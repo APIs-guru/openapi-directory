@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KnownGenderTypeEnum } from "./knowngendertypeenum";
+
 
 
 // KnownGender
@@ -7,6 +8,6 @@ import { KnownGenderTypeEnum } from "./knowngendertypeenum";
  * The known gender identity for the celebrity that matches the provided ID.
 **/
 export class KnownGender extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: KnownGenderTypeEnum;
 }

@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsManagementGoalsUpdatePathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    goal_id: str = field(default=None, metadata={'path_param': { 'field_name': 'goalId', 'style': 'simple', 'explode': False }})
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
-    web_property_id: str = field(default=None, metadata={'path_param': { 'field_name': 'webPropertyId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    goal_id: str = field(metadata={'path_param': { 'field_name': 'goalId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    web_property_id: str = field(metadata={'path_param': { 'field_name': 'webPropertyId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,21 +28,21 @@ class AnalyticsManagementGoalsUpdateQueryParams:
 
 @dataclass
 class AnalyticsManagementGoalsUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsManagementGoalsUpdateRequest:
-    path_params: AnalyticsManagementGoalsUpdatePathParams = field(default=None)
-    query_params: AnalyticsManagementGoalsUpdateQueryParams = field(default=None)
+    path_params: AnalyticsManagementGoalsUpdatePathParams = field()
+    query_params: AnalyticsManagementGoalsUpdateQueryParams = field()
+    security: AnalyticsManagementGoalsUpdateSecurity = field()
     request: Optional[shared.Goal] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsManagementGoalsUpdateSecurity = field(default=None)
     
 
 @dataclass
 class AnalyticsManagementGoalsUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     goal: Optional[shared.Goal] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // QosPolicy
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * QOS policy parameters.
 **/
 export class QosPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bandwidthGbps" })
+  @SpeakeasyMetadata({ data: "json, name=bandwidthGbps" })
   bandwidthGbps?: number;
 }

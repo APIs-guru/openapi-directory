@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Point
 /**
  * Point location in 2D in an image, where 0, 0 represents the top/left corner of the image
@@ -33,11 +33,11 @@ var Point = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=X" }),
+        SpeakeasyMetadata({ data: "json, name=X" }),
         __metadata("design:type", Number)
     ], Point.prototype, "x", void 0);
     __decorate([
-        Metadata({ data: "json, name=Y" }),
+        SpeakeasyMetadata({ data: "json, name=Y" }),
         __metadata("design:type", Number)
     ], Point.prototype, "y", void 0);
     return Point;

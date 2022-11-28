@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Album extends SpeakeasyBase {
-  @Metadata({ data: "json, name=can_comment" })
+  @SpeakeasyMetadata({ data: "json, name=can_comment" })
   canComment?: boolean;
 
-  @Metadata({ data: "json, name=count_comments" })
+  @SpeakeasyMetadata({ data: "json, name=count_comments" })
   countComments?: number;
 
-  @Metadata({ data: "json, name=count_views" })
+  @SpeakeasyMetadata({ data: "json, name=count_views" })
   countViews?: number;
 
-  @Metadata({ data: "json, name=date_create" })
+  @SpeakeasyMetadata({ data: "json, name=date_create" })
   dateCreate?: number;
 
-  @Metadata({ data: "json, name=date_update" })
+  @SpeakeasyMetadata({ data: "json, name=date_update" })
   dateUpdate?: number;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=farm" })
+  @SpeakeasyMetadata({ data: "json, name=farm" })
   farm?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=photos" })
+  @SpeakeasyMetadata({ data: "json, name=photos" })
   photos?: number;
 
-  @Metadata({ data: "json, name=primary" })
+  @SpeakeasyMetadata({ data: "json, name=primary" })
   primary?: string;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 
-  @Metadata({ data: "json, name=server" })
+  @SpeakeasyMetadata({ data: "json, name=server" })
   server?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=videos" })
+  @SpeakeasyMetadata({ data: "json, name=videos" })
   videos?: number;
 }

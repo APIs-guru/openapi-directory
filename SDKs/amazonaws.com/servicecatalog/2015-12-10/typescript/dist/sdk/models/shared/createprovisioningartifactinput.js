@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisioningArtifactProperties } from "./provisioningartifactproperties";
 var CreateProvisioningArtifactInput = /** @class */ (function (_super) {
     __extends(CreateProvisioningArtifactInput, _super);
@@ -30,19 +30,19 @@ var CreateProvisioningArtifactInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], CreateProvisioningArtifactInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=IdempotencyToken" }),
+        SpeakeasyMetadata({ data: "json, name=IdempotencyToken" }),
         __metadata("design:type", String)
     ], CreateProvisioningArtifactInput.prototype, "idempotencyToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=Parameters" }),
+        SpeakeasyMetadata({ data: "json, name=Parameters" }),
         __metadata("design:type", ProvisioningArtifactProperties)
     ], CreateProvisioningArtifactInput.prototype, "parameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProductId" }),
+        SpeakeasyMetadata({ data: "json, name=ProductId" }),
         __metadata("design:type", String)
     ], CreateProvisioningArtifactInput.prototype, "productId", void 0);
     return CreateProvisioningArtifactInput;

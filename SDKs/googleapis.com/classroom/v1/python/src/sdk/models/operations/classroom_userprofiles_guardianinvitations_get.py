@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ClassroomUserProfilesGuardianInvitationsGetPathParams:
-    invitation_id: str = field(default=None, metadata={'path_param': { 'field_name': 'invitationId', 'style': 'simple', 'explode': False }})
-    student_id: str = field(default=None, metadata={'path_param': { 'field_name': 'studentId', 'style': 'simple', 'explode': False }})
+    invitation_id: str = field(metadata={'path_param': { 'field_name': 'invitationId', 'style': 'simple', 'explode': False }})
+    student_id: str = field(metadata={'path_param': { 'field_name': 'studentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class ClassroomUserProfilesGuardianInvitationsGetQueryParams:
 
 @dataclass
 class ClassroomUserProfilesGuardianInvitationsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ClassroomUserProfilesGuardianInvitationsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class ClassroomUserProfilesGuardianInvitationsGetSecurity:
 
 @dataclass
 class ClassroomUserProfilesGuardianInvitationsGetRequest:
-    path_params: ClassroomUserProfilesGuardianInvitationsGetPathParams = field(default=None)
-    query_params: ClassroomUserProfilesGuardianInvitationsGetQueryParams = field(default=None)
-    security: ClassroomUserProfilesGuardianInvitationsGetSecurity = field(default=None)
+    path_params: ClassroomUserProfilesGuardianInvitationsGetPathParams = field()
+    query_params: ClassroomUserProfilesGuardianInvitationsGetQueryParams = field()
+    security: ClassroomUserProfilesGuardianInvitationsGetSecurity = field()
     
 
 @dataclass
 class ClassroomUserProfilesGuardianInvitationsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     guardian_invitation: Optional[shared.GuardianInvitation] = field(default=None)
-    status_code: int = field(default=None)
     

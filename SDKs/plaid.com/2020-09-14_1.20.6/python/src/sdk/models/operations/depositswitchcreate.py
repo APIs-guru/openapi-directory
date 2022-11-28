@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class DepositSwitchCreateRequest:
-    request: shared.DepositSwitchCreateRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.DepositSwitchCreateRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DepositSwitchCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     deposit_switch_create_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

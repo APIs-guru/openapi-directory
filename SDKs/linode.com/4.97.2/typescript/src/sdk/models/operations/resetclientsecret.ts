@@ -1,59 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ResetClientSecretPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=clientId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=clientId" })
   clientId: string;
 }
 
 
-export class ResetClientSecretSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class ResetClientSecretSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class ResetClientSecretSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: ResetClientSecretSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: ResetClientSecretSecurityOption2;
-}
-
-
-export class ResetClientSecretRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ResetClientSecretPathParams;
-
-  @Metadata()
-  security: ResetClientSecretSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class ResetClientSecretDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class ResetClientSecretRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ResetClientSecretPathParams;
+
+  @SpeakeasyMetadata()
+  security: ResetClientSecretSecurity;
+}
+
+
 export class ResetClientSecretResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   oAuthClient?: shared.OAuthClient;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resetClientSecretDefaultApplicationJsonObject?: ResetClientSecretDefaultApplicationJson;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PartnerGeneralConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * General settings of a partner.
 **/
 export class PartnerGeneralConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode?: string;
 
-  @Metadata({ data: "json, name=timeZone" })
+  @SpeakeasyMetadata({ data: "json, name=timeZone" })
   timeZone?: string;
 }

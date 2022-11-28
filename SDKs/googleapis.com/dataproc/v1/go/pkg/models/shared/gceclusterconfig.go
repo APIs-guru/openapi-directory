@@ -9,6 +9,8 @@ const (
 	GceClusterConfigPrivateIpv6GoogleAccessEnumBidirectional                      GceClusterConfigPrivateIpv6GoogleAccessEnum = "BIDIRECTIONAL"
 )
 
+// GceClusterConfig
+// Common config settings for resources of Compute Engine cluster instances, applicable to all instances in the cluster.
 type GceClusterConfig struct {
 	ConfidentialInstanceConfig *ConfidentialInstanceConfig                  `json:"confidentialInstanceConfig,omitempty"`
 	InternalIPOnly             *bool                                        `json:"internalIpOnly,omitempty"`

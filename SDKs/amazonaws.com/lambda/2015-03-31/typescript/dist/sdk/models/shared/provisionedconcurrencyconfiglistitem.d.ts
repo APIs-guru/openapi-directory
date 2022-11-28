@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProvisionedConcurrencyStatusEnumEnum } from "./provisionedconcurrencystatusenumenum";
 /**
  * Details about the provisioned concurrency configuration for a function alias or version.

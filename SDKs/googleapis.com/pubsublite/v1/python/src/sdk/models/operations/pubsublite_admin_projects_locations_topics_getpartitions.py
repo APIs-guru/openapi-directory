@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PubsubliteAdminProjectsLocationsTopicsGetPartitionsPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class PubsubliteAdminProjectsLocationsTopicsGetPartitionsQueryParams:
 
 @dataclass
 class PubsubliteAdminProjectsLocationsTopicsGetPartitionsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PubsubliteAdminProjectsLocationsTopicsGetPartitionsRequest:
-    path_params: PubsubliteAdminProjectsLocationsTopicsGetPartitionsPathParams = field(default=None)
-    query_params: PubsubliteAdminProjectsLocationsTopicsGetPartitionsQueryParams = field(default=None)
-    security: PubsubliteAdminProjectsLocationsTopicsGetPartitionsSecurity = field(default=None)
+    path_params: PubsubliteAdminProjectsLocationsTopicsGetPartitionsPathParams = field()
+    query_params: PubsubliteAdminProjectsLocationsTopicsGetPartitionsQueryParams = field()
+    security: PubsubliteAdminProjectsLocationsTopicsGetPartitionsSecurity = field()
     
 
 @dataclass
 class PubsubliteAdminProjectsLocationsTopicsGetPartitionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     topic_partitions: Optional[shared.TopicPartitions] = field(default=None)
     

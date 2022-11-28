@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdexchangebuyerCreativesGetPathParams:
-    account_id: int = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    buyer_creative_id: str = field(default=None, metadata={'path_param': { 'field_name': 'buyerCreativeId', 'style': 'simple', 'explode': False }})
+    account_id: int = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    buyer_creative_id: str = field(metadata={'path_param': { 'field_name': 'buyerCreativeId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,20 +23,20 @@ class AdexchangebuyerCreativesGetQueryParams:
 
 @dataclass
 class AdexchangebuyerCreativesGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdexchangebuyerCreativesGetRequest:
-    path_params: AdexchangebuyerCreativesGetPathParams = field(default=None)
-    query_params: AdexchangebuyerCreativesGetQueryParams = field(default=None)
-    security: AdexchangebuyerCreativesGetSecurity = field(default=None)
+    path_params: AdexchangebuyerCreativesGetPathParams = field()
+    query_params: AdexchangebuyerCreativesGetQueryParams = field()
+    security: AdexchangebuyerCreativesGetSecurity = field()
     
 
 @dataclass
 class AdexchangebuyerCreativesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     creative: Optional[shared.Creative] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndpointTypesElementEnum } from "./endpointtypeselementenum";
+
 
 
 // CustomDeliveryConfiguration
@@ -7,9 +8,9 @@ import { EndpointTypesElementEnum } from "./endpointtypeselementenum";
  * Specifies the delivery configuration settings for sending a campaign or campaign treatment through a custom channel. This object is required if you use the CampaignCustomMessage object to define the message to send for the campaign or campaign treatment.
 **/
 export class CustomDeliveryConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeliveryUri" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryUri" })
   deliveryUri: string;
 
-  @Metadata({ data: "json, name=EndpointTypes" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointTypes" })
   endpointTypes?: EndpointTypesElementEnum[];
 }

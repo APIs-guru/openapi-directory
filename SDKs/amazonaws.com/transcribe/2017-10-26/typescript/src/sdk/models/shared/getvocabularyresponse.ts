@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LanguageCodeEnum } from "./languagecodeenum";
 import { VocabularyStateEnum } from "./vocabularystateenum";
 
 
+
 export class GetVocabularyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DownloadUri" })
+  @SpeakeasyMetadata({ data: "json, name=DownloadUri" })
   downloadUri?: string;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=LanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageCode" })
   languageCode?: LanguageCodeEnum;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=VocabularyName" })
+  @SpeakeasyMetadata({ data: "json, name=VocabularyName" })
   vocabularyName?: string;
 
-  @Metadata({ data: "json, name=VocabularyState" })
+  @SpeakeasyMetadata({ data: "json, name=VocabularyState" })
   vocabularyState?: VocabularyStateEnum;
 }

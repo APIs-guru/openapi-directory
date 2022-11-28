@@ -1,8 +1,10 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://iptwist.com/documentation - Official Documentation"""
 import requests
-from typing import Optional
-from sdk.models import operations, shared
+
 from . import utils
+
+from .main import Main
 
 
 SERVERS = [
@@ -11,49 +13,46 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://iptwist.com/documentation - Official Documentation"""
+    main: Main
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        self._init_sdks()
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        self._init_sdks()
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        self._init_sdks()
     
-    def post_(self, request: operations.PostRequest) -> operations.PostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/"
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        if data is None and form is None:
-           raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.PostResponse(status_code=r.status_code, content_type=content_type)
+    
+    def _init_sdks(self):
         
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Response])
-                res.response = out
-        elif r.status_code == 401:
-            pass
-        elif r.status_code == 403:
-            pass
-
-        return res
-
+        self.main = Main(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+    
     

@@ -15,7 +15,7 @@ type PutSettingsOrganizationsOrganizationNameSendersSenderNameSecurity struct {
 
 type PutSettingsOrganizationsOrganizationNameSendersSenderNameRequest struct {
 	PathParams PutSettingsOrganizationsOrganizationNameSendersSenderNamePathParams
-	Request    *shared.Sender `request:"mediaType=application/json"`
+	Request    *shared.SenderInput `request:"mediaType=application/json"`
 	Security   PutSettingsOrganizationsOrganizationNameSendersSenderNameSecurity
 }
 

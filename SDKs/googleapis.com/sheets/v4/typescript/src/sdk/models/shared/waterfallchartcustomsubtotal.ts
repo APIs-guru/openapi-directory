@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WaterfallChartCustomSubtotal
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A custom subtotal column for a waterfall chart series.
 **/
 export class WaterfallChartCustomSubtotal extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataIsSubtotal" })
+  @SpeakeasyMetadata({ data: "json, name=dataIsSubtotal" })
   dataIsSubtotal?: boolean;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=subtotalIndex" })
+  @SpeakeasyMetadata({ data: "json, name=subtotalIndex" })
   subtotalIndex?: number;
 }

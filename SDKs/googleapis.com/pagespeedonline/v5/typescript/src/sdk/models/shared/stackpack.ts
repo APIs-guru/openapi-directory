@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StackPack
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Message containing Stack Pack information.
 **/
 export class StackPack extends SpeakeasyBase {
-  @Metadata({ data: "json, name=descriptions" })
+  @SpeakeasyMetadata({ data: "json, name=descriptions" })
   descriptions?: Map<string, string>;
 
-  @Metadata({ data: "json, name=iconDataURL" })
+  @SpeakeasyMetadata({ data: "json, name=iconDataURL" })
   iconDataUrl?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

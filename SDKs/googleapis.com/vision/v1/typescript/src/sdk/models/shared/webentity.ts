@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WebEntity
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Entity deduced from similar images on the Internet.
 **/
 export class WebEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=entityId" })
+  @SpeakeasyMetadata({ data: "json, name=entityId" })
   entityId?: string;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: number;
 }

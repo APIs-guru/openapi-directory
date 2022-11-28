@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ScheduledTask extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cron_expression" })
+  @SpeakeasyMetadata({ data: "json, name=cron_expression" })
   cronExpression?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=script_location" })
+  @SpeakeasyMetadata({ data: "json, name=script_location" })
   scriptLocation?: string;
 }

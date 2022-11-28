@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Query } from "./query";
+
 
 
 // ExecuteSqlQueryRequest
@@ -7,6 +8,6 @@ import { Query } from "./query";
  * An execute sql query request containing the query and the connection to execute it on.
 **/
 export class ExecuteSqlQueryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: Query;
 }

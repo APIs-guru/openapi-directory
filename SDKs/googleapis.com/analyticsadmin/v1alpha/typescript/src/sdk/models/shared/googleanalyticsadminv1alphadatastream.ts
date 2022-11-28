@@ -1,13 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleAnalyticsAdminV1alphaDataStreamAndroidAppStreamDataInput } from "./googleanalyticsadminv1alphadatastreamandroidappstreamdata";
+import { GoogleAnalyticsAdminV1alphaDataStreamIosAppStreamDataInput } from "./googleanalyticsadminv1alphadatastreamiosappstreamdata";
+import { GoogleAnalyticsAdminV1alphaDataStreamWebStreamDataInput } from "./googleanalyticsadminv1alphadatastreamwebstreamdata";
 import { GoogleAnalyticsAdminV1alphaDataStreamAndroidAppStreamData } from "./googleanalyticsadminv1alphadatastreamandroidappstreamdata";
 import { GoogleAnalyticsAdminV1alphaDataStreamIosAppStreamData } from "./googleanalyticsadminv1alphadatastreamiosappstreamdata";
 import { GoogleAnalyticsAdminV1alphaDataStreamWebStreamData } from "./googleanalyticsadminv1alphadatastreamwebstreamdata";
 
+
 export enum GoogleAnalyticsAdminV1alphaDataStreamTypeEnum {
-    DataStreamTypeUnspecified = "DATA_STREAM_TYPE_UNSPECIFIED"
-,    WebDataStream = "WEB_DATA_STREAM"
-,    AndroidAppDataStream = "ANDROID_APP_DATA_STREAM"
-,    IosAppDataStream = "IOS_APP_DATA_STREAM"
+    DataStreamTypeUnspecified = "DATA_STREAM_TYPE_UNSPECIFIED",
+    WebDataStream = "WEB_DATA_STREAM",
+    AndroidAppDataStream = "ANDROID_APP_DATA_STREAM",
+    IosAppDataStream = "IOS_APP_DATA_STREAM"
+}
+
+
+// GoogleAnalyticsAdminV1alphaDataStreamInput
+/** 
+ * A resource message representing a data stream.
+**/
+export class GoogleAnalyticsAdminV1alphaDataStreamInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=androidAppStreamData" })
+  androidAppStreamData?: GoogleAnalyticsAdminV1alphaDataStreamAndroidAppStreamDataInput;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=iosAppStreamData" })
+  iosAppStreamData?: GoogleAnalyticsAdminV1alphaDataStreamIosAppStreamDataInput;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: GoogleAnalyticsAdminV1alphaDataStreamTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=webStreamData" })
+  webStreamData?: GoogleAnalyticsAdminV1alphaDataStreamWebStreamDataInput;
 }
 
 
@@ -16,27 +42,27 @@ export enum GoogleAnalyticsAdminV1alphaDataStreamTypeEnum {
  * A resource message representing a data stream.
 **/
 export class GoogleAnalyticsAdminV1alphaDataStream extends SpeakeasyBase {
-  @Metadata({ data: "json, name=androidAppStreamData" })
+  @SpeakeasyMetadata({ data: "json, name=androidAppStreamData" })
   androidAppStreamData?: GoogleAnalyticsAdminV1alphaDataStreamAndroidAppStreamData;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=iosAppStreamData" })
+  @SpeakeasyMetadata({ data: "json, name=iosAppStreamData" })
   iosAppStreamData?: GoogleAnalyticsAdminV1alphaDataStreamIosAppStreamData;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GoogleAnalyticsAdminV1alphaDataStreamTypeEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=webStreamData" })
+  @SpeakeasyMetadata({ data: "json, name=webStreamData" })
   webStreamData?: GoogleAnalyticsAdminV1alphaDataStreamWebStreamData;
 }

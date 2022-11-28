@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import handshake
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListHandshakesForAccountResponse:
-    handshakes: Optional[List[handshake.Handshake]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Handshakes' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    handshakes: Optional[List[Handshake]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Handshakes') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     

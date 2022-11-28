@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsVersionsUploadPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class IntegrationsProjectsLocationsProductsIntegrationsVersionsUploadQueryParams
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsVersionsUploadSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsVersionsUploadRequest:
-    path_params: IntegrationsProjectsLocationsProductsIntegrationsVersionsUploadPathParams = field(default=None)
-    query_params: IntegrationsProjectsLocationsProductsIntegrationsVersionsUploadQueryParams = field(default=None)
+    path_params: IntegrationsProjectsLocationsProductsIntegrationsVersionsUploadPathParams = field()
+    query_params: IntegrationsProjectsLocationsProductsIntegrationsVersionsUploadQueryParams = field()
+    security: IntegrationsProjectsLocationsProductsIntegrationsVersionsUploadSecurity = field()
     request: Optional[shared.GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IntegrationsProjectsLocationsProductsIntegrationsVersionsUploadSecurity = field(default=None)
     
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsVersionsUploadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_integrations_v1alpha_upload_integration_version_response: Optional[shared.GoogleCloudIntegrationsV1alphaUploadIntegrationVersionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

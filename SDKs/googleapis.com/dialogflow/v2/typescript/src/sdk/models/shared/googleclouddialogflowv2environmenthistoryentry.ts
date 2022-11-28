@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2EnvironmentHistoryEntry
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents an environment history entry.
 **/
 export class GoogleCloudDialogflowV2EnvironmentHistoryEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=agentVersion" })
   agentVersion?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 }

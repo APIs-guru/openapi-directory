@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostEnableTransitGatewayRouteTablePropagationActionEnum(str, Enum):
     ENABLE_TRANSIT_GATEWAY_ROUTE_TABLE_PROPAGATION = "EnableTransitGatewayRouteTablePropagation"
@@ -10,8 +14,8 @@ class PostEnableTransitGatewayRouteTablePropagationVersionEnum(str, Enum):
 
 @dataclass
 class PostEnableTransitGatewayRouteTablePropagationQueryParams:
-    action: PostEnableTransitGatewayRouteTablePropagationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostEnableTransitGatewayRouteTablePropagationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostEnableTransitGatewayRouteTablePropagationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostEnableTransitGatewayRouteTablePropagationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostEnableTransitGatewayRouteTablePropagationHeaders:
 
 @dataclass
 class PostEnableTransitGatewayRouteTablePropagationRequest:
-    query_params: PostEnableTransitGatewayRouteTablePropagationQueryParams = field(default=None)
-    headers: PostEnableTransitGatewayRouteTablePropagationHeaders = field(default=None)
+    headers: PostEnableTransitGatewayRouteTablePropagationHeaders = field()
+    query_params: PostEnableTransitGatewayRouteTablePropagationQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostEnableTransitGatewayRouteTablePropagationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

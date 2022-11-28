@@ -10,6 +10,8 @@ const (
 	GoogleCloudDatalabelingV1beta1EvaluationJobStateEnumStopped          GoogleCloudDatalabelingV1beta1EvaluationJobStateEnum = "STOPPED"
 )
 
+// GoogleCloudDatalabelingV1beta1EvaluationJob
+// Defines an evaluation job that runs periodically to generate Evaluations. [Creating an evaluation job](/ml-engine/docs/continuous-evaluation/create-job) is the starting point for using continuous evaluation.
 type GoogleCloudDatalabelingV1beta1EvaluationJob struct {
 	AnnotationSpecSet       *string                                               `json:"annotationSpecSet,omitempty"`
 	Attempts                []GoogleCloudDatalabelingV1beta1Attempt               `json:"attempts,omitempty"`

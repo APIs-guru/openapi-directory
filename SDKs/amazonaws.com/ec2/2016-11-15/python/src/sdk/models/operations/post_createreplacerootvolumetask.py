@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateReplaceRootVolumeTaskActionEnum(str, Enum):
     CREATE_REPLACE_ROOT_VOLUME_TASK = "CreateReplaceRootVolumeTask"
@@ -10,8 +14,8 @@ class PostCreateReplaceRootVolumeTaskVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateReplaceRootVolumeTaskQueryParams:
-    action: PostCreateReplaceRootVolumeTaskActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateReplaceRootVolumeTaskVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateReplaceRootVolumeTaskActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateReplaceRootVolumeTaskVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateReplaceRootVolumeTaskHeaders:
 
 @dataclass
 class PostCreateReplaceRootVolumeTaskRequest:
-    query_params: PostCreateReplaceRootVolumeTaskQueryParams = field(default=None)
-    headers: PostCreateReplaceRootVolumeTaskHeaders = field(default=None)
+    headers: PostCreateReplaceRootVolumeTaskHeaders = field()
+    query_params: PostCreateReplaceRootVolumeTaskQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateReplaceRootVolumeTaskResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

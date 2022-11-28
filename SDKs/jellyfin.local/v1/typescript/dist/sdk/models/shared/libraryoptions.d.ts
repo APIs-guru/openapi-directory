@@ -1,0 +1,30 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { MediaPathInfo } from "./mediapathinfo";
+import { TypeOptions } from "./typeoptions";
+export declare class LibraryOptions extends SpeakeasyBase {
+    automaticRefreshIntervalDays?: number;
+    disabledLocalMetadataReaders?: string[];
+    disabledSubtitleFetchers?: string[];
+    enableAutomaticSeriesGrouping?: boolean;
+    enableChapterImageExtraction?: boolean;
+    enableEmbeddedEpisodeInfos?: boolean;
+    enableEmbeddedTitles?: boolean;
+    enableInternetProviders?: boolean;
+    enablePhotos?: boolean;
+    enableRealtimeMonitor?: boolean;
+    extractChapterImagesDuringLibraryScan?: boolean;
+    localMetadataReaderOrder?: string[];
+    metadataCountryCode?: string;
+    metadataSavers?: string[];
+    pathInfos?: MediaPathInfo[];
+    preferredMetadataLanguage?: string;
+    requirePerfectSubtitleMatch?: boolean;
+    saveLocalMetadata?: boolean;
+    saveSubtitlesWithMedia?: boolean;
+    seasonZeroDisplayName?: string;
+    skipSubtitlesIfAudioTrackMatches?: boolean;
+    skipSubtitlesIfEmbeddedSubtitlesPresent?: boolean;
+    subtitleDownloadLanguages?: string[];
+    subtitleFetcherOrder?: string[];
+    typeOptions?: TypeOptions[];
+}

@@ -1,5 +1,7 @@
 package shared
 
+// Type
+// Describes a type.
 type Type struct {
 	Arn         *string                   `json:"arn,omitempty"`
 	Definition  *string                   `json:"definition,omitempty"`

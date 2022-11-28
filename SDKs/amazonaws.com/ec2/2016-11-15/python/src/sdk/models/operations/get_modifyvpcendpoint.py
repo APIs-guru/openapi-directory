@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifyVpcEndpointActionEnum(str, Enum):
     MODIFY_VPC_ENDPOINT = "ModifyVpcEndpoint"
@@ -10,7 +14,9 @@ class GetModifyVpcEndpointVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyVpcEndpointQueryParams:
-    action: GetModifyVpcEndpointActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyVpcEndpointActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetModifyVpcEndpointVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpc_endpoint_id: str = field(metadata={'query_param': { 'field_name': 'VpcEndpointId', 'style': 'form', 'explode': True }})
     add_route_table_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'AddRouteTableId', 'style': 'form', 'explode': True }})
     add_security_group_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'AddSecurityGroupId', 'style': 'form', 'explode': True }})
     add_subnet_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'AddSubnetId', 'style': 'form', 'explode': True }})
@@ -21,8 +27,6 @@ class GetModifyVpcEndpointQueryParams:
     remove_security_group_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'RemoveSecurityGroupId', 'style': 'form', 'explode': True }})
     remove_subnet_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'RemoveSubnetId', 'style': 'form', 'explode': True }})
     reset_policy: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'ResetPolicy', 'style': 'form', 'explode': True }})
-    version: GetModifyVpcEndpointVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpc_endpoint_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VpcEndpointId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -38,13 +42,13 @@ class GetModifyVpcEndpointHeaders:
 
 @dataclass
 class GetModifyVpcEndpointRequest:
-    query_params: GetModifyVpcEndpointQueryParams = field(default=None)
-    headers: GetModifyVpcEndpointHeaders = field(default=None)
+    headers: GetModifyVpcEndpointHeaders = field()
+    query_params: GetModifyVpcEndpointQueryParams = field()
     
 
 @dataclass
 class GetModifyVpcEndpointResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ListStackInstancesForProvisionedProductInput = /** @class */ (function (_super) {
     __extends(ListStackInstancesForProvisionedProductInput, _super);
     function ListStackInstancesForProvisionedProductInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], ListStackInstancesForProvisionedProductInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageSize" }),
+        SpeakeasyMetadata({ data: "json, name=PageSize" }),
         __metadata("design:type", Number)
     ], ListStackInstancesForProvisionedProductInput.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=PageToken" }),
+        SpeakeasyMetadata({ data: "json, name=PageToken" }),
         __metadata("design:type", String)
     ], ListStackInstancesForProvisionedProductInput.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisionedProductId" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisionedProductId" }),
         __metadata("design:type", String)
     ], ListStackInstancesForProvisionedProductInput.prototype, "provisionedProductId", void 0);
     return ListStackInstancesForProvisionedProductInput;

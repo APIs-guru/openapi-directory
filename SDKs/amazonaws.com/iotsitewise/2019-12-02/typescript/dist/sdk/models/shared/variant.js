@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Variant
 /**
  * Contains an asset property value (of a single type only).
@@ -33,19 +33,19 @@ var Variant = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=booleanValue" }),
+        SpeakeasyMetadata({ data: "json, name=booleanValue" }),
         __metadata("design:type", Boolean)
     ], Variant.prototype, "booleanValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=doubleValue" }),
+        SpeakeasyMetadata({ data: "json, name=doubleValue" }),
         __metadata("design:type", Number)
     ], Variant.prototype, "doubleValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=integerValue" }),
+        SpeakeasyMetadata({ data: "json, name=integerValue" }),
         __metadata("design:type", Number)
     ], Variant.prototype, "integerValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=stringValue" }),
+        SpeakeasyMetadata({ data: "json, name=stringValue" }),
         __metadata("design:type", String)
     ], Variant.prototype, "stringValue", void 0);
     return Variant;

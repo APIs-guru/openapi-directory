@@ -1,52 +1,52 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSource } from "./datasource";
 import { Statistics } from "./statistics";
 
 
+
 export class DescribeDatasetImportJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=DataSize" })
+  @SpeakeasyMetadata({ data: "json, name=DataSize" })
   dataSize?: number;
 
-  @Metadata({ data: "json, name=DataSource" })
+  @SpeakeasyMetadata({ data: "json, name=DataSource" })
   dataSource?: DataSource;
 
-  @Metadata({ data: "json, name=DatasetArn" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetArn" })
   datasetArn?: string;
 
-  @Metadata({ data: "json, name=DatasetImportJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetImportJobArn" })
   datasetImportJobArn?: string;
 
-  @Metadata({ data: "json, name=DatasetImportJobName" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetImportJobName" })
   datasetImportJobName?: string;
 
-  @Metadata({ data: "json, name=EstimatedTimeRemainingInMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=EstimatedTimeRemainingInMinutes" })
   estimatedTimeRemainingInMinutes?: number;
 
-  @Metadata({ data: "json, name=FieldStatistics", elemType: shared.Statistics })
+  @SpeakeasyMetadata({ data: "json, name=FieldStatistics", elemType: Statistics })
   fieldStatistics?: Map<string, Statistics>;
 
-  @Metadata({ data: "json, name=GeolocationFormat" })
+  @SpeakeasyMetadata({ data: "json, name=GeolocationFormat" })
   geolocationFormat?: string;
 
-  @Metadata({ data: "json, name=LastModificationTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModificationTime" })
   lastModificationTime?: Date;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 
-  @Metadata({ data: "json, name=TimeZone" })
+  @SpeakeasyMetadata({ data: "json, name=TimeZone" })
   timeZone?: string;
 
-  @Metadata({ data: "json, name=TimestampFormat" })
+  @SpeakeasyMetadata({ data: "json, name=TimestampFormat" })
   timestampFormat?: string;
 
-  @Metadata({ data: "json, name=UseGeolocationForTimeZone" })
+  @SpeakeasyMetadata({ data: "json, name=UseGeolocationForTimeZone" })
   useGeolocationForTimeZone?: boolean;
 }

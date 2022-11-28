@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudPaymentsResellerSubscriptionV1DurationUnitEnum {
-    UnitUnspecified = "UNIT_UNSPECIFIED"
-,    Month = "MONTH"
-,    Day = "DAY"
+    UnitUnspecified = "UNIT_UNSPECIFIED",
+    Month = "MONTH",
+    Day = "DAY"
 }
 
 
@@ -12,9 +13,9 @@ export enum GoogleCloudPaymentsResellerSubscriptionV1DurationUnitEnum {
  * Describes the length of a period of a time.
 **/
 export class GoogleCloudPaymentsResellerSubscriptionV1Duration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=unit" })
+  @SpeakeasyMetadata({ data: "json, name=unit" })
   unit?: GoogleCloudPaymentsResellerSubscriptionV1DurationUnitEnum;
 }

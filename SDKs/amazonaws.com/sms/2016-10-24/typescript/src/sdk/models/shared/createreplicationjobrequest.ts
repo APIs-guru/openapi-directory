@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LicenseTypeEnum } from "./licensetypeenum";
 
 
+
 export class CreateReplicationJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=encrypted" })
+  @SpeakeasyMetadata({ data: "json, name=encrypted" })
   encrypted?: boolean;
 
-  @Metadata({ data: "json, name=frequency" })
+  @SpeakeasyMetadata({ data: "json, name=frequency" })
   frequency?: number;
 
-  @Metadata({ data: "json, name=kmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=licenseType" })
+  @SpeakeasyMetadata({ data: "json, name=licenseType" })
   licenseType?: LicenseTypeEnum;
 
-  @Metadata({ data: "json, name=numberOfRecentAmisToKeep" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfRecentAmisToKeep" })
   numberOfRecentAmisToKeep?: number;
 
-  @Metadata({ data: "json, name=roleName" })
+  @SpeakeasyMetadata({ data: "json, name=roleName" })
   roleName?: string;
 
-  @Metadata({ data: "json, name=runOnce" })
+  @SpeakeasyMetadata({ data: "json, name=runOnce" })
   runOnce?: boolean;
 
-  @Metadata({ data: "json, name=seedReplicationTime" })
+  @SpeakeasyMetadata({ data: "json, name=seedReplicationTime" })
   seedReplicationTime: Date;
 
-  @Metadata({ data: "json, name=serverId" })
+  @SpeakeasyMetadata({ data: "json, name=serverId" })
   serverId: string;
 }

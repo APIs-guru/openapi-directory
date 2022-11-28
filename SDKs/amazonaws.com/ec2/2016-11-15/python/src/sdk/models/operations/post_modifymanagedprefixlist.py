@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyManagedPrefixListActionEnum(str, Enum):
     MODIFY_MANAGED_PREFIX_LIST = "ModifyManagedPrefixList"
@@ -10,8 +14,8 @@ class PostModifyManagedPrefixListVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyManagedPrefixListQueryParams:
-    action: PostModifyManagedPrefixListActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyManagedPrefixListVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyManagedPrefixListActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyManagedPrefixListVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyManagedPrefixListHeaders:
 
 @dataclass
 class PostModifyManagedPrefixListRequest:
-    query_params: PostModifyManagedPrefixListQueryParams = field(default=None)
-    headers: PostModifyManagedPrefixListHeaders = field(default=None)
+    headers: PostModifyManagedPrefixListHeaders = field()
+    query_params: PostModifyManagedPrefixListQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyManagedPrefixListResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

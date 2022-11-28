@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SuperMembership extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EmployeeNumber" })
+  @SpeakeasyMetadata({ data: "json, name=EmployeeNumber" })
   employeeNumber: string;
 
-  @Metadata({ data: "json, name=SuperFundID" })
+  @SpeakeasyMetadata({ data: "json, name=SuperFundID" })
   superFundId: string;
 
-  @Metadata({ data: "json, name=SuperMembershipID" })
+  @SpeakeasyMetadata({ data: "json, name=SuperMembershipID" })
   superMembershipId?: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Contains an asset property value (of a single type only).
 **/

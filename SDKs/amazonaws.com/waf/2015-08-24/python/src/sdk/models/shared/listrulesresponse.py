@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import rulesummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListRulesResponse:
-    next_marker: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextMarker' }})
-    rules: Optional[List[rulesummary.RuleSummary]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Rules' }})
+    next_marker: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextMarker') }})
+    rules: Optional[List[RuleSummary]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Rules') }})
     

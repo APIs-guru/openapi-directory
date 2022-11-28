@@ -1,21 +1,17 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import {GetHeadersFromRequest} from "../internal/utils/headers";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://budgets.amazonaws.com",
-  "http://budgets.{region}.amazonaws.com.cn",
-  "https://budgets.{region}.amazonaws.com.cn",
+export const ServerList = [
+	"https://budgets.amazonaws.com",
+	"http://budgets.{region}.amazonaws.com.cn",
+	"https://budgets.{region}.amazonaws.com.cn",
 ] as const;
 
 export function WithServerURL(
@@ -26,13 +22,13 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
@@ -41,41 +37,48 @@ export function WithSecurity(security: Security): OptsFunc {
     security = new Security(security);
   }
   return (sdk: SDK) => {
-    sdk.security = security;
+    sdk._security = security;
   };
 }
 
-// SDK Documentation: https://docs.aws.amazon.com/budgets/ - Amazon Web Services documentation
+/* SDK Documentation: https://docs.aws.amazon.com/budgets/ - Amazon Web Services documentation*/
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  public _security?: Security;
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
+    if (!this._securityClient) {
+      if (this._security) {
+        this._securityClient = utils.CreateSecurityClient(
+          this._defaultClient,
+          this._security
         );
       } else {
-        this.securityClient = this.defaultClient;
+        this._securityClient = this._defaultClient;
       }
     }
+    
   }
   
-  // CreateBudget - <p>Creates a budget and, if included, notifications and subscribers. </p> <important> <p>Only one of <code>BudgetLimit</code> or <code>PlannedBudgetLimits</code> can be present in the syntax at one time. Use the syntax that matches your case. The Request Syntax section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>, see the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_CreateBudget.html#API_CreateBudget_Examples">Examples</a> section. </p> </important>
-  CreateBudget(
+  /**
+   * createBudget - <p>Creates a budget and, if included, notifications and subscribers. </p> <important> <p>Only one of <code>BudgetLimit</code> or <code>PlannedBudgetLimits</code> can be present in the syntax at one time. Use the syntax that matches your case. The Request Syntax section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>, see the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_CreateBudget.html#API_CreateBudget_Examples">Examples</a> section. </p> </important>
+  **/
+  createBudget(
     req: operations.CreateBudgetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateBudgetResponse> {
@@ -83,65 +86,65 @@ export class SDK {
       req = new operations.CreateBudgetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.CreateBudget";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateBudgetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateBudgetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createBudgetResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.creationLimitExceededException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.duplicateRecordException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -153,8 +156,10 @@ export class SDK {
   }
 
   
-  // CreateBudgetAction -  Creates a budget action. 
-  CreateBudgetAction(
+  /**
+   * createBudgetAction -  Creates a budget action. 
+  **/
+  createBudgetAction(
     req: operations.CreateBudgetActionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateBudgetActionResponse> {
@@ -162,70 +167,70 @@ export class SDK {
       req = new operations.CreateBudgetActionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.CreateBudgetAction";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateBudgetActionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateBudgetActionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createBudgetActionResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.creationLimitExceededException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.duplicateRecordException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.notFoundException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -237,8 +242,10 @@ export class SDK {
   }
 
   
-  // CreateNotification - Creates a notification. You must create the budget before you create the associated notification.
-  CreateNotification(
+  /**
+   * createNotification - Creates a notification. You must create the budget before you create the associated notification.
+  **/
+  createNotification(
     req: operations.CreateNotificationRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateNotificationResponse> {
@@ -246,70 +253,70 @@ export class SDK {
       req = new operations.CreateNotificationRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.CreateNotification";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateNotificationResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateNotificationResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createNotificationResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.notFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.creationLimitExceededException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.duplicateRecordException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -321,8 +328,10 @@ export class SDK {
   }
 
   
-  // CreateSubscriber - Creates a subscriber. You must create the associated budget and notification before you create the subscriber.
-  CreateSubscriber(
+  /**
+   * createSubscriber - Creates a subscriber. You must create the associated budget and notification before you create the subscriber.
+  **/
+  createSubscriber(
     req: operations.CreateSubscriberRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateSubscriberResponse> {
@@ -330,70 +339,70 @@ export class SDK {
       req = new operations.CreateSubscriberRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.CreateSubscriber";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateSubscriberResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateSubscriberResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createSubscriberResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.creationLimitExceededException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.duplicateRecordException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.notFoundException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -405,8 +414,10 @@ export class SDK {
   }
 
   
-  // DeleteBudget - <p>Deletes a budget. You can delete your budget at any time.</p> <important> <p>Deleting a budget also deletes the notifications and subscribers that are associated with that budget.</p> </important>
-  DeleteBudget(
+  /**
+   * deleteBudget - <p>Deletes a budget. You can delete your budget at any time.</p> <important> <p>Deleting a budget also deletes the notifications and subscribers that are associated with that budget.</p> </important>
+  **/
+  deleteBudget(
     req: operations.DeleteBudgetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteBudgetResponse> {
@@ -414,60 +425,60 @@ export class SDK {
       req = new operations.DeleteBudgetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.DeleteBudget";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteBudgetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteBudgetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteBudgetResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.notFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -479,8 +490,10 @@ export class SDK {
   }
 
   
-  // DeleteBudgetAction -  Deletes a budget action. 
-  DeleteBudgetAction(
+  /**
+   * deleteBudgetAction -  Deletes a budget action. 
+  **/
+  deleteBudgetAction(
     req: operations.DeleteBudgetActionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteBudgetActionResponse> {
@@ -488,65 +501,65 @@ export class SDK {
       req = new operations.DeleteBudgetActionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.DeleteBudgetAction";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteBudgetActionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteBudgetActionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteBudgetActionResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.notFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceLockedException = httpRes?.data;
             }
             break;
@@ -558,8 +571,10 @@ export class SDK {
   }
 
   
-  // DeleteNotification - <p>Deletes a notification.</p> <important> <p>Deleting a notification also deletes the subscribers that are associated with the notification.</p> </important>
-  DeleteNotification(
+  /**
+   * deleteNotification - <p>Deletes a notification.</p> <important> <p>Deleting a notification also deletes the subscribers that are associated with the notification.</p> </important>
+  **/
+  deleteNotification(
     req: operations.DeleteNotificationRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteNotificationResponse> {
@@ -567,60 +582,60 @@ export class SDK {
       req = new operations.DeleteNotificationRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.DeleteNotification";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteNotificationResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteNotificationResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteNotificationResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.notFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -632,8 +647,10 @@ export class SDK {
   }
 
   
-  // DeleteSubscriber - <p>Deletes a subscriber.</p> <important> <p>Deleting the last subscriber to a notification also deletes the notification.</p> </important>
-  DeleteSubscriber(
+  /**
+   * deleteSubscriber - <p>Deletes a subscriber.</p> <important> <p>Deleting the last subscriber to a notification also deletes the notification.</p> </important>
+  **/
+  deleteSubscriber(
     req: operations.DeleteSubscriberRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteSubscriberResponse> {
@@ -641,60 +658,60 @@ export class SDK {
       req = new operations.DeleteSubscriberRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.DeleteSubscriber";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteSubscriberResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteSubscriberResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteSubscriberResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.notFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -706,8 +723,10 @@ export class SDK {
   }
 
   
-  // DescribeBudget - <p>Describes a budget.</p> <important> <p>The Request Syntax section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>, see the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudget.html#API_DescribeBudget_Examples">Examples</a> section. </p> </important>
-  DescribeBudget(
+  /**
+   * describeBudget - <p>Describes a budget.</p> <important> <p>The Request Syntax section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>, see the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudget.html#API_DescribeBudget_Examples">Examples</a> section. </p> </important>
+  **/
+  describeBudget(
     req: operations.DescribeBudgetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeBudgetResponse> {
@@ -715,60 +734,60 @@ export class SDK {
       req = new operations.DescribeBudgetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.DescribeBudget";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeBudgetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeBudgetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeBudgetResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.notFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -780,8 +799,10 @@ export class SDK {
   }
 
   
-  // DescribeBudgetAction -  Describes a budget action detail. 
-  DescribeBudgetAction(
+  /**
+   * describeBudgetAction -  Describes a budget action detail. 
+  **/
+  describeBudgetAction(
     req: operations.DescribeBudgetActionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeBudgetActionResponse> {
@@ -789,60 +810,60 @@ export class SDK {
       req = new operations.DescribeBudgetActionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.DescribeBudgetAction";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeBudgetActionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeBudgetActionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeBudgetActionResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.notFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -854,8 +875,10 @@ export class SDK {
   }
 
   
-  // DescribeBudgetActionHistories -  Describes a budget action history detail. 
-  DescribeBudgetActionHistories(
+  /**
+   * describeBudgetActionHistories -  Describes a budget action history detail. 
+  **/
+  describeBudgetActionHistories(
     req: operations.DescribeBudgetActionHistoriesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeBudgetActionHistoriesResponse> {
@@ -863,22 +886,22 @@ export class SDK {
       req = new operations.DescribeBudgetActionHistoriesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.DescribeBudgetActionHistories";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -889,47 +912,47 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeBudgetActionHistoriesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeBudgetActionHistoriesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeBudgetActionHistoriesResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.notFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidNextTokenException = httpRes?.data;
             }
             break;
@@ -941,8 +964,10 @@ export class SDK {
   }
 
   
-  // DescribeBudgetActionsForAccount -  Describes all of the budget actions for an account. 
-  DescribeBudgetActionsForAccount(
+  /**
+   * describeBudgetActionsForAccount -  Describes all of the budget actions for an account. 
+  **/
+  describeBudgetActionsForAccount(
     req: operations.DescribeBudgetActionsForAccountRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeBudgetActionsForAccountResponse> {
@@ -950,22 +975,22 @@ export class SDK {
       req = new operations.DescribeBudgetActionsForAccountRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.DescribeBudgetActionsForAccount";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -976,42 +1001,42 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeBudgetActionsForAccountResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeBudgetActionsForAccountResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeBudgetActionsForAccountResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidNextTokenException = httpRes?.data;
             }
             break;
@@ -1023,8 +1048,10 @@ export class SDK {
   }
 
   
-  // DescribeBudgetActionsForBudget -  Describes all of the budget actions for a budget. 
-  DescribeBudgetActionsForBudget(
+  /**
+   * describeBudgetActionsForBudget -  Describes all of the budget actions for a budget. 
+  **/
+  describeBudgetActionsForBudget(
     req: operations.DescribeBudgetActionsForBudgetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeBudgetActionsForBudgetResponse> {
@@ -1032,22 +1059,22 @@ export class SDK {
       req = new operations.DescribeBudgetActionsForBudgetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.DescribeBudgetActionsForBudget";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1058,47 +1085,47 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeBudgetActionsForBudgetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeBudgetActionsForBudgetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeBudgetActionsForBudgetResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.notFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidNextTokenException = httpRes?.data;
             }
             break;
@@ -1110,8 +1137,10 @@ export class SDK {
   }
 
   
-  // DescribeBudgetPerformanceHistory - Describes the history for <code>DAILY</code>, <code>MONTHLY</code>, and <code>QUARTERLY</code> budgets. Budget history isn't available for <code>ANNUAL</code> budgets.
-  DescribeBudgetPerformanceHistory(
+  /**
+   * describeBudgetPerformanceHistory - Describes the history for <code>DAILY</code>, <code>MONTHLY</code>, and <code>QUARTERLY</code> budgets. Budget history isn't available for <code>ANNUAL</code> budgets.
+  **/
+  describeBudgetPerformanceHistory(
     req: operations.DescribeBudgetPerformanceHistoryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeBudgetPerformanceHistoryResponse> {
@@ -1119,22 +1148,22 @@ export class SDK {
       req = new operations.DescribeBudgetPerformanceHistoryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.DescribeBudgetPerformanceHistory";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1145,52 +1174,52 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeBudgetPerformanceHistoryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeBudgetPerformanceHistoryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeBudgetPerformanceHistoryResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.notFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidNextTokenException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.expiredNextTokenException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -1202,8 +1231,10 @@ export class SDK {
   }
 
   
-  // DescribeBudgets - <p>Lists the budgets that are associated with an account.</p> <important> <p>The Request Syntax section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>, see the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudgets.html#API_DescribeBudgets_Examples">Examples</a> section. </p> </important>
-  DescribeBudgets(
+  /**
+   * describeBudgets - <p>Lists the budgets that are associated with an account.</p> <important> <p>The Request Syntax section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>, see the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudgets.html#API_DescribeBudgets_Examples">Examples</a> section. </p> </important>
+  **/
+  describeBudgets(
     req: operations.DescribeBudgetsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeBudgetsResponse> {
@@ -1211,22 +1242,22 @@ export class SDK {
       req = new operations.DescribeBudgetsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.DescribeBudgets";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1237,52 +1268,52 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeBudgetsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeBudgetsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeBudgetsResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.notFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidNextTokenException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.expiredNextTokenException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -1294,8 +1325,10 @@ export class SDK {
   }
 
   
-  // DescribeNotificationsForBudget - Lists the notifications that are associated with a budget.
-  DescribeNotificationsForBudget(
+  /**
+   * describeNotificationsForBudget - Lists the notifications that are associated with a budget.
+  **/
+  describeNotificationsForBudget(
     req: operations.DescribeNotificationsForBudgetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeNotificationsForBudgetResponse> {
@@ -1303,22 +1336,22 @@ export class SDK {
       req = new operations.DescribeNotificationsForBudgetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.DescribeNotificationsForBudget";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1329,52 +1362,52 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeNotificationsForBudgetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeNotificationsForBudgetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeNotificationsForBudgetResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.notFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidNextTokenException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.expiredNextTokenException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -1386,8 +1419,10 @@ export class SDK {
   }
 
   
-  // DescribeSubscribersForNotification - Lists the subscribers that are associated with a notification.
-  DescribeSubscribersForNotification(
+  /**
+   * describeSubscribersForNotification - Lists the subscribers that are associated with a notification.
+  **/
+  describeSubscribersForNotification(
     req: operations.DescribeSubscribersForNotificationRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeSubscribersForNotificationResponse> {
@@ -1395,22 +1430,22 @@ export class SDK {
       req = new operations.DescribeSubscribersForNotificationRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.DescribeSubscribersForNotification";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1421,52 +1456,52 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeSubscribersForNotificationResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeSubscribersForNotificationResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeSubscribersForNotificationResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.notFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidNextTokenException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.expiredNextTokenException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -1478,8 +1513,10 @@ export class SDK {
   }
 
   
-  // ExecuteBudgetAction -  Executes a budget action. 
-  ExecuteBudgetAction(
+  /**
+   * executeBudgetAction -  Executes a budget action. 
+  **/
+  executeBudgetAction(
     req: operations.ExecuteBudgetActionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ExecuteBudgetActionResponse> {
@@ -1487,65 +1524,65 @@ export class SDK {
       req = new operations.ExecuteBudgetActionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.ExecuteBudgetAction";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ExecuteBudgetActionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ExecuteBudgetActionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.executeBudgetActionResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.notFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceLockedException = httpRes?.data;
             }
             break;
@@ -1557,8 +1594,10 @@ export class SDK {
   }
 
   
-  // UpdateBudget - <p>Updates a budget. You can change every part of a budget except for the <code>budgetName</code> and the <code>calculatedSpend</code>. When you modify a budget, the <code>calculatedSpend</code> drops to zero until AWS has new usage data to use for forecasting.</p> <important> <p>Only one of <code>BudgetLimit</code> or <code>PlannedBudgetLimits</code> can be present in the syntax at one time. Use the syntax that matches your case. The Request Syntax section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>, see the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_UpdateBudget.html#API_UpdateBudget_Examples">Examples</a> section. </p> </important>
-  UpdateBudget(
+  /**
+   * updateBudget - <p>Updates a budget. You can change every part of a budget except for the <code>budgetName</code> and the <code>calculatedSpend</code>. When you modify a budget, the <code>calculatedSpend</code> drops to zero until AWS has new usage data to use for forecasting.</p> <important> <p>Only one of <code>BudgetLimit</code> or <code>PlannedBudgetLimits</code> can be present in the syntax at one time. Use the syntax that matches your case. The Request Syntax section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>, see the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_UpdateBudget.html#API_UpdateBudget_Examples">Examples</a> section. </p> </important>
+  **/
+  updateBudget(
     req: operations.UpdateBudgetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateBudgetResponse> {
@@ -1566,60 +1605,60 @@ export class SDK {
       req = new operations.UpdateBudgetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.UpdateBudget";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateBudgetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateBudgetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateBudgetResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.notFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -1631,8 +1670,10 @@ export class SDK {
   }
 
   
-  // UpdateBudgetAction -  Updates a budget action. 
-  UpdateBudgetAction(
+  /**
+   * updateBudgetAction -  Updates a budget action. 
+  **/
+  updateBudgetAction(
     req: operations.UpdateBudgetActionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateBudgetActionResponse> {
@@ -1640,65 +1681,65 @@ export class SDK {
       req = new operations.UpdateBudgetActionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.UpdateBudgetAction";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateBudgetActionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateBudgetActionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateBudgetActionResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.notFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceLockedException = httpRes?.data;
             }
             break;
@@ -1710,8 +1751,10 @@ export class SDK {
   }
 
   
-  // UpdateNotification - Updates a notification.
-  UpdateNotification(
+  /**
+   * updateNotification - Updates a notification.
+  **/
+  updateNotification(
     req: operations.UpdateNotificationRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateNotificationResponse> {
@@ -1719,65 +1762,65 @@ export class SDK {
       req = new operations.UpdateNotificationRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.UpdateNotification";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateNotificationResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateNotificationResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateNotificationResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.notFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.duplicateRecordException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -1789,8 +1832,10 @@ export class SDK {
   }
 
   
-  // UpdateSubscriber - Updates a subscriber.
-  UpdateSubscriber(
+  /**
+   * updateSubscriber - Updates a subscriber.
+  **/
+  updateSubscriber(
     req: operations.UpdateSubscriberRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateSubscriberResponse> {
@@ -1798,65 +1843,65 @@ export class SDK {
       req = new operations.UpdateSubscriberRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=AWSBudgetServiceGateway.UpdateSubscriber";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateSubscriberResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateSubscriberResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateSubscriberResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalErrorException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.notFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.duplicateRecordException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;

@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetWebhookByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=webhookId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=webhookId" })
   webhookId: string;
 }
 
 
 export class GetWebhookByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetWebhookByIdPathParams;
 }
 
 
 export class GetWebhookByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getWebhookById200ApplicationJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getWebhookById200TextJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getWebhookById200TextPlainString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

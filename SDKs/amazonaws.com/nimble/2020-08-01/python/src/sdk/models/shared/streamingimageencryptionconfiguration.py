@@ -1,12 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import streamingimageencryptionconfigurationkeytype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StreamingImageEncryptionConfiguration:
-    key_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keyArn' }})
-    key_type: streamingimageencryptionconfigurationkeytype_enum.StreamingImageEncryptionConfigurationKeyTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keyType' }})
+    key_type: StreamingImageEncryptionConfigurationKeyTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('keyType') }})
+    key_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('keyArn') }})
     

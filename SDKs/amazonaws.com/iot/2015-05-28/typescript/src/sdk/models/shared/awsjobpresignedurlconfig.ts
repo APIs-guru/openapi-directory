@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsJobPresignedUrlConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration information for pre-signed URLs. Valid when <code>protocols</code> contains HTTP.
 **/
 export class AwsJobPresignedUrlConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expiresInSec" })
+  @SpeakeasyMetadata({ data: "json, name=expiresInSec" })
   expiresInSec?: number;
 }

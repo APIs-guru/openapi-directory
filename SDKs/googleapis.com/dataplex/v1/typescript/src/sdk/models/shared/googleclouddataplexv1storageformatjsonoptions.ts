@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDataplexV1StorageFormatJsonOptions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes JSON data format.
 **/
 export class GoogleCloudDataplexV1StorageFormatJsonOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=encoding" })
+  @SpeakeasyMetadata({ data: "json, name=encoding" })
   encoding?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Engagement
 /**
  * Incident Manager reaching out to a contact or escalation plan to engage contact during an incident.
@@ -33,27 +33,27 @@ var Engagement = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ContactArn" }),
+        SpeakeasyMetadata({ data: "json, name=ContactArn" }),
         __metadata("design:type", String)
     ], Engagement.prototype, "contactArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=EngagementArn" }),
+        SpeakeasyMetadata({ data: "json, name=EngagementArn" }),
         __metadata("design:type", String)
     ], Engagement.prototype, "engagementArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=IncidentId" }),
+        SpeakeasyMetadata({ data: "json, name=IncidentId" }),
         __metadata("design:type", String)
     ], Engagement.prototype, "incidentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Sender" }),
+        SpeakeasyMetadata({ data: "json, name=Sender" }),
         __metadata("design:type", String)
     ], Engagement.prototype, "sender", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartTime" }),
+        SpeakeasyMetadata({ data: "json, name=StartTime" }),
         __metadata("design:type", Date)
     ], Engagement.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=StopTime" }),
+        SpeakeasyMetadata({ data: "json, name=StopTime" }),
         __metadata("design:type", Date)
     ], Engagement.prototype, "stopTime", void 0);
     return Engagement;

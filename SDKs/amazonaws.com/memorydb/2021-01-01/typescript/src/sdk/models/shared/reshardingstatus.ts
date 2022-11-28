@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SlotMigration } from "./slotmigration";
+
 
 
 // ReshardingStatus
@@ -7,6 +8,6 @@ import { SlotMigration } from "./slotmigration";
  * The status of the online resharding
 **/
 export class ReshardingStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SlotMigration" })
+  @SpeakeasyMetadata({ data: "json, name=SlotMigration" })
   slotMigration?: SlotMigration;
 }

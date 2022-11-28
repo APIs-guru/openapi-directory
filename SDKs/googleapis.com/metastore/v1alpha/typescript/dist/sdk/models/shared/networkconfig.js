@@ -22,8 +22,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ConsumerInput } from "./consumer";
+import { Consumer } from "./consumer";
+// NetworkConfigInput
+/**
+ * Network configuration for the Dataproc Metastore service.
+**/
+var NetworkConfigInput = /** @class */ (function (_super) {
+    __extends(NetworkConfigInput, _super);
+    function NetworkConfigInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=consumers", elemType: ConsumerInput }),
+        __metadata("design:type", Array)
+    ], NetworkConfigInput.prototype, "consumers", void 0);
+    return NetworkConfigInput;
+}(SpeakeasyBase));
+export { NetworkConfigInput };
 // NetworkConfig
 /**
  * Network configuration for the Dataproc Metastore service.
@@ -34,7 +51,7 @@ var NetworkConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=consumers", elemType: shared.Consumer }),
+        SpeakeasyMetadata({ data: "json, name=consumers", elemType: Consumer }),
         __metadata("design:type", Array)
     ], NetworkConfig.prototype, "consumers", void 0);
     return NetworkConfig;

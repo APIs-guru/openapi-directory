@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDeleteAlarmsActionEnum(str, Enum):
     DELETE_ALARMS = "DeleteAlarms"
@@ -10,9 +14,9 @@ class GetDeleteAlarmsVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteAlarmsQueryParams:
-    action: GetDeleteAlarmsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    alarm_names: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'AlarmNames', 'style': 'form', 'explode': True }})
-    version: GetDeleteAlarmsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteAlarmsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    alarm_names: List[str] = field(metadata={'query_param': { 'field_name': 'AlarmNames', 'style': 'form', 'explode': True }})
+    version: GetDeleteAlarmsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteAlarmsHeaders:
 
 @dataclass
 class GetDeleteAlarmsRequest:
-    query_params: GetDeleteAlarmsQueryParams = field(default=None)
-    headers: GetDeleteAlarmsHeaders = field(default=None)
+    headers: GetDeleteAlarmsHeaders = field()
+    query_params: GetDeleteAlarmsQueryParams = field()
     
 
 @dataclass
 class GetDeleteAlarmsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

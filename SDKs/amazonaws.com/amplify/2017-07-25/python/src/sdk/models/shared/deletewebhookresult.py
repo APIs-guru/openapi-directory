@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import webhook
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteWebhookResult:
-    webhook: webhook.Webhook = field(default=None, metadata={'dataclasses_json': { 'field_name': 'webhook' }})
+    r"""DeleteWebhookResult
+     The result structure for the delete webhook request. 
+    """
+    
+    webhook: Webhook = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('webhook') }})
     

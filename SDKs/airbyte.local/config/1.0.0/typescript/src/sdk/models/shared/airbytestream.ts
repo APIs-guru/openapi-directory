@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SyncModeEnum } from "./syncmodeenum";
+
 
 
 // AirbyteStream
@@ -7,24 +8,24 @@ import { SyncModeEnum } from "./syncmodeenum";
  * the immutable schema defined by the source
 **/
 export class AirbyteStream extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultCursorField" })
+  @SpeakeasyMetadata({ data: "json, name=defaultCursorField" })
   defaultCursorField?: string[];
 
-  @Metadata({ data: "json, name=jsonSchema" })
+  @SpeakeasyMetadata({ data: "json, name=jsonSchema" })
   jsonSchema?: Map<string, any>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=namespace" })
+  @SpeakeasyMetadata({ data: "json, name=namespace" })
   namespace?: string;
 
-  @Metadata({ data: "json, name=sourceDefinedCursor" })
+  @SpeakeasyMetadata({ data: "json, name=sourceDefinedCursor" })
   sourceDefinedCursor?: boolean;
 
-  @Metadata({ data: "json, name=sourceDefinedPrimaryKey" })
+  @SpeakeasyMetadata({ data: "json, name=sourceDefinedPrimaryKey" })
   sourceDefinedPrimaryKey?: string[][];
 
-  @Metadata({ data: "json, name=supportedSyncModes" })
+  @SpeakeasyMetadata({ data: "json, name=supportedSyncModes" })
   supportedSyncModes?: SyncModeEnum[];
 }

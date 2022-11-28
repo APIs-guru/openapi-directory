@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * A group object, which contains a specified group’s metadata and attributes.
 **/

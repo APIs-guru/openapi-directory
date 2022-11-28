@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetFunctionDefinitionPathParams:
-    function_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'FunctionDefinitionId', 'style': 'simple', 'explode': False }})
+    function_definition_id: str = field(metadata={'path_param': { 'field_name': 'FunctionDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,14 +24,14 @@ class GetFunctionDefinitionHeaders:
 
 @dataclass
 class GetFunctionDefinitionRequest:
-    path_params: GetFunctionDefinitionPathParams = field(default=None)
-    headers: GetFunctionDefinitionHeaders = field(default=None)
+    headers: GetFunctionDefinitionHeaders = field()
+    path_params: GetFunctionDefinitionPathParams = field()
     
 
 @dataclass
 class GetFunctionDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_function_definition_response: Optional[shared.GetFunctionDefinitionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

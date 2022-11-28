@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RegisterInstanceRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for registering a notebook instance.
 **/
 export class RegisterInstanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceId" })
+  @SpeakeasyMetadata({ data: "json, name=instanceId" })
   instanceId?: string;
 }

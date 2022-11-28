@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudIdentitytoolkitAdminV2SpCertificate } from "./googlecloudidentitytoolkitadminv2spcertificate";
 // GoogleCloudIdentitytoolkitAdminV2SpConfig
 /**
  * The SAML SP (Service Provider) configuration when the project acts as the relying party to receive and accept an authentication assertion issued by a SAML identity provider.
@@ -34,17 +34,37 @@ var GoogleCloudIdentitytoolkitAdminV2SpConfig = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=callbackUri" }),
+        SpeakeasyMetadata({ data: "json, name=callbackUri" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitAdminV2SpConfig.prototype, "callbackUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=spCertificates", elemType: shared.GoogleCloudIdentitytoolkitAdminV2SpCertificate }),
+        SpeakeasyMetadata({ data: "json, name=spCertificates", elemType: GoogleCloudIdentitytoolkitAdminV2SpCertificate }),
         __metadata("design:type", Array)
     ], GoogleCloudIdentitytoolkitAdminV2SpConfig.prototype, "spCertificates", void 0);
     __decorate([
-        Metadata({ data: "json, name=spEntityId" }),
+        SpeakeasyMetadata({ data: "json, name=spEntityId" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitAdminV2SpConfig.prototype, "spEntityId", void 0);
     return GoogleCloudIdentitytoolkitAdminV2SpConfig;
 }(SpeakeasyBase));
 export { GoogleCloudIdentitytoolkitAdminV2SpConfig };
+// GoogleCloudIdentitytoolkitAdminV2SpConfigInput
+/**
+ * The SAML SP (Service Provider) configuration when the project acts as the relying party to receive and accept an authentication assertion issued by a SAML identity provider.
+**/
+var GoogleCloudIdentitytoolkitAdminV2SpConfigInput = /** @class */ (function (_super) {
+    __extends(GoogleCloudIdentitytoolkitAdminV2SpConfigInput, _super);
+    function GoogleCloudIdentitytoolkitAdminV2SpConfigInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=callbackUri" }),
+        __metadata("design:type", String)
+    ], GoogleCloudIdentitytoolkitAdminV2SpConfigInput.prototype, "callbackUri", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=spEntityId" }),
+        __metadata("design:type", String)
+    ], GoogleCloudIdentitytoolkitAdminV2SpConfigInput.prototype, "spEntityId", void 0);
+    return GoogleCloudIdentitytoolkitAdminV2SpConfigInput;
+}(SpeakeasyBase));
+export { GoogleCloudIdentitytoolkitAdminV2SpConfigInput };

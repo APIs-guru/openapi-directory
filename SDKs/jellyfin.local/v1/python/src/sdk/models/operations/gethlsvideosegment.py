@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetHlsVideoSegmentPathParams:
-    container: str = field(default=None, metadata={'path_param': { 'field_name': 'container', 'style': 'simple', 'explode': False }})
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
-    playlist_id: str = field(default=None, metadata={'path_param': { 'field_name': 'playlistId', 'style': 'simple', 'explode': False }})
-    segment_id: int = field(default=None, metadata={'path_param': { 'field_name': 'segmentId', 'style': 'simple', 'explode': False }})
+    container: str = field(metadata={'path_param': { 'field_name': 'container', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    playlist_id: str = field(metadata={'path_param': { 'field_name': 'playlistId', 'style': 'simple', 'explode': False }})
+    segment_id: int = field(metadata={'path_param': { 'field_name': 'segmentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -64,19 +65,19 @@ class GetHlsVideoSegmentQueryParams:
 
 @dataclass
 class GetHlsVideoSegmentSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetHlsVideoSegmentRequest:
-    path_params: GetHlsVideoSegmentPathParams = field(default=None)
-    query_params: GetHlsVideoSegmentQueryParams = field(default=None)
-    security: GetHlsVideoSegmentSecurity = field(default=None)
+    path_params: GetHlsVideoSegmentPathParams = field()
+    query_params: GetHlsVideoSegmentQueryParams = field()
+    security: GetHlsVideoSegmentSecurity = field()
     
 
 @dataclass
 class GetHlsVideoSegmentResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_hls_video_segment_200_video_wildcard_binary_string: Optional[bytes] = field(default=None)
-    status_code: int = field(default=None)
     

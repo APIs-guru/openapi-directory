@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Channel
@@ -6,33 +7,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An notification channel used to watch for resource changes.
 **/
 export class Channel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=expiration" })
+  @SpeakeasyMetadata({ data: "json, name=expiration" })
   expiration?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=params" })
+  @SpeakeasyMetadata({ data: "json, name=params" })
   params?: Map<string, string>;
 
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: boolean;
 
-  @Metadata({ data: "json, name=resourceId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=resourceUri" })
+  @SpeakeasyMetadata({ data: "json, name=resourceUri" })
   resourceUri?: string;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

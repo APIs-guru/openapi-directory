@@ -9,11 +9,11 @@ class PostInventoryOptimalServiceLevelHeaders:
 
 @dataclass
 class PostInventoryOptimalServiceLevelRequest:
-    headers: PostInventoryOptimalServiceLevelHeaders = field(default=None)
+    headers: PostInventoryOptimalServiceLevelHeaders = field()
     
 
 @dataclass
 class PostInventoryOptimalServiceLevelResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

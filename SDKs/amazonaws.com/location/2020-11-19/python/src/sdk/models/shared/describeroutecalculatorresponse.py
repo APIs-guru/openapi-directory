@@ -1,21 +1,23 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import pricingplan_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeRouteCalculatorResponse:
-    calculator_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CalculatorArn' }})
-    calculator_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CalculatorName' }})
-    create_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    data_source: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DataSource' }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    pricing_plan: pricingplan_enum.PricingPlanEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PricingPlan' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
-    update_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UpdateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    calculator_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CalculatorArn') }})
+    calculator_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CalculatorName') }})
+    create_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreateTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    data_source: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DataSource') }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    pricing_plan: PricingPlanEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('PricingPlan') }})
+    update_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('UpdateTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CloudresourcemanagerTagBindingsCreateQueryParams extends SpeakeasyBase {
     dollarXgafv?: shared.XgafvEnum;
@@ -20,7 +20,7 @@ export declare class CloudresourcemanagerTagBindingsCreateSecurity extends Speak
 }
 export declare class CloudresourcemanagerTagBindingsCreateRequest extends SpeakeasyBase {
     queryParams: CloudresourcemanagerTagBindingsCreateQueryParams;
-    request?: shared.TagBinding;
+    request?: shared.TagBindingInput;
     security: CloudresourcemanagerTagBindingsCreateSecurity;
 }
 export declare class CloudresourcemanagerTagBindingsCreateResponse extends SpeakeasyBase {

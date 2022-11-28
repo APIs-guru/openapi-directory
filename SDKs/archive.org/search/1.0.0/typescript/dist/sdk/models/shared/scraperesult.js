@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ScrapeResult
 /**
  * The result of a scrape request
@@ -33,23 +33,23 @@ var ScrapeResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", Number)
     ], ScrapeResult.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=cursor" }),
+        SpeakeasyMetadata({ data: "json, name=cursor" }),
         __metadata("design:type", String)
     ], ScrapeResult.prototype, "cursor", void 0);
     __decorate([
-        Metadata({ data: "json, name=items" }),
+        SpeakeasyMetadata({ data: "json, name=items" }),
         __metadata("design:type", Array)
     ], ScrapeResult.prototype, "items", void 0);
     __decorate([
-        Metadata({ data: "json, name=previous" }),
+        SpeakeasyMetadata({ data: "json, name=previous" }),
         __metadata("design:type", String)
     ], ScrapeResult.prototype, "previous", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], ScrapeResult.prototype, "total", void 0);
     return ScrapeResult;

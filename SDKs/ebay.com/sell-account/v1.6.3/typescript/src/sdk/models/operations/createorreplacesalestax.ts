@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateOrReplaceSalesTaxPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=countryCode" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=countryCode" })
   countryCode: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=jurisdictionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=jurisdictionId" })
   jurisdictionId: string;
 }
 
 
 export class CreateOrReplaceSalesTaxSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class CreateOrReplaceSalesTaxRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateOrReplaceSalesTaxPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.SalesTaxBase;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateOrReplaceSalesTaxSecurity;
 }
 
 
 export class CreateOrReplaceSalesTaxResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

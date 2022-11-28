@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class RuntimeEnvironmentEnum(str, Enum):
     SQL_1_0 = "SQL-1_0"

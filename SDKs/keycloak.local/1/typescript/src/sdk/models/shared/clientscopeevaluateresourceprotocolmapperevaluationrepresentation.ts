@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ClientScopeEvaluateResourceProtocolMapperEvaluationRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerId" })
+  @SpeakeasyMetadata({ data: "json, name=containerId" })
   containerId?: string;
 
-  @Metadata({ data: "json, name=containerName" })
+  @SpeakeasyMetadata({ data: "json, name=containerName" })
   containerName?: string;
 
-  @Metadata({ data: "json, name=containerType" })
+  @SpeakeasyMetadata({ data: "json, name=containerType" })
   containerType?: string;
 
-  @Metadata({ data: "json, name=mapperId" })
+  @SpeakeasyMetadata({ data: "json, name=mapperId" })
   mapperId?: string;
 
-  @Metadata({ data: "json, name=mapperName" })
+  @SpeakeasyMetadata({ data: "json, name=mapperName" })
   mapperName?: string;
 
-  @Metadata({ data: "json, name=protocolMapper" })
+  @SpeakeasyMetadata({ data: "json, name=protocolMapper" })
   protocolMapper?: string;
 }

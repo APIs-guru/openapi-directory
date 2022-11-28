@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ImageObjectDetectionModelDeploymentMetadata
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Model deployment metadata specific to Image Object Detection.
 **/
 export class ImageObjectDetectionModelDeploymentMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nodeCount" })
+  @SpeakeasyMetadata({ data: "json, name=nodeCount" })
   nodeCount?: string;
 }

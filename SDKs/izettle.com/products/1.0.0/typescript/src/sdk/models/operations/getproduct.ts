@@ -1,65 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetProductPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationUuid" })
   organizationUuid: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=productUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=productUuid" })
   productUuid: string;
 }
 
 
 export class GetProductHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=If-None-Match" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-None-Match" })
   ifNoneMatch?: string;
 }
 
 
-export class GetProductSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  zettleApiKey: shared.SchemeZettleApiKey;
-}
-
-
-export class GetProductSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  zettleOauth: shared.SchemeZettleOauth;
-}
-
-
 export class GetProductSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetProductSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  zettleApiKey?: shared.SchemeZettleApiKey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetProductSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  zettleOauth?: shared.SchemeZettleOauth;
 }
 
 
 export class GetProductRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetProductPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetProductHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetProductSecurity;
 }
 
 
 export class GetProductResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   productResponse?: shared.ProductResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

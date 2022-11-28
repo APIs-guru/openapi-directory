@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ServiceAddTargetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serviceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serviceId" })
   serviceId: string;
 }
 
 
 export class ServiceAddTargetSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   otoroshiAuth: shared.SchemeOtoroshiAuth;
 }
 
 
 export class ServiceAddTargetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ServiceAddTargetPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.Target;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ServiceAddTargetSecurity;
 }
 
 
 export class ServiceAddTargetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.Target })
+  @SpeakeasyMetadata({ elemType: shared.Target })
   targets?: shared.Target[];
 }

@@ -14,6 +14,8 @@ type RunPipelineActivityHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// RunPipelineActivityRequestBodyPipelineActivity
+// An activity that performs a transformation on a message.
 type RunPipelineActivityRequestBodyPipelineActivity struct {
 	AddAttributes        *shared.AddAttributesActivity        `json:"addAttributes,omitempty"`
 	Channel              *shared.ChannelActivity              `json:"channel,omitempty"`

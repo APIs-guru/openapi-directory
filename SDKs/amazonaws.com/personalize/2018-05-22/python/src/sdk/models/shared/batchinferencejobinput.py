@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import s3dataconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchInferenceJobInput:
-    s3_data_source: s3dataconfig.S3DataConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3DataSource' }})
+    r"""BatchInferenceJobInput
+    The input configuration of a batch inference job.
+    """
+    
+    s3_data_source: S3DataConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3DataSource') }})
     

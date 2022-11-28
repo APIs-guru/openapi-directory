@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import sessionfilterkey_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SessionFilter:
-    key: sessionfilterkey_enum.SessionFilterKeyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    value: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""SessionFilter
+    Describes a filter for Session Manager information.
+    """
+    
+    key: SessionFilterKeyEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    value: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

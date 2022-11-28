@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ManagedAgentNameEnum } from "./managedagentnameenum";
+
 
 
 // ManagedAgentStateChange
@@ -7,15 +8,15 @@ import { ManagedAgentNameEnum } from "./managedagentnameenum";
  * An object representing a change in state for a managed agent.
 **/
 export class ManagedAgentStateChange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerName" })
+  @SpeakeasyMetadata({ data: "json, name=containerName" })
   containerName: string;
 
-  @Metadata({ data: "json, name=managedAgentName" })
+  @SpeakeasyMetadata({ data: "json, name=managedAgentName" })
   managedAgentName: ManagedAgentNameEnum;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: string;
 }

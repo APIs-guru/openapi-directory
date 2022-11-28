@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudPubSubNotificationConfig } from "./cloudpubsubnotificationconfig";
+
 
 
 // NotificationConfig
@@ -7,6 +8,6 @@ import { CloudPubSubNotificationConfig } from "./cloudpubsubnotificationconfig";
  * NotificationConfig defines the mechanisms to notify instance agent.
 **/
 export class NotificationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pubsubNotification" })
+  @SpeakeasyMetadata({ data: "json, name=pubsubNotification" })
   pubsubNotification?: CloudPubSubNotificationConfig;
 }

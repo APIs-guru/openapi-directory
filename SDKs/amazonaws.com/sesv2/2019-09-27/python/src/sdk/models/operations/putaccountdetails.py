@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -25,26 +30,26 @@ class PutAccountDetailsRequestBodyMailTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PutAccountDetailsRequestBody:
-    additional_contact_email_addresses: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AdditionalContactEmailAddresses' }})
-    contact_language: Optional[PutAccountDetailsRequestBodyContactLanguageEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContactLanguage' }})
-    mail_type: PutAccountDetailsRequestBodyMailTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MailType' }})
-    production_access_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductionAccessEnabled' }})
-    use_case_description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UseCaseDescription' }})
-    website_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WebsiteURL' }})
+    mail_type: PutAccountDetailsRequestBodyMailTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MailType') }})
+    use_case_description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('UseCaseDescription') }})
+    website_url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('WebsiteURL') }})
+    additional_contact_email_addresses: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AdditionalContactEmailAddresses') }})
+    contact_language: Optional[PutAccountDetailsRequestBodyContactLanguageEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ContactLanguage') }})
+    production_access_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProductionAccessEnabled') }})
     
 
 @dataclass
 class PutAccountDetailsRequest:
-    headers: PutAccountDetailsHeaders = field(default=None)
-    request: PutAccountDetailsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutAccountDetailsHeaders = field()
+    request: PutAccountDetailsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutAccountDetailsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     put_account_details_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

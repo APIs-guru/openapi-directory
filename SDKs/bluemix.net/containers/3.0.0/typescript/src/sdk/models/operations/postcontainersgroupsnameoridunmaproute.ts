@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostContainersGroupsNameOrIdUnmaproutePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=name_or_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name_or_id" })
   nameOrId: string;
 }
 
 
 export class PostContainersGroupsNameOrIdUnmaprouteHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" })
   xAuthProjectId: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" })
   xAuthToken: string;
 }
 
 
 export class PostContainersGroupsNameOrIdUnmaprouteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostContainersGroupsNameOrIdUnmaproutePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PostContainersGroupsNameOrIdUnmaprouteHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.Route;
 }
 
 
 export class PostContainersGroupsNameOrIdUnmaprouteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   containersGroupsNameOrIdMaproutePostInfo?: shared.ContainersGroupsNameOrIdMaproutePostInfo;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

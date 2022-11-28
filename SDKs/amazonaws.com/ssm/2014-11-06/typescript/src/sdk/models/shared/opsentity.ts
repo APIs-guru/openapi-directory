@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OpsEntityItem } from "./opsentityitem";
+
 
 
 // OpsEntity
@@ -8,9 +8,9 @@ import { OpsEntityItem } from "./opsentityitem";
  * The result of the query.
 **/
 export class OpsEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Data", elemType: shared.OpsEntityItem })
+  @SpeakeasyMetadata({ data: "json, name=Data", elemType: OpsEntityItem })
   data?: Map<string, OpsEntityItem>;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 }

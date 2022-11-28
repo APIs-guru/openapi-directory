@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudAssetV1p7beta1GcsDestination
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A Cloud Storage location.
 **/
 export class GoogleCloudAssetV1p7beta1GcsDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 
-  @Metadata({ data: "json, name=uriPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=uriPrefix" })
   uriPrefix?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DataQualityAppSpecification
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the container that a data quality monitoring job runs.
 **/
 export class DataQualityAppSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContainerArguments" })
+  @SpeakeasyMetadata({ data: "json, name=ContainerArguments" })
   containerArguments?: string[];
 
-  @Metadata({ data: "json, name=ContainerEntrypoint" })
+  @SpeakeasyMetadata({ data: "json, name=ContainerEntrypoint" })
   containerEntrypoint?: string[];
 
-  @Metadata({ data: "json, name=Environment" })
+  @SpeakeasyMetadata({ data: "json, name=Environment" })
   environment?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ImageUri" })
+  @SpeakeasyMetadata({ data: "json, name=ImageUri" })
   imageUri: string;
 
-  @Metadata({ data: "json, name=PostAnalyticsProcessorSourceUri" })
+  @SpeakeasyMetadata({ data: "json, name=PostAnalyticsProcessorSourceUri" })
   postAnalyticsProcessorSourceUri?: string;
 
-  @Metadata({ data: "json, name=RecordPreprocessorSourceUri" })
+  @SpeakeasyMetadata({ data: "json, name=RecordPreprocessorSourceUri" })
   recordPreprocessorSourceUri?: string;
 }

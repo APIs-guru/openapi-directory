@@ -1,6 +1,7 @@
 
 
+
 export enum StreamStateEnum {
-    Live = "LIVE"
-,    Offline = "OFFLINE"
+    Live = "LIVE",
+    Offline = "OFFLINE"
 }

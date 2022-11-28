@@ -1,18 +1,20 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import domainstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeDomainResponse:
-    acm_certificate_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AcmCertificateArn' }})
-    created_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreatedTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DisplayName' }})
-    domain_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DomainName' }})
-    domain_status: Optional[domainstatus_enum.DomainStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DomainStatus' }})
+    acm_certificate_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AcmCertificateArn') }})
+    created_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreatedTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DisplayName') }})
+    domain_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DomainName') }})
+    domain_status: Optional[DomainStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DomainStatus') }})
     

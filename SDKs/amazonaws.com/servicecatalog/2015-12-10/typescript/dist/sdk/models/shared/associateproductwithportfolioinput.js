@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AssociateProductWithPortfolioInput = /** @class */ (function (_super) {
     __extends(AssociateProductWithPortfolioInput, _super);
     function AssociateProductWithPortfolioInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], AssociateProductWithPortfolioInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=PortfolioId" }),
+        SpeakeasyMetadata({ data: "json, name=PortfolioId" }),
         __metadata("design:type", String)
     ], AssociateProductWithPortfolioInput.prototype, "portfolioId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProductId" }),
+        SpeakeasyMetadata({ data: "json, name=ProductId" }),
         __metadata("design:type", String)
     ], AssociateProductWithPortfolioInput.prototype, "productId", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourcePortfolioId" }),
+        SpeakeasyMetadata({ data: "json, name=SourcePortfolioId" }),
         __metadata("design:type", String)
     ], AssociateProductWithPortfolioInput.prototype, "sourcePortfolioId", void 0);
     return AssociateProductWithPortfolioInput;

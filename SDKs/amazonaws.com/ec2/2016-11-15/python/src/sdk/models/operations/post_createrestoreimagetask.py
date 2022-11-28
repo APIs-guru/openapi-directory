@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateRestoreImageTaskActionEnum(str, Enum):
     CREATE_RESTORE_IMAGE_TASK = "CreateRestoreImageTask"
@@ -10,8 +14,8 @@ class PostCreateRestoreImageTaskVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateRestoreImageTaskQueryParams:
-    action: PostCreateRestoreImageTaskActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateRestoreImageTaskVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateRestoreImageTaskActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateRestoreImageTaskVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateRestoreImageTaskHeaders:
 
 @dataclass
 class PostCreateRestoreImageTaskRequest:
-    query_params: PostCreateRestoreImageTaskQueryParams = field(default=None)
-    headers: PostCreateRestoreImageTaskHeaders = field(default=None)
+    headers: PostCreateRestoreImageTaskHeaders = field()
+    query_params: PostCreateRestoreImageTaskQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateRestoreImageTaskResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

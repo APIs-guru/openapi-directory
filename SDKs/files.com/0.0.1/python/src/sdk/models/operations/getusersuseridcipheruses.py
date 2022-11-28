@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetUsersUserIDCipherUsesPathParams:
-    user_id: int = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    user_id: int = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class GetUsersUserIDCipherUsesQueryParams:
 
 @dataclass
 class GetUsersUserIDCipherUsesRequest:
-    path_params: GetUsersUserIDCipherUsesPathParams = field(default=None)
-    query_params: GetUsersUserIDCipherUsesQueryParams = field(default=None)
+    path_params: GetUsersUserIDCipherUsesPathParams = field()
+    query_params: GetUsersUserIDCipherUsesQueryParams = field()
     
 
 @dataclass
 class GetUsersUserIDCipherUsesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user_cipher_use_entities: Optional[List[shared.UserCipherUseEntity]] = field(default=None)
     

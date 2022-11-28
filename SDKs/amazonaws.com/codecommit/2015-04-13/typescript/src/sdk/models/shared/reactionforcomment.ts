@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReactionValueFormats } from "./reactionvalueformats";
+
 
 
 // ReactionForComment
@@ -7,12 +8,12 @@ import { ReactionValueFormats } from "./reactionvalueformats";
  * Information about the reaction values provided by users on a comment.
 **/
 export class ReactionForComment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=reaction" })
+  @SpeakeasyMetadata({ data: "json, name=reaction" })
   reaction?: ReactionValueFormats;
 
-  @Metadata({ data: "json, name=reactionUsers" })
+  @SpeakeasyMetadata({ data: "json, name=reactionUsers" })
   reactionUsers?: string[];
 
-  @Metadata({ data: "json, name=reactionsFromDeletedUsersCount" })
+  @SpeakeasyMetadata({ data: "json, name=reactionsFromDeletedUsersCount" })
   reactionsFromDeletedUsersCount?: number;
 }

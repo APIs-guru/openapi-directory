@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AlertcenterAlertsBatchDeleteQueryParams = /** @class */ (function (_super) {
     __extends(AlertcenterAlertsBatchDeleteQueryParams, _super);
@@ -30,47 +30,47 @@ var AlertcenterAlertsBatchDeleteQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], AlertcenterAlertsBatchDeleteQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], AlertcenterAlertsBatchDeleteQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], AlertcenterAlertsBatchDeleteQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], AlertcenterAlertsBatchDeleteQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], AlertcenterAlertsBatchDeleteQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], AlertcenterAlertsBatchDeleteQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], AlertcenterAlertsBatchDeleteQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], AlertcenterAlertsBatchDeleteQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], AlertcenterAlertsBatchDeleteQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], AlertcenterAlertsBatchDeleteQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], AlertcenterAlertsBatchDeleteQueryParams.prototype, "uploadProtocol", void 0);
     return AlertcenterAlertsBatchDeleteQueryParams;
@@ -82,11 +82,11 @@ var AlertcenterAlertsBatchDeleteSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], AlertcenterAlertsBatchDeleteSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], AlertcenterAlertsBatchDeleteSecurity.prototype, "oauth2c", void 0);
     return AlertcenterAlertsBatchDeleteSecurity;
@@ -98,15 +98,15 @@ var AlertcenterAlertsBatchDeleteRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AlertcenterAlertsBatchDeleteQueryParams)
     ], AlertcenterAlertsBatchDeleteRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.BatchDeleteAlertsRequest)
     ], AlertcenterAlertsBatchDeleteRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AlertcenterAlertsBatchDeleteSecurity)
     ], AlertcenterAlertsBatchDeleteRequest.prototype, "security", void 0);
     return AlertcenterAlertsBatchDeleteRequest;
@@ -118,15 +118,15 @@ var AlertcenterAlertsBatchDeleteResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.BatchDeleteAlertsResponse)
     ], AlertcenterAlertsBatchDeleteResponse.prototype, "batchDeleteAlertsResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AlertcenterAlertsBatchDeleteResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AlertcenterAlertsBatchDeleteResponse.prototype, "statusCode", void 0);
     return AlertcenterAlertsBatchDeleteResponse;

@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetCustomersCountJsonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=authtoken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authtoken" })
   authtoken: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=login" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=login" })
   login: string;
 }
 
 
 export class GetCustomersCountJsonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCustomersCountJsonQueryParams;
 }
 
 
 export class GetCustomersCountJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   count?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

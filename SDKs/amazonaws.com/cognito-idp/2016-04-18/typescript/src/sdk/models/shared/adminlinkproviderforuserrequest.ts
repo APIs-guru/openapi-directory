@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProviderUserIdentifierType } from "./provideruseridentifiertype";
-import { ProviderUserIdentifierType } from "./provideruseridentifiertype";
+
 
 
 export class AdminLinkProviderForUserRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DestinationUser" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationUser" })
   destinationUser: ProviderUserIdentifierType;
 
-  @Metadata({ data: "json, name=SourceUser" })
+  @SpeakeasyMetadata({ data: "json, name=SourceUser" })
   sourceUser: ProviderUserIdentifierType;
 
-  @Metadata({ data: "json, name=UserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolId" })
   userPoolId: string;
 }

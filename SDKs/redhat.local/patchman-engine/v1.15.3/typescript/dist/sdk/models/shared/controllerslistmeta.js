@@ -22,39 +22,39 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ControllersFilterData } from "./controllersfilterdata";
 var ControllersListMeta = /** @class */ (function (_super) {
     __extends(ControllersListMeta, _super);
     function ControllersListMeta() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=filter", elemType: shared.ControllersFilterData }),
+        SpeakeasyMetadata({ data: "json, name=filter", elemType: ControllersFilterData }),
         __metadata("design:type", Map)
     ], ControllersListMeta.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "json, name=limit" }),
+        SpeakeasyMetadata({ data: "json, name=limit" }),
         __metadata("design:type", Number)
     ], ControllersListMeta.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "json, name=offset" }),
+        SpeakeasyMetadata({ data: "json, name=offset" }),
         __metadata("design:type", Number)
     ], ControllersListMeta.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "json, name=search" }),
+        SpeakeasyMetadata({ data: "json, name=search" }),
         __metadata("design:type", String)
     ], ControllersListMeta.prototype, "search", void 0);
     __decorate([
-        Metadata({ data: "json, name=sort" }),
+        SpeakeasyMetadata({ data: "json, name=sort" }),
         __metadata("design:type", Array)
     ], ControllersListMeta.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "json, name=subtotals" }),
+        SpeakeasyMetadata({ data: "json, name=subtotals" }),
         __metadata("design:type", Map)
     ], ControllersListMeta.prototype, "subtotals", void 0);
     __decorate([
-        Metadata({ data: "json, name=total_items" }),
+        SpeakeasyMetadata({ data: "json, name=total_items" }),
         __metadata("design:type", Number)
     ], ControllersListMeta.prototype, "totalItems", void 0);
     return ControllersListMeta;

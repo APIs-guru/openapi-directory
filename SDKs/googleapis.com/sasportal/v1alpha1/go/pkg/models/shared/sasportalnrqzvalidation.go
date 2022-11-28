@@ -8,6 +8,8 @@ const (
 	SasPortalNrqzValidationStateEnumFinal            SasPortalNrqzValidationStateEnum = "FINAL"
 )
 
+// SasPortalNrqzValidation
+// Information about National Radio Quiet Zone validation.
 type SasPortalNrqzValidation struct {
 	CaseID    *string                           `json:"caseId,omitempty"`
 	CpiID     *string                           `json:"cpiId,omitempty"`

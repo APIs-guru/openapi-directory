@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
+from sdk.models import shared
 
 
 @dataclass
 class AddTextItemWithParentPathParams:
-    conv_id: str = field(default=None, metadata={'path_param': { 'field_name': 'convId', 'style': 'simple', 'explode': False }})
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    conv_id: str = field(metadata={'path_param': { 'field_name': 'convId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,20 +19,20 @@ class AddTextItemWithParentRequestBody:
 
 @dataclass
 class AddTextItemWithParentSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AddTextItemWithParentRequest:
-    path_params: AddTextItemWithParentPathParams = field(default=None)
+    path_params: AddTextItemWithParentPathParams = field()
+    security: AddTextItemWithParentSecurity = field()
     request: Optional[AddTextItemWithParentRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: AddTextItemWithParentSecurity = field(default=None)
     
 
 @dataclass
 class AddTextItemWithParentResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     conversation_item: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

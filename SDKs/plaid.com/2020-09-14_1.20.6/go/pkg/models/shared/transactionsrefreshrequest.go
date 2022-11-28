@@ -1,5 +1,7 @@
 package shared
 
+// TransactionsRefreshRequest
+// TransactionsRefreshRequest defines the request schema for `/transactions/refresh`
 type TransactionsRefreshRequest struct {
 	AccessToken string  `json:"access_token"`
 	ClientID    *string `json:"client_id,omitempty"`

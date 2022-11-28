@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostAbortEnvironmentUpdateActionEnum(str, Enum):
     ABORT_ENVIRONMENT_UPDATE = "AbortEnvironmentUpdate"
@@ -10,8 +14,8 @@ class PostAbortEnvironmentUpdateVersionEnum(str, Enum):
 
 @dataclass
 class PostAbortEnvironmentUpdateQueryParams:
-    action: PostAbortEnvironmentUpdateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostAbortEnvironmentUpdateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostAbortEnvironmentUpdateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostAbortEnvironmentUpdateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostAbortEnvironmentUpdateHeaders:
 
 @dataclass
 class PostAbortEnvironmentUpdateRequest:
-    query_params: PostAbortEnvironmentUpdateQueryParams = field(default=None)
-    headers: PostAbortEnvironmentUpdateHeaders = field(default=None)
+    headers: PostAbortEnvironmentUpdateHeaders = field()
+    query_params: PostAbortEnvironmentUpdateQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostAbortEnvironmentUpdateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

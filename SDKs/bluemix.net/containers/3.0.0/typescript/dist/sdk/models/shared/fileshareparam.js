@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var FileshareParam = /** @class */ (function (_super) {
     __extends(FileshareParam, _super);
     function FileshareParam() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fsIOPS" }),
+        SpeakeasyMetadata({ data: "json, name=fsIOPS" }),
         __metadata("design:type", Number)
     ], FileshareParam.prototype, "fsIops", void 0);
     __decorate([
-        Metadata({ data: "json, name=fsName" }),
+        SpeakeasyMetadata({ data: "json, name=fsName" }),
         __metadata("design:type", String)
     ], FileshareParam.prototype, "fsName", void 0);
     __decorate([
-        Metadata({ data: "json, name=fsSize" }),
+        SpeakeasyMetadata({ data: "json, name=fsSize" }),
         __metadata("design:type", Number)
     ], FileshareParam.prototype, "fsSize", void 0);
     return FileshareParam;

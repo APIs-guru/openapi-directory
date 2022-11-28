@@ -22,13 +22,9 @@ type EndpointGetAShowsEpisodesSecurity struct {
 	SpotifyAuth shared.SchemeSpotifyAuth `security:"scheme,type=oauth2"`
 }
 
-type EndpointGetAShowsEpisodesRequest struct {
-	PathParams  EndpointGetAShowsEpisodesPathParams
-	QueryParams EndpointGetAShowsEpisodesQueryParams
-	Headers     EndpointGetAShowsEpisodesHeaders
-	Security    EndpointGetAShowsEpisodesSecurity
-}
+// EndpointGetAShowsEpisodes200ApplicationJSON
 
+// https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
 type EndpointGetAShowsEpisodes200ApplicationJSON struct {
 	Href     *string                          `json:"href,omitempty"`
 	Items    []shared.SimplifiedEpisodeObject `json:"items,omitempty"`
@@ -37,6 +33,13 @@ type EndpointGetAShowsEpisodes200ApplicationJSON struct {
 	Offset   *int32                           `json:"offset,omitempty"`
 	Previous *string                          `json:"previous,omitempty"`
 	Total    *int32                           `json:"total,omitempty"`
+}
+
+type EndpointGetAShowsEpisodesRequest struct {
+	PathParams  EndpointGetAShowsEpisodesPathParams
+	QueryParams EndpointGetAShowsEpisodesQueryParams
+	Headers     EndpointGetAShowsEpisodesHeaders
+	Security    EndpointGetAShowsEpisodesSecurity
 }
 
 type EndpointGetAShowsEpisodesResponse struct {

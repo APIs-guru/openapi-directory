@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CanvasDetailsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=canvas_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=canvas_id" })
   canvasId?: string;
 }
 
 
 export class CanvasDetailsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: CanvasDetailsQueryParams;
 }
 
 
 export class CanvasDetailsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

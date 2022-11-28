@@ -1,7 +1,8 @@
 
 
+
 export enum OfflineStoreStatusValueEnum {
-    Active = "Active"
-,    Blocked = "Blocked"
-,    Disabled = "Disabled"
+    Active = "Active",
+    Blocked = "Blocked",
+    Disabled = "Disabled"
 }

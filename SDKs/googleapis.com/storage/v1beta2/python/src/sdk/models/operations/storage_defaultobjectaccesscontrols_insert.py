@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class StorageDefaultObjectAccessControlsInsertPathParams:
-    bucket: str = field(default=None, metadata={'path_param': { 'field_name': 'bucket', 'style': 'simple', 'explode': False }})
+    bucket: str = field(metadata={'path_param': { 'field_name': 'bucket', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,21 +22,21 @@ class StorageDefaultObjectAccessControlsInsertQueryParams:
 
 @dataclass
 class StorageDefaultObjectAccessControlsInsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class StorageDefaultObjectAccessControlsInsertRequest:
-    path_params: StorageDefaultObjectAccessControlsInsertPathParams = field(default=None)
-    query_params: StorageDefaultObjectAccessControlsInsertQueryParams = field(default=None)
+    path_params: StorageDefaultObjectAccessControlsInsertPathParams = field()
+    query_params: StorageDefaultObjectAccessControlsInsertQueryParams = field()
+    security: StorageDefaultObjectAccessControlsInsertSecurity = field()
     request: Optional[shared.ObjectAccessControl] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: StorageDefaultObjectAccessControlsInsertSecurity = field(default=None)
     
 
 @dataclass
 class StorageDefaultObjectAccessControlsInsertResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     object_access_control: Optional[shared.ObjectAccessControl] = field(default=None)
-    status_code: int = field(default=None)
     

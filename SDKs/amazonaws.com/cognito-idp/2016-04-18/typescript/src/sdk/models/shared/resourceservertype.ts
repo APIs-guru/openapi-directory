@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceServerScopeType } from "./resourceserverscopetype";
+
 
 
 // ResourceServerType
@@ -8,15 +8,15 @@ import { ResourceServerScopeType } from "./resourceserverscopetype";
  * A container for information about a resource server for a user pool.
 **/
 export class ResourceServerType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Identifier" })
+  @SpeakeasyMetadata({ data: "json, name=Identifier" })
   identifier?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Scopes", elemType: shared.ResourceServerScopeType })
+  @SpeakeasyMetadata({ data: "json, name=Scopes", elemType: ResourceServerScopeType })
   scopes?: ResourceServerScopeType[];
 
-  @Metadata({ data: "json, name=UserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolId" })
   userPoolId?: string;
 }

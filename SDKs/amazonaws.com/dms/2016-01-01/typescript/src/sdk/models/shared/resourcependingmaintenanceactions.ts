@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PendingMaintenanceAction } from "./pendingmaintenanceaction";
+
 
 
 // ResourcePendingMaintenanceActions
@@ -8,9 +8,9 @@ import { PendingMaintenanceAction } from "./pendingmaintenanceaction";
  * Identifies an DMS resource and any pending actions for it.
 **/
 export class ResourcePendingMaintenanceActions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PendingMaintenanceActionDetails", elemType: shared.PendingMaintenanceAction })
+  @SpeakeasyMetadata({ data: "json, name=PendingMaintenanceActionDetails", elemType: PendingMaintenanceAction })
   pendingMaintenanceActionDetails?: PendingMaintenanceAction[];
 
-  @Metadata({ data: "json, name=ResourceIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceIdentifier" })
   resourceIdentifier?: string;
 }

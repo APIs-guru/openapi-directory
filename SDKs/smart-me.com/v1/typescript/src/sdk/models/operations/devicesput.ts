@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DevicesPutPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class DevicesPutQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=switchNumber" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=switchNumber" })
   switchNumber?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=switchState" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=switchState" })
   switchState: boolean;
 }
 
 
 export class DevicesPutRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DevicesPutPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DevicesPutQueryParams;
 }
 
 
 export class DevicesPutResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   object?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComparisonOperatorEnum } from "./comparisonoperatorenum";
 import { ContactProtocolEnum } from "./contactprotocolenum";
 import { MetricNameEnum } from "./metricnameenum";
@@ -6,37 +6,38 @@ import { AlarmStateEnum } from "./alarmstateenum";
 import { TreatMissingDataEnum } from "./treatmissingdataenum";
 
 
+
 export class PutAlarmRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alarmName" })
+  @SpeakeasyMetadata({ data: "json, name=alarmName" })
   alarmName: string;
 
-  @Metadata({ data: "json, name=comparisonOperator" })
+  @SpeakeasyMetadata({ data: "json, name=comparisonOperator" })
   comparisonOperator: ComparisonOperatorEnum;
 
-  @Metadata({ data: "json, name=contactProtocols" })
+  @SpeakeasyMetadata({ data: "json, name=contactProtocols" })
   contactProtocols?: ContactProtocolEnum[];
 
-  @Metadata({ data: "json, name=datapointsToAlarm" })
+  @SpeakeasyMetadata({ data: "json, name=datapointsToAlarm" })
   datapointsToAlarm?: number;
 
-  @Metadata({ data: "json, name=evaluationPeriods" })
+  @SpeakeasyMetadata({ data: "json, name=evaluationPeriods" })
   evaluationPeriods: number;
 
-  @Metadata({ data: "json, name=metricName" })
+  @SpeakeasyMetadata({ data: "json, name=metricName" })
   metricName: MetricNameEnum;
 
-  @Metadata({ data: "json, name=monitoredResourceName" })
+  @SpeakeasyMetadata({ data: "json, name=monitoredResourceName" })
   monitoredResourceName: string;
 
-  @Metadata({ data: "json, name=notificationEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=notificationEnabled" })
   notificationEnabled?: boolean;
 
-  @Metadata({ data: "json, name=notificationTriggers" })
+  @SpeakeasyMetadata({ data: "json, name=notificationTriggers" })
   notificationTriggers?: AlarmStateEnum[];
 
-  @Metadata({ data: "json, name=threshold" })
+  @SpeakeasyMetadata({ data: "json, name=threshold" })
   threshold: number;
 
-  @Metadata({ data: "json, name=treatMissingData" })
+  @SpeakeasyMetadata({ data: "json, name=treatMissingData" })
   treatMissingData?: TreatMissingDataEnum;
 }

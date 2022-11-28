@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostUpdateTagsForResourceActionEnum(str, Enum):
     UPDATE_TAGS_FOR_RESOURCE = "UpdateTagsForResource"
@@ -10,8 +14,8 @@ class PostUpdateTagsForResourceVersionEnum(str, Enum):
 
 @dataclass
 class PostUpdateTagsForResourceQueryParams:
-    action: PostUpdateTagsForResourceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostUpdateTagsForResourceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostUpdateTagsForResourceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostUpdateTagsForResourceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostUpdateTagsForResourceHeaders:
 
 @dataclass
 class PostUpdateTagsForResourceRequest:
-    query_params: PostUpdateTagsForResourceQueryParams = field(default=None)
-    headers: PostUpdateTagsForResourceHeaders = field(default=None)
+    headers: PostUpdateTagsForResourceHeaders = field()
+    query_params: PostUpdateTagsForResourceQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostUpdateTagsForResourceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

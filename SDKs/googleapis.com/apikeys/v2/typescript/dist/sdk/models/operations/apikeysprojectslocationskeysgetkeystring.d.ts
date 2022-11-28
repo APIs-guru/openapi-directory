@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class ApikeysProjectsLocationsKeysGetKeyStringPathParams extends SpeakeasyBase {
     name: string;

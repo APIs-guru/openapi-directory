@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class GamesDevelopmentTeamListPathParams:
-    game_pk: str = field(default=None, metadata={'path_param': { 'field_name': 'game_pk', 'style': 'simple', 'explode': False }})
+    game_pk: str = field(metadata={'path_param': { 'field_name': 'game_pk', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,24 +17,24 @@ class GamesDevelopmentTeamListQueryParams:
     page_size: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page_size', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class GamesDevelopmentTeamListRequest:
-    path_params: GamesDevelopmentTeamListPathParams = field(default=None)
-    query_params: GamesDevelopmentTeamListQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class GamesDevelopmentTeamList200ApplicationJSON:
-    count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count' }})
-    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next' }})
-    previous: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'previous' }})
-    results: List[shared.GamePersonList] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    count: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('count') }})
+    results: List[shared.GamePersonList] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
+    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('next') }})
+    previous: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('previous') }})
+    
+
+@dataclass
+class GamesDevelopmentTeamListRequest:
+    path_params: GamesDevelopmentTeamListPathParams = field()
+    query_params: GamesDevelopmentTeamListQueryParams = field()
     
 
 @dataclass
 class GamesDevelopmentTeamListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     games_development_team_list_200_application_json_object: Optional[GamesDevelopmentTeamList200ApplicationJSON] = field(default=None)
     

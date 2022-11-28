@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://www.interzoid.com/services/getglobalnumberinfo - API home page and documentation"""
 import requests
 from typing import Optional
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,50 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://www.interzoid.com/services/getglobalnumberinfo - API home page and documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def getglobalnumberinfo(self, request: operations.GetglobalnumberinfoRequest) -> operations.GetglobalnumberinfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get demographic information for a global telephone number
+        Get demographic information for a global telephone number, including city and country information, primary languages spoken, and mobile device identification.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getglobalnumberinfo"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDeleteLoadBalancerListenersActionEnum(str, Enum):
     DELETE_LOAD_BALANCER_LISTENERS = "DeleteLoadBalancerListeners"
@@ -10,10 +14,10 @@ class GetDeleteLoadBalancerListenersVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteLoadBalancerListenersQueryParams:
-    action: GetDeleteLoadBalancerListenersActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    load_balancer_name: str = field(default=None, metadata={'query_param': { 'field_name': 'LoadBalancerName', 'style': 'form', 'explode': True }})
-    load_balancer_ports: List[int] = field(default=None, metadata={'query_param': { 'field_name': 'LoadBalancerPorts', 'style': 'form', 'explode': True }})
-    version: GetDeleteLoadBalancerListenersVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteLoadBalancerListenersActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    load_balancer_name: str = field(metadata={'query_param': { 'field_name': 'LoadBalancerName', 'style': 'form', 'explode': True }})
+    load_balancer_ports: List[int] = field(metadata={'query_param': { 'field_name': 'LoadBalancerPorts', 'style': 'form', 'explode': True }})
+    version: GetDeleteLoadBalancerListenersVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteLoadBalancerListenersHeaders:
 
 @dataclass
 class GetDeleteLoadBalancerListenersRequest:
-    query_params: GetDeleteLoadBalancerListenersQueryParams = field(default=None)
-    headers: GetDeleteLoadBalancerListenersHeaders = field(default=None)
+    headers: GetDeleteLoadBalancerListenersHeaders = field()
+    query_params: GetDeleteLoadBalancerListenersQueryParams = field()
     
 
 @dataclass
 class GetDeleteLoadBalancerListenersResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

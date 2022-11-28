@@ -1,5 +1,7 @@
 package shared
 
+// RadiusConfig
+// RADIUS configuration
 type RadiusConfig struct {
 	FailoverServer *FailoverServer `json:"failoverServer,omitempty"`
 	IPAddress      string          `json:"ipAddress"`

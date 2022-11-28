@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTeamsTeamIdMembershipsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=teamId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=teamId" })
   teamId: string;
 }
 
 
 export class GetTeamsTeamIdMembershipsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTeamsTeamIdMembershipsPathParams;
 }
 
 
 export class GetTeamsTeamIdMembershipsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata({ elemType: shared.InvitedUserInfo })
+  @SpeakeasyMetadata({ elemType: shared.InvitedUserInfo })
   invitedUserInfos?: shared.InvitedUserInfo[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

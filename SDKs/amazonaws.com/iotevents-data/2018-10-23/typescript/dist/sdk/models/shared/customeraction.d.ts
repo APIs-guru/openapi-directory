@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AcknowledgeActionConfiguration } from "./acknowledgeactionconfiguration";
 import { CustomerActionNameEnum } from "./customeractionnameenum";
 import { DisableActionConfiguration } from "./disableactionconfiguration";

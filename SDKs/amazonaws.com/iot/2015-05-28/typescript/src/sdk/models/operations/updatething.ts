@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateThingPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=thingName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=thingName" })
   thingName: string;
 }
 
 
 export class UpdateThingHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -36,69 +37,69 @@ export class UpdateThingHeaders extends SpeakeasyBase {
  * The attribute payload.
 **/
 export class UpdateThingRequestBodyAttributePayload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=merge" })
+  @SpeakeasyMetadata({ data: "json, name=merge" })
   merge?: boolean;
 }
 
 
 export class UpdateThingRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributePayload" })
+  @SpeakeasyMetadata({ data: "json, name=attributePayload" })
   attributePayload?: UpdateThingRequestBodyAttributePayload;
 
-  @Metadata({ data: "json, name=expectedVersion" })
+  @SpeakeasyMetadata({ data: "json, name=expectedVersion" })
   expectedVersion?: number;
 
-  @Metadata({ data: "json, name=removeThingType" })
+  @SpeakeasyMetadata({ data: "json, name=removeThingType" })
   removeThingType?: boolean;
 
-  @Metadata({ data: "json, name=thingTypeName" })
+  @SpeakeasyMetadata({ data: "json, name=thingTypeName" })
   thingTypeName?: string;
 }
 
 
 export class UpdateThingRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateThingPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateThingHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateThingRequestBody;
 }
 
 
 export class UpdateThingResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateThingResponse?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   versionConflictException?: any;
 }

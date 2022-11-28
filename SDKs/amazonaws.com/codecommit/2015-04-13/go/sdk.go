@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://codecommit.{region}.amazonaws.com",
 	"https://codecommit.{region}.amazonaws.com",
 	"http://codecommit.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/codecommit/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AssociateApprovalRuleTemplateWithRepository - Creates an association between an approval rule template and a specified repository. Then, the next time a pull request is created in the repository where the destination reference (if specified) matches the destination reference (branch) for the pull request, an approval rule that matches the template conditions is automatically created for that pull request. If no destination references are specified in the template, an approval rule that matches the template contents is created for all pull requests in that repository.
 func (s *SDK) AssociateApprovalRuleTemplateWithRepository(ctx context.Context, request operations.AssociateApprovalRuleTemplateWithRepositoryRequest) (*operations.AssociateApprovalRuleTemplateWithRepositoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.AssociateApprovalRuleTemplateWithRepository"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) AssociateApprovalRuleTemplateWithRepository(ctx context.Context, r
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -222,8 +249,9 @@ func (s *SDK) AssociateApprovalRuleTemplateWithRepository(ctx context.Context, r
 	return res, nil
 }
 
+// BatchAssociateApprovalRuleTemplateWithRepositories - Creates an association between an approval rule template and one or more specified repositories.
 func (s *SDK) BatchAssociateApprovalRuleTemplateWithRepositories(ctx context.Context, request operations.BatchAssociateApprovalRuleTemplateWithRepositoriesRequest) (*operations.BatchAssociateApprovalRuleTemplateWithRepositoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.BatchAssociateApprovalRuleTemplateWithRepositories"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -243,7 +271,7 @@ func (s *SDK) BatchAssociateApprovalRuleTemplateWithRepositories(ctx context.Con
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -373,8 +401,9 @@ func (s *SDK) BatchAssociateApprovalRuleTemplateWithRepositories(ctx context.Con
 	return res, nil
 }
 
+// BatchDescribeMergeConflicts - Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy.
 func (s *SDK) BatchDescribeMergeConflicts(ctx context.Context, request operations.BatchDescribeMergeConflictsRequest) (*operations.BatchDescribeMergeConflictsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.BatchDescribeMergeConflicts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -394,7 +423,7 @@ func (s *SDK) BatchDescribeMergeConflicts(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -634,8 +663,9 @@ func (s *SDK) BatchDescribeMergeConflicts(ctx context.Context, request operation
 	return res, nil
 }
 
+// BatchDisassociateApprovalRuleTemplateFromRepositories - Removes the association between an approval rule template and one or more specified repositories.
 func (s *SDK) BatchDisassociateApprovalRuleTemplateFromRepositories(ctx context.Context, request operations.BatchDisassociateApprovalRuleTemplateFromRepositoriesRequest) (*operations.BatchDisassociateApprovalRuleTemplateFromRepositoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.BatchDisassociateApprovalRuleTemplateFromRepositories"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -655,7 +685,7 @@ func (s *SDK) BatchDisassociateApprovalRuleTemplateFromRepositories(ctx context.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -785,8 +815,9 @@ func (s *SDK) BatchDisassociateApprovalRuleTemplateFromRepositories(ctx context.
 	return res, nil
 }
 
+// BatchGetCommits - Returns information about the contents of one or more commits in a repository.
 func (s *SDK) BatchGetCommits(ctx context.Context, request operations.BatchGetCommitsRequest) (*operations.BatchGetCommitsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.BatchGetCommits"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -806,7 +837,7 @@ func (s *SDK) BatchGetCommits(ctx context.Context, request operations.BatchGetCo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -936,8 +967,9 @@ func (s *SDK) BatchGetCommits(ctx context.Context, request operations.BatchGetCo
 	return res, nil
 }
 
+// BatchGetRepositories - <p>Returns information about one or more repositories.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a webpage can expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a webpage.</p> </note>
 func (s *SDK) BatchGetRepositories(ctx context.Context, request operations.BatchGetRepositoriesRequest) (*operations.BatchGetRepositoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.BatchGetRepositories"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -957,7 +989,7 @@ func (s *SDK) BatchGetRepositories(ctx context.Context, request operations.Batch
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1067,8 +1099,9 @@ func (s *SDK) BatchGetRepositories(ctx context.Context, request operations.Batch
 	return res, nil
 }
 
+// CreateApprovalRuleTemplate - Creates a template for approval rules that can then be associated with one or more repositories in your AWS account. When you associate a template with a repository, AWS CodeCommit creates an approval rule that matches the conditions of the template for all pull requests that meet the conditions of the template. For more information, see <a>AssociateApprovalRuleTemplateWithRepository</a>.
 func (s *SDK) CreateApprovalRuleTemplate(ctx context.Context, request operations.CreateApprovalRuleTemplateRequest) (*operations.CreateApprovalRuleTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.CreateApprovalRuleTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1088,7 +1121,7 @@ func (s *SDK) CreateApprovalRuleTemplate(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1188,8 +1221,9 @@ func (s *SDK) CreateApprovalRuleTemplate(ctx context.Context, request operations
 	return res, nil
 }
 
+// CreateBranch - <p>Creates a branch in a repository and points the branch to a commit.</p> <note> <p>Calling the create branch operation does not set a repository's default branch. To do this, call the update default branch operation.</p> </note>
 func (s *SDK) CreateBranch(ctx context.Context, request operations.CreateBranchRequest) (*operations.CreateBranchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.CreateBranch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1209,7 +1243,7 @@ func (s *SDK) CreateBranch(ctx context.Context, request operations.CreateBranchR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1370,8 +1404,9 @@ func (s *SDK) CreateBranch(ctx context.Context, request operations.CreateBranchR
 	return res, nil
 }
 
+// CreateCommit - Creates a commit for a repository on the tip of a specified branch.
 func (s *SDK) CreateCommit(ctx context.Context, request operations.CreateCommitRequest) (*operations.CreateCommitResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.CreateCommit"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1391,7 +1426,7 @@ func (s *SDK) CreateCommit(ctx context.Context, request operations.CreateCommitR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1801,8 +1836,9 @@ func (s *SDK) CreateCommit(ctx context.Context, request operations.CreateCommitR
 	return res, nil
 }
 
+// CreatePullRequest - Creates a pull request in the specified repository.
 func (s *SDK) CreatePullRequest(ctx context.Context, request operations.CreatePullRequestRequest) (*operations.CreatePullRequestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.CreatePullRequest"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1822,7 +1858,7 @@ func (s *SDK) CreatePullRequest(ctx context.Context, request operations.CreatePu
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2102,8 +2138,9 @@ func (s *SDK) CreatePullRequest(ctx context.Context, request operations.CreatePu
 	return res, nil
 }
 
+// CreatePullRequestApprovalRule - Creates an approval rule for a pull request.
 func (s *SDK) CreatePullRequestApprovalRule(ctx context.Context, request operations.CreatePullRequestApprovalRuleRequest) (*operations.CreatePullRequestApprovalRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.CreatePullRequestApprovalRule"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2123,7 +2160,7 @@ func (s *SDK) CreatePullRequestApprovalRule(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2303,8 +2340,9 @@ func (s *SDK) CreatePullRequestApprovalRule(ctx context.Context, request operati
 	return res, nil
 }
 
+// CreateRepository - Creates a new, empty repository.
 func (s *SDK) CreateRepository(ctx context.Context, request operations.CreateRepositoryRequest) (*operations.CreateRepositoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.CreateRepository"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2324,7 +2362,7 @@ func (s *SDK) CreateRepository(ctx context.Context, request operations.CreateRep
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2494,8 +2532,9 @@ func (s *SDK) CreateRepository(ctx context.Context, request operations.CreateRep
 	return res, nil
 }
 
+// CreateUnreferencedMergeCommit - <p>Creates an unreferenced commit that represents the result of merging two branches using a specified merge strategy. This can help you determine the outcome of a potential merge. This API cannot be used with the fast-forward merge strategy because that strategy does not create a merge commit.</p> <note> <p>This unreferenced merge commit can only be accessed using the GetCommit API or through git commands such as git fetch. To retrieve this commit, you must specify its commit ID or otherwise reference it.</p> </note>
 func (s *SDK) CreateUnreferencedMergeCommit(ctx context.Context, request operations.CreateUnreferencedMergeCommitRequest) (*operations.CreateUnreferencedMergeCommitResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.CreateUnreferencedMergeCommit"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2515,7 +2554,7 @@ func (s *SDK) CreateUnreferencedMergeCommit(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2905,8 +2944,9 @@ func (s *SDK) CreateUnreferencedMergeCommit(ctx context.Context, request operati
 	return res, nil
 }
 
+// DeleteApprovalRuleTemplate - Deletes a specified approval rule template. Deleting a template does not remove approval rules on pull requests already created with the template.
 func (s *SDK) DeleteApprovalRuleTemplate(ctx context.Context, request operations.DeleteApprovalRuleTemplateRequest) (*operations.DeleteApprovalRuleTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.DeleteApprovalRuleTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2926,7 +2966,7 @@ func (s *SDK) DeleteApprovalRuleTemplate(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2986,8 +3026,9 @@ func (s *SDK) DeleteApprovalRuleTemplate(ctx context.Context, request operations
 	return res, nil
 }
 
+// DeleteBranch - Deletes a branch from a repository, unless that branch is the default branch for the repository.
 func (s *SDK) DeleteBranch(ctx context.Context, request operations.DeleteBranchRequest) (*operations.DeleteBranchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.DeleteBranch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3007,7 +3048,7 @@ func (s *SDK) DeleteBranch(ctx context.Context, request operations.DeleteBranchR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3147,8 +3188,9 @@ func (s *SDK) DeleteBranch(ctx context.Context, request operations.DeleteBranchR
 	return res, nil
 }
 
+// DeleteCommentContent - Deletes the content of a comment made on a change, file, or commit in a repository.
 func (s *SDK) DeleteCommentContent(ctx context.Context, request operations.DeleteCommentContentRequest) (*operations.DeleteCommentContentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.DeleteCommentContent"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3168,7 +3210,7 @@ func (s *SDK) DeleteCommentContent(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3238,8 +3280,9 @@ func (s *SDK) DeleteCommentContent(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteFile - Deletes a specified file from a specified branch. A commit is created on the branch that contains the revision. The file still exists in the commits earlier to the commit that contains the deletion.
 func (s *SDK) DeleteFile(ctx context.Context, request operations.DeleteFileRequest) (*operations.DeleteFileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.DeleteFile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3259,7 +3302,7 @@ func (s *SDK) DeleteFile(ctx context.Context, request operations.DeleteFileReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3509,8 +3552,9 @@ func (s *SDK) DeleteFile(ctx context.Context, request operations.DeleteFileReque
 	return res, nil
 }
 
+// DeletePullRequestApprovalRule - Deletes an approval rule from a specified pull request. Approval rules can be deleted from a pull request only if the pull request is open, and if the approval rule was created specifically for a pull request and not generated from an approval rule template associated with the repository where the pull request was created. You cannot delete an approval rule from a merged or closed pull request.
 func (s *SDK) DeletePullRequestApprovalRule(ctx context.Context, request operations.DeletePullRequestApprovalRuleRequest) (*operations.DeletePullRequestApprovalRuleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.DeletePullRequestApprovalRule"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3530,7 +3574,7 @@ func (s *SDK) DeletePullRequestApprovalRule(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3680,8 +3724,9 @@ func (s *SDK) DeletePullRequestApprovalRule(ctx context.Context, request operati
 	return res, nil
 }
 
+// DeleteRepository - <p>Deletes a repository. If a specified repository was already deleted, a null repository ID is returned.</p> <important> <p>Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository fail.</p> </important>
 func (s *SDK) DeleteRepository(ctx context.Context, request operations.DeleteRepositoryRequest) (*operations.DeleteRepositoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.DeleteRepository"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3701,7 +3746,7 @@ func (s *SDK) DeleteRepository(ctx context.Context, request operations.DeleteRep
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3801,8 +3846,9 @@ func (s *SDK) DeleteRepository(ctx context.Context, request operations.DeleteRep
 	return res, nil
 }
 
+// DescribeMergeConflicts - Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy. If the merge option for the attempted merge is specified as FAST_FORWARD_MERGE, an exception is thrown.
 func (s *SDK) DescribeMergeConflicts(ctx context.Context, request operations.DescribeMergeConflictsRequest) (*operations.DescribeMergeConflictsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.DescribeMergeConflicts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3824,7 +3870,7 @@ func (s *SDK) DescribeMergeConflicts(ctx context.Context, request operations.Des
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4084,8 +4130,9 @@ func (s *SDK) DescribeMergeConflicts(ctx context.Context, request operations.Des
 	return res, nil
 }
 
+// DescribePullRequestEvents - Returns information about one or more pull request events.
 func (s *SDK) DescribePullRequestEvents(ctx context.Context, request operations.DescribePullRequestEventsRequest) (*operations.DescribePullRequestEventsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.DescribePullRequestEvents"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4107,7 +4154,7 @@ func (s *SDK) DescribePullRequestEvents(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4267,8 +4314,9 @@ func (s *SDK) DescribePullRequestEvents(ctx context.Context, request operations.
 	return res, nil
 }
 
+// DisassociateApprovalRuleTemplateFromRepository - Removes the association between a template and a repository so that approval rules based on the template are not automatically created when pull requests are created in the specified repository. This does not delete any approval rules previously created for pull requests through the template association.
 func (s *SDK) DisassociateApprovalRuleTemplateFromRepository(ctx context.Context, request operations.DisassociateApprovalRuleTemplateFromRepositoryRequest) (*operations.DisassociateApprovalRuleTemplateFromRepositoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.DisassociateApprovalRuleTemplateFromRepository"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4288,7 +4336,7 @@ func (s *SDK) DisassociateApprovalRuleTemplateFromRepository(ctx context.Context
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4419,8 +4467,9 @@ func (s *SDK) DisassociateApprovalRuleTemplateFromRepository(ctx context.Context
 	return res, nil
 }
 
+// EvaluatePullRequestApprovalRules - Evaluates whether a pull request has met all the conditions specified in its associated approval rules.
 func (s *SDK) EvaluatePullRequestApprovalRules(ctx context.Context, request operations.EvaluatePullRequestApprovalRulesRequest) (*operations.EvaluatePullRequestApprovalRulesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.EvaluatePullRequestApprovalRules"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4440,7 +4489,7 @@ func (s *SDK) EvaluatePullRequestApprovalRules(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4580,8 +4629,9 @@ func (s *SDK) EvaluatePullRequestApprovalRules(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetApprovalRuleTemplate - Returns information about a specified approval rule template.
 func (s *SDK) GetApprovalRuleTemplate(ctx context.Context, request operations.GetApprovalRuleTemplateRequest) (*operations.GetApprovalRuleTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.GetApprovalRuleTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4601,7 +4651,7 @@ func (s *SDK) GetApprovalRuleTemplate(ctx context.Context, request operations.Ge
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4661,8 +4711,9 @@ func (s *SDK) GetApprovalRuleTemplate(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetBlob - Returns the base-64 encoded content of an individual blob in a repository.
 func (s *SDK) GetBlob(ctx context.Context, request operations.GetBlobRequest) (*operations.GetBlobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.GetBlob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4682,7 +4733,7 @@ func (s *SDK) GetBlob(ctx context.Context, request operations.GetBlobRequest) (*
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4832,8 +4883,9 @@ func (s *SDK) GetBlob(ctx context.Context, request operations.GetBlobRequest) (*
 	return res, nil
 }
 
+// GetBranch - Returns information about a repository branch, including its name and the last commit ID.
 func (s *SDK) GetBranch(ctx context.Context, request operations.GetBranchRequest) (*operations.GetBranchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.GetBranch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4853,7 +4905,7 @@ func (s *SDK) GetBranch(ctx context.Context, request operations.GetBranchRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4993,8 +5045,9 @@ func (s *SDK) GetBranch(ctx context.Context, request operations.GetBranchRequest
 	return res, nil
 }
 
+// GetComment - <p>Returns the content of a comment made on a change, file, or commit in a repository. </p> <note> <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions.</p> </note>
 func (s *SDK) GetComment(ctx context.Context, request operations.GetCommentRequest) (*operations.GetCommentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.GetComment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5014,7 +5067,7 @@ func (s *SDK) GetComment(ctx context.Context, request operations.GetCommentReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5134,8 +5187,9 @@ func (s *SDK) GetComment(ctx context.Context, request operations.GetCommentReque
 	return res, nil
 }
 
+// GetCommentReactions - Returns information about reactions to a specified comment ID. Reactions from users who have been deleted will not be included in the count.
 func (s *SDK) GetCommentReactions(ctx context.Context, request operations.GetCommentReactionsRequest) (*operations.GetCommentReactionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.GetCommentReactions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5157,7 +5211,7 @@ func (s *SDK) GetCommentReactions(ctx context.Context, request operations.GetCom
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5257,8 +5311,9 @@ func (s *SDK) GetCommentReactions(ctx context.Context, request operations.GetCom
 	return res, nil
 }
 
+// GetCommentsForComparedCommit - <p>Returns information about comments made on the comparison between two commits.</p> <note> <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions.</p> </note>
 func (s *SDK) GetCommentsForComparedCommit(ctx context.Context, request operations.GetCommentsForComparedCommitRequest) (*operations.GetCommentsForComparedCommitResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.GetCommentsForComparedCommit"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5280,7 +5335,7 @@ func (s *SDK) GetCommentsForComparedCommit(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5440,8 +5495,9 @@ func (s *SDK) GetCommentsForComparedCommit(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetCommentsForPullRequest - <p>Returns comments made on a pull request.</p> <note> <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions.</p> </note>
 func (s *SDK) GetCommentsForPullRequest(ctx context.Context, request operations.GetCommentsForPullRequestRequest) (*operations.GetCommentsForPullRequestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.GetCommentsForPullRequest"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5463,7 +5519,7 @@ func (s *SDK) GetCommentsForPullRequest(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5663,8 +5719,9 @@ func (s *SDK) GetCommentsForPullRequest(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetCommit - Returns information about a commit, including commit message and committer information.
 func (s *SDK) GetCommit(ctx context.Context, request operations.GetCommitRequest) (*operations.GetCommitResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.GetCommit"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5684,7 +5741,7 @@ func (s *SDK) GetCommit(ctx context.Context, request operations.GetCommitRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5824,8 +5881,9 @@ func (s *SDK) GetCommit(ctx context.Context, request operations.GetCommitRequest
 	return res, nil
 }
 
+// GetDifferences - Returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID, or other fully qualified reference). Results can be limited to a specified path.
 func (s *SDK) GetDifferences(ctx context.Context, request operations.GetDifferencesRequest) (*operations.GetDifferencesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.GetDifferences"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5847,7 +5905,7 @@ func (s *SDK) GetDifferences(ctx context.Context, request operations.GetDifferen
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6037,8 +6095,9 @@ func (s *SDK) GetDifferences(ctx context.Context, request operations.GetDifferen
 	return res, nil
 }
 
+// GetFile - Returns the base-64 encoded contents of a specified file and its metadata.
 func (s *SDK) GetFile(ctx context.Context, request operations.GetFileRequest) (*operations.GetFileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.GetFile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6058,7 +6117,7 @@ func (s *SDK) GetFile(ctx context.Context, request operations.GetFileRequest) (*
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6228,8 +6287,9 @@ func (s *SDK) GetFile(ctx context.Context, request operations.GetFileRequest) (*
 	return res, nil
 }
 
+// GetFolder - Returns the contents of a specified folder in a repository.
 func (s *SDK) GetFolder(ctx context.Context, request operations.GetFolderRequest) (*operations.GetFolderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.GetFolder"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6249,7 +6309,7 @@ func (s *SDK) GetFolder(ctx context.Context, request operations.GetFolderRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6409,8 +6469,9 @@ func (s *SDK) GetFolder(ctx context.Context, request operations.GetFolderRequest
 	return res, nil
 }
 
+// GetMergeCommit - Returns information about a specified merge commit.
 func (s *SDK) GetMergeCommit(ctx context.Context, request operations.GetMergeCommitRequest) (*operations.GetMergeCommitResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.GetMergeCommit"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6430,7 +6491,7 @@ func (s *SDK) GetMergeCommit(ctx context.Context, request operations.GetMergeCom
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6590,8 +6651,9 @@ func (s *SDK) GetMergeCommit(ctx context.Context, request operations.GetMergeCom
 	return res, nil
 }
 
+// GetMergeConflicts - Returns information about merge conflicts between the before and after commit IDs for a pull request in a repository.
 func (s *SDK) GetMergeConflicts(ctx context.Context, request operations.GetMergeConflictsRequest) (*operations.GetMergeConflictsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.GetMergeConflicts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6613,7 +6675,7 @@ func (s *SDK) GetMergeConflicts(ctx context.Context, request operations.GetMerge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6863,8 +6925,9 @@ func (s *SDK) GetMergeConflicts(ctx context.Context, request operations.GetMerge
 	return res, nil
 }
 
+// GetMergeOptions - Returns information about the merge options available for merging two specified branches. For details about why a merge option is not available, use GetMergeConflicts or DescribeMergeConflicts.
 func (s *SDK) GetMergeOptions(ctx context.Context, request operations.GetMergeOptionsRequest) (*operations.GetMergeOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.GetMergeOptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6884,7 +6947,7 @@ func (s *SDK) GetMergeOptions(ctx context.Context, request operations.GetMergeOp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7074,8 +7137,9 @@ func (s *SDK) GetMergeOptions(ctx context.Context, request operations.GetMergeOp
 	return res, nil
 }
 
+// GetPullRequest - Gets information about a pull request in a specified repository.
 func (s *SDK) GetPullRequest(ctx context.Context, request operations.GetPullRequestRequest) (*operations.GetPullRequestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.GetPullRequest"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7095,7 +7159,7 @@ func (s *SDK) GetPullRequest(ctx context.Context, request operations.GetPullRequ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7205,8 +7269,9 @@ func (s *SDK) GetPullRequest(ctx context.Context, request operations.GetPullRequ
 	return res, nil
 }
 
+// GetPullRequestApprovalStates - Gets information about the approval states for a specified pull request. Approval states only apply to pull requests that have one or more approval rules applied to them.
 func (s *SDK) GetPullRequestApprovalStates(ctx context.Context, request operations.GetPullRequestApprovalStatesRequest) (*operations.GetPullRequestApprovalStatesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.GetPullRequestApprovalStates"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7226,7 +7291,7 @@ func (s *SDK) GetPullRequestApprovalStates(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7356,8 +7421,9 @@ func (s *SDK) GetPullRequestApprovalStates(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetPullRequestOverrideState - Returns information about whether approval rules have been set aside (overridden) for a pull request, and if so, the Amazon Resource Name (ARN) of the user or identity that overrode the rules and their requirements for the pull request.
 func (s *SDK) GetPullRequestOverrideState(ctx context.Context, request operations.GetPullRequestOverrideStateRequest) (*operations.GetPullRequestOverrideStateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.GetPullRequestOverrideState"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7377,7 +7443,7 @@ func (s *SDK) GetPullRequestOverrideState(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7507,8 +7573,9 @@ func (s *SDK) GetPullRequestOverrideState(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetRepository - <p>Returns information about a repository.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a webpage can expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a webpage.</p> </note>
 func (s *SDK) GetRepository(ctx context.Context, request operations.GetRepositoryRequest) (*operations.GetRepositoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.GetRepository"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7528,7 +7595,7 @@ func (s *SDK) GetRepository(ctx context.Context, request operations.GetRepositor
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7638,8 +7705,9 @@ func (s *SDK) GetRepository(ctx context.Context, request operations.GetRepositor
 	return res, nil
 }
 
+// GetRepositoryTriggers - Gets information about triggers configured for a repository.
 func (s *SDK) GetRepositoryTriggers(ctx context.Context, request operations.GetRepositoryTriggersRequest) (*operations.GetRepositoryTriggersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.GetRepositoryTriggers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7659,7 +7727,7 @@ func (s *SDK) GetRepositoryTriggers(ctx context.Context, request operations.GetR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7769,8 +7837,9 @@ func (s *SDK) GetRepositoryTriggers(ctx context.Context, request operations.GetR
 	return res, nil
 }
 
+// ListApprovalRuleTemplates - Lists all approval rule templates in the specified AWS Region in your AWS account. If an AWS Region is not specified, the AWS Region where you are signed in is used.
 func (s *SDK) ListApprovalRuleTemplates(ctx context.Context, request operations.ListApprovalRuleTemplatesRequest) (*operations.ListApprovalRuleTemplatesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.ListApprovalRuleTemplates"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7792,7 +7861,7 @@ func (s *SDK) ListApprovalRuleTemplates(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7842,8 +7911,9 @@ func (s *SDK) ListApprovalRuleTemplates(ctx context.Context, request operations.
 	return res, nil
 }
 
+// ListAssociatedApprovalRuleTemplatesForRepository - Lists all approval rule templates that are associated with a specified repository.
 func (s *SDK) ListAssociatedApprovalRuleTemplatesForRepository(ctx context.Context, request operations.ListAssociatedApprovalRuleTemplatesForRepositoryRequest) (*operations.ListAssociatedApprovalRuleTemplatesForRepositoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.ListAssociatedApprovalRuleTemplatesForRepository"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7865,7 +7935,7 @@ func (s *SDK) ListAssociatedApprovalRuleTemplatesForRepository(ctx context.Conte
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7995,8 +8065,9 @@ func (s *SDK) ListAssociatedApprovalRuleTemplatesForRepository(ctx context.Conte
 	return res, nil
 }
 
+// ListBranches - Gets information about one or more branches in a repository.
 func (s *SDK) ListBranches(ctx context.Context, request operations.ListBranchesRequest) (*operations.ListBranchesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.ListBranches"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8018,7 +8089,7 @@ func (s *SDK) ListBranches(ctx context.Context, request operations.ListBranchesR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8138,8 +8209,9 @@ func (s *SDK) ListBranches(ctx context.Context, request operations.ListBranchesR
 	return res, nil
 }
 
+// ListPullRequests - Returns a list of pull requests for a specified repository. The return list can be refined by pull request status or pull request author ARN.
 func (s *SDK) ListPullRequests(ctx context.Context, request operations.ListPullRequestsRequest) (*operations.ListPullRequestsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.ListPullRequests"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8161,7 +8233,7 @@ func (s *SDK) ListPullRequests(ctx context.Context, request operations.ListPullR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8321,8 +8393,9 @@ func (s *SDK) ListPullRequests(ctx context.Context, request operations.ListPullR
 	return res, nil
 }
 
+// ListRepositories - Gets information about one or more repositories.
 func (s *SDK) ListRepositories(ctx context.Context, request operations.ListRepositoriesRequest) (*operations.ListRepositoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.ListRepositories"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8344,7 +8417,7 @@ func (s *SDK) ListRepositories(ctx context.Context, request operations.ListRepos
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8404,8 +8477,9 @@ func (s *SDK) ListRepositories(ctx context.Context, request operations.ListRepos
 	return res, nil
 }
 
+// ListRepositoriesForApprovalRuleTemplate - Lists all repositories associated with the specified approval rule template.
 func (s *SDK) ListRepositoriesForApprovalRuleTemplate(ctx context.Context, request operations.ListRepositoriesForApprovalRuleTemplateRequest) (*operations.ListRepositoriesForApprovalRuleTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.ListRepositoriesForApprovalRuleTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8427,7 +8501,7 @@ func (s *SDK) ListRepositoriesForApprovalRuleTemplate(ctx context.Context, reque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8557,8 +8631,9 @@ func (s *SDK) ListRepositoriesForApprovalRuleTemplate(ctx context.Context, reque
 	return res, nil
 }
 
+// ListTagsForResource - Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats">CodeCommit Resources and Operations</a> in the<i> AWS CodeCommit User Guide</i>.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8578,7 +8653,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8648,8 +8723,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// MergeBranchesByFastForward - Merges two branches using the fast-forward merge strategy.
 func (s *SDK) MergeBranchesByFastForward(ctx context.Context, request operations.MergeBranchesByFastForwardRequest) (*operations.MergeBranchesByFastForwardResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.MergeBranchesByFastForward"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8669,7 +8745,7 @@ func (s *SDK) MergeBranchesByFastForward(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8889,8 +8965,9 @@ func (s *SDK) MergeBranchesByFastForward(ctx context.Context, request operations
 	return res, nil
 }
 
+// MergeBranchesBySquash - Merges two branches using the squash merge strategy.
 func (s *SDK) MergeBranchesBySquash(ctx context.Context, request operations.MergeBranchesBySquashRequest) (*operations.MergeBranchesBySquashResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.MergeBranchesBySquash"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8910,7 +8987,7 @@ func (s *SDK) MergeBranchesBySquash(ctx context.Context, request operations.Merg
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9330,8 +9407,9 @@ func (s *SDK) MergeBranchesBySquash(ctx context.Context, request operations.Merg
 	return res, nil
 }
 
+// MergeBranchesByThreeWay - Merges two specified branches using the three-way merge strategy.
 func (s *SDK) MergeBranchesByThreeWay(ctx context.Context, request operations.MergeBranchesByThreeWayRequest) (*operations.MergeBranchesByThreeWayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.MergeBranchesByThreeWay"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9351,7 +9429,7 @@ func (s *SDK) MergeBranchesByThreeWay(ctx context.Context, request operations.Me
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9771,8 +9849,9 @@ func (s *SDK) MergeBranchesByThreeWay(ctx context.Context, request operations.Me
 	return res, nil
 }
 
+// MergePullRequestByFastForward - Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge strategy. If the merge is successful, it closes the pull request.
 func (s *SDK) MergePullRequestByFastForward(ctx context.Context, request operations.MergePullRequestByFastForwardRequest) (*operations.MergePullRequestByFastForwardResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.MergePullRequestByFastForward"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9792,7 +9871,7 @@ func (s *SDK) MergePullRequestByFastForward(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10012,8 +10091,9 @@ func (s *SDK) MergePullRequestByFastForward(ctx context.Context, request operati
 	return res, nil
 }
 
+// MergePullRequestBySquash - Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the squash merge strategy. If the merge is successful, it closes the pull request.
 func (s *SDK) MergePullRequestBySquash(ctx context.Context, request operations.MergePullRequestBySquashRequest) (*operations.MergePullRequestBySquashResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.MergePullRequestBySquash"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10033,7 +10113,7 @@ func (s *SDK) MergePullRequestBySquash(ctx context.Context, request operations.M
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10443,8 +10523,9 @@ func (s *SDK) MergePullRequestBySquash(ctx context.Context, request operations.M
 	return res, nil
 }
 
+// MergePullRequestByThreeWay - Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the three-way merge strategy. If the merge is successful, it closes the pull request.
 func (s *SDK) MergePullRequestByThreeWay(ctx context.Context, request operations.MergePullRequestByThreeWayRequest) (*operations.MergePullRequestByThreeWayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.MergePullRequestByThreeWay"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10464,7 +10545,7 @@ func (s *SDK) MergePullRequestByThreeWay(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10874,8 +10955,9 @@ func (s *SDK) MergePullRequestByThreeWay(ctx context.Context, request operations
 	return res, nil
 }
 
+// OverridePullRequestApprovalRules - Sets aside (overrides) all approval rule requirements for a specified pull request.
 func (s *SDK) OverridePullRequestApprovalRules(ctx context.Context, request operations.OverridePullRequestApprovalRulesRequest) (*operations.OverridePullRequestApprovalRulesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.OverridePullRequestApprovalRules"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10895,7 +10977,7 @@ func (s *SDK) OverridePullRequestApprovalRules(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11066,8 +11148,9 @@ func (s *SDK) OverridePullRequestApprovalRules(ctx context.Context, request oper
 	return res, nil
 }
 
+// PostCommentForComparedCommit - Posts a comment on the comparison between two commits.
 func (s *SDK) PostCommentForComparedCommit(ctx context.Context, request operations.PostCommentForComparedCommitRequest) (*operations.PostCommentForComparedCommitResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.PostCommentForComparedCommit"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11087,7 +11170,7 @@ func (s *SDK) PostCommentForComparedCommit(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11357,8 +11440,9 @@ func (s *SDK) PostCommentForComparedCommit(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostCommentForPullRequest - Posts a comment on a pull request.
 func (s *SDK) PostCommentForPullRequest(ctx context.Context, request operations.PostCommentForPullRequestRequest) (*operations.PostCommentForPullRequestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.PostCommentForPullRequest"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11378,7 +11462,7 @@ func (s *SDK) PostCommentForPullRequest(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11688,8 +11772,9 @@ func (s *SDK) PostCommentForPullRequest(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostCommentReply - Posts a comment in reply to an existing comment on a comparison between commits or a pull request.
 func (s *SDK) PostCommentReply(ctx context.Context, request operations.PostCommentReplyRequest) (*operations.PostCommentReplyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.PostCommentReply"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11709,7 +11794,7 @@ func (s *SDK) PostCommentReply(ctx context.Context, request operations.PostComme
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11819,8 +11904,9 @@ func (s *SDK) PostCommentReply(ctx context.Context, request operations.PostComme
 	return res, nil
 }
 
+// PutCommentReaction - Adds or updates a reaction to a specified comment for the user whose identity is used to make the request. You can only add or update a reaction for yourself. You cannot add, modify, or delete a reaction for another user.
 func (s *SDK) PutCommentReaction(ctx context.Context, request operations.PutCommentReactionRequest) (*operations.PutCommentReactionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.PutCommentReaction"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11840,7 +11926,7 @@ func (s *SDK) PutCommentReaction(ctx context.Context, request operations.PutComm
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11931,8 +12017,9 @@ func (s *SDK) PutCommentReaction(ctx context.Context, request operations.PutComm
 	return res, nil
 }
 
+// PutFile - Adds or updates a file in a branch in an AWS CodeCommit repository, and generates a commit for the addition in the specified branch.
 func (s *SDK) PutFile(ctx context.Context, request operations.PutFileRequest) (*operations.PutFileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.PutFile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11952,7 +12039,7 @@ func (s *SDK) PutFile(ctx context.Context, request operations.PutFileRequest) (*
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12282,8 +12369,9 @@ func (s *SDK) PutFile(ctx context.Context, request operations.PutFileRequest) (*
 	return res, nil
 }
 
+// PutRepositoryTriggers - Replaces all triggers for a repository. Used to create or delete triggers.
 func (s *SDK) PutRepositoryTriggers(ctx context.Context, request operations.PutRepositoryTriggersRequest) (*operations.PutRepositoryTriggersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.PutRepositoryTriggers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12303,7 +12391,7 @@ func (s *SDK) PutRepositoryTriggers(ctx context.Context, request operations.PutR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12543,8 +12631,9 @@ func (s *SDK) PutRepositoryTriggers(ctx context.Context, request operations.PutR
 	return res, nil
 }
 
+// TagResource - Adds or updates tags for a resource in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats">CodeCommit Resources and Operations</a> in the <i>AWS CodeCommit User Guide</i>.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12564,7 +12653,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12675,8 +12764,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// TestRepositoryTriggers - Tests the functionality of repository triggers by sending information to the trigger target. If real data is available in the repository, the test sends data from the last commit. If no data is available, sample data is generated.
 func (s *SDK) TestRepositoryTriggers(ctx context.Context, request operations.TestRepositoryTriggersRequest) (*operations.TestRepositoryTriggersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.TestRepositoryTriggers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12696,7 +12786,7 @@ func (s *SDK) TestRepositoryTriggers(ctx context.Context, request operations.Tes
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12936,8 +13026,9 @@ func (s *SDK) TestRepositoryTriggers(ctx context.Context, request operations.Tes
 	return res, nil
 }
 
+// UntagResource - Removes tags for a resource in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats">CodeCommit Resources and Operations</a> in the <i>AWS CodeCommit User Guide</i>.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -12957,7 +13048,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13068,8 +13159,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateApprovalRuleTemplateContent - Updates the content of an approval rule template. You can change the number of required approvals, the membership of the approval rule, and whether an approval pool is defined.
 func (s *SDK) UpdateApprovalRuleTemplateContent(ctx context.Context, request operations.UpdateApprovalRuleTemplateContentRequest) (*operations.UpdateApprovalRuleTemplateContentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.UpdateApprovalRuleTemplateContent"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13089,7 +13181,7 @@ func (s *SDK) UpdateApprovalRuleTemplateContent(ctx context.Context, request ope
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13179,8 +13271,9 @@ func (s *SDK) UpdateApprovalRuleTemplateContent(ctx context.Context, request ope
 	return res, nil
 }
 
+// UpdateApprovalRuleTemplateDescription - Updates the description for a specified approval rule template.
 func (s *SDK) UpdateApprovalRuleTemplateDescription(ctx context.Context, request operations.UpdateApprovalRuleTemplateDescriptionRequest) (*operations.UpdateApprovalRuleTemplateDescriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.UpdateApprovalRuleTemplateDescription"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13200,7 +13293,7 @@ func (s *SDK) UpdateApprovalRuleTemplateDescription(ctx context.Context, request
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13270,8 +13363,9 @@ func (s *SDK) UpdateApprovalRuleTemplateDescription(ctx context.Context, request
 	return res, nil
 }
 
+// UpdateApprovalRuleTemplateName - Updates the name of a specified approval rule template.
 func (s *SDK) UpdateApprovalRuleTemplateName(ctx context.Context, request operations.UpdateApprovalRuleTemplateNameRequest) (*operations.UpdateApprovalRuleTemplateNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.UpdateApprovalRuleTemplateName"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13291,7 +13385,7 @@ func (s *SDK) UpdateApprovalRuleTemplateName(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13361,8 +13455,9 @@ func (s *SDK) UpdateApprovalRuleTemplateName(ctx context.Context, request operat
 	return res, nil
 }
 
+// UpdateComment - Replaces the contents of a comment.
 func (s *SDK) UpdateComment(ctx context.Context, request operations.UpdateCommentRequest) (*operations.UpdateCommentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.UpdateComment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13382,7 +13477,7 @@ func (s *SDK) UpdateComment(ctx context.Context, request operations.UpdateCommen
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13482,8 +13577,9 @@ func (s *SDK) UpdateComment(ctx context.Context, request operations.UpdateCommen
 	return res, nil
 }
 
+// UpdateDefaultBranch - <p>Sets or changes the default branch name for the specified repository.</p> <note> <p>If you use this operation to change the default branch name to the current default branch name, a success message is returned even though the default branch did not change.</p> </note>
 func (s *SDK) UpdateDefaultBranch(ctx context.Context, request operations.UpdateDefaultBranchRequest) (*operations.UpdateDefaultBranchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.UpdateDefaultBranch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13503,7 +13599,7 @@ func (s *SDK) UpdateDefaultBranch(ctx context.Context, request operations.Update
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13634,8 +13730,9 @@ func (s *SDK) UpdateDefaultBranch(ctx context.Context, request operations.Update
 	return res, nil
 }
 
+// UpdatePullRequestApprovalRuleContent - Updates the structure of an approval rule created specifically for a pull request. For example, you can change the number of required approvers and the approval pool for approvers.
 func (s *SDK) UpdatePullRequestApprovalRuleContent(ctx context.Context, request operations.UpdatePullRequestApprovalRuleContentRequest) (*operations.UpdatePullRequestApprovalRuleContentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestApprovalRuleContent"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13655,7 +13752,7 @@ func (s *SDK) UpdatePullRequestApprovalRuleContent(ctx context.Context, request 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13845,8 +13942,9 @@ func (s *SDK) UpdatePullRequestApprovalRuleContent(ctx context.Context, request 
 	return res, nil
 }
 
+// UpdatePullRequestApprovalState - Updates the state of a user's approval on a pull request. The user is derived from the signed-in account when the request is made.
 func (s *SDK) UpdatePullRequestApprovalState(ctx context.Context, request operations.UpdatePullRequestApprovalStateRequest) (*operations.UpdatePullRequestApprovalStateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestApprovalState"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -13866,7 +13964,7 @@ func (s *SDK) UpdatePullRequestApprovalState(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14047,8 +14145,9 @@ func (s *SDK) UpdatePullRequestApprovalState(ctx context.Context, request operat
 	return res, nil
 }
 
+// UpdatePullRequestDescription - Replaces the contents of the description of a pull request.
 func (s *SDK) UpdatePullRequestDescription(ctx context.Context, request operations.UpdatePullRequestDescriptionRequest) (*operations.UpdatePullRequestDescriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestDescription"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14068,7 +14167,7 @@ func (s *SDK) UpdatePullRequestDescription(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14148,8 +14247,9 @@ func (s *SDK) UpdatePullRequestDescription(ctx context.Context, request operatio
 	return res, nil
 }
 
+// UpdatePullRequestStatus - Updates the status of a pull request.
 func (s *SDK) UpdatePullRequestStatus(ctx context.Context, request operations.UpdatePullRequestStatusRequest) (*operations.UpdatePullRequestStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestStatus"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14169,7 +14269,7 @@ func (s *SDK) UpdatePullRequestStatus(ctx context.Context, request operations.Up
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14309,8 +14409,9 @@ func (s *SDK) UpdatePullRequestStatus(ctx context.Context, request operations.Up
 	return res, nil
 }
 
+// UpdatePullRequestTitle - Replaces the title of a pull request.
 func (s *SDK) UpdatePullRequestTitle(ctx context.Context, request operations.UpdatePullRequestTitleRequest) (*operations.UpdatePullRequestTitleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestTitle"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14330,7 +14431,7 @@ func (s *SDK) UpdatePullRequestTitle(ctx context.Context, request operations.Upd
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14420,8 +14521,9 @@ func (s *SDK) UpdatePullRequestTitle(ctx context.Context, request operations.Upd
 	return res, nil
 }
 
+// UpdateRepositoryDescription - <p>Sets or changes the comment or description for a repository.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a webpage can expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a webpage.</p> </note>
 func (s *SDK) UpdateRepositoryDescription(ctx context.Context, request operations.UpdateRepositoryDescriptionRequest) (*operations.UpdateRepositoryDescriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.UpdateRepositoryDescription"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14441,7 +14543,7 @@ func (s *SDK) UpdateRepositoryDescription(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14552,8 +14654,9 @@ func (s *SDK) UpdateRepositoryDescription(ctx context.Context, request operation
 	return res, nil
 }
 
+// UpdateRepositoryName - Renames a repository. The repository name must be unique across the calling AWS account. Repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. The suffix .git is prohibited. For more information about the limits on repository names, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">Limits</a> in the AWS CodeCommit User Guide.
 func (s *SDK) UpdateRepositoryName(ctx context.Context, request operations.UpdateRepositoryNameRequest) (*operations.UpdateRepositoryNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeCommit_20150413.UpdateRepositoryName"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -14573,7 +14676,7 @@ func (s *SDK) UpdateRepositoryName(ctx context.Context, request operations.Updat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

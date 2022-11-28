@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPaymentMethodPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetPaymentMethodQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=ff" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=ff" })
   ff?: shared.FeatureFlagsEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: string;
 }
 
 
 export class GetPaymentMethodSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   accountAuth: shared.SchemeAccountAuth;
 }
 
 
 export class GetPaymentMethodRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPaymentMethodPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPaymentMethodQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPaymentMethodSecurity;
 }
 
 
 export class GetPaymentMethodResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   paymentMethod?: shared.PaymentMethod;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceError?: shared.ServiceError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

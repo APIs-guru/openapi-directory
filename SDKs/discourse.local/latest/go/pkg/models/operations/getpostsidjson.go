@@ -9,11 +9,6 @@ type GetPostsIDJSONHeaders struct {
 	APIUsername string `header:"style=simple,explode=false,name=Api-Username"`
 }
 
-type GetPostsIDJSONRequest struct {
-	PathParams GetPostsIDJSONPathParams
-	Headers    GetPostsIDJSONHeaders
-}
-
 type GetPostsIDJSON200ApplicationJSONActionsSummary struct {
 	CanAct *bool  `json:"can_act,omitempty"`
 	ID     *int64 `json:"id,omitempty"`
@@ -67,6 +62,11 @@ type GetPostsIDJSON200ApplicationJSON struct {
 	Version                     *int64                                           `json:"version,omitempty"`
 	Wiki                        *bool                                            `json:"wiki,omitempty"`
 	Yours                       *bool                                            `json:"yours,omitempty"`
+}
+
+type GetPostsIDJSONRequest struct {
+	PathParams GetPostsIDJSONPathParams
+	Headers    GetPostsIDJSONHeaders
 }
 
 type GetPostsIDJSONResponse struct {

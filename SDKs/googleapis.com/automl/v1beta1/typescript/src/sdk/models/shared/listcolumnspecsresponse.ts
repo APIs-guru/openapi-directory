@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ColumnSpec } from "./columnspec";
+
 
 
 // ListColumnSpecsResponse
@@ -8,9 +8,9 @@ import { ColumnSpec } from "./columnspec";
  * Response message for AutoMl.ListColumnSpecs.
 **/
 export class ListColumnSpecsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnSpecs", elemType: shared.ColumnSpec })
+  @SpeakeasyMetadata({ data: "json, name=columnSpecs", elemType: ColumnSpec })
   columnSpecs?: ColumnSpec[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

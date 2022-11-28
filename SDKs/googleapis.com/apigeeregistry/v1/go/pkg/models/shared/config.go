@@ -1,6 +1,7 @@
 package shared
 
-type Config struct {
+// ConfigInput
+// Available configurations to provision an Instance.
+type ConfigInput struct {
 	CmekKeyName *string `json:"cmekKeyName,omitempty"`
-	Location    *string `json:"location,omitempty"`
 }

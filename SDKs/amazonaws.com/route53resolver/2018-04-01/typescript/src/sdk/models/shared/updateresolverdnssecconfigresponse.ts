@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResolverDnssecConfig } from "./resolverdnssecconfig";
 
 
+
 export class UpdateResolverDnssecConfigResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResolverDNSSECConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ResolverDNSSECConfig" })
   resolverDnssecConfig?: ResolverDnssecConfig;
 }

@@ -29,6 +29,8 @@ const (
 	FileMigrationEntityStatusEnumRemovingDeferredFolders      FileMigrationEntityStatusEnum = "removing_deferred_folders"
 )
 
+// FileMigrationEntity
+// Show File Migration
 type FileMigrationEntity struct {
 	DestPath   *string                           `json:"dest_path,omitempty"`
 	FilesMoved *int32                            `json:"files_moved,omitempty"`

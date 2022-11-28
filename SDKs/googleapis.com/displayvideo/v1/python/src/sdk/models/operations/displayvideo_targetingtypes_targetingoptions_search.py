@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class DisplayvideoTargetingTypesTargetingOptionsSearchTargetingTypeEnum(str, Enum):
@@ -53,7 +54,7 @@ class DisplayvideoTargetingTypesTargetingOptionsSearchTargetingTypeEnum(str, Enu
 
 @dataclass
 class DisplayvideoTargetingTypesTargetingOptionsSearchPathParams:
-    targeting_type: DisplayvideoTargetingTypesTargetingOptionsSearchTargetingTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'targetingType', 'style': 'simple', 'explode': False }})
+    targeting_type: DisplayvideoTargetingTypesTargetingOptionsSearchTargetingTypeEnum = field(metadata={'path_param': { 'field_name': 'targetingType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -73,21 +74,21 @@ class DisplayvideoTargetingTypesTargetingOptionsSearchQueryParams:
 
 @dataclass
 class DisplayvideoTargetingTypesTargetingOptionsSearchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoTargetingTypesTargetingOptionsSearchRequest:
-    path_params: DisplayvideoTargetingTypesTargetingOptionsSearchPathParams = field(default=None)
-    query_params: DisplayvideoTargetingTypesTargetingOptionsSearchQueryParams = field(default=None)
+    path_params: DisplayvideoTargetingTypesTargetingOptionsSearchPathParams = field()
+    query_params: DisplayvideoTargetingTypesTargetingOptionsSearchQueryParams = field()
+    security: DisplayvideoTargetingTypesTargetingOptionsSearchSecurity = field()
     request: Optional[shared.SearchTargetingOptionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoTargetingTypesTargetingOptionsSearchSecurity = field(default=None)
     
 
 @dataclass
 class DisplayvideoTargetingTypesTargetingOptionsSearchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     search_targeting_options_response: Optional[shared.SearchTargetingOptionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

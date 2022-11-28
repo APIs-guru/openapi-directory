@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Version extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Build, pathParam, name=Build" })
+  @SpeakeasyMetadata({ data: "json, name=Build" })
   build?: number;
 
-  @Metadata({ data: "json, name=Major, pathParam, name=Major" })
+  @SpeakeasyMetadata({ data: "json, name=Major" })
   major?: number;
 
-  @Metadata({ data: "json, name=MajorRevision, pathParam, name=MajorRevision" })
+  @SpeakeasyMetadata({ data: "json, name=MajorRevision" })
   majorRevision?: number;
 
-  @Metadata({ data: "json, name=Minor, pathParam, name=Minor" })
+  @SpeakeasyMetadata({ data: "json, name=Minor" })
   minor?: number;
 
-  @Metadata({ data: "json, name=MinorRevision, pathParam, name=MinorRevision" })
+  @SpeakeasyMetadata({ data: "json, name=MinorRevision" })
   minorRevision?: number;
 
-  @Metadata({ data: "json, name=Revision, pathParam, name=Revision" })
+  @SpeakeasyMetadata({ data: "json, name=Revision" })
   revision?: number;
 }

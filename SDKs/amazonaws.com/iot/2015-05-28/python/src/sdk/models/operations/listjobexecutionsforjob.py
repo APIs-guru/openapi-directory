@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ListJobExecutionsForJobPathParams:
-    job_id: str = field(default=None, metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
+    job_id: str = field(metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
     
 class ListJobExecutionsForJobStatusEnum(str, Enum):
     QUEUED = "QUEUED"
@@ -38,18 +42,18 @@ class ListJobExecutionsForJobHeaders:
 
 @dataclass
 class ListJobExecutionsForJobRequest:
-    path_params: ListJobExecutionsForJobPathParams = field(default=None)
-    query_params: ListJobExecutionsForJobQueryParams = field(default=None)
-    headers: ListJobExecutionsForJobHeaders = field(default=None)
+    headers: ListJobExecutionsForJobHeaders = field()
+    path_params: ListJobExecutionsForJobPathParams = field()
+    query_params: ListJobExecutionsForJobQueryParams = field()
     
 
 @dataclass
 class ListJobExecutionsForJobResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_request_exception: Optional[Any] = field(default=None)
     list_job_executions_for_job_response: Optional[shared.ListJobExecutionsForJobResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

@@ -1,78 +1,61 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPullrequestsSelectedUserPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=selected_user" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=selected_user" })
   selectedUser: string;
 }
 
 export enum GetPullrequestsSelectedUserStateEnum {
-    Merged = "MERGED"
-,    Superseded = "SUPERSEDED"
-,    Open = "OPEN"
-,    Declined = "DECLINED"
+    Merged = "MERGED",
+    Superseded = "SUPERSEDED",
+    Open = "OPEN",
+    Declined = "DECLINED"
 }
 
 
 export class GetPullrequestsSelectedUserQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state?: GetPullrequestsSelectedUserStateEnum;
 }
 
 
-export class GetPullrequestsSelectedUserSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2: shared.SchemeOauth2;
-}
-
-
-export class GetPullrequestsSelectedUserSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
-  basic: shared.SchemeBasic;
-}
-
-
-export class GetPullrequestsSelectedUserSecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
 export class GetPullrequestsSelectedUserSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetPullrequestsSelectedUserSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2?: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetPullrequestsSelectedUserSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  basic?: shared.SchemeBasic;
 
-  @Metadata({ data: "security, option=true" })
-  option3?: GetPullrequestsSelectedUserSecurityOption3;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey?: shared.SchemeApiKey;
 }
 
 
 export class GetPullrequestsSelectedUserRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPullrequestsSelectedUserPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPullrequestsSelectedUserQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPullrequestsSelectedUserSecurity;
 }
 
 
 export class GetPullrequestsSelectedUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   paginatedPullrequests?: shared.PaginatedPullrequests;
 }

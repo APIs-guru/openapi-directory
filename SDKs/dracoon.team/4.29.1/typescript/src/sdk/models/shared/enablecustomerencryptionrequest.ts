@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserKeyPairContainer } from "./userkeypaircontainer";
+
 
 
 // EnableCustomerEncryptionRequest
@@ -7,9 +8,9 @@ import { UserKeyPairContainer } from "./userkeypaircontainer";
  * Request model for enabling customer encryption
 **/
 export class EnableCustomerEncryptionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataSpaceRescueKey" })
+  @SpeakeasyMetadata({ data: "json, name=dataSpaceRescueKey" })
   dataSpaceRescueKey: UserKeyPairContainer;
 
-  @Metadata({ data: "json, name=enableCustomerEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=enableCustomerEncryption" })
   enableCustomerEncryption: boolean;
 }

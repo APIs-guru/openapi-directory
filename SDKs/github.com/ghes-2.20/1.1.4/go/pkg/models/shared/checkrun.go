@@ -36,6 +36,8 @@ const (
 	CheckRunStatusEnumCompleted  CheckRunStatusEnum = "completed"
 )
 
+// CheckRun
+// A check performed on the code of a given code change
 type CheckRun struct {
 	App          map[string]interface{} `json:"app"`
 	CheckSuite   CheckRunCheckSuite     `json:"check_suite"`

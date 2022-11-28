@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CertificateAuthorityConfiguration } from "./certificateauthorityconfiguration";
 import { CertificateAuthorityTypeEnum } from "./certificateauthoritytypeenum";
 import { KeyStorageSecurityStandardEnum } from "./keystoragesecuritystandardenum";
@@ -7,22 +6,23 @@ import { RevocationConfiguration } from "./revocationconfiguration";
 import { Tag } from "./tag";
 
 
+
 export class CreateCertificateAuthorityRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CertificateAuthorityConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateAuthorityConfiguration" })
   certificateAuthorityConfiguration: CertificateAuthorityConfiguration;
 
-  @Metadata({ data: "json, name=CertificateAuthorityType" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateAuthorityType" })
   certificateAuthorityType: CertificateAuthorityTypeEnum;
 
-  @Metadata({ data: "json, name=IdempotencyToken" })
+  @SpeakeasyMetadata({ data: "json, name=IdempotencyToken" })
   idempotencyToken?: string;
 
-  @Metadata({ data: "json, name=KeyStorageSecurityStandard" })
+  @SpeakeasyMetadata({ data: "json, name=KeyStorageSecurityStandard" })
   keyStorageSecurityStandard?: KeyStorageSecurityStandardEnum;
 
-  @Metadata({ data: "json, name=RevocationConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=RevocationConfiguration" })
   revocationConfiguration?: RevocationConfiguration;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

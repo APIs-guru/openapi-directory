@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudVisionV1p1beta1WebDetectionWebEntity
+// Entity deduced from similar images on the Internet.
 type GoogleCloudVisionV1p1beta1WebDetectionWebEntity struct {
 	Description *string  `json:"description,omitempty"`
 	EntityID    *string  `json:"entityId,omitempty"`

@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAccessControlEffectRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action: string;
 
-  @Metadata({ data: "json, name=IpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=IpAddress" })
   ipAddress: string;
 
-  @Metadata({ data: "json, name=OrganizationId" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationId" })
   organizationId: string;
 
-  @Metadata({ data: "json, name=UserId" })
+  @SpeakeasyMetadata({ data: "json, name=UserId" })
   userId: string;
 }

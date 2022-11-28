@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CertificateProviderInstance } from "./certificateproviderinstance";
 import { GoogleCloudNetworksecurityV1beta1GrpcEndpoint } from "./googlecloudnetworksecurityv1beta1grpcendpoint";
 // ValidationCa
@@ -35,11 +35,11 @@ var ValidationCa = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateProviderInstance" }),
+        SpeakeasyMetadata({ data: "json, name=certificateProviderInstance" }),
         __metadata("design:type", CertificateProviderInstance)
     ], ValidationCa.prototype, "certificateProviderInstance", void 0);
     __decorate([
-        Metadata({ data: "json, name=grpcEndpoint" }),
+        SpeakeasyMetadata({ data: "json, name=grpcEndpoint" }),
         __metadata("design:type", GoogleCloudNetworksecurityV1beta1GrpcEndpoint)
     ], ValidationCa.prototype, "grpcEndpoint", void 0);
     return ValidationCa;

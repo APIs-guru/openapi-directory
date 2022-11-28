@@ -50,6 +50,21 @@ const (
 	GoogleAppsCloudidentityDevicesV1DeviceOwnerTypeEnumByod                       GoogleAppsCloudidentityDevicesV1DeviceOwnerTypeEnum = "BYOD"
 )
 
+// GoogleAppsCloudidentityDevicesV1DeviceInput
+//
+//	A Device within the Cloud Identity Devices API. Represents a Device known to Google Cloud, independent of the device ownership, type, and whether it is assigned or in use by a user.
+type GoogleAppsCloudidentityDevicesV1DeviceInput struct {
+	AndroidSpecificAttributes *GoogleAppsCloudidentityDevicesV1AndroidAttributes `json:"androidSpecificAttributes,omitempty"`
+	AssetTag                  *string                                            `json:"assetTag,omitempty"`
+	DeviceID                  *string                                            `json:"deviceId,omitempty"`
+	LastSyncTime              *string                                            `json:"lastSyncTime,omitempty"`
+	SerialNumber              *string                                            `json:"serialNumber,omitempty"`
+	WifiMacAddresses          []string                                           `json:"wifiMacAddresses,omitempty"`
+}
+
+// GoogleAppsCloudidentityDevicesV1Device
+//
+//	A Device within the Cloud Identity Devices API. Represents a Device known to Google Cloud, independent of the device ownership, type, and whether it is assigned or in use by a user.
 type GoogleAppsCloudidentityDevicesV1Device struct {
 	AndroidSpecificAttributes *GoogleAppsCloudidentityDevicesV1AndroidAttributes          `json:"androidSpecificAttributes,omitempty"`
 	AssetTag                  *string                                                     `json:"assetTag,omitempty"`

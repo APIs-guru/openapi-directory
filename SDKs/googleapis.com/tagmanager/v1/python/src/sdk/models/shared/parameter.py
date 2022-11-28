@@ -1,8 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import parameter
-from . import parameter
+from sdk import utils
 
 class ParameterTypeEnum(str, Enum):
     TEMPLATE = "template"
@@ -17,9 +17,13 @@ class ParameterTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Parameter:
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    list: Optional[List[parameter.Parameter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'list' }})
-    map: Optional[List[parameter.Parameter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'map' }})
-    type: Optional[ParameterTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""Parameter
+    Represents a Google Tag Manager Parameter.
+    """
+    
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    list: Optional[List[Parameter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('list') }})
+    map: Optional[List[Parameter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('map') }})
+    type: Optional[ParameterTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

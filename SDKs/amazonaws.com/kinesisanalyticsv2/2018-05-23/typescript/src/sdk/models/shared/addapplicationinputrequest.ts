@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Input } from "./input";
 
 
+
 export class AddApplicationInputRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationName" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationName" })
   applicationName: string;
 
-  @Metadata({ data: "json, name=CurrentApplicationVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentApplicationVersionId" })
   currentApplicationVersionId: number;
 
-  @Metadata({ data: "json, name=Input" })
+  @SpeakeasyMetadata({ data: "json, name=Input" })
   input: Input;
 }

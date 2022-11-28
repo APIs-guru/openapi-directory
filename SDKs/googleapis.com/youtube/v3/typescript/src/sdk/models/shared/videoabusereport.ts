@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class VideoAbuseReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comments" })
+  @SpeakeasyMetadata({ data: "json, name=comments" })
   comments?: string;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=reasonId" })
+  @SpeakeasyMetadata({ data: "json, name=reasonId" })
   reasonId?: string;
 
-  @Metadata({ data: "json, name=secondaryReasonId" })
+  @SpeakeasyMetadata({ data: "json, name=secondaryReasonId" })
   secondaryReasonId?: string;
 
-  @Metadata({ data: "json, name=videoId" })
+  @SpeakeasyMetadata({ data: "json, name=videoId" })
   videoId?: string;
 }

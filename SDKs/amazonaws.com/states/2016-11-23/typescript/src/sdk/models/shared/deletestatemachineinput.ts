@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteStateMachineInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=stateMachineArn" })
+  @SpeakeasyMetadata({ data: "json, name=stateMachineArn" })
   stateMachineArn: string;
 }

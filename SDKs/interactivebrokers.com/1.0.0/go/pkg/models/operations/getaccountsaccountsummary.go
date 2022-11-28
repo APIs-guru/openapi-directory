@@ -4,10 +4,6 @@ type GetAccountsAccountSummaryPathParams struct {
 	Account string `pathParam:"style=simple,explode=false,name=account"`
 }
 
-type GetAccountsAccountSummaryRequest struct {
-	PathParams GetAccountsAccountSummaryPathParams
-}
-
 type GetAccountsAccountSummary200ApplicationJSONInfo struct {
 	AccountCode              *string `json:"AccountCode,omitempty"`
 	AccountReady             *string `json:"AccountReady,omitempty"`
@@ -131,6 +127,10 @@ type GetAccountsAccountSummary200ApplicationJSON struct {
 	Info    *GetAccountsAccountSummary200ApplicationJSONInfo    `json:"Info,omitempty"`
 	Ledger  []GetAccountsAccountSummary200ApplicationJSONLedger `json:"Ledger,omitempty"`
 	Summary *GetAccountsAccountSummary200ApplicationJSONSummary `json:"Summary,omitempty"`
+}
+
+type GetAccountsAccountSummaryRequest struct {
+	PathParams GetAccountsAccountSummaryPathParams
 }
 
 type GetAccountsAccountSummaryResponse struct {

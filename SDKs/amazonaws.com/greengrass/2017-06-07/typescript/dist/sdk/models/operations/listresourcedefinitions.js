@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ListResourceDefinitionsQueryParams = /** @class */ (function (_super) {
     __extends(ListResourceDefinitionsQueryParams, _super);
@@ -30,11 +30,11 @@ var ListResourceDefinitionsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MaxResults" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxResults" }),
         __metadata("design:type", String)
     ], ListResourceDefinitionsQueryParams.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
         __metadata("design:type", String)
     ], ListResourceDefinitionsQueryParams.prototype, "nextToken", void 0);
     return ListResourceDefinitionsQueryParams;
@@ -46,31 +46,31 @@ var ListResourceDefinitionsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], ListResourceDefinitionsHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], ListResourceDefinitionsHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], ListResourceDefinitionsHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], ListResourceDefinitionsHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], ListResourceDefinitionsHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], ListResourceDefinitionsHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], ListResourceDefinitionsHeaders.prototype, "xAmzSignedHeaders", void 0);
     return ListResourceDefinitionsHeaders;
@@ -82,11 +82,11 @@ var ListResourceDefinitionsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListResourceDefinitionsQueryParams)
     ], ListResourceDefinitionsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListResourceDefinitionsHeaders)
     ], ListResourceDefinitionsRequest.prototype, "headers", void 0);
     return ListResourceDefinitionsRequest;
@@ -98,15 +98,15 @@ var ListResourceDefinitionsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListResourceDefinitionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListResourceDefinitionsResponse)
     ], ListResourceDefinitionsResponse.prototype, "listResourceDefinitionsResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListResourceDefinitionsResponse.prototype, "statusCode", void 0);
     return ListResourceDefinitionsResponse;

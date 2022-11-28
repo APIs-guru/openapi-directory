@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetAddressTotalReceivedPathParams = /** @class */ (function (_super) {
     __extends(GetAddressTotalReceivedPathParams, _super);
     function GetAddressTotalReceivedPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=address" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=address" }),
         __metadata("design:type", String)
     ], GetAddressTotalReceivedPathParams.prototype, "address", void 0);
     return GetAddressTotalReceivedPathParams;
@@ -41,7 +41,7 @@ var GetAddressTotalReceivedRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAddressTotalReceivedPathParams)
     ], GetAddressTotalReceivedRequest.prototype, "pathParams", void 0);
     return GetAddressTotalReceivedRequest;
@@ -53,15 +53,15 @@ var GetAddressTotalReceivedResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAddressTotalReceivedResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAddressTotalReceivedResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAddressTotalReceivedResponse.prototype, "getAddressTotalReceivedResponse", void 0);
     return GetAddressTotalReceivedResponse;

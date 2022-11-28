@@ -1,5 +1,7 @@
 package shared
 
+// AwsEc2NetworkACLDetails
+// Contains details about an EC2 network access control list (ACL).
 type AwsEc2NetworkACLDetails struct {
 	Associations []AwsEc2NetworkACLAssociation `json:"Associations,omitempty"`
 	Entries      []AwsEc2NetworkACLEntry       `json:"Entries,omitempty"`

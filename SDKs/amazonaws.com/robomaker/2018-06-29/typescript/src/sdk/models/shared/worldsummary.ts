@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WorldSummary
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a world.
 **/
 export class WorldSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=generationJob" })
+  @SpeakeasyMetadata({ data: "json, name=generationJob" })
   generationJob?: string;
 
-  @Metadata({ data: "json, name=template" })
+  @SpeakeasyMetadata({ data: "json, name=template" })
   template?: string;
 }

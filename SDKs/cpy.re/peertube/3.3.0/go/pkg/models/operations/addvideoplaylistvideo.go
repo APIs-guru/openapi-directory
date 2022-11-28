@@ -18,18 +18,18 @@ type AddVideoPlaylistVideoSecurity struct {
 	OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
 }
 
-type AddVideoPlaylistVideoRequest struct {
-	PathParams AddVideoPlaylistVideoPathParams
-	Request    *AddVideoPlaylistVideoRequestBody `request:"mediaType=application/json"`
-	Security   AddVideoPlaylistVideoSecurity
-}
-
 type AddVideoPlaylistVideo200ApplicationJSONVideoPlaylistElement struct {
 	ID *int64 `json:"id,omitempty"`
 }
 
 type AddVideoPlaylistVideo200ApplicationJSON struct {
 	VideoPlaylistElement *AddVideoPlaylistVideo200ApplicationJSONVideoPlaylistElement `json:"videoPlaylistElement,omitempty"`
+}
+
+type AddVideoPlaylistVideoRequest struct {
+	PathParams AddVideoPlaylistVideoPathParams
+	Request    *AddVideoPlaylistVideoRequestBody `request:"mediaType=application/json"`
+	Security   AddVideoPlaylistVideoSecurity
 }
 
 type AddVideoPlaylistVideoResponse struct {

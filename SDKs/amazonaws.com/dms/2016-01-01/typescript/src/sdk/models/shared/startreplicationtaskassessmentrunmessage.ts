@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StartReplicationTaskAssessmentRunMessage
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class StartReplicationTaskAssessmentRunMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssessmentRunName" })
+  @SpeakeasyMetadata({ data: "json, name=AssessmentRunName" })
   assessmentRunName: string;
 
-  @Metadata({ data: "json, name=Exclude" })
+  @SpeakeasyMetadata({ data: "json, name=Exclude" })
   exclude?: string[];
 
-  @Metadata({ data: "json, name=IncludeOnly" })
+  @SpeakeasyMetadata({ data: "json, name=IncludeOnly" })
   includeOnly?: string[];
 
-  @Metadata({ data: "json, name=ReplicationTaskArn" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationTaskArn" })
   replicationTaskArn: string;
 
-  @Metadata({ data: "json, name=ResultEncryptionMode" })
+  @SpeakeasyMetadata({ data: "json, name=ResultEncryptionMode" })
   resultEncryptionMode?: string;
 
-  @Metadata({ data: "json, name=ResultKmsKeyArn" })
+  @SpeakeasyMetadata({ data: "json, name=ResultKmsKeyArn" })
   resultKmsKeyArn?: string;
 
-  @Metadata({ data: "json, name=ResultLocationBucket" })
+  @SpeakeasyMetadata({ data: "json, name=ResultLocationBucket" })
   resultLocationBucket: string;
 
-  @Metadata({ data: "json, name=ResultLocationFolder" })
+  @SpeakeasyMetadata({ data: "json, name=ResultLocationFolder" })
   resultLocationFolder?: string;
 
-  @Metadata({ data: "json, name=ServiceAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceAccessRoleArn" })
   serviceAccessRoleArn: string;
 }

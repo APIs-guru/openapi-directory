@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountRoleStatusEnum } from "./accountrolestatusenum";
 
 
+
 export class GetAdminAccountResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AdminAccount" })
+  @SpeakeasyMetadata({ data: "json, name=AdminAccount" })
   adminAccount?: string;
 
-  @Metadata({ data: "json, name=RoleStatus" })
+  @SpeakeasyMetadata({ data: "json, name=RoleStatus" })
   roleStatus?: AccountRoleStatusEnum;
 }

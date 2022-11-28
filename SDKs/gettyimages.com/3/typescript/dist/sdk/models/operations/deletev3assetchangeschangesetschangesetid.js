@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteV3AssetChangesChangeSetsChangeSetIdPathParams = /** @class */ (function (_super) {
     __extends(DeleteV3AssetChangesChangeSetsChangeSetIdPathParams, _super);
     function DeleteV3AssetChangesChangeSetsChangeSetIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=change-set-id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=change-set-id" }),
         __metadata("design:type", Number)
     ], DeleteV3AssetChangesChangeSetsChangeSetIdPathParams.prototype, "changeSetId", void 0);
     return DeleteV3AssetChangesChangeSetsChangeSetIdPathParams;
@@ -41,7 +41,7 @@ var DeleteV3AssetChangesChangeSetsChangeSetIdRequest = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteV3AssetChangesChangeSetsChangeSetIdPathParams)
     ], DeleteV3AssetChangesChangeSetsChangeSetIdRequest.prototype, "pathParams", void 0);
     return DeleteV3AssetChangesChangeSetsChangeSetIdRequest;
@@ -53,11 +53,11 @@ var DeleteV3AssetChangesChangeSetsChangeSetIdResponse = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteV3AssetChangesChangeSetsChangeSetIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteV3AssetChangesChangeSetsChangeSetIdResponse.prototype, "statusCode", void 0);
     return DeleteV3AssetChangesChangeSetsChangeSetIdResponse;

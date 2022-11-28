@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BigQueryModelTraining extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currentIteration" })
+  @SpeakeasyMetadata({ data: "json, name=currentIteration" })
   currentIteration?: number;
 
-  @Metadata({ data: "json, name=expectedTotalIterations" })
+  @SpeakeasyMetadata({ data: "json, name=expectedTotalIterations" })
   expectedTotalIterations?: string;
 }

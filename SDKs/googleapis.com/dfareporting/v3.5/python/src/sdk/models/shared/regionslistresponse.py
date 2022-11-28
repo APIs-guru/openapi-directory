@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import region
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RegionsListResponse:
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    regions: Optional[List[region.Region]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'regions' }})
+    r"""RegionsListResponse
+    Region List Response
+    """
+    
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    regions: Optional[List[Region]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('regions') }})
     

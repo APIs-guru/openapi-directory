@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetStatus200ApplicationJsonActionEnum {
     GetStatus = "getStatus"
@@ -14,35 +15,35 @@ export enum GetStatus200ApplicationJsonDataGlobalEnum {
  * Status of the service
 **/
 export class GetStatus200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=global" })
+  @SpeakeasyMetadata({ data: "json, name=global" })
   global?: GetStatus200ApplicationJsonDataGlobalEnum;
 }
 
 export enum GetStatus200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class GetStatus200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: GetStatus200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: GetStatus200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: GetStatus200ApplicationJsonResultEnum;
 }
 
 
 export class GetStatusResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getStatus200ApplicationJsonObject?: GetStatus200ApplicationJson;
 }

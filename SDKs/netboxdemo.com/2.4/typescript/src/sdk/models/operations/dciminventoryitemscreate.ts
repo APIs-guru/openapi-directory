@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DcimInventoryItemsCreateRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.WritableInventoryItem;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.WritableInventoryItemInput;
 }
 
 
 export class DcimInventoryItemsCreateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inventoryItem?: shared.InventoryItem;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

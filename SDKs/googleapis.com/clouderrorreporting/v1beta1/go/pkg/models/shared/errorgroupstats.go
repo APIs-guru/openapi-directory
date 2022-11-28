@@ -1,5 +1,7 @@
 package shared
 
+// ErrorGroupStats
+// Data extracted for a specific group based on certain filter criteria, such as a given time period and/or service filter.
 type ErrorGroupStats struct {
 	AffectedServices    []ServiceContext `json:"affectedServices,omitempty"`
 	AffectedUsersCount  *string          `json:"affectedUsersCount,omitempty"`

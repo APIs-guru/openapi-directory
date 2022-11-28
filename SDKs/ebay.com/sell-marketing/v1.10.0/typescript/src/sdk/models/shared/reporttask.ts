@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dimension } from "./dimension";
 import { InventoryReference } from "./inventoryreference";
+
 
 
 // ReportTask
@@ -9,63 +9,63 @@ import { InventoryReference } from "./inventoryreference";
  * This type defines the fields in a report task.
 **/
 export class ReportTask extends SpeakeasyBase {
-  @Metadata({ data: "json, name=campaignIds" })
+  @SpeakeasyMetadata({ data: "json, name=campaignIds" })
   campaignIds?: string[];
 
-  @Metadata({ data: "json, name=dateFrom" })
+  @SpeakeasyMetadata({ data: "json, name=dateFrom" })
   dateFrom?: string;
 
-  @Metadata({ data: "json, name=dateTo" })
+  @SpeakeasyMetadata({ data: "json, name=dateTo" })
   dateTo?: string;
 
-  @Metadata({ data: "json, name=dimensions", elemType: shared.Dimension })
+  @SpeakeasyMetadata({ data: "json, name=dimensions", elemType: Dimension })
   dimensions?: Dimension[];
 
-  @Metadata({ data: "json, name=inventoryReferences", elemType: shared.InventoryReference })
+  @SpeakeasyMetadata({ data: "json, name=inventoryReferences", elemType: InventoryReference })
   inventoryReferences?: InventoryReference[];
 
-  @Metadata({ data: "json, name=listingIds" })
+  @SpeakeasyMetadata({ data: "json, name=listingIds" })
   listingIds?: string[];
 
-  @Metadata({ data: "json, name=marketplaceId" })
+  @SpeakeasyMetadata({ data: "json, name=marketplaceId" })
   marketplaceId?: string;
 
-  @Metadata({ data: "json, name=metricKeys" })
+  @SpeakeasyMetadata({ data: "json, name=metricKeys" })
   metricKeys?: string[];
 
-  @Metadata({ data: "json, name=reportExpirationDate" })
+  @SpeakeasyMetadata({ data: "json, name=reportExpirationDate" })
   reportExpirationDate?: string;
 
-  @Metadata({ data: "json, name=reportFormat" })
+  @SpeakeasyMetadata({ data: "json, name=reportFormat" })
   reportFormat?: string;
 
-  @Metadata({ data: "json, name=reportHref" })
+  @SpeakeasyMetadata({ data: "json, name=reportHref" })
   reportHref?: string;
 
-  @Metadata({ data: "json, name=reportId" })
+  @SpeakeasyMetadata({ data: "json, name=reportId" })
   reportId?: string;
 
-  @Metadata({ data: "json, name=reportName" })
+  @SpeakeasyMetadata({ data: "json, name=reportName" })
   reportName?: string;
 
-  @Metadata({ data: "json, name=reportTaskCompletionDate" })
+  @SpeakeasyMetadata({ data: "json, name=reportTaskCompletionDate" })
   reportTaskCompletionDate?: string;
 
-  @Metadata({ data: "json, name=reportTaskCreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=reportTaskCreationDate" })
   reportTaskCreationDate?: string;
 
-  @Metadata({ data: "json, name=reportTaskExpectedCompletionDate" })
+  @SpeakeasyMetadata({ data: "json, name=reportTaskExpectedCompletionDate" })
   reportTaskExpectedCompletionDate?: string;
 
-  @Metadata({ data: "json, name=reportTaskId" })
+  @SpeakeasyMetadata({ data: "json, name=reportTaskId" })
   reportTaskId?: string;
 
-  @Metadata({ data: "json, name=reportTaskStatus" })
+  @SpeakeasyMetadata({ data: "json, name=reportTaskStatus" })
   reportTaskStatus?: string;
 
-  @Metadata({ data: "json, name=reportTaskStatusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=reportTaskStatusMessage" })
   reportTaskStatusMessage?: string;
 
-  @Metadata({ data: "json, name=reportType" })
+  @SpeakeasyMetadata({ data: "json, name=reportType" })
   reportType?: string;
 }

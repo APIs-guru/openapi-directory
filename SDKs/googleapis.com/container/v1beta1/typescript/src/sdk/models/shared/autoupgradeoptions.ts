@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AutoUpgradeOptions
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * AutoUpgradeOptions defines the set of options for the user to control how the Auto Upgrades will proceed.
 **/
 export class AutoUpgradeOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoUpgradeStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=autoUpgradeStartTime" })
   autoUpgradeStartTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 }

@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum JobStatusStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Pending = "PENDING"
-,    SetupDone = "SETUP_DONE"
-,    Running = "RUNNING"
-,    CancelPending = "CANCEL_PENDING"
-,    CancelStarted = "CANCEL_STARTED"
-,    Cancelled = "CANCELLED"
-,    Done = "DONE"
-,    Error = "ERROR"
-,    AttemptFailure = "ATTEMPT_FAILURE"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Pending = "PENDING",
+    SetupDone = "SETUP_DONE",
+    Running = "RUNNING",
+    CancelPending = "CANCEL_PENDING",
+    CancelStarted = "CANCEL_STARTED",
+    Cancelled = "CANCELLED",
+    Done = "DONE",
+    Error = "ERROR",
+    AttemptFailure = "ATTEMPT_FAILURE"
 }
 
 export enum JobStatusSubstateEnum {
-    Unspecified = "UNSPECIFIED"
-,    Submitted = "SUBMITTED"
-,    Queued = "QUEUED"
-,    StaleStatus = "STALE_STATUS"
+    Unspecified = "UNSPECIFIED",
+    Submitted = "SUBMITTED",
+    Queued = "QUEUED",
+    StaleStatus = "STALE_STATUS"
 }
 
 
@@ -26,15 +27,15 @@ export enum JobStatusSubstateEnum {
  * Dataproc job status.
 **/
 export class JobStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: JobStatusStateEnum;
 
-  @Metadata({ data: "json, name=stateStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=stateStartTime" })
   stateStartTime?: string;
 
-  @Metadata({ data: "json, name=substate" })
+  @SpeakeasyMetadata({ data: "json, name=substate" })
   substate?: JobStatusSubstateEnum;
 }

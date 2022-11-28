@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { TagFilter } from "./tagfilter";
 var DescribeTagsRequest = /** @class */ (function (_super) {
     __extends(DescribeTagsRequest, _super);
     function DescribeTagsRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=filters", elemType: shared.TagFilter }),
+        SpeakeasyMetadata({ data: "json, name=filters", elemType: TagFilter }),
         __metadata("design:type", Array)
     ], DescribeTagsRequest.prototype, "filters", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxResults" }),
+        SpeakeasyMetadata({ data: "json, name=maxResults" }),
         __metadata("design:type", Number)
     ], DescribeTagsRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], DescribeTagsRequest.prototype, "nextToken", void 0);
     return DescribeTagsRequest;

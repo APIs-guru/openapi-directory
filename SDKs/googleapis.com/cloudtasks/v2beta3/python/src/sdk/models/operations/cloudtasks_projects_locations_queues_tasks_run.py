@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudtasksProjectsLocationsQueuesTasksRunPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class CloudtasksProjectsLocationsQueuesTasksRunQueryParams:
 
 @dataclass
 class CloudtasksProjectsLocationsQueuesTasksRunSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudtasksProjectsLocationsQueuesTasksRunRequest:
-    path_params: CloudtasksProjectsLocationsQueuesTasksRunPathParams = field(default=None)
-    query_params: CloudtasksProjectsLocationsQueuesTasksRunQueryParams = field(default=None)
+    path_params: CloudtasksProjectsLocationsQueuesTasksRunPathParams = field()
+    query_params: CloudtasksProjectsLocationsQueuesTasksRunQueryParams = field()
+    security: CloudtasksProjectsLocationsQueuesTasksRunSecurity = field()
     request: Optional[shared.RunTaskRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudtasksProjectsLocationsQueuesTasksRunSecurity = field(default=None)
     
 
 @dataclass
 class CloudtasksProjectsLocationsQueuesTasksRunResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     task: Optional[shared.Task] = field(default=None)
     

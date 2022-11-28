@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudApigeeV1RevisionStatus
+// The status of a specific resource revision.
 type GoogleCloudApigeeV1RevisionStatus struct {
 	Errors     []GoogleCloudApigeeV1UpdateError `json:"errors,omitempty"`
 	JSONSpec   *string                          `json:"jsonSpec,omitempty"`

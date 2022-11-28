@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleHomeEnterpriseSdmV1ExecuteDeviceCommandRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for SmartDeviceManagementService.ExecuteDeviceCommand
 **/
 export class GoogleHomeEnterpriseSdmV1ExecuteDeviceCommandRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command?: string;
 
-  @Metadata({ data: "json, name=params" })
+  @SpeakeasyMetadata({ data: "json, name=params" })
   params?: Map<string, any>;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlatformType } from "./platformtype";
+
 
 
 // PlatformTypesListResponse
@@ -8,9 +8,9 @@ import { PlatformType } from "./platformtype";
  * Platform Type List Response
 **/
 export class PlatformTypesListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=platformTypes", elemType: shared.PlatformType })
+  @SpeakeasyMetadata({ data: "json, name=platformTypes", elemType: PlatformType })
   platformTypes?: PlatformType[];
 }

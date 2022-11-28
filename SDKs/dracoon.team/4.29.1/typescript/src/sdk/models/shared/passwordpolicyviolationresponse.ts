@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ViolatedPasswordPolicy } from "./violatedpasswordpolicy";
+
 
 
 // PasswordPolicyViolationResponse
@@ -8,18 +8,18 @@ import { ViolatedPasswordPolicy } from "./violatedpasswordpolicy";
  * List of violated password policies
 **/
 export class PasswordPolicyViolationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: number;
 
-  @Metadata({ data: "json, name=debugInfo" })
+  @SpeakeasyMetadata({ data: "json, name=debugInfo" })
   debugInfo?: string;
 
-  @Metadata({ data: "json, name=errorCode" })
+  @SpeakeasyMetadata({ data: "json, name=errorCode" })
   errorCode?: number;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=violatedPasswordPolicies", elemType: shared.ViolatedPasswordPolicy })
+  @SpeakeasyMetadata({ data: "json, name=violatedPasswordPolicies", elemType: ViolatedPasswordPolicy })
   violatedPasswordPolicies?: ViolatedPasswordPolicy[];
 }

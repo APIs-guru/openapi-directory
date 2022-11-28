@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AudioCodecOptions } from "./audiocodecoptions";
+
 
 
 // AudioParameters
@@ -7,21 +8,21 @@ import { AudioCodecOptions } from "./audiocodecoptions";
  * Parameters required for transcoding audio.
 **/
 export class AudioParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AudioPackingMode" })
+  @SpeakeasyMetadata({ data: "json, name=AudioPackingMode" })
   audioPackingMode?: string;
 
-  @Metadata({ data: "json, name=BitRate" })
+  @SpeakeasyMetadata({ data: "json, name=BitRate" })
   bitRate?: string;
 
-  @Metadata({ data: "json, name=Channels" })
+  @SpeakeasyMetadata({ data: "json, name=Channels" })
   channels?: string;
 
-  @Metadata({ data: "json, name=Codec" })
+  @SpeakeasyMetadata({ data: "json, name=Codec" })
   codec?: string;
 
-  @Metadata({ data: "json, name=CodecOptions" })
+  @SpeakeasyMetadata({ data: "json, name=CodecOptions" })
   codecOptions?: AudioCodecOptions;
 
-  @Metadata({ data: "json, name=SampleRate" })
+  @SpeakeasyMetadata({ data: "json, name=SampleRate" })
   sampleRate?: string;
 }

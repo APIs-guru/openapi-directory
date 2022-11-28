@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // S3LocationDescription
 /**
  * The description of the location of an object in Amazon S3.
@@ -33,15 +33,15 @@ var S3LocationDescription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bucketArn" }),
+        SpeakeasyMetadata({ data: "json, name=bucketArn" }),
         __metadata("design:type", String)
     ], S3LocationDescription.prototype, "bucketArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=fileKey" }),
+        SpeakeasyMetadata({ data: "json, name=fileKey" }),
         __metadata("design:type", String)
     ], S3LocationDescription.prototype, "fileKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=objectVersion" }),
+        SpeakeasyMetadata({ data: "json, name=objectVersion" }),
         __metadata("design:type", String)
     ], S3LocationDescription.prototype, "objectVersion", void 0);
     return S3LocationDescription;

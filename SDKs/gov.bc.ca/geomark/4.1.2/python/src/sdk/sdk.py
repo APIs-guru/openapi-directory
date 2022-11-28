@@ -1,7 +1,15 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://www2.gov.bc.ca/gov/content?id=F6BAF45131954020BCFD2EBCC456F084 - Geomark Web Service"""
 import requests
-from sdk.models import operations
+
 from . import utils
+
+from .boundingbox import BoundingBox
+from .create import Create
+from .feature import Feature
+from .info import Info
+from .parts import Parts
+from .point import Point
 
 
 SERVERS = [
@@ -12,202 +20,96 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://www2.gov.bc.ca/gov/content?id=F6BAF45131954020BCFD2EBCC456F084 - Geomark Web Service"""
+    bounding_box: BoundingBox
+    create: Create
+    feature: Feature
+    info: Info
+    parts: Parts
+    point: Point
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        self._init_sdks()
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        self._init_sdks()
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        self._init_sdks()
     
-    def get_geomarks_geomark_id_bounding_box_file_format_extension_(self, request: operations.GetGeomarksGeomarkIDBoundingBoxFileFormatExtensionRequest) -> operations.GetGeomarksGeomarkIDBoundingBoxFileFormatExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/geomarks/{geomarkId}/boundingBox.{fileFormatExtension}", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetGeomarksGeomarkIDBoundingBoxFileFormatExtensionResponse(status_code=r.status_code, content_type=content_type)
+    
+    def _init_sdks(self):
         
-        if r.status_code == 200:
-            pass
-        elif r.status_code == 400:
-            pass
-        elif r.status_code == 404:
-            pass
-        elif r.status_code == 500:
-            pass
-
-        return res
-
-    
-    def get_geomarks_geomark_id_feature_file_format_extension_(self, request: operations.GetGeomarksGeomarkIDFeatureFileFormatExtensionRequest) -> operations.GetGeomarksGeomarkIDFeatureFileFormatExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/geomarks/{geomarkId}/feature.{fileFormatExtension}", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetGeomarksGeomarkIDFeatureFileFormatExtensionResponse(status_code=r.status_code, content_type=content_type)
+        self.bounding_box = BoundingBox(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
         
-        if r.status_code == 200:
-            pass
-        elif r.status_code == 400:
-            pass
-        elif r.status_code == 404:
-            pass
-        elif r.status_code == 500:
-            pass
-
-        return res
-
-    
-    def get_geomarks_geomark_id_file_format_extension_(self, request: operations.GetGeomarksGeomarkIDFileFormatExtensionRequest) -> operations.GetGeomarksGeomarkIDFileFormatExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/geomarks/{geomarkId}.{fileFormatExtension}", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetGeomarksGeomarkIDFileFormatExtensionResponse(status_code=r.status_code, content_type=content_type)
+        self.create = Create(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
         
-        if r.status_code == 200:
-            pass
-        elif r.status_code == 400:
-            pass
-        elif r.status_code == 404:
-            pass
-        elif r.status_code == 500:
-            pass
-
-        return res
-
-    
-    def get_geomarks_geomark_id_parts_file_format_extension_(self, request: operations.GetGeomarksGeomarkIDPartsFileFormatExtensionRequest) -> operations.GetGeomarksGeomarkIDPartsFileFormatExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/geomarks/{geomarkId}/parts.{fileFormatExtension}", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetGeomarksGeomarkIDPartsFileFormatExtensionResponse(status_code=r.status_code, content_type=content_type)
+        self.feature = Feature(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
         
-        if r.status_code == 200:
-            pass
-        elif r.status_code == 400:
-            pass
-        elif r.status_code == 404:
-            pass
-        elif r.status_code == 500:
-            pass
-
-        return res
-
-    
-    def get_geomarks_geomark_id_point_file_format_extension_(self, request: operations.GetGeomarksGeomarkIDPointFileFormatExtensionRequest) -> operations.GetGeomarksGeomarkIDPointFileFormatExtensionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/geomarks/{geomarkId}/point.{fileFormatExtension}", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetGeomarksGeomarkIDPointFileFormatExtensionResponse(status_code=r.status_code, content_type=content_type)
+        self.info = Info(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
         
-        if r.status_code == 200:
-            pass
-        elif r.status_code == 400:
-            pass
-        elif r.status_code == 404:
-            pass
-        elif r.status_code == 500:
-            pass
-
-        return res
-
-    
-    def post_geomarks_copy(self, request: operations.PostGeomarksCopyRequest) -> operations.PostGeomarksCopyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/geomarks/copy"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("POST", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.PostGeomarksCopyResponse(status_code=r.status_code, content_type=content_type)
+        self.parts = Parts(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
         
-        if r.status_code == 400:
-            pass
-        elif r.status_code == 500:
-            pass
-
-        return res
-
+        self.point = Point(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
     
-    def post_geomarks_new(self, request: operations.PostGeomarksNewRequest) -> operations.PostGeomarksNewResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/geomarks/new"
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        client = self.client
-
-        r = client.request("POST", url, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.PostGeomarksNewResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 302:
-            pass
-        elif r.status_code == 400:
-            pass
-        elif r.status_code == 500:
-            pass
-
-        return res
-
     

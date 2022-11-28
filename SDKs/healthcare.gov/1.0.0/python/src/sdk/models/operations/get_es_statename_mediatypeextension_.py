@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from typing import Optional
+from enum import Enum
 
 class GetEsStateNameMediaTypeExtensionMediaTypeExtensionEnum(str, Enum):
     DOT_JSON = ".json"
@@ -7,18 +8,18 @@ class GetEsStateNameMediaTypeExtensionMediaTypeExtensionEnum(str, Enum):
 
 @dataclass
 class GetEsStateNameMediaTypeExtensionPathParams:
-    media_type_extension: GetEsStateNameMediaTypeExtensionMediaTypeExtensionEnum = field(default=None, metadata={'path_param': { 'field_name': 'mediaTypeExtension', 'style': 'simple', 'explode': False }})
-    state_name: str = field(default=None, metadata={'path_param': { 'field_name': 'stateName', 'style': 'simple', 'explode': False }})
+    media_type_extension: GetEsStateNameMediaTypeExtensionMediaTypeExtensionEnum = field(metadata={'path_param': { 'field_name': 'mediaTypeExtension', 'style': 'simple', 'explode': False }})
+    state_name: str = field(metadata={'path_param': { 'field_name': 'stateName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetEsStateNameMediaTypeExtensionRequest:
-    path_params: GetEsStateNameMediaTypeExtensionPathParams = field(default=None)
+    path_params: GetEsStateNameMediaTypeExtensionPathParams = field()
     
 
 @dataclass
 class GetEsStateNameMediaTypeExtensionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

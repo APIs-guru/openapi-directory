@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AccessapprovalProjectsApprovalRequestsApprovePathParams = /** @class */ (function (_super) {
     __extends(AccessapprovalProjectsApprovalRequestsApprovePathParams, _super);
@@ -30,7 +30,7 @@ var AccessapprovalProjectsApprovalRequestsApprovePathParams = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], AccessapprovalProjectsApprovalRequestsApprovePathParams.prototype, "name", void 0);
     return AccessapprovalProjectsApprovalRequestsApprovePathParams;
@@ -42,47 +42,47 @@ var AccessapprovalProjectsApprovalRequestsApproveQueryParams = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], AccessapprovalProjectsApprovalRequestsApproveQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], AccessapprovalProjectsApprovalRequestsApproveQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], AccessapprovalProjectsApprovalRequestsApproveQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], AccessapprovalProjectsApprovalRequestsApproveQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], AccessapprovalProjectsApprovalRequestsApproveQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], AccessapprovalProjectsApprovalRequestsApproveQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], AccessapprovalProjectsApprovalRequestsApproveQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], AccessapprovalProjectsApprovalRequestsApproveQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], AccessapprovalProjectsApprovalRequestsApproveQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], AccessapprovalProjectsApprovalRequestsApproveQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], AccessapprovalProjectsApprovalRequestsApproveQueryParams.prototype, "uploadProtocol", void 0);
     return AccessapprovalProjectsApprovalRequestsApproveQueryParams;
@@ -94,11 +94,11 @@ var AccessapprovalProjectsApprovalRequestsApproveSecurity = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], AccessapprovalProjectsApprovalRequestsApproveSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], AccessapprovalProjectsApprovalRequestsApproveSecurity.prototype, "oauth2c", void 0);
     return AccessapprovalProjectsApprovalRequestsApproveSecurity;
@@ -110,19 +110,19 @@ var AccessapprovalProjectsApprovalRequestsApproveRequest = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AccessapprovalProjectsApprovalRequestsApprovePathParams)
     ], AccessapprovalProjectsApprovalRequestsApproveRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AccessapprovalProjectsApprovalRequestsApproveQueryParams)
     ], AccessapprovalProjectsApprovalRequestsApproveRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.ApproveApprovalRequestMessage)
     ], AccessapprovalProjectsApprovalRequestsApproveRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AccessapprovalProjectsApprovalRequestsApproveSecurity)
     ], AccessapprovalProjectsApprovalRequestsApproveRequest.prototype, "security", void 0);
     return AccessapprovalProjectsApprovalRequestsApproveRequest;
@@ -134,15 +134,15 @@ var AccessapprovalProjectsApprovalRequestsApproveResponse = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ApprovalRequest)
     ], AccessapprovalProjectsApprovalRequestsApproveResponse.prototype, "approvalRequest", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AccessapprovalProjectsApprovalRequestsApproveResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AccessapprovalProjectsApprovalRequestsApproveResponse.prototype, "statusCode", void 0);
     return AccessapprovalProjectsApprovalRequestsApproveResponse;

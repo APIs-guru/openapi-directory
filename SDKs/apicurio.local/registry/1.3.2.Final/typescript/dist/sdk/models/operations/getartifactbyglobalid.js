@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetArtifactByGlobalIdPathParams = /** @class */ (function (_super) {
     __extends(GetArtifactByGlobalIdPathParams, _super);
     function GetArtifactByGlobalIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=globalId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=globalId" }),
         __metadata("design:type", Number)
     ], GetArtifactByGlobalIdPathParams.prototype, "globalId", void 0);
     return GetArtifactByGlobalIdPathParams;
@@ -41,7 +41,7 @@ var GetArtifactByGlobalIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetArtifactByGlobalIdPathParams)
     ], GetArtifactByGlobalIdRequest.prototype, "pathParams", void 0);
     return GetArtifactByGlobalIdRequest;
@@ -53,11 +53,11 @@ var GetArtifactByGlobalIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetArtifactByGlobalIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetArtifactByGlobalIdResponse.prototype, "statusCode", void 0);
     return GetArtifactByGlobalIdResponse;

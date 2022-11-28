@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CustomerInfoResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=first_name" })
+  @SpeakeasyMetadata({ data: "json, name=first_name" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=last_name" })
+  @SpeakeasyMetadata({ data: "json, name=last_name" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=middle_name" })
+  @SpeakeasyMetadata({ data: "json, name=middle_name" })
   middleName?: string;
 }

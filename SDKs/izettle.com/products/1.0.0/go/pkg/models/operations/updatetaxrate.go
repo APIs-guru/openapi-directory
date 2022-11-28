@@ -8,17 +8,9 @@ type UpdateTaxRatePathParams struct {
 	TaxRateUUID string `pathParam:"style=simple,explode=false,name=taxRateUuid"`
 }
 
-type UpdateTaxRateSecurityOption1 struct {
-	ZettleAPIKey shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type UpdateTaxRateSecurityOption2 struct {
-	ZettleOauth shared.SchemeZettleOauth `security:"scheme,type=oauth2"`
-}
-
 type UpdateTaxRateSecurity struct {
-	Option1 *UpdateTaxRateSecurityOption1 `security:"option"`
-	Option2 *UpdateTaxRateSecurityOption2 `security:"option"`
+	ZettleAPIKey *shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
+	ZettleOauth  *shared.SchemeZettleOauth  `security:"scheme,type=oauth2"`
 }
 
 type UpdateTaxRateRequest struct {

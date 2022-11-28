@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetRealmClientsIDEvaluateScopesProtocolMappersPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class GetRealmClientsIDEvaluateScopesProtocolMappersQueryParams:
 
 @dataclass
 class GetRealmClientsIDEvaluateScopesProtocolMappersRequest:
-    path_params: GetRealmClientsIDEvaluateScopesProtocolMappersPathParams = field(default=None)
-    query_params: GetRealmClientsIDEvaluateScopesProtocolMappersQueryParams = field(default=None)
+    path_params: GetRealmClientsIDEvaluateScopesProtocolMappersPathParams = field()
+    query_params: GetRealmClientsIDEvaluateScopesProtocolMappersQueryParams = field()
     
 
 @dataclass
 class GetRealmClientsIDEvaluateScopesProtocolMappersResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_scope_evaluate_resource_protocol_mapper_evaluation_representations: Optional[List[shared.ClientScopeEvaluateResourceProtocolMapperEvaluationRepresentation]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

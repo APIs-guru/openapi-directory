@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudbuildProjectsLocationsTriggersWebhookPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,14 +29,14 @@ class CloudbuildProjectsLocationsTriggersWebhookQueryParams:
 
 @dataclass
 class CloudbuildProjectsLocationsTriggersWebhookRequest:
-    path_params: CloudbuildProjectsLocationsTriggersWebhookPathParams = field(default=None)
-    query_params: CloudbuildProjectsLocationsTriggersWebhookQueryParams = field(default=None)
+    path_params: CloudbuildProjectsLocationsTriggersWebhookPathParams = field()
+    query_params: CloudbuildProjectsLocationsTriggersWebhookQueryParams = field()
     request: Optional[shared.HTTPBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CloudbuildProjectsLocationsTriggersWebhookResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     receive_trigger_webhook_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

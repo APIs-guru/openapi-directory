@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RecommendedOptionProjectedMetric } from "./recommendedoptionprojectedmetric";
 
 
+
 export class GetEc2RecommendationProjectedMetricsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=recommendedOptionProjectedMetrics", elemType: shared.RecommendedOptionProjectedMetric })
+  @SpeakeasyMetadata({ data: "json, name=recommendedOptionProjectedMetrics", elemType: RecommendedOptionProjectedMetric })
   recommendedOptionProjectedMetrics?: RecommendedOptionProjectedMetric[];
 }

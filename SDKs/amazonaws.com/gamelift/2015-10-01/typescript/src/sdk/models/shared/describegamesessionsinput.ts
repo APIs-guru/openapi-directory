@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DescribeGameSessionsInput
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input for a request operation.
 **/
 export class DescribeGameSessionsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AliasId" })
+  @SpeakeasyMetadata({ data: "json, name=AliasId" })
   aliasId?: string;
 
-  @Metadata({ data: "json, name=FleetId" })
+  @SpeakeasyMetadata({ data: "json, name=FleetId" })
   fleetId?: string;
 
-  @Metadata({ data: "json, name=GameSessionId" })
+  @SpeakeasyMetadata({ data: "json, name=GameSessionId" })
   gameSessionId?: string;
 
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=Location" })
+  @SpeakeasyMetadata({ data: "json, name=Location" })
   location?: string;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=StatusFilter" })
+  @SpeakeasyMetadata({ data: "json, name=StatusFilter" })
   statusFilter?: string;
 }

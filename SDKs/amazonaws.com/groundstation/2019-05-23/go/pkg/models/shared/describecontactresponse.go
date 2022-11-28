@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DescribeContactResponse
+// <p/>
 type DescribeContactResponse struct {
 	ContactID         *string            `json:"contactId,omitempty"`
 	ContactStatus     *ContactStatusEnum `json:"contactStatus,omitempty"`

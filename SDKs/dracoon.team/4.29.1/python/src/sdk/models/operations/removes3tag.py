@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RemoveS3TagPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class RemoveS3TagHeaders:
 
 @dataclass
 class RemoveS3TagRequest:
-    path_params: RemoveS3TagPathParams = field(default=None)
-    headers: RemoveS3TagHeaders = field(default=None)
+    headers: RemoveS3TagHeaders = field()
+    path_params: RemoveS3TagPathParams = field()
     
 
 @dataclass
 class RemoveS3TagResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

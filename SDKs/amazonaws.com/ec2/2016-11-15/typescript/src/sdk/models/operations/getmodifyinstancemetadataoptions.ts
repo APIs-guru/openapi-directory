@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetModifyInstanceMetadataOptionsActionEnum {
     ModifyInstanceMetadataOptions = "ModifyInstanceMetadataOptions"
 }
 
 export enum GetModifyInstanceMetadataOptionsHttpEndpointEnum {
-    Disabled = "disabled"
-,    Enabled = "enabled"
+    Disabled = "disabled",
+    Enabled = "enabled"
 }
 
 export enum GetModifyInstanceMetadataOptionsHttpProtocolIpv6Enum {
-    Disabled = "disabled"
-,    Enabled = "enabled"
+    Disabled = "disabled",
+    Enabled = "enabled"
 }
 
 export enum GetModifyInstanceMetadataOptionsHttpTokensEnum {
-    Optional = "optional"
-,    Required = "required"
+    Optional = "optional",
+    Required = "required"
 }
 
 export enum GetModifyInstanceMetadataOptionsVersionEnum {
@@ -25,72 +26,72 @@ export enum GetModifyInstanceMetadataOptionsVersionEnum {
 
 
 export class GetModifyInstanceMetadataOptionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetModifyInstanceMetadataOptionsActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=HttpEndpoint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HttpEndpoint" })
   httpEndpoint?: GetModifyInstanceMetadataOptionsHttpEndpointEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=HttpProtocolIpv6" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HttpProtocolIpv6" })
   httpProtocolIpv6?: GetModifyInstanceMetadataOptionsHttpProtocolIpv6Enum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=HttpPutResponseHopLimit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HttpPutResponseHopLimit" })
   httpPutResponseHopLimit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=HttpTokens" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HttpTokens" })
   httpTokens?: GetModifyInstanceMetadataOptionsHttpTokensEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=InstanceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=InstanceId" })
   instanceId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetModifyInstanceMetadataOptionsVersionEnum;
 }
 
 
 export class GetModifyInstanceMetadataOptionsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetModifyInstanceMetadataOptionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetModifyInstanceMetadataOptionsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetModifyInstanceMetadataOptionsHeaders;
 }
 
 
 export class GetModifyInstanceMetadataOptionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

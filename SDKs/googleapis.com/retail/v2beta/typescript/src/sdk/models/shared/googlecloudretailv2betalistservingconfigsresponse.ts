@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2betaServingConfig } from "./googlecloudretailv2betaservingconfig";
+
 
 
 // GoogleCloudRetailV2betaListServingConfigsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudRetailV2betaServingConfig } from "./googlecloudretailv2betas
  * Response for ListServingConfigs method.
 **/
 export class GoogleCloudRetailV2betaListServingConfigsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=servingConfigs", elemType: shared.GoogleCloudRetailV2betaServingConfig })
+  @SpeakeasyMetadata({ data: "json, name=servingConfigs", elemType: GoogleCloudRetailV2betaServingConfig })
   servingConfigs?: GoogleCloudRetailV2betaServingConfig[];
 }

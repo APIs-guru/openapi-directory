@@ -22,50 +22,50 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SubscriptionDefinition = /** @class */ (function (_super) {
     __extends(SubscriptionDefinition, _super);
     function SubscriptionDefinition() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=communicationMethod" }),
+        SpeakeasyMetadata({ data: "json, name=communicationMethod" }),
         __metadata("design:type", String)
     ], SubscriptionDefinition.prototype, "communicationMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], SubscriptionDefinition.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], SubscriptionDefinition.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], SubscriptionDefinition.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=isActive" }),
+        SpeakeasyMetadata({ data: "json, name=isActive" }),
         __metadata("design:type", Boolean)
     ], SubscriptionDefinition.prototype, "isActive", void 0);
     __decorate([
-        Metadata({ data: "json, name=isDefault" }),
+        SpeakeasyMetadata({ data: "json, name=isDefault" }),
         __metadata("design:type", Boolean)
     ], SubscriptionDefinition.prototype, "isDefault", void 0);
     __decorate([
-        Metadata({ data: "json, name=isInternal" }),
+        SpeakeasyMetadata({ data: "json, name=isInternal" }),
         __metadata("design:type", Boolean)
     ], SubscriptionDefinition.prototype, "isInternal", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], SubscriptionDefinition.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=purpose" }),
+        SpeakeasyMetadata({ data: "json, name=purpose" }),
         __metadata("design:type", String)
     ], SubscriptionDefinition.prototype, "purpose", void 0);
     __decorate([
-        Metadata({ data: "json, name=updatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=updatedAt" }),
         __metadata("design:type", Date)
     ], SubscriptionDefinition.prototype, "updatedAt", void 0);
     return SubscriptionDefinition;

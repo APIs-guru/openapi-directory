@@ -18,6 +18,8 @@ type CreatePushTemplateHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreatePushTemplateRequestBodyPushNotificationTemplateRequest
+// Specifies the content and settings for a message template that can be used in messages that are sent through a push notification channel.
 type CreatePushTemplateRequestBodyPushNotificationTemplateRequest struct {
 	Adm                  *shared.AndroidPushNotificationTemplate `json:"ADM,omitempty"`
 	Apns                 *shared.ApnsPushNotificationTemplate    `json:"APNS,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // PermissionType
 /**
  * A permission type that can be applied to story collaborator
@@ -33,43 +33,43 @@ var PermissionType = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=can_add_collaborators" }),
+        SpeakeasyMetadata({ data: "json, name=can_add_collaborators" }),
         __metadata("design:type", Boolean)
     ], PermissionType.prototype, "canAddCollaborators", void 0);
     __decorate([
-        Metadata({ data: "json, name=can_delete" }),
+        SpeakeasyMetadata({ data: "json, name=can_delete" }),
         __metadata("design:type", Boolean)
     ], PermissionType.prototype, "canDelete", void 0);
     __decorate([
-        Metadata({ data: "json, name=can_edit" }),
+        SpeakeasyMetadata({ data: "json, name=can_edit" }),
         __metadata("design:type", Boolean)
     ], PermissionType.prototype, "canEdit", void 0);
     __decorate([
-        Metadata({ data: "json, name=can_view" }),
+        SpeakeasyMetadata({ data: "json, name=can_view" }),
         __metadata("design:type", Boolean)
     ], PermissionType.prototype, "canView", void 0);
     __decorate([
-        Metadata({ data: "json, name=created_at" }),
+        SpeakeasyMetadata({ data: "json, name=created_at" }),
         __metadata("design:type", Date)
     ], PermissionType.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=created_by" }),
+        SpeakeasyMetadata({ data: "json, name=created_by" }),
         __metadata("design:type", String)
     ], PermissionType.prototype, "createdBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], PermissionType.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], PermissionType.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated_at" }),
+        SpeakeasyMetadata({ data: "json, name=updated_at" }),
         __metadata("design:type", Date)
     ], PermissionType.prototype, "updatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated_by" }),
+        SpeakeasyMetadata({ data: "json, name=updated_by" }),
         __metadata("design:type", String)
     ], PermissionType.prototype, "updatedBy", void 0);
     return PermissionType;

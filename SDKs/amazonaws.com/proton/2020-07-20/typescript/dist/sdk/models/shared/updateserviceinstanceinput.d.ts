@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentUpdateTypeEnum } from "./deploymentupdatetypeenum";
 export declare class UpdateServiceInstanceInput extends SpeakeasyBase {
     deploymentType: DeploymentUpdateTypeEnum;

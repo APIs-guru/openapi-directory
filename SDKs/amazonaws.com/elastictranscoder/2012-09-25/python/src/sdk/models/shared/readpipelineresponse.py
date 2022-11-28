@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import pipeline
-from . import warning
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ReadPipelineResponse:
-    pipeline: Optional[pipeline.Pipeline] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Pipeline' }})
-    warnings: Optional[List[warning.Warning]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Warnings' }})
+    r"""ReadPipelineResponse
+    The <code>ReadPipelineResponse</code> structure.
+    """
+    
+    pipeline: Optional[Pipeline] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Pipeline') }})
+    warnings: Optional[List[Warning]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Warnings') }})
     

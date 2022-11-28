@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PredictImageUrlPathParams = /** @class */ (function (_super) {
     __extends(PredictImageUrlPathParams, _super);
@@ -30,7 +30,7 @@ var PredictImageUrlPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=projectId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=projectId" }),
         __metadata("design:type", String)
     ], PredictImageUrlPathParams.prototype, "projectId", void 0);
     return PredictImageUrlPathParams;
@@ -42,11 +42,11 @@ var PredictImageUrlQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=application" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=application" }),
         __metadata("design:type", String)
     ], PredictImageUrlQueryParams.prototype, "application", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=iterationId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=iterationId" }),
         __metadata("design:type", String)
     ], PredictImageUrlQueryParams.prototype, "iterationId", void 0);
     return PredictImageUrlQueryParams;
@@ -58,7 +58,7 @@ var PredictImageUrlHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Prediction-Key" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Prediction-Key" }),
         __metadata("design:type", String)
     ], PredictImageUrlHeaders.prototype, "predictionKey", void 0);
     return PredictImageUrlHeaders;
@@ -70,23 +70,23 @@ var PredictImageUrlRequests = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/xml" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/xml" }),
         __metadata("design:type", Uint8Array)
     ], PredictImageUrlRequests.prototype, "applicationXml", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.ImageUrl)
     ], PredictImageUrlRequests.prototype, "imageUrl", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", shared.ImageUrl)
     ], PredictImageUrlRequests.prototype, "imageUrl1", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/json" }),
         __metadata("design:type", shared.ImageUrl)
     ], PredictImageUrlRequests.prototype, "imageUrl2", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/xml" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/xml" }),
         __metadata("design:type", Uint8Array)
     ], PredictImageUrlRequests.prototype, "textXml", void 0);
     return PredictImageUrlRequests;
@@ -98,19 +98,19 @@ var PredictImageUrlRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PredictImageUrlPathParams)
     ], PredictImageUrlRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PredictImageUrlQueryParams)
     ], PredictImageUrlRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PredictImageUrlHeaders)
     ], PredictImageUrlRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PredictImageUrlRequests)
     ], PredictImageUrlRequest.prototype, "request", void 0);
     return PredictImageUrlRequest;
@@ -122,19 +122,19 @@ var PredictImageUrlResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PredictImageUrlResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PredictImageUrlResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ImagePredictionResultModel)
     ], PredictImageUrlResponse.prototype, "imagePredictionResultModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PredictImageUrlResponse.prototype, "statusCode", void 0);
     return PredictImageUrlResponse;

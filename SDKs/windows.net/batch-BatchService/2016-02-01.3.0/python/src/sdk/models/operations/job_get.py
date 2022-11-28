@@ -1,17 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 
 
 @dataclass
 class JobGetPathParams:
-    job_id: str = field(default=None, metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
+    job_id: str = field(metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class JobGetQueryParams:
+    api_version: str = field(metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
     dollar_expand: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': '$expand', 'style': 'form', 'explode': True }})
     dollar_select: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': '$select', 'style': 'form', 'explode': True }})
-    api_version: str = field(default=None, metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
     timeout: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'timeout', 'style': 'form', 'explode': True }})
     
 
@@ -24,16 +27,16 @@ class JobGetHeaders:
 
 @dataclass
 class JobGetRequest:
-    path_params: JobGetPathParams = field(default=None)
-    query_params: JobGetQueryParams = field(default=None)
-    headers: JobGetHeaders = field(default=None)
+    headers: JobGetHeaders = field()
+    path_params: JobGetPathParams = field()
+    query_params: JobGetQueryParams = field()
     
 
 @dataclass
 class JobGetResponse:
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     batch_error: Optional[Any] = field(default=None)
     cloud_job: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

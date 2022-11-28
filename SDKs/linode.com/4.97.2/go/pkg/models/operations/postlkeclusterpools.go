@@ -15,27 +15,19 @@ type PostLkeClusterPoolsRequestBody struct {
 	Type  string         `json:"type"`
 }
 
-type PostLkeClusterPoolsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type PostLkeClusterPoolsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type PostLkeClusterPoolsSecurity struct {
-	Option1 *PostLkeClusterPoolsSecurityOption1 `security:"option"`
-	Option2 *PostLkeClusterPoolsSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type PostLkeClusterPoolsDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type PostLkeClusterPoolsRequest struct {
 	PathParams PostLkeClusterPoolsPathParams
 	Request    PostLkeClusterPoolsRequestBody `request:"mediaType=application/json"`
 	Security   PostLkeClusterPoolsSecurity
-}
-
-type PostLkeClusterPoolsDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type PostLkeClusterPoolsResponse struct {

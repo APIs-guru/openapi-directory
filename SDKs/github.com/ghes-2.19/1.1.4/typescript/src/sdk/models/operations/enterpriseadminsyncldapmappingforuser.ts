@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EnterpriseAdminSyncLdapMappingForUserPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=username" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" })
   username: string;
 }
 
 
-export class EnterpriseAdminSyncLdapMappingForUserRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: EnterpriseAdminSyncLdapMappingForUserPathParams;
-}
-
-
 export class EnterpriseAdminSyncLdapMappingForUser201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
+export class EnterpriseAdminSyncLdapMappingForUserRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: EnterpriseAdminSyncLdapMappingForUserPathParams;
+}
+
+
 export class EnterpriseAdminSyncLdapMappingForUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   enterpriseAdminSyncLdapMappingForUser201ApplicationJsonObject?: EnterpriseAdminSyncLdapMappingForUser201ApplicationJson;
 }

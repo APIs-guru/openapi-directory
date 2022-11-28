@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ChromeFromHtmlPostRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.ChromeHtmlToPdfRequest;
 }
 
 
 export class ChromeFromHtmlPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiResponseFailure?: shared.ApiResponseFailure;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   apiResponseSuccess?: shared.ApiResponseSuccess;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

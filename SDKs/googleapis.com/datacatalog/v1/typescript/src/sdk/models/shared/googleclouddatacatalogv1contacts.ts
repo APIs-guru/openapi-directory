@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatacatalogV1ContactsPerson } from "./googleclouddatacatalogv1contactsperson";
+
 
 
 // GoogleCloudDatacatalogV1Contacts
@@ -8,6 +8,6 @@ import { GoogleCloudDatacatalogV1ContactsPerson } from "./googleclouddatacatalog
  * Contact people for the entry.
 **/
 export class GoogleCloudDatacatalogV1Contacts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=people", elemType: shared.GoogleCloudDatacatalogV1ContactsPerson })
+  @SpeakeasyMetadata({ data: "json, name=people", elemType: GoogleCloudDatacatalogV1ContactsPerson })
   people?: GoogleCloudDatacatalogV1ContactsPerson[];
 }

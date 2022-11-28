@@ -10,6 +10,8 @@ const (
 	MacVerifyResponseProtectionLevelEnumExternalVpc                MacVerifyResponseProtectionLevelEnum = "EXTERNAL_VPC"
 )
 
+// MacVerifyResponse
+// Response message for KeyManagementService.MacVerify.
 type MacVerifyResponse struct {
 	Name                     *string                               `json:"name,omitempty"`
 	ProtectionLevel          *MacVerifyResponseProtectionLevelEnum `json:"protectionLevel,omitempty"`

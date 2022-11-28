@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/macie/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/macie/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def associate_member_account(self, request: operations.AssociateMemberAccountRequest) -> operations.AssociateMemberAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Associates a specified AWS account with Amazon Macie Classic as a member account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=MacieService.AssociateMemberAccount"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -69,22 +98,22 @@ class SDK:
 
     
     def associate_s3_resources(self, request: operations.AssociateS3ResourcesRequest) -> operations.AssociateS3ResourcesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Associates specified S3 resources with Amazon Macie Classic for monitoring and data classification. If memberAccountId isn't specified, the action associates specified S3 resources with Macie Classic for the current Macie Classic administrator account. If memberAccountId is specified, the action associates specified S3 resources with Macie Classic for the specified member account. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=MacieService.AssociateS3Resources"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -115,22 +144,22 @@ class SDK:
 
     
     def disassociate_member_account(self, request: operations.DisassociateMemberAccountRequest) -> operations.DisassociateMemberAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes the specified member account from Amazon Macie Classic.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=MacieService.DisassociateMemberAccount"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -151,22 +180,22 @@ class SDK:
 
     
     def disassociate_s3_resources(self, request: operations.DisassociateS3ResourcesRequest) -> operations.DisassociateS3ResourcesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes specified S3 resources from being monitored by Amazon Macie Classic. If memberAccountId isn't specified, the action removes specified S3 resources from Macie Classic for the current Macie Classic administrator account. If memberAccountId is specified, the action removes specified S3 resources from Macie Classic for the specified member account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=MacieService.DisassociateS3Resources"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -193,24 +222,23 @@ class SDK:
 
     
     def list_member_accounts(self, request: operations.ListMemberAccountsRequest) -> operations.ListMemberAccountsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all Amazon Macie Classic member accounts for the current Macie Classic administrator account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=MacieService.ListMemberAccounts"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -233,24 +261,23 @@ class SDK:
 
     
     def list_s3_resources(self, request: operations.ListS3ResourcesRequest) -> operations.ListS3ResourcesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all the S3 resources associated with Amazon Macie Classic. If memberAccountId isn't specified, the action lists the S3 resources associated with Macie Classic for the current Macie Classic administrator account. If memberAccountId is specified, the action lists the S3 resources associated with Macie Classic for the specified member account. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=MacieService.ListS3Resources"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -277,22 +304,22 @@ class SDK:
 
     
     def update_s3_resources(self, request: operations.UpdateS3ResourcesRequest) -> operations.UpdateS3ResourcesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the classification types for the specified S3 resources. If memberAccountId isn't specified, the action updates the classification types of the S3 resources associated with Amazon Macie Classic for the current Macie Classic administrator account. If memberAccountId is specified, the action updates the classification types of the S3 resources associated with Macie Classic for the specified member account. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=MacieService.UpdateS3Resources"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

@@ -9,6 +9,8 @@ const (
 	GoogleCloudContactcenterinsightsV1AnswerFeedbackCorrectnessLevelEnumFullyCorrect                GoogleCloudContactcenterinsightsV1AnswerFeedbackCorrectnessLevelEnum = "FULLY_CORRECT"
 )
 
+// GoogleCloudContactcenterinsightsV1AnswerFeedback
+// The feedback that the customer has about a certain answer in the conversation.
 type GoogleCloudContactcenterinsightsV1AnswerFeedback struct {
 	Clicked          *bool                                                                 `json:"clicked,omitempty"`
 	CorrectnessLevel *GoogleCloudContactcenterinsightsV1AnswerFeedbackCorrectnessLevelEnum `json:"correctnessLevel,omitempty"`

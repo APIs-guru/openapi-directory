@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BillingGroupProperties
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The properties of a billing group.
 **/
 export class BillingGroupProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billingGroupDescription" })
+  @SpeakeasyMetadata({ data: "json, name=billingGroupDescription" })
   billingGroupDescription?: string;
 }

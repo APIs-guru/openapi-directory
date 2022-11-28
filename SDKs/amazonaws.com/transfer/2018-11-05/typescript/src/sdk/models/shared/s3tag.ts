@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // S3Tag
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the key-value pair that are assigned to a file during the execution of a Tagging step.
 **/
 export class S3Tag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key: string;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value: string;
 }

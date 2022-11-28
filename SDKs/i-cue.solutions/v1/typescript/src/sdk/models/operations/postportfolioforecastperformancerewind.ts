@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostPortfolioForecastPerformanceRewindHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Token" })
   token?: string;
 }
 
 
 export class PostPortfolioForecastPerformanceRewindRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   forecastPerformanceRequest?: shared.ForecastPerformanceRequest;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   forecastPerformanceRequest1?: shared.ForecastPerformanceRequest;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   forecastPerformanceRequest2?: shared.ForecastPerformanceRequest;
 }
 
 
 export class PostPortfolioForecastPerformanceRewindRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PostPortfolioForecastPerformanceRewindHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PostPortfolioForecastPerformanceRewindRequests;
 }
 
 
 export class PostPortfolioForecastPerformanceRewindResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   rewindResponse?: shared.RewindResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

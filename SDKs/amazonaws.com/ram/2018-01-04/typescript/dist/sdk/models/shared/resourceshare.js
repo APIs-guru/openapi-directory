@@ -22,10 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceShareFeatureSetEnum } from "./resourcesharefeaturesetenum";
 import { ResourceShareStatusEnum } from "./resourcesharestatusenum";
+import { Tag } from "./tag";
 // ResourceShare
 /**
  * Describes a resource share.
@@ -36,43 +36,43 @@ var ResourceShare = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allowExternalPrincipals" }),
+        SpeakeasyMetadata({ data: "json, name=allowExternalPrincipals" }),
         __metadata("design:type", Boolean)
     ], ResourceShare.prototype, "allowExternalPrincipals", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], ResourceShare.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=featureSet" }),
+        SpeakeasyMetadata({ data: "json, name=featureSet" }),
         __metadata("design:type", String)
     ], ResourceShare.prototype, "featureSet", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedTime" }),
         __metadata("design:type", Date)
     ], ResourceShare.prototype, "lastUpdatedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ResourceShare.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=owningAccountId" }),
+        SpeakeasyMetadata({ data: "json, name=owningAccountId" }),
         __metadata("design:type", String)
     ], ResourceShare.prototype, "owningAccountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceShareArn" }),
+        SpeakeasyMetadata({ data: "json, name=resourceShareArn" }),
         __metadata("design:type", String)
     ], ResourceShare.prototype, "resourceShareArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], ResourceShare.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=statusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=statusMessage" }),
         __metadata("design:type", String)
     ], ResourceShare.prototype, "statusMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], ResourceShare.prototype, "tags", void 0);
     return ResourceShare;

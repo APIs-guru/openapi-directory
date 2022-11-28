@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SeverityLevel } from "./severitylevel";
+
 
 
 // DescribeSeverityLevelsResponse
@@ -8,6 +8,6 @@ import { SeverityLevel } from "./severitylevel";
  * The list of severity levels returned by the <a>DescribeSeverityLevels</a> operation.
 **/
 export class DescribeSeverityLevelsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=severityLevels", elemType: shared.SeverityLevel })
+  @SpeakeasyMetadata({ data: "json, name=severityLevels", elemType: SeverityLevel })
   severityLevels?: SeverityLevel[];
 }

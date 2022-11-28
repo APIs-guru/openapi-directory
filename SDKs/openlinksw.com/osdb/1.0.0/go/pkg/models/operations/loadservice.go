@@ -9,10 +9,6 @@ type LoadServiceRequestBody struct {
 	ServiceMoniker        *string `json:"service_moniker,omitempty"`
 }
 
-type LoadServiceRequest struct {
-	Request *LoadServiceRequestBody `request:"mediaType=application/json"`
-}
-
 type LoadService200ApplicationJSONStatusEnum string
 
 const (
@@ -24,6 +20,10 @@ type LoadService200ApplicationJSON struct {
 	Method   string                                  `json:"method"`
 	Response string                                  `json:"response"`
 	Status   LoadService200ApplicationJSONStatusEnum `json:"status"`
+}
+
+type LoadServiceRequest struct {
+	Request *LoadServiceRequestBody `request:"mediaType=application/json"`
 }
 
 type LoadServiceResponse struct {

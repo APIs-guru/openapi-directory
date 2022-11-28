@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LiveStreamContentDetails
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Detailed settings of a stream.
 **/
 export class LiveStreamContentDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=closedCaptionsIngestionUrl" })
+  @SpeakeasyMetadata({ data: "json, name=closedCaptionsIngestionUrl" })
   closedCaptionsIngestionUrl?: string;
 
-  @Metadata({ data: "json, name=isReusable" })
+  @SpeakeasyMetadata({ data: "json, name=isReusable" })
   isReusable?: boolean;
 }

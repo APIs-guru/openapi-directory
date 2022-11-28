@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { StackTrace } from "./stacktrace";
 /**
  * Error describes why the execution was abnormally terminated.

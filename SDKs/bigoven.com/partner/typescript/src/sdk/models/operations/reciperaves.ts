@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RecipeRavesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pg" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pg" })
   pg?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rpp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rpp" })
   rpp?: number;
 }
 
 
 export class RecipeRavesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RecipeRavesQueryParams;
 }
 
 
 export class RecipeRavesResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.BigOvenModelRecipeInfoReviewTuple2 })
+  @SpeakeasyMetadata({ elemType: shared.BigOvenModelRecipeInfoReviewTuple2 })
   bigOvenModelRecipeInfoReviewTuple2s?: shared.BigOvenModelRecipeInfoReviewTuple2[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

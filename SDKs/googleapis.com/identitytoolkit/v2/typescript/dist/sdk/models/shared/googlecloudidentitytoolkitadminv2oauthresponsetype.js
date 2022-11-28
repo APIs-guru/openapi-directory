@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudIdentitytoolkitAdminV2OAuthResponseType
 /**
  * The response type to request for in the OAuth authorization flow. You can set either `id_token` or `code` to true, but not both. Setting both types to be simultaneously true (`{code: true, id_token: true}`) is not yet supported. See https://openid.net/specs/openid-connect-core-1_0.html#Authentication for a mapping of response type to OAuth 2.0 flow.
@@ -33,15 +33,15 @@ var GoogleCloudIdentitytoolkitAdminV2OAuthResponseType = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=code" }),
+        SpeakeasyMetadata({ data: "json, name=code" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudIdentitytoolkitAdminV2OAuthResponseType.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=idToken" }),
+        SpeakeasyMetadata({ data: "json, name=idToken" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudIdentitytoolkitAdminV2OAuthResponseType.prototype, "idToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=token" }),
+        SpeakeasyMetadata({ data: "json, name=token" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudIdentitytoolkitAdminV2OAuthResponseType.prototype, "token", void 0);
     return GoogleCloudIdentitytoolkitAdminV2OAuthResponseType;

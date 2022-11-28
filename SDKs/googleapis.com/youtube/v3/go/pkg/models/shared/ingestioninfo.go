@@ -1,5 +1,7 @@
 package shared
 
+// IngestionInfo
+// Describes information necessary for ingesting an RTMP, HTTP, or SRT stream.
 type IngestionInfo struct {
 	BackupIngestionAddress      *string `json:"backupIngestionAddress,omitempty"`
 	IngestionAddress            *string `json:"ingestionAddress,omitempty"`

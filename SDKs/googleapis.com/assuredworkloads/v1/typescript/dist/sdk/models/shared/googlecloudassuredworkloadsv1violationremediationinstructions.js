@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsConsole } from "./googlecloudassuredworkloadsv1violationremediationinstructionsconsole";
 import { GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsGcloud } from "./googlecloudassuredworkloadsv1violationremediationinstructionsgcloud";
 // GoogleCloudAssuredworkloadsV1ViolationRemediationInstructions
@@ -35,11 +35,11 @@ var GoogleCloudAssuredworkloadsV1ViolationRemediationInstructions = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=consoleInstructions" }),
+        SpeakeasyMetadata({ data: "json, name=consoleInstructions" }),
         __metadata("design:type", GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsConsole)
     ], GoogleCloudAssuredworkloadsV1ViolationRemediationInstructions.prototype, "consoleInstructions", void 0);
     __decorate([
-        Metadata({ data: "json, name=gcloudInstructions" }),
+        SpeakeasyMetadata({ data: "json, name=gcloudInstructions" }),
         __metadata("design:type", GoogleCloudAssuredworkloadsV1ViolationRemediationInstructionsGcloud)
     ], GoogleCloudAssuredworkloadsV1ViolationRemediationInstructions.prototype, "gcloudInstructions", void 0);
     return GoogleCloudAssuredworkloadsV1ViolationRemediationInstructions;

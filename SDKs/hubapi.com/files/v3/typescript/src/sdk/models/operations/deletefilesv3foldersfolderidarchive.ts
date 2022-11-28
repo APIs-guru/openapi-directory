@@ -1,50 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteFilesV3FoldersFolderIdArchivePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=folderId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=folderId" })
   folderId: string;
 }
 
 
-export class DeleteFilesV3FoldersFolderIdArchiveSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  hapikey: shared.SchemeHapikey;
-}
-
-
-export class DeleteFilesV3FoldersFolderIdArchiveSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Legacy: shared.SchemeOauth2Legacy;
-}
-
-
 export class DeleteFilesV3FoldersFolderIdArchiveSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: DeleteFilesV3FoldersFolderIdArchiveSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  hapikey?: shared.SchemeHapikey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: DeleteFilesV3FoldersFolderIdArchiveSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
+
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Legacy?: shared.SchemeOauth2Legacy;
 }
 
 
 export class DeleteFilesV3FoldersFolderIdArchiveRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteFilesV3FoldersFolderIdArchivePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DeleteFilesV3FoldersFolderIdArchiveSecurity;
 }
 
 
 export class DeleteFilesV3FoldersFolderIdArchiveResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

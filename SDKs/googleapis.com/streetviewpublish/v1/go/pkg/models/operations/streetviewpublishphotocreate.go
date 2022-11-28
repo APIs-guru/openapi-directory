@@ -25,7 +25,7 @@ type StreetviewpublishPhotoCreateSecurity struct {
 
 type StreetviewpublishPhotoCreateRequest struct {
 	QueryParams StreetviewpublishPhotoCreateQueryParams
-	Request     *shared.Photo `request:"mediaType=application/json"`
+	Request     *shared.PhotoInput `request:"mediaType=application/json"`
 	Security    StreetviewpublishPhotoCreateSecurity
 }
 

@@ -1,5 +1,8 @@
 package shared
 
+// SimplifiedAlbumObject
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedalbumobject - Find more info on the official Spotify Web API Reference
 type SimplifiedAlbumObject struct {
 	AlbumGroup           *string                  `json:"album_group,omitempty"`
 	AlbumType            *string                  `json:"album_type,omitempty"`

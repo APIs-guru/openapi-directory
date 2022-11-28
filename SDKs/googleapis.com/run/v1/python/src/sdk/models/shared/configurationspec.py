@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import revisiontemplate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ConfigurationSpec:
-    template: Optional[revisiontemplate.RevisionTemplate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template' }})
+    r"""ConfigurationSpec
+    ConfigurationSpec holds the desired state of the Configuration (from the client).
+    """
+    
+    template: Optional[RevisionTemplate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('template') }})
     

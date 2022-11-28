@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RouterApplianceInstance
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * RouterAppliance represents a Router appliance which is specified by a VM URI and a NIC address.
 **/
 export class RouterApplianceInstance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ipAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=networkInterface" })
+  @SpeakeasyMetadata({ data: "json, name=networkInterface" })
   networkInterface?: string;
 
-  @Metadata({ data: "json, name=virtualMachine" })
+  @SpeakeasyMetadata({ data: "json, name=virtualMachine" })
   virtualMachine?: string;
 }

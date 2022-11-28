@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // EntitlementValue
 /**
  * The EntitlementValue represents the amount of capacity that the customer is entitled to for the product.
@@ -33,19 +33,19 @@ var EntitlementValue = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BooleanValue" }),
+        SpeakeasyMetadata({ data: "json, name=BooleanValue" }),
         __metadata("design:type", Boolean)
     ], EntitlementValue.prototype, "booleanValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=DoubleValue" }),
+        SpeakeasyMetadata({ data: "json, name=DoubleValue" }),
         __metadata("design:type", Number)
     ], EntitlementValue.prototype, "doubleValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=IntegerValue" }),
+        SpeakeasyMetadata({ data: "json, name=IntegerValue" }),
         __metadata("design:type", Number)
     ], EntitlementValue.prototype, "integerValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=StringValue" }),
+        SpeakeasyMetadata({ data: "json, name=StringValue" }),
         __metadata("design:type", String)
     ], EntitlementValue.prototype, "stringValue", void 0);
     return EntitlementValue;

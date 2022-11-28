@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2beta1Suggestion
+// Represents a suggestion for a human agent.
 type GoogleCloudDialogflowV2beta1Suggestion struct {
 	Articles      []GoogleCloudDialogflowV2beta1SuggestionArticle   `json:"articles,omitempty"`
 	CreateTime    *string                                           `json:"createTime,omitempty"`

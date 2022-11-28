@@ -280,6 +280,8 @@ type MinimalRepositoryRepository struct {
 	WatchersCount       int64                                          `json:"watchers_count"`
 }
 
+// MinimalRepository
+// Minimal Repository
 type MinimalRepository struct {
 	ArchiveURL          string                        `json:"archive_url"`
 	Archived            *bool                         `json:"archived,omitempty"`

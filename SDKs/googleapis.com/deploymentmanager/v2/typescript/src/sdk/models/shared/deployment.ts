@@ -1,45 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentLabelEntry } from "./deploymentlabelentry";
 import { Operation } from "./operation";
 import { TargetConfiguration } from "./targetconfiguration";
 import { DeploymentUpdate } from "./deploymentupdate";
 
 
+
 export class Deployment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=fingerprint" })
   fingerprint?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=insertTime" })
+  @SpeakeasyMetadata({ data: "json, name=insertTime" })
   insertTime?: string;
 
-  @Metadata({ data: "json, name=labels", elemType: shared.DeploymentLabelEntry })
+  @SpeakeasyMetadata({ data: "json, name=labels", elemType: DeploymentLabelEntry })
   labels?: DeploymentLabelEntry[];
 
-  @Metadata({ data: "json, name=manifest" })
+  @SpeakeasyMetadata({ data: "json, name=manifest" })
   manifest?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=operation" })
+  @SpeakeasyMetadata({ data: "json, name=operation" })
   operation?: Operation;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target?: TargetConfiguration;
 
-  @Metadata({ data: "json, name=update" })
+  @SpeakeasyMetadata({ data: "json, name=update" })
   update?: DeploymentUpdate;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

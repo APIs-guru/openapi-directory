@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Listing } from "./listing";
 
 
+
 export class ListingRespPaginated extends SpeakeasyBase {
-  @Metadata({ data: "json, name=listings", elemType: shared.Listing })
+  @SpeakeasyMetadata({ data: "json, name=listings", elemType: Listing })
   listings: Listing[];
 
-  @Metadata({ data: "json, name=maxPages" })
+  @SpeakeasyMetadata({ data: "json, name=maxPages" })
   maxPages: number;
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page: number;
 }

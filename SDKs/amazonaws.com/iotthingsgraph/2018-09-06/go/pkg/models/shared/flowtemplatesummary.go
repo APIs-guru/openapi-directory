@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// FlowTemplateSummary
+// An object that contains summary information about a workflow.
 type FlowTemplateSummary struct {
 	Arn            *string    `json:"arn,omitempty"`
 	CreatedAt      *time.Time `json:"createdAt,omitempty"`

@@ -9,6 +9,8 @@ const (
 	SharedDriveFileShareModeEnumStudentCopy      SharedDriveFileShareModeEnum = "STUDENT_COPY"
 )
 
+// SharedDriveFile
+// Drive file that is used as material for course work.
 type SharedDriveFile struct {
 	DriveFile *DriveFile                    `json:"driveFile,omitempty"`
 	ShareMode *SharedDriveFileShareModeEnum `json:"shareMode,omitempty"`

@@ -10,6 +10,8 @@ const (
 	RunReportRequestMetricAggregationsEnumCount                        RunReportRequestMetricAggregationsEnum = "COUNT"
 )
 
+// RunReportRequest
+// The request to generate a report.
 type RunReportRequest struct {
 	CohortSpec          *CohortSpec                              `json:"cohortSpec,omitempty"`
 	CurrencyCode        *string                                  `json:"currencyCode,omitempty"`

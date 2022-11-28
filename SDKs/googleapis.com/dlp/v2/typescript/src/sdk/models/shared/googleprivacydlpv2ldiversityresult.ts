@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2LDiversityHistogramBucket } from "./googleprivacydlpv2ldiversityhistogrambucket";
+
 
 
 // GooglePrivacyDlpV2LDiversityResult
@@ -8,6 +8,6 @@ import { GooglePrivacyDlpV2LDiversityHistogramBucket } from "./googleprivacydlpv
  * Result of the l-diversity computation.
 **/
 export class GooglePrivacyDlpV2LDiversityResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sensitiveValueFrequencyHistogramBuckets", elemType: shared.GooglePrivacyDlpV2LDiversityHistogramBucket })
+  @SpeakeasyMetadata({ data: "json, name=sensitiveValueFrequencyHistogramBuckets", elemType: GooglePrivacyDlpV2LDiversityHistogramBucket })
   sensitiveValueFrequencyHistogramBuckets?: GooglePrivacyDlpV2LDiversityHistogramBucket[];
 }

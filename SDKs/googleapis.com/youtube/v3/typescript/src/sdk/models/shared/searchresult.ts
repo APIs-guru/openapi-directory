@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceId } from "./resourceid";
 import { SearchResultSnippet } from "./searchresultsnippet";
+
 
 
 // SearchResult
@@ -8,15 +9,15 @@ import { SearchResultSnippet } from "./searchresultsnippet";
  * A search result contains information about a YouTube video, channel, or playlist that matches the search parameters specified in an API request. While a search result points to a uniquely identifiable resource, like a video, it does not have its own persistent data.
 **/
 export class SearchResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: ResourceId;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=snippet" })
+  @SpeakeasyMetadata({ data: "json, name=snippet" })
   snippet?: SearchResultSnippet;
 }

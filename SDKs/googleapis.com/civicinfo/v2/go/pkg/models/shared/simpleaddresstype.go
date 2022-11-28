@@ -1,5 +1,7 @@
 package shared
 
+// SimpleAddressType
+// A simple representation of an address.
 type SimpleAddressType struct {
 	City         *string `json:"city,omitempty"`
 	Line1        *string `json:"line1,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AccountQuota
 /**
  * Describes a quota for an Amazon Web Services account, for example the number of replication instances allowed.
@@ -33,15 +33,15 @@ var AccountQuota = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AccountQuotaName" }),
+        SpeakeasyMetadata({ data: "json, name=AccountQuotaName" }),
         __metadata("design:type", String)
     ], AccountQuota.prototype, "accountQuotaName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Max" }),
+        SpeakeasyMetadata({ data: "json, name=Max" }),
         __metadata("design:type", Number)
     ], AccountQuota.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "json, name=Used" }),
+        SpeakeasyMetadata({ data: "json, name=Used" }),
         __metadata("design:type", Number)
     ], AccountQuota.prototype, "used", void 0);
     return AccountQuota;

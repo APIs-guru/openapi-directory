@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ObRisk1DeliveryAddress
@@ -6,34 +7,34 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information that locates and identifies a specific address, as defined by postal services or in free format text.
 **/
 export class ObRisk1DeliveryAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AddressLine" })
+  @SpeakeasyMetadata({ data: "json, name=AddressLine" })
   addressLine?: string[];
 
-  @Metadata({ data: "json, name=BuildingNumber" })
+  @SpeakeasyMetadata({ data: "json, name=BuildingNumber" })
   buildingNumber?: string;
 
-  @Metadata({ data: "json, name=Country" })
+  @SpeakeasyMetadata({ data: "json, name=Country" })
   country: string;
 
-  @Metadata({ data: "json, name=CountrySubDivision" })
+  @SpeakeasyMetadata({ data: "json, name=CountrySubDivision" })
   countrySubDivision?: string;
 
-  @Metadata({ data: "json, name=PostCode" })
+  @SpeakeasyMetadata({ data: "json, name=PostCode" })
   postCode?: string;
 
-  @Metadata({ data: "json, name=StreetName" })
+  @SpeakeasyMetadata({ data: "json, name=StreetName" })
   streetName?: string;
 
-  @Metadata({ data: "json, name=TownName" })
+  @SpeakeasyMetadata({ data: "json, name=TownName" })
   townName: string;
 }
 
 export enum ObRisk1PaymentContextCodeEnum {
-    BillPayment = "BillPayment"
-,    EcommerceGoods = "EcommerceGoods"
-,    EcommerceServices = "EcommerceServices"
-,    Other = "Other"
-,    PartyToParty = "PartyToParty"
+    BillPayment = "BillPayment",
+    EcommerceGoods = "EcommerceGoods",
+    EcommerceServices = "EcommerceServices",
+    Other = "Other",
+    PartyToParty = "PartyToParty"
 }
 
 
@@ -42,15 +43,15 @@ export enum ObRisk1PaymentContextCodeEnum {
  * The Risk section is sent by the initiating party to the ASPSP. It is used to specify additional details for risk scoring for Payments.
 **/
 export class ObRisk1 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeliveryAddress" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryAddress" })
   deliveryAddress?: ObRisk1DeliveryAddress;
 
-  @Metadata({ data: "json, name=MerchantCategoryCode" })
+  @SpeakeasyMetadata({ data: "json, name=MerchantCategoryCode" })
   merchantCategoryCode?: string;
 
-  @Metadata({ data: "json, name=MerchantCustomerIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=MerchantCustomerIdentification" })
   merchantCustomerIdentification?: string;
 
-  @Metadata({ data: "json, name=PaymentContextCode" })
+  @SpeakeasyMetadata({ data: "json, name=PaymentContextCode" })
   paymentContextCode?: ObRisk1PaymentContextCodeEnum;
 }

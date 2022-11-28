@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CloudidentityDevicesDeviceUsersClientStatesListPathParams = /** @class */ (function (_super) {
     __extends(CloudidentityDevicesDeviceUsersClientStatesListPathParams, _super);
@@ -30,7 +30,7 @@ var CloudidentityDevicesDeviceUsersClientStatesListPathParams = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], CloudidentityDevicesDeviceUsersClientStatesListPathParams.prototype, "parent", void 0);
     return CloudidentityDevicesDeviceUsersClientStatesListPathParams;
@@ -42,63 +42,63 @@ var CloudidentityDevicesDeviceUsersClientStatesListQueryParams = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], CloudidentityDevicesDeviceUsersClientStatesListQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], CloudidentityDevicesDeviceUsersClientStatesListQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], CloudidentityDevicesDeviceUsersClientStatesListQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], CloudidentityDevicesDeviceUsersClientStatesListQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=customer" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=customer" }),
         __metadata("design:type", String)
     ], CloudidentityDevicesDeviceUsersClientStatesListQueryParams.prototype, "customer", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], CloudidentityDevicesDeviceUsersClientStatesListQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" }),
         __metadata("design:type", String)
     ], CloudidentityDevicesDeviceUsersClientStatesListQueryParams.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], CloudidentityDevicesDeviceUsersClientStatesListQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], CloudidentityDevicesDeviceUsersClientStatesListQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=orderBy" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=orderBy" }),
         __metadata("design:type", String)
     ], CloudidentityDevicesDeviceUsersClientStatesListQueryParams.prototype, "orderBy", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
         __metadata("design:type", String)
     ], CloudidentityDevicesDeviceUsersClientStatesListQueryParams.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], CloudidentityDevicesDeviceUsersClientStatesListQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], CloudidentityDevicesDeviceUsersClientStatesListQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], CloudidentityDevicesDeviceUsersClientStatesListQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], CloudidentityDevicesDeviceUsersClientStatesListQueryParams.prototype, "uploadProtocol", void 0);
     return CloudidentityDevicesDeviceUsersClientStatesListQueryParams;
@@ -110,11 +110,11 @@ var CloudidentityDevicesDeviceUsersClientStatesListSecurityOption1 = /** @class 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], CloudidentityDevicesDeviceUsersClientStatesListSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], CloudidentityDevicesDeviceUsersClientStatesListSecurityOption1.prototype, "oauth2c", void 0);
     return CloudidentityDevicesDeviceUsersClientStatesListSecurityOption1;
@@ -126,11 +126,11 @@ var CloudidentityDevicesDeviceUsersClientStatesListSecurityOption2 = /** @class 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], CloudidentityDevicesDeviceUsersClientStatesListSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], CloudidentityDevicesDeviceUsersClientStatesListSecurityOption2.prototype, "oauth2c", void 0);
     return CloudidentityDevicesDeviceUsersClientStatesListSecurityOption2;
@@ -142,11 +142,11 @@ var CloudidentityDevicesDeviceUsersClientStatesListSecurity = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", CloudidentityDevicesDeviceUsersClientStatesListSecurityOption1)
     ], CloudidentityDevicesDeviceUsersClientStatesListSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", CloudidentityDevicesDeviceUsersClientStatesListSecurityOption2)
     ], CloudidentityDevicesDeviceUsersClientStatesListSecurity.prototype, "option2", void 0);
     return CloudidentityDevicesDeviceUsersClientStatesListSecurity;
@@ -158,15 +158,15 @@ var CloudidentityDevicesDeviceUsersClientStatesListRequest = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CloudidentityDevicesDeviceUsersClientStatesListPathParams)
     ], CloudidentityDevicesDeviceUsersClientStatesListRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CloudidentityDevicesDeviceUsersClientStatesListQueryParams)
     ], CloudidentityDevicesDeviceUsersClientStatesListRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CloudidentityDevicesDeviceUsersClientStatesListSecurity)
     ], CloudidentityDevicesDeviceUsersClientStatesListRequest.prototype, "security", void 0);
     return CloudidentityDevicesDeviceUsersClientStatesListRequest;
@@ -178,15 +178,15 @@ var CloudidentityDevicesDeviceUsersClientStatesListResponse = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CloudidentityDevicesDeviceUsersClientStatesListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GoogleAppsCloudidentityDevicesV1ListClientStatesResponse)
     ], CloudidentityDevicesDeviceUsersClientStatesListResponse.prototype, "googleAppsCloudidentityDevicesV1ListClientStatesResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CloudidentityDevicesDeviceUsersClientStatesListResponse.prototype, "statusCode", void 0);
     return CloudidentityDevicesDeviceUsersClientStatesListResponse;

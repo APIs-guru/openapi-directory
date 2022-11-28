@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPassReportOuputQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DocumentId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DocumentId" })
   documentId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" })
   employerKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=IntermediaryId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=IntermediaryId" })
   intermediaryId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MessageFunctionCode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MessageFunctionCode" })
   messageFunctionCode: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PayScheduleKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PayScheduleKey" })
   payScheduleKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PaymentDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PaymentDate" })
   paymentDate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PensionKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PensionKey" })
   pensionKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TaxYear" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TaxYear" })
   taxYear: string;
 }
 
 
 export class GetPassReportOuputHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Version" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" })
   apiVersion: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class GetPassReportOuputRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPassReportOuputQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetPassReportOuputHeaders;
 }
 
 
 export class GetPassReportOuputResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPassReportOuput200ApplicationJsonBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

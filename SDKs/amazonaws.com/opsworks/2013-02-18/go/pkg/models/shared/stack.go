@@ -1,5 +1,7 @@
 package shared
 
+// Stack
+// Describes a stack.
 type Stack struct {
 	AgentVersion              *string                    `json:"AgentVersion,omitempty"`
 	Arn                       *string                    `json:"Arn,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetApiArticlesMediaTypeExtensionMediaTypeExtensionEnum {
     DotJson = ".json"
@@ -6,24 +7,24 @@ export enum GetApiArticlesMediaTypeExtensionMediaTypeExtensionEnum {
 
 
 export class GetApiArticlesMediaTypeExtensionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=mediaTypeExtension" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mediaTypeExtension" })
   mediaTypeExtension: GetApiArticlesMediaTypeExtensionMediaTypeExtensionEnum;
 }
 
 
 export class GetApiArticlesMediaTypeExtensionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetApiArticlesMediaTypeExtensionPathParams;
 }
 
 
 export class GetApiArticlesMediaTypeExtensionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

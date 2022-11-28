@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum IndexConfigTypeEnum {
-    IndexTypeUnspecified = "INDEX_TYPE_UNSPECIFIED"
-,    IndexTypeString = "INDEX_TYPE_STRING"
-,    IndexTypeInteger = "INDEX_TYPE_INTEGER"
+    IndexTypeUnspecified = "INDEX_TYPE_UNSPECIFIED",
+    IndexTypeString = "INDEX_TYPE_STRING",
+    IndexTypeInteger = "INDEX_TYPE_INTEGER"
 }
 
 
@@ -12,12 +13,25 @@ export enum IndexConfigTypeEnum {
  * Configuration for an indexed field.
 **/
 export class IndexConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=fieldPath" })
+  @SpeakeasyMetadata({ data: "json, name=fieldPath" })
   fieldPath?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: IndexConfigTypeEnum;
+}
+
+
+// IndexConfigInput
+/** 
+ * Configuration for an indexed field.
+**/
+export class IndexConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=fieldPath" })
+  fieldPath?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: IndexConfigTypeEnum;
 }

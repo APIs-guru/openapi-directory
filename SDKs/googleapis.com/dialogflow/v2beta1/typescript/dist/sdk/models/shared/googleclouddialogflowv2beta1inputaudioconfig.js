@@ -1,0 +1,96 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudDialogflowV2beta1SpeechContext } from "./googleclouddialogflowv2beta1speechcontext";
+export var GoogleCloudDialogflowV2beta1InputAudioConfigAudioEncodingEnum;
+(function (GoogleCloudDialogflowV2beta1InputAudioConfigAudioEncodingEnum) {
+    GoogleCloudDialogflowV2beta1InputAudioConfigAudioEncodingEnum["AudioEncodingUnspecified"] = "AUDIO_ENCODING_UNSPECIFIED";
+    GoogleCloudDialogflowV2beta1InputAudioConfigAudioEncodingEnum["AudioEncodingLinear16"] = "AUDIO_ENCODING_LINEAR_16";
+    GoogleCloudDialogflowV2beta1InputAudioConfigAudioEncodingEnum["AudioEncodingFlac"] = "AUDIO_ENCODING_FLAC";
+    GoogleCloudDialogflowV2beta1InputAudioConfigAudioEncodingEnum["AudioEncodingMulaw"] = "AUDIO_ENCODING_MULAW";
+    GoogleCloudDialogflowV2beta1InputAudioConfigAudioEncodingEnum["AudioEncodingAmr"] = "AUDIO_ENCODING_AMR";
+    GoogleCloudDialogflowV2beta1InputAudioConfigAudioEncodingEnum["AudioEncodingAmrWb"] = "AUDIO_ENCODING_AMR_WB";
+    GoogleCloudDialogflowV2beta1InputAudioConfigAudioEncodingEnum["AudioEncodingOggOpus"] = "AUDIO_ENCODING_OGG_OPUS";
+    GoogleCloudDialogflowV2beta1InputAudioConfigAudioEncodingEnum["AudioEncodingSpeexWithHeaderByte"] = "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE";
+})(GoogleCloudDialogflowV2beta1InputAudioConfigAudioEncodingEnum || (GoogleCloudDialogflowV2beta1InputAudioConfigAudioEncodingEnum = {}));
+export var GoogleCloudDialogflowV2beta1InputAudioConfigModelVariantEnum;
+(function (GoogleCloudDialogflowV2beta1InputAudioConfigModelVariantEnum) {
+    GoogleCloudDialogflowV2beta1InputAudioConfigModelVariantEnum["SpeechModelVariantUnspecified"] = "SPEECH_MODEL_VARIANT_UNSPECIFIED";
+    GoogleCloudDialogflowV2beta1InputAudioConfigModelVariantEnum["UseBestAvailable"] = "USE_BEST_AVAILABLE";
+    GoogleCloudDialogflowV2beta1InputAudioConfigModelVariantEnum["UseStandard"] = "USE_STANDARD";
+    GoogleCloudDialogflowV2beta1InputAudioConfigModelVariantEnum["UseEnhanced"] = "USE_ENHANCED";
+})(GoogleCloudDialogflowV2beta1InputAudioConfigModelVariantEnum || (GoogleCloudDialogflowV2beta1InputAudioConfigModelVariantEnum = {}));
+// GoogleCloudDialogflowV2beta1InputAudioConfig
+/**
+ * Instructs the speech recognizer on how to process the audio content.
+**/
+var GoogleCloudDialogflowV2beta1InputAudioConfig = /** @class */ (function (_super) {
+    __extends(GoogleCloudDialogflowV2beta1InputAudioConfig, _super);
+    function GoogleCloudDialogflowV2beta1InputAudioConfig() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=audioEncoding" }),
+        __metadata("design:type", String)
+    ], GoogleCloudDialogflowV2beta1InputAudioConfig.prototype, "audioEncoding", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=disableNoSpeechRecognizedEvent" }),
+        __metadata("design:type", Boolean)
+    ], GoogleCloudDialogflowV2beta1InputAudioConfig.prototype, "disableNoSpeechRecognizedEvent", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=enableWordInfo" }),
+        __metadata("design:type", Boolean)
+    ], GoogleCloudDialogflowV2beta1InputAudioConfig.prototype, "enableWordInfo", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=languageCode" }),
+        __metadata("design:type", String)
+    ], GoogleCloudDialogflowV2beta1InputAudioConfig.prototype, "languageCode", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=model" }),
+        __metadata("design:type", String)
+    ], GoogleCloudDialogflowV2beta1InputAudioConfig.prototype, "model", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=modelVariant" }),
+        __metadata("design:type", String)
+    ], GoogleCloudDialogflowV2beta1InputAudioConfig.prototype, "modelVariant", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=phraseHints" }),
+        __metadata("design:type", Array)
+    ], GoogleCloudDialogflowV2beta1InputAudioConfig.prototype, "phraseHints", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=sampleRateHertz" }),
+        __metadata("design:type", Number)
+    ], GoogleCloudDialogflowV2beta1InputAudioConfig.prototype, "sampleRateHertz", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=singleUtterance" }),
+        __metadata("design:type", Boolean)
+    ], GoogleCloudDialogflowV2beta1InputAudioConfig.prototype, "singleUtterance", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=speechContexts", elemType: GoogleCloudDialogflowV2beta1SpeechContext }),
+        __metadata("design:type", Array)
+    ], GoogleCloudDialogflowV2beta1InputAudioConfig.prototype, "speechContexts", void 0);
+    return GoogleCloudDialogflowV2beta1InputAudioConfig;
+}(SpeakeasyBase));
+export { GoogleCloudDialogflowV2beta1InputAudioConfig };

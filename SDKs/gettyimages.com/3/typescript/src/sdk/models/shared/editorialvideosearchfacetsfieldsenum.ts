@@ -1,8 +1,9 @@
 
 
+
 export enum EditorialVideoSearchFacetsFieldsEnum {
-    Artists = "artists"
-,    Events = "events"
-,    Locations = "locations"
-,    SpecificPeople = "specific_people"
+    Artists = "artists",
+    Events = "events",
+    Locations = "locations",
+    SpecificPeople = "specific_people"
 }

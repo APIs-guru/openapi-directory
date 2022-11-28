@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class MigrationsMapCommitAuthorPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=author_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=author_id" })
   authorId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class MigrationsMapCommitAuthorRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=remote_id" })
+  @SpeakeasyMetadata({ data: "json, name=remote_id" })
   remoteId?: string;
 }
 
 
 export class MigrationsMapCommitAuthorRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: MigrationsMapCommitAuthorPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: MigrationsMapCommitAuthorRequestBody;
 }
 
 
 export class MigrationsMapCommitAuthorResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   porterAuthor?: shared.PorterAuthor;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

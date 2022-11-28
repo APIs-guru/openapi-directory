@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteRepositoryOutput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the output of a delete repository operation.
 **/
 export class DeleteRepositoryOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=repositoryId" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryId" })
   repositoryId?: string;
 }

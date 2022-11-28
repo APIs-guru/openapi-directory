@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DependencyEdge } from "./dependencyedge";
 import { PartOfSpeech } from "./partofspeech";
 import { TextSpan } from "./textspan";
+
 
 
 // Token
@@ -9,15 +10,15 @@ import { TextSpan } from "./textspan";
  * Represents the smallest syntactic building block of the text.
 **/
 export class Token extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dependencyEdge" })
+  @SpeakeasyMetadata({ data: "json, name=dependencyEdge" })
   dependencyEdge?: DependencyEdge;
 
-  @Metadata({ data: "json, name=lemma" })
+  @SpeakeasyMetadata({ data: "json, name=lemma" })
   lemma?: string;
 
-  @Metadata({ data: "json, name=partOfSpeech" })
+  @SpeakeasyMetadata({ data: "json, name=partOfSpeech" })
   partOfSpeech?: PartOfSpeech;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: TextSpan;
 }

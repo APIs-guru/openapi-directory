@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import firstlastnamephonecodedout
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchFirstLastNamePhoneCodedOut:
-    personal_names_with_phone_numbers: Optional[List[firstlastnamephonecodedout.FirstLastNamePhoneCodedOut]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'personalNamesWithPhoneNumbers' }})
+    r"""BatchFirstLastNamePhoneCodedOut
+    Represents the output of inferring the LIKELY country and phone code of personal names+phones.
+    """
+    
+    personal_names_with_phone_numbers: Optional[List[FirstLastNamePhoneCodedOut]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('personalNamesWithPhoneNumbers') }})
     

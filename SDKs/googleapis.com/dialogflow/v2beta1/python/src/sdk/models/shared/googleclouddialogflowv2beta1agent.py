@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudDialogflowV2beta1AgentAPIVersionEnum(str, Enum):
     API_VERSION_UNSPECIFIED = "API_VERSION_UNSPECIFIED"
@@ -23,16 +25,20 @@ class GoogleCloudDialogflowV2beta1AgentTierEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowV2beta1Agent:
-    api_version: Optional[GoogleCloudDialogflowV2beta1AgentAPIVersionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apiVersion' }})
-    avatar_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatarUri' }})
-    classification_threshold: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'classificationThreshold' }})
-    default_language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultLanguageCode' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    enable_logging: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enableLogging' }})
-    match_mode: Optional[GoogleCloudDialogflowV2beta1AgentMatchModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'matchMode' }})
-    parent: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent' }})
-    supported_language_codes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'supportedLanguageCodes' }})
-    tier: Optional[GoogleCloudDialogflowV2beta1AgentTierEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tier' }})
-    time_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeZone' }})
+    r"""GoogleCloudDialogflowV2beta1Agent
+    A Dialogflow agent is a virtual agent that handles conversations with your end-users. It is a natural language understanding module that understands the nuances of human language. Dialogflow translates end-user text or audio during a conversation to structured data that your apps and services can understand. You design and build a Dialogflow agent to handle the types of conversations required for your system. For more information about agents, see the [Agent guide](https://cloud.google.com/dialogflow/docs/agents-overview). 
+    """
+    
+    api_version: Optional[GoogleCloudDialogflowV2beta1AgentAPIVersionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('apiVersion') }})
+    avatar_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('avatarUri') }})
+    classification_threshold: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('classificationThreshold') }})
+    default_language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultLanguageCode') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    enable_logging: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enableLogging') }})
+    match_mode: Optional[GoogleCloudDialogflowV2beta1AgentMatchModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('matchMode') }})
+    parent: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parent') }})
+    supported_language_codes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('supportedLanguageCodes') }})
+    tier: Optional[GoogleCloudDialogflowV2beta1AgentTierEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tier') }})
+    time_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeZone') }})
     

@@ -8,6 +8,8 @@ const (
 	OrganizationStateEnumDeleteRequested  OrganizationStateEnum = "DELETE_REQUESTED"
 )
 
+// Organization
+// The root node in the resource hierarchy to which a particular entity's (a company, for example) resources belong.
 type Organization struct {
 	CreateTime          *string                `json:"createTime,omitempty"`
 	DeleteTime          *string                `json:"deleteTime,omitempty"`

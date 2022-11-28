@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
-from . import contactlistdestination
-from . import suppressionlistdestination
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ImportDestination:
-    contact_list_destination: Optional[contactlistdestination.ContactListDestination] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContactListDestination' }})
-    suppression_list_destination: Optional[suppressionlistdestination.SuppressionListDestination] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SuppressionListDestination' }})
+    r"""ImportDestination
+    An object that contains details about the resource destination the import job is going to target.
+    """
+    
+    contact_list_destination: Optional[ContactListDestination] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ContactListDestination') }})
+    suppression_list_destination: Optional[SuppressionListDestination] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SuppressionListDestination') }})
     

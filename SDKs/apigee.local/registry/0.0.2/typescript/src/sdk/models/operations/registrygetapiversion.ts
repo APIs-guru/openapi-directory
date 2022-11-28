@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegistryGetApiVersionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=api" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=api" })
   api: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project" })
   project: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=version" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" })
   version: string;
 }
 
 
 export class RegistryGetApiVersionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RegistryGetApiVersionPathParams;
 }
 
 
 export class RegistryGetApiVersionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiVersion?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

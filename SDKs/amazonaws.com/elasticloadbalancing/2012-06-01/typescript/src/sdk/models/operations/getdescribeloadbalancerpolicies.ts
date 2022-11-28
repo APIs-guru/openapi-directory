@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetDescribeLoadBalancerPoliciesActionEnum {
     DescribeLoadBalancerPolicies = "DescribeLoadBalancerPolicies"
@@ -10,60 +11,60 @@ export enum GetDescribeLoadBalancerPoliciesVersionEnum {
 
 
 export class GetDescribeLoadBalancerPoliciesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetDescribeLoadBalancerPoliciesActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=LoadBalancerName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=LoadBalancerName" })
   loadBalancerName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PolicyNames" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PolicyNames" })
   policyNames?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetDescribeLoadBalancerPoliciesVersionEnum;
 }
 
 
 export class GetDescribeLoadBalancerPoliciesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetDescribeLoadBalancerPoliciesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDescribeLoadBalancerPoliciesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetDescribeLoadBalancerPoliciesHeaders;
 }
 
 
 export class GetDescribeLoadBalancerPoliciesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

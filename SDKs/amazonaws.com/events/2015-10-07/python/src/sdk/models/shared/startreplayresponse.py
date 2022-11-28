@@ -1,17 +1,19 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import replaystate_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StartReplayResponse:
-    replay_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReplayArn' }})
-    replay_start_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReplayStartTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    state: Optional[replaystate_enum.ReplayStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'State' }})
-    state_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StateReason' }})
+    replay_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReplayArn') }})
+    replay_start_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReplayStartTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    state: Optional[ReplayStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('State') }})
+    state_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StateReason') }})
     

@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetResourcesMediaIdPreviewJpgPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class GetResourcesMediaIdPreviewJpgRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetResourcesMediaIdPreviewJpgPathParams;
 }
 
 
 export class GetResourcesMediaIdPreviewJpgResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getResourcesMediaIdPreviewJpg200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

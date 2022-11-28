@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateClusterActionEnum(str, Enum):
     CREATE_CLUSTER = "CreateCluster"
@@ -10,8 +14,8 @@ class PostCreateClusterVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateClusterQueryParams:
-    action: PostCreateClusterActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateClusterVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateClusterActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateClusterVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateClusterHeaders:
 
 @dataclass
 class PostCreateClusterRequest:
-    query_params: PostCreateClusterQueryParams = field(default=None)
-    headers: PostCreateClusterHeaders = field(default=None)
+    headers: PostCreateClusterHeaders = field()
+    query_params: PostCreateClusterQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateClusterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

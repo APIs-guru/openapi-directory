@@ -10,12 +10,9 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import axios from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
 import * as operations from "./models/operations";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
-var Servers = [
+import * as utils from "../internal/utils";
+export var ServerList = [
     "https://api.ebay.com{basePath}",
 ];
 export function WithServerURL(serverURL, params) {
@@ -23,12 +20,12 @@ export function WithServerURL(serverURL, params) {
         if (params != null) {
             serverURL = utils.ReplaceParameters(serverURL, params);
         }
-        sdk.serverURL = serverURL;
+        sdk._serverURL = serverURL;
     };
 }
 export function WithClient(client) {
     return function (sdk) {
-        sdk.defaultClient = client;
+        sdk._defaultClient = client;
     };
 }
 var SDK = /** @class */ (function () {
@@ -38,50 +35,49 @@ var SDK = /** @class */ (function () {
             opts[_i] = arguments[_i];
         }
         var _this = this;
+        this._language = "typescript";
+        this._sdkVersion = "0.0.1";
+        this._genVersion = "internal";
         opts.forEach(function (o) { return o(_this); });
-        if (this.serverURL == "") {
-            this.serverURL = Servers[0];
+        if (this._serverURL == "") {
+            this._serverURL = ServerList[0];
         }
-        if (!this.defaultClient) {
-            this.defaultClient = axios.create({ baseURL: this.serverURL });
+        if (!this._defaultClient) {
+            this._defaultClient = axios.create({ baseURL: this._serverURL });
         }
-        if (!this.securityClient) {
-            if (this.security) {
-                this.securityClient = CreateSecurityClient(this.defaultClient, this.security);
-            }
-            else {
-                this.securityClient = this.defaultClient;
-            }
+        if (!this._securityClient) {
+            this._securityClient = this._defaultClient;
         }
     }
-    // GetRateLimits - This method retrieves the call limit and utilization data for an application. The data is retrieved for all RESTful APIs and resources. The response from getRateLimits includes a list of the applicable resources and the &quot;call limit&quot;, or quota, that is set for each resource. In addition to quota information, the response also includes the number of remaining calls available before the limit is reached, the time remaining before the quota resets, and the length of the &quot;time window&quot; to which the quota applies. By default, this method returns utilization data for all RESTful API resources. Use the api_name and api_context query parameters to filter the response to only the desired APIs. For more on call limits, see Compatible Application Check.
-    SDK.prototype.GetRateLimits = function (req, config) {
+    /**
+     * getRateLimits - This method retrieves the call limit and utilization data for an application. The data is retrieved for all RESTful APIs and resources. The response from getRateLimits includes a list of the applicable resources and the &quot;call limit&quot;, or quota, that is set for each resource. In addition to quota information, the response also includes the number of remaining calls available before the limit is reached, the time remaining before the quota resets, and the length of the &quot;time window&quot; to which the quota applies. By default, this method returns utilization data for all RESTful API resources. Use the api_name and api_context query parameters to filter the response to only the desired APIs. For more on call limits, see Compatible Application Check.
+    **/
+    SDK.prototype.getRateLimits = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetRateLimitsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/rate_limit/";
-        var client = CreateSecurityClient(this.defaultClient, req.security);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = utils.CreateSecurityClient(this._defaultClient, req.security);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.rateLimitsResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 204:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 204:
                     break;
-                case 500:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.getRateLimits500ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -90,34 +86,35 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // GetUserRateLimits - This method retrieves the call limit and utilization data for an application user. The call-limit data is returned for all RESTful APIs and resources that limit calls on a per-user basis. The response from getUserRateLimits includes a list of the applicable resources and the &quot;call limit&quot;, or quota, that is set for each resource. In addition to quota information, the response also includes the number of remaining calls available before the limit is reached, the time remaining before the quota resets, and the length of the &quot;time window&quot; to which the quota applies. By default, this method returns utilization data for all RESTful API resources that limit request access by user. Use the api_name and api_context query parameters to filter the response to only the desired APIs. For more on call limits, see Compatible Application Check.
-    SDK.prototype.GetUserRateLimits = function (req, config) {
+    /**
+     * getUserRateLimits - This method retrieves the call limit and utilization data for an application user. The call-limit data is returned for all RESTful APIs and resources that limit calls on a per-user basis. The response from getUserRateLimits includes a list of the applicable resources and the &quot;call limit&quot;, or quota, that is set for each resource. In addition to quota information, the response also includes the number of remaining calls available before the limit is reached, the time remaining before the quota resets, and the length of the &quot;time window&quot; to which the quota applies. By default, this method returns utilization data for all RESTful API resources that limit request access by user. Use the api_name and api_context query parameters to filter the response to only the desired APIs. For more on call limits, see Compatible Application Check.
+    **/
+    SDK.prototype.getUserRateLimits = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetUserRateLimitsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/user_rate_limit/";
-        var client = CreateSecurityClient(this.defaultClient, req.security);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = utils.CreateSecurityClient(this._defaultClient, req.security);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.rateLimitsResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 204:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 204:
                     break;
-                case 500:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.getUserRateLimits500ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;

@@ -1,5 +1,7 @@
 package shared
 
+// Container
+// A single application container. This specifies both the container to run, the command to run in the container and the arguments to supply to it. Note that additional arguments may be supplied by the system to the container at runtime.
 type Container struct {
 	Args                     []string              `json:"args,omitempty"`
 	Command                  []string              `json:"command,omitempty"`

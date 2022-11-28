@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://emr-containers.{region}.amazonaws.com",
 	"https://emr-containers.{region}.amazonaws.com",
 	"http://emr-containers.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/emr-containers/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CancelJobRun - Cancels a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.
 func (s *SDK) CancelJobRun(ctx context.Context, request operations.CancelJobRunRequest) (*operations.CancelJobRunResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualclusters/{virtualClusterId}/jobruns/{jobRunId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -71,7 +98,7 @@ func (s *SDK) CancelJobRun(ctx context.Context, request operations.CancelJobRunR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -121,8 +148,9 @@ func (s *SDK) CancelJobRun(ctx context.Context, request operations.CancelJobRunR
 	return res, nil
 }
 
+// CreateManagedEndpoint - Creates a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
 func (s *SDK) CreateManagedEndpoint(ctx context.Context, request operations.CreateManagedEndpointRequest) (*operations.CreateManagedEndpointResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualclusters/{virtualClusterId}/endpoints", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -142,7 +170,7 @@ func (s *SDK) CreateManagedEndpoint(ctx context.Context, request operations.Crea
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -202,8 +230,9 @@ func (s *SDK) CreateManagedEndpoint(ctx context.Context, request operations.Crea
 	return res, nil
 }
 
+// CreateVirtualCluster - Creates a virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.
 func (s *SDK) CreateVirtualCluster(ctx context.Context, request operations.CreateVirtualClusterRequest) (*operations.CreateVirtualClusterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/virtualclusters"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -223,7 +252,7 @@ func (s *SDK) CreateVirtualCluster(ctx context.Context, request operations.Creat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -283,8 +312,9 @@ func (s *SDK) CreateVirtualCluster(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// DeleteManagedEndpoint - Deletes a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
 func (s *SDK) DeleteManagedEndpoint(ctx context.Context, request operations.DeleteManagedEndpointRequest) (*operations.DeleteManagedEndpointResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualclusters/{virtualClusterId}/endpoints/{endpointId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -294,7 +324,7 @@ func (s *SDK) DeleteManagedEndpoint(ctx context.Context, request operations.Dele
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -344,8 +374,9 @@ func (s *SDK) DeleteManagedEndpoint(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// DeleteVirtualCluster - Deletes a virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.
 func (s *SDK) DeleteVirtualCluster(ctx context.Context, request operations.DeleteVirtualClusterRequest) (*operations.DeleteVirtualClusterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualclusters/{virtualClusterId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -355,7 +386,7 @@ func (s *SDK) DeleteVirtualCluster(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -405,8 +436,9 @@ func (s *SDK) DeleteVirtualCluster(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DescribeJobRun - Displays detailed information about a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.
 func (s *SDK) DescribeJobRun(ctx context.Context, request operations.DescribeJobRunRequest) (*operations.DescribeJobRunResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualclusters/{virtualClusterId}/jobruns/{jobRunId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -416,7 +448,7 @@ func (s *SDK) DescribeJobRun(ctx context.Context, request operations.DescribeJob
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -476,8 +508,9 @@ func (s *SDK) DescribeJobRun(ctx context.Context, request operations.DescribeJob
 	return res, nil
 }
 
+// DescribeManagedEndpoint - Displays detailed information about a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
 func (s *SDK) DescribeManagedEndpoint(ctx context.Context, request operations.DescribeManagedEndpointRequest) (*operations.DescribeManagedEndpointResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualclusters/{virtualClusterId}/endpoints/{endpointId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -487,7 +520,7 @@ func (s *SDK) DescribeManagedEndpoint(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -547,8 +580,9 @@ func (s *SDK) DescribeManagedEndpoint(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DescribeVirtualCluster - Displays detailed information about a specified virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.
 func (s *SDK) DescribeVirtualCluster(ctx context.Context, request operations.DescribeVirtualClusterRequest) (*operations.DescribeVirtualClusterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualclusters/{virtualClusterId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -558,7 +592,7 @@ func (s *SDK) DescribeVirtualCluster(ctx context.Context, request operations.Des
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -618,8 +652,9 @@ func (s *SDK) DescribeVirtualCluster(ctx context.Context, request operations.Des
 	return res, nil
 }
 
+// ListJobRuns - Lists job runs based on a set of parameters. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.
 func (s *SDK) ListJobRuns(ctx context.Context, request operations.ListJobRunsRequest) (*operations.ListJobRunsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualclusters/{virtualClusterId}/jobruns", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -631,7 +666,7 @@ func (s *SDK) ListJobRuns(ctx context.Context, request operations.ListJobRunsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -681,8 +716,9 @@ func (s *SDK) ListJobRuns(ctx context.Context, request operations.ListJobRunsReq
 	return res, nil
 }
 
+// ListManagedEndpoints - Lists managed endpoints based on a set of parameters. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
 func (s *SDK) ListManagedEndpoints(ctx context.Context, request operations.ListManagedEndpointsRequest) (*operations.ListManagedEndpointsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualclusters/{virtualClusterId}/endpoints", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -694,7 +730,7 @@ func (s *SDK) ListManagedEndpoints(ctx context.Context, request operations.ListM
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -744,8 +780,9 @@ func (s *SDK) ListManagedEndpoints(ctx context.Context, request operations.ListM
 	return res, nil
 }
 
+// ListTagsForResource - Lists the tags assigned to the resources.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -755,7 +792,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -815,8 +852,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// ListVirtualClusters - Lists information about the specified virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.
 func (s *SDK) ListVirtualClusters(ctx context.Context, request operations.ListVirtualClustersRequest) (*operations.ListVirtualClustersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/virtualclusters"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -828,7 +866,7 @@ func (s *SDK) ListVirtualClusters(ctx context.Context, request operations.ListVi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -878,8 +916,9 @@ func (s *SDK) ListVirtualClusters(ctx context.Context, request operations.ListVi
 	return res, nil
 }
 
+// StartJobRun - Starts a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.
 func (s *SDK) StartJobRun(ctx context.Context, request operations.StartJobRunRequest) (*operations.StartJobRunResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/virtualclusters/{virtualClusterId}/jobruns", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -899,7 +938,7 @@ func (s *SDK) StartJobRun(ctx context.Context, request operations.StartJobRunReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -959,8 +998,9 @@ func (s *SDK) StartJobRun(ctx context.Context, request operations.StartJobRunReq
 	return res, nil
 }
 
+// TagResource - Assigns tags to resources. A tag is a label that you assign to an AWS resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your AWS resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you've assigned to it. For example, you can define a set of tags for your Amazon EMR on EKS clusters to help you track each cluster's owner and stack level. We recommend that you devise a consistent set of tag keys for each resource type. You can then search and filter the resources based on the tags that you add.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -980,7 +1020,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1040,8 +1080,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Removes tags from resources.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceArn}#tagKeys", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1053,7 +1094,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

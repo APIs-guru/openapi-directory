@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteSubsitePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=domainName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=domainName" })
   domainName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=siteName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=siteName" })
   siteName: string;
 }
 
 
 export class DeleteSubsiteQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=domain_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=domain_name" })
   domainName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=site_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=site_name" })
   siteName: string;
 }
 
 
 export class DeleteSubsiteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteSubsitePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DeleteSubsiteQueryParams;
 }
 
 
 export class DeleteSubsiteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

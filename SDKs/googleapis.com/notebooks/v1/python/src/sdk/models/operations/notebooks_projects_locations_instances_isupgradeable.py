@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class NotebooksProjectsLocationsInstancesIsUpgradeablePathParams:
-    notebook_instance: str = field(default=None, metadata={'path_param': { 'field_name': 'notebookInstance', 'style': 'simple', 'explode': False }})
+    notebook_instance: str = field(metadata={'path_param': { 'field_name': 'notebookInstance', 'style': 'simple', 'explode': False }})
     
 class NotebooksProjectsLocationsInstancesIsUpgradeableTypeEnum(str, Enum):
     UPGRADE_TYPE_UNSPECIFIED = "UPGRADE_TYPE_UNSPECIFIED"
@@ -33,20 +34,20 @@ class NotebooksProjectsLocationsInstancesIsUpgradeableQueryParams:
 
 @dataclass
 class NotebooksProjectsLocationsInstancesIsUpgradeableSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class NotebooksProjectsLocationsInstancesIsUpgradeableRequest:
-    path_params: NotebooksProjectsLocationsInstancesIsUpgradeablePathParams = field(default=None)
-    query_params: NotebooksProjectsLocationsInstancesIsUpgradeableQueryParams = field(default=None)
-    security: NotebooksProjectsLocationsInstancesIsUpgradeableSecurity = field(default=None)
+    path_params: NotebooksProjectsLocationsInstancesIsUpgradeablePathParams = field()
+    query_params: NotebooksProjectsLocationsInstancesIsUpgradeableQueryParams = field()
+    security: NotebooksProjectsLocationsInstancesIsUpgradeableSecurity = field()
     
 
 @dataclass
 class NotebooksProjectsLocationsInstancesIsUpgradeableResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     is_instance_upgradeable_response: Optional[shared.IsInstanceUpgradeableResponse] = field(default=None)
-    status_code: int = field(default=None)
     

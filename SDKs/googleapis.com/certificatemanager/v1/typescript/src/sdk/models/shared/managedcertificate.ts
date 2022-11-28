@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthorizationAttemptInfo } from "./authorizationattemptinfo";
 import { ProvisioningIssue } from "./provisioningissue";
 
+
 export enum ManagedCertificateStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Provisioning = "PROVISIONING"
-,    Failed = "FAILED"
-,    Active = "ACTIVE"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Provisioning = "PROVISIONING",
+    Failed = "FAILED",
+    Active = "ACTIVE"
 }
 
 
@@ -16,21 +16,37 @@ export enum ManagedCertificateStateEnum {
  * Configuration and state of a Managed Certificate. Certificate Manager provisions and renews Managed Certificates automatically, for as long as it's authorized to do so.
 **/
 export class ManagedCertificate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizationAttemptInfo", elemType: shared.AuthorizationAttemptInfo })
+  @SpeakeasyMetadata({ data: "json, name=authorizationAttemptInfo", elemType: AuthorizationAttemptInfo })
   authorizationAttemptInfo?: AuthorizationAttemptInfo[];
 
-  @Metadata({ data: "json, name=dnsAuthorizations" })
+  @SpeakeasyMetadata({ data: "json, name=dnsAuthorizations" })
   dnsAuthorizations?: string[];
 
-  @Metadata({ data: "json, name=domains" })
+  @SpeakeasyMetadata({ data: "json, name=domains" })
   domains?: string[];
 
-  @Metadata({ data: "json, name=issuanceConfig" })
+  @SpeakeasyMetadata({ data: "json, name=issuanceConfig" })
   issuanceConfig?: string;
 
-  @Metadata({ data: "json, name=provisioningIssue" })
+  @SpeakeasyMetadata({ data: "json, name=provisioningIssue" })
   provisioningIssue?: ProvisioningIssue;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ManagedCertificateStateEnum;
+}
+
+
+// ManagedCertificateInput
+/** 
+ * Configuration and state of a Managed Certificate. Certificate Manager provisions and renews Managed Certificates automatically, for as long as it's authorized to do so.
+**/
+export class ManagedCertificateInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=dnsAuthorizations" })
+  dnsAuthorizations?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=domains" })
+  domains?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=issuanceConfig" })
+  issuanceConfig?: string;
 }

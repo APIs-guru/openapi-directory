@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var FilterFileDataStoppingsPathParams = /** @class */ (function (_super) {
     __extends(FilterFileDataStoppingsPathParams, _super);
     function FilterFileDataStoppingsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=type" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=type" }),
         __metadata("design:type", String)
     ], FilterFileDataStoppingsPathParams.prototype, "type", void 0);
     return FilterFileDataStoppingsPathParams;
@@ -41,11 +41,11 @@ var FilterFileDataStoppingsRequestBodyFile = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, content=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, content=true" }),
         __metadata("design:type", Uint8Array)
     ], FilterFileDataStoppingsRequestBodyFile.prototype, "content", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=file" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=file" }),
         __metadata("design:type", String)
     ], FilterFileDataStoppingsRequestBodyFile.prototype, "file", void 0);
     return FilterFileDataStoppingsRequestBodyFile;
@@ -57,7 +57,7 @@ var FilterFileDataStoppingsRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, file=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, file=true" }),
         __metadata("design:type", FilterFileDataStoppingsRequestBodyFile)
     ], FilterFileDataStoppingsRequestBody.prototype, "file", void 0);
     return FilterFileDataStoppingsRequestBody;
@@ -69,11 +69,11 @@ var FilterFileDataStoppingsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FilterFileDataStoppingsPathParams)
     ], FilterFileDataStoppingsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", FilterFileDataStoppingsRequestBody)
     ], FilterFileDataStoppingsRequest.prototype, "request", void 0);
     return FilterFileDataStoppingsRequest;
@@ -85,15 +85,15 @@ var FilterFileDataStoppingsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FilterFileDataStoppingsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], FilterFileDataStoppingsResponse.prototype, "exudeResponseBean", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FilterFileDataStoppingsResponse.prototype, "statusCode", void 0);
     return FilterFileDataStoppingsResponse;

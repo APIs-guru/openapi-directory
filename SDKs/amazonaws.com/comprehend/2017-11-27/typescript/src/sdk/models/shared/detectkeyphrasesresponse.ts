@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyPhrase } from "./keyphrase";
 
 
+
 export class DetectKeyPhrasesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=KeyPhrases", elemType: shared.KeyPhrase })
+  @SpeakeasyMetadata({ data: "json, name=KeyPhrases", elemType: KeyPhrase })
   keyPhrases?: KeyPhrase[];
 }

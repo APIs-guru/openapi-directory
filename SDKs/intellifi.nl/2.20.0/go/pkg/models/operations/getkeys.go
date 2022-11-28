@@ -33,11 +33,6 @@ type GetKeysSecurity struct {
 	CookieSid shared.SchemeCookieSid `security:"scheme,type=apiKey,subtype=cookie"`
 }
 
-type GetKeysRequest struct {
-	QueryParams GetKeysQueryParams
-	Security    GetKeysSecurity
-}
-
 type GetKeys200ApplicationJSON struct {
 	Count           *int64       `json:"count,omitempty"`
 	CountCurrent    *int64       `json:"count_current,omitempty"`
@@ -46,6 +41,11 @@ type GetKeys200ApplicationJSON struct {
 	QueryDurationMs *int64       `json:"query_duration_ms,omitempty"`
 	Results         []shared.Key `json:"results,omitempty"`
 	URL             *string      `json:"url,omitempty"`
+}
+
+type GetKeysRequest struct {
+	QueryParams GetKeysQueryParams
+	Security    GetKeysSecurity
 }
 
 type GetKeysResponse struct {

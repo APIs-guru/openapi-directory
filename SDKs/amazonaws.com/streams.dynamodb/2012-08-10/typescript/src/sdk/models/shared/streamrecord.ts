@@ -1,9 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { AttributeValue } from "./attributevalue";
-import { AttributeValue } from "./attributevalue";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeValue } from "./attributevalue";
 import { StreamViewTypeEnum } from "./streamviewtypeenum";
+
 
 
 // StreamRecord
@@ -11,24 +9,24 @@ import { StreamViewTypeEnum } from "./streamviewtypeenum";
  * A description of a single data modification that was performed on an item in a DynamoDB table.
 **/
 export class StreamRecord extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApproximateCreationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=ApproximateCreationDateTime" })
   approximateCreationDateTime?: Date;
 
-  @Metadata({ data: "json, name=Keys", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=Keys", elemType: AttributeValue })
   keys?: Map<string, AttributeValue>;
 
-  @Metadata({ data: "json, name=NewImage", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=NewImage", elemType: AttributeValue })
   newImage?: Map<string, AttributeValue>;
 
-  @Metadata({ data: "json, name=OldImage", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=OldImage", elemType: AttributeValue })
   oldImage?: Map<string, AttributeValue>;
 
-  @Metadata({ data: "json, name=SequenceNumber" })
+  @SpeakeasyMetadata({ data: "json, name=SequenceNumber" })
   sequenceNumber?: string;
 
-  @Metadata({ data: "json, name=SizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=SizeBytes" })
   sizeBytes?: number;
 
-  @Metadata({ data: "json, name=StreamViewType" })
+  @SpeakeasyMetadata({ data: "json, name=StreamViewType" })
   streamViewType?: StreamViewTypeEnum;
 }

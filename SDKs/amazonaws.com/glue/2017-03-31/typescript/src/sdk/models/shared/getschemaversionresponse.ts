@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataFormatEnum } from "./dataformatenum";
 import { SchemaVersionStatusEnum } from "./schemaversionstatusenum";
 
 
+
 export class GetSchemaVersionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedTime" })
   createdTime?: string;
 
-  @Metadata({ data: "json, name=DataFormat" })
+  @SpeakeasyMetadata({ data: "json, name=DataFormat" })
   dataFormat?: DataFormatEnum;
 
-  @Metadata({ data: "json, name=SchemaArn" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaArn" })
   schemaArn?: string;
 
-  @Metadata({ data: "json, name=SchemaDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaDefinition" })
   schemaDefinition?: string;
 
-  @Metadata({ data: "json, name=SchemaVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaVersionId" })
   schemaVersionId?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: SchemaVersionStatusEnum;
 
-  @Metadata({ data: "json, name=VersionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=VersionNumber" })
   versionNumber?: number;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Operation } from "./operation";
 /**
  * The response message for Operations.ListOperations.

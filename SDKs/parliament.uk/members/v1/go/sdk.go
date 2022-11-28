@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://parliament.uk",
 }
 
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -33,27 +37,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetAPILocationBrowseLocationTypeLocationName - Returns a list of locations, both parent and child
 func (s *SDK) GetAPILocationBrowseLocationTypeLocationName(ctx context.Context, request operations.GetAPILocationBrowseLocationTypeLocationNameRequest) (*operations.GetAPILocationBrowseLocationTypeLocationNameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Location/Browse/{locationType}/{locationName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -61,7 +83,7 @@ func (s *SDK) GetAPILocationBrowseLocationTypeLocationName(ctx context.Context, 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -107,8 +129,9 @@ func (s *SDK) GetAPILocationBrowseLocationTypeLocationName(ctx context.Context, 
 	return res, nil
 }
 
+// GetAPILocationConstituencySearch - Returns a list of constituencies
 func (s *SDK) GetAPILocationConstituencySearch(ctx context.Context, request operations.GetAPILocationConstituencySearchRequest) (*operations.GetAPILocationConstituencySearchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Location/Constituency/Search"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -118,7 +141,7 @@ func (s *SDK) GetAPILocationConstituencySearch(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -163,8 +186,9 @@ func (s *SDK) GetAPILocationConstituencySearch(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetAPILocationConstituencyID - Returns a constituency by ID
 func (s *SDK) GetAPILocationConstituencyID(ctx context.Context, request operations.GetAPILocationConstituencyIDRequest) (*operations.GetAPILocationConstituencyIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Location/Constituency/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -172,7 +196,7 @@ func (s *SDK) GetAPILocationConstituencyID(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -218,8 +242,9 @@ func (s *SDK) GetAPILocationConstituencyID(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetAPILocationConstituencyIDElectionResultLatest - Returns latest election result by constituency id
 func (s *SDK) GetAPILocationConstituencyIDElectionResultLatest(ctx context.Context, request operations.GetAPILocationConstituencyIDElectionResultLatestRequest) (*operations.GetAPILocationConstituencyIDElectionResultLatestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Location/Constituency/{id}/ElectionResult/Latest", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -227,7 +252,7 @@ func (s *SDK) GetAPILocationConstituencyIDElectionResultLatest(ctx context.Conte
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -273,8 +298,9 @@ func (s *SDK) GetAPILocationConstituencyIDElectionResultLatest(ctx context.Conte
 	return res, nil
 }
 
+// GetAPILocationConstituencyIDElectionResultElectionID - Returns an election result by constituency and election id
 func (s *SDK) GetAPILocationConstituencyIDElectionResultElectionID(ctx context.Context, request operations.GetAPILocationConstituencyIDElectionResultElectionIDRequest) (*operations.GetAPILocationConstituencyIDElectionResultElectionIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Location/Constituency/{id}/ElectionResult/{electionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -282,7 +308,7 @@ func (s *SDK) GetAPILocationConstituencyIDElectionResultElectionID(ctx context.C
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -328,8 +354,9 @@ func (s *SDK) GetAPILocationConstituencyIDElectionResultElectionID(ctx context.C
 	return res, nil
 }
 
+// GetAPILocationConstituencyIDElectionResults - Returns a list of election results by constituency ID
 func (s *SDK) GetAPILocationConstituencyIDElectionResults(ctx context.Context, request operations.GetAPILocationConstituencyIDElectionResultsRequest) (*operations.GetAPILocationConstituencyIDElectionResultsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Location/Constituency/{id}/ElectionResults", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -337,7 +364,7 @@ func (s *SDK) GetAPILocationConstituencyIDElectionResults(ctx context.Context, r
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -383,8 +410,9 @@ func (s *SDK) GetAPILocationConstituencyIDElectionResults(ctx context.Context, r
 	return res, nil
 }
 
+// GetAPILocationConstituencyIDGeometry - Returns geometry by constituency ID
 func (s *SDK) GetAPILocationConstituencyIDGeometry(ctx context.Context, request operations.GetAPILocationConstituencyIDGeometryRequest) (*operations.GetAPILocationConstituencyIDGeometryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Location/Constituency/{id}/Geometry", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -392,7 +420,7 @@ func (s *SDK) GetAPILocationConstituencyIDGeometry(ctx context.Context, request 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -438,8 +466,9 @@ func (s *SDK) GetAPILocationConstituencyIDGeometry(ctx context.Context, request 
 	return res, nil
 }
 
+// GetAPILocationConstituencyIDRepresentations - Returns a list of representations by constituency ID
 func (s *SDK) GetAPILocationConstituencyIDRepresentations(ctx context.Context, request operations.GetAPILocationConstituencyIDRepresentationsRequest) (*operations.GetAPILocationConstituencyIDRepresentationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Location/Constituency/{id}/Representations", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -447,7 +476,7 @@ func (s *SDK) GetAPILocationConstituencyIDRepresentations(ctx context.Context, r
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -493,8 +522,9 @@ func (s *SDK) GetAPILocationConstituencyIDRepresentations(ctx context.Context, r
 	return res, nil
 }
 
+// GetAPILocationConstituencyIDSynopsis - Returns a synopsis by constituency ID
 func (s *SDK) GetAPILocationConstituencyIDSynopsis(ctx context.Context, request operations.GetAPILocationConstituencyIDSynopsisRequest) (*operations.GetAPILocationConstituencyIDSynopsisResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Location/Constituency/{id}/Synopsis", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -502,7 +532,7 @@ func (s *SDK) GetAPILocationConstituencyIDSynopsis(ctx context.Context, request 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -548,8 +578,9 @@ func (s *SDK) GetAPILocationConstituencyIDSynopsis(ctx context.Context, request 
 	return res, nil
 }
 
+// GetAPILordsInterestsRegister - Returns a list of registered interests
 func (s *SDK) GetAPILordsInterestsRegister(ctx context.Context, request operations.GetAPILordsInterestsRegisterRequest) (*operations.GetAPILordsInterestsRegisterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/LordsInterests/Register"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -559,7 +590,7 @@ func (s *SDK) GetAPILordsInterestsRegister(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -604,8 +635,9 @@ func (s *SDK) GetAPILordsInterestsRegister(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetAPILordsInterestsStaff - Returns a list of staff
 func (s *SDK) GetAPILordsInterestsStaff(ctx context.Context, request operations.GetAPILordsInterestsStaffRequest) (*operations.GetAPILordsInterestsStaffResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/LordsInterests/Staff"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -615,7 +647,7 @@ func (s *SDK) GetAPILordsInterestsStaff(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -660,8 +692,9 @@ func (s *SDK) GetAPILordsInterestsStaff(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetAPIMembersHistory - Return members by ID with list of their historical names, parties and memberships
 func (s *SDK) GetAPIMembersHistory(ctx context.Context, request operations.GetAPIMembersHistoryRequest) (*operations.GetAPIMembersHistoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Members/History"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -671,7 +704,7 @@ func (s *SDK) GetAPIMembersHistory(ctx context.Context, request operations.GetAP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -717,8 +750,9 @@ func (s *SDK) GetAPIMembersHistory(ctx context.Context, request operations.GetAP
 	return res, nil
 }
 
+// GetAPIMembersSearch - Returns a list of current members of the Commons or Lords
 func (s *SDK) GetAPIMembersSearch(ctx context.Context, request operations.GetAPIMembersSearchRequest) (*operations.GetAPIMembersSearchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Members/Search"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -728,7 +762,7 @@ func (s *SDK) GetAPIMembersSearch(ctx context.Context, request operations.GetAPI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -773,8 +807,9 @@ func (s *SDK) GetAPIMembersSearch(ctx context.Context, request operations.GetAPI
 	return res, nil
 }
 
+// GetAPIMembersSearchHistorical - Returns a list of members of the Commons or Lords
 func (s *SDK) GetAPIMembersSearchHistorical(ctx context.Context, request operations.GetAPIMembersSearchHistoricalRequest) (*operations.GetAPIMembersSearchHistoricalResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Members/SearchHistorical"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -784,7 +819,7 @@ func (s *SDK) GetAPIMembersSearchHistorical(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -829,8 +864,9 @@ func (s *SDK) GetAPIMembersSearchHistorical(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetAPIMembersID - Return member by ID
 func (s *SDK) GetAPIMembersID(ctx context.Context, request operations.GetAPIMembersIDRequest) (*operations.GetAPIMembersIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Members/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -840,7 +876,7 @@ func (s *SDK) GetAPIMembersID(ctx context.Context, request operations.GetAPIMemb
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -886,8 +922,9 @@ func (s *SDK) GetAPIMembersID(ctx context.Context, request operations.GetAPIMemb
 	return res, nil
 }
 
+// GetAPIMembersIDBiography - Return biography of member by ID
 func (s *SDK) GetAPIMembersIDBiography(ctx context.Context, request operations.GetAPIMembersIDBiographyRequest) (*operations.GetAPIMembersIDBiographyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Members/{id}/Biography", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -895,7 +932,7 @@ func (s *SDK) GetAPIMembersIDBiography(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -941,8 +978,9 @@ func (s *SDK) GetAPIMembersIDBiography(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetAPIMembersIDContact - Return list of contact details of member by ID
 func (s *SDK) GetAPIMembersIDContact(ctx context.Context, request operations.GetAPIMembersIDContactRequest) (*operations.GetAPIMembersIDContactResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Members/{id}/Contact", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -950,7 +988,7 @@ func (s *SDK) GetAPIMembersIDContact(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -996,8 +1034,9 @@ func (s *SDK) GetAPIMembersIDContact(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetAPIMembersIDContributionSummary - Return contribution summary of member by ID
 func (s *SDK) GetAPIMembersIDContributionSummary(ctx context.Context, request operations.GetAPIMembersIDContributionSummaryRequest) (*operations.GetAPIMembersIDContributionSummaryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Members/{id}/ContributionSummary", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1007,7 +1046,7 @@ func (s *SDK) GetAPIMembersIDContributionSummary(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1053,8 +1092,9 @@ func (s *SDK) GetAPIMembersIDContributionSummary(ctx context.Context, request op
 	return res, nil
 }
 
+// GetAPIMembersIDEdms - Return list of early day motions of member by ID
 func (s *SDK) GetAPIMembersIDEdms(ctx context.Context, request operations.GetAPIMembersIDEdmsRequest) (*operations.GetAPIMembersIDEdmsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Members/{id}/Edms", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1064,7 +1104,7 @@ func (s *SDK) GetAPIMembersIDEdms(ctx context.Context, request operations.GetAPI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1110,8 +1150,9 @@ func (s *SDK) GetAPIMembersIDEdms(ctx context.Context, request operations.GetAPI
 	return res, nil
 }
 
+// GetAPIMembersIDExperience - Return experience of member by ID
 func (s *SDK) GetAPIMembersIDExperience(ctx context.Context, request operations.GetAPIMembersIDExperienceRequest) (*operations.GetAPIMembersIDExperienceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Members/{id}/Experience", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1119,7 +1160,7 @@ func (s *SDK) GetAPIMembersIDExperience(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1165,8 +1206,9 @@ func (s *SDK) GetAPIMembersIDExperience(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetAPIMembersIDFocus - Return list of areas of focus of member by ID
 func (s *SDK) GetAPIMembersIDFocus(ctx context.Context, request operations.GetAPIMembersIDFocusRequest) (*operations.GetAPIMembersIDFocusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Members/{id}/Focus", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1174,7 +1216,7 @@ func (s *SDK) GetAPIMembersIDFocus(ctx context.Context, request operations.GetAP
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1220,8 +1262,9 @@ func (s *SDK) GetAPIMembersIDFocus(ctx context.Context, request operations.GetAP
 	return res, nil
 }
 
+// GetAPIMembersIDLatestElectionResult - Return latest election result of member by ID
 func (s *SDK) GetAPIMembersIDLatestElectionResult(ctx context.Context, request operations.GetAPIMembersIDLatestElectionResultRequest) (*operations.GetAPIMembersIDLatestElectionResultResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Members/{id}/LatestElectionResult", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1229,7 +1272,7 @@ func (s *SDK) GetAPIMembersIDLatestElectionResult(ctx context.Context, request o
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1275,8 +1318,9 @@ func (s *SDK) GetAPIMembersIDLatestElectionResult(ctx context.Context, request o
 	return res, nil
 }
 
+// GetAPIMembersIDPortrait - Return portrait of member by ID
 func (s *SDK) GetAPIMembersIDPortrait(ctx context.Context, request operations.GetAPIMembersIDPortraitRequest) (*operations.GetAPIMembersIDPortraitResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Members/{id}/Portrait", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1286,7 +1330,7 @@ func (s *SDK) GetAPIMembersIDPortrait(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1310,8 +1354,9 @@ func (s *SDK) GetAPIMembersIDPortrait(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetAPIMembersIDPortraitURL - Return portrait url of member by ID
 func (s *SDK) GetAPIMembersIDPortraitURL(ctx context.Context, request operations.GetAPIMembersIDPortraitURLRequest) (*operations.GetAPIMembersIDPortraitURLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Members/{id}/PortraitUrl", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1319,7 +1364,7 @@ func (s *SDK) GetAPIMembersIDPortraitURL(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1365,8 +1410,9 @@ func (s *SDK) GetAPIMembersIDPortraitURL(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetAPIMembersIDRegisteredInterests - Return list of registered interests of member by ID
 func (s *SDK) GetAPIMembersIDRegisteredInterests(ctx context.Context, request operations.GetAPIMembersIDRegisteredInterestsRequest) (*operations.GetAPIMembersIDRegisteredInterestsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Members/{id}/RegisteredInterests", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1374,7 +1420,7 @@ func (s *SDK) GetAPIMembersIDRegisteredInterests(ctx context.Context, request op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1420,8 +1466,9 @@ func (s *SDK) GetAPIMembersIDRegisteredInterests(ctx context.Context, request op
 	return res, nil
 }
 
+// GetAPIMembersIDStaff - Return list of staff of member by ID
 func (s *SDK) GetAPIMembersIDStaff(ctx context.Context, request operations.GetAPIMembersIDStaffRequest) (*operations.GetAPIMembersIDStaffResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Members/{id}/Staff", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1429,7 +1476,7 @@ func (s *SDK) GetAPIMembersIDStaff(ctx context.Context, request operations.GetAP
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1475,8 +1522,9 @@ func (s *SDK) GetAPIMembersIDStaff(ctx context.Context, request operations.GetAP
 	return res, nil
 }
 
+// GetAPIMembersIDSynopsis - Return synopsis of member by ID
 func (s *SDK) GetAPIMembersIDSynopsis(ctx context.Context, request operations.GetAPIMembersIDSynopsisRequest) (*operations.GetAPIMembersIDSynopsisResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Members/{id}/Synopsis", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1484,7 +1532,7 @@ func (s *SDK) GetAPIMembersIDSynopsis(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1530,8 +1578,9 @@ func (s *SDK) GetAPIMembersIDSynopsis(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetAPIMembersIDThumbnail - Return thumbnail of member by ID
 func (s *SDK) GetAPIMembersIDThumbnail(ctx context.Context, request operations.GetAPIMembersIDThumbnailRequest) (*operations.GetAPIMembersIDThumbnailResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Members/{id}/Thumbnail", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1539,7 +1588,7 @@ func (s *SDK) GetAPIMembersIDThumbnail(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1562,8 +1611,9 @@ func (s *SDK) GetAPIMembersIDThumbnail(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetAPIMembersIDThumbnailURL - Return thumbnail url of member by ID
 func (s *SDK) GetAPIMembersIDThumbnailURL(ctx context.Context, request operations.GetAPIMembersIDThumbnailURLRequest) (*operations.GetAPIMembersIDThumbnailURLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Members/{id}/ThumbnailUrl", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1571,7 +1621,7 @@ func (s *SDK) GetAPIMembersIDThumbnailURL(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1617,8 +1667,9 @@ func (s *SDK) GetAPIMembersIDThumbnailURL(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetAPIMembersIDVoting - Return list of votes by member by ID
 func (s *SDK) GetAPIMembersIDVoting(ctx context.Context, request operations.GetAPIMembersIDVotingRequest) (*operations.GetAPIMembersIDVotingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Members/{id}/Voting", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1628,7 +1679,7 @@ func (s *SDK) GetAPIMembersIDVoting(ctx context.Context, request operations.GetA
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1674,8 +1725,9 @@ func (s *SDK) GetAPIMembersIDVoting(ctx context.Context, request operations.GetA
 	return res, nil
 }
 
+// GetAPIMembersIDWrittenQuestions - Return list of written questions by member by ID
 func (s *SDK) GetAPIMembersIDWrittenQuestions(ctx context.Context, request operations.GetAPIMembersIDWrittenQuestionsRequest) (*operations.GetAPIMembersIDWrittenQuestionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Members/{id}/WrittenQuestions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1685,7 +1737,7 @@ func (s *SDK) GetAPIMembersIDWrittenQuestions(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1731,8 +1783,9 @@ func (s *SDK) GetAPIMembersIDWrittenQuestions(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetAPIPartiesGetActiveHouse - Returns a list of current parties with at least one active member.
 func (s *SDK) GetAPIPartiesGetActiveHouse(ctx context.Context, request operations.GetAPIPartiesGetActiveHouseRequest) (*operations.GetAPIPartiesGetActiveHouseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Parties/GetActive/{house}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1740,7 +1793,7 @@ func (s *SDK) GetAPIPartiesGetActiveHouse(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1785,8 +1838,9 @@ func (s *SDK) GetAPIPartiesGetActiveHouse(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetAPIPartiesLordsByTypeForDate - Returns the composition of the House of Lords by peerage type.
 func (s *SDK) GetAPIPartiesLordsByTypeForDate(ctx context.Context, request operations.GetAPIPartiesLordsByTypeForDateRequest) (*operations.GetAPIPartiesLordsByTypeForDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Parties/LordsByType/{forDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1794,7 +1848,7 @@ func (s *SDK) GetAPIPartiesLordsByTypeForDate(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1839,8 +1893,9 @@ func (s *SDK) GetAPIPartiesLordsByTypeForDate(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetAPIPartiesStateOfThePartiesHouseForDate - Returns current state of parties
 func (s *SDK) GetAPIPartiesStateOfThePartiesHouseForDate(ctx context.Context, request operations.GetAPIPartiesStateOfThePartiesHouseForDateRequest) (*operations.GetAPIPartiesStateOfThePartiesHouseForDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Parties/StateOfTheParties/{house}/{forDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1848,7 +1903,7 @@ func (s *SDK) GetAPIPartiesStateOfThePartiesHouseForDate(ctx context.Context, re
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1893,8 +1948,9 @@ func (s *SDK) GetAPIPartiesStateOfThePartiesHouseForDate(ctx context.Context, re
 	return res, nil
 }
 
+// GetAPIPostsDepartmentsType - Returns a list of departments.
 func (s *SDK) GetAPIPostsDepartmentsType(ctx context.Context, request operations.GetAPIPostsDepartmentsTypeRequest) (*operations.GetAPIPostsDepartmentsTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Posts/Departments/{type}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1902,7 +1958,7 @@ func (s *SDK) GetAPIPostsDepartmentsType(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1947,8 +2003,9 @@ func (s *SDK) GetAPIPostsDepartmentsType(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetAPIPostsGovernmentPosts - Returns a list of government posts.
 func (s *SDK) GetAPIPostsGovernmentPosts(ctx context.Context, request operations.GetAPIPostsGovernmentPostsRequest) (*operations.GetAPIPostsGovernmentPostsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Posts/GovernmentPosts"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1958,7 +2015,7 @@ func (s *SDK) GetAPIPostsGovernmentPosts(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2004,8 +2061,9 @@ func (s *SDK) GetAPIPostsGovernmentPosts(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetAPIPostsOppositionPosts - Returns a list of opposition posts.
 func (s *SDK) GetAPIPostsOppositionPosts(ctx context.Context, request operations.GetAPIPostsOppositionPostsRequest) (*operations.GetAPIPostsOppositionPostsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Posts/OppositionPosts"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2015,7 +2073,7 @@ func (s *SDK) GetAPIPostsOppositionPosts(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2061,8 +2119,9 @@ func (s *SDK) GetAPIPostsOppositionPosts(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetAPIPostsSpeakerAndDeputiesForDate - Returns a list containing the speaker and deputy speakers.
 func (s *SDK) GetAPIPostsSpeakerAndDeputiesForDate(ctx context.Context, request operations.GetAPIPostsSpeakerAndDeputiesForDateRequest) (*operations.GetAPIPostsSpeakerAndDeputiesForDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Posts/SpeakerAndDeputies/{forDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2070,7 +2129,7 @@ func (s *SDK) GetAPIPostsSpeakerAndDeputiesForDate(ctx context.Context, request 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2116,8 +2175,9 @@ func (s *SDK) GetAPIPostsSpeakerAndDeputiesForDate(ctx context.Context, request 
 	return res, nil
 }
 
+// GetAPIPostsSpokespersons - Returns a list of spokespersons.
 func (s *SDK) GetAPIPostsSpokespersons(ctx context.Context, request operations.GetAPIPostsSpokespersonsRequest) (*operations.GetAPIPostsSpokespersonsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Posts/Spokespersons"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2127,7 +2187,7 @@ func (s *SDK) GetAPIPostsSpokespersons(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2173,8 +2233,9 @@ func (s *SDK) GetAPIPostsSpokespersons(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetAPIReferenceAnsweringBodies - Returns a list of answering bodies.
 func (s *SDK) GetAPIReferenceAnsweringBodies(ctx context.Context, request operations.GetAPIReferenceAnsweringBodiesRequest) (*operations.GetAPIReferenceAnsweringBodiesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Reference/AnsweringBodies"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2184,7 +2245,7 @@ func (s *SDK) GetAPIReferenceAnsweringBodies(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2229,8 +2290,9 @@ func (s *SDK) GetAPIReferenceAnsweringBodies(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetAPIReferenceDepartments - Returns a list of departments.
 func (s *SDK) GetAPIReferenceDepartments(ctx context.Context, request operations.GetAPIReferenceDepartmentsRequest) (*operations.GetAPIReferenceDepartmentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Reference/Departments"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2240,7 +2302,7 @@ func (s *SDK) GetAPIReferenceDepartments(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2285,8 +2347,9 @@ func (s *SDK) GetAPIReferenceDepartments(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetAPIReferenceDepartmentsIDLogo - Returns department logo.
 func (s *SDK) GetAPIReferenceDepartmentsIDLogo(ctx context.Context, request operations.GetAPIReferenceDepartmentsIDLogoRequest) (*operations.GetAPIReferenceDepartmentsIDLogoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/Reference/Departments/{id}/Logo", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2294,7 +2357,7 @@ func (s *SDK) GetAPIReferenceDepartmentsIDLogo(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2317,8 +2380,9 @@ func (s *SDK) GetAPIReferenceDepartmentsIDLogo(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetAPIReferencePolicyInterests - Returns a list of policy interest.
 func (s *SDK) GetAPIReferencePolicyInterests(ctx context.Context) (*operations.GetAPIReferencePolicyInterestsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/Reference/PolicyInterests"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2326,7 +2390,7 @@ func (s *SDK) GetAPIReferencePolicyInterests(ctx context.Context) (*operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

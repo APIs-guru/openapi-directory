@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudFunction } from "./cloudfunction";
+
 
 
 // ListFunctionsResponse
@@ -8,12 +8,12 @@ import { CloudFunction } from "./cloudfunction";
  * Response for the `ListFunctions` method.
 **/
 export class ListFunctionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=functions", elemType: shared.CloudFunction })
+  @SpeakeasyMetadata({ data: "json, name=functions", elemType: CloudFunction })
   functions?: CloudFunction[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

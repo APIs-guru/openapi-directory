@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ActionsGetSelfHostedRunnerGroupForOrgPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=org" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=org" })
   org: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=runner_group_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=runner_group_id" })
   runnerGroupId: number;
 }
 
 
 export class ActionsGetSelfHostedRunnerGroupForOrgRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ActionsGetSelfHostedRunnerGroupForOrgPathParams;
 }
 
 
 export class ActionsGetSelfHostedRunnerGroupForOrgResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   runnerGroupsOrg?: shared.RunnerGroupsOrg;
 }

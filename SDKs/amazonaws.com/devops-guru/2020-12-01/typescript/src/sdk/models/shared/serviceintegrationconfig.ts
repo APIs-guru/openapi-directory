@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OpsCenterIntegration } from "./opscenterintegration";
+
 
 
 // ServiceIntegrationConfig
@@ -7,6 +8,6 @@ import { OpsCenterIntegration } from "./opscenterintegration";
  *  Information about the integration of DevOps Guru with another AWS service, such as AWS Systems Manager. 
 **/
 export class ServiceIntegrationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OpsCenter" })
+  @SpeakeasyMetadata({ data: "json, name=OpsCenter" })
   opsCenter?: OpsCenterIntegration;
 }

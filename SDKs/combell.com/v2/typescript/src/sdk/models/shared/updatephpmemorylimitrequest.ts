@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdatePhpMemoryLimitRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=memory_limit" })
+  @SpeakeasyMetadata({ data: "json, name=memory_limit" })
   memoryLimit?: number;
 }

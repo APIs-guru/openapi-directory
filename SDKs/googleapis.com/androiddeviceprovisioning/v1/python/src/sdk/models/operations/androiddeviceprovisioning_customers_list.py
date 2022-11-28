@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -22,12 +23,12 @@ class AndroiddeviceprovisioningCustomersListQueryParams:
 
 @dataclass
 class AndroiddeviceprovisioningCustomersListRequest:
-    query_params: AndroiddeviceprovisioningCustomersListQueryParams = field(default=None)
+    query_params: AndroiddeviceprovisioningCustomersListQueryParams = field()
     
 
 @dataclass
 class AndroiddeviceprovisioningCustomersListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     customer_list_customers_response: Optional[shared.CustomerListCustomersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

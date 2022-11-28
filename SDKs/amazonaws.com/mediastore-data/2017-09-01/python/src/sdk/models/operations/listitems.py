@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -23,15 +26,15 @@ class ListItemsHeaders:
 
 @dataclass
 class ListItemsRequest:
-    query_params: ListItemsQueryParams = field(default=None)
-    headers: ListItemsHeaders = field(default=None)
+    headers: ListItemsHeaders = field()
+    query_params: ListItemsQueryParams = field()
     
 
 @dataclass
 class ListItemsResponse:
+    content_type: str = field()
+    status_code: int = field()
     container_not_found_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
     list_items_response: Optional[shared.ListItemsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteAccessKeyActionEnum(str, Enum):
     DELETE_ACCESS_KEY = "DeleteAccessKey"
@@ -10,8 +14,8 @@ class PostDeleteAccessKeyVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteAccessKeyQueryParams:
-    action: PostDeleteAccessKeyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteAccessKeyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteAccessKeyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteAccessKeyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteAccessKeyHeaders:
 
 @dataclass
 class PostDeleteAccessKeyRequest:
-    query_params: PostDeleteAccessKeyQueryParams = field(default=None)
-    headers: PostDeleteAccessKeyHeaders = field(default=None)
+    headers: PostDeleteAccessKeyHeaders = field()
+    query_params: PostDeleteAccessKeyQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteAccessKeyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

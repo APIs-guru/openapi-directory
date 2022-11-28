@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CertificateChains } from "./certificatechains";
 export var KeyOperationAttestationFormatEnum;
 (function (KeyOperationAttestationFormatEnum) {
@@ -30,6 +30,22 @@ export var KeyOperationAttestationFormatEnum;
     KeyOperationAttestationFormatEnum["CaviumV1Compressed"] = "CAVIUM_V1_COMPRESSED";
     KeyOperationAttestationFormatEnum["CaviumV2Compressed"] = "CAVIUM_V2_COMPRESSED";
 })(KeyOperationAttestationFormatEnum || (KeyOperationAttestationFormatEnum = {}));
+// KeyOperationAttestationInput
+/**
+ * Contains an HSM-generated attestation about a key operation. For more information, see [Verifying attestations] (https://cloud.google.com/kms/docs/attest-key).
+**/
+var KeyOperationAttestationInput = /** @class */ (function (_super) {
+    __extends(KeyOperationAttestationInput, _super);
+    function KeyOperationAttestationInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=certChains" }),
+        __metadata("design:type", CertificateChains)
+    ], KeyOperationAttestationInput.prototype, "certChains", void 0);
+    return KeyOperationAttestationInput;
+}(SpeakeasyBase));
+export { KeyOperationAttestationInput };
 // KeyOperationAttestation
 /**
  * Contains an HSM-generated attestation about a key operation. For more information, see [Verifying attestations] (https://cloud.google.com/kms/docs/attest-key).
@@ -40,15 +56,15 @@ var KeyOperationAttestation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certChains" }),
+        SpeakeasyMetadata({ data: "json, name=certChains" }),
         __metadata("design:type", CertificateChains)
     ], KeyOperationAttestation.prototype, "certChains", void 0);
     __decorate([
-        Metadata({ data: "json, name=content" }),
+        SpeakeasyMetadata({ data: "json, name=content" }),
         __metadata("design:type", String)
     ], KeyOperationAttestation.prototype, "content", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], KeyOperationAttestation.prototype, "format", void 0);
     return KeyOperationAttestation;

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,20 +21,20 @@ class DocsDocumentsCreateQueryParams:
 
 @dataclass
 class DocsDocumentsCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DocsDocumentsCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DocsDocumentsCreateSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class DocsDocumentsCreateSecurity:
 
 @dataclass
 class DocsDocumentsCreateRequest:
-    query_params: DocsDocumentsCreateQueryParams = field(default=None)
-    request: Optional[shared.Document] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DocsDocumentsCreateSecurity = field(default=None)
+    query_params: DocsDocumentsCreateQueryParams = field()
+    security: DocsDocumentsCreateSecurity = field()
+    request: Optional[shared.DocumentInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DocsDocumentsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     document: Optional[shared.Document] = field(default=None)
-    status_code: int = field(default=None)
     

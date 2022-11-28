@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PopulateVersionFilesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=uploadRequiredHashes" })
+  @SpeakeasyMetadata({ data: "json, name=uploadRequiredHashes" })
   uploadRequiredHashes?: string[];
 
-  @Metadata({ data: "json, name=uploadUrl" })
+  @SpeakeasyMetadata({ data: "json, name=uploadUrl" })
   uploadUrl?: string;
 }

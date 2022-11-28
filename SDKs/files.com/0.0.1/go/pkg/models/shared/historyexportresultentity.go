@@ -1,5 +1,7 @@
 package shared
 
+// HistoryExportResultEntity
+// List History Export Results
 type HistoryExportResultEntity struct {
 	Action              *string `json:"action,omitempty"`
 	CreatedAt           *int32  `json:"created_at,omitempty"`

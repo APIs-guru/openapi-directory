@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PutSetupV1ResourcesIDRecoverPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class PutSetupV1ResourcesIDRecoverQueryParams:
 
 @dataclass
 class PutSetupV1ResourcesIDRecoverRequest:
-    path_params: PutSetupV1ResourcesIDRecoverPathParams = field(default=None)
-    query_params: PutSetupV1ResourcesIDRecoverQueryParams = field(default=None)
+    path_params: PutSetupV1ResourcesIDRecoverPathParams = field()
+    query_params: PutSetupV1ResourcesIDRecoverQueryParams = field()
     
 
 @dataclass
 class PutSetupV1ResourcesIDRecoverResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     resource_view_model: Optional[shared.ResourceViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

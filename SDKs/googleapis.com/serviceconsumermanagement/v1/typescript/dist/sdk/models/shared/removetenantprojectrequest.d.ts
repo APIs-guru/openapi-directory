@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Request message to remove a tenant project resource from the tenancy unit.
 **/

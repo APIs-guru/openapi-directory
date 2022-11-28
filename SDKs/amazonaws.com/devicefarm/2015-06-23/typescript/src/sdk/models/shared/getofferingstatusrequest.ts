@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetOfferingStatusRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the request to retrieve the offering status for the specified customer or account.
 **/
 export class GetOfferingStatusRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

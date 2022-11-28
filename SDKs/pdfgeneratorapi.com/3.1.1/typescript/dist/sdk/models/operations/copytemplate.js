@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CopyTemplateQueryParams = /** @class */ (function (_super) {
     __extends(CopyTemplateQueryParams, _super);
@@ -30,35 +30,23 @@ var CopyTemplateQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" }),
         __metadata("design:type", String)
     ], CopyTemplateQueryParams.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=templateId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=templateId" }),
         __metadata("design:type", Number)
     ], CopyTemplateQueryParams.prototype, "templateId", void 0);
     return CopyTemplateQueryParams;
 }(SpeakeasyBase));
 export { CopyTemplateQueryParams };
-var CopyTemplateRequest = /** @class */ (function (_super) {
-    __extends(CopyTemplateRequest, _super);
-    function CopyTemplateRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", CopyTemplateQueryParams)
-    ], CopyTemplateRequest.prototype, "queryParams", void 0);
-    return CopyTemplateRequest;
-}(SpeakeasyBase));
-export { CopyTemplateRequest };
 var CopyTemplate200ApplicationJson = /** @class */ (function (_super) {
     __extends(CopyTemplate200ApplicationJson, _super);
     function CopyTemplate200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=response" }),
+        SpeakeasyMetadata({ data: "json, name=response" }),
         __metadata("design:type", shared.TemplateDefinition)
     ], CopyTemplate200ApplicationJson.prototype, "response", void 0);
     return CopyTemplate200ApplicationJson;
@@ -83,11 +71,11 @@ var CopyTemplate401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], CopyTemplate401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], CopyTemplate401ApplicationJson.prototype, "status", void 0);
     return CopyTemplate401ApplicationJson;
@@ -103,11 +91,11 @@ var CopyTemplate403ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], CopyTemplate403ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], CopyTemplate403ApplicationJson.prototype, "status", void 0);
     return CopyTemplate403ApplicationJson;
@@ -125,11 +113,11 @@ var CopyTemplate404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], CopyTemplate404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], CopyTemplate404ApplicationJson.prototype, "status", void 0);
     return CopyTemplate404ApplicationJson;
@@ -148,11 +136,11 @@ var CopyTemplate422ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], CopyTemplate422ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], CopyTemplate422ApplicationJson.prototype, "status", void 0);
     return CopyTemplate422ApplicationJson;
@@ -164,51 +152,63 @@ var CopyTemplate500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], CopyTemplate500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], CopyTemplate500ApplicationJson.prototype, "status", void 0);
     return CopyTemplate500ApplicationJson;
 }(SpeakeasyBase));
 export { CopyTemplate500ApplicationJson };
+var CopyTemplateRequest = /** @class */ (function (_super) {
+    __extends(CopyTemplateRequest, _super);
+    function CopyTemplateRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", CopyTemplateQueryParams)
+    ], CopyTemplateRequest.prototype, "queryParams", void 0);
+    return CopyTemplateRequest;
+}(SpeakeasyBase));
+export { CopyTemplateRequest };
 var CopyTemplateResponse = /** @class */ (function (_super) {
     __extends(CopyTemplateResponse, _super);
     function CopyTemplateResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CopyTemplateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CopyTemplateResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CopyTemplate200ApplicationJson)
     ], CopyTemplateResponse.prototype, "copyTemplate200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CopyTemplate401ApplicationJson)
     ], CopyTemplateResponse.prototype, "copyTemplate401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CopyTemplate403ApplicationJson)
     ], CopyTemplateResponse.prototype, "copyTemplate403ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CopyTemplate404ApplicationJson)
     ], CopyTemplateResponse.prototype, "copyTemplate404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CopyTemplate422ApplicationJson)
     ], CopyTemplateResponse.prototype, "copyTemplate422ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CopyTemplate500ApplicationJson)
     ], CopyTemplateResponse.prototype, "copyTemplate500ApplicationJsonObject", void 0);
     return CopyTemplateResponse;

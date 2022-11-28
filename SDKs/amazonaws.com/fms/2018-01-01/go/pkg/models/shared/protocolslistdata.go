@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ProtocolsListData
+// An Firewall Manager protocols list.
 type ProtocolsListData struct {
 	CreateTime            *time.Time          `json:"CreateTime,omitempty"`
 	LastUpdateTime        *time.Time          `json:"LastUpdateTime,omitempty"`

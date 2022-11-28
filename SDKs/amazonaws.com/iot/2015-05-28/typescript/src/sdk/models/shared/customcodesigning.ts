@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CodeSigningCertificateChain } from "./codesigningcertificatechain";
 import { CodeSigningSignature } from "./codesigningsignature";
+
 
 
 // CustomCodeSigning
@@ -8,15 +9,15 @@ import { CodeSigningSignature } from "./codesigningsignature";
  * Describes a custom method used to code sign a file.
 **/
 export class CustomCodeSigning extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateChain" })
+  @SpeakeasyMetadata({ data: "json, name=certificateChain" })
   certificateChain?: CodeSigningCertificateChain;
 
-  @Metadata({ data: "json, name=hashAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=hashAlgorithm" })
   hashAlgorithm?: string;
 
-  @Metadata({ data: "json, name=signature" })
+  @SpeakeasyMetadata({ data: "json, name=signature" })
   signature?: CodeSigningSignature;
 
-  @Metadata({ data: "json, name=signatureAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=signatureAlgorithm" })
   signatureAlgorithm?: string;
 }

@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SongApiPostRatingPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class SongApiPostRatingRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   songRatingContract?: shared.SongRatingContract;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   songRatingContract1?: shared.SongRatingContract;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   songRatingContract2?: shared.SongRatingContract;
 
-  @Metadata({ data: "request, media_type=text/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/xml" })
   textXml: Uint8Array;
 }
 
 
 export class SongApiPostRatingRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SongApiPostRatingPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: SongApiPostRatingRequests;
 }
 
 
 export class SongApiPostRatingResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

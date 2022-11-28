@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UpdateAclRequest = /** @class */ (function (_super) {
     __extends(UpdateAclRequest, _super);
     function UpdateAclRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ACLName" }),
+        SpeakeasyMetadata({ data: "json, name=ACLName" }),
         __metadata("design:type", String)
     ], UpdateAclRequest.prototype, "aclName", void 0);
     __decorate([
-        Metadata({ data: "json, name=UserNamesToAdd" }),
+        SpeakeasyMetadata({ data: "json, name=UserNamesToAdd" }),
         __metadata("design:type", Array)
     ], UpdateAclRequest.prototype, "userNamesToAdd", void 0);
     __decorate([
-        Metadata({ data: "json, name=UserNamesToRemove" }),
+        SpeakeasyMetadata({ data: "json, name=UserNamesToRemove" }),
         __metadata("design:type", Array)
     ], UpdateAclRequest.prototype, "userNamesToRemove", void 0);
     return UpdateAclRequest;

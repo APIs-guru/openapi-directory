@@ -1,0 +1,10 @@
+package shared
+
+type PredefinedScalingMetricTypeEnum string
+
+const (
+	PredefinedScalingMetricTypeEnumAsgAverageCPUUtilization PredefinedScalingMetricTypeEnum = "ASGAverageCPUUtilization"
+	PredefinedScalingMetricTypeEnumAsgAverageNetworkIn      PredefinedScalingMetricTypeEnum = "ASGAverageNetworkIn"
+	PredefinedScalingMetricTypeEnumAsgAverageNetworkOut     PredefinedScalingMetricTypeEnum = "ASGAverageNetworkOut"
+	PredefinedScalingMetricTypeEnumAlbRequestCountPerTarget PredefinedScalingMetricTypeEnum = "ALBRequestCountPerTarget"
+)

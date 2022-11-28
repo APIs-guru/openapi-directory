@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FieldLogLevelEnum } from "./fieldloglevelenum";
 /**
  * The CloudWatch Logs configuration.

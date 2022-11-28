@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AttributeParametersScoreTypeEnum(str, Enum):
     SCORE_TYPE_UNSPECIFIED = "SCORE_TYPE_UNSPECIFIED"
@@ -13,6 +15,10 @@ class AttributeParametersScoreTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AttributeParameters:
-    score_threshold: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scoreThreshold' }})
-    score_type: Optional[AttributeParametersScoreTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scoreType' }})
+    r"""AttributeParameters
+    Configurable parameters for attribute scoring.
+    """
+    
+    score_threshold: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scoreThreshold') }})
+    score_type: Optional[AttributeParametersScoreTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scoreType') }})
     

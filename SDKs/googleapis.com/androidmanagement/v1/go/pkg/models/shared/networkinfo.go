@@ -1,5 +1,7 @@
 package shared
 
+// NetworkInfo
+// Device network info.
 type NetworkInfo struct {
 	Imei                *string         `json:"imei,omitempty"`
 	Meid                *string         `json:"meid,omitempty"`

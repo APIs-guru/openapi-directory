@@ -17,15 +17,15 @@ type IpamVrfsListQueryParams struct {
 	TenantID      *string `queryParam:"style=form,explode=true,name=tenant_id"`
 }
 
-type IpamVrfsListRequest struct {
-	QueryParams IpamVrfsListQueryParams
-}
-
 type IpamVrfsList200ApplicationJSON struct {
 	Count    int64        `json:"count"`
 	Next     *string      `json:"next,omitempty"`
 	Previous *string      `json:"previous,omitempty"`
 	Results  []shared.Vrf `json:"results"`
+}
+
+type IpamVrfsListRequest struct {
+	QueryParams IpamVrfsListQueryParams
 }
 
 type IpamVrfsListResponse struct {

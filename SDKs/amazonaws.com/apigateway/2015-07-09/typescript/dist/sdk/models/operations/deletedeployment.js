@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteDeploymentPathParams = /** @class */ (function (_super) {
     __extends(DeleteDeploymentPathParams, _super);
     function DeleteDeploymentPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=deployment_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=deployment_id" }),
         __metadata("design:type", String)
     ], DeleteDeploymentPathParams.prototype, "deploymentId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=restapi_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=restapi_id" }),
         __metadata("design:type", String)
     ], DeleteDeploymentPathParams.prototype, "restapiId", void 0);
     return DeleteDeploymentPathParams;
@@ -45,31 +45,31 @@ var DeleteDeploymentHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], DeleteDeploymentHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], DeleteDeploymentHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], DeleteDeploymentHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], DeleteDeploymentHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], DeleteDeploymentHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], DeleteDeploymentHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], DeleteDeploymentHeaders.prototype, "xAmzSignedHeaders", void 0);
     return DeleteDeploymentHeaders;
@@ -81,11 +81,11 @@ var DeleteDeploymentRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteDeploymentPathParams)
     ], DeleteDeploymentRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteDeploymentHeaders)
     ], DeleteDeploymentRequest.prototype, "headers", void 0);
     return DeleteDeploymentRequest;
@@ -97,35 +97,35 @@ var DeleteDeploymentResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], DeleteDeploymentResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], DeleteDeploymentResponse.prototype, "conflictException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteDeploymentResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], DeleteDeploymentResponse.prototype, "limitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], DeleteDeploymentResponse.prototype, "notFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteDeploymentResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], DeleteDeploymentResponse.prototype, "tooManyRequestsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], DeleteDeploymentResponse.prototype, "unauthorizedException", void 0);
     return DeleteDeploymentResponse;

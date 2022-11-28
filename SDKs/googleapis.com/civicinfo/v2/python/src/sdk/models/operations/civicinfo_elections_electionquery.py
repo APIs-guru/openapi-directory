@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,12 +21,12 @@ class CivicinfoElectionsElectionQueryQueryParams:
 
 @dataclass
 class CivicinfoElectionsElectionQueryRequest:
-    query_params: CivicinfoElectionsElectionQueryQueryParams = field(default=None)
+    query_params: CivicinfoElectionsElectionQueryQueryParams = field()
     
 
 @dataclass
 class CivicinfoElectionsElectionQueryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     elections_query_response: Optional[shared.ElectionsQueryResponse] = field(default=None)
-    status_code: int = field(default=None)
     

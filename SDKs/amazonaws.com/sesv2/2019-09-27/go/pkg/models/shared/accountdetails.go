@@ -1,5 +1,7 @@
 package shared
 
+// AccountDetails
+// An object that contains information about your account details.
 type AccountDetails struct {
 	AdditionalContactEmailAddresses []string             `json:"AdditionalContactEmailAddresses,omitempty"`
 	ContactLanguage                 *ContactLanguageEnum `json:"ContactLanguage,omitempty"`

@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import borrowconfiguration
-from . import provisionalconfiguration
-from . import renewtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ConsumptionConfiguration:
-    borrow_configuration: Optional[borrowconfiguration.BorrowConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BorrowConfiguration' }})
-    provisional_configuration: Optional[provisionalconfiguration.ProvisionalConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProvisionalConfiguration' }})
-    renew_type: Optional[renewtype_enum.RenewTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RenewType' }})
+    r"""ConsumptionConfiguration
+    Details about a consumption configuration.
+    """
+    
+    borrow_configuration: Optional[BorrowConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BorrowConfiguration') }})
+    provisional_configuration: Optional[ProvisionalConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProvisionalConfiguration') }})
+    renew_type: Optional[RenewTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RenewType') }})
     

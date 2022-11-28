@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GeneratePresignedUrlsPublicPathParams:
-    access_key: str = field(default=None, metadata={'path_param': { 'field_name': 'access_key', 'style': 'simple', 'explode': False }})
-    upload_id: str = field(default=None, metadata={'path_param': { 'field_name': 'upload_id', 'style': 'simple', 'explode': False }})
+    access_key: str = field(metadata={'path_param': { 'field_name': 'access_key', 'style': 'simple', 'explode': False }})
+    upload_id: str = field(metadata={'path_param': { 'field_name': 'upload_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,15 +19,15 @@ class GeneratePresignedUrlsPublicHeaders:
 
 @dataclass
 class GeneratePresignedUrlsPublicRequest:
-    path_params: GeneratePresignedUrlsPublicPathParams = field(default=None)
-    headers: GeneratePresignedUrlsPublicHeaders = field(default=None)
-    request: shared.GeneratePresignedUrlsRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GeneratePresignedUrlsPublicHeaders = field()
+    path_params: GeneratePresignedUrlsPublicPathParams = field()
+    request: shared.GeneratePresignedUrlsRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GeneratePresignedUrlsPublicResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     presigned_url_list: Optional[shared.PresignedURLList] = field(default=None)
-    status_code: int = field(default=None)
     

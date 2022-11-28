@@ -1,68 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateSnapshotPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
   linodeId: number;
 }
 
 
 export class CreateSnapshotRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 }
 
 
-export class CreateSnapshotSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class CreateSnapshotSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class CreateSnapshotSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: CreateSnapshotSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: CreateSnapshotSecurityOption2;
-}
-
-
-export class CreateSnapshotRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: CreateSnapshotPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: CreateSnapshotRequestBody;
-
-  @Metadata()
-  security: CreateSnapshotSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class CreateSnapshotDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class CreateSnapshotRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: CreateSnapshotPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: CreateSnapshotRequestBody;
+
+  @SpeakeasyMetadata()
+  security: CreateSnapshotSecurity;
+}
+
+
 export class CreateSnapshotResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   backup?: shared.Backup;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createSnapshotDefaultApplicationJsonObject?: CreateSnapshotDefaultApplicationJson;
 }

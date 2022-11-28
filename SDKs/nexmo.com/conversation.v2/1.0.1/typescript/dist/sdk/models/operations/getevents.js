@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetEventsPathParams = /** @class */ (function (_super) {
     __extends(GetEventsPathParams, _super);
@@ -30,7 +30,7 @@ var GetEventsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=conversation_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=conversation_id" }),
         __metadata("design:type", String)
     ], GetEventsPathParams.prototype, "conversationId", void 0);
     return GetEventsPathParams;
@@ -42,27 +42,27 @@ var GetEventsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=cursor" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cursor" }),
         __metadata("design:type", String)
     ], GetEventsQueryParams.prototype, "cursor", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=end_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end_id" }),
         __metadata("design:type", String)
     ], GetEventsQueryParams.prototype, "endId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=event_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=event_type" }),
         __metadata("design:type", String)
     ], GetEventsQueryParams.prototype, "eventType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=order" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" }),
         __metadata("design:type", String)
     ], GetEventsQueryParams.prototype, "order", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], GetEventsQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=start_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start_id" }),
         __metadata("design:type", String)
     ], GetEventsQueryParams.prototype, "startId", void 0);
     return GetEventsQueryParams;
@@ -74,11 +74,11 @@ var GetEventsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetEventsPathParams)
     ], GetEventsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetEventsQueryParams)
     ], GetEventsRequest.prototype, "queryParams", void 0);
     return GetEventsRequest;
@@ -90,15 +90,15 @@ var GetEventsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetEventsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetEventsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetEventsResponse.prototype, "getEvents200ApplicationJsonAny", void 0);
     return GetEventsResponse;

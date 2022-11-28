@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Rule } from "./rule";
+
 
 
 // CreateDevicePoolRequest
@@ -8,18 +8,18 @@ import { Rule } from "./rule";
  * Represents a request to the create device pool operation.
 **/
 export class CreateDevicePoolRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=maxDevices" })
+  @SpeakeasyMetadata({ data: "json, name=maxDevices" })
   maxDevices?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=projectArn" })
+  @SpeakeasyMetadata({ data: "json, name=projectArn" })
   projectArn: string;
 
-  @Metadata({ data: "json, name=rules", elemType: shared.Rule })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: Rule })
   rules: Rule[];
 }

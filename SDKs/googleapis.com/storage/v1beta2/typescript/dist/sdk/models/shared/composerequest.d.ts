@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Object } from "./object";
 /**
  * Conditions that must be met for this operation to execute.

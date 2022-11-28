@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TaskSet
+// Information about a set of Amazon ECS tasks in either an CodeDeploy or an <code>EXTERNAL</code> deployment. An Amazon ECS task set includes details such as the desired number of tasks, how many tasks are running, and whether the task set serves production traffic.
 type TaskSet struct {
 	CapacityProviderStrategy []CapacityProviderStrategyItem `json:"capacityProviderStrategy,omitempty"`
 	ClusterArn               *string                        `json:"clusterArn,omitempty"`

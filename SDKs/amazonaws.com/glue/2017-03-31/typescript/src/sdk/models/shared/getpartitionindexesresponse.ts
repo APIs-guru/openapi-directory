@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PartitionIndexDescriptor } from "./partitionindexdescriptor";
 
 
+
 export class GetPartitionIndexesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=PartitionIndexDescriptorList", elemType: shared.PartitionIndexDescriptor })
+  @SpeakeasyMetadata({ data: "json, name=PartitionIndexDescriptorList", elemType: PartitionIndexDescriptor })
   partitionIndexDescriptorList?: PartitionIndexDescriptor[];
 }

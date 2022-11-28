@@ -8,14 +8,14 @@ type GetGifsByIDQueryParams struct {
 	Ids *string `queryParam:"style=form,explode=true,name=ids"`
 }
 
-type GetGifsByIDRequest struct {
-	QueryParams GetGifsByIDQueryParams
-}
-
 type GetGifsByID200ApplicationJSON struct {
 	Data       []shared.Gif       `json:"data,omitempty"`
 	Meta       *shared.Meta       `json:"meta,omitempty"`
 	Pagination *shared.Pagination `json:"pagination,omitempty"`
+}
+
+type GetGifsByIDRequest struct {
+	QueryParams GetGifsByIDQueryParams
 }
 
 type GetGifsByIDResponse struct {

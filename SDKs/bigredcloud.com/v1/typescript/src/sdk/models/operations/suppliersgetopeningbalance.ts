@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SuppliersGetOpeningBalancePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
   itemId: number;
 }
 
 
 export class SuppliersGetOpeningBalanceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SuppliersGetOpeningBalancePathParams;
 }
 
 
 export class SuppliersGetOpeningBalanceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ownerOpeningBalanceInPeriodsDto?: shared.OwnerOpeningBalanceInPeriodsDto;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

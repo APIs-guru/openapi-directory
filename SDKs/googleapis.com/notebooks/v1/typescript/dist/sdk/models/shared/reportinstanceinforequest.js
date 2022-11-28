@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ReportInstanceInfoRequest
 /**
  * Request for notebook instances to report information to Notebooks API.
@@ -33,11 +33,11 @@ var ReportInstanceInfoRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=metadata" }),
+        SpeakeasyMetadata({ data: "json, name=metadata" }),
         __metadata("design:type", Map)
     ], ReportInstanceInfoRequest.prototype, "metadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=vmId" }),
+        SpeakeasyMetadata({ data: "json, name=vmId" }),
         __metadata("design:type", String)
     ], ReportInstanceInfoRequest.prototype, "vmId", void 0);
     return ReportInstanceInfoRequest;

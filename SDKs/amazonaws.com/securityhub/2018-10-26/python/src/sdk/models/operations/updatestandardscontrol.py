@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class UpdateStandardsControlPathParams:
-    standards_control_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'StandardsControlArn', 'style': 'simple', 'explode': False }})
+    standards_control_arn: str = field(metadata={'path_param': { 'field_name': 'StandardsControlArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,24 +31,24 @@ class UpdateStandardsControlRequestBodyControlStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateStandardsControlRequestBody:
-    control_status: Optional[UpdateStandardsControlRequestBodyControlStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ControlStatus' }})
-    disabled_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DisabledReason' }})
+    control_status: Optional[UpdateStandardsControlRequestBodyControlStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ControlStatus') }})
+    disabled_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DisabledReason') }})
     
 
 @dataclass
 class UpdateStandardsControlRequest:
-    path_params: UpdateStandardsControlPathParams = field(default=None)
-    headers: UpdateStandardsControlHeaders = field(default=None)
-    request: UpdateStandardsControlRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateStandardsControlHeaders = field()
+    path_params: UpdateStandardsControlPathParams = field()
+    request: UpdateStandardsControlRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateStandardsControlResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_standards_control_response: Optional[dict[str, Any]] = field(default=None)
     

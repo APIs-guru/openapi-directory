@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReceiptTypeEnum } from "./receipttypeenum";
+
 
 
 // Receipt
@@ -7,15 +8,15 @@ import { ReceiptTypeEnum } from "./receipttypeenum";
  * Records events during an engagement.
 **/
 export class Receipt extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContactChannelArn" })
+  @SpeakeasyMetadata({ data: "json, name=ContactChannelArn" })
   contactChannelArn?: string;
 
-  @Metadata({ data: "json, name=ReceiptInfo" })
+  @SpeakeasyMetadata({ data: "json, name=ReceiptInfo" })
   receiptInfo?: string;
 
-  @Metadata({ data: "json, name=ReceiptTime" })
+  @SpeakeasyMetadata({ data: "json, name=ReceiptTime" })
   receiptTime: Date;
 
-  @Metadata({ data: "json, name=ReceiptType" })
+  @SpeakeasyMetadata({ data: "json, name=ReceiptType" })
   receiptType: ReceiptTypeEnum;
 }

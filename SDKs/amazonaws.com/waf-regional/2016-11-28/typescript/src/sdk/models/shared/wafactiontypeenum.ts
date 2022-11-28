@@ -1,7 +1,8 @@
 
 
+
 export enum WafActionTypeEnum {
-    Block = "BLOCK"
-,    Allow = "ALLOW"
-,    Count = "COUNT"
+    Block = "BLOCK",
+    Allow = "ALLOW",
+    Count = "COUNT"
 }

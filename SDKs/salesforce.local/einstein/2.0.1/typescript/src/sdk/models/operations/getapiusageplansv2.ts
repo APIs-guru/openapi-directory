@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiUsagePlansV2Security extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerToken: shared.SchemeBearerToken;
 }
 
 
 export class GetApiUsagePlansV2Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetApiUsagePlansV2Security;
 }
 
 
 export class GetApiUsagePlansV2Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiUsageList?: shared.ApiUsageList;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

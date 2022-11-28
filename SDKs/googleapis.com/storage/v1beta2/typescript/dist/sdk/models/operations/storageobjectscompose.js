@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var StorageObjectsComposePathParams = /** @class */ (function (_super) {
     __extends(StorageObjectsComposePathParams, _super);
@@ -30,11 +30,11 @@ var StorageObjectsComposePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=destinationBucket" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=destinationBucket" }),
         __metadata("design:type", String)
     ], StorageObjectsComposePathParams.prototype, "destinationBucket", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=destinationObject" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=destinationObject" }),
         __metadata("design:type", String)
     ], StorageObjectsComposePathParams.prototype, "destinationObject", void 0);
     return StorageObjectsComposePathParams;
@@ -46,39 +46,39 @@ var StorageObjectsComposeQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], StorageObjectsComposeQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], StorageObjectsComposeQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ifGenerationMatch" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ifGenerationMatch" }),
         __metadata("design:type", String)
     ], StorageObjectsComposeQueryParams.prototype, "ifGenerationMatch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ifMetagenerationMatch" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ifMetagenerationMatch" }),
         __metadata("design:type", String)
     ], StorageObjectsComposeQueryParams.prototype, "ifMetagenerationMatch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], StorageObjectsComposeQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], StorageObjectsComposeQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], StorageObjectsComposeQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], StorageObjectsComposeQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
         __metadata("design:type", String)
     ], StorageObjectsComposeQueryParams.prototype, "userIp", void 0);
     return StorageObjectsComposeQueryParams;
@@ -90,11 +90,11 @@ var StorageObjectsComposeSecurityOption1 = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], StorageObjectsComposeSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], StorageObjectsComposeSecurityOption1.prototype, "oauth2c", void 0);
     return StorageObjectsComposeSecurityOption1;
@@ -106,11 +106,11 @@ var StorageObjectsComposeSecurityOption2 = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], StorageObjectsComposeSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], StorageObjectsComposeSecurityOption2.prototype, "oauth2c", void 0);
     return StorageObjectsComposeSecurityOption2;
@@ -122,11 +122,11 @@ var StorageObjectsComposeSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", StorageObjectsComposeSecurityOption1)
     ], StorageObjectsComposeSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", StorageObjectsComposeSecurityOption2)
     ], StorageObjectsComposeSecurity.prototype, "option2", void 0);
     return StorageObjectsComposeSecurity;
@@ -138,19 +138,19 @@ var StorageObjectsComposeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageObjectsComposePathParams)
     ], StorageObjectsComposeRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageObjectsComposeQueryParams)
     ], StorageObjectsComposeRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.ComposeRequest)
     ], StorageObjectsComposeRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageObjectsComposeSecurity)
     ], StorageObjectsComposeRequest.prototype, "security", void 0);
     return StorageObjectsComposeRequest;
@@ -162,15 +162,15 @@ var StorageObjectsComposeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StorageObjectsComposeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Object)
     ], StorageObjectsComposeResponse.prototype, "object", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StorageObjectsComposeResponse.prototype, "statusCode", void 0);
     return StorageObjectsComposeResponse;

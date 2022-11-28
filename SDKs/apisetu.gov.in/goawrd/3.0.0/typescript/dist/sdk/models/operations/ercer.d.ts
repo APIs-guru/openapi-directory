@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class ErcerRequestBodyCertificateParameters extends SpeakeasyBase {
     fullName: string;
@@ -16,10 +16,6 @@ export declare class ErcerRequestBody extends SpeakeasyBase {
 export declare class ErcerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class ErcerRequest extends SpeakeasyBase {
-    request?: ErcerRequestBody;
-    security: ErcerSecurity;
 }
 export declare enum Ercer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Ercer504ApplicationJsonErrorDescriptionEnum {
 export declare class Ercer504ApplicationJson extends SpeakeasyBase {
     error?: Ercer504ApplicationJsonErrorEnum;
     errorDescription?: Ercer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class ErcerRequest extends SpeakeasyBase {
+    request?: ErcerRequestBody;
+    security: ErcerSecurity;
 }
 export declare class ErcerResponse extends SpeakeasyBase {
     contentType: string;

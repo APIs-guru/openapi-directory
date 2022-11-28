@@ -22,32 +22,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationItemTypeEnum } from "./configurationitemtypeenum";
+import { Filter } from "./filter";
+import { OrderByElement } from "./orderbyelement";
 var ListConfigurationsRequest = /** @class */ (function (_super) {
     __extends(ListConfigurationsRequest, _super);
     function ListConfigurationsRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=configurationType" }),
+        SpeakeasyMetadata({ data: "json, name=configurationType" }),
         __metadata("design:type", String)
     ], ListConfigurationsRequest.prototype, "configurationType", void 0);
     __decorate([
-        Metadata({ data: "json, name=filters", elemType: shared.Filter }),
+        SpeakeasyMetadata({ data: "json, name=filters", elemType: Filter }),
         __metadata("design:type", Array)
     ], ListConfigurationsRequest.prototype, "filters", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxResults" }),
+        SpeakeasyMetadata({ data: "json, name=maxResults" }),
         __metadata("design:type", Number)
     ], ListConfigurationsRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], ListConfigurationsRequest.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=orderBy", elemType: shared.OrderByElement }),
+        SpeakeasyMetadata({ data: "json, name=orderBy", elemType: OrderByElement }),
         __metadata("design:type", Array)
     ], ListConfigurationsRequest.prototype, "orderBy", void 0);
     return ListConfigurationsRequest;

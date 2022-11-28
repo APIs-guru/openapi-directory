@@ -9,6 +9,8 @@ const (
 	QuotaPropertiesQuotaModeEnumRelease           QuotaPropertiesQuotaModeEnum = "RELEASE"
 )
 
+// QuotaProperties
+// Represents the properties needed for quota operations.
 type QuotaProperties struct {
 	QuotaMode *QuotaPropertiesQuotaModeEnum `json:"quotaMode,omitempty"`
 }

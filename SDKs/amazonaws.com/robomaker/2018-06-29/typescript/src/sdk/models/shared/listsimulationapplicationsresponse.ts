@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SimulationApplicationSummary } from "./simulationapplicationsummary";
 
 
+
 export class ListSimulationApplicationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=simulationApplicationSummaries", elemType: shared.SimulationApplicationSummary })
+  @SpeakeasyMetadata({ data: "json, name=simulationApplicationSummaries", elemType: SimulationApplicationSummary })
   simulationApplicationSummaries?: SimulationApplicationSummary[];
 }

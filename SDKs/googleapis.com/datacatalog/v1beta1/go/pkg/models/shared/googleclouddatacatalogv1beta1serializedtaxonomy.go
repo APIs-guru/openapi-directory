@@ -7,6 +7,8 @@ const (
 	GoogleCloudDatacatalogV1beta1SerializedTaxonomyActivatedPolicyTypesEnumFineGrainedAccessControl GoogleCloudDatacatalogV1beta1SerializedTaxonomyActivatedPolicyTypesEnum = "FINE_GRAINED_ACCESS_CONTROL"
 )
 
+// GoogleCloudDatacatalogV1beta1SerializedTaxonomy
+// Message capturing a taxonomy and its policy tag hierarchy as a nested proto. Used for taxonomy import/export and mutation.
 type GoogleCloudDatacatalogV1beta1SerializedTaxonomy struct {
 	ActivatedPolicyTypes []GoogleCloudDatacatalogV1beta1SerializedTaxonomyActivatedPolicyTypesEnum `json:"activatedPolicyTypes,omitempty"`
 	Description          *string                                                                   `json:"description,omitempty"`

@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import searchforpositionresult
-from . import searchplaceindexforpositionsummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SearchPlaceIndexForPositionResponse:
-    results: List[searchforpositionresult.SearchForPositionResult] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Results' }})
-    summary: searchplaceindexforpositionsummary.SearchPlaceIndexForPositionSummary = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Summary' }})
+    results: List[SearchForPositionResult] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Results') }})
+    summary: SearchPlaceIndexForPositionSummary = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Summary') }})
     

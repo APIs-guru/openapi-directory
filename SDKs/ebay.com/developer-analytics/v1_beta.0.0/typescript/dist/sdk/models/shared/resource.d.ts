@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Rate } from "./rate";
 /**
  * This complex type defines the resource (API method) and the current rate-limit data for that resource.

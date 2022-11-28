@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ItvBillingHistoryRecord extends SpeakeasyBase {
-  @Metadata({ data: "json, name=card" })
+  @SpeakeasyMetadata({ data: "json, name=card" })
   card: Map<string, any>;
 
-  @Metadata({ data: "json, name=charge" })
+  @SpeakeasyMetadata({ data: "json, name=charge" })
   charge: Map<string, any>;
 
-  @Metadata({ data: "json, name=invoice" })
+  @SpeakeasyMetadata({ data: "json, name=invoice" })
   invoice: Map<string, any>;
 
-  @Metadata({ data: "json, name=subscription" })
+  @SpeakeasyMetadata({ data: "json, name=subscription" })
   subscription: Map<string, any>;
 }

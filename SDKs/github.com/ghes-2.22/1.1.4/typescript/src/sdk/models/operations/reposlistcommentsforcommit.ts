@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposListCommentsForCommitPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=commit_sha" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=commit_sha" })
   commitSha: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class ReposListCommentsForCommitQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
 export class ReposListCommentsForCommitRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReposListCommentsForCommitPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReposListCommentsForCommitQueryParams;
 }
 
 
 export class ReposListCommentsForCommitResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.CommitComment })
+  @SpeakeasyMetadata({ elemType: shared.CommitComment })
   commitComments?: shared.CommitComment[];
 }

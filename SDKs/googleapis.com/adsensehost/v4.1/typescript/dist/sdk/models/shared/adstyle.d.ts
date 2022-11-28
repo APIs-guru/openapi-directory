@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * The colors included in the style. These are represented as six hexadecimal characters, similar to HTML color codes, but without the leading hash.
 **/

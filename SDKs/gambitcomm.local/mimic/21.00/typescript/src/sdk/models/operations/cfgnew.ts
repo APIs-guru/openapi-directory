@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CfgNewPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=firstAgentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=firstAgentNum" })
   firstAgentNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=lastAgentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=lastAgentNum" })
   lastAgentNum: number;
 }
 
 
 export class CfgNewRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CfgNewPathParams;
 }
 
 
 export class CfgNewResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cfgNew200ApplicationJsonObject?: Map<string, number>;
 }

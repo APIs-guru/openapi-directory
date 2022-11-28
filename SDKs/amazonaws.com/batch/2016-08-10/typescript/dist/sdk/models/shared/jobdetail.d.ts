@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ArrayPropertiesDetail } from "./arraypropertiesdetail";
 import { AttemptDetail } from "./attemptdetail";
 import { ContainerDetail } from "./containerdetail";

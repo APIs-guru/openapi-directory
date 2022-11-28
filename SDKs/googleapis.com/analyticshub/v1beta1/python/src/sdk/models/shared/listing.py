@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import bigquerydatasetsource
-from . import dataprovider
-from . import publisher
+from sdk import utils
+from . import *
 
 class ListingCategoriesEnum(str, Enum):
     CATEGORY_UNSPECIFIED = "CATEGORY_UNSPECIFIED"
@@ -34,17 +34,40 @@ class ListingStateEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class ListingInput:
+    r"""ListingInput
+    A listing is what gets published into a data exchange that a subscriber can subscribe to. It contains a reference to the data source along with descriptive information that will help subscribers find and subscribe the data.
+    """
+    
+    bigquery_dataset: Optional[BigQueryDatasetSource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bigqueryDataset') }})
+    categories: Optional[List[ListingCategoriesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('categories') }})
+    data_provider: Optional[DataProvider] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataProvider') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    documentation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('documentation') }})
+    icon: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('icon') }})
+    primary_contact: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('primaryContact') }})
+    publisher: Optional[Publisher] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publisher') }})
+    request_access: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestAccess') }})
+    
+
+@dataclass_json
+@dataclass
 class Listing:
-    bigquery_dataset: Optional[bigquerydatasetsource.BigQueryDatasetSource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bigqueryDataset' }})
-    categories: Optional[List[ListingCategoriesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'categories' }})
-    data_provider: Optional[dataprovider.DataProvider] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataProvider' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    documentation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'documentation' }})
-    icon: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'icon' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    primary_contact: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primaryContact' }})
-    publisher: Optional[publisher.Publisher] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publisher' }})
-    request_access: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestAccess' }})
-    state: Optional[ListingStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    r"""Listing
+    A listing is what gets published into a data exchange that a subscriber can subscribe to. It contains a reference to the data source along with descriptive information that will help subscribers find and subscribe the data.
+    """
+    
+    bigquery_dataset: Optional[BigQueryDatasetSource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bigqueryDataset') }})
+    categories: Optional[List[ListingCategoriesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('categories') }})
+    data_provider: Optional[DataProvider] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataProvider') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    documentation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('documentation') }})
+    icon: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('icon') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    primary_contact: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('primaryContact') }})
+    publisher: Optional[Publisher] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publisher') }})
+    request_access: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestAccess') }})
+    state: Optional[ListingStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
     

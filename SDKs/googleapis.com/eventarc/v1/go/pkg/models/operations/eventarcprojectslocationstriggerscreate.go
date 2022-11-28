@@ -32,7 +32,7 @@ type EventarcProjectsLocationsTriggersCreateSecurity struct {
 type EventarcProjectsLocationsTriggersCreateRequest struct {
 	PathParams  EventarcProjectsLocationsTriggersCreatePathParams
 	QueryParams EventarcProjectsLocationsTriggersCreateQueryParams
-	Request     *shared.Trigger `request:"mediaType=application/json"`
+	Request     *shared.TriggerInput `request:"mediaType=application/json"`
 	Security    EventarcProjectsLocationsTriggersCreateSecurity
 }
 

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Meta38 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=recipient_config_json" })
+  @SpeakeasyMetadata({ data: "json, name=recipient_config_json" })
   recipientConfigJson?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

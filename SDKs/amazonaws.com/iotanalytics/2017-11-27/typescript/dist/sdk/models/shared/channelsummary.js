@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChannelStorageSummary } from "./channelstoragesummary";
 import { ChannelStatusEnum } from "./channelstatusenum";
 // ChannelSummary
@@ -35,27 +35,27 @@ var ChannelSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=channelName" }),
+        SpeakeasyMetadata({ data: "json, name=channelName" }),
         __metadata("design:type", String)
     ], ChannelSummary.prototype, "channelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=channelStorage" }),
+        SpeakeasyMetadata({ data: "json, name=channelStorage" }),
         __metadata("design:type", ChannelStorageSummary)
     ], ChannelSummary.prototype, "channelStorage", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], ChannelSummary.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastMessageArrivalTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastMessageArrivalTime" }),
         __metadata("design:type", Date)
     ], ChannelSummary.prototype, "lastMessageArrivalTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdateTime" }),
         __metadata("design:type", Date)
     ], ChannelSummary.prototype, "lastUpdateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], ChannelSummary.prototype, "status", void 0);
     return ChannelSummary;

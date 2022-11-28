@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ObActiveOrHistoricCurrencyAndAmount7
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Amount of money associated with the statement interest amount type.
 **/
 export class ObActiveOrHistoricCurrencyAndAmount7 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount: string;
 
-  @Metadata({ data: "json, name=Currency" })
+  @SpeakeasyMetadata({ data: "json, name=Currency" })
   currency: string;
 }

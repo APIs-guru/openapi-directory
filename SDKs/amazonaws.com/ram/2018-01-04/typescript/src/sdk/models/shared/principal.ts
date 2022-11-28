@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Principal
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a principal for use with Resource Access Manager.
 **/
 export class Principal extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=external" })
+  @SpeakeasyMetadata({ data: "json, name=external" })
   external?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedTime" })
   lastUpdatedTime?: Date;
 
-  @Metadata({ data: "json, name=resourceShareArn" })
+  @SpeakeasyMetadata({ data: "json, name=resourceShareArn" })
   resourceShareArn?: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum CreateHostXAmzTargetEnum {
     ComAmazonawsCodestarConnectionsCodeStarConnections20191201CreateHost = "com.amazonaws.codestar.connections.CodeStar_connections_20191201.CreateHost"

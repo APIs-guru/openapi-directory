@@ -8,6 +8,8 @@ const (
 	PasswordPoliciesContextPasswordPolicyScopeEnumScopeProfile     PasswordPoliciesContextPasswordPolicyScopeEnum = "SCOPE_PROFILE"
 )
 
+// PasswordPoliciesContext
+// Additional context for non-compliance related to password policies.
 type PasswordPoliciesContext struct {
 	PasswordPolicyScope *PasswordPoliciesContextPasswordPolicyScopeEnum `json:"passwordPolicyScope,omitempty"`
 }

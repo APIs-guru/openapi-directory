@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetGatewayResponseResponseTypeEnum(str, Enum):
@@ -28,8 +32,8 @@ class GetGatewayResponseResponseTypeEnum(str, Enum):
 
 @dataclass
 class GetGatewayResponsePathParams:
-    response_type: GetGatewayResponseResponseTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'response_type', 'style': 'simple', 'explode': False }})
-    restapi_id: str = field(default=None, metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
+    response_type: GetGatewayResponseResponseTypeEnum = field(metadata={'path_param': { 'field_name': 'response_type', 'style': 'simple', 'explode': False }})
+    restapi_id: str = field(metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -45,17 +49,17 @@ class GetGatewayResponseHeaders:
 
 @dataclass
 class GetGatewayResponseRequest:
-    path_params: GetGatewayResponsePathParams = field(default=None)
-    headers: GetGatewayResponseHeaders = field(default=None)
+    headers: GetGatewayResponseHeaders = field()
+    path_params: GetGatewayResponsePathParams = field()
     
 
 @dataclass
 class GetGatewayResponseResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     gateway_response: Optional[shared.GatewayResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

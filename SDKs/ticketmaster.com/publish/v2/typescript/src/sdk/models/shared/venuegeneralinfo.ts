@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VenueGeneralInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Venue general information
 **/
 export class VenueGeneralInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=childRules" })
+  @SpeakeasyMetadata({ data: "json, name=childRules" })
   childRules?: Map<string, string>;
 
-  @Metadata({ data: "json, name=generalRules" })
+  @SpeakeasyMetadata({ data: "json, name=generalRules" })
   generalRules?: Map<string, string>;
 }

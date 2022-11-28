@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpdateRowRequest } from "./updaterowrequest";
+
 
 
 // BatchUpdateRowsRequest
@@ -8,6 +8,6 @@ import { UpdateRowRequest } from "./updaterowrequest";
  * Request message for TablesService.BatchUpdateRows.
 **/
 export class BatchUpdateRowsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requests", elemType: shared.UpdateRowRequest })
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: UpdateRowRequest })
   requests?: UpdateRowRequest[];
 }

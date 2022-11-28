@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteDeliveryStreamInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowForceDelete" })
+  @SpeakeasyMetadata({ data: "json, name=AllowForceDelete" })
   allowForceDelete?: boolean;
 
-  @Metadata({ data: "json, name=DeliveryStreamName" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryStreamName" })
   deliveryStreamName: string;
 }

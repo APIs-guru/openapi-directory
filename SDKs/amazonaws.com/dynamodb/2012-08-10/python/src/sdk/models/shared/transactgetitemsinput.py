@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import returnconsumedcapacity_enum
-from . import transactgetitem
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TransactGetItemsInput:
-    return_consumed_capacity: Optional[returnconsumedcapacity_enum.ReturnConsumedCapacityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReturnConsumedCapacity' }})
-    transact_items: List[transactgetitem.TransactGetItem] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TransactItems' }})
+    transact_items: List[TransactGetItem] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TransactItems') }})
+    return_consumed_capacity: Optional[ReturnConsumedCapacityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReturnConsumedCapacity') }})
     

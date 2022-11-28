@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateImportJobHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,10 +32,10 @@ export class CreateImportJobHeaders extends SpeakeasyBase {
  * An object that contains details about the data source of the import job.
 **/
 export class CreateImportJobRequestBodyImportDataSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataFormat" })
+  @SpeakeasyMetadata({ data: "json, name=DataFormat" })
   dataFormat?: shared.DataFormatEnum;
 
-  @Metadata({ data: "json, name=S3Url" })
+  @SpeakeasyMetadata({ data: "json, name=S3Url" })
   s3Url?: string;
 }
 
@@ -44,48 +45,48 @@ export class CreateImportJobRequestBodyImportDataSource extends SpeakeasyBase {
  * An object that contains details about the resource destination the import job is going to target.
 **/
 export class CreateImportJobRequestBodyImportDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContactListDestination" })
+  @SpeakeasyMetadata({ data: "json, name=ContactListDestination" })
   contactListDestination?: shared.ContactListDestination;
 
-  @Metadata({ data: "json, name=SuppressionListDestination" })
+  @SpeakeasyMetadata({ data: "json, name=SuppressionListDestination" })
   suppressionListDestination?: shared.SuppressionListDestination;
 }
 
 
 export class CreateImportJobRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ImportDataSource" })
+  @SpeakeasyMetadata({ data: "json, name=ImportDataSource" })
   importDataSource: CreateImportJobRequestBodyImportDataSource;
 
-  @Metadata({ data: "json, name=ImportDestination" })
+  @SpeakeasyMetadata({ data: "json, name=ImportDestination" })
   importDestination: CreateImportJobRequestBodyImportDestination;
 }
 
 
 export class CreateImportJobRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateImportJobHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateImportJobRequestBody;
 }
 
 
 export class CreateImportJobResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createImportJobResponse?: shared.CreateImportJobResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

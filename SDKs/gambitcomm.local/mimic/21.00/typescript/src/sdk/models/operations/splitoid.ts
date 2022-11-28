@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SplitOidPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=OID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=OID" })
   oid: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
   agentNum: number;
 }
 
 
 export class SplitOidRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SplitOidPathParams;
 }
 
 
 export class SplitOidResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   splitOid200ApplicationJsonStrings?: string[];
 }

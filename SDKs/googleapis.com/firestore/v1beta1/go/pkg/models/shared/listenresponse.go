@@ -1,5 +1,7 @@
 package shared
 
+// ListenResponse
+// The response for Firestore.Listen.
 type ListenResponse struct {
 	DocumentChange *DocumentChange  `json:"documentChange,omitempty"`
 	DocumentDelete *DocumentDelete  `json:"documentDelete,omitempty"`

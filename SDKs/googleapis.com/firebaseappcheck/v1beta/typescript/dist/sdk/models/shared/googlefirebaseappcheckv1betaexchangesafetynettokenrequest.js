@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleFirebaseAppcheckV1betaExchangeSafetyNetTokenRequest
 /**
  * Request message for the ExchangeSafetyNetToken method.
@@ -33,7 +33,7 @@ var GoogleFirebaseAppcheckV1betaExchangeSafetyNetTokenRequest = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=safetyNetToken" }),
+        SpeakeasyMetadata({ data: "json, name=safetyNetToken" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1betaExchangeSafetyNetTokenRequest.prototype, "safetyNetToken", void 0);
     return GoogleFirebaseAppcheckV1betaExchangeSafetyNetTokenRequest;

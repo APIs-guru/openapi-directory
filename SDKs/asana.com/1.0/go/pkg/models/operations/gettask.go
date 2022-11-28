@@ -13,13 +13,13 @@ type GetTaskQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetTask200ApplicationJSON struct {
+	Data *shared.TaskResponse `json:"data,omitempty"`
+}
+
 type GetTaskRequest struct {
 	PathParams  GetTaskPathParams
 	QueryParams GetTaskQueryParams
-}
-
-type GetTask200ApplicationJSON struct {
-	Data *shared.TaskResponse `json:"data,omitempty"`
 }
 
 type GetTaskResponse struct {

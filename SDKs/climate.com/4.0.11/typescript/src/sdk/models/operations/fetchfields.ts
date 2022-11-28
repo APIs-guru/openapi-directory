@@ -1,71 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class FetchFieldsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fieldName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fieldName" })
   fieldName?: string;
 }
 
 
 export class FetchFieldsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Limit" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Limit" })
   xLimit?: number;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Next-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Next-Token" })
   xNextToken?: string;
 }
 
 
-export class FetchFieldsSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
-export class FetchFieldsSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2AuthorizationCode: shared.SchemeOauth2AuthorizationCode;
-}
-
-
 export class FetchFieldsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: FetchFieldsSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey?: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: FetchFieldsSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2AuthorizationCode?: shared.SchemeOauth2AuthorizationCode;
 }
 
 
 export class FetchFieldsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: FetchFieldsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: FetchFieldsHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: FetchFieldsSecurity;
 }
 
 
 export class FetchFieldsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   empty?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fields?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

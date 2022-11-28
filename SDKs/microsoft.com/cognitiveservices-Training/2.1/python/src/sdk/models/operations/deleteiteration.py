@@ -4,23 +4,23 @@ from dataclasses import dataclass, field
 
 @dataclass
 class DeleteIterationPathParams:
-    iteration_id: str = field(default=None, metadata={'path_param': { 'field_name': 'iterationId', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    iteration_id: str = field(metadata={'path_param': { 'field_name': 'iterationId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteIterationHeaders:
-    training_key: str = field(default=None, metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
+    training_key: str = field(metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteIterationRequest:
-    path_params: DeleteIterationPathParams = field(default=None)
-    headers: DeleteIterationHeaders = field(default=None)
+    headers: DeleteIterationHeaders = field()
+    path_params: DeleteIterationPathParams = field()
     
 
 @dataclass
 class DeleteIterationResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

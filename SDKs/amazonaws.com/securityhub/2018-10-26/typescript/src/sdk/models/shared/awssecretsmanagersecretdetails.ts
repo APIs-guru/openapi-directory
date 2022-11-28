@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsSecretsManagerSecretRotationRules } from "./awssecretsmanagersecretrotationrules";
+
 
 
 // AwsSecretsManagerSecretDetails
@@ -7,27 +8,27 @@ import { AwsSecretsManagerSecretRotationRules } from "./awssecretsmanagersecretr
  * Details about an Secrets Manager secret.
 **/
 export class AwsSecretsManagerSecretDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Deleted" })
+  @SpeakeasyMetadata({ data: "json, name=Deleted" })
   deleted?: boolean;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=RotationEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=RotationEnabled" })
   rotationEnabled?: boolean;
 
-  @Metadata({ data: "json, name=RotationLambdaArn" })
+  @SpeakeasyMetadata({ data: "json, name=RotationLambdaArn" })
   rotationLambdaArn?: string;
 
-  @Metadata({ data: "json, name=RotationOccurredWithinFrequency" })
+  @SpeakeasyMetadata({ data: "json, name=RotationOccurredWithinFrequency" })
   rotationOccurredWithinFrequency?: boolean;
 
-  @Metadata({ data: "json, name=RotationRules" })
+  @SpeakeasyMetadata({ data: "json, name=RotationRules" })
   rotationRules?: AwsSecretsManagerSecretRotationRules;
 }

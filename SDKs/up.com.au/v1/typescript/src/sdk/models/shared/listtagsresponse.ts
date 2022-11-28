@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TagResource } from "./tagresource";
 
 
+
 export class ListTagsResponseLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next: string;
 
-  @Metadata({ data: "json, name=prev" })
+  @SpeakeasyMetadata({ data: "json, name=prev" })
   prev: string;
 }
 
@@ -20,9 +20,9 @@ export class ListTagsResponseLinks extends SpeakeasyBase {
  * 
 **/
 export class ListTagsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.TagResource })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: TagResource })
   data: TagResource[];
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links: ListTagsResponseLinks;
 }

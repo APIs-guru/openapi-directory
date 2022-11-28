@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateEnvironmentPathParams:
-    environment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'environmentId', 'style': 'simple', 'explode': False }})
+    environment_id: str = field(metadata={'path_param': { 'field_name': 'environmentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,14 +20,14 @@ class UpdateEnvironmentRequests:
 
 @dataclass
 class UpdateEnvironmentRequest:
-    path_params: UpdateEnvironmentPathParams = field(default=None)
-    request: UpdateEnvironmentRequests = field(default=None)
+    path_params: UpdateEnvironmentPathParams = field()
+    request: UpdateEnvironmentRequests = field()
     
 
 @dataclass
 class UpdateEnvironmentResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     environment_model: Optional[shared.EnvironmentModel] = field(default=None)
     environment_model_haljson: Optional[shared.EnvironmentModelHaljson] = field(default=None)
-    status_code: int = field(default=None)
     

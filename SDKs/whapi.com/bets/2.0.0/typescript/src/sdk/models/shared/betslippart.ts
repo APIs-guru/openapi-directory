@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Betslippart extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eachWayAvailable" })
+  @SpeakeasyMetadata({ data: "json, name=eachWayAvailable" })
   eachWayAvailable?: boolean;
 
-  @Metadata({ data: "json, name=includeInMultiple" })
+  @SpeakeasyMetadata({ data: "json, name=includeInMultiple" })
   includeInMultiple: boolean;
 
-  @Metadata({ data: "json, name=legGroup" })
+  @SpeakeasyMetadata({ data: "json, name=legGroup" })
   legGroup?: number;
 
-  @Metadata({ data: "json, name=priceChanged" })
+  @SpeakeasyMetadata({ data: "json, name=priceChanged" })
   priceChanged?: boolean;
 
-  @Metadata({ data: "json, name=priceDen" })
+  @SpeakeasyMetadata({ data: "json, name=priceDen" })
   priceDen: number;
 
-  @Metadata({ data: "json, name=priceNum" })
+  @SpeakeasyMetadata({ data: "json, name=priceNum" })
   priceNum: number;
 
-  @Metadata({ data: "json, name=priceType" })
+  @SpeakeasyMetadata({ data: "json, name=priceType" })
   priceType: number;
 
-  @Metadata({ data: "json, name=selectionId" })
+  @SpeakeasyMetadata({ data: "json, name=selectionId" })
   selectionId: number;
 
-  @Metadata({ data: "json, name=singleAvailable" })
+  @SpeakeasyMetadata({ data: "json, name=singleAvailable" })
   singleAvailable?: boolean;
 
-  @Metadata({ data: "json, name=startingPriceAvailable" })
+  @SpeakeasyMetadata({ data: "json, name=startingPriceAvailable" })
   startingPriceAvailable?: boolean;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=statusChanged" })
+  @SpeakeasyMetadata({ data: "json, name=statusChanged" })
   statusChanged?: boolean;
 }

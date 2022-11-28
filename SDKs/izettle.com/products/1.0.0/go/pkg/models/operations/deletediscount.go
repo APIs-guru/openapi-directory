@@ -9,17 +9,9 @@ type DeleteDiscountPathParams struct {
 	OrganizationUUID string `pathParam:"style=simple,explode=false,name=organizationUuid"`
 }
 
-type DeleteDiscountSecurityOption1 struct {
-	ZettleAPIKey shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type DeleteDiscountSecurityOption2 struct {
-	ZettleOauth shared.SchemeZettleOauth `security:"scheme,type=oauth2"`
-}
-
 type DeleteDiscountSecurity struct {
-	Option1 *DeleteDiscountSecurityOption1 `security:"option"`
-	Option2 *DeleteDiscountSecurityOption2 `security:"option"`
+	ZettleAPIKey *shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
+	ZettleOauth  *shared.SchemeZettleOauth  `security:"scheme,type=oauth2"`
 }
 
 type DeleteDiscountRequest struct {

@@ -11,6 +11,8 @@ const (
 	FileUpdateInputAccessEnumPrivate            FileUpdateInputAccessEnum = "PRIVATE"
 )
 
+// FileUpdateInput
+// Object for updating files.
 type FileUpdateInput struct {
 	Access            *FileUpdateInputAccessEnum `json:"access,omitempty"`
 	IsUsableInContent *bool                      `json:"isUsableInContent,omitempty"`

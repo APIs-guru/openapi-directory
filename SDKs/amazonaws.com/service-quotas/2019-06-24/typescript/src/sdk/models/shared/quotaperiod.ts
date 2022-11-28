@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PeriodUnitEnum } from "./periodunitenum";
+
 
 
 // QuotaPeriod
@@ -7,9 +8,9 @@ import { PeriodUnitEnum } from "./periodunitenum";
  * Information about the quota period.
 **/
 export class QuotaPeriod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PeriodUnit" })
+  @SpeakeasyMetadata({ data: "json, name=PeriodUnit" })
   periodUnit?: PeriodUnitEnum;
 
-  @Metadata({ data: "json, name=PeriodValue" })
+  @SpeakeasyMetadata({ data: "json, name=PeriodValue" })
   periodValue?: number;
 }

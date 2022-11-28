@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { File } from "./file";
+
 
 
 // ListFilesResponse
@@ -8,9 +8,9 @@ import { File } from "./file";
  * The response from listing files.
 **/
 export class ListFilesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=files", elemType: shared.File })
+  @SpeakeasyMetadata({ data: "json, name=files", elemType: File })
   files?: File[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

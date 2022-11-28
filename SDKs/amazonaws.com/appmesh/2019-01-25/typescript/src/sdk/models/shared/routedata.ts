@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceMetadata } from "./resourcemetadata";
 import { RouteSpec } from "./routespec";
 import { RouteStatus } from "./routestatus";
+
 
 
 // RouteData
@@ -9,21 +10,21 @@ import { RouteStatus } from "./routestatus";
  * An object that represents a route returned by a describe operation.
 **/
 export class RouteData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=meshName" })
+  @SpeakeasyMetadata({ data: "json, name=meshName" })
   meshName: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata: ResourceMetadata;
 
-  @Metadata({ data: "json, name=routeName" })
+  @SpeakeasyMetadata({ data: "json, name=routeName" })
   routeName: string;
 
-  @Metadata({ data: "json, name=spec" })
+  @SpeakeasyMetadata({ data: "json, name=spec" })
   spec: RouteSpec;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: RouteStatus;
 
-  @Metadata({ data: "json, name=virtualRouterName" })
+  @SpeakeasyMetadata({ data: "json, name=virtualRouterName" })
   virtualRouterName: string;
 }

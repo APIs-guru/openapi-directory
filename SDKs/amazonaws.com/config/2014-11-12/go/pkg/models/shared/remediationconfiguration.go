@@ -1,5 +1,7 @@
 package shared
 
+// RemediationConfiguration
+// An object that represents the details about the remediation configuration that includes the remediation action, parameters, and data to execute the action.
 type RemediationConfiguration struct {
 	Arn                      *string                              `json:"Arn,omitempty"`
 	Automatic                *bool                                `json:"Automatic,omitempty"`

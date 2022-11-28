@@ -1,16 +1,14 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "http://corona-virus-stats.herokuapp.com/api/v1",
+export const ServerList = [
+	"http://corona-virus-stats.herokuapp.com/api/v1",
 ] as const;
 
 export function WithServerURL(
@@ -21,13 +19,13 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
@@ -36,60 +34,68 @@ export function WithSecurity(security: Security): OptsFunc {
     security = new Security(security);
   }
   return (sdk: SDK) => {
-    sdk.security = security;
+    sdk._security = security;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  public _security?: Security;
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
+    if (!this._securityClient) {
+      if (this._security) {
+        this._securityClient = utils.CreateSecurityClient(
+          this._defaultClient,
+          this._security
         );
       } else {
-        this.securityClient = this.defaultClient;
+        this._securityClient = this._defaultClient;
       }
     }
+    
   }
   
-  // CasesGeneralStatsList - Get the general stats
-  CasesGeneralStatsList(
-    
+  /**
+   * casesGeneralStatsList - Get the general stats
+  **/
+  casesGeneralStatsList(
     config?: AxiosRequestConfig
   ): Promise<operations.CasesGeneralStatsListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/cases/general-stats";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CasesGeneralStatsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CasesGeneralStatsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.generalStats = httpRes?.data;
             }
             break;
@@ -101,8 +107,10 @@ export class SDK {
   }
 
   
-  // CasesSearch - search a country
-  CasesSearch(
+  /**
+   * casesSearch - search a country
+  **/
+  casesSearch(
     req: operations.CasesSearchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CasesSearchResponse> {
@@ -110,11 +118,12 @@ export class SDK {
       req = new operations.CasesSearchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/cases/countries-search";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -123,17 +132,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CasesSearchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CasesSearchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.casesSearch200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -145,25 +155,26 @@ export class SDK {
   }
 
   
-  DocsList(
-    
+  docsList(
     config?: AxiosRequestConfig
   ): Promise<operations.DocsListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/docs/";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DocsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.DocsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 

@@ -12,17 +12,9 @@ type CreateProductQueryParams struct {
 	ReturnEntity *bool `queryParam:"style=form,explode=true,name=returnEntity"`
 }
 
-type CreateProductSecurityOption1 struct {
-	ZettleAPIKey shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type CreateProductSecurityOption2 struct {
-	ZettleOauth shared.SchemeZettleOauth `security:"scheme,type=oauth2"`
-}
-
 type CreateProductSecurity struct {
-	Option1 *CreateProductSecurityOption1 `security:"option"`
-	Option2 *CreateProductSecurityOption2 `security:"option"`
+	ZettleAPIKey *shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
+	ZettleOauth  *shared.SchemeZettleOauth  `security:"scheme,type=oauth2"`
 }
 
 type CreateProductRequest struct {

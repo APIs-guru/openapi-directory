@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndOfSegmentLocation } from "./endofsegmentlocation";
 import { Location } from "./location";
+
 
 
 // InsertPageBreakRequest
@@ -8,9 +9,9 @@ import { Location } from "./location";
  * Inserts a page break followed by a newline at the specified location.
 **/
 export class InsertPageBreakRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endOfSegmentLocation" })
+  @SpeakeasyMetadata({ data: "json, name=endOfSegmentLocation" })
   endOfSegmentLocation?: EndOfSegmentLocation;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: Location;
 }

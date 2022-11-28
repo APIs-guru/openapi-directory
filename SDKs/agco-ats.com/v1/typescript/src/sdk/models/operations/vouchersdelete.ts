@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class VouchersDeletePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=VoucherCode" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=VoucherCode" })
   voucherCode: string;
 }
 
 
 export class VouchersDeleteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: VouchersDeletePathParams;
 }
 
 
 export class VouchersDeleteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

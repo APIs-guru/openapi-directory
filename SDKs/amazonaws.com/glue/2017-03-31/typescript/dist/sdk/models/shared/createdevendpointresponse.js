@@ -1,0 +1,110 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { WorkerTypeEnum } from "./workertypeenum";
+var CreateDevEndpointResponse = /** @class */ (function (_super) {
+    __extends(CreateDevEndpointResponse, _super);
+    function CreateDevEndpointResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Arguments" }),
+        __metadata("design:type", Map)
+    ], CreateDevEndpointResponse.prototype, "arguments", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=AvailabilityZone" }),
+        __metadata("design:type", String)
+    ], CreateDevEndpointResponse.prototype, "availabilityZone", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=CreatedTimestamp" }),
+        __metadata("design:type", Date)
+    ], CreateDevEndpointResponse.prototype, "createdTimestamp", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=EndpointName" }),
+        __metadata("design:type", String)
+    ], CreateDevEndpointResponse.prototype, "endpointName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=ExtraJarsS3Path" }),
+        __metadata("design:type", String)
+    ], CreateDevEndpointResponse.prototype, "extraJarsS3Path", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=ExtraPythonLibsS3Path" }),
+        __metadata("design:type", String)
+    ], CreateDevEndpointResponse.prototype, "extraPythonLibsS3Path", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=FailureReason" }),
+        __metadata("design:type", String)
+    ], CreateDevEndpointResponse.prototype, "failureReason", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=GlueVersion" }),
+        __metadata("design:type", String)
+    ], CreateDevEndpointResponse.prototype, "glueVersion", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=NumberOfNodes" }),
+        __metadata("design:type", Number)
+    ], CreateDevEndpointResponse.prototype, "numberOfNodes", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=NumberOfWorkers" }),
+        __metadata("design:type", Number)
+    ], CreateDevEndpointResponse.prototype, "numberOfWorkers", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=RoleArn" }),
+        __metadata("design:type", String)
+    ], CreateDevEndpointResponse.prototype, "roleArn", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=SecurityConfiguration" }),
+        __metadata("design:type", String)
+    ], CreateDevEndpointResponse.prototype, "securityConfiguration", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=SecurityGroupIds" }),
+        __metadata("design:type", Array)
+    ], CreateDevEndpointResponse.prototype, "securityGroupIds", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Status" }),
+        __metadata("design:type", String)
+    ], CreateDevEndpointResponse.prototype, "status", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=SubnetId" }),
+        __metadata("design:type", String)
+    ], CreateDevEndpointResponse.prototype, "subnetId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=VpcId" }),
+        __metadata("design:type", String)
+    ], CreateDevEndpointResponse.prototype, "vpcId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=WorkerType" }),
+        __metadata("design:type", String)
+    ], CreateDevEndpointResponse.prototype, "workerType", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=YarnEndpointAddress" }),
+        __metadata("design:type", String)
+    ], CreateDevEndpointResponse.prototype, "yarnEndpointAddress", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=ZeppelinRemoteSparkInterpreterPort" }),
+        __metadata("design:type", Number)
+    ], CreateDevEndpointResponse.prototype, "zeppelinRemoteSparkInterpreterPort", void 0);
+    return CreateDevEndpointResponse;
+}(SpeakeasyBase));
+export { CreateDevEndpointResponse };

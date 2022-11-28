@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 class GetObjectInformationXAmzConsistencyLevelEnum(str, Enum):
@@ -10,6 +15,7 @@ class GetObjectInformationXAmzConsistencyLevelEnum(str, Enum):
 
 @dataclass
 class GetObjectInformationHeaders:
+    x_amz_data_partition: str = field(metadata={'header': { 'field_name': 'x-amz-data-partition', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -18,31 +24,35 @@ class GetObjectInformationHeaders:
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
     x_amz_consistency_level: Optional[GetObjectInformationXAmzConsistencyLevelEnum] = field(default=None, metadata={'header': { 'field_name': 'x-amz-consistency-level', 'style': 'simple', 'explode': False }})
-    x_amz_data_partition: str = field(default=None, metadata={'header': { 'field_name': 'x-amz-data-partition', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json
 @dataclass
 class GetObjectInformationRequestBodyObjectReference:
-    selector: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Selector' }})
+    r"""GetObjectInformationRequestBodyObjectReference
+    The reference that identifies an object.
+    """
+    
+    selector: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Selector') }})
     
 
 @dataclass_json
 @dataclass
 class GetObjectInformationRequestBody:
-    object_reference: GetObjectInformationRequestBodyObjectReference = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ObjectReference' }})
+    object_reference: GetObjectInformationRequestBodyObjectReference = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ObjectReference') }})
     
 
 @dataclass
 class GetObjectInformationRequest:
-    headers: GetObjectInformationHeaders = field(default=None)
-    request: GetObjectInformationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetObjectInformationHeaders = field()
+    request: GetObjectInformationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetObjectInformationResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     directory_not_enabled_exception: Optional[Any] = field(default=None)
     get_object_information_response: Optional[shared.GetObjectInformationResponse] = field(default=None)
     internal_service_exception: Optional[Any] = field(default=None)
@@ -50,6 +60,5 @@ class GetObjectInformationResponse:
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     retryable_conflict_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

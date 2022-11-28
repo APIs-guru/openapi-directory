@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetBrandingOptionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   brandingOptions?: shared.BrandingOptions;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDataplexV1AssetDiscoverySpec
+// Settings to manage the metadata discovery and publishing for an asset.
 type GoogleCloudDataplexV1AssetDiscoverySpec struct {
 	CsvOptions      *GoogleCloudDataplexV1AssetDiscoverySpecCsvOptions  `json:"csvOptions,omitempty"`
 	Enabled         *bool                                               `json:"enabled,omitempty"`

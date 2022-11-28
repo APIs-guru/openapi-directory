@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudBeyondcorpAppconnectorsV1alphaAppConnectorPrincipalInfoServiceAccount } from "./googlecloudbeyondcorpappconnectorsv1alphaappconnectorprincipalinfoserviceaccount";
+
 
 
 // GoogleCloudBeyondcorpAppconnectorsV1alphaAppConnectorPrincipalInfo
@@ -7,6 +8,6 @@ import { GoogleCloudBeyondcorpAppconnectorsV1alphaAppConnectorPrincipalInfoServi
  * PrincipalInfo represents an Identity oneof.
 **/
 export class GoogleCloudBeyondcorpAppconnectorsV1alphaAppConnectorPrincipalInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=serviceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
   serviceAccount?: GoogleCloudBeyondcorpAppconnectorsV1alphaAppConnectorPrincipalInfoServiceAccount;
 }

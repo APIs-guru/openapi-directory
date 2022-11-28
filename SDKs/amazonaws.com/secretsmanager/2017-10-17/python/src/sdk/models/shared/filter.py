@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import filternamestringtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Filter:
-    key: Optional[filternamestringtype_enum.FilterNameStringTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Key' }})
-    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Values' }})
+    r"""Filter
+    Allows you to add filters when you use the search function in Secrets Manager.
+    """
+    
+    key: Optional[FilterNameStringTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Key') }})
+    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Values') }})
     

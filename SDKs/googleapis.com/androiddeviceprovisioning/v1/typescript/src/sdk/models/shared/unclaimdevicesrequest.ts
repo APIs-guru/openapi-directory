@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PartnerUnclaim } from "./partnerunclaim";
+
 
 
 // UnclaimDevicesRequest
@@ -8,6 +8,6 @@ import { PartnerUnclaim } from "./partnerunclaim";
  * Request to unclaim devices asynchronously in batch.
 **/
 export class UnclaimDevicesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=unclaims", elemType: shared.PartnerUnclaim })
+  @SpeakeasyMetadata({ data: "json, name=unclaims", elemType: PartnerUnclaim })
   unclaims?: PartnerUnclaim[];
 }

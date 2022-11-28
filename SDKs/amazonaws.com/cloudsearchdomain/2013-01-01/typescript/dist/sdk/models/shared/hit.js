@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Hit
 /**
  * Information about a document that matches the search request.
@@ -33,19 +33,19 @@ var Hit = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=exprs" }),
+        SpeakeasyMetadata({ data: "json, name=exprs" }),
         __metadata("design:type", Map)
     ], Hit.prototype, "exprs", void 0);
     __decorate([
-        Metadata({ data: "json, name=fields" }),
+        SpeakeasyMetadata({ data: "json, name=fields" }),
         __metadata("design:type", Map)
     ], Hit.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "json, name=highlights" }),
+        SpeakeasyMetadata({ data: "json, name=highlights" }),
         __metadata("design:type", Map)
     ], Hit.prototype, "highlights", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Hit.prototype, "id", void 0);
     return Hit;

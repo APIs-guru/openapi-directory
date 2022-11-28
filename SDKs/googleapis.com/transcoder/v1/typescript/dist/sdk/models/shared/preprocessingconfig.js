@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Audio } from "./audio";
 import { Color } from "./color";
 import { Crop } from "./crop";
@@ -40,31 +40,31 @@ var PreprocessingConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=audio" }),
+        SpeakeasyMetadata({ data: "json, name=audio" }),
         __metadata("design:type", Audio)
     ], PreprocessingConfig.prototype, "audio", void 0);
     __decorate([
-        Metadata({ data: "json, name=color" }),
+        SpeakeasyMetadata({ data: "json, name=color" }),
         __metadata("design:type", Color)
     ], PreprocessingConfig.prototype, "color", void 0);
     __decorate([
-        Metadata({ data: "json, name=crop" }),
+        SpeakeasyMetadata({ data: "json, name=crop" }),
         __metadata("design:type", Crop)
     ], PreprocessingConfig.prototype, "crop", void 0);
     __decorate([
-        Metadata({ data: "json, name=deblock" }),
+        SpeakeasyMetadata({ data: "json, name=deblock" }),
         __metadata("design:type", Deblock)
     ], PreprocessingConfig.prototype, "deblock", void 0);
     __decorate([
-        Metadata({ data: "json, name=deinterlace" }),
+        SpeakeasyMetadata({ data: "json, name=deinterlace" }),
         __metadata("design:type", Deinterlace)
     ], PreprocessingConfig.prototype, "deinterlace", void 0);
     __decorate([
-        Metadata({ data: "json, name=denoise" }),
+        SpeakeasyMetadata({ data: "json, name=denoise" }),
         __metadata("design:type", Denoise)
     ], PreprocessingConfig.prototype, "denoise", void 0);
     __decorate([
-        Metadata({ data: "json, name=pad" }),
+        SpeakeasyMetadata({ data: "json, name=pad" }),
         __metadata("design:type", Pad)
     ], PreprocessingConfig.prototype, "pad", void 0);
     return PreprocessingConfig;

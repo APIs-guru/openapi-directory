@@ -1,5 +1,7 @@
 package shared
 
+// PendingUserData
+// Pending user information
 type PendingUserData struct {
 	DisplayName string `json:"displayName"`
 	Email       string `json:"email"`

@@ -1,20 +1,23 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetUsagePathParams:
-    usageplan_id: str = field(default=None, metadata={'path_param': { 'field_name': 'usageplanId', 'style': 'simple', 'explode': False }})
+    usageplan_id: str = field(metadata={'path_param': { 'field_name': 'usageplanId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetUsageQueryParams:
-    end_date: str = field(default=None, metadata={'query_param': { 'field_name': 'endDate', 'style': 'form', 'explode': True }})
+    end_date: str = field(metadata={'query_param': { 'field_name': 'endDate', 'style': 'form', 'explode': True }})
+    start_date: str = field(metadata={'query_param': { 'field_name': 'startDate', 'style': 'form', 'explode': True }})
     key_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'keyId', 'style': 'form', 'explode': True }})
     limit: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'limit', 'style': 'form', 'explode': True }})
     position: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'position', 'style': 'form', 'explode': True }})
-    start_date: str = field(default=None, metadata={'query_param': { 'field_name': 'startDate', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,17 +33,17 @@ class GetUsageHeaders:
 
 @dataclass
 class GetUsageRequest:
-    path_params: GetUsagePathParams = field(default=None)
-    query_params: GetUsageQueryParams = field(default=None)
-    headers: GetUsageHeaders = field(default=None)
+    headers: GetUsageHeaders = field()
+    path_params: GetUsagePathParams = field()
+    query_params: GetUsageQueryParams = field()
     
 
 @dataclass
 class GetUsageResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     usage: Optional[shared.Usage] = field(default=None)

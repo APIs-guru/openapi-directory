@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DescribeDeliveryChannelStatusRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The input for the <a>DeliveryChannelStatus</a> action.
 **/
 export class DescribeDeliveryChannelStatusRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeliveryChannelNames" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryChannelNames" })
   deliveryChannelNames?: string[];
 }

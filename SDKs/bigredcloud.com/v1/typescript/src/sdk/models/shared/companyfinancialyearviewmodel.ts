@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CompanyFinancialYearViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=firstMonth" })
+  @SpeakeasyMetadata({ data: "json, name=firstMonth" })
   firstMonth?: number;
 
-  @Metadata({ data: "json, name=startMonth" })
+  @SpeakeasyMetadata({ data: "json, name=startMonth" })
   startMonth?: number;
 
-  @Metadata({ data: "json, name=startYear" })
+  @SpeakeasyMetadata({ data: "json, name=startYear" })
   startYear?: number;
 }

@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountReference16Ch } from "./accountreference16ch";
 import { PaymentInitiationBulkElementJson } from "./paymentinitiationbulkelementjson";
 import { TransactionStatusEnum } from "./transactionstatusenum";
+
 
 
 // BulkPaymentInitiationWithStatusResponse
@@ -11,24 +11,24 @@ import { TransactionStatusEnum } from "./transactionstatusenum";
  * 
 **/
 export class BulkPaymentInitiationWithStatusResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acceptorTransactionDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=acceptorTransactionDateTime" })
   acceptorTransactionDateTime?: Date;
 
-  @Metadata({ data: "json, name=batchBookingPreferred" })
+  @SpeakeasyMetadata({ data: "json, name=batchBookingPreferred" })
   batchBookingPreferred?: boolean;
 
-  @Metadata({ data: "json, name=debtorAccount" })
+  @SpeakeasyMetadata({ data: "json, name=debtorAccount" })
   debtorAccount: AccountReference16Ch;
 
-  @Metadata({ data: "json, name=paymentInformationId" })
+  @SpeakeasyMetadata({ data: "json, name=paymentInformationId" })
   paymentInformationId?: string;
 
-  @Metadata({ data: "json, name=payments", elemType: shared.PaymentInitiationBulkElementJson })
+  @SpeakeasyMetadata({ data: "json, name=payments", elemType: PaymentInitiationBulkElementJson })
   payments: PaymentInitiationBulkElementJson[];
 
-  @Metadata({ data: "json, name=requestedExecutionDate" })
+  @SpeakeasyMetadata({ data: "json, name=requestedExecutionDate" })
   requestedExecutionDate?: Date;
 
-  @Metadata({ data: "json, name=transactionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=transactionStatus" })
   transactionStatus?: TransactionStatusEnum;
 }

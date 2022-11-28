@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetRulesQueryParams = /** @class */ (function (_super) {
     __extends(GetRulesQueryParams, _super);
@@ -30,7 +30,7 @@ var GetRulesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ids" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ids" }),
         __metadata("design:type", Array)
     ], GetRulesQueryParams.prototype, "ids", void 0);
     return GetRulesQueryParams;
@@ -42,7 +42,7 @@ var GetRulesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRulesQueryParams)
     ], GetRulesRequest.prototype, "queryParams", void 0);
     return GetRulesRequest;
@@ -54,23 +54,23 @@ var GetRulesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetRulesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetRulesResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GetRulesResponse)
     ], GetRulesResponse.prototype, "getRulesResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetRulesResponse.prototype, "problem", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetRulesResponse.prototype, "statusCode", void 0);
     return GetRulesResponse;

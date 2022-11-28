@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StartExecutionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=input" })
+  @SpeakeasyMetadata({ data: "json, name=input" })
   input?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=stateMachineArn" })
+  @SpeakeasyMetadata({ data: "json, name=stateMachineArn" })
   stateMachineArn: string;
 
-  @Metadata({ data: "json, name=traceHeader" })
+  @SpeakeasyMetadata({ data: "json, name=traceHeader" })
   traceHeader?: string;
 }

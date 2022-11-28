@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class EndpointGetRecommendationGenresHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointGetRecommendationGenresSecurity:
-    spotify_auth: shared.SchemeSpotifyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    spotify_auth: shared.SchemeSpotifyAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class EndpointGetRecommendationGenresRequest:
-    headers: EndpointGetRecommendationGenresHeaders = field(default=None)
-    security: EndpointGetRecommendationGenresSecurity = field(default=None)
+    headers: EndpointGetRecommendationGenresHeaders = field()
+    security: EndpointGetRecommendationGenresSecurity = field()
     
 
 @dataclass
 class EndpointGetRecommendationGenresResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response_object: Optional[shared.ErrorResponseObject] = field(default=None)
     genre_seeds_object: Optional[shared.GenreSeedsObject] = field(default=None)
-    status_code: int = field(default=None)
     

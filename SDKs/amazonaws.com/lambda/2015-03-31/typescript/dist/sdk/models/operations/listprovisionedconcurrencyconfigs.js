@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ListProvisionedConcurrencyConfigsPathParams = /** @class */ (function (_super) {
     __extends(ListProvisionedConcurrencyConfigsPathParams, _super);
@@ -30,7 +30,7 @@ var ListProvisionedConcurrencyConfigsPathParams = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=FunctionName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FunctionName" }),
         __metadata("design:type", String)
     ], ListProvisionedConcurrencyConfigsPathParams.prototype, "functionName", void 0);
     return ListProvisionedConcurrencyConfigsPathParams;
@@ -46,15 +46,15 @@ var ListProvisionedConcurrencyConfigsQueryParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=List" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=List" }),
         __metadata("design:type", String)
     ], ListProvisionedConcurrencyConfigsQueryParams.prototype, "list", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Marker" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Marker" }),
         __metadata("design:type", String)
     ], ListProvisionedConcurrencyConfigsQueryParams.prototype, "marker", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MaxItems" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxItems" }),
         __metadata("design:type", Number)
     ], ListProvisionedConcurrencyConfigsQueryParams.prototype, "maxItems", void 0);
     return ListProvisionedConcurrencyConfigsQueryParams;
@@ -66,31 +66,31 @@ var ListProvisionedConcurrencyConfigsHeaders = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], ListProvisionedConcurrencyConfigsHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], ListProvisionedConcurrencyConfigsHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], ListProvisionedConcurrencyConfigsHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], ListProvisionedConcurrencyConfigsHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], ListProvisionedConcurrencyConfigsHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], ListProvisionedConcurrencyConfigsHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], ListProvisionedConcurrencyConfigsHeaders.prototype, "xAmzSignedHeaders", void 0);
     return ListProvisionedConcurrencyConfigsHeaders;
@@ -102,15 +102,15 @@ var ListProvisionedConcurrencyConfigsRequest = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListProvisionedConcurrencyConfigsPathParams)
     ], ListProvisionedConcurrencyConfigsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListProvisionedConcurrencyConfigsQueryParams)
     ], ListProvisionedConcurrencyConfigsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListProvisionedConcurrencyConfigsHeaders)
     ], ListProvisionedConcurrencyConfigsRequest.prototype, "headers", void 0);
     return ListProvisionedConcurrencyConfigsRequest;
@@ -122,31 +122,31 @@ var ListProvisionedConcurrencyConfigsResponse = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListProvisionedConcurrencyConfigsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListProvisionedConcurrencyConfigsResponse.prototype, "invalidParameterValueException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListProvisionedConcurrencyConfigsResponse)
     ], ListProvisionedConcurrencyConfigsResponse.prototype, "listProvisionedConcurrencyConfigsResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListProvisionedConcurrencyConfigsResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListProvisionedConcurrencyConfigsResponse.prototype, "serviceException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListProvisionedConcurrencyConfigsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListProvisionedConcurrencyConfigsResponse.prototype, "tooManyRequestsException", void 0);
     return ListProvisionedConcurrencyConfigsResponse;

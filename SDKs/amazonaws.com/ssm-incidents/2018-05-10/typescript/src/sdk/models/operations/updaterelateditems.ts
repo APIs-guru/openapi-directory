@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateRelatedItemsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,60 +32,60 @@ export class UpdateRelatedItemsHeaders extends SpeakeasyBase {
  * Details about the related item you're adding.
 **/
 export class UpdateRelatedItemsRequestBodyRelatedItemsUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=itemToAdd" })
+  @SpeakeasyMetadata({ data: "json, name=itemToAdd" })
   itemToAdd?: shared.RelatedItem;
 
-  @Metadata({ data: "json, name=itemToRemove" })
+  @SpeakeasyMetadata({ data: "json, name=itemToRemove" })
   itemToRemove?: shared.ItemIdentifier;
 }
 
 
 export class UpdateRelatedItemsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientToken" })
   clientToken?: string;
 
-  @Metadata({ data: "json, name=incidentRecordArn" })
+  @SpeakeasyMetadata({ data: "json, name=incidentRecordArn" })
   incidentRecordArn: string;
 
-  @Metadata({ data: "json, name=relatedItemsUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=relatedItemsUpdate" })
   relatedItemsUpdate: UpdateRelatedItemsRequestBodyRelatedItemsUpdate;
 }
 
 
 export class UpdateRelatedItemsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateRelatedItemsHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateRelatedItemsRequestBody;
 }
 
 
 export class UpdateRelatedItemsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateRelatedItemsOutput?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

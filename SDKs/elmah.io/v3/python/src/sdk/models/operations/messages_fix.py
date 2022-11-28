@@ -4,8 +4,8 @@ from typing import Optional
 
 @dataclass
 class MessagesFixPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    log_id: str = field(default=None, metadata={'path_param': { 'field_name': 'logId', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    log_id: str = field(metadata={'path_param': { 'field_name': 'logId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,12 +15,12 @@ class MessagesFixQueryParams:
 
 @dataclass
 class MessagesFixRequest:
-    path_params: MessagesFixPathParams = field(default=None)
-    query_params: MessagesFixQueryParams = field(default=None)
+    path_params: MessagesFixPathParams = field()
+    query_params: MessagesFixQueryParams = field()
     
 
 @dataclass
 class MessagesFixResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

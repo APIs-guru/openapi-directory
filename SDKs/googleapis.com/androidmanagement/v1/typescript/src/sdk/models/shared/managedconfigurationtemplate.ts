@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ManagedConfigurationTemplate
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The managed configurations template for the app, saved from the managed configurations iframe.
 **/
 export class ManagedConfigurationTemplate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configurationVariables" })
+  @SpeakeasyMetadata({ data: "json, name=configurationVariables" })
   configurationVariables?: Map<string, string>;
 
-  @Metadata({ data: "json, name=templateId" })
+  @SpeakeasyMetadata({ data: "json, name=templateId" })
   templateId?: string;
 }

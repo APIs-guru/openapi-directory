@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeadLetterConfig } from "./deadletterconfig";
 import { EnvironmentResponse } from "./environmentresponse";
 import { FileSystemConfig } from "./filesystemconfig";
@@ -15,101 +14,102 @@ import { TracingConfigResponse } from "./tracingconfigresponse";
 import { VpcConfigResponse } from "./vpcconfigresponse";
 
 
+
 // FunctionConfiguration
 /** 
  * Details about a function's configuration.
 **/
 export class FunctionConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CodeSha256" })
+  @SpeakeasyMetadata({ data: "json, name=CodeSha256" })
   codeSha256?: string;
 
-  @Metadata({ data: "json, name=CodeSize" })
+  @SpeakeasyMetadata({ data: "json, name=CodeSize" })
   codeSize?: number;
 
-  @Metadata({ data: "json, name=DeadLetterConfig" })
+  @SpeakeasyMetadata({ data: "json, name=DeadLetterConfig" })
   deadLetterConfig?: DeadLetterConfig;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Environment" })
+  @SpeakeasyMetadata({ data: "json, name=Environment" })
   environment?: EnvironmentResponse;
 
-  @Metadata({ data: "json, name=FileSystemConfigs", elemType: shared.FileSystemConfig })
+  @SpeakeasyMetadata({ data: "json, name=FileSystemConfigs", elemType: FileSystemConfig })
   fileSystemConfigs?: FileSystemConfig[];
 
-  @Metadata({ data: "json, name=FunctionArn" })
+  @SpeakeasyMetadata({ data: "json, name=FunctionArn" })
   functionArn?: string;
 
-  @Metadata({ data: "json, name=FunctionName" })
+  @SpeakeasyMetadata({ data: "json, name=FunctionName" })
   functionName?: string;
 
-  @Metadata({ data: "json, name=Handler" })
+  @SpeakeasyMetadata({ data: "json, name=Handler" })
   handler?: string;
 
-  @Metadata({ data: "json, name=ImageConfigResponse" })
+  @SpeakeasyMetadata({ data: "json, name=ImageConfigResponse" })
   imageConfigResponse?: ImageConfigResponse;
 
-  @Metadata({ data: "json, name=KMSKeyArn" })
+  @SpeakeasyMetadata({ data: "json, name=KMSKeyArn" })
   kmsKeyArn?: string;
 
-  @Metadata({ data: "json, name=LastModified" })
+  @SpeakeasyMetadata({ data: "json, name=LastModified" })
   lastModified?: string;
 
-  @Metadata({ data: "json, name=LastUpdateStatus" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdateStatus" })
   lastUpdateStatus?: LastUpdateStatusEnum;
 
-  @Metadata({ data: "json, name=LastUpdateStatusReason" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdateStatusReason" })
   lastUpdateStatusReason?: string;
 
-  @Metadata({ data: "json, name=LastUpdateStatusReasonCode" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdateStatusReasonCode" })
   lastUpdateStatusReasonCode?: LastUpdateStatusReasonCodeEnum;
 
-  @Metadata({ data: "json, name=Layers", elemType: shared.Layer })
+  @SpeakeasyMetadata({ data: "json, name=Layers", elemType: Layer })
   layers?: Layer[];
 
-  @Metadata({ data: "json, name=MasterArn" })
+  @SpeakeasyMetadata({ data: "json, name=MasterArn" })
   masterArn?: string;
 
-  @Metadata({ data: "json, name=MemorySize" })
+  @SpeakeasyMetadata({ data: "json, name=MemorySize" })
   memorySize?: number;
 
-  @Metadata({ data: "json, name=PackageType" })
+  @SpeakeasyMetadata({ data: "json, name=PackageType" })
   packageType?: PackageTypeEnum;
 
-  @Metadata({ data: "json, name=RevisionId" })
+  @SpeakeasyMetadata({ data: "json, name=RevisionId" })
   revisionId?: string;
 
-  @Metadata({ data: "json, name=Role" })
+  @SpeakeasyMetadata({ data: "json, name=Role" })
   role?: string;
 
-  @Metadata({ data: "json, name=Runtime" })
+  @SpeakeasyMetadata({ data: "json, name=Runtime" })
   runtime?: RuntimeEnum;
 
-  @Metadata({ data: "json, name=SigningJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=SigningJobArn" })
   signingJobArn?: string;
 
-  @Metadata({ data: "json, name=SigningProfileVersionArn" })
+  @SpeakeasyMetadata({ data: "json, name=SigningProfileVersionArn" })
   signingProfileVersionArn?: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: StateEnum;
 
-  @Metadata({ data: "json, name=StateReason" })
+  @SpeakeasyMetadata({ data: "json, name=StateReason" })
   stateReason?: string;
 
-  @Metadata({ data: "json, name=StateReasonCode" })
+  @SpeakeasyMetadata({ data: "json, name=StateReasonCode" })
   stateReasonCode?: StateReasonCodeEnum;
 
-  @Metadata({ data: "json, name=Timeout" })
+  @SpeakeasyMetadata({ data: "json, name=Timeout" })
   timeout?: number;
 
-  @Metadata({ data: "json, name=TracingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=TracingConfig" })
   tracingConfig?: TracingConfigResponse;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: string;
 
-  @Metadata({ data: "json, name=VpcConfig" })
+  @SpeakeasyMetadata({ data: "json, name=VpcConfig" })
   vpcConfig?: VpcConfigResponse;
 }

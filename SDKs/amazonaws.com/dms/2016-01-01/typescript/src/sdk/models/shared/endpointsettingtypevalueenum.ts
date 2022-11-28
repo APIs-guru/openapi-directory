@@ -1,8 +1,9 @@
 
 
+
 export enum EndpointSettingTypeValueEnum {
-    String = "string"
-,    Boolean = "boolean"
-,    Integer = "integer"
-,    Enum = "enum"
+    String = "string",
+    Boolean = "boolean",
+    Integer = "integer",
+    Enum = "enum"
 }

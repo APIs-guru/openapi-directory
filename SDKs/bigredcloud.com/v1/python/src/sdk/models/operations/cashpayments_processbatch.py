@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class CashPaymentsProcessBatchRequest:
-    request: List[shared.BatchItemCashPaymentDto] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: List[shared.BatchItemCashPaymentDto] = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CashPaymentsProcessBatchResponse:
+    content_type: str = field()
+    status_code: int = field()
     cash_payments_process_batch_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

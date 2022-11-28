@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MetricFilterOperatorEnum(str, Enum):
     OPERATOR_UNSPECIFIED = "OPERATOR_UNSPECIFIED"
@@ -13,8 +15,12 @@ class MetricFilterOperatorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MetricFilter:
-    comparison_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comparisonValue' }})
-    metric_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metricName' }})
-    not_: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'not' }})
-    operator: Optional[MetricFilterOperatorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operator' }})
+    r"""MetricFilter
+    MetricFilter specifies the filter on a metric.
+    """
+    
+    comparison_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('comparisonValue') }})
+    metric_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metricName') }})
+    not_: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('not') }})
+    operator: Optional[MetricFilterOperatorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('operator') }})
     

@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,37 +14,64 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def bulk_create_transactions(self, request: operations.BulkCreateTransactionsRequest) -> operations.BulkCreateTransactionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Bulk create transactions
+        Creates multiple transactions.  Although this endpoint is still supported, it is recommended to use 'POST /budgets/{budget_id}/transactions' to create multiple transactions.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/transactions/bulk", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -60,22 +90,23 @@ class SDK:
 
     
     def create_account(self, request: operations.CreateAccountRequest) -> operations.CreateAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new account
+        Creates a new account
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/accounts", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -94,22 +125,23 @@ class SDK:
 
     
     def create_transaction(self, request: operations.CreateTransactionRequest) -> operations.CreateTransactionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a single transaction or multiple transactions
+        Creates a single transaction or multiple transactions.  If you provide a body containing a `transaction` object, a single transaction will be created and if you provide a body containing a `transactions` array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/transactions", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -132,13 +164,17 @@ class SDK:
 
     
     def get_account_by_id(self, request: operations.GetAccountByIDRequest) -> operations.GetAccountByIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Single account
+        Returns a single account
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/accounts/{account_id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -161,15 +197,18 @@ class SDK:
 
     
     def get_accounts(self, request: operations.GetAccountsRequest) -> operations.GetAccountsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Account list
+        Returns all accounts
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/accounts", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -192,15 +231,18 @@ class SDK:
 
     
     def get_budget_by_id(self, request: operations.GetBudgetByIDRequest) -> operations.GetBudgetByIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Single budget
+        Returns a single budget with all related entities.  This resource is effectively a full budget export.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -223,13 +265,17 @@ class SDK:
 
     
     def get_budget_month(self, request: operations.GetBudgetMonthRequest) -> operations.GetBudgetMonthResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Single budget month
+        Returns a single budget month
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/months/{month}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -252,15 +298,18 @@ class SDK:
 
     
     def get_budget_months(self, request: operations.GetBudgetMonthsRequest) -> operations.GetBudgetMonthsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List budget months
+        Returns all budget months
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/months", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -283,13 +332,17 @@ class SDK:
 
     
     def get_budget_settings_by_id(self, request: operations.GetBudgetSettingsByIDRequest) -> operations.GetBudgetSettingsByIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Budget Settings
+        Returns settings for a budget
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/settings", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -312,15 +365,18 @@ class SDK:
 
     
     def get_budgets(self, request: operations.GetBudgetsRequest) -> operations.GetBudgetsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List budgets
+        Returns budgets list with summary information
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/budgets"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -343,15 +399,18 @@ class SDK:
 
     
     def get_categories(self, request: operations.GetCategoriesRequest) -> operations.GetCategoriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List categories
+        Returns all categories grouped by category group.  Amounts (budgeted, activity, balance, etc.) are specific to the current budget month (UTC).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/categories", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -374,13 +433,17 @@ class SDK:
 
     
     def get_category_by_id(self, request: operations.GetCategoryByIDRequest) -> operations.GetCategoryByIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Single category
+        Returns a single category.  Amounts (budgeted, activity, balance, etc.) are specific to the current budget month (UTC).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/categories/{category_id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -403,13 +466,17 @@ class SDK:
 
     
     def get_month_category_by_id(self, request: operations.GetMonthCategoryByIDRequest) -> operations.GetMonthCategoryByIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Single category for a specific budget month
+        Returns a single category for a specific budget month.  Amounts (budgeted, activity, balance, etc.) are specific to the current budget month (UTC).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/months/{month}/categories/{category_id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -432,13 +499,17 @@ class SDK:
 
     
     def get_payee_by_id(self, request: operations.GetPayeeByIDRequest) -> operations.GetPayeeByIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Single payee
+        Returns a single payee
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/payees/{payee_id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -461,13 +532,17 @@ class SDK:
 
     
     def get_payee_location_by_id(self, request: operations.GetPayeeLocationByIDRequest) -> operations.GetPayeeLocationByIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Single payee location
+        Returns a single payee location
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/payee_locations/{payee_location_id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -490,13 +565,17 @@ class SDK:
 
     
     def get_payee_locations(self, request: operations.GetPayeeLocationsRequest) -> operations.GetPayeeLocationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List payee locations
+        Returns all payee locations
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/payee_locations", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -519,13 +598,17 @@ class SDK:
 
     
     def get_payee_locations_by_payee(self, request: operations.GetPayeeLocationsByPayeeRequest) -> operations.GetPayeeLocationsByPayeeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List locations for a payee
+        Returns all payee locations for a specified payee
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/payees/{payee_id}/payee_locations", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -548,15 +631,18 @@ class SDK:
 
     
     def get_payees(self, request: operations.GetPayeesRequest) -> operations.GetPayeesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List payees
+        Returns all payees
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/payees", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -579,13 +665,17 @@ class SDK:
 
     
     def get_scheduled_transaction_by_id(self, request: operations.GetScheduledTransactionByIDRequest) -> operations.GetScheduledTransactionByIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Single scheduled transaction
+        Returns a single scheduled transaction
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/scheduled_transactions/{scheduled_transaction_id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -608,15 +698,18 @@ class SDK:
 
     
     def get_scheduled_transactions(self, request: operations.GetScheduledTransactionsRequest) -> operations.GetScheduledTransactionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List scheduled transactions
+        Returns all scheduled transactions
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/scheduled_transactions", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -639,13 +732,17 @@ class SDK:
 
     
     def get_transaction_by_id(self, request: operations.GetTransactionByIDRequest) -> operations.GetTransactionByIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Single transaction
+        Returns a single transaction
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/transactions/{transaction_id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -668,15 +765,18 @@ class SDK:
 
     
     def get_transactions(self, request: operations.GetTransactionsRequest) -> operations.GetTransactionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List transactions
+        Returns budget transactions
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/transactions", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -699,15 +799,18 @@ class SDK:
 
     
     def get_transactions_by_account(self, request: operations.GetTransactionsByAccountRequest) -> operations.GetTransactionsByAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List account transactions
+        Returns all transactions for a specified account
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/accounts/{account_id}/transactions", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -730,15 +833,18 @@ class SDK:
 
     
     def get_transactions_by_category(self, request: operations.GetTransactionsByCategoryRequest) -> operations.GetTransactionsByCategoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List category transactions
+        Returns all transactions for a specified category
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/categories/{category_id}/transactions", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -761,15 +867,18 @@ class SDK:
 
     
     def get_transactions_by_payee(self, request: operations.GetTransactionsByPayeeRequest) -> operations.GetTransactionsByPayeeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List payee transactions
+        Returns all transactions for a specified payee
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/payees/{payee_id}/transactions", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -792,13 +901,17 @@ class SDK:
 
     
     def get_user(self) -> operations.GetUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""User info
+        Returns authenticated user information
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/user"
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -817,13 +930,17 @@ class SDK:
 
     
     def import_transactions(self, request: operations.ImportTransactionsRequest) -> operations.ImportTransactionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Import transactions
+        Imports available transactions on all linked accounts for the given budget.  Linked accounts allow transactions to be imported directly from a specified financial institution and this endpoint initiates that import.  Sending a request to this endpoint is the equivalent of clicking \"Import\" on each account in the web application or tapping the \"New Transactions\" banner in the mobile applications.  The response for this endpoint contains the transaction ids that have been imported.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/transactions/import", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -846,22 +963,23 @@ class SDK:
 
     
     def update_month_category(self, request: operations.UpdateMonthCategoryRequest) -> operations.UpdateMonthCategoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a category for a specific month
+        Update a category for a specific month.  Only `budgeted` amount can be updated.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/months/{month}/categories/{category_id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -880,22 +998,23 @@ class SDK:
 
     
     def update_transaction(self, request: operations.UpdateTransactionRequest) -> operations.UpdateTransactionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing transaction
+        Updates a single transaction
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/transactions/{transaction_id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -914,22 +1033,23 @@ class SDK:
 
     
     def update_transactions(self, request: operations.UpdateTransactionsRequest) -> operations.UpdateTransactionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update multiple transactions
+        Updates multiple transactions, by `id` or `import_id`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/budgets/{budget_id}/transactions", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

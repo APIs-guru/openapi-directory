@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ListTablesPathParams = /** @class */ (function (_super) {
     __extends(ListTablesPathParams, _super);
@@ -30,7 +30,7 @@ var ListTablesPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=workbookId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workbookId" }),
         __metadata("design:type", String)
     ], ListTablesPathParams.prototype, "workbookId", void 0);
     return ListTablesPathParams;
@@ -42,11 +42,11 @@ var ListTablesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" }),
         __metadata("design:type", Number)
     ], ListTablesQueryParams.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=nextToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nextToken" }),
         __metadata("design:type", String)
     ], ListTablesQueryParams.prototype, "nextToken", void 0);
     return ListTablesQueryParams;
@@ -58,31 +58,31 @@ var ListTablesHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], ListTablesHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], ListTablesHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], ListTablesHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], ListTablesHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], ListTablesHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], ListTablesHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], ListTablesHeaders.prototype, "xAmzSignedHeaders", void 0);
     return ListTablesHeaders;
@@ -94,15 +94,15 @@ var ListTablesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListTablesPathParams)
     ], ListTablesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListTablesQueryParams)
     ], ListTablesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListTablesHeaders)
     ], ListTablesRequest.prototype, "headers", void 0);
     return ListTablesRequest;
@@ -114,43 +114,43 @@ var ListTablesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListTablesResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListTablesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListTablesResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListTablesResult)
     ], ListTablesResponse.prototype, "listTablesResult", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListTablesResponse.prototype, "requestTimeoutException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListTablesResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListTablesResponse.prototype, "serviceUnavailableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListTablesResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListTablesResponse.prototype, "throttlingException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListTablesResponse.prototype, "validationException", void 0);
     return ListTablesResponse;

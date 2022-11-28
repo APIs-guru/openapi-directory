@@ -5,10 +5,8 @@ type GetAdminMappingsQueryParams struct {
 	Offset *int64 `queryParam:"style=form,explode=true,name=offset"`
 }
 
-type GetAdminMappingsRequest struct {
-	QueryParams GetAdminMappingsQueryParams
-}
-
+// GetAdminMappings200ApplicationJSONMappingsRequestBasicAuthCredentials
+// Pre-emptive basic auth credentials to match against
 type GetAdminMappings200ApplicationJSONMappingsRequestBasicAuthCredentials struct {
 	Password string `json:"password"`
 	Username string `json:"username"`
@@ -75,6 +73,10 @@ type GetAdminMappings200ApplicationJSONMeta struct {
 type GetAdminMappings200ApplicationJSON struct {
 	Mappings []GetAdminMappings200ApplicationJSONMappings `json:"mappings,omitempty"`
 	Meta     *GetAdminMappings200ApplicationJSONMeta      `json:"meta,omitempty"`
+}
+
+type GetAdminMappingsRequest struct {
+	QueryParams GetAdminMappingsQueryParams
 }
 
 type GetAdminMappingsResponse struct {

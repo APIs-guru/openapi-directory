@@ -1,6 +1,7 @@
 
 
+
 export enum MessageTypeEnum {
-    Transactional = "TRANSACTIONAL"
-,    Promotional = "PROMOTIONAL"
+    Transactional = "TRANSACTIONAL",
+    Promotional = "PROMOTIONAL"
 }

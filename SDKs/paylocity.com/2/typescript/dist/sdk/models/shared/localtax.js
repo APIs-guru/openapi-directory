@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LocalTax
 /**
  * The Local Tax model
@@ -33,27 +33,27 @@ var LocalTax = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=exemptions" }),
+        SpeakeasyMetadata({ data: "json, name=exemptions" }),
         __metadata("design:type", Number)
     ], LocalTax.prototype, "exemptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=exemptions2" }),
+        SpeakeasyMetadata({ data: "json, name=exemptions2" }),
         __metadata("design:type", Number)
     ], LocalTax.prototype, "exemptions2", void 0);
     __decorate([
-        Metadata({ data: "json, name=filingStatus" }),
+        SpeakeasyMetadata({ data: "json, name=filingStatus" }),
         __metadata("design:type", String)
     ], LocalTax.prototype, "filingStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=residentPSD" }),
+        SpeakeasyMetadata({ data: "json, name=residentPSD" }),
         __metadata("design:type", String)
     ], LocalTax.prototype, "residentPsd", void 0);
     __decorate([
-        Metadata({ data: "json, name=taxCode" }),
+        SpeakeasyMetadata({ data: "json, name=taxCode" }),
         __metadata("design:type", String)
     ], LocalTax.prototype, "taxCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=workPSD" }),
+        SpeakeasyMetadata({ data: "json, name=workPSD" }),
         __metadata("design:type", String)
     ], LocalTax.prototype, "workPsd", void 0);
     return LocalTax;

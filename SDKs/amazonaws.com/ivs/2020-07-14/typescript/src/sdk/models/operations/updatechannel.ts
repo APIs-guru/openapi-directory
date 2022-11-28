@@ -1,93 +1,94 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateChannelHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum UpdateChannelRequestBodyLatencyModeEnum {
-    Normal = "NORMAL"
-,    Low = "LOW"
+    Normal = "NORMAL",
+    Low = "LOW"
 }
 
 export enum UpdateChannelRequestBodyTypeEnum {
-    Basic = "BASIC"
-,    Standard = "STANDARD"
+    Basic = "BASIC",
+    Standard = "STANDARD"
 }
 
 
 export class UpdateChannelRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=authorized" })
+  @SpeakeasyMetadata({ data: "json, name=authorized" })
   authorized?: boolean;
 
-  @Metadata({ data: "json, name=latencyMode" })
+  @SpeakeasyMetadata({ data: "json, name=latencyMode" })
   latencyMode?: UpdateChannelRequestBodyLatencyModeEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=recordingConfigurationArn" })
+  @SpeakeasyMetadata({ data: "json, name=recordingConfigurationArn" })
   recordingConfigurationArn?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: UpdateChannelRequestBodyTypeEnum;
 }
 
 
 export class UpdateChannelRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateChannelHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateChannelRequestBody;
 }
 
 
 export class UpdateChannelResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pendingVerification?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateChannelResponse?: shared.UpdateChannelResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

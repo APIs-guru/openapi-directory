@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,13 +21,13 @@ class MybusinessaccountmanagementAccountsCreateQueryParams:
 
 @dataclass
 class MybusinessaccountmanagementAccountsCreateRequest:
-    query_params: MybusinessaccountmanagementAccountsCreateQueryParams = field(default=None)
-    request: Optional[shared.Account] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    query_params: MybusinessaccountmanagementAccountsCreateQueryParams = field()
+    request: Optional[shared.AccountInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MybusinessaccountmanagementAccountsCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     account: Optional[shared.Account] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

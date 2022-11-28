@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComplianceTypeEnum } from "./compliancetypeenum";
 import { EvaluationResultIdentifier } from "./evaluationresultidentifier";
+
 
 
 // EvaluationResult
@@ -8,21 +9,21 @@ import { EvaluationResultIdentifier } from "./evaluationresultidentifier";
  * The details of an Config evaluation. Provides the Amazon Web Services resource that was evaluated, the compliance of the resource, related time stamps, and supplementary information.
 **/
 export class EvaluationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Annotation" })
+  @SpeakeasyMetadata({ data: "json, name=Annotation" })
   annotation?: string;
 
-  @Metadata({ data: "json, name=ComplianceType" })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceType" })
   complianceType?: ComplianceTypeEnum;
 
-  @Metadata({ data: "json, name=ConfigRuleInvokedTime" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigRuleInvokedTime" })
   configRuleInvokedTime?: Date;
 
-  @Metadata({ data: "json, name=EvaluationResultIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=EvaluationResultIdentifier" })
   evaluationResultIdentifier?: EvaluationResultIdentifier;
 
-  @Metadata({ data: "json, name=ResultRecordedTime" })
+  @SpeakeasyMetadata({ data: "json, name=ResultRecordedTime" })
   resultRecordedTime?: Date;
 
-  @Metadata({ data: "json, name=ResultToken" })
+  @SpeakeasyMetadata({ data: "json, name=ResultToken" })
   resultToken?: string;
 }

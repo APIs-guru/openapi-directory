@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import errors
-from . import shippingsettings
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ShippingsettingsCustomBatchResponseEntry:
-    batch_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'batchId' }})
-    errors: Optional[errors.Errors] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    shipping_settings: Optional[shippingsettings.ShippingSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shippingSettings' }})
+    r"""ShippingsettingsCustomBatchResponseEntry
+    A batch entry encoding a single non-batch shipping settings response.
+    """
+    
+    batch_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('batchId') }})
+    errors: Optional[Errors] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    shipping_settings: Optional[ShippingSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('shippingSettings') }})
     

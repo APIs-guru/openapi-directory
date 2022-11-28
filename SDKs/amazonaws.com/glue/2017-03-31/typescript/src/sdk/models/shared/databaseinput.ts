@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PrincipalPermissions } from "./principalpermissions";
 import { DatabaseIdentifier } from "./databaseidentifier";
+
 
 
 // DatabaseInput
@@ -9,21 +9,21 @@ import { DatabaseIdentifier } from "./databaseidentifier";
  * The structure used to create or update a database.
 **/
 export class DatabaseInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreateTableDefaultPermissions", elemType: shared.PrincipalPermissions })
+  @SpeakeasyMetadata({ data: "json, name=CreateTableDefaultPermissions", elemType: PrincipalPermissions })
   createTableDefaultPermissions?: PrincipalPermissions[];
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=LocationUri" })
+  @SpeakeasyMetadata({ data: "json, name=LocationUri" })
   locationUri?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=Parameters" })
+  @SpeakeasyMetadata({ data: "json, name=Parameters" })
   parameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=TargetDatabase" })
+  @SpeakeasyMetadata({ data: "json, name=TargetDatabase" })
   targetDatabase?: DatabaseIdentifier;
 }

@@ -30,7 +30,7 @@ type AnalyticsadminPropertiesCustomMetricsCreateSecurity struct {
 type AnalyticsadminPropertiesCustomMetricsCreateRequest struct {
 	PathParams  AnalyticsadminPropertiesCustomMetricsCreatePathParams
 	QueryParams AnalyticsadminPropertiesCustomMetricsCreateQueryParams
-	Request     *shared.GoogleAnalyticsAdminV1alphaCustomMetric `request:"mediaType=application/json"`
+	Request     *shared.GoogleAnalyticsAdminV1alphaCustomMetricInput `request:"mediaType=application/json"`
 	Security    AnalyticsadminPropertiesCustomMetricsCreateSecurity
 }
 

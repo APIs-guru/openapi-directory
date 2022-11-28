@@ -12,6 +12,8 @@ const (
 	DigitalContentLabelAssignedTargetingOptionDetailsExcludedContentRatingTierEnumContentRatingTierFamilies         DigitalContentLabelAssignedTargetingOptionDetailsExcludedContentRatingTierEnum = "CONTENT_RATING_TIER_FAMILIES"
 )
 
+// DigitalContentLabelAssignedTargetingOptionDetails
+// Targeting details for digital content label. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION`.
 type DigitalContentLabelAssignedTargetingOptionDetails struct {
 	ExcludedContentRatingTier *DigitalContentLabelAssignedTargetingOptionDetailsExcludedContentRatingTierEnum `json:"excludedContentRatingTier,omitempty"`
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PortMapping } from "./portmapping";
+
 
 
 // PortForwardingConfig
@@ -8,6 +8,6 @@ import { PortMapping } from "./portmapping";
  * Configuration information for port forwarding.
 **/
 export class PortForwardingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portMappings", elemType: shared.PortMapping })
+  @SpeakeasyMetadata({ data: "json, name=portMappings", elemType: PortMapping })
   portMappings?: PortMapping[];
 }

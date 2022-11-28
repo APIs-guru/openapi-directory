@@ -1,16 +1,20 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
-from . import doublerange
-from . import tablesmodelcolumninfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TablesAnnotation:
-    baseline_score: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'baselineScore' }})
-    prediction_interval: Optional[doublerange.DoubleRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'predictionInterval' }})
-    score: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'score' }})
-    tables_model_column_info: Optional[List[tablesmodelcolumninfo.TablesModelColumnInfo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tablesModelColumnInfo' }})
-    value: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""TablesAnnotation
+    Contains annotation details specific to Tables.
+    """
+    
+    baseline_score: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('baselineScore') }})
+    prediction_interval: Optional[DoubleRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('predictionInterval') }})
+    score: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('score') }})
+    tables_model_column_info: Optional[List[TablesModelColumnInfo]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tablesModelColumnInfo') }})
+    value: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

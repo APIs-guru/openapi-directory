@@ -1,6 +1,7 @@
 
 
+
 export enum ChannelTypeEnum {
-    Basic = "BASIC"
-,    Standard = "STANDARD"
+    Basic = "BASIC",
+    Standard = "STANDARD"
 }

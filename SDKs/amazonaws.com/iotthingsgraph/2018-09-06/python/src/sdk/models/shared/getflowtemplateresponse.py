@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import flowtemplatedescription
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetFlowTemplateResponse:
-    description: Optional[flowtemplatedescription.FlowTemplateDescription] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    description: Optional[FlowTemplateDescription] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
     

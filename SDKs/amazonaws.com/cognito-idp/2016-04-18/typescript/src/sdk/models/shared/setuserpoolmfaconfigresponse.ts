@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserPoolMfaTypeEnum } from "./userpoolmfatypeenum";
 import { SmsMfaConfigType } from "./smsmfaconfigtype";
 import { SoftwareTokenMfaConfigType } from "./softwaretokenmfaconfigtype";
 
 
+
 export class SetUserPoolMfaConfigResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MfaConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=MfaConfiguration" })
   mfaConfiguration?: UserPoolMfaTypeEnum;
 
-  @Metadata({ data: "json, name=SmsMfaConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=SmsMfaConfiguration" })
   smsMfaConfiguration?: SmsMfaConfigType;
 
-  @Metadata({ data: "json, name=SoftwareTokenMfaConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=SoftwareTokenMfaConfiguration" })
   softwareTokenMfaConfiguration?: SoftwareTokenMfaConfigType;
 }

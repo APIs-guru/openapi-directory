@@ -1,0 +1,21 @@
+import { AxiosInstance } from "axios";
+import { Pipelines } from "./pipelines";
+import { Projects } from "./projects";
+import { Workers } from "./workers";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://genomics.googleapis.com/"];
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    pipelines: Pipelines;
+    projects: Projects;
+    workers: Workers;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
+    constructor(...opts: OptsFunc[]);
+}
+export {};

@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var IntentPredictRequest = /** @class */ (function (_super) {
     __extends(IntentPredictRequest, _super);
     function IntentPredictRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=document, multipart_form, name=document" }),
+        SpeakeasyMetadata({ data: "json, name=document, multipart_form, name=document" }),
         __metadata("design:type", String)
     ], IntentPredictRequest.prototype, "document", void 0);
     __decorate([
-        Metadata({ data: "json, name=modelId, multipart_form, name=modelId" }),
+        SpeakeasyMetadata({ data: "json, name=modelId, multipart_form, name=modelId" }),
         __metadata("design:type", String)
     ], IntentPredictRequest.prototype, "modelId", void 0);
     __decorate([
-        Metadata({ data: "json, name=numResults, multipart_form, name=numResults" }),
+        SpeakeasyMetadata({ data: "json, name=numResults, multipart_form, name=numResults" }),
         __metadata("design:type", Number)
     ], IntentPredictRequest.prototype, "numResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=sampleId, multipart_form, name=sampleId" }),
+        SpeakeasyMetadata({ data: "json, name=sampleId, multipart_form, name=sampleId" }),
         __metadata("design:type", String)
     ], IntentPredictRequest.prototype, "sampleId", void 0);
     return IntentPredictRequest;

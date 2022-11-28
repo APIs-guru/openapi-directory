@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddressFamilyEnum } from "./addressfamilyenum";
+
 
 
 // NewBgpPeer
@@ -7,18 +8,18 @@ import { AddressFamilyEnum } from "./addressfamilyenum";
  * Information about a new BGP peer.
 **/
 export class NewBgpPeer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addressFamily" })
+  @SpeakeasyMetadata({ data: "json, name=addressFamily" })
   addressFamily?: AddressFamilyEnum;
 
-  @Metadata({ data: "json, name=amazonAddress" })
+  @SpeakeasyMetadata({ data: "json, name=amazonAddress" })
   amazonAddress?: string;
 
-  @Metadata({ data: "json, name=asn" })
+  @SpeakeasyMetadata({ data: "json, name=asn" })
   asn?: number;
 
-  @Metadata({ data: "json, name=authKey" })
+  @SpeakeasyMetadata({ data: "json, name=authKey" })
   authKey?: string;
 
-  @Metadata({ data: "json, name=customerAddress" })
+  @SpeakeasyMetadata({ data: "json, name=customerAddress" })
   customerAddress?: string;
 }

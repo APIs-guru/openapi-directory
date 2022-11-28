@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Dataset
+// Information about a dataset.
 type Dataset struct {
 	Actions                 []DatasetAction              `json:"actions,omitempty"`
 	Arn                     *string                      `json:"arn,omitempty"`

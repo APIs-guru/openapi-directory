@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NodePermissions } from "./nodepermissions";
+
 
 
 // RoomUsersAddBatchRequestItem
@@ -7,9 +8,9 @@ import { NodePermissions } from "./nodepermissions";
  * Request item model for granting user to the room
 **/
 export class RoomUsersAddBatchRequestItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions: NodePermissions;
 }

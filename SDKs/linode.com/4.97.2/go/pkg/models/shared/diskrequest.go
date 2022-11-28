@@ -1,5 +1,7 @@
 package shared
 
+// DiskRequest
+// Disk object request.
 type DiskRequest struct {
 	AuthorizedKeys  []string               `json:"authorized_keys,omitempty"`
 	AuthorizedUsers []string               `json:"authorized_users,omitempty"`

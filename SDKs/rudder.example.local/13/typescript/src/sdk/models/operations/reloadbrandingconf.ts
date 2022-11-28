@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum ReloadBrandingConf200ApplicationJsonActionEnum {
     GetBrandingConf = "getBrandingConf"
@@ -7,35 +8,35 @@ export enum ReloadBrandingConf200ApplicationJsonActionEnum {
 
 
 export class ReloadBrandingConf200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=branding" })
+  @SpeakeasyMetadata({ data: "json, name=branding" })
   branding: shared.BrandingConf;
 }
 
 export enum ReloadBrandingConf200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class ReloadBrandingConf200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: ReloadBrandingConf200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: ReloadBrandingConf200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: ReloadBrandingConf200ApplicationJsonResultEnum;
 }
 
 
 export class ReloadBrandingConfResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reloadBrandingConf200ApplicationJsonObject?: ReloadBrandingConf200ApplicationJson;
 }

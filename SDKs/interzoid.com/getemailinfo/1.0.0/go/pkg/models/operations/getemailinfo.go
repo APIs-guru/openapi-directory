@@ -5,10 +5,6 @@ type GetemailinfoQueryParams struct {
 	License string `queryParam:"style=form,explode=true,name=license"`
 }
 
-type GetemailinfoRequest struct {
-	QueryParams GetemailinfoQueryParams
-}
-
 type Getemailinfo200ApplicationJSON struct {
 	Code             *string `json:"Code,omitempty"`
 	Credits          *string `json:"Credits,omitempty"`
@@ -22,6 +18,10 @@ type Getemailinfo200ApplicationJSON struct {
 	IsOrganizational *string `json:"IsOrganizational,omitempty"`
 	IsVulgar         *string `json:"IsVulgar,omitempty"`
 	Response         *string `json:"Response,omitempty"`
+}
+
+type GetemailinfoRequest struct {
+	QueryParams GetemailinfoQueryParams
 }
 
 type GetemailinfoResponse struct {

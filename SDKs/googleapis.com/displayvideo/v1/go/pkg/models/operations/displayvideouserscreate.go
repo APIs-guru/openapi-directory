@@ -25,7 +25,7 @@ type DisplayvideoUsersCreateSecurity struct {
 
 type DisplayvideoUsersCreateRequest struct {
 	QueryParams DisplayvideoUsersCreateQueryParams
-	Request     *shared.User `request:"mediaType=application/json"`
+	Request     *shared.UserInput `request:"mediaType=application/json"`
 	Security    DisplayvideoUsersCreateSecurity
 }
 

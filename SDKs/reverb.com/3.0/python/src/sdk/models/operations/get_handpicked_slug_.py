@@ -4,7 +4,7 @@ from typing import List,Optional
 
 @dataclass
 class GetHandpickedSlugPathParams:
-    slug: str = field(default=None, metadata={'path_param': { 'field_name': 'slug', 'style': 'simple', 'explode': False }})
+    slug: str = field(metadata={'path_param': { 'field_name': 'slug', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -47,12 +47,12 @@ class GetHandpickedSlugQueryParams:
 
 @dataclass
 class GetHandpickedSlugRequest:
-    path_params: GetHandpickedSlugPathParams = field(default=None)
-    query_params: GetHandpickedSlugQueryParams = field(default=None)
+    path_params: GetHandpickedSlugPathParams = field()
+    query_params: GetHandpickedSlugQueryParams = field()
     
 
 @dataclass
 class GetHandpickedSlugResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

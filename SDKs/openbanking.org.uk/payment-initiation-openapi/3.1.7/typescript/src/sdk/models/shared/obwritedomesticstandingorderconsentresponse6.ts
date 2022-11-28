@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObActiveOrHistoricCurrencyAndAmount } from "./obactiveorhistoriccurrencyandamount";
 import { ObChargeBearerType1CodeEnum } from "./obchargebearertype1codeenum";
 import { ObCashAccountDebtor4 } from "./obcashaccountdebtor4";
@@ -8,9 +7,10 @@ import { Links } from "./links";
 import { Meta } from "./meta";
 import { ObRisk1 } from "./obrisk1";
 
+
 export enum ObWriteDomesticStandingOrderConsentResponse6DataAuthorisationAuthorisationTypeEnum {
-    Any = "Any"
-,    Single = "Single"
+    Any = "Any",
+    Single = "Single"
 }
 
 
@@ -19,10 +19,10 @@ export enum ObWriteDomesticStandingOrderConsentResponse6DataAuthorisationAuthori
  * The authorisation type request from the TPP.
 **/
 export class ObWriteDomesticStandingOrderConsentResponse6DataAuthorisation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AuthorisationType" })
+  @SpeakeasyMetadata({ data: "json, name=AuthorisationType" })
   authorisationType: ObWriteDomesticStandingOrderConsentResponse6DataAuthorisationAuthorisationTypeEnum;
 
-  @Metadata({ data: "json, name=CompletionDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CompletionDateTime" })
   completionDateTime?: Date;
 }
 
@@ -32,13 +32,13 @@ export class ObWriteDomesticStandingOrderConsentResponse6DataAuthorisation exten
  * Set of elements used to provide details of a charge for the payment initiation.
 **/
 export class ObWriteDomesticStandingOrderConsentResponse6DataCharges extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount: ObActiveOrHistoricCurrencyAndAmount;
 
-  @Metadata({ data: "json, name=ChargeBearer" })
+  @SpeakeasyMetadata({ data: "json, name=ChargeBearer" })
   chargeBearer: ObChargeBearerType1CodeEnum;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: string;
 }
 
@@ -48,16 +48,16 @@ export class ObWriteDomesticStandingOrderConsentResponse6DataCharges extends Spe
  * Identification assigned by an institution to identify an account. This identification is known by the account owner.
 **/
 export class ObWriteDomesticStandingOrderConsentResponse6DataInitiationCreditorAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Identification" })
+  @SpeakeasyMetadata({ data: "json, name=Identification" })
   identification: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=SchemeName" })
+  @SpeakeasyMetadata({ data: "json, name=SchemeName" })
   schemeName: string;
 
-  @Metadata({ data: "json, name=SecondaryIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=SecondaryIdentification" })
   secondaryIdentification?: string;
 }
 
@@ -67,16 +67,16 @@ export class ObWriteDomesticStandingOrderConsentResponse6DataInitiationCreditorA
  * Unambiguous identification of the account of the debtor to which a debit entry will be made as a result of the transaction.
 **/
 export class ObWriteDomesticStandingOrderConsentResponse6DataInitiationDebtorAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Identification" })
+  @SpeakeasyMetadata({ data: "json, name=Identification" })
   identification: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=SchemeName" })
+  @SpeakeasyMetadata({ data: "json, name=SchemeName" })
   schemeName: string;
 
-  @Metadata({ data: "json, name=SecondaryIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=SecondaryIdentification" })
   secondaryIdentification?: string;
 }
 
@@ -86,10 +86,10 @@ export class ObWriteDomesticStandingOrderConsentResponse6DataInitiationDebtorAcc
  * The amount of the final Standing Order
 **/
 export class ObWriteDomesticStandingOrderConsentResponse6DataInitiationFinalPaymentAmount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount: string;
 
-  @Metadata({ data: "json, name=Currency" })
+  @SpeakeasyMetadata({ data: "json, name=Currency" })
   currency: string;
 }
 
@@ -99,10 +99,10 @@ export class ObWriteDomesticStandingOrderConsentResponse6DataInitiationFinalPaym
  * The amount of the first Standing Order
 **/
 export class ObWriteDomesticStandingOrderConsentResponse6DataInitiationFirstPaymentAmount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount: string;
 
-  @Metadata({ data: "json, name=Currency" })
+  @SpeakeasyMetadata({ data: "json, name=Currency" })
   currency: string;
 }
 
@@ -112,10 +112,10 @@ export class ObWriteDomesticStandingOrderConsentResponse6DataInitiationFirstPaym
  * The amount of the recurring Standing Order
 **/
 export class ObWriteDomesticStandingOrderConsentResponse6DataInitiationRecurringPaymentAmount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount: string;
 
-  @Metadata({ data: "json, name=Currency" })
+  @SpeakeasyMetadata({ data: "json, name=Currency" })
   currency: string;
 }
 
@@ -125,40 +125,40 @@ export class ObWriteDomesticStandingOrderConsentResponse6DataInitiationRecurring
  * The Initiation payload is sent by the initiating party to the ASPSP. It is used to request movement of funds from the debtor account to a creditor for a domestic standing order.
 **/
 export class ObWriteDomesticStandingOrderConsentResponse6DataInitiation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreditorAccount" })
+  @SpeakeasyMetadata({ data: "json, name=CreditorAccount" })
   creditorAccount: ObWriteDomesticStandingOrderConsentResponse6DataInitiationCreditorAccount;
 
-  @Metadata({ data: "json, name=DebtorAccount" })
+  @SpeakeasyMetadata({ data: "json, name=DebtorAccount" })
   debtorAccount?: ObWriteDomesticStandingOrderConsentResponse6DataInitiationDebtorAccount;
 
-  @Metadata({ data: "json, name=FinalPaymentAmount" })
+  @SpeakeasyMetadata({ data: "json, name=FinalPaymentAmount" })
   finalPaymentAmount?: ObWriteDomesticStandingOrderConsentResponse6DataInitiationFinalPaymentAmount;
 
-  @Metadata({ data: "json, name=FinalPaymentDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=FinalPaymentDateTime" })
   finalPaymentDateTime?: Date;
 
-  @Metadata({ data: "json, name=FirstPaymentAmount" })
+  @SpeakeasyMetadata({ data: "json, name=FirstPaymentAmount" })
   firstPaymentAmount: ObWriteDomesticStandingOrderConsentResponse6DataInitiationFirstPaymentAmount;
 
-  @Metadata({ data: "json, name=FirstPaymentDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=FirstPaymentDateTime" })
   firstPaymentDateTime: Date;
 
-  @Metadata({ data: "json, name=Frequency" })
+  @SpeakeasyMetadata({ data: "json, name=Frequency" })
   frequency: string;
 
-  @Metadata({ data: "json, name=NumberOfPayments" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfPayments" })
   numberOfPayments?: string;
 
-  @Metadata({ data: "json, name=RecurringPaymentAmount" })
+  @SpeakeasyMetadata({ data: "json, name=RecurringPaymentAmount" })
   recurringPaymentAmount?: ObWriteDomesticStandingOrderConsentResponse6DataInitiationRecurringPaymentAmount;
 
-  @Metadata({ data: "json, name=RecurringPaymentDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=RecurringPaymentDateTime" })
   recurringPaymentDateTime?: Date;
 
-  @Metadata({ data: "json, name=Reference" })
+  @SpeakeasyMetadata({ data: "json, name=Reference" })
   reference?: string;
 
-  @Metadata({ data: "json, name=SupplementaryData" })
+  @SpeakeasyMetadata({ data: "json, name=SupplementaryData" })
   supplementaryData?: Map<string, any>;
 }
 
@@ -167,67 +167,67 @@ export enum ObWriteDomesticStandingOrderConsentResponse6DataPermissionEnum {
 }
 
 export enum ObWriteDomesticStandingOrderConsentResponse6DataReadRefundAccountEnum {
-    No = "No"
-,    Yes = "Yes"
+    No = "No",
+    Yes = "Yes"
 }
 
 export enum ObWriteDomesticStandingOrderConsentResponse6DataStatusEnum {
-    Authorised = "Authorised"
-,    AwaitingAuthorisation = "AwaitingAuthorisation"
-,    Consumed = "Consumed"
-,    Rejected = "Rejected"
+    Authorised = "Authorised",
+    AwaitingAuthorisation = "AwaitingAuthorisation",
+    Consumed = "Consumed",
+    Rejected = "Rejected"
 }
 
 
 export class ObWriteDomesticStandingOrderConsentResponse6Data extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Authorisation" })
+  @SpeakeasyMetadata({ data: "json, name=Authorisation" })
   authorisation?: ObWriteDomesticStandingOrderConsentResponse6DataAuthorisation;
 
-  @Metadata({ data: "json, name=Charges", elemType: shared.ObWriteDomesticStandingOrderConsentResponse6DataCharges })
+  @SpeakeasyMetadata({ data: "json, name=Charges", elemType: ObWriteDomesticStandingOrderConsentResponse6DataCharges })
   charges?: ObWriteDomesticStandingOrderConsentResponse6DataCharges[];
 
-  @Metadata({ data: "json, name=ConsentId" })
+  @SpeakeasyMetadata({ data: "json, name=ConsentId" })
   consentId: string;
 
-  @Metadata({ data: "json, name=CreationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDateTime" })
   creationDateTime: Date;
 
-  @Metadata({ data: "json, name=CutOffDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CutOffDateTime" })
   cutOffDateTime?: Date;
 
-  @Metadata({ data: "json, name=Debtor" })
+  @SpeakeasyMetadata({ data: "json, name=Debtor" })
   debtor?: ObCashAccountDebtor4;
 
-  @Metadata({ data: "json, name=Initiation" })
+  @SpeakeasyMetadata({ data: "json, name=Initiation" })
   initiation: ObWriteDomesticStandingOrderConsentResponse6DataInitiation;
 
-  @Metadata({ data: "json, name=Permission" })
+  @SpeakeasyMetadata({ data: "json, name=Permission" })
   permission: ObWriteDomesticStandingOrderConsentResponse6DataPermissionEnum;
 
-  @Metadata({ data: "json, name=ReadRefundAccount" })
+  @SpeakeasyMetadata({ data: "json, name=ReadRefundAccount" })
   readRefundAccount?: ObWriteDomesticStandingOrderConsentResponse6DataReadRefundAccountEnum;
 
-  @Metadata({ data: "json, name=SCASupportData" })
+  @SpeakeasyMetadata({ data: "json, name=SCASupportData" })
   scaSupportData?: ObscaSupportData1;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status: ObWriteDomesticStandingOrderConsentResponse6DataStatusEnum;
 
-  @Metadata({ data: "json, name=StatusUpdateDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=StatusUpdateDateTime" })
   statusUpdateDateTime: Date;
 }
 
 
 export class ObWriteDomesticStandingOrderConsentResponse6 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Data" })
+  @SpeakeasyMetadata({ data: "json, name=Data" })
   data: ObWriteDomesticStandingOrderConsentResponse6Data;
 
-  @Metadata({ data: "json, name=Links" })
+  @SpeakeasyMetadata({ data: "json, name=Links" })
   links?: Links;
 
-  @Metadata({ data: "json, name=Meta" })
+  @SpeakeasyMetadata({ data: "json, name=Meta" })
   meta?: Meta;
 
-  @Metadata({ data: "json, name=Risk" })
+  @SpeakeasyMetadata({ data: "json, name=Risk" })
   risk: ObRisk1;
 }

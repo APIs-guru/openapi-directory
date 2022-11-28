@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DevicePoolTypeEnum } from "./devicepooltypeenum";
+
 
 
 // ListDevicePoolsRequest
@@ -7,12 +8,12 @@ import { DevicePoolTypeEnum } from "./devicepooltypeenum";
  * Represents the result of a list device pools request.
 **/
 export class ListDevicePoolsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: DevicePoolTypeEnum;
 }

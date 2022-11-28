@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CountriesGetV2CountriesCountryIdGetPathParams = /** @class */ (function (_super) {
     __extends(CountriesGetV2CountriesCountryIdGetPathParams, _super);
@@ -30,7 +30,7 @@ var CountriesGetV2CountriesCountryIdGetPathParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=country_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=country_id" }),
         __metadata("design:type", String)
     ], CountriesGetV2CountriesCountryIdGetPathParams.prototype, "countryId", void 0);
     return CountriesGetV2CountriesCountryIdGetPathParams;
@@ -42,27 +42,27 @@ var CountriesGetV2CountriesCountryIdGetQueryParams = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" }),
         __metadata("design:type", Array)
     ], CountriesGetV2CountriesCountryIdGetQueryParams.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], CountriesGetV2CountriesCountryIdGetQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], CountriesGetV2CountriesCountryIdGetQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=order_by" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order_by" }),
         __metadata("design:type", String)
     ], CountriesGetV2CountriesCountryIdGetQueryParams.prototype, "orderBy", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], CountriesGetV2CountriesCountryIdGetQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], CountriesGetV2CountriesCountryIdGetQueryParams.prototype, "sort", void 0);
     return CountriesGetV2CountriesCountryIdGetQueryParams;
@@ -74,11 +74,11 @@ var CountriesGetV2CountriesCountryIdGetRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CountriesGetV2CountriesCountryIdGetPathParams)
     ], CountriesGetV2CountriesCountryIdGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CountriesGetV2CountriesCountryIdGetQueryParams)
     ], CountriesGetV2CountriesCountryIdGetRequest.prototype, "queryParams", void 0);
     return CountriesGetV2CountriesCountryIdGetRequest;
@@ -90,19 +90,19 @@ var CountriesGetV2CountriesCountryIdGetResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CountriesGetV2CountriesCountryIdGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], CountriesGetV2CountriesCountryIdGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.OpenAqCountriesResult)
     ], CountriesGetV2CountriesCountryIdGetResponse.prototype, "openAqCountriesResult", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CountriesGetV2CountriesCountryIdGetResponse.prototype, "statusCode", void 0);
     return CountriesGetV2CountriesCountryIdGetResponse;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ChannelSectionContentDetails
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about a channelsection, including playlists and channels.
 **/
 export class ChannelSectionContentDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channels" })
+  @SpeakeasyMetadata({ data: "json, name=channels" })
   channels?: string[];
 
-  @Metadata({ data: "json, name=playlists" })
+  @SpeakeasyMetadata({ data: "json, name=playlists" })
   playlists?: string[];
 }

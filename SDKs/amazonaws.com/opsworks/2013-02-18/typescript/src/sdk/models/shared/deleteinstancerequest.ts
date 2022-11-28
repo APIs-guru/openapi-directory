@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteInstanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeleteElasticIp" })
+  @SpeakeasyMetadata({ data: "json, name=DeleteElasticIp" })
   deleteElasticIp?: boolean;
 
-  @Metadata({ data: "json, name=DeleteVolumes" })
+  @SpeakeasyMetadata({ data: "json, name=DeleteVolumes" })
   deleteVolumes?: boolean;
 
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId: string;
 }

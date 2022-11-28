@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Repository
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object representing a repository.
 **/
 export class Repository extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=registryId" })
+  @SpeakeasyMetadata({ data: "json, name=registryId" })
   registryId?: string;
 
-  @Metadata({ data: "json, name=repositoryArn" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryArn" })
   repositoryArn?: string;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName?: string;
 
-  @Metadata({ data: "json, name=repositoryUri" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryUri" })
   repositoryUri?: string;
 }

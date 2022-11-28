@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingReportsFilesListPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
-    report_id: str = field(default=None, metadata={'path_param': { 'field_name': 'reportId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    report_id: str = field(metadata={'path_param': { 'field_name': 'reportId', 'style': 'simple', 'explode': False }})
     
 class DfareportingReportsFilesListSortFieldEnum(str, Enum):
     ID = "ID"
@@ -38,20 +39,20 @@ class DfareportingReportsFilesListQueryParams:
 
 @dataclass
 class DfareportingReportsFilesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingReportsFilesListRequest:
-    path_params: DfareportingReportsFilesListPathParams = field(default=None)
-    query_params: DfareportingReportsFilesListQueryParams = field(default=None)
-    security: DfareportingReportsFilesListSecurity = field(default=None)
+    path_params: DfareportingReportsFilesListPathParams = field()
+    query_params: DfareportingReportsFilesListQueryParams = field()
+    security: DfareportingReportsFilesListSecurity = field()
     
 
 @dataclass
 class DfareportingReportsFilesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     file_list: Optional[shared.FileList] = field(default=None)
-    status_code: int = field(default=None)
     

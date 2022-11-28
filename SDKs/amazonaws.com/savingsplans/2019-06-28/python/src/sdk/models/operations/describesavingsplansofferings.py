@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,32 +29,32 @@ class DescribeSavingsPlansOfferingsRequestBodyProductTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DescribeSavingsPlansOfferingsRequestBody:
-    currencies: Optional[List[shared.CurrencyCodeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currencies' }})
-    descriptions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'descriptions' }})
-    durations: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'durations' }})
-    filters: Optional[List[shared.SavingsPlanOfferingFilterElement]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filters' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    offering_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'offeringIds' }})
-    operations: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operations' }})
-    payment_options: Optional[List[shared.SavingsPlanPaymentOptionEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentOptions' }})
-    plan_types: Optional[List[shared.SavingsPlanTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'planTypes' }})
-    product_type: Optional[DescribeSavingsPlansOfferingsRequestBodyProductTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'productType' }})
-    service_codes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serviceCodes' }})
-    usage_types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'usageTypes' }})
+    currencies: Optional[List[shared.CurrencyCodeEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currencies') }})
+    descriptions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('descriptions') }})
+    durations: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('durations') }})
+    filters: Optional[List[shared.SavingsPlanOfferingFilterElement]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filters') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    offering_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('offeringIds') }})
+    operations: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('operations') }})
+    payment_options: Optional[List[shared.SavingsPlanPaymentOptionEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentOptions') }})
+    plan_types: Optional[List[shared.SavingsPlanTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('planTypes') }})
+    product_type: Optional[DescribeSavingsPlansOfferingsRequestBodyProductTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('productType') }})
+    service_codes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serviceCodes') }})
+    usage_types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('usageTypes') }})
     
 
 @dataclass
 class DescribeSavingsPlansOfferingsRequest:
-    headers: DescribeSavingsPlansOfferingsHeaders = field(default=None)
-    request: DescribeSavingsPlansOfferingsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DescribeSavingsPlansOfferingsHeaders = field()
+    request: DescribeSavingsPlansOfferingsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DescribeSavingsPlansOfferingsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_savings_plans_offerings_response: Optional[shared.DescribeSavingsPlansOfferingsResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

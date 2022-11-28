@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetInternationalPaymentsInternationalPaymentIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=InternationalPaymentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=InternationalPaymentId" })
   internationalPaymentId: string;
 }
 
 
 export class GetInternationalPaymentsInternationalPaymentIdHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-customer-user-agent" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-customer-user-agent" })
   xCustomerUserAgent?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-fapi-auth-date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-fapi-auth-date" })
   xFapiAuthDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-fapi-customer-ip-address" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-fapi-customer-ip-address" })
   xFapiCustomerIpAddress?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-fapi-interaction-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-fapi-interaction-id" })
   xFapiInteractionId?: string;
 }
 
 
 export class GetInternationalPaymentsInternationalPaymentIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   tppoAuth2Security: shared.SchemeTppoAuth2Security;
 }
 
 
 export class GetInternationalPaymentsInternationalPaymentIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetInternationalPaymentsInternationalPaymentIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetInternationalPaymentsInternationalPaymentIdHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetInternationalPaymentsInternationalPaymentIdSecurity;
 }
 
 
 export class GetInternationalPaymentsInternationalPaymentIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   obErrorResponse1?: shared.ObErrorResponse1;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   obWriteInternationalResponse5?: shared.ObWriteInternationalResponse5;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

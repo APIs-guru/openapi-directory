@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RequestStatusEnum } from "./requeststatusenum";
+
 
 
 // RequestedServiceQuotaChange
@@ -7,45 +8,45 @@ import { RequestStatusEnum } from "./requeststatusenum";
  * Information about a quota increase request.
 **/
 export class RequestedServiceQuotaChange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CaseId" })
+  @SpeakeasyMetadata({ data: "json, name=CaseId" })
   caseId?: string;
 
-  @Metadata({ data: "json, name=Created" })
+  @SpeakeasyMetadata({ data: "json, name=Created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=DesiredValue" })
+  @SpeakeasyMetadata({ data: "json, name=DesiredValue" })
   desiredValue?: number;
 
-  @Metadata({ data: "json, name=GlobalQuota" })
+  @SpeakeasyMetadata({ data: "json, name=GlobalQuota" })
   globalQuota?: boolean;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=LastUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdated" })
   lastUpdated?: Date;
 
-  @Metadata({ data: "json, name=QuotaArn" })
+  @SpeakeasyMetadata({ data: "json, name=QuotaArn" })
   quotaArn?: string;
 
-  @Metadata({ data: "json, name=QuotaCode" })
+  @SpeakeasyMetadata({ data: "json, name=QuotaCode" })
   quotaCode?: string;
 
-  @Metadata({ data: "json, name=QuotaName" })
+  @SpeakeasyMetadata({ data: "json, name=QuotaName" })
   quotaName?: string;
 
-  @Metadata({ data: "json, name=Requester" })
+  @SpeakeasyMetadata({ data: "json, name=Requester" })
   requester?: string;
 
-  @Metadata({ data: "json, name=ServiceCode" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceCode" })
   serviceCode?: string;
 
-  @Metadata({ data: "json, name=ServiceName" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceName" })
   serviceName?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: RequestStatusEnum;
 
-  @Metadata({ data: "json, name=Unit" })
+  @SpeakeasyMetadata({ data: "json, name=Unit" })
   unit?: string;
 }

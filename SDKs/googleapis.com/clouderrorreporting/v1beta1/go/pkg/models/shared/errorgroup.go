@@ -10,6 +10,8 @@ const (
 	ErrorGroupResolutionStatusEnumMuted                       ErrorGroupResolutionStatusEnum = "MUTED"
 )
 
+// ErrorGroup
+// Description of a group of similar error events.
 type ErrorGroup struct {
 	GroupID          *string                         `json:"groupId,omitempty"`
 	Name             *string                         `json:"name,omitempty"`

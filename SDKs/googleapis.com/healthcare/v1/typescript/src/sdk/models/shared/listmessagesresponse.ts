@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Message } from "./message";
+
 
 
 // ListMessagesResponse
@@ -8,9 +8,9 @@ import { Message } from "./message";
  * Lists the messages in the specified HL7v2 store.
 **/
 export class ListMessagesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hl7V2Messages", elemType: shared.Message })
+  @SpeakeasyMetadata({ data: "json, name=hl7V2Messages", elemType: Message })
   hl7V2Messages?: Message[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

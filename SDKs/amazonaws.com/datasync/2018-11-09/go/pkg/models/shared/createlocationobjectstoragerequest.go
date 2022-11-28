@@ -1,5 +1,7 @@
 package shared
 
+// CreateLocationObjectStorageRequest
+// CreateLocationObjectStorageRequest
 type CreateLocationObjectStorageRequest struct {
 	AccessKey      *string                          `json:"AccessKey,omitempty"`
 	AgentArns      []string                         `json:"AgentArns"`

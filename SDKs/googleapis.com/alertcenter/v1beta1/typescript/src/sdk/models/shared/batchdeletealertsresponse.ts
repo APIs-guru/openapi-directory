@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Status } from "./status";
+
 
 
 // BatchDeleteAlertsResponse
@@ -8,9 +8,9 @@ import { Status } from "./status";
  * Response to batch delete operation on alerts.
 **/
 export class BatchDeleteAlertsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failedAlertStatus", elemType: shared.Status })
+  @SpeakeasyMetadata({ data: "json, name=failedAlertStatus", elemType: Status })
   failedAlertStatus?: Map<string, Status>;
 
-  @Metadata({ data: "json, name=successAlertIds" })
+  @SpeakeasyMetadata({ data: "json, name=successAlertIds" })
   successAlertIds?: string[];
 }

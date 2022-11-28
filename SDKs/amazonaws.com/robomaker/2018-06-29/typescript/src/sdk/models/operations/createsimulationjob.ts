@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateSimulationJobHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,13 +32,13 @@ export class CreateSimulationJobHeaders extends SpeakeasyBase {
  * Compute information for the simulation job.
 **/
 export class CreateSimulationJobRequestBodyCompute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=simulationUnitLimit" })
+  @SpeakeasyMetadata({ data: "json, name=simulationUnitLimit" })
   simulationUnitLimit?: number;
 }
 
 export enum CreateSimulationJobRequestBodyFailureBehaviorEnum {
-    Fail = "Fail"
-,    Continue = "Continue"
+    Fail = "Fail",
+    Continue = "Continue"
 }
 
 
@@ -46,7 +47,7 @@ export enum CreateSimulationJobRequestBodyFailureBehaviorEnum {
  * The logging configuration.
 **/
 export class CreateSimulationJobRequestBodyLoggingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=recordAllRosTopics" })
+  @SpeakeasyMetadata({ data: "json, name=recordAllRosTopics" })
   recordAllRosTopics?: boolean;
 }
 
@@ -56,10 +57,10 @@ export class CreateSimulationJobRequestBodyLoggingConfig extends SpeakeasyBase {
  * The output location.
 **/
 export class CreateSimulationJobRequestBodyOutputLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=s3Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=s3Bucket" })
   s3Bucket?: string;
 
-  @Metadata({ data: "json, name=s3Prefix" })
+  @SpeakeasyMetadata({ data: "json, name=s3Prefix" })
   s3Prefix?: string;
 }
 
@@ -69,93 +70,93 @@ export class CreateSimulationJobRequestBodyOutputLocation extends SpeakeasyBase 
  * If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and two subnet IDs.
 **/
 export class CreateSimulationJobRequestBodyVpcConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assignPublicIp" })
+  @SpeakeasyMetadata({ data: "json, name=assignPublicIp" })
   assignPublicIp?: boolean;
 
-  @Metadata({ data: "json, name=securityGroups" })
+  @SpeakeasyMetadata({ data: "json, name=securityGroups" })
   securityGroups?: string[];
 
-  @Metadata({ data: "json, name=subnets" })
+  @SpeakeasyMetadata({ data: "json, name=subnets" })
   subnets?: string[];
 }
 
 
 export class CreateSimulationJobRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientRequestToken" })
   clientRequestToken?: string;
 
-  @Metadata({ data: "json, name=compute" })
+  @SpeakeasyMetadata({ data: "json, name=compute" })
   compute?: CreateSimulationJobRequestBodyCompute;
 
-  @Metadata({ data: "json, name=dataSources", elemType: shared.DataSourceConfig })
+  @SpeakeasyMetadata({ data: "json, name=dataSources", elemType: shared.DataSourceConfig })
   dataSources?: shared.DataSourceConfig[];
 
-  @Metadata({ data: "json, name=failureBehavior" })
+  @SpeakeasyMetadata({ data: "json, name=failureBehavior" })
   failureBehavior?: CreateSimulationJobRequestBodyFailureBehaviorEnum;
 
-  @Metadata({ data: "json, name=iamRole" })
+  @SpeakeasyMetadata({ data: "json, name=iamRole" })
   iamRole: string;
 
-  @Metadata({ data: "json, name=loggingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=loggingConfig" })
   loggingConfig?: CreateSimulationJobRequestBodyLoggingConfig;
 
-  @Metadata({ data: "json, name=maxJobDurationInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=maxJobDurationInSeconds" })
   maxJobDurationInSeconds: number;
 
-  @Metadata({ data: "json, name=outputLocation" })
+  @SpeakeasyMetadata({ data: "json, name=outputLocation" })
   outputLocation?: CreateSimulationJobRequestBodyOutputLocation;
 
-  @Metadata({ data: "json, name=robotApplications", elemType: shared.RobotApplicationConfig })
+  @SpeakeasyMetadata({ data: "json, name=robotApplications", elemType: shared.RobotApplicationConfig })
   robotApplications?: shared.RobotApplicationConfig[];
 
-  @Metadata({ data: "json, name=simulationApplications", elemType: shared.SimulationApplicationConfig })
+  @SpeakeasyMetadata({ data: "json, name=simulationApplications", elemType: shared.SimulationApplicationConfig })
   simulationApplications?: shared.SimulationApplicationConfig[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=vpcConfig" })
+  @SpeakeasyMetadata({ data: "json, name=vpcConfig" })
   vpcConfig?: CreateSimulationJobRequestBodyVpcConfig;
 }
 
 
 export class CreateSimulationJobRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateSimulationJobHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateSimulationJobRequestBody;
 }
 
 
 export class CreateSimulationJobResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createSimulationJobResponse?: shared.CreateSimulationJobResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   idempotentParameterMismatchException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

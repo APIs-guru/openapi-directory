@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { OcrWordElement } from "./ocrwordelement";
 /**
  * OCR results of a page, including words of text and their location

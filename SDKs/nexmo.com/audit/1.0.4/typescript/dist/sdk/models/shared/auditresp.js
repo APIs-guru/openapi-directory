@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AuditEvent } from "./auditevent";
 import { PaginationLinks } from "./paginationlinks";
 import { PaginationData } from "./paginationdata";
 // AuditRespEmbedded
@@ -36,7 +36,7 @@ var AuditRespEmbedded = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=events", elemType: shared.AuditEvent }),
+        SpeakeasyMetadata({ data: "json, name=events", elemType: AuditEvent }),
         __metadata("design:type", Array)
     ], AuditRespEmbedded.prototype, "events", void 0);
     return AuditRespEmbedded;
@@ -48,15 +48,15 @@ var AuditResp = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=_embedded" }),
+        SpeakeasyMetadata({ data: "json, name=_embedded" }),
         __metadata("design:type", AuditRespEmbedded)
     ], AuditResp.prototype, "embedded", void 0);
     __decorate([
-        Metadata({ data: "json, name=_links" }),
+        SpeakeasyMetadata({ data: "json, name=_links" }),
         __metadata("design:type", PaginationLinks)
     ], AuditResp.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=page" }),
+        SpeakeasyMetadata({ data: "json, name=page" }),
         __metadata("design:type", PaginationData)
     ], AuditResp.prototype, "page", void 0);
     return AuditResp;

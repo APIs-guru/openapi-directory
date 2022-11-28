@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCrmV3ExtensionsCardsAppIdCardIdGetByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=appId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" })
   appId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=cardId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=cardId" })
   cardId: string;
 }
 
 
 export class GetCrmV3ExtensionsCardsAppIdCardIdGetByIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   developerHapikey: shared.SchemeDeveloperHapikey;
 }
 
 
 export class GetCrmV3ExtensionsCardsAppIdCardIdGetByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetCrmV3ExtensionsCardsAppIdCardIdGetByIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetCrmV3ExtensionsCardsAppIdCardIdGetByIdSecurity;
 }
 
 
 export class GetCrmV3ExtensionsCardsAppIdCardIdGetByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cardResponse?: shared.CardResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

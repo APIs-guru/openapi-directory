@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AccountGetPermissionsPathParams:
-    guest_id: int = field(default=None, metadata={'path_param': { 'field_name': 'guestId', 'style': 'simple', 'explode': False }})
+    guest_id: int = field(metadata={'path_param': { 'field_name': 'guestId', 'style': 'simple', 'explode': False }})
     
 class AccountGetPermissionsEntityTypeEnum(str, Enum):
     DATAPOINT = "datapoint"
@@ -27,13 +28,13 @@ class AccountGetPermissionsQueryParams:
 
 @dataclass
 class AccountGetPermissionsRequest:
-    path_params: AccountGetPermissionsPathParams = field(default=None)
-    query_params: AccountGetPermissionsQueryParams = field(default=None)
+    path_params: AccountGetPermissionsPathParams = field()
+    query_params: AccountGetPermissionsQueryParams = field()
     
 
 @dataclass
 class AccountGetPermissionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_responses_entities_response_api_core_dto_grants_grant_: Optional[shared.APICoreResponsesEntitiesResponseAPICoreDtoGrantsGrant] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

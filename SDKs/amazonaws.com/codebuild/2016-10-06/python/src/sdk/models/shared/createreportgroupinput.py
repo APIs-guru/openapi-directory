@@ -1,16 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import reportexportconfig
-from . import tag
-from . import reporttype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateReportGroupInput:
-    export_config: reportexportconfig.ReportExportConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 'exportConfig' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: reporttype_enum.ReportTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    export_config: ReportExportConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('exportConfig') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    type: ReportTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     

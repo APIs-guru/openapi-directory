@@ -1,5 +1,7 @@
 package shared
 
+// AuthResult
+// The authorizer result.
 type AuthResult struct {
 	Allowed              *Allowed          `json:"allowed,omitempty"`
 	AuthDecision         *AuthDecisionEnum `json:"authDecision,omitempty"`

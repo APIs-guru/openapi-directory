@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDownloadDbLogFilePortionActionEnum(str, Enum):
     DOWNLOAD_DB_LOG_FILE_PORTION = "DownloadDBLogFilePortion"
@@ -10,12 +14,12 @@ class GetDownloadDbLogFilePortionVersionEnum(str, Enum):
 
 @dataclass
 class GetDownloadDbLogFilePortionQueryParams:
-    action: GetDownloadDbLogFilePortionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    db_instance_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'DBInstanceIdentifier', 'style': 'form', 'explode': True }})
-    log_file_name: str = field(default=None, metadata={'query_param': { 'field_name': 'LogFileName', 'style': 'form', 'explode': True }})
+    action: GetDownloadDbLogFilePortionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_instance_identifier: str = field(metadata={'query_param': { 'field_name': 'DBInstanceIdentifier', 'style': 'form', 'explode': True }})
+    log_file_name: str = field(metadata={'query_param': { 'field_name': 'LogFileName', 'style': 'form', 'explode': True }})
+    version: GetDownloadDbLogFilePortionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     number_of_lines: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'NumberOfLines', 'style': 'form', 'explode': True }})
-    version: GetDownloadDbLogFilePortionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetDownloadDbLogFilePortionHeaders:
 
 @dataclass
 class GetDownloadDbLogFilePortionRequest:
-    query_params: GetDownloadDbLogFilePortionQueryParams = field(default=None)
-    headers: GetDownloadDbLogFilePortionHeaders = field(default=None)
+    headers: GetDownloadDbLogFilePortionHeaders = field()
+    query_params: GetDownloadDbLogFilePortionQueryParams = field()
     
 
 @dataclass
 class GetDownloadDbLogFilePortionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

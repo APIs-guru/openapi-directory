@@ -1,11 +1,7 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class SignUpIdSecurity extends SpeakeasyBase {
     oauthsecurity: shared.SchemeOauthsecurity;
-}
-export declare class SignUpIdRequest extends SpeakeasyBase {
-    request?: any;
-    security: SignUpIdSecurity;
 }
 export declare class SignUpId401ApplicationJson extends SpeakeasyBase {
     error?: string;
@@ -14,6 +10,10 @@ export declare class SignUpId401ApplicationJson extends SpeakeasyBase {
 export declare class SignUpId500ApplicationJson extends SpeakeasyBase {
     error?: any;
     errorDescription?: any;
+}
+export declare class SignUpIdRequest extends SpeakeasyBase {
+    request?: any;
+    security: SignUpIdSecurity;
 }
 export declare class SignUpIdResponse extends SpeakeasyBase {
     contentType: string;

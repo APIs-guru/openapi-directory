@@ -1,11 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChartOptions } from "./chartoptions";
 import { DataSet } from "./dataset";
 import { Threshold } from "./threshold";
 import { Axis } from "./axis";
-import { Axis } from "./axis";
-import { Axis } from "./axis";
+
 
 
 // XyChart
@@ -13,24 +11,24 @@ import { Axis } from "./axis";
  * A chart that displays data on a 2D (X and Y axes) plane.
 **/
 export class XyChart extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chartOptions" })
+  @SpeakeasyMetadata({ data: "json, name=chartOptions" })
   chartOptions?: ChartOptions;
 
-  @Metadata({ data: "json, name=dataSets", elemType: shared.DataSet })
+  @SpeakeasyMetadata({ data: "json, name=dataSets", elemType: DataSet })
   dataSets?: DataSet[];
 
-  @Metadata({ data: "json, name=thresholds", elemType: shared.Threshold })
+  @SpeakeasyMetadata({ data: "json, name=thresholds", elemType: Threshold })
   thresholds?: Threshold[];
 
-  @Metadata({ data: "json, name=timeshiftDuration" })
+  @SpeakeasyMetadata({ data: "json, name=timeshiftDuration" })
   timeshiftDuration?: string;
 
-  @Metadata({ data: "json, name=xAxis" })
+  @SpeakeasyMetadata({ data: "json, name=xAxis" })
   xAxis?: Axis;
 
-  @Metadata({ data: "json, name=y2Axis" })
+  @SpeakeasyMetadata({ data: "json, name=y2Axis" })
   y2Axis?: Axis;
 
-  @Metadata({ data: "json, name=yAxis" })
+  @SpeakeasyMetadata({ data: "json, name=yAxis" })
   yAxis?: Axis;
 }

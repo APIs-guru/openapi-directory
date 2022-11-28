@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -10,13 +10,13 @@ class RequestS3TagListHeaders:
 
 @dataclass
 class RequestS3TagListRequest:
-    headers: RequestS3TagListHeaders = field(default=None)
+    headers: RequestS3TagListHeaders = field()
     
 
 @dataclass
 class RequestS3TagListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     s3_tag_list: Optional[shared.S3TagList] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudChannelV1Value
+// Data type and value of a parameter.
 type GoogleCloudChannelV1Value struct {
 	BoolValue   *bool                  `json:"boolValue,omitempty"`
 	DoubleValue *float64               `json:"doubleValue,omitempty"`

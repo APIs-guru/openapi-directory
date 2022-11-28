@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IamcredentialsProjectsServiceAccountsGenerateAccessTokenPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class IamcredentialsProjectsServiceAccountsGenerateAccessTokenQueryParams:
 
 @dataclass
 class IamcredentialsProjectsServiceAccountsGenerateAccessTokenSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IamcredentialsProjectsServiceAccountsGenerateAccessTokenRequest:
-    path_params: IamcredentialsProjectsServiceAccountsGenerateAccessTokenPathParams = field(default=None)
-    query_params: IamcredentialsProjectsServiceAccountsGenerateAccessTokenQueryParams = field(default=None)
+    path_params: IamcredentialsProjectsServiceAccountsGenerateAccessTokenPathParams = field()
+    query_params: IamcredentialsProjectsServiceAccountsGenerateAccessTokenQueryParams = field()
+    security: IamcredentialsProjectsServiceAccountsGenerateAccessTokenSecurity = field()
     request: Optional[shared.GenerateAccessTokenRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IamcredentialsProjectsServiceAccountsGenerateAccessTokenSecurity = field(default=None)
     
 
 @dataclass
 class IamcredentialsProjectsServiceAccountsGenerateAccessTokenResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     generate_access_token_response: Optional[shared.GenerateAccessTokenResponse] = field(default=None)
-    status_code: int = field(default=None)
     

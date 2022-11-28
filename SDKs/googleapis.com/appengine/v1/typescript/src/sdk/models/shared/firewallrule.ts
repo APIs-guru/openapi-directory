@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum FirewallRuleActionEnum {
-    UnspecifiedAction = "UNSPECIFIED_ACTION"
-,    Allow = "ALLOW"
-,    Deny = "DENY"
+    UnspecifiedAction = "UNSPECIFIED_ACTION",
+    Allow = "ALLOW",
+    Deny = "DENY"
 }
 
 
@@ -12,15 +13,15 @@ export enum FirewallRuleActionEnum {
  * A single firewall rule that is evaluated against incoming traffic and provides an action to take on matched requests.
 **/
 export class FirewallRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: FirewallRuleActionEnum;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority?: number;
 
-  @Metadata({ data: "json, name=sourceRange" })
+  @SpeakeasyMetadata({ data: "json, name=sourceRange" })
   sourceRange?: string;
 }

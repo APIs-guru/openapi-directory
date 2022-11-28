@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
-from . import enterprisecrmcardstemplatesaplosserieslistdata
-from . import enterprisecrmcardstabulardata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudIntegrationsV1alphaMonitorExecutionStatsResponse:
-    aplos_series_list_data: Optional[enterprisecrmcardstemplatesaplosserieslistdata.EnterpriseCrmCardsTemplatesAplosSeriesListData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'aplosSeriesListData' }})
-    table_data: Optional[enterprisecrmcardstabulardata.EnterpriseCrmCardsTabularData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tableData' }})
+    r"""GoogleCloudIntegrationsV1alphaMonitorExecutionStatsResponse
+    The response for getting Execution stats.
+    """
+    
+    aplos_series_list_data: Optional[EnterpriseCrmCardsTemplatesAplosSeriesListData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('aplosSeriesListData') }})
+    table_data: Optional[EnterpriseCrmCardsTabularData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tableData') }})
     

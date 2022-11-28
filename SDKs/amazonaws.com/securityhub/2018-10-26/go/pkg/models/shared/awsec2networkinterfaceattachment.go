@@ -1,5 +1,7 @@
 package shared
 
+// AwsEc2NetworkInterfaceAttachment
+// Information about the network interface attachment.
 type AwsEc2NetworkInterfaceAttachment struct {
 	AttachTime          *string `json:"AttachTime,omitempty"`
 	AttachmentID        *string `json:"AttachmentId,omitempty"`

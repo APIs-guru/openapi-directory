@@ -1,5 +1,8 @@
 package shared
 
+// Entity
+//
+//	Provides information about an extracted medical entity.
 type Entity struct {
 	Attributes  []Attribute        `json:"Attributes,omitempty"`
 	BeginOffset *int64             `json:"BeginOffset,omitempty"`

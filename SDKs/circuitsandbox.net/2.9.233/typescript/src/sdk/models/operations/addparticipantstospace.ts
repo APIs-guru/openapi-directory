@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AddParticipantsToSpacePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 export enum AddParticipantsToSpaceRequestBodyRoleEnum {
-    Default = "DEFAULT"
-,    Moderator = "MODERATOR"
-,    Author = "AUTHOR"
-,    Participant = "PARTICIPANT"
-,    Reader = "READER"
+    Default = "DEFAULT",
+    Moderator = "MODERATOR",
+    Author = "AUTHOR",
+    Participant = "PARTICIPANT",
+    Reader = "READER"
 }
 
 
 export class AddParticipantsToSpaceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=role;" })
+  @SpeakeasyMetadata({ data: "form, name=role;" })
   role: AddParticipantsToSpaceRequestBodyRoleEnum;
 
-  @Metadata({ data: "form, name=userId;" })
+  @SpeakeasyMetadata({ data: "form, name=userId;" })
   userId: string[];
 }
 
 
 export class AddParticipantsToSpaceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class AddParticipantsToSpaceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AddParticipantsToSpacePathParams;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request: AddParticipantsToSpaceRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: AddParticipantsToSpaceSecurity;
 }
 
 
 export class AddParticipantsToSpaceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   participantAddResults?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetThemeMediaPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,19 +16,19 @@ class GetThemeMediaQueryParams:
 
 @dataclass
 class GetThemeMediaSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetThemeMediaRequest:
-    path_params: GetThemeMediaPathParams = field(default=None)
-    query_params: GetThemeMediaQueryParams = field(default=None)
-    security: GetThemeMediaSecurity = field(default=None)
+    path_params: GetThemeMediaPathParams = field()
+    query_params: GetThemeMediaQueryParams = field()
+    security: GetThemeMediaSecurity = field()
     
 
 @dataclass
 class GetThemeMediaResponse:
+    content_type: str = field()
+    status_code: int = field()
     all_theme_media_result: Optional[shared.AllThemeMediaResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

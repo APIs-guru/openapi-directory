@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataFilter } from "./datafilter";
 
+
 export enum DataFilterValueRangeMajorDimensionEnum {
-    DimensionUnspecified = "DIMENSION_UNSPECIFIED"
-,    Rows = "ROWS"
-,    Columns = "COLUMNS"
+    DimensionUnspecified = "DIMENSION_UNSPECIFIED",
+    Rows = "ROWS",
+    Columns = "COLUMNS"
 }
 
 
@@ -13,12 +14,12 @@ export enum DataFilterValueRangeMajorDimensionEnum {
  * A range of values whose location is specified by a DataFilter.
 **/
 export class DataFilterValueRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataFilter" })
+  @SpeakeasyMetadata({ data: "json, name=dataFilter" })
   dataFilter?: DataFilter;
 
-  @Metadata({ data: "json, name=majorDimension" })
+  @SpeakeasyMetadata({ data: "json, name=majorDimension" })
   majorDimension?: DataFilterValueRangeMajorDimensionEnum;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values?: any[][];
 }

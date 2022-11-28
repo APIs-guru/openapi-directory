@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetMappingValuesKeyKeyEnum {
-    IdType = "idType"
-,    ExchCode = "exchCode"
-,    MicCode = "micCode"
-,    Currency = "currency"
-,    MarketSecDes = "marketSecDes"
-,    SecurityType = "securityType"
-,    SecurityType2 = "securityType2"
+    IdType = "idType",
+    ExchCode = "exchCode",
+    MicCode = "micCode",
+    Currency = "currency",
+    MarketSecDes = "marketSecDes",
+    SecurityType = "securityType",
+    SecurityType2 = "securityType2"
 }
 
 
 export class GetMappingValuesKeyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=key" })
   key: GetMappingValuesKeyKeyEnum;
 }
 
 
-export class GetMappingValuesKeyRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetMappingValuesKeyPathParams;
-}
-
-
 export class GetMappingValuesKey200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values?: string[];
 }
 
 
+export class GetMappingValuesKeyRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetMappingValuesKeyPathParams;
+}
+
+
 export class GetMappingValuesKeyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getMappingValuesKey200ApplicationJsonObject?: GetMappingValuesKey200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getMappingValuesKey400WildcardString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getMappingValuesKey500WildcardString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

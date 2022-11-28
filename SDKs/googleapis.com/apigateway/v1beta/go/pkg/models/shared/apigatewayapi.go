@@ -11,6 +11,8 @@ const (
 	ApigatewayAPIStateEnumUpdating         ApigatewayAPIStateEnum = "UPDATING"
 )
 
+// ApigatewayAPI
+// An API that can be served by one or more Gateways.
 type ApigatewayAPI struct {
 	CreateTime     *string                 `json:"createTime,omitempty"`
 	DisplayName    *string                 `json:"displayName,omitempty"`
@@ -19,4 +21,12 @@ type ApigatewayAPI struct {
 	Name           *string                 `json:"name,omitempty"`
 	State          *ApigatewayAPIStateEnum `json:"state,omitempty"`
 	UpdateTime     *string                 `json:"updateTime,omitempty"`
+}
+
+// ApigatewayAPIInput
+// An API that can be served by one or more Gateways.
+type ApigatewayAPIInput struct {
+	DisplayName    *string           `json:"displayName,omitempty"`
+	Labels         map[string]string `json:"labels,omitempty"`
+	ManagedService *string           `json:"managedService,omitempty"`
 }

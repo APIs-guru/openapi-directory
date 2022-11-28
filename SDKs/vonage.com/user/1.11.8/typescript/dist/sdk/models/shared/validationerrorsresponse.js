@@ -22,27 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DetailedInvalidParam } from "./detailedinvalidparam";
 var ValidationErrorsResponse = /** @class */ (function (_super) {
     __extends(ValidationErrorsResponse, _super);
     function ValidationErrorsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=instance" }),
+        SpeakeasyMetadata({ data: "json, name=instance" }),
         __metadata("design:type", String)
     ], ValidationErrorsResponse.prototype, "instance", void 0);
     __decorate([
-        Metadata({ data: "json, name=invalid_parameters", elemType: shared.DetailedInvalidParam }),
+        SpeakeasyMetadata({ data: "json, name=invalid_parameters", elemType: DetailedInvalidParam }),
         __metadata("design:type", Array)
     ], ValidationErrorsResponse.prototype, "invalidParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], ValidationErrorsResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], ValidationErrorsResponse.prototype, "title", void 0);
     return ValidationErrorsResponse;

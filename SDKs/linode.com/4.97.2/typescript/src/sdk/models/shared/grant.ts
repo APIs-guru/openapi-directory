@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GrantPermissionsEnum {
-    ReadOnly = "read_only"
-,    ReadWrite = "read_write"
+    ReadOnly = "read_only",
+    ReadWrite = "read_write"
 }
 
 
@@ -12,12 +13,26 @@ export enum GrantPermissionsEnum {
  * 
 **/
 export class Grant extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
+  permissions?: GrantPermissionsEnum;
+}
+
+
+// GrantInput
+/** 
+ * Represents the level of access a restricted User has to a specific resource on the Account.
+ * 
+**/
+export class GrantInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions?: GrantPermissionsEnum;
 }

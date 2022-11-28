@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageProperties } from "./imageproperties";
+
 
 
 // UpdateImagePropertiesRequest
@@ -7,12 +8,12 @@ import { ImageProperties } from "./imageproperties";
  * Update the properties of an Image.
 **/
 export class UpdateImagePropertiesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 
-  @Metadata({ data: "json, name=imageProperties" })
+  @SpeakeasyMetadata({ data: "json, name=imageProperties" })
   imageProperties?: ImageProperties;
 
-  @Metadata({ data: "json, name=objectId" })
+  @SpeakeasyMetadata({ data: "json, name=objectId" })
   objectId?: string;
 }

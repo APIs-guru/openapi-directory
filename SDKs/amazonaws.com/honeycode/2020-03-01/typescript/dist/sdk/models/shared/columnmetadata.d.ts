@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FormatEnum } from "./formatenum";
 /**
  * Metadata for column in the table.

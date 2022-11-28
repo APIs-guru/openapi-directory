@@ -1,5 +1,7 @@
 package shared
 
+// TagPerformance
+// Represents performance data for a particular tag in a trained iteration
 type TagPerformance struct {
 	ID                    *string  `json:"Id,omitempty"`
 	Name                  *string  `json:"Name,omitempty"`

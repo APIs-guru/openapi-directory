@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -11,13 +14,13 @@ class UpdateUploadSharesHeaders:
 
 @dataclass
 class UpdateUploadSharesRequest:
-    headers: UpdateUploadSharesHeaders = field(default=None)
-    request: shared.UpdateUploadSharesBulkRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateUploadSharesHeaders = field()
+    request: shared.UpdateUploadSharesBulkRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateUploadSharesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

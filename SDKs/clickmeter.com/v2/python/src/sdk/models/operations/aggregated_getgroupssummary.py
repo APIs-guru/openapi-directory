@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class AggregatedGetGroupsSummarySortDirectionEnum(str, Enum):
@@ -30,6 +31,7 @@ class AggregatedGetGroupsSummaryTimeFrameEnum(str, Enum):
 
 @dataclass
 class AggregatedGetGroupsSummaryQueryParams:
+    time_frame: AggregatedGetGroupsSummaryTimeFrameEnum = field(metadata={'query_param': { 'field_name': 'timeFrame', 'style': 'form', 'explode': True }})
     favourite: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'favourite', 'style': 'form', 'explode': True }})
     from_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fromDay', 'style': 'form', 'explode': True }})
     limit: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'limit', 'style': 'form', 'explode': True }})
@@ -39,18 +41,17 @@ class AggregatedGetGroupsSummaryQueryParams:
     status: Optional[AggregatedGetGroupsSummaryStatusEnum] = field(default=None, metadata={'query_param': { 'field_name': 'status', 'style': 'form', 'explode': True }})
     tag: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'tag', 'style': 'form', 'explode': True }})
     text_search: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'textSearch', 'style': 'form', 'explode': True }})
-    time_frame: AggregatedGetGroupsSummaryTimeFrameEnum = field(default=None, metadata={'query_param': { 'field_name': 'timeFrame', 'style': 'form', 'explode': True }})
     to_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'toDay', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class AggregatedGetGroupsSummaryRequest:
-    query_params: AggregatedGetGroupsSummaryQueryParams = field(default=None)
+    query_params: AggregatedGetGroupsSummaryQueryParams = field()
     
 
 @dataclass
 class AggregatedGetGroupsSummaryResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_dto_aggregated_aggregated_summary_result: Optional[shared.APICoreDtoAggregatedAggregatedSummaryResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

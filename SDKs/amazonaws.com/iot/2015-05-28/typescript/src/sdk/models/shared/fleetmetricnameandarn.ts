@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FleetMetricNameAndArn
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The name and ARN of a fleet metric.
 **/
 export class FleetMetricNameAndArn extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metricArn" })
+  @SpeakeasyMetadata({ data: "json, name=metricArn" })
   metricArn?: string;
 
-  @Metadata({ data: "json, name=metricName" })
+  @SpeakeasyMetadata({ data: "json, name=metricName" })
   metricName?: string;
 }

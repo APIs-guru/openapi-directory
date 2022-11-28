@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QueryResultEntry } from "./queryresultentry";
 import { Project } from "./project";
 
 
+
 export class QueryjobProjectResults extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columns" })
+  @SpeakeasyMetadata({ data: "json, name=columns" })
   columns?: string[];
 
-  @Metadata({ data: "json, name=data", elemType: shared.QueryResultEntry, elemDepth: 2 })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: QueryResultEntry, elemDepth: 2 })
   data?: QueryResultEntry[][];
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=project" })
+  @SpeakeasyMetadata({ data: "json, name=project" })
   project?: Project;
 }

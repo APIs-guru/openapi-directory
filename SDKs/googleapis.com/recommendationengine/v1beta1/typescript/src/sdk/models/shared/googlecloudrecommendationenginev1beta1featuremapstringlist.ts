@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRecommendationengineV1beta1FeatureMapStringList
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A list of string features.
 **/
 export class GoogleCloudRecommendationengineV1beta1FeatureMapStringList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string[];
 }

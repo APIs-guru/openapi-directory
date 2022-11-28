@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ComputeResource } from "./computeresource";
 import { CeStateEnum } from "./cestateenum";
 import { CeStatusEnum } from "./cestatusenum";

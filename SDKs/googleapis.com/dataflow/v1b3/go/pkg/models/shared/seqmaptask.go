@@ -1,5 +1,7 @@
 package shared
 
+// SeqMapTask
+// Describes a particular function to invoke.
 type SeqMapTask struct {
 	Inputs      []SideInputInfo        `json:"inputs,omitempty"`
 	Name        *string                `json:"name,omitempty"`

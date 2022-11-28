@@ -4,10 +4,6 @@ type DeleteWorkspaceQueryParams struct {
 	WorkspaceID string `queryParam:"style=form,explode=true,name=workspaceId"`
 }
 
-type DeleteWorkspaceRequest struct {
-	QueryParams DeleteWorkspaceQueryParams
-}
-
 type DeleteWorkspace200ApplicationJSONResponse struct {
 	Success *bool `json:"success,omitempty"`
 }
@@ -77,6 +73,10 @@ type DeleteWorkspace422ApplicationJSON struct {
 type DeleteWorkspace500ApplicationJSON struct {
 	Error  *string `json:"error,omitempty"`
 	Status *int64  `json:"status,omitempty"`
+}
+
+type DeleteWorkspaceRequest struct {
+	QueryParams DeleteWorkspaceQueryParams
 }
 
 type DeleteWorkspaceResponse struct {

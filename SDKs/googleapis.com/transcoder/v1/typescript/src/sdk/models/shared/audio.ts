@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Audio
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Audio preprocessing configuration.
 **/
 export class Audio extends SpeakeasyBase {
-  @Metadata({ data: "json, name=highBoost" })
+  @SpeakeasyMetadata({ data: "json, name=highBoost" })
   highBoost?: boolean;
 
-  @Metadata({ data: "json, name=lowBoost" })
+  @SpeakeasyMetadata({ data: "json, name=lowBoost" })
   lowBoost?: boolean;
 
-  @Metadata({ data: "json, name=lufs" })
+  @SpeakeasyMetadata({ data: "json, name=lufs" })
   lufs?: number;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var RuntimeAccessConfigAccessTypeEnum;
 (function (RuntimeAccessConfigAccessTypeEnum) {
     RuntimeAccessConfigAccessTypeEnum["RuntimeAccessTypeUnspecified"] = "RUNTIME_ACCESS_TYPE_UNSPECIFIED";
@@ -39,17 +39,37 @@ var RuntimeAccessConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accessType" }),
+        SpeakeasyMetadata({ data: "json, name=accessType" }),
         __metadata("design:type", String)
     ], RuntimeAccessConfig.prototype, "accessType", void 0);
     __decorate([
-        Metadata({ data: "json, name=proxyUri" }),
+        SpeakeasyMetadata({ data: "json, name=proxyUri" }),
         __metadata("design:type", String)
     ], RuntimeAccessConfig.prototype, "proxyUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=runtimeOwner" }),
+        SpeakeasyMetadata({ data: "json, name=runtimeOwner" }),
         __metadata("design:type", String)
     ], RuntimeAccessConfig.prototype, "runtimeOwner", void 0);
     return RuntimeAccessConfig;
 }(SpeakeasyBase));
 export { RuntimeAccessConfig };
+// RuntimeAccessConfigInput
+/**
+ * Specifies the login configuration for Runtime
+**/
+var RuntimeAccessConfigInput = /** @class */ (function (_super) {
+    __extends(RuntimeAccessConfigInput, _super);
+    function RuntimeAccessConfigInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=accessType" }),
+        __metadata("design:type", String)
+    ], RuntimeAccessConfigInput.prototype, "accessType", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=runtimeOwner" }),
+        __metadata("design:type", String)
+    ], RuntimeAccessConfigInput.prototype, "runtimeOwner", void 0);
+    return RuntimeAccessConfigInput;
+}(SpeakeasyBase));
+export { RuntimeAccessConfigInput };

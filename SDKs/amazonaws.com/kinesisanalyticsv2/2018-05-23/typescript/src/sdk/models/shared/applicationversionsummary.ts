@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationStatusEnum } from "./applicationstatusenum";
+
 
 
 // ApplicationVersionSummary
@@ -7,9 +8,9 @@ import { ApplicationStatusEnum } from "./applicationstatusenum";
  * The summary of the application version.
 **/
 export class ApplicationVersionSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationStatus" })
   applicationStatus: ApplicationStatusEnum;
 
-  @Metadata({ data: "json, name=ApplicationVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationVersionId" })
   applicationVersionId: number;
 }

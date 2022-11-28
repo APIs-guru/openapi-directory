@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudIdentitytoolkitAdminV2IdpCertificate } from "./googlecloudidentitytoolkitadminv2idpcertificate";
 // GoogleCloudIdentitytoolkitAdminV2IdpConfig
 /**
  * The SAML IdP (Identity Provider) configuration when the project acts as the relying party.
@@ -34,19 +34,19 @@ var GoogleCloudIdentitytoolkitAdminV2IdpConfig = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=idpCertificates", elemType: shared.GoogleCloudIdentitytoolkitAdminV2IdpCertificate }),
+        SpeakeasyMetadata({ data: "json, name=idpCertificates", elemType: GoogleCloudIdentitytoolkitAdminV2IdpCertificate }),
         __metadata("design:type", Array)
     ], GoogleCloudIdentitytoolkitAdminV2IdpConfig.prototype, "idpCertificates", void 0);
     __decorate([
-        Metadata({ data: "json, name=idpEntityId" }),
+        SpeakeasyMetadata({ data: "json, name=idpEntityId" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitAdminV2IdpConfig.prototype, "idpEntityId", void 0);
     __decorate([
-        Metadata({ data: "json, name=signRequest" }),
+        SpeakeasyMetadata({ data: "json, name=signRequest" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudIdentitytoolkitAdminV2IdpConfig.prototype, "signRequest", void 0);
     __decorate([
-        Metadata({ data: "json, name=ssoUrl" }),
+        SpeakeasyMetadata({ data: "json, name=ssoUrl" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitAdminV2IdpConfig.prototype, "ssoUrl", void 0);
     return GoogleCloudIdentitytoolkitAdminV2IdpConfig;

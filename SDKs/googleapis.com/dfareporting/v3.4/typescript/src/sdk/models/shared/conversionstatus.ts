@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Conversion } from "./conversion";
 import { ConversionError } from "./conversionerror";
+
 
 
 // ConversionStatus
@@ -9,12 +9,12 @@ import { ConversionError } from "./conversionerror";
  * The original conversion that was inserted or updated and whether there were any errors.
 **/
 export class ConversionStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conversion" })
+  @SpeakeasyMetadata({ data: "json, name=conversion" })
   conversion?: Conversion;
 
-  @Metadata({ data: "json, name=errors", elemType: shared.ConversionError })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: ConversionError })
   errors?: ConversionError[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

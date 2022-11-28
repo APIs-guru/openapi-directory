@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudVisionV1p2beta1BoundingPoly } from "./googlecloudvisionv1p2beta1boundingpoly";
+
 
 
 // GoogleCloudVisionV1p2beta1CropHint
@@ -7,12 +8,12 @@ import { GoogleCloudVisionV1p2beta1BoundingPoly } from "./googlecloudvisionv1p2b
  * Single crop hint that is used to generate a new crop when serving an image.
 **/
 export class GoogleCloudVisionV1p2beta1CropHint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boundingPoly" })
+  @SpeakeasyMetadata({ data: "json, name=boundingPoly" })
   boundingPoly?: GoogleCloudVisionV1p2beta1BoundingPoly;
 
-  @Metadata({ data: "json, name=confidence" })
+  @SpeakeasyMetadata({ data: "json, name=confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=importanceFraction" })
+  @SpeakeasyMetadata({ data: "json, name=importanceFraction" })
   importanceFraction?: number;
 }

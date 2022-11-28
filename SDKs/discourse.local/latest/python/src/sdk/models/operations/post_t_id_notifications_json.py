@@ -1,17 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class PostTIDNotificationsJSONPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostTIDNotificationsJSONHeaders:
-    api_key: str = field(default=None, metadata={'header': { 'field_name': 'Api-Key', 'style': 'simple', 'explode': False }})
-    api_username: str = field(default=None, metadata={'header': { 'field_name': 'Api-Username', 'style': 'simple', 'explode': False }})
+    api_key: str = field(metadata={'header': { 'field_name': 'Api-Key', 'style': 'simple', 'explode': False }})
+    api_username: str = field(metadata={'header': { 'field_name': 'Api-Username', 'style': 'simple', 'explode': False }})
     
 class PostTIDNotificationsJSONRequestBodyNotificationLevelEnum(str, Enum):
     ZERO = "0"
@@ -23,25 +25,25 @@ class PostTIDNotificationsJSONRequestBodyNotificationLevelEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PostTIDNotificationsJSONRequestBody:
-    notification_level: PostTIDNotificationsJSONRequestBodyNotificationLevelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notification_level' }})
-    
-
-@dataclass
-class PostTIDNotificationsJSONRequest:
-    path_params: PostTIDNotificationsJSONPathParams = field(default=None)
-    headers: PostTIDNotificationsJSONHeaders = field(default=None)
-    request: Optional[PostTIDNotificationsJSONRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    notification_level: PostTIDNotificationsJSONRequestBodyNotificationLevelEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('notification_level') }})
     
 
 @dataclass_json
 @dataclass
 class PostTIDNotificationsJSON200ApplicationJSON:
-    success: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'success' }})
+    success: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('success') }})
+    
+
+@dataclass
+class PostTIDNotificationsJSONRequest:
+    headers: PostTIDNotificationsJSONHeaders = field()
+    path_params: PostTIDNotificationsJSONPathParams = field()
+    request: Optional[PostTIDNotificationsJSONRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostTIDNotificationsJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     post_t_id_notifications_json_200_application_json_object: Optional[PostTIDNotificationsJSON200ApplicationJSON] = field(default=None)
-    status_code: int = field(default=None)
     

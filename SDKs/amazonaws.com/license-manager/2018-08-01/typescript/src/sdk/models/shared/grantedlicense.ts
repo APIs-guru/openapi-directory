@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConsumptionConfiguration } from "./consumptionconfiguration";
 import { Entitlement } from "./entitlement";
 import { IssuerDetails } from "./issuerdetails";
@@ -9,53 +8,54 @@ import { LicenseStatusEnum } from "./licensestatusenum";
 import { DatetimeRange } from "./datetimerange";
 
 
+
 // GrantedLicense
 /** 
  * Describes a license that is granted to a grantee.
 **/
 export class GrantedLicense extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Beneficiary" })
+  @SpeakeasyMetadata({ data: "json, name=Beneficiary" })
   beneficiary?: string;
 
-  @Metadata({ data: "json, name=ConsumptionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=ConsumptionConfiguration" })
   consumptionConfiguration?: ConsumptionConfiguration;
 
-  @Metadata({ data: "json, name=CreateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreateTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=Entitlements", elemType: shared.Entitlement })
+  @SpeakeasyMetadata({ data: "json, name=Entitlements", elemType: Entitlement })
   entitlements?: Entitlement[];
 
-  @Metadata({ data: "json, name=HomeRegion" })
+  @SpeakeasyMetadata({ data: "json, name=HomeRegion" })
   homeRegion?: string;
 
-  @Metadata({ data: "json, name=Issuer" })
+  @SpeakeasyMetadata({ data: "json, name=Issuer" })
   issuer?: IssuerDetails;
 
-  @Metadata({ data: "json, name=LicenseArn" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseArn" })
   licenseArn?: string;
 
-  @Metadata({ data: "json, name=LicenseMetadata", elemType: shared.Metadata })
+  @SpeakeasyMetadata({ data: "json, name=LicenseMetadata", elemType: Metadata })
   licenseMetadata?: Metadata[];
 
-  @Metadata({ data: "json, name=LicenseName" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseName" })
   licenseName?: string;
 
-  @Metadata({ data: "json, name=ProductName" })
+  @SpeakeasyMetadata({ data: "json, name=ProductName" })
   productName?: string;
 
-  @Metadata({ data: "json, name=ProductSKU" })
+  @SpeakeasyMetadata({ data: "json, name=ProductSKU" })
   productSku?: string;
 
-  @Metadata({ data: "json, name=ReceivedMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=ReceivedMetadata" })
   receivedMetadata?: ReceivedMetadata;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: LicenseStatusEnum;
 
-  @Metadata({ data: "json, name=Validity" })
+  @SpeakeasyMetadata({ data: "json, name=Validity" })
   validity?: DatetimeRange;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: string;
 }

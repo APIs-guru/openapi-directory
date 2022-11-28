@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DemoteMasterMySqlReplicaConfiguration } from "./demotemastermysqlreplicaconfiguration";
+
 
 
 // DemoteMasterConfiguration
@@ -7,9 +8,9 @@ import { DemoteMasterMySqlReplicaConfiguration } from "./demotemastermysqlreplic
  * Read-replica configuration for connecting to the on-premises primary instance.
 **/
 export class DemoteMasterConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=mysqlReplicaConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=mysqlReplicaConfiguration" })
   mysqlReplicaConfiguration?: DemoteMasterMySqlReplicaConfiguration;
 }

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ProjectSettingsClassificationTypeEnum {
-    Multiclass = "Multiclass"
-,    Multilabel = "Multilabel"
+    Multiclass = "Multiclass",
+    Multilabel = "Multilabel"
 }
 
 
@@ -11,9 +12,9 @@ export enum ProjectSettingsClassificationTypeEnum {
  * Represents settings associated with a project
 **/
 export class ProjectSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=classificationType, form, name=classificationType;" })
+  @SpeakeasyMetadata({ data: "json, name=classificationType, form, name=classificationType;" })
   classificationType?: ProjectSettingsClassificationTypeEnum;
 
-  @Metadata({ data: "json, name=domainId, form, name=domainId;" })
+  @SpeakeasyMetadata({ data: "json, name=domainId, form, name=domainId;" })
   domainId?: string;
 }

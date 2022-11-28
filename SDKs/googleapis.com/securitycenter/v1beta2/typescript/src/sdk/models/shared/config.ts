@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ConfigModuleEnablementStateEnum {
-    EnablementStateUnspecified = "ENABLEMENT_STATE_UNSPECIFIED"
-,    Inherited = "INHERITED"
-,    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    EnablementStateUnspecified = "ENABLEMENT_STATE_UNSPECIFIED",
+    Inherited = "INHERITED",
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }
 
 
@@ -13,9 +14,9 @@ export enum ConfigModuleEnablementStateEnum {
  * Configuration of a module.
 **/
 export class Config extends SpeakeasyBase {
-  @Metadata({ data: "json, name=moduleEnablementState" })
+  @SpeakeasyMetadata({ data: "json, name=moduleEnablementState" })
   moduleEnablementState?: ConfigModuleEnablementStateEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: Map<string, any>;
 }

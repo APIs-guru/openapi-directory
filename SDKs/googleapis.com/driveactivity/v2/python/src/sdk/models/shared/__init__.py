@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .action import *
 from .actiondetail import *
 from .actor import *
@@ -12,7 +12,7 @@ from .consolidationstrategy import *
 from .copy import *
 from .create import *
 from .dataleakpreventionchange import *
-from .date import *
+from .date_ import *
 from .delete import *
 from .domain import *
 from .drive import *

@@ -4,21 +4,9 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type GetIPsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetIPsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetIPsSecurity struct {
-	Option1 *GetIPsSecurityOption1 `security:"option"`
-	Option2 *GetIPsSecurityOption2 `security:"option"`
-}
-
-type GetIPsRequest struct {
-	Security GetIPsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetIPs200ApplicationJSON struct {
@@ -30,6 +18,10 @@ type GetIPs200ApplicationJSON struct {
 
 type GetIPsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetIPsRequest struct {
+	Security GetIPsSecurity
 }
 
 type GetIPsResponse struct {

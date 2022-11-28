@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Permission } from "./permission";
-import { Permission } from "./permission";
+
 
 
 // PermissionChange
@@ -9,9 +8,9 @@ import { Permission } from "./permission";
  * Contains information about a Drive object's permissions that changed as a result of a permissionChange type event.
 **/
 export class PermissionChange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addedPermissions", elemType: shared.Permission })
+  @SpeakeasyMetadata({ data: "json, name=addedPermissions", elemType: Permission })
   addedPermissions?: Permission[];
 
-  @Metadata({ data: "json, name=removedPermissions", elemType: shared.Permission })
+  @SpeakeasyMetadata({ data: "json, name=removedPermissions", elemType: Permission })
   removedPermissions?: Permission[];
 }

@@ -13,18 +13,18 @@ type CreateProjectForTeamQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
-type CreateProjectForTeamRequestBody struct {
-	Data *shared.ProjectRequest `json:"data,omitempty"`
+type CreateProjectForTeamRequestBodyInput struct {
+	Data *shared.ProjectRequestInput `json:"data,omitempty"`
+}
+
+type CreateProjectForTeam201ApplicationJSON struct {
+	Data *shared.ProjectResponse `json:"data,omitempty"`
 }
 
 type CreateProjectForTeamRequest struct {
 	PathParams  CreateProjectForTeamPathParams
 	QueryParams CreateProjectForTeamQueryParams
-	Request     CreateProjectForTeamRequestBody `request:"mediaType=application/json"`
-}
-
-type CreateProjectForTeam201ApplicationJSON struct {
-	Data *shared.ProjectResponse `json:"data,omitempty"`
+	Request     CreateProjectForTeamRequestBodyInput `request:"mediaType=application/json"`
 }
 
 type CreateProjectForTeamResponse struct {

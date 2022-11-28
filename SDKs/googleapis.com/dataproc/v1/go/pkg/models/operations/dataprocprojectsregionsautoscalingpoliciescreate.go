@@ -30,7 +30,7 @@ type DataprocProjectsRegionsAutoscalingPoliciesCreateSecurity struct {
 type DataprocProjectsRegionsAutoscalingPoliciesCreateRequest struct {
 	PathParams  DataprocProjectsRegionsAutoscalingPoliciesCreatePathParams
 	QueryParams DataprocProjectsRegionsAutoscalingPoliciesCreateQueryParams
-	Request     *shared.AutoscalingPolicy `request:"mediaType=application/json"`
+	Request     *shared.AutoscalingPolicyInput `request:"mediaType=application/json"`
 	Security    DataprocProjectsRegionsAutoscalingPoliciesCreateSecurity
 }
 

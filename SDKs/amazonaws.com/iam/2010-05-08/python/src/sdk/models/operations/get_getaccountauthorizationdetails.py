@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetGetAccountAuthorizationDetailsActionEnum(str, Enum):
@@ -11,11 +15,11 @@ class GetGetAccountAuthorizationDetailsVersionEnum(str, Enum):
 
 @dataclass
 class GetGetAccountAuthorizationDetailsQueryParams:
-    action: GetGetAccountAuthorizationDetailsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetGetAccountAuthorizationDetailsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetGetAccountAuthorizationDetailsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     filter: Optional[List[shared.EntityTypeEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'Filter', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
-    version: GetGetAccountAuthorizationDetailsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetGetAccountAuthorizationDetailsHeaders:
 
 @dataclass
 class GetGetAccountAuthorizationDetailsRequest:
-    query_params: GetGetAccountAuthorizationDetailsQueryParams = field(default=None)
-    headers: GetGetAccountAuthorizationDetailsHeaders = field(default=None)
+    headers: GetGetAccountAuthorizationDetailsHeaders = field()
+    query_params: GetGetAccountAuthorizationDetailsQueryParams = field()
     
 
 @dataclass
 class GetGetAccountAuthorizationDetailsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

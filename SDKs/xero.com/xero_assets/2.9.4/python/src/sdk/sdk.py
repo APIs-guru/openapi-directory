@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,35 +14,55 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def create_asset(self, request: operations.CreateAssetRequest) -> operations.CreateAssetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""adds a fixed asset
+        Adds an asset to the system
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/Assets"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -56,19 +79,21 @@ class SDK:
 
     
     def create_asset_type(self, request: operations.CreateAssetTypeRequest) -> operations.CreateAssetTypeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""adds a fixed asset type
+        Adds an fixed asset type to the system
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/AssetTypes"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -87,15 +112,20 @@ class SDK:
 
     
     def get_asset_by_id(self, request: operations.GetAssetByIDRequest) -> operations.GetAssetByIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves fixed asset by id
+        By passing in the appropriate asset id, you can search for
+        a specific fixed asset in the system
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/Assets/{id}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -112,15 +142,18 @@ class SDK:
 
     
     def get_asset_settings(self, request: operations.GetAssetSettingsRequest) -> operations.GetAssetSettingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""searches fixed asset settings
+        By passing in the appropriate options, you can search for available fixed asset types in the system
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/Settings"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -137,15 +170,18 @@ class SDK:
 
     
     def get_asset_types(self, request: operations.GetAssetTypesRequest) -> operations.GetAssetTypesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""searches fixed asset types
+        By passing in the appropriate options, you can search for available fixed asset types in the system
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/AssetTypes"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -162,17 +198,19 @@ class SDK:
 
     
     def get_assets(self, request: operations.GetAssetsRequest) -> operations.GetAssetsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""searches fixed asset
+        By passing in the appropriate options, you can search for available fixed asset in the system
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/Assets"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 

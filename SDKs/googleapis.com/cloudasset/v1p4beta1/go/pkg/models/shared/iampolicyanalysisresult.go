@@ -1,5 +1,7 @@
 package shared
 
+// IamPolicyAnalysisResult
+// IAM Policy analysis result, consisting of one IAM policy binding and derived access control lists.
 type IamPolicyAnalysisResult struct {
 	AccessControlLists       []GoogleCloudAssetV1p4beta1AccessControlList `json:"accessControlLists,omitempty"`
 	AttachedResourceFullName *string                                      `json:"attachedResourceFullName,omitempty"`

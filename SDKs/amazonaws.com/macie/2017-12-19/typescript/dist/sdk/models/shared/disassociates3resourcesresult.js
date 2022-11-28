@@ -22,15 +22,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { FailedS3Resource } from "./faileds3resource";
 var DisassociateS3ResourcesResult = /** @class */ (function (_super) {
     __extends(DisassociateS3ResourcesResult, _super);
     function DisassociateS3ResourcesResult() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=failedS3Resources", elemType: shared.FailedS3Resource }),
+        SpeakeasyMetadata({ data: "json, name=failedS3Resources", elemType: FailedS3Resource }),
         __metadata("design:type", Array)
     ], DisassociateS3ResourcesResult.prototype, "failedS3Resources", void 0);
     return DisassociateS3ResourcesResult;

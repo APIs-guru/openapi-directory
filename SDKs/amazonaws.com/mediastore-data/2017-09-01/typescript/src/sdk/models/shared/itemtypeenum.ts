@@ -1,6 +1,7 @@
 
 
+
 export enum ItemTypeEnum {
-    Object = "OBJECT"
-,    Folder = "FOLDER"
+    Object = "OBJECT",
+    Folder = "FOLDER"
 }

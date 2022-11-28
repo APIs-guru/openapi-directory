@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetUserPolicyActionEnum(str, Enum):
     GET_USER_POLICY = "GetUserPolicy"
@@ -10,8 +14,8 @@ class PostGetUserPolicyVersionEnum(str, Enum):
 
 @dataclass
 class PostGetUserPolicyQueryParams:
-    action: PostGetUserPolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetUserPolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetUserPolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetUserPolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetUserPolicyHeaders:
 
 @dataclass
 class PostGetUserPolicyRequest:
-    query_params: PostGetUserPolicyQueryParams = field(default=None)
-    headers: PostGetUserPolicyHeaders = field(default=None)
+    headers: PostGetUserPolicyHeaders = field()
+    query_params: PostGetUserPolicyQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetUserPolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

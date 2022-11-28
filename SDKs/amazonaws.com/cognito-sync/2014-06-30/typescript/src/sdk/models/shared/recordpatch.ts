@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OperationEnum } from "./operationenum";
+
 
 
 // RecordPatch
@@ -7,18 +8,18 @@ import { OperationEnum } from "./operationenum";
  * An update operation for a record.
 **/
 export class RecordPatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeviceLastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceLastModifiedDate" })
   deviceLastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key: string;
 
-  @Metadata({ data: "json, name=Op" })
+  @SpeakeasyMetadata({ data: "json, name=Op" })
   op: OperationEnum;
 
-  @Metadata({ data: "json, name=SyncCount" })
+  @SpeakeasyMetadata({ data: "json, name=SyncCount" })
   syncCount: number;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

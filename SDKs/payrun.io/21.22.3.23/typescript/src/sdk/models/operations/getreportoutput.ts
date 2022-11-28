@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetReportOutputPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ReportDefinitionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ReportDefinitionId" })
   reportDefinitionId: string;
 }
 
 
 export class GetReportOutputHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Version" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" })
   apiVersion: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class GetReportOutputRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetReportOutputPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetReportOutputHeaders;
 }
 
 
 export class GetReportOutputResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getReportOutput200ApplicationJsonBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -5,7 +5,7 @@ import (
 )
 
 type TenancyTenantsCreateRequest struct {
-	Request shared.WritableTenant `request:"mediaType=application/json"`
+	Request shared.WritableTenantInput `request:"mediaType=application/json"`
 }
 
 type TenancyTenantsCreateResponse struct {

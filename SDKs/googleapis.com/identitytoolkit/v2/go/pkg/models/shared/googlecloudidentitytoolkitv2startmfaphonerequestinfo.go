@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo
+// App Verification info for a StartMfa request.
 type GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo struct {
 	AutoRetrievalInfo *GoogleCloudIdentitytoolkitV2AutoRetrievalInfo `json:"autoRetrievalInfo,omitempty"`
 	IosReceipt        *string                                        `json:"iosReceipt,omitempty"`

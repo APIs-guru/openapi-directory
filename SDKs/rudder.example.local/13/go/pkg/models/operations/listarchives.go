@@ -8,10 +8,6 @@ type ListArchivesPathParams struct {
 	ArchiveKind shared.ArchiveKindEnum `pathParam:"style=simple,explode=false,name=archiveKind"`
 }
 
-type ListArchivesRequest struct {
-	PathParams ListArchivesPathParams
-}
-
 type ListArchives200ApplicationJSONActionEnum string
 
 const (
@@ -43,6 +39,10 @@ type ListArchives200ApplicationJSON struct {
 	Action ListArchives200ApplicationJSONActionEnum `json:"action"`
 	Data   ListArchives200ApplicationJSONData       `json:"data"`
 	Result ListArchives200ApplicationJSONResultEnum `json:"result"`
+}
+
+type ListArchivesRequest struct {
+	PathParams ListArchivesPathParams
 }
 
 type ListArchivesResponse struct {

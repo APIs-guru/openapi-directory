@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetUpdateScalingParametersActionEnum(str, Enum):
@@ -8,6 +12,10 @@ class GetUpdateScalingParametersActionEnum(str, Enum):
 
 @dataclass
 class GetUpdateScalingParametersScalingParameters:
+    r"""GetUpdateScalingParametersScalingParameters
+    The desired instance type and desired number of replicas of each index partition.
+    """
+    
     desired_instance_type: Optional[shared.PartitionInstanceTypeEnum] = field(default=None, metadata={'query_param': { 'field_name': 'DesiredInstanceType' }})
     desired_partition_count: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'DesiredPartitionCount' }})
     desired_replication_count: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'DesiredReplicationCount' }})
@@ -18,10 +26,10 @@ class GetUpdateScalingParametersVersionEnum(str, Enum):
 
 @dataclass
 class GetUpdateScalingParametersQueryParams:
-    action: GetUpdateScalingParametersActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
-    scaling_parameters: GetUpdateScalingParametersScalingParameters = field(default=None, metadata={'query_param': { 'field_name': 'ScalingParameters', 'style': 'form', 'explode': True }})
-    version: GetUpdateScalingParametersVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetUpdateScalingParametersActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    scaling_parameters: GetUpdateScalingParametersScalingParameters = field(metadata={'query_param': { 'field_name': 'ScalingParameters', 'style': 'form', 'explode': True }})
+    version: GetUpdateScalingParametersVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -37,13 +45,13 @@ class GetUpdateScalingParametersHeaders:
 
 @dataclass
 class GetUpdateScalingParametersRequest:
-    query_params: GetUpdateScalingParametersQueryParams = field(default=None)
-    headers: GetUpdateScalingParametersHeaders = field(default=None)
+    headers: GetUpdateScalingParametersHeaders = field()
+    query_params: GetUpdateScalingParametersQueryParams = field()
     
 
 @dataclass
 class GetUpdateScalingParametersResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

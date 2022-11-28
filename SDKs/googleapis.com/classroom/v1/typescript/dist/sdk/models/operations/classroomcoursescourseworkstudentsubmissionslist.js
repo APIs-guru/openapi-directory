@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ClassroomCoursesCourseWorkStudentSubmissionsListPathParams = /** @class */ (function (_super) {
     __extends(ClassroomCoursesCourseWorkStudentSubmissionsListPathParams, _super);
@@ -30,11 +30,11 @@ var ClassroomCoursesCourseWorkStudentSubmissionsListPathParams = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=courseId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=courseId" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListPathParams.prototype, "courseId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=courseWorkId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=courseWorkId" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListPathParams.prototype, "courseWorkId", void 0);
     return ClassroomCoursesCourseWorkStudentSubmissionsListPathParams;
@@ -61,67 +61,67 @@ var ClassroomCoursesCourseWorkStudentSubmissionsListQueryParams = /** @class */ 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=late" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=late" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListQueryParams.prototype, "late", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
         __metadata("design:type", Number)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListQueryParams.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=states" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=states" }),
         __metadata("design:type", Array)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListQueryParams.prototype, "states", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListQueryParams.prototype, "uploadProtocol", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListQueryParams.prototype, "userId", void 0);
     return ClassroomCoursesCourseWorkStudentSubmissionsListQueryParams;
@@ -133,11 +133,11 @@ var ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption1 = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption1.prototype, "oauth2c", void 0);
     return ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption1;
@@ -149,11 +149,11 @@ var ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption2 = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption2.prototype, "oauth2c", void 0);
     return ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption2;
@@ -165,11 +165,11 @@ var ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption3 = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption3.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption3.prototype, "oauth2c", void 0);
     return ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption3;
@@ -181,11 +181,11 @@ var ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption4 = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption4.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption4.prototype, "oauth2c", void 0);
     return ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption4;
@@ -197,11 +197,11 @@ var ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption5 = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption5.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption5.prototype, "oauth2c", void 0);
     return ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption5;
@@ -213,11 +213,11 @@ var ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption6 = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption6.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption6.prototype, "oauth2c", void 0);
     return ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption6;
@@ -229,27 +229,27 @@ var ClassroomCoursesCourseWorkStudentSubmissionsListSecurity = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption1)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption2)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListSecurity.prototype, "option2", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption3)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListSecurity.prototype, "option3", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption4)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListSecurity.prototype, "option4", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption5)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListSecurity.prototype, "option5", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", ClassroomCoursesCourseWorkStudentSubmissionsListSecurityOption6)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListSecurity.prototype, "option6", void 0);
     return ClassroomCoursesCourseWorkStudentSubmissionsListSecurity;
@@ -261,15 +261,15 @@ var ClassroomCoursesCourseWorkStudentSubmissionsListRequest = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ClassroomCoursesCourseWorkStudentSubmissionsListPathParams)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ClassroomCoursesCourseWorkStudentSubmissionsListQueryParams)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ClassroomCoursesCourseWorkStudentSubmissionsListSecurity)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListRequest.prototype, "security", void 0);
     return ClassroomCoursesCourseWorkStudentSubmissionsListRequest;
@@ -281,15 +281,15 @@ var ClassroomCoursesCourseWorkStudentSubmissionsListResponse = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListStudentSubmissionsResponse)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListResponse.prototype, "listStudentSubmissionsResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ClassroomCoursesCourseWorkStudentSubmissionsListResponse.prototype, "statusCode", void 0);
     return ClassroomCoursesCourseWorkStudentSubmissionsListResponse;

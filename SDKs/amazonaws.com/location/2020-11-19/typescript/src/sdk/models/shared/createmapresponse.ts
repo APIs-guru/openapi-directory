@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateMapResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreateTime" })
   createTime: Date;
 
-  @Metadata({ data: "json, name=MapArn" })
+  @SpeakeasyMetadata({ data: "json, name=MapArn" })
   mapArn: string;
 
-  @Metadata({ data: "json, name=MapName" })
+  @SpeakeasyMetadata({ data: "json, name=MapName" })
   mapName: string;
 }

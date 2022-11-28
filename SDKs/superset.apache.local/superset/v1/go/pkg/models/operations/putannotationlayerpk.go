@@ -12,12 +12,6 @@ type PutAnnotationLayerPkSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PutAnnotationLayerPkRequest struct {
-	PathParams PutAnnotationLayerPkPathParams
-	Request    shared.AnnotationLayerRestAPIPut `request:"mediaType=application/json"`
-	Security   PutAnnotationLayerPkSecurity
-}
-
 type PutAnnotationLayerPk200ApplicationJSON struct {
 	ID     *float64                          `json:"id,omitempty"`
 	Result *shared.AnnotationLayerRestAPIPut `json:"result,omitempty"`
@@ -37,6 +31,12 @@ type PutAnnotationLayerPk404ApplicationJSON struct {
 
 type PutAnnotationLayerPk500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PutAnnotationLayerPkRequest struct {
+	PathParams PutAnnotationLayerPkPathParams
+	Request    shared.AnnotationLayerRestAPIPut `request:"mediaType=application/json"`
+	Security   PutAnnotationLayerPkSecurity
 }
 
 type PutAnnotationLayerPkResponse struct {

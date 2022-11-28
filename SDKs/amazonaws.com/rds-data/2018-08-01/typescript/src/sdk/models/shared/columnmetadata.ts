@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ColumnMetadata
@@ -6,45 +7,45 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the metadata for a column.
 **/
 export class ColumnMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arrayBaseColumnType" })
+  @SpeakeasyMetadata({ data: "json, name=arrayBaseColumnType" })
   arrayBaseColumnType?: number;
 
-  @Metadata({ data: "json, name=isAutoIncrement" })
+  @SpeakeasyMetadata({ data: "json, name=isAutoIncrement" })
   isAutoIncrement?: boolean;
 
-  @Metadata({ data: "json, name=isCaseSensitive" })
+  @SpeakeasyMetadata({ data: "json, name=isCaseSensitive" })
   isCaseSensitive?: boolean;
 
-  @Metadata({ data: "json, name=isCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=isCurrency" })
   isCurrency?: boolean;
 
-  @Metadata({ data: "json, name=isSigned" })
+  @SpeakeasyMetadata({ data: "json, name=isSigned" })
   isSigned?: boolean;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nullable" })
+  @SpeakeasyMetadata({ data: "json, name=nullable" })
   nullable?: number;
 
-  @Metadata({ data: "json, name=precision" })
+  @SpeakeasyMetadata({ data: "json, name=precision" })
   precision?: number;
 
-  @Metadata({ data: "json, name=scale" })
+  @SpeakeasyMetadata({ data: "json, name=scale" })
   scale?: number;
 
-  @Metadata({ data: "json, name=schemaName" })
+  @SpeakeasyMetadata({ data: "json, name=schemaName" })
   schemaName?: string;
 
-  @Metadata({ data: "json, name=tableName" })
+  @SpeakeasyMetadata({ data: "json, name=tableName" })
   tableName?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: number;
 
-  @Metadata({ data: "json, name=typeName" })
+  @SpeakeasyMetadata({ data: "json, name=typeName" })
   typeName?: string;
 }

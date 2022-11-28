@@ -25,6 +25,8 @@ const (
 	TypeTypeAnnotationEnumPgJsonb                       TypeTypeAnnotationEnum = "PG_JSONB"
 )
 
+// Type
+// `Type` indicates the type of a Cloud Spanner value, as might be stored in a table cell or returned from an SQL query.
 type Type struct {
 	ArrayElementType *Type                   `json:"arrayElementType,omitempty"`
 	Code             *TypeCodeEnum           `json:"code,omitempty"`

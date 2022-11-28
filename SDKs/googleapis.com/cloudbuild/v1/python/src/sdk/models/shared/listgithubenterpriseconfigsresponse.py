@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import githubenterpriseconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListGithubEnterpriseConfigsResponse:
-    configs: Optional[List[githubenterpriseconfig.GitHubEnterpriseConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configs' }})
+    r"""ListGithubEnterpriseConfigsResponse
+    RPC response object returned by ListGithubEnterpriseConfigs RPC method.
+    """
+    
+    configs: Optional[List[GitHubEnterpriseConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('configs') }})
     

@@ -1,5 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DirectDepositAdditionalDirectDeposit
@@ -7,31 +7,31 @@ import * as shared from "../shared";
  * The additional direct deposit model
 **/
 export class DirectDepositAdditionalDirectDeposit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountNumber" })
+  @SpeakeasyMetadata({ data: "json, name=accountNumber" })
   accountNumber?: string;
 
-  @Metadata({ data: "json, name=accountType" })
+  @SpeakeasyMetadata({ data: "json, name=accountType" })
   accountType?: string;
 
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=amountType" })
+  @SpeakeasyMetadata({ data: "json, name=amountType" })
   amountType?: string;
 
-  @Metadata({ data: "json, name=blockSpecial" })
+  @SpeakeasyMetadata({ data: "json, name=blockSpecial" })
   blockSpecial?: boolean;
 
-  @Metadata({ data: "json, name=isSkipPreNote" })
+  @SpeakeasyMetadata({ data: "json, name=isSkipPreNote" })
   isSkipPreNote?: boolean;
 
-  @Metadata({ data: "json, name=nameOnAccount" })
+  @SpeakeasyMetadata({ data: "json, name=nameOnAccount" })
   nameOnAccount?: string;
 
-  @Metadata({ data: "json, name=preNoteDate" })
+  @SpeakeasyMetadata({ data: "json, name=preNoteDate" })
   preNoteDate?: string;
 
-  @Metadata({ data: "json, name=routingNumber" })
+  @SpeakeasyMetadata({ data: "json, name=routingNumber" })
   routingNumber?: string;
 }
 
@@ -41,25 +41,25 @@ export class DirectDepositAdditionalDirectDeposit extends SpeakeasyBase {
  * The main Direct Deposit account.
 **/
 export class DirectDepositMainDirectDeposit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountNumber" })
+  @SpeakeasyMetadata({ data: "json, name=accountNumber" })
   accountNumber?: string;
 
-  @Metadata({ data: "json, name=accountType" })
+  @SpeakeasyMetadata({ data: "json, name=accountType" })
   accountType?: string;
 
-  @Metadata({ data: "json, name=blockSpecial" })
+  @SpeakeasyMetadata({ data: "json, name=blockSpecial" })
   blockSpecial?: boolean;
 
-  @Metadata({ data: "json, name=isSkipPreNote" })
+  @SpeakeasyMetadata({ data: "json, name=isSkipPreNote" })
   isSkipPreNote?: boolean;
 
-  @Metadata({ data: "json, name=nameOnAccount" })
+  @SpeakeasyMetadata({ data: "json, name=nameOnAccount" })
   nameOnAccount?: string;
 
-  @Metadata({ data: "json, name=preNoteDate" })
+  @SpeakeasyMetadata({ data: "json, name=preNoteDate" })
   preNoteDate?: string;
 
-  @Metadata({ data: "json, name=routingNumber" })
+  @SpeakeasyMetadata({ data: "json, name=routingNumber" })
   routingNumber?: string;
 }
 
@@ -69,9 +69,9 @@ export class DirectDepositMainDirectDeposit extends SpeakeasyBase {
  * The Direct Deposit model
 **/
 export class DirectDeposit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalDirectDeposit", elemType: shared.DirectDepositAdditionalDirectDeposit })
+  @SpeakeasyMetadata({ data: "json, name=additionalDirectDeposit", elemType: DirectDepositAdditionalDirectDeposit })
   additionalDirectDeposit?: DirectDepositAdditionalDirectDeposit[];
 
-  @Metadata({ data: "json, name=mainDirectDeposit" })
+  @SpeakeasyMetadata({ data: "json, name=mainDirectDeposit" })
   mainDirectDeposit?: DirectDepositMainDirectDeposit;
 }

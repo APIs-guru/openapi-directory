@@ -8,11 +8,6 @@ type UpdateGroupPathParams struct {
 	GroupID string `pathParam:"style=simple,explode=false,name=groupId"`
 }
 
-type UpdateGroupRequest struct {
-	PathParams UpdateGroupPathParams
-	Request    shared.GroupUpdate `request:"mediaType=application/json"`
-}
-
 type UpdateGroup200ApplicationJSONActionEnum string
 
 const (
@@ -34,6 +29,11 @@ type UpdateGroup200ApplicationJSON struct {
 	Action UpdateGroup200ApplicationJSONActionEnum `json:"action"`
 	Data   UpdateGroup200ApplicationJSONData       `json:"data"`
 	Result UpdateGroup200ApplicationJSONResultEnum `json:"result"`
+}
+
+type UpdateGroupRequest struct {
+	PathParams UpdateGroupPathParams
+	Request    shared.GroupUpdate `request:"mediaType=application/json"`
 }
 
 type UpdateGroupResponse struct {

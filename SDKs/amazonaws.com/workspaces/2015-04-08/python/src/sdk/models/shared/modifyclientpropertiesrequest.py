@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import clientproperties
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ModifyClientPropertiesRequest:
-    client_properties: clientproperties.ClientProperties = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientProperties' }})
-    resource_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceId' }})
+    client_properties: ClientProperties = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientProperties') }})
+    resource_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceId') }})
     

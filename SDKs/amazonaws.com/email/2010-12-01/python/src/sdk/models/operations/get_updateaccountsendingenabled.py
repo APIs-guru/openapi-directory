@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetUpdateAccountSendingEnabledActionEnum(str, Enum):
     UPDATE_ACCOUNT_SENDING_ENABLED = "UpdateAccountSendingEnabled"
@@ -10,9 +14,9 @@ class GetUpdateAccountSendingEnabledVersionEnum(str, Enum):
 
 @dataclass
 class GetUpdateAccountSendingEnabledQueryParams:
-    action: GetUpdateAccountSendingEnabledActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetUpdateAccountSendingEnabledActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetUpdateAccountSendingEnabledVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     enabled: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'Enabled', 'style': 'form', 'explode': True }})
-    version: GetUpdateAccountSendingEnabledVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,12 +32,12 @@ class GetUpdateAccountSendingEnabledHeaders:
 
 @dataclass
 class GetUpdateAccountSendingEnabledRequest:
-    query_params: GetUpdateAccountSendingEnabledQueryParams = field(default=None)
-    headers: GetUpdateAccountSendingEnabledHeaders = field(default=None)
+    headers: GetUpdateAccountSendingEnabledHeaders = field()
+    query_params: GetUpdateAccountSendingEnabledQueryParams = field()
     
 
 @dataclass
 class GetUpdateAccountSendingEnabledResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

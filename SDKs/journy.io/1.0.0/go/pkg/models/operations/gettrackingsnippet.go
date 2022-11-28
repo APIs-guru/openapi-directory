@@ -4,10 +4,8 @@ type GetTrackingSnippetQueryParams struct {
 	Domain string `queryParam:"style=form,explode=true,name=domain"`
 }
 
-type GetTrackingSnippetRequest struct {
-	QueryParams GetTrackingSnippetQueryParams
-}
-
+// GetTrackingSnippet200ApplicationJSONData
+// A snippet
 type GetTrackingSnippet200ApplicationJSONData struct {
 	Domain  string `json:"domain"`
 	Snippet string `json:"snippet"`
@@ -23,12 +21,16 @@ type GetTrackingSnippet200ApplicationJSON struct {
 	Meta GetTrackingSnippet200ApplicationJSONMeta `json:"meta"`
 }
 
+// GetTrackingSnippet400ApplicationJSONErrorsParameters
+// All query-, header- and path- parameters that seemed incorrect
 type GetTrackingSnippet400ApplicationJSONErrorsParameters struct {
 	Header map[string]string `json:"header,omitempty"`
 	Path   map[string]string `json:"path,omitempty"`
 	Query  map[string]string `json:"query,omitempty"`
 }
 
+// GetTrackingSnippet400ApplicationJSONErrors
+// Map that sums up all received values that seemed incorrect
 type GetTrackingSnippet400ApplicationJSONErrors struct {
 	Fields     map[string]string                                     `json:"fields,omitempty"`
 	Parameters *GetTrackingSnippet400ApplicationJSONErrorsParameters `json:"parameters,omitempty"`
@@ -93,6 +95,10 @@ type GetTrackingSnippet500ApplicationJSONMeta struct {
 type GetTrackingSnippet500ApplicationJSON struct {
 	Message string                                   `json:"message"`
 	Meta    GetTrackingSnippet500ApplicationJSONMeta `json:"meta"`
+}
+
+type GetTrackingSnippetRequest struct {
+	QueryParams GetTrackingSnippetQueryParams
 }
 
 type GetTrackingSnippetResponse struct {

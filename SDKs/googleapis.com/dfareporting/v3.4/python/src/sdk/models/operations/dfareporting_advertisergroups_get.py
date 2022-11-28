@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingAdvertiserGroupsGetPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class DfareportingAdvertiserGroupsGetQueryParams:
 
 @dataclass
 class DfareportingAdvertiserGroupsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingAdvertiserGroupsGetRequest:
-    path_params: DfareportingAdvertiserGroupsGetPathParams = field(default=None)
-    query_params: DfareportingAdvertiserGroupsGetQueryParams = field(default=None)
-    security: DfareportingAdvertiserGroupsGetSecurity = field(default=None)
+    path_params: DfareportingAdvertiserGroupsGetPathParams = field()
+    query_params: DfareportingAdvertiserGroupsGetQueryParams = field()
+    security: DfareportingAdvertiserGroupsGetSecurity = field()
     
 
 @dataclass
 class DfareportingAdvertiserGroupsGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     advertiser_group: Optional[shared.AdvertiserGroup] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeSubscriptionFiltersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filterNamePrefix" })
+  @SpeakeasyMetadata({ data: "json, name=filterNamePrefix" })
   filterNamePrefix?: string;
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=logGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=logGroupName" })
   logGroupName: string;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

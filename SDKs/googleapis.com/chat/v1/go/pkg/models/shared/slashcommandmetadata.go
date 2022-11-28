@@ -8,6 +8,8 @@ const (
 	SlashCommandMetadataTypeEnumInvoke          SlashCommandMetadataTypeEnum = "INVOKE"
 )
 
+// SlashCommandMetadata
+// Annotation metadata for slash commands (/).
 type SlashCommandMetadata struct {
 	Bot            *User                         `json:"bot,omitempty"`
 	CommandID      *string                       `json:"commandId,omitempty"`

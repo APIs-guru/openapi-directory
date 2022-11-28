@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAnalyticsAdminV1alphaAuditUserLinksRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for AuditUserLinks RPC.
 **/
 export class GoogleAnalyticsAdminV1alphaAuditUserLinksRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata({ data: "json, name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "json, name=pageToken" })
+  @SpeakeasyMetadata({ data: "json, name=pageToken" })
   pageToken?: string;
 }

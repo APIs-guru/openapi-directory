@@ -1,6 +1,7 @@
 
 
+
 export enum ResourceTypeEnum {
-    FileSystem = "FILE_SYSTEM"
-,    Volume = "VOLUME"
+    FileSystem = "FILE_SYSTEM",
+    Volume = "VOLUME"
 }

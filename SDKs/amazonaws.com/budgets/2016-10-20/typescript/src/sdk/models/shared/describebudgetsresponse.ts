@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Budget } from "./budget";
+
 
 
 // DescribeBudgetsResponse
@@ -8,9 +8,9 @@ import { Budget } from "./budget";
  *  Response of DescribeBudgets 
 **/
 export class DescribeBudgetsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Budgets", elemType: shared.Budget })
+  @SpeakeasyMetadata({ data: "json, name=Budgets", elemType: Budget })
   budgets?: Budget[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

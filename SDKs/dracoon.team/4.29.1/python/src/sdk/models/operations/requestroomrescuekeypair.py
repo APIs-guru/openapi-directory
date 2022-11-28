@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestRoomRescueKeyPairPathParams:
-    room_id: int = field(default=None, metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
+    room_id: int = field(metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,15 +24,15 @@ class RequestRoomRescueKeyPairHeaders:
 
 @dataclass
 class RequestRoomRescueKeyPairRequest:
-    path_params: RequestRoomRescueKeyPairPathParams = field(default=None)
-    query_params: RequestRoomRescueKeyPairQueryParams = field(default=None)
-    headers: RequestRoomRescueKeyPairHeaders = field(default=None)
+    headers: RequestRoomRescueKeyPairHeaders = field()
+    path_params: RequestRoomRescueKeyPairPathParams = field()
+    query_params: RequestRoomRescueKeyPairQueryParams = field()
     
 
 @dataclass
-class RequestRoomRescueKeyPairResponse:
-    content_type: str = field(default=None)
+class RequestRoomRescueKeyPairResponseOutput:
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
-    user_key_pair_container: Optional[shared.UserKeyPairContainer] = field(default=None)
+    user_key_pair_container: Optional[shared.UserKeyPairContainerOutput] = field(default=None)
     

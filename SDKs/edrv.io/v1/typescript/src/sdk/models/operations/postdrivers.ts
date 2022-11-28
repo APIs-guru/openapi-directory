@@ -1,89 +1,90 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostDriversRequestBodyAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=postalCode" })
+  @SpeakeasyMetadata({ data: "json, name=postalCode" })
   postalCode?: string;
 
-  @Metadata({ data: "json, name=streetAndNumber" })
+  @SpeakeasyMetadata({ data: "json, name=streetAndNumber" })
   streetAndNumber?: string;
 }
 
 
 export class PostDriversRequestBodyPhone extends SpeakeasyBase {
-  @Metadata({ data: "json, name=home" })
+  @SpeakeasyMetadata({ data: "json, name=home" })
   home?: string;
 
-  @Metadata({ data: "json, name=mobile" })
+  @SpeakeasyMetadata({ data: "json, name=mobile" })
   mobile?: string;
 
-  @Metadata({ data: "json, name=work" })
+  @SpeakeasyMetadata({ data: "json, name=work" })
   work?: string;
 }
 
 export enum PostDriversRequestBodySourceEnum {
-    Physical = "physical"
-,    Slack = "slack"
-,    Telegram = "telegram"
-,    Sms = "sms"
+    Physical = "physical",
+    Slack = "slack",
+    Telegram = "telegram",
+    Sms = "sms"
 }
 
 
 export class PostDriversRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: PostDriversRequestBodyAddress;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=firstname" })
+  @SpeakeasyMetadata({ data: "json, name=firstname" })
   firstname: string;
 
-  @Metadata({ data: "json, name=lastname" })
+  @SpeakeasyMetadata({ data: "json, name=lastname" })
   lastname: string;
 
-  @Metadata({ data: "json, name=phone" })
+  @SpeakeasyMetadata({ data: "json, name=phone" })
   phone?: PostDriversRequestBodyPhone;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source: PostDriversRequestBodySourceEnum;
 }
 
 
-export class PostDriversRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PostDriversRequestBody;
-}
-
-
 export class PostDrivers200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=ok" })
+  @SpeakeasyMetadata({ data: "json, name=ok" })
   ok?: boolean;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: Map<string, any>;
 }
 
 
+export class PostDriversRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PostDriversRequestBody;
+}
+
+
 export class PostDriversResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postDrivers200ApplicationJsonObject?: PostDrivers200ApplicationJson;
 }

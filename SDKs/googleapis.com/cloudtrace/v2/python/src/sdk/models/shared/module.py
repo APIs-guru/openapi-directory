@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import truncatablestring
-from . import truncatablestring
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Module:
-    build_id: Optional[truncatablestring.TruncatableString] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'buildId' }})
-    module: Optional[truncatablestring.TruncatableString] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'module' }})
+    r"""Module
+    Binary module.
+    """
+    
+    build_id: Optional[TruncatableString] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('buildId') }})
+    module: Optional[TruncatableString] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('module') }})
     

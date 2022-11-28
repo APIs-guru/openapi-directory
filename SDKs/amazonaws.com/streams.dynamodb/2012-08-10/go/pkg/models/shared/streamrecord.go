@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StreamRecord
+// A description of a single data modification that was performed on an item in a DynamoDB table.
 type StreamRecord struct {
 	ApproximateCreationDateTime *time.Time                `json:"ApproximateCreationDateTime,omitempty"`
 	Keys                        map[string]AttributeValue `json:"Keys,omitempty"`

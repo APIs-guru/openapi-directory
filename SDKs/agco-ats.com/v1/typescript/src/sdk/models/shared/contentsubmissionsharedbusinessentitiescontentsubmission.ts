@@ -1,43 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContentSubmissionSharedBusinessEntitiesContentSubmissionAttribute } from "./contentsubmissionsharedbusinessentitiescontentsubmissionattribute";
 import { ContentSubmissionSharedBusinessEntitiesContentDefinition } from "./contentsubmissionsharedbusinessentitiescontentdefinition";
 
 
+
 export class ContentSubmissionSharedBusinessEntitiesContentSubmission extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Attributes", elemType: shared.ContentSubmissionSharedBusinessEntitiesContentSubmissionAttribute })
+  @SpeakeasyMetadata({ data: "json, name=Attributes", elemType: ContentSubmissionSharedBusinessEntitiesContentSubmissionAttribute })
   attributes?: ContentSubmissionSharedBusinessEntitiesContentSubmissionAttribute[];
 
-  @Metadata({ data: "json, name=ContentDefinitionID" })
+  @SpeakeasyMetadata({ data: "json, name=ContentDefinitionID" })
   contentDefinitionId?: number;
 
-  @Metadata({ data: "json, name=ContentSubmissionID" })
+  @SpeakeasyMetadata({ data: "json, name=ContentSubmissionID" })
   contentSubmissionId?: number;
 
-  @Metadata({ data: "json, name=Definition" })
+  @SpeakeasyMetadata({ data: "json, name=Definition" })
   definition?: ContentSubmissionSharedBusinessEntitiesContentDefinition;
 
-  @Metadata({ data: "json, name=JobRunID" })
+  @SpeakeasyMetadata({ data: "json, name=JobRunID" })
   jobRunId?: number;
 
-  @Metadata({ data: "json, name=PackageID" })
+  @SpeakeasyMetadata({ data: "json, name=PackageID" })
   packageId?: string;
 
-  @Metadata({ data: "json, name=ReleaseNotes" })
+  @SpeakeasyMetadata({ data: "json, name=ReleaseNotes" })
   releaseNotes?: string;
 
-  @Metadata({ data: "json, name=Repository" })
+  @SpeakeasyMetadata({ data: "json, name=Repository" })
   repository?: string;
 
-  @Metadata({ data: "json, name=Revision" })
+  @SpeakeasyMetadata({ data: "json, name=Revision" })
   revision?: number;
 
-  @Metadata({ data: "json, name=SubmissionDate" })
+  @SpeakeasyMetadata({ data: "json, name=SubmissionDate" })
   submissionDate?: Date;
 
-  @Metadata({ data: "json, name=UserID" })
+  @SpeakeasyMetadata({ data: "json, name=UserID" })
   userId?: number;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: number;
 }

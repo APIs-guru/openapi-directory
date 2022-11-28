@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UploadFunctionPathParams = /** @class */ (function (_super) {
     __extends(UploadFunctionPathParams, _super);
@@ -30,7 +30,7 @@ var UploadFunctionPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=FunctionName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FunctionName" }),
         __metadata("design:type", String)
     ], UploadFunctionPathParams.prototype, "functionName", void 0);
     return UploadFunctionPathParams;
@@ -50,31 +50,31 @@ var UploadFunctionQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Description" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Description" }),
         __metadata("design:type", String)
     ], UploadFunctionQueryParams.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Handler" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Handler" }),
         __metadata("design:type", String)
     ], UploadFunctionQueryParams.prototype, "handler", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MemorySize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MemorySize" }),
         __metadata("design:type", Number)
     ], UploadFunctionQueryParams.prototype, "memorySize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Mode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Mode" }),
         __metadata("design:type", String)
     ], UploadFunctionQueryParams.prototype, "mode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Role" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Role" }),
         __metadata("design:type", String)
     ], UploadFunctionQueryParams.prototype, "role", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Runtime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Runtime" }),
         __metadata("design:type", String)
     ], UploadFunctionQueryParams.prototype, "runtime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Timeout" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Timeout" }),
         __metadata("design:type", Number)
     ], UploadFunctionQueryParams.prototype, "timeout", void 0);
     return UploadFunctionQueryParams;
@@ -86,31 +86,31 @@ var UploadFunctionHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UploadFunctionHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UploadFunctionHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UploadFunctionHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UploadFunctionHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UploadFunctionHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UploadFunctionHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UploadFunctionHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UploadFunctionHeaders;
@@ -122,7 +122,7 @@ var UploadFunctionRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FunctionZip" }),
+        SpeakeasyMetadata({ data: "json, name=FunctionZip" }),
         __metadata("design:type", String)
     ], UploadFunctionRequestBody.prototype, "functionZip", void 0);
     return UploadFunctionRequestBody;
@@ -134,19 +134,19 @@ var UploadFunctionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UploadFunctionPathParams)
     ], UploadFunctionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UploadFunctionQueryParams)
     ], UploadFunctionRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UploadFunctionHeaders)
     ], UploadFunctionRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UploadFunctionRequestBody)
     ], UploadFunctionRequest.prototype, "request", void 0);
     return UploadFunctionRequest;
@@ -158,27 +158,27 @@ var UploadFunctionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UploadFunctionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.FunctionConfiguration)
     ], UploadFunctionResponse.prototype, "functionConfiguration", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.InvalidParameterValueException)
     ], UploadFunctionResponse.prototype, "invalidParameterValueException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ResourceNotFoundException)
     ], UploadFunctionResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ServiceException)
     ], UploadFunctionResponse.prototype, "serviceException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UploadFunctionResponse.prototype, "statusCode", void 0);
     return UploadFunctionResponse;

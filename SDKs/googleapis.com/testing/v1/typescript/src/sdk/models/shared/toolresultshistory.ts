@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ToolResultsHistory
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a tool results history resource.
 **/
 export class ToolResultsHistory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=historyId" })
+  @SpeakeasyMetadata({ data: "json, name=historyId" })
   historyId?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 }

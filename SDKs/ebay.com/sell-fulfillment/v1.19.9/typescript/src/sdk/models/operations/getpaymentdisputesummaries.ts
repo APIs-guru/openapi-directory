@@ -1,60 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const GETPAYMENTDISPUTESUMMARIES_SERVERS = [
-	"https://apiz.ebay.com{basePath}",
-];
 
+export const GetPaymentDisputeSummariesServerList = [
+	"https://apiz.ebay.com{basePath}",
+] as const;
 
 
 export class GetPaymentDisputeSummariesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=buyer_username" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=buyer_username" })
   buyerUsername?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=open_date_from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=open_date_from" })
   openDateFrom?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=open_date_to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=open_date_to" })
   openDateTo?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=order_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order_id" })
   orderId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=payment_dispute_status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=payment_dispute_status" })
   paymentDisputeStatus?: string;
 }
 
 
 export class GetPaymentDisputeSummariesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetPaymentDisputeSummariesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPaymentDisputeSummariesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPaymentDisputeSummariesSecurity;
 }
 
 
 export class GetPaymentDisputeSummariesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   disputeSummaryResponse?: shared.DisputeSummaryResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

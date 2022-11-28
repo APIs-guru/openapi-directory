@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GenerateAccessTokenResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessToken" })
+  @SpeakeasyMetadata({ data: "json, name=accessToken" })
   accessToken?: string;
 
-  @Metadata({ data: "json, name=expireTime" })
+  @SpeakeasyMetadata({ data: "json, name=expireTime" })
   expireTime?: string;
 }

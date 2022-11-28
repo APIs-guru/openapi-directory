@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class AssociationStatusEnum(str, Enum):
     NOT_ASSOCIATED = "NOT_ASSOCIATED"

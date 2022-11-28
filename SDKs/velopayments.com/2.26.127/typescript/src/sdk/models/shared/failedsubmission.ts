@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FailedPayee } from "./failedpayee";
 
 
+
 export class FailedSubmission extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failedSubmission" })
+  @SpeakeasyMetadata({ data: "json, name=failedSubmission" })
   failedSubmission?: FailedPayee;
 
-  @Metadata({ data: "json, name=failureMessage" })
+  @SpeakeasyMetadata({ data: "json, name=failureMessage" })
   failureMessage?: string;
 }

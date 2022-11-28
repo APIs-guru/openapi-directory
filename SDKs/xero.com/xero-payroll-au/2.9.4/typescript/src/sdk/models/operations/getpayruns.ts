@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPayRunsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=order" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" })
   order?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=where" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=where" })
   where?: string;
 }
 
 
 export class GetPayRunsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=If-Modified-Since" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-Modified-Since" })
   ifModifiedSince?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" })
   xeroTenantId: string;
 }
 
 
 export class GetPayRunsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class GetPayRunsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPayRunsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetPayRunsHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPayRunsSecurity;
 }
 
 
 export class GetPayRunsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiException?: shared.ApiException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   payRuns?: shared.PayRuns;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

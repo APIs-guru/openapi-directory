@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BatchPolicy } from "./batchpolicy";
 import { SimulationJobSummary } from "./simulationjobsummary";
 import { FailedCreateSimulationJobRequest } from "./failedcreatesimulationjobrequest";

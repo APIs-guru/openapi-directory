@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ProjectsUpdateCardPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=card_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=card_id" })
   cardId: number;
 }
 
 
 export class ProjectsUpdateCardRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=archived" })
+  @SpeakeasyMetadata({ data: "json, name=archived" })
   archived?: boolean;
 
-  @Metadata({ data: "json, name=note" })
+  @SpeakeasyMetadata({ data: "json, name=note" })
   note?: string;
 }
 
 
 export class ProjectsUpdateCardRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ProjectsUpdateCardPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: ProjectsUpdateCardRequestBody;
 }
 
 
 export class ProjectsUpdateCardResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   projectCard?: shared.ProjectCard;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationErrorSimple?: shared.ValidationErrorSimple;
 }

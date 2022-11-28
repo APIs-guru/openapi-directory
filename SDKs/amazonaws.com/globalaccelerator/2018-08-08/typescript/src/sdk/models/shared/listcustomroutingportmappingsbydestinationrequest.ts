@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListCustomRoutingPortMappingsByDestinationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DestinationAddress" })
+  @SpeakeasyMetadata({ data: "json, name=DestinationAddress" })
   destinationAddress: string;
 
-  @Metadata({ data: "json, name=EndpointId" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointId" })
   endpointId: string;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

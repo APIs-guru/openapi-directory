@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OverlayPosition } from "./overlayposition";
+
 
 
 // EmbeddedObjectPosition
@@ -7,12 +8,12 @@ import { OverlayPosition } from "./overlayposition";
  * The position of an embedded object such as a chart.
 **/
 export class EmbeddedObjectPosition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=newSheet" })
+  @SpeakeasyMetadata({ data: "json, name=newSheet" })
   newSheet?: boolean;
 
-  @Metadata({ data: "json, name=overlayPosition" })
+  @SpeakeasyMetadata({ data: "json, name=overlayPosition" })
   overlayPosition?: OverlayPosition;
 
-  @Metadata({ data: "json, name=sheetId" })
+  @SpeakeasyMetadata({ data: "json, name=sheetId" })
   sheetId?: number;
 }

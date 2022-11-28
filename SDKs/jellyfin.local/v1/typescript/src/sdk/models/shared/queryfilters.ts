@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NameGuidPair } from "./nameguidpair";
 
 
+
 export class QueryFilters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Genres", elemType: shared.NameGuidPair })
+  @SpeakeasyMetadata({ data: "json, name=Genres", elemType: NameGuidPair })
   genres?: NameGuidPair[];
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: string[];
 }

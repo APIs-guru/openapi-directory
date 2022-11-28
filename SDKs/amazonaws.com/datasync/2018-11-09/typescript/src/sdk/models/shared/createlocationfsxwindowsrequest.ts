@@ -1,27 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TagListEntry } from "./taglistentry";
 
 
+
 export class CreateLocationFsxWindowsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Domain" })
+  @SpeakeasyMetadata({ data: "json, name=Domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=FsxFilesystemArn" })
+  @SpeakeasyMetadata({ data: "json, name=FsxFilesystemArn" })
   fsxFilesystemArn: string;
 
-  @Metadata({ data: "json, name=Password" })
+  @SpeakeasyMetadata({ data: "json, name=Password" })
   password: string;
 
-  @Metadata({ data: "json, name=SecurityGroupArns" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroupArns" })
   securityGroupArns: string[];
 
-  @Metadata({ data: "json, name=Subdirectory" })
+  @SpeakeasyMetadata({ data: "json, name=Subdirectory" })
   subdirectory?: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.TagListEntry })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: TagListEntry })
   tags?: TagListEntry[];
 
-  @Metadata({ data: "json, name=User" })
+  @SpeakeasyMetadata({ data: "json, name=User" })
   user: string;
 }

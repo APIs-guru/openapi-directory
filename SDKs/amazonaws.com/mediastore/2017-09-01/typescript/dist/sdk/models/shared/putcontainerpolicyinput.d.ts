@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class PutContainerPolicyInput extends SpeakeasyBase {
     containerName: string;
     policy: string;

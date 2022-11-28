@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NotebookInstanceLifecycleConfigSummary
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides a summary of a notebook instance lifecycle configuration.
 **/
 export class NotebookInstanceLifecycleConfigSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=NotebookInstanceLifecycleConfigArn" })
+  @SpeakeasyMetadata({ data: "json, name=NotebookInstanceLifecycleConfigArn" })
   notebookInstanceLifecycleConfigArn: string;
 
-  @Metadata({ data: "json, name=NotebookInstanceLifecycleConfigName" })
+  @SpeakeasyMetadata({ data: "json, name=NotebookInstanceLifecycleConfigName" })
   notebookInstanceLifecycleConfigName: string;
 }

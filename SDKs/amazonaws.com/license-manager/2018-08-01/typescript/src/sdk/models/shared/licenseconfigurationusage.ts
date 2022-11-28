@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceTypeEnum } from "./resourcetypeenum";
+
 
 
 // LicenseConfigurationUsage
@@ -7,21 +8,21 @@ import { ResourceTypeEnum } from "./resourcetypeenum";
  * Details about the usage of a resource associated with a license configuration.
 **/
 export class LicenseConfigurationUsage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssociationTime" })
+  @SpeakeasyMetadata({ data: "json, name=AssociationTime" })
   associationTime?: Date;
 
-  @Metadata({ data: "json, name=ConsumedLicenses" })
+  @SpeakeasyMetadata({ data: "json, name=ConsumedLicenses" })
   consumedLicenses?: number;
 
-  @Metadata({ data: "json, name=ResourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceArn" })
   resourceArn?: string;
 
-  @Metadata({ data: "json, name=ResourceOwnerId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceOwnerId" })
   resourceOwnerId?: string;
 
-  @Metadata({ data: "json, name=ResourceStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceStatus" })
   resourceStatus?: string;
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType?: ResourceTypeEnum;
 }

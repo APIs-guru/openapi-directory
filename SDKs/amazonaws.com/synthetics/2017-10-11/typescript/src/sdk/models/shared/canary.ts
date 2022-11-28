@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CanaryCodeOutput } from "./canarycodeoutput";
 import { CanaryRunConfigOutput } from "./canaryrunconfigoutput";
 import { CanaryScheduleOutput } from "./canaryscheduleoutput";
@@ -8,56 +8,57 @@ import { VisualReferenceOutput } from "./visualreferenceoutput";
 import { VpcConfigOutput } from "./vpcconfigoutput";
 
 
+
 // Canary
 /** 
  * This structure contains all information about one canary in your account.
 **/
 export class Canary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ArtifactS3Location" })
+  @SpeakeasyMetadata({ data: "json, name=ArtifactS3Location" })
   artifactS3Location?: string;
 
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: CanaryCodeOutput;
 
-  @Metadata({ data: "json, name=EngineArn" })
+  @SpeakeasyMetadata({ data: "json, name=EngineArn" })
   engineArn?: string;
 
-  @Metadata({ data: "json, name=ExecutionRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionRoleArn" })
   executionRoleArn?: string;
 
-  @Metadata({ data: "json, name=FailureRetentionPeriodInDays" })
+  @SpeakeasyMetadata({ data: "json, name=FailureRetentionPeriodInDays" })
   failureRetentionPeriodInDays?: number;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=RunConfig" })
+  @SpeakeasyMetadata({ data: "json, name=RunConfig" })
   runConfig?: CanaryRunConfigOutput;
 
-  @Metadata({ data: "json, name=RuntimeVersion" })
+  @SpeakeasyMetadata({ data: "json, name=RuntimeVersion" })
   runtimeVersion?: string;
 
-  @Metadata({ data: "json, name=Schedule" })
+  @SpeakeasyMetadata({ data: "json, name=Schedule" })
   schedule?: CanaryScheduleOutput;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: CanaryStatus;
 
-  @Metadata({ data: "json, name=SuccessRetentionPeriodInDays" })
+  @SpeakeasyMetadata({ data: "json, name=SuccessRetentionPeriodInDays" })
   successRetentionPeriodInDays?: number;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Timeline" })
+  @SpeakeasyMetadata({ data: "json, name=Timeline" })
   timeline?: CanaryTimeline;
 
-  @Metadata({ data: "json, name=VisualReference" })
+  @SpeakeasyMetadata({ data: "json, name=VisualReference" })
   visualReference?: VisualReferenceOutput;
 
-  @Metadata({ data: "json, name=VpcConfig" })
+  @SpeakeasyMetadata({ data: "json, name=VpcConfig" })
   vpcConfig?: VpcConfigOutput;
 }

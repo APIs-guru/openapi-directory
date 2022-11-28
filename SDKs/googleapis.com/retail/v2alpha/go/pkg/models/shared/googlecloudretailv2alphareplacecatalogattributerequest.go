@@ -1,6 +1,8 @@
 package shared
 
-type GoogleCloudRetailV2alphaReplaceCatalogAttributeRequest struct {
-	CatalogAttribute *GoogleCloudRetailV2alphaCatalogAttribute `json:"catalogAttribute,omitempty"`
-	UpdateMask       *string                                   `json:"updateMask,omitempty"`
+// GoogleCloudRetailV2alphaReplaceCatalogAttributeRequestInput
+// Request for CatalogService.ReplaceCatalogAttribute method.
+type GoogleCloudRetailV2alphaReplaceCatalogAttributeRequestInput struct {
+	CatalogAttribute *GoogleCloudRetailV2alphaCatalogAttributeInput `json:"catalogAttribute,omitempty"`
+	UpdateMask       *string                                        `json:"updateMask,omitempty"`
 }

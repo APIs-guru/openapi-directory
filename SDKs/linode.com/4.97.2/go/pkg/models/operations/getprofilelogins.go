@@ -4,21 +4,9 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type GetProfileLoginsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetProfileLoginsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetProfileLoginsSecurity struct {
-	Option1 *GetProfileLoginsSecurityOption1 `security:"option"`
-	Option2 *GetProfileLoginsSecurityOption2 `security:"option"`
-}
-
-type GetProfileLoginsRequest struct {
-	Security GetProfileLoginsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetProfileLogins200ApplicationJSON struct {
@@ -30,6 +18,10 @@ type GetProfileLogins200ApplicationJSON struct {
 
 type GetProfileLoginsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetProfileLoginsRequest struct {
+	Security GetProfileLoginsSecurity
 }
 
 type GetProfileLoginsResponse struct {

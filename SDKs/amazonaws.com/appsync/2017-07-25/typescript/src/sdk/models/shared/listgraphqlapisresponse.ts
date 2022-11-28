@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GraphqlApi } from "./graphqlapi";
 
 
+
 export class ListGraphqlApisResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=graphqlApis", elemType: shared.GraphqlApi })
+  @SpeakeasyMetadata({ data: "json, name=graphqlApis", elemType: GraphqlApi })
   graphqlApis?: GraphqlApi[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

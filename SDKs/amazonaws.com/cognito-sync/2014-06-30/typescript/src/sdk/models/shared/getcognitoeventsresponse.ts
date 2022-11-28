@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetCognitoEventsResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The response from the GetCognitoEvents request
 **/
 export class GetCognitoEventsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Events" })
+  @SpeakeasyMetadata({ data: "json, name=Events" })
   events?: Map<string, string>;
 }

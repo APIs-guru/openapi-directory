@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListObjectPoliciesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttachedPolicyIds" })
+  @SpeakeasyMetadata({ data: "json, name=AttachedPolicyIds" })
   attachedPolicyIds?: string[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

@@ -1,0 +1,31 @@
+import { AxiosInstance } from "axios";
+import { Acl } from "./acl";
+import { CalendarList } from "./calendarlist";
+import { Calendars } from "./calendars";
+import { Channels } from "./channels";
+import { Colors } from "./colors";
+import { Events } from "./events";
+import { Freebusy } from "./freebusy";
+import { Settings } from "./settings";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://www.googleapis.com/calendar/v3"];
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    acl: Acl;
+    calendarList: CalendarList;
+    calendars: Calendars;
+    channels: Channels;
+    colors: Colors;
+    events: Events;
+    freebusy: Freebusy;
+    settings: Settings;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
+    constructor(...opts: OptsFunc[]);
+}
+export {};

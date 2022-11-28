@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FhirVersionEnum } from "./fhirversionenum";
 import { PreloadDataConfig } from "./preloaddataconfig";
 import { SseConfiguration } from "./sseconfiguration";

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateNetworkInterfacePermissionActionEnum(str, Enum):
     CREATE_NETWORK_INTERFACE_PERMISSION = "CreateNetworkInterfacePermission"
@@ -10,8 +14,8 @@ class PostCreateNetworkInterfacePermissionVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateNetworkInterfacePermissionQueryParams:
-    action: PostCreateNetworkInterfacePermissionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateNetworkInterfacePermissionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateNetworkInterfacePermissionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateNetworkInterfacePermissionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateNetworkInterfacePermissionHeaders:
 
 @dataclass
 class PostCreateNetworkInterfacePermissionRequest:
-    query_params: PostCreateNetworkInterfacePermissionQueryParams = field(default=None)
-    headers: PostCreateNetworkInterfacePermissionHeaders = field(default=None)
+    headers: PostCreateNetworkInterfacePermissionHeaders = field()
+    query_params: PostCreateNetworkInterfacePermissionQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateNetworkInterfacePermissionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

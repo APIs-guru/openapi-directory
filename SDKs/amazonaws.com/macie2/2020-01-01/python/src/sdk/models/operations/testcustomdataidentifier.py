@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,28 +22,28 @@ class TestCustomDataIdentifierHeaders:
 @dataclass_json
 @dataclass
 class TestCustomDataIdentifierRequestBody:
-    ignore_words: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ignoreWords' }})
-    keywords: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keywords' }})
-    maximum_match_distance: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maximumMatchDistance' }})
-    regex: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'regex' }})
-    sample_text: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sampleText' }})
+    regex: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('regex') }})
+    sample_text: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sampleText') }})
+    ignore_words: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ignoreWords') }})
+    keywords: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('keywords') }})
+    maximum_match_distance: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maximumMatchDistance') }})
     
 
 @dataclass
 class TestCustomDataIdentifierRequest:
-    headers: TestCustomDataIdentifierHeaders = field(default=None)
-    request: TestCustomDataIdentifierRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: TestCustomDataIdentifierHeaders = field()
+    request: TestCustomDataIdentifierRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class TestCustomDataIdentifierResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     test_custom_data_identifier_response: Optional[shared.TestCustomDataIdentifierResponse] = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)

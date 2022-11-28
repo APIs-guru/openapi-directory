@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RemovePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
   agentNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=instance" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=instance" })
   instance: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=object" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=object" })
   object: string;
 }
 
 
 export class RemoveRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RemovePathParams;
 }
 
 
 export class RemoveResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   remove200ApplicationJsonString?: string;
 }

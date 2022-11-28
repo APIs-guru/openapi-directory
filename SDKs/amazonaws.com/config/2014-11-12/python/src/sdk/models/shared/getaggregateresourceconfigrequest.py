@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import aggregateresourceidentifier
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetAggregateResourceConfigRequest:
-    configuration_aggregator_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConfigurationAggregatorName' }})
-    resource_identifier: aggregateresourceidentifier.AggregateResourceIdentifier = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceIdentifier' }})
+    configuration_aggregator_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConfigurationAggregatorName') }})
+    resource_identifier: AggregateResourceIdentifier = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceIdentifier') }})
     

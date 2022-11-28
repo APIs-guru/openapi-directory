@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GoogleCloudPaymentsResellerSubscriptionV1ExtendSubscriptionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cycleEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=cycleEndTime" })
   cycleEndTime?: string;
 
-  @Metadata({ data: "json, name=freeTrialEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=freeTrialEndTime" })
   freeTrialEndTime?: string;
 
-  @Metadata({ data: "json, name=renewalTime" })
+  @SpeakeasyMetadata({ data: "json, name=renewalTime" })
   renewalTime?: string;
 }

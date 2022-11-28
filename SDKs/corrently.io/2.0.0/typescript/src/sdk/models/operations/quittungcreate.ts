@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class QuittungCreateRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 }
 
 
 export class QuittungCreateRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: QuittungCreateRequestBody;
 }
 
 
 export class QuittungCreateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   quittungCreate200ApplicationJsonString?: string;
 }

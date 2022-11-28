@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CorridorPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=countryIso2From" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=countryIso2From" })
   countryIso2From: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=countryIso2To" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=countryIso2To" })
   countryIso2To: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=firstNameFrom" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=firstNameFrom" })
   firstNameFrom: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=firstNameTo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=firstNameTo" })
   firstNameTo: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=lastNameFrom" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=lastNameFrom" })
   lastNameFrom: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=lastNameTo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=lastNameTo" })
   lastNameTo: string;
 }
 
 
 export class CorridorSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class CorridorRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CorridorPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CorridorSecurity;
 }
 
 
 export class CorridorResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   corridorOut?: shared.CorridorOut;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

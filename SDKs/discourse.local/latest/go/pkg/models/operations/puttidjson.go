@@ -18,12 +18,6 @@ type PutTIDJSONRequestBody struct {
 	Topic *PutTIDJSONRequestBodyTopic `json:"topic,omitempty"`
 }
 
-type PutTIDJSONRequest struct {
-	PathParams PutTIDJSONPathParams
-	Headers    PutTIDJSONHeaders
-	Request    *PutTIDJSONRequestBody `request:"mediaType=application/json"`
-}
-
 type PutTIDJSON200ApplicationJSONBasicTopic struct {
 	FancyTitle *string `json:"fancy_title,omitempty"`
 	ID         *int64  `json:"id,omitempty"`
@@ -34,6 +28,12 @@ type PutTIDJSON200ApplicationJSONBasicTopic struct {
 
 type PutTIDJSON200ApplicationJSON struct {
 	BasicTopic *PutTIDJSON200ApplicationJSONBasicTopic `json:"basic_topic,omitempty"`
+}
+
+type PutTIDJSONRequest struct {
+	PathParams PutTIDJSONPathParams
+	Headers    PutTIDJSONHeaders
+	Request    *PutTIDJSONRequestBody `request:"mediaType=application/json"`
 }
 
 type PutTIDJSONResponse struct {

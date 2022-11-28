@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // KendraConfiguration
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides configuration information for the AMAZON.KendraSearchIntent intent. When you use this intent, Amazon Lex searches the specified Amazon Kendra index and returns documents from the index that match the user's utterance.
 **/
 export class KendraConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kendraIndex" })
+  @SpeakeasyMetadata({ data: "json, name=kendraIndex" })
   kendraIndex: string;
 
-  @Metadata({ data: "json, name=queryFilterString" })
+  @SpeakeasyMetadata({ data: "json, name=queryFilterString" })
   queryFilterString?: string;
 
-  @Metadata({ data: "json, name=queryFilterStringEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=queryFilterStringEnabled" })
   queryFilterStringEnabled?: boolean;
 }

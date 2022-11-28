@@ -1,71 +1,72 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetSalesCountCarTypeEnum {
-    New = "new"
-,    Used = "used"
+    New = "new",
+    Used = "used"
 }
 
 export enum GetSalesCountCountryEnum {
-    UsLower = "us"
-,    CaLower = "ca"
-,    UsUpper = "US"
-,    CaUpper = "CA"
+    UsLower = "us",
+    CaLower = "ca",
+    UsUpper = "US",
+    CaUpper = "CA"
 }
 
 
 export class GetSalesCountQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=car_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=car_type" })
   carType?: GetSalesCountCarTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=city_state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=city_state" })
   cityState?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=country" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" })
   country?: GetSalesCountCountryEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=make" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=make" })
   make?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=mm" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mm" })
   mm?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=taxonomy_vin" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=taxonomy_vin" })
   taxonomyVin?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=vin" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vin" })
   vin?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ymm" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ymm" })
   ymm?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ymmt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ymmt" })
   ymmt?: string;
 }
 
 
 export class GetSalesCountRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSalesCountQueryParams;
 }
 
 
 export class GetSalesCountResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sales?: shared.Sales;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

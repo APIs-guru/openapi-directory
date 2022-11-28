@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class WritablePlatformLegacyRPCClientEnum(str, Enum):
     JUNIPER_JUNOS = "juniper-junos"
@@ -10,12 +12,11 @@ class WritablePlatformLegacyRPCClientEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class WritablePlatform:
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    manufacturer: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'manufacturer' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    napalm_args: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'napalm_args' }})
-    napalm_driver: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'napalm_driver' }})
-    rpc_client: Optional[WritablePlatformLegacyRPCClientEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rpc_client' }})
-    slug: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'slug' }})
+class WritablePlatformInput:
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    slug: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('slug') }})
+    manufacturer: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('manufacturer') }})
+    napalm_args: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('napalm_args') }})
+    napalm_driver: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('napalm_driver') }})
+    rpc_client: Optional[WritablePlatformLegacyRPCClientEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rpc_client') }})
     

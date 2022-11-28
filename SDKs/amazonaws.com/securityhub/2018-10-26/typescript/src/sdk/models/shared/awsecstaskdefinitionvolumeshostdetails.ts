@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEcsTaskDefinitionVolumesHostDetails
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a bind mount host volume.
 **/
 export class AwsEcsTaskDefinitionVolumesHostDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SourcePath" })
+  @SpeakeasyMetadata({ data: "json, name=SourcePath" })
   sourcePath?: string;
 }

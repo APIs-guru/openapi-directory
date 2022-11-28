@@ -1,109 +1,110 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateResourcePolicyStatementPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=resourceArn" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=resourceArn" })
   resourceArn: string;
 }
 
 
 export class CreateResourcePolicyStatementQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=expectedRevisionId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=expectedRevisionId" })
   expectedRevisionId?: string;
 }
 
 
 export class CreateResourcePolicyStatementHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum CreateResourcePolicyStatementRequestBodyEffectEnum {
-    Allow = "Allow"
-,    Deny = "Deny"
+    Allow = "Allow",
+    Deny = "Deny"
 }
 
 
 export class CreateResourcePolicyStatementRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: string[];
 
-  @Metadata({ data: "json, name=condition" })
+  @SpeakeasyMetadata({ data: "json, name=condition" })
   condition?: Map<string, Map<string, string>>;
 
-  @Metadata({ data: "json, name=effect" })
+  @SpeakeasyMetadata({ data: "json, name=effect" })
   effect: CreateResourcePolicyStatementRequestBodyEffectEnum;
 
-  @Metadata({ data: "json, name=principal", elemType: shared.Principal })
+  @SpeakeasyMetadata({ data: "json, name=principal", elemType: shared.Principal })
   principal: shared.Principal[];
 
-  @Metadata({ data: "json, name=statementId" })
+  @SpeakeasyMetadata({ data: "json, name=statementId" })
   statementId: string;
 }
 
 
 export class CreateResourcePolicyStatementRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateResourcePolicyStatementPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: CreateResourcePolicyStatementQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateResourcePolicyStatementHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateResourcePolicyStatementRequestBody;
 }
 
 
 export class CreateResourcePolicyStatementResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createResourcePolicyStatementResponse?: shared.CreateResourcePolicyStatementResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preconditionFailedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceQuotaExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

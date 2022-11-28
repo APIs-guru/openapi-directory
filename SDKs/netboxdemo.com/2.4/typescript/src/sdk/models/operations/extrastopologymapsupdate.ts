@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ExtrasTopologyMapsUpdatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class ExtrasTopologyMapsUpdateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ExtrasTopologyMapsUpdatePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.WritableTopologyMap;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.WritableTopologyMapInput;
 }
 
 
 export class ExtrasTopologyMapsUpdateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   topologyMap?: shared.TopologyMap;
 }

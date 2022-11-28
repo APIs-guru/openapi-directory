@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraintsSupportedCompressionsEnum {
-    CompressionTypeUnspecified = "COMPRESSION_TYPE_UNSPECIFIED"
-,    Raw = "RAW"
-,    Rice = "RICE"
+    CompressionTypeUnspecified = "COMPRESSION_TYPE_UNSPECIFIED",
+    Raw = "RAW",
+    Rice = "RICE"
 }
 
 
@@ -12,21 +13,21 @@ export enum GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateR
  * The constraints for this update.
 **/
 export class GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceLocation" })
+  @SpeakeasyMetadata({ data: "json, name=deviceLocation" })
   deviceLocation?: string;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=maxDatabaseEntries" })
+  @SpeakeasyMetadata({ data: "json, name=maxDatabaseEntries" })
   maxDatabaseEntries?: number;
 
-  @Metadata({ data: "json, name=maxUpdateEntries" })
+  @SpeakeasyMetadata({ data: "json, name=maxUpdateEntries" })
   maxUpdateEntries?: number;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=supportedCompressions" })
+  @SpeakeasyMetadata({ data: "json, name=supportedCompressions" })
   supportedCompressions?: GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraintsSupportedCompressionsEnum[];
 }

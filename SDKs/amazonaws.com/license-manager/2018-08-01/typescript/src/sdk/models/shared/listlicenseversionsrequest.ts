@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListLicenseVersionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LicenseArn" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseArn" })
   licenseArn: string;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

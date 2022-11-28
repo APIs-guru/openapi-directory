@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Device } from "./device";
 
 
+
 export class ConnectedDevice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=device" })
+  @SpeakeasyMetadata({ data: "json, name=device" })
   device: Device;
 
-  @Metadata({ data: "json, name=enabled_profiles" })
+  @SpeakeasyMetadata({ data: "json, name=enabled_profiles" })
   enabledProfiles: number;
 }

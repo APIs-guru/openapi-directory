@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SetValuePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
   agentNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=instance" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=instance" })
   instance: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=object" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=object" })
   object: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=variable" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=variable" })
   variable: string;
 }
 
 
 export class SetValueRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SetValuePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: string;
 }
 
 
 export class SetValueResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   setValue200ApplicationJsonString?: string;
 }

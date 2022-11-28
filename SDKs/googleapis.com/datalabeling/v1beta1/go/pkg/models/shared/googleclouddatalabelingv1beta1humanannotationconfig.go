@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDatalabelingV1beta1HumanAnnotationConfig
+// Configuration for how human labeling task should be done.
 type GoogleCloudDatalabelingV1beta1HumanAnnotationConfig struct {
 	AnnotatedDatasetDescription *string  `json:"annotatedDatasetDescription,omitempty"`
 	AnnotatedDatasetDisplayName *string  `json:"annotatedDatasetDisplayName,omitempty"`

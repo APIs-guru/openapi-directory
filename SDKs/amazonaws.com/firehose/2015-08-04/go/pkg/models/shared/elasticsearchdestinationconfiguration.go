@@ -1,5 +1,7 @@
 package shared
 
+// ElasticsearchDestinationConfiguration
+// Describes the configuration of a destination in Amazon ES.
 type ElasticsearchDestinationConfiguration struct {
 	BufferingHints           *ElasticsearchBufferingHints          `json:"BufferingHints,omitempty"`
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions             `json:"CloudWatchLoggingOptions,omitempty"`

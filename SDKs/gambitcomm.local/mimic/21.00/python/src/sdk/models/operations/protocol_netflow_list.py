@@ -4,17 +4,17 @@ from typing import Any,List,Optional
 
 @dataclass
 class ProtocolNetflowListPathParams:
-    agent_num: int = field(default=None, metadata={'path_param': { 'field_name': 'agentNum', 'style': 'simple', 'explode': False }})
+    agent_num: int = field(metadata={'path_param': { 'field_name': 'agentNum', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ProtocolNetflowListRequest:
-    path_params: ProtocolNetflowListPathParams = field(default=None)
+    path_params: ProtocolNetflowListPathParams = field()
     
 
 @dataclass
 class ProtocolNetflowListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     protocol_netflow_list_200_application_json_objects: Optional[List[dict[str, Any]]] = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { StandardError } from "./standarderror";
 import { Folder } from "./folder";
 export declare enum FolderActionResponseStatusEnum {

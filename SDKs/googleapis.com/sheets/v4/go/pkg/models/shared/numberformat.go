@@ -14,6 +14,8 @@ const (
 	NumberFormatTypeEnumScientific                  NumberFormatTypeEnum = "SCIENTIFIC"
 )
 
+// NumberFormat
+// The number format of a cell.
 type NumberFormat struct {
 	Pattern *string               `json:"pattern,omitempty"`
 	Type    *NumberFormatTypeEnum `json:"type,omitempty"`

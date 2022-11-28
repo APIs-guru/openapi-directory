@@ -1,8 +1,9 @@
 
 
+
 export enum InferenceSchedulerStatusEnum {
-    Pending = "PENDING"
-,    Running = "RUNNING"
-,    Stopping = "STOPPING"
-,    Stopped = "STOPPED"
+    Pending = "PENDING",
+    Running = "RUNNING",
+    Stopping = "STOPPING",
+    Stopped = "STOPPED"
 }

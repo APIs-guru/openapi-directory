@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import stage
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SerialPipeline:
-    stages: Optional[List[stage.Stage]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stages' }})
+    r"""SerialPipeline
+    SerialPipeline defines a sequential set of stages for a `DeliveryPipeline`.
+    """
+    
+    stages: Optional[List[Stage]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stages') }})
     

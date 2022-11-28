@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubtitleDeliveryMethodEnum } from "./subtitledeliverymethodenum";
 
 
+
 export class SubtitleProfile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Container" })
+  @SpeakeasyMetadata({ data: "json, name=Container" })
   container?: string;
 
-  @Metadata({ data: "json, name=DidlMode" })
+  @SpeakeasyMetadata({ data: "json, name=DidlMode" })
   didlMode?: string;
 
-  @Metadata({ data: "json, name=Format" })
+  @SpeakeasyMetadata({ data: "json, name=Format" })
   format?: string;
 
-  @Metadata({ data: "json, name=Language" })
+  @SpeakeasyMetadata({ data: "json, name=Language" })
   language?: string;
 
-  @Metadata({ data: "json, name=Method" })
+  @SpeakeasyMetadata({ data: "json, name=Method" })
   method?: SubtitleDeliveryMethodEnum;
 }

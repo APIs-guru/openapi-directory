@@ -12,6 +12,8 @@ const (
 	GoogleCloudPolicysimulatorV1AccessStateDiffAccessChangeEnumAccessMaybeGained           GoogleCloudPolicysimulatorV1AccessStateDiffAccessChangeEnum = "ACCESS_MAYBE_GAINED"
 )
 
+// GoogleCloudPolicysimulatorV1AccessStateDiff
+// A summary and comparison of the principal's access under the current (baseline) policies and the proposed (simulated) policies for a single access tuple.
 type GoogleCloudPolicysimulatorV1AccessStateDiff struct {
 	AccessChange *GoogleCloudPolicysimulatorV1AccessStateDiffAccessChangeEnum `json:"accessChange,omitempty"`
 	Baseline     *GoogleCloudPolicysimulatorV1ExplainedAccess                 `json:"baseline,omitempty"`

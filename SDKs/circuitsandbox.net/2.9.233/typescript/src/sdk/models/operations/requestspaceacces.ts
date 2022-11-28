@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RequestSpaceAccesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=spaceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=spaceId" })
   spaceId: string;
 }
 
 
 export class RequestSpaceAccesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=reason;" })
+  @SpeakeasyMetadata({ data: "form, name=reason;" })
   reason?: string;
 }
 
 
 export class RequestSpaceAccesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class RequestSpaceAccesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RequestSpaceAccesPathParams;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: RequestSpaceAccesRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: RequestSpaceAccesSecurity;
 }
 
 
 export class RequestSpaceAccesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

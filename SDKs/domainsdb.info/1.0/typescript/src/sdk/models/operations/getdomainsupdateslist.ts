@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDomainsUpdatesListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey?: string;
 }
 
 
 export class GetDomainsUpdatesListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDomainsUpdatesListQueryParams;
 }
 
 
 export class GetDomainsUpdatesListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateModel?: shared.UpdateModel;
 }

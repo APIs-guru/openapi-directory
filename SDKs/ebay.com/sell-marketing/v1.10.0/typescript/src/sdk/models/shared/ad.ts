@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Ad
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type defines the fields for an ad.
 **/
 export class Ad extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adId" })
+  @SpeakeasyMetadata({ data: "json, name=adId" })
   adId?: string;
 
-  @Metadata({ data: "json, name=bidPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=bidPercentage" })
   bidPercentage?: string;
 
-  @Metadata({ data: "json, name=inventoryReferenceId" })
+  @SpeakeasyMetadata({ data: "json, name=inventoryReferenceId" })
   inventoryReferenceId?: string;
 
-  @Metadata({ data: "json, name=inventoryReferenceType" })
+  @SpeakeasyMetadata({ data: "json, name=inventoryReferenceType" })
   inventoryReferenceType?: string;
 
-  @Metadata({ data: "json, name=listingId" })
+  @SpeakeasyMetadata({ data: "json, name=listingId" })
   listingId?: string;
 }

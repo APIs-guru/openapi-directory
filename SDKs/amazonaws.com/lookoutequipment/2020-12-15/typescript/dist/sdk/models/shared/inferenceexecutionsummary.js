@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { S3Object } from "./s3object";
 import { InferenceInputConfiguration } from "./inferenceinputconfiguration";
 import { InferenceOutputConfiguration } from "./inferenceoutputconfiguration";
@@ -37,51 +37,51 @@ var InferenceExecutionSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CustomerResultObject" }),
+        SpeakeasyMetadata({ data: "json, name=CustomerResultObject" }),
         __metadata("design:type", S3Object)
     ], InferenceExecutionSummary.prototype, "customerResultObject", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataEndTime" }),
+        SpeakeasyMetadata({ data: "json, name=DataEndTime" }),
         __metadata("design:type", Date)
     ], InferenceExecutionSummary.prototype, "dataEndTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataInputConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=DataInputConfiguration" }),
         __metadata("design:type", InferenceInputConfiguration)
     ], InferenceExecutionSummary.prototype, "dataInputConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataOutputConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=DataOutputConfiguration" }),
         __metadata("design:type", InferenceOutputConfiguration)
     ], InferenceExecutionSummary.prototype, "dataOutputConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataStartTime" }),
+        SpeakeasyMetadata({ data: "json, name=DataStartTime" }),
         __metadata("design:type", Date)
     ], InferenceExecutionSummary.prototype, "dataStartTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=FailedReason" }),
+        SpeakeasyMetadata({ data: "json, name=FailedReason" }),
         __metadata("design:type", String)
     ], InferenceExecutionSummary.prototype, "failedReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=InferenceSchedulerArn" }),
+        SpeakeasyMetadata({ data: "json, name=InferenceSchedulerArn" }),
         __metadata("design:type", String)
     ], InferenceExecutionSummary.prototype, "inferenceSchedulerArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=InferenceSchedulerName" }),
+        SpeakeasyMetadata({ data: "json, name=InferenceSchedulerName" }),
         __metadata("design:type", String)
     ], InferenceExecutionSummary.prototype, "inferenceSchedulerName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModelArn" }),
+        SpeakeasyMetadata({ data: "json, name=ModelArn" }),
         __metadata("design:type", String)
     ], InferenceExecutionSummary.prototype, "modelArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModelName" }),
+        SpeakeasyMetadata({ data: "json, name=ModelName" }),
         __metadata("design:type", String)
     ], InferenceExecutionSummary.prototype, "modelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ScheduledStartTime" }),
+        SpeakeasyMetadata({ data: "json, name=ScheduledStartTime" }),
         __metadata("design:type", Date)
     ], InferenceExecutionSummary.prototype, "scheduledStartTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], InferenceExecutionSummary.prototype, "status", void 0);
     return InferenceExecutionSummary;

@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSearchDomainItemQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=A" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=A" })
   a?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=CNAME" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CNAME" })
   cname?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MX" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MX" })
   mx?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=NS" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NS" })
   ns?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TXT" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TXT" })
   txt?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=country" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" })
   country?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date" })
   date?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=domain" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=domain" })
   domain?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=isDead" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isDead" })
   isDead?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=zone" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=zone" })
   zone?: string;
 }
 
 
 export class GetSearchDomainItemRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSearchDomainItemQueryParams;
 }
 
 
 export class GetSearchDomainItemResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   searchResults?: shared.SearchResults;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

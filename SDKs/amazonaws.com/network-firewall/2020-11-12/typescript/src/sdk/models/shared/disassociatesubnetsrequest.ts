@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DisassociateSubnetsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FirewallArn" })
+  @SpeakeasyMetadata({ data: "json, name=FirewallArn" })
   firewallArn?: string;
 
-  @Metadata({ data: "json, name=FirewallName" })
+  @SpeakeasyMetadata({ data: "json, name=FirewallName" })
   firewallName?: string;
 
-  @Metadata({ data: "json, name=SubnetIds" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetIds" })
   subnetIds: string[];
 
-  @Metadata({ data: "json, name=UpdateToken" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateToken" })
   updateToken?: string;
 }

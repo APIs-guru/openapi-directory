@@ -5,6 +5,8 @@ type InvalidRequestProblemErrors struct {
 	Parameters map[string][]string `json:"parameters,omitempty"`
 }
 
+// InvalidRequestProblem
+// A problem that indicates this request is invalid.
 type InvalidRequestProblem struct {
 	Detail string                        `json:"detail"`
 	Errors []InvalidRequestProblemErrors `json:"errors,omitempty"`

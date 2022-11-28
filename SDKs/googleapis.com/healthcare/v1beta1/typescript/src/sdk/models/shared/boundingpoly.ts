@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Vertex } from "./vertex";
+
 
 
 // BoundingPoly
@@ -8,9 +8,9 @@ import { Vertex } from "./vertex";
  * A bounding polygon for the detected image annotation.
 **/
 export class BoundingPoly extends SpeakeasyBase {
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=vertices", elemType: shared.Vertex })
+  @SpeakeasyMetadata({ data: "json, name=vertices", elemType: Vertex })
   vertices?: Vertex[];
 }

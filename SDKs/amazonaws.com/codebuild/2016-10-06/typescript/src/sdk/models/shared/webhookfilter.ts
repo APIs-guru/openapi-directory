@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WebhookFilterTypeEnum } from "./webhookfiltertypeenum";
+
 
 
 // WebhookFilter
@@ -7,12 +8,12 @@ import { WebhookFilterTypeEnum } from "./webhookfiltertypeenum";
  *  A filter used to determine which webhooks trigger a build. 
 **/
 export class WebhookFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=excludeMatchedPattern" })
+  @SpeakeasyMetadata({ data: "json, name=excludeMatchedPattern" })
   excludeMatchedPattern?: boolean;
 
-  @Metadata({ data: "json, name=pattern" })
+  @SpeakeasyMetadata({ data: "json, name=pattern" })
   pattern: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: WebhookFilterTypeEnum;
 }

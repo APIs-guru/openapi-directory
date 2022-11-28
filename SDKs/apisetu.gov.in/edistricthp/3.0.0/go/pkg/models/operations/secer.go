@@ -26,11 +26,6 @@ type SecerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type SecerRequest struct {
-	Request  *SecerRequestBody `request:"mediaType=application/json"`
-	Security SecerSecurity
-}
-
 type Secer400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Secer504ApplicationJSON struct {
 	Error            *Secer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Secer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type SecerRequest struct {
+	Request  *SecerRequestBody `request:"mediaType=application/json"`
+	Security SecerSecurity
 }
 
 type SecerResponse struct {

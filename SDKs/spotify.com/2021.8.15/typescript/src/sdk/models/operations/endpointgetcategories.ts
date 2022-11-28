@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EndpointGetCategoriesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=country" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" })
   country?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=locale" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locale" })
   locale?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 }
 
 
 export class EndpointGetCategoriesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class EndpointGetCategoriesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   spotifyAuth: shared.SchemeSpotifyAuth;
 }
 
 
 export class EndpointGetCategoriesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: EndpointGetCategoriesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: EndpointGetCategoriesHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: EndpointGetCategoriesSecurity;
 }
 
 
 export class EndpointGetCategoriesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   categoriesObject?: shared.CategoriesObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseObject?: shared.ErrorResponseObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

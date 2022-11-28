@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BoundingBox } from "./boundingbox";
+
 
 
 // Instance
@@ -7,9 +8,9 @@ import { BoundingBox } from "./boundingbox";
  * An instance of a label returned by Amazon Rekognition Image (<a>DetectLabels</a>) or by Amazon Rekognition Video (<a>GetLabelDetection</a>).
 **/
 export class Instance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BoundingBox" })
+  @SpeakeasyMetadata({ data: "json, name=BoundingBox" })
   boundingBox?: BoundingBox;
 
-  @Metadata({ data: "json, name=Confidence" })
+  @SpeakeasyMetadata({ data: "json, name=Confidence" })
   confidence?: number;
 }

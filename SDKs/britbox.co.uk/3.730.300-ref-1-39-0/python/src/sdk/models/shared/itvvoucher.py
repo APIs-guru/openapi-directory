@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum
+from typing import Any
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ItvVoucherOfferTypeEnum(str, Enum):
     STRIPE = "stripe"
@@ -10,8 +12,8 @@ class ItvVoucherOfferTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ItvVoucher:
-    display: dict[str, Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'display' }})
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    links: dict[str, Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
-    offer_type: ItvVoucherOfferTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'offerType' }})
+    display: dict[str, Any] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('display') }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    links: dict[str, Any] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('links') }})
+    offer_type: ItvVoucherOfferTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('offerType') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// TemplateVersionResponse
+// Provides information about a specific version of a message template.
 type TemplateVersionResponse struct {
 	CreationDate         string  `json:"CreationDate"`
 	DefaultSubstitutions *string `json:"DefaultSubstitutions,omitempty"`

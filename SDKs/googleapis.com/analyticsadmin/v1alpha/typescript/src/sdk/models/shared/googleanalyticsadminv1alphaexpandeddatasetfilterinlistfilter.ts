@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAnalyticsAdminV1alphaExpandedDataSetFilterInListFilter
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A filter for a string dimension that matches a particular list of options.
 **/
 export class GoogleAnalyticsAdminV1alphaExpandedDataSetFilterInListFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caseSensitive" })
+  @SpeakeasyMetadata({ data: "json, name=caseSensitive" })
   caseSensitive?: boolean;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values?: string[];
 }

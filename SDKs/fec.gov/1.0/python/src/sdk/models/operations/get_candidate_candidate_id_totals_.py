@@ -1,16 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetCandidateCandidateIDTotalsPathParams:
-    candidate_id: str = field(default=None, metadata={'path_param': { 'field_name': 'candidate_id', 'style': 'simple', 'explode': False }})
+    candidate_id: str = field(metadata={'path_param': { 'field_name': 'candidate_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetCandidateCandidateIDTotalsQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     cycle: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
     election_full: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'election_full', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
@@ -23,13 +26,13 @@ class GetCandidateCandidateIDTotalsQueryParams:
 
 @dataclass
 class GetCandidateCandidateIDTotalsRequest:
-    path_params: GetCandidateCandidateIDTotalsPathParams = field(default=None)
-    query_params: GetCandidateCandidateIDTotalsQueryParams = field(default=None)
+    path_params: GetCandidateCandidateIDTotalsPathParams = field()
+    query_params: GetCandidateCandidateIDTotalsQueryParams = field()
     
 
 @dataclass
 class GetCandidateCandidateIDTotalsResponse:
+    content_type: str = field()
+    status_code: int = field()
     committee_totals_page: Optional[shared.CommitteeTotalsPage] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

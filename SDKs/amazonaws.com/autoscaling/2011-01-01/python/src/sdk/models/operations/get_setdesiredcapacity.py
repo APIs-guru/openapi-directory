@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetSetDesiredCapacityActionEnum(str, Enum):
     SET_DESIRED_CAPACITY = "SetDesiredCapacity"
@@ -10,11 +14,11 @@ class GetSetDesiredCapacityVersionEnum(str, Enum):
 
 @dataclass
 class GetSetDesiredCapacityQueryParams:
-    action: GetSetDesiredCapacityActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    auto_scaling_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
-    desired_capacity: int = field(default=None, metadata={'query_param': { 'field_name': 'DesiredCapacity', 'style': 'form', 'explode': True }})
+    action: GetSetDesiredCapacityActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    auto_scaling_group_name: str = field(metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
+    desired_capacity: int = field(metadata={'query_param': { 'field_name': 'DesiredCapacity', 'style': 'form', 'explode': True }})
+    version: GetSetDesiredCapacityVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     honor_cooldown: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'HonorCooldown', 'style': 'form', 'explode': True }})
-    version: GetSetDesiredCapacityVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetSetDesiredCapacityHeaders:
 
 @dataclass
 class GetSetDesiredCapacityRequest:
-    query_params: GetSetDesiredCapacityQueryParams = field(default=None)
-    headers: GetSetDesiredCapacityHeaders = field(default=None)
+    headers: GetSetDesiredCapacityHeaders = field()
+    query_params: GetSetDesiredCapacityQueryParams = field()
     
 
 @dataclass
 class GetSetDesiredCapacityResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

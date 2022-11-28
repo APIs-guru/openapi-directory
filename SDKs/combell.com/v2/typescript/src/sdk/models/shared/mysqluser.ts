@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserRightsEnum } from "./userrightsenum";
 
 
+
 export class MySqlUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=rights" })
+  @SpeakeasyMetadata({ data: "json, name=rights" })
   rights?: UserRightsEnum;
 }

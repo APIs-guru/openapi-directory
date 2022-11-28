@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateAMapQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=app_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=app_token" })
   appToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=constraint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=constraint" })
   constraint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=entity_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entity_id" })
   entityId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=variable" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=variable" })
   variable: string;
 }
 
 
 export class CreateAMapHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-App-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-App-Token" })
   xAppToken?: string;
 }
 
 
 export class CreateAMapRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: CreateAMapQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateAMapHeaders;
 }
 
 
 export class CreateAMapResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

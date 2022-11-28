@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomRoutingDestinationConfiguration } from "./customroutingdestinationconfiguration";
 
 
+
 export class CreateCustomRoutingEndpointGroupRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DestinationConfigurations", elemType: shared.CustomRoutingDestinationConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=DestinationConfigurations", elemType: CustomRoutingDestinationConfiguration })
   destinationConfigurations: CustomRoutingDestinationConfiguration[];
 
-  @Metadata({ data: "json, name=EndpointGroupRegion" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointGroupRegion" })
   endpointGroupRegion: string;
 
-  @Metadata({ data: "json, name=IdempotencyToken" })
+  @SpeakeasyMetadata({ data: "json, name=IdempotencyToken" })
   idempotencyToken: string;
 
-  @Metadata({ data: "json, name=ListenerArn" })
+  @SpeakeasyMetadata({ data: "json, name=ListenerArn" })
   listenerArn: string;
 }

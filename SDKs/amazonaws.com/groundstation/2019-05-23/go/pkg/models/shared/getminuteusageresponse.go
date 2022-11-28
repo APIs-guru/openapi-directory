@@ -1,5 +1,7 @@
 package shared
 
+// GetMinuteUsageResponse
+// <p/>
 type GetMinuteUsageResponse struct {
 	EstimatedMinutesRemaining     *int64 `json:"estimatedMinutesRemaining,omitempty"`
 	IsReservedMinutesCustomer     *bool  `json:"isReservedMinutesCustomer,omitempty"`

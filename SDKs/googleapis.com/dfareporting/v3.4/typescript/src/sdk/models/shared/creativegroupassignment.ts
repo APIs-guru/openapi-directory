@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CreativeGroupAssignmentCreativeGroupNumberEnum {
-    CreativeGroupOne = "CREATIVE_GROUP_ONE"
-,    CreativeGroupTwo = "CREATIVE_GROUP_TWO"
+    CreativeGroupOne = "CREATIVE_GROUP_ONE",
+    CreativeGroupTwo = "CREATIVE_GROUP_TWO"
 }
 
 
@@ -11,9 +12,9 @@ export enum CreativeGroupAssignmentCreativeGroupNumberEnum {
  * Creative Group Assignment.
 **/
 export class CreativeGroupAssignment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creativeGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=creativeGroupId" })
   creativeGroupId?: string;
 
-  @Metadata({ data: "json, name=creativeGroupNumber" })
+  @SpeakeasyMetadata({ data: "json, name=creativeGroupNumber" })
   creativeGroupNumber?: CreativeGroupAssignmentCreativeGroupNumberEnum;
 }

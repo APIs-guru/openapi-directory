@@ -1,6 +1,7 @@
 
 
+
 export enum WebhookBuildTypeEnum {
-    Build = "BUILD"
-,    BuildBatch = "BUILD_BATCH"
+    Build = "BUILD",
+    BuildBatch = "BUILD_BATCH"
 }

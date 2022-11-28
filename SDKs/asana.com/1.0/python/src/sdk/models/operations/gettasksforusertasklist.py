@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class GetTasksForUserTaskListPathParams:
-    user_task_list_gid: str = field(default=None, metadata={'path_param': { 'field_name': 'user_task_list_gid', 'style': 'simple', 'explode': False }})
+    user_task_list_gid: str = field(metadata={'path_param': { 'field_name': 'user_task_list_gid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,22 +19,22 @@ class GetTasksForUserTaskListQueryParams:
     opt_pretty: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'opt_pretty', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class GetTasksForUserTaskListRequest:
-    path_params: GetTasksForUserTaskListPathParams = field(default=None)
-    query_params: GetTasksForUserTaskListQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class GetTasksForUserTaskList200ApplicationJSON:
-    data: Optional[List[shared.TaskCompact]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    data: Optional[List[shared.TaskCompact]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    
+
+@dataclass
+class GetTasksForUserTaskListRequest:
+    path_params: GetTasksForUserTaskListPathParams = field()
+    query_params: GetTasksForUserTaskListQueryParams = field()
     
 
 @dataclass
 class GetTasksForUserTaskListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     get_tasks_for_user_task_list_200_application_json_object: Optional[GetTasksForUserTaskList200ApplicationJSON] = field(default=None)
     

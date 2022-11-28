@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StageEnum } from "./stageenum";
 // AutoBranchCreationConfig
 /**
@@ -34,43 +34,43 @@ var AutoBranchCreationConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=basicAuthCredentials" }),
+        SpeakeasyMetadata({ data: "json, name=basicAuthCredentials" }),
         __metadata("design:type", String)
     ], AutoBranchCreationConfig.prototype, "basicAuthCredentials", void 0);
     __decorate([
-        Metadata({ data: "json, name=buildSpec" }),
+        SpeakeasyMetadata({ data: "json, name=buildSpec" }),
         __metadata("design:type", String)
     ], AutoBranchCreationConfig.prototype, "buildSpec", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableAutoBuild" }),
+        SpeakeasyMetadata({ data: "json, name=enableAutoBuild" }),
         __metadata("design:type", Boolean)
     ], AutoBranchCreationConfig.prototype, "enableAutoBuild", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableBasicAuth" }),
+        SpeakeasyMetadata({ data: "json, name=enableBasicAuth" }),
         __metadata("design:type", Boolean)
     ], AutoBranchCreationConfig.prototype, "enableBasicAuth", void 0);
     __decorate([
-        Metadata({ data: "json, name=enablePerformanceMode" }),
+        SpeakeasyMetadata({ data: "json, name=enablePerformanceMode" }),
         __metadata("design:type", Boolean)
     ], AutoBranchCreationConfig.prototype, "enablePerformanceMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=enablePullRequestPreview" }),
+        SpeakeasyMetadata({ data: "json, name=enablePullRequestPreview" }),
         __metadata("design:type", Boolean)
     ], AutoBranchCreationConfig.prototype, "enablePullRequestPreview", void 0);
     __decorate([
-        Metadata({ data: "json, name=environmentVariables" }),
+        SpeakeasyMetadata({ data: "json, name=environmentVariables" }),
         __metadata("design:type", Map)
     ], AutoBranchCreationConfig.prototype, "environmentVariables", void 0);
     __decorate([
-        Metadata({ data: "json, name=framework" }),
+        SpeakeasyMetadata({ data: "json, name=framework" }),
         __metadata("design:type", String)
     ], AutoBranchCreationConfig.prototype, "framework", void 0);
     __decorate([
-        Metadata({ data: "json, name=pullRequestEnvironmentName" }),
+        SpeakeasyMetadata({ data: "json, name=pullRequestEnvironmentName" }),
         __metadata("design:type", String)
     ], AutoBranchCreationConfig.prototype, "pullRequestEnvironmentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=stage" }),
+        SpeakeasyMetadata({ data: "json, name=stage" }),
         __metadata("design:type", String)
     ], AutoBranchCreationConfig.prototype, "stage", void 0);
     return AutoBranchCreationConfig;

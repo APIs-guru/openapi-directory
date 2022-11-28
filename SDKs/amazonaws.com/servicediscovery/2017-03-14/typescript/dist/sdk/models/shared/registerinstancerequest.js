@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RegisterInstanceRequest = /** @class */ (function (_super) {
     __extends(RegisterInstanceRequest, _super);
     function RegisterInstanceRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Attributes" }),
+        SpeakeasyMetadata({ data: "json, name=Attributes" }),
         __metadata("design:type", Map)
     ], RegisterInstanceRequest.prototype, "attributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatorRequestId" }),
+        SpeakeasyMetadata({ data: "json, name=CreatorRequestId" }),
         __metadata("design:type", String)
     ], RegisterInstanceRequest.prototype, "creatorRequestId", void 0);
     __decorate([
-        Metadata({ data: "json, name=InstanceId" }),
+        SpeakeasyMetadata({ data: "json, name=InstanceId" }),
         __metadata("design:type", String)
     ], RegisterInstanceRequest.prototype, "instanceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceId" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceId" }),
         __metadata("design:type", String)
     ], RegisterInstanceRequest.prototype, "serviceId", void 0);
     return RegisterInstanceRequest;

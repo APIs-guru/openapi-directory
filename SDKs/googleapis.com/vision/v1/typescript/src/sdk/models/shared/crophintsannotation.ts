@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CropHint } from "./crophint";
+
 
 
 // CropHintsAnnotation
@@ -8,6 +8,6 @@ import { CropHint } from "./crophint";
  * Set of crop hints that are used to generate new crops when serving images.
 **/
 export class CropHintsAnnotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cropHints", elemType: shared.CropHint })
+  @SpeakeasyMetadata({ data: "json, name=cropHints", elemType: CropHint })
   cropHints?: CropHint[];
 }

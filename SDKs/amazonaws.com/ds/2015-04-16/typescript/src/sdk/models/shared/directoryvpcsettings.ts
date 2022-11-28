@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DirectoryVpcSettings
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.
 **/
 export class DirectoryVpcSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SubnetIds" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetIds" })
   subnetIds: string[];
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId: string;
 }

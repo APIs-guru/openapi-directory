@@ -1,56 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class FetchFieldByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=fieldId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fieldId" })
   fieldId: string;
 }
 
 
-export class FetchFieldByIdSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
-export class FetchFieldByIdSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2AuthorizationCode: shared.SchemeOauth2AuthorizationCode;
-}
-
-
 export class FetchFieldByIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: FetchFieldByIdSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey?: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: FetchFieldByIdSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2AuthorizationCode?: shared.SchemeOauth2AuthorizationCode;
 }
 
 
 export class FetchFieldByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: FetchFieldByIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: FetchFieldByIdSecurity;
 }
 
 
 export class FetchFieldByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   field?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

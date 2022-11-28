@@ -11,6 +11,8 @@ const (
 	MetricHeaderEntryTypeEnumTime                  MetricHeaderEntryTypeEnum = "TIME"
 )
 
+// MetricHeaderEntry
+// Header for the metrics.
 type MetricHeaderEntry struct {
 	Name *string                    `json:"name,omitempty"`
 	Type *MetricHeaderEntryTypeEnum `json:"type,omitempty"`

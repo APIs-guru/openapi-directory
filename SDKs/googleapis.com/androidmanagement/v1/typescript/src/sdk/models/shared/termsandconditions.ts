@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserFacingMessage } from "./userfacingmessage";
-import { UserFacingMessage } from "./userfacingmessage";
+
 
 
 // TermsAndConditions
@@ -8,9 +8,9 @@ import { UserFacingMessage } from "./userfacingmessage";
  * A terms and conditions page to be accepted during provisioning.
 **/
 export class TermsAndConditions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: UserFacingMessage;
 
-  @Metadata({ data: "json, name=header" })
+  @SpeakeasyMetadata({ data: "json, name=header" })
   header?: UserFacingMessage;
 }

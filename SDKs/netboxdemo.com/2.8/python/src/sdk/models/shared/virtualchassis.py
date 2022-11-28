@@ -1,15 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import nesteddevice
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class VirtualChassis:
-    domain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domain' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    master: nesteddevice.NestedDevice = field(default=None, metadata={'dataclasses_json': { 'field_name': 'master' }})
-    member_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'member_count' }})
-    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    master: NestedDevice = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('master') }})
+    domain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('domain') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    member_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('member_count') }})
+    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     

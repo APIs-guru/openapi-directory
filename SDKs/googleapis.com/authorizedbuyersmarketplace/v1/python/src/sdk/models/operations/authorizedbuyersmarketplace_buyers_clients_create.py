@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersClientsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class AuthorizedbuyersmarketplaceBuyersClientsCreateQueryParams:
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersClientsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersClientsCreateRequest:
-    path_params: AuthorizedbuyersmarketplaceBuyersClientsCreatePathParams = field(default=None)
-    query_params: AuthorizedbuyersmarketplaceBuyersClientsCreateQueryParams = field(default=None)
-    request: Optional[shared.Client] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AuthorizedbuyersmarketplaceBuyersClientsCreateSecurity = field(default=None)
+    path_params: AuthorizedbuyersmarketplaceBuyersClientsCreatePathParams = field()
+    query_params: AuthorizedbuyersmarketplaceBuyersClientsCreateQueryParams = field()
+    security: AuthorizedbuyersmarketplaceBuyersClientsCreateSecurity = field()
+    request: Optional[shared.ClientInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersClientsCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     client: Optional[shared.Client] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

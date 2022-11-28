@@ -1,5 +1,7 @@
 package shared
 
+// RunQueryRequest
+// The request for Datastore.RunQuery.
 type RunQueryRequest struct {
 	DatabaseID  *string      `json:"databaseId,omitempty"`
 	GqlQuery    *GqlQuery    `json:"gqlQuery,omitempty"`

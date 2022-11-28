@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDisassociateDataShareConsumerActionEnum(str, Enum):
     DISASSOCIATE_DATA_SHARE_CONSUMER = "DisassociateDataShareConsumer"
@@ -10,11 +14,11 @@ class GetDisassociateDataShareConsumerVersionEnum(str, Enum):
 
 @dataclass
 class GetDisassociateDataShareConsumerQueryParams:
-    action: GetDisassociateDataShareConsumerActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDisassociateDataShareConsumerActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    data_share_arn: str = field(metadata={'query_param': { 'field_name': 'DataShareArn', 'style': 'form', 'explode': True }})
+    version: GetDisassociateDataShareConsumerVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     consumer_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ConsumerArn', 'style': 'form', 'explode': True }})
-    data_share_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'DataShareArn', 'style': 'form', 'explode': True }})
     disassociate_entire_account: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DisassociateEntireAccount', 'style': 'form', 'explode': True }})
-    version: GetDisassociateDataShareConsumerVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDisassociateDataShareConsumerHeaders:
 
 @dataclass
 class GetDisassociateDataShareConsumerRequest:
-    query_params: GetDisassociateDataShareConsumerQueryParams = field(default=None)
-    headers: GetDisassociateDataShareConsumerHeaders = field(default=None)
+    headers: GetDisassociateDataShareConsumerHeaders = field()
+    query_params: GetDisassociateDataShareConsumerQueryParams = field()
     
 
 @dataclass
 class GetDisassociateDataShareConsumerResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

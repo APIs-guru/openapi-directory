@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PutStudiesIdAttachmentsNamePathParams = /** @class */ (function (_super) {
     __extends(PutStudiesIdAttachmentsNamePathParams, _super);
     function PutStudiesIdAttachmentsNamePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], PutStudiesIdAttachmentsNamePathParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], PutStudiesIdAttachmentsNamePathParams.prototype, "name", void 0);
     return PutStudiesIdAttachmentsNamePathParams;
@@ -45,7 +45,7 @@ var PutStudiesIdAttachmentsNameHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=If-Match" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-Match" }),
         __metadata("design:type", String)
     ], PutStudiesIdAttachmentsNameHeaders.prototype, "ifMatch", void 0);
     return PutStudiesIdAttachmentsNameHeaders;
@@ -57,15 +57,15 @@ var PutStudiesIdAttachmentsNameRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutStudiesIdAttachmentsNamePathParams)
     ], PutStudiesIdAttachmentsNameRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutStudiesIdAttachmentsNameHeaders)
     ], PutStudiesIdAttachmentsNameRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/octet-stream" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/octet-stream" }),
         __metadata("design:type", Uint8Array)
     ], PutStudiesIdAttachmentsNameRequest.prototype, "request", void 0);
     return PutStudiesIdAttachmentsNameRequest;
@@ -77,15 +77,15 @@ var PutStudiesIdAttachmentsNameResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutStudiesIdAttachmentsNameResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PutStudiesIdAttachmentsNameResponse.prototype, "putStudiesIdAttachmentsName200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutStudiesIdAttachmentsNameResponse.prototype, "statusCode", void 0);
     return PutStudiesIdAttachmentsNameResponse;

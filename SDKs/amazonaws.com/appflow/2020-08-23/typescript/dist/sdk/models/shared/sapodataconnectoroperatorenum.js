@@ -1,0 +1,24 @@
+export var SapoDataConnectorOperatorEnum;
+(function (SapoDataConnectorOperatorEnum) {
+    SapoDataConnectorOperatorEnum["Projection"] = "PROJECTION";
+    SapoDataConnectorOperatorEnum["LessThan"] = "LESS_THAN";
+    SapoDataConnectorOperatorEnum["Contains"] = "CONTAINS";
+    SapoDataConnectorOperatorEnum["GreaterThan"] = "GREATER_THAN";
+    SapoDataConnectorOperatorEnum["Between"] = "BETWEEN";
+    SapoDataConnectorOperatorEnum["LessThanOrEqualTo"] = "LESS_THAN_OR_EQUAL_TO";
+    SapoDataConnectorOperatorEnum["GreaterThanOrEqualTo"] = "GREATER_THAN_OR_EQUAL_TO";
+    SapoDataConnectorOperatorEnum["EqualTo"] = "EQUAL_TO";
+    SapoDataConnectorOperatorEnum["NotEqualTo"] = "NOT_EQUAL_TO";
+    SapoDataConnectorOperatorEnum["Addition"] = "ADDITION";
+    SapoDataConnectorOperatorEnum["Multiplication"] = "MULTIPLICATION";
+    SapoDataConnectorOperatorEnum["Division"] = "DIVISION";
+    SapoDataConnectorOperatorEnum["Subtraction"] = "SUBTRACTION";
+    SapoDataConnectorOperatorEnum["MaskAll"] = "MASK_ALL";
+    SapoDataConnectorOperatorEnum["MaskFirstN"] = "MASK_FIRST_N";
+    SapoDataConnectorOperatorEnum["MaskLastN"] = "MASK_LAST_N";
+    SapoDataConnectorOperatorEnum["ValidateNonNull"] = "VALIDATE_NON_NULL";
+    SapoDataConnectorOperatorEnum["ValidateNonZero"] = "VALIDATE_NON_ZERO";
+    SapoDataConnectorOperatorEnum["ValidateNonNegative"] = "VALIDATE_NON_NEGATIVE";
+    SapoDataConnectorOperatorEnum["ValidateNumeric"] = "VALIDATE_NUMERIC";
+    SapoDataConnectorOperatorEnum["NoOp"] = "NO_OP";
+})(SapoDataConnectorOperatorEnum || (SapoDataConnectorOperatorEnum = {}));

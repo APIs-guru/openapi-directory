@@ -1,5 +1,7 @@
 package shared
 
+// InAppTemplateResponse
+// In-App Template Response.
 type InAppTemplateResponse struct {
 	Arn                 *string               `json:"Arn,omitempty"`
 	Content             []InAppMessageContent `json:"Content,omitempty"`

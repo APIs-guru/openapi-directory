@@ -15,3 +15,11 @@ type ImageAttachment struct {
 	ObjectID    int64             `json:"object_id"`
 	Parent      map[string]string `json:"parent,omitempty"`
 }
+
+type ImageAttachmentInput struct {
+	ContentType string  `json:"content_type"`
+	ImageHeight int64   `json:"image_height"`
+	ImageWidth  int64   `json:"image_width"`
+	Name        *string `json:"name,omitempty"`
+	ObjectID    int64   `json:"object_id"`
+}

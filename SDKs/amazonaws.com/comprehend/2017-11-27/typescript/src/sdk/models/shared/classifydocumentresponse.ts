@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DocumentClass } from "./documentclass";
 import { DocumentLabel } from "./documentlabel";
 
 
+
 export class ClassifyDocumentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Classes", elemType: shared.DocumentClass })
+  @SpeakeasyMetadata({ data: "json, name=Classes", elemType: DocumentClass })
   classes?: DocumentClass[];
 
-  @Metadata({ data: "json, name=Labels", elemType: shared.DocumentLabel })
+  @SpeakeasyMetadata({ data: "json, name=Labels", elemType: DocumentLabel })
   labels?: DocumentLabel[];
 }

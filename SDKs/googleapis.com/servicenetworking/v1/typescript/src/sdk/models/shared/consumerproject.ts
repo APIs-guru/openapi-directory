@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ConsumerProject
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a consumer project.
 **/
 export class ConsumerProject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=projectNum" })
+  @SpeakeasyMetadata({ data: "json, name=projectNum" })
   projectNum?: string;
 }

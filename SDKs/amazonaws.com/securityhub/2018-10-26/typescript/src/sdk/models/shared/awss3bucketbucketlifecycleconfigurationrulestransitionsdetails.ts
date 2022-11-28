@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A rule for when objects transition to specific storage classes.
 **/
 export class AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Date" })
+  @SpeakeasyMetadata({ data: "json, name=Date" })
   date?: string;
 
-  @Metadata({ data: "json, name=Days" })
+  @SpeakeasyMetadata({ data: "json, name=Days" })
   days?: number;
 
-  @Metadata({ data: "json, name=StorageClass" })
+  @SpeakeasyMetadata({ data: "json, name=StorageClass" })
   storageClass?: string;
 }

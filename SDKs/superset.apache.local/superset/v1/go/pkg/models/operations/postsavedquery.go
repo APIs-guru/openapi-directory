@@ -8,11 +8,6 @@ type PostSavedQuerySecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PostSavedQueryRequest struct {
-	Request  shared.SavedQueryRestAPIPost `request:"mediaType=application/json"`
-	Security PostSavedQuerySecurity
-}
-
 type PostSavedQuery201ApplicationJSON struct {
 	ID     *string                       `json:"id,omitempty"`
 	Result *shared.SavedQueryRestAPIPost `json:"result,omitempty"`
@@ -32,6 +27,11 @@ type PostSavedQuery422ApplicationJSON struct {
 
 type PostSavedQuery500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PostSavedQueryRequest struct {
+	Request  shared.SavedQueryRestAPIPost `request:"mediaType=application/json"`
+	Security PostSavedQuerySecurity
 }
 
 type PostSavedQueryResponse struct {

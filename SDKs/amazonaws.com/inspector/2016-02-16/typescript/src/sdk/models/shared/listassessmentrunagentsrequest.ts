@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AgentFilter } from "./agentfilter";
 
 
+
 export class ListAssessmentRunAgentsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assessmentRunArn" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentRunArn" })
   assessmentRunArn: string;
 
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: AgentFilter;
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

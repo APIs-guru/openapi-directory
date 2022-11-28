@@ -22,13 +22,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationCodeConfigurationUpdate } from "./applicationcodeconfigurationupdate";
 import { ApplicationSnapshotConfigurationUpdate } from "./applicationsnapshotconfigurationupdate";
 import { EnvironmentPropertyUpdates } from "./environmentpropertyupdates";
 import { FlinkApplicationConfigurationUpdate } from "./flinkapplicationconfigurationupdate";
 import { SqlApplicationConfigurationUpdate } from "./sqlapplicationconfigurationupdate";
+import { VpcConfigurationUpdate } from "./vpcconfigurationupdate";
 import { ZeppelinApplicationConfigurationUpdate } from "./zeppelinapplicationconfigurationupdate";
 // ApplicationConfigurationUpdate
 /**
@@ -40,31 +40,31 @@ var ApplicationConfigurationUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApplicationCodeConfigurationUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationCodeConfigurationUpdate" }),
         __metadata("design:type", ApplicationCodeConfigurationUpdate)
     ], ApplicationConfigurationUpdate.prototype, "applicationCodeConfigurationUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationSnapshotConfigurationUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationSnapshotConfigurationUpdate" }),
         __metadata("design:type", ApplicationSnapshotConfigurationUpdate)
     ], ApplicationConfigurationUpdate.prototype, "applicationSnapshotConfigurationUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=EnvironmentPropertyUpdates" }),
+        SpeakeasyMetadata({ data: "json, name=EnvironmentPropertyUpdates" }),
         __metadata("design:type", EnvironmentPropertyUpdates)
     ], ApplicationConfigurationUpdate.prototype, "environmentPropertyUpdates", void 0);
     __decorate([
-        Metadata({ data: "json, name=FlinkApplicationConfigurationUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=FlinkApplicationConfigurationUpdate" }),
         __metadata("design:type", FlinkApplicationConfigurationUpdate)
     ], ApplicationConfigurationUpdate.prototype, "flinkApplicationConfigurationUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=SqlApplicationConfigurationUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=SqlApplicationConfigurationUpdate" }),
         __metadata("design:type", SqlApplicationConfigurationUpdate)
     ], ApplicationConfigurationUpdate.prototype, "sqlApplicationConfigurationUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcConfigurationUpdates", elemType: shared.VpcConfigurationUpdate }),
+        SpeakeasyMetadata({ data: "json, name=VpcConfigurationUpdates", elemType: VpcConfigurationUpdate }),
         __metadata("design:type", Array)
     ], ApplicationConfigurationUpdate.prototype, "vpcConfigurationUpdates", void 0);
     __decorate([
-        Metadata({ data: "json, name=ZeppelinApplicationConfigurationUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=ZeppelinApplicationConfigurationUpdate" }),
         __metadata("design:type", ZeppelinApplicationConfigurationUpdate)
     ], ApplicationConfigurationUpdate.prototype, "zeppelinApplicationConfigurationUpdate", void 0);
     return ApplicationConfigurationUpdate;

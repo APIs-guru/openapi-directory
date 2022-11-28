@@ -12,6 +12,8 @@ const (
 	OAuthAuthorizationUserAgentCategoryEnumUnknown OAuthAuthorizationUserAgentCategoryEnum = "unknown"
 )
 
+// OAuthAuthorization
+// OAuth authorization
 type OAuthAuthorization struct {
 	ClientID               string                                  `json:"clientId"`
 	ClientName             string                                  `json:"clientName"`

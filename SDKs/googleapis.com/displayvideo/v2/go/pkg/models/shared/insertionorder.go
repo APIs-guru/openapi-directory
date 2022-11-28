@@ -39,6 +39,25 @@ const (
 	InsertionOrderReservationTypeEnumReservationTypeInstantReserve         InsertionOrderReservationTypeEnum = "RESERVATION_TYPE_INSTANT_RESERVE"
 )
 
+// InsertionOrderInput
+// A single insertion order.
+type InsertionOrderInput struct {
+	BidStrategy        *BiddingStrategy                      `json:"bidStrategy,omitempty"`
+	BillableOutcome    *InsertionOrderBillableOutcomeEnum    `json:"billableOutcome,omitempty"`
+	Budget             *InsertionOrderBudget                 `json:"budget,omitempty"`
+	CampaignID         *string                               `json:"campaignId,omitempty"`
+	DisplayName        *string                               `json:"displayName,omitempty"`
+	EntityStatus       *InsertionOrderEntityStatusEnum       `json:"entityStatus,omitempty"`
+	FrequencyCap       *FrequencyCap                         `json:"frequencyCap,omitempty"`
+	InsertionOrderType *InsertionOrderInsertionOrderTypeEnum `json:"insertionOrderType,omitempty"`
+	IntegrationDetails *IntegrationDetails                   `json:"integrationDetails,omitempty"`
+	Pacing             *Pacing                               `json:"pacing,omitempty"`
+	PartnerCosts       []PartnerCost                         `json:"partnerCosts,omitempty"`
+	PerformanceGoal    *PerformanceGoal                      `json:"performanceGoal,omitempty"`
+}
+
+// InsertionOrder
+// A single insertion order.
 type InsertionOrder struct {
 	AdvertiserID       *string                               `json:"advertiserId,omitempty"`
 	BidStrategy        *BiddingStrategy                      `json:"bidStrategy,omitempty"`

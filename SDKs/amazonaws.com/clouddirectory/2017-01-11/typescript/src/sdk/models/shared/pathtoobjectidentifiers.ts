@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PathToObjectIdentifiers
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Returns the path to the <code>ObjectIdentifiers</code> that is associated with the directory.
 **/
 export class PathToObjectIdentifiers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ObjectIdentifiers" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectIdentifiers" })
   objectIdentifiers?: string[];
 
-  @Metadata({ data: "json, name=Path" })
+  @SpeakeasyMetadata({ data: "json, name=Path" })
   path?: string;
 }

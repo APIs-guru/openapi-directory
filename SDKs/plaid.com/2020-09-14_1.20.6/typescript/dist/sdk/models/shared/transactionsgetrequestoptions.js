@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // TransactionsGetRequestOptions
 /**
  * An optional object to be used with the request. If specified, `options` must not be `null`.
@@ -33,19 +33,19 @@ var TransactionsGetRequestOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=account_ids" }),
+        SpeakeasyMetadata({ data: "json, name=account_ids" }),
         __metadata("design:type", Array)
     ], TransactionsGetRequestOptions.prototype, "accountIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", Number)
     ], TransactionsGetRequestOptions.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=include_original_description" }),
+        SpeakeasyMetadata({ data: "json, name=include_original_description" }),
         __metadata("design:type", Boolean)
     ], TransactionsGetRequestOptions.prototype, "includeOriginalDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=offset" }),
+        SpeakeasyMetadata({ data: "json, name=offset" }),
         __metadata("design:type", Number)
     ], TransactionsGetRequestOptions.prototype, "offset", void 0);
     return TransactionsGetRequestOptions;

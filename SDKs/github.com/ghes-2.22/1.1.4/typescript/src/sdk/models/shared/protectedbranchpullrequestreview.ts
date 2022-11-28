@@ -1,23 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Team } from "./team";
 import { SimpleUser } from "./simpleuser";
 
 
+
 export class ProtectedBranchPullRequestReviewDismissalRestrictions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=teams", elemType: shared.Team })
+  @SpeakeasyMetadata({ data: "json, name=teams", elemType: Team })
   teams?: Team[];
 
-  @Metadata({ data: "json, name=teams_url" })
+  @SpeakeasyMetadata({ data: "json, name=teams_url" })
   teamsUrl?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=users", elemType: shared.SimpleUser })
+  @SpeakeasyMetadata({ data: "json, name=users", elemType: SimpleUser })
   users?: SimpleUser[];
 
-  @Metadata({ data: "json, name=users_url" })
+  @SpeakeasyMetadata({ data: "json, name=users_url" })
   usersUrl?: string;
 }
 
@@ -27,18 +27,18 @@ export class ProtectedBranchPullRequestReviewDismissalRestrictions extends Speak
  * Protected Branch Pull Request Review
 **/
 export class ProtectedBranchPullRequestReview extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dismiss_stale_reviews" })
+  @SpeakeasyMetadata({ data: "json, name=dismiss_stale_reviews" })
   dismissStaleReviews: boolean;
 
-  @Metadata({ data: "json, name=dismissal_restrictions" })
+  @SpeakeasyMetadata({ data: "json, name=dismissal_restrictions" })
   dismissalRestrictions?: ProtectedBranchPullRequestReviewDismissalRestrictions;
 
-  @Metadata({ data: "json, name=require_code_owner_reviews" })
+  @SpeakeasyMetadata({ data: "json, name=require_code_owner_reviews" })
   requireCodeOwnerReviews: boolean;
 
-  @Metadata({ data: "json, name=required_approving_review_count" })
+  @SpeakeasyMetadata({ data: "json, name=required_approving_review_count" })
   requiredApprovingReviewCount?: number;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

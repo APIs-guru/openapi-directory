@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Button } from "./button";
 import { Image } from "./image";
 import { KeyValue } from "./keyvalue";
 import { TextParagraph } from "./textparagraph";
+
 
 
 // WidgetMarkup
@@ -11,15 +11,15 @@ import { TextParagraph } from "./textparagraph";
  * A widget is a UI element that presents texts, images, etc.
 **/
 export class WidgetMarkup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buttons", elemType: shared.Button })
+  @SpeakeasyMetadata({ data: "json, name=buttons", elemType: Button })
   buttons?: Button[];
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: Image;
 
-  @Metadata({ data: "json, name=keyValue" })
+  @SpeakeasyMetadata({ data: "json, name=keyValue" })
   keyValue?: KeyValue;
 
-  @Metadata({ data: "json, name=textParagraph" })
+  @SpeakeasyMetadata({ data: "json, name=textParagraph" })
   textParagraph?: TextParagraph;
 }

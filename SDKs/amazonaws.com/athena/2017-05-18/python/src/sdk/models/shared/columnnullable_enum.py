@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ColumnNullableEnum(str, Enum):
     NOT_NULL = "NOT_NULL"

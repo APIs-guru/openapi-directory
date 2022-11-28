@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var JobAddQueryParams = /** @class */ (function (_super) {
     __extends(JobAddQueryParams, _super);
     function JobAddQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api-version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" }),
         __metadata("design:type", String)
     ], JobAddQueryParams.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
         __metadata("design:type", Number)
     ], JobAddQueryParams.prototype, "timeout", void 0);
     return JobAddQueryParams;
@@ -45,15 +45,15 @@ var JobAddHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=client-request-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=client-request-id" }),
         __metadata("design:type", String)
     ], JobAddHeaders.prototype, "clientRequestId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=ocp-date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=ocp-date" }),
         __metadata("design:type", String)
     ], JobAddHeaders.prototype, "ocpDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=return-client-request-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=return-client-request-id" }),
         __metadata("design:type", Boolean)
     ], JobAddHeaders.prototype, "returnClientRequestId", void 0);
     return JobAddHeaders;
@@ -65,15 +65,15 @@ var JobAddRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", JobAddQueryParams)
     ], JobAddRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", JobAddHeaders)
     ], JobAddRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], JobAddRequest.prototype, "request", void 0);
     return JobAddRequest;
@@ -85,19 +85,19 @@ var JobAddResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], JobAddResponse.prototype, "batchError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], JobAddResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], JobAddResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], JobAddResponse.prototype, "statusCode", void 0);
     return JobAddResponse;

@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetAppsQueryParams = /** @class */ (function (_super) {
     __extends(GetAppsQueryParams, _super);
     function GetAppsQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=isOwner" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isOwner" }),
         __metadata("design:type", Boolean)
     ], GetAppsQueryParams.prototype, "isOwner", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetAppsQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageNumber" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageNumber" }),
         __metadata("design:type", Number)
     ], GetAppsQueryParams.prototype, "pageNumber", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=query" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" }),
         __metadata("design:type", String)
     ], GetAppsQueryParams.prototype, "query", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], GetAppsQueryParams.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" }),
         __metadata("design:type", String)
     ], GetAppsQueryParams.prototype, "userId", void 0);
     return GetAppsQueryParams;
@@ -61,7 +61,7 @@ var GetAppsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAppsQueryParams)
     ], GetAppsRequest.prototype, "queryParams", void 0);
     return GetAppsRequest;
@@ -73,15 +73,15 @@ var GetAppsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetAppsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAppsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAppsResponse.prototype, "statusCode", void 0);
     return GetAppsResponse;

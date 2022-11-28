@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ActivityTaskCompletedEventAttributes
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides the details of the <code>ActivityTaskCompleted</code> event.
 **/
 export class ActivityTaskCompletedEventAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: string;
 
-  @Metadata({ data: "json, name=scheduledEventId" })
+  @SpeakeasyMetadata({ data: "json, name=scheduledEventId" })
   scheduledEventId: number;
 
-  @Metadata({ data: "json, name=startedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=startedEventId" })
   startedEventId: number;
 }

@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// AuditSuppression
+//
+//	Filters out specific findings of a Device Defender audit.
 type AuditSuppression struct {
 	CheckName            string             `json:"checkName"`
 	Description          *string            `json:"description,omitempty"`

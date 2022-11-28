@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StaticValue
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The static value of the resource.
 **/
 export class StaticValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Values" })
+  @SpeakeasyMetadata({ data: "json, name=Values" })
   values: string[];
 }

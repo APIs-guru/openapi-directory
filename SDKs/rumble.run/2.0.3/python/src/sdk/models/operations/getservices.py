@@ -10,18 +10,18 @@ class GetServicesQueryParams:
 
 @dataclass
 class GetServicesSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetServicesRequest:
-    query_params: GetServicesQueryParams = field(default=None)
-    security: GetServicesSecurity = field(default=None)
+    query_params: GetServicesQueryParams = field()
+    security: GetServicesSecurity = field()
     
 
 @dataclass
 class GetServicesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     services: Optional[List[shared.Service]] = field(default=None)
-    status_code: int = field(default=None)
     

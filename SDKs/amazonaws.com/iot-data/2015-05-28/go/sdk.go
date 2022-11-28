@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://data.iot.{region}.amazonaws.com",
 	"https://data.iot.{region}.amazonaws.com",
 	"http://data.iot.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/iot/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DeleteThingShadow - <p>Deletes the shadow for the specified thing.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">DeleteThingShadow</a> action.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/API_DeleteThingShadow.html">DeleteThingShadow</a> in the IoT Developer Guide.</p>
 func (s *SDK) DeleteThingShadow(ctx context.Context, request operations.DeleteThingShadowRequest) (*operations.DeleteThingShadowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/things/{thingName}/shadow", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -73,7 +100,7 @@ func (s *SDK) DeleteThingShadow(ctx context.Context, request operations.DeleteTh
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -183,8 +210,9 @@ func (s *SDK) DeleteThingShadow(ctx context.Context, request operations.DeleteTh
 	return res, nil
 }
 
+// GetRetainedMessage - <p>Gets the details of a single retained message for the specified topic.</p> <p>This action returns the message payload of the retained message, which can incur messaging costs. To list only the topic names of the retained messages, call <a href="/iot/latest/developerguide/API_iotdata_ListRetainedMessages.html">ListRetainedMessages</a>.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions">GetRetainedMessage</a> action.</p> <p>For more information about messaging costs, see <a href="http://aws.amazon.com/iot-core/pricing/#Messaging">IoT Core pricing - Messaging</a>.</p>
 func (s *SDK) GetRetainedMessage(ctx context.Context, request operations.GetRetainedMessageRequest) (*operations.GetRetainedMessageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/retainedMessage/{topic}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -194,7 +222,7 @@ func (s *SDK) GetRetainedMessage(ctx context.Context, request operations.GetReta
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -294,8 +322,9 @@ func (s *SDK) GetRetainedMessage(ctx context.Context, request operations.GetReta
 	return res, nil
 }
 
+// GetThingShadow - <p>Gets the shadow for the specified thing.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">GetThingShadow</a> action.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/API_GetThingShadow.html">GetThingShadow</a> in the IoT Developer Guide.</p>
 func (s *SDK) GetThingShadow(ctx context.Context, request operations.GetThingShadowRequest) (*operations.GetThingShadowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/things/{thingName}/shadow", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -307,7 +336,7 @@ func (s *SDK) GetThingShadow(ctx context.Context, request operations.GetThingSha
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -417,8 +446,9 @@ func (s *SDK) GetThingShadow(ctx context.Context, request operations.GetThingSha
 	return res, nil
 }
 
+// ListNamedShadowsForThing - <p>Lists the shadows for the specified thing.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListNamedShadowsForThing</a> action.</p>
 func (s *SDK) ListNamedShadowsForThing(ctx context.Context, request operations.ListNamedShadowsForThingRequest) (*operations.ListNamedShadowsForThingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/things/shadow/ListNamedShadowsForThing/{thingName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -430,7 +460,7 @@ func (s *SDK) ListNamedShadowsForThing(ctx context.Context, request operations.L
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -530,8 +560,9 @@ func (s *SDK) ListNamedShadowsForThing(ctx context.Context, request operations.L
 	return res, nil
 }
 
+// ListRetainedMessages - <p>Lists summary information about the retained messages stored for the account.</p> <p>This action returns only the topic names of the retained messages. It doesn't return any message payloads. Although this action doesn't return a message payload, it can still incur messaging costs.</p> <p>To get the message payload of a retained message, call <a href="https://docs.aws.amazon.com/iot/latest/developerguide/API_iotdata_GetRetainedMessage.html">GetRetainedMessage</a> with the topic name of the retained message.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions">ListRetainedMessages</a> action.</p> <p>For more information about messaging costs, see <a href="http://aws.amazon.com/iot-core/pricing/#Messaging">IoT Core pricing - Messaging</a>.</p>
 func (s *SDK) ListRetainedMessages(ctx context.Context, request operations.ListRetainedMessagesRequest) (*operations.ListRetainedMessagesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/retainedMessage"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -543,7 +574,7 @@ func (s *SDK) ListRetainedMessages(ctx context.Context, request operations.ListR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -633,8 +664,9 @@ func (s *SDK) ListRetainedMessages(ctx context.Context, request operations.ListR
 	return res, nil
 }
 
+// Publish - <p>Publishes an MQTT message.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">Publish</a> action.</p> <p>For more information about MQTT messages, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html">MQTT Protocol</a> in the IoT Developer Guide.</p> <p>For more information about messaging costs, see <a href="http://aws.amazon.com/iot-core/pricing/#Messaging">IoT Core pricing - Messaging</a>.</p>
 func (s *SDK) Publish(ctx context.Context, request operations.PublishRequest) (*operations.PublishResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/topics/{topic}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -656,7 +688,7 @@ func (s *SDK) Publish(ctx context.Context, request operations.PublishRequest) (*
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -717,8 +749,9 @@ func (s *SDK) Publish(ctx context.Context, request operations.PublishRequest) (*
 	return res, nil
 }
 
+// UpdateThingShadow - <p>Updates the shadow for the specified thing.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">UpdateThingShadow</a> action.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/API_UpdateThingShadow.html">UpdateThingShadow</a> in the IoT Developer Guide.</p>
 func (s *SDK) UpdateThingShadow(ctx context.Context, request operations.UpdateThingShadowRequest) (*operations.UpdateThingShadowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/things/{thingName}/shadow", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -740,7 +773,7 @@ func (s *SDK) UpdateThingShadow(ctx context.Context, request operations.UpdateTh
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

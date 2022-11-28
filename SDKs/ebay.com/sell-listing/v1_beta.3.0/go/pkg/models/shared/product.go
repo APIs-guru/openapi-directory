@@ -1,5 +1,7 @@
 package shared
 
+// Product
+// The type that defines the fields for the aspects of a product.
 type Product struct {
 	Aspects     []Aspect `json:"aspects,omitempty"`
 	Brand       *string  `json:"brand,omitempty"`

@@ -22,6 +22,8 @@ type UpdateFunctionEventInvokeConfigHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateFunctionEventInvokeConfigRequestBodyDestinationConfig
+// A configuration object that specifies the destination of an event after Lambda processes it.
 type UpdateFunctionEventInvokeConfigRequestBodyDestinationConfig struct {
 	OnFailure *shared.OnFailure `json:"OnFailure,omitempty"`
 	OnSuccess *shared.OnSuccess `json:"OnSuccess,omitempty"`

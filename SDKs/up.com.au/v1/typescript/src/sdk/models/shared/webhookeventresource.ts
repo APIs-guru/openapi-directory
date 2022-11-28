@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class WebhookEventResourceAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=eventType" })
+  @SpeakeasyMetadata({ data: "json, name=eventType" })
   eventType: any;
 }
 
 
 export class WebhookEventResourceRelationshipsTransactionData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 
 export class WebhookEventResourceRelationshipsTransactionLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=related" })
+  @SpeakeasyMetadata({ data: "json, name=related" })
   related: string;
 }
 
 
 export class WebhookEventResourceRelationshipsTransaction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: WebhookEventResourceRelationshipsTransactionData;
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: WebhookEventResourceRelationshipsTransactionLinks;
 }
 
 
 export class WebhookEventResourceRelationshipsWebhookData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 
 export class WebhookEventResourceRelationshipsWebhookLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=related" })
+  @SpeakeasyMetadata({ data: "json, name=related" })
   related: string;
 }
 
 
 export class WebhookEventResourceRelationshipsWebhook extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: WebhookEventResourceRelationshipsWebhookData;
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: WebhookEventResourceRelationshipsWebhookLinks;
 }
 
 
 export class WebhookEventResourceRelationships extends SpeakeasyBase {
-  @Metadata({ data: "json, name=transaction" })
+  @SpeakeasyMetadata({ data: "json, name=transaction" })
   transaction?: WebhookEventResourceRelationshipsTransaction;
 
-  @Metadata({ data: "json, name=webhook" })
+  @SpeakeasyMetadata({ data: "json, name=webhook" })
   webhook: WebhookEventResourceRelationshipsWebhook;
 }
 
@@ -75,15 +76,15 @@ export class WebhookEventResourceRelationships extends SpeakeasyBase {
  * 
 **/
 export class WebhookEventResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes: WebhookEventResourceAttributes;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=relationships" })
+  @SpeakeasyMetadata({ data: "json, name=relationships" })
   relationships: WebhookEventResourceRelationships;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

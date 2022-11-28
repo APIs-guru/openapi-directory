@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ScheduleActivityTaskFailedCauseEnum(str, Enum):
     ACTIVITY_TYPE_DEPRECATED = "ACTIVITY_TYPE_DEPRECATED"

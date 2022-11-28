@@ -1,5 +1,7 @@
 package shared
 
+// Location
+// Information about an Direct Connect location.
 type Location struct {
 	AvailableMacSecPortSpeeds []string `json:"availableMacSecPortSpeeds,omitempty"`
 	AvailablePortSpeeds       []string `json:"availablePortSpeeds,omitempty"`

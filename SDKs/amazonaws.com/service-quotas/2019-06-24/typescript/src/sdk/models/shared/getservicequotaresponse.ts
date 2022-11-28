@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceQuota } from "./servicequota";
 
 
+
 export class GetServiceQuotaResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Quota" })
+  @SpeakeasyMetadata({ data: "json, name=Quota" })
   quota?: ServiceQuota;
 }

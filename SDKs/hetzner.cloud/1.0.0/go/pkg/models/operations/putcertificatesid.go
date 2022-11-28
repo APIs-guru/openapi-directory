@@ -9,11 +9,8 @@ type PutCertificatesIDUpdateCertificateRequest struct {
 	Name   *string                `json:"name,omitempty"`
 }
 
-type PutCertificatesIDRequest struct {
-	PathParams PutCertificatesIDPathParams
-	Request    *PutCertificatesIDUpdateCertificateRequest `request:"mediaType=application/json"`
-}
-
+// PutCertificatesIDCertificateResponseCertificateStatusError
+// If issuance or renewal reports `failed`, this property contains information about what happened
 type PutCertificatesIDCertificateResponseCertificateStatusError struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
@@ -36,6 +33,8 @@ const (
 	PutCertificatesIDCertificateResponseCertificateStatusRenewalEnumUnavailable PutCertificatesIDCertificateResponseCertificateStatusRenewalEnum = "unavailable"
 )
 
+// PutCertificatesIDCertificateResponseCertificateStatus
+// Current status of a type `managed` Certificate, always *null* for type `uploaded` Certificates
 type PutCertificatesIDCertificateResponseCertificateStatus struct {
 	Error    *PutCertificatesIDCertificateResponseCertificateStatusError        `json:"error,omitempty"`
 	Issuance *PutCertificatesIDCertificateResponseCertificateStatusIssuanceEnum `json:"issuance,omitempty"`
@@ -71,6 +70,11 @@ type PutCertificatesIDCertificateResponseCertificate struct {
 
 type PutCertificatesIDCertificateResponse struct {
 	Certificate PutCertificatesIDCertificateResponseCertificate `json:"certificate"`
+}
+
+type PutCertificatesIDRequest struct {
+	PathParams PutCertificatesIDPathParams
+	Request    *PutCertificatesIDUpdateCertificateRequest `request:"mediaType=application/json"`
 }
 
 type PutCertificatesIDResponse struct {

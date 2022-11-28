@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Task
+// Details on a task in a cluster.
 type Task struct {
 	Attachments           []Attachment           `json:"attachments,omitempty"`
 	Attributes            []Attribute            `json:"attributes,omitempty"`

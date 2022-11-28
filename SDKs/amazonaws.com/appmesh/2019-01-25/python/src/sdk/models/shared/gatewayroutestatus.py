@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import gatewayroutestatuscode_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GatewayRouteStatus:
-    status: gatewayroutestatuscode_enum.GatewayRouteStatusCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""GatewayRouteStatus
+    An object that represents the current status of a gateway route.
+    """
+    
+    status: GatewayRouteStatusCodeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

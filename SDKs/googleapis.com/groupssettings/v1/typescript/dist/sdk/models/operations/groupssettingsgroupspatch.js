@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GroupsSettingsGroupsPatchPathParams = /** @class */ (function (_super) {
     __extends(GroupsSettingsGroupsPatchPathParams, _super);
@@ -30,7 +30,7 @@ var GroupsSettingsGroupsPatchPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=groupUniqueId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupUniqueId" }),
         __metadata("design:type", String)
     ], GroupsSettingsGroupsPatchPathParams.prototype, "groupUniqueId", void 0);
     return GroupsSettingsGroupsPatchPathParams;
@@ -42,31 +42,31 @@ var GroupsSettingsGroupsPatchQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], GroupsSettingsGroupsPatchQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], GroupsSettingsGroupsPatchQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], GroupsSettingsGroupsPatchQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], GroupsSettingsGroupsPatchQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], GroupsSettingsGroupsPatchQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], GroupsSettingsGroupsPatchQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
         __metadata("design:type", String)
     ], GroupsSettingsGroupsPatchQueryParams.prototype, "userIp", void 0);
     return GroupsSettingsGroupsPatchQueryParams;
@@ -78,11 +78,11 @@ var GroupsSettingsGroupsPatchSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], GroupsSettingsGroupsPatchSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], GroupsSettingsGroupsPatchSecurity.prototype, "oauth2c", void 0);
     return GroupsSettingsGroupsPatchSecurity;
@@ -94,19 +94,19 @@ var GroupsSettingsGroupsPatchRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GroupsSettingsGroupsPatchPathParams)
     ], GroupsSettingsGroupsPatchRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GroupsSettingsGroupsPatchQueryParams)
     ], GroupsSettingsGroupsPatchRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.Groups)
     ], GroupsSettingsGroupsPatchRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GroupsSettingsGroupsPatchSecurity)
     ], GroupsSettingsGroupsPatchRequest.prototype, "security", void 0);
     return GroupsSettingsGroupsPatchRequest;
@@ -118,15 +118,15 @@ var GroupsSettingsGroupsPatchResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GroupsSettingsGroupsPatchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Groups)
     ], GroupsSettingsGroupsPatchResponse.prototype, "groups", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GroupsSettingsGroupsPatchResponse.prototype, "statusCode", void 0);
     return GroupsSettingsGroupsPatchResponse;

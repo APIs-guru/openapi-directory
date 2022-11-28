@@ -1,16 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import connectoroperator
-from . import tasktype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Task:
-    connector_operator: Optional[connectoroperator.ConnectorOperator] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectorOperator' }})
-    destination_field: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destinationField' }})
-    source_fields: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceFields' }})
-    task_properties: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskProperties' }})
-    task_type: tasktype_enum.TaskTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskType' }})
+    r"""Task
+     A class for modeling different type of tasks. Task implementation varies based on the <code>TaskType</code>. 
+    """
+    
+    source_fields: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceFields') }})
+    task_type: TaskTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskType') }})
+    connector_operator: Optional[ConnectorOperator] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectorOperator') }})
+    destination_field: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('destinationField') }})
+    task_properties: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskProperties') }})
     

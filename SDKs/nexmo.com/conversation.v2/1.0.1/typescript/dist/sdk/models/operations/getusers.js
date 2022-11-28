@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetUsersQueryParams = /** @class */ (function (_super) {
     __extends(GetUsersQueryParams, _super);
@@ -30,15 +30,15 @@ var GetUsersQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=cursor" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cursor" }),
         __metadata("design:type", String)
     ], GetUsersQueryParams.prototype, "cursor", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=order" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" }),
         __metadata("design:type", String)
     ], GetUsersQueryParams.prototype, "order", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], GetUsersQueryParams.prototype, "pageSize", void 0);
     return GetUsersQueryParams;
@@ -50,7 +50,7 @@ var GetUsersRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetUsersQueryParams)
     ], GetUsersRequest.prototype, "queryParams", void 0);
     return GetUsersRequest;
@@ -62,15 +62,15 @@ var GetUsersResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetUsersResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetUsersResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetUsersResponse.prototype, "getUsers200ApplicationJsonAny", void 0);
     return GetUsersResponse;

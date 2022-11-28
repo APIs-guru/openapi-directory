@@ -1,78 +1,79 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CisLineCisLinePayFrequencyEnum {
-    Monthly = "Monthly"
-,    Weekly = "Weekly"
+    Monthly = "Monthly",
+    Weekly = "Weekly"
 }
 
 export enum CisLineCisLineTaxTreatmentEnum {
-    Taxable = "Taxable"
-,    NonTaxable = "NonTaxable"
-,    Notional = "Notional"
-,    Materials = "Materials"
+    Taxable = "Taxable",
+    NonTaxable = "NonTaxable",
+    Notional = "Notional",
+    Materials = "Materials"
 }
 
 export enum CisLineCisLineUomEnum {
-    NotSet = "NotSet"
-,    Minute = "Minute"
-,    Hour = "Hour"
-,    Day = "Day"
-,    Week = "Week"
-,    Month = "Month"
-,    Year = "Year"
-,    Unit = "Unit"
+    NotSet = "NotSet",
+    Minute = "Minute",
+    Hour = "Hour",
+    Day = "Day",
+    Week = "Week",
+    Month = "Month",
+    Year = "Year",
+    Unit = "Unit"
 }
 
 
 export class CisLineCisLine extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CisDeduction" })
+  @SpeakeasyMetadata({ data: "json, name=CisDeduction" })
   cisDeduction?: number;
 
-  @Metadata({ data: "json, name=CisLineType" })
+  @SpeakeasyMetadata({ data: "json, name=CisLineType" })
   cisLineType?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Generated" })
+  @SpeakeasyMetadata({ data: "json, name=Generated" })
   generated?: Date;
 
-  @Metadata({ data: "json, name=GrossPay" })
+  @SpeakeasyMetadata({ data: "json, name=GrossPay" })
   grossPay?: number;
 
-  @Metadata({ data: "json, name=NominalCodeKey" })
+  @SpeakeasyMetadata({ data: "json, name=NominalCodeKey" })
   nominalCodeKey?: string;
 
-  @Metadata({ data: "json, name=PayFrequency" })
+  @SpeakeasyMetadata({ data: "json, name=PayFrequency" })
   payFrequency?: CisLineCisLinePayFrequencyEnum;
 
-  @Metadata({ data: "json, name=TaxMonth" })
+  @SpeakeasyMetadata({ data: "json, name=TaxMonth" })
   taxMonth?: number;
 
-  @Metadata({ data: "json, name=TaxPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=TaxPeriod" })
   taxPeriod?: number;
 
-  @Metadata({ data: "json, name=TaxTreatment" })
+  @SpeakeasyMetadata({ data: "json, name=TaxTreatment" })
   taxTreatment?: CisLineCisLineTaxTreatmentEnum;
 
-  @Metadata({ data: "json, name=TaxYear" })
+  @SpeakeasyMetadata({ data: "json, name=TaxYear" })
   taxYear?: number;
 
-  @Metadata({ data: "json, name=UOM" })
+  @SpeakeasyMetadata({ data: "json, name=UOM" })
   uom?: CisLineCisLineUomEnum;
 
-  @Metadata({ data: "json, name=UnitRate" })
+  @SpeakeasyMetadata({ data: "json, name=UnitRate" })
   unitRate?: number;
 
-  @Metadata({ data: "json, name=Units" })
+  @SpeakeasyMetadata({ data: "json, name=Units" })
   units?: number;
 
-  @Metadata({ data: "json, name=VAT" })
+  @SpeakeasyMetadata({ data: "json, name=VAT" })
   vat?: number;
 }
 
 
 export class CisLine extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CisLine" })
+  @SpeakeasyMetadata({ data: "json, name=CisLine" })
   cisLine?: CisLineCisLine;
 }

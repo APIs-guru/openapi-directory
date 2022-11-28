@@ -1,7 +1,8 @@
 
 
+
 export enum ContentTypeEnum {
-    PlainText = "PlainText"
-,    Ssml = "SSML"
-,    CustomPayload = "CustomPayload"
+    PlainText = "PlainText",
+    Ssml = "SSML",
+    CustomPayload = "CustomPayload"
 }

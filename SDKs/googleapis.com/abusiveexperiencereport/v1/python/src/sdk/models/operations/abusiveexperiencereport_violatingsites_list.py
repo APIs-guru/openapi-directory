@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,12 +21,12 @@ class AbusiveexperiencereportViolatingSitesListQueryParams:
 
 @dataclass
 class AbusiveexperiencereportViolatingSitesListRequest:
-    query_params: AbusiveexperiencereportViolatingSitesListQueryParams = field(default=None)
+    query_params: AbusiveexperiencereportViolatingSitesListQueryParams = field()
     
 
 @dataclass
 class AbusiveexperiencereportViolatingSitesListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     violating_sites_response: Optional[shared.ViolatingSitesResponse] = field(default=None)
     

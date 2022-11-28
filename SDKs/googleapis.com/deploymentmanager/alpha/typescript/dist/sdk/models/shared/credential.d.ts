@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BasicAuth } from "./basicauth";
 import { ServiceAccount } from "./serviceaccount";
 /**

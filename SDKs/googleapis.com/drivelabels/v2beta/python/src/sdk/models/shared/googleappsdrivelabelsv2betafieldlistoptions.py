@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class GoogleAppsDriveLabelsV2betaFieldListOptions:
-    max_entries: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxEntries' }})
+    r"""GoogleAppsDriveLabelsV2betaFieldListOptions
+    Options for a multi-valued variant of an associated field type.
+    """
+    
+    max_entries: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxEntries') }})
     

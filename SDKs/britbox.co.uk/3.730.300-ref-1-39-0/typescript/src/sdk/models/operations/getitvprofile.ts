@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetItvProfileQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: string;
 }
 
 
 export class GetItvProfileSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   accountAuth: shared.SchemeAccountAuth;
 }
 
 
 export class GetItvProfileRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetItvProfileQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetItvProfileSecurity;
 }
 
 
 export class GetItvProfileResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getItvProfile200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceError?: shared.ServiceError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

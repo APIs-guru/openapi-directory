@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://keyserv.solutions",
 }
 
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -33,27 +37,44 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
 func (s *SDK) KeysAPICurrent(ctx context.Context, request operations.KeysAPICurrentRequest) (*operations.KeysAPICurrentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/KeysApi/Current/{serial}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -61,7 +82,7 @@ func (s *SDK) KeysAPICurrent(ctx context.Context, request operations.KeysAPICurr
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -92,7 +113,7 @@ func (s *SDK) KeysAPICurrent(ctx context.Context, request operations.KeysAPICurr
 }
 
 func (s *SDK) KeysAPICustom(ctx context.Context, request operations.KeysAPICustomRequest) (*operations.KeysAPICustomResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/KeysApi/Custom/{serial}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -100,7 +121,7 @@ func (s *SDK) KeysAPICustom(ctx context.Context, request operations.KeysAPICusto
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -131,7 +152,7 @@ func (s *SDK) KeysAPICustom(ctx context.Context, request operations.KeysAPICusto
 }
 
 func (s *SDK) KeysAPIExpiry(ctx context.Context, request operations.KeysAPIExpiryRequest) (*operations.KeysAPIExpiryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/KeysApi/Expiry/{serial}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -139,7 +160,7 @@ func (s *SDK) KeysAPIExpiry(ctx context.Context, request operations.KeysAPIExpir
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -170,7 +191,7 @@ func (s *SDK) KeysAPIExpiry(ctx context.Context, request operations.KeysAPIExpir
 }
 
 func (s *SDK) KeysAPIFind(ctx context.Context, request operations.KeysAPIFindRequest) (*operations.KeysAPIFindResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/KeysApi/Find/{serial}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -178,7 +199,7 @@ func (s *SDK) KeysAPIFind(ctx context.Context, request operations.KeysAPIFindReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -209,7 +230,7 @@ func (s *SDK) KeysAPIFind(ctx context.Context, request operations.KeysAPIFindReq
 }
 
 func (s *SDK) ProductsAPICount(ctx context.Context, request operations.ProductsAPICountRequest) (*operations.ProductsAPICountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/ProductsApi/Count"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -227,7 +248,7 @@ func (s *SDK) ProductsAPICount(ctx context.Context, request operations.ProductsA
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -258,7 +279,7 @@ func (s *SDK) ProductsAPICount(ctx context.Context, request operations.ProductsA
 }
 
 func (s *SDK) ProductsAPIDeleteProduct(ctx context.Context, request operations.ProductsAPIDeleteProductRequest) (*operations.ProductsAPIDeleteProductResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/ProductsApi/{serial}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -268,7 +289,7 @@ func (s *SDK) ProductsAPIDeleteProduct(ctx context.Context, request operations.P
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -290,7 +311,7 @@ func (s *SDK) ProductsAPIDeleteProduct(ctx context.Context, request operations.P
 }
 
 func (s *SDK) ProductsAPIDeleteProduct2(ctx context.Context, request operations.ProductsAPIDeleteProduct2Request) (*operations.ProductsAPIDeleteProduct2Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/ProductsApi/{serial}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -300,7 +321,7 @@ func (s *SDK) ProductsAPIDeleteProduct2(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -322,7 +343,7 @@ func (s *SDK) ProductsAPIDeleteProduct2(ctx context.Context, request operations.
 }
 
 func (s *SDK) ProductsAPIFind(ctx context.Context, request operations.ProductsAPIFindRequest) (*operations.ProductsAPIFindResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/ProductsApi/Find"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -342,7 +363,7 @@ func (s *SDK) ProductsAPIFind(ctx context.Context, request operations.ProductsAP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -373,7 +394,7 @@ func (s *SDK) ProductsAPIFind(ctx context.Context, request operations.ProductsAP
 }
 
 func (s *SDK) ProductsAPIList(ctx context.Context, request operations.ProductsAPIListRequest) (*operations.ProductsAPIListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/ProductsApi/List"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -393,7 +414,7 @@ func (s *SDK) ProductsAPIList(ctx context.Context, request operations.ProductsAP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -424,7 +445,7 @@ func (s *SDK) ProductsAPIList(ctx context.Context, request operations.ProductsAP
 }
 
 func (s *SDK) ProductsAPIPatchProduct(ctx context.Context, request operations.ProductsAPIPatchProductRequest) (*operations.ProductsAPIPatchProductResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/ProductsApi"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -442,7 +463,7 @@ func (s *SDK) ProductsAPIPatchProduct(ctx context.Context, request operations.Pr
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -464,7 +485,7 @@ func (s *SDK) ProductsAPIPatchProduct(ctx context.Context, request operations.Pr
 }
 
 func (s *SDK) ProductsAPIPatchProduct2(ctx context.Context, request operations.ProductsAPIPatchProduct2Request) (*operations.ProductsAPIPatchProduct2Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/ProductsApi"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -482,7 +503,7 @@ func (s *SDK) ProductsAPIPatchProduct2(ctx context.Context, request operations.P
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -504,7 +525,7 @@ func (s *SDK) ProductsAPIPatchProduct2(ctx context.Context, request operations.P
 }
 
 func (s *SDK) ProductsAPISave(ctx context.Context, request operations.ProductsAPISaveRequest) (*operations.ProductsAPISaveResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/ProductsApi/Save"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -522,7 +543,7 @@ func (s *SDK) ProductsAPISave(ctx context.Context, request operations.ProductsAP
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -553,7 +574,7 @@ func (s *SDK) ProductsAPISave(ctx context.Context, request operations.ProductsAP
 }
 
 func (s *SDK) SubscriptionsAPICount(ctx context.Context, request operations.SubscriptionsAPICountRequest) (*operations.SubscriptionsAPICountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/SubscriptionsApi/Count"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -571,7 +592,7 @@ func (s *SDK) SubscriptionsAPICount(ctx context.Context, request operations.Subs
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -602,7 +623,7 @@ func (s *SDK) SubscriptionsAPICount(ctx context.Context, request operations.Subs
 }
 
 func (s *SDK) SubscriptionsAPIDeleteSubscription(ctx context.Context, request operations.SubscriptionsAPIDeleteSubscriptionRequest) (*operations.SubscriptionsAPIDeleteSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/SubscriptionsApi/{serial}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -614,7 +635,7 @@ func (s *SDK) SubscriptionsAPIDeleteSubscription(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -636,7 +657,7 @@ func (s *SDK) SubscriptionsAPIDeleteSubscription(ctx context.Context, request op
 }
 
 func (s *SDK) SubscriptionsAPIDeleteSubscription2(ctx context.Context, request operations.SubscriptionsAPIDeleteSubscription2Request) (*operations.SubscriptionsAPIDeleteSubscription2Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/SubscriptionsApi/{serial}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -648,7 +669,7 @@ func (s *SDK) SubscriptionsAPIDeleteSubscription2(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -670,7 +691,7 @@ func (s *SDK) SubscriptionsAPIDeleteSubscription2(ctx context.Context, request o
 }
 
 func (s *SDK) SubscriptionsAPIDisable(ctx context.Context, request operations.SubscriptionsAPIDisableRequest) (*operations.SubscriptionsAPIDisableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/SubscriptionsApi/Disable"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -688,7 +709,7 @@ func (s *SDK) SubscriptionsAPIDisable(ctx context.Context, request operations.Su
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -710,7 +731,7 @@ func (s *SDK) SubscriptionsAPIDisable(ctx context.Context, request operations.Su
 }
 
 func (s *SDK) SubscriptionsAPIDisable2(ctx context.Context, request operations.SubscriptionsAPIDisable2Request) (*operations.SubscriptionsAPIDisable2Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/SubscriptionsApi/Disable"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -728,7 +749,7 @@ func (s *SDK) SubscriptionsAPIDisable2(ctx context.Context, request operations.S
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -750,7 +771,7 @@ func (s *SDK) SubscriptionsAPIDisable2(ctx context.Context, request operations.S
 }
 
 func (s *SDK) SubscriptionsAPIEnable(ctx context.Context, request operations.SubscriptionsAPIEnableRequest) (*operations.SubscriptionsAPIEnableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/SubscriptionsApi/Enable"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -768,7 +789,7 @@ func (s *SDK) SubscriptionsAPIEnable(ctx context.Context, request operations.Sub
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -790,7 +811,7 @@ func (s *SDK) SubscriptionsAPIEnable(ctx context.Context, request operations.Sub
 }
 
 func (s *SDK) SubscriptionsAPIEnable2(ctx context.Context, request operations.SubscriptionsAPIEnable2Request) (*operations.SubscriptionsAPIEnable2Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/SubscriptionsApi/Enable"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -808,7 +829,7 @@ func (s *SDK) SubscriptionsAPIEnable2(ctx context.Context, request operations.Su
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -830,7 +851,7 @@ func (s *SDK) SubscriptionsAPIEnable2(ctx context.Context, request operations.Su
 }
 
 func (s *SDK) SubscriptionsAPIFind(ctx context.Context, request operations.SubscriptionsAPIFindRequest) (*operations.SubscriptionsAPIFindResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/SubscriptionsApi/Find"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -848,7 +869,7 @@ func (s *SDK) SubscriptionsAPIFind(ctx context.Context, request operations.Subsc
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -879,7 +900,7 @@ func (s *SDK) SubscriptionsAPIFind(ctx context.Context, request operations.Subsc
 }
 
 func (s *SDK) SubscriptionsAPIList(ctx context.Context, request operations.SubscriptionsAPIListRequest) (*operations.SubscriptionsAPIListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/SubscriptionsApi/List"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -899,7 +920,7 @@ func (s *SDK) SubscriptionsAPIList(ctx context.Context, request operations.Subsc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -930,7 +951,7 @@ func (s *SDK) SubscriptionsAPIList(ctx context.Context, request operations.Subsc
 }
 
 func (s *SDK) SubscriptionsAPIPutSubscription(ctx context.Context, request operations.SubscriptionsAPIPutSubscriptionRequest) (*operations.SubscriptionsAPIPutSubscriptionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/SubscriptionsApi"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -948,7 +969,7 @@ func (s *SDK) SubscriptionsAPIPutSubscription(ctx context.Context, request opera
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -970,7 +991,7 @@ func (s *SDK) SubscriptionsAPIPutSubscription(ctx context.Context, request opera
 }
 
 func (s *SDK) SubscriptionsAPIPutSubscription2(ctx context.Context, request operations.SubscriptionsAPIPutSubscription2Request) (*operations.SubscriptionsAPIPutSubscription2Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/SubscriptionsApi"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -988,7 +1009,7 @@ func (s *SDK) SubscriptionsAPIPutSubscription2(ctx context.Context, request oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1010,7 +1031,7 @@ func (s *SDK) SubscriptionsAPIPutSubscription2(ctx context.Context, request oper
 }
 
 func (s *SDK) SubscriptionsAPISave(ctx context.Context, request operations.SubscriptionsAPISaveRequest) (*operations.SubscriptionsAPISaveResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/SubscriptionsApi/Save"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1028,7 +1049,7 @@ func (s *SDK) SubscriptionsAPISave(ctx context.Context, request operations.Subsc
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

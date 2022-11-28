@@ -1,5 +1,7 @@
 package shared
 
+// RewriteResponse
+// A rewrite response.
 type RewriteResponse struct {
 	Done                *bool   `json:"done,omitempty"`
 	Kind                *string `json:"kind,omitempty"`

@@ -1,25 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+export class ManufacturerInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name: string;
+
+  @SpeakeasyMetadata({ data: "json, name=slug" })
+  slug: string;
+}
 
 
 export class Manufacturer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=devicetype_count" })
+  @SpeakeasyMetadata({ data: "json, name=devicetype_count" })
   devicetypeCount?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=inventoryitem_count" })
+  @SpeakeasyMetadata({ data: "json, name=inventoryitem_count" })
   inventoryitemCount?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=platform_count" })
+  @SpeakeasyMetadata({ data: "json, name=platform_count" })
   platformCount?: number;
 
-  @Metadata({ data: "json, name=slug" })
+  @SpeakeasyMetadata({ data: "json, name=slug" })
   slug: string;
 }

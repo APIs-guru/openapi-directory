@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PricingPlanEnum } from "./pricingplanenum";
 var DescribeTrackerResponse = /** @class */ (function (_super) {
     __extends(DescribeTrackerResponse, _super);
@@ -30,39 +30,39 @@ var DescribeTrackerResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreateTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreateTime" }),
         __metadata("design:type", Date)
     ], DescribeTrackerResponse.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], DescribeTrackerResponse.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=KmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=KmsKeyId" }),
         __metadata("design:type", String)
     ], DescribeTrackerResponse.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=PricingPlan" }),
+        SpeakeasyMetadata({ data: "json, name=PricingPlan" }),
         __metadata("design:type", String)
     ], DescribeTrackerResponse.prototype, "pricingPlan", void 0);
     __decorate([
-        Metadata({ data: "json, name=PricingPlanDataSource" }),
+        SpeakeasyMetadata({ data: "json, name=PricingPlanDataSource" }),
         __metadata("design:type", String)
     ], DescribeTrackerResponse.prototype, "pricingPlanDataSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags" }),
+        SpeakeasyMetadata({ data: "json, name=Tags" }),
         __metadata("design:type", Map)
     ], DescribeTrackerResponse.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrackerArn" }),
+        SpeakeasyMetadata({ data: "json, name=TrackerArn" }),
         __metadata("design:type", String)
     ], DescribeTrackerResponse.prototype, "trackerArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrackerName" }),
+        SpeakeasyMetadata({ data: "json, name=TrackerName" }),
         __metadata("design:type", String)
     ], DescribeTrackerResponse.prototype, "trackerName", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=UpdateTime" }),
         __metadata("design:type", Date)
     ], DescribeTrackerResponse.prototype, "updateTime", void 0);
     return DescribeTrackerResponse;

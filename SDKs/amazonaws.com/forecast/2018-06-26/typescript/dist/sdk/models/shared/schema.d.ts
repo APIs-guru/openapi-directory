@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SchemaAttribute } from "./schemaattribute";
 /**
  * Defines the fields of a dataset. You specify this object in the <a>CreateDataset</a> request.

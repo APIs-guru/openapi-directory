@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyObject } from "./keyobject";
 
 
+
 export class KeyMaterial extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cryptoAlg" })
+  @SpeakeasyMetadata({ data: "json, name=cryptoAlg" })
   cryptoAlg: string;
 
-  @Metadata({ data: "json, name=curve" })
+  @SpeakeasyMetadata({ data: "json, name=curve" })
   curve: string;
 
-  @Metadata({ data: "json, name=dhPublicKey" })
+  @SpeakeasyMetadata({ data: "json, name=dhPublicKey" })
   dhPublicKey: KeyObject;
 
-  @Metadata({ data: "json, name=nonce" })
+  @SpeakeasyMetadata({ data: "json, name=nonce" })
   nonce: string;
 }

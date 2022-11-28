@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StopApplicationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationName" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationName" })
   applicationName: string;
 
-  @Metadata({ data: "json, name=Force" })
+  @SpeakeasyMetadata({ data: "json, name=Force" })
   force?: boolean;
 }

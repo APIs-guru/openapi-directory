@@ -1,5 +1,7 @@
 package shared
 
+// HardwareInfo
+// Information about device hardware. The fields related to temperature thresholds are only available if hardwareStatusEnabled is true in the device's policy.
 type HardwareInfo struct {
 	BatteryShutdownTemperatures   []float32 `json:"batteryShutdownTemperatures,omitempty"`
 	BatteryThrottlingTemperatures []float32 `json:"batteryThrottlingTemperatures,omitempty"`

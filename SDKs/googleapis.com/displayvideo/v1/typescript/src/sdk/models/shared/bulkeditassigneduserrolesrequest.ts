@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { AssignedUserRole } from "./assigneduserrole";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AssignedUserRoleInput } from "./assigneduserrole";
 
 
-// BulkEditAssignedUserRolesRequest
+
+// BulkEditAssignedUserRolesRequestInput
 /** 
  * Request message for BulkEditAssignedUserRoles.
 **/
-export class BulkEditAssignedUserRolesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAssignedUserRoles", elemType: shared.AssignedUserRole })
-  createdAssignedUserRoles?: AssignedUserRole[];
+export class BulkEditAssignedUserRolesRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=createdAssignedUserRoles", elemType: AssignedUserRoleInput })
+  createdAssignedUserRoles?: AssignedUserRoleInput[];
 
-  @Metadata({ data: "json, name=deletedAssignedUserRoles" })
+  @SpeakeasyMetadata({ data: "json, name=deletedAssignedUserRoles" })
   deletedAssignedUserRoles?: string[];
 }

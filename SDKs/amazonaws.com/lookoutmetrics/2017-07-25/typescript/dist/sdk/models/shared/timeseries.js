@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DimensionNameValue } from "./dimensionnamevalue";
 // TimeSeries
 /**
  * Details about a metric. A metric is an aggregation of the values of a measure for a dimension value, such as <i>availability</i> in the <i>us-east-1</i> Region.
@@ -34,15 +34,15 @@ var TimeSeries = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DimensionList", elemType: shared.DimensionNameValue }),
+        SpeakeasyMetadata({ data: "json, name=DimensionList", elemType: DimensionNameValue }),
         __metadata("design:type", Array)
     ], TimeSeries.prototype, "dimensionList", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricValueList" }),
+        SpeakeasyMetadata({ data: "json, name=MetricValueList" }),
         __metadata("design:type", Array)
     ], TimeSeries.prototype, "metricValueList", void 0);
     __decorate([
-        Metadata({ data: "json, name=TimeSeriesId" }),
+        SpeakeasyMetadata({ data: "json, name=TimeSeriesId" }),
         __metadata("design:type", String)
     ], TimeSeries.prototype, "timeSeriesId", void 0);
     return TimeSeries;

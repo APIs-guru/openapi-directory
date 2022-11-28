@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostPatientsIdAttachmentsNameVerifyMd5PathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" })
   name: string;
 }
 
 
 export class PostPatientsIdAttachmentsNameVerifyMd5Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostPatientsIdAttachmentsNameVerifyMd5PathParams;
 }
 
 
 export class PostPatientsIdAttachmentsNameVerifyMd5Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postPatientsIdAttachmentsNameVerifyMd5200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

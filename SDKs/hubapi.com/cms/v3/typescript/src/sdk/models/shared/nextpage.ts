@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class NextPage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=after" })
+  @SpeakeasyMetadata({ data: "json, name=after" })
   after: string;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link?: string;
 }

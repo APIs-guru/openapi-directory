@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LinkTokenCreateRequestDepositSwitch
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies options for initializing Link for use with the Deposit Switch (beta) product. This field is required if `deposit_switch` is included in the `products` array.
 **/
 export class LinkTokenCreateRequestDepositSwitch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deposit_switch_id" })
+  @SpeakeasyMetadata({ data: "json, name=deposit_switch_id" })
   depositSwitchId: string;
 }

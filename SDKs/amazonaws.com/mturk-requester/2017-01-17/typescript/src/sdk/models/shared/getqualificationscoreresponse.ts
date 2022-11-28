@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Qualification } from "./qualification";
 
 
+
 export class GetQualificationScoreResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Qualification" })
+  @SpeakeasyMetadata({ data: "json, name=Qualification" })
   qualification?: Qualification;
 }

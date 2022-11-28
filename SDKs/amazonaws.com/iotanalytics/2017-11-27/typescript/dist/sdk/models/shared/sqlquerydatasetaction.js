@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { QueryFilter } from "./queryfilter";
 // SqlQueryDatasetAction
 /**
  * The SQL query to modify the message.
@@ -34,11 +34,11 @@ var SqlQueryDatasetAction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=filters", elemType: shared.QueryFilter }),
+        SpeakeasyMetadata({ data: "json, name=filters", elemType: QueryFilter }),
         __metadata("design:type", Array)
     ], SqlQueryDatasetAction.prototype, "filters", void 0);
     __decorate([
-        Metadata({ data: "json, name=sqlQuery" }),
+        SpeakeasyMetadata({ data: "json, name=sqlQuery" }),
         __metadata("design:type", String)
     ], SqlQueryDatasetAction.prototype, "sqlQuery", void 0);
     return SqlQueryDatasetAction;

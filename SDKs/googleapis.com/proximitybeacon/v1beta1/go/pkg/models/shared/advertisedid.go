@@ -10,6 +10,8 @@ const (
 	AdvertisedIDTypeEnumEddystoneEid    AdvertisedIDTypeEnum = "EDDYSTONE_EID"
 )
 
+// AdvertisedID
+// Defines a unique identifier of a beacon as broadcast by the device.
 type AdvertisedID struct {
 	ID   *string               `json:"id,omitempty"`
 	Type *AdvertisedIDTypeEnum `json:"type,omitempty"`

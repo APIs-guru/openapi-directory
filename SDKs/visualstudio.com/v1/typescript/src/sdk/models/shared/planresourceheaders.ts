@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PlanResourceHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, name=clientTenantId" })
+  @SpeakeasyMetadata({ data: "header, name=clientTenantId" })
   clientTenantId?: string;
 
-  @Metadata({ data: "header, name=homeTenantId" })
+  @SpeakeasyMetadata({ data: "header, name=homeTenantId" })
   homeTenantId?: string;
 
-  @Metadata({ data: "header, name=identityPrincipalId" })
+  @SpeakeasyMetadata({ data: "header, name=identityPrincipalId" })
   identityPrincipalId?: string;
 
-  @Metadata({ data: "header, name=identityUrl" })
+  @SpeakeasyMetadata({ data: "header, name=identityUrl" })
   identityUrl?: string;
 }

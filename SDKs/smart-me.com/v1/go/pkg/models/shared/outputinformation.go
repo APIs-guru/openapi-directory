@@ -7,6 +7,8 @@ const (
 	OutputInformationActionTypeEnumAnalogAction OutputInformationActionTypeEnum = "AnalogAction"
 )
 
+// OutputInformation
+// Informations about the Outputs of a Meter or Folder
 type OutputInformation struct {
 	ActionType *OutputInformationActionTypeEnum `json:"ActionType,omitempty"`
 	Name       *string                          `json:"Name,omitempty"`

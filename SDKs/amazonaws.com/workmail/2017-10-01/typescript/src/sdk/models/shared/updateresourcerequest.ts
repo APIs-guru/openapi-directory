@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BookingOptions } from "./bookingoptions";
 
 
+
 export class UpdateResourceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BookingOptions" })
+  @SpeakeasyMetadata({ data: "json, name=BookingOptions" })
   bookingOptions?: BookingOptions;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=OrganizationId" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationId" })
   organizationId: string;
 
-  @Metadata({ data: "json, name=ResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId" })
   resourceId: string;
 }

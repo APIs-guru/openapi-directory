@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDisableTransitGatewayRouteTablePropagationActionEnum(str, Enum):
     DISABLE_TRANSIT_GATEWAY_ROUTE_TABLE_PROPAGATION = "DisableTransitGatewayRouteTablePropagation"
@@ -10,11 +14,11 @@ class GetDisableTransitGatewayRouteTablePropagationVersionEnum(str, Enum):
 
 @dataclass
 class GetDisableTransitGatewayRouteTablePropagationQueryParams:
-    action: GetDisableTransitGatewayRouteTablePropagationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDisableTransitGatewayRouteTablePropagationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    transit_gateway_attachment_id: str = field(metadata={'query_param': { 'field_name': 'TransitGatewayAttachmentId', 'style': 'form', 'explode': True }})
+    transit_gateway_route_table_id: str = field(metadata={'query_param': { 'field_name': 'TransitGatewayRouteTableId', 'style': 'form', 'explode': True }})
+    version: GetDisableTransitGatewayRouteTablePropagationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    transit_gateway_attachment_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayAttachmentId', 'style': 'form', 'explode': True }})
-    transit_gateway_route_table_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayRouteTableId', 'style': 'form', 'explode': True }})
-    version: GetDisableTransitGatewayRouteTablePropagationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDisableTransitGatewayRouteTablePropagationHeaders:
 
 @dataclass
 class GetDisableTransitGatewayRouteTablePropagationRequest:
-    query_params: GetDisableTransitGatewayRouteTablePropagationQueryParams = field(default=None)
-    headers: GetDisableTransitGatewayRouteTablePropagationHeaders = field(default=None)
+    headers: GetDisableTransitGatewayRouteTablePropagationHeaders = field()
+    query_params: GetDisableTransitGatewayRouteTablePropagationQueryParams = field()
     
 
 @dataclass
 class GetDisableTransitGatewayRouteTablePropagationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

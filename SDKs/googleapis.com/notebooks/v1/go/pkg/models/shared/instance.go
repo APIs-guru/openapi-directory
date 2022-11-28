@@ -53,6 +53,8 @@ const (
 	InstanceStateEnumSuspended        InstanceStateEnum = "SUSPENDED"
 )
 
+// Instance
+// The definition of a notebook instance.
 type Instance struct {
 	AcceleratorConfig      *AcceleratorConfig          `json:"acceleratorConfig,omitempty"`
 	BootDiskSizeGb         *string                     `json:"bootDiskSizeGb,omitempty"`
@@ -88,6 +90,40 @@ type Instance struct {
 	Subnet                 *string                     `json:"subnet,omitempty"`
 	Tags                   []string                    `json:"tags,omitempty"`
 	UpdateTime             *string                     `json:"updateTime,omitempty"`
+	UpgradeHistory         []UpgradeHistoryEntry       `json:"upgradeHistory,omitempty"`
+	VMImage                *VMImage                    `json:"vmImage,omitempty"`
+}
+
+// InstanceInput
+// The definition of a notebook instance.
+type InstanceInput struct {
+	AcceleratorConfig      *AcceleratorConfig          `json:"acceleratorConfig,omitempty"`
+	BootDiskSizeGb         *string                     `json:"bootDiskSizeGb,omitempty"`
+	BootDiskType           *InstanceBootDiskTypeEnum   `json:"bootDiskType,omitempty"`
+	CanIPForward           *bool                       `json:"canIpForward,omitempty"`
+	ContainerImage         *ContainerImage             `json:"containerImage,omitempty"`
+	CustomGpuDriverPath    *string                     `json:"customGpuDriverPath,omitempty"`
+	DataDiskSizeGb         *string                     `json:"dataDiskSizeGb,omitempty"`
+	DataDiskType           *InstanceDataDiskTypeEnum   `json:"dataDiskType,omitempty"`
+	DiskEncryption         *InstanceDiskEncryptionEnum `json:"diskEncryption,omitempty"`
+	InstallGpuDriver       *bool                       `json:"installGpuDriver,omitempty"`
+	InstanceOwners         []string                    `json:"instanceOwners,omitempty"`
+	KmsKey                 *string                     `json:"kmsKey,omitempty"`
+	Labels                 map[string]string           `json:"labels,omitempty"`
+	MachineType            *string                     `json:"machineType,omitempty"`
+	Metadata               map[string]string           `json:"metadata,omitempty"`
+	Network                *string                     `json:"network,omitempty"`
+	NicType                *InstanceNicTypeEnum        `json:"nicType,omitempty"`
+	NoProxyAccess          *bool                       `json:"noProxyAccess,omitempty"`
+	NoPublicIP             *bool                       `json:"noPublicIp,omitempty"`
+	NoRemoveDataDisk       *bool                       `json:"noRemoveDataDisk,omitempty"`
+	PostStartupScript      *string                     `json:"postStartupScript,omitempty"`
+	ReservationAffinity    *ReservationAffinity        `json:"reservationAffinity,omitempty"`
+	ServiceAccount         *string                     `json:"serviceAccount,omitempty"`
+	ServiceAccountScopes   []string                    `json:"serviceAccountScopes,omitempty"`
+	ShieldedInstanceConfig *ShieldedInstanceConfig     `json:"shieldedInstanceConfig,omitempty"`
+	Subnet                 *string                     `json:"subnet,omitempty"`
+	Tags                   []string                    `json:"tags,omitempty"`
 	UpgradeHistory         []UpgradeHistoryEntry       `json:"upgradeHistory,omitempty"`
 	VMImage                *VMImage                    `json:"vmImage,omitempty"`
 }

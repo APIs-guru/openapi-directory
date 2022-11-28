@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AuditNodeResponse
+// Audit node report
 type AuditNodeResponse struct {
 	AuditUserPermissionList       []AuditUserPermission `json:"auditUserPermissionList"`
 	NodeCntChildren               int32                 `json:"nodeCntChildren"`

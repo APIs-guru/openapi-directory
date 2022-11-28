@@ -31,7 +31,7 @@ type FirebasemlProjectsModelsPatchSecurity struct {
 type FirebasemlProjectsModelsPatchRequest struct {
 	PathParams  FirebasemlProjectsModelsPatchPathParams
 	QueryParams FirebasemlProjectsModelsPatchQueryParams
-	Request     *shared.Model `request:"mediaType=application/json"`
+	Request     *shared.ModelInput `request:"mediaType=application/json"`
 	Security    FirebasemlProjectsModelsPatchSecurity
 }
 

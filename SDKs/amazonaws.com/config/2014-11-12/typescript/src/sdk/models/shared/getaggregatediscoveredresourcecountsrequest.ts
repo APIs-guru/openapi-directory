@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceCountFilters } from "./resourcecountfilters";
 import { ResourceCountGroupKeyEnum } from "./resourcecountgroupkeyenum";
 
 
+
 export class GetAggregateDiscoveredResourceCountsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigurationAggregatorName" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationAggregatorName" })
   configurationAggregatorName: string;
 
-  @Metadata({ data: "json, name=Filters" })
+  @SpeakeasyMetadata({ data: "json, name=Filters" })
   filters?: ResourceCountFilters;
 
-  @Metadata({ data: "json, name=GroupByKey" })
+  @SpeakeasyMetadata({ data: "json, name=GroupByKey" })
   groupByKey?: ResourceCountGroupKeyEnum;
 
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

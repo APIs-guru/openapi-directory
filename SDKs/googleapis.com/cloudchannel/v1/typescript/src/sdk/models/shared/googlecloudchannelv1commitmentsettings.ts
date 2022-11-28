@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudChannelV1RenewalSettings } from "./googlecloudchannelv1renewalsettings";
+
 
 
 // GoogleCloudChannelV1CommitmentSettings
@@ -7,12 +8,22 @@ import { GoogleCloudChannelV1RenewalSettings } from "./googlecloudchannelv1renew
  * Commitment settings for commitment-based offers.
 **/
 export class GoogleCloudChannelV1CommitmentSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=renewalSettings" })
+  @SpeakeasyMetadata({ data: "json, name=renewalSettings" })
   renewalSettings?: GoogleCloudChannelV1RenewalSettings;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
+}
+
+
+// GoogleCloudChannelV1CommitmentSettingsInput
+/** 
+ * Commitment settings for commitment-based offers.
+**/
+export class GoogleCloudChannelV1CommitmentSettingsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=renewalSettings" })
+  renewalSettings?: GoogleCloudChannelV1RenewalSettings;
 }

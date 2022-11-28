@@ -8,6 +8,8 @@ const (
 	GoogleCloudDatacatalogV1RoutineSpecRoutineTypeEnumProcedure              GoogleCloudDatacatalogV1RoutineSpecRoutineTypeEnum = "PROCEDURE"
 )
 
+// GoogleCloudDatacatalogV1RoutineSpec
+// Specification that applies to a routine. Valid only for entries with the `ROUTINE` type.
 type GoogleCloudDatacatalogV1RoutineSpec struct {
 	BigqueryRoutineSpec *GoogleCloudDatacatalogV1BigQueryRoutineSpec        `json:"bigqueryRoutineSpec,omitempty"`
 	DefinitionBody      *string                                             `json:"definitionBody,omitempty"`

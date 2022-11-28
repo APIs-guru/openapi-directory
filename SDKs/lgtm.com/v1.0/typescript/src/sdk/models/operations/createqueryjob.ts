@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateQueryJobQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=language" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=language" })
   language: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=project-id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=project-id" })
   projectId?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=projects-list" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=projects-list" })
   projectsList?: string;
 }
 
 
 export class CreateQueryJobSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   accessToken: shared.SchemeAccessToken;
 }
 
 
 export class CreateQueryJobRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: CreateQueryJobQueryParams;
 
-  @Metadata({ data: "request, media_type=text/plain" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/plain" })
   request: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateQueryJobSecurity;
 }
 
 
 export class CreateQueryJobResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   operation?: shared.Operation;
 }

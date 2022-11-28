@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReleaseAsset } from "./releaseasset";
 import { SimpleUser } from "./simpleuser";
+
 
 
 // Release
@@ -9,63 +9,63 @@ import { SimpleUser } from "./simpleuser";
  * A release.
 **/
 export class Release extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets", elemType: shared.ReleaseAsset })
+  @SpeakeasyMetadata({ data: "json, name=assets", elemType: ReleaseAsset })
   assets: ReleaseAsset[];
 
-  @Metadata({ data: "json, name=assets_url" })
+  @SpeakeasyMetadata({ data: "json, name=assets_url" })
   assetsUrl: string;
 
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author: SimpleUser;
 
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: string;
 
-  @Metadata({ data: "json, name=body_html" })
+  @SpeakeasyMetadata({ data: "json, name=body_html" })
   bodyHtml?: string;
 
-  @Metadata({ data: "json, name=body_text" })
+  @SpeakeasyMetadata({ data: "json, name=body_text" })
   bodyText?: string;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=draft" })
+  @SpeakeasyMetadata({ data: "json, name=draft" })
   draft: boolean;
 
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=node_id" })
+  @SpeakeasyMetadata({ data: "json, name=node_id" })
   nodeId: string;
 
-  @Metadata({ data: "json, name=prerelease" })
+  @SpeakeasyMetadata({ data: "json, name=prerelease" })
   prerelease: boolean;
 
-  @Metadata({ data: "json, name=published_at" })
+  @SpeakeasyMetadata({ data: "json, name=published_at" })
   publishedAt: Date;
 
-  @Metadata({ data: "json, name=tag_name" })
+  @SpeakeasyMetadata({ data: "json, name=tag_name" })
   tagName: string;
 
-  @Metadata({ data: "json, name=tarball_url" })
+  @SpeakeasyMetadata({ data: "json, name=tarball_url" })
   tarballUrl: string;
 
-  @Metadata({ data: "json, name=target_commitish" })
+  @SpeakeasyMetadata({ data: "json, name=target_commitish" })
   targetCommitish: string;
 
-  @Metadata({ data: "json, name=upload_url" })
+  @SpeakeasyMetadata({ data: "json, name=upload_url" })
   uploadUrl: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 
-  @Metadata({ data: "json, name=zipball_url" })
+  @SpeakeasyMetadata({ data: "json, name=zipball_url" })
   zipballUrl: string;
 }

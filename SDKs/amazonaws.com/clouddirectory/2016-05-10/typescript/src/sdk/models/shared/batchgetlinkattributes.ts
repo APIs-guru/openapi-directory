@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TypedLinkSpecifier } from "./typedlinkspecifier";
+
 
 
 // BatchGetLinkAttributes
@@ -7,9 +8,9 @@ import { TypedLinkSpecifier } from "./typedlinkspecifier";
  * Retrieves attributes that are associated with a typed link inside a <a>BatchRead</a> operation. For more information, see <a>GetLinkAttributes</a> and <a>BatchReadRequest$Operations</a>.
 **/
 export class BatchGetLinkAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributeNames" })
+  @SpeakeasyMetadata({ data: "json, name=AttributeNames" })
   attributeNames: string[];
 
-  @Metadata({ data: "json, name=TypedLinkSpecifier" })
+  @SpeakeasyMetadata({ data: "json, name=TypedLinkSpecifier" })
   typedLinkSpecifier: TypedLinkSpecifier;
 }

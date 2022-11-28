@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AssociateEntityToThingRequest = /** @class */ (function (_super) {
     __extends(AssociateEntityToThingRequest, _super);
     function AssociateEntityToThingRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=entityId" }),
+        SpeakeasyMetadata({ data: "json, name=entityId" }),
         __metadata("design:type", String)
     ], AssociateEntityToThingRequest.prototype, "entityId", void 0);
     __decorate([
-        Metadata({ data: "json, name=namespaceVersion" }),
+        SpeakeasyMetadata({ data: "json, name=namespaceVersion" }),
         __metadata("design:type", Number)
     ], AssociateEntityToThingRequest.prototype, "namespaceVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=thingName" }),
+        SpeakeasyMetadata({ data: "json, name=thingName" }),
         __metadata("design:type", String)
     ], AssociateEntityToThingRequest.prototype, "thingName", void 0);
     return AssociateEntityToThingRequest;

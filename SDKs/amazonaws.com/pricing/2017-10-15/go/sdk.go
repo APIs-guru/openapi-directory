@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://api.pricing.{region}.amazonaws.com",
 	"https://api.pricing.{region}.amazonaws.com",
 	"http://api.pricing.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/pricing/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DescribeServices - Returns the metadata for one service or a list of the metadata for all services. Use this without a service code to get the service codes for all services. Use it with a service code, such as <code>AmazonEC2</code>, to get information specific to that service, such as the attribute names available for that service. For example, some of the attribute names available for EC2 are <code>volumeType</code>, <code>maxIopsVolume</code>, <code>operation</code>, <code>locationType</code>, and <code>instanceCapacity10xlarge</code>.
 func (s *SDK) DescribeServices(ctx context.Context, request operations.DescribeServicesRequest) (*operations.DescribeServicesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSPriceListService.DescribeServices"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -83,7 +110,7 @@ func (s *SDK) DescribeServices(ctx context.Context, request operations.DescribeS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -163,8 +190,9 @@ func (s *SDK) DescribeServices(ctx context.Context, request operations.DescribeS
 	return res, nil
 }
 
+// GetAttributeValues - Returns a list of attribute values. Attibutes are similar to the details in a Price List API offer file. For a list of available attributes, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/reading-an-offer.html#pps-defs">Offer File Definitions</a> in the <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-what-is.html">Amazon Web Services Billing and Cost Management User Guide</a>.
 func (s *SDK) GetAttributeValues(ctx context.Context, request operations.GetAttributeValuesRequest) (*operations.GetAttributeValuesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSPriceListService.GetAttributeValues"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -186,7 +214,7 @@ func (s *SDK) GetAttributeValues(ctx context.Context, request operations.GetAttr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -266,8 +294,9 @@ func (s *SDK) GetAttributeValues(ctx context.Context, request operations.GetAttr
 	return res, nil
 }
 
+// GetProducts - Returns a list of all products that match the filter criteria.
 func (s *SDK) GetProducts(ctx context.Context, request operations.GetProductsRequest) (*operations.GetProductsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSPriceListService.GetProducts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -289,7 +318,7 @@ func (s *SDK) GetProducts(ctx context.Context, request operations.GetProductsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

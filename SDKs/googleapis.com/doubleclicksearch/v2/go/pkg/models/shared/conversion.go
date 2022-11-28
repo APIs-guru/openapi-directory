@@ -1,5 +1,7 @@
 package shared
 
+// Conversion
+// A conversion containing data relevant to DoubleClick Search.
 type Conversion struct {
 	AdGroupID                   *string           `json:"adGroupId,omitempty"`
 	AdID                        *string           `json:"adId,omitempty"`

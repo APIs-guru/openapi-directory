@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Endpoint } from "./endpoint";
 import { ReachabilityDetails } from "./reachabilitydetails";
-import { Endpoint } from "./endpoint";
+
 
 
 // ConnectivityTest
@@ -9,36 +9,67 @@ import { Endpoint } from "./endpoint";
  * A Connectivity Test for a network reachability analysis.
 **/
 export class ConnectivityTest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: Endpoint;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol?: string;
 
-  @Metadata({ data: "json, name=reachabilityDetails" })
+  @SpeakeasyMetadata({ data: "json, name=reachabilityDetails" })
   reachabilityDetails?: ReachabilityDetails;
 
-  @Metadata({ data: "json, name=relatedProjects" })
+  @SpeakeasyMetadata({ data: "json, name=relatedProjects" })
   relatedProjects?: string[];
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: Endpoint;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// ConnectivityTestInput
+/** 
+ * A Connectivity Test for a network reachability analysis.
+**/
+export class ConnectivityTestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=destination" })
+  destination?: Endpoint;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
+  protocol?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=reachabilityDetails" })
+  reachabilityDetails?: ReachabilityDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=relatedProjects" })
+  relatedProjects?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=source" })
+  source?: Endpoint;
 }

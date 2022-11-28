@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import webhook
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RoomWebhook:
-    is_assigned: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isAssigned' }})
-    webhook: webhook.Webhook = field(default=None, metadata={'dataclasses_json': { 'field_name': 'webhook' }})
+    r"""RoomWebhook
+    Webhook information
+    """
+    
+    is_assigned: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('isAssigned') }})
+    webhook: Webhook = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('webhook') }})
     

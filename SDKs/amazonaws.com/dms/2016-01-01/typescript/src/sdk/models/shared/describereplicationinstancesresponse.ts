@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationInstance } from "./replicationinstance";
+
 
 
 // DescribeReplicationInstancesResponse
@@ -8,9 +8,9 @@ import { ReplicationInstance } from "./replicationinstance";
  * <p/>
 **/
 export class DescribeReplicationInstancesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=ReplicationInstances", elemType: shared.ReplicationInstance })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationInstances", elemType: ReplicationInstance })
   replicationInstances?: ReplicationInstance[];
 }

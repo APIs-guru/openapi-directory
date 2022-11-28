@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateCodeSigningConfigHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,7 +32,7 @@ export class CreateCodeSigningConfigHeaders extends SpeakeasyBase {
  * List of signing profiles that can sign a code package. 
 **/
 export class CreateCodeSigningConfigRequestBodyAllowedPublishers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SigningProfileVersionArns" })
+  @SpeakeasyMetadata({ data: "json, name=SigningProfileVersionArns" })
   signingProfileVersionArns?: string[];
 }
 
@@ -41,45 +42,45 @@ export class CreateCodeSigningConfigRequestBodyAllowedPublishers extends Speakea
  * Code signing configuration <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-policies">policies</a> specify the validation failure action for signature mismatch or expiry.
 **/
 export class CreateCodeSigningConfigRequestBodyCodeSigningPolicies extends SpeakeasyBase {
-  @Metadata({ data: "json, name=UntrustedArtifactOnDeployment" })
+  @SpeakeasyMetadata({ data: "json, name=UntrustedArtifactOnDeployment" })
   untrustedArtifactOnDeployment?: shared.CodeSigningPolicyEnum;
 }
 
 
 export class CreateCodeSigningConfigRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowedPublishers" })
+  @SpeakeasyMetadata({ data: "json, name=AllowedPublishers" })
   allowedPublishers: CreateCodeSigningConfigRequestBodyAllowedPublishers;
 
-  @Metadata({ data: "json, name=CodeSigningPolicies" })
+  @SpeakeasyMetadata({ data: "json, name=CodeSigningPolicies" })
   codeSigningPolicies?: CreateCodeSigningConfigRequestBodyCodeSigningPolicies;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 }
 
 
 export class CreateCodeSigningConfigRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateCodeSigningConfigHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateCodeSigningConfigRequestBody;
 }
 
 
 export class CreateCodeSigningConfigResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createCodeSigningConfigResponse?: shared.CreateCodeSigningConfigResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterValueException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

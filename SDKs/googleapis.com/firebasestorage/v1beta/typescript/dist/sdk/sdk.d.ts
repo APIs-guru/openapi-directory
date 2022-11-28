@@ -1,17 +1,17 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Projects } from "./projects";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://firebasestorage.googleapis.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    projects: Projects;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    FirebasestorageProjectsBucketsAddFirebase(req: operations.FirebasestorageProjectsBucketsAddFirebaseRequest, config?: AxiosRequestConfig): Promise<operations.FirebasestorageProjectsBucketsAddFirebaseResponse>;
-    FirebasestorageProjectsBucketsGet(req: operations.FirebasestorageProjectsBucketsGetRequest, config?: AxiosRequestConfig): Promise<operations.FirebasestorageProjectsBucketsGetResponse>;
-    FirebasestorageProjectsBucketsList(req: operations.FirebasestorageProjectsBucketsListRequest, config?: AxiosRequestConfig): Promise<operations.FirebasestorageProjectsBucketsListResponse>;
-    FirebasestorageProjectsBucketsRemoveFirebase(req: operations.FirebasestorageProjectsBucketsRemoveFirebaseRequest, config?: AxiosRequestConfig): Promise<operations.FirebasestorageProjectsBucketsRemoveFirebaseResponse>;
 }
 export {};

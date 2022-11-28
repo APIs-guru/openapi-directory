@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GistsCreateCommentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=gist_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=gist_id" })
   gistId: string;
 }
 
 
 export class GistsCreateCommentRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body: string;
 }
 
 
 export class GistsCreateCommentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GistsCreateCommentPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: GistsCreateCommentRequestBody;
 }
 
 
 export class GistsCreateCommentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   gistComment?: shared.GistComment;
 }

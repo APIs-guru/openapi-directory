@@ -9,11 +9,11 @@ class PostPricingDecoyPricingHeaders:
 
 @dataclass
 class PostPricingDecoyPricingRequest:
-    headers: PostPricingDecoyPricingHeaders = field(default=None)
+    headers: PostPricingDecoyPricingHeaders = field()
     
 
 @dataclass
 class PostPricingDecoyPricingResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

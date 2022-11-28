@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TranslateProjectsLocationsGlossariesGlossaryEntriesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class TranslateProjectsLocationsGlossariesGlossaryEntriesListQueryParams:
 
 @dataclass
 class TranslateProjectsLocationsGlossariesGlossaryEntriesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TranslateProjectsLocationsGlossariesGlossaryEntriesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class TranslateProjectsLocationsGlossariesGlossaryEntriesListSecurity:
 
 @dataclass
 class TranslateProjectsLocationsGlossariesGlossaryEntriesListRequest:
-    path_params: TranslateProjectsLocationsGlossariesGlossaryEntriesListPathParams = field(default=None)
-    query_params: TranslateProjectsLocationsGlossariesGlossaryEntriesListQueryParams = field(default=None)
-    security: TranslateProjectsLocationsGlossariesGlossaryEntriesListSecurity = field(default=None)
+    path_params: TranslateProjectsLocationsGlossariesGlossaryEntriesListPathParams = field()
+    query_params: TranslateProjectsLocationsGlossariesGlossaryEntriesListQueryParams = field()
+    security: TranslateProjectsLocationsGlossariesGlossaryEntriesListSecurity = field()
     
 
 @dataclass
 class TranslateProjectsLocationsGlossariesGlossaryEntriesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_glossary_entries_response: Optional[shared.ListGlossaryEntriesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

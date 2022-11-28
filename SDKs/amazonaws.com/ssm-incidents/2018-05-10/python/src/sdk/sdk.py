@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/ssm-incidents/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/ssm-incidents/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def create_replication_set(self, request: operations.CreateReplicationSetRequest) -> operations.CreateReplicationSetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""A replication set replicates and encrypts your data to the provided Regions with the provided KMS key. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createReplicationSet"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -83,22 +112,22 @@ class SDK:
 
     
     def create_response_plan(self, request: operations.CreateResponsePlanRequest) -> operations.CreateResponsePlanResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a response plan that automates the initial response to incidents. A response plan engages contacts, starts chat channel collaboration, and initiates runbooks at the beginning of an incident.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createResponsePlan"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -137,22 +166,22 @@ class SDK:
 
     
     def create_timeline_event(self, request: operations.CreateTimelineEventRequest) -> operations.CreateTimelineEventResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a custom timeline event on the incident details page of an incident record. Timeline events are automatically created by Incident Manager, marking key moment during an incident. You can create custom timeline events to mark important events that are automatically detected by Incident Manager.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createTimelineEvent"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -191,22 +220,22 @@ class SDK:
 
     
     def delete_incident_record(self, request: operations.DeleteIncidentRecordRequest) -> operations.DeleteIncidentRecordResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an incident record from Incident Manager. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/deleteIncidentRecord"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -237,17 +266,18 @@ class SDK:
 
     
     def delete_replication_set(self, request: operations.DeleteReplicationSetRequest) -> operations.DeleteReplicationSetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes all Regions in your replication set. Deleting the replication set deletes all Incident Manager data.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/deleteReplicationSet#arn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -282,22 +312,22 @@ class SDK:
 
     
     def delete_resource_policy(self, request: operations.DeleteResourcePolicyRequest) -> operations.DeleteResourcePolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes the resource policy that AWS Resource Access Manager uses to share your Incident Manager resource.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/deleteResourcePolicy"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -332,22 +362,22 @@ class SDK:
 
     
     def delete_response_plan(self, request: operations.DeleteResponsePlanRequest) -> operations.DeleteResponsePlanResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes the specified response plan. Deleting a response plan stops all linked CloudWatch alarms and EventBridge events from creating an incident with this response plan.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/deleteResponsePlan"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -378,22 +408,22 @@ class SDK:
 
     
     def delete_timeline_event(self, request: operations.DeleteTimelineEventRequest) -> operations.DeleteTimelineEventResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a timeline event from an incident.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/deleteTimelineEvent"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -424,17 +454,18 @@ class SDK:
 
     
     def get_incident_record(self, request: operations.GetIncidentRecordRequest) -> operations.GetIncidentRecordResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the details of the specified incident record.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getIncidentRecord#arn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -469,17 +500,18 @@ class SDK:
 
     
     def get_replication_set(self, request: operations.GetReplicationSetRequest) -> operations.GetReplicationSetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve your Incident Manager replication set.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getReplicationSet#arn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -514,24 +546,23 @@ class SDK:
 
     
     def get_resource_policies(self, request: operations.GetResourcePoliciesRequest) -> operations.GetResourcePoliciesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the resource policies attached to the specified response plan.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getResourcePolicies#resourceArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -566,17 +597,18 @@ class SDK:
 
     
     def get_response_plan(self, request: operations.GetResponsePlanRequest) -> operations.GetResponsePlanResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the details of the specified response plan.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getResponsePlan#arn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -611,17 +643,18 @@ class SDK:
 
     
     def get_timeline_event(self, request: operations.GetTimelineEventRequest) -> operations.GetTimelineEventResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves a timeline event based on its ID and incident record.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getTimelineEvent#eventId&incidentRecordArn"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -656,24 +689,23 @@ class SDK:
 
     
     def list_incident_records(self, request: operations.ListIncidentRecordsRequest) -> operations.ListIncidentRecordsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all incident records in your account. Use this command to retrieve the Amazon Resource Name (ARN) of the incident record you want to update. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listIncidentRecords"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -704,24 +736,23 @@ class SDK:
 
     
     def list_related_items(self, request: operations.ListRelatedItemsRequest) -> operations.ListRelatedItemsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List all related items for an incident record.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listRelatedItems"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -752,24 +783,23 @@ class SDK:
 
     
     def list_replication_sets(self, request: operations.ListReplicationSetsRequest) -> operations.ListReplicationSetsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists details about the replication set configured in your account. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listReplicationSets"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -800,24 +830,23 @@ class SDK:
 
     
     def list_response_plans(self, request: operations.ListResponsePlansRequest) -> operations.ListResponsePlansResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all response plans in your account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listResponsePlans"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -848,15 +877,17 @@ class SDK:
 
     
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the tags that are attached to the specified response plan.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resourceArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -891,24 +922,23 @@ class SDK:
 
     
     def list_timeline_events(self, request: operations.ListTimelineEventsRequest) -> operations.ListTimelineEventsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists timeline events of the specified incident record.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/listTimelineEvents"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -939,22 +969,22 @@ class SDK:
 
     
     def put_resource_policy(self, request: operations.PutResourcePolicyRequest) -> operations.PutResourcePolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds a resource policy to the specified response plan.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/putResourcePolicy"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -989,22 +1019,22 @@ class SDK:
 
     
     def start_incident(self, request: operations.StartIncidentRequest) -> operations.StartIncidentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Used to start an incident from CloudWatch alarms, EventBridge events, or manually. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/startIncident"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1043,22 +1073,22 @@ class SDK:
 
     
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds a tag to a response plan.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resourceArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1101,17 +1131,18 @@ class SDK:
 
     
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes a tag from a resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resourceArn}#tagKeys", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1150,22 +1181,22 @@ class SDK:
 
     
     def update_deletion_protection(self, request: operations.UpdateDeletionProtectionRequest) -> operations.UpdateDeletionProtectionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update deletion protection to either allow or deny deletion of the final Region in a replication set.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/updateDeletionProtection"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1200,22 +1231,22 @@ class SDK:
 
     
     def update_incident_record(self, request: operations.UpdateIncidentRecordRequest) -> operations.UpdateIncidentRecordResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update the details of an incident record. You can use this action to update an incident record from the defined chat channel. For more information about using actions in chat channels, see <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/chat.html#chat-interact\">Interacting through chat</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/updateIncidentRecord"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1254,22 +1285,22 @@ class SDK:
 
     
     def update_related_items(self, request: operations.UpdateRelatedItemsRequest) -> operations.UpdateRelatedItemsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add or remove related items from the related items tab of an incident record.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/updateRelatedItems"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1308,22 +1339,22 @@ class SDK:
 
     
     def update_replication_set(self, request: operations.UpdateReplicationSetRequest) -> operations.UpdateReplicationSetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add or delete Regions from your replication set.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/updateReplicationSet"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1358,22 +1389,22 @@ class SDK:
 
     
     def update_response_plan(self, request: operations.UpdateResponsePlanRequest) -> operations.UpdateResponsePlanResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the specified response plan.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/updateResponsePlan"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1412,22 +1443,22 @@ class SDK:
 
     
     def update_timeline_event(self, request: operations.UpdateTimelineEventRequest) -> operations.UpdateTimelineEventResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a timeline event. You can update events of type <code>Custom Event</code>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/updateTimelineEvent"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

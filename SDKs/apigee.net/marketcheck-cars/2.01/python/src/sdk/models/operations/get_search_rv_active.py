@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -49,13 +50,13 @@ class GetSearchRvActiveQueryParams:
 
 @dataclass
 class GetSearchRvActiveRequest:
-    query_params: GetSearchRvActiveQueryParams = field(default=None)
+    query_params: GetSearchRvActiveQueryParams = field()
     
 
 @dataclass
 class GetSearchRvActiveResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     rv_search_response: Optional[shared.RvSearchResponse] = field(default=None)
-    status_code: int = field(default=None)
     

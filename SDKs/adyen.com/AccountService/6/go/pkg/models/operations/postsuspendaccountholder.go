@@ -4,17 +4,9 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type PostSuspendAccountHolderSecurityOption1 struct {
-	BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
-}
-
-type PostSuspendAccountHolderSecurityOption2 struct {
-	APIKeyAuth shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type PostSuspendAccountHolderSecurity struct {
-	Option1 *PostSuspendAccountHolderSecurityOption1 `security:"option"`
-	Option2 *PostSuspendAccountHolderSecurityOption2 `security:"option"`
+	BasicAuth  *shared.SchemeBasicAuth  `security:"scheme,type=http,subtype=basic"`
+	APIKeyAuth *shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type PostSuspendAccountHolderRequest struct {

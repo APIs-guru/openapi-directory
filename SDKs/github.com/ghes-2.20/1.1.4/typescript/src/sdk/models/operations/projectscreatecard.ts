@@ -1,77 +1,78 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ProjectsCreateCardPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=column_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=column_id" })
   columnId: number;
 }
 
 
 export class ProjectsCreateCardRequestBody1 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=note" })
+  @SpeakeasyMetadata({ data: "json, name=note" })
   note: string;
 }
 
 
 export class ProjectsCreateCardRequestBody2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content_id" })
+  @SpeakeasyMetadata({ data: "json, name=content_id" })
   contentId: number;
 
-  @Metadata({ data: "json, name=content_type" })
+  @SpeakeasyMetadata({ data: "json, name=content_type" })
   contentType: string;
 }
 
 
-export class ProjectsCreateCardRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ProjectsCreateCardPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: any;
-}
-
-
 export class ProjectsCreateCard503ApplicationJsonErrors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class ProjectsCreateCard503ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl?: string;
 
-  @Metadata({ data: "json, name=errors", elemType: operations.ProjectsCreateCard503ApplicationJsonErrors })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: ProjectsCreateCard503ApplicationJsonErrors })
   errors?: ProjectsCreateCard503ApplicationJsonErrors[];
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class ProjectsCreateCardRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ProjectsCreateCardPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: any;
+}
+
+
 export class ProjectsCreateCardResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   projectCard?: shared.ProjectCard;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   projectsCreateCard422ApplicationJsonOneOf?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   projectsCreateCard503ApplicationJsonObject?: ProjectsCreateCard503ApplicationJson;
 }

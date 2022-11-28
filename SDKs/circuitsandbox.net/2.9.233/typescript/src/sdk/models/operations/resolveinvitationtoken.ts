@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ResolveInvitationTokenQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" })
   token: string;
 }
 
 
 export class ResolveInvitationTokenSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class ResolveInvitationTokenRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ResolveInvitationTokenQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ResolveInvitationTokenSecurity;
 }
 
 
 export class ResolveInvitationTokenResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conversation?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import enterprisecrmcardscellvalue
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EnterpriseCrmCardsRow:
-    cells: Optional[List[enterprisecrmcardscellvalue.EnterpriseCrmCardsCellValue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cells' }})
+    cells: Optional[List[EnterpriseCrmCardsCellValue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cells') }})
     

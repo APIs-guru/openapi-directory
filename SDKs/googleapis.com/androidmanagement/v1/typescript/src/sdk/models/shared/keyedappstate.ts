@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum KeyedAppStateSeverityEnum {
-    SeverityUnspecified = "SEVERITY_UNSPECIFIED"
-,    Info = "INFO"
-,    Error = "ERROR"
+    SeverityUnspecified = "SEVERITY_UNSPECIFIED",
+    Info = "INFO",
+    Error = "ERROR"
 }
 
 
@@ -12,21 +13,21 @@ export enum KeyedAppStateSeverityEnum {
  * Keyed app state reported by the app.
 **/
 export class KeyedAppState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=lastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateTime" })
   lastUpdateTime?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: KeyedAppStateSeverityEnum;
 }

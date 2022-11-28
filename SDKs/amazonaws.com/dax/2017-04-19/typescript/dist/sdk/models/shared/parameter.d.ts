@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ChangeTypeEnum } from "./changetypeenum";
 import { IsModifiableEnum } from "./ismodifiableenum";
 import { NodeTypeSpecificValue } from "./nodetypespecificvalue";

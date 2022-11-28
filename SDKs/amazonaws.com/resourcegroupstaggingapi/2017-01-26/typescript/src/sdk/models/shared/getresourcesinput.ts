@@ -1,30 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TagFilter } from "./tagfilter";
 
 
+
 export class GetResourcesInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExcludeCompliantResources" })
+  @SpeakeasyMetadata({ data: "json, name=ExcludeCompliantResources" })
   excludeCompliantResources?: boolean;
 
-  @Metadata({ data: "json, name=IncludeComplianceDetails" })
+  @SpeakeasyMetadata({ data: "json, name=IncludeComplianceDetails" })
   includeComplianceDetails?: boolean;
 
-  @Metadata({ data: "json, name=PaginationToken" })
+  @SpeakeasyMetadata({ data: "json, name=PaginationToken" })
   paginationToken?: string;
 
-  @Metadata({ data: "json, name=ResourceARNList" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceARNList" })
   resourceArnList?: string[];
 
-  @Metadata({ data: "json, name=ResourceTypeFilters" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceTypeFilters" })
   resourceTypeFilters?: string[];
 
-  @Metadata({ data: "json, name=ResourcesPerPage" })
+  @SpeakeasyMetadata({ data: "json, name=ResourcesPerPage" })
   resourcesPerPage?: number;
 
-  @Metadata({ data: "json, name=TagFilters", elemType: shared.TagFilter })
+  @SpeakeasyMetadata({ data: "json, name=TagFilters", elemType: TagFilter })
   tagFilters?: TagFilter[];
 
-  @Metadata({ data: "json, name=TagsPerPage" })
+  @SpeakeasyMetadata({ data: "json, name=TagsPerPage" })
   tagsPerPage?: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SentimentScore
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the level of confidence that Amazon Comprehend has in the accuracy of its detection of sentiments.
 **/
 export class SentimentScore extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Mixed" })
+  @SpeakeasyMetadata({ data: "json, name=Mixed" })
   mixed?: number;
 
-  @Metadata({ data: "json, name=Negative" })
+  @SpeakeasyMetadata({ data: "json, name=Negative" })
   negative?: number;
 
-  @Metadata({ data: "json, name=Neutral" })
+  @SpeakeasyMetadata({ data: "json, name=Neutral" })
   neutral?: number;
 
-  @Metadata({ data: "json, name=Positive" })
+  @SpeakeasyMetadata({ data: "json, name=Positive" })
   positive?: number;
 }

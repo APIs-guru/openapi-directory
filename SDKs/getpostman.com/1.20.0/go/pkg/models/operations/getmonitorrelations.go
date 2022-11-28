@@ -5,10 +5,6 @@ type GetMonitorRelationsPathParams struct {
 	APIVersionID string `pathParam:"style=simple,explode=false,name=apiVersionId"`
 }
 
-type GetMonitorRelationsRequest struct {
-	PathParams GetMonitorRelationsPathParams
-}
-
 type GetMonitorRelations200ApplicationJSONMonitor struct {
 	ID        *string `json:"id,omitempty"`
 	MonitorID *string `json:"monitorId,omitempty"`
@@ -18,6 +14,10 @@ type GetMonitorRelations200ApplicationJSONMonitor struct {
 
 type GetMonitorRelations200ApplicationJSON struct {
 	Monitor []GetMonitorRelations200ApplicationJSONMonitor `json:"monitor,omitempty"`
+}
+
+type GetMonitorRelationsRequest struct {
+	PathParams GetMonitorRelationsPathParams
 }
 
 type GetMonitorRelationsResponse struct {

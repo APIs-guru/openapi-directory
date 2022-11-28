@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdmobAccountsNetworkReportGeneratePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class AdmobAccountsNetworkReportGenerateQueryParams:
 
 @dataclass
 class AdmobAccountsNetworkReportGenerateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdmobAccountsNetworkReportGenerateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class AdmobAccountsNetworkReportGenerateSecurity:
 
 @dataclass
 class AdmobAccountsNetworkReportGenerateRequest:
-    path_params: AdmobAccountsNetworkReportGeneratePathParams = field(default=None)
-    query_params: AdmobAccountsNetworkReportGenerateQueryParams = field(default=None)
+    path_params: AdmobAccountsNetworkReportGeneratePathParams = field()
+    query_params: AdmobAccountsNetworkReportGenerateQueryParams = field()
+    security: AdmobAccountsNetworkReportGenerateSecurity = field()
     request: Optional[shared.GenerateNetworkReportRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AdmobAccountsNetworkReportGenerateSecurity = field(default=None)
     
 
 @dataclass
 class AdmobAccountsNetworkReportGenerateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     generate_network_report_response: Optional[shared.GenerateNetworkReportResponse] = field(default=None)
-    status_code: int = field(default=None)
     

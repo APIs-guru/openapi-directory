@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthModeEnum } from "./authmodeenum";
+
 
 
 // StudioSummary
@@ -7,24 +8,24 @@ import { AuthModeEnum } from "./authmodeenum";
  * Details for an Amazon EMR Studio, including ID, Name, VPC, and Description. The details do not include subnets, IAM roles, security groups, or tags associated with the Studio.
 **/
 export class StudioSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AuthMode" })
+  @SpeakeasyMetadata({ data: "json, name=AuthMode" })
   authMode?: AuthModeEnum;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=StudioId" })
+  @SpeakeasyMetadata({ data: "json, name=StudioId" })
   studioId?: string;
 
-  @Metadata({ data: "json, name=Url" })
+  @SpeakeasyMetadata({ data: "json, name=Url" })
   url?: string;
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId?: string;
 }

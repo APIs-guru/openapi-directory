@@ -1,7 +1,8 @@
 
 
+
 export enum QuickConnectStateEnum {
-    Unavailable = "Unavailable"
-,    Available = "Available"
-,    Active = "Active"
+    Unavailable = "Unavailable",
+    Available = "Available",
+    Active = "Active"
 }

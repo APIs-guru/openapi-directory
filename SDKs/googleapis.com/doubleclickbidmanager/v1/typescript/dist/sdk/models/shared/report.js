@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReportKey } from "./reportkey";
 import { ReportMetadata } from "./reportmetadata";
 import { Parameters } from "./parameters";
@@ -36,15 +36,15 @@ var Report = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", ReportKey)
     ], Report.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadata" }),
+        SpeakeasyMetadata({ data: "json, name=metadata" }),
         __metadata("design:type", ReportMetadata)
     ], Report.prototype, "metadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=params" }),
+        SpeakeasyMetadata({ data: "json, name=params" }),
         __metadata("design:type", Parameters)
     ], Report.prototype, "params", void 0);
     return Report;

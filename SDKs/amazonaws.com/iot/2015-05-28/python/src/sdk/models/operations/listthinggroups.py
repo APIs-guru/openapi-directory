@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -25,17 +28,17 @@ class ListThingGroupsHeaders:
 
 @dataclass
 class ListThingGroupsRequest:
-    query_params: ListThingGroupsQueryParams = field(default=None)
-    headers: ListThingGroupsHeaders = field(default=None)
+    headers: ListThingGroupsHeaders = field()
+    query_params: ListThingGroupsQueryParams = field()
     
 
 @dataclass
 class ListThingGroupsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_thing_groups_response: Optional[shared.ListThingGroupsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

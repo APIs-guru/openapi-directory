@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FilterNameStringTypeEnum } from "./filternamestringtypeenum";
+
 
 
 // Filter
@@ -7,9 +8,9 @@ import { FilterNameStringTypeEnum } from "./filternamestringtypeenum";
  * Allows you to add filters when you use the search function in Secrets Manager.
 **/
 export class Filter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key?: FilterNameStringTypeEnum;
 
-  @Metadata({ data: "json, name=Values" })
+  @SpeakeasyMetadata({ data: "json, name=Values" })
   values?: string[];
 }

@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import stopstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StopDeploymentOutput:
-    status: Optional[stopstatus_enum.StopStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    status_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statusMessage' }})
+    r"""StopDeploymentOutput
+     Represents the output of a <code>StopDeployment</code> operation. 
+    """
+    
+    status: Optional[StopStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    status_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('statusMessage') }})
     

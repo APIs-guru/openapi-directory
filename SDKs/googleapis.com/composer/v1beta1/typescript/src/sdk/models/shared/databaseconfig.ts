@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DatabaseConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The configuration of Cloud SQL instance that is used by the Apache Airflow software.
 **/
 export class DatabaseConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=machineType" })
+  @SpeakeasyMetadata({ data: "json, name=machineType" })
   machineType?: string;
 }

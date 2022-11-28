@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetUpdateOpenIDConnectProviderThumbprintActionEnum(str, Enum):
     UPDATE_OPEN_ID_CONNECT_PROVIDER_THUMBPRINT = "UpdateOpenIDConnectProviderThumbprint"
@@ -10,10 +14,10 @@ class GetUpdateOpenIDConnectProviderThumbprintVersionEnum(str, Enum):
 
 @dataclass
 class GetUpdateOpenIDConnectProviderThumbprintQueryParams:
-    action: GetUpdateOpenIDConnectProviderThumbprintActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    open_id_connect_provider_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'OpenIDConnectProviderArn', 'style': 'form', 'explode': True }})
-    thumbprint_list: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'ThumbprintList', 'style': 'form', 'explode': True }})
-    version: GetUpdateOpenIDConnectProviderThumbprintVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetUpdateOpenIDConnectProviderThumbprintActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    open_id_connect_provider_arn: str = field(metadata={'query_param': { 'field_name': 'OpenIDConnectProviderArn', 'style': 'form', 'explode': True }})
+    thumbprint_list: List[str] = field(metadata={'query_param': { 'field_name': 'ThumbprintList', 'style': 'form', 'explode': True }})
+    version: GetUpdateOpenIDConnectProviderThumbprintVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetUpdateOpenIDConnectProviderThumbprintHeaders:
 
 @dataclass
 class GetUpdateOpenIDConnectProviderThumbprintRequest:
-    query_params: GetUpdateOpenIDConnectProviderThumbprintQueryParams = field(default=None)
-    headers: GetUpdateOpenIDConnectProviderThumbprintHeaders = field(default=None)
+    headers: GetUpdateOpenIDConnectProviderThumbprintHeaders = field()
+    query_params: GetUpdateOpenIDConnectProviderThumbprintQueryParams = field()
     
 
 @dataclass
 class GetUpdateOpenIDConnectProviderThumbprintResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

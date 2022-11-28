@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class FigiResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compositeFIGI" })
+  @SpeakeasyMetadata({ data: "json, name=compositeFIGI" })
   compositeFigi?: string;
 
-  @Metadata({ data: "json, name=exchCode" })
+  @SpeakeasyMetadata({ data: "json, name=exchCode" })
   exchCode?: string;
 
-  @Metadata({ data: "json, name=figi" })
+  @SpeakeasyMetadata({ data: "json, name=figi" })
   figi?: string;
 
-  @Metadata({ data: "json, name=marketSector" })
+  @SpeakeasyMetadata({ data: "json, name=marketSector" })
   marketSector?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=securityDescription" })
+  @SpeakeasyMetadata({ data: "json, name=securityDescription" })
   securityDescription?: string;
 
-  @Metadata({ data: "json, name=securityType" })
+  @SpeakeasyMetadata({ data: "json, name=securityType" })
   securityType?: string;
 
-  @Metadata({ data: "json, name=securityType2" })
+  @SpeakeasyMetadata({ data: "json, name=securityType2" })
   securityType2?: string;
 
-  @Metadata({ data: "json, name=shareClassFIGI" })
+  @SpeakeasyMetadata({ data: "json, name=shareClassFIGI" })
   shareClassFigi?: string;
 
-  @Metadata({ data: "json, name=ticker" })
+  @SpeakeasyMetadata({ data: "json, name=ticker" })
   ticker?: string;
 }

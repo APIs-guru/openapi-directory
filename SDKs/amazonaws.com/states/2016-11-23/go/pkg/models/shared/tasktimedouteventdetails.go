@@ -1,5 +1,7 @@
 package shared
 
+// TaskTimedOutEventDetails
+// Contains details about a resource timeout that occurred during an execution.
 type TaskTimedOutEventDetails struct {
 	Cause        *string `json:"cause,omitempty"`
 	Error        *string `json:"error,omitempty"`

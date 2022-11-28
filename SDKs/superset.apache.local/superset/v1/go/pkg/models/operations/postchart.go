@@ -8,11 +8,6 @@ type PostChartSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PostChartRequest struct {
-	Request  shared.ChartRestAPIPost `request:"mediaType=application/json"`
-	Security PostChartSecurity
-}
-
 type PostChart201ApplicationJSON struct {
 	ID     *float64                 `json:"id,omitempty"`
 	Result *shared.ChartRestAPIPost `json:"result,omitempty"`
@@ -32,6 +27,11 @@ type PostChart422ApplicationJSON struct {
 
 type PostChart500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PostChartRequest struct {
+	Request  shared.ChartRestAPIPost `request:"mediaType=application/json"`
+	Security PostChartSecurity
 }
 
 type PostChartResponse struct {

@@ -30,7 +30,7 @@ type RealtimebiddingBiddersBiddingFunctionsCreateSecurity struct {
 type RealtimebiddingBiddersBiddingFunctionsCreateRequest struct {
 	PathParams  RealtimebiddingBiddersBiddingFunctionsCreatePathParams
 	QueryParams RealtimebiddingBiddersBiddingFunctionsCreateQueryParams
-	Request     *shared.BiddingFunction `request:"mediaType=application/json"`
+	Request     *shared.BiddingFunctionInput `request:"mediaType=application/json"`
 	Security    RealtimebiddingBiddersBiddingFunctionsCreateSecurity
 }
 

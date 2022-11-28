@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class NewPartnerStoreStore extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=email_partner" })
+  @SpeakeasyMetadata({ data: "json, name=email_partner" })
   emailPartner?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=redirect_url" })
+  @SpeakeasyMetadata({ data: "json, name=redirect_url" })
   redirectUrl?: string;
 }
 
 
 export class NewPartnerStore extends SpeakeasyBase {
-  @Metadata({ data: "json, name=store" })
+  @SpeakeasyMetadata({ data: "json, name=store" })
   store?: NewPartnerStoreStore;
 }

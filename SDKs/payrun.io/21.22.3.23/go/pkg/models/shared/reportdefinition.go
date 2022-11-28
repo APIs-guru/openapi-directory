@@ -1,13 +1,19 @@
 package shared
 
+// ReportDefinitionReportDefinitionReportQueryGroup
+// The querys' groups
 type ReportDefinitionReportDefinitionReportQueryGroup struct {
 	Group []interface{} `json:"Group,omitempty"`
 }
 
+// ReportDefinitionReportDefinitionReportQueryVariable
+// The querys' variables
 type ReportDefinitionReportDefinitionReportQueryVariable struct {
 	Variable []interface{} `json:"Variable,omitempty"`
 }
 
+// ReportDefinitionReportDefinitionReportQuery
+// The report definitions' report query
 type ReportDefinitionReportDefinitionReportQuery struct {
 	ExcludeNullOrEmptyElements *bool                                                `json:"ExcludeNullOrEmptyElements,omitempty"`
 	Groups                     *ReportDefinitionReportDefinitionReportQueryGroup    `json:"Groups,omitempty"`

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AuthorizationCodesSharedModelsCodeValidationModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExpirationDate" })
+  @SpeakeasyMetadata({ data: "json, name=ExpirationDate" })
   expirationDate?: Date;
 
-  @Metadata({ data: "json, name=IsValid" })
+  @SpeakeasyMetadata({ data: "json, name=IsValid" })
   isValid?: boolean;
 }

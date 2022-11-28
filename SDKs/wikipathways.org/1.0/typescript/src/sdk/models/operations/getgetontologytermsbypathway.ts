@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetGetOntologyTermsByPathwayFormatEnum {
-    Json = "json"
-,    Xml = "xml"
-,    Html = "html"
-,    Dump = "dump"
-,    Jpg = "jpg"
-,    Pdf = "pdf"
+    Json = "json",
+    Xml = "xml",
+    Html = "html",
+    Dump = "dump",
+    Jpg = "jpg",
+    Pdf = "pdf"
 }
 
 
 export class GetGetOntologyTermsByPathwayQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format?: GetGetOntologyTermsByPathwayFormatEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pwId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pwId" })
   pwId: string;
 }
 
 
 export class GetGetOntologyTermsByPathwayRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetGetOntologyTermsByPathwayQueryParams;
 }
 
 
 export class GetGetOntologyTermsByPathwayResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

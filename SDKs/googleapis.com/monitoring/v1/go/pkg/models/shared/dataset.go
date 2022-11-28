@@ -18,6 +18,8 @@ const (
 	DataSetTargetAxisEnumY2                    DataSetTargetAxisEnum = "Y2"
 )
 
+// DataSet
+// Groups a time series query definition with charting options.
 type DataSet struct {
 	LegendTemplate     *string                `json:"legendTemplate,omitempty"`
 	MinAlignmentPeriod *string                `json:"minAlignmentPeriod,omitempty"`

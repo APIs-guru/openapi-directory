@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetOfferingsOfferingIdBadgesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
   offeringId: string;
 }
 
 
 export class GetOfferingsOfferingIdBadgesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetOfferingsOfferingIdBadgesPathParams;
 }
 
 
 export class GetOfferingsOfferingIdBadgesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badge?: shared.Badge;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListMfaDevicesActionEnum(str, Enum):
     LIST_MFA_DEVICES = "ListMFADevices"
@@ -10,11 +14,11 @@ class GetListMfaDevicesVersionEnum(str, Enum):
 
 @dataclass
 class GetListMfaDevicesQueryParams:
-    action: GetListMfaDevicesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetListMfaDevicesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetListMfaDevicesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
     user_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
-    version: GetListMfaDevicesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetListMfaDevicesHeaders:
 
 @dataclass
 class GetListMfaDevicesRequest:
-    query_params: GetListMfaDevicesQueryParams = field(default=None)
-    headers: GetListMfaDevicesHeaders = field(default=None)
+    headers: GetListMfaDevicesHeaders = field()
+    query_params: GetListMfaDevicesQueryParams = field()
     
 
 @dataclass
 class GetListMfaDevicesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

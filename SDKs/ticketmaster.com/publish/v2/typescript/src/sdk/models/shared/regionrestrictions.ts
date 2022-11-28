@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RegionRestrictions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This class defines an entitlement data on the Publish API
 **/
 export class RegionRestrictions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowed" })
+  @SpeakeasyMetadata({ data: "json, name=allowed" })
   allowed?: string[];
 }

@@ -20,6 +20,8 @@ const (
 	LoadBalancerInfoLoadBalancerTypeEnumSslProxy                    LoadBalancerInfoLoadBalancerTypeEnum = "SSL_PROXY"
 )
 
+// LoadBalancerInfo
+// For display only. Metadata associated with a load balancer.
 type LoadBalancerInfo struct {
 	BackendType      *LoadBalancerInfoBackendTypeEnum      `json:"backendType,omitempty"`
 	BackendURI       *string                               `json:"backendUri,omitempty"`

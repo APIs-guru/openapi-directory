@@ -9,6 +9,17 @@ const (
 	GoogleCloudDialogflowCxV3beta1VersionStateEnumFailed           GoogleCloudDialogflowCxV3beta1VersionStateEnum = "FAILED"
 )
 
+// GoogleCloudDialogflowCxV3beta1VersionInput
+// Represents a version of a flow.
+type GoogleCloudDialogflowCxV3beta1VersionInput struct {
+	Description *string                                    `json:"description,omitempty"`
+	DisplayName *string                                    `json:"displayName,omitempty"`
+	Name        *string                                    `json:"name,omitempty"`
+	NluSettings *GoogleCloudDialogflowCxV3beta1NluSettings `json:"nluSettings,omitempty"`
+}
+
+// GoogleCloudDialogflowCxV3beta1Version
+// Represents a version of a flow.
 type GoogleCloudDialogflowCxV3beta1Version struct {
 	CreateTime  *string                                         `json:"createTime,omitempty"`
 	Description *string                                         `json:"description,omitempty"`

@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AccessapprovalProjectsUpdateAccessApprovalSettingsPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +30,21 @@ class AccessapprovalProjectsUpdateAccessApprovalSettingsQueryParams:
 
 @dataclass
 class AccessapprovalProjectsUpdateAccessApprovalSettingsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AccessapprovalProjectsUpdateAccessApprovalSettingsRequest:
-    path_params: AccessapprovalProjectsUpdateAccessApprovalSettingsPathParams = field(default=None)
-    query_params: AccessapprovalProjectsUpdateAccessApprovalSettingsQueryParams = field(default=None)
-    request: Optional[shared.AccessApprovalSettings] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AccessapprovalProjectsUpdateAccessApprovalSettingsSecurity = field(default=None)
+    path_params: AccessapprovalProjectsUpdateAccessApprovalSettingsPathParams = field()
+    query_params: AccessapprovalProjectsUpdateAccessApprovalSettingsQueryParams = field()
+    security: AccessapprovalProjectsUpdateAccessApprovalSettingsSecurity = field()
+    request: Optional[shared.AccessApprovalSettingsInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AccessapprovalProjectsUpdateAccessApprovalSettingsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_approval_settings: Optional[shared.AccessApprovalSettings] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

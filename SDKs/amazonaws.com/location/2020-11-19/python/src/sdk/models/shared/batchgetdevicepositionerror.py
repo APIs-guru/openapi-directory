@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import batchitemerror
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchGetDevicePositionError:
-    device_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceId' }})
-    error: batchitemerror.BatchItemError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Error' }})
+    r"""BatchGetDevicePositionError
+    Contains error details for each device that didn't return a position.
+    """
+    
+    device_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceId') }})
+    error: BatchItemError = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Error') }})
     

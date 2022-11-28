@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class PipelineExecutionStartConditionEnum(str, Enum):
     EXPRESSION_MATCH_ONLY = "EXPRESSION_MATCH_ONLY"

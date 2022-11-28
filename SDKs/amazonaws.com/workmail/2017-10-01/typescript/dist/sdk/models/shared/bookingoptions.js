@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // BookingOptions
 /**
  * At least one delegate must be associated to the resource to disable automatic replies from the resource.
@@ -33,15 +33,15 @@ var BookingOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AutoAcceptRequests" }),
+        SpeakeasyMetadata({ data: "json, name=AutoAcceptRequests" }),
         __metadata("design:type", Boolean)
     ], BookingOptions.prototype, "autoAcceptRequests", void 0);
     __decorate([
-        Metadata({ data: "json, name=AutoDeclineConflictingRequests" }),
+        SpeakeasyMetadata({ data: "json, name=AutoDeclineConflictingRequests" }),
         __metadata("design:type", Boolean)
     ], BookingOptions.prototype, "autoDeclineConflictingRequests", void 0);
     __decorate([
-        Metadata({ data: "json, name=AutoDeclineRecurringRequests" }),
+        SpeakeasyMetadata({ data: "json, name=AutoDeclineRecurringRequests" }),
         __metadata("design:type", Boolean)
     ], BookingOptions.prototype, "autoDeclineRecurringRequests", void 0);
     return BookingOptions;

@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDistrictAdminPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetDistrictAdminRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDistrictAdminPathParams;
 }
 
 
 export class GetDistrictAdminResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   districtAdminResponse?: shared.DistrictAdminResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFound?: shared.NotFound;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

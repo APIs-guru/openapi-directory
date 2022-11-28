@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var LhDeepLinksItcoQueryParams = /** @class */ (function (_super) {
     __extends(LhDeepLinksItcoQueryParams, _super);
@@ -30,71 +30,71 @@ var LhDeepLinksItcoQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=cabin-class" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cabin-class" }),
         __metadata("design:type", String)
     ], LhDeepLinksItcoQueryParams.prototype, "cabinClass", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=catalogues" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=catalogues" }),
         __metadata("design:type", String)
     ], LhDeepLinksItcoQueryParams.prototype, "catalogues", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" }),
         __metadata("design:type", String)
     ], LhDeepLinksItcoQueryParams.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=destination" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=destination" }),
         __metadata("design:type", String)
     ], LhDeepLinksItcoQueryParams.prototype, "destination", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=encryption-key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=encryption-key" }),
         __metadata("design:type", String)
     ], LhDeepLinksItcoQueryParams.prototype, "encryptionKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fare" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fare" }),
         __metadata("design:type", String)
     ], LhDeepLinksItcoQueryParams.prototype, "fare", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fare-currency" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fare-currency" }),
         __metadata("design:type", String)
     ], LhDeepLinksItcoQueryParams.prototype, "fareCurrency", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lang" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" }),
         __metadata("design:type", String)
     ], LhDeepLinksItcoQueryParams.prototype, "lang", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=net-fare" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=net-fare" }),
         __metadata("design:type", String)
     ], LhDeepLinksItcoQueryParams.prototype, "netFare", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=origin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=origin" }),
         __metadata("design:type", String)
     ], LhDeepLinksItcoQueryParams.prototype, "origin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outbound-segments" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outbound-segments" }),
         __metadata("design:type", String)
     ], LhDeepLinksItcoQueryParams.prototype, "outboundSegments", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=partnerid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=partnerid" }),
         __metadata("design:type", String)
     ], LhDeepLinksItcoQueryParams.prototype, "partnerid", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=return-date" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=return-date" }),
         __metadata("design:type", String)
     ], LhDeepLinksItcoQueryParams.prototype, "returnDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=return-segments" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=return-segments" }),
         __metadata("design:type", String)
     ], LhDeepLinksItcoQueryParams.prototype, "returnSegments", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=trackingid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=trackingid" }),
         __metadata("design:type", String)
     ], LhDeepLinksItcoQueryParams.prototype, "trackingid", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=travel-date" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=travel-date" }),
         __metadata("design:type", String)
     ], LhDeepLinksItcoQueryParams.prototype, "travelDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=travelers" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=travelers" }),
         __metadata("design:type", String)
     ], LhDeepLinksItcoQueryParams.prototype, "travelers", void 0);
     return LhDeepLinksItcoQueryParams;
@@ -106,7 +106,7 @@ var LhDeepLinksItcoHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" }),
         __metadata("design:type", String)
     ], LhDeepLinksItcoHeaders.prototype, "accept", void 0);
     return LhDeepLinksItcoHeaders;
@@ -118,7 +118,7 @@ var LhDeepLinksItcoSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeAuth)
     ], LhDeepLinksItcoSecurity.prototype, "auth", void 0);
     return LhDeepLinksItcoSecurity;
@@ -130,15 +130,15 @@ var LhDeepLinksItcoRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LhDeepLinksItcoQueryParams)
     ], LhDeepLinksItcoRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LhDeepLinksItcoHeaders)
     ], LhDeepLinksItcoRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LhDeepLinksItcoSecurity)
     ], LhDeepLinksItcoRequest.prototype, "security", void 0);
     return LhDeepLinksItcoRequest;
@@ -150,15 +150,15 @@ var LhDeepLinksItcoResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], LhDeepLinksItcoResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], LhDeepLinksItcoResponse.prototype, "lhDeepLinksItco200ApplicationJsonString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], LhDeepLinksItcoResponse.prototype, "statusCode", void 0);
     return LhDeepLinksItcoResponse;

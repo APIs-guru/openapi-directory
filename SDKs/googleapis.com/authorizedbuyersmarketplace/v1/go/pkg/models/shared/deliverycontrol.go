@@ -39,6 +39,8 @@ const (
 	DeliveryControlRoadblockingTypeEnumCreativeSet                 DeliveryControlRoadblockingTypeEnum = "CREATIVE_SET"
 )
 
+// DeliveryControl
+// Message contains details about how the deal will be paced.
 type DeliveryControl struct {
 	CompanionDeliveryType *DeliveryControlCompanionDeliveryTypeEnum `json:"companionDeliveryType,omitempty"`
 	CreativeRotationType  *DeliveryControlCreativeRotationTypeEnum  `json:"creativeRotationType,omitempty"`

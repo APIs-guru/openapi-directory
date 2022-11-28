@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImportFilterNameEnum } from "./importfilternameenum";
 import { ImportFilterOperatorEnum } from "./importfilteroperatorenum";
+
 
 
 // ImportFilter
@@ -8,12 +9,12 @@ import { ImportFilterOperatorEnum } from "./importfilteroperatorenum";
  * Filters the response from the operation.
 **/
 export class ImportFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: ImportFilterNameEnum;
 
-  @Metadata({ data: "json, name=operator" })
+  @SpeakeasyMetadata({ data: "json, name=operator" })
   operator: ImportFilterOperatorEnum;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values: string[];
 }

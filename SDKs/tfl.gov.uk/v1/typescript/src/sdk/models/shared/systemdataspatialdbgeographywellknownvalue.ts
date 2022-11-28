@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SystemDataSpatialDbGeographyWellKnownValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=coordinateSystemId" })
+  @SpeakeasyMetadata({ data: "json, name=coordinateSystemId" })
   coordinateSystemId?: number;
 
-  @Metadata({ data: "json, name=wellKnownBinary" })
+  @SpeakeasyMetadata({ data: "json, name=wellKnownBinary" })
   wellKnownBinary?: string;
 
-  @Metadata({ data: "json, name=wellKnownText" })
+  @SpeakeasyMetadata({ data: "json, name=wellKnownText" })
   wellKnownText?: string;
 }

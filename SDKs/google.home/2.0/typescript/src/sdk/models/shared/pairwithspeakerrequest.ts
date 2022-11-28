@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PairwithSpeakerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connect" })
+  @SpeakeasyMetadata({ data: "json, name=connect" })
   connect: boolean;
 
-  @Metadata({ data: "json, name=mac_address" })
+  @SpeakeasyMetadata({ data: "json, name=mac_address" })
   macAddress: string;
 
-  @Metadata({ data: "json, name=profile" })
+  @SpeakeasyMetadata({ data: "json, name=profile" })
   profile: number;
 }

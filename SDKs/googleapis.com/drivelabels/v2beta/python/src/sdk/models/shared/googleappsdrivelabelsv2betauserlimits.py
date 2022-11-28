@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googleappsdrivelabelsv2betalistlimits
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleAppsDriveLabelsV2betaUserLimits:
-    list_limits: Optional[googleappsdrivelabelsv2betalistlimits.GoogleAppsDriveLabelsV2betaListLimits] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'listLimits' }})
+    r"""GoogleAppsDriveLabelsV2betaUserLimits
+    Limits for Field.Type.USER.
+    """
+    
+    list_limits: Optional[GoogleAppsDriveLabelsV2betaListLimits] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('listLimits') }})
     

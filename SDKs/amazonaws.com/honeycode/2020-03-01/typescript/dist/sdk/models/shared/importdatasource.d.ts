@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ImportDataSourceConfig } from "./importdatasourceconfig";
 /**
  * An object that has details about the source of the data that was submitted for import.

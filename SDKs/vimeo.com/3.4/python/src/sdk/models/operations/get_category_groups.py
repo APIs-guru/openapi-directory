@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetCategoryGroupsPathParams:
-    category: str = field(default=None, metadata={'path_param': { 'field_name': 'category', 'style': 'simple', 'explode': False }})
+    category: str = field(metadata={'path_param': { 'field_name': 'category', 'style': 'simple', 'explode': False }})
     
 class GetCategoryGroupsDirectionEnum(str, Enum):
     ASC = "asc"
@@ -29,14 +33,14 @@ class GetCategoryGroupsQueryParams:
 
 @dataclass
 class GetCategoryGroupsRequest:
-    path_params: GetCategoryGroupsPathParams = field(default=None)
-    query_params: GetCategoryGroupsQueryParams = field(default=None)
+    path_params: GetCategoryGroupsPathParams = field()
+    query_params: GetCategoryGroupsQueryParams = field()
     
 
 @dataclass
 class GetCategoryGroupsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     groups: Optional[List[shared.Group]] = field(default=None)
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     

@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PasswordPolicyTypeRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configType" })
+  @SpeakeasyMetadata({ data: "json, name=configType" })
   configType?: string;
 
-  @Metadata({ data: "json, name=defaultValue" })
+  @SpeakeasyMetadata({ data: "json, name=defaultValue" })
   defaultValue?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=multipleSupported" })
+  @SpeakeasyMetadata({ data: "json, name=multipleSupported" })
   multipleSupported?: boolean;
 }

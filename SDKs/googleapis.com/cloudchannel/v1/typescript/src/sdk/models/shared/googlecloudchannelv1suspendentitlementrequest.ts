@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudChannelV1SuspendEntitlementRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for CloudChannelService.SuspendEntitlement.
 **/
 export class GoogleCloudChannelV1SuspendEntitlementRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 }

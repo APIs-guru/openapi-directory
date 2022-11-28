@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsadminPropertiesCustomMetricsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class AnalyticsadminPropertiesCustomMetricsCreateQueryParams:
 
 @dataclass
 class AnalyticsadminPropertiesCustomMetricsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesCustomMetricsCreateRequest:
-    path_params: AnalyticsadminPropertiesCustomMetricsCreatePathParams = field(default=None)
-    query_params: AnalyticsadminPropertiesCustomMetricsCreateQueryParams = field(default=None)
-    request: Optional[shared.GoogleAnalyticsAdminV1alphaCustomMetric] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsadminPropertiesCustomMetricsCreateSecurity = field(default=None)
+    path_params: AnalyticsadminPropertiesCustomMetricsCreatePathParams = field()
+    query_params: AnalyticsadminPropertiesCustomMetricsCreateQueryParams = field()
+    security: AnalyticsadminPropertiesCustomMetricsCreateSecurity = field()
+    request: Optional[shared.GoogleAnalyticsAdminV1alphaCustomMetricInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesCustomMetricsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_custom_metric: Optional[shared.GoogleAnalyticsAdminV1alphaCustomMetric] = field(default=None)
-    status_code: int = field(default=None)
     

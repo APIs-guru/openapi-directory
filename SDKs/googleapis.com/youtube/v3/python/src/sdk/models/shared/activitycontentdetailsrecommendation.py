@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import resourceid
-from . import resourceid
+from sdk import utils
+from . import *
 
 class ActivityContentDetailsRecommendationReasonEnum(str, Enum):
     REASON_UNSPECIFIED = "reasonUnspecified"
@@ -14,7 +15,11 @@ class ActivityContentDetailsRecommendationReasonEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ActivityContentDetailsRecommendation:
-    reason: Optional[ActivityContentDetailsRecommendationReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
-    resource_id: Optional[resourceid.ResourceID] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceId' }})
-    seed_resource_id: Optional[resourceid.ResourceID] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'seedResourceId' }})
+    r"""ActivityContentDetailsRecommendation
+    Information that identifies the recommended resource.
+    """
+    
+    reason: Optional[ActivityContentDetailsRecommendationReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reason') }})
+    resource_id: Optional[ResourceID] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceId') }})
+    seed_resource_id: Optional[ResourceID] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('seedResourceId') }})
     

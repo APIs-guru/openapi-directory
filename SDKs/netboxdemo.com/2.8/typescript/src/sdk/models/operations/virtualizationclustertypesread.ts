@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class VirtualizationClusterTypesReadPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class VirtualizationClusterTypesReadRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: VirtualizationClusterTypesReadPathParams;
 }
 
 
 export class VirtualizationClusterTypesReadResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   clusterType?: shared.ClusterType;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

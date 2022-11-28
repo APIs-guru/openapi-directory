@@ -1,59 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetEventPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=eventId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=eventId" })
   eventId: number;
 }
 
 
-export class GetEventSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class GetEventSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class GetEventSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetEventSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetEventSecurityOption2;
-}
-
-
-export class GetEventRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetEventPathParams;
-
-  @Metadata()
-  security: GetEventSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class GetEventDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class GetEventRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetEventPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetEventSecurity;
+}
+
+
 export class GetEventResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   event?: shared.Event;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getEventDefaultApplicationJsonObject?: GetEventDefaultApplicationJson;
 }

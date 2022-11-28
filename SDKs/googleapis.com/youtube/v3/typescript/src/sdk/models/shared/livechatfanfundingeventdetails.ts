@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LiveChatFanFundingEventDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amountDisplayString" })
+  @SpeakeasyMetadata({ data: "json, name=amountDisplayString" })
   amountDisplayString?: string;
 
-  @Metadata({ data: "json, name=amountMicros" })
+  @SpeakeasyMetadata({ data: "json, name=amountMicros" })
   amountMicros?: string;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: string;
 
-  @Metadata({ data: "json, name=userComment" })
+  @SpeakeasyMetadata({ data: "json, name=userComment" })
   userComment?: string;
 }

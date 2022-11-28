@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssessmentRunFilter } from "./assessmentrunfilter";
 
 
+
 export class ListAssessmentRunsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assessmentTemplateArns" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentTemplateArns" })
   assessmentTemplateArns?: string[];
 
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: AssessmentRunFilter;
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

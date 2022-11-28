@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceTypeEnum } from "./resourcetypeenum";
+
 
 
 // ResourceUri
@@ -7,9 +8,9 @@ import { ResourceTypeEnum } from "./resourcetypeenum";
  * The URIs for function resources.
 **/
 export class ResourceUri extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType?: ResourceTypeEnum;
 
-  @Metadata({ data: "json, name=Uri" })
+  @SpeakeasyMetadata({ data: "json, name=Uri" })
   uri?: string;
 }

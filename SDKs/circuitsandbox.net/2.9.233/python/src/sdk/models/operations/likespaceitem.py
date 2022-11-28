@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class LikeSpaceItemPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class LikeSpaceItemSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class LikeSpaceItemRequest:
-    path_params: LikeSpaceItemPathParams = field(default=None)
-    security: LikeSpaceItemSecurity = field(default=None)
+    path_params: LikeSpaceItemPathParams = field()
+    security: LikeSpaceItemSecurity = field()
     
 
 @dataclass
 class LikeSpaceItemResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

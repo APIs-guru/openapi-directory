@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RejectedPaymentV3 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount: number;
 
-  @Metadata({ data: "json, name=currencyType" })
+  @SpeakeasyMetadata({ data: "json, name=currencyType" })
   currencyType: string;
 
-  @Metadata({ data: "json, name=lineNumber" })
+  @SpeakeasyMetadata({ data: "json, name=lineNumber" })
   lineNumber?: number;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=paymentMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=paymentMetadata" })
   paymentMetadata?: string;
 
-  @Metadata({ data: "json, name=payorPaymentId" })
+  @SpeakeasyMetadata({ data: "json, name=payorPaymentId" })
   payorPaymentId: string;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason: string;
 
-  @Metadata({ data: "json, name=reasonCode" })
+  @SpeakeasyMetadata({ data: "json, name=reasonCode" })
   reasonCode?: string;
 
-  @Metadata({ data: "json, name=remoteId" })
+  @SpeakeasyMetadata({ data: "json, name=remoteId" })
   remoteId: string;
 
-  @Metadata({ data: "json, name=remoteSystemId" })
+  @SpeakeasyMetadata({ data: "json, name=remoteSystemId" })
   remoteSystemId?: string;
 
-  @Metadata({ data: "json, name=sourceAccountName" })
+  @SpeakeasyMetadata({ data: "json, name=sourceAccountName" })
   sourceAccountName: string;
 }

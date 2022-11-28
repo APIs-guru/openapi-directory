@@ -1,5 +1,8 @@
 package shared
 
+// ControlMappingSource
+//
+//	The data source that determines from where Audit Manager collects evidence for the control.
 type ControlMappingSource struct {
 	SourceDescription   *string                `json:"sourceDescription,omitempty"`
 	SourceFrequency     *SourceFrequencyEnum   `json:"sourceFrequency,omitempty"`

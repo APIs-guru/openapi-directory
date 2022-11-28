@@ -15,6 +15,8 @@ type CreateLoggerDefinitionHeaders struct {
 	XAmznClientToken  *string `header:"style=simple,explode=false,name=X-Amzn-Client-Token"`
 }
 
+// CreateLoggerDefinitionRequestBodyInitialVersion
+// Information about a logger definition version.
 type CreateLoggerDefinitionRequestBodyInitialVersion struct {
 	Loggers []shared.Logger `json:"Loggers,omitempty"`
 }

@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResolverQueryLogConfigAssociation } from "./resolverquerylogconfigassociation";
 
 
+
 export class ListResolverQueryLogConfigAssociationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ResolverQueryLogConfigAssociations", elemType: shared.ResolverQueryLogConfigAssociation })
+  @SpeakeasyMetadata({ data: "json, name=ResolverQueryLogConfigAssociations", elemType: ResolverQueryLogConfigAssociation })
   resolverQueryLogConfigAssociations?: ResolverQueryLogConfigAssociation[];
 
-  @Metadata({ data: "json, name=TotalCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalCount" })
   totalCount?: number;
 
-  @Metadata({ data: "json, name=TotalFilteredCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalFilteredCount" })
   totalFilteredCount?: number;
 }

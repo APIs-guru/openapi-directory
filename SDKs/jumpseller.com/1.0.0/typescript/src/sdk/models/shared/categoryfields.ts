@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CategoryFields extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parent_id" })
+  @SpeakeasyMetadata({ data: "json, name=parent_id" })
   parentId?: number;
 
-  @Metadata({ data: "json, name=permalink" })
+  @SpeakeasyMetadata({ data: "json, name=permalink" })
   permalink?: string;
 }

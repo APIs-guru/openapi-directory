@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContainerRecipeSummary } from "./containerrecipesummary";
 
 
+
 export class ListContainerRecipesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerRecipeSummaryList", elemType: shared.ContainerRecipeSummary })
+  @SpeakeasyMetadata({ data: "json, name=containerRecipeSummaryList", elemType: ContainerRecipeSummary })
   containerRecipeSummaryList?: ContainerRecipeSummary[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 }

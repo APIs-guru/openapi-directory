@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InvoiceLineItemEntity } from "./invoicelineitementity";
 import { PaymentLineItemEntity } from "./paymentlineitementity";
+
 
 
 // AccountLineItemEntity
@@ -8,45 +9,45 @@ import { PaymentLineItemEntity } from "./paymentlineitementity";
  * List Payments
 **/
 export class AccountLineItemEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=balance" })
+  @SpeakeasyMetadata({ data: "json, name=balance" })
   balance?: number;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: string;
 
-  @Metadata({ data: "json, name=download_uri" })
+  @SpeakeasyMetadata({ data: "json, name=download_uri" })
   downloadUri?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=invoice_line_items" })
+  @SpeakeasyMetadata({ data: "json, name=invoice_line_items" })
   invoiceLineItems?: InvoiceLineItemEntity;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method?: string;
 
-  @Metadata({ data: "json, name=payment_line_items" })
+  @SpeakeasyMetadata({ data: "json, name=payment_line_items" })
   paymentLineItems?: PaymentLineItemEntity;
 
-  @Metadata({ data: "json, name=payment_reversed_at" })
+  @SpeakeasyMetadata({ data: "json, name=payment_reversed_at" })
   paymentReversedAt?: Date;
 
-  @Metadata({ data: "json, name=payment_type" })
+  @SpeakeasyMetadata({ data: "json, name=payment_type" })
   paymentType?: string;
 
-  @Metadata({ data: "json, name=site_name" })
+  @SpeakeasyMetadata({ data: "json, name=site_name" })
   siteName?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata({ data: "json, name=updated_at" })
   updatedAt?: Date;
 }

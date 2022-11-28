@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PendingMaintenanceAction } from "./pendingmaintenanceaction";
 // ResourcePendingMaintenanceActions
 /**
  * Identifies an DMS resource and any pending actions for it.
@@ -34,11 +34,11 @@ var ResourcePendingMaintenanceActions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PendingMaintenanceActionDetails", elemType: shared.PendingMaintenanceAction }),
+        SpeakeasyMetadata({ data: "json, name=PendingMaintenanceActionDetails", elemType: PendingMaintenanceAction }),
         __metadata("design:type", Array)
     ], ResourcePendingMaintenanceActions.prototype, "pendingMaintenanceActionDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceIdentifier" }),
         __metadata("design:type", String)
     ], ResourcePendingMaintenanceActions.prototype, "resourceIdentifier", void 0);
     return ResourcePendingMaintenanceActions;

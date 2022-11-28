@@ -1,4 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// SshKeyInput
+/** 
+ * An SSH key, used for authorizing with the interactive serial console feature.
+**/
+export class SshKeyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=publicKey" })
+  publicKey?: string;
+}
 
 
 // SshKey
@@ -6,9 +17,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An SSH key, used for authorizing with the interactive serial console feature.
 **/
 export class SshKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=publicKey" })
+  @SpeakeasyMetadata({ data: "json, name=publicKey" })
   publicKey?: string;
 }

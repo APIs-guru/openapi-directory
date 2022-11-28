@@ -1,5 +1,7 @@
 package shared
 
+// LoginResponse
+// Payload of successful login
 type LoginResponse struct {
 	Admin    *bool   `json:"admin,omitempty"`
 	LoginID  *int64  `json:"login_id,omitempty"`

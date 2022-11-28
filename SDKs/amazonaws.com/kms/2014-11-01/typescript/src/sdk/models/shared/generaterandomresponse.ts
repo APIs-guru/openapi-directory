@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GenerateRandomResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Plaintext" })
+  @SpeakeasyMetadata({ data: "json, name=Plaintext" })
   plaintext?: string;
 }

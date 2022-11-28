@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDocumentaiV1GcsDocuments } from "./googleclouddocumentaiv1gcsdocuments";
 import { GoogleCloudDocumentaiV1GcsPrefix } from "./googleclouddocumentaiv1gcsprefix";
+
 
 
 // GoogleCloudDocumentaiV1BatchDocumentsInputConfig
@@ -8,9 +9,9 @@ import { GoogleCloudDocumentaiV1GcsPrefix } from "./googleclouddocumentaiv1gcspr
  * The common config to specify a set of documents used as input.
 **/
 export class GoogleCloudDocumentaiV1BatchDocumentsInputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gcsDocuments" })
+  @SpeakeasyMetadata({ data: "json, name=gcsDocuments" })
   gcsDocuments?: GoogleCloudDocumentaiV1GcsDocuments;
 
-  @Metadata({ data: "json, name=gcsPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=gcsPrefix" })
   gcsPrefix?: GoogleCloudDocumentaiV1GcsPrefix;
 }

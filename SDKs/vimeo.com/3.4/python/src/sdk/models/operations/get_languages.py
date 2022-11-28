@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetLanguagesFilterEnum(str, Enum):
@@ -13,12 +14,12 @@ class GetLanguagesQueryParams:
 
 @dataclass
 class GetLanguagesRequest:
-    query_params: GetLanguagesQueryParams = field(default=None)
+    query_params: GetLanguagesQueryParams = field()
     
 
 @dataclass
 class GetLanguagesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     languages: Optional[List[shared.Language]] = field(default=None)
     

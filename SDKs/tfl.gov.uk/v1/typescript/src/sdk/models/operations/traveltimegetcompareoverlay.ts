@@ -1,79 +1,80 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TravelTimeGetCompareOverlayPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=height" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=height" })
   height: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=mapCenterLat" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mapCenterLat" })
   mapCenterLat: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=mapCenterLon" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mapCenterLon" })
   mapCenterLon: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pinLat" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pinLat" })
   pinLat: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pinLon" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pinLon" })
   pinLon: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=width" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=width" })
   width: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=z" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=z" })
   z: number;
 }
 
 export enum TravelTimeGetCompareOverlayDirectionEnum {
-    Average = "Average"
-,    From = "From"
-,    To = "To"
+    Average = "Average",
+    From = "From",
+    To = "To"
 }
 
 
 export class TravelTimeGetCompareOverlayQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=compareType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=compareType" })
   compareType: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=compareValue" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=compareValue" })
   compareValue: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction: TravelTimeGetCompareOverlayDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=modeId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modeId" })
   modeId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=scenarioTitle" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=scenarioTitle" })
   scenarioTitle: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timeOfDayId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeOfDayId" })
   timeOfDayId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=travelTimeInterval" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=travelTimeInterval" })
   travelTimeInterval: number;
 }
 
 
 export class TravelTimeGetCompareOverlayRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TravelTimeGetCompareOverlayPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: TravelTimeGetCompareOverlayQueryParams;
 }
 
 
 export class TravelTimeGetCompareOverlayResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   systemObject?: Map<string, any>;
 }

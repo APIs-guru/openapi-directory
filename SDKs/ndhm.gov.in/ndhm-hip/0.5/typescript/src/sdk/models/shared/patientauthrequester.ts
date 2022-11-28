@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PatientAuthRequesterTypeEnum {
-    Hip = "HIP"
-,    Hiu = "HIU"
+    Hip = "HIP",
+    Hiu = "HIU"
 }
 
 
@@ -11,9 +12,9 @@ export enum PatientAuthRequesterTypeEnum {
  * identification of requester
 **/
 export class PatientAuthRequester extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: PatientAuthRequesterTypeEnum;
 }

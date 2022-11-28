@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ApiModelsPermissionDataRequiredEnum {
-    Yes = "Yes"
-,    No = "No"
-,    Optional = "Optional"
+    Yes = "Yes",
+    No = "No",
+    Optional = "Optional"
 }
 
 
 export class ApiModelsPermission extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataDescription, form, name=DataDescription;" })
+  @SpeakeasyMetadata({ data: "json, name=DataDescription, form, name=DataDescription;" })
   dataDescription?: string;
 
-  @Metadata({ data: "json, name=DataRequired, form, name=DataRequired;" })
+  @SpeakeasyMetadata({ data: "json, name=DataRequired, form, name=DataRequired;" })
   dataRequired: ApiModelsPermissionDataRequiredEnum;
 
-  @Metadata({ data: "json, name=Description, form, name=Description;" })
+  @SpeakeasyMetadata({ data: "json, name=Description, form, name=Description;" })
   description?: string;
 
-  @Metadata({ data: "json, name=Id, form, name=Id;" })
+  @SpeakeasyMetadata({ data: "json, name=Id, form, name=Id;" })
   id?: number;
 
-  @Metadata({ data: "json, name=Name, form, name=Name;" })
+  @SpeakeasyMetadata({ data: "json, name=Name, form, name=Name;" })
   name: string;
 }

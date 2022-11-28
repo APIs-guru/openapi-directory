@@ -1,5 +1,7 @@
 package shared
 
+// UpdateSharesPasswordPolicies
+// Request model for updating shares password policies
 type UpdateSharesPasswordPolicies struct {
 	CharacterRules         *CharacterRules `json:"characterRules,omitempty"`
 	MinLength              *int32          `json:"minLength,omitempty"`

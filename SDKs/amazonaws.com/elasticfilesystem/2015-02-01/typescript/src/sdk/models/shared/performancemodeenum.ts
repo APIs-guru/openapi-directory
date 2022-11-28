@@ -1,6 +1,7 @@
 
 
+
 export enum PerformanceModeEnum {
-    GeneralPurpose = "generalPurpose"
-,    MaxIo = "maxIO"
+    GeneralPurpose = "generalPurpose",
+    MaxIo = "maxIO"
 }

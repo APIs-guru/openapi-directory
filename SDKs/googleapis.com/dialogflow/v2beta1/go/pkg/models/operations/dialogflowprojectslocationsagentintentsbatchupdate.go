@@ -40,7 +40,7 @@ type DialogflowProjectsLocationsAgentIntentsBatchUpdateSecurity struct {
 type DialogflowProjectsLocationsAgentIntentsBatchUpdateRequest struct {
 	PathParams  DialogflowProjectsLocationsAgentIntentsBatchUpdatePathParams
 	QueryParams DialogflowProjectsLocationsAgentIntentsBatchUpdateQueryParams
-	Request     *shared.GoogleCloudDialogflowV2beta1BatchUpdateIntentsRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudDialogflowV2beta1BatchUpdateIntentsRequestInput `request:"mediaType=application/json"`
 	Security    DialogflowProjectsLocationsAgentIntentsBatchUpdateSecurity
 }
 

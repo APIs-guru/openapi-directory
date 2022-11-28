@@ -1,13 +1,5 @@
 package shared
 
-type ClusterDefaultStorageTypeEnum string
-
-const (
-	ClusterDefaultStorageTypeEnumStorageTypeUnspecified ClusterDefaultStorageTypeEnum = "STORAGE_TYPE_UNSPECIFIED"
-	ClusterDefaultStorageTypeEnumSsd                    ClusterDefaultStorageTypeEnum = "SSD"
-	ClusterDefaultStorageTypeEnumHdd                    ClusterDefaultStorageTypeEnum = "HDD"
-)
-
 type ClusterStateEnum string
 
 const (
@@ -18,6 +10,16 @@ const (
 	ClusterStateEnumDisabled      ClusterStateEnum = "DISABLED"
 )
 
+type ClusterDefaultStorageTypeEnum string
+
+const (
+	ClusterDefaultStorageTypeEnumStorageTypeUnspecified ClusterDefaultStorageTypeEnum = "STORAGE_TYPE_UNSPECIFIED"
+	ClusterDefaultStorageTypeEnumSsd                    ClusterDefaultStorageTypeEnum = "SSD"
+	ClusterDefaultStorageTypeEnumHdd                    ClusterDefaultStorageTypeEnum = "HDD"
+)
+
+// Cluster
+// A resizable group of nodes in a particular cloud location, capable of serving all Tables in the parent Instance.
 type Cluster struct {
 	ClusterConfig      *ClusterConfig                 `json:"clusterConfig,omitempty"`
 	DefaultStorageType *ClusterDefaultStorageTypeEnum `json:"defaultStorageType,omitempty"`
@@ -26,4 +28,15 @@ type Cluster struct {
 	Name               *string                        `json:"name,omitempty"`
 	ServeNodes         *int32                         `json:"serveNodes,omitempty"`
 	State              *ClusterStateEnum              `json:"state,omitempty"`
+}
+
+// ClusterInput
+// A resizable group of nodes in a particular cloud location, capable of serving all Tables in the parent Instance.
+type ClusterInput struct {
+	ClusterConfig      *ClusterConfig                 `json:"clusterConfig,omitempty"`
+	DefaultStorageType *ClusterDefaultStorageTypeEnum `json:"defaultStorageType,omitempty"`
+	EncryptionConfig   *EncryptionConfig              `json:"encryptionConfig,omitempty"`
+	Location           *string                        `json:"location,omitempty"`
+	Name               *string                        `json:"name,omitempty"`
+	ServeNodes         *int32                         `json:"serveNodes,omitempty"`
 }

@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PatchApiV1TenantTenantIdPoolGroupPoolGroupNamePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=poolGroupName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=poolGroupName" })
   poolGroupName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tenantId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tenantId" })
   tenantId: string;
 }
 
 
 export class PatchApiV1TenantTenantIdPoolGroupPoolGroupNameRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   updatePoolGroupBody?: shared.UpdatePoolGroupBody;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   updatePoolGroupBody1?: shared.UpdatePoolGroupBody;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   updatePoolGroupBody2?: shared.UpdatePoolGroupBody;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   updatePoolGroupBody3?: shared.UpdatePoolGroupBody;
 }
 
 
 export class PatchApiV1TenantTenantIdPoolGroupPoolGroupNameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PatchApiV1TenantTenantIdPoolGroupPoolGroupNamePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PatchApiV1TenantTenantIdPoolGroupPoolGroupNameRequests;
 }
 
 
 export class PatchApiV1TenantTenantIdPoolGroupPoolGroupNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

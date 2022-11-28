@@ -4,17 +4,17 @@ from typing import Optional
 
 @dataclass
 class GroupV2GetGroupOptionalConversationsPathParams:
-    group_id: int = field(default=None, metadata={'path_param': { 'field_name': 'groupId', 'style': 'simple', 'explode': False }})
+    group_id: int = field(metadata={'path_param': { 'field_name': 'groupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GroupV2GetGroupOptionalConversationsRequest:
-    path_params: GroupV2GetGroupOptionalConversationsPathParams = field(default=None)
+    path_params: GroupV2GetGroupOptionalConversationsPathParams = field()
     
 
 @dataclass
 class GroupV2GetGroupOptionalConversationsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

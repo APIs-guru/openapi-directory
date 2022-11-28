@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IamPolicyAnalysisQuery } from "./iampolicyanalysisquery";
+
 
 
 // QueryContent
@@ -7,6 +8,6 @@ import { IamPolicyAnalysisQuery } from "./iampolicyanalysisquery";
  * The query content.
 **/
 export class QueryContent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=iamPolicyAnalysisQuery" })
+  @SpeakeasyMetadata({ data: "json, name=iamPolicyAnalysisQuery" })
   iamPolicyAnalysisQuery?: IamPolicyAnalysisQuery;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ThingAttribute } from "./thingattribute";
+
 
 
 // ListThingsResponse
@@ -8,9 +8,9 @@ import { ThingAttribute } from "./thingattribute";
  * The output from the ListThings operation.
 **/
 export class ListThingsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=things", elemType: shared.ThingAttribute })
+  @SpeakeasyMetadata({ data: "json, name=things", elemType: ThingAttribute })
   things?: ThingAttribute[];
 }

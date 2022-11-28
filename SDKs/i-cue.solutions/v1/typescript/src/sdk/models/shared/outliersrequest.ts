@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlanningLevelDataDto } from "./planningleveldatadto";
 
 
+
 export class OutliersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.PlanningLevelDataDto })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: PlanningLevelDataDto })
   data?: PlanningLevelDataDto[];
 
-  @Metadata({ data: "json, name=planningLevelId" })
+  @SpeakeasyMetadata({ data: "json, name=planningLevelId" })
   planningLevelId: string;
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate: string;
 }

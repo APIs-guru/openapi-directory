@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import channel
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetChannelResponse:
-    channel: Optional[channel.Channel] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channel' }})
+    channel: Optional[Channel] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('channel') }})
     

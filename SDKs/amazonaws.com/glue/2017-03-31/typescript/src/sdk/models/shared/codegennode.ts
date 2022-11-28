@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CodeGenNodeArg } from "./codegennodearg";
+
 
 
 // CodeGenNode
@@ -8,15 +8,15 @@ import { CodeGenNodeArg } from "./codegennodearg";
  * Represents a node in a directed acyclic graph (DAG)
 **/
 export class CodeGenNode extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Args", elemType: shared.CodeGenNodeArg })
+  @SpeakeasyMetadata({ data: "json, name=Args", elemType: CodeGenNodeArg })
   args: CodeGenNodeArg[];
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: string;
 
-  @Metadata({ data: "json, name=LineNumber" })
+  @SpeakeasyMetadata({ data: "json, name=LineNumber" })
   lineNumber?: number;
 
-  @Metadata({ data: "json, name=NodeType" })
+  @SpeakeasyMetadata({ data: "json, name=NodeType" })
   nodeType: string;
 }

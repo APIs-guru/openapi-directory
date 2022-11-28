@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolCoapSetTracePathParams = /** @class */ (function (_super) {
     __extends(ProtocolCoapSetTracePathParams, _super);
     function ProtocolCoapSetTracePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolCoapSetTracePathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=enableOrNot" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=enableOrNot" }),
         __metadata("design:type", String)
     ], ProtocolCoapSetTracePathParams.prototype, "enableOrNot", void 0);
     return ProtocolCoapSetTracePathParams;
@@ -45,7 +45,7 @@ var ProtocolCoapSetTraceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolCoapSetTracePathParams)
     ], ProtocolCoapSetTraceRequest.prototype, "pathParams", void 0);
     return ProtocolCoapSetTraceRequest;
@@ -57,15 +57,15 @@ var ProtocolCoapSetTraceResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolCoapSetTraceResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolCoapSetTraceResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolCoapSetTraceResponse.prototype, "protocolCoapSetTrace200ApplicationJsonString", void 0);
     return ProtocolCoapSetTraceResponse;

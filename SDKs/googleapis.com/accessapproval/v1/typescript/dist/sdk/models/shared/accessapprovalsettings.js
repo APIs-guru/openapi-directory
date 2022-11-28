@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { EnrolledService } from "./enrolledservice";
 // AccessApprovalSettings
 /**
  * Settings on a Project/Folder/Organization related to Access Approval.
@@ -34,33 +34,61 @@ var AccessApprovalSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=activeKeyVersion" }),
+        SpeakeasyMetadata({ data: "json, name=activeKeyVersion" }),
         __metadata("design:type", String)
     ], AccessApprovalSettings.prototype, "activeKeyVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=ancestorHasActiveKeyVersion" }),
+        SpeakeasyMetadata({ data: "json, name=ancestorHasActiveKeyVersion" }),
         __metadata("design:type", Boolean)
     ], AccessApprovalSettings.prototype, "ancestorHasActiveKeyVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=enrolledAncestor" }),
+        SpeakeasyMetadata({ data: "json, name=enrolledAncestor" }),
         __metadata("design:type", Boolean)
     ], AccessApprovalSettings.prototype, "enrolledAncestor", void 0);
     __decorate([
-        Metadata({ data: "json, name=enrolledServices", elemType: shared.EnrolledService }),
+        SpeakeasyMetadata({ data: "json, name=enrolledServices", elemType: EnrolledService }),
         __metadata("design:type", Array)
     ], AccessApprovalSettings.prototype, "enrolledServices", void 0);
     __decorate([
-        Metadata({ data: "json, name=invalidKeyVersion" }),
+        SpeakeasyMetadata({ data: "json, name=invalidKeyVersion" }),
         __metadata("design:type", Boolean)
     ], AccessApprovalSettings.prototype, "invalidKeyVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], AccessApprovalSettings.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=notificationEmails" }),
+        SpeakeasyMetadata({ data: "json, name=notificationEmails" }),
         __metadata("design:type", Array)
     ], AccessApprovalSettings.prototype, "notificationEmails", void 0);
     return AccessApprovalSettings;
 }(SpeakeasyBase));
 export { AccessApprovalSettings };
+// AccessApprovalSettingsInput
+/**
+ * Settings on a Project/Folder/Organization related to Access Approval.
+**/
+var AccessApprovalSettingsInput = /** @class */ (function (_super) {
+    __extends(AccessApprovalSettingsInput, _super);
+    function AccessApprovalSettingsInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=activeKeyVersion" }),
+        __metadata("design:type", String)
+    ], AccessApprovalSettingsInput.prototype, "activeKeyVersion", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=enrolledServices", elemType: EnrolledService }),
+        __metadata("design:type", Array)
+    ], AccessApprovalSettingsInput.prototype, "enrolledServices", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], AccessApprovalSettingsInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=notificationEmails" }),
+        __metadata("design:type", Array)
+    ], AccessApprovalSettingsInput.prototype, "notificationEmails", void 0);
+    return AccessApprovalSettingsInput;
+}(SpeakeasyBase));
+export { AccessApprovalSettingsInput };

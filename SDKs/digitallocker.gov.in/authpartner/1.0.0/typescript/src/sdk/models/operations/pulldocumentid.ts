@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PullDocumentIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
-export class PullDocumentIdRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
-  request?: any;
-
-  @Metadata()
-  security: PullDocumentIdSecurity;
-}
-
-
 export class PullDocumentId401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
 export class PullDocumentId404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: any;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: any;
 }
 
 
+export class PullDocumentIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  request?: any;
+
+  @SpeakeasyMetadata()
+  security: PullDocumentIdSecurity;
+}
+
+
 export class PullDocumentIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullDocumentId400ApplicationJsonOneOf?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullDocumentId401ApplicationJsonObject?: PullDocumentId401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullDocumentId404ApplicationJsonObject?: PullDocumentId404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullDocumentId500ApplicationJsonOneOf?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sample?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

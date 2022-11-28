@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.surevoip.co.uk",
 	"https://sandbox.surevoip.co.uk",
 }
@@ -20,10 +20,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://www.surevoip.co.uk/support/wiki/api_documentation - SureVoIP API Wiki
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -34,33 +39,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DeleteCustomersAccountAnnouncementsAnnouncementID - Delete an announcement audio file
 func (s *SDK) DeleteCustomersAccountAnnouncementsAnnouncementID(ctx context.Context, request operations.DeleteCustomersAccountAnnouncementsAnnouncementIDRequest) (*operations.DeleteCustomersAccountAnnouncementsAnnouncementIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/customers/{account}/announcements/{announcement_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -68,7 +95,7 @@ func (s *SDK) DeleteCustomersAccountAnnouncementsAnnouncementID(ctx context.Cont
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -108,8 +135,9 @@ func (s *SDK) DeleteCustomersAccountAnnouncementsAnnouncementID(ctx context.Cont
 	return res, nil
 }
 
+// Get - List global resources
 func (s *SDK) Get(ctx context.Context, request operations.GetRequest) (*operations.GetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -119,7 +147,7 @@ func (s *SDK) Get(ctx context.Context, request operations.GetRequest) (*operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -156,8 +184,9 @@ func (s *SDK) Get(ctx context.Context, request operations.GetRequest) (*operatio
 	return res, nil
 }
 
+// GetAnnouncements - List global announcements
 func (s *SDK) GetAnnouncements(ctx context.Context) (*operations.GetAnnouncementsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/announcements"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -165,7 +194,7 @@ func (s *SDK) GetAnnouncements(ctx context.Context) (*operations.GetAnnouncement
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -202,8 +231,9 @@ func (s *SDK) GetAnnouncements(ctx context.Context) (*operations.GetAnnouncement
 	return res, nil
 }
 
+// GetAreacodes - List areacodes
 func (s *SDK) GetAreacodes(ctx context.Context) (*operations.GetAreacodesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/areacodes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -211,7 +241,7 @@ func (s *SDK) GetAreacodes(ctx context.Context) (*operations.GetAreacodesRespons
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -232,8 +262,9 @@ func (s *SDK) GetAreacodes(ctx context.Context) (*operations.GetAreacodesRespons
 	return res, nil
 }
 
+// GetBilling - List global billing detail
 func (s *SDK) GetBilling(ctx context.Context) (*operations.GetBillingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/billing"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -241,7 +272,7 @@ func (s *SDK) GetBilling(ctx context.Context) (*operations.GetBillingResponse, e
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -262,8 +293,9 @@ func (s *SDK) GetBilling(ctx context.Context) (*operations.GetBillingResponse, e
 	return res, nil
 }
 
+// GetCalls - Validate a phone number by calling it once
 func (s *SDK) GetCalls(ctx context.Context, request operations.GetCallsRequest) (*operations.GetCallsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/calls"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -273,7 +305,7 @@ func (s *SDK) GetCalls(ctx context.Context, request operations.GetCallsRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -323,8 +355,9 @@ func (s *SDK) GetCalls(ctx context.Context, request operations.GetCallsRequest) 
 	return res, nil
 }
 
+// GetCharges - List charges
 func (s *SDK) GetCharges(ctx context.Context) (*operations.GetChargesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/charges"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -332,7 +365,7 @@ func (s *SDK) GetCharges(ctx context.Context) (*operations.GetChargesResponse, e
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -353,8 +386,9 @@ func (s *SDK) GetCharges(ctx context.Context) (*operations.GetChargesResponse, e
 	return res, nil
 }
 
+// GetContacts - List contacts
 func (s *SDK) GetContacts(ctx context.Context) (*operations.GetContactsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/contacts"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -362,7 +396,7 @@ func (s *SDK) GetContacts(ctx context.Context) (*operations.GetContactsResponse,
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -383,8 +417,9 @@ func (s *SDK) GetContacts(ctx context.Context) (*operations.GetContactsResponse,
 	return res, nil
 }
 
+// GetCustomers - List all customers or find your own account
 func (s *SDK) GetCustomers(ctx context.Context) (*operations.GetCustomersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/customers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -392,7 +427,7 @@ func (s *SDK) GetCustomers(ctx context.Context) (*operations.GetCustomersRespons
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -424,8 +459,9 @@ func (s *SDK) GetCustomers(ctx context.Context) (*operations.GetCustomersRespons
 	return res, nil
 }
 
+// GetCustomersAccountAnnouncements - List of announcement audio files
 func (s *SDK) GetCustomersAccountAnnouncements(ctx context.Context, request operations.GetCustomersAccountAnnouncementsRequest) (*operations.GetCustomersAccountAnnouncementsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/customers/{account}/announcements", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -433,7 +469,7 @@ func (s *SDK) GetCustomersAccountAnnouncements(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -473,8 +509,9 @@ func (s *SDK) GetCustomersAccountAnnouncements(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetCustomersAccountAnnouncementsAnnouncementID - Represents an announcement audio file
 func (s *SDK) GetCustomersAccountAnnouncementsAnnouncementID(ctx context.Context, request operations.GetCustomersAccountAnnouncementsAnnouncementIDRequest) (*operations.GetCustomersAccountAnnouncementsAnnouncementIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/customers/{account}/announcements/{announcement_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -482,7 +519,7 @@ func (s *SDK) GetCustomersAccountAnnouncementsAnnouncementID(ctx context.Context
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -522,8 +559,9 @@ func (s *SDK) GetCustomersAccountAnnouncementsAnnouncementID(ctx context.Context
 	return res, nil
 }
 
+// GetFaxes - List global ongoing faxes
 func (s *SDK) GetFaxes(ctx context.Context) (*operations.GetFaxesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/faxes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -531,7 +569,7 @@ func (s *SDK) GetFaxes(ctx context.Context) (*operations.GetFaxesResponse, error
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -552,8 +590,9 @@ func (s *SDK) GetFaxes(ctx context.Context) (*operations.GetFaxesResponse, error
 	return res, nil
 }
 
+// GetHosted - List Hosted VoIP domains
 func (s *SDK) GetHosted(ctx context.Context) (*operations.GetHostedResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/hosted"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -561,7 +600,7 @@ func (s *SDK) GetHosted(ctx context.Context) (*operations.GetHostedResponse, err
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -582,8 +621,9 @@ func (s *SDK) GetHosted(ctx context.Context) (*operations.GetHostedResponse, err
 	return res, nil
 }
 
+// GetIPAddress - Return the IP address from where your API request originated
 func (s *SDK) GetIPAddress(ctx context.Context) (*operations.GetIPAddressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ip-address"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -591,7 +631,7 @@ func (s *SDK) GetIPAddress(ctx context.Context) (*operations.GetIPAddressRespons
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -612,8 +652,9 @@ func (s *SDK) GetIPAddress(ctx context.Context) (*operations.GetIPAddressRespons
 	return res, nil
 }
 
+// GetMobile - List mobile accounts
 func (s *SDK) GetMobile(ctx context.Context) (*operations.GetMobileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/mobile"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -621,7 +662,7 @@ func (s *SDK) GetMobile(ctx context.Context) (*operations.GetMobileResponse, err
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -642,8 +683,9 @@ func (s *SDK) GetMobile(ctx context.Context) (*operations.GetMobileResponse, err
 	return res, nil
 }
 
+// GetNumbers - List available SureVoIP Ofcom number allocations for purchase
 func (s *SDK) GetNumbers(ctx context.Context) (*operations.GetNumbersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/numbers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -651,7 +693,7 @@ func (s *SDK) GetNumbers(ctx context.Context) (*operations.GetNumbersResponse, e
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -672,8 +714,10 @@ func (s *SDK) GetNumbers(ctx context.Context) (*operations.GetNumbersResponse, e
 	return res, nil
 }
 
+// GetNumbersAreacodes - Search available numbers by areacode
+// You can search by area name, area code or filter using both.
 func (s *SDK) GetNumbersAreacodes(ctx context.Context) (*operations.GetNumbersAreacodesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/numbers/areacodes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -681,7 +725,7 @@ func (s *SDK) GetNumbersAreacodes(ctx context.Context) (*operations.GetNumbersAr
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -711,8 +755,9 @@ func (s *SDK) GetNumbersAreacodes(ctx context.Context) (*operations.GetNumbersAr
 	return res, nil
 }
 
+// GetPartners - List SureVoIP Partner accounts
 func (s *SDK) GetPartners(ctx context.Context) (*operations.GetPartnersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/partners"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -720,7 +765,7 @@ func (s *SDK) GetPartners(ctx context.Context) (*operations.GetPartnersResponse,
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -741,8 +786,9 @@ func (s *SDK) GetPartners(ctx context.Context) (*operations.GetPartnersResponse,
 	return res, nil
 }
 
+// GetPorting - List ported numbers
 func (s *SDK) GetPorting(ctx context.Context) (*operations.GetPortingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/porting"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -750,7 +796,7 @@ func (s *SDK) GetPorting(ctx context.Context) (*operations.GetPortingResponse, e
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -771,8 +817,9 @@ func (s *SDK) GetPorting(ctx context.Context) (*operations.GetPortingResponse, e
 	return res, nil
 }
 
+// GetServiceStatus - List all Service Status messages
 func (s *SDK) GetServiceStatus(ctx context.Context) (*operations.GetServiceStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/service-status"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -780,7 +827,7 @@ func (s *SDK) GetServiceStatus(ctx context.Context) (*operations.GetServiceStatu
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -801,8 +848,9 @@ func (s *SDK) GetServiceStatus(ctx context.Context) (*operations.GetServiceStatu
 	return res, nil
 }
 
+// GetSip - List all SIP accounts
 func (s *SDK) GetSip(ctx context.Context) (*operations.GetSipResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/sip"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -810,7 +858,7 @@ func (s *SDK) GetSip(ctx context.Context) (*operations.GetSipResponse, error) {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -831,8 +879,9 @@ func (s *SDK) GetSip(ctx context.Context) (*operations.GetSipResponse, error) {
 	return res, nil
 }
 
+// GetSms - List SMS
 func (s *SDK) GetSms(ctx context.Context) (*operations.GetSmsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/sms"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -840,7 +889,7 @@ func (s *SDK) GetSms(ctx context.Context) (*operations.GetSmsResponse, error) {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -861,8 +910,9 @@ func (s *SDK) GetSms(ctx context.Context) (*operations.GetSmsResponse, error) {
 	return res, nil
 }
 
+// GetSupportIPAddress - Return the IP address from where your API request originated
 func (s *SDK) GetSupportIPAddress(ctx context.Context) (*operations.GetSupportIPAddressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/support/ip-address"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -870,7 +920,7 @@ func (s *SDK) GetSupportIPAddress(ctx context.Context) (*operations.GetSupportIP
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -891,8 +941,9 @@ func (s *SDK) GetSupportIPAddress(ctx context.Context) (*operations.GetSupportIP
 	return res, nil
 }
 
+// GetSupportServiceStatus - List all Service Status messages
 func (s *SDK) GetSupportServiceStatus(ctx context.Context) (*operations.GetSupportServiceStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/support/service-status"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -900,7 +951,7 @@ func (s *SDK) GetSupportServiceStatus(ctx context.Context) (*operations.GetSuppo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -921,8 +972,9 @@ func (s *SDK) GetSupportServiceStatus(ctx context.Context) (*operations.GetSuppo
 	return res, nil
 }
 
+// GetTopups - List all account credit topups
 func (s *SDK) GetTopups(ctx context.Context) (*operations.GetTopupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/topups"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -930,7 +982,7 @@ func (s *SDK) GetTopups(ctx context.Context) (*operations.GetTopupsResponse, err
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -951,8 +1003,9 @@ func (s *SDK) GetTopups(ctx context.Context) (*operations.GetTopupsResponse, err
 	return res, nil
 }
 
+// PostAnnouncements - Add a new announcement audio file
 func (s *SDK) PostAnnouncements(ctx context.Context, request operations.PostAnnouncementsRequest) (*operations.PostAnnouncementsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/announcements"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -970,7 +1023,7 @@ func (s *SDK) PostAnnouncements(ctx context.Context, request operations.PostAnno
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1030,8 +1083,9 @@ func (s *SDK) PostAnnouncements(ctx context.Context, request operations.PostAnno
 	return res, nil
 }
 
+// PostCalls - Create phone calls with or without announcements and scheduled hangups
 func (s *SDK) PostCalls(ctx context.Context, request operations.PostCallsRequest) (*operations.PostCallsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/calls"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1049,7 +1103,7 @@ func (s *SDK) PostCalls(ctx context.Context, request operations.PostCallsRequest
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1102,8 +1156,9 @@ func (s *SDK) PostCalls(ctx context.Context, request operations.PostCallsRequest
 	return res, nil
 }
 
+// PostCharges - Create charges for invoices
 func (s *SDK) PostCharges(ctx context.Context) (*operations.PostChargesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/charges"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1111,7 +1166,7 @@ func (s *SDK) PostCharges(ctx context.Context) (*operations.PostChargesResponse,
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1132,8 +1187,9 @@ func (s *SDK) PostCharges(ctx context.Context) (*operations.PostChargesResponse,
 	return res, nil
 }
 
+// PostSupportEcho - Return your POSTed data for testing
 func (s *SDK) PostSupportEcho(ctx context.Context) (*operations.PostSupportEchoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/support/echo"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1141,7 +1197,7 @@ func (s *SDK) PostSupportEcho(ctx context.Context) (*operations.PostSupportEchoR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1162,8 +1218,9 @@ func (s *SDK) PostSupportEcho(ctx context.Context) (*operations.PostSupportEchoR
 	return res, nil
 }
 
+// GetCustomer - Represents a customer
 func (s *SDK) GetCustomer(ctx context.Context, request operations.GetCustomerRequest) (*operations.GetCustomerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/customers/{account}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1171,7 +1228,7 @@ func (s *SDK) GetCustomer(ctx context.Context, request operations.GetCustomerReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

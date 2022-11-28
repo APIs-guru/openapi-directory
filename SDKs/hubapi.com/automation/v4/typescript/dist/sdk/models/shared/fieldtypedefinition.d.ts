@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Option } from "./option";
 export declare enum FieldTypeDefinitionFieldTypeEnum {
     Booleancheckbox = "booleancheckbox",

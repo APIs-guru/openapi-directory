@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateSoftwareUpdateJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IotJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=IotJobArn" })
   iotJobArn?: string;
 
-  @Metadata({ data: "json, name=IotJobId" })
+  @SpeakeasyMetadata({ data: "json, name=IotJobId" })
   iotJobId?: string;
 
-  @Metadata({ data: "json, name=PlatformSoftwareVersion" })
+  @SpeakeasyMetadata({ data: "json, name=PlatformSoftwareVersion" })
   platformSoftwareVersion?: string;
 }

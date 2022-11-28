@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ClassroomCoursesCourseWorkMaterialsListPathParams = /** @class */ (function (_super) {
     __extends(ClassroomCoursesCourseWorkMaterialsListPathParams, _super);
@@ -30,7 +30,7 @@ var ClassroomCoursesCourseWorkMaterialsListPathParams = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=courseId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=courseId" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkMaterialsListPathParams.prototype, "courseId", void 0);
     return ClassroomCoursesCourseWorkMaterialsListPathParams;
@@ -49,71 +49,71 @@ var ClassroomCoursesCourseWorkMaterialsListQueryParams = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkMaterialsListQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkMaterialsListQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkMaterialsListQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkMaterialsListQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=courseWorkMaterialStates" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=courseWorkMaterialStates" }),
         __metadata("design:type", Array)
     ], ClassroomCoursesCourseWorkMaterialsListQueryParams.prototype, "courseWorkMaterialStates", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkMaterialsListQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkMaterialsListQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=materialDriveId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=materialDriveId" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkMaterialsListQueryParams.prototype, "materialDriveId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=materialLink" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=materialLink" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkMaterialsListQueryParams.prototype, "materialLink", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkMaterialsListQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=orderBy" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=orderBy" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkMaterialsListQueryParams.prototype, "orderBy", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
         __metadata("design:type", Number)
     ], ClassroomCoursesCourseWorkMaterialsListQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkMaterialsListQueryParams.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], ClassroomCoursesCourseWorkMaterialsListQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkMaterialsListQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkMaterialsListQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkMaterialsListQueryParams.prototype, "uploadProtocol", void 0);
     return ClassroomCoursesCourseWorkMaterialsListQueryParams;
@@ -125,11 +125,11 @@ var ClassroomCoursesCourseWorkMaterialsListSecurityOption1 = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], ClassroomCoursesCourseWorkMaterialsListSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], ClassroomCoursesCourseWorkMaterialsListSecurityOption1.prototype, "oauth2c", void 0);
     return ClassroomCoursesCourseWorkMaterialsListSecurityOption1;
@@ -141,11 +141,11 @@ var ClassroomCoursesCourseWorkMaterialsListSecurityOption2 = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], ClassroomCoursesCourseWorkMaterialsListSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], ClassroomCoursesCourseWorkMaterialsListSecurityOption2.prototype, "oauth2c", void 0);
     return ClassroomCoursesCourseWorkMaterialsListSecurityOption2;
@@ -157,11 +157,11 @@ var ClassroomCoursesCourseWorkMaterialsListSecurity = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", ClassroomCoursesCourseWorkMaterialsListSecurityOption1)
     ], ClassroomCoursesCourseWorkMaterialsListSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", ClassroomCoursesCourseWorkMaterialsListSecurityOption2)
     ], ClassroomCoursesCourseWorkMaterialsListSecurity.prototype, "option2", void 0);
     return ClassroomCoursesCourseWorkMaterialsListSecurity;
@@ -173,15 +173,15 @@ var ClassroomCoursesCourseWorkMaterialsListRequest = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ClassroomCoursesCourseWorkMaterialsListPathParams)
     ], ClassroomCoursesCourseWorkMaterialsListRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ClassroomCoursesCourseWorkMaterialsListQueryParams)
     ], ClassroomCoursesCourseWorkMaterialsListRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ClassroomCoursesCourseWorkMaterialsListSecurity)
     ], ClassroomCoursesCourseWorkMaterialsListRequest.prototype, "security", void 0);
     return ClassroomCoursesCourseWorkMaterialsListRequest;
@@ -193,15 +193,15 @@ var ClassroomCoursesCourseWorkMaterialsListResponse = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ClassroomCoursesCourseWorkMaterialsListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListCourseWorkMaterialResponse)
     ], ClassroomCoursesCourseWorkMaterialsListResponse.prototype, "listCourseWorkMaterialResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ClassroomCoursesCourseWorkMaterialsListResponse.prototype, "statusCode", void 0);
     return ClassroomCoursesCourseWorkMaterialsListResponse;

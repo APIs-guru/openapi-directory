@@ -1,34 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesDisruption } from "./tflapipresentationentitiesdisruption";
 import { TflApiPresentationEntitiesValidityPeriod } from "./tflapipresentationentitiesvalidityperiod";
 
 
+
 export class TflApiPresentationEntitiesLineStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=disruption" })
+  @SpeakeasyMetadata({ data: "json, name=disruption" })
   disruption?: TflApiPresentationEntitiesDisruption;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=lineId" })
+  @SpeakeasyMetadata({ data: "json, name=lineId" })
   lineId?: string;
 
-  @Metadata({ data: "json, name=modified" })
+  @SpeakeasyMetadata({ data: "json, name=modified" })
   modified?: Date;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 
-  @Metadata({ data: "json, name=statusSeverity" })
+  @SpeakeasyMetadata({ data: "json, name=statusSeverity" })
   statusSeverity?: number;
 
-  @Metadata({ data: "json, name=statusSeverityDescription" })
+  @SpeakeasyMetadata({ data: "json, name=statusSeverityDescription" })
   statusSeverityDescription?: string;
 
-  @Metadata({ data: "json, name=validityPeriods", elemType: shared.TflApiPresentationEntitiesValidityPeriod })
+  @SpeakeasyMetadata({ data: "json, name=validityPeriods", elemType: TflApiPresentationEntitiesValidityPeriod })
   validityPeriods?: TflApiPresentationEntitiesValidityPeriod[];
 }

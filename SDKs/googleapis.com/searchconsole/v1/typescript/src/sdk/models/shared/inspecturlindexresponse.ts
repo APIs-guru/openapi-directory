@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UrlInspectionResult } from "./urlinspectionresult";
+
 
 
 // InspectUrlIndexResponse
@@ -7,6 +8,6 @@ import { UrlInspectionResult } from "./urlinspectionresult";
  * Index-Status inspection response.
 **/
 export class InspectUrlIndexResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inspectionResult" })
+  @SpeakeasyMetadata({ data: "json, name=inspectionResult" })
   inspectionResult?: UrlInspectionResult;
 }

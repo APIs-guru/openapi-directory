@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FilteredLogEvent
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a matched event.
 **/
 export class FilteredLogEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventId" })
+  @SpeakeasyMetadata({ data: "json, name=eventId" })
   eventId?: string;
 
-  @Metadata({ data: "json, name=ingestionTime" })
+  @SpeakeasyMetadata({ data: "json, name=ingestionTime" })
   ingestionTime?: number;
 
-  @Metadata({ data: "json, name=logStreamName" })
+  @SpeakeasyMetadata({ data: "json, name=logStreamName" })
   logStreamName?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: number;
 }

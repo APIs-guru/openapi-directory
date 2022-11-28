@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BuiltInIntentSummary
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides summary information about a built-in intent for the <a>ListBuiltInIntents</a> operation.
 **/
 export class BuiltInIntentSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=intentSignature" })
+  @SpeakeasyMetadata({ data: "json, name=intentSignature" })
   intentSignature?: string;
 }

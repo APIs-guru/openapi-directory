@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RichLinkProperties
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Properties specific to a RichLink.
 **/
 export class RichLinkProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mimeType" })
+  @SpeakeasyMetadata({ data: "json, name=mimeType" })
   mimeType?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

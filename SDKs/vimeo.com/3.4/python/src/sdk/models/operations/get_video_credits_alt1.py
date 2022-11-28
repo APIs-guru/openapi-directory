@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetVideoCreditsAlt1PathParams:
-    channel_id: float = field(default=None, metadata={'path_param': { 'field_name': 'channel_id', 'style': 'simple', 'explode': False }})
-    video_id: float = field(default=None, metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
+    channel_id: float = field(metadata={'path_param': { 'field_name': 'channel_id', 'style': 'simple', 'explode': False }})
+    video_id: float = field(metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
     
 class GetVideoCreditsAlt1DirectionEnum(str, Enum):
     ASC = "asc"
@@ -28,13 +32,13 @@ class GetVideoCreditsAlt1QueryParams:
 
 @dataclass
 class GetVideoCreditsAlt1Request:
-    path_params: GetVideoCreditsAlt1PathParams = field(default=None)
-    query_params: GetVideoCreditsAlt1QueryParams = field(default=None)
+    path_params: GetVideoCreditsAlt1PathParams = field()
+    query_params: GetVideoCreditsAlt1QueryParams = field()
     
 
 @dataclass
 class GetVideoCreditsAlt1Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     credits: Optional[List[shared.Credit]] = field(default=None)
     

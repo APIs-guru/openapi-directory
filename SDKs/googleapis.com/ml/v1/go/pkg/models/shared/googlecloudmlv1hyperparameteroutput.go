@@ -13,6 +13,8 @@ const (
 	GoogleCloudMlV1HyperparameterOutputStateEnumCancelled        GoogleCloudMlV1HyperparameterOutputStateEnum = "CANCELLED"
 )
 
+// GoogleCloudMlV1HyperparameterOutput
+// Represents the result of a single hyperparameter tuning trial from a training job. The TrainingOutput object that is returned on successful completion of a training job with hyperparameter tuning includes a list of HyperparameterOutput objects, one for each successful trial.
 type GoogleCloudMlV1HyperparameterOutput struct {
 	AllMetrics             []GoogleCloudMlV1HyperparameterOutputHyperparameterMetric `json:"allMetrics,omitempty"`
 	BuiltInAlgorithmOutput *GoogleCloudMlV1BuiltInAlgorithmOutput                    `json:"builtInAlgorithmOutput,omitempty"`

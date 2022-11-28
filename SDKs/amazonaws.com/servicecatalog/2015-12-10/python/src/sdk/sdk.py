@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/servicecatalog/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/servicecatalog/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def accept_portfolio_share(self, request: operations.AcceptPortfolioShareRequest) -> operations.AcceptPortfolioShareResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Accepts an offer to share the specified portfolio.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.AcceptPortfolioShare"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -71,22 +100,22 @@ class SDK:
 
     
     def associate_budget_with_resource(self, request: operations.AssociateBudgetWithResourceRequest) -> operations.AssociateBudgetWithResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Associates the specified budget with the specified resource.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.AssociateBudgetWithResource"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -117,22 +146,22 @@ class SDK:
 
     
     def associate_principal_with_portfolio(self, request: operations.AssociatePrincipalWithPortfolioRequest) -> operations.AssociatePrincipalWithPortfolioResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Associates the specified principal ARN with the specified portfolio.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.AssociatePrincipalWithPortfolio"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -159,22 +188,22 @@ class SDK:
 
     
     def associate_product_with_portfolio(self, request: operations.AssociateProductWithPortfolioRequest) -> operations.AssociateProductWithPortfolioResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Associates the specified product with the specified portfolio.</p> <p>A delegated admin is authorized to invoke this command.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.AssociateProductWithPortfolio"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -201,22 +230,22 @@ class SDK:
 
     
     def associate_service_action_with_provisioning_artifact(self, request: operations.AssociateServiceActionWithProvisioningArtifactRequest) -> operations.AssociateServiceActionWithProvisioningArtifactResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Associates a self-service action with a provisioning artifact.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.AssociateServiceActionWithProvisioningArtifact"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -243,22 +272,22 @@ class SDK:
 
     
     def associate_tag_option_with_resource(self, request: operations.AssociateTagOptionWithResourceRequest) -> operations.AssociateTagOptionWithResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Associate the specified TagOption with the specified portfolio or product.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.AssociateTagOptionWithResource"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -297,22 +326,22 @@ class SDK:
 
     
     def batch_associate_service_action_with_provisioning_artifact(self, request: operations.BatchAssociateServiceActionWithProvisioningArtifactRequest) -> operations.BatchAssociateServiceActionWithProvisioningArtifactResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Associates multiple self-service actions with provisioning artifacts.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.BatchAssociateServiceActionWithProvisioningArtifact"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -331,22 +360,22 @@ class SDK:
 
     
     def batch_disassociate_service_action_from_provisioning_artifact(self, request: operations.BatchDisassociateServiceActionFromProvisioningArtifactRequest) -> operations.BatchDisassociateServiceActionFromProvisioningArtifactResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disassociates a batch of self-service actions from the specified provisioning artifact.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.BatchDisassociateServiceActionFromProvisioningArtifact"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -365,22 +394,22 @@ class SDK:
 
     
     def copy_product(self, request: operations.CopyProductRequest) -> operations.CopyProductResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Copies the specified source product to the specified target product or a new product.</p> <p>You can copy a product to the same account or another account. You can copy a product to the same region or another region.</p> <p>This operation is performed asynchronously. To track the progress of the operation, use <a>DescribeCopyProductStatus</a>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.CopyProduct"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -403,22 +432,22 @@ class SDK:
 
     
     def create_constraint(self, request: operations.CreateConstraintRequest) -> operations.CreateConstraintResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a constraint.</p> <p>A delegated admin is authorized to invoke this command.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.CreateConstraint"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -449,22 +478,22 @@ class SDK:
 
     
     def create_portfolio(self, request: operations.CreatePortfolioRequest) -> operations.CreatePortfolioResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a portfolio.</p> <p>A delegated admin is authorized to invoke this command.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.CreatePortfolio"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -491,22 +520,22 @@ class SDK:
 
     
     def create_portfolio_share(self, request: operations.CreatePortfolioShareRequest) -> operations.CreatePortfolioShareResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the management account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account.</p> <p>Note that if a delegated admin is de-registered, they can no longer create portfolio shares.</p> <p> <code>AWSOrganizationsAccess</code> must be enabled in order to create a portfolio share to an organization node.</p> <p>You can't share a shared resource, including portfolios that contain a shared product.</p> <p>If the portfolio share with the specified account or organization node already exists, this action will have no effect and will not return an error. To update an existing share, you must use the <code> UpdatePortfolioShare</code> API instead.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.CreatePortfolioShare"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -541,22 +570,22 @@ class SDK:
 
     
     def create_product(self, request: operations.CreateProductRequest) -> operations.CreateProductResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a product.</p> <p>A delegated admin is authorized to invoke this command.</p> <p>The user or role that performs this operation must have the <code>cloudformation:GetTemplate</code> IAM policy permission. This policy permission is required when using the <code>ImportFromPhysicalId</code> template source in the information data section.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.CreateProduct"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -583,22 +612,22 @@ class SDK:
 
     
     def create_provisioned_product_plan(self, request: operations.CreateProvisionedProductPlanRequest) -> operations.CreateProvisionedProductPlanResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a plan. A plan includes the list of resources to be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed.</p> <p>You can create one plan per provisioned product. To create a plan for an existing provisioned product, the product status must be AVAILBLE or TAINTED.</p> <p>To view the resource changes in the change set, use <a>DescribeProvisionedProductPlan</a>. To create or modify the provisioned product, use <a>ExecuteProvisionedProductPlan</a>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.CreateProvisionedProductPlan"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -625,22 +654,22 @@ class SDK:
 
     
     def create_provisioning_artifact(self, request: operations.CreateProvisioningArtifactRequest) -> operations.CreateProvisioningArtifactResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates a provisioning artifact (also known as a version) for the specified product.</p> <p>You cannot create a provisioning artifact for a product that was shared with you.</p> <p>The user or role that performs this operation must have the <code>cloudformation:GetTemplate</code> IAM policy permission. This policy permission is required when using the <code>ImportFromPhysicalId</code> template source in the information data section.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.CreateProvisioningArtifact"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -667,22 +696,22 @@ class SDK:
 
     
     def create_service_action(self, request: operations.CreateServiceActionRequest) -> operations.CreateServiceActionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a self-service action.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.CreateServiceAction"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -705,22 +734,22 @@ class SDK:
 
     
     def create_tag_option(self, request: operations.CreateTagOptionRequest) -> operations.CreateTagOptionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a TagOption.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.CreateTagOption"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -747,22 +776,22 @@ class SDK:
 
     
     def delete_constraint(self, request: operations.DeleteConstraintRequest) -> operations.DeleteConstraintResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Deletes the specified constraint.</p> <p>A delegated admin is authorized to invoke this command.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DeleteConstraint"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -785,22 +814,22 @@ class SDK:
 
     
     def delete_portfolio(self, request: operations.DeletePortfolioRequest) -> operations.DeletePortfolioResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Deletes the specified portfolio.</p> <p>You cannot delete a portfolio if it was shared with you or if it has associated products, users, constraints, or shared accounts.</p> <p>A delegated admin is authorized to invoke this command.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DeletePortfolio"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -831,22 +860,22 @@ class SDK:
 
     
     def delete_portfolio_share(self, request: operations.DeletePortfolioShareRequest) -> operations.DeletePortfolioShareResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Stops sharing the specified portfolio with the specified account or organization node. Shares to an organization node can only be deleted by the management account of an organization or by a delegated administrator.</p> <p>Note that if a delegated admin is de-registered, portfolio shares created from that account are removed.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DeletePortfolioShare"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -877,22 +906,22 @@ class SDK:
 
     
     def delete_product(self, request: operations.DeleteProductRequest) -> operations.DeleteProductResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Deletes the specified product.</p> <p>You cannot delete a product if it was shared with you or is associated with a portfolio.</p> <p>A delegated admin is authorized to invoke this command.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DeleteProduct"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -923,22 +952,22 @@ class SDK:
 
     
     def delete_provisioned_product_plan(self, request: operations.DeleteProvisionedProductPlanRequest) -> operations.DeleteProvisionedProductPlanResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes the specified plan.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DeleteProvisionedProductPlan"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -961,22 +990,22 @@ class SDK:
 
     
     def delete_provisioning_artifact(self, request: operations.DeleteProvisioningArtifactRequest) -> operations.DeleteProvisioningArtifactResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Deletes the specified provisioning artifact (also known as a version) for the specified product.</p> <p>You cannot delete a provisioning artifact associated with a product that was shared with you. You cannot delete the last provisioning artifact for a product, because a product must have at least one provisioning artifact.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DeleteProvisioningArtifact"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1003,22 +1032,22 @@ class SDK:
 
     
     def delete_service_action(self, request: operations.DeleteServiceActionRequest) -> operations.DeleteServiceActionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a self-service action.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DeleteServiceAction"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1041,22 +1070,22 @@ class SDK:
 
     
     def delete_tag_option(self, request: operations.DeleteTagOptionRequest) -> operations.DeleteTagOptionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Deletes the specified TagOption.</p> <p>You cannot delete a TagOption if it is associated with a product or portfolio.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DeleteTagOption"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1083,22 +1112,22 @@ class SDK:
 
     
     def describe_constraint(self, request: operations.DescribeConstraintRequest) -> operations.DescribeConstraintResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the specified constraint.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DescribeConstraint"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1117,22 +1146,22 @@ class SDK:
 
     
     def describe_copy_product_status(self, request: operations.DescribeCopyProductStatusRequest) -> operations.DescribeCopyProductStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the status of the specified copy product operation.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DescribeCopyProductStatus"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1151,22 +1180,22 @@ class SDK:
 
     
     def describe_portfolio(self, request: operations.DescribePortfolioRequest) -> operations.DescribePortfolioResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Gets information about the specified portfolio.</p> <p>A delegated admin is authorized to invoke this command.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DescribePortfolio"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1185,22 +1214,22 @@ class SDK:
 
     
     def describe_portfolio_share_status(self, request: operations.DescribePortfolioShareStatusRequest) -> operations.DescribePortfolioShareStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the status of the specified portfolio share operation. This API can only be called by the management account in the organization or by a delegated admin.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DescribePortfolioShareStatus"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1227,24 +1256,23 @@ class SDK:
 
     
     def describe_portfolio_shares(self, request: operations.DescribePortfolioSharesRequest) -> operations.DescribePortfolioSharesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Returns a summary of each of the portfolio shares that were created for the specified portfolio.</p> <p>You can use this API to determine which accounts or organizational nodes this portfolio have been shared, whether the recipient entity has imported the share, and whether TagOptions are included with the share.</p> <p>The <code>PortfolioId</code> and <code>Type</code> parameters are both required.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DescribePortfolioShares"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1267,22 +1295,22 @@ class SDK:
 
     
     def describe_product(self, request: operations.DescribeProductRequest) -> operations.DescribeProductResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the specified product.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DescribeProduct"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1305,22 +1333,22 @@ class SDK:
 
     
     def describe_product_as_admin(self, request: operations.DescribeProductAsAdminRequest) -> operations.DescribeProductAsAdminResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the specified product. This operation is run with administrator access.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DescribeProductAsAdmin"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1343,22 +1371,22 @@ class SDK:
 
     
     def describe_product_view(self, request: operations.DescribeProductViewRequest) -> operations.DescribeProductViewResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the specified product.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DescribeProductView"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1381,22 +1409,22 @@ class SDK:
 
     
     def describe_provisioned_product(self, request: operations.DescribeProvisionedProductRequest) -> operations.DescribeProvisionedProductResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the specified provisioned product.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DescribeProvisionedProduct"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1419,22 +1447,22 @@ class SDK:
 
     
     def describe_provisioned_product_plan(self, request: operations.DescribeProvisionedProductPlanRequest) -> operations.DescribeProvisionedProductPlanResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the resource changes for the specified plan.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DescribeProvisionedProductPlan"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1457,22 +1485,22 @@ class SDK:
 
     
     def describe_provisioning_artifact(self, request: operations.DescribeProvisioningArtifactRequest) -> operations.DescribeProvisioningArtifactResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the specified provisioning artifact (also known as a version) for the specified product.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DescribeProvisioningArtifact"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1495,22 +1523,22 @@ class SDK:
 
     
     def describe_provisioning_parameters(self, request: operations.DescribeProvisioningParametersRequest) -> operations.DescribeProvisioningParametersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Gets information about the configuration required to provision the specified product using the specified provisioning artifact.</p> <p>If the output contains a TagOption key with an empty list of values, there is a TagOption conflict for that key. The end user cannot take action to fix the conflict, and launch is not blocked. In subsequent calls to <a>ProvisionProduct</a>, do not include conflicted TagOption keys as tags, or this causes the error \"Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i>\". Tag the provisioned product with the value <code>sc-tagoption-conflict-portfolioId-productId</code>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DescribeProvisioningParameters"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1533,22 +1561,22 @@ class SDK:
 
     
     def describe_record(self, request: operations.DescribeRecordRequest) -> operations.DescribeRecordResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Gets information about the specified request operation.</p> <p>Use this operation after calling a request operation (for example, <a>ProvisionProduct</a>, <a>TerminateProvisionedProduct</a>, or <a>UpdateProvisionedProduct</a>). </p> <note> <p>If a provisioned product was transferred to a new owner using <a>UpdateProvisionedProductProperties</a>, the new owner will be able to describe all past records for that product. The previous owner will no longer be able to describe the records, but will be able to use <a>ListRecordHistory</a> to see the product's history from when he was the owner.</p> </note>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DescribeRecord"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1567,22 +1595,22 @@ class SDK:
 
     
     def describe_service_action(self, request: operations.DescribeServiceActionRequest) -> operations.DescribeServiceActionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes a self-service action.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DescribeServiceAction"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1601,22 +1629,22 @@ class SDK:
 
     
     def describe_service_action_execution_parameters(self, request: operations.DescribeServiceActionExecutionParametersRequest) -> operations.DescribeServiceActionExecutionParametersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Finds the default parameters for a specific self-service action on a specific provisioned product and returns a map of the results to the user.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DescribeServiceActionExecutionParameters"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1639,22 +1667,22 @@ class SDK:
 
     
     def describe_tag_option(self, request: operations.DescribeTagOptionRequest) -> operations.DescribeTagOptionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the specified TagOption.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DescribeTagOption"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1677,22 +1705,22 @@ class SDK:
 
     
     def disable_aws_organizations_access(self, request: operations.DisableAwsOrganizationsAccessRequest) -> operations.DisableAwsOrganizationsAccessResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Disable portfolio sharing through AWS Organizations feature. This feature will not delete your current shares but it will prevent you from creating new shares throughout your organization. Current shares will not be in sync with your organization structure if it changes after calling this API. This API can only be called by the management account in the organization.</p> <p>This API can't be invoked if there are active delegated administrators in the organization.</p> <p>Note that a delegated administrator is not authorized to invoke <code>DisableAWSOrganizationsAccess</code>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DisableAWSOrganizationsAccess"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1719,22 +1747,22 @@ class SDK:
 
     
     def disassociate_budget_from_resource(self, request: operations.DisassociateBudgetFromResourceRequest) -> operations.DisassociateBudgetFromResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disassociates the specified budget from the specified resource.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DisassociateBudgetFromResource"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1753,22 +1781,22 @@ class SDK:
 
     
     def disassociate_principal_from_portfolio(self, request: operations.DisassociatePrincipalFromPortfolioRequest) -> operations.DisassociatePrincipalFromPortfolioResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disassociates a previously associated principal ARN from a specified portfolio.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DisassociatePrincipalFromPortfolio"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1791,22 +1819,22 @@ class SDK:
 
     
     def disassociate_product_from_portfolio(self, request: operations.DisassociateProductFromPortfolioRequest) -> operations.DisassociateProductFromPortfolioResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Disassociates the specified product from the specified portfolio. </p> <p>A delegated admin is authorized to invoke this command.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DisassociateProductFromPortfolio"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1833,22 +1861,22 @@ class SDK:
 
     
     def disassociate_service_action_from_provisioning_artifact(self, request: operations.DisassociateServiceActionFromProvisioningArtifactRequest) -> operations.DisassociateServiceActionFromProvisioningArtifactResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disassociates the specified self-service action association from the specified provisioning artifact.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DisassociateServiceActionFromProvisioningArtifact"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1867,22 +1895,22 @@ class SDK:
 
     
     def disassociate_tag_option_from_resource(self, request: operations.DisassociateTagOptionFromResourceRequest) -> operations.DisassociateTagOptionFromResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disassociates the specified TagOption from the specified resource.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.DisassociateTagOptionFromResource"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1905,22 +1933,22 @@ class SDK:
 
     
     def enable_aws_organizations_access(self, request: operations.EnableAwsOrganizationsAccessRequest) -> operations.EnableAwsOrganizationsAccessResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the management account in the organization.</p> <p>By calling this API Service Catalog will make a call to organizations:EnableAWSServiceAccess on your behalf so that your shares can be in sync with any changes in your AWS Organizations structure.</p> <p>Note that a delegated administrator is not authorized to invoke <code>EnableAWSOrganizationsAccess</code>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.EnableAWSOrganizationsAccess"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1947,22 +1975,22 @@ class SDK:
 
     
     def execute_provisioned_product_plan(self, request: operations.ExecuteProvisionedProductPlanRequest) -> operations.ExecuteProvisionedProductPlanResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Provisions or modifies a product based on the resource changes for the specified plan.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ExecuteProvisionedProductPlan"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1989,22 +2017,22 @@ class SDK:
 
     
     def execute_provisioned_product_service_action(self, request: operations.ExecuteProvisionedProductServiceActionRequest) -> operations.ExecuteProvisionedProductServiceActionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Executes a self-service action against a provisioned product.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ExecuteProvisionedProductServiceAction"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2031,22 +2059,22 @@ class SDK:
 
     
     def get_aws_organizations_access_status(self, request: operations.GetAwsOrganizationsAccessStatusRequest) -> operations.GetAwsOrganizationsAccessStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the Access Status for AWS Organization portfolio share feature. This API can only be called by the management account in the organization or by a delegated admin.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.GetAWSOrganizationsAccessStatus"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2069,24 +2097,23 @@ class SDK:
 
     
     def get_provisioned_product_outputs(self, request: operations.GetProvisionedProductOutputsRequest) -> operations.GetProvisionedProductOutputsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""This API takes either a <code>ProvisonedProductId</code> or a <code>ProvisionedProductName</code>, along with a list of one or more output keys, and responds with the key/value pairs of those outputs.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.GetProvisionedProductOutputs"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2109,22 +2136,22 @@ class SDK:
 
     
     def import_as_provisioned_product(self, request: operations.ImportAsProvisionedProductRequest) -> operations.ImportAsProvisionedProductResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Requests the import of a resource as a Service Catalog provisioned product that is associated to a Service Catalog product and provisioning artifact. Once imported, all supported Service Catalog governance actions are supported on the provisioned product.</p> <p>Resource import only supports CloudFormation stack ARNs. CloudFormation StackSets and non-root nested stacks are not supported.</p> <p>The CloudFormation stack must have one of the following statuses to be imported: <code>CREATE_COMPLETE</code>, <code>UPDATE_COMPLETE</code>, <code>UPDATE_ROLLBACK_COMPLETE</code>, <code>IMPORT_COMPLETE</code>, <code>IMPORT_ROLLBACK_COMPLETE</code>.</p> <p>Import of the resource requires that the CloudFormation stack template matches the associated Service Catalog product provisioning artifact. </p> <p>The user or role that performs this operation must have the <code>cloudformation:GetTemplate</code> and <code>cloudformation:DescribeStacks</code> IAM policy permissions. </p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ImportAsProvisionedProduct"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2155,24 +2182,23 @@ class SDK:
 
     
     def list_accepted_portfolio_shares(self, request: operations.ListAcceptedPortfolioSharesRequest) -> operations.ListAcceptedPortfolioSharesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all portfolios for which sharing was accepted by this account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ListAcceptedPortfolioShares"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2195,24 +2221,23 @@ class SDK:
 
     
     def list_budgets_for_resource(self, request: operations.ListBudgetsForResourceRequest) -> operations.ListBudgetsForResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all the budgets associated to the specified resource.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ListBudgetsForResource"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2235,24 +2260,23 @@ class SDK:
 
     
     def list_constraints_for_portfolio(self, request: operations.ListConstraintsForPortfolioRequest) -> operations.ListConstraintsForPortfolioResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the constraints for the specified portfolio and product.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ListConstraintsForPortfolio"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2275,24 +2299,23 @@ class SDK:
 
     
     def list_launch_paths(self, request: operations.ListLaunchPathsRequest) -> operations.ListLaunchPathsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the paths to the specified product. A path is how the user has access to a specified product, and is necessary when provisioning a product. A path also determines the constraints put on the product.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ListLaunchPaths"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2315,24 +2338,23 @@ class SDK:
 
     
     def list_organization_portfolio_access(self, request: operations.ListOrganizationPortfolioAccessRequest) -> operations.ListOrganizationPortfolioAccessResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Lists the organization nodes that have access to the specified portfolio. This API can only be called by the management account in the organization or by a delegated admin.</p> <p>If a delegated admin is de-registered, they can no longer perform this operation.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ListOrganizationPortfolioAccess"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2359,24 +2381,23 @@ class SDK:
 
     
     def list_portfolio_access(self, request: operations.ListPortfolioAccessRequest) -> operations.ListPortfolioAccessResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Lists the account IDs that have access to the specified portfolio.</p> <p>A delegated admin can list the accounts that have access to the shared portfolio. Note that if a delegated admin is de-registered, they can no longer perform this operation.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ListPortfolioAccess"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2399,24 +2420,23 @@ class SDK:
 
     
     def list_portfolios(self, request: operations.ListPortfoliosRequest) -> operations.ListPortfoliosResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all portfolios in the catalog.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ListPortfolios"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2435,24 +2455,23 @@ class SDK:
 
     
     def list_portfolios_for_product(self, request: operations.ListPortfoliosForProductRequest) -> operations.ListPortfoliosForProductResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all portfolios that the specified product is associated with.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ListPortfoliosForProduct"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2475,24 +2494,23 @@ class SDK:
 
     
     def list_principals_for_portfolio(self, request: operations.ListPrincipalsForPortfolioRequest) -> operations.ListPrincipalsForPortfolioResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all principal ARNs associated with the specified portfolio.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ListPrincipalsForPortfolio"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2515,22 +2533,22 @@ class SDK:
 
     
     def list_provisioned_product_plans(self, request: operations.ListProvisionedProductPlansRequest) -> operations.ListProvisionedProductPlansResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the plans for the specified provisioned product or all plans to which the user has access.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ListProvisionedProductPlans"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2553,22 +2571,22 @@ class SDK:
 
     
     def list_provisioning_artifacts(self, request: operations.ListProvisioningArtifactsRequest) -> operations.ListProvisioningArtifactsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all provisioning artifacts (also known as versions) for the specified product.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ListProvisioningArtifacts"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2591,24 +2609,23 @@ class SDK:
 
     
     def list_provisioning_artifacts_for_service_action(self, request: operations.ListProvisioningArtifactsForServiceActionRequest) -> operations.ListProvisioningArtifactsForServiceActionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all provisioning artifacts (also known as versions) for the specified self-service action.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ListProvisioningArtifactsForServiceAction"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2631,22 +2648,22 @@ class SDK:
 
     
     def list_record_history(self, request: operations.ListRecordHistoryRequest) -> operations.ListRecordHistoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the specified requests or all performed requests.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ListRecordHistory"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2665,24 +2682,23 @@ class SDK:
 
     
     def list_resources_for_tag_option(self, request: operations.ListResourcesForTagOptionRequest) -> operations.ListResourcesForTagOptionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the resources associated with the specified TagOption.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ListResourcesForTagOption"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2709,24 +2725,23 @@ class SDK:
 
     
     def list_service_actions(self, request: operations.ListServiceActionsRequest) -> operations.ListServiceActionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all self-service actions.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ListServiceActions"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2745,24 +2760,23 @@ class SDK:
 
     
     def list_service_actions_for_provisioning_artifact(self, request: operations.ListServiceActionsForProvisioningArtifactRequest) -> operations.ListServiceActionsForProvisioningArtifactResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a paginated list of self-service actions associated with the specified Product ID and Provisioning Artifact ID.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ListServiceActionsForProvisioningArtifact"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2785,22 +2799,22 @@ class SDK:
 
     
     def list_stack_instances_for_provisioned_product(self, request: operations.ListStackInstancesForProvisionedProductRequest) -> operations.ListStackInstancesForProvisionedProductResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns summary information about stack instances that are associated with the specified <code>CFN_STACKSET</code> type provisioned product. You can filter for stack instances that are associated with a specific AWS account name or region. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ListStackInstancesForProvisionedProduct"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2823,24 +2837,23 @@ class SDK:
 
     
     def list_tag_options(self, request: operations.ListTagOptionsRequest) -> operations.ListTagOptionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the specified TagOptions or all TagOptions.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ListTagOptions"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2863,22 +2876,22 @@ class SDK:
 
     
     def provision_product(self, request: operations.ProvisionProductRequest) -> operations.ProvisionProductResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Provisions the specified product.</p> <p>A provisioned product is a resourced instance of a product. For example, provisioning a product based on a CloudFormation template launches a CloudFormation stack and its underlying resources. You can check the status of this request using <a>DescribeRecord</a>.</p> <p>If the request contains a tag key with an empty list of values, there is a tag conflict for that key. Do not include conflicted keys as tags, or this causes the error \"Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i>\".</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ProvisionProduct"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2905,22 +2918,22 @@ class SDK:
 
     
     def reject_portfolio_share(self, request: operations.RejectPortfolioShareRequest) -> operations.RejectPortfolioShareResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Rejects an offer to share the specified portfolio.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.RejectPortfolioShare"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2939,22 +2952,22 @@ class SDK:
 
     
     def scan_provisioned_products(self, request: operations.ScanProvisionedProductsRequest) -> operations.ScanProvisionedProductsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Lists the provisioned products that are available (not terminated).</p> <p>To use additional filtering, see <a>SearchProvisionedProducts</a>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.ScanProvisionedProducts"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2973,24 +2986,23 @@ class SDK:
 
     
     def search_products(self, request: operations.SearchProductsRequest) -> operations.SearchProductsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the products to which the caller has access.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.SearchProducts"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3009,24 +3021,23 @@ class SDK:
 
     
     def search_products_as_admin(self, request: operations.SearchProductsAsAdminRequest) -> operations.SearchProductsAsAdminResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the products for the specified portfolio or all products.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.SearchProductsAsAdmin"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3049,24 +3060,23 @@ class SDK:
 
     
     def search_provisioned_products(self, request: operations.SearchProvisionedProductsRequest) -> operations.SearchProvisionedProductsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the provisioned products that meet the specified criteria.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.SearchProvisionedProducts"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3085,22 +3095,22 @@ class SDK:
 
     
     def terminate_provisioned_product(self, request: operations.TerminateProvisionedProductRequest) -> operations.TerminateProvisionedProductResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Terminates the specified provisioned product.</p> <p>This operation does not delete any records associated with the provisioned product.</p> <p>You can check the status of this request using <a>DescribeRecord</a>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.TerminateProvisionedProduct"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3119,22 +3129,22 @@ class SDK:
 
     
     def update_constraint(self, request: operations.UpdateConstraintRequest) -> operations.UpdateConstraintResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the specified constraint.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.UpdateConstraint"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3157,22 +3167,22 @@ class SDK:
 
     
     def update_portfolio(self, request: operations.UpdatePortfolioRequest) -> operations.UpdatePortfolioResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Updates the specified portfolio.</p> <p>You cannot update a product that was shared with you.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.UpdatePortfolio"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3203,22 +3213,22 @@ class SDK:
 
     
     def update_portfolio_share(self, request: operations.UpdatePortfolioShareRequest) -> operations.UpdatePortfolioShareResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Updates the specified portfolio share. You can use this API to enable or disable TagOptions sharing for an existing portfolio share. </p> <p>The portfolio share cannot be updated if the <code> CreatePortfolioShare</code> operation is <code>IN_PROGRESS</code>, as the share is not available to recipient entities. In this case, you must wait for the portfolio share to be COMPLETED.</p> <p>You must provide the <code>accountId</code> or organization node in the input, but not both.</p> <p>If the portfolio is shared to both an external account and an organization node, and both shares need to be updated, you must invoke <code>UpdatePortfolioShare</code> separately for each share type. </p> <p>This API cannot be used for removing the portfolio share. You must use <code>DeletePortfolioShare</code> API for that action. </p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.UpdatePortfolioShare"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3249,22 +3259,22 @@ class SDK:
 
     
     def update_product(self, request: operations.UpdateProductRequest) -> operations.UpdateProductResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the specified product.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.UpdateProduct"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3291,22 +3301,22 @@ class SDK:
 
     
     def update_provisioned_product(self, request: operations.UpdateProvisionedProductRequest) -> operations.UpdateProvisionedProductResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Requests updates to the configuration of the specified provisioned product.</p> <p>If there are tags associated with the object, they cannot be updated or added. Depending on the specific updates requested, this operation can update with no interruption, with some interruption, or replace the provisioned product entirely.</p> <p>You can check the status of this request using <a>DescribeRecord</a>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.UpdateProvisionedProduct"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3329,22 +3339,22 @@ class SDK:
 
     
     def update_provisioned_product_properties(self, request: operations.UpdateProvisionedProductPropertiesRequest) -> operations.UpdateProvisionedProductPropertiesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Requests updates to the properties of the specified provisioned product.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.UpdateProvisionedProductProperties"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3371,22 +3381,22 @@ class SDK:
 
     
     def update_provisioning_artifact(self, request: operations.UpdateProvisioningArtifactRequest) -> operations.UpdateProvisioningArtifactResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Updates the specified provisioning artifact (also known as a version) for the specified product.</p> <p>You cannot update a provisioning artifact for a product that was shared with you.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.UpdateProvisioningArtifact"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3409,22 +3419,22 @@ class SDK:
 
     
     def update_service_action(self, request: operations.UpdateServiceActionRequest) -> operations.UpdateServiceActionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a self-service action.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.UpdateServiceAction"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3447,22 +3457,22 @@ class SDK:
 
     
     def update_tag_option(self, request: operations.UpdateTagOptionRequest) -> operations.UpdateTagOptionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the specified TagOption.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWS242ServiceCatalogService.UpdateTagOption"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

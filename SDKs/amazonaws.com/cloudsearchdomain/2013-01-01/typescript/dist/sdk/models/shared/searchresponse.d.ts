@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BucketInfo } from "./bucketinfo";
 import { Hits } from "./hits";
 import { FieldStats } from "./fieldstats";

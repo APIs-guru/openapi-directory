@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PeoplePeopleConnectionsListPathParams:
-    resource_name: str = field(default=None, metadata={'path_param': { 'field_name': 'resourceName', 'style': 'simple', 'explode': False }})
+    resource_name: str = field(metadata={'path_param': { 'field_name': 'resourceName', 'style': 'simple', 'explode': False }})
     
 class PeoplePeopleConnectionsListSortOrderEnum(str, Enum):
     LAST_MODIFIED_ASCENDING = "LAST_MODIFIED_ASCENDING"
@@ -45,14 +46,14 @@ class PeoplePeopleConnectionsListQueryParams:
 
 @dataclass
 class PeoplePeopleConnectionsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PeoplePeopleConnectionsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -63,14 +64,14 @@ class PeoplePeopleConnectionsListSecurity:
 
 @dataclass
 class PeoplePeopleConnectionsListRequest:
-    path_params: PeoplePeopleConnectionsListPathParams = field(default=None)
-    query_params: PeoplePeopleConnectionsListQueryParams = field(default=None)
-    security: PeoplePeopleConnectionsListSecurity = field(default=None)
+    path_params: PeoplePeopleConnectionsListPathParams = field()
+    query_params: PeoplePeopleConnectionsListQueryParams = field()
+    security: PeoplePeopleConnectionsListSecurity = field()
     
 
 @dataclass
 class PeoplePeopleConnectionsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_connections_response: Optional[shared.ListConnectionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

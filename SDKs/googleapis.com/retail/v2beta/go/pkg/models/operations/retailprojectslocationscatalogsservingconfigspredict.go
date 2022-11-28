@@ -30,7 +30,7 @@ type RetailProjectsLocationsCatalogsServingConfigsPredictSecurity struct {
 type RetailProjectsLocationsCatalogsServingConfigsPredictRequest struct {
 	PathParams  RetailProjectsLocationsCatalogsServingConfigsPredictPathParams
 	QueryParams RetailProjectsLocationsCatalogsServingConfigsPredictQueryParams
-	Request     *shared.GoogleCloudRetailV2betaPredictRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudRetailV2betaPredictRequestInput `request:"mediaType=application/json"`
 	Security    RetailProjectsLocationsCatalogsServingConfigsPredictSecurity
 }
 

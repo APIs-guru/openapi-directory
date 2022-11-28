@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetStatsSeriesPeriodFieldsPeriodEnum;
 (function (GetStatsSeriesPeriodFieldsPeriodEnum) {
     GetStatsSeriesPeriodFieldsPeriodEnum["Day"] = "day";
@@ -34,11 +34,11 @@ var GetStatsSeriesPeriodFieldsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=fields" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fields" }),
         __metadata("design:type", String)
     ], GetStatsSeriesPeriodFieldsPathParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=period" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=period" }),
         __metadata("design:type", String)
     ], GetStatsSeriesPeriodFieldsPathParams.prototype, "period", void 0);
     return GetStatsSeriesPeriodFieldsPathParams;
@@ -50,15 +50,15 @@ var GetStatsSeriesPeriodFieldsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=end" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end" }),
         __metadata("design:type", Number)
     ], GetStatsSeriesPeriodFieldsQueryParams.prototype, "end", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=query" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" }),
         __metadata("design:type", String)
     ], GetStatsSeriesPeriodFieldsQueryParams.prototype, "query", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=start" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" }),
         __metadata("design:type", Number)
     ], GetStatsSeriesPeriodFieldsQueryParams.prototype, "start", void 0);
     return GetStatsSeriesPeriodFieldsQueryParams;
@@ -70,11 +70,11 @@ var GetStatsSeriesPeriodFieldsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetStatsSeriesPeriodFieldsPathParams)
     ], GetStatsSeriesPeriodFieldsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetStatsSeriesPeriodFieldsQueryParams)
     ], GetStatsSeriesPeriodFieldsRequest.prototype, "queryParams", void 0);
     return GetStatsSeriesPeriodFieldsRequest;
@@ -86,15 +86,15 @@ var GetStatsSeriesPeriodFieldsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetStatsSeriesPeriodFieldsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetStatsSeriesPeriodFieldsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetStatsSeriesPeriodFieldsResponse.prototype, "statusCode", void 0);
     return GetStatsSeriesPeriodFieldsResponse;

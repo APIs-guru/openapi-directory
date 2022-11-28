@@ -1,30 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Metadata } from "./metadata";
 
 
+
 export class VideoUpdatePayload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=metadata", elemType: shared.Metadata })
+  @SpeakeasyMetadata({ data: "json, name=metadata", elemType: Metadata })
   metadata?: Metadata[];
 
-  @Metadata({ data: "json, name=mp4Support" })
+  @SpeakeasyMetadata({ data: "json, name=mp4Support" })
   mp4Support?: boolean;
 
-  @Metadata({ data: "json, name=panoramic" })
+  @SpeakeasyMetadata({ data: "json, name=panoramic" })
   panoramic?: boolean;
 
-  @Metadata({ data: "json, name=playerId" })
+  @SpeakeasyMetadata({ data: "json, name=playerId" })
   playerId?: string;
 
-  @Metadata({ data: "json, name=public" })
+  @SpeakeasyMetadata({ data: "json, name=public" })
   public?: boolean;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

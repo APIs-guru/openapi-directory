@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PaymentInitiationWithStatusResponse
+// Generic JSON response body consistion of the corresponding payment initation JSON body together with an optional transaction status field.
 type PaymentInitiationWithStatusResponse struct {
 	CreditorAccount                        AccountReference16Ch             `json:"creditorAccount"`
 	CreditorAddress                        *Address                         `json:"creditorAddress,omitempty"`

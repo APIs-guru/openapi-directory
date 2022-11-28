@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LifeCycleLastCutoverFinalized } from "./lifecyclelastcutoverfinalized";
 import { LifeCycleLastCutoverInitiated } from "./lifecyclelastcutoverinitiated";
 import { LifeCycleLastCutoverReverted } from "./lifecyclelastcutoverreverted";

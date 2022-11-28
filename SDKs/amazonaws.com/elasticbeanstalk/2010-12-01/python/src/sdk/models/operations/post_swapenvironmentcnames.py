@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostSwapEnvironmentCnamEsActionEnum(str, Enum):
     SWAP_ENVIRONMENT_CNAM_ES = "SwapEnvironmentCNAMEs"
@@ -10,8 +14,8 @@ class PostSwapEnvironmentCnamEsVersionEnum(str, Enum):
 
 @dataclass
 class PostSwapEnvironmentCnamEsQueryParams:
-    action: PostSwapEnvironmentCnamEsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostSwapEnvironmentCnamEsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostSwapEnvironmentCnamEsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostSwapEnvironmentCnamEsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostSwapEnvironmentCnamEsHeaders:
 
 @dataclass
 class PostSwapEnvironmentCnamEsRequest:
-    query_params: PostSwapEnvironmentCnamEsQueryParams = field(default=None)
-    headers: PostSwapEnvironmentCnamEsHeaders = field(default=None)
+    headers: PostSwapEnvironmentCnamEsHeaders = field()
+    query_params: PostSwapEnvironmentCnamEsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostSwapEnvironmentCnamEsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

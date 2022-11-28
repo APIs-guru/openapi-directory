@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Represents a Topic umbrella for a list of questions that a Creator may want to respond to.
 **/

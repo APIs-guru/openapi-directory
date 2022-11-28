@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import pubsubdestination
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FeedOutputConfig:
-    pubsub_destination: Optional[pubsubdestination.PubsubDestination] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pubsubDestination' }})
+    r"""FeedOutputConfig
+    Output configuration for asset feed destination.
+    """
+    
+    pubsub_destination: Optional[PubsubDestination] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pubsubDestination') }})
     

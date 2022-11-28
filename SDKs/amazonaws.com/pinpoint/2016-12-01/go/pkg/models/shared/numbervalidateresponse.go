@@ -1,5 +1,7 @@
 package shared
 
+// NumberValidateResponse
+// Provides information about a phone number.
 type NumberValidateResponse struct {
 	Carrier                     *string `json:"Carrier,omitempty"`
 	City                        *string `json:"City,omitempty"`

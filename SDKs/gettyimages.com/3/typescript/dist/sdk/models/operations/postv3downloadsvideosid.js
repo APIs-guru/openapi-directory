@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostV3DownloadsVideosIdPathParams = /** @class */ (function (_super) {
     __extends(PostV3DownloadsVideosIdPathParams, _super);
@@ -30,7 +30,7 @@ var PostV3DownloadsVideosIdPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], PostV3DownloadsVideosIdPathParams.prototype, "id", void 0);
     return PostV3DownloadsVideosIdPathParams;
@@ -42,19 +42,19 @@ var PostV3DownloadsVideosIdQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=auto_download" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=auto_download" }),
         __metadata("design:type", Boolean)
     ], PostV3DownloadsVideosIdQueryParams.prototype, "autoDownload", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=product_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=product_id" }),
         __metadata("design:type", Number)
     ], PostV3DownloadsVideosIdQueryParams.prototype, "productId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=size" }),
         __metadata("design:type", String)
     ], PostV3DownloadsVideosIdQueryParams.prototype, "size", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=use_team_credits" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=use_team_credits" }),
         __metadata("design:type", Boolean)
     ], PostV3DownloadsVideosIdQueryParams.prototype, "useTeamCredits", void 0);
     return PostV3DownloadsVideosIdQueryParams;
@@ -66,7 +66,7 @@ var PostV3DownloadsVideosIdHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
         __metadata("design:type", String)
     ], PostV3DownloadsVideosIdHeaders.prototype, "acceptLanguage", void 0);
     return PostV3DownloadsVideosIdHeaders;
@@ -78,19 +78,19 @@ var PostV3DownloadsVideosIdRequests = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/*+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/*+json" }),
         __metadata("design:type", shared.PremiumAccessDownloadData)
     ], PostV3DownloadsVideosIdRequests.prototype, "premiumAccessDownloadData", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.PremiumAccessDownloadData)
     ], PostV3DownloadsVideosIdRequests.prototype, "premiumAccessDownloadData1", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json-patch+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" }),
         __metadata("design:type", shared.PremiumAccessDownloadData)
     ], PostV3DownloadsVideosIdRequests.prototype, "premiumAccessDownloadData2", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/json" }),
         __metadata("design:type", shared.PremiumAccessDownloadData)
     ], PostV3DownloadsVideosIdRequests.prototype, "premiumAccessDownloadData3", void 0);
     return PostV3DownloadsVideosIdRequests;
@@ -102,19 +102,19 @@ var PostV3DownloadsVideosIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostV3DownloadsVideosIdPathParams)
     ], PostV3DownloadsVideosIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostV3DownloadsVideosIdQueryParams)
     ], PostV3DownloadsVideosIdRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostV3DownloadsVideosIdHeaders)
     ], PostV3DownloadsVideosIdRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostV3DownloadsVideosIdRequests)
     ], PostV3DownloadsVideosIdRequest.prototype, "request", void 0);
     return PostV3DownloadsVideosIdRequest;
@@ -126,11 +126,11 @@ var PostV3DownloadsVideosIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostV3DownloadsVideosIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostV3DownloadsVideosIdResponse.prototype, "statusCode", void 0);
     return PostV3DownloadsVideosIdResponse;

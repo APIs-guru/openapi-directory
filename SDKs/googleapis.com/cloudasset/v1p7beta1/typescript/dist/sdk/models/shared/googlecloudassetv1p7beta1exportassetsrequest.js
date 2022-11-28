@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudAssetV1p7beta1OutputConfig } from "./googlecloudassetv1p7beta1outputconfig";
 export var GoogleCloudAssetV1p7beta1ExportAssetsRequestContentTypeEnum;
 (function (GoogleCloudAssetV1p7beta1ExportAssetsRequestContentTypeEnum) {
@@ -43,23 +43,23 @@ var GoogleCloudAssetV1p7beta1ExportAssetsRequest = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=assetTypes" }),
+        SpeakeasyMetadata({ data: "json, name=assetTypes" }),
         __metadata("design:type", Array)
     ], GoogleCloudAssetV1p7beta1ExportAssetsRequest.prototype, "assetTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=contentType" }),
+        SpeakeasyMetadata({ data: "json, name=contentType" }),
         __metadata("design:type", String)
     ], GoogleCloudAssetV1p7beta1ExportAssetsRequest.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ data: "json, name=outputConfig" }),
+        SpeakeasyMetadata({ data: "json, name=outputConfig" }),
         __metadata("design:type", GoogleCloudAssetV1p7beta1OutputConfig)
     ], GoogleCloudAssetV1p7beta1ExportAssetsRequest.prototype, "outputConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=readTime" }),
+        SpeakeasyMetadata({ data: "json, name=readTime" }),
         __metadata("design:type", String)
     ], GoogleCloudAssetV1p7beta1ExportAssetsRequest.prototype, "readTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=relationshipTypes" }),
+        SpeakeasyMetadata({ data: "json, name=relationshipTypes" }),
         __metadata("design:type", Array)
     ], GoogleCloudAssetV1p7beta1ExportAssetsRequest.prototype, "relationshipTypes", void 0);
     return GoogleCloudAssetV1p7beta1ExportAssetsRequest;

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
-from . import rolerepresentation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RolesRepresentation:
-    client: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'client' }})
-    realm: Optional[List[rolerepresentation.RoleRepresentation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'realm' }})
+    client: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('client') }})
+    realm: Optional[List[RoleRepresentation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('realm') }})
     

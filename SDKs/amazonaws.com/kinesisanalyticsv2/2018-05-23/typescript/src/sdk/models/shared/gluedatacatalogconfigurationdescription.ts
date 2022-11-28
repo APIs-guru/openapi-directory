@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GlueDataCatalogConfigurationDescription
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The configuration of the Glue Data Catalog that you use for Apache Flink SQL queries and table API transforms that you write in an application.
 **/
 export class GlueDataCatalogConfigurationDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DatabaseARN" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseARN" })
   databaseArn: string;
 }

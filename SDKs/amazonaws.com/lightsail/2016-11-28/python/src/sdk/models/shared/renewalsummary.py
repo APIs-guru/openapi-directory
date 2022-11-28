@@ -1,18 +1,23 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import domainvalidationrecord
-from . import renewalstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RenewalSummary:
-    domain_validation_records: Optional[List[domainvalidationrecord.DomainValidationRecord]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domainValidationRecords' }})
-    renewal_status: Optional[renewalstatus_enum.RenewalStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'renewalStatus' }})
-    renewal_status_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'renewalStatusReason' }})
-    updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updatedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    r"""RenewalSummary
+    Describes the status of a SSL/TLS certificate renewal managed by Amazon Lightsail.
+    """
+    
+    domain_validation_records: Optional[List[DomainValidationRecord]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('domainValidationRecords') }})
+    renewal_status: Optional[RenewalStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('renewalStatus') }})
+    renewal_status_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('renewalStatusReason') }})
+    updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updatedAt'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

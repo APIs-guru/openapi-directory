@@ -14,6 +14,8 @@ type CreateImageHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateImageRequestBodyImageTestsConfiguration
+// Image tests configuration.
 type CreateImageRequestBodyImageTestsConfiguration struct {
 	ImageTestsEnabled *bool  `json:"imageTestsEnabled,omitempty"`
 	TimeoutMinutes    *int64 `json:"timeoutMinutes,omitempty"`

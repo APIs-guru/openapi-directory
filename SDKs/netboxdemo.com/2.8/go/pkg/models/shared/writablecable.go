@@ -42,17 +42,14 @@ const (
 	WritableCableTypeEnumPower      WritableCableTypeEnum = "power"
 )
 
-type WritableCable struct {
+type WritableCableInput struct {
 	Color            *string                      `json:"color,omitempty"`
-	ID               *int64                       `json:"id,omitempty"`
 	Label            *string                      `json:"label,omitempty"`
 	Length           *int64                       `json:"length,omitempty"`
 	LengthUnit       *WritableCableLengthUnitEnum `json:"length_unit,omitempty"`
 	Status           *WritableCableStatusEnum     `json:"status,omitempty"`
-	TerminationA     map[string]string            `json:"termination_a,omitempty"`
 	TerminationAID   int64                        `json:"termination_a_id"`
 	TerminationAType string                       `json:"termination_a_type"`
-	TerminationB     map[string]string            `json:"termination_b,omitempty"`
 	TerminationBID   int64                        `json:"termination_b_id"`
 	TerminationBType string                       `json:"termination_b_type"`
 	Type             *WritableCableTypeEnum       `json:"type,omitempty"`

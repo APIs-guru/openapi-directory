@@ -1,15 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetNetworksIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
-}
-
-
-export class GetNetworksIdRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetNetworksIdPathParams;
 }
 
 
@@ -18,87 +13,93 @@ export class GetNetworksIdRequest extends SpeakeasyBase {
  * Protection configuration for the Network
 **/
 export class GetNetworksId200ApplicationJsonNetworkProtection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delete" })
+  @SpeakeasyMetadata({ data: "json, name=delete" })
   delete: boolean;
 }
 
 
 export class GetNetworksId200ApplicationJsonNetworkRoutes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination: string;
 
-  @Metadata({ data: "json, name=gateway" })
+  @SpeakeasyMetadata({ data: "json, name=gateway" })
   gateway: string;
 }
 
 export enum GetNetworksId200ApplicationJsonNetworkSubnetsTypeEnum {
-    Cloud = "cloud"
-,    Server = "server"
-,    Vswitch = "vswitch"
+    Cloud = "cloud",
+    Server = "server",
+    Vswitch = "vswitch"
 }
 
 
 export class GetNetworksId200ApplicationJsonNetworkSubnets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gateway" })
+  @SpeakeasyMetadata({ data: "json, name=gateway" })
   gateway: string;
 
-  @Metadata({ data: "json, name=ip_range" })
+  @SpeakeasyMetadata({ data: "json, name=ip_range" })
   ipRange?: string;
 
-  @Metadata({ data: "json, name=network_zone" })
+  @SpeakeasyMetadata({ data: "json, name=network_zone" })
   networkZone: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: GetNetworksId200ApplicationJsonNetworkSubnetsTypeEnum;
 }
 
 
 export class GetNetworksId200ApplicationJsonNetwork extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=ip_range" })
+  @SpeakeasyMetadata({ data: "json, name=ip_range" })
   ipRange: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels: Map<string, any>;
 
-  @Metadata({ data: "json, name=load_balancers" })
+  @SpeakeasyMetadata({ data: "json, name=load_balancers" })
   loadBalancers?: number[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=protection" })
+  @SpeakeasyMetadata({ data: "json, name=protection" })
   protection: GetNetworksId200ApplicationJsonNetworkProtection;
 
-  @Metadata({ data: "json, name=routes", elemType: operations.GetNetworksId200ApplicationJsonNetworkRoutes })
+  @SpeakeasyMetadata({ data: "json, name=routes", elemType: GetNetworksId200ApplicationJsonNetworkRoutes })
   routes: GetNetworksId200ApplicationJsonNetworkRoutes[];
 
-  @Metadata({ data: "json, name=servers" })
+  @SpeakeasyMetadata({ data: "json, name=servers" })
   servers: number[];
 
-  @Metadata({ data: "json, name=subnets", elemType: operations.GetNetworksId200ApplicationJsonNetworkSubnets })
+  @SpeakeasyMetadata({ data: "json, name=subnets", elemType: GetNetworksId200ApplicationJsonNetworkSubnets })
   subnets: GetNetworksId200ApplicationJsonNetworkSubnets[];
 }
 
 
 export class GetNetworksId200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: GetNetworksId200ApplicationJsonNetwork;
 }
 
 
+export class GetNetworksIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetNetworksIdPathParams;
+}
+
+
 export class GetNetworksIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getNetworksId200ApplicationJsonObject?: GetNetworksId200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

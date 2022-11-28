@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ScalingActivity
+// Represents a scaling activity.
 type ScalingActivity struct {
 	ActivityID        string                        `json:"ActivityId"`
 	Cause             string                        `json:"Cause"`

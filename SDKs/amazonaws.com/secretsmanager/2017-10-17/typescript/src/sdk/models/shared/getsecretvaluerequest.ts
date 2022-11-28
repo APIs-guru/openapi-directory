@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetSecretValueRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SecretId" })
+  @SpeakeasyMetadata({ data: "json, name=SecretId" })
   secretId: string;
 
-  @Metadata({ data: "json, name=VersionId" })
+  @SpeakeasyMetadata({ data: "json, name=VersionId" })
   versionId?: string;
 
-  @Metadata({ data: "json, name=VersionStage" })
+  @SpeakeasyMetadata({ data: "json, name=VersionStage" })
   versionStage?: string;
 }

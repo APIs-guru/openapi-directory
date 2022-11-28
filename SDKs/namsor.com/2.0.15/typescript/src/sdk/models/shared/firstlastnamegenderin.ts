@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class FirstLastNameGenderIn extends SpeakeasyBase {
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=gender" })
+  @SpeakeasyMetadata({ data: "json, name=gender" })
   gender?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName?: string;
 }

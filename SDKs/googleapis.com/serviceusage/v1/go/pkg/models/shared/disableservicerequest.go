@@ -8,6 +8,8 @@ const (
 	DisableServiceRequestCheckIfServiceHasUsageEnumCheck                             DisableServiceRequestCheckIfServiceHasUsageEnum = "CHECK"
 )
 
+// DisableServiceRequest
+// Request message for the `DisableService` method.
 type DisableServiceRequest struct {
 	CheckIfServiceHasUsage   *DisableServiceRequestCheckIfServiceHasUsageEnum `json:"checkIfServiceHasUsage,omitempty"`
 	DisableDependentServices *bool                                            `json:"disableDependentServices,omitempty"`

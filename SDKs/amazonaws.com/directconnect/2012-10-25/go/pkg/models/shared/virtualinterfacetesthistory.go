@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// VirtualInterfaceTestHistory
+// Information about the virtual interface failover test.
 type VirtualInterfaceTestHistory struct {
 	BgpPeers              []string   `json:"bgpPeers,omitempty"`
 	EndTime               *time.Time `json:"endTime,omitempty"`

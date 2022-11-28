@@ -23,16 +23,16 @@ type GetContentSourceSectionTimePeriodJSONQueryParams struct {
 	Offset *int64 `queryParam:"style=form,explode=true,name=offset"`
 }
 
-type GetContentSourceSectionTimePeriodJSONRequest struct {
-	PathParams  GetContentSourceSectionTimePeriodJSONPathParams
-	QueryParams GetContentSourceSectionTimePeriodJSONQueryParams
-}
-
 type GetContentSourceSectionTimePeriodJSON200ApplicationJSON struct {
 	Copyright  *string          `json:"copyright,omitempty"`
 	NumResults *int64           `json:"num_results,omitempty"`
 	Results    []shared.Article `json:"results,omitempty"`
 	Status     *string          `json:"status,omitempty"`
+}
+
+type GetContentSourceSectionTimePeriodJSONRequest struct {
+	PathParams  GetContentSourceSectionTimePeriodJSONPathParams
+	QueryParams GetContentSourceSectionTimePeriodJSONQueryParams
 }
 
 type GetContentSourceSectionTimePeriodJSONResponse struct {

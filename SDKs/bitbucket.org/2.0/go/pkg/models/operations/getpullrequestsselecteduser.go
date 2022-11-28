@@ -21,22 +21,10 @@ type GetPullrequestsSelectedUserQueryParams struct {
 	State *GetPullrequestsSelectedUserStateEnum `queryParam:"style=form,explode=true,name=state"`
 }
 
-type GetPullrequestsSelectedUserSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type GetPullrequestsSelectedUserSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type GetPullrequestsSelectedUserSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type GetPullrequestsSelectedUserSecurity struct {
-	Option1 *GetPullrequestsSelectedUserSecurityOption1 `security:"option"`
-	Option2 *GetPullrequestsSelectedUserSecurityOption2 `security:"option"`
-	Option3 *GetPullrequestsSelectedUserSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetPullrequestsSelectedUserRequest struct {

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TypedLinkAttributeDefinition } from "./typedlinkattributedefinition";
 
 
+
 export class ListTypedLinkFacetAttributesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Attributes", elemType: shared.TypedLinkAttributeDefinition })
+  @SpeakeasyMetadata({ data: "json, name=Attributes", elemType: TypedLinkAttributeDefinition })
   attributes?: TypedLinkAttributeDefinition[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

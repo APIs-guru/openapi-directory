@@ -1,17 +1,23 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import associationstatusname_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AssociationStatus:
-    additional_info: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AdditionalInfo' }})
-    date: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Date', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Message' }})
-    name: associationstatusname_enum.AssociationStatusNameEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    r"""AssociationStatus
+    Describes an association status.
+    """
+    
+    date_: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Date'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    message: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Message') }})
+    name: AssociationStatusNameEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    additional_info: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AdditionalInfo') }})
     

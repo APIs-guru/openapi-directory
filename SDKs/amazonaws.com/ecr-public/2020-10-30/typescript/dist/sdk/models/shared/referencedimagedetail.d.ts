@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * An object that describes the image tag details returned by a <a>DescribeImageTags</a> action.
 **/

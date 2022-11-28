@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateWebAclMigrationStackResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=S3ObjectUrl" })
+  @SpeakeasyMetadata({ data: "json, name=S3ObjectUrl" })
   s3ObjectUrl: string;
 }

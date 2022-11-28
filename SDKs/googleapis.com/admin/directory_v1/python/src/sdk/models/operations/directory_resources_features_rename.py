@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryResourcesFeaturesRenamePathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
-    old_name: str = field(default=None, metadata={'path_param': { 'field_name': 'oldName', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    old_name: str = field(metadata={'path_param': { 'field_name': 'oldName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class DirectoryResourcesFeaturesRenameQueryParams:
 
 @dataclass
 class DirectoryResourcesFeaturesRenameSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryResourcesFeaturesRenameRequest:
-    path_params: DirectoryResourcesFeaturesRenamePathParams = field(default=None)
-    query_params: DirectoryResourcesFeaturesRenameQueryParams = field(default=None)
+    path_params: DirectoryResourcesFeaturesRenamePathParams = field()
+    query_params: DirectoryResourcesFeaturesRenameQueryParams = field()
+    security: DirectoryResourcesFeaturesRenameSecurity = field()
     request: Optional[shared.FeatureRename] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DirectoryResourcesFeaturesRenameSecurity = field(default=None)
     
 
 @dataclass
 class DirectoryResourcesFeaturesRenameResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

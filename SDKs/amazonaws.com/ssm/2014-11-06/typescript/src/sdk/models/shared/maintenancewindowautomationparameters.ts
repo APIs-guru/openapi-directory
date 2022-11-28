@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MaintenanceWindowAutomationParameters
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The parameters for an <code>AUTOMATION</code> task type.
 **/
 export class MaintenanceWindowAutomationParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DocumentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=DocumentVersion" })
   documentVersion?: string;
 
-  @Metadata({ data: "json, name=Parameters" })
+  @SpeakeasyMetadata({ data: "json, name=Parameters" })
   parameters?: Map<string, string[]>;
 }

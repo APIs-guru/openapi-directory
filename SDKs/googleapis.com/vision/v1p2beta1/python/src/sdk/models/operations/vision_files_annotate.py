@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,14 +21,14 @@ class VisionFilesAnnotateQueryParams:
 
 @dataclass
 class VisionFilesAnnotateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VisionFilesAnnotateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -38,14 +39,14 @@ class VisionFilesAnnotateSecurity:
 
 @dataclass
 class VisionFilesAnnotateRequest:
-    query_params: VisionFilesAnnotateQueryParams = field(default=None)
+    query_params: VisionFilesAnnotateQueryParams = field()
+    security: VisionFilesAnnotateSecurity = field()
     request: Optional[shared.GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: VisionFilesAnnotateSecurity = field(default=None)
     
 
 @dataclass
 class VisionFilesAnnotateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_vision_v1p2beta1_batch_annotate_files_response: Optional[shared.GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,53 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class UpdateAccountSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class UpdateAccountSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
 
 export class UpdateAccountSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: UpdateAccountSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: UpdateAccountSecurityOption2;
-}
-
-
-export class UpdateAccountRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.Account;
-
-  @Metadata()
-  security: UpdateAccountSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class UpdateAccountDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class UpdateAccountRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.AccountInput;
+
+  @SpeakeasyMetadata()
+  security: UpdateAccountSecurity;
+}
+
+
 export class UpdateAccountResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   account?: shared.Account;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateAccountDefaultApplicationJsonObject?: UpdateAccountDefaultApplicationJson;
 }

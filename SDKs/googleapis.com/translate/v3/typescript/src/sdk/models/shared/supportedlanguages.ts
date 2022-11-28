@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SupportedLanguage } from "./supportedlanguage";
+
 
 
 // SupportedLanguages
@@ -8,6 +8,6 @@ import { SupportedLanguage } from "./supportedlanguage";
  * The response message for discovering supported languages.
 **/
 export class SupportedLanguages extends SpeakeasyBase {
-  @Metadata({ data: "json, name=languages", elemType: shared.SupportedLanguage })
+  @SpeakeasyMetadata({ data: "json, name=languages", elemType: SupportedLanguage })
   languages?: SupportedLanguage[];
 }

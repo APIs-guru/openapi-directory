@@ -1,11 +1,7 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class PullDocumentIdSecurity extends SpeakeasyBase {
     bearerAuth: shared.SchemeBearerAuth;
-}
-export declare class PullDocumentIdRequest extends SpeakeasyBase {
-    request?: any;
-    security: PullDocumentIdSecurity;
 }
 export declare class PullDocumentId401ApplicationJson extends SpeakeasyBase {
     error?: string;
@@ -14,6 +10,10 @@ export declare class PullDocumentId401ApplicationJson extends SpeakeasyBase {
 export declare class PullDocumentId404ApplicationJson extends SpeakeasyBase {
     error?: any;
     errorDescription?: any;
+}
+export declare class PullDocumentIdRequest extends SpeakeasyBase {
+    request?: any;
+    security: PullDocumentIdSecurity;
 }
 export declare class PullDocumentIdResponse extends SpeakeasyBase {
     contentType: string;

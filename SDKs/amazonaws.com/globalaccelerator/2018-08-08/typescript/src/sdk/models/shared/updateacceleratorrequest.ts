@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IpAddressTypeEnum } from "./ipaddresstypeenum";
 
 
+
 export class UpdateAcceleratorRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcceleratorArn" })
+  @SpeakeasyMetadata({ data: "json, name=AcceleratorArn" })
   acceleratorArn: string;
 
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=IpAddressType" })
+  @SpeakeasyMetadata({ data: "json, name=IpAddressType" })
   ipAddressType?: IpAddressTypeEnum;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 }

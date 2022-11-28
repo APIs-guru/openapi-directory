@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UpdateDevicePolicyConfigurationHeaders = /** @class */ (function (_super) {
     __extends(UpdateDevicePolicyConfigurationHeaders, _super);
     function UpdateDevicePolicyConfigurationHeaders() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateDevicePolicyConfigurationHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateDevicePolicyConfigurationHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateDevicePolicyConfigurationHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateDevicePolicyConfigurationHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateDevicePolicyConfigurationHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateDevicePolicyConfigurationHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateDevicePolicyConfigurationHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateDevicePolicyConfigurationHeaders;
@@ -65,11 +65,11 @@ var UpdateDevicePolicyConfigurationRequestBody = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DeviceCaCertificate" }),
+        SpeakeasyMetadata({ data: "json, name=DeviceCaCertificate" }),
         __metadata("design:type", String)
     ], UpdateDevicePolicyConfigurationRequestBody.prototype, "deviceCaCertificate", void 0);
     __decorate([
-        Metadata({ data: "json, name=FleetArn" }),
+        SpeakeasyMetadata({ data: "json, name=FleetArn" }),
         __metadata("design:type", String)
     ], UpdateDevicePolicyConfigurationRequestBody.prototype, "fleetArn", void 0);
     return UpdateDevicePolicyConfigurationRequestBody;
@@ -81,11 +81,11 @@ var UpdateDevicePolicyConfigurationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateDevicePolicyConfigurationHeaders)
     ], UpdateDevicePolicyConfigurationRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateDevicePolicyConfigurationRequestBody)
     ], UpdateDevicePolicyConfigurationRequest.prototype, "request", void 0);
     return UpdateDevicePolicyConfigurationRequest;
@@ -97,35 +97,35 @@ var UpdateDevicePolicyConfigurationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateDevicePolicyConfigurationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDevicePolicyConfigurationResponse.prototype, "internalServerErrorException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDevicePolicyConfigurationResponse.prototype, "invalidRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDevicePolicyConfigurationResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateDevicePolicyConfigurationResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDevicePolicyConfigurationResponse.prototype, "tooManyRequestsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDevicePolicyConfigurationResponse.prototype, "unauthorizedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], UpdateDevicePolicyConfigurationResponse.prototype, "updateDevicePolicyConfigurationResponse", void 0);
     return UpdateDevicePolicyConfigurationResponse;

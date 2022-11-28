@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 
 @dataclass
 class GetOrganizationApplianceSecurityEventsPathParams:
-    organization_id: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationId', 'style': 'simple', 'explode': False }})
+    organization_id: str = field(metadata={'path_param': { 'field_name': 'organizationId', 'style': 'simple', 'explode': False }})
     
 class GetOrganizationApplianceSecurityEventsSortOrderEnum(str, Enum):
     ASCENDING = "ascending"
@@ -24,14 +25,14 @@ class GetOrganizationApplianceSecurityEventsQueryParams:
 
 @dataclass
 class GetOrganizationApplianceSecurityEventsRequest:
-    path_params: GetOrganizationApplianceSecurityEventsPathParams = field(default=None)
-    query_params: GetOrganizationApplianceSecurityEventsQueryParams = field(default=None)
+    path_params: GetOrganizationApplianceSecurityEventsPathParams = field()
+    query_params: GetOrganizationApplianceSecurityEventsQueryParams = field()
     
 
 @dataclass
 class GetOrganizationApplianceSecurityEventsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     get_organization_appliance_security_events_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ForgotPasswordPinRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   string?: string;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   string1?: string;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   string2?: string;
 }
 
 
 export class ForgotPasswordPinRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: ForgotPasswordPinRequests;
 }
 
 
 export class ForgotPasswordPinResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pinRedeemResult?: shared.PinRedeemResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

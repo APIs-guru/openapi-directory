@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://tsapi.net",
 }
 
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -33,33 +37,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetSurveys - Returns a list of available Surveys
 func (s *SDK) GetSurveys(ctx context.Context) (*operations.GetSurveysResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Surveys"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -67,7 +93,7 @@ func (s *SDK) GetSurveys(ctx context.Context) (*operations.GetSurveysResponse, e
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -111,8 +137,9 @@ func (s *SDK) GetSurveys(ctx context.Context) (*operations.GetSurveysResponse, e
 	return res, nil
 }
 
+// GetSurveysSurveyIDInterviews - Fetches some interview records for a specific survey
 func (s *SDK) GetSurveysSurveyIDInterviews(ctx context.Context, request operations.GetSurveysSurveyIDInterviewsRequest) (*operations.GetSurveysSurveyIDInterviewsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Surveys/{surveyId}/Interviews", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -122,7 +149,7 @@ func (s *SDK) GetSurveysSurveyIDInterviews(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -166,8 +193,9 @@ func (s *SDK) GetSurveysSurveyIDInterviews(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetSurveysSurveyIDMetadata - Fetches the metadata for a specific survey
 func (s *SDK) GetSurveysSurveyIDMetadata(ctx context.Context, request operations.GetSurveysSurveyIDMetadataRequest) (*operations.GetSurveysSurveyIDMetadataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Surveys/{surveyId}/Metadata", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -175,7 +203,7 @@ func (s *SDK) GetSurveysSurveyIDMetadata(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

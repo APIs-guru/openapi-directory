@@ -31,7 +31,7 @@ type ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesUpdateEntitiesWith
 type ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesUpdateEntitiesWithConditionsRequest struct {
 	PathParams  ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesUpdateEntitiesWithConditionsPathParams
 	QueryParams ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesUpdateEntitiesWithConditionsQueryParams
-	Request     *shared.Entity `request:"mediaType=application/json"`
+	Request     *shared.EntityInput `request:"mediaType=application/json"`
 	Security    ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesUpdateEntitiesWithConditionsSecurity
 }
 

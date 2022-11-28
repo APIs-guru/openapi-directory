@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum CreateApplicationPresignedUrlXAmzTargetEnum {
     KinesisAnalytics20180523CreateApplicationPresignedUrl = "KinesisAnalytics_20180523.CreateApplicationPresignedUrl"

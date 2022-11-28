@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // QuotaOverride
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A quota override
 **/
 export class QuotaOverride extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adminOverrideAncestor" })
+  @SpeakeasyMetadata({ data: "json, name=adminOverrideAncestor" })
   adminOverrideAncestor?: string;
 
-  @Metadata({ data: "json, name=dimensions" })
+  @SpeakeasyMetadata({ data: "json, name=dimensions" })
   dimensions?: Map<string, string>;
 
-  @Metadata({ data: "json, name=metric" })
+  @SpeakeasyMetadata({ data: "json, name=metric" })
   metric?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=overrideValue" })
+  @SpeakeasyMetadata({ data: "json, name=overrideValue" })
   overrideValue?: string;
 
-  @Metadata({ data: "json, name=unit" })
+  @SpeakeasyMetadata({ data: "json, name=unit" })
   unit?: string;
 }

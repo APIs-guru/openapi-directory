@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StartSuiteRunResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=suiteRunArn" })
+  @SpeakeasyMetadata({ data: "json, name=suiteRunArn" })
   suiteRunArn?: string;
 
-  @Metadata({ data: "json, name=suiteRunId" })
+  @SpeakeasyMetadata({ data: "json, name=suiteRunId" })
   suiteRunId?: string;
 }

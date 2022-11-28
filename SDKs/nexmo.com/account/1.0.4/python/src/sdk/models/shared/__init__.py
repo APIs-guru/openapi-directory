@@ -7,6 +7,8 @@ from .errorauthenticationfailed import *
 from .errorauthenticationfailedaccountbalance import *
 from .errorautoreloadnotenabled import *
 from .errorsecretidnotfound import *
+from .registeremailrequest import *
+from .registeremailresponse import *
 from .secretinfo import *
 from .secretmgmtlinks import *
 from .security import *

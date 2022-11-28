@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// VirtualServiceRef
+// An object that represents a virtual service returned by a list operation.
 type VirtualServiceRef struct {
 	Arn                string    `json:"arn"`
 	CreatedAt          time.Time `json:"createdAt"`

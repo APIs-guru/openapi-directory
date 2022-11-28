@@ -4,7 +4,7 @@ from typing import Any,List,Optional
 
 @dataclass
 class GetNetworkSmDevicesPathParams:
-    network_id: str = field(default=None, metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
+    network_id: str = field(metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,14 +21,14 @@ class GetNetworkSmDevicesQueryParams:
 
 @dataclass
 class GetNetworkSmDevicesRequest:
-    path_params: GetNetworkSmDevicesPathParams = field(default=None)
-    query_params: GetNetworkSmDevicesQueryParams = field(default=None)
+    path_params: GetNetworkSmDevicesPathParams = field()
+    query_params: GetNetworkSmDevicesQueryParams = field()
     
 
 @dataclass
 class GetNetworkSmDevicesResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     get_network_sm_devices_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ResourceGroupStateEnum } from "./resourcegroupstateenum";
 /**
  * The information about the resource group integration.

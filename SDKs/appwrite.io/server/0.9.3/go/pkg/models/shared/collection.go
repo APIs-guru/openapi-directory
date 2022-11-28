@@ -1,5 +1,7 @@
 package shared
 
+// Collection
+// Collection
 type Collection struct {
 	DollarID          string                 `json:"$id"`
 	DollarPermissions map[string]interface{} `json:"$permissions"`

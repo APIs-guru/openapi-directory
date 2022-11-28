@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -23,19 +24,19 @@ class CloudsupportCasesSearchQueryParams:
 
 @dataclass
 class CloudsupportCasesSearchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudsupportCasesSearchRequest:
-    query_params: CloudsupportCasesSearchQueryParams = field(default=None)
-    security: CloudsupportCasesSearchSecurity = field(default=None)
+    query_params: CloudsupportCasesSearchQueryParams = field()
+    security: CloudsupportCasesSearchSecurity = field()
     
 
 @dataclass
 class CloudsupportCasesSearchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     search_cases_response: Optional[shared.SearchCasesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

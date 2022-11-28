@@ -1,5 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
+from sdk.models import shared
 
 class GetCommunityConversationsOrderEnum(str, Enum):
     ASCENDING = "ASCENDING"
@@ -22,19 +24,19 @@ class GetCommunityConversationsQueryParams:
 
 @dataclass
 class GetCommunityConversationsSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetCommunityConversationsRequest:
-    query_params: GetCommunityConversationsQueryParams = field(default=None)
-    security: GetCommunityConversationsSecurity = field(default=None)
+    query_params: GetCommunityConversationsQueryParams = field()
+    security: GetCommunityConversationsSecurity = field()
     
 
 @dataclass
 class GetCommunityConversationsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     conversations: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

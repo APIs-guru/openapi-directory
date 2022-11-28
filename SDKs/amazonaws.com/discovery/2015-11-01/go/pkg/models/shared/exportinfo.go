@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ExportInfo
+// Information regarding the export status of discovered data. The value is an array of objects.
 type ExportInfo struct {
 	ConfigurationsDownloadURL *string          `json:"configurationsDownloadUrl,omitempty"`
 	ExportID                  string           `json:"exportId"`

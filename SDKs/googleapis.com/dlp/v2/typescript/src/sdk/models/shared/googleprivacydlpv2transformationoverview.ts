@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2TransformationSummary } from "./googleprivacydlpv2transformationsummary";
+
 
 
 // GooglePrivacyDlpV2TransformationOverview
@@ -8,9 +8,9 @@ import { GooglePrivacyDlpV2TransformationSummary } from "./googleprivacydlpv2tra
  * Overview of the modifications that occurred.
 **/
 export class GooglePrivacyDlpV2TransformationOverview extends SpeakeasyBase {
-  @Metadata({ data: "json, name=transformationSummaries", elemType: shared.GooglePrivacyDlpV2TransformationSummary })
+  @SpeakeasyMetadata({ data: "json, name=transformationSummaries", elemType: GooglePrivacyDlpV2TransformationSummary })
   transformationSummaries?: GooglePrivacyDlpV2TransformationSummary[];
 
-  @Metadata({ data: "json, name=transformedBytes" })
+  @SpeakeasyMetadata({ data: "json, name=transformedBytes" })
   transformedBytes?: string;
 }

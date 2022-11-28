@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TokenRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=client_id" })
+  @SpeakeasyMetadata({ data: "json, name=client_id" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=client_secret" })
+  @SpeakeasyMetadata({ data: "json, name=client_secret" })
   clientSecret?: string;
 
-  @Metadata({ data: "json, name=grant_type" })
+  @SpeakeasyMetadata({ data: "json, name=grant_type" })
   grantType?: string;
 }

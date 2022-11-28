@@ -17,6 +17,8 @@ const (
 	GoogleCloudIntegrationsV1alphaCredentialCredentialTypeEnumOidcToken                      GoogleCloudIntegrationsV1alphaCredentialCredentialTypeEnum = "OIDC_TOKEN"
 )
 
+// GoogleCloudIntegrationsV1alphaCredential
+// Defines parameters for a single, canonical credential.
 type GoogleCloudIntegrationsV1alphaCredential struct {
 	AuthToken                      *GoogleCloudIntegrationsV1alphaAuthToken                      `json:"authToken,omitempty"`
 	CredentialType                 *GoogleCloudIntegrationsV1alphaCredentialCredentialTypeEnum   `json:"credentialType,omitempty"`

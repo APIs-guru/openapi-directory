@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChildPolicyEnum } from "./childpolicyenum";
 import { WorkflowExecutionTimeoutTypeEnum } from "./workflowexecutiontimeouttypeenum";
+
 
 
 // WorkflowExecutionTimedOutEventAttributes
@@ -8,9 +9,9 @@ import { WorkflowExecutionTimeoutTypeEnum } from "./workflowexecutiontimeouttype
  * Provides the details of the <code>WorkflowExecutionTimedOut</code> event.
 **/
 export class WorkflowExecutionTimedOutEventAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=childPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=childPolicy" })
   childPolicy: ChildPolicyEnum;
 
-  @Metadata({ data: "json, name=timeoutType" })
+  @SpeakeasyMetadata({ data: "json, name=timeoutType" })
   timeoutType: WorkflowExecutionTimeoutTypeEnum;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// CompensationInfo
+// Job compensation details.
 type CompensationInfo struct {
 	AnnualizedBaseCompensationRange  *CompensationRange  `json:"annualizedBaseCompensationRange,omitempty"`
 	AnnualizedTotalCompensationRange *CompensationRange  `json:"annualizedTotalCompensationRange,omitempty"`

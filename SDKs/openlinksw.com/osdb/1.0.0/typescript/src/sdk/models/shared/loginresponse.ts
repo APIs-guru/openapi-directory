@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LoginResponseResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user: string;
 }
 
@@ -12,15 +13,15 @@ export enum LoginResponseStatusEnum {
 
 
 export class LoginResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=api" })
+  @SpeakeasyMetadata({ data: "json, name=api" })
   api: string;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method: string;
 
-  @Metadata({ data: "json, name=response" })
+  @SpeakeasyMetadata({ data: "json, name=response" })
   response: LoginResponseResponse;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: LoginResponseStatusEnum;
 }

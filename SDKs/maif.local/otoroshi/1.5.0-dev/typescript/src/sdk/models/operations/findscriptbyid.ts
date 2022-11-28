@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class FindScriptByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=scriptId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=scriptId" })
   scriptId: string;
 }
 
 
 export class FindScriptByIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   otoroshiAuth: shared.SchemeOtoroshiAuth;
 }
 
 
 export class FindScriptByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: FindScriptByIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: FindScriptByIdSecurity;
 }
 
 
 export class FindScriptByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   script?: shared.Script;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

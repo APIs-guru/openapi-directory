@@ -32,7 +32,7 @@ type DataprocProjectsLocationsBatchesCreateSecurity struct {
 type DataprocProjectsLocationsBatchesCreateRequest struct {
 	PathParams  DataprocProjectsLocationsBatchesCreatePathParams
 	QueryParams DataprocProjectsLocationsBatchesCreateQueryParams
-	Request     *shared.Batch `request:"mediaType=application/json"`
+	Request     *shared.BatchInput `request:"mediaType=application/json"`
 	Security    DataprocProjectsLocationsBatchesCreateSecurity
 }
 

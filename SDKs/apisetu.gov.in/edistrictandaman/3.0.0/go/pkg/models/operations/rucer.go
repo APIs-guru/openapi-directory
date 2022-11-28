@@ -26,11 +26,6 @@ type RucerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type RucerRequest struct {
-	Request  *RucerRequestBody `request:"mediaType=application/json"`
-	Security RucerSecurity
-}
-
 type Rucer400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Rucer504ApplicationJSON struct {
 	Error            *Rucer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Rucer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type RucerRequest struct {
+	Request  *RucerRequestBody `request:"mediaType=application/json"`
+	Security RucerSecurity
 }
 
 type RucerResponse struct {

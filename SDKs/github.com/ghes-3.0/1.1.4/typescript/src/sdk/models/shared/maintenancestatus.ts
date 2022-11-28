@@ -1,23 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MaintenanceStatusConnectionServices extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=number" })
+  @SpeakeasyMetadata({ data: "json, name=number" })
   number: number;
 }
 
 
 export class MaintenanceStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connection_services", elemType: shared.MaintenanceStatusConnectionServices })
+  @SpeakeasyMetadata({ data: "json, name=connection_services", elemType: MaintenanceStatusConnectionServices })
   connectionServices?: MaintenanceStatusConnectionServices[];
 
-  @Metadata({ data: "json, name=scheduled_time" })
+  @SpeakeasyMetadata({ data: "json, name=scheduled_time" })
   scheduledTime?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }

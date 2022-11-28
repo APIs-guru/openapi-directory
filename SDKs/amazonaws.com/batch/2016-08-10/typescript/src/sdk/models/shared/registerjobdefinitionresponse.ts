@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegisterJobDefinitionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobDefinitionArn" })
+  @SpeakeasyMetadata({ data: "json, name=jobDefinitionArn" })
   jobDefinitionArn: string;
 
-  @Metadata({ data: "json, name=jobDefinitionName" })
+  @SpeakeasyMetadata({ data: "json, name=jobDefinitionName" })
   jobDefinitionName: string;
 
-  @Metadata({ data: "json, name=revision" })
+  @SpeakeasyMetadata({ data: "json, name=revision" })
   revision: number;
 }

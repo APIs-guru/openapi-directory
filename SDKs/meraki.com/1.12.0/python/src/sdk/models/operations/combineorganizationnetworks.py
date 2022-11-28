@@ -1,30 +1,31 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class CombineOrganizationNetworksPathParams:
-    organization_id: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationId', 'style': 'simple', 'explode': False }})
+    organization_id: str = field(metadata={'path_param': { 'field_name': 'organizationId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json
 @dataclass
 class CombineOrganizationNetworksRequestBody:
-    enrollment_string: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enrollmentString' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    network_ids: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'networkIds' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    network_ids: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('networkIds') }})
+    enrollment_string: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enrollmentString') }})
     
 
 @dataclass
 class CombineOrganizationNetworksRequest:
-    path_params: CombineOrganizationNetworksPathParams = field(default=None)
-    request: CombineOrganizationNetworksRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: CombineOrganizationNetworksPathParams = field()
+    request: CombineOrganizationNetworksRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CombineOrganizationNetworksResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     combine_organization_networks_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

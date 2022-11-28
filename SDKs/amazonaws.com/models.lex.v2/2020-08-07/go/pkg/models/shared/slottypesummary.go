@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SlotTypeSummary
+// Provides summary information about a slot type.
 type SlotTypeSummary struct {
 	Description             *string    `json:"description,omitempty"`
 	LastUpdatedDateTime     *time.Time `json:"lastUpdatedDateTime,omitempty"`

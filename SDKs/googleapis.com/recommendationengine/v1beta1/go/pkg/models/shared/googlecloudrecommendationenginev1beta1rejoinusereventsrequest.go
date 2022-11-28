@@ -8,6 +8,8 @@ const (
 	GoogleCloudRecommendationengineV1beta1RejoinUserEventsRequestUserEventRejoinScopeEnumUnjoinedEvents                  GoogleCloudRecommendationengineV1beta1RejoinUserEventsRequestUserEventRejoinScopeEnum = "UNJOINED_EVENTS"
 )
 
+// GoogleCloudRecommendationengineV1beta1RejoinUserEventsRequest
+// Request message for CatalogRejoin method.
 type GoogleCloudRecommendationengineV1beta1RejoinUserEventsRequest struct {
 	UserEventRejoinScope *GoogleCloudRecommendationengineV1beta1RejoinUserEventsRequestUserEventRejoinScopeEnum `json:"userEventRejoinScope,omitempty"`
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Color
 /**
  * Color preprocessing configuration. **Note:** This configuration is not supported.
@@ -33,15 +33,15 @@ var Color = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=brightness" }),
+        SpeakeasyMetadata({ data: "json, name=brightness" }),
         __metadata("design:type", Number)
     ], Color.prototype, "brightness", void 0);
     __decorate([
-        Metadata({ data: "json, name=contrast" }),
+        SpeakeasyMetadata({ data: "json, name=contrast" }),
         __metadata("design:type", Number)
     ], Color.prototype, "contrast", void 0);
     __decorate([
-        Metadata({ data: "json, name=saturation" }),
+        SpeakeasyMetadata({ data: "json, name=saturation" }),
         __metadata("design:type", Number)
     ], Color.prototype, "saturation", void 0);
     return Color;

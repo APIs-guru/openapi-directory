@@ -1,18 +1,15 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://api.bulksms.com/v1",
+export const ServerList = [
+	"https://api.bulksms.com/v1",
 ] as const;
 
 export function WithServerURL(
@@ -23,13 +20,13 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
@@ -38,41 +35,48 @@ export function WithSecurity(security: Security): OptsFunc {
     security = new Security(security);
   }
   return (sdk: SDK) => {
-    sdk.security = security;
+    sdk._security = security;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  public _security?: Security;
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
+    if (!this._securityClient) {
+      if (this._security) {
+        this._securityClient = utils.CreateSecurityClient(
+          this._defaultClient,
+          this._security
         );
       } else {
-        this.securityClient = this.defaultClient;
+        this._securityClient = this._defaultClient;
       }
     }
+    
   }
   
-  // DeleteWebhooksId - Delete a webhook
-  DeleteWebhooksId(
+  /**
+   * deleteWebhooksId - Delete a webhook
+  **/
+  deleteWebhooksId(
     req: operations.DeleteWebhooksIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteWebhooksIdResponse> {
@@ -80,24 +84,26 @@ export class SDK {
       req = new operations.DeleteWebhooksIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/webhooks/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteWebhooksIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.DeleteWebhooksIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -109,8 +115,10 @@ export class SDK {
   }
 
   
-  // GetBlockedNumbers - List blocked numbers
-  GetBlockedNumbers(
+  /**
+   * getBlockedNumbers - List blocked numbers
+  **/
+  getBlockedNumbers(
     req: operations.GetBlockedNumbersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBlockedNumbersResponse> {
@@ -118,11 +126,12 @@ export class SDK {
       req = new operations.GetBlockedNumbersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/blocked-numbers";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -131,17 +140,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBlockedNumbersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetBlockedNumbersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.blockedNumber = httpRes?.data;
             }
             break;
@@ -153,8 +163,9 @@ export class SDK {
   }
 
   
-  // GetMessages - Retrieve Messages
-  /** 
+  /**
+   * getMessages - Retrieve Messages
+   *
    * Retrieve the messages you have sent or received.
    * 
    * All the parameters are optional.  If a value is not supplied for `filter`, the messages are not filtered.
@@ -189,7 +200,7 @@ export class SDK {
    * | userSuppliedId  | String | | Use a string value you specified in the `userSuppliedId` property when you sent the message. Only `SENT` messages will be retrieved. <br/>`filter=userSuppliedId%3Dacc009876` |
    * 
   **/
-  GetMessages(
+  getMessages(
     req: operations.GetMessagesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMessagesResponse> {
@@ -197,11 +208,12 @@ export class SDK {
       req = new operations.GetMessagesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/messages";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -210,22 +222,23 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMessagesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetMessagesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messages = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -237,15 +250,16 @@ export class SDK {
   }
 
   
-  // GetMessagesId - Show Message
-  /** 
+  /**
+   * getMessagesId - Show Message
+   *
    * Get a the message by `id`.
    * ```http
    * GET /v1/messages/4023457654
    * ```
    * 
   **/
-  GetMessagesId(
+  getMessagesId(
     req: operations.GetMessagesIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMessagesIdResponse> {
@@ -253,32 +267,34 @@ export class SDK {
       req = new operations.GetMessagesIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/messages/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMessagesIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetMessagesIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.message = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -290,14 +306,15 @@ export class SDK {
   }
 
   
-  // GetMessagesIdRelatedReceivedMessages - List Related Messages
-  /** 
+  /**
+   * getMessagesIdRelatedReceivedMessages - List Related Messages
+   *
    * Get the messages related to a sent message identified by `id`.
    * 
    * For more information how this work, see the `relatedSentMessageId` field in the message.
    * 
   **/
-  GetMessagesIdRelatedReceivedMessages(
+  getMessagesIdRelatedReceivedMessages(
     req: operations.GetMessagesIdRelatedReceivedMessagesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMessagesIdRelatedReceivedMessagesResponse> {
@@ -305,27 +322,29 @@ export class SDK {
       req = new operations.GetMessagesIdRelatedReceivedMessagesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/messages/{id}/relatedReceivedMessages", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMessagesIdRelatedReceivedMessagesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetMessagesIdRelatedReceivedMessagesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messages = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -337,8 +356,9 @@ export class SDK {
   }
 
   
-  // GetMessagesSend - Send message by simple GET or POST
-  /** 
+  /**
+   * getMessagesSend - Send message by simple GET or POST
+   *
    * A really simple interface for people who require a GET mechanism to submit a single message.
    * 
    * The URI is interpreted as UTF-8. HTTP Basic Auth is used for authentication.
@@ -360,7 +380,7 @@ export class SDK {
    * ```
    * 
   **/
-  GetMessagesSend(
+  getMessagesSend(
     req: operations.GetMessagesSendRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMessagesSendResponse> {
@@ -368,11 +388,12 @@ export class SDK {
       req = new operations.GetMessagesSendRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/messages/send";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -381,27 +402,28 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMessagesSendResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetMessagesSendResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messages = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -413,11 +435,12 @@ export class SDK {
   }
 
   
-  // GetProfile - Get profile
-  /** 
+  /**
+   * getProfile - Get profile
+   *
    * Returns information about your user profile
   **/
-  GetProfile(
+  getProfile(
     req: operations.GetProfileRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProfileResponse> {
@@ -425,22 +448,24 @@ export class SDK {
       req = new operations.GetProfileRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/profile";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProfileResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetProfileResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.profile = httpRes?.data;
             }
             break;
@@ -452,11 +477,12 @@ export class SDK {
   }
 
   
-  // GetWebhooks - List webhooks
-  /** 
+  /**
+   * getWebhooks - List webhooks
+   *
    * Contains a list of your webhooks
   **/
-  GetWebhooks(
+  getWebhooks(
     req: operations.GetWebhooksRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetWebhooksResponse> {
@@ -464,22 +490,24 @@ export class SDK {
       req = new operations.GetWebhooksRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/webhooks";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetWebhooksResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetWebhooksResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.webhooks = httpRes?.data;
             }
             break;
@@ -491,8 +519,10 @@ export class SDK {
   }
 
   
-  // GetWebhooksId - Read a webhook
-  GetWebhooksId(
+  /**
+   * getWebhooksId - Read a webhook
+  **/
+  getWebhooksId(
     req: operations.GetWebhooksIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetWebhooksIdResponse> {
@@ -500,32 +530,34 @@ export class SDK {
       req = new operations.GetWebhooksIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/webhooks/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetWebhooksIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetWebhooksIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.webhook = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -537,8 +569,9 @@ export class SDK {
   }
 
   
-  // PostBlockedNumbers - Create a blocked number
-  /** 
+  /**
+   * postBlockedNumbers - Create a blocked number
+   *
    * Blocked numbers are phone numbers to which your account is not permitted to send messages.
    * The numbers can be created via this API, by a recipient replying with a STOP message to one
    * of your previous SENT messages, or by a BulkSMS administrator.
@@ -547,7 +580,7 @@ export class SDK {
    * `FAILED.BLOCKED`. Messages sent to blocked numbers are billed to your account.
    * 
   **/
-  PostBlockedNumbers(
+  postBlockedNumbers(
     req: operations.PostBlockedNumbersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostBlockedNumbersResponse> {
@@ -555,39 +588,39 @@ export class SDK {
       req = new operations.PostBlockedNumbersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/blocked-numbers";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostBlockedNumbersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostBlockedNumbersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -597,8 +630,9 @@ export class SDK {
   }
 
   
-  // PostMessages - Send Messages
-  /** 
+  /**
+   * postMessages - Send Messages
+   *
    * Send messages to one or more recipients.
    * 
    * You can post up to `30 000` messages in a batch. 
@@ -659,7 +693,7 @@ export class SDK {
    * ```
    * 
   **/
-  PostMessages(
+  postMessages(
     req: operations.PostMessagesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostMessagesResponse> {
@@ -667,22 +701,22 @@ export class SDK {
       req = new operations.PostMessagesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/messages";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -693,32 +727,32 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostMessagesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostMessagesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messages = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -730,8 +764,9 @@ export class SDK {
   }
 
   
-  // PostRmmPreSignAttachment - Upload an attachment via a signed URL
-  /** 
+  /**
+   * postRmmPreSignAttachment - Upload an attachment via a signed URL
+   *
    * You can send any URL as part of your SMS text.  When the recipient taps on the URL, the file to which the URL points will be downloaded and opened on the mobile device.  This handy feature is supported by most modern mobile devices.
    * 
    * The best way to send an attachment is to store the file on a web server you own and use that URL in the SMS text.  Your customer will then see a URL that she will recognise as belonging to you.  This is the most flexible and the simplest solution.
@@ -749,7 +784,7 @@ export class SDK {
    * If you need to, take a closer look at the example program (on the right-hand side) to get a better idea of how to implement this process.
    * 
   **/
-  PostRmmPreSignAttachment(
+  postRmmPreSignAttachment(
     req: operations.PostRmmPreSignAttachmentRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostRmmPreSignAttachmentResponse> {
@@ -757,40 +792,40 @@ export class SDK {
       req = new operations.PostRmmPreSignAttachmentRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/rmm/pre-sign-attachment";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostRmmPreSignAttachmentResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostRmmPreSignAttachmentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.preSignInfo = httpRes?.data;
             }
             break;
@@ -802,8 +837,9 @@ export class SDK {
   }
 
   
-  // PostWebhooks - Create a webhook
-  /** 
+  /**
+   * postWebhooks - Create a webhook
+   *
    * A webhook is an URL that you can register when you want the BulkSMS system to notify you about your messages.
    * You can register multiple webhooks, and each one will be called.  (Note: you can also use our [Web App](https://www.bulksms.com/account/#!/advanced-settings/webhooks) to manage your webhooks interactively.)  
    * If you want to be notified of `SENT` messages and `RECEIVED` messages you need to create two webhooks.
@@ -846,7 +882,7 @@ export class SDK {
    *  - A __message discarded__ email is sent after failure email is send when a message is discarded as a consequence of a non-retry-able error.
    * 
   **/
-  PostWebhooks(
+  postWebhooks(
     req: operations.PostWebhooksRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostWebhooksResponse> {
@@ -854,45 +890,45 @@ export class SDK {
       req = new operations.PostWebhooksRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/webhooks";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostWebhooksResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostWebhooksResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.webhook = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -904,8 +940,10 @@ export class SDK {
   }
 
   
-  // PostWebhooksId - Update a webhook
-  PostWebhooksId(
+  /**
+   * postWebhooksId - Update a webhook
+  **/
+  postWebhooksId(
     req: operations.PostWebhooksIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostWebhooksIdResponse> {
@@ -913,45 +951,45 @@ export class SDK {
       req = new operations.PostWebhooksIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/webhooks/{id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostWebhooksIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostWebhooksIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.webhook = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;

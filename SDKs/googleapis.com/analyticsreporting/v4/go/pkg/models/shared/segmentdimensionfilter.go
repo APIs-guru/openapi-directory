@@ -15,6 +15,8 @@ const (
 	SegmentDimensionFilterOperatorEnumNumericBetween      SegmentDimensionFilterOperatorEnum = "NUMERIC_BETWEEN"
 )
 
+// SegmentDimensionFilter
+// Dimension filter specifies the filtering options on a dimension.
 type SegmentDimensionFilter struct {
 	CaseSensitive      *bool                               `json:"caseSensitive,omitempty"`
 	DimensionName      *string                             `json:"dimensionName,omitempty"`

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostEnableSerialConsoleAccessActionEnum(str, Enum):
     ENABLE_SERIAL_CONSOLE_ACCESS = "EnableSerialConsoleAccess"
@@ -10,8 +14,8 @@ class PostEnableSerialConsoleAccessVersionEnum(str, Enum):
 
 @dataclass
 class PostEnableSerialConsoleAccessQueryParams:
-    action: PostEnableSerialConsoleAccessActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostEnableSerialConsoleAccessVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostEnableSerialConsoleAccessActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostEnableSerialConsoleAccessVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostEnableSerialConsoleAccessHeaders:
 
 @dataclass
 class PostEnableSerialConsoleAccessRequest:
-    query_params: PostEnableSerialConsoleAccessQueryParams = field(default=None)
-    headers: PostEnableSerialConsoleAccessHeaders = field(default=None)
+    headers: PostEnableSerialConsoleAccessHeaders = field()
+    query_params: PostEnableSerialConsoleAccessQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostEnableSerialConsoleAccessResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

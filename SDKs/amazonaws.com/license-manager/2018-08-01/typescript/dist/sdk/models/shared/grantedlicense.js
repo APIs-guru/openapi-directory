@@ -1,0 +1,104 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ConsumptionConfiguration } from "./consumptionconfiguration";
+import { Entitlement } from "./entitlement";
+import { IssuerDetails } from "./issuerdetails";
+import { Metadata } from "./metadata";
+import { ReceivedMetadata } from "./receivedmetadata";
+import { LicenseStatusEnum } from "./licensestatusenum";
+import { DatetimeRange } from "./datetimerange";
+// GrantedLicense
+/**
+ * Describes a license that is granted to a grantee.
+**/
+var GrantedLicense = /** @class */ (function (_super) {
+    __extends(GrantedLicense, _super);
+    function GrantedLicense() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Beneficiary" }),
+        __metadata("design:type", String)
+    ], GrantedLicense.prototype, "beneficiary", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=ConsumptionConfiguration" }),
+        __metadata("design:type", ConsumptionConfiguration)
+    ], GrantedLicense.prototype, "consumptionConfiguration", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=CreateTime" }),
+        __metadata("design:type", String)
+    ], GrantedLicense.prototype, "createTime", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Entitlements", elemType: Entitlement }),
+        __metadata("design:type", Array)
+    ], GrantedLicense.prototype, "entitlements", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=HomeRegion" }),
+        __metadata("design:type", String)
+    ], GrantedLicense.prototype, "homeRegion", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Issuer" }),
+        __metadata("design:type", IssuerDetails)
+    ], GrantedLicense.prototype, "issuer", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=LicenseArn" }),
+        __metadata("design:type", String)
+    ], GrantedLicense.prototype, "licenseArn", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=LicenseMetadata", elemType: Metadata }),
+        __metadata("design:type", Array)
+    ], GrantedLicense.prototype, "licenseMetadata", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=LicenseName" }),
+        __metadata("design:type", String)
+    ], GrantedLicense.prototype, "licenseName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=ProductName" }),
+        __metadata("design:type", String)
+    ], GrantedLicense.prototype, "productName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=ProductSKU" }),
+        __metadata("design:type", String)
+    ], GrantedLicense.prototype, "productSku", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=ReceivedMetadata" }),
+        __metadata("design:type", ReceivedMetadata)
+    ], GrantedLicense.prototype, "receivedMetadata", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Status" }),
+        __metadata("design:type", String)
+    ], GrantedLicense.prototype, "status", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Validity" }),
+        __metadata("design:type", DatetimeRange)
+    ], GrantedLicense.prototype, "validity", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Version" }),
+        __metadata("design:type", String)
+    ], GrantedLicense.prototype, "version", void 0);
+    return GrantedLicense;
+}(SpeakeasyBase));
+export { GrantedLicense };

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRetailV2PurchaseTransaction
+// A transaction represents the entire purchase transaction.
 type GoogleCloudRetailV2PurchaseTransaction struct {
 	Cost         *float32 `json:"cost,omitempty"`
 	CurrencyCode *string  `json:"currencyCode,omitempty"`

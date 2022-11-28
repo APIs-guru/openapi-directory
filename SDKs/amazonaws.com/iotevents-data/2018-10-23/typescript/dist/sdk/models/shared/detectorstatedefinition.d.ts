@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TimerDefinition } from "./timerdefinition";
 import { VariableDefinition } from "./variabledefinition";
 /**

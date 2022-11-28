@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .claimdevicerequest import *
 from .claimdeviceresponse import *
@@ -23,6 +23,7 @@ from .finddevicesbydeviceidentifierrequest import *
 from .finddevicesbydeviceidentifierresponse import *
 from .finddevicesbyownerrequest import *
 from .finddevicesbyownerresponse import *
+from .googleworkspaceaccount import *
 from .listcustomersresponse import *
 from .listvendorcustomersresponse import *
 from .listvendorsresponse import *

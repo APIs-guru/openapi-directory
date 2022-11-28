@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudbuildProjectsLocationsGitLabConfigsReposListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class CloudbuildProjectsLocationsGitLabConfigsReposListQueryParams:
 
 @dataclass
 class CloudbuildProjectsLocationsGitLabConfigsReposListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudbuildProjectsLocationsGitLabConfigsReposListRequest:
-    path_params: CloudbuildProjectsLocationsGitLabConfigsReposListPathParams = field(default=None)
-    query_params: CloudbuildProjectsLocationsGitLabConfigsReposListQueryParams = field(default=None)
-    security: CloudbuildProjectsLocationsGitLabConfigsReposListSecurity = field(default=None)
+    path_params: CloudbuildProjectsLocationsGitLabConfigsReposListPathParams = field()
+    query_params: CloudbuildProjectsLocationsGitLabConfigsReposListQueryParams = field()
+    security: CloudbuildProjectsLocationsGitLabConfigsReposListSecurity = field()
     
 
 @dataclass
 class CloudbuildProjectsLocationsGitLabConfigsReposListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_git_lab_repositories_response: Optional[shared.ListGitLabRepositoriesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

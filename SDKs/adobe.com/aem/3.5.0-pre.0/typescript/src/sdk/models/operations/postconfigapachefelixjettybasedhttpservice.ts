@@ -1,79 +1,80 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostConfigApacheFelixJettyBasedHttpServiceQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.clientcertificate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.clientcertificate" })
   orgApacheFelixHttpsClientcertificate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.clientcertificate@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.clientcertificate@TypeHint" })
   orgApacheFelixHttpsClientcertificateAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.enable" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.enable" })
   orgApacheFelixHttpsEnable?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.enable@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.enable@TypeHint" })
   orgApacheFelixHttpsEnableAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.keystore" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.keystore" })
   orgApacheFelixHttpsKeystore?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.keystore.key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.keystore.key" })
   orgApacheFelixHttpsKeystoreKey?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.keystore.key.password" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.keystore.key.password" })
   orgApacheFelixHttpsKeystoreKeyPassword?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.keystore.key.password@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.keystore.key.password@TypeHint" })
   orgApacheFelixHttpsKeystoreKeyPasswordAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.keystore.key@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.keystore.key@TypeHint" })
   orgApacheFelixHttpsKeystoreKeyAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.keystore.password" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.keystore.password" })
   orgApacheFelixHttpsKeystorePassword?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.keystore.password@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.keystore.password@TypeHint" })
   orgApacheFelixHttpsKeystorePasswordAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.keystore@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.keystore@TypeHint" })
   orgApacheFelixHttpsKeystoreAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.nio" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.nio" })
   orgApacheFelixHttpsNio?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.nio@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.nio@TypeHint" })
   orgApacheFelixHttpsNioAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.truststore" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.truststore" })
   orgApacheFelixHttpsTruststore?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.truststore.password" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.truststore.password" })
   orgApacheFelixHttpsTruststorePassword?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.truststore.password@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.truststore.password@TypeHint" })
   orgApacheFelixHttpsTruststorePasswordAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.truststore@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org.apache.felix.https.truststore@TypeHint" })
   orgApacheFelixHttpsTruststoreAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org.osgi.service.http.port.secure" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org.osgi.service.http.port.secure" })
   orgOsgiServiceHttpPortSecure?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=org.osgi.service.http.port.secure@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org.osgi.service.http.port.secure@TypeHint" })
   orgOsgiServiceHttpPortSecureAtTypeHint?: string;
 }
 
 
 export class PostConfigApacheFelixJettyBasedHttpServiceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostConfigApacheFelixJettyBasedHttpServiceQueryParams;
 }
 
 
 export class PostConfigApacheFelixJettyBasedHttpServiceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -4,10 +4,8 @@ type GetCertificatesIDPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetCertificatesIDRequest struct {
-	PathParams GetCertificatesIDPathParams
-}
-
+// GetCertificatesIDCertificateResponseCertificateStatusError
+// If issuance or renewal reports `failed`, this property contains information about what happened
 type GetCertificatesIDCertificateResponseCertificateStatusError struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
@@ -30,6 +28,8 @@ const (
 	GetCertificatesIDCertificateResponseCertificateStatusRenewalEnumUnavailable GetCertificatesIDCertificateResponseCertificateStatusRenewalEnum = "unavailable"
 )
 
+// GetCertificatesIDCertificateResponseCertificateStatus
+// Current status of a type `managed` Certificate, always *null* for type `uploaded` Certificates
 type GetCertificatesIDCertificateResponseCertificateStatus struct {
 	Error    *GetCertificatesIDCertificateResponseCertificateStatusError        `json:"error,omitempty"`
 	Issuance *GetCertificatesIDCertificateResponseCertificateStatusIssuanceEnum `json:"issuance,omitempty"`
@@ -65,6 +65,10 @@ type GetCertificatesIDCertificateResponseCertificate struct {
 
 type GetCertificatesIDCertificateResponse struct {
 	Certificate GetCertificatesIDCertificateResponseCertificate `json:"certificate"`
+}
+
+type GetCertificatesIDRequest struct {
+	PathParams GetCertificatesIDPathParams
 }
 
 type GetCertificatesIDResponse struct {

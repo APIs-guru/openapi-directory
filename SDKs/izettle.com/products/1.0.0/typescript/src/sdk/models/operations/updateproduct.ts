@@ -1,68 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateProductPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationUuid" })
   organizationUuid: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=productUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=productUuid" })
   productUuid: string;
 }
 
 
 export class UpdateProductHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=If-Match" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-Match" })
   ifMatch?: string;
 }
 
 
-export class UpdateProductSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  zettleApiKey: shared.SchemeZettleApiKey;
-}
-
-
-export class UpdateProductSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  zettleOauth: shared.SchemeZettleOauth;
-}
-
-
 export class UpdateProductSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: UpdateProductSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  zettleApiKey?: shared.SchemeZettleApiKey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: UpdateProductSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  zettleOauth?: shared.SchemeZettleOauth;
 }
 
 
 export class UpdateProductRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateProductPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateProductHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.ProductUpdateRequest;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdateProductSecurity;
 }
 
 
 export class UpdateProductResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

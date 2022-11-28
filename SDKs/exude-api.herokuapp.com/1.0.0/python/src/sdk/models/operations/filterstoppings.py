@@ -4,18 +4,18 @@ from typing import Any,Optional
 
 @dataclass
 class FilterStoppingsPathParams:
-    type: str = field(default=None, metadata={'path_param': { 'field_name': 'type', 'style': 'simple', 'explode': False }})
+    type: str = field(metadata={'path_param': { 'field_name': 'type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class FilterStoppingsRequest:
-    path_params: FilterStoppingsPathParams = field(default=None)
-    request: Any = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
+    path_params: FilterStoppingsPathParams = field()
+    request: Any = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class FilterStoppingsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     exude_response_bean: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

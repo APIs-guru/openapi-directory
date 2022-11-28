@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainConfigurationSummary } from "./domainconfigurationsummary";
 
 
+
 export class ListDomainConfigurationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domainConfigurations", elemType: shared.DomainConfigurationSummary })
+  @SpeakeasyMetadata({ data: "json, name=domainConfigurations", elemType: DomainConfigurationSummary })
   domainConfigurations?: DomainConfigurationSummary[];
 
-  @Metadata({ data: "json, name=nextMarker" })
+  @SpeakeasyMetadata({ data: "json, name=nextMarker" })
   nextMarker?: string;
 }

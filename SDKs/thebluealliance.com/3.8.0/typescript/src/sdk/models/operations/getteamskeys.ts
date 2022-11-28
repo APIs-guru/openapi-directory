@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTeamsKeysPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=page_num" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=page_num" })
   pageNum: number;
 }
 
 
 export class GetTeamsKeysHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=If-Modified-Since" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-Modified-Since" })
   ifModifiedSince?: string;
 }
 
 
 export class GetTeamsKeysSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class GetTeamsKeysRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTeamsKeysPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetTeamsKeysHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetTeamsKeysSecurity;
 }
 
 
 export class GetTeamsKeysResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTeamsKeys200ApplicationJsonStrings?: string[];
 }

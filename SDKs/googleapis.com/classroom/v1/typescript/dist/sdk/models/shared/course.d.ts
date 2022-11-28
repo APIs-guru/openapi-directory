@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CourseMaterialSet } from "./coursematerialset";
 import { GradebookSettings } from "./gradebooksettings";
 import { DriveFolder } from "./drivefolder";

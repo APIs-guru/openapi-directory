@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FileReference
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A reference to a file.
 **/
 export class FileReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileUri" })
+  @SpeakeasyMetadata({ data: "json, name=fileUri" })
   fileUri?: string;
 }

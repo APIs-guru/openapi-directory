@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SecretMgmtLinks } from "./secretmgmtlinks";
 var SecretInfo = /** @class */ (function (_super) {
     __extends(SecretInfo, _super);
@@ -30,15 +30,15 @@ var SecretInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=_links" }),
+        SpeakeasyMetadata({ data: "json, name=_links" }),
         __metadata("design:type", SecretMgmtLinks)
     ], SecretInfo.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=created_at" }),
+        SpeakeasyMetadata({ data: "json, name=created_at" }),
         __metadata("design:type", String)
     ], SecretInfo.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], SecretInfo.prototype, "id", void 0);
     return SecretInfo;

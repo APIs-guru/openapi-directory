@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RouteData } from "./routedata";
+
 
 
 // UpdateRouteOutput
@@ -7,6 +8,6 @@ import { RouteData } from "./routedata";
  * <zonbook></zonbook><xhtml></xhtml>
 **/
 export class UpdateRouteOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=route" })
+  @SpeakeasyMetadata({ data: "json, name=route" })
   route: RouteData;
 }

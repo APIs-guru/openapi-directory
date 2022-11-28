@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
+from sdk.models import shared
 
 
 @dataclass
 class GetListsDateListJSONPathParams:
-    date: str = field(default=None, metadata={'path_param': { 'field_name': 'date', 'style': 'simple', 'explode': False }})
-    list: str = field(default=None, metadata={'path_param': { 'field_name': 'list', 'style': 'simple', 'explode': False }})
+    date_: str = field(metadata={'path_param': { 'field_name': 'date', 'style': 'simple', 'explode': False }})
+    list: str = field(metadata={'path_param': { 'field_name': 'list', 'style': 'simple', 'explode': False }})
     
 class GetListsDateListJSONSortOrderEnum(str, Enum):
     ASC = "ASC"
@@ -31,76 +34,76 @@ class GetListsDateListJSONQueryParams:
 
 @dataclass
 class GetListsDateListJSONSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
-    
-
-@dataclass
-class GetListsDateListJSONRequest:
-    path_params: GetListsDateListJSONPathParams = field(default=None)
-    query_params: GetListsDateListJSONQueryParams = field(default=None)
-    security: GetListsDateListJSONSecurity = field(default=None)
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
     
 
 @dataclass_json
 @dataclass
 class GetListsDateListJSON200ApplicationJSONResultsBooksIsbns:
-    isbn10: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isbn10' }})
-    isbn13: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isbn13' }})
+    isbn10: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isbn10') }})
+    isbn13: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isbn13') }})
     
 
 @dataclass_json
 @dataclass
 class GetListsDateListJSON200ApplicationJSONResultsBooks:
-    age_group: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'age_group' }})
-    amazon_product_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amazon_product_url' }})
-    article_chapter_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'article_chapter_link' }})
-    asterisk: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'asterisk' }})
-    author: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'author' }})
-    book_image: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'book_image' }})
-    book_review_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'book_review_link' }})
-    contributor: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contributor' }})
-    contributor_note: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contributor_note' }})
-    dagger: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dagger' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    first_chapter_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_chapter_link' }})
-    isbns: Optional[List[GetListsDateListJSON200ApplicationJSONResultsBooksIsbns]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isbns' }})
-    price: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'price' }})
-    primary_isbn10: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primary_isbn10' }})
-    primary_isbn13: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primary_isbn13' }})
-    publisher: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publisher' }})
-    rank: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rank' }})
-    rank_last_week: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rank_last_week' }})
-    sunday_review_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sunday_review_link' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
-    weeks_on_list: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'weeks_on_list' }})
+    age_group: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('age_group') }})
+    amazon_product_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('amazon_product_url') }})
+    article_chapter_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('article_chapter_link') }})
+    asterisk: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('asterisk') }})
+    author: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('author') }})
+    book_image: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('book_image') }})
+    book_review_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('book_review_link') }})
+    contributor: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contributor') }})
+    contributor_note: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contributor_note') }})
+    dagger: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dagger') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    first_chapter_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('first_chapter_link') }})
+    isbns: Optional[List[GetListsDateListJSON200ApplicationJSONResultsBooksIsbns]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isbns') }})
+    price: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('price') }})
+    primary_isbn10: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('primary_isbn10') }})
+    primary_isbn13: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('primary_isbn13') }})
+    publisher: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publisher') }})
+    rank: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rank') }})
+    rank_last_week: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rank_last_week') }})
+    sunday_review_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sunday_review_link') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
+    weeks_on_list: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('weeks_on_list') }})
     
 
 @dataclass_json
 @dataclass
 class GetListsDateListJSON200ApplicationJSONResults:
-    bestsellers_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bestsellers_date' }})
-    books: Optional[List[GetListsDateListJSON200ApplicationJSONResultsBooks]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'books' }})
-    corrections: Optional[List[dict[str, Any]]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'corrections' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'display_name' }})
-    list_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'list_name' }})
-    normal_list_ends_at: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'normal_list_ends_at' }})
-    published_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'published_date' }})
-    updated: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated' }})
+    bestsellers_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bestsellers_date') }})
+    books: Optional[List[GetListsDateListJSON200ApplicationJSONResultsBooks]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('books') }})
+    corrections: Optional[List[dict[str, Any]]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('corrections') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('display_name') }})
+    list_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('list_name') }})
+    normal_list_ends_at: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('normal_list_ends_at') }})
+    published_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('published_date') }})
+    updated: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updated') }})
     
 
 @dataclass_json
 @dataclass
 class GetListsDateListJSON200ApplicationJSON:
-    copyright: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'copyright' }})
-    last_modified: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_modified' }})
-    num_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'num_results' }})
-    results: Optional[GetListsDateListJSON200ApplicationJSONResults] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
-    status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    copyright: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('copyright') }})
+    last_modified: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('last_modified') }})
+    num_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('num_results') }})
+    results: Optional[GetListsDateListJSON200ApplicationJSONResults] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
+    status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    
+
+@dataclass
+class GetListsDateListJSONRequest:
+    path_params: GetListsDateListJSONPathParams = field()
+    query_params: GetListsDateListJSONQueryParams = field()
+    security: GetListsDateListJSONSecurity = field()
     
 
 @dataclass
 class GetListsDateListJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_lists_date_list_json_200_application_json_object: Optional[GetListsDateListJSON200ApplicationJSON] = field(default=None)
-    status_code: int = field(default=None)
     

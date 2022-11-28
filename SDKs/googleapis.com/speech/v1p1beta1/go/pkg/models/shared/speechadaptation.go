@@ -1,5 +1,7 @@
 package shared
 
+// SpeechAdaptation
+// Speech adaptation configuration.
 type SpeechAdaptation struct {
 	CustomClasses       []CustomClass `json:"customClasses,omitempty"`
 	PhraseSetReferences []string      `json:"phraseSetReferences,omitempty"`

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetUserVodsAlt1DirectionEnum(str, Enum):
@@ -31,13 +35,13 @@ class GetUserVodsAlt1QueryParams:
 
 @dataclass
 class GetUserVodsAlt1Request:
-    query_params: GetUserVodsAlt1QueryParams = field(default=None)
+    query_params: GetUserVodsAlt1QueryParams = field()
     
 
 @dataclass
 class GetUserVodsAlt1Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     on_demand_pages: Optional[List[shared.OnDemandPage]] = field(default=None)
     

@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LegislativeSession extends SpeakeasyBase {
-  @Metadata({ data: "json, name=classification" })
+  @SpeakeasyMetadata({ data: "json, name=classification" })
   classification: string;
 
-  @Metadata({ data: "json, name=end_date" })
+  @SpeakeasyMetadata({ data: "json, name=end_date" })
   endDate: string;
 
-  @Metadata({ data: "json, name=identifier" })
+  @SpeakeasyMetadata({ data: "json, name=identifier" })
   identifier: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=start_date" })
+  @SpeakeasyMetadata({ data: "json, name=start_date" })
   startDate: string;
 }

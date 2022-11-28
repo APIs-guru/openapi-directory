@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ListServiceOfferingServicePlansPathParams = /** @class */ (function (_super) {
     __extends(ListServiceOfferingServicePlansPathParams, _super);
@@ -30,7 +30,7 @@ var ListServiceOfferingServicePlansPathParams = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], ListServiceOfferingServicePlansPathParams.prototype, "id", void 0);
     return ListServiceOfferingServicePlansPathParams;
@@ -42,19 +42,19 @@ var ListServiceOfferingServicePlansQueryParams = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=deepObject;explode=true;name=filter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=filter" }),
         __metadata("design:type", Map)
     ], ListServiceOfferingServicePlansQueryParams.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], ListServiceOfferingServicePlansQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], ListServiceOfferingServicePlansQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=deepObject;explode=true;name=sort_by" }),
+        SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=sort_by" }),
         __metadata("design:type", Map)
     ], ListServiceOfferingServicePlansQueryParams.prototype, "sortBy", void 0);
     return ListServiceOfferingServicePlansQueryParams;
@@ -66,11 +66,11 @@ var ListServiceOfferingServicePlansRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListServiceOfferingServicePlansPathParams)
     ], ListServiceOfferingServicePlansRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListServiceOfferingServicePlansQueryParams)
     ], ListServiceOfferingServicePlansRequest.prototype, "queryParams", void 0);
     return ListServiceOfferingServicePlansRequest;
@@ -82,19 +82,19 @@ var ListServiceOfferingServicePlansResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListServiceOfferingServicePlansResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorNotFound)
     ], ListServiceOfferingServicePlansResponse.prototype, "errorNotFound", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ServicePlansCollection)
     ], ListServiceOfferingServicePlansResponse.prototype, "servicePlansCollection", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListServiceOfferingServicePlansResponse.prototype, "statusCode", void 0);
     return ListServiceOfferingServicePlansResponse;

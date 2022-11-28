@@ -1,6 +1,7 @@
 
 
+
 export enum EndpointTypeEnum {
-    Regional = "REGIONAL"
-,    Edge = "EDGE"
+    Regional = "REGIONAL",
+    Edge = "EDGE"
 }

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PosixAccountOperatingSystemTypeEnum {
-    OperatingSystemTypeUnspecified = "OPERATING_SYSTEM_TYPE_UNSPECIFIED"
-,    Linux = "LINUX"
-,    Windows = "WINDOWS"
+    OperatingSystemTypeUnspecified = "OPERATING_SYSTEM_TYPE_UNSPECIFIED",
+    Linux = "LINUX",
+    Windows = "WINDOWS"
 }
 
 
@@ -12,36 +13,36 @@ export enum PosixAccountOperatingSystemTypeEnum {
  * The POSIX account information associated with a Google account.
 **/
 export class PosixAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=gecos" })
+  @SpeakeasyMetadata({ data: "json, name=gecos" })
   gecos?: string;
 
-  @Metadata({ data: "json, name=gid" })
+  @SpeakeasyMetadata({ data: "json, name=gid" })
   gid?: string;
 
-  @Metadata({ data: "json, name=homeDirectory" })
+  @SpeakeasyMetadata({ data: "json, name=homeDirectory" })
   homeDirectory?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=operatingSystemType" })
+  @SpeakeasyMetadata({ data: "json, name=operatingSystemType" })
   operatingSystemType?: PosixAccountOperatingSystemTypeEnum;
 
-  @Metadata({ data: "json, name=primary" })
+  @SpeakeasyMetadata({ data: "json, name=primary" })
   primary?: boolean;
 
-  @Metadata({ data: "json, name=shell" })
+  @SpeakeasyMetadata({ data: "json, name=shell" })
   shell?: string;
 
-  @Metadata({ data: "json, name=systemId" })
+  @SpeakeasyMetadata({ data: "json, name=systemId" })
   systemId?: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleprivacydlpv2storagemetadatalabel
+from sdk import utils
+from . import *
 
 class GooglePrivacyDlpV2MetadataLocationTypeEnum(str, Enum):
     METADATATYPE_UNSPECIFIED = "METADATATYPE_UNSPECIFIED"
@@ -11,6 +13,10 @@ class GooglePrivacyDlpV2MetadataLocationTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GooglePrivacyDlpV2MetadataLocation:
-    storage_label: Optional[googleprivacydlpv2storagemetadatalabel.GooglePrivacyDlpV2StorageMetadataLabel] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'storageLabel' }})
-    type: Optional[GooglePrivacyDlpV2MetadataLocationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""GooglePrivacyDlpV2MetadataLocation
+    Metadata Location
+    """
+    
+    storage_label: Optional[GooglePrivacyDlpV2StorageMetadataLabel] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('storageLabel') }})
+    type: Optional[GooglePrivacyDlpV2MetadataLocationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

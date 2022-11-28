@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SystemEventTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    UserDeletion = "USER_DELETION"
-,    TrashAutoPurge = "TRASH_AUTO_PURGE"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    UserDeletion = "USER_DELETION",
+    TrashAutoPurge = "TRASH_AUTO_PURGE"
 }
 
 
@@ -12,6 +13,6 @@ export enum SystemEventTypeEnum {
  * Event triggered by system operations instead of end users.
 **/
 export class SystemEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: SystemEventTypeEnum;
 }

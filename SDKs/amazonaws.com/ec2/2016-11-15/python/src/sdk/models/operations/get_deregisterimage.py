@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeregisterImageActionEnum(str, Enum):
     DEREGISTER_IMAGE = "DeregisterImage"
@@ -10,10 +14,10 @@ class GetDeregisterImageVersionEnum(str, Enum):
 
 @dataclass
 class GetDeregisterImageQueryParams:
-    action: GetDeregisterImageActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeregisterImageActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    image_id: str = field(metadata={'query_param': { 'field_name': 'ImageId', 'style': 'form', 'explode': True }})
+    version: GetDeregisterImageVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    image_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ImageId', 'style': 'form', 'explode': True }})
-    version: GetDeregisterImageVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,12 +33,12 @@ class GetDeregisterImageHeaders:
 
 @dataclass
 class GetDeregisterImageRequest:
-    query_params: GetDeregisterImageQueryParams = field(default=None)
-    headers: GetDeregisterImageHeaders = field(default=None)
+    headers: GetDeregisterImageHeaders = field()
+    query_params: GetDeregisterImageQueryParams = field()
     
 
 @dataclass
 class GetDeregisterImageResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

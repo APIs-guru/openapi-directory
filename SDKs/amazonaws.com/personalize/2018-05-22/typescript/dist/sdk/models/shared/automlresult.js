@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AutoMlResult
 /**
  * When the solution performs AutoML (<code>performAutoML</code> is true in <a>CreateSolution</a>), specifies the recipe that best optimized the specified metric.
@@ -33,7 +33,7 @@ var AutoMlResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bestRecipeArn" }),
+        SpeakeasyMetadata({ data: "json, name=bestRecipeArn" }),
         __metadata("design:type", String)
     ], AutoMlResult.prototype, "bestRecipeArn", void 0);
     return AutoMlResult;

@@ -22,23 +22,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CloudFormationHealth } from "./cloudformationhealth";
+import { ServiceHealth } from "./servicehealth";
 var DescribeResourceCollectionHealthResponse = /** @class */ (function (_super) {
     __extends(DescribeResourceCollectionHealthResponse, _super);
     function DescribeResourceCollectionHealthResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CloudFormation", elemType: shared.CloudFormationHealth }),
+        SpeakeasyMetadata({ data: "json, name=CloudFormation", elemType: CloudFormationHealth }),
         __metadata("design:type", Array)
     ], DescribeResourceCollectionHealthResponse.prototype, "cloudFormation", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], DescribeResourceCollectionHealthResponse.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=Service", elemType: shared.ServiceHealth }),
+        SpeakeasyMetadata({ data: "json, name=Service", elemType: ServiceHealth }),
         __metadata("design:type", Array)
     ], DescribeResourceCollectionHealthResponse.prototype, "service", void 0);
     return DescribeResourceCollectionHealthResponse;

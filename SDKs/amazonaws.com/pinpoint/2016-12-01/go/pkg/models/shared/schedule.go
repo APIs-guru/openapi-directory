@@ -1,5 +1,7 @@
 package shared
 
+// Schedule
+// Specifies the schedule settings for a campaign.
 type Schedule struct {
 	EndTime     *string              `json:"EndTime,omitempty"`
 	EventFilter *CampaignEventFilter `json:"EventFilter,omitempty"`

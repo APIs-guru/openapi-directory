@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RebootRequest } from "./rebootrequest";
 
 
+
 export class RebootWorkspacesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RebootWorkspaceRequests", elemType: shared.RebootRequest })
+  @SpeakeasyMetadata({ data: "json, name=RebootWorkspaceRequests", elemType: RebootRequest })
   rebootWorkspaceRequests: RebootRequest[];
 }

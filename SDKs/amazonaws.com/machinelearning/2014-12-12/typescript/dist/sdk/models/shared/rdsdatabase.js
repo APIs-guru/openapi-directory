@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RdsDatabase
 /**
  * The database details of an Amazon RDS database.
@@ -33,11 +33,11 @@ var RdsDatabase = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DatabaseName" }),
+        SpeakeasyMetadata({ data: "json, name=DatabaseName" }),
         __metadata("design:type", String)
     ], RdsDatabase.prototype, "databaseName", void 0);
     __decorate([
-        Metadata({ data: "json, name=InstanceIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=InstanceIdentifier" }),
         __metadata("design:type", String)
     ], RdsDatabase.prototype, "instanceIdentifier", void 0);
     return RdsDatabase;

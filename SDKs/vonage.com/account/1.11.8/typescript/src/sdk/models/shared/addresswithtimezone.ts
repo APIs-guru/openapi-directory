@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AddressWithTimeZone extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address_1" })
+  @SpeakeasyMetadata({ data: "json, name=address_1" })
   address1?: string;
 
-  @Metadata({ data: "json, name=address_2" })
+  @SpeakeasyMetadata({ data: "json, name=address_2" })
   address2?: string;
 
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=postal_code" })
+  @SpeakeasyMetadata({ data: "json, name=postal_code" })
   postalCode?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 
-  @Metadata({ data: "json, name=time_zone" })
+  @SpeakeasyMetadata({ data: "json, name=time_zone" })
   timeZone?: string;
 }

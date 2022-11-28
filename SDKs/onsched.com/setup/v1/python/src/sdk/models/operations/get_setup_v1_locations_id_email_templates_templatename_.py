@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetSetupV1LocationsIDEmailTemplatesTemplateNamePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    template_name: str = field(default=None, metadata={'path_param': { 'field_name': 'templateName', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    template_name: str = field(metadata={'path_param': { 'field_name': 'templateName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSetupV1LocationsIDEmailTemplatesTemplateNameRequest:
-    path_params: GetSetupV1LocationsIDEmailTemplatesTemplateNamePathParams = field(default=None)
+    path_params: GetSetupV1LocationsIDEmailTemplatesTemplateNamePathParams = field()
     
 
 @dataclass
 class GetSetupV1LocationsIDEmailTemplatesTemplateNameResponse:
+    content_type: str = field()
+    status_code: int = field()
     content_result: Optional[shared.ContentResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

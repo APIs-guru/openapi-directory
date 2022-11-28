@@ -10,15 +10,15 @@ class CreateOAuthClientHeaders:
 
 @dataclass
 class CreateOAuthClientRequest:
-    headers: CreateOAuthClientHeaders = field(default=None)
-    request: shared.CreateOAuthClientRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateOAuthClientHeaders = field()
+    request: shared.CreateOAuthClientRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateOAuthClientResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     o_auth_client: Optional[shared.OAuthClient] = field(default=None)
-    status_code: int = field(default=None)
     create_o_auth_client_400_application_json_one_of: Optional[Any] = field(default=None)
     

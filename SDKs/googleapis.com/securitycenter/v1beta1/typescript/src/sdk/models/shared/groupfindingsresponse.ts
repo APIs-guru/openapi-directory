@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GroupResult } from "./groupresult";
+
 
 
 // GroupFindingsResponse
@@ -8,12 +8,12 @@ import { GroupResult } from "./groupresult";
  * Response message for group by findings.
 **/
 export class GroupFindingsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groupByResults", elemType: shared.GroupResult })
+  @SpeakeasyMetadata({ data: "json, name=groupByResults", elemType: GroupResult })
   groupByResults?: GroupResult[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=readTime" })
+  @SpeakeasyMetadata({ data: "json, name=readTime" })
   readTime?: string;
 }

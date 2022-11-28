@@ -5,35 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class CreateProductSlugPathParams:
-    organization_uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationUuid', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class CreateProductSlugSecurityOption1:
-    zettle_oauth: shared.SchemeZettleOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class CreateProductSlugSecurityOption2:
-    zettle_api_key: shared.SchemeZettleAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    organization_uuid: str = field(metadata={'path_param': { 'field_name': 'organizationUuid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CreateProductSlugSecurity:
-    option1: Optional[CreateProductSlugSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[CreateProductSlugSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    zettle_api_key: Optional[shared.SchemeZettleAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    zettle_oauth: Optional[shared.SchemeZettleOauth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CreateProductSlugRequest:
-    path_params: CreateProductSlugPathParams = field(default=None)
-    request: shared.CreateSlugRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CreateProductSlugSecurity = field(default=None)
+    path_params: CreateProductSlugPathParams = field()
+    request: shared.CreateSlugRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: CreateProductSlugSecurity = field()
     
 
 @dataclass
 class CreateProductSlugResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     slug_response: Optional[shared.SlugResponse] = field(default=None)
-    status_code: int = field(default=None)
     

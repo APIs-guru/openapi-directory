@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MemberAccount
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about the Amazon Macie Classic member account.
 **/
 export class MemberAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 }

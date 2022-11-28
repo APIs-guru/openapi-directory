@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import csvformatdescriptor
-from . import jsonformatdescriptor
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FileFormatDescriptor:
-    csv_format_descriptor: Optional[csvformatdescriptor.CsvFormatDescriptor] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CsvFormatDescriptor' }})
-    json_format_descriptor: Optional[jsonformatdescriptor.JSONFormatDescriptor] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'JsonFormatDescriptor' }})
+    r"""FileFormatDescriptor
+    Contains information about a source file's formatting.
+    """
+    
+    csv_format_descriptor: Optional[CsvFormatDescriptor] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CsvFormatDescriptor') }})
+    json_format_descriptor: Optional[JSONFormatDescriptor] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('JsonFormatDescriptor') }})
     

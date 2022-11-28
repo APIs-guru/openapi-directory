@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PaymentsresellersubscriptionPartnersSubscriptionsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,13 +26,13 @@ class PaymentsresellersubscriptionPartnersSubscriptionsGetQueryParams:
 
 @dataclass
 class PaymentsresellersubscriptionPartnersSubscriptionsGetRequest:
-    path_params: PaymentsresellersubscriptionPartnersSubscriptionsGetPathParams = field(default=None)
-    query_params: PaymentsresellersubscriptionPartnersSubscriptionsGetQueryParams = field(default=None)
+    path_params: PaymentsresellersubscriptionPartnersSubscriptionsGetPathParams = field()
+    query_params: PaymentsresellersubscriptionPartnersSubscriptionsGetQueryParams = field()
     
 
 @dataclass
 class PaymentsresellersubscriptionPartnersSubscriptionsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_payments_reseller_subscription_v1_subscription: Optional[shared.GoogleCloudPaymentsResellerSubscriptionV1Subscription] = field(default=None)
-    status_code: int = field(default=None)
     

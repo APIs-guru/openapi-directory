@@ -13,13 +13,13 @@ type CreateWebhookRequestBody struct {
 	Data *shared.WebhookRequest `json:"data,omitempty"`
 }
 
+type CreateWebhook201ApplicationJSON struct {
+	Data *shared.WebhookResponse `json:"data,omitempty"`
+}
+
 type CreateWebhookRequest struct {
 	QueryParams CreateWebhookQueryParams
 	Request     CreateWebhookRequestBody `request:"mediaType=application/json"`
-}
-
-type CreateWebhook201ApplicationJSON struct {
-	Data *shared.WebhookResponse `json:"data,omitempty"`
 }
 
 type CreateWebhookResponse struct {

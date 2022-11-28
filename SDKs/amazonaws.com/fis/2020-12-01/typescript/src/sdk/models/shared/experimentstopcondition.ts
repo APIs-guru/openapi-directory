@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ExperimentStopCondition
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the stop condition for an experiment.
 **/
 export class ExperimentStopCondition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

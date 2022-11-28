@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeviceSecretVerifierConfigType
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The device verifier against which it will be authenticated.
 **/
 export class DeviceSecretVerifierConfigType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PasswordVerifier" })
+  @SpeakeasyMetadata({ data: "json, name=PasswordVerifier" })
   passwordVerifier?: string;
 
-  @Metadata({ data: "json, name=Salt" })
+  @SpeakeasyMetadata({ data: "json, name=Salt" })
   salt?: string;
 }

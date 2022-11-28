@@ -1,6 +1,7 @@
 
 
+
 export enum OperatorEnum {
-    All = "ALL"
-,    Any = "ANY"
+    All = "ALL",
+    Any = "ANY"
 }

@@ -12,6 +12,8 @@ const (
 	UpdateDeviceManagementInterfaceRequestBodyWan1WanEnabledEnumNotConfigured UpdateDeviceManagementInterfaceRequestBodyWan1WanEnabledEnum = "not configured"
 )
 
+// UpdateDeviceManagementInterfaceRequestBodyWan1
+// WAN 1 settings
 type UpdateDeviceManagementInterfaceRequestBodyWan1 struct {
 	StaticDNS        []string                                                      `json:"staticDns,omitempty"`
 	StaticGatewayIP  *string                                                       `json:"staticGatewayIp,omitempty"`
@@ -30,6 +32,8 @@ const (
 	UpdateDeviceManagementInterfaceRequestBodyWan2WanEnabledEnumNotConfigured UpdateDeviceManagementInterfaceRequestBodyWan2WanEnabledEnum = "not configured"
 )
 
+// UpdateDeviceManagementInterfaceRequestBodyWan2
+// WAN 2 settings (only for MX devices)
 type UpdateDeviceManagementInterfaceRequestBodyWan2 struct {
 	StaticDNS        []string                                                      `json:"staticDns,omitempty"`
 	StaticGatewayIP  *string                                                       `json:"staticGatewayIp,omitempty"`

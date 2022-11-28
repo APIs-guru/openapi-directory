@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventSourceConfiguration } from "./eventsourceconfiguration";
+
 
 
 // ListEventSourcesResponse
@@ -8,9 +8,9 @@ import { EventSourceConfiguration } from "./eventsourceconfiguration";
  * Contains a list of event sources (see <a>API_EventSourceConfiguration</a>)
 **/
 export class ListEventSourcesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EventSources", elemType: shared.EventSourceConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=EventSources", elemType: EventSourceConfiguration })
   eventSources?: EventSourceConfiguration[];
 
-  @Metadata({ data: "json, name=NextMarker" })
+  @SpeakeasyMetadata({ data: "json, name=NextMarker" })
   nextMarker?: string;
 }

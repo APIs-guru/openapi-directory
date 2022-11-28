@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetUsersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_token: Optional[shared.InvalidToken] = field(default=None)
     user_records: Optional[List[shared.UserRecord]] = field(default=None)
     

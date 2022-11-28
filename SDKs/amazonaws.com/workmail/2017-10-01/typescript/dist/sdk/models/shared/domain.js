@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Domain
 /**
  * <p>The domain to associate with an Amazon WorkMail organization.</p> <p>When you configure a domain hosted in Amazon Route 53 (Route 53), all recommended DNS records are added to the organization when you create it. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html">Adding a domain</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p>
@@ -33,11 +33,11 @@ var Domain = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DomainName" }),
+        SpeakeasyMetadata({ data: "json, name=DomainName" }),
         __metadata("design:type", String)
     ], Domain.prototype, "domainName", void 0);
     __decorate([
-        Metadata({ data: "json, name=HostedZoneId" }),
+        SpeakeasyMetadata({ data: "json, name=HostedZoneId" }),
         __metadata("design:type", String)
     ], Domain.prototype, "hostedZoneId", void 0);
     return Domain;

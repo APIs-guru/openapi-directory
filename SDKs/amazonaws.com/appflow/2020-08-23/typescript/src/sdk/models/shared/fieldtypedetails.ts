@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OperatorEnum } from "./operatorenum";
+
 
 
 // FieldTypeDetails
@@ -7,12 +8,12 @@ import { OperatorEnum } from "./operatorenum";
  *  Contains details regarding the supported field type and the operators that can be applied for filtering. 
 **/
 export class FieldTypeDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fieldType" })
+  @SpeakeasyMetadata({ data: "json, name=fieldType" })
   fieldType: string;
 
-  @Metadata({ data: "json, name=filterOperators" })
+  @SpeakeasyMetadata({ data: "json, name=filterOperators" })
   filterOperators: OperatorEnum[];
 
-  @Metadata({ data: "json, name=supportedValues" })
+  @SpeakeasyMetadata({ data: "json, name=supportedValues" })
   supportedValues?: string[];
 }

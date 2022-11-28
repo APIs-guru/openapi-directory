@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateDestinationRequest = /** @class */ (function (_super) {
     __extends(UpdateDestinationRequest, _super);
@@ -30,7 +30,7 @@ var UpdateDestinationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.DestinationUpdate)
     ], UpdateDestinationRequest.prototype, "request", void 0);
     return UpdateDestinationRequest;
@@ -42,19 +42,19 @@ var UpdateDestinationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateDestinationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.DestinationRead)
     ], UpdateDestinationResponse.prototype, "destinationRead", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.InvalidInputExceptionInfo)
     ], UpdateDestinationResponse.prototype, "invalidInputExceptionInfo", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateDestinationResponse.prototype, "statusCode", void 0);
     return UpdateDestinationResponse;

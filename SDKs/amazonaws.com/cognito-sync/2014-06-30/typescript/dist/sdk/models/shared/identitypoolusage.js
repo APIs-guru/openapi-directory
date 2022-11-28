@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // IdentityPoolUsage
 /**
  * Usage information for the identity pool.
@@ -33,19 +33,19 @@ var IdentityPoolUsage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DataStorage" }),
+        SpeakeasyMetadata({ data: "json, name=DataStorage" }),
         __metadata("design:type", Number)
     ], IdentityPoolUsage.prototype, "dataStorage", void 0);
     __decorate([
-        Metadata({ data: "json, name=IdentityPoolId" }),
+        SpeakeasyMetadata({ data: "json, name=IdentityPoolId" }),
         __metadata("design:type", String)
     ], IdentityPoolUsage.prototype, "identityPoolId", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModifiedDate" }),
+        SpeakeasyMetadata({ data: "json, name=LastModifiedDate" }),
         __metadata("design:type", Date)
     ], IdentityPoolUsage.prototype, "lastModifiedDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=SyncSessionsCount" }),
+        SpeakeasyMetadata({ data: "json, name=SyncSessionsCount" }),
         __metadata("design:type", Number)
     ], IdentityPoolUsage.prototype, "syncSessionsCount", void 0);
     return IdentityPoolUsage;

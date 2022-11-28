@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import voice
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListVoicesResponse:
-    voices: Optional[List[voice.Voice]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'voices' }})
+    r"""ListVoicesResponse
+    The message returned to the client by the `ListVoices` method.
+    """
+    
+    voices: Optional[List[Voice]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('voices') }})
     

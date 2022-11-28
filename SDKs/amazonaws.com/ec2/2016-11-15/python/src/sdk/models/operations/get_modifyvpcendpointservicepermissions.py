@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifyVpcEndpointServicePermissionsActionEnum(str, Enum):
     MODIFY_VPC_ENDPOINT_SERVICE_PERMISSIONS = "ModifyVpcEndpointServicePermissions"
@@ -10,12 +14,12 @@ class GetModifyVpcEndpointServicePermissionsVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyVpcEndpointServicePermissionsQueryParams:
-    action: GetModifyVpcEndpointServicePermissionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyVpcEndpointServicePermissionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    service_id: str = field(metadata={'query_param': { 'field_name': 'ServiceId', 'style': 'form', 'explode': True }})
+    version: GetModifyVpcEndpointServicePermissionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     add_allowed_principals: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'AddAllowedPrincipals', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     remove_allowed_principals: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'RemoveAllowedPrincipals', 'style': 'form', 'explode': True }})
-    service_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ServiceId', 'style': 'form', 'explode': True }})
-    version: GetModifyVpcEndpointServicePermissionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetModifyVpcEndpointServicePermissionsHeaders:
 
 @dataclass
 class GetModifyVpcEndpointServicePermissionsRequest:
-    query_params: GetModifyVpcEndpointServicePermissionsQueryParams = field(default=None)
-    headers: GetModifyVpcEndpointServicePermissionsHeaders = field(default=None)
+    headers: GetModifyVpcEndpointServicePermissionsHeaders = field()
+    query_params: GetModifyVpcEndpointServicePermissionsQueryParams = field()
     
 
 @dataclass
 class GetModifyVpcEndpointServicePermissionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

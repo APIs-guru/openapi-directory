@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudSqlCredential } from "./cloudsqlcredential";
 
+
 export enum CloudSqlPropertiesTypeEnum {
-    DatabaseTypeUnspecified = "DATABASE_TYPE_UNSPECIFIED"
-,    Postgres = "POSTGRES"
-,    Mysql = "MYSQL"
+    DatabaseTypeUnspecified = "DATABASE_TYPE_UNSPECIFIED",
+    Postgres = "POSTGRES",
+    Mysql = "MYSQL"
 }
 
 
@@ -13,18 +14,37 @@ export enum CloudSqlPropertiesTypeEnum {
  * Connection properties specific to the Cloud SQL.
 **/
 export class CloudSqlProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=credential" })
+  @SpeakeasyMetadata({ data: "json, name=credential" })
   credential?: CloudSqlCredential;
 
-  @Metadata({ data: "json, name=database" })
+  @SpeakeasyMetadata({ data: "json, name=database" })
   database?: string;
 
-  @Metadata({ data: "json, name=instanceId" })
+  @SpeakeasyMetadata({ data: "json, name=instanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=serviceAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccountId" })
   serviceAccountId?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: CloudSqlPropertiesTypeEnum;
+}
+
+
+// CloudSqlPropertiesInput
+/** 
+ * Connection properties specific to the Cloud SQL.
+**/
+export class CloudSqlPropertiesInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=credential" })
+  credential?: CloudSqlCredential;
+
+  @SpeakeasyMetadata({ data: "json, name=database" })
+  database?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=instanceId" })
+  instanceId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: CloudSqlPropertiesTypeEnum;
 }

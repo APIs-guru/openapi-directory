@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class ExportSystemPackagesPathParams:
-    inventory_id: str = field(default=None, metadata={'path_param': { 'field_name': 'inventory_id', 'style': 'simple', 'explode': False }})
+    inventory_id: str = field(metadata={'path_param': { 'field_name': 'inventory_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,19 +20,19 @@ class ExportSystemPackagesQueryParams:
 
 @dataclass
 class ExportSystemPackagesSecurity:
-    rh_identity: shared.SchemeRhIdentity = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    rh_identity: shared.SchemeRhIdentity = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class ExportSystemPackagesRequest:
-    path_params: ExportSystemPackagesPathParams = field(default=None)
-    query_params: ExportSystemPackagesQueryParams = field(default=None)
-    security: ExportSystemPackagesSecurity = field(default=None)
+    path_params: ExportSystemPackagesPathParams = field()
+    query_params: ExportSystemPackagesQueryParams = field()
+    security: ExportSystemPackagesSecurity = field()
     
 
 @dataclass
 class ExportSystemPackagesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     controllers_system_package_inlines: Optional[List[shared.ControllersSystemPackageInline]] = field(default=None)
     

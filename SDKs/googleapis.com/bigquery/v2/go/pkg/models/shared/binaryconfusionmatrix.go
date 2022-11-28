@@ -1,5 +1,7 @@
 package shared
 
+// BinaryConfusionMatrix
+// Confusion matrix for binary classification models.
 type BinaryConfusionMatrix struct {
 	Accuracy               *float64 `json:"accuracy,omitempty"`
 	F1Score                *float64 `json:"f1Score,omitempty"`

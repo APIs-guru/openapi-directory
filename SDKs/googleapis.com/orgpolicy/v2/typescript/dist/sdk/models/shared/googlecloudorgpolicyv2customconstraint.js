@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GoogleCloudOrgpolicyV2CustomConstraintActionTypeEnum;
 (function (GoogleCloudOrgpolicyV2CustomConstraintActionTypeEnum) {
     GoogleCloudOrgpolicyV2CustomConstraintActionTypeEnum["ActionTypeUnspecified"] = "ACTION_TYPE_UNSPECIFIED";
@@ -46,37 +46,77 @@ var GoogleCloudOrgpolicyV2CustomConstraint = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=actionType" }),
+        SpeakeasyMetadata({ data: "json, name=actionType" }),
         __metadata("design:type", String)
     ], GoogleCloudOrgpolicyV2CustomConstraint.prototype, "actionType", void 0);
     __decorate([
-        Metadata({ data: "json, name=condition" }),
+        SpeakeasyMetadata({ data: "json, name=condition" }),
         __metadata("design:type", String)
     ], GoogleCloudOrgpolicyV2CustomConstraint.prototype, "condition", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], GoogleCloudOrgpolicyV2CustomConstraint.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], GoogleCloudOrgpolicyV2CustomConstraint.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=methodTypes" }),
+        SpeakeasyMetadata({ data: "json, name=methodTypes" }),
         __metadata("design:type", Array)
     ], GoogleCloudOrgpolicyV2CustomConstraint.prototype, "methodTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleCloudOrgpolicyV2CustomConstraint.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceTypes" }),
+        SpeakeasyMetadata({ data: "json, name=resourceTypes" }),
         __metadata("design:type", Array)
     ], GoogleCloudOrgpolicyV2CustomConstraint.prototype, "resourceTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], GoogleCloudOrgpolicyV2CustomConstraint.prototype, "updateTime", void 0);
     return GoogleCloudOrgpolicyV2CustomConstraint;
 }(SpeakeasyBase));
 export { GoogleCloudOrgpolicyV2CustomConstraint };
+// GoogleCloudOrgpolicyV2CustomConstraintInput
+/**
+ * A custom constraint defined by customers which can *only* be applied to the given resource types and organization. By creating a custom constraint, customers can applied policies of this custom constraint. *Creating a custom constraint itself does NOT apply any policy enforcement*.
+**/
+var GoogleCloudOrgpolicyV2CustomConstraintInput = /** @class */ (function (_super) {
+    __extends(GoogleCloudOrgpolicyV2CustomConstraintInput, _super);
+    function GoogleCloudOrgpolicyV2CustomConstraintInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=actionType" }),
+        __metadata("design:type", String)
+    ], GoogleCloudOrgpolicyV2CustomConstraintInput.prototype, "actionType", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=condition" }),
+        __metadata("design:type", String)
+    ], GoogleCloudOrgpolicyV2CustomConstraintInput.prototype, "condition", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], GoogleCloudOrgpolicyV2CustomConstraintInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
+        __metadata("design:type", String)
+    ], GoogleCloudOrgpolicyV2CustomConstraintInput.prototype, "displayName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=methodTypes" }),
+        __metadata("design:type", Array)
+    ], GoogleCloudOrgpolicyV2CustomConstraintInput.prototype, "methodTypes", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], GoogleCloudOrgpolicyV2CustomConstraintInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=resourceTypes" }),
+        __metadata("design:type", Array)
+    ], GoogleCloudOrgpolicyV2CustomConstraintInput.prototype, "resourceTypes", void 0);
+    return GoogleCloudOrgpolicyV2CustomConstraintInput;
+}(SpeakeasyBase));
+export { GoogleCloudOrgpolicyV2CustomConstraintInput };

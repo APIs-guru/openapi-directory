@@ -1,64 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetReviewsResourceTypeJsonResourceTypeEnum {
-    All = "all"
-,    Picks = "picks"
+    All = "all",
+    Picks = "picks"
 }
 
 
 export class GetReviewsResourceTypeJsonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=resource-type" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=resource-type" })
   resourceType: GetReviewsResourceTypeJsonResourceTypeEnum;
 }
 
 export enum GetReviewsResourceTypeJsonOrderEnum {
-    ByTitle = "by-title"
-,    ByPublicationDate = "by-publication-date"
-,    ByOpeningDate = "by-opening-date"
+    ByTitle = "by-title",
+    ByPublicationDate = "by-publication-date",
+    ByOpeningDate = "by-opening-date"
 }
 
 
 export class GetReviewsResourceTypeJsonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=order" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" })
   order?: GetReviewsResourceTypeJsonOrderEnum;
 }
 
 
-export class GetReviewsResourceTypeJsonRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetReviewsResourceTypeJsonPathParams;
-
-  @Metadata()
-  queryParams: GetReviewsResourceTypeJsonQueryParams;
-}
-
-
 export class GetReviewsResourceTypeJson200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=copyright" })
+  @SpeakeasyMetadata({ data: "json, name=copyright" })
   copyright?: string;
 
-  @Metadata({ data: "json, name=num_results" })
+  @SpeakeasyMetadata({ data: "json, name=num_results" })
   numResults?: number;
 
-  @Metadata({ data: "json, name=results", elemType: shared.Movie })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: shared.Movie })
   results?: shared.Movie[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
+export class GetReviewsResourceTypeJsonRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetReviewsResourceTypeJsonPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetReviewsResourceTypeJsonQueryParams;
+}
+
+
 export class GetReviewsResourceTypeJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getReviewsResourceTypeJson200ApplicationJsonObject?: GetReviewsResourceTypeJson200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

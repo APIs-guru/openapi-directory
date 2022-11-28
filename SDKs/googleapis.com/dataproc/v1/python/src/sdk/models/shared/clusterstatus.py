@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ClusterStatusStateEnum(str, Enum):
     UNKNOWN = "UNKNOWN"
@@ -24,8 +26,12 @@ class ClusterStatusSubstateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ClusterStatus:
-    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detail' }})
-    state: Optional[ClusterStatusStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    state_start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stateStartTime' }})
-    substate: Optional[ClusterStatusSubstateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'substate' }})
+    r"""ClusterStatus
+    The status of a cluster and its instances.
+    """
+    
+    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detail') }})
+    state: Optional[ClusterStatusStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    state_start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stateStartTime') }})
+    substate: Optional[ClusterStatusSubstateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('substate') }})
     

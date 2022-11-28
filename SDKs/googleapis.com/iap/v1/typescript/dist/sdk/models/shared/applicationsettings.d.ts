@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AccessDeniedPageSettings } from "./accessdeniedpagesettings";
 import { AttributePropagationSettings } from "./attributepropagationsettings";
 import { CsmSettings } from "./csmsettings";

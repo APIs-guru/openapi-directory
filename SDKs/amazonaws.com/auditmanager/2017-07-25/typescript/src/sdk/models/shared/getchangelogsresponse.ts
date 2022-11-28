@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChangeLog } from "./changelog";
 
 
+
 export class GetChangeLogsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=changeLogs", elemType: shared.ChangeLog })
+  @SpeakeasyMetadata({ data: "json, name=changeLogs", elemType: ChangeLog })
   changeLogs?: ChangeLog[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

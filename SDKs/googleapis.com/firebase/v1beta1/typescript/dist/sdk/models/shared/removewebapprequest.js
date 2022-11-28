@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RemoveWebAppRequest = /** @class */ (function (_super) {
     __extends(RemoveWebAppRequest, _super);
     function RemoveWebAppRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allowMissing" }),
+        SpeakeasyMetadata({ data: "json, name=allowMissing" }),
         __metadata("design:type", Boolean)
     ], RemoveWebAppRequest.prototype, "allowMissing", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], RemoveWebAppRequest.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=immediate" }),
+        SpeakeasyMetadata({ data: "json, name=immediate" }),
         __metadata("design:type", Boolean)
     ], RemoveWebAppRequest.prototype, "immediate", void 0);
     __decorate([
-        Metadata({ data: "json, name=validateOnly" }),
+        SpeakeasyMetadata({ data: "json, name=validateOnly" }),
         __metadata("design:type", Boolean)
     ], RemoveWebAppRequest.prototype, "validateOnly", void 0);
     return RemoveWebAppRequest;

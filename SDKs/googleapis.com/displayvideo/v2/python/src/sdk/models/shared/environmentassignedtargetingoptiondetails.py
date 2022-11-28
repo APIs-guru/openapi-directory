@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class EnvironmentAssignedTargetingOptionDetailsEnvironmentEnum(str, Enum):
     ENVIRONMENT_UNSPECIFIED = "ENVIRONMENT_UNSPECIFIED"
@@ -12,5 +14,9 @@ class EnvironmentAssignedTargetingOptionDetailsEnvironmentEnum(str, Enum):
 @dataclass_json
 @dataclass
 class EnvironmentAssignedTargetingOptionDetails:
-    environment: Optional[EnvironmentAssignedTargetingOptionDetailsEnvironmentEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environment' }})
+    r"""EnvironmentAssignedTargetingOptionDetails
+    Assigned environment targeting option details. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_ENVIRONMENT`.
+    """
+    
+    environment: Optional[EnvironmentAssignedTargetingOptionDetailsEnvironmentEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environment') }})
     

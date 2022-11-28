@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A dependency that is defined for container startup and shutdown.
 **/
 export class AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Condition" })
+  @SpeakeasyMetadata({ data: "json, name=Condition" })
   condition?: string;
 
-  @Metadata({ data: "json, name=ContainerName" })
+  @SpeakeasyMetadata({ data: "json, name=ContainerName" })
   containerName?: string;
 }

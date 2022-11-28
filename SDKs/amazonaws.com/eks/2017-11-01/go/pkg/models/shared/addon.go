@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Addon
+// An Amazon EKS add-on.
 type Addon struct {
 	AddonArn              *string           `json:"addonArn,omitempty"`
 	AddonName             *string           `json:"addonName,omitempty"`

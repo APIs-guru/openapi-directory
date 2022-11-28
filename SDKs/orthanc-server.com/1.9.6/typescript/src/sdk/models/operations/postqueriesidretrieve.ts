@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostQueriesIdRetrievePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class PostQueriesIdRetrieveRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   any?: any;
 
-  @Metadata({ data: "request, media_type=text/plain" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/plain" })
   textPlain: Uint8Array;
 }
 
 
 export class PostQueriesIdRetrieveRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostQueriesIdRetrievePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PostQueriesIdRetrieveRequests;
 }
 
 
 export class PostQueriesIdRetrieveResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postQueriesIdRetrieve200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

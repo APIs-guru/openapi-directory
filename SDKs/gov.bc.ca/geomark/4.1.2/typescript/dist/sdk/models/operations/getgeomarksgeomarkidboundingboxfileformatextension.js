@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetGeomarksGeomarkIdBoundingBoxFileFormatExtensionFileFormatExtensionEnum;
 (function (GetGeomarksGeomarkIdBoundingBoxFileFormatExtensionFileFormatExtensionEnum) {
     GetGeomarksGeomarkIdBoundingBoxFileFormatExtensionFileFormatExtensionEnum["Json"] = "json";
@@ -41,11 +41,11 @@ var GetGeomarksGeomarkIdBoundingBoxFileFormatExtensionPathParams = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=fileFormatExtension" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fileFormatExtension" }),
         __metadata("design:type", String)
     ], GetGeomarksGeomarkIdBoundingBoxFileFormatExtensionPathParams.prototype, "fileFormatExtension", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=geomarkId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=geomarkId" }),
         __metadata("design:type", String)
     ], GetGeomarksGeomarkIdBoundingBoxFileFormatExtensionPathParams.prototype, "geomarkId", void 0);
     return GetGeomarksGeomarkIdBoundingBoxFileFormatExtensionPathParams;
@@ -57,7 +57,7 @@ var GetGeomarksGeomarkIdBoundingBoxFileFormatExtensionQueryParams = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=srid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=srid" }),
         __metadata("design:type", Number)
     ], GetGeomarksGeomarkIdBoundingBoxFileFormatExtensionQueryParams.prototype, "srid", void 0);
     return GetGeomarksGeomarkIdBoundingBoxFileFormatExtensionQueryParams;
@@ -69,11 +69,11 @@ var GetGeomarksGeomarkIdBoundingBoxFileFormatExtensionRequest = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGeomarksGeomarkIdBoundingBoxFileFormatExtensionPathParams)
     ], GetGeomarksGeomarkIdBoundingBoxFileFormatExtensionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGeomarksGeomarkIdBoundingBoxFileFormatExtensionQueryParams)
     ], GetGeomarksGeomarkIdBoundingBoxFileFormatExtensionRequest.prototype, "queryParams", void 0);
     return GetGeomarksGeomarkIdBoundingBoxFileFormatExtensionRequest;
@@ -85,11 +85,11 @@ var GetGeomarksGeomarkIdBoundingBoxFileFormatExtensionResponse = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetGeomarksGeomarkIdBoundingBoxFileFormatExtensionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetGeomarksGeomarkIdBoundingBoxFileFormatExtensionResponse.prototype, "statusCode", void 0);
     return GetGeomarksGeomarkIdBoundingBoxFileFormatExtensionResponse;

@@ -23,10 +23,14 @@ const (
 	EnterpriseCrmFrontendsEventbusProtoTriggerConfigTriggerTypeEnumCloudPubsubExternal       EnterpriseCrmFrontendsEventbusProtoTriggerConfigTriggerTypeEnum = "CLOUD_PUBSUB_EXTERNAL"
 	EnterpriseCrmFrontendsEventbusProtoTriggerConfigTriggerTypeEnumSfdcCdcChannel            EnterpriseCrmFrontendsEventbusProtoTriggerConfigTriggerTypeEnum = "SFDC_CDC_CHANNEL"
 	EnterpriseCrmFrontendsEventbusProtoTriggerConfigTriggerTypeEnumSfdcPlatformEventsChannel EnterpriseCrmFrontendsEventbusProtoTriggerConfigTriggerTypeEnum = "SFDC_PLATFORM_EVENTS_CHANNEL"
+	EnterpriseCrmFrontendsEventbusProtoTriggerConfigTriggerTypeEnumCloudScheduler            EnterpriseCrmFrontendsEventbusProtoTriggerConfigTriggerTypeEnum = "CLOUD_SCHEDULER"
 )
 
+// EnterpriseCrmFrontendsEventbusProtoTriggerConfig
+// Configuration detail of a trigger. Next available id: 17
 type EnterpriseCrmFrontendsEventbusProtoTriggerConfig struct {
 	AlertConfig              []EnterpriseCrmEventbusProtoWorkflowAlertConfig                               `json:"alertConfig,omitempty"`
+	CloudSchedulerConfig     *EnterpriseCrmEventbusProtoCloudSchedulerConfig                               `json:"cloudSchedulerConfig,omitempty"`
 	Description              *string                                                                       `json:"description,omitempty"`
 	EnabledClients           []string                                                                      `json:"enabledClients,omitempty"`
 	Label                    *string                                                                       `json:"label,omitempty"`

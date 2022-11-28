@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ReplaceImageRequestImageReplaceMethodEnum {
-    ImageReplaceMethodUnspecified = "IMAGE_REPLACE_METHOD_UNSPECIFIED"
-,    CenterCrop = "CENTER_CROP"
+    ImageReplaceMethodUnspecified = "IMAGE_REPLACE_METHOD_UNSPECIFIED",
+    CenterCrop = "CENTER_CROP"
 }
 
 
@@ -11,12 +12,12 @@ export enum ReplaceImageRequestImageReplaceMethodEnum {
  * Replaces an existing image with a new image. Replacing an image removes some image effects from the existing image in order to mirror the behavior of the Docs editor.
 **/
 export class ReplaceImageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageObjectId" })
+  @SpeakeasyMetadata({ data: "json, name=imageObjectId" })
   imageObjectId?: string;
 
-  @Metadata({ data: "json, name=imageReplaceMethod" })
+  @SpeakeasyMetadata({ data: "json, name=imageReplaceMethod" })
   imageReplaceMethod?: ReplaceImageRequestImageReplaceMethodEnum;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

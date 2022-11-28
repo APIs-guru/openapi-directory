@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * WebhookVerificationKeyGetRequest defines the request schema for `/webhook_verification_key/get`
 **/

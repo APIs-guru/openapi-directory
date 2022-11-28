@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClusterSummary } from "./clustersummary";
+
 
 
 // ListClustersOutput
@@ -8,9 +8,9 @@ import { ClusterSummary } from "./clustersummary";
  * This contains a ClusterSummaryList with the cluster details; for example, the cluster IDs, names, and status.
 **/
 export class ListClustersOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Clusters", elemType: shared.ClusterSummary })
+  @SpeakeasyMetadata({ data: "json, name=Clusters", elemType: ClusterSummary })
   clusters?: ClusterSummary[];
 
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 }

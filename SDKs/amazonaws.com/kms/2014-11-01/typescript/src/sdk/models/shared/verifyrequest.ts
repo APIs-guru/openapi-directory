@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MessageTypeEnum } from "./messagetypeenum";
 import { SigningAlgorithmSpecEnum } from "./signingalgorithmspecenum";
 
 
+
 export class VerifyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GrantTokens" })
+  @SpeakeasyMetadata({ data: "json, name=GrantTokens" })
   grantTokens?: string[];
 
-  @Metadata({ data: "json, name=KeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KeyId" })
   keyId: string;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message: string;
 
-  @Metadata({ data: "json, name=MessageType" })
+  @SpeakeasyMetadata({ data: "json, name=MessageType" })
   messageType?: MessageTypeEnum;
 
-  @Metadata({ data: "json, name=Signature" })
+  @SpeakeasyMetadata({ data: "json, name=Signature" })
   signature: string;
 
-  @Metadata({ data: "json, name=SigningAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=SigningAlgorithm" })
   signingAlgorithm: SigningAlgorithmSpecEnum;
 }

@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetKeyByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetKeyByIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=cookie" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=cookie" })
   cookieSid: shared.SchemeCookieSid;
 }
 
 
 export class GetKeyByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetKeyByIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetKeyByIdSecurity;
 }
 
 
 export class GetKeyByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   key?: shared.Key;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

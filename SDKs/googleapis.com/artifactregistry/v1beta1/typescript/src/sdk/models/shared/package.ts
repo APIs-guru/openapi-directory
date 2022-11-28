@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Package
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Packages are named collections of versions.
 **/
 export class Package extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

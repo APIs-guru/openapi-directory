@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudRunMetadata } from "./cloudrunmetadata";
+
 
 
 // Metadata
@@ -7,6 +8,6 @@ import { CloudRunMetadata } from "./cloudrunmetadata";
  * Metadata includes information associated with a `Rollout`.
 **/
 export class Metadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudRun" })
+  @SpeakeasyMetadata({ data: "json, name=cloudRun" })
   cloudRun?: CloudRunMetadata;
 }

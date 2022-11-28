@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dimension } from "./dimension";
 
+
 export enum TableColumnPropertiesWidthTypeEnum {
-    WidthTypeUnspecified = "WIDTH_TYPE_UNSPECIFIED"
-,    EvenlyDistributed = "EVENLY_DISTRIBUTED"
-,    FixedWidth = "FIXED_WIDTH"
+    WidthTypeUnspecified = "WIDTH_TYPE_UNSPECIFIED",
+    EvenlyDistributed = "EVENLY_DISTRIBUTED",
+    FixedWidth = "FIXED_WIDTH"
 }
 
 
@@ -13,9 +14,9 @@ export enum TableColumnPropertiesWidthTypeEnum {
  * The properties of a column in a table.
 **/
 export class TableColumnProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: Dimension;
 
-  @Metadata({ data: "json, name=widthType" })
+  @SpeakeasyMetadata({ data: "json, name=widthType" })
   widthType?: TableColumnPropertiesWidthTypeEnum;
 }

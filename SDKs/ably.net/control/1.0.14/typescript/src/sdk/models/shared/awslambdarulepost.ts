@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleSource } from "./rulesource";
 import { AwsAccessKeys } from "./awsaccesskeys";
 import { AwsAssumeRole } from "./awsassumerole";
+
 
 export enum AwsLambdaRulePostRequestModeEnum {
     Single = "single"
@@ -12,39 +13,39 @@ export enum AwsLambdaRulePostRuleTypeEnum {
 }
 
 export enum AwsLambdaRulePostStatusEnum {
-    Enabled = "enabled"
-,    Disabled = "disabled"
+    Enabled = "enabled",
+    Disabled = "disabled"
 }
 
 
 export class AwsLambdaRulePostTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authentication" })
+  @SpeakeasyMetadata({ data: "json, name=authentication" })
   authentication: any;
 
-  @Metadata({ data: "json, name=enveloped" })
+  @SpeakeasyMetadata({ data: "json, name=enveloped" })
   enveloped?: boolean;
 
-  @Metadata({ data: "json, name=functionName" })
+  @SpeakeasyMetadata({ data: "json, name=functionName" })
   functionName: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region: string;
 }
 
 
 export class AwsLambdaRulePost extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestMode" })
+  @SpeakeasyMetadata({ data: "json, name=requestMode" })
   requestMode: AwsLambdaRulePostRequestModeEnum;
 
-  @Metadata({ data: "json, name=ruleType" })
+  @SpeakeasyMetadata({ data: "json, name=ruleType" })
   ruleType: AwsLambdaRulePostRuleTypeEnum;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source: RuleSource;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: AwsLambdaRulePostStatusEnum;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target: AwsLambdaRulePostTarget;
 }

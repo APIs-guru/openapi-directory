@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class OriginPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=firstName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=firstName" })
   firstName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=lastName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=lastName" })
   lastName: string;
 }
 
 
 export class OriginSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class OriginRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: OriginPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: OriginSecurity;
 }
 
 
 export class OriginResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   firstLastNameOriginedOut?: shared.FirstLastNameOriginedOut;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

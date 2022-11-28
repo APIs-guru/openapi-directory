@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorDetail } from "./errordetail";
 import { BatchPermissionsRequestEntry } from "./batchpermissionsrequestentry";
+
 
 
 // BatchPermissionsFailureEntry
@@ -8,9 +9,9 @@ import { BatchPermissionsRequestEntry } from "./batchpermissionsrequestentry";
  * A list of failures when performing a batch grant or batch revoke operation.
 **/
 export class BatchPermissionsFailureEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Error" })
+  @SpeakeasyMetadata({ data: "json, name=Error" })
   error?: ErrorDetail;
 
-  @Metadata({ data: "json, name=RequestEntry" })
+  @SpeakeasyMetadata({ data: "json, name=RequestEntry" })
   requestEntry?: BatchPermissionsRequestEntry;
 }

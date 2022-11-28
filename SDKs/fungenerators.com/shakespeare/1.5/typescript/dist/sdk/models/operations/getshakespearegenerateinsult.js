@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetShakespeareGenerateInsultQueryParams = /** @class */ (function (_super) {
     __extends(GetShakespeareGenerateInsultQueryParams, _super);
@@ -30,7 +30,7 @@ var GetShakespeareGenerateInsultQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetShakespeareGenerateInsultQueryParams.prototype, "limit", void 0);
     return GetShakespeareGenerateInsultQueryParams;
@@ -42,7 +42,7 @@ var GetShakespeareGenerateInsultSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeXFungeneratorsApiSecret)
     ], GetShakespeareGenerateInsultSecurity.prototype, "xFungeneratorsApiSecret", void 0);
     return GetShakespeareGenerateInsultSecurity;
@@ -54,11 +54,11 @@ var GetShakespeareGenerateInsultRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetShakespeareGenerateInsultQueryParams)
     ], GetShakespeareGenerateInsultRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetShakespeareGenerateInsultSecurity)
     ], GetShakespeareGenerateInsultRequest.prototype, "security", void 0);
     return GetShakespeareGenerateInsultRequest;
@@ -70,11 +70,11 @@ var GetShakespeareGenerateInsultResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetShakespeareGenerateInsultResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetShakespeareGenerateInsultResponse.prototype, "statusCode", void 0);
     return GetShakespeareGenerateInsultResponse;

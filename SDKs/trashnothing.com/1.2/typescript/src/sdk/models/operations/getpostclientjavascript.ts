@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetPostClientJavascriptQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=access_token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" })
   accessToken: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=callback" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" })
   callback?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=group_ids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=group_ids" })
   groupIds: string;
 }
 
 
 export class GetPostClientJavascriptRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPostClientJavascriptQueryParams;
 }
 
 
 export class GetPostClientJavascriptResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import correlationstats
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CorrelatedColumn:
-    column_spec_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'columnSpecId' }})
-    correlation_stats: Optional[correlationstats.CorrelationStats] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'correlationStats' }})
+    r"""CorrelatedColumn
+    Identifies the table's column, and its correlation with the column this ColumnSpec describes.
+    """
+    
+    column_spec_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('columnSpecId') }})
+    correlation_stats: Optional[CorrelationStats] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('correlationStats') }})
     

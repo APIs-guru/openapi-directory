@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetFactCategoriesQueryParams = /** @class */ (function (_super) {
     __extends(GetFactCategoriesQueryParams, _super);
@@ -30,7 +30,7 @@ var GetFactCategoriesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=start" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" }),
         __metadata("design:type", Number)
     ], GetFactCategoriesQueryParams.prototype, "start", void 0);
     return GetFactCategoriesQueryParams;
@@ -42,7 +42,7 @@ var GetFactCategoriesSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeXFungeneratorsApiSecret)
     ], GetFactCategoriesSecurity.prototype, "xFungeneratorsApiSecret", void 0);
     return GetFactCategoriesSecurity;
@@ -54,11 +54,11 @@ var GetFactCategoriesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFactCategoriesQueryParams)
     ], GetFactCategoriesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFactCategoriesSecurity)
     ], GetFactCategoriesRequest.prototype, "security", void 0);
     return GetFactCategoriesRequest;
@@ -70,11 +70,11 @@ var GetFactCategoriesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetFactCategoriesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetFactCategoriesResponse.prototype, "statusCode", void 0);
     return GetFactCategoriesResponse;

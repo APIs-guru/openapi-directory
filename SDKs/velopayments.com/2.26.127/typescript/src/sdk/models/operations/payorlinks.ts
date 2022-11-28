@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PayorLinksQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=descendantsOfPayor" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=descendantsOfPayor" })
   descendantsOfPayor?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=parentOfPayor" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parentOfPayor" })
   parentOfPayor?: string;
 }
 
 
 export class PayorLinksRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PayorLinksQueryParams;
 }
 
 
 export class PayorLinksResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   payorLinksResponse?: shared.PayorLinksResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse400?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse403?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse404?: any;
 }

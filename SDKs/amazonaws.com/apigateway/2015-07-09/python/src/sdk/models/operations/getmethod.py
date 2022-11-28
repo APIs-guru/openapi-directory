@@ -1,13 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetMethodPathParams:
-    http_method: str = field(default=None, metadata={'path_param': { 'field_name': 'http_method', 'style': 'simple', 'explode': False }})
-    resource_id: str = field(default=None, metadata={'path_param': { 'field_name': 'resource_id', 'style': 'simple', 'explode': False }})
-    restapi_id: str = field(default=None, metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
+    http_method: str = field(metadata={'path_param': { 'field_name': 'http_method', 'style': 'simple', 'explode': False }})
+    resource_id: str = field(metadata={'path_param': { 'field_name': 'resource_id', 'style': 'simple', 'explode': False }})
+    restapi_id: str = field(metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,16 +26,16 @@ class GetMethodHeaders:
 
 @dataclass
 class GetMethodRequest:
-    path_params: GetMethodPathParams = field(default=None)
-    headers: GetMethodHeaders = field(default=None)
+    headers: GetMethodHeaders = field()
+    path_params: GetMethodPathParams = field()
     
 
 @dataclass
 class GetMethodResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     method: Optional[shared.Method] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

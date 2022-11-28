@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AddressUpdateModel } from "./addressupdatemodel";
 import { ContactUpdateModel } from "./contactupdatemodel";
 import { CustomFieldUpdateModel } from "./customfieldupdatemodel";

@@ -1,10 +1,14 @@
 package shared
 
+// ErrorOptions
+// The error option model
 type ErrorOptions struct {
 	Code        *string `json:"code,omitempty"`
 	Description *string `json:"description,omitempty"`
 }
 
+// Error
+// The error model
 type Error struct {
 	Field   *string        `json:"field,omitempty"`
 	Message *string        `json:"message,omitempty"`

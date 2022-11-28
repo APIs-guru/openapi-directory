@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDocumentaiV1beta3DocumentSchemaMetadata
+// Metadata for global schema behavior.
 type GoogleCloudDocumentaiV1beta3DocumentSchemaMetadata struct {
 	DocumentAllowMultipleLabels *bool `json:"documentAllowMultipleLabels,omitempty"`
 	DocumentSplitter            *bool `json:"documentSplitter,omitempty"`

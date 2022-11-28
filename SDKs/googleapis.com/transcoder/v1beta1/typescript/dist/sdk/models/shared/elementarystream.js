@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AudioStream } from "./audiostream";
 import { TextStream } from "./textstream";
 import { VideoStream } from "./videostream";
@@ -36,19 +36,19 @@ var ElementaryStream = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=audioStream" }),
+        SpeakeasyMetadata({ data: "json, name=audioStream" }),
         __metadata("design:type", AudioStream)
     ], ElementaryStream.prototype, "audioStream", void 0);
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], ElementaryStream.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=textStream" }),
+        SpeakeasyMetadata({ data: "json, name=textStream" }),
         __metadata("design:type", TextStream)
     ], ElementaryStream.prototype, "textStream", void 0);
     __decorate([
-        Metadata({ data: "json, name=videoStream" }),
+        SpeakeasyMetadata({ data: "json, name=videoStream" }),
         __metadata("design:type", VideoStream)
     ], ElementaryStream.prototype, "videoStream", void 0);
     return ElementaryStream;

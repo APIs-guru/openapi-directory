@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateDimensionPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,27 +31,27 @@ class CreateDimensionRequestBodyTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateDimensionRequestBody:
-    client_request_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientRequestToken' }})
-    string_values: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stringValues' }})
-    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: CreateDimensionRequestBodyTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    client_request_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientRequestToken') }})
+    string_values: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('stringValues') }})
+    type: CreateDimensionRequestBodyTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateDimensionRequest:
-    path_params: CreateDimensionPathParams = field(default=None)
-    headers: CreateDimensionHeaders = field(default=None)
-    request: CreateDimensionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateDimensionHeaders = field()
+    path_params: CreateDimensionPathParams = field()
+    request: CreateDimensionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateDimensionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_dimension_response: Optional[shared.CreateDimensionResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_already_exists_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

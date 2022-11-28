@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksPatchPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +30,21 @@ class AnalyticsadminPropertiesUserLinksPatchQueryParams:
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksPatchRequest:
-    path_params: AnalyticsadminPropertiesUserLinksPatchPathParams = field(default=None)
-    query_params: AnalyticsadminPropertiesUserLinksPatchQueryParams = field(default=None)
-    request: Optional[shared.GoogleAnalyticsAdminV1alphaUserLink] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsadminPropertiesUserLinksPatchSecurity = field(default=None)
+    path_params: AnalyticsadminPropertiesUserLinksPatchPathParams = field()
+    query_params: AnalyticsadminPropertiesUserLinksPatchQueryParams = field()
+    security: AnalyticsadminPropertiesUserLinksPatchSecurity = field()
+    request: Optional[shared.GoogleAnalyticsAdminV1alphaUserLinkInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesUserLinksPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_user_link: Optional[shared.GoogleAnalyticsAdminV1alphaUserLink] = field(default=None)
-    status_code: int = field(default=None)
     

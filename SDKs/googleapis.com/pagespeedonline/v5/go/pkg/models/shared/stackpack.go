@@ -1,5 +1,7 @@
 package shared
 
+// StackPack
+// Message containing Stack Pack information.
 type StackPack struct {
 	Descriptions map[string]string `json:"descriptions,omitempty"`
 	IconDataURL  *string           `json:"iconDataURL,omitempty"`

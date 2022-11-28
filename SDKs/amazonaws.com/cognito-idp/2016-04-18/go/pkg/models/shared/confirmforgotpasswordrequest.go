@@ -1,5 +1,7 @@
 package shared
 
+// ConfirmForgotPasswordRequest
+// The request representing the confirmation for a password reset.
 type ConfirmForgotPasswordRequest struct {
 	AnalyticsMetadata *AnalyticsMetadataType `json:"AnalyticsMetadata,omitempty"`
 	ClientID          string                 `json:"ClientId"`

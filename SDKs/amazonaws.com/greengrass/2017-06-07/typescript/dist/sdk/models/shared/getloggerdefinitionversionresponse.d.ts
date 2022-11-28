@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LoggerDefinitionVersion } from "./loggerdefinitionversion";
 export declare class GetLoggerDefinitionVersionResponse extends SpeakeasyBase {
     arn?: string;

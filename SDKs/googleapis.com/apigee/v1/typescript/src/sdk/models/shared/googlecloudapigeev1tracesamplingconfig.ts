@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudApigeeV1TraceSamplingConfigSamplerEnum {
-    SamplerUnspecified = "SAMPLER_UNSPECIFIED"
-,    Off = "OFF"
-,    Probability = "PROBABILITY"
+    SamplerUnspecified = "SAMPLER_UNSPECIFIED",
+    Off = "OFF",
+    Probability = "PROBABILITY"
 }
 
 
@@ -12,9 +13,9 @@ export enum GoogleCloudApigeeV1TraceSamplingConfigSamplerEnum {
  * TraceSamplingConfig represents the detail settings of distributed tracing. Only the fields that are defined in the distributed trace configuration can be overridden using the distribute trace configuration override APIs.
 **/
 export class GoogleCloudApigeeV1TraceSamplingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sampler" })
+  @SpeakeasyMetadata({ data: "json, name=sampler" })
   sampler?: GoogleCloudApigeeV1TraceSamplingConfigSamplerEnum;
 
-  @Metadata({ data: "json, name=samplingRate" })
+  @SpeakeasyMetadata({ data: "json, name=samplingRate" })
   samplingRate?: number;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitAdminV2OAuthResponseType } from "./googlecloudidentitytoolkitadminv2oauthresponsetype";
+
 
 
 // GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig
@@ -7,24 +8,24 @@ import { GoogleCloudIdentitytoolkitAdminV2OAuthResponseType } from "./googleclou
  * Configuration options for authenticating with an OAuth IDP.
 **/
 export class GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=clientSecret" })
+  @SpeakeasyMetadata({ data: "json, name=clientSecret" })
   clientSecret?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=issuer" })
+  @SpeakeasyMetadata({ data: "json, name=issuer" })
   issuer?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=responseType" })
+  @SpeakeasyMetadata({ data: "json, name=responseType" })
   responseType?: GoogleCloudIdentitytoolkitAdminV2OAuthResponseType;
 }

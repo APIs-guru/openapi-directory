@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomList
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a custom list entity, such as a custom affinity or custom intent audience list.
 **/
 export class CustomList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customListId" })
+  @SpeakeasyMetadata({ data: "json, name=customListId" })
   customListId?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

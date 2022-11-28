@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -39,17 +40,17 @@ class GetMyListingsDraftsQueryParams:
 
 @dataclass
 class GetMyListingsDraftsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetMyListingsDraftsRequest:
-    query_params: GetMyListingsDraftsQueryParams = field(default=None)
-    security: GetMyListingsDraftsSecurity = field(default=None)
+    query_params: GetMyListingsDraftsQueryParams = field()
+    security: GetMyListingsDraftsSecurity = field()
     
 
 @dataclass
 class GetMyListingsDraftsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

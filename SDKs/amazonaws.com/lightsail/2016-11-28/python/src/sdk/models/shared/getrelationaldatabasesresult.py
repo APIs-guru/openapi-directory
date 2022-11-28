@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import relationaldatabase
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetRelationalDatabasesResult:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    relational_databases: Optional[List[relationaldatabase.RelationalDatabase]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationalDatabases' }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    relational_databases: Optional[List[RelationalDatabase]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relationalDatabases') }})
     

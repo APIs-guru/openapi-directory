@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class GetSourceAccountPathParams:
-    source_account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'sourceAccountId', 'style': 'simple', 'explode': False }})
+    source_account_id: str = field(metadata={'path_param': { 'field_name': 'sourceAccountId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSourceAccountRequest:
-    path_params: GetSourceAccountPathParams = field(default=None)
+    path_params: GetSourceAccountPathParams = field()
     
 
 @dataclass
 class GetSourceAccountResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     source_account_response: Optional[shared.SourceAccountResponse] = field(default=None)
-    status_code: int = field(default=None)
     inline_response_401: Optional[Any] = field(default=None)
     inline_response_404: Optional[Any] = field(default=None)
     

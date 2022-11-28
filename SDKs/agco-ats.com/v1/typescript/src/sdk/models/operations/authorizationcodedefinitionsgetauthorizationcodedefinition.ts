@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AuthorizationCodeDefinitionsGetAuthorizationCodeDefinitionQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=categoryID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=categoryID" })
   categoryId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createdByUserID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdByUserID" })
   createdByUserId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=deletedByUserID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deletedByUserID" })
   deletedByUserId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeDeleted" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeDeleted" })
   includeDeleted?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 }
 
 
 export class AuthorizationCodeDefinitionsGetAuthorizationCodeDefinitionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AuthorizationCodeDefinitionsGetAuthorizationCodeDefinitionQueryParams;
 }
 
 
 export class AuthorizationCodeDefinitionsGetAuthorizationCodeDefinitionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiIPagedResponseAuthorizationCodesSharedModelsAuthorizationCodeDefinition?: shared.ApiIPagedResponseAuthorizationCodesSharedModelsAuthorizationCodeDefinition;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

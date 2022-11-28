@@ -10,18 +10,18 @@ class GetRateTablesQueryParams:
 
 @dataclass
 class GetRateTablesSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetRateTablesRequest:
-    query_params: GetRateTablesQueryParams = field(default=None)
-    security: GetRateTablesSecurity = field(default=None)
+    query_params: GetRateTablesQueryParams = field()
+    security: GetRateTablesSecurity = field()
     
 
 @dataclass
 class GetRateTablesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     rate_table_response: Optional[shared.RateTableResponse] = field(default=None)
-    status_code: int = field(default=None)
     

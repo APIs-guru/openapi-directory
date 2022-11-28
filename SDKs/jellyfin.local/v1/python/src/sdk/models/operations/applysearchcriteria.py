@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class ApplySearchCriteriaPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,19 +22,19 @@ class ApplySearchCriteriaRequests:
 
 @dataclass
 class ApplySearchCriteriaSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class ApplySearchCriteriaRequest:
-    path_params: ApplySearchCriteriaPathParams = field(default=None)
-    query_params: ApplySearchCriteriaQueryParams = field(default=None)
-    request: ApplySearchCriteriaRequests = field(default=None)
-    security: ApplySearchCriteriaSecurity = field(default=None)
+    path_params: ApplySearchCriteriaPathParams = field()
+    query_params: ApplySearchCriteriaQueryParams = field()
+    request: ApplySearchCriteriaRequests = field()
+    security: ApplySearchCriteriaSecurity = field()
     
 
 @dataclass
 class ApplySearchCriteriaResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

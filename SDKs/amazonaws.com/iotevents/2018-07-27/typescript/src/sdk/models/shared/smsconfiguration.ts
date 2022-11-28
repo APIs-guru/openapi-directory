@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RecipientDetail } from "./recipientdetail";
+
 
 
 // SmsConfiguration
@@ -8,12 +8,12 @@ import { RecipientDetail } from "./recipientdetail";
  * Contains the configuration information of SMS notifications.
 **/
 export class SmsConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalMessage" })
+  @SpeakeasyMetadata({ data: "json, name=additionalMessage" })
   additionalMessage?: string;
 
-  @Metadata({ data: "json, name=recipients", elemType: shared.RecipientDetail })
+  @SpeakeasyMetadata({ data: "json, name=recipients", elemType: RecipientDetail })
   recipients: RecipientDetail[];
 
-  @Metadata({ data: "json, name=senderId" })
+  @SpeakeasyMetadata({ data: "json, name=senderId" })
   senderId?: string;
 }

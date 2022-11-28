@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteStudiesIdAttachmentsNamePathParams = /** @class */ (function (_super) {
     __extends(DeleteStudiesIdAttachmentsNamePathParams, _super);
     function DeleteStudiesIdAttachmentsNamePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], DeleteStudiesIdAttachmentsNamePathParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], DeleteStudiesIdAttachmentsNamePathParams.prototype, "name", void 0);
     return DeleteStudiesIdAttachmentsNamePathParams;
@@ -45,7 +45,7 @@ var DeleteStudiesIdAttachmentsNameHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=If-Match" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-Match" }),
         __metadata("design:type", String)
     ], DeleteStudiesIdAttachmentsNameHeaders.prototype, "ifMatch", void 0);
     return DeleteStudiesIdAttachmentsNameHeaders;
@@ -57,11 +57,11 @@ var DeleteStudiesIdAttachmentsNameRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteStudiesIdAttachmentsNamePathParams)
     ], DeleteStudiesIdAttachmentsNameRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteStudiesIdAttachmentsNameHeaders)
     ], DeleteStudiesIdAttachmentsNameRequest.prototype, "headers", void 0);
     return DeleteStudiesIdAttachmentsNameRequest;
@@ -73,11 +73,11 @@ var DeleteStudiesIdAttachmentsNameResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteStudiesIdAttachmentsNameResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteStudiesIdAttachmentsNameResponse.prototype, "statusCode", void 0);
     return DeleteStudiesIdAttachmentsNameResponse;

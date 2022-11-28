@@ -1,6 +1,7 @@
 
 
+
 export enum ExecutionRuleEnum {
-    Following = "following"
-,    Preceding = "preceding"
+    Following = "following",
+    Preceding = "preceding"
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostSendCustomVerificationEmailActionEnum(str, Enum):
     SEND_CUSTOM_VERIFICATION_EMAIL = "SendCustomVerificationEmail"
@@ -10,8 +14,8 @@ class PostSendCustomVerificationEmailVersionEnum(str, Enum):
 
 @dataclass
 class PostSendCustomVerificationEmailQueryParams:
-    action: PostSendCustomVerificationEmailActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostSendCustomVerificationEmailVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostSendCustomVerificationEmailActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostSendCustomVerificationEmailVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostSendCustomVerificationEmailHeaders:
 
 @dataclass
 class PostSendCustomVerificationEmailRequest:
-    query_params: PostSendCustomVerificationEmailQueryParams = field(default=None)
-    headers: PostSendCustomVerificationEmailHeaders = field(default=None)
+    headers: PostSendCustomVerificationEmailHeaders = field()
+    query_params: PostSendCustomVerificationEmailQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostSendCustomVerificationEmailResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

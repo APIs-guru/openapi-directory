@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReimageNodeRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for ReimageNode.
 **/
 export class ReimageNodeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=tensorflowVersion" })
+  @SpeakeasyMetadata({ data: "json, name=tensorflowVersion" })
   tensorflowVersion?: string;
 }

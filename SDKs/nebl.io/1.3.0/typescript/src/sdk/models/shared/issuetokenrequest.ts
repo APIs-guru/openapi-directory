@@ -1,5 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IssueTokenRequestFlags
@@ -7,22 +7,22 @@ import * as shared from "../shared";
  * Object representing flags that potentialy modify this transaction
 **/
 export class IssueTokenRequestFlags extends SpeakeasyBase {
-  @Metadata({ data: "json, name=splitChange" })
+  @SpeakeasyMetadata({ data: "json, name=splitChange" })
   splitChange?: boolean;
 }
 
 
 export class IssueTokenRequestMetadataEncryptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=pubkey" })
+  @SpeakeasyMetadata({ data: "json, name=pubkey" })
   pubkey?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
@@ -32,40 +32,40 @@ export class IssueTokenRequestMetadataEncryptions extends SpeakeasyBase {
  * Object describing expiration rules of the token
 **/
 export class IssueTokenRequestMetadataRulesExpiration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=locked" })
+  @SpeakeasyMetadata({ data: "json, name=locked" })
   locked?: boolean;
 
-  @Metadata({ data: "json, name=validUntil" })
+  @SpeakeasyMetadata({ data: "json, name=validUntil" })
   validUntil?: number;
 }
 
 
 export class IssueTokenRequestMetadataRulesFeesItems extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=tokenId" })
+  @SpeakeasyMetadata({ data: "json, name=tokenId" })
   tokenId?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class IssueTokenRequestMetadataRulesFees extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.IssueTokenRequestMetadataRulesFeesItems })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: IssueTokenRequestMetadataRulesFeesItems })
   items?: IssueTokenRequestMetadataRulesFeesItems[];
 
-  @Metadata({ data: "json, name=locked" })
+  @SpeakeasyMetadata({ data: "json, name=locked" })
   locked?: boolean;
 }
 
 
 export class IssueTokenRequestMetadataRulesHolders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=locked" })
+  @SpeakeasyMetadata({ data: "json, name=locked" })
   locked?: boolean;
 }
 
@@ -75,37 +75,37 @@ export class IssueTokenRequestMetadataRulesHolders extends SpeakeasyBase {
  * Object describing token rules
 **/
 export class IssueTokenRequestMetadataRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expiration" })
+  @SpeakeasyMetadata({ data: "json, name=expiration" })
   expiration?: IssueTokenRequestMetadataRulesExpiration;
 
-  @Metadata({ data: "json, name=fees" })
+  @SpeakeasyMetadata({ data: "json, name=fees" })
   fees?: IssueTokenRequestMetadataRulesFees;
 
-  @Metadata({ data: "json, name=holders", elemType: shared.IssueTokenRequestMetadataRulesHolders })
+  @SpeakeasyMetadata({ data: "json, name=holders", elemType: IssueTokenRequestMetadataRulesHolders })
   holders?: IssueTokenRequestMetadataRulesHolders[];
 }
 
 
 export class IssueTokenRequestMetadataUrls extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataHash" })
+  @SpeakeasyMetadata({ data: "json, name=dataHash" })
   dataHash?: string;
 
-  @Metadata({ data: "json, name=mimeType" })
+  @SpeakeasyMetadata({ data: "json, name=mimeType" })
   mimeType?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
 
 export class IssueTokenRequestMetadataUserDataMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
@@ -115,7 +115,7 @@ export class IssueTokenRequestMetadataUserDataMeta extends SpeakeasyBase {
  * Metadata set by user on token
 **/
 export class IssueTokenRequestMetadataUserData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=meta", elemType: shared.IssueTokenRequestMetadataUserDataMeta })
+  @SpeakeasyMetadata({ data: "json, name=meta", elemType: IssueTokenRequestMetadataUserDataMeta })
   meta?: IssueTokenRequestMetadataUserDataMeta[];
 }
 
@@ -125,60 +125,60 @@ export class IssueTokenRequestMetadataUserData extends SpeakeasyBase {
  * Object representing all metadata at token issuance
 **/
 export class IssueTokenRequestMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=encryptions", elemType: shared.IssueTokenRequestMetadataEncryptions })
+  @SpeakeasyMetadata({ data: "json, name=encryptions", elemType: IssueTokenRequestMetadataEncryptions })
   encryptions?: IssueTokenRequestMetadataEncryptions[];
 
-  @Metadata({ data: "json, name=issuer" })
+  @SpeakeasyMetadata({ data: "json, name=issuer" })
   issuer?: string;
 
-  @Metadata({ data: "json, name=rules" })
+  @SpeakeasyMetadata({ data: "json, name=rules" })
   rules?: IssueTokenRequestMetadataRules;
 
-  @Metadata({ data: "json, name=tokenName" })
+  @SpeakeasyMetadata({ data: "json, name=tokenName" })
   tokenName?: string;
 
-  @Metadata({ data: "json, name=urls", elemType: shared.IssueTokenRequestMetadataUrls })
+  @SpeakeasyMetadata({ data: "json, name=urls", elemType: IssueTokenRequestMetadataUrls })
   urls?: IssueTokenRequestMetadataUrls[];
 
-  @Metadata({ data: "json, name=userData" })
+  @SpeakeasyMetadata({ data: "json, name=userData" })
   userData?: IssueTokenRequestMetadataUserData;
 }
 
 
 export class IssueTokenRequestTransfer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 }
 
 
 export class IssueTokenRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount: number;
 
-  @Metadata({ data: "json, name=divisibility" })
+  @SpeakeasyMetadata({ data: "json, name=divisibility" })
   divisibility: number;
 
-  @Metadata({ data: "json, name=fee" })
+  @SpeakeasyMetadata({ data: "json, name=fee" })
   fee: number;
 
-  @Metadata({ data: "json, name=flags" })
+  @SpeakeasyMetadata({ data: "json, name=flags" })
   flags?: IssueTokenRequestFlags;
 
-  @Metadata({ data: "json, name=issueAddress" })
+  @SpeakeasyMetadata({ data: "json, name=issueAddress" })
   issueAddress: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: IssueTokenRequestMetadata;
 
-  @Metadata({ data: "json, name=reissuable" })
+  @SpeakeasyMetadata({ data: "json, name=reissuable" })
   reissuable: boolean;
 
-  @Metadata({ data: "json, name=transfer", elemType: shared.IssueTokenRequestTransfer })
+  @SpeakeasyMetadata({ data: "json, name=transfer", elemType: IssueTokenRequestTransfer })
   transfer: IssueTokenRequestTransfer[];
 }

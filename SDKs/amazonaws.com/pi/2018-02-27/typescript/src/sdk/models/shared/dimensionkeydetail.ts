@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DetailStatusEnum } from "./detailstatusenum";
+
 
 
 // DimensionKeyDetail
@@ -7,12 +8,12 @@ import { DetailStatusEnum } from "./detailstatusenum";
  * An object that describes the details for a specified dimension.
 **/
 export class DimensionKeyDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Dimension" })
+  @SpeakeasyMetadata({ data: "json, name=Dimension" })
   dimension?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: DetailStatusEnum;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

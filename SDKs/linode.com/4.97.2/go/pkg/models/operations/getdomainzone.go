@@ -8,26 +8,18 @@ type GetDomainZonePathParams struct {
 	DomainID string `pathParam:"style=simple,explode=false,name=domainId"`
 }
 
-type GetDomainZoneSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetDomainZoneSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetDomainZoneSecurity struct {
-	Option1 *GetDomainZoneSecurityOption1 `security:"option"`
-	Option2 *GetDomainZoneSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type GetDomainZoneDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetDomainZoneRequest struct {
 	PathParams GetDomainZonePathParams
 	Security   GetDomainZoneSecurity
-}
-
-type GetDomainZoneDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetDomainZoneResponse struct {

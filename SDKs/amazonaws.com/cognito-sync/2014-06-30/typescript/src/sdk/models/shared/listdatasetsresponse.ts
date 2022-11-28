@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dataset } from "./dataset";
+
 
 
 // ListDatasetsResponse
@@ -8,12 +8,12 @@ import { Dataset } from "./dataset";
  * Returned for a successful ListDatasets request.
 **/
 export class ListDatasetsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Count" })
+  @SpeakeasyMetadata({ data: "json, name=Count" })
   count?: number;
 
-  @Metadata({ data: "json, name=Datasets", elemType: shared.Dataset })
+  @SpeakeasyMetadata({ data: "json, name=Datasets", elemType: Dataset })
   datasets?: Dataset[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

@@ -4,8 +4,8 @@ from typing import Optional
 
 @dataclass
 class Destiny2GetLinkedProfilesPathParams:
-    membership_id: int = field(default=None, metadata={'path_param': { 'field_name': 'membershipId', 'style': 'simple', 'explode': False }})
-    membership_type: int = field(default=None, metadata={'path_param': { 'field_name': 'membershipType', 'style': 'simple', 'explode': False }})
+    membership_id: int = field(metadata={'path_param': { 'field_name': 'membershipId', 'style': 'simple', 'explode': False }})
+    membership_type: int = field(metadata={'path_param': { 'field_name': 'membershipType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class Destiny2GetLinkedProfilesQueryParams:
 
 @dataclass
 class Destiny2GetLinkedProfilesRequest:
-    path_params: Destiny2GetLinkedProfilesPathParams = field(default=None)
-    query_params: Destiny2GetLinkedProfilesQueryParams = field(default=None)
+    path_params: Destiny2GetLinkedProfilesPathParams = field()
+    query_params: Destiny2GetLinkedProfilesQueryParams = field()
     
 
 @dataclass
 class Destiny2GetLinkedProfilesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

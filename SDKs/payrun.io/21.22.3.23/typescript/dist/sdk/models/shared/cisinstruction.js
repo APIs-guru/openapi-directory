@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var CisInstructionCisInstructionPayFrequencyEnum;
 (function (CisInstructionCisInstructionPayFrequencyEnum) {
     CisInstructionCisInstructionPayFrequencyEnum["Monthly"] = "Monthly";
@@ -45,51 +45,51 @@ var CisInstructionCisInstruction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CisLineTag" }),
+        SpeakeasyMetadata({ data: "json, name=CisLineTag" }),
         __metadata("design:type", String)
     ], CisInstructionCisInstruction.prototype, "cisLineTag", void 0);
     __decorate([
-        Metadata({ data: "json, name=CisLineType" }),
+        SpeakeasyMetadata({ data: "json, name=CisLineType" }),
         __metadata("design:type", String)
     ], CisInstructionCisInstruction.prototype, "cisLineType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], CisInstructionCisInstruction.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=PayFrequency" }),
+        SpeakeasyMetadata({ data: "json, name=PayFrequency" }),
         __metadata("design:type", String)
     ], CisInstructionCisInstruction.prototype, "payFrequency", void 0);
     __decorate([
-        Metadata({ data: "json, name=PeriodEnd" }),
+        SpeakeasyMetadata({ data: "json, name=PeriodEnd" }),
         __metadata("design:type", Number)
     ], CisInstructionCisInstruction.prototype, "periodEnd", void 0);
     __decorate([
-        Metadata({ data: "json, name=PeriodStart" }),
+        SpeakeasyMetadata({ data: "json, name=PeriodStart" }),
         __metadata("design:type", Number)
     ], CisInstructionCisInstruction.prototype, "periodStart", void 0);
     __decorate([
-        Metadata({ data: "json, name=TaxYearEnd" }),
+        SpeakeasyMetadata({ data: "json, name=TaxYearEnd" }),
         __metadata("design:type", Number)
     ], CisInstructionCisInstruction.prototype, "taxYearEnd", void 0);
     __decorate([
-        Metadata({ data: "json, name=TaxYearStart" }),
+        SpeakeasyMetadata({ data: "json, name=TaxYearStart" }),
         __metadata("design:type", Number)
     ], CisInstructionCisInstruction.prototype, "taxYearStart", void 0);
     __decorate([
-        Metadata({ data: "json, name=UOM" }),
+        SpeakeasyMetadata({ data: "json, name=UOM" }),
         __metadata("design:type", String)
     ], CisInstructionCisInstruction.prototype, "uom", void 0);
     __decorate([
-        Metadata({ data: "json, name=Units" }),
+        SpeakeasyMetadata({ data: "json, name=Units" }),
         __metadata("design:type", Number)
     ], CisInstructionCisInstruction.prototype, "units", void 0);
     __decorate([
-        Metadata({ data: "json, name=VAT" }),
+        SpeakeasyMetadata({ data: "json, name=VAT" }),
         __metadata("design:type", Number)
     ], CisInstructionCisInstruction.prototype, "vat", void 0);
     __decorate([
-        Metadata({ data: "json, name=Value" }),
+        SpeakeasyMetadata({ data: "json, name=Value" }),
         __metadata("design:type", Number)
     ], CisInstructionCisInstruction.prototype, "value", void 0);
     return CisInstructionCisInstruction;
@@ -101,7 +101,7 @@ var CisInstruction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CisInstruction" }),
+        SpeakeasyMetadata({ data: "json, name=CisInstruction" }),
         __metadata("design:type", CisInstructionCisInstruction)
     ], CisInstruction.prototype, "cisInstruction", void 0);
     return CisInstruction;

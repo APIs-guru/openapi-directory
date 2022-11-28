@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class EndpointGetAnAlbumPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,26 +15,26 @@ class EndpointGetAnAlbumQueryParams:
 
 @dataclass
 class EndpointGetAnAlbumHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointGetAnAlbumSecurity:
-    spotify_auth: shared.SchemeSpotifyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    spotify_auth: shared.SchemeSpotifyAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class EndpointGetAnAlbumRequest:
-    path_params: EndpointGetAnAlbumPathParams = field(default=None)
-    query_params: EndpointGetAnAlbumQueryParams = field(default=None)
-    headers: EndpointGetAnAlbumHeaders = field(default=None)
-    security: EndpointGetAnAlbumSecurity = field(default=None)
+    headers: EndpointGetAnAlbumHeaders = field()
+    path_params: EndpointGetAnAlbumPathParams = field()
+    query_params: EndpointGetAnAlbumQueryParams = field()
+    security: EndpointGetAnAlbumSecurity = field()
     
 
 @dataclass
 class EndpointGetAnAlbumResponse:
+    content_type: str = field()
+    status_code: int = field()
     album_object: Optional[shared.AlbumObject] = field(default=None)
-    content_type: str = field(default=None)
     error_response_object: Optional[shared.ErrorResponseObject] = field(default=None)
-    status_code: int = field(default=None)
     

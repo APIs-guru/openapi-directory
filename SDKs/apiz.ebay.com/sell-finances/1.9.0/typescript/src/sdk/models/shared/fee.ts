@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Amount } from "./amount";
+
 
 
 // Fee
@@ -7,12 +8,12 @@ import { Amount } from "./amount";
  * This type is used to display fees that are automatically deducted from seller payouts.
 **/
 export class Fee extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: Amount;
 
-  @Metadata({ data: "json, name=feeMemo" })
+  @SpeakeasyMetadata({ data: "json, name=feeMemo" })
   feeMemo?: string;
 
-  @Metadata({ data: "json, name=feeType" })
+  @SpeakeasyMetadata({ data: "json, name=feeType" })
   feeType?: string;
 }

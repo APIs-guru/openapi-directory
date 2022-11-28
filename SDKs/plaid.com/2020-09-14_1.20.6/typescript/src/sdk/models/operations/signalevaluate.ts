@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SignalEvaluateRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: Map<string, any>;
 }
 
 
 export class SignalEvaluateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   signalEvaluateResponse?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

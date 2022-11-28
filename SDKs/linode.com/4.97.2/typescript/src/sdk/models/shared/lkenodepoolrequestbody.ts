@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Items } from "./items";
+
 
 
 // LkeNodePoolRequestBody
@@ -9,15 +9,15 @@ import { Items } from "./items";
  * 
 **/
 export class LkeNodePoolRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=disks", elemType: shared.Items })
+  @SpeakeasyMetadata({ data: "json, name=disks", elemType: Items })
   disks?: Items[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

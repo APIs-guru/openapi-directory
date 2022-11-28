@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CompositeMedia } from "./compositemedia";
+
 
 
 // DiffUploadResponse
@@ -7,9 +8,9 @@ import { CompositeMedia } from "./compositemedia";
  * # gdata.* are outside protos with mising documentation
 **/
 export class DiffUploadResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=objectVersion" })
+  @SpeakeasyMetadata({ data: "json, name=objectVersion" })
   objectVersion?: string;
 
-  @Metadata({ data: "json, name=originalObject" })
+  @SpeakeasyMetadata({ data: "json, name=originalObject" })
   originalObject?: CompositeMedia;
 }

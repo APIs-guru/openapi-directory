@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UploadPartPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=session-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=session-id" })
   sessionId: string;
 }
 
 
 export class UploadPartRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/octet-stream" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/octet-stream" })
   applicationOctetStream: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/zip" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/zip" })
   applicationZip: Uint8Array;
 }
 
 
 export class UploadPartSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   accessToken: shared.SchemeAccessToken;
 }
 
 
 export class UploadPartRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UploadPartPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: UploadPartRequests;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UploadPartSecurity;
 }
 
 
 export class UploadPartResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

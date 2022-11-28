@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class InvokeEndpointOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Body" })
+  @SpeakeasyMetadata({ data: "json, name=Body" })
   body: string;
 }

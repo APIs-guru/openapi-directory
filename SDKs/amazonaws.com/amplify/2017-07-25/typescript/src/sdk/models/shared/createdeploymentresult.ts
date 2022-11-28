@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateDeploymentResult
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The result structure for the create a new deployment request. 
 **/
 export class CreateDeploymentResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileUploadUrls" })
+  @SpeakeasyMetadata({ data: "json, name=fileUploadUrls" })
   fileUploadUrls: Map<string, string>;
 
-  @Metadata({ data: "json, name=jobId" })
+  @SpeakeasyMetadata({ data: "json, name=jobId" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=zipUploadUrl" })
+  @SpeakeasyMetadata({ data: "json, name=zipUploadUrl" })
   zipUploadUrl: string;
 }

@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ConfigProxy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TCP_NODELAY" })
+  @SpeakeasyMetadata({ data: "json, name=TCP_NODELAY" })
   tcpNodelay?: number;
 
-  @Metadata({ data: "json, name=client_to_server" })
+  @SpeakeasyMetadata({ data: "json, name=client_to_server" })
   clientToServer?: string;
 
-  @Metadata({ data: "json, name=disconnect_delay" })
+  @SpeakeasyMetadata({ data: "json, name=disconnect_delay" })
   disconnectDelay?: number;
 
-  @Metadata({ data: "json, name=max_connects" })
+  @SpeakeasyMetadata({ data: "json, name=max_connects" })
   maxConnects?: number;
 
-  @Metadata({ data: "json, name=portno" })
+  @SpeakeasyMetadata({ data: "json, name=portno" })
   portno?: number;
 
-  @Metadata({ data: "json, name=pre_connect" })
+  @SpeakeasyMetadata({ data: "json, name=pre_connect" })
   preConnect?: string;
 
-  @Metadata({ data: "json, name=server_to_client" })
+  @SpeakeasyMetadata({ data: "json, name=server_to_client" })
   serverToClient?: string;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target?: string;
 
-  @Metadata({ data: "json, name=transport" })
+  @SpeakeasyMetadata({ data: "json, name=transport" })
   transport?: string;
 }

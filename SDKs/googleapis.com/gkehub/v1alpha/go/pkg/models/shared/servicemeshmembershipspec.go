@@ -25,6 +25,8 @@ const (
 	ServiceMeshMembershipSpecManagementEnumManagementManual      ServiceMeshMembershipSpecManagementEnum = "MANAGEMENT_MANUAL"
 )
 
+// ServiceMeshMembershipSpec
+// **Service Mesh**: Spec for a single Membership for the servicemesh feature
 type ServiceMeshMembershipSpec struct {
 	ControlPlane   *ServiceMeshMembershipSpecControlPlaneEnum   `json:"controlPlane,omitempty"`
 	DefaultChannel *ServiceMeshMembershipSpecDefaultChannelEnum `json:"defaultChannel,omitempty"`

@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Moderator } from "./moderator";
 
 
+
 export class Moderation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isMuted" })
+  @SpeakeasyMetadata({ data: "json, name=isMuted" })
   isMuted?: boolean;
 
-  @Metadata({ data: "json, name=moderator" })
+  @SpeakeasyMetadata({ data: "json, name=moderator" })
   moderator?: Moderator;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 }

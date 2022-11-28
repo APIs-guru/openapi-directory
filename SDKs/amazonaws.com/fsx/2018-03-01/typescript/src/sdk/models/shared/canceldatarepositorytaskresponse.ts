@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataRepositoryTaskLifecycleEnum } from "./datarepositorytasklifecycleenum";
 
 
+
 export class CancelDataRepositoryTaskResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Lifecycle" })
+  @SpeakeasyMetadata({ data: "json, name=Lifecycle" })
   lifecycle?: DataRepositoryTaskLifecycleEnum;
 
-  @Metadata({ data: "json, name=TaskId" })
+  @SpeakeasyMetadata({ data: "json, name=TaskId" })
   taskId?: string;
 }

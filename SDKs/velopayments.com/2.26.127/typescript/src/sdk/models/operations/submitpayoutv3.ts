@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SubmitPayoutV3MultipartFormData extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=file;json=true", elemType: shared.PaymentInstructionV3 })
+  @SpeakeasyMetadata({ data: "multipart_form, name=file;json=true", elemType: shared.PaymentInstructionV3 })
   file?: shared.PaymentInstructionV3[];
 
-  @Metadata({ data: "multipart_form, name=payorId" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=payorId" })
   payorId?: string;
 
-  @Metadata({ data: "multipart_form, name=payoutFromPayorId" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=payoutFromPayorId" })
   payoutFromPayorId?: string;
 
-  @Metadata({ data: "multipart_form, name=payoutToPayorId" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=payoutToPayorId" })
   payoutToPayorId?: string;
 }
 
 
 export class SubmitPayoutV3Requests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   createPayoutRequestV3?: shared.CreatePayoutRequestV3;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   object?: SubmitPayoutV3MultipartFormData;
 }
 
 
 export class SubmitPayoutV3Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request: SubmitPayoutV3Requests;
 }
 
 
 export class SubmitPayoutV3Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse400?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse401?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse403?: any;
 }

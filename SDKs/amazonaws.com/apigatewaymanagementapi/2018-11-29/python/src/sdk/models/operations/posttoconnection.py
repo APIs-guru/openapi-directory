@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class PostToConnectionPathParams:
-    connection_id: str = field(default=None, metadata={'path_param': { 'field_name': 'connectionId', 'style': 'simple', 'explode': False }})
+    connection_id: str = field(metadata={'path_param': { 'field_name': 'connectionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,22 +26,22 @@ class PostToConnectionHeaders:
 @dataclass_json
 @dataclass
 class PostToConnectionRequestBody:
-    data: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Data' }})
+    data: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Data') }})
     
 
 @dataclass
 class PostToConnectionRequest:
-    path_params: PostToConnectionPathParams = field(default=None)
-    headers: PostToConnectionHeaders = field(default=None)
-    request: PostToConnectionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PostToConnectionHeaders = field()
+    path_params: PostToConnectionPathParams = field()
+    request: PostToConnectionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostToConnectionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     forbidden_exception: Optional[Any] = field(default=None)
     gone_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     payload_too_large_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

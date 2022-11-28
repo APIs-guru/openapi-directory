@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CategoricalParameterRange
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A list of categorical hyperparameters to tune.
 **/
 export class CategoricalParameterRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=Values" })
+  @SpeakeasyMetadata({ data: "json, name=Values" })
   values: string[];
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GeographicDivision
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a political geography.
 **/
 export class GeographicDivision extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alsoKnownAs" })
+  @SpeakeasyMetadata({ data: "json, name=alsoKnownAs" })
   alsoKnownAs?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=officeIndices" })
+  @SpeakeasyMetadata({ data: "json, name=officeIndices" })
   officeIndices?: number[];
 }

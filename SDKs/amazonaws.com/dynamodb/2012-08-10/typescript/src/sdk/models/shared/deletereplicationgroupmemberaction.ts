@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteReplicationGroupMemberAction
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a replica to be deleted.
 **/
 export class DeleteReplicationGroupMemberAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RegionName" })
+  @SpeakeasyMetadata({ data: "json, name=RegionName" })
   regionName: string;
 }

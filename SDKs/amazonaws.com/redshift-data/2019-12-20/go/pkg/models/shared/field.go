@@ -1,5 +1,7 @@
 package shared
 
+// Field
+// A data value in a column.
 type Field struct {
 	BlobValue    *string  `json:"blobValue,omitempty"`
 	BooleanValue *bool    `json:"booleanValue,omitempty"`

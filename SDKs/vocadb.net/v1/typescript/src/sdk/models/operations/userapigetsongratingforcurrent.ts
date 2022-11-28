@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UserApiGetSongRatingForCurrentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=songId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=songId" })
   songId: number;
+}
+
+export enum UserApiGetSongRatingForCurrent200ApplicationJsonEnum {
+    Nothing = "Nothing",
+    Dislike = "Dislike",
+    Like = "Like",
+    Favorite = "Favorite"
+}
+
+export enum UserApiGetSongRatingForCurrent200ApplicationJsonpEnum {
+    Nothing = "Nothing",
+    Dislike = "Dislike",
+    Like = "Like",
+    Favorite = "Favorite"
+}
+
+export enum UserApiGetSongRatingForCurrent200TextJsonEnum {
+    Nothing = "Nothing",
+    Dislike = "Dislike",
+    Like = "Like",
+    Favorite = "Favorite"
 }
 
 
 export class UserApiGetSongRatingForCurrentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UserApiGetSongRatingForCurrentPathParams;
-}
-
-export enum UserApiGetSongRatingForCurrent200ApplicationJsonEnum {
-    Nothing = "Nothing"
-,    Dislike = "Dislike"
-,    Like = "Like"
-,    Favorite = "Favorite"
-}
-
-export enum UserApiGetSongRatingForCurrent200ApplicationJsonpEnum {
-    Nothing = "Nothing"
-,    Dislike = "Dislike"
-,    Like = "Like"
-,    Favorite = "Favorite"
-}
-
-export enum UserApiGetSongRatingForCurrent200TextJsonEnum {
-    Nothing = "Nothing"
-,    Dislike = "Dislike"
-,    Like = "Like"
-,    Favorite = "Favorite"
 }
 
 
 export class UserApiGetSongRatingForCurrentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   userApiGetSongRatingForCurrent200ApplicationJsonStringEnum?: UserApiGetSongRatingForCurrent200ApplicationJsonEnum;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   userApiGetSongRatingForCurrent200ApplicationJsonpStringEnum?: UserApiGetSongRatingForCurrent200ApplicationJsonpEnum;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   userApiGetSongRatingForCurrent200TextJsonStringEnum?: UserApiGetSongRatingForCurrent200TextJsonEnum;
 }

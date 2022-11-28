@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DenySpaceAccesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=participantId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=participantId" })
   participantId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=spaceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=spaceId" })
   spaceId: string;
 }
 
 
 export class DenySpaceAccesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=reason;" })
+  @SpeakeasyMetadata({ data: "form, name=reason;" })
   reason?: string;
 }
 
 
 export class DenySpaceAccesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class DenySpaceAccesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DenySpaceAccesPathParams;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: DenySpaceAccesRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DenySpaceAccesSecurity;
 }
 
 
 export class DenySpaceAccesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

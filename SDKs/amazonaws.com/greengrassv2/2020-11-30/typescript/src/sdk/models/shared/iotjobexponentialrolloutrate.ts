@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IoTJobRateIncreaseCriteria } from "./iotjobrateincreasecriteria";
+
 
 
 // IoTJobExponentialRolloutRate
@@ -7,12 +8,12 @@ import { IoTJobRateIncreaseCriteria } from "./iotjobrateincreasecriteria";
  * Contains information about an exponential rollout rate for a configuration deployment job.
 **/
 export class IoTJobExponentialRolloutRate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseRatePerMinute" })
+  @SpeakeasyMetadata({ data: "json, name=baseRatePerMinute" })
   baseRatePerMinute: number;
 
-  @Metadata({ data: "json, name=incrementFactor" })
+  @SpeakeasyMetadata({ data: "json, name=incrementFactor" })
   incrementFactor: number;
 
-  @Metadata({ data: "json, name=rateIncreaseCriteria" })
+  @SpeakeasyMetadata({ data: "json, name=rateIncreaseCriteria" })
   rateIncreaseCriteria: IoTJobRateIncreaseCriteria;
 }

@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AccountUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=admin" })
+  @SpeakeasyMetadata({ data: "json, name=admin" })
   admin?: boolean;
 
-  @Metadata({ data: "json, name=emailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=emailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=orderManager" })
+  @SpeakeasyMetadata({ data: "json, name=orderManager" })
   orderManager?: boolean;
 
-  @Metadata({ data: "json, name=paymentsAnalyst" })
+  @SpeakeasyMetadata({ data: "json, name=paymentsAnalyst" })
   paymentsAnalyst?: boolean;
 
-  @Metadata({ data: "json, name=paymentsManager" })
+  @SpeakeasyMetadata({ data: "json, name=paymentsManager" })
   paymentsManager?: boolean;
 
-  @Metadata({ data: "json, name=reportingManager" })
+  @SpeakeasyMetadata({ data: "json, name=reportingManager" })
   reportingManager?: boolean;
 }

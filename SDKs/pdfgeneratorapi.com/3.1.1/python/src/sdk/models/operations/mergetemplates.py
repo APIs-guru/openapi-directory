@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -11,26 +13,20 @@ class MergeTemplatesQueryParams:
     output: Optional[shared.OutputEnum] = field(default=None, metadata={'query_param': { 'field_name': 'output', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class MergeTemplatesRequest:
-    query_params: MergeTemplatesQueryParams = field(default=None)
-    request: List[shared.BatchData] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    
-
 @dataclass_json
 @dataclass
 class MergeTemplates200ApplicationJSONMeta:
-    content_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content-type' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'display_name' }})
-    encoding: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'encoding' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    content_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('content-type') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('display_name') }})
+    encoding: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('encoding') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     
 
 @dataclass_json
 @dataclass
 class MergeTemplates200ApplicationJSON:
-    meta: Optional[MergeTemplates200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
-    response: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'response' }})
+    meta: Optional[MergeTemplates200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('meta') }})
+    response: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('response') }})
     
 class MergeTemplates401ApplicationJSONErrorEnum(str, Enum):
     AUTHENTICATION_FAILED_REQUEST_EXPIRED = "Authentication failed: request expired"
@@ -48,8 +44,8 @@ class MergeTemplates401ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MergeTemplates401ApplicationJSON:
-    error: Optional[MergeTemplates401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[MergeTemplates401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 class MergeTemplates403ApplicationJSONErrorEnum(str, Enum):
     YOUR_ACCOUNT_HAS_EXCEEDED_THE_MONTHLY_DOCUMENT_GENERATION_LIMIT_ = "Your account has exceeded the monthly document generation limit."
@@ -58,8 +54,8 @@ class MergeTemplates403ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MergeTemplates403ApplicationJSON:
-    error: Optional[MergeTemplates403ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[MergeTemplates403ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 class MergeTemplates404ApplicationJSONErrorEnum(str, Enum):
     ENTITY_NOT_FOUND = "Entity not found"
@@ -70,8 +66,8 @@ class MergeTemplates404ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MergeTemplates404ApplicationJSON:
-    error: Optional[MergeTemplates404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[MergeTemplates404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 class MergeTemplates422ApplicationJSONErrorEnum(str, Enum):
     UNABLE_TO_PARSE_JSON_PLEASE_CHECK_FORMATTING = "Unable to parse JSON, please check formatting"
@@ -83,21 +79,27 @@ class MergeTemplates422ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MergeTemplates422ApplicationJSON:
-    error: Optional[MergeTemplates422ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[MergeTemplates422ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 
 @dataclass_json
 @dataclass
 class MergeTemplates500ApplicationJSON:
-    error: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    
+
+@dataclass
+class MergeTemplatesRequest:
+    query_params: MergeTemplatesQueryParams = field()
+    request: List[shared.BatchData] = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MergeTemplatesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     merge_templates_200_application_json_object: Optional[MergeTemplates200ApplicationJSON] = field(default=None)
     merge_templates_401_application_json_object: Optional[MergeTemplates401ApplicationJSON] = field(default=None)
     merge_templates_403_application_json_object: Optional[MergeTemplates403ApplicationJSON] = field(default=None)

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class NotebooksProjectsLocationsRuntimesGetIamPolicyPathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class NotebooksProjectsLocationsRuntimesGetIamPolicyQueryParams:
 
 @dataclass
 class NotebooksProjectsLocationsRuntimesGetIamPolicySecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class NotebooksProjectsLocationsRuntimesGetIamPolicyRequest:
-    path_params: NotebooksProjectsLocationsRuntimesGetIamPolicyPathParams = field(default=None)
-    query_params: NotebooksProjectsLocationsRuntimesGetIamPolicyQueryParams = field(default=None)
-    security: NotebooksProjectsLocationsRuntimesGetIamPolicySecurity = field(default=None)
+    path_params: NotebooksProjectsLocationsRuntimesGetIamPolicyPathParams = field()
+    query_params: NotebooksProjectsLocationsRuntimesGetIamPolicyQueryParams = field()
+    security: NotebooksProjectsLocationsRuntimesGetIamPolicySecurity = field()
     
 
 @dataclass
 class NotebooksProjectsLocationsRuntimesGetIamPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     policy: Optional[shared.Policy] = field(default=None)
-    status_code: int = field(default=None)
     

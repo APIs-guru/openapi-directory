@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostAssetsCovarianceMatrixValidationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets" })
+  @SpeakeasyMetadata({ data: "json, name=assets" })
   assets: number;
 
-  @Metadata({ data: "json, name=assetsCovarianceMatrix" })
+  @SpeakeasyMetadata({ data: "json, name=assetsCovarianceMatrix" })
   assetsCovarianceMatrix: number[][];
 }
 
-
-export class PostAssetsCovarianceMatrixValidationRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PostAssetsCovarianceMatrixValidationRequestBody;
-}
-
 export enum PostAssetsCovarianceMatrixValidation200ApplicationJsonMessageEnum {
-    ValidCovarianceMatrix = "valid covariance matrix"
-,    InvalidCovarianceMatrixNonSymmetricMatrix = "invalid covariance matrix - non symmetric matrix"
-,    InvalidCovarianceMatrixNonPositiveDiagonalElements = "invalid covariance matrix - non positive diagonal elements"
-,    InvalidCovarianceMatrixNonPositiveSemiDefiniteMatrix = "invalid covariance matrix - non positive semi-definite matrix"
+    ValidCovarianceMatrix = "valid covariance matrix",
+    InvalidCovarianceMatrixNonSymmetricMatrix = "invalid covariance matrix - non symmetric matrix",
+    InvalidCovarianceMatrixNonPositiveDiagonalElements = "invalid covariance matrix - non positive diagonal elements",
+    InvalidCovarianceMatrixNonPositiveSemiDefiniteMatrix = "invalid covariance matrix - non positive semi-definite matrix"
 }
 
 
 export class PostAssetsCovarianceMatrixValidation200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: PostAssetsCovarianceMatrixValidation200ApplicationJsonMessageEnum;
 }
 
 
+export class PostAssetsCovarianceMatrixValidationRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PostAssetsCovarianceMatrixValidationRequestBody;
+}
+
+
 export class PostAssetsCovarianceMatrixValidationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postAssetsCovarianceMatrixValidation200ApplicationJsonObject?: PostAssetsCovarianceMatrixValidation200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostBenefitsDocumentUploadSecurity = /** @class */ (function (_super) {
     __extends(PostBenefitsDocumentUploadSecurity, _super);
@@ -30,31 +30,19 @@ var PostBenefitsDocumentUploadSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApikey)
     ], PostBenefitsDocumentUploadSecurity.prototype, "apikey", void 0);
     return PostBenefitsDocumentUploadSecurity;
 }(SpeakeasyBase));
 export { PostBenefitsDocumentUploadSecurity };
-var PostBenefitsDocumentUploadRequest = /** @class */ (function (_super) {
-    __extends(PostBenefitsDocumentUploadRequest, _super);
-    function PostBenefitsDocumentUploadRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", PostBenefitsDocumentUploadSecurity)
-    ], PostBenefitsDocumentUploadRequest.prototype, "security", void 0);
-    return PostBenefitsDocumentUploadRequest;
-}(SpeakeasyBase));
-export { PostBenefitsDocumentUploadRequest };
 var PostBenefitsDocumentUpload202ApplicationJson = /** @class */ (function (_super) {
     __extends(PostBenefitsDocumentUpload202ApplicationJson, _super);
     function PostBenefitsDocumentUpload202ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=data" }),
+        SpeakeasyMetadata({ data: "json, name=data" }),
         __metadata("design:type", Object)
     ], PostBenefitsDocumentUpload202ApplicationJson.prototype, "data", void 0);
     return PostBenefitsDocumentUpload202ApplicationJson;
@@ -66,7 +54,7 @@ var PostBenefitsDocumentUpload401ApplicationJson = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Message" }),
+        SpeakeasyMetadata({ data: "json, name=Message" }),
         __metadata("design:type", String)
     ], PostBenefitsDocumentUpload401ApplicationJson.prototype, "message", void 0);
     return PostBenefitsDocumentUpload401ApplicationJson;
@@ -78,7 +66,7 @@ var PostBenefitsDocumentUpload403ApplicationJson = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Message" }),
+        SpeakeasyMetadata({ data: "json, name=Message" }),
         __metadata("design:type", String)
     ], PostBenefitsDocumentUpload403ApplicationJson.prototype, "message", void 0);
     return PostBenefitsDocumentUpload403ApplicationJson;
@@ -90,7 +78,7 @@ var PostBenefitsDocumentUpload422ApplicationJson = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=errors" }),
+        SpeakeasyMetadata({ data: "json, name=errors" }),
         __metadata("design:type", Array)
     ], PostBenefitsDocumentUpload422ApplicationJson.prototype, "errors", void 0);
     return PostBenefitsDocumentUpload422ApplicationJson;
@@ -102,7 +90,7 @@ var PostBenefitsDocumentUpload429ApplicationJson = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Message" }),
+        SpeakeasyMetadata({ data: "json, name=Message" }),
         __metadata("design:type", String)
     ], PostBenefitsDocumentUpload429ApplicationJson.prototype, "message", void 0);
     return PostBenefitsDocumentUpload429ApplicationJson;
@@ -114,59 +102,71 @@ var PostBenefitsDocumentUpload500ApplicationJson = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=code" }),
+        SpeakeasyMetadata({ data: "json, name=code" }),
         __metadata("design:type", String)
     ], PostBenefitsDocumentUpload500ApplicationJson.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=detail" }),
+        SpeakeasyMetadata({ data: "json, name=detail" }),
         __metadata("design:type", String)
     ], PostBenefitsDocumentUpload500ApplicationJson.prototype, "detail", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], PostBenefitsDocumentUpload500ApplicationJson.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], PostBenefitsDocumentUpload500ApplicationJson.prototype, "title", void 0);
     return PostBenefitsDocumentUpload500ApplicationJson;
 }(SpeakeasyBase));
 export { PostBenefitsDocumentUpload500ApplicationJson };
+var PostBenefitsDocumentUploadRequest = /** @class */ (function (_super) {
+    __extends(PostBenefitsDocumentUploadRequest, _super);
+    function PostBenefitsDocumentUploadRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", PostBenefitsDocumentUploadSecurity)
+    ], PostBenefitsDocumentUploadRequest.prototype, "security", void 0);
+    return PostBenefitsDocumentUploadRequest;
+}(SpeakeasyBase));
+export { PostBenefitsDocumentUploadRequest };
 var PostBenefitsDocumentUploadResponse = /** @class */ (function (_super) {
     __extends(PostBenefitsDocumentUploadResponse, _super);
     function PostBenefitsDocumentUploadResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostBenefitsDocumentUploadResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostBenefitsDocumentUploadResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostBenefitsDocumentUpload202ApplicationJson)
     ], PostBenefitsDocumentUploadResponse.prototype, "postBenefitsDocumentUpload202ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostBenefitsDocumentUpload401ApplicationJson)
     ], PostBenefitsDocumentUploadResponse.prototype, "postBenefitsDocumentUpload401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostBenefitsDocumentUpload403ApplicationJson)
     ], PostBenefitsDocumentUploadResponse.prototype, "postBenefitsDocumentUpload403ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostBenefitsDocumentUpload422ApplicationJson)
     ], PostBenefitsDocumentUploadResponse.prototype, "postBenefitsDocumentUpload422ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostBenefitsDocumentUpload429ApplicationJson)
     ], PostBenefitsDocumentUploadResponse.prototype, "postBenefitsDocumentUpload429ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostBenefitsDocumentUpload500ApplicationJson)
     ], PostBenefitsDocumentUploadResponse.prototype, "postBenefitsDocumentUpload500ApplicationJsonObject", void 0);
     return PostBenefitsDocumentUploadResponse;

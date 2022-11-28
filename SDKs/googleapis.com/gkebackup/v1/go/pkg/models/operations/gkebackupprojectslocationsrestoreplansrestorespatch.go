@@ -31,7 +31,7 @@ type GkebackupProjectsLocationsRestorePlansRestoresPatchSecurity struct {
 type GkebackupProjectsLocationsRestorePlansRestoresPatchRequest struct {
 	PathParams  GkebackupProjectsLocationsRestorePlansRestoresPatchPathParams
 	QueryParams GkebackupProjectsLocationsRestorePlansRestoresPatchQueryParams
-	Request     *shared.Restore `request:"mediaType=application/json"`
+	Request     *shared.RestoreInput `request:"mediaType=application/json"`
 	Security    GkebackupProjectsLocationsRestorePlansRestoresPatchSecurity
 }
 

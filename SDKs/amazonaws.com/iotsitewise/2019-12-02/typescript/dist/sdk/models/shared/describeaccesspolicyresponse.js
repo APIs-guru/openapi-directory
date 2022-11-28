@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Identity } from "./identity";
 import { PermissionEnum } from "./permissionenum";
 import { Resource } from "./resource";
@@ -32,31 +32,31 @@ var DescribeAccessPolicyResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accessPolicyArn" }),
+        SpeakeasyMetadata({ data: "json, name=accessPolicyArn" }),
         __metadata("design:type", String)
     ], DescribeAccessPolicyResponse.prototype, "accessPolicyArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=accessPolicyCreationDate" }),
+        SpeakeasyMetadata({ data: "json, name=accessPolicyCreationDate" }),
         __metadata("design:type", Date)
     ], DescribeAccessPolicyResponse.prototype, "accessPolicyCreationDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=accessPolicyId" }),
+        SpeakeasyMetadata({ data: "json, name=accessPolicyId" }),
         __metadata("design:type", String)
     ], DescribeAccessPolicyResponse.prototype, "accessPolicyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=accessPolicyIdentity" }),
+        SpeakeasyMetadata({ data: "json, name=accessPolicyIdentity" }),
         __metadata("design:type", Identity)
     ], DescribeAccessPolicyResponse.prototype, "accessPolicyIdentity", void 0);
     __decorate([
-        Metadata({ data: "json, name=accessPolicyLastUpdateDate" }),
+        SpeakeasyMetadata({ data: "json, name=accessPolicyLastUpdateDate" }),
         __metadata("design:type", Date)
     ], DescribeAccessPolicyResponse.prototype, "accessPolicyLastUpdateDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=accessPolicyPermission" }),
+        SpeakeasyMetadata({ data: "json, name=accessPolicyPermission" }),
         __metadata("design:type", String)
     ], DescribeAccessPolicyResponse.prototype, "accessPolicyPermission", void 0);
     __decorate([
-        Metadata({ data: "json, name=accessPolicyResource" }),
+        SpeakeasyMetadata({ data: "json, name=accessPolicyResource" }),
         __metadata("design:type", Resource)
     ], DescribeAccessPolicyResponse.prototype, "accessPolicyResource", void 0);
     return DescribeAccessPolicyResponse;

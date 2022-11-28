@@ -9,7 +9,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.vonage.com/t/vbc.prod/provisioning",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AccountCtrlGetAccountServicesByAccountID - Get account data by ID
 func (s *SDK) AccountCtrlGetAccountServicesByAccountID(ctx context.Context, request operations.AccountCtrlGetAccountServicesByAccountIDRequest) (*operations.AccountCtrlGetAccountServicesByAccountIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/accounts/{account_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -59,7 +81,7 @@ func (s *SDK) AccountCtrlGetAccountServicesByAccountID(ctx context.Context, requ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -90,8 +112,9 @@ func (s *SDK) AccountCtrlGetAccountServicesByAccountID(ctx context.Context, requ
 	return res, nil
 }
 
+// AccountCtrlGetLocationByID - Get location data by account ID and location ID
 func (s *SDK) AccountCtrlGetLocationByID(ctx context.Context, request operations.AccountCtrlGetLocationByIDRequest) (*operations.AccountCtrlGetLocationByIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/accounts/{account_id}/locations/{location_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -99,7 +122,7 @@ func (s *SDK) AccountCtrlGetLocationByID(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -130,8 +153,9 @@ func (s *SDK) AccountCtrlGetLocationByID(ctx context.Context, request operations
 	return res, nil
 }
 
+// AccountCtrlGetLocationsByAccountID - Get account locations data by account ID
 func (s *SDK) AccountCtrlGetLocationsByAccountID(ctx context.Context, request operations.AccountCtrlGetLocationsByAccountIDRequest) (*operations.AccountCtrlGetLocationsByAccountIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/accounts/{account_id}/locations", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -139,7 +163,7 @@ func (s *SDK) AccountCtrlGetLocationsByAccountID(ctx context.Context, request op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

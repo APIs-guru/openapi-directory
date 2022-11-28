@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .googlecloudrecommenderv1beta1costprojection import *
 from .googlecloudrecommenderv1beta1impact import *

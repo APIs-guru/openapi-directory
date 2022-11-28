@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum GetRepositoryPolicyXAmzTargetEnum {
     AmazonEc2ContainerRegistryV20150921GetRepositoryPolicy = "AmazonEC2ContainerRegistry_V20150921.GetRepositoryPolicy"
@@ -7,60 +8,60 @@ export enum GetRepositoryPolicyXAmzTargetEnum {
 
 
 export class GetRepositoryPolicyHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: GetRepositoryPolicyXAmzTargetEnum;
 }
 
 
 export class GetRepositoryPolicyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetRepositoryPolicyHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.GetRepositoryPolicyRequest;
 }
 
 
 export class GetRepositoryPolicyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getRepositoryPolicyResponse?: shared.GetRepositoryPolicyResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   repositoryNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   repositoryPolicyNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serverException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetDeviceParameterHistoryPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=deviceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=deviceId" })
   deviceId: number;
 }
 
 
 export class GetDeviceParameterHistoryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=from" })
   from?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=monitorSid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=monitorSid" })
   monitorSid?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=monitorType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=monitorType" })
   monitorType: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=parameterName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameterName" })
   parameterName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=to" })
   to?: number;
 }
 
 
 export class GetDeviceParameterHistoryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDeviceParameterHistoryPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDeviceParameterHistoryQueryParams;
 }
 
 
 export class GetDeviceParameterHistoryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

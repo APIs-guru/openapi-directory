@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateFileSystemPathParams:
-    file_system_id: str = field(default=None, metadata={'path_param': { 'field_name': 'FileSystemId', 'style': 'simple', 'explode': False }})
+    file_system_id: str = field(metadata={'path_param': { 'field_name': 'FileSystemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,27 +32,27 @@ class UpdateFileSystemRequestBodyThroughputModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateFileSystemRequestBody:
-    provisioned_throughput_in_mibps: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProvisionedThroughputInMibps' }})
-    throughput_mode: Optional[UpdateFileSystemRequestBodyThroughputModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ThroughputMode' }})
+    provisioned_throughput_in_mibps: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProvisionedThroughputInMibps') }})
+    throughput_mode: Optional[UpdateFileSystemRequestBodyThroughputModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ThroughputMode') }})
     
 
 @dataclass
 class UpdateFileSystemRequest:
-    path_params: UpdateFileSystemPathParams = field(default=None)
-    headers: UpdateFileSystemHeaders = field(default=None)
-    request: UpdateFileSystemRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateFileSystemHeaders = field()
+    path_params: UpdateFileSystemPathParams = field()
+    request: UpdateFileSystemRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateFileSystemResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     file_system_description: Optional[shared.FileSystemDescription] = field(default=None)
     file_system_not_found: Optional[Any] = field(default=None)
     incorrect_file_system_life_cycle_state: Optional[Any] = field(default=None)
     insufficient_throughput_capacity: Optional[Any] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throughput_limit_exceeded: Optional[Any] = field(default=None)
     too_many_requests: Optional[Any] = field(default=None)
     

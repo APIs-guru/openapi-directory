@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LambdaConfiguration } from "./lambdaconfiguration";
 import { SnsConfiguration } from "./snsconfiguration";
 // Action
@@ -35,11 +35,11 @@ var Action = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=LambdaConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=LambdaConfiguration" }),
         __metadata("design:type", LambdaConfiguration)
     ], Action.prototype, "lambdaConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=SNSConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=SNSConfiguration" }),
         __metadata("design:type", SnsConfiguration)
     ], Action.prototype, "snsConfiguration", void 0);
     return Action;

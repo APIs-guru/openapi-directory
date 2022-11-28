@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetDeviceRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the request to get the device.
 **/
 export class GetDeviceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessToken" })
+  @SpeakeasyMetadata({ data: "json, name=AccessToken" })
   accessToken?: string;
 
-  @Metadata({ data: "json, name=DeviceKey" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceKey" })
   deviceKey: string;
 }

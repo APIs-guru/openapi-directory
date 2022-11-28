@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Did } from "./did";
+import { Line } from "./line";
 import { BasicUser } from "./basicuser";
 var EndUserRoute = /** @class */ (function (_super) {
     __extends(EndUserRoute, _super);
@@ -31,39 +32,39 @@ var EndUserRoute = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=block_caller_id" }),
+        SpeakeasyMetadata({ data: "json, name=block_caller_id" }),
         __metadata("design:type", Boolean)
     ], EndUserRoute.prototype, "blockCallerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=caller_id" }),
+        SpeakeasyMetadata({ data: "json, name=caller_id" }),
         __metadata("design:type", String)
     ], EndUserRoute.prototype, "callerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=dids", elemType: shared.Did }),
+        SpeakeasyMetadata({ data: "json, name=dids", elemType: Did }),
         __metadata("design:type", Array)
     ], EndUserRoute.prototype, "dids", void 0);
     __decorate([
-        Metadata({ data: "json, name=dnd_enabled" }),
+        SpeakeasyMetadata({ data: "json, name=dnd_enabled" }),
         __metadata("design:type", Boolean)
     ], EndUserRoute.prototype, "dndEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=extension_handsets", elemType: shared.Line }),
+        SpeakeasyMetadata({ data: "json, name=extension_handsets", elemType: Line }),
         __metadata("design:type", Array)
     ], EndUserRoute.prototype, "extensionHandsets", void 0);
     __decorate([
-        Metadata({ data: "json, name=extension_number" }),
+        SpeakeasyMetadata({ data: "json, name=extension_number" }),
         __metadata("design:type", String)
     ], EndUserRoute.prototype, "extensionNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=location_id" }),
+        SpeakeasyMetadata({ data: "json, name=location_id" }),
         __metadata("design:type", Number)
     ], EndUserRoute.prototype, "locationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=user" }),
+        SpeakeasyMetadata({ data: "json, name=user" }),
         __metadata("design:type", BasicUser)
     ], EndUserRoute.prototype, "user", void 0);
     __decorate([
-        Metadata({ data: "json, name=vtt_enabled" }),
+        SpeakeasyMetadata({ data: "json, name=vtt_enabled" }),
         __metadata("design:type", Boolean)
     ], EndUserRoute.prototype, "vttEnabled", void 0);
     return EndUserRoute;

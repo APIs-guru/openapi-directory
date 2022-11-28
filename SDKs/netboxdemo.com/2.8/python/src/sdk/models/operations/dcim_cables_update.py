@@ -1,22 +1,25 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class DcimCablesUpdatePathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DcimCablesUpdateRequest:
-    path_params: DcimCablesUpdatePathParams = field(default=None)
-    request: shared.WritableCable = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: DcimCablesUpdatePathParams = field()
+    request: shared.WritableCableInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DcimCablesUpdateResponse:
+    content_type: str = field()
+    status_code: int = field()
     cable: Optional[shared.Cable] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

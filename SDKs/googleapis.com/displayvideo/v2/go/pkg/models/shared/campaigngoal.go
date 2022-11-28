@@ -10,6 +10,8 @@ const (
 	CampaignGoalCampaignGoalTypeEnumCampaignGoalTypeOnlineAction   CampaignGoalCampaignGoalTypeEnum = "CAMPAIGN_GOAL_TYPE_ONLINE_ACTION"
 )
 
+// CampaignGoal
+// Settings that control the goal of a campaign.
 type CampaignGoal struct {
 	CampaignGoalType *CampaignGoalCampaignGoalTypeEnum `json:"campaignGoalType,omitempty"`
 	PerformanceGoal  *PerformanceGoal                  `json:"performanceGoal,omitempty"`

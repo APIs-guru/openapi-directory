@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UserDto
@@ -8,30 +9,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *             
 **/
 export class UserDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountNumber" })
+  @SpeakeasyMetadata({ data: "json, name=accountNumber" })
   accountNumber?: string;
 
-  @Metadata({ data: "json, name=externalEntityNumber" })
+  @SpeakeasyMetadata({ data: "json, name=externalEntityNumber" })
   externalEntityNumber?: string;
 
-  @Metadata({ data: "json, name=guardian" })
+  @SpeakeasyMetadata({ data: "json, name=guardian" })
   guardian?: number;
 
-  @Metadata({ data: "json, name=gymNumber" })
+  @SpeakeasyMetadata({ data: "json, name=gymNumber" })
   gymNumber?: string;
 
-  @Metadata({ data: "json, name=introduceBy" })
+  @SpeakeasyMetadata({ data: "json, name=introduceBy" })
   introduceBy?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=number" })
+  @SpeakeasyMetadata({ data: "json, name=number" })
   number?: string;
 
-  @Metadata({ data: "json, name=typeId" })
+  @SpeakeasyMetadata({ data: "json, name=typeId" })
   typeId?: number;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: number;
 }

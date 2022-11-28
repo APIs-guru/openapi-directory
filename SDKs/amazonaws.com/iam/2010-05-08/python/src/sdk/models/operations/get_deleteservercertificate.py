@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteServerCertificateActionEnum(str, Enum):
     DELETE_SERVER_CERTIFICATE = "DeleteServerCertificate"
@@ -10,9 +14,9 @@ class GetDeleteServerCertificateVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteServerCertificateQueryParams:
-    action: GetDeleteServerCertificateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    server_certificate_name: str = field(default=None, metadata={'query_param': { 'field_name': 'ServerCertificateName', 'style': 'form', 'explode': True }})
-    version: GetDeleteServerCertificateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteServerCertificateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    server_certificate_name: str = field(metadata={'query_param': { 'field_name': 'ServerCertificateName', 'style': 'form', 'explode': True }})
+    version: GetDeleteServerCertificateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteServerCertificateHeaders:
 
 @dataclass
 class GetDeleteServerCertificateRequest:
-    query_params: GetDeleteServerCertificateQueryParams = field(default=None)
-    headers: GetDeleteServerCertificateHeaders = field(default=None)
+    headers: GetDeleteServerCertificateHeaders = field()
+    query_params: GetDeleteServerCertificateQueryParams = field()
     
 
 @dataclass
 class GetDeleteServerCertificateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

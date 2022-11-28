@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationInstanceTaskLog } from "./replicationinstancetasklog";
 
 
+
 export class DescribeReplicationInstanceTaskLogsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=ReplicationInstanceArn" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationInstanceArn" })
   replicationInstanceArn?: string;
 
-  @Metadata({ data: "json, name=ReplicationInstanceTaskLogs", elemType: shared.ReplicationInstanceTaskLog })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationInstanceTaskLogs", elemType: ReplicationInstanceTaskLog })
   replicationInstanceTaskLogs?: ReplicationInstanceTaskLog[];
 }

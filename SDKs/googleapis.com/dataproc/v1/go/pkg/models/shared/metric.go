@@ -12,6 +12,8 @@ const (
 	MetricMetricSourceEnumHiveserver2             MetricMetricSourceEnum = "HIVESERVER2"
 )
 
+// Metric
+// A Dataproc OSS metric.
 type Metric struct {
 	MetricOverrides []string                `json:"metricOverrides,omitempty"`
 	MetricSource    *MetricMetricSourceEnum `json:"metricSource,omitempty"`

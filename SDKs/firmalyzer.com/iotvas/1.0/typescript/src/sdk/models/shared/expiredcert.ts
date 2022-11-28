@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PublicKey } from "./publickey";
 
 
+
 export class ExpiredCert extends SpeakeasyBase {
-  @Metadata({ data: "json, name=file_hash" })
+  @SpeakeasyMetadata({ data: "json, name=file_hash" })
   fileHash?: string;
 
-  @Metadata({ data: "json, name=file_name" })
+  @SpeakeasyMetadata({ data: "json, name=file_name" })
   fileName?: string;
 
-  @Metadata({ data: "json, name=public_key" })
+  @SpeakeasyMetadata({ data: "json, name=public_key" })
   publicKey?: PublicKey;
 
-  @Metadata({ data: "json, name=subject_name" })
+  @SpeakeasyMetadata({ data: "json, name=subject_name" })
   subjectName?: string;
 
-  @Metadata({ data: "json, name=thumb_print" })
+  @SpeakeasyMetadata({ data: "json, name=thumb_print" })
   thumbPrint?: string;
 
-  @Metadata({ data: "json, name=valid_from" })
+  @SpeakeasyMetadata({ data: "json, name=valid_from" })
   validFrom?: string;
 
-  @Metadata({ data: "json, name=valid_to" })
+  @SpeakeasyMetadata({ data: "json, name=valid_to" })
   validTo?: string;
 }

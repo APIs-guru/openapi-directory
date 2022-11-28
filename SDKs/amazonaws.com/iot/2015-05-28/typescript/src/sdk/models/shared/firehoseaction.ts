@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FirehoseAction
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an action that writes data to an Amazon Kinesis Firehose stream.
 **/
 export class FirehoseAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=batchMode" })
+  @SpeakeasyMetadata({ data: "json, name=batchMode" })
   batchMode?: boolean;
 
-  @Metadata({ data: "json, name=deliveryStreamName" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryStreamName" })
   deliveryStreamName: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=separator" })
+  @SpeakeasyMetadata({ data: "json, name=separator" })
   separator?: string;
 }

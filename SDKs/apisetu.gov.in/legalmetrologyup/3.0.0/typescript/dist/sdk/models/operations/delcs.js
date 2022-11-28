@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DelcsRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(DelcsRequestBodyCertificateParameters, _super);
@@ -30,11 +30,11 @@ var DelcsRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=applicationNo" }),
+        SpeakeasyMetadata({ data: "json, name=applicationNo" }),
         __metadata("design:type", String)
     ], DelcsRequestBodyCertificateParameters.prototype, "applicationNo", void 0);
     __decorate([
-        Metadata({ data: "json, name=licenseNo" }),
+        SpeakeasyMetadata({ data: "json, name=licenseNo" }),
         __metadata("design:type", String)
     ], DelcsRequestBodyCertificateParameters.prototype, "licenseNo", void 0);
     return DelcsRequestBodyCertificateParameters;
@@ -50,19 +50,19 @@ var DelcsRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", DelcsRequestBodyCertificateParameters)
     ], DelcsRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], DelcsRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], DelcsRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], DelcsRequestBody.prototype, "txnId", void 0);
     return DelcsRequestBody;
@@ -74,32 +74,16 @@ var DelcsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], DelcsSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], DelcsSecurity.prototype, "clientId", void 0);
     return DelcsSecurity;
 }(SpeakeasyBase));
 export { DelcsSecurity };
-var DelcsRequest = /** @class */ (function (_super) {
-    __extends(DelcsRequest, _super);
-    function DelcsRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", DelcsRequestBody)
-    ], DelcsRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", DelcsSecurity)
-    ], DelcsRequest.prototype, "security", void 0);
-    return DelcsRequest;
-}(SpeakeasyBase));
-export { DelcsRequest };
 export var Delcs400ApplicationJsonErrorEnum;
 (function (Delcs400ApplicationJsonErrorEnum) {
     Delcs400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -122,11 +106,11 @@ var Delcs400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Delcs400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Delcs400ApplicationJson.prototype, "errorDescription", void 0);
     return Delcs400ApplicationJson;
@@ -148,11 +132,11 @@ var Delcs401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Delcs401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Delcs401ApplicationJson.prototype, "errorDescription", void 0);
     return Delcs401ApplicationJson;
@@ -174,11 +158,11 @@ var Delcs404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Delcs404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Delcs404ApplicationJson.prototype, "errorDescription", void 0);
     return Delcs404ApplicationJson;
@@ -198,11 +182,11 @@ var Delcs500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Delcs500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Delcs500ApplicationJson.prototype, "errorDescription", void 0);
     return Delcs500ApplicationJson;
@@ -222,11 +206,11 @@ var Delcs502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Delcs502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Delcs502ApplicationJson.prototype, "errorDescription", void 0);
     return Delcs502ApplicationJson;
@@ -246,11 +230,11 @@ var Delcs503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Delcs503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Delcs503ApplicationJson.prototype, "errorDescription", void 0);
     return Delcs503ApplicationJson;
@@ -270,55 +254,71 @@ var Delcs504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Delcs504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Delcs504ApplicationJson.prototype, "errorDescription", void 0);
     return Delcs504ApplicationJson;
 }(SpeakeasyBase));
 export { Delcs504ApplicationJson };
+var DelcsRequest = /** @class */ (function (_super) {
+    __extends(DelcsRequest, _super);
+    function DelcsRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", DelcsRequestBody)
+    ], DelcsRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", DelcsSecurity)
+    ], DelcsRequest.prototype, "security", void 0);
+    return DelcsRequest;
+}(SpeakeasyBase));
+export { DelcsRequest };
 var DelcsResponse = /** @class */ (function (_super) {
     __extends(DelcsResponse, _super);
     function DelcsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DelcsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DelcsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Delcs400ApplicationJson)
     ], DelcsResponse.prototype, "delcs400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Delcs401ApplicationJson)
     ], DelcsResponse.prototype, "delcs401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Delcs404ApplicationJson)
     ], DelcsResponse.prototype, "delcs404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Delcs500ApplicationJson)
     ], DelcsResponse.prototype, "delcs500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Delcs502ApplicationJson)
     ], DelcsResponse.prototype, "delcs502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Delcs503ApplicationJson)
     ], DelcsResponse.prototype, "delcs503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Delcs504ApplicationJson)
     ], DelcsResponse.prototype, "delcs504ApplicationJsonObject", void 0);
     return DelcsResponse;

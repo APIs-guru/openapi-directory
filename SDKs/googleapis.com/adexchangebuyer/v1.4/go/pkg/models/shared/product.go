@@ -1,5 +1,9 @@
 package shared
 
+// Product
+// A product is segment of inventory that a seller wishes to sell. It is associated with certain terms and targeting information which helps buyer know more about the inventory. Each field in a product can have one of the following setting:
+//
+// (readonly) - It is an error to try and set this field. (buyer-readonly) - Only the seller can set this field. (seller-readonly) - Only the buyer can set this field. (updatable) - The field is updatable at all times by either buyer or the seller.
 type Product struct {
 	BilledBuyer                   *Buyer                     `json:"billedBuyer,omitempty"`
 	Buyer                         *Buyer                     `json:"buyer,omitempty"`

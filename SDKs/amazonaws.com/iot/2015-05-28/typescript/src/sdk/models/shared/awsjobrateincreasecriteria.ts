@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsJobRateIncreaseCriteria
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The criteria to initiate the increase in rate of rollout for a job.
 **/
 export class AwsJobRateIncreaseCriteria extends SpeakeasyBase {
-  @Metadata({ data: "json, name=numberOfNotifiedThings" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfNotifiedThings" })
   numberOfNotifiedThings?: number;
 
-  @Metadata({ data: "json, name=numberOfSucceededThings" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfSucceededThings" })
   numberOfSucceededThings?: number;
 }

@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import provisioningartifactdetail
-from . import status_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeProvisioningArtifactOutput:
-    info: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Info' }})
-    provisioning_artifact_detail: Optional[provisioningartifactdetail.ProvisioningArtifactDetail] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProvisioningArtifactDetail' }})
-    status: Optional[status_enum.StatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
+    info: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Info') }})
+    provisioning_artifact_detail: Optional[ProvisioningArtifactDetail] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProvisioningArtifactDetail') }})
+    status: Optional[StatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
     

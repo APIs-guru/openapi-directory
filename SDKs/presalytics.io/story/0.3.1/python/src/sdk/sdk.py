@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,26 +14,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def cache_nonce_get(self, request: operations.CacheNonceGetRequest) -> operations.CacheNonceGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Cache: Get Subdocument
+        An endpoint for broswer retreive html documents that were cached durin the rendering process via a nonce (token)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/cache/{nonce}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -56,22 +82,23 @@ class SDK:
 
     
     def cache_post(self, request: operations.CachePostRequest) -> operations.CachePostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Cache: Store Subdocument
+        An endpoint for Presalytics Renderers to cache html subdocuments for subsequent retrieval by the browser.  Documents Are retrieved via token expire after 1 minute.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/cache"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -96,22 +123,23 @@ class SDK:
 
     
     def collaborators_post(self, request: operations.CollaboratorsPostRequest) -> operations.CollaboratorsPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Collborators: Bulk Update (Admin Only)
+        Allows for bulk updates on collaborator metadata.  Restricted to internal admins
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/collaborators"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -138,13 +166,17 @@ class SDK:
 
     
     def get_environment(self) -> operations.GetEnvironmentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Environment: Get
+        pass rendering metadata to the client-side scripts
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/environment/"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -167,13 +199,17 @@ class SDK:
 
     
     def session_id_delete(self, request: operations.SessionIDDeleteRequest) -> operations.SessionIDDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Sessions: Delete by Id
+        Remove a session and dependant data.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/sessions/{session_id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -198,15 +234,18 @@ class SDK:
 
     
     def session_id_get(self, request: operations.SessionIDGetRequest) -> operations.SessionIDGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Sessions: Get
+        Get session metadata
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/sessions/{session_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -233,13 +272,17 @@ class SDK:
 
     
     def sessions_id_views_get(self, request: operations.SessionsIDViewsGetRequest) -> operations.SessionsIDViewsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Views: List Session Views
+        Get data for all views in a session
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/sessions/{session_id}/views", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -266,22 +309,23 @@ class SDK:
 
     
     def sessions_id_views_post(self, request: operations.SessionsIDViewsPostRequest) -> operations.SessionsIDViewsPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Views: Create A Session View
+        Create a page view object for a viewing session
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/sessions/{session_id}/views", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -308,13 +352,17 @@ class SDK:
 
     
     def spec_no_tags(self) -> operations.SpecNoTagsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Specification: No tags
+        json-formatted version of this spec with the tags removed to help with codegen processes
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/no_tags_spec"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -331,15 +379,18 @@ class SDK:
 
     
     def story_get(self, request: operations.StoryGetRequest) -> operations.StoryGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story: Get List of User Stories
+        Returns a list of stories for this user identifie via the access token presentated to the api
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -366,13 +417,17 @@ class SDK:
 
     
     def story_id_analytics(self, request: operations.StoryIDAnalyticsRequest) -> operations.StoryIDAnalyticsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story: View Analytics
+        returns an html document containing session and event metrics for the story
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/analytics", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -397,13 +452,17 @@ class SDK:
 
     
     def story_id_collaborators_get(self, request: operations.StoryIDCollaboratorsGetRequest) -> operations.StoryIDCollaboratorsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story Collaborators: List
+        Gets a list users that can read or edit this story
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/collaborators", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -430,22 +489,23 @@ class SDK:
 
     
     def story_id_collaborators_inactive_post(self, request: operations.StoryIDCollaboratorsInactivePostRequest) -> operations.StoryIDCollaboratorsInactivePostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story Collaborators: Edit Inactive User Permission
+        Edit story permissions for inactive users.  Requires admin rights.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/collaborators/inactive", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -474,22 +534,23 @@ class SDK:
 
     
     def story_id_collaborators_post(self, request: operations.StoryIDCollaboratorsPostRequest) -> operations.StoryIDCollaboratorsPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story Collaborators: Add New User
+        Add a colloborator to this story
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/collaborators", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -516,13 +577,17 @@ class SDK:
 
     
     def story_id_collaborators_userid_delete(self, request: operations.StoryIDCollaboratorsUseridDeleteRequest) -> operations.StoryIDCollaboratorsUseridDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story Collaborators: Remove User
+        Remove a collaborator from this story
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/collaborators/{story_collaborator_userid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -547,13 +612,17 @@ class SDK:
 
     
     def story_id_collaborators_userid_get(self, request: operations.StoryIDCollaboratorsUseridGetRequest) -> operations.StoryIDCollaboratorsUseridGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story Collaborators: Access Permissions
+        Data to help you understand the access rights of a particular collaborator on this story
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/collaborators/{story_collaborator_userid}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -580,13 +649,17 @@ class SDK:
 
     
     def story_id_collaborators_userid_permissiontype_get(self, request: operations.StoryIDCollaboratorsUseridPermissiontypeGetRequest) -> operations.StoryIDCollaboratorsUseridPermissiontypeGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Permissions: Story Authorization for a User
+        Check whether user have certain types of permissions.  Use http status codes to understand if permission is granted - 204 = Granted, 403 = Forbidden
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/collaborators/authorize/{story_collaborator_userid}/{permissiontype}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -611,22 +684,23 @@ class SDK:
 
     
     def story_id_collaborators_userid_put(self, request: operations.StoryIDCollaboratorsUseridPutRequest) -> operations.StoryIDCollaboratorsUseridPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story Collaborators: Edit Access Rights
+        Modify a user's access right to this story (e.g., grant edit permissions)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/collaborators/{story_collaborator_userid}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -653,13 +727,17 @@ class SDK:
 
     
     def story_id_delete(self, request: operations.StoryIDDeleteRequest) -> operations.StoryIDDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story: Delete by Id
+        Remove a story and dependant data.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -684,13 +762,17 @@ class SDK:
 
     
     def story_id_events_get(self, request: operations.StoryIDEventsGetRequest) -> operations.StoryIDEventsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Events: List Events
+        Get a list of Events available to users of this story
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/events", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -709,22 +791,23 @@ class SDK:
 
     
     def story_id_events_post(self, request: operations.StoryIDEventsPostRequest) -> operations.StoryIDEventsPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Events: Manage Events
+        Add a message to the Story's conversation
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/events", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -751,13 +834,17 @@ class SDK:
 
     
     def story_id_file_ooxmlautomationid_delete(self, request: operations.StoryIDFileOoxmlautomationidDeleteRequest) -> operations.StoryIDFileOoxmlautomationidDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story: Delete Subdocument
+        Deletes a subdcoument of this story (e.g., .pptx, .docx, .xlsx)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/file/{ooxml_automation_id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -782,13 +869,17 @@ class SDK:
 
     
     def story_id_file_ooxmlautomationid_get(self, request: operations.StoryIDFileOoxmlautomationidGetRequest) -> operations.StoryIDFileOoxmlautomationidGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story: Download Updated File
+        Redtreives updated story as open office xml file (e.g., .pptx, .docx, .xlsx)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/file/{ooxml_automation_id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -818,24 +909,24 @@ class SDK:
 
     
     def story_id_file_post(self, request: operations.StoryIDFilePostRequest) -> operations.StoryIDFilePostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story: Upload a File To Existing Story
+        Upload a file to an existing story
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/file", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -858,15 +949,18 @@ class SDK:
 
     
     def story_id_get(self, request: operations.StoryIDGetRequest) -> operations.StoryIDGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story: Get by Id
+        Returns story metadata, inlcuding json object with story outline
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -893,13 +987,17 @@ class SDK:
 
     
     def story_id_messages_get(self, request: operations.StoryIDMessagesGetRequest) -> operations.StoryIDMessagesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Conversation: List Conversation Messages
+        Get a list of messages that have been send in this story
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/messages", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -918,22 +1016,23 @@ class SDK:
 
     
     def story_id_messages_post(self, request: operations.StoryIDMessagesPostRequest) -> operations.StoryIDMessagesPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Conversation: Send a Message
+        Add a message to the Story's conversation
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/messages", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -958,13 +1057,17 @@ class SDK:
 
     
     def story_id_outline_get(self, request: operations.StoryIDOutlineGetRequest) -> operations.StoryIDOutlineGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story: Get Story Outline
+        Returns Story's outline
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/outline", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -996,22 +1099,23 @@ class SDK:
 
     
     def story_id_outline_post(self, request: operations.StoryIDOutlinePostRequest) -> operations.StoryIDOutlinePostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story: Post Story Outline
+        Update a story outline.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/outline", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1036,13 +1140,17 @@ class SDK:
 
     
     def story_id_public(self, request: operations.StoryIDPublicRequest) -> operations.StoryIDPublicResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story: Public Link to Story Reveal.js Document
+        returns an html document containing a reveal.js epresentation of the story, if the story if set to is_public = True
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/public/", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1062,24 +1170,24 @@ class SDK:
 
     
     def story_id_put(self, request: operations.StoryIDPutRequest) -> operations.StoryIDPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story: Modify
+        Update story metadata, including story outline
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1106,13 +1214,17 @@ class SDK:
 
     
     def story_id_reveal(self, request: operations.StoryIDRevealRequest) -> operations.StoryIDRevealResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story: Get Story at Reveal.js Document
+        returns an html document containing a reveal.js epresentation of the story
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/reveal", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1137,22 +1249,23 @@ class SDK:
 
     
     def story_id_session_post(self, request: operations.StoryIDSessionPostRequest) -> operations.StoryIDSessionPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Sessions: Create a Session
+        Create a new session
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/sessions", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1179,15 +1292,18 @@ class SDK:
 
     
     def story_id_sessions_get(self, request: operations.StoryIDSessionsGetRequest) -> operations.StoryIDSessionsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Sessions: List Story Sessions
+        Get a list of sessions asscoaited with this story
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/sessions", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1214,13 +1330,17 @@ class SDK:
 
     
     def story_id_status_get(self, request: operations.StoryIDStatusGetRequest) -> operations.StoryIDStatusGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story: Get Story Status
+        Returns code indicating whether story has active running background and is healthy (e.g., the latest outline is valid)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{id}/status", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1249,13 +1369,17 @@ class SDK:
 
     
     def story_outline_schema(self, request: operations.StoryOutlineSchemaRequest) -> operations.StoryOutlineSchemaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story Outline Schema
+        Json Schema for validating Story Outline objects
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/outline-schema/{schema_version}/story-outline.json", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1272,13 +1396,17 @@ class SDK:
 
     
     def story_permission_types_get(self) -> operations.StoryPermissionTypesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Permissions: List Permission Types
+        Returns a list of possible user permission types
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/permission_types"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1305,24 +1433,24 @@ class SDK:
 
     
     def story_post(self, request: operations.StoryPostRequest) -> operations.StoryPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story: Upload
+        Upload new story to presalytics api
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1345,24 +1473,24 @@ class SDK:
 
     
     def story_post_file(self, request: operations.StoryPostFileRequest) -> operations.StoryPostFileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story: Upload a File
+        Upload new story to presalytics api via an Open Office Xml file
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/file"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1385,21 +1513,22 @@ class SDK:
 
     
     def story_post_file_json(self, request: operations.StoryPostFileJSONRequest) -> operations.StoryPostFileJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Story: Upload a File (base64)
+        Upload new story to presalytics api via an Open Office Xml file
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/file/json"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1422,13 +1551,17 @@ class SDK:
 
     
     def views_id_delete(self, request: operations.ViewsIDDeleteRequest) -> operations.ViewsIDDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Views: Delete by Id
+        Remove a view and dependant data.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/views/{view_id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1453,13 +1586,17 @@ class SDK:
 
     
     def views_id_get(self, request: operations.ViewsIDGetRequest) -> operations.ViewsIDGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Views: Get View
+        Get view meta data
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/views/{view_id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 

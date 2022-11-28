@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetUvQueryParams = /** @class */ (function (_super) {
     __extends(GetUvQueryParams, _super);
@@ -30,23 +30,23 @@ var GetUvQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", Number)
     ], GetUvQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dt" }),
         __metadata("design:type", Date)
     ], GetUvQueryParams.prototype, "dt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lat" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lat" }),
         __metadata("design:type", Number)
     ], GetUvQueryParams.prototype, "lat", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lng" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lng" }),
         __metadata("design:type", Number)
     ], GetUvQueryParams.prototype, "lng", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ozone" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ozone" }),
         __metadata("design:type", Number)
     ], GetUvQueryParams.prototype, "ozone", void 0);
     return GetUvQueryParams;
@@ -58,7 +58,7 @@ var GetUvHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=x-access-token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-access-token" }),
         __metadata("design:type", String)
     ], GetUvHeaders.prototype, "xAccessToken", void 0);
     return GetUvHeaders;
@@ -70,11 +70,11 @@ var GetUvRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetUvQueryParams)
     ], GetUvRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetUvHeaders)
     ], GetUvRequest.prototype, "headers", void 0);
     return GetUvRequest;
@@ -86,15 +86,15 @@ var GetUvResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetUvResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetUvResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UvIndexResult)
     ], GetUvResponse.prototype, "uvIndexResult", void 0);
     return GetUvResponse;

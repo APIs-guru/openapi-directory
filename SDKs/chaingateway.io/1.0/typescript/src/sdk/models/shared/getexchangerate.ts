@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetExchangeRate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency: string;
 
-  @Metadata({ data: "json, name=ok" })
+  @SpeakeasyMetadata({ data: "json, name=ok" })
   ok: boolean;
 
-  @Metadata({ data: "json, name=rate" })
+  @SpeakeasyMetadata({ data: "json, name=rate" })
   rate: number;
 }

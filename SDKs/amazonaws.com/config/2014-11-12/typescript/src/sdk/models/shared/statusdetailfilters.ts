@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MemberAccountRuleStatusEnum } from "./memberaccountrulestatusenum";
+
 
 
 // StatusDetailFilters
@@ -7,9 +8,9 @@ import { MemberAccountRuleStatusEnum } from "./memberaccountrulestatusenum";
  * Status filter object to filter results based on specific member account ID or status type for an organization config rule. 
 **/
 export class StatusDetailFilters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AccountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=MemberAccountRuleStatus" })
+  @SpeakeasyMetadata({ data: "json, name=MemberAccountRuleStatus" })
   memberAccountRuleStatus?: MemberAccountRuleStatusEnum;
 }

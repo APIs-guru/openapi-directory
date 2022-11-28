@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImportJobResponse } from "./importjobresponse";
+
 
 
 // ImportJobsResponse
@@ -8,9 +8,9 @@ import { ImportJobResponse } from "./importjobresponse";
  * Provides information about the status and settings of all the import jobs that are associated with an application or segment. An import job is a job that imports endpoint definitions from one or more files.
 **/
 export class ImportJobsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Item", elemType: shared.ImportJobResponse })
+  @SpeakeasyMetadata({ data: "json, name=Item", elemType: ImportJobResponse })
   item: ImportJobResponse[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

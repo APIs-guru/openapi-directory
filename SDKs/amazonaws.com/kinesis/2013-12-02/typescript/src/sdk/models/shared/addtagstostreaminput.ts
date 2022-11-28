@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AddTagsToStreamInput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input for <code>AddTagsToStream</code>.
 **/
 export class AddTagsToStreamInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StreamName" })
+  @SpeakeasyMetadata({ data: "json, name=StreamName" })
   streamName: string;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags: Map<string, string>;
 }

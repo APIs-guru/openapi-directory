@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SqlInjectionMatchSet } from "./sqlinjectionmatchset";
 // CreateSqlInjectionMatchSetResponse
 /**
@@ -34,11 +34,11 @@ var CreateSqlInjectionMatchSetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ChangeToken" }),
+        SpeakeasyMetadata({ data: "json, name=ChangeToken" }),
         __metadata("design:type", String)
     ], CreateSqlInjectionMatchSetResponse.prototype, "changeToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=SqlInjectionMatchSet" }),
+        SpeakeasyMetadata({ data: "json, name=SqlInjectionMatchSet" }),
         __metadata("design:type", SqlInjectionMatchSet)
     ], CreateSqlInjectionMatchSetResponse.prototype, "sqlInjectionMatchSet", void 0);
     return CreateSqlInjectionMatchSetResponse;

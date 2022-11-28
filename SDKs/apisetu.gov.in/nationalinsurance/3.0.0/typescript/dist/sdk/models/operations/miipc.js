@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var MiipcRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(MiipcRequestBodyCertificateParameters, _super);
@@ -30,15 +30,15 @@ var MiipcRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customer_Id" }),
+        SpeakeasyMetadata({ data: "json, name=customer_Id" }),
         __metadata("design:type", String)
     ], MiipcRequestBodyCertificateParameters.prototype, "customerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=policy_Number" }),
+        SpeakeasyMetadata({ data: "json, name=policy_Number" }),
         __metadata("design:type", String)
     ], MiipcRequestBodyCertificateParameters.prototype, "policyNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=policy_StartDate" }),
+        SpeakeasyMetadata({ data: "json, name=policy_StartDate" }),
         __metadata("design:type", String)
     ], MiipcRequestBodyCertificateParameters.prototype, "policyStartDate", void 0);
     return MiipcRequestBodyCertificateParameters;
@@ -54,19 +54,19 @@ var MiipcRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", MiipcRequestBodyCertificateParameters)
     ], MiipcRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], MiipcRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], MiipcRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], MiipcRequestBody.prototype, "txnId", void 0);
     return MiipcRequestBody;
@@ -78,32 +78,16 @@ var MiipcSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], MiipcSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], MiipcSecurity.prototype, "clientId", void 0);
     return MiipcSecurity;
 }(SpeakeasyBase));
 export { MiipcSecurity };
-var MiipcRequest = /** @class */ (function (_super) {
-    __extends(MiipcRequest, _super);
-    function MiipcRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", MiipcRequestBody)
-    ], MiipcRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", MiipcSecurity)
-    ], MiipcRequest.prototype, "security", void 0);
-    return MiipcRequest;
-}(SpeakeasyBase));
-export { MiipcRequest };
 export var Miipc400ApplicationJsonErrorEnum;
 (function (Miipc400ApplicationJsonErrorEnum) {
     Miipc400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -126,11 +110,11 @@ var Miipc400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Miipc400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Miipc400ApplicationJson.prototype, "errorDescription", void 0);
     return Miipc400ApplicationJson;
@@ -152,11 +136,11 @@ var Miipc401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Miipc401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Miipc401ApplicationJson.prototype, "errorDescription", void 0);
     return Miipc401ApplicationJson;
@@ -178,11 +162,11 @@ var Miipc404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Miipc404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Miipc404ApplicationJson.prototype, "errorDescription", void 0);
     return Miipc404ApplicationJson;
@@ -202,11 +186,11 @@ var Miipc500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Miipc500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Miipc500ApplicationJson.prototype, "errorDescription", void 0);
     return Miipc500ApplicationJson;
@@ -226,11 +210,11 @@ var Miipc502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Miipc502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Miipc502ApplicationJson.prototype, "errorDescription", void 0);
     return Miipc502ApplicationJson;
@@ -250,11 +234,11 @@ var Miipc503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Miipc503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Miipc503ApplicationJson.prototype, "errorDescription", void 0);
     return Miipc503ApplicationJson;
@@ -274,55 +258,71 @@ var Miipc504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Miipc504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Miipc504ApplicationJson.prototype, "errorDescription", void 0);
     return Miipc504ApplicationJson;
 }(SpeakeasyBase));
 export { Miipc504ApplicationJson };
+var MiipcRequest = /** @class */ (function (_super) {
+    __extends(MiipcRequest, _super);
+    function MiipcRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", MiipcRequestBody)
+    ], MiipcRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", MiipcSecurity)
+    ], MiipcRequest.prototype, "security", void 0);
+    return MiipcRequest;
+}(SpeakeasyBase));
+export { MiipcRequest };
 var MiipcResponse = /** @class */ (function (_super) {
     __extends(MiipcResponse, _super);
     function MiipcResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], MiipcResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], MiipcResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Miipc400ApplicationJson)
     ], MiipcResponse.prototype, "miipc400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Miipc401ApplicationJson)
     ], MiipcResponse.prototype, "miipc401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Miipc404ApplicationJson)
     ], MiipcResponse.prototype, "miipc404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Miipc500ApplicationJson)
     ], MiipcResponse.prototype, "miipc500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Miipc502ApplicationJson)
     ], MiipcResponse.prototype, "miipc502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Miipc503ApplicationJson)
     ], MiipcResponse.prototype, "miipc503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Miipc504ApplicationJson)
     ], MiipcResponse.prototype, "miipc504ApplicationJsonObject", void 0);
     return MiipcResponse;

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OrderCustomerMarketingRightsInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=explicitMarketingPreference" })
+  @SpeakeasyMetadata({ data: "json, name=explicitMarketingPreference" })
   explicitMarketingPreference?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedTimestamp" })
   lastUpdatedTimestamp?: string;
 
-  @Metadata({ data: "json, name=marketingEmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=marketingEmailAddress" })
   marketingEmailAddress?: string;
 }

@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MySqlSyncConfig } from "./mysqlsyncconfig";
 
+
 export enum SqlInstancesVerifyExternalSyncSettingsRequestSyncModeEnum {
-    ExternalSyncModeUnspecified = "EXTERNAL_SYNC_MODE_UNSPECIFIED"
-,    Online = "ONLINE"
-,    Offline = "OFFLINE"
+    ExternalSyncModeUnspecified = "EXTERNAL_SYNC_MODE_UNSPECIFIED",
+    Online = "ONLINE",
+    Offline = "OFFLINE"
 }
 
 
 export class SqlInstancesVerifyExternalSyncSettingsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mysqlSyncConfig" })
+  @SpeakeasyMetadata({ data: "json, name=mysqlSyncConfig" })
   mysqlSyncConfig?: MySqlSyncConfig;
 
-  @Metadata({ data: "json, name=syncMode" })
+  @SpeakeasyMetadata({ data: "json, name=syncMode" })
   syncMode?: SqlInstancesVerifyExternalSyncSettingsRequestSyncModeEnum;
 
-  @Metadata({ data: "json, name=verifyConnectionOnly" })
+  @SpeakeasyMetadata({ data: "json, name=verifyConnectionOnly" })
   verifyConnectionOnly?: boolean;
 
-  @Metadata({ data: "json, name=verifyReplicationOnly" })
+  @SpeakeasyMetadata({ data: "json, name=verifyReplicationOnly" })
   verifyReplicationOnly?: boolean;
 }

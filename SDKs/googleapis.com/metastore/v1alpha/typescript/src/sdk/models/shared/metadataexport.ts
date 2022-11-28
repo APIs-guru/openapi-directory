@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum MetadataExportDatabaseDumpTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Mysql = "MYSQL"
-,    Avro = "AVRO"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Mysql = "MYSQL",
+    Avro = "AVRO"
 }
 
 export enum MetadataExportStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Running = "RUNNING"
-,    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
-,    Cancelled = "CANCELLED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Running = "RUNNING",
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED",
+    Cancelled = "CANCELLED"
 }
 
 
@@ -20,18 +21,18 @@ export enum MetadataExportStateEnum {
  * The details of a metadata export operation.
 **/
 export class MetadataExport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=databaseDumpType" })
+  @SpeakeasyMetadata({ data: "json, name=databaseDumpType" })
   databaseDumpType?: MetadataExportDatabaseDumpTypeEnum;
 
-  @Metadata({ data: "json, name=destinationGcsUri" })
+  @SpeakeasyMetadata({ data: "json, name=destinationGcsUri" })
   destinationGcsUri?: string;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: MetadataExportStateEnum;
 }

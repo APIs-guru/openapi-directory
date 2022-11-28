@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ControlRequestCmdEnum;
 (function (ControlRequestCmdEnum) {
     ControlRequestCmdEnum["Cancel"] = "cancel";
@@ -34,19 +34,19 @@ var ControlRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=api_key;" }),
+        SpeakeasyMetadata({ data: "form, name=api_key;" }),
         __metadata("design:type", String)
     ], ControlRequest.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "form, name=api_secret;" }),
+        SpeakeasyMetadata({ data: "form, name=api_secret;" }),
         __metadata("design:type", String)
     ], ControlRequest.prototype, "apiSecret", void 0);
     __decorate([
-        Metadata({ data: "form, name=cmd;" }),
+        SpeakeasyMetadata({ data: "form, name=cmd;" }),
         __metadata("design:type", String)
     ], ControlRequest.prototype, "cmd", void 0);
     __decorate([
-        Metadata({ data: "form, name=request_id;" }),
+        SpeakeasyMetadata({ data: "form, name=request_id;" }),
         __metadata("design:type", String)
     ], ControlRequest.prototype, "requestId", void 0);
     return ControlRequest;

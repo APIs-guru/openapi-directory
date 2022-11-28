@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import nestedcable
-from . import nesteddevice
+from sdk import utils
+from . import *
 
 class ConsolePortConnectionStatusLabelEnum(str, Enum):
     NOT_CONNECTED = "Not Connected"
@@ -12,8 +13,8 @@ class ConsolePortConnectionStatusLabelEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ConsolePortConnectionStatus:
-    label: ConsolePortConnectionStatusLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    value: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    label: ConsolePortConnectionStatusLabelEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    value: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 class ConsolePortTypeLabelEnum(str, Enum):
     DE_9 = "DE-9"
@@ -49,21 +50,21 @@ class ConsolePortTypeValueEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ConsolePortType:
-    label: ConsolePortTypeLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    value: ConsolePortTypeValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    label: ConsolePortTypeLabelEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    value: ConsolePortTypeValueEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 
 @dataclass_json
 @dataclass
 class ConsolePort:
-    cable: Optional[nestedcable.NestedCable] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cable' }})
-    connected_endpoint: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connected_endpoint' }})
-    connected_endpoint_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connected_endpoint_type' }})
-    connection_status: Optional[ConsolePortConnectionStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_status' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    device: nesteddevice.NestedDevice = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: Optional[ConsolePortType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    device: NestedDevice = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('device') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    cable: Optional[NestedCable] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cable') }})
+    connected_endpoint: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connected_endpoint') }})
+    connected_endpoint_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connected_endpoint_type') }})
+    connection_status: Optional[ConsolePortConnectionStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connection_status') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    type: Optional[ConsolePortType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GamesParentGamesListPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=game_pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=game_pk" })
   gamePk: string;
 }
 
 
 export class GamesParentGamesListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
   pageSize?: number;
 }
 
 
-export class GamesParentGamesListRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GamesParentGamesListPathParams;
-
-  @Metadata()
-  queryParams: GamesParentGamesListQueryParams;
-}
-
-
 export class GamesParentGamesList200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count: number;
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata({ data: "json, name=previous" })
   previous?: string;
 
-  @Metadata({ data: "json, name=results", elemType: shared.Game })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: shared.Game })
   results: shared.Game[];
 }
 
 
+export class GamesParentGamesListRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GamesParentGamesListPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GamesParentGamesListQueryParams;
+}
+
+
 export class GamesParentGamesListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   gamesParentGamesList200ApplicationJsonObject?: GamesParentGamesList200ApplicationJson;
 }

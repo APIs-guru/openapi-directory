@@ -1,5 +1,7 @@
 package shared
 
+// JobStatus
+// JobStatus represents the current state of a Job.
 type JobStatus struct {
 	Active             *int32           `json:"active,omitempty"`
 	CompletionTime     *string          `json:"completionTime,omitempty"`

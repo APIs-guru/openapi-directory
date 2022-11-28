@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponseSetupErrorsEnum {
     SetupErrorUnspecified = "SETUP_ERROR_UNSPECIFIED",
     ErrorInvalidBaseSetup = "ERROR_INVALID_BASE_SETUP",

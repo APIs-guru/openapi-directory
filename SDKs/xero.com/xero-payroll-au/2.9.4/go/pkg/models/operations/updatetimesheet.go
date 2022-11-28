@@ -19,7 +19,7 @@ type UpdateTimesheetSecurity struct {
 type UpdateTimesheetRequest struct {
 	PathParams UpdateTimesheetPathParams
 	Headers    UpdateTimesheetHeaders
-	Request    []shared.Timesheet `request:"mediaType=application/json"`
+	Request    []shared.TimesheetInput `request:"mediaType=application/json"`
 	Security   UpdateTimesheetSecurity
 }
 

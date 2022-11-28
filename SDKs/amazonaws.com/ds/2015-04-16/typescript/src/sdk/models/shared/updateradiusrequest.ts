@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RadiusSettings } from "./radiussettings";
+
 
 
 // UpdateRadiusRequest
@@ -7,9 +8,9 @@ import { RadiusSettings } from "./radiussettings";
  * Contains the inputs for the <a>UpdateRadius</a> operation.
 **/
 export class UpdateRadiusRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DirectoryId" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryId" })
   directoryId: string;
 
-  @Metadata({ data: "json, name=RadiusSettings" })
+  @SpeakeasyMetadata({ data: "json, name=RadiusSettings" })
   radiusSettings: RadiusSettings;
 }

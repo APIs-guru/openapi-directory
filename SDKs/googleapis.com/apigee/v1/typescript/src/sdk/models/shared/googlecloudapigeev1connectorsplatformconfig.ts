@@ -1,14 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
-// GoogleCloudApigeeV1ConnectorsPlatformConfig
+
+// GoogleCloudApigeeV1ConnectorsPlatformConfigInput
 /** 
  * Configuration for the Connectors Platform add-on.
 **/
-export class GoogleCloudApigeeV1ConnectorsPlatformConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+export class GoogleCloudApigeeV1ConnectorsPlatformConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
-
-  @Metadata({ data: "json, name=expiresAt" })
-  expiresAt?: string;
 }

@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AccountUpdateRecoveryRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password: string;
 
-  @Metadata({ data: "json, name=passwordAgain" })
+  @SpeakeasyMetadata({ data: "json, name=passwordAgain" })
   passwordAgain: string;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId: string;
 }
 
 
 export class AccountUpdateRecoverySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   jwt: shared.SchemeJwt;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   project: shared.SchemeProject;
 }
 
 
 export class AccountUpdateRecoveryRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: AccountUpdateRecoveryRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: AccountUpdateRecoverySecurity;
 }
 
 
 export class AccountUpdateRecoveryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   token?: shared.Token;
 }

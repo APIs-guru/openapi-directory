@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OrthologRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rgdIds" })
+  @SpeakeasyMetadata({ data: "json, name=rgdIds" })
   rgdIds?: number[];
 
-  @Metadata({ data: "json, name=speciesTypeKeys" })
+  @SpeakeasyMetadata({ data: "json, name=speciesTypeKeys" })
   speciesTypeKeys?: number[];
 }

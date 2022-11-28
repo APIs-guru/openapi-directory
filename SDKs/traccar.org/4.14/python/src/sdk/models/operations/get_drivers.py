@@ -14,12 +14,12 @@ class GetDriversQueryParams:
 
 @dataclass
 class GetDriversRequest:
-    query_params: GetDriversQueryParams = field(default=None)
+    query_params: GetDriversQueryParams = field()
     
 
 @dataclass
 class GetDriversResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     drivers: Optional[List[shared.Driver]] = field(default=None)
-    status_code: int = field(default=None)
     

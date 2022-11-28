@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ThumbnailDetails } from "./thumbnaildetails";
+
 
 
 // LiveBroadcastSnippet
@@ -7,36 +8,36 @@ import { ThumbnailDetails } from "./thumbnaildetails";
  * Basic broadcast information.
 **/
 export class LiveBroadcastSnippet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actualEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=actualEndTime" })
   actualEndTime?: Date;
 
-  @Metadata({ data: "json, name=actualStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=actualStartTime" })
   actualStartTime?: Date;
 
-  @Metadata({ data: "json, name=channelId" })
+  @SpeakeasyMetadata({ data: "json, name=channelId" })
   channelId?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=isDefaultBroadcast" })
+  @SpeakeasyMetadata({ data: "json, name=isDefaultBroadcast" })
   isDefaultBroadcast?: boolean;
 
-  @Metadata({ data: "json, name=liveChatId" })
+  @SpeakeasyMetadata({ data: "json, name=liveChatId" })
   liveChatId?: string;
 
-  @Metadata({ data: "json, name=publishedAt" })
+  @SpeakeasyMetadata({ data: "json, name=publishedAt" })
   publishedAt?: Date;
 
-  @Metadata({ data: "json, name=scheduledEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=scheduledEndTime" })
   scheduledEndTime?: Date;
 
-  @Metadata({ data: "json, name=scheduledStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=scheduledStartTime" })
   scheduledStartTime?: Date;
 
-  @Metadata({ data: "json, name=thumbnails" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnails" })
   thumbnails?: ThumbnailDetails;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateSystemModelsClientStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientID" })
+  @SpeakeasyMetadata({ data: "json, name=ClientID" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=LastCheckin" })
+  @SpeakeasyMetadata({ data: "json, name=LastCheckin" })
   lastCheckin?: Date;
 
-  @Metadata({ data: "json, name=MinutesElapsed" })
+  @SpeakeasyMetadata({ data: "json, name=MinutesElapsed" })
   minutesElapsed?: number;
 
-  @Metadata({ data: "json, name=ReportResult" })
+  @SpeakeasyMetadata({ data: "json, name=ReportResult" })
   reportResult?: string;
 
-  @Metadata({ data: "json, name=ReportResultIsValid" })
+  @SpeakeasyMetadata({ data: "json, name=ReportResultIsValid" })
   reportResultIsValid?: boolean;
 
-  @Metadata({ data: "json, name=ReportValue" })
+  @SpeakeasyMetadata({ data: "json, name=ReportValue" })
   reportValue?: string;
 
-  @Metadata({ data: "json, name=Tag" })
+  @SpeakeasyMetadata({ data: "json, name=Tag" })
   tag?: string;
 }

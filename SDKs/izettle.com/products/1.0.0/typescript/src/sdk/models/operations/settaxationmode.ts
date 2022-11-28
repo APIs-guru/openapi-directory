@@ -1,47 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class SetTaxationModeSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  zettleApiKey: shared.SchemeZettleApiKey;
-}
-
-
-export class SetTaxationModeSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  zettleOauth: shared.SchemeZettleOauth;
-}
-
 
 export class SetTaxationModeSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: SetTaxationModeSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  zettleApiKey?: shared.SchemeZettleApiKey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: SetTaxationModeSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  zettleOauth?: shared.SchemeZettleOauth;
 }
 
 
 export class SetTaxationModeRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.TaxSettingsUpdateRequest;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: SetTaxationModeSecurity;
 }
 
 
 export class SetTaxationModeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   taxSettingsResponse?: shared.TaxSettingsResponse;
 }

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ScriptParameterKeyValue:
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""ScriptParameterKeyValue
+    A parameter for a studio component script, in the form of a key:value pair.
+    """
+    
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

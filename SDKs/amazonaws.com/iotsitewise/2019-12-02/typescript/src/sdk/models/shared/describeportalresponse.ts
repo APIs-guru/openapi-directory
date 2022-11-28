@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Alarms } from "./alarms";
 import { AuthModeEnum } from "./authmodeenum";
 import { ImageLocation } from "./imagelocation";
 import { PortalStatus } from "./portalstatus";
 
 
+
 export class DescribePortalResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alarms" })
+  @SpeakeasyMetadata({ data: "json, name=alarms" })
   alarms?: Alarms;
 
-  @Metadata({ data: "json, name=notificationSenderEmail" })
+  @SpeakeasyMetadata({ data: "json, name=notificationSenderEmail" })
   notificationSenderEmail?: string;
 
-  @Metadata({ data: "json, name=portalArn" })
+  @SpeakeasyMetadata({ data: "json, name=portalArn" })
   portalArn: string;
 
-  @Metadata({ data: "json, name=portalAuthMode" })
+  @SpeakeasyMetadata({ data: "json, name=portalAuthMode" })
   portalAuthMode?: AuthModeEnum;
 
-  @Metadata({ data: "json, name=portalClientId" })
+  @SpeakeasyMetadata({ data: "json, name=portalClientId" })
   portalClientId: string;
 
-  @Metadata({ data: "json, name=portalContactEmail" })
+  @SpeakeasyMetadata({ data: "json, name=portalContactEmail" })
   portalContactEmail: string;
 
-  @Metadata({ data: "json, name=portalCreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=portalCreationDate" })
   portalCreationDate: Date;
 
-  @Metadata({ data: "json, name=portalDescription" })
+  @SpeakeasyMetadata({ data: "json, name=portalDescription" })
   portalDescription?: string;
 
-  @Metadata({ data: "json, name=portalId" })
+  @SpeakeasyMetadata({ data: "json, name=portalId" })
   portalId: string;
 
-  @Metadata({ data: "json, name=portalLastUpdateDate" })
+  @SpeakeasyMetadata({ data: "json, name=portalLastUpdateDate" })
   portalLastUpdateDate: Date;
 
-  @Metadata({ data: "json, name=portalLogoImageLocation" })
+  @SpeakeasyMetadata({ data: "json, name=portalLogoImageLocation" })
   portalLogoImageLocation?: ImageLocation;
 
-  @Metadata({ data: "json, name=portalName" })
+  @SpeakeasyMetadata({ data: "json, name=portalName" })
   portalName: string;
 
-  @Metadata({ data: "json, name=portalStartUrl" })
+  @SpeakeasyMetadata({ data: "json, name=portalStartUrl" })
   portalStartUrl: string;
 
-  @Metadata({ data: "json, name=portalStatus" })
+  @SpeakeasyMetadata({ data: "json, name=portalStatus" })
   portalStatus: PortalStatus;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 }

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googlechromepolicyversionsv1policytargetkey
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleChromePolicyVersionsV1DeleteGroupPolicyRequest:
-    policy_schema: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policySchema' }})
-    policy_target_key: Optional[googlechromepolicyversionsv1policytargetkey.GoogleChromePolicyVersionsV1PolicyTargetKey] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policyTargetKey' }})
+    r"""GoogleChromePolicyVersionsV1DeleteGroupPolicyRequest
+    Request parameters for deleting the policy value of a specific group target.
+    """
+    
+    policy_schema: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policySchema') }})
+    policy_target_key: Optional[GoogleChromePolicyVersionsV1PolicyTargetKey] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policyTargetKey') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// Team
+// Team
 type Team struct {
 	DollarID    string `json:"$id"`
 	DateCreated int32  `json:"dateCreated"`

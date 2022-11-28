@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DescribedAccess } from "./describedaccess";
 
 
+
 export class DescribeAccessResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Access" })
+  @SpeakeasyMetadata({ data: "json, name=Access" })
   access: DescribedAccess;
 
-  @Metadata({ data: "json, name=ServerId" })
+  @SpeakeasyMetadata({ data: "json, name=ServerId" })
   serverId: string;
 }

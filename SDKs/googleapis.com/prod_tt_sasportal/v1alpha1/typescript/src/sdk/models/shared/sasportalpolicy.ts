@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SasPortalAssignment } from "./sasportalassignment";
+
 
 
 // SasPortalPolicy
@@ -8,9 +8,9 @@ import { SasPortalAssignment } from "./sasportalassignment";
  * Defines an access control policy to the resources.
 **/
 export class SasPortalPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assignments", elemType: shared.SasPortalAssignment })
+  @SpeakeasyMetadata({ data: "json, name=assignments", elemType: SasPortalAssignment })
   assignments?: SasPortalAssignment[];
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 }

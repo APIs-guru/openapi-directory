@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum RefreshSchemasXAmzTargetEnum {
     AmazonDmSv20160101RefreshSchemas = "AmazonDMSv20160101.RefreshSchemas"

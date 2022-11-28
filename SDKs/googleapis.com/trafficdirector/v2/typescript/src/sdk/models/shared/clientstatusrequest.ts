@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NodeMatcher } from "./nodematcher";
+
 
 
 // ClientStatusRequest
@@ -8,6 +8,6 @@ import { NodeMatcher } from "./nodematcher";
  * Request for client status of clients identified by a list of NodeMatchers.
 **/
 export class ClientStatusRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nodeMatchers", elemType: shared.NodeMatcher })
+  @SpeakeasyMetadata({ data: "json, name=nodeMatchers", elemType: NodeMatcher })
   nodeMatchers?: NodeMatcher[];
 }

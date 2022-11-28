@@ -1,23 +1,24 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import actioncategory_enum
-from . import actionconfigurationproperty
-from . import artifactdetails
-from . import artifactdetails
-from . import actiontypesettings
-from . import tag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateCustomActionTypeInput:
-    category: actioncategory_enum.ActionCategoryEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
-    configuration_properties: Optional[List[actionconfigurationproperty.ActionConfigurationProperty]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configurationProperties' }})
-    input_artifact_details: artifactdetails.ArtifactDetails = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inputArtifactDetails' }})
-    output_artifact_details: artifactdetails.ArtifactDetails = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outputArtifactDetails' }})
-    provider: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'provider' }})
-    settings: Optional[actiontypesettings.ActionTypeSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settings' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    version: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    r"""CreateCustomActionTypeInput
+    Represents the input of a CreateCustomActionType operation.
+    """
+    
+    category: ActionCategoryEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('category') }})
+    input_artifact_details: ArtifactDetails = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('inputArtifactDetails') }})
+    output_artifact_details: ArtifactDetails = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('outputArtifactDetails') }})
+    provider: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('provider') }})
+    version: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
+    configuration_properties: Optional[List[ActionConfigurationProperty]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('configurationProperties') }})
+    settings: Optional[ActionTypeSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settings') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     

@@ -1,25 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ZebraTeam } from "./zebrateam";
-import { ZebraTeam } from "./zebrateam";
+
 
 
 export class ZebraAlliances extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blue", elemType: shared.ZebraTeam })
+  @SpeakeasyMetadata({ data: "json, name=blue", elemType: ZebraTeam })
   blue?: ZebraTeam[];
 
-  @Metadata({ data: "json, name=red", elemType: shared.ZebraTeam })
+  @SpeakeasyMetadata({ data: "json, name=red", elemType: ZebraTeam })
   red?: ZebraTeam[];
 }
 
 
 export class Zebra extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alliances" })
+  @SpeakeasyMetadata({ data: "json, name=alliances" })
   alliances: ZebraAlliances;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key: string;
 
-  @Metadata({ data: "json, name=times" })
+  @SpeakeasyMetadata({ data: "json, name=times" })
   times: number[];
 }

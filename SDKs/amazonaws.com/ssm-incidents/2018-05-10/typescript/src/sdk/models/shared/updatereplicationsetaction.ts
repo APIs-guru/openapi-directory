@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddRegionAction } from "./addregionaction";
 import { DeleteRegionAction } from "./deleteregionaction";
+
 
 
 // UpdateReplicationSetAction
@@ -8,9 +9,9 @@ import { DeleteRegionAction } from "./deleteregionaction";
  * Details used when updating the replication set.
 **/
 export class UpdateReplicationSetAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addRegionAction" })
+  @SpeakeasyMetadata({ data: "json, name=addRegionAction" })
   addRegionAction?: AddRegionAction;
 
-  @Metadata({ data: "json, name=deleteRegionAction" })
+  @SpeakeasyMetadata({ data: "json, name=deleteRegionAction" })
   deleteRegionAction?: DeleteRegionAction;
 }

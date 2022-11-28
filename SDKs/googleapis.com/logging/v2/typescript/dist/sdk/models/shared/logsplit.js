@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LogSplit
 /**
  * Additional information used to correlate multiple log entries. Used when a single LogEntry would exceed the Google Cloud Logging size limit and is split across multiple log entries.
@@ -33,15 +33,15 @@ var LogSplit = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=index" }),
+        SpeakeasyMetadata({ data: "json, name=index" }),
         __metadata("design:type", Number)
     ], LogSplit.prototype, "index", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalSplits" }),
+        SpeakeasyMetadata({ data: "json, name=totalSplits" }),
         __metadata("design:type", Number)
     ], LogSplit.prototype, "totalSplits", void 0);
     __decorate([
-        Metadata({ data: "json, name=uid" }),
+        SpeakeasyMetadata({ data: "json, name=uid" }),
         __metadata("design:type", String)
     ], LogSplit.prototype, "uid", void 0);
     return LogSplit;

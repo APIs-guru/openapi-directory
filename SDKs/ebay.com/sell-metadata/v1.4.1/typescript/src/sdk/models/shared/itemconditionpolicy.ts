@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ItemCondition } from "./itemcondition";
 
 
+
 export class ItemConditionPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categoryId" })
+  @SpeakeasyMetadata({ data: "json, name=categoryId" })
   categoryId?: string;
 
-  @Metadata({ data: "json, name=categoryTreeId" })
+  @SpeakeasyMetadata({ data: "json, name=categoryTreeId" })
   categoryTreeId?: string;
 
-  @Metadata({ data: "json, name=itemConditionRequired" })
+  @SpeakeasyMetadata({ data: "json, name=itemConditionRequired" })
   itemConditionRequired?: boolean;
 
-  @Metadata({ data: "json, name=itemConditions", elemType: shared.ItemCondition })
+  @SpeakeasyMetadata({ data: "json, name=itemConditions", elemType: ItemCondition })
   itemConditions?: ItemCondition[];
 }

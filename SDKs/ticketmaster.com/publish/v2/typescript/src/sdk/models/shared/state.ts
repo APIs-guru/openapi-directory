@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // State
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * State
 **/
 export class State extends SpeakeasyBase {
-  @Metadata({ data: "json, name=names" })
+  @SpeakeasyMetadata({ data: "json, name=names" })
   names?: Map<string, string>;
 
-  @Metadata({ data: "json, name=stateCode" })
+  @SpeakeasyMetadata({ data: "json, name=stateCode" })
   stateCode?: string;
 }

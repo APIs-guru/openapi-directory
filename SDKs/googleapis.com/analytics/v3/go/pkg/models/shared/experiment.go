@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ExperimentParentLink
+// Parent link for an experiment. Points to the view (profile) to which this experiment belongs.
 type ExperimentParentLink struct {
 	Href *string `json:"href,omitempty"`
 	Type *string `json:"type,omitempty"`
@@ -17,6 +19,8 @@ type ExperimentVariations struct {
 	Won    *bool    `json:"won,omitempty"`
 }
 
+// Experiment
+// JSON template for Analytics experiment resource.
 type Experiment struct {
 	AccountID                      *string                `json:"accountId,omitempty"`
 	Created                        *time.Time             `json:"created,omitempty"`

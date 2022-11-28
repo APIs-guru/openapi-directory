@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class CommentAPIGetCommentsEntryTypeEnum(str, Enum):
@@ -19,24 +20,24 @@ class CommentAPIGetCommentsEntryTypeEnum(str, Enum):
 
 @dataclass
 class CommentAPIGetCommentsPathParams:
-    entry_type: CommentAPIGetCommentsEntryTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'entryType', 'style': 'simple', 'explode': False }})
+    entry_type: CommentAPIGetCommentsEntryTypeEnum = field(metadata={'path_param': { 'field_name': 'entryType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CommentAPIGetCommentsQueryParams:
-    entry_id: int = field(default=None, metadata={'query_param': { 'field_name': 'entryId', 'style': 'form', 'explode': True }})
+    entry_id: int = field(metadata={'query_param': { 'field_name': 'entryId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class CommentAPIGetCommentsRequest:
-    path_params: CommentAPIGetCommentsPathParams = field(default=None)
-    query_params: CommentAPIGetCommentsQueryParams = field(default=None)
+    path_params: CommentAPIGetCommentsPathParams = field()
+    query_params: CommentAPIGetCommentsQueryParams = field()
     
 
 @dataclass
 class CommentAPIGetCommentsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     partial_find_result_comment_for_api_contract_: Optional[shared.PartialFindResultCommentForAPIContract] = field(default=None)
-    status_code: int = field(default=None)
     

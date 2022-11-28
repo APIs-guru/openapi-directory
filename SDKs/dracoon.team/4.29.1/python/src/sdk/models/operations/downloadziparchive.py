@@ -10,13 +10,13 @@ class DownloadZipArchiveHeaders:
 
 @dataclass
 class DownloadZipArchiveRequest:
-    headers: DownloadZipArchiveHeaders = field(default=None)
-    request: shared.ZipDownloadRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DownloadZipArchiveHeaders = field()
+    request: shared.ZipDownloadRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DownloadZipArchiveResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

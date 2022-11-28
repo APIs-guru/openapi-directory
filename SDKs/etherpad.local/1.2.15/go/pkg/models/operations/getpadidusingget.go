@@ -4,10 +4,6 @@ type GetPadIDUsingGetQueryParams struct {
 	RoID *string `queryParam:"style=form,explode=true,name=roID"`
 }
 
-type GetPadIDUsingGetRequest struct {
-	QueryParams GetPadIDUsingGetQueryParams
-}
-
 type GetPadIDUsingGet200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -30,6 +26,10 @@ type GetPadIDUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type GetPadIDUsingGetRequest struct {
+	QueryParams GetPadIDUsingGetQueryParams
 }
 
 type GetPadIDUsingGetResponse struct {

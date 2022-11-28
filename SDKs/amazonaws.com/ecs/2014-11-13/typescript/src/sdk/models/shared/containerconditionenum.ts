@@ -1,8 +1,9 @@
 
 
+
 export enum ContainerConditionEnum {
-    Start = "START"
-,    Complete = "COMPLETE"
-,    Success = "SUCCESS"
-,    Healthy = "HEALTHY"
+    Start = "START",
+    Complete = "COMPLETE",
+    Success = "SUCCESS",
+    Healthy = "HEALTHY"
 }

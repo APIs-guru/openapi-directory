@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CorrelationStats } from "./correlationstats";
+
 
 
 // TablesDatasetMetadata
@@ -8,21 +8,21 @@ import { CorrelationStats } from "./correlationstats";
  * Metadata for a dataset used for AutoML Tables.
 **/
 export class TablesDatasetMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mlUseColumnSpecId" })
+  @SpeakeasyMetadata({ data: "json, name=mlUseColumnSpecId" })
   mlUseColumnSpecId?: string;
 
-  @Metadata({ data: "json, name=primaryTableSpecId" })
+  @SpeakeasyMetadata({ data: "json, name=primaryTableSpecId" })
   primaryTableSpecId?: string;
 
-  @Metadata({ data: "json, name=statsUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=statsUpdateTime" })
   statsUpdateTime?: string;
 
-  @Metadata({ data: "json, name=targetColumnCorrelations", elemType: shared.CorrelationStats })
+  @SpeakeasyMetadata({ data: "json, name=targetColumnCorrelations", elemType: CorrelationStats })
   targetColumnCorrelations?: Map<string, CorrelationStats>;
 
-  @Metadata({ data: "json, name=targetColumnSpecId" })
+  @SpeakeasyMetadata({ data: "json, name=targetColumnSpecId" })
   targetColumnSpecId?: string;
 
-  @Metadata({ data: "json, name=weightColumnSpecId" })
+  @SpeakeasyMetadata({ data: "json, name=weightColumnSpecId" })
   weightColumnSpecId?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StorageClassEnum } from "./storageclassenum";
 var PutObjectResponse = /** @class */ (function (_super) {
     __extends(PutObjectResponse, _super);
@@ -30,15 +30,15 @@ var PutObjectResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ContentSHA256" }),
+        SpeakeasyMetadata({ data: "json, name=ContentSHA256" }),
         __metadata("design:type", String)
     ], PutObjectResponse.prototype, "contentSha256", void 0);
     __decorate([
-        Metadata({ data: "json, name=ETag" }),
+        SpeakeasyMetadata({ data: "json, name=ETag" }),
         __metadata("design:type", String)
     ], PutObjectResponse.prototype, "eTag", void 0);
     __decorate([
-        Metadata({ data: "json, name=StorageClass" }),
+        SpeakeasyMetadata({ data: "json, name=StorageClass" }),
         __metadata("design:type", String)
     ], PutObjectResponse.prototype, "storageClass", void 0);
     return PutObjectResponse;

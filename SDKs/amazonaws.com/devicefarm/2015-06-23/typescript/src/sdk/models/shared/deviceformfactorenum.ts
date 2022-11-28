@@ -1,6 +1,7 @@
 
 
+
 export enum DeviceFormFactorEnum {
-    Phone = "PHONE"
-,    Tablet = "TABLET"
+    Phone = "PHONE",
+    Tablet = "TABLET"
 }

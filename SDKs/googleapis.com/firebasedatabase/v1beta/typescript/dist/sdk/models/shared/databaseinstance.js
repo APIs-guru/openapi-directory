@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var DatabaseInstanceStateEnum;
 (function (DatabaseInstanceStateEnum) {
     DatabaseInstanceStateEnum["LifecycleStateUnspecified"] = "LIFECYCLE_STATE_UNSPECIFIED";
@@ -46,25 +46,45 @@ var DatabaseInstance = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=databaseUrl" }),
+        SpeakeasyMetadata({ data: "json, name=databaseUrl" }),
         __metadata("design:type", String)
     ], DatabaseInstance.prototype, "databaseUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], DatabaseInstance.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=project" }),
+        SpeakeasyMetadata({ data: "json, name=project" }),
         __metadata("design:type", String)
     ], DatabaseInstance.prototype, "project", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], DatabaseInstance.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], DatabaseInstance.prototype, "type", void 0);
     return DatabaseInstance;
 }(SpeakeasyBase));
 export { DatabaseInstance };
+// DatabaseInstanceInput
+/**
+ * Representation of a Realtime Database instance. Details on interacting with contents of a DatabaseInstance can be found at: https://firebase.google.com/docs/database/rest/start.
+**/
+var DatabaseInstanceInput = /** @class */ (function (_super) {
+    __extends(DatabaseInstanceInput, _super);
+    function DatabaseInstanceInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], DatabaseInstanceInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=type" }),
+        __metadata("design:type", String)
+    ], DatabaseInstanceInput.prototype, "type", void 0);
+    return DatabaseInstanceInput;
+}(SpeakeasyBase));
+export { DatabaseInstanceInput };

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateCertificateFromCsrResponse
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The output from the CreateCertificateFromCsr operation.
 **/
 export class CreateCertificateFromCsrResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=certificateArn" })
   certificateArn?: string;
 
-  @Metadata({ data: "json, name=certificateId" })
+  @SpeakeasyMetadata({ data: "json, name=certificateId" })
   certificateId?: string;
 
-  @Metadata({ data: "json, name=certificatePem" })
+  @SpeakeasyMetadata({ data: "json, name=certificatePem" })
   certificatePem?: string;
 }

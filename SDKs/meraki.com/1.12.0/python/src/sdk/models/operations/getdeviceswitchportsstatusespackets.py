@@ -4,7 +4,7 @@ from typing import Any,Optional
 
 @dataclass
 class GetDeviceSwitchPortsStatusesPacketsPathParams:
-    serial: str = field(default=None, metadata={'path_param': { 'field_name': 'serial', 'style': 'simple', 'explode': False }})
+    serial: str = field(metadata={'path_param': { 'field_name': 'serial', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class GetDeviceSwitchPortsStatusesPacketsQueryParams:
 
 @dataclass
 class GetDeviceSwitchPortsStatusesPacketsRequest:
-    path_params: GetDeviceSwitchPortsStatusesPacketsPathParams = field(default=None)
-    query_params: GetDeviceSwitchPortsStatusesPacketsQueryParams = field(default=None)
+    path_params: GetDeviceSwitchPortsStatusesPacketsPathParams = field()
+    query_params: GetDeviceSwitchPortsStatusesPacketsQueryParams = field()
     
 
 @dataclass
 class GetDeviceSwitchPortsStatusesPacketsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_device_switch_ports_statuses_packets_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

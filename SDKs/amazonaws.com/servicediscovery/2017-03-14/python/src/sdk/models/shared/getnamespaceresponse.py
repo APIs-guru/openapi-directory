@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import namespace
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetNamespaceResponse:
-    namespace: Optional[namespace.Namespace] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Namespace' }})
+    namespace: Optional[Namespace] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Namespace') }})
     

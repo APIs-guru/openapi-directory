@@ -1,0 +1,5 @@
+export declare enum ActionHistoryStatusEnum {
+    Completed = "Completed",
+    Failed = "Failed",
+    Unknown = "Unknown"
+}

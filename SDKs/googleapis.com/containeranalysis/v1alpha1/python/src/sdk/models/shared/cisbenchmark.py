@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class CisBenchmarkSeverityEnum(str, Enum):
     SEVERITY_UNSPECIFIED = "SEVERITY_UNSPECIFIED"
@@ -14,6 +16,10 @@ class CisBenchmarkSeverityEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CisBenchmark:
-    profile_level: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'profileLevel' }})
-    severity: Optional[CisBenchmarkSeverityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'severity' }})
+    r"""CisBenchmark
+    A compliance check that is a CIS benchmark.
+    """
+    
+    profile_level: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('profileLevel') }})
+    severity: Optional[CisBenchmarkSeverityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('severity') }})
     

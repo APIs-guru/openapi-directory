@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,25 +23,25 @@ class DescribeSavingsPlansHeaders:
 @dataclass_json
 @dataclass
 class DescribeSavingsPlansRequestBody:
-    filters: Optional[List[shared.SavingsPlanFilter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filters' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    savings_plan_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'savingsPlanArns' }})
-    savings_plan_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'savingsPlanIds' }})
-    states: Optional[List[shared.SavingsPlanStateEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'states' }})
+    filters: Optional[List[shared.SavingsPlanFilter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filters') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    savings_plan_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('savingsPlanArns') }})
+    savings_plan_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('savingsPlanIds') }})
+    states: Optional[List[shared.SavingsPlanStateEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('states') }})
     
 
 @dataclass
 class DescribeSavingsPlansRequest:
-    headers: DescribeSavingsPlansHeaders = field(default=None)
-    request: DescribeSavingsPlansRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DescribeSavingsPlansHeaders = field()
+    request: DescribeSavingsPlansRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DescribeSavingsPlansResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_savings_plans_response: Optional[shared.DescribeSavingsPlansResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

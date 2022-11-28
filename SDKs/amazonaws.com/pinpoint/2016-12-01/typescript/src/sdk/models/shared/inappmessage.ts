@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InAppMessageContent } from "./inappmessagecontent";
 import { LayoutEnum } from "./layoutenum";
+
 
 
 // InAppMessage
@@ -9,12 +9,12 @@ import { LayoutEnum } from "./layoutenum";
  * Provides all fields required for building an in-app message.
 **/
 export class InAppMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Content", elemType: shared.InAppMessageContent })
+  @SpeakeasyMetadata({ data: "json, name=Content", elemType: InAppMessageContent })
   content?: InAppMessageContent[];
 
-  @Metadata({ data: "json, name=CustomConfig" })
+  @SpeakeasyMetadata({ data: "json, name=CustomConfig" })
   customConfig?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Layout" })
+  @SpeakeasyMetadata({ data: "json, name=Layout" })
   layout?: LayoutEnum;
 }

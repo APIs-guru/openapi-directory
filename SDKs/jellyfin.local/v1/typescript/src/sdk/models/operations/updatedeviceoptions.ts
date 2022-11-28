@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateDeviceOptionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id: string;
 }
 
 
 export class UpdateDeviceOptionsRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   deviceOptions?: shared.DeviceOptions;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   deviceOptions1?: shared.DeviceOptions;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   deviceOptions2?: shared.DeviceOptions;
 }
 
 
 export class UpdateDeviceOptionsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class UpdateDeviceOptionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UpdateDeviceOptionsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: UpdateDeviceOptionsRequests;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdateDeviceOptionsSecurity;
 }
 
 
 export class UpdateDeviceOptionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

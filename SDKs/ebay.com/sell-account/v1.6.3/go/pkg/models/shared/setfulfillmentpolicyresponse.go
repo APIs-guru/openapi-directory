@@ -1,5 +1,7 @@
 package shared
 
+// SetFulfillmentPolicyResponse
+// Complex type that that gets populated with a response containing a fulfillment policy.
 type SetFulfillmentPolicyResponse struct {
 	CategoryTypes       []CategoryType   `json:"categoryTypes,omitempty"`
 	Description         *string          `json:"description,omitempty"`

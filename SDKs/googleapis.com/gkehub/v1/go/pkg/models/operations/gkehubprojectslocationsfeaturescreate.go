@@ -32,7 +32,7 @@ type GkehubProjectsLocationsFeaturesCreateSecurity struct {
 type GkehubProjectsLocationsFeaturesCreateRequest struct {
 	PathParams  GkehubProjectsLocationsFeaturesCreatePathParams
 	QueryParams GkehubProjectsLocationsFeaturesCreateQueryParams
-	Request     *shared.Feature `request:"mediaType=application/json"`
+	Request     *shared.FeatureInput `request:"mediaType=application/json"`
 	Security    GkehubProjectsLocationsFeaturesCreateSecurity
 }
 

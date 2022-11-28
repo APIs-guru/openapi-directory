@@ -30,6 +30,8 @@ const (
 	UserEntitySslRequiredEnumNeverRequire     UserEntitySslRequiredEnum = "never_require"
 )
 
+// UserEntity
+// Create User
 type UserEntity struct {
 	Active2fa                 *bool                               `json:"active_2fa,omitempty"`
 	AdminGroupIds             []int32                             `json:"admin_group_ids,omitempty"`

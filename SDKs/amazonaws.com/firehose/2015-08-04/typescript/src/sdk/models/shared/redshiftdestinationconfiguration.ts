@@ -1,11 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchLoggingOptions } from "./cloudwatchloggingoptions";
 import { CopyCommand } from "./copycommand";
 import { ProcessingConfiguration } from "./processingconfiguration";
 import { RedshiftRetryOptions } from "./redshiftretryoptions";
 import { S3DestinationConfiguration } from "./s3destinationconfiguration";
 import { RedshiftS3BackupModeEnum } from "./redshifts3backupmodeenum";
-import { S3DestinationConfiguration } from "./s3destinationconfiguration";
+
 
 
 // RedshiftDestinationConfiguration
@@ -13,36 +13,36 @@ import { S3DestinationConfiguration } from "./s3destinationconfiguration";
  * Describes the configuration of a destination in Amazon Redshift.
 **/
 export class RedshiftDestinationConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudWatchLoggingOptions" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchLoggingOptions" })
   cloudWatchLoggingOptions?: CloudWatchLoggingOptions;
 
-  @Metadata({ data: "json, name=ClusterJDBCURL" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterJDBCURL" })
   clusterJdbcurl: string;
 
-  @Metadata({ data: "json, name=CopyCommand" })
+  @SpeakeasyMetadata({ data: "json, name=CopyCommand" })
   copyCommand: CopyCommand;
 
-  @Metadata({ data: "json, name=Password" })
+  @SpeakeasyMetadata({ data: "json, name=Password" })
   password: string;
 
-  @Metadata({ data: "json, name=ProcessingConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=ProcessingConfiguration" })
   processingConfiguration?: ProcessingConfiguration;
 
-  @Metadata({ data: "json, name=RetryOptions" })
+  @SpeakeasyMetadata({ data: "json, name=RetryOptions" })
   retryOptions?: RedshiftRetryOptions;
 
-  @Metadata({ data: "json, name=RoleARN" })
+  @SpeakeasyMetadata({ data: "json, name=RoleARN" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=S3BackupConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=S3BackupConfiguration" })
   s3BackupConfiguration?: S3DestinationConfiguration;
 
-  @Metadata({ data: "json, name=S3BackupMode" })
+  @SpeakeasyMetadata({ data: "json, name=S3BackupMode" })
   s3BackupMode?: RedshiftS3BackupModeEnum;
 
-  @Metadata({ data: "json, name=S3Configuration" })
+  @SpeakeasyMetadata({ data: "json, name=S3Configuration" })
   s3Configuration: S3DestinationConfiguration;
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username: string;
 }

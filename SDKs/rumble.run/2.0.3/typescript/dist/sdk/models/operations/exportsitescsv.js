@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ExportSitesCsvSecurity = /** @class */ (function (_super) {
     __extends(ExportSitesCsvSecurity, _super);
@@ -30,7 +30,7 @@ var ExportSitesCsvSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], ExportSitesCsvSecurity.prototype, "bearerAuth", void 0);
     return ExportSitesCsvSecurity;
@@ -42,7 +42,7 @@ var ExportSitesCsvRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ExportSitesCsvSecurity)
     ], ExportSitesCsvRequest.prototype, "security", void 0);
     return ExportSitesCsvRequest;
@@ -54,15 +54,15 @@ var ExportSitesCsvResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ExportSitesCsvResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ExportSitesCsvResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ExportSitesCsvResponse.prototype, "exportSitesCsv200TextCsvBinaryString", void 0);
     return ExportSitesCsvResponse;

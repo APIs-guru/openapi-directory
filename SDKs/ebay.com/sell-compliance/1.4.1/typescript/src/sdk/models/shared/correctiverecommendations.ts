@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AspectRecommendations } from "./aspectrecommendations";
 import { ProductRecommendation } from "./productrecommendation";
+
 
 
 // CorrectiveRecommendations
@@ -9,9 +9,9 @@ import { ProductRecommendation } from "./productrecommendation";
  * This type is used by the correctiveRecommendations container, which is returned if eBay has suggestions for how to correct the given violation.
 **/
 export class CorrectiveRecommendations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aspectRecommendations", elemType: shared.AspectRecommendations })
+  @SpeakeasyMetadata({ data: "json, name=aspectRecommendations", elemType: AspectRecommendations })
   aspectRecommendations?: AspectRecommendations[];
 
-  @Metadata({ data: "json, name=productRecommendation" })
+  @SpeakeasyMetadata({ data: "json, name=productRecommendation" })
   productRecommendation?: ProductRecommendation;
 }

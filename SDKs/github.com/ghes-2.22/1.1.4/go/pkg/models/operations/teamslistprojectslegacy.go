@@ -13,14 +13,14 @@ type TeamsListProjectsLegacyQueryParams struct {
 	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type TeamsListProjectsLegacyRequest struct {
-	PathParams  TeamsListProjectsLegacyPathParams
-	QueryParams TeamsListProjectsLegacyQueryParams
-}
-
 type TeamsListProjectsLegacy415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type TeamsListProjectsLegacyRequest struct {
+	PathParams  TeamsListProjectsLegacyPathParams
+	QueryParams TeamsListProjectsLegacyQueryParams
 }
 
 type TeamsListProjectsLegacyResponse struct {

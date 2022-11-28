@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CripcRequestBodyCertificateParameters extends SpeakeasyBase {
     dob: string;
@@ -19,10 +19,6 @@ export declare class CripcRequestBody extends SpeakeasyBase {
 export declare class CripcSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class CripcRequest extends SpeakeasyBase {
-    request?: CripcRequestBody;
-    security: CripcSecurity;
 }
 export declare enum Cripc400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -105,6 +101,10 @@ export declare enum Cripc504ApplicationJsonErrorDescriptionEnum {
 export declare class Cripc504ApplicationJson extends SpeakeasyBase {
     error?: Cripc504ApplicationJsonErrorEnum;
     errorDescription?: Cripc504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class CripcRequest extends SpeakeasyBase {
+    request?: CripcRequestBody;
+    security: CripcSecurity;
 }
 export declare class CripcResponse extends SpeakeasyBase {
     contentType: string;

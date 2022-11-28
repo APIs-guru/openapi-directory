@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * PaymentInitiationRecipientCreateRequest defines the request schema for `/payment_initiation/recipient/create`
 **/

@@ -1,0 +1,122 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+var PostBundlesRequestBody = /** @class */ (function (_super) {
+    __extends(PostBundlesRequestBody, _super);
+    function PostBundlesRequestBody() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "multipart_form, name=clickwrap_id" }),
+        __metadata("design:type", Number)
+    ], PostBundlesRequestBody.prototype, "clickwrapId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "multipart_form, name=code" }),
+        __metadata("design:type", String)
+    ], PostBundlesRequestBody.prototype, "code", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "multipart_form, name=description" }),
+        __metadata("design:type", String)
+    ], PostBundlesRequestBody.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "multipart_form, name=expires_at" }),
+        __metadata("design:type", Date)
+    ], PostBundlesRequestBody.prototype, "expiresAt", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "multipart_form, name=form_field_set_id" }),
+        __metadata("design:type", Number)
+    ], PostBundlesRequestBody.prototype, "formFieldSetId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "multipart_form, name=inbox_id" }),
+        __metadata("design:type", Number)
+    ], PostBundlesRequestBody.prototype, "inboxId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "multipart_form, name=max_uses" }),
+        __metadata("design:type", Number)
+    ], PostBundlesRequestBody.prototype, "maxUses", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "multipart_form, name=note" }),
+        __metadata("design:type", String)
+    ], PostBundlesRequestBody.prototype, "note", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "multipart_form, name=password" }),
+        __metadata("design:type", String)
+    ], PostBundlesRequestBody.prototype, "password", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "multipart_form, name=paths" }),
+        __metadata("design:type", Array)
+    ], PostBundlesRequestBody.prototype, "paths", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "multipart_form, name=preview_only" }),
+        __metadata("design:type", Boolean)
+    ], PostBundlesRequestBody.prototype, "previewOnly", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "multipart_form, name=require_registration" }),
+        __metadata("design:type", Boolean)
+    ], PostBundlesRequestBody.prototype, "requireRegistration", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "multipart_form, name=require_share_recipient" }),
+        __metadata("design:type", Boolean)
+    ], PostBundlesRequestBody.prototype, "requireShareRecipient", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "multipart_form, name=user_id" }),
+        __metadata("design:type", Number)
+    ], PostBundlesRequestBody.prototype, "userId", void 0);
+    return PostBundlesRequestBody;
+}(SpeakeasyBase));
+export { PostBundlesRequestBody };
+var PostBundlesRequest = /** @class */ (function (_super) {
+    __extends(PostBundlesRequest, _super);
+    function PostBundlesRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
+        __metadata("design:type", PostBundlesRequestBody)
+    ], PostBundlesRequest.prototype, "request", void 0);
+    return PostBundlesRequest;
+}(SpeakeasyBase));
+export { PostBundlesRequest };
+var PostBundlesResponse = /** @class */ (function (_super) {
+    __extends(PostBundlesResponse, _super);
+    function PostBundlesResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", shared.BundleEntity)
+    ], PostBundlesResponse.prototype, "bundleEntity", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], PostBundlesResponse.prototype, "contentType", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], PostBundlesResponse.prototype, "statusCode", void 0);
+    return PostBundlesResponse;
+}(SpeakeasyBase));
+export { PostBundlesResponse };

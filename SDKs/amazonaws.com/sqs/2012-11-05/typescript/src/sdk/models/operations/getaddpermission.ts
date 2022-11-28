@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAddPermissionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=AccountNumber" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=AccountNumber" })
   accountNumber: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=QueueName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=QueueName" })
   queueName: string;
 }
 
@@ -19,66 +20,66 @@ export enum GetAddPermissionVersionEnum {
 
 
 export class GetAddPermissionQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AWSAccountIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AWSAccountIds" })
   awsAccountIds: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetAddPermissionActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Actions" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Actions" })
   actions: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Label" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Label" })
   label: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetAddPermissionVersionEnum;
 }
 
 
 export class GetAddPermissionHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetAddPermissionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAddPermissionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAddPermissionQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetAddPermissionHeaders;
 }
 
 
 export class GetAddPermissionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// Hl7V2Store
+// Represents an HL7v2 store.
 type Hl7V2Store struct {
 	Labels                 map[string]string         `json:"labels,omitempty"`
 	Name                   *string                   `json:"name,omitempty"`

@@ -21,6 +21,8 @@ const (
 	DynamicLinkEventStatPlatformEnumOther                          DynamicLinkEventStatPlatformEnum = "OTHER"
 )
 
+// DynamicLinkEventStat
+// Dynamic Link event stat.
 type DynamicLinkEventStat struct {
 	Count    *string                           `json:"count,omitempty"`
 	Event    *DynamicLinkEventStatEventEnum    `json:"event,omitempty"`

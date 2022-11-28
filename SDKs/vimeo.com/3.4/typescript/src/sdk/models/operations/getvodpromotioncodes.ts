@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetVodPromotionCodesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ondemand_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ondemand_id" })
   ondemandId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=promotion_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=promotion_id" })
   promotionId: number;
 }
 
 
 export class GetVodPromotionCodesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
 export class GetVodPromotionCodesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 }
 
 
 export class GetVodPromotionCodesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetVodPromotionCodesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetVodPromotionCodesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetVodPromotionCodesSecurity;
 }
 
 
 export class GetVodPromotionCodesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   legacyError?: shared.LegacyError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   onDemandPromotionCode?: shared.OnDemandPromotionCode;
 }

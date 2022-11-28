@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SignRequestQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=test" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=test" })
   test?: number;
 }
 
 
-export class SignRequestRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: SignRequestQueryParams;
-
-  @Metadata({ data: "request, media_type=application/jwt" })
-  request: Uint8Array;
-}
-
-
 export class SignRequest201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=job" })
+  @SpeakeasyMetadata({ data: "json, name=job" })
   job?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
+export class SignRequestRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: SignRequestQueryParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/jwt" })
+  request: Uint8Array;
+}
+
+
 export class SignRequestResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   signRequest201ApplicationJsonObject?: SignRequest201ApplicationJson;
 }

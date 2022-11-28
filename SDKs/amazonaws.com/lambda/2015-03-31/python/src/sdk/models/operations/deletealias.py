@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteAliasPathParams:
-    function_name: str = field(default=None, metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'Name', 'style': 'simple', 'explode': False }})
+    function_name: str = field(metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'Name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,16 +24,16 @@ class DeleteAliasHeaders:
 
 @dataclass
 class DeleteAliasRequest:
-    path_params: DeleteAliasPathParams = field(default=None)
-    headers: DeleteAliasHeaders = field(default=None)
+    headers: DeleteAliasHeaders = field()
+    path_params: DeleteAliasPathParams = field()
     
 
 @dataclass
 class DeleteAliasResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     resource_conflict_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

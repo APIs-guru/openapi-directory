@@ -10,26 +10,18 @@ type GetLinodeTransferByYearMonthPathParams struct {
 	Year     int64 `pathParam:"style=simple,explode=false,name=year"`
 }
 
-type GetLinodeTransferByYearMonthSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetLinodeTransferByYearMonthSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetLinodeTransferByYearMonthSecurity struct {
-	Option1 *GetLinodeTransferByYearMonthSecurityOption1 `security:"option"`
-	Option2 *GetLinodeTransferByYearMonthSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type GetLinodeTransferByYearMonthDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetLinodeTransferByYearMonthRequest struct {
 	PathParams GetLinodeTransferByYearMonthPathParams
 	Security   GetLinodeTransferByYearMonthSecurity
-}
-
-type GetLinodeTransferByYearMonthDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetLinodeTransferByYearMonthResponse struct {

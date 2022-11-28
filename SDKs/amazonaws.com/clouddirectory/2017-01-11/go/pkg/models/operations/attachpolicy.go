@@ -11,10 +11,14 @@ type AttachPolicyHeaders struct {
 	XAmzDataPartition string  `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// AttachPolicyRequestBodyObjectReference
+// The reference that identifies an object.
 type AttachPolicyRequestBodyObjectReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }
 
+// AttachPolicyRequestBodyPolicyReference
+// The reference that identifies an object.
 type AttachPolicyRequestBodyPolicyReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }

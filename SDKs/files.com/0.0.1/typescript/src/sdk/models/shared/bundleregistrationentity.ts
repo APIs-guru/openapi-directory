@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BundleRegistrationEntity
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * List Bundle Registrations
 **/
 export class BundleRegistrationEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clickwrap_body" })
+  @SpeakeasyMetadata({ data: "json, name=clickwrap_body" })
   clickwrapBody?: string;
 
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=company" })
+  @SpeakeasyMetadata({ data: "json, name=company" })
   company?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=form_field_data" })
+  @SpeakeasyMetadata({ data: "json, name=form_field_data" })
   formFieldData?: string;
 
-  @Metadata({ data: "json, name=form_field_set_id" })
+  @SpeakeasyMetadata({ data: "json, name=form_field_set_id" })
   formFieldSetId?: number;
 
-  @Metadata({ data: "json, name=inbox_code" })
+  @SpeakeasyMetadata({ data: "json, name=inbox_code" })
   inboxCode?: string;
 
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// RequestEntity
+// List Requests
 type RequestEntity struct {
 	AutomationID    *string `json:"automation_id,omitempty"`
 	Destination     *string `json:"destination,omitempty"`

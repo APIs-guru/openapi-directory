@@ -1,5 +1,7 @@
 package shared
 
+// GooglePrivacyDlpV2Action
+// A task to execute on the completion of a job. See https://cloud.google.com/dlp/docs/concepts-actions to learn more.
 type GooglePrivacyDlpV2Action struct {
 	Deidentify                        *GooglePrivacyDlpV2Deidentify      `json:"deidentify,omitempty"`
 	JobNotificationEmails             map[string]interface{}             `json:"jobNotificationEmails,omitempty"`

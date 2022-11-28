@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import reportgroup
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateReportGroupOutput:
-    report_group: Optional[reportgroup.ReportGroup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reportGroup' }})
+    report_group: Optional[ReportGroup] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reportGroup') }})
     

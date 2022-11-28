@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RegionalPriceMigrationConfig } from "./regionalpricemigrationconfig";
 import { RegionsVersion } from "./regionsversion";
+
 
 
 // MigrateBasePlanPricesRequest
@@ -9,9 +9,9 @@ import { RegionsVersion } from "./regionsversion";
  * Request message for MigrateBasePlanPrices.
 **/
 export class MigrateBasePlanPricesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=regionalPriceMigrations", elemType: shared.RegionalPriceMigrationConfig })
+  @SpeakeasyMetadata({ data: "json, name=regionalPriceMigrations", elemType: RegionalPriceMigrationConfig })
   regionalPriceMigrations?: RegionalPriceMigrationConfig[];
 
-  @Metadata({ data: "json, name=regionsVersion" })
+  @SpeakeasyMetadata({ data: "json, name=regionsVersion" })
   regionsVersion?: RegionsVersion;
 }

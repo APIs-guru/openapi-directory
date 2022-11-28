@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Stats = /** @class */ (function (_super) {
     __extends(Stats, _super);
     function Stats() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=num_check_connectivity" }),
+        SpeakeasyMetadata({ data: "json, name=num_check_connectivity" }),
         __metadata("design:type", Number)
     ], Stats.prototype, "numCheckConnectivity", void 0);
     __decorate([
-        Metadata({ data: "json, name=num_connect_wifi" }),
+        SpeakeasyMetadata({ data: "json, name=num_connect_wifi" }),
         __metadata("design:type", Number)
     ], Stats.prototype, "numConnectWifi", void 0);
     __decorate([
-        Metadata({ data: "json, name=num_connected_wifi_not_saved" }),
+        SpeakeasyMetadata({ data: "json, name=num_connected_wifi_not_saved" }),
         __metadata("design:type", Number)
     ], Stats.prototype, "numConnectedWifiNotSaved", void 0);
     __decorate([
-        Metadata({ data: "json, name=num_initial_eureka_info" }),
+        SpeakeasyMetadata({ data: "json, name=num_initial_eureka_info" }),
         __metadata("design:type", Number)
     ], Stats.prototype, "numInitialEurekaInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=num_obtain_ip" }),
+        SpeakeasyMetadata({ data: "json, name=num_obtain_ip" }),
         __metadata("design:type", Number)
     ], Stats.prototype, "numObtainIp", void 0);
     return Stats;

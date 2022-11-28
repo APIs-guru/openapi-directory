@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GamesConfigurationImageConfigurationsUploadImageTypeEnum(str, Enum):
@@ -10,8 +11,8 @@ class GamesConfigurationImageConfigurationsUploadImageTypeEnum(str, Enum):
 
 @dataclass
 class GamesConfigurationImageConfigurationsUploadPathParams:
-    image_type: GamesConfigurationImageConfigurationsUploadImageTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'imageType', 'style': 'simple', 'explode': False }})
-    resource_id: str = field(default=None, metadata={'path_param': { 'field_name': 'resourceId', 'style': 'simple', 'explode': False }})
+    image_type: GamesConfigurationImageConfigurationsUploadImageTypeEnum = field(metadata={'path_param': { 'field_name': 'imageType', 'style': 'simple', 'explode': False }})
+    resource_id: str = field(metadata={'path_param': { 'field_name': 'resourceId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -31,20 +32,20 @@ class GamesConfigurationImageConfigurationsUploadQueryParams:
 
 @dataclass
 class GamesConfigurationImageConfigurationsUploadSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GamesConfigurationImageConfigurationsUploadRequest:
-    path_params: GamesConfigurationImageConfigurationsUploadPathParams = field(default=None)
-    query_params: GamesConfigurationImageConfigurationsUploadQueryParams = field(default=None)
-    security: GamesConfigurationImageConfigurationsUploadSecurity = field(default=None)
+    path_params: GamesConfigurationImageConfigurationsUploadPathParams = field()
+    query_params: GamesConfigurationImageConfigurationsUploadQueryParams = field()
+    security: GamesConfigurationImageConfigurationsUploadSecurity = field()
     
 
 @dataclass
 class GamesConfigurationImageConfigurationsUploadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     image_configuration: Optional[shared.ImageConfiguration] = field(default=None)
-    status_code: int = field(default=None)
     

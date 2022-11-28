@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteFunctionPathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
-    function_id: str = field(default=None, metadata={'path_param': { 'field_name': 'functionId', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    function_id: str = field(metadata={'path_param': { 'field_name': 'functionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class DeleteFunctionHeaders:
 
 @dataclass
 class DeleteFunctionRequest:
-    path_params: DeleteFunctionPathParams = field(default=None)
-    headers: DeleteFunctionHeaders = field(default=None)
+    headers: DeleteFunctionHeaders = field()
+    path_params: DeleteFunctionPathParams = field()
     
 
 @dataclass
 class DeleteFunctionResponse:
+    content_type: str = field()
+    status_code: int = field()
     concurrent_modification_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_function_response: Optional[dict[str, Any]] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

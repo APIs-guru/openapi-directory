@@ -1,5 +1,7 @@
 package shared
 
+// NonPrimaryStateTax
+// The Non-Primary State Tax model
 type NonPrimaryStateTax struct {
 	Amount             *float64 `json:"amount,omitempty"`
 	DeductionsAmount   *float64 `json:"deductionsAmount,omitempty"`

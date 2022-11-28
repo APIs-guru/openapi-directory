@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetEventsCountDirectionEnum(str, Enum):
@@ -24,13 +28,13 @@ class GetEventsCountQueryParams:
 
 @dataclass
 class GetEventsCountRequest:
-    query_params: GetEventsCountQueryParams = field(default=None)
+    query_params: GetEventsCountQueryParams = field()
     
 
 @dataclass
 class GetEventsCountResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     events_count: Optional[shared.EventsCount] = field(default=None)
-    status_code: int = field(default=None)
     

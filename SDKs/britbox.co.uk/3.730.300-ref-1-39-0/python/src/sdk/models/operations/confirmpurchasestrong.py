@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class ConfirmPurchaseStrongPathParams:
-    platform: str = field(default=None, metadata={'path_param': { 'field_name': 'platform', 'style': 'simple', 'explode': False }})
+    platform: str = field(metadata={'path_param': { 'field_name': 'platform', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,21 +15,21 @@ class ConfirmPurchaseStrongQueryParams:
 
 @dataclass
 class ConfirmPurchaseStrongSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ConfirmPurchaseStrongRequest:
-    path_params: ConfirmPurchaseStrongPathParams = field(default=None)
-    query_params: ConfirmPurchaseStrongQueryParams = field(default=None)
-    request: shared.ItvPurchaseStrongRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ConfirmPurchaseStrongSecurity = field(default=None)
+    path_params: ConfirmPurchaseStrongPathParams = field()
+    query_params: ConfirmPurchaseStrongQueryParams = field()
+    request: shared.ItvPurchaseStrongRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: ConfirmPurchaseStrongSecurity = field()
     
 
 @dataclass
 class ConfirmPurchaseStrongResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     itv_purchase_strong_response: Optional[shared.ItvPurchaseStrongResponse] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

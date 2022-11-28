@@ -8,6 +8,8 @@ const (
 	SignierteBelegdatenUnternehmenIDTypEnumGln          SignierteBelegdatenUnternehmenIDTypEnum = "gln"
 )
 
+// SignierteBelegdaten
+// The complete `Beleg` that has been signed by the "Signaturerstellungseinheit" and stored in the "Datenerfassungsprotokoll".
 type SignierteBelegdaten struct {
 	BelegDatumUhrzeit           *string                                  `json:"Beleg-Datum-Uhrzeit,omitempty"`
 	Belegnummer                 *string                                  `json:"Belegnummer,omitempty"`

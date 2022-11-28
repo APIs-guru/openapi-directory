@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryRoleAssignmentsGetPathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
-    role_assignment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'roleAssignmentId', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    role_assignment_id: str = field(metadata={'path_param': { 'field_name': 'roleAssignmentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class DirectoryRoleAssignmentsGetQueryParams:
 
 @dataclass
 class DirectoryRoleAssignmentsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryRoleAssignmentsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class DirectoryRoleAssignmentsGetSecurity:
 
 @dataclass
 class DirectoryRoleAssignmentsGetRequest:
-    path_params: DirectoryRoleAssignmentsGetPathParams = field(default=None)
-    query_params: DirectoryRoleAssignmentsGetQueryParams = field(default=None)
-    security: DirectoryRoleAssignmentsGetSecurity = field(default=None)
+    path_params: DirectoryRoleAssignmentsGetPathParams = field()
+    query_params: DirectoryRoleAssignmentsGetQueryParams = field()
+    security: DirectoryRoleAssignmentsGetSecurity = field()
     
 
 @dataclass
 class DirectoryRoleAssignmentsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     role_assignment: Optional[shared.RoleAssignment] = field(default=None)
-    status_code: int = field(default=None)
     

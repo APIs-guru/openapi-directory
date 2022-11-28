@@ -31,7 +31,7 @@ type CloudresourcemanagerFoldersPatchSecurity struct {
 type CloudresourcemanagerFoldersPatchRequest struct {
 	PathParams  CloudresourcemanagerFoldersPatchPathParams
 	QueryParams CloudresourcemanagerFoldersPatchQueryParams
-	Request     *shared.Folder `request:"mediaType=application/json"`
+	Request     *shared.FolderInput `request:"mediaType=application/json"`
 	Security    CloudresourcemanagerFoldersPatchSecurity
 }
 

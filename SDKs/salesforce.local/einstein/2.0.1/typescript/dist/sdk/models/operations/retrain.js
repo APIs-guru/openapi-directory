@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var RetrainRequestBody = /** @class */ (function (_super) {
     __extends(RetrainRequestBody, _super);
@@ -30,23 +30,23 @@ var RetrainRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, name=algorithm" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=algorithm" }),
         __metadata("design:type", String)
     ], RetrainRequestBody.prototype, "algorithm", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=epochs" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=epochs" }),
         __metadata("design:type", Number)
     ], RetrainRequestBody.prototype, "epochs", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=learningRate" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=learningRate" }),
         __metadata("design:type", Number)
     ], RetrainRequestBody.prototype, "learningRate", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=modelId" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=modelId" }),
         __metadata("design:type", String)
     ], RetrainRequestBody.prototype, "modelId", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=trainParams;json=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=trainParams;json=true" }),
         __metadata("design:type", shared.V2LanguageTrainParams)
     ], RetrainRequestBody.prototype, "trainParams", void 0);
     return RetrainRequestBody;
@@ -58,7 +58,7 @@ var RetrainSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerToken)
     ], RetrainSecurity.prototype, "bearerToken", void 0);
     return RetrainSecurity;
@@ -70,11 +70,11 @@ var RetrainRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", RetrainRequestBody)
     ], RetrainRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RetrainSecurity)
     ], RetrainRequest.prototype, "security", void 0);
     return RetrainRequest;
@@ -86,15 +86,15 @@ var RetrainResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RetrainResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RetrainResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.TrainResponse)
     ], RetrainResponse.prototype, "trainResponse", void 0);
     return RetrainResponse;

@@ -8,22 +8,9 @@ type GetLkeClusterKubeconfigPathParams struct {
 	ClusterID int64 `pathParam:"style=simple,explode=false,name=clusterId"`
 }
 
-type GetLkeClusterKubeconfigSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetLkeClusterKubeconfigSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetLkeClusterKubeconfigSecurity struct {
-	Option1 *GetLkeClusterKubeconfigSecurityOption1 `security:"option"`
-	Option2 *GetLkeClusterKubeconfigSecurityOption2 `security:"option"`
-}
-
-type GetLkeClusterKubeconfigRequest struct {
-	PathParams GetLkeClusterKubeconfigPathParams
-	Security   GetLkeClusterKubeconfigSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetLkeClusterKubeconfig200ApplicationJSON struct {
@@ -32,6 +19,11 @@ type GetLkeClusterKubeconfig200ApplicationJSON struct {
 
 type GetLkeClusterKubeconfigDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetLkeClusterKubeconfigRequest struct {
+	PathParams GetLkeClusterKubeconfigPathParams
+	Security   GetLkeClusterKubeconfigSecurity
 }
 
 type GetLkeClusterKubeconfigResponse struct {

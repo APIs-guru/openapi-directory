@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudBeyondcorpAppconnectorsV1NotificationConfigCloudPubSubNotificationConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The configuration for Pub/Sub messaging for the AppConnector.
 **/
 export class GoogleCloudBeyondcorpAppconnectorsV1NotificationConfigCloudPubSubNotificationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pubsubSubscription" })
+  @SpeakeasyMetadata({ data: "json, name=pubsubSubscription" })
   pubsubSubscription?: string;
 }

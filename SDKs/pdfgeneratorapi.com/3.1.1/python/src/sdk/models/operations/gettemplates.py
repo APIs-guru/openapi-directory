@@ -1,13 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass_json
 @dataclass
 class GetTemplates200ApplicationJSON:
-    response: Optional[List[shared.Template]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'response' }})
+    response: Optional[List[shared.Template]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('response') }})
     
 class GetTemplates401ApplicationJSONErrorEnum(str, Enum):
     AUTHENTICATION_FAILED_REQUEST_EXPIRED = "Authentication failed: request expired"
@@ -25,8 +27,8 @@ class GetTemplates401ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetTemplates401ApplicationJSON:
-    error: Optional[GetTemplates401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[GetTemplates401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 class GetTemplates403ApplicationJSONErrorEnum(str, Enum):
     YOUR_ACCOUNT_HAS_EXCEEDED_THE_MONTHLY_DOCUMENT_GENERATION_LIMIT_ = "Your account has exceeded the monthly document generation limit."
@@ -35,8 +37,8 @@ class GetTemplates403ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetTemplates403ApplicationJSON:
-    error: Optional[GetTemplates403ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[GetTemplates403ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 class GetTemplates404ApplicationJSONErrorEnum(str, Enum):
     ENTITY_NOT_FOUND = "Entity not found"
@@ -47,8 +49,8 @@ class GetTemplates404ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetTemplates404ApplicationJSON:
-    error: Optional[GetTemplates404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[GetTemplates404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 class GetTemplates422ApplicationJSONErrorEnum(str, Enum):
     UNABLE_TO_PARSE_JSON_PLEASE_CHECK_FORMATTING = "Unable to parse JSON, please check formatting"
@@ -60,21 +62,21 @@ class GetTemplates422ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetTemplates422ApplicationJSON:
-    error: Optional[GetTemplates422ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[GetTemplates422ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 
 @dataclass_json
 @dataclass
 class GetTemplates500ApplicationJSON:
-    error: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 
 @dataclass
 class GetTemplatesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_templates_200_application_json_object: Optional[GetTemplates200ApplicationJSON] = field(default=None)
     get_templates_401_application_json_object: Optional[GetTemplates401ApplicationJSON] = field(default=None)
     get_templates_403_application_json_object: Optional[GetTemplates403ApplicationJSON] = field(default=None)

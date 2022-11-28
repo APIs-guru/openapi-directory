@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DurationRange } from "./durationrange";
+
 
 
 // AssessmentTemplateFilter
@@ -7,12 +8,12 @@ import { DurationRange } from "./durationrange";
  * Used as the request parameter in the <a>ListAssessmentTemplates</a> action.
 **/
 export class AssessmentTemplateFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=durationRange" })
+  @SpeakeasyMetadata({ data: "json, name=durationRange" })
   durationRange?: DurationRange;
 
-  @Metadata({ data: "json, name=namePattern" })
+  @SpeakeasyMetadata({ data: "json, name=namePattern" })
   namePattern?: string;
 
-  @Metadata({ data: "json, name=rulesPackageArns" })
+  @SpeakeasyMetadata({ data: "json, name=rulesPackageArns" })
   rulesPackageArns?: string[];
 }

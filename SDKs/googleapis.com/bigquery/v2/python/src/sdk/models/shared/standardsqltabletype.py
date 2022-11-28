@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import standardsqlfield
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StandardSQLTableType:
-    columns: Optional[List[standardsqlfield.StandardSQLField]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'columns' }})
+    r"""StandardSQLTableType
+    A table type
+    """
+    
+    columns: Optional[List[StandardSQLField]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('columns') }})
     

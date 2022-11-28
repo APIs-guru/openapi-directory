@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import policyrepresentation
-from . import resourcerepresentation
-from . import scoperepresentation
+from sdk import utils
+from . import *
 
 class ResourceServerRepresentationDecisionStrategyEnum(str, Enum):
     AFFIRMATIVE = "AFFIRMATIVE"
@@ -19,13 +19,13 @@ class ResourceServerRepresentationPolicyEnforcementModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ResourceServerRepresentation:
-    allow_remote_resource_management: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allowRemoteResourceManagement' }})
-    client_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientId' }})
-    decision_strategy: Optional[ResourceServerRepresentationDecisionStrategyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'decisionStrategy' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    policies: Optional[List[policyrepresentation.PolicyRepresentation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policies' }})
-    policy_enforcement_mode: Optional[ResourceServerRepresentationPolicyEnforcementModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policyEnforcementMode' }})
-    resources: Optional[List[resourcerepresentation.ResourceRepresentation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
-    scopes: Optional[List[scoperepresentation.ScopeRepresentation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scopes' }})
+    allow_remote_resource_management: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allowRemoteResourceManagement') }})
+    client_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientId') }})
+    decision_strategy: Optional[ResourceServerRepresentationDecisionStrategyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('decisionStrategy') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    policies: Optional[List[PolicyRepresentation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policies') }})
+    policy_enforcement_mode: Optional[ResourceServerRepresentationPolicyEnforcementModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policyEnforcementMode') }})
+    resources: Optional[List[ResourceRepresentation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resources') }})
+    scopes: Optional[List[ScopeRepresentation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scopes') }})
     

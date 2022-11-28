@@ -17,14 +17,14 @@ type DuplicateProjectRequestBody struct {
 	Data *shared.ProjectDuplicateRequest `json:"data,omitempty"`
 }
 
+type DuplicateProject201ApplicationJSON struct {
+	Data *shared.JobResponse `json:"data,omitempty"`
+}
+
 type DuplicateProjectRequest struct {
 	PathParams  DuplicateProjectPathParams
 	QueryParams DuplicateProjectQueryParams
 	Request     *DuplicateProjectRequestBody `request:"mediaType=application/json"`
-}
-
-type DuplicateProject201ApplicationJSON struct {
-	Data *shared.JobResponse `json:"data,omitempty"`
 }
 
 type DuplicateProjectResponse struct {

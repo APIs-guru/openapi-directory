@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkerSettings } from "./workersettings";
+
 
 
 // TaskRunnerSettings
@@ -7,60 +8,60 @@ import { WorkerSettings } from "./workersettings";
  * Taskrunner configuration settings.
 **/
 export class TaskRunnerSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alsologtostderr" })
+  @SpeakeasyMetadata({ data: "json, name=alsologtostderr" })
   alsologtostderr?: boolean;
 
-  @Metadata({ data: "json, name=baseTaskDir" })
+  @SpeakeasyMetadata({ data: "json, name=baseTaskDir" })
   baseTaskDir?: string;
 
-  @Metadata({ data: "json, name=baseUrl" })
+  @SpeakeasyMetadata({ data: "json, name=baseUrl" })
   baseUrl?: string;
 
-  @Metadata({ data: "json, name=commandlinesFileName" })
+  @SpeakeasyMetadata({ data: "json, name=commandlinesFileName" })
   commandlinesFileName?: string;
 
-  @Metadata({ data: "json, name=continueOnException" })
+  @SpeakeasyMetadata({ data: "json, name=continueOnException" })
   continueOnException?: boolean;
 
-  @Metadata({ data: "json, name=dataflowApiVersion" })
+  @SpeakeasyMetadata({ data: "json, name=dataflowApiVersion" })
   dataflowApiVersion?: string;
 
-  @Metadata({ data: "json, name=harnessCommand" })
+  @SpeakeasyMetadata({ data: "json, name=harnessCommand" })
   harnessCommand?: string;
 
-  @Metadata({ data: "json, name=languageHint" })
+  @SpeakeasyMetadata({ data: "json, name=languageHint" })
   languageHint?: string;
 
-  @Metadata({ data: "json, name=logDir" })
+  @SpeakeasyMetadata({ data: "json, name=logDir" })
   logDir?: string;
 
-  @Metadata({ data: "json, name=logToSerialconsole" })
+  @SpeakeasyMetadata({ data: "json, name=logToSerialconsole" })
   logToSerialconsole?: boolean;
 
-  @Metadata({ data: "json, name=logUploadLocation" })
+  @SpeakeasyMetadata({ data: "json, name=logUploadLocation" })
   logUploadLocation?: string;
 
-  @Metadata({ data: "json, name=oauthScopes" })
+  @SpeakeasyMetadata({ data: "json, name=oauthScopes" })
   oauthScopes?: string[];
 
-  @Metadata({ data: "json, name=parallelWorkerSettings" })
+  @SpeakeasyMetadata({ data: "json, name=parallelWorkerSettings" })
   parallelWorkerSettings?: WorkerSettings;
 
-  @Metadata({ data: "json, name=streamingWorkerMainClass" })
+  @SpeakeasyMetadata({ data: "json, name=streamingWorkerMainClass" })
   streamingWorkerMainClass?: string;
 
-  @Metadata({ data: "json, name=taskGroup" })
+  @SpeakeasyMetadata({ data: "json, name=taskGroup" })
   taskGroup?: string;
 
-  @Metadata({ data: "json, name=taskUser" })
+  @SpeakeasyMetadata({ data: "json, name=taskUser" })
   taskUser?: string;
 
-  @Metadata({ data: "json, name=tempStoragePrefix" })
+  @SpeakeasyMetadata({ data: "json, name=tempStoragePrefix" })
   tempStoragePrefix?: string;
 
-  @Metadata({ data: "json, name=vmId" })
+  @SpeakeasyMetadata({ data: "json, name=vmId" })
   vmId?: string;
 
-  @Metadata({ data: "json, name=workflowFileName" })
+  @SpeakeasyMetadata({ data: "json, name=workflowFileName" })
   workflowFileName?: string;
 }

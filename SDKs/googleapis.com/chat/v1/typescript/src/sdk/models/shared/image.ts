@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OnClick } from "./onclick";
+
 
 
 // Image
@@ -7,12 +8,12 @@ import { OnClick } from "./onclick";
  * An image that is specified by a URL and can have an onclick action.
 **/
 export class Image extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aspectRatio" })
+  @SpeakeasyMetadata({ data: "json, name=aspectRatio" })
   aspectRatio?: number;
 
-  @Metadata({ data: "json, name=imageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=imageUrl" })
   imageUrl?: string;
 
-  @Metadata({ data: "json, name=onClick" })
+  @SpeakeasyMetadata({ data: "json, name=onClick" })
   onClick?: OnClick;
 }

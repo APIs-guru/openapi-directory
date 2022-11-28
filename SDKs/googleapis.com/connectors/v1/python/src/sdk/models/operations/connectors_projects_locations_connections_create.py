@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ConnectorsProjectsLocationsConnectionsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class ConnectorsProjectsLocationsConnectionsCreateQueryParams:
 
 @dataclass
 class ConnectorsProjectsLocationsConnectionsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ConnectorsProjectsLocationsConnectionsCreateRequest:
-    path_params: ConnectorsProjectsLocationsConnectionsCreatePathParams = field(default=None)
-    query_params: ConnectorsProjectsLocationsConnectionsCreateQueryParams = field(default=None)
-    request: Optional[shared.Connection] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ConnectorsProjectsLocationsConnectionsCreateSecurity = field(default=None)
+    path_params: ConnectorsProjectsLocationsConnectionsCreatePathParams = field()
+    query_params: ConnectorsProjectsLocationsConnectionsCreateQueryParams = field()
+    security: ConnectorsProjectsLocationsConnectionsCreateSecurity = field()
+    request: Optional[shared.ConnectionInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ConnectorsProjectsLocationsConnectionsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

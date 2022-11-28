@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ReactionsDeleteForCommitCommentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=comment_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=comment_id" })
   commentId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=reaction_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=reaction_id" })
   reactionId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class ReactionsDeleteForCommitCommentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReactionsDeleteForCommitCommentPathParams;
 }
 
 
 export class ReactionsDeleteForCommitCommentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

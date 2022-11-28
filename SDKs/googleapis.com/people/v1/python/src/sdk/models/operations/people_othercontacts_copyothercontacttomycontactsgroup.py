@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PeopleOtherContactsCopyOtherContactToMyContactsGroupPathParams:
-    resource_name: str = field(default=None, metadata={'path_param': { 'field_name': 'resourceName', 'style': 'simple', 'explode': False }})
+    resource_name: str = field(metadata={'path_param': { 'field_name': 'resourceName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class PeopleOtherContactsCopyOtherContactToMyContactsGroupQueryParams:
 
 @dataclass
 class PeopleOtherContactsCopyOtherContactToMyContactsGroupSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PeopleOtherContactsCopyOtherContactToMyContactsGroupSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class PeopleOtherContactsCopyOtherContactToMyContactsGroupSecurity:
 
 @dataclass
 class PeopleOtherContactsCopyOtherContactToMyContactsGroupRequest:
-    path_params: PeopleOtherContactsCopyOtherContactToMyContactsGroupPathParams = field(default=None)
-    query_params: PeopleOtherContactsCopyOtherContactToMyContactsGroupQueryParams = field(default=None)
+    path_params: PeopleOtherContactsCopyOtherContactToMyContactsGroupPathParams = field()
+    query_params: PeopleOtherContactsCopyOtherContactToMyContactsGroupQueryParams = field()
+    security: PeopleOtherContactsCopyOtherContactToMyContactsGroupSecurity = field()
     request: Optional[shared.CopyOtherContactToMyContactsGroupRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PeopleOtherContactsCopyOtherContactToMyContactsGroupSecurity = field(default=None)
     
 
 @dataclass
 class PeopleOtherContactsCopyOtherContactToMyContactsGroupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     person: Optional[shared.Person] = field(default=None)
-    status_code: int = field(default=None)
     

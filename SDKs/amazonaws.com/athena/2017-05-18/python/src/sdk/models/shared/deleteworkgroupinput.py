@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class DeleteWorkGroupInput:
-    recursive_delete_option: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RecursiveDeleteOption' }})
-    work_group: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WorkGroup' }})
+    work_group: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('WorkGroup') }})
+    recursive_delete_option: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RecursiveDeleteOption') }})
     

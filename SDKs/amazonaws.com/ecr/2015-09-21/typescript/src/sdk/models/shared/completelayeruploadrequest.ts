@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CompleteLayerUploadRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=layerDigests" })
+  @SpeakeasyMetadata({ data: "json, name=layerDigests" })
   layerDigests: string[];
 
-  @Metadata({ data: "json, name=registryId" })
+  @SpeakeasyMetadata({ data: "json, name=registryId" })
   registryId?: string;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName: string;
 
-  @Metadata({ data: "json, name=uploadId" })
+  @SpeakeasyMetadata({ data: "json, name=uploadId" })
   uploadId: string;
 }

@@ -8,6 +8,8 @@ const (
 	ModifyCourseWorkAssigneesRequestAssigneeModeEnumIndividualStudents      ModifyCourseWorkAssigneesRequestAssigneeModeEnum = "INDIVIDUAL_STUDENTS"
 )
 
+// ModifyCourseWorkAssigneesRequest
+// Request to modify assignee mode and options of a coursework.
 type ModifyCourseWorkAssigneesRequest struct {
 	AssigneeMode                    *ModifyCourseWorkAssigneesRequestAssigneeModeEnum `json:"assigneeMode,omitempty"`
 	ModifyIndividualStudentsOptions *ModifyIndividualStudentsOptions                  `json:"modifyIndividualStudentsOptions,omitempty"`

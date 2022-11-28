@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SegmentResponse } from "./segmentresponse";
 
 
+
 export class DeleteSegmentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SegmentResponse" })
+  @SpeakeasyMetadata({ data: "json, name=SegmentResponse" })
   segmentResponse: SegmentResponse;
 }

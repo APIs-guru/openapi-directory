@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TestInvokeAuthorizerPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=authorizerName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=authorizerName" })
   authorizerName: string;
 }
 
 
 export class TestInvokeAuthorizerHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,10 +38,10 @@ export class TestInvokeAuthorizerHeaders extends SpeakeasyBase {
  * Specifies the HTTP context to use for the test authorizer request.
 **/
 export class TestInvokeAuthorizerRequestBodyHttpContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=headers" })
+  @SpeakeasyMetadata({ data: "json, name=headers" })
   headers?: Map<string, string>;
 
-  @Metadata({ data: "json, name=queryString" })
+  @SpeakeasyMetadata({ data: "json, name=queryString" })
   queryString?: string;
 }
 
@@ -50,13 +51,13 @@ export class TestInvokeAuthorizerRequestBodyHttpContext extends SpeakeasyBase {
  * Specifies the MQTT context to use for the test authorizer request
 **/
 export class TestInvokeAuthorizerRequestBodyMqttContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }
 
@@ -66,69 +67,69 @@ export class TestInvokeAuthorizerRequestBodyMqttContext extends SpeakeasyBase {
  * Specifies the TLS context to use for the test authorizer request.
 **/
 export class TestInvokeAuthorizerRequestBodyTlsContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=serverName" })
+  @SpeakeasyMetadata({ data: "json, name=serverName" })
   serverName?: string;
 }
 
 
 export class TestInvokeAuthorizerRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=httpContext" })
+  @SpeakeasyMetadata({ data: "json, name=httpContext" })
   httpContext?: TestInvokeAuthorizerRequestBodyHttpContext;
 
-  @Metadata({ data: "json, name=mqttContext" })
+  @SpeakeasyMetadata({ data: "json, name=mqttContext" })
   mqttContext?: TestInvokeAuthorizerRequestBodyMqttContext;
 
-  @Metadata({ data: "json, name=tlsContext" })
+  @SpeakeasyMetadata({ data: "json, name=tlsContext" })
   tlsContext?: TestInvokeAuthorizerRequestBodyTlsContext;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token?: string;
 
-  @Metadata({ data: "json, name=tokenSignature" })
+  @SpeakeasyMetadata({ data: "json, name=tokenSignature" })
   tokenSignature?: string;
 }
 
 
 export class TestInvokeAuthorizerRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TestInvokeAuthorizerPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: TestInvokeAuthorizerHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: TestInvokeAuthorizerRequestBody;
 }
 
 
 export class TestInvokeAuthorizerResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidResponseException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   testInvokeAuthorizerResponse?: shared.TestInvokeAuthorizerResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 }

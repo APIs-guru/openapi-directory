@@ -1,5 +1,7 @@
 package shared
 
+// ItemPriceMarkdown
+// This type defines the fields used to describe an item price markdown promotion.
 type ItemPriceMarkdown struct {
 	ApplyFreeShipping                *bool                       `json:"applyFreeShipping,omitempty"`
 	AutoSelectFutureInventory        *bool                       `json:"autoSelectFutureInventory,omitempty"`

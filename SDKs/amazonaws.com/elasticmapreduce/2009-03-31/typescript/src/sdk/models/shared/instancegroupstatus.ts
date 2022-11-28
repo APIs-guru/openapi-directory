@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceGroupStateEnum } from "./instancegroupstateenum";
 import { InstanceGroupStateChangeReason } from "./instancegroupstatechangereason";
 import { InstanceGroupTimeline } from "./instancegrouptimeline";
+
 
 
 // InstanceGroupStatus
@@ -9,12 +10,12 @@ import { InstanceGroupTimeline } from "./instancegrouptimeline";
  * The details of the instance group status.
 **/
 export class InstanceGroupStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: InstanceGroupStateEnum;
 
-  @Metadata({ data: "json, name=StateChangeReason" })
+  @SpeakeasyMetadata({ data: "json, name=StateChangeReason" })
   stateChangeReason?: InstanceGroupStateChangeReason;
 
-  @Metadata({ data: "json, name=Timeline" })
+  @SpeakeasyMetadata({ data: "json, name=Timeline" })
   timeline?: InstanceGroupTimeline;
 }

@@ -8,6 +8,8 @@ const (
 	EventDefinitionVisibilityEnumHidden                     EventDefinitionVisibilityEnum = "HIDDEN"
 )
 
+// EventDefinition
+// An event definition resource.
 type EventDefinition struct {
 	ChildEvents       []EventChild                   `json:"childEvents,omitempty"`
 	Description       *string                        `json:"description,omitempty"`

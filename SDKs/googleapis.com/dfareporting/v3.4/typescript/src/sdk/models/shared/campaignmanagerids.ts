@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CampaignManagerIds
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Campaign Manager IDs related to the custom event.
 **/
 export class CampaignManagerIds extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adId" })
+  @SpeakeasyMetadata({ data: "json, name=adId" })
   adId?: string;
 
-  @Metadata({ data: "json, name=campaignId" })
+  @SpeakeasyMetadata({ data: "json, name=campaignId" })
   campaignId?: string;
 
-  @Metadata({ data: "json, name=creativeId" })
+  @SpeakeasyMetadata({ data: "json, name=creativeId" })
   creativeId?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=placementId" })
+  @SpeakeasyMetadata({ data: "json, name=placementId" })
   placementId?: string;
 
-  @Metadata({ data: "json, name=siteId" })
+  @SpeakeasyMetadata({ data: "json, name=siteId" })
   siteId?: string;
 }

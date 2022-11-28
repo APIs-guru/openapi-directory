@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiPostsDepartmentsTypePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=type" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=type" })
   type: number;
 }
 
 
 export class GetApiPostsDepartmentsTypeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetApiPostsDepartmentsTypePathParams;
 }
 
 
 export class GetApiPostsDepartmentsTypeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.GovernmentDepartment })
+  @SpeakeasyMetadata({ elemType: shared.GovernmentDepartment })
   governmentDepartments?: shared.GovernmentDepartment[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

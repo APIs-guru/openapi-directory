@@ -7,6 +7,8 @@ const (
 	ApplicationEnabledFeaturesEnumSnapshots                     ApplicationEnabledFeaturesEnum = "SNAPSHOTS"
 )
 
+// Application
+// The Application resource.
 type Application struct {
 	AchievementCount     *int32                           `json:"achievement_count,omitempty"`
 	Assets               []ImageAsset                     `json:"assets,omitempty"`

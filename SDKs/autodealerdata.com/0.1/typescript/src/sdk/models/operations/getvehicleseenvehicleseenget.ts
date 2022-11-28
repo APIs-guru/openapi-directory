@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetVehicleSeenVehicleSeenGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=afterDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=afterDate" })
   afterDate: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=jwt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" })
   jwt: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=vin" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vin" })
   vin: string;
 }
 
 
 export class GetVehicleSeenVehicleSeenGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetVehicleSeenVehicleSeenGetQueryParams;
 }
 
 
 export class GetVehicleSeenVehicleSeenGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   booleanResp?: shared.BooleanResp;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

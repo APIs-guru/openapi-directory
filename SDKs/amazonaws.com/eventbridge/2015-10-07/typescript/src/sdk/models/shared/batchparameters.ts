@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchArrayProperties } from "./batcharrayproperties";
 import { BatchRetryStrategy } from "./batchretrystrategy";
+
 
 
 // BatchParameters
@@ -8,15 +9,15 @@ import { BatchRetryStrategy } from "./batchretrystrategy";
  * The custom parameters to be used when the target is an Batch job.
 **/
 export class BatchParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ArrayProperties" })
+  @SpeakeasyMetadata({ data: "json, name=ArrayProperties" })
   arrayProperties?: BatchArrayProperties;
 
-  @Metadata({ data: "json, name=JobDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=JobDefinition" })
   jobDefinition: string;
 
-  @Metadata({ data: "json, name=JobName" })
+  @SpeakeasyMetadata({ data: "json, name=JobName" })
   jobName: string;
 
-  @Metadata({ data: "json, name=RetryStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=RetryStrategy" })
   retryStrategy?: BatchRetryStrategy;
 }

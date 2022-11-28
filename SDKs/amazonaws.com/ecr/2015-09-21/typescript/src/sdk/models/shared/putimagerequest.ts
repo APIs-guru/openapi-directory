@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutImageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageDigest" })
+  @SpeakeasyMetadata({ data: "json, name=imageDigest" })
   imageDigest?: string;
 
-  @Metadata({ data: "json, name=imageManifest" })
+  @SpeakeasyMetadata({ data: "json, name=imageManifest" })
   imageManifest: string;
 
-  @Metadata({ data: "json, name=imageManifestMediaType" })
+  @SpeakeasyMetadata({ data: "json, name=imageManifestMediaType" })
   imageManifestMediaType?: string;
 
-  @Metadata({ data: "json, name=imageTag" })
+  @SpeakeasyMetadata({ data: "json, name=imageTag" })
   imageTag?: string;
 
-  @Metadata({ data: "json, name=registryId" })
+  @SpeakeasyMetadata({ data: "json, name=registryId" })
   registryId?: string;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AppDevExperienceFeatureState } from "./appdevexperiencefeaturestate";
 import { FeatureState } from "./featurestate";
 /**
@@ -6,5 +6,6 @@ import { FeatureState } from "./featurestate";
 **/
 export declare class CommonFeatureState extends SpeakeasyBase {
     appdevexperience?: AppDevExperienceFeatureState;
+    fleetobservability?: Map<string, any>;
     state?: FeatureState;
 }

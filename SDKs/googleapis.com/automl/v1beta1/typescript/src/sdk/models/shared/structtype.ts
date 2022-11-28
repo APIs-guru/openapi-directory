@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataType } from "./datatype";
+
 
 
 // StructType
@@ -8,6 +8,6 @@ import { DataType } from "./datatype";
  * `StructType` defines the DataType-s of a STRUCT type.
 **/
 export class StructType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields", elemType: shared.DataType })
+  @SpeakeasyMetadata({ data: "json, name=fields", elemType: DataType })
   fields?: Map<string, DataType>;
 }

@@ -8,11 +8,6 @@ type PostDatabaseSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PostDatabaseRequest struct {
-	Request  shared.DatabaseRestAPIPost `request:"mediaType=application/json"`
-	Security PostDatabaseSecurity
-}
-
 type PostDatabase201ApplicationJSON struct {
 	ID     *float64                    `json:"id,omitempty"`
 	Result *shared.DatabaseRestAPIPost `json:"result,omitempty"`
@@ -32,6 +27,11 @@ type PostDatabase404ApplicationJSON struct {
 
 type PostDatabase500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PostDatabaseRequest struct {
+	Request  shared.DatabaseRestAPIPost `request:"mediaType=application/json"`
+	Security PostDatabaseSecurity
 }
 
 type PostDatabaseResponse struct {

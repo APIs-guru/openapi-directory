@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ForwardPaging } from "./forwardpaging";
 import { ExtensionActionDefinition } from "./extensionactiondefinition";
 export declare class CollectionResponseExtensionActionDefinitionForwardPaging extends SpeakeasyBase {

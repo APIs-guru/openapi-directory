@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Information about a CloudTrail trail, including the trail's name, home region, and Amazon Resource Name (ARN).
 **/

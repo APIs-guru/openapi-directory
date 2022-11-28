@@ -10,26 +10,18 @@ type DeleteNodeBalancerConfigNodePathParams struct {
 	NodeID         int64 `pathParam:"style=simple,explode=false,name=nodeId"`
 }
 
-type DeleteNodeBalancerConfigNodeSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type DeleteNodeBalancerConfigNodeSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type DeleteNodeBalancerConfigNodeSecurity struct {
-	Option1 *DeleteNodeBalancerConfigNodeSecurityOption1 `security:"option"`
-	Option2 *DeleteNodeBalancerConfigNodeSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type DeleteNodeBalancerConfigNodeDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteNodeBalancerConfigNodeRequest struct {
 	PathParams DeleteNodeBalancerConfigNodePathParams
 	Security   DeleteNodeBalancerConfigNodeSecurity
-}
-
-type DeleteNodeBalancerConfigNodeDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteNodeBalancerConfigNodeResponse struct {

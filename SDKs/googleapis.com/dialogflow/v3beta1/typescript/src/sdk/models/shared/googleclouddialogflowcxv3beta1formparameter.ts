@@ -1,5 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3beta1FormParameterFillBehavior } from "./googleclouddialogflowcxv3beta1formparameterfillbehavior";
+import { GoogleCloudDialogflowCxV3beta1FormParameterFillBehaviorInput } from "./googleclouddialogflowcxv3beta1formparameterfillbehavior";
+
 
 
 // GoogleCloudDialogflowCxV3beta1FormParameter
@@ -7,24 +9,52 @@ import { GoogleCloudDialogflowCxV3beta1FormParameterFillBehavior } from "./googl
  * Represents a form parameter.
 **/
 export class GoogleCloudDialogflowCxV3beta1FormParameter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultValue" })
+  @SpeakeasyMetadata({ data: "json, name=defaultValue" })
   defaultValue?: any;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=entityType" })
+  @SpeakeasyMetadata({ data: "json, name=entityType" })
   entityType?: string;
 
-  @Metadata({ data: "json, name=fillBehavior" })
+  @SpeakeasyMetadata({ data: "json, name=fillBehavior" })
   fillBehavior?: GoogleCloudDialogflowCxV3beta1FormParameterFillBehavior;
 
-  @Metadata({ data: "json, name=isList" })
+  @SpeakeasyMetadata({ data: "json, name=isList" })
   isList?: boolean;
 
-  @Metadata({ data: "json, name=redact" })
+  @SpeakeasyMetadata({ data: "json, name=redact" })
   redact?: boolean;
 
-  @Metadata({ data: "json, name=required" })
+  @SpeakeasyMetadata({ data: "json, name=required" })
+  required?: boolean;
+}
+
+
+// GoogleCloudDialogflowCxV3beta1FormParameterInput
+/** 
+ * Represents a form parameter.
+**/
+export class GoogleCloudDialogflowCxV3beta1FormParameterInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=defaultValue" })
+  defaultValue?: any;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=entityType" })
+  entityType?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=fillBehavior" })
+  fillBehavior?: GoogleCloudDialogflowCxV3beta1FormParameterFillBehaviorInput;
+
+  @SpeakeasyMetadata({ data: "json, name=isList" })
+  isList?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=redact" })
+  redact?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=required" })
   required?: boolean;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDataplexV1TaskInfrastructureSpecContainerImageRuntime
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Container Image Runtime Configuration used with Batch execution.
 **/
 export class GoogleCloudDataplexV1TaskInfrastructureSpecContainerImageRuntime extends SpeakeasyBase {
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: string;
 
-  @Metadata({ data: "json, name=javaJars" })
+  @SpeakeasyMetadata({ data: "json, name=javaJars" })
   javaJars?: string[];
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: Map<string, string>;
 
-  @Metadata({ data: "json, name=pythonPackages" })
+  @SpeakeasyMetadata({ data: "json, name=pythonPackages" })
   pythonPackages?: string[];
 }

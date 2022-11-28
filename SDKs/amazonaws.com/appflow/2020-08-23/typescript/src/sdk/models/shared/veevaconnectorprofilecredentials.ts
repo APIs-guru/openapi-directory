@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VeevaConnectorProfileCredentials
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The connector-specific profile credentials required when using Veeva. 
 **/
 export class VeevaConnectorProfileCredentials extends SpeakeasyBase {
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username: string;
 }

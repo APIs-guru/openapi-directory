@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TableMetadata
+// Contains metadata for a table.
 type TableMetadata struct {
 	Columns        []Column          `json:"Columns,omitempty"`
 	CreateTime     *time.Time        `json:"CreateTime,omitempty"`

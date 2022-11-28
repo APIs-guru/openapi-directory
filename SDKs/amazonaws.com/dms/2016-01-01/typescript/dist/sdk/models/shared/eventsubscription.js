@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // EventSubscription
 /**
  * Describes an event notification subscription created by the <code>CreateEventSubscription</code> operation.
@@ -33,39 +33,39 @@ var EventSubscription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CustSubscriptionId" }),
+        SpeakeasyMetadata({ data: "json, name=CustSubscriptionId" }),
         __metadata("design:type", String)
     ], EventSubscription.prototype, "custSubscriptionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=CustomerAwsId" }),
+        SpeakeasyMetadata({ data: "json, name=CustomerAwsId" }),
         __metadata("design:type", String)
     ], EventSubscription.prototype, "customerAwsId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Enabled" }),
+        SpeakeasyMetadata({ data: "json, name=Enabled" }),
         __metadata("design:type", Boolean)
     ], EventSubscription.prototype, "enabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventCategoriesList" }),
+        SpeakeasyMetadata({ data: "json, name=EventCategoriesList" }),
         __metadata("design:type", Array)
     ], EventSubscription.prototype, "eventCategoriesList", void 0);
     __decorate([
-        Metadata({ data: "json, name=SnsTopicArn" }),
+        SpeakeasyMetadata({ data: "json, name=SnsTopicArn" }),
         __metadata("design:type", String)
     ], EventSubscription.prototype, "snsTopicArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceIdsList" }),
+        SpeakeasyMetadata({ data: "json, name=SourceIdsList" }),
         __metadata("design:type", Array)
     ], EventSubscription.prototype, "sourceIdsList", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceType" }),
+        SpeakeasyMetadata({ data: "json, name=SourceType" }),
         __metadata("design:type", String)
     ], EventSubscription.prototype, "sourceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], EventSubscription.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubscriptionCreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=SubscriptionCreationTime" }),
         __metadata("design:type", String)
     ], EventSubscription.prototype, "subscriptionCreationTime", void 0);
     return EventSubscription;

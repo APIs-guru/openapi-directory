@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class DcimPowerPortsCreateRequest:
-    request: shared.WritablePowerPort = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WritablePowerPortInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DcimPowerPortsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     power_port: Optional[shared.PowerPort] = field(default=None)
-    status_code: int = field(default=None)
     

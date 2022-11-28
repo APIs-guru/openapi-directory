@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Error } from "./error";
 import { Status } from "./status";
 export declare enum ExecutionCallLogLevelEnum {
@@ -27,4 +27,13 @@ export declare class Execution extends SpeakeasyBase {
     state?: ExecutionStateEnum;
     status?: Status;
     workflowRevisionId?: string;
+}
+/**
+ * A running instance of a [Workflow](/workflows/docs/reference/rest/v1beta/projects.locations.workflows).
+**/
+export declare class ExecutionInput extends SpeakeasyBase {
+    argument?: string;
+    callLogLevel?: ExecutionCallLogLevelEnum;
+    error?: Error;
+    status?: Status;
 }

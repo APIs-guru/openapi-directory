@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { RxNormEntity } from "./rxnormentity";
 var InferRxNormResponse = /** @class */ (function (_super) {
     __extends(InferRxNormResponse, _super);
     function InferRxNormResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Entities", elemType: shared.RxNormEntity }),
+        SpeakeasyMetadata({ data: "json, name=Entities", elemType: RxNormEntity }),
         __metadata("design:type", Array)
     ], InferRxNormResponse.prototype, "entities", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModelVersion" }),
+        SpeakeasyMetadata({ data: "json, name=ModelVersion" }),
         __metadata("design:type", String)
     ], InferRxNormResponse.prototype, "modelVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=PaginationToken" }),
+        SpeakeasyMetadata({ data: "json, name=PaginationToken" }),
         __metadata("design:type", String)
     ], InferRxNormResponse.prototype, "paginationToken", void 0);
     return InferRxNormResponse;

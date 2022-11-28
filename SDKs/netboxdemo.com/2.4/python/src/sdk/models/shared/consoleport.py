@@ -1,17 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import nestedconsoleserverport
-from . import nesteddevice
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ConsolePort:
-    connection_status: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_status' }})
-    cs_port: Optional[nestedconsoleserverport.NestedConsoleServerPort] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cs_port' }})
-    device: nesteddevice.NestedDevice = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    device: NestedDevice = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('device') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    connection_status: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connection_status') }})
+    cs_port: Optional[NestedConsoleServerPort] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cs_port') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ThirdPartyURLTypeEnum(str, Enum):
     THIRD_PARTY_URL_TYPE_UNSPECIFIED = "THIRD_PARTY_URL_TYPE_UNSPECIFIED"
@@ -24,6 +26,10 @@ class ThirdPartyURLTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ThirdPartyURL:
-    type: Optional[ThirdPartyURLTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    r"""ThirdPartyURL
+    Tracking URLs from third parties to track interactions with an audio or a video creative.
+    """
+    
+    type: Optional[ThirdPartyURLTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     

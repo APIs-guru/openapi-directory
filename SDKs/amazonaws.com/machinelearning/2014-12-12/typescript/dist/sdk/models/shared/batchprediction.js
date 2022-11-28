@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntityStatusEnum } from "./entitystatusenum";
 // BatchPrediction
 /**
@@ -34,67 +34,67 @@ var BatchPrediction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BatchPredictionDataSourceId" }),
+        SpeakeasyMetadata({ data: "json, name=BatchPredictionDataSourceId" }),
         __metadata("design:type", String)
     ], BatchPrediction.prototype, "batchPredictionDataSourceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=BatchPredictionId" }),
+        SpeakeasyMetadata({ data: "json, name=BatchPredictionId" }),
         __metadata("design:type", String)
     ], BatchPrediction.prototype, "batchPredictionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ComputeTime" }),
+        SpeakeasyMetadata({ data: "json, name=ComputeTime" }),
         __metadata("design:type", Number)
     ], BatchPrediction.prototype, "computeTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedAt" }),
         __metadata("design:type", Date)
     ], BatchPrediction.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedByIamUser" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedByIamUser" }),
         __metadata("design:type", String)
     ], BatchPrediction.prototype, "createdByIamUser", void 0);
     __decorate([
-        Metadata({ data: "json, name=FinishedAt" }),
+        SpeakeasyMetadata({ data: "json, name=FinishedAt" }),
         __metadata("design:type", Date)
     ], BatchPrediction.prototype, "finishedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=InputDataLocationS3" }),
+        SpeakeasyMetadata({ data: "json, name=InputDataLocationS3" }),
         __metadata("design:type", String)
     ], BatchPrediction.prototype, "inputDataLocationS3", void 0);
     __decorate([
-        Metadata({ data: "json, name=InvalidRecordCount" }),
+        SpeakeasyMetadata({ data: "json, name=InvalidRecordCount" }),
         __metadata("design:type", Number)
     ], BatchPrediction.prototype, "invalidRecordCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastUpdatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=LastUpdatedAt" }),
         __metadata("design:type", Date)
     ], BatchPrediction.prototype, "lastUpdatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=MLModelId" }),
+        SpeakeasyMetadata({ data: "json, name=MLModelId" }),
         __metadata("design:type", String)
     ], BatchPrediction.prototype, "mlModelId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Message" }),
+        SpeakeasyMetadata({ data: "json, name=Message" }),
         __metadata("design:type", String)
     ], BatchPrediction.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], BatchPrediction.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=OutputUri" }),
+        SpeakeasyMetadata({ data: "json, name=OutputUri" }),
         __metadata("design:type", String)
     ], BatchPrediction.prototype, "outputUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartedAt" }),
+        SpeakeasyMetadata({ data: "json, name=StartedAt" }),
         __metadata("design:type", Date)
     ], BatchPrediction.prototype, "startedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], BatchPrediction.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=TotalRecordCount" }),
+        SpeakeasyMetadata({ data: "json, name=TotalRecordCount" }),
         __metadata("design:type", Number)
     ], BatchPrediction.prototype, "totalRecordCount", void 0);
     return BatchPrediction;

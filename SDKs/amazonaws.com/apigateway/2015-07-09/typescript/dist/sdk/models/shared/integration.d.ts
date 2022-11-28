@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionTypeEnum } from "./connectiontypeenum";
 import { ContentHandlingStrategyEnum } from "./contenthandlingstrategyenum";
 import { IntegrationResponse } from "./integrationresponse";

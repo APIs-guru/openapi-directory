@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VersionInformation
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a version.
 **/
 export class VersionInformation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=CreationTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTimestamp" })
   creationTimestamp?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: string;
 }

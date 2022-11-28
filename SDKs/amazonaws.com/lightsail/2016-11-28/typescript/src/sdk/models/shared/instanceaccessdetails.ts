@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HostKeyAttributes } from "./hostkeyattributes";
 import { PasswordData } from "./passworddata";
 import { InstanceAccessProtocolEnum } from "./instanceaccessprotocolenum";
+
 
 
 // InstanceAccessDetails
@@ -10,33 +10,33 @@ import { InstanceAccessProtocolEnum } from "./instanceaccessprotocolenum";
  * The parameters for gaining temporary access to one of your Amazon Lightsail instances.
 **/
 export class InstanceAccessDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certKey" })
+  @SpeakeasyMetadata({ data: "json, name=certKey" })
   certKey?: string;
 
-  @Metadata({ data: "json, name=expiresAt" })
+  @SpeakeasyMetadata({ data: "json, name=expiresAt" })
   expiresAt?: Date;
 
-  @Metadata({ data: "json, name=hostKeys", elemType: shared.HostKeyAttributes })
+  @SpeakeasyMetadata({ data: "json, name=hostKeys", elemType: HostKeyAttributes })
   hostKeys?: HostKeyAttributes[];
 
-  @Metadata({ data: "json, name=instanceName" })
+  @SpeakeasyMetadata({ data: "json, name=instanceName" })
   instanceName?: string;
 
-  @Metadata({ data: "json, name=ipAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=passwordData" })
+  @SpeakeasyMetadata({ data: "json, name=passwordData" })
   passwordData?: PasswordData;
 
-  @Metadata({ data: "json, name=privateKey" })
+  @SpeakeasyMetadata({ data: "json, name=privateKey" })
   privateKey?: string;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol?: InstanceAccessProtocolEnum;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }

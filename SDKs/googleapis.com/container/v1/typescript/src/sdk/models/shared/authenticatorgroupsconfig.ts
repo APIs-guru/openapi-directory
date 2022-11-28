@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AuthenticatorGroupsConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for returning group information from authenticators.
 **/
 export class AuthenticatorGroupsConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=securityGroup" })
+  @SpeakeasyMetadata({ data: "json, name=securityGroup" })
   securityGroup?: string;
 }

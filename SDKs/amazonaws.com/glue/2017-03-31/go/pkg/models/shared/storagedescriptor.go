@@ -1,5 +1,7 @@
 package shared
 
+// StorageDescriptor
+// Describes the physical storage of table data.
 type StorageDescriptor struct {
 	BucketColumns          []string          `json:"BucketColumns,omitempty"`
 	Columns                []Column          `json:"Columns,omitempty"`

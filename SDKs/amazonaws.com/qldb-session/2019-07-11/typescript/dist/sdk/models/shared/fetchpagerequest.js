@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // FetchPageRequest
 /**
  * Specifies the details of the page to be fetched.
@@ -33,11 +33,11 @@ var FetchPageRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=NextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextPageToken" }),
         __metadata("design:type", String)
     ], FetchPageRequest.prototype, "nextPageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=TransactionId" }),
+        SpeakeasyMetadata({ data: "json, name=TransactionId" }),
         __metadata("design:type", String)
     ], FetchPageRequest.prototype, "transactionId", void 0);
     return FetchPageRequest;

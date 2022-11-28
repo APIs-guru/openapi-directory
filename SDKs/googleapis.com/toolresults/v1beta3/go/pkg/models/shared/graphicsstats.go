@@ -1,5 +1,7 @@
 package shared
 
+// GraphicsStats
+// Graphics statistics for the App. The information is collected from 'adb shell dumpsys graphicsstats'. For more info see: https://developer.android.com/training/testing/performance.html Statistics will only be present for API 23+.
 type GraphicsStats struct {
 	Buckets               []GraphicsStatsBucket `json:"buckets,omitempty"`
 	HighInputLatencyCount *string               `json:"highInputLatencyCount,omitempty"`

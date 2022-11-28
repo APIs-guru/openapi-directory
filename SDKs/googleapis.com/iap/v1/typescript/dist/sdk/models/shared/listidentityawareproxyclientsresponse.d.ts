@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { IdentityAwareProxyClient } from "./identityawareproxyclient";
 /**
  * Response message for ListIdentityAwareProxyClients.

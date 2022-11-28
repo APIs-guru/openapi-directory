@@ -1,5 +1,7 @@
 package shared
 
+// Collection
+// The collection message.
 type Collection struct {
 	CustomLabel0    *string                     `json:"customLabel0,omitempty"`
 	CustomLabel1    *string                     `json:"customLabel1,omitempty"`

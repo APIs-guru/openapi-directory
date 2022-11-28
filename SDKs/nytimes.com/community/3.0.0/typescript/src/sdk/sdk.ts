@@ -1,15 +1,13 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "http://api.nytimes.com/svc/community/v3",
+export const ServerList = [
+	"http://api.nytimes.com/svc/community/v3",
 ] as const;
 
 export function WithServerURL(
@@ -20,47 +18,47 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
-// SDK Documentation: http://developer.nytimes.com/
+/* SDK Documentation: http://developer.nytimes.com/*/
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // GetUserContentByDateJson - Comments by Date
-  GetUserContentByDateJson(
+  /**
+   * getUserContentByDateJson - Comments by Date
+  **/
+  getUserContentByDateJson(
     req: operations.GetUserContentByDateJsonRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUserContentByDateJsonResponse> {
@@ -68,11 +66,12 @@ export class SDK {
       req = new operations.GetUserContentByDateJsonRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/user-content/by-date.json";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -81,17 +80,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUserContentByDateJsonResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetUserContentByDateJsonResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getUserContentByDateJson200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -103,8 +103,10 @@ export class SDK {
   }
 
   
-  // GetUserContentRecentJson - Recent User Comments
-  GetUserContentRecentJson(
+  /**
+   * getUserContentRecentJson - Recent User Comments
+  **/
+  getUserContentRecentJson(
     req: operations.GetUserContentRecentJsonRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUserContentRecentJsonResponse> {
@@ -112,22 +114,24 @@ export class SDK {
       req = new operations.GetUserContentRecentJsonRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/user-content/recent.json";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUserContentRecentJsonResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetUserContentRecentJsonResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getUserContentRecentJson200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -139,8 +143,10 @@ export class SDK {
   }
 
   
-  // GetUserContentUrlJson - Comments by URL
-  GetUserContentUrlJson(
+  /**
+   * getUserContentUrlJson - Comments by URL
+  **/
+  getUserContentUrlJson(
     req: operations.GetUserContentUrlJsonRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUserContentUrlJsonResponse> {
@@ -148,11 +154,12 @@ export class SDK {
       req = new operations.GetUserContentUrlJsonRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/user-content/url.json";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -161,17 +168,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUserContentUrlJsonResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetUserContentUrlJsonResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getUserContentUrlJson200ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -183,8 +191,10 @@ export class SDK {
   }
 
   
-  // GetUserContentUserJson - Comments by User
-  GetUserContentUserJson(
+  /**
+   * getUserContentUserJson - Comments by User
+  **/
+  getUserContentUserJson(
     req: operations.GetUserContentUserJsonRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetUserContentUserJsonResponse> {
@@ -192,11 +202,12 @@ export class SDK {
       req = new operations.GetUserContentUserJsonRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/user-content/user.json";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -205,17 +216,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetUserContentUserJsonResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetUserContentUserJsonResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getUserContentUserJson200ApplicationJsonObject = httpRes?.data;
             }
             break;

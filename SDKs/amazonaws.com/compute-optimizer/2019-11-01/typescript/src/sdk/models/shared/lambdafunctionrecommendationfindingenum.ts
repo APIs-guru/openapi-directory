@@ -1,7 +1,8 @@
 
 
+
 export enum LambdaFunctionRecommendationFindingEnum {
-    Optimized = "Optimized"
-,    NotOptimized = "NotOptimized"
-,    Unavailable = "Unavailable"
+    Optimized = "Optimized",
+    NotOptimized = "NotOptimized",
+    Unavailable = "Unavailable"
 }

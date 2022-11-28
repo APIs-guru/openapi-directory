@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CandidateSortByEnum } from "./candidatesortbyenum";
 import { AutoMlSortOrderEnum } from "./automlsortorderenum";
 import { CandidateStatusEnum } from "./candidatestatusenum";
 
 
+
 export class ListCandidatesForAutoMlJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoMLJobName" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMLJobName" })
   autoMlJobName: string;
 
-  @Metadata({ data: "json, name=CandidateNameEquals" })
+  @SpeakeasyMetadata({ data: "json, name=CandidateNameEquals" })
   candidateNameEquals?: string;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=SortBy" })
+  @SpeakeasyMetadata({ data: "json, name=SortBy" })
   sortBy?: CandidateSortByEnum;
 
-  @Metadata({ data: "json, name=SortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=SortOrder" })
   sortOrder?: AutoMlSortOrderEnum;
 
-  @Metadata({ data: "json, name=StatusEquals" })
+  @SpeakeasyMetadata({ data: "json, name=StatusEquals" })
   statusEquals?: CandidateStatusEnum;
 }

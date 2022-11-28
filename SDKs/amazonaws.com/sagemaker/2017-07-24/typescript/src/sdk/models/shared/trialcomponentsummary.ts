@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { UserContext } from "./usercontext";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserContext } from "./usercontext";
 import { TrialComponentStatus } from "./trialcomponentstatus";
 import { TrialComponentSource } from "./trialcomponentsource";
+
 
 
 // TrialComponentSummary
@@ -10,36 +10,36 @@ import { TrialComponentSource } from "./trialcomponentsource";
  * A summary of the properties of a trial component. To get all the properties, call the <a>DescribeTrialComponent</a> API and provide the <code>TrialComponentName</code>.
 **/
 export class TrialComponentSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedBy" })
   createdBy?: UserContext;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=DisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=LastModifiedBy" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedBy" })
   lastModifiedBy?: UserContext;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: TrialComponentStatus;
 
-  @Metadata({ data: "json, name=TrialComponentArn" })
+  @SpeakeasyMetadata({ data: "json, name=TrialComponentArn" })
   trialComponentArn?: string;
 
-  @Metadata({ data: "json, name=TrialComponentName" })
+  @SpeakeasyMetadata({ data: "json, name=TrialComponentName" })
   trialComponentName?: string;
 
-  @Metadata({ data: "json, name=TrialComponentSource" })
+  @SpeakeasyMetadata({ data: "json, name=TrialComponentSource" })
   trialComponentSource?: TrialComponentSource;
 }

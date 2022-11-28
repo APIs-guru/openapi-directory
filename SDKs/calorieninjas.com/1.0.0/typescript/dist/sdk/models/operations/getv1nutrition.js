@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetV1NutritionQueryParams = /** @class */ (function (_super) {
     __extends(GetV1NutritionQueryParams, _super);
     function GetV1NutritionQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=query" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" }),
         __metadata("design:type", String)
     ], GetV1NutritionQueryParams.prototype, "query", void 0);
     return GetV1NutritionQueryParams;
@@ -41,7 +41,7 @@ var GetV1NutritionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV1NutritionQueryParams)
     ], GetV1NutritionRequest.prototype, "queryParams", void 0);
     return GetV1NutritionRequest;
@@ -53,11 +53,11 @@ var GetV1NutritionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetV1NutritionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetV1NutritionResponse.prototype, "statusCode", void 0);
     return GetV1NutritionResponse;

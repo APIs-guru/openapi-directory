@@ -1,62 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateStackScriptPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=stackscriptId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=stackscriptId" })
   stackscriptId: string;
 }
 
 
-export class UpdateStackScriptSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class UpdateStackScriptSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class UpdateStackScriptSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: UpdateStackScriptSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: UpdateStackScriptSecurityOption2;
-}
-
-
-export class UpdateStackScriptRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdateStackScriptPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: shared.StackScript;
-
-  @Metadata()
-  security: UpdateStackScriptSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class UpdateStackScriptDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class UpdateStackScriptRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdateStackScriptPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: shared.StackScriptInput;
+
+  @SpeakeasyMetadata()
+  security: UpdateStackScriptSecurity;
+}
+
+
 export class UpdateStackScriptResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   stackScript?: shared.StackScript;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateStackScriptDefaultApplicationJsonObject?: UpdateStackScriptDefaultApplicationJson;
 }

@@ -5,16 +5,16 @@ type DeleteAnAPIVersionPathParams struct {
 	APIVersionID string `pathParam:"style=simple,explode=false,name=apiVersionId"`
 }
 
-type DeleteAnAPIVersionRequest struct {
-	PathParams DeleteAnAPIVersionPathParams
-}
-
 type DeleteAnAPIVersion200ApplicationJSONVersion struct {
 	ID *string `json:"id,omitempty"`
 }
 
 type DeleteAnAPIVersion200ApplicationJSON struct {
 	Version *DeleteAnAPIVersion200ApplicationJSONVersion `json:"version,omitempty"`
+}
+
+type DeleteAnAPIVersionRequest struct {
+	PathParams DeleteAnAPIVersionPathParams
 }
 
 type DeleteAnAPIVersionResponse struct {

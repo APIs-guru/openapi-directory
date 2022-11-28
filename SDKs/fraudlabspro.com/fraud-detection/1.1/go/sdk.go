@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.fraudlabspro.com",
 	"https://virtserver.swaggerhub.com/fraudlabspro/fraudlabspro/1.0",
 }
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -33,27 +37,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// PostV1OrderFeedback - Feedback the status of an order transaction.
 func (s *SDK) PostV1OrderFeedback(ctx context.Context, request operations.PostV1OrderFeedbackRequest) (*operations.PostV1OrderFeedbackResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/order/feedback"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -63,7 +85,7 @@ func (s *SDK) PostV1OrderFeedback(ctx context.Context, request operations.PostV1
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -94,8 +116,9 @@ func (s *SDK) PostV1OrderFeedback(ctx context.Context, request operations.PostV1
 	return res, nil
 }
 
+// PostV1OrderScreen - Screen order for payment fraud.
 func (s *SDK) PostV1OrderScreen(ctx context.Context, request operations.PostV1OrderScreenRequest) (*operations.PostV1OrderScreenResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/order/screen"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -105,7 +128,7 @@ func (s *SDK) PostV1OrderScreen(ctx context.Context, request operations.PostV1Or
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

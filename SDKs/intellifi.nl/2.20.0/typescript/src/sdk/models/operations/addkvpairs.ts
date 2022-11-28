@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AddKvPairsRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.KeyValuePair;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.KeyValuePairInput;
 }
 
 
 export class AddKvPairsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   responseDefaultResource?: shared.ResponseDefaultResource;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

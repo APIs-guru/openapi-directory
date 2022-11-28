@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreditEstimate } from "./creditestimate";
 import { Money } from "./money";
-import { Money } from "./money";
+
 
 
 // CostEstimate
@@ -10,12 +9,12 @@ import { Money } from "./money";
  * An estimated cost.
 **/
 export class CostEstimate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creditEstimates", elemType: shared.CreditEstimate })
+  @SpeakeasyMetadata({ data: "json, name=creditEstimates", elemType: CreditEstimate })
   creditEstimates?: CreditEstimate[];
 
-  @Metadata({ data: "json, name=netCostEstimate" })
+  @SpeakeasyMetadata({ data: "json, name=netCostEstimate" })
   netCostEstimate?: Money;
 
-  @Metadata({ data: "json, name=preCreditCostEstimate" })
+  @SpeakeasyMetadata({ data: "json, name=preCreditCostEstimate" })
   preCreditCostEstimate?: Money;
 }

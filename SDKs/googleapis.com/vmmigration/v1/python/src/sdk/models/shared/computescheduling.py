@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import schedulingnodeaffinity
+from sdk import utils
+from . import *
 
 class ComputeSchedulingOnHostMaintenanceEnum(str, Enum):
     ON_HOST_MAINTENANCE_UNSPECIFIED = "ON_HOST_MAINTENANCE_UNSPECIFIED"
@@ -17,8 +19,12 @@ class ComputeSchedulingRestartTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ComputeScheduling:
-    min_node_cpus: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minNodeCpus' }})
-    node_affinities: Optional[List[schedulingnodeaffinity.SchedulingNodeAffinity]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nodeAffinities' }})
-    on_host_maintenance: Optional[ComputeSchedulingOnHostMaintenanceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'onHostMaintenance' }})
-    restart_type: Optional[ComputeSchedulingRestartTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'restartType' }})
+    r"""ComputeScheduling
+    Scheduling information for VM on maintenance/restart behaviour and node allocation in sole tenant nodes.
+    """
+    
+    min_node_cpus: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minNodeCpus') }})
+    node_affinities: Optional[List[SchedulingNodeAffinity]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nodeAffinities') }})
+    on_host_maintenance: Optional[ComputeSchedulingOnHostMaintenanceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('onHostMaintenance') }})
+    restart_type: Optional[ComputeSchedulingRestartTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('restartType') }})
     

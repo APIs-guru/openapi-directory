@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RoleAliasDescription
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Role alias description.
 **/
 export class RoleAliasDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=credentialDurationSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=credentialDurationSeconds" })
   credentialDurationSeconds?: number;
 
-  @Metadata({ data: "json, name=lastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedDate" })
   lastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=roleAlias" })
+  @SpeakeasyMetadata({ data: "json, name=roleAlias" })
   roleAlias?: string;
 
-  @Metadata({ data: "json, name=roleAliasArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleAliasArn" })
   roleAliasArn?: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 }

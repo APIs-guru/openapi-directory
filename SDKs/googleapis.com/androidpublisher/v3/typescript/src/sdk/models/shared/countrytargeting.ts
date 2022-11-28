@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CountryTargeting
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Country targeting specification.
 **/
 export class CountryTargeting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=countries" })
+  @SpeakeasyMetadata({ data: "json, name=countries" })
   countries?: string[];
 
-  @Metadata({ data: "json, name=includeRestOfWorld" })
+  @SpeakeasyMetadata({ data: "json, name=includeRestOfWorld" })
   includeRestOfWorld?: boolean;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GalleryReference } from "./galleryreference";
+
 
 
 // CustomTemplate
@@ -7,33 +8,33 @@ import { GalleryReference } from "./galleryreference";
  * Represents a Google Tag Manager Custom Template's contents.
 **/
 export class CustomTemplate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=containerId" })
+  @SpeakeasyMetadata({ data: "json, name=containerId" })
   containerId?: string;
 
-  @Metadata({ data: "json, name=fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=fingerprint" })
   fingerprint?: string;
 
-  @Metadata({ data: "json, name=galleryReference" })
+  @SpeakeasyMetadata({ data: "json, name=galleryReference" })
   galleryReference?: GalleryReference;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=tagManagerUrl" })
+  @SpeakeasyMetadata({ data: "json, name=tagManagerUrl" })
   tagManagerUrl?: string;
 
-  @Metadata({ data: "json, name=templateData" })
+  @SpeakeasyMetadata({ data: "json, name=templateData" })
   templateData?: string;
 
-  @Metadata({ data: "json, name=templateId" })
+  @SpeakeasyMetadata({ data: "json, name=templateId" })
   templateId?: string;
 
-  @Metadata({ data: "json, name=workspaceId" })
+  @SpeakeasyMetadata({ data: "json, name=workspaceId" })
   workspaceId?: string;
 }

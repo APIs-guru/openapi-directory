@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SsmTargetAccountEnum } from "./ssmtargetaccountenum";
 /**
  * Details about the Systems Manager automation document that will be used as a runbook during an incident.

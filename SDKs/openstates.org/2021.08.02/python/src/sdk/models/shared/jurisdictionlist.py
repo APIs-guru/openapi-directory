@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import paginationmeta
-from . import jurisdiction
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class JurisdictionList:
-    pagination: paginationmeta.PaginationMeta = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagination' }})
-    results: List[jurisdiction.Jurisdiction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    pagination: PaginationMeta = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pagination') }})
+    results: List[Jurisdiction] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
     

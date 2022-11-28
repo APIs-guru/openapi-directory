@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FirewallRuleGroupMetadata } from "./firewallrulegroupmetadata";
 
 
+
 export class ListFirewallRuleGroupsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FirewallRuleGroups", elemType: shared.FirewallRuleGroupMetadata })
+  @SpeakeasyMetadata({ data: "json, name=FirewallRuleGroups", elemType: FirewallRuleGroupMetadata })
   firewallRuleGroups?: FirewallRuleGroupMetadata[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

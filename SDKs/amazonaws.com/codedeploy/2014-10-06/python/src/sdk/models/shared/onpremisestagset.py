@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import tagfilter
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class OnPremisesTagSet:
-    on_premises_tag_set_list: Optional[List[List[tagfilter.TagFilter]]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'onPremisesTagSetList' }})
+    r"""OnPremisesTagSet
+    Information about groups of on-premises instance tags.
+    """
+    
+    on_premises_tag_set_list: Optional[List[List[TagFilter]]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('onPremisesTagSetList') }})
     

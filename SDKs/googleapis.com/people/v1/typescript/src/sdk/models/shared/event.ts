@@ -1,6 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Date } from "./date";
 import { FieldMetadata } from "./fieldmetadata";
+import { FieldMetadataInput } from "./fieldmetadata";
+
 
 
 // Event
@@ -8,15 +10,31 @@ import { FieldMetadata } from "./fieldmetadata";
  * An event related to the person.
 **/
 export class Event extends SpeakeasyBase {
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=formattedType" })
+  @SpeakeasyMetadata({ data: "json, name=formattedType" })
   formattedType?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: FieldMetadata;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: string;
+}
+
+
+// EventInput
+/** 
+ * An event related to the person.
+**/
+export class EventInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=date" })
+  date?: Date;
+
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
+  metadata?: FieldMetadataInput;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

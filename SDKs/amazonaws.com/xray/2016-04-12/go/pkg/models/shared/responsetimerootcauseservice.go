@@ -1,5 +1,7 @@
 package shared
 
+// ResponseTimeRootCauseService
+// A collection of fields identifying the service in a response time warning.
 type ResponseTimeRootCauseService struct {
 	AccountID  *string                       `json:"AccountId,omitempty"`
 	EntityPath []ResponseTimeRootCauseEntity `json:"EntityPath,omitempty"`

@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class ActivityListOrgEventsForAuthenticatedUserPathParams:
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
-    username: str = field(default=None, metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    username: str = field(metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +17,13 @@ class ActivityListOrgEventsForAuthenticatedUserQueryParams:
 
 @dataclass
 class ActivityListOrgEventsForAuthenticatedUserRequest:
-    path_params: ActivityListOrgEventsForAuthenticatedUserPathParams = field(default=None)
-    query_params: ActivityListOrgEventsForAuthenticatedUserQueryParams = field(default=None)
+    path_params: ActivityListOrgEventsForAuthenticatedUserPathParams = field()
+    query_params: ActivityListOrgEventsForAuthenticatedUserQueryParams = field()
     
 
 @dataclass
 class ActivityListOrgEventsForAuthenticatedUserResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     events: Optional[List[shared.Event]] = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MonitoringGroundTruthS3Input
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The ground truth labels for the dataset used for the monitoring job.
 **/
 export class MonitoringGroundTruthS3Input extends SpeakeasyBase {
-  @Metadata({ data: "json, name=S3Uri" })
+  @SpeakeasyMetadata({ data: "json, name=S3Uri" })
   s3Uri?: string;
 }

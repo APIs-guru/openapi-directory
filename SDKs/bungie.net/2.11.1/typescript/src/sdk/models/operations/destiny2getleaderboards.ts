@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Destiny2GetLeaderboardsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" })
   destinyMembershipId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=membershipType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipType" })
   membershipType: number;
 }
 
 
 export class Destiny2GetLeaderboardsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxtop" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxtop" })
   maxtop?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=modes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modes" })
   modes?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=statid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=statid" })
   statid?: string;
 }
 
 
 export class Destiny2GetLeaderboardsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: Destiny2GetLeaderboardsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: Destiny2GetLeaderboardsQueryParams;
 }
 
 
 export class Destiny2GetLeaderboardsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

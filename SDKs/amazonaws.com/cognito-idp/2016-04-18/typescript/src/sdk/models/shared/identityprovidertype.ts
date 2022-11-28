@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IdentityProviderTypeTypeEnum } from "./identityprovidertypetypeenum";
+
 
 
 // IdentityProviderType
@@ -7,27 +8,27 @@ import { IdentityProviderTypeTypeEnum } from "./identityprovidertypetypeenum";
  * A container for information about an identity provider.
 **/
 export class IdentityProviderType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributeMapping" })
+  @SpeakeasyMetadata({ data: "json, name=AttributeMapping" })
   attributeMapping?: Map<string, string>;
 
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=IdpIdentifiers" })
+  @SpeakeasyMetadata({ data: "json, name=IdpIdentifiers" })
   idpIdentifiers?: string[];
 
-  @Metadata({ data: "json, name=LastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedDate" })
   lastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=ProviderDetails" })
+  @SpeakeasyMetadata({ data: "json, name=ProviderDetails" })
   providerDetails?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ProviderName" })
+  @SpeakeasyMetadata({ data: "json, name=ProviderName" })
   providerName?: string;
 
-  @Metadata({ data: "json, name=ProviderType" })
+  @SpeakeasyMetadata({ data: "json, name=ProviderType" })
   providerType?: IdentityProviderTypeTypeEnum;
 
-  @Metadata({ data: "json, name=UserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolId" })
   userPoolId?: string;
 }

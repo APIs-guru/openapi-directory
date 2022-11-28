@@ -1,14 +1,20 @@
 package shared
 
+// Activity31MetadataConnectionsRelated
+// Related content for this activity.
 type Activity31MetadataConnectionsRelated struct {
 	Options []string `json:"options"`
 	URI     string   `json:"uri"`
 }
 
+// Activity31MetadataConnections
+// A list of resource URIs related to the activity.
 type Activity31MetadataConnections struct {
 	Related Activity31MetadataConnectionsRelated `json:"related"`
 }
 
+// Activity31Metadata
+// The activity's metadata.
 type Activity31Metadata struct {
 	Connections Activity31MetadataConnections `json:"connections"`
 }

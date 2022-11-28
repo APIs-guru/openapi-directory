@@ -1,6 +1,7 @@
 
 
+
 export enum PosixPermissionsEnum {
-    None = "NONE"
-,    Preserve = "PRESERVE"
+    None = "NONE",
+    Preserve = "PRESERVE"
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UntagServiceInventoryPathParams = /** @class */ (function (_super) {
     __extends(UntagServiceInventoryPathParams, _super);
@@ -30,7 +30,7 @@ var UntagServiceInventoryPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], UntagServiceInventoryPathParams.prototype, "id", void 0);
     return UntagServiceInventoryPathParams;
@@ -42,11 +42,11 @@ var UntagServiceInventoryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UntagServiceInventoryPathParams)
     ], UntagServiceInventoryRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.Tag }),
         __metadata("design:type", Array)
     ], UntagServiceInventoryRequest.prototype, "request", void 0);
     return UntagServiceInventoryRequest;
@@ -58,11 +58,11 @@ var UntagServiceInventoryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UntagServiceInventoryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UntagServiceInventoryResponse.prototype, "statusCode", void 0);
     return UntagServiceInventoryResponse;

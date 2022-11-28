@@ -1,0 +1,141 @@
+# openapi
+
+<!-- Start SDK Installation -->
+## SDK Installation
+
+```bash
+go get openapi
+```
+<!-- End SDK Installation -->
+
+<!-- Start SDK Example Usage -->
+## SDK Example Usage
+
+```go
+package main
+
+import (
+    "openapi"
+    "openapi/pkg/models/shared"
+    "openapi/pkg/models/operations"
+)
+
+func main() {
+    s := sdk.New()
+    
+    req := operations.IamPoliciesCreatePolicyRequest{
+        Security: operations.IamPoliciesCreatePolicySecurity{
+            Oauth2: shared.SchemeOauth2{
+                Authorization: "Bearer YOUR_ACCESS_TOKEN_HERE",
+            }
+            Oauth2c: shared.SchemeOauth2c{
+                Authorization: "Bearer YOUR_ACCESS_TOKEN_HERE",
+            },
+        },
+        PathParams: operations.IamPoliciesCreatePolicyPathParams{
+            Parent: "ut",
+        },
+        QueryParams: operations.IamPoliciesCreatePolicyQueryParams{
+            DollarXgafv: "2",
+            AccessToken: "cum",
+            Alt: "proto",
+            Callback: "debitis",
+            Fields: "fugiat",
+            Key: "dolor",
+            OauthToken: "in",
+            PolicyID: "in",
+            PrettyPrint: true,
+            QuotaUser: "vel",
+            UploadType: "aperiam",
+            UploadProtocol: "deleniti",
+        },
+        Request: &shared.GoogleIamV2betaPolicyInput{
+            Annotations: map[string]string{
+                "sed": "et",
+            },
+            DisplayName: "aut",
+            Etag: "aliquam",
+            Name: "ex",
+            Rules: []shared.GoogleIamV2betaPolicyRule{
+                shared.GoogleIamV2betaPolicyRule{
+                    DenyRule: &shared.GoogleIamV2betaDenyRule{
+                        DenialCondition: &shared.GoogleTypeExpr{
+                            Description: "nam",
+                            Expression: "sit",
+                            Location: "et",
+                            Title: "consequatur",
+                        },
+                        DeniedPermissions: []string{
+                            "molestiae",
+                            "nemo",
+                            "sapiente",
+                        },
+                        DeniedPrincipals: []string{
+                            "minus",
+                            "nulla",
+                        },
+                        ExceptionPermissions: []string{
+                            "reprehenderit",
+                        },
+                        ExceptionPrincipals: []string{
+                            "sunt",
+                            "autem",
+                        },
+                    },
+                    Description: "non",
+                },
+                shared.GoogleIamV2betaPolicyRule{
+                    DenyRule: &shared.GoogleIamV2betaDenyRule{
+                        DenialCondition: &shared.GoogleTypeExpr{
+                            Description: "sed",
+                            Expression: "est",
+                            Location: "reprehenderit",
+                            Title: "harum",
+                        },
+                        DeniedPermissions: []string{
+                            "maiores",
+                        },
+                        DeniedPrincipals: []string{
+                            "iste",
+                            "maiores",
+                            "ea",
+                        },
+                        ExceptionPermissions: []string{
+                            "assumenda",
+                        },
+                        ExceptionPrincipals: []string{
+                            "accusantium",
+                        },
+                    },
+                    Description: "eligendi",
+                },
+            },
+            UID: "qui",
+        },
+    }
+    
+    res, err := s.Policies.IamPoliciesCreatePolicy(ctx, req)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.GoogleLongrunningOperation != nil {
+        // handle response
+    }
+```
+<!-- End SDK Example Usage -->
+
+<!-- Start SDK Available Operations -->
+## SDK Available Operations
+
+### policies
+
+* `IamPoliciesCreatePolicy` - Creates a policy.
+* `IamPoliciesDelete` - Deletes a policy. This action is permanent.
+* `IamPoliciesListPolicies` - Retrieves the policies of the specified kind that are attached to a resource. The response lists only policy metadata. In particular, policy rules are omitted.
+* `IamPoliciesOperationsGet` - Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+* `IamPoliciesUpdate` - Updates the specified policy. You can update only the rules and the display name for the policy. To update a policy, you should use a read-modify-write loop: 1. Use GetPolicy to read the current version of the policy. 2. Modify the policy as needed. 3. Use `UpdatePolicy` to write the updated policy. This pattern helps prevent conflicts between concurrent updates.
+
+<!-- End SDK Available Operations -->
+
+### SDK Generated by [Speakeasy](https://docs.speakeasyapi.dev/docs/using-speakeasy/client-sdks)

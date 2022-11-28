@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StackSetOperationTypeEnum } from "./stacksetoperationtypeenum";
 // UpdateProvisioningPreferences
 /**
@@ -34,31 +34,31 @@ var UpdateProvisioningPreferences = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=StackSetAccounts" }),
+        SpeakeasyMetadata({ data: "json, name=StackSetAccounts" }),
         __metadata("design:type", Array)
     ], UpdateProvisioningPreferences.prototype, "stackSetAccounts", void 0);
     __decorate([
-        Metadata({ data: "json, name=StackSetFailureToleranceCount" }),
+        SpeakeasyMetadata({ data: "json, name=StackSetFailureToleranceCount" }),
         __metadata("design:type", Number)
     ], UpdateProvisioningPreferences.prototype, "stackSetFailureToleranceCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=StackSetFailureTolerancePercentage" }),
+        SpeakeasyMetadata({ data: "json, name=StackSetFailureTolerancePercentage" }),
         __metadata("design:type", Number)
     ], UpdateProvisioningPreferences.prototype, "stackSetFailureTolerancePercentage", void 0);
     __decorate([
-        Metadata({ data: "json, name=StackSetMaxConcurrencyCount" }),
+        SpeakeasyMetadata({ data: "json, name=StackSetMaxConcurrencyCount" }),
         __metadata("design:type", Number)
     ], UpdateProvisioningPreferences.prototype, "stackSetMaxConcurrencyCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=StackSetMaxConcurrencyPercentage" }),
+        SpeakeasyMetadata({ data: "json, name=StackSetMaxConcurrencyPercentage" }),
         __metadata("design:type", Number)
     ], UpdateProvisioningPreferences.prototype, "stackSetMaxConcurrencyPercentage", void 0);
     __decorate([
-        Metadata({ data: "json, name=StackSetOperationType" }),
+        SpeakeasyMetadata({ data: "json, name=StackSetOperationType" }),
         __metadata("design:type", String)
     ], UpdateProvisioningPreferences.prototype, "stackSetOperationType", void 0);
     __decorate([
-        Metadata({ data: "json, name=StackSetRegions" }),
+        SpeakeasyMetadata({ data: "json, name=StackSetRegions" }),
         __metadata("design:type", Array)
     ], UpdateProvisioningPreferences.prototype, "stackSetRegions", void 0);
     return UpdateProvisioningPreferences;

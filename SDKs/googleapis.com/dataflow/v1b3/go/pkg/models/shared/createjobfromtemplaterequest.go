@@ -1,5 +1,7 @@
 package shared
 
+// CreateJobFromTemplateRequest
+// A request to create a Cloud Dataflow job from a template.
 type CreateJobFromTemplateRequest struct {
 	Environment *RuntimeEnvironment `json:"environment,omitempty"`
 	GcsPath     *string             `json:"gcsPath,omitempty"`

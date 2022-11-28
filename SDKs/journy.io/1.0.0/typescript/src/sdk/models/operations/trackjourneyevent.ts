@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TrackJourneyEventRequestBodyIdentificationAccount
@@ -6,10 +7,10 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Account identification requires an accountId, domain or both
 **/
 export class TrackJourneyEventRequestBodyIdentificationAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 }
 
@@ -19,10 +20,10 @@ export class TrackJourneyEventRequestBodyIdentificationAccount extends Speakeasy
  * User identification requires a userId, email or both
 **/
 export class TrackJourneyEventRequestBodyIdentificationUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 }
 
@@ -32,10 +33,10 @@ export class TrackJourneyEventRequestBodyIdentificationUser extends SpeakeasyBas
  * Event identification requires a user, account or both
 **/
 export class TrackJourneyEventRequestBodyIdentification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account" })
+  @SpeakeasyMetadata({ data: "json, name=account" })
   account?: TrackJourneyEventRequestBodyIdentificationAccount;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: TrackJourneyEventRequestBodyIdentificationUser;
 }
 
@@ -45,40 +46,34 @@ export class TrackJourneyEventRequestBodyIdentification extends SpeakeasyBase {
  * Event for a user or an account
 **/
 export class TrackJourneyEventRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=identification" })
+  @SpeakeasyMetadata({ data: "json, name=identification" })
   identification: TrackJourneyEventRequestBodyIdentification;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: Map<string, any>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=triggeredAt" })
+  @SpeakeasyMetadata({ data: "json, name=triggeredAt" })
   triggeredAt?: string;
 }
 
 
-export class TrackJourneyEventRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: TrackJourneyEventRequestBody;
-}
-
-
 export class TrackJourneyEvent201ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class TrackJourneyEvent201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: TrackJourneyEvent201ApplicationJsonMeta;
 }
 
@@ -88,13 +83,13 @@ export class TrackJourneyEvent201ApplicationJson extends SpeakeasyBase {
  * All query-, header- and path- parameters that seemed incorrect
 **/
 export class TrackJourneyEvent400ApplicationJsonErrorsParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=header" })
+  @SpeakeasyMetadata({ data: "json, name=header" })
   header?: Map<string, string>;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: Map<string, string>;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: Map<string, string>;
 }
 
@@ -104,132 +99,138 @@ export class TrackJourneyEvent400ApplicationJsonErrorsParameters extends Speakea
  * Map that sums up all received values that seemed incorrect
 **/
 export class TrackJourneyEvent400ApplicationJsonErrors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: Map<string, string>;
 
-  @Metadata({ data: "json, name=parameters" })
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
   parameters?: TrackJourneyEvent400ApplicationJsonErrorsParameters;
 }
 
 
 export class TrackJourneyEvent400ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class TrackJourneyEvent400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors: TrackJourneyEvent400ApplicationJsonErrors;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: TrackJourneyEvent400ApplicationJsonMeta;
 }
 
 
 export class TrackJourneyEvent401ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class TrackJourneyEvent401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: TrackJourneyEvent401ApplicationJsonMeta;
 }
 
 
 export class TrackJourneyEvent403ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class TrackJourneyEvent403ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: TrackJourneyEvent403ApplicationJsonMeta;
 }
 
 
 export class TrackJourneyEvent429ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class TrackJourneyEvent429ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: TrackJourneyEvent429ApplicationJsonMeta;
 }
 
 
 export class TrackJourneyEvent500ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }
 
 
 export class TrackJourneyEvent500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: TrackJourneyEvent500ApplicationJsonMeta;
 }
 
 
+export class TrackJourneyEventRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: TrackJourneyEventRequestBody;
+}
+
+
 export class TrackJourneyEventResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   trackJourneyEvent201ApplicationJsonObject?: TrackJourneyEvent201ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   trackJourneyEvent400ApplicationJsonObject?: TrackJourneyEvent400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   trackJourneyEvent401ApplicationJsonObject?: TrackJourneyEvent401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   trackJourneyEvent403ApplicationJsonObject?: TrackJourneyEvent403ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   trackJourneyEvent429ApplicationJsonObject?: TrackJourneyEvent429ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   trackJourneyEvent500ApplicationJsonObject?: TrackJourneyEvent500ApplicationJson;
 }

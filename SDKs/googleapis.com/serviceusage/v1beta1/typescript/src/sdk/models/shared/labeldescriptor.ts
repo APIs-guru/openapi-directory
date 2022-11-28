@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum LabelDescriptorValueTypeEnum {
-    String = "STRING"
-,    Bool = "BOOL"
-,    Int64 = "INT64"
+    String = "STRING",
+    Bool = "BOOL",
+    Int64 = "INT64"
 }
 
 
@@ -12,12 +13,12 @@ export enum LabelDescriptorValueTypeEnum {
  * A description of a label.
 **/
 export class LabelDescriptor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=valueType" })
+  @SpeakeasyMetadata({ data: "json, name=valueType" })
   valueType?: LabelDescriptorValueTypeEnum;
 }

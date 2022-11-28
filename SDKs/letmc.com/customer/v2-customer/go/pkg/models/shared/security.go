@@ -5,5 +5,6 @@ type SchemeAPIKey struct {
 }
 
 type SchemeBasic struct {
-	Authorization string `security:"name=Authorization"`
+	Password string `security:"name=password"`
+	Username string `security:"name=username"`
 }

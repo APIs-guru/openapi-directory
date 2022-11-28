@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudResourcesettingsV1Setting } from "./googlecloudresourcesettingsv1setting";
+
 
 
 // GoogleCloudResourcesettingsV1ListSettingsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudResourcesettingsV1Setting } from "./googlecloudresourcesetti
  * The response from ListSettings.
 **/
 export class GoogleCloudResourcesettingsV1ListSettingsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=settings", elemType: shared.GoogleCloudResourcesettingsV1Setting })
+  @SpeakeasyMetadata({ data: "json, name=settings", elemType: GoogleCloudResourcesettingsV1Setting })
   settings?: GoogleCloudResourcesettingsV1Setting[];
 }

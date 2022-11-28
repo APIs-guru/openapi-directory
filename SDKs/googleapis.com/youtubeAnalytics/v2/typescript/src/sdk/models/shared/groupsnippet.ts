@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GroupSnippet
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A group snippet.
 **/
 export class GroupSnippet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=publishedAt" })
+  @SpeakeasyMetadata({ data: "json, name=publishedAt" })
   publishedAt?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

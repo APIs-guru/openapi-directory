@@ -10,6 +10,8 @@ const (
 	AttributeParametersScoreTypeEnumRaw                  AttributeParametersScoreTypeEnum = "RAW"
 )
 
+// AttributeParameters
+// Configurable parameters for attribute scoring.
 type AttributeParameters struct {
 	ScoreThreshold *float32                          `json:"scoreThreshold,omitempty"`
 	ScoreType      *AttributeParametersScoreTypeEnum `json:"scoreType,omitempty"`

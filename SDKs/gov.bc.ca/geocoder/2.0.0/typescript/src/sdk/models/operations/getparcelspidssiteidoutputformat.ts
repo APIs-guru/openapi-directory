@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetParcelsPidsSiteIdOutputFormatOutputFormatEnum {
-    Json = "json"
-,    Geojson = "geojson"
-,    Xhtml = "xhtml"
-,    Kml = "kml"
-,    Gml = "gml"
-,    Csv = "csv"
-,    Shpz = "shpz"
+    Json = "json",
+    Geojson = "geojson",
+    Xhtml = "xhtml",
+    Kml = "kml",
+    Gml = "gml",
+    Csv = "csv",
+    Shpz = "shpz"
 }
 
 
 export class GetParcelsPidsSiteIdOutputFormatPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" })
   outputFormat: GetParcelsPidsSiteIdOutputFormatOutputFormatEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=siteID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=siteID" })
   siteId: string;
 }
 
 
 export class GetParcelsPidsSiteIdOutputFormatRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetParcelsPidsSiteIdOutputFormatPathParams;
 }
 
 
 export class GetParcelsPidsSiteIdOutputFormatResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

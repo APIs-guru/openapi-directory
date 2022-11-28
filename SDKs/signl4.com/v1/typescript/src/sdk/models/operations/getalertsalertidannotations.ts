@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAlertsAlertIdAnnotationsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=alertId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=alertId" })
   alertId: string;
 }
 
 
 export class GetAlertsAlertIdAnnotationsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAlertsAlertIdAnnotationsPathParams;
 }
 
 
 export class GetAlertsAlertIdAnnotationsResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.AlertAnnotationInfo })
+  @SpeakeasyMetadata({ elemType: shared.AlertAnnotationInfo })
   alertAnnotationInfos?: shared.AlertAnnotationInfo[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

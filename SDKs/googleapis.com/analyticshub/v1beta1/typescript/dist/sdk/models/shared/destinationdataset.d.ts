@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DestinationDatasetReference } from "./destinationdatasetreference";
 /**
  * Defines the destination bigquery dataset.

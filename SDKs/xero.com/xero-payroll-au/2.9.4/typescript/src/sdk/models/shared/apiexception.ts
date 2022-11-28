@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApiException
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The object returned for a bad request
 **/
 export class ApiException extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ErrorNumber" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorNumber" })
   errorNumber?: number;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 }

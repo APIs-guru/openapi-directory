@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -9,17 +10,17 @@ class GetRiddleRandomQueryParams:
 
 @dataclass
 class GetRiddleRandomSecurity:
-    x_fungenerators_api_secret: shared.SchemeXFungeneratorsAPISecret = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    x_fungenerators_api_secret: shared.SchemeXFungeneratorsAPISecret = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetRiddleRandomRequest:
-    query_params: GetRiddleRandomQueryParams = field(default=None)
-    security: GetRiddleRandomSecurity = field(default=None)
+    query_params: GetRiddleRandomQueryParams = field()
+    security: GetRiddleRandomSecurity = field()
     
 
 @dataclass
 class GetRiddleRandomResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

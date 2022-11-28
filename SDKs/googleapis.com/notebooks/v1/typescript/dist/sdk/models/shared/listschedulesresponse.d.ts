@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Schedule } from "./schedule";
 /**
  * Response for listing scheduled notebook job.

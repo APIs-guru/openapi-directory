@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class ReportBehaviorSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class ReportBehaviorRequest:
-    request: shared.CreateBehaviorInput = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: ReportBehaviorSecurity = field(default=None)
+    request: shared.CreateBehaviorInput = field(metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    security: ReportBehaviorSecurity = field()
     
 
 @dataclass
 class ReportBehaviorResponse:
+    content_type: str = field()
+    status_code: int = field()
     behaviour_output: Optional[shared.BehaviourOutput] = field(default=None)
-    content_type: str = field(default=None)
     errors: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

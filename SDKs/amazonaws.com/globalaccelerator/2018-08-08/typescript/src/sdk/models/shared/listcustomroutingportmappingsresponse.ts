@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PortMapping } from "./portmapping";
 
 
+
 export class ListCustomRoutingPortMappingsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=PortMappings", elemType: shared.PortMapping })
+  @SpeakeasyMetadata({ data: "json, name=PortMappings", elemType: PortMapping })
   portMappings?: PortMapping[];
 }

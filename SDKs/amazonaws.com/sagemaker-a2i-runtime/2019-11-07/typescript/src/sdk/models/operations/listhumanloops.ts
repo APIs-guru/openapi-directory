@@ -1,85 +1,86 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum ListHumanLoopsSortOrderEnum {
-    Ascending = "Ascending"
-,    Descending = "Descending"
+    Ascending = "Ascending",
+    Descending = "Descending"
 }
 
 
 export class ListHumanLoopsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=CreationTimeAfter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CreationTimeAfter" })
   creationTimeAfter?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=CreationTimeBefore" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CreationTimeBefore" })
   creationTimeBefore?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=FlowDefinitionArn" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=FlowDefinitionArn" })
   flowDefinitionArn: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MaxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=NextToken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SortOrder" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SortOrder" })
   sortOrder?: ListHumanLoopsSortOrderEnum;
 }
 
 
 export class ListHumanLoopsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class ListHumanLoopsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListHumanLoopsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ListHumanLoopsHeaders;
 }
 
 
 export class ListHumanLoopsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listHumanLoopsResponse?: shared.ListHumanLoopsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

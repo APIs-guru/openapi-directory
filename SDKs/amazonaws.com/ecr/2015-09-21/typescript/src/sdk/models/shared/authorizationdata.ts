@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AuthorizationData
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object representing authorization data for an Amazon ECR registry.
 **/
 export class AuthorizationData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizationToken" })
+  @SpeakeasyMetadata({ data: "json, name=authorizationToken" })
   authorizationToken?: string;
 
-  @Metadata({ data: "json, name=expiresAt" })
+  @SpeakeasyMetadata({ data: "json, name=expiresAt" })
   expiresAt?: Date;
 
-  @Metadata({ data: "json, name=proxyEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=proxyEndpoint" })
   proxyEndpoint?: string;
 }

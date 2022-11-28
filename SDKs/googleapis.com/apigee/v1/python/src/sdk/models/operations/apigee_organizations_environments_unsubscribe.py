@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsUnsubscribePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ApigeeOrganizationsEnvironmentsUnsubscribeQueryParams:
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsUnsubscribeSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsUnsubscribeRequest:
-    path_params: ApigeeOrganizationsEnvironmentsUnsubscribePathParams = field(default=None)
-    query_params: ApigeeOrganizationsEnvironmentsUnsubscribeQueryParams = field(default=None)
+    path_params: ApigeeOrganizationsEnvironmentsUnsubscribePathParams = field()
+    query_params: ApigeeOrganizationsEnvironmentsUnsubscribeQueryParams = field()
+    security: ApigeeOrganizationsEnvironmentsUnsubscribeSecurity = field()
     request: Optional[shared.GoogleCloudApigeeV1Subscription] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ApigeeOrganizationsEnvironmentsUnsubscribeSecurity = field(default=None)
     
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsUnsubscribeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_protobuf_empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

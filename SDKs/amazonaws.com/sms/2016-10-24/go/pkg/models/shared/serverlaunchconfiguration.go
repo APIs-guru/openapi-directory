@@ -1,5 +1,7 @@
 package shared
 
+// ServerLaunchConfiguration
+// Launch configuration for a server.
 type ServerLaunchConfiguration struct {
 	AssociatePublicIPAddress *bool           `json:"associatePublicIpAddress,omitempty"`
 	ConfigureScript          *S3Location     `json:"configureScript,omitempty"`

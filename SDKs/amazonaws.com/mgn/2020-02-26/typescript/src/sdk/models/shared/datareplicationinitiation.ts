@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataReplicationInitiationStep } from "./datareplicationinitiationstep";
+
 
 
 // DataReplicationInitiation
@@ -8,12 +8,12 @@ import { DataReplicationInitiationStep } from "./datareplicationinitiationstep";
  * Data replication initiation.
 **/
 export class DataReplicationInitiation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextAttemptDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=nextAttemptDateTime" })
   nextAttemptDateTime?: string;
 
-  @Metadata({ data: "json, name=startDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=startDateTime" })
   startDateTime?: string;
 
-  @Metadata({ data: "json, name=steps", elemType: shared.DataReplicationInitiationStep })
+  @SpeakeasyMetadata({ data: "json, name=steps", elemType: DataReplicationInitiationStep })
   steps?: DataReplicationInitiationStep[];
 }

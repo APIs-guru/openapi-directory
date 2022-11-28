@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ContinuousParameterRangeSpecification
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines the possible values for a continuous hyperparameter.
 **/
 export class ContinuousParameterRangeSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxValue" })
+  @SpeakeasyMetadata({ data: "json, name=MaxValue" })
   maxValue: string;
 
-  @Metadata({ data: "json, name=MinValue" })
+  @SpeakeasyMetadata({ data: "json, name=MinValue" })
   minValue: string;
 }

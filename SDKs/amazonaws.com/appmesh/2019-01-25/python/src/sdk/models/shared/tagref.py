@@ -1,10 +1,16 @@
 from dataclasses import dataclass, field
+from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class TagRef:
-    key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    value: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""TagRef
+    Optional metadata that you apply to a resource to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
+    """
+    
+    key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    value: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class DeleteKeyPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteKeySecurity:
-    cookie_sid: shared.SchemeCookieSid = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'cookie' }})
+    cookie_sid: shared.SchemeCookieSid = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'cookie' }})
     
 
 @dataclass
 class DeleteKeyRequest:
-    path_params: DeleteKeyPathParams = field(default=None)
-    security: DeleteKeySecurity = field(default=None)
+    path_params: DeleteKeyPathParams = field()
+    security: DeleteKeySecurity = field()
     
 
 @dataclass
 class DeleteKeyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     response_default_resource: Optional[shared.ResponseDefaultResource] = field(default=None)
-    status_code: int = field(default=None)
     

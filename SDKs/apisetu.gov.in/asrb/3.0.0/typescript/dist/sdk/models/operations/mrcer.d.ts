@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class MrcerRequestBodyCertificateParameters extends SpeakeasyBase {
     certType: string;
@@ -17,10 +17,6 @@ export declare class MrcerRequestBody extends SpeakeasyBase {
 export declare class MrcerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class MrcerRequest extends SpeakeasyBase {
-    request?: MrcerRequestBody;
-    security: MrcerSecurity;
 }
 export declare enum Mrcer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -103,6 +99,10 @@ export declare enum Mrcer504ApplicationJsonErrorDescriptionEnum {
 export declare class Mrcer504ApplicationJson extends SpeakeasyBase {
     error?: Mrcer504ApplicationJsonErrorEnum;
     errorDescription?: Mrcer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class MrcerRequest extends SpeakeasyBase {
+    request?: MrcerRequestBody;
+    security: MrcerSecurity;
 }
 export declare class MrcerResponse extends SpeakeasyBase {
     contentType: string;

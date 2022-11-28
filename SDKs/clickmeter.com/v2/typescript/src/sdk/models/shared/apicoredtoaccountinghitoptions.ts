@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiCoreDtoAccountingHitOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hideReferrer, form, name=hideReferrer;" })
+  @SpeakeasyMetadata({ data: "json, name=hideReferrer, form, name=hideReferrer;" })
   hideReferrer?: boolean;
 }

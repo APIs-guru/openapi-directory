@@ -1,27 +1,27 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import cloudwatchloggingoptions
-from . import copycommand
-from . import processingconfiguration
-from . import redshiftretryoptions
-from . import s3destinationconfiguration
-from . import redshifts3backupmode_enum
-from . import s3destinationconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RedshiftDestinationConfiguration:
-    cloud_watch_logging_options: Optional[cloudwatchloggingoptions.CloudWatchLoggingOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CloudWatchLoggingOptions' }})
-    cluster_jdbcurl: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClusterJDBCURL' }})
-    copy_command: copycommand.CopyCommand = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CopyCommand' }})
-    password: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Password' }})
-    processing_configuration: Optional[processingconfiguration.ProcessingConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProcessingConfiguration' }})
-    retry_options: Optional[redshiftretryoptions.RedshiftRetryOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RetryOptions' }})
-    role_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RoleARN' }})
-    s3_backup_configuration: Optional[s3destinationconfiguration.S3DestinationConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3BackupConfiguration' }})
-    s3_backup_mode: Optional[redshifts3backupmode_enum.RedshiftS3BackupModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3BackupMode' }})
-    s3_configuration: s3destinationconfiguration.S3DestinationConfiguration = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3Configuration' }})
-    username: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Username' }})
+    r"""RedshiftDestinationConfiguration
+    Describes the configuration of a destination in Amazon Redshift.
+    """
+    
+    cluster_jdbcurl: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClusterJDBCURL') }})
+    copy_command: CopyCommand = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CopyCommand') }})
+    password: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Password') }})
+    role_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RoleARN') }})
+    s3_configuration: S3DestinationConfiguration = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3Configuration') }})
+    username: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Username') }})
+    cloud_watch_logging_options: Optional[CloudWatchLoggingOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CloudWatchLoggingOptions') }})
+    processing_configuration: Optional[ProcessingConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProcessingConfiguration') }})
+    retry_options: Optional[RedshiftRetryOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RetryOptions') }})
+    s3_backup_configuration: Optional[S3DestinationConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3BackupConfiguration') }})
+    s3_backup_mode: Optional[RedshiftS3BackupModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3BackupMode') }})
     

@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ReplicaRegionType } from "./replicaregiontype";
 var ReplicateSecretToRegionsRequest = /** @class */ (function (_super) {
     __extends(ReplicateSecretToRegionsRequest, _super);
     function ReplicateSecretToRegionsRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AddReplicaRegions", elemType: shared.ReplicaRegionType }),
+        SpeakeasyMetadata({ data: "json, name=AddReplicaRegions", elemType: ReplicaRegionType }),
         __metadata("design:type", Array)
     ], ReplicateSecretToRegionsRequest.prototype, "addReplicaRegions", void 0);
     __decorate([
-        Metadata({ data: "json, name=ForceOverwriteReplicaSecret" }),
+        SpeakeasyMetadata({ data: "json, name=ForceOverwriteReplicaSecret" }),
         __metadata("design:type", Boolean)
     ], ReplicateSecretToRegionsRequest.prototype, "forceOverwriteReplicaSecret", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretId" }),
+        SpeakeasyMetadata({ data: "json, name=SecretId" }),
         __metadata("design:type", String)
     ], ReplicateSecretToRegionsRequest.prototype, "secretId", void 0);
     return ReplicateSecretToRegionsRequest;

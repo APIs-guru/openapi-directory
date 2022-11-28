@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeployKey
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An SSH key granting access to a single repository.
 **/
 export class DeployKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key: string;
 
-  @Metadata({ data: "json, name=read_only" })
+  @SpeakeasyMetadata({ data: "json, name=read_only" })
   readOnly: boolean;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 
-  @Metadata({ data: "json, name=verified" })
+  @SpeakeasyMetadata({ data: "json, name=verified" })
   verified: boolean;
 }

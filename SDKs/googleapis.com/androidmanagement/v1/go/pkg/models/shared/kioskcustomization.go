@@ -42,6 +42,8 @@ const (
 	KioskCustomizationSystemNavigationEnumHomeButtonOnly              KioskCustomizationSystemNavigationEnum = "HOME_BUTTON_ONLY"
 )
 
+// KioskCustomization
+// Settings controlling the behavior of a device in kiosk mode. To enable kiosk mode, set kioskCustomLauncherEnabled to true or specify an app in the policy with installType KIOSK.
 type KioskCustomization struct {
 	DeviceSettings      *KioskCustomizationDeviceSettingsEnum      `json:"deviceSettings,omitempty"`
 	PowerButtonActions  *KioskCustomizationPowerButtonActionsEnum  `json:"powerButtonActions,omitempty"`

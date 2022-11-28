@@ -10,6 +10,8 @@ const (
 	JobStateEnumFailed                     JobStateEnum = "FAILED"
 )
 
+// Job
+// Transcoding job resource.
 type Job struct {
 	Config                 *JobConfig      `json:"config,omitempty"`
 	CreateTime             *string         `json:"createTime,omitempty"`
@@ -26,4 +28,18 @@ type Job struct {
 	State                  *JobStateEnum   `json:"state,omitempty"`
 	TemplateID             *string         `json:"templateId,omitempty"`
 	TTLAfterCompletionDays *int32          `json:"ttlAfterCompletionDays,omitempty"`
+}
+
+// JobInput
+// Transcoding job resource.
+type JobInput struct {
+	Config                 *JobConfig `json:"config,omitempty"`
+	InputURI               *string    `json:"inputUri,omitempty"`
+	Name                   *string    `json:"name,omitempty"`
+	OriginURI              *OriginURI `json:"originUri,omitempty"`
+	OutputURI              *string    `json:"outputUri,omitempty"`
+	Priority               *int32     `json:"priority,omitempty"`
+	Progress               *Progress  `json:"progress,omitempty"`
+	TemplateID             *string    `json:"templateId,omitempty"`
+	TTLAfterCompletionDays *int32     `json:"ttlAfterCompletionDays,omitempty"`
 }

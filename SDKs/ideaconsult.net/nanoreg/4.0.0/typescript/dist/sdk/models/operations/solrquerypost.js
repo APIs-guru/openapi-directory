@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var SolrqueryPostWtEnum;
 (function (SolrqueryPostWtEnum) {
@@ -35,7 +35,7 @@ var SolrqueryPostQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=wt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=wt" }),
         __metadata("design:type", String)
     ], SolrqueryPostQueryParams.prototype, "wt", void 0);
     return SolrqueryPostQueryParams;
@@ -47,11 +47,11 @@ var SolrqueryPostRequestBodyParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fl" }),
+        SpeakeasyMetadata({ data: "json, name=fl" }),
         __metadata("design:type", Array)
     ], SolrqueryPostRequestBodyParams.prototype, "fl", void 0);
     __decorate([
-        Metadata({ data: "json, name=rows" }),
+        SpeakeasyMetadata({ data: "json, name=rows" }),
         __metadata("design:type", Number)
     ], SolrqueryPostRequestBodyParams.prototype, "rows", void 0);
     return SolrqueryPostRequestBodyParams;
@@ -63,11 +63,11 @@ var SolrqueryPostRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=facet" }),
+        SpeakeasyMetadata({ data: "json, name=facet" }),
         __metadata("design:type", Map)
     ], SolrqueryPostRequestBody.prototype, "facet", void 0);
     __decorate([
-        Metadata({ data: "json, name=params" }),
+        SpeakeasyMetadata({ data: "json, name=params" }),
         __metadata("design:type", SolrqueryPostRequestBodyParams)
     ], SolrqueryPostRequestBody.prototype, "params", void 0);
     return SolrqueryPostRequestBody;
@@ -79,11 +79,11 @@ var SolrqueryPostRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SolrqueryPostQueryParams)
     ], SolrqueryPostRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", SolrqueryPostRequestBody)
     ], SolrqueryPostRequest.prototype, "request", void 0);
     return SolrqueryPostRequest;
@@ -95,19 +95,19 @@ var SolrqueryPostResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], SolrqueryPostResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SolrqueryPostResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SolrResponse)
     ], SolrqueryPostResponse.prototype, "solrResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SolrqueryPostResponse.prototype, "statusCode", void 0);
     return SolrqueryPostResponse;

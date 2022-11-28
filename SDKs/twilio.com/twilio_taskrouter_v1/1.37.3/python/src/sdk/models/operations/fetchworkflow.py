@@ -1,0 +1,34 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from sdk.models import shared
+
+
+FETCH_WORKFLOW_SERVERS = [
+	"https://taskrouter.twilio.com",
+]
+
+
+@dataclass
+class FetchWorkflowPathParams:
+    sid: str = field(metadata={'path_param': { 'field_name': 'Sid', 'style': 'simple', 'explode': False }})
+    workspace_sid: str = field(metadata={'path_param': { 'field_name': 'WorkspaceSid', 'style': 'simple', 'explode': False }})
+    
+
+@dataclass
+class FetchWorkflowSecurity:
+    account_sid_auth_token: shared.SchemeAccountSidAuthToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    
+
+@dataclass
+class FetchWorkflowRequest:
+    path_params: FetchWorkflowPathParams = field()
+    security: FetchWorkflowSecurity = field()
+    server_url: Optional[str] = field(default=None)
+    
+
+@dataclass
+class FetchWorkflowResponse:
+    content_type: str = field()
+    status_code: int = field()
+    taskrouter_v1_workspace_workflow: Optional[shared.TaskrouterV1WorkspaceWorkflow] = field(default=None)
+    

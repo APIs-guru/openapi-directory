@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,47 +23,63 @@ class RegisterJobDefinitionHeaders:
 @dataclass_json
 @dataclass
 class RegisterJobDefinitionRequestBodyContainerProperties:
-    command: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    environment: Optional[List[shared.KeyValuePair]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environment' }})
-    execution_role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'executionRoleArn' }})
-    fargate_platform_configuration: Optional[shared.FargatePlatformConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fargatePlatformConfiguration' }})
-    image: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image' }})
-    instance_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instanceType' }})
-    job_role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobRoleArn' }})
-    linux_parameters: Optional[shared.LinuxParameters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'linuxParameters' }})
-    log_configuration: Optional[shared.LogConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logConfiguration' }})
-    memory: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'memory' }})
-    mount_points: Optional[List[shared.MountPoint]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mountPoints' }})
-    network_configuration: Optional[shared.NetworkConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'networkConfiguration' }})
-    privileged: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'privileged' }})
-    readonly_root_filesystem: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'readonlyRootFilesystem' }})
-    resource_requirements: Optional[List[shared.ResourceRequirement]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceRequirements' }})
-    secrets: Optional[List[shared.Secret]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'secrets' }})
-    ulimits: Optional[List[shared.Ulimit]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ulimits' }})
-    user: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
-    vcpus: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vcpus' }})
-    volumes: Optional[List[shared.Volume]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'volumes' }})
+    r"""RegisterJobDefinitionRequestBodyContainerProperties
+    Container properties are used in job definitions to describe the container that's launched as part of a job.
+    """
+    
+    command: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('command') }})
+    environment: Optional[List[shared.KeyValuePair]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environment') }})
+    execution_role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('executionRoleArn') }})
+    fargate_platform_configuration: Optional[shared.FargatePlatformConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fargatePlatformConfiguration') }})
+    image: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('image') }})
+    instance_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('instanceType') }})
+    job_role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobRoleArn') }})
+    linux_parameters: Optional[shared.LinuxParameters] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('linuxParameters') }})
+    log_configuration: Optional[shared.LogConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('logConfiguration') }})
+    memory: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('memory') }})
+    mount_points: Optional[List[shared.MountPoint]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mountPoints') }})
+    network_configuration: Optional[shared.NetworkConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('networkConfiguration') }})
+    privileged: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('privileged') }})
+    readonly_root_filesystem: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('readonlyRootFilesystem') }})
+    resource_requirements: Optional[List[shared.ResourceRequirement]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceRequirements') }})
+    secrets: Optional[List[shared.Secret]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('secrets') }})
+    ulimits: Optional[List[shared.Ulimit]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ulimits') }})
+    user: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('user') }})
+    vcpus: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vcpus') }})
+    volumes: Optional[List[shared.Volume]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('volumes') }})
     
 
 @dataclass_json
 @dataclass
 class RegisterJobDefinitionRequestBodyNodeProperties:
-    main_node: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mainNode' }})
-    node_range_properties: Optional[List[shared.NodeRangeProperty]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nodeRangeProperties' }})
-    num_nodes: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'numNodes' }})
+    r"""RegisterJobDefinitionRequestBodyNodeProperties
+    An object representing the node properties of a multi-node parallel job.
+    """
+    
+    main_node: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mainNode') }})
+    node_range_properties: Optional[List[shared.NodeRangeProperty]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nodeRangeProperties') }})
+    num_nodes: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('numNodes') }})
     
 
 @dataclass_json
 @dataclass
 class RegisterJobDefinitionRequestBodyRetryStrategy:
-    attempts: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attempts' }})
-    evaluate_on_exit: Optional[List[shared.EvaluateOnExit]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'evaluateOnExit' }})
+    r"""RegisterJobDefinitionRequestBodyRetryStrategy
+    The retry strategy associated with a job. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/job_retries.html\">Automated job retries</a> in the <i>Batch User Guide</i>.
+    """
+    
+    attempts: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attempts') }})
+    evaluate_on_exit: Optional[List[shared.EvaluateOnExit]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('evaluateOnExit') }})
     
 
 @dataclass_json
 @dataclass
 class RegisterJobDefinitionRequestBodyTimeout:
-    attempt_duration_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attemptDurationSeconds' }})
+    r"""RegisterJobDefinitionRequestBodyTimeout
+    An object representing a job timeout configuration.
+    """
+    
+    attempt_duration_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attemptDurationSeconds') }})
     
 class RegisterJobDefinitionRequestBodyTypeEnum(str, Enum):
     CONTAINER = "container"
@@ -68,29 +89,29 @@ class RegisterJobDefinitionRequestBodyTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RegisterJobDefinitionRequestBody:
-    container_properties: Optional[RegisterJobDefinitionRequestBodyContainerProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'containerProperties' }})
-    job_definition_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobDefinitionName' }})
-    node_properties: Optional[RegisterJobDefinitionRequestBodyNodeProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nodeProperties' }})
-    parameters: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parameters' }})
-    platform_capabilities: Optional[List[shared.PlatformCapabilityEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'platformCapabilities' }})
-    propagate_tags: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'propagateTags' }})
-    retry_strategy: Optional[RegisterJobDefinitionRequestBodyRetryStrategy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'retryStrategy' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    timeout: Optional[RegisterJobDefinitionRequestBodyTimeout] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeout' }})
-    type: RegisterJobDefinitionRequestBodyTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    job_definition_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobDefinitionName') }})
+    type: RegisterJobDefinitionRequestBodyTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    container_properties: Optional[RegisterJobDefinitionRequestBodyContainerProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('containerProperties') }})
+    node_properties: Optional[RegisterJobDefinitionRequestBodyNodeProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nodeProperties') }})
+    parameters: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parameters') }})
+    platform_capabilities: Optional[List[shared.PlatformCapabilityEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('platformCapabilities') }})
+    propagate_tags: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('propagateTags') }})
+    retry_strategy: Optional[RegisterJobDefinitionRequestBodyRetryStrategy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('retryStrategy') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    timeout: Optional[RegisterJobDefinitionRequestBodyTimeout] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeout') }})
     
 
 @dataclass
 class RegisterJobDefinitionRequest:
-    headers: RegisterJobDefinitionHeaders = field(default=None)
-    request: RegisterJobDefinitionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: RegisterJobDefinitionHeaders = field()
+    request: RegisterJobDefinitionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RegisterJobDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     register_job_definition_response: Optional[shared.RegisterJobDefinitionResponse] = field(default=None)
     server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

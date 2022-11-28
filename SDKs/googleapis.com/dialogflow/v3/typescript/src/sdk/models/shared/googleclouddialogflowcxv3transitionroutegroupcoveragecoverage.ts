@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3TransitionRouteGroup } from "./googleclouddialogflowcxv3transitionroutegroup";
 import { GoogleCloudDialogflowCxV3TransitionRouteGroupCoverageCoverageTransition } from "./googleclouddialogflowcxv3transitionroutegroupcoveragecoveragetransition";
+
 
 
 // GoogleCloudDialogflowCxV3TransitionRouteGroupCoverageCoverage
@@ -9,12 +9,12 @@ import { GoogleCloudDialogflowCxV3TransitionRouteGroupCoverageCoverageTransition
  * Coverage result message for one transition route group.
 **/
 export class GoogleCloudDialogflowCxV3TransitionRouteGroupCoverageCoverage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=coverageScore" })
+  @SpeakeasyMetadata({ data: "json, name=coverageScore" })
   coverageScore?: number;
 
-  @Metadata({ data: "json, name=routeGroup" })
+  @SpeakeasyMetadata({ data: "json, name=routeGroup" })
   routeGroup?: GoogleCloudDialogflowCxV3TransitionRouteGroup;
 
-  @Metadata({ data: "json, name=transitions", elemType: shared.GoogleCloudDialogflowCxV3TransitionRouteGroupCoverageCoverageTransition })
+  @SpeakeasyMetadata({ data: "json, name=transitions", elemType: GoogleCloudDialogflowCxV3TransitionRouteGroupCoverageCoverageTransition })
   transitions?: GoogleCloudDialogflowCxV3TransitionRouteGroupCoverageCoverageTransition[];
 }

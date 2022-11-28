@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TestnetGetFaucetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=address" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=address" })
   address: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=amount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=amount" })
   amount?: number;
 }
 
 
 export class TestnetGetFaucetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: TestnetGetFaucetQueryParams;
 }
 
 
 export class TestnetGetFaucetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getFaucetResponse?: shared.GetFaucetResponse;
 }

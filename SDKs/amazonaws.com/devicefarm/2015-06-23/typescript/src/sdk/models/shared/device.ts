@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceAvailabilityEnum } from "./deviceavailabilityenum";
 import { Cpu } from "./cpu";
 import { DeviceFormFactorEnum } from "./deviceformfactorenum";
@@ -8,71 +7,72 @@ import { DevicePlatformEnum } from "./deviceplatformenum";
 import { Resolution } from "./resolution";
 
 
+
 // Device
 /** 
  * Represents a device type that an app is tested against.
 **/
 export class Device extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=availability" })
+  @SpeakeasyMetadata({ data: "json, name=availability" })
   availability?: DeviceAvailabilityEnum;
 
-  @Metadata({ data: "json, name=carrier" })
+  @SpeakeasyMetadata({ data: "json, name=carrier" })
   carrier?: string;
 
-  @Metadata({ data: "json, name=cpu" })
+  @SpeakeasyMetadata({ data: "json, name=cpu" })
   cpu?: Cpu;
 
-  @Metadata({ data: "json, name=fleetName" })
+  @SpeakeasyMetadata({ data: "json, name=fleetName" })
   fleetName?: string;
 
-  @Metadata({ data: "json, name=fleetType" })
+  @SpeakeasyMetadata({ data: "json, name=fleetType" })
   fleetType?: string;
 
-  @Metadata({ data: "json, name=formFactor" })
+  @SpeakeasyMetadata({ data: "json, name=formFactor" })
   formFactor?: DeviceFormFactorEnum;
 
-  @Metadata({ data: "json, name=heapSize" })
+  @SpeakeasyMetadata({ data: "json, name=heapSize" })
   heapSize?: number;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: string;
 
-  @Metadata({ data: "json, name=instances", elemType: shared.DeviceInstance })
+  @SpeakeasyMetadata({ data: "json, name=instances", elemType: DeviceInstance })
   instances?: DeviceInstance[];
 
-  @Metadata({ data: "json, name=manufacturer" })
+  @SpeakeasyMetadata({ data: "json, name=manufacturer" })
   manufacturer?: string;
 
-  @Metadata({ data: "json, name=memory" })
+  @SpeakeasyMetadata({ data: "json, name=memory" })
   memory?: number;
 
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model?: string;
 
-  @Metadata({ data: "json, name=modelId" })
+  @SpeakeasyMetadata({ data: "json, name=modelId" })
   modelId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=os" })
+  @SpeakeasyMetadata({ data: "json, name=os" })
   os?: string;
 
-  @Metadata({ data: "json, name=platform" })
+  @SpeakeasyMetadata({ data: "json, name=platform" })
   platform?: DevicePlatformEnum;
 
-  @Metadata({ data: "json, name=radio" })
+  @SpeakeasyMetadata({ data: "json, name=radio" })
   radio?: string;
 
-  @Metadata({ data: "json, name=remoteAccessEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=remoteAccessEnabled" })
   remoteAccessEnabled?: boolean;
 
-  @Metadata({ data: "json, name=remoteDebugEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=remoteDebugEnabled" })
   remoteDebugEnabled?: boolean;
 
-  @Metadata({ data: "json, name=resolution" })
+  @SpeakeasyMetadata({ data: "json, name=resolution" })
   resolution?: Resolution;
 }

@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListVnicsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cursor" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cursor" })
   cursor?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end_time" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end_time" })
   endTime?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=size" })
   size?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start_time" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start_time" })
   startTime?: number;
 }
 
 
 export class ListVnicsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKeyAuth: shared.SchemeApiKeyAuth;
 }
 
 
 export class ListVnicsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListVnicsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ListVnicsSecurity;
 }
 
 
 export class ListVnicsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiError?: shared.ApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pagedListResponseWithTime?: shared.PagedListResponseWithTime;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

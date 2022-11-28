@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // S3Config
 /**
  * The path to the file(s) in an Amazon Simple Storage Service (Amazon S3) bucket, and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the file(s). Optionally, includes an AWS Key Management Service (KMS) key. This object is part of the <a>DataSource</a> object that is submitted in the <a>CreateDatasetImportJob</a> request, and part of the <a>DataDestination</a> object.
@@ -33,15 +33,15 @@ var S3Config = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=KMSKeyArn" }),
+        SpeakeasyMetadata({ data: "json, name=KMSKeyArn" }),
         __metadata("design:type", String)
     ], S3Config.prototype, "kmsKeyArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Path" }),
+        SpeakeasyMetadata({ data: "json, name=Path" }),
         __metadata("design:type", String)
     ], S3Config.prototype, "path", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=RoleArn" }),
         __metadata("design:type", String)
     ], S3Config.prototype, "roleArn", void 0);
     return S3Config;

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import batchreadoperationresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchReadResponse:
-    responses: Optional[List[batchreadoperationresponse.BatchReadOperationResponse]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Responses' }})
+    responses: Optional[List[BatchReadOperationResponse]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Responses') }})
     

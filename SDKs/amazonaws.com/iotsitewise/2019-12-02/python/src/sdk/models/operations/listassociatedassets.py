@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ListAssociatedAssetsPathParams:
-    asset_id: str = field(default=None, metadata={'path_param': { 'field_name': 'assetId', 'style': 'simple', 'explode': False }})
+    asset_id: str = field(metadata={'path_param': { 'field_name': 'assetId', 'style': 'simple', 'explode': False }})
     
 class ListAssociatedAssetsTraversalDirectionEnum(str, Enum):
     PARENT = "PARENT"
@@ -33,18 +37,18 @@ class ListAssociatedAssetsHeaders:
 
 @dataclass
 class ListAssociatedAssetsRequest:
-    path_params: ListAssociatedAssetsPathParams = field(default=None)
-    query_params: ListAssociatedAssetsQueryParams = field(default=None)
-    headers: ListAssociatedAssetsHeaders = field(default=None)
+    headers: ListAssociatedAssetsHeaders = field()
+    path_params: ListAssociatedAssetsPathParams = field()
+    query_params: ListAssociatedAssetsQueryParams = field()
     
 
 @dataclass
 class ListAssociatedAssetsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_associated_assets_response: Optional[shared.ListAssociatedAssetsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsManagementCustomMetricsGetPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    custom_metric_id: str = field(default=None, metadata={'path_param': { 'field_name': 'customMetricId', 'style': 'simple', 'explode': False }})
-    web_property_id: str = field(default=None, metadata={'path_param': { 'field_name': 'webPropertyId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    custom_metric_id: str = field(metadata={'path_param': { 'field_name': 'customMetricId', 'style': 'simple', 'explode': False }})
+    web_property_id: str = field(metadata={'path_param': { 'field_name': 'webPropertyId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,14 +24,14 @@ class AnalyticsManagementCustomMetricsGetQueryParams:
 
 @dataclass
 class AnalyticsManagementCustomMetricsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsManagementCustomMetricsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -41,14 +42,14 @@ class AnalyticsManagementCustomMetricsGetSecurity:
 
 @dataclass
 class AnalyticsManagementCustomMetricsGetRequest:
-    path_params: AnalyticsManagementCustomMetricsGetPathParams = field(default=None)
-    query_params: AnalyticsManagementCustomMetricsGetQueryParams = field(default=None)
-    security: AnalyticsManagementCustomMetricsGetSecurity = field(default=None)
+    path_params: AnalyticsManagementCustomMetricsGetPathParams = field()
+    query_params: AnalyticsManagementCustomMetricsGetQueryParams = field()
+    security: AnalyticsManagementCustomMetricsGetSecurity = field()
     
 
 @dataclass
 class AnalyticsManagementCustomMetricsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     custom_metric: Optional[shared.CustomMetric] = field(default=None)
-    status_code: int = field(default=None)
     

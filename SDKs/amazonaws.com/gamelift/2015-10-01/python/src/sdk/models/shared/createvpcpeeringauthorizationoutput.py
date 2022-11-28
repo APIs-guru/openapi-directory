@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import vpcpeeringauthorization
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateVpcPeeringAuthorizationOutput:
-    vpc_peering_authorization: Optional[vpcpeeringauthorization.VpcPeeringAuthorization] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VpcPeeringAuthorization' }})
+    r"""CreateVpcPeeringAuthorizationOutput
+    Represents the returned data in response to a request operation.
+    """
+    
+    vpc_peering_authorization: Optional[VpcPeeringAuthorization] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('VpcPeeringAuthorization') }})
     

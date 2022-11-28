@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScopeTypeEnum } from "./scopetypeenum";
+
 
 
 // Scope
@@ -7,9 +8,9 @@ import { ScopeTypeEnum } from "./scopetypeenum";
  * This data type contains key-value pairs that identify various Amazon resources.
 **/
 export class Scope extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: ScopeTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

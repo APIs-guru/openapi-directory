@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ProvideFeedback1RequestBody = /** @class */ (function (_super) {
     __extends(ProvideFeedback1RequestBody, _super);
@@ -30,19 +30,19 @@ var ProvideFeedback1RequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, name=data" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=data" }),
         __metadata("design:type", String)
     ], ProvideFeedback1RequestBody.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=expectedLabel" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=expectedLabel" }),
         __metadata("design:type", String)
     ], ProvideFeedback1RequestBody.prototype, "expectedLabel", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=modelId" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=modelId" }),
         __metadata("design:type", String)
     ], ProvideFeedback1RequestBody.prototype, "modelId", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=name" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=name" }),
         __metadata("design:type", String)
     ], ProvideFeedback1RequestBody.prototype, "name", void 0);
     return ProvideFeedback1RequestBody;
@@ -54,7 +54,7 @@ var ProvideFeedback1Security = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerToken)
     ], ProvideFeedback1Security.prototype, "bearerToken", void 0);
     return ProvideFeedback1Security;
@@ -66,11 +66,11 @@ var ProvideFeedback1Request = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", ProvideFeedback1RequestBody)
     ], ProvideFeedback1Request.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProvideFeedback1Security)
     ], ProvideFeedback1Request.prototype, "security", void 0);
     return ProvideFeedback1Request;
@@ -82,15 +82,15 @@ var ProvideFeedback1Response = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProvideFeedback1Response.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Example)
     ], ProvideFeedback1Response.prototype, "example", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProvideFeedback1Response.prototype, "statusCode", void 0);
     return ProvideFeedback1Response;

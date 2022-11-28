@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ZendeskMetadata
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The connector metadata specific to Zendesk. 
 **/
 export class ZendeskMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=oAuthScopes" })
+  @SpeakeasyMetadata({ data: "json, name=oAuthScopes" })
   oAuthScopes?: string[];
 }

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import gridcoordinate
-from . import gridrange
+from sdk import utils
+from . import *
 
 class CutPasteRequestPasteTypeEnum(str, Enum):
     PASTE_NORMAL = "PASTE_NORMAL"
@@ -17,7 +18,11 @@ class CutPasteRequestPasteTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CutPasteRequest:
-    destination: Optional[gridcoordinate.GridCoordinate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destination' }})
-    paste_type: Optional[CutPasteRequestPasteTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pasteType' }})
-    source: Optional[gridrange.GridRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
+    r"""CutPasteRequest
+    Moves data from the source to the destination.
+    """
+    
+    destination: Optional[GridCoordinate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('destination') }})
+    paste_type: Optional[CutPasteRequestPasteTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pasteType') }})
+    source: Optional[GridRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
     

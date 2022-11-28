@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetResourcesMediaSearchResultsJsonQueryParams = /** @class */ (function (_super) {
     __extends(GetResourcesMediaSearchResultsJsonQueryParams, _super);
@@ -30,15 +30,15 @@ var GetResourcesMediaSearchResultsJsonQueryParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=max" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=max" }),
         __metadata("design:type", Number)
     ], GetResourcesMediaSearchResultsJsonQueryParams.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=offset" }),
         __metadata("design:type", Number)
     ], GetResourcesMediaSearchResultsJsonQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=q" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=q" }),
         __metadata("design:type", String)
     ], GetResourcesMediaSearchResultsJsonQueryParams.prototype, "q", void 0);
     return GetResourcesMediaSearchResultsJsonQueryParams;
@@ -50,7 +50,7 @@ var GetResourcesMediaSearchResultsJsonRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourcesMediaSearchResultsJsonQueryParams)
     ], GetResourcesMediaSearchResultsJsonRequest.prototype, "queryParams", void 0);
     return GetResourcesMediaSearchResultsJsonRequest;
@@ -62,15 +62,15 @@ var GetResourcesMediaSearchResultsJsonResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetResourcesMediaSearchResultsJsonResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.MediaItemWrapped }),
+        SpeakeasyMetadata({ elemType: shared.MediaItemWrapped }),
         __metadata("design:type", Array)
     ], GetResourcesMediaSearchResultsJsonResponse.prototype, "mediaItemWrappeds", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetResourcesMediaSearchResultsJsonResponse.prototype, "statusCode", void 0);
     return GetResourcesMediaSearchResultsJsonResponse;

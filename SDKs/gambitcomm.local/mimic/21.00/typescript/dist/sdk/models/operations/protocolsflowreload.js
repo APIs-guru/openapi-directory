@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolSflowReloadPathParams = /** @class */ (function (_super) {
     __extends(ProtocolSflowReloadPathParams, _super);
     function ProtocolSflowReloadPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolSflowReloadPathParams.prototype, "agentNum", void 0);
     return ProtocolSflowReloadPathParams;
@@ -41,7 +41,7 @@ var ProtocolSflowReloadRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolSflowReloadPathParams)
     ], ProtocolSflowReloadRequest.prototype, "pathParams", void 0);
     return ProtocolSflowReloadRequest;
@@ -53,15 +53,15 @@ var ProtocolSflowReloadResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolSflowReloadResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolSflowReloadResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolSflowReloadResponse.prototype, "protocolSflowReload200ApplicationJsonString", void 0);
     return ProtocolSflowReloadResponse;

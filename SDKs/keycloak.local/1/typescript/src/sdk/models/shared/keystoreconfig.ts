@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class KeyStoreConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: string;
 
-  @Metadata({ data: "json, name=keyAlias" })
+  @SpeakeasyMetadata({ data: "json, name=keyAlias" })
   keyAlias?: string;
 
-  @Metadata({ data: "json, name=keyPassword" })
+  @SpeakeasyMetadata({ data: "json, name=keyPassword" })
   keyPassword?: string;
 
-  @Metadata({ data: "json, name=realmAlias" })
+  @SpeakeasyMetadata({ data: "json, name=realmAlias" })
   realmAlias?: string;
 
-  @Metadata({ data: "json, name=realmCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=realmCertificate" })
   realmCertificate?: boolean;
 
-  @Metadata({ data: "json, name=storePassword" })
+  @SpeakeasyMetadata({ data: "json, name=storePassword" })
   storePassword?: string;
 }

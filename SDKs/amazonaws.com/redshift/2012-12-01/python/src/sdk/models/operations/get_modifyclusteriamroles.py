@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifyClusterIamRolesActionEnum(str, Enum):
     MODIFY_CLUSTER_IAM_ROLES = "ModifyClusterIamRoles"
@@ -10,11 +14,11 @@ class GetModifyClusterIamRolesVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyClusterIamRolesQueryParams:
-    action: GetModifyClusterIamRolesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyClusterIamRolesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cluster_identifier: str = field(metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
+    version: GetModifyClusterIamRolesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     add_iam_roles: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'AddIamRoles', 'style': 'form', 'explode': True }})
-    cluster_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
     remove_iam_roles: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'RemoveIamRoles', 'style': 'form', 'explode': True }})
-    version: GetModifyClusterIamRolesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetModifyClusterIamRolesHeaders:
 
 @dataclass
 class GetModifyClusterIamRolesRequest:
-    query_params: GetModifyClusterIamRolesQueryParams = field(default=None)
-    headers: GetModifyClusterIamRolesHeaders = field(default=None)
+    headers: GetModifyClusterIamRolesHeaders = field()
+    query_params: GetModifyClusterIamRolesQueryParams = field()
     
 
 @dataclass
 class GetModifyClusterIamRolesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

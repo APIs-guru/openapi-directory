@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NestedClusterGroup } from "./nestedclustergroup";
 import { NestedSite } from "./nestedsite";
 import { NestedTenant } from "./nestedtenant";
 import { NestedClusterType } from "./nestedclustertype";
 
 
+
 export class Cluster extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comments" })
+  @SpeakeasyMetadata({ data: "json, name=comments" })
   comments?: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=custom_fields" })
+  @SpeakeasyMetadata({ data: "json, name=custom_fields" })
   customFields?: Map<string, any>;
 
-  @Metadata({ data: "json, name=device_count" })
+  @SpeakeasyMetadata({ data: "json, name=device_count" })
   deviceCount?: number;
 
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group?: NestedClusterGroup;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=last_updated" })
+  @SpeakeasyMetadata({ data: "json, name=last_updated" })
   lastUpdated?: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=site" })
+  @SpeakeasyMetadata({ data: "json, name=site" })
   site?: NestedSite;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=tenant" })
+  @SpeakeasyMetadata({ data: "json, name=tenant" })
   tenant?: NestedTenant;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: NestedClusterType;
 
-  @Metadata({ data: "json, name=virtualmachine_count" })
+  @SpeakeasyMetadata({ data: "json, name=virtualmachine_count" })
   virtualmachineCount?: number;
 }

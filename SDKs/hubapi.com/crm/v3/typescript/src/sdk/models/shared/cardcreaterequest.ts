@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CardActions } from "./cardactions";
 import { CardDisplayBody } from "./carddisplaybody";
 import { CardFetchBody } from "./cardfetchbody";
+
 
 
 // CardCreateRequest
@@ -9,15 +10,15 @@ import { CardFetchBody } from "./cardfetchbody";
  * State of card definition to be created
 **/
 export class CardCreateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions" })
+  @SpeakeasyMetadata({ data: "json, name=actions" })
   actions: CardActions;
 
-  @Metadata({ data: "json, name=display" })
+  @SpeakeasyMetadata({ data: "json, name=display" })
   display: CardDisplayBody;
 
-  @Metadata({ data: "json, name=fetch" })
+  @SpeakeasyMetadata({ data: "json, name=fetch" })
   fetch: CardFetchBody;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 }

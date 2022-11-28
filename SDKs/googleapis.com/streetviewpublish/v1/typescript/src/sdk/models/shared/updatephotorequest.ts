@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Photo } from "./photo";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PhotoInput } from "./photo";
 
 
-// UpdatePhotoRequest
+
+// UpdatePhotoRequestInput
 /** 
  * Request to update the metadata of a Photo. Updating the pixels of a photo is not supported.
 **/
-export class UpdatePhotoRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=photo" })
-  photo?: Photo;
+export class UpdatePhotoRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=photo" })
+  photo?: PhotoInput;
 
-  @Metadata({ data: "json, name=updateMask" })
+  @SpeakeasyMetadata({ data: "json, name=updateMask" })
   updateMask?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// Action
+// Defines an action to be initiated by a trigger.
 type Action struct {
 	Arguments             map[string]string     `json:"Arguments,omitempty"`
 	CrawlerName           *string               `json:"CrawlerName,omitempty"`

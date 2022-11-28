@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum NetworkPerformanceConfigExternalIpEgressBandwidthTierEnum {
-    TierUnspecified = "TIER_UNSPECIFIED"
-,    Tier1 = "TIER_1"
+    TierUnspecified = "TIER_UNSPECIFIED",
+    Tier1 = "TIER_1"
 }
 
 export enum NetworkPerformanceConfigTotalEgressBandwidthTierEnum {
-    TierUnspecified = "TIER_UNSPECIFIED"
-,    Tier1 = "TIER_1"
+    TierUnspecified = "TIER_UNSPECIFIED",
+    Tier1 = "TIER_1"
 }
 
 
@@ -16,9 +17,9 @@ export enum NetworkPerformanceConfigTotalEgressBandwidthTierEnum {
  * Configuration of all network bandwidth tiers
 **/
 export class NetworkPerformanceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=externalIpEgressBandwidthTier" })
+  @SpeakeasyMetadata({ data: "json, name=externalIpEgressBandwidthTier" })
   externalIpEgressBandwidthTier?: NetworkPerformanceConfigExternalIpEgressBandwidthTierEnum;
 
-  @Metadata({ data: "json, name=totalEgressBandwidthTier" })
+  @SpeakeasyMetadata({ data: "json, name=totalEgressBandwidthTier" })
   totalEgressBandwidthTier?: NetworkPerformanceConfigTotalEgressBandwidthTierEnum;
 }

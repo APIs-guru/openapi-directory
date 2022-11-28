@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostVerifyDomainDkimActionEnum(str, Enum):
     VERIFY_DOMAIN_DKIM = "VerifyDomainDkim"
@@ -10,8 +14,8 @@ class PostVerifyDomainDkimVersionEnum(str, Enum):
 
 @dataclass
 class PostVerifyDomainDkimQueryParams:
-    action: PostVerifyDomainDkimActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostVerifyDomainDkimVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostVerifyDomainDkimActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostVerifyDomainDkimVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostVerifyDomainDkimHeaders:
 
 @dataclass
 class PostVerifyDomainDkimRequest:
-    query_params: PostVerifyDomainDkimQueryParams = field(default=None)
-    headers: PostVerifyDomainDkimHeaders = field(default=None)
+    headers: PostVerifyDomainDkimHeaders = field()
+    query_params: PostVerifyDomainDkimQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostVerifyDomainDkimResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

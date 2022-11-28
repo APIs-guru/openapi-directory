@@ -1,14 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class ReactionsCreateForCommitCommentPathParams:
-    comment_id: int = field(default=None, metadata={'path_param': { 'field_name': 'comment_id', 'style': 'simple', 'explode': False }})
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    comment_id: int = field(metadata={'path_param': { 'field_name': 'comment_id', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 class ReactionsCreateForCommitCommentRequestBodyContentEnum(str, Enum):
     PLUS_1 = "+1"
@@ -24,26 +26,26 @@ class ReactionsCreateForCommitCommentRequestBodyContentEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ReactionsCreateForCommitCommentRequestBody:
-    content: ReactionsCreateForCommitCommentRequestBodyContentEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content' }})
-    
-
-@dataclass
-class ReactionsCreateForCommitCommentRequest:
-    path_params: ReactionsCreateForCommitCommentPathParams = field(default=None)
-    request: Optional[ReactionsCreateForCommitCommentRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    content: ReactionsCreateForCommitCommentRequestBodyContentEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('content') }})
     
 
 @dataclass_json
 @dataclass
 class ReactionsCreateForCommitComment415ApplicationJSON:
-    documentation_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'documentation_url' }})
-    message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    documentation_url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('documentation_url') }})
+    message: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
+    
+
+@dataclass
+class ReactionsCreateForCommitCommentRequest:
+    path_params: ReactionsCreateForCommitCommentPathParams = field()
+    request: Optional[ReactionsCreateForCommitCommentRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ReactionsCreateForCommitCommentResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     reaction: Optional[shared.Reaction] = field(default=None)
     reactions_create_for_commit_comment_415_application_json_object: Optional[ReactionsCreateForCommitComment415ApplicationJSON] = field(default=None)
     validation_error: Optional[shared.ValidationError] = field(default=None)

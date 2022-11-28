@@ -1,5 +1,7 @@
 package shared
 
+// AnnotationPayload
+// Contains annotation information that is relevant to AutoML.
 type AnnotationPayload struct {
 	AnnotationSpecID     *string                         `json:"annotationSpecId,omitempty"`
 	Classification       *ClassificationAnnotation       `json:"classification,omitempty"`

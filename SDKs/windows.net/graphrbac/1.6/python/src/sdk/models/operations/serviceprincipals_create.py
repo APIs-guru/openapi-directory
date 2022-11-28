@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class ServicePrincipalsCreatePathParams:
-    tenant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'tenantID', 'style': 'simple', 'explode': False }})
+    tenant_id: str = field(metadata={'path_param': { 'field_name': 'tenantID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ServicePrincipalsCreateQueryParams:
-    api_version: str = field(default=None, metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
+    api_version: str = field(metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -21,15 +21,15 @@ class ServicePrincipalsCreateRequests:
 
 @dataclass
 class ServicePrincipalsCreateRequest:
-    path_params: ServicePrincipalsCreatePathParams = field(default=None)
-    query_params: ServicePrincipalsCreateQueryParams = field(default=None)
-    request: ServicePrincipalsCreateRequests = field(default=None)
+    path_params: ServicePrincipalsCreatePathParams = field()
+    query_params: ServicePrincipalsCreateQueryParams = field()
+    request: ServicePrincipalsCreateRequests = field()
     
 
 @dataclass
 class ServicePrincipalsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     graph_error: Optional[shared.GraphError] = field(default=None)
     service_principal: Optional[dict[str, dict[str, Any]]] = field(default=None)
-    status_code: int = field(default=None)
     

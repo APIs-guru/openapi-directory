@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceType } from "./devicetype";
+
 
 
 // ListDevicesResponse
@@ -8,9 +8,9 @@ import { DeviceType } from "./devicetype";
  * Represents the response to list devices.
 **/
 export class ListDevicesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Devices", elemType: shared.DeviceType })
+  @SpeakeasyMetadata({ data: "json, name=Devices", elemType: DeviceType })
   devices?: DeviceType[];
 
-  @Metadata({ data: "json, name=PaginationToken" })
+  @SpeakeasyMetadata({ data: "json, name=PaginationToken" })
   paginationToken?: string;
 }

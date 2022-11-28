@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListPipelinesInput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input of a <code>ListPipelines</code> action.
 **/
 export class ListPipelinesInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetInventoryTasksQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date_range" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_range" })
   dateRange?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=feed_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=feed_type" })
   feedType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=look_back_days" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=look_back_days" })
   lookBackDays?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=schedule_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=schedule_id" })
   scheduleId?: string;
 }
 
 
 export class GetInventoryTasksSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetInventoryTasksRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetInventoryTasksQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetInventoryTasksSecurity;
 }
 
 
 export class GetInventoryTasksResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inventoryTaskCollection?: shared.InventoryTaskCollection;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

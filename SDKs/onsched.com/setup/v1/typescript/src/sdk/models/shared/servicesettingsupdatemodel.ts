@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ServiceSettingsUpdateModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bookAheadUnit" })
+  @SpeakeasyMetadata({ data: "json, name=bookAheadUnit" })
   bookAheadUnit?: number;
 
-  @Metadata({ data: "json, name=bookAheadValue" })
+  @SpeakeasyMetadata({ data: "json, name=bookAheadValue" })
   bookAheadValue?: number;
 
-  @Metadata({ data: "json, name=bookInAdvance" })
+  @SpeakeasyMetadata({ data: "json, name=bookInAdvance" })
   bookInAdvance?: number;
 }

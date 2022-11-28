@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MembershipStateCodeEnum(str, Enum):
     CODE_UNSPECIFIED = "CODE_UNSPECIFIED"
@@ -14,5 +16,9 @@ class MembershipStateCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MembershipState:
-    code: Optional[MembershipStateCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
+    r"""MembershipState
+    MembershipState describes the state of a Membership resource.
+    """
+    
+    code: Optional[MembershipStateCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
     

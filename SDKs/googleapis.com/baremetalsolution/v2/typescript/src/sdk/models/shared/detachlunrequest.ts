@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DetachLunRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Message for detach specific LUN from an Instance.
 **/
 export class DetachLunRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lun" })
+  @SpeakeasyMetadata({ data: "json, name=lun" })
   lun?: string;
 
-  @Metadata({ data: "json, name=skipReboot" })
+  @SpeakeasyMetadata({ data: "json, name=skipReboot" })
   skipReboot?: boolean;
 }

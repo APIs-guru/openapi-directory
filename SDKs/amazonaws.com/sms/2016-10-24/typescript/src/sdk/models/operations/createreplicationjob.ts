@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum CreateReplicationJobXAmzTargetEnum {
     AwsServerMigrationServiceV20161024CreateReplicationJob = "AWSServerMigrationService_V2016_10_24.CreateReplicationJob"
@@ -7,75 +8,75 @@ export enum CreateReplicationJobXAmzTargetEnum {
 
 
 export class CreateReplicationJobHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: CreateReplicationJobXAmzTargetEnum;
 }
 
 
 export class CreateReplicationJobRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateReplicationJobHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.CreateReplicationJobRequest;
 }
 
 
 export class CreateReplicationJobResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createReplicationJobResponse?: shared.CreateReplicationJobResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalError?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   missingRequiredParameterException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   noConnectorsAvailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   operationNotPermittedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   replicationJobAlreadyExistsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serverCannotBeReplicatedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   temporarilyUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedOperationException?: any;
 }

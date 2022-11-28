@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HttpBody } from "./httpbody";
 import { Notice } from "./notice";
+
 
 
 // RdapResponse
@@ -9,24 +9,24 @@ import { Notice } from "./notice";
  * Response to a general RDAP query.
 **/
 export class RdapResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string[];
 
-  @Metadata({ data: "json, name=errorCode" })
+  @SpeakeasyMetadata({ data: "json, name=errorCode" })
   errorCode?: number;
 
-  @Metadata({ data: "json, name=jsonResponse" })
+  @SpeakeasyMetadata({ data: "json, name=jsonResponse" })
   jsonResponse?: HttpBody;
 
-  @Metadata({ data: "json, name=lang" })
+  @SpeakeasyMetadata({ data: "json, name=lang" })
   lang?: string;
 
-  @Metadata({ data: "json, name=notices", elemType: shared.Notice })
+  @SpeakeasyMetadata({ data: "json, name=notices", elemType: Notice })
   notices?: Notice[];
 
-  @Metadata({ data: "json, name=rdapConformance" })
+  @SpeakeasyMetadata({ data: "json, name=rdapConformance" })
   rdapConformance?: string[];
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

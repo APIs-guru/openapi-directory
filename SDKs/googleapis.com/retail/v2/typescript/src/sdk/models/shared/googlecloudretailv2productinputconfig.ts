@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2BigQuerySource } from "./googlecloudretailv2bigquerysource";
 import { GoogleCloudRetailV2GcsSource } from "./googlecloudretailv2gcssource";
-import { GoogleCloudRetailV2ProductInlineSource } from "./googlecloudretailv2productinlinesource";
+import { GoogleCloudRetailV2ProductInlineSourceInput } from "./googlecloudretailv2productinlinesource";
 
 
-// GoogleCloudRetailV2ProductInputConfig
+
+// GoogleCloudRetailV2ProductInputConfigInput
 /** 
  * The input config source for products.
 **/
-export class GoogleCloudRetailV2ProductInputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bigQuerySource" })
+export class GoogleCloudRetailV2ProductInputConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=bigQuerySource" })
   bigQuerySource?: GoogleCloudRetailV2BigQuerySource;
 
-  @Metadata({ data: "json, name=gcsSource" })
+  @SpeakeasyMetadata({ data: "json, name=gcsSource" })
   gcsSource?: GoogleCloudRetailV2GcsSource;
 
-  @Metadata({ data: "json, name=productInlineSource" })
-  productInlineSource?: GoogleCloudRetailV2ProductInlineSource;
+  @SpeakeasyMetadata({ data: "json, name=productInlineSource" })
+  productInlineSource?: GoogleCloudRetailV2ProductInlineSourceInput;
 }

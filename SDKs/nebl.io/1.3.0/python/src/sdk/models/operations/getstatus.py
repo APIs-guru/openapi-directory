@@ -9,12 +9,12 @@ class GetStatusQueryParams:
 
 @dataclass
 class GetStatusRequest:
-    query_params: GetStatusQueryParams = field(default=None)
+    query_params: GetStatusQueryParams = field()
     
 
 @dataclass
 class GetStatusResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_status_response: Optional[dict[str, Any]] = field(default=None)
     

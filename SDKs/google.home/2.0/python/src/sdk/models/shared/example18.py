@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import alarm
-from . import timer
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Example18:
-    alarm: List[alarm.Alarm] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alarm' }})
-    timer: List[timer.Timer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timer' }})
+    alarm: List[Alarm] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('alarm') }})
+    timer: List[Timer] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('timer') }})
     

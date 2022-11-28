@@ -8,11 +8,6 @@ type PostReportSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PostReportRequest struct {
-	Request  shared.ReportScheduleRestAPIPost `request:"mediaType=application/json"`
-	Security PostReportSecurity
-}
-
 type PostReport201ApplicationJSON struct {
 	ID     *float64                          `json:"id,omitempty"`
 	Result *shared.ReportScheduleRestAPIPost `json:"result,omitempty"`
@@ -32,6 +27,11 @@ type PostReport404ApplicationJSON struct {
 
 type PostReport500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PostReportRequest struct {
+	Request  shared.ReportScheduleRestAPIPost `request:"mediaType=application/json"`
+	Security PostReportSecurity
 }
 
 type PostReportResponse struct {

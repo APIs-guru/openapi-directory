@@ -1,23 +1,25 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import applicationcodeconfigurationupdate
-from . import applicationsnapshotconfigurationupdate
-from . import environmentpropertyupdates
-from . import flinkapplicationconfigurationupdate
-from . import sqlapplicationconfigurationupdate
-from . import vpcconfigurationupdate
-from . import zeppelinapplicationconfigurationupdate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ApplicationConfigurationUpdate:
-    application_code_configuration_update: Optional[applicationcodeconfigurationupdate.ApplicationCodeConfigurationUpdate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApplicationCodeConfigurationUpdate' }})
-    application_snapshot_configuration_update: Optional[applicationsnapshotconfigurationupdate.ApplicationSnapshotConfigurationUpdate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApplicationSnapshotConfigurationUpdate' }})
-    environment_property_updates: Optional[environmentpropertyupdates.EnvironmentPropertyUpdates] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EnvironmentPropertyUpdates' }})
-    flink_application_configuration_update: Optional[flinkapplicationconfigurationupdate.FlinkApplicationConfigurationUpdate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FlinkApplicationConfigurationUpdate' }})
-    sql_application_configuration_update: Optional[sqlapplicationconfigurationupdate.SQLApplicationConfigurationUpdate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SqlApplicationConfigurationUpdate' }})
-    vpc_configuration_updates: Optional[List[vpcconfigurationupdate.VpcConfigurationUpdate]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VpcConfigurationUpdates' }})
-    zeppelin_application_configuration_update: Optional[zeppelinapplicationconfigurationupdate.ZeppelinApplicationConfigurationUpdate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ZeppelinApplicationConfigurationUpdate' }})
+    r"""ApplicationConfigurationUpdate
+    Describes updates to an application's configuration.
+    """
+    
+    application_code_configuration_update: Optional[ApplicationCodeConfigurationUpdate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ApplicationCodeConfigurationUpdate') }})
+    application_snapshot_configuration_update: Optional[ApplicationSnapshotConfigurationUpdate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ApplicationSnapshotConfigurationUpdate') }})
+    environment_property_updates: Optional[EnvironmentPropertyUpdates] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EnvironmentPropertyUpdates') }})
+    flink_application_configuration_update: Optional[FlinkApplicationConfigurationUpdate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FlinkApplicationConfigurationUpdate') }})
+    sql_application_configuration_update: Optional[SQLApplicationConfigurationUpdate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SqlApplicationConfigurationUpdate') }})
+    vpc_configuration_updates: Optional[List[VpcConfigurationUpdate]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('VpcConfigurationUpdates') }})
+    zeppelin_application_configuration_update: Optional[ZeppelinApplicationConfigurationUpdate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ZeppelinApplicationConfigurationUpdate') }})
     

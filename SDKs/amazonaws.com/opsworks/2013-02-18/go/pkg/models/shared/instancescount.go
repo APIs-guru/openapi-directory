@@ -1,5 +1,7 @@
 package shared
 
+// InstancesCount
+// Describes how many instances a stack has for each status.
 type InstancesCount struct {
 	Assigning      *int64 `json:"Assigning,omitempty"`
 	Booting        *int64 `json:"Booting,omitempty"`

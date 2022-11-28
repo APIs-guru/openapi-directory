@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import producteditfields
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ProductEdit:
-    product: Optional[producteditfields.ProductEditFields] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'product' }})
+    product: Optional[ProductEditFields] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('product') }})
     

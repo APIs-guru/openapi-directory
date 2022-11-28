@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SearchMetaSortsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   searchMetaSorts200ApplicationJsonStrings?: string[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   searchMetaSorts200TextJsonStrings?: string[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

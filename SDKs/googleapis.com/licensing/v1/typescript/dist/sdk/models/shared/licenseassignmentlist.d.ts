@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LicenseAssignment } from "./licenseassignment";
 export declare class LicenseAssignmentList extends SpeakeasyBase {
     etag?: string;

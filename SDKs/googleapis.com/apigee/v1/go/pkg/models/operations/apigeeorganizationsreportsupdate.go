@@ -32,7 +32,7 @@ type ApigeeOrganizationsReportsUpdateSecurity struct {
 type ApigeeOrganizationsReportsUpdateRequest struct {
 	PathParams  ApigeeOrganizationsReportsUpdatePathParams
 	QueryParams ApigeeOrganizationsReportsUpdateQueryParams
-	Request     *shared.GoogleCloudApigeeV1CustomReport `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudApigeeV1CustomReportInput `request:"mediaType=application/json"`
 	Security    ApigeeOrganizationsReportsUpdateSecurity
 }
 

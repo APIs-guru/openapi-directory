@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum InstanceStateEnum {
-    StateNotKnown = "STATE_NOT_KNOWN"
-,    Ready = "READY"
-,    Creating = "CREATING"
+    StateNotKnown = "STATE_NOT_KNOWN",
+    Ready = "READY",
+    Creating = "CREATING"
 }
 
 export enum InstanceTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Production = "PRODUCTION"
-,    Development = "DEVELOPMENT"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Production = "PRODUCTION",
+    Development = "DEVELOPMENT"
 }
 
 
@@ -18,24 +19,43 @@ export enum InstanceTypeEnum {
  * A collection of Bigtable Tables and the resources that serve them. All tables in an instance are served from all Clusters in the instance.
 **/
 export class Instance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=satisfiesPzs" })
+  @SpeakeasyMetadata({ data: "json, name=satisfiesPzs" })
   satisfiesPzs?: boolean;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: InstanceStateEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: InstanceTypeEnum;
+}
+
+
+// InstanceInput
+/** 
+ * A collection of Bigtable Tables and the resources that serve them. All tables in an instance are served from all Clusters in the instance.
+**/
+export class InstanceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: InstanceTypeEnum;
 }

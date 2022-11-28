@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CurrencyCodeEnum } from "./currencycodeenum";
+
 
 
 // MonetaryAmount
@@ -7,9 +8,9 @@ import { CurrencyCodeEnum } from "./currencycodeenum";
  * A number that represents the monetary amount for an offering or transaction.
 **/
 export class MonetaryAmount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode?: CurrencyCodeEnum;
 }

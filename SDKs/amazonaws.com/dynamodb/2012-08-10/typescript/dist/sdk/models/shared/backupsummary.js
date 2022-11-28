@@ -1,0 +1,79 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { BackupStatusEnum } from "./backupstatusenum";
+import { BackupTypeEnum } from "./backuptypeenum";
+// BackupSummary
+/**
+ * Contains details for the backup.
+**/
+var BackupSummary = /** @class */ (function (_super) {
+    __extends(BackupSummary, _super);
+    function BackupSummary() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=BackupArn" }),
+        __metadata("design:type", String)
+    ], BackupSummary.prototype, "backupArn", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=BackupCreationDateTime" }),
+        __metadata("design:type", Date)
+    ], BackupSummary.prototype, "backupCreationDateTime", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=BackupExpiryDateTime" }),
+        __metadata("design:type", Date)
+    ], BackupSummary.prototype, "backupExpiryDateTime", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=BackupName" }),
+        __metadata("design:type", String)
+    ], BackupSummary.prototype, "backupName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=BackupSizeBytes" }),
+        __metadata("design:type", Number)
+    ], BackupSummary.prototype, "backupSizeBytes", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=BackupStatus" }),
+        __metadata("design:type", String)
+    ], BackupSummary.prototype, "backupStatus", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=BackupType" }),
+        __metadata("design:type", String)
+    ], BackupSummary.prototype, "backupType", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=TableArn" }),
+        __metadata("design:type", String)
+    ], BackupSummary.prototype, "tableArn", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=TableId" }),
+        __metadata("design:type", String)
+    ], BackupSummary.prototype, "tableId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=TableName" }),
+        __metadata("design:type", String)
+    ], BackupSummary.prototype, "tableName", void 0);
+    return BackupSummary;
+}(SpeakeasyBase));
+export { BackupSummary };

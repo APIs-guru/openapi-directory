@@ -1,11 +1,8 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetweatherQueryParams extends SpeakeasyBase {
     city: string;
     license: string;
     state: string;
-}
-export declare class GetweatherRequest extends SpeakeasyBase {
-    queryParams: GetweatherQueryParams;
 }
 export declare class Getweather200ApplicationJson extends SpeakeasyBase {
     city?: string;
@@ -19,6 +16,9 @@ export declare class Getweather200ApplicationJson extends SpeakeasyBase {
     weather?: string;
     windDir?: string;
     windMph?: string;
+}
+export declare class GetweatherRequest extends SpeakeasyBase {
+    queryParams: GetweatherQueryParams;
 }
 export declare class GetweatherResponse extends SpeakeasyBase {
     contentType: string;

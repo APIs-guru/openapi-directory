@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetApiMiscRandomAddressQueryParams = /** @class */ (function (_super) {
     __extends(GetApiMiscRandomAddressQueryParams, _super);
     function GetApiMiscRandomAddressQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=culture" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=culture" }),
         __metadata("design:type", String)
     ], GetApiMiscRandomAddressQueryParams.prototype, "culture", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=number" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=number" }),
         __metadata("design:type", Number)
     ], GetApiMiscRandomAddressQueryParams.prototype, "number", void 0);
     return GetApiMiscRandomAddressQueryParams;
@@ -45,7 +45,7 @@ var GetApiMiscRandomAddressHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
         __metadata("design:type", String)
     ], GetApiMiscRandomAddressHeaders.prototype, "xApiKey", void 0);
     return GetApiMiscRandomAddressHeaders;
@@ -57,11 +57,11 @@ var GetApiMiscRandomAddressRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiMiscRandomAddressQueryParams)
     ], GetApiMiscRandomAddressRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiMiscRandomAddressHeaders)
     ], GetApiMiscRandomAddressRequest.prototype, "headers", void 0);
     return GetApiMiscRandomAddressRequest;
@@ -73,11 +73,11 @@ var GetApiMiscRandomAddressResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiMiscRandomAddressResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiMiscRandomAddressResponse.prototype, "statusCode", void 0);
     return GetApiMiscRandomAddressResponse;

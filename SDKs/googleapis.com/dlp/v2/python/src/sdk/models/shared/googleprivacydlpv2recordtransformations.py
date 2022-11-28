@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleprivacydlpv2fieldtransformation
-from . import googleprivacydlpv2recordsuppression
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GooglePrivacyDlpV2RecordTransformations:
-    field_transformations: Optional[List[googleprivacydlpv2fieldtransformation.GooglePrivacyDlpV2FieldTransformation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fieldTransformations' }})
-    record_suppressions: Optional[List[googleprivacydlpv2recordsuppression.GooglePrivacyDlpV2RecordSuppression]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recordSuppressions' }})
+    r"""GooglePrivacyDlpV2RecordTransformations
+    A type of transformation that is applied over structured data such as a table.
+    """
+    
+    field_transformations: Optional[List[GooglePrivacyDlpV2FieldTransformation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fieldTransformations') }})
+    record_suppressions: Optional[List[GooglePrivacyDlpV2RecordSuppression]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('recordSuppressions') }})
     

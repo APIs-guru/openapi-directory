@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteLaunchTemplateVersionsActionEnum(str, Enum):
     DELETE_LAUNCH_TEMPLATE_VERSIONS = "DeleteLaunchTemplateVersions"
@@ -10,8 +14,8 @@ class PostDeleteLaunchTemplateVersionsVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteLaunchTemplateVersionsQueryParams:
-    action: PostDeleteLaunchTemplateVersionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteLaunchTemplateVersionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteLaunchTemplateVersionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteLaunchTemplateVersionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteLaunchTemplateVersionsHeaders:
 
 @dataclass
 class PostDeleteLaunchTemplateVersionsRequest:
-    query_params: PostDeleteLaunchTemplateVersionsQueryParams = field(default=None)
-    headers: PostDeleteLaunchTemplateVersionsHeaders = field(default=None)
+    headers: PostDeleteLaunchTemplateVersionsHeaders = field()
+    query_params: PostDeleteLaunchTemplateVersionsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteLaunchTemplateVersionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserInfo } from "./userinfo";
+
 
 
 // GetAccountInfoResponse
@@ -8,9 +8,9 @@ import { UserInfo } from "./userinfo";
  * Response of getting account information.
 **/
 export class GetAccountInfoResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=users", elemType: shared.UserInfo })
+  @SpeakeasyMetadata({ data: "json, name=users", elemType: UserInfo })
   users?: UserInfo[];
 }

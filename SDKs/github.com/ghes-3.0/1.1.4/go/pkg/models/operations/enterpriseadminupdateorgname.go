@@ -8,14 +8,14 @@ type EnterpriseAdminUpdateOrgNameRequestBody struct {
 	Login string `json:"login"`
 }
 
-type EnterpriseAdminUpdateOrgNameRequest struct {
-	PathParams EnterpriseAdminUpdateOrgNamePathParams
-	Request    *EnterpriseAdminUpdateOrgNameRequestBody `request:"mediaType=application/json"`
-}
-
 type EnterpriseAdminUpdateOrgName202ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 	URL     *string `json:"url,omitempty"`
+}
+
+type EnterpriseAdminUpdateOrgNameRequest struct {
+	PathParams EnterpriseAdminUpdateOrgNamePathParams
+	Request    *EnterpriseAdminUpdateOrgNameRequestBody `request:"mediaType=application/json"`
 }
 
 type EnterpriseAdminUpdateOrgNameResponse struct {

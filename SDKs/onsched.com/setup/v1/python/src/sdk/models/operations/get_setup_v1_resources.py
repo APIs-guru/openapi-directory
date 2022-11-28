@@ -17,12 +17,12 @@ class GetSetupV1ResourcesQueryParams:
 
 @dataclass
 class GetSetupV1ResourcesRequest:
-    query_params: GetSetupV1ResourcesQueryParams = field(default=None)
+    query_params: GetSetupV1ResourcesQueryParams = field()
     
 
 @dataclass
 class GetSetupV1ResourcesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     resource_list_view_model: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

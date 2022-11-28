@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlanningLevelForecastResultData } from "./planninglevelforecastresultdata";
 
 
+
 export class TimeSeriesForecastResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: number;
 
-  @Metadata({ data: "json, name=forecastData", elemType: shared.PlanningLevelForecastResultData })
+  @SpeakeasyMetadata({ data: "json, name=forecastData", elemType: PlanningLevelForecastResultData })
   forecastData?: PlanningLevelForecastResultData[];
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method?: string;
 
-  @Metadata({ data: "json, name=timeSeriesId" })
+  @SpeakeasyMetadata({ data: "json, name=timeSeriesId" })
   timeSeriesId?: string;
 }

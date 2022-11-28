@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MysqlTable } from "./mysqltable";
+
 
 
 // MysqlDatabase
@@ -8,9 +8,9 @@ import { MysqlTable } from "./mysqltable";
  * MySQL database.
 **/
 export class MysqlDatabase extends SpeakeasyBase {
-  @Metadata({ data: "json, name=databaseName" })
+  @SpeakeasyMetadata({ data: "json, name=databaseName" })
   databaseName?: string;
 
-  @Metadata({ data: "json, name=mysqlTables", elemType: shared.MysqlTable })
+  @SpeakeasyMetadata({ data: "json, name=mysqlTables", elemType: MysqlTable })
   mysqlTables?: MysqlTable[];
 }

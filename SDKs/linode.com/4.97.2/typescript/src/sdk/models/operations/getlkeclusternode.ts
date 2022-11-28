@@ -1,48 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetLkeClusterNodePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=clusterId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=clusterId" })
   clusterId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=nodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nodeId" })
   nodeId: string;
 }
 
 
-export class GetLkeClusterNodeSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class GetLkeClusterNodeSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class GetLkeClusterNodeSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetLkeClusterNodeSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetLkeClusterNodeSecurityOption2;
-}
-
-
-export class GetLkeClusterNodeRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetLkeClusterNodePathParams;
-
-  @Metadata()
-  security: GetLkeClusterNodeSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 export enum GetLkeClusterNode200ApplicationJsonDataStatusEnum {
-    Ready = "ready"
-,    NotReady = "not_ready"
+    Ready = "ready",
+    NotReady = "not_ready"
 }
 
 
@@ -52,39 +32,48 @@ export enum GetLkeClusterNode200ApplicationJsonDataStatusEnum {
  * 
 **/
 export class GetLkeClusterNode200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=instance_id" })
+  @SpeakeasyMetadata({ data: "json, name=instance_id" })
   instanceId?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: GetLkeClusterNode200ApplicationJsonDataStatusEnum;
 }
 
 
 export class GetLkeClusterNode200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: GetLkeClusterNode200ApplicationJsonData;
 }
 
 
 export class GetLkeClusterNodeDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class GetLkeClusterNodeRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetLkeClusterNodePathParams;
+
+  @SpeakeasyMetadata()
+  security: GetLkeClusterNodeSecurity;
+}
+
+
 export class GetLkeClusterNodeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLkeClusterNode200ApplicationJsonObject?: GetLkeClusterNode200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLkeClusterNodeDefaultApplicationJsonObject?: GetLkeClusterNodeDefaultApplicationJson;
 }

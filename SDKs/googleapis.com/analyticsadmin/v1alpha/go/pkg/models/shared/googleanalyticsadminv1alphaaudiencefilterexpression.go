@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAnalyticsAdminV1alphaAudienceFilterExpression
+// A logical expression of Audience dimension, metric, or event filters.
 type GoogleAnalyticsAdminV1alphaAudienceFilterExpression struct {
 	AndGroup                *GoogleAnalyticsAdminV1alphaAudienceFilterExpressionList    `json:"andGroup,omitempty"`
 	DimensionOrMetricFilter *GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilter `json:"dimensionOrMetricFilter,omitempty"`

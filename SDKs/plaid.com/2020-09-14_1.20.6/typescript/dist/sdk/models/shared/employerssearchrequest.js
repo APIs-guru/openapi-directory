@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // EmployersSearchRequest
 /**
  * EmployersSearchRequest defines the request schema for `/employers/search`.
@@ -33,19 +33,19 @@ var EmployersSearchRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=client_id" }),
+        SpeakeasyMetadata({ data: "json, name=client_id" }),
         __metadata("design:type", String)
     ], EmployersSearchRequest.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=products" }),
+        SpeakeasyMetadata({ data: "json, name=products" }),
         __metadata("design:type", Array)
     ], EmployersSearchRequest.prototype, "products", void 0);
     __decorate([
-        Metadata({ data: "json, name=query" }),
+        SpeakeasyMetadata({ data: "json, name=query" }),
         __metadata("design:type", String)
     ], EmployersSearchRequest.prototype, "query", void 0);
     __decorate([
-        Metadata({ data: "json, name=secret" }),
+        SpeakeasyMetadata({ data: "json, name=secret" }),
         __metadata("design:type", String)
     ], EmployersSearchRequest.prototype, "secret", void 0);
     return EmployersSearchRequest;

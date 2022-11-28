@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var ListCallsDirectionEnum;
 (function (ListCallsDirectionEnum) {
@@ -48,35 +48,35 @@ var ListCallsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=direction" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" }),
         __metadata("design:type", String)
     ], ListCallsQueryParams.prototype, "direction", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fromDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromDate" }),
         __metadata("design:type", Number)
     ], ListCallsQueryParams.prototype, "fromDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], ListCallsQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=order" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" }),
         __metadata("design:type", String)
     ], ListCallsQueryParams.prototype, "order", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=size" }),
         __metadata("design:type", Number)
     ], ListCallsQueryParams.prototype, "size", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], ListCallsQueryParams.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=states" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=states" }),
         __metadata("design:type", String)
     ], ListCallsQueryParams.prototype, "states", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=toDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=toDate" }),
         __metadata("design:type", Number)
     ], ListCallsQueryParams.prototype, "toDate", void 0);
     return ListCallsQueryParams;
@@ -88,7 +88,7 @@ var ListCallsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListCallsQueryParams)
     ], ListCallsRequest.prototype, "queryParams", void 0);
     return ListCallsRequest;
@@ -100,19 +100,19 @@ var ListCallsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ elemType: shared.Call }),
+        SpeakeasyMetadata({ elemType: shared.Call }),
         __metadata("design:type", Array)
     ], ListCallsResponse.prototype, "calls", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListCallsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorResponse)
     ], ListCallsResponse.prototype, "errorResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListCallsResponse.prototype, "statusCode", void 0);
     return ListCallsResponse;

@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -16,15 +19,15 @@ class GetV2LoggingOptionsHeaders:
 
 @dataclass
 class GetV2LoggingOptionsRequest:
-    headers: GetV2LoggingOptionsHeaders = field(default=None)
+    headers: GetV2LoggingOptionsHeaders = field()
     
 
 @dataclass
 class GetV2LoggingOptionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_v2_logging_options_response: Optional[shared.GetV2LoggingOptionsResponse] = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     not_configured_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

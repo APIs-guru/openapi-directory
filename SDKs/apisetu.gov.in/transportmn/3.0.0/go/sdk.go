@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://apisetu.gov.in/transportmn/v3",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// Drvlc - Driving License
+// API to verify Driving License.
 func (s *SDK) Drvlc(ctx context.Context, request operations.DrvlcRequest) (*operations.DrvlcResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/drvlc/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -67,7 +90,7 @@ func (s *SDK) Drvlc(ctx context.Context, request operations.DrvlcRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -167,8 +190,10 @@ func (s *SDK) Drvlc(ctx context.Context, request operations.DrvlcRequest) (*oper
 	return res, nil
 }
 
+// Rvcer - Registration of Vehicles
+// API to verify Registration of Vehicles.
 func (s *SDK) Rvcer(ctx context.Context, request operations.RvcerRequest) (*operations.RvcerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/rvcer/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -183,7 +208,7 @@ func (s *SDK) Rvcer(ctx context.Context, request operations.RvcerRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

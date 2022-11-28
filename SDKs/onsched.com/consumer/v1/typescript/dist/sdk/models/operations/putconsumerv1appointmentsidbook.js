@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PutConsumerV1AppointmentsIdBookPathParams = /** @class */ (function (_super) {
     __extends(PutConsumerV1AppointmentsIdBookPathParams, _super);
@@ -30,7 +30,7 @@ var PutConsumerV1AppointmentsIdBookPathParams = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], PutConsumerV1AppointmentsIdBookPathParams.prototype, "id", void 0);
     return PutConsumerV1AppointmentsIdBookPathParams;
@@ -42,19 +42,19 @@ var PutConsumerV1AppointmentsIdBookRequests = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/*+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/*+json" }),
         __metadata("design:type", shared.AppointmentBookModel)
     ], PutConsumerV1AppointmentsIdBookRequests.prototype, "appointmentBookModel", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.AppointmentBookModel)
     ], PutConsumerV1AppointmentsIdBookRequests.prototype, "appointmentBookModel1", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json-patch+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" }),
         __metadata("design:type", shared.AppointmentBookModel)
     ], PutConsumerV1AppointmentsIdBookRequests.prototype, "appointmentBookModel2", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/json" }),
         __metadata("design:type", shared.AppointmentBookModel)
     ], PutConsumerV1AppointmentsIdBookRequests.prototype, "appointmentBookModel3", void 0);
     return PutConsumerV1AppointmentsIdBookRequests;
@@ -66,11 +66,11 @@ var PutConsumerV1AppointmentsIdBookRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutConsumerV1AppointmentsIdBookPathParams)
     ], PutConsumerV1AppointmentsIdBookRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutConsumerV1AppointmentsIdBookRequests)
     ], PutConsumerV1AppointmentsIdBookRequest.prototype, "request", void 0);
     return PutConsumerV1AppointmentsIdBookRequest;
@@ -82,15 +82,15 @@ var PutConsumerV1AppointmentsIdBookResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AppointmentViewModel)
     ], PutConsumerV1AppointmentsIdBookResponse.prototype, "appointmentViewModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutConsumerV1AppointmentsIdBookResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutConsumerV1AppointmentsIdBookResponse.prototype, "statusCode", void 0);
     return PutConsumerV1AppointmentsIdBookResponse;

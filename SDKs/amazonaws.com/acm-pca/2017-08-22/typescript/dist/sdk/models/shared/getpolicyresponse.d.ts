@@ -1,0 +1,4 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+export declare class GetPolicyResponse extends SpeakeasyBase {
+    policy?: string;
+}

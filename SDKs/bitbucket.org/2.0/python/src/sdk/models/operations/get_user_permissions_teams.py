@@ -10,36 +10,21 @@ class GetUserPermissionsTeamsQueryParams:
     
 
 @dataclass
-class GetUserPermissionsTeamsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetUserPermissionsTeamsSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class GetUserPermissionsTeamsSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
 class GetUserPermissionsTeamsSecurity:
-    option1: Optional[GetUserPermissionsTeamsSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetUserPermissionsTeamsSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[GetUserPermissionsTeamsSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetUserPermissionsTeamsRequest:
-    query_params: GetUserPermissionsTeamsQueryParams = field(default=None)
-    security: GetUserPermissionsTeamsSecurity = field(default=None)
+    query_params: GetUserPermissionsTeamsQueryParams = field()
+    security: GetUserPermissionsTeamsSecurity = field()
     
 
 @dataclass
 class GetUserPermissionsTeamsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     paginated_team_permissions: Optional[shared.PaginatedTeamPermissions] = field(default=None)
     

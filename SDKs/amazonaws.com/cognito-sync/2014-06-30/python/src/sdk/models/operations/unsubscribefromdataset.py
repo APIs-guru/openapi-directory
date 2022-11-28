@@ -1,13 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class UnsubscribeFromDatasetPathParams:
-    dataset_name: str = field(default=None, metadata={'path_param': { 'field_name': 'DatasetName', 'style': 'simple', 'explode': False }})
-    device_id: str = field(default=None, metadata={'path_param': { 'field_name': 'DeviceId', 'style': 'simple', 'explode': False }})
-    identity_id: str = field(default=None, metadata={'path_param': { 'field_name': 'IdentityId', 'style': 'simple', 'explode': False }})
-    identity_pool_id: str = field(default=None, metadata={'path_param': { 'field_name': 'IdentityPoolId', 'style': 'simple', 'explode': False }})
+    dataset_name: str = field(metadata={'path_param': { 'field_name': 'DatasetName', 'style': 'simple', 'explode': False }})
+    device_id: str = field(metadata={'path_param': { 'field_name': 'DeviceId', 'style': 'simple', 'explode': False }})
+    identity_id: str = field(metadata={'path_param': { 'field_name': 'IdentityId', 'style': 'simple', 'explode': False }})
+    identity_pool_id: str = field(metadata={'path_param': { 'field_name': 'IdentityPoolId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,19 +26,19 @@ class UnsubscribeFromDatasetHeaders:
 
 @dataclass
 class UnsubscribeFromDatasetRequest:
-    path_params: UnsubscribeFromDatasetPathParams = field(default=None)
-    headers: UnsubscribeFromDatasetHeaders = field(default=None)
+    headers: UnsubscribeFromDatasetHeaders = field()
+    path_params: UnsubscribeFromDatasetPathParams = field()
     
 
 @dataclass
 class UnsubscribeFromDatasetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_error_exception: Optional[Any] = field(default=None)
     invalid_configuration_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     not_authorized_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unsubscribe_from_dataset_response: Optional[dict[str, Any]] = field(default=None)
     

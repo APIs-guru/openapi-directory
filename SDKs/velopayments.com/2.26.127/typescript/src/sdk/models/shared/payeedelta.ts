@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OnboardedStatus2Enum } from "./onboardedstatus2enum";
 
 
+
 export class PayeeDelta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dbaName" })
+  @SpeakeasyMetadata({ data: "json, name=dbaName" })
   dbaName?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=onboardedStatus" })
+  @SpeakeasyMetadata({ data: "json, name=onboardedStatus" })
   onboardedStatus?: OnboardedStatus2Enum;
 
-  @Metadata({ data: "json, name=payeeCountry" })
+  @SpeakeasyMetadata({ data: "json, name=payeeCountry" })
   payeeCountry?: string;
 
-  @Metadata({ data: "json, name=payeeId" })
+  @SpeakeasyMetadata({ data: "json, name=payeeId" })
   payeeId: string;
 
-  @Metadata({ data: "json, name=remoteId" })
+  @SpeakeasyMetadata({ data: "json, name=remoteId" })
   remoteId: string;
 }

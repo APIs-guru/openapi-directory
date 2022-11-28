@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetBatchesBatchStatusEnum {
-    Submitted = "SUBMITTED"
-,    Removed = "REMOVED"
-,    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
+    Submitted = "SUBMITTED",
+    Removed = "REMOVED",
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED"
 }
 
 export enum GetBatchesBatchTypesEnum {
-    InternalTransfer = "INTERNAL_TRANSFER"
-,    BankTransfer = "BANK_TRANSFER"
-,    NewPayee = "NEW_PAYEE"
+    InternalTransfer = "INTERNAL_TRANSFER",
+    BankTransfer = "BANK_TRANSFER",
+    NewPayee = "NEW_PAYEE"
 }
 
 export enum GetBatchesOrderEnum {
-    Desc = "DESC"
-,    Asc = "ASC"
+    Desc = "DESC",
+    Asc = "ASC"
 }
 
 export enum GetBatchesOrderByEnum {
@@ -24,23 +25,17 @@ export enum GetBatchesOrderByEnum {
 
 
 export class GetBatchesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=batchStatus" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=batchStatus" })
   batchStatus?: GetBatchesBatchStatusEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=batchTypes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=batchTypes" })
   batchTypes?: GetBatchesBatchTypesEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=order" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" })
   order?: GetBatchesOrderEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=orderBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=orderBy" })
   orderBy?: GetBatchesOrderByEnum;
-}
-
-
-export class GetBatchesRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetBatchesQueryParams;
 }
 
 
@@ -49,79 +44,85 @@ export class GetBatchesRequest extends SpeakeasyBase {
  * The outcome of the attempted transaction.
 **/
 export class GetBatchesBatchItemsBatchItemResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 export enum GetBatchesBatchItemsBatchItemStatusEnum {
-    Submitted = "SUBMITTED"
-,    Removed = "REMOVED"
-,    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
+    Submitted = "SUBMITTED",
+    Removed = "REMOVED",
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED"
 }
 
 
 export class GetBatchesBatchItemsBatchItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=amountAfterCharges" })
+  @SpeakeasyMetadata({ data: "json, name=amountAfterCharges" })
   amountAfterCharges?: number;
 
-  @Metadata({ data: "json, name=batchItemUuid" })
+  @SpeakeasyMetadata({ data: "json, name=batchItemUuid" })
   batchItemUuid?: string;
 
-  @Metadata({ data: "json, name=dateCreated" })
+  @SpeakeasyMetadata({ data: "json, name=dateCreated" })
   dateCreated?: Date;
 
-  @Metadata({ data: "json, name=feeAmount" })
+  @SpeakeasyMetadata({ data: "json, name=feeAmount" })
   feeAmount?: number;
 
-  @Metadata({ data: "json, name=icanFrom" })
+  @SpeakeasyMetadata({ data: "json, name=icanFrom" })
   icanFrom?: number;
 
-  @Metadata({ data: "json, name=icanTo" })
+  @SpeakeasyMetadata({ data: "json, name=icanTo" })
   icanTo?: number;
 
-  @Metadata({ data: "json, name=lastUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdated" })
   lastUpdated?: Date;
 
-  @Metadata({ data: "json, name=ref" })
+  @SpeakeasyMetadata({ data: "json, name=ref" })
   ref?: string;
 
-  @Metadata({ data: "json, name=refId" })
+  @SpeakeasyMetadata({ data: "json, name=refId" })
   refId?: number;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: GetBatchesBatchItemsBatchItemResult;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: GetBatchesBatchItemsBatchItemStatusEnum;
 
-  @Metadata({ data: "json, name=taxAmount" })
+  @SpeakeasyMetadata({ data: "json, name=taxAmount" })
   taxAmount?: number;
 }
 
 
 export class GetBatchesBatchItems extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: operations.GetBatchesBatchItemsBatchItem })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: GetBatchesBatchItemsBatchItem })
   items?: GetBatchesBatchItemsBatchItem[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
+export class GetBatchesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetBatchesQueryParams;
+}
+
+
 export class GetBatchesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   batchItems?: GetBatchesBatchItems;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

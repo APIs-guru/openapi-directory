@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateDashboardResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dashboardArn" })
+  @SpeakeasyMetadata({ data: "json, name=dashboardArn" })
   dashboardArn: string;
 
-  @Metadata({ data: "json, name=dashboardId" })
+  @SpeakeasyMetadata({ data: "json, name=dashboardId" })
   dashboardId: string;
 }

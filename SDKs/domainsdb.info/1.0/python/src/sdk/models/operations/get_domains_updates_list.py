@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 from sdk.models import shared
 
 
@@ -10,12 +13,12 @@ class GetDomainsUpdatesListQueryParams:
 
 @dataclass
 class GetDomainsUpdatesListRequest:
-    query_params: GetDomainsUpdatesListQueryParams = field(default=None)
+    query_params: GetDomainsUpdatesListQueryParams = field()
     
 
 @dataclass
 class GetDomainsUpdatesListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     update_model: Optional[shared.UpdateModel] = field(default=None)
     

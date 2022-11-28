@@ -38,6 +38,8 @@ const (
 	SearchJobsRequestSearchModeEnumFeaturedJobSearch     SearchJobsRequestSearchModeEnum = "FEATURED_JOB_SEARCH"
 )
 
+// SearchJobsRequest
+// The Request body of the `SearchJobs` call.
 type SearchJobsRequest struct {
 	CustomRankingInfo    *CustomRankingInfo                         `json:"customRankingInfo,omitempty"`
 	DisableKeywordMatch  *bool                                      `json:"disableKeywordMatch,omitempty"`

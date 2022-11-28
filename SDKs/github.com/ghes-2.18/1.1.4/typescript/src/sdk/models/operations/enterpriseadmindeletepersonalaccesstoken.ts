@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EnterpriseAdminDeletePersonalAccessTokenPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=token_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=token_id" })
   tokenId: number;
 }
 
 
 export class EnterpriseAdminDeletePersonalAccessTokenRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EnterpriseAdminDeletePersonalAccessTokenPathParams;
 }
 
 
 export class EnterpriseAdminDeletePersonalAccessTokenResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

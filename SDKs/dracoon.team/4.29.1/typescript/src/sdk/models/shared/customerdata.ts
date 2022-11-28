@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomerData
@@ -6,36 +7,36 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Customer information
 **/
 export class CustomerData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountsLimit" })
+  @SpeakeasyMetadata({ data: "json, name=accountsLimit" })
   accountsLimit: number;
 
-  @Metadata({ data: "json, name=accountsUsed" })
+  @SpeakeasyMetadata({ data: "json, name=accountsUsed" })
   accountsUsed: number;
 
-  @Metadata({ data: "json, name=cntFiles" })
+  @SpeakeasyMetadata({ data: "json, name=cntFiles" })
   cntFiles?: number;
 
-  @Metadata({ data: "json, name=cntFolders" })
+  @SpeakeasyMetadata({ data: "json, name=cntFolders" })
   cntFolders?: number;
 
-  @Metadata({ data: "json, name=cntRooms" })
+  @SpeakeasyMetadata({ data: "json, name=cntRooms" })
   cntRooms?: number;
 
-  @Metadata({ data: "json, name=customerEncryptionEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=customerEncryptionEnabled" })
   customerEncryptionEnabled: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=isProviderCustomer" })
+  @SpeakeasyMetadata({ data: "json, name=isProviderCustomer" })
   isProviderCustomer: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=spaceLimit" })
+  @SpeakeasyMetadata({ data: "json, name=spaceLimit" })
   spaceLimit: number;
 
-  @Metadata({ data: "json, name=spaceUsed" })
+  @SpeakeasyMetadata({ data: "json, name=spaceUsed" })
   spaceUsed: number;
 }

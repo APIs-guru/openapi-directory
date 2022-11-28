@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RgbColor } from "./rgbcolor";
+
 
 
 // Color
@@ -7,6 +8,6 @@ import { RgbColor } from "./rgbcolor";
  * A solid color.
 **/
 export class Color extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rgbColor" })
+  @SpeakeasyMetadata({ data: "json, name=rgbColor" })
   rgbColor?: RgbColor;
 }

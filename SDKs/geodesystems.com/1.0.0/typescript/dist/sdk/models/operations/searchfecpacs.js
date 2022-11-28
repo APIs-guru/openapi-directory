@@ -22,146 +22,146 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SearchFecPacsQueryParams = /** @class */ (function (_super) {
     __extends(SearchFecPacsQueryParams, _super);
     function SearchFecPacsQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=changedate.from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=changedate.from" }),
         __metadata("design:type", Date)
     ], SearchFecPacsQueryParams.prototype, "changedateFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=changedate.to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=changedate.to" }),
         __metadata("design:type", Date)
     ], SearchFecPacsQueryParams.prototype, "changedateTo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=createdate.from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdate.from" }),
         __metadata("design:type", Date)
     ], SearchFecPacsQueryParams.prototype, "createdateFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=createdate.to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdate.to" }),
         __metadata("design:type", Date)
     ], SearchFecPacsQueryParams.prototype, "createdateTo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=description" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=description" }),
         __metadata("design:type", String)
     ], SearchFecPacsQueryParams.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filesuffix" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filesuffix" }),
         __metadata("design:type", String)
     ], SearchFecPacsQueryParams.prototype, "filesuffix", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fromdate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromdate" }),
         __metadata("design:type", Date)
     ], SearchFecPacsQueryParams.prototype, "fromdate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=group" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=group" }),
         __metadata("design:type", String)
     ], SearchFecPacsQueryParams.prototype, "group", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=max" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxlatitude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxlatitude" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "maxlatitude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxlongitude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxlongitude" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "maxlongitude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=minlatitude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minlatitude" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "minlatitude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=minlongitude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minlongitude" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "minlongitude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" }),
         __metadata("design:type", String)
     ], SearchFecPacsQueryParams.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.beginning_cash" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.beginning_cash" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "searchDbFecPacsBeginningCash", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.candidate_loan_repayments" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.candidate_loan_repayments" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "searchDbFecPacsCandidateLoanRepayments", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.committee" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.committee" }),
         __metadata("design:type", String)
     ], SearchFecPacsQueryParams.prototype, "searchDbFecPacsCommittee", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.contributions_from_candidate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.contributions_from_candidate" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "searchDbFecPacsContributionsFromCandidate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.contributions_from_individuals" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.contributions_from_individuals" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "searchDbFecPacsContributionsFromIndividuals", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.contributions_from_other_committees" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.contributions_from_other_committees" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "searchDbFecPacsContributionsFromOtherCommittees", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.contributions_to_other_committee" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.contributions_to_other_committee" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "searchDbFecPacsContributionsToOtherCommittee", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.ending_cash" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.ending_cash" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "searchDbFecPacsEndingCash", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.loan_repayments" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.loan_repayments" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "searchDbFecPacsLoanRepayments", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.loans_from_candidate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.loans_from_candidate" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "searchDbFecPacsLoansFromCandidate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.refends_to_othercommittees" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.refends_to_othercommittees" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "searchDbFecPacsRefendsToOthercommittees", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.refunds_to_individuals" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.refunds_to_individuals" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "searchDbFecPacsRefundsToIndividuals", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.total_distributions" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.total_distributions" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "searchDbFecPacsTotalDistributions", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.total_loans_received" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.total_loans_received" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "searchDbFecPacsTotalLoansReceived", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.total_receipts" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.total_receipts" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "searchDbFecPacsTotalReceipts", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.trans_from_affiliates" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.trans_from_affiliates" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "searchDbFecPacsTransFromAffiliates", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.transfers_to_affiliates" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_fec_pacs.transfers_to_affiliates" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "searchDbFecPacsTransfersToAffiliates", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=skip" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=skip" }),
         __metadata("design:type", Number)
     ], SearchFecPacsQueryParams.prototype, "skip", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=text" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=text" }),
         __metadata("design:type", String)
     ], SearchFecPacsQueryParams.prototype, "text", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=todate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=todate" }),
         __metadata("design:type", Date)
     ], SearchFecPacsQueryParams.prototype, "todate", void 0);
     return SearchFecPacsQueryParams;
@@ -173,7 +173,7 @@ var SearchFecPacsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SearchFecPacsQueryParams)
     ], SearchFecPacsRequest.prototype, "queryParams", void 0);
     return SearchFecPacsRequest;
@@ -185,11 +185,11 @@ var SearchFecPacsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SearchFecPacsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SearchFecPacsResponse.prototype, "statusCode", void 0);
     return SearchFecPacsResponse;

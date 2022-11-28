@@ -1,5 +1,7 @@
 package shared
 
+// PutApprovalResultInput
+// Represents the input of a <code>PutApprovalResult</code> action.
 type PutApprovalResultInput struct {
 	ActionName   string         `json:"actionName"`
 	PipelineName string         `json:"pipelineName"`

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import finding
-from . import resource
+from sdk import utils
+from . import *
 
 class ListFindingsResultStateChangeEnum(str, Enum):
     UNUSED = "UNUSED"
@@ -15,7 +16,11 @@ class ListFindingsResultStateChangeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ListFindingsResult:
-    finding: Optional[finding.Finding] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finding' }})
-    resource: Optional[resource.Resource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource' }})
-    state_change: Optional[ListFindingsResultStateChangeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stateChange' }})
+    r"""ListFindingsResult
+    Result containing the Finding and its StateChange.
+    """
+    
+    finding: Optional[Finding] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('finding') }})
+    resource: Optional[Resource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource') }})
+    state_change: Optional[ListFindingsResultStateChangeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stateChange') }})
     

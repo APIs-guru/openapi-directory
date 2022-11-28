@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FeatureGroupStatusEnum } from "./featuregroupstatusenum";
 import { OfflineStoreStatus } from "./offlinestorestatus";
+
 
 
 // FeatureGroupSummary
@@ -8,18 +9,18 @@ import { OfflineStoreStatus } from "./offlinestorestatus";
  * The name, Arn, <code>CreationTime</code>, <code>FeatureGroup</code> values, <code>LastUpdatedTime</code> and <code>EnableOnlineStorage</code> status of a <code>FeatureGroup</code>.
 **/
 export class FeatureGroupSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=FeatureGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=FeatureGroupArn" })
   featureGroupArn: string;
 
-  @Metadata({ data: "json, name=FeatureGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=FeatureGroupName" })
   featureGroupName: string;
 
-  @Metadata({ data: "json, name=FeatureGroupStatus" })
+  @SpeakeasyMetadata({ data: "json, name=FeatureGroupStatus" })
   featureGroupStatus?: FeatureGroupStatusEnum;
 
-  @Metadata({ data: "json, name=OfflineStoreStatus" })
+  @SpeakeasyMetadata({ data: "json, name=OfflineStoreStatus" })
   offlineStoreStatus?: OfflineStoreStatus;
 }

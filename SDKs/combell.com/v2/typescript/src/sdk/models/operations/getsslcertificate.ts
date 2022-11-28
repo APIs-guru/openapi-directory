@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSslCertificatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=sha1Fingerprint" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sha1Fingerprint" })
   sha1Fingerprint: string;
 }
 
 
 export class GetSslCertificateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sha1_fingerprint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sha1_fingerprint" })
   sha1Fingerprint: string;
 }
 
 
 export class GetSslCertificateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSslCertificatePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSslCertificateQueryParams;
 }
 
 
 export class GetSslCertificateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sslCertificateDetail?: shared.SslCertificateDetail;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScoreConfigOutput } from "./scoreconfigoutput";
+
 
 
 // ScoreConfigsOutput
@@ -8,6 +8,6 @@ import { ScoreConfigOutput } from "./scoreconfigoutput";
  * The result of an operation that returns multiple score configs
 **/
 export class ScoreConfigsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=score_configs", elemType: shared.ScoreConfigOutput })
+  @SpeakeasyMetadata({ data: "json, name=score_configs", elemType: ScoreConfigOutput })
   scoreConfigs: ScoreConfigOutput[];
 }

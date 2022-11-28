@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsRdsDbParameterGroup
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about a parameter group for a DB instance.
 **/
 export class AwsRdsDbParameterGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DbParameterGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=DbParameterGroupName" })
   dbParameterGroupName?: string;
 
-  @Metadata({ data: "json, name=ParameterApplyStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterApplyStatus" })
   parameterApplyStatus?: string;
 }

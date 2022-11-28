@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetUsersMeSubscriptionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=count" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=count" })
   count?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" })
   start?: number;
 }
 
 
 export class GetUsersMeSubscriptionsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class GetUsersMeSubscriptionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUsersMeSubscriptionsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetUsersMeSubscriptionsSecurity;
 }
 
 
 export class GetUsersMeSubscriptionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   videoChannelList?: any;
 }

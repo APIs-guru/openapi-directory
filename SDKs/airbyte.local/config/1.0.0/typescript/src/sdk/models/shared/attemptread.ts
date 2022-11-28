@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttemptStatusEnum } from "./attemptstatusenum";
 
 
+
 export class AttemptRead extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bytesSynced" })
+  @SpeakeasyMetadata({ data: "json, name=bytesSynced" })
   bytesSynced?: number;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: number;
 
-  @Metadata({ data: "json, name=endedAt" })
+  @SpeakeasyMetadata({ data: "json, name=endedAt" })
   endedAt?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=recordsSynced" })
+  @SpeakeasyMetadata({ data: "json, name=recordsSynced" })
   recordsSynced?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: AttemptStatusEnum;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt: number;
 }

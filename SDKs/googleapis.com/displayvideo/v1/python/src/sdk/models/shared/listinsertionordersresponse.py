@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import insertionorder
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListInsertionOrdersResponse:
-    insertion_orders: Optional[List[insertionorder.InsertionOrder]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'insertionOrders' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    insertion_orders: Optional[List[InsertionOrder]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('insertionOrders') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

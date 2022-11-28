@@ -1,12 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import formsettings
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateSettingsRequest:
-    settings: Optional[formsettings.FormSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settings' }})
-    update_mask: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateMask' }})
+    r"""UpdateSettingsRequest
+    Update Form's FormSettings.
+    """
+    
+    settings: Optional[FormSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settings') }})
+    update_mask: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateMask') }})
     

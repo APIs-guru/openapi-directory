@@ -22,19 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var InvalidRequestProblemErrors = /** @class */ (function (_super) {
     __extends(InvalidRequestProblemErrors, _super);
     function InvalidRequestProblemErrors() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], InvalidRequestProblemErrors.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=parameters" }),
+        SpeakeasyMetadata({ data: "json, name=parameters" }),
         __metadata("design:type", Map)
     ], InvalidRequestProblemErrors.prototype, "parameters", void 0);
     return InvalidRequestProblemErrors;
@@ -50,19 +49,19 @@ var InvalidRequestProblem = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=detail" }),
+        SpeakeasyMetadata({ data: "json, name=detail" }),
         __metadata("design:type", String)
     ], InvalidRequestProblem.prototype, "detail", void 0);
     __decorate([
-        Metadata({ data: "json, name=errors", elemType: shared.InvalidRequestProblemErrors }),
+        SpeakeasyMetadata({ data: "json, name=errors", elemType: InvalidRequestProblemErrors }),
         __metadata("design:type", Array)
     ], InvalidRequestProblem.prototype, "errors", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], InvalidRequestProblem.prototype, "title", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], InvalidRequestProblem.prototype, "type", void 0);
     return InvalidRequestProblem;

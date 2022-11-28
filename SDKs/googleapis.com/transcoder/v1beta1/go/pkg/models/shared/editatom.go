@@ -1,5 +1,7 @@
 package shared
 
+// EditAtom
+// Edit atom.
 type EditAtom struct {
 	EndTimeOffset   *string  `json:"endTimeOffset,omitempty"`
 	Inputs          []string `json:"inputs,omitempty"`

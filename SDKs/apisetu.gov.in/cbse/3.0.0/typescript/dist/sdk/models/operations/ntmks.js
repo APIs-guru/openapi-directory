@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var NtmksRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(NtmksRequestBodyCertificateParameters, _super);
@@ -30,15 +30,15 @@ var NtmksRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FullName" }),
+        SpeakeasyMetadata({ data: "json, name=FullName" }),
         __metadata("design:type", String)
     ], NtmksRequestBodyCertificateParameters.prototype, "fullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=rollno" }),
+        SpeakeasyMetadata({ data: "json, name=rollno" }),
         __metadata("design:type", String)
     ], NtmksRequestBodyCertificateParameters.prototype, "rollno", void 0);
     __decorate([
-        Metadata({ data: "json, name=year" }),
+        SpeakeasyMetadata({ data: "json, name=year" }),
         __metadata("design:type", String)
     ], NtmksRequestBodyCertificateParameters.prototype, "year", void 0);
     return NtmksRequestBodyCertificateParameters;
@@ -54,19 +54,19 @@ var NtmksRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", NtmksRequestBodyCertificateParameters)
     ], NtmksRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], NtmksRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], NtmksRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], NtmksRequestBody.prototype, "txnId", void 0);
     return NtmksRequestBody;
@@ -78,32 +78,16 @@ var NtmksSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], NtmksSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], NtmksSecurity.prototype, "clientId", void 0);
     return NtmksSecurity;
 }(SpeakeasyBase));
 export { NtmksSecurity };
-var NtmksRequest = /** @class */ (function (_super) {
-    __extends(NtmksRequest, _super);
-    function NtmksRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", NtmksRequestBody)
-    ], NtmksRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", NtmksSecurity)
-    ], NtmksRequest.prototype, "security", void 0);
-    return NtmksRequest;
-}(SpeakeasyBase));
-export { NtmksRequest };
 export var Ntmks400ApplicationJsonErrorEnum;
 (function (Ntmks400ApplicationJsonErrorEnum) {
     Ntmks400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -126,11 +110,11 @@ var Ntmks400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ntmks400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ntmks400ApplicationJson.prototype, "errorDescription", void 0);
     return Ntmks400ApplicationJson;
@@ -152,11 +136,11 @@ var Ntmks401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ntmks401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ntmks401ApplicationJson.prototype, "errorDescription", void 0);
     return Ntmks401ApplicationJson;
@@ -178,11 +162,11 @@ var Ntmks404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ntmks404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ntmks404ApplicationJson.prototype, "errorDescription", void 0);
     return Ntmks404ApplicationJson;
@@ -202,11 +186,11 @@ var Ntmks500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ntmks500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ntmks500ApplicationJson.prototype, "errorDescription", void 0);
     return Ntmks500ApplicationJson;
@@ -226,11 +210,11 @@ var Ntmks502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ntmks502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ntmks502ApplicationJson.prototype, "errorDescription", void 0);
     return Ntmks502ApplicationJson;
@@ -250,11 +234,11 @@ var Ntmks503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ntmks503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ntmks503ApplicationJson.prototype, "errorDescription", void 0);
     return Ntmks503ApplicationJson;
@@ -274,55 +258,71 @@ var Ntmks504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Ntmks504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Ntmks504ApplicationJson.prototype, "errorDescription", void 0);
     return Ntmks504ApplicationJson;
 }(SpeakeasyBase));
 export { Ntmks504ApplicationJson };
+var NtmksRequest = /** @class */ (function (_super) {
+    __extends(NtmksRequest, _super);
+    function NtmksRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", NtmksRequestBody)
+    ], NtmksRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", NtmksSecurity)
+    ], NtmksRequest.prototype, "security", void 0);
+    return NtmksRequest;
+}(SpeakeasyBase));
+export { NtmksRequest };
 var NtmksResponse = /** @class */ (function (_super) {
     __extends(NtmksResponse, _super);
     function NtmksResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], NtmksResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], NtmksResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ntmks400ApplicationJson)
     ], NtmksResponse.prototype, "ntmks400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ntmks401ApplicationJson)
     ], NtmksResponse.prototype, "ntmks401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ntmks404ApplicationJson)
     ], NtmksResponse.prototype, "ntmks404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ntmks500ApplicationJson)
     ], NtmksResponse.prototype, "ntmks500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ntmks502ApplicationJson)
     ], NtmksResponse.prototype, "ntmks502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ntmks503ApplicationJson)
     ], NtmksResponse.prototype, "ntmks503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Ntmks504ApplicationJson)
     ], NtmksResponse.prototype, "ntmks504ApplicationJsonObject", void 0);
     return NtmksResponse;

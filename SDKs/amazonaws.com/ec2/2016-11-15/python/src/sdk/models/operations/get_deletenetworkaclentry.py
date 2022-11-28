@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteNetworkACLEntryActionEnum(str, Enum):
     DELETE_NETWORK_ACL_ENTRY = "DeleteNetworkAclEntry"
@@ -10,12 +14,12 @@ class GetDeleteNetworkACLEntryVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteNetworkACLEntryQueryParams:
-    action: GetDeleteNetworkACLEntryActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteNetworkACLEntryActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    egress: bool = field(metadata={'query_param': { 'field_name': 'Egress', 'style': 'form', 'explode': True }})
+    network_acl_id: str = field(metadata={'query_param': { 'field_name': 'NetworkAclId', 'style': 'form', 'explode': True }})
+    rule_number: int = field(metadata={'query_param': { 'field_name': 'RuleNumber', 'style': 'form', 'explode': True }})
+    version: GetDeleteNetworkACLEntryVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    egress: bool = field(default=None, metadata={'query_param': { 'field_name': 'Egress', 'style': 'form', 'explode': True }})
-    network_acl_id: str = field(default=None, metadata={'query_param': { 'field_name': 'NetworkAclId', 'style': 'form', 'explode': True }})
-    rule_number: int = field(default=None, metadata={'query_param': { 'field_name': 'RuleNumber', 'style': 'form', 'explode': True }})
-    version: GetDeleteNetworkACLEntryVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,12 +35,12 @@ class GetDeleteNetworkACLEntryHeaders:
 
 @dataclass
 class GetDeleteNetworkACLEntryRequest:
-    query_params: GetDeleteNetworkACLEntryQueryParams = field(default=None)
-    headers: GetDeleteNetworkACLEntryHeaders = field(default=None)
+    headers: GetDeleteNetworkACLEntryHeaders = field()
+    query_params: GetDeleteNetworkACLEntryQueryParams = field()
     
 
 @dataclass
 class GetDeleteNetworkACLEntryResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

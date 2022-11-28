@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectStorageServerProtocolEnum } from "./objectstorageserverprotocolenum";
 
 
+
 export class UpdateLocationObjectStorageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessKey" })
+  @SpeakeasyMetadata({ data: "json, name=AccessKey" })
   accessKey?: string;
 
-  @Metadata({ data: "json, name=AgentArns" })
+  @SpeakeasyMetadata({ data: "json, name=AgentArns" })
   agentArns?: string[];
 
-  @Metadata({ data: "json, name=LocationArn" })
+  @SpeakeasyMetadata({ data: "json, name=LocationArn" })
   locationArn: string;
 
-  @Metadata({ data: "json, name=SecretKey" })
+  @SpeakeasyMetadata({ data: "json, name=SecretKey" })
   secretKey?: string;
 
-  @Metadata({ data: "json, name=ServerPort" })
+  @SpeakeasyMetadata({ data: "json, name=ServerPort" })
   serverPort?: number;
 
-  @Metadata({ data: "json, name=ServerProtocol" })
+  @SpeakeasyMetadata({ data: "json, name=ServerProtocol" })
   serverProtocol?: ObjectStorageServerProtocolEnum;
 
-  @Metadata({ data: "json, name=Subdirectory" })
+  @SpeakeasyMetadata({ data: "json, name=Subdirectory" })
   subdirectory?: string;
 }

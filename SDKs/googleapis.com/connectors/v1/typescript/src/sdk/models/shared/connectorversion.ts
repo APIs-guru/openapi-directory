@@ -1,17 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthConfigTemplate } from "./authconfigtemplate";
 import { ConfigVariableTemplate } from "./configvariabletemplate";
 import { EgressControlConfig } from "./egresscontrolconfig";
 import { RoleGrant } from "./rolegrant";
-import { RoleGrant } from "./rolegrant";
 import { SupportedRuntimeFeatures } from "./supportedruntimefeatures";
 
+
 export enum ConnectorVersionLaunchStageEnum {
-    LaunchStageUnspecified = "LAUNCH_STAGE_UNSPECIFIED"
-,    Preview = "PREVIEW"
-,    Ga = "GA"
-,    Deprecated = "DEPRECATED"
+    LaunchStageUnspecified = "LAUNCH_STAGE_UNSPECIFIED",
+    Preview = "PREVIEW",
+    Ga = "GA",
+    Deprecated = "DEPRECATED"
 }
 
 
@@ -20,42 +19,42 @@ export enum ConnectorVersionLaunchStageEnum {
  * ConnectorVersion indicates a specific version of a connector.
 **/
 export class ConnectorVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authConfigTemplates", elemType: shared.AuthConfigTemplate })
+  @SpeakeasyMetadata({ data: "json, name=authConfigTemplates", elemType: AuthConfigTemplate })
   authConfigTemplates?: AuthConfigTemplate[];
 
-  @Metadata({ data: "json, name=configVariableTemplates", elemType: shared.ConfigVariableTemplate })
+  @SpeakeasyMetadata({ data: "json, name=configVariableTemplates", elemType: ConfigVariableTemplate })
   configVariableTemplates?: ConfigVariableTemplate[];
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=egressControlConfig" })
+  @SpeakeasyMetadata({ data: "json, name=egressControlConfig" })
   egressControlConfig?: EgressControlConfig;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=launchStage" })
+  @SpeakeasyMetadata({ data: "json, name=launchStage" })
   launchStage?: ConnectorVersionLaunchStageEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=releaseVersion" })
+  @SpeakeasyMetadata({ data: "json, name=releaseVersion" })
   releaseVersion?: string;
 
-  @Metadata({ data: "json, name=roleGrant" })
+  @SpeakeasyMetadata({ data: "json, name=roleGrant" })
   roleGrant?: RoleGrant;
 
-  @Metadata({ data: "json, name=roleGrants", elemType: shared.RoleGrant })
+  @SpeakeasyMetadata({ data: "json, name=roleGrants", elemType: RoleGrant })
   roleGrants?: RoleGrant[];
 
-  @Metadata({ data: "json, name=supportedRuntimeFeatures" })
+  @SpeakeasyMetadata({ data: "json, name=supportedRuntimeFeatures" })
   supportedRuntimeFeatures?: SupportedRuntimeFeatures;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

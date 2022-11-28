@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class AppLaunchConfigurationStatusEnum(str, Enum):
     NOT_CONFIGURED = "NOT_CONFIGURED"

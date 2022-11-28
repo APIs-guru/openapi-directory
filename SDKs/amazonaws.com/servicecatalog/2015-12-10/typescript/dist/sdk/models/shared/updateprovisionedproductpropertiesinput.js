@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UpdateProvisionedProductPropertiesInput = /** @class */ (function (_super) {
     __extends(UpdateProvisionedProductPropertiesInput, _super);
     function UpdateProvisionedProductPropertiesInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], UpdateProvisionedProductPropertiesInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=IdempotencyToken" }),
+        SpeakeasyMetadata({ data: "json, name=IdempotencyToken" }),
         __metadata("design:type", String)
     ], UpdateProvisionedProductPropertiesInput.prototype, "idempotencyToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisionedProductId" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisionedProductId" }),
         __metadata("design:type", String)
     ], UpdateProvisionedProductPropertiesInput.prototype, "provisionedProductId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisionedProductProperties" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisionedProductProperties" }),
         __metadata("design:type", Map)
     ], UpdateProvisionedProductPropertiesInput.prototype, "provisionedProductProperties", void 0);
     return UpdateProvisionedProductPropertiesInput;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PricingPlanEnum } from "./pricingplanenum";
 export declare class DescribeRouteCalculatorResponse extends SpeakeasyBase {
     calculatorArn: string;

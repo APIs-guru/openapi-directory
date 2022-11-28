@@ -14,6 +14,8 @@ const (
 	OpenIDIdpConfigUserInfoSourceEnumIDToken          OpenIDIdpConfigUserInfoSourceEnum = "id_token"
 )
 
+// OpenIDIdpConfig
+// OpenID Connect IDP configuration
 type OpenIDIdpConfig struct {
 	AuthorizationEndPointURL *string                            `json:"authorizationEndPointUrl,omitempty"`
 	ClientID                 *string                            `json:"clientId,omitempty"`

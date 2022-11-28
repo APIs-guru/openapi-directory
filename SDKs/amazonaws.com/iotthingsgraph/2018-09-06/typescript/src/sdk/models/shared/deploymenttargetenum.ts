@@ -1,6 +1,7 @@
 
 
+
 export enum DeploymentTargetEnum {
-    Greengrass = "GREENGRASS"
-,    Cloud = "CLOUD"
+    Greengrass = "GREENGRASS",
+    Cloud = "CLOUD"
 }

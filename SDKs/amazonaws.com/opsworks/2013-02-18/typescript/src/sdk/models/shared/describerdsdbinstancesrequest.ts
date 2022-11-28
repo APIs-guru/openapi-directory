@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeRdsDbInstancesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RdsDbInstanceArns" })
+  @SpeakeasyMetadata({ data: "json, name=RdsDbInstanceArns" })
   rdsDbInstanceArns?: string[];
 
-  @Metadata({ data: "json, name=StackId" })
+  @SpeakeasyMetadata({ data: "json, name=StackId" })
   stackId: string;
 }

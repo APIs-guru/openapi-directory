@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateLogGroupRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=logGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=logGroupName" })
   logGroupName: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }

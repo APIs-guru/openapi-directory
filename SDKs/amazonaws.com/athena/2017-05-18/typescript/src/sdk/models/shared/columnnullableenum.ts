@@ -1,7 +1,8 @@
 
 
+
 export enum ColumnNullableEnum {
-    NotNull = "NOT_NULL"
-,    Nullable = "NULLABLE"
-,    Unknown = "UNKNOWN"
+    NotNull = "NOT_NULL",
+    Nullable = "NULLABLE",
+    Unknown = "UNKNOWN"
 }

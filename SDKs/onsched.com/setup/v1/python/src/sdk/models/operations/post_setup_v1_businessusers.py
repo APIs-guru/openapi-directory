@@ -18,7 +18,7 @@ class PostSetupV1BusinessusersRequest:
 
 @dataclass
 class PostSetupV1BusinessusersResponse:
+    content_type: str = field()
+    status_code: int = field()
     business_user_view_model: Optional[shared.BusinessUserViewModel] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

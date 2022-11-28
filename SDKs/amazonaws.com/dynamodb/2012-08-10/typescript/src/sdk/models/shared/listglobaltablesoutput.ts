@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GlobalTable } from "./globaltable";
 
 
+
 export class ListGlobalTablesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GlobalTables", elemType: shared.GlobalTable })
+  @SpeakeasyMetadata({ data: "json, name=GlobalTables", elemType: GlobalTable })
   globalTables?: GlobalTable[];
 
-  @Metadata({ data: "json, name=LastEvaluatedGlobalTableName" })
+  @SpeakeasyMetadata({ data: "json, name=LastEvaluatedGlobalTableName" })
   lastEvaluatedGlobalTableName?: string;
 }

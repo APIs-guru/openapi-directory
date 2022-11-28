@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetRealmAuthenticationRequiredActionsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=realm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=realm" })
   realm: string;
 }
 
 
 export class GetRealmAuthenticationRequiredActionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetRealmAuthenticationRequiredActionsPathParams;
 }
 
 
 export class GetRealmAuthenticationRequiredActionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.RequiredActionProviderRepresentation })
+  @SpeakeasyMetadata({ elemType: shared.RequiredActionProviderRepresentation })
   requiredActionProviderRepresentations?: shared.RequiredActionProviderRepresentation[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

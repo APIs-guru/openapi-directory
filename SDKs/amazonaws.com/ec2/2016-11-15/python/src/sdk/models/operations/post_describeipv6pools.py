@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeIpv6PoolsActionEnum(str, Enum):
     DESCRIBE_IPV6_POOLS = "DescribeIpv6Pools"
@@ -10,10 +14,10 @@ class PostDescribeIpv6PoolsVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeIpv6PoolsQueryParams:
-    action: PostDescribeIpv6PoolsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostDescribeIpv6PoolsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeIpv6PoolsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_results: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: PostDescribeIpv6PoolsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostDescribeIpv6PoolsHeaders:
 
 @dataclass
 class PostDescribeIpv6PoolsRequest:
-    query_params: PostDescribeIpv6PoolsQueryParams = field(default=None)
-    headers: PostDescribeIpv6PoolsHeaders = field(default=None)
+    headers: PostDescribeIpv6PoolsHeaders = field()
+    query_params: PostDescribeIpv6PoolsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeIpv6PoolsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

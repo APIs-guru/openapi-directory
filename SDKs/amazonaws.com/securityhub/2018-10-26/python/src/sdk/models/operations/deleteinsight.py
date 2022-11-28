@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DeleteInsightPathParams:
-    insight_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'InsightArn', 'style': 'simple', 'explode': False }})
+    insight_arn: str = field(metadata={'path_param': { 'field_name': 'InsightArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,18 +24,18 @@ class DeleteInsightHeaders:
 
 @dataclass
 class DeleteInsightRequest:
-    path_params: DeleteInsightPathParams = field(default=None)
-    headers: DeleteInsightHeaders = field(default=None)
+    headers: DeleteInsightHeaders = field()
+    path_params: DeleteInsightPathParams = field()
     
 
 @dataclass
 class DeleteInsightResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_insight_response: Optional[shared.DeleteInsightResponse] = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

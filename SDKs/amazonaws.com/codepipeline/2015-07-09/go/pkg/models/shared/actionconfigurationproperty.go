@@ -1,5 +1,7 @@
 package shared
 
+// ActionConfigurationProperty
+// Represents information about an action configuration property.
 type ActionConfigurationProperty struct {
 	Description *string                              `json:"description,omitempty"`
 	Key         bool                                 `json:"key"`

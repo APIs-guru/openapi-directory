@@ -1,59 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteImagePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=imageId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=imageId" })
   imageId: string;
 }
 
 
-export class DeleteImageSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class DeleteImageSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class DeleteImageSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: DeleteImageSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: DeleteImageSecurityOption2;
-}
-
-
-export class DeleteImageRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteImagePathParams;
-
-  @Metadata()
-  security: DeleteImageSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class DeleteImageDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class DeleteImageRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteImagePathParams;
+
+  @SpeakeasyMetadata()
+  security: DeleteImageSecurity;
+}
+
+
 export class DeleteImageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteImage200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteImageDefaultApplicationJsonObject?: DeleteImageDefaultApplicationJson;
 }

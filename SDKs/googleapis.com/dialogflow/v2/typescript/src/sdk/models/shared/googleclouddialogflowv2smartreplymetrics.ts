@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2SmartReplyMetricsTopNMetrics } from "./googleclouddialogflowv2smartreplymetricstopnmetrics";
+
 
 
 // GoogleCloudDialogflowV2SmartReplyMetrics
@@ -8,12 +8,12 @@ import { GoogleCloudDialogflowV2SmartReplyMetricsTopNMetrics } from "./googleclo
  * The evaluation metrics for smart reply model.
 **/
 export class GoogleCloudDialogflowV2SmartReplyMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowlistCoverage" })
+  @SpeakeasyMetadata({ data: "json, name=allowlistCoverage" })
   allowlistCoverage?: number;
 
-  @Metadata({ data: "json, name=conversationCount" })
+  @SpeakeasyMetadata({ data: "json, name=conversationCount" })
   conversationCount?: string;
 
-  @Metadata({ data: "json, name=topNMetrics", elemType: shared.GoogleCloudDialogflowV2SmartReplyMetricsTopNMetrics })
+  @SpeakeasyMetadata({ data: "json, name=topNMetrics", elemType: GoogleCloudDialogflowV2SmartReplyMetricsTopNMetrics })
   topNMetrics?: GoogleCloudDialogflowV2SmartReplyMetricsTopNMetrics[];
 }

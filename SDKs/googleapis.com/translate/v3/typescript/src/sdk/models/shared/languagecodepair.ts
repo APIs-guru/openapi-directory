@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LanguageCodePair
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Used with unidirectional glossaries.
 **/
 export class LanguageCodePair extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sourceLanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=sourceLanguageCode" })
   sourceLanguageCode?: string;
 
-  @Metadata({ data: "json, name=targetLanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=targetLanguageCode" })
   targetLanguageCode?: string;
 }

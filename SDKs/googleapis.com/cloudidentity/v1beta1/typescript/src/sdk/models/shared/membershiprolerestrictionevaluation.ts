@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum MembershipRoleRestrictionEvaluationStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Compliant = "COMPLIANT"
-,    ForwardCompliant = "FORWARD_COMPLIANT"
-,    NonCompliant = "NON_COMPLIANT"
-,    Evaluating = "EVALUATING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Compliant = "COMPLIANT",
+    ForwardCompliant = "FORWARD_COMPLIANT",
+    NonCompliant = "NON_COMPLIANT",
+    Evaluating = "EVALUATING"
 }
 
 
@@ -14,6 +15,6 @@ export enum MembershipRoleRestrictionEvaluationStateEnum {
  * The evaluated state of this restriction.
 **/
 export class MembershipRoleRestrictionEvaluation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: MembershipRoleRestrictionEvaluationStateEnum;
 }

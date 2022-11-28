@@ -1,51 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const POSTV05HEALTHINFORMATIONHIUONREQUEST_SERVERS = [
-	"https://dev.ndhm.gov.in/hiu",
-];
 
+export const PostV05HealthInformationHiuOnRequestServerList = [
+	"https://dev.ndhm.gov.in/hiu",
+] as const;
 
 
 export class PostV05HealthInformationHiuOnRequestHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-HIU-ID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-HIU-ID" })
   xHiuId: string;
 }
 
 
 export class PostV05HealthInformationHiuOnRequestRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   hiuHealthInformationRequestResponse?: shared.HiuHealthInformationRequestResponse;
 }
 
 
 export class PostV05HealthInformationHiuOnRequestRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PostV05HealthInformationHiuOnRequestHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: PostV05HealthInformationHiuOnRequestRequests;
 }
 
 
 export class PostV05HealthInformationHiuOnRequestResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventSummary } from "./eventsummary";
 
 
+
 export class ListTimelineEventsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventSummaries", elemType: shared.EventSummary })
+  @SpeakeasyMetadata({ data: "json, name=eventSummaries", elemType: EventSummary })
   eventSummaries: EventSummary[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

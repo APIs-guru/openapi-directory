@@ -22,70 +22,70 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetaddressmatchQueryParams = /** @class */ (function (_super) {
     __extends(GetaddressmatchQueryParams, _super);
     function GetaddressmatchQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=address" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=address" }),
         __metadata("design:type", String)
     ], GetaddressmatchQueryParams.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=license" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" }),
         __metadata("design:type", String)
     ], GetaddressmatchQueryParams.prototype, "license", void 0);
     return GetaddressmatchQueryParams;
 }(SpeakeasyBase));
 export { GetaddressmatchQueryParams };
-var GetaddressmatchRequest = /** @class */ (function (_super) {
-    __extends(GetaddressmatchRequest, _super);
-    function GetaddressmatchRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetaddressmatchQueryParams)
-    ], GetaddressmatchRequest.prototype, "queryParams", void 0);
-    return GetaddressmatchRequest;
-}(SpeakeasyBase));
-export { GetaddressmatchRequest };
 var Getaddressmatch200ApplicationJson = /** @class */ (function (_super) {
     __extends(Getaddressmatch200ApplicationJson, _super);
     function Getaddressmatch200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Code" }),
+        SpeakeasyMetadata({ data: "json, name=Code" }),
         __metadata("design:type", String)
     ], Getaddressmatch200ApplicationJson.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=Credits" }),
+        SpeakeasyMetadata({ data: "json, name=Credits" }),
         __metadata("design:type", String)
     ], Getaddressmatch200ApplicationJson.prototype, "credits", void 0);
     __decorate([
-        Metadata({ data: "json, name=Simkey" }),
+        SpeakeasyMetadata({ data: "json, name=Simkey" }),
         __metadata("design:type", String)
     ], Getaddressmatch200ApplicationJson.prototype, "simkey", void 0);
     return Getaddressmatch200ApplicationJson;
 }(SpeakeasyBase));
 export { Getaddressmatch200ApplicationJson };
+var GetaddressmatchRequest = /** @class */ (function (_super) {
+    __extends(GetaddressmatchRequest, _super);
+    function GetaddressmatchRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetaddressmatchQueryParams)
+    ], GetaddressmatchRequest.prototype, "queryParams", void 0);
+    return GetaddressmatchRequest;
+}(SpeakeasyBase));
+export { GetaddressmatchRequest };
 var GetaddressmatchResponse = /** @class */ (function (_super) {
     __extends(GetaddressmatchResponse, _super);
     function GetaddressmatchResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetaddressmatchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetaddressmatchResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Getaddressmatch200ApplicationJson)
     ], GetaddressmatchResponse.prototype, "getaddressmatch200ApplicationJsonObject", void 0);
     return GetaddressmatchResponse;

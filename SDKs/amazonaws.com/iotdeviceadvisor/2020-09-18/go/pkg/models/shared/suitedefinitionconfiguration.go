@@ -1,5 +1,7 @@
 package shared
 
+// SuiteDefinitionConfiguration
+// Gets Suite Definition Configuration.
 type SuiteDefinitionConfiguration struct {
 	DevicePermissionRoleArn  *string           `json:"devicePermissionRoleArn,omitempty"`
 	Devices                  []DeviceUnderTest `json:"devices,omitempty"`

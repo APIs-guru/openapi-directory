@@ -51,13 +51,13 @@ type GetSectionFormatQueryParams struct {
 	Callback *string `queryParam:"style=form,explode=true,name=callback"`
 }
 
+type GetSectionFormat200ApplicationJSON struct {
+	Results []shared.Article `json:"results,omitempty"`
+}
+
 type GetSectionFormatRequest struct {
 	PathParams  GetSectionFormatPathParams
 	QueryParams GetSectionFormatQueryParams
-}
-
-type GetSectionFormat200ApplicationJSON struct {
-	Results []shared.Article `json:"results,omitempty"`
 }
 
 type GetSectionFormatResponse struct {

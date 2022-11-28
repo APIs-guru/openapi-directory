@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CaseClassification } from "./caseclassification";
+
 
 
 // SearchCaseClassificationsResponse
@@ -8,9 +8,9 @@ import { CaseClassification } from "./caseclassification";
  * The response message for SearchCaseClassifications endpoint.
 **/
 export class SearchCaseClassificationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caseClassifications", elemType: shared.CaseClassification })
+  @SpeakeasyMetadata({ data: "json, name=caseClassifications", elemType: CaseClassification })
   caseClassifications?: CaseClassification[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

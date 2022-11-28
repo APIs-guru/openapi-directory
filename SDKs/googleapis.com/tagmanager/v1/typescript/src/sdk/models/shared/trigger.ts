@@ -1,47 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Condition } from "./condition";
-import { Parameter } from "./parameter";
-import { Parameter } from "./parameter";
-import { Condition } from "./condition";
-import { Parameter } from "./parameter";
-import { Condition } from "./condition";
-import { Parameter } from "./parameter";
-import { Parameter } from "./parameter";
-import { Parameter } from "./parameter";
-import { Parameter } from "./parameter";
-import { Parameter } from "./parameter";
-import { Parameter } from "./parameter";
-import { Parameter } from "./parameter";
-import { Parameter } from "./parameter";
-import { Parameter } from "./parameter";
-import { Parameter } from "./parameter";
-import { Parameter } from "./parameter";
-import { Parameter } from "./parameter";
-import { Parameter } from "./parameter";
-import { Parameter } from "./parameter";
 import { Parameter } from "./parameter";
 
+
 export enum TriggerTypeEnum {
-    Pageview = "pageview"
-,    DomReady = "domReady"
-,    WindowLoaded = "windowLoaded"
-,    CustomEvent = "customEvent"
-,    TriggerGroup = "triggerGroup"
-,    Always = "always"
-,    FormSubmission = "formSubmission"
-,    Click = "click"
-,    LinkClick = "linkClick"
-,    JsError = "jsError"
-,    HistoryChange = "historyChange"
-,    Timer = "timer"
-,    AmpClick = "ampClick"
-,    AmpTimer = "ampTimer"
-,    AmpScroll = "ampScroll"
-,    AmpVisibility = "ampVisibility"
-,    YouTubeVideo = "youTubeVideo"
-,    ScrollDepth = "scrollDepth"
-,    ElementVisibility = "elementVisibility"
+    Pageview = "pageview",
+    DomReady = "domReady",
+    WindowLoaded = "windowLoaded",
+    CustomEvent = "customEvent",
+    TriggerGroup = "triggerGroup",
+    Always = "always",
+    FormSubmission = "formSubmission",
+    Click = "click",
+    LinkClick = "linkClick",
+    JsError = "jsError",
+    HistoryChange = "historyChange",
+    Timer = "timer",
+    AmpClick = "ampClick",
+    AmpTimer = "ampTimer",
+    AmpScroll = "ampScroll",
+    AmpVisibility = "ampVisibility",
+    YouTubeVideo = "youTubeVideo",
+    ScrollDepth = "scrollDepth",
+    ElementVisibility = "elementVisibility"
 }
 
 
@@ -50,87 +31,87 @@ export enum TriggerTypeEnum {
  * Represents a Google Tag Manager Trigger
 **/
 export class Trigger extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=autoEventFilter", elemType: shared.Condition })
+  @SpeakeasyMetadata({ data: "json, name=autoEventFilter", elemType: Condition })
   autoEventFilter?: Condition[];
 
-  @Metadata({ data: "json, name=checkValidation" })
+  @SpeakeasyMetadata({ data: "json, name=checkValidation" })
   checkValidation?: Parameter;
 
-  @Metadata({ data: "json, name=containerId" })
+  @SpeakeasyMetadata({ data: "json, name=containerId" })
   containerId?: string;
 
-  @Metadata({ data: "json, name=continuousTimeMinMilliseconds" })
+  @SpeakeasyMetadata({ data: "json, name=continuousTimeMinMilliseconds" })
   continuousTimeMinMilliseconds?: Parameter;
 
-  @Metadata({ data: "json, name=customEventFilter", elemType: shared.Condition })
+  @SpeakeasyMetadata({ data: "json, name=customEventFilter", elemType: Condition })
   customEventFilter?: Condition[];
 
-  @Metadata({ data: "json, name=eventName" })
+  @SpeakeasyMetadata({ data: "json, name=eventName" })
   eventName?: Parameter;
 
-  @Metadata({ data: "json, name=filter", elemType: shared.Condition })
+  @SpeakeasyMetadata({ data: "json, name=filter", elemType: Condition })
   filter?: Condition[];
 
-  @Metadata({ data: "json, name=fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=fingerprint" })
   fingerprint?: string;
 
-  @Metadata({ data: "json, name=horizontalScrollPercentageList" })
+  @SpeakeasyMetadata({ data: "json, name=horizontalScrollPercentageList" })
   horizontalScrollPercentageList?: Parameter;
 
-  @Metadata({ data: "json, name=interval" })
+  @SpeakeasyMetadata({ data: "json, name=interval" })
   interval?: Parameter;
 
-  @Metadata({ data: "json, name=intervalSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=intervalSeconds" })
   intervalSeconds?: Parameter;
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: Parameter;
 
-  @Metadata({ data: "json, name=maxTimerLengthSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=maxTimerLengthSeconds" })
   maxTimerLengthSeconds?: Parameter;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parameter", elemType: shared.Parameter })
+  @SpeakeasyMetadata({ data: "json, name=parameter", elemType: Parameter })
   parameter?: Parameter[];
 
-  @Metadata({ data: "json, name=parentFolderId" })
+  @SpeakeasyMetadata({ data: "json, name=parentFolderId" })
   parentFolderId?: string;
 
-  @Metadata({ data: "json, name=selector" })
+  @SpeakeasyMetadata({ data: "json, name=selector" })
   selector?: Parameter;
 
-  @Metadata({ data: "json, name=totalTimeMinMilliseconds" })
+  @SpeakeasyMetadata({ data: "json, name=totalTimeMinMilliseconds" })
   totalTimeMinMilliseconds?: Parameter;
 
-  @Metadata({ data: "json, name=triggerId" })
+  @SpeakeasyMetadata({ data: "json, name=triggerId" })
   triggerId?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: TriggerTypeEnum;
 
-  @Metadata({ data: "json, name=uniqueTriggerId" })
+  @SpeakeasyMetadata({ data: "json, name=uniqueTriggerId" })
   uniqueTriggerId?: Parameter;
 
-  @Metadata({ data: "json, name=verticalScrollPercentageList" })
+  @SpeakeasyMetadata({ data: "json, name=verticalScrollPercentageList" })
   verticalScrollPercentageList?: Parameter;
 
-  @Metadata({ data: "json, name=visibilitySelector" })
+  @SpeakeasyMetadata({ data: "json, name=visibilitySelector" })
   visibilitySelector?: Parameter;
 
-  @Metadata({ data: "json, name=visiblePercentageMax" })
+  @SpeakeasyMetadata({ data: "json, name=visiblePercentageMax" })
   visiblePercentageMax?: Parameter;
 
-  @Metadata({ data: "json, name=visiblePercentageMin" })
+  @SpeakeasyMetadata({ data: "json, name=visiblePercentageMin" })
   visiblePercentageMin?: Parameter;
 
-  @Metadata({ data: "json, name=waitForTags" })
+  @SpeakeasyMetadata({ data: "json, name=waitForTags" })
   waitForTags?: Parameter;
 
-  @Metadata({ data: "json, name=waitForTagsTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=waitForTagsTimeout" })
   waitForTagsTimeout?: Parameter;
 }

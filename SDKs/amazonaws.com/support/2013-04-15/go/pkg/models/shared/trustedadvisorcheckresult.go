@@ -1,5 +1,7 @@
 package shared
 
+// TrustedAdvisorCheckResult
+// The results of a Trusted Advisor check returned by <a>DescribeTrustedAdvisorCheckResult</a>.
 type TrustedAdvisorCheckResult struct {
 	CategorySpecificSummary TrustedAdvisorCategorySpecificSummary `json:"categorySpecificSummary"`
 	CheckID                 string                                `json:"checkId"`

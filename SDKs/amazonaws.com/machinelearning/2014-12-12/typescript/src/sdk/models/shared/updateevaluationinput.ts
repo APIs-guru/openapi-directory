@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateEvaluationInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EvaluationId" })
+  @SpeakeasyMetadata({ data: "json, name=EvaluationId" })
   evaluationId: string;
 
-  @Metadata({ data: "json, name=EvaluationName" })
+  @SpeakeasyMetadata({ data: "json, name=EvaluationName" })
   evaluationName: string;
 }

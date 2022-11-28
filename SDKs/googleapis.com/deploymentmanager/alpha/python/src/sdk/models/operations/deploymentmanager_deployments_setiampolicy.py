@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DeploymentmanagerDeploymentsSetIamPolicyPathParams:
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class DeploymentmanagerDeploymentsSetIamPolicyQueryParams:
 
 @dataclass
 class DeploymentmanagerDeploymentsSetIamPolicySecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeploymentmanagerDeploymentsSetIamPolicySecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,15 +45,15 @@ class DeploymentmanagerDeploymentsSetIamPolicySecurity:
 
 @dataclass
 class DeploymentmanagerDeploymentsSetIamPolicyRequest:
-    path_params: DeploymentmanagerDeploymentsSetIamPolicyPathParams = field(default=None)
-    query_params: DeploymentmanagerDeploymentsSetIamPolicyQueryParams = field(default=None)
+    path_params: DeploymentmanagerDeploymentsSetIamPolicyPathParams = field()
+    query_params: DeploymentmanagerDeploymentsSetIamPolicyQueryParams = field()
+    security: DeploymentmanagerDeploymentsSetIamPolicySecurity = field()
     request: Optional[shared.GlobalSetPolicyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DeploymentmanagerDeploymentsSetIamPolicySecurity = field(default=None)
     
 
 @dataclass
 class DeploymentmanagerDeploymentsSetIamPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     policy: Optional[shared.Policy] = field(default=None)
-    status_code: int = field(default=None)
     

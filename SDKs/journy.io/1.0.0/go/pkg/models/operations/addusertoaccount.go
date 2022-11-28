@@ -4,13 +4,10 @@ type AddUserToAccountPathParams struct {
 	AccountID string `pathParam:"style=simple,explode=false,name=accountId"`
 }
 
+// AddUserToAccountRequestBody
+// The user being added/removed from the account
 type AddUserToAccountRequestBody struct {
 	UserID string `json:"userId"`
-}
-
-type AddUserToAccountRequest struct {
-	PathParams AddUserToAccountPathParams
-	Request    AddUserToAccountRequestBody `request:"mediaType=application/json"`
 }
 
 type AddUserToAccount201ApplicationJSONMeta struct {
@@ -23,12 +20,16 @@ type AddUserToAccount201ApplicationJSON struct {
 	Meta    AddUserToAccount201ApplicationJSONMeta `json:"meta"`
 }
 
+// AddUserToAccount400ApplicationJSONErrorsParameters
+// All query-, header- and path- parameters that seemed incorrect
 type AddUserToAccount400ApplicationJSONErrorsParameters struct {
 	Header map[string]string `json:"header,omitempty"`
 	Path   map[string]string `json:"path,omitempty"`
 	Query  map[string]string `json:"query,omitempty"`
 }
 
+// AddUserToAccount400ApplicationJSONErrors
+// Map that sums up all received values that seemed incorrect
 type AddUserToAccount400ApplicationJSONErrors struct {
 	Fields     map[string]string                                   `json:"fields,omitempty"`
 	Parameters *AddUserToAccount400ApplicationJSONErrorsParameters `json:"parameters,omitempty"`
@@ -73,6 +74,11 @@ type AddUserToAccount500ApplicationJSONMeta struct {
 type AddUserToAccount500ApplicationJSON struct {
 	Message string                                 `json:"message"`
 	Meta    AddUserToAccount500ApplicationJSONMeta `json:"meta"`
+}
+
+type AddUserToAccountRequest struct {
+	PathParams AddUserToAccountPathParams
+	Request    AddUserToAccountRequestBody `request:"mediaType=application/json"`
 }
 
 type AddUserToAccountResponse struct {

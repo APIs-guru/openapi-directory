@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PasswordPolicyType
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The password policy type.
 **/
 export class PasswordPolicyType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MinimumLength" })
+  @SpeakeasyMetadata({ data: "json, name=MinimumLength" })
   minimumLength?: number;
 
-  @Metadata({ data: "json, name=RequireLowercase" })
+  @SpeakeasyMetadata({ data: "json, name=RequireLowercase" })
   requireLowercase?: boolean;
 
-  @Metadata({ data: "json, name=RequireNumbers" })
+  @SpeakeasyMetadata({ data: "json, name=RequireNumbers" })
   requireNumbers?: boolean;
 
-  @Metadata({ data: "json, name=RequireSymbols" })
+  @SpeakeasyMetadata({ data: "json, name=RequireSymbols" })
   requireSymbols?: boolean;
 
-  @Metadata({ data: "json, name=RequireUppercase" })
+  @SpeakeasyMetadata({ data: "json, name=RequireUppercase" })
   requireUppercase?: boolean;
 
-  @Metadata({ data: "json, name=TemporaryPasswordValidityDays" })
+  @SpeakeasyMetadata({ data: "json, name=TemporaryPasswordValidityDays" })
   temporaryPasswordValidityDays?: number;
 }

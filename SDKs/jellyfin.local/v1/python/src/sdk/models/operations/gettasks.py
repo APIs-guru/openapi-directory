@@ -11,18 +11,18 @@ class GetTasksQueryParams:
 
 @dataclass
 class GetTasksSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetTasksRequest:
-    query_params: GetTasksQueryParams = field(default=None)
-    security: GetTasksSecurity = field(default=None)
+    query_params: GetTasksQueryParams = field()
+    security: GetTasksSecurity = field()
     
 
 @dataclass
 class GetTasksResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     task_infos: Optional[List[shared.TaskInfo]] = field(default=None)
     

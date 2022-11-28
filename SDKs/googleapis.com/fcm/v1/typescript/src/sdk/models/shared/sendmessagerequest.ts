@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Message } from "./message";
+
 
 
 // SendMessageRequest
@@ -7,9 +8,9 @@ import { Message } from "./message";
  * Request to send a message to specified target.
 **/
 export class SendMessageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: Message;
 
-  @Metadata({ data: "json, name=validateOnly" })
+  @SpeakeasyMetadata({ data: "json, name=validateOnly" })
   validateOnly?: boolean;
 }

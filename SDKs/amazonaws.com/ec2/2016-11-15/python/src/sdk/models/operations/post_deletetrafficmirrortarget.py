@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteTrafficMirrorTargetActionEnum(str, Enum):
     DELETE_TRAFFIC_MIRROR_TARGET = "DeleteTrafficMirrorTarget"
@@ -10,8 +14,8 @@ class PostDeleteTrafficMirrorTargetVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteTrafficMirrorTargetQueryParams:
-    action: PostDeleteTrafficMirrorTargetActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteTrafficMirrorTargetVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteTrafficMirrorTargetActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteTrafficMirrorTargetVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteTrafficMirrorTargetHeaders:
 
 @dataclass
 class PostDeleteTrafficMirrorTargetRequest:
-    query_params: PostDeleteTrafficMirrorTargetQueryParams = field(default=None)
-    headers: PostDeleteTrafficMirrorTargetHeaders = field(default=None)
+    headers: PostDeleteTrafficMirrorTargetHeaders = field()
+    query_params: PostDeleteTrafficMirrorTargetQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteTrafficMirrorTargetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

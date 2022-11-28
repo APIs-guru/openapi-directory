@@ -1,5 +1,7 @@
 package shared
 
+// DocDbSettings
+// Provides information that defines a DocumentDB endpoint.
 type DocDbSettings struct {
 	DatabaseName                *string                `json:"DatabaseName,omitempty"`
 	DocsToInvestigate           *int64                 `json:"DocsToInvestigate,omitempty"`

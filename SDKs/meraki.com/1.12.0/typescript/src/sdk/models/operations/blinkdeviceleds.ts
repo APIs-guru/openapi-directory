@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BlinkDeviceLedsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serial" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serial" })
   serial: string;
 }
 
 
 export class BlinkDeviceLedsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=duration" })
+  @SpeakeasyMetadata({ data: "json, name=duration" })
   duration?: number;
 
-  @Metadata({ data: "json, name=duty" })
+  @SpeakeasyMetadata({ data: "json, name=duty" })
   duty?: number;
 
-  @Metadata({ data: "json, name=period" })
+  @SpeakeasyMetadata({ data: "json, name=period" })
   period?: number;
 }
 
 
 export class BlinkDeviceLedsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: BlinkDeviceLedsPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: BlinkDeviceLedsRequestBody;
 }
 
 
 export class BlinkDeviceLedsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   blinkDeviceLeds202ApplicationJsonObject?: Map<string, any>;
 }

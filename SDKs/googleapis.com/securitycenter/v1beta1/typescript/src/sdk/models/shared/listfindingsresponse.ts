@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudSecuritycenterV1beta1Finding } from "./googlecloudsecuritycenterv1beta1finding";
+
 
 
 // ListFindingsResponse
@@ -8,15 +8,15 @@ import { GoogleCloudSecuritycenterV1beta1Finding } from "./googlecloudsecurityce
  * Response message for listing findings.
 **/
 export class ListFindingsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=findings", elemType: shared.GoogleCloudSecuritycenterV1beta1Finding })
+  @SpeakeasyMetadata({ data: "json, name=findings", elemType: GoogleCloudSecuritycenterV1beta1Finding })
   findings?: GoogleCloudSecuritycenterV1beta1Finding[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=readTime" })
+  @SpeakeasyMetadata({ data: "json, name=readTime" })
   readTime?: string;
 
-  @Metadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata({ data: "json, name=totalSize" })
   totalSize?: number;
 }

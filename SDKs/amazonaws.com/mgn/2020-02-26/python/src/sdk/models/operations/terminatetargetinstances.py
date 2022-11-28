@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,21 +22,21 @@ class TerminateTargetInstancesHeaders:
 @dataclass_json
 @dataclass
 class TerminateTargetInstancesRequestBody:
-    source_server_i_ds: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceServerIDs' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    source_server_i_ds: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceServerIDs') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class TerminateTargetInstancesRequest:
-    headers: TerminateTargetInstancesHeaders = field(default=None)
-    request: TerminateTargetInstancesRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: TerminateTargetInstancesHeaders = field()
+    request: TerminateTargetInstancesRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class TerminateTargetInstancesResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     terminate_target_instances_response: Optional[shared.TerminateTargetInstancesResponse] = field(default=None)
     uninitialized_account_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)

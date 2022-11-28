@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import multiregionkeytype_enum
-from . import multiregionkey
-from . import multiregionkey
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MultiRegionConfiguration:
-    multi_region_key_type: Optional[multiregionkeytype_enum.MultiRegionKeyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MultiRegionKeyType' }})
-    primary_key: Optional[multiregionkey.MultiRegionKey] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PrimaryKey' }})
-    replica_keys: Optional[List[multiregionkey.MultiRegionKey]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReplicaKeys' }})
+    r"""MultiRegionConfiguration
+    <p>Describes the configuration of this multi-Region key. This field appears only when the KMS key is a primary or replica of a multi-Region key.</p> <p>For more information about any listed KMS key, use the <a>DescribeKey</a> operation.</p>
+    """
+    
+    multi_region_key_type: Optional[MultiRegionKeyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MultiRegionKeyType') }})
+    primary_key: Optional[MultiRegionKey] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PrimaryKey') }})
+    replica_keys: Optional[List[MultiRegionKey]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReplicaKeys') }})
     

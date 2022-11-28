@@ -1,7 +1,8 @@
 package shared
 
 type SchemeBasicAuth struct {
-	Authorization string `security:"name=Authorization"`
+	Password string `security:"name=password"`
+	Username string `security:"name=username"`
 }
 
 type Security struct {

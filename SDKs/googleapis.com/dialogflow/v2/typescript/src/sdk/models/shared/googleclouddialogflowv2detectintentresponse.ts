@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2OutputAudioConfig } from "./googleclouddialogflowv2outputaudioconfig";
 import { GoogleCloudDialogflowV2QueryResult } from "./googleclouddialogflowv2queryresult";
 import { GoogleRpcStatus } from "./googlerpcstatus";
+
 
 
 // GoogleCloudDialogflowV2DetectIntentResponse
@@ -9,18 +10,18 @@ import { GoogleRpcStatus } from "./googlerpcstatus";
  * The message returned from the DetectIntent method.
 **/
 export class GoogleCloudDialogflowV2DetectIntentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=outputAudio" })
+  @SpeakeasyMetadata({ data: "json, name=outputAudio" })
   outputAudio?: string;
 
-  @Metadata({ data: "json, name=outputAudioConfig" })
+  @SpeakeasyMetadata({ data: "json, name=outputAudioConfig" })
   outputAudioConfig?: GoogleCloudDialogflowV2OutputAudioConfig;
 
-  @Metadata({ data: "json, name=queryResult" })
+  @SpeakeasyMetadata({ data: "json, name=queryResult" })
   queryResult?: GoogleCloudDialogflowV2QueryResult;
 
-  @Metadata({ data: "json, name=responseId" })
+  @SpeakeasyMetadata({ data: "json, name=responseId" })
   responseId?: string;
 
-  @Metadata({ data: "json, name=webhookStatus" })
+  @SpeakeasyMetadata({ data: "json, name=webhookStatus" })
   webhookStatus?: GoogleRpcStatus;
 }

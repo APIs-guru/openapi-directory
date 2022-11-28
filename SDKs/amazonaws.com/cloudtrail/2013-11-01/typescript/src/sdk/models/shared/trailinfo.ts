@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TrailInfo
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a CloudTrail trail, including the trail's name, home region, and Amazon Resource Name (ARN).
 **/
 export class TrailInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HomeRegion" })
+  @SpeakeasyMetadata({ data: "json, name=HomeRegion" })
   homeRegion?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=TrailARN" })
+  @SpeakeasyMetadata({ data: "json, name=TrailARN" })
   trailArn?: string;
 }

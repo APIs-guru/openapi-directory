@@ -1,65 +1,65 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RouteResponsePathInstructions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=distance" })
+  @SpeakeasyMetadata({ data: "json, name=distance" })
   distance?: number;
 
-  @Metadata({ data: "json, name=exit_number" })
+  @SpeakeasyMetadata({ data: "json, name=exit_number" })
   exitNumber?: number;
 
-  @Metadata({ data: "json, name=interval" })
+  @SpeakeasyMetadata({ data: "json, name=interval" })
   interval?: number[];
 
-  @Metadata({ data: "json, name=sign" })
+  @SpeakeasyMetadata({ data: "json, name=sign" })
   sign?: number;
 
-  @Metadata({ data: "json, name=street_name" })
+  @SpeakeasyMetadata({ data: "json, name=street_name" })
   streetName?: string;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: number;
 
-  @Metadata({ data: "json, name=turn_angle" })
+  @SpeakeasyMetadata({ data: "json, name=turn_angle" })
   turnAngle?: number;
 }
 
 
 export class RouteResponsePath extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ascend" })
+  @SpeakeasyMetadata({ data: "json, name=ascend" })
   ascend?: number;
 
-  @Metadata({ data: "json, name=bbox" })
+  @SpeakeasyMetadata({ data: "json, name=bbox" })
   bbox?: number[];
 
-  @Metadata({ data: "json, name=descend" })
+  @SpeakeasyMetadata({ data: "json, name=descend" })
   descend?: number;
 
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: Map<string, any>;
 
-  @Metadata({ data: "json, name=distance" })
+  @SpeakeasyMetadata({ data: "json, name=distance" })
   distance?: number;
 
-  @Metadata({ data: "json, name=instructions", elemType: shared.RouteResponsePathInstructions })
+  @SpeakeasyMetadata({ data: "json, name=instructions", elemType: RouteResponsePathInstructions })
   instructions?: RouteResponsePathInstructions[];
 
-  @Metadata({ data: "json, name=points" })
+  @SpeakeasyMetadata({ data: "json, name=points" })
   points?: Map<string, any>;
 
-  @Metadata({ data: "json, name=points_encoded" })
+  @SpeakeasyMetadata({ data: "json, name=points_encoded" })
   pointsEncoded?: boolean;
 
-  @Metadata({ data: "json, name=points_order" })
+  @SpeakeasyMetadata({ data: "json, name=points_order" })
   pointsOrder?: number[];
 
-  @Metadata({ data: "json, name=snapped_waypoints" })
+  @SpeakeasyMetadata({ data: "json, name=snapped_waypoints" })
   snappedWaypoints?: Map<string, any>;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: number;
 }

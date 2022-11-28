@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class VsmAccountResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=api_key" })
+  @SpeakeasyMetadata({ data: "json, name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "json, name=applications" })
+  @SpeakeasyMetadata({ data: "json, name=applications" })
   applications?: string[];
 
-  @Metadata({ data: "json, name=external_id" })
+  @SpeakeasyMetadata({ data: "json, name=external_id" })
   externalId: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=provider" })
+  @SpeakeasyMetadata({ data: "json, name=provider" })
   provider: string;
 }

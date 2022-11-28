@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateCodeSigningConfigPathParams:
-    code_signing_config_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'CodeSigningConfigArn', 'style': 'simple', 'explode': False }})
+    code_signing_config_arn: str = field(metadata={'path_param': { 'field_name': 'CodeSigningConfigArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,36 +28,44 @@ class UpdateCodeSigningConfigHeaders:
 @dataclass_json
 @dataclass
 class UpdateCodeSigningConfigRequestBodyAllowedPublishers:
-    signing_profile_version_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SigningProfileVersionArns' }})
+    r"""UpdateCodeSigningConfigRequestBodyAllowedPublishers
+    List of signing profiles that can sign a code package. 
+    """
+    
+    signing_profile_version_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SigningProfileVersionArns') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateCodeSigningConfigRequestBodyCodeSigningPolicies:
-    untrusted_artifact_on_deployment: Optional[shared.CodeSigningPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UntrustedArtifactOnDeployment' }})
+    r"""UpdateCodeSigningConfigRequestBodyCodeSigningPolicies
+    Code signing configuration <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-policies\">policies</a> specify the validation failure action for signature mismatch or expiry.
+    """
+    
+    untrusted_artifact_on_deployment: Optional[shared.CodeSigningPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('UntrustedArtifactOnDeployment') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateCodeSigningConfigRequestBody:
-    allowed_publishers: Optional[UpdateCodeSigningConfigRequestBodyAllowedPublishers] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AllowedPublishers' }})
-    code_signing_policies: Optional[UpdateCodeSigningConfigRequestBodyCodeSigningPolicies] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CodeSigningPolicies' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
+    allowed_publishers: Optional[UpdateCodeSigningConfigRequestBodyAllowedPublishers] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AllowedPublishers') }})
+    code_signing_policies: Optional[UpdateCodeSigningConfigRequestBodyCodeSigningPolicies] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CodeSigningPolicies') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
     
 
 @dataclass
 class UpdateCodeSigningConfigRequest:
-    path_params: UpdateCodeSigningConfigPathParams = field(default=None)
-    headers: UpdateCodeSigningConfigHeaders = field(default=None)
-    request: UpdateCodeSigningConfigRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateCodeSigningConfigHeaders = field()
+    path_params: UpdateCodeSigningConfigPathParams = field()
+    request: UpdateCodeSigningConfigRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateCodeSigningConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_code_signing_config_response: Optional[shared.UpdateCodeSigningConfigResponse] = field(default=None)
     

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowv2humanagentassistantconfigsuggestionfeatureconfig
+from sdk import utils
+from . import *
 
 class GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequestParticipantRoleEnum(str, Enum):
     ROLE_UNSPECIFIED = "ROLE_UNSPECIFIED"
@@ -13,6 +15,10 @@ class GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequestParticipantRoleEnu
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequest:
-    participant_role: Optional[GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequestParticipantRoleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'participantRole' }})
-    suggestion_feature_config: Optional[googleclouddialogflowv2humanagentassistantconfigsuggestionfeatureconfig.GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionFeatureConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'suggestionFeatureConfig' }})
+    r"""GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequest
+    The request message for ConversationProfiles.SetSuggestionFeature.
+    """
+    
+    participant_role: Optional[GoogleCloudDialogflowV2SetSuggestionFeatureConfigRequestParticipantRoleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('participantRole') }})
+    suggestion_feature_config: Optional[GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionFeatureConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('suggestionFeatureConfig') }})
     

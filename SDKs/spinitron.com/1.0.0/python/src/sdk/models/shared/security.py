@@ -3,27 +3,17 @@ from typing import Optional
 
 
 @dataclass
-class SchemeAccessToken:
-    api_key: str = field(default=None, metadata={'security': { 'field_name': 'access-token' }})
-    
-
-@dataclass
 class SchemeHTTPBearer:
-    authorization: str = field(default=None, metadata={'security': { 'field_name': 'Authorization' }})
+    authorization: str = field(metadata={'security': { 'field_name': 'Authorization' }})
     
 
 @dataclass
-class SecurityOption1:
-    http_bearer: SchemeHTTPBearer = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
-    
-
-@dataclass
-class SecurityOption2:
-    access_token: SchemeAccessToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+class SchemeAccessToken:
+    api_key: str = field(metadata={'security': { 'field_name': 'access-token' }})
     
 
 @dataclass
 class Security:
-    option1: Optional[SecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[SecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    access_token: Optional[SchemeAccessToken] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    http_bearer: Optional[SchemeHTTPBearer] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     

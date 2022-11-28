@@ -5,10 +5,6 @@ type SaveRevisionUsingPostQueryParams struct {
 	Rev   *string `queryParam:"style=form,explode=true,name=rev"`
 }
 
-type SaveRevisionUsingPostRequest struct {
-	QueryParams SaveRevisionUsingPostQueryParams
-}
-
 type SaveRevisionUsingPost200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -31,6 +27,10 @@ type SaveRevisionUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type SaveRevisionUsingPostRequest struct {
+	QueryParams SaveRevisionUsingPostQueryParams
 }
 
 type SaveRevisionUsingPostResponse struct {

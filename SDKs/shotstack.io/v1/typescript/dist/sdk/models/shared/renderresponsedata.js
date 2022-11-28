@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Edit } from "./edit";
 export var RenderResponseDataStatusEnum;
 (function (RenderResponseDataStatusEnum) {
@@ -43,55 +43,55 @@ var RenderResponseData = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=created" }),
+        SpeakeasyMetadata({ data: "json, name=created" }),
         __metadata("design:type", String)
     ], RenderResponseData.prototype, "created", void 0);
     __decorate([
-        Metadata({ data: "json, name=data" }),
+        SpeakeasyMetadata({ data: "json, name=data" }),
         __metadata("design:type", Edit)
     ], RenderResponseData.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "json, name=duration" }),
+        SpeakeasyMetadata({ data: "json, name=duration" }),
         __metadata("design:type", Number)
     ], RenderResponseData.prototype, "duration", void 0);
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], RenderResponseData.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], RenderResponseData.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=owner" }),
+        SpeakeasyMetadata({ data: "json, name=owner" }),
         __metadata("design:type", String)
     ], RenderResponseData.prototype, "owner", void 0);
     __decorate([
-        Metadata({ data: "json, name=plan" }),
+        SpeakeasyMetadata({ data: "json, name=plan" }),
         __metadata("design:type", String)
     ], RenderResponseData.prototype, "plan", void 0);
     __decorate([
-        Metadata({ data: "json, name=poster" }),
+        SpeakeasyMetadata({ data: "json, name=poster" }),
         __metadata("design:type", String)
     ], RenderResponseData.prototype, "poster", void 0);
     __decorate([
-        Metadata({ data: "json, name=renderTime" }),
+        SpeakeasyMetadata({ data: "json, name=renderTime" }),
         __metadata("design:type", Number)
     ], RenderResponseData.prototype, "renderTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], RenderResponseData.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=thumbnail" }),
+        SpeakeasyMetadata({ data: "json, name=thumbnail" }),
         __metadata("design:type", String)
     ], RenderResponseData.prototype, "thumbnail", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated" }),
+        SpeakeasyMetadata({ data: "json, name=updated" }),
         __metadata("design:type", String)
     ], RenderResponseData.prototype, "updated", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], RenderResponseData.prototype, "url", void 0);
     return RenderResponseData;

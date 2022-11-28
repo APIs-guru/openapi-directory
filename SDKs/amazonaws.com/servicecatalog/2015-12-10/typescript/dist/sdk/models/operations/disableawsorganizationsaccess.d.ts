@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum DisableAwsOrganizationsAccessXAmzTargetEnum {
     Aws242ServiceCatalogServiceDisableAwsOrganizationsAccess = "AWS242ServiceCatalogService.DisableAWSOrganizationsAccess"
 }

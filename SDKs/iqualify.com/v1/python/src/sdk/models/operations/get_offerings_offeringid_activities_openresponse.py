@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetOfferingsOfferingIDActivitiesOpenresponsePathParams:
-    offering_id: str = field(default=None, metadata={'path_param': { 'field_name': 'offeringId', 'style': 'simple', 'explode': False }})
+    offering_id: str = field(metadata={'path_param': { 'field_name': 'offeringId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetOfferingsOfferingIDActivitiesOpenresponseRequest:
-    path_params: GetOfferingsOfferingIDActivitiesOpenresponsePathParams = field(default=None)
+    path_params: GetOfferingsOfferingIDActivitiesOpenresponsePathParams = field()
     
 
 @dataclass
 class GetOfferingsOfferingIDActivitiesOpenresponseResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     offering_activities_responses: Optional[List[shared.OfferingActivitiesResponse]] = field(default=None)
-    status_code: int = field(default=None)
     

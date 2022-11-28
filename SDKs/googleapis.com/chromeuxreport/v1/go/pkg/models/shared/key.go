@@ -9,6 +9,8 @@ const (
 	KeyFormFactorEnumTablet         KeyFormFactorEnum = "TABLET"
 )
 
+// Key
+// Key defines all the dimensions that identify this record as unique.
 type Key struct {
 	EffectiveConnectionType *string            `json:"effectiveConnectionType,omitempty"`
 	FormFactor              *KeyFormFactorEnum `json:"formFactor,omitempty"`

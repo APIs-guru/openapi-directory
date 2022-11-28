@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RegistryId
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A wrapper structure that may contain the registry name and Amazon Resource Name (ARN).
 **/
 export class RegistryId extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RegistryArn" })
+  @SpeakeasyMetadata({ data: "json, name=RegistryArn" })
   registryArn?: string;
 
-  @Metadata({ data: "json, name=RegistryName" })
+  @SpeakeasyMetadata({ data: "json, name=RegistryName" })
   registryName?: string;
 }

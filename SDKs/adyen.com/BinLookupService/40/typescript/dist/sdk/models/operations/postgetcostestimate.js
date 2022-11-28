@@ -22,45 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var PostGetCostEstimateSecurityOption1 = /** @class */ (function (_super) {
-    __extends(PostGetCostEstimateSecurityOption1, _super);
-    function PostGetCostEstimateSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
-        __metadata("design:type", shared.SchemeBasicAuth)
-    ], PostGetCostEstimateSecurityOption1.prototype, "basicAuth", void 0);
-    return PostGetCostEstimateSecurityOption1;
-}(SpeakeasyBase));
-export { PostGetCostEstimateSecurityOption1 };
-var PostGetCostEstimateSecurityOption2 = /** @class */ (function (_super) {
-    __extends(PostGetCostEstimateSecurityOption2, _super);
-    function PostGetCostEstimateSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKeyAuth)
-    ], PostGetCostEstimateSecurityOption2.prototype, "apiKeyAuth", void 0);
-    return PostGetCostEstimateSecurityOption2;
-}(SpeakeasyBase));
-export { PostGetCostEstimateSecurityOption2 };
 var PostGetCostEstimateSecurity = /** @class */ (function (_super) {
     __extends(PostGetCostEstimateSecurity, _super);
     function PostGetCostEstimateSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostGetCostEstimateSecurityOption1)
-    ], PostGetCostEstimateSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeBasicAuth)
+    ], PostGetCostEstimateSecurity.prototype, "basicAuth", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostGetCostEstimateSecurityOption2)
-    ], PostGetCostEstimateSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKeyAuth)
+    ], PostGetCostEstimateSecurity.prototype, "apiKeyAuth", void 0);
     return PostGetCostEstimateSecurity;
 }(SpeakeasyBase));
 export { PostGetCostEstimateSecurity };
@@ -70,11 +46,11 @@ var PostGetCostEstimateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], PostGetCostEstimateRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostGetCostEstimateSecurity)
     ], PostGetCostEstimateRequest.prototype, "security", void 0);
     return PostGetCostEstimateRequest;
@@ -86,19 +62,19 @@ var PostGetCostEstimateResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostGetCostEstimateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostGetCostEstimateResponse.prototype, "costEstimateResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostGetCostEstimateResponse.prototype, "serviceError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostGetCostEstimateResponse.prototype, "statusCode", void 0);
     return PostGetCostEstimateResponse;

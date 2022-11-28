@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteNetworkSmTargetGroupPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=targetGroupId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=targetGroupId" })
   targetGroupId: string;
 }
 
 
 export class DeleteNetworkSmTargetGroupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteNetworkSmTargetGroupPathParams;
 }
 
 
 export class DeleteNetworkSmTargetGroupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

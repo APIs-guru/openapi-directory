@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OwnerOpeningBalanceVatEntryDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=vatRateId" })
+  @SpeakeasyMetadata({ data: "json, name=vatRateId" })
   vatRateId?: number;
 }

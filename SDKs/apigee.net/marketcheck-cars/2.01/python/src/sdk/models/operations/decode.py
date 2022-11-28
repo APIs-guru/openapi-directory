@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class DecodePathParams:
-    vin: str = field(default=None, metadata={'path_param': { 'field_name': 'vin', 'style': 'simple', 'explode': False }})
+    vin: str = field(metadata={'path_param': { 'field_name': 'vin', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class DecodeQueryParams:
 
 @dataclass
 class DecodeRequest:
-    path_params: DecodePathParams = field(default=None)
-    query_params: DecodeQueryParams = field(default=None)
+    path_params: DecodePathParams = field()
+    query_params: DecodeQueryParams = field()
     
 
 @dataclass
 class DecodeResponse:
+    content_type: str = field()
+    status_code: int = field()
     build: Optional[shared.Build] = field(default=None)
-    content_type: str = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     

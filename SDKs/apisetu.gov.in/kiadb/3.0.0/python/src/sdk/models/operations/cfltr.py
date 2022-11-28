@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
+from sdk.models import shared
 
 
 @dataclass_json
 @dataclass
 class CfltrRequestBodyCertificateParameters:
-    dob: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DOB' }})
-    full_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FullName' }})
-    reg_num: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RegNum' }})
-    uid: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UID' }})
+    dob: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DOB') }})
+    full_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FullName') }})
+    reg_num: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RegNum') }})
+    uid: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('UID') }})
     
 class CfltrRequestBodyFormatEnum(str, Enum):
     PDF = "pdf"
@@ -18,22 +21,16 @@ class CfltrRequestBodyFormatEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CfltrRequestBody:
-    certificate_parameters: Optional[CfltrRequestBodyCertificateParameters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificateParameters' }})
-    consent_artifact: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'consentArtifact' }})
-    format: CfltrRequestBodyFormatEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'format' }})
-    txn_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'txnId' }})
+    format: CfltrRequestBodyFormatEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('format') }})
+    txn_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('txnId') }})
+    certificate_parameters: Optional[CfltrRequestBodyCertificateParameters] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('certificateParameters') }})
+    consent_artifact: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('consentArtifact') }})
     
 
 @dataclass
 class CfltrSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    client_id: shared.SchemeClientID = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
-class CfltrRequest:
-    request: Optional[CfltrRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CfltrSecurity = field(default=None)
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    client_id: shared.SchemeClientID = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 class Cfltr400ApplicationJSONErrorEnum(str, Enum):
     MISSING_PARAMETER = "missing_parameter"
@@ -53,8 +50,8 @@ class Cfltr400ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Cfltr400ApplicationJSON:
-    error: Optional[Cfltr400ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Cfltr400ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Cfltr400ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Cfltr400ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Cfltr401ApplicationJSONErrorEnum(str, Enum):
     INVALID_AUTHENTICATION = "invalid_authentication"
@@ -68,8 +65,8 @@ class Cfltr401ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Cfltr401ApplicationJSON:
-    error: Optional[Cfltr401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Cfltr401ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Cfltr401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Cfltr401ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Cfltr404ApplicationJSONErrorEnum(str, Enum):
     RECORD_NOT_FOUND = "record_not_found"
@@ -83,8 +80,8 @@ class Cfltr404ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Cfltr404ApplicationJSON:
-    error: Optional[Cfltr404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Cfltr404ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Cfltr404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Cfltr404ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Cfltr500ApplicationJSONErrorEnum(str, Enum):
     INTERNAL_SERVER_ERROR = "internal_server_error"
@@ -96,8 +93,8 @@ class Cfltr500ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Cfltr500ApplicationJSON:
-    error: Optional[Cfltr500ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Cfltr500ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Cfltr500ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Cfltr500ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Cfltr502ApplicationJSONErrorEnum(str, Enum):
     BAD_GATEWY = "bad_gatewy"
@@ -109,8 +106,8 @@ class Cfltr502ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Cfltr502ApplicationJSON:
-    error: Optional[Cfltr502ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Cfltr502ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Cfltr502ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Cfltr502ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Cfltr503ApplicationJSONErrorEnum(str, Enum):
     SERVICE_UNAVAILABLE = "service_unavailable"
@@ -122,8 +119,8 @@ class Cfltr503ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Cfltr503ApplicationJSON:
-    error: Optional[Cfltr503ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Cfltr503ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Cfltr503ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Cfltr503ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Cfltr504ApplicationJSONErrorEnum(str, Enum):
     GATEWAY_TIMEOUT = "gateway_timeout"
@@ -135,14 +132,20 @@ class Cfltr504ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Cfltr504ApplicationJSON:
-    error: Optional[Cfltr504ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Cfltr504ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Cfltr504ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Cfltr504ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
+    
+
+@dataclass
+class CfltrRequest:
+    security: CfltrSecurity = field()
+    request: Optional[CfltrRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CfltrResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     cfltr_400_application_json_object: Optional[Cfltr400ApplicationJSON] = field(default=None)
     cfltr_401_application_json_object: Optional[Cfltr401ApplicationJSON] = field(default=None)
     cfltr_404_application_json_object: Optional[Cfltr404ApplicationJSON] = field(default=None)

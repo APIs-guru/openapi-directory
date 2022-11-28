@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReportContext
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details of the license configuration that this generator reports on.
 **/
 export class ReportContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=licenseConfigurationArns" })
+  @SpeakeasyMetadata({ data: "json, name=licenseConfigurationArns" })
   licenseConfigurationArns: string[];
 }

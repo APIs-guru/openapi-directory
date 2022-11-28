@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetSimilarMoviesPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,19 +19,19 @@ class GetSimilarMoviesQueryParams:
 
 @dataclass
 class GetSimilarMoviesSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetSimilarMoviesRequest:
-    path_params: GetSimilarMoviesPathParams = field(default=None)
-    query_params: GetSimilarMoviesQueryParams = field(default=None)
-    security: GetSimilarMoviesSecurity = field(default=None)
+    path_params: GetSimilarMoviesPathParams = field()
+    query_params: GetSimilarMoviesQueryParams = field()
+    security: GetSimilarMoviesSecurity = field()
     
 
 @dataclass
 class GetSimilarMoviesResponse:
+    content_type: str = field()
+    status_code: int = field()
     base_item_dto_query_result: Optional[shared.BaseItemDtoQueryResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteIntegrationPathParams:
-    http_method: str = field(default=None, metadata={'path_param': { 'field_name': 'http_method', 'style': 'simple', 'explode': False }})
-    resource_id: str = field(default=None, metadata={'path_param': { 'field_name': 'resource_id', 'style': 'simple', 'explode': False }})
-    restapi_id: str = field(default=None, metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
+    http_method: str = field(metadata={'path_param': { 'field_name': 'http_method', 'style': 'simple', 'explode': False }})
+    resource_id: str = field(metadata={'path_param': { 'field_name': 'resource_id', 'style': 'simple', 'explode': False }})
+    restapi_id: str = field(metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,17 +25,17 @@ class DeleteIntegrationHeaders:
 
 @dataclass
 class DeleteIntegrationRequest:
-    path_params: DeleteIntegrationPathParams = field(default=None)
-    headers: DeleteIntegrationHeaders = field(default=None)
+    headers: DeleteIntegrationHeaders = field()
+    path_params: DeleteIntegrationPathParams = field()
     
 
 @dataclass
 class DeleteIntegrationResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

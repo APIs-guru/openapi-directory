@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParameterMapEntry } from "./parametermapentry";
+
 
 
 // PolicyParameter
@@ -8,12 +8,12 @@ import { ParameterMapEntry } from "./parametermapentry";
  *  Name of the parameter from the Review policy. 
 **/
 export class PolicyParameter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key?: string;
 
-  @Metadata({ data: "json, name=MapEntries", elemType: shared.ParameterMapEntry })
+  @SpeakeasyMetadata({ data: "json, name=MapEntries", elemType: ParameterMapEntry })
   mapEntries?: ParameterMapEntry[];
 
-  @Metadata({ data: "json, name=Values" })
+  @SpeakeasyMetadata({ data: "json, name=Values" })
   values?: string[];
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TflApiPresentationEntitiesTwentyFourHourClockTime extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hour" })
+  @SpeakeasyMetadata({ data: "json, name=hour" })
   hour?: string;
 
-  @Metadata({ data: "json, name=minute" })
+  @SpeakeasyMetadata({ data: "json, name=minute" })
   minute?: string;
 }

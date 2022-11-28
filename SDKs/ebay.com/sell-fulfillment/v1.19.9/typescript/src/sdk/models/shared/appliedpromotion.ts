@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Amount } from "./amount";
+
 
 
 // AppliedPromotion
@@ -7,12 +8,12 @@ import { Amount } from "./amount";
  * This type contains information about a sales promotion that is applied to a line item.
 **/
 export class AppliedPromotion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=discountAmount" })
+  @SpeakeasyMetadata({ data: "json, name=discountAmount" })
   discountAmount?: Amount;
 
-  @Metadata({ data: "json, name=promotionId" })
+  @SpeakeasyMetadata({ data: "json, name=promotionId" })
   promotionId?: string;
 }

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ElectionShapeLookupBehaviorEnum {
-    ShapeLookupDefault = "shapeLookupDefault"
-,    ShapeLookupDisabled = "shapeLookupDisabled"
-,    ShapeLookupEnabled = "shapeLookupEnabled"
+    ShapeLookupDefault = "shapeLookupDefault",
+    ShapeLookupDisabled = "shapeLookupDisabled",
+    ShapeLookupEnabled = "shapeLookupEnabled"
 }
 
 
@@ -12,18 +13,18 @@ export enum ElectionShapeLookupBehaviorEnum {
  * Information about the election that was queried.
 **/
 export class Election extends SpeakeasyBase {
-  @Metadata({ data: "json, name=electionDay" })
+  @SpeakeasyMetadata({ data: "json, name=electionDay" })
   electionDay?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ocdDivisionId" })
+  @SpeakeasyMetadata({ data: "json, name=ocdDivisionId" })
   ocdDivisionId?: string;
 
-  @Metadata({ data: "json, name=shapeLookupBehavior" })
+  @SpeakeasyMetadata({ data: "json, name=shapeLookupBehavior" })
   shapeLookupBehavior?: ElectionShapeLookupBehaviorEnum;
 }

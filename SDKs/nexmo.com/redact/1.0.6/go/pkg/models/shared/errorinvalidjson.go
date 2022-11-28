@@ -1,5 +1,7 @@
 package shared
 
+// ErrorInvalidJSON
+// Invalid JSON
 type ErrorInvalidJSON struct {
 	Detail   string `json:"detail"`
 	Instance string `json:"instance"`

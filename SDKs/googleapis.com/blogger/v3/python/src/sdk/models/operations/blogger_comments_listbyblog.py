@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BloggerCommentsListByBlogPathParams:
-    blog_id: str = field(default=None, metadata={'path_param': { 'field_name': 'blogId', 'style': 'simple', 'explode': False }})
+    blog_id: str = field(metadata={'path_param': { 'field_name': 'blogId', 'style': 'simple', 'explode': False }})
     
 class BloggerCommentsListByBlogStatusEnum(str, Enum):
     LIVE = "LIVE"
@@ -37,14 +41,14 @@ class BloggerCommentsListByBlogQueryParams:
 
 @dataclass
 class BloggerCommentsListByBlogSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BloggerCommentsListByBlogSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -55,14 +59,14 @@ class BloggerCommentsListByBlogSecurity:
 
 @dataclass
 class BloggerCommentsListByBlogRequest:
-    path_params: BloggerCommentsListByBlogPathParams = field(default=None)
-    query_params: BloggerCommentsListByBlogQueryParams = field(default=None)
-    security: BloggerCommentsListByBlogSecurity = field(default=None)
+    path_params: BloggerCommentsListByBlogPathParams = field()
+    query_params: BloggerCommentsListByBlogQueryParams = field()
+    security: BloggerCommentsListByBlogSecurity = field()
     
 
 @dataclass
 class BloggerCommentsListByBlogResponse:
+    content_type: str = field()
+    status_code: int = field()
     comment_list: Optional[shared.CommentList] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

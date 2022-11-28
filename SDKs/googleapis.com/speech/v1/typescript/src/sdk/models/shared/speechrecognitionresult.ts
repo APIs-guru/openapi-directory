@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SpeechRecognitionAlternative } from "./speechrecognitionalternative";
+
 
 
 // SpeechRecognitionResult
@@ -8,15 +8,15 @@ import { SpeechRecognitionAlternative } from "./speechrecognitionalternative";
  * A speech recognition result corresponding to a portion of the audio.
 **/
 export class SpeechRecognitionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alternatives", elemType: shared.SpeechRecognitionAlternative })
+  @SpeakeasyMetadata({ data: "json, name=alternatives", elemType: SpeechRecognitionAlternative })
   alternatives?: SpeechRecognitionAlternative[];
 
-  @Metadata({ data: "json, name=channelTag" })
+  @SpeakeasyMetadata({ data: "json, name=channelTag" })
   channelTag?: number;
 
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=resultEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=resultEndTime" })
   resultEndTime?: string;
 }

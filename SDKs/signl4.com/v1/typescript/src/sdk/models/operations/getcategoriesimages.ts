@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCategoriesImagesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCategoriesImages200ApplicationJsonStrings?: string[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCategoriesImages200TextJsonStrings?: string[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -11,6 +11,8 @@ type DeleteObjectHeaders struct {
 	XAmzDataPartition string  `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// DeleteObjectRequestBodyObjectReference
+// The reference that identifies an object.
 type DeleteObjectRequestBodyObjectReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }

@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetEventSubscriptionsPathParams:
-    subscription_id: str = field(default=None, metadata={'path_param': { 'field_name': 'SubscriptionId', 'style': 'simple', 'explode': False }})
+    subscription_id: str = field(metadata={'path_param': { 'field_name': 'SubscriptionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetEventSubscriptionsRequest:
-    path_params: GetEventSubscriptionsPathParams = field(default=None)
+    path_params: GetEventSubscriptionsPathParams = field()
     
 
 @dataclass
 class GetEventSubscriptionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     event_subscriptions_response: Optional[shared.EventSubscriptionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

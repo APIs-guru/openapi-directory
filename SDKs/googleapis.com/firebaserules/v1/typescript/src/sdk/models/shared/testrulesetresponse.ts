@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Issue } from "./issue";
 import { TestResult } from "./testresult";
+
 
 
 // TestRulesetResponse
@@ -9,9 +9,9 @@ import { TestResult } from "./testresult";
  * The response for FirebaseRulesService.TestRuleset.
 **/
 export class TestRulesetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=issues", elemType: shared.Issue })
+  @SpeakeasyMetadata({ data: "json, name=issues", elemType: Issue })
   issues?: Issue[];
 
-  @Metadata({ data: "json, name=testResults", elemType: shared.TestResult })
+  @SpeakeasyMetadata({ data: "json, name=testResults", elemType: TestResult })
   testResults?: TestResult[];
 }

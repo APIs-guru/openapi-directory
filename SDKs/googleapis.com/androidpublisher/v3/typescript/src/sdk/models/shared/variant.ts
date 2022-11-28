@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceSpec } from "./devicespec";
+
 
 
 // Variant
@@ -7,9 +8,19 @@ import { DeviceSpec } from "./devicespec";
  * APK that is suitable for inclusion in a system image. The resource of SystemApksService.
 **/
 export class Variant extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceSpec" })
+  @SpeakeasyMetadata({ data: "json, name=deviceSpec" })
   deviceSpec?: DeviceSpec;
 
-  @Metadata({ data: "json, name=variantId" })
+  @SpeakeasyMetadata({ data: "json, name=variantId" })
   variantId?: number;
+}
+
+
+// VariantInput
+/** 
+ * APK that is suitable for inclusion in a system image. The resource of SystemApksService.
+**/
+export class VariantInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=deviceSpec" })
+  deviceSpec?: DeviceSpec;
 }

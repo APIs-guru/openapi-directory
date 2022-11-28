@@ -1,14 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
+from sdk.models import shared
 
 
 @dataclass_json
 @dataclass
 class TetmsRequestBodyCertificateParameters:
-    full_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FullName' }})
-    rollno: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rollno' }})
-    year_month: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'year_month' }})
+    full_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FullName') }})
+    rollno: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('rollno') }})
+    year_month: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('year_month') }})
     
 class TetmsRequestBodyFormatEnum(str, Enum):
     PDF = "pdf"
@@ -17,22 +20,16 @@ class TetmsRequestBodyFormatEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TetmsRequestBody:
-    certificate_parameters: Optional[TetmsRequestBodyCertificateParameters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificateParameters' }})
-    consent_artifact: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'consentArtifact' }})
-    format: TetmsRequestBodyFormatEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'format' }})
-    txn_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'txnId' }})
+    format: TetmsRequestBodyFormatEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('format') }})
+    txn_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('txnId') }})
+    certificate_parameters: Optional[TetmsRequestBodyCertificateParameters] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('certificateParameters') }})
+    consent_artifact: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('consentArtifact') }})
     
 
 @dataclass
 class TetmsSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    client_id: shared.SchemeClientID = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
-class TetmsRequest:
-    request: Optional[TetmsRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: TetmsSecurity = field(default=None)
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    client_id: shared.SchemeClientID = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 class Tetms400ApplicationJSONErrorEnum(str, Enum):
     MISSING_PARAMETER = "missing_parameter"
@@ -52,8 +49,8 @@ class Tetms400ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Tetms400ApplicationJSON:
-    error: Optional[Tetms400ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Tetms400ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Tetms400ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Tetms400ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Tetms401ApplicationJSONErrorEnum(str, Enum):
     INVALID_AUTHENTICATION = "invalid_authentication"
@@ -67,8 +64,8 @@ class Tetms401ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Tetms401ApplicationJSON:
-    error: Optional[Tetms401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Tetms401ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Tetms401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Tetms401ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Tetms404ApplicationJSONErrorEnum(str, Enum):
     RECORD_NOT_FOUND = "record_not_found"
@@ -82,8 +79,8 @@ class Tetms404ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Tetms404ApplicationJSON:
-    error: Optional[Tetms404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Tetms404ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Tetms404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Tetms404ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Tetms500ApplicationJSONErrorEnum(str, Enum):
     INTERNAL_SERVER_ERROR = "internal_server_error"
@@ -95,8 +92,8 @@ class Tetms500ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Tetms500ApplicationJSON:
-    error: Optional[Tetms500ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Tetms500ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Tetms500ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Tetms500ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Tetms502ApplicationJSONErrorEnum(str, Enum):
     BAD_GATEWY = "bad_gatewy"
@@ -108,8 +105,8 @@ class Tetms502ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Tetms502ApplicationJSON:
-    error: Optional[Tetms502ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Tetms502ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Tetms502ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Tetms502ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Tetms503ApplicationJSONErrorEnum(str, Enum):
     SERVICE_UNAVAILABLE = "service_unavailable"
@@ -121,8 +118,8 @@ class Tetms503ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Tetms503ApplicationJSON:
-    error: Optional[Tetms503ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Tetms503ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Tetms503ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Tetms503ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Tetms504ApplicationJSONErrorEnum(str, Enum):
     GATEWAY_TIMEOUT = "gateway_timeout"
@@ -134,14 +131,20 @@ class Tetms504ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Tetms504ApplicationJSON:
-    error: Optional[Tetms504ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Tetms504ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Tetms504ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Tetms504ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
+    
+
+@dataclass
+class TetmsRequest:
+    security: TetmsSecurity = field()
+    request: Optional[TetmsRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class TetmsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     tetms_400_application_json_object: Optional[Tetms400ApplicationJSON] = field(default=None)
     tetms_401_application_json_object: Optional[Tetms401ApplicationJSON] = field(default=None)
     tetms_404_application_json_object: Optional[Tetms404ApplicationJSON] = field(default=None)

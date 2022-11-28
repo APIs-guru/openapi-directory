@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class NumberValidation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country: string;
 
-  @Metadata({ data: "json, name=number" })
+  @SpeakeasyMetadata({ data: "json, name=number" })
   number: string;
 }

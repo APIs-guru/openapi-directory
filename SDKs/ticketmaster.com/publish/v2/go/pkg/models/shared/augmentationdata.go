@@ -8,6 +8,8 @@ const (
 	AugmentationDataRelatedEntityTypeEnumVenue      AugmentationDataRelatedEntityTypeEnum = "venue"
 )
 
+// AugmentationData
+// This class defines the Augmentation Data on the Publish API
 type AugmentationData struct {
 	Changes           []Change                              `json:"changes"`
 	RelatedEntityID   string                                `json:"relatedEntityId"`

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum KernelArchitectureEnum {
-    X8664 = "x86_64"
-,    I386 = "i386"
+    X8664 = "x86_64",
+    I386 = "i386"
 }
 
 
@@ -11,27 +12,27 @@ export enum KernelArchitectureEnum {
  * Linux kernel object
 **/
 export class Kernel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=architecture" })
+  @SpeakeasyMetadata({ data: "json, name=architecture" })
   architecture?: KernelArchitectureEnum;
 
-  @Metadata({ data: "json, name=deprecated" })
+  @SpeakeasyMetadata({ data: "json, name=deprecated" })
   deprecated?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kvm" })
+  @SpeakeasyMetadata({ data: "json, name=kvm" })
   kvm?: boolean;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=pvops" })
+  @SpeakeasyMetadata({ data: "json, name=pvops" })
   pvops?: boolean;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 
-  @Metadata({ data: "json, name=xen" })
+  @SpeakeasyMetadata({ data: "json, name=xen" })
   xen?: boolean;
 }

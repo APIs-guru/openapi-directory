@@ -4,10 +4,6 @@ type GetAPIV2PerformanceStatsHeaders struct {
 	XRapidAPIKey *string `header:"style=simple,explode=false,name=X-RapidApi-Key"`
 }
 
-type GetAPIV2PerformanceStatsRequest struct {
-	Headers GetAPIV2PerformanceStatsHeaders
-}
-
 type GetAPIV2PerformanceStats200ApplicationJSONDataAccuracy struct {
 	Last14Days *float64 `json:"last_14_days,omitempty"`
 	Last30Days *float64 `json:"last_30_days,omitempty"`
@@ -66,6 +62,10 @@ type GetAPIV2PerformanceStats200ApplicationJSON struct {
 
 type GetAPIV2PerformanceStats404ApplicationJSON struct {
 	Errors map[string]interface{} `json:"errors,omitempty"`
+}
+
+type GetAPIV2PerformanceStatsRequest struct {
+	Headers GetAPIV2PerformanceStatsHeaders
 }
 
 type GetAPIV2PerformanceStatsResponse struct {

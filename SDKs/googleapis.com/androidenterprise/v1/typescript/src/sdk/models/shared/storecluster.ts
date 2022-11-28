@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocalizedText } from "./localizedtext";
+
 
 
 // StoreCluster
@@ -8,15 +8,15 @@ import { LocalizedText } from "./localizedtext";
  * Definition of a managed Google Play store cluster, a list of products displayed as part of a store page.
 **/
 export class StoreCluster extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name", elemType: shared.LocalizedText })
+  @SpeakeasyMetadata({ data: "json, name=name", elemType: LocalizedText })
   name?: LocalizedText[];
 
-  @Metadata({ data: "json, name=orderInPage" })
+  @SpeakeasyMetadata({ data: "json, name=orderInPage" })
   orderInPage?: string;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string[];
 }

@@ -18,6 +18,8 @@ type PutEventsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// PutEventsRequestBodyEventsRequest
+// Specifies a batch of events to process.
 type PutEventsRequestBodyEventsRequest struct {
 	BatchItem map[string]shared.EventsBatch `json:"BatchItem,omitempty"`
 }

@@ -1,54 +1,55 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AccountGetPermissionsCountPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=guestId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=guestId" })
   guestId: number;
 }
 
 export enum AccountGetPermissionsCountEntityTypeEnum {
-    Datapoint = "datapoint"
-,    Group = "group"
+    Datapoint = "datapoint",
+    Group = "group"
 }
 
 export enum AccountGetPermissionsCountTypeEnum {
-    R = "r"
-,    W = "w"
+    R = "r",
+    W = "w"
 }
 
 
 export class AccountGetPermissionsCountQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=entityId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entityId" })
   entityId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=entityType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entityType" })
   entityType?: AccountGetPermissionsCountEntityTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: AccountGetPermissionsCountTypeEnum;
 }
 
 
 export class AccountGetPermissionsCountRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AccountGetPermissionsCountPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AccountGetPermissionsCountQueryParams;
 }
 
 
 export class AccountGetPermissionsCountResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiCoreResponsesCountResponce?: shared.ApiCoreResponsesCountResponce;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

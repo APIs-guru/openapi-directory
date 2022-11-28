@@ -4,10 +4,6 @@ type PostTagGroupsJSONRequestBody struct {
 	Name string `json:"name"`
 }
 
-type PostTagGroupsJSONRequest struct {
-	Request *PostTagGroupsJSONRequestBody `request:"mediaType=application/json"`
-}
-
 type PostTagGroupsJSON200ApplicationJSONTagGroup struct {
 	ID            int64                  `json:"id"`
 	Name          string                 `json:"name"`
@@ -19,6 +15,10 @@ type PostTagGroupsJSON200ApplicationJSONTagGroup struct {
 
 type PostTagGroupsJSON200ApplicationJSON struct {
 	TagGroup PostTagGroupsJSON200ApplicationJSONTagGroup `json:"tag_group"`
+}
+
+type PostTagGroupsJSONRequest struct {
+	Request *PostTagGroupsJSONRequestBody `request:"mediaType=application/json"`
 }
 
 type PostTagGroupsJSONResponse struct {

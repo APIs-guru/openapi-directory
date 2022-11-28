@@ -9,13 +9,13 @@ type RandomGifQueryParams struct {
 	Tag    *string `queryParam:"style=form,explode=true,name=tag"`
 }
 
-type RandomGifRequest struct {
-	QueryParams RandomGifQueryParams
-}
-
 type RandomGif200ApplicationJSON struct {
 	Data *shared.Gif  `json:"data,omitempty"`
 	Meta *shared.Meta `json:"meta,omitempty"`
+}
+
+type RandomGifRequest struct {
+	QueryParams RandomGifQueryParams
 }
 
 type RandomGifResponse struct {

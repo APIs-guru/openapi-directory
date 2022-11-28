@@ -17,6 +17,23 @@ const (
 	GoogleCloudIntegrationsV1alphaIntegrationTemplateVersionStatusEnumSnapshot GoogleCloudIntegrationsV1alphaIntegrationTemplateVersionStatusEnum = "SNAPSHOT"
 )
 
+// GoogleCloudIntegrationsV1alphaIntegrationTemplateVersionInput
+// IntegrationTemplateVersion definition. An IntegrationTemplateVersion provides configurations required to construct an IntegrationVersion. It cannot be executed directly like an Integration. Users can create IntegrationTemplateVersions using Integrations. These Templates can be shared by users across GCP projects.
+type GoogleCloudIntegrationsV1alphaIntegrationTemplateVersionInput struct {
+	DatabasePersistencePolicy  *GoogleCloudIntegrationsV1alphaIntegrationTemplateVersionDatabasePersistencePolicyEnum `json:"databasePersistencePolicy,omitempty"`
+	Description                *string                                                                                `json:"description,omitempty"`
+	LastModifierEmail          *string                                                                                `json:"lastModifierEmail,omitempty"`
+	ParentIntegrationVersionID *string                                                                                `json:"parentIntegrationVersionId,omitempty"`
+	Status                     *GoogleCloudIntegrationsV1alphaIntegrationTemplateVersionStatusEnum                    `json:"status,omitempty"`
+	TaskConfigs                []EnterpriseCrmFrontendsEventbusProtoTaskConfig                                        `json:"taskConfigs,omitempty"`
+	Teardown                   *EnterpriseCrmEventbusProtoTeardown                                                    `json:"teardown,omitempty"`
+	TemplateParameters         *EnterpriseCrmFrontendsEventbusProtoWorkflowParameters                                 `json:"templateParameters,omitempty"`
+	TriggerConfigs             []EnterpriseCrmFrontendsEventbusProtoTriggerConfig                                     `json:"triggerConfigs,omitempty"`
+	UserLabel                  *string                                                                                `json:"userLabel,omitempty"`
+}
+
+// GoogleCloudIntegrationsV1alphaIntegrationTemplateVersion
+// IntegrationTemplateVersion definition. An IntegrationTemplateVersion provides configurations required to construct an IntegrationVersion. It cannot be executed directly like an Integration. Users can create IntegrationTemplateVersions using Integrations. These Templates can be shared by users across GCP projects.
 type GoogleCloudIntegrationsV1alphaIntegrationTemplateVersion struct {
 	CreateTime                 *string                                                                                `json:"createTime,omitempty"`
 	DatabasePersistencePolicy  *GoogleCloudIntegrationsV1alphaIntegrationTemplateVersionDatabasePersistencePolicyEnum `json:"databasePersistencePolicy,omitempty"`

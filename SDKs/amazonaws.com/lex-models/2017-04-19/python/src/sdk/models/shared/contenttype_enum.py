@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ContentTypeEnum(str, Enum):
     PLAIN_TEXT = "PlainText"

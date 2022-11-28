@@ -9,6 +9,8 @@ const (
 	GoogleAnalyticsAdminV1alphaAudienceSimpleFilterScopeEnumAudienceFilterScopeAcrossAllSessions GoogleAnalyticsAdminV1alphaAudienceSimpleFilterScopeEnum = "AUDIENCE_FILTER_SCOPE_ACROSS_ALL_SESSIONS"
 )
 
+// GoogleAnalyticsAdminV1alphaAudienceSimpleFilter
+// Defines a simple filter that a user must satisfy to be a member of the Audience.
 type GoogleAnalyticsAdminV1alphaAudienceSimpleFilter struct {
 	FilterExpression *GoogleAnalyticsAdminV1alphaAudienceFilterExpression      `json:"filterExpression,omitempty"`
 	Scope            *GoogleAnalyticsAdminV1alphaAudienceSimpleFilterScopeEnum `json:"scope,omitempty"`

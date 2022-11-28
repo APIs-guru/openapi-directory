@@ -1,5 +1,8 @@
 package shared
 
+// DeviceObject
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-deviceobject - Find more info on the official Spotify Web API Reference
 type DeviceObject struct {
 	ID               *string `json:"id,omitempty"`
 	IsActive         *bool   `json:"is_active,omitempty"`

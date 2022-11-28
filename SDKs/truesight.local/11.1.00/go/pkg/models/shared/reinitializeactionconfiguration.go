@@ -1,5 +1,7 @@
 package shared
 
+// ReinitializeActionConfiguration
+// The deserialized form of the <b>Reinitialize</b> service's request payload.
 type ReinitializeActionConfiguration struct {
 	ResetAlertActions                 *int32 `json:"resetAlertActions,omitempty"`
 	ResetAlertAfterNTimes             *int32 `json:"resetAlertAfterNTimes,omitempty"`

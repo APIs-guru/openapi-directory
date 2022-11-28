@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DevEndpoint
+// A development endpoint where a developer can remotely debug extract, transform, and load (ETL) scripts.
 type DevEndpoint struct {
 	Arguments                          map[string]string `json:"Arguments,omitempty"`
 	AvailabilityZone                   *string           `json:"AvailabilityZone,omitempty"`

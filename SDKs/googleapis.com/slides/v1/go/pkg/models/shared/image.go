@@ -1,5 +1,7 @@
 package shared
 
+// Image
+// A PageElement kind representing an image.
 type Image struct {
 	ContentURL      *string          `json:"contentUrl,omitempty"`
 	ImageProperties *ImageProperties `json:"imageProperties,omitempty"`

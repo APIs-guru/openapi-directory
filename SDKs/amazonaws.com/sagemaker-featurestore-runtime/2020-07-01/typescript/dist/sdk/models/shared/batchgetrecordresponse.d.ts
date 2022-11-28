@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BatchGetRecordError } from "./batchgetrecorderror";
 import { BatchGetRecordResultDetail } from "./batchgetrecordresultdetail";
 import { BatchGetRecordIdentifier } from "./batchgetrecordidentifier";

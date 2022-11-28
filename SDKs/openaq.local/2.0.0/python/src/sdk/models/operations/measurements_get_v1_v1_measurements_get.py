@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -36,13 +40,13 @@ class MeasurementsGetV1V1MeasurementsGetQueryParams:
 
 @dataclass
 class MeasurementsGetV1V1MeasurementsGetRequest:
-    query_params: MeasurementsGetV1V1MeasurementsGetQueryParams = field(default=None)
+    query_params: MeasurementsGetV1V1MeasurementsGetQueryParams = field()
     
 
 @dataclass
 class MeasurementsGetV1V1MeasurementsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_validation_error: Optional[shared.HTTPValidationError] = field(default=None)
-    status_code: int = field(default=None)
     measurements_get_v1_v1_measurements_get_200_application_json_any: Optional[Any] = field(default=None)
     

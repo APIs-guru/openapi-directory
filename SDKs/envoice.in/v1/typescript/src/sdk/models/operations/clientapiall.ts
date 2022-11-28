@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ClientApiAllHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=x-auth-key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-auth-key" })
   xAuthKey: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-auth-secret" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-auth-secret" })
   xAuthSecret: string;
 }
 
 
 export class ClientApiAllRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ClientApiAllHeaders;
 }
 
 
 export class ClientApiAllResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata({ elemType: shared.ClientDetailsApiModel })
+  @SpeakeasyMetadata({ elemType: shared.ClientDetailsApiModel })
   clientDetailsApiModels?: shared.ClientDetailsApiModel[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

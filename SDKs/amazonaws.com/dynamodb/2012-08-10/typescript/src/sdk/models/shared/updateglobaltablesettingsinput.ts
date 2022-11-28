@@ -1,27 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BillingModeEnum } from "./billingmodeenum";
 import { GlobalTableGlobalSecondaryIndexSettingsUpdate } from "./globaltableglobalsecondaryindexsettingsupdate";
 import { AutoScalingSettingsUpdate } from "./autoscalingsettingsupdate";
 import { ReplicaSettingsUpdate } from "./replicasettingsupdate";
 
 
+
 export class UpdateGlobalTableSettingsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GlobalTableBillingMode" })
+  @SpeakeasyMetadata({ data: "json, name=GlobalTableBillingMode" })
   globalTableBillingMode?: BillingModeEnum;
 
-  @Metadata({ data: "json, name=GlobalTableGlobalSecondaryIndexSettingsUpdate", elemType: shared.GlobalTableGlobalSecondaryIndexSettingsUpdate })
+  @SpeakeasyMetadata({ data: "json, name=GlobalTableGlobalSecondaryIndexSettingsUpdate", elemType: GlobalTableGlobalSecondaryIndexSettingsUpdate })
   globalTableGlobalSecondaryIndexSettingsUpdate?: GlobalTableGlobalSecondaryIndexSettingsUpdate[];
 
-  @Metadata({ data: "json, name=GlobalTableName" })
+  @SpeakeasyMetadata({ data: "json, name=GlobalTableName" })
   globalTableName: string;
 
-  @Metadata({ data: "json, name=GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate" })
   globalTableProvisionedWriteCapacityAutoScalingSettingsUpdate?: AutoScalingSettingsUpdate;
 
-  @Metadata({ data: "json, name=GlobalTableProvisionedWriteCapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=GlobalTableProvisionedWriteCapacityUnits" })
   globalTableProvisionedWriteCapacityUnits?: number;
 
-  @Metadata({ data: "json, name=ReplicaSettingsUpdate", elemType: shared.ReplicaSettingsUpdate })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaSettingsUpdate", elemType: ReplicaSettingsUpdate })
   replicaSettingsUpdate?: ReplicaSettingsUpdate[];
 }

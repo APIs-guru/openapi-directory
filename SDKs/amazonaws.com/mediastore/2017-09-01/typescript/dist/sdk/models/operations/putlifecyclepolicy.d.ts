@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum PutLifecyclePolicyXAmzTargetEnum {
     MediaStore20170901PutLifecyclePolicy = "MediaStore_20170901.PutLifecyclePolicy"

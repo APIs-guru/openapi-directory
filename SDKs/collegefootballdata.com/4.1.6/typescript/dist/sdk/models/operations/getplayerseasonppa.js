@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetPlayerSeasonPpaQueryParams = /** @class */ (function (_super) {
     __extends(GetPlayerSeasonPpaQueryParams, _super);
@@ -30,31 +30,31 @@ var GetPlayerSeasonPpaQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=conference" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=conference" }),
         __metadata("design:type", String)
     ], GetPlayerSeasonPpaQueryParams.prototype, "conference", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=excludeGarbageTime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=excludeGarbageTime" }),
         __metadata("design:type", Boolean)
     ], GetPlayerSeasonPpaQueryParams.prototype, "excludeGarbageTime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=playerId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=playerId" }),
         __metadata("design:type", Number)
     ], GetPlayerSeasonPpaQueryParams.prototype, "playerId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=position" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=position" }),
         __metadata("design:type", String)
     ], GetPlayerSeasonPpaQueryParams.prototype, "position", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=team" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" }),
         __metadata("design:type", String)
     ], GetPlayerSeasonPpaQueryParams.prototype, "team", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=threshold" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=threshold" }),
         __metadata("design:type", String)
     ], GetPlayerSeasonPpaQueryParams.prototype, "threshold", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=year" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" }),
         __metadata("design:type", Number)
     ], GetPlayerSeasonPpaQueryParams.prototype, "year", void 0);
     return GetPlayerSeasonPpaQueryParams;
@@ -66,7 +66,7 @@ var GetPlayerSeasonPpaRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPlayerSeasonPpaQueryParams)
     ], GetPlayerSeasonPpaRequest.prototype, "queryParams", void 0);
     return GetPlayerSeasonPpaRequest;
@@ -78,15 +78,15 @@ var GetPlayerSeasonPpaResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetPlayerSeasonPpaResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.PlayerSeasonPpa }),
+        SpeakeasyMetadata({ elemType: shared.PlayerSeasonPpa }),
         __metadata("design:type", Array)
     ], GetPlayerSeasonPpaResponse.prototype, "playerSeasonPpas", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetPlayerSeasonPpaResponse.prototype, "statusCode", void 0);
     return GetPlayerSeasonPpaResponse;

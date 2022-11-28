@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class UnsubscribeDownloadSharePathParams:
-    share_id: int = field(default=None, metadata={'path_param': { 'field_name': 'share_id', 'style': 'simple', 'explode': False }})
+    share_id: int = field(metadata={'path_param': { 'field_name': 'share_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class UnsubscribeDownloadShareHeaders:
 
 @dataclass
 class UnsubscribeDownloadShareRequest:
-    path_params: UnsubscribeDownloadSharePathParams = field(default=None)
-    headers: UnsubscribeDownloadShareHeaders = field(default=None)
+    headers: UnsubscribeDownloadShareHeaders = field()
+    path_params: UnsubscribeDownloadSharePathParams = field()
     
 
 @dataclass
 class UnsubscribeDownloadShareResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

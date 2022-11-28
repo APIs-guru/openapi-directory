@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import fixedorpercent
+from sdk import utils
+from . import *
 
 class PatchRolloutModeEnum(str, Enum):
     MODE_UNSPECIFIED = "MODE_UNSPECIFIED"
@@ -12,6 +14,10 @@ class PatchRolloutModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PatchRollout:
-    disruption_budget: Optional[fixedorpercent.FixedOrPercent] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disruptionBudget' }})
-    mode: Optional[PatchRolloutModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mode' }})
+    r"""PatchRollout
+    Patch rollout configuration specifications. Contains details on the concurrency control when applying patch(es) to all targeted VMs.
+    """
+    
+    disruption_budget: Optional[FixedOrPercent] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('disruptionBudget') }})
+    mode: Optional[PatchRolloutModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mode') }})
     

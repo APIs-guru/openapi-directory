@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var IsoalRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(IsoalRequestBodyCertificateParameters, _super);
@@ -30,11 +30,11 @@ var IsoalRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=RefNo" }),
+        SpeakeasyMetadata({ data: "json, name=RefNo" }),
         __metadata("design:type", String)
     ], IsoalRequestBodyCertificateParameters.prototype, "refNo", void 0);
     __decorate([
-        Metadata({ data: "json, name=TokenNo" }),
+        SpeakeasyMetadata({ data: "json, name=TokenNo" }),
         __metadata("design:type", String)
     ], IsoalRequestBodyCertificateParameters.prototype, "tokenNo", void 0);
     return IsoalRequestBodyCertificateParameters;
@@ -50,19 +50,19 @@ var IsoalRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", IsoalRequestBodyCertificateParameters)
     ], IsoalRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], IsoalRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], IsoalRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], IsoalRequestBody.prototype, "txnId", void 0);
     return IsoalRequestBody;
@@ -74,32 +74,16 @@ var IsoalSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], IsoalSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], IsoalSecurity.prototype, "clientId", void 0);
     return IsoalSecurity;
 }(SpeakeasyBase));
 export { IsoalSecurity };
-var IsoalRequest = /** @class */ (function (_super) {
-    __extends(IsoalRequest, _super);
-    function IsoalRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", IsoalRequestBody)
-    ], IsoalRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", IsoalSecurity)
-    ], IsoalRequest.prototype, "security", void 0);
-    return IsoalRequest;
-}(SpeakeasyBase));
-export { IsoalRequest };
 export var Isoal400ApplicationJsonErrorEnum;
 (function (Isoal400ApplicationJsonErrorEnum) {
     Isoal400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -122,11 +106,11 @@ var Isoal400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Isoal400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Isoal400ApplicationJson.prototype, "errorDescription", void 0);
     return Isoal400ApplicationJson;
@@ -148,11 +132,11 @@ var Isoal401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Isoal401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Isoal401ApplicationJson.prototype, "errorDescription", void 0);
     return Isoal401ApplicationJson;
@@ -174,11 +158,11 @@ var Isoal404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Isoal404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Isoal404ApplicationJson.prototype, "errorDescription", void 0);
     return Isoal404ApplicationJson;
@@ -198,11 +182,11 @@ var Isoal500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Isoal500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Isoal500ApplicationJson.prototype, "errorDescription", void 0);
     return Isoal500ApplicationJson;
@@ -222,11 +206,11 @@ var Isoal502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Isoal502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Isoal502ApplicationJson.prototype, "errorDescription", void 0);
     return Isoal502ApplicationJson;
@@ -246,11 +230,11 @@ var Isoal503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Isoal503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Isoal503ApplicationJson.prototype, "errorDescription", void 0);
     return Isoal503ApplicationJson;
@@ -270,55 +254,71 @@ var Isoal504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Isoal504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Isoal504ApplicationJson.prototype, "errorDescription", void 0);
     return Isoal504ApplicationJson;
 }(SpeakeasyBase));
 export { Isoal504ApplicationJson };
+var IsoalRequest = /** @class */ (function (_super) {
+    __extends(IsoalRequest, _super);
+    function IsoalRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", IsoalRequestBody)
+    ], IsoalRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", IsoalSecurity)
+    ], IsoalRequest.prototype, "security", void 0);
+    return IsoalRequest;
+}(SpeakeasyBase));
+export { IsoalRequest };
 var IsoalResponse = /** @class */ (function (_super) {
     __extends(IsoalResponse, _super);
     function IsoalResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], IsoalResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], IsoalResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Isoal400ApplicationJson)
     ], IsoalResponse.prototype, "isoal400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Isoal401ApplicationJson)
     ], IsoalResponse.prototype, "isoal401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Isoal404ApplicationJson)
     ], IsoalResponse.prototype, "isoal404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Isoal500ApplicationJson)
     ], IsoalResponse.prototype, "isoal500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Isoal502ApplicationJson)
     ], IsoalResponse.prototype, "isoal502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Isoal503ApplicationJson)
     ], IsoalResponse.prototype, "isoal503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Isoal504ApplicationJson)
     ], IsoalResponse.prototype, "isoal504ApplicationJsonObject", void 0);
     return IsoalResponse;

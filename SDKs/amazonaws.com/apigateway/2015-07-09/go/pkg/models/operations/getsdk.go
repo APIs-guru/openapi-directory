@@ -4,17 +4,17 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type GetSdkPathParams struct {
+type GetSDKPathParams struct {
 	RestapiID string `pathParam:"style=simple,explode=false,name=restapi_id"`
 	SdkType   string `pathParam:"style=simple,explode=false,name=sdk_type"`
 	StageName string `pathParam:"style=simple,explode=false,name=stage_name"`
 }
 
-type GetSdkQueryParams struct {
+type GetSDKQueryParams struct {
 	Parameters map[string]string `queryParam:"style=form,explode=true,name=parameters"`
 }
 
-type GetSdkHeaders struct {
+type GetSDKHeaders struct {
 	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
 	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
 	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
@@ -24,19 +24,19 @@ type GetSdkHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
-type GetSdkRequest struct {
-	PathParams  GetSdkPathParams
-	QueryParams GetSdkQueryParams
-	Headers     GetSdkHeaders
+type GetSDKRequest struct {
+	PathParams  GetSDKPathParams
+	QueryParams GetSDKQueryParams
+	Headers     GetSDKHeaders
 }
 
-type GetSdkResponse struct {
+type GetSDKResponse struct {
 	BadRequestException      *interface{}
 	ConflictException        *interface{}
 	ContentType              string
 	LimitExceededException   *interface{}
 	NotFoundException        *interface{}
-	SdkResponse              *shared.SdkResponse
+	SdkResponse              *shared.SDKResponse
 	StatusCode               int64
 	TooManyRequestsException *interface{}
 	UnauthorizedException    *interface{}

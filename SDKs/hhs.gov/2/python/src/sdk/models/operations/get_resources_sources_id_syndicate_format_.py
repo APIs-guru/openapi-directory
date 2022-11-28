@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetResourcesSourcesIDSyndicateFormatPathParams:
-    format: str = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    format: str = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class GetResourcesSourcesIDSyndicateFormatQueryParams:
 
 @dataclass
 class GetResourcesSourcesIDSyndicateFormatRequest:
-    path_params: GetResourcesSourcesIDSyndicateFormatPathParams = field(default=None)
-    query_params: GetResourcesSourcesIDSyndicateFormatQueryParams = field(default=None)
+    path_params: GetResourcesSourcesIDSyndicateFormatPathParams = field()
+    query_params: GetResourcesSourcesIDSyndicateFormatQueryParams = field()
     
 
 @dataclass
 class GetResourcesSourcesIDSyndicateFormatResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     media_item_wrappeds: Optional[List[shared.MediaItemWrapped]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DebugRuleEvaluationStatus
+// Information about the status of the rule evaluation.
 type DebugRuleEvaluationStatus struct {
 	LastModifiedTime      *time.Time                `json:"LastModifiedTime,omitempty"`
 	RuleConfigurationName *string                   `json:"RuleConfigurationName,omitempty"`

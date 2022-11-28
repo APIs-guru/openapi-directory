@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,22 +22,22 @@ class BatchGetRecordHeaders:
 @dataclass_json
 @dataclass
 class BatchGetRecordRequestBody:
-    identifiers: List[shared.BatchGetRecordIdentifier] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Identifiers' }})
+    identifiers: List[shared.BatchGetRecordIdentifier] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Identifiers') }})
     
 
 @dataclass
 class BatchGetRecordRequest:
-    headers: BatchGetRecordHeaders = field(default=None)
-    request: BatchGetRecordRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: BatchGetRecordHeaders = field()
+    request: BatchGetRecordRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BatchGetRecordResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_forbidden: Optional[Any] = field(default=None)
     batch_get_record_response: Optional[shared.BatchGetRecordResponse] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure: Optional[Any] = field(default=None)
     service_unavailable: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_error: Optional[Any] = field(default=None)
     

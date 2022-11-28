@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PreflightInvoiceRecipientResultResultCodeEnum {
-    Ok = "ok"
-,    Nok = "nok"
+    Ok = "ok",
+    Nok = "nok"
 }
 
 
@@ -11,6 +12,6 @@ export enum PreflightInvoiceRecipientResultResultCodeEnum {
  * The result of preflighting an invoice recipient
 **/
 export class PreflightInvoiceRecipientResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: PreflightInvoiceRecipientResultResultCodeEnum;
 }

@@ -1,30 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PayeeAddress } from "./payeeaddress";
 import { Challenge } from "./challenge";
 import { Company } from "./company";
-import { Individual } from "./individual";
+import { IndividualInput } from "./individual";
 import { PayeeTypeEnum } from "./payeetypeenum";
 
 
-export class UpdatePayeeDetailsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+
+export class UpdatePayeeDetailsRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: PayeeAddress;
 
-  @Metadata({ data: "json, name=challenge" })
+  @SpeakeasyMetadata({ data: "json, name=challenge" })
   challenge?: Challenge;
 
-  @Metadata({ data: "json, name=company" })
+  @SpeakeasyMetadata({ data: "json, name=company" })
   company?: Company;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=individual" })
-  individual?: Individual;
+  @SpeakeasyMetadata({ data: "json, name=individual" })
+  individual?: IndividualInput;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=payeeType" })
+  @SpeakeasyMetadata({ data: "json, name=payeeType" })
   payeeType?: PayeeTypeEnum;
 }

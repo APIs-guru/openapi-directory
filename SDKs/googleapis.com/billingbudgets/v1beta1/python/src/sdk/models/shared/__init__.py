@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .googlecloudbillingbudgetsv1beta1allupdatesrule import *
 from .googlecloudbillingbudgetsv1beta1budget import *

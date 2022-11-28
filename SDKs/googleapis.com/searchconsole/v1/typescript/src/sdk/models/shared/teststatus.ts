@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TestStatusStatusEnum {
-    TestStatusUnspecified = "TEST_STATUS_UNSPECIFIED"
-,    Complete = "COMPLETE"
-,    InternalError = "INTERNAL_ERROR"
-,    PageUnreachable = "PAGE_UNREACHABLE"
+    TestStatusUnspecified = "TEST_STATUS_UNSPECIFIED",
+    Complete = "COMPLETE",
+    InternalError = "INTERNAL_ERROR",
+    PageUnreachable = "PAGE_UNREACHABLE"
 }
 
 
@@ -13,9 +14,9 @@ export enum TestStatusStatusEnum {
  * Final state of the test, including error details if necessary.
 **/
 export class TestStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: TestStatusStatusEnum;
 }

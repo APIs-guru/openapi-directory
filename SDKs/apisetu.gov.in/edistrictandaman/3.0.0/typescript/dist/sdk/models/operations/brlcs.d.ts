@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class BrlcsRequestBodyCertificateParameters extends SpeakeasyBase {
     certificateNumber: string;
@@ -15,10 +15,6 @@ export declare class BrlcsRequestBody extends SpeakeasyBase {
 export declare class BrlcsSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class BrlcsRequest extends SpeakeasyBase {
-    request?: BrlcsRequestBody;
-    security: BrlcsSecurity;
 }
 export declare enum Brlcs400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -101,6 +97,10 @@ export declare enum Brlcs504ApplicationJsonErrorDescriptionEnum {
 export declare class Brlcs504ApplicationJson extends SpeakeasyBase {
     error?: Brlcs504ApplicationJsonErrorEnum;
     errorDescription?: Brlcs504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class BrlcsRequest extends SpeakeasyBase {
+    request?: BrlcsRequestBody;
+    security: BrlcsSecurity;
 }
 export declare class BrlcsResponse extends SpeakeasyBase {
     contentType: string;

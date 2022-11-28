@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AccountSettings = /** @class */ (function (_super) {
     __extends(AccountSettings, _super);
     function AccountSettings() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dr-callback-url" }),
+        SpeakeasyMetadata({ data: "json, name=dr-callback-url" }),
         __metadata("design:type", String)
     ], AccountSettings.prototype, "drCallbackUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=max-calls-per-second" }),
+        SpeakeasyMetadata({ data: "json, name=max-calls-per-second" }),
         __metadata("design:type", Number)
     ], AccountSettings.prototype, "maxCallsPerSecond", void 0);
     __decorate([
-        Metadata({ data: "json, name=max-inbound-request" }),
+        SpeakeasyMetadata({ data: "json, name=max-inbound-request" }),
         __metadata("design:type", Number)
     ], AccountSettings.prototype, "maxInboundRequest", void 0);
     __decorate([
-        Metadata({ data: "json, name=max-outbound-request" }),
+        SpeakeasyMetadata({ data: "json, name=max-outbound-request" }),
         __metadata("design:type", Number)
     ], AccountSettings.prototype, "maxOutboundRequest", void 0);
     __decorate([
-        Metadata({ data: "json, name=mo-callback-url" }),
+        SpeakeasyMetadata({ data: "json, name=mo-callback-url" }),
         __metadata("design:type", String)
     ], AccountSettings.prototype, "moCallbackUrl", void 0);
     return AccountSettings;

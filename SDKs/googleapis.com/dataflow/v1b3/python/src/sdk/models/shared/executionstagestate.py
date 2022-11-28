@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ExecutionStageStateExecutionStageStateEnum(str, Enum):
     JOB_STATE_UNKNOWN = "JOB_STATE_UNKNOWN"
@@ -21,7 +23,11 @@ class ExecutionStageStateExecutionStageStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ExecutionStageState:
-    current_state_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currentStateTime' }})
-    execution_stage_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'executionStageName' }})
-    execution_stage_state: Optional[ExecutionStageStateExecutionStageStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'executionStageState' }})
+    r"""ExecutionStageState
+    A message describing the state of a particular execution stage.
+    """
+    
+    current_state_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currentStateTime') }})
+    execution_stage_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('executionStageName') }})
+    execution_stage_state: Optional[ExecutionStageStateExecutionStageStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('executionStageState') }})
     

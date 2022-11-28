@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LensSummary } from "./lenssummary";
+
 
 
 // ListLensesOutput
@@ -8,9 +8,9 @@ import { LensSummary } from "./lenssummary";
  * Output of a list lenses call.
 **/
 export class ListLensesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LensSummaries", elemType: shared.LensSummary })
+  @SpeakeasyMetadata({ data: "json, name=LensSummaries", elemType: LensSummary })
   lensSummaries?: LensSummary[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

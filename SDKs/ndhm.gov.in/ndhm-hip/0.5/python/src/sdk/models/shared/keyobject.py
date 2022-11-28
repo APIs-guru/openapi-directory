@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class KeyObject:
-    expiry: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiry', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    key_value: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keyValue' }})
-    parameters: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parameters' }})
+    expiry: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('expiry'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    key_value: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('keyValue') }})
+    parameters: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('parameters') }})
     

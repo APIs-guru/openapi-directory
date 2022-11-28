@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import forecasthyperparameterresponse
-from . import timeserieshistoryandforecastresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class HistoryAndForecastResponse:
-    hyperparameters: Optional[forecasthyperparameterresponse.ForecastHyperparameterResponse] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hyperparameters' }})
-    time_series: Optional[List[timeserieshistoryandforecastresponse.TimeSeriesHistoryAndForecastResponse]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeSeries' }})
+    hyperparameters: Optional[ForecastHyperparameterResponse] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hyperparameters') }})
+    time_series: Optional[List[TimeSeriesHistoryAndForecastResponse]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeSeries') }})
     

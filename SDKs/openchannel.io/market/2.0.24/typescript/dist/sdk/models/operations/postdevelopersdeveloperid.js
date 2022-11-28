@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostDevelopersDeveloperIdPathParams = /** @class */ (function (_super) {
     __extends(PostDevelopersDeveloperIdPathParams, _super);
     function PostDevelopersDeveloperIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=developerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=developerId" }),
         __metadata("design:type", String)
     ], PostDevelopersDeveloperIdPathParams.prototype, "developerId", void 0);
     return PostDevelopersDeveloperIdPathParams;
@@ -41,23 +41,23 @@ var PostDevelopersDeveloperIdQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=customData" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=customData" }),
         __metadata("design:type", String)
     ], PostDevelopersDeveloperIdQueryParams.prototype, "customData", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=email" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email" }),
         __metadata("design:type", String)
     ], PostDevelopersDeveloperIdQueryParams.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" }),
         __metadata("design:type", String)
     ], PostDevelopersDeveloperIdQueryParams.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" }),
         __metadata("design:type", String)
     ], PostDevelopersDeveloperIdQueryParams.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=username" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=username" }),
         __metadata("design:type", String)
     ], PostDevelopersDeveloperIdQueryParams.prototype, "username", void 0);
     return PostDevelopersDeveloperIdQueryParams;
@@ -69,11 +69,11 @@ var PostDevelopersDeveloperIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostDevelopersDeveloperIdPathParams)
     ], PostDevelopersDeveloperIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostDevelopersDeveloperIdQueryParams)
     ], PostDevelopersDeveloperIdRequest.prototype, "queryParams", void 0);
     return PostDevelopersDeveloperIdRequest;
@@ -85,15 +85,15 @@ var PostDevelopersDeveloperIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PostDevelopersDeveloperIdResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostDevelopersDeveloperIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostDevelopersDeveloperIdResponse.prototype, "statusCode", void 0);
     return PostDevelopersDeveloperIdResponse;

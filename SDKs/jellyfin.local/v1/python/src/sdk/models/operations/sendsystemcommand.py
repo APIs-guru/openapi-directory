@@ -1,27 +1,27 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SendSystemCommandPathParams:
-    command: shared.GeneralCommandTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'command', 'style': 'simple', 'explode': False }})
-    session_id: str = field(default=None, metadata={'path_param': { 'field_name': 'sessionId', 'style': 'simple', 'explode': False }})
+    command: shared.GeneralCommandTypeEnum = field(metadata={'path_param': { 'field_name': 'command', 'style': 'simple', 'explode': False }})
+    session_id: str = field(metadata={'path_param': { 'field_name': 'sessionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class SendSystemCommandSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class SendSystemCommandRequest:
-    path_params: SendSystemCommandPathParams = field(default=None)
-    security: SendSystemCommandSecurity = field(default=None)
+    path_params: SendSystemCommandPathParams = field()
+    security: SendSystemCommandSecurity = field()
     
 
 @dataclass
 class SendSystemCommandResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

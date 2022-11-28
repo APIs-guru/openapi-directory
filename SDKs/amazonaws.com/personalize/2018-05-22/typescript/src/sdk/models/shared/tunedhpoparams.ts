@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TunedHpoParams
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * If hyperparameter optimization (HPO) was performed, contains the hyperparameter values of the best performing model.
 **/
 export class TunedHpoParams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=algorithmHyperParameters" })
+  @SpeakeasyMetadata({ data: "json, name=algorithmHyperParameters" })
   algorithmHyperParameters?: Map<string, string>;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleSearchIdeahubV1betaTopic } from "./googlesearchideahubv1betatopic";
 /**
  * A single Idea that we want to show the end user.

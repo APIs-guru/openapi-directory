@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CorrectAnswer } from "./correctanswer";
+
 
 
 // CorrectAnswers
@@ -8,6 +8,6 @@ import { CorrectAnswer } from "./correctanswer";
  * The answer key for a question.
 **/
 export class CorrectAnswers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=answers", elemType: shared.CorrectAnswer })
+  @SpeakeasyMetadata({ data: "json, name=answers", elemType: CorrectAnswer })
   answers?: CorrectAnswer[];
 }

@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Scale } from "./scale";
 
 
+
 export class UpdateTaskSetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cluster" })
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
   cluster: string;
 
-  @Metadata({ data: "json, name=scale" })
+  @SpeakeasyMetadata({ data: "json, name=scale" })
   scale: Scale;
 
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service: string;
 
-  @Metadata({ data: "json, name=taskSet" })
+  @SpeakeasyMetadata({ data: "json, name=taskSet" })
   taskSet: string;
 }

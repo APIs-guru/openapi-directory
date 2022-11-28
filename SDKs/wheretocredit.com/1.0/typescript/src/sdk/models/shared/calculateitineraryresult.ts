@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CalculateItineraryProgramResult } from "./calculateitineraryprogramresult";
 
 
+
 export class CalculateItineraryResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=totals", elemType: shared.CalculateItineraryProgramResult })
+  @SpeakeasyMetadata({ data: "json, name=totals", elemType: CalculateItineraryProgramResult })
   totals?: CalculateItineraryProgramResult[];
 }

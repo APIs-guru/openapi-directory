@@ -26,7 +26,7 @@ type MybusinesslodgingLocationsUpdateLodgingQueryParams struct {
 type MybusinesslodgingLocationsUpdateLodgingRequest struct {
 	PathParams  MybusinesslodgingLocationsUpdateLodgingPathParams
 	QueryParams MybusinesslodgingLocationsUpdateLodgingQueryParams
-	Request     *shared.Lodging `request:"mediaType=application/json"`
+	Request     *shared.LodgingInput `request:"mediaType=application/json"`
 }
 
 type MybusinesslodgingLocationsUpdateLodgingResponse struct {

@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetApiTokenStatusHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=api_key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=api_key" })
   apiKey?: string;
 }
 
 
 export class GetApiTokenStatusRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetApiTokenStatusHeaders;
 }
 
 
 export class GetApiTokenStatusResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

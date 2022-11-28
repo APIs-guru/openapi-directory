@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RenderingEngineTypeEnum } from "./renderingenginetypeenum";
 /**
  * Information about a rendering engine.

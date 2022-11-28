@@ -10,10 +10,19 @@ const (
 	GoogleCloudApigeeV1EnvironmentGroupStateEnumUpdating         GoogleCloudApigeeV1EnvironmentGroupStateEnum = "UPDATING"
 )
 
+// GoogleCloudApigeeV1EnvironmentGroup
+// EnvironmentGroup configuration. An environment group is used to group one or more Apigee environments under a single host name.
 type GoogleCloudApigeeV1EnvironmentGroup struct {
 	CreatedAt      *string                                       `json:"createdAt,omitempty"`
 	Hostnames      []string                                      `json:"hostnames,omitempty"`
 	LastModifiedAt *string                                       `json:"lastModifiedAt,omitempty"`
 	Name           *string                                       `json:"name,omitempty"`
 	State          *GoogleCloudApigeeV1EnvironmentGroupStateEnum `json:"state,omitempty"`
+}
+
+// GoogleCloudApigeeV1EnvironmentGroupInput
+// EnvironmentGroup configuration. An environment group is used to group one or more Apigee environments under a single host name.
+type GoogleCloudApigeeV1EnvironmentGroupInput struct {
+	Hostnames []string `json:"hostnames,omitempty"`
+	Name      *string  `json:"name,omitempty"`
 }

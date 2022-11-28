@@ -8,6 +8,8 @@ const (
 	OsPolicyAssignmentReportOsPolicyComplianceComplianceStateEnumNonCompliant OsPolicyAssignmentReportOsPolicyComplianceComplianceStateEnum = "NON_COMPLIANT"
 )
 
+// OsPolicyAssignmentReportOsPolicyCompliance
+// Compliance data for an OS policy
 type OsPolicyAssignmentReportOsPolicyCompliance struct {
 	ComplianceState             *OsPolicyAssignmentReportOsPolicyComplianceComplianceStateEnum         `json:"complianceState,omitempty"`
 	ComplianceStateReason       *string                                                                `json:"complianceStateReason,omitempty"`

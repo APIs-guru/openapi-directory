@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class NamespacePatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authenticated" })
+  @SpeakeasyMetadata({ data: "json, name=authenticated" })
   authenticated?: boolean;
 
-  @Metadata({ data: "json, name=persistLast" })
+  @SpeakeasyMetadata({ data: "json, name=persistLast" })
   persistLast?: boolean;
 
-  @Metadata({ data: "json, name=persisted" })
+  @SpeakeasyMetadata({ data: "json, name=persisted" })
   persisted?: boolean;
 
-  @Metadata({ data: "json, name=pushEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=pushEnabled" })
   pushEnabled?: boolean;
 
-  @Metadata({ data: "json, name=tlsOnly" })
+  @SpeakeasyMetadata({ data: "json, name=tlsOnly" })
   tlsOnly?: boolean;
 }

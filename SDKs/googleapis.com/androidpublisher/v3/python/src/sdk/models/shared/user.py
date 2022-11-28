@@ -1,14 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import grant
-
-class UserAccessStateEnum(str, Enum):
-    ACCESS_STATE_UNSPECIFIED = "ACCESS_STATE_UNSPECIFIED"
-    INVITED = "INVITED"
-    INVITATION_EXPIRED = "INVITATION_EXPIRED"
-    ACCESS_GRANTED = "ACCESS_GRANTED"
-    ACCESS_EXPIRED = "ACCESS_EXPIRED"
+from sdk import utils
+from . import *
 
 class UserDeveloperAccountPermissionsEnum(str, Enum):
     DEVELOPER_LEVEL_PERMISSION_UNSPECIFIED = "DEVELOPER_LEVEL_PERMISSION_UNSPECIFIED"
@@ -27,15 +22,39 @@ class UserDeveloperAccountPermissionsEnum(str, Enum):
     CAN_CHANGE_MANAGED_PLAY_SETTING_GLOBAL = "CAN_CHANGE_MANAGED_PLAY_SETTING_GLOBAL"
     CAN_MANAGE_ORDERS_GLOBAL = "CAN_MANAGE_ORDERS_GLOBAL"
 
+class UserAccessStateEnum(str, Enum):
+    ACCESS_STATE_UNSPECIFIED = "ACCESS_STATE_UNSPECIFIED"
+    INVITED = "INVITED"
+    INVITATION_EXPIRED = "INVITATION_EXPIRED"
+    ACCESS_GRANTED = "ACCESS_GRANTED"
+    ACCESS_EXPIRED = "ACCESS_EXPIRED"
+
+
+@dataclass_json
+@dataclass
+class UserInput:
+    r"""UserInput
+    A user resource.
+    """
+    
+    developer_account_permissions: Optional[List[UserDeveloperAccountPermissionsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('developerAccountPermissions') }})
+    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('email') }})
+    expiration_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expirationTime') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    
 
 @dataclass_json
 @dataclass
 class User:
-    access_state: Optional[UserAccessStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accessState' }})
-    developer_account_permissions: Optional[List[UserDeveloperAccountPermissionsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'developerAccountPermissions' }})
-    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
-    expiration_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expirationTime' }})
-    grants: Optional[List[grant.Grant]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'grants' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    partial: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'partial' }})
+    r"""User
+    A user resource.
+    """
+    
+    access_state: Optional[UserAccessStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accessState') }})
+    developer_account_permissions: Optional[List[UserDeveloperAccountPermissionsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('developerAccountPermissions') }})
+    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('email') }})
+    expiration_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expirationTime') }})
+    grants: Optional[List[Grant]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('grants') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    partial: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partial') }})
     

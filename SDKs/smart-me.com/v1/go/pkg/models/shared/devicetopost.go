@@ -39,6 +39,8 @@ const (
 	DeviceToPostMeterSubTypeEnumMeterSubTypeVirtualBattery  DeviceToPostMeterSubTypeEnum = "MeterSubTypeVirtualBattery"
 )
 
+// DeviceToPost
+// Container Class for the Web API
 type DeviceToPost struct {
 	ActivePower            *float64                          `json:"ActivePower,omitempty" form:"name=ActivePower"`
 	CounterReading         *float64                          `json:"CounterReading,omitempty" form:"name=CounterReading"`

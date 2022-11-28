@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsScriptTypeAddOnEntryPoint } from "./googleappsscripttypeaddonentrypoint";
 import { GoogleAppsScriptTypeExecutionApiEntryPoint } from "./googleappsscripttypeexecutionapientrypoint";
 import { GoogleAppsScriptTypeWebAppEntryPoint } from "./googleappsscripttypewebappentrypoint";
 
+
 export enum EntryPointEntryPointTypeEnum {
-    EntryPointTypeUnspecified = "ENTRY_POINT_TYPE_UNSPECIFIED"
-,    WebApp = "WEB_APP"
-,    ExecutionApi = "EXECUTION_API"
-,    AddOn = "ADD_ON"
+    EntryPointTypeUnspecified = "ENTRY_POINT_TYPE_UNSPECIFIED",
+    WebApp = "WEB_APP",
+    ExecutionApi = "EXECUTION_API",
+    AddOn = "ADD_ON"
 }
 
 
@@ -16,15 +17,15 @@ export enum EntryPointEntryPointTypeEnum {
  * A configuration that defines how a deployment is accessed externally.
 **/
 export class EntryPoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addOn" })
+  @SpeakeasyMetadata({ data: "json, name=addOn" })
   addOn?: GoogleAppsScriptTypeAddOnEntryPoint;
 
-  @Metadata({ data: "json, name=entryPointType" })
+  @SpeakeasyMetadata({ data: "json, name=entryPointType" })
   entryPointType?: EntryPointEntryPointTypeEnum;
 
-  @Metadata({ data: "json, name=executionApi" })
+  @SpeakeasyMetadata({ data: "json, name=executionApi" })
   executionApi?: GoogleAppsScriptTypeExecutionApiEntryPoint;
 
-  @Metadata({ data: "json, name=webApp" })
+  @SpeakeasyMetadata({ data: "json, name=webApp" })
   webApp?: GoogleAppsScriptTypeWebAppEntryPoint;
 }

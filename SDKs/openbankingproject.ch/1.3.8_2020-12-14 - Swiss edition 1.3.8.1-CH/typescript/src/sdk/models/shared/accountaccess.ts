@@ -1,23 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountReference16Ch } from "./accountreference16ch";
 import { AdditionalInformationAccess } from "./additionalinformationaccess";
-import { AccountReference16Ch } from "./accountreference16ch";
-import { AccountReference16Ch } from "./accountreference16ch";
+
 
 export enum AccountAccessAllPsd2Enum {
-    AllAccounts = "allAccounts"
-,    AllAccountsWithOwnerName = "allAccountsWithOwnerName"
+    AllAccounts = "allAccounts",
+    AllAccountsWithOwnerName = "allAccountsWithOwnerName"
 }
 
 export enum AccountAccessAvailableAccountsEnum {
-    AllAccounts = "allAccounts"
-,    AllAccountsWithOwnerName = "allAccountsWithOwnerName"
+    AllAccounts = "allAccounts",
+    AllAccountsWithOwnerName = "allAccountsWithOwnerName"
 }
 
 export enum AccountAccessAvailableAccountsWithBalanceEnum {
-    AllAccounts = "allAccounts"
-,    AllAccountsWithOwnerName = "allAccountsWithOwnerName"
+    AllAccounts = "allAccounts",
+    AllAccountsWithOwnerName = "allAccountsWithOwnerName"
 }
 
 
@@ -27,27 +25,27 @@ export enum AccountAccessAvailableAccountsWithBalanceEnum {
  * 
 **/
 export class AccountAccess extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accounts", elemType: shared.AccountReference16Ch })
+  @SpeakeasyMetadata({ data: "json, name=accounts", elemType: AccountReference16Ch })
   accounts?: AccountReference16Ch[];
 
-  @Metadata({ data: "json, name=additionalInformation" })
+  @SpeakeasyMetadata({ data: "json, name=additionalInformation" })
   additionalInformation?: AdditionalInformationAccess;
 
-  @Metadata({ data: "json, name=allPsd2" })
+  @SpeakeasyMetadata({ data: "json, name=allPsd2" })
   allPsd2?: AccountAccessAllPsd2Enum;
 
-  @Metadata({ data: "json, name=availableAccounts" })
+  @SpeakeasyMetadata({ data: "json, name=availableAccounts" })
   availableAccounts?: AccountAccessAvailableAccountsEnum;
 
-  @Metadata({ data: "json, name=availableAccountsWithBalance" })
+  @SpeakeasyMetadata({ data: "json, name=availableAccountsWithBalance" })
   availableAccountsWithBalance?: AccountAccessAvailableAccountsWithBalanceEnum;
 
-  @Metadata({ data: "json, name=balances", elemType: shared.AccountReference16Ch })
+  @SpeakeasyMetadata({ data: "json, name=balances", elemType: AccountReference16Ch })
   balances?: AccountReference16Ch[];
 
-  @Metadata({ data: "json, name=restrictedTo" })
+  @SpeakeasyMetadata({ data: "json, name=restrictedTo" })
   restrictedTo?: string[];
 
-  @Metadata({ data: "json, name=transactions", elemType: shared.AccountReference16Ch })
+  @SpeakeasyMetadata({ data: "json, name=transactions", elemType: AccountReference16Ch })
   transactions?: AccountReference16Ch[];
 }

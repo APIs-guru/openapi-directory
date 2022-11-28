@@ -22,54 +22,54 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Fileshare = /** @class */ (function (_super) {
     __extends(Fileshare, _super);
     function Fileshare() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=capacity" }),
+        SpeakeasyMetadata({ data: "json, name=capacity" }),
         __metadata("design:type", Number)
     ], Fileshare.prototype, "capacity", void 0);
     __decorate([
-        Metadata({ data: "json, name=created_date" }),
+        SpeakeasyMetadata({ data: "json, name=created_date" }),
         __metadata("design:type", String)
     ], Fileshare.prototype, "createdDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=fsName" }),
+        SpeakeasyMetadata({ data: "json, name=fsName" }),
         __metadata("design:type", String)
     ], Fileshare.prototype, "fsName", void 0);
     __decorate([
-        Metadata({ data: "json, name=hostPath" }),
+        SpeakeasyMetadata({ data: "json, name=hostPath" }),
         __metadata("design:type", String)
     ], Fileshare.prototype, "hostPath", void 0);
     __decorate([
-        Metadata({ data: "json, name=iops" }),
+        SpeakeasyMetadata({ data: "json, name=iops" }),
         __metadata("design:type", Number)
     ], Fileshare.prototype, "iops", void 0);
     __decorate([
-        Metadata({ data: "json, name=iopsTotal" }),
+        SpeakeasyMetadata({ data: "json, name=iopsTotal" }),
         __metadata("design:type", Number)
     ], Fileshare.prototype, "iopsTotal", void 0);
     __decorate([
-        Metadata({ data: "json, name=orderId" }),
+        SpeakeasyMetadata({ data: "json, name=orderId" }),
         __metadata("design:type", String)
     ], Fileshare.prototype, "orderId", void 0);
     __decorate([
-        Metadata({ data: "json, name=provider" }),
+        SpeakeasyMetadata({ data: "json, name=provider" }),
         __metadata("design:type", String)
     ], Fileshare.prototype, "provider", void 0);
     __decorate([
-        Metadata({ data: "json, name=spaceGuid" }),
+        SpeakeasyMetadata({ data: "json, name=spaceGuid" }),
         __metadata("design:type", String)
     ], Fileshare.prototype, "spaceGuid", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Fileshare.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated_date" }),
+        SpeakeasyMetadata({ data: "json, name=updated_date" }),
         __metadata("design:type", String)
     ], Fileshare.prototype, "updatedDate", void 0);
     return Fileshare;

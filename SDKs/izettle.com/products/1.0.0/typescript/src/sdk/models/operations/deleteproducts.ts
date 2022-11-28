@@ -1,56 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteProductsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationUuid" })
   organizationUuid: string;
 }
 
 
 export class DeleteProductsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=uuid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uuid" })
   uuid: string[];
 }
 
 
-export class DeleteProductsSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  zettleApiKey: shared.SchemeZettleApiKey;
-}
-
-
-export class DeleteProductsSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  zettleOauth: shared.SchemeZettleOauth;
-}
-
-
 export class DeleteProductsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: DeleteProductsSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  zettleApiKey?: shared.SchemeZettleApiKey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: DeleteProductsSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  zettleOauth?: shared.SchemeZettleOauth;
 }
 
 
 export class DeleteProductsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteProductsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DeleteProductsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DeleteProductsSecurity;
 }
 
 
 export class DeleteProductsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

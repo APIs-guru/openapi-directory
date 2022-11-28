@@ -1,6 +1,7 @@
 
 
+
 export enum RuleGroupTypeEnum {
-    Stateless = "STATELESS"
-,    Stateful = "STATEFUL"
+    Stateless = "STATELESS",
+    Stateful = "STATEFUL"
 }

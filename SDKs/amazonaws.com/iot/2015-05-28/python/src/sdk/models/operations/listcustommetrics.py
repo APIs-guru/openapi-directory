@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -22,16 +25,16 @@ class ListCustomMetricsHeaders:
 
 @dataclass
 class ListCustomMetricsRequest:
-    query_params: ListCustomMetricsQueryParams = field(default=None)
-    headers: ListCustomMetricsHeaders = field(default=None)
+    headers: ListCustomMetricsHeaders = field()
+    query_params: ListCustomMetricsQueryParams = field()
     
 
 @dataclass
 class ListCustomMetricsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_custom_metrics_response: Optional[shared.ListCustomMetricsResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

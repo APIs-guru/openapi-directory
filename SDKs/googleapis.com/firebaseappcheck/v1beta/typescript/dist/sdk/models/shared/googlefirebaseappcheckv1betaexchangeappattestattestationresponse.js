@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirebaseAppcheckV1betaAppCheckToken } from "./googlefirebaseappcheckv1betaappchecktoken";
 import { GoogleFirebaseAppcheckV1betaAttestationTokenResponse } from "./googlefirebaseappcheckv1betaattestationtokenresponse";
 // GoogleFirebaseAppcheckV1betaExchangeAppAttestAttestationResponse
@@ -35,15 +35,15 @@ var GoogleFirebaseAppcheckV1betaExchangeAppAttestAttestationResponse = /** @clas
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=appCheckToken" }),
+        SpeakeasyMetadata({ data: "json, name=appCheckToken" }),
         __metadata("design:type", GoogleFirebaseAppcheckV1betaAppCheckToken)
     ], GoogleFirebaseAppcheckV1betaExchangeAppAttestAttestationResponse.prototype, "appCheckToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=artifact" }),
+        SpeakeasyMetadata({ data: "json, name=artifact" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1betaExchangeAppAttestAttestationResponse.prototype, "artifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=attestationToken" }),
+        SpeakeasyMetadata({ data: "json, name=attestationToken" }),
         __metadata("design:type", GoogleFirebaseAppcheckV1betaAttestationTokenResponse)
     ], GoogleFirebaseAppcheckV1betaExchangeAppAttestAttestationResponse.prototype, "attestationToken", void 0);
     return GoogleFirebaseAppcheckV1betaExchangeAppAttestAttestationResponse;

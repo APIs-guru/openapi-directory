@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAnnotationsByRgdIdAndOntologyUsingGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ontologyPrefix" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ontologyPrefix" })
   ontologyPrefix: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=rgdId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=rgdId" })
   rgdId: number;
 }
 
 
 export class GetAnnotationsByRgdIdAndOntologyUsingGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAnnotationsByRgdIdAndOntologyUsingGetPathParams;
 }
 
 
 export class GetAnnotationsByRgdIdAndOntologyUsingGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryDomainsGetPathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
-    domain_name: str = field(default=None, metadata={'path_param': { 'field_name': 'domainName', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    domain_name: str = field(metadata={'path_param': { 'field_name': 'domainName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class DirectoryDomainsGetQueryParams:
 
 @dataclass
 class DirectoryDomainsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryDomainsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class DirectoryDomainsGetSecurity:
 
 @dataclass
 class DirectoryDomainsGetRequest:
-    path_params: DirectoryDomainsGetPathParams = field(default=None)
-    query_params: DirectoryDomainsGetQueryParams = field(default=None)
-    security: DirectoryDomainsGetSecurity = field(default=None)
+    path_params: DirectoryDomainsGetPathParams = field()
+    query_params: DirectoryDomainsGetQueryParams = field()
+    security: DirectoryDomainsGetSecurity = field()
     
 
 @dataclass
 class DirectoryDomainsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     domains: Optional[shared.Domains] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleIdentityStsV1betaExchangeTokenRequest
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for ExchangeToken.
 **/
 export class GoogleIdentityStsV1betaExchangeTokenRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audience" })
+  @SpeakeasyMetadata({ data: "json, name=audience" })
   audience?: string;
 
-  @Metadata({ data: "json, name=grantType" })
+  @SpeakeasyMetadata({ data: "json, name=grantType" })
   grantType?: string;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: string;
 
-  @Metadata({ data: "json, name=requestedTokenType" })
+  @SpeakeasyMetadata({ data: "json, name=requestedTokenType" })
   requestedTokenType?: string;
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope?: string;
 
-  @Metadata({ data: "json, name=subjectToken" })
+  @SpeakeasyMetadata({ data: "json, name=subjectToken" })
   subjectToken?: string;
 
-  @Metadata({ data: "json, name=subjectTokenType" })
+  @SpeakeasyMetadata({ data: "json, name=subjectTokenType" })
   subjectTokenType?: string;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirebasedynamiclinksGetLinkStatsPathParams:
-    dynamic_link: str = field(default=None, metadata={'path_param': { 'field_name': 'dynamicLink', 'style': 'simple', 'explode': False }})
+    dynamic_link: str = field(metadata={'path_param': { 'field_name': 'dynamicLink', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class FirebasedynamiclinksGetLinkStatsQueryParams:
 
 @dataclass
 class FirebasedynamiclinksGetLinkStatsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebasedynamiclinksGetLinkStatsRequest:
-    path_params: FirebasedynamiclinksGetLinkStatsPathParams = field(default=None)
-    query_params: FirebasedynamiclinksGetLinkStatsQueryParams = field(default=None)
-    security: FirebasedynamiclinksGetLinkStatsSecurity = field(default=None)
+    path_params: FirebasedynamiclinksGetLinkStatsPathParams = field()
+    query_params: FirebasedynamiclinksGetLinkStatsQueryParams = field()
+    security: FirebasedynamiclinksGetLinkStatsSecurity = field()
     
 
 @dataclass
 class FirebasedynamiclinksGetLinkStatsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dynamic_link_stats: Optional[shared.DynamicLinkStats] = field(default=None)
-    status_code: int = field(default=None)
     

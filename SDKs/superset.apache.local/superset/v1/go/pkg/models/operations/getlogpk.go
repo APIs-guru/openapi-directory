@@ -16,12 +16,6 @@ type GetLogPkSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetLogPkRequest struct {
-	PathParams  GetLogPkPathParams
-	QueryParams GetLogPkQueryParams
-	Security    GetLogPkSecurity
-}
-
 type GetLogPk200ApplicationJSONDescriptionColumns struct {
 	ColumnName *string `json:"column_name,omitempty"`
 }
@@ -57,6 +51,12 @@ type GetLogPk422ApplicationJSON struct {
 
 type GetLogPk500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetLogPkRequest struct {
+	PathParams  GetLogPkPathParams
+	QueryParams GetLogPkQueryParams
+	Security    GetLogPkSecurity
 }
 
 type GetLogPkResponse struct {

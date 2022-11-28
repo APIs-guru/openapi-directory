@@ -9,7 +9,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://api.sportsdata.io",
 	"https://api.sportsdata.io",
 	"http://azure-api.sportsdata.io",
@@ -21,9 +21,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -34,33 +38,56 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AreGamesInProgress - Are Games In Progress
+// Returns <code>true</code> if there is at least one game being played at the time of the request or <code>false</code> if there are none.
 func (s *SDK) AreGamesInProgress(ctx context.Context, request operations.AreGamesInProgressRequest) (*operations.AreGamesInProgressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/AreAnyGamesInProgress", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -68,7 +95,7 @@ func (s *SDK) AreGamesInProgress(ctx context.Context, request operations.AreGame
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -98,8 +125,10 @@ func (s *SDK) AreGamesInProgress(ctx context.Context, request operations.AreGame
 	return res, nil
 }
 
+// ByeWeeks - Bye Weeks
+// Get bye weeks for the teams during a specified NFL season.
 func (s *SDK) ByeWeeks(ctx context.Context, request operations.ByeWeeksRequest) (*operations.ByeWeeksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Byes/{season}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -107,7 +136,7 @@ func (s *SDK) ByeWeeks(ctx context.Context, request operations.ByeWeeksRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -137,8 +166,9 @@ func (s *SDK) ByeWeeks(ctx context.Context, request operations.ByeWeeksRequest) 
 	return res, nil
 }
 
+// GameStatsBySeasonDeprecatedUseTeamGameStatsInstead - Game Stats by Season (Deprecated, use Team Game Stats instead)
 func (s *SDK) GameStatsBySeasonDeprecatedUseTeamGameStatsInstead(ctx context.Context, request operations.GameStatsBySeasonDeprecatedUseTeamGameStatsInsteadRequest) (*operations.GameStatsBySeasonDeprecatedUseTeamGameStatsInsteadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/GameStats/{season}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -146,7 +176,7 @@ func (s *SDK) GameStatsBySeasonDeprecatedUseTeamGameStatsInstead(ctx context.Con
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -176,8 +206,9 @@ func (s *SDK) GameStatsBySeasonDeprecatedUseTeamGameStatsInstead(ctx context.Con
 	return res, nil
 }
 
+// GameStatsByWeekDeprecatedUseTeamGameStatsInstead - Game Stats by Week (Deprecated, use Team Game Stats instead)
 func (s *SDK) GameStatsByWeekDeprecatedUseTeamGameStatsInstead(ctx context.Context, request operations.GameStatsByWeekDeprecatedUseTeamGameStatsInsteadRequest) (*operations.GameStatsByWeekDeprecatedUseTeamGameStatsInsteadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/GameStatsByWeek/{season}/{week}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -185,7 +216,7 @@ func (s *SDK) GameStatsByWeekDeprecatedUseTeamGameStatsInstead(ctx context.Conte
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -215,8 +246,9 @@ func (s *SDK) GameStatsByWeekDeprecatedUseTeamGameStatsInstead(ctx context.Conte
 	return res, nil
 }
 
+// News - News
 func (s *SDK) News(ctx context.Context, request operations.NewsRequest) (*operations.NewsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/News", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -224,7 +256,7 @@ func (s *SDK) News(ctx context.Context, request operations.NewsRequest) (*operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -254,8 +286,9 @@ func (s *SDK) News(ctx context.Context, request operations.NewsRequest) (*operat
 	return res, nil
 }
 
+// NewsByDate - News by Date
 func (s *SDK) NewsByDate(ctx context.Context, request operations.NewsByDateRequest) (*operations.NewsByDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/NewsByDate/{date}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -263,7 +296,7 @@ func (s *SDK) NewsByDate(ctx context.Context, request operations.NewsByDateReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -293,8 +326,9 @@ func (s *SDK) NewsByDate(ctx context.Context, request operations.NewsByDateReque
 	return res, nil
 }
 
+// NewsByPlayer - News by Player
 func (s *SDK) NewsByPlayer(ctx context.Context, request operations.NewsByPlayerRequest) (*operations.NewsByPlayerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/NewsByPlayerID/{playerid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -302,7 +336,7 @@ func (s *SDK) NewsByPlayer(ctx context.Context, request operations.NewsByPlayerR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -332,8 +366,9 @@ func (s *SDK) NewsByPlayer(ctx context.Context, request operations.NewsByPlayerR
 	return res, nil
 }
 
+// NewsByTeam - News by Team
 func (s *SDK) NewsByTeam(ctx context.Context, request operations.NewsByTeamRequest) (*operations.NewsByTeamResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/NewsByTeam/{team}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -341,7 +376,7 @@ func (s *SDK) NewsByTeam(ctx context.Context, request operations.NewsByTeamReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -371,8 +406,9 @@ func (s *SDK) NewsByTeam(ctx context.Context, request operations.NewsByTeamReque
 	return res, nil
 }
 
+// PlayerDetailsByAvailable - Player Details by Available
 func (s *SDK) PlayerDetailsByAvailable(ctx context.Context, request operations.PlayerDetailsByAvailableRequest) (*operations.PlayerDetailsByAvailableResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Players", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -380,7 +416,7 @@ func (s *SDK) PlayerDetailsByAvailable(ctx context.Context, request operations.P
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -410,8 +446,9 @@ func (s *SDK) PlayerDetailsByAvailable(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PlayerDetailsByFreeAgents - Player Details by Free Agents
 func (s *SDK) PlayerDetailsByFreeAgents(ctx context.Context, request operations.PlayerDetailsByFreeAgentsRequest) (*operations.PlayerDetailsByFreeAgentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/FreeAgents", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -419,7 +456,7 @@ func (s *SDK) PlayerDetailsByFreeAgents(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -449,8 +486,9 @@ func (s *SDK) PlayerDetailsByFreeAgents(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PlayerDetailsByPlayer - Player Details by Player
 func (s *SDK) PlayerDetailsByPlayer(ctx context.Context, request operations.PlayerDetailsByPlayerRequest) (*operations.PlayerDetailsByPlayerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Player/{playerid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -458,7 +496,7 @@ func (s *SDK) PlayerDetailsByPlayer(ctx context.Context, request operations.Play
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -488,8 +526,9 @@ func (s *SDK) PlayerDetailsByPlayer(ctx context.Context, request operations.Play
 	return res, nil
 }
 
+// PlayerDetailsByRookieDraftYear - Player Details by Rookie Draft Year
 func (s *SDK) PlayerDetailsByRookieDraftYear(ctx context.Context, request operations.PlayerDetailsByRookieDraftYearRequest) (*operations.PlayerDetailsByRookieDraftYearResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Rookies/{season}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -497,7 +536,7 @@ func (s *SDK) PlayerDetailsByRookieDraftYear(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -527,8 +566,9 @@ func (s *SDK) PlayerDetailsByRookieDraftYear(ctx context.Context, request operat
 	return res, nil
 }
 
+// PlayerDetailsByTeam - Player Details by Team
 func (s *SDK) PlayerDetailsByTeam(ctx context.Context, request operations.PlayerDetailsByTeamRequest) (*operations.PlayerDetailsByTeamResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Players/{team}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -536,7 +576,7 @@ func (s *SDK) PlayerDetailsByTeam(ctx context.Context, request operations.Player
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -566,8 +606,10 @@ func (s *SDK) PlayerDetailsByTeam(ctx context.Context, request operations.Player
 	return res, nil
 }
 
+// Referees - Referees
+// Returns full list of NFL Referees
 func (s *SDK) Referees(ctx context.Context, request operations.RefereesRequest) (*operations.RefereesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Referees", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -575,7 +617,7 @@ func (s *SDK) Referees(ctx context.Context, request operations.RefereesRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -605,8 +647,10 @@ func (s *SDK) Referees(ctx context.Context, request operations.RefereesRequest) 
 	return res, nil
 }
 
+// Schedule - Schedule
+// Game schedule for a specified season.
 func (s *SDK) Schedule(ctx context.Context, request operations.ScheduleRequest) (*operations.ScheduleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Schedules/{season}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -614,7 +658,7 @@ func (s *SDK) Schedule(ctx context.Context, request operations.ScheduleRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -644,8 +688,10 @@ func (s *SDK) Schedule(ctx context.Context, request operations.ScheduleRequest) 
 	return res, nil
 }
 
+// ScoresByDate - Scores by Date
+// Get game scores for a specified week of a season.
 func (s *SDK) ScoresByDate(ctx context.Context, request operations.ScoresByDateRequest) (*operations.ScoresByDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/ScoresByDate/{date}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -653,7 +699,7 @@ func (s *SDK) ScoresByDate(ctx context.Context, request operations.ScoresByDateR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -683,8 +729,10 @@ func (s *SDK) ScoresByDate(ctx context.Context, request operations.ScoresByDateR
 	return res, nil
 }
 
+// ScoresBySeason - Scores by Season
+// Game scores for a specified season.
 func (s *SDK) ScoresBySeason(ctx context.Context, request operations.ScoresBySeasonRequest) (*operations.ScoresBySeasonResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Scores/{season}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -692,7 +740,7 @@ func (s *SDK) ScoresBySeason(ctx context.Context, request operations.ScoresBySea
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -722,8 +770,10 @@ func (s *SDK) ScoresBySeason(ctx context.Context, request operations.ScoresBySea
 	return res, nil
 }
 
+// ScoresByWeek - Scores by Week
+// Get game scores for a specified week of a season.
 func (s *SDK) ScoresByWeek(ctx context.Context, request operations.ScoresByWeekRequest) (*operations.ScoresByWeekResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/ScoresByWeek/{season}/{week}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -731,7 +781,7 @@ func (s *SDK) ScoresByWeek(ctx context.Context, request operations.ScoresByWeekR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -761,8 +811,10 @@ func (s *SDK) ScoresByWeek(ctx context.Context, request operations.ScoresByWeekR
 	return res, nil
 }
 
+// ScoresByWeekSimulation - Scores by Week Simulation
+// Gets simulated live scores of NFL games, covering the Conference Championship games on January 21, 2018.
 func (s *SDK) ScoresByWeekSimulation(ctx context.Context, request operations.ScoresByWeekSimulationRequest) (*operations.ScoresByWeekSimulationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/SimulatedScores/{numberofplays}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -770,7 +822,7 @@ func (s *SDK) ScoresByWeekSimulation(ctx context.Context, request operations.Sco
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -800,8 +852,10 @@ func (s *SDK) ScoresByWeekSimulation(ctx context.Context, request operations.Sco
 	return res, nil
 }
 
+// SeasonCurrent - Season Current
+// Year of the current NFL season. This value changes on July 1st. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.
 func (s *SDK) SeasonCurrent(ctx context.Context, request operations.SeasonCurrentRequest) (*operations.SeasonCurrentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/CurrentSeason", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -809,7 +863,7 @@ func (s *SDK) SeasonCurrent(ctx context.Context, request operations.SeasonCurren
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -839,8 +893,10 @@ func (s *SDK) SeasonCurrent(ctx context.Context, request operations.SeasonCurren
 	return res, nil
 }
 
+// SeasonLastCompleted - Season Last Completed
+// Year of the most recently completed season. this value changes immediately after the Super Bowl. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.
 func (s *SDK) SeasonLastCompleted(ctx context.Context, request operations.SeasonLastCompletedRequest) (*operations.SeasonLastCompletedResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/LastCompletedSeason", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -848,7 +904,7 @@ func (s *SDK) SeasonLastCompleted(ctx context.Context, request operations.Season
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -878,8 +934,10 @@ func (s *SDK) SeasonLastCompleted(ctx context.Context, request operations.Season
 	return res, nil
 }
 
+// SeasonUpcoming - Season Upcoming
+// Year of the current NFL season, if we are in the mid-season. If we are in the off-season, then year of the next upcoming season. This value changes immediately after the Super Bowl. The earliest season for Fantasy data is 2001. The earliest season for Team data is 1985.
 func (s *SDK) SeasonUpcoming(ctx context.Context, request operations.SeasonUpcomingRequest) (*operations.SeasonUpcomingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/UpcomingSeason", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -887,7 +945,7 @@ func (s *SDK) SeasonUpcoming(ctx context.Context, request operations.SeasonUpcom
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -917,8 +975,10 @@ func (s *SDK) SeasonUpcoming(ctx context.Context, request operations.SeasonUpcom
 	return res, nil
 }
 
+// Stadiums - Stadiums
+// This method returns all stadiums.
 func (s *SDK) Stadiums(ctx context.Context, request operations.StadiumsRequest) (*operations.StadiumsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Stadiums", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -926,7 +986,7 @@ func (s *SDK) Stadiums(ctx context.Context, request operations.StadiumsRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -956,8 +1016,9 @@ func (s *SDK) Stadiums(ctx context.Context, request operations.StadiumsRequest) 
 	return res, nil
 }
 
+// Standings - Standings
 func (s *SDK) Standings(ctx context.Context, request operations.StandingsRequest) (*operations.StandingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Standings/{season}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -965,7 +1026,7 @@ func (s *SDK) Standings(ctx context.Context, request operations.StandingsRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -995,8 +1056,9 @@ func (s *SDK) Standings(ctx context.Context, request operations.StandingsRequest
 	return res, nil
 }
 
+// TeamGameStats - Team Game Stats
 func (s *SDK) TeamGameStats(ctx context.Context, request operations.TeamGameStatsRequest) (*operations.TeamGameStatsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/TeamGameStats/{season}/{week}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1004,7 +1066,7 @@ func (s *SDK) TeamGameStats(ctx context.Context, request operations.TeamGameStat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1034,8 +1096,9 @@ func (s *SDK) TeamGameStats(ctx context.Context, request operations.TeamGameStat
 	return res, nil
 }
 
+// TeamSeasonStats - Team Season Stats
 func (s *SDK) TeamSeasonStats(ctx context.Context, request operations.TeamSeasonStatsRequest) (*operations.TeamSeasonStatsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/TeamSeasonStats/{season}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1043,7 +1106,7 @@ func (s *SDK) TeamSeasonStats(ctx context.Context, request operations.TeamSeason
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1073,8 +1136,10 @@ func (s *SDK) TeamSeasonStats(ctx context.Context, request operations.TeamSeason
 	return res, nil
 }
 
+// TeamsActive - Teams (Active)
+// Gets all active teams.
 func (s *SDK) TeamsActive(ctx context.Context, request operations.TeamsActiveRequest) (*operations.TeamsActiveResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Teams", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1082,7 +1147,7 @@ func (s *SDK) TeamsActive(ctx context.Context, request operations.TeamsActiveReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1112,8 +1177,10 @@ func (s *SDK) TeamsActive(ctx context.Context, request operations.TeamsActiveReq
 	return res, nil
 }
 
+// TeamsAll - Teams (All)
+// Gets all teams, including pro bowl teams.
 func (s *SDK) TeamsAll(ctx context.Context, request operations.TeamsAllRequest) (*operations.TeamsAllResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/AllTeams", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1121,7 +1188,7 @@ func (s *SDK) TeamsAll(ctx context.Context, request operations.TeamsAllRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1151,8 +1218,10 @@ func (s *SDK) TeamsAll(ctx context.Context, request operations.TeamsAllRequest) 
 	return res, nil
 }
 
+// TeamsBySeason - Teams by Season
+// List of teams playing in a specified season.
 func (s *SDK) TeamsBySeason(ctx context.Context, request operations.TeamsBySeasonRequest) (*operations.TeamsBySeasonResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Teams/{season}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1160,7 +1229,7 @@ func (s *SDK) TeamsBySeason(ctx context.Context, request operations.TeamsBySeaso
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1190,8 +1259,10 @@ func (s *SDK) TeamsBySeason(ctx context.Context, request operations.TeamsBySeaso
 	return res, nil
 }
 
+// Timeframes - Timeframes
+// Get detailed information about past, present, and future timeframes.
 func (s *SDK) Timeframes(ctx context.Context, request operations.TimeframesRequest) (*operations.TimeframesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Timeframes/{type}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1199,7 +1270,7 @@ func (s *SDK) Timeframes(ctx context.Context, request operations.TimeframesReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1229,8 +1300,10 @@ func (s *SDK) Timeframes(ctx context.Context, request operations.TimeframesReque
 	return res, nil
 }
 
+// WeekCurrent - Week Current
+// Number of the current week of the NFL season. This value usually changes on Tuesday nights or Wednesday mornings at midnight ET.
 func (s *SDK) WeekCurrent(ctx context.Context, request operations.WeekCurrentRequest) (*operations.WeekCurrentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/CurrentWeek", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1238,7 +1311,7 @@ func (s *SDK) WeekCurrent(ctx context.Context, request operations.WeekCurrentReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1268,8 +1341,10 @@ func (s *SDK) WeekCurrent(ctx context.Context, request operations.WeekCurrentReq
 	return res, nil
 }
 
+// WeekLastCompleted - Week Last Completed
+// Number of the current week of the NFL season. This value usually changes on Tuesday nights or Wednesday mornings at midnight ET.
 func (s *SDK) WeekLastCompleted(ctx context.Context, request operations.WeekLastCompletedRequest) (*operations.WeekLastCompletedResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/LastCompletedWeek", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1277,7 +1352,7 @@ func (s *SDK) WeekLastCompleted(ctx context.Context, request operations.WeekLast
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1307,8 +1382,10 @@ func (s *SDK) WeekLastCompleted(ctx context.Context, request operations.WeekLast
 	return res, nil
 }
 
+// WeekUpcoming - Week Upcoming
+// Number of the current week of the NFL season. This value usually changes on Tuesday nights or Wednesday mornings at midnight ET.
 func (s *SDK) WeekUpcoming(ctx context.Context, request operations.WeekUpcomingRequest) (*operations.WeekUpcomingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/UpcomingWeek", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1316,7 +1393,7 @@ func (s *SDK) WeekUpcoming(ctx context.Context, request operations.WeekUpcomingR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1346,8 +1423,10 @@ func (s *SDK) WeekUpcoming(ctx context.Context, request operations.WeekUpcomingR
 	return res, nil
 }
 
+// XPing - X Ping
+// Ping NFL API
 func (s *SDK) XPing(ctx context.Context, request operations.XPingRequest) (*operations.XPingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Ping/{seconds}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1355,7 +1434,7 @@ func (s *SDK) XPing(ctx context.Context, request operations.XPingRequest) (*oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

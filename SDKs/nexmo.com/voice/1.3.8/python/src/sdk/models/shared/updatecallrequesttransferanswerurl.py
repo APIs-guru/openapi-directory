@@ -1,19 +1,24 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import requesttransferactionparam_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateCallRequestTransferAnswerURLDestination:
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    url: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    url: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateCallRequestTransferAnswerURL:
-    action: requesttransferactionparam_enum.RequestTransferActionParamEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    destination: UpdateCallRequestTransferAnswerURLDestination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destination' }})
+    action: RequestTransferActionParamEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    destination: UpdateCallRequestTransferAnswerURLDestination = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('destination') }})
     

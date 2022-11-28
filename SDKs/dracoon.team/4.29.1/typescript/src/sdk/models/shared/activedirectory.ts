@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ActiveDirectory
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Active Directory information
 **/
 export class ActiveDirectory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alias" })
+  @SpeakeasyMetadata({ data: "json, name=alias" })
   alias: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=isGlobalAvailable" })
+  @SpeakeasyMetadata({ data: "json, name=isGlobalAvailable" })
   isGlobalAvailable: boolean;
 }

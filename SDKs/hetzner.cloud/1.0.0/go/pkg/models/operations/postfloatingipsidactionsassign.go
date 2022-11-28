@@ -8,11 +8,8 @@ type PostFloatingIpsIDActionsAssignAssignFloatingIPRequest struct {
 	Server int64 `json:"server"`
 }
 
-type PostFloatingIpsIDActionsAssignRequest struct {
-	PathParams PostFloatingIpsIDActionsAssignPathParams
-	Request    *PostFloatingIpsIDActionsAssignAssignFloatingIPRequest `request:"mediaType=application/json"`
-}
-
+// PostFloatingIpsIDActionsAssignActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostFloatingIpsIDActionsAssignActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -44,6 +41,11 @@ type PostFloatingIpsIDActionsAssignActionResponseAction struct {
 
 type PostFloatingIpsIDActionsAssignActionResponse struct {
 	Action PostFloatingIpsIDActionsAssignActionResponseAction `json:"action"`
+}
+
+type PostFloatingIpsIDActionsAssignRequest struct {
+	PathParams PostFloatingIpsIDActionsAssignPathParams
+	Request    *PostFloatingIpsIDActionsAssignAssignFloatingIPRequest `request:"mediaType=application/json"`
 }
 
 type PostFloatingIpsIDActionsAssignResponse struct {

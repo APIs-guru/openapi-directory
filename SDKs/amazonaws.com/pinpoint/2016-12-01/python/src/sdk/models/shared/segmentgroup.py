@@ -1,17 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import segmentdimensions
-from . import segmentreference
-from . import sourcetype_enum
-from . import type_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SegmentGroup:
-    dimensions: Optional[List[segmentdimensions.SegmentDimensions]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Dimensions' }})
-    source_segments: Optional[List[segmentreference.SegmentReference]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SourceSegments' }})
-    source_type: Optional[sourcetype_enum.SourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SourceType' }})
-    type: Optional[type_enum.TypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""SegmentGroup
+    Specifies the base segments and dimensions for a segment, and the relationships between these base segments and dimensions.
+    """
+    
+    dimensions: Optional[List[SegmentDimensions]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Dimensions') }})
+    source_segments: Optional[List[SegmentReference]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SourceSegments') }})
+    source_type: Optional[SourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SourceType') }})
+    type: Optional[TypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

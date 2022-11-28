@@ -25,7 +25,7 @@ type MybusinessaccountmanagementLocationsAdminsCreateQueryParams struct {
 type MybusinessaccountmanagementLocationsAdminsCreateRequest struct {
 	PathParams  MybusinessaccountmanagementLocationsAdminsCreatePathParams
 	QueryParams MybusinessaccountmanagementLocationsAdminsCreateQueryParams
-	Request     *shared.Admin `request:"mediaType=application/json"`
+	Request     *shared.AdminInput `request:"mediaType=application/json"`
 }
 
 type MybusinessaccountmanagementLocationsAdminsCreateResponse struct {

@@ -12,13 +12,13 @@ class BrowseIndexTermsQueryParams:
 
 @dataclass
 class BrowseIndexTermsRequest:
-    query_params: BrowseIndexTermsQueryParams = field(default=None)
+    query_params: BrowseIndexTermsQueryParams = field()
     
 
 @dataclass
 class BrowseIndexTermsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     erskine_may_search_erskine_may_index_term_search_result_: Optional[shared.ErskineMaySearchErskineMayIndexTermSearchResult] = field(default=None)
-    status_code: int = field(default=None)
     

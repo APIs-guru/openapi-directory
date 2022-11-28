@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplayDestination } from "./replaydestination";
 
 
+
 export class StartReplayRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Destination" })
+  @SpeakeasyMetadata({ data: "json, name=Destination" })
   destination: ReplayDestination;
 
-  @Metadata({ data: "json, name=EventEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EventEndTime" })
   eventEndTime: Date;
 
-  @Metadata({ data: "json, name=EventSourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=EventSourceArn" })
   eventSourceArn: string;
 
-  @Metadata({ data: "json, name=EventStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=EventStartTime" })
   eventStartTime: Date;
 
-  @Metadata({ data: "json, name=ReplayName" })
+  @SpeakeasyMetadata({ data: "json, name=ReplayName" })
   replayName: string;
 }

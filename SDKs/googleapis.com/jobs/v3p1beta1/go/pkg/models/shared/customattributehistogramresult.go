@@ -1,5 +1,7 @@
 package shared
 
+// CustomAttributeHistogramResult
+// Output only. Custom attribute histogram result.
 type CustomAttributeHistogramResult struct {
 	Key                        *string                 `json:"key,omitempty"`
 	LongValueHistogramResult   *NumericBucketingResult `json:"longValueHistogramResult,omitempty"`

@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AgentsGetAgentsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 }
 
 
 export class AgentsGetAgentsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AgentsGetAgentsQueryParams;
 }
 
 
 export class AgentsGetAgentsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   apiPagedResponseBuildSystemSharedDtoAgent?: shared.ApiPagedResponseBuildSystemSharedDtoAgent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DynamicLinkWarning } from "./dynamiclinkwarning";
 /**
  * Response to create a short Dynamic Link.

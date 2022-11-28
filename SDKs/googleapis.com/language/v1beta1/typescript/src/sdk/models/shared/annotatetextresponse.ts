@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Sentiment } from "./sentiment";
 import { Entity } from "./entity";
 import { Sentence } from "./sentence";
 import { Token } from "./token";
+
 
 
 // AnnotateTextResponse
@@ -11,18 +11,18 @@ import { Token } from "./token";
  * The text annotations response message.
 **/
 export class AnnotateTextResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentSentiment" })
+  @SpeakeasyMetadata({ data: "json, name=documentSentiment" })
   documentSentiment?: Sentiment;
 
-  @Metadata({ data: "json, name=entities", elemType: shared.Entity })
+  @SpeakeasyMetadata({ data: "json, name=entities", elemType: Entity })
   entities?: Entity[];
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=sentences", elemType: shared.Sentence })
+  @SpeakeasyMetadata({ data: "json, name=sentences", elemType: Sentence })
   sentences?: Sentence[];
 
-  @Metadata({ data: "json, name=tokens", elemType: shared.Token })
+  @SpeakeasyMetadata({ data: "json, name=tokens", elemType: Token })
   tokens?: Token[];
 }

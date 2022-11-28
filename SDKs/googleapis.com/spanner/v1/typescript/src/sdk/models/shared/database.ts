@@ -1,20 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionConfig } from "./encryptionconfig";
 import { EncryptionInfo } from "./encryptioninfo";
 import { RestoreInfo } from "./restoreinfo";
 
+
 export enum DatabaseDatabaseDialectEnum {
-    DatabaseDialectUnspecified = "DATABASE_DIALECT_UNSPECIFIED"
-,    GoogleStandardSql = "GOOGLE_STANDARD_SQL"
-,    Postgresql = "POSTGRESQL"
+    DatabaseDialectUnspecified = "DATABASE_DIALECT_UNSPECIFIED",
+    GoogleStandardSql = "GOOGLE_STANDARD_SQL",
+    Postgresql = "POSTGRESQL"
 }
 
 export enum DatabaseStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Ready = "READY"
-,    ReadyOptimizing = "READY_OPTIMIZING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Ready = "READY",
+    ReadyOptimizing = "READY_OPTIMIZING"
 }
 
 
@@ -23,33 +23,33 @@ export enum DatabaseStateEnum {
  * A Cloud Spanner database.
 **/
 export class Database extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=databaseDialect" })
+  @SpeakeasyMetadata({ data: "json, name=databaseDialect" })
   databaseDialect?: DatabaseDatabaseDialectEnum;
 
-  @Metadata({ data: "json, name=defaultLeader" })
+  @SpeakeasyMetadata({ data: "json, name=defaultLeader" })
   defaultLeader?: string;
 
-  @Metadata({ data: "json, name=earliestVersionTime" })
+  @SpeakeasyMetadata({ data: "json, name=earliestVersionTime" })
   earliestVersionTime?: string;
 
-  @Metadata({ data: "json, name=encryptionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionConfig" })
   encryptionConfig?: EncryptionConfig;
 
-  @Metadata({ data: "json, name=encryptionInfo", elemType: shared.EncryptionInfo })
+  @SpeakeasyMetadata({ data: "json, name=encryptionInfo", elemType: EncryptionInfo })
   encryptionInfo?: EncryptionInfo[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=restoreInfo" })
+  @SpeakeasyMetadata({ data: "json, name=restoreInfo" })
   restoreInfo?: RestoreInfo;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: DatabaseStateEnum;
 
-  @Metadata({ data: "json, name=versionRetentionPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=versionRetentionPeriod" })
   versionRetentionPeriod?: string;
 }

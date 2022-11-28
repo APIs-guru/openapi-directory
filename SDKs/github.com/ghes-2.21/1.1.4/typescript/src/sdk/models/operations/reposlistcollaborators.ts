@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposListCollaboratorsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 export enum ReposListCollaboratorsAffiliationEnum {
-    Outside = "outside"
-,    Direct = "direct"
-,    All = "all"
+    Outside = "outside",
+    Direct = "direct",
+    All = "all"
 }
 
 
 export class ReposListCollaboratorsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=affiliation" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=affiliation" })
   affiliation?: ReposListCollaboratorsAffiliationEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
 export class ReposListCollaboratorsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReposListCollaboratorsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReposListCollaboratorsQueryParams;
 }
 
 
 export class ReposListCollaboratorsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata({ elemType: shared.Collaborator })
+  @SpeakeasyMetadata({ elemType: shared.Collaborator })
   collaborators?: shared.Collaborator[];
 }

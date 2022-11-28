@@ -11,13 +11,13 @@ class GetAPILordsInterestsStaffQueryParams:
 
 @dataclass
 class GetAPILordsInterestsStaffRequest:
-    query_params: GetAPILordsInterestsStaffQueryParams = field(default=None)
+    query_params: GetAPILordsInterestsStaffQueryParams = field()
     
 
 @dataclass
 class GetAPILordsInterestsStaffResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     members_staff_members_service_search_result: Optional[shared.MembersStaffMembersServiceSearchResult] = field(default=None)
-    status_code: int = field(default=None)
     

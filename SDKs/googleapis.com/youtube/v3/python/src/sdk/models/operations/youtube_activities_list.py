@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class YoutubeActivitiesListQueryParams:
+    part: List[str] = field(metadata={'query_param': { 'field_name': 'part', 'style': 'form', 'explode': True }})
     dollar_xgafv: Optional[shared.XgafvEnum] = field(default=None, metadata={'query_param': { 'field_name': '$.xgafv', 'style': 'form', 'explode': True }})
     access_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'access_token', 'style': 'form', 'explode': True }})
     alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
@@ -17,7 +19,6 @@ class YoutubeActivitiesListQueryParams:
     mine: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'mine', 'style': 'form', 'explode': True }})
     oauth_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'oauth_token', 'style': 'form', 'explode': True }})
     page_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'pageToken', 'style': 'form', 'explode': True }})
-    part: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'part', 'style': 'form', 'explode': True }})
     pretty_print: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'prettyPrint', 'style': 'form', 'explode': True }})
     published_after: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'publishedAfter', 'style': 'form', 'explode': True }})
     published_before: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'publishedBefore', 'style': 'form', 'explode': True }})
@@ -29,20 +30,20 @@ class YoutubeActivitiesListQueryParams:
 
 @dataclass
 class YoutubeActivitiesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class YoutubeActivitiesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class YoutubeActivitiesListSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -54,13 +55,13 @@ class YoutubeActivitiesListSecurity:
 
 @dataclass
 class YoutubeActivitiesListRequest:
-    query_params: YoutubeActivitiesListQueryParams = field(default=None)
-    security: YoutubeActivitiesListSecurity = field(default=None)
+    query_params: YoutubeActivitiesListQueryParams = field()
+    security: YoutubeActivitiesListSecurity = field()
     
 
 @dataclass
 class YoutubeActivitiesListResponse:
+    content_type: str = field()
+    status_code: int = field()
     activity_list_response: Optional[shared.ActivityListResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

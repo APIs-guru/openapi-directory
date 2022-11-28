@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Dimensions
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Dimensions of the media item.
 **/
 export class Dimensions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=heightPixels" })
+  @SpeakeasyMetadata({ data: "json, name=heightPixels" })
   heightPixels?: number;
 
-  @Metadata({ data: "json, name=widthPixels" })
+  @SpeakeasyMetadata({ data: "json, name=widthPixels" })
   widthPixels?: number;
 }

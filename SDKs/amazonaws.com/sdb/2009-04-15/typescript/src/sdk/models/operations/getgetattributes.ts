@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetGetAttributesActionEnum {
     GetAttributes = "GetAttributes"
@@ -10,54 +11,54 @@ export enum GetGetAttributesVersionEnum {
 
 
 export class GetGetAttributesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AWSAccessKeyId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AWSAccessKeyId" })
   awsAccessKeyId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetGetAttributesActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AttributeNames" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AttributeNames" })
   attributeNames?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ConsistentRead" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ConsistentRead" })
   consistentRead?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DomainName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DomainName" })
   domainName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ItemName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ItemName" })
   itemName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Signature" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Signature" })
   signature: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SignatureMethod" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SignatureMethod" })
   signatureMethod: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SignatureVersion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SignatureVersion" })
   signatureVersion: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Timestamp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Timestamp" })
   timestamp: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetGetAttributesVersionEnum;
 }
 
 
 export class GetGetAttributesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetGetAttributesQueryParams;
 }
 
 
 export class GetGetAttributesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

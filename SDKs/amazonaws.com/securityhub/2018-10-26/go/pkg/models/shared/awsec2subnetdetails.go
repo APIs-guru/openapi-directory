@@ -1,5 +1,7 @@
 package shared
 
+// AwsEc2SubnetDetails
+// Contains information about a subnet in Amazon EC2.
 type AwsEc2SubnetDetails struct {
 	AssignIpv6AddressOnCreation *bool                      `json:"AssignIpv6AddressOnCreation,omitempty"`
 	AvailabilityZone            *string                    `json:"AvailabilityZone,omitempty"`

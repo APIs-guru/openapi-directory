@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RespondActivityTaskCanceledInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: string;
 
-  @Metadata({ data: "json, name=taskToken" })
+  @SpeakeasyMetadata({ data: "json, name=taskToken" })
   taskToken: string;
 }

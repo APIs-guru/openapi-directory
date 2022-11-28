@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MobileDeviceIdList
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Wrapper message for a list of mobile device IDs defining Customer Match audience members.
 **/
 export class MobileDeviceIdList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mobileDeviceIds" })
+  @SpeakeasyMetadata({ data: "json, name=mobileDeviceIds" })
   mobileDeviceIds?: string[];
 }

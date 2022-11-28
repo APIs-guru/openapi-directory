@@ -1,50 +1,22 @@
 package operations
 
-import (
-	"time"
-)
-
 type NodesCommentCreatePathParams struct {
 	NodeID string `pathParam:"style=simple,explode=false,name=node_id"`
 }
 
-type NodesCommentCreateCommentAttributes struct {
-	CanEdit      *bool      `json:"can_edit,omitempty"`
-	Content      *string    `json:"content,omitempty"`
-	DateCreated  *time.Time `json:"date_created,omitempty"`
-	DateModified *time.Time `json:"date_modified,omitempty"`
-	Deleted      *bool      `json:"deleted,omitempty"`
-	HasChildren  *bool      `json:"has_children,omitempty"`
-	HasReport    *bool      `json:"has_report,omitempty"`
-	IsAbuse      *bool      `json:"is_abuse,omitempty"`
-	IsHam        *bool      `json:"is_ham,omitempty"`
-	Modified     *bool      `json:"modified,omitempty"`
-	Page         *string    `json:"page,omitempty"`
+// NodesCommentCreateCommentAttributesInput
+// The properties of the comment entity.
+type NodesCommentCreateCommentAttributesInput struct {
+	Content *string `json:"content,omitempty"`
 }
 
-type NodesCommentCreateCommentLinks struct {
-	Self *string `json:"self,omitempty"`
-}
-
-type NodesCommentCreateCommentRelationships struct {
-	Node    *string `json:"node,omitempty"`
-	Replies *string `json:"replies,omitempty"`
-	Reports *string `json:"reports,omitempty"`
-	Target  *string `json:"target,omitempty"`
-	User    *string `json:"user,omitempty"`
-}
-
-type NodesCommentCreateComment struct {
-	Attributes    *NodesCommentCreateCommentAttributes    `json:"attributes,omitempty"`
-	ID            string                                  `json:"id"`
-	Links         *NodesCommentCreateCommentLinks         `json:"links,omitempty"`
-	Relationships *NodesCommentCreateCommentRelationships `json:"relationships,omitempty"`
-	Type          *string                                 `json:"type,omitempty"`
+type NodesCommentCreateCommentInput struct {
+	Attributes *NodesCommentCreateCommentAttributesInput `json:"attributes,omitempty"`
 }
 
 type NodesCommentCreateRequest struct {
 	PathParams NodesCommentCreatePathParams
-	Request    NodesCommentCreateComment `request:"mediaType=application/json"`
+	Request    NodesCommentCreateCommentInput `request:"mediaType=application/json"`
 }
 
 type NodesCommentCreateResponse struct {

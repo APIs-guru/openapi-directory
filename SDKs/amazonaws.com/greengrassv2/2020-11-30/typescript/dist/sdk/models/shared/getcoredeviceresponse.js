@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CoreDeviceStatusEnum } from "./coredevicestatusenum";
 var GetCoreDeviceResponse = /** @class */ (function (_super) {
     __extends(GetCoreDeviceResponse, _super);
@@ -30,31 +30,31 @@ var GetCoreDeviceResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=architecture" }),
+        SpeakeasyMetadata({ data: "json, name=architecture" }),
         __metadata("design:type", String)
     ], GetCoreDeviceResponse.prototype, "architecture", void 0);
     __decorate([
-        Metadata({ data: "json, name=coreDeviceThingName" }),
+        SpeakeasyMetadata({ data: "json, name=coreDeviceThingName" }),
         __metadata("design:type", String)
     ], GetCoreDeviceResponse.prototype, "coreDeviceThingName", void 0);
     __decorate([
-        Metadata({ data: "json, name=coreVersion" }),
+        SpeakeasyMetadata({ data: "json, name=coreVersion" }),
         __metadata("design:type", String)
     ], GetCoreDeviceResponse.prototype, "coreVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastStatusUpdateTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=lastStatusUpdateTimestamp" }),
         __metadata("design:type", Date)
     ], GetCoreDeviceResponse.prototype, "lastStatusUpdateTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=platform" }),
+        SpeakeasyMetadata({ data: "json, name=platform" }),
         __metadata("design:type", String)
     ], GetCoreDeviceResponse.prototype, "platform", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], GetCoreDeviceResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], GetCoreDeviceResponse.prototype, "tags", void 0);
     return GetCoreDeviceResponse;

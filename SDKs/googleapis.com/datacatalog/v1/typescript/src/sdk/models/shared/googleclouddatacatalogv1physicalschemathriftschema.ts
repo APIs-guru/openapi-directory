@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatacatalogV1PhysicalSchemaThriftSchema
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Schema in Thrift format.
 **/
 export class GoogleCloudDatacatalogV1PhysicalSchemaThriftSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }

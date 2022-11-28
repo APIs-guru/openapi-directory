@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetUserTagsTagIdShowsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tag_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tag_id" })
   tagId: number;
 }
 
@@ -13,27 +14,27 @@ export enum GetUserTagsTagIdShowsEmbedEnum {
 
 
 export class GetUserTagsTagIdShowsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=embed" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=embed" })
   embed?: GetUserTagsTagIdShowsEmbedEnum;
 }
 
 
 export class GetUserTagsTagIdShowsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetUserTagsTagIdShowsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUserTagsTagIdShowsQueryParams;
 }
 
 
 export class GetUserTagsTagIdShowsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TagInstance })
+  @SpeakeasyMetadata({ elemType: shared.TagInstance })
   tagInstances?: shared.TagInstance[];
 }

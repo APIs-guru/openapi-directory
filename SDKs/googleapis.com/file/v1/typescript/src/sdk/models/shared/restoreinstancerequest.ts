@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RestoreInstanceRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * RestoreInstanceRequest restores an existing instance's file share from a backup.
 **/
 export class RestoreInstanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileShare" })
+  @SpeakeasyMetadata({ data: "json, name=fileShare" })
   fileShare?: string;
 
-  @Metadata({ data: "json, name=sourceBackup" })
+  @SpeakeasyMetadata({ data: "json, name=sourceBackup" })
   sourceBackup?: string;
 }

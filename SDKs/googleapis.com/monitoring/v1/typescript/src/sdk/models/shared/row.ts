@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Widget } from "./widget";
+
 
 
 // Row
@@ -8,9 +8,9 @@ import { Widget } from "./widget";
  * Defines the layout properties and content for a row.
 **/
 export class Row extends SpeakeasyBase {
-  @Metadata({ data: "json, name=weight" })
+  @SpeakeasyMetadata({ data: "json, name=weight" })
   weight?: string;
 
-  @Metadata({ data: "json, name=widgets", elemType: shared.Widget })
+  @SpeakeasyMetadata({ data: "json, name=widgets", elemType: Widget })
   widgets?: Widget[];
 }

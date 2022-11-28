@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIntegrationsV1alphaDownloadIntegrationVersionResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response for DownloadIntegrationVersion.
 **/
 export class GoogleCloudIntegrationsV1alphaDownloadIntegrationVersionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 }

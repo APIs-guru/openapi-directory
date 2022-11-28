@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import compensationhistogramresult
-from . import customattributehistogramresult
-from . import histogramresult
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class HistogramResults:
-    compensation_histogram_results: Optional[List[compensationhistogramresult.CompensationHistogramResult]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'compensationHistogramResults' }})
-    custom_attribute_histogram_results: Optional[List[customattributehistogramresult.CustomAttributeHistogramResult]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customAttributeHistogramResults' }})
-    simple_histogram_results: Optional[List[histogramresult.HistogramResult]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'simpleHistogramResults' }})
+    r"""HistogramResults
+    Output only. Histogram results that match HistogramFacets specified in SearchJobsRequest.
+    """
+    
+    compensation_histogram_results: Optional[List[CompensationHistogramResult]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('compensationHistogramResults') }})
+    custom_attribute_histogram_results: Optional[List[CustomAttributeHistogramResult]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customAttributeHistogramResults') }})
+    simple_histogram_results: Optional[List[HistogramResult]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('simpleHistogramResults') }})
     

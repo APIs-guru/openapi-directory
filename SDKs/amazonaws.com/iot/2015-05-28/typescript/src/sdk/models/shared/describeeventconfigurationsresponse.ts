@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Configuration } from "./configuration";
 
 
+
 export class DescribeEventConfigurationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=eventConfigurations", elemType: shared.Configuration })
+  @SpeakeasyMetadata({ data: "json, name=eventConfigurations", elemType: Configuration })
   eventConfigurations?: Map<string, Configuration>;
 
-  @Metadata({ data: "json, name=lastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedDate" })
   lastModifiedDate?: Date;
 }

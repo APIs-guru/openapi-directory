@@ -1,5 +1,7 @@
 package shared
 
+// DirectConnectGatewayAttachment
+// Information about an attachment between a Direct Connect gateway and a virtual interface.
 type DirectConnectGatewayAttachment struct {
 	AttachmentState              *DirectConnectGatewayAttachmentStateEnum `json:"attachmentState,omitempty"`
 	AttachmentType               *DirectConnectGatewayAttachmentTypeEnum  `json:"attachmentType,omitempty"`

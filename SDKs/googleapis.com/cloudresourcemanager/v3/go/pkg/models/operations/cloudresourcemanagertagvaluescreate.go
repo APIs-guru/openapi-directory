@@ -26,7 +26,7 @@ type CloudresourcemanagerTagValuesCreateSecurity struct {
 
 type CloudresourcemanagerTagValuesCreateRequest struct {
 	QueryParams CloudresourcemanagerTagValuesCreateQueryParams
-	Request     *shared.TagValue `request:"mediaType=application/json"`
+	Request     *shared.TagValueInput `request:"mediaType=application/json"`
 	Security    CloudresourcemanagerTagValuesCreateSecurity
 }
 

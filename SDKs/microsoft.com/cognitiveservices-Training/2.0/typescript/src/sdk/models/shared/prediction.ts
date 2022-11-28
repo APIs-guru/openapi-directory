@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BoundingBox } from "./boundingbox";
 
 
+
 export class Prediction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boundingBox" })
+  @SpeakeasyMetadata({ data: "json, name=boundingBox" })
   boundingBox?: BoundingBox;
 
-  @Metadata({ data: "json, name=probability" })
+  @SpeakeasyMetadata({ data: "json, name=probability" })
   probability?: number;
 
-  @Metadata({ data: "json, name=tagId" })
+  @SpeakeasyMetadata({ data: "json, name=tagId" })
   tagId?: string;
 
-  @Metadata({ data: "json, name=tagName" })
+  @SpeakeasyMetadata({ data: "json, name=tagName" })
   tagName?: string;
 }

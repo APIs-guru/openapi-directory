@@ -1,10 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleSource } from "./rulesource";
 
+
 export enum AzureFunctionRulePostRequestModeEnum {
-    Single = "single"
-,    Batch = "batch"
+    Single = "single",
+    Batch = "batch"
 }
 
 export enum AzureFunctionRulePostRuleTypeEnum {
@@ -12,8 +12,8 @@ export enum AzureFunctionRulePostRuleTypeEnum {
 }
 
 export enum AzureFunctionRulePostStatusEnum {
-    Enabled = "enabled"
-,    Disabled = "disabled"
+    Enabled = "enabled",
+    Disabled = "disabled"
 }
 
 export enum AzureFunctionRulePostTargetFormatEnum {
@@ -22,48 +22,48 @@ export enum AzureFunctionRulePostTargetFormatEnum {
 
 
 export class AzureFunctionRulePostTargetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class AzureFunctionRulePostTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=azureAppId" })
+  @SpeakeasyMetadata({ data: "json, name=azureAppId" })
   azureAppId: string;
 
-  @Metadata({ data: "json, name=azureFunctionName" })
+  @SpeakeasyMetadata({ data: "json, name=azureFunctionName" })
   azureFunctionName: string;
 
-  @Metadata({ data: "json, name=enveloped" })
+  @SpeakeasyMetadata({ data: "json, name=enveloped" })
   enveloped?: boolean;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: AzureFunctionRulePostTargetFormatEnum;
 
-  @Metadata({ data: "json, name=headers", elemType: shared.AzureFunctionRulePostTargetHeaders })
+  @SpeakeasyMetadata({ data: "json, name=headers", elemType: AzureFunctionRulePostTargetHeaders })
   headers?: AzureFunctionRulePostTargetHeaders[];
 
-  @Metadata({ data: "json, name=signingKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=signingKeyId" })
   signingKeyId?: string;
 }
 
 
 export class AzureFunctionRulePost extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestMode" })
+  @SpeakeasyMetadata({ data: "json, name=requestMode" })
   requestMode: AzureFunctionRulePostRequestModeEnum;
 
-  @Metadata({ data: "json, name=ruleType" })
+  @SpeakeasyMetadata({ data: "json, name=ruleType" })
   ruleType: AzureFunctionRulePostRuleTypeEnum;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source: RuleSource;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: AzureFunctionRulePostStatusEnum;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target: AzureFunctionRulePostTarget;
 }

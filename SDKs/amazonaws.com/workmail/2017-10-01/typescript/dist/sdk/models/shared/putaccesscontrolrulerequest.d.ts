@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AccessControlRuleEffectEnum } from "./accesscontrolruleeffectenum";
 export declare class PutAccessControlRuleRequest extends SpeakeasyBase {
     actions?: string[];

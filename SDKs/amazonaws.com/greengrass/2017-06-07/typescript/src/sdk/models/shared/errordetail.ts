@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ErrorDetail
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about the error.
 **/
 export class ErrorDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DetailedErrorCode" })
+  @SpeakeasyMetadata({ data: "json, name=DetailedErrorCode" })
   detailedErrorCode?: string;
 
-  @Metadata({ data: "json, name=DetailedErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=DetailedErrorMessage" })
   detailedErrorMessage?: string;
 }

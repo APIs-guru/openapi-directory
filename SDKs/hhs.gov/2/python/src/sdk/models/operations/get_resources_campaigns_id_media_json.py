@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetResourcesCampaignsIDMediaJSONPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +17,13 @@ class GetResourcesCampaignsIDMediaJSONQueryParams:
 
 @dataclass
 class GetResourcesCampaignsIDMediaJSONRequest:
-    path_params: GetResourcesCampaignsIDMediaJSONPathParams = field(default=None)
-    query_params: GetResourcesCampaignsIDMediaJSONQueryParams = field(default=None)
+    path_params: GetResourcesCampaignsIDMediaJSONPathParams = field()
+    query_params: GetResourcesCampaignsIDMediaJSONQueryParams = field()
     
 
 @dataclass
 class GetResourcesCampaignsIDMediaJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     media_item_wrapped: Optional[shared.MediaItemWrapped] = field(default=None)
-    status_code: int = field(default=None)
     

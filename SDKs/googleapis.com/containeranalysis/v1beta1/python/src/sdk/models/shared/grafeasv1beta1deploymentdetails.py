@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import deployment
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GrafeasV1beta1DeploymentDetails:
-    deployment: Optional[deployment.Deployment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deployment' }})
+    r"""GrafeasV1beta1DeploymentDetails
+    Details of a deployment occurrence.
+    """
+    
+    deployment: Optional[Deployment] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deployment') }})
     

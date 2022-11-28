@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
+from sdk.models import shared
 
 
 @dataclass
 class UpdateProductModulePathParams:
-    product_module_number: str = field(default=None, metadata={'path_param': { 'field_name': 'productModuleNumber', 'style': 'simple', 'explode': False }})
+    product_module_number: str = field(metadata={'path_param': { 'field_name': 'productModuleNumber', 'style': 'simple', 'explode': False }})
     
 class UpdateProductModuleRequestBodyLicenseTemplateEnum(str, Enum):
     TIMEVOLUME = "TIMEVOLUME"
@@ -30,20 +35,20 @@ class UpdateProductModuleRequestBody:
 
 @dataclass
 class UpdateProductModuleSecurity:
-    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_auth: shared.SchemeBasicAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class UpdateProductModuleRequest:
-    path_params: UpdateProductModulePathParams = field(default=None)
+    path_params: UpdateProductModulePathParams = field()
+    security: UpdateProductModuleSecurity = field()
     request: Optional[UpdateProductModuleRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
-    security: UpdateProductModuleSecurity = field(default=None)
     
 
 @dataclass
 class UpdateProductModuleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     netlicensing: Optional[Any] = field(default=None)
     

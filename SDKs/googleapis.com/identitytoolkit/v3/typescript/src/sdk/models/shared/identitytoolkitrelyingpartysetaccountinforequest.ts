@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IdentitytoolkitRelyingpartySetAccountInfoRequest
@@ -6,72 +7,72 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request to set the account information.
 **/
 export class IdentitytoolkitRelyingpartySetAccountInfoRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=captchaChallenge" })
+  @SpeakeasyMetadata({ data: "json, name=captchaChallenge" })
   captchaChallenge?: string;
 
-  @Metadata({ data: "json, name=captchaResponse" })
+  @SpeakeasyMetadata({ data: "json, name=captchaResponse" })
   captchaResponse?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=customAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=customAttributes" })
   customAttributes?: string;
 
-  @Metadata({ data: "json, name=delegatedProjectNumber" })
+  @SpeakeasyMetadata({ data: "json, name=delegatedProjectNumber" })
   delegatedProjectNumber?: string;
 
-  @Metadata({ data: "json, name=deleteAttribute" })
+  @SpeakeasyMetadata({ data: "json, name=deleteAttribute" })
   deleteAttribute?: string[];
 
-  @Metadata({ data: "json, name=deleteProvider" })
+  @SpeakeasyMetadata({ data: "json, name=deleteProvider" })
   deleteProvider?: string[];
 
-  @Metadata({ data: "json, name=disableUser" })
+  @SpeakeasyMetadata({ data: "json, name=disableUser" })
   disableUser?: boolean;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=emailVerified" })
+  @SpeakeasyMetadata({ data: "json, name=emailVerified" })
   emailVerified?: boolean;
 
-  @Metadata({ data: "json, name=idToken" })
+  @SpeakeasyMetadata({ data: "json, name=idToken" })
   idToken?: string;
 
-  @Metadata({ data: "json, name=instanceId" })
+  @SpeakeasyMetadata({ data: "json, name=instanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=lastLoginAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastLoginAt" })
   lastLoginAt?: string;
 
-  @Metadata({ data: "json, name=localId" })
+  @SpeakeasyMetadata({ data: "json, name=localId" })
   localId?: string;
 
-  @Metadata({ data: "json, name=oobCode" })
+  @SpeakeasyMetadata({ data: "json, name=oobCode" })
   oobCode?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=photoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=photoUrl" })
   photoUrl?: string;
 
-  @Metadata({ data: "json, name=provider" })
+  @SpeakeasyMetadata({ data: "json, name=provider" })
   provider?: string[];
 
-  @Metadata({ data: "json, name=returnSecureToken" })
+  @SpeakeasyMetadata({ data: "json, name=returnSecureToken" })
   returnSecureToken?: boolean;
 
-  @Metadata({ data: "json, name=upgradeToFederatedLogin" })
+  @SpeakeasyMetadata({ data: "json, name=upgradeToFederatedLogin" })
   upgradeToFederatedLogin?: boolean;
 
-  @Metadata({ data: "json, name=validSince" })
+  @SpeakeasyMetadata({ data: "json, name=validSince" })
   validSince?: string;
 }

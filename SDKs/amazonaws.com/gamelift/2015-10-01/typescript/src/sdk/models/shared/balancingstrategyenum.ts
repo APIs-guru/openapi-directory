@@ -1,7 +1,8 @@
 
 
+
 export enum BalancingStrategyEnum {
-    SpotOnly = "SPOT_ONLY"
-,    SpotPreferred = "SPOT_PREFERRED"
-,    OnDemandOnly = "ON_DEMAND_ONLY"
+    SpotOnly = "SPOT_ONLY",
+    SpotPreferred = "SPOT_PREFERRED",
+    OnDemandOnly = "ON_DEMAND_ONLY"
 }

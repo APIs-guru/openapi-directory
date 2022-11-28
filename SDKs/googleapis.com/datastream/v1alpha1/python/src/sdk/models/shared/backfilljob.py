@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import error
+from sdk import utils
+from . import *
 
 class BackfillJobStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -22,9 +24,13 @@ class BackfillJobTriggerEnum(str, Enum):
 @dataclass_json
 @dataclass
 class BackfillJob:
-    errors: Optional[List[error.Error]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
-    last_end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastEndTime' }})
-    last_start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastStartTime' }})
-    state: Optional[BackfillJobStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    trigger: Optional[BackfillJobTriggerEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trigger' }})
+    r"""BackfillJob
+    Represents a backfill job on a specific stream object.
+    """
+    
+    errors: Optional[List[Error]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
+    last_end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastEndTime') }})
+    last_start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastStartTime') }})
+    state: Optional[BackfillJobStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    trigger: Optional[BackfillJobTriggerEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('trigger') }})
     

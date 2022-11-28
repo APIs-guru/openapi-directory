@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListInstanceProfileTagsActionEnum(str, Enum):
     LIST_INSTANCE_PROFILE_TAGS = "ListInstanceProfileTags"
@@ -10,11 +14,11 @@ class GetListInstanceProfileTagsVersionEnum(str, Enum):
 
 @dataclass
 class GetListInstanceProfileTagsQueryParams:
-    action: GetListInstanceProfileTagsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    instance_profile_name: str = field(default=None, metadata={'query_param': { 'field_name': 'InstanceProfileName', 'style': 'form', 'explode': True }})
+    action: GetListInstanceProfileTagsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    instance_profile_name: str = field(metadata={'query_param': { 'field_name': 'InstanceProfileName', 'style': 'form', 'explode': True }})
+    version: GetListInstanceProfileTagsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
-    version: GetListInstanceProfileTagsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetListInstanceProfileTagsHeaders:
 
 @dataclass
 class GetListInstanceProfileTagsRequest:
-    query_params: GetListInstanceProfileTagsQueryParams = field(default=None)
-    headers: GetListInstanceProfileTagsHeaders = field(default=None)
+    headers: GetListInstanceProfileTagsHeaders = field()
+    query_params: GetListInstanceProfileTagsQueryParams = field()
     
 
 @dataclass
 class GetListInstanceProfileTagsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

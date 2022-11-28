@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VirtualNic
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration of gVNIC feature.
 **/
 export class VirtualNic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 }

@@ -10,6 +10,8 @@ const (
 	GoogleCloudAssuredworkloadsV1ViolationRemediationRemediationTypeEnumRemediationRestrictCmekCryptoKeyProjectsOrgPolicyViolation GoogleCloudAssuredworkloadsV1ViolationRemediationRemediationTypeEnum = "REMEDIATION_RESTRICT_CMEK_CRYPTO_KEY_PROJECTS_ORG_POLICY_VIOLATION"
 )
 
+// GoogleCloudAssuredworkloadsV1ViolationRemediation
+// Represents remediation guidance to resolve compliance violation for AssuredWorkload
 type GoogleCloudAssuredworkloadsV1ViolationRemediation struct {
 	CompliantValues []string                                                              `json:"compliantValues,omitempty"`
 	Instructions    *GoogleCloudAssuredworkloadsV1ViolationRemediationInstructions        `json:"instructions,omitempty"`

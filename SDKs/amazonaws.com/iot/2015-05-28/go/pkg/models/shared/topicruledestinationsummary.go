@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TopicRuleDestinationSummary
+// Information about the topic rule destination.
 type TopicRuleDestinationSummary struct {
 	Arn                   *string                         `json:"arn,omitempty"`
 	CreatedAt             *time.Time                      `json:"createdAt,omitempty"`

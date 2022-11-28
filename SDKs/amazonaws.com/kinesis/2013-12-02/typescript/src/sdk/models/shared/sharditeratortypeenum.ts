@@ -1,9 +1,10 @@
 
 
+
 export enum ShardIteratorTypeEnum {
-    AtSequenceNumber = "AT_SEQUENCE_NUMBER"
-,    AfterSequenceNumber = "AFTER_SEQUENCE_NUMBER"
-,    TrimHorizon = "TRIM_HORIZON"
-,    Latest = "LATEST"
-,    AtTimestamp = "AT_TIMESTAMP"
+    AtSequenceNumber = "AT_SEQUENCE_NUMBER",
+    AfterSequenceNumber = "AFTER_SEQUENCE_NUMBER",
+    TrimHorizon = "TRIM_HORIZON",
+    Latest = "LATEST",
+    AtTimestamp = "AT_TIMESTAMP"
 }

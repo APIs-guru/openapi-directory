@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetPresidentialContributionsBySizeQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     candidate_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'candidate_id', 'style': 'form', 'explode': True }})
     election_year: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'election_year', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
@@ -19,12 +22,12 @@ class GetPresidentialContributionsBySizeQueryParams:
 
 @dataclass
 class GetPresidentialContributionsBySizeRequest:
-    query_params: GetPresidentialContributionsBySizeQueryParams = field(default=None)
+    query_params: GetPresidentialContributionsBySizeQueryParams = field()
     
 
 @dataclass
 class GetPresidentialContributionsBySizeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     presidential_by_size_page: Optional[shared.PresidentialBySizePage] = field(default=None)
-    status_code: int = field(default=None)
     

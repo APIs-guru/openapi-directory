@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DcimPowerOutletsListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=device" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=device" })
   device?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=device_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=device_id" })
   deviceId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tag" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tag" })
   tag?: string;
 }
 
 
-export class DcimPowerOutletsListRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: DcimPowerOutletsListQueryParams;
-}
-
-
 export class DcimPowerOutletsList200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count: number;
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata({ data: "json, name=previous" })
   previous?: string;
 
-  @Metadata({ data: "json, name=results", elemType: shared.PowerOutlet })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: shared.PowerOutlet })
   results: shared.PowerOutlet[];
 }
 
 
+export class DcimPowerOutletsListRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: DcimPowerOutletsListQueryParams;
+}
+
+
 export class DcimPowerOutletsListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dcimPowerOutletsList200ApplicationJsonObject?: DcimPowerOutletsList200ApplicationJson;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SoftwareInformation
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the software on the device.
 **/
 export class SoftwareInformation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=installState" })
+  @SpeakeasyMetadata({ data: "json, name=installState" })
   installState?: string;
 
-  @Metadata({ data: "json, name=installedVersion" })
+  @SpeakeasyMetadata({ data: "json, name=installedVersion" })
   installedVersion?: string;
 
-  @Metadata({ data: "json, name=installingVersion" })
+  @SpeakeasyMetadata({ data: "json, name=installingVersion" })
   installingVersion?: string;
 }

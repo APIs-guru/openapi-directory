@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // VariableValue
 /**
  * Identifies a property value used in an expression.
@@ -33,11 +33,11 @@ var VariableValue = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=hierarchyId" }),
+        SpeakeasyMetadata({ data: "json, name=hierarchyId" }),
         __metadata("design:type", String)
     ], VariableValue.prototype, "hierarchyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=propertyId" }),
+        SpeakeasyMetadata({ data: "json, name=propertyId" }),
         __metadata("design:type", String)
     ], VariableValue.prototype, "propertyId", void 0);
     return VariableValue;

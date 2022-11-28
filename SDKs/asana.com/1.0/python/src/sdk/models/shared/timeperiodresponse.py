@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import timeperiodcompact
+from sdk import utils
+from . import *
 
 class TimePeriodResponsePeriodEnum(str, Enum):
     FY = "FY"
@@ -16,10 +18,10 @@ class TimePeriodResponsePeriodEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TimePeriodResponse:
-    end_on: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end_on' }})
-    gid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gid' }})
-    parent: Optional[timeperiodcompact.TimePeriodCompact] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent' }})
-    period: Optional[TimePeriodResponsePeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'period' }})
-    resource_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_type' }})
-    start_on: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'start_on' }})
+    end_on: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('end_on') }})
+    gid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gid') }})
+    parent: Optional[TimePeriodCompact] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parent') }})
+    period: Optional[TimePeriodResponsePeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('period') }})
+    resource_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource_type') }})
+    start_on: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('start_on') }})
     

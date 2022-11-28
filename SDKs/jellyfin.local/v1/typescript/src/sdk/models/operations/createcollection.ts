@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateCollectionQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ids" })
   ids?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=isLocked" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isLocked" })
   isLocked?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=parentId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parentId" })
   parentId?: string;
 }
 
 
 export class CreateCollectionSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class CreateCollectionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: CreateCollectionQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateCollectionSecurity;
 }
 
 
 export class CreateCollectionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   collectionCreationResult?: shared.CollectionCreationResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

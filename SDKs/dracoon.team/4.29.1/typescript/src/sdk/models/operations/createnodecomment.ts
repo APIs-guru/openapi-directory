@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateNodeCommentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=node_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=node_id" })
   nodeId: number;
 }
 
 
 export class CreateNodeCommentHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
   xSdsAuthToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Date-Format" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Date-Format" })
   xSdsDateFormat?: any;
 }
 
 
 export class CreateNodeCommentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateNodeCommentPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateNodeCommentHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.CreateNodeCommentRequest;
 }
 
 
 export class CreateNodeCommentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   comment?: shared.Comment;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

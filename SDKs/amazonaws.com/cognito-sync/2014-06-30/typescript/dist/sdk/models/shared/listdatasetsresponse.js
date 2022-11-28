@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Dataset } from "./dataset";
 // ListDatasetsResponse
 /**
  * Returned for a successful ListDatasets request.
@@ -34,15 +34,15 @@ var ListDatasetsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Count" }),
+        SpeakeasyMetadata({ data: "json, name=Count" }),
         __metadata("design:type", Number)
     ], ListDatasetsResponse.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=Datasets", elemType: shared.Dataset }),
+        SpeakeasyMetadata({ data: "json, name=Datasets", elemType: Dataset }),
         __metadata("design:type", Array)
     ], ListDatasetsResponse.prototype, "datasets", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListDatasetsResponse.prototype, "nextToken", void 0);
     return ListDatasetsResponse;

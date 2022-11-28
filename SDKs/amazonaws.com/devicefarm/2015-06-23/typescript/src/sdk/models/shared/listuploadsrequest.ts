@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UploadTypeEnum } from "./uploadtypeenum";
+
 
 
 // ListUploadsRequest
@@ -7,12 +8,12 @@ import { UploadTypeEnum } from "./uploadtypeenum";
  * Represents a request to the list uploads operation.
 **/
 export class ListUploadsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: UploadTypeEnum;
 }

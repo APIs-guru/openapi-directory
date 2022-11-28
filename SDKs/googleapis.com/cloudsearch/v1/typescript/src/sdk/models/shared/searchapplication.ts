@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSourceRestriction } from "./datasourcerestriction";
 import { FacetOptions } from "./facetoptions";
 import { SortOptions } from "./sortoptions";
@@ -8,41 +7,79 @@ import { ScoringConfig } from "./scoringconfig";
 import { SourceConfig } from "./sourceconfig";
 
 
+
+// SearchApplicationInput
+/** 
+ * SearchApplication
+**/
+export class SearchApplicationInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=dataSourceRestrictions", elemType: DataSourceRestriction })
+  dataSourceRestrictions?: DataSourceRestriction[];
+
+  @SpeakeasyMetadata({ data: "json, name=defaultFacetOptions", elemType: FacetOptions })
+  defaultFacetOptions?: FacetOptions[];
+
+  @SpeakeasyMetadata({ data: "json, name=defaultSortOptions" })
+  defaultSortOptions?: SortOptions;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=enableAuditLog" })
+  enableAuditLog?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=queryInterpretationConfig" })
+  queryInterpretationConfig?: QueryInterpretationConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=returnResultThumbnailUrls" })
+  returnResultThumbnailUrls?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=scoringConfig" })
+  scoringConfig?: ScoringConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=sourceConfig", elemType: SourceConfig })
+  sourceConfig?: SourceConfig[];
+}
+
+
 // SearchApplication
 /** 
  * SearchApplication
 **/
 export class SearchApplication extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataSourceRestrictions", elemType: shared.DataSourceRestriction })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceRestrictions", elemType: DataSourceRestriction })
   dataSourceRestrictions?: DataSourceRestriction[];
 
-  @Metadata({ data: "json, name=defaultFacetOptions", elemType: shared.FacetOptions })
+  @SpeakeasyMetadata({ data: "json, name=defaultFacetOptions", elemType: FacetOptions })
   defaultFacetOptions?: FacetOptions[];
 
-  @Metadata({ data: "json, name=defaultSortOptions" })
+  @SpeakeasyMetadata({ data: "json, name=defaultSortOptions" })
   defaultSortOptions?: SortOptions;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=enableAuditLog" })
+  @SpeakeasyMetadata({ data: "json, name=enableAuditLog" })
   enableAuditLog?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=operationIds" })
+  @SpeakeasyMetadata({ data: "json, name=operationIds" })
   operationIds?: string[];
 
-  @Metadata({ data: "json, name=queryInterpretationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=queryInterpretationConfig" })
   queryInterpretationConfig?: QueryInterpretationConfig;
 
-  @Metadata({ data: "json, name=returnResultThumbnailUrls" })
+  @SpeakeasyMetadata({ data: "json, name=returnResultThumbnailUrls" })
   returnResultThumbnailUrls?: boolean;
 
-  @Metadata({ data: "json, name=scoringConfig" })
+  @SpeakeasyMetadata({ data: "json, name=scoringConfig" })
   scoringConfig?: ScoringConfig;
 
-  @Metadata({ data: "json, name=sourceConfig", elemType: shared.SourceConfig })
+  @SpeakeasyMetadata({ data: "json, name=sourceConfig", elemType: SourceConfig })
   sourceConfig?: SourceConfig[];
 }

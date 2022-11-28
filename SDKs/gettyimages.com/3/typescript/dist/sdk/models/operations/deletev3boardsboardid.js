@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteV3BoardsBoardIdPathParams = /** @class */ (function (_super) {
     __extends(DeleteV3BoardsBoardIdPathParams, _super);
     function DeleteV3BoardsBoardIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=board_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=board_id" }),
         __metadata("design:type", String)
     ], DeleteV3BoardsBoardIdPathParams.prototype, "boardId", void 0);
     return DeleteV3BoardsBoardIdPathParams;
@@ -41,7 +41,7 @@ var DeleteV3BoardsBoardIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteV3BoardsBoardIdPathParams)
     ], DeleteV3BoardsBoardIdRequest.prototype, "pathParams", void 0);
     return DeleteV3BoardsBoardIdRequest;
@@ -53,11 +53,11 @@ var DeleteV3BoardsBoardIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteV3BoardsBoardIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteV3BoardsBoardIdResponse.prototype, "statusCode", void 0);
     return DeleteV3BoardsBoardIdResponse;

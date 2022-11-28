@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomPluginContentTypeEnum } from "./customplugincontenttypeenum";
 import { CustomPluginFileDescription } from "./custompluginfiledescription";
 import { CustomPluginLocationDescription } from "./custompluginlocationdescription";
@@ -36,27 +36,27 @@ var CustomPluginRevisionSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=contentType" }),
+        SpeakeasyMetadata({ data: "json, name=contentType" }),
         __metadata("design:type", String)
     ], CustomPluginRevisionSummary.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], CustomPluginRevisionSummary.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], CustomPluginRevisionSummary.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=fileDescription" }),
+        SpeakeasyMetadata({ data: "json, name=fileDescription" }),
         __metadata("design:type", CustomPluginFileDescription)
     ], CustomPluginRevisionSummary.prototype, "fileDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=location" }),
+        SpeakeasyMetadata({ data: "json, name=location" }),
         __metadata("design:type", CustomPluginLocationDescription)
     ], CustomPluginRevisionSummary.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "json, name=revision" }),
+        SpeakeasyMetadata({ data: "json, name=revision" }),
         __metadata("design:type", Number)
     ], CustomPluginRevisionSummary.prototype, "revision", void 0);
     return CustomPluginRevisionSummary;

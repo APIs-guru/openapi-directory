@@ -1,5 +1,8 @@
 package shared
 
+// UpdateSubscriberRequest
+//
+//	Request of UpdateSubscriber
 type UpdateSubscriberRequest struct {
 	AccountID     string       `json:"AccountId"`
 	BudgetName    string       `json:"BudgetName"`

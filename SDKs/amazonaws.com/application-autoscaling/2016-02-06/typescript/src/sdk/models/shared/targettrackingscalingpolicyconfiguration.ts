@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomizedMetricSpecification } from "./customizedmetricspecification";
 import { PredefinedMetricSpecification } from "./predefinedmetricspecification";
+
 
 
 // TargetTrackingScalingPolicyConfiguration
@@ -8,21 +9,21 @@ import { PredefinedMetricSpecification } from "./predefinedmetricspecification";
  * Represents a target tracking scaling policy configuration to use with Application Auto Scaling.
 **/
 export class TargetTrackingScalingPolicyConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CustomizedMetricSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=CustomizedMetricSpecification" })
   customizedMetricSpecification?: CustomizedMetricSpecification;
 
-  @Metadata({ data: "json, name=DisableScaleIn" })
+  @SpeakeasyMetadata({ data: "json, name=DisableScaleIn" })
   disableScaleIn?: boolean;
 
-  @Metadata({ data: "json, name=PredefinedMetricSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=PredefinedMetricSpecification" })
   predefinedMetricSpecification?: PredefinedMetricSpecification;
 
-  @Metadata({ data: "json, name=ScaleInCooldown" })
+  @SpeakeasyMetadata({ data: "json, name=ScaleInCooldown" })
   scaleInCooldown?: number;
 
-  @Metadata({ data: "json, name=ScaleOutCooldown" })
+  @SpeakeasyMetadata({ data: "json, name=ScaleOutCooldown" })
   scaleOutCooldown?: number;
 
-  @Metadata({ data: "json, name=TargetValue" })
+  @SpeakeasyMetadata({ data: "json, name=TargetValue" })
   targetValue: number;
 }

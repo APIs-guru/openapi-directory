@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ResourceDetail
+// Information about a resource.
 type ResourceDetail struct {
 	Arn         *string    `json:"ARN,omitempty"`
 	CreatedTime *time.Time `json:"CreatedTime,omitempty"`

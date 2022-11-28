@@ -1,39 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MlModelFilterVariableEnum } from "./mlmodelfiltervariableenum";
 import { SortOrderEnum } from "./sortorderenum";
 
 
+
 export class DescribeMlModelsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EQ" })
+  @SpeakeasyMetadata({ data: "json, name=EQ" })
   eq?: string;
 
-  @Metadata({ data: "json, name=FilterVariable" })
+  @SpeakeasyMetadata({ data: "json, name=FilterVariable" })
   filterVariable?: MlModelFilterVariableEnum;
 
-  @Metadata({ data: "json, name=GE" })
+  @SpeakeasyMetadata({ data: "json, name=GE" })
   ge?: string;
 
-  @Metadata({ data: "json, name=GT" })
+  @SpeakeasyMetadata({ data: "json, name=GT" })
   gt?: string;
 
-  @Metadata({ data: "json, name=LE" })
+  @SpeakeasyMetadata({ data: "json, name=LE" })
   le?: string;
 
-  @Metadata({ data: "json, name=LT" })
+  @SpeakeasyMetadata({ data: "json, name=LT" })
   lt?: string;
 
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=NE" })
+  @SpeakeasyMetadata({ data: "json, name=NE" })
   ne?: string;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Prefix" })
+  @SpeakeasyMetadata({ data: "json, name=Prefix" })
   prefix?: string;
 
-  @Metadata({ data: "json, name=SortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=SortOrder" })
   sortOrder?: SortOrderEnum;
 }

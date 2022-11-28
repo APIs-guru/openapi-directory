@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,20 +22,20 @@ class GetDeviceRegistrationHeaders:
 @dataclass_json
 @dataclass
 class GetDeviceRegistrationRequestBody:
-    device_fleet_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceFleetName' }})
-    device_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceName' }})
+    device_fleet_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceFleetName') }})
+    device_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceName') }})
     
 
 @dataclass
 class GetDeviceRegistrationRequest:
-    headers: GetDeviceRegistrationHeaders = field(default=None)
-    request: GetDeviceRegistrationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetDeviceRegistrationHeaders = field()
+    request: GetDeviceRegistrationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetDeviceRegistrationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_device_registration_result: Optional[shared.GetDeviceRegistrationResult] = field(default=None)
     internal_service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

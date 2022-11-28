@@ -9,6 +9,8 @@ const (
 	GoogleCloudChannelV1ParameterDefinitionParameterTypeEnumDouble                   GoogleCloudChannelV1ParameterDefinitionParameterTypeEnum = "DOUBLE"
 )
 
+// GoogleCloudChannelV1ParameterDefinition
+// Parameter's definition. Specifies what parameter is required to use the current Offer to purchase.
 type GoogleCloudChannelV1ParameterDefinition struct {
 	AllowedValues []GoogleCloudChannelV1Value                               `json:"allowedValues,omitempty"`
 	MaxValue      *GoogleCloudChannelV1Value                                `json:"maxValue,omitempty"`

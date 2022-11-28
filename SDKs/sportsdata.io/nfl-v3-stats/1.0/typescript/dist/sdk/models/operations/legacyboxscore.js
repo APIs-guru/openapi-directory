@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var LegacyBoxScoreFormatEnum;
 (function (LegacyBoxScoreFormatEnum) {
     LegacyBoxScoreFormatEnum["Xml"] = "XML";
@@ -34,19 +34,19 @@ var LegacyBoxScorePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], LegacyBoxScorePathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=hometeam" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=hometeam" }),
         __metadata("design:type", String)
     ], LegacyBoxScorePathParams.prototype, "hometeam", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=season" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=season" }),
         __metadata("design:type", String)
     ], LegacyBoxScorePathParams.prototype, "season", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=week" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=week" }),
         __metadata("design:type", String)
     ], LegacyBoxScorePathParams.prototype, "week", void 0);
     return LegacyBoxScorePathParams;
@@ -58,7 +58,7 @@ var LegacyBoxScoreRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LegacyBoxScorePathParams)
     ], LegacyBoxScoreRequest.prototype, "pathParams", void 0);
     return LegacyBoxScoreRequest;
@@ -70,15 +70,15 @@ var LegacyBoxScoreResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], LegacyBoxScoreResponse.prototype, "boxScore", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], LegacyBoxScoreResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], LegacyBoxScoreResponse.prototype, "statusCode", void 0);
     return LegacyBoxScoreResponse;

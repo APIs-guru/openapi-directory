@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class ResendValidationEmailRequest extends SpeakeasyBase {
     certificateArn: string;
     domain: string;

@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetForecastPointsPathParams = /** @class */ (function (_super) {
     __extends(GetForecastPointsPathParams, _super);
     function GetForecastPointsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=language" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=language" }),
         __metadata("design:type", String)
     ], GetForecastPointsPathParams.prototype, "language", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=yatchclubid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=yatchclubid" }),
         __metadata("design:type", String)
     ], GetForecastPointsPathParams.prototype, "yatchclubid", void 0);
     return GetForecastPointsPathParams;
@@ -45,7 +45,7 @@ var GetForecastPointsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetForecastPointsPathParams)
     ], GetForecastPointsRequest.prototype, "pathParams", void 0);
     return GetForecastPointsRequest;
@@ -57,11 +57,11 @@ var GetForecastPointsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetForecastPointsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetForecastPointsResponse.prototype, "statusCode", void 0);
     return GetForecastPointsResponse;

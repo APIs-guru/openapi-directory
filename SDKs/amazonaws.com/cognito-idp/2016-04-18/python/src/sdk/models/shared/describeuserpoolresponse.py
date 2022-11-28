@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import userpooltype
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeUserPoolResponse:
-    user_pool: Optional[userpooltype.UserPoolType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UserPool' }})
+    r"""DescribeUserPoolResponse
+    Represents the response to describe the user pool.
+    """
+    
+    user_pool: Optional[UserPoolType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('UserPool') }})
     

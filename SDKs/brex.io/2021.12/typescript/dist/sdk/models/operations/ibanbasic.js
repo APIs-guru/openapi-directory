@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var IbanBasicRequestBody = /** @class */ (function (_super) {
     __extends(IbanBasicRequestBody, _super);
@@ -30,7 +30,7 @@ var IbanBasicRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=ibanNumber;" }),
+        SpeakeasyMetadata({ data: "form, name=ibanNumber;" }),
         __metadata("design:type", String)
     ], IbanBasicRequestBody.prototype, "ibanNumber", void 0);
     return IbanBasicRequestBody;
@@ -42,7 +42,7 @@ var IbanBasicSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], IbanBasicSecurity.prototype, "userKey", void 0);
     return IbanBasicSecurity;
@@ -54,11 +54,11 @@ var IbanBasicRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", IbanBasicRequestBody)
     ], IbanBasicRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", IbanBasicSecurity)
     ], IbanBasicRequest.prototype, "security", void 0);
     return IbanBasicRequest;
@@ -70,19 +70,19 @@ var IbanBasicResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], IbanBasicResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], IbanBasicResponse.prototype, "ibanBasic200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], IbanBasicResponse.prototype, "ibanBasicDefaultApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], IbanBasicResponse.prototype, "statusCode", void 0);
     return IbanBasicResponse;

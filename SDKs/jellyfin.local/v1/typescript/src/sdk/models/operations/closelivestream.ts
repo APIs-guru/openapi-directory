@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CloseLiveStreamQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=liveStreamId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=liveStreamId" })
   liveStreamId: string;
 }
 
 
 export class CloseLiveStreamSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class CloseLiveStreamRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: CloseLiveStreamQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CloseLiveStreamSecurity;
 }
 
 
 export class CloseLiveStreamResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContactSettings } from "./contactsettings";
 
+
 export enum ConfigureContactSettingsRequestContactNoticesEnum {
-    ContactNoticeUnspecified = "CONTACT_NOTICE_UNSPECIFIED"
-,    PublicContactDataAcknowledgement = "PUBLIC_CONTACT_DATA_ACKNOWLEDGEMENT"
+    ContactNoticeUnspecified = "CONTACT_NOTICE_UNSPECIFIED",
+    PublicContactDataAcknowledgement = "PUBLIC_CONTACT_DATA_ACKNOWLEDGEMENT"
 }
 
 
@@ -12,15 +13,15 @@ export enum ConfigureContactSettingsRequestContactNoticesEnum {
  * Request for the `ConfigureContactSettings` method.
 **/
 export class ConfigureContactSettingsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contactNotices" })
+  @SpeakeasyMetadata({ data: "json, name=contactNotices" })
   contactNotices?: ConfigureContactSettingsRequestContactNoticesEnum[];
 
-  @Metadata({ data: "json, name=contactSettings" })
+  @SpeakeasyMetadata({ data: "json, name=contactSettings" })
   contactSettings?: ContactSettings;
 
-  @Metadata({ data: "json, name=updateMask" })
+  @SpeakeasyMetadata({ data: "json, name=updateMask" })
   updateMask?: string;
 
-  @Metadata({ data: "json, name=validateOnly" })
+  @SpeakeasyMetadata({ data: "json, name=validateOnly" })
   validateOnly?: boolean;
 }

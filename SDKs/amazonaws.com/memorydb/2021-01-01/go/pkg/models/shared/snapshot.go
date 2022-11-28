@@ -1,5 +1,7 @@
 package shared
 
+// Snapshot
+// Represents a copy of an entire cluster as of the time when the snapshot was taken.
 type Snapshot struct {
 	Arn                  *string               `json:"ARN,omitempty"`
 	ClusterConfiguration *ClusterConfiguration `json:"ClusterConfiguration,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class LoggingProjectsLocationsBucketsViewsPatchPathParams extends SpeakeasyBase {
     name: string;
@@ -32,7 +32,7 @@ export declare class LoggingProjectsLocationsBucketsViewsPatchSecurity extends S
 export declare class LoggingProjectsLocationsBucketsViewsPatchRequest extends SpeakeasyBase {
     pathParams: LoggingProjectsLocationsBucketsViewsPatchPathParams;
     queryParams: LoggingProjectsLocationsBucketsViewsPatchQueryParams;
-    request?: shared.LogView;
+    request?: shared.LogViewInput;
     security: LoggingProjectsLocationsBucketsViewsPatchSecurity;
 }
 export declare class LoggingProjectsLocationsBucketsViewsPatchResponse extends SpeakeasyBase {

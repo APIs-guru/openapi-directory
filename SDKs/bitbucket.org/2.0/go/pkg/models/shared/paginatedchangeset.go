@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedChangeset
+// A paginated list of commits.
 type PaginatedChangeset struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

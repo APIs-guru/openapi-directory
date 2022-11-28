@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ReinitializeActionConfiguration
 /**
  * The deserialized form of the <b>Reinitialize</b> service's request payload.
@@ -33,39 +33,39 @@ var ReinitializeActionConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=resetAlertActions" }),
+        SpeakeasyMetadata({ data: "json, name=resetAlertActions" }),
         __metadata("design:type", Number)
     ], ReinitializeActionConfiguration.prototype, "resetAlertActions", void 0);
     __decorate([
-        Metadata({ data: "json, name=resetAlertAfterNTimes" }),
+        SpeakeasyMetadata({ data: "json, name=resetAlertAfterNTimes" }),
         __metadata("design:type", Number)
     ], ReinitializeActionConfiguration.prototype, "resetAlertAfterNTimes", void 0);
     __decorate([
-        Metadata({ data: "json, name=resetDebugMode" }),
+        SpeakeasyMetadata({ data: "json, name=resetDebugMode" }),
         __metadata("design:type", Number)
     ], ReinitializeActionConfiguration.prototype, "resetDebugMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=resetDiscoveryAndPollingIntervals" }),
+        SpeakeasyMetadata({ data: "json, name=resetDiscoveryAndPollingIntervals" }),
         __metadata("design:type", Number)
     ], ReinitializeActionConfiguration.prototype, "resetDiscoveryAndPollingIntervals", void 0);
     __decorate([
-        Metadata({ data: "json, name=resetJavaSettings" }),
+        SpeakeasyMetadata({ data: "json, name=resetJavaSettings" }),
         __metadata("design:type", Number)
     ], ReinitializeActionConfiguration.prototype, "resetJavaSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=resetOtherAlertSettings" }),
+        SpeakeasyMetadata({ data: "json, name=resetOtherAlertSettings" }),
         __metadata("design:type", Number)
     ], ReinitializeActionConfiguration.prototype, "resetOtherAlertSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=resetRemovedPausedObjectList" }),
+        SpeakeasyMetadata({ data: "json, name=resetRemovedPausedObjectList" }),
         __metadata("design:type", Number)
     ], ReinitializeActionConfiguration.prototype, "resetRemovedPausedObjectList", void 0);
     __decorate([
-        Metadata({ data: "json, name=resetReportSettings" }),
+        SpeakeasyMetadata({ data: "json, name=resetReportSettings" }),
         __metadata("design:type", Number)
     ], ReinitializeActionConfiguration.prototype, "resetReportSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=resetThresholds" }),
+        SpeakeasyMetadata({ data: "json, name=resetThresholds" }),
         __metadata("design:type", Number)
     ], ReinitializeActionConfiguration.prototype, "resetThresholds", void 0);
     return ReinitializeActionConfiguration;

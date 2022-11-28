@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OutputLogEvent } from "./outputlogevent";
 
 
+
 export class GetLogEventsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=events", elemType: shared.OutputLogEvent })
+  @SpeakeasyMetadata({ data: "json, name=events", elemType: OutputLogEvent })
   events?: OutputLogEvent[];
 
-  @Metadata({ data: "json, name=nextBackwardToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextBackwardToken" })
   nextBackwardToken?: string;
 
-  @Metadata({ data: "json, name=nextForwardToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextForwardToken" })
   nextForwardToken?: string;
 }

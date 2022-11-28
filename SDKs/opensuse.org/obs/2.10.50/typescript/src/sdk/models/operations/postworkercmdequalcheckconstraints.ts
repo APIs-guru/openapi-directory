@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostWorkerCmdEqualCheckconstraintsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=arch" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=arch" })
   arch: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=package" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=package" })
   package: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=project" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=project" })
   project: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=repository" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=repository" })
   repository: string;
 }
 
 
 export class PostWorkerCmdEqualCheckconstraintsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuthentication: shared.SchemeBasicAuthentication;
 }
 
 
 export class PostWorkerCmdEqualCheckconstraintsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostWorkerCmdEqualCheckconstraintsQueryParams;
 
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   request: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PostWorkerCmdEqualCheckconstraintsSecurity;
 }
 
 
 export class PostWorkerCmdEqualCheckconstraintsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

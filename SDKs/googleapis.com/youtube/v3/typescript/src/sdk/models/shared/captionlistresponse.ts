@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Caption } from "./caption";
 
 
+
 export class CaptionListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=eventId" })
+  @SpeakeasyMetadata({ data: "json, name=eventId" })
   eventId?: string;
 
-  @Metadata({ data: "json, name=items", elemType: shared.Caption })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Caption })
   items?: Caption[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=visitorId" })
+  @SpeakeasyMetadata({ data: "json, name=visitorId" })
   visitorId?: string;
 }

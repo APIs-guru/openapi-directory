@@ -11,6 +11,8 @@ type UserInfoProviderUserInfo struct {
 	ScreenName  *string `json:"screenName,omitempty"`
 }
 
+// UserInfo
+// Template for an individual account info.
 type UserInfo struct {
 	CreatedAt         *string                    `json:"createdAt,omitempty"`
 	CustomAttributes  *string                    `json:"customAttributes,omitempty"`

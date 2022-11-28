@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -13,14 +14,14 @@ class ActivityListReposStarredByAuthenticatedUserQueryParams:
 
 @dataclass
 class ActivityListReposStarredByAuthenticatedUserRequest:
-    query_params: ActivityListReposStarredByAuthenticatedUserQueryParams = field(default=None)
+    query_params: ActivityListReposStarredByAuthenticatedUserQueryParams = field()
     
 
 @dataclass
 class ActivityListReposStarredByAuthenticatedUserResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     repositories: Optional[List[shared.Repository]] = field(default=None)
     starred_repositories: Optional[List[shared.StarredRepository]] = field(default=None)

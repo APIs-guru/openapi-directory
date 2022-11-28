@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateEnvironmentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
   environmentId: string;
 }
 
 
 export class UpdateEnvironmentRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   updateEnvironmentModel?: shared.UpdateEnvironmentModel;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   updateEnvironmentModel1?: shared.UpdateEnvironmentModel;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   updateEnvironmentModel2?: shared.UpdateEnvironmentModel;
 }
 
 
 export class UpdateEnvironmentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateEnvironmentPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: UpdateEnvironmentRequests;
 }
 
 
 export class UpdateEnvironmentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   environmentModel?: shared.EnvironmentModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   environmentModelHaljson?: shared.EnvironmentModelHaljson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

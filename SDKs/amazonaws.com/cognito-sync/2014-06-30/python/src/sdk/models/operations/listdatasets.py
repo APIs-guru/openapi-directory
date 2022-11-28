@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListDatasetsPathParams:
-    identity_id: str = field(default=None, metadata={'path_param': { 'field_name': 'IdentityId', 'style': 'simple', 'explode': False }})
-    identity_pool_id: str = field(default=None, metadata={'path_param': { 'field_name': 'IdentityPoolId', 'style': 'simple', 'explode': False }})
+    identity_id: str = field(metadata={'path_param': { 'field_name': 'IdentityId', 'style': 'simple', 'explode': False }})
+    identity_pool_id: str = field(metadata={'path_param': { 'field_name': 'IdentityPoolId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,18 +31,18 @@ class ListDatasetsHeaders:
 
 @dataclass
 class ListDatasetsRequest:
-    path_params: ListDatasetsPathParams = field(default=None)
-    query_params: ListDatasetsQueryParams = field(default=None)
-    headers: ListDatasetsHeaders = field(default=None)
+    headers: ListDatasetsHeaders = field()
+    path_params: ListDatasetsPathParams = field()
+    query_params: ListDatasetsQueryParams = field()
     
 
 @dataclass
 class ListDatasetsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_error_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     list_datasets_response: Optional[shared.ListDatasetsResponse] = field(default=None)
     not_authorized_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

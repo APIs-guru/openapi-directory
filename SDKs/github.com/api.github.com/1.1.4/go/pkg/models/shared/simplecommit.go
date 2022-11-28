@@ -14,6 +14,8 @@ type SimpleCommitCommitter struct {
 	Name  string `json:"name"`
 }
 
+// SimpleCommit
+// Simple Commit
 type SimpleCommit struct {
 	Author    SimpleCommitAuthor    `json:"author"`
 	Committer SimpleCommitCommitter `json:"committer"`

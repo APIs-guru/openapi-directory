@@ -15,6 +15,8 @@ const (
 	AggregateRequestFilteredDataQualityStandardEnumDataQualityBloodGlucoseIso151972013 AggregateRequestFilteredDataQualityStandardEnum = "dataQualityBloodGlucoseIso151972013"
 )
 
+// AggregateRequest
+// Next id: 10
 type AggregateRequest struct {
 	AggregateBy                 []AggregateBy                                     `json:"aggregateBy,omitempty"`
 	BucketByActivitySegment     *BucketByActivity                                 `json:"bucketByActivitySegment,omitempty"`

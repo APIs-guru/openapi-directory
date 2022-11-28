@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,27 +22,27 @@ class CreateProjectHeaders:
 @dataclass_json
 @dataclass
 class CreateProjectRequestBody:
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    portal_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'portalId' }})
-    project_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'projectDescription' }})
-    project_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'projectName' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    portal_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('portalId') }})
+    project_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('projectName') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    project_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('projectDescription') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateProjectRequest:
-    headers: CreateProjectHeaders = field(default=None)
-    request: CreateProjectRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateProjectHeaders = field()
+    request: CreateProjectRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateProjectResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_project_response: Optional[shared.CreateProjectResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

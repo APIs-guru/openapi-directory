@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,50 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_car_dealer_inventory_active(self, request: operations.GetCarDealerInventoryActiveRequest) -> operations.GetCarDealerInventoryActiveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get dealers active inventory
+        Get dealers active inventory
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/car/dealer/inventory/active"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -51,15 +76,18 @@ class SDK:
 
     
     def get_dealer_heavy_equipment_id_(self, request: operations.GetDealerHeavyEquipmentIDRequest) -> operations.GetDealerHeavyEquipmentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Dealer by id
+        Get a particular dealer's information by its id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/dealer/heavy-equipment/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -78,15 +106,18 @@ class SDK:
 
     
     def get_dealer_motorcycle_id_(self, request: operations.GetDealerMotorcycleIDRequest) -> operations.GetDealerMotorcycleIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Dealer by id
+        Get a particular dealer's information by its id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/dealer/motorcycle/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -105,15 +136,18 @@ class SDK:
 
     
     def get_dealer_rv_id_(self, request: operations.GetDealerRvIDRequest) -> operations.GetDealerRvIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Dealer by id
+        Get a particular dealer's information by its id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/dealer/rv/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -132,15 +166,18 @@ class SDK:
 
     
     def get_dealers_heavy_equipment(self, request: operations.GetDealersHeavyEquipmentRequest) -> operations.GetDealersHeavyEquipmentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Find car dealers around
+        The dealers API returns a list of dealers around a given point and radius.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/dealers/heavy-equipment"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -159,15 +196,18 @@ class SDK:
 
     
     def get_dealers_motorcycle(self, request: operations.GetDealersMotorcycleRequest) -> operations.GetDealersMotorcycleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Find car dealers around
+        The dealers API returns a list of dealers around a given point and radius.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/dealers/motorcycle"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -186,15 +226,18 @@ class SDK:
 
     
     def get_dealers_rv(self, request: operations.GetDealersRvRequest) -> operations.GetDealersRvResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Find car dealers around
+        The dealers API returns a list of dealers around a given point and radius.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/dealers/rv"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -213,15 +256,18 @@ class SDK:
 
     
     def get_listing_car_auction_id_(self, request: operations.GetListingCarAuctionIDRequest) -> operations.GetListingCarAuctionIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Listing by id
+        Get a particular auction listing by its id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/listing/car/auction/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -240,15 +286,18 @@ class SDK:
 
     
     def get_listing_car_auction_id_extra(self, request: operations.GetListingCarAuctionIDExtraRequest) -> operations.GetListingCarAuctionIDExtraResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Long text Listings attributes for Listing with the given id
+        Get listing options, features, seller comments
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/listing/car/auction/{id}/extra", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -267,15 +316,18 @@ class SDK:
 
     
     def get_listing_car_auction_id_media(self, request: operations.GetListingCarAuctionIDMediaRequest) -> operations.GetListingCarAuctionIDMediaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Listing media by id
+        Get listing media (photo, photos) by id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/listing/car/auction/{id}/media", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -294,15 +346,18 @@ class SDK:
 
     
     def get_listing_car_fsbo_id_(self, request: operations.GetListingCarFsboIDRequest) -> operations.GetListingCarFsboIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Listing by id
+        Get a particular private party listing by its id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/listing/car/fsbo/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -321,15 +376,18 @@ class SDK:
 
     
     def get_listing_car_fsbo_id_extra(self, request: operations.GetListingCarFsboIDExtraRequest) -> operations.GetListingCarFsboIDExtraResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Long text Listings attributes for Listing with the given id
+        Get listing options, features, seller comments
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/listing/car/fsbo/{id}/extra", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -348,15 +406,18 @@ class SDK:
 
     
     def get_listing_car_fsbo_id_media(self, request: operations.GetListingCarFsboIDMediaRequest) -> operations.GetListingCarFsboIDMediaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Listing media by id
+        Get listing media (photo, photos) by id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/listing/car/fsbo/{id}/media", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -375,15 +436,18 @@ class SDK:
 
     
     def get_listing_car_id_extra(self, request: operations.GetListingCarIDExtraRequest) -> operations.GetListingCarIDExtraResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Long text Listings attributes for Listing with the given id
+        Get listing options, features, seller comments
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/listing/car/{id}/extra", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -402,15 +466,18 @@ class SDK:
 
     
     def get_listing_car_id_media(self, request: operations.GetListingCarIDMediaRequest) -> operations.GetListingCarIDMediaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Listing media by id
+        Get listing media (photo, photos) by id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/listing/car/{id}/media", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -429,15 +496,18 @@ class SDK:
 
     
     def get_listing_heavy_equipment_id_(self, request: operations.GetListingHeavyEquipmentIDRequest) -> operations.GetListingHeavyEquipmentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Heavy equipment listing by id
+        Get a particular Heavy equipment listing by its id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/listing/heavy-equipment/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -456,15 +526,18 @@ class SDK:
 
     
     def get_listing_heavy_equipment_id_extra(self, request: operations.GetListingHeavyEquipmentIDExtraRequest) -> operations.GetListingHeavyEquipmentIDExtraResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Long text Heavy equipment Listings attributes for Listing with the given id
+        Get Heavy equipment listing options, features, seller comments
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/listing/heavy-equipment/{id}/extra", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -483,15 +556,18 @@ class SDK:
 
     
     def get_listing_heavy_equipment_id_media(self, request: operations.GetListingHeavyEquipmentIDMediaRequest) -> operations.GetListingHeavyEquipmentIDMediaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Listing media by id
+        Get listing media (photo, photos) by id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/listing/heavy-equipment/{id}/media", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -510,15 +586,18 @@ class SDK:
 
     
     def get_listing_motorcycle_id_(self, request: operations.GetListingMotorcycleIDRequest) -> operations.GetListingMotorcycleIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Motorcycle listing by id
+        Get a particular Motorcycle listing by its id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/listing/motorcycle/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -537,15 +616,18 @@ class SDK:
 
     
     def get_listing_motorcycle_id_extra(self, request: operations.GetListingMotorcycleIDExtraRequest) -> operations.GetListingMotorcycleIDExtraResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Long text Motorcycle Listings attributes for Listing with the given id
+        Get Motorcycle listing options, features, seller comments
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/listing/motorcycle/{id}/extra", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -564,15 +646,18 @@ class SDK:
 
     
     def get_listing_motorcycle_id_media(self, request: operations.GetListingMotorcycleIDMediaRequest) -> operations.GetListingMotorcycleIDMediaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Motorcycle listing media by id
+        Get Motorcycle listing media (photo, photos) by id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/listing/motorcycle/{id}/media", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -591,15 +676,18 @@ class SDK:
 
     
     def get_listing_rv_id_(self, request: operations.GetListingRvIDRequest) -> operations.GetListingRvIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""RV listing by id
+        Get a particular RV listing by its id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/listing/rv/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -618,15 +706,18 @@ class SDK:
 
     
     def get_listing_rv_id_extra(self, request: operations.GetListingRvIDExtraRequest) -> operations.GetListingRvIDExtraResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Long text RV Listings attributes for Listing with the given id
+        Get RV listing options, features, seller comments
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/listing/rv/{id}/extra", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -645,15 +736,18 @@ class SDK:
 
     
     def get_listing_rv_id_media(self, request: operations.GetListingRvIDMediaRequest) -> operations.GetListingRvIDMediaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Listing media by id
+        Get listing media (photo, photos) by id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/listing/rv/{id}/media", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -672,15 +766,29 @@ class SDK:
 
     
     def get_search_car_auction_active(self, request: operations.GetSearchCarAuctionActiveRequest) -> operations.GetSearchCarAuctionActiveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets active auction car listings for the given search criteria
+        This API produces a list of currently active auction cars from the market for the given search criteria. The API results are limited to allow pagination upto 5000 rows. 
+         The search API facilitates the following use cases - 
+        1. Search Cars around a given geo-point within a given radius 
+        2. Search cars for a specific year / make / model or combination of these 
+        3. Search cars matching multiple year, make, model combinatins in the same search request
+        4. Filter results by most car specification attributes
+        5. Search for similar cars by VIN or Taxonomy VIN 
+        6. Filter cars within a given price / miles / days on market (dom) range
+        7. Specify a sort order for the results on price / miles / dom / listed date 
+        8. Search cars for a given City / State combination 
+        9. Get Facets to build the search drill downs 
+        10. Get Market averages for price/miles/dom for your search
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search/car/auction/active"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -699,15 +807,29 @@ class SDK:
 
     
     def get_search_car_fsbo_active(self, request: operations.GetSearchCarFsboActiveRequest) -> operations.GetSearchCarFsboActiveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets active private party car listings for the given search criteria
+        This API produces a list of currently active FSBO cars from the market for the given search criteria. The API results are limited to allow pagination upto 5000 rows. 
+         The search API facilitates the following use cases - 
+        1. Search Cars around a given geo-point within a given radius 
+        2. Search cars for a specific year / make / model or combination of these 
+        3. Search cars matching multiple year, make, model combinatins in the same search request
+        4. Filter results by most car specification attributes
+        5. Search for similar cars by VIN or Taxonomy VIN 
+        6. Filter cars within a given price / miles / days on market (dom) range
+        7. Specify a sort order for the results on price / miles / dom / listed date 
+        8. Search cars for a given City / State combination 
+        9. Get Facets to build the search drill downs 
+        10. Get Market averages for price/miles/dom for your search
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search/car/fsbo/active"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -726,15 +848,29 @@ class SDK:
 
     
     def get_search_car_incentive_oem(self, request: operations.GetSearchCarIncentiveOemRequest) -> operations.GetSearchCarIncentiveOemResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets oem incentive listings for the given search criteria
+        This endpoint is the meat of the API and serves many purposes. This API produces a list of currently active oem incentive from the market for the given search criteria. The API results are limited to allow pagination upto 10000 rows. 
+         The search API facilitates the following use cases - 
+        1. Search Cars around a given geo-point within a given radius 
+        2. Search cars for a specific year / make / model or combination of these 
+        3. Search cars matching multiple year, make, model combinatins in the same search request
+        4. Filter results by most car specification attributes
+        5. Search for similar cars by VIN or Taxonomy VIN 
+        6. Filter cars within a given price / miles / days on market (dom) range
+        7. Specify a sort order for the results on price / miles / dom / listed date 
+        8. Search cars for a given City / State combination 
+        9. Get Facets to build the search drill downs 
+        10. Get Market averages for price/miles/dom for your search
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search/car/incentive/oem"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -753,15 +889,18 @@ class SDK:
 
     
     def get_search_car_recents(self, request: operations.GetSearchCarRecentsRequest) -> operations.GetSearchCarRecentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets Recent car listings for the given search criteria
+        This API produces a list of recently active (past 90 days) cars from the market for the given search criteria
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search/car/recents"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -780,15 +919,28 @@ class SDK:
 
     
     def get_search_heavy_equipment_active(self, request: operations.GetSearchHeavyEquipmentActiveRequest) -> operations.GetSearchHeavyEquipmentActiveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets active heavy equipment listings for the given search criteria
+        This endpoint provides search on heavy equipment inventory. This API produces a list of currently active heavy equipments from the market for the given search criteria. The API results are limited to allow pagination upto 5000 rows. 
+         The search API facilitates the following use cases - 
+        1. Search heavy equipments around a given geo-point within a given radius 
+        2. Search heavy equipments for a specific year / make / model or combination of these 
+        3. Search heavy equipments matching multiple year, make, model combinatins in the same search request
+        4. Filter results by most heavy equipment specification attributes
+        5. Filter heavy equipments within a given price / miles range
+        6. Specify a sort order for the results on price / miles / listed date 
+        7. Search heavy equipments for a given City / State combination 
+        8. Get Facets to build the search drill downs 
+        9. Get Market averages for price/miles for your search
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search/heavy-equipment/active"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -807,15 +959,18 @@ class SDK:
 
     
     def get_search_heavy_equipment_auto_complete(self, request: operations.GetSearchHeavyEquipmentAutoCompleteRequest) -> operations.GetSearchHeavyEquipmentAutoCompleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""API for auto-completion of inputs
+        Auto-complete the inputs of your end users
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search/heavy-equipment/auto-complete"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -834,15 +989,29 @@ class SDK:
 
     
     def get_search_motorcycle_active(self, request: operations.GetSearchMotorcycleActiveRequest) -> operations.GetSearchMotorcycleActiveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets active motorcycle listings for the given search criteria
+        This endpoint provides search on motorcycle inventory. This API produces a list of currently active motorcycles from the market for the given search criteria. The API results are limited to allow pagination upto 5000 rows. 
+         The search API facilitates the following use cases - 
+        1. Search motorcycles around a given geo-point within a given radius 
+        2. Search motorcycles for a specific year / make / model or combination of these 
+        3. Search motorcycles matching multiple year, make, model combinatins in the same search request
+        4. Filter results by most motorcycle specification attributes
+        5. Search for similar motorcycles by VIN or Taxonomy VIN 
+        6. Filter motorcycles within a given price / miles range
+        7. Specify a sort order for the results on price / miles / listed date 
+        8. Search motorcycles for a given City / State combination 
+        9. Get Facets to build the search drill downs 
+        10. Get Market averages for price/miles for your search
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search/motorcycle/active"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -861,15 +1030,18 @@ class SDK:
 
     
     def get_search_motorcycle_auto_complete(self, request: operations.GetSearchMotorcycleAutoCompleteRequest) -> operations.GetSearchMotorcycleAutoCompleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""API for auto-completion of inputs
+        Auto-complete the inputs of your end users
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search/motorcycle/auto-complete"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -888,15 +1060,28 @@ class SDK:
 
     
     def get_search_rv_active(self, request: operations.GetSearchRvActiveRequest) -> operations.GetSearchRvActiveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets active RV listings for the given search criteria
+        This endpoint provides search on RV inventory. This API produces a list of currently active RV from the market for the given search criteria. The API results are limited to allow pagination upto 5000 rows. 
+         The search API facilitates the following use cases - 
+        1. Search RV around a given geo-point within a given radius 
+        2. Search RV for a specific year / make / model or combination of these 
+        3. Search RV matching multiple year, make, model combinatins in the same search request
+        4. Filter results by most RV specification attributes
+        5. Filter RV within a given price / miles range
+        6. Specify a sort order for the results on price / miles / listed date 
+        7. Search RV for a given City / State combination 
+        8. Get Facets to build the search drill downs 
+        9. Get Market averages for price/miles for your search
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search/rv/active"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -915,15 +1100,18 @@ class SDK:
 
     
     def get_search_rv_auto_complete(self, request: operations.GetSearchRvAutoCompleteRequest) -> operations.GetSearchRvAutoCompleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""API for auto-completion of inputs
+        Auto-complete the inputs of your end users
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search/rv/auto-complete"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -942,15 +1130,18 @@ class SDK:
 
     
     def get_specs_car_auto_complete(self, request: operations.GetSpecsCarAutoCompleteRequest) -> operations.GetSpecsCarAutoCompleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""API for auto-completion of inputs based on taxonomy
+        Auto-complete the inputs of your end users, not from active set but from taxonomy (decoder database)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/specs/car/auto-complete"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -969,15 +1160,18 @@ class SDK:
 
     
     def auto_complete(self, request: operations.AutoCompleteRequest) -> operations.AutoCompleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""API for auto-completion of inputs
+        Auto-complete the inputs of your end users
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search/car/auto-complete"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -996,15 +1190,18 @@ class SDK:
 
     
     def crm_check(self, request: operations.CrmCheckRequest) -> operations.CrmCheckResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""CRM check of a particular vin
+        Check whether particular vin has had a listing after stipulated date or not
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/crm_check/car/{vin}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1023,15 +1220,18 @@ class SDK:
 
     
     def dealer_search(self, request: operations.DealerSearchRequest) -> operations.DealerSearchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Find car dealers around
+        The dealers API returns a list of dealers around a given point and radius.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/dealers/car"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1050,15 +1250,18 @@ class SDK:
 
     
     def decode(self, request: operations.DecodeRequest) -> operations.DecodeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""VIN Decoder
+        Get the basic information on specifications for a car identified by a valid VIN
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/decode/car/{vin}/specs", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1077,15 +1280,18 @@ class SDK:
 
     
     def decode_via_epi(self, request: operations.DecodeViaEpiRequest) -> operations.DecodeViaEpiResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""EPI VIN Decoder
+        Get the basic information on specifications for a car identified by a valid VIN from EPI's decoder
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/decode/car/epi/{vin}/specs", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1104,15 +1310,18 @@ class SDK:
 
     
     def get_cached_image(self, request: operations.GetCachedImageRequest) -> operations.GetCachedImageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Fetch cached image
+        Fetch the cached car image
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/image/cache/car/{listingID}/{imageID}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1131,15 +1340,18 @@ class SDK:
 
     
     def get_car_history(self, request: operations.GetCarHistoryRequest) -> operations.GetCarHistoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a cars online listing history
+        The history API returns online listing history for a car identified by its VIN. History listings are sorted in the descending order of the listing date / last seen date
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/history/car/{vin}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1158,15 +1370,18 @@ class SDK:
 
     
     def get_daily_stats(self, request: operations.GetDailyStatsRequest) -> operations.GetDailyStatsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Price, Miles and Days on Market stats
+        National, state and city level stats for price, miles and dom
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/stats/car"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1185,15 +1400,18 @@ class SDK:
 
     
     def get_dealer(self, request: operations.GetDealerRequest) -> operations.GetDealerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Dealer by id
+        Get a particular dealer's information by its id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/dealer/car/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1212,15 +1430,18 @@ class SDK:
 
     
     def get_listing(self, request: operations.GetListingRequest) -> operations.GetListingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Listing by id
+        Get a particular dealer listing by its id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/listing/car/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1239,15 +1460,18 @@ class SDK:
 
     
     def get_mds(self, request: operations.GetMdsRequest) -> operations.GetMdsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Market Days Supply
+        Get the basic information on specifications for a car identified by a valid VIN
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/mds/car"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1266,15 +1490,18 @@ class SDK:
 
     
     def get_popular_cars(self, request: operations.GetPopularCarsRequest) -> operations.GetPopularCarsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get make model wise top 50 popular cars on national, state, city level
+        Get make model wise top 50 popular cars on national, state, city level
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/popular/cars"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1293,15 +1520,18 @@ class SDK:
 
     
     def get_recall_history(self, request: operations.GetRecallHistoryRequest) -> operations.GetRecallHistoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Recall info by vin
+        Get a particular recall information for a vin
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/car/recall/{vin}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1320,15 +1550,18 @@ class SDK:
 
     
     def get_sales_count(self, request: operations.GetSalesCountRequest) -> operations.GetSalesCountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get sales count by make, model, year, trim or taxonomy vin
+        Get a sales count for city, state or national level by make, model, year, trim or taxonomy vin
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/sales/car"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1347,15 +1580,18 @@ class SDK:
 
     
     def get_taxonomy_terms(self, request: operations.GetTaxonomyTermsRequest) -> operations.GetTaxonomyTermsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""API for getting terms from taxonomy
+        Facets on taxonomy
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/specs/car/terms"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1374,24 +1610,24 @@ class SDK:
 
     
     def rank_car(self, request: operations.RankCarRequest) -> operations.RankCarResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Compute relative rank for car listings.
+        Computer rank for car listings based on inputs provided.Weights for ranking parameters can also be provided.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search/car/active/rank/listings"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1410,15 +1646,29 @@ class SDK:
 
     
     def search(self, request: operations.SearchRequest) -> operations.SearchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets active car listings for the given search criteria
+        This endpoint is the meat of the API and serves many purposes. This API produces a list of currently active cars from the market for the given search criteria. The API results are limited to allow pagination upto 10000 rows. 
+         The search API facilitates the following use cases - 
+        1. Search Cars around a given geo-point within a given radius 
+        2. Search cars for a specific year / make / model or combination of these 
+        3. Search cars matching multiple year, make, model combinatins in the same search request
+        4. Filter results by most car specification attributes
+        5. Search for similar cars by VIN or Taxonomy VIN 
+        6. Filter cars within a given price / miles / days on market (dom) range
+        7. Specify a sort order for the results on price / miles / dom / listed date 
+        8. Search cars for a given City / State combination 
+        9. Get Facets to build the search drill downs 
+        10. Get Market averages for price/miles/dom for your search
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search/car/active"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1437,24 +1687,24 @@ class SDK:
 
     
     def search_and_rank_car(self, request: operations.SearchAndRankCarRequest) -> operations.SearchAndRankCarResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Compute relative rank for car listings.
+        Computer rank for car listings based on inputs provided.Weights for ranking parameters can also be provided.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search/car/active/rank"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

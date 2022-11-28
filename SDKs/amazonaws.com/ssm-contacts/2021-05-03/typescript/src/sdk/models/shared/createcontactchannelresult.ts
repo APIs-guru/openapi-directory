@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateContactChannelResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContactChannelArn" })
+  @SpeakeasyMetadata({ data: "json, name=ContactChannelArn" })
   contactChannelArn: string;
 }

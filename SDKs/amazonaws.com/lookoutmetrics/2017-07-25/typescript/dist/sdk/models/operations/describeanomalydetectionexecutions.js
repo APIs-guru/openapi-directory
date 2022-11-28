@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DescribeAnomalyDetectionExecutionsQueryParams = /** @class */ (function (_super) {
     __extends(DescribeAnomalyDetectionExecutionsQueryParams, _super);
@@ -30,11 +30,11 @@ var DescribeAnomalyDetectionExecutionsQueryParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MaxResults" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxResults" }),
         __metadata("design:type", String)
     ], DescribeAnomalyDetectionExecutionsQueryParams.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
         __metadata("design:type", String)
     ], DescribeAnomalyDetectionExecutionsQueryParams.prototype, "nextToken", void 0);
     return DescribeAnomalyDetectionExecutionsQueryParams;
@@ -46,31 +46,31 @@ var DescribeAnomalyDetectionExecutionsHeaders = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], DescribeAnomalyDetectionExecutionsHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], DescribeAnomalyDetectionExecutionsHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], DescribeAnomalyDetectionExecutionsHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], DescribeAnomalyDetectionExecutionsHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], DescribeAnomalyDetectionExecutionsHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], DescribeAnomalyDetectionExecutionsHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], DescribeAnomalyDetectionExecutionsHeaders.prototype, "xAmzSignedHeaders", void 0);
     return DescribeAnomalyDetectionExecutionsHeaders;
@@ -82,19 +82,19 @@ var DescribeAnomalyDetectionExecutionsRequestBody = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AnomalyDetectorArn" }),
+        SpeakeasyMetadata({ data: "json, name=AnomalyDetectorArn" }),
         __metadata("design:type", String)
     ], DescribeAnomalyDetectionExecutionsRequestBody.prototype, "anomalyDetectorArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], DescribeAnomalyDetectionExecutionsRequestBody.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], DescribeAnomalyDetectionExecutionsRequestBody.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=Timestamp" }),
+        SpeakeasyMetadata({ data: "json, name=Timestamp" }),
         __metadata("design:type", String)
     ], DescribeAnomalyDetectionExecutionsRequestBody.prototype, "timestamp", void 0);
     return DescribeAnomalyDetectionExecutionsRequestBody;
@@ -106,15 +106,15 @@ var DescribeAnomalyDetectionExecutionsRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DescribeAnomalyDetectionExecutionsQueryParams)
     ], DescribeAnomalyDetectionExecutionsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DescribeAnomalyDetectionExecutionsHeaders)
     ], DescribeAnomalyDetectionExecutionsRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", DescribeAnomalyDetectionExecutionsRequestBody)
     ], DescribeAnomalyDetectionExecutionsRequest.prototype, "request", void 0);
     return DescribeAnomalyDetectionExecutionsRequest;
@@ -126,35 +126,35 @@ var DescribeAnomalyDetectionExecutionsResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], DescribeAnomalyDetectionExecutionsResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DescribeAnomalyDetectionExecutionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.DescribeAnomalyDetectionExecutionsResponse)
     ], DescribeAnomalyDetectionExecutionsResponse.prototype, "describeAnomalyDetectionExecutionsResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], DescribeAnomalyDetectionExecutionsResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], DescribeAnomalyDetectionExecutionsResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DescribeAnomalyDetectionExecutionsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], DescribeAnomalyDetectionExecutionsResponse.prototype, "tooManyRequestsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], DescribeAnomalyDetectionExecutionsResponse.prototype, "validationException", void 0);
     return DescribeAnomalyDetectionExecutionsResponse;

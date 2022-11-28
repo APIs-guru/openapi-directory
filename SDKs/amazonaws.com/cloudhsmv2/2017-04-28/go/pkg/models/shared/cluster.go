@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Cluster
+// Contains information about an AWS CloudHSM cluster.
 type Cluster struct {
 	BackupPolicy          *BackupPolicyEnum      `json:"BackupPolicy,omitempty"`
 	BackupRetentionPolicy *BackupRetentionPolicy `json:"BackupRetentionPolicy,omitempty"`

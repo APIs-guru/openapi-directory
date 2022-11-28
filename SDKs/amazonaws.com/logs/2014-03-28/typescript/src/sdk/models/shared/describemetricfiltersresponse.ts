@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricFilter } from "./metricfilter";
 
 
+
 export class DescribeMetricFiltersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metricFilters", elemType: shared.MetricFilter })
+  @SpeakeasyMetadata({ data: "json, name=metricFilters", elemType: MetricFilter })
   metricFilters?: MetricFilter[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

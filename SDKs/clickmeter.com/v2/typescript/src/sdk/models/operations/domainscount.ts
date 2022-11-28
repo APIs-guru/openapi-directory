@@ -1,39 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum DomainsCountTypeEnum {
-    System = "system"
-,    Go = "go"
-,    Personal = "personal"
-,    Dedicated = "dedicated"
+    System = "system",
+    Go = "go",
+    Personal = "personal",
+    Dedicated = "dedicated"
 }
 
 
 export class DomainsCountQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: DomainsCountTypeEnum;
 }
 
 
 export class DomainsCountRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DomainsCountQueryParams;
 }
 
 
 export class DomainsCountResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiCoreResponsesCountResponce?: shared.ApiCoreResponsesCountResponce;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

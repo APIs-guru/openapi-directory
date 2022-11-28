@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HttpHeader } from "./httpheader";
+
 
 
 // HttpGetAction
@@ -8,15 +8,15 @@ import { HttpHeader } from "./httpheader";
  * Not supported by Cloud Run HTTPGetAction describes an action based on HTTP Get requests.
 **/
 export class HttpGetAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host?: string;
 
-  @Metadata({ data: "json, name=httpHeaders", elemType: shared.HttpHeader })
+  @SpeakeasyMetadata({ data: "json, name=httpHeaders", elemType: HttpHeader })
   httpHeaders?: HttpHeader[];
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=scheme" })
+  @SpeakeasyMetadata({ data: "json, name=scheme" })
   scheme?: string;
 }

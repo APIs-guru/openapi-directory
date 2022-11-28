@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingConversionsBatchupdatePathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +29,21 @@ class DfareportingConversionsBatchupdateQueryParams:
 
 @dataclass
 class DfareportingConversionsBatchupdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingConversionsBatchupdateRequest:
-    path_params: DfareportingConversionsBatchupdatePathParams = field(default=None)
-    query_params: DfareportingConversionsBatchupdateQueryParams = field(default=None)
+    path_params: DfareportingConversionsBatchupdatePathParams = field()
+    query_params: DfareportingConversionsBatchupdateQueryParams = field()
+    security: DfareportingConversionsBatchupdateSecurity = field()
     request: Optional[shared.ConversionsBatchUpdateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DfareportingConversionsBatchupdateSecurity = field(default=None)
     
 
 @dataclass
 class DfareportingConversionsBatchupdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     conversions_batch_update_response: Optional[shared.ConversionsBatchUpdateResponse] = field(default=None)
-    status_code: int = field(default=None)
     

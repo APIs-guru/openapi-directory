@@ -22,12 +22,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ReauthSettingsMethodEnum;
 (function (ReauthSettingsMethodEnum) {
     ReauthSettingsMethodEnum["MethodUnspecified"] = "METHOD_UNSPECIFIED";
     ReauthSettingsMethodEnum["Login"] = "LOGIN";
     ReauthSettingsMethodEnum["SecureKey"] = "SECURE_KEY";
+    ReauthSettingsMethodEnum["EnrolledSecondFactors"] = "ENROLLED_SECOND_FACTORS";
 })(ReauthSettingsMethodEnum || (ReauthSettingsMethodEnum = {}));
 export var ReauthSettingsPolicyTypeEnum;
 (function (ReauthSettingsPolicyTypeEnum) {
@@ -45,15 +46,15 @@ var ReauthSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=maxAge" }),
+        SpeakeasyMetadata({ data: "json, name=maxAge" }),
         __metadata("design:type", String)
     ], ReauthSettings.prototype, "maxAge", void 0);
     __decorate([
-        Metadata({ data: "json, name=method" }),
+        SpeakeasyMetadata({ data: "json, name=method" }),
         __metadata("design:type", String)
     ], ReauthSettings.prototype, "method", void 0);
     __decorate([
-        Metadata({ data: "json, name=policyType" }),
+        SpeakeasyMetadata({ data: "json, name=policyType" }),
         __metadata("design:type", String)
     ], ReauthSettings.prototype, "policyType", void 0);
     return ReauthSettings;

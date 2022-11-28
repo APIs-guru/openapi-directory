@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CustomerPlanViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=locationId" })
+  @SpeakeasyMetadata({ data: "json, name=locationId" })
   locationId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=objectName" })
+  @SpeakeasyMetadata({ data: "json, name=objectName" })
   objectName?: string;
 
-  @Metadata({ data: "json, name=serviceGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceGroupId" })
   serviceGroupId?: string;
 
-  @Metadata({ data: "json, name=stripePlanId" })
+  @SpeakeasyMetadata({ data: "json, name=stripePlanId" })
   stripePlanId?: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }

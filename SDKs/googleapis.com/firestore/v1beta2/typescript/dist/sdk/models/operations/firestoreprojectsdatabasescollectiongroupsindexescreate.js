@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FirestoreProjectsDatabasesCollectionGroupsIndexesCreatePathParams = /** @class */ (function (_super) {
     __extends(FirestoreProjectsDatabasesCollectionGroupsIndexesCreatePathParams, _super);
@@ -30,7 +30,7 @@ var FirestoreProjectsDatabasesCollectionGroupsIndexesCreatePathParams = /** @cla
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreatePathParams.prototype, "parent", void 0);
     return FirestoreProjectsDatabasesCollectionGroupsIndexesCreatePathParams;
@@ -42,47 +42,47 @@ var FirestoreProjectsDatabasesCollectionGroupsIndexesCreateQueryParams = /** @cl
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateQueryParams.prototype, "uploadProtocol", void 0);
     return FirestoreProjectsDatabasesCollectionGroupsIndexesCreateQueryParams;
@@ -94,11 +94,11 @@ var FirestoreProjectsDatabasesCollectionGroupsIndexesCreateSecurityOption1 = /**
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateSecurityOption1.prototype, "oauth2c", void 0);
     return FirestoreProjectsDatabasesCollectionGroupsIndexesCreateSecurityOption1;
@@ -110,11 +110,11 @@ var FirestoreProjectsDatabasesCollectionGroupsIndexesCreateSecurityOption2 = /**
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateSecurityOption2.prototype, "oauth2c", void 0);
     return FirestoreProjectsDatabasesCollectionGroupsIndexesCreateSecurityOption2;
@@ -126,11 +126,11 @@ var FirestoreProjectsDatabasesCollectionGroupsIndexesCreateSecurity = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", FirestoreProjectsDatabasesCollectionGroupsIndexesCreateSecurityOption1)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", FirestoreProjectsDatabasesCollectionGroupsIndexesCreateSecurityOption2)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateSecurity.prototype, "option2", void 0);
     return FirestoreProjectsDatabasesCollectionGroupsIndexesCreateSecurity;
@@ -142,19 +142,19 @@ var FirestoreProjectsDatabasesCollectionGroupsIndexesCreateRequest = /** @class 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FirestoreProjectsDatabasesCollectionGroupsIndexesCreatePathParams)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FirestoreProjectsDatabasesCollectionGroupsIndexesCreateQueryParams)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.GoogleFirestoreAdminV1beta2Index)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FirestoreProjectsDatabasesCollectionGroupsIndexesCreateSecurity)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateRequest.prototype, "security", void 0);
     return FirestoreProjectsDatabasesCollectionGroupsIndexesCreateRequest;
@@ -166,15 +166,15 @@ var FirestoreProjectsDatabasesCollectionGroupsIndexesCreateResponse = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GoogleLongrunningOperation)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateResponse.prototype, "googleLongrunningOperation", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FirestoreProjectsDatabasesCollectionGroupsIndexesCreateResponse.prototype, "statusCode", void 0);
     return FirestoreProjectsDatabasesCollectionGroupsIndexesCreateResponse;

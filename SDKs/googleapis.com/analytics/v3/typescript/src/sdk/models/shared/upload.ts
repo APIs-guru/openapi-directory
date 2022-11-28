@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Upload
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Metadata returned for an upload operation.
 **/
 export class Upload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=customDataSourceId" })
+  @SpeakeasyMetadata({ data: "json, name=customDataSourceId" })
   customDataSourceId?: string;
 
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors?: string[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=uploadTime" })
+  @SpeakeasyMetadata({ data: "json, name=uploadTime" })
   uploadTime?: Date;
 }

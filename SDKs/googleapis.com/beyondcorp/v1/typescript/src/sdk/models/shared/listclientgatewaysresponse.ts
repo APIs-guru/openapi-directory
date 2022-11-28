@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClientGateway } from "./clientgateway";
+
 
 
 // ListClientGatewaysResponse
@@ -8,12 +8,12 @@ import { ClientGateway } from "./clientgateway";
  * Message for response to listing ClientGateways.
 **/
 export class ListClientGatewaysResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientGateways", elemType: shared.ClientGateway })
+  @SpeakeasyMetadata({ data: "json, name=clientGateways", elemType: ClientGateway })
   clientGateways?: ClientGateway[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

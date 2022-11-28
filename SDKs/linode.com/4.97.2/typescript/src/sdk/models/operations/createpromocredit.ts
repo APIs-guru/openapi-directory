@@ -1,59 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreatePromoCreditRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=promo_code" })
+  @SpeakeasyMetadata({ data: "json, name=promo_code" })
   promoCode: string;
 }
 
 
-export class CreatePromoCreditSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class CreatePromoCreditSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class CreatePromoCreditSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: CreatePromoCreditSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: CreatePromoCreditSecurityOption2;
-}
-
-
-export class CreatePromoCreditRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: CreatePromoCreditRequestBody;
-
-  @Metadata()
-  security: CreatePromoCreditSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class CreatePromoCreditDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class CreatePromoCreditRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: CreatePromoCreditRequestBody;
+
+  @SpeakeasyMetadata()
+  security: CreatePromoCreditSecurity;
+}
+
+
 export class CreatePromoCreditResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   promotion?: shared.Promotion;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createPromoCreditDefaultApplicationJsonObject?: CreatePromoCreditDefaultApplicationJson;
 }

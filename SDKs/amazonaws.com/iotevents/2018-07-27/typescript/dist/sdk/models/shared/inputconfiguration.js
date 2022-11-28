@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputStatusEnum } from "./inputstatusenum";
 // InputConfiguration
 /**
@@ -34,27 +34,27 @@ var InputConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], InputConfiguration.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=inputArn" }),
+        SpeakeasyMetadata({ data: "json, name=inputArn" }),
         __metadata("design:type", String)
     ], InputConfiguration.prototype, "inputArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=inputDescription" }),
+        SpeakeasyMetadata({ data: "json, name=inputDescription" }),
         __metadata("design:type", String)
     ], InputConfiguration.prototype, "inputDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=inputName" }),
+        SpeakeasyMetadata({ data: "json, name=inputName" }),
         __metadata("design:type", String)
     ], InputConfiguration.prototype, "inputName", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdateTime" }),
         __metadata("design:type", Date)
     ], InputConfiguration.prototype, "lastUpdateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], InputConfiguration.prototype, "status", void 0);
     return InputConfiguration;

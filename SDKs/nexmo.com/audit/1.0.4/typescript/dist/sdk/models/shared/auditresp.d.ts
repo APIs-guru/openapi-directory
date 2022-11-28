@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AuditEvent } from "./auditevent";
 import { PaginationLinks } from "./paginationlinks";
 import { PaginationData } from "./paginationdata";

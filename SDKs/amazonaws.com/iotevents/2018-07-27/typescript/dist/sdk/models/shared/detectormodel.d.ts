@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DetectorModelConfiguration } from "./detectormodelconfiguration";
 import { DetectorModelDefinition } from "./detectormodeldefinition";
 /**

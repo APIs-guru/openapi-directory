@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NotificationRuleSummary
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a specified notification rule.
 **/
 export class NotificationRuleSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 }

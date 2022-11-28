@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class PutConsumerV1AppointmentsIDConfirmPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,12 +14,12 @@ class PutConsumerV1AppointmentsIDConfirmQueryParams:
 
 @dataclass
 class PutConsumerV1AppointmentsIDConfirmRequest:
-    path_params: PutConsumerV1AppointmentsIDConfirmPathParams = field(default=None)
-    query_params: PutConsumerV1AppointmentsIDConfirmQueryParams = field(default=None)
+    path_params: PutConsumerV1AppointmentsIDConfirmPathParams = field()
+    query_params: PutConsumerV1AppointmentsIDConfirmQueryParams = field()
     
 
 @dataclass
 class PutConsumerV1AppointmentsIDConfirmResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

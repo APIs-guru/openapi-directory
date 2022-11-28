@@ -1,6 +1,7 @@
 
 
+
 export enum RoutingPolicyEnum {
-    Multivalue = "MULTIVALUE"
-,    Weighted = "WEIGHTED"
+    Multivalue = "MULTIVALUE",
+    Weighted = "WEIGHTED"
 }

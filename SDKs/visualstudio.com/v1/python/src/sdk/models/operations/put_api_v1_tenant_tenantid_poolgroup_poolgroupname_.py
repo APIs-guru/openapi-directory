@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class PutAPIV1TenantTenantIDPoolGroupPoolGroupNamePathParams:
-    pool_group_name: str = field(default=None, metadata={'path_param': { 'field_name': 'poolGroupName', 'style': 'simple', 'explode': False }})
-    tenant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'tenantId', 'style': 'simple', 'explode': False }})
+    pool_group_name: str = field(metadata={'path_param': { 'field_name': 'poolGroupName', 'style': 'simple', 'explode': False }})
+    tenant_id: str = field(metadata={'path_param': { 'field_name': 'tenantId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -19,14 +19,14 @@ class PutAPIV1TenantTenantIDPoolGroupPoolGroupNameRequests:
 
 @dataclass
 class PutAPIV1TenantTenantIDPoolGroupPoolGroupNameRequest:
-    path_params: PutAPIV1TenantTenantIDPoolGroupPoolGroupNamePathParams = field(default=None)
+    path_params: PutAPIV1TenantTenantIDPoolGroupPoolGroupNamePathParams = field()
     request: Optional[PutAPIV1TenantTenantIDPoolGroupPoolGroupNameRequests] = field(default=None)
     
 
 @dataclass
 class PutAPIV1TenantTenantIDPoolGroupPoolGroupNameResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

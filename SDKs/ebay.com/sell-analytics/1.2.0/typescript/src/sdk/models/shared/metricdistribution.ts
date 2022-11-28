@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Distribution } from "./distribution";
+
 
 
 // MetricDistribution
@@ -8,9 +8,9 @@ import { Distribution } from "./distribution";
  * This complex data type describes the metric distribution by basis.
 **/
 export class MetricDistribution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=basis" })
+  @SpeakeasyMetadata({ data: "json, name=basis" })
   basis?: string;
 
-  @Metadata({ data: "json, name=data", elemType: shared.Distribution })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: Distribution })
   data?: Distribution[];
 }

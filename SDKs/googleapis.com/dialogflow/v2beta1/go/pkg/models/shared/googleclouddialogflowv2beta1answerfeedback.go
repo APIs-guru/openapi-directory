@@ -9,6 +9,8 @@ const (
 	GoogleCloudDialogflowV2beta1AnswerFeedbackCorrectnessLevelEnumFullyCorrect                GoogleCloudDialogflowV2beta1AnswerFeedbackCorrectnessLevelEnum = "FULLY_CORRECT"
 )
 
+// GoogleCloudDialogflowV2beta1AnswerFeedback
+// Represents feedback the customer has about the quality & correctness of a certain answer in a conversation.
 type GoogleCloudDialogflowV2beta1AnswerFeedback struct {
 	AgentAssistantDetailFeedback *GoogleCloudDialogflowV2beta1AgentAssistantFeedback             `json:"agentAssistantDetailFeedback,omitempty"`
 	ClickTime                    *string                                                         `json:"clickTime,omitempty"`

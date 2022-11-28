@@ -10,7 +10,7 @@ type DcimSitesUpdatePathParams struct {
 
 type DcimSitesUpdateRequest struct {
 	PathParams DcimSitesUpdatePathParams
-	Request    shared.WritableSite `request:"mediaType=application/json"`
+	Request    shared.WritableSiteInput `request:"mediaType=application/json"`
 }
 
 type DcimSitesUpdateResponse struct {

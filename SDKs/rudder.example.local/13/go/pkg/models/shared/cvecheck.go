@@ -1,5 +1,7 @@
 package shared
 
+// CveCheckPackages
+// Packages affected by this CVE
 type CveCheckPackages struct {
 	Name    *string `json:"name,omitempty"`
 	Version *string `json:"version,omitempty"`

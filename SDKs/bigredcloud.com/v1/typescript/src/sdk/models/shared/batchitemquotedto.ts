@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QuoteDto } from "./quotedto";
 
 
+
 export class BatchItemQuoteDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=item" })
+  @SpeakeasyMetadata({ data: "json, name=item" })
   item?: QuoteDto;
 
-  @Metadata({ data: "json, name=opCode" })
+  @SpeakeasyMetadata({ data: "json, name=opCode" })
   opCode?: number;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MutationProtectionStatusEnum } from "./mutationprotectionstatusenum";
 import { Tag } from "./tag";
 export declare class AssociateFirewallRuleGroupRequest extends SpeakeasyBase {

@@ -1,16 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteDirectivePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=directiveId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=directiveId" })
   directiveId: string;
-}
-
-
-export class DeleteDirectiveRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteDirectivePathParams;
 }
 
 export enum DeleteDirective200ApplicationJsonActionEnum {
@@ -19,35 +14,41 @@ export enum DeleteDirective200ApplicationJsonActionEnum {
 
 
 export class DeleteDirective200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=directives", elemType: shared.Directive })
+  @SpeakeasyMetadata({ data: "json, name=directives", elemType: shared.Directive })
   directives: shared.Directive[];
 }
 
 export enum DeleteDirective200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class DeleteDirective200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: DeleteDirective200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: DeleteDirective200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: DeleteDirective200ApplicationJsonResultEnum;
 }
 
 
+export class DeleteDirectiveRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteDirectivePathParams;
+}
+
+
 export class DeleteDirectiveResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDirective200ApplicationJsonObject?: DeleteDirective200ApplicationJson;
 }

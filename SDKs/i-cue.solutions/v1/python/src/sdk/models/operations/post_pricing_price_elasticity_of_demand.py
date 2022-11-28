@@ -9,11 +9,11 @@ class PostPricingPriceElasticityOfDemandHeaders:
 
 @dataclass
 class PostPricingPriceElasticityOfDemandRequest:
-    headers: PostPricingPriceElasticityOfDemandHeaders = field(default=None)
+    headers: PostPricingPriceElasticityOfDemandHeaders = field()
     
 
 @dataclass
 class PostPricingPriceElasticityOfDemandResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

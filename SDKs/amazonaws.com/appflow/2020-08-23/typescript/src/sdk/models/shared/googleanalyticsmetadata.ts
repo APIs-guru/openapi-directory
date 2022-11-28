@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAnalyticsMetadata
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The connector metadata specific to Google Analytics. 
 **/
 export class GoogleAnalyticsMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=oAuthScopes" })
+  @SpeakeasyMetadata({ data: "json, name=oAuthScopes" })
   oAuthScopes?: string[];
 }

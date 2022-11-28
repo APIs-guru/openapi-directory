@@ -1,5 +1,7 @@
 package shared
 
+// LiveTvServiceInfo
+// Class ServiceInfo.
 type LiveTvServiceInfo struct {
 	HasUpdateAvailable *bool                    `json:"HasUpdateAvailable,omitempty"`
 	HomePageURL        *string                  `json:"HomePageUrl,omitempty"`

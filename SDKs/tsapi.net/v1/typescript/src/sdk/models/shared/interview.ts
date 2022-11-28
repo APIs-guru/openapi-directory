@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataItem } from "./dataitem";
 import { HierarchicalInterview } from "./hierarchicalinterview";
 
 
+
 export class Interview extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataItems", elemType: shared.DataItem })
+  @SpeakeasyMetadata({ data: "json, name=dataItems", elemType: DataItem })
   dataItems?: DataItem[];
 
-  @Metadata({ data: "json, name=hierarchicalInterviews", elemType: shared.HierarchicalInterview })
+  @SpeakeasyMetadata({ data: "json, name=hierarchicalInterviews", elemType: HierarchicalInterview })
   hierarchicalInterviews?: HierarchicalInterview[];
 
-  @Metadata({ data: "json, name=ident" })
+  @SpeakeasyMetadata({ data: "json, name=ident" })
   ident?: string;
 }

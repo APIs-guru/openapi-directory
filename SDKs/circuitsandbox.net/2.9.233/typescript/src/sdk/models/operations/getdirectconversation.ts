@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDirectConversationQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=participant" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=participant" })
   participant: string;
 }
 
 
 export class GetDirectConversationSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class GetDirectConversationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDirectConversationQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetDirectConversationSecurity;
 }
 
 
 export class GetDirectConversationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conversation?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

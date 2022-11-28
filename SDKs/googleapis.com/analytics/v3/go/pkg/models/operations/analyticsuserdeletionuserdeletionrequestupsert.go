@@ -21,7 +21,7 @@ type AnalyticsUserDeletionUserDeletionRequestUpsertSecurity struct {
 
 type AnalyticsUserDeletionUserDeletionRequestUpsertRequest struct {
 	QueryParams AnalyticsUserDeletionUserDeletionRequestUpsertQueryParams
-	Request     *shared.UserDeletionRequest `request:"mediaType=application/json"`
+	Request     *shared.UserDeletionRequestInput `request:"mediaType=application/json"`
 	Security    AnalyticsUserDeletionUserDeletionRequestUpsertSecurity
 }
 

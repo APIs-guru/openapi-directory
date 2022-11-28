@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import dealservingmetadatadealpausestatus
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DealServingMetadata:
-    alcohol_ads_allowed: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alcoholAdsAllowed' }})
-    deal_pause_status: Optional[dealservingmetadatadealpausestatus.DealServingMetadataDealPauseStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dealPauseStatus' }})
+    alcohol_ads_allowed: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('alcoholAdsAllowed') }})
+    deal_pause_status: Optional[DealServingMetadataDealPauseStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dealPauseStatus') }})
     

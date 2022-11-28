@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListPlacementsPathParams:
-    project_name: str = field(default=None, metadata={'path_param': { 'field_name': 'projectName', 'style': 'simple', 'explode': False }})
+    project_name: str = field(metadata={'path_param': { 'field_name': 'projectName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,17 +30,17 @@ class ListPlacementsHeaders:
 
 @dataclass
 class ListPlacementsRequest:
-    path_params: ListPlacementsPathParams = field(default=None)
-    query_params: ListPlacementsQueryParams = field(default=None)
-    headers: ListPlacementsHeaders = field(default=None)
+    headers: ListPlacementsHeaders = field()
+    path_params: ListPlacementsPathParams = field()
+    query_params: ListPlacementsQueryParams = field()
     
 
 @dataclass
 class ListPlacementsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_placements_response: Optional[shared.ListPlacementsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

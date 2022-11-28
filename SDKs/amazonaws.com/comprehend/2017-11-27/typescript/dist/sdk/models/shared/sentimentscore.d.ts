@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Describes the level of confidence that Amazon Comprehend has in the accuracy of its detection of sentiments.
 **/

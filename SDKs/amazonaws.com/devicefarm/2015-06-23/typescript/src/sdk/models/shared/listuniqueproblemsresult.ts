@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UniqueProblem } from "./uniqueproblem";
+
 
 
 // ListUniqueProblemsResult
@@ -8,9 +8,9 @@ import { UniqueProblem } from "./uniqueproblem";
  * Represents the result of a list unique problems request.
 **/
 export class ListUniqueProblemsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=uniqueProblems", elemType: shared.UniqueProblem, elemDepth: 2 })
+  @SpeakeasyMetadata({ data: "json, name=uniqueProblems", elemType: UniqueProblem, elemDepth: 2 })
   uniqueProblems?: Map<string, UniqueProblem[]>;
 }

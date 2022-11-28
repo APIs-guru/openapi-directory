@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import configmapenvsource
-from . import secretenvsource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EnvFromSource:
-    config_map_ref: Optional[configmapenvsource.ConfigMapEnvSource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configMapRef' }})
-    prefix: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'prefix' }})
-    secret_ref: Optional[secretenvsource.SecretEnvSource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'secretRef' }})
+    r"""EnvFromSource
+    Not supported by Cloud Run. EnvFromSource represents the source of a set of ConfigMaps
+    """
+    
+    config_map_ref: Optional[ConfigMapEnvSource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('configMapRef') }})
+    prefix: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('prefix') }})
+    secret_ref: Optional[SecretEnvSource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('secretRef') }})
     

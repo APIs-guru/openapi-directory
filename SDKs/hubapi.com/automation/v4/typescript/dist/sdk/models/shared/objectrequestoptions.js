@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ObjectRequestOptions
 /**
  * Configures what properties of the enrolled CRM object are included in the action execution request
@@ -33,7 +33,7 @@ var ObjectRequestOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=properties" }),
+        SpeakeasyMetadata({ data: "json, name=properties" }),
         __metadata("design:type", Array)
     ], ObjectRequestOptions.prototype, "properties", void 0);
     return ObjectRequestOptions;

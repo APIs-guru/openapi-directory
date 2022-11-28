@@ -1,29 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LifecyclePolicyPreviewResult } from "./lifecyclepolicypreviewresult";
 import { LifecyclePolicyPreviewStatusEnum } from "./lifecyclepolicypreviewstatusenum";
 import { LifecyclePolicyPreviewSummary } from "./lifecyclepolicypreviewsummary";
 
 
+
 export class GetLifecyclePolicyPreviewResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lifecyclePolicyText" })
+  @SpeakeasyMetadata({ data: "json, name=lifecyclePolicyText" })
   lifecyclePolicyText?: string;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=previewResults", elemType: shared.LifecyclePolicyPreviewResult })
+  @SpeakeasyMetadata({ data: "json, name=previewResults", elemType: LifecyclePolicyPreviewResult })
   previewResults?: LifecyclePolicyPreviewResult[];
 
-  @Metadata({ data: "json, name=registryId" })
+  @SpeakeasyMetadata({ data: "json, name=registryId" })
   registryId?: string;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: LifecyclePolicyPreviewStatusEnum;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: LifecyclePolicyPreviewSummary;
 }

@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetLastPayDateReportOuputQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EmployeeKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployeeKey" })
   employeeKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" })
   employerKey: string;
 }
 
 
 export class GetLastPayDateReportOuputHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Version" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" })
   apiVersion: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class GetLastPayDateReportOuputRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetLastPayDateReportOuputQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetLastPayDateReportOuputHeaders;
 }
 
 
 export class GetLastPayDateReportOuputResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLastPayDateReportOuput200ApplicationJsonBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

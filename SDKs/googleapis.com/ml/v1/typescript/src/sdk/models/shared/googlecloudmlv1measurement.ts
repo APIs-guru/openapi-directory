@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudMlV1MeasurementMetric } from "./googlecloudmlv1measurementmetric";
+
 
 
 // GoogleCloudMlV1Measurement
@@ -8,12 +8,12 @@ import { GoogleCloudMlV1MeasurementMetric } from "./googlecloudmlv1measurementme
  * A message representing a measurement.
 **/
 export class GoogleCloudMlV1Measurement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=elapsedTime" })
+  @SpeakeasyMetadata({ data: "json, name=elapsedTime" })
   elapsedTime?: string;
 
-  @Metadata({ data: "json, name=metrics", elemType: shared.GoogleCloudMlV1MeasurementMetric })
+  @SpeakeasyMetadata({ data: "json, name=metrics", elemType: GoogleCloudMlV1MeasurementMetric })
   metrics?: GoogleCloudMlV1MeasurementMetric[];
 
-  @Metadata({ data: "json, name=stepCount" })
+  @SpeakeasyMetadata({ data: "json, name=stepCount" })
   stepCount?: string;
 }

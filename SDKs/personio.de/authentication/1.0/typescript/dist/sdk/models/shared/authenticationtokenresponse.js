@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AuthenticationTokenResponseData = /** @class */ (function (_super) {
     __extends(AuthenticationTokenResponseData, _super);
     function AuthenticationTokenResponseData() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=token" }),
+        SpeakeasyMetadata({ data: "json, name=token" }),
         __metadata("design:type", String)
     ], AuthenticationTokenResponseData.prototype, "token", void 0);
     return AuthenticationTokenResponseData;
@@ -41,11 +41,11 @@ var AuthenticationTokenResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=data" }),
+        SpeakeasyMetadata({ data: "json, name=data" }),
         __metadata("design:type", AuthenticationTokenResponseData)
     ], AuthenticationTokenResponse.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "json, name=success" }),
+        SpeakeasyMetadata({ data: "json, name=success" }),
         __metadata("design:type", Boolean)
     ], AuthenticationTokenResponse.prototype, "success", void 0);
     return AuthenticationTokenResponse;

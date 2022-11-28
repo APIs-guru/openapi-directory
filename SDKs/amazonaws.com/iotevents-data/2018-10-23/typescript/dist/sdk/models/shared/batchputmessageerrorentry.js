@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorCodeEnum } from "./errorcodeenum";
 // BatchPutMessageErrorEntry
 /**
@@ -34,15 +34,15 @@ var BatchPutMessageErrorEntry = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=errorCode" }),
+        SpeakeasyMetadata({ data: "json, name=errorCode" }),
         __metadata("design:type", String)
     ], BatchPutMessageErrorEntry.prototype, "errorCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorMessage" }),
+        SpeakeasyMetadata({ data: "json, name=errorMessage" }),
         __metadata("design:type", String)
     ], BatchPutMessageErrorEntry.prototype, "errorMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=messageId" }),
+        SpeakeasyMetadata({ data: "json, name=messageId" }),
         __metadata("design:type", String)
     ], BatchPutMessageErrorEntry.prototype, "messageId", void 0);
     return BatchPutMessageErrorEntry;

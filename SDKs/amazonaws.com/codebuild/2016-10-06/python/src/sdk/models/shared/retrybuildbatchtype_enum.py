@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class RetryBuildBatchTypeEnum(str, Enum):
     RETRY_ALL_BUILDS = "RETRY_ALL_BUILDS"

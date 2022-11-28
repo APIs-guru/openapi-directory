@@ -1,5 +1,7 @@
 package shared
 
+// BackendConnectionErrors
+// <p/>
 type BackendConnectionErrors struct {
 	ConnectionRefusedCount *int64 `json:"ConnectionRefusedCount,omitempty"`
 	HTTPCode4XxCount       *int64 `json:"HTTPCode4XXCount,omitempty"`

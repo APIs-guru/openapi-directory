@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudidentityGroupsMembershipsSearchTransitiveMembershipsPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class CloudidentityGroupsMembershipsSearchTransitiveMembershipsQueryParams:
 
 @dataclass
 class CloudidentityGroupsMembershipsSearchTransitiveMembershipsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudidentityGroupsMembershipsSearchTransitiveMembershipsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudidentityGroupsMembershipsSearchTransitiveMembershipsSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -52,14 +53,14 @@ class CloudidentityGroupsMembershipsSearchTransitiveMembershipsSecurity:
 
 @dataclass
 class CloudidentityGroupsMembershipsSearchTransitiveMembershipsRequest:
-    path_params: CloudidentityGroupsMembershipsSearchTransitiveMembershipsPathParams = field(default=None)
-    query_params: CloudidentityGroupsMembershipsSearchTransitiveMembershipsQueryParams = field(default=None)
-    security: CloudidentityGroupsMembershipsSearchTransitiveMembershipsSecurity = field(default=None)
+    path_params: CloudidentityGroupsMembershipsSearchTransitiveMembershipsPathParams = field()
+    query_params: CloudidentityGroupsMembershipsSearchTransitiveMembershipsQueryParams = field()
+    security: CloudidentityGroupsMembershipsSearchTransitiveMembershipsSecurity = field()
     
 
 @dataclass
 class CloudidentityGroupsMembershipsSearchTransitiveMembershipsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     search_transitive_memberships_response: Optional[shared.SearchTransitiveMembershipsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

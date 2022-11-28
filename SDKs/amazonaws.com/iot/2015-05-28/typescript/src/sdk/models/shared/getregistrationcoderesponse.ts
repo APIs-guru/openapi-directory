@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetRegistrationCodeResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The output from the GetRegistrationCode operation.
 **/
 export class GetRegistrationCodeResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=registrationCode" })
+  @SpeakeasyMetadata({ data: "json, name=registrationCode" })
   registrationCode?: string;
 }

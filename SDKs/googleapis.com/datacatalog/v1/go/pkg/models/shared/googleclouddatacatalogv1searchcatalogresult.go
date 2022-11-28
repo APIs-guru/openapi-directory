@@ -19,6 +19,8 @@ const (
 	GoogleCloudDatacatalogV1SearchCatalogResultSearchResultTypeEnumEntryGroup                  GoogleCloudDatacatalogV1SearchCatalogResultSearchResultTypeEnum = "ENTRY_GROUP"
 )
 
+// GoogleCloudDatacatalogV1SearchCatalogResult
+// Result in the response to a search request. Each result captures details of one entry that matches the search.
 type GoogleCloudDatacatalogV1SearchCatalogResult struct {
 	Description          *string                                                          `json:"description,omitempty"`
 	DisplayName          *string                                                          `json:"displayName,omitempty"`

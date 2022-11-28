@@ -9,7 +9,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://api.sportsdata.io",
 	"https://api.sportsdata.io",
 	"http://azure-api.sportsdata.io",
@@ -21,9 +21,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -34,33 +38,56 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AreasCountries - Areas (Countries)
+// Areas (Countries)
 func (s *SDK) AreasCountries(ctx context.Context, request operations.AreasCountriesRequest) (*operations.AreasCountriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Areas", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -68,7 +95,7 @@ func (s *SDK) AreasCountries(ctx context.Context, request operations.AreasCountr
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -98,8 +125,10 @@ func (s *SDK) AreasCountries(ctx context.Context, request operations.AreasCountr
 	return res, nil
 }
 
+// BoxScore - Box Score
+// Games by Date
 func (s *SDK) BoxScore(ctx context.Context, request operations.BoxScoreRequest) (*operations.BoxScoreResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/BoxScore/{gameid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -107,7 +136,7 @@ func (s *SDK) BoxScore(ctx context.Context, request operations.BoxScoreRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -137,8 +166,10 @@ func (s *SDK) BoxScore(ctx context.Context, request operations.BoxScoreRequest) 
 	return res, nil
 }
 
+// BoxScoresByDate - Box Scores by Date
+// Games by Date
 func (s *SDK) BoxScoresByDate(ctx context.Context, request operations.BoxScoresByDateRequest) (*operations.BoxScoresByDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/BoxScores/{date}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -146,7 +177,7 @@ func (s *SDK) BoxScoresByDate(ctx context.Context, request operations.BoxScoresB
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -176,8 +207,10 @@ func (s *SDK) BoxScoresByDate(ctx context.Context, request operations.BoxScoresB
 	return res, nil
 }
 
+// Champions - Champions
+// Areas (Countries)
 func (s *SDK) Champions(ctx context.Context, request operations.ChampionsRequest) (*operations.ChampionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Champions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -185,7 +218,7 @@ func (s *SDK) Champions(ctx context.Context, request operations.ChampionsRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -215,8 +248,10 @@ func (s *SDK) Champions(ctx context.Context, request operations.ChampionsRequest
 	return res, nil
 }
 
+// CompetitionFixturesLeagueDetails - Competition Fixtures (League Details)
+// Competition Fixtures (League Details)
 func (s *SDK) CompetitionFixturesLeagueDetails(ctx context.Context, request operations.CompetitionFixturesLeagueDetailsRequest) (*operations.CompetitionFixturesLeagueDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/CompetitionDetails/{competitionid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -224,7 +259,7 @@ func (s *SDK) CompetitionFixturesLeagueDetails(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -254,8 +289,10 @@ func (s *SDK) CompetitionFixturesLeagueDetails(ctx context.Context, request oper
 	return res, nil
 }
 
+// CompetitionsLeagues - Competitions (Leagues)
+// Competitions (Leagues)
 func (s *SDK) CompetitionsLeagues(ctx context.Context, request operations.CompetitionsLeaguesRequest) (*operations.CompetitionsLeaguesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Competitions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -263,7 +300,7 @@ func (s *SDK) CompetitionsLeagues(ctx context.Context, request operations.Compet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -293,8 +330,10 @@ func (s *SDK) CompetitionsLeagues(ctx context.Context, request operations.Compet
 	return res, nil
 }
 
+// GamesByDate - Games by Date
+// Games by Date
 func (s *SDK) GamesByDate(ctx context.Context, request operations.GamesByDateRequest) (*operations.GamesByDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/GamesByDate/{date}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -302,7 +341,7 @@ func (s *SDK) GamesByDate(ctx context.Context, request operations.GamesByDateReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -332,8 +371,10 @@ func (s *SDK) GamesByDate(ctx context.Context, request operations.GamesByDateReq
 	return res, nil
 }
 
+// Items - Items
+// Competitions (Leagues)
 func (s *SDK) Items(ctx context.Context, request operations.ItemsRequest) (*operations.ItemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Items", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -341,7 +382,7 @@ func (s *SDK) Items(ctx context.Context, request operations.ItemsRequest) (*oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -371,8 +412,10 @@ func (s *SDK) Items(ctx context.Context, request operations.ItemsRequest) (*oper
 	return res, nil
 }
 
+// MembershipsActive - Memberships (Active)
+// Memberships (Active)
 func (s *SDK) MembershipsActive(ctx context.Context, request operations.MembershipsActiveRequest) (*operations.MembershipsActiveResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/ActiveMemberships", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -380,7 +423,7 @@ func (s *SDK) MembershipsActive(ctx context.Context, request operations.Membersh
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -410,8 +453,10 @@ func (s *SDK) MembershipsActive(ctx context.Context, request operations.Membersh
 	return res, nil
 }
 
+// MembershipsByTeamActive - Memberships by Team (Active)
+// Memberships by Team (Active)
 func (s *SDK) MembershipsByTeamActive(ctx context.Context, request operations.MembershipsByTeamActiveRequest) (*operations.MembershipsByTeamActiveResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/MembershipsByTeam/{teamid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -419,7 +464,7 @@ func (s *SDK) MembershipsByTeamActive(ctx context.Context, request operations.Me
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -449,8 +494,10 @@ func (s *SDK) MembershipsByTeamActive(ctx context.Context, request operations.Me
 	return res, nil
 }
 
+// MembershipsByTeamHistorical - Memberships by Team (Historical)
+// Memberships by Team (Historical)
 func (s *SDK) MembershipsByTeamHistorical(ctx context.Context, request operations.MembershipsByTeamHistoricalRequest) (*operations.MembershipsByTeamHistoricalResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/HistoricalMembershipsByTeam/{teamid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -458,7 +505,7 @@ func (s *SDK) MembershipsByTeamHistorical(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -488,8 +535,10 @@ func (s *SDK) MembershipsByTeamHistorical(ctx context.Context, request operation
 	return res, nil
 }
 
+// MembershipsHistorical - Memberships (Historical)
+// Memberships (Historical)
 func (s *SDK) MembershipsHistorical(ctx context.Context, request operations.MembershipsHistoricalRequest) (*operations.MembershipsHistoricalResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/HistoricalMemberships", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -497,7 +546,7 @@ func (s *SDK) MembershipsHistorical(ctx context.Context, request operations.Memb
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -527,8 +576,10 @@ func (s *SDK) MembershipsHistorical(ctx context.Context, request operations.Memb
 	return res, nil
 }
 
+// Player - Player
+// Player
 func (s *SDK) Player(ctx context.Context, request operations.PlayerRequest) (*operations.PlayerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Player/{playerid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -536,7 +587,7 @@ func (s *SDK) Player(ctx context.Context, request operations.PlayerRequest) (*op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -566,8 +617,10 @@ func (s *SDK) Player(ctx context.Context, request operations.PlayerRequest) (*op
 	return res, nil
 }
 
+// Players - Players
+// Players
 func (s *SDK) Players(ctx context.Context, request operations.PlayersRequest) (*operations.PlayersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Players", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -575,7 +628,7 @@ func (s *SDK) Players(ctx context.Context, request operations.PlayersRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -605,8 +658,10 @@ func (s *SDK) Players(ctx context.Context, request operations.PlayersRequest) (*
 	return res, nil
 }
 
+// PlayersByTeam - Players by Team
+// Players by Team
 func (s *SDK) PlayersByTeam(ctx context.Context, request operations.PlayersByTeamRequest) (*operations.PlayersByTeamResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/PlayersByTeam/{teamid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -614,7 +669,7 @@ func (s *SDK) PlayersByTeam(ctx context.Context, request operations.PlayersByTea
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -644,8 +699,10 @@ func (s *SDK) PlayersByTeam(ctx context.Context, request operations.PlayersByTea
 	return res, nil
 }
 
+// Schedule - Schedule
+// Schedule
 func (s *SDK) Schedule(ctx context.Context, request operations.ScheduleRequest) (*operations.ScheduleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Schedule/{roundid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -653,7 +710,7 @@ func (s *SDK) Schedule(ctx context.Context, request operations.ScheduleRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -683,8 +740,10 @@ func (s *SDK) Schedule(ctx context.Context, request operations.ScheduleRequest) 
 	return res, nil
 }
 
+// SeasonTeams - Season Teams
+// Season Teams
 func (s *SDK) SeasonTeams(ctx context.Context, request operations.SeasonTeamsRequest) (*operations.SeasonTeamsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/SeasonTeams/{seasonid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -692,7 +751,7 @@ func (s *SDK) SeasonTeams(ctx context.Context, request operations.SeasonTeamsReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -722,8 +781,10 @@ func (s *SDK) SeasonTeams(ctx context.Context, request operations.SeasonTeamsReq
 	return res, nil
 }
 
+// Spells - Spells
+// Areas (Countries)
 func (s *SDK) Spells(ctx context.Context, request operations.SpellsRequest) (*operations.SpellsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Spells", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -731,7 +792,7 @@ func (s *SDK) Spells(ctx context.Context, request operations.SpellsRequest) (*op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -761,8 +822,10 @@ func (s *SDK) Spells(ctx context.Context, request operations.SpellsRequest) (*op
 	return res, nil
 }
 
+// Standings - Standings
+// Standings
 func (s *SDK) Standings(ctx context.Context, request operations.StandingsRequest) (*operations.StandingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Standings/{roundid}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -770,7 +833,7 @@ func (s *SDK) Standings(ctx context.Context, request operations.StandingsRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -800,8 +863,10 @@ func (s *SDK) Standings(ctx context.Context, request operations.StandingsRequest
 	return res, nil
 }
 
+// Teams - Teams
+// Teams
 func (s *SDK) Teams(ctx context.Context, request operations.TeamsRequest) (*operations.TeamsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Teams", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -809,7 +874,7 @@ func (s *SDK) Teams(ctx context.Context, request operations.TeamsRequest) (*oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -839,8 +904,10 @@ func (s *SDK) Teams(ctx context.Context, request operations.TeamsRequest) (*oper
 	return res, nil
 }
 
+// Venues - Venues
+// Venues
 func (s *SDK) Venues(ctx context.Context, request operations.VenuesRequest) (*operations.VenuesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{format}/Venues", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -848,7 +915,7 @@ func (s *SDK) Venues(ctx context.Context, request operations.VenuesRequest) (*op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

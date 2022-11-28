@@ -11,6 +11,8 @@ const (
 	SnapshotStateEnumDeleted              SnapshotStateEnum = "DELETED"
 )
 
+// Snapshot
+// Represents a snapshot of a job.
 type Snapshot struct {
 	CreationTime   *string                  `json:"creationTime,omitempty"`
 	Description    *string                  `json:"description,omitempty"`

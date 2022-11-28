@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetParentPathQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=path" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=path" })
   path: string;
 }
 
 
 export class GetParentPathSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetParentPathRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetParentPathQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetParentPathSecurity;
 }
 
 
 export class GetParentPathResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getParentPath200ApplicationJsonString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

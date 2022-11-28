@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import automlmetricenum_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AutoMlJobObjective:
-    metric_name: automlmetricenum_enum.AutoMlMetricEnumEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetricName' }})
+    r"""AutoMlJobObjective
+    Specifies a metric to minimize or maximize as the objective of a job.
+    """
+    
+    metric_name: AutoMlMetricEnumEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MetricName') }})
     

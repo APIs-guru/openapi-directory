@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Config } from "./config";
 export declare enum ContainerThreatDetectionSettingsServiceEnablementStateEnum {
     EnablementStateUnspecified = "ENABLEMENT_STATE_UNSPECIFIED",
@@ -15,4 +15,12 @@ export declare class ContainerThreatDetectionSettings extends SpeakeasyBase {
     serviceAccount?: string;
     serviceEnablementState?: ContainerThreatDetectionSettingsServiceEnablementStateEnum;
     updateTime?: string;
+}
+/**
+ * Resource capturing the settings for the Container Threat Detection service.
+**/
+export declare class ContainerThreatDetectionSettingsInput extends SpeakeasyBase {
+    modules?: Map<string, Config>;
+    name?: string;
+    serviceEnablementState?: ContainerThreatDetectionSettingsServiceEnablementStateEnum;
 }

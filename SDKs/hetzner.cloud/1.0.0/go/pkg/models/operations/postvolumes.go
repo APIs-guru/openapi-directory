@@ -10,10 +10,8 @@ type PostVolumesCreateVolumeRequest struct {
 	Size      int64                  `json:"size"`
 }
 
-type PostVolumesRequest struct {
-	Request *PostVolumesCreateVolumeRequest `request:"mediaType=application/json"`
-}
-
+// PostVolumes201ApplicationJSONActionError
+// Error message for the Action if error occurred, otherwise null
 type PostVolumes201ApplicationJSONActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -43,6 +41,8 @@ type PostVolumes201ApplicationJSONAction struct {
 	Status    PostVolumes201ApplicationJSONActionStatusEnum  `json:"status"`
 }
 
+// PostVolumes201ApplicationJSONVolumeLocation
+// Location of the Volume. Volume can only be attached to Servers in the same Location.
 type PostVolumes201ApplicationJSONVolumeLocation struct {
 	City        string  `json:"city"`
 	Country     string  `json:"country"`
@@ -54,6 +54,8 @@ type PostVolumes201ApplicationJSONVolumeLocation struct {
 	NetworkZone string  `json:"network_zone"`
 }
 
+// PostVolumes201ApplicationJSONVolumeProtection
+// Protection configuration for the Resource
 type PostVolumes201ApplicationJSONVolumeProtection struct {
 	Delete bool `json:"delete"`
 }
@@ -83,6 +85,10 @@ type PostVolumes201ApplicationJSON struct {
 	Action      PostVolumes201ApplicationJSONAction   `json:"action"`
 	NextActions []PostVolumes201ApplicationJSONAction `json:"next_actions"`
 	Volume      PostVolumes201ApplicationJSONVolume   `json:"volume"`
+}
+
+type PostVolumesRequest struct {
+	Request *PostVolumesCreateVolumeRequest `request:"mediaType=application/json"`
 }
 
 type PostVolumesResponse struct {

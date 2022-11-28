@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum VideoFileDetailsVideoStreamRotationEnum {
-    None = "none"
-,    Clockwise = "clockwise"
-,    UpsideDown = "upsideDown"
-,    CounterClockwise = "counterClockwise"
-,    Other = "other"
+    None = "none",
+    Clockwise = "clockwise",
+    UpsideDown = "upsideDown",
+    CounterClockwise = "counterClockwise",
+    Other = "other"
 }
 
 
@@ -14,27 +15,27 @@ export enum VideoFileDetailsVideoStreamRotationEnum {
  * Information about a video stream.
 **/
 export class VideoFileDetailsVideoStream extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aspectRatio" })
+  @SpeakeasyMetadata({ data: "json, name=aspectRatio" })
   aspectRatio?: number;
 
-  @Metadata({ data: "json, name=bitrateBps" })
+  @SpeakeasyMetadata({ data: "json, name=bitrateBps" })
   bitrateBps?: string;
 
-  @Metadata({ data: "json, name=codec" })
+  @SpeakeasyMetadata({ data: "json, name=codec" })
   codec?: string;
 
-  @Metadata({ data: "json, name=frameRateFps" })
+  @SpeakeasyMetadata({ data: "json, name=frameRateFps" })
   frameRateFps?: number;
 
-  @Metadata({ data: "json, name=heightPixels" })
+  @SpeakeasyMetadata({ data: "json, name=heightPixels" })
   heightPixels?: number;
 
-  @Metadata({ data: "json, name=rotation" })
+  @SpeakeasyMetadata({ data: "json, name=rotation" })
   rotation?: VideoFileDetailsVideoStreamRotationEnum;
 
-  @Metadata({ data: "json, name=vendor" })
+  @SpeakeasyMetadata({ data: "json, name=vendor" })
   vendor?: string;
 
-  @Metadata({ data: "json, name=widthPixels" })
+  @SpeakeasyMetadata({ data: "json, name=widthPixels" })
   widthPixels?: number;
 }

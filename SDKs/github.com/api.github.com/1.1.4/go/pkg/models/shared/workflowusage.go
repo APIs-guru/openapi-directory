@@ -18,6 +18,8 @@ type WorkflowUsageBillable struct {
 	Windows *WorkflowUsageBillableWindows `json:"WINDOWS,omitempty"`
 }
 
+// WorkflowUsage
+// Workflow Usage
 type WorkflowUsage struct {
 	Billable WorkflowUsageBillable `json:"billable"`
 }

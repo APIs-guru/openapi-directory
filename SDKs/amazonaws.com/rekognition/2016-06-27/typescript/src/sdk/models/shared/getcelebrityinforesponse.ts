@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KnownGender } from "./knowngender";
 
 
+
 export class GetCelebrityInfoResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=KnownGender" })
+  @SpeakeasyMetadata({ data: "json, name=KnownGender" })
   knownGender?: KnownGender;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Urls" })
+  @SpeakeasyMetadata({ data: "json, name=Urls" })
   urls?: string[];
 }

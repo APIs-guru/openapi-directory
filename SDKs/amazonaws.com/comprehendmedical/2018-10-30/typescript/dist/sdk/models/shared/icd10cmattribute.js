@@ -22,10 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Icd10CmEntityTypeEnum } from "./icd10cmentitytypeenum";
 import { Icd10CmRelationshipTypeEnum } from "./icd10cmrelationshiptypeenum";
+import { Icd10CmTrait } from "./icd10cmtrait";
 import { Icd10CmAttributeTypeEnum } from "./icd10cmattributetypeenum";
 // Icd10CmAttribute
 /**
@@ -37,43 +37,43 @@ var Icd10CmAttribute = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BeginOffset" }),
+        SpeakeasyMetadata({ data: "json, name=BeginOffset" }),
         __metadata("design:type", Number)
     ], Icd10CmAttribute.prototype, "beginOffset", void 0);
     __decorate([
-        Metadata({ data: "json, name=Category" }),
+        SpeakeasyMetadata({ data: "json, name=Category" }),
         __metadata("design:type", String)
     ], Icd10CmAttribute.prototype, "category", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndOffset" }),
+        SpeakeasyMetadata({ data: "json, name=EndOffset" }),
         __metadata("design:type", Number)
     ], Icd10CmAttribute.prototype, "endOffset", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", Number)
     ], Icd10CmAttribute.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=RelationshipScore" }),
+        SpeakeasyMetadata({ data: "json, name=RelationshipScore" }),
         __metadata("design:type", Number)
     ], Icd10CmAttribute.prototype, "relationshipScore", void 0);
     __decorate([
-        Metadata({ data: "json, name=RelationshipType" }),
+        SpeakeasyMetadata({ data: "json, name=RelationshipType" }),
         __metadata("design:type", String)
     ], Icd10CmAttribute.prototype, "relationshipType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Score" }),
+        SpeakeasyMetadata({ data: "json, name=Score" }),
         __metadata("design:type", Number)
     ], Icd10CmAttribute.prototype, "score", void 0);
     __decorate([
-        Metadata({ data: "json, name=Text" }),
+        SpeakeasyMetadata({ data: "json, name=Text" }),
         __metadata("design:type", String)
     ], Icd10CmAttribute.prototype, "text", void 0);
     __decorate([
-        Metadata({ data: "json, name=Traits", elemType: shared.Icd10CmTrait }),
+        SpeakeasyMetadata({ data: "json, name=Traits", elemType: Icd10CmTrait }),
         __metadata("design:type", Array)
     ], Icd10CmAttribute.prototype, "traits", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], Icd10CmAttribute.prototype, "type", void 0);
     return Icd10CmAttribute;

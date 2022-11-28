@@ -9,7 +9,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.lufthansa.com/v1",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CargoGetRouteFromDateProductCodeByOriginAndDestinationGet - Retrieve all flights
+// Retrieve a list of all possible flights (both direct and connecting) between two airports on a given date. Routes are available for today and up to days in the future.
 func (s *SDK) CargoGetRouteFromDateProductCodeByOriginAndDestinationGet(ctx context.Context, request operations.CargoGetRouteFromDateProductCodeByOriginAndDestinationGetRequest) (*operations.CargoGetRouteFromDateProductCodeByOriginAndDestinationGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/cargo/getRoute/{origin}-{destination}/{fromDate}/{productCode}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -61,7 +84,7 @@ func (s *SDK) CargoGetRouteFromDateProductCodeByOriginAndDestinationGet(ctx cont
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -91,8 +114,10 @@ func (s *SDK) CargoGetRouteFromDateProductCodeByOriginAndDestinationGet(ctx cont
 	return res, nil
 }
 
+// CargoShipmentTrackingByAwbPrefixAndAwbNumberGet - Shipment Tracking
+// With this tracking service you can easily retrieve your shipment or flight status information.
 func (s *SDK) CargoShipmentTrackingByAwbPrefixAndAwbNumberGet(ctx context.Context, request operations.CargoShipmentTrackingByAwbPrefixAndAwbNumberGetRequest) (*operations.CargoShipmentTrackingByAwbPrefixAndAwbNumberGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/cargo/shipmentTracking/{aWBPrefix}-{aWBNumber}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -102,7 +127,7 @@ func (s *SDK) CargoShipmentTrackingByAwbPrefixAndAwbNumberGet(ctx context.Contex
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -132,8 +157,10 @@ func (s *SDK) CargoShipmentTrackingByAwbPrefixAndAwbNumberGet(ctx context.Contex
 	return res, nil
 }
 
+// OffersLoungesByLocationGet - Lounges
+// Lounge information
 func (s *SDK) OffersLoungesByLocationGet(ctx context.Context, request operations.OffersLoungesByLocationGetRequest) (*operations.OffersLoungesByLocationGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/offers/lounges/{location}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -145,7 +172,7 @@ func (s *SDK) OffersLoungesByLocationGet(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -175,8 +202,10 @@ func (s *SDK) OffersLoungesByLocationGet(ctx context.Context, request operations
 	return res, nil
 }
 
+// OffersSeatmapsDestinationDateCabinClassByFlightNumberAndOriginGet - Seat Maps
+// Cabin layout and seat characteristics.
 func (s *SDK) OffersSeatmapsDestinationDateCabinClassByFlightNumberAndOriginGet(ctx context.Context, request operations.OffersSeatmapsDestinationDateCabinClassByFlightNumberAndOriginGetRequest) (*operations.OffersSeatmapsDestinationDateCabinClassByFlightNumberAndOriginGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/offers/seatmaps/{flightNumber}/{origin}/{destination}/{date}/{cabinClass}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -186,7 +215,7 @@ func (s *SDK) OffersSeatmapsDestinationDateCabinClassByFlightNumberAndOriginGet(
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -216,8 +245,10 @@ func (s *SDK) OffersSeatmapsDestinationDateCabinClassByFlightNumberAndOriginGet(
 	return res, nil
 }
 
+// OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGet - Flight Status at Arrival Airport
+// Status of all arrivals at a given airport up to 4 hours from the provided date time.
 func (s *SDK) OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGet(ctx context.Context, request operations.OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetRequest) (*operations.OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/operations/flightstatus/arrivals/{airportCode}/{fromDateTime}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -229,7 +260,7 @@ func (s *SDK) OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGet(ctx 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -259,8 +290,10 @@ func (s *SDK) OperationsFlightstatusArrivalsByAirportCodeAndFromDateTimeGet(ctx 
 	return res, nil
 }
 
+// OperationsFlightstatusByFlightNumberAndDateGet - Flight Status
+// Status of a particular flight (boarding, delayed, etc.).
 func (s *SDK) OperationsFlightstatusByFlightNumberAndDateGet(ctx context.Context, request operations.OperationsFlightstatusByFlightNumberAndDateGetRequest) (*operations.OperationsFlightstatusByFlightNumberAndDateGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/operations/flightstatus/{flightNumber}/{date}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -272,7 +305,7 @@ func (s *SDK) OperationsFlightstatusByFlightNumberAndDateGet(ctx context.Context
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -302,8 +335,10 @@ func (s *SDK) OperationsFlightstatusByFlightNumberAndDateGet(ctx context.Context
 	return res, nil
 }
 
+// OperationsFlightstatusDeparturesByAirportCodeAndFromDateTimeGet - Flight Status at Departure Airport
+// Status of all departures from a given airport up to 4 hours from the provided date time.
 func (s *SDK) OperationsFlightstatusDeparturesByAirportCodeAndFromDateTimeGet(ctx context.Context, request operations.OperationsFlightstatusDeparturesByAirportCodeAndFromDateTimeGetRequest) (*operations.OperationsFlightstatusDeparturesByAirportCodeAndFromDateTimeGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/operations/flightstatus/departures/{airportCode}/{fromDateTime}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -315,7 +350,7 @@ func (s *SDK) OperationsFlightstatusDeparturesByAirportCodeAndFromDateTimeGet(ct
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -345,8 +380,10 @@ func (s *SDK) OperationsFlightstatusDeparturesByAirportCodeAndFromDateTimeGet(ct
 	return res, nil
 }
 
+// OperationsFlightstatusRouteDateByOriginAndDestinationGet - Flight Status by Route
+// Status of flights between a given origin and destination on a given date.
 func (s *SDK) OperationsFlightstatusRouteDateByOriginAndDestinationGet(ctx context.Context, request operations.OperationsFlightstatusRouteDateByOriginAndDestinationGetRequest) (*operations.OperationsFlightstatusRouteDateByOriginAndDestinationGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/operations/flightstatus/route/{origin}/{destination}/{date}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -358,7 +395,7 @@ func (s *SDK) OperationsFlightstatusRouteDateByOriginAndDestinationGet(ctx conte
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -388,8 +425,10 @@ func (s *SDK) OperationsFlightstatusRouteDateByOriginAndDestinationGet(ctx conte
 	return res, nil
 }
 
+// OperationsSchedulesFromDateTimeByOriginAndDestinationGet - Flight Schedules
+// Scheduled flights between given airports on a given date.
 func (s *SDK) OperationsSchedulesFromDateTimeByOriginAndDestinationGet(ctx context.Context, request operations.OperationsSchedulesFromDateTimeByOriginAndDestinationGetRequest) (*operations.OperationsSchedulesFromDateTimeByOriginAndDestinationGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/operations/schedules/{origin}/{destination}/{fromDateTime}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -401,7 +440,7 @@ func (s *SDK) OperationsSchedulesFromDateTimeByOriginAndDestinationGet(ctx conte
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -431,8 +470,10 @@ func (s *SDK) OperationsSchedulesFromDateTimeByOriginAndDestinationGet(ctx conte
 	return res, nil
 }
 
+// ReferencesAircraftByAircraftCodeGet - Aircraft
+// List all aircraft types or one specific aircraft type.
 func (s *SDK) ReferencesAircraftByAircraftCodeGet(ctx context.Context, request operations.ReferencesAircraftByAircraftCodeGetRequest) (*operations.ReferencesAircraftByAircraftCodeGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/references/aircraft/{aircraftCode}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -444,7 +485,7 @@ func (s *SDK) ReferencesAircraftByAircraftCodeGet(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -474,8 +515,10 @@ func (s *SDK) ReferencesAircraftByAircraftCodeGet(ctx context.Context, request o
 	return res, nil
 }
 
+// ReferencesAirlinesByAirlineCodeGet - Airlines
+// List all airlines or one specific airline.
 func (s *SDK) ReferencesAirlinesByAirlineCodeGet(ctx context.Context, request operations.ReferencesAirlinesByAirlineCodeGetRequest) (*operations.ReferencesAirlinesByAirlineCodeGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/references/airlines/{airlineCode}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -487,7 +530,7 @@ func (s *SDK) ReferencesAirlinesByAirlineCodeGet(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -517,8 +560,10 @@ func (s *SDK) ReferencesAirlinesByAirlineCodeGet(ctx context.Context, request op
 	return res, nil
 }
 
+// ReferencesAirportsByAirportCodeGet - Airports
+// List all airports or one specific airport. All airports response is very large. It is possible to request the response in a specific language.
 func (s *SDK) ReferencesAirportsByAirportCodeGet(ctx context.Context, request operations.ReferencesAirportsByAirportCodeGetRequest) (*operations.ReferencesAirportsByAirportCodeGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/references/airports/{airportCode}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -530,7 +575,7 @@ func (s *SDK) ReferencesAirportsByAirportCodeGet(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -560,8 +605,10 @@ func (s *SDK) ReferencesAirportsByAirportCodeGet(ctx context.Context, request op
 	return res, nil
 }
 
+// ReferencesAirportsNearestByLatitudeAndLongitudeGet - Nearest Airports
+// List the 5 closest airports to the given latitude and longitude, irrespective of the radius of the reference point.
 func (s *SDK) ReferencesAirportsNearestByLatitudeAndLongitudeGet(ctx context.Context, request operations.ReferencesAirportsNearestByLatitudeAndLongitudeGetRequest) (*operations.ReferencesAirportsNearestByLatitudeAndLongitudeGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/references/airports/nearest/{latitude},{longitude}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -573,7 +620,7 @@ func (s *SDK) ReferencesAirportsNearestByLatitudeAndLongitudeGet(ctx context.Con
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -603,8 +650,10 @@ func (s *SDK) ReferencesAirportsNearestByLatitudeAndLongitudeGet(ctx context.Con
 	return res, nil
 }
 
+// ReferencesCitiesByCityCodeGet - Cities
+// List all cities or one specific city. It is possible to request the response in a specific language.
 func (s *SDK) ReferencesCitiesByCityCodeGet(ctx context.Context, request operations.ReferencesCitiesByCityCodeGetRequest) (*operations.ReferencesCitiesByCityCodeGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/references/cities/{cityCode}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -616,7 +665,7 @@ func (s *SDK) ReferencesCitiesByCityCodeGet(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -646,8 +695,10 @@ func (s *SDK) ReferencesCitiesByCityCodeGet(ctx context.Context, request operati
 	return res, nil
 }
 
+// ReferencesCountriesByCountryCodeGet - Countries
+// List all countries or one specific country. It is possible to request the response in a specific language.
 func (s *SDK) ReferencesCountriesByCountryCodeGet(ctx context.Context, request operations.ReferencesCountriesByCountryCodeGetRequest) (*operations.ReferencesCountriesByCountryCodeGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/references/countries/{countryCode}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -659,7 +710,7 @@ func (s *SDK) ReferencesCountriesByCountryCodeGet(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

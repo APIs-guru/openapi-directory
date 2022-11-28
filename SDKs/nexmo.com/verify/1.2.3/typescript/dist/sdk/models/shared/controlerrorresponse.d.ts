@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum ControlErrorResponseStatusEnum {
     Zero = "0",
     One = "1",

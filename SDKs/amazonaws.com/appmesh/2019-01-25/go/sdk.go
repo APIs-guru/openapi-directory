@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://appmesh.{region}.amazonaws.com",
 	"https://appmesh.{region}.amazonaws.com",
 	"http://appmesh.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/appmesh/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateGatewayRoute - <p>Creates a gateway route.</p> <p>A gateway route is attached to a virtual gateway and routes traffic to an existing virtual service. If a route matches a request, it can distribute traffic to a target virtual service.</p> <p>For more information about gateway routes, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/gateway-routes.html">Gateway routes</a>.</p>
 func (s *SDK) CreateGatewayRoute(ctx context.Context, request operations.CreateGatewayRouteRequest) (*operations.CreateGatewayRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -83,7 +110,7 @@ func (s *SDK) CreateGatewayRoute(ctx context.Context, request operations.CreateG
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -193,8 +220,9 @@ func (s *SDK) CreateGatewayRoute(ctx context.Context, request operations.CreateG
 	return res, nil
 }
 
+// CreateMesh - <p>Creates a service mesh.</p> <p> A service mesh is a logical boundary for network traffic between services that are represented by resources within the mesh. After you create your service mesh, you can create virtual services, virtual nodes, virtual routers, and routes to distribute traffic between the applications in your mesh.</p> <p>For more information about service meshes, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/meshes.html">Service meshes</a>.</p>
 func (s *SDK) CreateMesh(ctx context.Context, request operations.CreateMeshRequest) (*operations.CreateMeshResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v20190125/meshes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -214,7 +242,7 @@ func (s *SDK) CreateMesh(ctx context.Context, request operations.CreateMeshReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -324,8 +352,9 @@ func (s *SDK) CreateMesh(ctx context.Context, request operations.CreateMeshReque
 	return res, nil
 }
 
+// CreateRoute - <p>Creates a route that is associated with a virtual router.</p> <p> You can route several different protocols and define a retry policy for a route. Traffic can be routed to one or more virtual nodes.</p> <p>For more information about routes, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/routes.html">Routes</a>.</p>
 func (s *SDK) CreateRoute(ctx context.Context, request operations.CreateRouteRequest) (*operations.CreateRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -347,7 +376,7 @@ func (s *SDK) CreateRoute(ctx context.Context, request operations.CreateRouteReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -457,8 +486,9 @@ func (s *SDK) CreateRoute(ctx context.Context, request operations.CreateRouteReq
 	return res, nil
 }
 
+// CreateVirtualGateway - <p>Creates a virtual gateway.</p> <p>A virtual gateway allows resources outside your mesh to communicate to resources that are inside your mesh. The virtual gateway represents an Envoy proxy running in an Amazon ECS task, in a Kubernetes service, or on an Amazon EC2 instance. Unlike a virtual node, which represents an Envoy running with an application, a virtual gateway represents Envoy deployed by itself.</p> <p>For more information about virtual gateways, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_gateways.html">Virtual gateways</a>. </p>
 func (s *SDK) CreateVirtualGateway(ctx context.Context, request operations.CreateVirtualGatewayRequest) (*operations.CreateVirtualGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualGateways", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -480,7 +510,7 @@ func (s *SDK) CreateVirtualGateway(ctx context.Context, request operations.Creat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -590,8 +620,9 @@ func (s *SDK) CreateVirtualGateway(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateVirtualNode - <p>Creates a virtual node within a service mesh.</p> <p> A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can specify the service discovery information for your task group, and whether the proxy running in a task group will communicate with other proxies using Transport Layer Security (TLS).</p> <p>You define a <code>listener</code> for any inbound traffic that your virtual node expects. Any virtual service that your virtual node expects to communicate to is specified as a <code>backend</code>.</p> <p>The response metadata for your new virtual node contains the <code>arn</code> that is associated with the virtual node. Set this value to the full ARN; for example, <code>arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp</code>) as the <code>APPMESH_RESOURCE_ARN</code> environment variable for your task group's Envoy proxy container in your task definition or pod spec. This is then mapped to the <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p> <note> <p>By default, App Mesh uses the name of the resource you specified in <code>APPMESH_RESOURCE_ARN</code> when Envoy is referring to itself in metrics and traces. You can override this behavior by setting the <code>APPMESH_RESOURCE_CLUSTER</code> environment variable with your own name.</p> </note> <p>For more information about virtual nodes, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html">Virtual nodes</a>. You must be using <code>1.15.0</code> or later of the Envoy image when setting these variables. For more information aboutApp Mesh Envoy variables, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html">Envoy image</a> in the AWS App Mesh User Guide.</p>
 func (s *SDK) CreateVirtualNode(ctx context.Context, request operations.CreateVirtualNodeRequest) (*operations.CreateVirtualNodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualNodes", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -613,7 +644,7 @@ func (s *SDK) CreateVirtualNode(ctx context.Context, request operations.CreateVi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -723,8 +754,9 @@ func (s *SDK) CreateVirtualNode(ctx context.Context, request operations.CreateVi
 	return res, nil
 }
 
+// CreateVirtualRouter - <p>Creates a virtual router within a service mesh.</p> <p>Specify a <code>listener</code> for any inbound traffic that your virtual router receives. Create a virtual router for each protocol and port that you need to route. Virtual routers handle traffic for one or more virtual services within your mesh. After you create your virtual router, create and associate routes for your virtual router that direct incoming requests to different virtual nodes.</p> <p>For more information about virtual routers, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_routers.html">Virtual routers</a>.</p>
 func (s *SDK) CreateVirtualRouter(ctx context.Context, request operations.CreateVirtualRouterRequest) (*operations.CreateVirtualRouterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualRouters", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -746,7 +778,7 @@ func (s *SDK) CreateVirtualRouter(ctx context.Context, request operations.Create
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -856,8 +888,9 @@ func (s *SDK) CreateVirtualRouter(ctx context.Context, request operations.Create
 	return res, nil
 }
 
+// CreateVirtualService - <p>Creates a virtual service within a service mesh.</p> <p>A virtual service is an abstraction of a real service that is provided by a virtual node directly or indirectly by means of a virtual router. Dependent services call your virtual service by its <code>virtualServiceName</code>, and those requests are routed to the virtual node or virtual router that is specified as the provider for the virtual service.</p> <p>For more information about virtual services, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_services.html">Virtual services</a>.</p>
 func (s *SDK) CreateVirtualService(ctx context.Context, request operations.CreateVirtualServiceRequest) (*operations.CreateVirtualServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualServices", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -879,7 +912,7 @@ func (s *SDK) CreateVirtualService(ctx context.Context, request operations.Creat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -989,8 +1022,9 @@ func (s *SDK) CreateVirtualService(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// DeleteGatewayRoute - Deletes an existing gateway route.
 func (s *SDK) DeleteGatewayRoute(ctx context.Context, request operations.DeleteGatewayRouteRequest) (*operations.DeleteGatewayRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1002,7 +1036,7 @@ func (s *SDK) DeleteGatewayRoute(ctx context.Context, request operations.DeleteG
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1102,8 +1136,9 @@ func (s *SDK) DeleteGatewayRoute(ctx context.Context, request operations.DeleteG
 	return res, nil
 }
 
+// DeleteMesh - <p>Deletes an existing service mesh.</p> <p>You must delete all resources (virtual services, routes, virtual routers, and virtual nodes) in the service mesh before you can delete the mesh itself.</p>
 func (s *SDK) DeleteMesh(ctx context.Context, request operations.DeleteMeshRequest) (*operations.DeleteMeshResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1113,7 +1148,7 @@ func (s *SDK) DeleteMesh(ctx context.Context, request operations.DeleteMeshReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1213,8 +1248,9 @@ func (s *SDK) DeleteMesh(ctx context.Context, request operations.DeleteMeshReque
 	return res, nil
 }
 
+// DeleteRoute - Deletes an existing route.
 func (s *SDK) DeleteRoute(ctx context.Context, request operations.DeleteRouteRequest) (*operations.DeleteRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1226,7 +1262,7 @@ func (s *SDK) DeleteRoute(ctx context.Context, request operations.DeleteRouteReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1326,8 +1362,9 @@ func (s *SDK) DeleteRoute(ctx context.Context, request operations.DeleteRouteReq
 	return res, nil
 }
 
+// DeleteVirtualGateway - Deletes an existing virtual gateway. You cannot delete a virtual gateway if any gateway routes are associated to it.
 func (s *SDK) DeleteVirtualGateway(ctx context.Context, request operations.DeleteVirtualGatewayRequest) (*operations.DeleteVirtualGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1339,7 +1376,7 @@ func (s *SDK) DeleteVirtualGateway(ctx context.Context, request operations.Delet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1439,8 +1476,9 @@ func (s *SDK) DeleteVirtualGateway(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteVirtualNode - <p>Deletes an existing virtual node.</p> <p>You must delete any virtual services that list a virtual node as a service provider before you can delete the virtual node itself.</p>
 func (s *SDK) DeleteVirtualNode(ctx context.Context, request operations.DeleteVirtualNodeRequest) (*operations.DeleteVirtualNodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1452,7 +1490,7 @@ func (s *SDK) DeleteVirtualNode(ctx context.Context, request operations.DeleteVi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1552,8 +1590,9 @@ func (s *SDK) DeleteVirtualNode(ctx context.Context, request operations.DeleteVi
 	return res, nil
 }
 
+// DeleteVirtualRouter - <p>Deletes an existing virtual router.</p> <p>You must delete any routes associated with the virtual router before you can delete the router itself.</p>
 func (s *SDK) DeleteVirtualRouter(ctx context.Context, request operations.DeleteVirtualRouterRequest) (*operations.DeleteVirtualRouterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1565,7 +1604,7 @@ func (s *SDK) DeleteVirtualRouter(ctx context.Context, request operations.Delete
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1665,8 +1704,9 @@ func (s *SDK) DeleteVirtualRouter(ctx context.Context, request operations.Delete
 	return res, nil
 }
 
+// DeleteVirtualService - Deletes an existing virtual service.
 func (s *SDK) DeleteVirtualService(ctx context.Context, request operations.DeleteVirtualServiceRequest) (*operations.DeleteVirtualServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1678,7 +1718,7 @@ func (s *SDK) DeleteVirtualService(ctx context.Context, request operations.Delet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1778,8 +1818,9 @@ func (s *SDK) DeleteVirtualService(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DescribeGatewayRoute - Describes an existing gateway route.
 func (s *SDK) DescribeGatewayRoute(ctx context.Context, request operations.DescribeGatewayRouteRequest) (*operations.DescribeGatewayRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1791,7 +1832,7 @@ func (s *SDK) DescribeGatewayRoute(ctx context.Context, request operations.Descr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1881,8 +1922,9 @@ func (s *SDK) DescribeGatewayRoute(ctx context.Context, request operations.Descr
 	return res, nil
 }
 
+// DescribeMesh - Describes an existing service mesh.
 func (s *SDK) DescribeMesh(ctx context.Context, request operations.DescribeMeshRequest) (*operations.DescribeMeshResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1894,7 +1936,7 @@ func (s *SDK) DescribeMesh(ctx context.Context, request operations.DescribeMeshR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1984,8 +2026,9 @@ func (s *SDK) DescribeMesh(ctx context.Context, request operations.DescribeMeshR
 	return res, nil
 }
 
+// DescribeRoute - Describes an existing route.
 func (s *SDK) DescribeRoute(ctx context.Context, request operations.DescribeRouteRequest) (*operations.DescribeRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1997,7 +2040,7 @@ func (s *SDK) DescribeRoute(ctx context.Context, request operations.DescribeRout
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2087,8 +2130,9 @@ func (s *SDK) DescribeRoute(ctx context.Context, request operations.DescribeRout
 	return res, nil
 }
 
+// DescribeVirtualGateway - Describes an existing virtual gateway.
 func (s *SDK) DescribeVirtualGateway(ctx context.Context, request operations.DescribeVirtualGatewayRequest) (*operations.DescribeVirtualGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2100,7 +2144,7 @@ func (s *SDK) DescribeVirtualGateway(ctx context.Context, request operations.Des
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2190,8 +2234,9 @@ func (s *SDK) DescribeVirtualGateway(ctx context.Context, request operations.Des
 	return res, nil
 }
 
+// DescribeVirtualNode - Describes an existing virtual node.
 func (s *SDK) DescribeVirtualNode(ctx context.Context, request operations.DescribeVirtualNodeRequest) (*operations.DescribeVirtualNodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2203,7 +2248,7 @@ func (s *SDK) DescribeVirtualNode(ctx context.Context, request operations.Descri
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2293,8 +2338,9 @@ func (s *SDK) DescribeVirtualNode(ctx context.Context, request operations.Descri
 	return res, nil
 }
 
+// DescribeVirtualRouter - Describes an existing virtual router.
 func (s *SDK) DescribeVirtualRouter(ctx context.Context, request operations.DescribeVirtualRouterRequest) (*operations.DescribeVirtualRouterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2306,7 +2352,7 @@ func (s *SDK) DescribeVirtualRouter(ctx context.Context, request operations.Desc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2396,8 +2442,9 @@ func (s *SDK) DescribeVirtualRouter(ctx context.Context, request operations.Desc
 	return res, nil
 }
 
+// DescribeVirtualService - Describes an existing virtual service.
 func (s *SDK) DescribeVirtualService(ctx context.Context, request operations.DescribeVirtualServiceRequest) (*operations.DescribeVirtualServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2409,7 +2456,7 @@ func (s *SDK) DescribeVirtualService(ctx context.Context, request operations.Des
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2499,8 +2546,9 @@ func (s *SDK) DescribeVirtualService(ctx context.Context, request operations.Des
 	return res, nil
 }
 
+// ListGatewayRoutes - Returns a list of existing gateway routes that are associated to a virtual gateway.
 func (s *SDK) ListGatewayRoutes(ctx context.Context, request operations.ListGatewayRoutesRequest) (*operations.ListGatewayRoutesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2512,7 +2560,7 @@ func (s *SDK) ListGatewayRoutes(ctx context.Context, request operations.ListGate
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2602,8 +2650,9 @@ func (s *SDK) ListGatewayRoutes(ctx context.Context, request operations.ListGate
 	return res, nil
 }
 
+// ListMeshes - Returns a list of existing service meshes.
 func (s *SDK) ListMeshes(ctx context.Context, request operations.ListMeshesRequest) (*operations.ListMeshesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v20190125/meshes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2615,7 +2664,7 @@ func (s *SDK) ListMeshes(ctx context.Context, request operations.ListMeshesReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2705,8 +2754,9 @@ func (s *SDK) ListMeshes(ctx context.Context, request operations.ListMeshesReque
 	return res, nil
 }
 
+// ListRoutes - Returns a list of existing routes in a service mesh.
 func (s *SDK) ListRoutes(ctx context.Context, request operations.ListRoutesRequest) (*operations.ListRoutesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2718,7 +2768,7 @@ func (s *SDK) ListRoutes(ctx context.Context, request operations.ListRoutesReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2808,8 +2858,9 @@ func (s *SDK) ListRoutes(ctx context.Context, request operations.ListRoutesReque
 	return res, nil
 }
 
+// ListTagsForResource - List the tags for an App Mesh resource.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v20190125/tags#resourceArn"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2821,7 +2872,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2911,8 +2962,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// ListVirtualGateways - Returns a list of existing virtual gateways in a service mesh.
 func (s *SDK) ListVirtualGateways(ctx context.Context, request operations.ListVirtualGatewaysRequest) (*operations.ListVirtualGatewaysResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualGateways", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2924,7 +2976,7 @@ func (s *SDK) ListVirtualGateways(ctx context.Context, request operations.ListVi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3014,8 +3066,9 @@ func (s *SDK) ListVirtualGateways(ctx context.Context, request operations.ListVi
 	return res, nil
 }
 
+// ListVirtualNodes - Returns a list of existing virtual nodes.
 func (s *SDK) ListVirtualNodes(ctx context.Context, request operations.ListVirtualNodesRequest) (*operations.ListVirtualNodesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualNodes", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3027,7 +3080,7 @@ func (s *SDK) ListVirtualNodes(ctx context.Context, request operations.ListVirtu
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3117,8 +3170,9 @@ func (s *SDK) ListVirtualNodes(ctx context.Context, request operations.ListVirtu
 	return res, nil
 }
 
+// ListVirtualRouters - Returns a list of existing virtual routers in a service mesh.
 func (s *SDK) ListVirtualRouters(ctx context.Context, request operations.ListVirtualRoutersRequest) (*operations.ListVirtualRoutersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualRouters", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3130,7 +3184,7 @@ func (s *SDK) ListVirtualRouters(ctx context.Context, request operations.ListVir
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3220,8 +3274,9 @@ func (s *SDK) ListVirtualRouters(ctx context.Context, request operations.ListVir
 	return res, nil
 }
 
+// ListVirtualServices - Returns a list of existing virtual services in a service mesh.
 func (s *SDK) ListVirtualServices(ctx context.Context, request operations.ListVirtualServicesRequest) (*operations.ListVirtualServicesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualServices", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3233,7 +3288,7 @@ func (s *SDK) ListVirtualServices(ctx context.Context, request operations.ListVi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3323,8 +3378,9 @@ func (s *SDK) ListVirtualServices(ctx context.Context, request operations.ListVi
 	return res, nil
 }
 
+// TagResource - Associates the specified tags to a resource with the specified <code>resourceArn</code>. If existing tags on a resource aren't specified in the request parameters, they aren't changed. When a resource is deleted, the tags associated with that resource are also deleted.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v20190125/tag#resourceArn"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3346,7 +3402,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3446,8 +3502,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Deletes specified tags from a resource.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v20190125/untag#resourceArn"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3469,7 +3526,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3559,8 +3616,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateGatewayRoute - Updates an existing gateway route that is associated to a specified virtual gateway in a service mesh.
 func (s *SDK) UpdateGatewayRoute(ctx context.Context, request operations.UpdateGatewayRouteRequest) (*operations.UpdateGatewayRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualGateway/{virtualGatewayName}/gatewayRoutes/{gatewayRouteName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3582,7 +3640,7 @@ func (s *SDK) UpdateGatewayRoute(ctx context.Context, request operations.UpdateG
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3692,8 +3750,9 @@ func (s *SDK) UpdateGatewayRoute(ctx context.Context, request operations.UpdateG
 	return res, nil
 }
 
+// UpdateMesh - Updates an existing service mesh.
 func (s *SDK) UpdateMesh(ctx context.Context, request operations.UpdateMeshRequest) (*operations.UpdateMeshResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3713,7 +3772,7 @@ func (s *SDK) UpdateMesh(ctx context.Context, request operations.UpdateMeshReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3813,8 +3872,9 @@ func (s *SDK) UpdateMesh(ctx context.Context, request operations.UpdateMeshReque
 	return res, nil
 }
 
+// UpdateRoute - Updates an existing route for a specified service mesh and virtual router.
 func (s *SDK) UpdateRoute(ctx context.Context, request operations.UpdateRouteRequest) (*operations.UpdateRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3836,7 +3896,7 @@ func (s *SDK) UpdateRoute(ctx context.Context, request operations.UpdateRouteReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3946,8 +4006,9 @@ func (s *SDK) UpdateRoute(ctx context.Context, request operations.UpdateRouteReq
 	return res, nil
 }
 
+// UpdateVirtualGateway - Updates an existing virtual gateway in a specified service mesh.
 func (s *SDK) UpdateVirtualGateway(ctx context.Context, request operations.UpdateVirtualGatewayRequest) (*operations.UpdateVirtualGatewayResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualGateways/{virtualGatewayName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3969,7 +4030,7 @@ func (s *SDK) UpdateVirtualGateway(ctx context.Context, request operations.Updat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4079,8 +4140,9 @@ func (s *SDK) UpdateVirtualGateway(ctx context.Context, request operations.Updat
 	return res, nil
 }
 
+// UpdateVirtualNode - Updates an existing virtual node in a specified service mesh.
 func (s *SDK) UpdateVirtualNode(ctx context.Context, request operations.UpdateVirtualNodeRequest) (*operations.UpdateVirtualNodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4102,7 +4164,7 @@ func (s *SDK) UpdateVirtualNode(ctx context.Context, request operations.UpdateVi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4212,8 +4274,9 @@ func (s *SDK) UpdateVirtualNode(ctx context.Context, request operations.UpdateVi
 	return res, nil
 }
 
+// UpdateVirtualRouter - Updates an existing virtual router in a specified service mesh.
 func (s *SDK) UpdateVirtualRouter(ctx context.Context, request operations.UpdateVirtualRouterRequest) (*operations.UpdateVirtualRouterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4235,7 +4298,7 @@ func (s *SDK) UpdateVirtualRouter(ctx context.Context, request operations.Update
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4345,8 +4408,9 @@ func (s *SDK) UpdateVirtualRouter(ctx context.Context, request operations.Update
 	return res, nil
 }
 
+// UpdateVirtualService - Updates an existing virtual service in a specified service mesh.
 func (s *SDK) UpdateVirtualService(ctx context.Context, request operations.UpdateVirtualServiceRequest) (*operations.UpdateVirtualServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4368,7 +4432,7 @@ func (s *SDK) UpdateVirtualService(ctx context.Context, request operations.Updat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

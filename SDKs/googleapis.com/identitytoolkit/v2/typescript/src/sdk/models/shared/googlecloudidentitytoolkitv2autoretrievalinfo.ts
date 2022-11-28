@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIdentitytoolkitV2AutoRetrievalInfo
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The information required to auto-retrieve an SMS.
 **/
 export class GoogleCloudIdentitytoolkitV2AutoRetrievalInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appSignatureHash" })
+  @SpeakeasyMetadata({ data: "json, name=appSignatureHash" })
   appSignatureHash?: string;
 }

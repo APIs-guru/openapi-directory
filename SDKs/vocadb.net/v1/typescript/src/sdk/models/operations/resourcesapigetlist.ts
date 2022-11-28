@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ResourcesApiGetListPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=cultureCode" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=cultureCode" })
   cultureCode: string;
 }
 
 
 export class ResourcesApiGetListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=setNames" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=setNames" })
   setNames: string[];
 }
 
 
 export class ResourcesApiGetListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ResourcesApiGetListPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ResourcesApiGetListQueryParams;
 }
 
 
 export class ResourcesApiGetListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourcesApiGetList200ApplicationJsonObject?: Map<string, Map<string, string>>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourcesApiGetList200TextJsonObject?: Map<string, Map<string, string>>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

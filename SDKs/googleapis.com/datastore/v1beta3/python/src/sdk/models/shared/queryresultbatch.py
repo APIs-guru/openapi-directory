@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import entityresult
+from sdk import utils
+from . import *
 
 class QueryResultBatchEntityResultTypeEnum(str, Enum):
     RESULT_TYPE_UNSPECIFIED = "RESULT_TYPE_UNSPECIFIED"
@@ -20,12 +22,16 @@ class QueryResultBatchMoreResultsEnum(str, Enum):
 @dataclass_json
 @dataclass
 class QueryResultBatch:
-    end_cursor: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endCursor' }})
-    entity_result_type: Optional[QueryResultBatchEntityResultTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entityResultType' }})
-    entity_results: Optional[List[entityresult.EntityResult]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entityResults' }})
-    more_results: Optional[QueryResultBatchMoreResultsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'moreResults' }})
-    read_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'readTime' }})
-    skipped_cursor: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'skippedCursor' }})
-    skipped_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'skippedResults' }})
-    snapshot_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'snapshotVersion' }})
+    r"""QueryResultBatch
+    A batch of results produced by a query.
+    """
+    
+    end_cursor: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endCursor') }})
+    entity_result_type: Optional[QueryResultBatchEntityResultTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entityResultType') }})
+    entity_results: Optional[List[EntityResult]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entityResults') }})
+    more_results: Optional[QueryResultBatchMoreResultsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('moreResults') }})
+    read_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('readTime') }})
+    skipped_cursor: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('skippedCursor') }})
+    skipped_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('skippedResults') }})
+    snapshot_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('snapshotVersion') }})
     

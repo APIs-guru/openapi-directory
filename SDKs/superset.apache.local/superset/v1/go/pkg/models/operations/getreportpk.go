@@ -16,12 +16,6 @@ type GetReportPkSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetReportPkRequest struct {
-	PathParams  GetReportPkPathParams
-	QueryParams GetReportPkQueryParams
-	Security    GetReportPkSecurity
-}
-
 type GetReportPk200ApplicationJSONDescriptionColumns struct {
 	ColumnName *string `json:"column_name,omitempty"`
 }
@@ -57,6 +51,12 @@ type GetReportPk422ApplicationJSON struct {
 
 type GetReportPk500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetReportPkRequest struct {
+	PathParams  GetReportPkPathParams
+	QueryParams GetReportPkQueryParams
+	Security    GetReportPkSecurity
 }
 
 type GetReportPkResponse struct {

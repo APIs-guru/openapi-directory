@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolSnmpv3ViewAddPathParams = /** @class */ (function (_super) {
     __extends(ProtocolSnmpv3ViewAddPathParams, _super);
     function ProtocolSnmpv3ViewAddPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolSnmpv3ViewAddPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=mask" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mask" }),
         __metadata("design:type", String)
     ], ProtocolSnmpv3ViewAddPathParams.prototype, "mask", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=subtree" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subtree" }),
         __metadata("design:type", String)
     ], ProtocolSnmpv3ViewAddPathParams.prototype, "subtree", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=viewName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=viewName" }),
         __metadata("design:type", String)
     ], ProtocolSnmpv3ViewAddPathParams.prototype, "viewName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=viewType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=viewType" }),
         __metadata("design:type", String)
     ], ProtocolSnmpv3ViewAddPathParams.prototype, "viewType", void 0);
     return ProtocolSnmpv3ViewAddPathParams;
@@ -57,7 +57,7 @@ var ProtocolSnmpv3ViewAddRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolSnmpv3ViewAddPathParams)
     ], ProtocolSnmpv3ViewAddRequest.prototype, "pathParams", void 0);
     return ProtocolSnmpv3ViewAddRequest;
@@ -69,15 +69,15 @@ var ProtocolSnmpv3ViewAddResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolSnmpv3ViewAddResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolSnmpv3ViewAddResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolSnmpv3ViewAddResponse.prototype, "protocolSnmpv3ViewAdd200ApplicationJsonString", void 0);
     return ProtocolSnmpv3ViewAddResponse;

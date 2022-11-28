@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// RepositoryMetadata
+// Information about a repository.
 type RepositoryMetadata struct {
 	Arn                   *string    `json:"Arn,omitempty"`
 	AccountID             *string    `json:"accountId,omitempty"`

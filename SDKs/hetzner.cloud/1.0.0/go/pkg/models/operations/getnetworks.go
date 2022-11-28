@@ -5,10 +5,6 @@ type GetNetworksQueryParams struct {
 	Name          *string `queryParam:"style=form,explode=true,name=name"`
 }
 
-type GetNetworksRequest struct {
-	QueryParams GetNetworksQueryParams
-}
-
 type GetNetworks200ApplicationJSONMetaPagination struct {
 	LastPage     float64 `json:"last_page"`
 	NextPage     float64 `json:"next_page"`
@@ -22,6 +18,8 @@ type GetNetworks200ApplicationJSONMeta struct {
 	Pagination GetNetworks200ApplicationJSONMetaPagination `json:"pagination"`
 }
 
+// GetNetworks200ApplicationJSONNetworksProtection
+// Protection configuration for the Network
 type GetNetworks200ApplicationJSONNetworksProtection struct {
 	Delete bool `json:"delete"`
 }
@@ -62,6 +60,10 @@ type GetNetworks200ApplicationJSONNetworks struct {
 type GetNetworks200ApplicationJSON struct {
 	Meta     *GetNetworks200ApplicationJSONMeta      `json:"meta,omitempty"`
 	Networks []GetNetworks200ApplicationJSONNetworks `json:"networks"`
+}
+
+type GetNetworksRequest struct {
+	QueryParams GetNetworksQueryParams
 }
 
 type GetNetworksResponse struct {

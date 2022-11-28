@@ -1,24 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Beleg } from "./beleg";
 
 
+
 export class BelegeBelegeGruppe extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Belege-kompakt" })
+  @SpeakeasyMetadata({ data: "json, name=Belege-kompakt" })
   belegeKompakt: string[];
 
-  @Metadata({ data: "json, name=Signaturzertifikat" })
+  @SpeakeasyMetadata({ data: "json, name=Signaturzertifikat" })
   signaturzertifikat: string;
 
-  @Metadata({ data: "json, name=Zertifizierungsstellen" })
+  @SpeakeasyMetadata({ data: "json, name=Zertifizierungsstellen" })
   zertifizierungsstellen: string[];
 }
 
 
 export class Belege extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Belege", elemType: shared.Beleg })
+  @SpeakeasyMetadata({ data: "json, name=Belege", elemType: Beleg })
   belege?: Beleg[];
 
-  @Metadata({ data: "json, name=Belege-Gruppe", elemType: shared.BelegeBelegeGruppe })
+  @SpeakeasyMetadata({ data: "json, name=Belege-Gruppe", elemType: BelegeBelegeGruppe })
   belegeGruppe?: BelegeBelegeGruppe[];
 }

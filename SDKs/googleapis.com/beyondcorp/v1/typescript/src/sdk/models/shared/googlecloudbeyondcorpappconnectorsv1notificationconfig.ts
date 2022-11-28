@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudBeyondcorpAppconnectorsV1NotificationConfigCloudPubSubNotificationConfig } from "./googlecloudbeyondcorpappconnectorsv1notificationconfigcloudpubsubnotificationconfig";
+
 
 
 // GoogleCloudBeyondcorpAppconnectorsV1NotificationConfig
@@ -7,6 +8,6 @@ import { GoogleCloudBeyondcorpAppconnectorsV1NotificationConfigCloudPubSubNotifi
  * NotificationConfig defines the mechanisms to notify instance agent.
 **/
 export class GoogleCloudBeyondcorpAppconnectorsV1NotificationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pubsubNotification" })
+  @SpeakeasyMetadata({ data: "json, name=pubsubNotification" })
   pubsubNotification?: GoogleCloudBeyondcorpAppconnectorsV1NotificationConfigCloudPubSubNotificationConfig;
 }

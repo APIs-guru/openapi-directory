@@ -1,5 +1,7 @@
 package shared
 
+// Order
+// Describes properties of a Planning order.
 type Order struct {
 	AccountID              *string           `json:"accountId,omitempty"`
 	AdvertiserID           *string           `json:"advertiserId,omitempty"`

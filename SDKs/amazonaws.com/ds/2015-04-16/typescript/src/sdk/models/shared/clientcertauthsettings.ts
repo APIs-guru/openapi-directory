@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ClientCertAuthSettings
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about the client certificate authentication settings for the <code>RegisterCertificate</code> and <code>DescribeCertificate</code> operations. 
 **/
 export class ClientCertAuthSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OCSPUrl" })
+  @SpeakeasyMetadata({ data: "json, name=OCSPUrl" })
   ocspUrl?: string;
 }

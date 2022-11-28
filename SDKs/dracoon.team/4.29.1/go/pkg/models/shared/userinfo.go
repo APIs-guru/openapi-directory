@@ -9,6 +9,8 @@ const (
 	UserInfoUserTypeEnumDeleted  UserInfoUserTypeEnum = "deleted"
 )
 
+// UserInfo
+// User information
 type UserInfo struct {
 	AvatarUUID  string               `json:"avatarUuid"`
 	DisplayName *string              `json:"displayName,omitempty"`

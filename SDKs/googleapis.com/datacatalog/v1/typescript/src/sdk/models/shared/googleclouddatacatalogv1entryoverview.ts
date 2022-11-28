@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatacatalogV1EntryOverview
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Entry overview fields for rich text descriptions of entries.
 **/
 export class GoogleCloudDatacatalogV1EntryOverview extends SpeakeasyBase {
-  @Metadata({ data: "json, name=overview" })
+  @SpeakeasyMetadata({ data: "json, name=overview" })
   overview?: string;
 }

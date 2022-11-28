@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableDescription } from "./tabledescription";
+
 
 
 // DeleteTableOutput
@@ -7,6 +8,6 @@ import { TableDescription } from "./tabledescription";
  * Represents the output of a <code>DeleteTable</code> operation.
 **/
 export class DeleteTableOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TableDescription" })
+  @SpeakeasyMetadata({ data: "json, name=TableDescription" })
   tableDescription?: TableDescription;
 }

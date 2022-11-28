@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAttachVpnGatewayActionEnum(str, Enum):
     ATTACH_VPN_GATEWAY = "AttachVpnGateway"
@@ -10,11 +14,11 @@ class GetAttachVpnGatewayVersionEnum(str, Enum):
 
 @dataclass
 class GetAttachVpnGatewayQueryParams:
-    action: GetAttachVpnGatewayActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetAttachVpnGatewayActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetAttachVpnGatewayVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpc_id: str = field(metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
+    vpn_gateway_id: str = field(metadata={'query_param': { 'field_name': 'VpnGatewayId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetAttachVpnGatewayVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpc_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
-    vpn_gateway_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VpnGatewayId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetAttachVpnGatewayHeaders:
 
 @dataclass
 class GetAttachVpnGatewayRequest:
-    query_params: GetAttachVpnGatewayQueryParams = field(default=None)
-    headers: GetAttachVpnGatewayHeaders = field(default=None)
+    headers: GetAttachVpnGatewayHeaders = field()
+    query_params: GetAttachVpnGatewayQueryParams = field()
     
 
 @dataclass
 class GetAttachVpnGatewayResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

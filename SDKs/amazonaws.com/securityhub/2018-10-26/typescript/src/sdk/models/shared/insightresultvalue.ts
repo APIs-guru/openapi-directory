@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InsightResultValue
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The insight result values returned by the <code>GetInsightResults</code> operation.
 **/
 export class InsightResultValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Count" })
+  @SpeakeasyMetadata({ data: "json, name=Count" })
   count: number;
 
-  @Metadata({ data: "json, name=GroupByAttributeValue" })
+  @SpeakeasyMetadata({ data: "json, name=GroupByAttributeValue" })
   groupByAttributeValue: string;
 }

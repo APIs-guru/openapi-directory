@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetEpisodesByCategoryPathParams = /** @class */ (function (_super) {
     __extends(GetEpisodesByCategoryPathParams, _super);
@@ -30,7 +30,7 @@ var GetEpisodesByCategoryPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=category" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=category" }),
         __metadata("design:type", String)
     ], GetEpisodesByCategoryPathParams.prototype, "category", void 0);
     return GetEpisodesByCategoryPathParams;
@@ -47,27 +47,27 @@ var GetEpisodesByCategoryQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=availability" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability" }),
         __metadata("design:type", String)
     ], GetEpisodesByCategoryQueryParams.prototype, "availability", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lang" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" }),
         __metadata("design:type", String)
     ], GetEpisodesByCategoryQueryParams.prototype, "lang", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetEpisodesByCategoryQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=per_page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" }),
         __metadata("design:type", Number)
     ], GetEpisodesByCategoryQueryParams.prototype, "perPage", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rights" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rights" }),
         __metadata("design:type", String)
     ], GetEpisodesByCategoryQueryParams.prototype, "rights", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], GetEpisodesByCategoryQueryParams.prototype, "sort", void 0);
     return GetEpisodesByCategoryQueryParams;
@@ -79,11 +79,11 @@ var GetEpisodesByCategoryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetEpisodesByCategoryPathParams)
     ], GetEpisodesByCategoryRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetEpisodesByCategoryQueryParams)
     ], GetEpisodesByCategoryRequest.prototype, "queryParams", void 0);
     return GetEpisodesByCategoryRequest;
@@ -95,15 +95,15 @@ var GetEpisodesByCategoryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetEpisodesByCategoryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetEpisodesByCategoryResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetEpisodesByCategoryResponse.prototype, "ibl", void 0);
     return GetEpisodesByCategoryResponse;

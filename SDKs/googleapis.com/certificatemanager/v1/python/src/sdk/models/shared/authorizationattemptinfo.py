@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AuthorizationAttemptInfoFailureReasonEnum(str, Enum):
     FAILURE_REASON_UNSPECIFIED = "FAILURE_REASON_UNSPECIFIED"
@@ -18,8 +20,12 @@ class AuthorizationAttemptInfoStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AuthorizationAttemptInfo:
-    details: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'details' }})
-    domain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domain' }})
-    failure_reason: Optional[AuthorizationAttemptInfoFailureReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failureReason' }})
-    state: Optional[AuthorizationAttemptInfoStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    r"""AuthorizationAttemptInfo
+    State of the latest attempt to authorize a domain for certificate issuance.
+    """
+    
+    details: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('details') }})
+    domain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('domain') }})
+    failure_reason: Optional[AuthorizationAttemptInfoFailureReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('failureReason') }})
+    state: Optional[AuthorizationAttemptInfoStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
     

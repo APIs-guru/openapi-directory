@@ -1,83 +1,72 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetV4LayersAsPlantedQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=occurredAfter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=occurredAfter" })
   occurredAfter?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=occurredBefore" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=occurredBefore" })
   occurredBefore?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=resourceOwnerId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=resourceOwnerId" })
   resourceOwnerId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=updatedAfter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=updatedAfter" })
   updatedAfter?: Date;
 }
 
 
 export class GetV4LayersAsPlantedHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" })
   accept: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Limit" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Limit" })
   xLimit?: number;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Next-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Next-Token" })
   xNextToken?: string;
 }
 
 
-export class GetV4LayersAsPlantedSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
-export class GetV4LayersAsPlantedSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2AuthorizationCode: shared.SchemeOauth2AuthorizationCode;
-}
-
-
 export class GetV4LayersAsPlantedSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetV4LayersAsPlantedSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey?: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetV4LayersAsPlantedSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2AuthorizationCode?: shared.SchemeOauth2AuthorizationCode;
 }
 
 
 export class GetV4LayersAsPlantedRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetV4LayersAsPlantedQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetV4LayersAsPlantedHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetV4LayersAsPlantedSecurity;
 }
 
 
 export class GetV4LayersAsPlantedResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   empty?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   plantingActivities?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

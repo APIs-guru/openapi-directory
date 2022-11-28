@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SentimentTypeEnum } from "./sentimenttypeenum";
 import { SentimentScore } from "./sentimentscore";
 // BatchDetectSentimentItemResult
@@ -35,15 +35,15 @@ var BatchDetectSentimentItemResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Index" }),
+        SpeakeasyMetadata({ data: "json, name=Index" }),
         __metadata("design:type", Number)
     ], BatchDetectSentimentItemResult.prototype, "index", void 0);
     __decorate([
-        Metadata({ data: "json, name=Sentiment" }),
+        SpeakeasyMetadata({ data: "json, name=Sentiment" }),
         __metadata("design:type", String)
     ], BatchDetectSentimentItemResult.prototype, "sentiment", void 0);
     __decorate([
-        Metadata({ data: "json, name=SentimentScore" }),
+        SpeakeasyMetadata({ data: "json, name=SentimentScore" }),
         __metadata("design:type", SentimentScore)
     ], BatchDetectSentimentItemResult.prototype, "sentimentScore", void 0);
     return BatchDetectSentimentItemResult;

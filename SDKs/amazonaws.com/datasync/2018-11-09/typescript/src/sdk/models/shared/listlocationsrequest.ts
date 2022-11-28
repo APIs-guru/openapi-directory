@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocationFilter } from "./locationfilter";
+
 
 
 // ListLocationsRequest
@@ -8,12 +8,12 @@ import { LocationFilter } from "./locationfilter";
  * ListLocationsRequest
 **/
 export class ListLocationsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Filters", elemType: shared.LocationFilter })
+  @SpeakeasyMetadata({ data: "json, name=Filters", elemType: LocationFilter })
   filters?: LocationFilter[];
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

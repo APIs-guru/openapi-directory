@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { S3Location } from "./s3location";
 import { FormatEnum } from "./formatenum";
 import { ReportFrequencyEnum } from "./reportfrequencyenum";
@@ -36,31 +36,31 @@ var ReportDefinition = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], ReportDefinition.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=destinationS3Location" }),
+        SpeakeasyMetadata({ data: "json, name=destinationS3Location" }),
         __metadata("design:type", S3Location)
     ], ReportDefinition.prototype, "destinationS3Location", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], ReportDefinition.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" }),
         __metadata("design:type", Date)
     ], ReportDefinition.prototype, "lastUpdatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=reportDescription" }),
+        SpeakeasyMetadata({ data: "json, name=reportDescription" }),
         __metadata("design:type", String)
     ], ReportDefinition.prototype, "reportDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=reportFrequency" }),
+        SpeakeasyMetadata({ data: "json, name=reportFrequency" }),
         __metadata("design:type", String)
     ], ReportDefinition.prototype, "reportFrequency", void 0);
     __decorate([
-        Metadata({ data: "json, name=reportId" }),
+        SpeakeasyMetadata({ data: "json, name=reportId" }),
         __metadata("design:type", String)
     ], ReportDefinition.prototype, "reportId", void 0);
     return ReportDefinition;

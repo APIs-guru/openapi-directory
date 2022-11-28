@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ResourceInfo
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a resource referenced in the request.
 **/
 export class ResourceInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=container" })
+  @SpeakeasyMetadata({ data: "json, name=container" })
   container?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=permission" })
+  @SpeakeasyMetadata({ data: "json, name=permission" })
   permission?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

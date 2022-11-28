@@ -19,6 +19,8 @@ type GetUsageStatisticsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// GetUsageStatisticsRequestBodySortBy
+// Specifies criteria for sorting the results of a query for Amazon Macie account quotas and usage data.
 type GetUsageStatisticsRequestBodySortBy struct {
 	Key     *shared.UsageStatisticsSortKeyEnum `json:"key,omitempty"`
 	OrderBy *shared.OrderByEnum                `json:"orderBy,omitempty"`

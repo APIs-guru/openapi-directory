@@ -1,6 +1,7 @@
 
 
+
 export enum ConnectionTypeEnum {
-    Internet = "INTERNET"
-,    VpcLink = "VPC_LINK"
+    Internet = "INTERNET",
+    VpcLink = "VPC_LINK"
 }

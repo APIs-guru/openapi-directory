@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClusterListEntry } from "./clusterlistentry";
 
 
+
 export class ListClustersResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterListEntries", elemType: shared.ClusterListEntry })
+  @SpeakeasyMetadata({ data: "json, name=ClusterListEntries", elemType: ClusterListEntry })
   clusterListEntries?: ClusterListEntry[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

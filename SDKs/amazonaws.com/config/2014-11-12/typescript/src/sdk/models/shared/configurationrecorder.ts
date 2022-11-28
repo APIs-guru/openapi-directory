@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RecordingGroup } from "./recordinggroup";
+
 
 
 // ConfigurationRecorder
@@ -7,12 +8,12 @@ import { RecordingGroup } from "./recordinggroup";
  * An object that represents the recording of configuration changes of an Amazon Web Services resource.
 **/
 export class ConfigurationRecorder extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=recordingGroup" })
+  @SpeakeasyMetadata({ data: "json, name=recordingGroup" })
   recordingGroup?: RecordingGroup;
 
-  @Metadata({ data: "json, name=roleARN" })
+  @SpeakeasyMetadata({ data: "json, name=roleARN" })
   roleArn?: string;
 }

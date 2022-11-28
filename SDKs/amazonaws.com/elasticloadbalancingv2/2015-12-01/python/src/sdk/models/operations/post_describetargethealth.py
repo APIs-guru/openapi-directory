@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeTargetHealthActionEnum(str, Enum):
     DESCRIBE_TARGET_HEALTH = "DescribeTargetHealth"
@@ -10,8 +14,8 @@ class PostDescribeTargetHealthVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeTargetHealthQueryParams:
-    action: PostDescribeTargetHealthActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeTargetHealthVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeTargetHealthActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeTargetHealthVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeTargetHealthHeaders:
 
 @dataclass
 class PostDescribeTargetHealthRequest:
-    query_params: PostDescribeTargetHealthQueryParams = field(default=None)
-    headers: PostDescribeTargetHealthHeaders = field(default=None)
+    headers: PostDescribeTargetHealthHeaders = field()
+    query_params: PostDescribeTargetHealthQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeTargetHealthResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

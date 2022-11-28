@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionValue } from "./dimensionvalue";
+
 
 
 // PivotDimensionHeader
@@ -8,6 +8,6 @@ import { DimensionValue } from "./dimensionvalue";
  * Summarizes dimension values from a row for this pivot.
 **/
 export class PivotDimensionHeader extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensionValues", elemType: shared.DimensionValue })
+  @SpeakeasyMetadata({ data: "json, name=dimensionValues", elemType: DimensionValue })
   dimensionValues?: DimensionValue[];
 }

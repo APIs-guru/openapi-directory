@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostAdminSettingsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fixedDelay" })
+  @SpeakeasyMetadata({ data: "json, name=fixedDelay" })
   fixedDelay?: number;
 }
 
 
 export class PostAdminSettingsRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: PostAdminSettingsRequestBody;
 }
 
 
 export class PostAdminSettingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

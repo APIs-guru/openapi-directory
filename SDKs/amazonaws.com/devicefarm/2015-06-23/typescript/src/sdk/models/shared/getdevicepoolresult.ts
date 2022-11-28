@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DevicePool } from "./devicepool";
+
 
 
 // GetDevicePoolResult
@@ -7,6 +8,6 @@ import { DevicePool } from "./devicepool";
  * Represents the result of a get device pool request.
 **/
 export class GetDevicePoolResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=devicePool" })
+  @SpeakeasyMetadata({ data: "json, name=devicePool" })
   devicePool?: DevicePool;
 }

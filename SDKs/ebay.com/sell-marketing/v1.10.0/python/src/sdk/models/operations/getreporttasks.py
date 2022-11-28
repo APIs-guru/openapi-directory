@@ -12,18 +12,18 @@ class GetReportTasksQueryParams:
 
 @dataclass
 class GetReportTasksSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetReportTasksRequest:
-    query_params: GetReportTasksQueryParams = field(default=None)
-    security: GetReportTasksSecurity = field(default=None)
+    query_params: GetReportTasksQueryParams = field()
+    security: GetReportTasksSecurity = field()
     
 
 @dataclass
 class GetReportTasksResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     report_task_paged_collection: Optional[shared.ReportTaskPagedCollection] = field(default=None)
-    status_code: int = field(default=None)
     

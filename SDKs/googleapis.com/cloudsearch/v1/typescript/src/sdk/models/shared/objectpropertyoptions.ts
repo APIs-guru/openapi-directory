@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PropertyDefinition } from "./propertydefinition";
+
 
 
 // ObjectPropertyOptions
@@ -8,6 +8,6 @@ import { PropertyDefinition } from "./propertydefinition";
  * The options for object properties.
 **/
 export class ObjectPropertyOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=subobjectProperties", elemType: shared.PropertyDefinition })
+  @SpeakeasyMetadata({ data: "json, name=subobjectProperties", elemType: PropertyDefinition })
   subobjectProperties?: PropertyDefinition[];
 }

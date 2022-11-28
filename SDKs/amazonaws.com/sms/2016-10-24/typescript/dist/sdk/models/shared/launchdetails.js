@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LaunchDetails
 /**
  * Details about the latest launch of an application.
@@ -33,15 +33,15 @@ var LaunchDetails = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=latestLaunchTime" }),
+        SpeakeasyMetadata({ data: "json, name=latestLaunchTime" }),
         __metadata("design:type", Date)
     ], LaunchDetails.prototype, "latestLaunchTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=stackId" }),
+        SpeakeasyMetadata({ data: "json, name=stackId" }),
         __metadata("design:type", String)
     ], LaunchDetails.prototype, "stackId", void 0);
     __decorate([
-        Metadata({ data: "json, name=stackName" }),
+        SpeakeasyMetadata({ data: "json, name=stackName" }),
         __metadata("design:type", String)
     ], LaunchDetails.prototype, "stackName", void 0);
     return LaunchDetails;

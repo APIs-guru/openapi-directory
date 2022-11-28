@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Attribute } from "./attribute";
 import { Scope } from "./scope";
+
 
 
 // ExclusionPreview
@@ -9,18 +9,18 @@ import { Scope } from "./scope";
  * Contains information about what is excluded from an assessment run given the current state of the assessment template.
 **/
 export class ExclusionPreview extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes", elemType: shared.Attribute })
+  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: Attribute })
   attributes?: Attribute[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=recommendation" })
+  @SpeakeasyMetadata({ data: "json, name=recommendation" })
   recommendation: string;
 
-  @Metadata({ data: "json, name=scopes", elemType: shared.Scope })
+  @SpeakeasyMetadata({ data: "json, name=scopes", elemType: Scope })
   scopes: Scope[];
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 }

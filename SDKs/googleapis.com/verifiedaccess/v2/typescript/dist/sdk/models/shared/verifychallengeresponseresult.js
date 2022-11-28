@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var VerifyChallengeResponseResultKeyTrustLevelEnum;
 (function (VerifyChallengeResponseResultKeyTrustLevelEnum) {
     VerifyChallengeResponseResultKeyTrustLevelEnum["KeyTrustLevelUnspecified"] = "KEY_TRUST_LEVEL_UNSPECIFIED";
@@ -41,27 +41,27 @@ var VerifyChallengeResponseResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customerId" }),
+        SpeakeasyMetadata({ data: "json, name=customerId" }),
         __metadata("design:type", String)
     ], VerifyChallengeResponseResult.prototype, "customerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=devicePermanentId" }),
+        SpeakeasyMetadata({ data: "json, name=devicePermanentId" }),
         __metadata("design:type", String)
     ], VerifyChallengeResponseResult.prototype, "devicePermanentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceSignal" }),
+        SpeakeasyMetadata({ data: "json, name=deviceSignal" }),
         __metadata("design:type", String)
     ], VerifyChallengeResponseResult.prototype, "deviceSignal", void 0);
     __decorate([
-        Metadata({ data: "json, name=keyTrustLevel" }),
+        SpeakeasyMetadata({ data: "json, name=keyTrustLevel" }),
         __metadata("design:type", String)
     ], VerifyChallengeResponseResult.prototype, "keyTrustLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=signedPublicKeyAndChallenge" }),
+        SpeakeasyMetadata({ data: "json, name=signedPublicKeyAndChallenge" }),
         __metadata("design:type", String)
     ], VerifyChallengeResponseResult.prototype, "signedPublicKeyAndChallenge", void 0);
     __decorate([
-        Metadata({ data: "json, name=virtualDeviceId" }),
+        SpeakeasyMetadata({ data: "json, name=virtualDeviceId" }),
         __metadata("design:type", String)
     ], VerifyChallengeResponseResult.prototype, "virtualDeviceId", void 0);
     return VerifyChallengeResponseResult;

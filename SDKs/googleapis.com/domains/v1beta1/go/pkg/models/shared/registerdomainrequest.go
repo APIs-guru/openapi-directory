@@ -14,10 +14,12 @@ const (
 	RegisterDomainRequestDomainNoticesEnumHstsPreloaded           RegisterDomainRequestDomainNoticesEnum = "HSTS_PRELOADED"
 )
 
-type RegisterDomainRequest struct {
+// RegisterDomainRequestInput
+// Request for the `RegisterDomain` method.
+type RegisterDomainRequestInput struct {
 	ContactNotices []RegisterDomainRequestContactNoticesEnum `json:"contactNotices,omitempty"`
 	DomainNotices  []RegisterDomainRequestDomainNoticesEnum  `json:"domainNotices,omitempty"`
-	Registration   *Registration                             `json:"registration,omitempty"`
+	Registration   *RegistrationInput                        `json:"registration,omitempty"`
 	ValidateOnly   *bool                                     `json:"validateOnly,omitempty"`
 	YearlyPrice    *Money                                    `json:"yearlyPrice,omitempty"`
 }

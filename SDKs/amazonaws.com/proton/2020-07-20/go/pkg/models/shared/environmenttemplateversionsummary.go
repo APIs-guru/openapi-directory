@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// EnvironmentTemplateVersionSummary
+// A summary of the version of an environment template detail data.
 type EnvironmentTemplateVersionSummary struct {
 	Arn                     string                    `json:"arn"`
 	CreatedAt               time.Time                 `json:"createdAt"`

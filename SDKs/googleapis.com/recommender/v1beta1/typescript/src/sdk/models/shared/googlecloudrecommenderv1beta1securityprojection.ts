@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRecommenderV1beta1SecurityProjection
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains various ways of describing the impact on Security.
 **/
 export class GoogleCloudRecommenderV1beta1SecurityProjection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: Map<string, any>;
 }

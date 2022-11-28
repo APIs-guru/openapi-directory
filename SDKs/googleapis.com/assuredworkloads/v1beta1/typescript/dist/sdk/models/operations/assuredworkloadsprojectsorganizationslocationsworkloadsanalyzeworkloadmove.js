@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMovePathParams = /** @class */ (function (_super) {
     __extends(AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMovePathParams, _super);
@@ -30,11 +30,11 @@ var AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMovePa
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=project" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project" }),
         __metadata("design:type", String)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMovePathParams.prototype, "project", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=target" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=target" }),
         __metadata("design:type", String)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMovePathParams.prototype, "target", void 0);
     return AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMovePathParams;
@@ -46,51 +46,51 @@ var AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveQu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=source" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=source" }),
         __metadata("design:type", String)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveQueryParams.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveQueryParams.prototype, "uploadProtocol", void 0);
     return AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveQueryParams;
@@ -102,11 +102,11 @@ var AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveSe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveSecurity.prototype, "oauth2c", void 0);
     return AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveSecurity;
@@ -118,15 +118,15 @@ var AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveRe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMovePathParams)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveQueryParams)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveSecurity)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveRequest.prototype, "security", void 0);
     return AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveRequest;
@@ -138,15 +138,15 @@ var AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveRe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GoogleCloudAssuredworkloadsV1beta1AnalyzeWorkloadMoveResponse)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveResponse.prototype, "googleCloudAssuredworkloadsV1beta1AnalyzeWorkloadMoveResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveResponse.prototype, "statusCode", void 0);
     return AssuredworkloadsProjectsOrganizationsLocationsWorkloadsAnalyzeWorkloadMoveResponse;

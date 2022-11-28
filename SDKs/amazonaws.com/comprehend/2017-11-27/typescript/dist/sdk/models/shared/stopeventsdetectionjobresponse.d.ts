@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { JobStatusEnum } from "./jobstatusenum";
 export declare class StopEventsDetectionJobResponse extends SpeakeasyBase {
     jobId?: string;

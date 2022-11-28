@@ -29,6 +29,8 @@ const (
 	SubscriptionCreateRequestEventTypeEnumConversationPropertyChange  SubscriptionCreateRequestEventTypeEnum = "conversation.propertyChange"
 )
 
+// SubscriptionCreateRequest
+// New webhook settings for an app.
 type SubscriptionCreateRequest struct {
 	Active       *bool                                  `json:"active,omitempty"`
 	EventType    SubscriptionCreateRequestEventTypeEnum `json:"eventType"`

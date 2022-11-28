@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPaymentPolicyByNameQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=marketplace_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=marketplace_id" })
   marketplaceId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name: string;
 }
 
 
 export class GetPaymentPolicyByNameSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetPaymentPolicyByNameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPaymentPolicyByNameQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPaymentPolicyByNameSecurity;
 }
 
 
 export class GetPaymentPolicyByNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   paymentPolicy?: shared.PaymentPolicy;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

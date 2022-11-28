@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StackScript
+// A StackScript enables you to quickly deploy a fully-configured application in an automated manner.
 type StackScript struct {
 	Created           *time.Time         `json:"created,omitempty"`
 	DeploymentsActive *int64             `json:"deployments_active,omitempty"`
@@ -20,4 +22,15 @@ type StackScript struct {
 	UserDefinedFields []UserDefinedField `json:"user_defined_fields,omitempty"`
 	UserGravatarID    *string            `json:"user_gravatar_id,omitempty"`
 	Username          *string            `json:"username,omitempty"`
+}
+
+// StackScriptInput
+// A StackScript enables you to quickly deploy a fully-configured application in an automated manner.
+type StackScriptInput struct {
+	Description *string  `json:"description,omitempty"`
+	Images      []string `json:"images,omitempty"`
+	IsPublic    *bool    `json:"is_public,omitempty"`
+	Label       *string  `json:"label,omitempty"`
+	RevNote     *string  `json:"rev_note,omitempty"`
+	Script      *string  `json:"script,omitempty"`
 }

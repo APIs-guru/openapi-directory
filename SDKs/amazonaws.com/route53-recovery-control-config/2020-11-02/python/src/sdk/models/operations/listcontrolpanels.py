@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -23,18 +26,18 @@ class ListControlPanelsHeaders:
 
 @dataclass
 class ListControlPanelsRequest:
-    query_params: ListControlPanelsQueryParams = field(default=None)
-    headers: ListControlPanelsHeaders = field(default=None)
+    headers: ListControlPanelsHeaders = field()
+    query_params: ListControlPanelsQueryParams = field()
     
 
 @dataclass
 class ListControlPanelsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_control_panels_response: Optional[shared.ListControlPanelsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

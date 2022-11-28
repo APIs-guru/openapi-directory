@@ -1,13 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import mfamode_enum
-from . import settings
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateBackendAuthMfaConfig:
-    mfa_mode: Optional[mfamode_enum.MfaModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MFAMode' }})
-    settings: Optional[settings.Settings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Settings' }})
+    r"""UpdateBackendAuthMfaConfig
+    Updates the multi-factor authentication (MFA) configuration for the backend of your Amplify project.
+    """
+    
+    mfa_mode: Optional[MfaModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MFAMode') }})
+    settings: Optional[Settings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Settings') }})
     

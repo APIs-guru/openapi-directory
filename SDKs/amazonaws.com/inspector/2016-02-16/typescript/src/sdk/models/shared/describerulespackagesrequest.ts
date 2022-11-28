@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocaleEnum } from "./localeenum";
 
 
+
 export class DescribeRulesPackagesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=locale" })
+  @SpeakeasyMetadata({ data: "json, name=locale" })
   locale?: LocaleEnum;
 
-  @Metadata({ data: "json, name=rulesPackageArns" })
+  @SpeakeasyMetadata({ data: "json, name=rulesPackageArns" })
   rulesPackageArns: string[];
 }

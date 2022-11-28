@@ -1,51 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Updated } from "./updated";
 import { Error } from "./error";
 import { Tag } from "./tag";
-import { Updated } from "./updated";
+
 
 
 export class ContactMobile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=number" })
+  @SpeakeasyMetadata({ data: "json, name=number" })
   number?: string;
 }
 
 
 export class Contact extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: Map<string, any>;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Updated;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Error;
 
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=mobile" })
+  @SpeakeasyMetadata({ data: "json, name=mobile" })
   mobile?: ContactMobile;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Updated;
 
-  @Metadata({ data: "json, name=valid" })
+  @SpeakeasyMetadata({ data: "json, name=valid" })
   valid?: boolean;
 }

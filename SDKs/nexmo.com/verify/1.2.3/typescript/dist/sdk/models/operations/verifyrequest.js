@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var VerifyRequestPathParams = /** @class */ (function (_super) {
     __extends(VerifyRequestPathParams, _super);
@@ -30,7 +30,7 @@ var VerifyRequestPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], VerifyRequestPathParams.prototype, "format", void 0);
     return VerifyRequestPathParams;
@@ -42,11 +42,11 @@ var VerifyRequestRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", VerifyRequestPathParams)
     ], VerifyRequestRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", shared.VerifyRequest)
     ], VerifyRequestRequest.prototype, "request", void 0);
     return VerifyRequestRequest;
@@ -58,19 +58,19 @@ var VerifyRequestResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], VerifyRequestResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], VerifyRequestResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], VerifyRequestResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], VerifyRequestResponse.prototype, "verifyRequest200ApplicationJsonOneOf", void 0);
     return VerifyRequestResponse;

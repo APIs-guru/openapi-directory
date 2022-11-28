@@ -24,6 +24,8 @@ const (
 	JobStatusSubstateEnumStaleStatus JobStatusSubstateEnum = "STALE_STATUS"
 )
 
+// JobStatus
+// Dataproc job status.
 type JobStatus struct {
 	Details        *string                `json:"details,omitempty"`
 	State          *JobStatusStateEnum    `json:"state,omitempty"`

@@ -18,6 +18,8 @@ const (
 	MediaReferenceTypeEnumArbitraryBytes        MediaReferenceTypeEnum = "ARBITRARY_BYTES"
 )
 
+// Media
+// # gdata.* are outside protos with mising documentation
 type Media struct {
 	Algorithm             *string                 `json:"algorithm,omitempty"`
 	BigstoreObjectRef     *string                 `json:"bigstoreObjectRef,omitempty"`

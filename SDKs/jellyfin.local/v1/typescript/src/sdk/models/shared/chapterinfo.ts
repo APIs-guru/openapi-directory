@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ChapterInfo
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Class ChapterInfo.
 **/
 export class ChapterInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ImageDateModified" })
+  @SpeakeasyMetadata({ data: "json, name=ImageDateModified" })
   imageDateModified?: Date;
 
-  @Metadata({ data: "json, name=ImagePath" })
+  @SpeakeasyMetadata({ data: "json, name=ImagePath" })
   imagePath?: string;
 
-  @Metadata({ data: "json, name=ImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=ImageTag" })
   imageTag?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=StartPositionTicks" })
+  @SpeakeasyMetadata({ data: "json, name=StartPositionTicks" })
   startPositionTicks?: number;
 }

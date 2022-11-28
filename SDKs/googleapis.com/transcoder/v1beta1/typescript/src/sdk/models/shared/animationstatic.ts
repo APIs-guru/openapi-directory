@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NormalizedCoordinate } from "./normalizedcoordinate";
+
 
 
 // AnimationStatic
@@ -7,9 +8,9 @@ import { NormalizedCoordinate } from "./normalizedcoordinate";
  * Display static overlay object.
 **/
 export class AnimationStatic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=startTimeOffset" })
+  @SpeakeasyMetadata({ data: "json, name=startTimeOffset" })
   startTimeOffset?: string;
 
-  @Metadata({ data: "json, name=xy" })
+  @SpeakeasyMetadata({ data: "json, name=xy" })
   xy?: NormalizedCoordinate;
 }

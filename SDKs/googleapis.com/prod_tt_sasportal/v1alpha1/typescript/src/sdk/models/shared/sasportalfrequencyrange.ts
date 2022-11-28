@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SasPortalFrequencyRange
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Frequency range from `low_frequency` to `high_frequency`.
 **/
 export class SasPortalFrequencyRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=highFrequencyMhz" })
+  @SpeakeasyMetadata({ data: "json, name=highFrequencyMhz" })
   highFrequencyMhz?: number;
 
-  @Metadata({ data: "json, name=lowFrequencyMhz" })
+  @SpeakeasyMetadata({ data: "json, name=lowFrequencyMhz" })
   lowFrequencyMhz?: number;
 }

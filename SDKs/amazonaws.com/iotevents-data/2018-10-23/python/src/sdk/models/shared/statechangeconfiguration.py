@@ -1,11 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import triggertype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StateChangeConfiguration:
-    trigger_type: Optional[triggertype_enum.TriggerTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'triggerType' }})
+    r"""StateChangeConfiguration
+    Contains the configuration information of alarm state changes.
+    """
+    
+    trigger_type: Optional[TriggerTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('triggerType') }})
     

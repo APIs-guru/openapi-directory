@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReportKey
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Key used to identify a report.
 **/
 export class ReportKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=queryId" })
+  @SpeakeasyMetadata({ data: "json, name=queryId" })
   queryId?: string;
 
-  @Metadata({ data: "json, name=reportId" })
+  @SpeakeasyMetadata({ data: "json, name=reportId" })
   reportId?: string;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoCombinedAudiencesGetPathParams:
-    combined_audience_id: str = field(default=None, metadata={'path_param': { 'field_name': 'combinedAudienceId', 'style': 'simple', 'explode': False }})
+    combined_audience_id: str = field(metadata={'path_param': { 'field_name': 'combinedAudienceId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class DisplayvideoCombinedAudiencesGetQueryParams:
 
 @dataclass
 class DisplayvideoCombinedAudiencesGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoCombinedAudiencesGetRequest:
-    path_params: DisplayvideoCombinedAudiencesGetPathParams = field(default=None)
-    query_params: DisplayvideoCombinedAudiencesGetQueryParams = field(default=None)
-    security: DisplayvideoCombinedAudiencesGetSecurity = field(default=None)
+    path_params: DisplayvideoCombinedAudiencesGetPathParams = field()
+    query_params: DisplayvideoCombinedAudiencesGetQueryParams = field()
+    security: DisplayvideoCombinedAudiencesGetSecurity = field()
     
 
 @dataclass
 class DisplayvideoCombinedAudiencesGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     combined_audience: Optional[shared.CombinedAudience] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

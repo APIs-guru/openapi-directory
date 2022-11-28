@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NodeBalancerTransfer
@@ -7,13 +8,13 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class NodeBalancerTransfer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=in" })
+  @SpeakeasyMetadata({ data: "json, name=in" })
   in?: number;
 
-  @Metadata({ data: "json, name=out" })
+  @SpeakeasyMetadata({ data: "json, name=out" })
   out?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
@@ -24,36 +25,53 @@ export class NodeBalancerTransfer extends SpeakeasyBase {
  * 
 **/
 export class NodeBalancer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=client_conn_throttle" })
+  @SpeakeasyMetadata({ data: "json, name=client_conn_throttle" })
   clientConnThrottle?: number;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=hostname" })
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
   hostname?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=ipv4" })
+  @SpeakeasyMetadata({ data: "json, name=ipv4" })
   ipv4?: string;
 
-  @Metadata({ data: "json, name=ipv6" })
+  @SpeakeasyMetadata({ data: "json, name=ipv6" })
   ipv6?: string;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=transfer" })
+  @SpeakeasyMetadata({ data: "json, name=transfer" })
   transfer?: NodeBalancerTransfer;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
+}
+
+
+// NodeBalancerInput
+/** 
+ * Linode's load balancing solution.  Can handle multiple ports, SSL termination, and any number of backends.  NodeBalancer ports are configured with NodeBalancer Configs, and each config is given one or more NodeBalancer Node that accepts traffic.  The traffic should be routed to the  NodeBalancer's ip address, the NodeBalancer will handle routing individual requests to backends.
+ * 
+**/
+export class NodeBalancerInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=client_conn_throttle" })
+  clientConnThrottle?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=label" })
+  label?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=tags" })
+  tags?: string[];
 }

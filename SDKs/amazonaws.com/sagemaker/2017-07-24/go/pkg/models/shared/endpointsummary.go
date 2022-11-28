@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// EndpointSummary
+// Provides summary information for an endpoint.
 type EndpointSummary struct {
 	CreationTime     time.Time          `json:"CreationTime"`
 	EndpointArn      string             `json:"EndpointArn"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PatientAuthConfirmRequestCredential
+// note, demographic details are only required for demographic verfication.
 type PatientAuthConfirmRequestCredential struct {
 	AuthCode    *string             `json:"authCode,omitempty"`
 	Demographic *PatientDemographic `json:"demographic,omitempty"`

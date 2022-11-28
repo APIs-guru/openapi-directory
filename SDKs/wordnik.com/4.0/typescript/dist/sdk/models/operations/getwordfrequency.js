@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetWordFrequencyPathParams = /** @class */ (function (_super) {
     __extends(GetWordFrequencyPathParams, _super);
     function GetWordFrequencyPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=word" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=word" }),
         __metadata("design:type", String)
     ], GetWordFrequencyPathParams.prototype, "word", void 0);
     return GetWordFrequencyPathParams;
@@ -46,15 +46,15 @@ var GetWordFrequencyQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=endYear" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endYear" }),
         __metadata("design:type", Number)
     ], GetWordFrequencyQueryParams.prototype, "endYear", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=startYear" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startYear" }),
         __metadata("design:type", Number)
     ], GetWordFrequencyQueryParams.prototype, "startYear", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=useCanonical" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=useCanonical" }),
         __metadata("design:type", String)
     ], GetWordFrequencyQueryParams.prototype, "useCanonical", void 0);
     return GetWordFrequencyQueryParams;
@@ -66,11 +66,11 @@ var GetWordFrequencyRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWordFrequencyPathParams)
     ], GetWordFrequencyRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWordFrequencyQueryParams)
     ], GetWordFrequencyRequest.prototype, "queryParams", void 0);
     return GetWordFrequencyRequest;
@@ -82,15 +82,15 @@ var GetWordFrequencyResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetWordFrequencyResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetWordFrequencyResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetWordFrequencyResponse.prototype, "statusCode", void 0);
     return GetWordFrequencyResponse;

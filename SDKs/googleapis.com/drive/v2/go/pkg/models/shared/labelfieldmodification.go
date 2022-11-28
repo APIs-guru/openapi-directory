@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LabelFieldModification
+// A modification to a label's field.
 type LabelFieldModification struct {
 	FieldID            *string     `json:"fieldId,omitempty"`
 	Kind               *string     `json:"kind,omitempty"`

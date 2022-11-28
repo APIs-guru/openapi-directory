@@ -1,62 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RemoveLinodeIpPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=address" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=address" })
   address: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
   linodeId: number;
 }
 
 
-export class RemoveLinodeIpSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class RemoveLinodeIpSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class RemoveLinodeIpSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: RemoveLinodeIpSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: RemoveLinodeIpSecurityOption2;
-}
-
-
-export class RemoveLinodeIpRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: RemoveLinodeIpPathParams;
-
-  @Metadata()
-  security: RemoveLinodeIpSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class RemoveLinodeIpDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class RemoveLinodeIpRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: RemoveLinodeIpPathParams;
+
+  @SpeakeasyMetadata()
+  security: RemoveLinodeIpSecurity;
+}
+
+
 export class RemoveLinodeIpResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   removeLinodeIp200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   removeLinodeIpDefaultApplicationJsonObject?: RemoveLinodeIpDefaultApplicationJson;
 }

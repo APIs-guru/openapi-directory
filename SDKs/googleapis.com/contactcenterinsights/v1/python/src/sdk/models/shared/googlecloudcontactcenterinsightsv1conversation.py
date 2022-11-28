@@ -1,12 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudcontactcenterinsightsv1conversationcallmetadata
-from . import googlecloudcontactcenterinsightsv1conversationdatasource
-from . import googlecloudcontactcenterinsightsv1dialogflowintent
-from . import googlecloudcontactcenterinsightsv1analysis
-from . import googlecloudcontactcenterinsightsv1runtimeannotation
-from . import googlecloudcontactcenterinsightsv1conversationtranscript
+from sdk import utils
+from . import *
 
 class GoogleCloudContactcenterinsightsV1ConversationMediumEnum(str, Enum):
     MEDIUM_UNSPECIFIED = "MEDIUM_UNSPECIFIED"
@@ -17,23 +17,49 @@ class GoogleCloudContactcenterinsightsV1ConversationMediumEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudContactcenterinsightsV1Conversation:
-    agent_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'agentId' }})
-    call_metadata: Optional[googlecloudcontactcenterinsightsv1conversationcallmetadata.GoogleCloudContactcenterinsightsV1ConversationCallMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'callMetadata' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    data_source: Optional[googlecloudcontactcenterinsightsv1conversationdatasource.GoogleCloudContactcenterinsightsV1ConversationDataSource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataSource' }})
-    dialogflow_intents: Optional[dict[str, googlecloudcontactcenterinsightsv1dialogflowintent.GoogleCloudContactcenterinsightsV1DialogflowIntent]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dialogflowIntents' }})
-    duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'duration' }})
-    expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expireTime' }})
-    labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
-    language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'languageCode' }})
-    latest_analysis: Optional[googlecloudcontactcenterinsightsv1analysis.GoogleCloudContactcenterinsightsV1Analysis] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'latestAnalysis' }})
-    medium: Optional[GoogleCloudContactcenterinsightsV1ConversationMediumEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'medium' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    obfuscated_user_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'obfuscatedUserId' }})
-    runtime_annotations: Optional[List[googlecloudcontactcenterinsightsv1runtimeannotation.GoogleCloudContactcenterinsightsV1RuntimeAnnotation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'runtimeAnnotations' }})
-    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTime' }})
-    transcript: Optional[googlecloudcontactcenterinsightsv1conversationtranscript.GoogleCloudContactcenterinsightsV1ConversationTranscript] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transcript' }})
-    ttl: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ttl' }})
-    turn_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'turnCount' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
+    r"""GoogleCloudContactcenterinsightsV1Conversation
+    The conversation resource.
+    """
+    
+    agent_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('agentId') }})
+    call_metadata: Optional[GoogleCloudContactcenterinsightsV1ConversationCallMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('callMetadata') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    data_source: Optional[GoogleCloudContactcenterinsightsV1ConversationDataSource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataSource') }})
+    dialogflow_intents: Optional[dict[str, GoogleCloudContactcenterinsightsV1DialogflowIntent]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dialogflowIntents') }})
+    duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('duration') }})
+    expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expireTime') }})
+    labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
+    language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('languageCode') }})
+    latest_analysis: Optional[GoogleCloudContactcenterinsightsV1Analysis] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('latestAnalysis') }})
+    medium: Optional[GoogleCloudContactcenterinsightsV1ConversationMediumEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('medium') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    obfuscated_user_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('obfuscatedUserId') }})
+    runtime_annotations: Optional[List[GoogleCloudContactcenterinsightsV1RuntimeAnnotation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('runtimeAnnotations') }})
+    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime') }})
+    transcript: Optional[GoogleCloudContactcenterinsightsV1ConversationTranscript] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transcript') }})
+    ttl: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ttl') }})
+    turn_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('turnCount') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
+    
+
+@dataclass_json
+@dataclass
+class GoogleCloudContactcenterinsightsV1ConversationInput:
+    r"""GoogleCloudContactcenterinsightsV1ConversationInput
+    The conversation resource.
+    """
+    
+    agent_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('agentId') }})
+    call_metadata: Optional[GoogleCloudContactcenterinsightsV1ConversationCallMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('callMetadata') }})
+    data_source: Optional[GoogleCloudContactcenterinsightsV1ConversationDataSourceInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataSource') }})
+    expire_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expireTime') }})
+    labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
+    language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('languageCode') }})
+    latest_analysis: Optional[GoogleCloudContactcenterinsightsV1AnalysisInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('latestAnalysis') }})
+    medium: Optional[GoogleCloudContactcenterinsightsV1ConversationMediumEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('medium') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    obfuscated_user_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('obfuscatedUserId') }})
+    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime') }})
+    transcript: Optional[GoogleCloudContactcenterinsightsV1ConversationTranscript] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transcript') }})
+    ttl: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ttl') }})
     

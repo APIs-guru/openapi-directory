@@ -5,10 +5,6 @@ type UserAPIGetSongRatingPathParams struct {
 	SongID int32 `pathParam:"style=simple,explode=false,name=songId"`
 }
 
-type UserAPIGetSongRatingRequest struct {
-	PathParams UserAPIGetSongRatingPathParams
-}
-
 type UserAPIGetSongRating200ApplicationJSONEnum string
 
 const (
@@ -35,6 +31,10 @@ const (
 	UserAPIGetSongRating200TextJSONEnumLike     UserAPIGetSongRating200TextJSONEnum = "Like"
 	UserAPIGetSongRating200TextJSONEnumFavorite UserAPIGetSongRating200TextJSONEnum = "Favorite"
 )
+
+type UserAPIGetSongRatingRequest struct {
+	PathParams UserAPIGetSongRatingPathParams
+}
 
 type UserAPIGetSongRatingResponse struct {
 	Body                                              []byte

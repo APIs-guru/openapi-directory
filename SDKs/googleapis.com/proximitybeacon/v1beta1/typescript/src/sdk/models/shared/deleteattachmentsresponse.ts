@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteAttachmentsResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response for a request to delete attachments.
 **/
 export class DeleteAttachmentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=numDeleted" })
+  @SpeakeasyMetadata({ data: "json, name=numDeleted" })
   numDeleted?: number;
 }

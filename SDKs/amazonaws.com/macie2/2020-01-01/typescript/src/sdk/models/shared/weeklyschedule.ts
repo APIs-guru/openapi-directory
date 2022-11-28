@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DayOfWeekEnum } from "./dayofweekenum";
+
 
 
 // WeeklySchedule
@@ -7,6 +8,6 @@ import { DayOfWeekEnum } from "./dayofweekenum";
  * Specifies a weekly recurrence pattern for running a classification job.
 **/
 export class WeeklySchedule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dayOfWeek" })
+  @SpeakeasyMetadata({ data: "json, name=dayOfWeek" })
   dayOfWeek?: DayOfWeekEnum;
 }

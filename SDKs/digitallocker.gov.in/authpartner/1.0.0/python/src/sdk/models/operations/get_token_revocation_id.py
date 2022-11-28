@@ -1,6 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
+from sdk.models import shared
 
 class GetTokenRevocationIDRequestBodyTokenTypeHintEnum(str, Enum):
     REFRESH_TOKEN = "refresh_token"
@@ -10,23 +13,23 @@ class GetTokenRevocationIDRequestBodyTokenTypeHintEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetTokenRevocationIDRequestBody:
-    token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'token' }})
-    token_type_hint: Optional[GetTokenRevocationIDRequestBodyTokenTypeHintEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'token_type_hint' }})
+    token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('token') }})
+    token_type_hint: Optional[GetTokenRevocationIDRequestBodyTokenTypeHintEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('token_type_hint') }})
     
 
 @dataclass
 class GetTokenRevocationIDSecurity:
-    oauthsecurity: shared.SchemeOauthsecurity = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauthsecurity: shared.SchemeOauthsecurity = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetTokenRevocationIDRequest:
+    security: GetTokenRevocationIDSecurity = field()
     request: Optional[GetTokenRevocationIDRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: GetTokenRevocationIDSecurity = field(default=None)
     
 
 @dataclass
 class GetTokenRevocationIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

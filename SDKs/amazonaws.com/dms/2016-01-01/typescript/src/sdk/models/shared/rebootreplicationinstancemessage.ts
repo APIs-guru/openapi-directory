@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RebootReplicationInstanceMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ForceFailover" })
+  @SpeakeasyMetadata({ data: "json, name=ForceFailover" })
   forceFailover?: boolean;
 
-  @Metadata({ data: "json, name=ForcePlannedFailover" })
+  @SpeakeasyMetadata({ data: "json, name=ForcePlannedFailover" })
   forcePlannedFailover?: boolean;
 
-  @Metadata({ data: "json, name=ReplicationInstanceArn" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationInstanceArn" })
   replicationInstanceArn: string;
 }

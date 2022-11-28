@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Meta } from "./meta";
 
 
+
 export class OpenAqResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: Meta;
 
-  @Metadata({ data: "json, name=results" })
+  @SpeakeasyMetadata({ data: "json, name=results" })
   results?: any[];
 }

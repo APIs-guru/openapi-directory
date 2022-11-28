@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import policycompliancedetail
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetComplianceDetailResponse:
-    policy_compliance_detail: Optional[policycompliancedetail.PolicyComplianceDetail] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PolicyComplianceDetail' }})
+    policy_compliance_detail: Optional[PolicyComplianceDetail] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PolicyComplianceDetail') }})
     

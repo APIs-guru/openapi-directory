@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorCodeEnum } from "./errorcodeenum";
+
 
 
 // ErrorReason
@@ -7,9 +8,9 @@ import { ErrorCodeEnum } from "./errorcodeenum";
  * An error that explains why an action did not succeed.
 **/
 export class ErrorReason extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ErrorCode" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorCode" })
   errorCode?: ErrorCodeEnum;
 
-  @Metadata({ data: "json, name=ErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorMessage" })
   errorMessage?: string;
 }

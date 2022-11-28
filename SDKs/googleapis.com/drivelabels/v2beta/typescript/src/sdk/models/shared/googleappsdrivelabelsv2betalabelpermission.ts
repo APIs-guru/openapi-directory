@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleAppsDriveLabelsV2betaLabelPermissionRoleEnum {
-    LabelRoleUnspecified = "LABEL_ROLE_UNSPECIFIED"
-,    Reader = "READER"
-,    Applier = "APPLIER"
-,    Organizer = "ORGANIZER"
-,    Editor = "EDITOR"
+    LabelRoleUnspecified = "LABEL_ROLE_UNSPECIFIED",
+    Reader = "READER",
+    Applier = "APPLIER",
+    Organizer = "ORGANIZER",
+    Editor = "EDITOR"
 }
 
 
@@ -14,21 +15,21 @@ export enum GoogleAppsDriveLabelsV2betaLabelPermissionRoleEnum {
  * The permission that applies to a principal (user, group, audience) on a label.
 **/
 export class GoogleAppsDriveLabelsV2betaLabelPermission extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audience" })
+  @SpeakeasyMetadata({ data: "json, name=audience" })
   audience?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=person" })
+  @SpeakeasyMetadata({ data: "json, name=person" })
   person?: string;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: GoogleAppsDriveLabelsV2betaLabelPermissionRoleEnum;
 }

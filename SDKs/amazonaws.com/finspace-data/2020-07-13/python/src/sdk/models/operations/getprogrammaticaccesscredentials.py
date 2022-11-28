@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetProgrammaticAccessCredentialsQueryParams:
+    environment_id: str = field(metadata={'query_param': { 'field_name': 'environmentId', 'style': 'form', 'explode': True }})
     duration_in_minutes: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'durationInMinutes', 'style': 'form', 'explode': True }})
-    environment_id: str = field(default=None, metadata={'query_param': { 'field_name': 'environmentId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -22,16 +25,16 @@ class GetProgrammaticAccessCredentialsHeaders:
 
 @dataclass
 class GetProgrammaticAccessCredentialsRequest:
-    query_params: GetProgrammaticAccessCredentialsQueryParams = field(default=None)
-    headers: GetProgrammaticAccessCredentialsHeaders = field(default=None)
+    headers: GetProgrammaticAccessCredentialsHeaders = field()
+    query_params: GetProgrammaticAccessCredentialsQueryParams = field()
     
 
 @dataclass
 class GetProgrammaticAccessCredentialsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_programmatic_access_credentials_response: Optional[shared.GetProgrammaticAccessCredentialsResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

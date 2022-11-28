@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DownloadRequirements extends SpeakeasyBase {
-  @Metadata({ data: "json, name=is_note_required" })
+  @SpeakeasyMetadata({ data: "json, name=is_note_required" })
   isNoteRequired?: boolean;
 
-  @Metadata({ data: "json, name=is_project_code_required" })
+  @SpeakeasyMetadata({ data: "json, name=is_project_code_required" })
   isProjectCodeRequired?: boolean;
 
-  @Metadata({ data: "json, name=project_codes" })
+  @SpeakeasyMetadata({ data: "json, name=project_codes" })
   projectCodes?: string[];
 }

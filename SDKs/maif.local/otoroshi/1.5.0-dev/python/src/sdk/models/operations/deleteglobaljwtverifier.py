@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class DeleteGlobalJwtVerifierPathParams:
-    verifier_id: str = field(default=None, metadata={'path_param': { 'field_name': 'verifierId', 'style': 'simple', 'explode': False }})
+    verifier_id: str = field(metadata={'path_param': { 'field_name': 'verifierId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteGlobalJwtVerifierSecurity:
-    otoroshi_auth: shared.SchemeOtoroshiAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    otoroshi_auth: shared.SchemeOtoroshiAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class DeleteGlobalJwtVerifierRequest:
-    path_params: DeleteGlobalJwtVerifierPathParams = field(default=None)
-    security: DeleteGlobalJwtVerifierSecurity = field(default=None)
+    path_params: DeleteGlobalJwtVerifierPathParams = field()
+    security: DeleteGlobalJwtVerifierSecurity = field()
     
 
 @dataclass
 class DeleteGlobalJwtVerifierResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     deleted: Optional[shared.Deleted] = field(default=None)
-    status_code: int = field(default=None)
     

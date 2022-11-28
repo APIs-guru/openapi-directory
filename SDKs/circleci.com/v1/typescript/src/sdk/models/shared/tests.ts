@@ -1,33 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatusEnum } from "./statusenum";
 
 
+
 export class TestsTests extends SpeakeasyBase {
-  @Metadata({ data: "json, name=classname" })
+  @SpeakeasyMetadata({ data: "json, name=classname" })
   classname?: string;
 
-  @Metadata({ data: "json, name=file" })
+  @SpeakeasyMetadata({ data: "json, name=file" })
   file?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: StatusEnum;
 
-  @Metadata({ data: "json, name=run_time" })
+  @SpeakeasyMetadata({ data: "json, name=run_time" })
   runTime?: number;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 }
 
 
 export class Tests extends SpeakeasyBase {
-  @Metadata({ data: "json, name=tests", elemType: shared.TestsTests })
+  @SpeakeasyMetadata({ data: "json, name=tests", elemType: TestsTests })
   tests?: TestsTests[];
 }

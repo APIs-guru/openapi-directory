@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ReloadUserConf200ApplicationJsonActionEnum {
     ReloadUserConf = "reloadUserConf"
@@ -6,41 +7,41 @@ export enum ReloadUserConf200ApplicationJsonActionEnum {
 
 
 export class ReloadUserConf200ApplicationJsonDataReload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: string;
 }
 
 
 export class ReloadUserConf200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=reload" })
+  @SpeakeasyMetadata({ data: "json, name=reload" })
   reload: ReloadUserConf200ApplicationJsonDataReload;
 }
 
 export enum ReloadUserConf200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class ReloadUserConf200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: ReloadUserConf200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: ReloadUserConf200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: ReloadUserConf200ApplicationJsonResultEnum;
 }
 
 
 export class ReloadUserConfResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reloadUserConf200ApplicationJsonObject?: ReloadUserConf200ApplicationJson;
 }

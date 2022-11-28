@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ContentRestriction
+// A restriction for accessing the content of the file.
 type ContentRestriction struct {
 	ReadOnly        *bool      `json:"readOnly,omitempty"`
 	Reason          *string    `json:"reason,omitempty"`

@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MybusinessbusinessinformationLocationsUpdateAttributesPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +30,14 @@ class MybusinessbusinessinformationLocationsUpdateAttributesQueryParams:
 
 @dataclass
 class MybusinessbusinessinformationLocationsUpdateAttributesRequest:
-    path_params: MybusinessbusinessinformationLocationsUpdateAttributesPathParams = field(default=None)
-    query_params: MybusinessbusinessinformationLocationsUpdateAttributesQueryParams = field(default=None)
-    request: Optional[shared.Attributes] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: MybusinessbusinessinformationLocationsUpdateAttributesPathParams = field()
+    query_params: MybusinessbusinessinformationLocationsUpdateAttributesQueryParams = field()
+    request: Optional[shared.AttributesInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MybusinessbusinessinformationLocationsUpdateAttributesResponse:
+    content_type: str = field()
+    status_code: int = field()
     attributes: Optional[shared.Attributes] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// EventSubscription
+// Describes an event notification subscription created by the <code>CreateEventSubscription</code> operation.
 type EventSubscription struct {
 	CustSubscriptionID       *string  `json:"CustSubscriptionId,omitempty"`
 	CustomerAwsID            *string  `json:"CustomerAwsId,omitempty"`

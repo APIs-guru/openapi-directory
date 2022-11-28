@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ResetRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chargestation" })
+  @SpeakeasyMetadata({ data: "json, name=chargestation" })
   chargestation?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
-export class ResetRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: ResetRequestBody;
-}
-
-
 export class Reset201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=ok" })
+  @SpeakeasyMetadata({ data: "json, name=ok" })
   ok?: boolean;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: Map<string, any>;
 }
 
 
+export class ResetRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: ResetRequestBody;
+}
+
+
 export class ResetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reset201ApplicationJsonObject?: Reset201ApplicationJson;
 }

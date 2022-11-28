@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Attribute } from "./attribute";
 import { FindingSeverityEnum } from "./findingseverityenum";
 // ImageScanFinding
 /**
@@ -35,23 +35,23 @@ var ImageScanFinding = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attributes", elemType: shared.Attribute }),
+        SpeakeasyMetadata({ data: "json, name=attributes", elemType: Attribute }),
         __metadata("design:type", Array)
     ], ImageScanFinding.prototype, "attributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], ImageScanFinding.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ImageScanFinding.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=severity" }),
+        SpeakeasyMetadata({ data: "json, name=severity" }),
         __metadata("design:type", String)
     ], ImageScanFinding.prototype, "severity", void 0);
     __decorate([
-        Metadata({ data: "json, name=uri" }),
+        SpeakeasyMetadata({ data: "json, name=uri" }),
         __metadata("design:type", String)
     ], ImageScanFinding.prototype, "uri", void 0);
     return ImageScanFinding;

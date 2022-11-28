@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AccountAssignment } from "./accountassignment";
 var ListAccountAssignmentsResponse = /** @class */ (function (_super) {
     __extends(ListAccountAssignmentsResponse, _super);
     function ListAccountAssignmentsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AccountAssignments", elemType: shared.AccountAssignment }),
+        SpeakeasyMetadata({ data: "json, name=AccountAssignments", elemType: AccountAssignment }),
         __metadata("design:type", Array)
     ], ListAccountAssignmentsResponse.prototype, "accountAssignments", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListAccountAssignmentsResponse.prototype, "nextToken", void 0);
     return ListAccountAssignmentsResponse;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ApiKeyIds
 /**
  * The identifier of an <a>ApiKey</a> used in a <a>UsagePlan</a>.
@@ -33,11 +33,11 @@ var ApiKeyIds = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ids" }),
+        SpeakeasyMetadata({ data: "json, name=ids" }),
         __metadata("design:type", Array)
     ], ApiKeyIds.prototype, "ids", void 0);
     __decorate([
-        Metadata({ data: "json, name=warnings" }),
+        SpeakeasyMetadata({ data: "json, name=warnings" }),
         __metadata("design:type", Array)
     ], ApiKeyIds.prototype, "warnings", void 0);
     return ApiKeyIds;

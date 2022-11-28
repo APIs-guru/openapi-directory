@@ -15,16 +15,16 @@ type GetConversationMessagesQueryParams struct {
 	PerPage             *int64   `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type GetConversationMessagesRequest struct {
-	PathParams  GetConversationMessagesPathParams
-	QueryParams GetConversationMessagesQueryParams
-}
-
 type GetConversationMessages200ApplicationJSON struct {
 	Conversation *shared.Conversation `json:"conversation,omitempty"`
 	Messages     []shared.Message     `json:"messages,omitempty"`
 	Page         *int64               `json:"page,omitempty"`
 	PerPage      *int64               `json:"per_page,omitempty"`
+}
+
+type GetConversationMessagesRequest struct {
+	PathParams  GetConversationMessagesPathParams
+	QueryParams GetConversationMessagesQueryParams
 }
 
 type GetConversationMessagesResponse struct {

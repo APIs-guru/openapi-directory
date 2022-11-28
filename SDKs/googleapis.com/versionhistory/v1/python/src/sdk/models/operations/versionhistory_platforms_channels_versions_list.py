@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VersionhistoryPlatformsChannelsVersionsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,13 +30,13 @@ class VersionhistoryPlatformsChannelsVersionsListQueryParams:
 
 @dataclass
 class VersionhistoryPlatformsChannelsVersionsListRequest:
-    path_params: VersionhistoryPlatformsChannelsVersionsListPathParams = field(default=None)
-    query_params: VersionhistoryPlatformsChannelsVersionsListQueryParams = field(default=None)
+    path_params: VersionhistoryPlatformsChannelsVersionsListPathParams = field()
+    query_params: VersionhistoryPlatformsChannelsVersionsListQueryParams = field()
     
 
 @dataclass
 class VersionhistoryPlatformsChannelsVersionsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_versions_response: Optional[shared.ListVersionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

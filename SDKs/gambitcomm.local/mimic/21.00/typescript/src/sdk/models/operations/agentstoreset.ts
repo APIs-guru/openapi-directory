@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AgentStoreSetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
   agentNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=persist" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=persist" })
   persist: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=var" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=var" })
   var: string;
 }
 
 
 export class AgentStoreSetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AgentStoreSetPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: string;
 }
 
 
 export class AgentStoreSetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   agentStoreSet200ApplicationJsonString?: string;
 }

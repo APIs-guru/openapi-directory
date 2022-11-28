@@ -50,6 +50,8 @@ const (
 	ResultMetadataDataTypeEnumTimestampWithTimezone ResultMetadataDataTypeEnum = "TIMESTAMP_WITH_TIMEZONE"
 )
 
+// ResultMetadata
+// Result Metadata message contains metadata about the result returned after executing an Action.
 type ResultMetadata struct {
 	DataType    *ResultMetadataDataTypeEnum `json:"dataType,omitempty"`
 	Description *string                     `json:"description,omitempty"`

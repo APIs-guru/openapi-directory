@@ -4,17 +4,9 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type PostDeleteShareholdersSecurityOption1 struct {
-	BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
-}
-
-type PostDeleteShareholdersSecurityOption2 struct {
-	APIKeyAuth shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type PostDeleteShareholdersSecurity struct {
-	Option1 *PostDeleteShareholdersSecurityOption1 `security:"option"`
-	Option2 *PostDeleteShareholdersSecurityOption2 `security:"option"`
+	BasicAuth  *shared.SchemeBasicAuth  `security:"scheme,type=http,subtype=basic"`
+	APIKeyAuth *shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type PostDeleteShareholdersRequest struct {

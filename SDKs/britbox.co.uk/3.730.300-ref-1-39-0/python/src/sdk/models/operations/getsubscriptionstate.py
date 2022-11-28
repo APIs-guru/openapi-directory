@@ -10,19 +10,19 @@ class GetSubscriptionStateQueryParams:
 
 @dataclass
 class GetSubscriptionStateSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetSubscriptionStateRequest:
-    query_params: GetSubscriptionStateQueryParams = field(default=None)
-    security: GetSubscriptionStateSecurity = field(default=None)
+    query_params: GetSubscriptionStateQueryParams = field()
+    security: GetSubscriptionStateSecurity = field()
     
 
 @dataclass
 class GetSubscriptionStateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     itv_subscription_state: Optional[shared.ItvSubscriptionState] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

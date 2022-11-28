@@ -14,13 +14,13 @@ type GetUsersForWorkspaceQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetUsersForWorkspace200ApplicationJSON struct {
+	Data []shared.UserCompact `json:"data,omitempty"`
+}
+
 type GetUsersForWorkspaceRequest struct {
 	PathParams  GetUsersForWorkspacePathParams
 	QueryParams GetUsersForWorkspaceQueryParams
-}
-
-type GetUsersForWorkspace200ApplicationJSON struct {
-	Data []shared.UserCompact `json:"data,omitempty"`
 }
 
 type GetUsersForWorkspaceResponse struct {

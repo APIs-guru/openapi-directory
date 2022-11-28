@@ -1,5 +1,7 @@
 package shared
 
+// OntapVolumeConfiguration
+// The configuration of an Amazon FSx for NetApp ONTAP volume
 type OntapVolumeConfiguration struct {
 	FlexCacheEndpointType     *FlexCacheEndpointTypeEnum `json:"FlexCacheEndpointType,omitempty"`
 	JunctionPath              *string                    `json:"JunctionPath,omitempty"`

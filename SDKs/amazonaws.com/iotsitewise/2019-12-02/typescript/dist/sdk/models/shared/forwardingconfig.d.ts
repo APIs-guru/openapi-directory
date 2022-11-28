@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ForwardingConfigStateEnum } from "./forwardingconfigstateenum";
 /**
  * The forwarding configuration for a given property.

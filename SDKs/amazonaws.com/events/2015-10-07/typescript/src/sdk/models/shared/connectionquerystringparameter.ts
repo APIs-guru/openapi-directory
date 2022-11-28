@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ConnectionQueryStringParameter
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Additional query string parameter for the connection. You can include up to 100 additional query string parameters per request. Each additional parameter counts towards the event payload size, which cannot exceed 64 KB.
 **/
 export class ConnectionQueryStringParameter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IsValueSecret" })
+  @SpeakeasyMetadata({ data: "json, name=IsValueSecret" })
   isValueSecret?: boolean;
 
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key?: string;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

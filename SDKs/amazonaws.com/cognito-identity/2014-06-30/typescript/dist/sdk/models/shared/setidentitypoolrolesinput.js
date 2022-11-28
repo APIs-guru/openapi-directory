@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { RoleMapping } from "./rolemapping";
 // SetIdentityPoolRolesInput
 /**
  * Input to the <code>SetIdentityPoolRoles</code> action.
@@ -34,15 +34,15 @@ var SetIdentityPoolRolesInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=IdentityPoolId" }),
+        SpeakeasyMetadata({ data: "json, name=IdentityPoolId" }),
         __metadata("design:type", String)
     ], SetIdentityPoolRolesInput.prototype, "identityPoolId", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleMappings", elemType: shared.RoleMapping }),
+        SpeakeasyMetadata({ data: "json, name=RoleMappings", elemType: RoleMapping }),
         __metadata("design:type", Map)
     ], SetIdentityPoolRolesInput.prototype, "roleMappings", void 0);
     __decorate([
-        Metadata({ data: "json, name=Roles" }),
+        SpeakeasyMetadata({ data: "json, name=Roles" }),
         __metadata("design:type", Map)
     ], SetIdentityPoolRolesInput.prototype, "roles", void 0);
     return SetIdentityPoolRolesInput;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CustomerAction } from "./customeraction";
 import { RuleEvaluation } from "./ruleevaluation";
 import { AlarmStateNameEnum } from "./alarmstatenameenum";

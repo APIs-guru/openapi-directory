@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssessmentControlSet } from "./assessmentcontrolset";
 import { FrameworkMetadata } from "./frameworkmetadata";
+
 
 
 // AssessmentFramework
@@ -9,15 +9,15 @@ import { FrameworkMetadata } from "./frameworkmetadata";
  *  The file used to structure and automate Audit Manager assessments for a given compliance standard. 
 **/
 export class AssessmentFramework extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=controlSets", elemType: shared.AssessmentControlSet })
+  @SpeakeasyMetadata({ data: "json, name=controlSets", elemType: AssessmentControlSet })
   controlSets?: AssessmentControlSet[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: FrameworkMetadata;
 }

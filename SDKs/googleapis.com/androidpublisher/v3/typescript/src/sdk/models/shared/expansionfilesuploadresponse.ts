@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExpansionFile } from "./expansionfile";
+
 
 
 // ExpansionFilesUploadResponse
@@ -7,6 +8,6 @@ import { ExpansionFile } from "./expansionfile";
  * Response for uploading an expansion file.
 **/
 export class ExpansionFilesUploadResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expansionFile" })
+  @SpeakeasyMetadata({ data: "json, name=expansionFile" })
   expansionFile?: ExpansionFile;
 }

@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import annotationlayer
-from . import chartdatafilter
-from . import chartdatafilter
-from . import chartdatafilter
+from sdk import utils
+from . import *
 
 class ChartDataQueryObjectDatasourceTypeEnum(str, Enum):
     DRUID = "druid"
@@ -14,8 +13,8 @@ class ChartDataQueryObjectDatasourceTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ChartDataQueryObjectDatasource:
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    type: Optional[ChartDataQueryObjectDatasourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    type: Optional[ChartDataQueryObjectDatasourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     
 class ChartDataQueryObjectExtrasRelativeEndEnum(str, Enum):
     TODAY = "today"
@@ -50,14 +49,18 @@ class ChartDataQueryObjectExtrasTimeGrainSqlaEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ChartDataQueryObjectExtras:
-    druid_time_origin: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'druid_time_origin' }})
-    having: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'having' }})
-    having_druid: Optional[List[chartdatafilter.ChartDataFilter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'having_druid' }})
-    relative_end: Optional[ChartDataQueryObjectExtrasRelativeEndEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relative_end' }})
-    relative_start: Optional[ChartDataQueryObjectExtrasRelativeStartEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relative_start' }})
-    time_grain_sqla: Optional[ChartDataQueryObjectExtrasTimeGrainSqlaEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time_grain_sqla' }})
-    time_range_endpoints: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time_range_endpoints' }})
-    where: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'where' }})
+    r"""ChartDataQueryObjectExtras
+    Extra parameters to add to the query.
+    """
+    
+    druid_time_origin: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('druid_time_origin') }})
+    having: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('having') }})
+    having_druid: Optional[List[ChartDataFilter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('having_druid') }})
+    relative_end: Optional[ChartDataQueryObjectExtrasRelativeEndEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relative_end') }})
+    relative_start: Optional[ChartDataQueryObjectExtrasRelativeStartEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relative_start') }})
+    time_grain_sqla: Optional[ChartDataQueryObjectExtrasTimeGrainSqlaEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('time_grain_sqla') }})
+    time_range_endpoints: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('time_range_endpoints') }})
+    where: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('where') }})
     
 class ChartDataQueryObjectPostProcessingOperationEnum(str, Enum):
     AGGREGATE = "aggregate"
@@ -79,40 +82,40 @@ class ChartDataQueryObjectPostProcessingOperationEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ChartDataQueryObjectPostProcessing:
-    operation: ChartDataQueryObjectPostProcessingOperationEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operation' }})
-    options: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
+    operation: ChartDataQueryObjectPostProcessingOperationEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('operation') }})
+    options: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
     
 
 @dataclass_json
 @dataclass
 class ChartDataQueryObject:
-    annotation_layers: Optional[List[annotationlayer.AnnotationLayer]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'annotation_layers' }})
-    applied_time_extras: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applied_time_extras' }})
-    apply_fetch_values_predicate: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apply_fetch_values_predicate' }})
-    columns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'columns' }})
-    datasource: Optional[ChartDataQueryObjectDatasource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'datasource' }})
-    druid_time_origin: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'druid_time_origin' }})
-    extras: Optional[ChartDataQueryObjectExtras] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'extras' }})
-    filters: Optional[List[chartdatafilter.ChartDataFilter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filters' }})
-    granularity: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'granularity' }})
-    granularity_sqla: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'granularity_sqla' }})
-    groupby: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'groupby' }})
-    having: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'having' }})
-    having_filters: Optional[List[chartdatafilter.ChartDataFilter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'having_filters' }})
-    is_rowcount: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'is_rowcount' }})
-    is_timeseries: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'is_timeseries' }})
-    metrics: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metrics' }})
-    order_desc: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'order_desc' }})
-    orderby: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orderby' }})
-    post_processing: Optional[List[ChartDataQueryObjectPostProcessing]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'post_processing' }})
-    result_type: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'result_type' }})
-    row_limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'row_limit' }})
-    row_offset: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'row_offset' }})
-    time_offsets: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time_offsets' }})
-    time_range: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time_range' }})
-    time_shift: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time_shift' }})
-    timeseries_limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeseries_limit' }})
-    timeseries_limit_metric: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeseries_limit_metric' }})
-    url_params: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url_params' }})
-    where: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'where' }})
+    annotation_layers: Optional[List[AnnotationLayer]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('annotation_layers') }})
+    applied_time_extras: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('applied_time_extras') }})
+    apply_fetch_values_predicate: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('apply_fetch_values_predicate') }})
+    columns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('columns') }})
+    datasource: Optional[ChartDataQueryObjectDatasource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('datasource') }})
+    druid_time_origin: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('druid_time_origin') }})
+    extras: Optional[ChartDataQueryObjectExtras] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('extras') }})
+    filters: Optional[List[ChartDataFilter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filters') }})
+    granularity: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('granularity') }})
+    granularity_sqla: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('granularity_sqla') }})
+    groupby: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('groupby') }})
+    having: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('having') }})
+    having_filters: Optional[List[ChartDataFilter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('having_filters') }})
+    is_rowcount: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('is_rowcount') }})
+    is_timeseries: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('is_timeseries') }})
+    metrics: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metrics') }})
+    order_desc: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('order_desc') }})
+    orderby: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('orderby') }})
+    post_processing: Optional[List[ChartDataQueryObjectPostProcessing]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('post_processing') }})
+    result_type: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('result_type') }})
+    row_limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('row_limit') }})
+    row_offset: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('row_offset') }})
+    time_offsets: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('time_offsets') }})
+    time_range: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('time_range') }})
+    time_shift: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('time_shift') }})
+    timeseries_limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeseries_limit') }})
+    timeseries_limit_metric: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeseries_limit_metric') }})
+    url_params: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url_params') }})
+    where: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('where') }})
     

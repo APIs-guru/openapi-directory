@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteTrafficMirrorSessionActionEnum(str, Enum):
     DELETE_TRAFFIC_MIRROR_SESSION = "DeleteTrafficMirrorSession"
@@ -10,10 +14,10 @@ class GetDeleteTrafficMirrorSessionVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteTrafficMirrorSessionQueryParams:
-    action: GetDeleteTrafficMirrorSessionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteTrafficMirrorSessionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    traffic_mirror_session_id: str = field(metadata={'query_param': { 'field_name': 'TrafficMirrorSessionId', 'style': 'form', 'explode': True }})
+    version: GetDeleteTrafficMirrorSessionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    traffic_mirror_session_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TrafficMirrorSessionId', 'style': 'form', 'explode': True }})
-    version: GetDeleteTrafficMirrorSessionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteTrafficMirrorSessionHeaders:
 
 @dataclass
 class GetDeleteTrafficMirrorSessionRequest:
-    query_params: GetDeleteTrafficMirrorSessionQueryParams = field(default=None)
-    headers: GetDeleteTrafficMirrorSessionHeaders = field(default=None)
+    headers: GetDeleteTrafficMirrorSessionHeaders = field()
+    query_params: GetDeleteTrafficMirrorSessionQueryParams = field()
     
 
 @dataclass
 class GetDeleteTrafficMirrorSessionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

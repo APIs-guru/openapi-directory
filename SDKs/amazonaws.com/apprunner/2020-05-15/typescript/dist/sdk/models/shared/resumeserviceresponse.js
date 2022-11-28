@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Service } from "./service";
 var ResumeServiceResponse = /** @class */ (function (_super) {
     __extends(ResumeServiceResponse, _super);
@@ -30,11 +30,11 @@ var ResumeServiceResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=OperationId" }),
+        SpeakeasyMetadata({ data: "json, name=OperationId" }),
         __metadata("design:type", String)
     ], ResumeServiceResponse.prototype, "operationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Service" }),
+        SpeakeasyMetadata({ data: "json, name=Service" }),
         __metadata("design:type", Service)
     ], ResumeServiceResponse.prototype, "service", void 0);
     return ResumeServiceResponse;

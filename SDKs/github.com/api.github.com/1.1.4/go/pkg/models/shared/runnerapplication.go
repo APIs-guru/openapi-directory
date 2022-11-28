@@ -1,5 +1,7 @@
 package shared
 
+// RunnerApplication
+// Runner Application
 type RunnerApplication struct {
 	Architecture string `json:"architecture"`
 	DownloadURL  string `json:"download_url"`

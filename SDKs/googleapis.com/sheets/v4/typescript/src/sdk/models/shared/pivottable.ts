@@ -1,16 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PivotGroup } from "./pivotgroup";
 import { PivotFilterCriteria } from "./pivotfiltercriteria";
 import { DataExecutionStatus } from "./dataexecutionstatus";
 import { PivotFilterSpec } from "./pivotfilterspec";
-import { PivotGroup } from "./pivotgroup";
 import { GridRange } from "./gridrange";
 import { PivotValue } from "./pivotvalue";
 
+
 export enum PivotTableValueLayoutEnum {
-    Horizontal = "HORIZONTAL"
-,    Vertical = "VERTICAL"
+    Horizontal = "HORIZONTAL",
+    Vertical = "VERTICAL"
 }
 
 
@@ -19,30 +18,30 @@ export enum PivotTableValueLayoutEnum {
  * A pivot table.
 **/
 export class PivotTable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columns", elemType: shared.PivotGroup })
+  @SpeakeasyMetadata({ data: "json, name=columns", elemType: PivotGroup })
   columns?: PivotGroup[];
 
-  @Metadata({ data: "json, name=criteria", elemType: shared.PivotFilterCriteria })
+  @SpeakeasyMetadata({ data: "json, name=criteria", elemType: PivotFilterCriteria })
   criteria?: Map<string, PivotFilterCriteria>;
 
-  @Metadata({ data: "json, name=dataExecutionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=dataExecutionStatus" })
   dataExecutionStatus?: DataExecutionStatus;
 
-  @Metadata({ data: "json, name=dataSourceId" })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceId" })
   dataSourceId?: string;
 
-  @Metadata({ data: "json, name=filterSpecs", elemType: shared.PivotFilterSpec })
+  @SpeakeasyMetadata({ data: "json, name=filterSpecs", elemType: PivotFilterSpec })
   filterSpecs?: PivotFilterSpec[];
 
-  @Metadata({ data: "json, name=rows", elemType: shared.PivotGroup })
+  @SpeakeasyMetadata({ data: "json, name=rows", elemType: PivotGroup })
   rows?: PivotGroup[];
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: GridRange;
 
-  @Metadata({ data: "json, name=valueLayout" })
+  @SpeakeasyMetadata({ data: "json, name=valueLayout" })
   valueLayout?: PivotTableValueLayoutEnum;
 
-  @Metadata({ data: "json, name=values", elemType: shared.PivotValue })
+  @SpeakeasyMetadata({ data: "json, name=values", elemType: PivotValue })
   values?: PivotValue[];
 }

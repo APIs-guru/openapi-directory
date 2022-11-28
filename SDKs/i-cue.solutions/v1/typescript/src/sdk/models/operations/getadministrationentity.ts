@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAdministrationEntityHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Token" })
   token?: string;
 }
 
 
 export class GetAdministrationEntityRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetAdministrationEntityHeaders;
 }
 
 
 export class GetAdministrationEntityResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.Entity })
+  @SpeakeasyMetadata({ elemType: shared.Entity })
   entities?: shared.Entity[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

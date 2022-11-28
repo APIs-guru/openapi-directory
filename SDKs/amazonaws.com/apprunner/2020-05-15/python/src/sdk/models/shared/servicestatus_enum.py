@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ServiceStatusEnum(str, Enum):
     CREATE_FAILED = "CREATE_FAILED"

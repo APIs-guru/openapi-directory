@@ -15,6 +15,8 @@ const (
 	ServingConfigTrailingSlashBehaviorEnumRemove                           ServingConfigTrailingSlashBehaviorEnum = "REMOVE"
 )
 
+// ServingConfig
+// The configuration for how incoming requests to a site should be routed and processed before serving content. The URL request paths are matched against the specified URL patterns in the configuration, then Hosting applies the applicable configuration according to a specific [priority order](https://firebase.google.com/docs/hosting/full-config#hosting_priority_order).
 type ServingConfig struct {
 	AppAssociation        *ServingConfigAppAssociationEnum        `json:"appAssociation,omitempty"`
 	CleanUrls             *bool                                   `json:"cleanUrls,omitempty"`

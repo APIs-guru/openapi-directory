@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchEncryptionModeEnum } from "./cloudwatchencryptionmodeenum";
+
 
 
 // CloudWatchEncryption
@@ -7,9 +8,9 @@ import { CloudWatchEncryptionModeEnum } from "./cloudwatchencryptionmodeenum";
  * Specifies how Amazon CloudWatch data should be encrypted.
 **/
 export class CloudWatchEncryption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudWatchEncryptionMode" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchEncryptionMode" })
   cloudWatchEncryptionMode?: CloudWatchEncryptionModeEnum;
 
-  @Metadata({ data: "json, name=KmsKeyArn" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyArn" })
   kmsKeyArn?: string;
 }

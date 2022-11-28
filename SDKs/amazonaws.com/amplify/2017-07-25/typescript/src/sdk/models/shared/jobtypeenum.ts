@@ -1,8 +1,9 @@
 
 
+
 export enum JobTypeEnum {
-    Release = "RELEASE"
-,    Retry = "RETRY"
-,    Manual = "MANUAL"
-,    WebHook = "WEB_HOOK"
+    Release = "RELEASE",
+    Retry = "RETRY",
+    Manual = "MANUAL",
+    WebHook = "WEB_HOOK"
 }

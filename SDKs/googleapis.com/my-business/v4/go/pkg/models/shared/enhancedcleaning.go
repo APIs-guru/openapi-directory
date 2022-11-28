@@ -54,6 +54,8 @@ const (
 	EnhancedCleaningGuestRoomsEnhancedCleaningExceptionEnumDependentOnDayOfWeek EnhancedCleaningGuestRoomsEnhancedCleaningExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// EnhancedCleaning
+// Enhanced cleaning measures implemented by the hotel during COVID-19.
 type EnhancedCleaning struct {
 	CommercialGradeDisinfectantCleaning          *bool                                                             `json:"commercialGradeDisinfectantCleaning,omitempty"`
 	CommercialGradeDisinfectantCleaningException *EnhancedCleaningCommercialGradeDisinfectantCleaningExceptionEnum `json:"commercialGradeDisinfectantCleaningException,omitempty"`

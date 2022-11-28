@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TeamDrive } from "./teamdrive";
+
 
 
 // TeamDriveList
@@ -8,12 +8,12 @@ import { TeamDrive } from "./teamdrive";
  * A list of Team Drives.
 **/
 export class TeamDriveList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.TeamDrive })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: TeamDrive })
   items?: TeamDrive[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

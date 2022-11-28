@@ -10,7 +10,7 @@ class UploadFileQueryParams:
 
 @dataclass
 class UploadFileHeaders:
-    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'xero-tenant-id', 'style': 'simple', 'explode': False }})
+    xero_tenant_id: str = field(metadata={'header': { 'field_name': 'xero-tenant-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,20 +23,20 @@ class UploadFileRequestBody:
 
 @dataclass
 class UploadFileSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class UploadFileRequest:
-    query_params: UploadFileQueryParams = field(default=None)
-    headers: UploadFileHeaders = field(default=None)
+    headers: UploadFileHeaders = field()
+    query_params: UploadFileQueryParams = field()
+    security: UploadFileSecurity = field()
     request: Optional[UploadFileRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
-    security: UploadFileSecurity = field(default=None)
     
 
 @dataclass
 class UploadFileResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     file_object: Optional[shared.FileObject] = field(default=None)
-    status_code: int = field(default=None)
     

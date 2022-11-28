@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SetRepositoriesRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json", elemType: shared.RepositoryInfo })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json", elemType: shared.RepositoryInfo })
   repositoryInfos?: shared.RepositoryInfo[];
 
-  @Metadata({ data: "request, media_type=application/json", elemType: shared.RepositoryInfo })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.RepositoryInfo })
   repositoryInfos1?: shared.RepositoryInfo[];
 
-  @Metadata({ data: "request, media_type=text/json", elemType: shared.RepositoryInfo })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json", elemType: shared.RepositoryInfo })
   repositoryInfos2?: shared.RepositoryInfo[];
 }
 
 
 export class SetRepositoriesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class SetRepositoriesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: SetRepositoriesRequests;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: SetRepositoriesSecurity;
 }
 
 
 export class SetRepositoriesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

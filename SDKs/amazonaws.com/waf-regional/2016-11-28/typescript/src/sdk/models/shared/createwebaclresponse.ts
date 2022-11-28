@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WebAcl } from "./webacl";
 
 
+
 export class CreateWebAclResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChangeToken" })
+  @SpeakeasyMetadata({ data: "json, name=ChangeToken" })
   changeToken?: string;
 
-  @Metadata({ data: "json, name=WebACL" })
+  @SpeakeasyMetadata({ data: "json, name=WebACL" })
   webAcl?: WebAcl;
 }

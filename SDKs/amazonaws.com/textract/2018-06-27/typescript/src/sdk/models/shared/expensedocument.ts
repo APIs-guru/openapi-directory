@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LineItemGroup } from "./lineitemgroup";
 import { ExpenseField } from "./expensefield";
+
 
 
 // ExpenseDocument
@@ -9,12 +9,12 @@ import { ExpenseField } from "./expensefield";
  * The structure holding all the information returned by AnalyzeExpense
 **/
 export class ExpenseDocument extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExpenseIndex" })
+  @SpeakeasyMetadata({ data: "json, name=ExpenseIndex" })
   expenseIndex?: number;
 
-  @Metadata({ data: "json, name=LineItemGroups", elemType: shared.LineItemGroup })
+  @SpeakeasyMetadata({ data: "json, name=LineItemGroups", elemType: LineItemGroup })
   lineItemGroups?: LineItemGroup[];
 
-  @Metadata({ data: "json, name=SummaryFields", elemType: shared.ExpenseField })
+  @SpeakeasyMetadata({ data: "json, name=SummaryFields", elemType: ExpenseField })
   summaryFields?: ExpenseField[];
 }

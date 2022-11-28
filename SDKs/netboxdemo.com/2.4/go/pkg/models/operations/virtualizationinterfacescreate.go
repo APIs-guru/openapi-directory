@@ -5,7 +5,7 @@ import (
 )
 
 type VirtualizationInterfacesCreateRequest struct {
-	Request shared.WritableInterface `request:"mediaType=application/json"`
+	Request shared.WritableInterfaceInput `request:"mediaType=application/json"`
 }
 
 type VirtualizationInterfacesCreateResponse struct {

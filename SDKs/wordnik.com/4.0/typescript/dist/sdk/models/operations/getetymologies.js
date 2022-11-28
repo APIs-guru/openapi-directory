@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetEtymologiesPathParams = /** @class */ (function (_super) {
     __extends(GetEtymologiesPathParams, _super);
     function GetEtymologiesPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=word" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=word" }),
         __metadata("design:type", String)
     ], GetEtymologiesPathParams.prototype, "word", void 0);
     return GetEtymologiesPathParams;
@@ -46,7 +46,7 @@ var GetEtymologiesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=useCanonical" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=useCanonical" }),
         __metadata("design:type", String)
     ], GetEtymologiesQueryParams.prototype, "useCanonical", void 0);
     return GetEtymologiesQueryParams;
@@ -58,11 +58,11 @@ var GetEtymologiesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetEtymologiesPathParams)
     ], GetEtymologiesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetEtymologiesQueryParams)
     ], GetEtymologiesRequest.prototype, "queryParams", void 0);
     return GetEtymologiesRequest;
@@ -74,15 +74,15 @@ var GetEtymologiesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetEtymologiesResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetEtymologiesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetEtymologiesResponse.prototype, "statusCode", void 0);
     return GetEtymologiesResponse;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GenerateEphemeralCertRequest
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Ephemeral certificate creation request.
 **/
 export class GenerateEphemeralCertRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=access_token" })
+  @SpeakeasyMetadata({ data: "json, name=access_token" })
   accessToken?: string;
 
-  @Metadata({ data: "json, name=public_key" })
+  @SpeakeasyMetadata({ data: "json, name=public_key" })
   publicKey?: string;
 
-  @Metadata({ data: "json, name=readTime" })
+  @SpeakeasyMetadata({ data: "json, name=readTime" })
   readTime?: string;
 
-  @Metadata({ data: "json, name=validDuration" })
+  @SpeakeasyMetadata({ data: "json, name=validDuration" })
   validDuration?: string;
 }

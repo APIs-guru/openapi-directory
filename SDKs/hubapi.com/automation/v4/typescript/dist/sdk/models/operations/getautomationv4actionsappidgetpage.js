@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetAutomationV4ActionsAppIdGetPagePathParams = /** @class */ (function (_super) {
     __extends(GetAutomationV4ActionsAppIdGetPagePathParams, _super);
@@ -30,7 +30,7 @@ var GetAutomationV4ActionsAppIdGetPagePathParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
         __metadata("design:type", Number)
     ], GetAutomationV4ActionsAppIdGetPagePathParams.prototype, "appId", void 0);
     return GetAutomationV4ActionsAppIdGetPagePathParams;
@@ -42,15 +42,15 @@ var GetAutomationV4ActionsAppIdGetPageQueryParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=after" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=after" }),
         __metadata("design:type", String)
     ], GetAutomationV4ActionsAppIdGetPageQueryParams.prototype, "after", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=archived" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=archived" }),
         __metadata("design:type", Boolean)
     ], GetAutomationV4ActionsAppIdGetPageQueryParams.prototype, "archived", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetAutomationV4ActionsAppIdGetPageQueryParams.prototype, "limit", void 0);
     return GetAutomationV4ActionsAppIdGetPageQueryParams;
@@ -62,7 +62,7 @@ var GetAutomationV4ActionsAppIdGetPageSecurity = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeDeveloperHapikey)
     ], GetAutomationV4ActionsAppIdGetPageSecurity.prototype, "developerHapikey", void 0);
     return GetAutomationV4ActionsAppIdGetPageSecurity;
@@ -74,15 +74,15 @@ var GetAutomationV4ActionsAppIdGetPageRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAutomationV4ActionsAppIdGetPagePathParams)
     ], GetAutomationV4ActionsAppIdGetPageRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAutomationV4ActionsAppIdGetPageQueryParams)
     ], GetAutomationV4ActionsAppIdGetPageRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAutomationV4ActionsAppIdGetPageSecurity)
     ], GetAutomationV4ActionsAppIdGetPageRequest.prototype, "security", void 0);
     return GetAutomationV4ActionsAppIdGetPageRequest;
@@ -94,19 +94,19 @@ var GetAutomationV4ActionsAppIdGetPageResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetAutomationV4ActionsAppIdGetPageResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CollectionResponseExtensionActionDefinitionForwardPaging)
     ], GetAutomationV4ActionsAppIdGetPageResponse.prototype, "collectionResponseExtensionActionDefinitionForwardPaging", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAutomationV4ActionsAppIdGetPageResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAutomationV4ActionsAppIdGetPageResponse.prototype, "statusCode", void 0);
     return GetAutomationV4ActionsAppIdGetPageResponse;

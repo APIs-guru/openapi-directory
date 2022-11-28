@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ItemImportRequestOptions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An optional object to configure `/item/import` request.
 **/
 export class ItemImportRequestOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=webhook" })
+  @SpeakeasyMetadata({ data: "json, name=webhook" })
   webhook?: string;
 }

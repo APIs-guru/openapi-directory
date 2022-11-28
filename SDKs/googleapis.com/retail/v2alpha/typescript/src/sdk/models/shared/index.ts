@@ -13,6 +13,7 @@ export * from "./googlecloudretailv2alphacatalog";
 export * from "./googlecloudretailv2alphacatalogattribute";
 export * from "./googlecloudretailv2alphacolorinfo";
 export * from "./googlecloudretailv2alphacompletequeryresponse";
+export * from "./googlecloudretailv2alphacompletequeryresponseattributeresult";
 export * from "./googlecloudretailv2alphacompletequeryresponsecompletionresult";
 export * from "./googlecloudretailv2alphacompletequeryresponserecentsearchresult";
 export * from "./googlecloudretailv2alphacompletiondatainputconfig";

@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class SuppliersGetOpeningBalanceListPathParams:
-    item_id: int = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: int = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class SuppliersGetOpeningBalanceListRequest:
-    path_params: SuppliersGetOpeningBalanceListPathParams = field(default=None)
+    path_params: SuppliersGetOpeningBalanceListPathParams = field()
     
 
 @dataclass
 class SuppliersGetOpeningBalanceListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     owner_opening_balance_dtos: Optional[List[shared.OwnerOpeningBalanceDto]] = field(default=None)
-    status_code: int = field(default=None)
     

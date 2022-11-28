@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RegionTypeEnum } from "./regiontypeenum";
 import { DirectoryStageEnum } from "./directorystageenum";
 import { DirectoryVpcSettings } from "./directoryvpcsettings";
+
 
 
 // RegionDescription
@@ -9,30 +10,30 @@ import { DirectoryVpcSettings } from "./directoryvpcsettings";
  * The replicated Region information for a directory.
 **/
 export class RegionDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DesiredNumberOfDomainControllers" })
+  @SpeakeasyMetadata({ data: "json, name=DesiredNumberOfDomainControllers" })
   desiredNumberOfDomainControllers?: number;
 
-  @Metadata({ data: "json, name=DirectoryId" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryId" })
   directoryId?: string;
 
-  @Metadata({ data: "json, name=LastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedDateTime" })
   lastUpdatedDateTime?: Date;
 
-  @Metadata({ data: "json, name=LaunchTime" })
+  @SpeakeasyMetadata({ data: "json, name=LaunchTime" })
   launchTime?: Date;
 
-  @Metadata({ data: "json, name=RegionName" })
+  @SpeakeasyMetadata({ data: "json, name=RegionName" })
   regionName?: string;
 
-  @Metadata({ data: "json, name=RegionType" })
+  @SpeakeasyMetadata({ data: "json, name=RegionType" })
   regionType?: RegionTypeEnum;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: DirectoryStageEnum;
 
-  @Metadata({ data: "json, name=StatusLastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=StatusLastUpdatedDateTime" })
   statusLastUpdatedDateTime?: Date;
 
-  @Metadata({ data: "json, name=VpcSettings" })
+  @SpeakeasyMetadata({ data: "json, name=VpcSettings" })
   vpcSettings?: DirectoryVpcSettings;
 }

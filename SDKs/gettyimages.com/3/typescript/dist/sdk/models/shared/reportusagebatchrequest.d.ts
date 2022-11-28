@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AssetUsage } from "./assetusage";
 /**
  * Specifies the request information for the Batch Usages endpoint.

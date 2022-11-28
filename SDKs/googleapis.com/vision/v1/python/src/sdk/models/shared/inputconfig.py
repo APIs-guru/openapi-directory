@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import gcssource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InputConfig:
-    content: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content' }})
-    gcs_source: Optional[gcssource.GcsSource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gcsSource' }})
-    mime_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mimeType' }})
+    r"""InputConfig
+    The desired input location and metadata.
+    """
+    
+    content: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('content') }})
+    gcs_source: Optional[GcsSource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gcsSource') }})
+    mime_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mimeType') }})
     

@@ -1,6 +1,7 @@
 
 
+
 export enum LanguageEnum {
-    Python = "PYTHON"
-,    Scala = "SCALA"
+    Python = "PYTHON",
+    Scala = "SCALA"
 }

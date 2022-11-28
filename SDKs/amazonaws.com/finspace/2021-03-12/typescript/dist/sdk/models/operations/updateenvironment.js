@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateEnvironmentPathParams = /** @class */ (function (_super) {
     __extends(UpdateEnvironmentPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateEnvironmentPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=environmentId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environmentId" }),
         __metadata("design:type", String)
     ], UpdateEnvironmentPathParams.prototype, "environmentId", void 0);
     return UpdateEnvironmentPathParams;
@@ -42,31 +42,31 @@ var UpdateEnvironmentHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateEnvironmentHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateEnvironmentHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateEnvironmentHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateEnvironmentHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateEnvironmentHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateEnvironmentHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateEnvironmentHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateEnvironmentHeaders;
@@ -87,27 +87,27 @@ var UpdateEnvironmentRequestBodyFederationParameters = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=applicationCallBackURL" }),
+        SpeakeasyMetadata({ data: "json, name=applicationCallBackURL" }),
         __metadata("design:type", String)
     ], UpdateEnvironmentRequestBodyFederationParameters.prototype, "applicationCallBackUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=attributeMap" }),
+        SpeakeasyMetadata({ data: "json, name=attributeMap" }),
         __metadata("design:type", Map)
     ], UpdateEnvironmentRequestBodyFederationParameters.prototype, "attributeMap", void 0);
     __decorate([
-        Metadata({ data: "json, name=federationProviderName" }),
+        SpeakeasyMetadata({ data: "json, name=federationProviderName" }),
         __metadata("design:type", String)
     ], UpdateEnvironmentRequestBodyFederationParameters.prototype, "federationProviderName", void 0);
     __decorate([
-        Metadata({ data: "json, name=federationURN" }),
+        SpeakeasyMetadata({ data: "json, name=federationURN" }),
         __metadata("design:type", String)
     ], UpdateEnvironmentRequestBodyFederationParameters.prototype, "federationUrn", void 0);
     __decorate([
-        Metadata({ data: "json, name=samlMetadataDocument" }),
+        SpeakeasyMetadata({ data: "json, name=samlMetadataDocument" }),
         __metadata("design:type", String)
     ], UpdateEnvironmentRequestBodyFederationParameters.prototype, "samlMetadataDocument", void 0);
     __decorate([
-        Metadata({ data: "json, name=samlMetadataURL" }),
+        SpeakeasyMetadata({ data: "json, name=samlMetadataURL" }),
         __metadata("design:type", String)
     ], UpdateEnvironmentRequestBodyFederationParameters.prototype, "samlMetadataUrl", void 0);
     return UpdateEnvironmentRequestBodyFederationParameters;
@@ -119,19 +119,19 @@ var UpdateEnvironmentRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], UpdateEnvironmentRequestBody.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=federationMode" }),
+        SpeakeasyMetadata({ data: "json, name=federationMode" }),
         __metadata("design:type", String)
     ], UpdateEnvironmentRequestBody.prototype, "federationMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=federationParameters" }),
+        SpeakeasyMetadata({ data: "json, name=federationParameters" }),
         __metadata("design:type", UpdateEnvironmentRequestBodyFederationParameters)
     ], UpdateEnvironmentRequestBody.prototype, "federationParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], UpdateEnvironmentRequestBody.prototype, "name", void 0);
     return UpdateEnvironmentRequestBody;
@@ -143,15 +143,15 @@ var UpdateEnvironmentRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateEnvironmentPathParams)
     ], UpdateEnvironmentRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateEnvironmentHeaders)
     ], UpdateEnvironmentRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateEnvironmentRequestBody)
     ], UpdateEnvironmentRequest.prototype, "request", void 0);
     return UpdateEnvironmentRequest;
@@ -163,35 +163,35 @@ var UpdateEnvironmentResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateEnvironmentResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateEnvironmentResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateEnvironmentResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateEnvironmentResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateEnvironmentResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateEnvironmentResponse.prototype, "throttlingException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdateEnvironmentResponse)
     ], UpdateEnvironmentResponse.prototype, "updateEnvironmentResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateEnvironmentResponse.prototype, "validationException", void 0);
     return UpdateEnvironmentResponse;

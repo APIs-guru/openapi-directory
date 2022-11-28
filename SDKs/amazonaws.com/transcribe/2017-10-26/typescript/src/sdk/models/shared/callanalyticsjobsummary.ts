@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CallAnalyticsJobStatusEnum } from "./callanalyticsjobstatusenum";
 import { LanguageCodeEnum } from "./languagecodeenum";
+
 
 
 // CallAnalyticsJobSummary
@@ -8,24 +9,24 @@ import { LanguageCodeEnum } from "./languagecodeenum";
  * Provides summary information about a call analytics job.
 **/
 export class CallAnalyticsJobSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CallAnalyticsJobName" })
+  @SpeakeasyMetadata({ data: "json, name=CallAnalyticsJobName" })
   callAnalyticsJobName?: string;
 
-  @Metadata({ data: "json, name=CallAnalyticsJobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=CallAnalyticsJobStatus" })
   callAnalyticsJobStatus?: CallAnalyticsJobStatusEnum;
 
-  @Metadata({ data: "json, name=CompletionTime" })
+  @SpeakeasyMetadata({ data: "json, name=CompletionTime" })
   completionTime?: Date;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=LanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageCode" })
   languageCode?: LanguageCodeEnum;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 }

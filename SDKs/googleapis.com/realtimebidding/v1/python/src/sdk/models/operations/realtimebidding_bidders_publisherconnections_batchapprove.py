@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RealtimebiddingBiddersPublisherConnectionsBatchApprovePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class RealtimebiddingBiddersPublisherConnectionsBatchApproveQueryParams:
 
 @dataclass
 class RealtimebiddingBiddersPublisherConnectionsBatchApproveSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RealtimebiddingBiddersPublisherConnectionsBatchApproveRequest:
-    path_params: RealtimebiddingBiddersPublisherConnectionsBatchApprovePathParams = field(default=None)
-    query_params: RealtimebiddingBiddersPublisherConnectionsBatchApproveQueryParams = field(default=None)
+    path_params: RealtimebiddingBiddersPublisherConnectionsBatchApprovePathParams = field()
+    query_params: RealtimebiddingBiddersPublisherConnectionsBatchApproveQueryParams = field()
+    security: RealtimebiddingBiddersPublisherConnectionsBatchApproveSecurity = field()
     request: Optional[shared.BatchApprovePublisherConnectionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: RealtimebiddingBiddersPublisherConnectionsBatchApproveSecurity = field(default=None)
     
 
 @dataclass
 class RealtimebiddingBiddersPublisherConnectionsBatchApproveResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_approve_publisher_connections_response: Optional[shared.BatchApprovePublisherConnectionsResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

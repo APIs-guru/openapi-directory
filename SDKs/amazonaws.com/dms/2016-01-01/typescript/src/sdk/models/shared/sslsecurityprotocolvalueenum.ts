@@ -1,6 +1,7 @@
 
 
+
 export enum SslSecurityProtocolValueEnum {
-    Plaintext = "plaintext"
-,    SslEncryption = "ssl-encryption"
+    Plaintext = "plaintext",
+    SslEncryption = "ssl-encryption"
 }

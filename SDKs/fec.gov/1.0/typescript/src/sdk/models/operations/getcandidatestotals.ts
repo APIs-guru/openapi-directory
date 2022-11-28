@@ -1,111 +1,112 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetCandidatesTotalsOfficeEnum {
-    Unknown = ""
-,    H = "H"
-,    S = "S"
-,    P = "P"
+    Unknown = "",
+    H = "H",
+    S = "S",
+    P = "P"
 }
 
 
 export class GetCandidatesTotalsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=candidate_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=candidate_id" })
   candidateId?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cycle" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cycle" })
   cycle?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=district" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=district" })
   district?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=election_full" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=election_full" })
   electionFull?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=election_year" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=election_year" })
   electionYear?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=federal_funds_flag" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=federal_funds_flag" })
   federalFundsFlag?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=has_raised_funds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=has_raised_funds" })
   hasRaisedFunds?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=is_active_candidate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=is_active_candidate" })
   isActiveCandidate?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=max_cash_on_hand_end_period" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max_cash_on_hand_end_period" })
   maxCashOnHandEndPeriod?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=max_debts_owed_by_committee" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max_debts_owed_by_committee" })
   maxDebtsOwedByCommittee?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=max_disbursements" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max_disbursements" })
   maxDisbursements?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=max_receipts" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max_receipts" })
   maxReceipts?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=min_cash_on_hand_end_period" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=min_cash_on_hand_end_period" })
   minCashOnHandEndPeriod?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=min_debts_owed_by_committee" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=min_debts_owed_by_committee" })
   minDebtsOwedByCommittee?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=min_disbursements" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=min_disbursements" })
   minDisbursements?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=min_receipts" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=min_receipts" })
   minReceipts?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=office" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=office" })
   office?: GetCandidatesTotalsOfficeEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=party" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=party" })
   party?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" })
   q?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_hide_null" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_hide_null" })
   sortHideNull?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_null_only" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_null_only" })
   sortNullOnly?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_nulls_last" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_nulls_last" })
   sortNullsLast?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state?: string[];
 }
 
 
 export class GetCandidatesTotalsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCandidatesTotalsQueryParams;
 }
 
 
 export class GetCandidatesTotalsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   candidateHistoryTotalPage?: shared.CandidateHistoryTotalPage;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

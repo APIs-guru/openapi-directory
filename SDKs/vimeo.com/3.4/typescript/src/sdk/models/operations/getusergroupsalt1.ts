@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetUserGroupsAlt1DirectionEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 export enum GetUserGroupsAlt1FilterEnum {
@@ -11,47 +12,47 @@ export enum GetUserGroupsAlt1FilterEnum {
 }
 
 export enum GetUserGroupsAlt1SortEnum {
-    Alphabetical = "alphabetical"
-,    Date = "date"
-,    Members = "members"
-,    Videos = "videos"
+    Alphabetical = "alphabetical",
+    Date = "date",
+    Members = "members",
+    Videos = "videos"
 }
 
 
 export class GetUserGroupsAlt1QueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: GetUserGroupsAlt1DirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: GetUserGroupsAlt1FilterEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: GetUserGroupsAlt1SortEnum;
 }
 
 
 export class GetUserGroupsAlt1Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUserGroupsAlt1QueryParams;
 }
 
 
 export class GetUserGroupsAlt1Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.Group })
+  @SpeakeasyMetadata({ elemType: shared.Group })
   groups?: shared.Group[];
 }

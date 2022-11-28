@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DataAccessOptionsLogModeEnum {
-    LogModeUnspecified = "LOG_MODE_UNSPECIFIED"
-,    LogFailClosed = "LOG_FAIL_CLOSED"
+    LogModeUnspecified = "LOG_MODE_UNSPECIFIED",
+    LogFailClosed = "LOG_FAIL_CLOSED"
 }
 
 
@@ -11,6 +12,6 @@ export enum DataAccessOptionsLogModeEnum {
  * Write a Data Access (Gin) log
 **/
 export class DataAccessOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=logMode" })
+  @SpeakeasyMetadata({ data: "json, name=logMode" })
   logMode?: DataAccessOptionsLogModeEnum;
 }

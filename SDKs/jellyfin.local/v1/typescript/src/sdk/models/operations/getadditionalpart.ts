@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAdditionalPartPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
   itemId: string;
 }
 
 
 export class GetAdditionalPartQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" })
   userId?: string;
 }
 
 
 export class GetAdditionalPartSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetAdditionalPartRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAdditionalPartPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAdditionalPartQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetAdditionalPartSecurity;
 }
 
 
 export class GetAdditionalPartResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   baseItemDtoQueryResult?: shared.BaseItemDtoQueryResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposGetContentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=path" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=path" })
   path: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class ReposGetContentQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ref" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ref" })
   ref?: string;
 }
 
 
 export class ReposGetContentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReposGetContentPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReposGetContentQueryParams;
 }
 
 
 export class ReposGetContentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reposGetContent200ApplicationJsonOneOf?: any;
 }

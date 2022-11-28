@@ -18,11 +18,6 @@ type UpdateEnvironmentRequestBody struct {
 	Environment *UpdateEnvironmentRequestBodyEnvironment `json:"environment,omitempty"`
 }
 
-type UpdateEnvironmentRequest struct {
-	PathParams UpdateEnvironmentPathParams
-	Request    *UpdateEnvironmentRequestBody `request:"mediaType=application/json"`
-}
-
 type UpdateEnvironment200ApplicationJSONEnvironment struct {
 	ID   *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
@@ -40,6 +35,11 @@ type UpdateEnvironment400ApplicationJSONError struct {
 
 type UpdateEnvironment400ApplicationJSON struct {
 	Error *UpdateEnvironment400ApplicationJSONError `json:"error,omitempty"`
+}
+
+type UpdateEnvironmentRequest struct {
+	PathParams UpdateEnvironmentPathParams
+	Request    *UpdateEnvironmentRequestBody `request:"mediaType=application/json"`
 }
 
 type UpdateEnvironmentResponse struct {

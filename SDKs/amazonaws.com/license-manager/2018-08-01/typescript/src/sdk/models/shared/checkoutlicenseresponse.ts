@@ -1,28 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CheckoutTypeEnum } from "./checkouttypeenum";
 import { EntitlementData } from "./entitlementdata";
 
 
+
 export class CheckoutLicenseResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CheckoutType" })
+  @SpeakeasyMetadata({ data: "json, name=CheckoutType" })
   checkoutType?: CheckoutTypeEnum;
 
-  @Metadata({ data: "json, name=EntitlementsAllowed", elemType: shared.EntitlementData })
+  @SpeakeasyMetadata({ data: "json, name=EntitlementsAllowed", elemType: EntitlementData })
   entitlementsAllowed?: EntitlementData[];
 
-  @Metadata({ data: "json, name=Expiration" })
+  @SpeakeasyMetadata({ data: "json, name=Expiration" })
   expiration?: string;
 
-  @Metadata({ data: "json, name=IssuedAt" })
+  @SpeakeasyMetadata({ data: "json, name=IssuedAt" })
   issuedAt?: string;
 
-  @Metadata({ data: "json, name=LicenseConsumptionToken" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseConsumptionToken" })
   licenseConsumptionToken?: string;
 
-  @Metadata({ data: "json, name=NodeId" })
+  @SpeakeasyMetadata({ data: "json, name=NodeId" })
   nodeId?: string;
 
-  @Metadata({ data: "json, name=SignedToken" })
+  @SpeakeasyMetadata({ data: "json, name=SignedToken" })
   signedToken?: string;
 }

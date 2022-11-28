@@ -11,6 +11,8 @@ const (
 	PatientAuthInitRequestQueryRequesterTypeEnumHiu PatientAuthInitRequestQueryRequesterTypeEnum = "HIU"
 )
 
+// PatientAuthInitRequestQueryRequester
+// identification of requester
 type PatientAuthInitRequestQueryRequester struct {
 	ID   string                                       `json:"id"`
 	Type PatientAuthInitRequestQueryRequesterTypeEnum `json:"type"`

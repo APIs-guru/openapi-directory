@@ -8,6 +8,8 @@ const (
 	GoogleCloudDialogflowCxV3beta1RestoreAgentRequestRestoreOptionEnumFallback                 GoogleCloudDialogflowCxV3beta1RestoreAgentRequestRestoreOptionEnum = "FALLBACK"
 )
 
+// GoogleCloudDialogflowCxV3beta1RestoreAgentRequest
+// The request message for Agents.RestoreAgent.
 type GoogleCloudDialogflowCxV3beta1RestoreAgentRequest struct {
 	AgentContent  *string                                                             `json:"agentContent,omitempty"`
 	AgentURI      *string                                                             `json:"agentUri,omitempty"`

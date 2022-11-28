@@ -1,35 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Chronology } from "./chronology";
 import { DateTimeFieldType } from "./datetimefieldtype";
 import { DateTimeField } from "./datetimefield";
 
 
+
 export class LocalTime extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chronology" })
+  @SpeakeasyMetadata({ data: "json, name=chronology" })
   chronology?: Chronology;
 
-  @Metadata({ data: "json, name=fieldTypes", elemType: shared.DateTimeFieldType })
+  @SpeakeasyMetadata({ data: "json, name=fieldTypes", elemType: DateTimeFieldType })
   fieldTypes?: DateTimeFieldType[];
 
-  @Metadata({ data: "json, name=fields", elemType: shared.DateTimeField })
+  @SpeakeasyMetadata({ data: "json, name=fields", elemType: DateTimeField })
   fields?: DateTimeField[];
 
-  @Metadata({ data: "json, name=hourOfDay" })
+  @SpeakeasyMetadata({ data: "json, name=hourOfDay" })
   hourOfDay?: number;
 
-  @Metadata({ data: "json, name=millisOfDay" })
+  @SpeakeasyMetadata({ data: "json, name=millisOfDay" })
   millisOfDay?: number;
 
-  @Metadata({ data: "json, name=millisOfSecond" })
+  @SpeakeasyMetadata({ data: "json, name=millisOfSecond" })
   millisOfSecond?: number;
 
-  @Metadata({ data: "json, name=minuteOfHour" })
+  @SpeakeasyMetadata({ data: "json, name=minuteOfHour" })
   minuteOfHour?: number;
 
-  @Metadata({ data: "json, name=secondOfMinute" })
+  @SpeakeasyMetadata({ data: "json, name=secondOfMinute" })
   secondOfMinute?: number;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values?: number[];
 }

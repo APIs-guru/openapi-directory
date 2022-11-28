@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Links } from "./links";
 import { Meta } from "./meta";
+
 
 
 // ObFundsConfirmationResponse1DataInstructedAmount
@@ -8,42 +9,42 @@ import { Meta } from "./meta";
  * Amount of money to be confirmed as available funds in the debtor account. Contains an Amount and a Currency.
 **/
 export class ObFundsConfirmationResponse1DataInstructedAmount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount: string;
 
-  @Metadata({ data: "json, name=Currency" })
+  @SpeakeasyMetadata({ data: "json, name=Currency" })
   currency: string;
 }
 
 
 export class ObFundsConfirmationResponse1Data extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConsentId" })
+  @SpeakeasyMetadata({ data: "json, name=ConsentId" })
   consentId: string;
 
-  @Metadata({ data: "json, name=CreationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDateTime" })
   creationDateTime: Date;
 
-  @Metadata({ data: "json, name=FundsAvailable" })
+  @SpeakeasyMetadata({ data: "json, name=FundsAvailable" })
   fundsAvailable: boolean;
 
-  @Metadata({ data: "json, name=FundsConfirmationId" })
+  @SpeakeasyMetadata({ data: "json, name=FundsConfirmationId" })
   fundsConfirmationId: string;
 
-  @Metadata({ data: "json, name=InstructedAmount" })
+  @SpeakeasyMetadata({ data: "json, name=InstructedAmount" })
   instructedAmount: ObFundsConfirmationResponse1DataInstructedAmount;
 
-  @Metadata({ data: "json, name=Reference" })
+  @SpeakeasyMetadata({ data: "json, name=Reference" })
   reference: string;
 }
 
 
 export class ObFundsConfirmationResponse1 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Data" })
+  @SpeakeasyMetadata({ data: "json, name=Data" })
   data: ObFundsConfirmationResponse1Data;
 
-  @Metadata({ data: "json, name=Links" })
+  @SpeakeasyMetadata({ data: "json, name=Links" })
   links?: Links;
 
-  @Metadata({ data: "json, name=Meta" })
+  @SpeakeasyMetadata({ data: "json, name=Meta" })
   meta?: Meta;
 }

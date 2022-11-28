@@ -9,6 +9,8 @@ const (
 	DuplicateAccessEnumInsufficient      DuplicateAccessEnum = "INSUFFICIENT"
 )
 
+// Duplicate
+// Information about the location that this location duplicates.
 type Duplicate struct {
 	Access       *DuplicateAccessEnum `json:"access,omitempty"`
 	LocationName *string              `json:"locationName,omitempty"`

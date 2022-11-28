@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetChannelsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=isFavorite" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isFavorite" })
   isFavorite?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
   startIndex?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=supportsLatestItems" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=supportsLatestItems" })
   supportsLatestItems?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=supportsMediaDeletion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=supportsMediaDeletion" })
   supportsMediaDeletion?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" })
   userId?: string;
 }
 
 
 export class GetChannelsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetChannelsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetChannelsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetChannelsSecurity;
 }
 
 
 export class GetChannelsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   baseItemDtoQueryResult?: shared.BaseItemDtoQueryResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

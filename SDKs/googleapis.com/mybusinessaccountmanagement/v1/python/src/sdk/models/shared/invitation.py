@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import account
-from . import targetlocation
+from sdk import utils
+from . import *
 
 class InvitationRoleEnum(str, Enum):
     ADMIN_ROLE_UNSPECIFIED = "ADMIN_ROLE_UNSPECIFIED"
@@ -20,9 +21,13 @@ class InvitationTargetTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Invitation:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    role: Optional[InvitationRoleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
-    target_account: Optional[account.Account] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetAccount' }})
-    target_location: Optional[targetlocation.TargetLocation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetLocation' }})
-    target_type: Optional[InvitationTargetTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetType' }})
+    r"""Invitation
+    Represents a pending invitation.
+    """
+    
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    role: Optional[InvitationRoleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('role') }})
+    target_account: Optional[Account] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetAccount') }})
+    target_location: Optional[TargetLocation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetLocation') }})
+    target_type: Optional[InvitationTargetTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetType') }})
     

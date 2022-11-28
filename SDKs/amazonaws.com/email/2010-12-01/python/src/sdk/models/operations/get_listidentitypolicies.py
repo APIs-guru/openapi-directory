@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListIdentityPoliciesActionEnum(str, Enum):
     LIST_IDENTITY_POLICIES = "ListIdentityPolicies"
@@ -10,9 +14,9 @@ class GetListIdentityPoliciesVersionEnum(str, Enum):
 
 @dataclass
 class GetListIdentityPoliciesQueryParams:
-    action: GetListIdentityPoliciesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    identity: str = field(default=None, metadata={'query_param': { 'field_name': 'Identity', 'style': 'form', 'explode': True }})
-    version: GetListIdentityPoliciesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetListIdentityPoliciesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    identity: str = field(metadata={'query_param': { 'field_name': 'Identity', 'style': 'form', 'explode': True }})
+    version: GetListIdentityPoliciesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetListIdentityPoliciesHeaders:
 
 @dataclass
 class GetListIdentityPoliciesRequest:
-    query_params: GetListIdentityPoliciesQueryParams = field(default=None)
-    headers: GetListIdentityPoliciesHeaders = field(default=None)
+    headers: GetListIdentityPoliciesHeaders = field()
+    query_params: GetListIdentityPoliciesQueryParams = field()
     
 
 @dataclass
 class GetListIdentityPoliciesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

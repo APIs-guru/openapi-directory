@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeTagsActionEnum(str, Enum):
     DESCRIBE_TAGS = "DescribeTags"
@@ -10,14 +14,14 @@ class GetDescribeTagsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeTagsQueryParams:
-    action: GetDescribeTagsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeTagsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeTagsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
     resource_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ResourceName', 'style': 'form', 'explode': True }})
     resource_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ResourceType', 'style': 'form', 'explode': True }})
     tag_keys: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
     tag_values: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'TagValues', 'style': 'form', 'explode': True }})
-    version: GetDescribeTagsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -33,13 +37,13 @@ class GetDescribeTagsHeaders:
 
 @dataclass
 class GetDescribeTagsRequest:
-    query_params: GetDescribeTagsQueryParams = field(default=None)
-    headers: GetDescribeTagsHeaders = field(default=None)
+    headers: GetDescribeTagsHeaders = field()
+    query_params: GetDescribeTagsQueryParams = field()
     
 
 @dataclass
 class GetDescribeTagsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

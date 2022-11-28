@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudChannelV1CloudIdentityCustomerAccount } from "./googlecloudchannelv1cloudidentitycustomeraccount";
+
 
 
 // GoogleCloudChannelV1CheckCloudIdentityAccountsExistResponse
@@ -8,6 +8,6 @@ import { GoogleCloudChannelV1CloudIdentityCustomerAccount } from "./googlecloudc
  * Response message for CloudChannelService.CheckCloudIdentityAccountsExist.
 **/
 export class GoogleCloudChannelV1CheckCloudIdentityAccountsExistResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudIdentityAccounts", elemType: shared.GoogleCloudChannelV1CloudIdentityCustomerAccount })
+  @SpeakeasyMetadata({ data: "json, name=cloudIdentityAccounts", elemType: GoogleCloudChannelV1CloudIdentityCustomerAccount })
   cloudIdentityAccounts?: GoogleCloudChannelV1CloudIdentityCustomerAccount[];
 }

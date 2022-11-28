@@ -10,11 +10,11 @@ class GetComparisonShoppingPagesFindQueryParams:
 
 @dataclass
 class GetComparisonShoppingPagesFindRequest:
-    query_params: GetComparisonShoppingPagesFindQueryParams = field(default=None)
+    query_params: GetComparisonShoppingPagesFindQueryParams = field()
     
 
 @dataclass
 class GetComparisonShoppingPagesFindResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

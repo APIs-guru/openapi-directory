@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class KeyAlgorithmEnum(str, Enum):
     RSA_1024 = "RSA_1024"

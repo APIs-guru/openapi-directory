@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GroupOwnerSetting } from "./groupownersetting";
 /**
  * Attributes that define a local volume resource.

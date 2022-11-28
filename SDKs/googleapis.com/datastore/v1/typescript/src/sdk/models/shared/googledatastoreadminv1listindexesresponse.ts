@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleDatastoreAdminV1Index } from "./googledatastoreadminv1index";
+
 
 
 // GoogleDatastoreAdminV1ListIndexesResponse
@@ -8,9 +8,9 @@ import { GoogleDatastoreAdminV1Index } from "./googledatastoreadminv1index";
  * The response for google.datastore.admin.v1.DatastoreAdmin.ListIndexes.
 **/
 export class GoogleDatastoreAdminV1ListIndexesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=indexes", elemType: shared.GoogleDatastoreAdminV1Index })
+  @SpeakeasyMetadata({ data: "json, name=indexes", elemType: GoogleDatastoreAdminV1Index })
   indexes?: GoogleDatastoreAdminV1Index[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

@@ -4,6 +4,8 @@ type UpdateNetworkApplianceTrafficShapingPathParams struct {
 	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
 }
 
+// UpdateNetworkApplianceTrafficShapingRequestBodyGlobalBandwidthLimits
+// Global per-client bandwidth limit
 type UpdateNetworkApplianceTrafficShapingRequestBodyGlobalBandwidthLimits struct {
 	LimitDown *int64 `json:"limitDown,omitempty"`
 	LimitUp   *int64 `json:"limitUp,omitempty"`

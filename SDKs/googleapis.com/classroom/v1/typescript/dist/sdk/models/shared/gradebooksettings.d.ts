@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GradeCategory } from "./gradecategory";
 export declare enum GradebookSettingsCalculationTypeEnum {
     CalculationTypeUnspecified = "CALCULATION_TYPE_UNSPECIFIED",

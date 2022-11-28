@@ -1,5 +1,7 @@
 package shared
 
+// AwsAPIGatewayV2APIDetails
+// Contains information about a version 2 API in Amazon API Gateway.
 type AwsAPIGatewayV2APIDetails struct {
 	APIEndpoint               *string               `json:"ApiEndpoint,omitempty"`
 	APIID                     *string               `json:"ApiId,omitempty"`

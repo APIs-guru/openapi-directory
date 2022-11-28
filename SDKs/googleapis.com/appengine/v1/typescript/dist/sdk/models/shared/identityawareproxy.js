@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // IdentityAwareProxy
 /**
  * Identity-Aware Proxy
@@ -33,19 +33,19 @@ var IdentityAwareProxy = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=enabled" }),
+        SpeakeasyMetadata({ data: "json, name=enabled" }),
         __metadata("design:type", Boolean)
     ], IdentityAwareProxy.prototype, "enabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=oauth2ClientId" }),
+        SpeakeasyMetadata({ data: "json, name=oauth2ClientId" }),
         __metadata("design:type", String)
     ], IdentityAwareProxy.prototype, "oauth2ClientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=oauth2ClientSecret" }),
+        SpeakeasyMetadata({ data: "json, name=oauth2ClientSecret" }),
         __metadata("design:type", String)
     ], IdentityAwareProxy.prototype, "oauth2ClientSecret", void 0);
     __decorate([
-        Metadata({ data: "json, name=oauth2ClientSecretSha256" }),
+        SpeakeasyMetadata({ data: "json, name=oauth2ClientSecretSha256" }),
         __metadata("design:type", String)
     ], IdentityAwareProxy.prototype, "oauth2ClientSecretSha256", void 0);
     return IdentityAwareProxy;

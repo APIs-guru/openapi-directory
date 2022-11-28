@@ -1,5 +1,7 @@
 package shared
 
+// DealItem
+// The detailed data returned for the deal item.
 type DealItem struct {
 	AdditionalImages      []Image          `json:"additionalImages,omitempty"`
 	CategoryAncestorIds   []string         `json:"categoryAncestorIds,omitempty"`

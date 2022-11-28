@@ -1,18 +1,11 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare class PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurityOption1 extends SpeakeasyBase {
-    oauth2Legacy: shared.SchemeOauth2Legacy;
-}
-export declare class PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurityOption2 extends SpeakeasyBase {
-    hapikey: shared.SchemeHapikey;
-}
-export declare class PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurityOption3 extends SpeakeasyBase {
-    oauth2Legacy: shared.SchemeOauth2Legacy;
-}
 export declare class PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurity extends SpeakeasyBase {
-    option1?: PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurityOption1;
-    option2?: PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurityOption2;
-    option3?: PostCommunicationPreferencesV3UnsubscribeUnsubscribeSecurityOption3;
+    oauth2Legacy?: shared.SchemeOauth2Legacy;
+    hapikey?: shared.SchemeHapikey;
+    oauth2Legacy1?: shared.SchemeOauth2Legacy;
+    privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
+    privateAppsLegacy1?: shared.SchemePrivateAppsLegacy;
 }
 export declare class PostCommunicationPreferencesV3UnsubscribeUnsubscribeRequest extends SpeakeasyBase {
     request: shared.PublicUpdateSubscriptionStatusRequest;

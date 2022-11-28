@@ -1,17 +1,22 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import provisioningartifactguidance_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateProvisioningArtifactInput:
-    accept_language: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AcceptLanguage' }})
-    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Active' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    guidance: Optional[provisioningartifactguidance_enum.ProvisioningArtifactGuidanceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Guidance' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    product_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductId' }})
-    provisioning_artifact_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProvisioningArtifactId' }})
+    product_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProductId') }})
+    provisioning_artifact_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProvisioningArtifactId') }})
+    accept_language: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AcceptLanguage') }})
+    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Active') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    guidance: Optional[ProvisioningArtifactGuidanceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Guidance') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
     

@@ -11,6 +11,8 @@ const (
 	GetPurchaseReservedInstancesOfferingActionEnumPurchaseReservedInstancesOffering GetPurchaseReservedInstancesOfferingActionEnum = "PurchaseReservedInstancesOffering"
 )
 
+// GetPurchaseReservedInstancesOfferingLimitPrice
+// Describes the limit price of a Reserved Instance offering.
 type GetPurchaseReservedInstancesOfferingLimitPrice struct {
 	Amount       *float64                       `queryParam:"name=Amount"`
 	CurrencyCode *shared.CurrencyCodeValuesEnum `queryParam:"name=CurrencyCode"`

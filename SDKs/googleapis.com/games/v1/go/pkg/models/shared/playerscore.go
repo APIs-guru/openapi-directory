@@ -9,6 +9,8 @@ const (
 	PlayerScoreTimeSpanEnumDaily                    PlayerScoreTimeSpanEnum = "DAILY"
 )
 
+// PlayerScore
+// A player score.
 type PlayerScore struct {
 	FormattedScore *string                  `json:"formattedScore,omitempty"`
 	Kind           *string                  `json:"kind,omitempty"`

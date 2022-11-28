@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import backendenvironment
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteBackendEnvironmentResult:
-    backend_environment: backendenvironment.BackendEnvironment = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backendEnvironment' }})
+    r"""DeleteBackendEnvironmentResult
+     The result structure of the delete backend environment result. 
+    """
+    
+    backend_environment: BackendEnvironment = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('backendEnvironment') }})
     

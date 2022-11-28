@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestPublicDownloadShareInfoPathParams:
-    access_key: str = field(default=None, metadata={'path_param': { 'field_name': 'access_key', 'style': 'simple', 'explode': False }})
+    access_key: str = field(metadata={'path_param': { 'field_name': 'access_key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +18,14 @@ class RequestPublicDownloadShareInfoHeaders:
 
 @dataclass
 class RequestPublicDownloadShareInfoRequest:
-    path_params: RequestPublicDownloadShareInfoPathParams = field(default=None)
-    headers: RequestPublicDownloadShareInfoHeaders = field(default=None)
+    headers: RequestPublicDownloadShareInfoHeaders = field()
+    path_params: RequestPublicDownloadShareInfoPathParams = field()
     
 
 @dataclass
-class RequestPublicDownloadShareInfoResponse:
-    content_type: str = field(default=None)
+class RequestPublicDownloadShareInfoResponseOutput:
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    public_download_share: Optional[shared.PublicDownloadShare] = field(default=None)
-    status_code: int = field(default=None)
+    public_download_share: Optional[shared.PublicDownloadShareOutput] = field(default=None)
     

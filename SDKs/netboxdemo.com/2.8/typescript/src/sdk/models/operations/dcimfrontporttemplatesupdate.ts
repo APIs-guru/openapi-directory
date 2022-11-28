@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DcimFrontPortTemplatesUpdatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class DcimFrontPortTemplatesUpdateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DcimFrontPortTemplatesUpdatePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.WritableFrontPortTemplate;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.WritableFrontPortTemplateInput;
 }
 
 
 export class DcimFrontPortTemplatesUpdateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   frontPortTemplate?: shared.FrontPortTemplate;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

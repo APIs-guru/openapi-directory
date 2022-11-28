@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import optionalcolor
-from . import dimension
+from sdk import utils
+from . import *
 
 class TableCellBorderDashStyleEnum(str, Enum):
     DASH_STYLE_UNSPECIFIED = "DASH_STYLE_UNSPECIFIED"
@@ -14,7 +15,11 @@ class TableCellBorderDashStyleEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TableCellBorder:
-    color: Optional[optionalcolor.OptionalColor] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'color' }})
-    dash_style: Optional[TableCellBorderDashStyleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dashStyle' }})
-    width: Optional[dimension.Dimension] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
+    r"""TableCellBorder
+    A border around a table cell. Table cell borders cannot be transparent. To hide a table cell border, make its width 0.
+    """
+    
+    color: Optional[OptionalColor] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('color') }})
+    dash_style: Optional[TableCellBorderDashStyleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dashStyle') }})
+    width: Optional[Dimension] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('width') }})
     

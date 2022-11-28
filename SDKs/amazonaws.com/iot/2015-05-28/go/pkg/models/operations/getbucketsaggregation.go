@@ -14,6 +14,8 @@ type GetBucketsAggregationHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// GetBucketsAggregationRequestBodyBucketsAggregationType
+// The type of bucketed aggregation performed.
 type GetBucketsAggregationRequestBodyBucketsAggregationType struct {
 	TermsAggregation *shared.TermsAggregation `json:"termsAggregation,omitempty"`
 }

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleanalyticsadminv1alphaaudiencefilterexpression
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleAnalyticsAdminV1alphaAudienceFilterExpressionList:
-    filter_expressions: Optional[List[googleanalyticsadminv1alphaaudiencefilterexpression.GoogleAnalyticsAdminV1alphaAudienceFilterExpression]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filterExpressions' }})
+    r"""GoogleAnalyticsAdminV1alphaAudienceFilterExpressionList
+    A list of Audience filter expressions.
+    """
+    
+    filter_expressions: Optional[List[GoogleAnalyticsAdminV1alphaAudienceFilterExpression]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filterExpressions') }})
     

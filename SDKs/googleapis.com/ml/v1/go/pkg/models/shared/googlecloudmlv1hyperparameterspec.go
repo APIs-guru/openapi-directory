@@ -16,6 +16,8 @@ const (
 	GoogleCloudMlV1HyperparameterSpecGoalEnumMinimize            GoogleCloudMlV1HyperparameterSpecGoalEnum = "MINIMIZE"
 )
 
+// GoogleCloudMlV1HyperparameterSpec
+// Represents a set of hyperparameters to optimize.
 type GoogleCloudMlV1HyperparameterSpec struct {
 	Algorithm                *GoogleCloudMlV1HyperparameterSpecAlgorithmEnum `json:"algorithm,omitempty"`
 	EnableTrialEarlyStopping *bool                                           `json:"enableTrialEarlyStopping,omitempty"`

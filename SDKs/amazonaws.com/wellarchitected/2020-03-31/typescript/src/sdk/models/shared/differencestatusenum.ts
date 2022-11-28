@@ -1,7 +1,8 @@
 
 
+
 export enum DifferenceStatusEnum {
-    Updated = "UPDATED"
-,    New = "NEW"
-,    Deleted = "DELETED"
+    Updated = "UPDATED",
+    New = "NEW",
+    Deleted = "DELETED"
 }

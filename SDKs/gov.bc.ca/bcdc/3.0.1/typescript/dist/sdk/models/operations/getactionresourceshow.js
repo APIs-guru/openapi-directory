@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetActionResourceShowQueryParams = /** @class */ (function (_super) {
     __extends(GetActionResourceShowQueryParams, _super);
     function GetActionResourceShowQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" }),
         __metadata("design:type", String)
     ], GetActionResourceShowQueryParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=include_tracking" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_tracking" }),
         __metadata("design:type", Boolean)
     ], GetActionResourceShowQueryParams.prototype, "includeTracking", void 0);
     return GetActionResourceShowQueryParams;
@@ -45,7 +45,7 @@ var GetActionResourceShowRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetActionResourceShowQueryParams)
     ], GetActionResourceShowRequest.prototype, "queryParams", void 0);
     return GetActionResourceShowRequest;
@@ -57,11 +57,11 @@ var GetActionResourceShowResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetActionResourceShowResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetActionResourceShowResponse.prototype, "statusCode", void 0);
     return GetActionResourceShowResponse;

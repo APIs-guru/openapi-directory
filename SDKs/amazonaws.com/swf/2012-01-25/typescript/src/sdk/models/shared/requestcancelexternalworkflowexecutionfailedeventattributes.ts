@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RequestCancelExternalWorkflowExecutionFailedCauseEnum } from "./requestcancelexternalworkflowexecutionfailedcauseenum";
+
 
 
 // RequestCancelExternalWorkflowExecutionFailedEventAttributes
@@ -7,21 +8,21 @@ import { RequestCancelExternalWorkflowExecutionFailedCauseEnum } from "./request
  * Provides the details of the <code>RequestCancelExternalWorkflowExecutionFailed</code> event.
 **/
 export class RequestCancelExternalWorkflowExecutionFailedEventAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cause" })
+  @SpeakeasyMetadata({ data: "json, name=cause" })
   cause: RequestCancelExternalWorkflowExecutionFailedCauseEnum;
 
-  @Metadata({ data: "json, name=control" })
+  @SpeakeasyMetadata({ data: "json, name=control" })
   control?: string;
 
-  @Metadata({ data: "json, name=decisionTaskCompletedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=decisionTaskCompletedEventId" })
   decisionTaskCompletedEventId: number;
 
-  @Metadata({ data: "json, name=initiatedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=initiatedEventId" })
   initiatedEventId: number;
 
-  @Metadata({ data: "json, name=runId" })
+  @SpeakeasyMetadata({ data: "json, name=runId" })
   runId?: string;
 
-  @Metadata({ data: "json, name=workflowId" })
+  @SpeakeasyMetadata({ data: "json, name=workflowId" })
   workflowId: string;
 }

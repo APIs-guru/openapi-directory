@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteMonitorPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=monitor_uid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=monitor_uid" })
   monitorUid: string;
 }
 
 
-export class DeleteMonitorRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteMonitorPathParams;
-}
-
-
 export class DeleteMonitor200ApplicationJsonMonitor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 }
 
 
 export class DeleteMonitor200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=monitor" })
+  @SpeakeasyMetadata({ data: "json, name=monitor" })
   monitor?: DeleteMonitor200ApplicationJsonMonitor;
 }
 
 
 export class DeleteMonitor404ApplicationJsonError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class DeleteMonitor404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: DeleteMonitor404ApplicationJsonError;
 }
 
 
+export class DeleteMonitorRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteMonitorPathParams;
+}
+
+
 export class DeleteMonitorResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteMonitor200ApplicationJsonObject?: DeleteMonitor200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteMonitor404ApplicationJsonObject?: DeleteMonitor404ApplicationJson;
 }

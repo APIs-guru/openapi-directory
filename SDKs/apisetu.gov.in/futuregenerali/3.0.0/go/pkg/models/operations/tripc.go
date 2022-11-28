@@ -27,11 +27,6 @@ type TripcSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type TripcRequest struct {
-	Request  *TripcRequestBody `request:"mediaType=application/json"`
-	Security TripcSecurity
-}
-
 type Tripc400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Tripc504ApplicationJSON struct {
 	Error            *Tripc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Tripc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type TripcRequest struct {
+	Request  *TripcRequestBody `request:"mediaType=application/json"`
+	Security TripcSecurity
 }
 
 type TripcResponse struct {

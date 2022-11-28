@@ -18,15 +18,15 @@ class PostEventsPagedRequests:
 
 @dataclass
 class PostEventsPagedRequest:
-    query_params: PostEventsPagedQueryParams = field(default=None)
+    query_params: PostEventsPagedQueryParams = field()
     request: Optional[PostEventsPagedRequests] = field(default=None)
     
 
 @dataclass
 class PostEventsPagedResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_response_content: Optional[shared.ErrorResponseContent] = field(default=None)
     overview_event_paged_results_public: Optional[shared.OverviewEventPagedResultsPublic] = field(default=None)
-    status_code: int = field(default=None)
     

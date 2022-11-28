@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * An optional object to filter `/investments/holdings/get` results. If provided, must not be `null`.
 **/

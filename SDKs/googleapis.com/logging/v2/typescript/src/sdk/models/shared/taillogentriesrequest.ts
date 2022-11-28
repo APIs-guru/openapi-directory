@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TailLogEntriesRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The parameters to TailLogEntries.
 **/
 export class TailLogEntriesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bufferWindow" })
+  @SpeakeasyMetadata({ data: "json, name=bufferWindow" })
   bufferWindow?: string;
 
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=resourceNames" })
+  @SpeakeasyMetadata({ data: "json, name=resourceNames" })
   resourceNames?: string[];
 }

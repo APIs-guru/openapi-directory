@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VideoAbuseReportSecondaryReason } from "./videoabusereportsecondaryreason";
+
 
 
 // VideoAbuseReportReasonSnippet
@@ -8,9 +8,9 @@ import { VideoAbuseReportSecondaryReason } from "./videoabusereportsecondaryreas
  * Basic details about a video category, such as its localized title.
 **/
 export class VideoAbuseReportReasonSnippet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=secondaryReasons", elemType: shared.VideoAbuseReportSecondaryReason })
+  @SpeakeasyMetadata({ data: "json, name=secondaryReasons", elemType: VideoAbuseReportSecondaryReason })
   secondaryReasons?: VideoAbuseReportSecondaryReason[];
 }

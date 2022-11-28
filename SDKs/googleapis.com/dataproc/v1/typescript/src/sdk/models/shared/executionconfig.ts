@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ExecutionConfig
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Execution configuration for a workload.
 **/
 export class ExecutionConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=idleTtl" })
+  @SpeakeasyMetadata({ data: "json, name=idleTtl" })
   idleTtl?: string;
 
-  @Metadata({ data: "json, name=kmsKey" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKey" })
   kmsKey?: string;
 
-  @Metadata({ data: "json, name=networkTags" })
+  @SpeakeasyMetadata({ data: "json, name=networkTags" })
   networkTags?: string[];
 
-  @Metadata({ data: "json, name=networkUri" })
+  @SpeakeasyMetadata({ data: "json, name=networkUri" })
   networkUri?: string;
 
-  @Metadata({ data: "json, name=serviceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
   serviceAccount?: string;
 
-  @Metadata({ data: "json, name=subnetworkUri" })
+  @SpeakeasyMetadata({ data: "json, name=subnetworkUri" })
   subnetworkUri?: string;
 }

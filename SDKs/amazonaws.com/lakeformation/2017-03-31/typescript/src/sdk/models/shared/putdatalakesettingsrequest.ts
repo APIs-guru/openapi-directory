@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataLakeSettings } from "./datalakesettings";
 
 
+
 export class PutDataLakeSettingsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CatalogId" })
+  @SpeakeasyMetadata({ data: "json, name=CatalogId" })
   catalogId?: string;
 
-  @Metadata({ data: "json, name=DataLakeSettings" })
+  @SpeakeasyMetadata({ data: "json, name=DataLakeSettings" })
   dataLakeSettings: DataLakeSettings;
 }

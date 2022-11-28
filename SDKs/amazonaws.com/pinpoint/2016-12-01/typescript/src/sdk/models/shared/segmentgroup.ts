@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SegmentDimensions } from "./segmentdimensions";
 import { SegmentReference } from "./segmentreference";
 import { SourceTypeEnum } from "./sourcetypeenum";
 import { TypeEnum } from "./typeenum";
+
 
 
 // SegmentGroup
@@ -11,15 +11,15 @@ import { TypeEnum } from "./typeenum";
  * Specifies the base segments and dimensions for a segment, and the relationships between these base segments and dimensions.
 **/
 export class SegmentGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Dimensions", elemType: shared.SegmentDimensions })
+  @SpeakeasyMetadata({ data: "json, name=Dimensions", elemType: SegmentDimensions })
   dimensions?: SegmentDimensions[];
 
-  @Metadata({ data: "json, name=SourceSegments", elemType: shared.SegmentReference })
+  @SpeakeasyMetadata({ data: "json, name=SourceSegments", elemType: SegmentReference })
   sourceSegments?: SegmentReference[];
 
-  @Metadata({ data: "json, name=SourceType" })
+  @SpeakeasyMetadata({ data: "json, name=SourceType" })
   sourceType?: SourceTypeEnum;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: TypeEnum;
 }

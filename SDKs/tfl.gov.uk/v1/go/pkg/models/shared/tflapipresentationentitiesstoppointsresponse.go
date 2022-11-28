@@ -1,5 +1,7 @@
 package shared
 
+// TflAPIPresentationEntitiesStopPointsResponse
+// A paged response containing StopPoints
 type TflAPIPresentationEntitiesStopPointsResponse struct {
 	CentrePoint []float64                             `json:"centrePoint,omitempty"`
 	Page        *int32                                `json:"page,omitempty"`

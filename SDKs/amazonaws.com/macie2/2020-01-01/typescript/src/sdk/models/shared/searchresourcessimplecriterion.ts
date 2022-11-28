@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SearchResourcesComparatorEnum } from "./searchresourcescomparatorenum";
 import { SearchResourcesSimpleCriterionKeyEnum } from "./searchresourcessimplecriterionkeyenum";
+
 
 
 // SearchResourcesSimpleCriterion
@@ -8,12 +9,12 @@ import { SearchResourcesSimpleCriterionKeyEnum } from "./searchresourcessimplecr
  * Specifies a property-based filter condition that determines which Amazon Web Services resources are included or excluded from the query results.
 **/
 export class SearchResourcesSimpleCriterion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comparator" })
+  @SpeakeasyMetadata({ data: "json, name=comparator" })
   comparator?: SearchResourcesComparatorEnum;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: SearchResourcesSimpleCriterionKeyEnum;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values?: string[];
 }

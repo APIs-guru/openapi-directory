@@ -1,6 +1,7 @@
 
 
+
 export enum CreateImageSearchFacetsFieldsEnum {
-    Artists = "artists"
-,    Locations = "locations"
+    Artists = "artists",
+    Locations = "locations"
 }

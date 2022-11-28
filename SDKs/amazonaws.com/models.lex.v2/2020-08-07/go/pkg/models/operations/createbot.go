@@ -14,6 +14,8 @@ type CreateBotHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateBotRequestBodyDataPrivacy
+// By default, data stored by Amazon Lex is encrypted. The <code>DataPrivacy</code> structure provides settings that determine how Amazon Lex handles special cases of securing the data for your bot.
 type CreateBotRequestBodyDataPrivacy struct {
 	ChildDirected *bool `json:"childDirected,omitempty"`
 }

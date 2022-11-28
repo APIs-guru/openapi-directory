@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoFloodlightGroupsGetPathParams:
-    floodlight_group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'floodlightGroupId', 'style': 'simple', 'explode': False }})
+    floodlight_group_id: str = field(metadata={'path_param': { 'field_name': 'floodlightGroupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class DisplayvideoFloodlightGroupsGetQueryParams:
 
 @dataclass
 class DisplayvideoFloodlightGroupsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoFloodlightGroupsGetRequest:
-    path_params: DisplayvideoFloodlightGroupsGetPathParams = field(default=None)
-    query_params: DisplayvideoFloodlightGroupsGetQueryParams = field(default=None)
-    security: DisplayvideoFloodlightGroupsGetSecurity = field(default=None)
+    path_params: DisplayvideoFloodlightGroupsGetPathParams = field()
+    query_params: DisplayvideoFloodlightGroupsGetQueryParams = field()
+    security: DisplayvideoFloodlightGroupsGetSecurity = field()
     
 
 @dataclass
 class DisplayvideoFloodlightGroupsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     floodlight_group: Optional[shared.FloodlightGroup] = field(default=None)
-    status_code: int = field(default=None)
     

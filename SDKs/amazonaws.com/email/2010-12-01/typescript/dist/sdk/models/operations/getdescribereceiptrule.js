@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetDescribeReceiptRuleActionEnum;
 (function (GetDescribeReceiptRuleActionEnum) {
     GetDescribeReceiptRuleActionEnum["DescribeReceiptRule"] = "DescribeReceiptRule";
@@ -37,19 +37,19 @@ var GetDescribeReceiptRuleQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetDescribeReceiptRuleQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=RuleName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RuleName" }),
         __metadata("design:type", String)
     ], GetDescribeReceiptRuleQueryParams.prototype, "ruleName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=RuleSetName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RuleSetName" }),
         __metadata("design:type", String)
     ], GetDescribeReceiptRuleQueryParams.prototype, "ruleSetName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetDescribeReceiptRuleQueryParams.prototype, "version", void 0);
     return GetDescribeReceiptRuleQueryParams;
@@ -61,31 +61,31 @@ var GetDescribeReceiptRuleHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetDescribeReceiptRuleHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetDescribeReceiptRuleHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetDescribeReceiptRuleHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetDescribeReceiptRuleHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetDescribeReceiptRuleHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetDescribeReceiptRuleHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetDescribeReceiptRuleHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetDescribeReceiptRuleHeaders;
@@ -97,11 +97,11 @@ var GetDescribeReceiptRuleRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDescribeReceiptRuleQueryParams)
     ], GetDescribeReceiptRuleRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDescribeReceiptRuleHeaders)
     ], GetDescribeReceiptRuleRequest.prototype, "headers", void 0);
     return GetDescribeReceiptRuleRequest;
@@ -113,15 +113,15 @@ var GetDescribeReceiptRuleResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetDescribeReceiptRuleResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDescribeReceiptRuleResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDescribeReceiptRuleResponse.prototype, "statusCode", void 0);
     return GetDescribeReceiptRuleResponse;

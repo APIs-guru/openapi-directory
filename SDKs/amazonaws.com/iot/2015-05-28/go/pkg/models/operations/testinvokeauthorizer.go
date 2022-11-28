@@ -18,17 +18,23 @@ type TestInvokeAuthorizerHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// TestInvokeAuthorizerRequestBodyHTTPContext
+// Specifies the HTTP context to use for the test authorizer request.
 type TestInvokeAuthorizerRequestBodyHTTPContext struct {
 	Headers     map[string]string `json:"headers,omitempty"`
 	QueryString *string           `json:"queryString,omitempty"`
 }
 
+// TestInvokeAuthorizerRequestBodyMqttContext
+// Specifies the MQTT context to use for the test authorizer request
 type TestInvokeAuthorizerRequestBodyMqttContext struct {
 	ClientID *string `json:"clientId,omitempty"`
 	Password *string `json:"password,omitempty"`
 	Username *string `json:"username,omitempty"`
 }
 
+// TestInvokeAuthorizerRequestBodyTLSContext
+// Specifies the TLS context to use for the test authorizer request.
 type TestInvokeAuthorizerRequestBodyTLSContext struct {
 	ServerName *string `json:"serverName,omitempty"`
 }

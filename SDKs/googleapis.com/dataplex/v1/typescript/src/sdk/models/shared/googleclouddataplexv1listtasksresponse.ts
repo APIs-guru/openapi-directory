@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDataplexV1Task } from "./googleclouddataplexv1task";
+
 
 
 // GoogleCloudDataplexV1ListTasksResponse
@@ -8,12 +8,12 @@ import { GoogleCloudDataplexV1Task } from "./googleclouddataplexv1task";
  * List tasks response.
 **/
 export class GoogleCloudDataplexV1ListTasksResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=tasks", elemType: shared.GoogleCloudDataplexV1Task })
+  @SpeakeasyMetadata({ data: "json, name=tasks", elemType: GoogleCloudDataplexV1Task })
   tasks?: GoogleCloudDataplexV1Task[];
 
-  @Metadata({ data: "json, name=unreachableLocations" })
+  @SpeakeasyMetadata({ data: "json, name=unreachableLocations" })
   unreachableLocations?: string[];
 }

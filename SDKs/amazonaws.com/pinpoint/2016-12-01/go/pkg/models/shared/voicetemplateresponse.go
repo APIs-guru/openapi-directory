@@ -1,5 +1,7 @@
 package shared
 
+// VoiceTemplateResponse
+// Provides information about the content and settings for a message template that can be used in messages that are sent through the voice channel.
 type VoiceTemplateResponse struct {
 	Arn                  *string           `json:"Arn,omitempty"`
 	Body                 *string           `json:"Body,omitempty"`

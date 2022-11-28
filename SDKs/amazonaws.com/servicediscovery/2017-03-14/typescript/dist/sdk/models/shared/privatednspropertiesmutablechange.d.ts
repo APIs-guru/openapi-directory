@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SoaChange } from "./soachange";
 /**
  * Updated DNS properties for the private DNS namespace.

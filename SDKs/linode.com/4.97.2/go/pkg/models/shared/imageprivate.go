@@ -19,6 +19,8 @@ const (
 	ImagePrivateTypeEnumAutomatic ImagePrivateTypeEnum = "automatic"
 )
 
+// ImagePrivate
+// Private Image object
 type ImagePrivate struct {
 	Created     *time.Time              `json:"created,omitempty"`
 	CreatedBy   *string                 `json:"created_by,omitempty"`
@@ -34,4 +36,12 @@ type ImagePrivate struct {
 	Type        *ImagePrivateTypeEnum   `json:"type,omitempty"`
 	Updated     *time.Time              `json:"updated,omitempty"`
 	Vendor      *string                 `json:"vendor,omitempty"`
+}
+
+// ImagePrivateInput
+// Private Image object
+type ImagePrivateInput struct {
+	Description *string                 `json:"description,omitempty"`
+	Label       *string                 `json:"label,omitempty"`
+	Status      *ImagePrivateStatusEnum `json:"status,omitempty"`
 }

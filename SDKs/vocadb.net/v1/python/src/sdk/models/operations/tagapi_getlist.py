@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class TagAPIGetListFieldsEnum(str, Enum):
@@ -63,13 +64,13 @@ class TagAPIGetListQueryParams:
 
 @dataclass
 class TagAPIGetListRequest:
-    query_params: TagAPIGetListQueryParams = field(default=None)
+    query_params: TagAPIGetListQueryParams = field()
     
 
 @dataclass
 class TagAPIGetListResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     partial_find_result_tag_for_api_contract_: Optional[shared.PartialFindResultTagForAPIContract] = field(default=None)
-    status_code: int = field(default=None)
     

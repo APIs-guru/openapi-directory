@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import optionalcolor
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Shading:
-    background_color: Optional[optionalcolor.OptionalColor] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backgroundColor' }})
+    r"""Shading
+    The shading of a paragraph.
+    """
+    
+    background_color: Optional[OptionalColor] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('backgroundColor') }})
     

@@ -28,11 +28,6 @@ type MripcSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type MripcRequest struct {
-	Request  *MripcRequestBody `request:"mediaType=application/json"`
-	Security MripcSecurity
-}
-
 type Mripc400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Mripc504ApplicationJSON struct {
 	Error            *Mripc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Mripc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type MripcRequest struct {
+	Request  *MripcRequestBody `request:"mediaType=application/json"`
+	Security MripcSecurity
 }
 
 type MripcResponse struct {

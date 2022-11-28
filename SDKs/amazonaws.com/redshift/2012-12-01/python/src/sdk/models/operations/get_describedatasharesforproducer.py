@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeDataSharesForProducerActionEnum(str, Enum):
     DESCRIBE_DATA_SHARES_FOR_PRODUCER = "DescribeDataSharesForProducer"
@@ -17,12 +21,12 @@ class GetDescribeDataSharesForProducerVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeDataSharesForProducerQueryParams:
-    action: GetDescribeDataSharesForProducerActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeDataSharesForProducerActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeDataSharesForProducerVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
     producer_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ProducerArn', 'style': 'form', 'explode': True }})
     status: Optional[GetDescribeDataSharesForProducerStatusEnum] = field(default=None, metadata={'query_param': { 'field_name': 'Status', 'style': 'form', 'explode': True }})
-    version: GetDescribeDataSharesForProducerVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -38,13 +42,13 @@ class GetDescribeDataSharesForProducerHeaders:
 
 @dataclass
 class GetDescribeDataSharesForProducerRequest:
-    query_params: GetDescribeDataSharesForProducerQueryParams = field(default=None)
-    headers: GetDescribeDataSharesForProducerHeaders = field(default=None)
+    headers: GetDescribeDataSharesForProducerHeaders = field()
+    query_params: GetDescribeDataSharesForProducerQueryParams = field()
     
 
 @dataclass
 class GetDescribeDataSharesForProducerResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

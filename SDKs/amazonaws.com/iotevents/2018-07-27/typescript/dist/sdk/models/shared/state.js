@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OnEnterLifecycle } from "./onenterlifecycle";
 import { OnExitLifecycle } from "./onexitlifecycle";
 import { OnInputLifecycle } from "./oninputlifecycle";
@@ -36,19 +36,19 @@ var State = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=onEnter" }),
+        SpeakeasyMetadata({ data: "json, name=onEnter" }),
         __metadata("design:type", OnEnterLifecycle)
     ], State.prototype, "onEnter", void 0);
     __decorate([
-        Metadata({ data: "json, name=onExit" }),
+        SpeakeasyMetadata({ data: "json, name=onExit" }),
         __metadata("design:type", OnExitLifecycle)
     ], State.prototype, "onExit", void 0);
     __decorate([
-        Metadata({ data: "json, name=onInput" }),
+        SpeakeasyMetadata({ data: "json, name=onInput" }),
         __metadata("design:type", OnInputLifecycle)
     ], State.prototype, "onInput", void 0);
     __decorate([
-        Metadata({ data: "json, name=stateName" }),
+        SpeakeasyMetadata({ data: "json, name=stateName" }),
         __metadata("design:type", String)
     ], State.prototype, "stateName", void 0);
     return State;

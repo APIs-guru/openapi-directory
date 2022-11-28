@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetUpdateApplicationVersionActionEnum(str, Enum):
     UPDATE_APPLICATION_VERSION = "UpdateApplicationVersion"
@@ -10,11 +14,11 @@ class GetUpdateApplicationVersionVersionEnum(str, Enum):
 
 @dataclass
 class GetUpdateApplicationVersionQueryParams:
-    action: GetUpdateApplicationVersionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    application_name: str = field(default=None, metadata={'query_param': { 'field_name': 'ApplicationName', 'style': 'form', 'explode': True }})
+    action: GetUpdateApplicationVersionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    application_name: str = field(metadata={'query_param': { 'field_name': 'ApplicationName', 'style': 'form', 'explode': True }})
+    version: GetUpdateApplicationVersionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    version_label: str = field(metadata={'query_param': { 'field_name': 'VersionLabel', 'style': 'form', 'explode': True }})
     description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Description', 'style': 'form', 'explode': True }})
-    version: GetUpdateApplicationVersionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    version_label: str = field(default=None, metadata={'query_param': { 'field_name': 'VersionLabel', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetUpdateApplicationVersionHeaders:
 
 @dataclass
 class GetUpdateApplicationVersionRequest:
-    query_params: GetUpdateApplicationVersionQueryParams = field(default=None)
-    headers: GetUpdateApplicationVersionHeaders = field(default=None)
+    headers: GetUpdateApplicationVersionHeaders = field()
+    query_params: GetUpdateApplicationVersionQueryParams = field()
     
 
 @dataclass
 class GetUpdateApplicationVersionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

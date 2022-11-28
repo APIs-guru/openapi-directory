@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlatformDifferenceEnum } from "./platformdifferenceenum";
 import { UtilizationMetric } from "./utilizationmetric";
+
 
 
 // InstanceRecommendationOption
@@ -9,18 +9,18 @@ import { UtilizationMetric } from "./utilizationmetric";
  * Describes a recommendation option for an Amazon EC2 instance.
 **/
 export class InstanceRecommendationOption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceType" })
+  @SpeakeasyMetadata({ data: "json, name=instanceType" })
   instanceType?: string;
 
-  @Metadata({ data: "json, name=performanceRisk" })
+  @SpeakeasyMetadata({ data: "json, name=performanceRisk" })
   performanceRisk?: number;
 
-  @Metadata({ data: "json, name=platformDifferences" })
+  @SpeakeasyMetadata({ data: "json, name=platformDifferences" })
   platformDifferences?: PlatformDifferenceEnum[];
 
-  @Metadata({ data: "json, name=projectedUtilizationMetrics", elemType: shared.UtilizationMetric })
+  @SpeakeasyMetadata({ data: "json, name=projectedUtilizationMetrics", elemType: UtilizationMetric })
   projectedUtilizationMetrics?: UtilizationMetric[];
 
-  @Metadata({ data: "json, name=rank" })
+  @SpeakeasyMetadata({ data: "json, name=rank" })
   rank?: number;
 }

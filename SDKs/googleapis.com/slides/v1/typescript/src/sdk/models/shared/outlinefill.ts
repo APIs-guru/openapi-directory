@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SolidFill } from "./solidfill";
+
 
 
 // OutlineFill
@@ -7,6 +8,6 @@ import { SolidFill } from "./solidfill";
  * The fill of the outline.
 **/
 export class OutlineFill extends SpeakeasyBase {
-  @Metadata({ data: "json, name=solidFill" })
+  @SpeakeasyMetadata({ data: "json, name=solidFill" })
   solidFill?: SolidFill;
 }

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ClusterCustomerAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lat" })
+  @SpeakeasyMetadata({ data: "json, name=lat" })
   lat?: number;
 
-  @Metadata({ data: "json, name=lon" })
+  @SpeakeasyMetadata({ data: "json, name=lon" })
   lon?: number;
 
-  @Metadata({ data: "json, name=street_hint" })
+  @SpeakeasyMetadata({ data: "json, name=street_hint" })
   streetHint?: string;
 }

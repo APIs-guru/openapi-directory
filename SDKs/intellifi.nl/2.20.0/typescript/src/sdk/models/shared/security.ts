@@ -1,49 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SchemeCookieSid extends SpeakeasyBase {
-  @Metadata({ data: "security, name=brain.sid" })
+  @SpeakeasyMetadata({ data: "security, name=brain.sid" })
   apiKey: string;
 }
 
 
 export class SchemeHeaderApiKey extends SpeakeasyBase {
-  @Metadata({ data: "security, name=X-Api-Key" })
+  @SpeakeasyMetadata({ data: "security, name=X-Api-Key" })
   apiKey: string;
 }
 
 
 export class SchemeQueryApiKey extends SpeakeasyBase {
-  @Metadata({ data: "security, name=key" })
+  @SpeakeasyMetadata({ data: "security, name=key" })
   apiKey: string;
 }
 
 
-export class SecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=cookie" })
-  cookieSid: SchemeCookieSid;
-}
-
-
-export class SecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  headerApiKey: SchemeHeaderApiKey;
-}
-
-
-export class SecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  queryApiKey: SchemeQueryApiKey;
-}
-
-
 export class Security extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: SecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=cookie" })
+  cookieSid?: SchemeCookieSid;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: SecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  headerApiKey?: SchemeHeaderApiKey;
 
-  @Metadata({ data: "security, option=true" })
-  option3?: SecurityOption3;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  queryApiKey?: SchemeQueryApiKey;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum LambdaFunctionRecommendationFilterNameEnum {
-    Finding = "Finding"
-,    FindingReasonCode = "FindingReasonCode"
+    Finding = "Finding",
+    FindingReasonCode = "FindingReasonCode"
 }

@@ -28,11 +28,6 @@ type HmipcSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type HmipcRequest struct {
-	Request  *HmipcRequestBody `request:"mediaType=application/json"`
-	Security HmipcSecurity
-}
-
 type Hmipc400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Hmipc504ApplicationJSON struct {
 	Error            *Hmipc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Hmipc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type HmipcRequest struct {
+	Request  *HmipcRequestBody `request:"mediaType=application/json"`
+	Security HmipcSecurity
 }
 
 type HmipcResponse struct {

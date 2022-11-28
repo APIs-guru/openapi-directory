@@ -1,24 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const AIRTRAVELMULTILEG_SERVERS = [
-	"http://api.climatekuul.com:8000/footprint",
-];
 
+export const AirtravelMultilegServerList = [
+	"http://api.climatekuul.com:8000/footprint",
+] as const;
 
 
 export class AirtravelMultilegRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.AirtravelMultilegRequest;
 }
 
 
 export class AirtravelMultilegResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

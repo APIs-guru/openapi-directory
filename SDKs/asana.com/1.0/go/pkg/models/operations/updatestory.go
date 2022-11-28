@@ -13,18 +13,18 @@ type UpdateStoryQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
-type UpdateStoryRequestBody struct {
-	Data *shared.StoryRequest `json:"data,omitempty"`
+type UpdateStoryRequestBodyInput struct {
+	Data *shared.StoryRequestInput `json:"data,omitempty"`
+}
+
+type UpdateStory200ApplicationJSON struct {
+	Data *shared.StoryResponse `json:"data,omitempty"`
 }
 
 type UpdateStoryRequest struct {
 	PathParams  UpdateStoryPathParams
 	QueryParams UpdateStoryQueryParams
-	Request     UpdateStoryRequestBody `request:"mediaType=application/json"`
-}
-
-type UpdateStory200ApplicationJSON struct {
-	Data *shared.StoryResponse `json:"data,omitempty"`
+	Request     UpdateStoryRequestBodyInput `request:"mediaType=application/json"`
 }
 
 type UpdateStoryResponse struct {

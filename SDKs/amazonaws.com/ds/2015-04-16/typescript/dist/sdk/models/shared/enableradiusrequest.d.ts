@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RadiusSettings } from "./radiussettings";
 /**
  * Contains the inputs for the <a>EnableRadius</a> operation.

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceAppliedCapabilities
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The capabilities related to this choice on applied metadata.
 **/
 export class GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceAppliedCapabilities extends SpeakeasyBase {
-  @Metadata({ data: "json, name=canRead" })
+  @SpeakeasyMetadata({ data: "json, name=canRead" })
   canRead?: boolean;
 
-  @Metadata({ data: "json, name=canSearch" })
+  @SpeakeasyMetadata({ data: "json, name=canSearch" })
   canSearch?: boolean;
 
-  @Metadata({ data: "json, name=canSelect" })
+  @SpeakeasyMetadata({ data: "json, name=canSelect" })
   canSelect?: boolean;
 }

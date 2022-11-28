@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EnterpriseAdminCreateEnterpriseServerLicenseRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=license" })
+  @SpeakeasyMetadata({ data: "json, name=license" })
   license: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=settings" })
+  @SpeakeasyMetadata({ data: "json, name=settings" })
   settings?: string;
 }
 
 
 export class EnterpriseAdminCreateEnterpriseServerLicenseRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: EnterpriseAdminCreateEnterpriseServerLicenseRequestBody;
 }
 
 
 export class EnterpriseAdminCreateEnterpriseServerLicenseResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

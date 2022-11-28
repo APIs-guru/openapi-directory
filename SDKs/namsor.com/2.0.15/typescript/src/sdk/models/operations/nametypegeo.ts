@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class NameTypeGeoPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=countryIso2" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=countryIso2" })
   countryIso2: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=properNoun" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=properNoun" })
   properNoun: string;
 }
 
 
 export class NameTypeGeoSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class NameTypeGeoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: NameTypeGeoPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: NameTypeGeoSecurity;
 }
 
 
 export class NameTypeGeoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   properNounCategorizedOut?: shared.ProperNounCategorizedOut;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

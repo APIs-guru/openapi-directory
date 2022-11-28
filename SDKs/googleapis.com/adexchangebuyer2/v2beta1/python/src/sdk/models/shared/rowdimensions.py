@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import timeinterval
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RowDimensions:
-    publisher_identifier: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publisherIdentifier' }})
-    time_interval: Optional[timeinterval.TimeInterval] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeInterval' }})
+    r"""RowDimensions
+    A response may include multiple rows, breaking down along various dimensions. Encapsulates the values of all dimensions for a given row.
+    """
+    
+    publisher_identifier: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publisherIdentifier') }})
+    time_interval: Optional[TimeInterval] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeInterval') }})
     

@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SentimentTypeEnum } from "./sentimenttypeenum";
 import { SentimentScore } from "./sentimentscore";
 
 
+
 export class DetectSentimentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Sentiment" })
+  @SpeakeasyMetadata({ data: "json, name=Sentiment" })
   sentiment?: SentimentTypeEnum;
 
-  @Metadata({ data: "json, name=SentimentScore" })
+  @SpeakeasyMetadata({ data: "json, name=SentimentScore" })
   sentimentScore?: SentimentScore;
 }

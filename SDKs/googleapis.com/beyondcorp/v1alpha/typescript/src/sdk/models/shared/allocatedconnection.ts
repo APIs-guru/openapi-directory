@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AllocatedConnection
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Allocated connection of the AppGateway.
 **/
 export class AllocatedConnection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ingressPort" })
+  @SpeakeasyMetadata({ data: "json, name=ingressPort" })
   ingressPort?: number;
 
-  @Metadata({ data: "json, name=pscUri" })
+  @SpeakeasyMetadata({ data: "json, name=pscUri" })
   pscUri?: string;
 }

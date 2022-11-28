@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.test.payrun.io",
 }
 
@@ -18,10 +18,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://developer.test.payrun.io/docs - External Documents
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +37,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DeleteAeAssessment - Delete auto enrolment assessment
+// Deletes an existing auto enrolment assessment for the employee. Used to remove historical assessments
 func (s *SDK) DeleteAeAssessment(ctx context.Context, request operations.DeleteAeAssessmentRequest) (*operations.DeleteAeAssessmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/AEAssessment/{AEAssessmentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -62,7 +86,7 @@ func (s *SDK) DeleteAeAssessment(ctx context.Context, request operations.DeleteA
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -123,8 +147,10 @@ func (s *SDK) DeleteAeAssessment(ctx context.Context, request operations.DeleteA
 	return res, nil
 }
 
+// DeleteBatchJob - Delete the Batch job
+// Deletes the the Batch job
 func (s *SDK) DeleteBatchJob(ctx context.Context, request operations.DeleteBatchJobRequest) (*operations.DeleteBatchJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/Batch/{JobId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -134,7 +160,7 @@ func (s *SDK) DeleteBatchJob(ctx context.Context, request operations.DeleteBatch
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -195,8 +221,10 @@ func (s *SDK) DeleteBatchJob(ctx context.Context, request operations.DeleteBatch
 	return res, nil
 }
 
+// DeleteCisInstruction - Delete a CIS instruction
+// Delete the specified CIS instruction
 func (s *SDK) DeleteCisInstruction(ctx context.Context, request operations.DeleteCisInstructionRequest) (*operations.DeleteCisInstructionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisInstruction/{CisInstructionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -206,7 +234,7 @@ func (s *SDK) DeleteCisInstruction(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -267,8 +295,10 @@ func (s *SDK) DeleteCisInstruction(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteCisInstructionTag - Delete CIS instruction tag
+// Deletes a tag from the CIS instruction
 func (s *SDK) DeleteCisInstructionTag(ctx context.Context, request operations.DeleteCisInstructionTagRequest) (*operations.DeleteCisInstructionTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisInstruction/{CisInstructionId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -278,7 +308,7 @@ func (s *SDK) DeleteCisInstructionTag(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -339,8 +369,10 @@ func (s *SDK) DeleteCisInstructionTag(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DeleteCisJob - Delete the CIS job
+// Deletes the the CIS job
 func (s *SDK) DeleteCisJob(ctx context.Context, request operations.DeleteCisJobRequest) (*operations.DeleteCisJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/Cis/{JobId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -350,7 +382,7 @@ func (s *SDK) DeleteCisJob(ctx context.Context, request operations.DeleteCisJobR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -411,8 +443,10 @@ func (s *SDK) DeleteCisJob(ctx context.Context, request operations.DeleteCisJobR
 	return res, nil
 }
 
+// DeleteCisLine - Delete a CIS line
+// Delete the specified CIS line
 func (s *SDK) DeleteCisLine(ctx context.Context, request operations.DeleteCisLineRequest) (*operations.DeleteCisLineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisLine/{CisLineId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -422,7 +456,7 @@ func (s *SDK) DeleteCisLine(ctx context.Context, request operations.DeleteCisLin
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -483,8 +517,10 @@ func (s *SDK) DeleteCisLine(ctx context.Context, request operations.DeleteCisLin
 	return res, nil
 }
 
+// DeleteCisLineTag - Delete CIS line tag
+// Deletes a tag from the CIS line
 func (s *SDK) DeleteCisLineTag(ctx context.Context, request operations.DeleteCisLineTagRequest) (*operations.DeleteCisLineTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisLine/{CisLineId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -494,7 +530,7 @@ func (s *SDK) DeleteCisLineTag(ctx context.Context, request operations.DeleteCis
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -555,8 +591,10 @@ func (s *SDK) DeleteCisLineTag(ctx context.Context, request operations.DeleteCis
 	return res, nil
 }
 
+// DeleteCisLineType - Delete an CIS line type
+// Delete the specified CIS line type
 func (s *SDK) DeleteCisLineType(ctx context.Context, request operations.DeleteCisLineTypeRequest) (*operations.DeleteCisLineTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/CisLineType/{CisLineTypeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -566,7 +604,7 @@ func (s *SDK) DeleteCisLineType(ctx context.Context, request operations.DeleteCi
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -627,8 +665,10 @@ func (s *SDK) DeleteCisLineType(ctx context.Context, request operations.DeleteCi
 	return res, nil
 }
 
+// DeleteCisLineTypeTag - Delete CIS line type tag
+// Deletes a tag from the CIS line type
 func (s *SDK) DeleteCisLineTypeTag(ctx context.Context, request operations.DeleteCisLineTypeTagRequest) (*operations.DeleteCisLineTypeTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/CisLineType/{CisLineTypeId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -638,7 +678,7 @@ func (s *SDK) DeleteCisLineTypeTag(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -699,8 +739,10 @@ func (s *SDK) DeleteCisLineTypeTag(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteCisTransaction - Delete the CIS transaction
+// Deletes the specified CIS transaction
 func (s *SDK) DeleteCisTransaction(ctx context.Context, request operations.DeleteCisTransactionRequest) (*operations.DeleteCisTransactionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/CisTransaction/{CisTransactionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -710,7 +752,7 @@ func (s *SDK) DeleteCisTransaction(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -771,8 +813,10 @@ func (s *SDK) DeleteCisTransaction(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteDpsJob - Delete the DPS job
+// Deletes the the DPS job
 func (s *SDK) DeleteDpsJob(ctx context.Context, request operations.DeleteDpsJobRequest) (*operations.DeleteDpsJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/Dps/{JobId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -782,7 +826,7 @@ func (s *SDK) DeleteDpsJob(ctx context.Context, request operations.DeleteDpsJobR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -843,8 +887,10 @@ func (s *SDK) DeleteDpsJob(ctx context.Context, request operations.DeleteDpsJobR
 	return res, nil
 }
 
+// DeleteDpsMessage - Deletes the DPS message
+// Deletes the DPS message
 func (s *SDK) DeleteDpsMessage(ctx context.Context, request operations.DeleteDpsMessageRequest) (*operations.DeleteDpsMessageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/DpsMessage/{DpsMessageId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -854,7 +900,7 @@ func (s *SDK) DeleteDpsMessage(ctx context.Context, request operations.DeleteDps
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -915,8 +961,10 @@ func (s *SDK) DeleteDpsMessage(ctx context.Context, request operations.DeleteDps
 	return res, nil
 }
 
+// DeleteEmployee - Delete an Employee
+// Delete the specified employee
 func (s *SDK) DeleteEmployee(ctx context.Context, request operations.DeleteEmployeeRequest) (*operations.DeleteEmployeeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -926,7 +974,7 @@ func (s *SDK) DeleteEmployee(ctx context.Context, request operations.DeleteEmplo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -987,8 +1035,10 @@ func (s *SDK) DeleteEmployee(ctx context.Context, request operations.DeleteEmplo
 	return res, nil
 }
 
+// DeleteEmployeeRevision - Delete an Employee revision matching the specified revision date.
+// Deletes the specified employee revision for the matching revision date
 func (s *SDK) DeleteEmployeeRevision(ctx context.Context, request operations.DeleteEmployeeRevisionRequest) (*operations.DeleteEmployeeRevisionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -998,7 +1048,7 @@ func (s *SDK) DeleteEmployeeRevision(ctx context.Context, request operations.Del
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1059,8 +1109,10 @@ func (s *SDK) DeleteEmployeeRevision(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteEmployeeRevisionByNumber - Delete an Employee revision matching the specified revision number.
+// Deletes the specified employee revision for the matching revision number
 func (s *SDK) DeleteEmployeeRevisionByNumber(ctx context.Context, request operations.DeleteEmployeeRevisionByNumberRequest) (*operations.DeleteEmployeeRevisionByNumberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/Revision/{RevisionNumber}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1070,7 +1122,7 @@ func (s *SDK) DeleteEmployeeRevisionByNumber(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1131,8 +1183,10 @@ func (s *SDK) DeleteEmployeeRevisionByNumber(ctx context.Context, request operat
 	return res, nil
 }
 
+// DeleteEmployeeSecret - Deletes employee secret
+// Deletes an employee secret from the given resource location
 func (s *SDK) DeleteEmployeeSecret(ctx context.Context, request operations.DeleteEmployeeSecretRequest) (*operations.DeleteEmployeeSecretResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/Secret/{SecretId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1142,7 +1196,7 @@ func (s *SDK) DeleteEmployeeSecret(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1203,8 +1257,10 @@ func (s *SDK) DeleteEmployeeSecret(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteEmployeeTag - Delete employee tag
+// Deletes a tag from the employee
 func (s *SDK) DeleteEmployeeTag(ctx context.Context, request operations.DeleteEmployeeTagRequest) (*operations.DeleteEmployeeTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1214,7 +1270,7 @@ func (s *SDK) DeleteEmployeeTag(ctx context.Context, request operations.DeleteEm
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1275,8 +1331,10 @@ func (s *SDK) DeleteEmployeeTag(ctx context.Context, request operations.DeleteEm
 	return res, nil
 }
 
+// DeleteEmployer - Delete an Employer
+// Delete the specified employer
 func (s *SDK) DeleteEmployer(ctx context.Context, request operations.DeleteEmployerRequest) (*operations.DeleteEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1286,7 +1344,7 @@ func (s *SDK) DeleteEmployer(ctx context.Context, request operations.DeleteEmplo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1347,8 +1405,10 @@ func (s *SDK) DeleteEmployer(ctx context.Context, request operations.DeleteEmplo
 	return res, nil
 }
 
+// DeleteEmployerRevision - Delete an Employer revision matching the specified revision date.
+// Deletes the specified employer revision for the matching revision date
 func (s *SDK) DeleteEmployerRevision(ctx context.Context, request operations.DeleteEmployerRevisionRequest) (*operations.DeleteEmployerRevisionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1358,7 +1418,7 @@ func (s *SDK) DeleteEmployerRevision(ctx context.Context, request operations.Del
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1419,8 +1479,10 @@ func (s *SDK) DeleteEmployerRevision(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteEmployerRevisionByNumber - Delete an Employer revision matching the specified revision number.
+// Deletes the specified employer revision for the matching revision number
 func (s *SDK) DeleteEmployerRevisionByNumber(ctx context.Context, request operations.DeleteEmployerRevisionByNumberRequest) (*operations.DeleteEmployerRevisionByNumberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Revision/{RevisionNumber}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1430,7 +1492,7 @@ func (s *SDK) DeleteEmployerRevisionByNumber(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1491,8 +1553,10 @@ func (s *SDK) DeleteEmployerRevisionByNumber(ctx context.Context, request operat
 	return res, nil
 }
 
+// DeleteEmployerSecret - Deletes employer secret
+// Deletes an employer secret from the given resource location
 func (s *SDK) DeleteEmployerSecret(ctx context.Context, request operations.DeleteEmployerSecretRequest) (*operations.DeleteEmployerSecretResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Secret/{SecretId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1502,7 +1566,7 @@ func (s *SDK) DeleteEmployerSecret(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1563,8 +1627,10 @@ func (s *SDK) DeleteEmployerSecret(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteEmployerTag - Delete employer tag
+// Deletes a tag from the employer
 func (s *SDK) DeleteEmployerTag(ctx context.Context, request operations.DeleteEmployerTagRequest) (*operations.DeleteEmployerTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1574,7 +1640,7 @@ func (s *SDK) DeleteEmployerTag(ctx context.Context, request operations.DeleteEm
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1635,8 +1701,10 @@ func (s *SDK) DeleteEmployerTag(ctx context.Context, request operations.DeleteEm
 	return res, nil
 }
 
+// DeleteHolidayScheme - Delete an holiday scheme
+// Delete the specified holiday scheme
 func (s *SDK) DeleteHolidayScheme(ctx context.Context, request operations.DeleteHolidaySchemeRequest) (*operations.DeleteHolidaySchemeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/HolidayScheme/{HolidaySchemeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1646,7 +1714,7 @@ func (s *SDK) DeleteHolidayScheme(ctx context.Context, request operations.Delete
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1707,8 +1775,10 @@ func (s *SDK) DeleteHolidayScheme(ctx context.Context, request operations.Delete
 	return res, nil
 }
 
+// DeleteHolidaySchemeRevision - Delete an holiday scheme revision matching the specified revision date.
+// Deletes the specified holiday scheme revision for the matching revision date
 func (s *SDK) DeleteHolidaySchemeRevision(ctx context.Context, request operations.DeleteHolidaySchemeRevisionRequest) (*operations.DeleteHolidaySchemeRevisionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/HolidayScheme/{HolidaySchemeId}/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1718,7 +1788,7 @@ func (s *SDK) DeleteHolidaySchemeRevision(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1779,8 +1849,10 @@ func (s *SDK) DeleteHolidaySchemeRevision(ctx context.Context, request operation
 	return res, nil
 }
 
+// DeleteHolidaySchemeRevisionByNumber - Delete an HolidayScheme revision matching the specified revision number.
+// Deletes the specified holiday scheme revision for the matching revision number
 func (s *SDK) DeleteHolidaySchemeRevisionByNumber(ctx context.Context, request operations.DeleteHolidaySchemeRevisionByNumberRequest) (*operations.DeleteHolidaySchemeRevisionByNumberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/HolidayScheme/{HolidaySchemeId}/Revision/{RevisionNumber}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1790,7 +1862,7 @@ func (s *SDK) DeleteHolidaySchemeRevisionByNumber(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1851,8 +1923,10 @@ func (s *SDK) DeleteHolidaySchemeRevisionByNumber(ctx context.Context, request o
 	return res, nil
 }
 
+// DeleteHolidaySchemeTag - Delete holiday scheme tag
+// Deletes a tag from the holiday scheme
 func (s *SDK) DeleteHolidaySchemeTag(ctx context.Context, request operations.DeleteHolidaySchemeTagRequest) (*operations.DeleteHolidaySchemeTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/HolidayScheme/{HolidaySchemeId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1862,7 +1936,7 @@ func (s *SDK) DeleteHolidaySchemeTag(ctx context.Context, request operations.Del
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1923,8 +1997,10 @@ func (s *SDK) DeleteHolidaySchemeTag(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteJournalInstruction - Deletes a Journal instruction
+// Delete the specified Journal instruction
 func (s *SDK) DeleteJournalInstruction(ctx context.Context, request operations.DeleteJournalInstructionRequest) (*operations.DeleteJournalInstructionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/JournalInstruction/{JournalInstructionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1934,7 +2010,7 @@ func (s *SDK) DeleteJournalInstruction(ctx context.Context, request operations.D
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1995,8 +2071,10 @@ func (s *SDK) DeleteJournalInstruction(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DeleteJournalInstructionTemplate - Deletes a Journal instruction template
+// Delete the specified Journal instruction template object
 func (s *SDK) DeleteJournalInstructionTemplate(ctx context.Context, request operations.DeleteJournalInstructionTemplateRequest) (*operations.DeleteJournalInstructionTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/JournalInstruction/{JournalInstructionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2006,7 +2084,7 @@ func (s *SDK) DeleteJournalInstructionTemplate(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2067,8 +2145,10 @@ func (s *SDK) DeleteJournalInstructionTemplate(ctx context.Context, request oper
 	return res, nil
 }
 
+// DeleteJournalLineTag - Delete journal line tag
+// Deletes a tag from the journal line
 func (s *SDK) DeleteJournalLineTag(ctx context.Context, request operations.DeleteJournalLineTagRequest) (*operations.DeleteJournalLineTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/JournalLine/{JournalLineId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2078,7 +2158,7 @@ func (s *SDK) DeleteJournalLineTag(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2139,8 +2219,10 @@ func (s *SDK) DeleteJournalLineTag(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteNominalCode - Deletes the nominal codes
+// Deletes the nominal code
 func (s *SDK) DeleteNominalCode(ctx context.Context, request operations.DeleteNominalCodeRequest) (*operations.DeleteNominalCodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/NominalCode/{NominalCodeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2150,7 +2232,7 @@ func (s *SDK) DeleteNominalCode(ctx context.Context, request operations.DeleteNo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2211,8 +2293,10 @@ func (s *SDK) DeleteNominalCode(ctx context.Context, request operations.DeleteNo
 	return res, nil
 }
 
+// DeletePayCode - Deletes a pay code
+// Delete the specified pay code
 func (s *SDK) DeletePayCode(ctx context.Context, request operations.DeletePayCodeRequest) (*operations.DeletePayCodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PayCode/{PayCodeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2222,7 +2306,7 @@ func (s *SDK) DeletePayCode(ctx context.Context, request operations.DeletePayCod
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2283,8 +2367,10 @@ func (s *SDK) DeletePayCode(ctx context.Context, request operations.DeletePayCod
 	return res, nil
 }
 
+// DeletePayCodeRevision - Deletes a pay code revision
+// Delete the pay code revision for the specified date
 func (s *SDK) DeletePayCodeRevision(ctx context.Context, request operations.DeletePayCodeRevisionRequest) (*operations.DeletePayCodeRevisionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PayCode/{PayCodeId}/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2294,7 +2380,7 @@ func (s *SDK) DeletePayCodeRevision(ctx context.Context, request operations.Dele
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2355,8 +2441,10 @@ func (s *SDK) DeletePayCodeRevision(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// DeletePayCodeRevisionByNumber - Delete an PayCode revision matching the specified revision number.
+// Deletes the specified pay code revision for the matching revision number
 func (s *SDK) DeletePayCodeRevisionByNumber(ctx context.Context, request operations.DeletePayCodeRevisionByNumberRequest) (*operations.DeletePayCodeRevisionByNumberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PayCode/{PayCodeId}/Revision/{RevisionNumber}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2366,7 +2454,7 @@ func (s *SDK) DeletePayCodeRevisionByNumber(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2427,8 +2515,10 @@ func (s *SDK) DeletePayCodeRevisionByNumber(ctx context.Context, request operati
 	return res, nil
 }
 
+// DeletePayCodeTag - Delete pay code tag
+// Deletes a tag from the pay code
 func (s *SDK) DeletePayCodeTag(ctx context.Context, request operations.DeletePayCodeTagRequest) (*operations.DeletePayCodeTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PayCode/{PayCodeId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2438,7 +2528,7 @@ func (s *SDK) DeletePayCodeTag(ctx context.Context, request operations.DeletePay
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2499,8 +2589,10 @@ func (s *SDK) DeletePayCodeTag(ctx context.Context, request operations.DeletePay
 	return res, nil
 }
 
+// DeletePayInstruction - Deletes a pay instruction
+// Delete the specified pay instruction
 func (s *SDK) DeletePayInstruction(ctx context.Context, request operations.DeletePayInstructionRequest) (*operations.DeletePayInstructionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayInstruction/{PayInstructionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2510,7 +2602,7 @@ func (s *SDK) DeletePayInstruction(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2571,8 +2663,10 @@ func (s *SDK) DeletePayInstruction(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeletePayInstructionTag - Delete pay instruction tag
+// Deletes a tag from the pay instruction
 func (s *SDK) DeletePayInstructionTag(ctx context.Context, request operations.DeletePayInstructionTagRequest) (*operations.DeletePayInstructionTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayInstruction/{PayInstructionId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2582,7 +2676,7 @@ func (s *SDK) DeletePayInstructionTag(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2643,8 +2737,10 @@ func (s *SDK) DeletePayInstructionTag(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DeletePayLineTag - Delete pay line tag
+// Deletes a tag from the pay line
 func (s *SDK) DeletePayLineTag(ctx context.Context, request operations.DeletePayLineTagRequest) (*operations.DeletePayLineTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayLine/{PayLineId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2654,7 +2750,7 @@ func (s *SDK) DeletePayLineTag(ctx context.Context, request operations.DeletePay
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2715,8 +2811,10 @@ func (s *SDK) DeletePayLineTag(ctx context.Context, request operations.DeletePay
 	return res, nil
 }
 
+// DeletePayRun - Deletes a pay run
+// Delete the specified pay run
 func (s *SDK) DeletePayRun(ctx context.Context, request operations.DeletePayRunRequest) (*operations.DeletePayRunResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRun/{PayRunId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2726,7 +2824,7 @@ func (s *SDK) DeletePayRun(ctx context.Context, request operations.DeletePayRunR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2787,8 +2885,10 @@ func (s *SDK) DeletePayRun(ctx context.Context, request operations.DeletePayRunR
 	return res, nil
 }
 
+// DeletePayRunEmployee - Deletes a pay run employee
+// Delete pay run results for a single employee
 func (s *SDK) DeletePayRunEmployee(ctx context.Context, request operations.DeletePayRunEmployeeRequest) (*operations.DeletePayRunEmployeeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRun/{PayRunId}/Employee/{EmployeeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2798,7 +2898,7 @@ func (s *SDK) DeletePayRunEmployee(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2859,8 +2959,10 @@ func (s *SDK) DeletePayRunEmployee(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeletePayRunJob - Delete the pay run job
+// Deletes the the payrun job
 func (s *SDK) DeletePayRunJob(ctx context.Context, request operations.DeletePayRunJobRequest) (*operations.DeletePayRunJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/PayRuns/{JobId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2870,7 +2972,7 @@ func (s *SDK) DeletePayRunJob(ctx context.Context, request operations.DeletePayR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2931,8 +3033,10 @@ func (s *SDK) DeletePayRunJob(ctx context.Context, request operations.DeletePayR
 	return res, nil
 }
 
+// DeletePayRunTag - Delete pay run tag
+// Deletes a tag from the pay run
 func (s *SDK) DeletePayRunTag(ctx context.Context, request operations.DeletePayRunTagRequest) (*operations.DeletePayRunTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRun/{PayRunId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2942,7 +3046,7 @@ func (s *SDK) DeletePayRunTag(ctx context.Context, request operations.DeletePayR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3003,8 +3107,10 @@ func (s *SDK) DeletePayRunTag(ctx context.Context, request operations.DeletePayR
 	return res, nil
 }
 
+// DeletePaySchedule - Deletes a pay schedule
+// Delete the specified pay schedule
 func (s *SDK) DeletePaySchedule(ctx context.Context, request operations.DeletePayScheduleRequest) (*operations.DeletePayScheduleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3014,7 +3120,7 @@ func (s *SDK) DeletePaySchedule(ctx context.Context, request operations.DeletePa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3075,8 +3181,10 @@ func (s *SDK) DeletePaySchedule(ctx context.Context, request operations.DeletePa
 	return res, nil
 }
 
+// DeletePayScheduleTag - Delete pay schedule tag
+// Deletes a tag from the pay schedule
 func (s *SDK) DeletePayScheduleTag(ctx context.Context, request operations.DeletePayScheduleTagRequest) (*operations.DeletePayScheduleTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3086,7 +3194,7 @@ func (s *SDK) DeletePayScheduleTag(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3147,8 +3255,10 @@ func (s *SDK) DeletePayScheduleTag(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeletePension - Delete a Pension
+// Delete the specified ppension
 func (s *SDK) DeletePension(ctx context.Context, request operations.DeletePensionRequest) (*operations.DeletePensionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Pension/{PensionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3158,7 +3268,7 @@ func (s *SDK) DeletePension(ctx context.Context, request operations.DeletePensio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3219,8 +3329,10 @@ func (s *SDK) DeletePension(ctx context.Context, request operations.DeletePensio
 	return res, nil
 }
 
+// DeletePensionRevision - Delete an Pension revision matching the specified revision date.
+// Deletes the specified pension revision for the matching revision date
 func (s *SDK) DeletePensionRevision(ctx context.Context, request operations.DeletePensionRevisionRequest) (*operations.DeletePensionRevisionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Pension/{PensionId}/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3230,7 +3342,7 @@ func (s *SDK) DeletePensionRevision(ctx context.Context, request operations.Dele
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3291,8 +3403,10 @@ func (s *SDK) DeletePensionRevision(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// DeletePensionRevisionByNumber - Delete an Pension revision matching the specified revision number.
+// Deletes the specified pension revision for the matching revision number
 func (s *SDK) DeletePensionRevisionByNumber(ctx context.Context, request operations.DeletePensionRevisionByNumberRequest) (*operations.DeletePensionRevisionByNumberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Pension/{PensionId}/Revision/{RevisionNumber}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3302,7 +3416,7 @@ func (s *SDK) DeletePensionRevisionByNumber(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3363,8 +3477,10 @@ func (s *SDK) DeletePensionRevisionByNumber(ctx context.Context, request operati
 	return res, nil
 }
 
+// DeletePermission - Deletes the permission object
+// Deletes the permission object from the application
 func (s *SDK) DeletePermission(ctx context.Context, request operations.DeletePermissionRequest) (*operations.DeletePermissionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Permission/{PermissionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3374,7 +3490,7 @@ func (s *SDK) DeletePermission(ctx context.Context, request operations.DeletePer
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3435,8 +3551,10 @@ func (s *SDK) DeletePermission(ctx context.Context, request operations.DeletePer
 	return res, nil
 }
 
+// DeleteReportDefinition - Deletes a report definition
+// Delete the specified report definition
 func (s *SDK) DeleteReportDefinition(ctx context.Context, request operations.DeleteReportDefinitionRequest) (*operations.DeleteReportDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Report/{ReportDefinitionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3446,7 +3564,7 @@ func (s *SDK) DeleteReportDefinition(ctx context.Context, request operations.Del
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3507,8 +3625,10 @@ func (s *SDK) DeleteReportDefinition(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteReportingInstruction - Deletes a reporting instruction
+// Delete the specified reporting instruction
 func (s *SDK) DeleteReportingInstruction(ctx context.Context, request operations.DeleteReportingInstructionRequest) (*operations.DeleteReportingInstructionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/ReportingInstruction/{ReportingInstructionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3518,7 +3638,7 @@ func (s *SDK) DeleteReportingInstruction(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3579,8 +3699,10 @@ func (s *SDK) DeleteReportingInstruction(ctx context.Context, request operations
 	return res, nil
 }
 
+// DeleteRtiJob - Delete the RTI job
+// Deletes the the RTI job
 func (s *SDK) DeleteRtiJob(ctx context.Context, request operations.DeleteRtiJobRequest) (*operations.DeleteRtiJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/Rti/{JobId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3590,7 +3712,7 @@ func (s *SDK) DeleteRtiJob(ctx context.Context, request operations.DeleteRtiJobR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3651,8 +3773,10 @@ func (s *SDK) DeleteRtiJob(ctx context.Context, request operations.DeleteRtiJobR
 	return res, nil
 }
 
+// DeleteRtiTransaction - Delete the RTI transaction
+// Deletes the specified RTI transaction
 func (s *SDK) DeleteRtiTransaction(ctx context.Context, request operations.DeleteRtiTransactionRequest) (*operations.DeleteRtiTransactionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/RtiTransaction/{RtiTransactionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3662,7 +3786,7 @@ func (s *SDK) DeleteRtiTransaction(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3723,8 +3847,10 @@ func (s *SDK) DeleteRtiTransaction(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteRtiTransactionTag - Delete RTI transaction tag
+// Deletes a tag from the RTI transaction
 func (s *SDK) DeleteRtiTransactionTag(ctx context.Context, request operations.DeleteRtiTransactionTagRequest) (*operations.DeleteRtiTransactionTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/RtiTransaction/{RtiTransactionId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3734,7 +3860,7 @@ func (s *SDK) DeleteRtiTransactionTag(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3795,8 +3921,10 @@ func (s *SDK) DeleteRtiTransactionTag(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DeleteSubContractor - Delete an sub contractor
+// Delete the specified sub contractor
 func (s *SDK) DeleteSubContractor(ctx context.Context, request operations.DeleteSubContractorRequest) (*operations.DeleteSubContractorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3806,7 +3934,7 @@ func (s *SDK) DeleteSubContractor(ctx context.Context, request operations.Delete
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3867,8 +3995,10 @@ func (s *SDK) DeleteSubContractor(ctx context.Context, request operations.Delete
 	return res, nil
 }
 
+// DeleteSubContractorRevision - Delete an sub contractor revision matching the specified revision date.
+// Deletes the specified sub contractor revision for the matching revision date
 func (s *SDK) DeleteSubContractorRevision(ctx context.Context, request operations.DeleteSubContractorRevisionRequest) (*operations.DeleteSubContractorRevisionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3878,7 +4008,7 @@ func (s *SDK) DeleteSubContractorRevision(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3939,8 +4069,10 @@ func (s *SDK) DeleteSubContractorRevision(ctx context.Context, request operation
 	return res, nil
 }
 
+// DeleteSubContractorRevisionByNumber - Delete an SubContractor revision matching the specified revision number.
+// Deletes the specified sub contractor revision for the matching revision number
 func (s *SDK) DeleteSubContractorRevisionByNumber(ctx context.Context, request operations.DeleteSubContractorRevisionByNumberRequest) (*operations.DeleteSubContractorRevisionByNumberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/Revision/{RevisionNumber}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3950,7 +4082,7 @@ func (s *SDK) DeleteSubContractorRevisionByNumber(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4011,8 +4143,10 @@ func (s *SDK) DeleteSubContractorRevisionByNumber(ctx context.Context, request o
 	return res, nil
 }
 
+// DeleteSubContractorTag - Delete sub contractor tag
+// Deletes a tag from the sub contractor
 func (s *SDK) DeleteSubContractorTag(ctx context.Context, request operations.DeleteSubContractorTagRequest) (*operations.DeleteSubContractorTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4022,7 +4156,7 @@ func (s *SDK) DeleteSubContractorTag(ctx context.Context, request operations.Del
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4083,8 +4217,10 @@ func (s *SDK) DeleteSubContractorTag(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteThirdPartyJob - Delete the Third Party job
+// Deletes the the Third Party job
 func (s *SDK) DeleteThirdPartyJob(ctx context.Context, request operations.DeleteThirdPartyJobRequest) (*operations.DeleteThirdPartyJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/ThirdParty/{JobId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4094,7 +4230,7 @@ func (s *SDK) DeleteThirdPartyJob(ctx context.Context, request operations.Delete
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4155,8 +4291,10 @@ func (s *SDK) DeleteThirdPartyJob(ctx context.Context, request operations.Delete
 	return res, nil
 }
 
+// DeleteThirdPartyTransaction - Delete third party transaction
+// Deletes a third party transaction record from the given resource location
 func (s *SDK) DeleteThirdPartyTransaction(ctx context.Context, request operations.DeleteThirdPartyTransactionRequest) (*operations.DeleteThirdPartyTransactionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/ThirdPartyTransaction/{ThirdPartyTransactionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4166,7 +4304,7 @@ func (s *SDK) DeleteThirdPartyTransaction(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4227,8 +4365,10 @@ func (s *SDK) DeleteThirdPartyTransaction(ctx context.Context, request operation
 	return res, nil
 }
 
+// DeleteThirdPartyTransactionTag - Delete third party transaction tag
+// Deletes a tag from the third party transaction
 func (s *SDK) DeleteThirdPartyTransactionTag(ctx context.Context, request operations.DeleteThirdPartyTransactionTagRequest) (*operations.DeleteThirdPartyTransactionTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/ThirdPartyTransaction/{ThirdPartyTransactionId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4238,7 +4378,7 @@ func (s *SDK) DeleteThirdPartyTransactionTag(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4299,8 +4439,10 @@ func (s *SDK) DeleteThirdPartyTransactionTag(ctx context.Context, request operat
 	return res, nil
 }
 
+// DeleteTransformDefinition - Deletes a transform definition
+// Delete the specified transform definition
 func (s *SDK) DeleteTransformDefinition(ctx context.Context, request operations.DeleteTransformDefinitionRequest) (*operations.DeleteTransformDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Transform/{TransformDefinitionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4310,7 +4452,7 @@ func (s *SDK) DeleteTransformDefinition(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4371,8 +4513,10 @@ func (s *SDK) DeleteTransformDefinition(ctx context.Context, request operations.
 	return res, nil
 }
 
+// DeleteUser - Deletes the user object
+// Deletes the user object from the application
 func (s *SDK) DeleteUser(ctx context.Context, request operations.DeleteUserRequest) (*operations.DeleteUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/User/{UserId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4382,7 +4526,7 @@ func (s *SDK) DeleteUser(ctx context.Context, request operations.DeleteUserReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4443,8 +4587,10 @@ func (s *SDK) DeleteUser(ctx context.Context, request operations.DeleteUserReque
 	return res, nil
 }
 
+// DeleteUserTag - Delete user tag
+// Deletes a tag from the user
 func (s *SDK) DeleteUserTag(ctx context.Context, request operations.DeleteUserTagRequest) (*operations.DeleteUserTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/User/{UserId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4454,7 +4600,7 @@ func (s *SDK) DeleteUserTag(ctx context.Context, request operations.DeleteUserTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4515,8 +4661,10 @@ func (s *SDK) DeleteUserTag(ctx context.Context, request operations.DeleteUserTa
 	return res, nil
 }
 
+// GetAeAssessmentFromEmployee - Get the auto enrolment assessment
+// Gets the auto enrolment assessment from the specified employee
 func (s *SDK) GetAeAssessmentFromEmployee(ctx context.Context, request operations.GetAeAssessmentFromEmployeeRequest) (*operations.GetAeAssessmentFromEmployeeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/AEAssessment/{AEAssessmentId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4526,7 +4674,7 @@ func (s *SDK) GetAeAssessmentFromEmployee(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4596,8 +4744,10 @@ func (s *SDK) GetAeAssessmentFromEmployee(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetAeAssessmentsFromEmployee - Get the auto enrolment assessments
+// Gets all auto enrolment assessments from the specified employee
 func (s *SDK) GetAeAssessmentsFromEmployee(ctx context.Context, request operations.GetAeAssessmentsFromEmployeeRequest) (*operations.GetAeAssessmentsFromEmployeeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/AEAssessments", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4607,7 +4757,7 @@ func (s *SDK) GetAeAssessmentsFromEmployee(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4677,8 +4827,10 @@ func (s *SDK) GetAeAssessmentsFromEmployee(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetAeAssessmentsFromPayRun - Get the auto enrolment assessments
+// Gets all auto enrolment assessments from the specified pay run
 func (s *SDK) GetAeAssessmentsFromPayRun(ctx context.Context, request operations.GetAeAssessmentsFromPayRunRequest) (*operations.GetAeAssessmentsFromPayRunResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRun/{PayRunId}/AEAssessments", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4688,7 +4840,7 @@ func (s *SDK) GetAeAssessmentsFromPayRun(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4758,8 +4910,10 @@ func (s *SDK) GetAeAssessmentsFromPayRun(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetActivePayInstructionsReportOutput - Runs the active pay instructions report
+// Returns the result of the executed active pay instructions report for the given query parameters
 func (s *SDK) GetActivePayInstructionsReportOutput(ctx context.Context, request operations.GetActivePayInstructionsReportOutputRequest) (*operations.GetActivePayInstructionsReportOutputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Report/ACTPAYINS/run"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4771,7 +4925,7 @@ func (s *SDK) GetActivePayInstructionsReportOutput(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4841,8 +4995,10 @@ func (s *SDK) GetActivePayInstructionsReportOutput(ctx context.Context, request 
 	return res, nil
 }
 
+// GetAllCisInstructionTags - Get all CIS instruction tags
+// Gets all the CIS instruction tags
 func (s *SDK) GetAllCisInstructionTags(ctx context.Context, request operations.GetAllCisInstructionTagsRequest) (*operations.GetAllCisInstructionTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisInstructions/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4852,7 +5008,7 @@ func (s *SDK) GetAllCisInstructionTags(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4922,8 +5078,10 @@ func (s *SDK) GetAllCisInstructionTags(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetAllCisLineTags - Get all CIS line tags
+// Gets all the CIS line tags
 func (s *SDK) GetAllCisLineTags(ctx context.Context, request operations.GetAllCisLineTagsRequest) (*operations.GetAllCisLineTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisLines/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4933,7 +5091,7 @@ func (s *SDK) GetAllCisLineTags(ctx context.Context, request operations.GetAllCi
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5003,8 +5161,10 @@ func (s *SDK) GetAllCisLineTags(ctx context.Context, request operations.GetAllCi
 	return res, nil
 }
 
+// GetAllCisLineTypeTags - Get all CIS line type tags
+// Gets all the CIS line type tags
 func (s *SDK) GetAllCisLineTypeTags(ctx context.Context, request operations.GetAllCisLineTypeTagsRequest) (*operations.GetAllCisLineTypeTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/CisLineTypes/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5014,7 +5174,7 @@ func (s *SDK) GetAllCisLineTypeTags(ctx context.Context, request operations.GetA
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5084,8 +5244,10 @@ func (s *SDK) GetAllCisLineTypeTags(ctx context.Context, request operations.GetA
 	return res, nil
 }
 
+// GetAllEmployeeTags - Get all employee tags
+// Gets all the employee tags
 func (s *SDK) GetAllEmployeeTags(ctx context.Context, request operations.GetAllEmployeeTagsRequest) (*operations.GetAllEmployeeTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employees/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5095,7 +5257,7 @@ func (s *SDK) GetAllEmployeeTags(ctx context.Context, request operations.GetAllE
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5165,8 +5327,10 @@ func (s *SDK) GetAllEmployeeTags(ctx context.Context, request operations.GetAllE
 	return res, nil
 }
 
+// GetAllEmployerTags - Get all employer tags
+// Gets all the employer tags
 func (s *SDK) GetAllEmployerTags(ctx context.Context, request operations.GetAllEmployerTagsRequest) (*operations.GetAllEmployerTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Employers/Tags"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5176,7 +5340,7 @@ func (s *SDK) GetAllEmployerTags(ctx context.Context, request operations.GetAllE
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5246,8 +5410,10 @@ func (s *SDK) GetAllEmployerTags(ctx context.Context, request operations.GetAllE
 	return res, nil
 }
 
+// GetAllHolidaySchemeTags - Get all holiday scheme tags
+// Gets all the holiday scheme tags
 func (s *SDK) GetAllHolidaySchemeTags(ctx context.Context, request operations.GetAllHolidaySchemeTagsRequest) (*operations.GetAllHolidaySchemeTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/HolidaySchemes/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5257,7 +5423,7 @@ func (s *SDK) GetAllHolidaySchemeTags(ctx context.Context, request operations.Ge
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5327,8 +5493,10 @@ func (s *SDK) GetAllHolidaySchemeTags(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetAllJournalLineTags - Get all journal line tags
+// Gets all the journal line tags
 func (s *SDK) GetAllJournalLineTags(ctx context.Context, request operations.GetAllJournalLineTagsRequest) (*operations.GetAllJournalLineTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/JournalLines/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5338,7 +5506,7 @@ func (s *SDK) GetAllJournalLineTags(ctx context.Context, request operations.GetA
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5408,8 +5576,10 @@ func (s *SDK) GetAllJournalLineTags(ctx context.Context, request operations.GetA
 	return res, nil
 }
 
+// GetAllJournalLinesWithTag - Get links to tagged journal lines
+// Gets the journal lines with the specified tag
 func (s *SDK) GetAllJournalLinesWithTag(ctx context.Context, request operations.GetAllJournalLinesWithTagRequest) (*operations.GetAllJournalLinesWithTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/JournalLines/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5419,7 +5589,7 @@ func (s *SDK) GetAllJournalLinesWithTag(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5489,8 +5659,10 @@ func (s *SDK) GetAllJournalLinesWithTag(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetAllPayCodeTags - Get all pay code tags
+// Gets all the pay code tags
 func (s *SDK) GetAllPayCodeTags(ctx context.Context, request operations.GetAllPayCodeTagsRequest) (*operations.GetAllPayCodeTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PayCodes/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5500,7 +5672,7 @@ func (s *SDK) GetAllPayCodeTags(ctx context.Context, request operations.GetAllPa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5570,8 +5742,10 @@ func (s *SDK) GetAllPayCodeTags(ctx context.Context, request operations.GetAllPa
 	return res, nil
 }
 
+// GetAllPayInstructionTags - Get all pay instruction tags
+// Gets all the pay instruction tags
 func (s *SDK) GetAllPayInstructionTags(ctx context.Context, request operations.GetAllPayInstructionTagsRequest) (*operations.GetAllPayInstructionTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayInstructions/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5581,7 +5755,7 @@ func (s *SDK) GetAllPayInstructionTags(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5651,8 +5825,10 @@ func (s *SDK) GetAllPayInstructionTags(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetAllPayLineTags - Get all pay line tags
+// Gets all the pay line tags
 func (s *SDK) GetAllPayLineTags(ctx context.Context, request operations.GetAllPayLineTagsRequest) (*operations.GetAllPayLineTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayLines/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5662,7 +5838,7 @@ func (s *SDK) GetAllPayLineTags(ctx context.Context, request operations.GetAllPa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5732,8 +5908,10 @@ func (s *SDK) GetAllPayLineTags(ctx context.Context, request operations.GetAllPa
 	return res, nil
 }
 
+// GetAllPayRunTags - Get all pay run tags
+// Gets all the pay run tags
 func (s *SDK) GetAllPayRunTags(ctx context.Context, request operations.GetAllPayRunTagsRequest) (*operations.GetAllPayRunTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRuns/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5743,7 +5921,7 @@ func (s *SDK) GetAllPayRunTags(ctx context.Context, request operations.GetAllPay
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5813,8 +5991,10 @@ func (s *SDK) GetAllPayRunTags(ctx context.Context, request operations.GetAllPay
 	return res, nil
 }
 
+// GetAllPayScheduleTags - Get all pay schedule tags
+// Gets all the pay schedule tags
 func (s *SDK) GetAllPayScheduleTags(ctx context.Context, request operations.GetAllPayScheduleTagsRequest) (*operations.GetAllPayScheduleTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedules/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5824,7 +6004,7 @@ func (s *SDK) GetAllPayScheduleTags(ctx context.Context, request operations.GetA
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5894,8 +6074,10 @@ func (s *SDK) GetAllPayScheduleTags(ctx context.Context, request operations.GetA
 	return res, nil
 }
 
+// GetAllRtiTransactionTags - Get all RTI transaction tags
+// Gets all the RTI transaction tags
 func (s *SDK) GetAllRtiTransactionTags(ctx context.Context, request operations.GetAllRtiTransactionTagsRequest) (*operations.GetAllRtiTransactionTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/RtiTransactions/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5905,7 +6087,7 @@ func (s *SDK) GetAllRtiTransactionTags(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5975,8 +6157,10 @@ func (s *SDK) GetAllRtiTransactionTags(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetAllSubContractorTags - Get all sub contractor tags
+// Gets all the sub contractor tags
 func (s *SDK) GetAllSubContractorTags(ctx context.Context, request operations.GetAllSubContractorTagsRequest) (*operations.GetAllSubContractorTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractors/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -5986,7 +6170,7 @@ func (s *SDK) GetAllSubContractorTags(ctx context.Context, request operations.Ge
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6056,8 +6240,10 @@ func (s *SDK) GetAllSubContractorTags(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetAllThirdPartyTransactionTags - Get all third party transaction tags
+// Gets all the third party transaction tags
 func (s *SDK) GetAllThirdPartyTransactionTags(ctx context.Context, request operations.GetAllThirdPartyTransactionTagsRequest) (*operations.GetAllThirdPartyTransactionTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/ThirdPartyTransactions/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6067,7 +6253,7 @@ func (s *SDK) GetAllThirdPartyTransactionTags(ctx context.Context, request opera
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6137,8 +6323,10 @@ func (s *SDK) GetAllThirdPartyTransactionTags(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetAllThirdPartyTransactionsWithTag - Get links to tagged third party transactions
+// Gets the third party transactions with the specified tag
 func (s *SDK) GetAllThirdPartyTransactionsWithTag(ctx context.Context, request operations.GetAllThirdPartyTransactionsWithTagRequest) (*operations.GetAllThirdPartyTransactionsWithTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/ThirdPartyTransactions/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6148,7 +6336,7 @@ func (s *SDK) GetAllThirdPartyTransactionsWithTag(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6218,8 +6406,10 @@ func (s *SDK) GetAllThirdPartyTransactionsWithTag(ctx context.Context, request o
 	return res, nil
 }
 
+// GetAllUserTags - Get all user tags
+// Get all tags from all users
 func (s *SDK) GetAllUserTags(ctx context.Context, request operations.GetAllUserTagsRequest) (*operations.GetAllUserTagsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Users/Tags"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6229,7 +6419,7 @@ func (s *SDK) GetAllUserTags(ctx context.Context, request operations.GetAllUserT
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6299,8 +6489,10 @@ func (s *SDK) GetAllUserTags(ctx context.Context, request operations.GetAllUserT
 	return res, nil
 }
 
+// GetAllUsersWithTag - Get links to tagged users
+// Gets the users with the specified tag
 func (s *SDK) GetAllUsersWithTag(ctx context.Context, request operations.GetAllUsersWithTagRequest) (*operations.GetAllUsersWithTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Users/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6310,7 +6502,7 @@ func (s *SDK) GetAllUsersWithTag(ctx context.Context, request operations.GetAllU
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6380,8 +6572,10 @@ func (s *SDK) GetAllUsersWithTag(ctx context.Context, request operations.GetAllU
 	return res, nil
 }
 
+// GetAoeLiabilityReportOuput - Runs the AOE liability report
+// Returns the result of the executed AOE liability report for the given query parameters
 func (s *SDK) GetAoeLiabilityReportOuput(ctx context.Context, request operations.GetAoeLiabilityReportOuputRequest) (*operations.GetAoeLiabilityReportOuputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Report/AOELIABILITY/run"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6393,7 +6587,7 @@ func (s *SDK) GetAoeLiabilityReportOuput(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6463,8 +6657,10 @@ func (s *SDK) GetAoeLiabilityReportOuput(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetBatchJobInfo - Get the Batch job information
+// Return the the Batch job information
 func (s *SDK) GetBatchJobInfo(ctx context.Context, request operations.GetBatchJobInfoRequest) (*operations.GetBatchJobInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/Batch/{JobId}/Info", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6474,7 +6670,7 @@ func (s *SDK) GetBatchJobInfo(ctx context.Context, request operations.GetBatchJo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6544,8 +6740,10 @@ func (s *SDK) GetBatchJobInfo(ctx context.Context, request operations.GetBatchJo
 	return res, nil
 }
 
+// GetBatchJobProgress - Get the Batch job progress
+// Return the the Batch job progress
 func (s *SDK) GetBatchJobProgress(ctx context.Context, request operations.GetBatchJobProgressRequest) (*operations.GetBatchJobProgressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/Batch/{JobId}/Progress", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6555,7 +6753,7 @@ func (s *SDK) GetBatchJobProgress(ctx context.Context, request operations.GetBat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6616,8 +6814,10 @@ func (s *SDK) GetBatchJobProgress(ctx context.Context, request operations.GetBat
 	return res, nil
 }
 
+// GetBatchJobStatus - Get the Batch job status
+// Return the the Batch job status
 func (s *SDK) GetBatchJobStatus(ctx context.Context, request operations.GetBatchJobStatusRequest) (*operations.GetBatchJobStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/Batch/{JobId}/Status", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6627,7 +6827,7 @@ func (s *SDK) GetBatchJobStatus(ctx context.Context, request operations.GetBatch
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6688,8 +6888,10 @@ func (s *SDK) GetBatchJobStatus(ctx context.Context, request operations.GetBatch
 	return res, nil
 }
 
+// GetBatchJobs - Get all Batch jobs
+// Gets all the Batch jobs
 func (s *SDK) GetBatchJobs(ctx context.Context, request operations.GetBatchJobsRequest) (*operations.GetBatchJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Jobs/Batch"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6699,7 +6901,7 @@ func (s *SDK) GetBatchJobs(ctx context.Context, request operations.GetBatchJobsR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6769,8 +6971,10 @@ func (s *SDK) GetBatchJobs(ctx context.Context, request operations.GetBatchJobsR
 	return res, nil
 }
 
+// GetCisInstructionFromSubContractor - Get CIS instruction from sub contractor
+// Gets the specified CIS instruction from sub contractor.
 func (s *SDK) GetCisInstructionFromSubContractor(ctx context.Context, request operations.GetCisInstructionFromSubContractorRequest) (*operations.GetCisInstructionFromSubContractorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisInstruction/{CisInstructionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6780,7 +6984,7 @@ func (s *SDK) GetCisInstructionFromSubContractor(ctx context.Context, request op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6850,8 +7054,10 @@ func (s *SDK) GetCisInstructionFromSubContractor(ctx context.Context, request op
 	return res, nil
 }
 
+// GetCisInstructionsFromSubContractor - Get CIS instructions from sub contractor.
+// Get links to all CIS instructions for the specified sub contractor.
 func (s *SDK) GetCisInstructionsFromSubContractor(ctx context.Context, request operations.GetCisInstructionsFromSubContractorRequest) (*operations.GetCisInstructionsFromSubContractorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisInstructions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6861,7 +7067,7 @@ func (s *SDK) GetCisInstructionsFromSubContractor(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6931,8 +7137,10 @@ func (s *SDK) GetCisInstructionsFromSubContractor(ctx context.Context, request o
 	return res, nil
 }
 
+// GetCisInstructionsWithTag - Get CIS instructions with tag
+// Gets the CIS instruction with the tag
 func (s *SDK) GetCisInstructionsWithTag(ctx context.Context, request operations.GetCisInstructionsWithTagRequest) (*operations.GetCisInstructionsWithTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisInstructions/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -6942,7 +7150,7 @@ func (s *SDK) GetCisInstructionsWithTag(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7012,8 +7220,10 @@ func (s *SDK) GetCisInstructionsWithTag(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetCisJobInfo - Get the CIS job information
+// Return the the CIS job information
 func (s *SDK) GetCisJobInfo(ctx context.Context, request operations.GetCisJobInfoRequest) (*operations.GetCisJobInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/Cis/{JobId}/Info", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7023,7 +7233,7 @@ func (s *SDK) GetCisJobInfo(ctx context.Context, request operations.GetCisJobInf
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7093,8 +7303,10 @@ func (s *SDK) GetCisJobInfo(ctx context.Context, request operations.GetCisJobInf
 	return res, nil
 }
 
+// GetCisJobProgress - Get the CIS job progress
+// Return the the CIS job progress
 func (s *SDK) GetCisJobProgress(ctx context.Context, request operations.GetCisJobProgressRequest) (*operations.GetCisJobProgressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/Cis/{JobId}/Progress", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7104,7 +7316,7 @@ func (s *SDK) GetCisJobProgress(ctx context.Context, request operations.GetCisJo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7165,8 +7377,10 @@ func (s *SDK) GetCisJobProgress(ctx context.Context, request operations.GetCisJo
 	return res, nil
 }
 
+// GetCisJobStatus - Get the CIS job status
+// Return the the CIS job status
 func (s *SDK) GetCisJobStatus(ctx context.Context, request operations.GetCisJobStatusRequest) (*operations.GetCisJobStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/Cis/{JobId}/Status", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7176,7 +7390,7 @@ func (s *SDK) GetCisJobStatus(ctx context.Context, request operations.GetCisJobS
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7237,8 +7451,10 @@ func (s *SDK) GetCisJobStatus(ctx context.Context, request operations.GetCisJobS
 	return res, nil
 }
 
+// GetCisJobs - Get all CIS jobs
+// Gets all the CIS jobs
 func (s *SDK) GetCisJobs(ctx context.Context, request operations.GetCisJobsRequest) (*operations.GetCisJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Jobs/Cis"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7248,7 +7464,7 @@ func (s *SDK) GetCisJobs(ctx context.Context, request operations.GetCisJobsReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7318,8 +7534,10 @@ func (s *SDK) GetCisJobs(ctx context.Context, request operations.GetCisJobsReque
 	return res, nil
 }
 
+// GetCisLineFromSubContractor - Get CIS line from sub contractor
+// Gets the specified CIS line from sub contractor.
 func (s *SDK) GetCisLineFromSubContractor(ctx context.Context, request operations.GetCisLineFromSubContractorRequest) (*operations.GetCisLineFromSubContractorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisLine/{CisLineId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7329,7 +7547,7 @@ func (s *SDK) GetCisLineFromSubContractor(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7399,8 +7617,10 @@ func (s *SDK) GetCisLineFromSubContractor(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetCisLineTypeFromEmployer - Get CIS line type from employer
+// Gets the specified CIS line type from employer.
 func (s *SDK) GetCisLineTypeFromEmployer(ctx context.Context, request operations.GetCisLineTypeFromEmployerRequest) (*operations.GetCisLineTypeFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/CisLineType/{CisLineTypeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7410,7 +7630,7 @@ func (s *SDK) GetCisLineTypeFromEmployer(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7480,8 +7700,10 @@ func (s *SDK) GetCisLineTypeFromEmployer(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetCisLineTypesFromEmployer - Get CIS line types from employer.
+// Get links to all CIS line types for the specified employer.
 func (s *SDK) GetCisLineTypesFromEmployer(ctx context.Context, request operations.GetCisLineTypesFromEmployerRequest) (*operations.GetCisLineTypesFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/CisLineTypes", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7491,7 +7713,7 @@ func (s *SDK) GetCisLineTypesFromEmployer(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7561,8 +7783,10 @@ func (s *SDK) GetCisLineTypesFromEmployer(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetCisLineTypesWithTag - Get CIS line types with tag
+// Gets the CIS line type with the tag
 func (s *SDK) GetCisLineTypesWithTag(ctx context.Context, request operations.GetCisLineTypesWithTagRequest) (*operations.GetCisLineTypesWithTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/CisLineTypes/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7572,7 +7796,7 @@ func (s *SDK) GetCisLineTypesWithTag(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7642,8 +7866,10 @@ func (s *SDK) GetCisLineTypesWithTag(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetCisLinesFromSubContractor - Get CIS lines from sub contractor.
+// Get links to all CIS lines for the specified sub contractor.
 func (s *SDK) GetCisLinesFromSubContractor(ctx context.Context, request operations.GetCisLinesFromSubContractorRequest) (*operations.GetCisLinesFromSubContractorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisLines", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7653,7 +7879,7 @@ func (s *SDK) GetCisLinesFromSubContractor(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7723,8 +7949,10 @@ func (s *SDK) GetCisLinesFromSubContractor(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetCisLinesWithTag - Get CIS lines with tag
+// Gets the CIS line with the tag
 func (s *SDK) GetCisLinesWithTag(ctx context.Context, request operations.GetCisLinesWithTagRequest) (*operations.GetCisLinesWithTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisLines/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7734,7 +7962,7 @@ func (s *SDK) GetCisLinesWithTag(ctx context.Context, request operations.GetCisL
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7804,8 +8032,10 @@ func (s *SDK) GetCisLinesWithTag(ctx context.Context, request operations.GetCisL
 	return res, nil
 }
 
+// GetCisTransactionFromEmployer - Get the CIS transaction
+// Returns the specified CIS transaction
 func (s *SDK) GetCisTransactionFromEmployer(ctx context.Context, request operations.GetCisTransactionFromEmployerRequest) (*operations.GetCisTransactionFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/CisTransaction/{CisTransactionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7815,7 +8045,7 @@ func (s *SDK) GetCisTransactionFromEmployer(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7885,8 +8115,10 @@ func (s *SDK) GetCisTransactionFromEmployer(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetCisTransactionsFromEmployer - Get all CIS transactions for the employer
+// Get links for all CIS transactions for the specified employer
 func (s *SDK) GetCisTransactionsFromEmployer(ctx context.Context, request operations.GetCisTransactionsFromEmployerRequest) (*operations.GetCisTransactionsFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/CisTransactions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7896,7 +8128,7 @@ func (s *SDK) GetCisTransactionsFromEmployer(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7966,8 +8198,10 @@ func (s *SDK) GetCisTransactionsFromEmployer(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetCommentariesFromEmployee - Get links to all commentaries for the specified employee
+// Get links to all commentaries for the specified employee.
 func (s *SDK) GetCommentariesFromEmployee(ctx context.Context, request operations.GetCommentariesFromEmployeeRequest) (*operations.GetCommentariesFromEmployeeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/Commentaries", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -7977,7 +8211,7 @@ func (s *SDK) GetCommentariesFromEmployee(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8047,8 +8281,10 @@ func (s *SDK) GetCommentariesFromEmployee(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetCommentariesFromPayRun - Get links to all commentaries for the specified pay run
+// Get links to all commentaries for the specified pay run.
 func (s *SDK) GetCommentariesFromPayRun(ctx context.Context, request operations.GetCommentariesFromPayRunRequest) (*operations.GetCommentariesFromPayRunResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRun/{PayRunId}/Commentaries", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8058,7 +8294,7 @@ func (s *SDK) GetCommentariesFromPayRun(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8128,8 +8364,10 @@ func (s *SDK) GetCommentariesFromPayRun(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetCommentaryFromEmployee - Get commentary from employee
+// Gets the specified commentary report from the employee
 func (s *SDK) GetCommentaryFromEmployee(ctx context.Context, request operations.GetCommentaryFromEmployeeRequest) (*operations.GetCommentaryFromEmployeeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/Commentary/{CommentaryId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8139,7 +8377,7 @@ func (s *SDK) GetCommentaryFromEmployee(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8209,8 +8447,10 @@ func (s *SDK) GetCommentaryFromEmployee(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetCommentaryFromPayRunByEmployee - Get commentary from payrun by specified employee.
+// Get commentary from payrun by specified employee.
 func (s *SDK) GetCommentaryFromPayRunByEmployee(ctx context.Context, request operations.GetCommentaryFromPayRunByEmployeeRequest) (*operations.GetCommentaryFromPayRunByEmployeeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRun/{PayRunId}/Employee/{EmployeeId}/Commentary", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8220,7 +8460,7 @@ func (s *SDK) GetCommentaryFromPayRunByEmployee(ctx context.Context, request ope
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8290,8 +8530,10 @@ func (s *SDK) GetCommentaryFromPayRunByEmployee(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetDpsJobInfo - Get the DPS job information
+// Return the the DPS job information
 func (s *SDK) GetDpsJobInfo(ctx context.Context, request operations.GetDpsJobInfoRequest) (*operations.GetDpsJobInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/Dps/{JobId}/Info", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8301,7 +8543,7 @@ func (s *SDK) GetDpsJobInfo(ctx context.Context, request operations.GetDpsJobInf
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8371,8 +8613,10 @@ func (s *SDK) GetDpsJobInfo(ctx context.Context, request operations.GetDpsJobInf
 	return res, nil
 }
 
+// GetDpsJobProgress - Get the DPS job progress
+// Return the the DPS job progress
 func (s *SDK) GetDpsJobProgress(ctx context.Context, request operations.GetDpsJobProgressRequest) (*operations.GetDpsJobProgressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/Dps/{JobId}/Progress", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8382,7 +8626,7 @@ func (s *SDK) GetDpsJobProgress(ctx context.Context, request operations.GetDpsJo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8443,8 +8687,10 @@ func (s *SDK) GetDpsJobProgress(ctx context.Context, request operations.GetDpsJo
 	return res, nil
 }
 
+// GetDpsJobStatus - Get the DPS job status
+// Return the the DPS job status
 func (s *SDK) GetDpsJobStatus(ctx context.Context, request operations.GetDpsJobStatusRequest) (*operations.GetDpsJobStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/Dps/{JobId}/Status", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8454,7 +8700,7 @@ func (s *SDK) GetDpsJobStatus(ctx context.Context, request operations.GetDpsJobS
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8515,8 +8761,10 @@ func (s *SDK) GetDpsJobStatus(ctx context.Context, request operations.GetDpsJobS
 	return res, nil
 }
 
+// GetDpsJobs - Get all DPS jobs
+// Gets all the DPS jobs
 func (s *SDK) GetDpsJobs(ctx context.Context, request operations.GetDpsJobsRequest) (*operations.GetDpsJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Jobs/Dps"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8526,7 +8774,7 @@ func (s *SDK) GetDpsJobs(ctx context.Context, request operations.GetDpsJobsReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8596,8 +8844,10 @@ func (s *SDK) GetDpsJobs(ctx context.Context, request operations.GetDpsJobsReque
 	return res, nil
 }
 
+// GetDpsMessageFromEmployer - Gets the DPS message
+// Gets the DPS message
 func (s *SDK) GetDpsMessageFromEmployer(ctx context.Context, request operations.GetDpsMessageFromEmployerRequest) (*operations.GetDpsMessageFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/DpsMessage/{DpsMessageId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8607,7 +8857,7 @@ func (s *SDK) GetDpsMessageFromEmployer(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8677,8 +8927,10 @@ func (s *SDK) GetDpsMessageFromEmployer(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetDpsMessageReportOutput - Runs the DPS message report
+// Returns the result of the executed DPS message report for the given query parameters
 func (s *SDK) GetDpsMessageReportOutput(ctx context.Context, request operations.GetDpsMessageReportOutputRequest) (*operations.GetDpsMessageReportOutputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Report/DPSMSG/run"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8690,7 +8942,7 @@ func (s *SDK) GetDpsMessageReportOutput(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8760,8 +9012,10 @@ func (s *SDK) GetDpsMessageReportOutput(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetDpsMessagesFromEmployer - Gets the DPS messages
+// Gets the DPS message links
 func (s *SDK) GetDpsMessagesFromEmployer(ctx context.Context, request operations.GetDpsMessagesFromEmployerRequest) (*operations.GetDpsMessagesFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/DpsMessages", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8771,7 +9025,7 @@ func (s *SDK) GetDpsMessagesFromEmployer(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8841,8 +9095,10 @@ func (s *SDK) GetDpsMessagesFromEmployer(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetEmployeeByEffectiveDate - Get employee by effective date.
+// Returns the employee's state at the specified effective date.
 func (s *SDK) GetEmployeeByEffectiveDate(ctx context.Context, request operations.GetEmployeeByEffectiveDateRequest) (*operations.GetEmployeeByEffectiveDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8852,7 +9108,7 @@ func (s *SDK) GetEmployeeByEffectiveDate(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8922,8 +9178,10 @@ func (s *SDK) GetEmployeeByEffectiveDate(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetEmployeeFromEmployer - Get employee from employer
+// Gets the specified employee from employer by employee code.
 func (s *SDK) GetEmployeeFromEmployer(ctx context.Context, request operations.GetEmployeeFromEmployerRequest) (*operations.GetEmployeeFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -8933,7 +9191,7 @@ func (s *SDK) GetEmployeeFromEmployer(ctx context.Context, request operations.Ge
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9003,8 +9261,10 @@ func (s *SDK) GetEmployeeFromEmployer(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetEmployeeRevisionByNumber - Gets the employee by revision number
+// Get the employee revision matching the specified revision number
 func (s *SDK) GetEmployeeRevisionByNumber(ctx context.Context, request operations.GetEmployeeRevisionByNumberRequest) (*operations.GetEmployeeRevisionByNumberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/Revision/{RevisionNumber}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9014,7 +9274,7 @@ func (s *SDK) GetEmployeeRevisionByNumber(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9084,8 +9344,10 @@ func (s *SDK) GetEmployeeRevisionByNumber(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetEmployeeRevisions - Get all employee revisions
+// Gets links to all employee revisions
 func (s *SDK) GetEmployeeRevisions(ctx context.Context, request operations.GetEmployeeRevisionsRequest) (*operations.GetEmployeeRevisionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/Revisions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9095,7 +9357,7 @@ func (s *SDK) GetEmployeeRevisions(ctx context.Context, request operations.GetEm
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9165,8 +9427,10 @@ func (s *SDK) GetEmployeeRevisions(ctx context.Context, request operations.GetEm
 	return res, nil
 }
 
+// GetEmployeeSecret - Get employee secret
+// Get the public visible employee secret object
 func (s *SDK) GetEmployeeSecret(ctx context.Context, request operations.GetEmployeeSecretRequest) (*operations.GetEmployeeSecretResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/Secret/{SecretId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9176,7 +9440,7 @@ func (s *SDK) GetEmployeeSecret(ctx context.Context, request operations.GetEmplo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9246,8 +9510,10 @@ func (s *SDK) GetEmployeeSecret(ctx context.Context, request operations.GetEmplo
 	return res, nil
 }
 
+// GetEmployeeSecrets - Get all employee secret links
+// Get all the employee secret links
 func (s *SDK) GetEmployeeSecrets(ctx context.Context, request operations.GetEmployeeSecretsRequest) (*operations.GetEmployeeSecretsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/Secrets", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9257,7 +9523,7 @@ func (s *SDK) GetEmployeeSecrets(ctx context.Context, request operations.GetEmpl
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9327,8 +9593,10 @@ func (s *SDK) GetEmployeeSecrets(ctx context.Context, request operations.GetEmpl
 	return res, nil
 }
 
+// GetEmployeesByEffectiveDate - Get employees from employer at a given effective date.
+// Get links to all employees for the employer on specified effective date.
 func (s *SDK) GetEmployeesByEffectiveDate(ctx context.Context, request operations.GetEmployeesByEffectiveDateRequest) (*operations.GetEmployeesByEffectiveDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employees/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9338,7 +9606,7 @@ func (s *SDK) GetEmployeesByEffectiveDate(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9408,8 +9676,10 @@ func (s *SDK) GetEmployeesByEffectiveDate(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetEmployeesFromEmployer - Get employees from employer.
+// Get links to all employees for the specified employer.
 func (s *SDK) GetEmployeesFromEmployer(ctx context.Context, request operations.GetEmployeesFromEmployerRequest) (*operations.GetEmployeesFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employees", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9419,7 +9689,7 @@ func (s *SDK) GetEmployeesFromEmployer(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9489,8 +9759,10 @@ func (s *SDK) GetEmployeesFromEmployer(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetEmployeesFromPayRun - Get employees from the pay run
+// Gets links to all employees included in the specified pay run.
 func (s *SDK) GetEmployeesFromPayRun(ctx context.Context, request operations.GetEmployeesFromPayRunRequest) (*operations.GetEmployeesFromPayRunResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRun/{PayRunId}/Employees", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9500,7 +9772,7 @@ func (s *SDK) GetEmployeesFromPayRun(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9570,8 +9842,10 @@ func (s *SDK) GetEmployeesFromPayRun(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetEmployeesFromPaySchedule - Get all employees revisions from a pay schedule.
+// Gets links to all employee revisions that have ever existed in the specified pay schedule.
 func (s *SDK) GetEmployeesFromPaySchedule(ctx context.Context, request operations.GetEmployeesFromPayScheduleRequest) (*operations.GetEmployeesFromPayScheduleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/Employees", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9581,7 +9855,7 @@ func (s *SDK) GetEmployeesFromPaySchedule(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9651,8 +9925,10 @@ func (s *SDK) GetEmployeesFromPaySchedule(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetEmployeesFromPayScheduleOnEffectiveDate - Get employees from a pay schedule on effective date.
+// Gets links to all employee revisions in the specified pay schedule for the given effective date.
 func (s *SDK) GetEmployeesFromPayScheduleOnEffectiveDate(ctx context.Context, request operations.GetEmployeesFromPayScheduleOnEffectiveDateRequest) (*operations.GetEmployeesFromPayScheduleOnEffectiveDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/Employees/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9662,7 +9938,7 @@ func (s *SDK) GetEmployeesFromPayScheduleOnEffectiveDate(ctx context.Context, re
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9732,8 +10008,10 @@ func (s *SDK) GetEmployeesFromPayScheduleOnEffectiveDate(ctx context.Context, re
 	return res, nil
 }
 
+// GetEmployeesWithTag - Get employees with tag
+// Gets the employees with the tag
 func (s *SDK) GetEmployeesWithTag(ctx context.Context, request operations.GetEmployeesWithTagRequest) (*operations.GetEmployeesWithTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employees/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9743,7 +10021,7 @@ func (s *SDK) GetEmployeesWithTag(ctx context.Context, request operations.GetEmp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9813,8 +10091,10 @@ func (s *SDK) GetEmployeesWithTag(ctx context.Context, request operations.GetEmp
 	return res, nil
 }
 
+// GetEmployer - Gets the employer
+// Get the specified employer object
 func (s *SDK) GetEmployer(ctx context.Context, request operations.GetEmployerRequest) (*operations.GetEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9824,7 +10104,7 @@ func (s *SDK) GetEmployer(ctx context.Context, request operations.GetEmployerReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9894,8 +10174,10 @@ func (s *SDK) GetEmployer(ctx context.Context, request operations.GetEmployerReq
 	return res, nil
 }
 
+// GetEmployerByEffectiveDate - Gets the employer at the specified effective
+// Returns the employer's state at the specified effective date.
 func (s *SDK) GetEmployerByEffectiveDate(ctx context.Context, request operations.GetEmployerByEffectiveDateRequest) (*operations.GetEmployerByEffectiveDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9905,7 +10187,7 @@ func (s *SDK) GetEmployerByEffectiveDate(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9975,8 +10257,10 @@ func (s *SDK) GetEmployerByEffectiveDate(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetEmployerJobs - Gets all jobs relating to the employer.
+// Returns all job information objects for the specified employer.
 func (s *SDK) GetEmployerJobs(ctx context.Context, request operations.GetEmployerJobsRequest) (*operations.GetEmployerJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/Employer/{EmployerId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -9986,7 +10270,7 @@ func (s *SDK) GetEmployerJobs(ctx context.Context, request operations.GetEmploye
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10056,8 +10340,10 @@ func (s *SDK) GetEmployerJobs(ctx context.Context, request operations.GetEmploye
 	return res, nil
 }
 
+// GetEmployerRevisionByNumber - Gets the employer by revision number
+// Get the employer revision matching the specified revision number
 func (s *SDK) GetEmployerRevisionByNumber(ctx context.Context, request operations.GetEmployerRevisionByNumberRequest) (*operations.GetEmployerRevisionByNumberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Revision/{RevisionNumber}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10067,7 +10353,7 @@ func (s *SDK) GetEmployerRevisionByNumber(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10137,8 +10423,10 @@ func (s *SDK) GetEmployerRevisionByNumber(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetEmployerRevisions - Gets the employer revisions
+// Gets links to all the employer revisions
 func (s *SDK) GetEmployerRevisions(ctx context.Context, request operations.GetEmployerRevisionsRequest) (*operations.GetEmployerRevisionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Revisions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10148,7 +10436,7 @@ func (s *SDK) GetEmployerRevisions(ctx context.Context, request operations.GetEm
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10218,8 +10506,10 @@ func (s *SDK) GetEmployerRevisions(ctx context.Context, request operations.GetEm
 	return res, nil
 }
 
+// GetEmployerSecret - Get employer secret
+// Get the public visible employer secret object
 func (s *SDK) GetEmployerSecret(ctx context.Context, request operations.GetEmployerSecretRequest) (*operations.GetEmployerSecretResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Secret/{SecretId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10229,7 +10519,7 @@ func (s *SDK) GetEmployerSecret(ctx context.Context, request operations.GetEmplo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10299,8 +10589,10 @@ func (s *SDK) GetEmployerSecret(ctx context.Context, request operations.GetEmplo
 	return res, nil
 }
 
+// GetEmployerSecrets - Get all employer secret links
+// Get all the employer secret links
 func (s *SDK) GetEmployerSecrets(ctx context.Context, request operations.GetEmployerSecretsRequest) (*operations.GetEmployerSecretsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Secrets", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10310,7 +10602,7 @@ func (s *SDK) GetEmployerSecrets(ctx context.Context, request operations.GetEmpl
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10380,8 +10672,10 @@ func (s *SDK) GetEmployerSecrets(ctx context.Context, request operations.GetEmpl
 	return res, nil
 }
 
+// GetEmployerSummaryReportOuput - Runs the employer summary report
+// Returns the result of the employer summary report for the given query parameters
 func (s *SDK) GetEmployerSummaryReportOuput(ctx context.Context, request operations.GetEmployerSummaryReportOuputRequest) (*operations.GetEmployerSummaryReportOuputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Report/EMPSUM/run"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10393,7 +10687,7 @@ func (s *SDK) GetEmployerSummaryReportOuput(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10463,8 +10757,10 @@ func (s *SDK) GetEmployerSummaryReportOuput(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetEmployers - Gets all employers
+// Gets links to all employers contained under the authorised application scope
 func (s *SDK) GetEmployers(ctx context.Context, request operations.GetEmployersRequest) (*operations.GetEmployersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Employers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10474,7 +10770,7 @@ func (s *SDK) GetEmployers(ctx context.Context, request operations.GetEmployersR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10544,8 +10840,10 @@ func (s *SDK) GetEmployers(ctx context.Context, request operations.GetEmployersR
 	return res, nil
 }
 
+// GetEmployersByEffectiveDate - Gets all employers at the specified effective date
+// Gets links to all employers contained under the authorised application scope for the specified effective date.
 func (s *SDK) GetEmployersByEffectiveDate(ctx context.Context, request operations.GetEmployersByEffectiveDateRequest) (*operations.GetEmployersByEffectiveDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employers/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10555,7 +10853,7 @@ func (s *SDK) GetEmployersByEffectiveDate(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10625,8 +10923,10 @@ func (s *SDK) GetEmployersByEffectiveDate(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetEmployersWithTag - Get employers with tag
+// Gets the employers with the tag
 func (s *SDK) GetEmployersWithTag(ctx context.Context, request operations.GetEmployersWithTagRequest) (*operations.GetEmployersWithTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employers/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10636,7 +10936,7 @@ func (s *SDK) GetEmployersWithTag(ctx context.Context, request operations.GetEmp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10706,8 +11006,10 @@ func (s *SDK) GetEmployersWithTag(ctx context.Context, request operations.GetEmp
 	return res, nil
 }
 
+// GetGrossToNetReportOutput - Runs the gross to net report
+// Returns the result of the executed gross to net report for the given query parameters
 func (s *SDK) GetGrossToNetReportOutput(ctx context.Context, request operations.GetGrossToNetReportOutputRequest) (*operations.GetGrossToNetReportOutputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Report/GRO2NET/run"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10719,7 +11021,7 @@ func (s *SDK) GetGrossToNetReportOutput(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10789,8 +11091,10 @@ func (s *SDK) GetGrossToNetReportOutput(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetHealthCheck - Get health check status
+// Returns the health status of the application
 func (s *SDK) GetHealthCheck(ctx context.Context) (*operations.GetHealthCheckResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Healthcheck"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10798,7 +11102,7 @@ func (s *SDK) GetHealthCheck(ctx context.Context) (*operations.GetHealthCheckRes
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10868,8 +11172,10 @@ func (s *SDK) GetHealthCheck(ctx context.Context) (*operations.GetHealthCheckRes
 	return res, nil
 }
 
+// GetHolidayBalanceReportOutput - Runs the holiday balance report
+// Returns the result of the executed holiday balance report for the given query parameters
 func (s *SDK) GetHolidayBalanceReportOutput(ctx context.Context, request operations.GetHolidayBalanceReportOutputRequest) (*operations.GetHolidayBalanceReportOutputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Report/HOLBAL/run"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10881,7 +11187,7 @@ func (s *SDK) GetHolidayBalanceReportOutput(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10951,8 +11257,10 @@ func (s *SDK) GetHolidayBalanceReportOutput(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetHolidaySchemeByEffectiveDate - Get holiday scheme by effective date.
+// Returns the holiday scheme's state at the specified effective date.
 func (s *SDK) GetHolidaySchemeByEffectiveDate(ctx context.Context, request operations.GetHolidaySchemeByEffectiveDateRequest) (*operations.GetHolidaySchemeByEffectiveDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/HolidayScheme/{HolidaySchemeId}/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -10962,7 +11270,7 @@ func (s *SDK) GetHolidaySchemeByEffectiveDate(ctx context.Context, request opera
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11032,8 +11340,10 @@ func (s *SDK) GetHolidaySchemeByEffectiveDate(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetHolidaySchemeFromEmployer - Get holiday scheme from employer
+// Gets the specified holiday scheme from employer.
 func (s *SDK) GetHolidaySchemeFromEmployer(ctx context.Context, request operations.GetHolidaySchemeFromEmployerRequest) (*operations.GetHolidaySchemeFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/HolidayScheme/{HolidaySchemeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11043,7 +11353,7 @@ func (s *SDK) GetHolidaySchemeFromEmployer(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11113,8 +11423,10 @@ func (s *SDK) GetHolidaySchemeFromEmployer(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetHolidaySchemeRevisionByNumber - Gets the holiday scheme revision by revision number
+// Get the holiday scheme revision matching the specified revision number
 func (s *SDK) GetHolidaySchemeRevisionByNumber(ctx context.Context, request operations.GetHolidaySchemeRevisionByNumberRequest) (*operations.GetHolidaySchemeRevisionByNumberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/HolidayScheme/{HolidaySchemeId}/Revision/{RevisionNumber}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11124,7 +11436,7 @@ func (s *SDK) GetHolidaySchemeRevisionByNumber(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11194,8 +11506,10 @@ func (s *SDK) GetHolidaySchemeRevisionByNumber(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetHolidaySchemeRevisions - Get all holiday scheme revisions
+// Gets links to all the holiday scheme revisions
 func (s *SDK) GetHolidaySchemeRevisions(ctx context.Context, request operations.GetHolidaySchemeRevisionsRequest) (*operations.GetHolidaySchemeRevisionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/HolidayScheme/{HolidaySchemeId}/Revisions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11205,7 +11519,7 @@ func (s *SDK) GetHolidaySchemeRevisions(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11275,8 +11589,10 @@ func (s *SDK) GetHolidaySchemeRevisions(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetHolidaySchemesByEffectiveDate - Get holiday schemes from employer at a given effective date.
+// Get links to all holiday schemes for the employer on specified effective date.
 func (s *SDK) GetHolidaySchemesByEffectiveDate(ctx context.Context, request operations.GetHolidaySchemesByEffectiveDateRequest) (*operations.GetHolidaySchemesByEffectiveDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/HolidaySchemes/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11286,7 +11602,7 @@ func (s *SDK) GetHolidaySchemesByEffectiveDate(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11356,8 +11672,10 @@ func (s *SDK) GetHolidaySchemesByEffectiveDate(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetHolidaySchemesFromEmployer - Get holiday schemes from employer.
+// Get links to all holiday schemes for the specified employer.
 func (s *SDK) GetHolidaySchemesFromEmployer(ctx context.Context, request operations.GetHolidaySchemesFromEmployerRequest) (*operations.GetHolidaySchemesFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/HolidaySchemes", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11367,7 +11685,7 @@ func (s *SDK) GetHolidaySchemesFromEmployer(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11437,8 +11755,10 @@ func (s *SDK) GetHolidaySchemesFromEmployer(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetHolidaySchemesWithTag - Get holiday schemes with tag
+// Gets the holiday scheme with the tag
 func (s *SDK) GetHolidaySchemesWithTag(ctx context.Context, request operations.GetHolidaySchemesWithTagRequest) (*operations.GetHolidaySchemesWithTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/HolidaySchemes/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11448,7 +11768,7 @@ func (s *SDK) GetHolidaySchemesWithTag(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11518,8 +11838,10 @@ func (s *SDK) GetHolidaySchemesWithTag(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetJournalExpressionSchema - Gets the journal expression data schema
+// Gets the data schema for all available journal expression values. Includes table names, column names and data types.
 func (s *SDK) GetJournalExpressionSchema(ctx context.Context, request operations.GetJournalExpressionSchemaRequest) (*operations.GetJournalExpressionSchemaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ReferenceData/JournalExpressionDataTable"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11529,7 +11851,7 @@ func (s *SDK) GetJournalExpressionSchema(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11599,8 +11921,10 @@ func (s *SDK) GetJournalExpressionSchema(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetJournalInstructionFromEmployer - Gets the specified journal instruction from the employer
+// Returns the specified journal instruction from employer
 func (s *SDK) GetJournalInstructionFromEmployer(ctx context.Context, request operations.GetJournalInstructionFromEmployerRequest) (*operations.GetJournalInstructionFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/JournalInstruction/{JournalInstructionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11610,7 +11934,7 @@ func (s *SDK) GetJournalInstructionFromEmployer(ctx context.Context, request ope
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11680,8 +12004,10 @@ func (s *SDK) GetJournalInstructionFromEmployer(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetJournalInstructionTemplate - Gets the Journal instructions template for the application
+// Retrurns the specified journal instruction from the application
 func (s *SDK) GetJournalInstructionTemplate(ctx context.Context, request operations.GetJournalInstructionTemplateRequest) (*operations.GetJournalInstructionTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/JournalInstruction/{JournalInstructionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11691,7 +12017,7 @@ func (s *SDK) GetJournalInstructionTemplate(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11761,8 +12087,10 @@ func (s *SDK) GetJournalInstructionTemplate(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetJournalInstructionTemplates - Gets the Journal instructions templates for the application
+// Get links to all journal instruction templates for the application
 func (s *SDK) GetJournalInstructionTemplates(ctx context.Context, request operations.GetJournalInstructionTemplatesRequest) (*operations.GetJournalInstructionTemplatesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/JournalInstructions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11772,7 +12100,7 @@ func (s *SDK) GetJournalInstructionTemplates(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11842,8 +12170,10 @@ func (s *SDK) GetJournalInstructionTemplates(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetJournalInstructionsFromEmployer - Gets the Journal instructions from the specified employer
+// Get links to all journal instructions for the specified employer
 func (s *SDK) GetJournalInstructionsFromEmployer(ctx context.Context, request operations.GetJournalInstructionsFromEmployerRequest) (*operations.GetJournalInstructionsFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/JournalInstructions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11853,7 +12183,7 @@ func (s *SDK) GetJournalInstructionsFromEmployer(ctx context.Context, request op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11923,8 +12253,10 @@ func (s *SDK) GetJournalInstructionsFromEmployer(ctx context.Context, request op
 	return res, nil
 }
 
+// GetJournalLineFromEmployer - Gets the specified journal Line from the employer
+// Returns the specified journal Line from employer
 func (s *SDK) GetJournalLineFromEmployer(ctx context.Context, request operations.GetJournalLineFromEmployerRequest) (*operations.GetJournalLineFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/JournalLine/{JournalLineId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -11934,7 +12266,7 @@ func (s *SDK) GetJournalLineFromEmployer(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12004,8 +12336,10 @@ func (s *SDK) GetJournalLineFromEmployer(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetJournalLinesFromEmployee - Gets the journal Lines from the specified employee
+// Get links to all journal lines for the specified employee
 func (s *SDK) GetJournalLinesFromEmployee(ctx context.Context, request operations.GetJournalLinesFromEmployeeRequest) (*operations.GetJournalLinesFromEmployeeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/JournalLines", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12015,7 +12349,7 @@ func (s *SDK) GetJournalLinesFromEmployee(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12085,8 +12419,10 @@ func (s *SDK) GetJournalLinesFromEmployee(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetJournalLinesFromEmployer - Gets the Journal Lines from the specified employer
+// Get links to all journal Lines for the specified employer
 func (s *SDK) GetJournalLinesFromEmployer(ctx context.Context, request operations.GetJournalLinesFromEmployerRequest) (*operations.GetJournalLinesFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/JournalLines", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12096,7 +12432,7 @@ func (s *SDK) GetJournalLinesFromEmployer(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12166,8 +12502,10 @@ func (s *SDK) GetJournalLinesFromEmployer(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetJournalLinesFromPayRun - Gets the journal Lines from the specified pay run
+// Get links to all journal lines for the specified pay run
 func (s *SDK) GetJournalLinesFromPayRun(ctx context.Context, request operations.GetJournalLinesFromPayRunRequest) (*operations.GetJournalLinesFromPayRunResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRun/{PayRunId}/JournalLines", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12177,7 +12515,7 @@ func (s *SDK) GetJournalLinesFromPayRun(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12247,8 +12585,10 @@ func (s *SDK) GetJournalLinesFromPayRun(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetJournalLinesFromSubContractor - Gets the journal Lines from the specified sub contractor
+// Get links to all journal lines for the specified sub contractor
 func (s *SDK) GetJournalLinesFromSubContractor(ctx context.Context, request operations.GetJournalLinesFromSubContractorRequest) (*operations.GetJournalLinesFromSubContractorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/JournalLines", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12258,7 +12598,7 @@ func (s *SDK) GetJournalLinesFromSubContractor(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12328,8 +12668,10 @@ func (s *SDK) GetJournalLinesFromSubContractor(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetJournalReportOuput - Runs the journal report
+// Returns the result of the journal report for the given query parameters
 func (s *SDK) GetJournalReportOuput(ctx context.Context, request operations.GetJournalReportOuputRequest) (*operations.GetJournalReportOuputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Report/JOURNAL/run"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12341,7 +12683,7 @@ func (s *SDK) GetJournalReportOuput(ctx context.Context, request operations.GetJ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12411,8 +12753,10 @@ func (s *SDK) GetJournalReportOuput(ctx context.Context, request operations.GetJ
 	return res, nil
 }
 
+// GetLastPayDateReportOuput - Runs the last pay date report
+// Returns the result of the executed last pay date report for the given query parameters
 func (s *SDK) GetLastPayDateReportOuput(ctx context.Context, request operations.GetLastPayDateReportOuputRequest) (*operations.GetLastPayDateReportOuputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Report/LASTPAYDATE/run"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12424,7 +12768,7 @@ func (s *SDK) GetLastPayDateReportOuput(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12494,8 +12838,10 @@ func (s *SDK) GetLastPayDateReportOuput(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetNetPayReportOutput - Runs the net pay report
+// Returns the result of the executed net pay report for the given query parameters
 func (s *SDK) GetNetPayReportOutput(ctx context.Context, request operations.GetNetPayReportOutputRequest) (*operations.GetNetPayReportOutputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Report/NETPAY/run"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12507,7 +12853,7 @@ func (s *SDK) GetNetPayReportOutput(ctx context.Context, request operations.GetN
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12577,8 +12923,10 @@ func (s *SDK) GetNetPayReportOutput(ctx context.Context, request operations.GetN
 	return res, nil
 }
 
+// GetNextPayPeriodDatesReportOutput - Runs the next pay period report
+// Returns the result of the executed next pay period report for the given query parameters
 func (s *SDK) GetNextPayPeriodDatesReportOutput(ctx context.Context, request operations.GetNextPayPeriodDatesReportOutputRequest) (*operations.GetNextPayPeriodDatesReportOutputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Report/NEXTPERIOD/run"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12590,7 +12938,7 @@ func (s *SDK) GetNextPayPeriodDatesReportOutput(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12660,8 +13008,10 @@ func (s *SDK) GetNextPayPeriodDatesReportOutput(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetNominalCodeFromEmployer - Gets the nominal code
+// Gets the nominal code
 func (s *SDK) GetNominalCodeFromEmployer(ctx context.Context, request operations.GetNominalCodeFromEmployerRequest) (*operations.GetNominalCodeFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/NominalCode/{NominalCodeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12671,7 +13021,7 @@ func (s *SDK) GetNominalCodeFromEmployer(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12741,8 +13091,10 @@ func (s *SDK) GetNominalCodeFromEmployer(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetNominalCodesFromEmployer - Gets the nominal codes
+// Gets the nominal code links
 func (s *SDK) GetNominalCodesFromEmployer(ctx context.Context, request operations.GetNominalCodesFromEmployerRequest) (*operations.GetNominalCodesFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/NominalCodes", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12752,7 +13104,7 @@ func (s *SDK) GetNominalCodesFromEmployer(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12822,8 +13174,10 @@ func (s *SDK) GetNominalCodesFromEmployer(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetP11SummaryReportOutput - Runs the P11 summary report
+// Returns the result of the executed P11 summary report for the given query parameters
 func (s *SDK) GetP11SummaryReportOutput(ctx context.Context, request operations.GetP11SummaryReportOutputRequest) (*operations.GetP11SummaryReportOutputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Report/P11SUM/run"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12835,7 +13189,7 @@ func (s *SDK) GetP11SummaryReportOutput(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12905,8 +13259,10 @@ func (s *SDK) GetP11SummaryReportOutput(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetP32NetReportOutput - Runs the P32 report
+// Returns the result of the executed P32 report for the given query parameters
 func (s *SDK) GetP32NetReportOutput(ctx context.Context, request operations.GetP32NetReportOutputRequest) (*operations.GetP32NetReportOutputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Report/P32/run"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -12918,7 +13274,7 @@ func (s *SDK) GetP32NetReportOutput(ctx context.Context, request operations.GetP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -12988,8 +13344,10 @@ func (s *SDK) GetP32NetReportOutput(ctx context.Context, request operations.GetP
 	return res, nil
 }
 
+// GetP32SummaryNetReportOutput - Runs the P32 summary report
+// Returns the result of the executed P32 summary report for the given query parameters
 func (s *SDK) GetP32SummaryNetReportOutput(ctx context.Context, request operations.GetP32SummaryNetReportOutputRequest) (*operations.GetP32SummaryNetReportOutputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Report/P32SUM/run"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13001,7 +13359,7 @@ func (s *SDK) GetP32SummaryNetReportOutput(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13071,8 +13429,10 @@ func (s *SDK) GetP32SummaryNetReportOutput(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetP45ReportOutput - Runs the P45 report
+// Returns the result of the executed P45 report for the given query parameters
 func (s *SDK) GetP45ReportOutput(ctx context.Context, request operations.GetP45ReportOutputRequest) (*operations.GetP45ReportOutputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Report/P45/run"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13084,7 +13444,7 @@ func (s *SDK) GetP45ReportOutput(ctx context.Context, request operations.GetP45R
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13154,8 +13514,10 @@ func (s *SDK) GetP45ReportOutput(ctx context.Context, request operations.GetP45R
 	return res, nil
 }
 
+// GetP60ReportOutput - Runs the P60 report
+// Returns the result of the executed P60 report for the given query parameters
 func (s *SDK) GetP60ReportOutput(ctx context.Context, request operations.GetP60ReportOutputRequest) (*operations.GetP60ReportOutputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Report/P60/run"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13167,7 +13529,7 @@ func (s *SDK) GetP60ReportOutput(ctx context.Context, request operations.GetP60R
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13237,8 +13599,10 @@ func (s *SDK) GetP60ReportOutput(ctx context.Context, request operations.GetP60R
 	return res, nil
 }
 
+// GetPapdisReportOuput - Runs the PAPDIS report
+// Returns the result of the executed PAPDIS report. PAPDIS is a free and open data interface standard designed to allow payroll and middleware software developers to create a file that can be used by pension providers to exchange data. http://www.papdis.org
 func (s *SDK) GetPapdisReportOuput(ctx context.Context, request operations.GetPapdisReportOuputRequest) (*operations.GetPapdisReportOuputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Report/PAPDIS/run"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13250,7 +13614,7 @@ func (s *SDK) GetPapdisReportOuput(ctx context.Context, request operations.GetPa
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13320,8 +13684,10 @@ func (s *SDK) GetPapdisReportOuput(ctx context.Context, request operations.GetPa
 	return res, nil
 }
 
+// GetPassReportOuput - Runs the PASS report
+// Returns the result of the executed PASS report. PASS stands for Payroll and Systemsync. PASS 1.1 is an extension of the PAPDIS V1.1 schema. https://pensionsynckb.systemsyncsolutions.com/display/PKB/PASS+1.1
 func (s *SDK) GetPassReportOuput(ctx context.Context, request operations.GetPassReportOuputRequest) (*operations.GetPassReportOuputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Report/PASS/run"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13333,7 +13699,7 @@ func (s *SDK) GetPassReportOuput(ctx context.Context, request operations.GetPass
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13403,8 +13769,10 @@ func (s *SDK) GetPassReportOuput(ctx context.Context, request operations.GetPass
 	return res, nil
 }
 
+// GetPayCodeByEffectiveDate - Gets pay code for specified date
+// Gets the pay code revision for the specified effective date
 func (s *SDK) GetPayCodeByEffectiveDate(ctx context.Context, request operations.GetPayCodeByEffectiveDateRequest) (*operations.GetPayCodeByEffectiveDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PayCode/{PayCodeId}/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13414,7 +13782,7 @@ func (s *SDK) GetPayCodeByEffectiveDate(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13484,8 +13852,10 @@ func (s *SDK) GetPayCodeByEffectiveDate(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetPayCodeFromEmployer - Gets the specified pay code from the employer
+// Returns the specified pay code from the employer
 func (s *SDK) GetPayCodeFromEmployer(ctx context.Context, request operations.GetPayCodeFromEmployerRequest) (*operations.GetPayCodeFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PayCode/{PayCodeId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13495,7 +13865,7 @@ func (s *SDK) GetPayCodeFromEmployer(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13565,8 +13935,10 @@ func (s *SDK) GetPayCodeFromEmployer(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetPayCodeRevisionByNumber - Gets the pay code by revision number
+// Get the pay code revision matching the specified revision number
 func (s *SDK) GetPayCodeRevisionByNumber(ctx context.Context, request operations.GetPayCodeRevisionByNumberRequest) (*operations.GetPayCodeRevisionByNumberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PayCode/{PayCodeId}/Revision/{RevisionNumber}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13576,7 +13948,7 @@ func (s *SDK) GetPayCodeRevisionByNumber(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13646,8 +14018,10 @@ func (s *SDK) GetPayCodeRevisionByNumber(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetPayCodeRevisions - Get all revisions of the Pay Code
+// Returns links to all revisions of the pay code
 func (s *SDK) GetPayCodeRevisions(ctx context.Context, request operations.GetPayCodeRevisionsRequest) (*operations.GetPayCodeRevisionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PayCode/{PayCodeId}/Revisions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13657,7 +14031,7 @@ func (s *SDK) GetPayCodeRevisions(ctx context.Context, request operations.GetPay
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13727,8 +14101,10 @@ func (s *SDK) GetPayCodeRevisions(ctx context.Context, request operations.GetPay
 	return res, nil
 }
 
+// GetPayCodesByEffectiveDate - Gets all pay codes for specified date
+// Gets the effective pay code revision for the specified date
 func (s *SDK) GetPayCodesByEffectiveDate(ctx context.Context, request operations.GetPayCodesByEffectiveDateRequest) (*operations.GetPayCodesByEffectiveDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PayCodes/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13738,7 +14114,7 @@ func (s *SDK) GetPayCodesByEffectiveDate(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13808,8 +14184,10 @@ func (s *SDK) GetPayCodesByEffectiveDate(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetPayCodesFromEmployer - Gets the pay codes from the employer
+// Get links to all the pay codes for the specified employer
 func (s *SDK) GetPayCodesFromEmployer(ctx context.Context, request operations.GetPayCodesFromEmployerRequest) (*operations.GetPayCodesFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PayCodes", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13819,7 +14197,7 @@ func (s *SDK) GetPayCodesFromEmployer(ctx context.Context, request operations.Ge
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13889,8 +14267,10 @@ func (s *SDK) GetPayCodesFromEmployer(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetPayCodesFromNominalCode - Gets the pay codes by nominal code
+// Get the pay codes that share the specified nominal code
 func (s *SDK) GetPayCodesFromNominalCode(ctx context.Context, request operations.GetPayCodesFromNominalCodeRequest) (*operations.GetPayCodesFromNominalCodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/NominalCode/{NominalCodeId}/PayCodes", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13900,7 +14280,7 @@ func (s *SDK) GetPayCodesFromNominalCode(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -13970,8 +14350,10 @@ func (s *SDK) GetPayCodesFromNominalCode(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetPayCodesWithTag - Get pay codes with tag
+// Gets the pay codes with the tag
 func (s *SDK) GetPayCodesWithTag(ctx context.Context, request operations.GetPayCodesWithTagRequest) (*operations.GetPayCodesWithTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PayCodes/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -13981,7 +14363,7 @@ func (s *SDK) GetPayCodesWithTag(ctx context.Context, request operations.GetPayC
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14051,8 +14433,10 @@ func (s *SDK) GetPayCodesWithTag(ctx context.Context, request operations.GetPayC
 	return res, nil
 }
 
+// GetPayDashboardPayslipReportOuput - Runs the Pay Dashboard payslips report
+// Returns the result of the executed Pay Dashboard payslip report for the given query parameters. See https://api.paydashboard.com for details. For compatability should be returned as JSON with TransformDefinitionKey=Json-Clean.
 func (s *SDK) GetPayDashboardPayslipReportOuput(ctx context.Context, request operations.GetPayDashboardPayslipReportOuputRequest) (*operations.GetPayDashboardPayslipReportOuputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Report/PAYDASHBOARD/run"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14064,7 +14448,7 @@ func (s *SDK) GetPayDashboardPayslipReportOuput(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14134,8 +14518,10 @@ func (s *SDK) GetPayDashboardPayslipReportOuput(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetPayInstructionFromEmployee - Gets the specified pay instruction from the employee
+// Returns the specified pay instruction from employee
 func (s *SDK) GetPayInstructionFromEmployee(ctx context.Context, request operations.GetPayInstructionFromEmployeeRequest) (*operations.GetPayInstructionFromEmployeeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayInstruction/{PayInstructionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14145,7 +14531,7 @@ func (s *SDK) GetPayInstructionFromEmployee(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14215,8 +14601,10 @@ func (s *SDK) GetPayInstructionFromEmployee(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetPayInstructionsFromEmployee - Gets the pay instructions from the specified employee
+// Get links to all pay instructions for the specified employee
 func (s *SDK) GetPayInstructionsFromEmployee(ctx context.Context, request operations.GetPayInstructionsFromEmployeeRequest) (*operations.GetPayInstructionsFromEmployeeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayInstructions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14226,7 +14614,7 @@ func (s *SDK) GetPayInstructionsFromEmployee(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14296,8 +14684,10 @@ func (s *SDK) GetPayInstructionsFromEmployee(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetPayInstructionsWithTag - Get pay instructions with tag
+// Gets the pay instructions with the tag
 func (s *SDK) GetPayInstructionsWithTag(ctx context.Context, request operations.GetPayInstructionsWithTagRequest) (*operations.GetPayInstructionsWithTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayInstructions/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14307,7 +14697,7 @@ func (s *SDK) GetPayInstructionsWithTag(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14377,8 +14767,10 @@ func (s *SDK) GetPayInstructionsWithTag(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetPayLineFromEmployee - Gets the specified pay line from the employee
+// Returns the specified pay line from employee
 func (s *SDK) GetPayLineFromEmployee(ctx context.Context, request operations.GetPayLineFromEmployeeRequest) (*operations.GetPayLineFromEmployeeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayLine/{PayLineId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14388,7 +14780,7 @@ func (s *SDK) GetPayLineFromEmployee(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14458,8 +14850,10 @@ func (s *SDK) GetPayLineFromEmployee(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetPayLinesFromEmployee - Gets the pay lines from the specified employee
+// Get links to all pay lines for the specified employee
 func (s *SDK) GetPayLinesFromEmployee(ctx context.Context, request operations.GetPayLinesFromEmployeeRequest) (*operations.GetPayLinesFromEmployeeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayLines", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14469,7 +14863,7 @@ func (s *SDK) GetPayLinesFromEmployee(ctx context.Context, request operations.Ge
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14539,8 +14933,10 @@ func (s *SDK) GetPayLinesFromEmployee(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetPayLinesWithTag - Get pay lines with tag
+// Gets the pay line with the tag
 func (s *SDK) GetPayLinesWithTag(ctx context.Context, request operations.GetPayLinesWithTagRequest) (*operations.GetPayLinesWithTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayLines/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14550,7 +14946,7 @@ func (s *SDK) GetPayLinesWithTag(ctx context.Context, request operations.GetPayL
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14620,8 +15016,10 @@ func (s *SDK) GetPayLinesWithTag(ctx context.Context, request operations.GetPayL
 	return res, nil
 }
 
+// GetPayRunFromPaySchedule - Gets the pay run from the pay schedule
+// Returns the pay run from the pay schedule
 func (s *SDK) GetPayRunFromPaySchedule(ctx context.Context, request operations.GetPayRunFromPayScheduleRequest) (*operations.GetPayRunFromPayScheduleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRun/{PayRunId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14631,7 +15029,7 @@ func (s *SDK) GetPayRunFromPaySchedule(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14701,8 +15099,10 @@ func (s *SDK) GetPayRunFromPaySchedule(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetPayRunJobInfo - Get the pay run job information
+// Return the the payrun job information
 func (s *SDK) GetPayRunJobInfo(ctx context.Context, request operations.GetPayRunJobInfoRequest) (*operations.GetPayRunJobInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/PayRuns/{JobId}/Info", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14712,7 +15112,7 @@ func (s *SDK) GetPayRunJobInfo(ctx context.Context, request operations.GetPayRun
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14782,8 +15182,10 @@ func (s *SDK) GetPayRunJobInfo(ctx context.Context, request operations.GetPayRun
 	return res, nil
 }
 
+// GetPayRunJobProgress - Get the pay run job progress
+// Return the the payrun job progress
 func (s *SDK) GetPayRunJobProgress(ctx context.Context, request operations.GetPayRunJobProgressRequest) (*operations.GetPayRunJobProgressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/PayRuns/{JobId}/Progress", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14793,7 +15195,7 @@ func (s *SDK) GetPayRunJobProgress(ctx context.Context, request operations.GetPa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14854,8 +15256,10 @@ func (s *SDK) GetPayRunJobProgress(ctx context.Context, request operations.GetPa
 	return res, nil
 }
 
+// GetPayRunJobStatus - Get the pay run job status
+// Return the the payrun job status
 func (s *SDK) GetPayRunJobStatus(ctx context.Context, request operations.GetPayRunJobStatusRequest) (*operations.GetPayRunJobStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/PayRuns/{JobId}/Status", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14865,7 +15269,7 @@ func (s *SDK) GetPayRunJobStatus(ctx context.Context, request operations.GetPayR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -14926,8 +15330,10 @@ func (s *SDK) GetPayRunJobStatus(ctx context.Context, request operations.GetPayR
 	return res, nil
 }
 
+// GetPayRunJobs - Get all PayRun jobs
+// Gets all the pay run jobs
 func (s *SDK) GetPayRunJobs(ctx context.Context, request operations.GetPayRunJobsRequest) (*operations.GetPayRunJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Jobs/PayRuns"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -14937,7 +15343,7 @@ func (s *SDK) GetPayRunJobs(ctx context.Context, request operations.GetPayRunJob
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15007,8 +15413,10 @@ func (s *SDK) GetPayRunJobs(ctx context.Context, request operations.GetPayRunJob
 	return res, nil
 }
 
+// GetPayRunsFromEmployee - Gets the pay runs from the employee
+// Get links to all pay runs for the specified employee.
 func (s *SDK) GetPayRunsFromEmployee(ctx context.Context, request operations.GetPayRunsFromEmployeeRequest) (*operations.GetPayRunsFromEmployeeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayRuns", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15018,7 +15426,7 @@ func (s *SDK) GetPayRunsFromEmployee(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15088,8 +15496,10 @@ func (s *SDK) GetPayRunsFromEmployee(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetPayRunsFromPaySchedule - Gets the pay runs from the pay schedule
+// Get links to all pay runs for the specified pay schedule
 func (s *SDK) GetPayRunsFromPaySchedule(ctx context.Context, request operations.GetPayRunsFromPayScheduleRequest) (*operations.GetPayRunsFromPayScheduleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRuns", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15099,7 +15509,7 @@ func (s *SDK) GetPayRunsFromPaySchedule(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15169,8 +15579,10 @@ func (s *SDK) GetPayRunsFromPaySchedule(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetPayRunsWithTag - Get pay runs with tag
+// Gets the pay runs with the tag
 func (s *SDK) GetPayRunsWithTag(ctx context.Context, request operations.GetPayRunsWithTagRequest) (*operations.GetPayRunsWithTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRuns/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15180,7 +15592,7 @@ func (s *SDK) GetPayRunsWithTag(ctx context.Context, request operations.GetPayRu
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15250,8 +15662,10 @@ func (s *SDK) GetPayRunsWithTag(ctx context.Context, request operations.GetPayRu
 	return res, nil
 }
 
+// GetPayScheduleFromEmployer - Gets the specified pay schedule from the employer
+// Returns the specified pay schedule object from employer
 func (s *SDK) GetPayScheduleFromEmployer(ctx context.Context, request operations.GetPayScheduleFromEmployerRequest) (*operations.GetPayScheduleFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15261,7 +15675,7 @@ func (s *SDK) GetPayScheduleFromEmployer(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15331,8 +15745,10 @@ func (s *SDK) GetPayScheduleFromEmployer(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetPaySchedulesFromEmployer - Gets the pay schedule from the specified employer
+// Get links to all pay schedules for the specified employer
 func (s *SDK) GetPaySchedulesFromEmployer(ctx context.Context, request operations.GetPaySchedulesFromEmployerRequest) (*operations.GetPaySchedulesFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedules", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15342,7 +15758,7 @@ func (s *SDK) GetPaySchedulesFromEmployer(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15412,8 +15828,10 @@ func (s *SDK) GetPaySchedulesFromEmployer(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetPaySchedulesWithTag - Get pay schedule with tag
+// Gets the pay schedules with the tag
 func (s *SDK) GetPaySchedulesWithTag(ctx context.Context, request operations.GetPaySchedulesWithTagRequest) (*operations.GetPaySchedulesWithTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedules/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15423,7 +15841,7 @@ func (s *SDK) GetPaySchedulesWithTag(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15493,8 +15911,10 @@ func (s *SDK) GetPaySchedulesWithTag(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetPayslip3ReportOutput - Runs the verbose payslip report
+// Returns the result of the executed verbose payslip report for the given query parameters
 func (s *SDK) GetPayslip3ReportOutput(ctx context.Context, request operations.GetPayslip3ReportOutputRequest) (*operations.GetPayslip3ReportOutputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Report/PAYSLIP3/run"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15506,7 +15926,7 @@ func (s *SDK) GetPayslip3ReportOutput(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15576,8 +15996,10 @@ func (s *SDK) GetPayslip3ReportOutput(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetPensionByEffectiveDate - Get pension by effective date.
+// Returns the penion's state at the specified effective date.
 func (s *SDK) GetPensionByEffectiveDate(ctx context.Context, request operations.GetPensionByEffectiveDateRequest) (*operations.GetPensionByEffectiveDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Pension/{PensionId}/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15587,7 +16009,7 @@ func (s *SDK) GetPensionByEffectiveDate(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15657,8 +16079,10 @@ func (s *SDK) GetPensionByEffectiveDate(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetPensionFromEmployer - Get pension from employer
+// Gets the specified pension from employer by pension code.
 func (s *SDK) GetPensionFromEmployer(ctx context.Context, request operations.GetPensionFromEmployerRequest) (*operations.GetPensionFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Pension/{PensionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15668,7 +16092,7 @@ func (s *SDK) GetPensionFromEmployer(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15738,8 +16162,10 @@ func (s *SDK) GetPensionFromEmployer(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetPensionLiabilityReportOutput - Runs the pension liability report
+// Returns the result of the executed pension liability report for the given query parameters
 func (s *SDK) GetPensionLiabilityReportOutput(ctx context.Context, request operations.GetPensionLiabilityReportOutputRequest) (*operations.GetPensionLiabilityReportOutputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Report/PENLIABILITY/run"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15751,7 +16177,7 @@ func (s *SDK) GetPensionLiabilityReportOutput(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15821,8 +16247,10 @@ func (s *SDK) GetPensionLiabilityReportOutput(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetPensionRevisionByNumber - Gets the pension by revision number
+// Get the pension revision matching the specified revision number
 func (s *SDK) GetPensionRevisionByNumber(ctx context.Context, request operations.GetPensionRevisionByNumberRequest) (*operations.GetPensionRevisionByNumberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Pension/{PensionId}/Revision/{RevisionNumber}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15832,7 +16260,7 @@ func (s *SDK) GetPensionRevisionByNumber(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15902,8 +16330,10 @@ func (s *SDK) GetPensionRevisionByNumber(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetPensionRevisions - Get all pension revisions
+// Returns links to all revisions of the pension
 func (s *SDK) GetPensionRevisions(ctx context.Context, request operations.GetPensionRevisionsRequest) (*operations.GetPensionRevisionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Pension/{PensionId}/Revisions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15913,7 +16343,7 @@ func (s *SDK) GetPensionRevisions(ctx context.Context, request operations.GetPen
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -15983,8 +16413,10 @@ func (s *SDK) GetPensionRevisions(ctx context.Context, request operations.GetPen
 	return res, nil
 }
 
+// GetPensionsByEffectiveDate - Get pensions from employer at a given effective date.
+// Get links to all pensions for the employer on specified effective date.
 func (s *SDK) GetPensionsByEffectiveDate(ctx context.Context, request operations.GetPensionsByEffectiveDateRequest) (*operations.GetPensionsByEffectiveDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Pensions/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -15994,7 +16426,7 @@ func (s *SDK) GetPensionsByEffectiveDate(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16064,8 +16496,10 @@ func (s *SDK) GetPensionsByEffectiveDate(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetPensionsFromEmployer - Get pensions from employer.
+// Get links to all pensions for the specified employer.
 func (s *SDK) GetPensionsFromEmployer(ctx context.Context, request operations.GetPensionsFromEmployerRequest) (*operations.GetPensionsFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Pensions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -16075,7 +16509,7 @@ func (s *SDK) GetPensionsFromEmployer(ctx context.Context, request operations.Ge
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16145,8 +16579,10 @@ func (s *SDK) GetPensionsFromEmployer(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetPermission - Gets the permission object
+// Gets the permission object for application
 func (s *SDK) GetPermission(ctx context.Context, request operations.GetPermissionRequest) (*operations.GetPermissionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Permission/{PermissionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -16156,7 +16592,7 @@ func (s *SDK) GetPermission(ctx context.Context, request operations.GetPermissio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16226,8 +16662,10 @@ func (s *SDK) GetPermission(ctx context.Context, request operations.GetPermissio
 	return res, nil
 }
 
+// GetPermissions - Gets all permission objects
+// Gets all permission objects for application
 func (s *SDK) GetPermissions(ctx context.Context, request operations.GetPermissionsRequest) (*operations.GetPermissionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Permissions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -16237,7 +16675,7 @@ func (s *SDK) GetPermissions(ctx context.Context, request operations.GetPermissi
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16307,8 +16745,10 @@ func (s *SDK) GetPermissions(ctx context.Context, request operations.GetPermissi
 	return res, nil
 }
 
+// GetQueryResponse - Get the query result
+// Get the results for the specified query
 func (s *SDK) GetQueryResponse(ctx context.Context, request operations.GetQueryResponseRequest) (*operations.GetQueryResponseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Query"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -16328,7 +16768,7 @@ func (s *SDK) GetQueryResponse(ctx context.Context, request operations.GetQueryR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16398,8 +16838,10 @@ func (s *SDK) GetQueryResponse(ctx context.Context, request operations.GetQueryR
 	return res, nil
 }
 
+// GetReportDefinitionFromApplication - Get the report definition
+// Returns the specified report definition from the authroised application
 func (s *SDK) GetReportDefinitionFromApplication(ctx context.Context, request operations.GetReportDefinitionFromApplicationRequest) (*operations.GetReportDefinitionFromApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Report/{ReportDefinitionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -16409,7 +16851,7 @@ func (s *SDK) GetReportDefinitionFromApplication(ctx context.Context, request op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16479,8 +16921,10 @@ func (s *SDK) GetReportDefinitionFromApplication(ctx context.Context, request op
 	return res, nil
 }
 
+// GetReportDefinitionsFromApplication - Gets all reports
+// Get links to all saved report definitions under authorised application
 func (s *SDK) GetReportDefinitionsFromApplication(ctx context.Context, request operations.GetReportDefinitionsFromApplicationRequest) (*operations.GetReportDefinitionsFromApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Reports"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -16490,7 +16934,7 @@ func (s *SDK) GetReportDefinitionsFromApplication(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16560,8 +17004,10 @@ func (s *SDK) GetReportDefinitionsFromApplication(ctx context.Context, request o
 	return res, nil
 }
 
+// GetReportLineFromEmployer - Gets the specified report line from the employer
+// Returns the specified pay line from employee
 func (s *SDK) GetReportLineFromEmployer(ctx context.Context, request operations.GetReportLineFromEmployerRequest) (*operations.GetReportLineFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/ReportLine/{ReportLineId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -16571,7 +17017,7 @@ func (s *SDK) GetReportLineFromEmployer(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16641,8 +17087,10 @@ func (s *SDK) GetReportLineFromEmployer(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetReportLinesFromEmployer - Gets the report lines from the specified employer
+// Get links to all report lines for the specified employee
 func (s *SDK) GetReportLinesFromEmployer(ctx context.Context, request operations.GetReportLinesFromEmployerRequest) (*operations.GetReportLinesFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/ReportLines", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -16652,7 +17100,7 @@ func (s *SDK) GetReportLinesFromEmployer(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16722,8 +17170,10 @@ func (s *SDK) GetReportLinesFromEmployer(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetReportLinesFromPayRun - Gets the report lines from the specified pay run
+// Returns all report lines associated with the specified pay run
 func (s *SDK) GetReportLinesFromPayRun(ctx context.Context, request operations.GetReportLinesFromPayRunRequest) (*operations.GetReportLinesFromPayRunResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRun/{PayRunId}/ReportLines", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -16733,7 +17183,7 @@ func (s *SDK) GetReportLinesFromPayRun(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16803,8 +17253,10 @@ func (s *SDK) GetReportLinesFromPayRun(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetReportOutput - Runs the specified report definition
+// Returns the result of the executed report definition
 func (s *SDK) GetReportOutput(ctx context.Context, request operations.GetReportOutputRequest) (*operations.GetReportOutputResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Report/{ReportDefinitionId}/run", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -16814,7 +17266,7 @@ func (s *SDK) GetReportOutput(ctx context.Context, request operations.GetReportO
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16884,8 +17336,10 @@ func (s *SDK) GetReportOutput(ctx context.Context, request operations.GetReportO
 	return res, nil
 }
 
+// GetReportingInstructionFromEmployer - Gets the specified reporting instruction from the employer
+// Returns the specified pay instruction from employee
 func (s *SDK) GetReportingInstructionFromEmployer(ctx context.Context, request operations.GetReportingInstructionFromEmployerRequest) (*operations.GetReportingInstructionFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/ReportingInstruction/{ReportingInstructionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -16895,7 +17349,7 @@ func (s *SDK) GetReportingInstructionFromEmployer(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -16965,8 +17419,10 @@ func (s *SDK) GetReportingInstructionFromEmployer(ctx context.Context, request o
 	return res, nil
 }
 
+// GetReportingInstructionsFromEmployer - Gets the reporting instructions from the specified employer
+// Get links to all pay instructions for the specified employee
 func (s *SDK) GetReportingInstructionsFromEmployer(ctx context.Context, request operations.GetReportingInstructionsFromEmployerRequest) (*operations.GetReportingInstructionsFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/ReportingInstructions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -16976,7 +17432,7 @@ func (s *SDK) GetReportingInstructionsFromEmployer(ctx context.Context, request 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17046,8 +17502,10 @@ func (s *SDK) GetReportingInstructionsFromEmployer(ctx context.Context, request 
 	return res, nil
 }
 
+// GetRtiJobInfo - Get the RTI job information
+// Return the the RTI job information
 func (s *SDK) GetRtiJobInfo(ctx context.Context, request operations.GetRtiJobInfoRequest) (*operations.GetRtiJobInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/Rti/{JobId}/Info", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -17057,7 +17515,7 @@ func (s *SDK) GetRtiJobInfo(ctx context.Context, request operations.GetRtiJobInf
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17127,8 +17585,10 @@ func (s *SDK) GetRtiJobInfo(ctx context.Context, request operations.GetRtiJobInf
 	return res, nil
 }
 
+// GetRtiJobProgress - Get the RTI job progress
+// Return the the RTI job progress
 func (s *SDK) GetRtiJobProgress(ctx context.Context, request operations.GetRtiJobProgressRequest) (*operations.GetRtiJobProgressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/Rti/{JobId}/Progress", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -17138,7 +17598,7 @@ func (s *SDK) GetRtiJobProgress(ctx context.Context, request operations.GetRtiJo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17199,8 +17659,10 @@ func (s *SDK) GetRtiJobProgress(ctx context.Context, request operations.GetRtiJo
 	return res, nil
 }
 
+// GetRtiJobStatus - Get the RTI job status
+// Return the the RTI job status
 func (s *SDK) GetRtiJobStatus(ctx context.Context, request operations.GetRtiJobStatusRequest) (*operations.GetRtiJobStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/Rti/{JobId}/Status", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -17210,7 +17672,7 @@ func (s *SDK) GetRtiJobStatus(ctx context.Context, request operations.GetRtiJobS
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17271,8 +17733,10 @@ func (s *SDK) GetRtiJobStatus(ctx context.Context, request operations.GetRtiJobS
 	return res, nil
 }
 
+// GetRtiJobs - Get all RTI jobs
+// Gets all the RTI jobs
 func (s *SDK) GetRtiJobs(ctx context.Context, request operations.GetRtiJobsRequest) (*operations.GetRtiJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Jobs/Rti"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -17282,7 +17746,7 @@ func (s *SDK) GetRtiJobs(ctx context.Context, request operations.GetRtiJobsReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17352,8 +17816,10 @@ func (s *SDK) GetRtiJobs(ctx context.Context, request operations.GetRtiJobsReque
 	return res, nil
 }
 
+// GetRtiTransactionFromEmployer - Get the RTI transaction
+// Returns the specified RTI transaction
 func (s *SDK) GetRtiTransactionFromEmployer(ctx context.Context, request operations.GetRtiTransactionFromEmployerRequest) (*operations.GetRtiTransactionFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/RtiTransaction/{RtiTransactionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -17363,7 +17829,7 @@ func (s *SDK) GetRtiTransactionFromEmployer(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17433,8 +17899,10 @@ func (s *SDK) GetRtiTransactionFromEmployer(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetRtiTransactionsFromEmployer - Get all RTI transactions for the employer
+// Get links for all RTI transactions for the specified employer
 func (s *SDK) GetRtiTransactionsFromEmployer(ctx context.Context, request operations.GetRtiTransactionsFromEmployerRequest) (*operations.GetRtiTransactionsFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/RtiTransactions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -17444,7 +17912,7 @@ func (s *SDK) GetRtiTransactionsFromEmployer(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17514,8 +17982,10 @@ func (s *SDK) GetRtiTransactionsFromEmployer(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetRtiTransactionsWithTag - Get RTI transactions with tag
+// Gets the RTI transactions with the tag
 func (s *SDK) GetRtiTransactionsWithTag(ctx context.Context, request operations.GetRtiTransactionsWithTagRequest) (*operations.GetRtiTransactionsWithTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/RtiTransactions/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -17525,7 +17995,7 @@ func (s *SDK) GetRtiTransactionsWithTag(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17595,8 +18065,10 @@ func (s *SDK) GetRtiTransactionsWithTag(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetSchema - Get XSD schema
+// Returns the XSD schema for the specified data type
 func (s *SDK) GetSchema(ctx context.Context, request operations.GetSchemaRequest) (*operations.GetSchemaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Schemas/{DtoDataType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -17606,7 +18078,7 @@ func (s *SDK) GetSchema(ctx context.Context, request operations.GetSchemaRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17676,8 +18148,10 @@ func (s *SDK) GetSchema(ctx context.Context, request operations.GetSchemaRequest
 	return res, nil
 }
 
+// GetSchemas - Get a list of all available schemas
+// Returns a collection of links to all the available data object schemas
 func (s *SDK) GetSchemas(ctx context.Context, request operations.GetSchemasRequest) (*operations.GetSchemasResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Schemas"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -17687,7 +18161,7 @@ func (s *SDK) GetSchemas(ctx context.Context, request operations.GetSchemasReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17757,8 +18231,10 @@ func (s *SDK) GetSchemas(ctx context.Context, request operations.GetSchemasReque
 	return res, nil
 }
 
+// GetSubContractorByEffectiveDate - Get sub contractor by effective date.
+// Returns the sub contractor's state at the specified effective date.
 func (s *SDK) GetSubContractorByEffectiveDate(ctx context.Context, request operations.GetSubContractorByEffectiveDateRequest) (*operations.GetSubContractorByEffectiveDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -17768,7 +18244,7 @@ func (s *SDK) GetSubContractorByEffectiveDate(ctx context.Context, request opera
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17838,8 +18314,10 @@ func (s *SDK) GetSubContractorByEffectiveDate(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetSubContractorFromEmployer - Get sub contractor from employer
+// Gets the specified sub contractor from employer.
 func (s *SDK) GetSubContractorFromEmployer(ctx context.Context, request operations.GetSubContractorFromEmployerRequest) (*operations.GetSubContractorFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -17849,7 +18327,7 @@ func (s *SDK) GetSubContractorFromEmployer(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -17919,8 +18397,10 @@ func (s *SDK) GetSubContractorFromEmployer(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetSubContractorRevisionByNumber - Gets the sub contractor by revision number
+// Get the sub contractor revision matching the specified revision number
 func (s *SDK) GetSubContractorRevisionByNumber(ctx context.Context, request operations.GetSubContractorRevisionByNumberRequest) (*operations.GetSubContractorRevisionByNumberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/Revision/{RevisionNumber}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -17930,7 +18410,7 @@ func (s *SDK) GetSubContractorRevisionByNumber(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18000,8 +18480,10 @@ func (s *SDK) GetSubContractorRevisionByNumber(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetSubContractorRevisions - Get all sub contractor revisions
+// Gets links to all the sub contractor revisions
 func (s *SDK) GetSubContractorRevisions(ctx context.Context, request operations.GetSubContractorRevisionsRequest) (*operations.GetSubContractorRevisionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/Revisions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -18011,7 +18493,7 @@ func (s *SDK) GetSubContractorRevisions(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18081,8 +18563,10 @@ func (s *SDK) GetSubContractorRevisions(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetSubContractorsByEffectiveDate - Get sub contractors from employer at a given effective date.
+// Get links to all sub contractors for the employer on specified effective date.
 func (s *SDK) GetSubContractorsByEffectiveDate(ctx context.Context, request operations.GetSubContractorsByEffectiveDateRequest) (*operations.GetSubContractorsByEffectiveDateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractors/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -18092,7 +18576,7 @@ func (s *SDK) GetSubContractorsByEffectiveDate(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18162,8 +18646,10 @@ func (s *SDK) GetSubContractorsByEffectiveDate(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetSubContractorsFromEmployer - Get sub contractors from employer.
+// Get links to all sub contractors for the specified employer.
 func (s *SDK) GetSubContractorsFromEmployer(ctx context.Context, request operations.GetSubContractorsFromEmployerRequest) (*operations.GetSubContractorsFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractors", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -18173,7 +18659,7 @@ func (s *SDK) GetSubContractorsFromEmployer(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18243,8 +18729,10 @@ func (s *SDK) GetSubContractorsFromEmployer(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetSubContractorsWithTag - Get sub contractors with tag
+// Gets the sub contractor with the tag
 func (s *SDK) GetSubContractorsWithTag(ctx context.Context, request operations.GetSubContractorsWithTagRequest) (*operations.GetSubContractorsWithTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractors/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -18254,7 +18742,7 @@ func (s *SDK) GetSubContractorsWithTag(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18324,8 +18812,10 @@ func (s *SDK) GetSubContractorsWithTag(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetTagFromCisInstruction - Get CIS instruction tag
+// Gets the tag from the CIS instruction
 func (s *SDK) GetTagFromCisInstruction(ctx context.Context, request operations.GetTagFromCisInstructionRequest) (*operations.GetTagFromCisInstructionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisInstruction/{CisInstructionId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -18335,7 +18825,7 @@ func (s *SDK) GetTagFromCisInstruction(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18405,8 +18895,10 @@ func (s *SDK) GetTagFromCisInstruction(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetTagFromCisLine - Get CIS line tag
+// Gets the tag from the CIS line
 func (s *SDK) GetTagFromCisLine(ctx context.Context, request operations.GetTagFromCisLineRequest) (*operations.GetTagFromCisLineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisLine/{CisLineId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -18416,7 +18908,7 @@ func (s *SDK) GetTagFromCisLine(ctx context.Context, request operations.GetTagFr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18486,8 +18978,10 @@ func (s *SDK) GetTagFromCisLine(ctx context.Context, request operations.GetTagFr
 	return res, nil
 }
 
+// GetTagFromCisLineType - Get CIS line type tag
+// Gets the tag from the CIS line type
 func (s *SDK) GetTagFromCisLineType(ctx context.Context, request operations.GetTagFromCisLineTypeRequest) (*operations.GetTagFromCisLineTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/CisLineType/{CisLineTypeId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -18497,7 +18991,7 @@ func (s *SDK) GetTagFromCisLineType(ctx context.Context, request operations.GetT
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18567,8 +19061,10 @@ func (s *SDK) GetTagFromCisLineType(ctx context.Context, request operations.GetT
 	return res, nil
 }
 
+// GetTagFromEmployee - Get employee tag
+// Gets the tag from the employee
 func (s *SDK) GetTagFromEmployee(ctx context.Context, request operations.GetTagFromEmployeeRequest) (*operations.GetTagFromEmployeeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -18578,7 +19074,7 @@ func (s *SDK) GetTagFromEmployee(ctx context.Context, request operations.GetTagF
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18648,8 +19144,10 @@ func (s *SDK) GetTagFromEmployee(ctx context.Context, request operations.GetTagF
 	return res, nil
 }
 
+// GetTagFromEmployeeRevision - Get employee revision tag
+// Gets the tag from the employee revision
 func (s *SDK) GetTagFromEmployeeRevision(ctx context.Context, request operations.GetTagFromEmployeeRevisionRequest) (*operations.GetTagFromEmployeeRevisionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/Tag/{TagId}/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -18659,7 +19157,7 @@ func (s *SDK) GetTagFromEmployeeRevision(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18729,8 +19227,10 @@ func (s *SDK) GetTagFromEmployeeRevision(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetTagFromEmployer - Get employer tag
+// Gets the tag from the employer
 func (s *SDK) GetTagFromEmployer(ctx context.Context, request operations.GetTagFromEmployerRequest) (*operations.GetTagFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -18740,7 +19240,7 @@ func (s *SDK) GetTagFromEmployer(ctx context.Context, request operations.GetTagF
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18810,8 +19310,10 @@ func (s *SDK) GetTagFromEmployer(ctx context.Context, request operations.GetTagF
 	return res, nil
 }
 
+// GetTagFromEmployerRevision - Get employer revision tag
+// Gets the tag from the employer revision
 func (s *SDK) GetTagFromEmployerRevision(ctx context.Context, request operations.GetTagFromEmployerRevisionRequest) (*operations.GetTagFromEmployerRevisionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Tag/{TagId}/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -18821,7 +19323,7 @@ func (s *SDK) GetTagFromEmployerRevision(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18891,8 +19393,10 @@ func (s *SDK) GetTagFromEmployerRevision(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetTagFromHolidayScheme - Get holiday scheme tag
+// Gets the tag from the holiday scheme
 func (s *SDK) GetTagFromHolidayScheme(ctx context.Context, request operations.GetTagFromHolidaySchemeRequest) (*operations.GetTagFromHolidaySchemeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/HolidayScheme/{HolidaySchemeId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -18902,7 +19406,7 @@ func (s *SDK) GetTagFromHolidayScheme(ctx context.Context, request operations.Ge
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -18972,8 +19476,10 @@ func (s *SDK) GetTagFromHolidayScheme(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetTagFromHolidaySchemeRevision - Get holiday scheme revision tag
+// Gets the tag from the holiday scheme revision
 func (s *SDK) GetTagFromHolidaySchemeRevision(ctx context.Context, request operations.GetTagFromHolidaySchemeRevisionRequest) (*operations.GetTagFromHolidaySchemeRevisionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/HolidayScheme/{HolidaySchemeId}/Tag/{TagId}/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -18983,7 +19489,7 @@ func (s *SDK) GetTagFromHolidaySchemeRevision(ctx context.Context, request opera
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19053,8 +19559,10 @@ func (s *SDK) GetTagFromHolidaySchemeRevision(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetTagFromJournalLine - Get journal line tag
+// Gets a tag from the journal line
 func (s *SDK) GetTagFromJournalLine(ctx context.Context, request operations.GetTagFromJournalLineRequest) (*operations.GetTagFromJournalLineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/JournalLine/{JournalLineId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -19064,7 +19572,7 @@ func (s *SDK) GetTagFromJournalLine(ctx context.Context, request operations.GetT
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19134,8 +19642,10 @@ func (s *SDK) GetTagFromJournalLine(ctx context.Context, request operations.GetT
 	return res, nil
 }
 
+// GetTagFromPayCode - Get pay code tag
+// Gets the tag from the pay code
 func (s *SDK) GetTagFromPayCode(ctx context.Context, request operations.GetTagFromPayCodeRequest) (*operations.GetTagFromPayCodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PayCode/{PayCodeId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -19145,7 +19655,7 @@ func (s *SDK) GetTagFromPayCode(ctx context.Context, request operations.GetTagFr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19215,8 +19725,10 @@ func (s *SDK) GetTagFromPayCode(ctx context.Context, request operations.GetTagFr
 	return res, nil
 }
 
+// GetTagFromPayInstruction - Get pay instruction tag
+// Gets the tag from the pay instruction
 func (s *SDK) GetTagFromPayInstruction(ctx context.Context, request operations.GetTagFromPayInstructionRequest) (*operations.GetTagFromPayInstructionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayInstruction/{PayInstructionId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -19226,7 +19738,7 @@ func (s *SDK) GetTagFromPayInstruction(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19296,8 +19808,10 @@ func (s *SDK) GetTagFromPayInstruction(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetTagFromPayLine - Get pay line tag
+// Gets the tag from the pay line
 func (s *SDK) GetTagFromPayLine(ctx context.Context, request operations.GetTagFromPayLineRequest) (*operations.GetTagFromPayLineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayLine/{PayLineId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -19307,7 +19821,7 @@ func (s *SDK) GetTagFromPayLine(ctx context.Context, request operations.GetTagFr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19377,8 +19891,10 @@ func (s *SDK) GetTagFromPayLine(ctx context.Context, request operations.GetTagFr
 	return res, nil
 }
 
+// GetTagFromPayRun - Get pay run tag
+// Gets the tag from the pay run
 func (s *SDK) GetTagFromPayRun(ctx context.Context, request operations.GetTagFromPayRunRequest) (*operations.GetTagFromPayRunResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRun/{PayRunId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -19388,7 +19904,7 @@ func (s *SDK) GetTagFromPayRun(ctx context.Context, request operations.GetTagFro
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19458,8 +19974,10 @@ func (s *SDK) GetTagFromPayRun(ctx context.Context, request operations.GetTagFro
 	return res, nil
 }
 
+// GetTagFromPaySchedule - Get pay schedule tag
+// Gets the tag from the pay schedule
 func (s *SDK) GetTagFromPaySchedule(ctx context.Context, request operations.GetTagFromPayScheduleRequest) (*operations.GetTagFromPayScheduleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -19469,7 +19987,7 @@ func (s *SDK) GetTagFromPaySchedule(ctx context.Context, request operations.GetT
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19539,8 +20057,10 @@ func (s *SDK) GetTagFromPaySchedule(ctx context.Context, request operations.GetT
 	return res, nil
 }
 
+// GetTagFromRtiTransaction - Get RTI transaction tag
+// Gets the tag from the RTI transaction
 func (s *SDK) GetTagFromRtiTransaction(ctx context.Context, request operations.GetTagFromRtiTransactionRequest) (*operations.GetTagFromRtiTransactionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/RtiTransaction/{RtiTransactionId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -19550,7 +20070,7 @@ func (s *SDK) GetTagFromRtiTransaction(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19620,8 +20140,10 @@ func (s *SDK) GetTagFromRtiTransaction(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetTagFromSubContractor - Get sub contractor tag
+// Gets the tag from the sub contractor
 func (s *SDK) GetTagFromSubContractor(ctx context.Context, request operations.GetTagFromSubContractorRequest) (*operations.GetTagFromSubContractorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -19631,7 +20153,7 @@ func (s *SDK) GetTagFromSubContractor(ctx context.Context, request operations.Ge
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19701,8 +20223,10 @@ func (s *SDK) GetTagFromSubContractor(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetTagFromSubContractorRevision - Get sub contractor revision tag
+// Gets the tag from the sub contractor revision
 func (s *SDK) GetTagFromSubContractorRevision(ctx context.Context, request operations.GetTagFromSubContractorRevisionRequest) (*operations.GetTagFromSubContractorRevisionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/Tag/{TagId}/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -19712,7 +20236,7 @@ func (s *SDK) GetTagFromSubContractorRevision(ctx context.Context, request opera
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19782,8 +20306,10 @@ func (s *SDK) GetTagFromSubContractorRevision(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetTagFromThirdPartyTransaction - Get third party transaction tag
+// Gets a tag from the third party transaction
 func (s *SDK) GetTagFromThirdPartyTransaction(ctx context.Context, request operations.GetTagFromThirdPartyTransactionRequest) (*operations.GetTagFromThirdPartyTransactionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/ThirdPartyTransaction/{ThirdPartyTransactionId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -19793,7 +20319,7 @@ func (s *SDK) GetTagFromThirdPartyTransaction(ctx context.Context, request opera
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19863,8 +20389,10 @@ func (s *SDK) GetTagFromThirdPartyTransaction(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetTagFromUser - Get user tag
+// Gets a tag from the user
 func (s *SDK) GetTagFromUser(ctx context.Context, request operations.GetTagFromUserRequest) (*operations.GetTagFromUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/User/{UserId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -19874,7 +20402,7 @@ func (s *SDK) GetTagFromUser(ctx context.Context, request operations.GetTagFromU
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -19944,8 +20472,10 @@ func (s *SDK) GetTagFromUser(ctx context.Context, request operations.GetTagFromU
 	return res, nil
 }
 
+// GetTagsFromCisInstruction - Get all tags from the CIS instruction
+// Gets all the tags from the CIS instruction
 func (s *SDK) GetTagsFromCisInstruction(ctx context.Context, request operations.GetTagsFromCisInstructionRequest) (*operations.GetTagsFromCisInstructionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisInstruction/{CisInstructionId}/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -19955,7 +20485,7 @@ func (s *SDK) GetTagsFromCisInstruction(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20025,8 +20555,10 @@ func (s *SDK) GetTagsFromCisInstruction(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetTagsFromCisLine - Get all tags from the CIS line
+// Gets all the tags from the CIS line
 func (s *SDK) GetTagsFromCisLine(ctx context.Context, request operations.GetTagsFromCisLineRequest) (*operations.GetTagsFromCisLineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisLine/{CisLineId}/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -20036,7 +20568,7 @@ func (s *SDK) GetTagsFromCisLine(ctx context.Context, request operations.GetTags
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20106,8 +20638,10 @@ func (s *SDK) GetTagsFromCisLine(ctx context.Context, request operations.GetTags
 	return res, nil
 }
 
+// GetTagsFromCisLineType - Get all tags from the CIS line type
+// Gets all the tags from the CIS line type
 func (s *SDK) GetTagsFromCisLineType(ctx context.Context, request operations.GetTagsFromCisLineTypeRequest) (*operations.GetTagsFromCisLineTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/CisLineType/{CisLineTypeId}/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -20117,7 +20651,7 @@ func (s *SDK) GetTagsFromCisLineType(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20187,8 +20721,10 @@ func (s *SDK) GetTagsFromCisLineType(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetTagsFromEmployee - Get all employee tags
+// Gets all the tags from the employee
 func (s *SDK) GetTagsFromEmployee(ctx context.Context, request operations.GetTagsFromEmployeeRequest) (*operations.GetTagsFromEmployeeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -20198,7 +20734,7 @@ func (s *SDK) GetTagsFromEmployee(ctx context.Context, request operations.GetTag
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20268,8 +20804,10 @@ func (s *SDK) GetTagsFromEmployee(ctx context.Context, request operations.GetTag
 	return res, nil
 }
 
+// GetTagsFromEmployeeRevision - Get all employee revision tags
+// Gets all the tags from the employee revision
 func (s *SDK) GetTagsFromEmployeeRevision(ctx context.Context, request operations.GetTagsFromEmployeeRevisionRequest) (*operations.GetTagsFromEmployeeRevisionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/Tags/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -20279,7 +20817,7 @@ func (s *SDK) GetTagsFromEmployeeRevision(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20349,8 +20887,10 @@ func (s *SDK) GetTagsFromEmployeeRevision(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetTagsFromEmployer - Get all employer tags
+// Gets all the tags from the employer
 func (s *SDK) GetTagsFromEmployer(ctx context.Context, request operations.GetTagsFromEmployerRequest) (*operations.GetTagsFromEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -20360,7 +20900,7 @@ func (s *SDK) GetTagsFromEmployer(ctx context.Context, request operations.GetTag
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20430,8 +20970,10 @@ func (s *SDK) GetTagsFromEmployer(ctx context.Context, request operations.GetTag
 	return res, nil
 }
 
+// GetTagsFromEmployerRevision - Get all employer revision tags
+// Gets all the tags from the employer revision
 func (s *SDK) GetTagsFromEmployerRevision(ctx context.Context, request operations.GetTagsFromEmployerRevisionRequest) (*operations.GetTagsFromEmployerRevisionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Tags/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -20441,7 +20983,7 @@ func (s *SDK) GetTagsFromEmployerRevision(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20511,8 +21053,10 @@ func (s *SDK) GetTagsFromEmployerRevision(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetTagsFromHolidayScheme - Get all tags from the holiday scheme
+// Gets all the tags from the holiday scheme
 func (s *SDK) GetTagsFromHolidayScheme(ctx context.Context, request operations.GetTagsFromHolidaySchemeRequest) (*operations.GetTagsFromHolidaySchemeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/HolidayScheme/{HolidaySchemeId}/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -20522,7 +21066,7 @@ func (s *SDK) GetTagsFromHolidayScheme(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20592,8 +21136,10 @@ func (s *SDK) GetTagsFromHolidayScheme(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetTagsFromHolidaySchemeRevision - Get all holiday scheme revision tags
+// Gets all the tags from the holiday scheme revision
 func (s *SDK) GetTagsFromHolidaySchemeRevision(ctx context.Context, request operations.GetTagsFromHolidaySchemeRevisionRequest) (*operations.GetTagsFromHolidaySchemeRevisionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/HolidayScheme/{HolidaySchemeId}/Tags/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -20603,7 +21149,7 @@ func (s *SDK) GetTagsFromHolidaySchemeRevision(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20673,8 +21219,10 @@ func (s *SDK) GetTagsFromHolidaySchemeRevision(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetTagsFromJournalLine - Get tags from journal line
+// Gets all tags from the journal line
 func (s *SDK) GetTagsFromJournalLine(ctx context.Context, request operations.GetTagsFromJournalLineRequest) (*operations.GetTagsFromJournalLineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/JournalLine/{JournalLineId}/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -20684,7 +21232,7 @@ func (s *SDK) GetTagsFromJournalLine(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20754,8 +21302,10 @@ func (s *SDK) GetTagsFromJournalLine(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetTagsFromPayCode - Get all pay code tags
+// Gets all the tags from the pay code
 func (s *SDK) GetTagsFromPayCode(ctx context.Context, request operations.GetTagsFromPayCodeRequest) (*operations.GetTagsFromPayCodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PayCode/{PayCodeId}/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -20765,7 +21315,7 @@ func (s *SDK) GetTagsFromPayCode(ctx context.Context, request operations.GetTags
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20835,8 +21385,10 @@ func (s *SDK) GetTagsFromPayCode(ctx context.Context, request operations.GetTags
 	return res, nil
 }
 
+// GetTagsFromPayInstruction - Get all tags from the pay instruction
+// Gets all the tags from the pay instruction
 func (s *SDK) GetTagsFromPayInstruction(ctx context.Context, request operations.GetTagsFromPayInstructionRequest) (*operations.GetTagsFromPayInstructionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayInstruction/{PayInstructionId}/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -20846,7 +21398,7 @@ func (s *SDK) GetTagsFromPayInstruction(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20916,8 +21468,10 @@ func (s *SDK) GetTagsFromPayInstruction(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetTagsFromPayLine - Get all tags from the pay line
+// Gets all the tags from the pay line
 func (s *SDK) GetTagsFromPayLine(ctx context.Context, request operations.GetTagsFromPayLineRequest) (*operations.GetTagsFromPayLineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayLine/{PayLineId}/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -20927,7 +21481,7 @@ func (s *SDK) GetTagsFromPayLine(ctx context.Context, request operations.GetTags
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -20997,8 +21551,10 @@ func (s *SDK) GetTagsFromPayLine(ctx context.Context, request operations.GetTags
 	return res, nil
 }
 
+// GetTagsFromPayRun - Get all pay run tags
+// Gets all the tags from the pay run
 func (s *SDK) GetTagsFromPayRun(ctx context.Context, request operations.GetTagsFromPayRunRequest) (*operations.GetTagsFromPayRunResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRun/{PayRunId}/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -21008,7 +21564,7 @@ func (s *SDK) GetTagsFromPayRun(ctx context.Context, request operations.GetTagsF
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21078,8 +21634,10 @@ func (s *SDK) GetTagsFromPayRun(ctx context.Context, request operations.GetTagsF
 	return res, nil
 }
 
+// GetTagsFromPaySchedule - Get all pay schedule tags
+// Gets all the tags from the pay schedule
 func (s *SDK) GetTagsFromPaySchedule(ctx context.Context, request operations.GetTagsFromPayScheduleRequest) (*operations.GetTagsFromPayScheduleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -21089,7 +21647,7 @@ func (s *SDK) GetTagsFromPaySchedule(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21159,8 +21717,10 @@ func (s *SDK) GetTagsFromPaySchedule(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetTagsFromRtiTransaction - Get all tags from RTI transaction
+// Gets all the tags from the RTI transaction
 func (s *SDK) GetTagsFromRtiTransaction(ctx context.Context, request operations.GetTagsFromRtiTransactionRequest) (*operations.GetTagsFromRtiTransactionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/RtiTransaction/{RtiTransactionId}/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -21170,7 +21730,7 @@ func (s *SDK) GetTagsFromRtiTransaction(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21240,8 +21800,10 @@ func (s *SDK) GetTagsFromRtiTransaction(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetTagsFromSubContractor - Get all tags from the sub contractor
+// Gets all the tags from the sub contractor
 func (s *SDK) GetTagsFromSubContractor(ctx context.Context, request operations.GetTagsFromSubContractorRequest) (*operations.GetTagsFromSubContractorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -21251,7 +21813,7 @@ func (s *SDK) GetTagsFromSubContractor(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21321,8 +21883,10 @@ func (s *SDK) GetTagsFromSubContractor(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetTagsFromSubContractorRevision - Get all sub contractor revision tags
+// Gets all the tags from the sub contractor revision
 func (s *SDK) GetTagsFromSubContractorRevision(ctx context.Context, request operations.GetTagsFromSubContractorRevisionRequest) (*operations.GetTagsFromSubContractorRevisionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/Tags/{EffectiveDate}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -21332,7 +21896,7 @@ func (s *SDK) GetTagsFromSubContractorRevision(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21402,8 +21966,10 @@ func (s *SDK) GetTagsFromSubContractorRevision(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetTagsFromThirdPartyTransaction - Get tags from third party transaction
+// Gets all tags from the third party transaction
 func (s *SDK) GetTagsFromThirdPartyTransaction(ctx context.Context, request operations.GetTagsFromThirdPartyTransactionRequest) (*operations.GetTagsFromThirdPartyTransactionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/ThirdPartyTransaction/{ThirdPartyTransactionId}/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -21413,7 +21979,7 @@ func (s *SDK) GetTagsFromThirdPartyTransaction(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21483,8 +22049,10 @@ func (s *SDK) GetTagsFromThirdPartyTransaction(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetTagsFromUser - Get tags from user
+// Gets all tags from the user
 func (s *SDK) GetTagsFromUser(ctx context.Context, request operations.GetTagsFromUserRequest) (*operations.GetTagsFromUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/User/{UserId}/Tags", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -21494,7 +22062,7 @@ func (s *SDK) GetTagsFromUser(ctx context.Context, request operations.GetTagsFro
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21564,8 +22132,10 @@ func (s *SDK) GetTagsFromUser(ctx context.Context, request operations.GetTagsFro
 	return res, nil
 }
 
+// GetTemplateModel - Get the object template
+// Returns a template instance of the specified data type
 func (s *SDK) GetTemplateModel(ctx context.Context, request operations.GetTemplateModelRequest) (*operations.GetTemplateModelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Template/{DtoDataType}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -21575,7 +22145,7 @@ func (s *SDK) GetTemplateModel(ctx context.Context, request operations.GetTempla
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21645,8 +22215,10 @@ func (s *SDK) GetTemplateModel(ctx context.Context, request operations.GetTempla
 	return res, nil
 }
 
+// GetTemplates - Get a list of all available data object tempaltes
+// Returns a collection of links to all the available data object templates
 func (s *SDK) GetTemplates(ctx context.Context, request operations.GetTemplatesRequest) (*operations.GetTemplatesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Templates"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -21656,7 +22228,7 @@ func (s *SDK) GetTemplates(ctx context.Context, request operations.GetTemplatesR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21726,8 +22298,10 @@ func (s *SDK) GetTemplates(ctx context.Context, request operations.GetTemplatesR
 	return res, nil
 }
 
+// GetThirdPartyJobInfo - Get the Third Party job information
+// Return the the Third Party job information
 func (s *SDK) GetThirdPartyJobInfo(ctx context.Context, request operations.GetThirdPartyJobInfoRequest) (*operations.GetThirdPartyJobInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/ThirdParty/{JobId}/Info", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -21737,7 +22311,7 @@ func (s *SDK) GetThirdPartyJobInfo(ctx context.Context, request operations.GetTh
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21807,8 +22381,10 @@ func (s *SDK) GetThirdPartyJobInfo(ctx context.Context, request operations.GetTh
 	return res, nil
 }
 
+// GetThirdPartyJobProgress - Get the Third Party job progress
+// Return the the Third Party job progress
 func (s *SDK) GetThirdPartyJobProgress(ctx context.Context, request operations.GetThirdPartyJobProgressRequest) (*operations.GetThirdPartyJobProgressResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/ThirdParty/{JobId}/Progress", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -21818,7 +22394,7 @@ func (s *SDK) GetThirdPartyJobProgress(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21879,8 +22455,10 @@ func (s *SDK) GetThirdPartyJobProgress(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetThirdPartyJobStatus - Get the Third Party job status
+// Return the the Third Party job status
 func (s *SDK) GetThirdPartyJobStatus(ctx context.Context, request operations.GetThirdPartyJobStatusRequest) (*operations.GetThirdPartyJobStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Jobs/ThirdParty/{JobId}/Status", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -21890,7 +22468,7 @@ func (s *SDK) GetThirdPartyJobStatus(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -21951,8 +22529,10 @@ func (s *SDK) GetThirdPartyJobStatus(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetThirdPartyJobs - Get all Third Party jobs
+// Gets all the Third Party jobs
 func (s *SDK) GetThirdPartyJobs(ctx context.Context, request operations.GetThirdPartyJobsRequest) (*operations.GetThirdPartyJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Jobs/ThirdParty"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -21962,7 +22542,7 @@ func (s *SDK) GetThirdPartyJobs(ctx context.Context, request operations.GetThird
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22032,8 +22612,10 @@ func (s *SDK) GetThirdPartyJobs(ctx context.Context, request operations.GetThird
 	return res, nil
 }
 
+// GetThirdPartyTransaction - Get a third party transaction
+// Get a third party transaction
 func (s *SDK) GetThirdPartyTransaction(ctx context.Context, request operations.GetThirdPartyTransactionRequest) (*operations.GetThirdPartyTransactionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/ThirdPartyTransaction/{ThirdPartyTransactionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -22043,7 +22625,7 @@ func (s *SDK) GetThirdPartyTransaction(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22113,8 +22695,10 @@ func (s *SDK) GetThirdPartyTransaction(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetThirdPartyTransactions - Get all third party transaction links
+// Get all third party transaction links
 func (s *SDK) GetThirdPartyTransactions(ctx context.Context, request operations.GetThirdPartyTransactionsRequest) (*operations.GetThirdPartyTransactionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/ThirdPartyTransactions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -22124,7 +22708,7 @@ func (s *SDK) GetThirdPartyTransactions(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22194,8 +22778,10 @@ func (s *SDK) GetThirdPartyTransactions(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetTransformDefinitionFromApplication - Get the transform definition
+// Returns the specified transform definition from the authroised application
 func (s *SDK) GetTransformDefinitionFromApplication(ctx context.Context, request operations.GetTransformDefinitionFromApplicationRequest) (*operations.GetTransformDefinitionFromApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Transform/{TransformDefinitionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -22205,7 +22791,7 @@ func (s *SDK) GetTransformDefinitionFromApplication(ctx context.Context, request
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22275,8 +22861,10 @@ func (s *SDK) GetTransformDefinitionFromApplication(ctx context.Context, request
 	return res, nil
 }
 
+// GetTransformDefinitionsFromApplication - Gets all transform definitions
+// Get links to all saved transform definitions under authorised application
 func (s *SDK) GetTransformDefinitionsFromApplication(ctx context.Context, request operations.GetTransformDefinitionsFromApplicationRequest) (*operations.GetTransformDefinitionsFromApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Transforms"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -22286,7 +22874,7 @@ func (s *SDK) GetTransformDefinitionsFromApplication(ctx context.Context, reques
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22356,8 +22944,10 @@ func (s *SDK) GetTransformDefinitionsFromApplication(ctx context.Context, reques
 	return res, nil
 }
 
+// GetUser - Gets the user object
+// Gets the user object for application
 func (s *SDK) GetUser(ctx context.Context, request operations.GetUserRequest) (*operations.GetUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/User/{UserId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -22367,7 +22957,7 @@ func (s *SDK) GetUser(ctx context.Context, request operations.GetUserRequest) (*
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22437,8 +23027,10 @@ func (s *SDK) GetUser(ctx context.Context, request operations.GetUserRequest) (*
 	return res, nil
 }
 
+// GetUsers - Gets all user objects
+// Gets all user objects for application
 func (s *SDK) GetUsers(ctx context.Context, request operations.GetUsersRequest) (*operations.GetUsersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Users"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -22448,7 +23040,7 @@ func (s *SDK) GetUsers(ctx context.Context, request operations.GetUsersRequest) 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22518,8 +23110,10 @@ func (s *SDK) GetUsers(ctx context.Context, request operations.GetUsersRequest) 
 	return res, nil
 }
 
+// PatchCisInstruction - Patches the CIS instruction
+// Update an existing CIS instruction object
 func (s *SDK) PatchCisInstruction(ctx context.Context, request operations.PatchCisInstructionRequest) (*operations.PatchCisInstructionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisInstruction/{CisInstructionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -22529,7 +23123,7 @@ func (s *SDK) PatchCisInstruction(ctx context.Context, request operations.PatchC
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22599,8 +23193,10 @@ func (s *SDK) PatchCisInstruction(ctx context.Context, request operations.PatchC
 	return res, nil
 }
 
+// PatchDpsMessage - Patches the DPS message
+// Patches the specified DPS message with the supplied values
 func (s *SDK) PatchDpsMessage(ctx context.Context, request operations.PatchDpsMessageRequest) (*operations.PatchDpsMessageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/DpsMessage/{DpsMessageId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -22610,7 +23206,7 @@ func (s *SDK) PatchDpsMessage(ctx context.Context, request operations.PatchDpsMe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22680,8 +23276,10 @@ func (s *SDK) PatchDpsMessage(ctx context.Context, request operations.PatchDpsMe
 	return res, nil
 }
 
+// PatchEmployee - Patches the employee
+// Patches the specified employee with the supplied values
 func (s *SDK) PatchEmployee(ctx context.Context, request operations.PatchEmployeeRequest) (*operations.PatchEmployeeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22701,7 +23299,7 @@ func (s *SDK) PatchEmployee(ctx context.Context, request operations.PatchEmploye
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22771,8 +23369,10 @@ func (s *SDK) PatchEmployee(ctx context.Context, request operations.PatchEmploye
 	return res, nil
 }
 
+// PatchEmployer - Patches the employer
+// Patches the specified employer with the supplied values
 func (s *SDK) PatchEmployer(ctx context.Context, request operations.PatchEmployerRequest) (*operations.PatchEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22792,7 +23392,7 @@ func (s *SDK) PatchEmployer(ctx context.Context, request operations.PatchEmploye
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22862,8 +23462,10 @@ func (s *SDK) PatchEmployer(ctx context.Context, request operations.PatchEmploye
 	return res, nil
 }
 
+// PatchHolidayScheme - Patches the holiday scheme
+// Patches the specified holiday scheme with the supplied values
 func (s *SDK) PatchHolidayScheme(ctx context.Context, request operations.PatchHolidaySchemeRequest) (*operations.PatchHolidaySchemeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/HolidayScheme/{HolidaySchemeId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22883,7 +23485,7 @@ func (s *SDK) PatchHolidayScheme(ctx context.Context, request operations.PatchHo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -22953,8 +23555,10 @@ func (s *SDK) PatchHolidayScheme(ctx context.Context, request operations.PatchHo
 	return res, nil
 }
 
+// PatchPayCode - Patches the pay code
+// Patches the specified pay code object with the supplied values
 func (s *SDK) PatchPayCode(ctx context.Context, request operations.PatchPayCodeRequest) (*operations.PatchPayCodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PayCode/{PayCodeId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -22974,7 +23578,7 @@ func (s *SDK) PatchPayCode(ctx context.Context, request operations.PatchPayCodeR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23044,8 +23648,10 @@ func (s *SDK) PatchPayCode(ctx context.Context, request operations.PatchPayCodeR
 	return res, nil
 }
 
+// PatchPayInstruction - Sparse Update of a Pay Instruction
+// Patches the specified pay instruction with the supplied values
 func (s *SDK) PatchPayInstruction(ctx context.Context, request operations.PatchPayInstructionRequest) (*operations.PatchPayInstructionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayInstruction/{PayInstructionId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23065,7 +23671,7 @@ func (s *SDK) PatchPayInstruction(ctx context.Context, request operations.PatchP
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23135,8 +23741,10 @@ func (s *SDK) PatchPayInstruction(ctx context.Context, request operations.PatchP
 	return res, nil
 }
 
+// PatchPension - Patches the pension
+// Patches the specified pension with the supplied values
 func (s *SDK) PatchPension(ctx context.Context, request operations.PatchPensionRequest) (*operations.PatchPensionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Pension/{PensionId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23156,7 +23764,7 @@ func (s *SDK) PatchPension(ctx context.Context, request operations.PatchPensionR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23226,8 +23834,10 @@ func (s *SDK) PatchPension(ctx context.Context, request operations.PatchPensionR
 	return res, nil
 }
 
+// PatchPermission - Patch permission object
+// Patch the permission object at the specified resource location
 func (s *SDK) PatchPermission(ctx context.Context, request operations.PatchPermissionRequest) (*operations.PatchPermissionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Permission/{PermissionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -23237,7 +23847,7 @@ func (s *SDK) PatchPermission(ctx context.Context, request operations.PatchPermi
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23307,8 +23917,10 @@ func (s *SDK) PatchPermission(ctx context.Context, request operations.PatchPermi
 	return res, nil
 }
 
+// PatchSubContractor - Patches the sub contractor
+// Patches the specified sub contractor with the supplied values
 func (s *SDK) PatchSubContractor(ctx context.Context, request operations.PatchSubContractorRequest) (*operations.PatchSubContractorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23328,7 +23940,7 @@ func (s *SDK) PatchSubContractor(ctx context.Context, request operations.PatchSu
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23398,8 +24010,10 @@ func (s *SDK) PatchSubContractor(ctx context.Context, request operations.PatchSu
 	return res, nil
 }
 
+// PatchUser - Patch user object
+// Patch the user object at the specified resource location
 func (s *SDK) PatchUser(ctx context.Context, request operations.PatchUserRequest) (*operations.PatchUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/User/{UserId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -23409,7 +24023,7 @@ func (s *SDK) PatchUser(ctx context.Context, request operations.PatchUserRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23479,8 +24093,10 @@ func (s *SDK) PatchUser(ctx context.Context, request operations.PatchUserRequest
 	return res, nil
 }
 
+// PostCisInstructionIntoSubContractor - Create a new CIS instruction
+// Create a new CIS instruction object
 func (s *SDK) PostCisInstructionIntoSubContractor(ctx context.Context, request operations.PostCisInstructionIntoSubContractorRequest) (*operations.PostCisInstructionIntoSubContractorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisInstructions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23500,7 +24116,7 @@ func (s *SDK) PostCisInstructionIntoSubContractor(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23570,8 +24186,10 @@ func (s *SDK) PostCisInstructionIntoSubContractor(ctx context.Context, request o
 	return res, nil
 }
 
+// PostCisLineTypeIntoEmployer - Create a new CIS line type
+// Create a new CIS line type object
 func (s *SDK) PostCisLineTypeIntoEmployer(ctx context.Context, request operations.PostCisLineTypeIntoEmployerRequest) (*operations.PostCisLineTypeIntoEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/CisLineTypes", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23591,7 +24209,7 @@ func (s *SDK) PostCisLineTypeIntoEmployer(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23661,8 +24279,10 @@ func (s *SDK) PostCisLineTypeIntoEmployer(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostDpsMessage - Posta the DPS message
+// Insert new DPS message
 func (s *SDK) PostDpsMessage(ctx context.Context, request operations.PostDpsMessageRequest) (*operations.PostDpsMessageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/DpsMessages", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -23672,7 +24292,7 @@ func (s *SDK) PostDpsMessage(ctx context.Context, request operations.PostDpsMess
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23742,8 +24362,10 @@ func (s *SDK) PostDpsMessage(ctx context.Context, request operations.PostDpsMess
 	return res, nil
 }
 
+// PostEmployeeIntoEmployer - Create a new Employee
+// Create a new employee object
 func (s *SDK) PostEmployeeIntoEmployer(ctx context.Context, request operations.PostEmployeeIntoEmployerRequest) (*operations.PostEmployeeIntoEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employees", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23763,7 +24385,7 @@ func (s *SDK) PostEmployeeIntoEmployer(ctx context.Context, request operations.P
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23833,8 +24455,10 @@ func (s *SDK) PostEmployeeIntoEmployer(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostEmployeeSecret - Create a new employee secret
+// Create new employee secret using auto generated resource location key
 func (s *SDK) PostEmployeeSecret(ctx context.Context, request operations.PostEmployeeSecretRequest) (*operations.PostEmployeeSecretResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/Secrets", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -23844,7 +24468,7 @@ func (s *SDK) PostEmployeeSecret(ctx context.Context, request operations.PostEmp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -23914,8 +24538,10 @@ func (s *SDK) PostEmployeeSecret(ctx context.Context, request operations.PostEmp
 	return res, nil
 }
 
+// PostEmployer - Create a new Employer
+// Create a new employer object
 func (s *SDK) PostEmployer(ctx context.Context, request operations.PostEmployerRequest) (*operations.PostEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Employers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -23935,7 +24561,7 @@ func (s *SDK) PostEmployer(ctx context.Context, request operations.PostEmployerR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24005,8 +24631,10 @@ func (s *SDK) PostEmployer(ctx context.Context, request operations.PostEmployerR
 	return res, nil
 }
 
+// PostEmployerSecret - Create a new employer secret
+// Create new employer secret using auto generated resource location key
 func (s *SDK) PostEmployerSecret(ctx context.Context, request operations.PostEmployerSecretRequest) (*operations.PostEmployerSecretResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Secrets", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -24016,7 +24644,7 @@ func (s *SDK) PostEmployerSecret(ctx context.Context, request operations.PostEmp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24086,8 +24714,10 @@ func (s *SDK) PostEmployerSecret(ctx context.Context, request operations.PostEmp
 	return res, nil
 }
 
+// PostHolidaySchemeIntoEmployer - Create a new holiday scheme
+// Create a new holiday scheme object
 func (s *SDK) PostHolidaySchemeIntoEmployer(ctx context.Context, request operations.PostHolidaySchemeIntoEmployerRequest) (*operations.PostHolidaySchemeIntoEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/HolidaySchemes", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24107,7 +24737,7 @@ func (s *SDK) PostHolidaySchemeIntoEmployer(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24177,8 +24807,10 @@ func (s *SDK) PostHolidaySchemeIntoEmployer(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostJournalInstruction - Creates a new Journal Instruction
+// Creates a new Journal instruction object
 func (s *SDK) PostJournalInstruction(ctx context.Context, request operations.PostJournalInstructionRequest) (*operations.PostJournalInstructionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/JournalInstructions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -24188,7 +24820,7 @@ func (s *SDK) PostJournalInstruction(ctx context.Context, request operations.Pos
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24258,8 +24890,10 @@ func (s *SDK) PostJournalInstruction(ctx context.Context, request operations.Pos
 	return res, nil
 }
 
+// PostJournalInstructionTemplate - Creates a new Journal Instruction template
+// Creates a new Journal instruction teamplte object
 func (s *SDK) PostJournalInstructionTemplate(ctx context.Context, request operations.PostJournalInstructionTemplateRequest) (*operations.PostJournalInstructionTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/JournalInstructions"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -24269,7 +24903,7 @@ func (s *SDK) PostJournalInstructionTemplate(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24339,8 +24973,10 @@ func (s *SDK) PostJournalInstructionTemplate(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostNewAeAssessment - Insert new auto enrolment assessment
+// Creates a new auto enrolment assessment for the employee. Used to insert historical assessments
 func (s *SDK) PostNewAeAssessment(ctx context.Context, request operations.PostNewAeAssessmentRequest) (*operations.PostNewAeAssessmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/AEAssessments", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24360,7 +24996,7 @@ func (s *SDK) PostNewAeAssessment(ctx context.Context, request operations.PostNe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24430,8 +25066,10 @@ func (s *SDK) PostNewAeAssessment(ctx context.Context, request operations.PostNe
 	return res, nil
 }
 
+// PostNewBatchJob - Create new Batch job
+// Adds a new Batch job to the queue and returns the job info
 func (s *SDK) PostNewBatchJob(ctx context.Context, request operations.PostNewBatchJobRequest) (*operations.PostNewBatchJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Jobs/Batch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24451,7 +25089,7 @@ func (s *SDK) PostNewBatchJob(ctx context.Context, request operations.PostNewBat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24521,8 +25159,10 @@ func (s *SDK) PostNewBatchJob(ctx context.Context, request operations.PostNewBat
 	return res, nil
 }
 
+// PostNewCisJob - Create new CIS job
+// Adds a new CIS job to the queue and returns the job info
 func (s *SDK) PostNewCisJob(ctx context.Context, request operations.PostNewCisJobRequest) (*operations.PostNewCisJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Jobs/Cis"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24542,7 +25182,7 @@ func (s *SDK) PostNewCisJob(ctx context.Context, request operations.PostNewCisJo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24612,8 +25252,10 @@ func (s *SDK) PostNewCisJob(ctx context.Context, request operations.PostNewCisJo
 	return res, nil
 }
 
+// PostNewDpsJob - Create new DPS job
+// Creates the new DPS job to the queue and returns the job info
 func (s *SDK) PostNewDpsJob(ctx context.Context, request operations.PostNewDpsJobRequest) (*operations.PostNewDpsJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Jobs/Dps"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24633,7 +25275,7 @@ func (s *SDK) PostNewDpsJob(ctx context.Context, request operations.PostNewDpsJo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24703,8 +25345,10 @@ func (s *SDK) PostNewDpsJob(ctx context.Context, request operations.PostNewDpsJo
 	return res, nil
 }
 
+// PostNewPayRunJob - Create new PayRun job
+// Creates the new pay run job to the queue and returns the job info
 func (s *SDK) PostNewPayRunJob(ctx context.Context, request operations.PostNewPayRunJobRequest) (*operations.PostNewPayRunJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Jobs/PayRuns"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24724,7 +25368,7 @@ func (s *SDK) PostNewPayRunJob(ctx context.Context, request operations.PostNewPa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24794,8 +25438,10 @@ func (s *SDK) PostNewPayRunJob(ctx context.Context, request operations.PostNewPa
 	return res, nil
 }
 
+// PostNewRtiJob - Create new RTI job
+// Creates the new RTI job to the queue and returns the job info
 func (s *SDK) PostNewRtiJob(ctx context.Context, request operations.PostNewRtiJobRequest) (*operations.PostNewRtiJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Jobs/Rti"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24815,7 +25461,7 @@ func (s *SDK) PostNewRtiJob(ctx context.Context, request operations.PostNewRtiJo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24885,8 +25531,10 @@ func (s *SDK) PostNewRtiJob(ctx context.Context, request operations.PostNewRtiJo
 	return res, nil
 }
 
+// PostNewThirdPartyJob - Create new Third Party job
+// Adds a new Third Party job to the queue and returns the job info
 func (s *SDK) PostNewThirdPartyJob(ctx context.Context, request operations.PostNewThirdPartyJobRequest) (*operations.PostNewThirdPartyJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Jobs/ThirdParty"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24906,7 +25554,7 @@ func (s *SDK) PostNewThirdPartyJob(ctx context.Context, request operations.PostN
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -24976,8 +25624,10 @@ func (s *SDK) PostNewThirdPartyJob(ctx context.Context, request operations.PostN
 	return res, nil
 }
 
+// PostNominalCode - Insert nominal code
+// Inserts a new nominal code
 func (s *SDK) PostNominalCode(ctx context.Context, request operations.PostNominalCodeRequest) (*operations.PostNominalCodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/NominalCodes", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -24997,7 +25647,7 @@ func (s *SDK) PostNominalCode(ctx context.Context, request operations.PostNomina
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25067,8 +25717,10 @@ func (s *SDK) PostNominalCode(ctx context.Context, request operations.PostNomina
 	return res, nil
 }
 
+// PostPayCode - Create a new pay code
+// Create a new pay code object
 func (s *SDK) PostPayCode(ctx context.Context, request operations.PostPayCodeRequest) (*operations.PostPayCodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PayCodes", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25088,7 +25740,7 @@ func (s *SDK) PostPayCode(ctx context.Context, request operations.PostPayCodeReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25158,8 +25810,10 @@ func (s *SDK) PostPayCode(ctx context.Context, request operations.PostPayCodeReq
 	return res, nil
 }
 
+// PostPayInstruction - Creates a new Pay Instruction
+// Creates a new pay instruction object
 func (s *SDK) PostPayInstruction(ctx context.Context, request operations.PostPayInstructionRequest) (*operations.PostPayInstructionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayInstructions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25179,7 +25833,7 @@ func (s *SDK) PostPayInstruction(ctx context.Context, request operations.PostPay
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25249,8 +25903,10 @@ func (s *SDK) PostPayInstruction(ctx context.Context, request operations.PostPay
 	return res, nil
 }
 
+// PostPaySchedule - Create a new pay schedule
+// Create a new pay schedule object
 func (s *SDK) PostPaySchedule(ctx context.Context, request operations.PostPayScheduleRequest) (*operations.PostPayScheduleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedules", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25270,7 +25926,7 @@ func (s *SDK) PostPaySchedule(ctx context.Context, request operations.PostPaySch
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25340,8 +25996,10 @@ func (s *SDK) PostPaySchedule(ctx context.Context, request operations.PostPaySch
 	return res, nil
 }
 
+// PostPensionIntoEmployer - Create a new Pension
+// Create a new pension object
 func (s *SDK) PostPensionIntoEmployer(ctx context.Context, request operations.PostPensionIntoEmployerRequest) (*operations.PostPensionIntoEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Pensions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25361,7 +26019,7 @@ func (s *SDK) PostPensionIntoEmployer(ctx context.Context, request operations.Po
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25431,8 +26089,10 @@ func (s *SDK) PostPensionIntoEmployer(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostPermission - Post permisson object
+// Post the new permission object into the application
 func (s *SDK) PostPermission(ctx context.Context, request operations.PostPermissionRequest) (*operations.PostPermissionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Permissions"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -25442,7 +26102,7 @@ func (s *SDK) PostPermission(ctx context.Context, request operations.PostPermiss
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25512,8 +26172,10 @@ func (s *SDK) PostPermission(ctx context.Context, request operations.PostPermiss
 	return res, nil
 }
 
+// PostReportDefinition - Create a new report definition
+// Creates a new report defintion object
 func (s *SDK) PostReportDefinition(ctx context.Context, request operations.PostReportDefinitionRequest) (*operations.PostReportDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Reports"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25533,7 +26195,7 @@ func (s *SDK) PostReportDefinition(ctx context.Context, request operations.PostR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25603,8 +26265,10 @@ func (s *SDK) PostReportDefinition(ctx context.Context, request operations.PostR
 	return res, nil
 }
 
+// PostReportingInstruction - Creates a new Reporting Instruction
+// Creates a new reporting instruction object
 func (s *SDK) PostReportingInstruction(ctx context.Context, request operations.PostReportingInstructionRequest) (*operations.PostReportingInstructionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/ReportingInstructions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25624,7 +26288,7 @@ func (s *SDK) PostReportingInstruction(ctx context.Context, request operations.P
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25694,8 +26358,10 @@ func (s *SDK) PostReportingInstruction(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostSubContractorIntoEmployer - Create a new sub contractor
+// Create a new sub contractor object
 func (s *SDK) PostSubContractorIntoEmployer(ctx context.Context, request operations.PostSubContractorIntoEmployerRequest) (*operations.PostSubContractorIntoEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractors", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25715,7 +26381,7 @@ func (s *SDK) PostSubContractorIntoEmployer(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25785,8 +26451,10 @@ func (s *SDK) PostSubContractorIntoEmployer(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostTransformDefinition - Create a new transform definition
+// Creates a new transform defintion object
 func (s *SDK) PostTransformDefinition(ctx context.Context, request operations.PostTransformDefinitionRequest) (*operations.PostTransformDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Transforms"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25806,7 +26474,7 @@ func (s *SDK) PostTransformDefinition(ctx context.Context, request operations.Po
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25876,8 +26544,10 @@ func (s *SDK) PostTransformDefinition(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostUser - Post user object
+// Post the new user object into the application
 func (s *SDK) PostUser(ctx context.Context, request operations.PostUserRequest) (*operations.PostUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/Users"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -25887,7 +26557,7 @@ func (s *SDK) PostUser(ctx context.Context, request operations.PostUserRequest) 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -25957,8 +26627,10 @@ func (s *SDK) PostUser(ctx context.Context, request operations.PostUserRequest) 
 	return res, nil
 }
 
+// PutCisInstructionIntoSubContractor - Updates the CIS instruction
+// Insert or update existing CIS instruction object
 func (s *SDK) PutCisInstructionIntoSubContractor(ctx context.Context, request operations.PutCisInstructionIntoSubContractorRequest) (*operations.PutCisInstructionIntoSubContractorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisInstruction/{CisInstructionId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -25978,7 +26650,7 @@ func (s *SDK) PutCisInstructionIntoSubContractor(ctx context.Context, request op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26048,8 +26720,10 @@ func (s *SDK) PutCisInstructionIntoSubContractor(ctx context.Context, request op
 	return res, nil
 }
 
+// PutCisInstructionTag - Insert CIS instruction tag
+// Inserts a new tag on the CIS instruction
 func (s *SDK) PutCisInstructionTag(ctx context.Context, request operations.PutCisInstructionTagRequest) (*operations.PutCisInstructionTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisInstruction/{CisInstructionId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -26059,7 +26733,7 @@ func (s *SDK) PutCisInstructionTag(ctx context.Context, request operations.PutCi
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26129,8 +26803,10 @@ func (s *SDK) PutCisInstructionTag(ctx context.Context, request operations.PutCi
 	return res, nil
 }
 
+// PutCisLineTag - Insert CIS line tag
+// Inserts a new tag on the CIS line
 func (s *SDK) PutCisLineTag(ctx context.Context, request operations.PutCisLineTagRequest) (*operations.PutCisLineTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/CisLine/{CisLineId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -26140,7 +26816,7 @@ func (s *SDK) PutCisLineTag(ctx context.Context, request operations.PutCisLineTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26210,8 +26886,10 @@ func (s *SDK) PutCisLineTag(ctx context.Context, request operations.PutCisLineTa
 	return res, nil
 }
 
+// PutCisLineTypeIntoEmployer - Updates the CIS line type
+// Updates the existing specified CIS line type object
 func (s *SDK) PutCisLineTypeIntoEmployer(ctx context.Context, request operations.PutCisLineTypeIntoEmployerRequest) (*operations.PutCisLineTypeIntoEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/CisLineType/{CisLineTypeId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26231,7 +26909,7 @@ func (s *SDK) PutCisLineTypeIntoEmployer(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26301,8 +26979,10 @@ func (s *SDK) PutCisLineTypeIntoEmployer(ctx context.Context, request operations
 	return res, nil
 }
 
+// PutCisLineTypeTag - Insert CIS line type tag
+// Inserts a new tag on the CIS line type
 func (s *SDK) PutCisLineTypeTag(ctx context.Context, request operations.PutCisLineTypeTagRequest) (*operations.PutCisLineTypeTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/CisLineType/{CisLineTypeId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -26312,7 +26992,7 @@ func (s *SDK) PutCisLineTypeTag(ctx context.Context, request operations.PutCisLi
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26382,8 +27062,10 @@ func (s *SDK) PutCisLineTypeTag(ctx context.Context, request operations.PutCisLi
 	return res, nil
 }
 
+// PutDpsMessage - Puts the DPS message
+// Puts the DPS message
 func (s *SDK) PutDpsMessage(ctx context.Context, request operations.PutDpsMessageRequest) (*operations.PutDpsMessageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/DpsMessage/{DpsMessageId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -26393,7 +27075,7 @@ func (s *SDK) PutDpsMessage(ctx context.Context, request operations.PutDpsMessag
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26463,8 +27145,10 @@ func (s *SDK) PutDpsMessage(ctx context.Context, request operations.PutDpsMessag
 	return res, nil
 }
 
+// PutEmployeeIntoEmployer - Updates the Employee
+// Updates the existing specified employee object
 func (s *SDK) PutEmployeeIntoEmployer(ctx context.Context, request operations.PutEmployeeIntoEmployerRequest) (*operations.PutEmployeeIntoEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26484,7 +27168,7 @@ func (s *SDK) PutEmployeeIntoEmployer(ctx context.Context, request operations.Pu
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26554,8 +27238,10 @@ func (s *SDK) PutEmployeeIntoEmployer(ctx context.Context, request operations.Pu
 	return res, nil
 }
 
+// PutEmployeeSecret - Create a new employee secret
+// Create / update an employee secret at the given resource location
 func (s *SDK) PutEmployeeSecret(ctx context.Context, request operations.PutEmployeeSecretRequest) (*operations.PutEmployeeSecretResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/Secret/{SecretId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -26565,7 +27251,7 @@ func (s *SDK) PutEmployeeSecret(ctx context.Context, request operations.PutEmplo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26635,8 +27321,10 @@ func (s *SDK) PutEmployeeSecret(ctx context.Context, request operations.PutEmplo
 	return res, nil
 }
 
+// PutEmployeeTag - Insert employee tag
+// Inserts a new tag on the employee
 func (s *SDK) PutEmployeeTag(ctx context.Context, request operations.PutEmployeeTagRequest) (*operations.PutEmployeeTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -26646,7 +27334,7 @@ func (s *SDK) PutEmployeeTag(ctx context.Context, request operations.PutEmployee
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26716,8 +27404,10 @@ func (s *SDK) PutEmployeeTag(ctx context.Context, request operations.PutEmployee
 	return res, nil
 }
 
+// PutEmployer - Updates the Employer
+// Updates the existing specified employer object
 func (s *SDK) PutEmployer(ctx context.Context, request operations.PutEmployerRequest) (*operations.PutEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26737,7 +27427,7 @@ func (s *SDK) PutEmployer(ctx context.Context, request operations.PutEmployerReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26807,8 +27497,10 @@ func (s *SDK) PutEmployer(ctx context.Context, request operations.PutEmployerReq
 	return res, nil
 }
 
+// PutEmployerSecret - Create a new employer secret
+// Create / update an employer secret at the given resource location
 func (s *SDK) PutEmployerSecret(ctx context.Context, request operations.PutEmployerSecretRequest) (*operations.PutEmployerSecretResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Secret/{SecretId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -26818,7 +27510,7 @@ func (s *SDK) PutEmployerSecret(ctx context.Context, request operations.PutEmplo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26888,8 +27580,10 @@ func (s *SDK) PutEmployerSecret(ctx context.Context, request operations.PutEmplo
 	return res, nil
 }
 
+// PutEmployerTag - Insert employer tag
+// Inserts a new tag on the employer
 func (s *SDK) PutEmployerTag(ctx context.Context, request operations.PutEmployerTagRequest) (*operations.PutEmployerTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -26899,7 +27593,7 @@ func (s *SDK) PutEmployerTag(ctx context.Context, request operations.PutEmployer
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -26969,8 +27663,10 @@ func (s *SDK) PutEmployerTag(ctx context.Context, request operations.PutEmployer
 	return res, nil
 }
 
+// PutHolidaySchemeIntoEmployer - Updates the holiday scheme
+// Updates the existing specified holiday scheme object
 func (s *SDK) PutHolidaySchemeIntoEmployer(ctx context.Context, request operations.PutHolidaySchemeIntoEmployerRequest) (*operations.PutHolidaySchemeIntoEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/HolidayScheme/{HolidaySchemeId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -26990,7 +27686,7 @@ func (s *SDK) PutHolidaySchemeIntoEmployer(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27060,8 +27756,10 @@ func (s *SDK) PutHolidaySchemeIntoEmployer(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PutHolidaySchemeTag - Insert holiday scheme tag
+// Inserts a new tag on the holiday scheme
 func (s *SDK) PutHolidaySchemeTag(ctx context.Context, request operations.PutHolidaySchemeTagRequest) (*operations.PutHolidaySchemeTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/HolidayScheme/{HolidaySchemeId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -27071,7 +27769,7 @@ func (s *SDK) PutHolidaySchemeTag(ctx context.Context, request operations.PutHol
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27141,8 +27839,10 @@ func (s *SDK) PutHolidaySchemeTag(ctx context.Context, request operations.PutHol
 	return res, nil
 }
 
+// PutJournalInstruction - Update a Journal Instruction
+// Updates the existing specified Journal instruction object
 func (s *SDK) PutJournalInstruction(ctx context.Context, request operations.PutJournalInstructionRequest) (*operations.PutJournalInstructionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/JournalInstruction/{JournalInstructionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -27152,7 +27852,7 @@ func (s *SDK) PutJournalInstruction(ctx context.Context, request operations.PutJ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27222,8 +27922,10 @@ func (s *SDK) PutJournalInstruction(ctx context.Context, request operations.PutJ
 	return res, nil
 }
 
+// PutJournalInstructionTemplate - Update a Journal Instruction template
+// Updates the existing specified Journal instruction template object
 func (s *SDK) PutJournalInstructionTemplate(ctx context.Context, request operations.PutJournalInstructionTemplateRequest) (*operations.PutJournalInstructionTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/JournalInstruction/{JournalInstructionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -27233,7 +27935,7 @@ func (s *SDK) PutJournalInstructionTemplate(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27303,8 +28005,10 @@ func (s *SDK) PutJournalInstructionTemplate(ctx context.Context, request operati
 	return res, nil
 }
 
+// PutJournalLineTag - Insert journal line tag
+// Inserts a tag on the journal line
 func (s *SDK) PutJournalLineTag(ctx context.Context, request operations.PutJournalLineTagRequest) (*operations.PutJournalLineTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/JournalLine/{JournalLineId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -27314,7 +28018,7 @@ func (s *SDK) PutJournalLineTag(ctx context.Context, request operations.PutJourn
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27384,8 +28088,10 @@ func (s *SDK) PutJournalLineTag(ctx context.Context, request operations.PutJourn
 	return res, nil
 }
 
+// PutNewAeAssessment - Insert new auto enrolment assessment
+// Creates a new auto enrolment assessment for the employee. Used to insert historical assessments
 func (s *SDK) PutNewAeAssessment(ctx context.Context, request operations.PutNewAeAssessmentRequest) (*operations.PutNewAeAssessmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/AEAssessment/{AEAssessmentId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27405,7 +28111,7 @@ func (s *SDK) PutNewAeAssessment(ctx context.Context, request operations.PutNewA
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27475,8 +28181,10 @@ func (s *SDK) PutNewAeAssessment(ctx context.Context, request operations.PutNewA
 	return res, nil
 }
 
+// PutNominalCode - Insert nominal code
+// Inserts a new nominal code at the specified resource location
 func (s *SDK) PutNominalCode(ctx context.Context, request operations.PutNominalCodeRequest) (*operations.PutNominalCodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/NominalCode/{NominalCodeId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27496,7 +28204,7 @@ func (s *SDK) PutNominalCode(ctx context.Context, request operations.PutNominalC
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27566,8 +28274,10 @@ func (s *SDK) PutNominalCode(ctx context.Context, request operations.PutNominalC
 	return res, nil
 }
 
+// PutPayCode - Updates a pay code
+// Updates the existing specified pay code object
 func (s *SDK) PutPayCode(ctx context.Context, request operations.PutPayCodeRequest) (*operations.PutPayCodeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PayCode/{PayCodeId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27587,7 +28297,7 @@ func (s *SDK) PutPayCode(ctx context.Context, request operations.PutPayCodeReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27657,8 +28367,10 @@ func (s *SDK) PutPayCode(ctx context.Context, request operations.PutPayCodeReque
 	return res, nil
 }
 
+// PutPayCodeTag - Insert pay code tag
+// Inserts a new tag on the pay code
 func (s *SDK) PutPayCodeTag(ctx context.Context, request operations.PutPayCodeTagRequest) (*operations.PutPayCodeTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PayCode/{PayCodeId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -27668,7 +28380,7 @@ func (s *SDK) PutPayCodeTag(ctx context.Context, request operations.PutPayCodeTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27738,8 +28450,10 @@ func (s *SDK) PutPayCodeTag(ctx context.Context, request operations.PutPayCodeTa
 	return res, nil
 }
 
+// PutPayInstruction - Update a Pay Instruction
+// Updates the existing specified pay instruction object
 func (s *SDK) PutPayInstruction(ctx context.Context, request operations.PutPayInstructionRequest) (*operations.PutPayInstructionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayInstruction/{PayInstructionId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -27759,7 +28473,7 @@ func (s *SDK) PutPayInstruction(ctx context.Context, request operations.PutPayIn
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27829,8 +28543,10 @@ func (s *SDK) PutPayInstruction(ctx context.Context, request operations.PutPayIn
 	return res, nil
 }
 
+// PutPayInstructionTag - Insert pay instruction tag
+// Inserts a new tag on the pay instruction
 func (s *SDK) PutPayInstructionTag(ctx context.Context, request operations.PutPayInstructionTagRequest) (*operations.PutPayInstructionTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayInstruction/{PayInstructionId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -27840,7 +28556,7 @@ func (s *SDK) PutPayInstructionTag(ctx context.Context, request operations.PutPa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27910,8 +28626,10 @@ func (s *SDK) PutPayInstructionTag(ctx context.Context, request operations.PutPa
 	return res, nil
 }
 
+// PutPayLineTag - Insert pay line tag
+// Inserts a new tag on the pay line
 func (s *SDK) PutPayLineTag(ctx context.Context, request operations.PutPayLineTagRequest) (*operations.PutPayLineTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Employee/{EmployeeId}/PayLine/{PayLineId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -27921,7 +28639,7 @@ func (s *SDK) PutPayLineTag(ctx context.Context, request operations.PutPayLineTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -27991,8 +28709,10 @@ func (s *SDK) PutPayLineTag(ctx context.Context, request operations.PutPayLineTa
 	return res, nil
 }
 
+// PutPayRunTag - Insert pay run tag
+// Inserts a new tag on the pay run
 func (s *SDK) PutPayRunTag(ctx context.Context, request operations.PutPayRunTagRequest) (*operations.PutPayRunTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/PayRun/{PayRunId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -28002,7 +28722,7 @@ func (s *SDK) PutPayRunTag(ctx context.Context, request operations.PutPayRunTagR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28072,8 +28792,10 @@ func (s *SDK) PutPayRunTag(ctx context.Context, request operations.PutPayRunTagR
 	return res, nil
 }
 
+// PutPaySchedule - Updates a pay schedule
+// Updates the existing specified pay schedule object
 func (s *SDK) PutPaySchedule(ctx context.Context, request operations.PutPayScheduleRequest) (*operations.PutPayScheduleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28093,7 +28815,7 @@ func (s *SDK) PutPaySchedule(ctx context.Context, request operations.PutPaySched
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28163,8 +28885,10 @@ func (s *SDK) PutPaySchedule(ctx context.Context, request operations.PutPaySched
 	return res, nil
 }
 
+// PutPayScheduleTag - Insert pay schedule tag
+// Inserts a new tag on the pay schedule
 func (s *SDK) PutPayScheduleTag(ctx context.Context, request operations.PutPayScheduleTagRequest) (*operations.PutPayScheduleTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/PaySchedule/{PayScheduleId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -28174,7 +28898,7 @@ func (s *SDK) PutPayScheduleTag(ctx context.Context, request operations.PutPaySc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28244,8 +28968,10 @@ func (s *SDK) PutPayScheduleTag(ctx context.Context, request operations.PutPaySc
 	return res, nil
 }
 
+// PutPensionIntoEmployer - Updates the Pension
+// Updates existing or inserts the specified pension object
 func (s *SDK) PutPensionIntoEmployer(ctx context.Context, request operations.PutPensionIntoEmployerRequest) (*operations.PutPensionIntoEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/Pension/{PensionId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28265,7 +28991,7 @@ func (s *SDK) PutPensionIntoEmployer(ctx context.Context, request operations.Put
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28335,8 +29061,10 @@ func (s *SDK) PutPensionIntoEmployer(ctx context.Context, request operations.Put
 	return res, nil
 }
 
+// PutPermission - Puts permisson object
+// Puts the permission object into the specified resource location
 func (s *SDK) PutPermission(ctx context.Context, request operations.PutPermissionRequest) (*operations.PutPermissionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Permission/{PermissionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -28346,7 +29074,7 @@ func (s *SDK) PutPermission(ctx context.Context, request operations.PutPermissio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28416,8 +29144,10 @@ func (s *SDK) PutPermission(ctx context.Context, request operations.PutPermissio
 	return res, nil
 }
 
+// PutReportDefinition - Updates a report definition
+// Updates the existing specified report definition object
 func (s *SDK) PutReportDefinition(ctx context.Context, request operations.PutReportDefinitionRequest) (*operations.PutReportDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Report/{ReportDefinitionId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28437,7 +29167,7 @@ func (s *SDK) PutReportDefinition(ctx context.Context, request operations.PutRep
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28507,8 +29237,10 @@ func (s *SDK) PutReportDefinition(ctx context.Context, request operations.PutRep
 	return res, nil
 }
 
+// PutReportingInstruction - Update a reporting Instruction
+// Updates the existing specified reporting instruction object
 func (s *SDK) PutReportingInstruction(ctx context.Context, request operations.PutReportingInstructionRequest) (*operations.PutReportingInstructionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/ReportingInstruction/{ReportingInstructionId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28528,7 +29260,7 @@ func (s *SDK) PutReportingInstruction(ctx context.Context, request operations.Pu
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28598,8 +29330,10 @@ func (s *SDK) PutReportingInstruction(ctx context.Context, request operations.Pu
 	return res, nil
 }
 
+// PutRtiTransactionTag - Insert RTI transaction tag
+// Inserts a new tag on the RTI transaction
 func (s *SDK) PutRtiTransactionTag(ctx context.Context, request operations.PutRtiTransactionTagRequest) (*operations.PutRtiTransactionTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/RtiTransaction/{RtiTransactionId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -28609,7 +29343,7 @@ func (s *SDK) PutRtiTransactionTag(ctx context.Context, request operations.PutRt
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28679,8 +29413,10 @@ func (s *SDK) PutRtiTransactionTag(ctx context.Context, request operations.PutRt
 	return res, nil
 }
 
+// PutSubContractorIntoEmployer - Updates the sub contractor
+// Updates the existing specified sub contractor object
 func (s *SDK) PutSubContractorIntoEmployer(ctx context.Context, request operations.PutSubContractorIntoEmployerRequest) (*operations.PutSubContractorIntoEmployerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28700,7 +29436,7 @@ func (s *SDK) PutSubContractorIntoEmployer(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28770,8 +29506,10 @@ func (s *SDK) PutSubContractorIntoEmployer(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PutSubContractorTag - Insert sub contractor tag
+// Inserts a new tag on the sub contractor
 func (s *SDK) PutSubContractorTag(ctx context.Context, request operations.PutSubContractorTagRequest) (*operations.PutSubContractorTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/SubContractor/{SubContractorId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -28781,7 +29519,7 @@ func (s *SDK) PutSubContractorTag(ctx context.Context, request operations.PutSub
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28851,8 +29589,10 @@ func (s *SDK) PutSubContractorTag(ctx context.Context, request operations.PutSub
 	return res, nil
 }
 
+// PutThirdPartyTransactionTag - insert third party transaction tag
+// Inserts a tag on the third party transaction
 func (s *SDK) PutThirdPartyTransactionTag(ctx context.Context, request operations.PutThirdPartyTransactionTagRequest) (*operations.PutThirdPartyTransactionTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Employer/{EmployerId}/ThirdPartyTransaction/{ThirdPartyTransactionId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -28862,7 +29602,7 @@ func (s *SDK) PutThirdPartyTransactionTag(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -28932,8 +29672,10 @@ func (s *SDK) PutThirdPartyTransactionTag(ctx context.Context, request operation
 	return res, nil
 }
 
+// PutTransformDefinition - Updates a transform definition
+// Updates the existing specified transform definition object
 func (s *SDK) PutTransformDefinition(ctx context.Context, request operations.PutTransformDefinitionRequest) (*operations.PutTransformDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/Transform/{TransformDefinitionId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -28953,7 +29695,7 @@ func (s *SDK) PutTransformDefinition(ctx context.Context, request operations.Put
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29023,8 +29765,10 @@ func (s *SDK) PutTransformDefinition(ctx context.Context, request operations.Put
 	return res, nil
 }
 
+// PutUser - Puts user object
+// Puts the user object into the specified resource location
 func (s *SDK) PutUser(ctx context.Context, request operations.PutUserRequest) (*operations.PutUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/User/{UserId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -29034,7 +29778,7 @@ func (s *SDK) PutUser(ctx context.Context, request operations.PutUserRequest) (*
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -29104,8 +29848,10 @@ func (s *SDK) PutUser(ctx context.Context, request operations.PutUserRequest) (*
 	return res, nil
 }
 
+// PutUserTag - Insert user tag
+// Inserts a tag on the user
 func (s *SDK) PutUserTag(ctx context.Context, request operations.PutUserTagRequest) (*operations.PutUserTagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/User/{UserId}/Tag/{TagId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -29115,7 +29861,7 @@ func (s *SDK) PutUserTag(ctx context.Context, request operations.PutUserTagReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DataprocProjectsRegionsClustersPatchPathParams:
-    cluster_name: str = field(default=None, metadata={'path_param': { 'field_name': 'clusterName', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    region: str = field(default=None, metadata={'path_param': { 'field_name': 'region', 'style': 'simple', 'explode': False }})
+    cluster_name: str = field(metadata={'path_param': { 'field_name': 'clusterName', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    region: str = field(metadata={'path_param': { 'field_name': 'region', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,21 +34,21 @@ class DataprocProjectsRegionsClustersPatchQueryParams:
 
 @dataclass
 class DataprocProjectsRegionsClustersPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataprocProjectsRegionsClustersPatchRequest:
-    path_params: DataprocProjectsRegionsClustersPatchPathParams = field(default=None)
-    query_params: DataprocProjectsRegionsClustersPatchQueryParams = field(default=None)
-    request: Optional[shared.Cluster] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DataprocProjectsRegionsClustersPatchSecurity = field(default=None)
+    path_params: DataprocProjectsRegionsClustersPatchPathParams = field()
+    query_params: DataprocProjectsRegionsClustersPatchQueryParams = field()
+    security: DataprocProjectsRegionsClustersPatchSecurity = field()
+    request: Optional[shared.ClusterInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DataprocProjectsRegionsClustersPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

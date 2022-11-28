@@ -1,5 +1,7 @@
 package shared
 
+// CloudSQLInstanceInfo
+// For display only. Metadata associated with a Cloud SQL instance.
 type CloudSQLInstanceInfo struct {
 	DisplayName *string `json:"displayName,omitempty"`
 	ExternalIP  *string `json:"externalIp,omitempty"`

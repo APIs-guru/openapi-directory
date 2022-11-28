@@ -13,12 +13,12 @@ class GetBundleRegistrationsQueryParams:
 
 @dataclass
 class GetBundleRegistrationsRequest:
-    query_params: GetBundleRegistrationsQueryParams = field(default=None)
+    query_params: GetBundleRegistrationsQueryParams = field()
     
 
 @dataclass
 class GetBundleRegistrationsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bundle_registration_entities: Optional[List[shared.BundleRegistrationEntity]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

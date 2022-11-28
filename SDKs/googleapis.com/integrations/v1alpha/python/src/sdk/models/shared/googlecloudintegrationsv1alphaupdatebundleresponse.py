@@ -1,11 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudintegrationsv1alphaintegrationbundleconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudIntegrationsV1alphaUpdateBundleResponse:
-    config: Optional[googlecloudintegrationsv1alphaintegrationbundleconfig.GoogleCloudIntegrationsV1alphaIntegrationBundleConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'config' }})
+    r"""GoogleCloudIntegrationsV1alphaUpdateBundleResponse
+    Response message for Bundle update
+    """
+    
+    config: Optional[GoogleCloudIntegrationsV1alphaIntegrationBundleConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('config') }})
     

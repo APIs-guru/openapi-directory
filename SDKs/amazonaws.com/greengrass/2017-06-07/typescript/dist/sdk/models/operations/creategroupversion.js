@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateGroupVersionPathParams = /** @class */ (function (_super) {
     __extends(CreateGroupVersionPathParams, _super);
@@ -30,7 +30,7 @@ var CreateGroupVersionPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=GroupId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=GroupId" }),
         __metadata("design:type", String)
     ], CreateGroupVersionPathParams.prototype, "groupId", void 0);
     return CreateGroupVersionPathParams;
@@ -42,35 +42,35 @@ var CreateGroupVersionHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateGroupVersionHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateGroupVersionHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateGroupVersionHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateGroupVersionHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateGroupVersionHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateGroupVersionHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateGroupVersionHeaders.prototype, "xAmzSignedHeaders", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amzn-Client-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amzn-Client-Token" }),
         __metadata("design:type", String)
     ], CreateGroupVersionHeaders.prototype, "xAmznClientToken", void 0);
     return CreateGroupVersionHeaders;
@@ -82,31 +82,31 @@ var CreateGroupVersionRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ConnectorDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=ConnectorDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], CreateGroupVersionRequestBody.prototype, "connectorDefinitionVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CoreDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=CoreDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], CreateGroupVersionRequestBody.prototype, "coreDefinitionVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeviceDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=DeviceDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], CreateGroupVersionRequestBody.prototype, "deviceDefinitionVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=FunctionDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=FunctionDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], CreateGroupVersionRequestBody.prototype, "functionDefinitionVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=LoggerDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=LoggerDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], CreateGroupVersionRequestBody.prototype, "loggerDefinitionVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], CreateGroupVersionRequestBody.prototype, "resourceDefinitionVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubscriptionDefinitionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=SubscriptionDefinitionVersionArn" }),
         __metadata("design:type", String)
     ], CreateGroupVersionRequestBody.prototype, "subscriptionDefinitionVersionArn", void 0);
     return CreateGroupVersionRequestBody;
@@ -118,15 +118,15 @@ var CreateGroupVersionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateGroupVersionPathParams)
     ], CreateGroupVersionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateGroupVersionHeaders)
     ], CreateGroupVersionRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateGroupVersionRequestBody)
     ], CreateGroupVersionRequest.prototype, "request", void 0);
     return CreateGroupVersionRequest;
@@ -138,19 +138,19 @@ var CreateGroupVersionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateGroupVersionResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateGroupVersionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreateGroupVersionResponse)
     ], CreateGroupVersionResponse.prototype, "createGroupVersionResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateGroupVersionResponse.prototype, "statusCode", void 0);
     return CreateGroupVersionResponse;

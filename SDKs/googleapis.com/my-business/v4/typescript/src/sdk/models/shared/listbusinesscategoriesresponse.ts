@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Category } from "./category";
 
 
+
 export class ListBusinessCategoriesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categories", elemType: shared.Category })
+  @SpeakeasyMetadata({ data: "json, name=categories", elemType: Category })
   categories?: Category[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=totalCategoryCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalCategoryCount" })
   totalCategoryCount?: number;
 }

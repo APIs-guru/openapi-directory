@@ -1,13 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { ScriptError } from "./scripterror";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomBiddingScriptRef } from "./custombiddingscriptref";
+import { ScriptError } from "./scripterror";
+
 
 export enum CustomBiddingScriptStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Accepted = "ACCEPTED"
-,    Rejected = "REJECTED"
-,    Pending = "PENDING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Accepted = "ACCEPTED",
+    Rejected = "REJECTED",
+    Pending = "PENDING"
+}
+
+
+// CustomBiddingScriptInput
+/** 
+ * A single custom bidding script.
+**/
+export class CustomBiddingScriptInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=script" })
+  script?: CustomBiddingScriptRef;
 }
 
 
@@ -16,27 +26,27 @@ export enum CustomBiddingScriptStateEnum {
  * A single custom bidding script.
 **/
 export class CustomBiddingScript extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=customBiddingAlgorithmId" })
+  @SpeakeasyMetadata({ data: "json, name=customBiddingAlgorithmId" })
   customBiddingAlgorithmId?: string;
 
-  @Metadata({ data: "json, name=customBiddingScriptId" })
+  @SpeakeasyMetadata({ data: "json, name=customBiddingScriptId" })
   customBiddingScriptId?: string;
 
-  @Metadata({ data: "json, name=errors", elemType: shared.ScriptError })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: ScriptError })
   errors?: ScriptError[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=script" })
+  @SpeakeasyMetadata({ data: "json, name=script" })
   script?: CustomBiddingScriptRef;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: CustomBiddingScriptStateEnum;
 }

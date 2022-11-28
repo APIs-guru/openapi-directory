@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateSystemModelsUpdateMetricsDataActiveVersionByClientRecord extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BundleNumber" })
+  @SpeakeasyMetadata({ data: "json, name=BundleNumber" })
   bundleNumber?: number;
 
-  @Metadata({ data: "json, name=ClientCount" })
+  @SpeakeasyMetadata({ data: "json, name=ClientCount" })
   clientCount?: number;
 
-  @Metadata({ data: "json, name=ReleaseName" })
+  @SpeakeasyMetadata({ data: "json, name=ReleaseName" })
   releaseName?: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class AndroiddeviceprovisioningCustomersConfigurationsCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -19,7 +19,7 @@ export declare class AndroiddeviceprovisioningCustomersConfigurationsCreateQuery
 export declare class AndroiddeviceprovisioningCustomersConfigurationsCreateRequest extends SpeakeasyBase {
     pathParams: AndroiddeviceprovisioningCustomersConfigurationsCreatePathParams;
     queryParams: AndroiddeviceprovisioningCustomersConfigurationsCreateQueryParams;
-    request?: shared.Configuration;
+    request?: shared.ConfigurationInput;
 }
 export declare class AndroiddeviceprovisioningCustomersConfigurationsCreateResponse extends SpeakeasyBase {
     configuration?: shared.Configuration;

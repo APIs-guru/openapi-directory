@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import applicationsresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetAppsResponse:
-    applications_response: applicationsresponse.ApplicationsResponse = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApplicationsResponse' }})
+    applications_response: ApplicationsResponse = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ApplicationsResponse') }})
     

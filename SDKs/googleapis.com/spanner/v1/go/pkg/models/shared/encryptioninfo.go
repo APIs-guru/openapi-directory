@@ -8,6 +8,14 @@ const (
 	EncryptionInfoEncryptionTypeEnumCustomerManagedEncryption EncryptionInfoEncryptionTypeEnum = "CUSTOMER_MANAGED_ENCRYPTION"
 )
 
+// EncryptionInfoInput
+// Encryption information for a Cloud Spanner database or backup.
+type EncryptionInfoInput struct {
+	EncryptionStatus *Status `json:"encryptionStatus,omitempty"`
+}
+
+// EncryptionInfo
+// Encryption information for a Cloud Spanner database or backup.
 type EncryptionInfo struct {
 	EncryptionStatus *Status                           `json:"encryptionStatus,omitempty"`
 	EncryptionType   *EncryptionInfoEncryptionTypeEnum `json:"encryptionType,omitempty"`

@@ -9,6 +9,8 @@ const (
 	LocationFilterTelecommutePreferenceEnumTelecommuteJobsExcluded          LocationFilterTelecommutePreferenceEnum = "TELECOMMUTE_JOBS_EXCLUDED"
 )
 
+// LocationFilter
+// Input only. Geographic region of the search.
 type LocationFilter struct {
 	Address               *string                                  `json:"address,omitempty"`
 	DistanceInMiles       *float64                                 `json:"distanceInMiles,omitempty"`

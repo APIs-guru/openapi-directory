@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VideoFileDetailsAudioStream } from "./videofiledetailsaudiostream";
 import { VideoFileDetailsVideoStream } from "./videofiledetailsvideostream";
 
+
 export enum VideoFileDetailsFileTypeEnum {
-    Video = "video"
-,    Audio = "audio"
-,    Image = "image"
-,    Archive = "archive"
-,    Document = "document"
-,    Project = "project"
-,    Other = "other"
+    Video = "video",
+    Audio = "audio",
+    Image = "image",
+    Archive = "archive",
+    Document = "document",
+    Project = "project",
+    Other = "other"
 }
 
 
@@ -19,30 +19,30 @@ export enum VideoFileDetailsFileTypeEnum {
  * Describes original video file properties, including technical details about audio and video streams, but also metadata information like content length, digitization time, or geotagging information.
 **/
 export class VideoFileDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audioStreams", elemType: shared.VideoFileDetailsAudioStream })
+  @SpeakeasyMetadata({ data: "json, name=audioStreams", elemType: VideoFileDetailsAudioStream })
   audioStreams?: VideoFileDetailsAudioStream[];
 
-  @Metadata({ data: "json, name=bitrateBps" })
+  @SpeakeasyMetadata({ data: "json, name=bitrateBps" })
   bitrateBps?: string;
 
-  @Metadata({ data: "json, name=container" })
+  @SpeakeasyMetadata({ data: "json, name=container" })
   container?: string;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: string;
 
-  @Metadata({ data: "json, name=durationMs" })
+  @SpeakeasyMetadata({ data: "json, name=durationMs" })
   durationMs?: string;
 
-  @Metadata({ data: "json, name=fileName" })
+  @SpeakeasyMetadata({ data: "json, name=fileName" })
   fileName?: string;
 
-  @Metadata({ data: "json, name=fileSize" })
+  @SpeakeasyMetadata({ data: "json, name=fileSize" })
   fileSize?: string;
 
-  @Metadata({ data: "json, name=fileType" })
+  @SpeakeasyMetadata({ data: "json, name=fileType" })
   fileType?: VideoFileDetailsFileTypeEnum;
 
-  @Metadata({ data: "json, name=videoStreams", elemType: shared.VideoFileDetailsVideoStream })
+  @SpeakeasyMetadata({ data: "json, name=videoStreams", elemType: VideoFileDetailsVideoStream })
   videoStreams?: VideoFileDetailsVideoStream[];
 }

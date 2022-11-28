@@ -1,16 +1,25 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ImageConfigTextRedactionModeEnum(str, Enum):
     TEXT_REDACTION_MODE_UNSPECIFIED = "TEXT_REDACTION_MODE_UNSPECIFIED"
     REDACT_ALL_TEXT = "REDACT_ALL_TEXT"
     REDACT_SENSITIVE_TEXT = "REDACT_SENSITIVE_TEXT"
     REDACT_NO_TEXT = "REDACT_NO_TEXT"
+    REDACT_SENSITIVE_TEXT_CLEAN_DESCRIPTORS = "REDACT_SENSITIVE_TEXT_CLEAN_DESCRIPTORS"
 
 
 @dataclass_json
 @dataclass
 class ImageConfig:
-    text_redaction_mode: Optional[ImageConfigTextRedactionModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'textRedactionMode' }})
+    r"""ImageConfig
+    Specifies how to handle de-identification of image pixels.
+    """
+    
+    additional_info_types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('additionalInfoTypes') }})
+    exclude_info_types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('excludeInfoTypes') }})
+    text_redaction_mode: Optional[ImageConfigTextRedactionModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('textRedactionMode') }})
     

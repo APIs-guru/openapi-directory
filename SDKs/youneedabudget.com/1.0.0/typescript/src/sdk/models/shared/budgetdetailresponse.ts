@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BudgetDetail } from "./budgetdetail";
 
 
+
 export class BudgetDetailResponseData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=budget" })
+  @SpeakeasyMetadata({ data: "json, name=budget" })
   budget: BudgetDetail;
 
-  @Metadata({ data: "json, name=server_knowledge" })
+  @SpeakeasyMetadata({ data: "json, name=server_knowledge" })
   serverKnowledge: number;
 }
 
 
 export class BudgetDetailResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: BudgetDetailResponseData;
 }

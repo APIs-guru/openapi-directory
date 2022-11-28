@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatasetTypeEnum } from "./datasettypeenum";
 import { DomainEnum } from "./domainenum";
 import { EncryptionConfig } from "./encryptionconfig";
@@ -7,25 +6,26 @@ import { Schema } from "./schema";
 import { Tag } from "./tag";
 
 
+
 export class CreateDatasetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataFrequency" })
+  @SpeakeasyMetadata({ data: "json, name=DataFrequency" })
   dataFrequency?: string;
 
-  @Metadata({ data: "json, name=DatasetName" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetName" })
   datasetName: string;
 
-  @Metadata({ data: "json, name=DatasetType" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetType" })
   datasetType: DatasetTypeEnum;
 
-  @Metadata({ data: "json, name=Domain" })
+  @SpeakeasyMetadata({ data: "json, name=Domain" })
   domain: DomainEnum;
 
-  @Metadata({ data: "json, name=EncryptionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptionConfig" })
   encryptionConfig?: EncryptionConfig;
 
-  @Metadata({ data: "json, name=Schema" })
+  @SpeakeasyMetadata({ data: "json, name=Schema" })
   schema: Schema;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

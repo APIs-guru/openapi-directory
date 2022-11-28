@@ -1,5 +1,7 @@
 package shared
 
+// DeviceProfile
+// Defines the MediaBrowser.Model.Dlna.DeviceProfile.
 type DeviceProfile struct {
 	AlbumArtPn                       *string               `json:"AlbumArtPn,omitempty"`
 	CodecProfiles                    []CodecProfile        `json:"CodecProfiles,omitempty"`

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class FileshareParam extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fsIOPS" })
+  @SpeakeasyMetadata({ data: "json, name=fsIOPS" })
   fsIops: number;
 
-  @Metadata({ data: "json, name=fsName" })
+  @SpeakeasyMetadata({ data: "json, name=fsName" })
   fsName: string;
 
-  @Metadata({ data: "json, name=fsSize" })
+  @SpeakeasyMetadata({ data: "json, name=fsSize" })
   fsSize: number;
 }

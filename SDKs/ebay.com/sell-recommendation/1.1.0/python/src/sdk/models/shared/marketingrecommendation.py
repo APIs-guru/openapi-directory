@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import ad
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MarketingRecommendation:
-    ad: Optional[ad.Ad] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ad' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    r"""MarketingRecommendation
+    A complex type that contains information about how a seller can improve their listing configurations. The AD object contains Promoted Listings recommendations and information, which the seller can use to improve buyer conversions. The response can also contain an optional message about the returned data.
+    """
+    
+    ad: Optional[Ad] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ad') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
     

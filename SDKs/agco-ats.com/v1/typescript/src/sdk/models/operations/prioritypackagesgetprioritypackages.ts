@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum PriorityPackagesGetPriorityPackagesStatusEnum {
-    Active = "Active"
-,    Completed = "Completed"
-,    All = "All"
+    Active = "Active",
+    Completed = "Completed",
+    All = "All"
 }
 
 
 export class PriorityPackagesGetPriorityPackagesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ClientID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClientID" })
   clientId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Status" })
   status?: PriorityPackagesGetPriorityPackagesStatusEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 }
 
 
 export class PriorityPackagesGetPriorityPackagesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PriorityPackagesGetPriorityPackagesQueryParams;
 }
 
 
 export class PriorityPackagesGetPriorityPackagesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   apiPagedResponseUpdateSystemModelsPriorityPackage?: shared.ApiPagedResponseUpdateSystemModelsPriorityPackage;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

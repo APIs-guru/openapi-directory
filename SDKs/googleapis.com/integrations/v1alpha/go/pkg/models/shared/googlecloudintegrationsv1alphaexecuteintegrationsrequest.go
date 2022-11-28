@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudIntegrationsV1alphaExecuteIntegrationsRequest
+// The request for executing an integration.
 type GoogleCloudIntegrationsV1alphaExecuteIntegrationsRequest struct {
 	DoNotPropagateError *bool                                               `json:"doNotPropagateError,omitempty"`
 	ExecutionID         *string                                             `json:"executionId,omitempty"`

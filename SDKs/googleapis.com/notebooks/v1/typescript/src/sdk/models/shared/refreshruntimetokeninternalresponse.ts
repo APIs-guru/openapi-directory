@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RefreshRuntimeTokenInternalResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response with a new access token.
 **/
 export class RefreshRuntimeTokenInternalResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessToken" })
+  @SpeakeasyMetadata({ data: "json, name=accessToken" })
   accessToken?: string;
 
-  @Metadata({ data: "json, name=expireTime" })
+  @SpeakeasyMetadata({ data: "json, name=expireTime" })
   expireTime?: string;
 }

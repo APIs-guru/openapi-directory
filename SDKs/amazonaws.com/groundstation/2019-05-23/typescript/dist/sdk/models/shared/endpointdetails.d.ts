@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DataflowEndpoint } from "./dataflowendpoint";
 import { SecurityDetails } from "./securitydetails";
 /**

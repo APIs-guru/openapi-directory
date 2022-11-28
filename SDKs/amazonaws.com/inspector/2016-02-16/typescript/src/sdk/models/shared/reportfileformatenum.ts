@@ -1,6 +1,7 @@
 
 
+
 export enum ReportFileFormatEnum {
-    Html = "HTML"
-,    Pdf = "PDF"
+    Html = "HTML",
+    Pdf = "PDF"
 }

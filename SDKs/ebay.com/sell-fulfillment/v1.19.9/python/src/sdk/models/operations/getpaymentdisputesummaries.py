@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
+
+
 GET_PAYMENT_DISPUTE_SUMMARIES_SERVERS = [
 	"https://apiz.ebay.com{basePath}",
 ]
@@ -19,19 +24,19 @@ class GetPaymentDisputeSummariesQueryParams:
 
 @dataclass
 class GetPaymentDisputeSummariesSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetPaymentDisputeSummariesRequest:
+    query_params: GetPaymentDisputeSummariesQueryParams = field()
+    security: GetPaymentDisputeSummariesSecurity = field()
     server_url: Optional[str] = field(default=None)
-    query_params: GetPaymentDisputeSummariesQueryParams = field(default=None)
-    security: GetPaymentDisputeSummariesSecurity = field(default=None)
     
 
 @dataclass
 class GetPaymentDisputeSummariesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dispute_summary_response: Optional[shared.DisputeSummaryResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubDomainSetting } from "./subdomainsetting";
+
 
 
 // SubDomain
@@ -7,12 +8,12 @@ import { SubDomainSetting } from "./subdomainsetting";
  *  The subdomain for the domain association. 
 **/
 export class SubDomain extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dnsRecord" })
+  @SpeakeasyMetadata({ data: "json, name=dnsRecord" })
   dnsRecord: string;
 
-  @Metadata({ data: "json, name=subDomainSetting" })
+  @SpeakeasyMetadata({ data: "json, name=subDomainSetting" })
   subDomainSetting: SubDomainSetting;
 
-  @Metadata({ data: "json, name=verified" })
+  @SpeakeasyMetadata({ data: "json, name=verified" })
   verified: boolean;
 }

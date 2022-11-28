@@ -18,6 +18,8 @@ const (
 	GoogleCloudBillingBudgetsV1beta1FilterCreditTypesTreatmentEnumIncludeSpecifiedCredits         GoogleCloudBillingBudgetsV1beta1FilterCreditTypesTreatmentEnum = "INCLUDE_SPECIFIED_CREDITS"
 )
 
+// GoogleCloudBillingBudgetsV1beta1Filter
+// A filter for a budget, limiting the scope of the cost to calculate.
 type GoogleCloudBillingBudgetsV1beta1Filter struct {
 	CalendarPeriod       *GoogleCloudBillingBudgetsV1beta1FilterCalendarPeriodEnum       `json:"calendarPeriod,omitempty"`
 	CreditTypes          []string                                                        `json:"creditTypes,omitempty"`

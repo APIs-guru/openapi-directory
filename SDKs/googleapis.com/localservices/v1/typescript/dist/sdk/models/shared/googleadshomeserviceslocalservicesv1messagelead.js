@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleAdsHomeservicesLocalservicesV1MessageLead
 /**
  * Container for message lead specific information.
@@ -33,19 +33,19 @@ var GoogleAdsHomeservicesLocalservicesV1MessageLead = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=consumerPhoneNumber" }),
+        SpeakeasyMetadata({ data: "json, name=consumerPhoneNumber" }),
         __metadata("design:type", String)
     ], GoogleAdsHomeservicesLocalservicesV1MessageLead.prototype, "consumerPhoneNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=customerName" }),
+        SpeakeasyMetadata({ data: "json, name=customerName" }),
         __metadata("design:type", String)
     ], GoogleAdsHomeservicesLocalservicesV1MessageLead.prototype, "customerName", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobType" }),
+        SpeakeasyMetadata({ data: "json, name=jobType" }),
         __metadata("design:type", String)
     ], GoogleAdsHomeservicesLocalservicesV1MessageLead.prototype, "jobType", void 0);
     __decorate([
-        Metadata({ data: "json, name=postalCode" }),
+        SpeakeasyMetadata({ data: "json, name=postalCode" }),
         __metadata("design:type", String)
     ], GoogleAdsHomeservicesLocalservicesV1MessageLead.prototype, "postalCode", void 0);
     return GoogleAdsHomeservicesLocalservicesV1MessageLead;

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceTypeEnum } from "./resourcetypeenum";
+
 
 
 // Relationship
@@ -7,15 +8,15 @@ import { ResourceTypeEnum } from "./resourcetypeenum";
  * The relationship of the related resource to the main resource.
 **/
 export class Relationship extends SpeakeasyBase {
-  @Metadata({ data: "json, name=relationshipName" })
+  @SpeakeasyMetadata({ data: "json, name=relationshipName" })
   relationshipName?: string;
 
-  @Metadata({ data: "json, name=resourceId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=resourceName" })
+  @SpeakeasyMetadata({ data: "json, name=resourceName" })
   resourceName?: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType?: ResourceTypeEnum;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetDownloadUrlForLayerResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=downloadUrl" })
+  @SpeakeasyMetadata({ data: "json, name=downloadUrl" })
   downloadUrl?: string;
 
-  @Metadata({ data: "json, name=layerDigest" })
+  @SpeakeasyMetadata({ data: "json, name=layerDigest" })
   layerDigest?: string;
 }

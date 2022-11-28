@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SharedDriveInfo
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The shared drives to search
 **/
 export class SharedDriveInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sharedDriveIds" })
+  @SpeakeasyMetadata({ data: "json, name=sharedDriveIds" })
   sharedDriveIds?: string[];
 }

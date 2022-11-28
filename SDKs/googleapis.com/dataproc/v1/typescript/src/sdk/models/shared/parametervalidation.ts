@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RegexValidation } from "./regexvalidation";
 import { ValueValidation } from "./valuevalidation";
+
 
 
 // ParameterValidation
@@ -8,9 +9,9 @@ import { ValueValidation } from "./valuevalidation";
  * Configuration for parameter validation.
 **/
 export class ParameterValidation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=regex" })
+  @SpeakeasyMetadata({ data: "json, name=regex" })
   regex?: RegexValidation;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values?: ValueValidation;
 }

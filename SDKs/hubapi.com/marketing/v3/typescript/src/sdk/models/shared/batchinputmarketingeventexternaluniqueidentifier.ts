@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MarketingEventExternalUniqueIdentifier } from "./marketingeventexternaluniqueidentifier";
 
 
+
 export class BatchInputMarketingEventExternalUniqueIdentifier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inputs", elemType: shared.MarketingEventExternalUniqueIdentifier })
+  @SpeakeasyMetadata({ data: "json, name=inputs", elemType: MarketingEventExternalUniqueIdentifier })
   inputs: MarketingEventExternalUniqueIdentifier[];
 }

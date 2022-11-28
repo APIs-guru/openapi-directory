@@ -10,6 +10,8 @@ const (
 	DeviceIntegrityDeviceRecognitionVerdictEnumMeetsVirtualIntegrity DeviceIntegrityDeviceRecognitionVerdictEnum = "MEETS_VIRTUAL_INTEGRITY"
 )
 
+// DeviceIntegrity
+// Contains the device attestation information.
 type DeviceIntegrity struct {
 	DeviceRecognitionVerdict []DeviceIntegrityDeviceRecognitionVerdictEnum `json:"deviceRecognitionVerdict,omitempty"`
 }

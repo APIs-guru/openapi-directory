@@ -8,10 +8,6 @@ type DeleteDirectivePathParams struct {
 	DirectiveID string `pathParam:"style=simple,explode=false,name=directiveId"`
 }
 
-type DeleteDirectiveRequest struct {
-	PathParams DeleteDirectivePathParams
-}
-
 type DeleteDirective200ApplicationJSONActionEnum string
 
 const (
@@ -33,6 +29,10 @@ type DeleteDirective200ApplicationJSON struct {
 	Action DeleteDirective200ApplicationJSONActionEnum `json:"action"`
 	Data   DeleteDirective200ApplicationJSONData       `json:"data"`
 	Result DeleteDirective200ApplicationJSONResultEnum `json:"result"`
+}
+
+type DeleteDirectiveRequest struct {
+	PathParams DeleteDirectivePathParams
 }
 
 type DeleteDirectiveResponse struct {

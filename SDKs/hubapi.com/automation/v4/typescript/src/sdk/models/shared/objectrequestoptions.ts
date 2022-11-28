@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ObjectRequestOptions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configures what properties of the enrolled CRM object are included in the action execution request
 **/
 export class ObjectRequestOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties: string[];
 }

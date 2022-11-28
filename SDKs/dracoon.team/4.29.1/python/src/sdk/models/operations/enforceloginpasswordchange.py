@@ -10,12 +10,12 @@ class EnforceLoginPasswordChangeHeaders:
 
 @dataclass
 class EnforceLoginPasswordChangeRequest:
-    headers: EnforceLoginPasswordChangeHeaders = field(default=None)
+    headers: EnforceLoginPasswordChangeHeaders = field()
     
 
 @dataclass
 class EnforceLoginPasswordChangeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

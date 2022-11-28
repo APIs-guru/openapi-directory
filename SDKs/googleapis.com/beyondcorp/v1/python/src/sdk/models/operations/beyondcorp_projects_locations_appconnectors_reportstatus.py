@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BeyondcorpProjectsLocationsAppConnectorsReportStatusPathParams:
-    app_connector: str = field(default=None, metadata={'path_param': { 'field_name': 'appConnector', 'style': 'simple', 'explode': False }})
+    app_connector: str = field(metadata={'path_param': { 'field_name': 'appConnector', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class BeyondcorpProjectsLocationsAppConnectorsReportStatusQueryParams:
 
 @dataclass
 class BeyondcorpProjectsLocationsAppConnectorsReportStatusSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BeyondcorpProjectsLocationsAppConnectorsReportStatusRequest:
-    path_params: BeyondcorpProjectsLocationsAppConnectorsReportStatusPathParams = field(default=None)
-    query_params: BeyondcorpProjectsLocationsAppConnectorsReportStatusQueryParams = field(default=None)
+    path_params: BeyondcorpProjectsLocationsAppConnectorsReportStatusPathParams = field()
+    query_params: BeyondcorpProjectsLocationsAppConnectorsReportStatusQueryParams = field()
+    security: BeyondcorpProjectsLocationsAppConnectorsReportStatusSecurity = field()
     request: Optional[shared.GoogleCloudBeyondcorpAppconnectorsV1ReportStatusRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: BeyondcorpProjectsLocationsAppConnectorsReportStatusSecurity = field(default=None)
     
 
 @dataclass
 class BeyondcorpProjectsLocationsAppConnectorsReportStatusResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_operation: Optional[shared.GoogleLongrunningOperation] = field(default=None)
-    status_code: int = field(default=None)
     

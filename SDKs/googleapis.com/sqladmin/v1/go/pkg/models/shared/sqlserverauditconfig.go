@@ -1,5 +1,7 @@
 package shared
 
+// SQLServerAuditConfig
+// SQL Server specific audit configuration.
 type SQLServerAuditConfig struct {
 	Bucket            *string `json:"bucket,omitempty"`
 	Kind              *string `json:"kind,omitempty"`

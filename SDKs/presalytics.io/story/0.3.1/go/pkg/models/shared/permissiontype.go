@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PermissionType
+// A permission type that can be applied to story collaborator
 type PermissionType struct {
 	CanAddCollaborators *bool      `json:"can_add_collaborators,omitempty"`
 	CanDelete           *bool      `json:"can_delete,omitempty"`

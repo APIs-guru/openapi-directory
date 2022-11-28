@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PatchDevelopersDeveloperIdPathParams = /** @class */ (function (_super) {
     __extends(PatchDevelopersDeveloperIdPathParams, _super);
     function PatchDevelopersDeveloperIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=developerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=developerId" }),
         __metadata("design:type", String)
     ], PatchDevelopersDeveloperIdPathParams.prototype, "developerId", void 0);
     return PatchDevelopersDeveloperIdPathParams;
@@ -41,23 +41,23 @@ var PatchDevelopersDeveloperIdQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=customData" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=customData" }),
         __metadata("design:type", String)
     ], PatchDevelopersDeveloperIdQueryParams.prototype, "customData", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=email" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email" }),
         __metadata("design:type", String)
     ], PatchDevelopersDeveloperIdQueryParams.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" }),
         __metadata("design:type", String)
     ], PatchDevelopersDeveloperIdQueryParams.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" }),
         __metadata("design:type", String)
     ], PatchDevelopersDeveloperIdQueryParams.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=username" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=username" }),
         __metadata("design:type", String)
     ], PatchDevelopersDeveloperIdQueryParams.prototype, "username", void 0);
     return PatchDevelopersDeveloperIdQueryParams;
@@ -69,11 +69,11 @@ var PatchDevelopersDeveloperIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PatchDevelopersDeveloperIdPathParams)
     ], PatchDevelopersDeveloperIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PatchDevelopersDeveloperIdQueryParams)
     ], PatchDevelopersDeveloperIdRequest.prototype, "queryParams", void 0);
     return PatchDevelopersDeveloperIdRequest;
@@ -85,15 +85,15 @@ var PatchDevelopersDeveloperIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PatchDevelopersDeveloperIdResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PatchDevelopersDeveloperIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PatchDevelopersDeveloperIdResponse.prototype, "statusCode", void 0);
     return PatchDevelopersDeveloperIdResponse;

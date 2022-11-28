@@ -22,47 +22,48 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { FreeBetDetail } from "./freebetdetail";
+import { Betslipleg } from "./betslipleg";
 var Betslipbet = /** @class */ (function (_super) {
     __extends(Betslipbet, _super);
     function Betslipbet() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=betMultiplier" }),
+        SpeakeasyMetadata({ data: "json, name=betMultiplier" }),
         __metadata("design:type", Number)
     ], Betslipbet.prototype, "betMultiplier", void 0);
     __decorate([
-        Metadata({ data: "json, name=freeBets", elemType: shared.FreeBetDetail }),
+        SpeakeasyMetadata({ data: "json, name=freeBets", elemType: FreeBetDetail }),
         __metadata("design:type", Array)
     ], Betslipbet.prototype, "freeBets", void 0);
     __decorate([
-        Metadata({ data: "json, name=legs", elemType: shared.Betslipleg }),
+        SpeakeasyMetadata({ data: "json, name=legs", elemType: Betslipleg }),
         __metadata("design:type", Array)
     ], Betslipbet.prototype, "legs", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxStake" }),
+        SpeakeasyMetadata({ data: "json, name=maxStake" }),
         __metadata("design:type", Number)
     ], Betslipbet.prototype, "maxStake", void 0);
     __decorate([
-        Metadata({ data: "json, name=minStake" }),
+        SpeakeasyMetadata({ data: "json, name=minStake" }),
         __metadata("design:type", Number)
     ], Betslipbet.prototype, "minStake", void 0);
     __decorate([
-        Metadata({ data: "json, name=numLines" }),
+        SpeakeasyMetadata({ data: "json, name=numLines" }),
         __metadata("design:type", Number)
     ], Betslipbet.prototype, "numLines", void 0);
     __decorate([
-        Metadata({ data: "json, name=number" }),
+        SpeakeasyMetadata({ data: "json, name=number" }),
         __metadata("design:type", Number)
     ], Betslipbet.prototype, "number", void 0);
     __decorate([
-        Metadata({ data: "json, name=typeCode" }),
+        SpeakeasyMetadata({ data: "json, name=typeCode" }),
         __metadata("design:type", String)
     ], Betslipbet.prototype, "typeCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=typeName" }),
+        SpeakeasyMetadata({ data: "json, name=typeName" }),
         __metadata("design:type", String)
     ], Betslipbet.prototype, "typeName", void 0);
     return Betslipbet;

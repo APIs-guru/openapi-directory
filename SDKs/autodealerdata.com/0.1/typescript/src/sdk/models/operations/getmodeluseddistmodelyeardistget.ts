@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetModelUsedDistModelYearDistGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=brandName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=brandName" })
   brandName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=jwt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" })
   jwt: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=modelName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modelName" })
   modelName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=regionName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=regionName" })
   regionName?: string;
 }
 
 
 export class GetModelUsedDistModelYearDistGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetModelUsedDistModelYearDistGetQueryParams;
 }
 
 
 export class GetModelUsedDistModelYearDistGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   modelYearDistResp?: shared.ModelYearDistResp;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

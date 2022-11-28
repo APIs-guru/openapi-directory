@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Airport } from "./airport";
 import { Link } from "./link";
+
 
 
 // AirportResourceAirports
@@ -9,7 +9,7 @@ import { Link } from "./link";
  * Container for airport elements.
 **/
 export class AirportResourceAirports extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Airport" })
+  @SpeakeasyMetadata({ data: "json, name=Airport" })
   airport?: Airport;
 }
 
@@ -19,13 +19,13 @@ export class AirportResourceAirports extends SpeakeasyBase {
  * Container for meta links.
 **/
 export class AirportResourceMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=@Version" })
+  @SpeakeasyMetadata({ data: "json, name=@Version" })
   atVersion?: string;
 
-  @Metadata({ data: "json, name=Link", elemType: shared.Link })
+  @SpeakeasyMetadata({ data: "json, name=Link", elemType: Link })
   link?: Link[];
 
-  @Metadata({ data: "json, name=TotalCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalCount" })
   totalCount?: number;
 }
 
@@ -35,9 +35,9 @@ export class AirportResourceMeta extends SpeakeasyBase {
  * Root element of airport response.
 **/
 export class AirportResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Airports" })
+  @SpeakeasyMetadata({ data: "json, name=Airports" })
   airports?: AirportResourceAirports;
 
-  @Metadata({ data: "json, name=Meta" })
+  @SpeakeasyMetadata({ data: "json, name=Meta" })
   meta?: AirportResourceMeta;
 }

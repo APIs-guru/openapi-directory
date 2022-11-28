@@ -1,10 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
-from . import environmenttemplate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateEnvironmentTemplateOutput:
-    environment_template: environmenttemplate.EnvironmentTemplate = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environmentTemplate' }})
+    environment_template: EnvironmentTemplate = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('environmentTemplate') }})
     

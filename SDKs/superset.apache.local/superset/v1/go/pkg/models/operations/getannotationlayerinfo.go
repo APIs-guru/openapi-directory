@@ -12,11 +12,6 @@ type GetAnnotationLayerInfoSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetAnnotationLayerInfoRequest struct {
-	QueryParams GetAnnotationLayerInfoQueryParams
-	Security    GetAnnotationLayerInfoSecurity
-}
-
 type GetAnnotationLayerInfo200ApplicationJSONFiltersColumnName struct {
 	Name     *string `json:"name,omitempty"`
 	Operator *string `json:"operator,omitempty"`
@@ -47,6 +42,11 @@ type GetAnnotationLayerInfo422ApplicationJSON struct {
 
 type GetAnnotationLayerInfo500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetAnnotationLayerInfoRequest struct {
+	QueryParams GetAnnotationLayerInfoQueryParams
+	Security    GetAnnotationLayerInfoSecurity
 }
 
 type GetAnnotationLayerInfoResponse struct {

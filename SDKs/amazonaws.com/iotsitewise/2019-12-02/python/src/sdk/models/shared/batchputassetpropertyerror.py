@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import batchputassetpropertyvalueerrorcode_enum
-from . import timeinnanos
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchPutAssetPropertyError:
-    error_code: batchputassetpropertyvalueerrorcode_enum.BatchPutAssetPropertyValueErrorCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorCode' }})
-    error_message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorMessage' }})
-    timestamps: List[timeinnanos.TimeInNanos] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timestamps' }})
+    r"""BatchPutAssetPropertyError
+    Contains error information from updating a batch of asset property values.
+    """
+    
+    error_code: BatchPutAssetPropertyValueErrorCodeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorCode') }})
+    error_message: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorMessage') }})
+    timestamps: List[TimeInNanos] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('timestamps') }})
     

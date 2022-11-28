@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PlayerTournamentStatsByPlayerFormatEnum {
-    Xml = "XML"
-,    Json = "JSON"
+    Xml = "XML",
+    Json = "JSON"
 }
 
 
 export class PlayerTournamentStatsByPlayerPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: PlayerTournamentStatsByPlayerFormatEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=playerid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=playerid" })
   playerid: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tournamentid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tournamentid" })
   tournamentid: string;
 }
 
 
 export class PlayerTournamentStatsByPlayerRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PlayerTournamentStatsByPlayerPathParams;
 }
 
 
 export class PlayerTournamentStatsByPlayerResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   playerTournament?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -5,13 +5,13 @@ from sdk.models import shared
 
 @dataclass
 class ApplicationGetRequest:
-    request: shared.ApplicationGetRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.ApplicationGetRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ApplicationGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     application_get_response: Optional[shared.ApplicationGetResponse] = field(default=None)
-    content_type: str = field(default=None)
     error: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeRange } from "./timerange";
 import { DeploymentStatusEnum } from "./deploymentstatusenum";
+
 
 
 // ListDeploymentsInput
@@ -8,21 +9,21 @@ import { DeploymentStatusEnum } from "./deploymentstatusenum";
  * Represents the input of a <code>ListDeployments</code> operation.
 **/
 export class ListDeploymentsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationName" })
+  @SpeakeasyMetadata({ data: "json, name=applicationName" })
   applicationName?: string;
 
-  @Metadata({ data: "json, name=createTimeRange" })
+  @SpeakeasyMetadata({ data: "json, name=createTimeRange" })
   createTimeRange?: TimeRange;
 
-  @Metadata({ data: "json, name=deploymentGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentGroupName" })
   deploymentGroupName?: string;
 
-  @Metadata({ data: "json, name=externalId" })
+  @SpeakeasyMetadata({ data: "json, name=externalId" })
   externalId?: string;
 
-  @Metadata({ data: "json, name=includeOnlyStatuses" })
+  @SpeakeasyMetadata({ data: "json, name=includeOnlyStatuses" })
   includeOnlyStatuses?: DeploymentStatusEnum[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

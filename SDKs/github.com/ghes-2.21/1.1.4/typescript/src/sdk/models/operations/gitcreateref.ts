@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GitCreateRefPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class GitCreateRefRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=ref" })
+  @SpeakeasyMetadata({ data: "json, name=ref" })
   ref: string;
 
-  @Metadata({ data: "json, name=sha" })
+  @SpeakeasyMetadata({ data: "json, name=sha" })
   sha: string;
 }
 
 
 export class GitCreateRefRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GitCreateRefPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: GitCreateRefRequestBody;
 }
 
 
 export class GitCreateRefResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   gitRef?: shared.GitRef;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

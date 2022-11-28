@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LaunchAppAction
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An action to launch an app.
 **/
 export class LaunchAppAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=packageName" })
+  @SpeakeasyMetadata({ data: "json, name=packageName" })
   packageName?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SqlScheduledMaintenance
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Any scheduled maintenance for this instance.
 **/
 export class SqlScheduledMaintenance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=canDefer" })
+  @SpeakeasyMetadata({ data: "json, name=canDefer" })
   canDefer?: boolean;
 
-  @Metadata({ data: "json, name=canReschedule" })
+  @SpeakeasyMetadata({ data: "json, name=canReschedule" })
   canReschedule?: boolean;
 
-  @Metadata({ data: "json, name=scheduleDeadlineTime" })
+  @SpeakeasyMetadata({ data: "json, name=scheduleDeadlineTime" })
   scheduleDeadlineTime?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 }

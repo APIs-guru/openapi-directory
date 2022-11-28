@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class SnowExportAssetsJSONSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class SnowExportAssetsJSONRequest:
-    security: SnowExportAssetsJSONSecurity = field(default=None)
+    security: SnowExportAssetsJSONSecurity = field()
     
 
 @dataclass
 class SnowExportAssetsJSONResponse:
+    content_type: str = field()
+    status_code: int = field()
     asset_service_nows: Optional[List[shared.AssetServiceNow]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

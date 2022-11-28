@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LambdaAuthorizerConfig
 /**
  * A <code>LambdaAuthorizerConfig</code> holds configuration on how to authorize AppSync API access when using the <code>AWS_LAMBDA</code> authorizer mode. Be aware that an AppSync API may have only one Lambda authorizer configured at a time.
@@ -33,15 +33,15 @@ var LambdaAuthorizerConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authorizerResultTtlInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=authorizerResultTtlInSeconds" }),
         __metadata("design:type", Number)
     ], LambdaAuthorizerConfig.prototype, "authorizerResultTtlInSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=authorizerUri" }),
+        SpeakeasyMetadata({ data: "json, name=authorizerUri" }),
         __metadata("design:type", String)
     ], LambdaAuthorizerConfig.prototype, "authorizerUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=identityValidationExpression" }),
+        SpeakeasyMetadata({ data: "json, name=identityValidationExpression" }),
         __metadata("design:type", String)
     ], LambdaAuthorizerConfig.prototype, "identityValidationExpression", void 0);
     return LambdaAuthorizerConfig;

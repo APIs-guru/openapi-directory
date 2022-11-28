@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // JobScheduling
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Job scheduling options.
 **/
 export class JobScheduling extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxFailuresPerHour" })
+  @SpeakeasyMetadata({ data: "json, name=maxFailuresPerHour" })
   maxFailuresPerHour?: number;
 
-  @Metadata({ data: "json, name=maxFailuresTotal" })
+  @SpeakeasyMetadata({ data: "json, name=maxFailuresTotal" })
   maxFailuresTotal?: number;
 }

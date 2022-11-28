@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DeleteTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Trash = "TRASH"
-,    PermanentDelete = "PERMANENT_DELETE"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Trash = "TRASH",
+    PermanentDelete = "PERMANENT_DELETE"
 }
 
 
@@ -12,6 +13,6 @@ export enum DeleteTypeEnum {
  * An object was deleted.
 **/
 export class Delete extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: DeleteTypeEnum;
 }

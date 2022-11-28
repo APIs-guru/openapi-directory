@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ModelReference } from "./modelreference";
 import { TableReference } from "./tablereference";
 
 
+
 export class JobConfigurationExtract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compression" })
+  @SpeakeasyMetadata({ data: "json, name=compression" })
   compression?: string;
 
-  @Metadata({ data: "json, name=destinationFormat" })
+  @SpeakeasyMetadata({ data: "json, name=destinationFormat" })
   destinationFormat?: string;
 
-  @Metadata({ data: "json, name=destinationUri" })
+  @SpeakeasyMetadata({ data: "json, name=destinationUri" })
   destinationUri?: string;
 
-  @Metadata({ data: "json, name=destinationUris" })
+  @SpeakeasyMetadata({ data: "json, name=destinationUris" })
   destinationUris?: string[];
 
-  @Metadata({ data: "json, name=fieldDelimiter" })
+  @SpeakeasyMetadata({ data: "json, name=fieldDelimiter" })
   fieldDelimiter?: string;
 
-  @Metadata({ data: "json, name=printHeader" })
+  @SpeakeasyMetadata({ data: "json, name=printHeader" })
   printHeader?: boolean;
 
-  @Metadata({ data: "json, name=sourceModel" })
+  @SpeakeasyMetadata({ data: "json, name=sourceModel" })
   sourceModel?: ModelReference;
 
-  @Metadata({ data: "json, name=sourceTable" })
+  @SpeakeasyMetadata({ data: "json, name=sourceTable" })
   sourceTable?: TableReference;
 
-  @Metadata({ data: "json, name=useAvroLogicalTypes" })
+  @SpeakeasyMetadata({ data: "json, name=useAvroLogicalTypes" })
   useAvroLogicalTypes?: boolean;
 }

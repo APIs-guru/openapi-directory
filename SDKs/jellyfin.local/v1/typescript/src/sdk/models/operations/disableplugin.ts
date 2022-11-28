@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class DisablePluginPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pluginId" })
+
+export class DisablePluginPathParamsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pluginId" })
   pluginId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=version" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" })
   version: shared.Version;
 }
 
 
 export class DisablePluginSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class DisablePluginRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DisablePluginPathParams;
+  @SpeakeasyMetadata()
+  pathParams: DisablePluginPathParamsInput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DisablePluginSecurity;
 }
 
 
 export class DisablePluginResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

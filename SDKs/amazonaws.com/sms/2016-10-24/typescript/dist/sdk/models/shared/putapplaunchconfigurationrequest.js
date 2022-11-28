@@ -22,27 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ServerGroupLaunchConfiguration } from "./servergrouplaunchconfiguration";
 var PutAppLaunchConfigurationRequest = /** @class */ (function (_super) {
     __extends(PutAppLaunchConfigurationRequest, _super);
     function PutAppLaunchConfigurationRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=appId" }),
+        SpeakeasyMetadata({ data: "json, name=appId" }),
         __metadata("design:type", String)
     ], PutAppLaunchConfigurationRequest.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "json, name=autoLaunch" }),
+        SpeakeasyMetadata({ data: "json, name=autoLaunch" }),
         __metadata("design:type", Boolean)
     ], PutAppLaunchConfigurationRequest.prototype, "autoLaunch", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleName" }),
+        SpeakeasyMetadata({ data: "json, name=roleName" }),
         __metadata("design:type", String)
     ], PutAppLaunchConfigurationRequest.prototype, "roleName", void 0);
     __decorate([
-        Metadata({ data: "json, name=serverGroupLaunchConfigurations", elemType: shared.ServerGroupLaunchConfiguration }),
+        SpeakeasyMetadata({ data: "json, name=serverGroupLaunchConfigurations", elemType: ServerGroupLaunchConfiguration }),
         __metadata("design:type", Array)
     ], PutAppLaunchConfigurationRequest.prototype, "serverGroupLaunchConfigurations", void 0);
     return PutAppLaunchConfigurationRequest;

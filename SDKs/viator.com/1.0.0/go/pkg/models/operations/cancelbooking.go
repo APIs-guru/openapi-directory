@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var CancelBookingServers = []string{
+var CancelBookingServerList = []string{
 	"https://api.sandbox.viator.com/partner",
 }
 
@@ -14,13 +14,6 @@ type CancelBookingPathParams struct {
 
 type CancelBookingHeaders struct {
 	AcceptLanguage string `header:"style=simple,explode=false,name=Accept-Language"`
-}
-
-type CancelBookingRequest struct {
-	ServerURL  *string
-	PathParams CancelBookingPathParams
-	Headers    CancelBookingHeaders
-	Request    *shared.CancellationRequest `request:"mediaType=application/json"`
 }
 
 type CancelBooking400ApplicationJSONCodeEnum string
@@ -59,6 +52,13 @@ type CancelBooking404ApplicationJSON struct {
 	Message    *CancelBooking404ApplicationJSONMessageEnum `json:"message,omitempty"`
 	Timestamp  *string                                     `json:"timestamp,omitempty"`
 	TrackingID *string                                     `json:"trackingId,omitempty"`
+}
+
+type CancelBookingRequest struct {
+	ServerURL  *string
+	PathParams CancelBookingPathParams
+	Headers    CancelBookingHeaders
+	Request    *shared.CancellationRequest `request:"mediaType=application/json"`
 }
 
 type CancelBookingResponse struct {

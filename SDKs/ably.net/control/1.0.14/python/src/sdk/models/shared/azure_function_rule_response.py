@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import rule_source
+from sdk import utils
+from . import *
 
 class AzureFunctionRuleResponseRequestModeEnum(str, Enum):
     SINGLE = "single"
@@ -21,33 +23,33 @@ class AzureFunctionRuleResponseTargetFormatEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AzureFunctionRuleResponseTargetHeaders:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 
 @dataclass_json
 @dataclass
 class AzureFunctionRuleResponseTarget:
-    azure_app_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'azureAppId' }})
-    azure_function_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'azureFunctionName' }})
-    enveloped: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enveloped' }})
-    format: Optional[AzureFunctionRuleResponseTargetFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'format' }})
-    headers: Optional[List[AzureFunctionRuleResponseTargetHeaders]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'headers' }})
-    signing_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'signingKeyId' }})
+    azure_app_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('azureAppId') }})
+    azure_function_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('azureFunctionName') }})
+    enveloped: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enveloped') }})
+    format: Optional[AzureFunctionRuleResponseTargetFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('format') }})
+    headers: Optional[List[AzureFunctionRuleResponseTargetHeaders]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('headers') }})
+    signing_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('signingKeyId') }})
     
 
 @dataclass_json
 @dataclass
 class AzureFunctionRuleResponse:
-    links: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': '_links' }})
-    app_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appId' }})
-    created: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    modified: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modified' }})
-    request_mode: AzureFunctionRuleResponseRequestModeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestMode' }})
-    rule_type: AzureFunctionRuleResponseRuleTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ruleType' }})
-    source: rule_source.RuleSource = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
-    status: Optional[AzureFunctionRuleResponseStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    target: AzureFunctionRuleResponseTarget = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target' }})
-    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    request_mode: AzureFunctionRuleResponseRequestModeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestMode') }})
+    rule_type: AzureFunctionRuleResponseRuleTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ruleType') }})
+    source: RuleSource = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
+    target: AzureFunctionRuleResponseTarget = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('target') }})
+    links: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('_links') }})
+    app_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('appId') }})
+    created: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('created') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    modified: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('modified') }})
+    status: Optional[AzureFunctionRuleResponseStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
     

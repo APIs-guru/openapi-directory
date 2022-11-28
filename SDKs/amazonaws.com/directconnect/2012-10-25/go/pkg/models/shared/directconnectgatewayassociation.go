@@ -1,5 +1,7 @@
 package shared
 
+// DirectConnectGatewayAssociation
+// Information about an association between a Direct Connect gateway and a virtual private gateway or transit gateway.
 type DirectConnectGatewayAssociation struct {
 	AllowedPrefixesToDirectConnectGateway []RouteFilterPrefix                       `json:"allowedPrefixesToDirectConnectGateway,omitempty"`
 	AssociatedGateway                     *AssociatedGateway                        `json:"associatedGateway,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetDefineRankExpressionActionEnum {
     DefineRankExpression = "DefineRankExpression"
@@ -10,10 +11,10 @@ export enum GetDefineRankExpressionActionEnum {
  * A named expression that can be evaluated at search time and used for ranking or thresholding in a search query. 
 **/
 export class GetDefineRankExpressionRankExpression extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=RankExpression" })
+  @SpeakeasyMetadata({ data: "queryParam, name=RankExpression" })
   rankExpression: string;
 
-  @Metadata({ data: "queryParam, name=RankName" })
+  @SpeakeasyMetadata({ data: "queryParam, name=RankName" })
   rankName: string;
 }
 
@@ -23,60 +24,60 @@ export enum GetDefineRankExpressionVersionEnum {
 
 
 export class GetDefineRankExpressionQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetDefineRankExpressionActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DomainName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DomainName" })
   domainName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=RankExpression" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RankExpression" })
   rankExpression: GetDefineRankExpressionRankExpression;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetDefineRankExpressionVersionEnum;
 }
 
 
 export class GetDefineRankExpressionHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetDefineRankExpressionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDefineRankExpressionQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetDefineRankExpressionHeaders;
 }
 
 
 export class GetDefineRankExpressionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

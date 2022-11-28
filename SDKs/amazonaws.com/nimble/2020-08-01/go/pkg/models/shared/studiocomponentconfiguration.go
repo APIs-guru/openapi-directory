@@ -1,5 +1,7 @@
 package shared
 
+// StudioComponentConfiguration
+// The configuration of the studio component, based on component type.
 type StudioComponentConfiguration struct {
 	ActiveDirectoryConfiguration  *ActiveDirectoryConfiguration  `json:"activeDirectoryConfiguration,omitempty"`
 	ComputeFarmConfiguration      *ComputeFarmConfiguration      `json:"computeFarmConfiguration,omitempty"`

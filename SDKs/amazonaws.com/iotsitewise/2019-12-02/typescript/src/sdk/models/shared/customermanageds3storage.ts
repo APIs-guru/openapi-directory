@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomerManagedS3Storage
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about a customer managed Amazon S3 bucket.
 **/
 export class CustomerManagedS3Storage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=s3ResourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=s3ResourceArn" })
   s3ResourceArn: string;
 }

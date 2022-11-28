@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FailedCreateWorkspaceRequest } from "./failedcreateworkspacerequest";
 import { Workspace } from "./workspace";
 
 
+
 export class CreateWorkspacesResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FailedRequests", elemType: shared.FailedCreateWorkspaceRequest })
+  @SpeakeasyMetadata({ data: "json, name=FailedRequests", elemType: FailedCreateWorkspaceRequest })
   failedRequests?: FailedCreateWorkspaceRequest[];
 
-  @Metadata({ data: "json, name=PendingRequests", elemType: shared.Workspace })
+  @SpeakeasyMetadata({ data: "json, name=PendingRequests", elemType: Workspace })
   pendingRequests?: Workspace[];
 }

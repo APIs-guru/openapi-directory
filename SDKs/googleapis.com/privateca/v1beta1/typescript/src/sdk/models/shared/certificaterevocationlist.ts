@@ -1,11 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RevokedCertificate } from "./revokedcertificate";
 
+
 export enum CertificateRevocationListStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    Superseded = "SUPERSEDED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    Superseded = "SUPERSEDED"
 }
 
 
@@ -14,30 +14,30 @@ export enum CertificateRevocationListStateEnum {
  * A CertificateRevocationList corresponds to a signed X.509 certificate Revocation List (CRL). A CRL contains the serial numbers of certificates that should no longer be trusted.
 **/
 export class CertificateRevocationList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessUrl" })
+  @SpeakeasyMetadata({ data: "json, name=accessUrl" })
   accessUrl?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pemCrl" })
+  @SpeakeasyMetadata({ data: "json, name=pemCrl" })
   pemCrl?: string;
 
-  @Metadata({ data: "json, name=revokedCertificates", elemType: shared.RevokedCertificate })
+  @SpeakeasyMetadata({ data: "json, name=revokedCertificates", elemType: RevokedCertificate })
   revokedCertificates?: RevokedCertificate[];
 
-  @Metadata({ data: "json, name=sequenceNumber" })
+  @SpeakeasyMetadata({ data: "json, name=sequenceNumber" })
   sequenceNumber?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: CertificateRevocationListStateEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

@@ -18,6 +18,8 @@ const (
 	MediaTypeEnumAvatar           MediaTypeEnum = "avatar"
 )
 
+// Media
+// The `Media` object contains a reference for most any media associated with a team or event on TBA.
 type Media struct {
 	Details    map[string]interface{} `json:"details,omitempty"`
 	DirectURL  *string                `json:"direct_url,omitempty"`

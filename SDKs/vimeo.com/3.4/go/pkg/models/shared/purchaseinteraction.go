@@ -1,5 +1,7 @@
 package shared
 
+// PurchaseInteractionBuy
+// Information on purchasing this video.
 type PurchaseInteractionBuy struct {
 	Drm *bool `json:"drm,omitempty"`
 }
@@ -13,6 +15,8 @@ const (
 	PurchaseInteractionSubscribeStreamEnumUnavailable PurchaseInteractionSubscribeStreamEnum = "unavailable"
 )
 
+// PurchaseInteractionSubscribe
+// Information on subscribing to this video.
 type PurchaseInteractionSubscribe struct {
 	Drm          *bool                                   `json:"drm,omitempty"`
 	ExpiresTime  *string                                 `json:"expires_time,omitempty"`

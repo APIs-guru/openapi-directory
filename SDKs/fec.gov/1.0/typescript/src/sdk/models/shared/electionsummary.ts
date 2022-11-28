@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ElectionSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=disbursements" })
+  @SpeakeasyMetadata({ data: "json, name=disbursements" })
   disbursements?: number;
 
-  @Metadata({ data: "json, name=independent_expenditures" })
+  @SpeakeasyMetadata({ data: "json, name=independent_expenditures" })
   independentExpenditures?: number;
 
-  @Metadata({ data: "json, name=receipts" })
+  @SpeakeasyMetadata({ data: "json, name=receipts" })
   receipts?: number;
 }

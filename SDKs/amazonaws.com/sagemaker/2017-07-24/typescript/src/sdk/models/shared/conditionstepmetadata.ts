@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConditionOutcomeEnum } from "./conditionoutcomeenum";
+
 
 
 // ConditionStepMetadata
@@ -7,6 +8,6 @@ import { ConditionOutcomeEnum } from "./conditionoutcomeenum";
  * Metadata for a Condition step.
 **/
 export class ConditionStepMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Outcome" })
+  @SpeakeasyMetadata({ data: "json, name=Outcome" })
   outcome?: ConditionOutcomeEnum;
 }

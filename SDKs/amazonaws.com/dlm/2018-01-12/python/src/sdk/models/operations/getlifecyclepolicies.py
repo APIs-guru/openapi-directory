@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetLifecyclePoliciesStateEnum(str, Enum):
@@ -30,17 +34,17 @@ class GetLifecyclePoliciesHeaders:
 
 @dataclass
 class GetLifecyclePoliciesRequest:
-    query_params: GetLifecyclePoliciesQueryParams = field(default=None)
-    headers: GetLifecyclePoliciesHeaders = field(default=None)
+    headers: GetLifecyclePoliciesHeaders = field()
+    query_params: GetLifecyclePoliciesQueryParams = field()
     
 
 @dataclass
 class GetLifecyclePoliciesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_lifecycle_policies_response: Optional[shared.GetLifecyclePoliciesResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

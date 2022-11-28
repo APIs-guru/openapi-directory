@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// JobRun
+// This entity describes a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.
 type JobRun struct {
 	Arn                    *string                 `json:"arn,omitempty"`
 	ClientToken            *string                 `json:"clientToken,omitempty"`

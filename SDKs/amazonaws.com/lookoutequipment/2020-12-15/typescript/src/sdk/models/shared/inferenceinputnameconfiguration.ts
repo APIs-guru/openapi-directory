@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InferenceInputNameConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies configuration information for the input data for the inference, including timestamp format and delimiter. 
 **/
 export class InferenceInputNameConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComponentTimestampDelimiter" })
+  @SpeakeasyMetadata({ data: "json, name=ComponentTimestampDelimiter" })
   componentTimestampDelimiter?: string;
 
-  @Metadata({ data: "json, name=TimestampFormat" })
+  @SpeakeasyMetadata({ data: "json, name=TimestampFormat" })
   timestampFormat?: string;
 }

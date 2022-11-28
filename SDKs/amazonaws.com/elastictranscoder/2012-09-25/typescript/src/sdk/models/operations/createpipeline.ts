@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreatePipelineHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,13 +32,13 @@ export class CreatePipelineHeaders extends SpeakeasyBase {
  * The <code>PipelineOutputConfig</code> structure.
 **/
 export class CreatePipelineRequestBodyContentConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=Bucket" })
   bucket?: string;
 
-  @Metadata({ data: "json, name=Permissions", elemType: shared.Permission })
+  @SpeakeasyMetadata({ data: "json, name=Permissions", elemType: shared.Permission })
   permissions?: shared.Permission[];
 
-  @Metadata({ data: "json, name=StorageClass" })
+  @SpeakeasyMetadata({ data: "json, name=StorageClass" })
   storageClass?: string;
 }
 
@@ -47,16 +48,16 @@ export class CreatePipelineRequestBodyContentConfig extends SpeakeasyBase {
  * <p>The Amazon Simple Notification Service (Amazon SNS) topic or topics to notify in order to report job status.</p> <important> <p>To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.</p> </important>
 **/
 export class CreatePipelineRequestBodyNotifications extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Completed" })
+  @SpeakeasyMetadata({ data: "json, name=Completed" })
   completed?: string;
 
-  @Metadata({ data: "json, name=Error" })
+  @SpeakeasyMetadata({ data: "json, name=Error" })
   error?: string;
 
-  @Metadata({ data: "json, name=Progressing" })
+  @SpeakeasyMetadata({ data: "json, name=Progressing" })
   progressing?: string;
 
-  @Metadata({ data: "json, name=Warning" })
+  @SpeakeasyMetadata({ data: "json, name=Warning" })
   warning?: string;
 }
 
@@ -66,78 +67,78 @@ export class CreatePipelineRequestBodyNotifications extends SpeakeasyBase {
  * The <code>PipelineOutputConfig</code> structure.
 **/
 export class CreatePipelineRequestBodyThumbnailConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=Bucket" })
   bucket?: string;
 
-  @Metadata({ data: "json, name=Permissions", elemType: shared.Permission })
+  @SpeakeasyMetadata({ data: "json, name=Permissions", elemType: shared.Permission })
   permissions?: shared.Permission[];
 
-  @Metadata({ data: "json, name=StorageClass" })
+  @SpeakeasyMetadata({ data: "json, name=StorageClass" })
   storageClass?: string;
 }
 
 
 export class CreatePipelineRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AwsKmsKeyArn" })
+  @SpeakeasyMetadata({ data: "json, name=AwsKmsKeyArn" })
   awsKmsKeyArn?: string;
 
-  @Metadata({ data: "json, name=ContentConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ContentConfig" })
   contentConfig?: CreatePipelineRequestBodyContentConfig;
 
-  @Metadata({ data: "json, name=InputBucket" })
+  @SpeakeasyMetadata({ data: "json, name=InputBucket" })
   inputBucket: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=Notifications" })
+  @SpeakeasyMetadata({ data: "json, name=Notifications" })
   notifications?: CreatePipelineRequestBodyNotifications;
 
-  @Metadata({ data: "json, name=OutputBucket" })
+  @SpeakeasyMetadata({ data: "json, name=OutputBucket" })
   outputBucket?: string;
 
-  @Metadata({ data: "json, name=Role" })
+  @SpeakeasyMetadata({ data: "json, name=Role" })
   role: string;
 
-  @Metadata({ data: "json, name=ThumbnailConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ThumbnailConfig" })
   thumbnailConfig?: CreatePipelineRequestBodyThumbnailConfig;
 }
 
 
 export class CreatePipelineRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreatePipelineHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreatePipelineRequestBody;
 }
 
 
 export class CreatePipelineResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createPipelineResponse?: shared.CreatePipelineResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   incompatibleVersionException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServiceException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

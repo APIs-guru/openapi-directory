@@ -5,7 +5,7 @@ import (
 )
 
 type ExtrasTopologyMapsCreateRequest struct {
-	Request shared.WritableTopologyMap `request:"mediaType=application/json"`
+	Request shared.WritableTopologyMapInput `request:"mediaType=application/json"`
 }
 
 type ExtrasTopologyMapsCreateResponse struct {

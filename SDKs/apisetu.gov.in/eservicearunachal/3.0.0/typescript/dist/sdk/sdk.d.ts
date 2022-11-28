@@ -1,37 +1,52 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://apisetu.gov.in/eservicearunachal/v3"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
     /**
+     * chcer - Character Certificate
+     *
      * API to verify Character Certificate.
     **/
-    Chcer(req: operations.ChcerRequest, config?: AxiosRequestConfig): Promise<operations.ChcerResponse>;
+    chcer(req: operations.ChcerRequest, config?: AxiosRequestConfig): Promise<operations.ChcerResponse>;
     /**
+     * dmcer - Domicile Certificate
+     *
      * API to verify Domicile Certificate.
     **/
-    Dmcer(req: operations.DmcerRequest, config?: AxiosRequestConfig): Promise<operations.DmcerResponse>;
+    dmcer(req: operations.DmcerRequest, config?: AxiosRequestConfig): Promise<operations.DmcerResponse>;
     /**
+     * dpcer - Dependency Certificate
+     *
      * API to verify Dependency Certificate.
     **/
-    Dpcer(req: operations.DpcerRequest, config?: AxiosRequestConfig): Promise<operations.DpcerResponse>;
+    dpcer(req: operations.DpcerRequest, config?: AxiosRequestConfig): Promise<operations.DpcerResponse>;
     /**
+     * incer - Income Certificate
+     *
      * API to verify Income Certificate.
     **/
-    Incer(req: operations.IncerRequest, config?: AxiosRequestConfig): Promise<operations.IncerResponse>;
+    incer(req: operations.IncerRequest, config?: AxiosRequestConfig): Promise<operations.IncerResponse>;
     /**
+     * rscer - Residence Certificate
+     *
      * API to verify Residence Certificate.
     **/
-    Rscer(req: operations.RscerRequest, config?: AxiosRequestConfig): Promise<operations.RscerResponse>;
+    rscer(req: operations.RscerRequest, config?: AxiosRequestConfig): Promise<operations.RscerResponse>;
     /**
+     * shcer - SC/ST  Certificate
+     *
      * API to verify SC/ST  Certificate.
     **/
-    Shcer(req: operations.ShcerRequest, config?: AxiosRequestConfig): Promise<operations.ShcerResponse>;
+    shcer(req: operations.ShcerRequest, config?: AxiosRequestConfig): Promise<operations.ShcerResponse>;
 }
 export {};

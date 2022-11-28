@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,35 +22,39 @@ class CreateWorldExportJobHeaders:
 @dataclass_json
 @dataclass
 class CreateWorldExportJobRequestBodyOutputLocation:
-    s3_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3Bucket' }})
-    s3_prefix: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3Prefix' }})
+    r"""CreateWorldExportJobRequestBodyOutputLocation
+    The output location.
+    """
+    
+    s3_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3Bucket') }})
+    s3_prefix: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3Prefix') }})
     
 
 @dataclass_json
 @dataclass
 class CreateWorldExportJobRequestBody:
-    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientRequestToken' }})
-    iam_role: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iamRole' }})
-    output_location: CreateWorldExportJobRequestBodyOutputLocation = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outputLocation' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    worlds: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'worlds' }})
+    iam_role: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('iamRole') }})
+    output_location: CreateWorldExportJobRequestBodyOutputLocation = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('outputLocation') }})
+    worlds: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('worlds') }})
+    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientRequestToken') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateWorldExportJobRequest:
-    headers: CreateWorldExportJobHeaders = field(default=None)
-    request: CreateWorldExportJobRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateWorldExportJobHeaders = field()
+    request: CreateWorldExportJobRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateWorldExportJobResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_world_export_job_response: Optional[shared.CreateWorldExportJobResponse] = field(default=None)
     idempotent_parameter_mismatch_exception: Optional[Any] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

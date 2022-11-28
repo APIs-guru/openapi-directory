@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GlobalImagesPutGlobalImageContentsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ID" })
   id: string;
 }
 
 
 export class GlobalImagesPutGlobalImageContentsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=isFullImage" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isFullImage" })
   isFullImage?: boolean;
 }
 
 
 export class GlobalImagesPutGlobalImageContentsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GlobalImagesPutGlobalImageContentsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GlobalImagesPutGlobalImageContentsQueryParams;
 }
 
 
 export class GlobalImagesPutGlobalImageContentsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   systemObject?: Map<string, any>;
 }

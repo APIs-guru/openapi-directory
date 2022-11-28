@@ -1,37 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EndpointGetAListOfCurrentUsersPlaylistsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 }
 
 
 export class EndpointGetAListOfCurrentUsersPlaylistsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class EndpointGetAListOfCurrentUsersPlaylistsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   spotifyAuth: shared.SchemeSpotifyAuth;
-}
-
-
-export class EndpointGetAListOfCurrentUsersPlaylistsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: EndpointGetAListOfCurrentUsersPlaylistsQueryParams;
-
-  @Metadata()
-  headers: EndpointGetAListOfCurrentUsersPlaylistsHeaders;
-
-  @Metadata()
-  security: EndpointGetAListOfCurrentUsersPlaylistsSecurity;
 }
 
 
@@ -40,39 +29,51 @@ export class EndpointGetAListOfCurrentUsersPlaylistsRequest extends SpeakeasyBas
  * https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
 **/
 export class EndpointGetAListOfCurrentUsersPlaylists200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 
-  @Metadata({ data: "json, name=items", elemType: shared.SimplifiedPlaylistObject })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: shared.SimplifiedPlaylistObject })
   items?: shared.SimplifiedPlaylistObject[];
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset?: number;
 
-  @Metadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata({ data: "json, name=previous" })
   previous?: string;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
+export class EndpointGetAListOfCurrentUsersPlaylistsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: EndpointGetAListOfCurrentUsersPlaylistsQueryParams;
+
+  @SpeakeasyMetadata()
+  headers: EndpointGetAListOfCurrentUsersPlaylistsHeaders;
+
+  @SpeakeasyMetadata()
+  security: EndpointGetAListOfCurrentUsersPlaylistsSecurity;
+}
+
+
 export class EndpointGetAListOfCurrentUsersPlaylistsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseObject?: shared.ErrorResponseObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   endpointGetAListOfCurrentUsersPlaylists200ApplicationJsonObject?: EndpointGetAListOfCurrentUsersPlaylists200ApplicationJson;
 }

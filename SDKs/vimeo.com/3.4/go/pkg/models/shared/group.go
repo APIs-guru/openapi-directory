@@ -1,17 +1,23 @@
 package shared
 
+// GroupMetadataConnectionsUsers
+// Information about the members or moderators of this group.
 type GroupMetadataConnectionsUsers struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupMetadataConnectionsVideos
+// Information about the videos contained within this group.
 type GroupMetadataConnectionsVideos struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupMetadataConnections
+// A collection of information that is connected to this resource.
 type GroupMetadataConnections struct {
 	Users  GroupMetadataConnectionsUsers  `json:"users"`
 	Videos GroupMetadataConnectionsVideos `json:"videos"`
@@ -24,6 +30,8 @@ const (
 	GroupMetadataInteractionsJoinTypeEnumModerator GroupMetadataInteractionsJoinTypeEnum = "moderator"
 )
 
+// GroupMetadataInteractionsJoin
+// An action indicating that someone has joined the group. This data requires a bearer token with the `private` scope.
 type GroupMetadataInteractionsJoin struct {
 	Added     bool                                  `json:"added"`
 	AddedTime string                                `json:"added_time"`
@@ -32,10 +40,14 @@ type GroupMetadataInteractionsJoin struct {
 	URI       string                                `json:"uri"`
 }
 
+// GroupMetadataInteractions
+// User actions that have involved the group. This data requires a bearer token with the `private` scope.
 type GroupMetadataInteractions struct {
 	Join GroupMetadataInteractionsJoin `json:"join"`
 }
 
+// GroupMetadata
+// Metadata about the group.
 type GroupMetadata struct {
 	Connections  GroupMetadataConnections  `json:"connections"`
 	Interactions GroupMetadataInteractions `json:"interactions"`
@@ -76,6 +88,8 @@ const (
 	GroupPrivacyViewEnumMembers GroupPrivacyViewEnum = "members"
 )
 
+// GroupPrivacy
+// The group's privacy settings.
 type GroupPrivacy struct {
 	Comment GroupPrivacyCommentEnum `json:"comment"`
 	Invite  GroupPrivacyInviteEnum  `json:"invite"`
@@ -98,125 +112,167 @@ const (
 	GroupUserAccountEnumProducer     GroupUserAccountEnum = "producer"
 )
 
+// GroupUserMetadataConnectionsAlbums
+// Information about the albums created by this user.
 type GroupUserMetadataConnectionsAlbums struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataConnectionsAppearances
+// Information about the appearances of this user in other videos.
 type GroupUserMetadataConnectionsAppearances struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataConnectionsBlock
+// Information on the users that the current user has blocked. This data requires a bearer token with the `private` scope.
 type GroupUserMetadataConnectionsBlock struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataConnectionsCategories
+// Information about this user's followed categories.
 type GroupUserMetadataConnectionsCategories struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataConnectionsChannels
+// Information about this user's subscribed channels.
 type GroupUserMetadataConnectionsChannels struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataConnectionsFeed
+// Information about this user's feed.
 type GroupUserMetadataConnectionsFeed struct {
 	Options []string `json:"options"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataConnectionsFolders
+// Information about this user's folders.
 type GroupUserMetadataConnectionsFolders struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataConnectionsFollowers
+// Information about the user's followers.
 type GroupUserMetadataConnectionsFollowers struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataConnectionsFollowing
+// Information about the users that the current user is following.
 type GroupUserMetadataConnectionsFollowing struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataConnectionsGroups
+// Information about the groups created by this user.
 type GroupUserMetadataConnectionsGroups struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataConnectionsLikes
+// Information about the videos that this user has liked.
 type GroupUserMetadataConnectionsLikes struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataConnectionsModeratedChannels
+// Information about the channels that this user moderates.
 type GroupUserMetadataConnectionsModeratedChannels struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataConnectionsPictures
+// Information about this user's portraits.
 type GroupUserMetadataConnectionsPictures struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataConnectionsPortfolios
+// Information about this user's portfolios.
 type GroupUserMetadataConnectionsPortfolios struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataConnectionsRecommendedChannels
+// A collection of recommended channels for the current user to follow. This data requires a bearer token with the `private` scope.
 type GroupUserMetadataConnectionsRecommendedChannels struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataConnectionsRecommendedUsers
+// A Collection of recommended users for the current user to follow. This data requires a bearer token with the `private` scope.
 type GroupUserMetadataConnectionsRecommendedUsers struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataConnectionsShared
+// Information about the videos that have been shared with this user.
 type GroupUserMetadataConnectionsShared struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataConnectionsVideos
+// Information about the videos uploaded by this user.
 type GroupUserMetadataConnectionsVideos struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataConnectionsWatchedVideos
+// Information about the videos that this user has watched.
 type GroupUserMetadataConnectionsWatchedVideos struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataConnectionsWatchlater
+// Information about the videos that this user wants to watch later.
 type GroupUserMetadataConnectionsWatchlater struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataConnections
+// The list of resource URIs related to the user.
 type GroupUserMetadataConnections struct {
 	Albums              GroupUserMetadataConnectionsAlbums              `json:"albums"`
 	Appearances         GroupUserMetadataConnectionsAppearances         `json:"appearances"`
@@ -245,6 +301,8 @@ type GroupUserMetadataInteractionsAddPrivacyUser struct {
 	URI     *string  `json:"uri,omitempty"`
 }
 
+// GroupUserMetadataInteractionsBlock
+// Information related to the block status of this user.
 type GroupUserMetadataInteractionsBlock struct {
 	Added     bool     `json:"added"`
 	AddedTime string   `json:"added_time"`
@@ -252,12 +310,16 @@ type GroupUserMetadataInteractionsBlock struct {
 	URI       string   `json:"uri"`
 }
 
+// GroupUserMetadataInteractionsFollow
+// Information related to the followed status of this user.
 type GroupUserMetadataInteractionsFollow struct {
 	Added   bool     `json:"added"`
 	Options []string `json:"options"`
 	URI     string   `json:"uri"`
 }
 
+// GroupUserMetadataInteractionsReport
+// Information regarding where and how to report a user.
 type GroupUserMetadataInteractionsReport struct {
 	Options []string `json:"options"`
 	Reason  []string `json:"reason"`
@@ -271,6 +333,8 @@ type GroupUserMetadataInteractions struct {
 	Report         GroupUserMetadataInteractionsReport          `json:"report"`
 }
 
+// GroupUserMetadata
+// The user's metadata.
 type GroupUserMetadata struct {
 	Connections  GroupUserMetadataConnections  `json:"connections"`
 	Interactions GroupUserMetadataInteractions `json:"interactions"`
@@ -320,12 +384,16 @@ type GroupUserPreferences struct {
 	Videos *GroupUserPreferencesVideos `json:"videos,omitempty"`
 }
 
+// GroupUserUploadQuotaLifetime
+// Information about the user's lifetime upload usage.
 type GroupUserUploadQuotaLifetime struct {
 	Free float64 `json:"free"`
 	Max  float64 `json:"max"`
 	Used float64 `json:"used"`
 }
 
+// GroupUserUploadQuotaPeriodic
+// Information about the user's usage for the current period.
 type GroupUserUploadQuotaPeriodic struct {
 	Free      float64 `json:"free"`
 	Max       float64 `json:"max"`
@@ -340,6 +408,8 @@ const (
 	GroupUserUploadQuotaSpaceShowingEnumPeriodic GroupUserUploadQuotaSpaceShowingEnum = "periodic"
 )
 
+// GroupUserUploadQuotaSpace
+// Information about the user's upload space remaining for the current period.
 type GroupUserUploadQuotaSpace struct {
 	Free    float64                              `json:"free"`
 	Max     float64                              `json:"max"`
@@ -347,6 +417,8 @@ type GroupUserUploadQuotaSpace struct {
 	Used    float64                              `json:"used"`
 }
 
+// GroupUserUploadQuota
+// Appears only when the user has upload access and is looking at their own user record.
 type GroupUserUploadQuota struct {
 	Lifetime GroupUserUploadQuotaLifetime `json:"lifetime"`
 	Periodic GroupUserUploadQuotaPeriodic `json:"periodic"`
@@ -359,6 +431,8 @@ type GroupUserWebsites struct {
 	Name        string `json:"name"`
 }
 
+// GroupUser
+// The owner of the group.
 type GroupUser struct {
 	Account       GroupUserAccountEnum  `json:"account"`
 	Bio           string                `json:"bio"`

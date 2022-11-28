@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndOfSegmentLocation } from "./endofsegmentlocation";
 import { Location } from "./location";
+
 
 
 // InsertTextRequest
@@ -8,12 +9,12 @@ import { Location } from "./location";
  * Inserts text at the specified location.
 **/
 export class InsertTextRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endOfSegmentLocation" })
+  @SpeakeasyMetadata({ data: "json, name=endOfSegmentLocation" })
   endOfSegmentLocation?: EndOfSegmentLocation;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: Location;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }

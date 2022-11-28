@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CaptureModeEnum } from "./capturemodeenum";
+
 
 
 // CaptureOption
@@ -7,6 +8,6 @@ import { CaptureModeEnum } from "./capturemodeenum";
  * <p/>
 **/
 export class CaptureOption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CaptureMode" })
+  @SpeakeasyMetadata({ data: "json, name=CaptureMode" })
   captureMode: CaptureModeEnum;
 }

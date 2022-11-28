@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchLogsLogDelivery } from "./cloudwatchlogslogdelivery";
 import { FirehoseLogDelivery } from "./firehoselogdelivery";
 import { S3LogDelivery } from "./s3logdelivery";

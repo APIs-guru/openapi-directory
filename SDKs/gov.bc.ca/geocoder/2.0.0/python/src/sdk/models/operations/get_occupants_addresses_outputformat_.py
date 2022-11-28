@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetOccupantsAddressesOutputFormatOutputFormatEnum(str, Enum):
     JSON = "json"
@@ -13,7 +14,7 @@ class GetOccupantsAddressesOutputFormatOutputFormatEnum(str, Enum):
 
 @dataclass
 class GetOccupantsAddressesOutputFormatPathParams:
-    output_format: GetOccupantsAddressesOutputFormatOutputFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
+    output_format: GetOccupantsAddressesOutputFormatOutputFormatEnum = field(metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
     
 class GetOccupantsAddressesOutputFormatInterpolationEnum(str, Enum):
     ADAPTIVE = "adaptive"
@@ -98,12 +99,12 @@ class GetOccupantsAddressesOutputFormatQueryParams:
 
 @dataclass
 class GetOccupantsAddressesOutputFormatRequest:
-    path_params: GetOccupantsAddressesOutputFormatPathParams = field(default=None)
-    query_params: GetOccupantsAddressesOutputFormatQueryParams = field(default=None)
+    path_params: GetOccupantsAddressesOutputFormatPathParams = field()
+    query_params: GetOccupantsAddressesOutputFormatQueryParams = field()
     
 
 @dataclass
 class GetOccupantsAddressesOutputFormatResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

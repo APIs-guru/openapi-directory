@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ConfigSsh extends SpeakeasyBase {
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

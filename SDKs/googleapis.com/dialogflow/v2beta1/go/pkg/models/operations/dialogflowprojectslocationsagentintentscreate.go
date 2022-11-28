@@ -49,7 +49,7 @@ type DialogflowProjectsLocationsAgentIntentsCreateSecurity struct {
 type DialogflowProjectsLocationsAgentIntentsCreateRequest struct {
 	PathParams  DialogflowProjectsLocationsAgentIntentsCreatePathParams
 	QueryParams DialogflowProjectsLocationsAgentIntentsCreateQueryParams
-	Request     *shared.GoogleCloudDialogflowV2beta1Intent `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudDialogflowV2beta1IntentInput `request:"mediaType=application/json"`
 	Security    DialogflowProjectsLocationsAgentIntentsCreateSecurity
 }
 

@@ -21,6 +21,8 @@ const (
 	StartImportRequestBodyMergeStrategyEnumFailOnConflict StartImportRequestBodyMergeStrategyEnum = "FailOnConflict"
 )
 
+// StartImportRequestBodyResourceSpecification
+// Provides information about the bot or bot locale that you want to import. You can sepcifiy the <code>botImportSpecification</code> or the <code>botLocaleImportSpecification</code>, but not both.
 type StartImportRequestBodyResourceSpecification struct {
 	BotImportSpecification       *shared.BotImportSpecification       `json:"botImportSpecification,omitempty"`
 	BotLocaleImportSpecification *shared.BotLocaleImportSpecification `json:"botLocaleImportSpecification,omitempty"`

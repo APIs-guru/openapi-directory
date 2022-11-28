@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QueryMetadata } from "./querymetadata";
 import { Parameters } from "./parameters";
 import { QuerySchedule } from "./queryschedule";
@@ -36,35 +36,35 @@ var Query = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], Query.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadata" }),
+        SpeakeasyMetadata({ data: "json, name=metadata" }),
         __metadata("design:type", QueryMetadata)
     ], Query.prototype, "metadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=params" }),
+        SpeakeasyMetadata({ data: "json, name=params" }),
         __metadata("design:type", Parameters)
     ], Query.prototype, "params", void 0);
     __decorate([
-        Metadata({ data: "json, name=queryId" }),
+        SpeakeasyMetadata({ data: "json, name=queryId" }),
         __metadata("design:type", String)
     ], Query.prototype, "queryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=reportDataEndTimeMs" }),
+        SpeakeasyMetadata({ data: "json, name=reportDataEndTimeMs" }),
         __metadata("design:type", String)
     ], Query.prototype, "reportDataEndTimeMs", void 0);
     __decorate([
-        Metadata({ data: "json, name=reportDataStartTimeMs" }),
+        SpeakeasyMetadata({ data: "json, name=reportDataStartTimeMs" }),
         __metadata("design:type", String)
     ], Query.prototype, "reportDataStartTimeMs", void 0);
     __decorate([
-        Metadata({ data: "json, name=schedule" }),
+        SpeakeasyMetadata({ data: "json, name=schedule" }),
         __metadata("design:type", QuerySchedule)
     ], Query.prototype, "schedule", void 0);
     __decorate([
-        Metadata({ data: "json, name=timezoneCode" }),
+        SpeakeasyMetadata({ data: "json, name=timezoneCode" }),
         __metadata("design:type", String)
     ], Query.prototype, "timezoneCode", void 0);
     return Query;

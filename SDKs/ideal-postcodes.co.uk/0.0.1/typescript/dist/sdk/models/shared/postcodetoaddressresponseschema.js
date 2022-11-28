@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Address } from "./address";
 var PostcodeToAddressResponseSchema = /** @class */ (function (_super) {
     __extends(PostcodeToAddressResponseSchema, _super);
     function PostcodeToAddressResponseSchema() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=code" }),
+        SpeakeasyMetadata({ data: "json, name=code" }),
         __metadata("design:type", Number)
     ], PostcodeToAddressResponseSchema.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], PostcodeToAddressResponseSchema.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=result", elemType: shared.Address }),
+        SpeakeasyMetadata({ data: "json, name=result", elemType: Address }),
         __metadata("design:type", Array)
     ], PostcodeToAddressResponseSchema.prototype, "result", void 0);
     return PostcodeToAddressResponseSchema;

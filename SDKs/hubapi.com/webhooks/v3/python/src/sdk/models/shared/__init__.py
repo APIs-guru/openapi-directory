@@ -1,6 +1,7 @@
 from .batchinputsubscriptionbatchupdaterequest import *
 from .batchresponsesubscriptionresponse import *
 from .batchresponsesubscriptionresponsewitherrors import *
+from .error import *
 from .errorcategory import *
 from .errordetail import *
 from .security import *

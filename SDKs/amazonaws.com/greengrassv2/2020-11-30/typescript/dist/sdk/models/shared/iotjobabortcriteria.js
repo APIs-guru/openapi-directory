@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IoTJobAbortActionEnum } from "./iotjobabortactionenum";
 import { IoTJobExecutionFailureTypeEnum } from "./iotjobexecutionfailuretypeenum";
 // IoTJobAbortCriteria
@@ -35,19 +35,19 @@ var IoTJobAbortCriteria = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=action" }),
+        SpeakeasyMetadata({ data: "json, name=action" }),
         __metadata("design:type", String)
     ], IoTJobAbortCriteria.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureType" }),
+        SpeakeasyMetadata({ data: "json, name=failureType" }),
         __metadata("design:type", String)
     ], IoTJobAbortCriteria.prototype, "failureType", void 0);
     __decorate([
-        Metadata({ data: "json, name=minNumberOfExecutedThings" }),
+        SpeakeasyMetadata({ data: "json, name=minNumberOfExecutedThings" }),
         __metadata("design:type", Number)
     ], IoTJobAbortCriteria.prototype, "minNumberOfExecutedThings", void 0);
     __decorate([
-        Metadata({ data: "json, name=thresholdPercentage" }),
+        SpeakeasyMetadata({ data: "json, name=thresholdPercentage" }),
         __metadata("design:type", Number)
     ], IoTJobAbortCriteria.prototype, "thresholdPercentage", void 0);
     return IoTJobAbortCriteria;

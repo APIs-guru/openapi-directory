@@ -11,6 +11,8 @@ const (
 	RoleStageEnumEap        RoleStageEnum = "EAP"
 )
 
+// Role
+// A role in the Identity and Access Management API.
 type Role struct {
 	Deleted             *bool          `json:"deleted,omitempty"`
 	Description         *string        `json:"description,omitempty"`

@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeProjectVersionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ProjectArn" })
+  @SpeakeasyMetadata({ data: "json, name=ProjectArn" })
   projectArn: string;
 
-  @Metadata({ data: "json, name=VersionNames" })
+  @SpeakeasyMetadata({ data: "json, name=VersionNames" })
   versionNames?: string[];
 }

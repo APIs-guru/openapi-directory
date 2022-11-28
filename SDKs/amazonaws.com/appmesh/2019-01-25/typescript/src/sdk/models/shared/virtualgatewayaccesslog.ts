@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualGatewayFileAccessLog } from "./virtualgatewayfileaccesslog";
+
 
 
 // VirtualGatewayAccessLog
@@ -7,6 +8,6 @@ import { VirtualGatewayFileAccessLog } from "./virtualgatewayfileaccesslog";
  * The access log configuration for a virtual gateway.
 **/
 export class VirtualGatewayAccessLog extends SpeakeasyBase {
-  @Metadata({ data: "json, name=file" })
+  @SpeakeasyMetadata({ data: "json, name=file" })
   file?: VirtualGatewayFileAccessLog;
 }

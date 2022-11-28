@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CertHttpChallenge
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents an HTTP certificate challenge.
 **/
 export class CertHttpChallenge extends SpeakeasyBase {
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token?: string;
 }

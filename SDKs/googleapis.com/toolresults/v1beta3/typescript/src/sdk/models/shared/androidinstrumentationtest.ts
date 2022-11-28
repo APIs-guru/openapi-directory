@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AndroidInstrumentationTest
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A test of an Android application that can control an Android component independently of its normal lifecycle. See for more information on types of Android tests.
 **/
 export class AndroidInstrumentationTest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=testPackageId" })
+  @SpeakeasyMetadata({ data: "json, name=testPackageId" })
   testPackageId?: string;
 
-  @Metadata({ data: "json, name=testRunnerClass" })
+  @SpeakeasyMetadata({ data: "json, name=testRunnerClass" })
   testRunnerClass?: string;
 
-  @Metadata({ data: "json, name=testTargets" })
+  @SpeakeasyMetadata({ data: "json, name=testTargets" })
   testTargets?: string[];
 
-  @Metadata({ data: "json, name=useOrchestrator" })
+  @SpeakeasyMetadata({ data: "json, name=useOrchestrator" })
   useOrchestrator?: boolean;
 }

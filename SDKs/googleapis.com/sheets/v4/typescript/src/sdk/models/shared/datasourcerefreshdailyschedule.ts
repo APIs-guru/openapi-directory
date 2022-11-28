@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeOfDay } from "./timeofday";
+
 
 
 // DataSourceRefreshDailySchedule
@@ -7,6 +8,6 @@ import { TimeOfDay } from "./timeofday";
  * A schedule for data to refresh every day in a given time interval.
 **/
 export class DataSourceRefreshDailySchedule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: TimeOfDay;
 }

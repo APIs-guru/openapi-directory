@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PipelineDeclaration } from "./pipelinedeclaration";
 import { Tag } from "./tag";
+
 
 
 // CreatePipelineOutput
@@ -9,9 +9,9 @@ import { Tag } from "./tag";
  * Represents the output of a <code>CreatePipeline</code> action.
 **/
 export class CreatePipelineOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pipeline" })
+  @SpeakeasyMetadata({ data: "json, name=pipeline" })
   pipeline?: PipelineDeclaration;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 }

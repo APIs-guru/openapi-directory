@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class WindowsDeploymentTypeEnum(str, Enum):
     MULTI_AZ_1 = "MULTI_AZ_1"

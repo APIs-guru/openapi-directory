@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .addproducttoproductsetrequest import *
 from .alt_enum import *
 from .annotatefilerequest import *

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PayeeUserSelfUpdateRequest
@@ -9,21 +10,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class PayeeUserSelfUpdateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=primaryContactNumber" })
+  @SpeakeasyMetadata({ data: "json, name=primaryContactNumber" })
   primaryContactNumber?: string;
 
-  @Metadata({ data: "json, name=secondaryContactNumber" })
+  @SpeakeasyMetadata({ data: "json, name=secondaryContactNumber" })
   secondaryContactNumber?: string;
 
-  @Metadata({ data: "json, name=smsNumber" })
+  @SpeakeasyMetadata({ data: "json, name=smsNumber" })
   smsNumber?: string;
 }

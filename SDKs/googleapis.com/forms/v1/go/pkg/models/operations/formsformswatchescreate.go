@@ -64,7 +64,7 @@ type FormsFormsWatchesCreateSecurity struct {
 type FormsFormsWatchesCreateRequest struct {
 	PathParams  FormsFormsWatchesCreatePathParams
 	QueryParams FormsFormsWatchesCreateQueryParams
-	Request     *shared.CreateWatchRequest `request:"mediaType=application/json"`
+	Request     *shared.CreateWatchRequestInput `request:"mediaType=application/json"`
 	Security    FormsFormsWatchesCreateSecurity
 }
 

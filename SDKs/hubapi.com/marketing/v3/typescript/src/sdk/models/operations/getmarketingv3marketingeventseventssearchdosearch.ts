@@ -1,53 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetMarketingV3MarketingEventsEventsSearchDoSearchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" })
   q: string;
 }
 
 
-export class GetMarketingV3MarketingEventsEventsSearchDoSearchSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  hapikey: shared.SchemeHapikey;
-}
-
-
-export class GetMarketingV3MarketingEventsEventsSearchDoSearchSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Legacy: shared.SchemeOauth2Legacy;
-}
-
-
 export class GetMarketingV3MarketingEventsEventsSearchDoSearchSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetMarketingV3MarketingEventsEventsSearchDoSearchSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  hapikey?: shared.SchemeHapikey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetMarketingV3MarketingEventsEventsSearchDoSearchSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Legacy?: shared.SchemeOauth2Legacy;
+
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
 }
 
 
 export class GetMarketingV3MarketingEventsEventsSearchDoSearchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetMarketingV3MarketingEventsEventsSearchDoSearchQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetMarketingV3MarketingEventsEventsSearchDoSearchSecurity;
 }
 
 
 export class GetMarketingV3MarketingEventsEventsSearchDoSearchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   collectionResponseMarketingEventExternalUniqueIdentifierNoPaging?: shared.CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

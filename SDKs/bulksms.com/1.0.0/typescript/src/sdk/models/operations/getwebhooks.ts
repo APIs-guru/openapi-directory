@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetWebhooksSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
 export class GetWebhooksRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetWebhooksSecurity;
 }
 
 
 export class GetWebhooksResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.Webhook })
+  @SpeakeasyMetadata({ elemType: shared.Webhook })
   webhooks?: shared.Webhook[];
 }

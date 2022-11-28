@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiCoreDtoDatapointsWeightedDestinationItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=weight" })
+  @SpeakeasyMetadata({ data: "json, name=weight" })
   weight?: number;
 }

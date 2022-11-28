@@ -1,6 +1,7 @@
 
 
+
 export enum AcceptCodeValidationEnum {
-    Ignore = "IGNORE"
-,    Enforce = "ENFORCE"
+    Ignore = "IGNORE",
+    Enforce = "ENFORCE"
 }

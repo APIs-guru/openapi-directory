@@ -12,6 +12,8 @@ const (
 	PasteDataRequestTypeEnumPasteConditionalFormatting PasteDataRequestTypeEnum = "PASTE_CONDITIONAL_FORMATTING"
 )
 
+// PasteDataRequest
+// Inserts data into the spreadsheet starting at the specified coordinate.
 type PasteDataRequest struct {
 	Coordinate *GridCoordinate           `json:"coordinate,omitempty"`
 	Data       *string                   `json:"data,omitempty"`

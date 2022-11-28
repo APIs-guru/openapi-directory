@@ -27,7 +27,7 @@ type MybusinessaccountmanagementLocationsAdminsPatchQueryParams struct {
 type MybusinessaccountmanagementLocationsAdminsPatchRequest struct {
 	PathParams  MybusinessaccountmanagementLocationsAdminsPatchPathParams
 	QueryParams MybusinessaccountmanagementLocationsAdminsPatchQueryParams
-	Request     *shared.Admin `request:"mediaType=application/json"`
+	Request     *shared.AdminInput `request:"mediaType=application/json"`
 }
 
 type MybusinessaccountmanagementLocationsAdminsPatchResponse struct {

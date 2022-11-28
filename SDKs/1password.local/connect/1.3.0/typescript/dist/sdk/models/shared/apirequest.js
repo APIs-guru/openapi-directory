@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ApiRequestActionEnum;
 (function (ApiRequestActionEnum) {
     ApiRequestActionEnum["Read"] = "READ";
@@ -36,23 +36,23 @@ var ApiRequestActor = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=account" }),
+        SpeakeasyMetadata({ data: "json, name=account" }),
         __metadata("design:type", String)
     ], ApiRequestActor.prototype, "account", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], ApiRequestActor.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=jti" }),
+        SpeakeasyMetadata({ data: "json, name=jti" }),
         __metadata("design:type", String)
     ], ApiRequestActor.prototype, "jti", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestIp" }),
+        SpeakeasyMetadata({ data: "json, name=requestIp" }),
         __metadata("design:type", String)
     ], ApiRequestActor.prototype, "requestIp", void 0);
     __decorate([
-        Metadata({ data: "json, name=userAgent" }),
+        SpeakeasyMetadata({ data: "json, name=userAgent" }),
         __metadata("design:type", String)
     ], ApiRequestActor.prototype, "userAgent", void 0);
     return ApiRequestActor;
@@ -64,7 +64,7 @@ var ApiRequestResourceItem = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], ApiRequestResourceItem.prototype, "id", void 0);
     return ApiRequestResourceItem;
@@ -81,7 +81,7 @@ var ApiRequestResourceVault = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], ApiRequestResourceVault.prototype, "id", void 0);
     return ApiRequestResourceVault;
@@ -93,19 +93,19 @@ var ApiRequestResource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=item" }),
+        SpeakeasyMetadata({ data: "json, name=item" }),
         __metadata("design:type", ApiRequestResourceItem)
     ], ApiRequestResource.prototype, "item", void 0);
     __decorate([
-        Metadata({ data: "json, name=itemVersion" }),
+        SpeakeasyMetadata({ data: "json, name=itemVersion" }),
         __metadata("design:type", Number)
     ], ApiRequestResource.prototype, "itemVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], ApiRequestResource.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=vault" }),
+        SpeakeasyMetadata({ data: "json, name=vault" }),
         __metadata("design:type", ApiRequestResourceVault)
     ], ApiRequestResource.prototype, "vault", void 0);
     return ApiRequestResource;
@@ -126,27 +126,27 @@ var ApiRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=action" }),
+        SpeakeasyMetadata({ data: "json, name=action" }),
         __metadata("design:type", String)
     ], ApiRequest.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "json, name=actor" }),
+        SpeakeasyMetadata({ data: "json, name=actor" }),
         __metadata("design:type", ApiRequestActor)
     ], ApiRequest.prototype, "actor", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestId" }),
+        SpeakeasyMetadata({ data: "json, name=requestId" }),
         __metadata("design:type", String)
     ], ApiRequest.prototype, "requestId", void 0);
     __decorate([
-        Metadata({ data: "json, name=resource" }),
+        SpeakeasyMetadata({ data: "json, name=resource" }),
         __metadata("design:type", ApiRequestResource)
     ], ApiRequest.prototype, "resource", void 0);
     __decorate([
-        Metadata({ data: "json, name=result" }),
+        SpeakeasyMetadata({ data: "json, name=result" }),
         __metadata("design:type", String)
     ], ApiRequest.prototype, "result", void 0);
     __decorate([
-        Metadata({ data: "json, name=timestamp" }),
+        SpeakeasyMetadata({ data: "json, name=timestamp" }),
         __metadata("design:type", Date)
     ], ApiRequest.prototype, "timestamp", void 0);
     return ApiRequest;

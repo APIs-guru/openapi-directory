@@ -1,10 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CertificateChains } from "./certificatechains";
 
+
 export enum KeyOperationAttestationFormatEnum {
-    AttestationFormatUnspecified = "ATTESTATION_FORMAT_UNSPECIFIED"
-,    CaviumV1Compressed = "CAVIUM_V1_COMPRESSED"
-,    CaviumV2Compressed = "CAVIUM_V2_COMPRESSED"
+    AttestationFormatUnspecified = "ATTESTATION_FORMAT_UNSPECIFIED",
+    CaviumV1Compressed = "CAVIUM_V1_COMPRESSED",
+    CaviumV2Compressed = "CAVIUM_V2_COMPRESSED"
+}
+
+
+// KeyOperationAttestationInput
+/** 
+ * Contains an HSM-generated attestation about a key operation. For more information, see [Verifying attestations] (https://cloud.google.com/kms/docs/attest-key).
+**/
+export class KeyOperationAttestationInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=certChains" })
+  certChains?: CertificateChains;
 }
 
 
@@ -13,12 +24,12 @@ export enum KeyOperationAttestationFormatEnum {
  * Contains an HSM-generated attestation about a key operation. For more information, see [Verifying attestations] (https://cloud.google.com/kms/docs/attest-key).
 **/
 export class KeyOperationAttestation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certChains" })
+  @SpeakeasyMetadata({ data: "json, name=certChains" })
   certChains?: CertificateChains;
 
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: KeyOperationAttestationFormatEnum;
 }

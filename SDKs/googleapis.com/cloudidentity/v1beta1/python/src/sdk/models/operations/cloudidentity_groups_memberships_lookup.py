@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudidentityGroupsMembershipsLookupPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class CloudidentityGroupsMembershipsLookupQueryParams:
 
 @dataclass
 class CloudidentityGroupsMembershipsLookupSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudidentityGroupsMembershipsLookupSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudidentityGroupsMembershipsLookupSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -52,14 +53,14 @@ class CloudidentityGroupsMembershipsLookupSecurity:
 
 @dataclass
 class CloudidentityGroupsMembershipsLookupRequest:
-    path_params: CloudidentityGroupsMembershipsLookupPathParams = field(default=None)
-    query_params: CloudidentityGroupsMembershipsLookupQueryParams = field(default=None)
-    security: CloudidentityGroupsMembershipsLookupSecurity = field(default=None)
+    path_params: CloudidentityGroupsMembershipsLookupPathParams = field()
+    query_params: CloudidentityGroupsMembershipsLookupQueryParams = field()
+    security: CloudidentityGroupsMembershipsLookupSecurity = field()
     
 
 @dataclass
 class CloudidentityGroupsMembershipsLookupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     lookup_membership_name_response: Optional[shared.LookupMembershipNameResponse] = field(default=None)
-    status_code: int = field(default=None)
     

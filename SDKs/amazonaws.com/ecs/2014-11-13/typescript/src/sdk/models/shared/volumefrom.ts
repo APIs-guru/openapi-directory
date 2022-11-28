@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VolumeFrom
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details on a data volume from another container in the same task definition.
 **/
 export class VolumeFrom extends SpeakeasyBase {
-  @Metadata({ data: "json, name=readOnly" })
+  @SpeakeasyMetadata({ data: "json, name=readOnly" })
   readOnly?: boolean;
 
-  @Metadata({ data: "json, name=sourceContainer" })
+  @SpeakeasyMetadata({ data: "json, name=sourceContainer" })
   sourceContainer?: string;
 }

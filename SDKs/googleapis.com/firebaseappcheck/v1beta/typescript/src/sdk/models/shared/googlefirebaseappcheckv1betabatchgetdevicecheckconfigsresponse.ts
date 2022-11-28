@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirebaseAppcheckV1betaDeviceCheckConfig } from "./googlefirebaseappcheckv1betadevicecheckconfig";
+
 
 
 // GoogleFirebaseAppcheckV1betaBatchGetDeviceCheckConfigsResponse
@@ -8,6 +8,6 @@ import { GoogleFirebaseAppcheckV1betaDeviceCheckConfig } from "./googlefirebasea
  * Response message for the BatchGetDeviceCheckConfigs method.
 **/
 export class GoogleFirebaseAppcheckV1betaBatchGetDeviceCheckConfigsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configs", elemType: shared.GoogleFirebaseAppcheckV1betaDeviceCheckConfig })
+  @SpeakeasyMetadata({ data: "json, name=configs", elemType: GoogleFirebaseAppcheckV1betaDeviceCheckConfig })
   configs?: GoogleFirebaseAppcheckV1betaDeviceCheckConfig[];
 }

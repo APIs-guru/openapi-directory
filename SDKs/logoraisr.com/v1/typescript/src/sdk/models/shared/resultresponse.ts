@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ResultResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=result_file_url" })
+  @SpeakeasyMetadata({ data: "json, name=result_file_url" })
   resultFileUrl?: string;
 }

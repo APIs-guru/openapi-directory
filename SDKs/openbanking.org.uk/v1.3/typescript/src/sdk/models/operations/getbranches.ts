@@ -1,18 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetBranchesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=If-Modified-Since" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-Modified-Since" })
   ifModifiedSince?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=If-None-Match" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-None-Match" })
   ifNoneMatch?: string;
-}
-
-
-export class GetBranchesRequest extends SpeakeasyBase {
-  @Metadata()
-  headers: GetBranchesHeaders;
 }
 
 export enum GetBranches400ErrorObjectDescriptionEnum {
@@ -29,13 +24,13 @@ export enum GetBranches400ErrorObjectTitleEnum {
 
 
 export class GetBranches400ErrorObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: GetBranches400ErrorObjectDescriptionEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: GetBranches400ErrorObjectStatusEnum;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: GetBranches400ErrorObjectTitleEnum;
 }
 
@@ -53,13 +48,13 @@ export enum GetBranches408ErrorObjectTitleEnum {
 
 
 export class GetBranches408ErrorObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: GetBranches408ErrorObjectDescriptionEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: GetBranches408ErrorObjectStatusEnum;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: GetBranches408ErrorObjectTitleEnum;
 }
 
@@ -77,13 +72,13 @@ export enum GetBranches429ErrorObjectTitleEnum {
 
 
 export class GetBranches429ErrorObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: GetBranches429ErrorObjectDescriptionEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: GetBranches429ErrorObjectStatusEnum;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: GetBranches429ErrorObjectTitleEnum;
 }
 
@@ -101,13 +96,13 @@ export enum GetBranches500ErrorObjectTitleEnum {
 
 
 export class GetBranches500ErrorObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: GetBranches500ErrorObjectDescriptionEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: GetBranches500ErrorObjectStatusEnum;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: GetBranches500ErrorObjectTitleEnum;
 }
 
@@ -125,39 +120,39 @@ export enum GetBranches503ErrorObjectTitleEnum {
 
 
 export class GetBranches503ErrorObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: GetBranches503ErrorObjectDescriptionEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: GetBranches503ErrorObjectStatusEnum;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: GetBranches503ErrorObjectTitleEnum;
 }
 
 
 export class GetBranchesErrorObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 }
 
 export enum GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchAccessibilityTypesEnum {
-    AudioCashMachine = "AudioCashMachine"
-,    AutomaticDoors = "AutomaticDoors"
-,    ChairAccess = "ChairAccess"
-,    DriveThru = "DriveThru"
-,    ExternalRamp = "ExternalRamp"
-,    InductionLoop = "InductionLoop"
-,    InternalRamp = "InternalRamp"
-,    LevelAccess = "LevelAccess"
-,    LowerLevelCounter = "LowerLevelCounter"
-,    WheelchairAccess = "WheelchairAccess"
+    AudioCashMachine = "AudioCashMachine",
+    AutomaticDoors = "AutomaticDoors",
+    ChairAccess = "ChairAccess",
+    DriveThru = "DriveThru",
+    ExternalRamp = "ExternalRamp",
+    InductionLoop = "InductionLoop",
+    InternalRamp = "InternalRamp",
+    LevelAccess = "LevelAccess",
+    LowerLevelCounter = "LowerLevelCounter",
+    WheelchairAccess = "WheelchairAccess"
 }
 
 
@@ -166,25 +161,25 @@ export enum GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchAcce
  * Postal Address
 **/
 export class GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BuildingNumberOrName" })
+  @SpeakeasyMetadata({ data: "json, name=BuildingNumberOrName" })
   buildingNumberOrName?: string;
 
-  @Metadata({ data: "json, name=Country" })
+  @SpeakeasyMetadata({ data: "json, name=Country" })
   country: string;
 
-  @Metadata({ data: "json, name=CountrySubDivision" })
+  @SpeakeasyMetadata({ data: "json, name=CountrySubDivision" })
   countrySubDivision?: string;
 
-  @Metadata({ data: "json, name=OptionalAddressField" })
+  @SpeakeasyMetadata({ data: "json, name=OptionalAddressField" })
   optionalAddressField?: string;
 
-  @Metadata({ data: "json, name=PostCode" })
+  @SpeakeasyMetadata({ data: "json, name=PostCode" })
   postCode?: string;
 
-  @Metadata({ data: "json, name=StreetName" })
+  @SpeakeasyMetadata({ data: "json, name=StreetName" })
   streetName?: string;
 
-  @Metadata({ data: "json, name=TownName" })
+  @SpeakeasyMetadata({ data: "json, name=TownName" })
   townName?: string;
 }
 
@@ -194,69 +189,69 @@ export class GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchAdd
  * Alternative Phone Number
 **/
 export class GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchAlternatePhone extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AlternateTelephoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=AlternateTelephoneNumber" })
   alternateTelephoneNumber?: string;
 
-  @Metadata({ data: "json, name=AlternateTelephoneNumberDescription" })
+  @SpeakeasyMetadata({ data: "json, name=AlternateTelephoneNumberDescription" })
   alternateTelephoneNumberDescription?: string;
 }
 
 export enum GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchBranchFacilitiesNameEnum {
-    BusinessItSupport = "BusinessITSupport"
-,    CollectionLockers = "CollectionLockers"
-,    MeetingRooms = "MeetingRooms"
-,    Parking = "Parking"
-,    Wifi = "Wifi"
+    BusinessItSupport = "BusinessITSupport",
+    CollectionLockers = "CollectionLockers",
+    MeetingRooms = "MeetingRooms",
+    Parking = "Parking",
+    Wifi = "Wifi"
 }
 
 export enum GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchBranchMediatedServiceNameEnum {
-    BureauDeChange = "BureauDeChange"
-,    BusinessCounter = "BusinessCounter"
-,    CardIssuanceFacility = "CardIssuanceFacility"
-,    CounterServices = "CounterServices"
-,    DriveThru = "DriveThru"
-,    MortgageAdvisor = "MortgageAdvisor"
-,    NightSafe = "NightSafe"
-,    OnDemandCurrency = "OnDemandCurrency"
-,    PremierCounter = "PremierCounter"
-,    VideoBanking = "VideoBanking"
-,    WheelChairAccess = "WheelChairAccess"
+    BureauDeChange = "BureauDeChange",
+    BusinessCounter = "BusinessCounter",
+    CardIssuanceFacility = "CardIssuanceFacility",
+    CounterServices = "CounterServices",
+    DriveThru = "DriveThru",
+    MortgageAdvisor = "MortgageAdvisor",
+    NightSafe = "NightSafe",
+    OnDemandCurrency = "OnDemandCurrency",
+    PremierCounter = "PremierCounter",
+    VideoBanking = "VideoBanking",
+    WheelChairAccess = "WheelChairAccess"
 }
 
 export enum GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchBranchSelfServeServiceNameEnum {
-    AccountVerificationService = "AccountVerificationService"
-,    AssistedServiceCounter = "AssistedServiceCounter"
-,    BusinessDepositTerminal = "BusinessDepositTerminal"
-,    CashChequeDepositMachineCoin = "CashChequeDepositMachineCoin"
-,    CashChequeDepositMachineNoCoin = "CashChequeDepositMachineNoCoin"
-,    ExternalAtmAudio = "ExternalAtmAudio"
-,    ExternalAtmNoAudio = "ExternalAtmNoAudio"
-,    ExternalQuickServicePoint = "ExternalQuickServicePoint"
-,    InternalAtmAudio = "InternalAtmAudio"
-,    InternalAtmNoAudio = "InternalAtmNoAudio"
-,    InternalQuickServicePoint = "InternalQuickServicePoint"
-,    LodgementDevice = "LodgementDevice"
-,    OnlineBankingPoint = "OnlineBankingPoint"
-,    QuickDeposit = "QuickDeposit"
-,    SaturdayCounterService = "SaturdayCounterService"
-,    SelfServiceAccountOpening = "SelfServiceAccountOpening"
-,    StatementPrinter = "StatementPrinter"
+    AccountVerificationService = "AccountVerificationService",
+    AssistedServiceCounter = "AssistedServiceCounter",
+    BusinessDepositTerminal = "BusinessDepositTerminal",
+    CashChequeDepositMachineCoin = "CashChequeDepositMachineCoin",
+    CashChequeDepositMachineNoCoin = "CashChequeDepositMachineNoCoin",
+    ExternalAtmAudio = "ExternalAtmAudio",
+    ExternalAtmNoAudio = "ExternalAtmNoAudio",
+    ExternalQuickServicePoint = "ExternalQuickServicePoint",
+    InternalAtmAudio = "InternalAtmAudio",
+    InternalAtmNoAudio = "InternalAtmNoAudio",
+    InternalQuickServicePoint = "InternalQuickServicePoint",
+    LodgementDevice = "LodgementDevice",
+    OnlineBankingPoint = "OnlineBankingPoint",
+    QuickDeposit = "QuickDeposit",
+    SaturdayCounterService = "SaturdayCounterService",
+    SelfServiceAccountOpening = "SelfServiceAccountOpening",
+    StatementPrinter = "StatementPrinter"
 }
 
 export enum GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchBranchTypeEnum {
-    Physical = "Physical"
-,    Mobile = "Mobile"
+    Physical = "Physical",
+    Mobile = "Mobile"
 }
 
 export enum GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchCustomerSegmentEnum {
-    Business = "Business"
-,    Corporate = "Corporate"
-,    Personal = "Personal"
-,    Premier = "Premier"
-,    Private = "Private"
-,    Select = "Select"
-,    Sme = "SME"
-,    Wealth = "Wealth"
+    Business = "Business",
+    Corporate = "Corporate",
+    Personal = "Personal",
+    Premier = "Premier",
+    Private = "Private",
+    Select = "Select",
+    Sme = "SME",
+    Wealth = "Wealth"
 }
 
 
@@ -265,45 +260,45 @@ export enum GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchCust
  * Geographic Coordinates
 **/
 export class GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchGeographicLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Latitude" })
+  @SpeakeasyMetadata({ data: "json, name=Latitude" })
   latitude: string;
 
-  @Metadata({ data: "json, name=Longitude" })
+  @SpeakeasyMetadata({ data: "json, name=Longitude" })
   longitude: string;
 }
 
 export enum GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOpeningTimesOpeningDayEnum {
-    Monday = "Monday"
-,    Tuesday = "Tuesday"
-,    Wednesday = "Wednesday"
-,    Thursday = "Thursday"
-,    Friday = "Friday"
-,    Saturday = "Saturday"
-,    Sunday = "Sunday"
-,    PublicAndBankHoliday = "Public and Bank Holiday"
+    Monday = "Monday",
+    Tuesday = "Tuesday",
+    Wednesday = "Wednesday",
+    Thursday = "Thursday",
+    Friday = "Friday",
+    Saturday = "Saturday",
+    Sunday = "Sunday",
+    PublicAndBankHoliday = "Public and Bank Holiday"
 }
 
 
 export class GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOpeningTimes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClosingTime" })
+  @SpeakeasyMetadata({ data: "json, name=ClosingTime" })
   closingTime: string;
 
-  @Metadata({ data: "json, name=OpeningDay" })
+  @SpeakeasyMetadata({ data: "json, name=OpeningDay" })
   openingDay: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOpeningTimesOpeningDayEnum;
 
-  @Metadata({ data: "json, name=OpeningTime" })
+  @SpeakeasyMetadata({ data: "json, name=OpeningTime" })
   openingTime: string;
 
-  @Metadata({ data: "json, name=UnavailableFinishTime" })
+  @SpeakeasyMetadata({ data: "json, name=UnavailableFinishTime" })
   unavailableFinishTime?: string;
 
-  @Metadata({ data: "json, name=UnavailableStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=UnavailableStartTime" })
   unavailableStartTime?: string;
 }
 
 export enum GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOrganisationBrandTrademarkIpoCodeEnum {
-    Uk = "UK"
-,    Eu = "EU"
+    Uk = "UK",
+    Eu = "EU"
 }
 
 
@@ -312,10 +307,10 @@ export enum GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOrga
  * Brand
 **/
 export class GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOrganisationBrand extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TrademarkID" })
+  @SpeakeasyMetadata({ data: "json, name=TrademarkID" })
   trademarkId: string;
 
-  @Metadata({ data: "json, name=TrademarkIPOCode" })
+  @SpeakeasyMetadata({ data: "json, name=TrademarkIPOCode" })
   trademarkIpoCode: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOrganisationBrandTrademarkIpoCodeEnum;
 }
 
@@ -325,7 +320,7 @@ export class GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOrg
  * Organisation Name
 **/
 export class GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOrganisationParentOrganisationOrganisationName extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LegalName" })
+  @SpeakeasyMetadata({ data: "json, name=LegalName" })
   legalName: string;
 }
 
@@ -335,13 +330,13 @@ export class GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOrg
  * Parent organisation
 **/
 export class GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOrganisationParentOrganisation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BIC" })
+  @SpeakeasyMetadata({ data: "json, name=BIC" })
   bic?: string;
 
-  @Metadata({ data: "json, name=LEI" })
+  @SpeakeasyMetadata({ data: "json, name=LEI" })
   lei?: string;
 
-  @Metadata({ data: "json, name=OrganisationName" })
+  @SpeakeasyMetadata({ data: "json, name=OrganisationName" })
   organisationName: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOrganisationParentOrganisationOrganisationName;
 }
 
@@ -351,10 +346,10 @@ export class GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOrg
  * Organisation
 **/
 export class GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOrganisation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Brand" })
+  @SpeakeasyMetadata({ data: "json, name=Brand" })
   brand: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOrganisationBrand;
 
-  @Metadata({ data: "json, name=ParentOrganisation" })
+  @SpeakeasyMetadata({ data: "json, name=ParentOrganisation" })
   parentOrganisation: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOrganisationParentOrganisation;
 }
 
@@ -364,94 +359,94 @@ export class GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOrg
  * Planned branch closure
 **/
 export class GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchPlannedBranchClosure extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndDate" })
+  @SpeakeasyMetadata({ data: "json, name=EndDate" })
   endDate?: string;
 
-  @Metadata({ data: "json, name=StartDate" })
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
   startDate?: string;
 }
 
 
 export class GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ATMAtBranch" })
+  @SpeakeasyMetadata({ data: "json, name=ATMAtBranch" })
   atmAtBranch: boolean;
 
-  @Metadata({ data: "json, name=AccessibilityTypes" })
+  @SpeakeasyMetadata({ data: "json, name=AccessibilityTypes" })
   accessibilityTypes?: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchAccessibilityTypesEnum;
 
-  @Metadata({ data: "json, name=Address" })
+  @SpeakeasyMetadata({ data: "json, name=Address" })
   address: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchAddress;
 
-  @Metadata({ data: "json, name=AlternatePhone", elemType: operations.GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchAlternatePhone })
+  @SpeakeasyMetadata({ data: "json, name=AlternatePhone", elemType: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchAlternatePhone })
   alternatePhone?: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchAlternatePhone[];
 
-  @Metadata({ data: "json, name=ArrivalTime" })
+  @SpeakeasyMetadata({ data: "json, name=ArrivalTime" })
   arrivalTime?: string;
 
-  @Metadata({ data: "json, name=BranchDescription" })
+  @SpeakeasyMetadata({ data: "json, name=BranchDescription" })
   branchDescription?: string;
 
-  @Metadata({ data: "json, name=BranchFacilitiesName" })
+  @SpeakeasyMetadata({ data: "json, name=BranchFacilitiesName" })
   branchFacilitiesName?: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchBranchFacilitiesNameEnum[];
 
-  @Metadata({ data: "json, name=BranchIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=BranchIdentification" })
   branchIdentification: string;
 
-  @Metadata({ data: "json, name=BranchMediatedServiceName" })
+  @SpeakeasyMetadata({ data: "json, name=BranchMediatedServiceName" })
   branchMediatedServiceName?: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchBranchMediatedServiceNameEnum[];
 
-  @Metadata({ data: "json, name=BranchName" })
+  @SpeakeasyMetadata({ data: "json, name=BranchName" })
   branchName?: string;
 
-  @Metadata({ data: "json, name=BranchOtherFacilities" })
+  @SpeakeasyMetadata({ data: "json, name=BranchOtherFacilities" })
   branchOtherFacilities?: string[];
 
-  @Metadata({ data: "json, name=BranchOtherMediatedServices" })
+  @SpeakeasyMetadata({ data: "json, name=BranchOtherMediatedServices" })
   branchOtherMediatedServices?: string[];
 
-  @Metadata({ data: "json, name=BranchOtherSelfServices" })
+  @SpeakeasyMetadata({ data: "json, name=BranchOtherSelfServices" })
   branchOtherSelfServices?: string[];
 
-  @Metadata({ data: "json, name=BranchPhoto" })
+  @SpeakeasyMetadata({ data: "json, name=BranchPhoto" })
   branchPhoto?: string;
 
-  @Metadata({ data: "json, name=BranchSelfServeServiceName" })
+  @SpeakeasyMetadata({ data: "json, name=BranchSelfServeServiceName" })
   branchSelfServeServiceName?: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchBranchSelfServeServiceNameEnum[];
 
-  @Metadata({ data: "json, name=BranchType" })
+  @SpeakeasyMetadata({ data: "json, name=BranchType" })
   branchType: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchBranchTypeEnum;
 
-  @Metadata({ data: "json, name=CustomerSegment" })
+  @SpeakeasyMetadata({ data: "json, name=CustomerSegment" })
   customerSegment: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchCustomerSegmentEnum[];
 
-  @Metadata({ data: "json, name=DaysOfTheWeek" })
+  @SpeakeasyMetadata({ data: "json, name=DaysOfTheWeek" })
   daysOfTheWeek?: string;
 
-  @Metadata({ data: "json, name=DepartureTime" })
+  @SpeakeasyMetadata({ data: "json, name=DepartureTime" })
   departureTime?: string;
 
-  @Metadata({ data: "json, name=FaxNumber" })
+  @SpeakeasyMetadata({ data: "json, name=FaxNumber" })
   faxNumber?: string[];
 
-  @Metadata({ data: "json, name=GeographicLocation" })
+  @SpeakeasyMetadata({ data: "json, name=GeographicLocation" })
   geographicLocation?: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchGeographicLocation;
 
-  @Metadata({ data: "json, name=OpeningTimes", elemType: operations.GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOpeningTimes })
+  @SpeakeasyMetadata({ data: "json, name=OpeningTimes", elemType: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOpeningTimes })
   openingTimes: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOpeningTimes[];
 
-  @Metadata({ data: "json, name=Organisation" })
+  @SpeakeasyMetadata({ data: "json, name=Organisation" })
   organisation: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchOrganisation;
 
-  @Metadata({ data: "json, name=ParkingLocation" })
+  @SpeakeasyMetadata({ data: "json, name=ParkingLocation" })
   parkingLocation?: string;
 
-  @Metadata({ data: "json, name=PlannedBranchClosure", elemType: operations.GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchPlannedBranchClosure })
+  @SpeakeasyMetadata({ data: "json, name=PlannedBranchClosure", elemType: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchPlannedBranchClosure })
   plannedBranchClosure?: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranchPlannedBranchClosure[];
 
-  @Metadata({ data: "json, name=StopName" })
+  @SpeakeasyMetadata({ data: "json, name=StopName" })
   stopName?: string;
 
-  @Metadata({ data: "json, name=TelephoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=TelephoneNumber" })
   telephoneNumber: string;
 }
 
@@ -469,60 +464,66 @@ export enum GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonMetaDataTe
 
 
 export class GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonMetaData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Agreement" })
+  @SpeakeasyMetadata({ data: "json, name=Agreement" })
   agreement: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonMetaDataAgreementEnum;
 
-  @Metadata({ data: "json, name=LastUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdated" })
   lastUpdated: Date;
 
-  @Metadata({ data: "json, name=License" })
+  @SpeakeasyMetadata({ data: "json, name=License" })
   license: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonMetaDataLicenseEnum;
 
-  @Metadata({ data: "json, name=TermsOfUse" })
+  @SpeakeasyMetadata({ data: "json, name=TermsOfUse" })
   termsOfUse: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonMetaDataTermsOfUseEnum;
 
-  @Metadata({ data: "json, name=TotalResults" })
+  @SpeakeasyMetadata({ data: "json, name=TotalResults" })
   totalResults: number;
 }
 
 
 export class GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: operations.GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranch })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranch })
   data: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonBranch[];
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonMetaData;
 }
 
 
+export class GetBranchesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  headers: GetBranchesHeaders;
+}
+
+
 export class GetBranchesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   fourHundredErrorObject?: GetBranches400ErrorObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fourHundredAndEightErrorObject?: GetBranches408ErrorObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fourHundredAndTwentyNineErrorObject?: GetBranches429ErrorObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fiveHundredErrorObject?: GetBranches500ErrorObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fiveHundredAndThreeErrorObject?: GetBranches503ErrorObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorObject?: GetBranchesErrorObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getBranches200ApplicationPrsOpenbankingOpendataV13PlusJsonObject?: GetBranches200ApplicationPrsOpenbankingOpendataV13PlusJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

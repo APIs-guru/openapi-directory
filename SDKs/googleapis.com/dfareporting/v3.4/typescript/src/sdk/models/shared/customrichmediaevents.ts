@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionValue } from "./dimensionvalue";
+
 
 
 // CustomRichMediaEvents
@@ -8,9 +8,9 @@ import { DimensionValue } from "./dimensionvalue";
  * Represents a Custom Rich Media Events group.
 **/
 export class CustomRichMediaEvents extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filteredEventIds", elemType: shared.DimensionValue })
+  @SpeakeasyMetadata({ data: "json, name=filteredEventIds", elemType: DimensionValue })
   filteredEventIds?: DimensionValue[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

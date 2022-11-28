@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Match
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The part of a profile that contains a recommendation found during analysis.
 **/
 export class Match extends SpeakeasyBase {
-  @Metadata({ data: "json, name=frameAddress" })
+  @SpeakeasyMetadata({ data: "json, name=frameAddress" })
   frameAddress?: string;
 
-  @Metadata({ data: "json, name=targetFramesIndex" })
+  @SpeakeasyMetadata({ data: "json, name=targetFramesIndex" })
   targetFramesIndex?: number;
 
-  @Metadata({ data: "json, name=thresholdBreachValue" })
+  @SpeakeasyMetadata({ data: "json, name=thresholdBreachValue" })
   thresholdBreachValue?: number;
 }

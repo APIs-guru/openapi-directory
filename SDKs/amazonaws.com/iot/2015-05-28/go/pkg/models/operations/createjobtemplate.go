@@ -18,20 +18,28 @@ type CreateJobTemplateHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateJobTemplateRequestBodyAbortConfig
+// The criteria that determine when and how a job abort takes place.
 type CreateJobTemplateRequestBodyAbortConfig struct {
 	CriteriaList []shared.AbortCriteria `json:"criteriaList,omitempty"`
 }
 
+// CreateJobTemplateRequestBodyJobExecutionsRolloutConfig
+// Allows you to create a staged rollout of a job.
 type CreateJobTemplateRequestBodyJobExecutionsRolloutConfig struct {
 	ExponentialRate  *shared.ExponentialRolloutRate `json:"exponentialRate,omitempty"`
 	MaximumPerMinute *int64                         `json:"maximumPerMinute,omitempty"`
 }
 
+// CreateJobTemplateRequestBodyPresignedURLConfig
+// Configuration for pre-signed S3 URLs.
 type CreateJobTemplateRequestBodyPresignedURLConfig struct {
 	ExpiresInSec *int64  `json:"expiresInSec,omitempty"`
 	RoleArn      *string `json:"roleArn,omitempty"`
 }
 
+// CreateJobTemplateRequestBodyTimeoutConfig
+// Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to <code>TIMED_OUT</code>.
 type CreateJobTemplateRequestBodyTimeoutConfig struct {
 	InProgressTimeoutInMinutes *int64 `json:"inProgressTimeoutInMinutes,omitempty"`
 }

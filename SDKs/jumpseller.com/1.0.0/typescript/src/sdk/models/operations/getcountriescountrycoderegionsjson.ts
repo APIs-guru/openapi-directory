@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetCountriesCountryCodeRegionsJsonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=country_code" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=country_code" })
   countryCode: string;
 }
 
 
 export class GetCountriesCountryCodeRegionsJsonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=authtoken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authtoken" })
   authtoken: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=login" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=login" })
   login: string;
 }
 
 
 export class GetCountriesCountryCodeRegionsJsonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetCountriesCountryCodeRegionsJsonPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCountriesCountryCodeRegionsJsonQueryParams;
 }
 
 
 export class GetCountriesCountryCodeRegionsJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFound?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   regions?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

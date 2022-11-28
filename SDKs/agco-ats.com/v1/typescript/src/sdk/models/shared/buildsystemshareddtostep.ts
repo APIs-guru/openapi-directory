@@ -1,6 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BuildSystemSharedDtoParameter } from "./buildsystemshareddtoparameter";
+
+
+
+// BuildSystemSharedDtoStepInput
+/** 
+ * Step
+**/
+export class BuildSystemSharedDtoStepInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=ConfigRequired, form, name=ConfigRequired;" })
+  configRequired: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=Deleted, form, name=Deleted;" })
+  deleted?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=Description, form, name=Description;" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ImplementationID, form, name=ImplementationID;" })
+  implementationId: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Name, form, name=Name;" })
+  name: string;
+
+  @SpeakeasyMetadata({ data: "json, name=StepID, form, name=StepID;" })
+  stepId?: number;
+}
 
 
 // BuildSystemSharedDtoStep
@@ -8,24 +33,24 @@ import { BuildSystemSharedDtoParameter } from "./buildsystemshareddtoparameter";
  * Step
 **/
 export class BuildSystemSharedDtoStep extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigRequired" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigRequired" })
   configRequired: boolean;
 
-  @Metadata({ data: "json, name=Deleted" })
+  @SpeakeasyMetadata({ data: "json, name=Deleted" })
   deleted?: boolean;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=ImplementationID" })
+  @SpeakeasyMetadata({ data: "json, name=ImplementationID" })
   implementationId: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=Parameters", elemType: shared.BuildSystemSharedDtoParameter })
+  @SpeakeasyMetadata({ data: "json, name=Parameters", elemType: BuildSystemSharedDtoParameter })
   parameters?: BuildSystemSharedDtoParameter[];
 
-  @Metadata({ data: "json, name=StepID" })
+  @SpeakeasyMetadata({ data: "json, name=StepID" })
   stepId?: number;
 }

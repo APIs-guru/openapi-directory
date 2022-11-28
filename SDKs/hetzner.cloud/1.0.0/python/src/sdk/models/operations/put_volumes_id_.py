@@ -1,49 +1,60 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class PutVolumesIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json
 @dataclass
 class PutVolumesIDUpdateVolumeRequestLabels:
-    labelkey: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labelkey' }})
+    r"""PutVolumesIDUpdateVolumeRequestLabels
+    User-defined labels (key-value pairs)
+    """
+    
+    labelkey: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('labelkey') }})
     
 
 @dataclass_json
 @dataclass
 class PutVolumesIDUpdateVolumeRequest:
-    labels: Optional[PutVolumesIDUpdateVolumeRequestLabels] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    
-
-@dataclass
-class PutVolumesIDRequest:
-    path_params: PutVolumesIDPathParams = field(default=None)
-    request: Optional[PutVolumesIDUpdateVolumeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    labels: Optional[PutVolumesIDUpdateVolumeRequestLabels] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
     
 
 @dataclass_json
 @dataclass
 class PutVolumesID200ApplicationJSONVolumeLocation:
-    city: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'city' }})
-    country: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'country' }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    id: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    latitude: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'latitude' }})
-    longitude: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'longitude' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    network_zone: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'network_zone' }})
+    r"""PutVolumesID200ApplicationJSONVolumeLocation
+    Location of the Volume. Volume can only be attached to Servers in the same Location.
+    """
+    
+    city: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('city') }})
+    country: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('country') }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    id: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    latitude: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('latitude') }})
+    longitude: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('longitude') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    network_zone: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('network_zone') }})
     
 
 @dataclass_json
 @dataclass
 class PutVolumesID200ApplicationJSONVolumeProtection:
-    delete: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'delete' }})
+    r"""PutVolumesID200ApplicationJSONVolumeProtection
+    Protection configuration for the Resource
+    """
+    
+    delete: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('delete') }})
     
 class PutVolumesID200ApplicationJSONVolumeStatusEnum(str, Enum):
     CREATING = "creating"
@@ -53,28 +64,34 @@ class PutVolumesID200ApplicationJSONVolumeStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PutVolumesID200ApplicationJSONVolume:
-    created: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created' }})
-    format: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'format' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    labels: dict[str, str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
-    linux_device: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'linux_device' }})
-    location: PutVolumesID200ApplicationJSONVolumeLocation = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    protection: PutVolumesID200ApplicationJSONVolumeProtection = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protection' }})
-    server: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
-    size: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'size' }})
-    status: PutVolumesID200ApplicationJSONVolumeStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    created: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created') }})
+    format: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('format') }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    labels: dict[str, str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
+    linux_device: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('linux_device') }})
+    location: PutVolumesID200ApplicationJSONVolumeLocation = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    protection: PutVolumesID200ApplicationJSONVolumeProtection = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('protection') }})
+    server: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('server') }})
+    size: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('size') }})
+    status: PutVolumesID200ApplicationJSONVolumeStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 
 @dataclass_json
 @dataclass
 class PutVolumesID200ApplicationJSON:
-    volume: PutVolumesID200ApplicationJSONVolume = field(default=None, metadata={'dataclasses_json': { 'field_name': 'volume' }})
+    volume: PutVolumesID200ApplicationJSONVolume = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('volume') }})
+    
+
+@dataclass
+class PutVolumesIDRequest:
+    path_params: PutVolumesIDPathParams = field()
+    request: Optional[PutVolumesIDUpdateVolumeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutVolumesIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     put_volumes_id_200_application_json_object: Optional[PutVolumesID200ApplicationJSON] = field(default=None)
-    status_code: int = field(default=None)
     

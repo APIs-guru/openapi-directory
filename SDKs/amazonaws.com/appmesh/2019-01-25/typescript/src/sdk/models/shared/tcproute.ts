@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TcpRouteAction } from "./tcprouteaction";
 import { TcpTimeout } from "./tcptimeout";
+
 
 
 // TcpRoute
@@ -8,9 +9,9 @@ import { TcpTimeout } from "./tcptimeout";
  * An object that represents a TCP route type.
 **/
 export class TcpRoute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: TcpRouteAction;
 
-  @Metadata({ data: "json, name=timeout" })
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
   timeout?: TcpTimeout;
 }

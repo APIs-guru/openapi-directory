@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudAuditOptions } from "./cloudauditoptions";
 import { CounterOptions } from "./counteroptions";
 import { DataAccessOptions } from "./dataaccessoptions";
@@ -36,15 +36,15 @@ var LogConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cloudAudit" }),
+        SpeakeasyMetadata({ data: "json, name=cloudAudit" }),
         __metadata("design:type", CloudAuditOptions)
     ], LogConfig.prototype, "cloudAudit", void 0);
     __decorate([
-        Metadata({ data: "json, name=counter" }),
+        SpeakeasyMetadata({ data: "json, name=counter" }),
         __metadata("design:type", CounterOptions)
     ], LogConfig.prototype, "counter", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataAccess" }),
+        SpeakeasyMetadata({ data: "json, name=dataAccess" }),
         __metadata("design:type", DataAccessOptions)
     ], LogConfig.prototype, "dataAccess", void 0);
     return LogConfig;

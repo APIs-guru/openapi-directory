@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class StartStreamPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=uuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=uuid" })
   uuid: string;
 }
 
 
 export class StartStreamSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
 export class StartStreamRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: StartStreamPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.StartStreamRequest;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: StartStreamSecurity;
 }
 
 
 export class StartStreamResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   startStreamResponse?: shared.StartStreamResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

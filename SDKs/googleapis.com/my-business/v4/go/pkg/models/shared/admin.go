@@ -10,6 +10,8 @@ const (
 	AdminRoleEnumCommunityManager     AdminRoleEnum = "COMMUNITY_MANAGER"
 )
 
+// Admin
+// An administrator of an Account or a Location.
 type Admin struct {
 	AdminName         *string        `json:"adminName,omitempty"`
 	Name              *string        `json:"name,omitempty"`

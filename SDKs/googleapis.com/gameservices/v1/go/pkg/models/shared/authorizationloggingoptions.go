@@ -10,6 +10,8 @@ const (
 	AuthorizationLoggingOptionsPermissionTypeEnumDataWrite                 AuthorizationLoggingOptionsPermissionTypeEnum = "DATA_WRITE"
 )
 
+// AuthorizationLoggingOptions
+// Authorization-related information used by Cloud Audit Logging.
 type AuthorizationLoggingOptions struct {
 	PermissionType *AuthorizationLoggingOptionsPermissionTypeEnum `json:"permissionType,omitempty"`
 }

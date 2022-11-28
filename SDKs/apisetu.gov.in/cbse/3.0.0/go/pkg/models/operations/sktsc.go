@@ -28,11 +28,6 @@ type SktscSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type SktscRequest struct {
-	Request  *SktscRequestBody `request:"mediaType=application/json"`
-	Security SktscSecurity
-}
-
 type Sktsc400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Sktsc504ApplicationJSON struct {
 	Error            *Sktsc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Sktsc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type SktscRequest struct {
+	Request  *SktscRequestBody `request:"mediaType=application/json"`
+	Security SktscSecurity
 }
 
 type SktscResponse struct {

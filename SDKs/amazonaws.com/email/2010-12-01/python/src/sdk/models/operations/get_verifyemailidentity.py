@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetVerifyEmailIdentityActionEnum(str, Enum):
     VERIFY_EMAIL_IDENTITY = "VerifyEmailIdentity"
@@ -10,9 +14,9 @@ class GetVerifyEmailIdentityVersionEnum(str, Enum):
 
 @dataclass
 class GetVerifyEmailIdentityQueryParams:
-    action: GetVerifyEmailIdentityActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    email_address: str = field(default=None, metadata={'query_param': { 'field_name': 'EmailAddress', 'style': 'form', 'explode': True }})
-    version: GetVerifyEmailIdentityVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetVerifyEmailIdentityActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    email_address: str = field(metadata={'query_param': { 'field_name': 'EmailAddress', 'style': 'form', 'explode': True }})
+    version: GetVerifyEmailIdentityVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetVerifyEmailIdentityHeaders:
 
 @dataclass
 class GetVerifyEmailIdentityRequest:
-    query_params: GetVerifyEmailIdentityQueryParams = field(default=None)
-    headers: GetVerifyEmailIdentityHeaders = field(default=None)
+    headers: GetVerifyEmailIdentityHeaders = field()
+    query_params: GetVerifyEmailIdentityQueryParams = field()
     
 
 @dataclass
 class GetVerifyEmailIdentityResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

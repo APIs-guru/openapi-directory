@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CommitStats } from "./commitstats";
+
 
 
 // CommitResponse
@@ -7,9 +8,9 @@ import { CommitStats } from "./commitstats";
  * The response for Commit.
 **/
 export class CommitResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commitStats" })
+  @SpeakeasyMetadata({ data: "json, name=commitStats" })
   commitStats?: CommitStats;
 
-  @Metadata({ data: "json, name=commitTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=commitTimestamp" })
   commitTimestamp?: string;
 }

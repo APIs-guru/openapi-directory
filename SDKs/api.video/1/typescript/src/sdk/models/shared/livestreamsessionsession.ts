@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LiveStreamSessionSession extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endedAt" })
+  @SpeakeasyMetadata({ data: "json, name=endedAt" })
   endedAt?: Date;
 
-  @Metadata({ data: "json, name=loadedAt" })
+  @SpeakeasyMetadata({ data: "json, name=loadedAt" })
   loadedAt?: Date;
 
-  @Metadata({ data: "json, name=sessionId" })
+  @SpeakeasyMetadata({ data: "json, name=sessionId" })
   sessionId?: string;
 }

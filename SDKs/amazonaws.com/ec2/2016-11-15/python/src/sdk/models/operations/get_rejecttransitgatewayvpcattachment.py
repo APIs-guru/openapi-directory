@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetRejectTransitGatewayVpcAttachmentActionEnum(str, Enum):
     REJECT_TRANSIT_GATEWAY_VPC_ATTACHMENT = "RejectTransitGatewayVpcAttachment"
@@ -10,10 +14,10 @@ class GetRejectTransitGatewayVpcAttachmentVersionEnum(str, Enum):
 
 @dataclass
 class GetRejectTransitGatewayVpcAttachmentQueryParams:
-    action: GetRejectTransitGatewayVpcAttachmentActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetRejectTransitGatewayVpcAttachmentActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    transit_gateway_attachment_id: str = field(metadata={'query_param': { 'field_name': 'TransitGatewayAttachmentId', 'style': 'form', 'explode': True }})
+    version: GetRejectTransitGatewayVpcAttachmentVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    transit_gateway_attachment_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayAttachmentId', 'style': 'form', 'explode': True }})
-    version: GetRejectTransitGatewayVpcAttachmentVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetRejectTransitGatewayVpcAttachmentHeaders:
 
 @dataclass
 class GetRejectTransitGatewayVpcAttachmentRequest:
-    query_params: GetRejectTransitGatewayVpcAttachmentQueryParams = field(default=None)
-    headers: GetRejectTransitGatewayVpcAttachmentHeaders = field(default=None)
+    headers: GetRejectTransitGatewayVpcAttachmentHeaders = field()
+    query_params: GetRejectTransitGatewayVpcAttachmentQueryParams = field()
     
 
 @dataclass
 class GetRejectTransitGatewayVpcAttachmentResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

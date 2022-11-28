@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateOrganizationInsightMonitoredMediaServerPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=monitoredMediaServerId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=monitoredMediaServerId" })
   monitoredMediaServerId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
   organizationId: string;
 }
 
 
 export class UpdateOrganizationInsightMonitoredMediaServerRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=bestEffortMonitoringEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=bestEffortMonitoringEnabled" })
   bestEffortMonitoringEnabled?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class UpdateOrganizationInsightMonitoredMediaServerRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateOrganizationInsightMonitoredMediaServerPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateOrganizationInsightMonitoredMediaServerRequestBody;
 }
 
 
 export class UpdateOrganizationInsightMonitoredMediaServerResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateOrganizationInsightMonitoredMediaServer200ApplicationJsonObject?: Map<string, any>;
 }

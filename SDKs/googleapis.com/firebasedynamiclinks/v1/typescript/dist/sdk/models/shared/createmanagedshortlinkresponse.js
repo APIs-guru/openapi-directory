@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ManagedShortLink } from "./managedshortlink";
+import { DynamicLinkWarning } from "./dynamiclinkwarning";
 // CreateManagedShortLinkResponse
 /**
  * Response to create a short Dynamic Link.
@@ -35,15 +35,15 @@ var CreateManagedShortLinkResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=managedShortLink" }),
+        SpeakeasyMetadata({ data: "json, name=managedShortLink" }),
         __metadata("design:type", ManagedShortLink)
     ], CreateManagedShortLinkResponse.prototype, "managedShortLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=previewLink" }),
+        SpeakeasyMetadata({ data: "json, name=previewLink" }),
         __metadata("design:type", String)
     ], CreateManagedShortLinkResponse.prototype, "previewLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=warning", elemType: shared.DynamicLinkWarning }),
+        SpeakeasyMetadata({ data: "json, name=warning", elemType: DynamicLinkWarning }),
         __metadata("design:type", Array)
     ], CreateManagedShortLinkResponse.prototype, "warning", void 0);
     return CreateManagedShortLinkResponse;

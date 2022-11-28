@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Beleg } from "./beleg";
 export declare class BelegeBelegeGruppe extends SpeakeasyBase {
     belegeKompakt: string[];

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudPubsubTopic } from "./cloudpubsubtopic";
+
 
 
 // WatchTarget
@@ -7,6 +8,6 @@ import { CloudPubsubTopic } from "./cloudpubsubtopic";
  * The target for notification delivery.
 **/
 export class WatchTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=topic" })
+  @SpeakeasyMetadata({ data: "json, name=topic" })
   topic?: CloudPubsubTopic;
 }

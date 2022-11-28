@@ -30,7 +30,7 @@ type CloudchannelAccountsCustomersEntitlementsChangeOfferSecurity struct {
 type CloudchannelAccountsCustomersEntitlementsChangeOfferRequest struct {
 	PathParams  CloudchannelAccountsCustomersEntitlementsChangeOfferPathParams
 	QueryParams CloudchannelAccountsCustomersEntitlementsChangeOfferQueryParams
-	Request     *shared.GoogleCloudChannelV1ChangeOfferRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudChannelV1ChangeOfferRequestInput `request:"mediaType=application/json"`
 	Security    CloudchannelAccountsCustomersEntitlementsChangeOfferSecurity
 }
 

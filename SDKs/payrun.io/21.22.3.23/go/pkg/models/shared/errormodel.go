@@ -9,6 +9,8 @@ const (
 	ErrorModelErrorModelErrorCategoryEnumValidationFailure ErrorModelErrorModelErrorCategoryEnum = "ValidationFailure"
 )
 
+// ErrorModelErrorModelErrors
+// The error models' errors
 type ErrorModelErrorModelErrors struct {
 	Error []string `json:"Error,omitempty"`
 }

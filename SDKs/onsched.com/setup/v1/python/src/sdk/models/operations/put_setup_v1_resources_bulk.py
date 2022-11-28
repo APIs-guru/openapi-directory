@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from sdk.models import shared
 
@@ -19,13 +22,13 @@ class PutSetupV1ResourcesBulkRequests:
 
 @dataclass
 class PutSetupV1ResourcesBulkRequest:
-    query_params: PutSetupV1ResourcesBulkQueryParams = field(default=None)
+    query_params: PutSetupV1ResourcesBulkQueryParams = field()
     request: Optional[PutSetupV1ResourcesBulkRequests] = field(default=None)
     
 
 @dataclass
 class PutSetupV1ResourcesBulkResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     resource_view_models: Optional[List[shared.ResourceViewModel]] = field(default=None)
-    status_code: int = field(default=None)
     

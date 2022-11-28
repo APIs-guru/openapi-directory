@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateRoleAliasPathParams:
-    role_alias: str = field(default=None, metadata={'path_param': { 'field_name': 'roleAlias', 'style': 'simple', 'explode': False }})
+    role_alias: str = field(metadata={'path_param': { 'field_name': 'roleAlias', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,28 +27,28 @@ class CreateRoleAliasHeaders:
 @dataclass_json
 @dataclass
 class CreateRoleAliasRequestBody:
-    credential_duration_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'credentialDurationSeconds' }})
-    role_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roleArn' }})
-    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    role_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('roleArn') }})
+    credential_duration_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('credentialDurationSeconds') }})
+    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateRoleAliasRequest:
-    path_params: CreateRoleAliasPathParams = field(default=None)
-    headers: CreateRoleAliasHeaders = field(default=None)
-    request: CreateRoleAliasRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateRoleAliasHeaders = field()
+    path_params: CreateRoleAliasPathParams = field()
+    request: CreateRoleAliasRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateRoleAliasResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_role_alias_response: Optional[shared.CreateRoleAliasResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_already_exists_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

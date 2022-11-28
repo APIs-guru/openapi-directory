@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AuthenticatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=username" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" })
   username: string;
 }
 
 
 export class AuthenticateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=password" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=password" })
   password: string;
 }
 
 
 export class AuthenticateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AuthenticatePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AuthenticateQueryParams;
 }
 
 
 export class AuthenticateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

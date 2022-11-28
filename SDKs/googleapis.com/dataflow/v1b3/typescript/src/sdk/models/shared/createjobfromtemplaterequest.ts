@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuntimeEnvironment } from "./runtimeenvironment";
+
 
 
 // CreateJobFromTemplateRequest
@@ -7,18 +8,18 @@ import { RuntimeEnvironment } from "./runtimeenvironment";
  * A request to create a Cloud Dataflow job from a template.
 **/
 export class CreateJobFromTemplateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: RuntimeEnvironment;
 
-  @Metadata({ data: "json, name=gcsPath" })
+  @SpeakeasyMetadata({ data: "json, name=gcsPath" })
   gcsPath?: string;
 
-  @Metadata({ data: "json, name=jobName" })
+  @SpeakeasyMetadata({ data: "json, name=jobName" })
   jobName?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=parameters" })
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
   parameters?: Map<string, string>;
 }

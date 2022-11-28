@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MinimalRepository } from "./minimalrepository";
 import { SimpleCommitStatus } from "./simplecommitstatus";
+
 
 
 // CombinedCommitStatus
@@ -9,24 +9,24 @@ import { SimpleCommitStatus } from "./simplecommitstatus";
  * Combined Commit Status
 **/
 export class CombinedCommitStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commit_url" })
+  @SpeakeasyMetadata({ data: "json, name=commit_url" })
   commitUrl: string;
 
-  @Metadata({ data: "json, name=repository" })
+  @SpeakeasyMetadata({ data: "json, name=repository" })
   repository: MinimalRepository;
 
-  @Metadata({ data: "json, name=sha" })
+  @SpeakeasyMetadata({ data: "json, name=sha" })
   sha: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state: string;
 
-  @Metadata({ data: "json, name=statuses", elemType: shared.SimpleCommitStatus })
+  @SpeakeasyMetadata({ data: "json, name=statuses", elemType: SimpleCommitStatus })
   statuses: SimpleCommitStatus[];
 
-  @Metadata({ data: "json, name=total_count" })
+  @SpeakeasyMetadata({ data: "json, name=total_count" })
   totalCount: number;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

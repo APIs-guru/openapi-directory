@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ActionsSetSelectedReposForOrgSecretPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=org" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=org" })
   org: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=secret_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=secret_name" })
   secretName: string;
 }
 
 
 export class ActionsSetSelectedReposForOrgSecretRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=selected_repository_ids" })
+  @SpeakeasyMetadata({ data: "json, name=selected_repository_ids" })
   selectedRepositoryIds?: number[];
 }
 
 
 export class ActionsSetSelectedReposForOrgSecretRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ActionsSetSelectedReposForOrgSecretPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: ActionsSetSelectedReposForOrgSecretRequestBody;
 }
 
 
 export class ActionsSetSelectedReposForOrgSecretResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

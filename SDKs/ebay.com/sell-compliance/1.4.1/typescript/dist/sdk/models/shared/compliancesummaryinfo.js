@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ComplianceSummaryInfo
 /**
  * This type is used by each unique eBay marketplace and compliance type combination that is returned in the getListingViolationsSummary response to indicate the total number of listing violations in regards to that eBay marketplace and compliance type.
@@ -33,15 +33,15 @@ var ComplianceSummaryInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=complianceType" }),
+        SpeakeasyMetadata({ data: "json, name=complianceType" }),
         __metadata("design:type", String)
     ], ComplianceSummaryInfo.prototype, "complianceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=listingCount" }),
+        SpeakeasyMetadata({ data: "json, name=listingCount" }),
         __metadata("design:type", Number)
     ], ComplianceSummaryInfo.prototype, "listingCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=marketplaceId" }),
+        SpeakeasyMetadata({ data: "json, name=marketplaceId" }),
         __metadata("design:type", String)
     ], ComplianceSummaryInfo.prototype, "marketplaceId", void 0);
     return ComplianceSummaryInfo;

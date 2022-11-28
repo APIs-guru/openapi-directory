@@ -29,11 +29,6 @@ type RegriiSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type RegriiRequest struct {
-	Request  *RegriiRequestBody `request:"mediaType=application/json"`
-	Security RegriiSecurity
-}
-
 type Regrii400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Regrii504ApplicationJSON struct {
 	Error            *Regrii504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Regrii504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type RegriiRequest struct {
+	Request  *RegriiRequestBody `request:"mediaType=application/json"`
+	Security RegriiSecurity
 }
 
 type RegriiResponse struct {

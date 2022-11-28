@@ -102,6 +102,8 @@ const (
 	FieldTypeDefinitionTypeEnumObjectCoordinates FieldTypeDefinitionTypeEnum = "object_coordinates"
 )
 
+// FieldTypeDefinition
+// The data type expected by an input field.
 type FieldTypeDefinition struct {
 	FieldType            *FieldTypeDefinitionFieldTypeEnum            `json:"fieldType,omitempty"`
 	Name                 string                                       `json:"name"`

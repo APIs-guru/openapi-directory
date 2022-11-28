@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ForumGetForumTagSuggestionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=partialtag" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=partialtag" })
   partialtag?: string;
 }
 
 
 export class ForumGetForumTagSuggestionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ForumGetForumTagSuggestionsQueryParams;
 }
 
 
 export class ForumGetForumTagSuggestionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

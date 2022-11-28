@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetPolicyOptions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Encapsulates settings provided to GetIamPolicy.
 **/
 export class GetPolicyOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requestedPolicyVersion" })
+  @SpeakeasyMetadata({ data: "json, name=requestedPolicyVersion" })
   requestedPolicyVersion?: number;
 }

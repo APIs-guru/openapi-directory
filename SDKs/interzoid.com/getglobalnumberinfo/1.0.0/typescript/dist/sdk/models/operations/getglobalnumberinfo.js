@@ -22,98 +22,98 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetglobalnumberinfoQueryParams = /** @class */ (function (_super) {
     __extends(GetglobalnumberinfoQueryParams, _super);
     function GetglobalnumberinfoQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=intlnumber" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=intlnumber" }),
         __metadata("design:type", String)
     ], GetglobalnumberinfoQueryParams.prototype, "intlnumber", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=license" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" }),
         __metadata("design:type", String)
     ], GetglobalnumberinfoQueryParams.prototype, "license", void 0);
     return GetglobalnumberinfoQueryParams;
 }(SpeakeasyBase));
 export { GetglobalnumberinfoQueryParams };
-var GetglobalnumberinfoRequest = /** @class */ (function (_super) {
-    __extends(GetglobalnumberinfoRequest, _super);
-    function GetglobalnumberinfoRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetglobalnumberinfoQueryParams)
-    ], GetglobalnumberinfoRequest.prototype, "queryParams", void 0);
-    return GetglobalnumberinfoRequest;
-}(SpeakeasyBase));
-export { GetglobalnumberinfoRequest };
 var Getglobalnumberinfo200ApplicationJson = /** @class */ (function (_super) {
     __extends(Getglobalnumberinfo200ApplicationJson, _super);
     function Getglobalnumberinfo200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Code" }),
+        SpeakeasyMetadata({ data: "json, name=Code" }),
         __metadata("design:type", String)
     ], Getglobalnumberinfo200ApplicationJson.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=Country" }),
+        SpeakeasyMetadata({ data: "json, name=Country" }),
         __metadata("design:type", String)
     ], Getglobalnumberinfo200ApplicationJson.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "json, name=Credits" }),
+        SpeakeasyMetadata({ data: "json, name=Credits" }),
         __metadata("design:type", String)
     ], Getglobalnumberinfo200ApplicationJson.prototype, "credits", void 0);
     __decorate([
-        Metadata({ data: "json, name=Language2" }),
+        SpeakeasyMetadata({ data: "json, name=Language2" }),
         __metadata("design:type", String)
     ], Getglobalnumberinfo200ApplicationJson.prototype, "language2", void 0);
     __decorate([
-        Metadata({ data: "json, name=Language3" }),
+        SpeakeasyMetadata({ data: "json, name=Language3" }),
         __metadata("design:type", String)
     ], Getglobalnumberinfo200ApplicationJson.prototype, "language3", void 0);
     __decorate([
-        Metadata({ data: "json, name=Mobile" }),
+        SpeakeasyMetadata({ data: "json, name=Mobile" }),
         __metadata("design:type", String)
     ], Getglobalnumberinfo200ApplicationJson.prototype, "mobile", void 0);
     __decorate([
-        Metadata({ data: "json, name=PrimaryCity" }),
+        SpeakeasyMetadata({ data: "json, name=PrimaryCity" }),
         __metadata("design:type", String)
     ], Getglobalnumberinfo200ApplicationJson.prototype, "primaryCity", void 0);
     __decorate([
-        Metadata({ data: "json, name=PrimaryLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=PrimaryLanguage" }),
         __metadata("design:type", String)
     ], Getglobalnumberinfo200ApplicationJson.prototype, "primaryLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=Region" }),
+        SpeakeasyMetadata({ data: "json, name=Region" }),
         __metadata("design:type", String)
     ], Getglobalnumberinfo200ApplicationJson.prototype, "region", void 0);
     __decorate([
-        Metadata({ data: "json, name=Wealth" }),
+        SpeakeasyMetadata({ data: "json, name=Wealth" }),
         __metadata("design:type", String)
     ], Getglobalnumberinfo200ApplicationJson.prototype, "wealth", void 0);
     return Getglobalnumberinfo200ApplicationJson;
 }(SpeakeasyBase));
 export { Getglobalnumberinfo200ApplicationJson };
+var GetglobalnumberinfoRequest = /** @class */ (function (_super) {
+    __extends(GetglobalnumberinfoRequest, _super);
+    function GetglobalnumberinfoRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetglobalnumberinfoQueryParams)
+    ], GetglobalnumberinfoRequest.prototype, "queryParams", void 0);
+    return GetglobalnumberinfoRequest;
+}(SpeakeasyBase));
+export { GetglobalnumberinfoRequest };
 var GetglobalnumberinfoResponse = /** @class */ (function (_super) {
     __extends(GetglobalnumberinfoResponse, _super);
     function GetglobalnumberinfoResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetglobalnumberinfoResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetglobalnumberinfoResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Getglobalnumberinfo200ApplicationJson)
     ], GetglobalnumberinfoResponse.prototype, "getglobalnumberinfo200ApplicationJsonObject", void 0);
     return GetglobalnumberinfoResponse;

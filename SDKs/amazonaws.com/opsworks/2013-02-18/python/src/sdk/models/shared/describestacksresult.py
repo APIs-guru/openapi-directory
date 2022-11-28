@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import stack
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeStacksResult:
-    stacks: Optional[List[stack.Stack]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Stacks' }})
+    r"""DescribeStacksResult
+    Contains the response to a <code>DescribeStacks</code> request.
+    """
+    
+    stacks: Optional[List[Stack]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Stacks') }})
     

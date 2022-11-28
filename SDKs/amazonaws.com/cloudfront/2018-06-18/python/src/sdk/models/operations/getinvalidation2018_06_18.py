@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 
 
 @dataclass
 class GetInvalidation20180618PathParams:
-    distribution_id: str = field(default=None, metadata={'path_param': { 'field_name': 'DistributionId', 'style': 'simple', 'explode': False }})
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'Id', 'style': 'simple', 'explode': False }})
+    distribution_id: str = field(metadata={'path_param': { 'field_name': 'DistributionId', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,13 +24,13 @@ class GetInvalidation20180618Headers:
 
 @dataclass
 class GetInvalidation20180618Request:
-    path_params: GetInvalidation20180618PathParams = field(default=None)
-    headers: GetInvalidation20180618Headers = field(default=None)
+    headers: GetInvalidation20180618Headers = field()
+    path_params: GetInvalidation20180618PathParams = field()
     
 
 @dataclass
 class GetInvalidation20180618Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

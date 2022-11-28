@@ -8,6 +8,8 @@ const (
 	InternalCheckerStateEnumRunning     InternalCheckerStateEnum = "RUNNING"
 )
 
+// InternalChecker
+// An internal checker allows Uptime checks to run on private/internal GCP resources.
 type InternalChecker struct {
 	DisplayName   *string                   `json:"displayName,omitempty"`
 	GcpZone       *string                   `json:"gcpZone,omitempty"`

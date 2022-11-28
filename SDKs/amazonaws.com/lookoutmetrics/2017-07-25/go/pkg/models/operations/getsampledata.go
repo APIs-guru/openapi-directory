@@ -14,6 +14,8 @@ type GetSampleDataHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// GetSampleDataRequestBodyS3SourceConfig
+// Contains information about the source configuration in Amazon S3.
 type GetSampleDataRequestBodyS3SourceConfig struct {
 	FileFormatDescriptor   *shared.FileFormatDescriptor `json:"FileFormatDescriptor,omitempty"`
 	HistoricalDataPathList []string                     `json:"HistoricalDataPathList,omitempty"`

@@ -14,6 +14,8 @@ const (
 	UsageCapExceededProblemScopeEnumProduct UsageCapExceededProblemScopeEnum = "Product"
 )
 
+// UsageCapExceededProblem
+// A problem that indicates that a usage cap has been exceeded.
 type UsageCapExceededProblem struct {
 	Detail string                             `json:"detail"`
 	Period *UsageCapExceededProblemPeriodEnum `json:"period,omitempty"`

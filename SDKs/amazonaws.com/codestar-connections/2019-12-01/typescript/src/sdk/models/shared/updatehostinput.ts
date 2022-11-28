@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VpcConfiguration } from "./vpcconfiguration";
 
 
+
 export class UpdateHostInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HostArn" })
+  @SpeakeasyMetadata({ data: "json, name=HostArn" })
   hostArn: string;
 
-  @Metadata({ data: "json, name=ProviderEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=ProviderEndpoint" })
   providerEndpoint?: string;
 
-  @Metadata({ data: "json, name=VpcConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=VpcConfiguration" })
   vpcConfiguration?: VpcConfiguration;
 }

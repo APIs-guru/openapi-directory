@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // TestInvokeAuthorizerResponse
 /**
  * Represents the response of the test invoke request for a custom <a>Authorizer</a>
@@ -33,31 +33,31 @@ var TestInvokeAuthorizerResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authorization" }),
+        SpeakeasyMetadata({ data: "json, name=authorization" }),
         __metadata("design:type", Map)
     ], TestInvokeAuthorizerResponse.prototype, "authorization", void 0);
     __decorate([
-        Metadata({ data: "json, name=claims" }),
+        SpeakeasyMetadata({ data: "json, name=claims" }),
         __metadata("design:type", Map)
     ], TestInvokeAuthorizerResponse.prototype, "claims", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientStatus" }),
+        SpeakeasyMetadata({ data: "json, name=clientStatus" }),
         __metadata("design:type", Number)
     ], TestInvokeAuthorizerResponse.prototype, "clientStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=latency" }),
+        SpeakeasyMetadata({ data: "json, name=latency" }),
         __metadata("design:type", Number)
     ], TestInvokeAuthorizerResponse.prototype, "latency", void 0);
     __decorate([
-        Metadata({ data: "json, name=log" }),
+        SpeakeasyMetadata({ data: "json, name=log" }),
         __metadata("design:type", String)
     ], TestInvokeAuthorizerResponse.prototype, "log", void 0);
     __decorate([
-        Metadata({ data: "json, name=policy" }),
+        SpeakeasyMetadata({ data: "json, name=policy" }),
         __metadata("design:type", String)
     ], TestInvokeAuthorizerResponse.prototype, "policy", void 0);
     __decorate([
-        Metadata({ data: "json, name=principalId" }),
+        SpeakeasyMetadata({ data: "json, name=principalId" }),
         __metadata("design:type", String)
     ], TestInvokeAuthorizerResponse.prototype, "principalId", void 0);
     return TestInvokeAuthorizerResponse;

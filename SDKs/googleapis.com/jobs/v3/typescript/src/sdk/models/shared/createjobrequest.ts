@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Job } from "./job";
+
 
 
 // CreateJobRequest
@@ -7,6 +8,6 @@ import { Job } from "./job";
  * Input only. Create job request.
 **/
 export class CreateJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=job" })
+  @SpeakeasyMetadata({ data: "json, name=job" })
   job?: Job;
 }

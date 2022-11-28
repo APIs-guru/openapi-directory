@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClassifierEvaluationMetrics } from "./classifierevaluationmetrics";
 // ClassifierMetadata
 /**
@@ -34,19 +34,19 @@ var ClassifierMetadata = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EvaluationMetrics" }),
+        SpeakeasyMetadata({ data: "json, name=EvaluationMetrics" }),
         __metadata("design:type", ClassifierEvaluationMetrics)
     ], ClassifierMetadata.prototype, "evaluationMetrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=NumberOfLabels" }),
+        SpeakeasyMetadata({ data: "json, name=NumberOfLabels" }),
         __metadata("design:type", Number)
     ], ClassifierMetadata.prototype, "numberOfLabels", void 0);
     __decorate([
-        Metadata({ data: "json, name=NumberOfTestDocuments" }),
+        SpeakeasyMetadata({ data: "json, name=NumberOfTestDocuments" }),
         __metadata("design:type", Number)
     ], ClassifierMetadata.prototype, "numberOfTestDocuments", void 0);
     __decorate([
-        Metadata({ data: "json, name=NumberOfTrainedDocuments" }),
+        SpeakeasyMetadata({ data: "json, name=NumberOfTrainedDocuments" }),
         __metadata("design:type", Number)
     ], ClassifierMetadata.prototype, "numberOfTrainedDocuments", void 0);
     return ClassifierMetadata;

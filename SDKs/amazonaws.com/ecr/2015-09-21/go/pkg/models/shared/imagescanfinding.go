@@ -1,5 +1,7 @@
 package shared
 
+// ImageScanFinding
+// Contains information about an image scan finding.
 type ImageScanFinding struct {
 	Attributes  []Attribute          `json:"attributes,omitempty"`
 	Description *string              `json:"description,omitempty"`

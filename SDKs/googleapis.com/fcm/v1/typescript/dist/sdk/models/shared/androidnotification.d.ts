@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LightSettings } from "./lightsettings";
 export declare enum AndroidNotificationNotificationPriorityEnum {
     PriorityUnspecified = "PRIORITY_UNSPECIFIED",

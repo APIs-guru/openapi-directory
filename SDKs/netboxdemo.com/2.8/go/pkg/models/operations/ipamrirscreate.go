@@ -5,7 +5,7 @@ import (
 )
 
 type IpamRirsCreateRequest struct {
-	Request shared.Rir `request:"mediaType=application/json"`
+	Request shared.RirInput `request:"mediaType=application/json"`
 }
 
 type IpamRirsCreateResponse struct {

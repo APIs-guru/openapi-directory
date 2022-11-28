@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AddEventSourceHeaders = /** @class */ (function (_super) {
     __extends(AddEventSourceHeaders, _super);
@@ -30,31 +30,31 @@ var AddEventSourceHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], AddEventSourceHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], AddEventSourceHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], AddEventSourceHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], AddEventSourceHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], AddEventSourceHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], AddEventSourceHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], AddEventSourceHeaders.prototype, "xAmzSignedHeaders", void 0);
     return AddEventSourceHeaders;
@@ -66,23 +66,23 @@ var AddEventSourceRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BatchSize" }),
+        SpeakeasyMetadata({ data: "json, name=BatchSize" }),
         __metadata("design:type", Number)
     ], AddEventSourceRequestBody.prototype, "batchSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventSource" }),
+        SpeakeasyMetadata({ data: "json, name=EventSource" }),
         __metadata("design:type", String)
     ], AddEventSourceRequestBody.prototype, "eventSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=FunctionName" }),
+        SpeakeasyMetadata({ data: "json, name=FunctionName" }),
         __metadata("design:type", String)
     ], AddEventSourceRequestBody.prototype, "functionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Parameters" }),
+        SpeakeasyMetadata({ data: "json, name=Parameters" }),
         __metadata("design:type", Map)
     ], AddEventSourceRequestBody.prototype, "parameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=Role" }),
+        SpeakeasyMetadata({ data: "json, name=Role" }),
         __metadata("design:type", String)
     ], AddEventSourceRequestBody.prototype, "role", void 0);
     return AddEventSourceRequestBody;
@@ -94,11 +94,11 @@ var AddEventSourceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddEventSourceHeaders)
     ], AddEventSourceRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", AddEventSourceRequestBody)
     ], AddEventSourceRequest.prototype, "request", void 0);
     return AddEventSourceRequest;
@@ -110,23 +110,23 @@ var AddEventSourceResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AddEventSourceResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.EventSourceConfiguration)
     ], AddEventSourceResponse.prototype, "eventSourceConfiguration", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.InvalidParameterValueException)
     ], AddEventSourceResponse.prototype, "invalidParameterValueException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ServiceException)
     ], AddEventSourceResponse.prototype, "serviceException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AddEventSourceResponse.prototype, "statusCode", void 0);
     return AddEventSourceResponse;

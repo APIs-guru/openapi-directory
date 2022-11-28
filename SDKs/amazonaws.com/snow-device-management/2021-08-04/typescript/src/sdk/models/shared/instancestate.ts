@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceStateNameEnum } from "./instancestatenameenum";
+
 
 
 // InstanceState
@@ -7,9 +8,9 @@ import { InstanceStateNameEnum } from "./instancestatenameenum";
  * The description of the current state of an instance.
 **/
 export class InstanceState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: InstanceStateNameEnum;
 }

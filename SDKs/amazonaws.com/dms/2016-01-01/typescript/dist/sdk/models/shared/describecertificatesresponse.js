@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Certificate } from "./certificate";
 var DescribeCertificatesResponse = /** @class */ (function (_super) {
     __extends(DescribeCertificatesResponse, _super);
     function DescribeCertificatesResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Certificates", elemType: shared.Certificate }),
+        SpeakeasyMetadata({ data: "json, name=Certificates", elemType: Certificate }),
         __metadata("design:type", Array)
     ], DescribeCertificatesResponse.prototype, "certificates", void 0);
     __decorate([
-        Metadata({ data: "json, name=Marker" }),
+        SpeakeasyMetadata({ data: "json, name=Marker" }),
         __metadata("design:type", String)
     ], DescribeCertificatesResponse.prototype, "marker", void 0);
     return DescribeCertificatesResponse;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TriggerTypeEnum } from "./triggertypeenum";
 /**
  * Contains the configuration information of alarm state changes.

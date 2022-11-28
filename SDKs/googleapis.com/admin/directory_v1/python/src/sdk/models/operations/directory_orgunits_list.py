@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryOrgunitsListPathParams:
-    customer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'customerId', 'style': 'simple', 'explode': False }})
+    customer_id: str = field(metadata={'path_param': { 'field_name': 'customerId', 'style': 'simple', 'explode': False }})
     
 class DirectoryOrgunitsListTypeEnum(str, Enum):
     ALL = "all"
@@ -31,14 +32,14 @@ class DirectoryOrgunitsListQueryParams:
 
 @dataclass
 class DirectoryOrgunitsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryOrgunitsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -49,14 +50,14 @@ class DirectoryOrgunitsListSecurity:
 
 @dataclass
 class DirectoryOrgunitsListRequest:
-    path_params: DirectoryOrgunitsListPathParams = field(default=None)
-    query_params: DirectoryOrgunitsListQueryParams = field(default=None)
-    security: DirectoryOrgunitsListSecurity = field(default=None)
+    path_params: DirectoryOrgunitsListPathParams = field()
+    query_params: DirectoryOrgunitsListQueryParams = field()
+    security: DirectoryOrgunitsListSecurity = field()
     
 
 @dataclass
 class DirectoryOrgunitsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     org_units: Optional[shared.OrgUnits] = field(default=None)
-    status_code: int = field(default=None)
     

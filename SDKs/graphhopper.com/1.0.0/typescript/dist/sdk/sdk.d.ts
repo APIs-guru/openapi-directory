@@ -1,0 +1,32 @@
+import { AxiosInstance } from "axios";
+import { Security } from "./models/shared";
+import { ClusterApi } from "./clusterapi";
+import { GeocodingApi } from "./geocodingapi";
+import { IsochroneApi } from "./isochroneapi";
+import { MapMatchingApi } from "./mapmatchingapi";
+import { MatrixApi } from "./matrixapi";
+import { RouteOptimizationApi } from "./routeoptimizationapi";
+import { RoutingApi } from "./routingapi";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://graphhopper.com/api/1"];
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    clusterApi: ClusterApi;
+    geocodingApi: GeocodingApi;
+    isochroneApi: IsochroneApi;
+    mapMatchingApi: MapMatchingApi;
+    matrixApi: MatrixApi;
+    routeOptimizationApi: RouteOptimizationApi;
+    routingApi: RoutingApi;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _security?: Security;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
+    constructor(...opts: OptsFunc[]);
+}
+export {};

@@ -1,85 +1,86 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateApiVersionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
   apiId: string;
 }
 
 
 export class CreateApiVersionRequestBodyVersionSourceRelations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentation" })
+  @SpeakeasyMetadata({ data: "json, name=documentation" })
   documentation?: boolean;
 
-  @Metadata({ data: "json, name=mock" })
+  @SpeakeasyMetadata({ data: "json, name=mock" })
   mock?: boolean;
 
-  @Metadata({ data: "json, name=monitor" })
+  @SpeakeasyMetadata({ data: "json, name=monitor" })
   monitor?: boolean;
 }
 
 
 export class CreateApiVersionRequestBodyVersionSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=relations" })
+  @SpeakeasyMetadata({ data: "json, name=relations" })
   relations?: CreateApiVersionRequestBodyVersionSourceRelations;
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: boolean;
 }
 
 
 export class CreateApiVersionRequestBodyVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: CreateApiVersionRequestBodyVersionSource;
 }
 
 
 export class CreateApiVersionRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: CreateApiVersionRequestBodyVersion;
 }
 
 
-export class CreateApiVersionRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: CreateApiVersionPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: CreateApiVersionRequestBody;
-}
-
-
 export class CreateApiVersion200ApplicationJsonVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=api" })
+  @SpeakeasyMetadata({ data: "json, name=api" })
   api?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class CreateApiVersion200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: CreateApiVersion200ApplicationJsonVersion;
 }
 
 
+export class CreateApiVersionRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: CreateApiVersionPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: CreateApiVersionRequestBody;
+}
+
+
 export class CreateApiVersionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createApiVersion200ApplicationJsonObject?: CreateApiVersion200ApplicationJson;
 }

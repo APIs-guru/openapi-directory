@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Behavior
+// Represents behaviour reports
 type Behavior struct {
 	BirthDate    time.Time   `json:"birth_date"`
 	Country      interface{} `json:"country"`

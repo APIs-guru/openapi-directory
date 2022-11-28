@@ -10,12 +10,12 @@ class GetFbsTeamsQueryParams:
 
 @dataclass
 class GetFbsTeamsRequest:
-    query_params: GetFbsTeamsQueryParams = field(default=None)
+    query_params: GetFbsTeamsQueryParams = field()
     
 
 @dataclass
 class GetFbsTeamsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     teams: Optional[List[shared.Team]] = field(default=None)
     

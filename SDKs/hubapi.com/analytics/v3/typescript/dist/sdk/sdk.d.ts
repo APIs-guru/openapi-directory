@@ -1,17 +1,17 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { BehavioralEventsTracking } from "./behavioraleventstracking";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://api.hubapi.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    behavioralEventsTracking: BehavioralEventsTracking;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    /**
-     * Endpoint to send an instance of a behavioral event
-    **/
-    PostEventsV3Send(req: operations.PostEventsV3SendRequest, config?: AxiosRequestConfig): Promise<operations.PostEventsV3SendResponse>;
 }
 export {};

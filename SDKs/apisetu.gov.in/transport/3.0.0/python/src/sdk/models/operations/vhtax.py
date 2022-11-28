@@ -1,16 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
+from sdk.models import shared
 
 
 @dataclass_json
 @dataclass
 class VhtaxRequestBodyCertificateParameters:
-    full_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FullName' }})
-    uid: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UID' }})
-    chasis_no: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'chasis_no' }})
-    reg_no: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reg_no' }})
-    swd_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'swd_name' }})
+    full_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FullName') }})
+    uid: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('UID') }})
+    chasis_no: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('chasis_no') }})
+    reg_no: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('reg_no') }})
+    swd_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('swd_name') }})
     
 class VhtaxRequestBodyFormatEnum(str, Enum):
     PDF = "pdf"
@@ -19,22 +22,16 @@ class VhtaxRequestBodyFormatEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VhtaxRequestBody:
-    certificate_parameters: Optional[VhtaxRequestBodyCertificateParameters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificateParameters' }})
-    consent_artifact: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'consentArtifact' }})
-    format: VhtaxRequestBodyFormatEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'format' }})
-    txn_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'txnId' }})
+    format: VhtaxRequestBodyFormatEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('format') }})
+    txn_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('txnId') }})
+    certificate_parameters: Optional[VhtaxRequestBodyCertificateParameters] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('certificateParameters') }})
+    consent_artifact: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('consentArtifact') }})
     
 
 @dataclass
 class VhtaxSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    client_id: shared.SchemeClientID = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
-class VhtaxRequest:
-    request: Optional[VhtaxRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: VhtaxSecurity = field(default=None)
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    client_id: shared.SchemeClientID = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 class Vhtax400ApplicationJSONErrorEnum(str, Enum):
     MISSING_PARAMETER = "missing_parameter"
@@ -54,8 +51,8 @@ class Vhtax400ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Vhtax400ApplicationJSON:
-    error: Optional[Vhtax400ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Vhtax400ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Vhtax400ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Vhtax400ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Vhtax401ApplicationJSONErrorEnum(str, Enum):
     INVALID_AUTHENTICATION = "invalid_authentication"
@@ -69,8 +66,8 @@ class Vhtax401ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Vhtax401ApplicationJSON:
-    error: Optional[Vhtax401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Vhtax401ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Vhtax401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Vhtax401ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Vhtax404ApplicationJSONErrorEnum(str, Enum):
     RECORD_NOT_FOUND = "record_not_found"
@@ -84,8 +81,8 @@ class Vhtax404ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Vhtax404ApplicationJSON:
-    error: Optional[Vhtax404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Vhtax404ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Vhtax404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Vhtax404ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Vhtax500ApplicationJSONErrorEnum(str, Enum):
     INTERNAL_SERVER_ERROR = "internal_server_error"
@@ -97,8 +94,8 @@ class Vhtax500ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Vhtax500ApplicationJSON:
-    error: Optional[Vhtax500ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Vhtax500ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Vhtax500ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Vhtax500ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Vhtax502ApplicationJSONErrorEnum(str, Enum):
     BAD_GATEWY = "bad_gatewy"
@@ -110,8 +107,8 @@ class Vhtax502ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Vhtax502ApplicationJSON:
-    error: Optional[Vhtax502ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Vhtax502ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Vhtax502ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Vhtax502ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Vhtax503ApplicationJSONErrorEnum(str, Enum):
     SERVICE_UNAVAILABLE = "service_unavailable"
@@ -123,8 +120,8 @@ class Vhtax503ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Vhtax503ApplicationJSON:
-    error: Optional[Vhtax503ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Vhtax503ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Vhtax503ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Vhtax503ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Vhtax504ApplicationJSONErrorEnum(str, Enum):
     GATEWAY_TIMEOUT = "gateway_timeout"
@@ -136,14 +133,20 @@ class Vhtax504ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Vhtax504ApplicationJSON:
-    error: Optional[Vhtax504ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Vhtax504ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Vhtax504ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Vhtax504ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
+    
+
+@dataclass
+class VhtaxRequest:
+    security: VhtaxSecurity = field()
+    request: Optional[VhtaxRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class VhtaxResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     vhtax_400_application_json_object: Optional[Vhtax400ApplicationJSON] = field(default=None)
     vhtax_401_application_json_object: Optional[Vhtax401ApplicationJSON] = field(default=None)
     vhtax_404_application_json_object: Optional[Vhtax404ApplicationJSON] = field(default=None)

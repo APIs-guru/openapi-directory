@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteSwaggerPathParams = /** @class */ (function (_super) {
     __extends(DeleteSwaggerPathParams, _super);
@@ -30,7 +30,7 @@ var DeleteSwaggerPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], DeleteSwaggerPathParams.prototype, "id", void 0);
     return DeleteSwaggerPathParams;
@@ -42,7 +42,7 @@ var DeleteSwaggerSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], DeleteSwaggerSecurity.prototype, "apiKey", void 0);
     return DeleteSwaggerSecurity;
@@ -54,11 +54,11 @@ var DeleteSwaggerRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteSwaggerPathParams)
     ], DeleteSwaggerRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteSwaggerSecurity)
     ], DeleteSwaggerRequest.prototype, "security", void 0);
     return DeleteSwaggerRequest;
@@ -70,11 +70,11 @@ var DeleteSwaggerResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteSwaggerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteSwaggerResponse.prototype, "statusCode", void 0);
     return DeleteSwaggerResponse;

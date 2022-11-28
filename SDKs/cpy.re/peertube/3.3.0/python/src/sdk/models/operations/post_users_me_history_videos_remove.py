@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -12,17 +13,17 @@ class PostUsersMeHistoryVideosRemoveRequestBody:
 
 @dataclass
 class PostUsersMeHistoryVideosRemoveSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PostUsersMeHistoryVideosRemoveRequest:
+    security: PostUsersMeHistoryVideosRemoveSecurity = field()
     request: Optional[PostUsersMeHistoryVideosRemoveRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
-    security: PostUsersMeHistoryVideosRemoveSecurity = field(default=None)
     
 
 @dataclass
 class PostUsersMeHistoryVideosRemoveResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

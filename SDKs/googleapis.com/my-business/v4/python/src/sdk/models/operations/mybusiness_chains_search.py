@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -22,12 +23,12 @@ class MybusinessChainsSearchQueryParams:
 
 @dataclass
 class MybusinessChainsSearchRequest:
-    query_params: MybusinessChainsSearchQueryParams = field(default=None)
+    query_params: MybusinessChainsSearchQueryParams = field()
     
 
 @dataclass
 class MybusinessChainsSearchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     search_chains_response: Optional[shared.SearchChainsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

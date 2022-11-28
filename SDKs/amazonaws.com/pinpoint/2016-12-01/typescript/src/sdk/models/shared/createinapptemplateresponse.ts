@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TemplateCreateMessageBody } from "./templatecreatemessagebody";
 
 
+
 export class CreateInAppTemplateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TemplateCreateMessageBody" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateCreateMessageBody" })
   templateCreateMessageBody: TemplateCreateMessageBody;
 }

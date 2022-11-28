@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LoggingLevelEnum } from "./logginglevelenum";
+
 
 
 // LoggingOptions
@@ -7,6 +8,6 @@ import { LoggingLevelEnum } from "./logginglevelenum";
  * Contains logging options.
 **/
 export class LoggingOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=level" })
+  @SpeakeasyMetadata({ data: "json, name=level" })
   level: LoggingLevelEnum;
 }

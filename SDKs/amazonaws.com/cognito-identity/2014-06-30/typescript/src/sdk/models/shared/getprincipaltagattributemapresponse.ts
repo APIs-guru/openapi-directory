@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetPrincipalTagAttributeMapResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IdentityPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityPoolId" })
   identityPoolId?: string;
 
-  @Metadata({ data: "json, name=IdentityProviderName" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityProviderName" })
   identityProviderName?: string;
 
-  @Metadata({ data: "json, name=PrincipalTags" })
+  @SpeakeasyMetadata({ data: "json, name=PrincipalTags" })
   principalTags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=UseDefaults" })
+  @SpeakeasyMetadata({ data: "json, name=UseDefaults" })
   useDefaults?: boolean;
 }

@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTrainedModelMetrics1PathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=modelId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=modelId" })
   modelId: string;
 }
 
 
 export class GetTrainedModelMetrics1Security extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerToken: shared.SchemeBearerToken;
 }
 
 
 export class GetTrainedModelMetrics1Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTrainedModelMetrics1PathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetTrainedModelMetrics1Security;
 }
 
 
 export class GetTrainedModelMetrics1Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   metrics?: shared.Metrics;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

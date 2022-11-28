@@ -1,30 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SqlParameter } from "./sqlparameter";
 
 
+
 export class ExecuteStatementInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterIdentifier" })
   clusterIdentifier: string;
 
-  @Metadata({ data: "json, name=Database" })
+  @SpeakeasyMetadata({ data: "json, name=Database" })
   database: string;
 
-  @Metadata({ data: "json, name=DbUser" })
+  @SpeakeasyMetadata({ data: "json, name=DbUser" })
   dbUser?: string;
 
-  @Metadata({ data: "json, name=Parameters", elemType: shared.SqlParameter })
+  @SpeakeasyMetadata({ data: "json, name=Parameters", elemType: SqlParameter })
   parameters?: SqlParameter[];
 
-  @Metadata({ data: "json, name=SecretArn" })
+  @SpeakeasyMetadata({ data: "json, name=SecretArn" })
   secretArn?: string;
 
-  @Metadata({ data: "json, name=Sql" })
+  @SpeakeasyMetadata({ data: "json, name=Sql" })
   sql: string;
 
-  @Metadata({ data: "json, name=StatementName" })
+  @SpeakeasyMetadata({ data: "json, name=StatementName" })
   statementName?: string;
 
-  @Metadata({ data: "json, name=WithEvent" })
+  @SpeakeasyMetadata({ data: "json, name=WithEvent" })
   withEvent?: boolean;
 }

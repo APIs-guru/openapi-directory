@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsDynamoDbTableProvisionedThroughputOverride
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Replica-specific configuration for the provisioned throughput.
 **/
 export class AwsDynamoDbTableProvisionedThroughputOverride extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReadCapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=ReadCapacityUnits" })
   readCapacityUnits?: number;
 }

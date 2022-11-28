@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CodeConfiguration } from "./codeconfiguration";
 import { SourceCodeVersion } from "./sourcecodeversion";
 // CodeRepository
@@ -35,15 +35,15 @@ var CodeRepository = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CodeConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=CodeConfiguration" }),
         __metadata("design:type", CodeConfiguration)
     ], CodeRepository.prototype, "codeConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=RepositoryUrl" }),
+        SpeakeasyMetadata({ data: "json, name=RepositoryUrl" }),
         __metadata("design:type", String)
     ], CodeRepository.prototype, "repositoryUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceCodeVersion" }),
+        SpeakeasyMetadata({ data: "json, name=SourceCodeVersion" }),
         __metadata("design:type", SourceCodeVersion)
     ], CodeRepository.prototype, "sourceCodeVersion", void 0);
     return CodeRepository;

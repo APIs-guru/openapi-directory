@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -24,16 +27,16 @@ class DescribeFileSystemsHeaders:
 
 @dataclass
 class DescribeFileSystemsRequest:
-    query_params: DescribeFileSystemsQueryParams = field(default=None)
-    headers: DescribeFileSystemsHeaders = field(default=None)
+    headers: DescribeFileSystemsHeaders = field()
+    query_params: DescribeFileSystemsQueryParams = field()
     
 
 @dataclass
 class DescribeFileSystemsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_file_systems_response: Optional[shared.DescribeFileSystemsResponse] = field(default=None)
     file_system_not_found: Optional[Any] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

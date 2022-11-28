@@ -1,5 +1,7 @@
 package shared
 
+// Api2ControllersWebAPIReviewControllerReviewRequestLegacy
+// Legacy -- This object here is deprecated. Please use the new "ReviewRequest" structure for all future development
 type Api2ControllersWebAPIReviewControllerReviewRequestLegacy struct {
 	ActiveMinutes *int32  `json:"ActiveMinutes,omitempty" form:"name=ActiveMinutes"`
 	Comment       *string `json:"Comment,omitempty" form:"name=Comment"`

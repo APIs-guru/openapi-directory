@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { RequestedServiceQuotaChange } from "./requestedservicequotachange";
 var ListRequestedServiceQuotaChangeHistoryByQuotaResponse = /** @class */ (function (_super) {
     __extends(ListRequestedServiceQuotaChangeHistoryByQuotaResponse, _super);
     function ListRequestedServiceQuotaChangeHistoryByQuotaResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListRequestedServiceQuotaChangeHistoryByQuotaResponse.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=RequestedQuotas", elemType: shared.RequestedServiceQuotaChange }),
+        SpeakeasyMetadata({ data: "json, name=RequestedQuotas", elemType: RequestedServiceQuotaChange }),
         __metadata("design:type", Array)
     ], ListRequestedServiceQuotaChangeHistoryByQuotaResponse.prototype, "requestedQuotas", void 0);
     return ListRequestedServiceQuotaChangeHistoryByQuotaResponse;

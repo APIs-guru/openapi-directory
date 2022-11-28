@@ -1,9 +1,7 @@
 package operations
 
-type ConnectionsRequest struct {
-	Request map[string]interface{} `request:"mediaType=application/json"`
-}
-
+// Connections200ApplicationJSONLastHandshake
+// Structure holding detailed information about the connection
 type Connections200ApplicationJSONLastHandshake struct {
 	Agent                    *string `json:"agent,omitempty"`
 	ChainID                  *string `json:"chain_id,omitempty"`
@@ -27,6 +25,10 @@ type Connections200ApplicationJSON struct {
 	LastHandshake *Connections200ApplicationJSONLastHandshake `json:"last_handshake,omitempty"`
 	Peer          *string                                     `json:"peer,omitempty"`
 	Syncing       *bool                                       `json:"syncing,omitempty"`
+}
+
+type ConnectionsRequest struct {
+	Request map[string]interface{} `request:"mediaType=application/json"`
 }
 
 type ConnectionsResponse struct {

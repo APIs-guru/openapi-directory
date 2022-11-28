@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import agent_key
+from sdk import utils
+from . import *
 
 class NodeSettingsPolicyModeEnum(str, Enum):
     AUDIT = "audit"
@@ -12,8 +14,8 @@ class NodeSettingsPolicyModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class NodeSettingsProperties:
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    value: Any = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    value: Any = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 class NodeSettingsStateEnum(str, Enum):
     ENABLED = "enabled"
@@ -26,8 +28,8 @@ class NodeSettingsStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class NodeSettings:
-    agent_key: Optional[agent_key.AgentKey] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'agentKey' }})
-    policy_mode: Optional[NodeSettingsPolicyModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policyMode' }})
-    properties: Optional[List[NodeSettingsProperties]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'properties' }})
-    state: Optional[NodeSettingsStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    agent_key: Optional[AgentKey] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('agentKey') }})
+    policy_mode: Optional[NodeSettingsPolicyModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policyMode') }})
+    properties: Optional[List[NodeSettingsProperties]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('properties') }})
+    state: Optional[NodeSettingsStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
     

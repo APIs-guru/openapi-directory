@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,20 +22,20 @@ class GetSamplingTargetsHeaders:
 @dataclass_json
 @dataclass
 class GetSamplingTargetsRequestBody:
-    sampling_statistics_documents: List[shared.SamplingStatisticsDocument] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SamplingStatisticsDocuments' }})
+    sampling_statistics_documents: List[shared.SamplingStatisticsDocument] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SamplingStatisticsDocuments') }})
     
 
 @dataclass
 class GetSamplingTargetsRequest:
-    headers: GetSamplingTargetsHeaders = field(default=None)
-    request: GetSamplingTargetsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetSamplingTargetsHeaders = field()
+    request: GetSamplingTargetsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetSamplingTargetsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_sampling_targets_result: Optional[shared.GetSamplingTargetsResult] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttled_exception: Optional[Any] = field(default=None)
     

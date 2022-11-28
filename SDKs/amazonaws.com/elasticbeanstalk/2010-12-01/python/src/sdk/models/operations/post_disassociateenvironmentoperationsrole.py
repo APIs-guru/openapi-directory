@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDisassociateEnvironmentOperationsRoleActionEnum(str, Enum):
     DISASSOCIATE_ENVIRONMENT_OPERATIONS_ROLE = "DisassociateEnvironmentOperationsRole"
@@ -10,8 +14,8 @@ class PostDisassociateEnvironmentOperationsRoleVersionEnum(str, Enum):
 
 @dataclass
 class PostDisassociateEnvironmentOperationsRoleQueryParams:
-    action: PostDisassociateEnvironmentOperationsRoleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDisassociateEnvironmentOperationsRoleVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDisassociateEnvironmentOperationsRoleActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDisassociateEnvironmentOperationsRoleVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDisassociateEnvironmentOperationsRoleHeaders:
 
 @dataclass
 class PostDisassociateEnvironmentOperationsRoleRequest:
-    query_params: PostDisassociateEnvironmentOperationsRoleQueryParams = field(default=None)
-    headers: PostDisassociateEnvironmentOperationsRoleHeaders = field(default=None)
+    headers: PostDisassociateEnvironmentOperationsRoleHeaders = field()
+    query_params: PostDisassociateEnvironmentOperationsRoleQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDisassociateEnvironmentOperationsRoleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

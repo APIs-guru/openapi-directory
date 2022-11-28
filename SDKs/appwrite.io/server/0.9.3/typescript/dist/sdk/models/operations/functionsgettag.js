@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FunctionsGetTagPathParams = /** @class */ (function (_super) {
     __extends(FunctionsGetTagPathParams, _super);
@@ -30,11 +30,11 @@ var FunctionsGetTagPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=functionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=functionId" }),
         __metadata("design:type", String)
     ], FunctionsGetTagPathParams.prototype, "functionId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=tagId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tagId" }),
         __metadata("design:type", String)
     ], FunctionsGetTagPathParams.prototype, "tagId", void 0);
     return FunctionsGetTagPathParams;
@@ -46,11 +46,11 @@ var FunctionsGetTagSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeKey)
     ], FunctionsGetTagSecurity.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], FunctionsGetTagSecurity.prototype, "project", void 0);
     return FunctionsGetTagSecurity;
@@ -62,11 +62,11 @@ var FunctionsGetTagRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FunctionsGetTagPathParams)
     ], FunctionsGetTagRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FunctionsGetTagSecurity)
     ], FunctionsGetTagRequest.prototype, "security", void 0);
     return FunctionsGetTagRequest;
@@ -78,15 +78,15 @@ var FunctionsGetTagResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FunctionsGetTagResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FunctionsGetTagResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Tag)
     ], FunctionsGetTagResponse.prototype, "tag", void 0);
     return FunctionsGetTagResponse;

@@ -8,6 +8,8 @@ const (
 	ExitEventTypeEnumExitEventTypeBackup      ExitEventTypeEnum = "EXIT_EVENT_TYPE_BACKUP"
 )
 
+// ExitEvent
+// Exit event of the creative.
 type ExitEvent struct {
 	Name          *string            `json:"name,omitempty"`
 	ReportingName *string            `json:"reportingName,omitempty"`

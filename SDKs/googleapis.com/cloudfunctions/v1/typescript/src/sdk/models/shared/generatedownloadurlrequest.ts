@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GenerateDownloadUrlRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request of `GenerateDownloadUrl` method.
 **/
 export class GenerateDownloadUrlRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=versionId" })
+  @SpeakeasyMetadata({ data: "json, name=versionId" })
   versionId?: string;
 }

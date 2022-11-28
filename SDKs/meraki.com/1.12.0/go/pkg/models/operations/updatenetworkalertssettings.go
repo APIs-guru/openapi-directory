@@ -4,6 +4,8 @@ type UpdateNetworkAlertsSettingsPathParams struct {
 	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
 }
 
+// UpdateNetworkAlertsSettingsRequestBodyAlertsAlertDestinations
+// A hash of destinations for this specific alert
 type UpdateNetworkAlertsSettingsRequestBodyAlertsAlertDestinations struct {
 	AllAdmins     *bool    `json:"allAdmins,omitempty"`
 	Emails        []string `json:"emails,omitempty"`
@@ -18,6 +20,8 @@ type UpdateNetworkAlertsSettingsRequestBodyAlerts struct {
 	Type              string                                                         `json:"type"`
 }
 
+// UpdateNetworkAlertsSettingsRequestBodyDefaultDestinations
+// The network-wide destinations for all alerts on the network.
 type UpdateNetworkAlertsSettingsRequestBodyDefaultDestinations struct {
 	AllAdmins     *bool    `json:"allAdmins,omitempty"`
 	Emails        []string `json:"emails,omitempty"`

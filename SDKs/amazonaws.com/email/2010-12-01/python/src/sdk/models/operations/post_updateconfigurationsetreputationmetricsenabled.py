@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostUpdateConfigurationSetReputationMetricsEnabledActionEnum(str, Enum):
     UPDATE_CONFIGURATION_SET_REPUTATION_METRICS_ENABLED = "UpdateConfigurationSetReputationMetricsEnabled"
@@ -10,8 +14,8 @@ class PostUpdateConfigurationSetReputationMetricsEnabledVersionEnum(str, Enum):
 
 @dataclass
 class PostUpdateConfigurationSetReputationMetricsEnabledQueryParams:
-    action: PostUpdateConfigurationSetReputationMetricsEnabledActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostUpdateConfigurationSetReputationMetricsEnabledVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostUpdateConfigurationSetReputationMetricsEnabledActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostUpdateConfigurationSetReputationMetricsEnabledVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostUpdateConfigurationSetReputationMetricsEnabledHeaders:
 
 @dataclass
 class PostUpdateConfigurationSetReputationMetricsEnabledRequest:
-    query_params: PostUpdateConfigurationSetReputationMetricsEnabledQueryParams = field(default=None)
-    headers: PostUpdateConfigurationSetReputationMetricsEnabledHeaders = field(default=None)
+    headers: PostUpdateConfigurationSetReputationMetricsEnabledHeaders = field()
+    query_params: PostUpdateConfigurationSetReputationMetricsEnabledQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostUpdateConfigurationSetReputationMetricsEnabledResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

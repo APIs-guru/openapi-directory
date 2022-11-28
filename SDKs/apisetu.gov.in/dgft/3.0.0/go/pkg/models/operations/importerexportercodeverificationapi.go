@@ -9,22 +9,9 @@ type ImporterExporterCodeVerificationAPIPathParams struct {
 	Iec string `pathParam:"style=simple,explode=false,name=iec"`
 }
 
-type ImporterExporterCodeVerificationAPISecurityOption1 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type ImporterExporterCodeVerificationAPISecurityOption2 struct {
-	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type ImporterExporterCodeVerificationAPISecurity struct {
-	Option1 *ImporterExporterCodeVerificationAPISecurityOption1 `security:"option"`
-	Option2 *ImporterExporterCodeVerificationAPISecurityOption2 `security:"option"`
-}
-
-type ImporterExporterCodeVerificationAPIRequest struct {
-	PathParams ImporterExporterCodeVerificationAPIPathParams
-	Security   ImporterExporterCodeVerificationAPISecurity
+	APIKey   *shared.SchemeAPIKey   `security:"scheme,type=apiKey,subtype=header"`
+	ClientID *shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type ImporterExporterCodeVerificationAPI200ApplicationJSON struct {
@@ -169,6 +156,11 @@ const (
 type ImporterExporterCodeVerificationAPI504ApplicationJSON struct {
 	Error            *ImporterExporterCodeVerificationAPI504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *ImporterExporterCodeVerificationAPI504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type ImporterExporterCodeVerificationAPIRequest struct {
+	PathParams ImporterExporterCodeVerificationAPIPathParams
+	Security   ImporterExporterCodeVerificationAPISecurity
 }
 
 type ImporterExporterCodeVerificationAPIResponse struct {

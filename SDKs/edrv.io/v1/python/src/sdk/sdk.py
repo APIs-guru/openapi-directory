@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,37 +14,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def cancelreservation(self, request: operations.CancelreservationRequest) -> operations.CancelreservationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Use to request a delete an existing reservation. The request will wait for the charge station to process the command. It will timeout after 60 seconds.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/commands/cancelreservation"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -58,13 +87,16 @@ class SDK:
 
     
     def delete_charge_station(self, request: operations.DeleteChargeStationRequest) -> operations.DeleteChargeStationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Use to delete a charge station
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/chargestations/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -79,13 +111,16 @@ class SDK:
 
     
     def delete_connector(self, request: operations.DeleteConnectorRequest) -> operations.DeleteConnectorResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a connector
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/connectors/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -98,13 +133,16 @@ class SDK:
 
     
     def delete_driver(self, request: operations.DeleteDriverRequest) -> operations.DeleteDriverResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a driver
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/drivers/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -117,13 +155,16 @@ class SDK:
 
     
     def delete_location(self, request: operations.DeleteLocationRequest) -> operations.DeleteLocationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a location
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/location/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -136,13 +177,16 @@ class SDK:
 
     
     def delete_token(self, request: operations.DeleteTokenRequest) -> operations.DeleteTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Use to delete a token
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/tokens/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -155,22 +199,22 @@ class SDK:
 
     
     def deletechargingschedule(self, request: operations.DeletechargingscheduleRequest) -> operations.DeletechargingscheduleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a smart charging schedule
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/commands/chargingschedule"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -187,15 +231,17 @@ class SDK:
 
     
     def get_charge_station(self, request: operations.GetChargeStationRequest) -> operations.GetChargeStationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a single charge station's data
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/chargestations/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -208,15 +254,17 @@ class SDK:
 
     
     def get_charge_station_connectors(self, request: operations.GetChargeStationConnectorsRequest) -> operations.GetChargeStationConnectorsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List connectors for a chargestation
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/chargestations/{id}/connectors", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -231,15 +279,17 @@ class SDK:
 
     
     def get_charge_stations(self, request: operations.GetChargeStationsRequest) -> operations.GetChargeStationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List all Chargestations
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/chargestations"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -252,15 +302,17 @@ class SDK:
 
     
     def get_commands(self, request: operations.GetCommandsRequest) -> operations.GetCommandsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Commands data
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/commands"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -273,13 +325,16 @@ class SDK:
 
     
     def get_configuration(self, request: operations.GetConfigurationRequest) -> operations.GetConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get one Configuration data
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/configurations/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -292,15 +347,17 @@ class SDK:
 
     
     def get_configurations(self, request: operations.GetConfigurationsRequest) -> operations.GetConfigurationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Configurations data
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/configurations"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -313,15 +370,17 @@ class SDK:
 
     
     def get_connector(self, request: operations.GetConnectorRequest) -> operations.GetConnectorResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a connector
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/connectors/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -334,15 +393,17 @@ class SDK:
 
     
     def get_connectors(self, request: operations.GetConnectorsRequest) -> operations.GetConnectorsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List connectors
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/connectors"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -355,15 +416,17 @@ class SDK:
 
     
     def get_driver(self, request: operations.GetDriverRequest) -> operations.GetDriverResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a driver's data
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/drivers/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -376,15 +439,17 @@ class SDK:
 
     
     def get_drivers(self, request: operations.GetDriversRequest) -> operations.GetDriversResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List all drivers
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/drivers"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -401,15 +466,17 @@ class SDK:
 
     
     def get_location(self, request: operations.GetLocationRequest) -> operations.GetLocationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a location's data
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/location/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -422,15 +489,17 @@ class SDK:
 
     
     def get_locations(self, request: operations.GetLocationsRequest) -> operations.GetLocationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Locations data
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/locations"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -445,15 +514,17 @@ class SDK:
 
     
     def get_organization(self, request: operations.GetOrganizationRequest) -> operations.GetOrganizationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get one organization's data by id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/organizations/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -466,15 +537,17 @@ class SDK:
 
     
     def get_organizations(self, request: operations.GetOrganizationsRequest) -> operations.GetOrganizationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get an array of all Organizations
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/organizations"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -487,15 +560,17 @@ class SDK:
 
     
     def get_realtime(self, request: operations.GetRealtimeRequest) -> operations.GetRealtimeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Use to request a Websockets handshake
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/realtime"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -508,15 +583,17 @@ class SDK:
 
     
     def get_reservation(self, request: operations.GetReservationRequest) -> operations.GetReservationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get one reservation data
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/reservations/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -529,15 +606,17 @@ class SDK:
 
     
     def get_reservations(self, request: operations.GetReservationsRequest) -> operations.GetReservationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Reservations data
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/reservations"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -550,15 +629,17 @@ class SDK:
 
     
     def get_token(self, request: operations.GetTokenRequest) -> operations.GetTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a single token's data
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/tokens/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -571,15 +652,17 @@ class SDK:
 
     
     def get_tokens(self, request: operations.GetTokensRequest) -> operations.GetTokensResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List tokens
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/tokens"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -596,15 +679,17 @@ class SDK:
 
     
     def get_transaction(self, request: operations.GetTransactionRequest) -> operations.GetTransactionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a specific transaction
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/transactions/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -619,13 +704,16 @@ class SDK:
 
     
     def get_transaction_cost(self, request: operations.GetTransactionCostRequest) -> operations.GetTransactionCostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a specific transaction's cost
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/transactions/{id}/cost", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -640,15 +728,17 @@ class SDK:
 
     
     def get_transactions(self, request: operations.GetTransactionsRequest) -> operations.GetTransactionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of transactions
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/transactions"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -665,13 +755,16 @@ class SDK:
 
     
     def get_variables(self, request: operations.GetVariablesRequest) -> operations.GetVariablesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a charge station's config variables
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/commands/{id}/variables", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -684,15 +777,17 @@ class SDK:
 
     
     def get_vehicle(self, request: operations.GetVehicleRequest) -> operations.GetVehicleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a vehicle's data
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/vehicles/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -705,13 +800,16 @@ class SDK:
 
     
     def get_vehicle_battery(self, request: operations.GetVehicleBatteryRequest) -> operations.GetVehicleBatteryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a vehicle's battery
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/vehicles/{id}/battery", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -724,13 +822,16 @@ class SDK:
 
     
     def get_vehicle_charge(self, request: operations.GetVehicleChargeRequest) -> operations.GetVehicleChargeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a vehicle's charge
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/vehicles/{id}/charge", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -743,13 +844,16 @@ class SDK:
 
     
     def get_vehicle_location(self, request: operations.GetVehicleLocationRequest) -> operations.GetVehicleLocationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a vehicle's location
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/vehicles/{id}/location", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -762,13 +866,16 @@ class SDK:
 
     
     def get_vehicle_odometer(self, request: operations.GetVehicleOdometerRequest) -> operations.GetVehicleOdometerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a vehicle's odometer
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/vehicles/{id}/odometer", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._security_client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -781,15 +888,17 @@ class SDK:
 
     
     def get_vehicles(self, request: operations.GetVehiclesRequest) -> operations.GetVehiclesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List all vehicles
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/vehicles"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -806,22 +915,22 @@ class SDK:
 
     
     def patch_charge_station(self, request: operations.PatchChargeStationRequest) -> operations.PatchChargeStationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a charge station's data
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/chargestations/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -838,22 +947,22 @@ class SDK:
 
     
     def patch_charge_station_variable(self, request: operations.PatchChargeStationVariableRequest) -> operations.PatchChargeStationVariableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update config variables for a chargestation
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/commands/{id}/variables", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -870,22 +979,22 @@ class SDK:
 
     
     def patch_connector(self, request: operations.PatchConnectorRequest) -> operations.PatchConnectorResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a connector's data
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/connectors/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -902,22 +1011,22 @@ class SDK:
 
     
     def patch_driver(self, request: operations.PatchDriverRequest) -> operations.PatchDriverResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a driver's data
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/drivers/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -934,22 +1043,22 @@ class SDK:
 
     
     def patch_location(self, request: operations.PatchLocationRequest) -> operations.PatchLocationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a location's data
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/location/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -966,22 +1075,22 @@ class SDK:
 
     
     def patch_organization(self, request: operations.PatchOrganizationRequest) -> operations.PatchOrganizationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update an organization's data
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/organizations/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -996,22 +1105,22 @@ class SDK:
 
     
     def patch_token(self, request: operations.PatchTokenRequest) -> operations.PatchTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a token
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/tokens/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1028,22 +1137,22 @@ class SDK:
 
     
     def post_charge(self, request: operations.PostChargeRequest) -> operations.PostChargeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Change charge
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/vehicles/{id}/charge", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1060,22 +1169,22 @@ class SDK:
 
     
     def post_charge_stations(self, request: operations.PostChargeStationsRequest) -> operations.PostChargeStationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new charge station
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/chargestations"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1092,22 +1201,22 @@ class SDK:
 
     
     def post_configurations(self, request: operations.PostConfigurationsRequest) -> operations.PostConfigurationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create connector with parameters
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/configurations"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1124,22 +1233,22 @@ class SDK:
 
     
     def post_connectors(self, request: operations.PostConnectorsRequest) -> operations.PostConnectorsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new connector
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/connectors"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1156,22 +1265,22 @@ class SDK:
 
     
     def post_drivers(self, request: operations.PostDriversRequest) -> operations.PostDriversResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new driver
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/drivers"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1188,22 +1297,22 @@ class SDK:
 
     
     def post_locations(self, request: operations.PostLocationsRequest) -> operations.PostLocationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new location
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/locations"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1220,22 +1329,22 @@ class SDK:
 
     
     def post_tokens(self, request: operations.PostTokensRequest) -> operations.PostTokensResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new token
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/tokens"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1252,22 +1361,22 @@ class SDK:
 
     
     def remotestart(self, request: operations.RemotestartRequest) -> operations.RemotestartResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Use to request a remote start command. The request will wait for the charge station to process the command. It will timeout after 60 seconds.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/commands/remotestart"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1284,22 +1393,22 @@ class SDK:
 
     
     def remotestop(self, request: operations.RemotestopRequest) -> operations.RemotestopResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Use to request a remote stop command. The request will wait for the charge station to process the command. It will timeout after 60 seconds.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/commands/remotestop"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1314,22 +1423,22 @@ class SDK:
 
     
     def reserve(self, request: operations.ReserveRequest) -> operations.ReserveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Use to request a reserve command. The request will wait for the charge station to process the command. It will timeout after 60 seconds.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/commands/reserve"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1346,22 +1455,22 @@ class SDK:
 
     
     def reset(self, request: operations.ResetRequest) -> operations.ResetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Use to request a reset command. The request will wait for the charge station to process the command. It will timeout after 60 seconds.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/commands/reset"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1378,22 +1487,22 @@ class SDK:
 
     
     def setchargingschedule(self, request: operations.SetchargingscheduleRequest) -> operations.SetchargingscheduleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set one of charging power or current of a specific chargestation connector
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/commands/chargingschedule"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1410,22 +1519,22 @@ class SDK:
 
     
     def unlockconnector(self, request: operations.UnlockconnectorRequest) -> operations.UnlockconnectorResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Use to request an unlock command for a connector. The request will wait for the charge station to process the command. It will timeout after 60 seconds.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/commands/unlockconnector"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1442,22 +1551,22 @@ class SDK:
 
     
     def updatereservation(self, request: operations.UpdatereservationRequest) -> operations.UpdatereservationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Use to request a update an existing reservation. The request will wait for the charge station to process the command. It will timeout after 60 seconds.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/reservations/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

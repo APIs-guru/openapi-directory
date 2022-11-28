@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PatchOpEnum {
-    Add = "add"
-,    Remove = "remove"
-,    Replace = "replace"
+    Add = "add",
+    Remove = "remove",
+    Replace = "replace"
 }
 
 
 export class Patch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=op" })
+  @SpeakeasyMetadata({ data: "json, name=op" })
   op: PatchOpEnum;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: Map<string, any>;
 }

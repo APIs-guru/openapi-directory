@@ -1,6 +1,7 @@
 
 
+
 export enum TestGridSessionArtifactCategoryEnum {
-    Video = "VIDEO"
-,    Log = "LOG"
+    Video = "VIDEO",
+    Log = "LOG"
 }

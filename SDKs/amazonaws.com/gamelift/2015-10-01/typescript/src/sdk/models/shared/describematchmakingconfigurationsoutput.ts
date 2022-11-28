@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MatchmakingConfiguration } from "./matchmakingconfiguration";
+
 
 
 // DescribeMatchmakingConfigurationsOutput
@@ -8,9 +8,9 @@ import { MatchmakingConfiguration } from "./matchmakingconfiguration";
  * Represents the returned data in response to a request operation.
 **/
 export class DescribeMatchmakingConfigurationsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Configurations", elemType: shared.MatchmakingConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=Configurations", elemType: MatchmakingConfiguration })
   configurations?: MatchmakingConfiguration[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

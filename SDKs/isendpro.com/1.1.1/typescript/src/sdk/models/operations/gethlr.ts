@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetHlrRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.HlRrequest;
 }
 
 
 export class GetHlrResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   erreur?: shared.Erreur;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   hlrReponse?: shared.HlrReponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

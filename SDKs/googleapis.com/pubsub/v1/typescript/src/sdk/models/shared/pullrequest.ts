@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PullRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for the `Pull` method.
 **/
 export class PullRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxMessages" })
+  @SpeakeasyMetadata({ data: "json, name=maxMessages" })
   maxMessages?: number;
 
-  @Metadata({ data: "json, name=returnImmediately" })
+  @SpeakeasyMetadata({ data: "json, name=returnImmediately" })
   returnImmediately?: boolean;
 }

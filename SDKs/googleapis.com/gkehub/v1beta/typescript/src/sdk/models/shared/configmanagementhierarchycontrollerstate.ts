@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigManagementHierarchyControllerDeploymentState } from "./configmanagementhierarchycontrollerdeploymentstate";
 import { ConfigManagementHierarchyControllerVersion } from "./configmanagementhierarchycontrollerversion";
+
 
 
 // ConfigManagementHierarchyControllerState
@@ -8,9 +9,9 @@ import { ConfigManagementHierarchyControllerVersion } from "./configmanagementhi
  * State for Hierarchy Controller
 **/
 export class ConfigManagementHierarchyControllerState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ConfigManagementHierarchyControllerDeploymentState;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: ConfigManagementHierarchyControllerVersion;
 }

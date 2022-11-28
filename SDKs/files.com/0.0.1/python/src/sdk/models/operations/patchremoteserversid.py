@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PatchRemoteServersIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class PatchRemoteServersIDRequestBodyOneDriveAccountTypeEnum(str, Enum):
     PERSONAL = "personal"
@@ -87,13 +88,13 @@ class PatchRemoteServersIDRequestBody:
 
 @dataclass
 class PatchRemoteServersIDRequest:
-    path_params: PatchRemoteServersIDPathParams = field(default=None)
+    path_params: PatchRemoteServersIDPathParams = field()
     request: Optional[PatchRemoteServersIDRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PatchRemoteServersIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     remote_server_entity: Optional[shared.RemoteServerEntity] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDocumentaiV1ProcessorTypeLocationInfo
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The location information about where the processor is available.
 **/
 export class GoogleCloudDocumentaiV1ProcessorTypeLocationInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=locationId" })
+  @SpeakeasyMetadata({ data: "json, name=locationId" })
   locationId?: string;
 }

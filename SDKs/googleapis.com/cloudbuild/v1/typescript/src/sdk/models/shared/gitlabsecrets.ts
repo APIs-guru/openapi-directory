@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GitLabSecrets
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * GitLabSecrets represents the secrets in Secret Manager for a GitLab integration.
 **/
 export class GitLabSecrets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiAccessTokenVersion" })
+  @SpeakeasyMetadata({ data: "json, name=apiAccessTokenVersion" })
   apiAccessTokenVersion?: string;
 
-  @Metadata({ data: "json, name=apiKeyVersion" })
+  @SpeakeasyMetadata({ data: "json, name=apiKeyVersion" })
   apiKeyVersion?: string;
 
-  @Metadata({ data: "json, name=readAccessTokenVersion" })
+  @SpeakeasyMetadata({ data: "json, name=readAccessTokenVersion" })
   readAccessTokenVersion?: string;
 
-  @Metadata({ data: "json, name=webhookSecretVersion" })
+  @SpeakeasyMetadata({ data: "json, name=webhookSecretVersion" })
   webhookSecretVersion?: string;
 }

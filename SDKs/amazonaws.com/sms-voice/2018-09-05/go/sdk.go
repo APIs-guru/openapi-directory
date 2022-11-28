@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://sms-voice.pinpoint.{region}.amazonaws.com",
 	"https://sms-voice.pinpoint.{region}.amazonaws.com",
 	"http://sms-voice.pinpoint.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/pinpoint/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateConfigurationSet - Create a new configuration set. After you create the configuration set, you can add one or more event destinations to it.
 func (s *SDK) CreateConfigurationSet(ctx context.Context, request operations.CreateConfigurationSetRequest) (*operations.CreateConfigurationSetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/sms-voice/configuration-sets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) CreateConfigurationSet(ctx context.Context, request operations.Cre
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -161,8 +188,9 @@ func (s *SDK) CreateConfigurationSet(ctx context.Context, request operations.Cre
 	return res, nil
 }
 
+// CreateConfigurationSetEventDestination - Create a new event destination in a configuration set.
 func (s *SDK) CreateConfigurationSetEventDestination(ctx context.Context, request operations.CreateConfigurationSetEventDestinationRequest) (*operations.CreateConfigurationSetEventDestinationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/sms-voice/configuration-sets/{ConfigurationSetName}/event-destinations", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -182,7 +210,7 @@ func (s *SDK) CreateConfigurationSetEventDestination(ctx context.Context, reques
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -272,8 +300,9 @@ func (s *SDK) CreateConfigurationSetEventDestination(ctx context.Context, reques
 	return res, nil
 }
 
+// DeleteConfigurationSet - Deletes an existing configuration set.
 func (s *SDK) DeleteConfigurationSet(ctx context.Context, request operations.DeleteConfigurationSetRequest) (*operations.DeleteConfigurationSetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/sms-voice/configuration-sets/{ConfigurationSetName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -283,7 +312,7 @@ func (s *SDK) DeleteConfigurationSet(ctx context.Context, request operations.Del
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -353,8 +382,9 @@ func (s *SDK) DeleteConfigurationSet(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteConfigurationSetEventDestination - Deletes an event destination in a configuration set.
 func (s *SDK) DeleteConfigurationSetEventDestination(ctx context.Context, request operations.DeleteConfigurationSetEventDestinationRequest) (*operations.DeleteConfigurationSetEventDestinationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/sms-voice/configuration-sets/{ConfigurationSetName}/event-destinations/{EventDestinationName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -364,7 +394,7 @@ func (s *SDK) DeleteConfigurationSetEventDestination(ctx context.Context, reques
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -434,8 +464,9 @@ func (s *SDK) DeleteConfigurationSetEventDestination(ctx context.Context, reques
 	return res, nil
 }
 
+// GetConfigurationSetEventDestinations - Obtain information about an event destination, including the types of events it reports, the Amazon Resource Name (ARN) of the destination, and the name of the event destination.
 func (s *SDK) GetConfigurationSetEventDestinations(ctx context.Context, request operations.GetConfigurationSetEventDestinationsRequest) (*operations.GetConfigurationSetEventDestinationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/sms-voice/configuration-sets/{ConfigurationSetName}/event-destinations", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -445,7 +476,7 @@ func (s *SDK) GetConfigurationSetEventDestinations(ctx context.Context, request 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -515,8 +546,9 @@ func (s *SDK) GetConfigurationSetEventDestinations(ctx context.Context, request 
 	return res, nil
 }
 
+// ListConfigurationSets - List all of the configuration sets associated with your Amazon Pinpoint account in the current region.
 func (s *SDK) ListConfigurationSets(ctx context.Context, request operations.ListConfigurationSetsRequest) (*operations.ListConfigurationSetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/sms-voice/configuration-sets"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -528,7 +560,7 @@ func (s *SDK) ListConfigurationSets(ctx context.Context, request operations.List
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -588,8 +620,9 @@ func (s *SDK) ListConfigurationSets(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// SendVoiceMessage - Create a new voice message and send it to a recipient's phone number.
 func (s *SDK) SendVoiceMessage(ctx context.Context, request operations.SendVoiceMessageRequest) (*operations.SendVoiceMessageResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/sms-voice/voice/message"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -609,7 +642,7 @@ func (s *SDK) SendVoiceMessage(ctx context.Context, request operations.SendVoice
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -669,8 +702,9 @@ func (s *SDK) SendVoiceMessage(ctx context.Context, request operations.SendVoice
 	return res, nil
 }
 
+// UpdateConfigurationSetEventDestination - Update an event destination in a configuration set. An event destination is a location that you publish information about your voice calls to. For example, you can log an event to an Amazon CloudWatch destination when a call fails.
 func (s *SDK) UpdateConfigurationSetEventDestination(ctx context.Context, request operations.UpdateConfigurationSetEventDestinationRequest) (*operations.UpdateConfigurationSetEventDestinationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/sms-voice/configuration-sets/{ConfigurationSetName}/event-destinations/{EventDestinationName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -690,7 +724,7 @@ func (s *SDK) UpdateConfigurationSetEventDestination(ctx context.Context, reques
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

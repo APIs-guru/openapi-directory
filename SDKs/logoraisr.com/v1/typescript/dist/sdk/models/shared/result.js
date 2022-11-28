@@ -22,27 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Color } from "./color";
 var Result = /** @class */ (function (_super) {
     __extends(Result, _super);
     function Result() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=colors", elemType: shared.Color }),
+        SpeakeasyMetadata({ data: "json, name=colors", elemType: Color }),
         __metadata("design:type", Array)
     ], Result.prototype, "colors", void 0);
     __decorate([
-        Metadata({ data: "json, name=height" }),
+        SpeakeasyMetadata({ data: "json, name=height" }),
         __metadata("design:type", Number)
     ], Result.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "json, name=number_of_pixel_in_image" }),
+        SpeakeasyMetadata({ data: "json, name=number_of_pixel_in_image" }),
         __metadata("design:type", Number)
     ], Result.prototype, "numberOfPixelInImage", void 0);
     __decorate([
-        Metadata({ data: "json, name=width" }),
+        SpeakeasyMetadata({ data: "json, name=width" }),
         __metadata("design:type", Number)
     ], Result.prototype, "width", void 0);
     return Result;

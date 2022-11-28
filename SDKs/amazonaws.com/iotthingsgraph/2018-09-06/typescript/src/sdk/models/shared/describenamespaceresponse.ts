@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeNamespaceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=namespaceArn" })
+  @SpeakeasyMetadata({ data: "json, name=namespaceArn" })
   namespaceArn?: string;
 
-  @Metadata({ data: "json, name=namespaceName" })
+  @SpeakeasyMetadata({ data: "json, name=namespaceName" })
   namespaceName?: string;
 
-  @Metadata({ data: "json, name=namespaceVersion" })
+  @SpeakeasyMetadata({ data: "json, name=namespaceVersion" })
   namespaceVersion?: number;
 
-  @Metadata({ data: "json, name=trackingNamespaceName" })
+  @SpeakeasyMetadata({ data: "json, name=trackingNamespaceName" })
   trackingNamespaceName?: string;
 
-  @Metadata({ data: "json, name=trackingNamespaceVersion" })
+  @SpeakeasyMetadata({ data: "json, name=trackingNamespaceVersion" })
   trackingNamespaceVersion?: number;
 }

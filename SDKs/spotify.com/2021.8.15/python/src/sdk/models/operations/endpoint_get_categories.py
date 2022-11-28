@@ -13,25 +13,25 @@ class EndpointGetCategoriesQueryParams:
 
 @dataclass
 class EndpointGetCategoriesHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointGetCategoriesSecurity:
-    spotify_auth: shared.SchemeSpotifyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    spotify_auth: shared.SchemeSpotifyAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class EndpointGetCategoriesRequest:
-    query_params: EndpointGetCategoriesQueryParams = field(default=None)
-    headers: EndpointGetCategoriesHeaders = field(default=None)
-    security: EndpointGetCategoriesSecurity = field(default=None)
+    headers: EndpointGetCategoriesHeaders = field()
+    query_params: EndpointGetCategoriesQueryParams = field()
+    security: EndpointGetCategoriesSecurity = field()
     
 
 @dataclass
 class EndpointGetCategoriesResponse:
+    content_type: str = field()
+    status_code: int = field()
     categories_object: Optional[shared.CategoriesObject] = field(default=None)
-    content_type: str = field(default=None)
     error_response_object: Optional[shared.ErrorResponseObject] = field(default=None)
-    status_code: int = field(default=None)
     

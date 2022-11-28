@@ -1,5 +1,7 @@
 package shared
 
+// SandboxCard
+// Sandbox card
 type SandboxCard struct {
 	Info         *SandboxCardInfo     `json:"info,omitempty"`
 	Party        *SandboxParty        `json:"party,omitempty"`

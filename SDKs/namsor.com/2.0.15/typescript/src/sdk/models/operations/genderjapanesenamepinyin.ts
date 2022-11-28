@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GenderJapaneseNamePinyinPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=japaneseGivenName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=japaneseGivenName" })
   japaneseGivenName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=japaneseSurname" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=japaneseSurname" })
   japaneseSurname: string;
 }
 
 
 export class GenderJapaneseNamePinyinSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class GenderJapaneseNamePinyinRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GenderJapaneseNamePinyinPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GenderJapaneseNamePinyinSecurity;
 }
 
 
 export class GenderJapaneseNamePinyinResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   firstLastNameGenderedOut?: shared.FirstLastNameGenderedOut;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

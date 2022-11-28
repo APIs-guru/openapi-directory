@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApplyYaraRulesRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request: any;
 }
 
 
 export class ApplyYaraRulesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

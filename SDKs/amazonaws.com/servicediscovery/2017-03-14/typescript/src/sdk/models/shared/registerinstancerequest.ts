@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegisterInstanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Attributes" })
+  @SpeakeasyMetadata({ data: "json, name=Attributes" })
   attributes: Map<string, string>;
 
-  @Metadata({ data: "json, name=CreatorRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=CreatorRequestId" })
   creatorRequestId?: string;
 
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId: string;
 
-  @Metadata({ data: "json, name=ServiceId" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceId" })
   serviceId: string;
 }

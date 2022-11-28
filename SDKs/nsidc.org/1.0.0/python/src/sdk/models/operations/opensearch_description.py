@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class OpensearchDescriptionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     opensearch_description_200_application_opensearchdescription_plus_xml_string: Optional[str] = field(default=None)
     

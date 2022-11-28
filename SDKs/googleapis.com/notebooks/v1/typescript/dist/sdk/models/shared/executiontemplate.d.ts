@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SchedulerAcceleratorConfig } from "./scheduleracceleratorconfig";
 import { DataprocParameters } from "./dataprocparameters";
 import { VertexAiParameters } from "./vertexaiparameters";

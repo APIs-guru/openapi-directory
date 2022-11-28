@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSandboxSandboxIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=sandboxId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sandboxId" })
   sandboxId: string;
 }
 
 
 export class GetSandboxSandboxIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   authorizationCodeToken: shared.SchemeAuthorizationCodeToken;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   clientId: shared.SchemeClientId;
 }
 
 
 export class GetSandboxSandboxIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSandboxSandboxIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetSandboxSandboxIdSecurity;
 }
 
 
 export class GetSandboxSandboxIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sandbox?: shared.Sandbox;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

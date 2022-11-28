@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatusEnum } from "./statusenum";
 import { ChannelTypeEnum } from "./channeltypeenum";
 import { SingleMasterConfiguration } from "./singlemasterconfiguration";
+
 
 
 // ChannelInfo
@@ -9,24 +10,24 @@ import { SingleMasterConfiguration } from "./singlemasterconfiguration";
  * A structure that encapsulates a signaling channel's metadata and properties.
 **/
 export class ChannelInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChannelARN" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelARN" })
   channelArn?: string;
 
-  @Metadata({ data: "json, name=ChannelName" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelName" })
   channelName?: string;
 
-  @Metadata({ data: "json, name=ChannelStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelStatus" })
   channelStatus?: StatusEnum;
 
-  @Metadata({ data: "json, name=ChannelType" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelType" })
   channelType?: ChannelTypeEnum;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=SingleMasterConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=SingleMasterConfiguration" })
   singleMasterConfiguration?: SingleMasterConfiguration;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: string;
 }

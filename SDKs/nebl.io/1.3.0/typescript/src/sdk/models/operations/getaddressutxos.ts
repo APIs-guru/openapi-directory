@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAddressUtxosPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=address" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=address" })
   address: string;
 }
 
 
 export class GetAddressUtxosRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAddressUtxosPathParams;
 }
 
 
 export class GetAddressUtxosResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.GetAddressUtxosResponse })
+  @SpeakeasyMetadata({ elemType: shared.GetAddressUtxosResponse })
   getAddressUtxosResponse?: shared.GetAddressUtxosResponse[];
 }

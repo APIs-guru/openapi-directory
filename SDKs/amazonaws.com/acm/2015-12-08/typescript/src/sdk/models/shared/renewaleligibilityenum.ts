@@ -1,6 +1,7 @@
 
 
+
 export enum RenewalEligibilityEnum {
-    Eligible = "ELIGIBLE"
-,    Ineligible = "INELIGIBLE"
+    Eligible = "ELIGIBLE",
+    Ineligible = "INELIGIBLE"
 }

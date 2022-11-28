@@ -1,6 +1,7 @@
 
 
+
 export enum CapacityTypesEnum {
-    OnDemand = "ON_DEMAND"
-,    Spot = "SPOT"
+    OnDemand = "ON_DEMAND",
+    Spot = "SPOT"
 }

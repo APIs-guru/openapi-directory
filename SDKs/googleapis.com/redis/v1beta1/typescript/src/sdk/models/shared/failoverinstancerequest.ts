@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum FailoverInstanceRequestDataProtectionModeEnum {
-    DataProtectionModeUnspecified = "DATA_PROTECTION_MODE_UNSPECIFIED"
-,    LimitedDataLoss = "LIMITED_DATA_LOSS"
-,    ForceDataLoss = "FORCE_DATA_LOSS"
+    DataProtectionModeUnspecified = "DATA_PROTECTION_MODE_UNSPECIFIED",
+    LimitedDataLoss = "LIMITED_DATA_LOSS",
+    ForceDataLoss = "FORCE_DATA_LOSS"
 }
 
 
@@ -12,6 +13,6 @@ export enum FailoverInstanceRequestDataProtectionModeEnum {
  * Request for Failover.
 **/
 export class FailoverInstanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataProtectionMode" })
+  @SpeakeasyMetadata({ data: "json, name=dataProtectionMode" })
   dataProtectionMode?: FailoverInstanceRequestDataProtectionModeEnum;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// OperatingSystem
+// Describes supported operating systems in AWS OpsWorks Stacks.
 type OperatingSystem struct {
 	ConfigurationManagers []OperatingSystemConfigurationManager `json:"ConfigurationManagers,omitempty"`
 	ID                    *string                               `json:"Id,omitempty"`

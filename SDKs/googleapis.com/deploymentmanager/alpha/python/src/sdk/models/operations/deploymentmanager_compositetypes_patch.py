@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DeploymentmanagerCompositeTypesPatchPathParams:
-    composite_type: str = field(default=None, metadata={'path_param': { 'field_name': 'compositeType', 'style': 'simple', 'explode': False }})
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    composite_type: str = field(metadata={'path_param': { 'field_name': 'compositeType', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class DeploymentmanagerCompositeTypesPatchQueryParams:
 
 @dataclass
 class DeploymentmanagerCompositeTypesPatchSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeploymentmanagerCompositeTypesPatchSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,15 +45,15 @@ class DeploymentmanagerCompositeTypesPatchSecurity:
 
 @dataclass
 class DeploymentmanagerCompositeTypesPatchRequest:
-    path_params: DeploymentmanagerCompositeTypesPatchPathParams = field(default=None)
-    query_params: DeploymentmanagerCompositeTypesPatchQueryParams = field(default=None)
+    path_params: DeploymentmanagerCompositeTypesPatchPathParams = field()
+    query_params: DeploymentmanagerCompositeTypesPatchQueryParams = field()
+    security: DeploymentmanagerCompositeTypesPatchSecurity = field()
     request: Optional[shared.CompositeType] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DeploymentmanagerCompositeTypesPatchSecurity = field(default=None)
     
 
 @dataclass
 class DeploymentmanagerCompositeTypesPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

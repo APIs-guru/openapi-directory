@@ -12,12 +12,6 @@ type PutChartPkSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PutChartPkRequest struct {
-	PathParams PutChartPkPathParams
-	Request    shared.ChartRestAPIPut `request:"mediaType=application/json"`
-	Security   PutChartPkSecurity
-}
-
 type PutChartPk200ApplicationJSON struct {
 	ID     *float64                `json:"id,omitempty"`
 	Result *shared.ChartRestAPIPut `json:"result,omitempty"`
@@ -45,6 +39,12 @@ type PutChartPk422ApplicationJSON struct {
 
 type PutChartPk500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PutChartPkRequest struct {
+	PathParams PutChartPkPathParams
+	Request    shared.ChartRestAPIPut `request:"mediaType=application/json"`
+	Security   PutChartPkSecurity
 }
 
 type PutChartPkResponse struct {

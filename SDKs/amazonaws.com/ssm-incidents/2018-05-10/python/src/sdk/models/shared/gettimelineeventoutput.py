@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import timelineevent
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetTimelineEventOutput:
-    event: timelineevent.TimelineEvent = field(default=None, metadata={'dataclasses_json': { 'field_name': 'event' }})
+    event: TimelineEvent = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('event') }})
     

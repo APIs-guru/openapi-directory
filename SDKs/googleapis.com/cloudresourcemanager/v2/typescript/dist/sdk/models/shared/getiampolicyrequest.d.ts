@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GetPolicyOptions } from "./getpolicyoptions";
 /**
  * Request message for `GetIamPolicy` method.

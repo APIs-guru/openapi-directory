@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegisterUsageResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PublicKeyRotationTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=PublicKeyRotationTimestamp" })
   publicKeyRotationTimestamp?: Date;
 
-  @Metadata({ data: "json, name=Signature" })
+  @SpeakeasyMetadata({ data: "json, name=Signature" })
   signature?: string;
 }

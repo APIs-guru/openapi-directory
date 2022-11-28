@@ -1,14 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Status } from "./status";
 import { Trace } from "./trace";
 
+
 export enum ReachabilityDetailsResultEnum {
-    ResultUnspecified = "RESULT_UNSPECIFIED"
-,    Reachable = "REACHABLE"
-,    Unreachable = "UNREACHABLE"
-,    Ambiguous = "AMBIGUOUS"
-,    Undetermined = "UNDETERMINED"
+    ResultUnspecified = "RESULT_UNSPECIFIED",
+    Reachable = "REACHABLE",
+    Unreachable = "UNREACHABLE",
+    Ambiguous = "AMBIGUOUS",
+    Undetermined = "UNDETERMINED"
 }
 
 
@@ -17,15 +17,15 @@ export enum ReachabilityDetailsResultEnum {
  * Results of the configuration analysis from the last run of the test.
 **/
 export class ReachabilityDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Status;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: ReachabilityDetailsResultEnum;
 
-  @Metadata({ data: "json, name=traces", elemType: shared.Trace })
+  @SpeakeasyMetadata({ data: "json, name=traces", elemType: Trace })
   traces?: Trace[];
 
-  @Metadata({ data: "json, name=verifyTime" })
+  @SpeakeasyMetadata({ data: "json, name=verifyTime" })
   verifyTime?: string;
 }

@@ -1,61 +1,62 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkTrafficAnalysisPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 export enum UpdateNetworkTrafficAnalysisRequestBodyCustomPieChartItemsTypeEnum {
-    Host = "host"
-,    Port = "port"
-,    IpRange = "ipRange"
+    Host = "host",
+    Port = "port",
+    IpRange = "ipRange"
 }
 
 
 export class UpdateNetworkTrafficAnalysisRequestBodyCustomPieChartItems extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: UpdateNetworkTrafficAnalysisRequestBodyCustomPieChartItemsTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: string;
 }
 
 export enum UpdateNetworkTrafficAnalysisRequestBodyModeEnum {
-    Disabled = "disabled"
-,    Basic = "basic"
-,    Detailed = "detailed"
+    Disabled = "disabled",
+    Basic = "basic",
+    Detailed = "detailed"
 }
 
 
 export class UpdateNetworkTrafficAnalysisRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customPieChartItems", elemType: operations.UpdateNetworkTrafficAnalysisRequestBodyCustomPieChartItems })
+  @SpeakeasyMetadata({ data: "json, name=customPieChartItems", elemType: UpdateNetworkTrafficAnalysisRequestBodyCustomPieChartItems })
   customPieChartItems?: UpdateNetworkTrafficAnalysisRequestBodyCustomPieChartItems[];
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: UpdateNetworkTrafficAnalysisRequestBodyModeEnum;
 }
 
 
 export class UpdateNetworkTrafficAnalysisRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkTrafficAnalysisPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkTrafficAnalysisRequestBody;
 }
 
 
 export class UpdateNetworkTrafficAnalysisResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkTrafficAnalysis200ApplicationJsonObject?: Map<string, any>;
 }

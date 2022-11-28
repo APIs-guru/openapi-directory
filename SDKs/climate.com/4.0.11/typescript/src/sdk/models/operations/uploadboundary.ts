@@ -1,50 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class UploadBoundarySecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
-export class UploadBoundarySecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2AuthorizationCode: shared.SchemeOauth2AuthorizationCode;
-}
-
 
 export class UploadBoundarySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: UploadBoundarySecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey?: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: UploadBoundarySecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2AuthorizationCode?: shared.SchemeOauth2AuthorizationCode;
 }
 
 
 export class UploadBoundaryRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UploadBoundarySecurity;
 }
 
 
 export class UploadBoundaryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   uploadedBoundaryId?: any;
 }

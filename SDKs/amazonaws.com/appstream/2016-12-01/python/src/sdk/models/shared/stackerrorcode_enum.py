@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class StackErrorCodeEnum(str, Enum):
     STORAGE_CONNECTOR_ERROR = "STORAGE_CONNECTOR_ERROR"

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import scanrunerrortrace
-from . import scanrunwarningtrace
+from sdk import utils
+from . import *
 
 class ScanRunExecutionStateEnum(str, Enum):
     EXECUTION_STATE_UNSPECIFIED = "EXECUTION_STATE_UNSPECIFIED"
@@ -20,15 +21,19 @@ class ScanRunResultStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ScanRun:
-    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endTime' }})
-    error_trace: Optional[scanrunerrortrace.ScanRunErrorTrace] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorTrace' }})
-    execution_state: Optional[ScanRunExecutionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'executionState' }})
-    has_vulnerabilities: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hasVulnerabilities' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    progress_percent: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progressPercent' }})
-    result_state: Optional[ScanRunResultStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resultState' }})
-    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTime' }})
-    urls_crawled_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'urlsCrawledCount' }})
-    urls_tested_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'urlsTestedCount' }})
-    warning_traces: Optional[List[scanrunwarningtrace.ScanRunWarningTrace]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'warningTraces' }})
+    r"""ScanRun
+    A ScanRun is a output-only resource representing an actual run of the scan. Next id: 12
+    """
+    
+    end_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endTime') }})
+    error_trace: Optional[ScanRunErrorTrace] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorTrace') }})
+    execution_state: Optional[ScanRunExecutionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('executionState') }})
+    has_vulnerabilities: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hasVulnerabilities') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    progress_percent: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('progressPercent') }})
+    result_state: Optional[ScanRunResultStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resultState') }})
+    start_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime') }})
+    urls_crawled_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('urlsCrawledCount') }})
+    urls_tested_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('urlsTestedCount') }})
+    warning_traces: Optional[List[ScanRunWarningTrace]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('warningTraces') }})
     

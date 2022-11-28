@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TargetsPresentCondition
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * TargetsPresentCondition contains information on any Targets defined in the Delivery Pipeline that do not actually exist.
 **/
 export class TargetsPresentCondition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=missingTargets" })
+  @SpeakeasyMetadata({ data: "json, name=missingTargets" })
   missingTargets?: string[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: boolean;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetMapVersionNumberCopyrightsFormatFormatEnum {
-    Json = "json"
-,    Jsonp = "jsonp"
-,    Xml = "xml"
+    Json = "json",
+    Jsonp = "jsonp",
+    Xml = "xml"
 }
 
 
 export class GetMapVersionNumberCopyrightsFormatPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: GetMapVersionNumberCopyrightsFormatFormatEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" })
   versionNumber: number;
 }
 
 
 export class GetMapVersionNumberCopyrightsFormatQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=callback" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" })
   callback?: string;
 }
 
 
 export class GetMapVersionNumberCopyrightsFormatRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetMapVersionNumberCopyrightsFormatPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetMapVersionNumberCopyrightsFormatQueryParams;
 }
 
 
 export class GetMapVersionNumberCopyrightsFormatResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

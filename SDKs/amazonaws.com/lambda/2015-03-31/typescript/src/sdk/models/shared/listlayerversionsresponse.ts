@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LayerVersionsListItem } from "./layerversionslistitem";
 
 
+
 export class ListLayerVersionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LayerVersions", elemType: shared.LayerVersionsListItem })
+  @SpeakeasyMetadata({ data: "json, name=LayerVersions", elemType: LayerVersionsListItem })
   layerVersions?: LayerVersionsListItem[];
 
-  @Metadata({ data: "json, name=NextMarker" })
+  @SpeakeasyMetadata({ data: "json, name=NextMarker" })
   nextMarker?: string;
 }

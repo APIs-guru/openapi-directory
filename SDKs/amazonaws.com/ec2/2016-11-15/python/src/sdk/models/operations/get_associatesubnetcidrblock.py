@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAssociateSubnetCidrBlockActionEnum(str, Enum):
     ASSOCIATE_SUBNET_CIDR_BLOCK = "AssociateSubnetCidrBlock"
@@ -10,10 +14,10 @@ class GetAssociateSubnetCidrBlockVersionEnum(str, Enum):
 
 @dataclass
 class GetAssociateSubnetCidrBlockQueryParams:
-    action: GetAssociateSubnetCidrBlockActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    ipv6_cidr_block: str = field(default=None, metadata={'query_param': { 'field_name': 'Ipv6CidrBlock', 'style': 'form', 'explode': True }})
-    subnet_id: str = field(default=None, metadata={'query_param': { 'field_name': 'SubnetId', 'style': 'form', 'explode': True }})
-    version: GetAssociateSubnetCidrBlockVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetAssociateSubnetCidrBlockActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    ipv6_cidr_block: str = field(metadata={'query_param': { 'field_name': 'Ipv6CidrBlock', 'style': 'form', 'explode': True }})
+    subnet_id: str = field(metadata={'query_param': { 'field_name': 'SubnetId', 'style': 'form', 'explode': True }})
+    version: GetAssociateSubnetCidrBlockVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetAssociateSubnetCidrBlockHeaders:
 
 @dataclass
 class GetAssociateSubnetCidrBlockRequest:
-    query_params: GetAssociateSubnetCidrBlockQueryParams = field(default=None)
-    headers: GetAssociateSubnetCidrBlockHeaders = field(default=None)
+    headers: GetAssociateSubnetCidrBlockHeaders = field()
+    query_params: GetAssociateSubnetCidrBlockQueryParams = field()
     
 
 @dataclass
 class GetAssociateSubnetCidrBlockResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

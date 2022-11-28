@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListPublicKeysRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Requests the public keys for a specified time range.
 **/
 export class ListPublicKeysRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 }

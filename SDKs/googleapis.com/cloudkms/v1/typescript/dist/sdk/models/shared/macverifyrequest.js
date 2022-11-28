@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // MacVerifyRequest
 /**
  * Request message for KeyManagementService.MacVerify.
@@ -33,19 +33,19 @@ var MacVerifyRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=data" }),
+        SpeakeasyMetadata({ data: "json, name=data" }),
         __metadata("design:type", String)
     ], MacVerifyRequest.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataCrc32c" }),
+        SpeakeasyMetadata({ data: "json, name=dataCrc32c" }),
         __metadata("design:type", String)
     ], MacVerifyRequest.prototype, "dataCrc32c", void 0);
     __decorate([
-        Metadata({ data: "json, name=mac" }),
+        SpeakeasyMetadata({ data: "json, name=mac" }),
         __metadata("design:type", String)
     ], MacVerifyRequest.prototype, "mac", void 0);
     __decorate([
-        Metadata({ data: "json, name=macCrc32c" }),
+        SpeakeasyMetadata({ data: "json, name=macCrc32c" }),
         __metadata("design:type", String)
     ], MacVerifyRequest.prototype, "macCrc32c", void 0);
     return MacVerifyRequest;

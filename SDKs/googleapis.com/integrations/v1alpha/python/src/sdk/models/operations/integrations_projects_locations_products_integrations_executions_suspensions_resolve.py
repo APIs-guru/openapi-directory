@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsExecutionsSuspensionsResolvePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class IntegrationsProjectsLocationsProductsIntegrationsExecutionsSuspensionsReso
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsExecutionsSuspensionsResolveSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsExecutionsSuspensionsResolveRequest:
-    path_params: IntegrationsProjectsLocationsProductsIntegrationsExecutionsSuspensionsResolvePathParams = field(default=None)
-    query_params: IntegrationsProjectsLocationsProductsIntegrationsExecutionsSuspensionsResolveQueryParams = field(default=None)
-    request: Optional[shared.GoogleCloudIntegrationsV1alphaResolveSuspensionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IntegrationsProjectsLocationsProductsIntegrationsExecutionsSuspensionsResolveSecurity = field(default=None)
+    path_params: IntegrationsProjectsLocationsProductsIntegrationsExecutionsSuspensionsResolvePathParams = field()
+    query_params: IntegrationsProjectsLocationsProductsIntegrationsExecutionsSuspensionsResolveQueryParams = field()
+    security: IntegrationsProjectsLocationsProductsIntegrationsExecutionsSuspensionsResolveSecurity = field()
+    request: Optional[shared.GoogleCloudIntegrationsV1alphaResolveSuspensionRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsExecutionsSuspensionsResolveResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_integrations_v1alpha_resolve_suspension_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

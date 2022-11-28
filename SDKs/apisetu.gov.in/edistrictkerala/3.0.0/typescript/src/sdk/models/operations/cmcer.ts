@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CmcerRequestBodyCertificateParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aplno" })
+  @SpeakeasyMetadata({ data: "json, name=aplno" })
   aplno: string;
 
-  @Metadata({ data: "json, name=certno" })
+  @SpeakeasyMetadata({ data: "json, name=certno" })
   certno: string;
 
-  @Metadata({ data: "json, name=sccd" })
+  @SpeakeasyMetadata({ data: "json, name=sccd" })
   sccd: string;
 }
 
@@ -19,97 +20,88 @@ export enum CmcerRequestBodyFormatEnum {
 
 
 export class CmcerRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateParameters" })
+  @SpeakeasyMetadata({ data: "json, name=certificateParameters" })
   certificateParameters?: CmcerRequestBodyCertificateParameters;
 
-  @Metadata({ data: "json, name=consentArtifact" })
+  @SpeakeasyMetadata({ data: "json, name=consentArtifact" })
   consentArtifact?: any;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format: CmcerRequestBodyFormatEnum;
 
-  @Metadata({ data: "json, name=txnId" })
+  @SpeakeasyMetadata({ data: "json, name=txnId" })
   txnId: string;
 }
 
 
 export class CmcerSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   clientId: shared.SchemeClientId;
 }
 
-
-export class CmcerRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: CmcerRequestBody;
-
-  @Metadata()
-  security: CmcerSecurity;
-}
-
 export enum Cmcer400ApplicationJsonErrorEnum {
-    MissingParameter = "missing_parameter"
-,    InvalidParameter = "invalid_parameter"
-,    InvalidFormat = "invalid_format"
-,    InvalidTxnid = "invalid_txnid"
-,    InvalidConsentid = "invalid_consentid"
+    MissingParameter = "missing_parameter",
+    InvalidParameter = "invalid_parameter",
+    InvalidFormat = "invalid_format",
+    InvalidTxnid = "invalid_txnid",
+    InvalidConsentid = "invalid_consentid"
 }
 
 export enum Cmcer400ApplicationJsonErrorDescriptionEnum {
-    PleaseProvideAllMandatoryParameters = "Please provide all mandatory parameters"
-,    BadRequest = "Bad request"
-,    TheFormatParameterIsInvalid = "The format parameter is invalid"
-,    TheTxnIdParameterMustBeInUuidFormat = "The txnId parameter must be in UUID format"
-,    TheConsentIdParameterMustBeInUuidFormat = "The consentId parameter must be in UUID format"
+    PleaseProvideAllMandatoryParameters = "Please provide all mandatory parameters",
+    BadRequest = "Bad request",
+    TheFormatParameterIsInvalid = "The format parameter is invalid",
+    TheTxnIdParameterMustBeInUuidFormat = "The txnId parameter must be in UUID format",
+    TheConsentIdParameterMustBeInUuidFormat = "The consentId parameter must be in UUID format"
 }
 
 
 export class Cmcer400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Cmcer400ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Cmcer400ApplicationJsonErrorDescriptionEnum;
 }
 
 export enum Cmcer401ApplicationJsonErrorEnum {
-    InvalidAuthentication = "invalid_authentication"
-,    InvalidAuthorization = "invalid_authorization"
+    InvalidAuthentication = "invalid_authentication",
+    InvalidAuthorization = "invalid_authorization"
 }
 
 export enum Cmcer401ApplicationJsonErrorDescriptionEnum {
-    AuthenticationFailed = "Authentication failed"
-,    YouAreNotAuthorizedToUseThisApi = "You are not authorized to use this API"
+    AuthenticationFailed = "Authentication failed",
+    YouAreNotAuthorizedToUseThisApi = "You are not authorized to use this API"
 }
 
 
 export class Cmcer401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Cmcer401ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Cmcer401ApplicationJsonErrorDescriptionEnum;
 }
 
 export enum Cmcer404ApplicationJsonErrorEnum {
-    RecordNotFound = "record_not_found"
-,    UrlNotFound = "url_not_found"
+    RecordNotFound = "record_not_found",
+    UrlNotFound = "url_not_found"
 }
 
 export enum Cmcer404ApplicationJsonErrorDescriptionEnum {
-    NoRecordFound = "No record found"
-,    YourApiUrlOrPathIsIncorrect = "Your API url or path is incorrect"
+    NoRecordFound = "No record found",
+    YourApiUrlOrPathIsIncorrect = "Your API url or path is incorrect"
 }
 
 
 export class Cmcer404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Cmcer404ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Cmcer404ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -123,10 +115,10 @@ export enum Cmcer500ApplicationJsonErrorDescriptionEnum {
 
 
 export class Cmcer500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Cmcer500ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Cmcer500ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -140,10 +132,10 @@ export enum Cmcer502ApplicationJsonErrorDescriptionEnum {
 
 
 export class Cmcer502ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Cmcer502ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Cmcer502ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -157,10 +149,10 @@ export enum Cmcer503ApplicationJsonErrorDescriptionEnum {
 
 
 export class Cmcer503ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Cmcer503ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Cmcer503ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -174,39 +166,48 @@ export enum Cmcer504ApplicationJsonErrorDescriptionEnum {
 
 
 export class Cmcer504ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Cmcer504ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Cmcer504ApplicationJsonErrorDescriptionEnum;
 }
 
 
+export class CmcerRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: CmcerRequestBody;
+
+  @SpeakeasyMetadata()
+  security: CmcerSecurity;
+}
+
+
 export class CmcerResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cmcer400ApplicationJsonObject?: Cmcer400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cmcer401ApplicationJsonObject?: Cmcer401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cmcer404ApplicationJsonObject?: Cmcer404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cmcer500ApplicationJsonObject?: Cmcer500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cmcer502ApplicationJsonObject?: Cmcer502ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cmcer503ApplicationJsonObject?: Cmcer503ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cmcer504ApplicationJsonObject?: Cmcer504ApplicationJson;
 }

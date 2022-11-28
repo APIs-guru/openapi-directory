@@ -1,14 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
+from sdk.models import shared
 
 
 @dataclass_json
 @dataclass
 class SkmstRequestBodyCertificateParameters:
-    coursename: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'coursename' }})
-    personalno: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'personalno' }})
-    unit: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unit' }})
+    coursename: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('coursename') }})
+    personalno: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('personalno') }})
+    unit: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('unit') }})
     
 class SkmstRequestBodyFormatEnum(str, Enum):
     PDF = "pdf"
@@ -17,22 +20,16 @@ class SkmstRequestBodyFormatEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SkmstRequestBody:
-    certificate_parameters: Optional[SkmstRequestBodyCertificateParameters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificateParameters' }})
-    consent_artifact: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'consentArtifact' }})
-    format: SkmstRequestBodyFormatEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'format' }})
-    txn_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'txnId' }})
+    format: SkmstRequestBodyFormatEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('format') }})
+    txn_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('txnId') }})
+    certificate_parameters: Optional[SkmstRequestBodyCertificateParameters] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('certificateParameters') }})
+    consent_artifact: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('consentArtifact') }})
     
 
 @dataclass
 class SkmstSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    client_id: shared.SchemeClientID = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
-class SkmstRequest:
-    request: Optional[SkmstRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: SkmstSecurity = field(default=None)
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    client_id: shared.SchemeClientID = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 class Skmst400ApplicationJSONErrorEnum(str, Enum):
     MISSING_PARAMETER = "missing_parameter"
@@ -52,8 +49,8 @@ class Skmst400ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Skmst400ApplicationJSON:
-    error: Optional[Skmst400ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Skmst400ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Skmst400ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Skmst400ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Skmst401ApplicationJSONErrorEnum(str, Enum):
     INVALID_AUTHENTICATION = "invalid_authentication"
@@ -67,8 +64,8 @@ class Skmst401ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Skmst401ApplicationJSON:
-    error: Optional[Skmst401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Skmst401ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Skmst401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Skmst401ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Skmst404ApplicationJSONErrorEnum(str, Enum):
     RECORD_NOT_FOUND = "record_not_found"
@@ -82,8 +79,8 @@ class Skmst404ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Skmst404ApplicationJSON:
-    error: Optional[Skmst404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Skmst404ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Skmst404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Skmst404ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Skmst500ApplicationJSONErrorEnum(str, Enum):
     INTERNAL_SERVER_ERROR = "internal_server_error"
@@ -95,8 +92,8 @@ class Skmst500ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Skmst500ApplicationJSON:
-    error: Optional[Skmst500ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Skmst500ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Skmst500ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Skmst500ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Skmst502ApplicationJSONErrorEnum(str, Enum):
     BAD_GATEWY = "bad_gatewy"
@@ -108,8 +105,8 @@ class Skmst502ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Skmst502ApplicationJSON:
-    error: Optional[Skmst502ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Skmst502ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Skmst502ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Skmst502ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Skmst503ApplicationJSONErrorEnum(str, Enum):
     SERVICE_UNAVAILABLE = "service_unavailable"
@@ -121,8 +118,8 @@ class Skmst503ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Skmst503ApplicationJSON:
-    error: Optional[Skmst503ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Skmst503ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Skmst503ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Skmst503ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Skmst504ApplicationJSONErrorEnum(str, Enum):
     GATEWAY_TIMEOUT = "gateway_timeout"
@@ -134,14 +131,20 @@ class Skmst504ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Skmst504ApplicationJSON:
-    error: Optional[Skmst504ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Skmst504ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Skmst504ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Skmst504ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
+    
+
+@dataclass
+class SkmstRequest:
+    security: SkmstSecurity = field()
+    request: Optional[SkmstRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SkmstResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     skmst_400_application_json_object: Optional[Skmst400ApplicationJSON] = field(default=None)
     skmst_401_application_json_object: Optional[Skmst401ApplicationJSON] = field(default=None)
     skmst_404_application_json_object: Optional[Skmst404ApplicationJSON] = field(default=None)

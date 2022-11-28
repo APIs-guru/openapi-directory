@@ -10,13 +10,13 @@ class RequestInfrastructurePropertiesHeaders:
 
 @dataclass
 class RequestInfrastructurePropertiesRequest:
-    headers: RequestInfrastructurePropertiesHeaders = field(default=None)
+    headers: RequestInfrastructurePropertiesHeaders = field()
     
 
 @dataclass
 class RequestInfrastructurePropertiesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     infrastructure_properties: Optional[shared.InfrastructureProperties] = field(default=None)
-    status_code: int = field(default=None)
     

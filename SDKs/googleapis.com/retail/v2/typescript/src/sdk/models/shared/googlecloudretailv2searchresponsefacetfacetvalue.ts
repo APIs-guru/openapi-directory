@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2Interval } from "./googlecloudretailv2interval";
+
 
 
 // GoogleCloudRetailV2SearchResponseFacetFacetValue
@@ -7,18 +8,18 @@ import { GoogleCloudRetailV2Interval } from "./googlecloudretailv2interval";
  * A facet value which contains value names and their count.
 **/
 export class GoogleCloudRetailV2SearchResponseFacetFacetValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: string;
 
-  @Metadata({ data: "json, name=interval" })
+  @SpeakeasyMetadata({ data: "json, name=interval" })
   interval?: GoogleCloudRetailV2Interval;
 
-  @Metadata({ data: "json, name=maxValue" })
+  @SpeakeasyMetadata({ data: "json, name=maxValue" })
   maxValue?: number;
 
-  @Metadata({ data: "json, name=minValue" })
+  @SpeakeasyMetadata({ data: "json, name=minValue" })
   minValue?: number;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

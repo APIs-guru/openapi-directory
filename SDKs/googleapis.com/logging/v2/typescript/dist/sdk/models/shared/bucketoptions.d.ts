@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Explicit } from "./explicit";
 import { Exponential } from "./exponential";
 import { Linear } from "./linear";

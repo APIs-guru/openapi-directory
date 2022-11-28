@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetModifyTrafficMirrorFilterRuleActionEnum;
 (function (GetModifyTrafficMirrorFilterRuleActionEnum) {
     GetModifyTrafficMirrorFilterRuleActionEnum["ModifyTrafficMirrorFilterRule"] = "ModifyTrafficMirrorFilterRule";
@@ -37,11 +37,11 @@ var GetModifyTrafficMirrorFilterRuleDestinationPortRange = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, name=FromPort" }),
+        SpeakeasyMetadata({ data: "queryParam, name=FromPort" }),
         __metadata("design:type", Number)
     ], GetModifyTrafficMirrorFilterRuleDestinationPortRange.prototype, "fromPort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, name=ToPort" }),
+        SpeakeasyMetadata({ data: "queryParam, name=ToPort" }),
         __metadata("design:type", Number)
     ], GetModifyTrafficMirrorFilterRuleDestinationPortRange.prototype, "toPort", void 0);
     return GetModifyTrafficMirrorFilterRuleDestinationPortRange;
@@ -62,11 +62,11 @@ var GetModifyTrafficMirrorFilterRuleSourcePortRange = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, name=FromPort" }),
+        SpeakeasyMetadata({ data: "queryParam, name=FromPort" }),
         __metadata("design:type", Number)
     ], GetModifyTrafficMirrorFilterRuleSourcePortRange.prototype, "fromPort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, name=ToPort" }),
+        SpeakeasyMetadata({ data: "queryParam, name=ToPort" }),
         __metadata("design:type", Number)
     ], GetModifyTrafficMirrorFilterRuleSourcePortRange.prototype, "toPort", void 0);
     return GetModifyTrafficMirrorFilterRuleSourcePortRange;
@@ -87,59 +87,59 @@ var GetModifyTrafficMirrorFilterRuleQueryParams = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetModifyTrafficMirrorFilterRuleQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Description" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Description" }),
         __metadata("design:type", String)
     ], GetModifyTrafficMirrorFilterRuleQueryParams.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DestinationCidrBlock" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DestinationCidrBlock" }),
         __metadata("design:type", String)
     ], GetModifyTrafficMirrorFilterRuleQueryParams.prototype, "destinationCidrBlock", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DestinationPortRange" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DestinationPortRange" }),
         __metadata("design:type", GetModifyTrafficMirrorFilterRuleDestinationPortRange)
     ], GetModifyTrafficMirrorFilterRuleQueryParams.prototype, "destinationPortRange", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
         __metadata("design:type", Boolean)
     ], GetModifyTrafficMirrorFilterRuleQueryParams.prototype, "dryRun", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Protocol" }),
         __metadata("design:type", Number)
     ], GetModifyTrafficMirrorFilterRuleQueryParams.prototype, "protocol", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=RemoveField" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RemoveField" }),
         __metadata("design:type", Array)
     ], GetModifyTrafficMirrorFilterRuleQueryParams.prototype, "removeField", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=RuleAction" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RuleAction" }),
         __metadata("design:type", String)
     ], GetModifyTrafficMirrorFilterRuleQueryParams.prototype, "ruleAction", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=RuleNumber" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RuleNumber" }),
         __metadata("design:type", Number)
     ], GetModifyTrafficMirrorFilterRuleQueryParams.prototype, "ruleNumber", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=SourceCidrBlock" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SourceCidrBlock" }),
         __metadata("design:type", String)
     ], GetModifyTrafficMirrorFilterRuleQueryParams.prototype, "sourceCidrBlock", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=SourcePortRange" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SourcePortRange" }),
         __metadata("design:type", GetModifyTrafficMirrorFilterRuleSourcePortRange)
     ], GetModifyTrafficMirrorFilterRuleQueryParams.prototype, "sourcePortRange", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TrafficDirection" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TrafficDirection" }),
         __metadata("design:type", String)
     ], GetModifyTrafficMirrorFilterRuleQueryParams.prototype, "trafficDirection", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TrafficMirrorFilterRuleId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TrafficMirrorFilterRuleId" }),
         __metadata("design:type", String)
     ], GetModifyTrafficMirrorFilterRuleQueryParams.prototype, "trafficMirrorFilterRuleId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetModifyTrafficMirrorFilterRuleQueryParams.prototype, "version", void 0);
     return GetModifyTrafficMirrorFilterRuleQueryParams;
@@ -151,31 +151,31 @@ var GetModifyTrafficMirrorFilterRuleHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetModifyTrafficMirrorFilterRuleHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetModifyTrafficMirrorFilterRuleHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetModifyTrafficMirrorFilterRuleHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetModifyTrafficMirrorFilterRuleHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetModifyTrafficMirrorFilterRuleHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetModifyTrafficMirrorFilterRuleHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetModifyTrafficMirrorFilterRuleHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetModifyTrafficMirrorFilterRuleHeaders;
@@ -187,11 +187,11 @@ var GetModifyTrafficMirrorFilterRuleRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModifyTrafficMirrorFilterRuleQueryParams)
     ], GetModifyTrafficMirrorFilterRuleRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModifyTrafficMirrorFilterRuleHeaders)
     ], GetModifyTrafficMirrorFilterRuleRequest.prototype, "headers", void 0);
     return GetModifyTrafficMirrorFilterRuleRequest;
@@ -203,15 +203,15 @@ var GetModifyTrafficMirrorFilterRuleResponse = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetModifyTrafficMirrorFilterRuleResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetModifyTrafficMirrorFilterRuleResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetModifyTrafficMirrorFilterRuleResponse.prototype, "statusCode", void 0);
     return GetModifyTrafficMirrorFilterRuleResponse;

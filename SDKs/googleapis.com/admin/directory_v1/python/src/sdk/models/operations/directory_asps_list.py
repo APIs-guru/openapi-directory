@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryAspsListPathParams:
-    user_key: str = field(default=None, metadata={'path_param': { 'field_name': 'userKey', 'style': 'simple', 'explode': False }})
+    user_key: str = field(metadata={'path_param': { 'field_name': 'userKey', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class DirectoryAspsListQueryParams:
 
 @dataclass
 class DirectoryAspsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryAspsListRequest:
-    path_params: DirectoryAspsListPathParams = field(default=None)
-    query_params: DirectoryAspsListQueryParams = field(default=None)
-    security: DirectoryAspsListSecurity = field(default=None)
+    path_params: DirectoryAspsListPathParams = field()
+    query_params: DirectoryAspsListQueryParams = field()
+    security: DirectoryAspsListSecurity = field()
     
 
 @dataclass
 class DirectoryAspsListResponse:
+    content_type: str = field()
+    status_code: int = field()
     asps: Optional[shared.Asps] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

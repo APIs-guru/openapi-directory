@@ -1,29 +1,131 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2alphaCustomAttribute } from "./googlecloudretailv2alphacustomattribute";
 import { GoogleCloudRetailV2alphaAudience } from "./googlecloudretailv2alphaaudience";
 import { GoogleCloudRetailV2alphaColorInfo } from "./googlecloudretailv2alphacolorinfo";
 import { GoogleCloudRetailV2alphaFulfillmentInfo } from "./googlecloudretailv2alphafulfillmentinfo";
 import { GoogleCloudRetailV2alphaImage } from "./googlecloudretailv2alphaimage";
-import { GoogleCloudRetailV2alphaLocalInventory } from "./googlecloudretailv2alphalocalinventory";
 import { GoogleCloudRetailV2alphaPriceInfo } from "./googlecloudretailv2alphapriceinfo";
 import { GoogleCloudRetailV2alphaPromotion } from "./googlecloudretailv2alphapromotion";
 import { GoogleCloudRetailV2alphaRating } from "./googlecloudretailv2alpharating";
-import { GoogleCloudRetailV2alphaProduct } from "./googlecloudretailv2alphaproduct";
+import { GoogleCloudRetailV2alphaLocalInventory } from "./googlecloudretailv2alphalocalinventory";
+
 
 export enum GoogleCloudRetailV2alphaProductAvailabilityEnum {
-    AvailabilityUnspecified = "AVAILABILITY_UNSPECIFIED"
-,    InStock = "IN_STOCK"
-,    OutOfStock = "OUT_OF_STOCK"
-,    Preorder = "PREORDER"
-,    Backorder = "BACKORDER"
+    AvailabilityUnspecified = "AVAILABILITY_UNSPECIFIED",
+    InStock = "IN_STOCK",
+    OutOfStock = "OUT_OF_STOCK",
+    Preorder = "PREORDER",
+    Backorder = "BACKORDER"
 }
 
 export enum GoogleCloudRetailV2alphaProductTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Primary = "PRIMARY"
-,    Variant = "VARIANT"
-,    Collection = "COLLECTION"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Primary = "PRIMARY",
+    Variant = "VARIANT",
+    Collection = "COLLECTION"
+}
+
+
+// GoogleCloudRetailV2alphaProductInput
+/** 
+ * Product captures all metadata information of items to be recommended or searched.
+**/
+export class GoogleCloudRetailV2alphaProductInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: GoogleCloudRetailV2alphaCustomAttribute })
+  attributes?: Map<string, GoogleCloudRetailV2alphaCustomAttribute>;
+
+  @SpeakeasyMetadata({ data: "json, name=audience" })
+  audience?: GoogleCloudRetailV2alphaAudience;
+
+  @SpeakeasyMetadata({ data: "json, name=availability" })
+  availability?: GoogleCloudRetailV2alphaProductAvailabilityEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=availableQuantity" })
+  availableQuantity?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=availableTime" })
+  availableTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=brands" })
+  brands?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=categories" })
+  categories?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=collectionMemberIds" })
+  collectionMemberIds?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=colorInfo" })
+  colorInfo?: GoogleCloudRetailV2alphaColorInfo;
+
+  @SpeakeasyMetadata({ data: "json, name=conditions" })
+  conditions?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=expireTime" })
+  expireTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=fulfillmentInfo", elemType: GoogleCloudRetailV2alphaFulfillmentInfo })
+  fulfillmentInfo?: GoogleCloudRetailV2alphaFulfillmentInfo[];
+
+  @SpeakeasyMetadata({ data: "json, name=gtin" })
+  gtin?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=images", elemType: GoogleCloudRetailV2alphaImage })
+  images?: GoogleCloudRetailV2alphaImage[];
+
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
+  languageCode?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=materials" })
+  materials?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=patterns" })
+  patterns?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=priceInfo" })
+  priceInfo?: GoogleCloudRetailV2alphaPriceInfo;
+
+  @SpeakeasyMetadata({ data: "json, name=primaryProductId" })
+  primaryProductId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=promotions", elemType: GoogleCloudRetailV2alphaPromotion })
+  promotions?: GoogleCloudRetailV2alphaPromotion[];
+
+  @SpeakeasyMetadata({ data: "json, name=publishTime" })
+  publishTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=rating" })
+  rating?: GoogleCloudRetailV2alphaRating;
+
+  @SpeakeasyMetadata({ data: "json, name=retrievableFields" })
+  retrievableFields?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=sizes" })
+  sizes?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=tags" })
+  tags?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=title" })
+  title?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ttl" })
+  ttl?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: GoogleCloudRetailV2alphaProductTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=uri" })
+  uri?: string;
 }
 
 
@@ -32,105 +134,105 @@ export enum GoogleCloudRetailV2alphaProductTypeEnum {
  * Product captures all metadata information of items to be recommended or searched.
 **/
 export class GoogleCloudRetailV2alphaProduct extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes", elemType: shared.GoogleCloudRetailV2alphaCustomAttribute })
+  @SpeakeasyMetadata({ data: "json, name=attributes", elemType: GoogleCloudRetailV2alphaCustomAttribute })
   attributes?: Map<string, GoogleCloudRetailV2alphaCustomAttribute>;
 
-  @Metadata({ data: "json, name=audience" })
+  @SpeakeasyMetadata({ data: "json, name=audience" })
   audience?: GoogleCloudRetailV2alphaAudience;
 
-  @Metadata({ data: "json, name=availability" })
+  @SpeakeasyMetadata({ data: "json, name=availability" })
   availability?: GoogleCloudRetailV2alphaProductAvailabilityEnum;
 
-  @Metadata({ data: "json, name=availableQuantity" })
+  @SpeakeasyMetadata({ data: "json, name=availableQuantity" })
   availableQuantity?: number;
 
-  @Metadata({ data: "json, name=availableTime" })
+  @SpeakeasyMetadata({ data: "json, name=availableTime" })
   availableTime?: string;
 
-  @Metadata({ data: "json, name=brands" })
+  @SpeakeasyMetadata({ data: "json, name=brands" })
   brands?: string[];
 
-  @Metadata({ data: "json, name=categories" })
+  @SpeakeasyMetadata({ data: "json, name=categories" })
   categories?: string[];
 
-  @Metadata({ data: "json, name=collectionMemberIds" })
+  @SpeakeasyMetadata({ data: "json, name=collectionMemberIds" })
   collectionMemberIds?: string[];
 
-  @Metadata({ data: "json, name=colorInfo" })
+  @SpeakeasyMetadata({ data: "json, name=colorInfo" })
   colorInfo?: GoogleCloudRetailV2alphaColorInfo;
 
-  @Metadata({ data: "json, name=conditions" })
+  @SpeakeasyMetadata({ data: "json, name=conditions" })
   conditions?: string[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=expireTime" })
+  @SpeakeasyMetadata({ data: "json, name=expireTime" })
   expireTime?: string;
 
-  @Metadata({ data: "json, name=fulfillmentInfo", elemType: shared.GoogleCloudRetailV2alphaFulfillmentInfo })
+  @SpeakeasyMetadata({ data: "json, name=fulfillmentInfo", elemType: GoogleCloudRetailV2alphaFulfillmentInfo })
   fulfillmentInfo?: GoogleCloudRetailV2alphaFulfillmentInfo[];
 
-  @Metadata({ data: "json, name=gtin" })
+  @SpeakeasyMetadata({ data: "json, name=gtin" })
   gtin?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=images", elemType: shared.GoogleCloudRetailV2alphaImage })
+  @SpeakeasyMetadata({ data: "json, name=images", elemType: GoogleCloudRetailV2alphaImage })
   images?: GoogleCloudRetailV2alphaImage[];
 
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=localInventories", elemType: shared.GoogleCloudRetailV2alphaLocalInventory })
+  @SpeakeasyMetadata({ data: "json, name=localInventories", elemType: GoogleCloudRetailV2alphaLocalInventory })
   localInventories?: GoogleCloudRetailV2alphaLocalInventory[];
 
-  @Metadata({ data: "json, name=materials" })
+  @SpeakeasyMetadata({ data: "json, name=materials" })
   materials?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=patterns" })
+  @SpeakeasyMetadata({ data: "json, name=patterns" })
   patterns?: string[];
 
-  @Metadata({ data: "json, name=priceInfo" })
+  @SpeakeasyMetadata({ data: "json, name=priceInfo" })
   priceInfo?: GoogleCloudRetailV2alphaPriceInfo;
 
-  @Metadata({ data: "json, name=primaryProductId" })
+  @SpeakeasyMetadata({ data: "json, name=primaryProductId" })
   primaryProductId?: string;
 
-  @Metadata({ data: "json, name=promotions", elemType: shared.GoogleCloudRetailV2alphaPromotion })
+  @SpeakeasyMetadata({ data: "json, name=promotions", elemType: GoogleCloudRetailV2alphaPromotion })
   promotions?: GoogleCloudRetailV2alphaPromotion[];
 
-  @Metadata({ data: "json, name=publishTime" })
+  @SpeakeasyMetadata({ data: "json, name=publishTime" })
   publishTime?: string;
 
-  @Metadata({ data: "json, name=rating" })
+  @SpeakeasyMetadata({ data: "json, name=rating" })
   rating?: GoogleCloudRetailV2alphaRating;
 
-  @Metadata({ data: "json, name=retrievableFields" })
+  @SpeakeasyMetadata({ data: "json, name=retrievableFields" })
   retrievableFields?: string;
 
-  @Metadata({ data: "json, name=sizes" })
+  @SpeakeasyMetadata({ data: "json, name=sizes" })
   sizes?: string[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=ttl" })
+  @SpeakeasyMetadata({ data: "json, name=ttl" })
   ttl?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GoogleCloudRetailV2alphaProductTypeEnum;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 
-  @Metadata({ data: "json, name=variants", elemType: shared.GoogleCloudRetailV2alphaProduct })
+  @SpeakeasyMetadata({ data: "json, name=variants", elemType: GoogleCloudRetailV2alphaProduct })
   variants?: GoogleCloudRetailV2alphaProduct[];
 }

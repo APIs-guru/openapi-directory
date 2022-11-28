@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var OptIn1 = /** @class */ (function (_super) {
     __extends(OptIn1, _super);
     function OptIn1() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=opencast" }),
+        SpeakeasyMetadata({ data: "json, name=opencast" }),
         __metadata("design:type", Boolean)
     ], OptIn1.prototype, "opencast", void 0);
     __decorate([
-        Metadata({ data: "json, name=preview_channel" }),
+        SpeakeasyMetadata({ data: "json, name=preview_channel" }),
         __metadata("design:type", Boolean)
     ], OptIn1.prototype, "previewChannel", void 0);
     __decorate([
-        Metadata({ data: "json, name=remote_ducking" }),
+        SpeakeasyMetadata({ data: "json, name=remote_ducking" }),
         __metadata("design:type", Boolean)
     ], OptIn1.prototype, "remoteDucking", void 0);
     __decorate([
-        Metadata({ data: "json, name=stats" }),
+        SpeakeasyMetadata({ data: "json, name=stats" }),
         __metadata("design:type", Boolean)
     ], OptIn1.prototype, "stats", void 0);
     return OptIn1;

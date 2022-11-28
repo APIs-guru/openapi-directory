@@ -1,5 +1,7 @@
 package shared
 
+// CreateAdsByInventoryReferenceResponse
+// This type defines the fields returned when you create an ad by inventory reference ID.
 type CreateAdsByInventoryReferenceResponse struct {
 	Ads                    []AdReference `json:"ads,omitempty"`
 	Errors                 []Error       `json:"errors,omitempty"`

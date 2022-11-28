@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DirectoryChromeosdevicesIssueCommandRequestCommandTypeEnum {
-    CommandTypeUnspecified = "COMMAND_TYPE_UNSPECIFIED"
-,    Reboot = "REBOOT"
-,    TakeAScreenshot = "TAKE_A_SCREENSHOT"
-,    SetVolume = "SET_VOLUME"
-,    WipeUsers = "WIPE_USERS"
-,    RemotePowerwash = "REMOTE_POWERWASH"
+    CommandTypeUnspecified = "COMMAND_TYPE_UNSPECIFIED",
+    Reboot = "REBOOT",
+    TakeAScreenshot = "TAKE_A_SCREENSHOT",
+    SetVolume = "SET_VOLUME",
+    WipeUsers = "WIPE_USERS",
+    RemotePowerwash = "REMOTE_POWERWASH"
 }
 
 
@@ -15,9 +16,9 @@ export enum DirectoryChromeosdevicesIssueCommandRequestCommandTypeEnum {
  * A request for issuing a command.
 **/
 export class DirectoryChromeosdevicesIssueCommandRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commandType" })
+  @SpeakeasyMetadata({ data: "json, name=commandType" })
   commandType?: DirectoryChromeosdevicesIssueCommandRequestCommandTypeEnum;
 
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: string;
 }

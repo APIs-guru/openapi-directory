@@ -1,5 +1,7 @@
 package shared
 
+// AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails
+// The log configuration for the results of the run command actions.
 type AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails struct {
 	CloudWatchEncryptionEnabled *bool   `json:"CloudWatchEncryptionEnabled,omitempty"`
 	CloudWatchLogGroupName      *string `json:"CloudWatchLogGroupName,omitempty"`

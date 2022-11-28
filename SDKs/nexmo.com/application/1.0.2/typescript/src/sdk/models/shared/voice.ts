@@ -1,25 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum VoiceWebhooksEndpointTypeEnum {
-    AnswerUrl = "answer_url"
-,    EventUrl = "event_url"
+    AnswerUrl = "answer_url",
+    EventUrl = "event_url"
 }
 
 export enum VoiceWebhooksHttpMethodEnum {
-    Get = "GET"
-,    Post = "POST"
+    Get = "GET",
+    Post = "POST"
 }
 
 
 export class VoiceWebhooks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=endpoint" })
   endpoint: string;
 
-  @Metadata({ data: "json, name=endpoint_type" })
+  @SpeakeasyMetadata({ data: "json, name=endpoint_type" })
   endpointType: VoiceWebhooksEndpointTypeEnum;
 
-  @Metadata({ data: "json, name=http_method" })
+  @SpeakeasyMetadata({ data: "json, name=http_method" })
   httpMethod: VoiceWebhooksHttpMethodEnum;
 }
 
@@ -29,6 +29,6 @@ export class VoiceWebhooks extends SpeakeasyBase {
  * The Nexmo product that you access with this application.
 **/
 export class Voice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=webhooks", elemType: shared.VoiceWebhooks })
+  @SpeakeasyMetadata({ data: "json, name=webhooks", elemType: VoiceWebhooks })
   webhooks?: VoiceWebhooks[];
 }

@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDnsDomainNameRecordsRecordIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=domainName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=domainName" })
   domainName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=recordId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=recordId" })
   recordId: string;
 }
 
 
 export class GetDnsDomainNameRecordsRecordIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=domain_name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=domain_name" })
   domainName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=record_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=record_id" })
   recordId: string;
 }
 
 
 export class GetDnsDomainNameRecordsRecordIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDnsDomainNameRecordsRecordIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDnsDomainNameRecordsRecordIdQueryParams;
 }
 
 
 export class GetDnsDomainNameRecordsRecordIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dnsRecord?: shared.DnsRecord;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

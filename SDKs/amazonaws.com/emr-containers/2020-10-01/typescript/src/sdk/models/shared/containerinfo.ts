@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EksInfo } from "./eksinfo";
+
 
 
 // ContainerInfo
@@ -7,6 +8,6 @@ import { EksInfo } from "./eksinfo";
  * The information about the container used for a job run or a managed endpoint.
 **/
 export class ContainerInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eksInfo" })
+  @SpeakeasyMetadata({ data: "json, name=eksInfo" })
   eksInfo?: EksInfo;
 }

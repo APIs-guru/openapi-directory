@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import trust
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class DetachTrustRequest:
-    trust: Optional[trust.Trust] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trust' }})
+class DetachTrustRequestInput:
+    r"""DetachTrustRequestInput
+    Request message for DetachTrust
+    """
+    
+    trust: Optional[TrustInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('trust') }})
     

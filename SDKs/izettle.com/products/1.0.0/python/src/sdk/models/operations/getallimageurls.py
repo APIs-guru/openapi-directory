@@ -5,34 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class GetAllImageUrlsPathParams:
-    organization_uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationUuid', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class GetAllImageUrlsSecurityOption1:
-    zettle_api_key: shared.SchemeZettleAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
-class GetAllImageUrlsSecurityOption2:
-    zettle_oauth: shared.SchemeZettleOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    organization_uuid: str = field(metadata={'path_param': { 'field_name': 'organizationUuid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetAllImageUrlsSecurity:
-    option1: Optional[GetAllImageUrlsSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetAllImageUrlsSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    zettle_api_key: Optional[shared.SchemeZettleAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    zettle_oauth: Optional[shared.SchemeZettleOauth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetAllImageUrlsRequest:
-    path_params: GetAllImageUrlsPathParams = field(default=None)
-    security: GetAllImageUrlsSecurity = field(default=None)
+    path_params: GetAllImageUrlsPathParams = field()
+    security: GetAllImageUrlsSecurity = field()
     
 
 @dataclass
 class GetAllImageUrlsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     library_images_response: Optional[shared.LibraryImagesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ExperimentTemplate
+// Describes an experiment template.
 type ExperimentTemplate struct {
 	Actions        map[string]ExperimentTemplateAction `json:"actions,omitempty"`
 	CreationTime   *time.Time                          `json:"creationTime,omitempty"`

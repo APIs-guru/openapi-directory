@@ -1,44 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DiagnosticMessage } from "./diagnosticmessage";
 import { Metric } from "./metric";
 import { PrefixNode } from "./prefixnode";
 
+
 export enum VisualizationDataKeyUnitEnum {
-    KeyUnitUnspecified = "KEY_UNIT_UNSPECIFIED"
-,    Key = "KEY"
-,    Chunk = "CHUNK"
+    KeyUnitUnspecified = "KEY_UNIT_UNSPECIFIED",
+    Key = "KEY",
+    Chunk = "CHUNK"
 }
 
 
 export class VisualizationData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataSourceEndToken" })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceEndToken" })
   dataSourceEndToken?: string;
 
-  @Metadata({ data: "json, name=dataSourceSeparatorToken" })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceSeparatorToken" })
   dataSourceSeparatorToken?: string;
 
-  @Metadata({ data: "json, name=diagnosticMessages", elemType: shared.DiagnosticMessage })
+  @SpeakeasyMetadata({ data: "json, name=diagnosticMessages", elemType: DiagnosticMessage })
   diagnosticMessages?: DiagnosticMessage[];
 
-  @Metadata({ data: "json, name=endKeyStrings" })
+  @SpeakeasyMetadata({ data: "json, name=endKeyStrings" })
   endKeyStrings?: string[];
 
-  @Metadata({ data: "json, name=hasPii" })
+  @SpeakeasyMetadata({ data: "json, name=hasPii" })
   hasPii?: boolean;
 
-  @Metadata({ data: "json, name=indexedKeys" })
+  @SpeakeasyMetadata({ data: "json, name=indexedKeys" })
   indexedKeys?: string[];
 
-  @Metadata({ data: "json, name=keySeparator" })
+  @SpeakeasyMetadata({ data: "json, name=keySeparator" })
   keySeparator?: string;
 
-  @Metadata({ data: "json, name=keyUnit" })
+  @SpeakeasyMetadata({ data: "json, name=keyUnit" })
   keyUnit?: VisualizationDataKeyUnitEnum;
 
-  @Metadata({ data: "json, name=metrics", elemType: shared.Metric })
+  @SpeakeasyMetadata({ data: "json, name=metrics", elemType: Metric })
   metrics?: Metric[];
 
-  @Metadata({ data: "json, name=prefixNodes", elemType: shared.PrefixNode })
+  @SpeakeasyMetadata({ data: "json, name=prefixNodes", elemType: PrefixNode })
   prefixNodes?: PrefixNode[];
 }

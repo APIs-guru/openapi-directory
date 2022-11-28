@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class JSONFileFormatCompressionEnum(str, Enum):
     JSON_COMPRESSION_UNSPECIFIED = "JSON_COMPRESSION_UNSPECIFIED"
@@ -16,6 +18,10 @@ class JSONFileFormatSchemaFileFormatEnum(str, Enum):
 @dataclass_json
 @dataclass
 class JSONFileFormat:
-    compression: Optional[JSONFileFormatCompressionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'compression' }})
-    schema_file_format: Optional[JSONFileFormatSchemaFileFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schemaFileFormat' }})
+    r"""JSONFileFormat
+    JSON file format configuration.
+    """
+    
+    compression: Optional[JSONFileFormatCompressionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('compression') }})
+    schema_file_format: Optional[JSONFileFormatSchemaFileFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('schemaFileFormat') }})
     

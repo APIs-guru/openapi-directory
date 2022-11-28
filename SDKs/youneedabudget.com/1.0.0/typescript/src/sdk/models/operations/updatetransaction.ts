@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateTransactionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=budget_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=budget_id" })
   budgetId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=transaction_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=transaction_id" })
   transactionId: string;
 }
 
 
 export class UpdateTransactionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateTransactionPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.SaveTransactionWrapper;
 }
 
 
 export class UpdateTransactionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   transactionResponse?: shared.TransactionResponse;
 }

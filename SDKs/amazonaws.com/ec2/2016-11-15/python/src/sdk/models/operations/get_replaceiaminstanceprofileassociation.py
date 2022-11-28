@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetReplaceIamInstanceProfileAssociationActionEnum(str, Enum):
     REPLACE_IAM_INSTANCE_PROFILE_ASSOCIATION = "ReplaceIamInstanceProfileAssociation"
@@ -7,6 +11,10 @@ class GetReplaceIamInstanceProfileAssociationActionEnum(str, Enum):
 
 @dataclass
 class GetReplaceIamInstanceProfileAssociationIamInstanceProfile:
+    r"""GetReplaceIamInstanceProfileAssociationIamInstanceProfile
+    Describes an IAM instance profile.
+    """
+    
     arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Arn' }})
     name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Name' }})
     
@@ -16,10 +24,10 @@ class GetReplaceIamInstanceProfileAssociationVersionEnum(str, Enum):
 
 @dataclass
 class GetReplaceIamInstanceProfileAssociationQueryParams:
-    action: GetReplaceIamInstanceProfileAssociationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    association_id: str = field(default=None, metadata={'query_param': { 'field_name': 'AssociationId', 'style': 'form', 'explode': True }})
-    iam_instance_profile: GetReplaceIamInstanceProfileAssociationIamInstanceProfile = field(default=None, metadata={'query_param': { 'field_name': 'IamInstanceProfile', 'style': 'form', 'explode': True }})
-    version: GetReplaceIamInstanceProfileAssociationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetReplaceIamInstanceProfileAssociationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    association_id: str = field(metadata={'query_param': { 'field_name': 'AssociationId', 'style': 'form', 'explode': True }})
+    iam_instance_profile: GetReplaceIamInstanceProfileAssociationIamInstanceProfile = field(metadata={'query_param': { 'field_name': 'IamInstanceProfile', 'style': 'form', 'explode': True }})
+    version: GetReplaceIamInstanceProfileAssociationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -35,13 +43,13 @@ class GetReplaceIamInstanceProfileAssociationHeaders:
 
 @dataclass
 class GetReplaceIamInstanceProfileAssociationRequest:
-    query_params: GetReplaceIamInstanceProfileAssociationQueryParams = field(default=None)
-    headers: GetReplaceIamInstanceProfileAssociationHeaders = field(default=None)
+    headers: GetReplaceIamInstanceProfileAssociationHeaders = field()
+    query_params: GetReplaceIamInstanceProfileAssociationQueryParams = field()
     
 
 @dataclass
 class GetReplaceIamInstanceProfileAssociationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

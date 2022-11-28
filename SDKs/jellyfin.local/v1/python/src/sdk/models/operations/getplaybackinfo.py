@@ -5,29 +5,29 @@ from sdk.models import shared
 
 @dataclass
 class GetPlaybackInfoPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetPlaybackInfoQueryParams:
-    user_id: str = field(default=None, metadata={'query_param': { 'field_name': 'userId', 'style': 'form', 'explode': True }})
+    user_id: str = field(metadata={'query_param': { 'field_name': 'userId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetPlaybackInfoSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetPlaybackInfoRequest:
-    path_params: GetPlaybackInfoPathParams = field(default=None)
-    query_params: GetPlaybackInfoQueryParams = field(default=None)
-    security: GetPlaybackInfoSecurity = field(default=None)
+    path_params: GetPlaybackInfoPathParams = field()
+    query_params: GetPlaybackInfoQueryParams = field()
+    security: GetPlaybackInfoSecurity = field()
     
 
 @dataclass
 class GetPlaybackInfoResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     playback_info_response: Optional[shared.PlaybackInfoResponse] = field(default=None)
-    status_code: int = field(default=None)
     

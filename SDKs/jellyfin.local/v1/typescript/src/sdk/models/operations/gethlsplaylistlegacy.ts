@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetHlsPlaylistLegacyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
   itemId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=playlistId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=playlistId" })
   playlistId: string;
 }
 
 
 export class GetHlsPlaylistLegacySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetHlsPlaylistLegacyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetHlsPlaylistLegacyPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetHlsPlaylistLegacySecurity;
 }
 
 
 export class GetHlsPlaylistLegacyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getHlsPlaylistLegacy200ApplicationXMpegurlBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

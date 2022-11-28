@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GymArticleDetailsDto
@@ -8,51 +9,51 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *             
 **/
 export class GymArticleDetailsDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=articleId" })
+  @SpeakeasyMetadata({ data: "json, name=articleId" })
   articleId?: number;
 
-  @Metadata({ data: "json, name=availableQty" })
+  @SpeakeasyMetadata({ data: "json, name=availableQty" })
   availableQty?: number;
 
-  @Metadata({ data: "json, name=createdUser" })
+  @SpeakeasyMetadata({ data: "json, name=createdUser" })
   createdUser?: string;
 
-  @Metadata({ data: "json, name=employeeDiscount" })
+  @SpeakeasyMetadata({ data: "json, name=employeeDiscount" })
   employeeDiscount?: number;
 
-  @Metadata({ data: "json, name=employeePrice" })
+  @SpeakeasyMetadata({ data: "json, name=employeePrice" })
   employeePrice?: number;
 
-  @Metadata({ data: "json, name=gymId" })
+  @SpeakeasyMetadata({ data: "json, name=gymId" })
   gymId?: number;
 
-  @Metadata({ data: "json, name=gymIdList" })
+  @SpeakeasyMetadata({ data: "json, name=gymIdList" })
   gymIdList?: string;
 
-  @Metadata({ data: "json, name=gymName" })
+  @SpeakeasyMetadata({ data: "json, name=gymName" })
   gymName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=isDefault" })
+  @SpeakeasyMetadata({ data: "json, name=isDefault" })
   isDefault?: boolean;
 
-  @Metadata({ data: "json, name=isInventoryItem" })
+  @SpeakeasyMetadata({ data: "json, name=isInventoryItem" })
   isInventoryItem?: boolean;
 
-  @Metadata({ data: "json, name=isObsolete" })
+  @SpeakeasyMetadata({ data: "json, name=isObsolete" })
   isObsolete?: boolean;
 
-  @Metadata({ data: "json, name=modifiedUser" })
+  @SpeakeasyMetadata({ data: "json, name=modifiedUser" })
   modifiedUser?: string;
 
-  @Metadata({ data: "json, name=reorderLevel" })
+  @SpeakeasyMetadata({ data: "json, name=reorderLevel" })
   reorderLevel?: number;
 
-  @Metadata({ data: "json, name=revenueAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=revenueAccountId" })
   revenueAccountId?: number;
 
-  @Metadata({ data: "json, name=sellingPrice" })
+  @SpeakeasyMetadata({ data: "json, name=sellingPrice" })
   sellingPrice?: number;
 }

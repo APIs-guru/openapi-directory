@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetVideoStreamByContainerPathParams:
-    container: str = field(default=None, metadata={'path_param': { 'field_name': 'container', 'style': 'simple', 'explode': False }})
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
-    stream: str = field(default=None, metadata={'path_param': { 'field_name': 'stream', 'style': 'simple', 'explode': False }})
+    container: str = field(metadata={'path_param': { 'field_name': 'container', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    stream: str = field(metadata={'path_param': { 'field_name': 'stream', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -63,13 +64,13 @@ class GetVideoStreamByContainerQueryParams:
 
 @dataclass
 class GetVideoStreamByContainerRequest:
-    path_params: GetVideoStreamByContainerPathParams = field(default=None)
-    query_params: GetVideoStreamByContainerQueryParams = field(default=None)
+    path_params: GetVideoStreamByContainerPathParams = field()
+    query_params: GetVideoStreamByContainerQueryParams = field()
     
 
 @dataclass
 class GetVideoStreamByContainerResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_video_stream_by_container_200_video_wildcard_binary_string: Optional[bytes] = field(default=None)
-    status_code: int = field(default=None)
     

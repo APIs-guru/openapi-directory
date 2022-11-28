@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRecaptchaenterpriseV1RelatedAccountGroup } from "./googlecloudrecaptchaenterprisev1relatedaccountgroup";
+
 
 
 // GoogleCloudRecaptchaenterpriseV1ListRelatedAccountGroupsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudRecaptchaenterpriseV1RelatedAccountGroup } from "./googleclo
  * The response to a `ListRelatedAccountGroups` call.
 **/
 export class GoogleCloudRecaptchaenterpriseV1ListRelatedAccountGroupsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=relatedAccountGroups", elemType: shared.GoogleCloudRecaptchaenterpriseV1RelatedAccountGroup })
+  @SpeakeasyMetadata({ data: "json, name=relatedAccountGroups", elemType: GoogleCloudRecaptchaenterpriseV1RelatedAccountGroup })
   relatedAccountGroups?: GoogleCloudRecaptchaenterpriseV1RelatedAccountGroup[];
 }

@@ -1,5 +1,7 @@
 package shared
 
+// OsPolicyResourceFile
+// A remote or local file.
 type OsPolicyResourceFile struct {
 	AllowInsecure *bool                       `json:"allowInsecure,omitempty"`
 	Gcs           *OsPolicyResourceFileGcs    `json:"gcs,omitempty"`

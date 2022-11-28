@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeValue } from "./attributevalue";
+
 
 
 // PutRequest
@@ -8,6 +8,6 @@ import { AttributeValue } from "./attributevalue";
  * A container for a Put BatchWrite request
 **/
 export class PutRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Item", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=Item", elemType: AttributeValue })
   item: Map<string, AttributeValue>;
 }

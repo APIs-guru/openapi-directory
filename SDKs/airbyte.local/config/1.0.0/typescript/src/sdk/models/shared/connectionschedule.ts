@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ConnectionScheduleTimeUnitEnum {
-    Minutes = "minutes"
-,    Hours = "hours"
-,    Days = "days"
-,    Weeks = "weeks"
-,    Months = "months"
+    Minutes = "minutes",
+    Hours = "hours",
+    Days = "days",
+    Weeks = "weeks",
+    Months = "months"
 }
 
 
@@ -14,9 +15,9 @@ export enum ConnectionScheduleTimeUnitEnum {
  * if null, then no schedule is set.
 **/
 export class ConnectionSchedule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=timeUnit" })
+  @SpeakeasyMetadata({ data: "json, name=timeUnit" })
   timeUnit: ConnectionScheduleTimeUnitEnum;
 
-  @Metadata({ data: "json, name=units" })
+  @SpeakeasyMetadata({ data: "json, name=units" })
   units: number;
 }

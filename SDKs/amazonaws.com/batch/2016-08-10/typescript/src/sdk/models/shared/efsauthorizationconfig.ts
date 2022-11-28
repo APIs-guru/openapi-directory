@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EfsAuthorizationConfigIamEnum } from "./efsauthorizationconfigiamenum";
+
 
 
 // EfsAuthorizationConfig
@@ -7,9 +8,9 @@ import { EfsAuthorizationConfigIamEnum } from "./efsauthorizationconfigiamenum";
  * The authorization configuration details for the Amazon EFS file system.
 **/
 export class EfsAuthorizationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessPointId" })
+  @SpeakeasyMetadata({ data: "json, name=accessPointId" })
   accessPointId?: string;
 
-  @Metadata({ data: "json, name=iam" })
+  @SpeakeasyMetadata({ data: "json, name=iam" })
   iam?: EfsAuthorizationConfigIamEnum;
 }

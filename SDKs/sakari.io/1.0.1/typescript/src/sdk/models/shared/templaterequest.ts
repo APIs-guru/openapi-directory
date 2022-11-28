@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TemplateRequestTypeEnum {
-    Sms = "SMS"
-,    Web = "Web"
+    Sms = "SMS",
+    Web = "Web"
 }
 
 
 export class TemplateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=template" })
+  @SpeakeasyMetadata({ data: "json, name=template" })
   template?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: TemplateRequestTypeEnum;
 }

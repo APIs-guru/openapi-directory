@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListClassificationJobsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
   nextToken?: string;
 }
 
 
 export class ListClassificationJobsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -40,10 +41,10 @@ export class ListClassificationJobsHeaders extends SpeakeasyBase {
  * Specifies criteria for filtering the results of a request for information about classification jobs.
 **/
 export class ListClassificationJobsRequestBodyFilterCriteria extends SpeakeasyBase {
-  @Metadata({ data: "json, name=excludes", elemType: shared.ListJobsFilterTerm })
+  @SpeakeasyMetadata({ data: "json, name=excludes", elemType: shared.ListJobsFilterTerm })
   excludes?: shared.ListJobsFilterTerm[];
 
-  @Metadata({ data: "json, name=includes", elemType: shared.ListJobsFilterTerm })
+  @SpeakeasyMetadata({ data: "json, name=includes", elemType: shared.ListJobsFilterTerm })
   includes?: shared.ListJobsFilterTerm[];
 }
 
@@ -53,69 +54,69 @@ export class ListClassificationJobsRequestBodyFilterCriteria extends SpeakeasyBa
  * Specifies criteria for sorting the results of a request for information about classification jobs.
 **/
 export class ListClassificationJobsRequestBodySortCriteria extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributeName" })
+  @SpeakeasyMetadata({ data: "json, name=attributeName" })
   attributeName?: shared.ListJobsSortAttributeNameEnum;
 
-  @Metadata({ data: "json, name=orderBy" })
+  @SpeakeasyMetadata({ data: "json, name=orderBy" })
   orderBy?: shared.OrderByEnum;
 }
 
 
 export class ListClassificationJobsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filterCriteria" })
+  @SpeakeasyMetadata({ data: "json, name=filterCriteria" })
   filterCriteria?: ListClassificationJobsRequestBodyFilterCriteria;
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=sortCriteria" })
+  @SpeakeasyMetadata({ data: "json, name=sortCriteria" })
   sortCriteria?: ListClassificationJobsRequestBodySortCriteria;
 }
 
 
 export class ListClassificationJobsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListClassificationJobsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ListClassificationJobsHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: ListClassificationJobsRequestBody;
 }
 
 
 export class ListClassificationJobsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listClassificationJobsResponse?: shared.ListClassificationJobsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceQuotaExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

@@ -1,85 +1,86 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateTypePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
   apiId: string;
 }
 
 
 export class CreateTypeHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum CreateTypeRequestBodyFormatEnum {
-    Sdl = "SDL"
-,    Json = "JSON"
+    Sdl = "SDL",
+    Json = "JSON"
 }
 
 
 export class CreateTypeRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=definition" })
+  @SpeakeasyMetadata({ data: "json, name=definition" })
   definition: string;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format: CreateTypeRequestBodyFormatEnum;
 }
 
 
 export class CreateTypeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateTypePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateTypeHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateTypeRequestBody;
 }
 
 
 export class CreateTypeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   concurrentModificationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createTypeResponse?: shared.CreateTypeResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 }

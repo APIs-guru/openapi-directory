@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AwsAccessKeysResponseAuthenticationModeEnum {
     Credentials = "credentials"
@@ -6,9 +7,9 @@ export enum AwsAccessKeysResponseAuthenticationModeEnum {
 
 
 export class AwsAccessKeysResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=accessKeyId" })
   accessKeyId?: string;
 
-  @Metadata({ data: "json, name=authenticationMode" })
+  @SpeakeasyMetadata({ data: "json, name=authenticationMode" })
   authenticationMode?: AwsAccessKeysResponseAuthenticationModeEnum;
 }

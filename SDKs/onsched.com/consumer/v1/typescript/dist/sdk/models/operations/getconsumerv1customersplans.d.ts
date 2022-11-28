@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetConsumerV1CustomersPlansQueryParams extends SpeakeasyBase {
     groupId?: string;
     limit?: number;

@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ReportLineReportLine = /** @class */ (function (_super) {
     __extends(ReportLineReportLine, _super);
     function ReportLineReportLine() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], ReportLineReportLine.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Generated" }),
+        SpeakeasyMetadata({ data: "json, name=Generated" }),
         __metadata("design:type", Date)
     ], ReportLineReportLine.prototype, "generated", void 0);
     __decorate([
-        Metadata({ data: "json, name=TaxMonth" }),
+        SpeakeasyMetadata({ data: "json, name=TaxMonth" }),
         __metadata("design:type", Number)
     ], ReportLineReportLine.prototype, "taxMonth", void 0);
     __decorate([
-        Metadata({ data: "json, name=TaxYear" }),
+        SpeakeasyMetadata({ data: "json, name=TaxYear" }),
         __metadata("design:type", Number)
     ], ReportLineReportLine.prototype, "taxYear", void 0);
     __decorate([
-        Metadata({ data: "json, name=Value" }),
+        SpeakeasyMetadata({ data: "json, name=Value" }),
         __metadata("design:type", Number)
     ], ReportLineReportLine.prototype, "value", void 0);
     return ReportLineReportLine;
@@ -57,7 +57,7 @@ var ReportLine = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ReportLine" }),
+        SpeakeasyMetadata({ data: "json, name=ReportLine" }),
         __metadata("design:type", ReportLineReportLine)
     ], ReportLine.prototype, "reportLine", void 0);
     return ReportLine;

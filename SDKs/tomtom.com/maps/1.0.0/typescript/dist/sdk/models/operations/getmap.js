@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetMapPathParams = /** @class */ (function (_super) {
     __extends(GetMapPathParams, _super);
     function GetMapPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" }),
         __metadata("design:type", Number)
     ], GetMapPathParams.prototype, "versionNumber", void 0);
     return GetMapPathParams;
@@ -71,43 +71,43 @@ var GetMapQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=bbox" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bbox" }),
         __metadata("design:type", String)
     ], GetMapQueryParams.prototype, "bbox", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetMapQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=height" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=height" }),
         __metadata("design:type", Number)
     ], GetMapQueryParams.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=layers" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=layers" }),
         __metadata("design:type", String)
     ], GetMapQueryParams.prototype, "layers", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=request" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=request" }),
         __metadata("design:type", String)
     ], GetMapQueryParams.prototype, "request", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=service" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=service" }),
         __metadata("design:type", String)
     ], GetMapQueryParams.prototype, "service", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=srs" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=srs" }),
         __metadata("design:type", String)
     ], GetMapQueryParams.prototype, "srs", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=styles" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=styles" }),
         __metadata("design:type", String)
     ], GetMapQueryParams.prototype, "styles", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=version" }),
         __metadata("design:type", String)
     ], GetMapQueryParams.prototype, "version", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=width" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=width" }),
         __metadata("design:type", Number)
     ], GetMapQueryParams.prototype, "width", void 0);
     return GetMapQueryParams;
@@ -119,11 +119,11 @@ var GetMapRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMapPathParams)
     ], GetMapRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMapQueryParams)
     ], GetMapRequest.prototype, "queryParams", void 0);
     return GetMapRequest;
@@ -135,11 +135,11 @@ var GetMapResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetMapResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetMapResponse.prototype, "statusCode", void 0);
     return GetMapResponse;

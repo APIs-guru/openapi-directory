@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TunnelStatusEnum } from "./tunnelstatusenum";
+
 
 
 // TunnelSummary
@@ -7,21 +8,21 @@ import { TunnelStatusEnum } from "./tunnelstatusenum";
  * Information about the tunnel.
 **/
 export class TunnelSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: TunnelStatusEnum;
 
-  @Metadata({ data: "json, name=tunnelArn" })
+  @SpeakeasyMetadata({ data: "json, name=tunnelArn" })
   tunnelArn?: string;
 
-  @Metadata({ data: "json, name=tunnelId" })
+  @SpeakeasyMetadata({ data: "json, name=tunnelId" })
   tunnelId?: string;
 }

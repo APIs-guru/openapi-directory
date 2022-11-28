@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://staging.truanon.com",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetProfile - Get Profile
+// get_profile Private API: Request confirmed profile data for your unique member ID
 func (s *SDK) GetProfile(ctx context.Context, request operations.GetProfileRequest) (*operations.GetProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/get_profile"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -61,7 +84,7 @@ func (s *SDK) GetProfile(ctx context.Context, request operations.GetProfileReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -82,8 +105,16 @@ func (s *SDK) GetProfile(ctx context.Context, request operations.GetProfileReque
 	return res, nil
 }
 
+// GetToken - Get Token
+// request_token Private API: Request a Proof token to let the member confirm in a popup interface
+//
+//	{"id":"qjgblv72bzzio","type":"Proof","active":true,"name":"New Proof"}
+//
+// Step 2. Create a verifyProfile Public Web link: Use the Proof token id as the token argument in your public URL used to open a new target popup. This activity is where members may confirm immediately.
+//
+//	https://staging.truanon.com/verifyProfile?id=john_doe&service=securecannabisalliance&token=qjgblv72bzzio
 func (s *SDK) GetToken(ctx context.Context, request operations.GetTokenRequest) (*operations.GetTokenResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/request_token"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -93,7 +124,7 @@ func (s *SDK) GetToken(ctx context.Context, request operations.GetTokenRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

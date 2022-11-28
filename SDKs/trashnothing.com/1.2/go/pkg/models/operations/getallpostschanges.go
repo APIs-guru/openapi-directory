@@ -12,27 +12,10 @@ type GetAllPostsChangesQueryParams struct {
 	PerPage *int64    `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type GetAllPostsChangesSecurityOption1 struct {
-	Oauth2Implicit shared.SchemeOauth2Implicit `security:"scheme,type=oauth2"`
-}
-
-type GetAllPostsChangesSecurityOption2 struct {
-	Oauth2Code shared.SchemeOauth2Code `security:"scheme,type=oauth2"`
-}
-
-type GetAllPostsChangesSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
-}
-
 type GetAllPostsChangesSecurity struct {
-	Option1 *GetAllPostsChangesSecurityOption1 `security:"option"`
-	Option2 *GetAllPostsChangesSecurityOption2 `security:"option"`
-	Option3 *GetAllPostsChangesSecurityOption3 `security:"option"`
-}
-
-type GetAllPostsChangesRequest struct {
-	QueryParams GetAllPostsChangesQueryParams
-	Security    GetAllPostsChangesSecurity
+	Oauth2Implicit *shared.SchemeOauth2Implicit `security:"scheme,type=oauth2"`
+	Oauth2Code     *shared.SchemeOauth2Code     `security:"scheme,type=oauth2"`
+	APIKey         *shared.SchemeAPIKey         `security:"scheme,type=apiKey,subtype=query"`
 }
 
 type GetAllPostsChanges200ApplicationJSONChanges struct {
@@ -43,6 +26,11 @@ type GetAllPostsChanges200ApplicationJSONChanges struct {
 
 type GetAllPostsChanges200ApplicationJSON struct {
 	Changes []GetAllPostsChanges200ApplicationJSONChanges `json:"changes,omitempty"`
+}
+
+type GetAllPostsChangesRequest struct {
+	QueryParams GetAllPostsChangesQueryParams
+	Security    GetAllPostsChangesSecurity
 }
 
 type GetAllPostsChangesResponse struct {

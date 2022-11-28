@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var LocaleGetCurrenciesSecurity = /** @class */ (function (_super) {
     __extends(LocaleGetCurrenciesSecurity, _super);
@@ -30,11 +30,11 @@ var LocaleGetCurrenciesSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeJwt)
     ], LocaleGetCurrenciesSecurity.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], LocaleGetCurrenciesSecurity.prototype, "project", void 0);
     return LocaleGetCurrenciesSecurity;
@@ -46,7 +46,7 @@ var LocaleGetCurrenciesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LocaleGetCurrenciesSecurity)
     ], LocaleGetCurrenciesRequest.prototype, "security", void 0);
     return LocaleGetCurrenciesRequest;
@@ -58,15 +58,15 @@ var LocaleGetCurrenciesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], LocaleGetCurrenciesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], LocaleGetCurrenciesResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CurrencyList)
     ], LocaleGetCurrenciesResponse.prototype, "currencyList", void 0);
     return LocaleGetCurrenciesResponse;

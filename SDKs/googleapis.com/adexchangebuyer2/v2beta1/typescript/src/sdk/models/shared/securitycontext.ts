@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SecurityContextSecuritiesEnum {
-    Insecure = "INSECURE"
-,    Ssl = "SSL"
+    Insecure = "INSECURE",
+    Ssl = "SSL"
 }
 
 
@@ -11,6 +12,6 @@ export enum SecurityContextSecuritiesEnum {
  * Output only. A security context.
 **/
 export class SecurityContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=securities" })
+  @SpeakeasyMetadata({ data: "json, name=securities" })
   securities?: SecurityContextSecuritiesEnum[];
 }

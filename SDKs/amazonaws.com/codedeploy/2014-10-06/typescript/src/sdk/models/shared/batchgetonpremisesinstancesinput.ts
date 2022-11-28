@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchGetOnPremisesInstancesInput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input of a <code>BatchGetOnPremisesInstances</code> operation.
 **/
 export class BatchGetOnPremisesInstancesInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceNames" })
+  @SpeakeasyMetadata({ data: "json, name=instanceNames" })
   instanceNames: string[];
 }

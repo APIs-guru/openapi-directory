@@ -7,6 +7,8 @@ const (
 	IntegratorCardPayloadResponseResponseVersionEnumV3 IntegratorCardPayloadResponseResponseVersionEnum = "v3"
 )
 
+// IntegratorCardPayloadResponse
+// The card details payload, sent to HubSpot by an app in response to a data fetch request when a user visits a CRM record page.
 type IntegratorCardPayloadResponse struct {
 	AllItemsLinkURL *string                                           `json:"allItemsLinkUrl,omitempty"`
 	CardLabel       *string                                           `json:"cardLabel,omitempty"`

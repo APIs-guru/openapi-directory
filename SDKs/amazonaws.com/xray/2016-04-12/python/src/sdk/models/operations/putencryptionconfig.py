@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -22,21 +27,21 @@ class PutEncryptionConfigRequestBodyTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PutEncryptionConfigRequestBody:
-    key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KeyId' }})
-    type: PutEncryptionConfigRequestBodyTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    type: PutEncryptionConfigRequestBodyTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('KeyId') }})
     
 
 @dataclass
 class PutEncryptionConfigRequest:
-    headers: PutEncryptionConfigHeaders = field(default=None)
-    request: PutEncryptionConfigRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutEncryptionConfigHeaders = field()
+    request: PutEncryptionConfigRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutEncryptionConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_request_exception: Optional[Any] = field(default=None)
     put_encryption_config_result: Optional[shared.PutEncryptionConfigResult] = field(default=None)
-    status_code: int = field(default=None)
     throttled_exception: Optional[Any] = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StopConfigurationRecorderRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The input for the <a>StopConfigurationRecorder</a> action.
 **/
 export class StopConfigurationRecorderRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigurationRecorderName" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationRecorderName" })
   configurationRecorderName: string;
 }

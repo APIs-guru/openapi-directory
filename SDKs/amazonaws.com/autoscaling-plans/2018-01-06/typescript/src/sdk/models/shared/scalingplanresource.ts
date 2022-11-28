@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScalableDimensionEnum } from "./scalabledimensionenum";
 import { ScalingPolicy } from "./scalingpolicy";
 import { ScalingStatusCodeEnum } from "./scalingstatuscodeenum";
 import { ServiceNamespaceEnum } from "./servicenamespaceenum";
+
 
 
 // ScalingPlanResource
@@ -11,27 +11,27 @@ import { ServiceNamespaceEnum } from "./servicenamespaceenum";
  * Represents a scalable resource.
 **/
 export class ScalingPlanResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId" })
   resourceId: string;
 
-  @Metadata({ data: "json, name=ScalableDimension" })
+  @SpeakeasyMetadata({ data: "json, name=ScalableDimension" })
   scalableDimension: ScalableDimensionEnum;
 
-  @Metadata({ data: "json, name=ScalingPlanName" })
+  @SpeakeasyMetadata({ data: "json, name=ScalingPlanName" })
   scalingPlanName: string;
 
-  @Metadata({ data: "json, name=ScalingPlanVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ScalingPlanVersion" })
   scalingPlanVersion: number;
 
-  @Metadata({ data: "json, name=ScalingPolicies", elemType: shared.ScalingPolicy })
+  @SpeakeasyMetadata({ data: "json, name=ScalingPolicies", elemType: ScalingPolicy })
   scalingPolicies?: ScalingPolicy[];
 
-  @Metadata({ data: "json, name=ScalingStatusCode" })
+  @SpeakeasyMetadata({ data: "json, name=ScalingStatusCode" })
   scalingStatusCode: ScalingStatusCodeEnum;
 
-  @Metadata({ data: "json, name=ScalingStatusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ScalingStatusMessage" })
   scalingStatusMessage?: string;
 
-  @Metadata({ data: "json, name=ServiceNamespace" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceNamespace" })
   serviceNamespace: ServiceNamespaceEnum;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResolverQueryLogConfigAssociation } from "./resolverquerylogconfigassociation";
 var GetResolverQueryLogConfigAssociationResponse = /** @class */ (function (_super) {
     __extends(GetResolverQueryLogConfigAssociationResponse, _super);
@@ -30,7 +30,7 @@ var GetResolverQueryLogConfigAssociationResponse = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ResolverQueryLogConfigAssociation" }),
+        SpeakeasyMetadata({ data: "json, name=ResolverQueryLogConfigAssociation" }),
         __metadata("design:type", ResolverQueryLogConfigAssociation)
     ], GetResolverQueryLogConfigAssociationResponse.prototype, "resolverQueryLogConfigAssociation", void 0);
     return GetResolverQueryLogConfigAssociationResponse;

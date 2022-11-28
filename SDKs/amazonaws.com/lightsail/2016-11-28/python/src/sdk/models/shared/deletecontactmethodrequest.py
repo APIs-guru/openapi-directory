@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import contactprotocol_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteContactMethodRequest:
-    protocol: contactprotocol_enum.ContactProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
+    protocol: ContactProtocolEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('protocol') }})
     

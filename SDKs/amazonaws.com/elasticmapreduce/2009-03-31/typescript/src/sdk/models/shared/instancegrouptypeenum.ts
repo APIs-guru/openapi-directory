@@ -1,7 +1,8 @@
 
 
+
 export enum InstanceGroupTypeEnum {
-    Master = "MASTER"
-,    Core = "CORE"
-,    Task = "TASK"
+    Master = "MASTER",
+    Core = "CORE",
+    Task = "TASK"
 }

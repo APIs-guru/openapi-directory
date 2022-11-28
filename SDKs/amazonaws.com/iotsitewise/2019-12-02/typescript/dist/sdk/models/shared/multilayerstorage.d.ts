@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CustomerManagedS3Storage } from "./customermanageds3storage";
 /**
  * Contains information about the storage destination.

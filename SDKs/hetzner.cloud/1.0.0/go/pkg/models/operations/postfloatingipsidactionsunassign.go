@@ -4,10 +4,8 @@ type PostFloatingIpsIDActionsUnassignPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostFloatingIpsIDActionsUnassignRequest struct {
-	PathParams PostFloatingIpsIDActionsUnassignPathParams
-}
-
+// PostFloatingIpsIDActionsUnassignActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostFloatingIpsIDActionsUnassignActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -39,6 +37,10 @@ type PostFloatingIpsIDActionsUnassignActionResponseAction struct {
 
 type PostFloatingIpsIDActionsUnassignActionResponse struct {
 	Action PostFloatingIpsIDActionsUnassignActionResponseAction `json:"action"`
+}
+
+type PostFloatingIpsIDActionsUnassignRequest struct {
+	PathParams PostFloatingIpsIDActionsUnassignPathParams
 }
 
 type PostFloatingIpsIDActionsUnassignResponse struct {

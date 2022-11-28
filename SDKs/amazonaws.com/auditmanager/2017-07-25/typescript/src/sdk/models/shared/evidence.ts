@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Resource } from "./resource";
+
 
 
 // Evidence
@@ -8,48 +8,48 @@ import { Resource } from "./resource";
  *  A record that contains the information needed to demonstrate compliance with the requirements specified by a control. Examples of evidence include change activity triggered by a user, or a system configuration snapshot. 
 **/
 export class Evidence extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assessmentReportSelection" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentReportSelection" })
   assessmentReportSelection?: string;
 
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=awsAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=awsAccountId" })
   awsAccountId?: string;
 
-  @Metadata({ data: "json, name=awsOrganization" })
+  @SpeakeasyMetadata({ data: "json, name=awsOrganization" })
   awsOrganization?: string;
 
-  @Metadata({ data: "json, name=complianceCheck" })
+  @SpeakeasyMetadata({ data: "json, name=complianceCheck" })
   complianceCheck?: string;
 
-  @Metadata({ data: "json, name=dataSource" })
+  @SpeakeasyMetadata({ data: "json, name=dataSource" })
   dataSource?: string;
 
-  @Metadata({ data: "json, name=eventName" })
+  @SpeakeasyMetadata({ data: "json, name=eventName" })
   eventName?: string;
 
-  @Metadata({ data: "json, name=eventSource" })
+  @SpeakeasyMetadata({ data: "json, name=eventSource" })
   eventSource?: string;
 
-  @Metadata({ data: "json, name=evidenceAwsAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=evidenceAwsAccountId" })
   evidenceAwsAccountId?: string;
 
-  @Metadata({ data: "json, name=evidenceByType" })
+  @SpeakeasyMetadata({ data: "json, name=evidenceByType" })
   evidenceByType?: string;
 
-  @Metadata({ data: "json, name=evidenceFolderId" })
+  @SpeakeasyMetadata({ data: "json, name=evidenceFolderId" })
   evidenceFolderId?: string;
 
-  @Metadata({ data: "json, name=iamId" })
+  @SpeakeasyMetadata({ data: "json, name=iamId" })
   iamId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=resourcesIncluded", elemType: shared.Resource })
+  @SpeakeasyMetadata({ data: "json, name=resourcesIncluded", elemType: Resource })
   resourcesIncluded?: Resource[];
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: Date;
 }

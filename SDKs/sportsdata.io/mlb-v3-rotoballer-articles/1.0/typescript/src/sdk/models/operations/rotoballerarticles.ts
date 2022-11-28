@@ -1,30 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum RotoballerArticlesFormatEnum {
-    Xml = "xml"
-,    Json = "json"
+    Xml = "xml",
+    Json = "json"
 }
 
 
 export class RotoballerArticlesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: RotoballerArticlesFormatEnum;
 }
 
 
 export class RotoballerArticlesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RotoballerArticlesPathParams;
 }
 
 
 export class RotoballerArticlesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   articles?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

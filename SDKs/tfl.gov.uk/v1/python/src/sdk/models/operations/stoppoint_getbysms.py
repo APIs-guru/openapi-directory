@@ -4,7 +4,7 @@ from typing import Any,Optional
 
 @dataclass
 class StopPointGetBySmsPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,14 +14,14 @@ class StopPointGetBySmsQueryParams:
 
 @dataclass
 class StopPointGetBySmsRequest:
-    path_params: StopPointGetBySmsPathParams = field(default=None)
-    query_params: StopPointGetBySmsQueryParams = field(default=None)
+    path_params: StopPointGetBySmsPathParams = field()
+    query_params: StopPointGetBySmsQueryParams = field()
     
 
 @dataclass
 class StopPointGetBySmsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     system_object: Optional[dict[str, Any]] = field(default=None)
     

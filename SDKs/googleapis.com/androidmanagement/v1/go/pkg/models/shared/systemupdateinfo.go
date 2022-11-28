@@ -10,6 +10,8 @@ const (
 	SystemUpdateInfoUpdateStatusEnumOsUpdateAvailable       SystemUpdateInfoUpdateStatusEnum = "OS_UPDATE_AVAILABLE"
 )
 
+// SystemUpdateInfo
+// Information about a potential pending system update.
 type SystemUpdateInfo struct {
 	UpdateReceivedTime *string                           `json:"updateReceivedTime,omitempty"`
 	UpdateStatus       *SystemUpdateInfoUpdateStatusEnum `json:"updateStatus,omitempty"`

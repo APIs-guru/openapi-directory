@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetProblemEventPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetProblemEventQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=time" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=time" })
   time?: number;
 }
 
 
 export class GetProblemEventSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKeyAuth: shared.SchemeApiKeyAuth;
 }
 
 
 export class GetProblemEventRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetProblemEventPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetProblemEventQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetProblemEventSecurity;
 }
 
 
 export class GetProblemEventResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiError?: shared.ApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemEvent?: shared.ProblemEvent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

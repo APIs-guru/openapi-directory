@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NavigationInfo
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information of navigation behavior.
 **/
 export class NavigationInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableForcedRedirect" })
+  @SpeakeasyMetadata({ data: "json, name=enableForcedRedirect" })
   enableForcedRedirect?: boolean;
 }

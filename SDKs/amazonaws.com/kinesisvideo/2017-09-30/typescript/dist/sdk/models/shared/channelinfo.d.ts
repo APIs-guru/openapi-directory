@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { StatusEnum } from "./statusenum";
 import { ChannelTypeEnum } from "./channeltypeenum";
 import { SingleMasterConfiguration } from "./singlemasterconfiguration";

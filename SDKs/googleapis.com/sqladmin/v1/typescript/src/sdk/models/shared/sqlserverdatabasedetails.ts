@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SqlServerDatabaseDetails
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a Sql Server database on the Cloud SQL instance.
 **/
 export class SqlServerDatabaseDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compatibilityLevel" })
+  @SpeakeasyMetadata({ data: "json, name=compatibilityLevel" })
   compatibilityLevel?: number;
 
-  @Metadata({ data: "json, name=recoveryModel" })
+  @SpeakeasyMetadata({ data: "json, name=recoveryModel" })
   recoveryModel?: string;
 }

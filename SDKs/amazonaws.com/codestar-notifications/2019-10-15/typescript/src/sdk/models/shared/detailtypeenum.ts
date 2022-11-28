@@ -1,6 +1,7 @@
 
 
+
 export enum DetailTypeEnum {
-    Basic = "BASIC"
-,    Full = "FULL"
+    Basic = "BASIC",
+    Full = "FULL"
 }

@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetGuideInfoSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetGuideInfoRequest:
-    security: GetGuideInfoSecurity = field(default=None)
+    security: GetGuideInfoSecurity = field()
     
 
 @dataclass
 class GetGuideInfoResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     guide_info: Optional[shared.GuideInfo] = field(default=None)
-    status_code: int = field(default=None)
     

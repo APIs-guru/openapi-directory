@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ConnectorsProjectsLocationsConnectionsExecuteSQLQueryPathParams:
-    connection: str = field(default=None, metadata={'path_param': { 'field_name': 'connection', 'style': 'simple', 'explode': False }})
+    connection: str = field(metadata={'path_param': { 'field_name': 'connection', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ConnectorsProjectsLocationsConnectionsExecuteSQLQueryQueryParams:
 
 @dataclass
 class ConnectorsProjectsLocationsConnectionsExecuteSQLQuerySecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ConnectorsProjectsLocationsConnectionsExecuteSQLQueryRequest:
-    path_params: ConnectorsProjectsLocationsConnectionsExecuteSQLQueryPathParams = field(default=None)
-    query_params: ConnectorsProjectsLocationsConnectionsExecuteSQLQueryQueryParams = field(default=None)
+    path_params: ConnectorsProjectsLocationsConnectionsExecuteSQLQueryPathParams = field()
+    query_params: ConnectorsProjectsLocationsConnectionsExecuteSQLQueryQueryParams = field()
+    security: ConnectorsProjectsLocationsConnectionsExecuteSQLQuerySecurity = field()
     request: Optional[shared.ExecuteSQLQueryRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ConnectorsProjectsLocationsConnectionsExecuteSQLQuerySecurity = field(default=None)
     
 
 @dataclass
 class ConnectorsProjectsLocationsConnectionsExecuteSQLQueryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     execute_sql_query_response: Optional[shared.ExecuteSQLQueryResponse] = field(default=None)
-    status_code: int = field(default=None)
     

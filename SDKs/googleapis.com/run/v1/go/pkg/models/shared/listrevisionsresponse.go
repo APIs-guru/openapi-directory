@@ -1,5 +1,7 @@
 package shared
 
+// ListRevisionsResponse
+// ListRevisionsResponse is a list of Revision resources.
 type ListRevisionsResponse struct {
 	APIVersion  *string    `json:"apiVersion,omitempty"`
 	Items       []Revision `json:"items,omitempty"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ConfigurationRecorderStatus
+// The current status of the configuration recorder.
 type ConfigurationRecorderStatus struct {
 	LastErrorCode        *string             `json:"lastErrorCode,omitempty"`
 	LastErrorMessage     *string             `json:"lastErrorMessage,omitempty"`

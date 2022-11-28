@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AccountIdentifier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregatorId" })
+  @SpeakeasyMetadata({ data: "json, name=aggregatorId" })
   aggregatorId?: string;
 
-  @Metadata({ data: "json, name=merchantId" })
+  @SpeakeasyMetadata({ data: "json, name=merchantId" })
   merchantId?: string;
 }

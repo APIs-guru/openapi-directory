@@ -1,6 +1,8 @@
 package shared
 
-type SubmitJobRequest struct {
-	Job       *Job    `json:"job,omitempty"`
-	RequestID *string `json:"requestId,omitempty"`
+// SubmitJobRequestInput
+// A request to submit a job.
+type SubmitJobRequestInput struct {
+	Job       *JobInput `json:"job,omitempty"`
+	RequestID *string   `json:"requestId,omitempty"`
 }

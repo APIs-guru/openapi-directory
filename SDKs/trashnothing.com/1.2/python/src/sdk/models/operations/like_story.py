@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class LikeStoryPathParams:
-    story_id: str = field(default=None, metadata={'path_param': { 'field_name': 'story_id', 'style': 'simple', 'explode': False }})
+    story_id: str = field(metadata={'path_param': { 'field_name': 'story_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class LikeStoryQueryParams:
 
 @dataclass
 class LikeStoryRequest:
-    path_params: LikeStoryPathParams = field(default=None)
-    query_params: LikeStoryQueryParams = field(default=None)
+    path_params: LikeStoryPathParams = field()
+    query_params: LikeStoryQueryParams = field()
     
 
 @dataclass
 class LikeStoryResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     story: Optional[shared.Story] = field(default=None)
     

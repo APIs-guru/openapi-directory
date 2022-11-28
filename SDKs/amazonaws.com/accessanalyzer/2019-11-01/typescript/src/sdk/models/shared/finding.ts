@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceTypeEnum } from "./resourcetypeenum";
 import { FindingSource } from "./findingsource";
 import { FindingStatusEnum } from "./findingstatusenum";
+
 
 
 // Finding
@@ -10,45 +10,45 @@ import { FindingStatusEnum } from "./findingstatusenum";
  * Contains information about a finding.
 **/
 export class Finding extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: string[];
 
-  @Metadata({ data: "json, name=analyzedAt" })
+  @SpeakeasyMetadata({ data: "json, name=analyzedAt" })
   analyzedAt: Date;
 
-  @Metadata({ data: "json, name=condition" })
+  @SpeakeasyMetadata({ data: "json, name=condition" })
   condition: Map<string, string>;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=isPublic" })
+  @SpeakeasyMetadata({ data: "json, name=isPublic" })
   isPublic?: boolean;
 
-  @Metadata({ data: "json, name=principal" })
+  @SpeakeasyMetadata({ data: "json, name=principal" })
   principal?: Map<string, string>;
 
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource?: string;
 
-  @Metadata({ data: "json, name=resourceOwnerAccount" })
+  @SpeakeasyMetadata({ data: "json, name=resourceOwnerAccount" })
   resourceOwnerAccount: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType: ResourceTypeEnum;
 
-  @Metadata({ data: "json, name=sources", elemType: shared.FindingSource })
+  @SpeakeasyMetadata({ data: "json, name=sources", elemType: FindingSource })
   sources?: FindingSource[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: FindingStatusEnum;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt: Date;
 }

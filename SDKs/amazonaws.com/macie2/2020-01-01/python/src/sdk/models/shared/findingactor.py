@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import domaindetails
-from . import ipaddressdetails
-from . import useridentity
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FindingActor:
-    domain_details: Optional[domaindetails.DomainDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domainDetails' }})
-    ip_address_details: Optional[ipaddressdetails.IPAddressDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipAddressDetails' }})
-    user_identity: Optional[useridentity.UserIdentity] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userIdentity' }})
+    r"""FindingActor
+    Provides information about an entity that performed an action that produced a policy finding for a resource.
+    """
+    
+    domain_details: Optional[DomainDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('domainDetails') }})
+    ip_address_details: Optional[IPAddressDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipAddressDetails') }})
+    user_identity: Optional[UserIdentity] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('userIdentity') }})
     

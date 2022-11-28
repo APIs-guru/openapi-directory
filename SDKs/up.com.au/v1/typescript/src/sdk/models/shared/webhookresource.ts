@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class WebhookResourceAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=secretKey" })
+  @SpeakeasyMetadata({ data: "json, name=secretKey" })
   secretKey?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }
 
 
 export class WebhookResourceLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self: string;
 }
 
 
 export class WebhookResourceRelationshipsLogsLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=related" })
+  @SpeakeasyMetadata({ data: "json, name=related" })
   related: string;
 }
 
 
 export class WebhookResourceRelationshipsLogs extends SpeakeasyBase {
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: WebhookResourceRelationshipsLogsLinks;
 }
 
 
 export class WebhookResourceRelationships extends SpeakeasyBase {
-  @Metadata({ data: "json, name=logs" })
+  @SpeakeasyMetadata({ data: "json, name=logs" })
   logs: WebhookResourceRelationshipsLogs;
 }
 
@@ -46,18 +47,18 @@ export class WebhookResourceRelationships extends SpeakeasyBase {
  * 
 **/
 export class WebhookResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes: WebhookResourceAttributes;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: WebhookResourceLinks;
 
-  @Metadata({ data: "json, name=relationships" })
+  @SpeakeasyMetadata({ data: "json, name=relationships" })
   relationships: WebhookResourceRelationships;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

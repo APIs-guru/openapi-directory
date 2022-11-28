@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var InviteMemberPathParams = /** @class */ (function (_super) {
     __extends(InviteMemberPathParams, _super);
@@ -30,7 +30,7 @@ var InviteMemberPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=productId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=productId" }),
         __metadata("design:type", String)
     ], InviteMemberPathParams.prototype, "productId", void 0);
     return InviteMemberPathParams;
@@ -42,15 +42,15 @@ var InviteMemberRequests = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/*+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/*+json" }),
         __metadata("design:type", shared.InviteMembersRequest)
     ], InviteMemberRequests.prototype, "inviteMembersRequest", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.InviteMembersRequest)
     ], InviteMemberRequests.prototype, "inviteMembersRequest1", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/json" }),
         __metadata("design:type", shared.InviteMembersRequest)
     ], InviteMemberRequests.prototype, "inviteMembersRequest2", void 0);
     return InviteMemberRequests;
@@ -62,11 +62,11 @@ var InviteMemberRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", InviteMemberPathParams)
     ], InviteMemberRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", InviteMemberRequests)
     ], InviteMemberRequest.prototype, "request", void 0);
     return InviteMemberRequest;
@@ -78,11 +78,11 @@ var InviteMemberResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], InviteMemberResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], InviteMemberResponse.prototype, "statusCode", void 0);
     return InviteMemberResponse;

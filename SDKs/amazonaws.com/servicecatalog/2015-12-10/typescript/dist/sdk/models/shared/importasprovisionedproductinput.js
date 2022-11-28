@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ImportAsProvisionedProductInput = /** @class */ (function (_super) {
     __extends(ImportAsProvisionedProductInput, _super);
     function ImportAsProvisionedProductInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], ImportAsProvisionedProductInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=IdempotencyToken" }),
+        SpeakeasyMetadata({ data: "json, name=IdempotencyToken" }),
         __metadata("design:type", String)
     ], ImportAsProvisionedProductInput.prototype, "idempotencyToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=PhysicalId" }),
+        SpeakeasyMetadata({ data: "json, name=PhysicalId" }),
         __metadata("design:type", String)
     ], ImportAsProvisionedProductInput.prototype, "physicalId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProductId" }),
+        SpeakeasyMetadata({ data: "json, name=ProductId" }),
         __metadata("design:type", String)
     ], ImportAsProvisionedProductInput.prototype, "productId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisionedProductName" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisionedProductName" }),
         __metadata("design:type", String)
     ], ImportAsProvisionedProductInput.prototype, "provisionedProductName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisioningArtifactId" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactId" }),
         __metadata("design:type", String)
     ], ImportAsProvisionedProductInput.prototype, "provisioningArtifactId", void 0);
     return ImportAsProvisionedProductInput;

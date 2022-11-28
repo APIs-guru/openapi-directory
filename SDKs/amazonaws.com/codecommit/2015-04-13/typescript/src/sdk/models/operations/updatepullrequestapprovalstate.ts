@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum UpdatePullRequestApprovalStateXAmzTargetEnum {
     CodeCommit20150413UpdatePullRequestApprovalState = "CodeCommit_20150413.UpdatePullRequestApprovalState"
@@ -7,93 +8,93 @@ export enum UpdatePullRequestApprovalStateXAmzTargetEnum {
 
 
 export class UpdatePullRequestApprovalStateHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: UpdatePullRequestApprovalStateXAmzTargetEnum;
 }
 
 
 export class UpdatePullRequestApprovalStateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdatePullRequestApprovalStateHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.UpdatePullRequestApprovalStateInput;
 }
 
 
 export class UpdatePullRequestApprovalStateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   approvalStateRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionIntegrityChecksFailedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyAccessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyDisabledException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidApprovalStateException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidPullRequestIdException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRevisionIdException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   maximumNumberOfApprovalsExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullRequestAlreadyClosedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullRequestCannotBeApprovedByAuthorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullRequestDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullRequestIdRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   revisionIdRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   revisionNotCurrentException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

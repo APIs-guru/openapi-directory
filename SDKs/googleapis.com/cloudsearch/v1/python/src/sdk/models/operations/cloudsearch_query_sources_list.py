@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -25,14 +26,14 @@ class CloudsearchQuerySourcesListQueryParams:
 
 @dataclass
 class CloudsearchQuerySourcesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudsearchQuerySourcesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,13 +44,13 @@ class CloudsearchQuerySourcesListSecurity:
 
 @dataclass
 class CloudsearchQuerySourcesListRequest:
-    query_params: CloudsearchQuerySourcesListQueryParams = field(default=None)
-    security: CloudsearchQuerySourcesListSecurity = field(default=None)
+    query_params: CloudsearchQuerySourcesListQueryParams = field()
+    security: CloudsearchQuerySourcesListSecurity = field()
     
 
 @dataclass
 class CloudsearchQuerySourcesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_query_sources_response: Optional[shared.ListQuerySourcesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

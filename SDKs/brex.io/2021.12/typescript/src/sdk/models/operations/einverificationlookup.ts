@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EinVerificationLookupQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tight" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tight" })
   tight?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=zip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=zip" })
   zip?: string;
 }
 
 
 export class EinVerificationLookupSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   userKey: shared.SchemeUserKey;
 }
 
 
 export class EinVerificationLookupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: EinVerificationLookupQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: EinVerificationLookupSecurity;
 }
 
 
 export class EinVerificationLookupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   einVerificationLookup200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   einVerificationLookupDefaultApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

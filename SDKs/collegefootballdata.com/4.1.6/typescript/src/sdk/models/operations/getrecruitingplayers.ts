@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetRecruitingPlayersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=classification" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=classification" })
   classification?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=position" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=position" })
   position?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=team" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" })
   team?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=year" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" })
   year?: number;
 }
 
 
 export class GetRecruitingPlayersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetRecruitingPlayersQueryParams;
 }
 
 
 export class GetRecruitingPlayersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.Recruit })
+  @SpeakeasyMetadata({ elemType: shared.Recruit })
   recruits?: shared.Recruit[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

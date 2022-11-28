@@ -1,11 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import categoryresource
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListCategoriesResponse:
-    data: List[categoryresource.CategoryResource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    r"""ListCategoriesResponse
+    Successful response to get all categories and their ancestry. The
+    returned list is not paginated.
+    
+    """
+    
+    data: List[CategoryResource] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
     

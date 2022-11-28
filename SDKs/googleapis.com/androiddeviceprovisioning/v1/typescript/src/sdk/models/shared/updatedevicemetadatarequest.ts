@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceMetadata } from "./devicemetadata";
+
 
 
 // UpdateDeviceMetadataRequest
@@ -7,6 +8,6 @@ import { DeviceMetadata } from "./devicemetadata";
  * Request to set metadata for a device.
 **/
 export class UpdateDeviceMetadataRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=deviceMetadata" })
   deviceMetadata?: DeviceMetadata;
 }

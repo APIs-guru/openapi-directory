@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GroupResult } from "./groupresult";
 // GroupAssetsResponse
 /**
  * Response message for grouping by assets.
@@ -34,15 +34,15 @@ var GroupAssetsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=groupByResults", elemType: shared.GroupResult }),
+        SpeakeasyMetadata({ data: "json, name=groupByResults", elemType: GroupResult }),
         __metadata("design:type", Array)
     ], GroupAssetsResponse.prototype, "groupByResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], GroupAssetsResponse.prototype, "nextPageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=readTime" }),
+        SpeakeasyMetadata({ data: "json, name=readTime" }),
         __metadata("design:type", String)
     ], GroupAssetsResponse.prototype, "readTime", void 0);
     return GroupAssetsResponse;

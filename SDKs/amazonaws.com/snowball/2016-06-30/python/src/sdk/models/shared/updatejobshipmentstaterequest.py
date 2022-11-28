@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import shipmentstate_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateJobShipmentStateRequest:
-    job_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'JobId' }})
-    shipment_state: shipmentstate_enum.ShipmentStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ShipmentState' }})
+    job_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('JobId') }})
+    shipment_state: ShipmentStateEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ShipmentState') }})
     

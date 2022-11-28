@@ -1,6 +1,7 @@
 
 
+
 export enum NotebookInstanceLifecycleConfigSortOrderEnum {
-    Ascending = "Ascending"
-,    Descending = "Descending"
+    Ascending = "Ascending",
+    Descending = "Descending"
 }

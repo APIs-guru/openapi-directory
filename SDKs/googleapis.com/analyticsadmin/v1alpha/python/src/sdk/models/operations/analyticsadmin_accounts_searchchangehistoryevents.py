@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsadminAccountsSearchChangeHistoryEventsPathParams:
-    account: str = field(default=None, metadata={'path_param': { 'field_name': 'account', 'style': 'simple', 'explode': False }})
+    account: str = field(metadata={'path_param': { 'field_name': 'account', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class AnalyticsadminAccountsSearchChangeHistoryEventsQueryParams:
 
 @dataclass
 class AnalyticsadminAccountsSearchChangeHistoryEventsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminAccountsSearchChangeHistoryEventsRequest:
-    path_params: AnalyticsadminAccountsSearchChangeHistoryEventsPathParams = field(default=None)
-    query_params: AnalyticsadminAccountsSearchChangeHistoryEventsQueryParams = field(default=None)
+    path_params: AnalyticsadminAccountsSearchChangeHistoryEventsPathParams = field()
+    query_params: AnalyticsadminAccountsSearchChangeHistoryEventsQueryParams = field()
+    security: AnalyticsadminAccountsSearchChangeHistoryEventsSecurity = field()
     request: Optional[shared.GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsadminAccountsSearchChangeHistoryEventsSecurity = field(default=None)
     
 
 @dataclass
 class AnalyticsadminAccountsSearchChangeHistoryEventsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_search_change_history_events_response: Optional[shared.GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

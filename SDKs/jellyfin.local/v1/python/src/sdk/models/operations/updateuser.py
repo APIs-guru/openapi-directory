@@ -1,35 +1,38 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateUserPathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
-class UpdateUserRequests:
-    user_dto: Optional[shared.UserDto] = field(default=None, metadata={'request': { 'media_type': 'application/*+json' }})
-    user_dto1: Optional[shared.UserDto] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    user_dto2: Optional[shared.UserDto] = field(default=None, metadata={'request': { 'media_type': 'text/json' }})
+class UpdateUserRequestsInput:
+    user_dto: Optional[shared.UserDtoInput] = field(default=None, metadata={'request': { 'media_type': 'application/*+json' }})
+    user_dto1: Optional[shared.UserDtoInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    user_dto2: Optional[shared.UserDtoInput] = field(default=None, metadata={'request': { 'media_type': 'text/json' }})
     
 
 @dataclass
 class UpdateUserSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class UpdateUserRequest:
-    path_params: UpdateUserPathParams = field(default=None)
-    request: UpdateUserRequests = field(default=None)
-    security: UpdateUserSecurity = field(default=None)
+    path_params: UpdateUserPathParams = field()
+    request: UpdateUserRequestsInput = field()
+    security: UpdateUserSecurity = field()
     
 
 @dataclass
 class UpdateUserResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

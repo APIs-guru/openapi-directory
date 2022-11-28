@@ -14,23 +14,9 @@ type UpdateMessengerAccountRequestBody struct {
 	Name         *string  `json:"name,omitempty"`
 }
 
-type UpdateMessengerAccountSecurityOption1 struct {
-	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
-}
-
-type UpdateMessengerAccountSecurityOption2 struct {
-	BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
-}
-
 type UpdateMessengerAccountSecurity struct {
-	Option1 *UpdateMessengerAccountSecurityOption1 `security:"option"`
-	Option2 *UpdateMessengerAccountSecurityOption2 `security:"option"`
-}
-
-type UpdateMessengerAccountRequest struct {
-	PathParams UpdateMessengerAccountPathParams
-	Request    UpdateMessengerAccountRequestBody `request:"mediaType=application/json"`
-	Security   UpdateMessengerAccountSecurity
+	BearerAuth *shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
+	BasicAuth  *shared.SchemeBasicAuth  `security:"scheme,type=http,subtype=basic"`
 }
 
 type UpdateMessengerAccount200ApplicationJSON struct {
@@ -53,6 +39,12 @@ type UpdateMessengerAccount400ApplicationJSON struct {
 	InvalidParams []UpdateMessengerAccount400ApplicationJSONInvalidParams `json:"invalid_params,omitempty"`
 	Title         *string                                                 `json:"title,omitempty"`
 	Type          *string                                                 `json:"type,omitempty"`
+}
+
+type UpdateMessengerAccountRequest struct {
+	PathParams UpdateMessengerAccountPathParams
+	Request    UpdateMessengerAccountRequestBody `request:"mediaType=application/json"`
+	Security   UpdateMessengerAccountSecurity
 }
 
 type UpdateMessengerAccountResponse struct {

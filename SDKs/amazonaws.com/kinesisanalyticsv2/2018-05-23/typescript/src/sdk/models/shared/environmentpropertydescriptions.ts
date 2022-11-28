@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PropertyGroup } from "./propertygroup";
+
 
 
 // EnvironmentPropertyDescriptions
@@ -8,6 +8,6 @@ import { PropertyGroup } from "./propertygroup";
  * Describes the execution properties for an Apache Flink runtime.
 **/
 export class EnvironmentPropertyDescriptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PropertyGroupDescriptions", elemType: shared.PropertyGroup })
+  @SpeakeasyMetadata({ data: "json, name=PropertyGroupDescriptions", elemType: PropertyGroup })
   propertyGroupDescriptions?: PropertyGroup[];
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3QueryInput } from "./googleclouddialogflowcxv3queryinput";
+
 
 
 // GoogleCloudDialogflowCxV3ConversationTurnUserInput
@@ -7,15 +8,15 @@ import { GoogleCloudDialogflowCxV3QueryInput } from "./googleclouddialogflowcxv3
  * The input from the human user.
 **/
 export class GoogleCloudDialogflowCxV3ConversationTurnUserInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableSentimentAnalysis" })
+  @SpeakeasyMetadata({ data: "json, name=enableSentimentAnalysis" })
   enableSentimentAnalysis?: boolean;
 
-  @Metadata({ data: "json, name=injectedParameters" })
+  @SpeakeasyMetadata({ data: "json, name=injectedParameters" })
   injectedParameters?: Map<string, any>;
 
-  @Metadata({ data: "json, name=input" })
+  @SpeakeasyMetadata({ data: "json, name=input" })
   input?: GoogleCloudDialogflowCxV3QueryInput;
 
-  @Metadata({ data: "json, name=isWebhookEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=isWebhookEnabled" })
   isWebhookEnabled?: boolean;
 }

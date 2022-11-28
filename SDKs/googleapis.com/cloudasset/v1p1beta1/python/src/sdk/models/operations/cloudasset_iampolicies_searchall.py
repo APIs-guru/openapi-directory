@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudassetIamPoliciesSearchAllPathParams:
-    scope: str = field(default=None, metadata={'path_param': { 'field_name': 'scope', 'style': 'simple', 'explode': False }})
+    scope: str = field(metadata={'path_param': { 'field_name': 'scope', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class CloudassetIamPoliciesSearchAllQueryParams:
 
 @dataclass
 class CloudassetIamPoliciesSearchAllSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudassetIamPoliciesSearchAllRequest:
-    path_params: CloudassetIamPoliciesSearchAllPathParams = field(default=None)
-    query_params: CloudassetIamPoliciesSearchAllQueryParams = field(default=None)
-    security: CloudassetIamPoliciesSearchAllSecurity = field(default=None)
+    path_params: CloudassetIamPoliciesSearchAllPathParams = field()
+    query_params: CloudassetIamPoliciesSearchAllQueryParams = field()
+    security: CloudassetIamPoliciesSearchAllSecurity = field()
     
 
 @dataclass
 class CloudassetIamPoliciesSearchAllResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     search_all_iam_policies_response: Optional[shared.SearchAllIamPoliciesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

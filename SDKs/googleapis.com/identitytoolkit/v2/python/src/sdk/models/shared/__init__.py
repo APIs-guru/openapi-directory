@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .googlecloudidentitytoolkitadminv2allowbydefault import *
 from .googlecloudidentitytoolkitadminv2allowlistonly import *
@@ -8,6 +8,7 @@ from .googlecloudidentitytoolkitadminv2clientpermissions import *
 from .googlecloudidentitytoolkitadminv2codeflowconfig import *
 from .googlecloudidentitytoolkitadminv2defaultsupportedidp import *
 from .googlecloudidentitytoolkitadminv2defaultsupportedidpconfig import *
+from .googlecloudidentitytoolkitadminv2emailprivacyconfig import *
 from .googlecloudidentitytoolkitadminv2hashconfig import *
 from .googlecloudidentitytoolkitadminv2idpcertificate import *
 from .googlecloudidentitytoolkitadminv2idpconfig import *

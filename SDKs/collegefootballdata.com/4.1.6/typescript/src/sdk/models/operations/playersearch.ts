@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PlayerSearchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=position" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=position" })
   position?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchTerm" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchTerm" })
   searchTerm: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=team" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" })
   team?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=year" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" })
   year?: number;
 }
 
 
 export class PlayerSearchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PlayerSearchQueryParams;
 }
 
 
 export class PlayerSearchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.PlayerSearchResult })
+  @SpeakeasyMetadata({ elemType: shared.PlayerSearchResult })
   playerSearchResults?: shared.PlayerSearchResult[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

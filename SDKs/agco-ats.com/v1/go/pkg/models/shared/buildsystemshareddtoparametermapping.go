@@ -7,6 +7,8 @@ const (
 	BuildSystemSharedDtoParameterMappingSourceTypeEnumVariable BuildSystemSharedDtoParameterMappingSourceTypeEnum = "Variable"
 )
 
+// BuildSystemSharedDtoParameterMapping
+// A DTO for an IParameterMapping
 type BuildSystemSharedDtoParameterMapping struct {
 	Name       *string                                             `json:"Name,omitempty"`
 	Source     *string                                             `json:"Source,omitempty"`

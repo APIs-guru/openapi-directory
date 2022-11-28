@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MergeConflict } from "./mergeconflict";
 import { Entity } from "./entity";
+
 
 
 // GetWorkspaceStatusResponse
@@ -9,9 +9,9 @@ import { Entity } from "./entity";
  * The changes that have occurred in the workspace since the base container version.
 **/
 export class GetWorkspaceStatusResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mergeConflict", elemType: shared.MergeConflict })
+  @SpeakeasyMetadata({ data: "json, name=mergeConflict", elemType: MergeConflict })
   mergeConflict?: MergeConflict[];
 
-  @Metadata({ data: "json, name=workspaceChange", elemType: shared.Entity })
+  @SpeakeasyMetadata({ data: "json, name=workspaceChange", elemType: Entity })
   workspaceChange?: Entity[];
 }

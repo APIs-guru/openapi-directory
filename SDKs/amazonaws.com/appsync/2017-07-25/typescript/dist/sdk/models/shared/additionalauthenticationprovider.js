@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthenticationTypeEnum } from "./authenticationtypeenum";
 import { LambdaAuthorizerConfig } from "./lambdaauthorizerconfig";
 import { OpenIdConnectConfig } from "./openidconnectconfig";
@@ -37,19 +37,19 @@ var AdditionalAuthenticationProvider = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authenticationType" }),
+        SpeakeasyMetadata({ data: "json, name=authenticationType" }),
         __metadata("design:type", String)
     ], AdditionalAuthenticationProvider.prototype, "authenticationType", void 0);
     __decorate([
-        Metadata({ data: "json, name=lambdaAuthorizerConfig" }),
+        SpeakeasyMetadata({ data: "json, name=lambdaAuthorizerConfig" }),
         __metadata("design:type", LambdaAuthorizerConfig)
     ], AdditionalAuthenticationProvider.prototype, "lambdaAuthorizerConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=openIDConnectConfig" }),
+        SpeakeasyMetadata({ data: "json, name=openIDConnectConfig" }),
         __metadata("design:type", OpenIdConnectConfig)
     ], AdditionalAuthenticationProvider.prototype, "openIdConnectConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=userPoolConfig" }),
+        SpeakeasyMetadata({ data: "json, name=userPoolConfig" }),
         __metadata("design:type", CognitoUserPoolConfig)
     ], AdditionalAuthenticationProvider.prototype, "userPoolConfig", void 0);
     return AdditionalAuthenticationProvider;

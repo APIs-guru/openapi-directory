@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FirstLastNameGenderedOut } from "./firstlastnamegenderedout";
+
 
 
 // BatchFirstLastNameGenderedOut
@@ -8,6 +8,6 @@ import { FirstLastNameGenderedOut } from "./firstlastnamegenderedout";
  * Represents the output of inferring the LIKELY gender from a list of personal names.
 **/
 export class BatchFirstLastNameGenderedOut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=personalNames", elemType: shared.FirstLastNameGenderedOut })
+  @SpeakeasyMetadata({ data: "json, name=personalNames", elemType: FirstLastNameGenderedOut })
   personalNames?: FirstLastNameGenderedOut[];
 }

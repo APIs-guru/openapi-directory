@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * The input properties for an entities detection job. This includes the name of the S3 bucket and the path to the files to be analyzed.
 **/

@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import modificationresourceenum_enum
-from . import modificationstateenum_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ModificationState:
-    resource: Optional[modificationresourceenum_enum.ModificationResourceEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Resource' }})
-    state: Optional[modificationstateenum_enum.ModificationStateEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'State' }})
+    r"""ModificationState
+    Describes a WorkSpace modification.
+    """
+    
+    resource: Optional[ModificationResourceEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Resource') }})
+    state: Optional[ModificationStateEnumEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('State') }})
     

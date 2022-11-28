@@ -1,27 +1,28 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class JoinCommunityConversationPathParams:
-    conv_id: str = field(default=None, metadata={'path_param': { 'field_name': 'convId', 'style': 'simple', 'explode': False }})
+    conv_id: str = field(metadata={'path_param': { 'field_name': 'convId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class JoinCommunityConversationSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class JoinCommunityConversationRequest:
-    path_params: JoinCommunityConversationPathParams = field(default=None)
-    security: JoinCommunityConversationSecurity = field(default=None)
+    path_params: JoinCommunityConversationPathParams = field()
+    security: JoinCommunityConversationSecurity = field()
     
 
 @dataclass
 class JoinCommunityConversationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     conversation: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -8,7 +8,10 @@ const (
 	TimeSeriesTableMetricVisualizationEnumBar                            TimeSeriesTableMetricVisualizationEnum = "BAR"
 )
 
+// TimeSeriesTable
+// A table that displays time series data.
 type TimeSeriesTable struct {
+	ColumnSettings      []ColumnSettings                        `json:"columnSettings,omitempty"`
 	DataSets            []TableDataSet                          `json:"dataSets,omitempty"`
 	MetricVisualization *TimeSeriesTableMetricVisualizationEnum `json:"metricVisualization,omitempty"`
 }

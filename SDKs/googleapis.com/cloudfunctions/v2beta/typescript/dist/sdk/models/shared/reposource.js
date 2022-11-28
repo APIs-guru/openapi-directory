@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RepoSource
 /**
  * Location of the source in a Google Cloud Source Repository.
@@ -33,31 +33,31 @@ var RepoSource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=branchName" }),
+        SpeakeasyMetadata({ data: "json, name=branchName" }),
         __metadata("design:type", String)
     ], RepoSource.prototype, "branchName", void 0);
     __decorate([
-        Metadata({ data: "json, name=commitSha" }),
+        SpeakeasyMetadata({ data: "json, name=commitSha" }),
         __metadata("design:type", String)
     ], RepoSource.prototype, "commitSha", void 0);
     __decorate([
-        Metadata({ data: "json, name=dir" }),
+        SpeakeasyMetadata({ data: "json, name=dir" }),
         __metadata("design:type", String)
     ], RepoSource.prototype, "dir", void 0);
     __decorate([
-        Metadata({ data: "json, name=invertRegex" }),
+        SpeakeasyMetadata({ data: "json, name=invertRegex" }),
         __metadata("design:type", Boolean)
     ], RepoSource.prototype, "invertRegex", void 0);
     __decorate([
-        Metadata({ data: "json, name=projectId" }),
+        SpeakeasyMetadata({ data: "json, name=projectId" }),
         __metadata("design:type", String)
     ], RepoSource.prototype, "projectId", void 0);
     __decorate([
-        Metadata({ data: "json, name=repoName" }),
+        SpeakeasyMetadata({ data: "json, name=repoName" }),
         __metadata("design:type", String)
     ], RepoSource.prototype, "repoName", void 0);
     __decorate([
-        Metadata({ data: "json, name=tagName" }),
+        SpeakeasyMetadata({ data: "json, name=tagName" }),
         __metadata("design:type", String)
     ], RepoSource.prototype, "tagName", void 0);
     return RepoSource;

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryCustomersGetPathParams:
-    customer_key: str = field(default=None, metadata={'path_param': { 'field_name': 'customerKey', 'style': 'simple', 'explode': False }})
+    customer_key: str = field(metadata={'path_param': { 'field_name': 'customerKey', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class DirectoryCustomersGetQueryParams:
 
 @dataclass
 class DirectoryCustomersGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryCustomersGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class DirectoryCustomersGetSecurity:
 
 @dataclass
 class DirectoryCustomersGetRequest:
-    path_params: DirectoryCustomersGetPathParams = field(default=None)
-    query_params: DirectoryCustomersGetQueryParams = field(default=None)
-    security: DirectoryCustomersGetSecurity = field(default=None)
+    path_params: DirectoryCustomersGetPathParams = field()
+    query_params: DirectoryCustomersGetQueryParams = field()
+    security: DirectoryCustomersGetSecurity = field()
     
 
 @dataclass
 class DirectoryCustomersGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     customer: Optional[shared.Customer] = field(default=None)
-    status_code: int = field(default=None)
     

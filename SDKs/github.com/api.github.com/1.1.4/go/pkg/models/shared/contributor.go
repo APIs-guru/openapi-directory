@@ -1,5 +1,7 @@
 package shared
 
+// Contributor
+// Contributor
 type Contributor struct {
 	AvatarURL         *string `json:"avatar_url,omitempty"`
 	Contributions     int64   `json:"contributions"`

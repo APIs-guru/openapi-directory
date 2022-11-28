@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceDescription } from "./servicedescription";
+
 
 export enum DescribeServiceResponseStatusEnum {
     Success = "success"
@@ -7,15 +8,15 @@ export enum DescribeServiceResponseStatusEnum {
 
 
 export class DescribeServiceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=api" })
+  @SpeakeasyMetadata({ data: "json, name=api" })
   api: string;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method: string;
 
-  @Metadata({ data: "json, name=response" })
+  @SpeakeasyMetadata({ data: "json, name=response" })
   response: ServiceDescription;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: DescribeServiceResponseStatusEnum;
 }

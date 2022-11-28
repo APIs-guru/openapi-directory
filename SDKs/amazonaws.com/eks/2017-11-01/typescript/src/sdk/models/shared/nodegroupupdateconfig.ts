@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NodegroupUpdateConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The node group update configuration.
 **/
 export class NodegroupUpdateConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxUnavailable" })
+  @SpeakeasyMetadata({ data: "json, name=maxUnavailable" })
   maxUnavailable?: number;
 
-  @Metadata({ data: "json, name=maxUnavailablePercentage" })
+  @SpeakeasyMetadata({ data: "json, name=maxUnavailablePercentage" })
   maxUnavailablePercentage?: number;
 }

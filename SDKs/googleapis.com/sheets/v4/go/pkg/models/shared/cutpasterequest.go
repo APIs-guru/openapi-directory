@@ -12,6 +12,8 @@ const (
 	CutPasteRequestPasteTypeEnumPasteConditionalFormatting CutPasteRequestPasteTypeEnum = "PASTE_CONDITIONAL_FORMATTING"
 )
 
+// CutPasteRequest
+// Moves data from the source to the destination.
 type CutPasteRequest struct {
 	Destination *GridCoordinate               `json:"destination,omitempty"`
 	PasteType   *CutPasteRequestPasteTypeEnum `json:"pasteType,omitempty"`

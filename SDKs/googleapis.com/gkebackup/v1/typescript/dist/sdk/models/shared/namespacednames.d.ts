@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { NamespacedName } from "./namespacedname";
 /**
  * A list of namespaced Kubernetes resources.

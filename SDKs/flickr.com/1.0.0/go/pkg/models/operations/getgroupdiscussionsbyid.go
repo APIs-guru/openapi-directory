@@ -11,10 +11,6 @@ type GetGroupDiscussionsByIDQueryParams struct {
 	PerPage *float64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
-type GetGroupDiscussionsByIDRequest struct {
-	QueryParams GetGroupDiscussionsByIDQueryParams
-}
-
 type GetGroupDiscussionsByID200ApplicationJSON struct {
 	Iconfarm        *float64       `json:"iconfarm,omitempty"`
 	Iconserver      *float64       `json:"iconserver,omitempty"`
@@ -28,6 +24,10 @@ type GetGroupDiscussionsByID200ApplicationJSON struct {
 	Privacy         *float64       `json:"privacy,omitempty"`
 	Topics          []shared.Topic `json:"topics,omitempty"`
 	Total           *float64       `json:"total,omitempty"`
+}
+
+type GetGroupDiscussionsByIDRequest struct {
+	QueryParams GetGroupDiscussionsByIDQueryParams
 }
 
 type GetGroupDiscussionsByIDResponse struct {

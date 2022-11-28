@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssignedInventorySource } from "./assignedinventorysource";
+
 
 
 // ListAssignedInventorySourcesResponse
@@ -8,9 +8,9 @@ import { AssignedInventorySource } from "./assignedinventorysource";
  * Response message for AssignedInventorySourceService.ListAssignedInventorySources.
 **/
 export class ListAssignedInventorySourcesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assignedInventorySources", elemType: shared.AssignedInventorySource })
+  @SpeakeasyMetadata({ data: "json, name=assignedInventorySources", elemType: AssignedInventorySource })
   assignedInventorySources?: AssignedInventorySource[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

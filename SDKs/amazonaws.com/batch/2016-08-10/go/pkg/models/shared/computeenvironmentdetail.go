@@ -1,5 +1,7 @@
 package shared
 
+// ComputeEnvironmentDetail
+// An object representing an Batch compute environment.
 type ComputeEnvironmentDetail struct {
 	ComputeEnvironmentArn  string            `json:"computeEnvironmentArn"`
 	ComputeEnvironmentName string            `json:"computeEnvironmentName"`

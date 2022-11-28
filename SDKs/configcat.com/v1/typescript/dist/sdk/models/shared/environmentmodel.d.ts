@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProductModel } from "./productmodel";
 export declare class EnvironmentModel extends SpeakeasyBase {
     environmentId?: string;

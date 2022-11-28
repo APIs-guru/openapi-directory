@@ -1,5 +1,7 @@
 package shared
 
+// IntegrationResponse
+// Represents an integration response.
 type IntegrationResponse struct {
 	ContentHandlingStrategy     *ContentHandlingStrategyEnum `json:"ContentHandlingStrategy,omitempty"`
 	IntegrationResponseID       *string                      `json:"IntegrationResponseId,omitempty"`

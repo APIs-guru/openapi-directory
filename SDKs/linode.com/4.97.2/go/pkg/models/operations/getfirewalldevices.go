@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var GetFirewallDevicesServers = []string{
+var GetFirewallDevicesServerList = []string{
 	"https://api.linode.com/v4",
 }
 
@@ -17,24 +17,9 @@ type GetFirewallDevicesQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetFirewallDevicesSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetFirewallDevicesSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetFirewallDevicesSecurity struct {
-	Option1 *GetFirewallDevicesSecurityOption1 `security:"option"`
-	Option2 *GetFirewallDevicesSecurityOption2 `security:"option"`
-}
-
-type GetFirewallDevicesRequest struct {
-	ServerURL   *string
-	PathParams  GetFirewallDevicesPathParams
-	QueryParams GetFirewallDevicesQueryParams
-	Security    GetFirewallDevicesSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetFirewallDevices200ApplicationJSON struct {
@@ -46,6 +31,13 @@ type GetFirewallDevices200ApplicationJSON struct {
 
 type GetFirewallDevicesDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetFirewallDevicesRequest struct {
+	ServerURL   *string
+	PathParams  GetFirewallDevicesPathParams
+	QueryParams GetFirewallDevicesQueryParams
+	Security    GetFirewallDevicesSecurity
 }
 
 type GetFirewallDevicesResponse struct {

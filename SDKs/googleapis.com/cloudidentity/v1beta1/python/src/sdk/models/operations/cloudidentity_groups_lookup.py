@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -22,20 +23,20 @@ class CloudidentityGroupsLookupQueryParams:
 
 @dataclass
 class CloudidentityGroupsLookupSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudidentityGroupsLookupSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudidentityGroupsLookupSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -47,13 +48,13 @@ class CloudidentityGroupsLookupSecurity:
 
 @dataclass
 class CloudidentityGroupsLookupRequest:
-    query_params: CloudidentityGroupsLookupQueryParams = field(default=None)
-    security: CloudidentityGroupsLookupSecurity = field(default=None)
+    query_params: CloudidentityGroupsLookupQueryParams = field()
+    security: CloudidentityGroupsLookupSecurity = field()
     
 
 @dataclass
 class CloudidentityGroupsLookupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     lookup_group_name_response: Optional[shared.LookupGroupNameResponse] = field(default=None)
-    status_code: int = field(default=None)
     

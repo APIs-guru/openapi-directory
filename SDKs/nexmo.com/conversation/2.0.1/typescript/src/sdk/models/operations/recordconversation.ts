@@ -1,51 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const RECORDCONVERSATION_SERVERS = [
-	"https://api.nexmo.com/v1",
-];
 
+export const RecordConversationServerList = [
+	"https://api.nexmo.com/v1",
+] as const;
 
 
 export class RecordConversationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=conversation_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=conversation_id" })
   conversationId: string;
 }
 
 
 export class RecordConversationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: shared.ActionEnum;
 
-  @Metadata({ data: "json, name=event_method" })
+  @SpeakeasyMetadata({ data: "json, name=event_method" })
   eventMethod?: string;
 
-  @Metadata({ data: "json, name=event_url" })
+  @SpeakeasyMetadata({ data: "json, name=event_url" })
   eventUrl?: string[];
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: shared.FormatEnum;
 
-  @Metadata({ data: "json, name=split" })
+  @SpeakeasyMetadata({ data: "json, name=split" })
   split?: string;
 }
 
 
 export class RecordConversationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   serverUrl?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RecordConversationPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: RecordConversationRequestBody;
 }
 
 
 export class RecordConversationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

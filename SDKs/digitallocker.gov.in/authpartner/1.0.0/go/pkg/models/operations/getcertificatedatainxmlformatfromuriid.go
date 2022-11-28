@@ -12,11 +12,6 @@ type GetCertificateDataInXMLFormatFromURIIDSecurity struct {
 	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetCertificateDataInXMLFormatFromURIIDRequest struct {
-	PathParams GetCertificateDataInXMLFormatFromURIIDPathParams
-	Security   GetCertificateDataInXMLFormatFromURIIDSecurity
-}
-
 type GetCertificateDataInXMLFormatFromURIID400ApplicationJSON struct {
 	Error            *string `json:"error,omitempty"`
 	ErrorDescription *string `json:"error_description,omitempty"`
@@ -30,6 +25,11 @@ type GetCertificateDataInXMLFormatFromURIID401ApplicationJSON struct {
 type GetCertificateDataInXMLFormatFromURIID404ApplicationJSON struct {
 	Error            *string `json:"error,omitempty"`
 	ErrorDescription *string `json:"error_description,omitempty"`
+}
+
+type GetCertificateDataInXMLFormatFromURIIDRequest struct {
+	PathParams GetCertificateDataInXMLFormatFromURIIDPathParams
+	Security   GetCertificateDataInXMLFormatFromURIIDSecurity
 }
 
 type GetCertificateDataInXMLFormatFromURIIDResponse struct {

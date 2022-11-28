@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainAssociation } from "./domainassociation";
+
 
 
 // UpdateDomainAssociationResult
@@ -7,6 +8,6 @@ import { DomainAssociation } from "./domainassociation";
  *  The result structure for the update domain association request. 
 **/
 export class UpdateDomainAssociationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domainAssociation" })
+  @SpeakeasyMetadata({ data: "json, name=domainAssociation" })
   domainAssociation: DomainAssociation;
 }

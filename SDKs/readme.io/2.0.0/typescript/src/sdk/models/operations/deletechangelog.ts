@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteChangelogPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=slug" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=slug" })
   slug: string;
 }
 
 
 export class DeleteChangelogSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class DeleteChangelogRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteChangelogPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DeleteChangelogSecurity;
 }
 
 
 export class DeleteChangelogResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

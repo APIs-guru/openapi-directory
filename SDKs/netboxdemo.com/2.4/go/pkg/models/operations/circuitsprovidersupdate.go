@@ -10,7 +10,7 @@ type CircuitsProvidersUpdatePathParams struct {
 
 type CircuitsProvidersUpdateRequest struct {
 	PathParams CircuitsProvidersUpdatePathParams
-	Request    shared.Provider `request:"mediaType=application/json"`
+	Request    shared.ProviderInput `request:"mediaType=application/json"`
 }
 
 type CircuitsProvidersUpdateResponse struct {

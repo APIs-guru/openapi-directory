@@ -11,6 +11,8 @@ const (
 	PartnerEntityStatusEnumEntityStatusScheduledForDeletion PartnerEntityStatusEnum = "ENTITY_STATUS_SCHEDULED_FOR_DELETION"
 )
 
+// Partner
+// A single partner in Display & Video 360 (DV360).
 type Partner struct {
 	AdServerConfig   *PartnerAdServerConfig   `json:"adServerConfig,omitempty"`
 	DataAccessConfig *PartnerDataAccessConfig `json:"dataAccessConfig,omitempty"`

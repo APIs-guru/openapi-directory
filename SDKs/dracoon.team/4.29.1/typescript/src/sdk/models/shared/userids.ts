@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UserIds
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * List of user IDs
 **/
 export class UserIds extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ids" })
+  @SpeakeasyMetadata({ data: "json, name=ids" })
   ids: number[];
 }

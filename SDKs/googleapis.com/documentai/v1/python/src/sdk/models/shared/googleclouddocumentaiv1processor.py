@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudDocumentaiV1ProcessorStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -16,12 +18,30 @@ class GoogleCloudDocumentaiV1ProcessorStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDocumentaiV1Processor:
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    default_processor_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultProcessorVersion' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    kms_key_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kmsKeyName' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    process_endpoint: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'processEndpoint' }})
-    state: Optional[GoogleCloudDocumentaiV1ProcessorStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""GoogleCloudDocumentaiV1Processor
+    The first-class citizen for Document AI. Each processor defines how to extract structural information from a document.
+    """
+    
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    default_processor_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultProcessorVersion') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    kms_key_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kmsKeyName') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    process_endpoint: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('processEndpoint') }})
+    state: Optional[GoogleCloudDocumentaiV1ProcessorStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    
+
+@dataclass_json
+@dataclass
+class GoogleCloudDocumentaiV1ProcessorInput:
+    r"""GoogleCloudDocumentaiV1ProcessorInput
+    The first-class citizen for Document AI. Each processor defines how to extract structural information from a document.
+    """
+    
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    default_processor_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultProcessorVersion') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    kms_key_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kmsKeyName') }})
+    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

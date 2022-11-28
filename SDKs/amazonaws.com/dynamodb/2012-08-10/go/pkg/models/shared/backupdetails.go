@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BackupDetails
+// Contains the details of the backup created for the table.
 type BackupDetails struct {
 	BackupArn              string           `json:"BackupArn"`
 	BackupCreationDateTime time.Time        `json:"BackupCreationDateTime"`

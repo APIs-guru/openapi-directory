@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetCallAnalyticsCategoryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CategoryName" })
+  @SpeakeasyMetadata({ data: "json, name=CategoryName" })
   categoryName: string;
 }

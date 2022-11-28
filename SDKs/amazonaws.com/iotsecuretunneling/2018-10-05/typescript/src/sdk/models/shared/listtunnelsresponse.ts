@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TunnelSummary } from "./tunnelsummary";
 
 
+
 export class ListTunnelsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=tunnelSummaries", elemType: shared.TunnelSummary })
+  @SpeakeasyMetadata({ data: "json, name=tunnelSummaries", elemType: TunnelSummary })
   tunnelSummaries?: TunnelSummary[];
 }

@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -19,21 +23,21 @@ class StartBulkDeploymentHeaders:
 @dataclass_json
 @dataclass
 class StartBulkDeploymentRequestBody:
-    execution_role_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExecutionRoleArn' }})
-    input_file_uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InputFileUri' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    execution_role_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ExecutionRoleArn') }})
+    input_file_uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('InputFileUri') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class StartBulkDeploymentRequest:
-    headers: StartBulkDeploymentHeaders = field(default=None)
-    request: StartBulkDeploymentRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: StartBulkDeploymentHeaders = field()
+    request: StartBulkDeploymentRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class StartBulkDeploymentResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     start_bulk_deployment_response: Optional[shared.StartBulkDeploymentResponse] = field(default=None)
-    status_code: int = field(default=None)
     

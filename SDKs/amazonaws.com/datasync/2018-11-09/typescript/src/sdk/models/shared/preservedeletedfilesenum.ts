@@ -1,6 +1,7 @@
 
 
+
 export enum PreserveDeletedFilesEnum {
-    Preserve = "PRESERVE"
-,    Remove = "REMOVE"
+    Preserve = "PRESERVE",
+    Remove = "REMOVE"
 }

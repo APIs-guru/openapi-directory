@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class NestDealer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=dealer_type" })
+  @SpeakeasyMetadata({ data: "json, name=dealer_type" })
   dealerType?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: string;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=phone" })
+  @SpeakeasyMetadata({ data: "json, name=phone" })
   phone?: string;
 
-  @Metadata({ data: "json, name=seller_email" })
+  @SpeakeasyMetadata({ data: "json, name=seller_email" })
   sellerEmail?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 
-  @Metadata({ data: "json, name=street" })
+  @SpeakeasyMetadata({ data: "json, name=street" })
   street?: string;
 
-  @Metadata({ data: "json, name=website" })
+  @SpeakeasyMetadata({ data: "json, name=website" })
   website?: string;
 
-  @Metadata({ data: "json, name=zip" })
+  @SpeakeasyMetadata({ data: "json, name=zip" })
   zip?: string;
 }

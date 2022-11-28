@@ -22,32 +22,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BackupRetentionPolicy } from "./backupretentionpolicy";
+import { Tag } from "./tag";
 var CreateClusterRequest = /** @class */ (function (_super) {
     __extends(CreateClusterRequest, _super);
     function CreateClusterRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BackupRetentionPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=BackupRetentionPolicy" }),
         __metadata("design:type", BackupRetentionPolicy)
     ], CreateClusterRequest.prototype, "backupRetentionPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=HsmType" }),
+        SpeakeasyMetadata({ data: "json, name=HsmType" }),
         __metadata("design:type", String)
     ], CreateClusterRequest.prototype, "hsmType", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceBackupId" }),
+        SpeakeasyMetadata({ data: "json, name=SourceBackupId" }),
         __metadata("design:type", String)
     ], CreateClusterRequest.prototype, "sourceBackupId", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetIds" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetIds" }),
         __metadata("design:type", Array)
     ], CreateClusterRequest.prototype, "subnetIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=TagList", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=TagList", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateClusterRequest.prototype, "tagList", void 0);
     return CreateClusterRequest;

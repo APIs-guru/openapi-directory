@@ -1,17 +1,19 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Hackathons } from "./hackathons";
+import { SwaggerDoc } from "./swaggerdoc";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["http://www.hackathonwatch.com/api/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    hackathons: Hackathons;
+    swaggerDoc: SwaggerDoc;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    GetHackathonsIdFormat(req: operations.GetHackathonsIdFormatRequest, config?: AxiosRequestConfig): Promise<operations.GetHackathonsIdFormatResponse>;
-    GetHackathonsComingFormat(req: operations.GetHackathonsComingFormatRequest, config?: AxiosRequestConfig): Promise<operations.GetHackathonsComingFormatResponse>;
-    GetSwaggerDocFormat(config?: AxiosRequestConfig): Promise<operations.GetSwaggerDocFormatResponse>;
-    GetSwaggerDocNameFormat(req: operations.GetSwaggerDocNameFormatRequest, config?: AxiosRequestConfig): Promise<operations.GetSwaggerDocNameFormatResponse>;
 }
 export {};

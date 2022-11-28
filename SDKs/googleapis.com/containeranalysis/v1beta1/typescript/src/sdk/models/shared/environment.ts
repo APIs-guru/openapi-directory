@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Environment
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines an object for the environment field in in-toto links. The suggested fields are "variables", "filesystem", and "workdir".
 **/
 export class Environment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customValues" })
+  @SpeakeasyMetadata({ data: "json, name=customValues" })
   customValues?: Map<string, string>;
 }

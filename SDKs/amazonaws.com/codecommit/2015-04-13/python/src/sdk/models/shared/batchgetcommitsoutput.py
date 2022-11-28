@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import commit
-from . import batchgetcommitserror
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchGetCommitsOutput:
-    commits: Optional[List[commit.Commit]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commits' }})
-    errors: Optional[List[batchgetcommitserror.BatchGetCommitsError]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
+    commits: Optional[List[Commit]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('commits') }})
+    errors: Optional[List[BatchGetCommitsError]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
     

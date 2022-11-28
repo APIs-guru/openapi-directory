@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArchiveStateEnum } from "./archivestateenum";
 
 
+
 export class UpdateArchiveResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ArchiveArn" })
+  @SpeakeasyMetadata({ data: "json, name=ArchiveArn" })
   archiveArn?: string;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: ArchiveStateEnum;
 
-  @Metadata({ data: "json, name=StateReason" })
+  @SpeakeasyMetadata({ data: "json, name=StateReason" })
   stateReason?: string;
 }

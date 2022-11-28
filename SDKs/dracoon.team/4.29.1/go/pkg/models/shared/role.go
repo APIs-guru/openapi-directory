@@ -1,5 +1,7 @@
 package shared
 
+// Role
+// Role information
 type Role struct {
 	Description string  `json:"description"`
 	ID          int32   `json:"id"`

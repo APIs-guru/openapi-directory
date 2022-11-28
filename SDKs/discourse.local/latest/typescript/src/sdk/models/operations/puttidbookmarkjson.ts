@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutTIdBookmarkJsonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class PutTIdBookmarkJsonHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Key" })
   apiKey: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Username" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Username" })
   apiUsername: string;
 }
 
 
 export class PutTIdBookmarkJsonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutTIdBookmarkJsonPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PutTIdBookmarkJsonHeaders;
 }
 
 
 export class PutTIdBookmarkJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

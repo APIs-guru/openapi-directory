@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Policy } from "./policy";
+
 
 
 // PolicyInfo
@@ -7,9 +8,9 @@ import { Policy } from "./policy";
  * The IAM policy and its attached resource.
 **/
 export class PolicyInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachedResource" })
+  @SpeakeasyMetadata({ data: "json, name=attachedResource" })
   attachedResource?: string;
 
-  @Metadata({ data: "json, name=policy" })
+  @SpeakeasyMetadata({ data: "json, name=policy" })
   policy?: Policy;
 }

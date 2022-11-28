@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2InfoType } from "./googleprivacydlpv2infotype";
+
 
 
 // GooglePrivacyDlpV2InfoTypeLimit
@@ -7,9 +8,9 @@ import { GooglePrivacyDlpV2InfoType } from "./googleprivacydlpv2infotype";
  * Max findings configuration per infoType, per content item or long running DlpJob.
 **/
 export class GooglePrivacyDlpV2InfoTypeLimit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=infoType" })
+  @SpeakeasyMetadata({ data: "json, name=infoType" })
   infoType?: GooglePrivacyDlpV2InfoType;
 
-  @Metadata({ data: "json, name=maxFindings" })
+  @SpeakeasyMetadata({ data: "json, name=maxFindings" })
   maxFindings?: number;
 }

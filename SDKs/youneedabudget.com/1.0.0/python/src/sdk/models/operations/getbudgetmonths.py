@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetBudgetMonthsPathParams:
-    budget_id: str = field(default=None, metadata={'path_param': { 'field_name': 'budget_id', 'style': 'simple', 'explode': False }})
+    budget_id: str = field(metadata={'path_param': { 'field_name': 'budget_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class GetBudgetMonthsQueryParams:
 
 @dataclass
 class GetBudgetMonthsRequest:
-    path_params: GetBudgetMonthsPathParams = field(default=None)
-    query_params: GetBudgetMonthsQueryParams = field(default=None)
+    path_params: GetBudgetMonthsPathParams = field()
+    query_params: GetBudgetMonthsQueryParams = field()
     
 
 @dataclass
 class GetBudgetMonthsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     month_summaries_response: Optional[shared.MonthSummariesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

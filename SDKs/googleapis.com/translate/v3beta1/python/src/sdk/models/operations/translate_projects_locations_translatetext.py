@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TranslateProjectsLocationsTranslateTextPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class TranslateProjectsLocationsTranslateTextQueryParams:
 
 @dataclass
 class TranslateProjectsLocationsTranslateTextSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TranslateProjectsLocationsTranslateTextSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class TranslateProjectsLocationsTranslateTextSecurity:
 
 @dataclass
 class TranslateProjectsLocationsTranslateTextRequest:
-    path_params: TranslateProjectsLocationsTranslateTextPathParams = field(default=None)
-    query_params: TranslateProjectsLocationsTranslateTextQueryParams = field(default=None)
+    path_params: TranslateProjectsLocationsTranslateTextPathParams = field()
+    query_params: TranslateProjectsLocationsTranslateTextQueryParams = field()
+    security: TranslateProjectsLocationsTranslateTextSecurity = field()
     request: Optional[shared.TranslateTextRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: TranslateProjectsLocationsTranslateTextSecurity = field(default=None)
     
 
 @dataclass
 class TranslateProjectsLocationsTranslateTextResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     translate_text_response: Optional[shared.TranslateTextResponse] = field(default=None)
     

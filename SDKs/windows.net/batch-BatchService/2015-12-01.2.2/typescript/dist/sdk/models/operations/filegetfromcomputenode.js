@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var FileGetFromComputeNodePathParams = /** @class */ (function (_super) {
     __extends(FileGetFromComputeNodePathParams, _super);
     function FileGetFromComputeNodePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=fileName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fileName" }),
         __metadata("design:type", String)
     ], FileGetFromComputeNodePathParams.prototype, "fileName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=nodeId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nodeId" }),
         __metadata("design:type", String)
     ], FileGetFromComputeNodePathParams.prototype, "nodeId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=poolId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=poolId" }),
         __metadata("design:type", String)
     ], FileGetFromComputeNodePathParams.prototype, "poolId", void 0);
     return FileGetFromComputeNodePathParams;
@@ -49,11 +49,11 @@ var FileGetFromComputeNodeQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api-version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" }),
         __metadata("design:type", String)
     ], FileGetFromComputeNodeQueryParams.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
         __metadata("design:type", Number)
     ], FileGetFromComputeNodeQueryParams.prototype, "timeout", void 0);
     return FileGetFromComputeNodeQueryParams;
@@ -65,27 +65,27 @@ var FileGetFromComputeNodeHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=If-Modified-Since" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-Modified-Since" }),
         __metadata("design:type", String)
     ], FileGetFromComputeNodeHeaders.prototype, "ifModifiedSince", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=If-Unmodified-Since" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-Unmodified-Since" }),
         __metadata("design:type", String)
     ], FileGetFromComputeNodeHeaders.prototype, "ifUnmodifiedSince", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=client-request-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=client-request-id" }),
         __metadata("design:type", String)
     ], FileGetFromComputeNodeHeaders.prototype, "clientRequestId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=ocp-date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=ocp-date" }),
         __metadata("design:type", String)
     ], FileGetFromComputeNodeHeaders.prototype, "ocpDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=ocp-range" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=ocp-range" }),
         __metadata("design:type", String)
     ], FileGetFromComputeNodeHeaders.prototype, "ocpRange", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=return-client-request-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=return-client-request-id" }),
         __metadata("design:type", Boolean)
     ], FileGetFromComputeNodeHeaders.prototype, "returnClientRequestId", void 0);
     return FileGetFromComputeNodeHeaders;
@@ -97,15 +97,15 @@ var FileGetFromComputeNodeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FileGetFromComputeNodePathParams)
     ], FileGetFromComputeNodeRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FileGetFromComputeNodeQueryParams)
     ], FileGetFromComputeNodeRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FileGetFromComputeNodeHeaders)
     ], FileGetFromComputeNodeRequest.prototype, "headers", void 0);
     return FileGetFromComputeNodeRequest;
@@ -117,23 +117,23 @@ var FileGetFromComputeNodeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], FileGetFromComputeNodeResponse.prototype, "batchError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FileGetFromComputeNodeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], FileGetFromComputeNodeResponse.prototype, "fileGetFromComputeNode200ApplicationJsonBinaryString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], FileGetFromComputeNodeResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FileGetFromComputeNodeResponse.prototype, "statusCode", void 0);
     return FileGetFromComputeNodeResponse;

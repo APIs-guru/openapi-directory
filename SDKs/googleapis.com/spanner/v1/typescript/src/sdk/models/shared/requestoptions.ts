@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum RequestOptionsPriorityEnum {
-    PriorityUnspecified = "PRIORITY_UNSPECIFIED"
-,    PriorityLow = "PRIORITY_LOW"
-,    PriorityMedium = "PRIORITY_MEDIUM"
-,    PriorityHigh = "PRIORITY_HIGH"
+    PriorityUnspecified = "PRIORITY_UNSPECIFIED",
+    PriorityLow = "PRIORITY_LOW",
+    PriorityMedium = "PRIORITY_MEDIUM",
+    PriorityHigh = "PRIORITY_HIGH"
 }
 
 
@@ -13,12 +14,12 @@ export enum RequestOptionsPriorityEnum {
  * Common request options for various APIs.
 **/
 export class RequestOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority?: RequestOptionsPriorityEnum;
 
-  @Metadata({ data: "json, name=requestTag" })
+  @SpeakeasyMetadata({ data: "json, name=requestTag" })
   requestTag?: string;
 
-  @Metadata({ data: "json, name=transactionTag" })
+  @SpeakeasyMetadata({ data: "json, name=transactionTag" })
   transactionTag?: string;
 }

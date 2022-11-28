@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SubModule
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Returns information about a submodule reference in a repository folder.
 **/
 export class SubModule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=absolutePath" })
+  @SpeakeasyMetadata({ data: "json, name=absolutePath" })
   absolutePath?: string;
 
-  @Metadata({ data: "json, name=commitId" })
+  @SpeakeasyMetadata({ data: "json, name=commitId" })
   commitId?: string;
 
-  @Metadata({ data: "json, name=relativePath" })
+  @SpeakeasyMetadata({ data: "json, name=relativePath" })
   relativePath?: string;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsDriveLabelsV2betaFieldListOptions } from "./googleappsdrivelabelsv2betafieldlistoptions";
+
 
 
 // GoogleAppsDriveLabelsV2betaFieldUserOptions
@@ -7,6 +8,6 @@ import { GoogleAppsDriveLabelsV2betaFieldListOptions } from "./googleappsdrivela
  * Options for the user field type.
 **/
 export class GoogleAppsDriveLabelsV2betaFieldUserOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=listOptions" })
+  @SpeakeasyMetadata({ data: "json, name=listOptions" })
   listOptions?: GoogleAppsDriveLabelsV2betaFieldListOptions;
 }

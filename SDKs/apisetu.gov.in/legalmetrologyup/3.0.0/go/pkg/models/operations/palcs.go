@@ -27,11 +27,6 @@ type PalcsSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type PalcsRequest struct {
-	Request  *PalcsRequestBody `request:"mediaType=application/json"`
-	Security PalcsSecurity
-}
-
 type Palcs400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Palcs504ApplicationJSON struct {
 	Error            *Palcs504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Palcs504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type PalcsRequest struct {
+	Request  *PalcsRequestBody `request:"mediaType=application/json"`
+	Security PalcsSecurity
 }
 
 type PalcsResponse struct {

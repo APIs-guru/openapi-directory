@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDocumentaiV1DocumentOutputConfig } from "./googleclouddocumentaiv1documentoutputconfig";
 import { GoogleCloudDocumentaiV1BatchDocumentsInputConfig } from "./googleclouddocumentaiv1batchdocumentsinputconfig";
+
 
 
 // GoogleCloudDocumentaiV1BatchProcessRequest
@@ -8,12 +9,12 @@ import { GoogleCloudDocumentaiV1BatchDocumentsInputConfig } from "./googlecloudd
  * Request message for batch process document method.
 **/
 export class GoogleCloudDocumentaiV1BatchProcessRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentOutputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=documentOutputConfig" })
   documentOutputConfig?: GoogleCloudDocumentaiV1DocumentOutputConfig;
 
-  @Metadata({ data: "json, name=inputDocuments" })
+  @SpeakeasyMetadata({ data: "json, name=inputDocuments" })
   inputDocuments?: GoogleCloudDocumentaiV1BatchDocumentsInputConfig;
 
-  @Metadata({ data: "json, name=skipHumanReview" })
+  @SpeakeasyMetadata({ data: "json, name=skipHumanReview" })
   skipHumanReview?: boolean;
 }

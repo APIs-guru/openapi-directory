@@ -1,6 +1,7 @@
 
 
+
 export enum EnableHybridValuesEnum {
-    True = "TRUE"
-,    False = "FALSE"
+    True = "TRUE",
+    False = "FALSE"
 }

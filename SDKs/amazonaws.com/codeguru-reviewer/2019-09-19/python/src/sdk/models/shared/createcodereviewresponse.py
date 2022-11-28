@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import codereview
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateCodeReviewResponse:
-    code_review: Optional[codereview.CodeReview] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CodeReview' }})
+    code_review: Optional[CodeReview] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CodeReview') }})
     

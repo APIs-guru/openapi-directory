@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Schema } from "./schema";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SchemaInput } from "./schema";
+
 
 export enum ValidateMessageRequestEncodingEnum {
-    EncodingUnspecified = "ENCODING_UNSPECIFIED"
-,    Json = "JSON"
-,    Binary = "BINARY"
+    EncodingUnspecified = "ENCODING_UNSPECIFIED",
+    Json = "JSON",
+    Binary = "BINARY"
 }
 
 
-// ValidateMessageRequest
+// ValidateMessageRequestInput
 /** 
  * Request for the `ValidateMessage` method.
 **/
-export class ValidateMessageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=encoding" })
+export class ValidateMessageRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=encoding" })
   encoding?: ValidateMessageRequestEncodingEnum;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=schema" })
-  schema?: Schema;
+  @SpeakeasyMetadata({ data: "json, name=schema" })
+  schema?: SchemaInput;
 }

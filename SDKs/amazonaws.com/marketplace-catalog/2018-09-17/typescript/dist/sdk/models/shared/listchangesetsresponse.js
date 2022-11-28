@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ChangeSetSummaryListItem } from "./changesetsummarylistitem";
 var ListChangeSetsResponse = /** @class */ (function (_super) {
     __extends(ListChangeSetsResponse, _super);
     function ListChangeSetsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ChangeSetSummaryList", elemType: shared.ChangeSetSummaryListItem }),
+        SpeakeasyMetadata({ data: "json, name=ChangeSetSummaryList", elemType: ChangeSetSummaryListItem }),
         __metadata("design:type", Array)
     ], ListChangeSetsResponse.prototype, "changeSetSummaryList", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListChangeSetsResponse.prototype, "nextToken", void 0);
     return ListChangeSetsResponse;

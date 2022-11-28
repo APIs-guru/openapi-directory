@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // QueryParameterMatch
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object representing the query parameter to match.
 **/
 export class QueryParameterMatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exact" })
+  @SpeakeasyMetadata({ data: "json, name=exact" })
   exact?: string;
 }

@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import List,Optional
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -12,32 +15,53 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def connect(self, request: operations.ConnectRequest) -> operations.ConnectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""connect
+        Initiate a connection to a specified peer.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/net/connect"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -51,19 +75,21 @@ class SDK:
 
     
     def connections(self, request: operations.ConnectionsRequest) -> operations.ConnectionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""connections
+        Returns an array of all peer connection statuses.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/net/connections"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -78,19 +104,21 @@ class SDK:
 
     
     def disconnect(self, request: operations.DisconnectRequest) -> operations.DisconnectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""disconnect
+        Initiate disconnection from a specified peer.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/net/disconnect"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -104,19 +132,21 @@ class SDK:
 
     
     def status(self, request: operations.StatusRequest) -> operations.StatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""status
+        Retrieves the connection status for a specified peer.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/net/status"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

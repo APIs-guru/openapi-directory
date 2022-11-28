@@ -5,10 +5,6 @@ type GetIntegrationTestRelationsPathParams struct {
 	APIVersionID string `pathParam:"style=simple,explode=false,name=apiVersionId"`
 }
 
-type GetIntegrationTestRelationsRequest struct {
-	PathParams GetIntegrationTestRelationsPathParams
-}
-
 type GetIntegrationTestRelations200ApplicationJSONIntegrationtest struct {
 	CollectionID *string `json:"collectionId,omitempty"`
 	ID           *string `json:"id,omitempty"`
@@ -18,6 +14,10 @@ type GetIntegrationTestRelations200ApplicationJSONIntegrationtest struct {
 
 type GetIntegrationTestRelations200ApplicationJSON struct {
 	Integrationtest []GetIntegrationTestRelations200ApplicationJSONIntegrationtest `json:"integrationtest,omitempty"`
+}
+
+type GetIntegrationTestRelationsRequest struct {
+	PathParams GetIntegrationTestRelationsPathParams
 }
 
 type GetIntegrationTestRelationsResponse struct {

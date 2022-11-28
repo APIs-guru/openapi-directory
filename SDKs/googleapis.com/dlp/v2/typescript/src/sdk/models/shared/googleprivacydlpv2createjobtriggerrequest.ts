@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GooglePrivacyDlpV2JobTrigger } from "./googleprivacydlpv2jobtrigger";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GooglePrivacyDlpV2JobTriggerInput } from "./googleprivacydlpv2jobtrigger";
 
 
-// GooglePrivacyDlpV2CreateJobTriggerRequest
+
+// GooglePrivacyDlpV2CreateJobTriggerRequestInput
 /** 
  * Request message for CreateJobTrigger.
 **/
-export class GooglePrivacyDlpV2CreateJobTriggerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobTrigger" })
-  jobTrigger?: GooglePrivacyDlpV2JobTrigger;
+export class GooglePrivacyDlpV2CreateJobTriggerRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=jobTrigger" })
+  jobTrigger?: GooglePrivacyDlpV2JobTriggerInput;
 
-  @Metadata({ data: "json, name=locationId" })
+  @SpeakeasyMetadata({ data: "json, name=locationId" })
   locationId?: string;
 
-  @Metadata({ data: "json, name=triggerId" })
+  @SpeakeasyMetadata({ data: "json, name=triggerId" })
   triggerId?: string;
 }

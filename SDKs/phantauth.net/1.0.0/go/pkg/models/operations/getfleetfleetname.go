@@ -4,10 +4,6 @@ type GetFleetFleetnamePathParams struct {
 	Fleetname string `pathParam:"style=simple,explode=false,name=fleetname"`
 }
 
-type GetFleetFleetnameRequest struct {
-	PathParams GetFleetFleetnamePathParams
-}
-
 type GetFleetFleetname200ApplicationJSON struct {
 	AtID      *string       `json:"@id,omitempty"`
 	Logo      *string       `json:"logo,omitempty"`
@@ -16,6 +12,10 @@ type GetFleetFleetname200ApplicationJSON struct {
 	Name      *string       `json:"name,omitempty"`
 	Profile   *string       `json:"profile,omitempty"`
 	Sub       string        `json:"sub"`
+}
+
+type GetFleetFleetnameRequest struct {
+	PathParams GetFleetFleetnamePathParams
 }
 
 type GetFleetFleetnameResponse struct {

@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RpcRequest = /** @class */ (function (_super) {
     __extends(RpcRequest, _super);
     function RpcRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], RpcRequest.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=jsonrpc" }),
+        SpeakeasyMetadata({ data: "json, name=jsonrpc" }),
         __metadata("design:type", String)
     ], RpcRequest.prototype, "jsonrpc", void 0);
     __decorate([
-        Metadata({ data: "json, name=method" }),
+        SpeakeasyMetadata({ data: "json, name=method" }),
         __metadata("design:type", String)
     ], RpcRequest.prototype, "method", void 0);
     __decorate([
-        Metadata({ data: "json, name=params" }),
+        SpeakeasyMetadata({ data: "json, name=params" }),
         __metadata("design:type", Array)
     ], RpcRequest.prototype, "params", void 0);
     return RpcRequest;

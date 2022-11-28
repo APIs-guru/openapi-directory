@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntityStateEnum } from "./entitystateenum";
 import { UserRoleEnum } from "./userroleenum";
 var DescribeUserResponse = /** @class */ (function (_super) {
@@ -31,35 +31,35 @@ var DescribeUserResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DisabledDate" }),
+        SpeakeasyMetadata({ data: "json, name=DisabledDate" }),
         __metadata("design:type", Date)
     ], DescribeUserResponse.prototype, "disabledDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=DisplayName" }),
+        SpeakeasyMetadata({ data: "json, name=DisplayName" }),
         __metadata("design:type", String)
     ], DescribeUserResponse.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Email" }),
+        SpeakeasyMetadata({ data: "json, name=Email" }),
         __metadata("design:type", String)
     ], DescribeUserResponse.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=EnabledDate" }),
+        SpeakeasyMetadata({ data: "json, name=EnabledDate" }),
         __metadata("design:type", Date)
     ], DescribeUserResponse.prototype, "enabledDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], DescribeUserResponse.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], DescribeUserResponse.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=UserId" }),
+        SpeakeasyMetadata({ data: "json, name=UserId" }),
         __metadata("design:type", String)
     ], DescribeUserResponse.prototype, "userId", void 0);
     __decorate([
-        Metadata({ data: "json, name=UserRole" }),
+        SpeakeasyMetadata({ data: "json, name=UserRole" }),
         __metadata("design:type", String)
     ], DescribeUserResponse.prototype, "userRole", void 0);
     return DescribeUserResponse;

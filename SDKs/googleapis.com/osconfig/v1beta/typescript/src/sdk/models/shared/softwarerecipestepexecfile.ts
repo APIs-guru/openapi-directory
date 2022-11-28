@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SoftwareRecipeStepExecFile
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Executes an artifact or local file.
 **/
 export class SoftwareRecipeStepExecFile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedExitCodes" })
+  @SpeakeasyMetadata({ data: "json, name=allowedExitCodes" })
   allowedExitCodes?: number[];
 
-  @Metadata({ data: "json, name=args" })
+  @SpeakeasyMetadata({ data: "json, name=args" })
   args?: string[];
 
-  @Metadata({ data: "json, name=artifactId" })
+  @SpeakeasyMetadata({ data: "json, name=artifactId" })
   artifactId?: string;
 
-  @Metadata({ data: "json, name=localPath" })
+  @SpeakeasyMetadata({ data: "json, name=localPath" })
   localPath?: string;
 }

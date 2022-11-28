@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetActionPackageRelationshipsListQueryParams = /** @class */ (function (_super) {
     __extends(GetActionPackageRelationshipsListQueryParams, _super);
     function GetActionPackageRelationshipsListQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" }),
         __metadata("design:type", String)
     ], GetActionPackageRelationshipsListQueryParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=id2" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id2" }),
         __metadata("design:type", String)
     ], GetActionPackageRelationshipsListQueryParams.prototype, "id2", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rel" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rel" }),
         __metadata("design:type", String)
     ], GetActionPackageRelationshipsListQueryParams.prototype, "rel", void 0);
     return GetActionPackageRelationshipsListQueryParams;
@@ -49,7 +49,7 @@ var GetActionPackageRelationshipsListRequest = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetActionPackageRelationshipsListQueryParams)
     ], GetActionPackageRelationshipsListRequest.prototype, "queryParams", void 0);
     return GetActionPackageRelationshipsListRequest;
@@ -61,11 +61,11 @@ var GetActionPackageRelationshipsListResponse = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetActionPackageRelationshipsListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetActionPackageRelationshipsListResponse.prototype, "statusCode", void 0);
     return GetActionPackageRelationshipsListResponse;

@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 
 
 @dataclass
 class JobDeletePathParams:
-    job_id: str = field(default=None, metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
+    job_id: str = field(metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class JobDeleteQueryParams:
-    api_version: str = field(default=None, metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
+    api_version: str = field(metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
     timeout: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'timeout', 'style': 'form', 'explode': True }})
     
 
@@ -26,15 +29,15 @@ class JobDeleteHeaders:
 
 @dataclass
 class JobDeleteRequest:
-    path_params: JobDeletePathParams = field(default=None)
-    query_params: JobDeleteQueryParams = field(default=None)
-    headers: JobDeleteHeaders = field(default=None)
+    headers: JobDeleteHeaders = field()
+    path_params: JobDeletePathParams = field()
+    query_params: JobDeleteQueryParams = field()
     
 
 @dataclass
 class JobDeleteResponse:
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     batch_error: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { MembershipRole } from "./membershiprole";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { MembershipRole1 } from "./membershiprole1";
+
 
 
 // UpdateMembershipRolesParams
@@ -7,9 +8,9 @@ import { MembershipRole } from "./membershiprole";
  * The details of an update to a `MembershipRole`.
 **/
 export class UpdateMembershipRolesParams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fieldMask" })
+  @SpeakeasyMetadata({ data: "json, name=fieldMask" })
   fieldMask?: string;
 
-  @Metadata({ data: "json, name=membershipRole" })
-  membershipRole?: MembershipRole;
+  @SpeakeasyMetadata({ data: "json, name=membershipRole" })
+  membershipRole?: MembershipRole1;
 }

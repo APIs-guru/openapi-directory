@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountTakeoverEventActionTypeEnum } from "./accounttakeovereventactiontypeenum";
+
 
 
 // AccountTakeoverActionType
@@ -7,9 +8,9 @@ import { AccountTakeoverEventActionTypeEnum } from "./accounttakeovereventaction
  * Account takeover action type.
 **/
 export class AccountTakeoverActionType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EventAction" })
+  @SpeakeasyMetadata({ data: "json, name=EventAction" })
   eventAction: AccountTakeoverEventActionTypeEnum;
 
-  @Metadata({ data: "json, name=Notify" })
+  @SpeakeasyMetadata({ data: "json, name=Notify" })
   notify: boolean;
 }

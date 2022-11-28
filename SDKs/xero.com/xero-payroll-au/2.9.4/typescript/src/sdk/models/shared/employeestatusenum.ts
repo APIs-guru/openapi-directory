@@ -1,6 +1,7 @@
 
 
+
 export enum EmployeeStatusEnum {
-    Active = "ACTIVE"
-,    Terminated = "TERMINATED"
+    Active = "ACTIVE",
+    Terminated = "TERMINATED"
 }

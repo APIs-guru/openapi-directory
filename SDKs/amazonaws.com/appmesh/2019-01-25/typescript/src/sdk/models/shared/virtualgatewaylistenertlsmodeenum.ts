@@ -1,7 +1,8 @@
 
 
+
 export enum VirtualGatewayListenerTlsModeEnum {
-    Strict = "STRICT"
-,    Permissive = "PERMISSIVE"
-,    Disabled = "DISABLED"
+    Strict = "STRICT",
+    Permissive = "PERMISSIVE",
+    Disabled = "DISABLED"
 }

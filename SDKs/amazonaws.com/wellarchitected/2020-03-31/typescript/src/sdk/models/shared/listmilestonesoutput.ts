@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MilestoneSummary } from "./milestonesummary";
+
 
 
 // ListMilestonesOutput
@@ -8,12 +8,12 @@ import { MilestoneSummary } from "./milestonesummary";
  * Output of a list milestones call.
 **/
 export class ListMilestonesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MilestoneSummaries", elemType: shared.MilestoneSummary })
+  @SpeakeasyMetadata({ data: "json, name=MilestoneSummaries", elemType: MilestoneSummary })
   milestoneSummaries?: MilestoneSummary[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=WorkloadId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkloadId" })
   workloadId?: string;
 }

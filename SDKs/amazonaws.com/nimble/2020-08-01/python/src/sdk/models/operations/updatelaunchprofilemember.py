@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateLaunchProfileMemberPathParams:
-    launch_profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'launchProfileId', 'style': 'simple', 'explode': False }})
-    principal_id: str = field(default=None, metadata={'path_param': { 'field_name': 'principalId', 'style': 'simple', 'explode': False }})
-    studio_id: str = field(default=None, metadata={'path_param': { 'field_name': 'studioId', 'style': 'simple', 'explode': False }})
+    launch_profile_id: str = field(metadata={'path_param': { 'field_name': 'launchProfileId', 'style': 'simple', 'explode': False }})
+    principal_id: str = field(metadata={'path_param': { 'field_name': 'principalId', 'style': 'simple', 'explode': False }})
+    studio_id: str = field(metadata={'path_param': { 'field_name': 'studioId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,25 +34,25 @@ class UpdateLaunchProfileMemberRequestBodyPersonaEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateLaunchProfileMemberRequestBody:
-    persona: UpdateLaunchProfileMemberRequestBodyPersonaEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'persona' }})
+    persona: UpdateLaunchProfileMemberRequestBodyPersonaEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('persona') }})
     
 
 @dataclass
 class UpdateLaunchProfileMemberRequest:
-    path_params: UpdateLaunchProfileMemberPathParams = field(default=None)
-    headers: UpdateLaunchProfileMemberHeaders = field(default=None)
-    request: UpdateLaunchProfileMemberRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateLaunchProfileMemberHeaders = field()
+    path_params: UpdateLaunchProfileMemberPathParams = field()
+    request: UpdateLaunchProfileMemberRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateLaunchProfileMemberResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     update_launch_profile_member_response: Optional[shared.UpdateLaunchProfileMemberResponse] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)

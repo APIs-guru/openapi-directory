@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostListServiceSpecificCredentialsActionEnum(str, Enum):
     LIST_SERVICE_SPECIFIC_CREDENTIALS = "ListServiceSpecificCredentials"
@@ -10,8 +14,8 @@ class PostListServiceSpecificCredentialsVersionEnum(str, Enum):
 
 @dataclass
 class PostListServiceSpecificCredentialsQueryParams:
-    action: PostListServiceSpecificCredentialsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostListServiceSpecificCredentialsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostListServiceSpecificCredentialsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostListServiceSpecificCredentialsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostListServiceSpecificCredentialsHeaders:
 
 @dataclass
 class PostListServiceSpecificCredentialsRequest:
-    query_params: PostListServiceSpecificCredentialsQueryParams = field(default=None)
-    headers: PostListServiceSpecificCredentialsHeaders = field(default=None)
+    headers: PostListServiceSpecificCredentialsHeaders = field()
+    query_params: PostListServiceSpecificCredentialsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostListServiceSpecificCredentialsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

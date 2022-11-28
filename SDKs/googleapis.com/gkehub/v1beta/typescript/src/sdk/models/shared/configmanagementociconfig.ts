@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ConfigManagementOciConfig
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * OCI repo configuration for a single cluster
 **/
 export class ConfigManagementOciConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gcpServiceAccountEmail" })
+  @SpeakeasyMetadata({ data: "json, name=gcpServiceAccountEmail" })
   gcpServiceAccountEmail?: string;
 
-  @Metadata({ data: "json, name=policyDir" })
+  @SpeakeasyMetadata({ data: "json, name=policyDir" })
   policyDir?: string;
 
-  @Metadata({ data: "json, name=secretType" })
+  @SpeakeasyMetadata({ data: "json, name=secretType" })
   secretType?: string;
 
-  @Metadata({ data: "json, name=syncRepo" })
+  @SpeakeasyMetadata({ data: "json, name=syncRepo" })
   syncRepo?: string;
 
-  @Metadata({ data: "json, name=syncWaitSecs" })
+  @SpeakeasyMetadata({ data: "json, name=syncWaitSecs" })
   syncWaitSecs?: string;
 }

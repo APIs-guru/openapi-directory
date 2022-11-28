@@ -5,26 +5,26 @@ from sdk.models import shared
 
 @dataclass
 class PutCategoriesIDJSONPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PutCategoriesIDJSONQueryParams:
-    authtoken: str = field(default=None, metadata={'query_param': { 'field_name': 'authtoken', 'style': 'form', 'explode': True }})
-    login: str = field(default=None, metadata={'query_param': { 'field_name': 'login', 'style': 'form', 'explode': True }})
+    authtoken: str = field(metadata={'query_param': { 'field_name': 'authtoken', 'style': 'form', 'explode': True }})
+    login: str = field(metadata={'query_param': { 'field_name': 'login', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class PutCategoriesIDJSONRequest:
-    path_params: PutCategoriesIDJSONPathParams = field(default=None)
-    query_params: PutCategoriesIDJSONQueryParams = field(default=None)
-    request: shared.CategoryEdit = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: PutCategoriesIDJSONPathParams = field()
+    query_params: PutCategoriesIDJSONQueryParams = field()
+    request: shared.CategoryEdit = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutCategoriesIDJSONResponse:
+    content_type: str = field()
+    status_code: int = field()
     category: Optional[shared.Category] = field(default=None)
-    content_type: str = field(default=None)
     not_found: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

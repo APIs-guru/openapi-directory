@@ -1,5 +1,7 @@
 package shared
 
+// EnterpriseCrmEventbusProtoValueType
+// Used for define type for values. Currently supported value types include int, string, double, array, and any proto message.
 type EnterpriseCrmEventbusProtoValueType struct {
 	BooleanValue *bool                                  `json:"booleanValue,omitempty"`
 	DoubleArray  *EnterpriseCrmEventbusProtoDoubleArray `json:"doubleArray,omitempty"`

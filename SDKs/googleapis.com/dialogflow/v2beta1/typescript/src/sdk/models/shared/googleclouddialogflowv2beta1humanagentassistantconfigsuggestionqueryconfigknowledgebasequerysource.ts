@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfigKnowledgeBaseQuerySource
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Knowledge base source settings. Supported features: ARTICLE_SUGGESTION, FAQ.
 **/
 export class GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfigKnowledgeBaseQuerySource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=knowledgeBases" })
+  @SpeakeasyMetadata({ data: "json, name=knowledgeBases" })
   knowledgeBases?: string[];
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetPolicyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Policy" })
+  @SpeakeasyMetadata({ data: "json, name=Policy" })
   policy?: string;
 
-  @Metadata({ data: "json, name=RevisionId" })
+  @SpeakeasyMetadata({ data: "json, name=RevisionId" })
   revisionId?: string;
 }

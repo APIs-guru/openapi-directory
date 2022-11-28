@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SeverityDescriptionEnum } from "./severitydescriptionenum";
+
 
 
 // Severity
@@ -7,9 +8,9 @@ import { SeverityDescriptionEnum } from "./severitydescriptionenum";
  * Provides the numerical and qualitative representations of a finding's severity.
 **/
 export class Severity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: SeverityDescriptionEnum;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: number;
 }

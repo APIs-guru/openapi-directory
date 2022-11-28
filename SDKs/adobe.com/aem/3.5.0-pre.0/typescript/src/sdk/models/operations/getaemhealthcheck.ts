@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAemHealthCheckQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=combineTagsOr" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=combineTagsOr" })
   combineTagsOr?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tags" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tags" })
   tags?: string;
 }
 
 
 export class GetAemHealthCheckRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAemHealthCheckQueryParams;
 }
 
 
 export class GetAemHealthCheckResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAemHealthCheckDefaultApplicationJsonString?: string;
 }

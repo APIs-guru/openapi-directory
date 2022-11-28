@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetContainersJsonQueryParams = /** @class */ (function (_super) {
     __extends(GetContainersJsonQueryParams, _super);
     function GetContainersJsonQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=all" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=all" }),
         __metadata("design:type", String)
     ], GetContainersJsonQueryParams.prototype, "all", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filters" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filters" }),
         __metadata("design:type", String)
     ], GetContainersJsonQueryParams.prototype, "filters", void 0);
     return GetContainersJsonQueryParams;
@@ -45,11 +45,11 @@ var GetContainersJsonHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" }),
         __metadata("design:type", String)
     ], GetContainersJsonHeaders.prototype, "xAuthProjectId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" }),
         __metadata("design:type", String)
     ], GetContainersJsonHeaders.prototype, "xAuthToken", void 0);
     return GetContainersJsonHeaders;
@@ -61,11 +61,11 @@ var GetContainersJsonRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetContainersJsonQueryParams)
     ], GetContainersJsonRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetContainersJsonHeaders)
     ], GetContainersJsonRequest.prototype, "headers", void 0);
     return GetContainersJsonRequest;
@@ -77,15 +77,15 @@ var GetContainersJsonResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], GetContainersJsonResponse.prototype, "containers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetContainersJsonResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetContainersJsonResponse.prototype, "statusCode", void 0);
     return GetContainersJsonResponse;

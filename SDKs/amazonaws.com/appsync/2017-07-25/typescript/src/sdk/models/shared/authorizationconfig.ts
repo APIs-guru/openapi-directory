@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthorizationTypeEnum } from "./authorizationtypeenum";
 import { AwsIamConfig } from "./awsiamconfig";
+
 
 
 // AuthorizationConfig
@@ -8,9 +9,9 @@ import { AwsIamConfig } from "./awsiamconfig";
  * The authorization config in case the HTTP endpoint requires authorization.
 **/
 export class AuthorizationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizationType" })
+  @SpeakeasyMetadata({ data: "json, name=authorizationType" })
   authorizationType: AuthorizationTypeEnum;
 
-  @Metadata({ data: "json, name=awsIamConfig" })
+  @SpeakeasyMetadata({ data: "json, name=awsIamConfig" })
   awsIamConfig?: AwsIamConfig;
 }

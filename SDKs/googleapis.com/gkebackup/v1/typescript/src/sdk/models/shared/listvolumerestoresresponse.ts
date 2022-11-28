@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VolumeRestore } from "./volumerestore";
+
 
 
 // ListVolumeRestoresResponse
@@ -8,9 +8,9 @@ import { VolumeRestore } from "./volumerestore";
  * Response message for ListVolumeRestores.
 **/
 export class ListVolumeRestoresResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=volumeRestores", elemType: shared.VolumeRestore })
+  @SpeakeasyMetadata({ data: "json, name=volumeRestores", elemType: VolumeRestore })
   volumeRestores?: VolumeRestore[];
 }

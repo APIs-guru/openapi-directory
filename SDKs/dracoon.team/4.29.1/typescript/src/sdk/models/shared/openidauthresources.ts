@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OpenIdProvider } from "./openidprovider";
+
 
 
 // OpenIdAuthResources
@@ -8,6 +8,6 @@ import { OpenIdProvider } from "./openidprovider";
  * List of OpenID Connect providers
 **/
 export class OpenIdAuthResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=openIdProviders", elemType: shared.OpenIdProvider })
+  @SpeakeasyMetadata({ data: "json, name=openIdProviders", elemType: OpenIdProvider })
   openIdProviders: OpenIdProvider[];
 }

@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Optional
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,32 +14,53 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def incer(self, request: operations.IncerRequest) -> operations.IncerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Income Certificate
+        API to verify Income Certificate.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/incer/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -77,19 +101,21 @@ class SDK:
 
     
     def rmcer(self, request: operations.RmcerRequest) -> operations.RmcerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Marriage Certificate
+        API to verify Marriage Certificate.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/rmcer/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -130,19 +156,21 @@ class SDK:
 
     
     def rscer(self, request: operations.RscerRequest) -> operations.RscerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Residence Certificate
+        API to verify Residence Certificate.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/rscer/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -183,19 +211,21 @@ class SDK:
 
     
     def sicrd(self, request: operations.SicrdRequest) -> operations.SicrdResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Senior Citizen Identity Card/ Certificate
+        API to verify Senior Citizen Identity Card/ Certificate.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/sicrd/certificate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

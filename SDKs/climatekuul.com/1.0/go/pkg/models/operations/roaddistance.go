@@ -1,6 +1,6 @@
 package operations
 
-var RoadDistanceServers = []string{
+var RoadDistanceServerList = []string{
 	"http://api.climatekuul.com:8000/footprint",
 }
 

@@ -1,21 +1,21 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import attributedimension
-from . import segmentbehaviors
-from . import segmentdemographics
-from . import segmentlocation
-from . import metricdimension
-from . import attributedimension
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SegmentDimensions:
-    attributes: Optional[dict[str, attributedimension.AttributeDimension]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Attributes' }})
-    behavior: Optional[segmentbehaviors.SegmentBehaviors] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Behavior' }})
-    demographic: Optional[segmentdemographics.SegmentDemographics] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Demographic' }})
-    location: Optional[segmentlocation.SegmentLocation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Location' }})
-    metrics: Optional[dict[str, metricdimension.MetricDimension]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Metrics' }})
-    user_attributes: Optional[dict[str, attributedimension.AttributeDimension]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UserAttributes' }})
+    r"""SegmentDimensions
+    Specifies the dimension settings for a segment.
+    """
+    
+    attributes: Optional[dict[str, AttributeDimension]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Attributes') }})
+    behavior: Optional[SegmentBehaviors] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Behavior') }})
+    demographic: Optional[SegmentDemographics] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Demographic') }})
+    location: Optional[SegmentLocation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Location') }})
+    metrics: Optional[dict[str, MetricDimension]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Metrics') }})
+    user_attributes: Optional[dict[str, AttributeDimension]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('UserAttributes') }})
     

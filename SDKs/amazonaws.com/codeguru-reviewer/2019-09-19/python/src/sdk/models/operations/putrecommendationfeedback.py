@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,25 +23,25 @@ class PutRecommendationFeedbackHeaders:
 @dataclass_json
 @dataclass
 class PutRecommendationFeedbackRequestBody:
-    code_review_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CodeReviewArn' }})
-    reactions: List[shared.ReactionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Reactions' }})
-    recommendation_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RecommendationId' }})
+    code_review_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CodeReviewArn') }})
+    reactions: List[shared.ReactionEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Reactions') }})
+    recommendation_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RecommendationId') }})
     
 
 @dataclass
 class PutRecommendationFeedbackRequest:
-    headers: PutRecommendationFeedbackHeaders = field(default=None)
-    request: PutRecommendationFeedbackRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutRecommendationFeedbackHeaders = field()
+    request: PutRecommendationFeedbackRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutRecommendationFeedbackResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     put_recommendation_feedback_response: Optional[dict[str, Any]] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

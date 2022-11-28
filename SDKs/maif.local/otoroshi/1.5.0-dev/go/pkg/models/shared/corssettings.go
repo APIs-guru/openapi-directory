@@ -1,5 +1,7 @@
 package shared
 
+// CorsSettings
+// The configuration for cors support
 type CorsSettings struct {
 	AllowCredentials bool     `json:"allowCredentials"`
 	AllowHeaders     []string `json:"allowHeaders"`

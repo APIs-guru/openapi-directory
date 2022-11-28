@@ -1,38 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RoleRolePrivileges extends SpeakeasyBase {
-  @Metadata({ data: "json, name=privilegeName" })
+  @SpeakeasyMetadata({ data: "json, name=privilegeName" })
   privilegeName?: string;
 
-  @Metadata({ data: "json, name=serviceId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceId" })
   serviceId?: string;
 }
 
 
 export class Role extends SpeakeasyBase {
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=isSuperAdminRole" })
+  @SpeakeasyMetadata({ data: "json, name=isSuperAdminRole" })
   isSuperAdminRole?: boolean;
 
-  @Metadata({ data: "json, name=isSystemRole" })
+  @SpeakeasyMetadata({ data: "json, name=isSystemRole" })
   isSystemRole?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=roleDescription" })
+  @SpeakeasyMetadata({ data: "json, name=roleDescription" })
   roleDescription?: string;
 
-  @Metadata({ data: "json, name=roleId" })
+  @SpeakeasyMetadata({ data: "json, name=roleId" })
   roleId?: string;
 
-  @Metadata({ data: "json, name=roleName" })
+  @SpeakeasyMetadata({ data: "json, name=roleName" })
   roleName?: string;
 
-  @Metadata({ data: "json, name=rolePrivileges", elemType: shared.RoleRolePrivileges })
+  @SpeakeasyMetadata({ data: "json, name=rolePrivileges", elemType: RoleRolePrivileges })
   rolePrivileges?: RoleRolePrivileges[];
 }

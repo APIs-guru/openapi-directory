@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PodcastMinimum } from "./podcastminimum";
+
 
 
 // CuratedListSearchResult
@@ -8,36 +8,36 @@ import { PodcastMinimum } from "./podcastminimum";
  * When **type** is *curated*.
 **/
 export class CuratedListSearchResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description_highlighted" })
+  @SpeakeasyMetadata({ data: "json, name=description_highlighted" })
   descriptionHighlighted?: string;
 
-  @Metadata({ data: "json, name=description_original" })
+  @SpeakeasyMetadata({ data: "json, name=description_original" })
   descriptionOriginal?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=listennotes_url" })
+  @SpeakeasyMetadata({ data: "json, name=listennotes_url" })
   listennotesUrl?: string;
 
-  @Metadata({ data: "json, name=podcasts", elemType: shared.PodcastMinimum })
+  @SpeakeasyMetadata({ data: "json, name=podcasts", elemType: PodcastMinimum })
   podcasts?: PodcastMinimum[];
 
-  @Metadata({ data: "json, name=pub_date_ms" })
+  @SpeakeasyMetadata({ data: "json, name=pub_date_ms" })
   pubDateMs?: number;
 
-  @Metadata({ data: "json, name=source_domain" })
+  @SpeakeasyMetadata({ data: "json, name=source_domain" })
   sourceDomain?: string;
 
-  @Metadata({ data: "json, name=source_url" })
+  @SpeakeasyMetadata({ data: "json, name=source_url" })
   sourceUrl?: string;
 
-  @Metadata({ data: "json, name=title_highlighted" })
+  @SpeakeasyMetadata({ data: "json, name=title_highlighted" })
   titleHighlighted?: string;
 
-  @Metadata({ data: "json, name=title_original" })
+  @SpeakeasyMetadata({ data: "json, name=title_original" })
   titleOriginal?: string;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }

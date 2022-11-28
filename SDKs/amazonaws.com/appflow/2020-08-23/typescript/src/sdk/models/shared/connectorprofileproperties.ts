@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatadogConnectorProfileProperties } from "./datadogconnectorprofileproperties";
 import { DynatraceConnectorProfileProperties } from "./dynatraceconnectorprofileproperties";
 import { InforNexusConnectorProfileProperties } from "./infornexusconnectorprofileproperties";
@@ -13,59 +13,60 @@ import { VeevaConnectorProfileProperties } from "./veevaconnectorprofileproperti
 import { ZendeskConnectorProfileProperties } from "./zendeskconnectorprofileproperties";
 
 
+
 // ConnectorProfileProperties
 /** 
  *  The connector-specific profile properties required by each connector. 
 **/
 export class ConnectorProfileProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amplitude" })
+  @SpeakeasyMetadata({ data: "json, name=Amplitude" })
   amplitude?: Map<string, any>;
 
-  @Metadata({ data: "json, name=Datadog" })
+  @SpeakeasyMetadata({ data: "json, name=Datadog" })
   datadog?: DatadogConnectorProfileProperties;
 
-  @Metadata({ data: "json, name=Dynatrace" })
+  @SpeakeasyMetadata({ data: "json, name=Dynatrace" })
   dynatrace?: DynatraceConnectorProfileProperties;
 
-  @Metadata({ data: "json, name=GoogleAnalytics" })
+  @SpeakeasyMetadata({ data: "json, name=GoogleAnalytics" })
   googleAnalytics?: Map<string, any>;
 
-  @Metadata({ data: "json, name=Honeycode" })
+  @SpeakeasyMetadata({ data: "json, name=Honeycode" })
   honeycode?: Map<string, any>;
 
-  @Metadata({ data: "json, name=InforNexus" })
+  @SpeakeasyMetadata({ data: "json, name=InforNexus" })
   inforNexus?: InforNexusConnectorProfileProperties;
 
-  @Metadata({ data: "json, name=Marketo" })
+  @SpeakeasyMetadata({ data: "json, name=Marketo" })
   marketo?: MarketoConnectorProfileProperties;
 
-  @Metadata({ data: "json, name=Redshift" })
+  @SpeakeasyMetadata({ data: "json, name=Redshift" })
   redshift?: RedshiftConnectorProfileProperties;
 
-  @Metadata({ data: "json, name=SAPOData" })
+  @SpeakeasyMetadata({ data: "json, name=SAPOData" })
   sapoData?: SapoDataConnectorProfileProperties;
 
-  @Metadata({ data: "json, name=Salesforce" })
+  @SpeakeasyMetadata({ data: "json, name=Salesforce" })
   salesforce?: SalesforceConnectorProfileProperties;
 
-  @Metadata({ data: "json, name=ServiceNow" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceNow" })
   serviceNow?: ServiceNowConnectorProfileProperties;
 
-  @Metadata({ data: "json, name=Singular" })
+  @SpeakeasyMetadata({ data: "json, name=Singular" })
   singular?: Map<string, any>;
 
-  @Metadata({ data: "json, name=Slack" })
+  @SpeakeasyMetadata({ data: "json, name=Slack" })
   slack?: SlackConnectorProfileProperties;
 
-  @Metadata({ data: "json, name=Snowflake" })
+  @SpeakeasyMetadata({ data: "json, name=Snowflake" })
   snowflake?: SnowflakeConnectorProfileProperties;
 
-  @Metadata({ data: "json, name=Trendmicro" })
+  @SpeakeasyMetadata({ data: "json, name=Trendmicro" })
   trendmicro?: Map<string, any>;
 
-  @Metadata({ data: "json, name=Veeva" })
+  @SpeakeasyMetadata({ data: "json, name=Veeva" })
   veeva?: VeevaConnectorProfileProperties;
 
-  @Metadata({ data: "json, name=Zendesk" })
+  @SpeakeasyMetadata({ data: "json, name=Zendesk" })
   zendesk?: ZendeskConnectorProfileProperties;
 }

@@ -1,11 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import color
-from . import colorstyle
-from . import datasourcecolumnreference
-from . import color
-from . import colorstyle
+from sdk import utils
+from . import *
 
 class SortSpecSortOrderEnum(str, Enum):
     SORT_ORDER_UNSPECIFIED = "SORT_ORDER_UNSPECIFIED"
@@ -16,11 +14,15 @@ class SortSpecSortOrderEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SortSpec:
-    background_color: Optional[color.Color] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backgroundColor' }})
-    background_color_style: Optional[colorstyle.ColorStyle] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backgroundColorStyle' }})
-    data_source_column_reference: Optional[datasourcecolumnreference.DataSourceColumnReference] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataSourceColumnReference' }})
-    dimension_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dimensionIndex' }})
-    foreground_color: Optional[color.Color] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'foregroundColor' }})
-    foreground_color_style: Optional[colorstyle.ColorStyle] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'foregroundColorStyle' }})
-    sort_order: Optional[SortSpecSortOrderEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sortOrder' }})
+    r"""SortSpec
+    A sort order associated with a specific column or row.
+    """
+    
+    background_color: Optional[Color] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('backgroundColor') }})
+    background_color_style: Optional[ColorStyle] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('backgroundColorStyle') }})
+    data_source_column_reference: Optional[DataSourceColumnReference] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataSourceColumnReference') }})
+    dimension_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dimensionIndex') }})
+    foreground_color: Optional[Color] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('foregroundColor') }})
+    foreground_color_style: Optional[ColorStyle] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('foregroundColorStyle') }})
+    sort_order: Optional[SortSpecSortOrderEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sortOrder') }})
     

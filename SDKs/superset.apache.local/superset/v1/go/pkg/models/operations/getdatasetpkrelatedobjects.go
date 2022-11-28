@@ -12,11 +12,6 @@ type GetDatasetPkRelatedObjectsSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetDatasetPkRelatedObjectsRequest struct {
-	PathParams GetDatasetPkRelatedObjectsPathParams
-	Security   GetDatasetPkRelatedObjectsSecurity
-}
-
 type GetDatasetPkRelatedObjects401ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -27,6 +22,11 @@ type GetDatasetPkRelatedObjects404ApplicationJSON struct {
 
 type GetDatasetPkRelatedObjects500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetDatasetPkRelatedObjectsRequest struct {
+	PathParams GetDatasetPkRelatedObjectsPathParams
+	Security   GetDatasetPkRelatedObjectsSecurity
 }
 
 type GetDatasetPkRelatedObjectsResponse struct {

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoScalingGroupProviderUpdate } from "./autoscalinggroupproviderupdate";
 
 
+
 export class UpdateCapacityProviderRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoScalingGroupProvider" })
+  @SpeakeasyMetadata({ data: "json, name=autoScalingGroupProvider" })
   autoScalingGroupProvider: AutoScalingGroupProviderUpdate;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }

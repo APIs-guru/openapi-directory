@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var WorkloadIdentityPoolStateEnum;
 (function (WorkloadIdentityPoolStateEnum) {
     WorkloadIdentityPoolStateEnum["StateUnspecified"] = "STATE_UNSPECIFIED";
@@ -39,25 +39,49 @@ var WorkloadIdentityPool = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], WorkloadIdentityPool.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=disabled" }),
+        SpeakeasyMetadata({ data: "json, name=disabled" }),
         __metadata("design:type", Boolean)
     ], WorkloadIdentityPool.prototype, "disabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], WorkloadIdentityPool.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], WorkloadIdentityPool.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], WorkloadIdentityPool.prototype, "state", void 0);
     return WorkloadIdentityPool;
 }(SpeakeasyBase));
 export { WorkloadIdentityPool };
+// WorkloadIdentityPoolInput
+/**
+ * Represents a collection of external workload identities. You can define IAM policies to grant these identities access to Google Cloud resources.
+**/
+var WorkloadIdentityPoolInput = /** @class */ (function (_super) {
+    __extends(WorkloadIdentityPoolInput, _super);
+    function WorkloadIdentityPoolInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], WorkloadIdentityPoolInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=disabled" }),
+        __metadata("design:type", Boolean)
+    ], WorkloadIdentityPoolInput.prototype, "disabled", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
+        __metadata("design:type", String)
+    ], WorkloadIdentityPoolInput.prototype, "displayName", void 0);
+    return WorkloadIdentityPoolInput;
+}(SpeakeasyBase));
+export { WorkloadIdentityPoolInput };

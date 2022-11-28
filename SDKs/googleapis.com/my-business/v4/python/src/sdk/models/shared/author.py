@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AuthorTypeEnum(str, Enum):
     AUTHOR_TYPE_UNSPECIFIED = "AUTHOR_TYPE_UNSPECIFIED"
@@ -12,7 +14,11 @@ class AuthorTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Author:
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    profile_photo_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'profilePhotoUrl' }})
-    type: Optional[AuthorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""Author
+    Represents the author of a question or answer
+    """
+    
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    profile_photo_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('profilePhotoUrl') }})
+    type: Optional[AuthorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

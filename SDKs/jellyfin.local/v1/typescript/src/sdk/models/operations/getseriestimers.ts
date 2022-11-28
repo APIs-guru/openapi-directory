@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSeriesTimersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
   sortBy?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
   sortOrder?: shared.SortOrderEnum;
 }
 
 
 export class GetSeriesTimersSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetSeriesTimersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSeriesTimersQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetSeriesTimersSecurity;
 }
 
 
 export class GetSeriesTimersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   seriesTimerInfoDtoQueryResult?: shared.SeriesTimerInfoDtoQueryResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

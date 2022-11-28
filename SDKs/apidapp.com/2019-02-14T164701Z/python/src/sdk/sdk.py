@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,Optional
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,26 +14,45 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def delete_key_key_(self, request: operations.DeleteKeyKeyRequest) -> operations.DeleteKeyKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/key/{key}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -45,13 +67,16 @@ class SDK:
 
     
     def get_account_id_(self, request: operations.GetAccountIDRequest) -> operations.GetAccountIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get account balance
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/{id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -68,13 +93,16 @@ class SDK:
 
     
     def get_block(self, request: operations.GetBlockRequest) -> operations.GetBlockResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Access detailed block information
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/block"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -91,13 +119,16 @@ class SDK:
 
     
     def get_block_id_(self, request: operations.GetBlockIDRequest) -> operations.GetBlockIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get information about particular block
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/block/{id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -114,13 +145,16 @@ class SDK:
 
     
     def get_block_id_transaction(self, request: operations.GetBlockIDTransactionRequest) -> operations.GetBlockIDTransactionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get transaction count within block
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/block/{id}/transaction", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -137,13 +171,16 @@ class SDK:
 
     
     def get_block_id_transaction_index_(self, request: operations.GetBlockIDTransactionIndexRequest) -> operations.GetBlockIDTransactionIndexResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get information about particular transaction within block
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/block/{id}/transaction/{index}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -160,13 +197,16 @@ class SDK:
 
     
     def get_blockchain(self, request: operations.GetBlockchainRequest) -> operations.GetBlockchainResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of supported blockchains
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/blockchain"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -183,13 +223,16 @@ class SDK:
 
     
     def get_blockchain_id_(self, request: operations.GetBlockchainIDRequest) -> operations.GetBlockchainIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get information about blockchain woth given id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/blockchain/{id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -206,13 +249,16 @@ class SDK:
 
     
     def get_contract_id_(self, request: operations.GetContractIDRequest) -> operations.GetContractIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get contract balance
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/contract/{id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -229,13 +275,16 @@ class SDK:
 
     
     def get_erc20(self) -> operations.GetErc20Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get token information such as name, total amount in circulation, etc
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/erc20"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -250,13 +299,16 @@ class SDK:
 
     
     def get_erc20_address_(self, request: operations.GetErc20AddressRequest) -> operations.GetErc20AddressResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get information amout token balance in the account
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/erc20/{address}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -271,15 +323,14 @@ class SDK:
 
     
     def get_key(self, request: operations.GetKeyRequest) -> operations.GetKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/key"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -294,13 +345,16 @@ class SDK:
 
     
     def get_transaction_hash_(self, request: operations.GetTransactionHashRequest) -> operations.GetTransactionHashResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get information about transaction by the transaction hash value
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/transaction/{hash}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -317,13 +371,16 @@ class SDK:
 
     
     def get_transaction_hash_receipt(self, request: operations.GetTransactionHashReceiptRequest) -> operations.GetTransactionHashReceiptResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get receipt detail information
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/transaction/{hash}/receipt", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -340,13 +397,16 @@ class SDK:
 
     
     def get_version(self) -> operations.GetVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get API version info
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/version"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -363,13 +423,16 @@ class SDK:
 
     
     def get_wallet(self) -> operations.GetWalletResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get current account balance
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/wallet"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -384,13 +447,13 @@ class SDK:
 
     
     def get_wallet_account(self) -> operations.GetWalletAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/wallet/account"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -405,13 +468,16 @@ class SDK:
 
     
     def get_wallet_account_id_(self, request: operations.GetWalletAccountIDRequest) -> operations.GetWalletAccountIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get account balance
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/wallet/account/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -426,13 +492,13 @@ class SDK:
 
     
     def options_(self) -> operations.OptionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -449,13 +515,13 @@ class SDK:
 
     
     def options_account(self) -> operations.OptionsAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -472,13 +538,13 @@ class SDK:
 
     
     def options_account_id_(self, request: operations.OptionsAccountIDRequest) -> operations.OptionsAccountIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/account/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -495,13 +561,13 @@ class SDK:
 
     
     def options_block(self) -> operations.OptionsBlockResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/block"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -518,13 +584,13 @@ class SDK:
 
     
     def options_block_id_(self, request: operations.OptionsBlockIDRequest) -> operations.OptionsBlockIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/block/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -541,13 +607,13 @@ class SDK:
 
     
     def options_block_id_transaction(self, request: operations.OptionsBlockIDTransactionRequest) -> operations.OptionsBlockIDTransactionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/block/{id}/transaction", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -564,13 +630,13 @@ class SDK:
 
     
     def options_block_id_transaction_index_(self, request: operations.OptionsBlockIDTransactionIndexRequest) -> operations.OptionsBlockIDTransactionIndexResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/block/{id}/transaction/{index}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -587,13 +653,13 @@ class SDK:
 
     
     def options_blockchain(self) -> operations.OptionsBlockchainResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/blockchain"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -610,13 +676,13 @@ class SDK:
 
     
     def options_blockchain_id_(self, request: operations.OptionsBlockchainIDRequest) -> operations.OptionsBlockchainIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/blockchain/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -633,13 +699,13 @@ class SDK:
 
     
     def options_contract(self) -> operations.OptionsContractResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/contract"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -656,13 +722,13 @@ class SDK:
 
     
     def options_contract_id_(self, request: operations.OptionsContractIDRequest) -> operations.OptionsContractIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/contract/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -679,13 +745,13 @@ class SDK:
 
     
     def options_echo(self) -> operations.OptionsEchoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/echo"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -702,13 +768,13 @@ class SDK:
 
     
     def options_erc20(self) -> operations.OptionsErc20Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/erc20"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -725,13 +791,13 @@ class SDK:
 
     
     def options_erc20_address_(self, request: operations.OptionsErc20AddressRequest) -> operations.OptionsErc20AddressResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/erc20/{address}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -748,13 +814,13 @@ class SDK:
 
     
     def options_key(self) -> operations.OptionsKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/key"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -771,13 +837,13 @@ class SDK:
 
     
     def options_key_key_(self, request: operations.OptionsKeyKeyRequest) -> operations.OptionsKeyKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/key/{key}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -794,13 +860,13 @@ class SDK:
 
     
     def options_transaction(self) -> operations.OptionsTransactionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/transaction"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -817,13 +883,13 @@ class SDK:
 
     
     def options_transaction_hash_(self, request: operations.OptionsTransactionHashRequest) -> operations.OptionsTransactionHashResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/transaction/{hash}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -840,13 +906,13 @@ class SDK:
 
     
     def options_transaction_hash_receipt(self, request: operations.OptionsTransactionHashReceiptRequest) -> operations.OptionsTransactionHashReceiptResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/transaction/{hash}/receipt", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -863,13 +929,13 @@ class SDK:
 
     
     def options_version(self) -> operations.OptionsVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/version"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -886,13 +952,13 @@ class SDK:
 
     
     def options_wallet(self) -> operations.OptionsWalletResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/wallet"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -909,13 +975,13 @@ class SDK:
 
     
     def options_wallet_account(self) -> operations.OptionsWalletAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/wallet/account"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -932,13 +998,13 @@ class SDK:
 
     
     def options_wallet_account_id_(self, request: operations.OptionsWalletAccountIDRequest) -> operations.OptionsWalletAccountIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/wallet/account/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -955,13 +1021,13 @@ class SDK:
 
     
     def options_wallet_account_id_pay(self, request: operations.OptionsWalletAccountIDPayRequest) -> operations.OptionsWalletAccountIDPayResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/wallet/account/{id}/pay", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("OPTIONS", url)
         content_type = r.headers.get("Content-Type")
 
@@ -978,13 +1044,16 @@ class SDK:
 
     
     def post_account(self, request: operations.PostAccountRequest) -> operations.PostAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create new account
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/account"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1001,13 +1070,16 @@ class SDK:
 
     
     def post_contract(self) -> operations.PostContractResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new smart contract
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/contract"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1022,13 +1094,16 @@ class SDK:
 
     
     def post_contract_id_(self, request: operations.PostContractIDRequest) -> operations.PostContractIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Call the contract
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/contract/{id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1045,13 +1120,13 @@ class SDK:
 
     
     def post_erc20(self) -> operations.PostErc20Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/erc20"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1066,13 +1141,16 @@ class SDK:
 
     
     def post_erc20_address_(self, request: operations.PostErc20AddressRequest) -> operations.PostErc20AddressResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Transfer tokens to another account
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/erc20/{address}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1087,13 +1165,13 @@ class SDK:
 
     
     def post_key(self) -> operations.PostKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/key"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1108,13 +1186,16 @@ class SDK:
 
     
     def post_transaction(self, request: operations.PostTransactionRequest) -> operations.PostTransactionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new transaction. Transfer Ether between accounts
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/transaction"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1131,13 +1212,16 @@ class SDK:
 
     
     def post_wallet(self) -> operations.PostWalletResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create personal wallet
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/wallet"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1152,13 +1236,13 @@ class SDK:
 
     
     def post_wallet_account(self) -> operations.PostWalletAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/wallet/account"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1173,13 +1257,13 @@ class SDK:
 
     
     def post_wallet_account_id_contract(self, request: operations.PostWalletAccountIDContractRequest) -> operations.PostWalletAccountIDContractResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/wallet/account/{id}/contract", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1194,13 +1278,13 @@ class SDK:
 
     
     def post_wallet_account_id_erc20(self, request: operations.PostWalletAccountIDErc20Request) -> operations.PostWalletAccountIDErc20Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/wallet/account/{id}/erc20", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1215,13 +1299,16 @@ class SDK:
 
     
     def post_wallet_account_id_pay(self, request: operations.PostWalletAccountIDPayRequest) -> operations.PostWalletAccountIDPayResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Send payment from the account held within the wallet
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/wallet/account/{id}/pay", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 

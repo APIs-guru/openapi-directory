@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DomainUserCredentials extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain: string;
 
-  @Metadata({ data: "json, name=organizationalUnit" })
+  @SpeakeasyMetadata({ data: "json, name=organizationalUnit" })
   organizationalUnit?: string;
 
-  @Metadata({ data: "json, name=passwordSecretIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=passwordSecretIdentifier" })
   passwordSecretIdentifier: string;
 
-  @Metadata({ data: "json, name=userName" })
+  @SpeakeasyMetadata({ data: "json, name=userName" })
   userName: string;
 }

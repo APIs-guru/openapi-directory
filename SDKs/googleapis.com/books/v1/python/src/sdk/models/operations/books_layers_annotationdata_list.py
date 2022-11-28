@@ -1,22 +1,26 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BooksLayersAnnotationDataListPathParams:
-    layer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'layerId', 'style': 'simple', 'explode': False }})
-    volume_id: str = field(default=None, metadata={'path_param': { 'field_name': 'volumeId', 'style': 'simple', 'explode': False }})
+    layer_id: str = field(metadata={'path_param': { 'field_name': 'layerId', 'style': 'simple', 'explode': False }})
+    volume_id: str = field(metadata={'path_param': { 'field_name': 'volumeId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class BooksLayersAnnotationDataListQueryParams:
+    content_version: str = field(metadata={'query_param': { 'field_name': 'contentVersion', 'style': 'form', 'explode': True }})
     dollar_xgafv: Optional[shared.XgafvEnum] = field(default=None, metadata={'query_param': { 'field_name': '$.xgafv', 'style': 'form', 'explode': True }})
     access_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'access_token', 'style': 'form', 'explode': True }})
     alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
     annotation_data_id: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'annotationDataId', 'style': 'form', 'explode': True }})
     callback: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'callback', 'style': 'form', 'explode': True }})
-    content_version: str = field(default=None, metadata={'query_param': { 'field_name': 'contentVersion', 'style': 'form', 'explode': True }})
     fields: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fields', 'style': 'form', 'explode': True }})
     h: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'h', 'style': 'form', 'explode': True }})
     key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'key', 'style': 'form', 'explode': True }})
@@ -37,20 +41,20 @@ class BooksLayersAnnotationDataListQueryParams:
 
 @dataclass
 class BooksLayersAnnotationDataListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BooksLayersAnnotationDataListRequest:
-    path_params: BooksLayersAnnotationDataListPathParams = field(default=None)
-    query_params: BooksLayersAnnotationDataListQueryParams = field(default=None)
-    security: BooksLayersAnnotationDataListSecurity = field(default=None)
+    path_params: BooksLayersAnnotationDataListPathParams = field()
+    query_params: BooksLayersAnnotationDataListQueryParams = field()
+    security: BooksLayersAnnotationDataListSecurity = field()
     
 
 @dataclass
 class BooksLayersAnnotationDataListResponse:
+    content_type: str = field()
+    status_code: int = field()
     annotationsdata: Optional[shared.Annotationsdata] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

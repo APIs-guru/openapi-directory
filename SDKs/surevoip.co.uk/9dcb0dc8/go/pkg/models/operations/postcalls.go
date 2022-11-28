@@ -27,13 +27,13 @@ type PostCallsRequestBody struct {
 	To                   string                       `json:"to"`
 }
 
-type PostCallsRequest struct {
-	Request PostCallsRequestBody `request:"mediaType=application/json"`
-}
-
 type PostCalls202ApplicationJSON struct {
 	Call     *string `json:"Call,omitempty"`
 	Location *string `json:"Location,omitempty"`
+}
+
+type PostCallsRequest struct {
+	Request PostCallsRequestBody `request:"mediaType=application/json"`
 }
 
 type PostCallsResponse struct {

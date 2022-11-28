@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ServiceMeshStatusDetails } from "./servicemeshstatusdetails";
 export declare enum ServiceMeshControlPlaneManagementStateEnum {
     LifecycleStateUnspecified = "LIFECYCLE_STATE_UNSPECIFIED",

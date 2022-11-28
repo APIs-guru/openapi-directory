@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Asset } from "./asset";
 
 
+
 export class BoardListBoard extends SpeakeasyBase {
-  @Metadata({ data: "json, name=asset_count" })
+  @SpeakeasyMetadata({ data: "json, name=asset_count" })
   assetCount?: number;
 
-  @Metadata({ data: "json, name=board_relationship" })
+  @SpeakeasyMetadata({ data: "json, name=board_relationship" })
   boardRelationship?: string;
 
-  @Metadata({ data: "json, name=date_created" })
+  @SpeakeasyMetadata({ data: "json, name=date_created" })
   dateCreated?: Date;
 
-  @Metadata({ data: "json, name=date_last_updated" })
+  @SpeakeasyMetadata({ data: "json, name=date_last_updated" })
   dateLastUpdated?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=hero_asset" })
+  @SpeakeasyMetadata({ data: "json, name=hero_asset" })
   heroAsset?: Asset;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

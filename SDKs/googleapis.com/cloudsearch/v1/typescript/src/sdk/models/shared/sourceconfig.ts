@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SourceCrowdingConfig } from "./sourcecrowdingconfig";
 import { SourceScoringConfig } from "./sourcescoringconfig";
 import { Source } from "./source";
+
 
 
 // SourceConfig
@@ -9,12 +10,12 @@ import { Source } from "./source";
  * Configurations for a source while processing a Search or Suggest request.
 **/
 export class SourceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=crowdingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=crowdingConfig" })
   crowdingConfig?: SourceCrowdingConfig;
 
-  @Metadata({ data: "json, name=scoringConfig" })
+  @SpeakeasyMetadata({ data: "json, name=scoringConfig" })
   scoringConfig?: SourceScoringConfig;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: Source;
 }

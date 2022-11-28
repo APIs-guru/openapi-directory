@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BlueGreenInfo } from "./bluegreeninfo";
+
 
 
 // UpdateInfo
@@ -7,6 +8,6 @@ import { BlueGreenInfo } from "./bluegreeninfo";
  * UpdateInfo contains resource (instance groups, etc), status and other intermediate information relevant to a node pool upgrade.
 **/
 export class UpdateInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blueGreenInfo" })
+  @SpeakeasyMetadata({ data: "json, name=blueGreenInfo" })
   blueGreenInfo?: BlueGreenInfo;
 }

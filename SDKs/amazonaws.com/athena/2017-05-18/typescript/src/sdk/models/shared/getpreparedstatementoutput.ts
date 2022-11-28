@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PreparedStatement } from "./preparedstatement";
 
 
+
 export class GetPreparedStatementOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PreparedStatement" })
+  @SpeakeasyMetadata({ data: "json, name=PreparedStatement" })
   preparedStatement?: PreparedStatement;
 }

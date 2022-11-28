@@ -44,6 +44,8 @@ const (
 	FlagTypeEnumRepeatedString         FlagTypeEnum = "REPEATED_STRING"
 )
 
+// Flag
+// A flag resource.
 type Flag struct {
 	AllowedIntValues    []string            `json:"allowedIntValues,omitempty"`
 	AllowedStringValues []string            `json:"allowedStringValues,omitempty"`

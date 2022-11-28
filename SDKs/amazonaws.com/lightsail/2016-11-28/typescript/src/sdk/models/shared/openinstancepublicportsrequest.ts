@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PortInfo } from "./portinfo";
 
 
+
 export class OpenInstancePublicPortsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceName" })
+  @SpeakeasyMetadata({ data: "json, name=instanceName" })
   instanceName: string;
 
-  @Metadata({ data: "json, name=portInfo" })
+  @SpeakeasyMetadata({ data: "json, name=portInfo" })
   portInfo: PortInfo;
 }

@@ -1,0 +1,6 @@
+package shared
+
+type ModifyVpcPeeringConnectionOptionsResult struct {
+	AccepterPeeringConnectionOptions  *PeeringConnectionOptions
+	RequesterPeeringConnectionOptions *PeeringConnectionOptions
+}

@@ -1,5 +1,7 @@
 package shared
 
+// CreateAgentRequest
+// CreateAgentRequest
 type CreateAgentRequest struct {
 	ActivationKey     string         `json:"ActivationKey"`
 	AgentName         *string        `json:"AgentName,omitempty"`

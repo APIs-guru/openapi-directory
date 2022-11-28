@@ -8,6 +8,8 @@ const (
 	SandboxIncomeFireWebhookRequestVerificationStatusEnumVerificationStatusProcessingFailed   SandboxIncomeFireWebhookRequestVerificationStatusEnum = "VERIFICATION_STATUS_PROCESSING_FAILED"
 )
 
+// SandboxIncomeFireWebhookRequest
+// SandboxIncomeFireWebhookRequest defines the request schema for `/sandbox/income/fire_webhook`
 type SandboxIncomeFireWebhookRequest struct {
 	ClientID             *string                                               `json:"client_id,omitempty"`
 	IncomeVerificationID string                                                `json:"income_verification_id"`

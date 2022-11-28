@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { V2AndroidApplication } from "./v2androidapplication";
+
 
 
 // V2AndroidKeyRestrictions
@@ -8,6 +8,6 @@ import { V2AndroidApplication } from "./v2androidapplication";
  * The Android apps that are allowed to use the key.
 **/
 export class V2AndroidKeyRestrictions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedApplications", elemType: shared.V2AndroidApplication })
+  @SpeakeasyMetadata({ data: "json, name=allowedApplications", elemType: V2AndroidApplication })
   allowedApplications?: V2AndroidApplication[];
 }

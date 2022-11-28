@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetEnvironmentsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=productId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=productId" })
   productId: string;
 }
 
 
 export class GetEnvironmentsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetEnvironmentsPathParams;
 }
 
 
 export class GetEnvironmentsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.EnvironmentModelHaljson })
+  @SpeakeasyMetadata({ elemType: shared.EnvironmentModelHaljson })
   environmentModelHaljsons?: shared.EnvironmentModelHaljson[];
 
-  @Metadata({ elemType: shared.EnvironmentModel })
+  @SpeakeasyMetadata({ elemType: shared.EnvironmentModel })
   environmentModels?: shared.EnvironmentModel[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

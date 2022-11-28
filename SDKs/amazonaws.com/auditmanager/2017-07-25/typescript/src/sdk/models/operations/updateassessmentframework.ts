@@ -1,83 +1,84 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateAssessmentFrameworkPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=frameworkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=frameworkId" })
   frameworkId: string;
 }
 
 
 export class UpdateAssessmentFrameworkHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class UpdateAssessmentFrameworkRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=complianceType" })
+  @SpeakeasyMetadata({ data: "json, name=complianceType" })
   complianceType?: string;
 
-  @Metadata({ data: "json, name=controlSets", elemType: shared.UpdateAssessmentFrameworkControlSet })
+  @SpeakeasyMetadata({ data: "json, name=controlSets", elemType: shared.UpdateAssessmentFrameworkControlSet })
   controlSets: shared.UpdateAssessmentFrameworkControlSet[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }
 
 
 export class UpdateAssessmentFrameworkRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateAssessmentFrameworkPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateAssessmentFrameworkHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateAssessmentFrameworkRequestBody;
 }
 
 
 export class UpdateAssessmentFrameworkResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateAssessmentFrameworkResponse?: shared.UpdateAssessmentFrameworkResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

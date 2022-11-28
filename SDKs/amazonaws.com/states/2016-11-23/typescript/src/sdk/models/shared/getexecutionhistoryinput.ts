@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetExecutionHistoryInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=executionArn" })
+  @SpeakeasyMetadata({ data: "json, name=executionArn" })
   executionArn: string;
 
-  @Metadata({ data: "json, name=includeExecutionData" })
+  @SpeakeasyMetadata({ data: "json, name=includeExecutionData" })
   includeExecutionData?: boolean;
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=reverseOrder" })
+  @SpeakeasyMetadata({ data: "json, name=reverseOrder" })
   reverseOrder?: boolean;
 }

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Any,Optional
@@ -7,7 +7,7 @@ from typing import Any,Optional
 
 @dataclass
 class GetSetupV1ServicesIDAllocationsPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,13 +22,13 @@ class GetSetupV1ServicesIDAllocationsQueryParams:
 
 @dataclass
 class GetSetupV1ServicesIDAllocationsRequest:
-    path_params: GetSetupV1ServicesIDAllocationsPathParams = field(default=None)
-    query_params: GetSetupV1ServicesIDAllocationsQueryParams = field(default=None)
+    path_params: GetSetupV1ServicesIDAllocationsPathParams = field()
+    query_params: GetSetupV1ServicesIDAllocationsQueryParams = field()
     
 
 @dataclass
 class GetSetupV1ServicesIDAllocationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_allocation_list_view_model: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

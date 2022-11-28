@@ -1,11 +1,7 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class UpdateTemplateQueryParams extends SpeakeasyBase {
     templateId: number;
-}
-export declare class UpdateTemplateRequest extends SpeakeasyBase {
-    queryParams: UpdateTemplateQueryParams;
-    request: shared.TemplateDefinitionNew;
 }
 export declare class UpdateTemplate200ApplicationJson extends SpeakeasyBase {
     response?: shared.TemplateDefinition;
@@ -55,6 +51,10 @@ export declare class UpdateTemplate422ApplicationJson extends SpeakeasyBase {
 export declare class UpdateTemplate500ApplicationJson extends SpeakeasyBase {
     error?: string;
     status?: number;
+}
+export declare class UpdateTemplateRequest extends SpeakeasyBase {
+    queryParams: UpdateTemplateQueryParams;
+    request: shared.TemplateDefinitionNew;
 }
 export declare class UpdateTemplateResponse extends SpeakeasyBase {
     contentType: string;

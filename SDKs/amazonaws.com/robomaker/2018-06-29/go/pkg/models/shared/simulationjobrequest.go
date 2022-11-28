@@ -1,5 +1,7 @@
 package shared
 
+// SimulationJobRequest
+// Information about a simulation job request.
 type SimulationJobRequest struct {
 	Compute                 *Compute                      `json:"compute,omitempty"`
 	DataSources             []DataSourceConfig            `json:"dataSources,omitempty"`

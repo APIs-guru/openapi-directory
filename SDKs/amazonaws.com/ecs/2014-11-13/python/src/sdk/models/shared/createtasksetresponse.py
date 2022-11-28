@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import taskset
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateTaskSetResponse:
-    task_set: Optional[taskset.TaskSet] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskSet' }})
+    task_set: Optional[TaskSet] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskSet') }})
     

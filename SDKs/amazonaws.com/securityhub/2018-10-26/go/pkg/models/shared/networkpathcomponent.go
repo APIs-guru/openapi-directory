@@ -1,5 +1,7 @@
 package shared
 
+// NetworkPathComponent
+// Information about a network path component.
 type NetworkPathComponent struct {
 	ComponentID   *string        `json:"ComponentId,omitempty"`
 	ComponentType *string        `json:"ComponentType,omitempty"`

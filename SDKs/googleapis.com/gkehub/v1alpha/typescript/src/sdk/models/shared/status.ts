@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum StatusCodeEnum {
-    CodeUnspecified = "CODE_UNSPECIFIED"
-,    Ok = "OK"
-,    Failed = "FAILED"
-,    Unknown = "UNKNOWN"
+    CodeUnspecified = "CODE_UNSPECIFIED",
+    Ok = "OK",
+    Failed = "FAILED",
+    Unknown = "UNKNOWN"
 }
 
 
@@ -13,9 +14,9 @@ export enum StatusCodeEnum {
  * Status specifies state for the subcomponent.
 **/
 export class Status extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: StatusCodeEnum;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 }

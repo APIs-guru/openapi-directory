@@ -1,12 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class ReadAccountDetailsPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'account-id', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'account-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,7 +18,8 @@ class ReadAccountDetailsQueryParams:
 
 @dataclass
 class ReadAccountDetailsHeaders:
-    consent_id: str = field(default=None, metadata={'header': { 'field_name': 'Consent-ID', 'style': 'simple', 'explode': False }})
+    consent_id: str = field(metadata={'header': { 'field_name': 'Consent-ID', 'style': 'simple', 'explode': False }})
+    x_request_id: str = field(metadata={'header': { 'field_name': 'X-Request-ID', 'style': 'simple', 'explode': False }})
     digest: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Digest', 'style': 'simple', 'explode': False }})
     psu_accept: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-Accept', 'style': 'simple', 'explode': False }})
     psu_accept_charset: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-Accept-Charset', 'style': 'simple', 'explode': False }})
@@ -30,7 +33,6 @@ class ReadAccountDetailsHeaders:
     psu_user_agent: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-User-Agent', 'style': 'simple', 'explode': False }})
     signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Signature', 'style': 'simple', 'explode': False }})
     tpp_signature_certificate: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'TPP-Signature-Certificate', 'style': 'simple', 'explode': False }})
-    x_request_id: str = field(default=None, metadata={'header': { 'field_name': 'X-Request-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -38,23 +40,25 @@ class ReadAccountDetailsSecurity:
     bearer_auth_o_auth: Optional[shared.SchemeBearerAuthOAuth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
-@dataclass
-class ReadAccountDetailsRequest:
-    path_params: ReadAccountDetailsPathParams = field(default=None)
-    query_params: ReadAccountDetailsQueryParams = field(default=None)
-    headers: ReadAccountDetailsHeaders = field(default=None)
-    security: ReadAccountDetailsSecurity = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class ReadAccountDetails200ApplicationJSON:
-    account: shared.AccountDetails = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
+    account: shared.AccountDetails = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('account') }})
+    
+
+@dataclass
+class ReadAccountDetailsRequest:
+    headers: ReadAccountDetailsHeaders = field()
+    path_params: ReadAccountDetailsPathParams = field()
+    query_params: ReadAccountDetailsQueryParams = field()
+    security: ReadAccountDetailsSecurity = field()
     
 
 @dataclass
 class ReadAccountDetailsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     error400_ais: Optional[shared.Error400Ais] = field(default=None)
     error400_ng_ais: Optional[shared.Error400NgAis] = field(default=None)
     error401_ais: Optional[shared.Error401Ais] = field(default=None)
@@ -71,7 +75,5 @@ class ReadAccountDetailsResponse:
     error409_ng_ais: Optional[shared.Error409NgAis] = field(default=None)
     error429_ais: Optional[shared.Error429Ais] = field(default=None)
     error429_ng_ais: Optional[shared.Error429NgAis] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     read_account_details_200_application_json_object: Optional[ReadAccountDetails200ApplicationJSON] = field(default=None)
     

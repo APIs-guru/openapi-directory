@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Stack } from "./stack";
 
 
+
 export class UpdateStackResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Stack" })
+  @SpeakeasyMetadata({ data: "json, name=Stack" })
   stack?: Stack;
 }

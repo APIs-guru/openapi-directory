@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ImageVersion
+// A version of a SageMaker <code>Image</code>. A version represents an existing container image.
 type ImageVersion struct {
 	CreationTime       time.Time              `json:"CreationTime"`
 	FailureReason      *string                `json:"FailureReason,omitempty"`

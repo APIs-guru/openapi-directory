@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetLocalTaxByTaxCodePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=companyId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=companyId" })
   companyId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=employeeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=employeeId" })
   employeeId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=taxCode" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=taxCode" })
   taxCode: string;
 }
 
 
 export class GetLocalTaxByTaxCodeSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   paylocityAuth: shared.SchemePaylocityAuth;
 }
 
 
 export class GetLocalTaxByTaxCodeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetLocalTaxByTaxCodePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetLocalTaxByTaxCodeSecurity;
 }
 
 
 export class GetLocalTaxByTaxCodeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.Error })
+  @SpeakeasyMetadata({ elemType: shared.Error })
   errors?: shared.Error[];
 
-  @Metadata({ elemType: shared.LocalTax })
+  @SpeakeasyMetadata({ elemType: shared.LocalTax })
   localTaxes?: shared.LocalTax[];
 }

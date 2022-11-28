@@ -1,8 +1,10 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+
 from . import utils
+
+from .projects import Projects
 
 
 SERVERS = [
@@ -11,350 +13,46 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster"""
+    projects: Projects
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        self._init_sdks()
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        self._init_sdks()
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        self._init_sdks()
     
-    def gkehub_projects_locations_global_memberships_initialize_hub(self, request: operations.GkehubProjectsLocationsGlobalMembershipsInitializeHubRequest) -> operations.GkehubProjectsLocationsGlobalMembershipsInitializeHubResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1alpha2/{project}:initializeHub", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GkehubProjectsLocationsGlobalMembershipsInitializeHubResponse(status_code=r.status_code, content_type=content_type)
+    
+    def _init_sdks(self):
         
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.InitializeHubResponse])
-                res.initialize_hub_response = out
-
-        return res
-
+        self.projects = Projects(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
     
-    def gkehub_projects_locations_list(self, request: operations.GkehubProjectsLocationsListRequest) -> operations.GkehubProjectsLocationsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1alpha2/{name}/locations", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GkehubProjectsLocationsListResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.ListLocationsResponse])
-                res.list_locations_response = out
-
-        return res
-
-    
-    def gkehub_projects_locations_memberships_create(self, request: operations.GkehubProjectsLocationsMembershipsCreateRequest) -> operations.GkehubProjectsLocationsMembershipsCreateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1alpha2/{parent}/memberships", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GkehubProjectsLocationsMembershipsCreateResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Operation])
-                res.operation = out
-
-        return res
-
-    
-    def gkehub_projects_locations_memberships_generate_connect_manifest(self, request: operations.GkehubProjectsLocationsMembershipsGenerateConnectManifestRequest) -> operations.GkehubProjectsLocationsMembershipsGenerateConnectManifestResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1alpha2/{name}:generateConnectManifest", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GkehubProjectsLocationsMembershipsGenerateConnectManifestResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.GenerateConnectManifestResponse])
-                res.generate_connect_manifest_response = out
-
-        return res
-
-    
-    def gkehub_projects_locations_memberships_get_iam_policy(self, request: operations.GkehubProjectsLocationsMembershipsGetIamPolicyRequest) -> operations.GkehubProjectsLocationsMembershipsGetIamPolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1alpha2/{resource}:getIamPolicy", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GkehubProjectsLocationsMembershipsGetIamPolicyResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Policy])
-                res.policy = out
-
-        return res
-
-    
-    def gkehub_projects_locations_memberships_list(self, request: operations.GkehubProjectsLocationsMembershipsListRequest) -> operations.GkehubProjectsLocationsMembershipsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1alpha2/{parent}/memberships", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GkehubProjectsLocationsMembershipsListResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.ListMembershipsResponse])
-                res.list_memberships_response = out
-
-        return res
-
-    
-    def gkehub_projects_locations_memberships_patch(self, request: operations.GkehubProjectsLocationsMembershipsPatchRequest) -> operations.GkehubProjectsLocationsMembershipsPatchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1alpha2/{name}", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GkehubProjectsLocationsMembershipsPatchResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Operation])
-                res.operation = out
-
-        return res
-
-    
-    def gkehub_projects_locations_memberships_set_iam_policy(self, request: operations.GkehubProjectsLocationsMembershipsSetIamPolicyRequest) -> operations.GkehubProjectsLocationsMembershipsSetIamPolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1alpha2/{resource}:setIamPolicy", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GkehubProjectsLocationsMembershipsSetIamPolicyResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Policy])
-                res.policy = out
-
-        return res
-
-    
-    def gkehub_projects_locations_memberships_test_iam_permissions(self, request: operations.GkehubProjectsLocationsMembershipsTestIamPermissionsRequest) -> operations.GkehubProjectsLocationsMembershipsTestIamPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1alpha2/{resource}:testIamPermissions", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GkehubProjectsLocationsMembershipsTestIamPermissionsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.TestIamPermissionsResponse])
-                res.test_iam_permissions_response = out
-
-        return res
-
-    
-    def gkehub_projects_locations_operations_cancel(self, request: operations.GkehubProjectsLocationsOperationsCancelRequest) -> operations.GkehubProjectsLocationsOperationsCancelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1alpha2/{name}:cancel", request.path_params)
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GkehubProjectsLocationsOperationsCancelResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
-                res.empty = out
-
-        return res
-
-    
-    def gkehub_projects_locations_operations_delete(self, request: operations.GkehubProjectsLocationsOperationsDeleteRequest) -> operations.GkehubProjectsLocationsOperationsDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1alpha2/{name}", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("DELETE", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GkehubProjectsLocationsOperationsDeleteResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
-                res.empty = out
-
-        return res
-
-    
-    def gkehub_projects_locations_operations_get(self, request: operations.GkehubProjectsLocationsOperationsGetRequest) -> operations.GkehubProjectsLocationsOperationsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1alpha2/{name}", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GkehubProjectsLocationsOperationsGetResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Operation])
-                res.operation = out
-
-        return res
-
-    
-    def gkehub_projects_locations_operations_list(self, request: operations.GkehubProjectsLocationsOperationsListRequest) -> operations.GkehubProjectsLocationsOperationsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1alpha2/{name}/operations", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GkehubProjectsLocationsOperationsListResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.ListOperationsResponse])
-                res.list_operations_response = out
-
-        return res
-
     

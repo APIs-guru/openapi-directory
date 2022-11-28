@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import criticality_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TrackingConfig:
-    autotrack: criticality_enum.CriticalityEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'autotrack' }})
+    r"""TrackingConfig
+    Object that determines whether tracking should be used during a contact executed with this <code>Config</code> in the mission profile.
+    """
+    
+    autotrack: CriticalityEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('autotrack') }})
     

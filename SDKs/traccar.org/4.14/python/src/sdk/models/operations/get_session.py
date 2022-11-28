@@ -10,12 +10,12 @@ class GetSessionQueryParams:
 
 @dataclass
 class GetSessionRequest:
-    query_params: GetSessionQueryParams = field(default=None)
+    query_params: GetSessionQueryParams = field()
     
 
 @dataclass
 class GetSessionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user: Optional[shared.User] = field(default=None)
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// IncidentRecord
+// The record of the incident that's created when an incident occurs.
 type IncidentRecord struct {
 	Arn                  string                   `json:"arn"`
 	AutomationExecutions []AutomationExecution    `json:"automationExecutions,omitempty"`

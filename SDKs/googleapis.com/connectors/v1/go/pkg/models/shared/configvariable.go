@@ -1,5 +1,7 @@
 package shared
 
+// ConfigVariable
+// ConfigVariable represents a configuration variable present in a Connection. or AuthConfig.
 type ConfigVariable struct {
 	BoolValue   *bool   `json:"boolValue,omitempty"`
 	IntValue    *string `json:"intValue,omitempty"`

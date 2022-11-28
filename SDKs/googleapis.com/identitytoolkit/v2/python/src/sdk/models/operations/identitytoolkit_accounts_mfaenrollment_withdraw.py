@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,20 +21,20 @@ class IdentitytoolkitAccountsMfaEnrollmentWithdrawQueryParams:
 
 @dataclass
 class IdentitytoolkitAccountsMfaEnrollmentWithdrawSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IdentitytoolkitAccountsMfaEnrollmentWithdrawRequest:
-    query_params: IdentitytoolkitAccountsMfaEnrollmentWithdrawQueryParams = field(default=None)
+    query_params: IdentitytoolkitAccountsMfaEnrollmentWithdrawQueryParams = field()
+    security: IdentitytoolkitAccountsMfaEnrollmentWithdrawSecurity = field()
     request: Optional[shared.GoogleCloudIdentitytoolkitV2WithdrawMfaRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IdentitytoolkitAccountsMfaEnrollmentWithdrawSecurity = field(default=None)
     
 
 @dataclass
 class IdentitytoolkitAccountsMfaEnrollmentWithdrawResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_identitytoolkit_v2_withdraw_mfa_response: Optional[shared.GoogleCloudIdentitytoolkitV2WithdrawMfaResponse] = field(default=None)
-    status_code: int = field(default=None)
     

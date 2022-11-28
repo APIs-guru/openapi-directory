@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import metricpolicy
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetMetricPolicyOutput:
-    metric_policy: metricpolicy.MetricPolicy = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetricPolicy' }})
+    metric_policy: MetricPolicy = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MetricPolicy') }})
     

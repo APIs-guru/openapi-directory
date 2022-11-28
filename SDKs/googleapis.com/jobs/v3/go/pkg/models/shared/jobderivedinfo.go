@@ -36,6 +36,8 @@ const (
 	JobDerivedInfoJobCategoriesEnumTransportationAndLogistics       JobDerivedInfoJobCategoriesEnum = "TRANSPORTATION_AND_LOGISTICS"
 )
 
+// JobDerivedInfo
+// Output only. Derived details about the job posting.
 type JobDerivedInfo struct {
 	JobCategories []JobDerivedInfoJobCategoriesEnum `json:"jobCategories,omitempty"`
 	Locations     []Location                        `json:"locations,omitempty"`

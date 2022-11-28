@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetDescribeConfigurationSetActionEnum(str, Enum):
@@ -11,10 +15,10 @@ class GetDescribeConfigurationSetVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeConfigurationSetQueryParams:
-    action: GetDescribeConfigurationSetActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeConfigurationSetActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    configuration_set_name: str = field(metadata={'query_param': { 'field_name': 'ConfigurationSetName', 'style': 'form', 'explode': True }})
+    version: GetDescribeConfigurationSetVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     configuration_set_attribute_names: Optional[List[shared.ConfigurationSetAttributeEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'ConfigurationSetAttributeNames', 'style': 'form', 'explode': True }})
-    configuration_set_name: str = field(default=None, metadata={'query_param': { 'field_name': 'ConfigurationSetName', 'style': 'form', 'explode': True }})
-    version: GetDescribeConfigurationSetVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDescribeConfigurationSetHeaders:
 
 @dataclass
 class GetDescribeConfigurationSetRequest:
-    query_params: GetDescribeConfigurationSetQueryParams = field(default=None)
-    headers: GetDescribeConfigurationSetHeaders = field(default=None)
+    headers: GetDescribeConfigurationSetHeaders = field()
+    query_params: GetDescribeConfigurationSetQueryParams = field()
     
 
 @dataclass
 class GetDescribeConfigurationSetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

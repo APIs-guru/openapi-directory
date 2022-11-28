@@ -40,11 +40,8 @@ type GetVolumesIDActionsQueryParams struct {
 	Status *GetVolumesIDActionsStatusParameterStatusEnum `queryParam:"style=form,explode=true,name=status"`
 }
 
-type GetVolumesIDActionsRequest struct {
-	PathParams  GetVolumesIDActionsPathParams
-	QueryParams GetVolumesIDActionsQueryParams
-}
-
+// GetVolumesIDActionsActionsResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type GetVolumesIDActionsActionsResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -90,6 +87,11 @@ type GetVolumesIDActionsActionsResponseMeta struct {
 type GetVolumesIDActionsActionsResponse struct {
 	Actions []GetVolumesIDActionsActionsResponseAction `json:"actions"`
 	Meta    *GetVolumesIDActionsActionsResponseMeta    `json:"meta,omitempty"`
+}
+
+type GetVolumesIDActionsRequest struct {
+	PathParams  GetVolumesIDActionsPathParams
+	QueryParams GetVolumesIDActionsQueryParams
 }
 
 type GetVolumesIDActionsResponse struct {

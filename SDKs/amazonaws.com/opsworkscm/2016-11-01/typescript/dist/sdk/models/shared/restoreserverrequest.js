@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RestoreServerRequest = /** @class */ (function (_super) {
     __extends(RestoreServerRequest, _super);
     function RestoreServerRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BackupId" }),
+        SpeakeasyMetadata({ data: "json, name=BackupId" }),
         __metadata("design:type", String)
     ], RestoreServerRequest.prototype, "backupId", void 0);
     __decorate([
-        Metadata({ data: "json, name=InstanceType" }),
+        SpeakeasyMetadata({ data: "json, name=InstanceType" }),
         __metadata("design:type", String)
     ], RestoreServerRequest.prototype, "instanceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=KeyPair" }),
+        SpeakeasyMetadata({ data: "json, name=KeyPair" }),
         __metadata("design:type", String)
     ], RestoreServerRequest.prototype, "keyPair", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerName" }),
+        SpeakeasyMetadata({ data: "json, name=ServerName" }),
         __metadata("design:type", String)
     ], RestoreServerRequest.prototype, "serverName", void 0);
     return RestoreServerRequest;

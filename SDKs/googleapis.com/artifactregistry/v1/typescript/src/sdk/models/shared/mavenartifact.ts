@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MavenArtifact
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * MavenArtifact represents a maven artifact.
 **/
 export class MavenArtifact extends SpeakeasyBase {
-  @Metadata({ data: "json, name=artifactId" })
+  @SpeakeasyMetadata({ data: "json, name=artifactId" })
   artifactId?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=groupId" })
+  @SpeakeasyMetadata({ data: "json, name=groupId" })
   groupId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pomUri" })
+  @SpeakeasyMetadata({ data: "json, name=pomUri" })
   pomUri?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

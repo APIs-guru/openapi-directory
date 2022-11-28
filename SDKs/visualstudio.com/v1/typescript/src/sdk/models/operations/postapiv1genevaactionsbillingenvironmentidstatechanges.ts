@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostApiV1GenevaActionsBillingEnvironmentIdStateChangesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
   environmentId: string;
 }
 
 
 export class PostApiV1GenevaActionsBillingEnvironmentIdStateChangesRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   createEnvironmentStateChangeBody?: shared.CreateEnvironmentStateChangeBody;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   createEnvironmentStateChangeBody1?: shared.CreateEnvironmentStateChangeBody;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   createEnvironmentStateChangeBody2?: shared.CreateEnvironmentStateChangeBody;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   createEnvironmentStateChangeBody3?: shared.CreateEnvironmentStateChangeBody;
 }
 
 
 export class PostApiV1GenevaActionsBillingEnvironmentIdStateChangesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostApiV1GenevaActionsBillingEnvironmentIdStateChangesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: PostApiV1GenevaActionsBillingEnvironmentIdStateChangesRequests;
 }
 
 
 export class PostApiV1GenevaActionsBillingEnvironmentIdStateChangesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   environmentStateChange?: shared.EnvironmentStateChange;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

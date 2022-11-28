@@ -30,7 +30,7 @@ type CloudchannelAccountsCustomersProvisionCloudIdentitySecurity struct {
 type CloudchannelAccountsCustomersProvisionCloudIdentityRequest struct {
 	PathParams  CloudchannelAccountsCustomersProvisionCloudIdentityPathParams
 	QueryParams CloudchannelAccountsCustomersProvisionCloudIdentityQueryParams
-	Request     *shared.GoogleCloudChannelV1ProvisionCloudIdentityRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudChannelV1ProvisionCloudIdentityRequestInput `request:"mediaType=application/json"`
 	Security    CloudchannelAccountsCustomersProvisionCloudIdentitySecurity
 }
 

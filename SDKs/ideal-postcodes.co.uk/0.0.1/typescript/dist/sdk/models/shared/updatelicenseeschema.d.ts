@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CreateLicenseeDaily } from "./createlicenseedaily";
 export declare class UpdateLicenseeSchema extends SpeakeasyBase {
     address?: string;

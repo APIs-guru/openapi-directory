@@ -14,11 +14,11 @@ class CustomEventsAnalyticsQueryParams:
 
 @dataclass
 class CustomEventsAnalyticsRequest:
-    query_params: CustomEventsAnalyticsQueryParams = field(default=None)
+    query_params: CustomEventsAnalyticsQueryParams = field()
     
 
 @dataclass
 class CustomEventsAnalyticsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReportingUpdateMetricsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=UpdateGroupID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=UpdateGroupID" })
   updateGroupId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=bundleNumber" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bundleNumber" })
   bundleNumber?: number;
 }
 
 
 export class ReportingUpdateMetricsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReportingUpdateMetricsQueryParams;
 }
 
 
 export class ReportingUpdateMetricsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateSystemModelsUpdateMetricsData?: shared.UpdateSystemModelsUpdateMetricsData;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // VpcConfigResponse
 /**
  * VPC configuration associated with your simulation job.
@@ -33,19 +33,19 @@ var VpcConfigResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=assignPublicIp" }),
+        SpeakeasyMetadata({ data: "json, name=assignPublicIp" }),
         __metadata("design:type", Boolean)
     ], VpcConfigResponse.prototype, "assignPublicIp", void 0);
     __decorate([
-        Metadata({ data: "json, name=securityGroups" }),
+        SpeakeasyMetadata({ data: "json, name=securityGroups" }),
         __metadata("design:type", Array)
     ], VpcConfigResponse.prototype, "securityGroups", void 0);
     __decorate([
-        Metadata({ data: "json, name=subnets" }),
+        SpeakeasyMetadata({ data: "json, name=subnets" }),
         __metadata("design:type", Array)
     ], VpcConfigResponse.prototype, "subnets", void 0);
     __decorate([
-        Metadata({ data: "json, name=vpcId" }),
+        SpeakeasyMetadata({ data: "json, name=vpcId" }),
         __metadata("design:type", String)
     ], VpcConfigResponse.prototype, "vpcId", void 0);
     return VpcConfigResponse;

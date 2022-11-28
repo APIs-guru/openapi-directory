@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import resourcepolicy
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PutResourcePolicyResponse:
-    resource_policy: Optional[resourcepolicy.ResourcePolicy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourcePolicy' }})
+    resource_policy: Optional[ResourcePolicy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourcePolicy') }})
     

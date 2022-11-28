@@ -5,10 +5,6 @@ type GetRevisionChangesetUsingPostQueryParams struct {
 	Rev   *string `queryParam:"style=form,explode=true,name=rev"`
 }
 
-type GetRevisionChangesetUsingPostRequest struct {
-	QueryParams GetRevisionChangesetUsingPostQueryParams
-}
-
 type GetRevisionChangesetUsingPost200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -31,6 +27,10 @@ type GetRevisionChangesetUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type GetRevisionChangesetUsingPostRequest struct {
+	QueryParams GetRevisionChangesetUsingPostQueryParams
 }
 
 type GetRevisionChangesetUsingPostResponse struct {

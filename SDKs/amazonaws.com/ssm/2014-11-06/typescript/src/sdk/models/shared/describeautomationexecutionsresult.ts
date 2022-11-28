@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutomationExecutionMetadata } from "./automationexecutionmetadata";
 
 
+
 export class DescribeAutomationExecutionsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutomationExecutionMetadataList", elemType: shared.AutomationExecutionMetadata })
+  @SpeakeasyMetadata({ data: "json, name=AutomationExecutionMetadataList", elemType: AutomationExecutionMetadata })
   automationExecutionMetadataList?: AutomationExecutionMetadata[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

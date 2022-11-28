@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Occurrences } from "./occurrences";
+
 
 
 // CustomDataIdentifiersDetections
@@ -7,15 +8,15 @@ import { Occurrences } from "./occurrences";
  * The list of detected instances of sensitive data.
 **/
 export class CustomDataIdentifiersDetections extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=Count" })
+  @SpeakeasyMetadata({ data: "json, name=Count" })
   count?: number;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Occurrences" })
+  @SpeakeasyMetadata({ data: "json, name=Occurrences" })
   occurrences?: Occurrences;
 }

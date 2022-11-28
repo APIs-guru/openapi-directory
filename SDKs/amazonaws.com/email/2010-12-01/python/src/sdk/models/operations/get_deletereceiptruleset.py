@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteReceiptRuleSetActionEnum(str, Enum):
     DELETE_RECEIPT_RULE_SET = "DeleteReceiptRuleSet"
@@ -10,9 +14,9 @@ class GetDeleteReceiptRuleSetVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteReceiptRuleSetQueryParams:
-    action: GetDeleteReceiptRuleSetActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    rule_set_name: str = field(default=None, metadata={'query_param': { 'field_name': 'RuleSetName', 'style': 'form', 'explode': True }})
-    version: GetDeleteReceiptRuleSetVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteReceiptRuleSetActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    rule_set_name: str = field(metadata={'query_param': { 'field_name': 'RuleSetName', 'style': 'form', 'explode': True }})
+    version: GetDeleteReceiptRuleSetVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteReceiptRuleSetHeaders:
 
 @dataclass
 class GetDeleteReceiptRuleSetRequest:
-    query_params: GetDeleteReceiptRuleSetQueryParams = field(default=None)
-    headers: GetDeleteReceiptRuleSetHeaders = field(default=None)
+    headers: GetDeleteReceiptRuleSetHeaders = field()
+    query_params: GetDeleteReceiptRuleSetQueryParams = field()
     
 
 @dataclass
 class GetDeleteReceiptRuleSetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

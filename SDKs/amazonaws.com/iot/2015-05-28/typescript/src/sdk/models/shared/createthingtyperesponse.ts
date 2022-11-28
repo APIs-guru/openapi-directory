@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateThingTypeResponse
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The output of the CreateThingType operation.
 **/
 export class CreateThingTypeResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=thingTypeArn" })
+  @SpeakeasyMetadata({ data: "json, name=thingTypeArn" })
   thingTypeArn?: string;
 
-  @Metadata({ data: "json, name=thingTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=thingTypeId" })
   thingTypeId?: string;
 
-  @Metadata({ data: "json, name=thingTypeName" })
+  @SpeakeasyMetadata({ data: "json, name=thingTypeName" })
   thingTypeName?: string;
 }

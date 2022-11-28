@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TopicRuleListItem } from "./topicrulelistitem";
+
 
 
 // ListTopicRulesResponse
@@ -8,9 +8,9 @@ import { TopicRuleListItem } from "./topicrulelistitem";
  * The output from the ListTopicRules operation.
 **/
 export class ListTopicRulesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=rules", elemType: shared.TopicRuleListItem })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: TopicRuleListItem })
   rules?: TopicRuleListItem[];
 }

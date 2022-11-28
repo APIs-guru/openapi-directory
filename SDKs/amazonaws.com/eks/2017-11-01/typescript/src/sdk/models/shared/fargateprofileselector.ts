@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FargateProfileSelector
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object representing an Fargate profile selector.
 **/
 export class FargateProfileSelector extends SpeakeasyBase {
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=namespace" })
+  @SpeakeasyMetadata({ data: "json, name=namespace" })
   namespace?: string;
 }

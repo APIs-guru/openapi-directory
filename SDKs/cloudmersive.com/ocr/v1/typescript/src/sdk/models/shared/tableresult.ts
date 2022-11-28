@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FormTableDefinition } from "./formtabledefinition";
 import { TableRowResult } from "./tablerowresult";
+
 
 
 // TableResult
@@ -9,9 +9,9 @@ import { TableRowResult } from "./tablerowresult";
  * The result of reading a table via OCR from a form
 **/
 export class TableResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TableDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=TableDefinition" })
   tableDefinition?: FormTableDefinition;
 
-  @Metadata({ data: "json, name=TableRowsResult", elemType: shared.TableRowResult })
+  @SpeakeasyMetadata({ data: "json, name=TableRowsResult", elemType: TableRowResult })
   tableRowsResult?: TableRowResult[];
 }

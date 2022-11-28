@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ApplicationListQueryParams = /** @class */ (function (_super) {
     __extends(ApplicationListQueryParams, _super);
     function ApplicationListQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api-version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" }),
         __metadata("design:type", String)
     ], ApplicationListQueryParams.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxresults" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxresults" }),
         __metadata("design:type", Number)
     ], ApplicationListQueryParams.prototype, "maxresults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
         __metadata("design:type", Number)
     ], ApplicationListQueryParams.prototype, "timeout", void 0);
     return ApplicationListQueryParams;
@@ -49,15 +49,15 @@ var ApplicationListHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=client-request-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=client-request-id" }),
         __metadata("design:type", String)
     ], ApplicationListHeaders.prototype, "clientRequestId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=ocp-date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=ocp-date" }),
         __metadata("design:type", String)
     ], ApplicationListHeaders.prototype, "ocpDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=return-client-request-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=return-client-request-id" }),
         __metadata("design:type", Boolean)
     ], ApplicationListHeaders.prototype, "returnClientRequestId", void 0);
     return ApplicationListHeaders;
@@ -69,11 +69,11 @@ var ApplicationListRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ApplicationListQueryParams)
     ], ApplicationListRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ApplicationListHeaders)
     ], ApplicationListRequest.prototype, "headers", void 0);
     return ApplicationListRequest;
@@ -85,23 +85,23 @@ var ApplicationListResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ApplicationListResponse.prototype, "applicationListResult", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ApplicationListResponse.prototype, "batchError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ApplicationListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], ApplicationListResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ApplicationListResponse.prototype, "statusCode", void 0);
     return ApplicationListResponse;

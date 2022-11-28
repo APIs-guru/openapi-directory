@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateGroupConversationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=participants;" })
+  @SpeakeasyMetadata({ data: "form, name=participants;" })
   participants: string[];
 
-  @Metadata({ data: "form, name=topic;" })
+  @SpeakeasyMetadata({ data: "form, name=topic;" })
   topic?: string;
 }
 
 
 export class CreateGroupConversationSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class CreateGroupConversationRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request: CreateGroupConversationRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateGroupConversationSecurity;
 }
 
 
 export class CreateGroupConversationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conversation?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

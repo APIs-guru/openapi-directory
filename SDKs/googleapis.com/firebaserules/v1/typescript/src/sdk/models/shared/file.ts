@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // File
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * `File` containing source content.
 **/
 export class File extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=fingerprint" })
   fingerprint?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

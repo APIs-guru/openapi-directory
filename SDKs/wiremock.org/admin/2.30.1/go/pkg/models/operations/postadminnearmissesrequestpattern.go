@@ -1,5 +1,7 @@
 package operations
 
+// PostAdminNearMissesRequestPatternRequestBodyBasicAuthCredentials
+// Pre-emptive basic auth credentials to match against
 type PostAdminNearMissesRequestPatternRequestBodyBasicAuthCredentials struct {
 	Password string `json:"password"`
 	Username string `json:"username"`
@@ -18,10 +20,6 @@ type PostAdminNearMissesRequestPatternRequestBody struct {
 	URLPattern           *string                                                           `json:"urlPattern,omitempty"`
 }
 
-type PostAdminNearMissesRequestPatternRequest struct {
-	Request PostAdminNearMissesRequestPatternRequestBody `request:"mediaType=application/json"`
-}
-
 type PostAdminNearMissesRequestPattern200ApplicationJSONNearMisses struct {
 	AbsoluteURL *string                `json:"absoluteUrl,omitempty"`
 	Body        *string                `json:"body,omitempty"`
@@ -33,6 +31,10 @@ type PostAdminNearMissesRequestPattern200ApplicationJSONNearMisses struct {
 
 type PostAdminNearMissesRequestPattern200ApplicationJSON struct {
 	NearMisses []PostAdminNearMissesRequestPattern200ApplicationJSONNearMisses `json:"nearMisses,omitempty"`
+}
+
+type PostAdminNearMissesRequestPatternRequest struct {
+	Request PostAdminNearMissesRequestPatternRequestBody `request:"mediaType=application/json"`
 }
 
 type PostAdminNearMissesRequestPatternResponse struct {

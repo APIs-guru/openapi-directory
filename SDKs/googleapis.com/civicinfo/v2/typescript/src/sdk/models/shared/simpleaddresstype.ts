@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SimpleAddressType
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A simple representation of an address.
 **/
 export class SimpleAddressType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: string;
 
-  @Metadata({ data: "json, name=line1" })
+  @SpeakeasyMetadata({ data: "json, name=line1" })
   line1?: string;
 
-  @Metadata({ data: "json, name=line2" })
+  @SpeakeasyMetadata({ data: "json, name=line2" })
   line2?: string;
 
-  @Metadata({ data: "json, name=line3" })
+  @SpeakeasyMetadata({ data: "json, name=line3" })
   line3?: string;
 
-  @Metadata({ data: "json, name=locationName" })
+  @SpeakeasyMetadata({ data: "json, name=locationName" })
   locationName?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 
-  @Metadata({ data: "json, name=zip" })
+  @SpeakeasyMetadata({ data: "json, name=zip" })
   zip?: string;
 }

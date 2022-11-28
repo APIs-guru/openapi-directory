@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1DeveloperSubscription } from "./googlecloudapigeev1developersubscription";
+
 
 
 // GoogleCloudApigeeV1ListDeveloperSubscriptionsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudApigeeV1DeveloperSubscription } from "./googlecloudapigeev1d
  * Response for ListDeveloperSubscriptions.
 **/
 export class GoogleCloudApigeeV1ListDeveloperSubscriptionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=developerSubscriptions", elemType: shared.GoogleCloudApigeeV1DeveloperSubscription })
+  @SpeakeasyMetadata({ data: "json, name=developerSubscriptions", elemType: GoogleCloudApigeeV1DeveloperSubscription })
   developerSubscriptions?: GoogleCloudApigeeV1DeveloperSubscription[];
 
-  @Metadata({ data: "json, name=nextStartKey" })
+  @SpeakeasyMetadata({ data: "json, name=nextStartKey" })
   nextStartKey?: string;
 }

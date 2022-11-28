@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { QueryRequestInput } from "./queryrequestinput";
 /**
  * Request type for the [`Query`](#google.home.graph.v1.HomeGraphApiService.Query) call.

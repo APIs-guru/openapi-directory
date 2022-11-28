@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AcceleratorAttributes } from "./acceleratorattributes";
 
 
+
 export class DescribeAcceleratorAttributesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcceleratorAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=AcceleratorAttributes" })
   acceleratorAttributes?: AcceleratorAttributes;
 }

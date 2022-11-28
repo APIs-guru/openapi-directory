@@ -1,5 +1,7 @@
 package shared
 
+// CharityOrg
+// The full location, ID, logo and other details of the charity organization.
 type CharityOrg struct {
 	CharityOrgID     *string   `json:"charityOrgId,omitempty"`
 	Description      *string   `json:"description,omitempty"`

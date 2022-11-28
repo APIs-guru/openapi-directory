@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetUserAndRelatedDataPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=user_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=user_id" })
   userId: string;
 }
 
 
-export class GetUserAndRelatedDataRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetUserAndRelatedDataPathParams;
-}
-
-
 export class GetUserAndRelatedData200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=feedback", elemType: shared.Feedback })
+  @SpeakeasyMetadata({ data: "json, name=feedback", elemType: shared.Feedback })
   feedback?: shared.Feedback[];
 
-  @Metadata({ data: "json, name=offer_count" })
+  @SpeakeasyMetadata({ data: "json, name=offer_count" })
   offerCount?: number;
 
-  @Metadata({ data: "json, name=posts", elemType: shared.Post })
+  @SpeakeasyMetadata({ data: "json, name=posts", elemType: shared.Post })
   posts?: shared.Post[];
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: shared.User;
 
-  @Metadata({ data: "json, name=wanted_count" })
+  @SpeakeasyMetadata({ data: "json, name=wanted_count" })
   wantedCount?: number;
 }
 
 
+export class GetUserAndRelatedDataRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetUserAndRelatedDataPathParams;
+}
+
+
 export class GetUserAndRelatedDataResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getUserAndRelatedData200ApplicationJsonObject?: GetUserAndRelatedData200ApplicationJson;
 }

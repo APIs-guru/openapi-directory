@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VpcPeeringAuthorization } from "./vpcpeeringauthorization";
+
 
 
 // CreateVpcPeeringAuthorizationOutput
@@ -7,6 +8,6 @@ import { VpcPeeringAuthorization } from "./vpcpeeringauthorization";
  * Represents the returned data in response to a request operation.
 **/
 export class CreateVpcPeeringAuthorizationOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=VpcPeeringAuthorization" })
+  @SpeakeasyMetadata({ data: "json, name=VpcPeeringAuthorization" })
   vpcPeeringAuthorization?: VpcPeeringAuthorization;
 }

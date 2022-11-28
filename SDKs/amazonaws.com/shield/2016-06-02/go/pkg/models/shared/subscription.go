@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Subscription
+// Information about the Shield Advanced subscription for an account.
 type Subscription struct {
 	AutoRenew                 *AutoRenewEnum                 `json:"AutoRenew,omitempty"`
 	EndTime                   *time.Time                     `json:"EndTime,omitempty"`

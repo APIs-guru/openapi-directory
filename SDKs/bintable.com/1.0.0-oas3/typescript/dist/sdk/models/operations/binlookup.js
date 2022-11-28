@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var BinLookupPathParams = /** @class */ (function (_super) {
     __extends(BinLookupPathParams, _super);
@@ -30,7 +30,7 @@ var BinLookupPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=bin" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=bin" }),
         __metadata("design:type", String)
     ], BinLookupPathParams.prototype, "bin", void 0);
     return BinLookupPathParams;
@@ -42,7 +42,7 @@ var BinLookupQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
         __metadata("design:type", String)
     ], BinLookupQueryParams.prototype, "apiKey", void 0);
     return BinLookupQueryParams;
@@ -54,11 +54,11 @@ var BinLookupRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", BinLookupPathParams)
     ], BinLookupRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", BinLookupQueryParams)
     ], BinLookupRequest.prototype, "queryParams", void 0);
     return BinLookupRequest;
@@ -70,15 +70,15 @@ var BinLookupResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], BinLookupResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.ResponseItem }),
+        SpeakeasyMetadata({ elemType: shared.ResponseItem }),
         __metadata("design:type", Array)
     ], BinLookupResponse.prototype, "responseItems", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], BinLookupResponse.prototype, "statusCode", void 0);
     return BinLookupResponse;

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AddPermissionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Statement" })
+  @SpeakeasyMetadata({ data: "json, name=Statement" })
   statement?: string;
 }

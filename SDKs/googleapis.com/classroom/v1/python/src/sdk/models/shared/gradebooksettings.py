@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import gradecategory
+from sdk import utils
+from . import *
 
 class GradebookSettingsCalculationTypeEnum(str, Enum):
     CALCULATION_TYPE_UNSPECIFIED = "CALCULATION_TYPE_UNSPECIFIED"
@@ -18,7 +20,11 @@ class GradebookSettingsDisplaySettingEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GradebookSettings:
-    calculation_type: Optional[GradebookSettingsCalculationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'calculationType' }})
-    display_setting: Optional[GradebookSettingsDisplaySettingEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displaySetting' }})
-    grade_categories: Optional[List[gradecategory.GradeCategory]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gradeCategories' }})
+    r"""GradebookSettings
+    The gradebook settings for a course. See the [help center article](https://support.google.com/edu/classroom/answer/9184995) for details.
+    """
+    
+    calculation_type: Optional[GradebookSettingsCalculationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('calculationType') }})
+    display_setting: Optional[GradebookSettingsDisplaySettingEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displaySetting') }})
+    grade_categories: Optional[List[GradeCategory]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gradeCategories') }})
     

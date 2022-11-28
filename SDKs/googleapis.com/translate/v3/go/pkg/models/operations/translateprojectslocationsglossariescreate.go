@@ -30,7 +30,7 @@ type TranslateProjectsLocationsGlossariesCreateSecurity struct {
 type TranslateProjectsLocationsGlossariesCreateRequest struct {
 	PathParams  TranslateProjectsLocationsGlossariesCreatePathParams
 	QueryParams TranslateProjectsLocationsGlossariesCreateQueryParams
-	Request     *shared.Glossary `request:"mediaType=application/json"`
+	Request     *shared.GlossaryInput `request:"mediaType=application/json"`
 	Security    TranslateProjectsLocationsGlossariesCreateSecurity
 }
 

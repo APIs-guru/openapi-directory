@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TimestampValue
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about a timestamp.
 **/
 export class TimestampValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=timeInMillis" })
+  @SpeakeasyMetadata({ data: "json, name=timeInMillis" })
   timeInMillis?: number;
 }

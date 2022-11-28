@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SecretmanagerProjectsSecretsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class SecretmanagerProjectsSecretsCreateQueryParams:
 
 @dataclass
 class SecretmanagerProjectsSecretsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SecretmanagerProjectsSecretsCreateRequest:
-    path_params: SecretmanagerProjectsSecretsCreatePathParams = field(default=None)
-    query_params: SecretmanagerProjectsSecretsCreateQueryParams = field(default=None)
-    request: Optional[shared.Secret] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: SecretmanagerProjectsSecretsCreateSecurity = field(default=None)
+    path_params: SecretmanagerProjectsSecretsCreatePathParams = field()
+    query_params: SecretmanagerProjectsSecretsCreateQueryParams = field()
+    security: SecretmanagerProjectsSecretsCreateSecurity = field()
+    request: Optional[shared.SecretInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SecretmanagerProjectsSecretsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     secret: Optional[shared.Secret] = field(default=None)
-    status_code: int = field(default=None)
     

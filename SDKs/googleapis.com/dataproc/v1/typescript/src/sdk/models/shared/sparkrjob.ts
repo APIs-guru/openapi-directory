@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LoggingConfig } from "./loggingconfig";
+
 
 
 // SparkRJob
@@ -7,21 +8,21 @@ import { LoggingConfig } from "./loggingconfig";
  * A Dataproc job for running Apache SparkR (https://spark.apache.org/docs/latest/sparkr.html) applications on YARN.
 **/
 export class SparkRJob extends SpeakeasyBase {
-  @Metadata({ data: "json, name=archiveUris" })
+  @SpeakeasyMetadata({ data: "json, name=archiveUris" })
   archiveUris?: string[];
 
-  @Metadata({ data: "json, name=args" })
+  @SpeakeasyMetadata({ data: "json, name=args" })
   args?: string[];
 
-  @Metadata({ data: "json, name=fileUris" })
+  @SpeakeasyMetadata({ data: "json, name=fileUris" })
   fileUris?: string[];
 
-  @Metadata({ data: "json, name=loggingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=loggingConfig" })
   loggingConfig?: LoggingConfig;
 
-  @Metadata({ data: "json, name=mainRFileUri" })
+  @SpeakeasyMetadata({ data: "json, name=mainRFileUri" })
   mainRFileUri?: string;
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: Map<string, string>;
 }

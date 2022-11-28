@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolWebPortAddPathParams = /** @class */ (function (_super) {
     __extends(ProtocolWebPortAddPathParams, _super);
     function ProtocolWebPortAddPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolWebPortAddPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=port" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=port" }),
         __metadata("design:type", Number)
     ], ProtocolWebPortAddPathParams.prototype, "port", void 0);
     return ProtocolWebPortAddPathParams;
@@ -45,7 +45,7 @@ var ProtocolWebPortAddRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolWebPortAddPathParams)
     ], ProtocolWebPortAddRequest.prototype, "pathParams", void 0);
     return ProtocolWebPortAddRequest;
@@ -57,15 +57,15 @@ var ProtocolWebPortAddResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolWebPortAddResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolWebPortAddResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolWebPortAddResponse.prototype, "protocolWebPortAdd200ApplicationJsonString", void 0);
     return ProtocolWebPortAddResponse;

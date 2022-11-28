@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteStudioInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StudioId" })
+  @SpeakeasyMetadata({ data: "json, name=StudioId" })
   studioId: string;
 }

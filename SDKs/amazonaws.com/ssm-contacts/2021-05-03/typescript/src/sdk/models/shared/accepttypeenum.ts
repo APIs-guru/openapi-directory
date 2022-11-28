@@ -1,6 +1,7 @@
 
 
+
 export enum AcceptTypeEnum {
-    Delivered = "DELIVERED"
-,    Read = "READ"
+    Delivered = "DELIVERED",
+    Read = "READ"
 }

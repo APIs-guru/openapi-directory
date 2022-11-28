@@ -30,7 +30,7 @@ type PolicysimulatorProjectsLocationsReplaysCreateSecurity struct {
 type PolicysimulatorProjectsLocationsReplaysCreateRequest struct {
 	PathParams  PolicysimulatorProjectsLocationsReplaysCreatePathParams
 	QueryParams PolicysimulatorProjectsLocationsReplaysCreateQueryParams
-	Request     *shared.GoogleCloudPolicysimulatorV1beta1Replay `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudPolicysimulatorV1beta1ReplayInput `request:"mediaType=application/json"`
 	Security    PolicysimulatorProjectsLocationsReplaysCreateSecurity
 }
 

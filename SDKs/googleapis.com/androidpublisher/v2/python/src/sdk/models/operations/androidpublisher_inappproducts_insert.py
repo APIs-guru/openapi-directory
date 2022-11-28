@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidpublisherInappproductsInsertPathParams:
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,21 +23,21 @@ class AndroidpublisherInappproductsInsertQueryParams:
 
 @dataclass
 class AndroidpublisherInappproductsInsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherInappproductsInsertRequest:
-    path_params: AndroidpublisherInappproductsInsertPathParams = field(default=None)
-    query_params: AndroidpublisherInappproductsInsertQueryParams = field(default=None)
+    path_params: AndroidpublisherInappproductsInsertPathParams = field()
+    query_params: AndroidpublisherInappproductsInsertQueryParams = field()
+    security: AndroidpublisherInappproductsInsertSecurity = field()
     request: Optional[shared.InAppProduct] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AndroidpublisherInappproductsInsertSecurity = field(default=None)
     
 
 @dataclass
 class AndroidpublisherInappproductsInsertResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

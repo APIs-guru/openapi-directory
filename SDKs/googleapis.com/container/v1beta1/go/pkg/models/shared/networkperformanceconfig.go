@@ -14,6 +14,8 @@ const (
 	NetworkPerformanceConfigTotalEgressBandwidthTierEnumTier1           NetworkPerformanceConfigTotalEgressBandwidthTierEnum = "TIER_1"
 )
 
+// NetworkPerformanceConfig
+// Configuration of all network bandwidth tiers
 type NetworkPerformanceConfig struct {
 	ExternalIPEgressBandwidthTier *NetworkPerformanceConfigExternalIPEgressBandwidthTierEnum `json:"externalIpEgressBandwidthTier,omitempty"`
 	TotalEgressBandwidthTier      *NetworkPerformanceConfigTotalEgressBandwidthTierEnum      `json:"totalEgressBandwidthTier,omitempty"`

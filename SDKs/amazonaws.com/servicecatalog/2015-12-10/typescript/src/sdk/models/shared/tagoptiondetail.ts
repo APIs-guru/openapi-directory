@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TagOptionDetail
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a TagOption.
 **/
 export class TagOptionDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Active" })
+  @SpeakeasyMetadata({ data: "json, name=Active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key?: string;
 
-  @Metadata({ data: "json, name=Owner" })
+  @SpeakeasyMetadata({ data: "json, name=Owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

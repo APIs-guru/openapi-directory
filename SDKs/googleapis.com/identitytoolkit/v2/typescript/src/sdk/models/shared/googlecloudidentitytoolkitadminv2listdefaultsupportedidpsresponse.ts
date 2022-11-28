@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdp } from "./googlecloudidentitytoolkitadminv2defaultsupportedidp";
+
 
 
 // GoogleCloudIdentitytoolkitAdminV2ListDefaultSupportedIdpsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdp } from "./googlecl
  * Response for ListDefaultSupportedIdps
 **/
 export class GoogleCloudIdentitytoolkitAdminV2ListDefaultSupportedIdpsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultSupportedIdps", elemType: shared.GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdp })
+  @SpeakeasyMetadata({ data: "json, name=defaultSupportedIdps", elemType: GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdp })
   defaultSupportedIdps?: GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdp[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

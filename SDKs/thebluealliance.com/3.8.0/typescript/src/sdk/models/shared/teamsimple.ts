@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TeamSimple extends SpeakeasyBase {
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=nickname" })
+  @SpeakeasyMetadata({ data: "json, name=nickname" })
   nickname?: string;
 
-  @Metadata({ data: "json, name=state_prov" })
+  @SpeakeasyMetadata({ data: "json, name=state_prov" })
   stateProv?: string;
 
-  @Metadata({ data: "json, name=team_number" })
+  @SpeakeasyMetadata({ data: "json, name=team_number" })
   teamNumber: number;
 }

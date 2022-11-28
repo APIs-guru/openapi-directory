@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetV3EventsIdPathParams = /** @class */ (function (_super) {
     __extends(GetV3EventsIdPathParams, _super);
     function GetV3EventsIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", Number)
     ], GetV3EventsIdPathParams.prototype, "id", void 0);
     return GetV3EventsIdPathParams;
@@ -41,7 +41,7 @@ var GetV3EventsIdQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=fields" }),
         __metadata("design:type", Array)
     ], GetV3EventsIdQueryParams.prototype, "fields", void 0);
     return GetV3EventsIdQueryParams;
@@ -53,7 +53,7 @@ var GetV3EventsIdHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
         __metadata("design:type", String)
     ], GetV3EventsIdHeaders.prototype, "acceptLanguage", void 0);
     return GetV3EventsIdHeaders;
@@ -65,15 +65,15 @@ var GetV3EventsIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3EventsIdPathParams)
     ], GetV3EventsIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3EventsIdQueryParams)
     ], GetV3EventsIdRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3EventsIdHeaders)
     ], GetV3EventsIdRequest.prototype, "headers", void 0);
     return GetV3EventsIdRequest;
@@ -85,11 +85,11 @@ var GetV3EventsIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetV3EventsIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetV3EventsIdResponse.prototype, "statusCode", void 0);
     return GetV3EventsIdResponse;

@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BackfillError } from "./backfillerror";
 import { PartitionIndexStatusEnum } from "./partitionindexstatusenum";
 import { KeySchemaElement } from "./keyschemaelement";
+
 
 
 // PartitionIndexDescriptor
@@ -10,15 +10,15 @@ import { KeySchemaElement } from "./keyschemaelement";
  * A descriptor for a partition index in a table.
 **/
 export class PartitionIndexDescriptor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BackfillErrors", elemType: shared.BackfillError })
+  @SpeakeasyMetadata({ data: "json, name=BackfillErrors", elemType: BackfillError })
   backfillErrors?: BackfillError[];
 
-  @Metadata({ data: "json, name=IndexName" })
+  @SpeakeasyMetadata({ data: "json, name=IndexName" })
   indexName: string;
 
-  @Metadata({ data: "json, name=IndexStatus" })
+  @SpeakeasyMetadata({ data: "json, name=IndexStatus" })
   indexStatus: PartitionIndexStatusEnum;
 
-  @Metadata({ data: "json, name=Keys", elemType: shared.KeySchemaElement })
+  @SpeakeasyMetadata({ data: "json, name=Keys", elemType: KeySchemaElement })
   keys: KeySchemaElement[];
 }

@@ -1,62 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdatePersonalAccessTokenPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tokenId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tokenId" })
   tokenId: number;
 }
 
 
-export class UpdatePersonalAccessTokenSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class UpdatePersonalAccessTokenSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class UpdatePersonalAccessTokenSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: UpdatePersonalAccessTokenSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: UpdatePersonalAccessTokenSecurityOption2;
-}
-
-
-export class UpdatePersonalAccessTokenRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdatePersonalAccessTokenPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.PersonalAccessToken;
-
-  @Metadata()
-  security: UpdatePersonalAccessTokenSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class UpdatePersonalAccessTokenDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class UpdatePersonalAccessTokenRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdatePersonalAccessTokenPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.PersonalAccessTokenInput;
+
+  @SpeakeasyMetadata()
+  security: UpdatePersonalAccessTokenSecurity;
+}
+
+
 export class UpdatePersonalAccessTokenResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   personalAccessToken?: shared.PersonalAccessToken;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updatePersonalAccessTokenDefaultApplicationJsonObject?: UpdatePersonalAccessTokenDefaultApplicationJson;
 }

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import propertyreference
+from sdk import utils
+from . import *
 
 class PropertyOrderDirectionEnum(str, Enum):
     DIRECTION_UNSPECIFIED = "DIRECTION_UNSPECIFIED"
@@ -12,6 +14,10 @@ class PropertyOrderDirectionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PropertyOrder:
-    direction: Optional[PropertyOrderDirectionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'direction' }})
-    property: Optional[propertyreference.PropertyReference] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'property' }})
+    r"""PropertyOrder
+    The desired order for a specific property.
+    """
+    
+    direction: Optional[PropertyOrderDirectionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('direction') }})
+    property: Optional[PropertyReference] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('property') }})
     

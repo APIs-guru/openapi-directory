@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetInstancesIdSimplifiedTagsPathParams = /** @class */ (function (_super) {
     __extends(GetInstancesIdSimplifiedTagsPathParams, _super);
     function GetInstancesIdSimplifiedTagsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], GetInstancesIdSimplifiedTagsPathParams.prototype, "id", void 0);
     return GetInstancesIdSimplifiedTagsPathParams;
@@ -41,7 +41,7 @@ var GetInstancesIdSimplifiedTagsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ignore-length" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ignore-length" }),
         __metadata("design:type", Array)
     ], GetInstancesIdSimplifiedTagsQueryParams.prototype, "ignoreLength", void 0);
     return GetInstancesIdSimplifiedTagsQueryParams;
@@ -53,11 +53,11 @@ var GetInstancesIdSimplifiedTagsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetInstancesIdSimplifiedTagsPathParams)
     ], GetInstancesIdSimplifiedTagsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetInstancesIdSimplifiedTagsQueryParams)
     ], GetInstancesIdSimplifiedTagsRequest.prototype, "queryParams", void 0);
     return GetInstancesIdSimplifiedTagsRequest;
@@ -69,15 +69,15 @@ var GetInstancesIdSimplifiedTagsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetInstancesIdSimplifiedTagsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetInstancesIdSimplifiedTagsResponse.prototype, "getInstancesIdSimplifiedTags200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetInstancesIdSimplifiedTagsResponse.prototype, "statusCode", void 0);
     return GetInstancesIdSimplifiedTagsResponse;

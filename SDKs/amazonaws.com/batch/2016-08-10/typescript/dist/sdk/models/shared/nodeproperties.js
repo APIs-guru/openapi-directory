@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { NodeRangeProperty } from "./noderangeproperty";
 // NodeProperties
 /**
  * An object representing the node properties of a multi-node parallel job.
@@ -34,15 +34,15 @@ var NodeProperties = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=mainNode" }),
+        SpeakeasyMetadata({ data: "json, name=mainNode" }),
         __metadata("design:type", Number)
     ], NodeProperties.prototype, "mainNode", void 0);
     __decorate([
-        Metadata({ data: "json, name=nodeRangeProperties", elemType: shared.NodeRangeProperty }),
+        SpeakeasyMetadata({ data: "json, name=nodeRangeProperties", elemType: NodeRangeProperty }),
         __metadata("design:type", Array)
     ], NodeProperties.prototype, "nodeRangeProperties", void 0);
     __decorate([
-        Metadata({ data: "json, name=numNodes" }),
+        SpeakeasyMetadata({ data: "json, name=numNodes" }),
         __metadata("design:type", Number)
     ], NodeProperties.prototype, "numNodes", void 0);
     return NodeProperties;

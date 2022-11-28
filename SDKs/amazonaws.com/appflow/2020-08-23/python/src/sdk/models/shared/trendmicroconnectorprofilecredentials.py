@@ -1,9 +1,14 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class TrendmicroConnectorProfileCredentials:
-    api_secret_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apiSecretKey' }})
+    r"""TrendmicroConnectorProfileCredentials
+     The connector-specific profile credentials required when using Trend Micro. 
+    """
+    
+    api_secret_key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('apiSecretKey') }})
     

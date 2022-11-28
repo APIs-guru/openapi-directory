@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetRelatedWordsPathParams = /** @class */ (function (_super) {
     __extends(GetRelatedWordsPathParams, _super);
     function GetRelatedWordsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=word" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=word" }),
         __metadata("design:type", String)
     ], GetRelatedWordsPathParams.prototype, "word", void 0);
     return GetRelatedWordsPathParams;
@@ -66,15 +66,15 @@ var GetRelatedWordsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limitPerRelationshipType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limitPerRelationshipType" }),
         __metadata("design:type", Number)
     ], GetRelatedWordsQueryParams.prototype, "limitPerRelationshipType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=relationshipTypes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=relationshipTypes" }),
         __metadata("design:type", String)
     ], GetRelatedWordsQueryParams.prototype, "relationshipTypes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=useCanonical" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=useCanonical" }),
         __metadata("design:type", String)
     ], GetRelatedWordsQueryParams.prototype, "useCanonical", void 0);
     return GetRelatedWordsQueryParams;
@@ -86,11 +86,11 @@ var GetRelatedWordsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRelatedWordsPathParams)
     ], GetRelatedWordsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRelatedWordsQueryParams)
     ], GetRelatedWordsRequest.prototype, "queryParams", void 0);
     return GetRelatedWordsRequest;
@@ -102,15 +102,15 @@ var GetRelatedWordsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetRelatedWordsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetRelatedWordsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetRelatedWordsResponse.prototype, "statusCode", void 0);
     return GetRelatedWordsResponse;

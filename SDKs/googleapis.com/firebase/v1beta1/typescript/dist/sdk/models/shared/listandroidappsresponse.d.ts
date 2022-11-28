@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AndroidApp } from "./androidapp";
 export declare class ListAndroidAppsResponse extends SpeakeasyBase {
     apps?: AndroidApp[];

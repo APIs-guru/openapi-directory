@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var TopUpAccountBalanceServers = []string{
+var TopUpAccountBalanceServerList = []string{
 	"https://rest.nexmo.com",
 }
 

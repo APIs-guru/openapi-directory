@@ -1,5 +1,7 @@
 package shared
 
+// SandboxUser
+// User data
 type SandboxUser struct {
 	Accounts          []SandboxBankAccount     `json:"accounts,omitempty"`
 	Cards             []SandboxCard            `json:"cards,omitempty"`

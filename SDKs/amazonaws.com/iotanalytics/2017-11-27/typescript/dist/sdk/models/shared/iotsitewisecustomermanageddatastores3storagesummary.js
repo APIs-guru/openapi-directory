@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // IotSiteWiseCustomerManagedDatastoreS3StorageSummary
 /**
  *  Contains information about the data store that you manage, which stores data used by IoT SiteWise.
@@ -33,11 +33,11 @@ var IotSiteWiseCustomerManagedDatastoreS3StorageSummary = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bucket" }),
+        SpeakeasyMetadata({ data: "json, name=bucket" }),
         __metadata("design:type", String)
     ], IotSiteWiseCustomerManagedDatastoreS3StorageSummary.prototype, "bucket", void 0);
     __decorate([
-        Metadata({ data: "json, name=keyPrefix" }),
+        SpeakeasyMetadata({ data: "json, name=keyPrefix" }),
         __metadata("design:type", String)
     ], IotSiteWiseCustomerManagedDatastoreS3StorageSummary.prototype, "keyPrefix", void 0);
     return IotSiteWiseCustomerManagedDatastoreS3StorageSummary;

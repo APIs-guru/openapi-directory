@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum RepertoirEcreaterequestRepertoireEditEnum {
     Create = "create"
@@ -6,12 +7,12 @@ export enum RepertoirEcreaterequestRepertoireEditEnum {
 
 
 export class RepertoirEcreaterequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keyid" })
+  @SpeakeasyMetadata({ data: "json, name=keyid" })
   keyid: string;
 
-  @Metadata({ data: "json, name=repertoireEdit" })
+  @SpeakeasyMetadata({ data: "json, name=repertoireEdit" })
   repertoireEdit: RepertoirEcreaterequestRepertoireEditEnum;
 
-  @Metadata({ data: "json, name=repertoireNom" })
+  @SpeakeasyMetadata({ data: "json, name=repertoireNom" })
   repertoireNom: string;
 }

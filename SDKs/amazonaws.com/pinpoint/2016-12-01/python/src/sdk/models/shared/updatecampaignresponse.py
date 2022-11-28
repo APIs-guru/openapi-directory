@@ -1,10 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
-from . import campaignresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateCampaignResponse:
-    campaign_response: campaignresponse.CampaignResponse = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CampaignResponse' }})
+    campaign_response: CampaignResponse = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CampaignResponse') }})
     

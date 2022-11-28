@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudVisionV1p2beta1Product } from "./googlecloudvisionv1p2beta1product";
+
 
 
 // GoogleCloudVisionV1p2beta1ProductSearchResultsResult
@@ -7,12 +8,12 @@ import { GoogleCloudVisionV1p2beta1Product } from "./googlecloudvisionv1p2beta1p
  * Information about a product.
 **/
 export class GoogleCloudVisionV1p2beta1ProductSearchResultsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: string;
 
-  @Metadata({ data: "json, name=product" })
+  @SpeakeasyMetadata({ data: "json, name=product" })
   product?: GoogleCloudVisionV1p2beta1Product;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: number;
 }

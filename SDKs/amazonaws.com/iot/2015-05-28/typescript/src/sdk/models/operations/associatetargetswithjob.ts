@@ -1,89 +1,90 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AssociateTargetsWithJobPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=jobId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=jobId" })
   jobId: string;
 }
 
 
 export class AssociateTargetsWithJobQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=namespaceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=namespaceId" })
   namespaceId?: string;
 }
 
 
 export class AssociateTargetsWithJobHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class AssociateTargetsWithJobRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment?: string;
 
-  @Metadata({ data: "json, name=targets" })
+  @SpeakeasyMetadata({ data: "json, name=targets" })
   targets: string[];
 }
 
 
 export class AssociateTargetsWithJobRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AssociateTargetsWithJobPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AssociateTargetsWithJobQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: AssociateTargetsWithJobHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: AssociateTargetsWithJobRequestBody;
 }
 
 
 export class AssociateTargetsWithJobResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   associateTargetsWithJobResponse?: shared.AssociateTargetsWithJobResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

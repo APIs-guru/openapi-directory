@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConfigManagementSyncError } from "./configmanagementsyncerror";
 export declare enum ConfigManagementSyncStateCodeEnum {
     SyncCodeUnspecified = "SYNC_CODE_UNSPECIFIED",

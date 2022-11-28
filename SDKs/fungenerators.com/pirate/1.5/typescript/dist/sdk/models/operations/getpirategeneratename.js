@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetPirateGenerateNameQueryParams = /** @class */ (function (_super) {
     __extends(GetPirateGenerateNameQueryParams, _super);
@@ -30,11 +30,11 @@ var GetPirateGenerateNameQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetPirateGenerateNameQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=variation" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=variation" }),
         __metadata("design:type", String)
     ], GetPirateGenerateNameQueryParams.prototype, "variation", void 0);
     return GetPirateGenerateNameQueryParams;
@@ -46,7 +46,7 @@ var GetPirateGenerateNameSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeXFungeneratorsApiSecret)
     ], GetPirateGenerateNameSecurity.prototype, "xFungeneratorsApiSecret", void 0);
     return GetPirateGenerateNameSecurity;
@@ -58,11 +58,11 @@ var GetPirateGenerateNameRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPirateGenerateNameQueryParams)
     ], GetPirateGenerateNameRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPirateGenerateNameSecurity)
     ], GetPirateGenerateNameRequest.prototype, "security", void 0);
     return GetPirateGenerateNameRequest;
@@ -74,11 +74,11 @@ var GetPirateGenerateNameResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetPirateGenerateNameResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetPirateGenerateNameResponse.prototype, "statusCode", void 0);
     return GetPirateGenerateNameResponse;

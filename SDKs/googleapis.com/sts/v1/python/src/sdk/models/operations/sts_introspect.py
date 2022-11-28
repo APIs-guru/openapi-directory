@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,13 +21,13 @@ class StsIntrospectQueryParams:
 
 @dataclass
 class StsIntrospectRequest:
-    query_params: StsIntrospectQueryParams = field(default=None)
+    query_params: StsIntrospectQueryParams = field()
     request: Optional[shared.GoogleIdentityStsV1IntrospectTokenRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class StsIntrospectResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_identity_sts_v1_introspect_token_response: Optional[shared.GoogleIdentityStsV1IntrospectTokenResponse] = field(default=None)
-    status_code: int = field(default=None)
     

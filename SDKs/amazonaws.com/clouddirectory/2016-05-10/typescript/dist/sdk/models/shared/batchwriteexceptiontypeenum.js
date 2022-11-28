@@ -1,0 +1,21 @@
+export var BatchWriteExceptionTypeEnum;
+(function (BatchWriteExceptionTypeEnum) {
+    BatchWriteExceptionTypeEnum["InternalServiceException"] = "InternalServiceException";
+    BatchWriteExceptionTypeEnum["ValidationException"] = "ValidationException";
+    BatchWriteExceptionTypeEnum["InvalidArnException"] = "InvalidArnException";
+    BatchWriteExceptionTypeEnum["LinkNameAlreadyInUseException"] = "LinkNameAlreadyInUseException";
+    BatchWriteExceptionTypeEnum["StillContainsLinksException"] = "StillContainsLinksException";
+    BatchWriteExceptionTypeEnum["FacetValidationException"] = "FacetValidationException";
+    BatchWriteExceptionTypeEnum["ObjectNotDetachedException"] = "ObjectNotDetachedException";
+    BatchWriteExceptionTypeEnum["ResourceNotFoundException"] = "ResourceNotFoundException";
+    BatchWriteExceptionTypeEnum["AccessDeniedException"] = "AccessDeniedException";
+    BatchWriteExceptionTypeEnum["InvalidAttachmentException"] = "InvalidAttachmentException";
+    BatchWriteExceptionTypeEnum["NotIndexException"] = "NotIndexException";
+    BatchWriteExceptionTypeEnum["NotNodeException"] = "NotNodeException";
+    BatchWriteExceptionTypeEnum["IndexedAttributeMissingException"] = "IndexedAttributeMissingException";
+    BatchWriteExceptionTypeEnum["ObjectAlreadyDetachedException"] = "ObjectAlreadyDetachedException";
+    BatchWriteExceptionTypeEnum["NotPolicyException"] = "NotPolicyException";
+    BatchWriteExceptionTypeEnum["DirectoryNotEnabledException"] = "DirectoryNotEnabledException";
+    BatchWriteExceptionTypeEnum["LimitExceededException"] = "LimitExceededException";
+    BatchWriteExceptionTypeEnum["UnsupportedIndexTypeException"] = "UnsupportedIndexTypeException";
+})(BatchWriteExceptionTypeEnum || (BatchWriteExceptionTypeEnum = {}));

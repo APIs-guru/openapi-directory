@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DisapprovalReasonEnum(str, Enum):
     LENGTH_OF_IMAGE_ANIMATION = "LENGTH_OF_IMAGE_ANIMATION"
@@ -110,6 +112,10 @@ class DisapprovalReasonEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Disapproval:
-    details: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'details' }})
-    reason: Optional[DisapprovalReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
+    r"""Disapproval
+    Output only. The reason and details for a disapproval.
+    """
+    
+    details: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('details') }})
+    reason: Optional[DisapprovalReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reason') }})
     

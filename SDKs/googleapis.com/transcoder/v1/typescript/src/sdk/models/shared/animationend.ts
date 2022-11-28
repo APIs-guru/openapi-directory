@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AnimationEnd
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * End previous overlay animation from the video. Without AnimationEnd, the overlay object will keep the state of previous animation until the end of the video.
 **/
 export class AnimationEnd extends SpeakeasyBase {
-  @Metadata({ data: "json, name=startTimeOffset" })
+  @SpeakeasyMetadata({ data: "json, name=startTimeOffset" })
   startTimeOffset?: string;
 }

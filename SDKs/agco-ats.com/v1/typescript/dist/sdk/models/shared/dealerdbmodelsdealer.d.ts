@@ -1,0 +1,34 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+export declare class DealerDbModelsDealer extends SpeakeasyBase {
+    billingAddress?: string;
+    billingAddress2?: string;
+    billingAddress3?: string;
+    billingAddress4?: string;
+    billingCity?: string;
+    billingCountry?: string;
+    billingCountryCode?: string;
+    billingState?: string;
+    billingZip?: string;
+    brands?: string[];
+    dealerCode?: string;
+    dealerName?: string;
+    dealerStatus?: string;
+    dealerStatusUpdateDate?: string;
+    filler?: string;
+    isValid?: boolean;
+    languagePreference?: string;
+    region1?: string;
+    region2?: string;
+    regionMapping?: string;
+    roleBrand?: string;
+    shippingAddress2?: string;
+    shippingAddress3?: string;
+    shippingAddress4?: string;
+    shippingCity?: string;
+    shippingCountry?: string;
+    shippingState?: string;
+    shippingStreet?: string;
+    shippingZip?: string;
+    telephone?: string;
+    vatCode?: string;
+}

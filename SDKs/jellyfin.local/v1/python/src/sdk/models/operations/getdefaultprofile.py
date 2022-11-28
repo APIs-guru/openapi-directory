@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetDefaultProfileSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetDefaultProfileRequest:
-    security: GetDefaultProfileSecurity = field(default=None)
+    security: GetDefaultProfileSecurity = field()
     
 
 @dataclass
 class GetDefaultProfileResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     device_profile: Optional[shared.DeviceProfile] = field(default=None)
-    status_code: int = field(default=None)
     

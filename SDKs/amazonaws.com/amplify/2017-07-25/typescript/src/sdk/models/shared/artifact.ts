@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Artifact
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Describes an artifact. 
 **/
 export class Artifact extends SpeakeasyBase {
-  @Metadata({ data: "json, name=artifactFileName" })
+  @SpeakeasyMetadata({ data: "json, name=artifactFileName" })
   artifactFileName: string;
 
-  @Metadata({ data: "json, name=artifactId" })
+  @SpeakeasyMetadata({ data: "json, name=artifactId" })
   artifactId: string;
 }

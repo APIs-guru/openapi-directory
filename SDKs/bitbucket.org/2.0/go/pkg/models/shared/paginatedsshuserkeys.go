@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedSSHUserKeys
+// A paginated list of SSH keys.
 type PaginatedSSHUserKeys struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LoggingInfo } from "./logginginfo";
 import { Target } from "./target";
 import { MaintenanceWindowTaskInvocationParameters } from "./maintenancewindowtaskinvocationparameters";
@@ -7,46 +6,47 @@ import { MaintenanceWindowTaskParameterValueExpression } from "./maintenancewind
 import { MaintenanceWindowTaskTypeEnum } from "./maintenancewindowtasktypeenum";
 
 
+
 export class GetMaintenanceWindowTaskResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=LoggingInfo" })
+  @SpeakeasyMetadata({ data: "json, name=LoggingInfo" })
   loggingInfo?: LoggingInfo;
 
-  @Metadata({ data: "json, name=MaxConcurrency" })
+  @SpeakeasyMetadata({ data: "json, name=MaxConcurrency" })
   maxConcurrency?: string;
 
-  @Metadata({ data: "json, name=MaxErrors" })
+  @SpeakeasyMetadata({ data: "json, name=MaxErrors" })
   maxErrors?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Priority" })
+  @SpeakeasyMetadata({ data: "json, name=Priority" })
   priority?: number;
 
-  @Metadata({ data: "json, name=ServiceRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceRoleArn" })
   serviceRoleArn?: string;
 
-  @Metadata({ data: "json, name=Targets", elemType: shared.Target })
+  @SpeakeasyMetadata({ data: "json, name=Targets", elemType: Target })
   targets?: Target[];
 
-  @Metadata({ data: "json, name=TaskArn" })
+  @SpeakeasyMetadata({ data: "json, name=TaskArn" })
   taskArn?: string;
 
-  @Metadata({ data: "json, name=TaskInvocationParameters" })
+  @SpeakeasyMetadata({ data: "json, name=TaskInvocationParameters" })
   taskInvocationParameters?: MaintenanceWindowTaskInvocationParameters;
 
-  @Metadata({ data: "json, name=TaskParameters", elemType: shared.MaintenanceWindowTaskParameterValueExpression })
+  @SpeakeasyMetadata({ data: "json, name=TaskParameters", elemType: MaintenanceWindowTaskParameterValueExpression })
   taskParameters?: Map<string, MaintenanceWindowTaskParameterValueExpression>;
 
-  @Metadata({ data: "json, name=TaskType" })
+  @SpeakeasyMetadata({ data: "json, name=TaskType" })
   taskType?: MaintenanceWindowTaskTypeEnum;
 
-  @Metadata({ data: "json, name=WindowId" })
+  @SpeakeasyMetadata({ data: "json, name=WindowId" })
   windowId?: string;
 
-  @Metadata({ data: "json, name=WindowTaskId" })
+  @SpeakeasyMetadata({ data: "json, name=WindowTaskId" })
   windowTaskId?: string;
 }

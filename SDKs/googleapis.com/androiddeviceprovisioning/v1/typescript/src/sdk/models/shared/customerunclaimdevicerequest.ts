@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceReference } from "./devicereference";
+
 
 
 // CustomerUnclaimDeviceRequest
@@ -7,6 +8,6 @@ import { DeviceReference } from "./devicereference";
  * Request message for customer to unclaim a device.
 **/
 export class CustomerUnclaimDeviceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=device" })
+  @SpeakeasyMetadata({ data: "json, name=device" })
   device?: DeviceReference;
 }

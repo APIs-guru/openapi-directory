@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostSetupV1LocationsIDEmailTemplatesPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class PostSetupV1LocationsIDEmailTemplatesRequests:
 
 @dataclass
 class PostSetupV1LocationsIDEmailTemplatesRequest:
-    path_params: PostSetupV1LocationsIDEmailTemplatesPathParams = field(default=None)
+    path_params: PostSetupV1LocationsIDEmailTemplatesPathParams = field()
     request: Optional[PostSetupV1LocationsIDEmailTemplatesRequests] = field(default=None)
     
 
 @dataclass
 class PostSetupV1LocationsIDEmailTemplatesResponse:
+    content_type: str = field()
+    status_code: int = field()
     content_result: Optional[shared.ContentResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

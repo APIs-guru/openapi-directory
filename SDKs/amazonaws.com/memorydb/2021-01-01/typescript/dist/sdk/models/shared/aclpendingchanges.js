@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AclPendingChanges
 /**
  * Returns the updates being applied to the ACL.
@@ -33,11 +33,11 @@ var AclPendingChanges = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=UserNamesToAdd" }),
+        SpeakeasyMetadata({ data: "json, name=UserNamesToAdd" }),
         __metadata("design:type", Array)
     ], AclPendingChanges.prototype, "userNamesToAdd", void 0);
     __decorate([
-        Metadata({ data: "json, name=UserNamesToRemove" }),
+        SpeakeasyMetadata({ data: "json, name=UserNamesToRemove" }),
         __metadata("design:type", Array)
     ], AclPendingChanges.prototype, "userNamesToRemove", void 0);
     return AclPendingChanges;

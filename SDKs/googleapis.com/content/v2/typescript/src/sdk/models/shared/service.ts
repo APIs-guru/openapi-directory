@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeliveryTime } from "./deliverytime";
 import { Price } from "./price";
 import { MinimumOrderValueTable } from "./minimumordervaluetable";
@@ -7,37 +6,38 @@ import { PickupCarrierService } from "./pickupcarrierservice";
 import { RateGroup } from "./rategroup";
 
 
+
 export class Service extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: string;
 
-  @Metadata({ data: "json, name=deliveryCountry" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryCountry" })
   deliveryCountry?: string;
 
-  @Metadata({ data: "json, name=deliveryTime" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryTime" })
   deliveryTime?: DeliveryTime;
 
-  @Metadata({ data: "json, name=eligibility" })
+  @SpeakeasyMetadata({ data: "json, name=eligibility" })
   eligibility?: string;
 
-  @Metadata({ data: "json, name=minimumOrderValue" })
+  @SpeakeasyMetadata({ data: "json, name=minimumOrderValue" })
   minimumOrderValue?: Price;
 
-  @Metadata({ data: "json, name=minimumOrderValueTable" })
+  @SpeakeasyMetadata({ data: "json, name=minimumOrderValueTable" })
   minimumOrderValueTable?: MinimumOrderValueTable;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pickupService" })
+  @SpeakeasyMetadata({ data: "json, name=pickupService" })
   pickupService?: PickupCarrierService;
 
-  @Metadata({ data: "json, name=rateGroups", elemType: shared.RateGroup })
+  @SpeakeasyMetadata({ data: "json, name=rateGroups", elemType: RateGroup })
   rateGroups?: RateGroup[];
 
-  @Metadata({ data: "json, name=shipmentType" })
+  @SpeakeasyMetadata({ data: "json, name=shipmentType" })
   shipmentType?: string;
 }

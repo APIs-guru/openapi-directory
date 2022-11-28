@@ -1,6 +1,7 @@
 
 
+
 export enum ActionEnum {
-    Start = "start"
-,    Stop = "stop"
+    Start = "start",
+    Stop = "stop"
 }

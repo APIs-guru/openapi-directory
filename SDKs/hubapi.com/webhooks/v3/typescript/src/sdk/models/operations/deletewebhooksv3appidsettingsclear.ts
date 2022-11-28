@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteWebhooksV3AppIdSettingsClearPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=appId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" })
   appId: number;
 }
 
 
 export class DeleteWebhooksV3AppIdSettingsClearSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   developerHapikey: shared.SchemeDeveloperHapikey;
 }
 
 
 export class DeleteWebhooksV3AppIdSettingsClearRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteWebhooksV3AppIdSettingsClearPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DeleteWebhooksV3AppIdSettingsClearSecurity;
 }
 
 
 export class DeleteWebhooksV3AppIdSettingsClearResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

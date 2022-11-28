@@ -1,14 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import addresses
-from . import detailedservice
-from . import hours
-from . import operatingstatus
-from . import phone
-from . import satisfaction
-from . import services
-from . import waittimes
+from sdk import utils
+from . import *
 
 class PropertiesActiveStatusEnum(str, Enum):
     A = "A"
@@ -24,22 +19,22 @@ class PropertiesFacilityTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Properties:
-    active_status: Optional[PropertiesActiveStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'active_status' }})
-    address: Optional[addresses.Addresses] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'address' }})
-    classification: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'classification' }})
-    detailed_services: Optional[List[detailedservice.DetailedService]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detailed_services' }})
-    facility_type: PropertiesFacilityTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'facility_type' }})
-    hours: Optional[hours.Hours] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hours' }})
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    mobile: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mobile' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    operating_status: operatingstatus.OperatingStatus = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operating_status' }})
-    operational_hours_special_instructions: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operational_hours_special_instructions' }})
-    phone: Optional[phone.Phone] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phone' }})
-    satisfaction: Optional[satisfaction.Satisfaction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'satisfaction' }})
-    services: Optional[services.Services] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'services' }})
-    time_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time_zone' }})
-    visn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'visn' }})
-    wait_times: Optional[waittimes.WaitTimes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wait_times' }})
-    website: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'website' }})
+    facility_type: PropertiesFacilityTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('facility_type') }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    operating_status: OperatingStatus = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('operating_status') }})
+    active_status: Optional[PropertiesActiveStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('active_status') }})
+    address: Optional[Addresses] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('address') }})
+    classification: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('classification') }})
+    detailed_services: Optional[List[DetailedService]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detailed_services') }})
+    hours: Optional[Hours] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hours') }})
+    mobile: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mobile') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    operational_hours_special_instructions: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('operational_hours_special_instructions') }})
+    phone: Optional[Phone] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('phone') }})
+    satisfaction: Optional[Satisfaction] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('satisfaction') }})
+    services: Optional[Services] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('services') }})
+    time_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('time_zone') }})
+    visn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('visn') }})
+    wait_times: Optional[WaitTimes] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('wait_times') }})
+    website: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('website') }})
     

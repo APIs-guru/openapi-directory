@@ -13,12 +13,12 @@ class GetSchoolsQueryParams:
 
 @dataclass
 class GetSchoolsRequest:
-    query_params: GetSchoolsQueryParams = field(default=None)
+    query_params: GetSchoolsQueryParams = field()
     
 
 @dataclass
 class GetSchoolsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     schools_response: Optional[shared.SchoolsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

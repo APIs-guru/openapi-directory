@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ActivityContentDetailsUpload
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the uploaded video.
 **/
 export class ActivityContentDetailsUpload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=videoId" })
+  @SpeakeasyMetadata({ data: "json, name=videoId" })
   videoId?: string;
 }

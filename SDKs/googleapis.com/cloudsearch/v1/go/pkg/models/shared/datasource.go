@@ -1,5 +1,7 @@
 package shared
 
+// DataSource
+// Datasource is a logical namespace for items to be indexed. All items must belong to a datasource. This is the prerequisite before items can be indexed into Cloud Search.
 type DataSource struct {
 	DisableModifications    *bool             `json:"disableModifications,omitempty"`
 	DisableServing          *bool             `json:"disableServing,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudIntegrationsV1alphaValueType
+// The type of the parameter.
 type GoogleCloudIntegrationsV1alphaValueType struct {
 	BooleanArray *GoogleCloudIntegrationsV1alphaBooleanParameterArray `json:"booleanArray,omitempty"`
 	BooleanValue *bool                                                `json:"booleanValue,omitempty"`

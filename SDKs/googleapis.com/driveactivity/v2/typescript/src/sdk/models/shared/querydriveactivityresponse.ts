@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DriveActivity } from "./driveactivity";
+
 
 
 // QueryDriveActivityResponse
@@ -8,9 +8,9 @@ import { DriveActivity } from "./driveactivity";
  * Response message for querying Drive activity.
 **/
 export class QueryDriveActivityResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activities", elemType: shared.DriveActivity })
+  @SpeakeasyMetadata({ data: "json, name=activities", elemType: DriveActivity })
   activities?: DriveActivity[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteBatchJobPathParams = /** @class */ (function (_super) {
     __extends(DeleteBatchJobPathParams, _super);
@@ -30,7 +30,7 @@ var DeleteBatchJobPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=JobId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=JobId" }),
         __metadata("design:type", String)
     ], DeleteBatchJobPathParams.prototype, "jobId", void 0);
     return DeleteBatchJobPathParams;
@@ -42,11 +42,11 @@ var DeleteBatchJobHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], DeleteBatchJobHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], DeleteBatchJobHeaders.prototype, "authorization", void 0);
     return DeleteBatchJobHeaders;
@@ -58,11 +58,11 @@ var DeleteBatchJobRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteBatchJobPathParams)
     ], DeleteBatchJobRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteBatchJobHeaders)
     ], DeleteBatchJobRequest.prototype, "headers", void 0);
     return DeleteBatchJobRequest;
@@ -74,15 +74,15 @@ var DeleteBatchJobResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteBatchJobResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], DeleteBatchJobResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteBatchJobResponse.prototype, "statusCode", void 0);
     return DeleteBatchJobResponse;

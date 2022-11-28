@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KinesisDataStreamDestination } from "./kinesisdatastreamdestination";
 
 
+
 export class DescribeKinesisStreamingDestinationOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=KinesisDataStreamDestinations", elemType: shared.KinesisDataStreamDestination })
+  @SpeakeasyMetadata({ data: "json, name=KinesisDataStreamDestinations", elemType: KinesisDataStreamDestination })
   kinesisDataStreamDestinations?: KinesisDataStreamDestination[];
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName?: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserRolePermission } from "./userrolepermission";
+
 
 
 // UserRole
@@ -8,27 +8,27 @@ import { UserRolePermission } from "./userrolepermission";
  * Contains properties of auser role, which is used to manage user access.
 **/
 export class UserRole extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=defaultUserRole" })
+  @SpeakeasyMetadata({ data: "json, name=defaultUserRole" })
   defaultUserRole?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parentUserRoleId" })
+  @SpeakeasyMetadata({ data: "json, name=parentUserRoleId" })
   parentUserRoleId?: string;
 
-  @Metadata({ data: "json, name=permissions", elemType: shared.UserRolePermission })
+  @SpeakeasyMetadata({ data: "json, name=permissions", elemType: UserRolePermission })
   permissions?: UserRolePermission[];
 
-  @Metadata({ data: "json, name=subaccountId" })
+  @SpeakeasyMetadata({ data: "json, name=subaccountId" })
   subaccountId?: string;
 }

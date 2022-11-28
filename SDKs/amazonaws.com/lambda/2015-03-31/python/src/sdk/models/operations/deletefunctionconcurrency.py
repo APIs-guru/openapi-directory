@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteFunctionConcurrencyPathParams:
-    function_name: str = field(default=None, metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
+    function_name: str = field(metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,17 +23,17 @@ class DeleteFunctionConcurrencyHeaders:
 
 @dataclass
 class DeleteFunctionConcurrencyRequest:
-    path_params: DeleteFunctionConcurrencyPathParams = field(default=None)
-    headers: DeleteFunctionConcurrencyHeaders = field(default=None)
+    headers: DeleteFunctionConcurrencyHeaders = field()
+    path_params: DeleteFunctionConcurrencyPathParams = field()
     
 
 @dataclass
 class DeleteFunctionConcurrencyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     resource_conflict_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

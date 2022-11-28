@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Represents a log subscription, which tracks real-time data from a chosen log group to a specified destination.
 **/

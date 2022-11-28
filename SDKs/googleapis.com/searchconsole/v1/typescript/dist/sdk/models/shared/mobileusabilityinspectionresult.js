@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { MobileUsabilityIssue } from "./mobileusabilityissue";
 export var MobileUsabilityInspectionResultVerdictEnum;
 (function (MobileUsabilityInspectionResultVerdictEnum) {
     MobileUsabilityInspectionResultVerdictEnum["VerdictUnspecified"] = "VERDICT_UNSPECIFIED";
@@ -42,11 +42,11 @@ var MobileUsabilityInspectionResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=issues", elemType: shared.MobileUsabilityIssue }),
+        SpeakeasyMetadata({ data: "json, name=issues", elemType: MobileUsabilityIssue }),
         __metadata("design:type", Array)
     ], MobileUsabilityInspectionResult.prototype, "issues", void 0);
     __decorate([
-        Metadata({ data: "json, name=verdict" }),
+        SpeakeasyMetadata({ data: "json, name=verdict" }),
         __metadata("design:type", String)
     ], MobileUsabilityInspectionResult.prototype, "verdict", void 0);
     return MobileUsabilityInspectionResult;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Column } from "./column";
+
 
 
 // Columns
@@ -8,18 +8,18 @@ import { Column } from "./column";
  * Lists columns (dimensions and metrics) for a particular report type.
 **/
 export class Columns extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributeNames" })
+  @SpeakeasyMetadata({ data: "json, name=attributeNames" })
   attributeNames?: string[];
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=items", elemType: shared.Column })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Column })
   items?: Column[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=totalResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalResults" })
   totalResults?: number;
 }

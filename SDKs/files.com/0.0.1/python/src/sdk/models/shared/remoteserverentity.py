@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class RemoteServerEntityAuthStatusEnum(str, Enum):
     NOT_APPLICABLE = "not_applicable"
@@ -43,37 +45,41 @@ class RemoteServerEntitySslEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RemoteServerEntity:
-    auth_account_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_account_name' }})
-    auth_setup_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_setup_link' }})
-    auth_status: Optional[RemoteServerEntityAuthStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_status' }})
-    authentication_method: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authentication_method' }})
-    azure_blob_storage_account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'azure_blob_storage_account' }})
-    azure_blob_storage_container: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'azure_blob_storage_container' }})
-    backblaze_b2_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backblaze_b2_bucket' }})
-    backblaze_b2_s3_endpoint: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backblaze_b2_s3_endpoint' }})
-    enable_dedicated_ips: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enable_dedicated_ips' }})
-    google_cloud_storage_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'google_cloud_storage_bucket' }})
-    google_cloud_storage_project_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'google_cloud_storage_project_id' }})
-    hostname: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hostname' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    max_connections: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'max_connections' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    one_drive_account_type: Optional[RemoteServerEntityOneDriveAccountTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'one_drive_account_type' }})
-    port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'port' }})
-    rackspace_container: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rackspace_container' }})
-    rackspace_region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rackspace_region' }})
-    rackspace_username: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rackspace_username' }})
-    remote_home_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'remote_home_path' }})
-    s3_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3_bucket' }})
-    s3_compatible_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3_compatible_bucket' }})
-    s3_compatible_endpoint: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3_compatible_endpoint' }})
-    s3_compatible_region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3_compatible_region' }})
-    s3_region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3_region' }})
-    server_certificate: Optional[RemoteServerEntityServerCertificateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server_certificate' }})
-    server_host_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server_host_key' }})
-    server_type: Optional[RemoteServerEntityServerTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server_type' }})
-    ssl: Optional[RemoteServerEntitySslEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ssl' }})
-    username: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'username' }})
-    wasabi_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wasabi_bucket' }})
-    wasabi_region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wasabi_region' }})
+    r"""RemoteServerEntity
+    Create Remote Server
+    """
+    
+    auth_account_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('auth_account_name') }})
+    auth_setup_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('auth_setup_link') }})
+    auth_status: Optional[RemoteServerEntityAuthStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('auth_status') }})
+    authentication_method: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authentication_method') }})
+    azure_blob_storage_account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('azure_blob_storage_account') }})
+    azure_blob_storage_container: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('azure_blob_storage_container') }})
+    backblaze_b2_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('backblaze_b2_bucket') }})
+    backblaze_b2_s3_endpoint: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('backblaze_b2_s3_endpoint') }})
+    enable_dedicated_ips: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enable_dedicated_ips') }})
+    google_cloud_storage_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('google_cloud_storage_bucket') }})
+    google_cloud_storage_project_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('google_cloud_storage_project_id') }})
+    hostname: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hostname') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    max_connections: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('max_connections') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    one_drive_account_type: Optional[RemoteServerEntityOneDriveAccountTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('one_drive_account_type') }})
+    port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('port') }})
+    rackspace_container: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rackspace_container') }})
+    rackspace_region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rackspace_region') }})
+    rackspace_username: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rackspace_username') }})
+    remote_home_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('remote_home_path') }})
+    s3_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3_bucket') }})
+    s3_compatible_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3_compatible_bucket') }})
+    s3_compatible_endpoint: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3_compatible_endpoint') }})
+    s3_compatible_region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3_compatible_region') }})
+    s3_region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3_region') }})
+    server_certificate: Optional[RemoteServerEntityServerCertificateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('server_certificate') }})
+    server_host_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('server_host_key') }})
+    server_type: Optional[RemoteServerEntityServerTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('server_type') }})
+    ssl: Optional[RemoteServerEntitySslEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ssl') }})
+    username: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('username') }})
+    wasabi_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('wasabi_bucket') }})
+    wasabi_region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('wasabi_region') }})
     

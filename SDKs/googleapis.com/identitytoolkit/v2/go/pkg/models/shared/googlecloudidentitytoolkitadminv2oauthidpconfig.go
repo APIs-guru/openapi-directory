@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig
+// Configuration options for authenticating with an OAuth IDP.
 type GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig struct {
 	ClientID     *string                                             `json:"clientId,omitempty"`
 	ClientSecret *string                                             `json:"clientSecret,omitempty"`

@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AllLinesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   otoroshiAuth: shared.SchemeOtoroshiAuth;
 }
 
 
 export class AllLinesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   security: AllLinesSecurity;
 }
 
 
 export class AllLinesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   environment?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

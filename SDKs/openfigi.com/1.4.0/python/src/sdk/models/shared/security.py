@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class SchemeAPIKeyAuth:
-    api_key: str = field(default=None, metadata={'security': { 'field_name': 'X-OPENFIGI-APIKEY' }})
+    api_key: str = field(metadata={'security': { 'field_name': 'X-OPENFIGI-APIKEY' }})
     
 
 @dataclass

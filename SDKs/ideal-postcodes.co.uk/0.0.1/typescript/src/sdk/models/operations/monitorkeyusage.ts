@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class MonitorKeyUsagePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=key" })
   key: string;
 }
 
 
 export class MonitorKeyUsageQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end" })
   end?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=licensee" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=licensee" })
   licensee?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" })
   start?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tags" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tags" })
   tags?: string;
 }
 
 
 export class MonitorKeyUsageSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   apiKey: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   userToken: shared.SchemeUserToken;
 }
 
 
 export class MonitorKeyUsageRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: MonitorKeyUsagePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: MonitorKeyUsageQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: MonitorKeyUsageSecurity;
 }
 
 
 export class MonitorKeyUsageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseSchema?: shared.ErrorResponseSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   keyUsageResponseSchema?: shared.KeyUsageResponseSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

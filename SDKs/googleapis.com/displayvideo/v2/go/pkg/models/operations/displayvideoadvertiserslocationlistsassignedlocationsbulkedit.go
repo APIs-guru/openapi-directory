@@ -31,7 +31,7 @@ type DisplayvideoAdvertisersLocationListsAssignedLocationsBulkEditSecurity struc
 type DisplayvideoAdvertisersLocationListsAssignedLocationsBulkEditRequest struct {
 	PathParams  DisplayvideoAdvertisersLocationListsAssignedLocationsBulkEditPathParams
 	QueryParams DisplayvideoAdvertisersLocationListsAssignedLocationsBulkEditQueryParams
-	Request     *shared.BulkEditAssignedLocationsRequest `request:"mediaType=application/json"`
+	Request     *shared.BulkEditAssignedLocationsRequestInput `request:"mediaType=application/json"`
 	Security    DisplayvideoAdvertisersLocationListsAssignedLocationsBulkEditSecurity
 }
 

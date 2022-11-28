@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParameterConstraints } from "./parameterconstraints";
 // ProvisioningArtifactParameter
 /**
@@ -34,27 +34,27 @@ var ProvisioningArtifactParameter = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DefaultValue" }),
+        SpeakeasyMetadata({ data: "json, name=DefaultValue" }),
         __metadata("design:type", String)
     ], ProvisioningArtifactParameter.prototype, "defaultValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], ProvisioningArtifactParameter.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=IsNoEcho" }),
+        SpeakeasyMetadata({ data: "json, name=IsNoEcho" }),
         __metadata("design:type", Boolean)
     ], ProvisioningArtifactParameter.prototype, "isNoEcho", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParameterConstraints" }),
+        SpeakeasyMetadata({ data: "json, name=ParameterConstraints" }),
         __metadata("design:type", ParameterConstraints)
     ], ProvisioningArtifactParameter.prototype, "parameterConstraints", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParameterKey" }),
+        SpeakeasyMetadata({ data: "json, name=ParameterKey" }),
         __metadata("design:type", String)
     ], ProvisioningArtifactParameter.prototype, "parameterKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParameterType" }),
+        SpeakeasyMetadata({ data: "json, name=ParameterType" }),
         __metadata("design:type", String)
     ], ProvisioningArtifactParameter.prototype, "parameterType", void 0);
     return ProvisioningArtifactParameter;

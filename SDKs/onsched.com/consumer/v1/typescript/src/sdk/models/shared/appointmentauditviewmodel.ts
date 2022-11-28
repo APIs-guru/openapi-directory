@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AppointmentAuditViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appointmentId" })
+  @SpeakeasyMetadata({ data: "json, name=appointmentId" })
   appointmentId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=modificationType" })
+  @SpeakeasyMetadata({ data: "json, name=modificationType" })
   modificationType?: string;
 
-  @Metadata({ data: "json, name=modifiedBy" })
+  @SpeakeasyMetadata({ data: "json, name=modifiedBy" })
   modifiedBy?: string;
 
-  @Metadata({ data: "json, name=modifiedOn" })
+  @SpeakeasyMetadata({ data: "json, name=modifiedOn" })
   modifiedOn?: Date;
 
-  @Metadata({ data: "json, name=notesAfter" })
+  @SpeakeasyMetadata({ data: "json, name=notesAfter" })
   notesAfter?: string;
 
-  @Metadata({ data: "json, name=notesBefore" })
+  @SpeakeasyMetadata({ data: "json, name=notesBefore" })
   notesBefore?: string;
 
-  @Metadata({ data: "json, name=statusAfter" })
+  @SpeakeasyMetadata({ data: "json, name=statusAfter" })
   statusAfter?: string;
 
-  @Metadata({ data: "json, name=statusBefore" })
+  @SpeakeasyMetadata({ data: "json, name=statusBefore" })
   statusBefore?: string;
 }

@@ -1,22 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Tag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=color" })
+  @SpeakeasyMetadata({ data: "json, name=color" })
   color?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=slug" })
+  @SpeakeasyMetadata({ data: "json, name=slug" })
   slug: string;
 
-  @Metadata({ data: "json, name=tagged_items" })
+  @SpeakeasyMetadata({ data: "json, name=tagged_items" })
   taggedItems?: number;
+}
+
+
+export class TagInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=color" })
+  color?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name: string;
+
+  @SpeakeasyMetadata({ data: "json, name=slug" })
+  slug: string;
 }

@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ContactInformation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=fax" })
+  @SpeakeasyMetadata({ data: "json, name=fax" })
   fax?: string;
 
-  @Metadata({ data: "json, name=isPreferred" })
+  @SpeakeasyMetadata({ data: "json, name=isPreferred" })
   isPreferred?: boolean;
 
-  @Metadata({ data: "json, name=isWebAddress" })
+  @SpeakeasyMetadata({ data: "json, name=isWebAddress" })
   isWebAddress?: boolean;
 
-  @Metadata({ data: "json, name=line1" })
+  @SpeakeasyMetadata({ data: "json, name=line1" })
   line1?: string;
 
-  @Metadata({ data: "json, name=line2" })
+  @SpeakeasyMetadata({ data: "json, name=line2" })
   line2?: string;
 
-  @Metadata({ data: "json, name=line3" })
+  @SpeakeasyMetadata({ data: "json, name=line3" })
   line3?: string;
 
-  @Metadata({ data: "json, name=line4" })
+  @SpeakeasyMetadata({ data: "json, name=line4" })
   line4?: string;
 
-  @Metadata({ data: "json, name=line5" })
+  @SpeakeasyMetadata({ data: "json, name=line5" })
   line5?: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=phone" })
+  @SpeakeasyMetadata({ data: "json, name=phone" })
   phone?: string;
 
-  @Metadata({ data: "json, name=postcode" })
+  @SpeakeasyMetadata({ data: "json, name=postcode" })
   postcode?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=typeDescription" })
+  @SpeakeasyMetadata({ data: "json, name=typeDescription" })
   typeDescription?: string;
 
-  @Metadata({ data: "json, name=typeId" })
+  @SpeakeasyMetadata({ data: "json, name=typeId" })
   typeId?: number;
 }

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UtteranceList } from "./utterancelist";
 
 
+
 export class GetUtterancesViewResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=botName" })
+  @SpeakeasyMetadata({ data: "json, name=botName" })
   botName?: string;
 
-  @Metadata({ data: "json, name=utterances", elemType: shared.UtteranceList })
+  @SpeakeasyMetadata({ data: "json, name=utterances", elemType: UtteranceList })
   utterances?: UtteranceList[];
 }

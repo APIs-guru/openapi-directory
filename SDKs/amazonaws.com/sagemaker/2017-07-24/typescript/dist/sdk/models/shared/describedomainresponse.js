@@ -1,0 +1,105 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AppNetworkAccessTypeEnum } from "./appnetworkaccesstypeenum";
+import { AuthModeEnum } from "./authmodeenum";
+import { UserSettings } from "./usersettings";
+import { DomainStatusEnum } from "./domainstatusenum";
+var DescribeDomainResponse = /** @class */ (function (_super) {
+    __extends(DescribeDomainResponse, _super);
+    function DescribeDomainResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=AppNetworkAccessType" }),
+        __metadata("design:type", String)
+    ], DescribeDomainResponse.prototype, "appNetworkAccessType", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=AuthMode" }),
+        __metadata("design:type", String)
+    ], DescribeDomainResponse.prototype, "authMode", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
+        __metadata("design:type", Date)
+    ], DescribeDomainResponse.prototype, "creationTime", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=DefaultUserSettings" }),
+        __metadata("design:type", UserSettings)
+    ], DescribeDomainResponse.prototype, "defaultUserSettings", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=DomainArn" }),
+        __metadata("design:type", String)
+    ], DescribeDomainResponse.prototype, "domainArn", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=DomainId" }),
+        __metadata("design:type", String)
+    ], DescribeDomainResponse.prototype, "domainId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=DomainName" }),
+        __metadata("design:type", String)
+    ], DescribeDomainResponse.prototype, "domainName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=FailureReason" }),
+        __metadata("design:type", String)
+    ], DescribeDomainResponse.prototype, "failureReason", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=HomeEfsFileSystemId" }),
+        __metadata("design:type", String)
+    ], DescribeDomainResponse.prototype, "homeEfsFileSystemId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=HomeEfsFileSystemKmsKeyId" }),
+        __metadata("design:type", String)
+    ], DescribeDomainResponse.prototype, "homeEfsFileSystemKmsKeyId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=KmsKeyId" }),
+        __metadata("design:type", String)
+    ], DescribeDomainResponse.prototype, "kmsKeyId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=LastModifiedTime" }),
+        __metadata("design:type", Date)
+    ], DescribeDomainResponse.prototype, "lastModifiedTime", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=SingleSignOnManagedApplicationInstanceId" }),
+        __metadata("design:type", String)
+    ], DescribeDomainResponse.prototype, "singleSignOnManagedApplicationInstanceId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Status" }),
+        __metadata("design:type", String)
+    ], DescribeDomainResponse.prototype, "status", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=SubnetIds" }),
+        __metadata("design:type", Array)
+    ], DescribeDomainResponse.prototype, "subnetIds", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Url" }),
+        __metadata("design:type", String)
+    ], DescribeDomainResponse.prototype, "url", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=VpcId" }),
+        __metadata("design:type", String)
+    ], DescribeDomainResponse.prototype, "vpcId", void 0);
+    return DescribeDomainResponse;
+}(SpeakeasyBase));
+export { DescribeDomainResponse };

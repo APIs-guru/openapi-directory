@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Task } from "./task";
 var NotifyMigrationTaskStateRequest = /** @class */ (function (_super) {
     __extends(NotifyMigrationTaskStateRequest, _super);
@@ -30,27 +30,27 @@ var NotifyMigrationTaskStateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DryRun" }),
+        SpeakeasyMetadata({ data: "json, name=DryRun" }),
         __metadata("design:type", Boolean)
     ], NotifyMigrationTaskStateRequest.prototype, "dryRun", void 0);
     __decorate([
-        Metadata({ data: "json, name=MigrationTaskName" }),
+        SpeakeasyMetadata({ data: "json, name=MigrationTaskName" }),
         __metadata("design:type", String)
     ], NotifyMigrationTaskStateRequest.prototype, "migrationTaskName", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextUpdateSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=NextUpdateSeconds" }),
         __metadata("design:type", Number)
     ], NotifyMigrationTaskStateRequest.prototype, "nextUpdateSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProgressUpdateStream" }),
+        SpeakeasyMetadata({ data: "json, name=ProgressUpdateStream" }),
         __metadata("design:type", String)
     ], NotifyMigrationTaskStateRequest.prototype, "progressUpdateStream", void 0);
     __decorate([
-        Metadata({ data: "json, name=Task" }),
+        SpeakeasyMetadata({ data: "json, name=Task" }),
         __metadata("design:type", Task)
     ], NotifyMigrationTaskStateRequest.prototype, "task", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdateDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=UpdateDateTime" }),
         __metadata("design:type", Date)
     ], NotifyMigrationTaskStateRequest.prototype, "updateDateTime", void 0);
     return NotifyMigrationTaskStateRequest;

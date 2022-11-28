@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ClickwrapEntityUseWithBundlesEnum(str, Enum):
     NONE = "none"
@@ -20,10 +22,14 @@ class ClickwrapEntityUseWithUsersEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ClickwrapEntity:
-    body: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'body' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    use_with_bundles: Optional[ClickwrapEntityUseWithBundlesEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'use_with_bundles' }})
-    use_with_inboxes: Optional[ClickwrapEntityUseWithInboxesEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'use_with_inboxes' }})
-    use_with_users: Optional[ClickwrapEntityUseWithUsersEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'use_with_users' }})
+    r"""ClickwrapEntity
+    Create Clickwrap
+    """
+    
+    body: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('body') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    use_with_bundles: Optional[ClickwrapEntityUseWithBundlesEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('use_with_bundles') }})
+    use_with_inboxes: Optional[ClickwrapEntityUseWithInboxesEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('use_with_inboxes') }})
+    use_with_users: Optional[ClickwrapEntityUseWithUsersEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('use_with_users') }})
     

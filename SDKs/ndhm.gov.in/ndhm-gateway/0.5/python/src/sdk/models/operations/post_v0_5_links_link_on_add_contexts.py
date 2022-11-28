@@ -5,26 +5,26 @@ from sdk.models import shared
 
 @dataclass
 class PostV05LinksLinkOnAddContextsHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
-    x_hip_id: str = field(default=None, metadata={'header': { 'field_name': 'X-HIP-ID', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    x_hip_id: str = field(metadata={'header': { 'field_name': 'X-HIP-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostV05LinksLinkOnAddContextsRequests:
-    application_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'application/xml' }})
+    application_xml: bytes = field(metadata={'request': { 'media_type': 'application/xml' }})
     patient_care_context_link_response: Optional[shared.PatientCareContextLinkResponse] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostV05LinksLinkOnAddContextsRequest:
-    headers: PostV05LinksLinkOnAddContextsHeaders = field(default=None)
-    request: PostV05LinksLinkOnAddContextsRequests = field(default=None)
+    headers: PostV05LinksLinkOnAddContextsHeaders = field()
+    request: PostV05LinksLinkOnAddContextsRequests = field()
     
 
 @dataclass
 class PostV05LinksLinkOnAddContextsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

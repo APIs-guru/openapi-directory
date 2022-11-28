@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class PlacementGroupStrategyEnum(str, Enum):
     SPREAD = "SPREAD"

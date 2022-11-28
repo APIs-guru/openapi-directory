@@ -1,89 +1,90 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateDomainAssociationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=appId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" })
   appId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=domainName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=domainName" })
   domainName: string;
 }
 
 
 export class UpdateDomainAssociationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class UpdateDomainAssociationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoSubDomainCreationPatterns" })
+  @SpeakeasyMetadata({ data: "json, name=autoSubDomainCreationPatterns" })
   autoSubDomainCreationPatterns?: string[];
 
-  @Metadata({ data: "json, name=autoSubDomainIAMRole" })
+  @SpeakeasyMetadata({ data: "json, name=autoSubDomainIAMRole" })
   autoSubDomainIamRole?: string;
 
-  @Metadata({ data: "json, name=enableAutoSubDomain" })
+  @SpeakeasyMetadata({ data: "json, name=enableAutoSubDomain" })
   enableAutoSubDomain?: boolean;
 
-  @Metadata({ data: "json, name=subDomainSettings", elemType: shared.SubDomainSetting })
+  @SpeakeasyMetadata({ data: "json, name=subDomainSettings", elemType: shared.SubDomainSetting })
   subDomainSettings: shared.SubDomainSetting[];
 }
 
 
 export class UpdateDomainAssociationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateDomainAssociationPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateDomainAssociationHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateDomainAssociationRequestBody;
 }
 
 
 export class UpdateDomainAssociationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dependentServiceFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateDomainAssociationResult?: shared.UpdateDomainAssociationResult;
 }

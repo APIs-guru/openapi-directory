@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudApigeeV1CertInfo
@@ -6,36 +7,36 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * X.509 certificate as defined in RFC 5280.
 **/
 export class GoogleCloudApigeeV1CertInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=basicConstraints" })
+  @SpeakeasyMetadata({ data: "json, name=basicConstraints" })
   basicConstraints?: string;
 
-  @Metadata({ data: "json, name=expiryDate" })
+  @SpeakeasyMetadata({ data: "json, name=expiryDate" })
   expiryDate?: string;
 
-  @Metadata({ data: "json, name=isValid" })
+  @SpeakeasyMetadata({ data: "json, name=isValid" })
   isValid?: string;
 
-  @Metadata({ data: "json, name=issuer" })
+  @SpeakeasyMetadata({ data: "json, name=issuer" })
   issuer?: string;
 
-  @Metadata({ data: "json, name=publicKey" })
+  @SpeakeasyMetadata({ data: "json, name=publicKey" })
   publicKey?: string;
 
-  @Metadata({ data: "json, name=serialNumber" })
+  @SpeakeasyMetadata({ data: "json, name=serialNumber" })
   serialNumber?: string;
 
-  @Metadata({ data: "json, name=sigAlgName" })
+  @SpeakeasyMetadata({ data: "json, name=sigAlgName" })
   sigAlgName?: string;
 
-  @Metadata({ data: "json, name=subject" })
+  @SpeakeasyMetadata({ data: "json, name=subject" })
   subject?: string;
 
-  @Metadata({ data: "json, name=subjectAlternativeNames" })
+  @SpeakeasyMetadata({ data: "json, name=subjectAlternativeNames" })
   subjectAlternativeNames?: string[];
 
-  @Metadata({ data: "json, name=validFrom" })
+  @SpeakeasyMetadata({ data: "json, name=validFrom" })
   validFrom?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: number;
 }

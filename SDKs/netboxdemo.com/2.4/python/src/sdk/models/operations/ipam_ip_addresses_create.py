@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class IpamIPAddressesCreateRequest:
-    request: shared.WritableIPAddress = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WritableIPAddressInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class IpamIPAddressesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ip_address: Optional[shared.IPAddress] = field(default=None)
-    status_code: int = field(default=None)
     

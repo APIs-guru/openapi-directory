@@ -1,31 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttachmentsSource } from "./attachmentssource";
 import { DocumentFormatEnum } from "./documentformatenum";
 
 
+
 export class UpdateDocumentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Attachments", elemType: shared.AttachmentsSource })
+  @SpeakeasyMetadata({ data: "json, name=Attachments", elemType: AttachmentsSource })
   attachments?: AttachmentsSource[];
 
-  @Metadata({ data: "json, name=Content" })
+  @SpeakeasyMetadata({ data: "json, name=Content" })
   content: string;
 
-  @Metadata({ data: "json, name=DisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=DocumentFormat" })
+  @SpeakeasyMetadata({ data: "json, name=DocumentFormat" })
   documentFormat?: DocumentFormatEnum;
 
-  @Metadata({ data: "json, name=DocumentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=DocumentVersion" })
   documentVersion?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=TargetType" })
+  @SpeakeasyMetadata({ data: "json, name=TargetType" })
   targetType?: string;
 
-  @Metadata({ data: "json, name=VersionName" })
+  @SpeakeasyMetadata({ data: "json, name=VersionName" })
   versionName?: string;
 }

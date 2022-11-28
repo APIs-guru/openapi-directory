@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DescribeTrailsRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Returns information about the trail.
 **/
 export class DescribeTrailsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=includeShadowTrails" })
+  @SpeakeasyMetadata({ data: "json, name=includeShadowTrails" })
   includeShadowTrails?: boolean;
 
-  @Metadata({ data: "json, name=trailNameList" })
+  @SpeakeasyMetadata({ data: "json, name=trailNameList" })
   trailNameList?: string[];
 }

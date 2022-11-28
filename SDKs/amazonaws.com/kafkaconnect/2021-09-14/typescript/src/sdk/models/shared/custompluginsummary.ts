@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomPluginStateEnum } from "./custompluginstateenum";
 import { CustomPluginRevisionSummary } from "./custompluginrevisionsummary";
+
 
 
 // CustomPluginSummary
@@ -8,21 +9,21 @@ import { CustomPluginRevisionSummary } from "./custompluginrevisionsummary";
  * A summary of the custom plugin.
 **/
 export class CustomPluginSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=customPluginArn" })
+  @SpeakeasyMetadata({ data: "json, name=customPluginArn" })
   customPluginArn?: string;
 
-  @Metadata({ data: "json, name=customPluginState" })
+  @SpeakeasyMetadata({ data: "json, name=customPluginState" })
   customPluginState?: CustomPluginStateEnum;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=latestRevision" })
+  @SpeakeasyMetadata({ data: "json, name=latestRevision" })
   latestRevision?: CustomPluginRevisionSummary;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

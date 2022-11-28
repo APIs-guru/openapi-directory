@@ -1,5 +1,7 @@
 package shared
 
+// AutoScalingGroupConfiguration
+// Describes the configuration of an Auto Scaling group.
 type AutoScalingGroupConfiguration struct {
 	DesiredCapacity *int64  `json:"desiredCapacity,omitempty"`
 	InstanceType    *string `json:"instanceType,omitempty"`

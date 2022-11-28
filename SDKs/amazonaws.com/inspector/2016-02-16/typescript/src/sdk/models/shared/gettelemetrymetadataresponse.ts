@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TelemetryMetadata } from "./telemetrymetadata";
 
 
+
 export class GetTelemetryMetadataResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=telemetryMetadata", elemType: shared.TelemetryMetadata })
+  @SpeakeasyMetadata({ data: "json, name=telemetryMetadata", elemType: TelemetryMetadata })
   telemetryMetadata: TelemetryMetadata[];
 }

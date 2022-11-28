@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class UnauthorizedCacheControlHeaderStrategyEnum(str, Enum):
     FAIL_WITH_403 = "FAIL_WITH_403"

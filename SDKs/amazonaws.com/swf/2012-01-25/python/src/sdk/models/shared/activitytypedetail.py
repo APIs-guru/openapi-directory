@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import activitytypeconfiguration
-from . import activitytypeinfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ActivityTypeDetail:
-    configuration: activitytypeconfiguration.ActivityTypeConfiguration = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configuration' }})
-    type_info: activitytypeinfo.ActivityTypeInfo = field(default=None, metadata={'dataclasses_json': { 'field_name': 'typeInfo' }})
+    r"""ActivityTypeDetail
+    Detailed information about an activity type.
+    """
+    
+    configuration: ActivityTypeConfiguration = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('configuration') }})
+    type_info: ActivityTypeInfo = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('typeInfo') }})
     

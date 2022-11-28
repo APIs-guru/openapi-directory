@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegistryGetProjectPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project" })
   project: string;
 }
 
 
 export class RegistryGetProjectRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RegistryGetProjectPathParams;
 }
 
 
 export class RegistryGetProjectResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   project?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

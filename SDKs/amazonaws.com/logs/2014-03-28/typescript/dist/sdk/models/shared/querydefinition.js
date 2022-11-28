@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // QueryDefinition
 /**
  * This structure contains details about a saved CloudWatch Logs Insights query definition.
@@ -33,23 +33,23 @@ var QueryDefinition = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=lastModified" }),
+        SpeakeasyMetadata({ data: "json, name=lastModified" }),
         __metadata("design:type", Number)
     ], QueryDefinition.prototype, "lastModified", void 0);
     __decorate([
-        Metadata({ data: "json, name=logGroupNames" }),
+        SpeakeasyMetadata({ data: "json, name=logGroupNames" }),
         __metadata("design:type", Array)
     ], QueryDefinition.prototype, "logGroupNames", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], QueryDefinition.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=queryDefinitionId" }),
+        SpeakeasyMetadata({ data: "json, name=queryDefinitionId" }),
         __metadata("design:type", String)
     ], QueryDefinition.prototype, "queryDefinitionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=queryString" }),
+        SpeakeasyMetadata({ data: "json, name=queryString" }),
         __metadata("design:type", String)
     ], QueryDefinition.prototype, "queryString", void 0);
     return QueryDefinition;

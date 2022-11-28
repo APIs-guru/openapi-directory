@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InputLogEvent } from "./inputlogevent";
 export declare class PutLogEventsRequest extends SpeakeasyBase {
     logEvents: InputLogEvent[];

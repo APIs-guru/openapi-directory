@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum FantasyDefenseGameStatsFormatEnum {
-    Xml = "XML"
-,    Json = "JSON"
+    Xml = "XML",
+    Json = "JSON"
 }
 
 
 export class FantasyDefenseGameStatsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: FantasyDefenseGameStatsFormatEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=season" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=season" })
   season: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=week" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=week" })
   week: string;
 }
 
 
 export class FantasyDefenseGameStatsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: FantasyDefenseGameStatsPathParams;
 }
 
 
 export class FantasyDefenseGameStatsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fantasyDefenseGames?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

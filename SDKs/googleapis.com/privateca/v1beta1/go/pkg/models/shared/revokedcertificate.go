@@ -14,6 +14,8 @@ const (
 	RevokedCertificateRevocationReasonEnumAttributeAuthorityCompromise   RevokedCertificateRevocationReasonEnum = "ATTRIBUTE_AUTHORITY_COMPROMISE"
 )
 
+// RevokedCertificate
+// Describes a revoked Certificate.
 type RevokedCertificate struct {
 	Certificate      *string                                 `json:"certificate,omitempty"`
 	HexSerialNumber  *string                                 `json:"hexSerialNumber,omitempty"`

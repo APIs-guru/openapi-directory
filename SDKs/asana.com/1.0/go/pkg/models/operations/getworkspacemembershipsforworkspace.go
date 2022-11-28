@@ -16,13 +16,13 @@ type GetWorkspaceMembershipsForWorkspaceQueryParams struct {
 	User      *string  `queryParam:"style=form,explode=true,name=user"`
 }
 
+type GetWorkspaceMembershipsForWorkspace200ApplicationJSON struct {
+	Data []shared.WorkspaceMembershipCompact `json:"data,omitempty"`
+}
+
 type GetWorkspaceMembershipsForWorkspaceRequest struct {
 	PathParams  GetWorkspaceMembershipsForWorkspacePathParams
 	QueryParams GetWorkspaceMembershipsForWorkspaceQueryParams
-}
-
-type GetWorkspaceMembershipsForWorkspace200ApplicationJSON struct {
-	Data []shared.WorkspaceMembershipCompact `json:"data,omitempty"`
 }
 
 type GetWorkspaceMembershipsForWorkspaceResponse struct {

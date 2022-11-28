@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SharesPasswordPolicies
+// Shares password policies
 type SharesPasswordPolicies struct {
 	CharacterRules         *CharacterRules `json:"characterRules,omitempty"`
 	MinLength              *int32          `json:"minLength,omitempty"`

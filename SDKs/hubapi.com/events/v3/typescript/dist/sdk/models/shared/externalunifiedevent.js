@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ExternalUnifiedEvent
 /**
  * Used to represent any event. With this format, the `objectType` and `eventType` values are stringified CRM types. Example object:
@@ -54,27 +54,27 @@ var ExternalUnifiedEvent = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=eventType" }),
+        SpeakeasyMetadata({ data: "json, name=eventType" }),
         __metadata("design:type", String)
     ], ExternalUnifiedEvent.prototype, "eventType", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], ExternalUnifiedEvent.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=objectId" }),
+        SpeakeasyMetadata({ data: "json, name=objectId" }),
         __metadata("design:type", String)
     ], ExternalUnifiedEvent.prototype, "objectId", void 0);
     __decorate([
-        Metadata({ data: "json, name=objectType" }),
+        SpeakeasyMetadata({ data: "json, name=objectType" }),
         __metadata("design:type", String)
     ], ExternalUnifiedEvent.prototype, "objectType", void 0);
     __decorate([
-        Metadata({ data: "json, name=occurredAt" }),
+        SpeakeasyMetadata({ data: "json, name=occurredAt" }),
         __metadata("design:type", Date)
     ], ExternalUnifiedEvent.prototype, "occurredAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=properties" }),
+        SpeakeasyMetadata({ data: "json, name=properties" }),
         __metadata("design:type", Map)
     ], ExternalUnifiedEvent.prototype, "properties", void 0);
     return ExternalUnifiedEvent;

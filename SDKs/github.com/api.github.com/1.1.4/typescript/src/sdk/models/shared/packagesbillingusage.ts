@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PackagesBillingUsage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=included_gigabytes_bandwidth" })
+  @SpeakeasyMetadata({ data: "json, name=included_gigabytes_bandwidth" })
   includedGigabytesBandwidth: number;
 
-  @Metadata({ data: "json, name=total_gigabytes_bandwidth_used" })
+  @SpeakeasyMetadata({ data: "json, name=total_gigabytes_bandwidth_used" })
   totalGigabytesBandwidthUsed: number;
 
-  @Metadata({ data: "json, name=total_paid_gigabytes_bandwidth_used" })
+  @SpeakeasyMetadata({ data: "json, name=total_paid_gigabytes_bandwidth_used" })
   totalPaidGigabytesBandwidthUsed: number;
 }

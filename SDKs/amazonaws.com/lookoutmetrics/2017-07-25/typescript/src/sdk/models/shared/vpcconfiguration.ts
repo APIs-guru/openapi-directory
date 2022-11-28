@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VpcConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains configuration information about the Amazon Virtual Private Cloud (VPC).
 **/
 export class VpcConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SecurityGroupIdList" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroupIdList" })
   securityGroupIdList: string[];
 
-  @Metadata({ data: "json, name=SubnetIdList" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetIdList" })
   subnetIdList: string[];
 }

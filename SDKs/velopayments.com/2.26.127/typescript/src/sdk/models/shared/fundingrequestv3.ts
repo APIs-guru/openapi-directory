@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class FundingRequestV3 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount: number;
 
-  @Metadata({ data: "json, name=fundingAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=fundingAccountId" })
   fundingAccountId: string;
 }

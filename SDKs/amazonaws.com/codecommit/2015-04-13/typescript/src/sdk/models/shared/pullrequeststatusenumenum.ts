@@ -1,6 +1,7 @@
 
 
+
 export enum PullRequestStatusEnumEnum {
-    Open = "OPEN"
-,    Closed = "CLOSED"
+    Open = "OPEN",
+    Closed = "CLOSED"
 }

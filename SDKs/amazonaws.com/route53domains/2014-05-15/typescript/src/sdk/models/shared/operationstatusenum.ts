@@ -1,9 +1,10 @@
 
 
+
 export enum OperationStatusEnum {
-    Submitted = "SUBMITTED"
-,    InProgress = "IN_PROGRESS"
-,    Error = "ERROR"
-,    Successful = "SUCCESSFUL"
-,    Failed = "FAILED"
+    Submitted = "SUBMITTED",
+    InProgress = "IN_PROGRESS",
+    Error = "ERROR",
+    Successful = "SUCCESSFUL",
+    Failed = "FAILED"
 }

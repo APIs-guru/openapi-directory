@@ -1,5 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatacatalogV1beta1TagFieldEnumValue } from "./googleclouddatacatalogv1beta1tagfieldenumvalue";
+
+
+
+// GoogleCloudDatacatalogV1beta1TagFieldInput
+/** 
+ * Contains the value and supporting information for a field within a Tag.
+**/
+export class GoogleCloudDatacatalogV1beta1TagFieldInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=boolValue" })
+  boolValue?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=doubleValue" })
+  doubleValue?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=enumValue" })
+  enumValue?: GoogleCloudDatacatalogV1beta1TagFieldEnumValue;
+
+  @SpeakeasyMetadata({ data: "json, name=stringValue" })
+  stringValue?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=timestampValue" })
+  timestampValue?: string;
+}
 
 
 // GoogleCloudDatacatalogV1beta1TagField
@@ -7,24 +30,24 @@ import { GoogleCloudDatacatalogV1beta1TagFieldEnumValue } from "./googleclouddat
  * Contains the value and supporting information for a field within a Tag.
 **/
 export class GoogleCloudDatacatalogV1beta1TagField extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boolValue" })
+  @SpeakeasyMetadata({ data: "json, name=boolValue" })
   boolValue?: boolean;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=doubleValue" })
+  @SpeakeasyMetadata({ data: "json, name=doubleValue" })
   doubleValue?: number;
 
-  @Metadata({ data: "json, name=enumValue" })
+  @SpeakeasyMetadata({ data: "json, name=enumValue" })
   enumValue?: GoogleCloudDatacatalogV1beta1TagFieldEnumValue;
 
-  @Metadata({ data: "json, name=order" })
+  @SpeakeasyMetadata({ data: "json, name=order" })
   order?: number;
 
-  @Metadata({ data: "json, name=stringValue" })
+  @SpeakeasyMetadata({ data: "json, name=stringValue" })
   stringValue?: string;
 
-  @Metadata({ data: "json, name=timestampValue" })
+  @SpeakeasyMetadata({ data: "json, name=timestampValue" })
   timestampValue?: string;
 }

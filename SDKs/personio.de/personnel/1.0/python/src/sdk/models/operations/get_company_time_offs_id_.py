@@ -4,17 +4,17 @@ from typing import Any,Optional
 
 @dataclass
 class GetCompanyTimeOffsIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetCompanyTimeOffsIDRequest:
-    path_params: GetCompanyTimeOffsIDPathParams = field(default=None)
+    path_params: GetCompanyTimeOffsIDPathParams = field()
     
 
 @dataclass
 class GetCompanyTimeOffsIDResponse:
+    content_type: str = field()
+    status_code: int = field()
     absence_period_response: Optional[dict[str, Any]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

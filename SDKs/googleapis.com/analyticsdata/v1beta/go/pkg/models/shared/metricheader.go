@@ -18,6 +18,8 @@ const (
 	MetricHeaderTypeEnumTypeKilometers        MetricHeaderTypeEnum = "TYPE_KILOMETERS"
 )
 
+// MetricHeader
+// Describes a metric column in the report. Visible metrics requested in a report produce column entries within rows and MetricHeaders. However, metrics used exclusively within filters or expressions do not produce columns in a report; correspondingly, those metrics do not produce headers.
 type MetricHeader struct {
 	Name *string               `json:"name,omitempty"`
 	Type *MetricHeaderTypeEnum `json:"type,omitempty"`

@@ -27,11 +27,6 @@ type GrredSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type GrredRequest struct {
-	Request  *GrredRequestBody `request:"mediaType=application/json"`
-	Security GrredSecurity
-}
-
 type Grred400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Grred504ApplicationJSON struct {
 	Error            *Grred504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Grred504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type GrredRequest struct {
+	Request  *GrredRequestBody `request:"mediaType=application/json"`
+	Security GrredSecurity
 }
 
 type GrredResponse struct {

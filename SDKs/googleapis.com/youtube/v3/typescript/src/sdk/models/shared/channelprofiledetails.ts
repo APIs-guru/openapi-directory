@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ChannelProfileDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channelId" })
+  @SpeakeasyMetadata({ data: "json, name=channelId" })
   channelId?: string;
 
-  @Metadata({ data: "json, name=channelUrl" })
+  @SpeakeasyMetadata({ data: "json, name=channelUrl" })
   channelUrl?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=profileImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=profileImageUrl" })
   profileImageUrl?: string;
 }

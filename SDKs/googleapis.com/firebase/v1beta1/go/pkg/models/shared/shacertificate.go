@@ -8,6 +8,8 @@ const (
 	ShaCertificateCertTypeEnumSha256                        ShaCertificateCertTypeEnum = "SHA_256"
 )
 
+// ShaCertificate
+// A SHA-1 or SHA-256 certificate associated with the AndroidApp.
 type ShaCertificate struct {
 	CertType *ShaCertificateCertTypeEnum `json:"certType,omitempty"`
 	Name     *string                     `json:"name,omitempty"`

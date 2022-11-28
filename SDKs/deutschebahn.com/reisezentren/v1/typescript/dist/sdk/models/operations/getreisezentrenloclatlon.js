@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetReisezentrenLocLatLonPathParams = /** @class */ (function (_super) {
     __extends(GetReisezentrenLocLatLonPathParams, _super);
@@ -30,11 +30,11 @@ var GetReisezentrenLocLatLonPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=lat" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=lat" }),
         __metadata("design:type", Number)
     ], GetReisezentrenLocLatLonPathParams.prototype, "lat", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=lon" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=lon" }),
         __metadata("design:type", Number)
     ], GetReisezentrenLocLatLonPathParams.prototype, "lon", void 0);
     return GetReisezentrenLocLatLonPathParams;
@@ -46,7 +46,7 @@ var GetReisezentrenLocLatLonRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetReisezentrenLocLatLonPathParams)
     ], GetReisezentrenLocLatLonRequest.prototype, "pathParams", void 0);
     return GetReisezentrenLocLatLonRequest;
@@ -58,15 +58,15 @@ var GetReisezentrenLocLatLonResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetReisezentrenLocLatLonResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetReisezentrenLocLatLonResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.TravelCenter)
     ], GetReisezentrenLocLatLonResponse.prototype, "travelCenter", void 0);
     return GetReisezentrenLocLatLonResponse;

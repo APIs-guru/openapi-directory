@@ -13,13 +13,13 @@ type GetWorkspaceQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetWorkspace200ApplicationJSON struct {
+	Data *shared.WorkspaceResponse `json:"data,omitempty"`
+}
+
 type GetWorkspaceRequest struct {
 	PathParams  GetWorkspacePathParams
 	QueryParams GetWorkspaceQueryParams
-}
-
-type GetWorkspace200ApplicationJSON struct {
-	Data *shared.WorkspaceResponse `json:"data,omitempty"`
 }
 
 type GetWorkspaceResponse struct {

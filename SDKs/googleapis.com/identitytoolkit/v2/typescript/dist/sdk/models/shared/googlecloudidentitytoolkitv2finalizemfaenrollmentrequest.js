@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitV2FinalizeMfaPhoneRequestInfo } from "./googlecloudidentitytoolkitv2finalizemfaphonerequestinfo";
 // GoogleCloudIdentitytoolkitV2FinalizeMfaEnrollmentRequest
 /**
@@ -34,19 +34,19 @@ var GoogleCloudIdentitytoolkitV2FinalizeMfaEnrollmentRequest = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitV2FinalizeMfaEnrollmentRequest.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=idToken" }),
+        SpeakeasyMetadata({ data: "json, name=idToken" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitV2FinalizeMfaEnrollmentRequest.prototype, "idToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=phoneVerificationInfo" }),
+        SpeakeasyMetadata({ data: "json, name=phoneVerificationInfo" }),
         __metadata("design:type", GoogleCloudIdentitytoolkitV2FinalizeMfaPhoneRequestInfo)
     ], GoogleCloudIdentitytoolkitV2FinalizeMfaEnrollmentRequest.prototype, "phoneVerificationInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=tenantId" }),
+        SpeakeasyMetadata({ data: "json, name=tenantId" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitV2FinalizeMfaEnrollmentRequest.prototype, "tenantId", void 0);
     return GoogleCloudIdentitytoolkitV2FinalizeMfaEnrollmentRequest;

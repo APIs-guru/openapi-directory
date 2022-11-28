@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import serviceactionassociation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchAssociateServiceActionWithProvisioningArtifactInput:
-    accept_language: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AcceptLanguage' }})
-    service_action_associations: List[serviceactionassociation.ServiceActionAssociation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ServiceActionAssociations' }})
+    service_action_associations: List[ServiceActionAssociation] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ServiceActionAssociations') }})
+    accept_language: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AcceptLanguage') }})
     

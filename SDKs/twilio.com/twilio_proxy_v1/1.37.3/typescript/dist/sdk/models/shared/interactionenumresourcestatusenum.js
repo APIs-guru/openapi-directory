@@ -1,0 +1,24 @@
+export var InteractionEnumResourceStatusEnum;
+(function (InteractionEnumResourceStatusEnum) {
+    InteractionEnumResourceStatusEnum["Accepted"] = "accepted";
+    InteractionEnumResourceStatusEnum["Answered"] = "answered";
+    InteractionEnumResourceStatusEnum["Busy"] = "busy";
+    InteractionEnumResourceStatusEnum["Canceled"] = "canceled";
+    InteractionEnumResourceStatusEnum["Completed"] = "completed";
+    InteractionEnumResourceStatusEnum["Deleted"] = "deleted";
+    InteractionEnumResourceStatusEnum["Delivered"] = "delivered";
+    InteractionEnumResourceStatusEnum["DeliveryUnknown"] = "delivery-unknown";
+    InteractionEnumResourceStatusEnum["Failed"] = "failed";
+    InteractionEnumResourceStatusEnum["InProgress"] = "in-progress";
+    InteractionEnumResourceStatusEnum["Initiated"] = "initiated";
+    InteractionEnumResourceStatusEnum["NoAnswer"] = "no-answer";
+    InteractionEnumResourceStatusEnum["Queued"] = "queued";
+    InteractionEnumResourceStatusEnum["Received"] = "received";
+    InteractionEnumResourceStatusEnum["Receiving"] = "receiving";
+    InteractionEnumResourceStatusEnum["Ringing"] = "ringing";
+    InteractionEnumResourceStatusEnum["Scheduled"] = "scheduled";
+    InteractionEnumResourceStatusEnum["Sending"] = "sending";
+    InteractionEnumResourceStatusEnum["Sent"] = "sent";
+    InteractionEnumResourceStatusEnum["Undelivered"] = "undelivered";
+    InteractionEnumResourceStatusEnum["Unknown"] = "unknown";
+})(InteractionEnumResourceStatusEnum || (InteractionEnumResourceStatusEnum = {}));

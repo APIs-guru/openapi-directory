@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Job } from "./job";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { JobInput } from "./job";
 
 
-// SubmitJobRequest
+
+// SubmitJobRequestInput
 /** 
  * A request to submit a job.
 **/
-export class SubmitJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=job" })
-  job?: Job;
+export class SubmitJobRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=job" })
+  job?: JobInput;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 }

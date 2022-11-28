@@ -1,5 +1,7 @@
 package shared
 
+// ExportContextCsvExportOptions
+// Options for exporting data as CSV. `MySQL` and `PostgreSQL` instances only.
 type ExportContextCsvExportOptions struct {
 	EscapeCharacter    *string `json:"escapeCharacter,omitempty"`
 	FieldsTerminatedBy *string `json:"fieldsTerminatedBy,omitempty"`
@@ -17,16 +19,22 @@ const (
 	ExportContextFileTypeEnumBak                    ExportContextFileTypeEnum = "BAK"
 )
 
+// ExportContextSQLExportOptionsMysqlExportOptions
+// Options for exporting from MySQL.
 type ExportContextSQLExportOptionsMysqlExportOptions struct {
 	MasterData *int32 `json:"masterData,omitempty"`
 }
 
+// ExportContextSQLExportOptions
+// Options for exporting data as SQL statements.
 type ExportContextSQLExportOptions struct {
 	MysqlExportOptions *ExportContextSQLExportOptionsMysqlExportOptions `json:"mysqlExportOptions,omitempty"`
 	SchemaOnly         *bool                                            `json:"schemaOnly,omitempty"`
 	Tables             []string                                         `json:"tables,omitempty"`
 }
 
+// ExportContext
+// Database instance export context.
 type ExportContext struct {
 	CsvExportOptions *ExportContextCsvExportOptions `json:"csvExportOptions,omitempty"`
 	Databases        []string                       `json:"databases,omitempty"`

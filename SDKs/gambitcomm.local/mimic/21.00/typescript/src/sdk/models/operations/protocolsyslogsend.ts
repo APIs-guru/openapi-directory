@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ProtocolSyslogSendPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
   agentNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pri" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pri" })
   pri: number;
 }
 
 
 export class ProtocolSyslogSendRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ProtocolSyslogSendPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.SyslogMsg;
 }
 
 
 export class ProtocolSyslogSendResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   protocolSyslogSend200ApplicationJsonString?: string;
 }

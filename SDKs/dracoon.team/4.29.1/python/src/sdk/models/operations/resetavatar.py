@@ -10,13 +10,13 @@ class ResetAvatarHeaders:
 
 @dataclass
 class ResetAvatarRequest:
-    headers: ResetAvatarHeaders = field(default=None)
+    headers: ResetAvatarHeaders = field()
     
 
 @dataclass
 class ResetAvatarResponse:
+    content_type: str = field()
+    status_code: int = field()
     avatar: Optional[shared.Avatar] = field(default=None)
-    content_type: str = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

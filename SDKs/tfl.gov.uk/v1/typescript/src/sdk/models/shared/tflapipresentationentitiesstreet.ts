@@ -1,24 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesStreetSegment } from "./tflapipresentationentitiesstreetsegment";
 
 
+
 export class TflApiPresentationEntitiesStreet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=closure" })
+  @SpeakeasyMetadata({ data: "json, name=closure" })
   closure?: string;
 
-  @Metadata({ data: "json, name=directions" })
+  @SpeakeasyMetadata({ data: "json, name=directions" })
   directions?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=segments", elemType: shared.TflApiPresentationEntitiesStreetSegment })
+  @SpeakeasyMetadata({ data: "json, name=segments", elemType: TflApiPresentationEntitiesStreetSegment })
   segments?: TflApiPresentationEntitiesStreetSegment[];
 
-  @Metadata({ data: "json, name=sourceSystemId" })
+  @SpeakeasyMetadata({ data: "json, name=sourceSystemId" })
   sourceSystemId?: number;
 
-  @Metadata({ data: "json, name=sourceSystemKey" })
+  @SpeakeasyMetadata({ data: "json, name=sourceSystemKey" })
   sourceSystemKey?: string;
 }

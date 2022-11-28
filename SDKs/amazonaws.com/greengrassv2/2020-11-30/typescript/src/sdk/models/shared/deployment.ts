@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentStatusEnum } from "./deploymentstatusenum";
+
 
 
 // Deployment
@@ -7,24 +8,24 @@ import { DeploymentStatusEnum } from "./deploymentstatusenum";
  * Contains information about a deployment.
 **/
 export class Deployment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=creationTimestamp" })
   creationTimestamp?: Date;
 
-  @Metadata({ data: "json, name=deploymentId" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentId" })
   deploymentId?: string;
 
-  @Metadata({ data: "json, name=deploymentName" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentName" })
   deploymentName?: string;
 
-  @Metadata({ data: "json, name=deploymentStatus" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentStatus" })
   deploymentStatus?: DeploymentStatusEnum;
 
-  @Metadata({ data: "json, name=isLatestForTarget" })
+  @SpeakeasyMetadata({ data: "json, name=isLatestForTarget" })
   isLatestForTarget?: boolean;
 
-  @Metadata({ data: "json, name=revisionId" })
+  @SpeakeasyMetadata({ data: "json, name=revisionId" })
   revisionId?: string;
 
-  @Metadata({ data: "json, name=targetArn" })
+  @SpeakeasyMetadata({ data: "json, name=targetArn" })
   targetArn?: string;
 }

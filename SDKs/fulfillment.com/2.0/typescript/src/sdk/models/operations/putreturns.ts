@@ -1,143 +1,144 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutReturnsRmaRequestV2Items extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quantityExpected" })
+  @SpeakeasyMetadata({ data: "json, name=quantityExpected" })
   quantityExpected: number;
 
-  @Metadata({ data: "json, name=sku" })
+  @SpeakeasyMetadata({ data: "json, name=sku" })
   sku: string;
 }
 
 
 export class PutReturnsRmaRequestV2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: operations.PutReturnsRmaRequestV2Items })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: PutReturnsRmaRequestV2Items })
   items: PutReturnsRmaRequestV2Items[];
 
-  @Metadata({ data: "json, name=merchantOrderId" })
+  @SpeakeasyMetadata({ data: "json, name=merchantOrderId" })
   merchantOrderId?: string;
 
-  @Metadata({ data: "json, name=recipient" })
+  @SpeakeasyMetadata({ data: "json, name=recipient" })
   recipient: shared.OneordersPostRequestBodyContentApplication1jsonSchemaPropertiesRecipient;
 
-  @Metadata({ data: "json, name=rmaNumber" })
+  @SpeakeasyMetadata({ data: "json, name=rmaNumber" })
   rmaNumber: string;
 }
 
 
 export class PutReturnsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   fdcAuth: shared.SchemeFdcAuth;
 }
 
 
-export class PutReturnsRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PutReturnsRmaRequestV2;
-
-  @Metadata()
-  security: PutReturnsSecurity;
-}
-
-
 export class PutReturnsRmaResponseV2Items extends SpeakeasyBase {
-  @Metadata({ data: "json, name=quantityExpected" })
+  @SpeakeasyMetadata({ data: "json, name=quantityExpected" })
   quantityExpected: number;
 
-  @Metadata({ data: "json, name=sku" })
+  @SpeakeasyMetadata({ data: "json, name=sku" })
   sku: string;
 }
 
 
 export class PutReturnsRmaResponseV2ConsigneeV2IsoCountryV2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=iso2" })
+  @SpeakeasyMetadata({ data: "json, name=iso2" })
   iso2?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class PutReturnsRmaResponseV2ConsigneeV2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address1" })
+  @SpeakeasyMetadata({ data: "json, name=address1" })
   address1: string;
 
-  @Metadata({ data: "json, name=address2" })
+  @SpeakeasyMetadata({ data: "json, name=address2" })
   address2?: string;
 
-  @Metadata({ data: "json, name=addressLocality" })
+  @SpeakeasyMetadata({ data: "json, name=addressLocality" })
   addressLocality: string;
 
-  @Metadata({ data: "json, name=addressRegion" })
+  @SpeakeasyMetadata({ data: "json, name=addressRegion" })
   addressRegion: string;
 
-  @Metadata({ data: "json, name=companyName" })
+  @SpeakeasyMetadata({ data: "json, name=companyName" })
   companyName?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=iso" })
+  @SpeakeasyMetadata({ data: "json, name=iso" })
   iso?: PutReturnsRmaResponseV2ConsigneeV2IsoCountryV2;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName: string;
 
-  @Metadata({ data: "json, name=phone" })
+  @SpeakeasyMetadata({ data: "json, name=phone" })
   phone?: string;
 
-  @Metadata({ data: "json, name=postalCode" })
+  @SpeakeasyMetadata({ data: "json, name=postalCode" })
   postalCode: string;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: Date;
 
-  @Metadata({ data: "json, name=updatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=updatedBy" })
   updatedBy?: shared.OnereturnsGetResponses200ContentApplication1jsonSchemaPropertiesDataItemsPropertiesUpdatedBy;
 }
 
 
 export class PutReturnsRmaResponseV2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: operations.PutReturnsRmaResponseV2Items })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: PutReturnsRmaResponseV2Items })
   items: PutReturnsRmaResponseV2Items[];
 
-  @Metadata({ data: "json, name=merchantOrderId" })
+  @SpeakeasyMetadata({ data: "json, name=merchantOrderId" })
   merchantOrderId?: string;
 
-  @Metadata({ data: "json, name=recipient" })
+  @SpeakeasyMetadata({ data: "json, name=recipient" })
   recipient: PutReturnsRmaResponseV2ConsigneeV2;
 
-  @Metadata({ data: "json, name=rmaNumber" })
+  @SpeakeasyMetadata({ data: "json, name=rmaNumber" })
   rmaNumber: string;
 }
 
 
+export class PutReturnsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PutReturnsRmaRequestV2;
+
+  @SpeakeasyMetadata()
+  security: PutReturnsSecurity;
+}
+
+
 export class PutReturnsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   rmaResponseV2?: PutReturnsRmaResponseV2;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   oneordersGetResponses404ContentApplication1jsonSchema?: shared.OneordersGetResponses404ContentApplication1jsonSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   onereturnsPutResponses201ContentApplication1jsonSchema?: shared.OnereturnsPutResponses201ContentApplication1jsonSchema;
 }

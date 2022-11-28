@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class QueryInterpretationInterpretationTypeEnum(str, Enum):
     NONE = "NONE"
@@ -16,7 +18,7 @@ class QueryInterpretationReasonEnum(str, Enum):
 @dataclass_json
 @dataclass
 class QueryInterpretation:
-    interpretation_type: Optional[QueryInterpretationInterpretationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interpretationType' }})
-    interpreted_query: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interpretedQuery' }})
-    reason: Optional[QueryInterpretationReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
+    interpretation_type: Optional[QueryInterpretationInterpretationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('interpretationType') }})
+    interpreted_query: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('interpretedQuery') }})
+    reason: Optional[QueryInterpretationReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reason') }})
     

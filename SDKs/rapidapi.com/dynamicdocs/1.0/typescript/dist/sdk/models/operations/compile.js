@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CompilePathParams = /** @class */ (function (_super) {
     __extends(CompilePathParams, _super);
     function CompilePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=template-token" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=template-token" }),
         __metadata("design:type", String)
     ], CompilePathParams.prototype, "templateToken", void 0);
     return CompilePathParams;
@@ -46,23 +46,23 @@ var CompileQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=doc-file-name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=doc-file-name" }),
         __metadata("design:type", String)
     ], CompileQueryParams.prototype, "docFileName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=doc-url-expires-in" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=doc-url-expires-in" }),
         __metadata("design:type", Number)
     ], CompileQueryParams.prototype, "docUrlExpiresIn", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=latex-compiler" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=latex-compiler" }),
         __metadata("design:type", String)
     ], CompileQueryParams.prototype, "latexCompiler", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=latex-runs " }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=latex-runs " }),
         __metadata("design:type", Number)
     ], CompileQueryParams.prototype, "latexRuns", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=main-file-name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=main-file-name" }),
         __metadata("design:type", String)
     ], CompileQueryParams.prototype, "mainFileName", void 0);
     return CompileQueryParams;
@@ -74,7 +74,7 @@ var CompileHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Content-Type" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Content-Type" }),
         __metadata("design:type", String)
     ], CompileHeaders.prototype, "contentType", void 0);
     return CompileHeaders;
@@ -86,19 +86,19 @@ var CompileRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CompilePathParams)
     ], CompileRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CompileQueryParams)
     ], CompileRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CompileHeaders)
     ], CompileRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Map)
     ], CompileRequest.prototype, "request", void 0);
     return CompileRequest;
@@ -110,15 +110,15 @@ var CompileResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CompileResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CompileResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], CompileResponse.prototype, "compile200ApplicationJsonObject", void 0);
     return CompileResponse;

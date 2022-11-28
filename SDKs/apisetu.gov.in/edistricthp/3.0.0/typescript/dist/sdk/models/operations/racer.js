@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var RacerRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(RacerRequestBodyCertificateParameters, _super);
@@ -30,7 +30,7 @@ var RacerRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=UDF1" }),
+        SpeakeasyMetadata({ data: "json, name=UDF1" }),
         __metadata("design:type", String)
     ], RacerRequestBodyCertificateParameters.prototype, "udf1", void 0);
     return RacerRequestBodyCertificateParameters;
@@ -46,19 +46,19 @@ var RacerRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", RacerRequestBodyCertificateParameters)
     ], RacerRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], RacerRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], RacerRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], RacerRequestBody.prototype, "txnId", void 0);
     return RacerRequestBody;
@@ -70,32 +70,16 @@ var RacerSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], RacerSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], RacerSecurity.prototype, "clientId", void 0);
     return RacerSecurity;
 }(SpeakeasyBase));
 export { RacerSecurity };
-var RacerRequest = /** @class */ (function (_super) {
-    __extends(RacerRequest, _super);
-    function RacerRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", RacerRequestBody)
-    ], RacerRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", RacerSecurity)
-    ], RacerRequest.prototype, "security", void 0);
-    return RacerRequest;
-}(SpeakeasyBase));
-export { RacerRequest };
 export var Racer400ApplicationJsonErrorEnum;
 (function (Racer400ApplicationJsonErrorEnum) {
     Racer400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -118,11 +102,11 @@ var Racer400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Racer400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Racer400ApplicationJson.prototype, "errorDescription", void 0);
     return Racer400ApplicationJson;
@@ -144,11 +128,11 @@ var Racer401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Racer401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Racer401ApplicationJson.prototype, "errorDescription", void 0);
     return Racer401ApplicationJson;
@@ -170,11 +154,11 @@ var Racer404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Racer404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Racer404ApplicationJson.prototype, "errorDescription", void 0);
     return Racer404ApplicationJson;
@@ -194,11 +178,11 @@ var Racer500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Racer500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Racer500ApplicationJson.prototype, "errorDescription", void 0);
     return Racer500ApplicationJson;
@@ -218,11 +202,11 @@ var Racer502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Racer502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Racer502ApplicationJson.prototype, "errorDescription", void 0);
     return Racer502ApplicationJson;
@@ -242,11 +226,11 @@ var Racer503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Racer503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Racer503ApplicationJson.prototype, "errorDescription", void 0);
     return Racer503ApplicationJson;
@@ -266,55 +250,71 @@ var Racer504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Racer504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Racer504ApplicationJson.prototype, "errorDescription", void 0);
     return Racer504ApplicationJson;
 }(SpeakeasyBase));
 export { Racer504ApplicationJson };
+var RacerRequest = /** @class */ (function (_super) {
+    __extends(RacerRequest, _super);
+    function RacerRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", RacerRequestBody)
+    ], RacerRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", RacerSecurity)
+    ], RacerRequest.prototype, "security", void 0);
+    return RacerRequest;
+}(SpeakeasyBase));
+export { RacerRequest };
 var RacerResponse = /** @class */ (function (_super) {
     __extends(RacerResponse, _super);
     function RacerResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RacerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RacerResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Racer400ApplicationJson)
     ], RacerResponse.prototype, "racer400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Racer401ApplicationJson)
     ], RacerResponse.prototype, "racer401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Racer404ApplicationJson)
     ], RacerResponse.prototype, "racer404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Racer500ApplicationJson)
     ], RacerResponse.prototype, "racer500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Racer502ApplicationJson)
     ], RacerResponse.prototype, "racer502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Racer503ApplicationJson)
     ], RacerResponse.prototype, "racer503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Racer504ApplicationJson)
     ], RacerResponse.prototype, "racer504ApplicationJsonObject", void 0);
     return RacerResponse;

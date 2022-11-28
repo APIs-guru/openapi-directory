@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import firstpartymobileapplicationtargeting
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MobileApplicationTargeting:
-    first_party_targeting: Optional[firstpartymobileapplicationtargeting.FirstPartyMobileApplicationTargeting] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firstPartyTargeting' }})
+    r"""MobileApplicationTargeting
+    Mobile application targeting settings.
+    """
+    
+    first_party_targeting: Optional[FirstPartyMobileApplicationTargeting] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('firstPartyTargeting') }})
     

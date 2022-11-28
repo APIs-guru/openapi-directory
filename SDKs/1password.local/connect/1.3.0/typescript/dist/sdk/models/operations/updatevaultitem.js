@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateVaultItemPathParams = /** @class */ (function (_super) {
     __extends(UpdateVaultItemPathParams, _super);
@@ -30,11 +30,11 @@ var UpdateVaultItemPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=itemUuid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemUuid" }),
         __metadata("design:type", String)
     ], UpdateVaultItemPathParams.prototype, "itemUuid", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=vaultUuid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=vaultUuid" }),
         __metadata("design:type", String)
     ], UpdateVaultItemPathParams.prototype, "vaultUuid", void 0);
     return UpdateVaultItemPathParams;
@@ -46,7 +46,7 @@ var UpdateVaultItemSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeConnectToken)
     ], UpdateVaultItemSecurity.prototype, "connectToken", void 0);
     return UpdateVaultItemSecurity;
@@ -58,15 +58,15 @@ var UpdateVaultItemRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateVaultItemPathParams)
     ], UpdateVaultItemRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", shared.FullItem)
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.FullItemInput)
     ], UpdateVaultItemRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateVaultItemSecurity)
     ], UpdateVaultItemRequest.prototype, "security", void 0);
     return UpdateVaultItemRequest;
@@ -78,19 +78,19 @@ var UpdateVaultItemResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateVaultItemResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorResponse)
     ], UpdateVaultItemResponse.prototype, "errorResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.FullItem)
     ], UpdateVaultItemResponse.prototype, "fullItem", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateVaultItemResponse.prototype, "statusCode", void 0);
     return UpdateVaultItemResponse;

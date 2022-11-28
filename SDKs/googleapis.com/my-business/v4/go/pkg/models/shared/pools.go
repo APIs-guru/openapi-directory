@@ -126,6 +126,8 @@ const (
 	PoolsWavePoolExceptionEnumDependentOnDayOfWeek PoolsWavePoolExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// Pools
+// Swimming pool or recreational water facilities available at the hotel.
 type Pools struct {
 	AdultPool                  *bool                                `json:"adultPool,omitempty"`
 	AdultPoolException         *PoolsAdultPoolExceptionEnum         `json:"adultPoolException,omitempty"`

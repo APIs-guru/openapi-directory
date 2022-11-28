@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CanaryStateEnum } from "./canarystateenum";
 import { CanaryStateReasonCodeEnum } from "./canarystatereasoncodeenum";
+
 
 
 // CanaryStatus
@@ -8,12 +9,12 @@ import { CanaryStateReasonCodeEnum } from "./canarystatereasoncodeenum";
  * A structure that contains the current state of the canary.
 **/
 export class CanaryStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: CanaryStateEnum;
 
-  @Metadata({ data: "json, name=StateReason" })
+  @SpeakeasyMetadata({ data: "json, name=StateReason" })
   stateReason?: string;
 
-  @Metadata({ data: "json, name=StateReasonCode" })
+  @SpeakeasyMetadata({ data: "json, name=StateReasonCode" })
   stateReasonCode?: CanaryStateReasonCodeEnum;
 }

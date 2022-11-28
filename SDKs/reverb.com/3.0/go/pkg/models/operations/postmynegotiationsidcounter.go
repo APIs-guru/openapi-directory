@@ -45,6 +45,8 @@ const (
 	PostMyNegotiationsIDCounterRequestBodyShippingPriceCurrencyEnumMxn PostMyNegotiationsIDCounterRequestBodyShippingPriceCurrencyEnum = "MXN"
 )
 
+// PostMyNegotiationsIDCounterRequestBodyShippingPrice
+// Shipping price (sellers only)
 type PostMyNegotiationsIDCounterRequestBodyShippingPrice struct {
 	Amount   string                                                          `json:"amount"`
 	Currency PostMyNegotiationsIDCounterRequestBodyShippingPriceCurrencyEnum `json:"currency"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Sample } from "./sample";
+
 
 
 // ListSamplesResult
@@ -8,9 +8,9 @@ import { Sample } from "./sample";
  * Represents the result of a list samples request.
 **/
 export class ListSamplesResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=samples", elemType: shared.Sample })
+  @SpeakeasyMetadata({ data: "json, name=samples", elemType: Sample })
   samples?: Sample[];
 }

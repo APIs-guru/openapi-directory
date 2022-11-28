@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostVideosVideoIDSourcePathParams:
-    video_id: str = field(default=None, metadata={'path_param': { 'field_name': 'videoId', 'style': 'simple', 'explode': False }})
+    video_id: str = field(metadata={'path_param': { 'field_name': 'videoId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,21 +15,21 @@ class PostVideosVideoIDSourceHeaders:
 
 @dataclass
 class PostVideosVideoIDSourceSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class PostVideosVideoIDSourceRequest:
-    path_params: PostVideosVideoIDSourcePathParams = field(default=None)
-    headers: PostVideosVideoIDSourceHeaders = field(default=None)
+    headers: PostVideosVideoIDSourceHeaders = field()
+    path_params: PostVideosVideoIDSourcePathParams = field()
+    security: PostVideosVideoIDSourceSecurity = field()
     request: Optional[shared.VideoUploadPayload] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
-    security: PostVideosVideoIDSourceSecurity = field(default=None)
     
 
 @dataclass
 class PostVideosVideoIDSourceResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     bad_request: Optional[shared.BadRequest] = field(default=None)
     not_found: Optional[shared.NotFound] = field(default=None)
     video: Optional[shared.Video] = field(default=None)

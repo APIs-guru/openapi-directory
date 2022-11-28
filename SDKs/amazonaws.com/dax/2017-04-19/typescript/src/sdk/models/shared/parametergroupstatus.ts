@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ParameterGroupStatus
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The status of a parameter group.
 **/
 export class ParameterGroupStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NodeIdsToReboot" })
+  @SpeakeasyMetadata({ data: "json, name=NodeIdsToReboot" })
   nodeIdsToReboot?: string[];
 
-  @Metadata({ data: "json, name=ParameterApplyStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterApplyStatus" })
   parameterApplyStatus?: string;
 
-  @Metadata({ data: "json, name=ParameterGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterGroupName" })
   parameterGroupName?: string;
 }

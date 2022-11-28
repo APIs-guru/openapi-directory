@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ModifyAckDeadlineRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for the ModifyAckDeadline method.
 **/
 export class ModifyAckDeadlineRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ackDeadlineSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=ackDeadlineSeconds" })
   ackDeadlineSeconds?: number;
 
-  @Metadata({ data: "json, name=ackIds" })
+  @SpeakeasyMetadata({ data: "json, name=ackIds" })
   ackIds?: string[];
 }

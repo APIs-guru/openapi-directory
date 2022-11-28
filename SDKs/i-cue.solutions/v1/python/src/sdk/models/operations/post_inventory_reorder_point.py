@@ -9,11 +9,11 @@ class PostInventoryReorderPointHeaders:
 
 @dataclass
 class PostInventoryReorderPointRequest:
-    headers: PostInventoryReorderPointHeaders = field(default=None)
+    headers: PostInventoryReorderPointHeaders = field()
     
 
 @dataclass
 class PostInventoryReorderPointResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

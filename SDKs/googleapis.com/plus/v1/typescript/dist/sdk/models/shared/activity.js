@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Acl } from "./acl";
 import { Place } from "./place";
 // ActivityActorClientSpecificActorInfoYoutubeActorInfo
@@ -36,7 +35,7 @@ var ActivityActorClientSpecificActorInfoYoutubeActorInfo = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=channelId" }),
+        SpeakeasyMetadata({ data: "json, name=channelId" }),
         __metadata("design:type", String)
     ], ActivityActorClientSpecificActorInfoYoutubeActorInfo.prototype, "channelId", void 0);
     return ActivityActorClientSpecificActorInfoYoutubeActorInfo;
@@ -52,7 +51,7 @@ var ActivityActorClientSpecificActorInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=youtubeActorInfo" }),
+        SpeakeasyMetadata({ data: "json, name=youtubeActorInfo" }),
         __metadata("design:type", ActivityActorClientSpecificActorInfoYoutubeActorInfo)
     ], ActivityActorClientSpecificActorInfo.prototype, "youtubeActorInfo", void 0);
     return ActivityActorClientSpecificActorInfo;
@@ -68,7 +67,7 @@ var ActivityActorImage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], ActivityActorImage.prototype, "url", void 0);
     return ActivityActorImage;
@@ -84,11 +83,11 @@ var ActivityActorName = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=familyName" }),
+        SpeakeasyMetadata({ data: "json, name=familyName" }),
         __metadata("design:type", String)
     ], ActivityActorName.prototype, "familyName", void 0);
     __decorate([
-        Metadata({ data: "json, name=givenName" }),
+        SpeakeasyMetadata({ data: "json, name=givenName" }),
         __metadata("design:type", String)
     ], ActivityActorName.prototype, "givenName", void 0);
     return ActivityActorName;
@@ -104,7 +103,7 @@ var ActivityActorVerification = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=adHocVerified" }),
+        SpeakeasyMetadata({ data: "json, name=adHocVerified" }),
         __metadata("design:type", String)
     ], ActivityActorVerification.prototype, "adHocVerified", void 0);
     return ActivityActorVerification;
@@ -120,31 +119,31 @@ var ActivityActor = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clientSpecificActorInfo" }),
+        SpeakeasyMetadata({ data: "json, name=clientSpecificActorInfo" }),
         __metadata("design:type", ActivityActorClientSpecificActorInfo)
     ], ActivityActor.prototype, "clientSpecificActorInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], ActivityActor.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], ActivityActor.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=image" }),
+        SpeakeasyMetadata({ data: "json, name=image" }),
         __metadata("design:type", ActivityActorImage)
     ], ActivityActor.prototype, "image", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", ActivityActorName)
     ], ActivityActor.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], ActivityActor.prototype, "url", void 0);
     __decorate([
-        Metadata({ data: "json, name=verification" }),
+        SpeakeasyMetadata({ data: "json, name=verification" }),
         __metadata("design:type", ActivityActorVerification)
     ], ActivityActor.prototype, "verification", void 0);
     return ActivityActor;
@@ -160,7 +159,7 @@ var ActivityObjectActorClientSpecificActorInfoYoutubeActorInfo = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=channelId" }),
+        SpeakeasyMetadata({ data: "json, name=channelId" }),
         __metadata("design:type", String)
     ], ActivityObjectActorClientSpecificActorInfoYoutubeActorInfo.prototype, "channelId", void 0);
     return ActivityObjectActorClientSpecificActorInfoYoutubeActorInfo;
@@ -176,7 +175,7 @@ var ActivityObjectActorClientSpecificActorInfo = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=youtubeActorInfo" }),
+        SpeakeasyMetadata({ data: "json, name=youtubeActorInfo" }),
         __metadata("design:type", ActivityObjectActorClientSpecificActorInfoYoutubeActorInfo)
     ], ActivityObjectActorClientSpecificActorInfo.prototype, "youtubeActorInfo", void 0);
     return ActivityObjectActorClientSpecificActorInfo;
@@ -192,7 +191,7 @@ var ActivityObjectActorImage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], ActivityObjectActorImage.prototype, "url", void 0);
     return ActivityObjectActorImage;
@@ -208,7 +207,7 @@ var ActivityObjectActorVerification = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=adHocVerified" }),
+        SpeakeasyMetadata({ data: "json, name=adHocVerified" }),
         __metadata("design:type", String)
     ], ActivityObjectActorVerification.prototype, "adHocVerified", void 0);
     return ActivityObjectActorVerification;
@@ -224,27 +223,27 @@ var ActivityObjectActor = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clientSpecificActorInfo" }),
+        SpeakeasyMetadata({ data: "json, name=clientSpecificActorInfo" }),
         __metadata("design:type", ActivityObjectActorClientSpecificActorInfo)
     ], ActivityObjectActor.prototype, "clientSpecificActorInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], ActivityObjectActor.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], ActivityObjectActor.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=image" }),
+        SpeakeasyMetadata({ data: "json, name=image" }),
         __metadata("design:type", ActivityObjectActorImage)
     ], ActivityObjectActor.prototype, "image", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], ActivityObjectActor.prototype, "url", void 0);
     __decorate([
-        Metadata({ data: "json, name=verification" }),
+        SpeakeasyMetadata({ data: "json, name=verification" }),
         __metadata("design:type", ActivityObjectActorVerification)
     ], ActivityObjectActor.prototype, "verification", void 0);
     return ActivityObjectActor;
@@ -260,11 +259,11 @@ var ActivityObjectAttachmentsEmbed = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], ActivityObjectAttachmentsEmbed.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], ActivityObjectAttachmentsEmbed.prototype, "url", void 0);
     return ActivityObjectAttachmentsEmbed;
@@ -280,19 +279,19 @@ var ActivityObjectAttachmentsFullImage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=height" }),
+        SpeakeasyMetadata({ data: "json, name=height" }),
         __metadata("design:type", Number)
     ], ActivityObjectAttachmentsFullImage.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], ActivityObjectAttachmentsFullImage.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], ActivityObjectAttachmentsFullImage.prototype, "url", void 0);
     __decorate([
-        Metadata({ data: "json, name=width" }),
+        SpeakeasyMetadata({ data: "json, name=width" }),
         __metadata("design:type", Number)
     ], ActivityObjectAttachmentsFullImage.prototype, "width", void 0);
     return ActivityObjectAttachmentsFullImage;
@@ -308,19 +307,19 @@ var ActivityObjectAttachmentsImage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=height" }),
+        SpeakeasyMetadata({ data: "json, name=height" }),
         __metadata("design:type", Number)
     ], ActivityObjectAttachmentsImage.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], ActivityObjectAttachmentsImage.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], ActivityObjectAttachmentsImage.prototype, "url", void 0);
     __decorate([
-        Metadata({ data: "json, name=width" }),
+        SpeakeasyMetadata({ data: "json, name=width" }),
         __metadata("design:type", Number)
     ], ActivityObjectAttachmentsImage.prototype, "width", void 0);
     return ActivityObjectAttachmentsImage;
@@ -336,19 +335,19 @@ var ActivityObjectAttachmentsThumbnailsImage = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=height" }),
+        SpeakeasyMetadata({ data: "json, name=height" }),
         __metadata("design:type", Number)
     ], ActivityObjectAttachmentsThumbnailsImage.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], ActivityObjectAttachmentsThumbnailsImage.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], ActivityObjectAttachmentsThumbnailsImage.prototype, "url", void 0);
     __decorate([
-        Metadata({ data: "json, name=width" }),
+        SpeakeasyMetadata({ data: "json, name=width" }),
         __metadata("design:type", Number)
     ], ActivityObjectAttachmentsThumbnailsImage.prototype, "width", void 0);
     return ActivityObjectAttachmentsThumbnailsImage;
@@ -360,15 +359,15 @@ var ActivityObjectAttachmentsThumbnails = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], ActivityObjectAttachmentsThumbnails.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=image" }),
+        SpeakeasyMetadata({ data: "json, name=image" }),
         __metadata("design:type", ActivityObjectAttachmentsThumbnailsImage)
     ], ActivityObjectAttachmentsThumbnails.prototype, "image", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], ActivityObjectAttachmentsThumbnails.prototype, "url", void 0);
     return ActivityObjectAttachmentsThumbnails;
@@ -380,39 +379,39 @@ var ActivityObjectAttachments = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=content" }),
+        SpeakeasyMetadata({ data: "json, name=content" }),
         __metadata("design:type", String)
     ], ActivityObjectAttachments.prototype, "content", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], ActivityObjectAttachments.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=embed" }),
+        SpeakeasyMetadata({ data: "json, name=embed" }),
         __metadata("design:type", ActivityObjectAttachmentsEmbed)
     ], ActivityObjectAttachments.prototype, "embed", void 0);
     __decorate([
-        Metadata({ data: "json, name=fullImage" }),
+        SpeakeasyMetadata({ data: "json, name=fullImage" }),
         __metadata("design:type", ActivityObjectAttachmentsFullImage)
     ], ActivityObjectAttachments.prototype, "fullImage", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], ActivityObjectAttachments.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=image" }),
+        SpeakeasyMetadata({ data: "json, name=image" }),
         __metadata("design:type", ActivityObjectAttachmentsImage)
     ], ActivityObjectAttachments.prototype, "image", void 0);
     __decorate([
-        Metadata({ data: "json, name=objectType" }),
+        SpeakeasyMetadata({ data: "json, name=objectType" }),
         __metadata("design:type", String)
     ], ActivityObjectAttachments.prototype, "objectType", void 0);
     __decorate([
-        Metadata({ data: "json, name=thumbnails", elemType: shared.ActivityObjectAttachmentsThumbnails }),
+        SpeakeasyMetadata({ data: "json, name=thumbnails", elemType: ActivityObjectAttachmentsThumbnails }),
         __metadata("design:type", Array)
     ], ActivityObjectAttachments.prototype, "thumbnails", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], ActivityObjectAttachments.prototype, "url", void 0);
     return ActivityObjectAttachments;
@@ -428,11 +427,11 @@ var ActivityObjectPlusoners = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=selfLink" }),
+        SpeakeasyMetadata({ data: "json, name=selfLink" }),
         __metadata("design:type", String)
     ], ActivityObjectPlusoners.prototype, "selfLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalItems" }),
+        SpeakeasyMetadata({ data: "json, name=totalItems" }),
         __metadata("design:type", Number)
     ], ActivityObjectPlusoners.prototype, "totalItems", void 0);
     return ActivityObjectPlusoners;
@@ -448,11 +447,11 @@ var ActivityObjectReplies = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=selfLink" }),
+        SpeakeasyMetadata({ data: "json, name=selfLink" }),
         __metadata("design:type", String)
     ], ActivityObjectReplies.prototype, "selfLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalItems" }),
+        SpeakeasyMetadata({ data: "json, name=totalItems" }),
         __metadata("design:type", Number)
     ], ActivityObjectReplies.prototype, "totalItems", void 0);
     return ActivityObjectReplies;
@@ -468,11 +467,11 @@ var ActivityObjectResharers = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=selfLink" }),
+        SpeakeasyMetadata({ data: "json, name=selfLink" }),
         __metadata("design:type", String)
     ], ActivityObjectResharers.prototype, "selfLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalItems" }),
+        SpeakeasyMetadata({ data: "json, name=totalItems" }),
         __metadata("design:type", Number)
     ], ActivityObjectResharers.prototype, "totalItems", void 0);
     return ActivityObjectResharers;
@@ -488,43 +487,43 @@ var ActivityObject = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=actor" }),
+        SpeakeasyMetadata({ data: "json, name=actor" }),
         __metadata("design:type", ActivityObjectActor)
     ], ActivityObject.prototype, "actor", void 0);
     __decorate([
-        Metadata({ data: "json, name=attachments", elemType: shared.ActivityObjectAttachments }),
+        SpeakeasyMetadata({ data: "json, name=attachments", elemType: ActivityObjectAttachments }),
         __metadata("design:type", Array)
     ], ActivityObject.prototype, "attachments", void 0);
     __decorate([
-        Metadata({ data: "json, name=content" }),
+        SpeakeasyMetadata({ data: "json, name=content" }),
         __metadata("design:type", String)
     ], ActivityObject.prototype, "content", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], ActivityObject.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=objectType" }),
+        SpeakeasyMetadata({ data: "json, name=objectType" }),
         __metadata("design:type", String)
     ], ActivityObject.prototype, "objectType", void 0);
     __decorate([
-        Metadata({ data: "json, name=originalContent" }),
+        SpeakeasyMetadata({ data: "json, name=originalContent" }),
         __metadata("design:type", String)
     ], ActivityObject.prototype, "originalContent", void 0);
     __decorate([
-        Metadata({ data: "json, name=plusoners" }),
+        SpeakeasyMetadata({ data: "json, name=plusoners" }),
         __metadata("design:type", ActivityObjectPlusoners)
     ], ActivityObject.prototype, "plusoners", void 0);
     __decorate([
-        Metadata({ data: "json, name=replies" }),
+        SpeakeasyMetadata({ data: "json, name=replies" }),
         __metadata("design:type", ActivityObjectReplies)
     ], ActivityObject.prototype, "replies", void 0);
     __decorate([
-        Metadata({ data: "json, name=resharers" }),
+        SpeakeasyMetadata({ data: "json, name=resharers" }),
         __metadata("design:type", ActivityObjectResharers)
     ], ActivityObject.prototype, "resharers", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], ActivityObject.prototype, "url", void 0);
     return ActivityObject;
@@ -540,7 +539,7 @@ var ActivityProvider = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], ActivityProvider.prototype, "title", void 0);
     return ActivityProvider;
@@ -552,83 +551,83 @@ var Activity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=access" }),
+        SpeakeasyMetadata({ data: "json, name=access" }),
         __metadata("design:type", Acl)
     ], Activity.prototype, "access", void 0);
     __decorate([
-        Metadata({ data: "json, name=actor" }),
+        SpeakeasyMetadata({ data: "json, name=actor" }),
         __metadata("design:type", ActivityActor)
     ], Activity.prototype, "actor", void 0);
     __decorate([
-        Metadata({ data: "json, name=address" }),
+        SpeakeasyMetadata({ data: "json, name=address" }),
         __metadata("design:type", String)
     ], Activity.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "json, name=annotation" }),
+        SpeakeasyMetadata({ data: "json, name=annotation" }),
         __metadata("design:type", String)
     ], Activity.prototype, "annotation", void 0);
     __decorate([
-        Metadata({ data: "json, name=crosspostSource" }),
+        SpeakeasyMetadata({ data: "json, name=crosspostSource" }),
         __metadata("design:type", String)
     ], Activity.prototype, "crosspostSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], Activity.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=geocode" }),
+        SpeakeasyMetadata({ data: "json, name=geocode" }),
         __metadata("design:type", String)
     ], Activity.prototype, "geocode", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Activity.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], Activity.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=location" }),
+        SpeakeasyMetadata({ data: "json, name=location" }),
         __metadata("design:type", Place)
     ], Activity.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "json, name=object" }),
+        SpeakeasyMetadata({ data: "json, name=object" }),
         __metadata("design:type", ActivityObject)
     ], Activity.prototype, "object", void 0);
     __decorate([
-        Metadata({ data: "json, name=placeId" }),
+        SpeakeasyMetadata({ data: "json, name=placeId" }),
         __metadata("design:type", String)
     ], Activity.prototype, "placeId", void 0);
     __decorate([
-        Metadata({ data: "json, name=placeName" }),
+        SpeakeasyMetadata({ data: "json, name=placeName" }),
         __metadata("design:type", String)
     ], Activity.prototype, "placeName", void 0);
     __decorate([
-        Metadata({ data: "json, name=provider" }),
+        SpeakeasyMetadata({ data: "json, name=provider" }),
         __metadata("design:type", ActivityProvider)
     ], Activity.prototype, "provider", void 0);
     __decorate([
-        Metadata({ data: "json, name=published" }),
+        SpeakeasyMetadata({ data: "json, name=published" }),
         __metadata("design:type", Date)
     ], Activity.prototype, "published", void 0);
     __decorate([
-        Metadata({ data: "json, name=radius" }),
+        SpeakeasyMetadata({ data: "json, name=radius" }),
         __metadata("design:type", String)
     ], Activity.prototype, "radius", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], Activity.prototype, "title", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated" }),
+        SpeakeasyMetadata({ data: "json, name=updated" }),
         __metadata("design:type", Date)
     ], Activity.prototype, "updated", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], Activity.prototype, "url", void 0);
     __decorate([
-        Metadata({ data: "json, name=verb" }),
+        SpeakeasyMetadata({ data: "json, name=verb" }),
         __metadata("design:type", String)
     ], Activity.prototype, "verb", void 0);
     return Activity;

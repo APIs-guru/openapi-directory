@@ -1,15 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import playmediacontrolactivity
-from . import playmediacontrolcommandset
-from . import playmediacontrolscheme_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PlayMediaControl:
-    activity: Optional[playmediacontrolactivity.PlayMediaControlActivity] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'activity' }})
-    commands: Optional[playmediacontrolcommandset.PlayMediaControlCommandSet] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commands' }})
-    scheme: playmediacontrolscheme_enum.PlayMediaControlSchemeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scheme' }})
+    scheme: PlayMediaControlSchemeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('scheme') }})
+    activity: Optional[PlayMediaControlActivity] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('activity') }})
+    commands: Optional[PlayMediaControlCommandSet] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('commands') }})
     

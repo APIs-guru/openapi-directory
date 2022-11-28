@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainIspPlacement } from "./domainispplacement";
 import { VolumeStatistics } from "./volumestatistics";
+
 
 
 // DailyVolume
@@ -9,12 +9,12 @@ import { VolumeStatistics } from "./volumestatistics";
  * An object that contains information about the volume of email sent on each day of the analysis period.
 **/
 export class DailyVolume extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DomainIspPlacements", elemType: shared.DomainIspPlacement })
+  @SpeakeasyMetadata({ data: "json, name=DomainIspPlacements", elemType: DomainIspPlacement })
   domainIspPlacements?: DomainIspPlacement[];
 
-  @Metadata({ data: "json, name=StartDate" })
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
   startDate?: Date;
 
-  @Metadata({ data: "json, name=VolumeStatistics" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeStatistics" })
   volumeStatistics?: VolumeStatistics;
 }

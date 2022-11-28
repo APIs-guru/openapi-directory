@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SpellResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=suggestedQuery" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedQuery" })
   suggestedQuery?: string;
 }

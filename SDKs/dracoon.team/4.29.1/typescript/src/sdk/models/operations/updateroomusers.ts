@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateRoomUsersPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=room_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=room_id" })
   roomId: number;
 }
 
 
 export class UpdateRoomUsersHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
   xSdsAuthToken?: string;
 }
 
 
 export class UpdateRoomUsersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateRoomUsersPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateRoomUsersHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.RoomUsersAddBatchRequest;
 }
 
 
 export class UpdateRoomUsersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

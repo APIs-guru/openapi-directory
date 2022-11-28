@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsEc2VpnConnectionOptionsTunnelOptionsDetails } from "./awsec2vpnconnectionoptionstunneloptionsdetails";
+
 
 
 // AwsEc2VpnConnectionOptionsDetails
@@ -8,9 +8,9 @@ import { AwsEc2VpnConnectionOptionsTunnelOptionsDetails } from "./awsec2vpnconne
  * VPN connection options.
 **/
 export class AwsEc2VpnConnectionOptionsDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StaticRoutesOnly" })
+  @SpeakeasyMetadata({ data: "json, name=StaticRoutesOnly" })
   staticRoutesOnly?: boolean;
 
-  @Metadata({ data: "json, name=TunnelOptions", elemType: shared.AwsEc2VpnConnectionOptionsTunnelOptionsDetails })
+  @SpeakeasyMetadata({ data: "json, name=TunnelOptions", elemType: AwsEc2VpnConnectionOptionsTunnelOptionsDetails })
   tunnelOptions?: AwsEc2VpnConnectionOptionsTunnelOptionsDetails[];
 }

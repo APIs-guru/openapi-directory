@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudVideointelligenceV1p2beta1VideoContext
+// Video context and/or feature-specific parameters.
 type GoogleCloudVideointelligenceV1p2beta1VideoContext struct {
 	ExplicitContentDetectionConfig *GoogleCloudVideointelligenceV1p2beta1ExplicitContentDetectionConfig `json:"explicitContentDetectionConfig,omitempty"`
 	FaceDetectionConfig            *GoogleCloudVideointelligenceV1p2beta1FaceDetectionConfig            `json:"faceDetectionConfig,omitempty"`

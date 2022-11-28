@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import protectiongroup
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeProtectionGroupResponse:
-    protection_group: protectiongroup.ProtectionGroup = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProtectionGroup' }})
+    protection_group: ProtectionGroup = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProtectionGroup') }})
     

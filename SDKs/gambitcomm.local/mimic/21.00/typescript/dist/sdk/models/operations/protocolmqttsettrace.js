@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolMqttSetTracePathParams = /** @class */ (function (_super) {
     __extends(ProtocolMqttSetTracePathParams, _super);
     function ProtocolMqttSetTracePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolMqttSetTracePathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=enableOrNot" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=enableOrNot" }),
         __metadata("design:type", String)
     ], ProtocolMqttSetTracePathParams.prototype, "enableOrNot", void 0);
     return ProtocolMqttSetTracePathParams;
@@ -45,7 +45,7 @@ var ProtocolMqttSetTraceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolMqttSetTracePathParams)
     ], ProtocolMqttSetTraceRequest.prototype, "pathParams", void 0);
     return ProtocolMqttSetTraceRequest;
@@ -57,15 +57,15 @@ var ProtocolMqttSetTraceResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolMqttSetTraceResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolMqttSetTraceResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolMqttSetTraceResponse.prototype, "protocolMqttSetTrace200ApplicationJsonString", void 0);
     return ProtocolMqttSetTraceResponse;

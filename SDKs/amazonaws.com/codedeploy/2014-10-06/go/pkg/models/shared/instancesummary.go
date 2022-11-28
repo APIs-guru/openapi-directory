@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// InstanceSummary
+// Information about an instance in a deployment.InstanceSummary is deprecated, use DeploymentTarget instead.
 type InstanceSummary struct {
 	DeploymentID    *string             `json:"deploymentId,omitempty"`
 	InstanceID      *string             `json:"instanceId,omitempty"`

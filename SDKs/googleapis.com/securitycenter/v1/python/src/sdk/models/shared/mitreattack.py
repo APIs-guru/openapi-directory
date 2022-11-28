@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MitreAttackAdditionalTacticsEnum(str, Enum):
     TACTIC_UNSPECIFIED = "TACTIC_UNSPECIFIED"
@@ -55,6 +57,7 @@ class MitreAttackAdditionalTechniquesEnum(str, Enum):
     NETWORK_SERVICE_DISCOVERY = "NETWORK_SERVICE_DISCOVERY"
     ACCESS_TOKEN_MANIPULATION = "ACCESS_TOKEN_MANIPULATION"
     ABUSE_ELEVATION_CONTROL_MECHANISM = "ABUSE_ELEVATION_CONTROL_MECHANISM"
+    DEFAULT_ACCOUNTS = "DEFAULT_ACCOUNTS"
 
 class MitreAttackPrimaryTacticEnum(str, Enum):
     TACTIC_UNSPECIFIED = "TACTIC_UNSPECIFIED"
@@ -109,14 +112,19 @@ class MitreAttackPrimaryTechniquesEnum(str, Enum):
     NETWORK_SERVICE_DISCOVERY = "NETWORK_SERVICE_DISCOVERY"
     ACCESS_TOKEN_MANIPULATION = "ACCESS_TOKEN_MANIPULATION"
     ABUSE_ELEVATION_CONTROL_MECHANISM = "ABUSE_ELEVATION_CONTROL_MECHANISM"
+    DEFAULT_ACCOUNTS = "DEFAULT_ACCOUNTS"
 
 
 @dataclass_json
 @dataclass
 class MitreAttack:
-    additional_tactics: Optional[List[MitreAttackAdditionalTacticsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additionalTactics' }})
-    additional_techniques: Optional[List[MitreAttackAdditionalTechniquesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additionalTechniques' }})
-    primary_tactic: Optional[MitreAttackPrimaryTacticEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primaryTactic' }})
-    primary_techniques: Optional[List[MitreAttackPrimaryTechniquesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primaryTechniques' }})
-    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    r"""MitreAttack
+    MITRE ATT&CK tactics and techniques related to this finding. See: https://attack.mitre.org
+    """
+    
+    additional_tactics: Optional[List[MitreAttackAdditionalTacticsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('additionalTactics') }})
+    additional_techniques: Optional[List[MitreAttackAdditionalTechniquesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('additionalTechniques') }})
+    primary_tactic: Optional[MitreAttackPrimaryTacticEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('primaryTactic') }})
+    primary_techniques: Optional[List[MitreAttackPrimaryTechniquesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('primaryTechniques') }})
+    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
     

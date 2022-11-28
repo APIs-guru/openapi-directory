@@ -1,5 +1,7 @@
 package shared
 
+// DeviceInfo
+// Device information.
 type DeviceInfo struct {
 	HwVersion    *string `json:"hwVersion,omitempty"`
 	Manufacturer *string `json:"manufacturer,omitempty"`

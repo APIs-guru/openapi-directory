@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteServiceSpecificCredentialActionEnum(str, Enum):
     DELETE_SERVICE_SPECIFIC_CREDENTIAL = "DeleteServiceSpecificCredential"
@@ -10,10 +14,10 @@ class GetDeleteServiceSpecificCredentialVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteServiceSpecificCredentialQueryParams:
-    action: GetDeleteServiceSpecificCredentialActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    service_specific_credential_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ServiceSpecificCredentialId', 'style': 'form', 'explode': True }})
+    action: GetDeleteServiceSpecificCredentialActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    service_specific_credential_id: str = field(metadata={'query_param': { 'field_name': 'ServiceSpecificCredentialId', 'style': 'form', 'explode': True }})
+    version: GetDeleteServiceSpecificCredentialVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     user_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
-    version: GetDeleteServiceSpecificCredentialVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteServiceSpecificCredentialHeaders:
 
 @dataclass
 class GetDeleteServiceSpecificCredentialRequest:
-    query_params: GetDeleteServiceSpecificCredentialQueryParams = field(default=None)
-    headers: GetDeleteServiceSpecificCredentialHeaders = field(default=None)
+    headers: GetDeleteServiceSpecificCredentialHeaders = field()
+    query_params: GetDeleteServiceSpecificCredentialQueryParams = field()
     
 
 @dataclass
 class GetDeleteServiceSpecificCredentialResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

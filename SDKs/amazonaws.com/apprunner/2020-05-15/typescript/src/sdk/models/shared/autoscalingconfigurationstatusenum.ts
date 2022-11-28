@@ -1,6 +1,7 @@
 
 
+
 export enum AutoScalingConfigurationStatusEnum {
-    Active = "ACTIVE"
-,    Inactive = "INACTIVE"
+    Active = "ACTIVE",
+    Inactive = "INACTIVE"
 }

@@ -1,10 +1,18 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
-from . import pipelinedeclaration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdatePipelineInput:
-    pipeline: pipelinedeclaration.PipelineDeclaration = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pipeline' }})
+    r"""UpdatePipelineInput
+    Represents the input of an <code>UpdatePipeline</code> action.
+    """
+    
+    pipeline: PipelineDeclaration = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pipeline') }})
     

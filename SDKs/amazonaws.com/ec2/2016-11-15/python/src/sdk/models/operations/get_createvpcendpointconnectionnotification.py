@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetCreateVpcEndpointConnectionNotificationActionEnum(str, Enum):
     CREATE_VPC_ENDPOINT_CONNECTION_NOTIFICATION = "CreateVpcEndpointConnectionNotification"
@@ -10,13 +14,13 @@ class GetCreateVpcEndpointConnectionNotificationVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateVpcEndpointConnectionNotificationQueryParams:
-    action: GetCreateVpcEndpointConnectionNotificationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetCreateVpcEndpointConnectionNotificationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    connection_events: List[str] = field(metadata={'query_param': { 'field_name': 'ConnectionEvents', 'style': 'form', 'explode': True }})
+    connection_notification_arn: str = field(metadata={'query_param': { 'field_name': 'ConnectionNotificationArn', 'style': 'form', 'explode': True }})
+    version: GetCreateVpcEndpointConnectionNotificationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     client_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ClientToken', 'style': 'form', 'explode': True }})
-    connection_events: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'ConnectionEvents', 'style': 'form', 'explode': True }})
-    connection_notification_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'ConnectionNotificationArn', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     service_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ServiceId', 'style': 'form', 'explode': True }})
-    version: GetCreateVpcEndpointConnectionNotificationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     vpc_endpoint_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'VpcEndpointId', 'style': 'form', 'explode': True }})
     
 
@@ -33,13 +37,13 @@ class GetCreateVpcEndpointConnectionNotificationHeaders:
 
 @dataclass
 class GetCreateVpcEndpointConnectionNotificationRequest:
-    query_params: GetCreateVpcEndpointConnectionNotificationQueryParams = field(default=None)
-    headers: GetCreateVpcEndpointConnectionNotificationHeaders = field(default=None)
+    headers: GetCreateVpcEndpointConnectionNotificationHeaders = field()
+    query_params: GetCreateVpcEndpointConnectionNotificationQueryParams = field()
     
 
 @dataclass
 class GetCreateVpcEndpointConnectionNotificationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

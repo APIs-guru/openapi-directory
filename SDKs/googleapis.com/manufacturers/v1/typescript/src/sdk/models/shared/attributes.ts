@@ -1,14 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Image } from "./image";
 import { Capacity } from "./capacity";
 import { Count } from "./count";
 import { FeatureDescription } from "./featuredescription";
 import { Grocery } from "./grocery";
-import { Image } from "./image";
 import { Nutrition } from "./nutrition";
 import { ProductDetail } from "./productdetail";
 import { Price } from "./price";
+
 
 
 // Attributes
@@ -16,120 +15,120 @@ import { Price } from "./price";
  * Attributes of the product. For more information, see https://support.google.com/manufacturers/answer/6124116.
 **/
 export class Attributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalImageLink", elemType: shared.Image })
+  @SpeakeasyMetadata({ data: "json, name=additionalImageLink", elemType: Image })
   additionalImageLink?: Image[];
 
-  @Metadata({ data: "json, name=ageGroup" })
+  @SpeakeasyMetadata({ data: "json, name=ageGroup" })
   ageGroup?: string;
 
-  @Metadata({ data: "json, name=brand" })
+  @SpeakeasyMetadata({ data: "json, name=brand" })
   brand?: string;
 
-  @Metadata({ data: "json, name=capacity" })
+  @SpeakeasyMetadata({ data: "json, name=capacity" })
   capacity?: Capacity;
 
-  @Metadata({ data: "json, name=color" })
+  @SpeakeasyMetadata({ data: "json, name=color" })
   color?: string;
 
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: Count;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=disclosureDate" })
+  @SpeakeasyMetadata({ data: "json, name=disclosureDate" })
   disclosureDate?: string;
 
-  @Metadata({ data: "json, name=excludedDestination" })
+  @SpeakeasyMetadata({ data: "json, name=excludedDestination" })
   excludedDestination?: string[];
 
-  @Metadata({ data: "json, name=featureDescription", elemType: shared.FeatureDescription })
+  @SpeakeasyMetadata({ data: "json, name=featureDescription", elemType: FeatureDescription })
   featureDescription?: FeatureDescription[];
 
-  @Metadata({ data: "json, name=flavor" })
+  @SpeakeasyMetadata({ data: "json, name=flavor" })
   flavor?: string;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: string;
 
-  @Metadata({ data: "json, name=gender" })
+  @SpeakeasyMetadata({ data: "json, name=gender" })
   gender?: string;
 
-  @Metadata({ data: "json, name=grocery" })
+  @SpeakeasyMetadata({ data: "json, name=grocery" })
   grocery?: Grocery;
 
-  @Metadata({ data: "json, name=gtin" })
+  @SpeakeasyMetadata({ data: "json, name=gtin" })
   gtin?: string[];
 
-  @Metadata({ data: "json, name=imageLink" })
+  @SpeakeasyMetadata({ data: "json, name=imageLink" })
   imageLink?: Image;
 
-  @Metadata({ data: "json, name=includedDestination" })
+  @SpeakeasyMetadata({ data: "json, name=includedDestination" })
   includedDestination?: string[];
 
-  @Metadata({ data: "json, name=itemGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=itemGroupId" })
   itemGroupId?: string;
 
-  @Metadata({ data: "json, name=material" })
+  @SpeakeasyMetadata({ data: "json, name=material" })
   material?: string;
 
-  @Metadata({ data: "json, name=mpn" })
+  @SpeakeasyMetadata({ data: "json, name=mpn" })
   mpn?: string;
 
-  @Metadata({ data: "json, name=nutrition" })
+  @SpeakeasyMetadata({ data: "json, name=nutrition" })
   nutrition?: Nutrition;
 
-  @Metadata({ data: "json, name=pattern" })
+  @SpeakeasyMetadata({ data: "json, name=pattern" })
   pattern?: string;
 
-  @Metadata({ data: "json, name=productDetail", elemType: shared.ProductDetail })
+  @SpeakeasyMetadata({ data: "json, name=productDetail", elemType: ProductDetail })
   productDetail?: ProductDetail[];
 
-  @Metadata({ data: "json, name=productHighlight" })
+  @SpeakeasyMetadata({ data: "json, name=productHighlight" })
   productHighlight?: string[];
 
-  @Metadata({ data: "json, name=productLine" })
+  @SpeakeasyMetadata({ data: "json, name=productLine" })
   productLine?: string;
 
-  @Metadata({ data: "json, name=productName" })
+  @SpeakeasyMetadata({ data: "json, name=productName" })
   productName?: string;
 
-  @Metadata({ data: "json, name=productPageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=productPageUrl" })
   productPageUrl?: string;
 
-  @Metadata({ data: "json, name=productType" })
+  @SpeakeasyMetadata({ data: "json, name=productType" })
   productType?: string[];
 
-  @Metadata({ data: "json, name=releaseDate" })
+  @SpeakeasyMetadata({ data: "json, name=releaseDate" })
   releaseDate?: string;
 
-  @Metadata({ data: "json, name=richProductContent" })
+  @SpeakeasyMetadata({ data: "json, name=richProductContent" })
   richProductContent?: string[];
 
-  @Metadata({ data: "json, name=scent" })
+  @SpeakeasyMetadata({ data: "json, name=scent" })
   scent?: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: string;
 
-  @Metadata({ data: "json, name=sizeSystem" })
+  @SpeakeasyMetadata({ data: "json, name=sizeSystem" })
   sizeSystem?: string;
 
-  @Metadata({ data: "json, name=sizeType" })
+  @SpeakeasyMetadata({ data: "json, name=sizeType" })
   sizeType?: string[];
 
-  @Metadata({ data: "json, name=suggestedRetailPrice" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedRetailPrice" })
   suggestedRetailPrice?: Price;
 
-  @Metadata({ data: "json, name=targetClientId" })
+  @SpeakeasyMetadata({ data: "json, name=targetClientId" })
   targetClientId?: string;
 
-  @Metadata({ data: "json, name=theme" })
+  @SpeakeasyMetadata({ data: "json, name=theme" })
   theme?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=videoLink" })
+  @SpeakeasyMetadata({ data: "json, name=videoLink" })
   videoLink?: string[];
 }

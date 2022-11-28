@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchLogsDestination } from "./cloudwatchlogsdestination";
 import { KinesisFirehoseDestination } from "./kinesisfirehosedestination";
 import { EventTypeEnum } from "./eventtypeenum";

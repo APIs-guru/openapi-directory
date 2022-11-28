@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,28 +28,28 @@ class ListAnomalyGroupTimeSeriesHeaders:
 @dataclass_json
 @dataclass
 class ListAnomalyGroupTimeSeriesRequestBody:
-    anomaly_detector_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AnomalyDetectorArn' }})
-    anomaly_group_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AnomalyGroupId' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    metric_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetricName' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    anomaly_detector_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AnomalyDetectorArn') }})
+    anomaly_group_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AnomalyGroupId') }})
+    metric_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MetricName') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     
 
 @dataclass
 class ListAnomalyGroupTimeSeriesRequest:
-    query_params: ListAnomalyGroupTimeSeriesQueryParams = field(default=None)
-    headers: ListAnomalyGroupTimeSeriesHeaders = field(default=None)
-    request: ListAnomalyGroupTimeSeriesRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListAnomalyGroupTimeSeriesHeaders = field()
+    query_params: ListAnomalyGroupTimeSeriesQueryParams = field()
+    request: ListAnomalyGroupTimeSeriesRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListAnomalyGroupTimeSeriesResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_anomaly_group_time_series_response: Optional[shared.ListAnomalyGroupTimeSeriesResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DynamoDbSettings
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides the Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role used to define an Amazon DynamoDB target endpoint.
 **/
 export class DynamoDbSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ServiceAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceAccessRoleArn" })
   serviceAccessRoleArn: string;
 }

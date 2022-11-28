@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCancelExportTaskActionEnum(str, Enum):
     CANCEL_EXPORT_TASK = "CancelExportTask"
@@ -10,9 +14,9 @@ class GetCancelExportTaskVersionEnum(str, Enum):
 
 @dataclass
 class GetCancelExportTaskQueryParams:
-    action: GetCancelExportTaskActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    export_task_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ExportTaskId', 'style': 'form', 'explode': True }})
-    version: GetCancelExportTaskVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetCancelExportTaskActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    export_task_id: str = field(metadata={'query_param': { 'field_name': 'ExportTaskId', 'style': 'form', 'explode': True }})
+    version: GetCancelExportTaskVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,12 +32,12 @@ class GetCancelExportTaskHeaders:
 
 @dataclass
 class GetCancelExportTaskRequest:
-    query_params: GetCancelExportTaskQueryParams = field(default=None)
-    headers: GetCancelExportTaskHeaders = field(default=None)
+    headers: GetCancelExportTaskHeaders = field()
+    query_params: GetCancelExportTaskQueryParams = field()
     
 
 @dataclass
 class GetCancelExportTaskResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

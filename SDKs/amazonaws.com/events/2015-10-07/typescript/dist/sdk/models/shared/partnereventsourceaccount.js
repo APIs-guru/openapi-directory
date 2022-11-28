@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventSourceStateEnum } from "./eventsourcestateenum";
 // PartnerEventSourceAccount
 /**
@@ -34,19 +34,19 @@ var PartnerEventSourceAccount = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Account" }),
+        SpeakeasyMetadata({ data: "json, name=Account" }),
         __metadata("design:type", String)
     ], PartnerEventSourceAccount.prototype, "account", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", Date)
     ], PartnerEventSourceAccount.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExpirationTime" }),
+        SpeakeasyMetadata({ data: "json, name=ExpirationTime" }),
         __metadata("design:type", Date)
     ], PartnerEventSourceAccount.prototype, "expirationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], PartnerEventSourceAccount.prototype, "state", void 0);
     return PartnerEventSourceAccount;

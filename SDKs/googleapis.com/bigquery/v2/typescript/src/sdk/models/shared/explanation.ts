@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Explanation
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Explanation for a single feature.
 **/
 export class Explanation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attribution" })
+  @SpeakeasyMetadata({ data: "json, name=attribution" })
   attribution?: number;
 
-  @Metadata({ data: "json, name=featureName" })
+  @SpeakeasyMetadata({ data: "json, name=featureName" })
   featureName?: string;
 }

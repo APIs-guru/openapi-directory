@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { StageEnum } from "./stageenum";
 /**
  *  Describes the automated branch creation configuration.

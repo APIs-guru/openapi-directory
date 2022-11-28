@@ -10,14 +10,14 @@ class SnsPostSnsPostHeaders:
 
 @dataclass
 class SnsPostSnsPostRequest:
-    headers: SnsPostSnsPostHeaders = field(default=None)
-    request: shared.SnsMessageRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SnsPostSnsPostHeaders = field()
+    request: shared.SnsMessageRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SnsPostSnsPostResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_validation_error: Optional[shared.HTTPValidationError] = field(default=None)
-    status_code: int = field(default=None)
     sns_post_sns_post_200_application_json_any: Optional[Any] = field(default=None)
     

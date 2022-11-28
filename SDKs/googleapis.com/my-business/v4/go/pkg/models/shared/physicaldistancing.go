@@ -45,6 +45,8 @@ const (
 	PhysicalDistancingWellnessAreasHavePrivateSpacesExceptionEnumDependentOnDayOfWeek PhysicalDistancingWellnessAreasHavePrivateSpacesExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// PhysicalDistancing
+// Physical distancing measures implemented by the hotel during COVID-19.
 type PhysicalDistancing struct {
 	CommonAreasPhysicalDistancingArranged          *bool                                                                 `json:"commonAreasPhysicalDistancingArranged,omitempty"`
 	CommonAreasPhysicalDistancingArrangedException *PhysicalDistancingCommonAreasPhysicalDistancingArrangedExceptionEnum `json:"commonAreasPhysicalDistancingArrangedException,omitempty"`

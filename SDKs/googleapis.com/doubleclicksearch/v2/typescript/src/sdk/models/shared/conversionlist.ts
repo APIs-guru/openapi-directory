@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Conversion } from "./conversion";
+
 
 
 // ConversionList
@@ -8,9 +8,9 @@ import { Conversion } from "./conversion";
  * A list of conversions.
 **/
 export class ConversionList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conversion", elemType: shared.Conversion })
+  @SpeakeasyMetadata({ data: "json, name=conversion", elemType: Conversion })
   conversion?: Conversion[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

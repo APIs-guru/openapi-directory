@@ -1,5 +1,7 @@
 package shared
 
+// IbmDb2Settings
+// Provides information that defines an IBM Db2 LUW endpoint.
 type IbmDb2Settings struct {
 	CurrentLsn                  *string `json:"CurrentLsn,omitempty"`
 	DatabaseName                *string `json:"DatabaseName,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { OcrResult } from "./ocrresult";
 export declare class OcrPredictResponse extends SpeakeasyBase {
     object?: string;

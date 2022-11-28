@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeliverabilityTestReport } from "./deliverabilitytestreport";
+
 
 
 // ListDeliverabilityTestReportsResponse
@@ -8,9 +8,9 @@ import { DeliverabilityTestReport } from "./deliverabilitytestreport";
  * A list of the predictive inbox placement test reports that are available for your account, regardless of whether or not those tests are complete.
 **/
 export class ListDeliverabilityTestReportsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeliverabilityTestReports", elemType: shared.DeliverabilityTestReport })
+  @SpeakeasyMetadata({ data: "json, name=DeliverabilityTestReports", elemType: DeliverabilityTestReport })
   deliverabilityTestReports: DeliverabilityTestReport[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

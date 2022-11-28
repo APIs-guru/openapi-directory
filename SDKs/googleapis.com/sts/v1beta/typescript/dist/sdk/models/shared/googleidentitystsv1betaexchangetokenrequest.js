@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleIdentityStsV1betaExchangeTokenRequest
 /**
  * Request message for ExchangeToken.
@@ -33,31 +33,31 @@ var GoogleIdentityStsV1betaExchangeTokenRequest = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=audience" }),
+        SpeakeasyMetadata({ data: "json, name=audience" }),
         __metadata("design:type", String)
     ], GoogleIdentityStsV1betaExchangeTokenRequest.prototype, "audience", void 0);
     __decorate([
-        Metadata({ data: "json, name=grantType" }),
+        SpeakeasyMetadata({ data: "json, name=grantType" }),
         __metadata("design:type", String)
     ], GoogleIdentityStsV1betaExchangeTokenRequest.prototype, "grantType", void 0);
     __decorate([
-        Metadata({ data: "json, name=options" }),
+        SpeakeasyMetadata({ data: "json, name=options" }),
         __metadata("design:type", String)
     ], GoogleIdentityStsV1betaExchangeTokenRequest.prototype, "options", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestedTokenType" }),
+        SpeakeasyMetadata({ data: "json, name=requestedTokenType" }),
         __metadata("design:type", String)
     ], GoogleIdentityStsV1betaExchangeTokenRequest.prototype, "requestedTokenType", void 0);
     __decorate([
-        Metadata({ data: "json, name=scope" }),
+        SpeakeasyMetadata({ data: "json, name=scope" }),
         __metadata("design:type", String)
     ], GoogleIdentityStsV1betaExchangeTokenRequest.prototype, "scope", void 0);
     __decorate([
-        Metadata({ data: "json, name=subjectToken" }),
+        SpeakeasyMetadata({ data: "json, name=subjectToken" }),
         __metadata("design:type", String)
     ], GoogleIdentityStsV1betaExchangeTokenRequest.prototype, "subjectToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=subjectTokenType" }),
+        SpeakeasyMetadata({ data: "json, name=subjectTokenType" }),
         __metadata("design:type", String)
     ], GoogleIdentityStsV1betaExchangeTokenRequest.prototype, "subjectTokenType", void 0);
     return GoogleIdentityStsV1betaExchangeTokenRequest;

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkflowExecution } from "./workflowexecution";
 import { WorkflowType } from "./workflowtype";
+
 
 
 // ChildWorkflowExecutionFailedEventAttributes
@@ -8,21 +9,21 @@ import { WorkflowType } from "./workflowtype";
  * Provides the details of the <code>ChildWorkflowExecutionFailed</code> event.
 **/
 export class ChildWorkflowExecutionFailedEventAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: string;
 
-  @Metadata({ data: "json, name=initiatedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=initiatedEventId" })
   initiatedEventId: number;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 
-  @Metadata({ data: "json, name=startedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=startedEventId" })
   startedEventId: number;
 
-  @Metadata({ data: "json, name=workflowExecution" })
+  @SpeakeasyMetadata({ data: "json, name=workflowExecution" })
   workflowExecution: WorkflowExecution;
 
-  @Metadata({ data: "json, name=workflowType" })
+  @SpeakeasyMetadata({ data: "json, name=workflowType" })
   workflowType: WorkflowType;
 }

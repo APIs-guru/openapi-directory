@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FindListingRecommendationsQueryParams = /** @class */ (function (_super) {
     __extends(FindListingRecommendationsQueryParams, _super);
@@ -30,15 +30,15 @@ var FindListingRecommendationsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" }),
         __metadata("design:type", String)
     ], FindListingRecommendationsQueryParams.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", String)
     ], FindListingRecommendationsQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", String)
     ], FindListingRecommendationsQueryParams.prototype, "offset", void 0);
     return FindListingRecommendationsQueryParams;
@@ -50,7 +50,7 @@ var FindListingRecommendationsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-EBAY-C-MARKETPLACE-ID" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-EBAY-C-MARKETPLACE-ID" }),
         __metadata("design:type", String)
     ], FindListingRecommendationsHeaders.prototype, "xEbayCMarketplaceId", void 0);
     return FindListingRecommendationsHeaders;
@@ -62,7 +62,7 @@ var FindListingRecommendationsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeApiAuth)
     ], FindListingRecommendationsSecurity.prototype, "apiAuth", void 0);
     return FindListingRecommendationsSecurity;
@@ -74,19 +74,19 @@ var FindListingRecommendationsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FindListingRecommendationsQueryParams)
     ], FindListingRecommendationsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FindListingRecommendationsHeaders)
     ], FindListingRecommendationsRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.FindListingRecommendationRequest)
     ], FindListingRecommendationsRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FindListingRecommendationsSecurity)
     ], FindListingRecommendationsRequest.prototype, "security", void 0);
     return FindListingRecommendationsRequest;
@@ -98,15 +98,15 @@ var FindListingRecommendationsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FindListingRecommendationsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.PagedListingRecommendationCollection)
     ], FindListingRecommendationsResponse.prototype, "pagedListingRecommendationCollection", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FindListingRecommendationsResponse.prototype, "statusCode", void 0);
     return FindListingRecommendationsResponse;

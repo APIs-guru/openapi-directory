@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UnitReactionsFeedback } from "./unitreactionsfeedback";
 
 
+
 export class UnitReactionsAnalyticsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=feedback" })
+  @SpeakeasyMetadata({ data: "json, name=feedback" })
   feedback?: UnitReactionsFeedback;
 
-  @Metadata({ data: "json, name=pageId" })
+  @SpeakeasyMetadata({ data: "json, name=pageId" })
   pageId?: boolean;
 }

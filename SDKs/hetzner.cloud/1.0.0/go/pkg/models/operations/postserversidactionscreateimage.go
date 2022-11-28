@@ -4,6 +4,8 @@ type PostServersIDActionsCreateImagePathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
+// PostServersIDActionsCreateImageCreateImageRequestLabels
+// User-defined labels (key-value pairs)
 type PostServersIDActionsCreateImageCreateImageRequestLabels struct {
 	Labelkey *string `json:"labelkey,omitempty"`
 }
@@ -21,11 +23,8 @@ type PostServersIDActionsCreateImageCreateImageRequest struct {
 	Type        *PostServersIDActionsCreateImageCreateImageRequestTypeEnum `json:"type,omitempty"`
 }
 
-type PostServersIDActionsCreateImageRequest struct {
-	PathParams PostServersIDActionsCreateImagePathParams
-	Request    *PostServersIDActionsCreateImageCreateImageRequest `request:"mediaType=application/json"`
-}
-
+// PostServersIDActionsCreateImage201ApplicationJSONActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersIDActionsCreateImage201ApplicationJSONActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -55,6 +54,8 @@ type PostServersIDActionsCreateImage201ApplicationJSONAction struct {
 	Status    PostServersIDActionsCreateImage201ApplicationJSONActionStatusEnum  `json:"status"`
 }
 
+// PostServersIDActionsCreateImage201ApplicationJSONImageCreatedFrom
+// Information about the Server the Image was created from
 type PostServersIDActionsCreateImage201ApplicationJSONImageCreatedFrom struct {
 	ID   int64  `json:"id"`
 	Name string `json:"name"`
@@ -70,6 +71,8 @@ const (
 	PostServersIDActionsCreateImage201ApplicationJSONImageOsFlavorEnumUnknown PostServersIDActionsCreateImage201ApplicationJSONImageOsFlavorEnum = "unknown"
 )
 
+// PostServersIDActionsCreateImage201ApplicationJSONImageProtection
+// Protection configuration for the Resource
 type PostServersIDActionsCreateImage201ApplicationJSONImageProtection struct {
 	Delete bool `json:"delete"`
 }
@@ -116,6 +119,11 @@ type PostServersIDActionsCreateImage201ApplicationJSONImage struct {
 type PostServersIDActionsCreateImage201ApplicationJSON struct {
 	Action *PostServersIDActionsCreateImage201ApplicationJSONAction `json:"action,omitempty"`
 	Image  *PostServersIDActionsCreateImage201ApplicationJSONImage  `json:"image,omitempty"`
+}
+
+type PostServersIDActionsCreateImageRequest struct {
+	PathParams PostServersIDActionsCreateImagePathParams
+	Request    *PostServersIDActionsCreateImageCreateImageRequest `request:"mediaType=application/json"`
 }
 
 type PostServersIDActionsCreateImageResponse struct {

@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BillingProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billingType" })
+  @SpeakeasyMetadata({ data: "json, name=billingType" })
   billingType?: string;
 
-  @Metadata({ data: "json, name=channelType" })
+  @SpeakeasyMetadata({ data: "json, name=channelType" })
   channelType?: string;
 
-  @Metadata({ data: "json, name=paymentType" })
+  @SpeakeasyMetadata({ data: "json, name=paymentType" })
   paymentType?: string;
 
-  @Metadata({ data: "json, name=tier" })
+  @SpeakeasyMetadata({ data: "json, name=tier" })
   tier?: string;
 
-  @Metadata({ data: "json, name=workloadType" })
+  @SpeakeasyMetadata({ data: "json, name=workloadType" })
   workloadType?: string;
 }

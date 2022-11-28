@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var GetPaymentDisputeSummariesServers = []string{
+var GetPaymentDisputeSummariesServerList = []string{
 	"https://apiz.ebay.com{basePath}",
 }
 

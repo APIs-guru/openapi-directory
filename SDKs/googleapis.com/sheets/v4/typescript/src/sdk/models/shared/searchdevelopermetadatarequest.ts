@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataFilter } from "./datafilter";
+
 
 
 // SearchDeveloperMetadataRequest
@@ -8,6 +8,6 @@ import { DataFilter } from "./datafilter";
  * A request to retrieve all developer metadata matching the set of specified criteria.
 **/
 export class SearchDeveloperMetadataRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataFilters", elemType: shared.DataFilter })
+  @SpeakeasyMetadata({ data: "json, name=dataFilters", elemType: DataFilter })
   dataFilters?: DataFilter[];
 }

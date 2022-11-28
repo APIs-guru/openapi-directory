@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum RotoballerArticlesByPlayerFormatEnum {
-    Xml = "xml"
-,    Json = "json"
+    Xml = "xml",
+    Json = "json"
 }
 
 
 export class RotoballerArticlesByPlayerPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: RotoballerArticlesByPlayerFormatEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=playerid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=playerid" })
   playerid: string;
 }
 
 
 export class RotoballerArticlesByPlayerRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RotoballerArticlesByPlayerPathParams;
 }
 
 
 export class RotoballerArticlesByPlayerResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   articles?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

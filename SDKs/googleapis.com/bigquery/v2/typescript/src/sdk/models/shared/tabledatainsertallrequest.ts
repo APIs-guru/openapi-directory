@@ -1,29 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TableDataInsertAllRequestRows extends SpeakeasyBase {
-  @Metadata({ data: "json, name=insertId" })
+  @SpeakeasyMetadata({ data: "json, name=insertId" })
   insertId?: string;
 
-  @Metadata({ data: "json, name=json" })
+  @SpeakeasyMetadata({ data: "json, name=json" })
   json?: Map<string, any>;
 }
 
 
 export class TableDataInsertAllRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ignoreUnknownValues" })
+  @SpeakeasyMetadata({ data: "json, name=ignoreUnknownValues" })
   ignoreUnknownValues?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=rows", elemType: shared.TableDataInsertAllRequestRows })
+  @SpeakeasyMetadata({ data: "json, name=rows", elemType: TableDataInsertAllRequestRows })
   rows?: TableDataInsertAllRequestRows[];
 
-  @Metadata({ data: "json, name=skipInvalidRows" })
+  @SpeakeasyMetadata({ data: "json, name=skipInvalidRows" })
   skipInvalidRows?: boolean;
 
-  @Metadata({ data: "json, name=templateSuffix" })
+  @SpeakeasyMetadata({ data: "json, name=templateSuffix" })
   templateSuffix?: string;
 }

@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Timer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fire_time" })
+  @SpeakeasyMetadata({ data: "json, name=fire_time" })
   fireTime: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=original_duration" })
+  @SpeakeasyMetadata({ data: "json, name=original_duration" })
   originalDuration: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 }

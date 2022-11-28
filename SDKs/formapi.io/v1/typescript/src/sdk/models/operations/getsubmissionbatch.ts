@@ -1,86 +1,87 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSubmissionBatchPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=submission_batch_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=submission_batch_id" })
   submissionBatchId: string;
 }
 
 
 export class GetSubmissionBatchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_submissions" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_submissions" })
   includeSubmissions?: boolean;
 }
 
 
 export class GetSubmissionBatchSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   apiTokenBasic: shared.SchemeApiTokenBasic;
 }
 
-
-export class GetSubmissionBatchRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetSubmissionBatchPathParams;
-
-  @Metadata()
-  queryParams: GetSubmissionBatchQueryParams;
-
-  @Metadata()
-  security: GetSubmissionBatchSecurity;
-}
-
 export enum GetSubmissionBatchSubmissionBatchStateEnum {
-    Pending = "pending"
-,    Processed = "processed"
-,    Error = "error"
+    Pending = "pending",
+    Processed = "processed",
+    Error = "error"
 }
 
 
 export class GetSubmissionBatchSubmissionBatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=completion_percentage" })
+  @SpeakeasyMetadata({ data: "json, name=completion_percentage" })
   completionPercentage: number;
 
-  @Metadata({ data: "json, name=error_count" })
+  @SpeakeasyMetadata({ data: "json, name=error_count" })
   errorCount: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata: Map<string, any>;
 
-  @Metadata({ data: "json, name=pending_count" })
+  @SpeakeasyMetadata({ data: "json, name=pending_count" })
   pendingCount: number;
 
-  @Metadata({ data: "json, name=processed_at" })
+  @SpeakeasyMetadata({ data: "json, name=processed_at" })
   processedAt: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state: GetSubmissionBatchSubmissionBatchStateEnum;
 
-  @Metadata({ data: "json, name=submissions", elemType: shared.Submission })
+  @SpeakeasyMetadata({ data: "json, name=submissions", elemType: shared.Submission })
   submissions?: shared.Submission[];
 
-  @Metadata({ data: "json, name=total_count" })
+  @SpeakeasyMetadata({ data: "json, name=total_count" })
   totalCount: number;
 }
 
 
+export class GetSubmissionBatchRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetSubmissionBatchPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetSubmissionBatchQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetSubmissionBatchSecurity;
+}
+
+
 export class GetSubmissionBatchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   authenticationError?: shared.AuthenticationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   submissionBatch?: GetSubmissionBatchSubmissionBatch;
 }

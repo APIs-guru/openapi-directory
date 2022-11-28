@@ -8,9 +8,11 @@ const (
 	GoogleCloudRetailV2betaImportProductsRequestReconciliationModeEnumFull                          GoogleCloudRetailV2betaImportProductsRequestReconciliationModeEnum = "FULL"
 )
 
-type GoogleCloudRetailV2betaImportProductsRequest struct {
+// GoogleCloudRetailV2betaImportProductsRequestInput
+// Request message for Import methods.
+type GoogleCloudRetailV2betaImportProductsRequestInput struct {
 	ErrorsConfig            *GoogleCloudRetailV2betaImportErrorsConfig                          `json:"errorsConfig,omitempty"`
-	InputConfig             *GoogleCloudRetailV2betaProductInputConfig                          `json:"inputConfig,omitempty"`
+	InputConfig             *GoogleCloudRetailV2betaProductInputConfigInput                     `json:"inputConfig,omitempty"`
 	NotificationPubsubTopic *string                                                             `json:"notificationPubsubTopic,omitempty"`
 	ReconciliationMode      *GoogleCloudRetailV2betaImportProductsRequestReconciliationModeEnum `json:"reconciliationMode,omitempty"`
 	RequestID               *string                                                             `json:"requestId,omitempty"`

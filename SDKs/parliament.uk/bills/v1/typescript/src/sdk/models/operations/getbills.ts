@@ -1,74 +1,75 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetBillsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=BillIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=BillIds" })
   billIds?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=BillStage" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=BillStage" })
   billStage?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=BillStagesExcluded" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=BillStagesExcluded" })
   billStagesExcluded?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=BillType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=BillType" })
   billType?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=CurrentHouse" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CurrentHouse" })
   currentHouse?: shared.HouseEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DepartmentId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DepartmentId" })
   departmentId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=IsDefeated" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=IsDefeated" })
   isDefeated?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=IsWithdrawn" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=IsWithdrawn" })
   isWithdrawn?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MemberId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MemberId" })
   memberId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=OriginatingHouse" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=OriginatingHouse" })
   originatingHouse?: shared.OriginatingHouseEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SearchTerm" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SearchTerm" })
   searchTerm?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Session" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Session" })
   session?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Skip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Skip" })
   skip?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SortOrder" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SortOrder" })
   sortOrder?: shared.BillSortOrderEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Take" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Take" })
   take?: number;
 }
 
 
 export class GetBillsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetBillsQueryParams;
 }
 
 
 export class GetBillsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   billSummarySearchResult?: shared.BillSummarySearchResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TransferRun } from "./transferrun";
+
 
 
 // StartManualTransferRunsResponse
@@ -8,6 +8,6 @@ import { TransferRun } from "./transferrun";
  * A response to start manual transfer runs.
 **/
 export class StartManualTransferRunsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=runs", elemType: shared.TransferRun })
+  @SpeakeasyMetadata({ data: "json, name=runs", elemType: TransferRun })
   runs?: TransferRun[];
 }

@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SubscriptionCreateModify extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: string;
 
-  @Metadata({ data: "json, name=callbackOnModify" })
+  @SpeakeasyMetadata({ data: "json, name=callbackOnModify" })
   callbackOnModify?: boolean;
 
-  @Metadata({ data: "json, name=callbackUrl" })
+  @SpeakeasyMetadata({ data: "json, name=callbackUrl" })
   callbackUrl?: string;
 
-  @Metadata({ data: "json, name=custom" })
+  @SpeakeasyMetadata({ data: "json, name=custom" })
   custom?: any;
 
-  @Metadata({ data: "json, name=frequency" })
+  @SpeakeasyMetadata({ data: "json, name=frequency" })
   frequency: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=serial" })
+  @SpeakeasyMetadata({ data: "json, name=serial" })
   serial?: string;
 
-  @Metadata({ data: "json, name=startFrom" })
+  @SpeakeasyMetadata({ data: "json, name=startFrom" })
   startFrom?: string;
 }

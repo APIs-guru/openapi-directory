@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class PayableIssue2:
-    code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    r"""PayableIssue2
+    payable issues for the payee and payor combination
+    """
+    
+    code: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    message: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
     

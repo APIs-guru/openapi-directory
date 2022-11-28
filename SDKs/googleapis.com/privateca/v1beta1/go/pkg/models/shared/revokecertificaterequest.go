@@ -14,6 +14,8 @@ const (
 	RevokeCertificateRequestReasonEnumAttributeAuthorityCompromise   RevokeCertificateRequestReasonEnum = "ATTRIBUTE_AUTHORITY_COMPROMISE"
 )
 
+// RevokeCertificateRequest
+// Request message for CertificateAuthorityService.RevokeCertificate.
 type RevokeCertificateRequest struct {
 	Reason    *RevokeCertificateRequestReasonEnum `json:"reason,omitempty"`
 	RequestID *string                             `json:"requestId,omitempty"`

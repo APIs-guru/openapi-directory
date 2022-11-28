@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SingleTargetDataset
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A single target dataset to which all data will be streamed.
 **/
 export class SingleTargetDataset extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datasetId" })
+  @SpeakeasyMetadata({ data: "json, name=datasetId" })
   datasetId?: string;
 }

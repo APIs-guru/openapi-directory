@@ -1,142 +1,143 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetListsOverviewFormatFormatEnum {
-    Json = "json"
-,    Jsonp = "jsonp"
+    Json = "json",
+    Jsonp = "jsonp"
 }
 
 
 export class GetListsOverviewFormatPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: GetListsOverviewFormatFormatEnum;
 }
 
 
 export class GetListsOverviewFormatQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api-key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-key" })
   apiKey?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=published_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=published_date" })
   publishedDate?: string;
 }
 
 
 export class GetListsOverviewFormatSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   apiKey: shared.SchemeApiKey;
 }
 
 
-export class GetListsOverviewFormatRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetListsOverviewFormatPathParams;
-
-  @Metadata()
-  queryParams: GetListsOverviewFormatQueryParams;
-
-  @Metadata()
-  security: GetListsOverviewFormatSecurity;
-}
-
-
 export class GetListsOverviewFormat200ApplicationJsonResultsListsBooks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=age_group" })
+  @SpeakeasyMetadata({ data: "json, name=age_group" })
   ageGroup?: string;
 
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author?: string;
 
-  @Metadata({ data: "json, name=contributor" })
+  @SpeakeasyMetadata({ data: "json, name=contributor" })
   contributor?: string;
 
-  @Metadata({ data: "json, name=contributor_note" })
+  @SpeakeasyMetadata({ data: "json, name=contributor_note" })
   contributorNote?: string;
 
-  @Metadata({ data: "json, name=created_date" })
+  @SpeakeasyMetadata({ data: "json, name=created_date" })
   createdDate?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: number;
 
-  @Metadata({ data: "json, name=primary_isbn10" })
+  @SpeakeasyMetadata({ data: "json, name=primary_isbn10" })
   primaryIsbn10?: string;
 
-  @Metadata({ data: "json, name=primary_isbn13" })
+  @SpeakeasyMetadata({ data: "json, name=primary_isbn13" })
   primaryIsbn13?: string;
 
-  @Metadata({ data: "json, name=publisher" })
+  @SpeakeasyMetadata({ data: "json, name=publisher" })
   publisher?: string;
 
-  @Metadata({ data: "json, name=rank" })
+  @SpeakeasyMetadata({ data: "json, name=rank" })
   rank?: number;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=updated_date" })
+  @SpeakeasyMetadata({ data: "json, name=updated_date" })
   updatedDate?: string;
 }
 
 
 export class GetListsOverviewFormat200ApplicationJsonResultsLists extends SpeakeasyBase {
-  @Metadata({ data: "json, name=books", elemType: operations.GetListsOverviewFormat200ApplicationJsonResultsListsBooks })
+  @SpeakeasyMetadata({ data: "json, name=books", elemType: GetListsOverviewFormat200ApplicationJsonResultsListsBooks })
   books?: GetListsOverviewFormat200ApplicationJsonResultsListsBooks[];
 
-  @Metadata({ data: "json, name=display_name" })
+  @SpeakeasyMetadata({ data: "json, name=display_name" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=list_id" })
+  @SpeakeasyMetadata({ data: "json, name=list_id" })
   listId?: number;
 
-  @Metadata({ data: "json, name=list_image" })
+  @SpeakeasyMetadata({ data: "json, name=list_image" })
   listImage?: string;
 
-  @Metadata({ data: "json, name=list_name" })
+  @SpeakeasyMetadata({ data: "json, name=list_name" })
   listName?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: string;
 }
 
 
 export class GetListsOverviewFormat200ApplicationJsonResults extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bestsellers_date" })
+  @SpeakeasyMetadata({ data: "json, name=bestsellers_date" })
   bestsellersDate?: string;
 
-  @Metadata({ data: "json, name=lists", elemType: operations.GetListsOverviewFormat200ApplicationJsonResultsLists })
+  @SpeakeasyMetadata({ data: "json, name=lists", elemType: GetListsOverviewFormat200ApplicationJsonResultsLists })
   lists?: GetListsOverviewFormat200ApplicationJsonResultsLists[];
 
-  @Metadata({ data: "json, name=published_date" })
+  @SpeakeasyMetadata({ data: "json, name=published_date" })
   publishedDate?: string;
 }
 
 
 export class GetListsOverviewFormat200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=copyright" })
+  @SpeakeasyMetadata({ data: "json, name=copyright" })
   copyright?: string;
 
-  @Metadata({ data: "json, name=num_results" })
+  @SpeakeasyMetadata({ data: "json, name=num_results" })
   numResults?: number;
 
-  @Metadata({ data: "json, name=results" })
+  @SpeakeasyMetadata({ data: "json, name=results" })
   results?: GetListsOverviewFormat200ApplicationJsonResults;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
+export class GetListsOverviewFormatRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetListsOverviewFormatPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetListsOverviewFormatQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetListsOverviewFormatSecurity;
+}
+
+
 export class GetListsOverviewFormatResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getListsOverviewFormat200ApplicationJsonObject?: GetListsOverviewFormat200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

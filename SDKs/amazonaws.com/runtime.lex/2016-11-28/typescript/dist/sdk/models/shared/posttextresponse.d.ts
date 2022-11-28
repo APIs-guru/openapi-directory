@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ActiveContext } from "./activecontext";
 import { PredictedIntent } from "./predictedintent";
 import { DialogStateEnum } from "./dialogstateenum";

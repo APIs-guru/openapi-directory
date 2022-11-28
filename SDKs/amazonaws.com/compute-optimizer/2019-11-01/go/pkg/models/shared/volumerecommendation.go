@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// VolumeRecommendation
+// Describes an Amazon Elastic Block Store (Amazon EBS) volume recommendation.
 type VolumeRecommendation struct {
 	AccountID                   *string                      `json:"accountId,omitempty"`
 	CurrentConfiguration        *VolumeConfiguration         `json:"currentConfiguration,omitempty"`

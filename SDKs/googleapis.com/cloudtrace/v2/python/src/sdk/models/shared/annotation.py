@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import attributes
-from . import truncatablestring
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Annotation:
-    attributes: Optional[attributes.Attributes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
-    description: Optional[truncatablestring.TruncatableString] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    r"""Annotation
+    Text annotation with a set of attributes.
+    """
+    
+    attributes: Optional[Attributes] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attributes') }})
+    description: Optional[TruncatableString] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
     

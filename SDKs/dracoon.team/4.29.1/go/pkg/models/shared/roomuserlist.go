@@ -1,6 +1,8 @@
 package shared
 
-type RoomUserList struct {
-	Items []RoomUser `json:"items"`
-	Range Range      `json:"range"`
+// RoomUserListOutput
+// List of users
+type RoomUserListOutput struct {
+	Items []RoomUserOutput `json:"items"`
+	Range Range            `json:"range"`
 }

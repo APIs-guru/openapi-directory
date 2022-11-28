@@ -1,9 +1,10 @@
 
 
+
 export enum SeverityEnum {
-    Info = "Info"
-,    Low = "Low"
-,    Medium = "Medium"
-,    High = "High"
-,    Critical = "Critical"
+    Info = "Info",
+    Low = "Low",
+    Medium = "Medium",
+    High = "High",
+    Critical = "Critical"
 }

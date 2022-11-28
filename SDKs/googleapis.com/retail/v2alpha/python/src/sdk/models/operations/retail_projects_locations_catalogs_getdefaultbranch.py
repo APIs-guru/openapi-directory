@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RetailProjectsLocationsCatalogsGetDefaultBranchPathParams:
-    catalog: str = field(default=None, metadata={'path_param': { 'field_name': 'catalog', 'style': 'simple', 'explode': False }})
+    catalog: str = field(metadata={'path_param': { 'field_name': 'catalog', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class RetailProjectsLocationsCatalogsGetDefaultBranchQueryParams:
 
 @dataclass
 class RetailProjectsLocationsCatalogsGetDefaultBranchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RetailProjectsLocationsCatalogsGetDefaultBranchRequest:
-    path_params: RetailProjectsLocationsCatalogsGetDefaultBranchPathParams = field(default=None)
-    query_params: RetailProjectsLocationsCatalogsGetDefaultBranchQueryParams = field(default=None)
-    security: RetailProjectsLocationsCatalogsGetDefaultBranchSecurity = field(default=None)
+    path_params: RetailProjectsLocationsCatalogsGetDefaultBranchPathParams = field()
+    query_params: RetailProjectsLocationsCatalogsGetDefaultBranchQueryParams = field()
+    security: RetailProjectsLocationsCatalogsGetDefaultBranchSecurity = field()
     
 
 @dataclass
 class RetailProjectsLocationsCatalogsGetDefaultBranchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_retail_v2alpha_get_default_branch_response: Optional[shared.GoogleCloudRetailV2alphaGetDefaultBranchResponse] = field(default=None)
-    status_code: int = field(default=None)
     

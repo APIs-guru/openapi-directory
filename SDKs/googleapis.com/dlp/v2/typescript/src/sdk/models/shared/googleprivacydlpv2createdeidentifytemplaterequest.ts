@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GooglePrivacyDlpV2DeidentifyTemplate } from "./googleprivacydlpv2deidentifytemplate";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GooglePrivacyDlpV2DeidentifyTemplateInput } from "./googleprivacydlpv2deidentifytemplate";
 
 
-// GooglePrivacyDlpV2CreateDeidentifyTemplateRequest
+
+// GooglePrivacyDlpV2CreateDeidentifyTemplateRequestInput
 /** 
  * Request message for CreateDeidentifyTemplate.
 **/
-export class GooglePrivacyDlpV2CreateDeidentifyTemplateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deidentifyTemplate" })
-  deidentifyTemplate?: GooglePrivacyDlpV2DeidentifyTemplate;
+export class GooglePrivacyDlpV2CreateDeidentifyTemplateRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=deidentifyTemplate" })
+  deidentifyTemplate?: GooglePrivacyDlpV2DeidentifyTemplateInput;
 
-  @Metadata({ data: "json, name=locationId" })
+  @SpeakeasyMetadata({ data: "json, name=locationId" })
   locationId?: string;
 
-  @Metadata({ data: "json, name=templateId" })
+  @SpeakeasyMetadata({ data: "json, name=templateId" })
   templateId?: string;
 }

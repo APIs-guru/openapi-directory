@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InsightsValue } from "./insightsvalue";
 /**
  * Represents a single search keyword and its value.

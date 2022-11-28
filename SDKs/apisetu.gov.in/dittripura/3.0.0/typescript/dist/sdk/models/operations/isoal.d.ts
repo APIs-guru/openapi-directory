@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class IsoalRequestBodyCertificateParameters extends SpeakeasyBase {
     refNo: string;
@@ -16,10 +16,6 @@ export declare class IsoalRequestBody extends SpeakeasyBase {
 export declare class IsoalSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class IsoalRequest extends SpeakeasyBase {
-    request?: IsoalRequestBody;
-    security: IsoalSecurity;
 }
 export declare enum Isoal400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Isoal504ApplicationJsonErrorDescriptionEnum {
 export declare class Isoal504ApplicationJson extends SpeakeasyBase {
     error?: Isoal504ApplicationJsonErrorEnum;
     errorDescription?: Isoal504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class IsoalRequest extends SpeakeasyBase {
+    request?: IsoalRequestBody;
+    security: IsoalSecurity;
 }
 export declare class IsoalResponse extends SpeakeasyBase {
     contentType: string;

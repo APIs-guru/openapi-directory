@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VideoProperties } from "./videoproperties";
+
 
 
 // UpdateVideoPropertiesRequest
@@ -7,12 +8,12 @@ import { VideoProperties } from "./videoproperties";
  * Update the properties of a Video.
 **/
 export class UpdateVideoPropertiesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 
-  @Metadata({ data: "json, name=objectId" })
+  @SpeakeasyMetadata({ data: "json, name=objectId" })
   objectId?: string;
 
-  @Metadata({ data: "json, name=videoProperties" })
+  @SpeakeasyMetadata({ data: "json, name=videoProperties" })
   videoProperties?: VideoProperties;
 }

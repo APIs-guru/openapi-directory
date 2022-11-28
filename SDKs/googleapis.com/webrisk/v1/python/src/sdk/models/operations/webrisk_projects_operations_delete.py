@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class WebriskProjectsOperationsDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,13 +26,13 @@ class WebriskProjectsOperationsDeleteQueryParams:
 
 @dataclass
 class WebriskProjectsOperationsDeleteRequest:
-    path_params: WebriskProjectsOperationsDeletePathParams = field(default=None)
-    query_params: WebriskProjectsOperationsDeleteQueryParams = field(default=None)
+    path_params: WebriskProjectsOperationsDeletePathParams = field()
+    query_params: WebriskProjectsOperationsDeleteQueryParams = field()
     
 
 @dataclass
 class WebriskProjectsOperationsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_protobuf_empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

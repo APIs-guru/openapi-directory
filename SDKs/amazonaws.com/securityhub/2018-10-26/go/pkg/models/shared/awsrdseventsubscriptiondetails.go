@@ -1,5 +1,7 @@
 package shared
 
+// AwsRdsEventSubscriptionDetails
+// Details about an Amazon RDS event notification subscription. The subscription allows Amazon RDS to post events to an SNS topic.
 type AwsRdsEventSubscriptionDetails struct {
 	CustSubscriptionID       *string  `json:"CustSubscriptionId,omitempty"`
 	CustomerAwsID            *string  `json:"CustomerAwsId,omitempty"`

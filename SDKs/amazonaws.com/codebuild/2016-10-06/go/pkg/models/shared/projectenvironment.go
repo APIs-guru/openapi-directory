@@ -1,5 +1,7 @@
 package shared
 
+// ProjectEnvironment
+// Information about the build environment of the build project.
 type ProjectEnvironment struct {
 	Certificate              *string                       `json:"certificate,omitempty"`
 	ComputeType              ComputeTypeEnum               `json:"computeType"`

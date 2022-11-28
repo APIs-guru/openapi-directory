@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CloudWatchLoggingOptionDescription
 /**
  * Description of the CloudWatch logging option.
@@ -33,15 +33,15 @@ var CloudWatchLoggingOptionDescription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CloudWatchLoggingOptionId" }),
+        SpeakeasyMetadata({ data: "json, name=CloudWatchLoggingOptionId" }),
         __metadata("design:type", String)
     ], CloudWatchLoggingOptionDescription.prototype, "cloudWatchLoggingOptionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=LogStreamARN" }),
+        SpeakeasyMetadata({ data: "json, name=LogStreamARN" }),
         __metadata("design:type", String)
     ], CloudWatchLoggingOptionDescription.prototype, "logStreamArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleARN" }),
+        SpeakeasyMetadata({ data: "json, name=RoleARN" }),
         __metadata("design:type", String)
     ], CloudWatchLoggingOptionDescription.prototype, "roleArn", void 0);
     return CloudWatchLoggingOptionDescription;

@@ -22,6 +22,8 @@ const (
 	PrintServerFailureInfoErrorCodeEnumDataLoss           PrintServerFailureInfoErrorCodeEnum = "DATA_LOSS"
 )
 
+// PrintServerFailureInfo
+// Info about failures
 type PrintServerFailureInfo struct {
 	ErrorCode     *PrintServerFailureInfoErrorCodeEnum `json:"errorCode,omitempty"`
 	ErrorMessage  *string                              `json:"errorMessage,omitempty"`

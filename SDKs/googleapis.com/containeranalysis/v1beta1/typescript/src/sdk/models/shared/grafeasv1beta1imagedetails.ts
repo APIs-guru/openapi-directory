@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Derived } from "./derived";
+
 
 
 // GrafeasV1beta1ImageDetails
@@ -7,6 +8,6 @@ import { Derived } from "./derived";
  * Details of an image occurrence.
 **/
 export class GrafeasV1beta1ImageDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=derivedImage" })
+  @SpeakeasyMetadata({ data: "json, name=derivedImage" })
   derivedImage?: Derived;
 }

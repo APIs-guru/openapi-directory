@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import configuration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CustomerListConfigurationsResponse:
-    configurations: Optional[List[configuration.Configuration]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configurations' }})
+    r"""CustomerListConfigurationsResponse
+    Response message of customer's listing configuration.
+    """
+    
+    configurations: Optional[List[Configuration]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('configurations') }})
     

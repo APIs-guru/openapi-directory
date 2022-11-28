@@ -27,6 +27,8 @@ const (
 	CreativeCustomEventTargetTypeEnumTargetPopup  CreativeCustomEventTargetTypeEnum = "TARGET_POPUP"
 )
 
+// CreativeCustomEvent
+// Creative Custom Event.
 type CreativeCustomEvent struct {
 	AdvertiserCustomEventID   *string                                           `json:"advertiserCustomEventId,omitempty"`
 	AdvertiserCustomEventName *string                                           `json:"advertiserCustomEventName,omitempty"`

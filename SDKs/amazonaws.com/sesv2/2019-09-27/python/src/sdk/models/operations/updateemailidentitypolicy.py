@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class UpdateEmailIdentityPolicyPathParams:
-    email_identity: str = field(default=None, metadata={'path_param': { 'field_name': 'EmailIdentity', 'style': 'simple', 'explode': False }})
-    policy_name: str = field(default=None, metadata={'path_param': { 'field_name': 'PolicyName', 'style': 'simple', 'explode': False }})
+    email_identity: str = field(metadata={'path_param': { 'field_name': 'EmailIdentity', 'style': 'simple', 'explode': False }})
+    policy_name: str = field(metadata={'path_param': { 'field_name': 'PolicyName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,22 +27,22 @@ class UpdateEmailIdentityPolicyHeaders:
 @dataclass_json
 @dataclass
 class UpdateEmailIdentityPolicyRequestBody:
-    policy: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Policy' }})
+    policy: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Policy') }})
     
 
 @dataclass
 class UpdateEmailIdentityPolicyRequest:
-    path_params: UpdateEmailIdentityPolicyPathParams = field(default=None)
-    headers: UpdateEmailIdentityPolicyHeaders = field(default=None)
-    request: UpdateEmailIdentityPolicyRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateEmailIdentityPolicyHeaders = field()
+    path_params: UpdateEmailIdentityPolicyPathParams = field()
+    request: UpdateEmailIdentityPolicyRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateEmailIdentityPolicyResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     update_email_identity_policy_response: Optional[dict[str, Any]] = field(default=None)
     

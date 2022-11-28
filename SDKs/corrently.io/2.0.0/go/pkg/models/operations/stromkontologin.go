@@ -4,10 +4,6 @@ type StromkontoLoginRequestBody struct {
 	Email *string `json:"email,omitempty"`
 }
 
-type StromkontoLoginRequest struct {
-	Request StromkontoLoginRequestBody `request:"mediaType=application/json"`
-}
-
 type StromkontoLogin200ApplicationJSONStatusEnum string
 
 const (
@@ -17,6 +13,10 @@ const (
 
 type StromkontoLogin200ApplicationJSON struct {
 	Status *StromkontoLogin200ApplicationJSONStatusEnum `json:"status,omitempty"`
+}
+
+type StromkontoLoginRequest struct {
+	Request StromkontoLoginRequestBody `request:"mediaType=application/json"`
 }
 
 type StromkontoLoginResponse struct {

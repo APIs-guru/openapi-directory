@@ -1,14 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
+from sdk.models import shared
 
 
 @dataclass_json
 @dataclass
 class LlcerRequestBodyCertificateParameters:
-    udf1: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UDF1' }})
-    udf2: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UDF2' }})
-    udf3: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UDF3' }})
+    udf1: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('UDF1') }})
+    udf2: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('UDF2') }})
+    udf3: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('UDF3') }})
     
 class LlcerRequestBodyFormatEnum(str, Enum):
     PDF = "pdf"
@@ -17,22 +20,16 @@ class LlcerRequestBodyFormatEnum(str, Enum):
 @dataclass_json
 @dataclass
 class LlcerRequestBody:
-    certificate_parameters: Optional[LlcerRequestBodyCertificateParameters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificateParameters' }})
-    consent_artifact: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'consentArtifact' }})
-    format: LlcerRequestBodyFormatEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'format' }})
-    txn_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'txnId' }})
+    format: LlcerRequestBodyFormatEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('format') }})
+    txn_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('txnId') }})
+    certificate_parameters: Optional[LlcerRequestBodyCertificateParameters] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('certificateParameters') }})
+    consent_artifact: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('consentArtifact') }})
     
 
 @dataclass
 class LlcerSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    client_id: shared.SchemeClientID = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
-class LlcerRequest:
-    request: Optional[LlcerRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: LlcerSecurity = field(default=None)
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    client_id: shared.SchemeClientID = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 class Llcer400ApplicationJSONErrorEnum(str, Enum):
     MISSING_PARAMETER = "missing_parameter"
@@ -52,8 +49,8 @@ class Llcer400ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Llcer400ApplicationJSON:
-    error: Optional[Llcer400ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Llcer400ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Llcer400ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Llcer400ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Llcer401ApplicationJSONErrorEnum(str, Enum):
     INVALID_AUTHENTICATION = "invalid_authentication"
@@ -67,8 +64,8 @@ class Llcer401ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Llcer401ApplicationJSON:
-    error: Optional[Llcer401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Llcer401ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Llcer401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Llcer401ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Llcer404ApplicationJSONErrorEnum(str, Enum):
     RECORD_NOT_FOUND = "record_not_found"
@@ -82,8 +79,8 @@ class Llcer404ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Llcer404ApplicationJSON:
-    error: Optional[Llcer404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Llcer404ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Llcer404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Llcer404ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Llcer500ApplicationJSONErrorEnum(str, Enum):
     INTERNAL_SERVER_ERROR = "internal_server_error"
@@ -95,8 +92,8 @@ class Llcer500ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Llcer500ApplicationJSON:
-    error: Optional[Llcer500ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Llcer500ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Llcer500ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Llcer500ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Llcer502ApplicationJSONErrorEnum(str, Enum):
     BAD_GATEWY = "bad_gatewy"
@@ -108,8 +105,8 @@ class Llcer502ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Llcer502ApplicationJSON:
-    error: Optional[Llcer502ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Llcer502ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Llcer502ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Llcer502ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Llcer503ApplicationJSONErrorEnum(str, Enum):
     SERVICE_UNAVAILABLE = "service_unavailable"
@@ -121,8 +118,8 @@ class Llcer503ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Llcer503ApplicationJSON:
-    error: Optional[Llcer503ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Llcer503ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Llcer503ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Llcer503ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
     
 class Llcer504ApplicationJSONErrorEnum(str, Enum):
     GATEWAY_TIMEOUT = "gateway_timeout"
@@ -134,14 +131,20 @@ class Llcer504ApplicationJSONErrorDescriptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Llcer504ApplicationJSON:
-    error: Optional[Llcer504ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    error_description: Optional[Llcer504ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorDescription' }})
+    error: Optional[Llcer504ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    error_description: Optional[Llcer504ApplicationJSONErrorDescriptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorDescription') }})
+    
+
+@dataclass
+class LlcerRequest:
+    security: LlcerSecurity = field()
+    request: Optional[LlcerRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class LlcerResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     llcer_400_application_json_object: Optional[Llcer400ApplicationJSON] = field(default=None)
     llcer_401_application_json_object: Optional[Llcer401ApplicationJSON] = field(default=None)
     llcer_404_application_json_object: Optional[Llcer404ApplicationJSON] = field(default=None)

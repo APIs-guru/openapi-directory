@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RemoveProfileAttributePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=key" })
   key: string;
 }
 
 
 export class RemoveProfileAttributeHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
   xSdsAuthToken?: string;
 }
 
 
 export class RemoveProfileAttributeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RemoveProfileAttributePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: RemoveProfileAttributeHeaders;
 }
 
 
 export class RemoveProfileAttributeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

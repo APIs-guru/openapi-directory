@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class EventarcProjectsLocationsTriggersCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -25,7 +25,7 @@ export declare class EventarcProjectsLocationsTriggersCreateSecurity extends Spe
 export declare class EventarcProjectsLocationsTriggersCreateRequest extends SpeakeasyBase {
     pathParams: EventarcProjectsLocationsTriggersCreatePathParams;
     queryParams: EventarcProjectsLocationsTriggersCreateQueryParams;
-    request?: shared.Trigger;
+    request?: shared.TriggerInput;
     security: EventarcProjectsLocationsTriggersCreateSecurity;
 }
 export declare class EventarcProjectsLocationsTriggersCreateResponse extends SpeakeasyBase {

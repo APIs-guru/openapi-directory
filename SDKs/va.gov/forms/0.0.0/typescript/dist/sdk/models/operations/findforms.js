@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FindFormsQueryParams = /** @class */ (function (_super) {
     __extends(FindFormsQueryParams, _super);
@@ -30,7 +30,7 @@ var FindFormsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=query" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" }),
         __metadata("design:type", String)
     ], FindFormsQueryParams.prototype, "query", void 0);
     return FindFormsQueryParams;
@@ -42,63 +42,63 @@ var FindFormsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApikey)
     ], FindFormsSecurity.prototype, "apikey", void 0);
     return FindFormsSecurity;
 }(SpeakeasyBase));
 export { FindFormsSecurity };
-var FindFormsRequest = /** @class */ (function (_super) {
-    __extends(FindFormsRequest, _super);
-    function FindFormsRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", FindFormsQueryParams)
-    ], FindFormsRequest.prototype, "queryParams", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", FindFormsSecurity)
-    ], FindFormsRequest.prototype, "security", void 0);
-    return FindFormsRequest;
-}(SpeakeasyBase));
-export { FindFormsRequest };
 var FindForms200ApplicationJson = /** @class */ (function (_super) {
     __extends(FindForms200ApplicationJson, _super);
     function FindForms200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=data" }),
+        SpeakeasyMetadata({ data: "json, name=data" }),
         __metadata("design:type", Array)
     ], FindForms200ApplicationJson.prototype, "data", void 0);
     return FindForms200ApplicationJson;
 }(SpeakeasyBase));
 export { FindForms200ApplicationJson };
+var FindFormsRequest = /** @class */ (function (_super) {
+    __extends(FindFormsRequest, _super);
+    function FindFormsRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", FindFormsQueryParams)
+    ], FindFormsRequest.prototype, "queryParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", FindFormsSecurity)
+    ], FindFormsRequest.prototype, "security", void 0);
+    return FindFormsRequest;
+}(SpeakeasyBase));
+export { FindFormsRequest };
 var FindFormsResponse = /** @class */ (function (_super) {
     __extends(FindFormsResponse, _super);
     function FindFormsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FindFormsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FindFormsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FindForms200ApplicationJson)
     ], FindFormsResponse.prototype, "findForms200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], FindFormsResponse.prototype, "findForms401ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], FindFormsResponse.prototype, "findForms429ApplicationJsonAny", void 0);
     return FindFormsResponse;

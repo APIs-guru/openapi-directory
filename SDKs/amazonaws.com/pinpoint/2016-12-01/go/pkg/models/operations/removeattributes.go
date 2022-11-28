@@ -19,6 +19,8 @@ type RemoveAttributesHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// RemoveAttributesRequestBodyUpdateAttributesRequest
+// Specifies one or more attributes to remove from all the endpoints that are associated with an application.
 type RemoveAttributesRequestBodyUpdateAttributesRequest struct {
 	Blacklist []string `json:"Blacklist,omitempty"`
 }

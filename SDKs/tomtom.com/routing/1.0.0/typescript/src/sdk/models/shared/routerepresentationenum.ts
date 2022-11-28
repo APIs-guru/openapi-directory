@@ -1,6 +1,7 @@
 
 
+
 export enum RouteRepresentationEnum {
-    Polyline = "polyline"
-,    None = "none"
+    Polyline = "polyline",
+    None = "none"
 }

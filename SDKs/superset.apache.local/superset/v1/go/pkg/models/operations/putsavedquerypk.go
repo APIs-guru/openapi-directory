@@ -12,12 +12,6 @@ type PutSavedQueryPkSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PutSavedQueryPkRequest struct {
-	PathParams PutSavedQueryPkPathParams
-	Request    shared.SavedQueryRestAPIPut `request:"mediaType=application/json"`
-	Security   PutSavedQueryPkSecurity
-}
-
 type PutSavedQueryPk200ApplicationJSON struct {
 	Result *shared.SavedQueryRestAPIPut `json:"result,omitempty"`
 }
@@ -40,6 +34,12 @@ type PutSavedQueryPk422ApplicationJSON struct {
 
 type PutSavedQueryPk500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PutSavedQueryPkRequest struct {
+	PathParams PutSavedQueryPkPathParams
+	Request    shared.SavedQueryRestAPIPut `request:"mediaType=application/json"`
+	Security   PutSavedQueryPkSecurity
 }
 
 type PutSavedQueryPkResponse struct {

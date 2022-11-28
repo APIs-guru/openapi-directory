@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EventType
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Event type information
 **/
 export class EventType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=usableCustomerAdminWebhook" })
+  @SpeakeasyMetadata({ data: "json, name=usableCustomerAdminWebhook" })
   usableCustomerAdminWebhook: boolean;
 
-  @Metadata({ data: "json, name=usableNodeWebhook" })
+  @SpeakeasyMetadata({ data: "json, name=usableNodeWebhook" })
   usableNodeWebhook: boolean;
 
-  @Metadata({ data: "json, name=usablePushNotification" })
+  @SpeakeasyMetadata({ data: "json, name=usablePushNotification" })
   usablePushNotification: boolean;
 
-  @Metadata({ data: "json, name=usableTenantWebhook" })
+  @SpeakeasyMetadata({ data: "json, name=usableTenantWebhook" })
   usableTenantWebhook: boolean;
 }

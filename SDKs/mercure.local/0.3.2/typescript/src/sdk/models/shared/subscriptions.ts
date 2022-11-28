@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Subscription } from "./subscription";
 
 
+
 export class Subscriptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=@context" })
+  @SpeakeasyMetadata({ data: "json, name=@context" })
   atContext: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=lastEventID" })
+  @SpeakeasyMetadata({ data: "json, name=lastEventID" })
   lastEventId: string;
 
-  @Metadata({ data: "json, name=subscriptions", elemType: shared.Subscription })
+  @SpeakeasyMetadata({ data: "json, name=subscriptions", elemType: Subscription })
   subscriptions: Subscription[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

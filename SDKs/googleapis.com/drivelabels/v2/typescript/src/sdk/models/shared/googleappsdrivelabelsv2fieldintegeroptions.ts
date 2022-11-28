@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAppsDriveLabelsV2FieldIntegerOptions
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Options for the Integer field type.
 **/
 export class GoogleAppsDriveLabelsV2FieldIntegerOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxValue" })
+  @SpeakeasyMetadata({ data: "json, name=maxValue" })
   maxValue?: string;
 
-  @Metadata({ data: "json, name=minValue" })
+  @SpeakeasyMetadata({ data: "json, name=minValue" })
   minValue?: string;
 }

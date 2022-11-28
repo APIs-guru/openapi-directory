@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsConsentStoresConsentsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class HealthcareProjectsLocationsDatasetsConsentStoresConsentsListQueryParams:
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsConsentStoresConsentsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsConsentStoresConsentsListRequest:
-    path_params: HealthcareProjectsLocationsDatasetsConsentStoresConsentsListPathParams = field(default=None)
-    query_params: HealthcareProjectsLocationsDatasetsConsentStoresConsentsListQueryParams = field(default=None)
-    security: HealthcareProjectsLocationsDatasetsConsentStoresConsentsListSecurity = field(default=None)
+    path_params: HealthcareProjectsLocationsDatasetsConsentStoresConsentsListPathParams = field()
+    query_params: HealthcareProjectsLocationsDatasetsConsentStoresConsentsListQueryParams = field()
+    security: HealthcareProjectsLocationsDatasetsConsentStoresConsentsListSecurity = field()
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsConsentStoresConsentsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_consents_response: Optional[shared.ListConsentsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

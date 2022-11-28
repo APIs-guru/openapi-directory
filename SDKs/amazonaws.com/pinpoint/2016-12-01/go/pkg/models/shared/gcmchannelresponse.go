@@ -1,5 +1,7 @@
 package shared
 
+// GcmChannelResponse
+// Provides information about the status and settings of the GCM channel for an application. The GCM channel enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.
 type GcmChannelResponse struct {
 	ApplicationID    *string `json:"ApplicationId,omitempty"`
 	CreationDate     *string `json:"CreationDate,omitempty"`

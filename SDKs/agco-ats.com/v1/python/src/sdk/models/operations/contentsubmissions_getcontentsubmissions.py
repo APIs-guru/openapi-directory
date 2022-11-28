@@ -18,13 +18,13 @@ class ContentSubmissionsGetContentSubmissionsQueryParams:
 
 @dataclass
 class ContentSubmissionsGetContentSubmissionsRequest:
-    query_params: ContentSubmissionsGetContentSubmissionsQueryParams = field(default=None)
+    query_params: ContentSubmissionsGetContentSubmissionsQueryParams = field()
     
 
 @dataclass
 class ContentSubmissionsGetContentSubmissionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     api_paged_response_content_submission_shared_business_entities_content_submission_: Optional[shared.APIPagedResponseContentSubmissionSharedBusinessEntitiesContentSubmission] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

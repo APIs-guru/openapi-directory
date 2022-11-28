@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FrequencyCap
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Frequency Cap.
 **/
 export class FrequencyCap extends SpeakeasyBase {
-  @Metadata({ data: "json, name=duration" })
+  @SpeakeasyMetadata({ data: "json, name=duration" })
   duration?: string;
 
-  @Metadata({ data: "json, name=impressions" })
+  @SpeakeasyMetadata({ data: "json, name=impressions" })
   impressions?: string;
 }

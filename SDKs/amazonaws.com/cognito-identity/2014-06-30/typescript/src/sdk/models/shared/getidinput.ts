@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetIdInput
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Input to the GetId action.
 **/
 export class GetIdInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AccountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=IdentityPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityPoolId" })
   identityPoolId: string;
 
-  @Metadata({ data: "json, name=Logins" })
+  @SpeakeasyMetadata({ data: "json, name=Logins" })
   logins?: Map<string, string>;
 }

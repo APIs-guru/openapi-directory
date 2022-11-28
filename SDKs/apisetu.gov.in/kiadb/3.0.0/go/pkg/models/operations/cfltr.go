@@ -29,11 +29,6 @@ type CfltrSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type CfltrRequest struct {
-	Request  *CfltrRequestBody `request:"mediaType=application/json"`
-	Security CfltrSecurity
-}
-
 type Cfltr400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Cfltr504ApplicationJSON struct {
 	Error            *Cfltr504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Cfltr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type CfltrRequest struct {
+	Request  *CfltrRequestBody `request:"mediaType=application/json"`
+	Security CfltrSecurity
 }
 
 type CfltrResponse struct {

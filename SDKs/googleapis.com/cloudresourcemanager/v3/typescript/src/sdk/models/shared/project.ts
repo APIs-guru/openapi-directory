@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ProjectStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    DeleteRequested = "DELETE_REQUESTED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    DeleteRequested = "DELETE_REQUESTED"
 }
 
 
@@ -12,33 +13,52 @@ export enum ProjectStateEnum {
  * A project is a high-level Google Cloud entity. It is a container for ACLs, APIs, App Engine Apps, VMs, and other Google Cloud Platform resources.
 **/
 export class Project extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=deleteTime" })
+  @SpeakeasyMetadata({ data: "json, name=deleteTime" })
   deleteTime?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ProjectStateEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// ProjectInput
+/** 
+ * A project is a high-level Google Cloud entity. It is a container for ACLs, APIs, App Engine Apps, VMs, and other Google Cloud Platform resources.
+**/
+export class ProjectInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=parent" })
+  parent?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
+  projectId?: string;
 }

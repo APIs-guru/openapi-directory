@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleclouddatacatalogv1beta1policytag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDatacatalogV1beta1ListPolicyTagsResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    policy_tags: Optional[List[googleclouddatacatalogv1beta1policytag.GoogleCloudDatacatalogV1beta1PolicyTag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policyTags' }})
+    r"""GoogleCloudDatacatalogV1beta1ListPolicyTagsResponse
+    Response message for ListPolicyTags.
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    policy_tags: Optional[List[GoogleCloudDatacatalogV1beta1PolicyTag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policyTags') }})
     

@@ -8,6 +8,8 @@ const (
 	CertificateAttributesValidationStateEnumValidationFailed                      CertificateAttributesValidationStateEnum = "VALIDATION_FAILED"
 )
 
+// CertificateAttributes
+// Stores information about a certificate.
 type CertificateAttributes struct {
 	CertificateTemplate    *CertificateTemplate                      `json:"certificateTemplate,omitempty"`
 	Fingerprint            *string                                   `json:"fingerprint,omitempty"`

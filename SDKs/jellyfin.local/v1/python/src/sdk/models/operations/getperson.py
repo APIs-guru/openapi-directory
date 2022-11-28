@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetPersonPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetPersonQueryParams:
 
 @dataclass
 class GetPersonSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetPersonRequest:
-    path_params: GetPersonPathParams = field(default=None)
-    query_params: GetPersonQueryParams = field(default=None)
-    security: GetPersonSecurity = field(default=None)
+    path_params: GetPersonPathParams = field()
+    query_params: GetPersonQueryParams = field()
+    security: GetPersonSecurity = field()
     
 
 @dataclass
 class GetPersonResponse:
+    content_type: str = field()
+    status_code: int = field()
     base_item_dto: Optional[shared.BaseItemDto] = field(default=None)
-    content_type: str = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

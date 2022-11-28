@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetAttachLoadBalancerTargetGroupsActionEnum(str, Enum):
     ATTACH_LOAD_BALANCER_TARGET_GROUPS = "AttachLoadBalancerTargetGroups"
@@ -10,10 +14,10 @@ class GetAttachLoadBalancerTargetGroupsVersionEnum(str, Enum):
 
 @dataclass
 class GetAttachLoadBalancerTargetGroupsQueryParams:
-    action: GetAttachLoadBalancerTargetGroupsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    auto_scaling_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
-    target_group_ar_ns: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'TargetGroupARNs', 'style': 'form', 'explode': True }})
-    version: GetAttachLoadBalancerTargetGroupsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetAttachLoadBalancerTargetGroupsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    auto_scaling_group_name: str = field(metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
+    target_group_ar_ns: List[str] = field(metadata={'query_param': { 'field_name': 'TargetGroupARNs', 'style': 'form', 'explode': True }})
+    version: GetAttachLoadBalancerTargetGroupsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetAttachLoadBalancerTargetGroupsHeaders:
 
 @dataclass
 class GetAttachLoadBalancerTargetGroupsRequest:
-    query_params: GetAttachLoadBalancerTargetGroupsQueryParams = field(default=None)
-    headers: GetAttachLoadBalancerTargetGroupsHeaders = field(default=None)
+    headers: GetAttachLoadBalancerTargetGroupsHeaders = field()
+    query_params: GetAttachLoadBalancerTargetGroupsQueryParams = field()
     
 
 @dataclass
 class GetAttachLoadBalancerTargetGroupsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

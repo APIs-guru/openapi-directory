@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTeamEventsByYearPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=team_key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team_key" })
   teamKey: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=year" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=year" })
   year: number;
 }
 
 
 export class GetTeamEventsByYearHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=If-Modified-Since" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-Modified-Since" })
   ifModifiedSince?: string;
 }
 
 
 export class GetTeamEventsByYearSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class GetTeamEventsByYearRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTeamEventsByYearPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetTeamEventsByYearHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetTeamEventsByYearSecurity;
 }
 
 
 export class GetTeamEventsByYearResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.Event })
+  @SpeakeasyMetadata({ elemType: shared.Event })
   events?: shared.Event[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

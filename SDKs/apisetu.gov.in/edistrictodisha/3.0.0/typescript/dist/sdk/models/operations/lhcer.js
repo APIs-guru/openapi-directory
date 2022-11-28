@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var LhcerRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(LhcerRequestBodyCertificateParameters, _super);
@@ -30,11 +30,11 @@ var LhcerRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=UID" }),
+        SpeakeasyMetadata({ data: "json, name=UID" }),
         __metadata("design:type", String)
     ], LhcerRequestBodyCertificateParameters.prototype, "uid", void 0);
     __decorate([
-        Metadata({ data: "json, name=refno" }),
+        SpeakeasyMetadata({ data: "json, name=refno" }),
         __metadata("design:type", String)
     ], LhcerRequestBodyCertificateParameters.prototype, "refno", void 0);
     return LhcerRequestBodyCertificateParameters;
@@ -50,19 +50,19 @@ var LhcerRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", LhcerRequestBodyCertificateParameters)
     ], LhcerRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], LhcerRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], LhcerRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], LhcerRequestBody.prototype, "txnId", void 0);
     return LhcerRequestBody;
@@ -74,32 +74,16 @@ var LhcerSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], LhcerSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], LhcerSecurity.prototype, "clientId", void 0);
     return LhcerSecurity;
 }(SpeakeasyBase));
 export { LhcerSecurity };
-var LhcerRequest = /** @class */ (function (_super) {
-    __extends(LhcerRequest, _super);
-    function LhcerRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", LhcerRequestBody)
-    ], LhcerRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", LhcerSecurity)
-    ], LhcerRequest.prototype, "security", void 0);
-    return LhcerRequest;
-}(SpeakeasyBase));
-export { LhcerRequest };
 export var Lhcer400ApplicationJsonErrorEnum;
 (function (Lhcer400ApplicationJsonErrorEnum) {
     Lhcer400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -122,11 +106,11 @@ var Lhcer400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Lhcer400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Lhcer400ApplicationJson.prototype, "errorDescription", void 0);
     return Lhcer400ApplicationJson;
@@ -148,11 +132,11 @@ var Lhcer401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Lhcer401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Lhcer401ApplicationJson.prototype, "errorDescription", void 0);
     return Lhcer401ApplicationJson;
@@ -174,11 +158,11 @@ var Lhcer404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Lhcer404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Lhcer404ApplicationJson.prototype, "errorDescription", void 0);
     return Lhcer404ApplicationJson;
@@ -198,11 +182,11 @@ var Lhcer500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Lhcer500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Lhcer500ApplicationJson.prototype, "errorDescription", void 0);
     return Lhcer500ApplicationJson;
@@ -222,11 +206,11 @@ var Lhcer502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Lhcer502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Lhcer502ApplicationJson.prototype, "errorDescription", void 0);
     return Lhcer502ApplicationJson;
@@ -246,11 +230,11 @@ var Lhcer503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Lhcer503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Lhcer503ApplicationJson.prototype, "errorDescription", void 0);
     return Lhcer503ApplicationJson;
@@ -270,55 +254,71 @@ var Lhcer504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Lhcer504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Lhcer504ApplicationJson.prototype, "errorDescription", void 0);
     return Lhcer504ApplicationJson;
 }(SpeakeasyBase));
 export { Lhcer504ApplicationJson };
+var LhcerRequest = /** @class */ (function (_super) {
+    __extends(LhcerRequest, _super);
+    function LhcerRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", LhcerRequestBody)
+    ], LhcerRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", LhcerSecurity)
+    ], LhcerRequest.prototype, "security", void 0);
+    return LhcerRequest;
+}(SpeakeasyBase));
+export { LhcerRequest };
 var LhcerResponse = /** @class */ (function (_super) {
     __extends(LhcerResponse, _super);
     function LhcerResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], LhcerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], LhcerResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Lhcer400ApplicationJson)
     ], LhcerResponse.prototype, "lhcer400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Lhcer401ApplicationJson)
     ], LhcerResponse.prototype, "lhcer401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Lhcer404ApplicationJson)
     ], LhcerResponse.prototype, "lhcer404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Lhcer500ApplicationJson)
     ], LhcerResponse.prototype, "lhcer500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Lhcer502ApplicationJson)
     ], LhcerResponse.prototype, "lhcer502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Lhcer503ApplicationJson)
     ], LhcerResponse.prototype, "lhcer503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Lhcer504ApplicationJson)
     ], LhcerResponse.prototype, "lhcer504ApplicationJsonObject", void 0);
     return LhcerResponse;

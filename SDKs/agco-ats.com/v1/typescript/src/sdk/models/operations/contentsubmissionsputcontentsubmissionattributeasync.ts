@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ContentSubmissionsPutContentSubmissionAttributeAsyncPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=contentSubmissionAttributeID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=contentSubmissionAttributeID" })
   contentSubmissionAttributeId: number;
 }
 
 
 export class ContentSubmissionsPutContentSubmissionAttributeAsyncRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   contentSubmissionSharedBusinessEntitiesContentSubmissionAttribute?: shared.ContentSubmissionSharedBusinessEntitiesContentSubmissionAttribute;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   contentSubmissionSharedBusinessEntitiesContentSubmissionAttribute1?: shared.ContentSubmissionSharedBusinessEntitiesContentSubmissionAttribute;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   contentSubmissionSharedBusinessEntitiesContentSubmissionAttribute2?: shared.ContentSubmissionSharedBusinessEntitiesContentSubmissionAttribute;
 
-  @Metadata({ data: "request, media_type=text/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/xml" })
   textXml: Uint8Array;
 }
 
 
 export class ContentSubmissionsPutContentSubmissionAttributeAsyncRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ContentSubmissionsPutContentSubmissionAttributeAsyncPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: ContentSubmissionsPutContentSubmissionAttributeAsyncRequests;
 }
 
 
 export class ContentSubmissionsPutContentSubmissionAttributeAsyncResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

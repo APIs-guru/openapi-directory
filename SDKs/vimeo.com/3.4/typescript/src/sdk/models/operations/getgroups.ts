@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetGroupsDirectionEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 export enum GetGroupsFilterEnum {
@@ -11,48 +12,48 @@ export enum GetGroupsFilterEnum {
 }
 
 export enum GetGroupsSortEnum {
-    Alphabetical = "alphabetical"
-,    Date = "date"
-,    Followers = "followers"
-,    Relevant = "relevant"
-,    Videos = "videos"
+    Alphabetical = "alphabetical",
+    Date = "date",
+    Followers = "followers",
+    Relevant = "relevant",
+    Videos = "videos"
 }
 
 
 export class GetGroupsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: GetGroupsDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: GetGroupsFilterEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: GetGroupsSortEnum;
 }
 
 
 export class GetGroupsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetGroupsQueryParams;
 }
 
 
 export class GetGroupsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.Group })
+  @SpeakeasyMetadata({ elemType: shared.Group })
   groups?: shared.Group[];
 }

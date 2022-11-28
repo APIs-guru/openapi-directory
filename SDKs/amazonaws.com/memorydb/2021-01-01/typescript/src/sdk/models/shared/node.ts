@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Endpoint } from "./endpoint";
+
 
 
 // Node
@@ -7,18 +8,18 @@ import { Endpoint } from "./endpoint";
  * Represents an individual node within a cluster. Each node runs its own instance of the cluster's protocol-compliant caching software.
 **/
 export class Node extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AvailabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZone" })
   availabilityZone?: string;
 
-  @Metadata({ data: "json, name=CreateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreateTime" })
   createTime?: Date;
 
-  @Metadata({ data: "json, name=Endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=Endpoint" })
   endpoint?: Endpoint;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

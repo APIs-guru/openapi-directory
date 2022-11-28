@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ExecutionParameter
 /**
  * Details of an execution parameter value that is passed to a self-service action when executed on a provisioned product.
@@ -33,15 +33,15 @@ var ExecutionParameter = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DefaultValues" }),
+        SpeakeasyMetadata({ data: "json, name=DefaultValues" }),
         __metadata("design:type", Array)
     ], ExecutionParameter.prototype, "defaultValues", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], ExecutionParameter.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], ExecutionParameter.prototype, "type", void 0);
     return ExecutionParameter;

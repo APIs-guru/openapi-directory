@@ -1,74 +1,75 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetVideosAlt1DirectionEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 export enum GetVideosAlt1FilterEnum {
-    AppOnly = "app_only"
-,    Embeddable = "embeddable"
-,    Featured = "featured"
-,    Playable = "playable"
+    AppOnly = "app_only",
+    Embeddable = "embeddable",
+    Featured = "featured",
+    Playable = "playable"
 }
 
 export enum GetVideosAlt1SortEnum {
-    Alphabetical = "alphabetical"
-,    Comments = "comments"
-,    Date = "date"
-,    Default = "default"
-,    Duration = "duration"
-,    LastUserActionEventDate = "last_user_action_event_date"
-,    Likes = "likes"
-,    ModifiedTime = "modified_time"
-,    Plays = "plays"
+    Alphabetical = "alphabetical",
+    Comments = "comments",
+    Date = "date",
+    Default = "default",
+    Duration = "duration",
+    LastUserActionEventDate = "last_user_action_event_date",
+    Likes = "likes",
+    ModifiedTime = "modified_time",
+    Plays = "plays"
 }
 
 
 export class GetVideosAlt1QueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=containing_uri" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=containing_uri" })
   containingUri?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: GetVideosAlt1DirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: GetVideosAlt1FilterEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter_embeddable" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter_embeddable" })
   filterEmbeddable?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter_playable" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter_playable" })
   filterPlayable?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: GetVideosAlt1SortEnum;
 }
 
 
 export class GetVideosAlt1Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetVideosAlt1QueryParams;
 }
 
 
 export class GetVideosAlt1Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.Video })
+  @SpeakeasyMetadata({ elemType: shared.Video })
   videos?: shared.Video[];
 }

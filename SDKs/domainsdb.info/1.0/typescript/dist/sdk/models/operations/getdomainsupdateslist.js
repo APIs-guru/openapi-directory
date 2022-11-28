@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetDomainsUpdatesListQueryParams = /** @class */ (function (_super) {
     __extends(GetDomainsUpdatesListQueryParams, _super);
@@ -30,7 +30,7 @@ var GetDomainsUpdatesListQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
         __metadata("design:type", String)
     ], GetDomainsUpdatesListQueryParams.prototype, "apiKey", void 0);
     return GetDomainsUpdatesListQueryParams;
@@ -42,7 +42,7 @@ var GetDomainsUpdatesListRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDomainsUpdatesListQueryParams)
     ], GetDomainsUpdatesListRequest.prototype, "queryParams", void 0);
     return GetDomainsUpdatesListRequest;
@@ -54,15 +54,15 @@ var GetDomainsUpdatesListResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDomainsUpdatesListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDomainsUpdatesListResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdateModel)
     ], GetDomainsUpdatesListResponse.prototype, "updateModel", void 0);
     return GetDomainsUpdatesListResponse;

@@ -1,14 +1,49 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LoggingConfig } from "./loggingconfig";
 import { NotificationConfig } from "./notificationconfig";
 import { Schedule } from "./schedule";
 import { TransferSpec } from "./transferspec";
 
+
 export enum TransferJobStatusEnum {
-    StatusUnspecified = "STATUS_UNSPECIFIED"
-,    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
-,    Deleted = "DELETED"
+    StatusUnspecified = "STATUS_UNSPECIFIED",
+    Enabled = "ENABLED",
+    Disabled = "DISABLED",
+    Deleted = "DELETED"
+}
+
+
+// TransferJobInput
+/** 
+ * This resource represents the configuration of a transfer job that runs periodically.
+**/
+export class TransferJobInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=latestOperationName" })
+  latestOperationName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=loggingConfig" })
+  loggingConfig?: LoggingConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=notificationConfig" })
+  notificationConfig?: NotificationConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
+  projectId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=schedule" })
+  schedule?: Schedule;
+
+  @SpeakeasyMetadata({ data: "json, name=status" })
+  status?: TransferJobStatusEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=transferSpec" })
+  transferSpec?: TransferSpec;
 }
 
 
@@ -17,39 +52,39 @@ export enum TransferJobStatusEnum {
  * This resource represents the configuration of a transfer job that runs periodically.
 **/
 export class TransferJob extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: string;
 
-  @Metadata({ data: "json, name=deletionTime" })
+  @SpeakeasyMetadata({ data: "json, name=deletionTime" })
   deletionTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=lastModificationTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastModificationTime" })
   lastModificationTime?: string;
 
-  @Metadata({ data: "json, name=latestOperationName" })
+  @SpeakeasyMetadata({ data: "json, name=latestOperationName" })
   latestOperationName?: string;
 
-  @Metadata({ data: "json, name=loggingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=loggingConfig" })
   loggingConfig?: LoggingConfig;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notificationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=notificationConfig" })
   notificationConfig?: NotificationConfig;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=schedule" })
+  @SpeakeasyMetadata({ data: "json, name=schedule" })
   schedule?: Schedule;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: TransferJobStatusEnum;
 
-  @Metadata({ data: "json, name=transferSpec" })
+  @SpeakeasyMetadata({ data: "json, name=transferSpec" })
   transferSpec?: TransferSpec;
 }

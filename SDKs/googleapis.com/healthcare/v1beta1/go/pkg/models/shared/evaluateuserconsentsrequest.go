@@ -8,6 +8,8 @@ const (
 	EvaluateUserConsentsRequestResponseViewEnumFull                    EvaluateUserConsentsRequestResponseViewEnum = "FULL"
 )
 
+// EvaluateUserConsentsRequest
+// Evaluate a user's Consents for all matching User data mappings. Note: User data mappings are indexed asynchronously, causing slight delays between the time mappings are created or updated and when they are included in EvaluateUserConsents results.
 type EvaluateUserConsentsRequest struct {
 	ConsentList        *ConsentList                                 `json:"consentList,omitempty"`
 	PageSize           *int32                                       `json:"pageSize,omitempty"`

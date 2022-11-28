@@ -1,7 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SchedulerResource } from "./schedulerresource";
+import { TriggererResource } from "./triggererresource";
 import { WebServerResource } from "./webserverresource";
 import { WorkerResource } from "./workerresource";
+
 
 
 // WorkloadsConfig
@@ -9,12 +11,15 @@ import { WorkerResource } from "./workerresource";
  * The Kubernetes workloads configuration for GKE cluster associated with the Cloud Composer environment. Supported for Cloud Composer environments in versions composer-2.*.*-airflow-*.*.* and newer.
 **/
 export class WorkloadsConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=scheduler" })
+  @SpeakeasyMetadata({ data: "json, name=scheduler" })
   scheduler?: SchedulerResource;
 
-  @Metadata({ data: "json, name=webServer" })
+  @SpeakeasyMetadata({ data: "json, name=triggerer" })
+  triggerer?: TriggererResource;
+
+  @SpeakeasyMetadata({ data: "json, name=webServer" })
   webServer?: WebServerResource;
 
-  @Metadata({ data: "json, name=worker" })
+  @SpeakeasyMetadata({ data: "json, name=worker" })
   worker?: WorkerResource;
 }

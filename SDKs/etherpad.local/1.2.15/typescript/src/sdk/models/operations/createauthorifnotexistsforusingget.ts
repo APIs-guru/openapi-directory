@@ -1,91 +1,92 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateAuthorIfNotExistsForUsingGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=authorMapper" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authorMapper" })
   authorMapper?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 }
 
 
-export class CreateAuthorIfNotExistsForUsingGetRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: CreateAuthorIfNotExistsForUsingGetQueryParams;
-}
-
-
 export class CreateAuthorIfNotExistsForUsingGet200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorID" })
+  @SpeakeasyMetadata({ data: "json, name=authorID" })
   authorId?: string;
 }
 
 
 export class CreateAuthorIfNotExistsForUsingGet200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: CreateAuthorIfNotExistsForUsingGet200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class CreateAuthorIfNotExistsForUsingGet400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class CreateAuthorIfNotExistsForUsingGet401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class CreateAuthorIfNotExistsForUsingGet500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class CreateAuthorIfNotExistsForUsingGetRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: CreateAuthorIfNotExistsForUsingGetQueryParams;
+}
+
+
 export class CreateAuthorIfNotExistsForUsingGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createAuthorIfNotExistsForUsingGet200ApplicationJsonObject?: CreateAuthorIfNotExistsForUsingGet200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createAuthorIfNotExistsForUsingGet400ApplicationJsonObject?: CreateAuthorIfNotExistsForUsingGet400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createAuthorIfNotExistsForUsingGet401ApplicationJsonObject?: CreateAuthorIfNotExistsForUsingGet401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createAuthorIfNotExistsForUsingGet500ApplicationJsonObject?: CreateAuthorIfNotExistsForUsingGet500ApplicationJson;
 }

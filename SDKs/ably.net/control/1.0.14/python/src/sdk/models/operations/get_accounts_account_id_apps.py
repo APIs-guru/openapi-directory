@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class GetAccountsAccountIDAppsPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'account_id', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'account_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetAccountsAccountIDAppsSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetAccountsAccountIDAppsRequest:
-    path_params: GetAccountsAccountIDAppsPathParams = field(default=None)
-    security: GetAccountsAccountIDAppsSecurity = field(default=None)
+    path_params: GetAccountsAccountIDAppsPathParams = field()
+    security: GetAccountsAccountIDAppsSecurity = field()
     
 
 @dataclass
 class GetAccountsAccountIDAppsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     app_responses: Optional[List[shared.AppResponse]] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
     

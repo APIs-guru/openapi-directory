@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AsyncInferenceConfig } from "./asyncinferenceconfig";
 import { DataCaptureConfigSummary } from "./datacaptureconfigsummary";
 import { EndpointStatusEnum } from "./endpointstatusenum";
@@ -7,37 +6,38 @@ import { DeploymentConfig } from "./deploymentconfig";
 import { ProductionVariantSummary } from "./productionvariantsummary";
 
 
+
 export class DescribeEndpointOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AsyncInferenceConfig" })
+  @SpeakeasyMetadata({ data: "json, name=AsyncInferenceConfig" })
   asyncInferenceConfig?: AsyncInferenceConfig;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=DataCaptureConfig" })
+  @SpeakeasyMetadata({ data: "json, name=DataCaptureConfig" })
   dataCaptureConfig?: DataCaptureConfigSummary;
 
-  @Metadata({ data: "json, name=EndpointArn" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointArn" })
   endpointArn: string;
 
-  @Metadata({ data: "json, name=EndpointConfigName" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointConfigName" })
   endpointConfigName: string;
 
-  @Metadata({ data: "json, name=EndpointName" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointName" })
   endpointName: string;
 
-  @Metadata({ data: "json, name=EndpointStatus" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointStatus" })
   endpointStatus: EndpointStatusEnum;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=LastDeploymentConfig" })
+  @SpeakeasyMetadata({ data: "json, name=LastDeploymentConfig" })
   lastDeploymentConfig?: DeploymentConfig;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime: Date;
 
-  @Metadata({ data: "json, name=ProductionVariants", elemType: shared.ProductionVariantSummary })
+  @SpeakeasyMetadata({ data: "json, name=ProductionVariants", elemType: ProductionVariantSummary })
   productionVariants?: ProductionVariantSummary[];
 }

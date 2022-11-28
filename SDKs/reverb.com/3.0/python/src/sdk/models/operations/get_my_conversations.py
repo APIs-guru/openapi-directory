@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -13,17 +14,17 @@ class GetMyConversationsQueryParams:
 
 @dataclass
 class GetMyConversationsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetMyConversationsRequest:
-    query_params: GetMyConversationsQueryParams = field(default=None)
-    security: GetMyConversationsSecurity = field(default=None)
+    query_params: GetMyConversationsQueryParams = field()
+    security: GetMyConversationsSecurity = field()
     
 
 @dataclass
 class GetMyConversationsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

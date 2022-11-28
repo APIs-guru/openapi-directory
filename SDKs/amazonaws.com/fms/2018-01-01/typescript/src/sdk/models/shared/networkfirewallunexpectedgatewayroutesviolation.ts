@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Route } from "./route";
+
 
 
 // NetworkFirewallUnexpectedGatewayRoutesViolation
@@ -8,15 +8,15 @@ import { Route } from "./route";
  * Violation detail for an unexpected gateway route that’s present in a route table.
 **/
 export class NetworkFirewallUnexpectedGatewayRoutesViolation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GatewayId" })
+  @SpeakeasyMetadata({ data: "json, name=GatewayId" })
   gatewayId?: string;
 
-  @Metadata({ data: "json, name=RouteTableId" })
+  @SpeakeasyMetadata({ data: "json, name=RouteTableId" })
   routeTableId?: string;
 
-  @Metadata({ data: "json, name=ViolatingRoutes", elemType: shared.Route })
+  @SpeakeasyMetadata({ data: "json, name=ViolatingRoutes", elemType: Route })
   violatingRoutes?: Route[];
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId?: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * The number of errors in a given time period. All numbers are approximate since the error events are sampled before counting them.
 **/

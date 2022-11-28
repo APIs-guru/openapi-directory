@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum CreateDataSourceFromS3XAmzTargetEnum {
     AmazonMl20141212CreateDataSourceFromS3 = "AmazonML_20141212.CreateDataSourceFromS3"

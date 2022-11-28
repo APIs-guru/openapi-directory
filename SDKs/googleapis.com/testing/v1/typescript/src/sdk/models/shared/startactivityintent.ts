@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StartActivityIntent
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A starting intent specified by an action, uri, and categories.
 **/
 export class StartActivityIntent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: string;
 
-  @Metadata({ data: "json, name=categories" })
+  @SpeakeasyMetadata({ data: "json, name=categories" })
   categories?: string[];
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

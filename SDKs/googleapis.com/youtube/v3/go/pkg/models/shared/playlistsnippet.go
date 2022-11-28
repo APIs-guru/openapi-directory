@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PlaylistSnippet
+// Basic details about a playlist, including title, description and thumbnails.
 type PlaylistSnippet struct {
 	ChannelID        *string               `json:"channelId,omitempty"`
 	ChannelTitle     *string               `json:"channelTitle,omitempty"`

@@ -63,6 +63,8 @@ const (
 	TransportationTransferExceptionEnumDependentOnDayOfWeek TransportationTransferExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// Transportation
+// Vehicles or vehicular services facilitated or owned by the property.
 type Transportation struct {
 	AirportShuttle                 *bool                                             `json:"airportShuttle,omitempty"`
 	AirportShuttleException        *TransportationAirportShuttleExceptionEnum        `json:"airportShuttleException,omitempty"`

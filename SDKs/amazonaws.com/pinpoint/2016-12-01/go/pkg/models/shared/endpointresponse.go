@@ -1,5 +1,7 @@
 package shared
 
+// EndpointResponse
+// Provides information about the channel type and other settings for an endpoint.
 type EndpointResponse struct {
 	Address        *string              `json:"Address,omitempty"`
 	ApplicationID  *string              `json:"ApplicationId,omitempty"`

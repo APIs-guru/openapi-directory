@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SimilarSalePriceData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=daysBack" })
+  @SpeakeasyMetadata({ data: "json, name=daysBack" })
   daysBack: number;
 
-  @Metadata({ data: "json, name=mileCount" })
+  @SpeakeasyMetadata({ data: "json, name=mileCount" })
   mileCount: number;
 
-  @Metadata({ data: "json, name=milesAvg" })
+  @SpeakeasyMetadata({ data: "json, name=milesAvg" })
   milesAvg: number;
 
-  @Metadata({ data: "json, name=milesStdDev" })
+  @SpeakeasyMetadata({ data: "json, name=milesStdDev" })
   milesStdDev: number;
 
-  @Metadata({ data: "json, name=newCount" })
+  @SpeakeasyMetadata({ data: "json, name=newCount" })
   newCount: number;
 
-  @Metadata({ data: "json, name=newSaleAvg" })
+  @SpeakeasyMetadata({ data: "json, name=newSaleAvg" })
   newSaleAvg: number;
 
-  @Metadata({ data: "json, name=newSaleStdDev" })
+  @SpeakeasyMetadata({ data: "json, name=newSaleStdDev" })
   newSaleStdDev: number;
 
-  @Metadata({ data: "json, name=usedCount" })
+  @SpeakeasyMetadata({ data: "json, name=usedCount" })
   usedCount: number;
 
-  @Metadata({ data: "json, name=usedSaleAvg" })
+  @SpeakeasyMetadata({ data: "json, name=usedSaleAvg" })
   usedSaleAvg: number;
 
-  @Metadata({ data: "json, name=usedSaleStdDev" })
+  @SpeakeasyMetadata({ data: "json, name=usedSaleStdDev" })
   usedSaleStdDev: number;
 }

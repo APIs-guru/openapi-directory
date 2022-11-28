@@ -1,5 +1,7 @@
 package shared
 
+// AwsCodeBuildProjectDetails
+// Information about an CodeBuild project.
 type AwsCodeBuildProjectDetails struct {
 	EncryptionKey *string                         `json:"EncryptionKey,omitempty"`
 	Environment   *AwsCodeBuildProjectEnvironment `json:"Environment,omitempty"`

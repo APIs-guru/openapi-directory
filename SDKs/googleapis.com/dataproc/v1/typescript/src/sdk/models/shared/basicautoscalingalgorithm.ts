@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SparkStandaloneAutoscalingConfig } from "./sparkstandaloneautoscalingconfig";
 import { BasicYarnAutoscalingConfig } from "./basicyarnautoscalingconfig";
+
 
 
 // BasicAutoscalingAlgorithm
@@ -8,12 +9,12 @@ import { BasicYarnAutoscalingConfig } from "./basicyarnautoscalingconfig";
  * Basic algorithm for autoscaling.
 **/
 export class BasicAutoscalingAlgorithm extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cooldownPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=cooldownPeriod" })
   cooldownPeriod?: string;
 
-  @Metadata({ data: "json, name=sparkStandaloneConfig" })
+  @SpeakeasyMetadata({ data: "json, name=sparkStandaloneConfig" })
   sparkStandaloneConfig?: SparkStandaloneAutoscalingConfig;
 
-  @Metadata({ data: "json, name=yarnConfig" })
+  @SpeakeasyMetadata({ data: "json, name=yarnConfig" })
   yarnConfig?: BasicYarnAutoscalingConfig;
 }

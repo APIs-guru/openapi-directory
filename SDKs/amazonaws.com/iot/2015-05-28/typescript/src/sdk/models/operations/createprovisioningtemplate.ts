@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateProvisioningTemplateHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,72 +32,72 @@ export class CreateProvisioningTemplateHeaders extends SpeakeasyBase {
  * Structure that contains <code>payloadVersion</code> and <code>targetArn</code>.
 **/
 export class CreateProvisioningTemplateRequestBodyPreProvisioningHook extends SpeakeasyBase {
-  @Metadata({ data: "json, name=payloadVersion" })
+  @SpeakeasyMetadata({ data: "json, name=payloadVersion" })
   payloadVersion?: string;
 
-  @Metadata({ data: "json, name=targetArn" })
+  @SpeakeasyMetadata({ data: "json, name=targetArn" })
   targetArn?: string;
 }
 
 
 export class CreateProvisioningTemplateRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=preProvisioningHook" })
+  @SpeakeasyMetadata({ data: "json, name=preProvisioningHook" })
   preProvisioningHook?: CreateProvisioningTemplateRequestBodyPreProvisioningHook;
 
-  @Metadata({ data: "json, name=provisioningRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=provisioningRoleArn" })
   provisioningRoleArn: string;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: shared.Tag })
   tags?: shared.Tag[];
 
-  @Metadata({ data: "json, name=templateBody" })
+  @SpeakeasyMetadata({ data: "json, name=templateBody" })
   templateBody: string;
 
-  @Metadata({ data: "json, name=templateName" })
+  @SpeakeasyMetadata({ data: "json, name=templateName" })
   templateName: string;
 }
 
 
 export class CreateProvisioningTemplateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateProvisioningTemplateHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateProvisioningTemplateRequestBody;
 }
 
 
 export class CreateProvisioningTemplateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createProvisioningTemplateResponse?: shared.CreateProvisioningTemplateResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceAlreadyExistsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 }

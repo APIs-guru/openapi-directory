@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class PurchasesPutPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PurchasesPutRequest:
-    path_params: PurchasesPutPathParams = field(default=None)
-    request: shared.PurchaseDto = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: PurchasesPutPathParams = field()
+    request: shared.PurchaseDto = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PurchasesPutResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     purchases_put_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetResourcesCampaignsIdSyndicateFormatPathParams = /** @class */ (function (_super) {
     __extends(GetResourcesCampaignsIdSyndicateFormatPathParams, _super);
@@ -30,11 +30,11 @@ var GetResourcesCampaignsIdSyndicateFormatPathParams = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], GetResourcesCampaignsIdSyndicateFormatPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", Number)
     ], GetResourcesCampaignsIdSyndicateFormatPathParams.prototype, "id", void 0);
     return GetResourcesCampaignsIdSyndicateFormatPathParams;
@@ -46,7 +46,7 @@ var GetResourcesCampaignsIdSyndicateFormatQueryParams = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=displayMethod" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=displayMethod" }),
         __metadata("design:type", String)
     ], GetResourcesCampaignsIdSyndicateFormatQueryParams.prototype, "displayMethod", void 0);
     return GetResourcesCampaignsIdSyndicateFormatQueryParams;
@@ -58,11 +58,11 @@ var GetResourcesCampaignsIdSyndicateFormatRequest = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourcesCampaignsIdSyndicateFormatPathParams)
     ], GetResourcesCampaignsIdSyndicateFormatRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourcesCampaignsIdSyndicateFormatQueryParams)
     ], GetResourcesCampaignsIdSyndicateFormatRequest.prototype, "queryParams", void 0);
     return GetResourcesCampaignsIdSyndicateFormatRequest;
@@ -74,15 +74,15 @@ var GetResourcesCampaignsIdSyndicateFormatResponse = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetResourcesCampaignsIdSyndicateFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetResourcesCampaignsIdSyndicateFormatResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SyndicateMarshallerWrapped)
     ], GetResourcesCampaignsIdSyndicateFormatResponse.prototype, "syndicateMarshallerWrapped", void 0);
     return GetResourcesCampaignsIdSyndicateFormatResponse;

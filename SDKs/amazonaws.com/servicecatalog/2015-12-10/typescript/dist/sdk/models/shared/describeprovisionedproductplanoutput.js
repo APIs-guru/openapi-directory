@@ -22,24 +22,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisionedProductPlanDetails } from "./provisionedproductplandetails";
+import { ResourceChange } from "./resourcechange";
 var DescribeProvisionedProductPlanOutput = /** @class */ (function (_super) {
     __extends(DescribeProvisionedProductPlanOutput, _super);
     function DescribeProvisionedProductPlanOutput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=NextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextPageToken" }),
         __metadata("design:type", String)
     ], DescribeProvisionedProductPlanOutput.prototype, "nextPageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisionedProductPlanDetails" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisionedProductPlanDetails" }),
         __metadata("design:type", ProvisionedProductPlanDetails)
     ], DescribeProvisionedProductPlanOutput.prototype, "provisionedProductPlanDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceChanges", elemType: shared.ResourceChange }),
+        SpeakeasyMetadata({ data: "json, name=ResourceChanges", elemType: ResourceChange }),
         __metadata("design:type", Array)
     ], DescribeProvisionedProductPlanOutput.prototype, "resourceChanges", void 0);
     return DescribeProvisionedProductPlanOutput;

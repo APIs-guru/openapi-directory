@@ -1,0 +1,30 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+export declare class Electioneering extends SpeakeasyBase {
+    amendmentIndicator?: string;
+    beginningImageNumber?: string;
+    calculatedCandidateShare?: number;
+    candidateDistrict?: string;
+    candidateId?: string;
+    candidateName?: string;
+    candidateOffice?: string;
+    candidateState?: string;
+    committeeId?: string;
+    committeeName?: string;
+    communicationDate?: Date;
+    disbursementAmount?: number;
+    disbursementDate?: Date;
+    electionType?: string;
+    fileNumber?: number;
+    linkId?: number;
+    numberOfCandidates?: number;
+    payeeName?: string;
+    payeeState?: string;
+    pdfUrl?: string;
+    publicDistributionDate?: Date;
+    purposeDescription?: string;
+    receiptDate?: Date;
+    reportYear?: number;
+    sbImageNum?: string;
+    sbLinkId?: string;
+    subId?: number;
+}

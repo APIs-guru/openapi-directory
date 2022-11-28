@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Fleet
+// Describes a fleet.
 type Fleet struct {
 	Arn                            string                `json:"Arn"`
 	ComputeCapacityStatus          ComputeCapacityStatus `json:"ComputeCapacityStatus"`

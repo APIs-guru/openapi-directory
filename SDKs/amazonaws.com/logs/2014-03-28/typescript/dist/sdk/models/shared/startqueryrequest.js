@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var StartQueryRequest = /** @class */ (function (_super) {
     __extends(StartQueryRequest, _super);
     function StartQueryRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", Number)
     ], StartQueryRequest.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=limit" }),
+        SpeakeasyMetadata({ data: "json, name=limit" }),
         __metadata("design:type", Number)
     ], StartQueryRequest.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "json, name=logGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=logGroupName" }),
         __metadata("design:type", String)
     ], StartQueryRequest.prototype, "logGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=logGroupNames" }),
+        SpeakeasyMetadata({ data: "json, name=logGroupNames" }),
         __metadata("design:type", Array)
     ], StartQueryRequest.prototype, "logGroupNames", void 0);
     __decorate([
-        Metadata({ data: "json, name=queryString" }),
+        SpeakeasyMetadata({ data: "json, name=queryString" }),
         __metadata("design:type", String)
     ], StartQueryRequest.prototype, "queryString", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", Number)
     ], StartQueryRequest.prototype, "startTime", void 0);
     return StartQueryRequest;

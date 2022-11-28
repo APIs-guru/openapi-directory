@@ -1,5 +1,7 @@
 package shared
 
+// PosSale
+// The change of the available quantity of an item at the given store.
 type PosSale struct {
 	ContentLanguage *string `json:"contentLanguage,omitempty"`
 	Gtin            *string `json:"gtin,omitempty"`

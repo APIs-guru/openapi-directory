@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -66,13 +67,13 @@ class GetMdsQueryParams:
 
 @dataclass
 class GetMdsRequest:
-    query_params: GetMdsQueryParams = field(default=None)
+    query_params: GetMdsQueryParams = field()
     
 
 @dataclass
 class GetMdsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     mds: Optional[shared.Mds] = field(default=None)
-    status_code: int = field(default=None)
     

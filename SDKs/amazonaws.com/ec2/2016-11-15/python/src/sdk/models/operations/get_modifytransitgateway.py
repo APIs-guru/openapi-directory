@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetModifyTransitGatewayActionEnum(str, Enum):
@@ -8,6 +12,10 @@ class GetModifyTransitGatewayActionEnum(str, Enum):
 
 @dataclass
 class GetModifyTransitGatewayOptions:
+    r"""GetModifyTransitGatewayOptions
+    The transit gateway options.
+    """
+    
     add_transit_gateway_cidr_blocks: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'AddTransitGatewayCidrBlocks' }})
     association_default_route_table_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'AssociationDefaultRouteTableId' }})
     auto_accept_shared_attachments: Optional[shared.AutoAcceptSharedAttachmentsValueEnum] = field(default=None, metadata={'query_param': { 'field_name': 'AutoAcceptSharedAttachments' }})
@@ -24,12 +32,12 @@ class GetModifyTransitGatewayVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyTransitGatewayQueryParams:
-    action: GetModifyTransitGatewayActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyTransitGatewayActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    transit_gateway_id: str = field(metadata={'query_param': { 'field_name': 'TransitGatewayId', 'style': 'form', 'explode': True }})
+    version: GetModifyTransitGatewayVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Description', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     options: Optional[GetModifyTransitGatewayOptions] = field(default=None, metadata={'query_param': { 'field_name': 'Options', 'style': 'form', 'explode': True }})
-    transit_gateway_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayId', 'style': 'form', 'explode': True }})
-    version: GetModifyTransitGatewayVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -45,13 +53,13 @@ class GetModifyTransitGatewayHeaders:
 
 @dataclass
 class GetModifyTransitGatewayRequest:
-    query_params: GetModifyTransitGatewayQueryParams = field(default=None)
-    headers: GetModifyTransitGatewayHeaders = field(default=None)
+    headers: GetModifyTransitGatewayHeaders = field()
+    query_params: GetModifyTransitGatewayQueryParams = field()
     
 
 @dataclass
 class GetModifyTransitGatewayResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

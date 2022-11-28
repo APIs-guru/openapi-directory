@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Exemplar } from "./exemplar";
 import { ExplicitBuckets } from "./explicitbuckets";
 import { ExponentialBuckets } from "./exponentialbuckets";

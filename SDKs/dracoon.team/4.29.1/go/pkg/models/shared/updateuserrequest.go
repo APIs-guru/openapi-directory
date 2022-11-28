@@ -1,5 +1,7 @@
 package shared
 
+// UpdateUserRequest
+// Request model for updating user's metadata
 type UpdateUserRequest struct {
 	AuthData         *UserAuthDataUpdateRequest `json:"authData,omitempty"`
 	AuthMethods      []UserAuthMethod           `json:"authMethods,omitempty"`

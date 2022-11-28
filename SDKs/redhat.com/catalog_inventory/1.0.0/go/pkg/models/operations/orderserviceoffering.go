@@ -8,13 +8,13 @@ type OrderServiceOfferingPathParams struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type OrderServiceOfferingRequest struct {
-	PathParams OrderServiceOfferingPathParams
-	Request    shared.OrderParametersServiceOffering `request:"mediaType=application/json"`
-}
-
 type OrderServiceOffering200ApplicationJSON struct {
 	TaskID *string `json:"task_id,omitempty"`
+}
+
+type OrderServiceOfferingRequest struct {
+	PathParams OrderServiceOfferingPathParams
+	Request    shared.OrderParametersServiceOfferingInput `request:"mediaType=application/json"`
 }
 
 type OrderServiceOfferingResponse struct {

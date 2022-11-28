@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContainerProjectsZonesGetServerconfigPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    zone: str = field(default=None, metadata={'path_param': { 'field_name': 'zone', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    zone: str = field(metadata={'path_param': { 'field_name': 'zone', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class ContainerProjectsZonesGetServerconfigQueryParams:
 
 @dataclass
 class ContainerProjectsZonesGetServerconfigSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContainerProjectsZonesGetServerconfigRequest:
-    path_params: ContainerProjectsZonesGetServerconfigPathParams = field(default=None)
-    query_params: ContainerProjectsZonesGetServerconfigQueryParams = field(default=None)
-    security: ContainerProjectsZonesGetServerconfigSecurity = field(default=None)
+    path_params: ContainerProjectsZonesGetServerconfigPathParams = field()
+    query_params: ContainerProjectsZonesGetServerconfigQueryParams = field()
+    security: ContainerProjectsZonesGetServerconfigSecurity = field()
     
 
 @dataclass
 class ContainerProjectsZonesGetServerconfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     server_config: Optional[shared.ServerConfig] = field(default=None)
-    status_code: int = field(default=None)
     

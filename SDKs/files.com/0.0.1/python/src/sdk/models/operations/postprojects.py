@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class PostProjectsRequestBody:
-    global_access: str = field(default=None, metadata={'multipart_form': { 'field_name': 'global_access' }})
+    global_access: str = field(metadata={'multipart_form': { 'field_name': 'global_access' }})
     
 
 @dataclass
 class PostProjectsRequest:
-    request: PostProjectsRequestBody = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
+    request: PostProjectsRequestBody = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PostProjectsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     project_entity: Optional[shared.ProjectEntity] = field(default=None)
-    status_code: int = field(default=None)
     

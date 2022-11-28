@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Upload } from "./upload";
+
 
 
 // InstallToRemoteAccessSessionResult
@@ -7,6 +8,6 @@ import { Upload } from "./upload";
  * Represents the response from the server after AWS Device Farm makes a request to install to a remote access session.
 **/
 export class InstallToRemoteAccessSessionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appUpload" })
+  @SpeakeasyMetadata({ data: "json, name=appUpload" })
   appUpload?: Upload;
 }

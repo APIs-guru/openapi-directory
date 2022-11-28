@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MaintenanceWindowExecutionStatusEnum } from "./maintenancewindowexecutionstatusenum";
 
 
+
 export class GetMaintenanceWindowExecutionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: MaintenanceWindowExecutionStatusEnum;
 
-  @Metadata({ data: "json, name=StatusDetails" })
+  @SpeakeasyMetadata({ data: "json, name=StatusDetails" })
   statusDetails?: string;
 
-  @Metadata({ data: "json, name=TaskIds" })
+  @SpeakeasyMetadata({ data: "json, name=TaskIds" })
   taskIds?: string[];
 
-  @Metadata({ data: "json, name=WindowExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=WindowExecutionId" })
   windowExecutionId?: string;
 }

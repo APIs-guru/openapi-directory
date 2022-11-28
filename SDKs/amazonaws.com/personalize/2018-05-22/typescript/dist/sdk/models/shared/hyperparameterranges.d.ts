@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CategoricalHyperParameterRange } from "./categoricalhyperparameterrange";
 import { ContinuousHyperParameterRange } from "./continuoushyperparameterrange";
 import { IntegerHyperParameterRange } from "./integerhyperparameterrange";

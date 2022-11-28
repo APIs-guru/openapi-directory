@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteReplicationGroupActionEnum(str, Enum):
     DELETE_REPLICATION_GROUP = "DeleteReplicationGroup"
@@ -10,11 +14,11 @@ class GetDeleteReplicationGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteReplicationGroupQueryParams:
-    action: GetDeleteReplicationGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteReplicationGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    replication_group_id: str = field(metadata={'query_param': { 'field_name': 'ReplicationGroupId', 'style': 'form', 'explode': True }})
+    version: GetDeleteReplicationGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     final_snapshot_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'FinalSnapshotIdentifier', 'style': 'form', 'explode': True }})
-    replication_group_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ReplicationGroupId', 'style': 'form', 'explode': True }})
     retain_primary_cluster: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'RetainPrimaryCluster', 'style': 'form', 'explode': True }})
-    version: GetDeleteReplicationGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDeleteReplicationGroupHeaders:
 
 @dataclass
 class GetDeleteReplicationGroupRequest:
-    query_params: GetDeleteReplicationGroupQueryParams = field(default=None)
-    headers: GetDeleteReplicationGroupHeaders = field(default=None)
+    headers: GetDeleteReplicationGroupHeaders = field()
+    query_params: GetDeleteReplicationGroupQueryParams = field()
     
 
 @dataclass
 class GetDeleteReplicationGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

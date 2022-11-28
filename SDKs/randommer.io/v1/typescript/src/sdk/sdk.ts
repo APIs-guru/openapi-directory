@@ -1,18 +1,14 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import {GetHeadersFromRequest} from "../internal/utils/headers";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://randommer.io",
+export const ServerList = [
+	"https://randommer.io",
 ] as const;
 
 export function WithServerURL(
@@ -23,47 +19,47 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // GetApiCard - Get Card
-  GetApiCard(
+  /**
+   * getApiCard - Get Card
+  **/
+  getApiCard(
     req: operations.GetApiCardRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiCardResponse> {
@@ -71,13 +67,11 @@ export class SDK {
       req = new operations.GetApiCardRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Card";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -86,16 +80,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiCardResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiCardResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -105,8 +101,10 @@ export class SDK {
   }
 
   
-  // GetApiCardTypes - Get available card types
-  GetApiCardTypes(
+  /**
+   * getApiCardTypes - Get available card types
+  **/
+  getApiCardTypes(
     req: operations.GetApiCardTypesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiCardTypesResponse> {
@@ -114,23 +112,23 @@ export class SDK {
       req = new operations.GetApiCardTypesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Card/Types";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiCardTypesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiCardTypesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -140,7 +138,7 @@ export class SDK {
   }
 
   
-  GetApiMiscCultures(
+  getApiMiscCultures(
     req: operations.GetApiMiscCulturesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMiscCulturesResponse> {
@@ -148,23 +146,23 @@ export class SDK {
       req = new operations.GetApiMiscCulturesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Misc/Cultures";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMiscCulturesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiMiscCulturesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -174,7 +172,7 @@ export class SDK {
   }
 
   
-  GetApiMiscRandomAddress(
+  getApiMiscRandomAddress(
     req: operations.GetApiMiscRandomAddressRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiMiscRandomAddressResponse> {
@@ -182,13 +180,11 @@ export class SDK {
       req = new operations.GetApiMiscRandomAddressRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Misc/Random-Address";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -197,16 +193,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiMiscRandomAddressResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiMiscRandomAddressResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -216,8 +214,10 @@ export class SDK {
   }
 
   
-  // GetApiName - Get name
-  GetApiName(
+  /**
+   * getApiName - Get name
+  **/
+  getApiName(
     req: operations.GetApiNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiNameResponse> {
@@ -225,13 +225,11 @@ export class SDK {
       req = new operations.GetApiNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Name";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -240,16 +238,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -259,8 +259,10 @@ export class SDK {
   }
 
   
-  // GetApiNameSuggestions - Get business name suggestions
-  GetApiNameSuggestions(
+  /**
+   * getApiNameSuggestions - Get business name suggestions
+  **/
+  getApiNameSuggestions(
     req: operations.GetApiNameSuggestionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiNameSuggestionsResponse> {
@@ -268,13 +270,11 @@ export class SDK {
       req = new operations.GetApiNameSuggestionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Name/Suggestions";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -283,16 +283,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiNameSuggestionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiNameSuggestionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -302,8 +304,10 @@ export class SDK {
   }
 
   
-  // GetApiPhoneCountries - Get available countries
-  GetApiPhoneCountries(
+  /**
+   * getApiPhoneCountries - Get available countries
+  **/
+  getApiPhoneCountries(
     req: operations.GetApiPhoneCountriesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiPhoneCountriesResponse> {
@@ -311,23 +315,23 @@ export class SDK {
       req = new operations.GetApiPhoneCountriesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Phone/Countries";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiPhoneCountriesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiPhoneCountriesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -337,8 +341,10 @@ export class SDK {
   }
 
   
-  // GetApiPhoneGenerate - Get bulk telephone numbers for a country
-  GetApiPhoneGenerate(
+  /**
+   * getApiPhoneGenerate - Get bulk telephone numbers for a country
+  **/
+  getApiPhoneGenerate(
     req: operations.GetApiPhoneGenerateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiPhoneGenerateResponse> {
@@ -346,13 +352,11 @@ export class SDK {
       req = new operations.GetApiPhoneGenerateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Phone/Generate";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -361,16 +365,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiPhoneGenerateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiPhoneGenerateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -380,8 +386,10 @@ export class SDK {
   }
 
   
-  // GetApiPhoneValidate - Validate a phone number
-  GetApiPhoneValidate(
+  /**
+   * getApiPhoneValidate - Validate a phone number
+  **/
+  getApiPhoneValidate(
     req: operations.GetApiPhoneValidateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiPhoneValidateResponse> {
@@ -389,13 +397,11 @@ export class SDK {
       req = new operations.GetApiPhoneValidateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Phone/Validate";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -404,16 +410,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiPhoneValidateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiPhoneValidateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -423,8 +431,10 @@ export class SDK {
   }
 
   
-  // GetApiSocialNumber - Generate a social security number
-  GetApiSocialNumber(
+  /**
+   * getApiSocialNumber - Generate a social security number
+  **/
+  getApiSocialNumber(
     req: operations.GetApiSocialNumberRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiSocialNumberResponse> {
@@ -432,23 +442,23 @@ export class SDK {
       req = new operations.GetApiSocialNumberRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/SocialNumber";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiSocialNumberResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiSocialNumberResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -458,8 +468,10 @@ export class SDK {
   }
 
   
-  // GetApiTextLoremIpsum - Generate lorem ipsum
-  GetApiTextLoremIpsum(
+  /**
+   * getApiTextLoremIpsum - Generate lorem ipsum
+  **/
+  getApiTextLoremIpsum(
     req: operations.GetApiTextLoremIpsumRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiTextLoremIpsumResponse> {
@@ -467,13 +479,11 @@ export class SDK {
       req = new operations.GetApiTextLoremIpsumRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Text/LoremIpsum";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -482,16 +492,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiTextLoremIpsumResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiTextLoremIpsumResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -501,8 +513,10 @@ export class SDK {
   }
 
   
-  // GetApiTextPassword - Generate password
-  GetApiTextPassword(
+  /**
+   * getApiTextPassword - Generate password
+  **/
+  getApiTextPassword(
     req: operations.GetApiTextPasswordRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiTextPasswordResponse> {
@@ -510,13 +524,11 @@ export class SDK {
       req = new operations.GetApiTextPasswordRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Text/Password";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -525,16 +537,18 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiTextPasswordResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiTextPasswordResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -544,8 +558,10 @@ export class SDK {
   }
 
   
-  // PostApiSocialNumber - Validate VAT/identity numbers
-  PostApiSocialNumber(
+  /**
+   * postApiSocialNumber - Validate VAT/identity numbers
+  **/
+  postApiSocialNumber(
     req: operations.PostApiSocialNumberRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiSocialNumberResponse> {
@@ -553,23 +569,21 @@ export class SDK {
       req = new operations.PostApiSocialNumberRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/SocialNumber";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -580,21 +594,21 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiSocialNumberResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiSocialNumberResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -604,8 +618,10 @@ export class SDK {
   }
 
   
-  // PostApiTextHumanize - Humanize text
-  PostApiTextHumanize(
+  /**
+   * postApiTextHumanize - Humanize text
+  **/
+  postApiTextHumanize(
     req: operations.PostApiTextHumanizeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiTextHumanizeResponse> {
@@ -613,40 +629,38 @@ export class SDK {
       req = new operations.PostApiTextHumanizeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Text/Humanize";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiTextHumanizeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiTextHumanizeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -656,8 +670,10 @@ export class SDK {
   }
 
   
-  // PostApiTextTransform - Transform text
-  PostApiTextTransform(
+  /**
+   * postApiTextTransform - Transform text
+  **/
+  postApiTextTransform(
     req: operations.PostApiTextTransformRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiTextTransformResponse> {
@@ -665,23 +681,21 @@ export class SDK {
       req = new operations.PostApiTextTransformRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/Text/Transform";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -692,21 +706,21 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiTextTransformResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiTextTransformResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 

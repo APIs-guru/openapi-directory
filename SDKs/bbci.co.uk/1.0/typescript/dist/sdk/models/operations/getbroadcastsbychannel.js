@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetBroadcastsByChannelPathParams = /** @class */ (function (_super) {
     __extends(GetBroadcastsByChannelPathParams, _super);
@@ -30,7 +30,7 @@ var GetBroadcastsByChannelPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=channel" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=channel" }),
         __metadata("design:type", String)
     ], GetBroadcastsByChannelPathParams.prototype, "channel", void 0);
     return GetBroadcastsByChannelPathParams;
@@ -42,27 +42,27 @@ var GetBroadcastsByChannelQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=availability" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability" }),
         __metadata("design:type", String)
     ], GetBroadcastsByChannelQueryParams.prototype, "availability", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=from" }),
         __metadata("design:type", String)
     ], GetBroadcastsByChannelQueryParams.prototype, "from", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lang" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" }),
         __metadata("design:type", String)
     ], GetBroadcastsByChannelQueryParams.prototype, "lang", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=mixin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mixin" }),
         __metadata("design:type", Array)
     ], GetBroadcastsByChannelQueryParams.prototype, "mixin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=per_page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" }),
         __metadata("design:type", Number)
     ], GetBroadcastsByChannelQueryParams.prototype, "perPage", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rights" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rights" }),
         __metadata("design:type", String)
     ], GetBroadcastsByChannelQueryParams.prototype, "rights", void 0);
     return GetBroadcastsByChannelQueryParams;
@@ -74,11 +74,11 @@ var GetBroadcastsByChannelRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBroadcastsByChannelPathParams)
     ], GetBroadcastsByChannelRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetBroadcastsByChannelQueryParams)
     ], GetBroadcastsByChannelRequest.prototype, "queryParams", void 0);
     return GetBroadcastsByChannelRequest;
@@ -90,15 +90,15 @@ var GetBroadcastsByChannelResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetBroadcastsByChannelResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetBroadcastsByChannelResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetBroadcastsByChannelResponse.prototype, "ibl", void 0);
     return GetBroadcastsByChannelResponse;

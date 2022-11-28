@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GetTrailStatusResponse
+// Returns the objects or data listed below if successful. Otherwise, returns an error.
 type GetTrailStatusResponse struct {
 	IsLogging                          *bool      `json:"IsLogging,omitempty"`
 	LatestCloudWatchLogsDeliveryError  *string    `json:"LatestCloudWatchLogsDeliveryError,omitempty"`

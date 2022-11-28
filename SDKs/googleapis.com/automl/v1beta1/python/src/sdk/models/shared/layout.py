@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import boundingpoly
-from . import textsegment
+from sdk import utils
+from . import *
 
 class LayoutTextSegmentTypeEnum(str, Enum):
     TEXT_SEGMENT_TYPE_UNSPECIFIED = "TEXT_SEGMENT_TYPE_UNSPECIFIED"
@@ -20,8 +21,12 @@ class LayoutTextSegmentTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Layout:
-    bounding_poly: Optional[boundingpoly.BoundingPoly] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'boundingPoly' }})
-    page_number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pageNumber' }})
-    text_segment: Optional[textsegment.TextSegment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'textSegment' }})
-    text_segment_type: Optional[LayoutTextSegmentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'textSegmentType' }})
+    r"""Layout
+    Describes the layout information of a text_segment in the document.
+    """
+    
+    bounding_poly: Optional[BoundingPoly] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('boundingPoly') }})
+    page_number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pageNumber') }})
+    text_segment: Optional[TextSegment] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('textSegment') }})
+    text_segment_type: Optional[LayoutTextSegmentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('textSegmentType') }})
     

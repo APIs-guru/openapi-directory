@@ -10,13 +10,13 @@ class GetAPIMembersHistoryQueryParams:
 
 @dataclass
 class GetAPIMembersHistoryRequest:
-    query_params: GetAPIMembersHistoryQueryParams = field(default=None)
+    query_params: GetAPIMembersHistoryQueryParams = field()
     
 
 @dataclass
 class GetAPIMembersHistoryResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     member_history_items: Optional[List[shared.MemberHistoryItem]] = field(default=None)
-    status_code: int = field(default=None)
     

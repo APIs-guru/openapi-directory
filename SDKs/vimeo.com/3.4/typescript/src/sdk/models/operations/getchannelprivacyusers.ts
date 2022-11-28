@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetChannelPrivacyUsersPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=channel_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=channel_id" })
   channelId: number;
 }
 
 export enum GetChannelPrivacyUsersDirectionEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 
 export class GetChannelPrivacyUsersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: GetChannelPrivacyUsersDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
 export class GetChannelPrivacyUsersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetChannelPrivacyUsersPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetChannelPrivacyUsersQueryParams;
 }
 
 
 export class GetChannelPrivacyUsersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata({ elemType: shared.User })
+  @SpeakeasyMetadata({ elemType: shared.User })
   users?: shared.User[];
 }

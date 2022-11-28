@@ -52,6 +52,8 @@ const (
 	FilterSetTimeSeriesGranularityEnumDaily                            FilterSetTimeSeriesGranularityEnum = "DAILY"
 )
 
+// FilterSet
+// A set of filters that is applied to a request for data. Within a filter set, an AND operation is performed across the filters represented by each field. An OR operation is performed across the filters represented by the multiple values of a repeated field, for example, "format=VIDEO AND deal_id=12 AND (seller_network_id=34 OR seller_network_id=56)".
 type FilterSet struct {
 	AbsoluteDateRange     *AbsoluteDateRange                  `json:"absoluteDateRange,omitempty"`
 	BreakdownDimensions   []FilterSetBreakdownDimensionsEnum  `json:"breakdownDimensions,omitempty"`

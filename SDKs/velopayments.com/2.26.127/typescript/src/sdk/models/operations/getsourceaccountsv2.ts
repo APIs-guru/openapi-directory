@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSourceAccountsV2QueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fundingAccountId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fundingAccountId" })
   fundingAccountId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=payorId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=payorId" })
   payorId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=physicalAccountId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=physicalAccountId" })
   physicalAccountId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=physicalAccountName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=physicalAccountName" })
   physicalAccountName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 }
 
 
 export class GetSourceAccountsV2Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSourceAccountsV2QueryParams;
 }
 
 
 export class GetSourceAccountsV2Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listSourceAccountResponseV2?: shared.ListSourceAccountResponseV2;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse400?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse401?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse403?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse404?: any;
 }

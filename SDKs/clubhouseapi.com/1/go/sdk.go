@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://www.clubhouseapi.com/api/",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetCheckForUpdate - Clubhouse uses this to check for updates when app is not installed from App Store (eg TestFlight)
 func (s *SDK) GetCheckForUpdate(ctx context.Context, request operations.GetCheckForUpdateRequest) (*operations.GetCheckForUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/check_for_update"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -61,7 +83,7 @@ func (s *SDK) GetCheckForUpdate(ctx context.Context, request operations.GetCheck
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -82,8 +104,9 @@ func (s *SDK) GetCheckForUpdate(ctx context.Context, request operations.GetCheck
 	return res, nil
 }
 
+// GetGetActionableNotifications - get actionable notifications (the bell again)
 func (s *SDK) GetGetActionableNotifications(ctx context.Context) (*operations.GetGetActionableNotificationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_actionable_notifications"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -91,7 +114,7 @@ func (s *SDK) GetGetActionableNotifications(ctx context.Context) (*operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -112,8 +135,9 @@ func (s *SDK) GetGetActionableNotifications(ctx context.Context) (*operations.Ge
 	return res, nil
 }
 
+// GetGetAllTopics - gets all topics.
 func (s *SDK) GetGetAllTopics(ctx context.Context) (*operations.GetGetAllTopicsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_all_topics"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -121,7 +145,7 @@ func (s *SDK) GetGetAllTopics(ctx context.Context) (*operations.GetGetAllTopicsR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -142,8 +166,9 @@ func (s *SDK) GetGetAllTopics(ctx context.Context) (*operations.GetGetAllTopicsR
 	return res, nil
 }
 
+// GetGetChannels - get all channels
 func (s *SDK) GetGetChannels(ctx context.Context) (*operations.GetGetChannelsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_channels"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -151,7 +176,7 @@ func (s *SDK) GetGetChannels(ctx context.Context) (*operations.GetGetChannelsRes
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -172,8 +197,9 @@ func (s *SDK) GetGetChannels(ctx context.Context) (*operations.GetGetChannelsRes
 	return res, nil
 }
 
+// GetGetEvents - the Upcoming for You page
 func (s *SDK) GetGetEvents(ctx context.Context, request operations.GetGetEventsRequest) (*operations.GetGetEventsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_events"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -183,7 +209,7 @@ func (s *SDK) GetGetEvents(ctx context.Context, request operations.GetGetEventsR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -204,8 +230,9 @@ func (s *SDK) GetGetEvents(ctx context.Context, request operations.GetGetEventsR
 	return res, nil
 }
 
+// GetGetNotifications - get notifications (the bell icon)
 func (s *SDK) GetGetNotifications(ctx context.Context, request operations.GetGetNotificationsRequest) (*operations.GetGetNotificationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_notifications"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -215,7 +242,7 @@ func (s *SDK) GetGetNotifications(ctx context.Context, request operations.GetGet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -236,8 +263,9 @@ func (s *SDK) GetGetNotifications(ctx context.Context, request operations.GetGet
 	return res, nil
 }
 
+// GetGetSettings - get notification settings
 func (s *SDK) GetGetSettings(ctx context.Context) (*operations.GetGetSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_settings"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -245,7 +273,7 @@ func (s *SDK) GetGetSettings(ctx context.Context) (*operations.GetGetSettingsRes
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -266,8 +294,9 @@ func (s *SDK) GetGetSettings(ctx context.Context) (*operations.GetGetSettingsRes
 	return res, nil
 }
 
+// GetGetSuggestedFollowsAll - gets suggested follows during signup
 func (s *SDK) GetGetSuggestedFollowsAll(ctx context.Context, request operations.GetGetSuggestedFollowsAllRequest) (*operations.GetGetSuggestedFollowsAllResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_suggested_follows_all"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -277,7 +306,7 @@ func (s *SDK) GetGetSuggestedFollowsAll(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -298,8 +327,9 @@ func (s *SDK) GetGetSuggestedFollowsAll(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetGetUsersForTopic - looks up users by topic.
 func (s *SDK) GetGetUsersForTopic(ctx context.Context, request operations.GetGetUsersForTopicRequest) (*operations.GetGetUsersForTopicResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_users_for_topic"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -309,7 +339,7 @@ func (s *SDK) GetGetUsersForTopic(ctx context.Context, request operations.GetGet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -330,8 +360,9 @@ func (s *SDK) GetGetUsersForTopic(ctx context.Context, request operations.GetGet
 	return res, nil
 }
 
+// GetGetWelcomeChannel - called during signup
 func (s *SDK) GetGetWelcomeChannel(ctx context.Context) (*operations.GetGetWelcomeChannelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_welcome_channel"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -339,7 +370,7 @@ func (s *SDK) GetGetWelcomeChannel(ctx context.Context) (*operations.GetGetWelco
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -360,8 +391,9 @@ func (s *SDK) GetGetWelcomeChannel(ctx context.Context) (*operations.GetGetWelco
 	return res, nil
 }
 
+// PostCallPhoneNumberAuth - Call phone number auth.
 func (s *SDK) PostCallPhoneNumberAuth(ctx context.Context, request operations.PostCallPhoneNumberAuthRequest) (*operations.PostCallPhoneNumberAuthResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/call_phone_number_auth"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -376,7 +408,7 @@ func (s *SDK) PostCallPhoneNumberAuth(ctx context.Context, request operations.Po
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -397,8 +429,9 @@ func (s *SDK) PostCallPhoneNumberAuth(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostCheckWaitlistStatus - checks waitlist status.
 func (s *SDK) PostCheckWaitlistStatus(ctx context.Context) (*operations.PostCheckWaitlistStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/check_waitlist_status"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -406,7 +439,7 @@ func (s *SDK) PostCheckWaitlistStatus(ctx context.Context) (*operations.PostChec
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -428,8 +461,9 @@ func (s *SDK) PostCheckWaitlistStatus(ctx context.Context) (*operations.PostChec
 	return res, nil
 }
 
+// PostCompletePhoneNumberAuth - Call phone number auth.
 func (s *SDK) PostCompletePhoneNumberAuth(ctx context.Context, request operations.PostCompletePhoneNumberAuthRequest) (*operations.PostCompletePhoneNumberAuthResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/complete_phone_number_auth"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -444,7 +478,7 @@ func (s *SDK) PostCompletePhoneNumberAuth(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -465,8 +499,9 @@ func (s *SDK) PostCompletePhoneNumberAuth(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostCreateChannel - creates a channel
 func (s *SDK) PostCreateChannel(ctx context.Context, request operations.PostCreateChannelRequest) (*operations.PostCreateChannelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/create_channel"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -481,7 +516,7 @@ func (s *SDK) PostCreateChannel(ctx context.Context, request operations.PostCrea
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -502,8 +537,9 @@ func (s *SDK) PostCreateChannel(ctx context.Context, request operations.PostCrea
 	return res, nil
 }
 
+// PostFollow - follows a user
 func (s *SDK) PostFollow(ctx context.Context, request operations.PostFollowRequest) (*operations.PostFollowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/follow"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -518,7 +554,7 @@ func (s *SDK) PostFollow(ctx context.Context, request operations.PostFollowReque
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -539,8 +575,9 @@ func (s *SDK) PostFollow(ctx context.Context, request operations.PostFollowReque
 	return res, nil
 }
 
+// PostGetClub - gets club by id
 func (s *SDK) PostGetClub(ctx context.Context, request operations.PostGetClubRequest) (*operations.PostGetClubResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_club"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -555,7 +592,7 @@ func (s *SDK) PostGetClub(ctx context.Context, request operations.PostGetClubReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -576,8 +613,9 @@ func (s *SDK) PostGetClub(ctx context.Context, request operations.PostGetClubReq
 	return res, nil
 }
 
+// PostGetClubsForTopic - looks up clubs by topic.
 func (s *SDK) PostGetClubsForTopic(ctx context.Context, request operations.PostGetClubsForTopicRequest) (*operations.PostGetClubsForTopicResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_clubs_for_topic"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -592,7 +630,7 @@ func (s *SDK) PostGetClubsForTopic(ctx context.Context, request operations.PostG
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -613,8 +651,9 @@ func (s *SDK) PostGetClubsForTopic(ctx context.Context, request operations.PostG
 	return res, nil
 }
 
+// PostGetCreateChannelTargets - is fetched when you tap Create Room
 func (s *SDK) PostGetCreateChannelTargets(ctx context.Context, request operations.PostGetCreateChannelTargetsRequest) (*operations.PostGetCreateChannelTargetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_create_channel_targets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -629,7 +668,7 @@ func (s *SDK) PostGetCreateChannelTargets(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -650,8 +689,9 @@ func (s *SDK) PostGetCreateChannelTargets(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostGetFollowing - get a list of the users and clubs that this user is following. Returned users have bios truncated to ~80 characters.
 func (s *SDK) PostGetFollowing(ctx context.Context, request operations.PostGetFollowingRequest) (*operations.PostGetFollowingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_following"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -666,7 +706,7 @@ func (s *SDK) PostGetFollowing(ctx context.Context, request operations.PostGetFo
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -687,8 +727,9 @@ func (s *SDK) PostGetFollowing(ctx context.Context, request operations.PostGetFo
 	return res, nil
 }
 
+// PostGetOnlineFriends - gets online friends on the app homepage.
 func (s *SDK) PostGetOnlineFriends(ctx context.Context, request operations.PostGetOnlineFriendsRequest) (*operations.PostGetOnlineFriendsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_online_friends"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -703,7 +744,7 @@ func (s *SDK) PostGetOnlineFriends(ctx context.Context, request operations.PostG
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -724,8 +765,9 @@ func (s *SDK) PostGetOnlineFriends(ctx context.Context, request operations.PostG
 	return res, nil
 }
 
+// PostGetProfile - looks up user profile by ID.
 func (s *SDK) PostGetProfile(ctx context.Context, request operations.PostGetProfileRequest) (*operations.PostGetProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_profile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -740,7 +782,7 @@ func (s *SDK) PostGetProfile(ctx context.Context, request operations.PostGetProf
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -761,8 +803,9 @@ func (s *SDK) PostGetProfile(ctx context.Context, request operations.PostGetProf
 	return res, nil
 }
 
+// PostGetReleaseNotes - gets release notes.
 func (s *SDK) PostGetReleaseNotes(ctx context.Context) (*operations.PostGetReleaseNotesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_release_notes"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -770,7 +813,7 @@ func (s *SDK) PostGetReleaseNotes(ctx context.Context) (*operations.PostGetRelea
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -791,8 +834,9 @@ func (s *SDK) PostGetReleaseNotes(ctx context.Context) (*operations.PostGetRelea
 	return res, nil
 }
 
+// PostGetSuggestedClubInvites - find users to invite to clubs based on phone number
 func (s *SDK) PostGetSuggestedClubInvites(ctx context.Context, request operations.PostGetSuggestedClubInvitesRequest) (*operations.PostGetSuggestedClubInvitesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_suggested_club_invites"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -807,7 +851,7 @@ func (s *SDK) PostGetSuggestedClubInvites(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -828,8 +872,9 @@ func (s *SDK) PostGetSuggestedClubInvites(ctx context.Context, request operation
 	return res, nil
 }
 
+// PostGetSuggestedFollowsFriendsOnly - find people to follow by uploading contacts during signup
 func (s *SDK) PostGetSuggestedFollowsFriendsOnly(ctx context.Context, request operations.PostGetSuggestedFollowsFriendsOnlyRequest) (*operations.PostGetSuggestedFollowsFriendsOnlyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_suggested_follows_friends_only"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -844,7 +889,7 @@ func (s *SDK) PostGetSuggestedFollowsFriendsOnly(ctx context.Context, request op
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -865,8 +910,9 @@ func (s *SDK) PostGetSuggestedFollowsFriendsOnly(ctx context.Context, request op
 	return res, nil
 }
 
+// PostGetSuggestedFollowsSimilar - find similar users. (The Sparkles button on Clubhouse's profile page)
 func (s *SDK) PostGetSuggestedFollowsSimilar(ctx context.Context, request operations.PostGetSuggestedFollowsSimilarRequest) (*operations.PostGetSuggestedFollowsSimilarResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_suggested_follows_similar"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -881,7 +927,7 @@ func (s *SDK) PostGetSuggestedFollowsSimilar(ctx context.Context, request operat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -902,8 +948,10 @@ func (s *SDK) PostGetSuggestedFollowsSimilar(ctx context.Context, request operat
 	return res, nil
 }
 
+// PostGetSuggestedInvites - find users to invite based on phone number.
+// (also see https://zerforschung.org/posts/clubhouse-telefonnummern-en/ for @zerforschung's analysis of the privacy implications of this API)
 func (s *SDK) PostGetSuggestedInvites(ctx context.Context, request operations.PostGetSuggestedInvitesRequest) (*operations.PostGetSuggestedInvitesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_suggested_invites"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -918,7 +966,7 @@ func (s *SDK) PostGetSuggestedInvites(ctx context.Context, request operations.Po
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -939,8 +987,9 @@ func (s *SDK) PostGetSuggestedInvites(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostGetSuggestedSpeakers - gets suggested users when you start a private room
 func (s *SDK) PostGetSuggestedSpeakers(ctx context.Context, request operations.PostGetSuggestedSpeakersRequest) (*operations.PostGetSuggestedSpeakersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_suggested_speakers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -955,7 +1004,7 @@ func (s *SDK) PostGetSuggestedSpeakers(ctx context.Context, request operations.P
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -976,8 +1025,9 @@ func (s *SDK) PostGetSuggestedSpeakers(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostGetTopic - looks up topic by ID.
 func (s *SDK) PostGetTopic(ctx context.Context, request operations.PostGetTopicRequest) (*operations.PostGetTopicResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/get_topic"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -992,7 +1042,7 @@ func (s *SDK) PostGetTopic(ctx context.Context, request operations.PostGetTopicR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1013,8 +1063,9 @@ func (s *SDK) PostGetTopic(ctx context.Context, request operations.PostGetTopicR
 	return res, nil
 }
 
+// PostInviteFromWaitlist - wave to another user on the waitlist to give them access
 func (s *SDK) PostInviteFromWaitlist(ctx context.Context, request operations.PostInviteFromWaitlistRequest) (*operations.PostInviteFromWaitlistResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/invite_from_waitlist"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1029,7 +1080,7 @@ func (s *SDK) PostInviteFromWaitlist(ctx context.Context, request operations.Pos
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1050,8 +1101,9 @@ func (s *SDK) PostInviteFromWaitlist(ctx context.Context, request operations.Pos
 	return res, nil
 }
 
+// PostInviteToApp - invite a user to the app, using one of your invites
 func (s *SDK) PostInviteToApp(ctx context.Context, request operations.PostInviteToAppRequest) (*operations.PostInviteToAppResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/invite_to_app"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1066,7 +1118,7 @@ func (s *SDK) PostInviteToApp(ctx context.Context, request operations.PostInvite
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1087,8 +1139,9 @@ func (s *SDK) PostInviteToApp(ctx context.Context, request operations.PostInvite
 	return res, nil
 }
 
+// PostJoinChannel - join a channel.
 func (s *SDK) PostJoinChannel(ctx context.Context, request operations.PostJoinChannelRequest) (*operations.PostJoinChannelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/join_channel"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1103,7 +1156,7 @@ func (s *SDK) PostJoinChannel(ctx context.Context, request operations.PostJoinCh
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1125,8 +1178,9 @@ func (s *SDK) PostJoinChannel(ctx context.Context, request operations.PostJoinCh
 	return res, nil
 }
 
+// PostLeaveChannel - leave a channel.
 func (s *SDK) PostLeaveChannel(ctx context.Context, request operations.PostLeaveChannelRequest) (*operations.PostLeaveChannelResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/leave_channel"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1141,7 +1195,7 @@ func (s *SDK) PostLeaveChannel(ctx context.Context, request operations.PostLeave
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1162,8 +1216,9 @@ func (s *SDK) PostLeaveChannel(ctx context.Context, request operations.PostLeave
 	return res, nil
 }
 
+// PostMe - gets user
 func (s *SDK) PostMe(ctx context.Context, request operations.PostMeRequest) (*operations.PostMeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/me"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1178,7 +1233,7 @@ func (s *SDK) PostMe(ctx context.Context, request operations.PostMeRequest) (*op
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1200,8 +1255,9 @@ func (s *SDK) PostMe(ctx context.Context, request operations.PostMeRequest) (*op
 	return res, nil
 }
 
+// PostRecordActionTrails - analytics
 func (s *SDK) PostRecordActionTrails(ctx context.Context, request operations.PostRecordActionTrailsRequest) (*operations.PostRecordActionTrailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/record_action_trails"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1216,7 +1272,7 @@ func (s *SDK) PostRecordActionTrails(ctx context.Context, request operations.Pos
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1237,8 +1293,9 @@ func (s *SDK) PostRecordActionTrails(ctx context.Context, request operations.Pos
 	return res, nil
 }
 
+// PostRefreshToken - gets an access_token from a refresh_token.
 func (s *SDK) PostRefreshToken(ctx context.Context, request operations.PostRefreshTokenRequest) (*operations.PostRefreshTokenResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/refresh_token"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1253,7 +1310,7 @@ func (s *SDK) PostRefreshToken(ctx context.Context, request operations.PostRefre
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1275,8 +1332,9 @@ func (s *SDK) PostRefreshToken(ctx context.Context, request operations.PostRefre
 	return res, nil
 }
 
+// PostResendPhoneNumberAuth - Resend phone number auth.
 func (s *SDK) PostResendPhoneNumberAuth(ctx context.Context, request operations.PostResendPhoneNumberAuthRequest) (*operations.PostResendPhoneNumberAuthResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/resend_phone_number_auth"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1291,7 +1349,7 @@ func (s *SDK) PostResendPhoneNumberAuth(ctx context.Context, request operations.
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1312,8 +1370,9 @@ func (s *SDK) PostResendPhoneNumberAuth(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostSearchClubs - search clubs.
 func (s *SDK) PostSearchClubs(ctx context.Context, request operations.PostSearchClubsRequest) (*operations.PostSearchClubsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/search_clubs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1328,7 +1387,7 @@ func (s *SDK) PostSearchClubs(ctx context.Context, request operations.PostSearch
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1349,8 +1408,9 @@ func (s *SDK) PostSearchClubs(ctx context.Context, request operations.PostSearch
 	return res, nil
 }
 
+// PostSearchUsers - search for users
 func (s *SDK) PostSearchUsers(ctx context.Context, request operations.PostSearchUsersRequest) (*operations.PostSearchUsersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/search_users"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1365,7 +1425,7 @@ func (s *SDK) PostSearchUsers(ctx context.Context, request operations.PostSearch
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1386,8 +1446,9 @@ func (s *SDK) PostSearchUsers(ctx context.Context, request operations.PostSearch
 	return res, nil
 }
 
+// PostStartPhoneNumberAuth - Starts phone number auth.
 func (s *SDK) PostStartPhoneNumberAuth(ctx context.Context, request operations.PostStartPhoneNumberAuthRequest) (*operations.PostStartPhoneNumberAuthResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/start_phone_number_auth"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1402,7 +1463,7 @@ func (s *SDK) PostStartPhoneNumberAuth(ctx context.Context, request operations.P
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1423,8 +1484,9 @@ func (s *SDK) PostStartPhoneNumberAuth(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostUpdateNotifications - updates notification during signup.
 func (s *SDK) PostUpdateNotifications(ctx context.Context, request operations.PostUpdateNotificationsRequest) (*operations.PostUpdateNotificationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/update_notifications"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1439,7 +1501,7 @@ func (s *SDK) PostUpdateNotifications(ctx context.Context, request operations.Po
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1460,8 +1522,9 @@ func (s *SDK) PostUpdateNotifications(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostUpdateUsername - edits username.
 func (s *SDK) PostUpdateUsername(ctx context.Context, request operations.PostUpdateUsernameRequest) (*operations.PostUpdateUsernameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/update_username"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1476,7 +1539,7 @@ func (s *SDK) PostUpdateUsername(ctx context.Context, request operations.PostUpd
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

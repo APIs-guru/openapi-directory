@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InspectorEventEnum } from "./inspectoreventenum";
+
 
 
 // EventSubscription
@@ -7,9 +8,9 @@ import { InspectorEventEnum } from "./inspectoreventenum";
  * This data type is used in the <a>Subscription</a> data type.
 **/
 export class EventSubscription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=event" })
+  @SpeakeasyMetadata({ data: "json, name=event" })
   event: InspectorEventEnum;
 
-  @Metadata({ data: "json, name=subscribedAt" })
+  @SpeakeasyMetadata({ data: "json, name=subscribedAt" })
   subscribedAt: Date;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ListGeofenceCollectionsResponseEntry
+// Contains the geofence collection details.
 type ListGeofenceCollectionsResponseEntry struct {
 	CollectionName        string          `json:"CollectionName"`
 	CreateTime            time.Time       `json:"CreateTime"`

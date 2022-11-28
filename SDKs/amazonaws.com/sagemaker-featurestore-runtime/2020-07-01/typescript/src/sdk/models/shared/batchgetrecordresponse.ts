@@ -1,17 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchGetRecordError } from "./batchgetrecorderror";
 import { BatchGetRecordResultDetail } from "./batchgetrecordresultdetail";
 import { BatchGetRecordIdentifier } from "./batchgetrecordidentifier";
 
 
+
 export class BatchGetRecordResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Errors", elemType: shared.BatchGetRecordError })
+  @SpeakeasyMetadata({ data: "json, name=Errors", elemType: BatchGetRecordError })
   errors: BatchGetRecordError[];
 
-  @Metadata({ data: "json, name=Records", elemType: shared.BatchGetRecordResultDetail })
+  @SpeakeasyMetadata({ data: "json, name=Records", elemType: BatchGetRecordResultDetail })
   records: BatchGetRecordResultDetail[];
 
-  @Metadata({ data: "json, name=UnprocessedIdentifiers", elemType: shared.BatchGetRecordIdentifier })
+  @SpeakeasyMetadata({ data: "json, name=UnprocessedIdentifiers", elemType: BatchGetRecordIdentifier })
   unprocessedIdentifiers: BatchGetRecordIdentifier[];
 }

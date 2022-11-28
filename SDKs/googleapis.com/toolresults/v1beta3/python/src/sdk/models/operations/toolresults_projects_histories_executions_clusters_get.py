@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsClustersGetPathParams:
-    cluster_id: str = field(default=None, metadata={'path_param': { 'field_name': 'clusterId', 'style': 'simple', 'explode': False }})
-    execution_id: str = field(default=None, metadata={'path_param': { 'field_name': 'executionId', 'style': 'simple', 'explode': False }})
-    history_id: str = field(default=None, metadata={'path_param': { 'field_name': 'historyId', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    cluster_id: str = field(metadata={'path_param': { 'field_name': 'clusterId', 'style': 'simple', 'explode': False }})
+    execution_id: str = field(metadata={'path_param': { 'field_name': 'executionId', 'style': 'simple', 'explode': False }})
+    history_id: str = field(metadata={'path_param': { 'field_name': 'historyId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class ToolresultsProjectsHistoriesExecutionsClustersGetQueryParams:
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsClustersGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsClustersGetRequest:
-    path_params: ToolresultsProjectsHistoriesExecutionsClustersGetPathParams = field(default=None)
-    query_params: ToolresultsProjectsHistoriesExecutionsClustersGetQueryParams = field(default=None)
-    security: ToolresultsProjectsHistoriesExecutionsClustersGetSecurity = field(default=None)
+    path_params: ToolresultsProjectsHistoriesExecutionsClustersGetPathParams = field()
+    query_params: ToolresultsProjectsHistoriesExecutionsClustersGetQueryParams = field()
+    security: ToolresultsProjectsHistoriesExecutionsClustersGetSecurity = field()
     
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsClustersGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     screenshot_cluster: Optional[shared.ScreenshotCluster] = field(default=None)
-    status_code: int = field(default=None)
     

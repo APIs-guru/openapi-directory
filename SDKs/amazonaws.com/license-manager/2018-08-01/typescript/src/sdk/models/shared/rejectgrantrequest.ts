@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RejectGrantRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GrantArn" })
+  @SpeakeasyMetadata({ data: "json, name=GrantArn" })
   grantArn: string;
 }

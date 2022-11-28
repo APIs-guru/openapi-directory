@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetHighlightsByCategoryPathParams = /** @class */ (function (_super) {
     __extends(GetHighlightsByCategoryPathParams, _super);
@@ -30,7 +30,7 @@ var GetHighlightsByCategoryPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=category" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=category" }),
         __metadata("design:type", String)
     ], GetHighlightsByCategoryPathParams.prototype, "category", void 0);
     return GetHighlightsByCategoryPathParams;
@@ -42,19 +42,19 @@ var GetHighlightsByCategoryQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=availability" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability" }),
         __metadata("design:type", String)
     ], GetHighlightsByCategoryQueryParams.prototype, "availability", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lang" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" }),
         __metadata("design:type", String)
     ], GetHighlightsByCategoryQueryParams.prototype, "lang", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=mixin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mixin" }),
         __metadata("design:type", Array)
     ], GetHighlightsByCategoryQueryParams.prototype, "mixin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rights" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rights" }),
         __metadata("design:type", String)
     ], GetHighlightsByCategoryQueryParams.prototype, "rights", void 0);
     return GetHighlightsByCategoryQueryParams;
@@ -66,11 +66,11 @@ var GetHighlightsByCategoryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetHighlightsByCategoryPathParams)
     ], GetHighlightsByCategoryRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetHighlightsByCategoryQueryParams)
     ], GetHighlightsByCategoryRequest.prototype, "queryParams", void 0);
     return GetHighlightsByCategoryRequest;
@@ -82,15 +82,15 @@ var GetHighlightsByCategoryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetHighlightsByCategoryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetHighlightsByCategoryResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetHighlightsByCategoryResponse.prototype, "ibl", void 0);
     return GetHighlightsByCategoryResponse;

@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,27 +22,27 @@ class CreateMissionProfileHeaders:
 @dataclass_json
 @dataclass
 class CreateMissionProfileRequestBody:
-    contact_post_pass_duration_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contactPostPassDurationSeconds' }})
-    contact_pre_pass_duration_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contactPrePassDurationSeconds' }})
-    dataflow_edges: List[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataflowEdges' }})
-    minimum_viable_contact_duration_seconds: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minimumViableContactDurationSeconds' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    tracking_config_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trackingConfigArn' }})
+    dataflow_edges: List[List[str]] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataflowEdges') }})
+    minimum_viable_contact_duration_seconds: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('minimumViableContactDurationSeconds') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    tracking_config_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('trackingConfigArn') }})
+    contact_post_pass_duration_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contactPostPassDurationSeconds') }})
+    contact_pre_pass_duration_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contactPrePassDurationSeconds') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateMissionProfileRequest:
-    headers: CreateMissionProfileHeaders = field(default=None)
-    request: CreateMissionProfileRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateMissionProfileHeaders = field()
+    request: CreateMissionProfileRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateMissionProfileResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dependency_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     mission_profile_id_response: Optional[shared.MissionProfileIDResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

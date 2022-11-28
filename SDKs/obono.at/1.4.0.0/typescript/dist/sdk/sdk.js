@@ -10,16 +10,11 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import axios from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { GetHeadersFromResponse } from "../internal/utils/headers";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
-var Servers = [
+export var ServerList = [
     "https://obono.at/api/v1",
 ];
 export function WithServerURL(serverURL, params) {
@@ -27,12 +22,12 @@ export function WithServerURL(serverURL, params) {
         if (params != null) {
             serverURL = utils.ReplaceParameters(serverURL, params);
         }
-        sdk.serverURL = serverURL;
+        sdk._serverURL = serverURL;
     };
 }
 export function WithClient(client) {
     return function (sdk) {
-        sdk.defaultClient = client;
+        sdk._defaultClient = client;
     };
 }
 export function WithSecurity(security) {
@@ -40,7 +35,7 @@ export function WithSecurity(security) {
         security = new Security(security);
     }
     return function (sdk) {
-        sdk.security = security;
+        sdk._security = security;
     };
 }
 var SDK = /** @class */ (function () {
@@ -50,41 +45,45 @@ var SDK = /** @class */ (function () {
             opts[_i] = arguments[_i];
         }
         var _this = this;
+        this._language = "typescript";
+        this._sdkVersion = "0.0.1";
+        this._genVersion = "internal";
         opts.forEach(function (o) { return o(_this); });
-        if (this.serverURL == "") {
-            this.serverURL = Servers[0];
+        if (this._serverURL == "") {
+            this._serverURL = ServerList[0];
         }
-        if (!this.defaultClient) {
-            this.defaultClient = axios.create({ baseURL: this.serverURL });
+        if (!this._defaultClient) {
+            this._defaultClient = axios.create({ baseURL: this._serverURL });
         }
-        if (!this.securityClient) {
-            if (this.security) {
-                this.securityClient = CreateSecurityClient(this.defaultClient, this.security);
+        if (!this._securityClient) {
+            if (this._security) {
+                this._securityClient = utils.CreateSecurityClient(this._defaultClient, this._security);
             }
             else {
-                this.securityClient = this.defaultClient;
+                this._securityClient = this._defaultClient;
             }
         }
     }
-    // GetAuth - Request a JWT access token using your obono username and password.
-    SDK.prototype.GetAuth = function (req, config) {
+    /**
+     * getAuth - Request a JWT access token using your obono username and password.
+    **/
+    SDK.prototype.getAuth = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetAuthRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/auth";
-        var client = this.securityClient;
+        var client = this._securityClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.authResult = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -93,272 +92,266 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // GetBelegeBelegUuid - Retrieves a particular `Beleg` from the "Datenerfassungsprotokoll".
-    SDK.prototype.GetBelegeBelegUuid = function (req, config) {
+    /**
+     * getBelegeBelegUuid - Retrieves a particular `Beleg` from the "Datenerfassungsprotokoll".
+    **/
+    SDK.prototype.getBelegeBelegUuid = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetBelegeBelegUuidRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/belege/{belegUuid}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.beleg = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetExportCsvRegistrierkassenRegistrierkasseUuidBelege = function (req, config) {
+    SDK.prototype.getExportCsvRegistrierkassenRegistrierkasseUuidBelege = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetExportCsvRegistrierkassenRegistrierkasseUuidBelegeRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/export/csv/registrierkassen/{registrierkasseUuid}/belege", req.pathParams);
-        var client = this.securityClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetExportDep131RegistrierkassenRegistrierkasseUuidBelege = function (req, config) {
+    SDK.prototype.getExportDep131RegistrierkassenRegistrierkasseUuidBelege = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetExportDep131RegistrierkassenRegistrierkasseUuidBelegeRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/export/dep131/registrierkassen/{registrierkasseUuid}/belege", req.pathParams);
-        var client = this.securityClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetExportDep7RegistrierkassenRegistrierkasseUuidBelege = function (req, config) {
+    SDK.prototype.getExportDep7RegistrierkassenRegistrierkasseUuidBelege = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetExportDep7RegistrierkassenRegistrierkasseUuidBelegeRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/export/dep7/registrierkassen/{registrierkasseUuid}/belege", req.pathParams);
-        var client = this.securityClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetExportGobdRegistrierkassenRegistrierkasseUuid = function (req, config) {
+    SDK.prototype.getExportGobdRegistrierkassenRegistrierkasseUuid = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetExportGobdRegistrierkassenRegistrierkasseUuidRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/export/gobd/registrierkassen/{registrierkasseUuid}", req.pathParams);
-        var client = this.securityClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetExportHtmlBelegeBelegUuid = function (req, config) {
+    SDK.prototype.getExportHtmlBelegeBelegUuid = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetExportHtmlBelegeBelegUuidRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/export/html/belege/{belegUuid}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetExportPdfBelegeBelegUuid = function (req, config) {
+    SDK.prototype.getExportPdfBelegeBelegUuid = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetExportPdfBelegeBelegUuidRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/export/pdf/belege/{belegUuid}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetExportQrBelegeBelegUuid = function (req, config) {
+    SDK.prototype.getExportQrBelegeBelegUuid = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetExportQrBelegeBelegUuidRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/export/qr/belege/{belegUuid}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetExportThermalPrintBelegeBelegUuid = function (req, config) {
+    SDK.prototype.getExportThermalPrintBelegeBelegUuid = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetExportThermalPrintBelegeBelegUuidRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/export/thermal-print/belege/{belegUuid}", req.pathParams);
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    SDK.prototype.GetExportXlsRegistrierkassenRegistrierkasseUuidBelege = function (req, config) {
+    SDK.prototype.getExportXlsRegistrierkassenRegistrierkasseUuidBelege = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetExportXlsRegistrierkassenRegistrierkasseUuidBelegeRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/export/xls/registrierkassen/{registrierkasseUuid}/belege", req.pathParams);
-        var client = this.securityClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // AddBeleg - Signs a receipt and stores it in the "Datenerfassungsprotokoll".
-    SDK.prototype.AddBeleg = function (req, config) {
+    /**
+     * addBeleg - Signs a receipt and stores it in the "Datenerfassungsprotokoll".
+    **/
+    SDK.prototype.addBeleg = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.AddBelegRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/registrierkassen/{registrierkasseUuid}/belege/{belegUuid}", req.pathParams);
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
+        var client = this._securityClient;
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
         var body;
         if (reqBody instanceof FormData)
@@ -368,51 +361,52 @@ var SDK = /** @class */ (function () {
         if (body == null || Object.keys(body).length === 0)
             throw new Error("request body is required");
         return client
-            .put(url, body, __assign({ headers: headers }, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "put", headers: headers, data: body }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
-            var res = { statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers) };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 201:
+            var res = { statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers) };
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 201:
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 403:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 403:
                     break;
-                case 409:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 409:
                     break;
-                case 415:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 415:
                     break;
-                case 429:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 429:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // CreateAbschluss - Generates an `Abschlussbeleg`.
-    SDK.prototype.CreateAbschluss = function (req, config) {
+    /**
+     * createAbschluss - Generates an `Abschlussbeleg`.
+    **/
+    SDK.prototype.createAbschluss = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.CreateAbschlussRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/registrierkassen/{registrierkasseUuid}/abschluss", req.pathParams);
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.securityClient;
+        var client = this._securityClient;
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
         var body;
         if (reqBody instanceof FormData)
@@ -422,71 +416,72 @@ var SDK = /** @class */ (function () {
         if (body == null || Object.keys(body).length === 0)
             throw new Error("request body is required");
         return client
-            .post(url, body, __assign({ headers: headers }, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
-            var res = { statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers) };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 201:
+            var res = { statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers) };
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 201:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetBeleg - Retrieves a particular `Beleg` from the "Datenerfassungsprotokoll".
-    SDK.prototype.GetBeleg = function (req, config) {
+    /**
+     * getBeleg - Retrieves a particular `Beleg` from the "Datenerfassungsprotokoll".
+    **/
+    SDK.prototype.getBeleg = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetBelegRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/registrierkassen/{registrierkasseUuid}/belege/{belegUuid}", req.pathParams);
-        var client = this.securityClient;
+        var client = this._securityClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.beleg = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetBelege - Retrieves the `Beleg` collection from the "Datenerfassungsprotokoll".
-    SDK.prototype.GetBelege = function (req, config) {
+    /**
+     * getBelege - Retrieves the `Beleg` collection from the "Datenerfassungsprotokoll".
+    **/
+    SDK.prototype.getBelege = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetBelegeRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/registrierkassen/{registrierkasseUuid}/belege", req.pathParams);
-        var client = this.securityClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.belege = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -495,51 +490,53 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // GetDep - Generates a DEP file.
-    SDK.prototype.GetDep = function (req, config) {
+    /**
+     * getDep - Generates a DEP file.
+    **/
+    SDK.prototype.getDep = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetDepRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/registrierkassen/{registrierkasseUuid}/dep", req.pathParams);
-        var client = this.securityClient;
+        var client = this._securityClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetMonatsbelege - Returns a list of `Monatsbelege`.
-    SDK.prototype.GetMonatsbelege = function (req, config) {
+    /**
+     * getMonatsbelege - Returns a list of `Monatsbelege`.
+    **/
+    SDK.prototype.getMonatsbelege = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetMonatsbelegeRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/registrierkassen/{registrierkasseUuid}/monatsbelege", req.pathParams);
-        var client = this.securityClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._securityClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.monatsbelegs = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -548,29 +545,30 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // GetRegistrierkasse - Returns information about a particular `Registrierkasse`.
-    SDK.prototype.GetRegistrierkasse = function (req, config) {
+    /**
+     * getRegistrierkasse - Returns information about a particular `Registrierkasse`.
+    **/
+    SDK.prototype.getRegistrierkasse = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetRegistrierkasseRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/registrierkassen/{registrierkasseUuid}", req.pathParams);
-        var client = this.securityClient;
+        var client = this._securityClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.registrierkasse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
             }
             return res;

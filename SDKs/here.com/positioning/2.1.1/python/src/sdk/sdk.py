@@ -1,8 +1,10 @@
-import warnings
+
+
 import requests
-from typing import Optional
-from sdk.models import operations, shared
+from sdk.models import shared
 from . import utils
+
+from .api_information import APIInformation
 
 
 SERVERS = [
@@ -12,59 +14,55 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+    api_information: APIInformation
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        self._init_sdks()
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        self._init_sdks()
     
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        self._init_sdks()
+    
+
     def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
-
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        self._init_sdks()
     
-    def get_api_version(self) -> operations.GetAPIVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/version"
-
-        client = self.client
-
-        r = client.request("GET", url)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetAPIVersionResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.APIVersion])
-                res.api_version = out
-
-        return res
-
     
-    def get_health(self) -> operations.GetHealthResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/health"
-
-        client = self.client
-
-        r = client.request("GET", url)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetHealthResponse(status_code=r.status_code, content_type=content_type)
+    def _init_sdks(self):
         
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.APIHealthStatus])
-                res.api_health_status = out
-
-        return res
-
+        self.api_information = APIInformation(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+    
     

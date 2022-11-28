@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,26 +28,26 @@ class ListWebsiteAuthorizationProvidersHeaders:
 @dataclass_json
 @dataclass
 class ListWebsiteAuthorizationProvidersRequestBody:
-    fleet_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FleetArn' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    fleet_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FleetArn') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     
 
 @dataclass
 class ListWebsiteAuthorizationProvidersRequest:
-    query_params: ListWebsiteAuthorizationProvidersQueryParams = field(default=None)
-    headers: ListWebsiteAuthorizationProvidersHeaders = field(default=None)
-    request: ListWebsiteAuthorizationProvidersRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListWebsiteAuthorizationProvidersHeaders = field()
+    query_params: ListWebsiteAuthorizationProvidersQueryParams = field()
+    request: ListWebsiteAuthorizationProvidersRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListWebsiteAuthorizationProvidersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_error_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_website_authorization_providers_response: Optional[shared.ListWebsiteAuthorizationProvidersResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

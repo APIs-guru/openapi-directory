@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AddHeldAccountResult } from "./addheldaccountresult";
 /**
  * Response for batch create held accounts.

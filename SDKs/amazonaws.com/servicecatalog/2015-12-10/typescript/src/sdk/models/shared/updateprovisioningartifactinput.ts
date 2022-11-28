@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisioningArtifactGuidanceEnum } from "./provisioningartifactguidanceenum";
 
 
+
 export class UpdateProvisioningArtifactInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcceptLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=AcceptLanguage" })
   acceptLanguage?: string;
 
-  @Metadata({ data: "json, name=Active" })
+  @SpeakeasyMetadata({ data: "json, name=Active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=Guidance" })
+  @SpeakeasyMetadata({ data: "json, name=Guidance" })
   guidance?: ProvisioningArtifactGuidanceEnum;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ProductId" })
+  @SpeakeasyMetadata({ data: "json, name=ProductId" })
   productId: string;
 
-  @Metadata({ data: "json, name=ProvisioningArtifactId" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactId" })
   provisioningArtifactId: string;
 }

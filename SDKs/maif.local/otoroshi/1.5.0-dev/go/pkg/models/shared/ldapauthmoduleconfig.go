@@ -1,5 +1,7 @@
 package shared
 
+// LdapAuthModuleConfig
+// Settings to authenticate users using a generic OAuth2 provider
 type LdapAuthModuleConfig struct {
 	AdminPassword     string  `json:"adminPassword"`
 	AdminUsername     string  `json:"adminUsername"`

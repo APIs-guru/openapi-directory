@@ -1,5 +1,7 @@
 package shared
 
+// Service
+// An otoroshi service descriptor. Represent a forward HTTP call on a domain to another location with some optional api management mecanism
 type Service struct {
 	Canary                     *Canary              `json:"Canary,omitempty"`
 	AdditionalHeaders          map[string]string    `json:"additionalHeaders,omitempty"`

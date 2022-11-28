@@ -1,24 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CopyTemplateQueryParams:
+    template_id: int = field(metadata={'query_param': { 'field_name': 'templateId', 'style': 'form', 'explode': True }})
     name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'name', 'style': 'form', 'explode': True }})
-    template_id: int = field(default=None, metadata={'query_param': { 'field_name': 'templateId', 'style': 'form', 'explode': True }})
-    
-
-@dataclass
-class CopyTemplateRequest:
-    query_params: CopyTemplateQueryParams = field(default=None)
     
 
 @dataclass_json
 @dataclass
 class CopyTemplate200ApplicationJSON:
-    response: Optional[shared.TemplateDefinition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'response' }})
+    response: Optional[shared.TemplateDefinition] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('response') }})
     
 class CopyTemplate401ApplicationJSONErrorEnum(str, Enum):
     AUTHENTICATION_FAILED_REQUEST_EXPIRED = "Authentication failed: request expired"
@@ -36,8 +33,8 @@ class CopyTemplate401ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CopyTemplate401ApplicationJSON:
-    error: Optional[CopyTemplate401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[CopyTemplate401ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 class CopyTemplate403ApplicationJSONErrorEnum(str, Enum):
     YOUR_ACCOUNT_HAS_EXCEEDED_THE_MONTHLY_DOCUMENT_GENERATION_LIMIT_ = "Your account has exceeded the monthly document generation limit."
@@ -46,8 +43,8 @@ class CopyTemplate403ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CopyTemplate403ApplicationJSON:
-    error: Optional[CopyTemplate403ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[CopyTemplate403ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 class CopyTemplate404ApplicationJSONErrorEnum(str, Enum):
     ENTITY_NOT_FOUND = "Entity not found"
@@ -58,8 +55,8 @@ class CopyTemplate404ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CopyTemplate404ApplicationJSON:
-    error: Optional[CopyTemplate404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[CopyTemplate404ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 class CopyTemplate422ApplicationJSONErrorEnum(str, Enum):
     UNABLE_TO_PARSE_JSON_PLEASE_CHECK_FORMATTING = "Unable to parse JSON, please check formatting"
@@ -71,21 +68,26 @@ class CopyTemplate422ApplicationJSONErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CopyTemplate422ApplicationJSON:
-    error: Optional[CopyTemplate422ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[CopyTemplate422ApplicationJSONErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 
 @dataclass_json
 @dataclass
 class CopyTemplate500ApplicationJSON:
-    error: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    error: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    status: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    
+
+@dataclass
+class CopyTemplateRequest:
+    query_params: CopyTemplateQueryParams = field()
     
 
 @dataclass
 class CopyTemplateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     copy_template_200_application_json_object: Optional[CopyTemplate200ApplicationJSON] = field(default=None)
     copy_template_401_application_json_object: Optional[CopyTemplate401ApplicationJSON] = field(default=None)
     copy_template_403_application_json_object: Optional[CopyTemplate403ApplicationJSON] = field(default=None)

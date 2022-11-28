@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudDataplexV1ZoneResourceSpecLocationTypeEnum(str, Enum):
     LOCATION_TYPE_UNSPECIFIED = "LOCATION_TYPE_UNSPECIFIED"
@@ -11,5 +13,9 @@ class GoogleCloudDataplexV1ZoneResourceSpecLocationTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDataplexV1ZoneResourceSpec:
-    location_type: Optional[GoogleCloudDataplexV1ZoneResourceSpecLocationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locationType' }})
+    r"""GoogleCloudDataplexV1ZoneResourceSpec
+    Settings for resources attached as assets within a zone.
+    """
+    
+    location_type: Optional[GoogleCloudDataplexV1ZoneResourceSpecLocationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('locationType') }})
     

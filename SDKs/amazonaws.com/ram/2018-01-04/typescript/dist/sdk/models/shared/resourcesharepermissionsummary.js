@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ResourceSharePermissionSummary
 /**
  * Information about a permission that is associated with a resource share.
@@ -33,39 +33,39 @@ var ResourceSharePermissionSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], ResourceSharePermissionSummary.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], ResourceSharePermissionSummary.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=defaultVersion" }),
+        SpeakeasyMetadata({ data: "json, name=defaultVersion" }),
         __metadata("design:type", Boolean)
     ], ResourceSharePermissionSummary.prototype, "defaultVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=isResourceTypeDefault" }),
+        SpeakeasyMetadata({ data: "json, name=isResourceTypeDefault" }),
         __metadata("design:type", Boolean)
     ], ResourceSharePermissionSummary.prototype, "isResourceTypeDefault", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedTime" }),
         __metadata("design:type", Date)
     ], ResourceSharePermissionSummary.prototype, "lastUpdatedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ResourceSharePermissionSummary.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceType" }),
+        SpeakeasyMetadata({ data: "json, name=resourceType" }),
         __metadata("design:type", String)
     ], ResourceSharePermissionSummary.prototype, "resourceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], ResourceSharePermissionSummary.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], ResourceSharePermissionSummary.prototype, "version", void 0);
     return ResourceSharePermissionSummary;

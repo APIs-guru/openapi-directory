@@ -1,6 +1,7 @@
 
 
+
 export enum ExitBehaviorEnum {
-    Fail = "FAIL"
-,    Restart = "RESTART"
+    Fail = "FAIL",
+    Restart = "RESTART"
 }

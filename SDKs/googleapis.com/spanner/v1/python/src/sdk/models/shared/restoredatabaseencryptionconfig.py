@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class RestoreDatabaseEncryptionConfigEncryptionTypeEnum(str, Enum):
     ENCRYPTION_TYPE_UNSPECIFIED = "ENCRYPTION_TYPE_UNSPECIFIED"
@@ -12,6 +14,10 @@ class RestoreDatabaseEncryptionConfigEncryptionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RestoreDatabaseEncryptionConfig:
-    encryption_type: Optional[RestoreDatabaseEncryptionConfigEncryptionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'encryptionType' }})
-    kms_key_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kmsKeyName' }})
+    r"""RestoreDatabaseEncryptionConfig
+    Encryption configuration for the restored database.
+    """
+    
+    encryption_type: Optional[RestoreDatabaseEncryptionConfigEncryptionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('encryptionType') }})
+    kms_key_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kmsKeyName') }})
     

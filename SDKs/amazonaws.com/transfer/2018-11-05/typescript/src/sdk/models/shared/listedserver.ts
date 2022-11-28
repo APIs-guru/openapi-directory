@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainEnum } from "./domainenum";
 import { EndpointTypeEnum } from "./endpointtypeenum";
 import { IdentityProviderTypeEnum } from "./identityprovidertypeenum";
 import { StateEnum } from "./stateenum";
+
 
 
 // ListedServer
@@ -10,27 +11,27 @@ import { StateEnum } from "./stateenum";
  * Returns properties of a file transfer protocol-enabled server that was specified.
 **/
 export class ListedServer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=Domain" })
+  @SpeakeasyMetadata({ data: "json, name=Domain" })
   domain?: DomainEnum;
 
-  @Metadata({ data: "json, name=EndpointType" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointType" })
   endpointType?: EndpointTypeEnum;
 
-  @Metadata({ data: "json, name=IdentityProviderType" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityProviderType" })
   identityProviderType?: IdentityProviderTypeEnum;
 
-  @Metadata({ data: "json, name=LoggingRole" })
+  @SpeakeasyMetadata({ data: "json, name=LoggingRole" })
   loggingRole?: string;
 
-  @Metadata({ data: "json, name=ServerId" })
+  @SpeakeasyMetadata({ data: "json, name=ServerId" })
   serverId?: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: StateEnum;
 
-  @Metadata({ data: "json, name=UserCount" })
+  @SpeakeasyMetadata({ data: "json, name=UserCount" })
   userCount?: number;
 }

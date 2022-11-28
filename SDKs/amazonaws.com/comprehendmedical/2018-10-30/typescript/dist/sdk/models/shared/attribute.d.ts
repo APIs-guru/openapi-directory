@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EntityTypeEnum } from "./entitytypeenum";
 import { RelationshipTypeEnum } from "./relationshiptypeenum";
 import { Trait } from "./trait";

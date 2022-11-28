@@ -22,66 +22,66 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetBlockResponse = /** @class */ (function (_super) {
     __extends(GetBlockResponse, _super);
     function GetBlockResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bits" }),
+        SpeakeasyMetadata({ data: "json, name=bits" }),
         __metadata("design:type", String)
     ], GetBlockResponse.prototype, "bits", void 0);
     __decorate([
-        Metadata({ data: "json, name=confirmations" }),
+        SpeakeasyMetadata({ data: "json, name=confirmations" }),
         __metadata("design:type", Number)
     ], GetBlockResponse.prototype, "confirmations", void 0);
     __decorate([
-        Metadata({ data: "json, name=difficulty" }),
+        SpeakeasyMetadata({ data: "json, name=difficulty" }),
         __metadata("design:type", Number)
     ], GetBlockResponse.prototype, "difficulty", void 0);
     __decorate([
-        Metadata({ data: "json, name=hash" }),
+        SpeakeasyMetadata({ data: "json, name=hash" }),
         __metadata("design:type", String)
     ], GetBlockResponse.prototype, "hash", void 0);
     __decorate([
-        Metadata({ data: "json, name=height" }),
+        SpeakeasyMetadata({ data: "json, name=height" }),
         __metadata("design:type", Number)
     ], GetBlockResponse.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "json, name=merkleroot" }),
+        SpeakeasyMetadata({ data: "json, name=merkleroot" }),
         __metadata("design:type", String)
     ], GetBlockResponse.prototype, "merkleroot", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextblockhash" }),
+        SpeakeasyMetadata({ data: "json, name=nextblockhash" }),
         __metadata("design:type", String)
     ], GetBlockResponse.prototype, "nextblockhash", void 0);
     __decorate([
-        Metadata({ data: "json, name=nonce" }),
+        SpeakeasyMetadata({ data: "json, name=nonce" }),
         __metadata("design:type", Number)
     ], GetBlockResponse.prototype, "nonce", void 0);
     __decorate([
-        Metadata({ data: "json, name=previousblockhash" }),
+        SpeakeasyMetadata({ data: "json, name=previousblockhash" }),
         __metadata("design:type", String)
     ], GetBlockResponse.prototype, "previousblockhash", void 0);
     __decorate([
-        Metadata({ data: "json, name=reward" }),
+        SpeakeasyMetadata({ data: "json, name=reward" }),
         __metadata("design:type", Number)
     ], GetBlockResponse.prototype, "reward", void 0);
     __decorate([
-        Metadata({ data: "json, name=size" }),
+        SpeakeasyMetadata({ data: "json, name=size" }),
         __metadata("design:type", Number)
     ], GetBlockResponse.prototype, "size", void 0);
     __decorate([
-        Metadata({ data: "json, name=time" }),
+        SpeakeasyMetadata({ data: "json, name=time" }),
         __metadata("design:type", Number)
     ], GetBlockResponse.prototype, "time", void 0);
     __decorate([
-        Metadata({ data: "json, name=tx" }),
+        SpeakeasyMetadata({ data: "json, name=tx" }),
         __metadata("design:type", Array)
     ], GetBlockResponse.prototype, "tx", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", Number)
     ], GetBlockResponse.prototype, "version", void 0);
     return GetBlockResponse;

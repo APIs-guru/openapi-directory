@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class DeviceIntegrityDeviceRecognitionVerdictEnum(str, Enum):
     UNKNOWN = "UNKNOWN"
@@ -13,5 +15,9 @@ class DeviceIntegrityDeviceRecognitionVerdictEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DeviceIntegrity:
-    device_recognition_verdict: Optional[List[DeviceIntegrityDeviceRecognitionVerdictEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deviceRecognitionVerdict' }})
+    r"""DeviceIntegrity
+    Contains the device attestation information.
+    """
+    
+    device_recognition_verdict: Optional[List[DeviceIntegrityDeviceRecognitionVerdictEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deviceRecognitionVerdict') }})
     

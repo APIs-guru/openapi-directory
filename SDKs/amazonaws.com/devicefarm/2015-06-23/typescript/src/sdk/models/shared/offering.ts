@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DevicePlatformEnum } from "./deviceplatformenum";
 import { RecurringCharge } from "./recurringcharge";
 import { OfferingTypeEnum } from "./offeringtypeenum";
+
 
 
 // Offering
@@ -10,18 +10,18 @@ import { OfferingTypeEnum } from "./offeringtypeenum";
  * Represents the metadata of a device offering.
 **/
 export class Offering extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=platform" })
+  @SpeakeasyMetadata({ data: "json, name=platform" })
   platform?: DevicePlatformEnum;
 
-  @Metadata({ data: "json, name=recurringCharges", elemType: shared.RecurringCharge })
+  @SpeakeasyMetadata({ data: "json, name=recurringCharges", elemType: RecurringCharge })
   recurringCharges?: RecurringCharge[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: OfferingTypeEnum;
 }

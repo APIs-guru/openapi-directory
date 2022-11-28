@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // JobTemplateSummary
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object that contains information about the job template.
 **/
 export class JobTemplateSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=jobTemplateArn" })
+  @SpeakeasyMetadata({ data: "json, name=jobTemplateArn" })
   jobTemplateArn?: string;
 
-  @Metadata({ data: "json, name=jobTemplateId" })
+  @SpeakeasyMetadata({ data: "json, name=jobTemplateId" })
   jobTemplateId?: string;
 }

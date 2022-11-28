@@ -1,5 +1,7 @@
 package shared
 
+// PortfolioShareDetail
+// Information about the portfolio share.
 type PortfolioShareDetail struct {
 	Accepted        *bool                           `json:"Accepted,omitempty"`
 	PrincipalID     *string                         `json:"PrincipalId,omitempty"`

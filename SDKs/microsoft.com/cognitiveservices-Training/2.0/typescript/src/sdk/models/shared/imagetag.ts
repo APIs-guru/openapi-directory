@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ImageTag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=tagId" })
+  @SpeakeasyMetadata({ data: "json, name=tagId" })
   tagId?: string;
 
-  @Metadata({ data: "json, name=tagName" })
+  @SpeakeasyMetadata({ data: "json, name=tagName" })
   tagName?: string;
 }

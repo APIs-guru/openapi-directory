@@ -1,22 +1,18 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import {GetHeadersFromRequest} from "../internal/utils/headers";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "http://workspaces.{region}.amazonaws.com",
-  "https://workspaces.{region}.amazonaws.com",
-  "http://workspaces.{region}.amazonaws.com.cn",
-  "https://workspaces.{region}.amazonaws.com.cn",
+export const ServerList = [
+	"http://workspaces.{region}.amazonaws.com",
+	"https://workspaces.{region}.amazonaws.com",
+	"http://workspaces.{region}.amazonaws.com.cn",
+	"https://workspaces.{region}.amazonaws.com.cn",
 ] as const;
 
 export function WithServerURL(
@@ -27,13 +23,13 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
@@ -42,41 +38,48 @@ export function WithSecurity(security: Security): OptsFunc {
     security = new Security(security);
   }
   return (sdk: SDK) => {
-    sdk.security = security;
+    sdk._security = security;
   };
 }
 
-// SDK Documentation: https://docs.aws.amazon.com/workspaces/ - Amazon Web Services documentation
+/* SDK Documentation: https://docs.aws.amazon.com/workspaces/ - Amazon Web Services documentation*/
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  public _security?: Security;
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
+    if (!this._securityClient) {
+      if (this._security) {
+        this._securityClient = utils.CreateSecurityClient(
+          this._defaultClient,
+          this._security
         );
       } else {
-        this.securityClient = this.defaultClient;
+        this._securityClient = this._defaultClient;
       }
     }
+    
   }
   
-  // AssociateConnectionAlias - <p>Associates the specified connection alias with the specified directory to enable cross-Region redirection. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.</p> <note> <p>Before performing this operation, call <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html"> DescribeConnectionAliases</a> to make sure that the current state of the connection alias is <code>CREATED</code>.</p> </note>
-  AssociateConnectionAlias(
+  /**
+   * associateConnectionAlias - <p>Associates the specified connection alias with the specified directory to enable cross-Region redirection. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.</p> <note> <p>Before performing this operation, call <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html"> DescribeConnectionAliases</a> to make sure that the current state of the connection alias is <code>CREATED</code>.</p> </note>
+  **/
+  associateConnectionAlias(
     req: operations.AssociateConnectionAliasRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AssociateConnectionAliasResponse> {
@@ -84,70 +87,70 @@ export class SDK {
       req = new operations.AssociateConnectionAliasRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.AssociateConnectionAlias";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AssociateConnectionAliasResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AssociateConnectionAliasResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.associateConnectionAliasResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceAssociatedException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidResourceStateException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operationNotSupportedException = httpRes?.data;
             }
             break;
@@ -159,8 +162,10 @@ export class SDK {
   }
 
   
-  // AssociateIpGroups - Associates the specified IP access control group with the specified directory.
-  AssociateIpGroups(
+  /**
+   * associateIpGroups - Associates the specified IP access control group with the specified directory.
+  **/
+  associateIpGroups(
     req: operations.AssociateIpGroupsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AssociateIpGroupsResponse> {
@@ -168,70 +173,70 @@ export class SDK {
       req = new operations.AssociateIpGroupsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.AssociateIpGroups";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AssociateIpGroupsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AssociateIpGroupsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.associateIpGroupsResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceLimitExceededException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidResourceStateException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operationNotSupportedException = httpRes?.data;
             }
             break;
@@ -243,8 +248,10 @@ export class SDK {
   }
 
   
-  // AuthorizeIpRules - <p>Adds one or more rules to the specified IP access control group.</p> <p>This action gives users permission to access their WorkSpaces from the CIDR address ranges specified in the rules.</p>
-  AuthorizeIpRules(
+  /**
+   * authorizeIpRules - <p>Adds one or more rules to the specified IP access control group.</p> <p>This action gives users permission to access their WorkSpaces from the CIDR address ranges specified in the rules.</p>
+  **/
+  authorizeIpRules(
     req: operations.AuthorizeIpRulesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AuthorizeIpRulesResponse> {
@@ -252,65 +259,65 @@ export class SDK {
       req = new operations.AuthorizeIpRulesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.AuthorizeIpRules";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AuthorizeIpRulesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AuthorizeIpRulesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.authorizeIpRulesResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceLimitExceededException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidResourceStateException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -322,8 +329,10 @@ export class SDK {
   }
 
   
-  // CopyWorkspaceImage - <p>Copies the specified image from the specified Region to the current Region. For more information about copying images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/copy-custom-image.html"> Copy a Custom WorkSpaces Image</a>.</p> <note> <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p> <p>In the AWS GovCloud (US-West) Region, to copy images to and from other AWS Regions, contact AWS Support.</p> </note> <important> <p>Before copying a shared image, be sure to verify that it has been shared from the correct AWS account. To determine if an image has been shared and to see the AWS account ID that owns an image, use the <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html">DescribeWorkSpaceImages</a> and <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImagePermissions.html">DescribeWorkspaceImagePermissions</a> API operations. </p> </important>
-  CopyWorkspaceImage(
+  /**
+   * copyWorkspaceImage - <p>Copies the specified image from the specified Region to the current Region. For more information about copying images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/copy-custom-image.html"> Copy a Custom WorkSpaces Image</a>.</p> <note> <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p> <p>In the AWS GovCloud (US-West) Region, to copy images to and from other AWS Regions, contact AWS Support.</p> </note> <important> <p>Before copying a shared image, be sure to verify that it has been shared from the correct AWS account. To determine if an image has been shared and to see the AWS account ID that owns an image, use the <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html">DescribeWorkSpaceImages</a> and <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImagePermissions.html">DescribeWorkspaceImagePermissions</a> API operations. </p> </important>
+  **/
+  copyWorkspaceImage(
     req: operations.CopyWorkspaceImageRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CopyWorkspaceImageResponse> {
@@ -331,75 +340,75 @@ export class SDK {
       req = new operations.CopyWorkspaceImageRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.CopyWorkspaceImage";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CopyWorkspaceImageResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CopyWorkspaceImageResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.copyWorkspaceImageResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceLimitExceededException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceAlreadyExistsException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operationNotSupportedException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
@@ -411,8 +420,10 @@ export class SDK {
   }
 
   
-  // CreateConnectionAlias - Creates the specified connection alias for use with cross-Region redirection. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.
-  CreateConnectionAlias(
+  /**
+   * createConnectionAlias - Creates the specified connection alias for use with cross-Region redirection. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.
+  **/
+  createConnectionAlias(
     req: operations.CreateConnectionAliasRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateConnectionAliasResponse> {
@@ -420,70 +431,70 @@ export class SDK {
       req = new operations.CreateConnectionAliasRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.CreateConnectionAlias";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateConnectionAliasResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateConnectionAliasResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createConnectionAliasResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceAlreadyExistsException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceLimitExceededException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidResourceStateException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operationNotSupportedException = httpRes?.data;
             }
             break;
@@ -495,8 +506,10 @@ export class SDK {
   }
 
   
-  // CreateIpGroup - <p>Creates an IP access control group.</p> <p>An IP access control group provides you with the ability to control the IP addresses from which users are allowed to access their WorkSpaces. To specify the CIDR address ranges, add rules to your IP access control group and then associate the group with your directory. You can add rules when you create the group or at any time using <a>AuthorizeIpRules</a>.</p> <p>There is a default IP access control group associated with your directory. If you don't associate an IP access control group with your directory, the default group is used. The default group includes a default rule that allows users to access their WorkSpaces from anywhere. You cannot modify the default IP access control group for your directory.</p>
-  CreateIpGroup(
+  /**
+   * createIpGroup - <p>Creates an IP access control group.</p> <p>An IP access control group provides you with the ability to control the IP addresses from which users are allowed to access their WorkSpaces. To specify the CIDR address ranges, add rules to your IP access control group and then associate the group with your directory. You can add rules when you create the group or at any time using <a>AuthorizeIpRules</a>.</p> <p>There is a default IP access control group associated with your directory. If you don't associate an IP access control group with your directory, the default group is used. The default group includes a default rule that allows users to access their WorkSpaces from anywhere. You cannot modify the default IP access control group for your directory.</p>
+  **/
+  createIpGroup(
     req: operations.CreateIpGroupRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateIpGroupResponse> {
@@ -504,65 +517,65 @@ export class SDK {
       req = new operations.CreateIpGroupRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.CreateIpGroup";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateIpGroupResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateIpGroupResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createIpGroupResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceLimitExceededException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceAlreadyExistsException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceCreationFailedException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -574,8 +587,10 @@ export class SDK {
   }
 
   
-  // CreateTags - Creates the specified tags for the specified WorkSpaces resource.
-  CreateTags(
+  /**
+   * createTags - Creates the specified tags for the specified WorkSpaces resource.
+  **/
+  createTags(
     req: operations.CreateTagsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateTagsResponse> {
@@ -583,55 +598,55 @@ export class SDK {
       req = new operations.CreateTagsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.CreateTags";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateTagsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateTagsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createTagsResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceLimitExceededException = httpRes?.data;
             }
             break;
@@ -643,8 +658,10 @@ export class SDK {
   }
 
   
-  // CreateWorkspaceBundle - Creates the specified WorkSpace bundle. For more information about creating WorkSpace bundles, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/create-custom-bundle.html"> Create a Custom WorkSpaces Image and Bundle</a>.
-  CreateWorkspaceBundle(
+  /**
+   * createWorkspaceBundle - Creates the specified WorkSpace bundle. For more information about creating WorkSpace bundles, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/create-custom-bundle.html"> Create a Custom WorkSpaces Image and Bundle</a>.
+  **/
+  createWorkspaceBundle(
     req: operations.CreateWorkspaceBundleRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateWorkspaceBundleResponse> {
@@ -652,70 +669,70 @@ export class SDK {
       req = new operations.CreateWorkspaceBundleRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.CreateWorkspaceBundle";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateWorkspaceBundleResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateWorkspaceBundleResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createWorkspaceBundleResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceUnavailableException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceAlreadyExistsException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceLimitExceededException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -727,8 +744,10 @@ export class SDK {
   }
 
   
-  // CreateWorkspaces - <p>Creates one or more WorkSpaces.</p> <p>This operation is asynchronous and returns before the WorkSpaces are created.</p>
-  CreateWorkspaces(
+  /**
+   * createWorkspaces - <p>Creates one or more WorkSpaces.</p> <p>This operation is asynchronous and returns before the WorkSpaces are created.</p>
+  **/
+  createWorkspaces(
     req: operations.CreateWorkspacesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateWorkspacesResponse> {
@@ -736,50 +755,50 @@ export class SDK {
       req = new operations.CreateWorkspacesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.CreateWorkspaces";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateWorkspacesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateWorkspacesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createWorkspacesResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceLimitExceededException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
@@ -791,8 +810,10 @@ export class SDK {
   }
 
   
-  // DeleteConnectionAlias - <p>Deletes the specified connection alias. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.</p> <important> <p> <b>If you will no longer be using a fully qualified domain name (FQDN) as the registration code for your WorkSpaces users, you must take certain precautions to prevent potential security issues.</b> For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html#cross-region-redirection-security-considerations"> Security Considerations if You Stop Using Cross-Region Redirection</a>.</p> </important> <note> <p>To delete a connection alias that has been shared, the shared account must first disassociate the connection alias from any directories it has been associated with. Then you must unshare the connection alias from the account it has been shared with. You can delete a connection alias only after it is no longer shared with any accounts or associated with any directories.</p> </note>
-  DeleteConnectionAlias(
+  /**
+   * deleteConnectionAlias - <p>Deletes the specified connection alias. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.</p> <important> <p> <b>If you will no longer be using a fully qualified domain name (FQDN) as the registration code for your WorkSpaces users, you must take certain precautions to prevent potential security issues.</b> For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html#cross-region-redirection-security-considerations"> Security Considerations if You Stop Using Cross-Region Redirection</a>.</p> </important> <note> <p>To delete a connection alias that has been shared, the shared account must first disassociate the connection alias from any directories it has been associated with. Then you must unshare the connection alias from the account it has been shared with. You can delete a connection alias only after it is no longer shared with any accounts or associated with any directories.</p> </note>
+  **/
+  deleteConnectionAlias(
     req: operations.DeleteConnectionAliasRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteConnectionAliasResponse> {
@@ -800,70 +821,70 @@ export class SDK {
       req = new operations.DeleteConnectionAliasRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DeleteConnectionAlias";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteConnectionAliasResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteConnectionAliasResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteConnectionAliasResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceAssociatedException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidResourceStateException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operationNotSupportedException = httpRes?.data;
             }
             break;
@@ -875,8 +896,10 @@ export class SDK {
   }
 
   
-  // DeleteIpGroup - <p>Deletes the specified IP access control group.</p> <p>You cannot delete an IP access control group that is associated with a directory.</p>
-  DeleteIpGroup(
+  /**
+   * deleteIpGroup - <p>Deletes the specified IP access control group.</p> <p>You cannot delete an IP access control group that is associated with a directory.</p>
+  **/
+  deleteIpGroup(
     req: operations.DeleteIpGroupRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteIpGroupResponse> {
@@ -884,60 +907,60 @@ export class SDK {
       req = new operations.DeleteIpGroupRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DeleteIpGroup";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteIpGroupResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteIpGroupResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteIpGroupResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceAssociatedException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -949,8 +972,10 @@ export class SDK {
   }
 
   
-  // DeleteTags - Deletes the specified tags from the specified WorkSpaces resource.
-  DeleteTags(
+  /**
+   * deleteTags - Deletes the specified tags from the specified WorkSpaces resource.
+  **/
+  deleteTags(
     req: operations.DeleteTagsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteTagsResponse> {
@@ -958,50 +983,50 @@ export class SDK {
       req = new operations.DeleteTagsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DeleteTags";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteTagsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteTagsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteTagsResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
@@ -1013,8 +1038,10 @@ export class SDK {
   }
 
   
-  // DeleteWorkspaceBundle - Deletes the specified WorkSpace bundle. For more information about deleting WorkSpace bundles, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/delete_bundle.html"> Delete a Custom WorkSpaces Bundle or Image</a>.
-  DeleteWorkspaceBundle(
+  /**
+   * deleteWorkspaceBundle - Deletes the specified WorkSpace bundle. For more information about deleting WorkSpace bundles, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/delete_bundle.html"> Delete a Custom WorkSpaces Bundle or Image</a>.
+  **/
+  deleteWorkspaceBundle(
     req: operations.DeleteWorkspaceBundleRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteWorkspaceBundleResponse> {
@@ -1022,60 +1049,60 @@ export class SDK {
       req = new operations.DeleteWorkspaceBundleRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DeleteWorkspaceBundle";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteWorkspaceBundleResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteWorkspaceBundleResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteWorkspaceBundleResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceAssociatedException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -1087,8 +1114,10 @@ export class SDK {
   }
 
   
-  // DeleteWorkspaceImage - Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image and unshare the image if it is shared with other accounts. 
-  DeleteWorkspaceImage(
+  /**
+   * deleteWorkspaceImage - Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image and unshare the image if it is shared with other accounts. 
+  **/
+  deleteWorkspaceImage(
     req: operations.DeleteWorkspaceImageRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteWorkspaceImageResponse> {
@@ -1096,55 +1125,55 @@ export class SDK {
       req = new operations.DeleteWorkspaceImageRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DeleteWorkspaceImage";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteWorkspaceImageResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteWorkspaceImageResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteWorkspaceImageResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceAssociatedException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidResourceStateException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -1156,8 +1185,10 @@ export class SDK {
   }
 
   
-  // DeregisterWorkspaceDirectory - <p>Deregisters the specified directory. This operation is asynchronous and returns before the WorkSpace directory is deregistered. If any WorkSpaces are registered to this directory, you must remove them before you can deregister the directory.</p> <note> <p>Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the <a href="http://aws.amazon.com/directoryservice/pricing/">AWS Directory Services pricing terms</a>.</p> <p>To delete empty directories, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html"> Delete the Directory for Your WorkSpaces</a>. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again.</p> </note>
-  DeregisterWorkspaceDirectory(
+  /**
+   * deregisterWorkspaceDirectory - <p>Deregisters the specified directory. This operation is asynchronous and returns before the WorkSpace directory is deregistered. If any WorkSpaces are registered to this directory, you must remove them before you can deregister the directory.</p> <note> <p>Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the <a href="http://aws.amazon.com/directoryservice/pricing/">AWS Directory Services pricing terms</a>.</p> <p>To delete empty directories, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html"> Delete the Directory for Your WorkSpaces</a>. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again.</p> </note>
+  **/
+  deregisterWorkspaceDirectory(
     req: operations.DeregisterWorkspaceDirectoryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeregisterWorkspaceDirectoryResponse> {
@@ -1165,65 +1196,65 @@ export class SDK {
       req = new operations.DeregisterWorkspaceDirectoryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DeregisterWorkspaceDirectory";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeregisterWorkspaceDirectoryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeregisterWorkspaceDirectoryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deregisterWorkspaceDirectoryResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operationNotSupportedException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidResourceStateException = httpRes?.data;
             }
             break;
@@ -1235,8 +1266,10 @@ export class SDK {
   }
 
   
-  // DescribeAccount - Retrieves a list that describes the configuration of Bring Your Own License (BYOL) for the specified account.
-  DescribeAccount(
+  /**
+   * describeAccount - Retrieves a list that describes the configuration of Bring Your Own License (BYOL) for the specified account.
+  **/
+  describeAccount(
     req: operations.DescribeAccountRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeAccountResponse> {
@@ -1244,45 +1277,45 @@ export class SDK {
       req = new operations.DescribeAccountRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DescribeAccount";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeAccountResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeAccountResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeAccountResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -1294,8 +1327,10 @@ export class SDK {
   }
 
   
-  // DescribeAccountModifications - Retrieves a list that describes modifications to the configuration of Bring Your Own License (BYOL) for the specified account.
-  DescribeAccountModifications(
+  /**
+   * describeAccountModifications - Retrieves a list that describes modifications to the configuration of Bring Your Own License (BYOL) for the specified account.
+  **/
+  describeAccountModifications(
     req: operations.DescribeAccountModificationsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeAccountModificationsResponse> {
@@ -1303,45 +1338,45 @@ export class SDK {
       req = new operations.DescribeAccountModificationsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DescribeAccountModifications";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeAccountModificationsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeAccountModificationsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeAccountModificationsResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -1353,8 +1388,10 @@ export class SDK {
   }
 
   
-  // DescribeClientProperties - Retrieves a list that describes one or more specified Amazon WorkSpaces clients.
-  DescribeClientProperties(
+  /**
+   * describeClientProperties - Retrieves a list that describes one or more specified Amazon WorkSpaces clients.
+  **/
+  describeClientProperties(
     req: operations.DescribeClientPropertiesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeClientPropertiesResponse> {
@@ -1362,55 +1399,55 @@ export class SDK {
       req = new operations.DescribeClientPropertiesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DescribeClientProperties";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeClientPropertiesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeClientPropertiesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeClientPropertiesResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -1422,8 +1459,10 @@ export class SDK {
   }
 
   
-  // DescribeConnectionAliasPermissions - Describes the permissions that the owner of a connection alias has granted to another AWS account for the specified connection alias. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.
-  DescribeConnectionAliasPermissions(
+  /**
+   * describeConnectionAliasPermissions - Describes the permissions that the owner of a connection alias has granted to another AWS account for the specified connection alias. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.
+  **/
+  describeConnectionAliasPermissions(
     req: operations.DescribeConnectionAliasPermissionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeConnectionAliasPermissionsResponse> {
@@ -1431,60 +1470,60 @@ export class SDK {
       req = new operations.DescribeConnectionAliasPermissionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DescribeConnectionAliasPermissions";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeConnectionAliasPermissionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeConnectionAliasPermissionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeConnectionAliasPermissionsResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operationNotSupportedException = httpRes?.data;
             }
             break;
@@ -1496,8 +1535,10 @@ export class SDK {
   }
 
   
-  // DescribeConnectionAliases - Retrieves a list that describes the connection aliases used for cross-Region redirection. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.
-  DescribeConnectionAliases(
+  /**
+   * describeConnectionAliases - Retrieves a list that describes the connection aliases used for cross-Region redirection. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.
+  **/
+  describeConnectionAliases(
     req: operations.DescribeConnectionAliasesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeConnectionAliasesResponse> {
@@ -1505,55 +1546,55 @@ export class SDK {
       req = new operations.DescribeConnectionAliasesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DescribeConnectionAliases";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeConnectionAliasesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeConnectionAliasesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeConnectionAliasesResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operationNotSupportedException = httpRes?.data;
             }
             break;
@@ -1565,8 +1606,10 @@ export class SDK {
   }
 
   
-  // DescribeIpGroups - Describes one or more of your IP access control groups.
-  DescribeIpGroups(
+  /**
+   * describeIpGroups - Describes one or more of your IP access control groups.
+  **/
+  describeIpGroups(
     req: operations.DescribeIpGroupsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeIpGroupsResponse> {
@@ -1574,50 +1617,50 @@ export class SDK {
       req = new operations.DescribeIpGroupsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DescribeIpGroups";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeIpGroupsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeIpGroupsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeIpGroupsResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -1629,8 +1672,10 @@ export class SDK {
   }
 
   
-  // DescribeTags - Describes the specified tags for the specified WorkSpaces resource.
-  DescribeTags(
+  /**
+   * describeTags - Describes the specified tags for the specified WorkSpaces resource.
+  **/
+  describeTags(
     req: operations.DescribeTagsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeTagsResponse> {
@@ -1638,45 +1683,45 @@ export class SDK {
       req = new operations.DescribeTagsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DescribeTags";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeTagsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeTagsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeTagsResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
@@ -1688,8 +1733,10 @@ export class SDK {
   }
 
   
-  // DescribeWorkspaceBundles - <p>Retrieves a list that describes the available WorkSpace bundles.</p> <p>You can filter the results using either bundle ID or owner, but not both.</p>
-  DescribeWorkspaceBundles(
+  /**
+   * describeWorkspaceBundles - <p>Retrieves a list that describes the available WorkSpace bundles.</p> <p>You can filter the results using either bundle ID or owner, but not both.</p>
+  **/
+  describeWorkspaceBundles(
     req: operations.DescribeWorkspaceBundlesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeWorkspaceBundlesResponse> {
@@ -1697,22 +1744,22 @@ export class SDK {
       req = new operations.DescribeWorkspaceBundlesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DescribeWorkspaceBundles";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1723,27 +1770,27 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeWorkspaceBundlesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeWorkspaceBundlesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeWorkspaceBundlesResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
@@ -1755,8 +1802,10 @@ export class SDK {
   }
 
   
-  // DescribeWorkspaceDirectories - Describes the available directories that are registered with Amazon WorkSpaces.
-  DescribeWorkspaceDirectories(
+  /**
+   * describeWorkspaceDirectories - Describes the available directories that are registered with Amazon WorkSpaces.
+  **/
+  describeWorkspaceDirectories(
     req: operations.DescribeWorkspaceDirectoriesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeWorkspaceDirectoriesResponse> {
@@ -1764,22 +1813,22 @@ export class SDK {
       req = new operations.DescribeWorkspaceDirectoriesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DescribeWorkspaceDirectories";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1790,27 +1839,27 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeWorkspaceDirectoriesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeWorkspaceDirectoriesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeWorkspaceDirectoriesResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
@@ -1822,8 +1871,10 @@ export class SDK {
   }
 
   
-  // DescribeWorkspaceImagePermissions - Describes the permissions that the owner of an image has granted to other AWS accounts for an image.
-  DescribeWorkspaceImagePermissions(
+  /**
+   * describeWorkspaceImagePermissions - Describes the permissions that the owner of an image has granted to other AWS accounts for an image.
+  **/
+  describeWorkspaceImagePermissions(
     req: operations.DescribeWorkspaceImagePermissionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeWorkspaceImagePermissionsResponse> {
@@ -1831,55 +1882,55 @@ export class SDK {
       req = new operations.DescribeWorkspaceImagePermissionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DescribeWorkspaceImagePermissions";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeWorkspaceImagePermissionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeWorkspaceImagePermissionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeWorkspaceImagePermissionsResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
@@ -1891,8 +1942,10 @@ export class SDK {
   }
 
   
-  // DescribeWorkspaceImages - Retrieves a list that describes one or more specified images, if the image identifiers are provided. Otherwise, all images in the account are described. 
-  DescribeWorkspaceImages(
+  /**
+   * describeWorkspaceImages - Retrieves a list that describes one or more specified images, if the image identifiers are provided. Otherwise, all images in the account are described. 
+  **/
+  describeWorkspaceImages(
     req: operations.DescribeWorkspaceImagesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeWorkspaceImagesResponse> {
@@ -1900,45 +1953,45 @@ export class SDK {
       req = new operations.DescribeWorkspaceImagesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DescribeWorkspaceImages";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeWorkspaceImagesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeWorkspaceImagesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeWorkspaceImagesResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -1950,8 +2003,10 @@ export class SDK {
   }
 
   
-  // DescribeWorkspaceSnapshots - Describes the snapshots for the specified WorkSpace.
-  DescribeWorkspaceSnapshots(
+  /**
+   * describeWorkspaceSnapshots - Describes the snapshots for the specified WorkSpace.
+  **/
+  describeWorkspaceSnapshots(
     req: operations.DescribeWorkspaceSnapshotsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeWorkspaceSnapshotsResponse> {
@@ -1959,55 +2014,55 @@ export class SDK {
       req = new operations.DescribeWorkspaceSnapshotsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DescribeWorkspaceSnapshots";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeWorkspaceSnapshotsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeWorkspaceSnapshotsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeWorkspaceSnapshotsResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -2019,8 +2074,10 @@ export class SDK {
   }
 
   
-  // DescribeWorkspaces - <p>Describes the specified WorkSpaces.</p> <p>You can filter the results by using the bundle identifier, directory identifier, or owner, but you can specify only one filter at a time.</p>
-  DescribeWorkspaces(
+  /**
+   * describeWorkspaces - <p>Describes the specified WorkSpaces.</p> <p>You can filter the results by using the bundle identifier, directory identifier, or owner, but you can specify only one filter at a time.</p>
+  **/
+  describeWorkspaces(
     req: operations.DescribeWorkspacesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeWorkspacesResponse> {
@@ -2028,22 +2085,22 @@ export class SDK {
       req = new operations.DescribeWorkspacesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DescribeWorkspaces";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2054,32 +2111,32 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeWorkspacesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeWorkspacesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeWorkspacesResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceUnavailableException = httpRes?.data;
             }
             break;
@@ -2091,8 +2148,10 @@ export class SDK {
   }
 
   
-  // DescribeWorkspacesConnectionStatus - Describes the connection status of the specified WorkSpaces.
-  DescribeWorkspacesConnectionStatus(
+  /**
+   * describeWorkspacesConnectionStatus - Describes the connection status of the specified WorkSpaces.
+  **/
+  describeWorkspacesConnectionStatus(
     req: operations.DescribeWorkspacesConnectionStatusRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeWorkspacesConnectionStatusResponse> {
@@ -2100,45 +2159,45 @@ export class SDK {
       req = new operations.DescribeWorkspacesConnectionStatusRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DescribeWorkspacesConnectionStatus";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeWorkspacesConnectionStatusResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeWorkspacesConnectionStatusResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeWorkspacesConnectionStatusResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
@@ -2150,8 +2209,10 @@ export class SDK {
   }
 
   
-  // DisassociateConnectionAlias - <p>Disassociates a connection alias from a directory. Disassociating a connection alias disables cross-Region redirection between two directories in different AWS Regions. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.</p> <note> <p>Before performing this operation, call <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html"> DescribeConnectionAliases</a> to make sure that the current state of the connection alias is <code>CREATED</code>.</p> </note>
-  DisassociateConnectionAlias(
+  /**
+   * disassociateConnectionAlias - <p>Disassociates a connection alias from a directory. Disassociating a connection alias disables cross-Region redirection between two directories in different AWS Regions. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.</p> <note> <p>Before performing this operation, call <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html"> DescribeConnectionAliases</a> to make sure that the current state of the connection alias is <code>CREATED</code>.</p> </note>
+  **/
+  disassociateConnectionAlias(
     req: operations.DisassociateConnectionAliasRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DisassociateConnectionAliasResponse> {
@@ -2159,65 +2220,65 @@ export class SDK {
       req = new operations.DisassociateConnectionAliasRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DisassociateConnectionAlias";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DisassociateConnectionAliasResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DisassociateConnectionAliasResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.disassociateConnectionAliasResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidResourceStateException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operationNotSupportedException = httpRes?.data;
             }
             break;
@@ -2229,8 +2290,10 @@ export class SDK {
   }
 
   
-  // DisassociateIpGroups - Disassociates the specified IP access control group from the specified directory.
-  DisassociateIpGroups(
+  /**
+   * disassociateIpGroups - Disassociates the specified IP access control group from the specified directory.
+  **/
+  disassociateIpGroups(
     req: operations.DisassociateIpGroupsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DisassociateIpGroupsResponse> {
@@ -2238,60 +2301,60 @@ export class SDK {
       req = new operations.DisassociateIpGroupsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.DisassociateIpGroups";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DisassociateIpGroupsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DisassociateIpGroupsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.disassociateIpGroupsResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidResourceStateException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -2303,8 +2366,10 @@ export class SDK {
   }
 
   
-  // ImportWorkspaceImage - Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your AWS account, and you must own the image. For more information about creating BYOL images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html"> Bring Your Own Windows Desktop Licenses</a>.
-  ImportWorkspaceImage(
+  /**
+   * importWorkspaceImage - Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your AWS account, and you must own the image. For more information about creating BYOL images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html"> Bring Your Own Windows Desktop Licenses</a>.
+  **/
+  importWorkspaceImage(
     req: operations.ImportWorkspaceImageRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ImportWorkspaceImageResponse> {
@@ -2312,70 +2377,70 @@ export class SDK {
       req = new operations.ImportWorkspaceImageRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.ImportWorkspaceImage";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ImportWorkspaceImageResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ImportWorkspaceImageResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.importWorkspaceImageResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceLimitExceededException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceAlreadyExistsException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operationNotSupportedException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
@@ -2387,8 +2452,10 @@ export class SDK {
   }
 
   
-  // ListAvailableManagementCidrRanges - <p>Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable Bring Your Own License (BYOL). </p> <p>This operation can be run only by AWS accounts that are enabled for BYOL. If your account isn't enabled for BYOL, you'll receive an <code>AccessDeniedException</code> error.</p> <p>The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>
-  ListAvailableManagementCidrRanges(
+  /**
+   * listAvailableManagementCidrRanges - <p>Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable Bring Your Own License (BYOL). </p> <p>This operation can be run only by AWS accounts that are enabled for BYOL. If your account isn't enabled for BYOL, you'll receive an <code>AccessDeniedException</code> error.</p> <p>The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>
+  **/
+  listAvailableManagementCidrRanges(
     req: operations.ListAvailableManagementCidrRangesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListAvailableManagementCidrRangesResponse> {
@@ -2396,50 +2463,50 @@ export class SDK {
       req = new operations.ListAvailableManagementCidrRangesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.ListAvailableManagementCidrRanges";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListAvailableManagementCidrRangesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListAvailableManagementCidrRangesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAvailableManagementCidrRangesResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -2451,8 +2518,10 @@ export class SDK {
   }
 
   
-  // MigrateWorkspace - <p>Migrates a WorkSpace from one operating system or bundle type to another, while retaining the data on the user volume.</p> <p>The migration process recreates the WorkSpace by using a new root volume from the target bundle image and the user volume from the last available snapshot of the original WorkSpace. During migration, the original <code>D:\Users\%USERNAME%</code> user profile folder is renamed to <code>D:\Users\%USERNAME%MMddyyTHHmmss%.NotMigrated</code>. A new <code>D:\Users\%USERNAME%\</code> folder is generated by the new OS. Certain files in the old user profile are moved to the new user profile.</p> <p>For available migration scenarios, details about what happens during migration, and best practices, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/migrate-workspaces.html">Migrate a WorkSpace</a>.</p>
-  MigrateWorkspace(
+  /**
+   * migrateWorkspace - <p>Migrates a WorkSpace from one operating system or bundle type to another, while retaining the data on the user volume.</p> <p>The migration process recreates the WorkSpace by using a new root volume from the target bundle image and the user volume from the last available snapshot of the original WorkSpace. During migration, the original <code>D:\Users\%USERNAME%</code> user profile folder is renamed to <code>D:\Users\%USERNAME%MMddyyTHHmmss%.NotMigrated</code>. A new <code>D:\Users\%USERNAME%\</code> folder is generated by the new OS. Certain files in the old user profile are moved to the new user profile.</p> <p>For available migration scenarios, details about what happens during migration, and best practices, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/migrate-workspaces.html">Migrate a WorkSpace</a>.</p>
+  **/
+  migrateWorkspace(
     req: operations.MigrateWorkspaceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.MigrateWorkspaceResponse> {
@@ -2460,70 +2529,70 @@ export class SDK {
       req = new operations.MigrateWorkspaceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.MigrateWorkspace";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.MigrateWorkspaceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.MigrateWorkspaceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.migrateWorkspaceResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operationNotSupportedException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operationInProgressException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceUnavailableException = httpRes?.data;
             }
             break;
@@ -2535,8 +2604,10 @@ export class SDK {
   }
 
   
-  // ModifyAccount - Modifies the configuration of Bring Your Own License (BYOL) for the specified account.
-  ModifyAccount(
+  /**
+   * modifyAccount - Modifies the configuration of Bring Your Own License (BYOL) for the specified account.
+  **/
+  modifyAccount(
     req: operations.ModifyAccountRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ModifyAccountResponse> {
@@ -2544,65 +2615,65 @@ export class SDK {
       req = new operations.ModifyAccountRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.ModifyAccount";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ModifyAccountResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ModifyAccountResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.modifyAccountResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidResourceStateException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
@@ -2614,8 +2685,10 @@ export class SDK {
   }
 
   
-  // ModifyClientProperties - Modifies the properties of the specified Amazon WorkSpaces clients.
-  ModifyClientProperties(
+  /**
+   * modifyClientProperties - Modifies the properties of the specified Amazon WorkSpaces clients.
+  **/
+  modifyClientProperties(
     req: operations.ModifyClientPropertiesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ModifyClientPropertiesResponse> {
@@ -2623,55 +2696,55 @@ export class SDK {
       req = new operations.ModifyClientPropertiesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.ModifyClientProperties";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ModifyClientPropertiesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ModifyClientPropertiesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.modifyClientPropertiesResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -2683,8 +2756,10 @@ export class SDK {
   }
 
   
-  // ModifySelfservicePermissions - Modifies the self-service WorkSpace management capabilities for your users. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/enable-user-self-service-workspace-management.html">Enable Self-Service WorkSpace Management Capabilities for Your Users</a>.
-  ModifySelfservicePermissions(
+  /**
+   * modifySelfservicePermissions - Modifies the self-service WorkSpace management capabilities for your users. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/enable-user-self-service-workspace-management.html">Enable Self-Service WorkSpace Management Capabilities for Your Users</a>.
+  **/
+  modifySelfservicePermissions(
     req: operations.ModifySelfservicePermissionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ModifySelfservicePermissionsResponse> {
@@ -2692,55 +2767,55 @@ export class SDK {
       req = new operations.ModifySelfservicePermissionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.ModifySelfservicePermissions";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ModifySelfservicePermissionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ModifySelfservicePermissionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.modifySelfservicePermissionsResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
@@ -2752,8 +2827,10 @@ export class SDK {
   }
 
   
-  // ModifyWorkspaceAccessProperties - Specifies which devices and operating systems users can use to access their WorkSpaces. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html#control-device-access"> Control Device Access</a>.
-  ModifyWorkspaceAccessProperties(
+  /**
+   * modifyWorkspaceAccessProperties - Specifies which devices and operating systems users can use to access their WorkSpaces. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html#control-device-access"> Control Device Access</a>.
+  **/
+  modifyWorkspaceAccessProperties(
     req: operations.ModifyWorkspaceAccessPropertiesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ModifyWorkspaceAccessPropertiesResponse> {
@@ -2761,50 +2838,50 @@ export class SDK {
       req = new operations.ModifyWorkspaceAccessPropertiesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.ModifyWorkspaceAccessProperties";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ModifyWorkspaceAccessPropertiesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ModifyWorkspaceAccessPropertiesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.modifyWorkspaceAccessPropertiesResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -2816,8 +2893,10 @@ export class SDK {
   }
 
   
-  // ModifyWorkspaceCreationProperties - Modify the default properties used to create WorkSpaces.
-  ModifyWorkspaceCreationProperties(
+  /**
+   * modifyWorkspaceCreationProperties - Modify the default properties used to create WorkSpaces.
+  **/
+  modifyWorkspaceCreationProperties(
     req: operations.ModifyWorkspaceCreationPropertiesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ModifyWorkspaceCreationPropertiesResponse> {
@@ -2825,60 +2904,60 @@ export class SDK {
       req = new operations.ModifyWorkspaceCreationPropertiesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.ModifyWorkspaceCreationProperties";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ModifyWorkspaceCreationPropertiesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ModifyWorkspaceCreationPropertiesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.modifyWorkspaceCreationPropertiesResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operationNotSupportedException = httpRes?.data;
             }
             break;
@@ -2890,8 +2969,10 @@ export class SDK {
   }
 
   
-  // ModifyWorkspaceProperties - Modifies the specified WorkSpace properties. For important information about how to modify the size of the root and user volumes, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html"> Modify a WorkSpace</a>. 
-  ModifyWorkspaceProperties(
+  /**
+   * modifyWorkspaceProperties - Modifies the specified WorkSpace properties. For important information about how to modify the size of the root and user volumes, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html"> Modify a WorkSpace</a>. 
+  **/
+  modifyWorkspaceProperties(
     req: operations.ModifyWorkspacePropertiesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ModifyWorkspacePropertiesResponse> {
@@ -2899,75 +2980,75 @@ export class SDK {
       req = new operations.ModifyWorkspacePropertiesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.ModifyWorkspaceProperties";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ModifyWorkspacePropertiesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ModifyWorkspacePropertiesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.modifyWorkspacePropertiesResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidResourceStateException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operationInProgressException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.unsupportedWorkspaceConfigurationException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceUnavailableException = httpRes?.data;
             }
             break;
@@ -2979,8 +3060,10 @@ export class SDK {
   }
 
   
-  // ModifyWorkspaceState - <p>Sets the state of the specified WorkSpace.</p> <p>To maintain a WorkSpace without being interrupted, set the WorkSpace state to <code>ADMIN_MAINTENANCE</code>. WorkSpaces in this state do not respond to requests to reboot, stop, start, rebuild, or restore. An AutoStop WorkSpace in this state is not stopped. Users cannot log into a WorkSpace in the <code>ADMIN_MAINTENANCE</code> state.</p>
-  ModifyWorkspaceState(
+  /**
+   * modifyWorkspaceState - <p>Sets the state of the specified WorkSpace.</p> <p>To maintain a WorkSpace without being interrupted, set the WorkSpace state to <code>ADMIN_MAINTENANCE</code>. WorkSpaces in this state do not respond to requests to reboot, stop, start, rebuild, or restore. An AutoStop WorkSpace in this state is not stopped. Users cannot log into a WorkSpace in the <code>ADMIN_MAINTENANCE</code> state.</p>
+  **/
+  modifyWorkspaceState(
     req: operations.ModifyWorkspaceStateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ModifyWorkspaceStateResponse> {
@@ -2988,55 +3071,55 @@ export class SDK {
       req = new operations.ModifyWorkspaceStateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.ModifyWorkspaceState";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ModifyWorkspaceStateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ModifyWorkspaceStateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.modifyWorkspaceStateResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidResourceStateException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
@@ -3048,8 +3131,10 @@ export class SDK {
   }
 
   
-  // RebootWorkspaces - <p>Reboots the specified WorkSpaces.</p> <p>You cannot reboot a WorkSpace unless its state is <code>AVAILABLE</code> or <code>UNHEALTHY</code>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have rebooted.</p>
-  RebootWorkspaces(
+  /**
+   * rebootWorkspaces - <p>Reboots the specified WorkSpaces.</p> <p>You cannot reboot a WorkSpace unless its state is <code>AVAILABLE</code> or <code>UNHEALTHY</code>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have rebooted.</p>
+  **/
+  rebootWorkspaces(
     req: operations.RebootWorkspacesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RebootWorkspacesResponse> {
@@ -3057,40 +3142,40 @@ export class SDK {
       req = new operations.RebootWorkspacesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.RebootWorkspaces";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RebootWorkspacesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RebootWorkspacesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rebootWorkspacesResult = httpRes?.data;
             }
             break;
@@ -3102,8 +3187,10 @@ export class SDK {
   }
 
   
-  // RebuildWorkspaces - <p>Rebuilds the specified WorkSpace.</p> <p>You cannot rebuild a WorkSpace unless its state is <code>AVAILABLE</code>, <code>ERROR</code>, <code>UNHEALTHY</code>, <code>STOPPED</code>, or <code>REBOOTING</code>.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html">Rebuild a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.</p>
-  RebuildWorkspaces(
+  /**
+   * rebuildWorkspaces - <p>Rebuilds the specified WorkSpace.</p> <p>You cannot rebuild a WorkSpace unless its state is <code>AVAILABLE</code>, <code>ERROR</code>, <code>UNHEALTHY</code>, <code>STOPPED</code>, or <code>REBOOTING</code>.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html">Rebuild a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.</p>
+  **/
+  rebuildWorkspaces(
     req: operations.RebuildWorkspacesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RebuildWorkspacesResponse> {
@@ -3111,40 +3198,40 @@ export class SDK {
       req = new operations.RebuildWorkspacesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.RebuildWorkspaces";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RebuildWorkspacesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RebuildWorkspacesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rebuildWorkspacesResult = httpRes?.data;
             }
             break;
@@ -3156,8 +3243,10 @@ export class SDK {
   }
 
   
-  // RegisterWorkspaceDirectory - Registers the specified directory. This operation is asynchronous and returns before the WorkSpace directory is registered. If this is the first time you are registering a directory, you will need to create the workspaces_DefaultRole role before you can register a directory. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role"> Creating the workspaces_DefaultRole Role</a>.
-  RegisterWorkspaceDirectory(
+  /**
+   * registerWorkspaceDirectory - Registers the specified directory. This operation is asynchronous and returns before the WorkSpace directory is registered. If this is the first time you are registering a directory, you will need to create the workspaces_DefaultRole role before you can register a directory. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role"> Creating the workspaces_DefaultRole Role</a>.
+  **/
+  registerWorkspaceDirectory(
     req: operations.RegisterWorkspaceDirectoryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegisterWorkspaceDirectoryResponse> {
@@ -3165,80 +3254,80 @@ export class SDK {
       req = new operations.RegisterWorkspaceDirectoryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.RegisterWorkspaceDirectory";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegisterWorkspaceDirectoryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RegisterWorkspaceDirectoryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.registerWorkspaceDirectoryResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceLimitExceededException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.workspacesDefaultRoleNotFoundException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidResourceStateException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.unsupportedNetworkConfigurationException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operationNotSupportedException = httpRes?.data;
             }
             break;
@@ -3250,8 +3339,10 @@ export class SDK {
   }
 
   
-  // RestoreWorkspace - <p>Restores the specified WorkSpace to its last known healthy state.</p> <p>You cannot restore a WorkSpace unless its state is <code> AVAILABLE</code>, <code>ERROR</code>, <code>UNHEALTHY</code>, or <code>STOPPED</code>.</p> <p>Restoring a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/restore-workspace.html">Restore a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpace is completely restored.</p>
-  RestoreWorkspace(
+  /**
+   * restoreWorkspace - <p>Restores the specified WorkSpace to its last known healthy state.</p> <p>You cannot restore a WorkSpace unless its state is <code> AVAILABLE</code>, <code>ERROR</code>, <code>UNHEALTHY</code>, or <code>STOPPED</code>.</p> <p>Restoring a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/restore-workspace.html">Restore a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpace is completely restored.</p>
+  **/
+  restoreWorkspace(
     req: operations.RestoreWorkspaceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RestoreWorkspaceResponse> {
@@ -3259,55 +3350,55 @@ export class SDK {
       req = new operations.RestoreWorkspaceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.RestoreWorkspace";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RestoreWorkspaceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RestoreWorkspaceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.restoreWorkspaceResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -3319,8 +3410,10 @@ export class SDK {
   }
 
   
-  // RevokeIpRules - Removes one or more rules from the specified IP access control group.
-  RevokeIpRules(
+  /**
+   * revokeIpRules - Removes one or more rules from the specified IP access control group.
+  **/
+  revokeIpRules(
     req: operations.RevokeIpRulesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RevokeIpRulesResponse> {
@@ -3328,60 +3421,60 @@ export class SDK {
       req = new operations.RevokeIpRulesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.RevokeIpRules";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RevokeIpRulesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RevokeIpRulesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.revokeIpRulesResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidResourceStateException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -3393,8 +3486,10 @@ export class SDK {
   }
 
   
-  // StartWorkspaces - <p>Starts the specified WorkSpaces.</p> <p>You cannot start a WorkSpace unless it has a running mode of <code>AutoStop</code> and a state of <code>STOPPED</code>.</p>
-  StartWorkspaces(
+  /**
+   * startWorkspaces - <p>Starts the specified WorkSpaces.</p> <p>You cannot start a WorkSpace unless it has a running mode of <code>AutoStop</code> and a state of <code>STOPPED</code>.</p>
+  **/
+  startWorkspaces(
     req: operations.StartWorkspacesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.StartWorkspacesResponse> {
@@ -3402,40 +3497,40 @@ export class SDK {
       req = new operations.StartWorkspacesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.StartWorkspaces";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.StartWorkspacesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.StartWorkspacesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.startWorkspacesResult = httpRes?.data;
             }
             break;
@@ -3447,8 +3542,10 @@ export class SDK {
   }
 
   
-  // StopWorkspaces - <p> Stops the specified WorkSpaces.</p> <p>You cannot stop a WorkSpace unless it has a running mode of <code>AutoStop</code> and a state of <code>AVAILABLE</code>, <code>IMPAIRED</code>, <code>UNHEALTHY</code>, or <code>ERROR</code>.</p>
-  StopWorkspaces(
+  /**
+   * stopWorkspaces - <p> Stops the specified WorkSpaces.</p> <p>You cannot stop a WorkSpace unless it has a running mode of <code>AutoStop</code> and a state of <code>AVAILABLE</code>, <code>IMPAIRED</code>, <code>UNHEALTHY</code>, or <code>ERROR</code>.</p>
+  **/
+  stopWorkspaces(
     req: operations.StopWorkspacesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.StopWorkspacesResponse> {
@@ -3456,40 +3553,40 @@ export class SDK {
       req = new operations.StopWorkspacesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.StopWorkspaces";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.StopWorkspacesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.StopWorkspacesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.stopWorkspacesResult = httpRes?.data;
             }
             break;
@@ -3501,8 +3598,10 @@ export class SDK {
   }
 
   
-  // TerminateWorkspaces - <p>Terminates the specified WorkSpaces.</p> <important> <p>Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is destroyed. If you need to archive any user data, contact AWS Support before terminating the WorkSpace.</p> </important> <p>You can terminate a WorkSpace that is in any state except <code>SUSPENDED</code>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely terminated. After a WorkSpace is terminated, the <code>TERMINATED</code> state is returned only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html"> DescribeWorkSpaces</a>. If the WorkSpace ID isn't returned, then the WorkSpace has been successfully terminated.</p> <note> <p>Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the <a href="http://aws.amazon.com/directoryservice/pricing/">AWS Directory Services pricing terms</a>.</p> <p>To delete empty directories, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html"> Delete the Directory for Your WorkSpaces</a>. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again.</p> </note>
-  TerminateWorkspaces(
+  /**
+   * terminateWorkspaces - <p>Terminates the specified WorkSpaces.</p> <important> <p>Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is destroyed. If you need to archive any user data, contact AWS Support before terminating the WorkSpace.</p> </important> <p>You can terminate a WorkSpace that is in any state except <code>SUSPENDED</code>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely terminated. After a WorkSpace is terminated, the <code>TERMINATED</code> state is returned only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html"> DescribeWorkSpaces</a>. If the WorkSpace ID isn't returned, then the WorkSpace has been successfully terminated.</p> <note> <p>Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the <a href="http://aws.amazon.com/directoryservice/pricing/">AWS Directory Services pricing terms</a>.</p> <p>To delete empty directories, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html"> Delete the Directory for Your WorkSpaces</a>. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again.</p> </note>
+  **/
+  terminateWorkspaces(
     req: operations.TerminateWorkspacesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TerminateWorkspacesResponse> {
@@ -3510,40 +3609,40 @@ export class SDK {
       req = new operations.TerminateWorkspacesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.TerminateWorkspaces";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TerminateWorkspacesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TerminateWorkspacesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.terminateWorkspacesResult = httpRes?.data;
             }
             break;
@@ -3555,8 +3654,10 @@ export class SDK {
   }
 
   
-  // UpdateConnectionAliasPermission - <p>Shares or unshares a connection alias with one account by specifying whether that account has permission to associate the connection alias with a directory. If the association permission is granted, the connection alias is shared with that account. If the association permission is revoked, the connection alias is unshared with the account. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.</p> <note> <ul> <li> <p>Before performing this operation, call <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html"> DescribeConnectionAliases</a> to make sure that the current state of the connection alias is <code>CREATED</code>.</p> </li> <li> <p>To delete a connection alias that has been shared, the shared account must first disassociate the connection alias from any directories it has been associated with. Then you must unshare the connection alias from the account it has been shared with. You can delete a connection alias only after it is no longer shared with any accounts or associated with any directories.</p> </li> </ul> </note>
-  UpdateConnectionAliasPermission(
+  /**
+   * updateConnectionAliasPermission - <p>Shares or unshares a connection alias with one account by specifying whether that account has permission to associate the connection alias with a directory. If the association permission is granted, the connection alias is shared with that account. If the association permission is revoked, the connection alias is unshared with the account. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.</p> <note> <ul> <li> <p>Before performing this operation, call <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html"> DescribeConnectionAliases</a> to make sure that the current state of the connection alias is <code>CREATED</code>.</p> </li> <li> <p>To delete a connection alias that has been shared, the shared account must first disassociate the connection alias from any directories it has been associated with. Then you must unshare the connection alias from the account it has been shared with. You can delete a connection alias only after it is no longer shared with any accounts or associated with any directories.</p> </li> </ul> </note>
+  **/
+  updateConnectionAliasPermission(
     req: operations.UpdateConnectionAliasPermissionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateConnectionAliasPermissionResponse> {
@@ -3564,75 +3665,75 @@ export class SDK {
       req = new operations.UpdateConnectionAliasPermissionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.UpdateConnectionAliasPermission";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateConnectionAliasPermissionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateConnectionAliasPermissionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateConnectionAliasPermissionResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceLimitExceededException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceAssociatedException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidResourceStateException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operationNotSupportedException = httpRes?.data;
             }
             break;
@@ -3644,8 +3745,10 @@ export class SDK {
   }
 
   
-  // UpdateRulesOfIpGroup - Replaces the current rules of the specified IP access control group with the specified rules.
-  UpdateRulesOfIpGroup(
+  /**
+   * updateRulesOfIpGroup - Replaces the current rules of the specified IP access control group with the specified rules.
+  **/
+  updateRulesOfIpGroup(
     req: operations.UpdateRulesOfIpGroupRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateRulesOfIpGroupResponse> {
@@ -3653,65 +3756,65 @@ export class SDK {
       req = new operations.UpdateRulesOfIpGroupRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.UpdateRulesOfIpGroup";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateRulesOfIpGroupResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateRulesOfIpGroupResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateRulesOfIpGroupResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceLimitExceededException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidResourceStateException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
@@ -3723,8 +3826,10 @@ export class SDK {
   }
 
   
-  // UpdateWorkspaceBundle - <p>Updates a WorkSpace bundle with a new image. For more information about updating WorkSpace bundles, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/update-custom-bundle.html"> Update a Custom WorkSpaces Bundle</a>.</p> <important> <p>Existing WorkSpaces aren't automatically updated when you update the bundle that they're based on. To update existing WorkSpaces that are based on a bundle that you've updated, you must either rebuild the WorkSpaces or delete and recreate them.</p> </important>
-  UpdateWorkspaceBundle(
+  /**
+   * updateWorkspaceBundle - <p>Updates a WorkSpace bundle with a new image. For more information about updating WorkSpace bundles, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/update-custom-bundle.html"> Update a Custom WorkSpaces Bundle</a>.</p> <important> <p>Existing WorkSpaces aren't automatically updated when you update the bundle that they're based on. To update existing WorkSpaces that are based on a bundle that you've updated, you must either rebuild the WorkSpaces or delete and recreate them.</p> </important>
+  **/
+  updateWorkspaceBundle(
     req: operations.UpdateWorkspaceBundleRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateWorkspaceBundleResponse> {
@@ -3732,60 +3837,60 @@ export class SDK {
       req = new operations.UpdateWorkspaceBundleRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.UpdateWorkspaceBundle";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateWorkspaceBundleResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateWorkspaceBundleResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateWorkspaceBundleResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceUnavailableException = httpRes?.data;
             }
             break;
@@ -3797,8 +3902,10 @@ export class SDK {
   }
 
   
-  // UpdateWorkspaceImagePermission - <p>Shares or unshares an image with one account in the same AWS Region by specifying whether that account has permission to copy the image. If the copy image permission is granted, the image is shared with that account. If the copy image permission is revoked, the image is unshared with the account.</p> <p>After an image has been shared, the recipient account can copy the image to other AWS Regions as needed.</p> <note> <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p> <p>In the AWS GovCloud (US-West) Region, to copy images to and from other AWS Regions, contact AWS Support.</p> </note> <p>For more information about sharing images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html"> Share or Unshare a Custom WorkSpaces Image</a>.</p> <note> <ul> <li> <p>To delete an image that has been shared, you must unshare the image before you delete it.</p> </li> <li> <p>Sharing Bring Your Own License (BYOL) images across AWS accounts isn't supported at this time in the AWS GovCloud (US-West) Region. To share BYOL images across accounts in the AWS GovCloud (US-West) Region, contact AWS Support.</p> </li> </ul> </note>
-  UpdateWorkspaceImagePermission(
+  /**
+   * updateWorkspaceImagePermission - <p>Shares or unshares an image with one account in the same AWS Region by specifying whether that account has permission to copy the image. If the copy image permission is granted, the image is shared with that account. If the copy image permission is revoked, the image is unshared with the account.</p> <p>After an image has been shared, the recipient account can copy the image to other AWS Regions as needed.</p> <note> <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p> <p>In the AWS GovCloud (US-West) Region, to copy images to and from other AWS Regions, contact AWS Support.</p> </note> <p>For more information about sharing images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html"> Share or Unshare a Custom WorkSpaces Image</a>.</p> <note> <ul> <li> <p>To delete an image that has been shared, you must unshare the image before you delete it.</p> </li> <li> <p>Sharing Bring Your Own License (BYOL) images across AWS accounts isn't supported at this time in the AWS GovCloud (US-West) Region. To share BYOL images across accounts in the AWS GovCloud (US-West) Region, contact AWS Support.</p> </li> </ul> </note>
+  **/
+  updateWorkspaceImagePermission(
     req: operations.UpdateWorkspaceImagePermissionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateWorkspaceImagePermissionResponse> {
@@ -3806,65 +3913,65 @@ export class SDK {
       req = new operations.UpdateWorkspaceImagePermissionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=WorkspacesService.UpdateWorkspaceImagePermission";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateWorkspaceImagePermissionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateWorkspaceImagePermissionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateWorkspaceImagePermissionResult = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceUnavailableException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.accessDeniedException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParameterValuesException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.operationNotSupportedException = httpRes?.data;
             }
             break;

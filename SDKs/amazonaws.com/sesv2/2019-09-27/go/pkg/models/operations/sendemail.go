@@ -14,18 +14,24 @@ type SendEmailHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// SendEmailRequestBodyContent
+// An object that defines the entire content of the email, including the message headers and the body content. You can create a simple email message, in which you specify the subject and the text and HTML versions of the message body. You can also create raw messages, in which you specify a complete MIME-formatted message. Raw messages can include attachments and custom headers.
 type SendEmailRequestBodyContent struct {
 	Raw      *shared.RawMessage `json:"Raw,omitempty"`
 	Simple   *shared.Message    `json:"Simple,omitempty"`
 	Template *shared.Template   `json:"Template,omitempty"`
 }
 
+// SendEmailRequestBodyDestination
+// An object that describes the recipients for an email.
 type SendEmailRequestBodyDestination struct {
 	BccAddresses []string `json:"BccAddresses,omitempty"`
 	CcAddresses  []string `json:"CcAddresses,omitempty"`
 	ToAddresses  []string `json:"ToAddresses,omitempty"`
 }
 
+// SendEmailRequestBodyListManagementOptions
+// An object used to specify a list or topic to which an email belongs, which will be used when a contact chooses to unsubscribe.
 type SendEmailRequestBodyListManagementOptions struct {
 	ContactListName *string `json:"ContactListName,omitempty"`
 	TopicName       *string `json:"TopicName,omitempty"`

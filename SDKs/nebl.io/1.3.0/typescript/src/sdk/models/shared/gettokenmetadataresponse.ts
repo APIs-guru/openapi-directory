@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetTokenMetadataResponseMetadataOfIssuanceDataUserDataMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
@@ -16,22 +16,22 @@ export class GetTokenMetadataResponseMetadataOfIssuanceDataUserDataMeta extends 
  * Metadata set by user on token
 **/
 export class GetTokenMetadataResponseMetadataOfIssuanceDataUserData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=meta", elemType: shared.GetTokenMetadataResponseMetadataOfIssuanceDataUserDataMeta })
+  @SpeakeasyMetadata({ data: "json, name=meta", elemType: GetTokenMetadataResponseMetadataOfIssuanceDataUserDataMeta })
   meta?: GetTokenMetadataResponseMetadataOfIssuanceDataUserDataMeta[];
 }
 
 
 export class GetTokenMetadataResponseMetadataOfIssuanceData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=issuer" })
+  @SpeakeasyMetadata({ data: "json, name=issuer" })
   issuer?: string;
 
-  @Metadata({ data: "json, name=tokenName" })
+  @SpeakeasyMetadata({ data: "json, name=tokenName" })
   tokenName?: string;
 
-  @Metadata({ data: "json, name=userData" })
+  @SpeakeasyMetadata({ data: "json, name=userData" })
   userData?: GetTokenMetadataResponseMetadataOfIssuanceDataUserData;
 }
 
@@ -41,7 +41,7 @@ export class GetTokenMetadataResponseMetadataOfIssuanceData extends SpeakeasyBas
  * Metadata set at issuance
 **/
 export class GetTokenMetadataResponseMetadataOfIssuance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: GetTokenMetadataResponseMetadataOfIssuanceData;
 }
 
@@ -51,7 +51,7 @@ export class GetTokenMetadataResponseMetadataOfIssuance extends SpeakeasyBase {
  * Metadata set by user on token for UTXO
 **/
 export class GetTokenMetadataResponseMetadataOfUtxoUserData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: Map<string, any>[];
 }
 
@@ -61,57 +61,57 @@ export class GetTokenMetadataResponseMetadataOfUtxoUserData extends SpeakeasyBas
  * Metadata set for UTXO
 **/
 export class GetTokenMetadataResponseMetadataOfUtxo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=userData" })
+  @SpeakeasyMetadata({ data: "json, name=userData" })
   userData?: GetTokenMetadataResponseMetadataOfUtxoUserData;
 }
 
 
 export class GetTokenMetadataResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregationPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=aggregationPolicy" })
   aggregationPolicy?: string;
 
-  @Metadata({ data: "json, name=divisibility" })
+  @SpeakeasyMetadata({ data: "json, name=divisibility" })
   divisibility?: number;
 
-  @Metadata({ data: "json, name=firstBlock" })
+  @SpeakeasyMetadata({ data: "json, name=firstBlock" })
   firstBlock?: number;
 
-  @Metadata({ data: "json, name=initialIssuanceAmount" })
+  @SpeakeasyMetadata({ data: "json, name=initialIssuanceAmount" })
   initialIssuanceAmount?: number;
 
-  @Metadata({ data: "json, name=issuanceTxid" })
+  @SpeakeasyMetadata({ data: "json, name=issuanceTxid" })
   issuanceTxid?: string;
 
-  @Metadata({ data: "json, name=issueAddress" })
+  @SpeakeasyMetadata({ data: "json, name=issueAddress" })
   issueAddress?: string;
 
-  @Metadata({ data: "json, name=lockStatus" })
+  @SpeakeasyMetadata({ data: "json, name=lockStatus" })
   lockStatus?: boolean;
 
-  @Metadata({ data: "json, name=metadataOfIssuance" })
+  @SpeakeasyMetadata({ data: "json, name=metadataOfIssuance" })
   metadataOfIssuance?: GetTokenMetadataResponseMetadataOfIssuance;
 
-  @Metadata({ data: "json, name=metadataOfUtxo" })
+  @SpeakeasyMetadata({ data: "json, name=metadataOfUtxo" })
   metadataOfUtxo?: GetTokenMetadataResponseMetadataOfUtxo;
 
-  @Metadata({ data: "json, name=numOfBurns" })
+  @SpeakeasyMetadata({ data: "json, name=numOfBurns" })
   numOfBurns?: number;
 
-  @Metadata({ data: "json, name=numOfHolders" })
+  @SpeakeasyMetadata({ data: "json, name=numOfHolders" })
   numOfHolders?: number;
 
-  @Metadata({ data: "json, name=numOfIssuance" })
+  @SpeakeasyMetadata({ data: "json, name=numOfIssuance" })
   numOfIssuance?: number;
 
-  @Metadata({ data: "json, name=numOfTransfers" })
+  @SpeakeasyMetadata({ data: "json, name=numOfTransfers" })
   numOfTransfers?: number;
 
-  @Metadata({ data: "json, name=someUtxo" })
+  @SpeakeasyMetadata({ data: "json, name=someUtxo" })
   someUtxo?: string;
 
-  @Metadata({ data: "json, name=tokenId" })
+  @SpeakeasyMetadata({ data: "json, name=tokenId" })
   tokenId?: string;
 
-  @Metadata({ data: "json, name=totalSupply" })
+  @SpeakeasyMetadata({ data: "json, name=totalSupply" })
   totalSupply?: number;
 }

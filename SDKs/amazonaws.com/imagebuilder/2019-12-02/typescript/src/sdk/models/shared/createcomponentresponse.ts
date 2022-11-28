@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateComponentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientToken" })
   clientToken?: string;
 
-  @Metadata({ data: "json, name=componentBuildVersionArn" })
+  @SpeakeasyMetadata({ data: "json, name=componentBuildVersionArn" })
   componentBuildVersionArn?: string;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 }

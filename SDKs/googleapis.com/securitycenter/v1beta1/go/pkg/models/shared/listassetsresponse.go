@@ -1,5 +1,7 @@
 package shared
 
+// ListAssetsResponse
+// Response message for listing assets.
 type ListAssetsResponse struct {
 	ListAssetsResults []ListAssetsResult `json:"listAssetsResults,omitempty"`
 	NextPageToken     *string            `json:"nextPageToken,omitempty"`

@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteImagesIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class DeleteImagesIdHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" })
   xAuthProjectId: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" })
   xAuthToken: string;
 }
 
 
 export class DeleteImagesIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteImagesIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: DeleteImagesIdHeaders;
 }
 
 
 export class DeleteImagesIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

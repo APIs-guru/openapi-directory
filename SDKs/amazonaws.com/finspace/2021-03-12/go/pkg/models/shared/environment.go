@@ -1,5 +1,7 @@
 package shared
 
+// Environment
+// Represents an FinSpace environment.
 type Environment struct {
 	AwsAccountID              *string                `json:"awsAccountId,omitempty"`
 	DedicatedServiceAccountID *string                `json:"dedicatedServiceAccountId,omitempty"`

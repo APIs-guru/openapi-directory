@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class TeamsListIdpGroupsForOrgPathParams:
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +16,14 @@ class TeamsListIdpGroupsForOrgQueryParams:
 
 @dataclass
 class TeamsListIdpGroupsForOrgRequest:
-    path_params: TeamsListIdpGroupsForOrgPathParams = field(default=None)
-    query_params: TeamsListIdpGroupsForOrgQueryParams = field(default=None)
+    path_params: TeamsListIdpGroupsForOrgPathParams = field()
+    query_params: TeamsListIdpGroupsForOrgQueryParams = field()
     
 
 @dataclass
 class TeamsListIdpGroupsForOrgResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     group_mapping: Optional[shared.GroupMapping] = field(default=None)
     

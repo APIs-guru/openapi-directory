@@ -1,5 +1,8 @@
 package shared
 
+// RecommendationSummary
+//
+//	Information about recommendations.
 type RecommendationSummary struct {
 	Description            *string                     `json:"Description,omitempty"`
 	EndLine                *int64                      `json:"EndLine,omitempty"`

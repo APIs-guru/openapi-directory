@@ -1,187 +1,187 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Country } from "./country";
-import { Currency } from "./currency";
 import { Currency } from "./currency";
 import { UiLanguage } from "./uilanguage";
 
+
 export enum UserSettingsInvoiceTemplateEnum {
-    Default = "Default"
-,    Template1 = "Template1"
-,    Template2 = "Template2"
+    Default = "Default",
+    Template1 = "Template1",
+    Template2 = "Template2"
 }
 
 export enum UserSettingsProfessionEnum {
-    Other = "Other"
-,    DesignAndCreative = "DesignAndCreative"
-,    SoftwareDevelopment = "SoftwareDevelopment"
-,    ContentWritingAndMarketing = "ContentWritingAndMarketing"
-,    Freelancers = "Freelancers"
-,    Consultants = "Consultants"
-,    Smes = "Smes"
-,    Enterprise = "Enterprise"
-,    ECommerce = "ECommerce"
-,    Individual = "Individual"
+    Other = "Other",
+    DesignAndCreative = "DesignAndCreative",
+    SoftwareDevelopment = "SoftwareDevelopment",
+    ContentWritingAndMarketing = "ContentWritingAndMarketing",
+    Freelancers = "Freelancers",
+    Consultants = "Consultants",
+    Smes = "Smes",
+    Enterprise = "Enterprise",
+    ECommerce = "ECommerce",
+    Individual = "Individual"
 }
 
 export enum UserSettingsReferralProgramEnum {
-    Enabled = "Enabled"
-,    Disabled = "Disabled"
+    Enabled = "Enabled",
+    Disabled = "Disabled"
 }
 
 export enum UserSettingsStoreCheckoutFieldsEnum {
-    ShowMinimumRequiredFields = "ShowMinimumRequiredFields"
-,    ShowAllFields = "ShowAllFields"
+    ShowMinimumRequiredFields = "ShowMinimumRequiredFields",
+    ShowAllFields = "ShowAllFields"
 }
 
 
 export class UserSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountantEmail" })
+  @SpeakeasyMetadata({ data: "json, name=AccountantEmail" })
   accountantEmail?: string;
 
-  @Metadata({ data: "json, name=Address" })
+  @SpeakeasyMetadata({ data: "json, name=Address" })
   address?: string;
 
-  @Metadata({ data: "json, name=ApiKey" })
+  @SpeakeasyMetadata({ data: "json, name=ApiKey" })
   apiKey?: string;
 
-  @Metadata({ data: "json, name=ApiSecret" })
+  @SpeakeasyMetadata({ data: "json, name=ApiSecret" })
   apiSecret?: string;
 
-  @Metadata({ data: "json, name=BackgroundImage" })
+  @SpeakeasyMetadata({ data: "json, name=BackgroundImage" })
   backgroundImage?: string;
 
-  @Metadata({ data: "json, name=Bank" })
+  @SpeakeasyMetadata({ data: "json, name=Bank" })
   bank?: string;
 
-  @Metadata({ data: "json, name=BankAccount" })
+  @SpeakeasyMetadata({ data: "json, name=BankAccount" })
   bankAccount?: string;
 
-  @Metadata({ data: "json, name=Cname" })
+  @SpeakeasyMetadata({ data: "json, name=Cname" })
   cname?: string;
 
-  @Metadata({ data: "json, name=CompanyRegistrationNumber" })
+  @SpeakeasyMetadata({ data: "json, name=CompanyRegistrationNumber" })
   companyRegistrationNumber?: string;
 
-  @Metadata({ data: "json, name=Country" })
+  @SpeakeasyMetadata({ data: "json, name=Country" })
   country?: Country;
 
-  @Metadata({ data: "json, name=CountryId" })
+  @SpeakeasyMetadata({ data: "json, name=CountryId" })
   countryId?: number;
 
-  @Metadata({ data: "json, name=Currency" })
+  @SpeakeasyMetadata({ data: "json, name=Currency" })
   currency?: Currency;
 
-  @Metadata({ data: "json, name=CurrencyId" })
+  @SpeakeasyMetadata({ data: "json, name=CurrencyId" })
   currencyId?: number;
 
-  @Metadata({ data: "json, name=CurrencySymbol" })
+  @SpeakeasyMetadata({ data: "json, name=CurrencySymbol" })
   currencySymbol?: string;
 
-  @Metadata({ data: "json, name=DefaultDateFormat" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultDateFormat" })
   defaultDateFormat?: string;
 
-  @Metadata({ data: "json, name=DefaultDueDateInDays" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultDueDateInDays" })
   defaultDueDateInDays?: number;
 
-  @Metadata({ data: "json, name=DoNotTrack" })
+  @SpeakeasyMetadata({ data: "json, name=DoNotTrack" })
   doNotTrack?: boolean;
 
-  @Metadata({ data: "json, name=EnableClientPortal" })
+  @SpeakeasyMetadata({ data: "json, name=EnableClientPortal" })
   enableClientPortal?: boolean;
 
-  @Metadata({ data: "json, name=EnablePredictiveInvoicing" })
+  @SpeakeasyMetadata({ data: "json, name=EnablePredictiveInvoicing" })
   enablePredictiveInvoicing?: boolean;
 
-  @Metadata({ data: "json, name=EnableRecurringInvoicing" })
+  @SpeakeasyMetadata({ data: "json, name=EnableRecurringInvoicing" })
   enableRecurringInvoicing?: boolean;
 
-  @Metadata({ data: "json, name=HasInvoiceLogo" })
+  @SpeakeasyMetadata({ data: "json, name=HasInvoiceLogo" })
   hasInvoiceLogo?: boolean;
 
-  @Metadata({ data: "json, name=Iban" })
+  @SpeakeasyMetadata({ data: "json, name=Iban" })
   iban?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: number;
 
-  @Metadata({ data: "json, name=InvoiceTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=InvoiceTemplate" })
   invoiceTemplate?: UserSettingsInvoiceTemplateEnum;
 
-  @Metadata({ data: "json, name=InvoiceTemplateColorHex" })
+  @SpeakeasyMetadata({ data: "json, name=InvoiceTemplateColorHex" })
   invoiceTemplateColorHex?: string;
 
-  @Metadata({ data: "json, name=PhoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=PhoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=Profession" })
+  @SpeakeasyMetadata({ data: "json, name=Profession" })
   profession?: UserSettingsProfessionEnum;
 
-  @Metadata({ data: "json, name=ReceiveSmsNotifications" })
+  @SpeakeasyMetadata({ data: "json, name=ReceiveSmsNotifications" })
   receiveSmsNotifications?: boolean;
 
-  @Metadata({ data: "json, name=ReferralProgram" })
+  @SpeakeasyMetadata({ data: "json, name=ReferralProgram" })
   referralProgram?: UserSettingsReferralProgramEnum;
 
-  @Metadata({ data: "json, name=StoreCheckoutFields" })
+  @SpeakeasyMetadata({ data: "json, name=StoreCheckoutFields" })
   storeCheckoutFields?: UserSettingsStoreCheckoutFieldsEnum;
 
-  @Metadata({ data: "json, name=StoreColorHex" })
+  @SpeakeasyMetadata({ data: "json, name=StoreColorHex" })
   storeColorHex?: string;
 
-  @Metadata({ data: "json, name=StoreCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=StoreCurrency" })
   storeCurrency?: Currency;
 
-  @Metadata({ data: "json, name=StoreCurrencyId" })
+  @SpeakeasyMetadata({ data: "json, name=StoreCurrencyId" })
   storeCurrencyId?: number;
 
-  @Metadata({ data: "json, name=StoreCustomJavaScript" })
+  @SpeakeasyMetadata({ data: "json, name=StoreCustomJavaScript" })
   storeCustomJavaScript?: string;
 
-  @Metadata({ data: "json, name=StoreDescription" })
+  @SpeakeasyMetadata({ data: "json, name=StoreDescription" })
   storeDescription?: string;
 
-  @Metadata({ data: "json, name=StoreEmail" })
+  @SpeakeasyMetadata({ data: "json, name=StoreEmail" })
   storeEmail?: string;
 
-  @Metadata({ data: "json, name=StoreLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=StoreLanguage" })
   storeLanguage?: UiLanguage;
 
-  @Metadata({ data: "json, name=StoreLanguageId" })
+  @SpeakeasyMetadata({ data: "json, name=StoreLanguageId" })
   storeLanguageId?: number;
 
-  @Metadata({ data: "json, name=StoreName" })
+  @SpeakeasyMetadata({ data: "json, name=StoreName" })
   storeName?: string;
 
-  @Metadata({ data: "json, name=StorePurchaseEmailMessage" })
+  @SpeakeasyMetadata({ data: "json, name=StorePurchaseEmailMessage" })
   storePurchaseEmailMessage?: string;
 
-  @Metadata({ data: "json, name=StorePurchaseThankYouMessage" })
+  @SpeakeasyMetadata({ data: "json, name=StorePurchaseThankYouMessage" })
   storePurchaseThankYouMessage?: string;
 
-  @Metadata({ data: "json, name=StoreTextColorHex" })
+  @SpeakeasyMetadata({ data: "json, name=StoreTextColorHex" })
   storeTextColorHex?: string;
 
-  @Metadata({ data: "json, name=StoreUrl" })
+  @SpeakeasyMetadata({ data: "json, name=StoreUrl" })
   storeUrl?: string;
 
-  @Metadata({ data: "json, name=SubscribeToProductEmails" })
+  @SpeakeasyMetadata({ data: "json, name=SubscribeToProductEmails" })
   subscribeToProductEmails?: boolean;
 
-  @Metadata({ data: "json, name=Swift" })
+  @SpeakeasyMetadata({ data: "json, name=Swift" })
   swift?: string;
 
-  @Metadata({ data: "json, name=Terms" })
+  @SpeakeasyMetadata({ data: "json, name=Terms" })
   terms?: string;
 
-  @Metadata({ data: "json, name=UserId" })
+  @SpeakeasyMetadata({ data: "json, name=UserId" })
   userId?: number;
 
-  @Metadata({ data: "json, name=UserSignature" })
+  @SpeakeasyMetadata({ data: "json, name=UserSignature" })
   userSignature?: string;
 
-  @Metadata({ data: "json, name=VatNumber" })
+  @SpeakeasyMetadata({ data: "json, name=VatNumber" })
   vatNumber?: string;
 
-  @Metadata({ data: "json, name=YearsOfExperience" })
+  @SpeakeasyMetadata({ data: "json, name=YearsOfExperience" })
   yearsOfExperience?: number;
 }

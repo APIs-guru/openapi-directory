@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AccountDeleteGuestPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=guestId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=guestId" })
   guestId: number;
 }
 
 
 export class AccountDeleteGuestRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AccountDeleteGuestPathParams;
 }
 
 
 export class AccountDeleteGuestResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiCoreResponsesEntityUriSystemInt64?: shared.ApiCoreResponsesEntityUriSystemInt64;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

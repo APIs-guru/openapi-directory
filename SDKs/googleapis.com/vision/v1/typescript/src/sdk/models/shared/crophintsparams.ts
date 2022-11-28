@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CropHintsParams
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Parameters for crop hints annotation request.
 **/
 export class CropHintsParams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aspectRatios" })
+  @SpeakeasyMetadata({ data: "json, name=aspectRatios" })
   aspectRatios?: number[];
 }

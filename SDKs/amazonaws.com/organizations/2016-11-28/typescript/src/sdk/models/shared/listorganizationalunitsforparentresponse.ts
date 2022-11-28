@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrganizationalUnit } from "./organizationalunit";
 
 
+
 export class ListOrganizationalUnitsForParentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=OrganizationalUnits", elemType: shared.OrganizationalUnit })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationalUnits", elemType: OrganizationalUnit })
   organizationalUnits?: OrganizationalUnit[];
 }

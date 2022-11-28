@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool } from "./googledevtoolsremotebuildexecutionadminv1alphaworkerpool";
 
 
+
 export class GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=workerPools", elemType: shared.GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool })
+  @SpeakeasyMetadata({ data: "json, name=workerPools", elemType: GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool })
   workerPools?: GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool[];
 }

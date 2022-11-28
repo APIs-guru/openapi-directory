@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DetailSystemPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=inventory_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=inventory_id" })
   inventoryId: string;
 }
 
 
 export class DetailSystemSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   rhIdentity: shared.SchemeRhIdentity;
 }
 
 
 export class DetailSystemRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DetailSystemPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DetailSystemSecurity;
 }
 
 
 export class DetailSystemResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   controllersSystemDetailResponse?: shared.ControllersSystemDetailResponse;
 }

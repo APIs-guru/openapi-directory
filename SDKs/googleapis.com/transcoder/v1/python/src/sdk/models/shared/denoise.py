@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class Denoise:
-    strength: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'strength' }})
-    tune: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tune' }})
+    r"""Denoise
+    Denoise preprocessing configuration. **Note:** This configuration is not supported.
+    """
+    
+    strength: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('strength') }})
+    tune: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tune') }})
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyDefaultCreditSpecificationActionEnum(str, Enum):
     MODIFY_DEFAULT_CREDIT_SPECIFICATION = "ModifyDefaultCreditSpecification"
@@ -16,11 +20,11 @@ class GetModifyDefaultCreditSpecificationVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyDefaultCreditSpecificationQueryParams:
-    action: GetModifyDefaultCreditSpecificationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    cpu_credits: str = field(default=None, metadata={'query_param': { 'field_name': 'CpuCredits', 'style': 'form', 'explode': True }})
+    action: GetModifyDefaultCreditSpecificationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cpu_credits: str = field(metadata={'query_param': { 'field_name': 'CpuCredits', 'style': 'form', 'explode': True }})
+    instance_family: GetModifyDefaultCreditSpecificationInstanceFamilyEnum = field(metadata={'query_param': { 'field_name': 'InstanceFamily', 'style': 'form', 'explode': True }})
+    version: GetModifyDefaultCreditSpecificationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    instance_family: GetModifyDefaultCreditSpecificationInstanceFamilyEnum = field(default=None, metadata={'query_param': { 'field_name': 'InstanceFamily', 'style': 'form', 'explode': True }})
-    version: GetModifyDefaultCreditSpecificationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -36,13 +40,13 @@ class GetModifyDefaultCreditSpecificationHeaders:
 
 @dataclass
 class GetModifyDefaultCreditSpecificationRequest:
-    query_params: GetModifyDefaultCreditSpecificationQueryParams = field(default=None)
-    headers: GetModifyDefaultCreditSpecificationHeaders = field(default=None)
+    headers: GetModifyDefaultCreditSpecificationHeaders = field()
+    query_params: GetModifyDefaultCreditSpecificationQueryParams = field()
     
 
 @dataclass
 class GetModifyDefaultCreditSpecificationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

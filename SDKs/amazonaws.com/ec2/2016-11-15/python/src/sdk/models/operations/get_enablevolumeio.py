@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetEnableVolumeIoActionEnum(str, Enum):
     ENABLE_VOLUME_IO = "EnableVolumeIO"
@@ -10,10 +14,10 @@ class GetEnableVolumeIoVersionEnum(str, Enum):
 
 @dataclass
 class GetEnableVolumeIoQueryParams:
-    action: GetEnableVolumeIoActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetEnableVolumeIoActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetEnableVolumeIoVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    volume_id: str = field(metadata={'query_param': { 'field_name': 'VolumeId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetEnableVolumeIoVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    volume_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VolumeId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,12 +33,12 @@ class GetEnableVolumeIoHeaders:
 
 @dataclass
 class GetEnableVolumeIoRequest:
-    query_params: GetEnableVolumeIoQueryParams = field(default=None)
-    headers: GetEnableVolumeIoHeaders = field(default=None)
+    headers: GetEnableVolumeIoHeaders = field()
+    query_params: GetEnableVolumeIoQueryParams = field()
     
 
 @dataclass
 class GetEnableVolumeIoResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

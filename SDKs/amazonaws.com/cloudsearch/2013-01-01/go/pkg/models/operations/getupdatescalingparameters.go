@@ -10,6 +10,8 @@ const (
 	GetUpdateScalingParametersActionEnumUpdateScalingParameters GetUpdateScalingParametersActionEnum = "UpdateScalingParameters"
 )
 
+// GetUpdateScalingParametersScalingParameters
+// The desired instance type and desired number of replicas of each index partition.
 type GetUpdateScalingParametersScalingParameters struct {
 	DesiredInstanceType     *shared.PartitionInstanceTypeEnum `queryParam:"name=DesiredInstanceType"`
 	DesiredPartitionCount   *int64                            `queryParam:"name=DesiredPartitionCount"`

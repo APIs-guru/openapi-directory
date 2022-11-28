@@ -1,7 +1,8 @@
 
 
+
 export enum CanaryRunStateEnum {
-    Running = "RUNNING"
-,    Passed = "PASSED"
-,    Failed = "FAILED"
+    Running = "RUNNING",
+    Passed = "PASSED",
+    Failed = "FAILED"
 }

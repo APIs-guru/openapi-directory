@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MetricHeaderTypeEnum(str, Enum):
     METRIC_TYPE_UNSPECIFIED = "METRIC_TYPE_UNSPECIFIED"
@@ -21,6 +23,10 @@ class MetricHeaderTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MetricHeader:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: Optional[MetricHeaderTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""MetricHeader
+    Describes a metric column in the report. Visible metrics requested in a report produce column entries within rows and MetricHeaders. However, metrics used exclusively within filters or expressions do not produce columns in a report; correspondingly, those metrics do not produce headers.
+    """
+    
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    type: Optional[MetricHeaderTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

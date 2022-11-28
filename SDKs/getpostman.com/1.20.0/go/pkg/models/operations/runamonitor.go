@@ -4,10 +4,6 @@ type RunAMonitorPathParams struct {
 	MonitorUID string `pathParam:"style=simple,explode=false,name=monitor_uid"`
 }
 
-type RunAMonitorRequest struct {
-	PathParams RunAMonitorPathParams
-}
-
 type RunAMonitor200ApplicationJSONRunExecutionsItem struct {
 	ID   *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
@@ -105,6 +101,10 @@ type RunAMonitor200ApplicationJSONRun struct {
 
 type RunAMonitor200ApplicationJSON struct {
 	Run *RunAMonitor200ApplicationJSONRun `json:"run,omitempty"`
+}
+
+type RunAMonitorRequest struct {
+	PathParams RunAMonitorPathParams
 }
 
 type RunAMonitorResponse struct {

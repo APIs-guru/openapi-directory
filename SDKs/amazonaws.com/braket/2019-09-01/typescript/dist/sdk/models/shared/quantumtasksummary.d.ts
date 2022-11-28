@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { QuantumTaskStatusEnum } from "./quantumtaskstatusenum";
 /**
  * Includes information about a quantum task.

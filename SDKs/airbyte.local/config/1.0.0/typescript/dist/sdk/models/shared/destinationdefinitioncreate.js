@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DestinationDefinitionCreate = /** @class */ (function (_super) {
     __extends(DestinationDefinitionCreate, _super);
     function DestinationDefinitionCreate() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dockerImageTag" }),
+        SpeakeasyMetadata({ data: "json, name=dockerImageTag" }),
         __metadata("design:type", String)
     ], DestinationDefinitionCreate.prototype, "dockerImageTag", void 0);
     __decorate([
-        Metadata({ data: "json, name=dockerRepository" }),
+        SpeakeasyMetadata({ data: "json, name=dockerRepository" }),
         __metadata("design:type", String)
     ], DestinationDefinitionCreate.prototype, "dockerRepository", void 0);
     __decorate([
-        Metadata({ data: "json, name=documentationUrl" }),
+        SpeakeasyMetadata({ data: "json, name=documentationUrl" }),
         __metadata("design:type", String)
     ], DestinationDefinitionCreate.prototype, "documentationUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=icon" }),
+        SpeakeasyMetadata({ data: "json, name=icon" }),
         __metadata("design:type", String)
     ], DestinationDefinitionCreate.prototype, "icon", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], DestinationDefinitionCreate.prototype, "name", void 0);
     return DestinationDefinitionCreate;

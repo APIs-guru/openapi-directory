@@ -9,6 +9,8 @@ const (
 	ReleaseChannelConfigChannelEnumStable      ReleaseChannelConfigChannelEnum = "STABLE"
 )
 
+// ReleaseChannelConfig
+// ReleaseChannelConfig exposes configuration for a release channel.
 type ReleaseChannelConfig struct {
 	AvailableVersions []AvailableVersion               `json:"availableVersions,omitempty"`
 	Channel           *ReleaseChannelConfigChannelEnum `json:"channel,omitempty"`

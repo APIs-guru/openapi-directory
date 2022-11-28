@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetAssociateTransitGatewayMulticastDomainActionEnum(str, Enum):
     ASSOCIATE_TRANSIT_GATEWAY_MULTICAST_DOMAIN = "AssociateTransitGatewayMulticastDomain"
@@ -10,12 +14,12 @@ class GetAssociateTransitGatewayMulticastDomainVersionEnum(str, Enum):
 
 @dataclass
 class GetAssociateTransitGatewayMulticastDomainQueryParams:
-    action: GetAssociateTransitGatewayMulticastDomainActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetAssociateTransitGatewayMulticastDomainActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetAssociateTransitGatewayMulticastDomainVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     subnet_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'SubnetIds', 'style': 'form', 'explode': True }})
     transit_gateway_attachment_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayAttachmentId', 'style': 'form', 'explode': True }})
     transit_gateway_multicast_domain_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayMulticastDomainId', 'style': 'form', 'explode': True }})
-    version: GetAssociateTransitGatewayMulticastDomainVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetAssociateTransitGatewayMulticastDomainHeaders:
 
 @dataclass
 class GetAssociateTransitGatewayMulticastDomainRequest:
-    query_params: GetAssociateTransitGatewayMulticastDomainQueryParams = field(default=None)
-    headers: GetAssociateTransitGatewayMulticastDomainHeaders = field(default=None)
+    headers: GetAssociateTransitGatewayMulticastDomainHeaders = field()
+    query_params: GetAssociateTransitGatewayMulticastDomainQueryParams = field()
     
 
 @dataclass
 class GetAssociateTransitGatewayMulticastDomainResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

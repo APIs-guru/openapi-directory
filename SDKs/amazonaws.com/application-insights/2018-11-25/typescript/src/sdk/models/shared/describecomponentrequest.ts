@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeComponentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComponentName" })
+  @SpeakeasyMetadata({ data: "json, name=ComponentName" })
   componentName: string;
 
-  @Metadata({ data: "json, name=ResourceGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceGroupName" })
   resourceGroupName: string;
 }

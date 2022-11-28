@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProfileTime } from "./profiletime";
+
 
 
 // ListProfileTimesResponse
@@ -8,9 +8,9 @@ import { ProfileTime } from "./profiletime";
  * The structure representing the listProfileTimesResponse.
 **/
 export class ListProfileTimesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=profileTimes", elemType: shared.ProfileTime })
+  @SpeakeasyMetadata({ data: "json, name=profileTimes", elemType: ProfileTime })
   profileTimes: ProfileTime[];
 }

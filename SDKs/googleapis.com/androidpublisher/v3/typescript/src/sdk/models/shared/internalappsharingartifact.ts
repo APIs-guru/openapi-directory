@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InternalAppSharingArtifact
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An artifact resource which gets created when uploading an APK or Android App Bundle through internal app sharing.
 **/
 export class InternalAppSharingArtifact extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateFingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=certificateFingerprint" })
   certificateFingerprint?: string;
 
-  @Metadata({ data: "json, name=downloadUrl" })
+  @SpeakeasyMetadata({ data: "json, name=downloadUrl" })
   downloadUrl?: string;
 
-  @Metadata({ data: "json, name=sha256" })
+  @SpeakeasyMetadata({ data: "json, name=sha256" })
   sha256?: string;
 }

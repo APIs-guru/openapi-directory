@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ChangedAssetDetail = /** @class */ (function (_super) {
     __extends(ChangedAssetDetail, _super);
     function ChangedAssetDetail() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=asset_changed_utc_datetime" }),
+        SpeakeasyMetadata({ data: "json, name=asset_changed_utc_datetime" }),
         __metadata("design:type", Date)
     ], ChangedAssetDetail.prototype, "assetChangedUtcDatetime", void 0);
     __decorate([
-        Metadata({ data: "json, name=asset_lifecycle" }),
+        SpeakeasyMetadata({ data: "json, name=asset_lifecycle" }),
         __metadata("design:type", String)
     ], ChangedAssetDetail.prototype, "assetLifecycle", void 0);
     __decorate([
-        Metadata({ data: "json, name=asset_type" }),
+        SpeakeasyMetadata({ data: "json, name=asset_type" }),
         __metadata("design:type", String)
     ], ChangedAssetDetail.prototype, "assetType", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], ChangedAssetDetail.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=uri" }),
+        SpeakeasyMetadata({ data: "json, name=uri" }),
         __metadata("design:type", String)
     ], ChangedAssetDetail.prototype, "uri", void 0);
     return ChangedAssetDetail;

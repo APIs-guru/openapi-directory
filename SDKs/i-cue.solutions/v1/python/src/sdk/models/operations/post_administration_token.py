@@ -17,15 +17,15 @@ class PostAdministrationTokenRequests:
 
 @dataclass
 class PostAdministrationTokenRequest:
-    headers: PostAdministrationTokenHeaders = field(default=None)
+    headers: PostAdministrationTokenHeaders = field()
     request: Optional[PostAdministrationTokenRequests] = field(default=None)
     
 
 @dataclass
 class PostAdministrationTokenResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     post_administration_token_200_application_json_uuid_string: Optional[str] = field(default=None)
     post_administration_token_200_text_json_uuid_string: Optional[str] = field(default=None)
     post_administration_token_200_text_plain_uuid_string: Optional[str] = field(default=None)
-    status_code: int = field(default=None)
     

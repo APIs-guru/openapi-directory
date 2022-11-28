@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DateOperatorOptions } from "./dateoperatoroptions";
+
 
 
 // DatePropertyOptions
@@ -7,6 +8,6 @@ import { DateOperatorOptions } from "./dateoperatoroptions";
  * The options for date properties.
 **/
 export class DatePropertyOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=operatorOptions" })
+  @SpeakeasyMetadata({ data: "json, name=operatorOptions" })
   operatorOptions?: DateOperatorOptions;
 }

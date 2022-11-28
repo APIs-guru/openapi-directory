@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DeleteUserImagePathParams:
-    image_type: shared.ImageTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'imageType', 'style': 'simple', 'explode': False }})
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    image_type: shared.ImageTypeEnum = field(metadata={'path_param': { 'field_name': 'imageType', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,19 +17,19 @@ class DeleteUserImageQueryParams:
 
 @dataclass
 class DeleteUserImageSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class DeleteUserImageRequest:
-    path_params: DeleteUserImagePathParams = field(default=None)
-    query_params: DeleteUserImageQueryParams = field(default=None)
-    security: DeleteUserImageSecurity = field(default=None)
+    path_params: DeleteUserImagePathParams = field()
+    query_params: DeleteUserImageQueryParams = field()
+    security: DeleteUserImageSecurity = field()
     
 
 @dataclass
 class DeleteUserImageResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

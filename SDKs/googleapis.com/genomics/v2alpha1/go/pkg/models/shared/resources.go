@@ -1,5 +1,7 @@
 package shared
 
+// Resources
+// The system resources for the pipeline run. At least one zone or region must be specified or the pipeline run will fail.
 type Resources struct {
 	ProjectID      *string         `json:"projectId,omitempty"`
 	Regions        []string        `json:"regions,omitempty"`

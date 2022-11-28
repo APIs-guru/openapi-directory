@@ -1,5 +1,7 @@
 package shared
 
+// Rule
+// Contains information about a rule in Amazon EventBridge.
 type Rule struct {
 	Arn                *string        `json:"Arn,omitempty"`
 	Description        *string        `json:"Description,omitempty"`

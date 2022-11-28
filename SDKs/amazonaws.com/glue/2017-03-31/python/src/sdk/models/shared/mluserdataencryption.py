@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import mluserdataencryptionmodestring_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MlUserDataEncryption:
-    kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KmsKeyId' }})
-    ml_user_data_encryption_mode: mluserdataencryptionmodestring_enum.MlUserDataEncryptionModeStringEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MlUserDataEncryptionMode' }})
+    r"""MlUserDataEncryption
+    The encryption-at-rest settings of the transform that apply to accessing user data.
+    """
+    
+    ml_user_data_encryption_mode: MlUserDataEncryptionModeStringEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MlUserDataEncryptionMode') }})
+    kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('KmsKeyId') }})
     

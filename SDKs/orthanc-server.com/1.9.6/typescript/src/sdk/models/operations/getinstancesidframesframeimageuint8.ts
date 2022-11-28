@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetInstancesIdFramesFrameImageUint8PathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=frame" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=frame" })
   frame: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetInstancesIdFramesFrameImageUint8QueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=quality" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quality" })
   quality?: number;
 }
 
 
 export class GetInstancesIdFramesFrameImageUint8Headers extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" })
   accept?: string;
 }
 
 
 export class GetInstancesIdFramesFrameImageUint8Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetInstancesIdFramesFrameImageUint8PathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetInstancesIdFramesFrameImageUint8QueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetInstancesIdFramesFrameImageUint8Headers;
 }
 
 
 export class GetInstancesIdFramesFrameImageUint8Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

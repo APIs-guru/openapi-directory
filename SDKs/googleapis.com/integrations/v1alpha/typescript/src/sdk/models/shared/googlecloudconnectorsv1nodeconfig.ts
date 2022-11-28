@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudConnectorsV1NodeConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for the connection.
 **/
 export class GoogleCloudConnectorsV1NodeConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxNodeCount" })
+  @SpeakeasyMetadata({ data: "json, name=maxNodeCount" })
   maxNodeCount?: number;
 
-  @Metadata({ data: "json, name=minNodeCount" })
+  @SpeakeasyMetadata({ data: "json, name=minNodeCount" })
   minNodeCount?: number;
 }

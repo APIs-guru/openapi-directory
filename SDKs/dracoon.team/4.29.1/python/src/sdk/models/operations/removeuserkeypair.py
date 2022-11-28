@@ -15,13 +15,13 @@ class RemoveUserKeyPairHeaders:
 
 @dataclass
 class RemoveUserKeyPairRequest:
-    query_params: RemoveUserKeyPairQueryParams = field(default=None)
-    headers: RemoveUserKeyPairHeaders = field(default=None)
+    headers: RemoveUserKeyPairHeaders = field()
+    query_params: RemoveUserKeyPairQueryParams = field()
     
 
 @dataclass
 class RemoveUserKeyPairResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

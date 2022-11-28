@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ExportAssetsJsonlQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" })
   search?: string;
 }
 
 
 export class ExportAssetsJsonlSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
 export class ExportAssetsJsonlRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ExportAssetsJsonlQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ExportAssetsJsonlSecurity;
 }
 
 
 export class ExportAssetsJsonlResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   exportAssetsJsonl200ApplicationJsonBinaryString?: Uint8Array;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DeliveryError } from "./deliveryerror";
 import { IpReputation } from "./ipreputation";
 import { FeedbackLoop } from "./feedbackloop";

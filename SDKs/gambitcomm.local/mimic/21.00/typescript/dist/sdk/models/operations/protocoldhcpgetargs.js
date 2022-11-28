@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolDhcpGetArgsPathParams = /** @class */ (function (_super) {
     __extends(ProtocolDhcpGetArgsPathParams, _super);
     function ProtocolDhcpGetArgsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolDhcpGetArgsPathParams.prototype, "agentNum", void 0);
     return ProtocolDhcpGetArgsPathParams;
@@ -41,7 +41,7 @@ var ProtocolDhcpGetArgsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolDhcpGetArgsPathParams)
     ], ProtocolDhcpGetArgsRequest.prototype, "pathParams", void 0);
     return ProtocolDhcpGetArgsRequest;
@@ -53,15 +53,15 @@ var ProtocolDhcpGetArgsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolDhcpGetArgsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolDhcpGetArgsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], ProtocolDhcpGetArgsResponse.prototype, "protocolDhcpGetArgs200ApplicationJsonObject", void 0);
     return ProtocolDhcpGetArgsResponse;

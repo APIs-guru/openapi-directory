@@ -22,15 +22,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Sites } from "./sites";
 var SiteTypeLayer = /** @class */ (function (_super) {
     __extends(SiteTypeLayer, _super);
     function SiteTypeLayer() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Sites", elemType: shared.Sites }),
+        SpeakeasyMetadata({ data: "json, name=Sites", elemType: Sites }),
         __metadata("design:type", Array)
     ], SiteTypeLayer.prototype, "sites", void 0);
     return SiteTypeLayer;

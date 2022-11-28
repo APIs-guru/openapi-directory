@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetWordOfTheDayQueryParams = /** @class */ (function (_super) {
     __extends(GetWordOfTheDayQueryParams, _super);
     function GetWordOfTheDayQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=date" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date" }),
         __metadata("design:type", String)
     ], GetWordOfTheDayQueryParams.prototype, "date", void 0);
     return GetWordOfTheDayQueryParams;
@@ -41,7 +41,7 @@ var GetWordOfTheDayRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWordOfTheDayQueryParams)
     ], GetWordOfTheDayRequest.prototype, "queryParams", void 0);
     return GetWordOfTheDayRequest;
@@ -53,15 +53,15 @@ var GetWordOfTheDayResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetWordOfTheDayResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetWordOfTheDayResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetWordOfTheDayResponse.prototype, "statusCode", void 0);
     return GetWordOfTheDayResponse;

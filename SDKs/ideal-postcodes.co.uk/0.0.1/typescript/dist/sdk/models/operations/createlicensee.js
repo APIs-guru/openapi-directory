@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateLicenseePathParams = /** @class */ (function (_super) {
     __extends(CreateLicenseePathParams, _super);
@@ -30,7 +30,7 @@ var CreateLicenseePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=key" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=key" }),
         __metadata("design:type", String)
     ], CreateLicenseePathParams.prototype, "key", void 0);
     return CreateLicenseePathParams;
@@ -42,11 +42,11 @@ var CreateLicenseeSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], CreateLicenseeSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeUserToken)
     ], CreateLicenseeSecurity.prototype, "userToken", void 0);
     return CreateLicenseeSecurity;
@@ -58,15 +58,15 @@ var CreateLicenseeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateLicenseePathParams)
     ], CreateLicenseeRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.CreateLicenseeSchema)
     ], CreateLicenseeRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateLicenseeSecurity)
     ], CreateLicenseeRequest.prototype, "security", void 0);
     return CreateLicenseeRequest;
@@ -78,19 +78,19 @@ var CreateLicenseeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AddressLookupResponseSchema)
     ], CreateLicenseeResponse.prototype, "addressLookupResponseSchema", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateLicenseeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.LicenseeResponseSchema)
     ], CreateLicenseeResponse.prototype, "licenseeResponseSchema", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateLicenseeResponse.prototype, "statusCode", void 0);
     return CreateLicenseeResponse;

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifyUserActionEnum(str, Enum):
     MODIFY_USER = "ModifyUser"
@@ -10,13 +14,13 @@ class GetModifyUserVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyUserQueryParams:
+    action: GetModifyUserActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    user_id: str = field(metadata={'query_param': { 'field_name': 'UserId', 'style': 'form', 'explode': True }})
+    version: GetModifyUserVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     access_string: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'AccessString', 'style': 'form', 'explode': True }})
-    action: GetModifyUserActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
     append_access_string: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'AppendAccessString', 'style': 'form', 'explode': True }})
     no_password_required: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'NoPasswordRequired', 'style': 'form', 'explode': True }})
     passwords: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'Passwords', 'style': 'form', 'explode': True }})
-    user_id: str = field(default=None, metadata={'query_param': { 'field_name': 'UserId', 'style': 'form', 'explode': True }})
-    version: GetModifyUserVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,13 +36,13 @@ class GetModifyUserHeaders:
 
 @dataclass
 class GetModifyUserRequest:
-    query_params: GetModifyUserQueryParams = field(default=None)
-    headers: GetModifyUserHeaders = field(default=None)
+    headers: GetModifyUserHeaders = field()
+    query_params: GetModifyUserQueryParams = field()
     
 
 @dataclass
 class GetModifyUserResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

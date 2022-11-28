@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateScalingPlanResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ScalingPlanVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ScalingPlanVersion" })
   scalingPlanVersion: number;
 }

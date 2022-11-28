@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContactTypeEnum } from "./contacttypeenum";
 
 
+
 export class ListContactsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AliasPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=AliasPrefix" })
   aliasPrefix?: string;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: ContactTypeEnum;
 }

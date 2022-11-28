@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetWaybackV1AvailableQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=callback" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" })
   callback?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=closest" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=closest" })
   closest?: shared.ClosestEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=status_code" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status_code" })
   statusCode?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tag" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tag" })
   tag?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timeout" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeout" })
   timeout?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timestamp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timestamp" })
   timestamp?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=url" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=url" })
   url: string;
 }
 
 
 export class GetWaybackV1AvailableRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetWaybackV1AvailableQueryParams;
 }
 
 
 export class GetWaybackV1AvailableResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   availabilityResults?: shared.AvailabilityResults;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

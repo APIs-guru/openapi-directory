@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorldGenerationJobErrorCodeEnum } from "./worldgenerationjoberrorcodeenum";
+
 
 
 // WorldFailure
@@ -7,12 +8,12 @@ import { WorldGenerationJobErrorCodeEnum } from "./worldgenerationjoberrorcodeen
  * Information about a failed world.
 **/
 export class WorldFailure extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failureCode" })
+  @SpeakeasyMetadata({ data: "json, name=failureCode" })
   failureCode?: WorldGenerationJobErrorCodeEnum;
 
-  @Metadata({ data: "json, name=failureCount" })
+  @SpeakeasyMetadata({ data: "json, name=failureCount" })
   failureCount?: number;
 
-  @Metadata({ data: "json, name=sampleFailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=sampleFailureReason" })
   sampleFailureReason?: string;
 }

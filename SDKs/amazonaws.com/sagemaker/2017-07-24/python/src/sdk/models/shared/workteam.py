@@ -1,24 +1,28 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import memberdefinition
-from . import notificationconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Workteam:
-    create_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreateDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    last_updated_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastUpdatedDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    member_definitions: List[memberdefinition.MemberDefinition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MemberDefinitions' }})
-    notification_configuration: Optional[notificationconfiguration.NotificationConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NotificationConfiguration' }})
-    product_listing_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductListingIds' }})
-    sub_domain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SubDomain' }})
-    workforce_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WorkforceArn' }})
-    workteam_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WorkteamArn' }})
-    workteam_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WorkteamName' }})
+    r"""Workteam
+    Provides details about a labeling work team.
+    """
+    
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    member_definitions: List[MemberDefinition] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MemberDefinitions') }})
+    workteam_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('WorkteamArn') }})
+    workteam_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('WorkteamName') }})
+    create_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreateDate'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    last_updated_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LastUpdatedDate'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    notification_configuration: Optional[NotificationConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NotificationConfiguration') }})
+    product_listing_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProductListingIds') }})
+    sub_domain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SubDomain') }})
+    workforce_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('WorkforceArn') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AppengineAppsDomainMappingsPatchPathParams = /** @class */ (function (_super) {
     __extends(AppengineAppsDomainMappingsPatchPathParams, _super);
@@ -30,11 +30,11 @@ var AppengineAppsDomainMappingsPatchPathParams = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=appsId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appsId" }),
         __metadata("design:type", String)
     ], AppengineAppsDomainMappingsPatchPathParams.prototype, "appsId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=domainMappingsId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=domainMappingsId" }),
         __metadata("design:type", String)
     ], AppengineAppsDomainMappingsPatchPathParams.prototype, "domainMappingsId", void 0);
     return AppengineAppsDomainMappingsPatchPathParams;
@@ -46,51 +46,51 @@ var AppengineAppsDomainMappingsPatchQueryParams = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], AppengineAppsDomainMappingsPatchQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], AppengineAppsDomainMappingsPatchQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], AppengineAppsDomainMappingsPatchQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], AppengineAppsDomainMappingsPatchQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], AppengineAppsDomainMappingsPatchQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], AppengineAppsDomainMappingsPatchQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], AppengineAppsDomainMappingsPatchQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], AppengineAppsDomainMappingsPatchQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], AppengineAppsDomainMappingsPatchQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=updateMask" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=updateMask" }),
         __metadata("design:type", String)
     ], AppengineAppsDomainMappingsPatchQueryParams.prototype, "updateMask", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], AppengineAppsDomainMappingsPatchQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], AppengineAppsDomainMappingsPatchQueryParams.prototype, "uploadProtocol", void 0);
     return AppengineAppsDomainMappingsPatchQueryParams;
@@ -102,11 +102,11 @@ var AppengineAppsDomainMappingsPatchSecurity = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], AppengineAppsDomainMappingsPatchSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], AppengineAppsDomainMappingsPatchSecurity.prototype, "oauth2c", void 0);
     return AppengineAppsDomainMappingsPatchSecurity;
@@ -118,19 +118,19 @@ var AppengineAppsDomainMappingsPatchRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AppengineAppsDomainMappingsPatchPathParams)
     ], AppengineAppsDomainMappingsPatchRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AppengineAppsDomainMappingsPatchQueryParams)
     ], AppengineAppsDomainMappingsPatchRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.DomainMapping)
     ], AppengineAppsDomainMappingsPatchRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AppengineAppsDomainMappingsPatchSecurity)
     ], AppengineAppsDomainMappingsPatchRequest.prototype, "security", void 0);
     return AppengineAppsDomainMappingsPatchRequest;
@@ -142,15 +142,15 @@ var AppengineAppsDomainMappingsPatchResponse = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AppengineAppsDomainMappingsPatchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Operation)
     ], AppengineAppsDomainMappingsPatchResponse.prototype, "operation", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AppengineAppsDomainMappingsPatchResponse.prototype, "statusCode", void 0);
     return AppengineAppsDomainMappingsPatchResponse;

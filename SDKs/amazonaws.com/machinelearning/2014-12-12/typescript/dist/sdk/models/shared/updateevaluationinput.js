@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UpdateEvaluationInput = /** @class */ (function (_super) {
     __extends(UpdateEvaluationInput, _super);
     function UpdateEvaluationInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EvaluationId" }),
+        SpeakeasyMetadata({ data: "json, name=EvaluationId" }),
         __metadata("design:type", String)
     ], UpdateEvaluationInput.prototype, "evaluationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=EvaluationName" }),
+        SpeakeasyMetadata({ data: "json, name=EvaluationName" }),
         __metadata("design:type", String)
     ], UpdateEvaluationInput.prototype, "evaluationName", void 0);
     return UpdateEvaluationInput;

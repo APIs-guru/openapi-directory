@@ -32,14 +32,14 @@ type PostDriversRequestBody struct {
 	Source    PostDriversRequestBodySourceEnum `json:"source"`
 }
 
-type PostDriversRequest struct {
-	Request PostDriversRequestBody `request:"mediaType=application/json"`
-}
-
 type PostDrivers200ApplicationJSON struct {
 	Message *string                `json:"message,omitempty"`
 	Ok      *bool                  `json:"ok,omitempty"`
 	Result  map[string]interface{} `json:"result,omitempty"`
+}
+
+type PostDriversRequest struct {
+	Request PostDriversRequestBody `request:"mediaType=application/json"`
 }
 
 type PostDriversResponse struct {

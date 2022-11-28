@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FeatureSettings
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The feature specific settings to be used in the application. These define behaviors that are user configurable.
 **/
 export class FeatureSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=splitHealthChecks" })
+  @SpeakeasyMetadata({ data: "json, name=splitHealthChecks" })
   splitHealthChecks?: boolean;
 
-  @Metadata({ data: "json, name=useContainerOptimizedOs" })
+  @SpeakeasyMetadata({ data: "json, name=useContainerOptimizedOs" })
   useContainerOptimizedOs?: boolean;
 }

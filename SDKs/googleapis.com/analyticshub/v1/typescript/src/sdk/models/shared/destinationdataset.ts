@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DestinationDatasetReference } from "./destinationdatasetreference";
+
 
 
 // DestinationDataset
@@ -7,18 +8,18 @@ import { DestinationDatasetReference } from "./destinationdatasetreference";
  * Defines the destination bigquery dataset.
 **/
 export class DestinationDataset extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datasetReference" })
+  @SpeakeasyMetadata({ data: "json, name=datasetReference" })
   datasetReference?: DestinationDatasetReference;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=friendlyName" })
+  @SpeakeasyMetadata({ data: "json, name=friendlyName" })
   friendlyName?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 }

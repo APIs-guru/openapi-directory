@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkApplianceTrafficShapingRulesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 export enum UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesDefinitionsTypeEnum {
-    Application = "application"
-,    ApplicationCategory = "applicationCategory"
-,    Host = "host"
-,    Port = "port"
-,    IpRange = "ipRange"
-,    LocalNet = "localNet"
+    Application = "application",
+    ApplicationCategory = "applicationCategory",
+    Host = "host",
+    Port = "port",
+    IpRange = "ipRange",
+    LocalNet = "localNet"
 }
 
 
 export class UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesDefinitions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesDefinitionsTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: string;
 }
 
@@ -30,10 +31,10 @@ export class UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesDefinition
  * The bandwidth limits object, specifying the upload ('limitUp') and download ('limitDown') speed in Kbps. These are only enforced if 'settings' is set to 'custom'.
 **/
 export class UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimitsBandwidthLimits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=limitDown" })
+  @SpeakeasyMetadata({ data: "json, name=limitDown" })
   limitDown?: number;
 
-  @Metadata({ data: "json, name=limitUp" })
+  @SpeakeasyMetadata({ data: "json, name=limitUp" })
   limitUp?: number;
 }
 
@@ -44,54 +45,54 @@ export class UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesPerClientB
  * 
 **/
 export class UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bandwidthLimits" })
+  @SpeakeasyMetadata({ data: "json, name=bandwidthLimits" })
   bandwidthLimits?: UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimitsBandwidthLimits;
 
-  @Metadata({ data: "json, name=settings" })
+  @SpeakeasyMetadata({ data: "json, name=settings" })
   settings?: string;
 }
 
 
 export class UpdateNetworkApplianceTrafficShapingRulesRequestBodyRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=definitions", elemType: operations.UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesDefinitions })
+  @SpeakeasyMetadata({ data: "json, name=definitions", elemType: UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesDefinitions })
   definitions: UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesDefinitions[];
 
-  @Metadata({ data: "json, name=dscpTagValue" })
+  @SpeakeasyMetadata({ data: "json, name=dscpTagValue" })
   dscpTagValue?: number;
 
-  @Metadata({ data: "json, name=perClientBandwidthLimits" })
+  @SpeakeasyMetadata({ data: "json, name=perClientBandwidthLimits" })
   perClientBandwidthLimits?: UpdateNetworkApplianceTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimits;
 
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority?: string;
 }
 
 
 export class UpdateNetworkApplianceTrafficShapingRulesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultRulesEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=defaultRulesEnabled" })
   defaultRulesEnabled?: boolean;
 
-  @Metadata({ data: "json, name=rules", elemType: operations.UpdateNetworkApplianceTrafficShapingRulesRequestBodyRules })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: UpdateNetworkApplianceTrafficShapingRulesRequestBodyRules })
   rules?: UpdateNetworkApplianceTrafficShapingRulesRequestBodyRules[];
 }
 
 
 export class UpdateNetworkApplianceTrafficShapingRulesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkApplianceTrafficShapingRulesPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkApplianceTrafficShapingRulesRequestBody;
 }
 
 
 export class UpdateNetworkApplianceTrafficShapingRulesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkApplianceTrafficShapingRules200ApplicationJsonObject?: Map<string, any>;
 }

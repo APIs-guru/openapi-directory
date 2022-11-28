@@ -1,5 +1,7 @@
 package shared
 
+// UploadListElement
+// A list of in-progress multipart uploads for a vault.
 type UploadListElement struct {
 	ArchiveDescription *string `json:"ArchiveDescription,omitempty"`
 	CreationDate       *string `json:"CreationDate,omitempty"`

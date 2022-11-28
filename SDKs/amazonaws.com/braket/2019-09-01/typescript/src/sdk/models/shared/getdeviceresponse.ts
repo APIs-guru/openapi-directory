@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceStatusEnum } from "./devicestatusenum";
 import { DeviceTypeEnum } from "./devicetypeenum";
 
 
+
 export class GetDeviceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceArn" })
+  @SpeakeasyMetadata({ data: "json, name=deviceArn" })
   deviceArn: string;
 
-  @Metadata({ data: "json, name=deviceCapabilities" })
+  @SpeakeasyMetadata({ data: "json, name=deviceCapabilities" })
   deviceCapabilities: string;
 
-  @Metadata({ data: "json, name=deviceName" })
+  @SpeakeasyMetadata({ data: "json, name=deviceName" })
   deviceName: string;
 
-  @Metadata({ data: "json, name=deviceStatus" })
+  @SpeakeasyMetadata({ data: "json, name=deviceStatus" })
   deviceStatus: DeviceStatusEnum;
 
-  @Metadata({ data: "json, name=deviceType" })
+  @SpeakeasyMetadata({ data: "json, name=deviceType" })
   deviceType: DeviceTypeEnum;
 
-  @Metadata({ data: "json, name=providerName" })
+  @SpeakeasyMetadata({ data: "json, name=providerName" })
   providerName: string;
 }

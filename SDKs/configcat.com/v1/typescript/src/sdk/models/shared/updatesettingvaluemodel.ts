@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RolloutPercentageItemModel } from "./rolloutpercentageitemmodel";
 import { RolloutRuleModel } from "./rolloutrulemodel";
 
 
+
 export class UpdateSettingValueModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rolloutPercentageItems", elemType: shared.RolloutPercentageItemModel })
+  @SpeakeasyMetadata({ data: "json, name=rolloutPercentageItems", elemType: RolloutPercentageItemModel })
   rolloutPercentageItems?: RolloutPercentageItemModel[];
 
-  @Metadata({ data: "json, name=rolloutRules", elemType: shared.RolloutRuleModel })
+  @SpeakeasyMetadata({ data: "json, name=rolloutRules", elemType: RolloutRuleModel })
   rolloutRules?: RolloutRuleModel[];
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: Map<string, any>;
 }

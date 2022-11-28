@@ -6,6 +6,8 @@ type CollaboratorPermissions struct {
 	Push  bool `json:"push"`
 }
 
+// Collaborator
+// Collaborator
 type Collaborator struct {
 	AvatarURL         string                   `json:"avatar_url"`
 	EventsURL         string                   `json:"events_url"`

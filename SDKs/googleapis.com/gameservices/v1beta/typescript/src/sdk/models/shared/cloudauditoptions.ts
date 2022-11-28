@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthorizationLoggingOptions } from "./authorizationloggingoptions";
 
+
 export enum CloudAuditOptionsLogNameEnum {
-    UnspecifiedLogName = "UNSPECIFIED_LOG_NAME"
-,    AdminActivity = "ADMIN_ACTIVITY"
-,    DataAccess = "DATA_ACCESS"
+    UnspecifiedLogName = "UNSPECIFIED_LOG_NAME",
+    AdminActivity = "ADMIN_ACTIVITY",
+    DataAccess = "DATA_ACCESS"
 }
 
 
@@ -13,9 +14,9 @@ export enum CloudAuditOptionsLogNameEnum {
  * Write a Cloud Audit log
 **/
 export class CloudAuditOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizationLoggingOptions" })
+  @SpeakeasyMetadata({ data: "json, name=authorizationLoggingOptions" })
   authorizationLoggingOptions?: AuthorizationLoggingOptions;
 
-  @Metadata({ data: "json, name=logName" })
+  @SpeakeasyMetadata({ data: "json, name=logName" })
   logName?: CloudAuditOptionsLogNameEnum;
 }

@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class PutSetupV1CalendarsIDRecoverPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PutSetupV1CalendarsIDRecoverRequest:
-    path_params: PutSetupV1CalendarsIDRecoverPathParams = field(default=None)
+    path_params: PutSetupV1CalendarsIDRecoverPathParams = field()
     
 
 @dataclass
 class PutSetupV1CalendarsIDRecoverResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     schedule_view_model: Optional[shared.ScheduleViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

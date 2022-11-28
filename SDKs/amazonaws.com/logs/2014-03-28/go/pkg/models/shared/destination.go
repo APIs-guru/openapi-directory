@@ -1,5 +1,7 @@
 package shared
 
+// Destination
+// Represents a cross-account destination that receives subscription log events.
 type Destination struct {
 	AccessPolicy    *string `json:"accessPolicy,omitempty"`
 	Arn             *string `json:"arn,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LicenseSpecification
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details for associating a license configuration with a resource.
 **/
 export class LicenseSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AmiAssociationScope" })
+  @SpeakeasyMetadata({ data: "json, name=AmiAssociationScope" })
   amiAssociationScope?: string;
 
-  @Metadata({ data: "json, name=LicenseConfigurationArn" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseConfigurationArn" })
   licenseConfigurationArn: string;
 }

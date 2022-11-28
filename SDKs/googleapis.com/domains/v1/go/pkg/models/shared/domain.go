@@ -11,6 +11,8 @@ const (
 	DomainResourceStateEnumDeleted                  DomainResourceStateEnum = "DELETED"
 )
 
+// Domain
+// A domain that the calling user manages in Google Domains.
 type Domain struct {
 	DomainName    *string                  `json:"domainName,omitempty"`
 	ResourceState *DomainResourceStateEnum `json:"resourceState,omitempty"`

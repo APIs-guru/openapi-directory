@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DcimDevicesNapalmPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class DcimDevicesNapalmQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=method" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=method" })
   method: string;
 }
 
 
 export class DcimDevicesNapalmRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DcimDevicesNapalmPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DcimDevicesNapalmQueryParams;
 }
 
 
 export class DcimDevicesNapalmResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deviceNapalm?: shared.DeviceNapalm;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

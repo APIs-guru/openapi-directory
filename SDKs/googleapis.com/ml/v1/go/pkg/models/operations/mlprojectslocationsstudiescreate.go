@@ -31,7 +31,7 @@ type MlProjectsLocationsStudiesCreateSecurity struct {
 type MlProjectsLocationsStudiesCreateRequest struct {
 	PathParams  MlProjectsLocationsStudiesCreatePathParams
 	QueryParams MlProjectsLocationsStudiesCreateQueryParams
-	Request     *shared.GoogleCloudMlV1Study `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudMlV1StudyInput `request:"mediaType=application/json"`
 	Security    MlProjectsLocationsStudiesCreateSecurity
 }
 

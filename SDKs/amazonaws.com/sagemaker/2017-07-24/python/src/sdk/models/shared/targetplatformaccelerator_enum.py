@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class TargetPlatformAcceleratorEnum(str, Enum):
     INTEL_GRAPHICS = "INTEL_GRAPHICS"

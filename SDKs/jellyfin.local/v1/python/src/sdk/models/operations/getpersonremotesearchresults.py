@@ -12,18 +12,18 @@ class GetPersonRemoteSearchResultsRequests:
 
 @dataclass
 class GetPersonRemoteSearchResultsSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetPersonRemoteSearchResultsRequest:
-    request: GetPersonRemoteSearchResultsRequests = field(default=None)
-    security: GetPersonRemoteSearchResultsSecurity = field(default=None)
+    request: GetPersonRemoteSearchResultsRequests = field()
+    security: GetPersonRemoteSearchResultsSecurity = field()
     
 
 @dataclass
 class GetPersonRemoteSearchResultsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     remote_search_results: Optional[List[shared.RemoteSearchResult]] = field(default=None)
-    status_code: int = field(default=None)
     

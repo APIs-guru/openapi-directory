@@ -1,63 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArchitectureEnum } from "./architectureenum";
 import { AutoScalingTypeEnum } from "./autoscalingtypeenum";
 import { BlockDeviceMapping } from "./blockdevicemapping";
 import { RootDeviceTypeEnum } from "./rootdevicetypeenum";
 
 
+
 export class CreateInstanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AgentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=AgentVersion" })
   agentVersion?: string;
 
-  @Metadata({ data: "json, name=AmiId" })
+  @SpeakeasyMetadata({ data: "json, name=AmiId" })
   amiId?: string;
 
-  @Metadata({ data: "json, name=Architecture" })
+  @SpeakeasyMetadata({ data: "json, name=Architecture" })
   architecture?: ArchitectureEnum;
 
-  @Metadata({ data: "json, name=AutoScalingType" })
+  @SpeakeasyMetadata({ data: "json, name=AutoScalingType" })
   autoScalingType?: AutoScalingTypeEnum;
 
-  @Metadata({ data: "json, name=AvailabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZone" })
   availabilityZone?: string;
 
-  @Metadata({ data: "json, name=BlockDeviceMappings", elemType: shared.BlockDeviceMapping })
+  @SpeakeasyMetadata({ data: "json, name=BlockDeviceMappings", elemType: BlockDeviceMapping })
   blockDeviceMappings?: BlockDeviceMapping[];
 
-  @Metadata({ data: "json, name=EbsOptimized" })
+  @SpeakeasyMetadata({ data: "json, name=EbsOptimized" })
   ebsOptimized?: boolean;
 
-  @Metadata({ data: "json, name=Hostname" })
+  @SpeakeasyMetadata({ data: "json, name=Hostname" })
   hostname?: string;
 
-  @Metadata({ data: "json, name=InstallUpdatesOnBoot" })
+  @SpeakeasyMetadata({ data: "json, name=InstallUpdatesOnBoot" })
   installUpdatesOnBoot?: boolean;
 
-  @Metadata({ data: "json, name=InstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceType" })
   instanceType: string;
 
-  @Metadata({ data: "json, name=LayerIds" })
+  @SpeakeasyMetadata({ data: "json, name=LayerIds" })
   layerIds: string[];
 
-  @Metadata({ data: "json, name=Os" })
+  @SpeakeasyMetadata({ data: "json, name=Os" })
   os?: string;
 
-  @Metadata({ data: "json, name=RootDeviceType" })
+  @SpeakeasyMetadata({ data: "json, name=RootDeviceType" })
   rootDeviceType?: RootDeviceTypeEnum;
 
-  @Metadata({ data: "json, name=SshKeyName" })
+  @SpeakeasyMetadata({ data: "json, name=SshKeyName" })
   sshKeyName?: string;
 
-  @Metadata({ data: "json, name=StackId" })
+  @SpeakeasyMetadata({ data: "json, name=StackId" })
   stackId: string;
 
-  @Metadata({ data: "json, name=SubnetId" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetId" })
   subnetId?: string;
 
-  @Metadata({ data: "json, name=Tenancy" })
+  @SpeakeasyMetadata({ data: "json, name=Tenancy" })
   tenancy?: string;
 
-  @Metadata({ data: "json, name=VirtualizationType" })
+  @SpeakeasyMetadata({ data: "json, name=VirtualizationType" })
   virtualizationType?: string;
 }

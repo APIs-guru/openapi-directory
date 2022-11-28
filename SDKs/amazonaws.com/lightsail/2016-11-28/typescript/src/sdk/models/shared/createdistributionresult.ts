@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LightsailDistribution } from "./lightsaildistribution";
 import { Operation } from "./operation";
 
 
+
 export class CreateDistributionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=distribution" })
+  @SpeakeasyMetadata({ data: "json, name=distribution" })
   distribution?: LightsailDistribution;
 
-  @Metadata({ data: "json, name=operation" })
+  @SpeakeasyMetadata({ data: "json, name=operation" })
   operation?: Operation;
 }

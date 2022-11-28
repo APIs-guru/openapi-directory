@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegisterClientResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizationEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=authorizationEndpoint" })
   authorizationEndpoint?: string;
 
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=clientIdIssuedAt" })
+  @SpeakeasyMetadata({ data: "json, name=clientIdIssuedAt" })
   clientIdIssuedAt?: number;
 
-  @Metadata({ data: "json, name=clientSecret" })
+  @SpeakeasyMetadata({ data: "json, name=clientSecret" })
   clientSecret?: string;
 
-  @Metadata({ data: "json, name=clientSecretExpiresAt" })
+  @SpeakeasyMetadata({ data: "json, name=clientSecretExpiresAt" })
   clientSecretExpiresAt?: number;
 
-  @Metadata({ data: "json, name=tokenEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=tokenEndpoint" })
   tokenEndpoint?: string;
 }

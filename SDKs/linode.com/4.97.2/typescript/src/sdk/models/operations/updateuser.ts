@@ -1,62 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateUserPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=username" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" })
   username: string;
 }
 
 
-export class UpdateUserSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class UpdateUserSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class UpdateUserSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: UpdateUserSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: UpdateUserSecurityOption2;
-}
-
-
-export class UpdateUserRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdateUserPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: shared.User;
-
-  @Metadata()
-  security: UpdateUserSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class UpdateUserDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class UpdateUserRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdateUserPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: shared.UserInput;
+
+  @SpeakeasyMetadata()
+  security: UpdateUserSecurity;
+}
+
+
 export class UpdateUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   user?: shared.User;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateUserDefaultApplicationJsonObject?: UpdateUserDefaultApplicationJson;
 }

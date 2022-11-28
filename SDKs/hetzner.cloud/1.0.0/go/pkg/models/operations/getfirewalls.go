@@ -20,10 +20,6 @@ type GetFirewallsQueryParams struct {
 	Sort          *GetFirewallsSortEnum `queryParam:"style=form,explode=true,name=sort"`
 }
 
-type GetFirewallsRequest struct {
-	QueryParams GetFirewallsQueryParams
-}
-
 type GetFirewallsFirewallsResponseFirewallAppliedToAppliedToResourcesServer struct {
 	ID int64 `json:"id"`
 }
@@ -112,6 +108,10 @@ type GetFirewallsFirewallsResponseMeta struct {
 type GetFirewallsFirewallsResponse struct {
 	Firewalls []GetFirewallsFirewallsResponseFirewall `json:"firewalls"`
 	Meta      *GetFirewallsFirewallsResponseMeta      `json:"meta,omitempty"`
+}
+
+type GetFirewallsRequest struct {
+	QueryParams GetFirewallsQueryParams
 }
 
 type GetFirewallsResponse struct {

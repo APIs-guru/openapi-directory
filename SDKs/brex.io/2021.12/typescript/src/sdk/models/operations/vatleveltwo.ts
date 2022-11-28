@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class VatLevelTwoPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=country" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=country" })
   country: string;
 }
 
 
 export class VatLevelTwoRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=confirmation;" })
+  @SpeakeasyMetadata({ data: "form, name=confirmation;" })
   confirmation?: boolean;
 
-  @Metadata({ data: "form, name=vatNumber;" })
+  @SpeakeasyMetadata({ data: "form, name=vatNumber;" })
   vatNumber: string;
 }
 
 
 export class VatLevelTwoSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   userKey: shared.SchemeUserKey;
 }
 
 
 export class VatLevelTwoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: VatLevelTwoPathParams;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request: VatLevelTwoRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: VatLevelTwoSecurity;
 }
 
 
 export class VatLevelTwoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   vatLevelTwo200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   vatLevelTwoDefaultApplicationJsonAny?: any;
 }

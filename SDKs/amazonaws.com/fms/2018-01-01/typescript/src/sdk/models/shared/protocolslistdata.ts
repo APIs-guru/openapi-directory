@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProtocolsListData
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An Firewall Manager protocols list.
 **/
 export class ProtocolsListData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreateTime" })
   createTime?: Date;
 
-  @Metadata({ data: "json, name=LastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdateTime" })
   lastUpdateTime?: Date;
 
-  @Metadata({ data: "json, name=ListId" })
+  @SpeakeasyMetadata({ data: "json, name=ListId" })
   listId?: string;
 
-  @Metadata({ data: "json, name=ListName" })
+  @SpeakeasyMetadata({ data: "json, name=ListName" })
   listName: string;
 
-  @Metadata({ data: "json, name=ListUpdateToken" })
+  @SpeakeasyMetadata({ data: "json, name=ListUpdateToken" })
   listUpdateToken?: string;
 
-  @Metadata({ data: "json, name=PreviousProtocolsList" })
+  @SpeakeasyMetadata({ data: "json, name=PreviousProtocolsList" })
   previousProtocolsList?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=ProtocolsList" })
+  @SpeakeasyMetadata({ data: "json, name=ProtocolsList" })
   protocolsList: string[];
 }

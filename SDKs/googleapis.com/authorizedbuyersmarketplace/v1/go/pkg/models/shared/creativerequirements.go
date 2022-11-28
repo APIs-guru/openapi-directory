@@ -42,6 +42,8 @@ const (
 	CreativeRequirementsSkippableAdTypeEnumAny                        CreativeRequirementsSkippableAdTypeEnum = "ANY"
 )
 
+// CreativeRequirements
+// Message captures data about the creatives in the deal.
 type CreativeRequirements struct {
 	CreativeFormat                 *CreativeRequirementsCreativeFormatEnum                 `json:"creativeFormat,omitempty"`
 	CreativePreApprovalPolicy      *CreativeRequirementsCreativePreApprovalPolicyEnum      `json:"creativePreApprovalPolicy,omitempty"`

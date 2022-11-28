@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import virtualrouterdata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateVirtualRouterOutput:
-    virtual_router: virtualrouterdata.VirtualRouterData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'virtualRouter' }})
+    r"""CreateVirtualRouterOutput
+    <zonbook></zonbook><xhtml></xhtml>
+    """
+    
+    virtual_router: VirtualRouterData = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('virtualRouter') }})
     

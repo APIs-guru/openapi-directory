@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum EnterpriseCrmEventbusProtoNodeIdentifierElementTypeEnum {
-    UnknownType = "UNKNOWN_TYPE"
-,    TaskConfig = "TASK_CONFIG"
-,    TriggerConfig = "TRIGGER_CONFIG"
+    UnknownType = "UNKNOWN_TYPE",
+    TaskConfig = "TASK_CONFIG",
+    TriggerConfig = "TRIGGER_CONFIG"
 }
 
 
@@ -12,9 +13,9 @@ export enum EnterpriseCrmEventbusProtoNodeIdentifierElementTypeEnum {
  * Represents a node identifier (type + id). Next highest id: 3
 **/
 export class EnterpriseCrmEventbusProtoNodeIdentifier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=elementIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=elementIdentifier" })
   elementIdentifier?: string;
 
-  @Metadata({ data: "json, name=elementType" })
+  @SpeakeasyMetadata({ data: "json, name=elementType" })
   elementType?: EnterpriseCrmEventbusProtoNodeIdentifierElementTypeEnum;
 }

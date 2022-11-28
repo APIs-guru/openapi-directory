@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RecommendationRelatedCloudWatchMetricsSourceDetail
 /**
  *  Information about an Amazon CloudWatch metric that is analyzed by DevOps Guru. It is one of many analyzed metrics that are used to generate insights.
@@ -33,11 +33,11 @@ var RecommendationRelatedCloudWatchMetricsSourceDetail = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MetricName" }),
+        SpeakeasyMetadata({ data: "json, name=MetricName" }),
         __metadata("design:type", String)
     ], RecommendationRelatedCloudWatchMetricsSourceDetail.prototype, "metricName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Namespace" }),
+        SpeakeasyMetadata({ data: "json, name=Namespace" }),
         __metadata("design:type", String)
     ], RecommendationRelatedCloudWatchMetricsSourceDetail.prototype, "namespace", void 0);
     return RecommendationRelatedCloudWatchMetricsSourceDetail;

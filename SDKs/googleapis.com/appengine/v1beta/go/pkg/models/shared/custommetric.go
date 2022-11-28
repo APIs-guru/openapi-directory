@@ -1,5 +1,7 @@
 package shared
 
+// CustomMetric
+// Allows autoscaling based on Stackdriver metrics.
 type CustomMetric struct {
 	Filter                   *string  `json:"filter,omitempty"`
 	MetricName               *string  `json:"metricName,omitempty"`

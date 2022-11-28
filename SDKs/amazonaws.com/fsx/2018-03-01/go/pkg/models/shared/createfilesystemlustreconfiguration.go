@@ -1,5 +1,7 @@
 package shared
 
+// CreateFileSystemLustreConfiguration
+// The Lustre configuration for the file system being created.
 type CreateFileSystemLustreConfiguration struct {
 	AutoImportPolicy              *AutoImportPolicyTypeEnum `json:"AutoImportPolicy,omitempty"`
 	AutomaticBackupRetentionDays  *int64                    `json:"AutomaticBackupRetentionDays,omitempty"`

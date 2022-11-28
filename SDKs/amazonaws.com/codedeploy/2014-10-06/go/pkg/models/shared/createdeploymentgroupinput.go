@@ -1,5 +1,7 @@
 package shared
 
+// CreateDeploymentGroupInput
+// Represents the input of a <code>CreateDeploymentGroup</code> operation.
 type CreateDeploymentGroupInput struct {
 	AlarmConfiguration               *AlarmConfiguration               `json:"alarmConfiguration,omitempty"`
 	ApplicationName                  string                            `json:"applicationName"`

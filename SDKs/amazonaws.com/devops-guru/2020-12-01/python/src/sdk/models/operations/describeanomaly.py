@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeAnomalyPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'Id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,18 +24,18 @@ class DescribeAnomalyHeaders:
 
 @dataclass
 class DescribeAnomalyRequest:
-    path_params: DescribeAnomalyPathParams = field(default=None)
-    headers: DescribeAnomalyHeaders = field(default=None)
+    headers: DescribeAnomalyHeaders = field()
+    path_params: DescribeAnomalyPathParams = field()
     
 
 @dataclass
 class DescribeAnomalyResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_anomaly_response: Optional[shared.DescribeAnomalyResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

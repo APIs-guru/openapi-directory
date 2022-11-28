@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AuthenticateUserByNameRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   authenticateUserByName?: shared.AuthenticateUserByName;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   authenticateUserByName1?: shared.AuthenticateUserByName;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   authenticateUserByName2?: shared.AuthenticateUserByName;
 }
 
 
 export class AuthenticateUserByNameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request: AuthenticateUserByNameRequests;
 }
 
 
 export class AuthenticateUserByNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   authenticationResult?: shared.AuthenticationResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

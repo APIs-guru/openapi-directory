@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionConfiguration } from "./encryptionconfiguration";
+
 
 
 // ResultConfigurationUpdates
@@ -7,15 +8,15 @@ import { EncryptionConfiguration } from "./encryptionconfiguration";
  * The information about the updates in the query results, such as output location and encryption configuration for the query results.
 **/
 export class ResultConfigurationUpdates extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EncryptionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptionConfiguration" })
   encryptionConfiguration?: EncryptionConfiguration;
 
-  @Metadata({ data: "json, name=OutputLocation" })
+  @SpeakeasyMetadata({ data: "json, name=OutputLocation" })
   outputLocation?: string;
 
-  @Metadata({ data: "json, name=RemoveEncryptionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=RemoveEncryptionConfiguration" })
   removeEncryptionConfiguration?: boolean;
 
-  @Metadata({ data: "json, name=RemoveOutputLocation" })
+  @SpeakeasyMetadata({ data: "json, name=RemoveOutputLocation" })
   removeOutputLocation?: boolean;
 }

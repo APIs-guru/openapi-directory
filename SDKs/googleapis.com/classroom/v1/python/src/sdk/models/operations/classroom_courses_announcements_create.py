@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ClassroomCoursesAnnouncementsCreatePathParams:
-    course_id: str = field(default=None, metadata={'path_param': { 'field_name': 'courseId', 'style': 'simple', 'explode': False }})
+    course_id: str = field(metadata={'path_param': { 'field_name': 'courseId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ClassroomCoursesAnnouncementsCreateQueryParams:
 
 @dataclass
 class ClassroomCoursesAnnouncementsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ClassroomCoursesAnnouncementsCreateRequest:
-    path_params: ClassroomCoursesAnnouncementsCreatePathParams = field(default=None)
-    query_params: ClassroomCoursesAnnouncementsCreateQueryParams = field(default=None)
+    path_params: ClassroomCoursesAnnouncementsCreatePathParams = field()
+    query_params: ClassroomCoursesAnnouncementsCreateQueryParams = field()
+    security: ClassroomCoursesAnnouncementsCreateSecurity = field()
     request: Optional[shared.Announcement] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ClassroomCoursesAnnouncementsCreateSecurity = field(default=None)
     
 
 @dataclass
 class ClassroomCoursesAnnouncementsCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     announcement: Optional[shared.Announcement] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,17 +1,23 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import regionstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RegionInfo:
-    sse_kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sseKmsKeyId' }})
-    status: regionstatus_enum.RegionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    status_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statusMessage' }})
-    status_update_date_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statusUpdateDateTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    r"""RegionInfo
+    Information about a Region in your replication set.
+    """
+    
+    status: RegionStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    status_update_date_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('statusUpdateDateTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    sse_kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sseKmsKeyId') }})
+    status_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('statusMessage') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DirectoryConnectSettings
 /**
  * Contains information for the <a>ConnectDirectory</a> operation when an AD Connector directory is being created.
@@ -33,19 +33,19 @@ var DirectoryConnectSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CustomerDnsIps" }),
+        SpeakeasyMetadata({ data: "json, name=CustomerDnsIps" }),
         __metadata("design:type", Array)
     ], DirectoryConnectSettings.prototype, "customerDnsIps", void 0);
     __decorate([
-        Metadata({ data: "json, name=CustomerUserName" }),
+        SpeakeasyMetadata({ data: "json, name=CustomerUserName" }),
         __metadata("design:type", String)
     ], DirectoryConnectSettings.prototype, "customerUserName", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetIds" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetIds" }),
         __metadata("design:type", Array)
     ], DirectoryConnectSettings.prototype, "subnetIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcId" }),
+        SpeakeasyMetadata({ data: "json, name=VpcId" }),
         __metadata("design:type", String)
     ], DirectoryConnectSettings.prototype, "vpcId", void 0);
     return DirectoryConnectSettings;

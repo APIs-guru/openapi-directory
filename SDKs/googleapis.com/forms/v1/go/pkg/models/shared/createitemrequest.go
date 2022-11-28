@@ -1,6 +1,8 @@
 package shared
 
-type CreateItemRequest struct {
-	Item     *Item     `json:"item,omitempty"`
-	Location *Location `json:"location,omitempty"`
+// CreateItemRequestInput
+// Create an item in a form.
+type CreateItemRequestInput struct {
+	Item     *ItemInput `json:"item,omitempty"`
+	Location *Location  `json:"location,omitempty"`
 }

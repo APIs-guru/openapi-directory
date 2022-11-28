@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PayoutCompanyV3 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=companyName" })
+  @SpeakeasyMetadata({ data: "json, name=companyName" })
   companyName: string;
 }

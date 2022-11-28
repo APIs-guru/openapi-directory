@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2alphaModelServingConfigList
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents an ordered combination of valid serving configs, which can be used for `PAGE_OPTIMIZATION` recommendations.
 **/
 export class GoogleCloudRetailV2alphaModelServingConfigList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=servingConfigIds" })
+  @SpeakeasyMetadata({ data: "json, name=servingConfigIds" })
   servingConfigIds?: string[];
 }

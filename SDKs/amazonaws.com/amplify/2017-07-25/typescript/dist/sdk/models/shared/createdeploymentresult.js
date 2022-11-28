@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CreateDeploymentResult
 /**
  *  The result structure for the create a new deployment request.
@@ -33,15 +33,15 @@ var CreateDeploymentResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fileUploadUrls" }),
+        SpeakeasyMetadata({ data: "json, name=fileUploadUrls" }),
         __metadata("design:type", Map)
     ], CreateDeploymentResult.prototype, "fileUploadUrls", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobId" }),
+        SpeakeasyMetadata({ data: "json, name=jobId" }),
         __metadata("design:type", String)
     ], CreateDeploymentResult.prototype, "jobId", void 0);
     __decorate([
-        Metadata({ data: "json, name=zipUploadUrl" }),
+        SpeakeasyMetadata({ data: "json, name=zipUploadUrl" }),
         __metadata("design:type", String)
     ], CreateDeploymentResult.prototype, "zipUploadUrl", void 0);
     return CreateDeploymentResult;

@@ -10,7 +10,7 @@ type IpamAggregatesPartialUpdatePathParams struct {
 
 type IpamAggregatesPartialUpdateRequest struct {
 	PathParams IpamAggregatesPartialUpdatePathParams
-	Request    shared.WritableAggregate `request:"mediaType=application/json"`
+	Request    shared.WritableAggregateInput `request:"mediaType=application/json"`
 }
 
 type IpamAggregatesPartialUpdateResponse struct {

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Contains information about the domain names that you want ACM to use to send you emails that enable you to validate domain ownership.
 **/

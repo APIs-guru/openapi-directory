@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LatencyCriteria
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Parameters for a latency threshold SLI.
 **/
 export class LatencyCriteria extends SpeakeasyBase {
-  @Metadata({ data: "json, name=threshold" })
+  @SpeakeasyMetadata({ data: "json, name=threshold" })
   threshold?: string;
 }

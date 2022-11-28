@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var StorageBucketsGetPathParams = /** @class */ (function (_super) {
     __extends(StorageBucketsGetPathParams, _super);
@@ -30,7 +30,7 @@ var StorageBucketsGetPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=bucket" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=bucket" }),
         __metadata("design:type", String)
     ], StorageBucketsGetPathParams.prototype, "bucket", void 0);
     return StorageBucketsGetPathParams;
@@ -47,51 +47,51 @@ var StorageBucketsGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], StorageBucketsGetQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], StorageBucketsGetQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ifMetagenerationMatch" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ifMetagenerationMatch" }),
         __metadata("design:type", String)
     ], StorageBucketsGetQueryParams.prototype, "ifMetagenerationMatch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ifMetagenerationNotMatch" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ifMetagenerationNotMatch" }),
         __metadata("design:type", String)
     ], StorageBucketsGetQueryParams.prototype, "ifMetagenerationNotMatch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], StorageBucketsGetQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], StorageBucketsGetQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], StorageBucketsGetQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=projection" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=projection" }),
         __metadata("design:type", String)
     ], StorageBucketsGetQueryParams.prototype, "projection", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], StorageBucketsGetQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], StorageBucketsGetQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
         __metadata("design:type", String)
     ], StorageBucketsGetQueryParams.prototype, "userIp", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userProject" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userProject" }),
         __metadata("design:type", String)
     ], StorageBucketsGetQueryParams.prototype, "userProject", void 0);
     return StorageBucketsGetQueryParams;
@@ -103,11 +103,11 @@ var StorageBucketsGetSecurityOption1 = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], StorageBucketsGetSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], StorageBucketsGetSecurityOption1.prototype, "oauth2c", void 0);
     return StorageBucketsGetSecurityOption1;
@@ -119,11 +119,11 @@ var StorageBucketsGetSecurityOption2 = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], StorageBucketsGetSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], StorageBucketsGetSecurityOption2.prototype, "oauth2c", void 0);
     return StorageBucketsGetSecurityOption2;
@@ -135,11 +135,11 @@ var StorageBucketsGetSecurityOption3 = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], StorageBucketsGetSecurityOption3.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], StorageBucketsGetSecurityOption3.prototype, "oauth2c", void 0);
     return StorageBucketsGetSecurityOption3;
@@ -151,11 +151,11 @@ var StorageBucketsGetSecurityOption4 = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], StorageBucketsGetSecurityOption4.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], StorageBucketsGetSecurityOption4.prototype, "oauth2c", void 0);
     return StorageBucketsGetSecurityOption4;
@@ -167,11 +167,11 @@ var StorageBucketsGetSecurityOption5 = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], StorageBucketsGetSecurityOption5.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], StorageBucketsGetSecurityOption5.prototype, "oauth2c", void 0);
     return StorageBucketsGetSecurityOption5;
@@ -183,23 +183,23 @@ var StorageBucketsGetSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", StorageBucketsGetSecurityOption1)
     ], StorageBucketsGetSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", StorageBucketsGetSecurityOption2)
     ], StorageBucketsGetSecurity.prototype, "option2", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", StorageBucketsGetSecurityOption3)
     ], StorageBucketsGetSecurity.prototype, "option3", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", StorageBucketsGetSecurityOption4)
     ], StorageBucketsGetSecurity.prototype, "option4", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", StorageBucketsGetSecurityOption5)
     ], StorageBucketsGetSecurity.prototype, "option5", void 0);
     return StorageBucketsGetSecurity;
@@ -211,15 +211,15 @@ var StorageBucketsGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageBucketsGetPathParams)
     ], StorageBucketsGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageBucketsGetQueryParams)
     ], StorageBucketsGetRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageBucketsGetSecurity)
     ], StorageBucketsGetRequest.prototype, "security", void 0);
     return StorageBucketsGetRequest;
@@ -231,15 +231,15 @@ var StorageBucketsGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Bucket)
     ], StorageBucketsGetResponse.prototype, "bucket", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StorageBucketsGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StorageBucketsGetResponse.prototype, "statusCode", void 0);
     return StorageBucketsGetResponse;

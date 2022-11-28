@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,21 +22,21 @@ class CreateGraphHeaders:
 @dataclass_json
 @dataclass
 class CreateGraphRequestBody:
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     
 
 @dataclass
 class CreateGraphRequest:
-    headers: CreateGraphHeaders = field(default=None)
-    request: CreateGraphRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateGraphHeaders = field()
+    request: CreateGraphRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateGraphResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_graph_response: Optional[shared.CreateGraphResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

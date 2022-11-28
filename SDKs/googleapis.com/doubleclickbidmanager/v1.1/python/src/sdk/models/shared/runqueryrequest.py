@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class RunQueryRequestDataRangeEnum(str, Enum):
     CUSTOM_DATES = "CUSTOM_DATES"
@@ -28,8 +30,12 @@ class RunQueryRequestDataRangeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RunQueryRequest:
-    data_range: Optional[RunQueryRequestDataRangeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataRange' }})
-    report_data_end_time_ms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reportDataEndTimeMs' }})
-    report_data_start_time_ms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reportDataStartTimeMs' }})
-    timezone_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timezoneCode' }})
+    r"""RunQueryRequest
+    Request to run a stored query to generate a report.
+    """
+    
+    data_range: Optional[RunQueryRequestDataRangeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataRange') }})
+    report_data_end_time_ms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reportDataEndTimeMs') }})
+    report_data_start_time_ms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reportDataStartTimeMs') }})
+    timezone_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timezoneCode') }})
     

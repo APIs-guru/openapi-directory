@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TemplateVersionStatusEnum } from "./templateversionstatusenum";
 export declare class UpdateEnvironmentTemplateVersionInput extends SpeakeasyBase {
     description?: string;

@@ -1,8 +1,12 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://developers.google.com/identity/protocols/oauth2/"""
 import requests
 from typing import Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
+from .userinfo import Userinfo
 
 
 SERVERS = [
@@ -11,28 +15,50 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://developers.google.com/identity/protocols/oauth2/"""
+    userinfo: Userinfo
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def oauth2_tokeninfo(self, request: operations.Oauth2TokeninfoRequest) -> operations.Oauth2TokeninfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get token info
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/oauth2/v1/tokeninfo"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -42,52 +68,6 @@ class SDK:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Tokeninfo])
                 res.tokeninfo = out
-
-        return res
-
-    
-    def oauth2_userinfo_get(self, request: operations.Oauth2UserinfoGetRequest) -> operations.Oauth2UserinfoGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/oauth2/v1/userinfo"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.Oauth2UserinfoGetResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Userinfo])
-                res.userinfo = out
-
-        return res
-
-    
-    def oauth2_userinfo_v2_me_get(self, request: operations.Oauth2UserinfoV2MeGetRequest) -> operations.Oauth2UserinfoV2MeGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/userinfo/v2/me"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.Oauth2UserinfoV2MeGetResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.Userinfo])
-                res.userinfo = out
 
         return res
 

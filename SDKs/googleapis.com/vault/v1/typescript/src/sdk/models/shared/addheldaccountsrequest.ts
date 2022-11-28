@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AddHeldAccountsRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Add a list of accounts to a hold.
 **/
 export class AddHeldAccountsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountIds" })
+  @SpeakeasyMetadata({ data: "json, name=accountIds" })
   accountIds?: string[];
 
-  @Metadata({ data: "json, name=emails" })
+  @SpeakeasyMetadata({ data: "json, name=emails" })
   emails?: string[];
 }

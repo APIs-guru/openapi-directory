@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NodePoolAutoscaling } from "./nodepoolautoscaling";
+
 
 
 // SetNodePoolAutoscalingRequest
@@ -7,21 +8,21 @@ import { NodePoolAutoscaling } from "./nodepoolautoscaling";
  * SetNodePoolAutoscalingRequest sets the autoscaler settings of a node pool.
 **/
 export class SetNodePoolAutoscalingRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoscaling" })
+  @SpeakeasyMetadata({ data: "json, name=autoscaling" })
   autoscaling?: NodePoolAutoscaling;
 
-  @Metadata({ data: "json, name=clusterId" })
+  @SpeakeasyMetadata({ data: "json, name=clusterId" })
   clusterId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nodePoolId" })
+  @SpeakeasyMetadata({ data: "json, name=nodePoolId" })
   nodePoolId?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=zone" })
+  @SpeakeasyMetadata({ data: "json, name=zone" })
   zone?: string;
 }

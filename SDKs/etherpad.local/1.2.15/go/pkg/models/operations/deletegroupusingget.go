@@ -4,10 +4,6 @@ type DeleteGroupUsingGetQueryParams struct {
 	GroupID *string `queryParam:"style=form,explode=true,name=groupID"`
 }
 
-type DeleteGroupUsingGetRequest struct {
-	QueryParams DeleteGroupUsingGetQueryParams
-}
-
 type DeleteGroupUsingGet200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -30,6 +26,10 @@ type DeleteGroupUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type DeleteGroupUsingGetRequest struct {
+	QueryParams DeleteGroupUsingGetQueryParams
 }
 
 type DeleteGroupUsingGetResponse struct {

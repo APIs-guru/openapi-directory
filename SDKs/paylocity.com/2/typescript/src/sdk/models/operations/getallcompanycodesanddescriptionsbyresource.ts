@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAllCompanyCodesAndDescriptionsByResourcePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=codeResource" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=codeResource" })
   codeResource: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=companyId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=companyId" })
   companyId: string;
 }
 
 
 export class GetAllCompanyCodesAndDescriptionsByResourceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   paylocityAuth: shared.SchemePaylocityAuth;
 }
 
 
 export class GetAllCompanyCodesAndDescriptionsByResourceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAllCompanyCodesAndDescriptionsByResourcePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetAllCompanyCodesAndDescriptionsByResourceSecurity;
 }
 
 
 export class GetAllCompanyCodesAndDescriptionsByResourceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.CompanyCodes })
+  @SpeakeasyMetadata({ elemType: shared.CompanyCodes })
   companyCodes?: shared.CompanyCodes[];
 
-  @Metadata({ elemType: shared.Error })
+  @SpeakeasyMetadata({ elemType: shared.Error })
   errors?: shared.Error[];
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AddressAutocompleteHitUrls extends SpeakeasyBase {
-  @Metadata({ data: "json, name=udprn" })
+  @SpeakeasyMetadata({ data: "json, name=udprn" })
   udprn?: string;
 
-  @Metadata({ data: "json, name=umprn" })
+  @SpeakeasyMetadata({ data: "json, name=umprn" })
   umprn?: string;
 }

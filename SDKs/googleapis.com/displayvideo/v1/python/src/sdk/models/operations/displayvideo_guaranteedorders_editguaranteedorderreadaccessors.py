@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoGuaranteedOrdersEditGuaranteedOrderReadAccessorsPathParams:
-    guaranteed_order_id: str = field(default=None, metadata={'path_param': { 'field_name': 'guaranteedOrderId', 'style': 'simple', 'explode': False }})
+    guaranteed_order_id: str = field(metadata={'path_param': { 'field_name': 'guaranteedOrderId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DisplayvideoGuaranteedOrdersEditGuaranteedOrderReadAccessorsQueryParams:
 
 @dataclass
 class DisplayvideoGuaranteedOrdersEditGuaranteedOrderReadAccessorsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoGuaranteedOrdersEditGuaranteedOrderReadAccessorsRequest:
-    path_params: DisplayvideoGuaranteedOrdersEditGuaranteedOrderReadAccessorsPathParams = field(default=None)
-    query_params: DisplayvideoGuaranteedOrdersEditGuaranteedOrderReadAccessorsQueryParams = field(default=None)
+    path_params: DisplayvideoGuaranteedOrdersEditGuaranteedOrderReadAccessorsPathParams = field()
+    query_params: DisplayvideoGuaranteedOrdersEditGuaranteedOrderReadAccessorsQueryParams = field()
+    security: DisplayvideoGuaranteedOrdersEditGuaranteedOrderReadAccessorsSecurity = field()
     request: Optional[shared.EditGuaranteedOrderReadAccessorsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoGuaranteedOrdersEditGuaranteedOrderReadAccessorsSecurity = field(default=None)
     
 
 @dataclass
 class DisplayvideoGuaranteedOrdersEditGuaranteedOrderReadAccessorsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     edit_guaranteed_order_read_accessors_response: Optional[shared.EditGuaranteedOrderReadAccessorsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

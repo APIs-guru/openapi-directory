@@ -1,44 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AdsenseReportsGenerateResponseHeaders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class AdsenseReportsGenerateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=averages" })
+  @SpeakeasyMetadata({ data: "json, name=averages" })
   averages?: string[];
 
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: string;
 
-  @Metadata({ data: "json, name=headers", elemType: shared.AdsenseReportsGenerateResponseHeaders })
+  @SpeakeasyMetadata({ data: "json, name=headers", elemType: AdsenseReportsGenerateResponseHeaders })
   headers?: AdsenseReportsGenerateResponseHeaders[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=rows" })
+  @SpeakeasyMetadata({ data: "json, name=rows" })
   rows?: string[][];
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate?: string;
 
-  @Metadata({ data: "json, name=totalMatchedRows" })
+  @SpeakeasyMetadata({ data: "json, name=totalMatchedRows" })
   totalMatchedRows?: string;
 
-  @Metadata({ data: "json, name=totals" })
+  @SpeakeasyMetadata({ data: "json, name=totals" })
   totals?: string[];
 
-  @Metadata({ data: "json, name=warnings" })
+  @SpeakeasyMetadata({ data: "json, name=warnings" })
   warnings?: string[];
 }

@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetActionOrganizationShowQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_datasets" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_datasets" })
   includeDatasets?: boolean;
 }
 
 
 export class GetActionOrganizationShowRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetActionOrganizationShowQueryParams;
 }
 
 
 export class GetActionOrganizationShowResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

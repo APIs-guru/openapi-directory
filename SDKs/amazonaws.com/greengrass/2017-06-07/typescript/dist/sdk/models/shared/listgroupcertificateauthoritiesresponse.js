@@ -22,15 +22,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GroupCertificateAuthorityProperties } from "./groupcertificateauthorityproperties";
 var ListGroupCertificateAuthoritiesResponse = /** @class */ (function (_super) {
     __extends(ListGroupCertificateAuthoritiesResponse, _super);
     function ListGroupCertificateAuthoritiesResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=GroupCertificateAuthorities", elemType: shared.GroupCertificateAuthorityProperties }),
+        SpeakeasyMetadata({ data: "json, name=GroupCertificateAuthorities", elemType: GroupCertificateAuthorityProperties }),
         __metadata("design:type", Array)
     ], ListGroupCertificateAuthoritiesResponse.prototype, "groupCertificateAuthorities", void 0);
     return ListGroupCertificateAuthoritiesResponse;

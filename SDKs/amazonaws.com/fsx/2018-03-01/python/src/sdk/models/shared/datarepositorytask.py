@@ -1,31 +1,32 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import datarepositorytaskfailuredetails
-from . import datarepositorytasklifecycle_enum
-from . import completionreport
-from . import datarepositorytaskstatus
-from . import tag
-from . import datarepositorytasktype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DataRepositoryTask:
-    creation_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreationTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    end_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EndTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    failure_details: Optional[datarepositorytaskfailuredetails.DataRepositoryTaskFailureDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FailureDetails' }})
-    file_system_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FileSystemId' }})
-    lifecycle: datarepositorytasklifecycle_enum.DataRepositoryTaskLifecycleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Lifecycle' }})
-    paths: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Paths' }})
-    report: Optional[completionreport.CompletionReport] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Report' }})
-    resource_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceARN' }})
-    start_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    status: Optional[datarepositorytaskstatus.DataRepositoryTaskStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
-    task_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaskId' }})
-    type: datarepositorytasktype_enum.DataRepositoryTaskTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""DataRepositoryTask
+    A description of the data repository task. You use data repository tasks to perform bulk transfer operations between your Amazon FSx file system and its linked data repository.
+    """
+    
+    creation_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreationTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    file_system_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FileSystemId') }})
+    lifecycle: DataRepositoryTaskLifecycleEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Lifecycle') }})
+    task_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TaskId') }})
+    type: DataRepositoryTaskTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    end_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EndTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    failure_details: Optional[DataRepositoryTaskFailureDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FailureDetails') }})
+    paths: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Paths') }})
+    report: Optional[CompletionReport] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Report') }})
+    resource_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceARN') }})
+    start_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StartTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    status: Optional[DataRepositoryTaskStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     

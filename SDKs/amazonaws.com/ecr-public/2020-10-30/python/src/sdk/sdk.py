@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/ecr-public/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/ecr-public/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def batch_check_layer_availability(self, request: operations.BatchCheckLayerAvailabilityRequest) -> operations.BatchCheckLayerAvailabilityResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Checks the availability of one or more image layers within a repository in a public registry. When an image is pushed to a repository, each image layer is checked to verify if it has been uploaded before. If it has been uploaded, then the image layer is skipped.</p> <note> <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.BatchCheckLayerAvailability"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -75,22 +104,22 @@ class SDK:
 
     
     def batch_delete_image(self, request: operations.BatchDeleteImageRequest) -> operations.BatchDeleteImageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Deletes a list of specified images within a repository in a public registry. Images are specified with either an <code>imageTag</code> or <code>imageDigest</code>.</p> <p>You can remove a tag from an image by specifying the image's tag in your request. When you remove the last tag from an image, the image is deleted from your repository.</p> <p>You can completely delete an image (and all of its tags) by specifying the image's digest in your request.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.BatchDeleteImage"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -117,22 +146,22 @@ class SDK:
 
     
     def complete_layer_upload(self, request: operations.CompleteLayerUploadRequest) -> operations.CompleteLayerUploadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Informs Amazon ECR that the image layer upload has completed for a specified public registry, repository name, and upload ID. You can optionally provide a <code>sha256</code> digest of the image layer for data validation purposes.</p> <p>When an image is pushed, the CompleteLayerUpload API is called once per each new image layer to verify that the upload has completed.</p> <note> <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.CompleteLayerUpload"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -187,22 +216,22 @@ class SDK:
 
     
     def create_repository(self, request: operations.CreateRepositoryRequest) -> operations.CreateRepositoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a repository in a public registry. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html\">Amazon ECR repositories</a> in the <i>Amazon Elastic Container Registry User Guide</i>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.CreateRepository"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -241,22 +270,22 @@ class SDK:
 
     
     def delete_repository(self, request: operations.DeleteRepositoryRequest) -> operations.DeleteRepositoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a repository in a public registry. If the repository contains images, you must either delete all images in the repository or use the <code>force</code> option which deletes all images on your behalf before deleting the repository.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.DeleteRepository"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -287,22 +316,22 @@ class SDK:
 
     
     def delete_repository_policy(self, request: operations.DeleteRepositoryPolicyRequest) -> operations.DeleteRepositoryPolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes the repository policy associated with the specified repository.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.DeleteRepositoryPolicy"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -333,24 +362,23 @@ class SDK:
 
     
     def describe_image_tags(self, request: operations.DescribeImageTagsRequest) -> operations.DescribeImageTagsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the image tag details for a repository in a public registry.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.DescribeImageTags"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -377,24 +405,23 @@ class SDK:
 
     
     def describe_images(self, request: operations.DescribeImagesRequest) -> operations.DescribeImagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Returns metadata about the images in a repository in a public registry.</p> <note> <p>Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the <code>docker images</code> command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by <a>DescribeImages</a>.</p> </note>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.DescribeImages"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -425,24 +452,23 @@ class SDK:
 
     
     def describe_registries(self, request: operations.DescribeRegistriesRequest) -> operations.DescribeRegistriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns details for a public registry.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.DescribeRegistries"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -469,24 +495,23 @@ class SDK:
 
     
     def describe_repositories(self, request: operations.DescribeRepositoriesRequest) -> operations.DescribeRepositoriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes repositories in a public registry.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.DescribeRepositories"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -513,22 +538,22 @@ class SDK:
 
     
     def get_authorization_token(self, request: operations.GetAuthorizationTokenRequest) -> operations.GetAuthorizationTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves an authorization token. An authorization token represents your IAM authentication credentials and can be used to access any Amazon ECR registry that your IAM principal has access to. The authorization token is valid for 12 hours. This API requires the <code>ecr-public:GetAuthorizationToken</code> and <code>sts:GetServiceBearerToken</code> permissions.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.GetAuthorizationToken"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -551,22 +576,22 @@ class SDK:
 
     
     def get_registry_catalog_data(self, request: operations.GetRegistryCatalogDataRequest) -> operations.GetRegistryCatalogDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves catalog metadata for a public registry.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.GetRegistryCatalogData"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -589,22 +614,22 @@ class SDK:
 
     
     def get_repository_catalog_data(self, request: operations.GetRepositoryCatalogDataRequest) -> operations.GetRepositoryCatalogDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve catalog metadata for a repository in a public registry. This metadata is displayed publicly in the Amazon ECR Public Gallery.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.GetRepositoryCatalogData"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -631,22 +656,22 @@ class SDK:
 
     
     def get_repository_policy(self, request: operations.GetRepositoryPolicyRequest) -> operations.GetRepositoryPolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the repository policy for the specified repository.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.GetRepositoryPolicy"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -677,22 +702,22 @@ class SDK:
 
     
     def initiate_layer_upload(self, request: operations.InitiateLayerUploadRequest) -> operations.InitiateLayerUploadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Notifies Amazon ECR that you intend to upload an image layer.</p> <p>When an image is pushed, the InitiateLayerUpload API is called once per image layer that has not already been uploaded. Whether or not an image layer has been uploaded is determined by the BatchCheckLayerAvailability API action.</p> <note> <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.InitiateLayerUpload"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -727,22 +752,22 @@ class SDK:
 
     
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List the tags for an Amazon ECR Public resource.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.ListTagsForResource"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -769,22 +794,22 @@ class SDK:
 
     
     def put_image(self, request: operations.PutImageRequest) -> operations.PutImageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates or updates the image manifest and tags associated with an image.</p> <p>When an image is pushed and all new image layers have been uploaded, the PutImage API is called once to create or update the image manifest and the tags associated with the image.</p> <note> <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.PutImage"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -843,22 +868,22 @@ class SDK:
 
     
     def put_registry_catalog_data(self, request: operations.PutRegistryCatalogDataRequest) -> operations.PutRegistryCatalogDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create or updates the catalog data for a public registry.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.PutRegistryCatalogData"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -885,22 +910,22 @@ class SDK:
 
     
     def put_repository_catalog_data(self, request: operations.PutRepositoryCatalogDataRequest) -> operations.PutRepositoryCatalogDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates or updates the catalog data for a repository in a public registry.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.PutRepositoryCatalogData"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -927,22 +952,22 @@ class SDK:
 
     
     def set_repository_policy(self, request: operations.SetRepositoryPolicyRequest) -> operations.SetRepositoryPolicyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Applies a repository policy to the specified public repository to control access permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html\">Amazon ECR Repository Policies</a> in the <i>Amazon Elastic Container Registry User Guide</i>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.SetRepositoryPolicy"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -969,22 +994,22 @@ class SDK:
 
     
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Associates the specified tags to a resource with the specified <code>resourceArn</code>. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.TagResource"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1019,22 +1044,22 @@ class SDK:
 
     
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes specified tags from a resource.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.UntagResource"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1069,22 +1094,22 @@ class SDK:
 
     
     def upload_layer_part(self, request: operations.UploadLayerPartRequest) -> operations.UploadLayerPartResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Uploads an image layer part to Amazon ECR.</p> <p>When an image is pushed, each new image layer is uploaded in parts. The maximum size of each image layer part can be 20971520 bytes (or about 20MB). The UploadLayerPart API is called once per each new image layer part.</p> <note> <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SpencerFrontendService.UploadLayerPart"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

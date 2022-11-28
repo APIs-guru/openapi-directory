@@ -13,27 +13,19 @@ type ResizeLinodeInstanceRequestBody struct {
 	Type                string `json:"type"`
 }
 
-type ResizeLinodeInstanceSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type ResizeLinodeInstanceSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type ResizeLinodeInstanceSecurity struct {
-	Option1 *ResizeLinodeInstanceSecurityOption1 `security:"option"`
-	Option2 *ResizeLinodeInstanceSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type ResizeLinodeInstanceDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type ResizeLinodeInstanceRequest struct {
 	PathParams ResizeLinodeInstancePathParams
 	Request    ResizeLinodeInstanceRequestBody `request:"mediaType=application/json"`
 	Security   ResizeLinodeInstanceSecurity
-}
-
-type ResizeLinodeInstanceDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type ResizeLinodeInstanceResponse struct {

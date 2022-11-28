@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BloggerPostsListPathParams:
-    blog_id: str = field(default=None, metadata={'path_param': { 'field_name': 'blogId', 'style': 'simple', 'explode': False }})
+    blog_id: str = field(metadata={'path_param': { 'field_name': 'blogId', 'style': 'simple', 'explode': False }})
     
 class BloggerPostsListOrderByEnum(str, Enum):
     ORDER_BY_UNSPECIFIED = "ORDER_BY_UNSPECIFIED"
@@ -52,14 +56,14 @@ class BloggerPostsListQueryParams:
 
 @dataclass
 class BloggerPostsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BloggerPostsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -70,14 +74,14 @@ class BloggerPostsListSecurity:
 
 @dataclass
 class BloggerPostsListRequest:
-    path_params: BloggerPostsListPathParams = field(default=None)
-    query_params: BloggerPostsListQueryParams = field(default=None)
-    security: BloggerPostsListSecurity = field(default=None)
+    path_params: BloggerPostsListPathParams = field()
+    query_params: BloggerPostsListQueryParams = field()
+    security: BloggerPostsListSecurity = field()
     
 
 @dataclass
 class BloggerPostsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     post_list: Optional[shared.PostList] = field(default=None)
-    status_code: int = field(default=None)
     

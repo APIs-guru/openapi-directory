@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TriggerEventTypeEnum } from "./triggereventtypeenum";
+
 
 
 // TriggerConfig
@@ -7,12 +8,12 @@ import { TriggerEventTypeEnum } from "./triggereventtypeenum";
  * Information about notification triggers for the deployment group.
 **/
 export class TriggerConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=triggerEvents" })
+  @SpeakeasyMetadata({ data: "json, name=triggerEvents" })
   triggerEvents?: TriggerEventTypeEnum[];
 
-  @Metadata({ data: "json, name=triggerName" })
+  @SpeakeasyMetadata({ data: "json, name=triggerName" })
   triggerName?: string;
 
-  @Metadata({ data: "json, name=triggerTargetArn" })
+  @SpeakeasyMetadata({ data: "json, name=triggerTargetArn" })
   triggerTargetArn?: string;
 }

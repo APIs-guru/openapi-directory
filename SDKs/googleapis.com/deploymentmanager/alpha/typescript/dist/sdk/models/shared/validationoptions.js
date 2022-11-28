@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ValidationOptionsSchemaValidationEnum;
 (function (ValidationOptionsSchemaValidationEnum) {
     ValidationOptionsSchemaValidationEnum["Unknown"] = "UNKNOWN";
@@ -49,11 +49,11 @@ var ValidationOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=schemaValidation" }),
+        SpeakeasyMetadata({ data: "json, name=schemaValidation" }),
         __metadata("design:type", String)
     ], ValidationOptions.prototype, "schemaValidation", void 0);
     __decorate([
-        Metadata({ data: "json, name=undeclaredProperties" }),
+        SpeakeasyMetadata({ data: "json, name=undeclaredProperties" }),
         __metadata("design:type", String)
     ], ValidationOptions.prototype, "undeclaredProperties", void 0);
     return ValidationOptions;

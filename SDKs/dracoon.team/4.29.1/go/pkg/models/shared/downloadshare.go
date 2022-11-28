@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DownloadShare
+// Download Share information
 type DownloadShare struct {
 	AccessKey           string     `json:"accessKey"`
 	Classification      *int32     `json:"classification,omitempty"`

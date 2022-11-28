@@ -1,82 +1,83 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum CreateScriptTagRequestBodyScriptTagDisplayScopeEnum {
-    All = "all"
-,    Shop = "shop"
-,    ThanksPage = "thanks_page"
-,    Cart = "cart"
+    All = "all",
+    Shop = "shop",
+    ThanksPage = "thanks_page",
+    Cart = "cart"
 }
 
 
 export class CreateScriptTagRequestBodyScriptTag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=display_scope" })
+  @SpeakeasyMetadata({ data: "json, name=display_scope" })
   displayScope?: CreateScriptTagRequestBodyScriptTagDisplayScopeEnum;
 
-  @Metadata({ data: "json, name=src" })
+  @SpeakeasyMetadata({ data: "json, name=src" })
   src?: string;
 }
 
 
 export class CreateScriptTagRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=script_tag" })
+  @SpeakeasyMetadata({ data: "json, name=script_tag" })
   scriptTag?: CreateScriptTagRequestBodyScriptTag;
 }
 
 
 export class CreateScriptTagSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
-
-export class CreateScriptTagRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: CreateScriptTagRequestBody;
-
-  @Metadata()
-  security: CreateScriptTagSecurity;
-}
-
 export enum CreateScriptTag200ApplicationJsonScriptTagDisplayScopeEnum {
-    All = "all"
-,    Shop = "shop"
-,    ThanksPage = "thanks_page"
-,    Cart = "cart"
+    All = "all",
+    Shop = "shop",
+    ThanksPage = "thanks_page",
+    Cart = "cart"
 }
 
 
 export class CreateScriptTag200ApplicationJsonScriptTag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=display_scope" })
+  @SpeakeasyMetadata({ data: "json, name=display_scope" })
   displayScope?: CreateScriptTag200ApplicationJsonScriptTagDisplayScopeEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=make_date" })
+  @SpeakeasyMetadata({ data: "json, name=make_date" })
   makeDate?: number;
 
-  @Metadata({ data: "json, name=src" })
+  @SpeakeasyMetadata({ data: "json, name=src" })
   src?: string;
 
-  @Metadata({ data: "json, name=update_date" })
+  @SpeakeasyMetadata({ data: "json, name=update_date" })
   updateDate?: number;
 }
 
 
 export class CreateScriptTag200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=script_tag" })
+  @SpeakeasyMetadata({ data: "json, name=script_tag" })
   scriptTag?: CreateScriptTag200ApplicationJsonScriptTag;
 }
 
 
+export class CreateScriptTagRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: CreateScriptTagRequestBody;
+
+  @SpeakeasyMetadata()
+  security: CreateScriptTagSecurity;
+}
+
+
 export class CreateScriptTagResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createScriptTag200ApplicationJsonObject?: CreateScriptTag200ApplicationJson;
 }

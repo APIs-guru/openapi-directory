@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteEventPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=conversation_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=conversation_id" })
   conversationId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=event_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=event_id" })
   eventId: string;
 }
 
 
 export class DeleteEventRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteEventPathParams;
 }
 
 
 export class DeleteEventResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteEvent200ApplicationJsonObject?: Map<string, any>;
 }

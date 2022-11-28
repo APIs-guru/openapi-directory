@@ -4,24 +4,24 @@ from typing import Any,Optional
 
 @dataclass
 class PostPeersIDStorePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostPeersIDStoreRequests:
+    text_plain: bytes = field(metadata={'request': { 'media_type': 'text/plain' }})
     any: Optional[Any] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    text_plain: bytes = field(default=None, metadata={'request': { 'media_type': 'text/plain' }})
     
 
 @dataclass
 class PostPeersIDStoreRequest:
-    path_params: PostPeersIDStorePathParams = field(default=None)
+    path_params: PostPeersIDStorePathParams = field()
     request: Optional[PostPeersIDStoreRequests] = field(default=None)
     
 
 @dataclass
 class PostPeersIDStoreResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     post_peers_id_store_200_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

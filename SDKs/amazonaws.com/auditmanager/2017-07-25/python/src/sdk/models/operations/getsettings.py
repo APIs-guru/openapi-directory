@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetSettingsAttributeEnum(str, Enum):
@@ -12,7 +16,7 @@ class GetSettingsAttributeEnum(str, Enum):
 
 @dataclass
 class GetSettingsPathParams:
-    attribute: GetSettingsAttributeEnum = field(default=None, metadata={'path_param': { 'field_name': 'attribute', 'style': 'simple', 'explode': False }})
+    attribute: GetSettingsAttributeEnum = field(metadata={'path_param': { 'field_name': 'attribute', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,15 +32,15 @@ class GetSettingsHeaders:
 
 @dataclass
 class GetSettingsRequest:
-    path_params: GetSettingsPathParams = field(default=None)
-    headers: GetSettingsHeaders = field(default=None)
+    headers: GetSettingsHeaders = field()
+    path_params: GetSettingsPathParams = field()
     
 
 @dataclass
 class GetSettingsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_settings_response: Optional[shared.GetSettingsResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

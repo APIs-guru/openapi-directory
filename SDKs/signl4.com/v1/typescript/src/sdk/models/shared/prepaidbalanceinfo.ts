@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PrepaidBalanceInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=balance" })
+  @SpeakeasyMetadata({ data: "json, name=balance" })
   balance?: number;
 
-  @Metadata({ data: "json, name=latestTopUp" })
+  @SpeakeasyMetadata({ data: "json, name=latestTopUp" })
   latestTopUp?: Date;
 
-  @Metadata({ data: "json, name=pendingTransaction" })
+  @SpeakeasyMetadata({ data: "json, name=pendingTransaction" })
   pendingTransaction?: boolean;
 }

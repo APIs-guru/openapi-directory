@@ -6,3 +6,10 @@ type PayItem struct {
 	LeaveTypes         []LeaveType         `json:"LeaveTypes,omitempty"`
 	ReimbursementTypes []ReimbursementType `json:"ReimbursementTypes,omitempty"`
 }
+
+type PayItemInput struct {
+	DeductionTypes     []DeductionTypeInput     `json:"DeductionTypes,omitempty"`
+	EarningsRates      []EarningsRateInput      `json:"EarningsRates,omitempty"`
+	LeaveTypes         []LeaveTypeInput         `json:"LeaveTypes,omitempty"`
+	ReimbursementTypes []ReimbursementTypeInput `json:"ReimbursementTypes,omitempty"`
+}

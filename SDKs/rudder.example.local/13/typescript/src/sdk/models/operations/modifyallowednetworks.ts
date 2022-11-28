@@ -1,33 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ModifyAllowedNetworksPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=nodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nodeId" })
   nodeId: string;
 }
 
 
 export class ModifyAllowedNetworksRequestBodyAllowedNetworks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=add" })
+  @SpeakeasyMetadata({ data: "json, name=add" })
   add?: any[];
 
-  @Metadata({ data: "json, name=delete" })
+  @SpeakeasyMetadata({ data: "json, name=delete" })
   delete?: any[];
 }
 
 
 export class ModifyAllowedNetworksRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowed_networks" })
+  @SpeakeasyMetadata({ data: "json, name=allowed_networks" })
   allowedNetworks?: ModifyAllowedNetworksRequestBodyAllowedNetworks;
-}
-
-
-export class ModifyAllowedNetworksRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ModifyAllowedNetworksPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: ModifyAllowedNetworksRequestBody;
 }
 
 export enum ModifyAllowedNetworks200ApplicationJsonActionEnum {
@@ -40,35 +32,44 @@ export enum ModifyAllowedNetworks200ApplicationJsonActionEnum {
  * Information about the allowed_networks settings
 **/
 export class ModifyAllowedNetworks200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowed_networks" })
+  @SpeakeasyMetadata({ data: "json, name=allowed_networks" })
   allowedNetworks?: any[];
 }
 
 export enum ModifyAllowedNetworks200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class ModifyAllowedNetworks200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: ModifyAllowedNetworks200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: ModifyAllowedNetworks200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: ModifyAllowedNetworks200ApplicationJsonResultEnum;
 }
 
 
+export class ModifyAllowedNetworksRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ModifyAllowedNetworksPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: ModifyAllowedNetworksRequestBody;
+}
+
+
 export class ModifyAllowedNetworksResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   modifyAllowedNetworks200ApplicationJsonObject?: ModifyAllowedNetworks200ApplicationJson;
 }

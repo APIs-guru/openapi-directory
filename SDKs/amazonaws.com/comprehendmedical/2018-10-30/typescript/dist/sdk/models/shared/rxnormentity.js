@@ -22,9 +22,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { RxNormAttribute } from "./rxnormattribute";
 import { RxNormEntityCategoryEnum } from "./rxnormentitycategoryenum";
+import { RxNormConcept } from "./rxnormconcept";
+import { RxNormTrait } from "./rxnormtrait";
 import { RxNormEntityTypeEnum } from "./rxnormentitytypeenum";
 // RxNormEntity
 /**
@@ -36,43 +38,43 @@ var RxNormEntity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Attributes", elemType: shared.RxNormAttribute }),
+        SpeakeasyMetadata({ data: "json, name=Attributes", elemType: RxNormAttribute }),
         __metadata("design:type", Array)
     ], RxNormEntity.prototype, "attributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=BeginOffset" }),
+        SpeakeasyMetadata({ data: "json, name=BeginOffset" }),
         __metadata("design:type", Number)
     ], RxNormEntity.prototype, "beginOffset", void 0);
     __decorate([
-        Metadata({ data: "json, name=Category" }),
+        SpeakeasyMetadata({ data: "json, name=Category" }),
         __metadata("design:type", String)
     ], RxNormEntity.prototype, "category", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndOffset" }),
+        SpeakeasyMetadata({ data: "json, name=EndOffset" }),
         __metadata("design:type", Number)
     ], RxNormEntity.prototype, "endOffset", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", Number)
     ], RxNormEntity.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=RxNormConcepts", elemType: shared.RxNormConcept }),
+        SpeakeasyMetadata({ data: "json, name=RxNormConcepts", elemType: RxNormConcept }),
         __metadata("design:type", Array)
     ], RxNormEntity.prototype, "rxNormConcepts", void 0);
     __decorate([
-        Metadata({ data: "json, name=Score" }),
+        SpeakeasyMetadata({ data: "json, name=Score" }),
         __metadata("design:type", Number)
     ], RxNormEntity.prototype, "score", void 0);
     __decorate([
-        Metadata({ data: "json, name=Text" }),
+        SpeakeasyMetadata({ data: "json, name=Text" }),
         __metadata("design:type", String)
     ], RxNormEntity.prototype, "text", void 0);
     __decorate([
-        Metadata({ data: "json, name=Traits", elemType: shared.RxNormTrait }),
+        SpeakeasyMetadata({ data: "json, name=Traits", elemType: RxNormTrait }),
         __metadata("design:type", Array)
     ], RxNormEntity.prototype, "traits", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], RxNormEntity.prototype, "type", void 0);
     return RxNormEntity;

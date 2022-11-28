@@ -1,5 +1,7 @@
 package shared
 
+// GridData
+// Data in the grid, as well as metadata about the dimensions.
 type GridData struct {
 	ColumnMetadata []DimensionProperties `json:"columnMetadata,omitempty"`
 	RowData        []RowData             `json:"rowData,omitempty"`

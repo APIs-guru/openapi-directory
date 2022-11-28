@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SignInBehaviorRedirectConditionEnum {
-    RedirectConditionUnspecified = "REDIRECT_CONDITION_UNSPECIFIED"
-,    Never = "NEVER"
+    RedirectConditionUnspecified = "REDIRECT_CONDITION_UNSPECIFIED",
+    Never = "NEVER"
 }
 
 
@@ -11,6 +12,6 @@ export enum SignInBehaviorRedirectConditionEnum {
  * Controls sign-in behavior.
 **/
 export class SignInBehavior extends SpeakeasyBase {
-  @Metadata({ data: "json, name=redirectCondition" })
+  @SpeakeasyMetadata({ data: "json, name=redirectCondition" })
   redirectCondition?: SignInBehaviorRedirectConditionEnum;
 }

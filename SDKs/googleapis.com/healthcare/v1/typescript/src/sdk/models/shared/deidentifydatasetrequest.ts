@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeidentifyConfig } from "./deidentifyconfig";
+
 
 
 // DeidentifyDatasetRequest
@@ -7,12 +8,12 @@ import { DeidentifyConfig } from "./deidentifyconfig";
  * Redacts identifying information from the specified dataset.
 **/
 export class DeidentifyDatasetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: DeidentifyConfig;
 
-  @Metadata({ data: "json, name=destinationDataset" })
+  @SpeakeasyMetadata({ data: "json, name=destinationDataset" })
   destinationDataset?: string;
 
-  @Metadata({ data: "json, name=gcsConfigUri" })
+  @SpeakeasyMetadata({ data: "json, name=gcsConfigUri" })
   gcsConfigUri?: string;
 }

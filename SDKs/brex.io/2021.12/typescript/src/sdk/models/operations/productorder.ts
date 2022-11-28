@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ProductOrderPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=sku" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sku" })
   sku: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=subjectId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subjectId" })
   subjectId: string;
 }
 
 
 export class ProductOrderSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   userKey: shared.SchemeUserKey;
 }
 
 
 export class ProductOrderRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ProductOrderPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ProductOrderSecurity;
 }
 
 
 export class ProductOrderResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   productOrder200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   productOrderDefaultApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

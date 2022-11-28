@@ -10,6 +10,8 @@ const (
 	IPReputationReputationEnumBad                           IPReputationReputationEnum = "BAD"
 )
 
+// IPReputation
+// IP Reputation information for a set of IPs in a specific reputation category.
 type IPReputation struct {
 	IPCount    *string                     `json:"ipCount,omitempty"`
 	NumIps     *string                     `json:"numIps,omitempty"`

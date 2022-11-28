@@ -1,6 +1,7 @@
 
 
+
 export enum PayloadTypeEnum {
-    String = "STRING"
-,    Json = "JSON"
+    String = "STRING",
+    Json = "JSON"
 }

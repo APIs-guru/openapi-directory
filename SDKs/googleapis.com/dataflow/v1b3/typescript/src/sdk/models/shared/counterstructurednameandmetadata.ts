@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CounterMetadata } from "./countermetadata";
 import { CounterStructuredName } from "./counterstructuredname";
+
 
 
 // CounterStructuredNameAndMetadata
@@ -8,9 +9,9 @@ import { CounterStructuredName } from "./counterstructuredname";
  * A single message which encapsulates structured name and metadata for a given counter.
 **/
 export class CounterStructuredNameAndMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: CounterMetadata;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: CounterStructuredName;
 }

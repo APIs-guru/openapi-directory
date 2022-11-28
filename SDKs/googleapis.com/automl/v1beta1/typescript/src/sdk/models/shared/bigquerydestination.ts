@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BigQueryDestination
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The BigQuery location for the output content.
 **/
 export class BigQueryDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=outputUri" })
+  @SpeakeasyMetadata({ data: "json, name=outputUri" })
   outputUri?: string;
 }

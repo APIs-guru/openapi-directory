@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GkebackupProjectsLocationsBackupPlansListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class GkebackupProjectsLocationsBackupPlansListQueryParams:
 
 @dataclass
 class GkebackupProjectsLocationsBackupPlansListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GkebackupProjectsLocationsBackupPlansListRequest:
-    path_params: GkebackupProjectsLocationsBackupPlansListPathParams = field(default=None)
-    query_params: GkebackupProjectsLocationsBackupPlansListQueryParams = field(default=None)
-    security: GkebackupProjectsLocationsBackupPlansListSecurity = field(default=None)
+    path_params: GkebackupProjectsLocationsBackupPlansListPathParams = field()
+    query_params: GkebackupProjectsLocationsBackupPlansListQueryParams = field()
+    security: GkebackupProjectsLocationsBackupPlansListSecurity = field()
     
 
 @dataclass
 class GkebackupProjectsLocationsBackupPlansListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_backup_plans_response: Optional[shared.ListBackupPlansResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostReplaceNetworkACLAssociationActionEnum(str, Enum):
     REPLACE_NETWORK_ACL_ASSOCIATION = "ReplaceNetworkAclAssociation"
@@ -10,8 +14,8 @@ class PostReplaceNetworkACLAssociationVersionEnum(str, Enum):
 
 @dataclass
 class PostReplaceNetworkACLAssociationQueryParams:
-    action: PostReplaceNetworkACLAssociationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostReplaceNetworkACLAssociationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostReplaceNetworkACLAssociationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostReplaceNetworkACLAssociationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostReplaceNetworkACLAssociationHeaders:
 
 @dataclass
 class PostReplaceNetworkACLAssociationRequest:
-    query_params: PostReplaceNetworkACLAssociationQueryParams = field(default=None)
-    headers: PostReplaceNetworkACLAssociationHeaders = field(default=None)
+    headers: PostReplaceNetworkACLAssociationHeaders = field()
+    query_params: PostReplaceNetworkACLAssociationQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostReplaceNetworkACLAssociationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

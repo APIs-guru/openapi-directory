@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class GetSyndicatedCommentsFormatEnum(str, Enum):
     XML = "xml"
@@ -13,7 +14,7 @@ class GetSyndicatedCommentsFormatEnum(str, Enum):
 
 @dataclass
 class GetSyndicatedCommentsPathParams:
-    format: GetSyndicatedCommentsFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    format: GetSyndicatedCommentsFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,15 +28,15 @@ class GetSyndicatedCommentsQueryParams:
 
 @dataclass
 class GetSyndicatedCommentsRequest:
-    path_params: GetSyndicatedCommentsPathParams = field(default=None)
-    query_params: GetSyndicatedCommentsQueryParams = field(default=None)
+    path_params: GetSyndicatedCommentsPathParams = field()
+    query_params: GetSyndicatedCommentsQueryParams = field()
     
 
 @dataclass
 class GetSyndicatedCommentsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     get_syndicated_comments_204_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

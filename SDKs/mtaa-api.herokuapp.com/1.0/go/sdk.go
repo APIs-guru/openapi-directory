@@ -4,12 +4,11 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-
 	"openapi/internal/utils"
 	"openapi/pkg/models/operations"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://mtaa-api.herokuapp.com/api",
 }
 
@@ -18,9 +17,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +34,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DistrictsInARegion - Returns all districts in region
+// Returns a post code and all districts in a specified region
 func (s *SDK) DistrictsInARegion(ctx context.Context, request operations.DistrictsInARegionRequest) (*operations.DistrictsInARegionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{country}/{region}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -59,7 +81,7 @@ func (s *SDK) DistrictsInARegion(ctx context.Context, request operations.Distric
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -81,8 +103,10 @@ func (s *SDK) DistrictsInARegion(ctx context.Context, request operations.Distric
 	return res, nil
 }
 
+// TanzaniaRegions - Returns all regions present in Tanzania
+// Fetches all regions present in Tanzania and then return a response as json
 func (s *SDK) TanzaniaRegions(ctx context.Context, request operations.TanzaniaRegionsRequest) (*operations.TanzaniaRegionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{country}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -90,7 +114,7 @@ func (s *SDK) TanzaniaRegions(ctx context.Context, request operations.TanzaniaRe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -111,8 +135,10 @@ func (s *SDK) TanzaniaRegions(ctx context.Context, request operations.TanzaniaRe
 	return res, nil
 }
 
+// WardsInADistrict - Returns all wards in a district
+// Returns all wards in a  specified district and district postcode
 func (s *SDK) WardsInADistrict(ctx context.Context, request operations.WardsInADistrictRequest) (*operations.WardsInADistrictResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{country}/{region}/{district}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -120,7 +146,7 @@ func (s *SDK) WardsInADistrict(ctx context.Context, request operations.WardsInAD
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -142,8 +168,10 @@ func (s *SDK) WardsInADistrict(ctx context.Context, request operations.WardsInAD
 	return res, nil
 }
 
+// NeighborhoodInAStreet - Returns all neighborhood in a street
+// Returns all neighborhood in a specified street
 func (s *SDK) NeighborhoodInAStreet(ctx context.Context, request operations.NeighborhoodInAStreetRequest) (*operations.NeighborhoodInAStreetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{country}/{region}/{district}/{ward}/{street}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -151,7 +179,7 @@ func (s *SDK) NeighborhoodInAStreet(ctx context.Context, request operations.Neig
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -173,8 +201,10 @@ func (s *SDK) NeighborhoodInAStreet(ctx context.Context, request operations.Neig
 	return res, nil
 }
 
+// StreetsInAWard - Returns all streets in a ward
+// Returns all streets in a specified ward and ward postcode
 func (s *SDK) StreetsInAWard(ctx context.Context, request operations.StreetsInAWardRequest) (*operations.StreetsInAWardResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{country}/{region}/{district}/{ward}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -182,7 +212,7 @@ func (s *SDK) StreetsInAWard(ctx context.Context, request operations.StreetsInAW
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudIdentitytoolkitV2FinalizeMfaPhoneResponseInfo
 /**
  * Phone Verification info for a FinalizeMfa response.
@@ -33,15 +33,15 @@ var GoogleCloudIdentitytoolkitV2FinalizeMfaPhoneResponseInfo = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=androidVerificationProof" }),
+        SpeakeasyMetadata({ data: "json, name=androidVerificationProof" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitV2FinalizeMfaPhoneResponseInfo.prototype, "androidVerificationProof", void 0);
     __decorate([
-        Metadata({ data: "json, name=androidVerificationProofExpireTime" }),
+        SpeakeasyMetadata({ data: "json, name=androidVerificationProofExpireTime" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitV2FinalizeMfaPhoneResponseInfo.prototype, "androidVerificationProofExpireTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=phoneNumber" }),
+        SpeakeasyMetadata({ data: "json, name=phoneNumber" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitV2FinalizeMfaPhoneResponseInfo.prototype, "phoneNumber", void 0);
     return GoogleCloudIdentitytoolkitV2FinalizeMfaPhoneResponseInfo;

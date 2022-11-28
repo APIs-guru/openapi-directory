@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostSetupV1ResourcegroupsRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   resourceGroupInputModel?: shared.ResourceGroupInputModel;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   resourceGroupInputModel1?: shared.ResourceGroupInputModel;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   resourceGroupInputModel2?: shared.ResourceGroupInputModel;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   resourceGroupInputModel3?: shared.ResourceGroupInputModel;
 }
 
 
 export class PostSetupV1ResourcegroupsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PostSetupV1ResourcegroupsRequests;
 }
 
 
 export class PostSetupV1ResourcegroupsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceGroupViewModel?: shared.ResourceGroupViewModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsScriptTypeWebAppConfig } from "./googleappsscripttypewebappconfig";
+
 
 
 // GoogleAppsScriptTypeWebAppEntryPoint
@@ -7,9 +8,9 @@ import { GoogleAppsScriptTypeWebAppConfig } from "./googleappsscripttypewebappco
  * A web application entry point.
 **/
 export class GoogleAppsScriptTypeWebAppEntryPoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entryPointConfig" })
+  @SpeakeasyMetadata({ data: "json, name=entryPointConfig" })
   entryPointConfig?: GoogleAppsScriptTypeWebAppConfig;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

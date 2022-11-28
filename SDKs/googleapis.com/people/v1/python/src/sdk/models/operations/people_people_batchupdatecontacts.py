@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,20 +24,20 @@ class PeoplePeopleBatchUpdateContactsQueryParams:
 
 @dataclass
 class PeoplePeopleBatchUpdateContactsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PeoplePeopleBatchUpdateContactsRequest:
-    query_params: PeoplePeopleBatchUpdateContactsQueryParams = field(default=None)
-    request: Optional[shared.BatchUpdateContactsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PeoplePeopleBatchUpdateContactsSecurity = field(default=None)
+    query_params: PeoplePeopleBatchUpdateContactsQueryParams = field()
+    security: PeoplePeopleBatchUpdateContactsSecurity = field()
+    request: Optional[shared.BatchUpdateContactsRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PeoplePeopleBatchUpdateContactsResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_update_contacts_response: Optional[shared.BatchUpdateContactsResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

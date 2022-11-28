@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PhoneNumber
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This complex type contains a string field representing a telephone number.
 **/
 export class PhoneNumber extends SpeakeasyBase {
-  @Metadata({ data: "json, name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
   phoneNumber?: string;
 }

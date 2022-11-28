@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostApiV1GenevaActionsConfigurationTargetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=target" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=target" })
   target: string;
 }
 
 
 export class PostApiV1GenevaActionsConfigurationTargetRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   updateSystemConfigurationBody?: shared.UpdateSystemConfigurationBody;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   updateSystemConfigurationBody1?: shared.UpdateSystemConfigurationBody;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   updateSystemConfigurationBody2?: shared.UpdateSystemConfigurationBody;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   updateSystemConfigurationBody3?: shared.UpdateSystemConfigurationBody;
 }
 
 
 export class PostApiV1GenevaActionsConfigurationTargetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostApiV1GenevaActionsConfigurationTargetPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: PostApiV1GenevaActionsConfigurationTargetRequests;
 }
 
 
 export class PostApiV1GenevaActionsConfigurationTargetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   systemConfigurationResponse?: shared.SystemConfigurationResponse;
 }

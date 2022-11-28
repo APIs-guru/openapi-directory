@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateAlarmModelHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,10 +32,10 @@ export class CreateAlarmModelHeaders extends SpeakeasyBase {
  * Contains the configuration information of alarm state changes.
 **/
 export class CreateAlarmModelRequestBodyAlarmCapabilities extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acknowledgeFlow" })
+  @SpeakeasyMetadata({ data: "json, name=acknowledgeFlow" })
   acknowledgeFlow?: shared.AcknowledgeFlow;
 
-  @Metadata({ data: "json, name=initializationConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=initializationConfiguration" })
   initializationConfiguration?: shared.InitializationConfiguration;
 }
 
@@ -44,7 +45,7 @@ export class CreateAlarmModelRequestBodyAlarmCapabilities extends SpeakeasyBase 
  * Contains information about one or more alarm actions.
 **/
 export class CreateAlarmModelRequestBodyAlarmEventActions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alarmActions", elemType: shared.AlarmAction })
+  @SpeakeasyMetadata({ data: "json, name=alarmActions", elemType: shared.AlarmAction })
   alarmActions?: shared.AlarmAction[];
 }
 
@@ -54,7 +55,7 @@ export class CreateAlarmModelRequestBodyAlarmEventActions extends SpeakeasyBase 
  * Contains information about one or more notification actions.
 **/
 export class CreateAlarmModelRequestBodyAlarmNotification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=notificationActions", elemType: shared.NotificationAction })
+  @SpeakeasyMetadata({ data: "json, name=notificationActions", elemType: shared.NotificationAction })
   notificationActions?: shared.NotificationAction[];
 }
 
@@ -64,81 +65,81 @@ export class CreateAlarmModelRequestBodyAlarmNotification extends SpeakeasyBase 
  * Defines when your alarm is invoked.
 **/
 export class CreateAlarmModelRequestBodyAlarmRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=simpleRule" })
+  @SpeakeasyMetadata({ data: "json, name=simpleRule" })
   simpleRule?: shared.SimpleRule;
 }
 
 
 export class CreateAlarmModelRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alarmCapabilities" })
+  @SpeakeasyMetadata({ data: "json, name=alarmCapabilities" })
   alarmCapabilities?: CreateAlarmModelRequestBodyAlarmCapabilities;
 
-  @Metadata({ data: "json, name=alarmEventActions" })
+  @SpeakeasyMetadata({ data: "json, name=alarmEventActions" })
   alarmEventActions?: CreateAlarmModelRequestBodyAlarmEventActions;
 
-  @Metadata({ data: "json, name=alarmModelDescription" })
+  @SpeakeasyMetadata({ data: "json, name=alarmModelDescription" })
   alarmModelDescription?: string;
 
-  @Metadata({ data: "json, name=alarmModelName" })
+  @SpeakeasyMetadata({ data: "json, name=alarmModelName" })
   alarmModelName: string;
 
-  @Metadata({ data: "json, name=alarmNotification" })
+  @SpeakeasyMetadata({ data: "json, name=alarmNotification" })
   alarmNotification?: CreateAlarmModelRequestBodyAlarmNotification;
 
-  @Metadata({ data: "json, name=alarmRule" })
+  @SpeakeasyMetadata({ data: "json, name=alarmRule" })
   alarmRule: CreateAlarmModelRequestBodyAlarmRule;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: number;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: shared.Tag })
   tags?: shared.Tag[];
 }
 
 
 export class CreateAlarmModelRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateAlarmModelHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateAlarmModelRequestBody;
 }
 
 
 export class CreateAlarmModelResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createAlarmModelResponse?: shared.CreateAlarmModelResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceAlreadyExistsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceInUseException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

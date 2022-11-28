@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SuggestionMatch
 /**
  * An autocomplete suggestion that matches the query string specified in a <code>SuggestRequest</code>.
@@ -33,15 +33,15 @@ var SuggestionMatch = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], SuggestionMatch.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=score" }),
+        SpeakeasyMetadata({ data: "json, name=score" }),
         __metadata("design:type", Number)
     ], SuggestionMatch.prototype, "score", void 0);
     __decorate([
-        Metadata({ data: "json, name=suggestion" }),
+        SpeakeasyMetadata({ data: "json, name=suggestion" }),
         __metadata("design:type", String)
     ], SuggestionMatch.prototype, "suggestion", void 0);
     return SuggestionMatch;

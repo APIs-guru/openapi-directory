@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class NetworkservicesProjectsLocationsGrpcRoutesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class NetworkservicesProjectsLocationsGrpcRoutesListQueryParams:
 
 @dataclass
 class NetworkservicesProjectsLocationsGrpcRoutesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class NetworkservicesProjectsLocationsGrpcRoutesListRequest:
-    path_params: NetworkservicesProjectsLocationsGrpcRoutesListPathParams = field(default=None)
-    query_params: NetworkservicesProjectsLocationsGrpcRoutesListQueryParams = field(default=None)
-    security: NetworkservicesProjectsLocationsGrpcRoutesListSecurity = field(default=None)
+    path_params: NetworkservicesProjectsLocationsGrpcRoutesListPathParams = field()
+    query_params: NetworkservicesProjectsLocationsGrpcRoutesListQueryParams = field()
+    security: NetworkservicesProjectsLocationsGrpcRoutesListSecurity = field()
     
 
 @dataclass
 class NetworkservicesProjectsLocationsGrpcRoutesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_grpc_routes_response: Optional[shared.ListGrpcRoutesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

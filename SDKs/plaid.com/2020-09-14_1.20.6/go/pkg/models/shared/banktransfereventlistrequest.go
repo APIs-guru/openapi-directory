@@ -18,6 +18,8 @@ const (
 	BankTransferEventListRequestBankTransferDirectionEnumOutbound BankTransferEventListRequestBankTransferDirectionEnum = "outbound"
 )
 
+// BankTransferEventListRequest
+// BankTransferEventListRequest defines the request schema for `/bank_transfer/event/list`
 type BankTransferEventListRequest struct {
 	AccountID            *string                                                `json:"account_id,omitempty"`
 	BankTransferID       *string                                                `json:"bank_transfer_id,omitempty"`

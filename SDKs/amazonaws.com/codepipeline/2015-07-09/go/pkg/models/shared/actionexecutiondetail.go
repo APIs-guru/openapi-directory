@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ActionExecutionDetail
+// Returns information about an execution of an action, including the action execution ID, and the name, version, and timing of the action.
 type ActionExecutionDetail struct {
 	ActionExecutionID   *string                    `json:"actionExecutionId,omitempty"`
 	ActionName          *string                    `json:"actionName,omitempty"`

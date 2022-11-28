@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReportRowMetricValue
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Representation of a metric value.
 **/
 export class ReportRowMetricValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=doubleValue" })
+  @SpeakeasyMetadata({ data: "json, name=doubleValue" })
   doubleValue?: number;
 
-  @Metadata({ data: "json, name=integerValue" })
+  @SpeakeasyMetadata({ data: "json, name=integerValue" })
   integerValue?: string;
 
-  @Metadata({ data: "json, name=microsValue" })
+  @SpeakeasyMetadata({ data: "json, name=microsValue" })
   microsValue?: string;
 }

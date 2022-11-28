@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ResetUserPasswordRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DirectoryId" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryId" })
   directoryId: string;
 
-  @Metadata({ data: "json, name=NewPassword" })
+  @SpeakeasyMetadata({ data: "json, name=NewPassword" })
   newPassword: string;
 
-  @Metadata({ data: "json, name=UserName" })
+  @SpeakeasyMetadata({ data: "json, name=UserName" })
   userName: string;
 }

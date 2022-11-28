@@ -30,7 +30,7 @@ type AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsCreateSecurit
 type AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsCreateRequest struct {
 	PathParams  AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsCreatePathParams
 	QueryParams AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsCreateQueryParams
-	Request     *shared.GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLinkProposal `request:"mediaType=application/json"`
+	Request     *shared.GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLinkProposalInput `request:"mediaType=application/json"`
 	Security    AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsCreateSecurity
 }
 

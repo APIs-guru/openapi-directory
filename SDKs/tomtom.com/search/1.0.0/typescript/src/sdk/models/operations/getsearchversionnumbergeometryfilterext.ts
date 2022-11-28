@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSearchVersionNumberGeometryFilterExtPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ext" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ext" })
   ext: shared.ExtEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" })
   versionNumber: number;
 }
 
 
 export class GetSearchVersionNumberGeometryFilterExtQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=geometryList" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=geometryList" })
   geometryList: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=poiList" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=poiList" })
   poiList: string;
 }
 
 
 export class GetSearchVersionNumberGeometryFilterExtRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSearchVersionNumberGeometryFilterExtPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSearchVersionNumberGeometryFilterExtQueryParams;
 }
 
 
 export class GetSearchVersionNumberGeometryFilterExtResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

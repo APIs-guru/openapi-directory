@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TflAPIPresentationEntitiesMatchedRoute
+// Description of a Route used in Route search results.
 type TflAPIPresentationEntitiesMatchedRoute struct {
 	Destination     *string    `json:"destination,omitempty"`
 	DestinationName *string    `json:"destinationName,omitempty"`

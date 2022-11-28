@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ResourceDataSyncOrganizationalUnit
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Organizations organizational unit data source for the sync.
 **/
 export class ResourceDataSyncOrganizationalUnit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OrganizationalUnitId" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationalUnitId" })
   organizationalUnitId?: string;
 }

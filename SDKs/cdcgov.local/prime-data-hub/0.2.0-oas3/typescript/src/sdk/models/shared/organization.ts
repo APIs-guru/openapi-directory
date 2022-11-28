@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SettingMetadata } from "./settingmetadata";
 
+
 export enum OrganizationJurisdictionEnum {
-    National = "National"
-,    State = "State"
-,    County = "County"
+    National = "National",
+    State = "State",
+    County = "County"
 }
 
 
@@ -13,21 +14,21 @@ export enum OrganizationJurisdictionEnum {
  * An organization connected to data hub
 **/
 export class Organization extends SpeakeasyBase {
-  @Metadata({ data: "json, name=countyName" })
+  @SpeakeasyMetadata({ data: "json, name=countyName" })
   countyName?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=jurisdiction" })
+  @SpeakeasyMetadata({ data: "json, name=jurisdiction" })
   jurisdiction: OrganizationJurisdictionEnum;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: SettingMetadata;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=stateCode" })
+  @SpeakeasyMetadata({ data: "json, name=stateCode" })
   stateCode?: string;
 }

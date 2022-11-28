@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HrefType } from "./hreftype";
 import { AccountReference16Ch } from "./accountreference16ch";
 import { Balance } from "./balance";
 import { AccountReport } from "./accountreport";
+
 
 
 // TransactionsResponse200Json
@@ -13,15 +13,15 @@ import { AccountReport } from "./accountreport";
  * 
 **/
 export class TransactionsResponse200Json extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_links", elemType: shared.HrefType })
+  @SpeakeasyMetadata({ data: "json, name=_links", elemType: HrefType })
   links?: Map<string, HrefType>;
 
-  @Metadata({ data: "json, name=account" })
+  @SpeakeasyMetadata({ data: "json, name=account" })
   account?: AccountReference16Ch;
 
-  @Metadata({ data: "json, name=balances", elemType: shared.Balance })
+  @SpeakeasyMetadata({ data: "json, name=balances", elemType: Balance })
   balances?: Balance[];
 
-  @Metadata({ data: "json, name=transactions" })
+  @SpeakeasyMetadata({ data: "json, name=transactions" })
   transactions?: AccountReport;
 }

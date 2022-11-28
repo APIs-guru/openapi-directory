@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NetworkConfig } from "./networkconfig";
 import { WorkerConfig } from "./workerconfig";
 export var WorkerPoolStateEnum;
@@ -43,49 +43,77 @@ var WorkerPool = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=annotations" }),
+        SpeakeasyMetadata({ data: "json, name=annotations" }),
         __metadata("design:type", Map)
     ], WorkerPool.prototype, "annotations", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], WorkerPool.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=deleteTime" }),
+        SpeakeasyMetadata({ data: "json, name=deleteTime" }),
         __metadata("design:type", String)
     ], WorkerPool.prototype, "deleteTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], WorkerPool.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], WorkerPool.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], WorkerPool.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=networkConfig" }),
+        SpeakeasyMetadata({ data: "json, name=networkConfig" }),
         __metadata("design:type", NetworkConfig)
     ], WorkerPool.prototype, "networkConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], WorkerPool.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=uid" }),
+        SpeakeasyMetadata({ data: "json, name=uid" }),
         __metadata("design:type", String)
     ], WorkerPool.prototype, "uid", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], WorkerPool.prototype, "updateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=workerConfig" }),
+        SpeakeasyMetadata({ data: "json, name=workerConfig" }),
         __metadata("design:type", WorkerConfig)
     ], WorkerPool.prototype, "workerConfig", void 0);
     return WorkerPool;
 }(SpeakeasyBase));
 export { WorkerPool };
+// WorkerPoolInput
+/**
+ * Configuration for a `WorkerPool` to run the builds. Workers provide a build environment where Cloud Build runs your builds. Cloud Build owns and maintains a pool of workers for general use. By default, when you submit a build, Cloud Build uses one of the workers from this pool. Builds that run in the default worker pool have access to the public internet. If your build needs access to resources on a private network, create and use a `WorkerPool` to run your builds. Custom `WorkerPool`s give your builds access to any single VPC network that you administer, including any on-prem resources connected to that VPC network. For an overview of custom worker pools, see [Custom workers overview](https://cloud.google.com/cloud-build/docs/custom-workers/custom-workers-overview).
+**/
+var WorkerPoolInput = /** @class */ (function (_super) {
+    __extends(WorkerPoolInput, _super);
+    function WorkerPoolInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=annotations" }),
+        __metadata("design:type", Map)
+    ], WorkerPoolInput.prototype, "annotations", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
+        __metadata("design:type", String)
+    ], WorkerPoolInput.prototype, "displayName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=networkConfig" }),
+        __metadata("design:type", NetworkConfig)
+    ], WorkerPoolInput.prototype, "networkConfig", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=workerConfig" }),
+        __metadata("design:type", WorkerConfig)
+    ], WorkerPoolInput.prototype, "workerConfig", void 0);
+    return WorkerPoolInput;
+}(SpeakeasyBase));
+export { WorkerPoolInput };

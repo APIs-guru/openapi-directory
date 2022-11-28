@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreateAccountStateEnum } from "./createaccountstateenum";
 
 
+
 export class ListCreateAccountStatusRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=States" })
+  @SpeakeasyMetadata({ data: "json, name=States" })
   states?: CreateAccountStateEnum[];
 }

@@ -1,5 +1,7 @@
 package shared
 
+// ShareInvitationSummary
+// A share invitation summary return object.
 type ShareInvitationSummary struct {
 	PermissionType    *PermissionTypeEnum `json:"PermissionType,omitempty"`
 	ShareInvitationID *string             `json:"ShareInvitationId,omitempty"`

@@ -1,17 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SongForApiContract } from "./songforapicontract";
-import { SongForApiContract } from "./songforapicontract";
-import { SongForApiContract } from "./songforapicontract";
+
 
 
 export class RelatedSongsContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=artistMatches", elemType: shared.SongForApiContract })
+  @SpeakeasyMetadata({ data: "json, name=artistMatches", elemType: SongForApiContract })
   artistMatches?: SongForApiContract[];
 
-  @Metadata({ data: "json, name=likeMatches", elemType: shared.SongForApiContract })
+  @SpeakeasyMetadata({ data: "json, name=likeMatches", elemType: SongForApiContract })
   likeMatches?: SongForApiContract[];
 
-  @Metadata({ data: "json, name=tagMatches", elemType: shared.SongForApiContract })
+  @SpeakeasyMetadata({ data: "json, name=tagMatches", elemType: SongForApiContract })
   tagMatches?: SongForApiContract[];
 }

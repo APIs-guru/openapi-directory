@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var OptionsWalletAccountIdPathParams = /** @class */ (function (_super) {
     __extends(OptionsWalletAccountIdPathParams, _super);
     function OptionsWalletAccountIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], OptionsWalletAccountIdPathParams.prototype, "id", void 0);
     return OptionsWalletAccountIdPathParams;
@@ -41,7 +41,7 @@ var OptionsWalletAccountIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", OptionsWalletAccountIdPathParams)
     ], OptionsWalletAccountIdRequest.prototype, "pathParams", void 0);
     return OptionsWalletAccountIdRequest;
@@ -53,19 +53,19 @@ var OptionsWalletAccountIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], OptionsWalletAccountIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], OptionsWalletAccountIdResponse.prototype, "empty", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], OptionsWalletAccountIdResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], OptionsWalletAccountIdResponse.prototype, "statusCode", void 0);
     return OptionsWalletAccountIdResponse;

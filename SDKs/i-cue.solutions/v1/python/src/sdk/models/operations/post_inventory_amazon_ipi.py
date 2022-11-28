@@ -9,11 +9,11 @@ class PostInventoryAmazonIpiHeaders:
 
 @dataclass
 class PostInventoryAmazonIpiRequest:
-    headers: PostInventoryAmazonIpiHeaders = field(default=None)
+    headers: PostInventoryAmazonIpiHeaders = field()
     
 
 @dataclass
 class PostInventoryAmazonIpiResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

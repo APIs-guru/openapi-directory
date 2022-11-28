@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class AppsCreateFromManifestPathParams:
-    code: str = field(default=None, metadata={'path_param': { 'field_name': 'code', 'style': 'simple', 'explode': False }})
+    code: str = field(metadata={'path_param': { 'field_name': 'code', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AppsCreateFromManifestRequest:
-    path_params: AppsCreateFromManifestPathParams = field(default=None)
+    path_params: AppsCreateFromManifestPathParams = field()
     
 
 @dataclass
 class AppsCreateFromManifestResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     git_hub_app: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     basic_error: Optional[shared.BasicError] = field(default=None)
     validation_error_simple: Optional[shared.ValidationErrorSimple] = field(default=None)
     

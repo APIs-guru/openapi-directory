@@ -16,6 +16,8 @@ const (
 	GoogleAnalyticsAdminV1alphaGoogleSignalsSettingsStateEnumGoogleSignalsDisabled         GoogleAnalyticsAdminV1alphaGoogleSignalsSettingsStateEnum = "GOOGLE_SIGNALS_DISABLED"
 )
 
+// GoogleAnalyticsAdminV1alphaGoogleSignalsSettings
+// Settings values for Google Signals. This is a singleton resource.
 type GoogleAnalyticsAdminV1alphaGoogleSignalsSettings struct {
 	Consent *GoogleAnalyticsAdminV1alphaGoogleSignalsSettingsConsentEnum `json:"consent,omitempty"`
 	Name    *string                                                      `json:"name,omitempty"`

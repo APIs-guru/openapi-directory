@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ForumGetPostAndParentAwaitingApprovalPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=childPostId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=childPostId" })
   childPostId: number;
 }
 
 
 export class ForumGetPostAndParentAwaitingApprovalQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=showbanned" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=showbanned" })
   showbanned?: string;
 }
 
 
 export class ForumGetPostAndParentAwaitingApprovalRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ForumGetPostAndParentAwaitingApprovalPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ForumGetPostAndParentAwaitingApprovalQueryParams;
 }
 
 
 export class ForumGetPostAndParentAwaitingApprovalResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

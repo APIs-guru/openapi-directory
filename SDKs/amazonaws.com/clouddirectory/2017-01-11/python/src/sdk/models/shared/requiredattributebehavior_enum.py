@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class RequiredAttributeBehaviorEnum(str, Enum):
     REQUIRED_ALWAYS = "REQUIRED_ALWAYS"

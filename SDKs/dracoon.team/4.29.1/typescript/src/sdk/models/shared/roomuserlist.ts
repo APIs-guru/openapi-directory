@@ -1,17 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { RoomUser } from "./roomuser";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { RoomUserOutput } from "./roomuser";
 import { Range } from "./range";
 
 
-// RoomUserList
+
+// RoomUserListOutput
 /** 
  * List of users
 **/
-export class RoomUserList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.RoomUser })
-  items: RoomUser[];
+export class RoomUserListOutput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: RoomUserOutput })
+  items: RoomUserOutput[];
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range: Range;
 }

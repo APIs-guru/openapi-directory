@@ -1,5 +1,7 @@
 package shared
 
+// PaymentInitiationPaymentCreateRequest
+// PaymentInitiationPaymentCreateRequest defines the request schema for `/payment_initiation/payment/create`
 type PaymentInitiationPaymentCreateRequest struct {
 	Amount      map[string]interface{} `json:"amount"`
 	ClientID    *string                `json:"client_id,omitempty"`

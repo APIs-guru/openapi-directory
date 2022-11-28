@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MetricProcessingConfig } from "./metricprocessingconfig";
 import { ExpressionVariable } from "./expressionvariable";
 import { MetricWindow } from "./metricwindow";

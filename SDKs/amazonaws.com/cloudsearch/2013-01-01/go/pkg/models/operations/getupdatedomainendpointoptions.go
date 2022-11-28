@@ -10,6 +10,8 @@ const (
 	GetUpdateDomainEndpointOptionsActionEnumUpdateDomainEndpointOptions GetUpdateDomainEndpointOptionsActionEnum = "UpdateDomainEndpointOptions"
 )
 
+// GetUpdateDomainEndpointOptionsDomainEndpointOptions
+// The domain's endpoint options.
 type GetUpdateDomainEndpointOptionsDomainEndpointOptions struct {
 	EnforceHTTPS      *bool                         `queryParam:"name=EnforceHTTPS"`
 	TLSSecurityPolicy *shared.TLSSecurityPolicyEnum `queryParam:"name=TLSSecurityPolicy"`

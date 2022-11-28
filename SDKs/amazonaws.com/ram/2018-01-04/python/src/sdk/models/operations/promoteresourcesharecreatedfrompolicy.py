@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class PromoteResourceShareCreatedFromPolicyQueryParams:
-    resource_share_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'resourceShareArn', 'style': 'form', 'explode': True }})
+    resource_share_arn: str = field(metadata={'query_param': { 'field_name': 'resourceShareArn', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -21,13 +24,14 @@ class PromoteResourceShareCreatedFromPolicyHeaders:
 
 @dataclass
 class PromoteResourceShareCreatedFromPolicyRequest:
-    query_params: PromoteResourceShareCreatedFromPolicyQueryParams = field(default=None)
-    headers: PromoteResourceShareCreatedFromPolicyHeaders = field(default=None)
+    headers: PromoteResourceShareCreatedFromPolicyHeaders = field()
+    query_params: PromoteResourceShareCreatedFromPolicyQueryParams = field()
     
 
 @dataclass
 class PromoteResourceShareCreatedFromPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_exception: Optional[Any] = field(default=None)
     malformed_arn_exception: Optional[Any] = field(default=None)
     missing_required_parameter_exception: Optional[Any] = field(default=None)
@@ -36,6 +40,5 @@ class PromoteResourceShareCreatedFromPolicyResponse:
     resource_share_limit_exceeded_exception: Optional[Any] = field(default=None)
     server_internal_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unknown_resource_exception: Optional[Any] = field(default=None)
     

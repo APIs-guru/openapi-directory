@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PostSaleAuthenticationProgram } from "./postsaleauthenticationprogram";
 import { EbayFulfillmentProgram } from "./ebayfulfillmentprogram";
+
 
 
 // Program
@@ -8,9 +9,9 @@ import { EbayFulfillmentProgram } from "./ebayfulfillmentprogram";
  * This type is returned for order line items eligible for the Authenticity Guarantee service and/or for order line items fulfilled by the eBay Fulfillment program.
 **/
 export class Program extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authenticityVerification" })
+  @SpeakeasyMetadata({ data: "json, name=authenticityVerification" })
   authenticityVerification?: PostSaleAuthenticationProgram;
 
-  @Metadata({ data: "json, name=fulfillmentProgram" })
+  @SpeakeasyMetadata({ data: "json, name=fulfillmentProgram" })
   fulfillmentProgram?: EbayFulfillmentProgram;
 }

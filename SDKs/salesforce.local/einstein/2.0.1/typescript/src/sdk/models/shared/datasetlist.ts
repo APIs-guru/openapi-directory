@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Dataset } from "./dataset";
 
 
+
 export class DatasetList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.Dataset })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: Dataset })
   data?: Dataset[];
 
-  @Metadata({ data: "json, name=object" })
+  @SpeakeasyMetadata({ data: "json, name=object" })
   object?: string;
 }

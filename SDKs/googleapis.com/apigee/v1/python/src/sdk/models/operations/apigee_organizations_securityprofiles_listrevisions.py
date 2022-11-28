@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ApigeeOrganizationsSecurityProfilesListRevisionsPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class ApigeeOrganizationsSecurityProfilesListRevisionsQueryParams:
 
 @dataclass
 class ApigeeOrganizationsSecurityProfilesListRevisionsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApigeeOrganizationsSecurityProfilesListRevisionsRequest:
-    path_params: ApigeeOrganizationsSecurityProfilesListRevisionsPathParams = field(default=None)
-    query_params: ApigeeOrganizationsSecurityProfilesListRevisionsQueryParams = field(default=None)
-    security: ApigeeOrganizationsSecurityProfilesListRevisionsSecurity = field(default=None)
+    path_params: ApigeeOrganizationsSecurityProfilesListRevisionsPathParams = field()
+    query_params: ApigeeOrganizationsSecurityProfilesListRevisionsQueryParams = field()
+    security: ApigeeOrganizationsSecurityProfilesListRevisionsSecurity = field()
     
 
 @dataclass
 class ApigeeOrganizationsSecurityProfilesListRevisionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_apigee_v1_list_security_profile_revisions_response: Optional[shared.GoogleCloudApigeeV1ListSecurityProfileRevisionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

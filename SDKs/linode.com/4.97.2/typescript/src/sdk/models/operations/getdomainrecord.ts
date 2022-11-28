@@ -1,62 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDomainRecordPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=domainId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=domainId" })
   domainId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=recordId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=recordId" })
   recordId: number;
 }
 
 
-export class GetDomainRecordSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class GetDomainRecordSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class GetDomainRecordSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetDomainRecordSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetDomainRecordSecurityOption2;
-}
-
-
-export class GetDomainRecordRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetDomainRecordPathParams;
-
-  @Metadata()
-  security: GetDomainRecordSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class GetDomainRecordDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class GetDomainRecordRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetDomainRecordPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetDomainRecordSecurity;
+}
+
+
 export class GetDomainRecordResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   domainRecord?: shared.DomainRecord;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDomainRecordDefaultApplicationJsonObject?: GetDomainRecordDefaultApplicationJson;
 }

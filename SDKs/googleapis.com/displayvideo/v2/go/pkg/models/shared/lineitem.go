@@ -14,21 +14,24 @@ const (
 type LineItemLineItemTypeEnum string
 
 const (
-	LineItemLineItemTypeEnumLineItemTypeUnspecified                     LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_UNSPECIFIED"
-	LineItemLineItemTypeEnumLineItemTypeDisplayDefault                  LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_DISPLAY_DEFAULT"
-	LineItemLineItemTypeEnumLineItemTypeDisplayMobileAppInstall         LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_DISPLAY_MOBILE_APP_INSTALL"
-	LineItemLineItemTypeEnumLineItemTypeVideoDefault                    LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_VIDEO_DEFAULT"
-	LineItemLineItemTypeEnumLineItemTypeVideoMobileAppInstall           LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_VIDEO_MOBILE_APP_INSTALL"
-	LineItemLineItemTypeEnumLineItemTypeDisplayMobileAppInventory       LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_DISPLAY_MOBILE_APP_INVENTORY"
-	LineItemLineItemTypeEnumLineItemTypeVideoMobileAppInventory         LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_VIDEO_MOBILE_APP_INVENTORY"
-	LineItemLineItemTypeEnumLineItemTypeAudioDefault                    LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_AUDIO_DEFAULT"
-	LineItemLineItemTypeEnumLineItemTypeVideoOverTheTop                 LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_VIDEO_OVER_THE_TOP"
-	LineItemLineItemTypeEnumLineItemTypeYoutubeAndPartnersAction        LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_ACTION"
-	LineItemLineItemTypeEnumLineItemTypeYoutubeAndPartnersNonSkippable  LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_NON_SKIPPABLE"
-	LineItemLineItemTypeEnumLineItemTypeYoutubeAndPartnersVideoSequence LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_VIDEO_SEQUENCE"
-	LineItemLineItemTypeEnumLineItemTypeYoutubeAndPartnersAudio         LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_AUDIO"
-	LineItemLineItemTypeEnumLineItemTypeYoutubeAndPartnersReach         LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_REACH"
-	LineItemLineItemTypeEnumLineItemTypeYoutubeAndPartnersSimple        LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_SIMPLE"
+	LineItemLineItemTypeEnumLineItemTypeUnspecified                              LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_UNSPECIFIED"
+	LineItemLineItemTypeEnumLineItemTypeDisplayDefault                           LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_DISPLAY_DEFAULT"
+	LineItemLineItemTypeEnumLineItemTypeDisplayMobileAppInstall                  LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_DISPLAY_MOBILE_APP_INSTALL"
+	LineItemLineItemTypeEnumLineItemTypeVideoDefault                             LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_VIDEO_DEFAULT"
+	LineItemLineItemTypeEnumLineItemTypeVideoMobileAppInstall                    LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_VIDEO_MOBILE_APP_INSTALL"
+	LineItemLineItemTypeEnumLineItemTypeDisplayMobileAppInventory                LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_DISPLAY_MOBILE_APP_INVENTORY"
+	LineItemLineItemTypeEnumLineItemTypeVideoMobileAppInventory                  LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_VIDEO_MOBILE_APP_INVENTORY"
+	LineItemLineItemTypeEnumLineItemTypeAudioDefault                             LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_AUDIO_DEFAULT"
+	LineItemLineItemTypeEnumLineItemTypeVideoOverTheTop                          LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_VIDEO_OVER_THE_TOP"
+	LineItemLineItemTypeEnumLineItemTypeYoutubeAndPartnersAction                 LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_ACTION"
+	LineItemLineItemTypeEnumLineItemTypeYoutubeAndPartnersNonSkippable           LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_NON_SKIPPABLE"
+	LineItemLineItemTypeEnumLineItemTypeYoutubeAndPartnersVideoSequence          LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_VIDEO_SEQUENCE"
+	LineItemLineItemTypeEnumLineItemTypeYoutubeAndPartnersAudio                  LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_AUDIO"
+	LineItemLineItemTypeEnumLineItemTypeYoutubeAndPartnersReach                  LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_REACH"
+	LineItemLineItemTypeEnumLineItemTypeYoutubeAndPartnersSimple                 LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_SIMPLE"
+	LineItemLineItemTypeEnumLineItemTypeYoutubeAndPartnersNonSkippableOverTheTop LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_NON_SKIPPABLE_OVER_THE_TOP"
+	LineItemLineItemTypeEnumLineItemTypeYoutubeAndPartnersReachOverTheTop        LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_REACH_OVER_THE_TOP"
+	LineItemLineItemTypeEnumLineItemTypeYoutubeAndPartnersSimpleOverTheTop       LineItemLineItemTypeEnum = "LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_SIMPLE_OVER_THE_TOP"
 )
 
 type LineItemReservationTypeEnum string
@@ -58,6 +61,31 @@ const (
 	LineItemWarningMessagesEnumParentInsertionOrderExpired                  LineItemWarningMessagesEnum = "PARENT_INSERTION_ORDER_EXPIRED"
 )
 
+// LineItemInput
+// A single line item.
+type LineItemInput struct {
+	BidStrategy                *BiddingStrategy            `json:"bidStrategy,omitempty"`
+	Budget                     *LineItemBudgetInput        `json:"budget,omitempty"`
+	ConversionCounting         *ConversionCountingConfig   `json:"conversionCounting,omitempty"`
+	CreativeIds                []string                    `json:"creativeIds,omitempty"`
+	DisplayName                *string                     `json:"displayName,omitempty"`
+	EntityStatus               *LineItemEntityStatusEnum   `json:"entityStatus,omitempty"`
+	ExcludeNewExchanges        *bool                       `json:"excludeNewExchanges,omitempty"`
+	Flight                     *LineItemFlight             `json:"flight,omitempty"`
+	FrequencyCap               *FrequencyCap               `json:"frequencyCap,omitempty"`
+	InsertionOrderID           *string                     `json:"insertionOrderId,omitempty"`
+	IntegrationDetails         *IntegrationDetails         `json:"integrationDetails,omitempty"`
+	LineItemType               *LineItemLineItemTypeEnum   `json:"lineItemType,omitempty"`
+	MobileApp                  *MobileAppInput             `json:"mobileApp,omitempty"`
+	Pacing                     *Pacing                     `json:"pacing,omitempty"`
+	PartnerCosts               []PartnerCost               `json:"partnerCosts,omitempty"`
+	PartnerRevenueModel        *PartnerRevenueModel        `json:"partnerRevenueModel,omitempty"`
+	TargetingExpansion         *TargetingExpansionConfig   `json:"targetingExpansion,omitempty"`
+	YoutubeAndPartnersSettings *YoutubeAndPartnersSettings `json:"youtubeAndPartnersSettings,omitempty"`
+}
+
+// LineItem
+// A single line item.
 type LineItem struct {
 	AdvertiserID               *string                       `json:"advertiserId,omitempty"`
 	BidStrategy                *BiddingStrategy              `json:"bidStrategy,omitempty"`

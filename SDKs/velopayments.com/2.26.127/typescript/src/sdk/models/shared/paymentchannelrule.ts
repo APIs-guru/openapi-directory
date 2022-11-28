@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PaymentChannelRule
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Rules that will get applied when creating or updating a payment channel for the given country
 **/
 export class PaymentChannelRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName: string;
 
-  @Metadata({ data: "json, name=displayOrder" })
+  @SpeakeasyMetadata({ data: "json, name=displayOrder" })
   displayOrder?: number;
 
-  @Metadata({ data: "json, name=element" })
+  @SpeakeasyMetadata({ data: "json, name=element" })
   element: string;
 
-  @Metadata({ data: "json, name=maxLength" })
+  @SpeakeasyMetadata({ data: "json, name=maxLength" })
   maxLength?: number;
 
-  @Metadata({ data: "json, name=minLength" })
+  @SpeakeasyMetadata({ data: "json, name=minLength" })
   minLength?: number;
 
-  @Metadata({ data: "json, name=required" })
+  @SpeakeasyMetadata({ data: "json, name=required" })
   required: boolean;
 
-  @Metadata({ data: "json, name=validation" })
+  @SpeakeasyMetadata({ data: "json, name=validation" })
   validation: string;
 }

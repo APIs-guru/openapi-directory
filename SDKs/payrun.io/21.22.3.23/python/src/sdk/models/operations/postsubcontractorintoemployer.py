@@ -5,26 +5,26 @@ from sdk.models import shared
 
 @dataclass
 class PostSubContractorIntoEmployerPathParams:
-    employer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'EmployerId', 'style': 'simple', 'explode': False }})
+    employer_id: str = field(metadata={'path_param': { 'field_name': 'EmployerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostSubContractorIntoEmployerHeaders:
-    api_version: str = field(default=None, metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    api_version: str = field(metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostSubContractorIntoEmployerRequest:
-    path_params: PostSubContractorIntoEmployerPathParams = field(default=None)
-    headers: PostSubContractorIntoEmployerHeaders = field(default=None)
-    request: shared.SubContractor = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PostSubContractorIntoEmployerHeaders = field()
+    path_params: PostSubContractorIntoEmployerPathParams = field()
+    request: shared.SubContractor = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostSubContractorIntoEmployerResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_model: Optional[shared.ErrorModel] = field(default=None)
     link: Optional[shared.Link] = field(default=None)
-    status_code: int = field(default=None)
     

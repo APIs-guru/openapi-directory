@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersProposalsAddNotePathParams:
-    proposal: str = field(default=None, metadata={'path_param': { 'field_name': 'proposal', 'style': 'simple', 'explode': False }})
+    proposal: str = field(metadata={'path_param': { 'field_name': 'proposal', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class AuthorizedbuyersmarketplaceBuyersProposalsAddNoteQueryParams:
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersProposalsAddNoteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersProposalsAddNoteRequest:
-    path_params: AuthorizedbuyersmarketplaceBuyersProposalsAddNotePathParams = field(default=None)
-    query_params: AuthorizedbuyersmarketplaceBuyersProposalsAddNoteQueryParams = field(default=None)
-    request: Optional[shared.AddNoteRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AuthorizedbuyersmarketplaceBuyersProposalsAddNoteSecurity = field(default=None)
+    path_params: AuthorizedbuyersmarketplaceBuyersProposalsAddNotePathParams = field()
+    query_params: AuthorizedbuyersmarketplaceBuyersProposalsAddNoteQueryParams = field()
+    security: AuthorizedbuyersmarketplaceBuyersProposalsAddNoteSecurity = field()
+    request: Optional[shared.AddNoteRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersProposalsAddNoteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     proposal: Optional[shared.Proposal] = field(default=None)
-    status_code: int = field(default=None)
     

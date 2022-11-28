@@ -1,71 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetFilesV3FoldersFolderIdGetByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=folderId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=folderId" })
   folderId: string;
 }
 
 
 export class GetFilesV3FoldersFolderIdGetByIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=properties" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=properties" })
   properties?: string[];
 }
 
 
-export class GetFilesV3FoldersFolderIdGetByIdSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Legacy: shared.SchemeOauth2Legacy;
-}
-
-
-export class GetFilesV3FoldersFolderIdGetByIdSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  hapikey: shared.SchemeHapikey;
-}
-
-
-export class GetFilesV3FoldersFolderIdGetByIdSecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Legacy: shared.SchemeOauth2Legacy;
-}
-
-
 export class GetFilesV3FoldersFolderIdGetByIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetFilesV3FoldersFolderIdGetByIdSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetFilesV3FoldersFolderIdGetByIdSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Legacy?: shared.SchemeOauth2Legacy;
 
-  @Metadata({ data: "security, option=true" })
-  option3?: GetFilesV3FoldersFolderIdGetByIdSecurityOption3;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  hapikey?: shared.SchemeHapikey;
+
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  privateAppsLegacy1?: shared.SchemePrivateAppsLegacy;
+
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Legacy1?: shared.SchemeOauth2Legacy;
 }
 
 
 export class GetFilesV3FoldersFolderIdGetByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetFilesV3FoldersFolderIdGetByIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetFilesV3FoldersFolderIdGetByIdQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetFilesV3FoldersFolderIdGetByIdSecurity;
 }
 
 
 export class GetFilesV3FoldersFolderIdGetByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   folder?: shared.Folder;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

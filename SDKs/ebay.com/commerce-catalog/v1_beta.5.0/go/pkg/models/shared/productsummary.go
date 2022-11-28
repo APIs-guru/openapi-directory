@@ -1,5 +1,7 @@
 package shared
 
+// ProductSummary
+// This type contains a summary of a specified product. The product summary includes information about the product's identifiers, product images, aspects, and the getProduct URL for retrieving the product details.
 type ProductSummary struct {
 	AdditionalImages []Image  `json:"additionalImages,omitempty"`
 	Aspects          []Aspect `json:"aspects,omitempty"`

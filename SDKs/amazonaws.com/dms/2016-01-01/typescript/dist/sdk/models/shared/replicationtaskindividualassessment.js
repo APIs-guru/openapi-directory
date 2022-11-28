@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ReplicationTaskIndividualAssessment
 /**
  * Provides information that describes an individual assessment from a premigration assessment run.
@@ -33,23 +33,23 @@ var ReplicationTaskIndividualAssessment = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=IndividualAssessmentName" }),
+        SpeakeasyMetadata({ data: "json, name=IndividualAssessmentName" }),
         __metadata("design:type", String)
     ], ReplicationTaskIndividualAssessment.prototype, "individualAssessmentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplicationTaskAssessmentRunArn" }),
+        SpeakeasyMetadata({ data: "json, name=ReplicationTaskAssessmentRunArn" }),
         __metadata("design:type", String)
     ], ReplicationTaskIndividualAssessment.prototype, "replicationTaskAssessmentRunArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplicationTaskIndividualAssessmentArn" }),
+        SpeakeasyMetadata({ data: "json, name=ReplicationTaskIndividualAssessmentArn" }),
         __metadata("design:type", String)
     ], ReplicationTaskIndividualAssessment.prototype, "replicationTaskIndividualAssessmentArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplicationTaskIndividualAssessmentStartDate" }),
+        SpeakeasyMetadata({ data: "json, name=ReplicationTaskIndividualAssessmentStartDate" }),
         __metadata("design:type", Date)
     ], ReplicationTaskIndividualAssessment.prototype, "replicationTaskIndividualAssessmentStartDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], ReplicationTaskIndividualAssessment.prototype, "status", void 0);
     return ReplicationTaskIndividualAssessment;

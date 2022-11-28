@@ -22,82 +22,82 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ConvertcurrencyQueryParams = /** @class */ (function (_super) {
     __extends(ConvertcurrencyQueryParams, _super);
     function ConvertcurrencyQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=amount" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=amount" }),
         __metadata("design:type", String)
     ], ConvertcurrencyQueryParams.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=from" }),
         __metadata("design:type", String)
     ], ConvertcurrencyQueryParams.prototype, "from", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=license" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" }),
         __metadata("design:type", String)
     ], ConvertcurrencyQueryParams.prototype, "license", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=to" }),
         __metadata("design:type", String)
     ], ConvertcurrencyQueryParams.prototype, "to", void 0);
     return ConvertcurrencyQueryParams;
 }(SpeakeasyBase));
 export { ConvertcurrencyQueryParams };
-var ConvertcurrencyRequest = /** @class */ (function (_super) {
-    __extends(ConvertcurrencyRequest, _super);
-    function ConvertcurrencyRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", ConvertcurrencyQueryParams)
-    ], ConvertcurrencyRequest.prototype, "queryParams", void 0);
-    return ConvertcurrencyRequest;
-}(SpeakeasyBase));
-export { ConvertcurrencyRequest };
 var Convertcurrency200ApplicationJson = /** @class */ (function (_super) {
     __extends(Convertcurrency200ApplicationJson, _super);
     function Convertcurrency200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Code" }),
+        SpeakeasyMetadata({ data: "json, name=Code" }),
         __metadata("design:type", String)
     ], Convertcurrency200ApplicationJson.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=Converted" }),
+        SpeakeasyMetadata({ data: "json, name=Converted" }),
         __metadata("design:type", String)
     ], Convertcurrency200ApplicationJson.prototype, "converted", void 0);
     __decorate([
-        Metadata({ data: "json, name=Credits" }),
+        SpeakeasyMetadata({ data: "json, name=Credits" }),
         __metadata("design:type", String)
     ], Convertcurrency200ApplicationJson.prototype, "credits", void 0);
     __decorate([
-        Metadata({ data: "json, name=Currency" }),
+        SpeakeasyMetadata({ data: "json, name=Currency" }),
         __metadata("design:type", String)
     ], Convertcurrency200ApplicationJson.prototype, "currency", void 0);
     return Convertcurrency200ApplicationJson;
 }(SpeakeasyBase));
 export { Convertcurrency200ApplicationJson };
+var ConvertcurrencyRequest = /** @class */ (function (_super) {
+    __extends(ConvertcurrencyRequest, _super);
+    function ConvertcurrencyRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", ConvertcurrencyQueryParams)
+    ], ConvertcurrencyRequest.prototype, "queryParams", void 0);
+    return ConvertcurrencyRequest;
+}(SpeakeasyBase));
+export { ConvertcurrencyRequest };
 var ConvertcurrencyResponse = /** @class */ (function (_super) {
     __extends(ConvertcurrencyResponse, _super);
     function ConvertcurrencyResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ConvertcurrencyResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ConvertcurrencyResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Convertcurrency200ApplicationJson)
     ], ConvertcurrencyResponse.prototype, "convertcurrency200ApplicationJsonObject", void 0);
     return ConvertcurrencyResponse;

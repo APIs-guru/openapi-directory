@@ -1,5 +1,7 @@
 package shared
 
+// ObBranchAndFinancialInstitutionIdentification61
+// Financial institution servicing an account for the creditor.
 type ObBranchAndFinancialInstitutionIdentification61 struct {
 	Identification *string           `json:"Identification,omitempty"`
 	Name           *string           `json:"Name,omitempty"`

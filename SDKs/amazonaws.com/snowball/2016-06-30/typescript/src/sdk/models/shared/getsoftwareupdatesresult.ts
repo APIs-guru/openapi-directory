@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetSoftwareUpdatesResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=UpdatesURI" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatesURI" })
   updatesUri?: string;
 }

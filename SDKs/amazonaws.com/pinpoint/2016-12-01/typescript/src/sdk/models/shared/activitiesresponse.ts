@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActivityResponse } from "./activityresponse";
+
 
 
 // ActivitiesResponse
@@ -8,9 +8,9 @@ import { ActivityResponse } from "./activityresponse";
  * Provides information about the activities that were performed by a campaign.
 **/
 export class ActivitiesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Item", elemType: shared.ActivityResponse })
+  @SpeakeasyMetadata({ data: "json, name=Item", elemType: ActivityResponse })
   item: ActivityResponse[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

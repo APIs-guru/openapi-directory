@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,23 +22,23 @@ class PutTelemetryRecordsHeaders:
 @dataclass_json
 @dataclass
 class PutTelemetryRecordsRequestBody:
-    ec2_instance_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EC2InstanceId' }})
-    hostname: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Hostname' }})
-    resource_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceARN' }})
-    telemetry_records: List[shared.TelemetryRecord] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TelemetryRecords' }})
+    telemetry_records: List[shared.TelemetryRecord] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TelemetryRecords') }})
+    ec2_instance_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EC2InstanceId') }})
+    hostname: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Hostname') }})
+    resource_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceARN') }})
     
 
 @dataclass
 class PutTelemetryRecordsRequest:
-    headers: PutTelemetryRecordsHeaders = field(default=None)
-    request: PutTelemetryRecordsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutTelemetryRecordsHeaders = field()
+    request: PutTelemetryRecordsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutTelemetryRecordsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_request_exception: Optional[Any] = field(default=None)
     put_telemetry_records_result: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     throttled_exception: Optional[Any] = field(default=None)
     

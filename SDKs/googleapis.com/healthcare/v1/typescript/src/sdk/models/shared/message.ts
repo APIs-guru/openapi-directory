@@ -1,8 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParsedData } from "./parseddata";
 import { PatientId } from "./patientid";
 import { SchematizedData } from "./schematizeddata";
+
+
+
+// MessageInput
+/** 
+ * A complete HL7v2 message. See [Introduction to HL7 Standards] (https://www.hl7.org/implement/standards/index.cfm?ref=common) for details on the standard.
+**/
+export class MessageInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=data" })
+  data?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=messageType" })
+  messageType?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=parsedData" })
+  parsedData?: ParsedData;
+
+  @SpeakeasyMetadata({ data: "json, name=patientIds", elemType: PatientId })
+  patientIds?: PatientId[];
+
+  @SpeakeasyMetadata({ data: "json, name=schematizedData" })
+  schematizedData?: SchematizedData;
+
+  @SpeakeasyMetadata({ data: "json, name=sendFacility" })
+  sendFacility?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=sendTime" })
+  sendTime?: string;
+}
 
 
 // Message
@@ -10,33 +44,33 @@ import { SchematizedData } from "./schematizeddata";
  * A complete HL7v2 message. See [Introduction to HL7 Standards] (https://www.hl7.org/implement/standards/index.cfm?ref=common) for details on the standard.
 **/
 export class Message extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=messageType" })
+  @SpeakeasyMetadata({ data: "json, name=messageType" })
   messageType?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=parsedData" })
+  @SpeakeasyMetadata({ data: "json, name=parsedData" })
   parsedData?: ParsedData;
 
-  @Metadata({ data: "json, name=patientIds", elemType: shared.PatientId })
+  @SpeakeasyMetadata({ data: "json, name=patientIds", elemType: PatientId })
   patientIds?: PatientId[];
 
-  @Metadata({ data: "json, name=schematizedData" })
+  @SpeakeasyMetadata({ data: "json, name=schematizedData" })
   schematizedData?: SchematizedData;
 
-  @Metadata({ data: "json, name=sendFacility" })
+  @SpeakeasyMetadata({ data: "json, name=sendFacility" })
   sendFacility?: string;
 
-  @Metadata({ data: "json, name=sendTime" })
+  @SpeakeasyMetadata({ data: "json, name=sendTime" })
   sendTime?: string;
 }

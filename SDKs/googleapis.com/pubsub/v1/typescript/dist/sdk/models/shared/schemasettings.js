@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var SchemaSettingsEncodingEnum;
 (function (SchemaSettingsEncodingEnum) {
     SchemaSettingsEncodingEnum["EncodingUnspecified"] = "ENCODING_UNSPECIFIED";
@@ -39,19 +39,19 @@ var SchemaSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=encoding" }),
+        SpeakeasyMetadata({ data: "json, name=encoding" }),
         __metadata("design:type", String)
     ], SchemaSettings.prototype, "encoding", void 0);
     __decorate([
-        Metadata({ data: "json, name=firstRevisionId" }),
+        SpeakeasyMetadata({ data: "json, name=firstRevisionId" }),
         __metadata("design:type", String)
     ], SchemaSettings.prototype, "firstRevisionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastRevisionId" }),
+        SpeakeasyMetadata({ data: "json, name=lastRevisionId" }),
         __metadata("design:type", String)
     ], SchemaSettings.prototype, "lastRevisionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=schema" }),
+        SpeakeasyMetadata({ data: "json, name=schema" }),
         __metadata("design:type", String)
     ], SchemaSettings.prototype, "schema", void 0);
     return SchemaSettings;

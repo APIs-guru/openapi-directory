@@ -12,11 +12,6 @@ type GetSavedQueryExportSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetSavedQueryExportRequest struct {
-	QueryParams GetSavedQueryExportQueryParams
-	Security    GetSavedQueryExportSecurity
-}
-
 type GetSavedQueryExport400ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -31,6 +26,11 @@ type GetSavedQueryExport404ApplicationJSON struct {
 
 type GetSavedQueryExport500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetSavedQueryExportRequest struct {
+	QueryParams GetSavedQueryExportQueryParams
+	Security    GetSavedQueryExportSecurity
 }
 
 type GetSavedQueryExportResponse struct {

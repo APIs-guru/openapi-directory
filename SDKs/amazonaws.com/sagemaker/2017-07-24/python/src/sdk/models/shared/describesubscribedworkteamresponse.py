@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import subscribedworkteam
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeSubscribedWorkteamResponse:
-    subscribed_workteam: subscribedworkteam.SubscribedWorkteam = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SubscribedWorkteam' }})
+    subscribed_workteam: SubscribedWorkteam = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SubscribedWorkteam') }})
     

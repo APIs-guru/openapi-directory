@@ -1,6 +1,7 @@
 
 
+
 export enum TextTypeEnum {
-    Ssml = "ssml"
-,    Text = "text"
+    Ssml = "ssml",
+    Text = "text"
 }

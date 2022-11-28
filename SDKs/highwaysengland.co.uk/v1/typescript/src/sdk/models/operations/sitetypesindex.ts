@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SiteTypesIndexPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=version" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" })
   version: string;
 }
 
 
 export class SiteTypesIndexRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SiteTypesIndexPathParams;
 }
 
 
 export class SiteTypesIndexResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   siteTypeResponse?: shared.SiteTypeResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

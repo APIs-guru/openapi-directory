@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LicenseOperationFailure
+// Describes the failure of a license operation.
 type LicenseOperationFailure struct {
 	ErrorMessage         *string           `json:"ErrorMessage,omitempty"`
 	FailureTime          *time.Time        `json:"FailureTime,omitempty"`

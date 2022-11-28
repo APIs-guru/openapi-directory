@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -12,12 +13,12 @@ class GetUsersQueryParams:
 
 @dataclass
 class GetUsersRequest:
-    query_params: GetUsersQueryParams = field(default=None)
+    query_params: GetUsersQueryParams = field()
     
 
 @dataclass
 class GetUsersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_users_200_application_json_any: Optional[Any] = field(default=None)
     

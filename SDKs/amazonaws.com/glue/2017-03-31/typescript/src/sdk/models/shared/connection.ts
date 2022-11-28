@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionTypeEnum } from "./connectiontypeenum";
 import { PhysicalConnectionRequirements } from "./physicalconnectionrequirements";
+
 
 
 // Connection
@@ -8,30 +9,30 @@ import { PhysicalConnectionRequirements } from "./physicalconnectionrequirements
  * Defines a connection to a data source.
 **/
 export class Connection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConnectionProperties" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionProperties" })
   connectionProperties?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ConnectionType" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionType" })
   connectionType?: ConnectionTypeEnum;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=LastUpdatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedBy" })
   lastUpdatedBy?: string;
 
-  @Metadata({ data: "json, name=LastUpdatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedTime" })
   lastUpdatedTime?: Date;
 
-  @Metadata({ data: "json, name=MatchCriteria" })
+  @SpeakeasyMetadata({ data: "json, name=MatchCriteria" })
   matchCriteria?: string[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=PhysicalConnectionRequirements" })
+  @SpeakeasyMetadata({ data: "json, name=PhysicalConnectionRequirements" })
   physicalConnectionRequirements?: PhysicalConnectionRequirements;
 }

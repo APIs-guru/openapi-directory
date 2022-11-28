@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAppsDriveLabelsV2betaDeleteLabelPermissionRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Deletes a Label Permission. Permissions affect the Label resource as a whole, are not revisioned, and do not require publishing.
 **/
 export class GoogleAppsDriveLabelsV2betaDeleteLabelPermissionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=useAdminAccess" })
+  @SpeakeasyMetadata({ data: "json, name=useAdminAccess" })
   useAdminAccess?: boolean;
 }

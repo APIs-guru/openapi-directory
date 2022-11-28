@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { S3ApplicationCodeLocationDescription } from "./s3applicationcodelocationdescription";
 /**
  * Describes details about the code of a Kinesis Data Analytics application.

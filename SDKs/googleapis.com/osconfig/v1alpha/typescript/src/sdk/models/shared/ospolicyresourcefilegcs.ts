@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OsPolicyResourceFileGcs
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies a file available as a Cloud Storage Object.
 **/
 export class OsPolicyResourceFileGcs extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucket" })
+  @SpeakeasyMetadata({ data: "json, name=bucket" })
   bucket?: string;
 
-  @Metadata({ data: "json, name=generation" })
+  @SpeakeasyMetadata({ data: "json, name=generation" })
   generation?: string;
 
-  @Metadata({ data: "json, name=object" })
+  @SpeakeasyMetadata({ data: "json, name=object" })
   object?: string;
 }

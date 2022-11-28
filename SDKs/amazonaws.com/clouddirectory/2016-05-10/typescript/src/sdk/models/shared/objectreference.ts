@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ObjectReference
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The reference that identifies an object.
 **/
 export class ObjectReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Selector" })
+  @SpeakeasyMetadata({ data: "json, name=Selector" })
   selector?: string;
 }

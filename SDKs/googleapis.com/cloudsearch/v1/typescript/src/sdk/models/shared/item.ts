@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ItemAcl } from "./itemacl";
 import { ItemContent } from "./itemcontent";
 import { ItemMetadata } from "./itemmetadata";
 import { ItemStatus } from "./itemstatus";
 import { ItemStructuredData } from "./itemstructureddata";
 
+
 export enum ItemItemTypeEnum {
-    Unspecified = "UNSPECIFIED"
-,    ContentItem = "CONTENT_ITEM"
-,    ContainerItem = "CONTAINER_ITEM"
-,    VirtualContainerItem = "VIRTUAL_CONTAINER_ITEM"
+    Unspecified = "UNSPECIFIED",
+    ContentItem = "CONTENT_ITEM",
+    ContainerItem = "CONTAINER_ITEM",
+    VirtualContainerItem = "VIRTUAL_CONTAINER_ITEM"
 }
 
 
@@ -18,33 +19,33 @@ export enum ItemItemTypeEnum {
  * Represents a single object that is an item in the search index, such as a file, folder, or a database record.
 **/
 export class Item extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acl" })
+  @SpeakeasyMetadata({ data: "json, name=acl" })
   acl?: ItemAcl;
 
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: ItemContent;
 
-  @Metadata({ data: "json, name=itemType" })
+  @SpeakeasyMetadata({ data: "json, name=itemType" })
   itemType?: ItemItemTypeEnum;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: ItemMetadata;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: string;
 
-  @Metadata({ data: "json, name=queue" })
+  @SpeakeasyMetadata({ data: "json, name=queue" })
   queue?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ItemStatus;
 
-  @Metadata({ data: "json, name=structuredData" })
+  @SpeakeasyMetadata({ data: "json, name=structuredData" })
   structuredData?: ItemStructuredData;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

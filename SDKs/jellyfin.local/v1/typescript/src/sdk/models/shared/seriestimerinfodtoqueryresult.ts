@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SeriesTimerInfoDto } from "./seriestimerinfodto";
 
 
+
 export class SeriesTimerInfoDtoQueryResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Items", elemType: shared.SeriesTimerInfoDto })
+  @SpeakeasyMetadata({ data: "json, name=Items", elemType: SeriesTimerInfoDto })
   items?: SeriesTimerInfoDto[];
 
-  @Metadata({ data: "json, name=StartIndex" })
+  @SpeakeasyMetadata({ data: "json, name=StartIndex" })
   startIndex?: number;
 
-  @Metadata({ data: "json, name=TotalRecordCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalRecordCount" })
   totalRecordCount?: number;
 }

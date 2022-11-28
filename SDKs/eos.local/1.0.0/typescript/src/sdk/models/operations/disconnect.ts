@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DisconnectRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=endpoint" })
   endpoint: string;
 }
 
 
 export class DisconnectRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: DisconnectRequestBody;
 }
 
 
 export class DisconnectResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   disconnect200ApplicationJsonString?: string;
 }

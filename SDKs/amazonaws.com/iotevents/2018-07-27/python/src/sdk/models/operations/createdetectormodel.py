@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,8 +23,12 @@ class CreateDetectorModelHeaders:
 @dataclass_json
 @dataclass
 class CreateDetectorModelRequestBodyDetectorModelDefinition:
-    initial_state_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'initialStateName' }})
-    states: Optional[List[shared.State]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'states' }})
+    r"""CreateDetectorModelRequestBodyDetectorModelDefinition
+    Information that defines how a detector operates.
+    """
+    
+    initial_state_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('initialStateName') }})
+    states: Optional[List[shared.State]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('states') }})
     
 class CreateDetectorModelRequestBodyEvaluationMethodEnum(str, Enum):
     BATCH = "BATCH"
@@ -29,24 +38,25 @@ class CreateDetectorModelRequestBodyEvaluationMethodEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateDetectorModelRequestBody:
-    detector_model_definition: CreateDetectorModelRequestBodyDetectorModelDefinition = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detectorModelDefinition' }})
-    detector_model_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detectorModelDescription' }})
-    detector_model_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detectorModelName' }})
-    evaluation_method: Optional[CreateDetectorModelRequestBodyEvaluationMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'evaluationMethod' }})
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    role_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roleArn' }})
-    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    detector_model_definition: CreateDetectorModelRequestBodyDetectorModelDefinition = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('detectorModelDefinition') }})
+    detector_model_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('detectorModelName') }})
+    role_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('roleArn') }})
+    detector_model_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detectorModelDescription') }})
+    evaluation_method: Optional[CreateDetectorModelRequestBodyEvaluationMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('evaluationMethod') }})
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateDetectorModelRequest:
-    headers: CreateDetectorModelHeaders = field(default=None)
-    request: CreateDetectorModelRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateDetectorModelHeaders = field()
+    request: CreateDetectorModelRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateDetectorModelResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_detector_model_response: Optional[shared.CreateDetectorModelResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
@@ -54,6 +64,5 @@ class CreateDetectorModelResponse:
     resource_already_exists_exception: Optional[Any] = field(default=None)
     resource_in_use_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

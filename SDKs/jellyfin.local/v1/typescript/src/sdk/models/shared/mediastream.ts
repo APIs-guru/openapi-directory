@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubtitleDeliveryMethodEnum } from "./subtitledeliverymethodenum";
 import { MediaStreamTypeEnum } from "./mediastreamtypeenum";
+
 
 
 // MediaStream
@@ -8,144 +9,283 @@ import { MediaStreamTypeEnum } from "./mediastreamtypeenum";
  * Class MediaStream.
 **/
 export class MediaStream extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AspectRatio" })
+  @SpeakeasyMetadata({ data: "json, name=AspectRatio" })
   aspectRatio?: string;
 
-  @Metadata({ data: "json, name=AverageFrameRate" })
+  @SpeakeasyMetadata({ data: "json, name=AverageFrameRate" })
   averageFrameRate?: number;
 
-  @Metadata({ data: "json, name=BitDepth" })
+  @SpeakeasyMetadata({ data: "json, name=BitDepth" })
   bitDepth?: number;
 
-  @Metadata({ data: "json, name=BitRate" })
+  @SpeakeasyMetadata({ data: "json, name=BitRate" })
   bitRate?: number;
 
-  @Metadata({ data: "json, name=ChannelLayout" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelLayout" })
   channelLayout?: string;
 
-  @Metadata({ data: "json, name=Channels" })
+  @SpeakeasyMetadata({ data: "json, name=Channels" })
   channels?: number;
 
-  @Metadata({ data: "json, name=Codec" })
+  @SpeakeasyMetadata({ data: "json, name=Codec" })
   codec?: string;
 
-  @Metadata({ data: "json, name=CodecTag" })
+  @SpeakeasyMetadata({ data: "json, name=CodecTag" })
   codecTag?: string;
 
-  @Metadata({ data: "json, name=CodecTimeBase" })
+  @SpeakeasyMetadata({ data: "json, name=CodecTimeBase" })
   codecTimeBase?: string;
 
-  @Metadata({ data: "json, name=ColorPrimaries" })
+  @SpeakeasyMetadata({ data: "json, name=ColorPrimaries" })
   colorPrimaries?: string;
 
-  @Metadata({ data: "json, name=ColorRange" })
+  @SpeakeasyMetadata({ data: "json, name=ColorRange" })
   colorRange?: string;
 
-  @Metadata({ data: "json, name=ColorSpace" })
+  @SpeakeasyMetadata({ data: "json, name=ColorSpace" })
   colorSpace?: string;
 
-  @Metadata({ data: "json, name=ColorTransfer" })
+  @SpeakeasyMetadata({ data: "json, name=ColorTransfer" })
   colorTransfer?: string;
 
-  @Metadata({ data: "json, name=Comment" })
+  @SpeakeasyMetadata({ data: "json, name=Comment" })
   comment?: string;
 
-  @Metadata({ data: "json, name=DeliveryMethod" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryMethod" })
   deliveryMethod?: SubtitleDeliveryMethodEnum;
 
-  @Metadata({ data: "json, name=DeliveryUrl" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryUrl" })
   deliveryUrl?: string;
 
-  @Metadata({ data: "json, name=DisplayTitle" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayTitle" })
   displayTitle?: string;
 
-  @Metadata({ data: "json, name=Height" })
+  @SpeakeasyMetadata({ data: "json, name=Height" })
   height?: number;
 
-  @Metadata({ data: "json, name=Index" })
+  @SpeakeasyMetadata({ data: "json, name=Index" })
   index?: number;
 
-  @Metadata({ data: "json, name=IsAVC" })
+  @SpeakeasyMetadata({ data: "json, name=IsAVC" })
   isAvc?: boolean;
 
-  @Metadata({ data: "json, name=IsAnamorphic" })
+  @SpeakeasyMetadata({ data: "json, name=IsAnamorphic" })
   isAnamorphic?: boolean;
 
-  @Metadata({ data: "json, name=IsDefault" })
+  @SpeakeasyMetadata({ data: "json, name=IsDefault" })
   isDefault?: boolean;
 
-  @Metadata({ data: "json, name=IsExternal" })
+  @SpeakeasyMetadata({ data: "json, name=IsExternal" })
   isExternal?: boolean;
 
-  @Metadata({ data: "json, name=IsExternalUrl" })
+  @SpeakeasyMetadata({ data: "json, name=IsExternalUrl" })
   isExternalUrl?: boolean;
 
-  @Metadata({ data: "json, name=IsForced" })
+  @SpeakeasyMetadata({ data: "json, name=IsForced" })
   isForced?: boolean;
 
-  @Metadata({ data: "json, name=IsInterlaced" })
+  @SpeakeasyMetadata({ data: "json, name=IsInterlaced" })
   isInterlaced?: boolean;
 
-  @Metadata({ data: "json, name=IsTextSubtitleStream" })
+  @SpeakeasyMetadata({ data: "json, name=IsTextSubtitleStream" })
   isTextSubtitleStream?: boolean;
 
-  @Metadata({ data: "json, name=Language" })
+  @SpeakeasyMetadata({ data: "json, name=Language" })
   language?: string;
 
-  @Metadata({ data: "json, name=Level" })
+  @SpeakeasyMetadata({ data: "json, name=Level" })
   level?: number;
 
-  @Metadata({ data: "json, name=NalLengthSize" })
+  @SpeakeasyMetadata({ data: "json, name=NalLengthSize" })
   nalLengthSize?: string;
 
-  @Metadata({ data: "json, name=PacketLength" })
+  @SpeakeasyMetadata({ data: "json, name=PacketLength" })
   packetLength?: number;
 
-  @Metadata({ data: "json, name=Path" })
+  @SpeakeasyMetadata({ data: "json, name=Path" })
   path?: string;
 
-  @Metadata({ data: "json, name=PixelFormat" })
+  @SpeakeasyMetadata({ data: "json, name=PixelFormat" })
   pixelFormat?: string;
 
-  @Metadata({ data: "json, name=Profile" })
+  @SpeakeasyMetadata({ data: "json, name=Profile" })
   profile?: string;
 
-  @Metadata({ data: "json, name=RealFrameRate" })
+  @SpeakeasyMetadata({ data: "json, name=RealFrameRate" })
   realFrameRate?: number;
 
-  @Metadata({ data: "json, name=RefFrames" })
+  @SpeakeasyMetadata({ data: "json, name=RefFrames" })
   refFrames?: number;
 
-  @Metadata({ data: "json, name=SampleRate" })
+  @SpeakeasyMetadata({ data: "json, name=SampleRate" })
   sampleRate?: number;
 
-  @Metadata({ data: "json, name=Score" })
+  @SpeakeasyMetadata({ data: "json, name=Score" })
   score?: number;
 
-  @Metadata({ data: "json, name=SupportsExternalStream" })
+  @SpeakeasyMetadata({ data: "json, name=SupportsExternalStream" })
   supportsExternalStream?: boolean;
 
-  @Metadata({ data: "json, name=TimeBase" })
+  @SpeakeasyMetadata({ data: "json, name=TimeBase" })
   timeBase?: string;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: MediaStreamTypeEnum;
 
-  @Metadata({ data: "json, name=VideoRange" })
+  @SpeakeasyMetadata({ data: "json, name=VideoRange" })
   videoRange?: string;
 
-  @Metadata({ data: "json, name=Width" })
+  @SpeakeasyMetadata({ data: "json, name=Width" })
   width?: number;
 
-  @Metadata({ data: "json, name=localizedDefault" })
+  @SpeakeasyMetadata({ data: "json, name=localizedDefault" })
   localizedDefault?: string;
 
-  @Metadata({ data: "json, name=localizedForced" })
+  @SpeakeasyMetadata({ data: "json, name=localizedForced" })
   localizedForced?: string;
 
-  @Metadata({ data: "json, name=localizedUndefined" })
+  @SpeakeasyMetadata({ data: "json, name=localizedUndefined" })
+  localizedUndefined?: string;
+}
+
+
+// MediaStreamInput
+/** 
+ * Class MediaStream.
+**/
+export class MediaStreamInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=AspectRatio" })
+  aspectRatio?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=AverageFrameRate" })
+  averageFrameRate?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=BitDepth" })
+  bitDepth?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=BitRate" })
+  bitRate?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=ChannelLayout" })
+  channelLayout?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Channels" })
+  channels?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Codec" })
+  codec?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=CodecTag" })
+  codecTag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=CodecTimeBase" })
+  codecTimeBase?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ColorPrimaries" })
+  colorPrimaries?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ColorRange" })
+  colorRange?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ColorSpace" })
+  colorSpace?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ColorTransfer" })
+  colorTransfer?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Comment" })
+  comment?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=DeliveryMethod" })
+  deliveryMethod?: SubtitleDeliveryMethodEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=DeliveryUrl" })
+  deliveryUrl?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Height" })
+  height?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Index" })
+  index?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=IsAVC" })
+  isAvc?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsAnamorphic" })
+  isAnamorphic?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsDefault" })
+  isDefault?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsExternal" })
+  isExternal?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsExternalUrl" })
+  isExternalUrl?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsForced" })
+  isForced?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsInterlaced" })
+  isInterlaced?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=Language" })
+  language?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Level" })
+  level?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=NalLengthSize" })
+  nalLengthSize?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=PacketLength" })
+  packetLength?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Path" })
+  path?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=PixelFormat" })
+  pixelFormat?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Profile" })
+  profile?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=RealFrameRate" })
+  realFrameRate?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=RefFrames" })
+  refFrames?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=SampleRate" })
+  sampleRate?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Score" })
+  score?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=SupportsExternalStream" })
+  supportsExternalStream?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=TimeBase" })
+  timeBase?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Title" })
+  title?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Type" })
+  type?: MediaStreamTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=Width" })
+  width?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=localizedDefault" })
+  localizedDefault?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=localizedForced" })
+  localizedForced?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=localizedUndefined" })
   localizedUndefined?: string;
 }

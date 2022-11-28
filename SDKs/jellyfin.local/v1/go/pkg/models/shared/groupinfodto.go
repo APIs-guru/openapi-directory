@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GroupInfoDto
+// Class GroupInfoDto.
 type GroupInfoDto struct {
 	GroupID       *string             `json:"GroupId,omitempty"`
 	GroupName     *string             `json:"GroupName,omitempty"`

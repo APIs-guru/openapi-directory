@@ -1,5 +1,7 @@
 package shared
 
+// SubscriptionPurchase
+// A SubscriptionPurchase resource indicates the status of a user's subscription purchase.
 type SubscriptionPurchase struct {
 	AcknowledgementState        *int32                          `json:"acknowledgementState,omitempty"`
 	AutoRenewing                *bool                           `json:"autoRenewing,omitempty"`

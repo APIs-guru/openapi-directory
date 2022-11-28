@@ -10,11 +10,9 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import axios from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
 import * as operations from "./models/operations";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
-var Servers = [
+import * as utils from "../internal/utils";
+export var ServerList = [
     "https://extendsclass.com/api/json-storage",
 ];
 export function WithServerURL(serverURL, params) {
@@ -22,12 +20,12 @@ export function WithServerURL(serverURL, params) {
         if (params != null) {
             serverURL = utils.ReplaceParameters(serverURL, params);
         }
-        sdk.serverURL = serverURL;
+        sdk._serverURL = serverURL;
     };
 }
 export function WithClient(client) {
     return function (sdk) {
-        sdk.defaultClient = client;
+        sdk._defaultClient = client;
     };
 }
 var SDK = /** @class */ (function () {
@@ -37,56 +35,55 @@ var SDK = /** @class */ (function () {
             opts[_i] = arguments[_i];
         }
         var _this = this;
+        this._language = "typescript";
+        this._sdkVersion = "0.0.1";
+        this._genVersion = "internal";
         opts.forEach(function (o) { return o(_this); });
-        if (this.serverURL == "") {
-            this.serverURL = Servers[0];
+        if (this._serverURL == "") {
+            this._serverURL = ServerList[0];
         }
-        if (!this.defaultClient) {
-            this.defaultClient = axios.create({ baseURL: this.serverURL });
+        if (!this._defaultClient) {
+            this._defaultClient = axios.create({ baseURL: this._serverURL });
         }
-        if (!this.securityClient) {
-            if (this.security) {
-                this.securityClient = CreateSecurityClient(this.defaultClient, this.security);
-            }
-            else {
-                this.securityClient = this.defaultClient;
-            }
+        if (!this._securityClient) {
+            this._securityClient = this._defaultClient;
         }
     }
-    // DeleteBinId - Delete a json bin
-    SDK.prototype.DeleteBinId = function (req, config) {
+    /**
+     * deleteBinId - Delete a json bin
+    **/
+    SDK.prototype.deleteBinId = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.DeleteBinIdRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/bin/{id}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .delete(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "delete" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.deleteStatus = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 401:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 401:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.error = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 404:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.error = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 422:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 422:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.error = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -95,35 +92,36 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // GetBinId - Return a json bin
-    SDK.prototype.GetBinId = function (req, config) {
+    /**
+     * getBinId - Return a json bin
+    **/
+    SDK.prototype.getBinId = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetBinIdRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/bin/{id}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.getBinId200ApplicationJsonObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 404:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.error = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 422:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 422:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.error = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -132,45 +130,46 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // PatchBinId - Partially update a json bin with JSON Merge Patch
-    SDK.prototype.PatchBinId = function (req, config) {
+    /**
+     * patchBinId - Partially update a json bin with JSON Merge Patch
+    **/
+    SDK.prototype.patchBinId = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PatchBinIdRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/bin/{id}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .patch(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "patch" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.updateStatus = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 401:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 401:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.error = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 404:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.error = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 413:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 413:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.error = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 422:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 422:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.error = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -179,32 +178,33 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // PostBin - Create a json bin
-    SDK.prototype.PostBin = function (config) {
-        var baseURL = this.serverURL;
+    /**
+     * postBin - Create a json bin
+    **/
+    SDK.prototype.postBin = function (config) {
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/bin";
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .post(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.createStatus = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 413:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 413:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.error = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 422:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 422:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.error = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -213,45 +213,46 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // PutBinId - Update a json bin
-    SDK.prototype.PutBinId = function (req, config) {
+    /**
+     * putBinId - Update a json bin
+    **/
+    SDK.prototype.putBinId = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.PutBinIdRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/bin/{id}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .put(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "put" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.updateStatus = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 401:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 401:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.error = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 404:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.error = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 413:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 413:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.error = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 422:
-                    if (MatchContentType(contentType, "application/json")) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 422:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.error = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;

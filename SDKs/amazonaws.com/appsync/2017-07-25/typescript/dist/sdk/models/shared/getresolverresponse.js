@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Resolver } from "./resolver";
 var GetResolverResponse = /** @class */ (function (_super) {
     __extends(GetResolverResponse, _super);
@@ -30,7 +30,7 @@ var GetResolverResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=resolver" }),
+        SpeakeasyMetadata({ data: "json, name=resolver" }),
         __metadata("design:type", Resolver)
     ], GetResolverResponse.prototype, "resolver", void 0);
     return GetResolverResponse;

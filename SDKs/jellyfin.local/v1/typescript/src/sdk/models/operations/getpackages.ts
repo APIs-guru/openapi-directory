@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPackagesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetPackagesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPackagesSecurity;
 }
 
 
 export class GetPackagesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.PackageInfo })
+  @SpeakeasyMetadata({ elemType: shared.PackageInfo })
   packageInfos?: shared.PackageInfo[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

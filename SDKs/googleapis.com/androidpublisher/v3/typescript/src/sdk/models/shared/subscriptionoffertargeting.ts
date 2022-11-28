@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AcquisitionTargetingRule } from "./acquisitiontargetingrule";
 import { UpgradeTargetingRule } from "./upgradetargetingrule";
+
 
 
 // SubscriptionOfferTargeting
@@ -8,9 +9,9 @@ import { UpgradeTargetingRule } from "./upgradetargetingrule";
  * Defines the rule a user needs to satisfy to receive this offer.
 **/
 export class SubscriptionOfferTargeting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acquisitionRule" })
+  @SpeakeasyMetadata({ data: "json, name=acquisitionRule" })
   acquisitionRule?: AcquisitionTargetingRule;
 
-  @Metadata({ data: "json, name=upgradeRule" })
+  @SpeakeasyMetadata({ data: "json, name=upgradeRule" })
   upgradeRule?: UpgradeTargetingRule;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// ChangeList
+// A list of changes for a user.
 type ChangeList struct {
 	Etag              *string  `json:"etag,omitempty"`
 	Items             []Change `json:"items,omitempty"`

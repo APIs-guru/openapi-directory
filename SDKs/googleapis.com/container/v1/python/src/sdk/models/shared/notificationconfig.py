@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import pubsub
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class NotificationConfig:
-    pubsub: Optional[pubsub.PubSub] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pubsub' }})
+    r"""NotificationConfig
+    NotificationConfig is the configuration of notifications.
+    """
+    
+    pubsub: Optional[PubSub] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pubsub') }})
     

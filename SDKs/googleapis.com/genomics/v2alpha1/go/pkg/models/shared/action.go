@@ -14,6 +14,8 @@ const (
 	ActionFlagsEnumBlockExternalNetwork        ActionFlagsEnum = "BLOCK_EXTERNAL_NETWORK"
 )
 
+// Action
+// Specifies a single action that runs a Docker container.
 type Action struct {
 	Commands             []string          `json:"commands,omitempty"`
 	Credentials          *Secret           `json:"credentials,omitempty"`

@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TagResourceRelationshipsTransactionsLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=related" })
+  @SpeakeasyMetadata({ data: "json, name=related" })
   related: string;
 }
 
 
 export class TagResourceRelationshipsTransactions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: TagResourceRelationshipsTransactionsLinks;
 }
 
 
 export class TagResourceRelationships extends SpeakeasyBase {
-  @Metadata({ data: "json, name=transactions" })
+  @SpeakeasyMetadata({ data: "json, name=transactions" })
   transactions: TagResourceRelationshipsTransactions;
 }
 
@@ -25,12 +26,12 @@ export class TagResourceRelationships extends SpeakeasyBase {
  * 
 **/
 export class TagResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=relationships" })
+  @SpeakeasyMetadata({ data: "json, name=relationships" })
   relationships: TagResourceRelationships;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

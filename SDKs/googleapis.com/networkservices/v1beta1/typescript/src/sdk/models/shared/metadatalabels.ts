@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MetadataLabels
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines a name-pair value for a single label.
 **/
 export class MetadataLabels extends SpeakeasyBase {
-  @Metadata({ data: "json, name=labelName" })
+  @SpeakeasyMetadata({ data: "json, name=labelName" })
   labelName?: string;
 
-  @Metadata({ data: "json, name=labelValue" })
+  @SpeakeasyMetadata({ data: "json, name=labelValue" })
   labelValue?: string;
 }

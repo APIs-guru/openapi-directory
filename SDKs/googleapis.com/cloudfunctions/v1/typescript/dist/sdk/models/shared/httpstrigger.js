@@ -22,13 +22,29 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var HttpsTriggerSecurityLevelEnum;
 (function (HttpsTriggerSecurityLevelEnum) {
     HttpsTriggerSecurityLevelEnum["SecurityLevelUnspecified"] = "SECURITY_LEVEL_UNSPECIFIED";
     HttpsTriggerSecurityLevelEnum["SecureAlways"] = "SECURE_ALWAYS";
     HttpsTriggerSecurityLevelEnum["SecureOptional"] = "SECURE_OPTIONAL";
 })(HttpsTriggerSecurityLevelEnum || (HttpsTriggerSecurityLevelEnum = {}));
+// HttpsTriggerInput
+/**
+ * Describes HttpsTrigger, could be used to connect web hooks to function.
+**/
+var HttpsTriggerInput = /** @class */ (function (_super) {
+    __extends(HttpsTriggerInput, _super);
+    function HttpsTriggerInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=securityLevel" }),
+        __metadata("design:type", String)
+    ], HttpsTriggerInput.prototype, "securityLevel", void 0);
+    return HttpsTriggerInput;
+}(SpeakeasyBase));
+export { HttpsTriggerInput };
 // HttpsTrigger
 /**
  * Describes HttpsTrigger, could be used to connect web hooks to function.
@@ -39,11 +55,11 @@ var HttpsTrigger = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=securityLevel" }),
+        SpeakeasyMetadata({ data: "json, name=securityLevel" }),
         __metadata("design:type", String)
     ], HttpsTrigger.prototype, "securityLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], HttpsTrigger.prototype, "url", void 0);
     return HttpsTrigger;

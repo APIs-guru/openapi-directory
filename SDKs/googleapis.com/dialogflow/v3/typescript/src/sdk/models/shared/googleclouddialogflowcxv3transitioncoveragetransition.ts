@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3EventHandler } from "./googleclouddialogflowcxv3eventhandler";
 import { GoogleCloudDialogflowCxV3TransitionCoverageTransitionNode } from "./googleclouddialogflowcxv3transitioncoveragetransitionnode";
-import { GoogleCloudDialogflowCxV3TransitionCoverageTransitionNode } from "./googleclouddialogflowcxv3transitioncoveragetransitionnode";
 import { GoogleCloudDialogflowCxV3TransitionRoute } from "./googleclouddialogflowcxv3transitionroute";
+
 
 
 // GoogleCloudDialogflowCxV3TransitionCoverageTransition
@@ -10,21 +10,21 @@ import { GoogleCloudDialogflowCxV3TransitionRoute } from "./googleclouddialogflo
  * A transition in a page.
 **/
 export class GoogleCloudDialogflowCxV3TransitionCoverageTransition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=covered" })
+  @SpeakeasyMetadata({ data: "json, name=covered" })
   covered?: boolean;
 
-  @Metadata({ data: "json, name=eventHandler" })
+  @SpeakeasyMetadata({ data: "json, name=eventHandler" })
   eventHandler?: GoogleCloudDialogflowCxV3EventHandler;
 
-  @Metadata({ data: "json, name=index" })
+  @SpeakeasyMetadata({ data: "json, name=index" })
   index?: number;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: GoogleCloudDialogflowCxV3TransitionCoverageTransitionNode;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target?: GoogleCloudDialogflowCxV3TransitionCoverageTransitionNode;
 
-  @Metadata({ data: "json, name=transitionRoute" })
+  @SpeakeasyMetadata({ data: "json, name=transitionRoute" })
   transitionRoute?: GoogleCloudDialogflowCxV3TransitionRoute;
 }

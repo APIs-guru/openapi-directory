@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreateReceiptRuleSetActionEnum(str, Enum):
     CREATE_RECEIPT_RULE_SET = "CreateReceiptRuleSet"
@@ -10,9 +14,9 @@ class GetCreateReceiptRuleSetVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateReceiptRuleSetQueryParams:
-    action: GetCreateReceiptRuleSetActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    rule_set_name: str = field(default=None, metadata={'query_param': { 'field_name': 'RuleSetName', 'style': 'form', 'explode': True }})
-    version: GetCreateReceiptRuleSetVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetCreateReceiptRuleSetActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    rule_set_name: str = field(metadata={'query_param': { 'field_name': 'RuleSetName', 'style': 'form', 'explode': True }})
+    version: GetCreateReceiptRuleSetVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetCreateReceiptRuleSetHeaders:
 
 @dataclass
 class GetCreateReceiptRuleSetRequest:
-    query_params: GetCreateReceiptRuleSetQueryParams = field(default=None)
-    headers: GetCreateReceiptRuleSetHeaders = field(default=None)
+    headers: GetCreateReceiptRuleSetHeaders = field()
+    query_params: GetCreateReceiptRuleSetQueryParams = field()
     
 
 @dataclass
 class GetCreateReceiptRuleSetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DeleteLogGroupXAmzTargetEnum {
     Logs20140328DeleteLogGroup = "Logs_20140328.DeleteLogGroup"

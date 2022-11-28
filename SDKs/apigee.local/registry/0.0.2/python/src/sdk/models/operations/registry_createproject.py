@@ -9,13 +9,13 @@ class RegistryCreateProjectQueryParams:
 
 @dataclass
 class RegistryCreateProjectRequest:
-    query_params: RegistryCreateProjectQueryParams = field(default=None)
-    request: Any = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    query_params: RegistryCreateProjectQueryParams = field()
+    request: Any = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RegistryCreateProjectResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     project: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

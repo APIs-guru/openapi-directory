@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TranslateTextGlossaryConfig } from "./translatetextglossaryconfig";
+
 
 
 // TranslateTextRequest
@@ -7,24 +8,24 @@ import { TranslateTextGlossaryConfig } from "./translatetextglossaryconfig";
  * The request message for synchronous translation.
 **/
 export class TranslateTextRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contents" })
+  @SpeakeasyMetadata({ data: "json, name=contents" })
   contents?: string[];
 
-  @Metadata({ data: "json, name=glossaryConfig" })
+  @SpeakeasyMetadata({ data: "json, name=glossaryConfig" })
   glossaryConfig?: TranslateTextGlossaryConfig;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=mimeType" })
+  @SpeakeasyMetadata({ data: "json, name=mimeType" })
   mimeType?: string;
 
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model?: string;
 
-  @Metadata({ data: "json, name=sourceLanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=sourceLanguageCode" })
   sourceLanguageCode?: string;
 
-  @Metadata({ data: "json, name=targetLanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=targetLanguageCode" })
   targetLanguageCode?: string;
 }

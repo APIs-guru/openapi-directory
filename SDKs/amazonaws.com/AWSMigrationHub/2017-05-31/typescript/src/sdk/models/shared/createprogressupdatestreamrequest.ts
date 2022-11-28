@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateProgressUpdateStreamRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DryRun" })
+  @SpeakeasyMetadata({ data: "json, name=DryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "json, name=ProgressUpdateStreamName" })
+  @SpeakeasyMetadata({ data: "json, name=ProgressUpdateStreamName" })
   progressUpdateStreamName: string;
 }

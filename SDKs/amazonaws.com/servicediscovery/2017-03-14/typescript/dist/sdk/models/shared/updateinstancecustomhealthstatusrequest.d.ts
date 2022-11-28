@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CustomHealthStatusEnum } from "./customhealthstatusenum";
 export declare class UpdateInstanceCustomHealthStatusRequest extends SpeakeasyBase {
     instanceId: string;

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BwdifConfig } from "./bwdifconfig";
 import { YadifConfig } from "./yadifconfig";
+
 
 
 // Deinterlace
@@ -8,9 +9,9 @@ import { YadifConfig } from "./yadifconfig";
  * Deinterlace configuration for input video.
 **/
 export class Deinterlace extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bwdif" })
+  @SpeakeasyMetadata({ data: "json, name=bwdif" })
   bwdif?: BwdifConfig;
 
-  @Metadata({ data: "json, name=yadif" })
+  @SpeakeasyMetadata({ data: "json, name=yadif" })
   yadif?: YadifConfig;
 }

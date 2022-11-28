@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetRealmClientRegistrationPolicyProvidersPathParams:
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetRealmClientRegistrationPolicyProvidersRequest:
-    path_params: GetRealmClientRegistrationPolicyProvidersPathParams = field(default=None)
+    path_params: GetRealmClientRegistrationPolicyProvidersPathParams = field()
     
 
 @dataclass
 class GetRealmClientRegistrationPolicyProvidersResponse:
+    content_type: str = field()
+    status_code: int = field()
     component_type_representations: Optional[List[shared.ComponentTypeRepresentation]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

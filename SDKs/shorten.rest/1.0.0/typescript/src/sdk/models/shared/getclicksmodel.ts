@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClickModel } from "./clickmodel";
 
 
+
 export class GetClicksModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clicks", elemType: shared.ClickModel })
+  @SpeakeasyMetadata({ data: "json, name=clicks", elemType: ClickModel })
   clicks?: ClickModel[];
 
-  @Metadata({ data: "json, name=lastId" })
+  @SpeakeasyMetadata({ data: "json, name=lastId" })
   lastId?: string;
 }

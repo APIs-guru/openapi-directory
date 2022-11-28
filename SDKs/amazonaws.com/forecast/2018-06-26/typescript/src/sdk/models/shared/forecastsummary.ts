@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ForecastSummary
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides a summary of the forecast properties used in the <a>ListForecasts</a> operation. To get the complete set of properties, call the <a>DescribeForecast</a> operation, and provide the <code>ForecastArn</code> that is listed in the summary.
 **/
 export class ForecastSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=DatasetGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetGroupArn" })
   datasetGroupArn?: string;
 
-  @Metadata({ data: "json, name=ForecastArn" })
+  @SpeakeasyMetadata({ data: "json, name=ForecastArn" })
   forecastArn?: string;
 
-  @Metadata({ data: "json, name=ForecastName" })
+  @SpeakeasyMetadata({ data: "json, name=ForecastName" })
   forecastName?: string;
 
-  @Metadata({ data: "json, name=LastModificationTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModificationTime" })
   lastModificationTime?: Date;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 
-  @Metadata({ data: "json, name=PredictorArn" })
+  @SpeakeasyMetadata({ data: "json, name=PredictorArn" })
   predictorArn?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

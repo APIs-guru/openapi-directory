@@ -13,13 +13,13 @@ type ContactsRemoveSecurity struct {
 	SakariAuth shared.SchemeSakariAuth `security:"scheme,type=oauth2"`
 }
 
+type ContactsRemove200ApplicationJSON struct {
+	Success *bool `json:"success,omitempty"`
+}
+
 type ContactsRemoveRequest struct {
 	PathParams ContactsRemovePathParams
 	Security   ContactsRemoveSecurity
-}
-
-type ContactsRemove200ApplicationJSON struct {
-	Success *bool `json:"success,omitempty"`
 }
 
 type ContactsRemoveResponse struct {

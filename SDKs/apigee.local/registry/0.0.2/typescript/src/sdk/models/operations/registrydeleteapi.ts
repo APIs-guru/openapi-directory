@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegistryDeleteApiPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=api" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=api" })
   api: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project" })
   project: string;
 }
 
 
 export class RegistryDeleteApiRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RegistryDeleteApiPathParams;
 }
 
 
 export class RegistryDeleteApiResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

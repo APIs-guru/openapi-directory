@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Lake } from "./lake";
 /**
  * Specifies how metastore metadata should be integrated with the Dataplex service.

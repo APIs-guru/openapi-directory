@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Source } from "./source";
+
 
 
 // SourceResultCount
@@ -7,15 +8,15 @@ import { Source } from "./source";
  * Per source result count information.
 **/
 export class SourceResultCount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hasMoreResults" })
+  @SpeakeasyMetadata({ data: "json, name=hasMoreResults" })
   hasMoreResults?: boolean;
 
-  @Metadata({ data: "json, name=resultCountEstimate" })
+  @SpeakeasyMetadata({ data: "json, name=resultCountEstimate" })
   resultCountEstimate?: string;
 
-  @Metadata({ data: "json, name=resultCountExact" })
+  @SpeakeasyMetadata({ data: "json, name=resultCountExact" })
   resultCountExact?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: Source;
 }

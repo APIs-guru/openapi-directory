@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MfaModeEnum } from "./mfamodeenum";
 import { Settings } from "./settings";
+
 
 
 // CreateBackendAuthMfaConfig
@@ -8,9 +9,9 @@ import { Settings } from "./settings";
  * Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.
 **/
 export class CreateBackendAuthMfaConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MFAMode" })
+  @SpeakeasyMetadata({ data: "json, name=MFAMode" })
   mfaMode: MfaModeEnum;
 
-  @Metadata({ data: "json, name=Settings" })
+  @SpeakeasyMetadata({ data: "json, name=Settings" })
   settings?: Settings;
 }

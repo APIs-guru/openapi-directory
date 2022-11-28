@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import quotaoverride
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class OverrideInlineSource:
-    overrides: Optional[List[quotaoverride.QuotaOverride]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'overrides' }})
+    r"""OverrideInlineSource
+    Import data embedded in the request message
+    """
+    
+    overrides: Optional[List[QuotaOverride]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('overrides') }})
     

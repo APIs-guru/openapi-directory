@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleFirestoreAdminV1beta2IndexField } from "./googlefirestoreadminv1beta2indexfield";
 export var GoogleFirestoreAdminV1beta2IndexQueryScopeEnum;
 (function (GoogleFirestoreAdminV1beta2IndexQueryScopeEnum) {
     GoogleFirestoreAdminV1beta2IndexQueryScopeEnum["QueryScopeUnspecified"] = "QUERY_SCOPE_UNSPECIFIED";
@@ -47,19 +47,19 @@ var GoogleFirestoreAdminV1beta2Index = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fields", elemType: shared.GoogleFirestoreAdminV1beta2IndexField }),
+        SpeakeasyMetadata({ data: "json, name=fields", elemType: GoogleFirestoreAdminV1beta2IndexField }),
         __metadata("design:type", Array)
     ], GoogleFirestoreAdminV1beta2Index.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleFirestoreAdminV1beta2Index.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=queryScope" }),
+        SpeakeasyMetadata({ data: "json, name=queryScope" }),
         __metadata("design:type", String)
     ], GoogleFirestoreAdminV1beta2Index.prototype, "queryScope", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], GoogleFirestoreAdminV1beta2Index.prototype, "state", void 0);
     return GoogleFirestoreAdminV1beta2Index;

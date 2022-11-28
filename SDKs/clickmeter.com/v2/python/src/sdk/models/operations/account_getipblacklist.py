@@ -11,12 +11,12 @@ class AccountGetIPBlacklistQueryParams:
 
 @dataclass
 class AccountGetIPBlacklistRequest:
-    query_params: AccountGetIPBlacklistQueryParams = field(default=None)
+    query_params: AccountGetIPBlacklistQueryParams = field()
     
 
 @dataclass
 class AccountGetIPBlacklistResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_responses_entities_response_api_core_dto_accounting_ip_blacklist_entry_: Optional[shared.APICoreResponsesEntitiesResponseAPICoreDtoAccountingIPBlacklistEntry] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

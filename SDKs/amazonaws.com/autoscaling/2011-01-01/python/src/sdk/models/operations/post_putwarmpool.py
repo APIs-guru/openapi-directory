@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostPutWarmPoolActionEnum(str, Enum):
     PUT_WARM_POOL = "PutWarmPool"
@@ -10,8 +14,8 @@ class PostPutWarmPoolVersionEnum(str, Enum):
 
 @dataclass
 class PostPutWarmPoolQueryParams:
-    action: PostPutWarmPoolActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostPutWarmPoolVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostPutWarmPoolActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostPutWarmPoolVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostPutWarmPoolHeaders:
 
 @dataclass
 class PostPutWarmPoolRequest:
-    query_params: PostPutWarmPoolQueryParams = field(default=None)
-    headers: PostPutWarmPoolHeaders = field(default=None)
+    headers: PostPutWarmPoolHeaders = field()
+    query_params: PostPutWarmPoolQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostPutWarmPoolResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

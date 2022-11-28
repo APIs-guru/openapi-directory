@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteGroupPolicyActionEnum(str, Enum):
     DELETE_GROUP_POLICY = "DeleteGroupPolicy"
@@ -10,8 +14,8 @@ class PostDeleteGroupPolicyVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteGroupPolicyQueryParams:
-    action: PostDeleteGroupPolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteGroupPolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteGroupPolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteGroupPolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteGroupPolicyHeaders:
 
 @dataclass
 class PostDeleteGroupPolicyRequest:
-    query_params: PostDeleteGroupPolicyQueryParams = field(default=None)
-    headers: PostDeleteGroupPolicyHeaders = field(default=None)
+    headers: PostDeleteGroupPolicyHeaders = field()
+    query_params: PostDeleteGroupPolicyQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteGroupPolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

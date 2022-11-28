@@ -1,30 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum RefereesFormatEnum {
-    Xml = "XML"
-,    Json = "JSON"
+    Xml = "XML",
+    Json = "JSON"
 }
 
 
 export class RefereesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: RefereesFormatEnum;
 }
 
 
 export class RefereesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RefereesPathParams;
 }
 
 
 export class RefereesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   referees?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

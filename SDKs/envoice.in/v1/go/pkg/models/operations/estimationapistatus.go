@@ -9,11 +9,6 @@ type EstimationAPIStatusHeaders struct {
 	XAuthSecret string `header:"style=simple,explode=false,name=x-auth-secret"`
 }
 
-type EstimationAPIStatusRequest struct {
-	QueryParams EstimationAPIStatusQueryParams
-	Headers     EstimationAPIStatusHeaders
-}
-
 type EstimationAPIStatus200ApplicationJSONEnum string
 
 const (
@@ -29,6 +24,11 @@ const (
 	EstimationAPIStatus200TextJSONEnumAccepted EstimationAPIStatus200TextJSONEnum = "Accepted"
 	EstimationAPIStatus200TextJSONEnumRejected EstimationAPIStatus200TextJSONEnum = "Rejected"
 )
+
+type EstimationAPIStatusRequest struct {
+	QueryParams EstimationAPIStatusQueryParams
+	Headers     EstimationAPIStatusHeaders
+}
 
 type EstimationAPIStatusResponse struct {
 	Body                                            []byte

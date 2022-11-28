@@ -1,68 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSnippetsWorkspaceEncodedIdCommentsCommentIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=comment_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=comment_id" })
   commentId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=encoded_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=encoded_id" })
   encodedId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=workspace" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspace" })
   workspace: string;
 }
 
 
-export class GetSnippetsWorkspaceEncodedIdCommentsCommentIdSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2: shared.SchemeOauth2;
-}
-
-
-export class GetSnippetsWorkspaceEncodedIdCommentsCommentIdSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
-  basic: shared.SchemeBasic;
-}
-
-
-export class GetSnippetsWorkspaceEncodedIdCommentsCommentIdSecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
 export class GetSnippetsWorkspaceEncodedIdCommentsCommentIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetSnippetsWorkspaceEncodedIdCommentsCommentIdSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2?: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetSnippetsWorkspaceEncodedIdCommentsCommentIdSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  basic?: shared.SchemeBasic;
 
-  @Metadata({ data: "security, option=true" })
-  option3?: GetSnippetsWorkspaceEncodedIdCommentsCommentIdSecurityOption3;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey?: shared.SchemeApiKey;
 }
 
 
 export class GetSnippetsWorkspaceEncodedIdCommentsCommentIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSnippetsWorkspaceEncodedIdCommentsCommentIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetSnippetsWorkspaceEncodedIdCommentsCommentIdSecurity;
 }
 
 
 export class GetSnippetsWorkspaceEncodedIdCommentsCommentIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   snippetComment?: Map<string, any>;
 }

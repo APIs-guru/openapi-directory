@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClusterSettingNameEnum } from "./clustersettingnameenum";
+
 
 
 // ClusterSetting
@@ -7,9 +8,9 @@ import { ClusterSettingNameEnum } from "./clustersettingnameenum";
  * The settings to use when creating a cluster. This parameter is used to enable CloudWatch Container Insights for a cluster.
 **/
 export class ClusterSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: ClusterSettingNameEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

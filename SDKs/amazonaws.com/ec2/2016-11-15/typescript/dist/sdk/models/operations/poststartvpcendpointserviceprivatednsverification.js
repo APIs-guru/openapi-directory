@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PostStartVpcEndpointServicePrivateDnsVerificationActionEnum;
 (function (PostStartVpcEndpointServicePrivateDnsVerificationActionEnum) {
     PostStartVpcEndpointServicePrivateDnsVerificationActionEnum["StartVpcEndpointServicePrivateDnsVerification"] = "StartVpcEndpointServicePrivateDnsVerification";
@@ -37,11 +37,11 @@ var PostStartVpcEndpointServicePrivateDnsVerificationQueryParams = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], PostStartVpcEndpointServicePrivateDnsVerificationQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], PostStartVpcEndpointServicePrivateDnsVerificationQueryParams.prototype, "version", void 0);
     return PostStartVpcEndpointServicePrivateDnsVerificationQueryParams;
@@ -53,31 +53,31 @@ var PostStartVpcEndpointServicePrivateDnsVerificationHeaders = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], PostStartVpcEndpointServicePrivateDnsVerificationHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], PostStartVpcEndpointServicePrivateDnsVerificationHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], PostStartVpcEndpointServicePrivateDnsVerificationHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], PostStartVpcEndpointServicePrivateDnsVerificationHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], PostStartVpcEndpointServicePrivateDnsVerificationHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], PostStartVpcEndpointServicePrivateDnsVerificationHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], PostStartVpcEndpointServicePrivateDnsVerificationHeaders.prototype, "xAmzSignedHeaders", void 0);
     return PostStartVpcEndpointServicePrivateDnsVerificationHeaders;
@@ -89,15 +89,15 @@ var PostStartVpcEndpointServicePrivateDnsVerificationRequest = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostStartVpcEndpointServicePrivateDnsVerificationQueryParams)
     ], PostStartVpcEndpointServicePrivateDnsVerificationRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostStartVpcEndpointServicePrivateDnsVerificationHeaders)
     ], PostStartVpcEndpointServicePrivateDnsVerificationRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/xml" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/xml" }),
         __metadata("design:type", Uint8Array)
     ], PostStartVpcEndpointServicePrivateDnsVerificationRequest.prototype, "request", void 0);
     return PostStartVpcEndpointServicePrivateDnsVerificationRequest;
@@ -109,15 +109,15 @@ var PostStartVpcEndpointServicePrivateDnsVerificationResponse = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PostStartVpcEndpointServicePrivateDnsVerificationResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostStartVpcEndpointServicePrivateDnsVerificationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostStartVpcEndpointServicePrivateDnsVerificationResponse.prototype, "statusCode", void 0);
     return PostStartVpcEndpointServicePrivateDnsVerificationResponse;

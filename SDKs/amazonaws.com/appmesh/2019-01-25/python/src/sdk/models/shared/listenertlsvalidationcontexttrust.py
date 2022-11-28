@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
-from . import tlsvalidationcontextfiletrust
-from . import tlsvalidationcontextsdstrust
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListenerTLSValidationContextTrust:
-    file: Optional[tlsvalidationcontextfiletrust.TLSValidationContextFileTrust] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'file' }})
-    sds: Optional[tlsvalidationcontextsdstrust.TLSValidationContextSdsTrust] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sds' }})
+    r"""ListenerTLSValidationContextTrust
+    An object that represents a listener's Transport Layer Security (TLS) validation context trust.
+    """
+    
+    file: Optional[TLSValidationContextFileTrust] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('file') }})
+    sds: Optional[TLSValidationContextSdsTrust] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sds') }})
     

@@ -1,45 +1,46 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AggregationType } from "./aggregationtype";
 import { FleetMetricUnitEnum } from "./fleetmetricunitenum";
 
 
+
 export class DescribeFleetMetricResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregationField" })
+  @SpeakeasyMetadata({ data: "json, name=aggregationField" })
   aggregationField?: string;
 
-  @Metadata({ data: "json, name=aggregationType" })
+  @SpeakeasyMetadata({ data: "json, name=aggregationType" })
   aggregationType?: AggregationType;
 
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=indexName" })
+  @SpeakeasyMetadata({ data: "json, name=indexName" })
   indexName?: string;
 
-  @Metadata({ data: "json, name=lastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedDate" })
   lastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=metricArn" })
+  @SpeakeasyMetadata({ data: "json, name=metricArn" })
   metricArn?: string;
 
-  @Metadata({ data: "json, name=metricName" })
+  @SpeakeasyMetadata({ data: "json, name=metricName" })
   metricName?: string;
 
-  @Metadata({ data: "json, name=period" })
+  @SpeakeasyMetadata({ data: "json, name=period" })
   period?: number;
 
-  @Metadata({ data: "json, name=queryString" })
+  @SpeakeasyMetadata({ data: "json, name=queryString" })
   queryString?: string;
 
-  @Metadata({ data: "json, name=queryVersion" })
+  @SpeakeasyMetadata({ data: "json, name=queryVersion" })
   queryVersion?: string;
 
-  @Metadata({ data: "json, name=unit" })
+  @SpeakeasyMetadata({ data: "json, name=unit" })
   unit?: FleetMetricUnitEnum;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: number;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// BucketAccessControl
+// An access-control entry.
 type BucketAccessControl struct {
 	Bucket   *string `json:"bucket,omitempty"`
 	Domain   *string `json:"domain,omitempty"`

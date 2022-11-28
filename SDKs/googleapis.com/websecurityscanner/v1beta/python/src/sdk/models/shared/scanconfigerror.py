@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ScanConfigErrorCodeEnum(str, Enum):
     CODE_UNSPECIFIED = "CODE_UNSPECIFIED"
@@ -50,6 +55,10 @@ class ScanConfigErrorCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ScanConfigError:
-    code: Optional[ScanConfigErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    field_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fieldName' }})
+    r"""ScanConfigError
+    Defines a custom error message used by CreateScanConfig and UpdateScanConfig APIs when scan configuration validation fails. It is also reported as part of a ScanRunErrorTrace message if scan validation fails due to a scan configuration error.
+    """
+    
+    code: Optional[ScanConfigErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    field_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fieldName') }})
     

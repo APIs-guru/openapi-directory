@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import describedexecution
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeExecutionResponse:
-    execution: describedexecution.DescribedExecution = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Execution' }})
-    workflow_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WorkflowId' }})
+    execution: DescribedExecution = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Execution') }})
+    workflow_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('WorkflowId') }})
     

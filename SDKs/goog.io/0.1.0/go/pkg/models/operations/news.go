@@ -8,10 +8,6 @@ type NewsPathParams struct {
 	Query string `pathParam:"style=simple,explode=false,name=query"`
 }
 
-type NewsRequest struct {
-	PathParams NewsPathParams
-}
-
 type News200ApplicationJSONEntries struct {
 	Guidislink      *string `json:"guidislink,omitempty"`
 	ID              *string `json:"id,omitempty"`
@@ -47,6 +43,10 @@ type News200ApplicationJSONFeed struct {
 type News200ApplicationJSON struct {
 	Entries []News200ApplicationJSONEntries `json:"entries,omitempty"`
 	Feed    *News200ApplicationJSONFeed     `json:"feed,omitempty"`
+}
+
+type NewsRequest struct {
+	PathParams NewsPathParams
 }
 
 type NewsResponse struct {

@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeEngineVersionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DefaultOnly" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultOnly" })
   defaultOnly?: boolean;
 
-  @Metadata({ data: "json, name=EngineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=EngineVersion" })
   engineVersion?: string;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ParameterGroupFamily" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterGroupFamily" })
   parameterGroupFamily?: string;
 }

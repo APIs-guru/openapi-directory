@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://okta.local",
 	"https://,",
 }
@@ -19,9 +19,17 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	CreateUser           *CreateUser
+	CredentialOperations *CredentialOperations
+	LifecycleOperations  *LifecycleOperations
+
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,140 +40,73 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
 	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
+	}
+
+	sdk.CreateUser = NewCreateUser(
+		sdk._defaultClient,
+		sdk._securityClient,
+		sdk._serverURL,
+		sdk._language,
+		sdk._sdkVersion,
+		sdk._genVersion,
+	)
+
+	sdk.CredentialOperations = NewCredentialOperations(
+		sdk._defaultClient,
+		sdk._securityClient,
+		sdk._serverURL,
+		sdk._language,
+		sdk._sdkVersion,
+		sdk._genVersion,
+	)
+
+	sdk.LifecycleOperations = NewLifecycleOperations(
+		sdk._defaultClient,
+		sdk._securityClient,
+		sdk._serverURL,
+		sdk._language,
+		sdk._sdkVersion,
+		sdk._genVersion,
+	)
 
 	return sdk
 }
 
-func (s *SDK) ActivateUser(ctx context.Context, request operations.ActivateUserRequest) (*operations.ActivateUserResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/api/v1/users/{userId}/lifecycle/activate", request.PathParams)
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	req.Header.Set("Content-Type", reqContentType)
-
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.ActivateUserResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-	}
-
-	return res, nil
-}
-
-func (s *SDK) ChangePassword(ctx context.Context, request operations.ChangePasswordRequest) (*operations.ChangePasswordResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/api/v1/users/{userId}/credentials/change_password", request.PathParams)
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	req.Header.Set("Content-Type", reqContentType)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.ChangePasswordResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-	}
-
-	return res, nil
-}
-
-func (s *SDK) ChangeRecoveryQuestion(ctx context.Context, request operations.ChangeRecoveryQuestionRequest) (*operations.ChangeRecoveryQuestionResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/api/v1/users/{userId}/credentials/change_recovery_question", request.PathParams)
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	req.Header.Set("Content-Type", reqContentType)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.ChangeRecoveryQuestionResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-	}
-
-	return res, nil
-}
-
+// ClearUserSessions - Clear User Sessions
+// Clear User Sessions
 func (s *SDK) ClearUserSessions(ctx context.Context, request operations.ClearUserSessionsRequest) (*operations.ClearUserSessionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/v1/users/{userId}/sessions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -180,7 +121,7 @@ func (s *SDK) ClearUserSessions(ctx context.Context, request operations.ClearUse
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -201,84 +142,10 @@ func (s *SDK) ClearUserSessions(ctx context.Context, request operations.ClearUse
 	return res, nil
 }
 
-func (s *SDK) CreateUserInGroup(ctx context.Context, request operations.CreateUserInGroupRequest) (*operations.CreateUserInGroupResponse, error) {
-	baseURL := s.serverURL
-	url := strings.TrimSuffix(baseURL, "/") + "/api/v1/users"
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	req.Header.Set("Content-Type", reqContentType)
-
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.CreateUserInGroupResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-	}
-
-	return res, nil
-}
-
-func (s *SDK) DeactivateUser(ctx context.Context, request operations.DeactivateUserRequest) (*operations.DeactivateUserResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/api/v1/users/{userId}/lifecycle/deactivate", request.PathParams)
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	req.Header.Set("Content-Type", reqContentType)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.DeactivateUserResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-	}
-
-	return res, nil
-}
-
+// FindUser - Find User
+// Find User
 func (s *SDK) FindUser(ctx context.Context, request operations.FindUserRequest) (*operations.FindUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v1/users"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -295,7 +162,7 @@ func (s *SDK) FindUser(ctx context.Context, request operations.FindUserRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -316,47 +183,10 @@ func (s *SDK) FindUser(ctx context.Context, request operations.FindUserRequest) 
 	return res, nil
 }
 
-func (s *SDK) ForgotPasswordOneTimeCode(ctx context.Context, request operations.ForgotPasswordOneTimeCodeRequest) (*operations.ForgotPasswordOneTimeCodeResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/api/v1/users/{userId}/credentials/forgot_password", request.PathParams)
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	req.Header.Set("Content-Type", reqContentType)
-
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.ForgotPasswordOneTimeCodeResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-	}
-
-	return res, nil
-}
-
+// GetAssignedAppLinks - Get Assigned App Links
+// Get Assigned App Links
 func (s *SDK) GetAssignedAppLinks(ctx context.Context, request operations.GetAssignedAppLinksRequest) (*operations.GetAssignedAppLinksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/v1/users/{userId}/appLinks", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -371,7 +201,7 @@ func (s *SDK) GetAssignedAppLinks(ctx context.Context, request operations.GetAss
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -392,8 +222,10 @@ func (s *SDK) GetAssignedAppLinks(ctx context.Context, request operations.GetAss
 	return res, nil
 }
 
+// GetCurrentUser - Get Current User
+// Get Current User
 func (s *SDK) GetCurrentUser(ctx context.Context, request operations.GetCurrentUserRequest) (*operations.GetCurrentUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/api/v1/users/me"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -408,7 +240,7 @@ func (s *SDK) GetCurrentUser(ctx context.Context, request operations.GetCurrentU
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -429,8 +261,10 @@ func (s *SDK) GetCurrentUser(ctx context.Context, request operations.GetCurrentU
 	return res, nil
 }
 
+// GetGroupsForUser - Get Groups for User
+// Get Groups for User
 func (s *SDK) GetGroupsForUser(ctx context.Context, request operations.GetGroupsForUserRequest) (*operations.GetGroupsForUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/v1/users/{userId}/groups", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -445,7 +279,7 @@ func (s *SDK) GetGroupsForUser(ctx context.Context, request operations.GetGroups
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -466,8 +300,10 @@ func (s *SDK) GetGroupsForUser(ctx context.Context, request operations.GetGroups
 	return res, nil
 }
 
+// GetUser - Get User
+// Get User
 func (s *SDK) GetUser(ctx context.Context, request operations.GetUserRequest) (*operations.GetUserResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/v1/users/{userId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -482,7 +318,7 @@ func (s *SDK) GetUser(ctx context.Context, request operations.GetUserRequest) (*
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -503,8 +339,10 @@ func (s *SDK) GetUser(ctx context.Context, request operations.GetUserRequest) (*
 	return res, nil
 }
 
+// ResetFactors - Reset Factors
+// Reset Factors
 func (s *SDK) ResetFactors(ctx context.Context, request operations.ResetFactorsRequest) (*operations.ResetFactorsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/v1/users/{userId}/lifecycle/reset_factors", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -519,7 +357,7 @@ func (s *SDK) ResetFactors(ctx context.Context, request operations.ResetFactorsR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -530,232 +368,6 @@ func (s *SDK) ResetFactors(ctx context.Context, request operations.ResetFactorsR
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.ResetFactorsResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-	}
-
-	return res, nil
-}
-
-func (s *SDK) ResetPassword(ctx context.Context, request operations.ResetPasswordRequest) (*operations.ResetPasswordResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/api/v1/users/{userId}/lifecycle/reset_password", request.PathParams)
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	req.Header.Set("Content-Type", reqContentType)
-
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.ResetPasswordResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-	}
-
-	return res, nil
-}
-
-func (s *SDK) SetRecoveryCredential(ctx context.Context, request operations.SetRecoveryCredentialRequest) (*operations.SetRecoveryCredentialResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/api/v1/users/{userId}", request.PathParams)
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "PUT", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	req.Header.Set("Content-Type", reqContentType)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.SetRecoveryCredentialResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-	}
-
-	return res, nil
-}
-
-func (s *SDK) SetTempPassword(ctx context.Context, request operations.SetTempPasswordRequest) (*operations.SetTempPasswordResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/api/v1/users/{userId}/lifecycle/expire_password", request.PathParams)
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	req.Header.Set("Content-Type", reqContentType)
-
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.SetTempPasswordResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-	}
-
-	return res, nil
-}
-
-func (s *SDK) SuspendUser(ctx context.Context, request operations.SuspendUserRequest) (*operations.SuspendUserResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/api/v1/users/{userId}/lifecycle/suspend", request.PathParams)
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	req.Header.Set("Content-Type", reqContentType)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.SuspendUserResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-	}
-
-	return res, nil
-}
-
-func (s *SDK) UnlockUser(ctx context.Context, request operations.UnlockUserRequest) (*operations.UnlockUserResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/api/v1/users/{userId}/lifecycle/unlock", request.PathParams)
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	req.Header.Set("Content-Type", reqContentType)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.UnlockUserResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-	}
-
-	return res, nil
-}
-
-func (s *SDK) UnsuspendUser(ctx context.Context, request operations.UnsuspendUserRequest) (*operations.UnsuspendUserResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/api/v1/users/{userId}/lifecycle/unsuspend", request.PathParams)
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	req.Header.Set("Content-Type", reqContentType)
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.UnsuspendUserResponse{
 		StatusCode:  int64(httpRes.StatusCode),
 		ContentType: contentType,
 	}

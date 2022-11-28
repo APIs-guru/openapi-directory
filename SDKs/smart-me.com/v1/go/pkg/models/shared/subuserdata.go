@@ -11,6 +11,8 @@ const (
 	SubUserDataPermissionLevelEnumSelectedFolderOnly                SubUserDataPermissionLevelEnum = "SelectedFolderOnly"
 )
 
+// SubUserData
+// Container data for the sub user
 type SubUserData struct {
 	AccessEndDate       *time.Time                      `json:"AccessEndDate,omitempty" form:"name=AccessEndDate"`
 	AccessTimeStartDate *time.Time                      `json:"AccessTimeStartDate,omitempty" form:"name=AccessTimeStartDate"`

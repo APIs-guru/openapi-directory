@@ -1,16 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import compressiontype_enum
-from . import transformdatasource
-from . import splittype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TransformInput:
-    compression_type: Optional[compressiontype_enum.CompressionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CompressionType' }})
-    content_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContentType' }})
-    data_source: transformdatasource.TransformDataSource = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DataSource' }})
-    split_type: Optional[splittype_enum.SplitTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SplitType' }})
+    r"""TransformInput
+    Describes the input source of a transform job and the way the transform job consumes it.
+    """
+    
+    data_source: TransformDataSource = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DataSource') }})
+    compression_type: Optional[CompressionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CompressionType') }})
+    content_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ContentType') }})
+    split_type: Optional[SplitTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SplitType') }})
     

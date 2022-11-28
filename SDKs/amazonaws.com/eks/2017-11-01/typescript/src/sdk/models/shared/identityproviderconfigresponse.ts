@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OidcIdentityProviderConfig } from "./oidcidentityproviderconfig";
+
 
 
 // IdentityProviderConfigResponse
@@ -7,6 +8,6 @@ import { OidcIdentityProviderConfig } from "./oidcidentityproviderconfig";
  * The full description of your identity configuration.
 **/
 export class IdentityProviderConfigResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=oidc" })
+  @SpeakeasyMetadata({ data: "json, name=oidc" })
   oidc?: OidcIdentityProviderConfig;
 }

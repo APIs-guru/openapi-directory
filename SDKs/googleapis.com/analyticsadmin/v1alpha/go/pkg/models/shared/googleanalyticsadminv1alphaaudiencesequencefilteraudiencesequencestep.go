@@ -9,6 +9,8 @@ const (
 	GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStepScopeEnumAudienceFilterScopeAcrossAllSessions GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStepScopeEnum = "AUDIENCE_FILTER_SCOPE_ACROSS_ALL_SESSIONS"
 )
 
+// GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStep
+// A condition that must occur in the specified step order for this user to match the sequence.
 type GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStep struct {
 	ConstraintDuration *string                                                                         `json:"constraintDuration,omitempty"`
 	FilterExpression   *GoogleAnalyticsAdminV1alphaAudienceFilterExpression                            `json:"filterExpression,omitempty"`

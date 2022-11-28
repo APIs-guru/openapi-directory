@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListAssessmentFrameworksFrameworkTypeEnum(str, Enum):
@@ -9,7 +13,7 @@ class ListAssessmentFrameworksFrameworkTypeEnum(str, Enum):
 
 @dataclass
 class ListAssessmentFrameworksQueryParams:
-    framework_type: ListAssessmentFrameworksFrameworkTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'frameworkType', 'style': 'form', 'explode': True }})
+    framework_type: ListAssessmentFrameworksFrameworkTypeEnum = field(metadata={'query_param': { 'field_name': 'frameworkType', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'nextToken', 'style': 'form', 'explode': True }})
     
@@ -27,16 +31,16 @@ class ListAssessmentFrameworksHeaders:
 
 @dataclass
 class ListAssessmentFrameworksRequest:
-    query_params: ListAssessmentFrameworksQueryParams = field(default=None)
-    headers: ListAssessmentFrameworksHeaders = field(default=None)
+    headers: ListAssessmentFrameworksHeaders = field()
+    query_params: ListAssessmentFrameworksQueryParams = field()
     
 
 @dataclass
 class ListAssessmentFrameworksResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_assessment_frameworks_response: Optional[shared.ListAssessmentFrameworksResponse] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

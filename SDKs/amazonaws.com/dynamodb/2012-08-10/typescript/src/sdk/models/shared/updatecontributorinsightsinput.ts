@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContributorInsightsActionEnum } from "./contributorinsightsactionenum";
 
 
+
 export class UpdateContributorInsightsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContributorInsightsAction" })
+  @SpeakeasyMetadata({ data: "json, name=ContributorInsightsAction" })
   contributorInsightsAction: ContributorInsightsActionEnum;
 
-  @Metadata({ data: "json, name=IndexName" })
+  @SpeakeasyMetadata({ data: "json, name=IndexName" })
   indexName?: string;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName: string;
 }

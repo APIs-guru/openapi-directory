@@ -1,10 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatacatalogV1StorageProperties } from "./googleclouddatacatalogv1storageproperties";
 
+
 export enum GoogleCloudDatacatalogV1DataSourceServiceEnum {
-    ServiceUnspecified = "SERVICE_UNSPECIFIED"
-,    CloudStorage = "CLOUD_STORAGE"
-,    Bigquery = "BIGQUERY"
+    ServiceUnspecified = "SERVICE_UNSPECIFIED",
+    CloudStorage = "CLOUD_STORAGE",
+    Bigquery = "BIGQUERY"
+}
+
+
+// GoogleCloudDatacatalogV1DataSourceInput
+/** 
+ * Physical location of an entry.
+**/
+export class GoogleCloudDatacatalogV1DataSourceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=resource" })
+  resource?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=service" })
+  service?: GoogleCloudDatacatalogV1DataSourceServiceEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=storageProperties" })
+  storageProperties?: GoogleCloudDatacatalogV1StorageProperties;
 }
 
 
@@ -13,15 +30,15 @@ export enum GoogleCloudDatacatalogV1DataSourceServiceEnum {
  * Physical location of an entry.
 **/
 export class GoogleCloudDatacatalogV1DataSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource?: string;
 
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service?: GoogleCloudDatacatalogV1DataSourceServiceEnum;
 
-  @Metadata({ data: "json, name=sourceEntry" })
+  @SpeakeasyMetadata({ data: "json, name=sourceEntry" })
   sourceEntry?: string;
 
-  @Metadata({ data: "json, name=storageProperties" })
+  @SpeakeasyMetadata({ data: "json, name=storageProperties" })
   storageProperties?: GoogleCloudDatacatalogV1StorageProperties;
 }

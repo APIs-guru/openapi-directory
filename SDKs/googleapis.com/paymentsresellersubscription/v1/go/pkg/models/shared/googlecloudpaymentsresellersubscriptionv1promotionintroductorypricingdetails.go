@@ -1,5 +1,13 @@
 package shared
 
+// GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetails
+// The details of a introductory pricing promotion.
 type GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetails struct {
 	IntroductoryPricingSpecs []GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsIntroductoryPricingSpec `json:"introductoryPricingSpecs,omitempty"`
+}
+
+// GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsInput
+// The details of a introductory pricing promotion.
+type GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsInput struct {
+	IntroductoryPricingSpecs []GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsIntroductoryPricingSpecInput `json:"introductoryPricingSpecs,omitempty"`
 }

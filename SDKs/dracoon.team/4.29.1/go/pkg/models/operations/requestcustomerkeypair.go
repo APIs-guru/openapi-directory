@@ -12,9 +12,9 @@ type RequestCustomerKeyPairRequest struct {
 	Headers RequestCustomerKeyPairHeaders
 }
 
-type RequestCustomerKeyPairResponse struct {
+type RequestCustomerKeyPairResponseOutput struct {
 	ContentType          string
 	ErrorResponse        *shared.ErrorResponse
 	StatusCode           int64
-	UserKeyPairContainer *shared.UserKeyPairContainer
+	UserKeyPairContainer *shared.UserKeyPairContainerOutput
 }

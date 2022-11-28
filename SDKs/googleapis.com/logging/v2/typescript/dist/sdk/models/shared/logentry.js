@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HttpRequest } from "./httprequest";
 import { MonitoredResourceMetadata } from "./monitoredresourcemetadata";
 import { LogEntryOperation } from "./logentryoperation";
@@ -41,6 +41,86 @@ export var LogEntrySeverityEnum;
     LogEntrySeverityEnum["Alert"] = "ALERT";
     LogEntrySeverityEnum["Emergency"] = "EMERGENCY";
 })(LogEntrySeverityEnum || (LogEntrySeverityEnum = {}));
+// LogEntryInput
+/**
+ * An individual entry in a log.
+**/
+var LogEntryInput = /** @class */ (function (_super) {
+    __extends(LogEntryInput, _super);
+    function LogEntryInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=httpRequest" }),
+        __metadata("design:type", HttpRequest)
+    ], LogEntryInput.prototype, "httpRequest", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=insertId" }),
+        __metadata("design:type", String)
+    ], LogEntryInput.prototype, "insertId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=jsonPayload" }),
+        __metadata("design:type", Map)
+    ], LogEntryInput.prototype, "jsonPayload", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], LogEntryInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=logName" }),
+        __metadata("design:type", String)
+    ], LogEntryInput.prototype, "logName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=metadata" }),
+        __metadata("design:type", MonitoredResourceMetadata)
+    ], LogEntryInput.prototype, "metadata", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=operation" }),
+        __metadata("design:type", LogEntryOperation)
+    ], LogEntryInput.prototype, "operation", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=protoPayload" }),
+        __metadata("design:type", Map)
+    ], LogEntryInput.prototype, "protoPayload", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=resource" }),
+        __metadata("design:type", MonitoredResource)
+    ], LogEntryInput.prototype, "resource", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=severity" }),
+        __metadata("design:type", String)
+    ], LogEntryInput.prototype, "severity", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=sourceLocation" }),
+        __metadata("design:type", LogEntrySourceLocation)
+    ], LogEntryInput.prototype, "sourceLocation", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=spanId" }),
+        __metadata("design:type", String)
+    ], LogEntryInput.prototype, "spanId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=split" }),
+        __metadata("design:type", LogSplit)
+    ], LogEntryInput.prototype, "split", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=textPayload" }),
+        __metadata("design:type", String)
+    ], LogEntryInput.prototype, "textPayload", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=timestamp" }),
+        __metadata("design:type", String)
+    ], LogEntryInput.prototype, "timestamp", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=trace" }),
+        __metadata("design:type", String)
+    ], LogEntryInput.prototype, "trace", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=traceSampled" }),
+        __metadata("design:type", Boolean)
+    ], LogEntryInput.prototype, "traceSampled", void 0);
+    return LogEntryInput;
+}(SpeakeasyBase));
+export { LogEntryInput };
 // LogEntry
 /**
  * An individual entry in a log.
@@ -51,75 +131,75 @@ var LogEntry = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=httpRequest" }),
+        SpeakeasyMetadata({ data: "json, name=httpRequest" }),
         __metadata("design:type", HttpRequest)
     ], LogEntry.prototype, "httpRequest", void 0);
     __decorate([
-        Metadata({ data: "json, name=insertId" }),
+        SpeakeasyMetadata({ data: "json, name=insertId" }),
         __metadata("design:type", String)
     ], LogEntry.prototype, "insertId", void 0);
     __decorate([
-        Metadata({ data: "json, name=jsonPayload" }),
+        SpeakeasyMetadata({ data: "json, name=jsonPayload" }),
         __metadata("design:type", Map)
     ], LogEntry.prototype, "jsonPayload", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], LogEntry.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=logName" }),
+        SpeakeasyMetadata({ data: "json, name=logName" }),
         __metadata("design:type", String)
     ], LogEntry.prototype, "logName", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadata" }),
+        SpeakeasyMetadata({ data: "json, name=metadata" }),
         __metadata("design:type", MonitoredResourceMetadata)
     ], LogEntry.prototype, "metadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=operation" }),
+        SpeakeasyMetadata({ data: "json, name=operation" }),
         __metadata("design:type", LogEntryOperation)
     ], LogEntry.prototype, "operation", void 0);
     __decorate([
-        Metadata({ data: "json, name=protoPayload" }),
+        SpeakeasyMetadata({ data: "json, name=protoPayload" }),
         __metadata("design:type", Map)
     ], LogEntry.prototype, "protoPayload", void 0);
     __decorate([
-        Metadata({ data: "json, name=receiveTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=receiveTimestamp" }),
         __metadata("design:type", String)
     ], LogEntry.prototype, "receiveTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=resource" }),
+        SpeakeasyMetadata({ data: "json, name=resource" }),
         __metadata("design:type", MonitoredResource)
     ], LogEntry.prototype, "resource", void 0);
     __decorate([
-        Metadata({ data: "json, name=severity" }),
+        SpeakeasyMetadata({ data: "json, name=severity" }),
         __metadata("design:type", String)
     ], LogEntry.prototype, "severity", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceLocation" }),
+        SpeakeasyMetadata({ data: "json, name=sourceLocation" }),
         __metadata("design:type", LogEntrySourceLocation)
     ], LogEntry.prototype, "sourceLocation", void 0);
     __decorate([
-        Metadata({ data: "json, name=spanId" }),
+        SpeakeasyMetadata({ data: "json, name=spanId" }),
         __metadata("design:type", String)
     ], LogEntry.prototype, "spanId", void 0);
     __decorate([
-        Metadata({ data: "json, name=split" }),
+        SpeakeasyMetadata({ data: "json, name=split" }),
         __metadata("design:type", LogSplit)
     ], LogEntry.prototype, "split", void 0);
     __decorate([
-        Metadata({ data: "json, name=textPayload" }),
+        SpeakeasyMetadata({ data: "json, name=textPayload" }),
         __metadata("design:type", String)
     ], LogEntry.prototype, "textPayload", void 0);
     __decorate([
-        Metadata({ data: "json, name=timestamp" }),
+        SpeakeasyMetadata({ data: "json, name=timestamp" }),
         __metadata("design:type", String)
     ], LogEntry.prototype, "timestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=trace" }),
+        SpeakeasyMetadata({ data: "json, name=trace" }),
         __metadata("design:type", String)
     ], LogEntry.prototype, "trace", void 0);
     __decorate([
-        Metadata({ data: "json, name=traceSampled" }),
+        SpeakeasyMetadata({ data: "json, name=traceSampled" }),
         __metadata("design:type", Boolean)
     ], LogEntry.prototype, "traceSampled", void 0);
     return LogEntry;

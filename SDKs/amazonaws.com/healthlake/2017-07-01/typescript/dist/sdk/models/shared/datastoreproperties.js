@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatastoreStatusEnum } from "./datastorestatusenum";
 import { FhirVersionEnum } from "./fhirversionenum";
 import { PreloadDataConfig } from "./preloaddataconfig";
@@ -37,39 +37,39 @@ var DatastoreProperties = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedAt" }),
         __metadata("design:type", Date)
     ], DatastoreProperties.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatastoreArn" }),
+        SpeakeasyMetadata({ data: "json, name=DatastoreArn" }),
         __metadata("design:type", String)
     ], DatastoreProperties.prototype, "datastoreArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatastoreEndpoint" }),
+        SpeakeasyMetadata({ data: "json, name=DatastoreEndpoint" }),
         __metadata("design:type", String)
     ], DatastoreProperties.prototype, "datastoreEndpoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatastoreId" }),
+        SpeakeasyMetadata({ data: "json, name=DatastoreId" }),
         __metadata("design:type", String)
     ], DatastoreProperties.prototype, "datastoreId", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatastoreName" }),
+        SpeakeasyMetadata({ data: "json, name=DatastoreName" }),
         __metadata("design:type", String)
     ], DatastoreProperties.prototype, "datastoreName", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatastoreStatus" }),
+        SpeakeasyMetadata({ data: "json, name=DatastoreStatus" }),
         __metadata("design:type", String)
     ], DatastoreProperties.prototype, "datastoreStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatastoreTypeVersion" }),
+        SpeakeasyMetadata({ data: "json, name=DatastoreTypeVersion" }),
         __metadata("design:type", String)
     ], DatastoreProperties.prototype, "datastoreTypeVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=PreloadDataConfig" }),
+        SpeakeasyMetadata({ data: "json, name=PreloadDataConfig" }),
         __metadata("design:type", PreloadDataConfig)
     ], DatastoreProperties.prototype, "preloadDataConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=SseConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=SseConfiguration" }),
         __metadata("design:type", SseConfiguration)
     ], DatastoreProperties.prototype, "sseConfiguration", void 0);
     return DatastoreProperties;

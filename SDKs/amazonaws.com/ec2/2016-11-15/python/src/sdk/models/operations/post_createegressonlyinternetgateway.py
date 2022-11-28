@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateEgressOnlyInternetGatewayActionEnum(str, Enum):
     CREATE_EGRESS_ONLY_INTERNET_GATEWAY = "CreateEgressOnlyInternetGateway"
@@ -10,8 +14,8 @@ class PostCreateEgressOnlyInternetGatewayVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateEgressOnlyInternetGatewayQueryParams:
-    action: PostCreateEgressOnlyInternetGatewayActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateEgressOnlyInternetGatewayVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateEgressOnlyInternetGatewayActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateEgressOnlyInternetGatewayVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateEgressOnlyInternetGatewayHeaders:
 
 @dataclass
 class PostCreateEgressOnlyInternetGatewayRequest:
-    query_params: PostCreateEgressOnlyInternetGatewayQueryParams = field(default=None)
-    headers: PostCreateEgressOnlyInternetGatewayHeaders = field(default=None)
+    headers: PostCreateEgressOnlyInternetGatewayHeaders = field()
+    query_params: PostCreateEgressOnlyInternetGatewayQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateEgressOnlyInternetGatewayResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

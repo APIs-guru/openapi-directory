@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ChartAxisViewWindowOptionsViewWindowModeEnum {
-    DefaultViewWindowMode = "DEFAULT_VIEW_WINDOW_MODE"
-,    ViewWindowModeUnsupported = "VIEW_WINDOW_MODE_UNSUPPORTED"
-,    Explicit = "EXPLICIT"
-,    Pretty = "PRETTY"
+    DefaultViewWindowMode = "DEFAULT_VIEW_WINDOW_MODE",
+    ViewWindowModeUnsupported = "VIEW_WINDOW_MODE_UNSUPPORTED",
+    Explicit = "EXPLICIT",
+    Pretty = "PRETTY"
 }
 
 
@@ -13,12 +14,12 @@ export enum ChartAxisViewWindowOptionsViewWindowModeEnum {
  * The options that define a "view window" for a chart (such as the visible values in an axis).
 **/
 export class ChartAxisViewWindowOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=viewWindowMax" })
+  @SpeakeasyMetadata({ data: "json, name=viewWindowMax" })
   viewWindowMax?: number;
 
-  @Metadata({ data: "json, name=viewWindowMin" })
+  @SpeakeasyMetadata({ data: "json, name=viewWindowMin" })
   viewWindowMin?: number;
 
-  @Metadata({ data: "json, name=viewWindowMode" })
+  @SpeakeasyMetadata({ data: "json, name=viewWindowMode" })
   viewWindowMode?: ChartAxisViewWindowOptionsViewWindowModeEnum;
 }

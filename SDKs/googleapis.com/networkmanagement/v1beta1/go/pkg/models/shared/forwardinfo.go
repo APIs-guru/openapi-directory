@@ -13,6 +13,8 @@ const (
 	ForwardInfoTargetEnumAnotherProject             ForwardInfoTargetEnum = "ANOTHER_PROJECT"
 )
 
+// ForwardInfo
+// Details of the final state "forward" and associated resource.
 type ForwardInfo struct {
 	ResourceURI *string                `json:"resourceUri,omitempty"`
 	Target      *ForwardInfoTargetEnum `json:"target,omitempty"`

@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetNumbersCurrencyQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=language" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=language" })
   language?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=number" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=number" })
   number?: number;
 }
 
 
 export class GetNumbersCurrencySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   xMathtoolsApiSecret: shared.SchemeXMathtoolsApiSecret;
 }
 
 
 export class GetNumbersCurrencyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetNumbersCurrencyQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetNumbersCurrencySecurity;
 }
 
 
 export class GetNumbersCurrencyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

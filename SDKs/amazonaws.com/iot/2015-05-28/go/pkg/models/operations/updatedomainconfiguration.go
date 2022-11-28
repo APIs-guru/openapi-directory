@@ -18,6 +18,8 @@ type UpdateDomainConfigurationHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateDomainConfigurationRequestBodyAuthorizerConfig
+// An object that specifies the authorization service for a domain.
 type UpdateDomainConfigurationRequestBodyAuthorizerConfig struct {
 	AllowAuthorizerOverride *bool   `json:"allowAuthorizerOverride,omitempty"`
 	DefaultAuthorizerName   *string `json:"defaultAuthorizerName,omitempty"`

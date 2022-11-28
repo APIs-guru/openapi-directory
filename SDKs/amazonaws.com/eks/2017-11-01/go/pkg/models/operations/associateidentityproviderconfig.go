@@ -18,6 +18,8 @@ type AssociateIdentityProviderConfigHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// AssociateIdentityProviderConfigRequestBodyOidc
+// An object representing an OpenID Connect (OIDC) configuration. Before associating an OIDC identity provider to your cluster, review the considerations in <a href="https://docs.aws.amazon.com/eks/latest/userguide/authenticate-oidc-identity-provider.html">Authenticating users for your cluster from an OpenID Connect identity provider</a> in the <i>Amazon EKS User Guide</i>.
 type AssociateIdentityProviderConfigRequestBodyOidc struct {
 	ClientID                   *string           `json:"clientId,omitempty"`
 	GroupsClaim                *string           `json:"groupsClaim,omitempty"`

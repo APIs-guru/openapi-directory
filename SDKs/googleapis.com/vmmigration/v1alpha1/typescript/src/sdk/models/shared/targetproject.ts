@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TargetProject
@@ -6,18 +7,31 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * TargetProject message represents a target Compute Engine project for a migration or a clone.
 **/
 export class TargetProject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=project" })
+  @SpeakeasyMetadata({ data: "json, name=project" })
   project?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// TargetProjectInput
+/** 
+ * TargetProject message represents a target Compute Engine project for a migration or a clone.
+**/
+export class TargetProjectInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=project" })
+  project?: string;
 }

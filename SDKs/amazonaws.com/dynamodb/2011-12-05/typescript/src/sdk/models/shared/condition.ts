@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeValue } from "./attributevalue";
 import { ComparisonOperatorEnum } from "./comparisonoperatorenum";
 
 
+
 export class Condition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributeValueList", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=AttributeValueList", elemType: AttributeValue })
   attributeValueList?: AttributeValue[];
 
-  @Metadata({ data: "json, name=ComparisonOperator" })
+  @SpeakeasyMetadata({ data: "json, name=ComparisonOperator" })
   comparisonOperator: ComparisonOperatorEnum;
 }

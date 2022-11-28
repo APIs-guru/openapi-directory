@@ -10,7 +10,6 @@ export * from "./googleclouddatacatalogv1bigquerytablespec";
 export * from "./googleclouddatacatalogv1businesscontext";
 export * from "./googleclouddatacatalogv1cloudsqlbigqueryconnectionspec";
 export * from "./googleclouddatacatalogv1columnschema";
-export * from "./googleclouddatacatalogv1columnschemalookercolumnspec";
 export * from "./googleclouddatacatalogv1contacts";
 export * from "./googleclouddatacatalogv1contactsperson";
 export * from "./googleclouddatacatalogv1crossregionalsource";

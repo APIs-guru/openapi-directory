@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import loggingconfig
-from . import notificationconfig
-from . import schedule
-from . import transferspec
+from sdk import utils
+from . import *
 
 class TransferJobStatusEnum(str, Enum):
     STATUS_UNSPECIFIED = "STATUS_UNSPECIFIED"
@@ -16,16 +15,38 @@ class TransferJobStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TransferJob:
-    creation_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creationTime' }})
-    deletion_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deletionTime' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    last_modification_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastModificationTime' }})
-    latest_operation_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'latestOperationName' }})
-    logging_config: Optional[loggingconfig.LoggingConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'loggingConfig' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    notification_config: Optional[notificationconfig.NotificationConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notificationConfig' }})
-    project_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'projectId' }})
-    schedule: Optional[schedule.Schedule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schedule' }})
-    status: Optional[TransferJobStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    transfer_spec: Optional[transferspec.TransferSpec] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transferSpec' }})
+    r"""TransferJob
+    This resource represents the configuration of a transfer job that runs periodically.
+    """
+    
+    creation_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creationTime') }})
+    deletion_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deletionTime') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    last_modification_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastModificationTime') }})
+    latest_operation_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('latestOperationName') }})
+    logging_config: Optional[LoggingConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('loggingConfig') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    notification_config: Optional[NotificationConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('notificationConfig') }})
+    project_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('projectId') }})
+    schedule: Optional[Schedule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('schedule') }})
+    status: Optional[TransferJobStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    transfer_spec: Optional[TransferSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transferSpec') }})
+    
+
+@dataclass_json
+@dataclass
+class TransferJobInput:
+    r"""TransferJobInput
+    This resource represents the configuration of a transfer job that runs periodically.
+    """
+    
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    latest_operation_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('latestOperationName') }})
+    logging_config: Optional[LoggingConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('loggingConfig') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    notification_config: Optional[NotificationConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('notificationConfig') }})
+    project_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('projectId') }})
+    schedule: Optional[Schedule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('schedule') }})
+    status: Optional[TransferJobStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    transfer_spec: Optional[TransferSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transferSpec') }})
     

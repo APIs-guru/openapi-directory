@@ -1,5 +1,7 @@
 package shared
 
+// ExtendedKeyUsageOptions
+// KeyUsage.ExtendedKeyUsageOptions has fields that correspond to certain common OIDs that could be specified as an extended key usage value.
 type ExtendedKeyUsageOptions struct {
 	ClientAuth      *bool `json:"clientAuth,omitempty"`
 	CodeSigning     *bool `json:"codeSigning,omitempty"`

@@ -9,6 +9,8 @@ const (
 	CompensationHistogramResultTypeEnumAnnualizedTotal                             CompensationHistogramResultTypeEnum = "ANNUALIZED_TOTAL"
 )
 
+// CompensationHistogramResult
+// Output only. Compensation based histogram result.
 type CompensationHistogramResult struct {
 	Result *NumericBucketingResult              `json:"result,omitempty"`
 	Type   *CompensationHistogramResultTypeEnum `json:"type,omitempty"`

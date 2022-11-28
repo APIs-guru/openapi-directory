@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { JobSummary } from "./jobsummary";
 /**
  *  The result structure for the start a deployment request.

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TimestampRange
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The range of timestamps for which to return fragments.
 **/
 export class TimestampRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=EndTimestamp" })
   endTimestamp: Date;
 
-  @Metadata({ data: "json, name=StartTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=StartTimestamp" })
   startTimestamp: Date;
 }

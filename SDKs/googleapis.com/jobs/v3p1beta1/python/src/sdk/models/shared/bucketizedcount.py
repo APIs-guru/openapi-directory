@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import bucketrange
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BucketizedCount:
-    count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count' }})
-    range: Optional[bucketrange.BucketRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'range' }})
+    r"""BucketizedCount
+    Represents count of jobs within one bucket.
+    """
+    
+    count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('count') }})
+    range: Optional[BucketRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('range') }})
     

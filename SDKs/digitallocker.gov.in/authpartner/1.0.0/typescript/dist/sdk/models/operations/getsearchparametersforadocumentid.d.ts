@@ -1,11 +1,7 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetSearchParametersForADocumentIdSecurity extends SpeakeasyBase {
     oauthsecurity: shared.SchemeOauthsecurity;
-}
-export declare class GetSearchParametersForADocumentIdRequest extends SpeakeasyBase {
-    request?: any;
-    security: GetSearchParametersForADocumentIdSecurity;
 }
 export declare class GetSearchParametersForADocumentId400ApplicationJson extends SpeakeasyBase {
     error?: any;
@@ -18,6 +14,10 @@ export declare class GetSearchParametersForADocumentId401ApplicationJson extends
 export declare class GetSearchParametersForADocumentId500ApplicationJson extends SpeakeasyBase {
     error?: any;
     errorDescription?: any;
+}
+export declare class GetSearchParametersForADocumentIdRequest extends SpeakeasyBase {
+    request?: any;
+    security: GetSearchParametersForADocumentIdSecurity;
 }
 export declare class GetSearchParametersForADocumentIdResponse extends SpeakeasyBase {
     contentType: string;

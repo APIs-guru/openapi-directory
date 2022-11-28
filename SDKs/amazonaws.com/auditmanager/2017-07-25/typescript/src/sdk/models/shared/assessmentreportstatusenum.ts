@@ -1,7 +1,8 @@
 
 
+
 export enum AssessmentReportStatusEnum {
-    Complete = "COMPLETE"
-,    InProgress = "IN_PROGRESS"
-,    Failed = "FAILED"
+    Complete = "COMPLETE",
+    InProgress = "IN_PROGRESS",
+    Failed = "FAILED"
 }

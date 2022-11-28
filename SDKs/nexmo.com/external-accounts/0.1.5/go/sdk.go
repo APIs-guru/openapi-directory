@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.nexmo.com/beta/chatapp-accounts",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateMessengerAccount - Create a Messenger account
 func (s *SDK) CreateMessengerAccount(ctx context.Context, request operations.CreateMessengerAccountRequest) (*operations.CreateMessengerAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/messenger"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -70,7 +92,7 @@ func (s *SDK) CreateMessengerAccount(ctx context.Context, request operations.Cre
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -130,8 +152,9 @@ func (s *SDK) CreateMessengerAccount(ctx context.Context, request operations.Cre
 	return res, nil
 }
 
+// DeleteMessengerAccount - Delete a Messenger account
 func (s *SDK) DeleteMessengerAccount(ctx context.Context, request operations.DeleteMessengerAccountRequest) (*operations.DeleteMessengerAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/messenger/{external_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -139,7 +162,7 @@ func (s *SDK) DeleteMessengerAccount(ctx context.Context, request operations.Del
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -181,8 +204,9 @@ func (s *SDK) DeleteMessengerAccount(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// GetAllAccounts - Retrieve all accounts you own
 func (s *SDK) GetAllAccounts(ctx context.Context, request operations.GetAllAccountsRequest) (*operations.GetAllAccountsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -192,7 +216,7 @@ func (s *SDK) GetAllAccounts(ctx context.Context, request operations.GetAllAccou
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -232,8 +256,9 @@ func (s *SDK) GetAllAccounts(ctx context.Context, request operations.GetAllAccou
 	return res, nil
 }
 
+// GetMessengerAccount - Retrieve a Messenger account
 func (s *SDK) GetMessengerAccount(ctx context.Context, request operations.GetMessengerAccountRequest) (*operations.GetMessengerAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/messenger/{external_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -241,7 +266,7 @@ func (s *SDK) GetMessengerAccount(ctx context.Context, request operations.GetMes
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -282,8 +307,9 @@ func (s *SDK) GetMessengerAccount(ctx context.Context, request operations.GetMes
 	return res, nil
 }
 
+// GetVsmAccount - Retrieve a Viber Service Message account
 func (s *SDK) GetVsmAccount(ctx context.Context, request operations.GetVsmAccountRequest) (*operations.GetVsmAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/viber_service_msg/{external_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -291,7 +317,7 @@ func (s *SDK) GetVsmAccount(ctx context.Context, request operations.GetVsmAccoun
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -332,8 +358,9 @@ func (s *SDK) GetVsmAccount(ctx context.Context, request operations.GetVsmAccoun
 	return res, nil
 }
 
+// GetWaAccount - Retrieve a Whatsapp account
 func (s *SDK) GetWaAccount(ctx context.Context, request operations.GetWaAccountRequest) (*operations.GetWaAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/whatsapp/{external_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -341,7 +368,7 @@ func (s *SDK) GetWaAccount(ctx context.Context, request operations.GetWaAccountR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -382,8 +409,9 @@ func (s *SDK) GetWaAccount(ctx context.Context, request operations.GetWaAccountR
 	return res, nil
 }
 
+// LinkApplication - Link application to an account
 func (s *SDK) LinkApplication(ctx context.Context, request operations.LinkApplicationRequest) (*operations.LinkApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{provider}/{external_id}/applications", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -401,7 +429,7 @@ func (s *SDK) LinkApplication(ctx context.Context, request operations.LinkApplic
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -461,8 +489,9 @@ func (s *SDK) LinkApplication(ctx context.Context, request operations.LinkApplic
 	return res, nil
 }
 
+// UnliWithoutApplicationnkApplication - Unlink application from an account
 func (s *SDK) UnliWithoutApplicationnkApplication(ctx context.Context, request operations.UnliWithoutApplicationnkApplicationRequest) (*operations.UnliWithoutApplicationnkApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{provider}/{external_id}/applications/{application_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -470,7 +499,7 @@ func (s *SDK) UnliWithoutApplicationnkApplication(ctx context.Context, request o
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -521,8 +550,9 @@ func (s *SDK) UnliWithoutApplicationnkApplication(ctx context.Context, request o
 	return res, nil
 }
 
+// UpdateMessengerAccount - Update a Messenger account
 func (s *SDK) UpdateMessengerAccount(ctx context.Context, request operations.UpdateMessengerAccountRequest) (*operations.UpdateMessengerAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/messenger/{external_id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -540,7 +570,7 @@ func (s *SDK) UpdateMessengerAccount(ctx context.Context, request operations.Upd
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

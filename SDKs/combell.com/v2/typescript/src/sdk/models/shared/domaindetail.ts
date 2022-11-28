@@ -1,25 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NameServer } from "./nameserver";
 import { Registrant } from "./registrant";
 
 
+
 export class DomainDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=can_toggle_renew" })
+  @SpeakeasyMetadata({ data: "json, name=can_toggle_renew" })
   canToggleRenew?: boolean;
 
-  @Metadata({ data: "json, name=domain_name" })
+  @SpeakeasyMetadata({ data: "json, name=domain_name" })
   domainName?: string;
 
-  @Metadata({ data: "json, name=expiration_date" })
+  @SpeakeasyMetadata({ data: "json, name=expiration_date" })
   expirationDate?: Date;
 
-  @Metadata({ data: "json, name=name_servers", elemType: shared.NameServer })
+  @SpeakeasyMetadata({ data: "json, name=name_servers", elemType: NameServer })
   nameServers?: NameServer[];
 
-  @Metadata({ data: "json, name=registrant" })
+  @SpeakeasyMetadata({ data: "json, name=registrant" })
   registrant?: Registrant;
 
-  @Metadata({ data: "json, name=will_renew" })
+  @SpeakeasyMetadata({ data: "json, name=will_renew" })
   willRenew?: boolean;
 }

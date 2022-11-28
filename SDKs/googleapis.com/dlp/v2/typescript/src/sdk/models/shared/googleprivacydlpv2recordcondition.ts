@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2Expressions } from "./googleprivacydlpv2expressions";
+
 
 
 // GooglePrivacyDlpV2RecordCondition
@@ -7,6 +8,6 @@ import { GooglePrivacyDlpV2Expressions } from "./googleprivacydlpv2expressions";
  * A condition for determining whether a transformation should be applied to a field.
 **/
 export class GooglePrivacyDlpV2RecordCondition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expressions" })
+  @SpeakeasyMetadata({ data: "json, name=expressions" })
   expressions?: GooglePrivacyDlpV2Expressions;
 }

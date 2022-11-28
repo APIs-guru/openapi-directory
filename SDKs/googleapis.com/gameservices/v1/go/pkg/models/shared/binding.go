@@ -1,5 +1,7 @@
 package shared
 
+// Binding
+// Associates `members`, or principals, with a `role`.
 type Binding struct {
 	BindingID *string  `json:"bindingId,omitempty"`
 	Condition *Expr    `json:"condition,omitempty"`

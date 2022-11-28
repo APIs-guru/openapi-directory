@@ -25,11 +25,6 @@ type CreateAPIVersionRequestBody struct {
 	Version *CreateAPIVersionRequestBodyVersion `json:"version,omitempty"`
 }
 
-type CreateAPIVersionRequest struct {
-	PathParams CreateAPIVersionPathParams
-	Request    *CreateAPIVersionRequestBody `request:"mediaType=application/json"`
-}
-
 type CreateAPIVersion200ApplicationJSONVersion struct {
 	API  *string `json:"api,omitempty"`
 	ID   *string `json:"id,omitempty"`
@@ -38,6 +33,11 @@ type CreateAPIVersion200ApplicationJSONVersion struct {
 
 type CreateAPIVersion200ApplicationJSON struct {
 	Version *CreateAPIVersion200ApplicationJSONVersion `json:"version,omitempty"`
+}
+
+type CreateAPIVersionRequest struct {
+	PathParams CreateAPIVersionPathParams
+	Request    *CreateAPIVersionRequestBody `request:"mediaType=application/json"`
 }
 
 type CreateAPIVersionResponse struct {

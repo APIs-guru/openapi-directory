@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import policytypestatus_enum
-from . import policytype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PolicyTypeSummary:
-    status: Optional[policytypestatus_enum.PolicyTypeStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
-    type: Optional[policytype_enum.PolicyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""PolicyTypeSummary
+    Contains information about a policy type and its status in the associated root.
+    """
+    
+    status: Optional[PolicyTypeStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
+    type: Optional[PolicyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

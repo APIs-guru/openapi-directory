@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchPolicy } from "./batchpolicy";
 import { SimulationJobSummary } from "./simulationjobsummary";
 import { FailedCreateSimulationJobRequest } from "./failedcreatesimulationjobrequest";
@@ -8,37 +7,38 @@ import { SimulationJobRequest } from "./simulationjobrequest";
 import { SimulationJobBatchStatusEnum } from "./simulationjobbatchstatusenum";
 
 
+
 export class StartSimulationJobBatchResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=batchPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=batchPolicy" })
   batchPolicy?: BatchPolicy;
 
-  @Metadata({ data: "json, name=clientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientRequestToken" })
   clientRequestToken?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=createdRequests", elemType: shared.SimulationJobSummary })
+  @SpeakeasyMetadata({ data: "json, name=createdRequests", elemType: SimulationJobSummary })
   createdRequests?: SimulationJobSummary[];
 
-  @Metadata({ data: "json, name=failedRequests", elemType: shared.FailedCreateSimulationJobRequest })
+  @SpeakeasyMetadata({ data: "json, name=failedRequests", elemType: FailedCreateSimulationJobRequest })
   failedRequests?: FailedCreateSimulationJobRequest[];
 
-  @Metadata({ data: "json, name=failureCode" })
+  @SpeakeasyMetadata({ data: "json, name=failureCode" })
   failureCode?: SimulationJobBatchErrorCodeEnum;
 
-  @Metadata({ data: "json, name=failureReason" })
+  @SpeakeasyMetadata({ data: "json, name=failureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=pendingRequests", elemType: shared.SimulationJobRequest })
+  @SpeakeasyMetadata({ data: "json, name=pendingRequests", elemType: SimulationJobRequest })
   pendingRequests?: SimulationJobRequest[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: SimulationJobBatchStatusEnum;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }

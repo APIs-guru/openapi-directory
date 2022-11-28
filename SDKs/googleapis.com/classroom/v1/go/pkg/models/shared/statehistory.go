@@ -11,6 +11,8 @@ const (
 	StateHistoryStateEnumStudentEditedAfterTurnIn StateHistoryStateEnum = "STUDENT_EDITED_AFTER_TURN_IN"
 )
 
+// StateHistory
+// The history of each state this submission has been in.
 type StateHistory struct {
 	ActorUserID    *string                `json:"actorUserId,omitempty"`
 	State          *StateHistoryStateEnum `json:"state,omitempty"`

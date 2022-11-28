@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MysqlColumn
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * MySQL Column.
 **/
 export class MysqlColumn extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collation" })
+  @SpeakeasyMetadata({ data: "json, name=collation" })
   collation?: string;
 
-  @Metadata({ data: "json, name=column" })
+  @SpeakeasyMetadata({ data: "json, name=column" })
   column?: string;
 
-  @Metadata({ data: "json, name=dataType" })
+  @SpeakeasyMetadata({ data: "json, name=dataType" })
   dataType?: string;
 
-  @Metadata({ data: "json, name=length" })
+  @SpeakeasyMetadata({ data: "json, name=length" })
   length?: number;
 
-  @Metadata({ data: "json, name=nullable" })
+  @SpeakeasyMetadata({ data: "json, name=nullable" })
   nullable?: boolean;
 
-  @Metadata({ data: "json, name=ordinalPosition" })
+  @SpeakeasyMetadata({ data: "json, name=ordinalPosition" })
   ordinalPosition?: number;
 
-  @Metadata({ data: "json, name=primaryKey" })
+  @SpeakeasyMetadata({ data: "json, name=primaryKey" })
   primaryKey?: boolean;
 }

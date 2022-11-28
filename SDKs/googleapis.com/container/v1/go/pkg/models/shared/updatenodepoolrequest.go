@@ -1,8 +1,11 @@
 package shared
 
+// UpdateNodePoolRequest
+// UpdateNodePoolRequests update a node pool's image and/or version.
 type UpdateNodePoolRequest struct {
 	ClusterID              *string                 `json:"clusterId,omitempty"`
 	ConfidentialNodes      *ConfidentialNodes      `json:"confidentialNodes,omitempty"`
+	FastSocket             *FastSocket             `json:"fastSocket,omitempty"`
 	GcfsConfig             *GcfsConfig             `json:"gcfsConfig,omitempty"`
 	Gvnic                  *VirtualNic             `json:"gvnic,omitempty"`
 	ImageType              *string                 `json:"imageType,omitempty"`
@@ -16,6 +19,7 @@ type UpdateNodePoolRequest struct {
 	NodePoolID             *string                 `json:"nodePoolId,omitempty"`
 	NodeVersion            *string                 `json:"nodeVersion,omitempty"`
 	ProjectID              *string                 `json:"projectId,omitempty"`
+	ResourceLabels         *ResourceLabels         `json:"resourceLabels,omitempty"`
 	Tags                   *NetworkTags            `json:"tags,omitempty"`
 	Taints                 *NodeTaints             `json:"taints,omitempty"`
 	UpgradeSettings        *UpgradeSettings        `json:"upgradeSettings,omitempty"`

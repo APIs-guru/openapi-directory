@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Table } from "./table";
 // Workspace
 /**
  * A single workspace.
@@ -34,23 +34,23 @@ var Workspace = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Workspace.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], Workspace.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Workspace.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=tables", elemType: shared.Table }),
+        SpeakeasyMetadata({ data: "json, name=tables", elemType: Table }),
         __metadata("design:type", Array)
     ], Workspace.prototype, "tables", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Workspace.prototype, "updateTime", void 0);
     return Workspace;

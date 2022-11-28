@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import angleunits_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Elevation:
-    unit: angleunits_enum.AngleUnitsEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unit' }})
-    value: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""Elevation
+    Elevation angle of the satellite in the sky during a contact.
+    """
+    
+    unit: AngleUnitsEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('unit') }})
+    value: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestDeletedNodePathParams:
-    deleted_node_id: int = field(default=None, metadata={'path_param': { 'field_name': 'deleted_node_id', 'style': 'simple', 'explode': False }})
+    deleted_node_id: int = field(metadata={'path_param': { 'field_name': 'deleted_node_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +19,14 @@ class RequestDeletedNodeHeaders:
 
 @dataclass
 class RequestDeletedNodeRequest:
-    path_params: RequestDeletedNodePathParams = field(default=None)
-    headers: RequestDeletedNodeHeaders = field(default=None)
+    headers: RequestDeletedNodeHeaders = field()
+    path_params: RequestDeletedNodePathParams = field()
     
 
 @dataclass
 class RequestDeletedNodeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     deleted_node: Optional[shared.DeletedNode] = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

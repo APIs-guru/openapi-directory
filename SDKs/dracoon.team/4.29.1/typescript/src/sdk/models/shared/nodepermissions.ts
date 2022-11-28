@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NodePermissions
@@ -6,33 +7,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Node permissions
 **/
 export class NodePermissions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=change" })
+  @SpeakeasyMetadata({ data: "json, name=change" })
   change: boolean;
 
-  @Metadata({ data: "json, name=create" })
+  @SpeakeasyMetadata({ data: "json, name=create" })
   create: boolean;
 
-  @Metadata({ data: "json, name=delete" })
+  @SpeakeasyMetadata({ data: "json, name=delete" })
   delete: boolean;
 
-  @Metadata({ data: "json, name=deleteRecycleBin" })
+  @SpeakeasyMetadata({ data: "json, name=deleteRecycleBin" })
   deleteRecycleBin: boolean;
 
-  @Metadata({ data: "json, name=manage" })
+  @SpeakeasyMetadata({ data: "json, name=manage" })
   manage: boolean;
 
-  @Metadata({ data: "json, name=manageDownloadShare" })
+  @SpeakeasyMetadata({ data: "json, name=manageDownloadShare" })
   manageDownloadShare: boolean;
 
-  @Metadata({ data: "json, name=manageUploadShare" })
+  @SpeakeasyMetadata({ data: "json, name=manageUploadShare" })
   manageUploadShare: boolean;
 
-  @Metadata({ data: "json, name=read" })
+  @SpeakeasyMetadata({ data: "json, name=read" })
   read: boolean;
 
-  @Metadata({ data: "json, name=readRecycleBin" })
+  @SpeakeasyMetadata({ data: "json, name=readRecycleBin" })
   readRecycleBin: boolean;
 
-  @Metadata({ data: "json, name=restoreRecycleBin" })
+  @SpeakeasyMetadata({ data: "json, name=restoreRecycleBin" })
   restoreRecycleBin: boolean;
 }

@@ -9,6 +9,8 @@ const (
 	TransferOptionsOverwriteWhenEnumAlways                   TransferOptionsOverwriteWhenEnum = "ALWAYS"
 )
 
+// TransferOptions
+// TransferOptions define the actions to be performed on objects in a transfer.
 type TransferOptions struct {
 	DeleteObjectsFromSourceAfterTransfer  *bool                             `json:"deleteObjectsFromSourceAfterTransfer,omitempty"`
 	DeleteObjectsUniqueInSink             *bool                             `json:"deleteObjectsUniqueInSink,omitempty"`

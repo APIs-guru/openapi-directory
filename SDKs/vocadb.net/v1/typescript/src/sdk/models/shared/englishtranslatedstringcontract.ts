@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EnglishTranslatedStringContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=english" })
+  @SpeakeasyMetadata({ data: "json, name=english" })
   english?: string;
 
-  @Metadata({ data: "json, name=original" })
+  @SpeakeasyMetadata({ data: "json, name=original" })
   original?: string;
 }

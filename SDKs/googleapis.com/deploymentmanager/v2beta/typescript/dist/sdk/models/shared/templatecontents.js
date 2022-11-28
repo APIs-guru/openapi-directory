@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ImportFile } from "./importfile";
 export var TemplateContentsInterpreterEnum;
 (function (TemplateContentsInterpreterEnum) {
     TemplateContentsInterpreterEnum["UnknownInterpreter"] = "UNKNOWN_INTERPRETER";
@@ -40,23 +40,23 @@ var TemplateContents = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=imports", elemType: shared.ImportFile }),
+        SpeakeasyMetadata({ data: "json, name=imports", elemType: ImportFile }),
         __metadata("design:type", Array)
     ], TemplateContents.prototype, "imports", void 0);
     __decorate([
-        Metadata({ data: "json, name=interpreter" }),
+        SpeakeasyMetadata({ data: "json, name=interpreter" }),
         __metadata("design:type", String)
     ], TemplateContents.prototype, "interpreter", void 0);
     __decorate([
-        Metadata({ data: "json, name=mainTemplate" }),
+        SpeakeasyMetadata({ data: "json, name=mainTemplate" }),
         __metadata("design:type", String)
     ], TemplateContents.prototype, "mainTemplate", void 0);
     __decorate([
-        Metadata({ data: "json, name=schema" }),
+        SpeakeasyMetadata({ data: "json, name=schema" }),
         __metadata("design:type", String)
     ], TemplateContents.prototype, "schema", void 0);
     __decorate([
-        Metadata({ data: "json, name=template" }),
+        SpeakeasyMetadata({ data: "json, name=template" }),
         __metadata("design:type", String)
     ], TemplateContents.prototype, "template", void 0);
     return TemplateContents;

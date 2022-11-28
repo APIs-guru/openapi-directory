@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BitbucketServerSecrets
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * BitbucketServerSecrets represents the secrets in Secret Manager for a Bitbucket Server.
 **/
 export class BitbucketServerSecrets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adminAccessTokenVersionName" })
+  @SpeakeasyMetadata({ data: "json, name=adminAccessTokenVersionName" })
   adminAccessTokenVersionName?: string;
 
-  @Metadata({ data: "json, name=readAccessTokenVersionName" })
+  @SpeakeasyMetadata({ data: "json, name=readAccessTokenVersionName" })
   readAccessTokenVersionName?: string;
 
-  @Metadata({ data: "json, name=webhookSecretVersionName" })
+  @SpeakeasyMetadata({ data: "json, name=webhookSecretVersionName" })
   webhookSecretVersionName?: string;
 }

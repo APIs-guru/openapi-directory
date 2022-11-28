@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DisruptionsGetDisruptionsByRouteAndStopPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=route_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=route_id" })
   routeId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=stop_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=stop_id" })
   stopId: number;
 }
 
 export enum DisruptionsGetDisruptionsByRouteAndStopDisruptionStatusEnum {
-    Current = "current"
-,    Planned = "planned"
+    Current = "current",
+    Planned = "planned"
 }
 
 
 export class DisruptionsGetDisruptionsByRouteAndStopQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=devid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=devid" })
   devid?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=disruption_status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=disruption_status" })
   disruptionStatus?: DisruptionsGetDisruptionsByRouteAndStopDisruptionStatusEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=signature" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=signature" })
   signature?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" })
   token?: string;
 }
 
 
 export class DisruptionsGetDisruptionsByRouteAndStopRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DisruptionsGetDisruptionsByRouteAndStopPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DisruptionsGetDisruptionsByRouteAndStopQueryParams;
 }
 
 
 export class DisruptionsGetDisruptionsByRouteAndStopResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   v3DisruptionsResponse?: shared.V3DisruptionsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   v3ErrorResponse?: shared.V3ErrorResponse;
 }

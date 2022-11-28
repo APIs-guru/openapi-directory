@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContactGroup } from "./contactgroup";
 import { Status } from "./status";
+
 
 
 // ContactGroupResponse
@@ -8,12 +9,12 @@ import { Status } from "./status";
  * The response for a specific contact group.
 **/
 export class ContactGroupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contactGroup" })
+  @SpeakeasyMetadata({ data: "json, name=contactGroup" })
   contactGroup?: ContactGroup;
 
-  @Metadata({ data: "json, name=requestedResourceName" })
+  @SpeakeasyMetadata({ data: "json, name=requestedResourceName" })
   requestedResourceName?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: Status;
 }

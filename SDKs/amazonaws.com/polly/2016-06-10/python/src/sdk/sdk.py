@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/polly/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,30 +17,58 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/polly/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def delete_lexicon(self, request: operations.DeleteLexiconRequest) -> operations.DeleteLexiconResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Deletes the specified pronunciation lexicon stored in an Amazon Web Services Region. A lexicon which has been deleted is not available for speech synthesis, nor is it possible to retrieve it using either the <code>GetLexicon</code> or <code>ListLexicon</code> APIs.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing Lexicons</a>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/lexicons/{LexiconName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -60,17 +91,18 @@ class SDK:
 
     
     def describe_voices(self, request: operations.DescribeVoicesRequest) -> operations.DescribeVoicesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Returns the list of voices that are available for use when requesting speech synthesis. Each voice speaks a specified language, is either male or female, and is identified by an ID, which is the ASCII version of the voice name. </p> <p>When synthesizing speech ( <code>SynthesizeSpeech</code> ), you provide the voice ID for the voice you want from the list of voices returned by <code>DescribeVoices</code>.</p> <p>For example, you want your news reader application to read news in a specific language, but giving a user the option to choose the voice. Using the <code>DescribeVoices</code> operation you can provide the user with a list of available voices to select from.</p> <p> You can optionally specify a language code to filter the available voices. For example, if you specify <code>en-US</code>, the operation returns a list of all available US English voices. </p> <p>This operation requires permissions to perform the <code>polly:DescribeVoices</code> action.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/voices"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -93,15 +125,17 @@ class SDK:
 
     
     def get_lexicon(self, request: operations.GetLexiconRequest) -> operations.GetLexiconResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the content of the specified pronunciation lexicon stored in an Amazon Web Services Region. For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing Lexicons</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/lexicons/{LexiconName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -124,15 +158,17 @@ class SDK:
 
     
     def get_speech_synthesis_task(self, request: operations.GetSpeechSynthesisTaskRequest) -> operations.GetSpeechSynthesisTaskResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves a specific SpeechSynthesisTask object based on its TaskID. This object contains information about the given speech synthesis task, including the status of the task, and a link to the S3 bucket containing the output of the task.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/synthesisTasks/{TaskId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -159,17 +195,18 @@ class SDK:
 
     
     def list_lexicons(self, request: operations.ListLexiconsRequest) -> operations.ListLexiconsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of pronunciation lexicons stored in an Amazon Web Services Region. For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing Lexicons</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/lexicons"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -192,17 +229,18 @@ class SDK:
 
     
     def list_speech_synthesis_tasks(self, request: operations.ListSpeechSynthesisTasksRequest) -> operations.ListSpeechSynthesisTasksResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of SpeechSynthesisTask objects ordered by their creation date. This operation can filter the tasks by their status, for example, allowing users to list only tasks that are completed.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/synthesisTasks"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -225,22 +263,22 @@ class SDK:
 
     
     def put_lexicon(self, request: operations.PutLexiconRequest) -> operations.PutLexiconResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Stores a pronunciation lexicon in an Amazon Web Services Region. If a lexicon with the same name already exists in the region, it is overwritten by the new lexicon. Lexicon operations have eventual consistency, therefore, it might take some time before the lexicon is available to the SynthesizeSpeech operation.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html\">Managing Lexicons</a>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/lexicons/{LexiconName}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -283,22 +321,22 @@ class SDK:
 
     
     def start_speech_synthesis_task(self, request: operations.StartSpeechSynthesisTaskRequest) -> operations.StartSpeechSynthesisTaskResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Allows the creation of an asynchronous synthesis task, by starting a new <code>SpeechSynthesisTask</code>. This operation requires all the standard information needed for speech synthesis, plus the name of an Amazon S3 bucket for the service to store the output of the synthesis task and two optional parameters (<code>OutputS3KeyPrefix</code> and <code>SnsTopicArn</code>). Once the synthesis task is created, this operation will return a <code>SpeechSynthesisTask</code> object, which will include an identifier of this task as well as the current status. The <code>SpeechSynthesisTask</code> object is available for 72 hours after starting the asynchronous synthesis task.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/synthesisTasks"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -361,22 +399,22 @@ class SDK:
 
     
     def synthesize_speech(self, request: operations.SynthesizeSpeechRequest) -> operations.SynthesizeSpeechResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Synthesizes UTF-8 input, plain text or SSML, to a stream of bytes. SSML input must be valid, well-formed SSML. Some alphabets might not be available with all the voices (for example, Cyrillic might not be read at all by English voices) unless phoneme mapping is used. For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/how-text-to-speech-works.html\">How it Works</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/speech"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

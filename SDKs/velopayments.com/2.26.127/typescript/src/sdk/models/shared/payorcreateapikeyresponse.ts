@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PayorCreateApiKeyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiKey" })
+  @SpeakeasyMetadata({ data: "json, name=apiKey" })
   apiKey?: string;
 
-  @Metadata({ data: "json, name=apiSecret" })
+  @SpeakeasyMetadata({ data: "json, name=apiSecret" })
   apiSecret?: string;
 }

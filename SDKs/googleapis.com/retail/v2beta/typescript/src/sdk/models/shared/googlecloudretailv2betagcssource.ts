@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2betaGcsSource
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Google Cloud Storage location for input content.
 **/
 export class GoogleCloudRetailV2betaGcsSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataSchema" })
+  @SpeakeasyMetadata({ data: "json, name=dataSchema" })
   dataSchema?: string;
 
-  @Metadata({ data: "json, name=inputUris" })
+  @SpeakeasyMetadata({ data: "json, name=inputUris" })
   inputUris?: string[];
 }

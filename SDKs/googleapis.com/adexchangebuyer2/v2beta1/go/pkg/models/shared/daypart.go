@@ -13,6 +13,8 @@ const (
 	DayPartDayOfWeekEnumSunday               DayPartDayOfWeekEnum = "SUNDAY"
 )
 
+// DayPart
+// Daypart targeting message that specifies if the ad can be shown only during certain parts of a day/week.
 type DayPart struct {
 	DayOfWeek *DayPartDayOfWeekEnum `json:"dayOfWeek,omitempty"`
 	EndTime   *TimeOfDay            `json:"endTime,omitempty"`

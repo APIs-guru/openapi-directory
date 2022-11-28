@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var InferIcd10CmRequest = /** @class */ (function (_super) {
     __extends(InferIcd10CmRequest, _super);
     function InferIcd10CmRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Text" }),
+        SpeakeasyMetadata({ data: "json, name=Text" }),
         __metadata("design:type", String)
     ], InferIcd10CmRequest.prototype, "text", void 0);
     return InferIcd10CmRequest;

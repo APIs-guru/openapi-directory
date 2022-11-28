@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AssetCompositeModel } from "./assetcompositemodel";
 import { AssetHierarchy } from "./assethierarchy";
 import { AssetProperty } from "./assetproperty";

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AssociatedAssetsSummary
+// Contains a summary of an associated asset.
 type AssociatedAssetsSummary struct {
 	Arn            string           `json:"arn"`
 	AssetModelID   string           `json:"assetModelId"`

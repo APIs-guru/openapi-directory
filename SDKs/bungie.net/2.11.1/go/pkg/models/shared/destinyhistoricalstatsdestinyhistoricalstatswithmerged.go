@@ -1,0 +1,6 @@
+package shared
+
+type DestinyHistoricalStatsDestinyHistoricalStatsWithMerged struct {
+	Merged  *DestinyHistoricalStatsDestinyHistoricalStatsByPeriod
+	Results map[string]DestinyHistoricalStatsDestinyHistoricalStatsByPeriod
+}

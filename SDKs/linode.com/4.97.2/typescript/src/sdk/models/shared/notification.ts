@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NotificationEntity
@@ -6,37 +7,37 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Detailed information about the Notification.
 **/
 export class NotificationEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
 export enum NotificationSeverityEnum {
-    Minor = "minor"
-,    Major = "major"
-,    Critical = "critical"
+    Minor = "minor",
+    Major = "major",
+    Critical = "critical"
 }
 
 export enum NotificationTypeEnum {
-    MigrationScheduled = "migration_scheduled"
-,    MigrationImminent = "migration_imminent"
-,    MigrationPending = "migration_pending"
-,    RebootScheduled = "reboot_scheduled"
-,    Outage = "outage"
-,    PaymentDue = "payment_due"
-,    TicketImportant = "ticket_important"
-,    TicketAbuse = "ticket_abuse"
-,    Notice = "notice"
-,    Maintenance = "maintenance"
-,    Promotion = "promotion"
+    MigrationScheduled = "migration_scheduled",
+    MigrationImminent = "migration_imminent",
+    MigrationPending = "migration_pending",
+    RebootScheduled = "reboot_scheduled",
+    Outage = "outage",
+    PaymentDue = "payment_due",
+    TicketImportant = "ticket_important",
+    TicketAbuse = "ticket_abuse",
+    Notice = "notice",
+    Maintenance = "maintenance",
+    Promotion = "promotion"
 }
 
 
@@ -46,27 +47,27 @@ export enum NotificationTypeEnum {
  * 
 **/
 export class Notification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: string;
 
-  @Metadata({ data: "json, name=entity" })
+  @SpeakeasyMetadata({ data: "json, name=entity" })
   entity?: NotificationEntity;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: NotificationSeverityEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: NotificationTypeEnum;
 
-  @Metadata({ data: "json, name=until" })
+  @SpeakeasyMetadata({ data: "json, name=until" })
   until?: Date;
 
-  @Metadata({ data: "json, name=when" })
+  @SpeakeasyMetadata({ data: "json, name=when" })
   when?: Date;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // FunctionCodeLocation
 /**
  * Details about a function's deployment package.
@@ -33,19 +33,19 @@ var FunctionCodeLocation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ImageUri" }),
+        SpeakeasyMetadata({ data: "json, name=ImageUri" }),
         __metadata("design:type", String)
     ], FunctionCodeLocation.prototype, "imageUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=Location" }),
+        SpeakeasyMetadata({ data: "json, name=Location" }),
         __metadata("design:type", String)
     ], FunctionCodeLocation.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "json, name=RepositoryType" }),
+        SpeakeasyMetadata({ data: "json, name=RepositoryType" }),
         __metadata("design:type", String)
     ], FunctionCodeLocation.prototype, "repositoryType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResolvedImageUri" }),
+        SpeakeasyMetadata({ data: "json, name=ResolvedImageUri" }),
         __metadata("design:type", String)
     ], FunctionCodeLocation.prototype, "resolvedImageUri", void 0);
     return FunctionCodeLocation;

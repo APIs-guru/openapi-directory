@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class StatusCodeEnum(str, Enum):
     CODE_UNSPECIFIED = "CODE_UNSPECIFIED"
@@ -12,6 +14,10 @@ class StatusCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Status:
-    code: Optional[StatusCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    r"""Status
+    Status specifies state for the subcomponent.
+    """
+    
+    code: Optional[StatusCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
     

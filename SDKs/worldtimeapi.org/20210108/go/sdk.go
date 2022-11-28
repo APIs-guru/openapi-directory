@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://worldtimeapi.org/api/",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetIP - request the current time based on the ip of the request. note: this is a "best guess" obtained from open-source data.
 func (s *SDK) GetIP(ctx context.Context) (*operations.GetIPResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ip"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -60,7 +82,7 @@ func (s *SDK) GetIP(ctx context.Context) (*operations.GetIPResponse, error) {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -100,8 +122,9 @@ func (s *SDK) GetIP(ctx context.Context) (*operations.GetIPResponse, error) {
 	return res, nil
 }
 
+// GetIPIpv4 - request the current time based on the ip of the request. note: this is a "best guess" obtained from open-source data.
 func (s *SDK) GetIPIpv4(ctx context.Context, request operations.GetIPIpv4Request) (*operations.GetIPIpv4Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ip/{ipv4}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -109,7 +132,7 @@ func (s *SDK) GetIPIpv4(ctx context.Context, request operations.GetIPIpv4Request
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -149,8 +172,9 @@ func (s *SDK) GetIPIpv4(ctx context.Context, request operations.GetIPIpv4Request
 	return res, nil
 }
 
+// GetIPIpv4Txt - request the current time based on the ip of the request. note: this is a "best guess" obtained from open-source data.
 func (s *SDK) GetIPIpv4Txt(ctx context.Context, request operations.GetIPIpv4TxtRequest) (*operations.GetIPIpv4TxtResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/ip/{ipv4}.txt", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -158,7 +182,7 @@ func (s *SDK) GetIPIpv4Txt(ctx context.Context, request operations.GetIPIpv4TxtR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -200,8 +224,9 @@ func (s *SDK) GetIPIpv4Txt(ctx context.Context, request operations.GetIPIpv4TxtR
 	return res, nil
 }
 
+// GetIPTxt - request the current time based on the ip of the request. note: this is a "best guess" obtained from open-source data.
 func (s *SDK) GetIPTxt(ctx context.Context) (*operations.GetIPTxtResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ip.txt"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -209,7 +234,7 @@ func (s *SDK) GetIPTxt(ctx context.Context) (*operations.GetIPTxtResponse, error
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -251,8 +276,9 @@ func (s *SDK) GetIPTxt(ctx context.Context) (*operations.GetIPTxtResponse, error
 	return res, nil
 }
 
+// GetTimezone - a listing of all timezones.
 func (s *SDK) GetTimezone(ctx context.Context) (*operations.GetTimezoneResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/timezone"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -260,7 +286,7 @@ func (s *SDK) GetTimezone(ctx context.Context) (*operations.GetTimezoneResponse,
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -290,8 +316,9 @@ func (s *SDK) GetTimezone(ctx context.Context) (*operations.GetTimezoneResponse,
 	return res, nil
 }
 
+// GetTimezoneArea - a listing of all timezones available for that area.
 func (s *SDK) GetTimezoneArea(ctx context.Context, request operations.GetTimezoneAreaRequest) (*operations.GetTimezoneAreaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/timezone/{area}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -299,7 +326,7 @@ func (s *SDK) GetTimezoneArea(ctx context.Context, request operations.GetTimezon
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -339,8 +366,9 @@ func (s *SDK) GetTimezoneArea(ctx context.Context, request operations.GetTimezon
 	return res, nil
 }
 
+// GetTimezoneAreaLocation - request the current time for a timezone.
 func (s *SDK) GetTimezoneAreaLocation(ctx context.Context, request operations.GetTimezoneAreaLocationRequest) (*operations.GetTimezoneAreaLocationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/timezone/{area}/{location}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -348,7 +376,7 @@ func (s *SDK) GetTimezoneAreaLocation(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -388,8 +416,9 @@ func (s *SDK) GetTimezoneAreaLocation(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetTimezoneAreaLocationRegion - request the current time for a timezone.
 func (s *SDK) GetTimezoneAreaLocationRegion(ctx context.Context, request operations.GetTimezoneAreaLocationRegionRequest) (*operations.GetTimezoneAreaLocationRegionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/timezone/{area}/{location}/{region}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -397,7 +426,7 @@ func (s *SDK) GetTimezoneAreaLocationRegion(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -437,8 +466,9 @@ func (s *SDK) GetTimezoneAreaLocationRegion(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetTimezoneAreaLocationRegionTxt - request the current time for a timezone.
 func (s *SDK) GetTimezoneAreaLocationRegionTxt(ctx context.Context, request operations.GetTimezoneAreaLocationRegionTxtRequest) (*operations.GetTimezoneAreaLocationRegionTxtResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/timezone/{area}/{location}/{region}.txt", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -446,7 +476,7 @@ func (s *SDK) GetTimezoneAreaLocationRegionTxt(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -488,8 +518,9 @@ func (s *SDK) GetTimezoneAreaLocationRegionTxt(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetTimezoneAreaLocationTxt - request the current time for a timezone.
 func (s *SDK) GetTimezoneAreaLocationTxt(ctx context.Context, request operations.GetTimezoneAreaLocationTxtRequest) (*operations.GetTimezoneAreaLocationTxtResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/timezone/{area}/{location}.txt", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -497,7 +528,7 @@ func (s *SDK) GetTimezoneAreaLocationTxt(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -539,8 +570,9 @@ func (s *SDK) GetTimezoneAreaLocationTxt(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetTimezoneAreaTxt - a listing of all timezones available for that area.
 func (s *SDK) GetTimezoneAreaTxt(ctx context.Context, request operations.GetTimezoneAreaTxtRequest) (*operations.GetTimezoneAreaTxtResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/timezone/{area}.txt", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -548,7 +580,7 @@ func (s *SDK) GetTimezoneAreaTxt(ctx context.Context, request operations.GetTime
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -590,8 +622,9 @@ func (s *SDK) GetTimezoneAreaTxt(ctx context.Context, request operations.GetTime
 	return res, nil
 }
 
+// GetTimezoneTxt - a listing of all timezones.
 func (s *SDK) GetTimezoneTxt(ctx context.Context) (*operations.GetTimezoneTxtResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/timezone.txt"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -599,7 +632,7 @@ func (s *SDK) GetTimezoneTxt(ctx context.Context) (*operations.GetTimezoneTxtRes
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class FullImportSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   otoroshiAuth: shared.SchemeOtoroshiAuth;
 }
 
 
 export class FullImportRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.ImportExport;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: FullImportSecurity;
 }
 
 
 export class FullImportResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   done?: shared.Done;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

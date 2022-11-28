@@ -1,23 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnalysisCompleted } from "./analysiscompleted";
 import { Status } from "./status";
-import { Status } from "./status";
+
 
 export enum DiscoveryOccurrenceAnalysisStatusEnum {
-    AnalysisStatusUnspecified = "ANALYSIS_STATUS_UNSPECIFIED"
-,    Pending = "PENDING"
-,    Scanning = "SCANNING"
-,    FinishedSuccess = "FINISHED_SUCCESS"
-,    Complete = "COMPLETE"
-,    FinishedFailed = "FINISHED_FAILED"
-,    FinishedUnsupported = "FINISHED_UNSUPPORTED"
+    AnalysisStatusUnspecified = "ANALYSIS_STATUS_UNSPECIFIED",
+    Pending = "PENDING",
+    Scanning = "SCANNING",
+    FinishedSuccess = "FINISHED_SUCCESS",
+    Complete = "COMPLETE",
+    FinishedFailed = "FINISHED_FAILED",
+    FinishedUnsupported = "FINISHED_UNSUPPORTED"
 }
 
 export enum DiscoveryOccurrenceContinuousAnalysisEnum {
-    ContinuousAnalysisUnspecified = "CONTINUOUS_ANALYSIS_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    Inactive = "INACTIVE"
+    ContinuousAnalysisUnspecified = "CONTINUOUS_ANALYSIS_UNSPECIFIED",
+    Active = "ACTIVE",
+    Inactive = "INACTIVE"
 }
 
 
@@ -26,27 +25,55 @@ export enum DiscoveryOccurrenceContinuousAnalysisEnum {
  * Provides information about the analysis status of a discovered resource.
 **/
 export class DiscoveryOccurrence extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analysisCompleted" })
+  @SpeakeasyMetadata({ data: "json, name=analysisCompleted" })
   analysisCompleted?: AnalysisCompleted;
 
-  @Metadata({ data: "json, name=analysisError", elemType: shared.Status })
+  @SpeakeasyMetadata({ data: "json, name=analysisError", elemType: Status })
   analysisError?: Status[];
 
-  @Metadata({ data: "json, name=analysisStatus" })
+  @SpeakeasyMetadata({ data: "json, name=analysisStatus" })
   analysisStatus?: DiscoveryOccurrenceAnalysisStatusEnum;
 
-  @Metadata({ data: "json, name=analysisStatusError" })
+  @SpeakeasyMetadata({ data: "json, name=analysisStatusError" })
   analysisStatusError?: Status;
 
-  @Metadata({ data: "json, name=archiveTime" })
+  @SpeakeasyMetadata({ data: "json, name=archiveTime" })
   archiveTime?: string;
 
-  @Metadata({ data: "json, name=continuousAnalysis" })
+  @SpeakeasyMetadata({ data: "json, name=continuousAnalysis" })
   continuousAnalysis?: DiscoveryOccurrenceContinuousAnalysisEnum;
 
-  @Metadata({ data: "json, name=cpe" })
+  @SpeakeasyMetadata({ data: "json, name=cpe" })
   cpe?: string;
 
-  @Metadata({ data: "json, name=lastScanTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastScanTime" })
+  lastScanTime?: string;
+}
+
+
+// DiscoveryOccurrenceInput
+/** 
+ * Provides information about the analysis status of a discovered resource.
+**/
+export class DiscoveryOccurrenceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=analysisCompleted" })
+  analysisCompleted?: AnalysisCompleted;
+
+  @SpeakeasyMetadata({ data: "json, name=analysisError", elemType: Status })
+  analysisError?: Status[];
+
+  @SpeakeasyMetadata({ data: "json, name=analysisStatus" })
+  analysisStatus?: DiscoveryOccurrenceAnalysisStatusEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=analysisStatusError" })
+  analysisStatusError?: Status;
+
+  @SpeakeasyMetadata({ data: "json, name=continuousAnalysis" })
+  continuousAnalysis?: DiscoveryOccurrenceContinuousAnalysisEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=cpe" })
+  cpe?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=lastScanTime" })
   lastScanTime?: string;
 }

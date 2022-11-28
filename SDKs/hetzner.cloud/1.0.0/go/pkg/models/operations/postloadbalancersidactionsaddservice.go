@@ -4,6 +4,8 @@ type PostLoadBalancersIDActionsAddServicePathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
+// PostLoadBalancersIDActionsAddServiceLoadBalancerServiceLoadBalancerServiceHealthCheckHTTP
+// Additional configuration for protocol http
 type PostLoadBalancersIDActionsAddServiceLoadBalancerServiceLoadBalancerServiceHealthCheckHTTP struct {
 	Domain      string   `json:"domain"`
 	Path        string   `json:"path"`
@@ -19,6 +21,8 @@ const (
 	PostLoadBalancersIDActionsAddServiceLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnumHTTP PostLoadBalancersIDActionsAddServiceLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnum = "http"
 )
 
+// PostLoadBalancersIDActionsAddServiceLoadBalancerServiceLoadBalancerServiceHealthCheck
+// Service health check
 type PostLoadBalancersIDActionsAddServiceLoadBalancerServiceLoadBalancerServiceHealthCheck struct {
 	HTTP     *PostLoadBalancersIDActionsAddServiceLoadBalancerServiceLoadBalancerServiceHealthCheckHTTP        `json:"http,omitempty"`
 	Interval int64                                                                                             `json:"interval"`
@@ -28,6 +32,8 @@ type PostLoadBalancersIDActionsAddServiceLoadBalancerServiceLoadBalancerServiceH
 	Timeout  int64                                                                                             `json:"timeout"`
 }
 
+// PostLoadBalancersIDActionsAddServiceLoadBalancerServiceHTTP
+// Configuration option for protocols http and https
 type PostLoadBalancersIDActionsAddServiceLoadBalancerServiceHTTP struct {
 	Certificates   []int64 `json:"certificates,omitempty"`
 	CookieLifetime int64   `json:"cookie_lifetime"`
@@ -53,11 +59,8 @@ type PostLoadBalancersIDActionsAddServiceLoadBalancerService struct {
 	Proxyprotocol   bool                                                                                  `json:"proxyprotocol"`
 }
 
-type PostLoadBalancersIDActionsAddServiceRequest struct {
-	PathParams PostLoadBalancersIDActionsAddServicePathParams
-	Request    *PostLoadBalancersIDActionsAddServiceLoadBalancerService `request:"mediaType=application/json"`
-}
-
+// PostLoadBalancersIDActionsAddServiceActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostLoadBalancersIDActionsAddServiceActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -89,6 +92,11 @@ type PostLoadBalancersIDActionsAddServiceActionResponseAction struct {
 
 type PostLoadBalancersIDActionsAddServiceActionResponse struct {
 	Action PostLoadBalancersIDActionsAddServiceActionResponseAction `json:"action"`
+}
+
+type PostLoadBalancersIDActionsAddServiceRequest struct {
+	PathParams PostLoadBalancersIDActionsAddServicePathParams
+	Request    *PostLoadBalancersIDActionsAddServiceLoadBalancerService `request:"mediaType=application/json"`
 }
 
 type PostLoadBalancersIDActionsAddServiceResponse struct {

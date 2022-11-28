@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2StoredInfoTypeVersion } from "./googleprivacydlpv2storedinfotypeversion";
-import { GooglePrivacyDlpV2StoredInfoTypeVersion } from "./googleprivacydlpv2storedinfotypeversion";
+
 
 
 // GooglePrivacyDlpV2StoredInfoType
@@ -9,12 +8,12 @@ import { GooglePrivacyDlpV2StoredInfoTypeVersion } from "./googleprivacydlpv2sto
  * StoredInfoType resource message that contains information about the current version and any pending updates.
 **/
 export class GooglePrivacyDlpV2StoredInfoType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=currentVersion" })
   currentVersion?: GooglePrivacyDlpV2StoredInfoTypeVersion;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pendingVersions", elemType: shared.GooglePrivacyDlpV2StoredInfoTypeVersion })
+  @SpeakeasyMetadata({ data: "json, name=pendingVersions", elemType: GooglePrivacyDlpV2StoredInfoTypeVersion })
   pendingVersions?: GooglePrivacyDlpV2StoredInfoTypeVersion[];
 }

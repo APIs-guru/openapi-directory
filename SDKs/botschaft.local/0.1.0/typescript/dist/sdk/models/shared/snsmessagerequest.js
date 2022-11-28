@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SnsMessageRequest = /** @class */ (function (_super) {
     __extends(SnsMessageRequest, _super);
     function SnsMessageRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=base64_message" }),
+        SpeakeasyMetadata({ data: "json, name=base64_message" }),
         __metadata("design:type", String)
     ], SnsMessageRequest.prototype, "base64Message", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], SnsMessageRequest.prototype, "message", void 0);
     return SnsMessageRequest;

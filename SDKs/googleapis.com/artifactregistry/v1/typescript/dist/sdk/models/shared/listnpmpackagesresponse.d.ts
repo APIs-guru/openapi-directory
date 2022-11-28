@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { NpmPackage } from "./npmpackage";
 /**
  * The response from listing npm packages.

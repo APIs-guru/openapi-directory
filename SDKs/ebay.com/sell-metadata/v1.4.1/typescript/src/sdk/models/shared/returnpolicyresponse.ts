@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReturnPolicy } from "./returnpolicy";
 import { Error } from "./error";
 
 
+
 export class ReturnPolicyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=returnPolicies", elemType: shared.ReturnPolicy })
+  @SpeakeasyMetadata({ data: "json, name=returnPolicies", elemType: ReturnPolicy })
   returnPolicies?: ReturnPolicy[];
 
-  @Metadata({ data: "json, name=warnings", elemType: shared.Error })
+  @SpeakeasyMetadata({ data: "json, name=warnings", elemType: Error })
   warnings?: Error[];
 }

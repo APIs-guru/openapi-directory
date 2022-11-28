@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import lambdacodehook
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CodeHookSpecification:
-    lambda_code_hook: lambdacodehook.LambdaCodeHook = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lambdaCodeHook' }})
+    r"""CodeHookSpecification
+    Contains information about code hooks that Amazon Lex calls during a conversation.
+    """
+    
+    lambda_code_hook: LambdaCodeHook = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('lambdaCodeHook') }})
     

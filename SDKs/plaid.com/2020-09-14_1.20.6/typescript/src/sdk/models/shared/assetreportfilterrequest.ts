@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AssetReportFilterRequest
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * AssetReportFilterRequest defines the request schema for `/asset_report/filter`
 **/
 export class AssetReportFilterRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account_ids_to_exclude" })
+  @SpeakeasyMetadata({ data: "json, name=account_ids_to_exclude" })
   accountIdsToExclude: string[];
 
-  @Metadata({ data: "json, name=asset_report_token" })
+  @SpeakeasyMetadata({ data: "json, name=asset_report_token" })
   assetReportToken: string;
 
-  @Metadata({ data: "json, name=client_id" })
+  @SpeakeasyMetadata({ data: "json, name=client_id" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 }

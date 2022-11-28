@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GroupQueueModeEnum } from "./groupqueuemodeenum";
+
 
 
 // QueueRequestDto
@@ -7,9 +8,9 @@ import { GroupQueueModeEnum } from "./groupqueuemodeenum";
  * Class QueueRequestDto.
 **/
 export class QueueRequestDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ItemIds" })
+  @SpeakeasyMetadata({ data: "json, name=ItemIds" })
   itemIds?: string[];
 
-  @Metadata({ data: "json, name=Mode" })
+  @SpeakeasyMetadata({ data: "json, name=Mode" })
   mode?: GroupQueueModeEnum;
 }

@@ -1,24 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ModelsPackageUpdate } from "./modelspackageupdate";
 
 
+
 export class ControllersSystemPackageData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=evra" })
+  @SpeakeasyMetadata({ data: "json, name=evra" })
   evra?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: string;
 
-  @Metadata({ data: "json, name=updatable" })
+  @SpeakeasyMetadata({ data: "json, name=updatable" })
   updatable?: boolean;
 
-  @Metadata({ data: "json, name=updates", elemType: shared.ModelsPackageUpdate })
+  @SpeakeasyMetadata({ data: "json, name=updates", elemType: ModelsPackageUpdate })
   updates?: ModelsPackageUpdate[];
 }

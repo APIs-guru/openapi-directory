@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorMetric } from "./errormetric";
 import { WeightedQuantileLoss } from "./weightedquantileloss";
+
 
 
 // Metrics
@@ -9,15 +9,15 @@ import { WeightedQuantileLoss } from "./weightedquantileloss";
  * Provides metrics that are used to evaluate the performance of a predictor. This object is part of the <a>WindowSummary</a> object.
 **/
 export class Metrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AverageWeightedQuantileLoss" })
+  @SpeakeasyMetadata({ data: "json, name=AverageWeightedQuantileLoss" })
   averageWeightedQuantileLoss?: number;
 
-  @Metadata({ data: "json, name=ErrorMetrics", elemType: shared.ErrorMetric })
+  @SpeakeasyMetadata({ data: "json, name=ErrorMetrics", elemType: ErrorMetric })
   errorMetrics?: ErrorMetric[];
 
-  @Metadata({ data: "json, name=RMSE" })
+  @SpeakeasyMetadata({ data: "json, name=RMSE" })
   rmse?: number;
 
-  @Metadata({ data: "json, name=WeightedQuantileLosses", elemType: shared.WeightedQuantileLoss })
+  @SpeakeasyMetadata({ data: "json, name=WeightedQuantileLosses", elemType: WeightedQuantileLoss })
   weightedQuantileLosses?: WeightedQuantileLoss[];
 }

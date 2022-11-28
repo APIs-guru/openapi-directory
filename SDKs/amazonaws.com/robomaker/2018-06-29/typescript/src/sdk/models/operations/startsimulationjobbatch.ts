@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class StartSimulationJobBatchHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,60 +32,60 @@ export class StartSimulationJobBatchHeaders extends SpeakeasyBase {
  * Information about the batch policy.
 **/
 export class StartSimulationJobBatchRequestBodyBatchPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxConcurrency" })
+  @SpeakeasyMetadata({ data: "json, name=maxConcurrency" })
   maxConcurrency?: number;
 
-  @Metadata({ data: "json, name=timeoutInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=timeoutInSeconds" })
   timeoutInSeconds?: number;
 }
 
 
 export class StartSimulationJobBatchRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=batchPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=batchPolicy" })
   batchPolicy?: StartSimulationJobBatchRequestBodyBatchPolicy;
 
-  @Metadata({ data: "json, name=clientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientRequestToken" })
   clientRequestToken?: string;
 
-  @Metadata({ data: "json, name=createSimulationJobRequests", elemType: shared.SimulationJobRequest })
+  @SpeakeasyMetadata({ data: "json, name=createSimulationJobRequests", elemType: shared.SimulationJobRequest })
   createSimulationJobRequests: shared.SimulationJobRequest[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }
 
 
 export class StartSimulationJobBatchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: StartSimulationJobBatchHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: StartSimulationJobBatchRequestBody;
 }
 
 
 export class StartSimulationJobBatchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   idempotentParameterMismatchException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   startSimulationJobBatchResponse?: shared.StartSimulationJobBatchResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

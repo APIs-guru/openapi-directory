@@ -1,101 +1,102 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetReportPkLogLogIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=log_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=log_id" })
   logId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class GetReportPkLogLogIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=q" })
   q?: shared.GetItemSchema;
 }
 
 
 export class GetReportPkLogLogIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetReportPkLogLogIdRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetReportPkLogLogIdPathParams;
-
-  @Metadata()
-  queryParams: GetReportPkLogLogIdQueryParams;
-
-  @Metadata()
-  security: GetReportPkLogLogIdSecurity;
-}
-
-
 export class GetReportPkLogLogId200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: shared.ReportExecutionLogRestApiGet;
 }
 
 
 export class GetReportPkLogLogId400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetReportPkLogLogId401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetReportPkLogLogId404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetReportPkLogLogId422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetReportPkLogLogId500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetReportPkLogLogIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetReportPkLogLogIdPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetReportPkLogLogIdQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetReportPkLogLogIdSecurity;
+}
+
+
 export class GetReportPkLogLogIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getReportPkLogLogId200ApplicationJsonObject?: GetReportPkLogLogId200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getReportPkLogLogId400ApplicationJsonObject?: GetReportPkLogLogId400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getReportPkLogLogId401ApplicationJsonObject?: GetReportPkLogLogId401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getReportPkLogLogId404ApplicationJsonObject?: GetReportPkLogLogId404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getReportPkLogLogId422ApplicationJsonObject?: GetReportPkLogLogId422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getReportPkLogLogId500ApplicationJsonObject?: GetReportPkLogLogId500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

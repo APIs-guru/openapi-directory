@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetStripeGatewayDeveloperDeveloperIdAccountsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=developerId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=developerId" })
   developerId: string;
 }
 
 
 export class GetStripeGatewayDeveloperDeveloperIdAccountsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetStripeGatewayDeveloperDeveloperIdAccountsPathParams;
 }
 
 
 export class GetStripeGatewayDeveloperDeveloperIdAccountsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

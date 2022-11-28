@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Api } from "./api";
 import { Authentication } from "./authentication";
 import { Documentation } from "./documentation";
@@ -10,38 +9,39 @@ import { Quota } from "./quota";
 import { Usage } from "./usage";
 
 
+
 // ServiceConfig
 /** 
  * The configuration of the service.
 **/
 export class ServiceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apis", elemType: shared.Api })
+  @SpeakeasyMetadata({ data: "json, name=apis", elemType: Api })
   apis?: Api[];
 
-  @Metadata({ data: "json, name=authentication" })
+  @SpeakeasyMetadata({ data: "json, name=authentication" })
   authentication?: Authentication;
 
-  @Metadata({ data: "json, name=documentation" })
+  @SpeakeasyMetadata({ data: "json, name=documentation" })
   documentation?: Documentation;
 
-  @Metadata({ data: "json, name=endpoints", elemType: shared.Endpoint })
+  @SpeakeasyMetadata({ data: "json, name=endpoints", elemType: Endpoint })
   endpoints?: Endpoint[];
 
-  @Metadata({ data: "json, name=monitoredResources", elemType: shared.MonitoredResourceDescriptor })
+  @SpeakeasyMetadata({ data: "json, name=monitoredResources", elemType: MonitoredResourceDescriptor })
   monitoredResources?: MonitoredResourceDescriptor[];
 
-  @Metadata({ data: "json, name=monitoring" })
+  @SpeakeasyMetadata({ data: "json, name=monitoring" })
   monitoring?: Monitoring;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=quota" })
+  @SpeakeasyMetadata({ data: "json, name=quota" })
   quota?: Quota;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=usage" })
+  @SpeakeasyMetadata({ data: "json, name=usage" })
   usage?: Usage;
 }

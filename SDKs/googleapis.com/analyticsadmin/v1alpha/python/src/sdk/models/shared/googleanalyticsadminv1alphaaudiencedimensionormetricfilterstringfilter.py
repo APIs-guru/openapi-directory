@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterStringFilterMatchTypeEnum(str, Enum):
     MATCH_TYPE_UNSPECIFIED = "MATCH_TYPE_UNSPECIFIED"
@@ -14,7 +16,11 @@ class GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterStringFilterMatc
 @dataclass_json
 @dataclass
 class GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterStringFilter:
-    case_sensitive: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'caseSensitive' }})
-    match_type: Optional[GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterStringFilterMatchTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'matchType' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterStringFilter
+    A filter for a string-type dimension that matches a particular pattern.
+    """
+    
+    case_sensitive: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('caseSensitive') }})
+    match_type: Optional[GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterStringFilterMatchTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('matchType') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

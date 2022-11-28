@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MirrorConfig
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration to automatically mirror a repository from another hosting service, for example GitHub or Bitbucket.
 **/
 export class MirrorConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deployKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=deployKeyId" })
   deployKeyId?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=webhookId" })
+  @SpeakeasyMetadata({ data: "json, name=webhookId" })
   webhookId?: string;
 }

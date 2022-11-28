@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2Value } from "./googleprivacydlpv2value";
+
 
 
 // GooglePrivacyDlpV2Row
@@ -8,6 +8,6 @@ import { GooglePrivacyDlpV2Value } from "./googleprivacydlpv2value";
  * Values of the row.
 **/
 export class GooglePrivacyDlpV2Row extends SpeakeasyBase {
-  @Metadata({ data: "json, name=values", elemType: shared.GooglePrivacyDlpV2Value })
+  @SpeakeasyMetadata({ data: "json, name=values", elemType: GooglePrivacyDlpV2Value })
   values?: GooglePrivacyDlpV2Value[];
 }

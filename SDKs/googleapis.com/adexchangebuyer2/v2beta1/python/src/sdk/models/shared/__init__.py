@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .absolutedaterange import *
 from .acceptproposalrequest import *
 from .adddealassociationrequest import *
@@ -24,7 +24,7 @@ from .creativesize import *
 from .creativespecification import *
 from .creativestatusrow import *
 from .criteriatargeting import *
-from .date import *
+from .date_ import *
 from .daypart import *
 from .dayparttargeting import *
 from .deal import *

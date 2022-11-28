@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ServiceusageServicesConsumerQuotaMetricsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 class ServiceusageServicesConsumerQuotaMetricsListViewEnum(str, Enum):
     QUOTA_VIEW_UNSPECIFIED = "QUOTA_VIEW_UNSPECIFIED"
@@ -33,14 +34,14 @@ class ServiceusageServicesConsumerQuotaMetricsListQueryParams:
 
 @dataclass
 class ServiceusageServicesConsumerQuotaMetricsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ServiceusageServicesConsumerQuotaMetricsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -51,14 +52,14 @@ class ServiceusageServicesConsumerQuotaMetricsListSecurity:
 
 @dataclass
 class ServiceusageServicesConsumerQuotaMetricsListRequest:
-    path_params: ServiceusageServicesConsumerQuotaMetricsListPathParams = field(default=None)
-    query_params: ServiceusageServicesConsumerQuotaMetricsListQueryParams = field(default=None)
-    security: ServiceusageServicesConsumerQuotaMetricsListSecurity = field(default=None)
+    path_params: ServiceusageServicesConsumerQuotaMetricsListPathParams = field()
+    query_params: ServiceusageServicesConsumerQuotaMetricsListQueryParams = field()
+    security: ServiceusageServicesConsumerQuotaMetricsListSecurity = field()
     
 
 @dataclass
 class ServiceusageServicesConsumerQuotaMetricsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_consumer_quota_metrics_response: Optional[shared.ListConsumerQuotaMetricsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

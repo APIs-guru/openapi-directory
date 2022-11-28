@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryOrgunitsInsertPathParams:
-    customer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'customerId', 'style': 'simple', 'explode': False }})
+    customer_id: str = field(metadata={'path_param': { 'field_name': 'customerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DirectoryOrgunitsInsertQueryParams:
 
 @dataclass
 class DirectoryOrgunitsInsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryOrgunitsInsertRequest:
-    path_params: DirectoryOrgunitsInsertPathParams = field(default=None)
-    query_params: DirectoryOrgunitsInsertQueryParams = field(default=None)
+    path_params: DirectoryOrgunitsInsertPathParams = field()
+    query_params: DirectoryOrgunitsInsertQueryParams = field()
+    security: DirectoryOrgunitsInsertSecurity = field()
     request: Optional[shared.OrgUnit] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DirectoryOrgunitsInsertSecurity = field(default=None)
     
 
 @dataclass
 class DirectoryOrgunitsInsertResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     org_unit: Optional[shared.OrgUnit] = field(default=None)
-    status_code: int = field(default=None)
     

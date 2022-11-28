@@ -9,6 +9,8 @@ const (
 	YoutubeAndPartnersSettingsContentCategoryEnumYoutubeAndPartnersContentCategoryLimited     YoutubeAndPartnersSettingsContentCategoryEnum = "YOUTUBE_AND_PARTNERS_CONTENT_CATEGORY_LIMITED"
 )
 
+// YoutubeAndPartnersSettings
+// Settings for YouTube and Partners line items.
 type YoutubeAndPartnersSettings struct {
 	BiddingStrategy               *YoutubeAndPartnersBiddingStrategy               `json:"biddingStrategy,omitempty"`
 	ContentCategory               *YoutubeAndPartnersSettingsContentCategoryEnum   `json:"contentCategory,omitempty"`

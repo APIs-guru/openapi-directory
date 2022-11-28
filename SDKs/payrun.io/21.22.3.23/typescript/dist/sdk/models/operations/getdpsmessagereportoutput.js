@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetDpsMessageReportOutputQueryParams = /** @class */ (function (_super) {
     __extends(GetDpsMessageReportOutputQueryParams, _super);
@@ -30,31 +30,31 @@ var GetDpsMessageReportOutputQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" }),
         __metadata("design:type", String)
     ], GetDpsMessageReportOutputQueryParams.prototype, "employerKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=FromDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=FromDate" }),
         __metadata("design:type", Date)
     ], GetDpsMessageReportOutputQueryParams.prototype, "fromDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MaxIndex" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxIndex" }),
         __metadata("design:type", String)
     ], GetDpsMessageReportOutputQueryParams.prototype, "maxIndex", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MessageStatuses" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MessageStatuses" }),
         __metadata("design:type", String)
     ], GetDpsMessageReportOutputQueryParams.prototype, "messageStatuses", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MessageTypes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MessageTypes" }),
         __metadata("design:type", String)
     ], GetDpsMessageReportOutputQueryParams.prototype, "messageTypes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=StartIndex" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=StartIndex" }),
         __metadata("design:type", String)
     ], GetDpsMessageReportOutputQueryParams.prototype, "startIndex", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ToDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ToDate" }),
         __metadata("design:type", Date)
     ], GetDpsMessageReportOutputQueryParams.prototype, "toDate", void 0);
     return GetDpsMessageReportOutputQueryParams;
@@ -66,11 +66,11 @@ var GetDpsMessageReportOutputHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetDpsMessageReportOutputHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetDpsMessageReportOutputHeaders.prototype, "authorization", void 0);
     return GetDpsMessageReportOutputHeaders;
@@ -82,11 +82,11 @@ var GetDpsMessageReportOutputRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDpsMessageReportOutputQueryParams)
     ], GetDpsMessageReportOutputRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDpsMessageReportOutputHeaders)
     ], GetDpsMessageReportOutputRequest.prototype, "headers", void 0);
     return GetDpsMessageReportOutputRequest;
@@ -98,19 +98,19 @@ var GetDpsMessageReportOutputResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDpsMessageReportOutputResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetDpsMessageReportOutputResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetDpsMessageReportOutputResponse.prototype, "getDpsMessageReportOutput200ApplicationJsonBinaryString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDpsMessageReportOutputResponse.prototype, "statusCode", void 0);
     return GetDpsMessageReportOutputResponse;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AdTechnologyProviders
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Detected ad technology provider information.
 **/
 export class AdTechnologyProviders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detectedProviderIds" })
+  @SpeakeasyMetadata({ data: "json, name=detectedProviderIds" })
   detectedProviderIds?: string[];
 
-  @Metadata({ data: "json, name=hasUnidentifiedProvider" })
+  @SpeakeasyMetadata({ data: "json, name=hasUnidentifiedProvider" })
   hasUnidentifiedProvider?: boolean;
 }

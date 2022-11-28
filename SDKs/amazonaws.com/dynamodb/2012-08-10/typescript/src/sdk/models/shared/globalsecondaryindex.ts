@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeySchemaElement } from "./keyschemaelement";
 import { Projection } from "./projection";
 import { ProvisionedThroughput } from "./provisionedthroughput";
+
 
 
 // GlobalSecondaryIndex
@@ -10,15 +10,15 @@ import { ProvisionedThroughput } from "./provisionedthroughput";
  * Represents the properties of a global secondary index.
 **/
 export class GlobalSecondaryIndex extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IndexName" })
+  @SpeakeasyMetadata({ data: "json, name=IndexName" })
   indexName: string;
 
-  @Metadata({ data: "json, name=KeySchema", elemType: shared.KeySchemaElement })
+  @SpeakeasyMetadata({ data: "json, name=KeySchema", elemType: KeySchemaElement })
   keySchema: KeySchemaElement[];
 
-  @Metadata({ data: "json, name=Projection" })
+  @SpeakeasyMetadata({ data: "json, name=Projection" })
   projection: Projection;
 
-  @Metadata({ data: "json, name=ProvisionedThroughput" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedThroughput" })
   provisionedThroughput?: ProvisionedThroughput;
 }

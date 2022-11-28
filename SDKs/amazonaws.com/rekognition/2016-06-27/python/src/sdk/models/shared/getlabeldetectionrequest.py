@@ -1,14 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import labeldetectionsortby_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetLabelDetectionRequest:
-    job_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'JobId' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    sort_by: Optional[labeldetectionsortby_enum.LabelDetectionSortByEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SortBy' }})
+    job_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('JobId') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
+    sort_by: Optional[LabelDetectionSortByEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SortBy') }})
     

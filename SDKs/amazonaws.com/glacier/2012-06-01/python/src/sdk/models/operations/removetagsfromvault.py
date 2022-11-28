@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class RemoveTagsFromVaultPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    vault_name: str = field(default=None, metadata={'path_param': { 'field_name': 'vaultName', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    vault_name: str = field(metadata={'path_param': { 'field_name': 'vaultName', 'style': 'simple', 'explode': False }})
     
 class RemoveTagsFromVaultOperationEnum(str, Enum):
     REMOVE = "remove"
@@ -14,7 +19,7 @@ class RemoveTagsFromVaultOperationEnum(str, Enum):
 
 @dataclass
 class RemoveTagsFromVaultQueryParams:
-    operation: RemoveTagsFromVaultOperationEnum = field(default=None, metadata={'query_param': { 'field_name': 'operation', 'style': 'form', 'explode': True }})
+    operation: RemoveTagsFromVaultOperationEnum = field(metadata={'query_param': { 'field_name': 'operation', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,23 +36,23 @@ class RemoveTagsFromVaultHeaders:
 @dataclass_json
 @dataclass
 class RemoveTagsFromVaultRequestBody:
-    tag_keys: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TagKeys' }})
+    tag_keys: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TagKeys') }})
     
 
 @dataclass
 class RemoveTagsFromVaultRequest:
-    path_params: RemoveTagsFromVaultPathParams = field(default=None)
-    query_params: RemoveTagsFromVaultQueryParams = field(default=None)
-    headers: RemoveTagsFromVaultHeaders = field(default=None)
-    request: RemoveTagsFromVaultRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: RemoveTagsFromVaultHeaders = field()
+    path_params: RemoveTagsFromVaultPathParams = field()
+    query_params: RemoveTagsFromVaultQueryParams = field()
+    request: RemoveTagsFromVaultRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RemoveTagsFromVaultResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     missing_parameter_value_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

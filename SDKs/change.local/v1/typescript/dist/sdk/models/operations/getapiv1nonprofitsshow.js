@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetApiV1NonprofitsShowQueryParams = /** @class */ (function (_super) {
     __extends(GetApiV1NonprofitsShowQueryParams, _super);
@@ -30,7 +30,7 @@ var GetApiV1NonprofitsShowQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" }),
         __metadata("design:type", String)
     ], GetApiV1NonprofitsShowQueryParams.prototype, "id", void 0);
     return GetApiV1NonprofitsShowQueryParams;
@@ -42,7 +42,7 @@ var GetApiV1NonprofitsShowSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuth)
     ], GetApiV1NonprofitsShowSecurity.prototype, "basicAuth", void 0);
     return GetApiV1NonprofitsShowSecurity;
@@ -54,11 +54,11 @@ var GetApiV1NonprofitsShowRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiV1NonprofitsShowQueryParams)
     ], GetApiV1NonprofitsShowRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiV1NonprofitsShowSecurity)
     ], GetApiV1NonprofitsShowRequest.prototype, "security", void 0);
     return GetApiV1NonprofitsShowRequest;
@@ -70,11 +70,11 @@ var GetApiV1NonprofitsShowResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiV1NonprofitsShowResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiV1NonprofitsShowResponse.prototype, "statusCode", void 0);
     return GetApiV1NonprofitsShowResponse;

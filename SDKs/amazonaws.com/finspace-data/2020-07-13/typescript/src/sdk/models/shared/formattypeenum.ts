@@ -1,8 +1,9 @@
 
 
+
 export enum FormatTypeEnum {
-    Csv = "CSV"
-,    Json = "JSON"
-,    Parquet = "PARQUET"
-,    Xml = "XML"
+    Csv = "CSV",
+    Json = "JSON",
+    Parquet = "PARQUET",
+    Xml = "XML"
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var TestnetGetTokenIdPathParams = /** @class */ (function (_super) {
     __extends(TestnetGetTokenIdPathParams, _super);
@@ -30,7 +30,7 @@ var TestnetGetTokenIdPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=tokensymbol" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tokensymbol" }),
         __metadata("design:type", String)
     ], TestnetGetTokenIdPathParams.prototype, "tokensymbol", void 0);
     return TestnetGetTokenIdPathParams;
@@ -42,7 +42,7 @@ var TestnetGetTokenIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TestnetGetTokenIdPathParams)
     ], TestnetGetTokenIdRequest.prototype, "pathParams", void 0);
     return TestnetGetTokenIdRequest;
@@ -54,15 +54,15 @@ var TestnetGetTokenIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TestnetGetTokenIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TestnetGetTokenIdResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GetTokenIdResponse)
     ], TestnetGetTokenIdResponse.prototype, "getTokenIdResponse", void 0);
     return TestnetGetTokenIdResponse;

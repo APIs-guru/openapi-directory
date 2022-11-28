@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsBasePlansOffersGetPathParams:
-    base_plan_id: str = field(default=None, metadata={'path_param': { 'field_name': 'basePlanId', 'style': 'simple', 'explode': False }})
-    offer_id: str = field(default=None, metadata={'path_param': { 'field_name': 'offerId', 'style': 'simple', 'explode': False }})
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
-    product_id: str = field(default=None, metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
+    base_plan_id: str = field(metadata={'path_param': { 'field_name': 'basePlanId', 'style': 'simple', 'explode': False }})
+    offer_id: str = field(metadata={'path_param': { 'field_name': 'offerId', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    product_id: str = field(metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class AndroidpublisherMonetizationSubscriptionsBasePlansOffersGetQueryParams:
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsBasePlansOffersGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsBasePlansOffersGetRequest:
-    path_params: AndroidpublisherMonetizationSubscriptionsBasePlansOffersGetPathParams = field(default=None)
-    query_params: AndroidpublisherMonetizationSubscriptionsBasePlansOffersGetQueryParams = field(default=None)
-    security: AndroidpublisherMonetizationSubscriptionsBasePlansOffersGetSecurity = field(default=None)
+    path_params: AndroidpublisherMonetizationSubscriptionsBasePlansOffersGetPathParams = field()
+    query_params: AndroidpublisherMonetizationSubscriptionsBasePlansOffersGetQueryParams = field()
+    security: AndroidpublisherMonetizationSubscriptionsBasePlansOffersGetSecurity = field()
     
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsBasePlansOffersGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     subscription_offer: Optional[shared.SubscriptionOffer] = field(default=None)
     

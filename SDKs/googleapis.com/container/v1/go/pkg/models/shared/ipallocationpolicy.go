@@ -16,6 +16,8 @@ const (
 	IPAllocationPolicyStackTypeEnumIpv4Ipv6             IPAllocationPolicyStackTypeEnum = "IPV4_IPV6"
 )
 
+// IPAllocationPolicy
+// Configuration for controlling how IPs are allocated in the cluster.
 type IPAllocationPolicy struct {
 	ClusterIpv4Cidr            *string                               `json:"clusterIpv4Cidr,omitempty"`
 	ClusterIpv4CidrBlock       *string                               `json:"clusterIpv4CidrBlock,omitempty"`

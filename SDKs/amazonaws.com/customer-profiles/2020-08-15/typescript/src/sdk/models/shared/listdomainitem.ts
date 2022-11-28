@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListDomainItem
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object in a list that represents a domain.
 **/
 export class ListDomainItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=LastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedAt" })
   lastUpdatedAt: Date;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 }

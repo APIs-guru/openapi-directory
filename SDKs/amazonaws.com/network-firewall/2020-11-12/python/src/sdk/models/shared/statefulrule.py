@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from typing import List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import statefulaction_enum
-from . import header
-from . import ruleoption
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StatefulRule:
-    action: statefulaction_enum.StatefulActionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Action' }})
-    header: header.Header = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Header' }})
-    rule_options: List[ruleoption.RuleOption] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RuleOptions' }})
+    r"""StatefulRule
+    A single 5-tuple stateful rule, for use in a stateful rule group.
+    """
+    
+    action: StatefulActionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Action') }})
+    header: Header = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Header') }})
+    rule_options: List[RuleOption] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RuleOptions') }})
     

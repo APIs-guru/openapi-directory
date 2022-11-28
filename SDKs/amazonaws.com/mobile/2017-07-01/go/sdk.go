@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://mobile.{region}.amazonaws.com",
 	"https://mobile.{region}.amazonaws.com",
 	"http://mobile.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/mobile/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateProject -  Creates an AWS Mobile Hub project.
 func (s *SDK) CreateProject(ctx context.Context, request operations.CreateProjectRequest) (*operations.CreateProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/projects"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -83,7 +110,7 @@ func (s *SDK) CreateProject(ctx context.Context, request operations.CreateProjec
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -183,8 +210,9 @@ func (s *SDK) CreateProject(ctx context.Context, request operations.CreateProjec
 	return res, nil
 }
 
+// DeleteProject -  Delets a project in AWS Mobile Hub.
 func (s *SDK) DeleteProject(ctx context.Context, request operations.DeleteProjectRequest) (*operations.DeleteProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/projects/{projectId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -194,7 +222,7 @@ func (s *SDK) DeleteProject(ctx context.Context, request operations.DeleteProjec
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -274,8 +302,9 @@ func (s *SDK) DeleteProject(ctx context.Context, request operations.DeleteProjec
 	return res, nil
 }
 
+// DescribeBundle -  Get the bundle details for the requested bundle id.
 func (s *SDK) DescribeBundle(ctx context.Context, request operations.DescribeBundleRequest) (*operations.DescribeBundleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bundles/{bundleId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -285,7 +314,7 @@ func (s *SDK) DescribeBundle(ctx context.Context, request operations.DescribeBun
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -375,8 +404,9 @@ func (s *SDK) DescribeBundle(ctx context.Context, request operations.DescribeBun
 	return res, nil
 }
 
+// DescribeProject -  Gets details about a project in AWS Mobile Hub.
 func (s *SDK) DescribeProject(ctx context.Context, request operations.DescribeProjectRequest) (*operations.DescribeProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/project#projectId"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -388,7 +418,7 @@ func (s *SDK) DescribeProject(ctx context.Context, request operations.DescribePr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -478,8 +508,9 @@ func (s *SDK) DescribeProject(ctx context.Context, request operations.DescribePr
 	return res, nil
 }
 
+// ExportBundle -  Generates customized software development kit (SDK) and or tool packages used to integrate mobile web or mobile app clients with backend AWS resources.
 func (s *SDK) ExportBundle(ctx context.Context, request operations.ExportBundleRequest) (*operations.ExportBundleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bundles/{bundleId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -491,7 +522,7 @@ func (s *SDK) ExportBundle(ctx context.Context, request operations.ExportBundleR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -581,8 +612,9 @@ func (s *SDK) ExportBundle(ctx context.Context, request operations.ExportBundleR
 	return res, nil
 }
 
+// ExportProject -  Exports project configuration to a snapshot which can be downloaded and shared. Note that mobile app push credentials are encrypted in exported projects, so they can only be shared successfully within the same AWS account.
 func (s *SDK) ExportProject(ctx context.Context, request operations.ExportProjectRequest) (*operations.ExportProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/exports/{projectId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -592,7 +624,7 @@ func (s *SDK) ExportProject(ctx context.Context, request operations.ExportProjec
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -682,8 +714,9 @@ func (s *SDK) ExportProject(ctx context.Context, request operations.ExportProjec
 	return res, nil
 }
 
+// ListBundles -  List all available bundles.
 func (s *SDK) ListBundles(ctx context.Context, request operations.ListBundlesRequest) (*operations.ListBundlesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/bundles"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -695,7 +728,7 @@ func (s *SDK) ListBundles(ctx context.Context, request operations.ListBundlesReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -775,8 +808,9 @@ func (s *SDK) ListBundles(ctx context.Context, request operations.ListBundlesReq
 	return res, nil
 }
 
+// ListProjects -  Lists projects in AWS Mobile Hub.
 func (s *SDK) ListProjects(ctx context.Context, request operations.ListProjectsRequest) (*operations.ListProjectsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/projects"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -788,7 +822,7 @@ func (s *SDK) ListProjects(ctx context.Context, request operations.ListProjectsR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -868,8 +902,9 @@ func (s *SDK) ListProjects(ctx context.Context, request operations.ListProjectsR
 	return res, nil
 }
 
+// UpdateProject -  Update an existing project.
 func (s *SDK) UpdateProject(ctx context.Context, request operations.UpdateProjectRequest) (*operations.UpdateProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/update#projectId"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -891,7 +926,7 @@ func (s *SDK) UpdateProject(ctx context.Context, request operations.UpdateProjec
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

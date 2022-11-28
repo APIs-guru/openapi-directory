@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // NotificationConfiguration
 /**
  * Describes a notification topic and its status. Notification topics are used for publishing DAX events to subscribers using Amazon Simple Notification Service (SNS).
@@ -33,11 +33,11 @@ var NotificationConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=TopicArn" }),
+        SpeakeasyMetadata({ data: "json, name=TopicArn" }),
         __metadata("design:type", String)
     ], NotificationConfiguration.prototype, "topicArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=TopicStatus" }),
+        SpeakeasyMetadata({ data: "json, name=TopicStatus" }),
         __metadata("design:type", String)
     ], NotificationConfiguration.prototype, "topicStatus", void 0);
     return NotificationConfiguration;

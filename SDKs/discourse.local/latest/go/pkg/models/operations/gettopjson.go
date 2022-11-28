@@ -5,10 +5,6 @@ type GetTopJSONHeaders struct {
 	APIUsername string `header:"style=simple,explode=false,name=Api-Username"`
 }
 
-type GetTopJSONRequest struct {
-	Headers GetTopJSONHeaders
-}
-
 type GetTopJSON200ApplicationJSONTopicListTopicsPosters struct {
 	Description    *string `json:"description,omitempty"`
 	Extras         *string `json:"extras,omitempty"`
@@ -73,6 +69,10 @@ type GetTopJSON200ApplicationJSON struct {
 	PrimaryGroups []interface{}                          `json:"primary_groups,omitempty"`
 	TopicList     *GetTopJSON200ApplicationJSONTopicList `json:"topic_list,omitempty"`
 	Users         []GetTopJSON200ApplicationJSONUsers    `json:"users,omitempty"`
+}
+
+type GetTopJSONRequest struct {
+	Headers GetTopJSONHeaders
 }
 
 type GetTopJSONResponse struct {

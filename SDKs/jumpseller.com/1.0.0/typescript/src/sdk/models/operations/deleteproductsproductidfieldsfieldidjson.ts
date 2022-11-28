@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteProductsProductIdFieldsFieldIdJsonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=field_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=field_id" })
   fieldId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=product_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=product_id" })
   productId: number;
 }
 
 
 export class DeleteProductsProductIdFieldsFieldIdJsonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=authtoken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authtoken" })
   authtoken: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=login" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=login" })
   login: string;
 }
 
 
 export class DeleteProductsProductIdFieldsFieldIdJsonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteProductsProductIdFieldsFieldIdJsonPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DeleteProductsProductIdFieldsFieldIdJsonQueryParams;
 }
 
 
 export class DeleteProductsProductIdFieldsFieldIdJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   messageObject?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFound?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

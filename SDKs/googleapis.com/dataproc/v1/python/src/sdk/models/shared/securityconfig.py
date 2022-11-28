@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import identityconfig
-from . import kerberosconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SecurityConfig:
-    identity_config: Optional[identityconfig.IdentityConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'identityConfig' }})
-    kerberos_config: Optional[kerberosconfig.KerberosConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kerberosConfig' }})
+    r"""SecurityConfig
+    Security related configuration, including encryption, Kerberos, etc.
+    """
+    
+    identity_config: Optional[IdentityConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('identityConfig') }})
+    kerberos_config: Optional[KerberosConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kerberosConfig') }})
     

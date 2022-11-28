@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GymGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=gymID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=gymID" })
   gymId: number;
 }
 
 
 export class GymGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GymGetPathParams;
 }
 
 
 export class GymGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiResponse?: shared.ApiResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   defaultResponseDtoOfGymDto?: shared.DefaultResponseDtoOfGymDto;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

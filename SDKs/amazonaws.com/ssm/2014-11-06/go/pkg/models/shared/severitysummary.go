@@ -1,5 +1,7 @@
 package shared
 
+// SeveritySummary
+// The number of managed instances found for each patch severity level defined in the request filter.
 type SeveritySummary struct {
 	CriticalCount      *int64 `json:"CriticalCount,omitempty"`
 	HighCount          *int64 `json:"HighCount,omitempty"`

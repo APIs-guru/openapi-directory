@@ -1,24 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Domain } from "./domain";
 
 
+
 export class CreateOrganizationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Alias" })
+  @SpeakeasyMetadata({ data: "json, name=Alias" })
   alias: string;
 
-  @Metadata({ data: "json, name=ClientToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientToken" })
   clientToken?: string;
 
-  @Metadata({ data: "json, name=DirectoryId" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryId" })
   directoryId?: string;
 
-  @Metadata({ data: "json, name=Domains", elemType: shared.Domain })
+  @SpeakeasyMetadata({ data: "json, name=Domains", elemType: Domain })
   domains?: Domain[];
 
-  @Metadata({ data: "json, name=EnableInteroperability" })
+  @SpeakeasyMetadata({ data: "json, name=EnableInteroperability" })
   enableInteroperability?: boolean;
 
-  @Metadata({ data: "json, name=KmsKeyArn" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyArn" })
   kmsKeyArn?: string;
 }

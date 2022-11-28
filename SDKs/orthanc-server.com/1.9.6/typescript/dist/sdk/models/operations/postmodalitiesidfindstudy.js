@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostModalitiesIdFindStudyPathParams = /** @class */ (function (_super) {
     __extends(PostModalitiesIdFindStudyPathParams, _super);
     function PostModalitiesIdFindStudyPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], PostModalitiesIdFindStudyPathParams.prototype, "id", void 0);
     return PostModalitiesIdFindStudyPathParams;
@@ -41,11 +41,11 @@ var PostModalitiesIdFindStudyRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostModalitiesIdFindStudyPathParams)
     ], PostModalitiesIdFindStudyRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], PostModalitiesIdFindStudyRequest.prototype, "request", void 0);
     return PostModalitiesIdFindStudyRequest;
@@ -57,15 +57,15 @@ var PostModalitiesIdFindStudyResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostModalitiesIdFindStudyResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostModalitiesIdFindStudyResponse.prototype, "postModalitiesIdFindStudy200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostModalitiesIdFindStudyResponse.prototype, "statusCode", void 0);
     return PostModalitiesIdFindStudyResponse;

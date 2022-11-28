@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateDomainPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=DomainName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=DomainName" })
   domainName: string;
 }
 
 
 export class CreateDomainHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,63 +38,63 @@ export class CreateDomainHeaders extends SpeakeasyBase {
  * The flag that enables the matching process of duplicate profiles.
 **/
 export class CreateDomainRequestBodyMatching extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 }
 
 
 export class CreateDomainRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeadLetterQueueUrl" })
+  @SpeakeasyMetadata({ data: "json, name=DeadLetterQueueUrl" })
   deadLetterQueueUrl?: string;
 
-  @Metadata({ data: "json, name=DefaultEncryptionKey" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultEncryptionKey" })
   defaultEncryptionKey?: string;
 
-  @Metadata({ data: "json, name=DefaultExpirationDays" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultExpirationDays" })
   defaultExpirationDays: number;
 
-  @Metadata({ data: "json, name=Matching" })
+  @SpeakeasyMetadata({ data: "json, name=Matching" })
   matching?: CreateDomainRequestBodyMatching;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 }
 
 
 export class CreateDomainRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateDomainPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateDomainHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateDomainRequestBody;
 }
 
 
 export class CreateDomainResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createDomainResponse?: shared.CreateDomainResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

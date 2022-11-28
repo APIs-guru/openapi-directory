@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PubsubNotificationSettings
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Settings for Pub/Sub notifications, all methods require that the caller is a direct user of the merchant center account.
 **/
 export class PubsubNotificationSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudTopicName" })
+  @SpeakeasyMetadata({ data: "json, name=cloudTopicName" })
   cloudTopicName?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=registeredEvents" })
+  @SpeakeasyMetadata({ data: "json, name=registeredEvents" })
   registeredEvents?: string[];
 }

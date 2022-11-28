@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DeleteBackendPathParams:
-    app_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
-    backend_environment_name: str = field(default=None, metadata={'path_param': { 'field_name': 'backendEnvironmentName', 'style': 'simple', 'explode': False }})
+    app_id: str = field(metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
+    backend_environment_name: str = field(metadata={'path_param': { 'field_name': 'backendEnvironmentName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,17 +25,17 @@ class DeleteBackendHeaders:
 
 @dataclass
 class DeleteBackendRequest:
-    path_params: DeleteBackendPathParams = field(default=None)
-    headers: DeleteBackendHeaders = field(default=None)
+    headers: DeleteBackendHeaders = field()
+    path_params: DeleteBackendPathParams = field()
     
 
 @dataclass
 class DeleteBackendResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     delete_backend_response: Optional[shared.DeleteBackendResponse] = field(default=None)
     gateway_timeout_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

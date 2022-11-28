@@ -1,5 +1,7 @@
 package shared
 
+// StructuredQuery
+// A Firestore query.
 type StructuredQuery struct {
 	EndAt   *Cursor              `json:"endAt,omitempty"`
 	From    []CollectionSelector `json:"from,omitempty"`

@@ -24,10 +24,16 @@ type ChatSpacesMessagesUpdateQueryParams struct {
 	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
 }
 
+type ChatSpacesMessagesUpdateSecurity struct {
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+}
+
 type ChatSpacesMessagesUpdateRequest struct {
 	PathParams  ChatSpacesMessagesUpdatePathParams
 	QueryParams ChatSpacesMessagesUpdateQueryParams
-	Request     *shared.Message `request:"mediaType=application/json"`
+	Request     *shared.MessageInput `request:"mediaType=application/json"`
+	Security    ChatSpacesMessagesUpdateSecurity
 }
 
 type ChatSpacesMessagesUpdateResponse struct {

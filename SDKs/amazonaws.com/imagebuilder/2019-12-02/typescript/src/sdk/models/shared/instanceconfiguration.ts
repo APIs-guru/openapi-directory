@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceBlockDeviceMapping } from "./instanceblockdevicemapping";
+
 
 
 // InstanceConfiguration
@@ -8,9 +8,9 @@ import { InstanceBlockDeviceMapping } from "./instanceblockdevicemapping";
  * Defines a custom source AMI and block device mapping configurations of an instance used for building and testing container images.
 **/
 export class InstanceConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blockDeviceMappings", elemType: shared.InstanceBlockDeviceMapping })
+  @SpeakeasyMetadata({ data: "json, name=blockDeviceMappings", elemType: InstanceBlockDeviceMapping })
   blockDeviceMappings?: InstanceBlockDeviceMapping[];
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: string;
 }

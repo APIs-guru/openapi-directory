@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateImageVersionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ImageVersionArn" })
+  @SpeakeasyMetadata({ data: "json, name=ImageVersionArn" })
   imageVersionArn?: string;
 }

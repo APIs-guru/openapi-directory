@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CalendarEventsMovePathParams:
-    calendar_id: str = field(default=None, metadata={'path_param': { 'field_name': 'calendarId', 'style': 'simple', 'explode': False }})
-    event_id: str = field(default=None, metadata={'path_param': { 'field_name': 'eventId', 'style': 'simple', 'explode': False }})
+    calendar_id: str = field(metadata={'path_param': { 'field_name': 'calendarId', 'style': 'simple', 'explode': False }})
+    event_id: str = field(metadata={'path_param': { 'field_name': 'eventId', 'style': 'simple', 'explode': False }})
     
 class CalendarEventsMoveSendUpdatesEnum(str, Enum):
     ALL = "all"
@@ -16,8 +20,8 @@ class CalendarEventsMoveSendUpdatesEnum(str, Enum):
 
 @dataclass
 class CalendarEventsMoveQueryParams:
+    destination: str = field(metadata={'query_param': { 'field_name': 'destination', 'style': 'form', 'explode': True }})
     alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
-    destination: str = field(default=None, metadata={'query_param': { 'field_name': 'destination', 'style': 'form', 'explode': True }})
     fields: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fields', 'style': 'form', 'explode': True }})
     key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'key', 'style': 'form', 'explode': True }})
     oauth_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'oauth_token', 'style': 'form', 'explode': True }})
@@ -30,14 +34,14 @@ class CalendarEventsMoveQueryParams:
 
 @dataclass
 class CalendarEventsMoveSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CalendarEventsMoveSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -48,14 +52,14 @@ class CalendarEventsMoveSecurity:
 
 @dataclass
 class CalendarEventsMoveRequest:
-    path_params: CalendarEventsMovePathParams = field(default=None)
-    query_params: CalendarEventsMoveQueryParams = field(default=None)
-    security: CalendarEventsMoveSecurity = field(default=None)
+    path_params: CalendarEventsMovePathParams = field()
+    query_params: CalendarEventsMoveQueryParams = field()
+    security: CalendarEventsMoveSecurity = field()
     
 
 @dataclass
 class CalendarEventsMoveResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     event: Optional[shared.Event] = field(default=None)
-    status_code: int = field(default=None)
     

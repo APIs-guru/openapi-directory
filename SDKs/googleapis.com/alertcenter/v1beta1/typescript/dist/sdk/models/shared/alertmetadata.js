@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AlertMetadata
 /**
  * An alert metadata.
@@ -33,31 +33,31 @@ var AlertMetadata = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alertId" }),
+        SpeakeasyMetadata({ data: "json, name=alertId" }),
         __metadata("design:type", String)
     ], AlertMetadata.prototype, "alertId", void 0);
     __decorate([
-        Metadata({ data: "json, name=assignee" }),
+        SpeakeasyMetadata({ data: "json, name=assignee" }),
         __metadata("design:type", String)
     ], AlertMetadata.prototype, "assignee", void 0);
     __decorate([
-        Metadata({ data: "json, name=customerId" }),
+        SpeakeasyMetadata({ data: "json, name=customerId" }),
         __metadata("design:type", String)
     ], AlertMetadata.prototype, "customerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], AlertMetadata.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=severity" }),
+        SpeakeasyMetadata({ data: "json, name=severity" }),
         __metadata("design:type", String)
     ], AlertMetadata.prototype, "severity", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], AlertMetadata.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], AlertMetadata.prototype, "updateTime", void 0);
     return AlertMetadata;

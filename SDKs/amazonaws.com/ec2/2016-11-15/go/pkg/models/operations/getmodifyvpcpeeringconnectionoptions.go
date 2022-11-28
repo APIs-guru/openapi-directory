@@ -1,5 +1,7 @@
 package operations
 
+// GetModifyVpcPeeringConnectionOptionsAccepterPeeringConnectionOptions
+// The VPC peering connection options.
 type GetModifyVpcPeeringConnectionOptionsAccepterPeeringConnectionOptions struct {
 	AllowDNSResolutionFromRemoteVpc            *bool `queryParam:"name=AllowDnsResolutionFromRemoteVpc"`
 	AllowEgressFromLocalClassicLinkToRemoteVpc *bool `queryParam:"name=AllowEgressFromLocalClassicLinkToRemoteVpc"`
@@ -12,6 +14,8 @@ const (
 	GetModifyVpcPeeringConnectionOptionsActionEnumModifyVpcPeeringConnectionOptions GetModifyVpcPeeringConnectionOptionsActionEnum = "ModifyVpcPeeringConnectionOptions"
 )
 
+// GetModifyVpcPeeringConnectionOptionsRequesterPeeringConnectionOptions
+// The VPC peering connection options.
 type GetModifyVpcPeeringConnectionOptionsRequesterPeeringConnectionOptions struct {
 	AllowDNSResolutionFromRemoteVpc            *bool `queryParam:"name=AllowDnsResolutionFromRemoteVpc"`
 	AllowEgressFromLocalClassicLinkToRemoteVpc *bool `queryParam:"name=AllowEgressFromLocalClassicLinkToRemoteVpc"`

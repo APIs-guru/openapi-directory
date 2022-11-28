@@ -1,5 +1,7 @@
 package shared
 
+// VpnGatewayInfo
+// For display only. Metadata associated with a Compute Engine VPN gateway.
 type VpnGatewayInfo struct {
 	DisplayName  *string `json:"displayName,omitempty"`
 	IPAddress    *string `json:"ipAddress,omitempty"`

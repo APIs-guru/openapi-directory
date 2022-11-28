@@ -1,5 +1,7 @@
 package shared
 
+// CloneStep
+// CloneStep holds information about the clone step progress.
 type CloneStep struct {
 	AdaptingOs              map[string]interface{} `json:"adaptingOs,omitempty"`
 	EndTime                 *string                `json:"endTime,omitempty"`

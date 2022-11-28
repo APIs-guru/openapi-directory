@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -24,14 +27,14 @@ class RequestSyslogEventsHeaders:
 
 @dataclass
 class RequestSyslogEventsRequest:
-    query_params: RequestSyslogEventsQueryParams = field(default=None)
-    headers: RequestSyslogEventsHeaders = field(default=None)
+    headers: RequestSyslogEventsHeaders = field()
+    query_params: RequestSyslogEventsQueryParams = field()
     
 
 @dataclass
 class RequestSyslogEventsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     syslog_event_list: Optional[shared.SyslogEventList] = field(default=None)
     

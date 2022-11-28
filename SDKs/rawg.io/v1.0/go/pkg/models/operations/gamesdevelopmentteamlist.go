@@ -14,16 +14,16 @@ type GamesDevelopmentTeamListQueryParams struct {
 	PageSize *int64  `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GamesDevelopmentTeamListRequest struct {
-	PathParams  GamesDevelopmentTeamListPathParams
-	QueryParams GamesDevelopmentTeamListQueryParams
-}
-
 type GamesDevelopmentTeamList200ApplicationJSON struct {
 	Count    int64                   `json:"count"`
 	Next     *string                 `json:"next,omitempty"`
 	Previous *string                 `json:"previous,omitempty"`
 	Results  []shared.GamePersonList `json:"results"`
+}
+
+type GamesDevelopmentTeamListRequest struct {
+	PathParams  GamesDevelopmentTeamListPathParams
+	QueryParams GamesDevelopmentTeamListQueryParams
 }
 
 type GamesDevelopmentTeamListResponse struct {

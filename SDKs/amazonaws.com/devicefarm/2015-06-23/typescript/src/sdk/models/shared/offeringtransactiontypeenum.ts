@@ -1,7 +1,8 @@
 
 
+
 export enum OfferingTransactionTypeEnum {
-    Purchase = "PURCHASE"
-,    Renew = "RENEW"
-,    System = "SYSTEM"
+    Purchase = "PURCHASE",
+    Renew = "RENEW",
+    System = "SYSTEM"
 }

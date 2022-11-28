@@ -14,6 +14,8 @@ const (
 	UpdateOpenIDIdpConfigRequestUserInfoSourceEnumIDToken          UpdateOpenIDIdpConfigRequestUserInfoSourceEnum = "id_token"
 )
 
+// UpdateOpenIDIdpConfigRequest
+// Request model for updating an OpenID Connect IDP configuration
 type UpdateOpenIDIdpConfigRequest struct {
 	AuthorizationEndPointURL  *string                                         `json:"authorizationEndPointUrl,omitempty"`
 	ClientID                  *string                                         `json:"clientId,omitempty"`

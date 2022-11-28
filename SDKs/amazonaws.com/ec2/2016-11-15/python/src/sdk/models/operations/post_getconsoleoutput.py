@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetConsoleOutputActionEnum(str, Enum):
     GET_CONSOLE_OUTPUT = "GetConsoleOutput"
@@ -10,8 +14,8 @@ class PostGetConsoleOutputVersionEnum(str, Enum):
 
 @dataclass
 class PostGetConsoleOutputQueryParams:
-    action: PostGetConsoleOutputActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetConsoleOutputVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetConsoleOutputActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetConsoleOutputVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetConsoleOutputHeaders:
 
 @dataclass
 class PostGetConsoleOutputRequest:
-    query_params: PostGetConsoleOutputQueryParams = field(default=None)
-    headers: PostGetConsoleOutputHeaders = field(default=None)
+    headers: PostGetConsoleOutputHeaders = field()
+    query_params: PostGetConsoleOutputQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetConsoleOutputResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

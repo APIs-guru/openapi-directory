@@ -20,6 +20,8 @@ const (
 	EnterpriseCrmFrontendsEventbusProtoEventExecutionInfoProductEnumSecurity           EnterpriseCrmFrontendsEventbusProtoEventExecutionInfoProductEnum = "SECURITY"
 )
 
+// EnterpriseCrmFrontendsEventbusProtoEventExecutionInfo
+// Contains all the execution details for a workflow instance. Next available id: 24
 type EnterpriseCrmFrontendsEventbusProtoEventExecutionInfo struct {
 	ClientID                            *string                                                              `json:"clientId,omitempty"`
 	CreateTime                          *string                                                              `json:"createTime,omitempty"`

@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SecretsSecretsCreateRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.WritableSecret;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.WritableSecretInput;
 }
 
 
 export class SecretsSecretsCreateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   secret?: shared.Secret;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

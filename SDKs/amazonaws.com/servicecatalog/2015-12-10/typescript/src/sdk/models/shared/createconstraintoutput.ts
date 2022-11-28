@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConstraintDetail } from "./constraintdetail";
 import { StatusEnum } from "./statusenum";
 
 
+
 export class CreateConstraintOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConstraintDetail" })
+  @SpeakeasyMetadata({ data: "json, name=ConstraintDetail" })
   constraintDetail?: ConstraintDetail;
 
-  @Metadata({ data: "json, name=ConstraintParameters" })
+  @SpeakeasyMetadata({ data: "json, name=ConstraintParameters" })
   constraintParameters?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: StatusEnum;
 }

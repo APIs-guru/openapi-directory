@@ -1,86 +1,87 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PullsMergePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pull_number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pull_number" })
   pullNumber: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 export enum PullsMergeRequestBodyMergeMethodEnum {
-    Merge = "merge"
-,    Squash = "squash"
-,    Rebase = "rebase"
+    Merge = "merge",
+    Squash = "squash",
+    Rebase = "rebase"
 }
 
 
 export class PullsMergeRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commit_message" })
+  @SpeakeasyMetadata({ data: "json, name=commit_message" })
   commitMessage?: string;
 
-  @Metadata({ data: "json, name=commit_title" })
+  @SpeakeasyMetadata({ data: "json, name=commit_title" })
   commitTitle?: string;
 
-  @Metadata({ data: "json, name=merge_method" })
+  @SpeakeasyMetadata({ data: "json, name=merge_method" })
   mergeMethod?: PullsMergeRequestBodyMergeMethodEnum;
 
-  @Metadata({ data: "json, name=sha" })
+  @SpeakeasyMetadata({ data: "json, name=sha" })
   sha?: string;
 }
 
 
-export class PullsMergeRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PullsMergePathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PullsMergeRequestBody;
-}
-
-
 export class PullsMerge405ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PullsMerge409ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class PullsMergeRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PullsMergePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PullsMergeRequestBody;
+}
+
+
 export class PullsMergeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullRequestMergeResult?: shared.PullRequestMergeResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullsMerge405ApplicationJsonObject?: PullsMerge405ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullsMerge409ApplicationJsonObject?: PullsMerge409ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

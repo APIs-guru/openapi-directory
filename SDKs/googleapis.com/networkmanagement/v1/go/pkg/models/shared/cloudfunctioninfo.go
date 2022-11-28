@@ -1,5 +1,7 @@
 package shared
 
+// CloudFunctionInfo
+// For display only. Metadata associated with a Cloud Function.
 type CloudFunctionInfo struct {
 	DisplayName *string `json:"displayName,omitempty"`
 	Location    *string `json:"location,omitempty"`

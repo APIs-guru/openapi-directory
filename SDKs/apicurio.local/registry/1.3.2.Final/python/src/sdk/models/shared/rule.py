@@ -1,12 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import ruletype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Rule:
-    config: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'config' }})
-    type: Optional[ruletype_enum.RuleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    config: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('config') }})
+    type: Optional[RuleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TargetingRuleScope } from "./targetingrulescope";
+
 
 
 // UpgradeTargetingRule
@@ -7,12 +8,12 @@ import { TargetingRuleScope } from "./targetingrulescope";
  * Represents a targeting rule of the form: User currently has {scope} [with billing period {billing_period}].
 **/
 export class UpgradeTargetingRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billingPeriodDuration" })
+  @SpeakeasyMetadata({ data: "json, name=billingPeriodDuration" })
   billingPeriodDuration?: string;
 
-  @Metadata({ data: "json, name=oncePerUser" })
+  @SpeakeasyMetadata({ data: "json, name=oncePerUser" })
   oncePerUser?: boolean;
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope?: TargetingRuleScope;
 }

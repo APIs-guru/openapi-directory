@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Destiny2GetCollectibleNodeDetailsPathParams = /** @class */ (function (_super) {
     __extends(Destiny2GetCollectibleNodeDetailsPathParams, _super);
     function Destiny2GetCollectibleNodeDetailsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=characterId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=characterId" }),
         __metadata("design:type", Number)
     ], Destiny2GetCollectibleNodeDetailsPathParams.prototype, "characterId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=collectiblePresentationNodeHash" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=collectiblePresentationNodeHash" }),
         __metadata("design:type", Number)
     ], Destiny2GetCollectibleNodeDetailsPathParams.prototype, "collectiblePresentationNodeHash", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" }),
         __metadata("design:type", Number)
     ], Destiny2GetCollectibleNodeDetailsPathParams.prototype, "destinyMembershipId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
         __metadata("design:type", Number)
     ], Destiny2GetCollectibleNodeDetailsPathParams.prototype, "membershipType", void 0);
     return Destiny2GetCollectibleNodeDetailsPathParams;
@@ -53,7 +53,7 @@ var Destiny2GetCollectibleNodeDetailsQueryParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=components" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=components" }),
         __metadata("design:type", Array)
     ], Destiny2GetCollectibleNodeDetailsQueryParams.prototype, "components", void 0);
     return Destiny2GetCollectibleNodeDetailsQueryParams;
@@ -65,11 +65,11 @@ var Destiny2GetCollectibleNodeDetailsRequest = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetCollectibleNodeDetailsPathParams)
     ], Destiny2GetCollectibleNodeDetailsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetCollectibleNodeDetailsQueryParams)
     ], Destiny2GetCollectibleNodeDetailsRequest.prototype, "queryParams", void 0);
     return Destiny2GetCollectibleNodeDetailsRequest;
@@ -81,15 +81,15 @@ var Destiny2GetCollectibleNodeDetailsResponse = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], Destiny2GetCollectibleNodeDetailsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], Destiny2GetCollectibleNodeDetailsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], Destiny2GetCollectibleNodeDetailsResponse.prototype, "statusCode", void 0);
     return Destiny2GetCollectibleNodeDetailsResponse;

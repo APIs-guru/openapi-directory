@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TeardownTag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=stopTeardownOnFailure" })
+  @SpeakeasyMetadata({ data: "json, name=stopTeardownOnFailure" })
   stopTeardownOnFailure?: boolean;
 
-  @Metadata({ data: "json, name=tagName" })
+  @SpeakeasyMetadata({ data: "json, name=tagName" })
   tagName?: string;
 }

@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TournamentHierarchyFormatEnum {
-    Xml = "XML"
-,    Json = "JSON"
+    Xml = "XML",
+    Json = "JSON"
 }
 
 
 export class TournamentHierarchyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: TournamentHierarchyFormatEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=season" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=season" })
   season: string;
 }
 
 
 export class TournamentHierarchyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TournamentHierarchyPathParams;
 }
 
 
 export class TournamentHierarchyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tournament?: any;
 }

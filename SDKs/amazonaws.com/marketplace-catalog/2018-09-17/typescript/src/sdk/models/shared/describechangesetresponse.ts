@@ -1,35 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChangeSummary } from "./changesummary";
 import { FailureCodeEnum } from "./failurecodeenum";
 import { ChangeStatusEnum } from "./changestatusenum";
 
 
+
 export class DescribeChangeSetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChangeSet", elemType: shared.ChangeSummary })
+  @SpeakeasyMetadata({ data: "json, name=ChangeSet", elemType: ChangeSummary })
   changeSet?: ChangeSummary[];
 
-  @Metadata({ data: "json, name=ChangeSetArn" })
+  @SpeakeasyMetadata({ data: "json, name=ChangeSetArn" })
   changeSetArn?: string;
 
-  @Metadata({ data: "json, name=ChangeSetId" })
+  @SpeakeasyMetadata({ data: "json, name=ChangeSetId" })
   changeSetId?: string;
 
-  @Metadata({ data: "json, name=ChangeSetName" })
+  @SpeakeasyMetadata({ data: "json, name=ChangeSetName" })
   changeSetName?: string;
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=FailureCode" })
+  @SpeakeasyMetadata({ data: "json, name=FailureCode" })
   failureCode?: FailureCodeEnum;
 
-  @Metadata({ data: "json, name=FailureDescription" })
+  @SpeakeasyMetadata({ data: "json, name=FailureDescription" })
   failureDescription?: string;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ChangeStatusEnum;
 }

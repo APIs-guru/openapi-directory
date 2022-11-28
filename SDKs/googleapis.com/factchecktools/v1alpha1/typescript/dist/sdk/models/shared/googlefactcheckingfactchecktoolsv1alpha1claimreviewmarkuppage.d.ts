@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor } from "./googlefactcheckingfactchecktoolsv1alpha1claimreviewauthor";
 import { GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup } from "./googlefactcheckingfactchecktoolsv1alpha1claimreviewmarkup";
 /**

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudAssuredworkloadsV1beta1ViolationRemediationInstructions } from "./googlecloudassuredworkloadsv1beta1violationremediationinstructions";
 export var GoogleCloudAssuredworkloadsV1beta1ViolationRemediationRemediationTypeEnum;
 (function (GoogleCloudAssuredworkloadsV1beta1ViolationRemediationRemediationTypeEnum) {
@@ -42,15 +42,15 @@ var GoogleCloudAssuredworkloadsV1beta1ViolationRemediation = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=compliantValues" }),
+        SpeakeasyMetadata({ data: "json, name=compliantValues" }),
         __metadata("design:type", Array)
     ], GoogleCloudAssuredworkloadsV1beta1ViolationRemediation.prototype, "compliantValues", void 0);
     __decorate([
-        Metadata({ data: "json, name=instructions" }),
+        SpeakeasyMetadata({ data: "json, name=instructions" }),
         __metadata("design:type", GoogleCloudAssuredworkloadsV1beta1ViolationRemediationInstructions)
     ], GoogleCloudAssuredworkloadsV1beta1ViolationRemediation.prototype, "instructions", void 0);
     __decorate([
-        Metadata({ data: "json, name=remediationType" }),
+        SpeakeasyMetadata({ data: "json, name=remediationType" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1beta1ViolationRemediation.prototype, "remediationType", void 0);
     return GoogleCloudAssuredworkloadsV1beta1ViolationRemediation;

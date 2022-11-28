@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetFolderPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetFolderQueryParams:
 
 @dataclass
 class GetFolderSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetFolderRequest:
-    path_params: GetFolderPathParams = field(default=None)
-    query_params: GetFolderQueryParams = field(default=None)
-    security: GetFolderSecurity = field(default=None)
+    path_params: GetFolderPathParams = field()
+    query_params: GetFolderQueryParams = field()
+    security: GetFolderSecurity = field()
     
 
 @dataclass
 class GetFolderResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_error: Optional[shared.APIError] = field(default=None)
-    content_type: str = field(default=None)
     folder: Optional[shared.Folder] = field(default=None)
-    status_code: int = field(default=None)
     

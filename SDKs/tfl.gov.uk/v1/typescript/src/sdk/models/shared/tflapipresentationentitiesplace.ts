@@ -1,37 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesAdditionalProperties } from "./tflapipresentationentitiesadditionalproperties";
-import { TflApiPresentationEntitiesPlace } from "./tflapipresentationentitiesplace";
+
 
 
 export class TflApiPresentationEntitiesPlace extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalProperties", elemType: shared.TflApiPresentationEntitiesAdditionalProperties })
+  @SpeakeasyMetadata({ data: "json, name=additionalProperties", elemType: TflApiPresentationEntitiesAdditionalProperties })
   additionalProperties?: TflApiPresentationEntitiesAdditionalProperties[];
 
-  @Metadata({ data: "json, name=children", elemType: shared.TflApiPresentationEntitiesPlace })
+  @SpeakeasyMetadata({ data: "json, name=children", elemType: TflApiPresentationEntitiesPlace })
   children?: TflApiPresentationEntitiesPlace[];
 
-  @Metadata({ data: "json, name=childrenUrls" })
+  @SpeakeasyMetadata({ data: "json, name=childrenUrls" })
   childrenUrls?: string[];
 
-  @Metadata({ data: "json, name=commonName" })
+  @SpeakeasyMetadata({ data: "json, name=commonName" })
   commonName?: string;
 
-  @Metadata({ data: "json, name=distance" })
+  @SpeakeasyMetadata({ data: "json, name=distance" })
   distance?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lat" })
+  @SpeakeasyMetadata({ data: "json, name=lat" })
   lat?: number;
 
-  @Metadata({ data: "json, name=lon" })
+  @SpeakeasyMetadata({ data: "json, name=lon" })
   lon?: number;
 
-  @Metadata({ data: "json, name=placeType" })
+  @SpeakeasyMetadata({ data: "json, name=placeType" })
   placeType?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

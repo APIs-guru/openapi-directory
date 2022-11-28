@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum GetMappingValuesKeyKeyEnum {
     IdType = "idType",
     ExchCode = "exchCode",
@@ -11,11 +11,11 @@ export declare enum GetMappingValuesKeyKeyEnum {
 export declare class GetMappingValuesKeyPathParams extends SpeakeasyBase {
     key: GetMappingValuesKeyKeyEnum;
 }
-export declare class GetMappingValuesKeyRequest extends SpeakeasyBase {
-    pathParams: GetMappingValuesKeyPathParams;
-}
 export declare class GetMappingValuesKey200ApplicationJson extends SpeakeasyBase {
     values?: string[];
+}
+export declare class GetMappingValuesKeyRequest extends SpeakeasyBase {
+    pathParams: GetMappingValuesKeyPathParams;
 }
 export declare class GetMappingValuesKeyResponse extends SpeakeasyBase {
     contentType: string;

@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ReactionsListForTeamDiscussionCommentPathParams:
-    comment_number: int = field(default=None, metadata={'path_param': { 'field_name': 'comment_number', 'style': 'simple', 'explode': False }})
-    discussion_number: int = field(default=None, metadata={'path_param': { 'field_name': 'discussion_number', 'style': 'simple', 'explode': False }})
-    team_id: int = field(default=None, metadata={'path_param': { 'field_name': 'team_id', 'style': 'simple', 'explode': False }})
+    comment_number: int = field(metadata={'path_param': { 'field_name': 'comment_number', 'style': 'simple', 'explode': False }})
+    discussion_number: int = field(metadata={'path_param': { 'field_name': 'discussion_number', 'style': 'simple', 'explode': False }})
+    team_id: int = field(metadata={'path_param': { 'field_name': 'team_id', 'style': 'simple', 'explode': False }})
     
 class ReactionsListForTeamDiscussionCommentContentEnum(str, Enum):
     PLUS_1 = "+1"
@@ -29,20 +30,20 @@ class ReactionsListForTeamDiscussionCommentQueryParams:
 
 @dataclass
 class ReactionsListForTeamDiscussionCommentHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'accept', 'style': 'simple', 'explode': False }})
+    accept: str = field(metadata={'header': { 'field_name': 'accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ReactionsListForTeamDiscussionCommentRequest:
-    path_params: ReactionsListForTeamDiscussionCommentPathParams = field(default=None)
-    query_params: ReactionsListForTeamDiscussionCommentQueryParams = field(default=None)
-    headers: ReactionsListForTeamDiscussionCommentHeaders = field(default=None)
+    headers: ReactionsListForTeamDiscussionCommentHeaders = field()
+    path_params: ReactionsListForTeamDiscussionCommentPathParams = field()
+    query_params: ReactionsListForTeamDiscussionCommentQueryParams = field()
     
 
 @dataclass
 class ReactionsListForTeamDiscussionCommentResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     reactions: Optional[List[shared.Reaction]] = field(default=None)
     

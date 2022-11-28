@@ -12,6 +12,8 @@ const (
 	VerificationOptionVerificationMethodEnumVettedPartner                 VerificationOptionVerificationMethodEnum = "VETTED_PARTNER"
 )
 
+// VerificationOption
+// The verification option represents how to verify the location (indicated by verification method) and where the verification will be sent to (indicated by display data).
 type VerificationOption struct {
 	AddressData        *AddressVerificationData                  `json:"addressData,omitempty"`
 	EmailData          *EmailVerificationData                    `json:"emailData,omitempty"`

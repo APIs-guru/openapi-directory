@@ -1,21 +1,22 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import acknowledgeactionconfiguration
-from . import customeractionname_enum
-from . import disableactionconfiguration
-from . import enableactionconfiguration
-from . import resetactionconfiguration
-from . import snoozeactionconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CustomerAction:
-    acknowledge_action_configuration: Optional[acknowledgeactionconfiguration.AcknowledgeActionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'acknowledgeActionConfiguration' }})
-    action_name: Optional[customeractionname_enum.CustomerActionNameEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actionName' }})
-    disable_action_configuration: Optional[disableactionconfiguration.DisableActionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disableActionConfiguration' }})
-    enable_action_configuration: Optional[enableactionconfiguration.EnableActionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enableActionConfiguration' }})
-    reset_action_configuration: Optional[resetactionconfiguration.ResetActionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resetActionConfiguration' }})
-    snooze_action_configuration: Optional[snoozeactionconfiguration.SnoozeActionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'snoozeActionConfiguration' }})
+    r"""CustomerAction
+    Contains information about the action that you can take to respond to the alarm.
+    """
+    
+    acknowledge_action_configuration: Optional[AcknowledgeActionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('acknowledgeActionConfiguration') }})
+    action_name: Optional[CustomerActionNameEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('actionName') }})
+    disable_action_configuration: Optional[DisableActionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('disableActionConfiguration') }})
+    enable_action_configuration: Optional[EnableActionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enableActionConfiguration') }})
+    reset_action_configuration: Optional[ResetActionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resetActionConfiguration') }})
+    snooze_action_configuration: Optional[SnoozeActionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('snoozeActionConfiguration') }})
     

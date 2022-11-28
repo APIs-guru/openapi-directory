@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BaseKpiResult } from "./basekpiresult";
+
 
 
 // ApplicationDateRangeKpiResponse
@@ -7,21 +8,21 @@ import { BaseKpiResult } from "./basekpiresult";
  * Provides the results of a query that retrieved the data for a standard metric that applies to an application, and provides information about that query.
 **/
 export class ApplicationDateRangeKpiResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationId" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationId" })
   applicationId: string;
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime: Date;
 
-  @Metadata({ data: "json, name=KpiName" })
+  @SpeakeasyMetadata({ data: "json, name=KpiName" })
   kpiName: string;
 
-  @Metadata({ data: "json, name=KpiResult" })
+  @SpeakeasyMetadata({ data: "json, name=KpiResult" })
   kpiResult: BaseKpiResult;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime: Date;
 }

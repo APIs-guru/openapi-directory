@@ -1,101 +1,102 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutChartPkPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class PutChartPkSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class PutChartPkRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PutChartPkPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.ChartRestApiPut;
-
-  @Metadata()
-  security: PutChartPkSecurity;
-}
-
-
 export class PutChartPk200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: shared.ChartRestApiPut;
 }
 
 
 export class PutChartPk400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutChartPk401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutChartPk403ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutChartPk404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutChartPk422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutChartPk500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class PutChartPkRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PutChartPkPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.ChartRestApiPut;
+
+  @SpeakeasyMetadata()
+  security: PutChartPkSecurity;
+}
+
+
 export class PutChartPkResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putChartPk200ApplicationJsonObject?: PutChartPk200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putChartPk400ApplicationJsonObject?: PutChartPk400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putChartPk401ApplicationJsonObject?: PutChartPk401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putChartPk403ApplicationJsonObject?: PutChartPk403ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putChartPk404ApplicationJsonObject?: PutChartPk404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putChartPk422ApplicationJsonObject?: PutChartPk422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putChartPk500ApplicationJsonObject?: PutChartPk500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,7 +1,8 @@
 
 
+
 export enum FindingStatusEnum {
-    Active = "ACTIVE"
-,    Archived = "ARCHIVED"
-,    Resolved = "RESOLVED"
+    Active = "ACTIVE",
+    Archived = "ARCHIVED",
+    Resolved = "RESOLVED"
 }

@@ -1,5 +1,7 @@
 package shared
 
+// GetRecordsOutput
+// Represents the output for <a>GetRecords</a>.
 type GetRecordsOutput struct {
 	ChildShards        []ChildShard `json:"ChildShards,omitempty"`
 	MillisBehindLatest *int64       `json:"MillisBehindLatest,omitempty"`

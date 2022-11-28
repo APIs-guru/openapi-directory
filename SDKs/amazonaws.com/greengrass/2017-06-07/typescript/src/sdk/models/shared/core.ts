@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Core
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a core.
 **/
 export class Core extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CertificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateArn" })
   certificateArn: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: string;
 
-  @Metadata({ data: "json, name=SyncShadow" })
+  @SpeakeasyMetadata({ data: "json, name=SyncShadow" })
   syncShadow?: boolean;
 
-  @Metadata({ data: "json, name=ThingArn" })
+  @SpeakeasyMetadata({ data: "json, name=ThingArn" })
   thingArn: string;
 }

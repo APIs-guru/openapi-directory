@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AuthDetailsRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=ipAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=realmId" })
+  @SpeakeasyMetadata({ data: "json, name=realmId" })
   realmId?: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 }

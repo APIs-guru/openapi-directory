@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteNetworkInterfaceActionEnum(str, Enum):
     DELETE_NETWORK_INTERFACE = "DeleteNetworkInterface"
@@ -10,10 +14,10 @@ class GetDeleteNetworkInterfaceVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteNetworkInterfaceQueryParams:
-    action: GetDeleteNetworkInterfaceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteNetworkInterfaceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    network_interface_id: str = field(metadata={'query_param': { 'field_name': 'NetworkInterfaceId', 'style': 'form', 'explode': True }})
+    version: GetDeleteNetworkInterfaceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    network_interface_id: str = field(default=None, metadata={'query_param': { 'field_name': 'NetworkInterfaceId', 'style': 'form', 'explode': True }})
-    version: GetDeleteNetworkInterfaceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,12 +33,12 @@ class GetDeleteNetworkInterfaceHeaders:
 
 @dataclass
 class GetDeleteNetworkInterfaceRequest:
-    query_params: GetDeleteNetworkInterfaceQueryParams = field(default=None)
-    headers: GetDeleteNetworkInterfaceHeaders = field(default=None)
+    headers: GetDeleteNetworkInterfaceHeaders = field()
+    query_params: GetDeleteNetworkInterfaceQueryParams = field()
     
 
 @dataclass
 class GetDeleteNetworkInterfaceResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

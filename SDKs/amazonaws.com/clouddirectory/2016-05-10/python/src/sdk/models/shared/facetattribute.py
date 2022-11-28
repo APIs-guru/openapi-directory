@@ -1,16 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import facetattributedefinition
-from . import facetattributereference
-from . import requiredattributebehavior_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class FacetAttribute:
-    attribute_definition: Optional[facetattributedefinition.FacetAttributeDefinition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AttributeDefinition' }})
-    attribute_reference: Optional[facetattributereference.FacetAttributeReference] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AttributeReference' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    required_behavior: Optional[requiredattributebehavior_enum.RequiredAttributeBehaviorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RequiredBehavior' }})
+    r"""FacetAttribute
+    An attribute that is associated with the <a>Facet</a>.
+    """
+    
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    attribute_definition: Optional[FacetAttributeDefinition] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AttributeDefinition') }})
+    attribute_reference: Optional[FacetAttributeReference] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AttributeReference') }})
+    required_behavior: Optional[RequiredAttributeBehaviorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RequiredBehavior') }})
     

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreatePayeeAddress2 } from "./createpayeeaddress2";
 import { Challenge2 } from "./challenge2";
 import { Company2 } from "./company2";
@@ -9,37 +8,38 @@ import { PayeePayorRef } from "./payeepayorref";
 import { PayeeTypeEnum } from "./payeetypeenum";
 
 
+
 export class FailedPayee2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: CreatePayeeAddress2;
 
-  @Metadata({ data: "json, name=challenge" })
+  @SpeakeasyMetadata({ data: "json, name=challenge" })
   challenge?: Challenge2;
 
-  @Metadata({ data: "json, name=company" })
+  @SpeakeasyMetadata({ data: "json, name=company" })
   company?: Company2;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=individual" })
+  @SpeakeasyMetadata({ data: "json, name=individual" })
   individual?: CreateIndividual2;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=payeeId" })
+  @SpeakeasyMetadata({ data: "json, name=payeeId" })
   payeeId?: string;
 
-  @Metadata({ data: "json, name=paymentChannel" })
+  @SpeakeasyMetadata({ data: "json, name=paymentChannel" })
   paymentChannel?: CreatePaymentChannel2;
 
-  @Metadata({ data: "json, name=payorRefs", elemType: shared.PayeePayorRef })
+  @SpeakeasyMetadata({ data: "json, name=payorRefs", elemType: PayeePayorRef })
   payorRefs?: PayeePayorRef[];
 
-  @Metadata({ data: "json, name=remoteId" })
+  @SpeakeasyMetadata({ data: "json, name=remoteId" })
   remoteId?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: PayeeTypeEnum;
 }

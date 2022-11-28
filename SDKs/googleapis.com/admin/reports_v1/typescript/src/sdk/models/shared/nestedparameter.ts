@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NestedParameter
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * JSON template for a parameter used in various reports.
 **/
 export class NestedParameter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boolValue" })
+  @SpeakeasyMetadata({ data: "json, name=boolValue" })
   boolValue?: boolean;
 
-  @Metadata({ data: "json, name=intValue" })
+  @SpeakeasyMetadata({ data: "json, name=intValue" })
   intValue?: string;
 
-  @Metadata({ data: "json, name=multiBoolValue" })
+  @SpeakeasyMetadata({ data: "json, name=multiBoolValue" })
   multiBoolValue?: boolean[];
 
-  @Metadata({ data: "json, name=multiIntValue" })
+  @SpeakeasyMetadata({ data: "json, name=multiIntValue" })
   multiIntValue?: string[];
 
-  @Metadata({ data: "json, name=multiValue" })
+  @SpeakeasyMetadata({ data: "json, name=multiValue" })
   multiValue?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

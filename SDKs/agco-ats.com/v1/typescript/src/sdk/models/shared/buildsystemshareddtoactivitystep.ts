@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BuildSystemSharedDtoParameterMapping } from "./buildsystemshareddtoparametermapping";
+
 
 
 // BuildSystemSharedDtoActivityStep
@@ -8,27 +8,27 @@ import { BuildSystemSharedDtoParameterMapping } from "./buildsystemshareddtopara
  * A DTO for an IActivityStep
 **/
 export class BuildSystemSharedDtoActivityStep extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActivityID" })
+  @SpeakeasyMetadata({ data: "json, name=ActivityID" })
   activityId?: number;
 
-  @Metadata({ data: "json, name=ActivityStepID" })
+  @SpeakeasyMetadata({ data: "json, name=ActivityStepID" })
   activityStepId?: number;
 
-  @Metadata({ data: "json, name=ImplementationID" })
+  @SpeakeasyMetadata({ data: "json, name=ImplementationID" })
   implementationId?: string;
 
-  @Metadata({ data: "json, name=ParameterMappings", elemType: shared.BuildSystemSharedDtoParameterMapping })
+  @SpeakeasyMetadata({ data: "json, name=ParameterMappings", elemType: BuildSystemSharedDtoParameterMapping })
   parameterMappings?: BuildSystemSharedDtoParameterMapping[];
 
-  @Metadata({ data: "json, name=RunOrder" })
+  @SpeakeasyMetadata({ data: "json, name=RunOrder" })
   runOrder?: number;
 
-  @Metadata({ data: "json, name=StepID" })
+  @SpeakeasyMetadata({ data: "json, name=StepID" })
   stepId?: number;
 
-  @Metadata({ data: "json, name=StepName" })
+  @SpeakeasyMetadata({ data: "json, name=StepName" })
   stepName?: string;
 
-  @Metadata({ data: "json, name=UseConfig" })
+  @SpeakeasyMetadata({ data: "json, name=UseConfig" })
   useConfig?: string;
 }

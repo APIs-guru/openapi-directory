@@ -56,6 +56,8 @@ const (
 	ActiveViewVideoViewabilityMetricConfigMinimumVolumeEnumVideoVolumePercent10          ActiveViewVideoViewabilityMetricConfigMinimumVolumeEnum = "VIDEO_VOLUME_PERCENT_10"
 )
 
+// ActiveViewVideoViewabilityMetricConfig
+// Configuration for custom Active View video viewability metrics.
 type ActiveViewVideoViewabilityMetricConfig struct {
 	DisplayName        *string                                                       `json:"displayName,omitempty"`
 	MinimumDuration    *ActiveViewVideoViewabilityMetricConfigMinimumDurationEnum    `json:"minimumDuration,omitempty"`

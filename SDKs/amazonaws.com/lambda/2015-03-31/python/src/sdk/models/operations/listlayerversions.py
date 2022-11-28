@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ListLayerVersionsPathParams:
-    layer_name: str = field(default=None, metadata={'path_param': { 'field_name': 'LayerName', 'style': 'simple', 'explode': False }})
+    layer_name: str = field(metadata={'path_param': { 'field_name': 'LayerName', 'style': 'simple', 'explode': False }})
     
 class ListLayerVersionsCompatibleRuntimeEnum(str, Enum):
     NODEJS = "nodejs"
@@ -55,18 +59,18 @@ class ListLayerVersionsHeaders:
 
 @dataclass
 class ListLayerVersionsRequest:
-    path_params: ListLayerVersionsPathParams = field(default=None)
-    query_params: ListLayerVersionsQueryParams = field(default=None)
-    headers: ListLayerVersionsHeaders = field(default=None)
+    headers: ListLayerVersionsHeaders = field()
+    path_params: ListLayerVersionsPathParams = field()
+    query_params: ListLayerVersionsQueryParams = field()
     
 
 @dataclass
 class ListLayerVersionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     list_layer_versions_response: Optional[shared.ListLayerVersionsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BloggerPostsInsertPathParams:
-    blog_id: str = field(default=None, metadata={'path_param': { 'field_name': 'blogId', 'style': 'simple', 'explode': False }})
+    blog_id: str = field(metadata={'path_param': { 'field_name': 'blogId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,21 +29,21 @@ class BloggerPostsInsertQueryParams:
 
 @dataclass
 class BloggerPostsInsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BloggerPostsInsertRequest:
-    path_params: BloggerPostsInsertPathParams = field(default=None)
-    query_params: BloggerPostsInsertQueryParams = field(default=None)
+    path_params: BloggerPostsInsertPathParams = field()
+    query_params: BloggerPostsInsertQueryParams = field()
+    security: BloggerPostsInsertSecurity = field()
     request: Optional[shared.Post] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: BloggerPostsInsertSecurity = field(default=None)
     
 
 @dataclass
 class BloggerPostsInsertResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     post: Optional[shared.Post] = field(default=None)
-    status_code: int = field(default=None)
     

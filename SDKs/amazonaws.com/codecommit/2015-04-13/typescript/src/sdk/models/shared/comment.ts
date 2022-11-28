@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Comment
@@ -6,33 +7,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Returns information about a specific comment.
 **/
 export class Comment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorArn" })
+  @SpeakeasyMetadata({ data: "json, name=authorArn" })
   authorArn?: string;
 
-  @Metadata({ data: "json, name=callerReactions" })
+  @SpeakeasyMetadata({ data: "json, name=callerReactions" })
   callerReactions?: string[];
 
-  @Metadata({ data: "json, name=clientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientRequestToken" })
   clientRequestToken?: string;
 
-  @Metadata({ data: "json, name=commentId" })
+  @SpeakeasyMetadata({ data: "json, name=commentId" })
   commentId?: string;
 
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
   deleted?: boolean;
 
-  @Metadata({ data: "json, name=inReplyTo" })
+  @SpeakeasyMetadata({ data: "json, name=inReplyTo" })
   inReplyTo?: string;
 
-  @Metadata({ data: "json, name=lastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedDate" })
   lastModifiedDate?: Date;
 
-  @Metadata({ data: "json, name=reactionCounts" })
+  @SpeakeasyMetadata({ data: "json, name=reactionCounts" })
   reactionCounts?: Map<string, number>;
 }

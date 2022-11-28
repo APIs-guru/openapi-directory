@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// QualificationRequest
+//
+//	The QualificationRequest data structure represents a request a Worker has made for a Qualification.
 type QualificationRequest struct {
 	Answer                 *string    `json:"Answer,omitempty"`
 	QualificationRequestID *string    `json:"QualificationRequestId,omitempty"`

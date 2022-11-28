@@ -9,6 +9,8 @@ const (
 	VideoContextActionEnumUploadedBy   VideoContextActionEnum = "Uploaded by"
 )
 
+// VideoContext
+// The context of the video's subscription, if this video is part of a subscription.
 type VideoContext struct {
 	Action       VideoContextActionEnum `json:"action"`
 	Resource     map[string]interface{} `json:"resource"`
@@ -27,75 +29,101 @@ const (
 	VideoLicenseEnumCc0    VideoLicenseEnum = "cc0"
 )
 
+// VideoMetadataConnectionsComments
+// Information about the comments on this video.
 type VideoMetadataConnectionsComments struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoMetadataConnectionsCredits
+// Information about the users credited in this video.
 type VideoMetadataConnectionsCredits struct {
 	Options []string `json:"options,omitempty"`
 	Total   *float64 `json:"total,omitempty"`
 	URI     *string  `json:"uri,omitempty"`
 }
 
+// VideoMetadataConnectionsLikes
+// Information about the users who have liked this video.
 type VideoMetadataConnectionsLikes struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoMetadataConnectionsOndemand
+// Information about this video's ondemand data.
 type VideoMetadataConnectionsOndemand struct {
 	Options     []string `json:"options"`
 	ResourceKey string   `json:"resource_key"`
 	URI         string   `json:"uri"`
 }
 
+// VideoMetadataConnectionsPictures
+// Information about this video's thumbnails.
 type VideoMetadataConnectionsPictures struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoMetadataConnectionsPlayback
+// The DRM playback status connection for this video.
 type VideoMetadataConnectionsPlayback struct {
 	Options []string `json:"options"`
 	URI     string   `json:"uri"`
 }
 
+// VideoMetadataConnectionsRecommendations
+// The recommendations for this video.
 type VideoMetadataConnectionsRecommendations struct {
 	Options []string `json:"options,omitempty"`
 	URI     *string  `json:"uri,omitempty"`
 }
 
+// VideoMetadataConnectionsRelated
+// Related content for this video.
 type VideoMetadataConnectionsRelated struct {
 	Options []string `json:"options,omitempty"`
 	URI     *string  `json:"uri,omitempty"`
 }
 
+// VideoMetadataConnectionsSeason
+// Information about the video's season.
 type VideoMetadataConnectionsSeason struct {
 	Name    string   `json:"name"`
 	Options []string `json:"options"`
 	URI     string   `json:"uri"`
 }
 
+// VideoMetadataConnectionsTexttracks
+// Information about this video's text tracks.
 type VideoMetadataConnectionsTexttracks struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoMetadataConnectionsTrailer
+// Information about this video's VOD trailer.
 type VideoMetadataConnectionsTrailer struct {
 	Options     []string `json:"options"`
 	ResourceKey string   `json:"resource_key"`
 	URI         string   `json:"uri"`
 }
 
+// VideoMetadataConnectionsUsersWithAccess
+// Information about the user privacy of this video, if the video privacy is `users`.
 type VideoMetadataConnectionsUsersWithAccess struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoMetadataConnectionsVersions
+// Information about the versions of this video.
 type VideoMetadataConnectionsVersions struct {
 	CurrentURI *string  `json:"current_uri,omitempty"`
 	Options    []string `json:"options"`
@@ -103,6 +131,8 @@ type VideoMetadataConnectionsVersions struct {
 	URI        string   `json:"uri"`
 }
 
+// VideoMetadataConnections
+// A list of resource URIs related to the video.
 type VideoMetadataConnections struct {
 	Comments        VideoMetadataConnectionsComments        `json:"comments"`
 	Credits         VideoMetadataConnectionsCredits         `json:"credits"`
@@ -137,6 +167,8 @@ const (
 	VideoMetadataInteractionsBuyStreamEnumUnavailable VideoMetadataInteractionsBuyStreamEnum = "unavailable"
 )
 
+// VideoMetadataInteractionsBuy
+// The Buy interaction for a On Demand video.
 type VideoMetadataInteractionsBuy struct {
 	Currency     string                                   `json:"currency"`
 	DisplayPrice string                                   `json:"display_price"`
@@ -149,11 +181,15 @@ type VideoMetadataInteractionsBuy struct {
 	URI          string                                   `json:"uri"`
 }
 
+// VideoMetadataInteractionsChannel
+// When a video is referenced by a channel URI, if the user is a moderator of the channel, include information about removing the video from the channel.
 type VideoMetadataInteractionsChannel struct {
 	Options []string `json:"options"`
 	URI     string   `json:"uri"`
 }
 
+// VideoMetadataInteractionsLike
+// Information about whether the authenticated user has liked this video.
 type VideoMetadataInteractionsLike struct {
 	Added     bool     `json:"added"`
 	AddedTime string   `json:"added_time"`
@@ -170,6 +206,8 @@ const (
 	VideoMetadataInteractionsRentStreamEnumUnavailable VideoMetadataInteractionsRentStreamEnum = "unavailable"
 )
 
+// VideoMetadataInteractionsRent
+// The Rent interaction for an On Demand video.
 type VideoMetadataInteractionsRent struct {
 	Currency     string                                  `json:"currency"`
 	DisplayPrice string                                  `json:"display_price"`
@@ -182,12 +220,16 @@ type VideoMetadataInteractionsRent struct {
 	URI          string                                  `json:"uri"`
 }
 
+// VideoMetadataInteractionsReport
+// Information about where and how to report a video.
 type VideoMetadataInteractionsReport struct {
 	Options []string `json:"options"`
 	Reason  []string `json:"reason"`
 	URI     string   `json:"uri"`
 }
 
+// VideoMetadataInteractionsSubscribe
+// Subscription information for an On Demand video.
 type VideoMetadataInteractionsSubscribe struct {
 	Drm          *bool   `json:"drm,omitempty"`
 	ExpiresTime  *string `json:"expires_time,omitempty"`
@@ -195,6 +237,8 @@ type VideoMetadataInteractionsSubscribe struct {
 	Stream       *string `json:"stream,omitempty"`
 }
 
+// VideoMetadataInteractionsWatched
+// Information about removing this video from the user's list of watched videos.
 type VideoMetadataInteractionsWatched struct {
 	Added     bool     `json:"added"`
 	AddedTime string   `json:"added_time"`
@@ -202,6 +246,8 @@ type VideoMetadataInteractionsWatched struct {
 	URI       string   `json:"uri"`
 }
 
+// VideoMetadataInteractionsWatchlater
+// Information about whether this video appears on the authenticated user's Watch Later list.
 type VideoMetadataInteractionsWatchlater struct {
 	Added     bool     `json:"added"`
 	AddedTime string   `json:"added_time"`
@@ -209,6 +255,8 @@ type VideoMetadataInteractionsWatchlater struct {
 	URI       string   `json:"uri"`
 }
 
+// VideoMetadataInteractions
+// A list of resource URIs related to the video.
 type VideoMetadataInteractions struct {
 	Buy        VideoMetadataInteractionsBuy        `json:"buy"`
 	Channel    VideoMetadataInteractionsChannel    `json:"channel"`
@@ -220,25 +268,35 @@ type VideoMetadataInteractions struct {
 	Watchlater VideoMetadataInteractionsWatchlater `json:"watchlater"`
 }
 
+// VideoMetadata
+// The video's metadata.
 type VideoMetadata struct {
 	Connections  VideoMetadataConnections  `json:"connections"`
 	Interactions VideoMetadataInteractions `json:"interactions"`
 }
 
+// VideoProjectMetadataConnectionsVideos
+// A standard connection object indicating how to get all the videos in this project.
 type VideoProjectMetadataConnectionsVideos struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoProjectMetadataConnections
+// A list of resource URIs related to the project.
 type VideoProjectMetadataConnections struct {
 	Videos VideoProjectMetadataConnectionsVideos `json:"videos"`
 }
 
+// VideoProjectMetadata
+// The project's metadata.
 type VideoProjectMetadata struct {
 	Connections VideoProjectMetadataConnections `json:"connections"`
 }
 
+// VideoProject
+// Information about the folder that contains this video.
 type VideoProject struct {
 	CreatedTime  string               `json:"created_time"`
 	Metadata     VideoProjectMetadata `json:"metadata"`
@@ -276,6 +334,8 @@ const (
 	VideoPrivacyViewEnumUsers    VideoPrivacyViewEnum = "users"
 )
 
+// VideoPrivacy
+// The video's privacy setting.
 type VideoPrivacy struct {
 	Add      bool                     `json:"add"`
 	Comments VideoPrivacyCommentsEnum `json:"comments"`
@@ -309,6 +369,8 @@ const (
 	VideoSpatialStereoFormatEnumTopBottom VideoSpatialStereoFormatEnum = "top-bottom"
 )
 
+// VideoSpatial
+// 360 spatial data.
 type VideoSpatial struct {
 	DirectorTimeline []VideoSpatialDirectorTimeline `json:"director_timeline"`
 	FieldOfView      float64                        `json:"field_of_view"`
@@ -316,6 +378,8 @@ type VideoSpatial struct {
 	StereoFormat     VideoSpatialStereoFormatEnum   `json:"stereo_format"`
 }
 
+// VideoStats
+// A collection of stats associated with this video.
 type VideoStats struct {
 	Plays float64 `json:"plays"`
 }
@@ -342,6 +406,8 @@ const (
 	VideoTranscodeStatusEnumInProgress VideoTranscodeStatusEnum = "in_progress"
 )
 
+// VideoTranscode
+// The transcode information for a video upload.
 type VideoTranscode struct {
 	Status *VideoTranscodeStatusEnum `json:"status,omitempty"`
 }
@@ -363,6 +429,8 @@ const (
 	VideoUploadStatusEnumInProgress VideoUploadStatusEnum = "in_progress"
 )
 
+// VideoUpload
+// The upload information for this video.
 type VideoUpload struct {
 	Approach    *VideoUploadApproachEnum `json:"approach,omitempty"`
 	CompleteURI *string                  `json:"complete_uri,omitempty"`
@@ -388,125 +456,167 @@ const (
 	VideoUserAccountEnumProducer     VideoUserAccountEnum = "producer"
 )
 
+// VideoUserMetadataConnectionsAlbums
+// Information about the albums created by this user.
 type VideoUserMetadataConnectionsAlbums struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataConnectionsAppearances
+// Information about the appearances of this user in other videos.
 type VideoUserMetadataConnectionsAppearances struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataConnectionsBlock
+// Information on the users that the current user has blocked. This data requires a bearer token with the `private` scope.
 type VideoUserMetadataConnectionsBlock struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataConnectionsCategories
+// Information about this user's followed categories.
 type VideoUserMetadataConnectionsCategories struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataConnectionsChannels
+// Information about this user's subscribed channels.
 type VideoUserMetadataConnectionsChannels struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataConnectionsFeed
+// Information about this user's feed.
 type VideoUserMetadataConnectionsFeed struct {
 	Options []string `json:"options"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataConnectionsFolders
+// Information about this user's folders.
 type VideoUserMetadataConnectionsFolders struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataConnectionsFollowers
+// Information about the user's followers.
 type VideoUserMetadataConnectionsFollowers struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataConnectionsFollowing
+// Information about the users that the current user is following.
 type VideoUserMetadataConnectionsFollowing struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataConnectionsGroups
+// Information about the groups created by this user.
 type VideoUserMetadataConnectionsGroups struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataConnectionsLikes
+// Information about the videos that this user has liked.
 type VideoUserMetadataConnectionsLikes struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataConnectionsModeratedChannels
+// Information about the channels that this user moderates.
 type VideoUserMetadataConnectionsModeratedChannels struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataConnectionsPictures
+// Information about this user's portraits.
 type VideoUserMetadataConnectionsPictures struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataConnectionsPortfolios
+// Information about this user's portfolios.
 type VideoUserMetadataConnectionsPortfolios struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataConnectionsRecommendedChannels
+// A collection of recommended channels for the current user to follow. This data requires a bearer token with the `private` scope.
 type VideoUserMetadataConnectionsRecommendedChannels struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataConnectionsRecommendedUsers
+// A Collection of recommended users for the current user to follow. This data requires a bearer token with the `private` scope.
 type VideoUserMetadataConnectionsRecommendedUsers struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataConnectionsShared
+// Information about the videos that have been shared with this user.
 type VideoUserMetadataConnectionsShared struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataConnectionsVideos
+// Information about the videos uploaded by this user.
 type VideoUserMetadataConnectionsVideos struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataConnectionsWatchedVideos
+// Information about the videos that this user has watched.
 type VideoUserMetadataConnectionsWatchedVideos struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataConnectionsWatchlater
+// Information about the videos that this user wants to watch later.
 type VideoUserMetadataConnectionsWatchlater struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataConnections
+// The list of resource URIs related to the user.
 type VideoUserMetadataConnections struct {
 	Albums              VideoUserMetadataConnectionsAlbums              `json:"albums"`
 	Appearances         VideoUserMetadataConnectionsAppearances         `json:"appearances"`
@@ -535,6 +645,8 @@ type VideoUserMetadataInteractionsAddPrivacyUser struct {
 	URI     *string  `json:"uri,omitempty"`
 }
 
+// VideoUserMetadataInteractionsBlock
+// Information related to the block status of this user.
 type VideoUserMetadataInteractionsBlock struct {
 	Added     bool     `json:"added"`
 	AddedTime string   `json:"added_time"`
@@ -542,12 +654,16 @@ type VideoUserMetadataInteractionsBlock struct {
 	URI       string   `json:"uri"`
 }
 
+// VideoUserMetadataInteractionsFollow
+// Information related to the followed status of this user.
 type VideoUserMetadataInteractionsFollow struct {
 	Added   bool     `json:"added"`
 	Options []string `json:"options"`
 	URI     string   `json:"uri"`
 }
 
+// VideoUserMetadataInteractionsReport
+// Information regarding where and how to report a user.
 type VideoUserMetadataInteractionsReport struct {
 	Options []string `json:"options"`
 	Reason  []string `json:"reason"`
@@ -561,6 +677,8 @@ type VideoUserMetadataInteractions struct {
 	Report         VideoUserMetadataInteractionsReport          `json:"report"`
 }
 
+// VideoUserMetadata
+// The user's metadata.
 type VideoUserMetadata struct {
 	Connections  VideoUserMetadataConnections  `json:"connections"`
 	Interactions VideoUserMetadataInteractions `json:"interactions"`
@@ -610,12 +728,16 @@ type VideoUserPreferences struct {
 	Videos *VideoUserPreferencesVideos `json:"videos,omitempty"`
 }
 
+// VideoUserUploadQuotaLifetime
+// Information about the user's lifetime upload usage.
 type VideoUserUploadQuotaLifetime struct {
 	Free float64 `json:"free"`
 	Max  float64 `json:"max"`
 	Used float64 `json:"used"`
 }
 
+// VideoUserUploadQuotaPeriodic
+// Information about the user's usage for the current period.
 type VideoUserUploadQuotaPeriodic struct {
 	Free      float64 `json:"free"`
 	Max       float64 `json:"max"`
@@ -630,6 +752,8 @@ const (
 	VideoUserUploadQuotaSpaceShowingEnumPeriodic VideoUserUploadQuotaSpaceShowingEnum = "periodic"
 )
 
+// VideoUserUploadQuotaSpace
+// Information about the user's upload space remaining for the current period.
 type VideoUserUploadQuotaSpace struct {
 	Free    float64                              `json:"free"`
 	Max     float64                              `json:"max"`
@@ -637,6 +761,8 @@ type VideoUserUploadQuotaSpace struct {
 	Used    float64                              `json:"used"`
 }
 
+// VideoUserUploadQuota
+// Appears only when the user has upload access and is looking at their own user record.
 type VideoUserUploadQuota struct {
 	Lifetime VideoUserUploadQuotaLifetime `json:"lifetime"`
 	Periodic VideoUserUploadQuotaPeriodic `json:"periodic"`
@@ -649,6 +775,8 @@ type VideoUserWebsites struct {
 	Name        string `json:"name"`
 }
 
+// VideoUser
+// The video owner.
 type VideoUser struct {
 	Account       VideoUserAccountEnum  `json:"account"`
 	Bio           string                `json:"bio"`

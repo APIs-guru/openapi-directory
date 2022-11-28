@@ -10,13 +10,13 @@ class ArticleDeleteQueryParams:
 
 @dataclass
 class ArticleDeleteRequest:
-    query_params: ArticleDeleteQueryParams = field(default=None)
+    query_params: ArticleDeleteQueryParams = field()
     
 
 @dataclass
 class ArticleDeleteResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_exception: Optional[shared.APIException] = field(default=None)
-    content_type: str = field(default=None)
     default_response_dto_of_integer: Optional[shared.DefaultResponseDtoOfInteger] = field(default=None)
-    status_code: int = field(default=None)
     

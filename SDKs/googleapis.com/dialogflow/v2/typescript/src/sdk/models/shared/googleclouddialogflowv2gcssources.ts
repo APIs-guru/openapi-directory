@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2GcsSources
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Google Cloud Storage location for the inputs.
 **/
 export class GoogleCloudDialogflowV2GcsSources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=uris" })
+  @SpeakeasyMetadata({ data: "json, name=uris" })
   uris?: string[];
 }

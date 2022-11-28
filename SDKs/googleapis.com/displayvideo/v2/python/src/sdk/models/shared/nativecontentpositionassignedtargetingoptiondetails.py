@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class NativeContentPositionAssignedTargetingOptionDetailsContentPositionEnum(str, Enum):
     NATIVE_CONTENT_POSITION_UNSPECIFIED = "NATIVE_CONTENT_POSITION_UNSPECIFIED"
@@ -14,5 +16,9 @@ class NativeContentPositionAssignedTargetingOptionDetailsContentPositionEnum(str
 @dataclass_json
 @dataclass
 class NativeContentPositionAssignedTargetingOptionDetails:
-    content_position: Optional[NativeContentPositionAssignedTargetingOptionDetailsContentPositionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contentPosition' }})
+    r"""NativeContentPositionAssignedTargetingOptionDetails
+    Details for native content position assigned targeting option. This will be populated in the native_content_position_details field when targeting_type is `TARGETING_TYPE_NATIVE_CONTENT_POSITION`. Explicitly targeting all options is not supported. Remove all native content position targeting options to achieve this effect.
+    """
+    
+    content_position: Optional[NativeContentPositionAssignedTargetingOptionDetailsContentPositionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contentPosition') }})
     

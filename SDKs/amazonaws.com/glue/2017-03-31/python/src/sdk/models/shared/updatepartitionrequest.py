@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import partitioninput
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdatePartitionRequest:
-    catalog_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CatalogId' }})
-    database_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DatabaseName' }})
-    partition_input: partitioninput.PartitionInput = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PartitionInput' }})
-    partition_value_list: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PartitionValueList' }})
-    table_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TableName' }})
+    database_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DatabaseName') }})
+    partition_input: PartitionInput = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('PartitionInput') }})
+    partition_value_list: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('PartitionValueList') }})
+    table_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TableName') }})
+    catalog_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CatalogId') }})
     

@@ -28,6 +28,8 @@ type ListObjectChildrenHeaders struct {
 	XAmzDataPartition    string                                      `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// ListObjectChildrenRequestBodyObjectReference
+// The reference that identifies an object.
 type ListObjectChildrenRequestBodyObjectReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }

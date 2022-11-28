@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatalabelingV1beta1PdfInstruction
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Instruction from a PDF file.
 **/
 export class GoogleCloudDatalabelingV1beta1PdfInstruction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gcsFileUri" })
+  @SpeakeasyMetadata({ data: "json, name=gcsFileUri" })
   gcsFileUri?: string;
 }

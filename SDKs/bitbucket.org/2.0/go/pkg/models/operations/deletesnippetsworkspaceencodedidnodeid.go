@@ -10,22 +10,10 @@ type DeleteSnippetsWorkspaceEncodedIDNodeIDPathParams struct {
 	Workspace string `pathParam:"style=simple,explode=false,name=workspace"`
 }
 
-type DeleteSnippetsWorkspaceEncodedIDNodeIDSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type DeleteSnippetsWorkspaceEncodedIDNodeIDSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type DeleteSnippetsWorkspaceEncodedIDNodeIDSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type DeleteSnippetsWorkspaceEncodedIDNodeIDSecurity struct {
-	Option1 *DeleteSnippetsWorkspaceEncodedIDNodeIDSecurityOption1 `security:"option"`
-	Option2 *DeleteSnippetsWorkspaceEncodedIDNodeIDSecurityOption2 `security:"option"`
-	Option3 *DeleteSnippetsWorkspaceEncodedIDNodeIDSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type DeleteSnippetsWorkspaceEncodedIDNodeIDRequest struct {

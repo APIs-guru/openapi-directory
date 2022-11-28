@@ -27,11 +27,6 @@ type BacerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type BacerRequest struct {
-	Request  *BacerRequestBody `request:"mediaType=application/json"`
-	Security BacerSecurity
-}
-
 type Bacer400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Bacer504ApplicationJSON struct {
 	Error            *Bacer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Bacer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type BacerRequest struct {
+	Request  *BacerRequestBody `request:"mediaType=application/json"`
+	Security BacerSecurity
 }
 
 type BacerResponse struct {

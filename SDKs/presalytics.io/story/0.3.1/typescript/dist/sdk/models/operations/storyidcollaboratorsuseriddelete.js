@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var StoryIdCollaboratorsUseridDeletePathParams = /** @class */ (function (_super) {
     __extends(StoryIdCollaboratorsUseridDeletePathParams, _super);
     function StoryIdCollaboratorsUseridDeletePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], StoryIdCollaboratorsUseridDeletePathParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=story_collaborator_userid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=story_collaborator_userid" }),
         __metadata("design:type", String)
     ], StoryIdCollaboratorsUseridDeletePathParams.prototype, "storyCollaboratorUserid", void 0);
     return StoryIdCollaboratorsUseridDeletePathParams;
@@ -45,7 +45,7 @@ var StoryIdCollaboratorsUseridDeleteRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StoryIdCollaboratorsUseridDeletePathParams)
     ], StoryIdCollaboratorsUseridDeleteRequest.prototype, "pathParams", void 0);
     return StoryIdCollaboratorsUseridDeleteRequest;
@@ -57,15 +57,15 @@ var StoryIdCollaboratorsUseridDeleteResponse = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StoryIdCollaboratorsUseridDeleteResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StoryIdCollaboratorsUseridDeleteResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StoryIdCollaboratorsUseridDeleteResponse.prototype, "problemDetail", void 0);
     return StoryIdCollaboratorsUseridDeleteResponse;

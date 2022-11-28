@@ -1,5 +1,7 @@
 package shared
 
+// InstancesListResponse
+// Database instances list response.
 type InstancesListResponse struct {
 	Items         []DatabaseInstance `json:"items,omitempty"`
 	Kind          *string            `json:"kind,omitempty"`

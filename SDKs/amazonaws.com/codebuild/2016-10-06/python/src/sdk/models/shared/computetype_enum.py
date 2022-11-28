@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ComputeTypeEnum(str, Enum):
     BUILD_GENERAL1_SMALL = "BUILD_GENERAL1_SMALL"

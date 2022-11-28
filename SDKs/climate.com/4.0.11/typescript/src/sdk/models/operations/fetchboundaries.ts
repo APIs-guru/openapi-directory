@@ -1,50 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class FetchBoundariesSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
-export class FetchBoundariesSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2AuthorizationCode: shared.SchemeOauth2AuthorizationCode;
-}
-
 
 export class FetchBoundariesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: FetchBoundariesSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey?: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: FetchBoundariesSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2AuthorizationCode?: shared.SchemeOauth2AuthorizationCode;
 }
 
 
 export class FetchBoundariesRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.BoundariesQuery;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: FetchBoundariesSecurity;
 }
 
 
 export class FetchBoundariesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   boundaries?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

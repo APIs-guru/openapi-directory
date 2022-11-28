@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ReturnPolicyOnlinePolicyTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    NumberOfDaysAfterDelivery = "NUMBER_OF_DAYS_AFTER_DELIVERY"
-,    NoReturns = "NO_RETURNS"
-,    LifetimeReturns = "LIFETIME_RETURNS"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    NumberOfDaysAfterDelivery = "NUMBER_OF_DAYS_AFTER_DELIVERY",
+    NoReturns = "NO_RETURNS",
+    LifetimeReturns = "LIFETIME_RETURNS"
 }
 
 
@@ -13,9 +14,9 @@ export enum ReturnPolicyOnlinePolicyTypeEnum {
  * The available policies.
 **/
 export class ReturnPolicyOnlinePolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=days" })
+  @SpeakeasyMetadata({ data: "json, name=days" })
   days?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ReturnPolicyOnlinePolicyTypeEnum;
 }

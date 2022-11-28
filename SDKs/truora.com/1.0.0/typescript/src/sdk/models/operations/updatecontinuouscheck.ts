@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateContinuousCheckPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=continuous_check_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=continuous_check_id" })
   continuousCheckId: number;
 }
 
 
 export class UpdateContinuousCheckSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class UpdateContinuousCheckRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateContinuousCheckPathParams;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request: shared.UpdateContinuousCheckInput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdateContinuousCheckSecurity;
 }
 
 
 export class UpdateContinuousCheckResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   continuousCheck?: shared.ContinuousCheck;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

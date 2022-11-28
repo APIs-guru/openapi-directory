@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class EnterpriseCrmEventbusProtoTaskUIModuleConfigModuleIDEnum(str, Enum):
     UNSPECIFIED_TASK_MODULE = "UNSPECIFIED_TASK_MODULE"
@@ -28,5 +30,9 @@ class EnterpriseCrmEventbusProtoTaskUIModuleConfigModuleIDEnum(str, Enum):
 @dataclass_json
 @dataclass
 class EnterpriseCrmEventbusProtoTaskUIModuleConfig:
-    module_id: Optional[EnterpriseCrmEventbusProtoTaskUIModuleConfigModuleIDEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'moduleId' }})
+    r"""EnterpriseCrmEventbusProtoTaskUIModuleConfig
+    Task author would use this type to configure a config module.
+    """
+    
+    module_id: Optional[EnterpriseCrmEventbusProtoTaskUIModuleConfigModuleIDEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('moduleId') }})
     

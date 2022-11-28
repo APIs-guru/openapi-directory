@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoMls3DataSource } from "./automls3datasource";
+
 
 
 // AutoMlDataSource
@@ -7,6 +8,6 @@ import { AutoMls3DataSource } from "./automls3datasource";
  * The data source for the Autopilot job.
 **/
 export class AutoMlDataSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=S3DataSource" })
+  @SpeakeasyMetadata({ data: "json, name=S3DataSource" })
   s3DataSource: AutoMls3DataSource;
 }

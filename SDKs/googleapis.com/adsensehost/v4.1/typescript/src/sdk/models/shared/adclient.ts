@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AdClient extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arcOptIn" })
+  @SpeakeasyMetadata({ data: "json, name=arcOptIn" })
   arcOptIn?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=productCode" })
+  @SpeakeasyMetadata({ data: "json, name=productCode" })
   productCode?: string;
 
-  @Metadata({ data: "json, name=supportsReporting" })
+  @SpeakeasyMetadata({ data: "json, name=supportsReporting" })
   supportsReporting?: boolean;
 }

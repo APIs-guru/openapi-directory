@@ -28,11 +28,6 @@ type NtmksSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type NtmksRequest struct {
-	Request  *NtmksRequestBody `request:"mediaType=application/json"`
-	Security NtmksSecurity
-}
-
 type Ntmks400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Ntmks504ApplicationJSON struct {
 	Error            *Ntmks504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Ntmks504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type NtmksRequest struct {
+	Request  *NtmksRequestBody `request:"mediaType=application/json"`
+	Security NtmksSecurity
 }
 
 type NtmksResponse struct {

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRetailV2Interval
+// A floating point interval.
 type GoogleCloudRetailV2Interval struct {
 	ExclusiveMaximum *float64 `json:"exclusiveMaximum,omitempty"`
 	ExclusiveMinimum *float64 `json:"exclusiveMinimum,omitempty"`

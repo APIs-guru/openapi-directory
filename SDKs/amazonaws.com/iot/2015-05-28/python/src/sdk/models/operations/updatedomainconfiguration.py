@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateDomainConfigurationPathParams:
-    domain_configuration_name: str = field(default=None, metadata={'path_param': { 'field_name': 'domainConfigurationName', 'style': 'simple', 'explode': False }})
+    domain_configuration_name: str = field(metadata={'path_param': { 'field_name': 'domainConfigurationName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,8 +28,12 @@ class UpdateDomainConfigurationHeaders:
 @dataclass_json
 @dataclass
 class UpdateDomainConfigurationRequestBodyAuthorizerConfig:
-    allow_authorizer_override: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allowAuthorizerOverride' }})
-    default_authorizer_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultAuthorizerName' }})
+    r"""UpdateDomainConfigurationRequestBodyAuthorizerConfig
+    An object that specifies the authorization service for a domain.
+    """
+    
+    allow_authorizer_override: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allowAuthorizerOverride') }})
+    default_authorizer_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultAuthorizerName') }})
     
 class UpdateDomainConfigurationRequestBodyDomainConfigurationStatusEnum(str, Enum):
     ENABLED = "ENABLED"
@@ -34,27 +43,27 @@ class UpdateDomainConfigurationRequestBodyDomainConfigurationStatusEnum(str, Enu
 @dataclass_json
 @dataclass
 class UpdateDomainConfigurationRequestBody:
-    authorizer_config: Optional[UpdateDomainConfigurationRequestBodyAuthorizerConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorizerConfig' }})
-    domain_configuration_status: Optional[UpdateDomainConfigurationRequestBodyDomainConfigurationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domainConfigurationStatus' }})
-    remove_authorizer_config: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'removeAuthorizerConfig' }})
+    authorizer_config: Optional[UpdateDomainConfigurationRequestBodyAuthorizerConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authorizerConfig') }})
+    domain_configuration_status: Optional[UpdateDomainConfigurationRequestBodyDomainConfigurationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('domainConfigurationStatus') }})
+    remove_authorizer_config: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('removeAuthorizerConfig') }})
     
 
 @dataclass
 class UpdateDomainConfigurationRequest:
-    path_params: UpdateDomainConfigurationPathParams = field(default=None)
-    headers: UpdateDomainConfigurationHeaders = field(default=None)
-    request: UpdateDomainConfigurationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateDomainConfigurationHeaders = field()
+    path_params: UpdateDomainConfigurationPathParams = field()
+    request: UpdateDomainConfigurationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateDomainConfigurationResponse:
+    content_type: str = field()
+    status_code: int = field()
     certificate_validation_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     update_domain_configuration_response: Optional[shared.UpdateDomainConfigurationResponse] = field(default=None)

@@ -1,5 +1,7 @@
 package shared
 
+// OnDemandGenreInteractionsPage
+// Interactions for On Demand pages that are in this genre.
 type OnDemandGenreInteractionsPage struct {
 	Added   bool     `json:"added"`
 	Options []string `json:"options"`
@@ -10,11 +12,15 @@ type OnDemandGenreInteractions struct {
 	Page OnDemandGenreInteractionsPage `json:"page"`
 }
 
+// OnDemandGenreMetadataConnectionsPages
+// Information about the On Demand pages related to this group.
 type OnDemandGenreMetadataConnectionsPages struct {
 	Options []string `json:"options"`
 	URI     string   `json:"uri"`
 }
 
+// OnDemandGenreMetadataConnections
+// A collection of information connected to this resource.
 type OnDemandGenreMetadataConnections struct {
 	Pages OnDemandGenreMetadataConnectionsPages `json:"pages"`
 }

@@ -1,74 +1,75 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetCommentsIdsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ids" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ids" })
   ids: string;
 }
 
 export enum GetCommentsIdsOrderEnum {
-    Desc = "desc"
-,    Asc = "asc"
+    Desc = "desc",
+    Asc = "asc"
 }
 
 export enum GetCommentsIdsSortEnum {
-    Creation = "creation"
-,    Votes = "votes"
+    Creation = "creation",
+    Votes = "votes"
 }
 
 
 export class GetCommentsIdsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=callback" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" })
   callback?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fromdate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromdate" })
   fromdate?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=max" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" })
   max?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=min" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=min" })
   min?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=order" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" })
   order?: GetCommentsIdsOrderEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
   pagesize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=site" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=site" })
   site: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: GetCommentsIdsSortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=todate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=todate" })
   todate?: number;
 }
 
 
 export class GetCommentsIdsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetCommentsIdsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCommentsIdsQueryParams;
 }
 
 
 export class GetCommentsIdsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

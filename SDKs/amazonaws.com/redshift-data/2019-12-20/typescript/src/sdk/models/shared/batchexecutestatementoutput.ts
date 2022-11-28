@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BatchExecuteStatementOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterIdentifier" })
   clusterIdentifier?: string;
 
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=Database" })
+  @SpeakeasyMetadata({ data: "json, name=Database" })
   database?: string;
 
-  @Metadata({ data: "json, name=DbUser" })
+  @SpeakeasyMetadata({ data: "json, name=DbUser" })
   dbUser?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=SecretArn" })
+  @SpeakeasyMetadata({ data: "json, name=SecretArn" })
   secretArn?: string;
 }

@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ArchivedObjectVersionForApiContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=changedFields" })
+  @SpeakeasyMetadata({ data: "json, name=changedFields" })
   changedFields?: string[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: number;
 }

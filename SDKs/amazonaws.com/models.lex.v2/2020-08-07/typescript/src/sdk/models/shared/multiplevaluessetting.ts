@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MultipleValuesSetting
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Indicates whether a slot can return multiple values.
 **/
 export class MultipleValuesSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowMultipleValues" })
+  @SpeakeasyMetadata({ data: "json, name=allowMultipleValues" })
   allowMultipleValues?: boolean;
 }

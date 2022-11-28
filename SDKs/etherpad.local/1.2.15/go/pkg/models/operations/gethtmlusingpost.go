@@ -5,10 +5,6 @@ type GetHTMLUsingPostQueryParams struct {
 	Rev   *string `queryParam:"style=form,explode=true,name=rev"`
 }
 
-type GetHTMLUsingPostRequest struct {
-	QueryParams GetHTMLUsingPostQueryParams
-}
-
 type GetHTMLUsingPost200ApplicationJSONData struct {
 	HTML *string `json:"html,omitempty"`
 }
@@ -35,6 +31,10 @@ type GetHTMLUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type GetHTMLUsingPostRequest struct {
+	QueryParams GetHTMLUsingPostQueryParams
 }
 
 type GetHTMLUsingPostResponse struct {

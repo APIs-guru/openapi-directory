@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://devicefarm.{region}.amazonaws.com",
 	"https://devicefarm.{region}.amazonaws.com",
 	"http://devicefarm.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/devicefarm/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateDevicePool - Creates a device pool.
 func (s *SDK) CreateDevicePool(ctx context.Context, request operations.CreateDevicePoolRequest) (*operations.CreateDevicePoolResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.CreateDevicePool"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) CreateDevicePool(ctx context.Context, request operations.CreateDev
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -151,8 +178,9 @@ func (s *SDK) CreateDevicePool(ctx context.Context, request operations.CreateDev
 	return res, nil
 }
 
+// CreateInstanceProfile - Creates a profile that can be applied to one or more private fleet device instances.
 func (s *SDK) CreateInstanceProfile(ctx context.Context, request operations.CreateInstanceProfileRequest) (*operations.CreateInstanceProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.CreateInstanceProfile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -172,7 +200,7 @@ func (s *SDK) CreateInstanceProfile(ctx context.Context, request operations.Crea
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -242,8 +270,9 @@ func (s *SDK) CreateInstanceProfile(ctx context.Context, request operations.Crea
 	return res, nil
 }
 
+// CreateNetworkProfile - Creates a network profile.
 func (s *SDK) CreateNetworkProfile(ctx context.Context, request operations.CreateNetworkProfileRequest) (*operations.CreateNetworkProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.CreateNetworkProfile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -263,7 +292,7 @@ func (s *SDK) CreateNetworkProfile(ctx context.Context, request operations.Creat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -333,8 +362,9 @@ func (s *SDK) CreateNetworkProfile(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateProject - Creates a project.
 func (s *SDK) CreateProject(ctx context.Context, request operations.CreateProjectRequest) (*operations.CreateProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.CreateProject"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -354,7 +384,7 @@ func (s *SDK) CreateProject(ctx context.Context, request operations.CreateProjec
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -434,8 +464,9 @@ func (s *SDK) CreateProject(ctx context.Context, request operations.CreateProjec
 	return res, nil
 }
 
+// CreateRemoteAccessSession - Specifies and starts a remote access session.
 func (s *SDK) CreateRemoteAccessSession(ctx context.Context, request operations.CreateRemoteAccessSessionRequest) (*operations.CreateRemoteAccessSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.CreateRemoteAccessSession"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -455,7 +486,7 @@ func (s *SDK) CreateRemoteAccessSession(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -525,8 +556,9 @@ func (s *SDK) CreateRemoteAccessSession(ctx context.Context, request operations.
 	return res, nil
 }
 
+// CreateTestGridProject - Creates a Selenium testing project. Projects are used to track <a>TestGridSession</a> instances.
 func (s *SDK) CreateTestGridProject(ctx context.Context, request operations.CreateTestGridProjectRequest) (*operations.CreateTestGridProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.CreateTestGridProject"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -546,7 +578,7 @@ func (s *SDK) CreateTestGridProject(ctx context.Context, request operations.Crea
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -606,8 +638,9 @@ func (s *SDK) CreateTestGridProject(ctx context.Context, request operations.Crea
 	return res, nil
 }
 
+// CreateTestGridURL - Creates a signed, short-term URL that can be passed to a Selenium <code>RemoteWebDriver</code> constructor.
 func (s *SDK) CreateTestGridURL(ctx context.Context, request operations.CreateTestGridURLRequest) (*operations.CreateTestGridURLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.CreateTestGridUrl"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -627,7 +660,7 @@ func (s *SDK) CreateTestGridURL(ctx context.Context, request operations.CreateTe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -687,8 +720,9 @@ func (s *SDK) CreateTestGridURL(ctx context.Context, request operations.CreateTe
 	return res, nil
 }
 
+// CreateUpload - Uploads an app or test scripts.
 func (s *SDK) CreateUpload(ctx context.Context, request operations.CreateUploadRequest) (*operations.CreateUploadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.CreateUpload"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -708,7 +742,7 @@ func (s *SDK) CreateUpload(ctx context.Context, request operations.CreateUploadR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -778,8 +812,9 @@ func (s *SDK) CreateUpload(ctx context.Context, request operations.CreateUploadR
 	return res, nil
 }
 
+// CreateVpceConfiguration - Creates a configuration record in Device Farm for your Amazon Virtual Private Cloud (VPC) endpoint.
 func (s *SDK) CreateVpceConfiguration(ctx context.Context, request operations.CreateVpceConfigurationRequest) (*operations.CreateVpceConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.CreateVPCEConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -799,7 +834,7 @@ func (s *SDK) CreateVpceConfiguration(ctx context.Context, request operations.Cr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -859,8 +894,9 @@ func (s *SDK) CreateVpceConfiguration(ctx context.Context, request operations.Cr
 	return res, nil
 }
 
+// DeleteDevicePool - Deletes a device pool given the pool ARN. Does not allow deletion of curated pools owned by the system.
 func (s *SDK) DeleteDevicePool(ctx context.Context, request operations.DeleteDevicePoolRequest) (*operations.DeleteDevicePoolResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.DeleteDevicePool"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -880,7 +916,7 @@ func (s *SDK) DeleteDevicePool(ctx context.Context, request operations.DeleteDev
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -950,8 +986,9 @@ func (s *SDK) DeleteDevicePool(ctx context.Context, request operations.DeleteDev
 	return res, nil
 }
 
+// DeleteInstanceProfile - Deletes a profile that can be applied to one or more private device instances.
 func (s *SDK) DeleteInstanceProfile(ctx context.Context, request operations.DeleteInstanceProfileRequest) (*operations.DeleteInstanceProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.DeleteInstanceProfile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -971,7 +1008,7 @@ func (s *SDK) DeleteInstanceProfile(ctx context.Context, request operations.Dele
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1041,8 +1078,9 @@ func (s *SDK) DeleteInstanceProfile(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// DeleteNetworkProfile - Deletes a network profile.
 func (s *SDK) DeleteNetworkProfile(ctx context.Context, request operations.DeleteNetworkProfileRequest) (*operations.DeleteNetworkProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.DeleteNetworkProfile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1062,7 +1100,7 @@ func (s *SDK) DeleteNetworkProfile(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1132,8 +1170,9 @@ func (s *SDK) DeleteNetworkProfile(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteProject - <p>Deletes an AWS Device Farm project, given the project ARN.</p> <p> Deleting this resource does not stop an in-progress run.</p>
 func (s *SDK) DeleteProject(ctx context.Context, request operations.DeleteProjectRequest) (*operations.DeleteProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.DeleteProject"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1153,7 +1192,7 @@ func (s *SDK) DeleteProject(ctx context.Context, request operations.DeleteProjec
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1223,8 +1262,9 @@ func (s *SDK) DeleteProject(ctx context.Context, request operations.DeleteProjec
 	return res, nil
 }
 
+// DeleteRemoteAccessSession - Deletes a completed remote access session and its results.
 func (s *SDK) DeleteRemoteAccessSession(ctx context.Context, request operations.DeleteRemoteAccessSessionRequest) (*operations.DeleteRemoteAccessSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.DeleteRemoteAccessSession"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1244,7 +1284,7 @@ func (s *SDK) DeleteRemoteAccessSession(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1314,8 +1354,9 @@ func (s *SDK) DeleteRemoteAccessSession(ctx context.Context, request operations.
 	return res, nil
 }
 
+// DeleteRun - <p>Deletes the run, given the run ARN.</p> <p> Deleting this resource does not stop an in-progress run.</p>
 func (s *SDK) DeleteRun(ctx context.Context, request operations.DeleteRunRequest) (*operations.DeleteRunResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.DeleteRun"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1335,7 +1376,7 @@ func (s *SDK) DeleteRun(ctx context.Context, request operations.DeleteRunRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1405,8 +1446,9 @@ func (s *SDK) DeleteRun(ctx context.Context, request operations.DeleteRunRequest
 	return res, nil
 }
 
+// DeleteTestGridProject - <p> Deletes a Selenium testing project and all content generated under it. </p> <important> <p>You cannot undo this operation.</p> </important> <note> <p>You cannot delete a project if it has active sessions.</p> </note>
 func (s *SDK) DeleteTestGridProject(ctx context.Context, request operations.DeleteTestGridProjectRequest) (*operations.DeleteTestGridProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.DeleteTestGridProject"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1426,7 +1468,7 @@ func (s *SDK) DeleteTestGridProject(ctx context.Context, request operations.Dele
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1496,8 +1538,9 @@ func (s *SDK) DeleteTestGridProject(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// DeleteUpload - Deletes an upload given the upload ARN.
 func (s *SDK) DeleteUpload(ctx context.Context, request operations.DeleteUploadRequest) (*operations.DeleteUploadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.DeleteUpload"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1517,7 +1560,7 @@ func (s *SDK) DeleteUpload(ctx context.Context, request operations.DeleteUploadR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1587,8 +1630,9 @@ func (s *SDK) DeleteUpload(ctx context.Context, request operations.DeleteUploadR
 	return res, nil
 }
 
+// DeleteVpceConfiguration - Deletes a configuration for your Amazon Virtual Private Cloud (VPC) endpoint.
 func (s *SDK) DeleteVpceConfiguration(ctx context.Context, request operations.DeleteVpceConfigurationRequest) (*operations.DeleteVpceConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.DeleteVPCEConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1608,7 +1652,7 @@ func (s *SDK) DeleteVpceConfiguration(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1678,8 +1722,9 @@ func (s *SDK) DeleteVpceConfiguration(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// GetAccountSettings - Returns the number of unmetered iOS or unmetered Android devices that have been purchased by the account.
 func (s *SDK) GetAccountSettings(ctx context.Context, request operations.GetAccountSettingsRequest) (*operations.GetAccountSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.GetAccountSettings"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1699,7 +1744,7 @@ func (s *SDK) GetAccountSettings(ctx context.Context, request operations.GetAcco
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1769,8 +1814,9 @@ func (s *SDK) GetAccountSettings(ctx context.Context, request operations.GetAcco
 	return res, nil
 }
 
+// GetDevice - Gets information about a unique device type.
 func (s *SDK) GetDevice(ctx context.Context, request operations.GetDeviceRequest) (*operations.GetDeviceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.GetDevice"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1790,7 +1836,7 @@ func (s *SDK) GetDevice(ctx context.Context, request operations.GetDeviceRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1860,8 +1906,9 @@ func (s *SDK) GetDevice(ctx context.Context, request operations.GetDeviceRequest
 	return res, nil
 }
 
+// GetDeviceInstance - Returns information about a device instance that belongs to a private device fleet.
 func (s *SDK) GetDeviceInstance(ctx context.Context, request operations.GetDeviceInstanceRequest) (*operations.GetDeviceInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.GetDeviceInstance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1881,7 +1928,7 @@ func (s *SDK) GetDeviceInstance(ctx context.Context, request operations.GetDevic
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1951,8 +1998,9 @@ func (s *SDK) GetDeviceInstance(ctx context.Context, request operations.GetDevic
 	return res, nil
 }
 
+// GetDevicePool - Gets information about a device pool.
 func (s *SDK) GetDevicePool(ctx context.Context, request operations.GetDevicePoolRequest) (*operations.GetDevicePoolResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.GetDevicePool"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1972,7 +2020,7 @@ func (s *SDK) GetDevicePool(ctx context.Context, request operations.GetDevicePoo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2042,8 +2090,9 @@ func (s *SDK) GetDevicePool(ctx context.Context, request operations.GetDevicePoo
 	return res, nil
 }
 
+// GetDevicePoolCompatibility - Gets information about compatibility with a device pool.
 func (s *SDK) GetDevicePoolCompatibility(ctx context.Context, request operations.GetDevicePoolCompatibilityRequest) (*operations.GetDevicePoolCompatibilityResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.GetDevicePoolCompatibility"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2063,7 +2112,7 @@ func (s *SDK) GetDevicePoolCompatibility(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2133,8 +2182,9 @@ func (s *SDK) GetDevicePoolCompatibility(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetInstanceProfile - Returns information about the specified instance profile.
 func (s *SDK) GetInstanceProfile(ctx context.Context, request operations.GetInstanceProfileRequest) (*operations.GetInstanceProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.GetInstanceProfile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2154,7 +2204,7 @@ func (s *SDK) GetInstanceProfile(ctx context.Context, request operations.GetInst
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2224,8 +2274,9 @@ func (s *SDK) GetInstanceProfile(ctx context.Context, request operations.GetInst
 	return res, nil
 }
 
+// GetJob - Gets information about a job.
 func (s *SDK) GetJob(ctx context.Context, request operations.GetJobRequest) (*operations.GetJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.GetJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2245,7 +2296,7 @@ func (s *SDK) GetJob(ctx context.Context, request operations.GetJobRequest) (*op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2315,8 +2366,9 @@ func (s *SDK) GetJob(ctx context.Context, request operations.GetJobRequest) (*op
 	return res, nil
 }
 
+// GetNetworkProfile - Returns information about a network profile.
 func (s *SDK) GetNetworkProfile(ctx context.Context, request operations.GetNetworkProfileRequest) (*operations.GetNetworkProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.GetNetworkProfile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2336,7 +2388,7 @@ func (s *SDK) GetNetworkProfile(ctx context.Context, request operations.GetNetwo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2406,8 +2458,9 @@ func (s *SDK) GetNetworkProfile(ctx context.Context, request operations.GetNetwo
 	return res, nil
 }
 
+// GetOfferingStatus - Gets the current status and future status of all offerings purchased by an AWS account. The response indicates how many offerings are currently available and the offerings that will be available in the next period. The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. If you must be able to invoke this operation, contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a>.
 func (s *SDK) GetOfferingStatus(ctx context.Context, request operations.GetOfferingStatusRequest) (*operations.GetOfferingStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.GetOfferingStatus"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2429,7 +2482,7 @@ func (s *SDK) GetOfferingStatus(ctx context.Context, request operations.GetOffer
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2509,8 +2562,9 @@ func (s *SDK) GetOfferingStatus(ctx context.Context, request operations.GetOffer
 	return res, nil
 }
 
+// GetProject - Gets information about a project.
 func (s *SDK) GetProject(ctx context.Context, request operations.GetProjectRequest) (*operations.GetProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.GetProject"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2530,7 +2584,7 @@ func (s *SDK) GetProject(ctx context.Context, request operations.GetProjectReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2600,8 +2654,9 @@ func (s *SDK) GetProject(ctx context.Context, request operations.GetProjectReque
 	return res, nil
 }
 
+// GetRemoteAccessSession - Returns a link to a currently running remote access session.
 func (s *SDK) GetRemoteAccessSession(ctx context.Context, request operations.GetRemoteAccessSessionRequest) (*operations.GetRemoteAccessSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.GetRemoteAccessSession"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2621,7 +2676,7 @@ func (s *SDK) GetRemoteAccessSession(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2691,8 +2746,9 @@ func (s *SDK) GetRemoteAccessSession(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetRun - Gets information about a run.
 func (s *SDK) GetRun(ctx context.Context, request operations.GetRunRequest) (*operations.GetRunResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.GetRun"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2712,7 +2768,7 @@ func (s *SDK) GetRun(ctx context.Context, request operations.GetRunRequest) (*op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2782,8 +2838,9 @@ func (s *SDK) GetRun(ctx context.Context, request operations.GetRunRequest) (*op
 	return res, nil
 }
 
+// GetSuite - Gets information about a suite.
 func (s *SDK) GetSuite(ctx context.Context, request operations.GetSuiteRequest) (*operations.GetSuiteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.GetSuite"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2803,7 +2860,7 @@ func (s *SDK) GetSuite(ctx context.Context, request operations.GetSuiteRequest) 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2873,8 +2930,9 @@ func (s *SDK) GetSuite(ctx context.Context, request operations.GetSuiteRequest) 
 	return res, nil
 }
 
+// GetTest - Gets information about a test.
 func (s *SDK) GetTest(ctx context.Context, request operations.GetTestRequest) (*operations.GetTestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.GetTest"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2894,7 +2952,7 @@ func (s *SDK) GetTest(ctx context.Context, request operations.GetTestRequest) (*
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2964,8 +3022,9 @@ func (s *SDK) GetTest(ctx context.Context, request operations.GetTestRequest) (*
 	return res, nil
 }
 
+// GetTestGridProject - Retrieves information about a Selenium testing project.
 func (s *SDK) GetTestGridProject(ctx context.Context, request operations.GetTestGridProjectRequest) (*operations.GetTestGridProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.GetTestGridProject"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2985,7 +3044,7 @@ func (s *SDK) GetTestGridProject(ctx context.Context, request operations.GetTest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3045,8 +3104,9 @@ func (s *SDK) GetTestGridProject(ctx context.Context, request operations.GetTest
 	return res, nil
 }
 
+// GetTestGridSession - <p>A session is an instance of a browser created through a <code>RemoteWebDriver</code> with the URL from <a>CreateTestGridUrlResult$url</a>. You can use the following to look up sessions:</p> <ul> <li> <p>The session ARN (<a>GetTestGridSessionRequest$sessionArn</a>).</p> </li> <li> <p>The project ARN and a session ID (<a>GetTestGridSessionRequest$projectArn</a> and <a>GetTestGridSessionRequest$sessionId</a>).</p> </li> </ul> <p/>
 func (s *SDK) GetTestGridSession(ctx context.Context, request operations.GetTestGridSessionRequest) (*operations.GetTestGridSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.GetTestGridSession"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3066,7 +3126,7 @@ func (s *SDK) GetTestGridSession(ctx context.Context, request operations.GetTest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3126,8 +3186,9 @@ func (s *SDK) GetTestGridSession(ctx context.Context, request operations.GetTest
 	return res, nil
 }
 
+// GetUpload - Gets information about an upload.
 func (s *SDK) GetUpload(ctx context.Context, request operations.GetUploadRequest) (*operations.GetUploadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.GetUpload"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3147,7 +3208,7 @@ func (s *SDK) GetUpload(ctx context.Context, request operations.GetUploadRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3217,8 +3278,9 @@ func (s *SDK) GetUpload(ctx context.Context, request operations.GetUploadRequest
 	return res, nil
 }
 
+// GetVpceConfiguration - Returns information about the configuration settings for your Amazon Virtual Private Cloud (VPC) endpoint.
 func (s *SDK) GetVpceConfiguration(ctx context.Context, request operations.GetVpceConfigurationRequest) (*operations.GetVpceConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.GetVPCEConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3238,7 +3300,7 @@ func (s *SDK) GetVpceConfiguration(ctx context.Context, request operations.GetVp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3298,8 +3360,9 @@ func (s *SDK) GetVpceConfiguration(ctx context.Context, request operations.GetVp
 	return res, nil
 }
 
+// InstallToRemoteAccessSession - Installs an application to the device in a remote access session. For Android applications, the file must be in .apk format. For iOS applications, the file must be in .ipa format.
 func (s *SDK) InstallToRemoteAccessSession(ctx context.Context, request operations.InstallToRemoteAccessSessionRequest) (*operations.InstallToRemoteAccessSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.InstallToRemoteAccessSession"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3319,7 +3382,7 @@ func (s *SDK) InstallToRemoteAccessSession(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3389,8 +3452,9 @@ func (s *SDK) InstallToRemoteAccessSession(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ListArtifacts - Gets information about artifacts.
 func (s *SDK) ListArtifacts(ctx context.Context, request operations.ListArtifactsRequest) (*operations.ListArtifactsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListArtifacts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3412,7 +3476,7 @@ func (s *SDK) ListArtifacts(ctx context.Context, request operations.ListArtifact
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3482,8 +3546,9 @@ func (s *SDK) ListArtifacts(ctx context.Context, request operations.ListArtifact
 	return res, nil
 }
 
+// ListDeviceInstances - Returns information about the private device instances associated with one or more AWS accounts.
 func (s *SDK) ListDeviceInstances(ctx context.Context, request operations.ListDeviceInstancesRequest) (*operations.ListDeviceInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListDeviceInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3503,7 +3568,7 @@ func (s *SDK) ListDeviceInstances(ctx context.Context, request operations.ListDe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3573,8 +3638,9 @@ func (s *SDK) ListDeviceInstances(ctx context.Context, request operations.ListDe
 	return res, nil
 }
 
+// ListDevicePools - Gets information about device pools.
 func (s *SDK) ListDevicePools(ctx context.Context, request operations.ListDevicePoolsRequest) (*operations.ListDevicePoolsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListDevicePools"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3596,7 +3662,7 @@ func (s *SDK) ListDevicePools(ctx context.Context, request operations.ListDevice
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3666,8 +3732,9 @@ func (s *SDK) ListDevicePools(ctx context.Context, request operations.ListDevice
 	return res, nil
 }
 
+// ListDevices - Gets information about unique device types.
 func (s *SDK) ListDevices(ctx context.Context, request operations.ListDevicesRequest) (*operations.ListDevicesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListDevices"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3689,7 +3756,7 @@ func (s *SDK) ListDevices(ctx context.Context, request operations.ListDevicesReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3759,8 +3826,9 @@ func (s *SDK) ListDevices(ctx context.Context, request operations.ListDevicesReq
 	return res, nil
 }
 
+// ListInstanceProfiles - Returns information about all the instance profiles in an AWS account.
 func (s *SDK) ListInstanceProfiles(ctx context.Context, request operations.ListInstanceProfilesRequest) (*operations.ListInstanceProfilesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListInstanceProfiles"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3780,7 +3848,7 @@ func (s *SDK) ListInstanceProfiles(ctx context.Context, request operations.ListI
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3850,8 +3918,9 @@ func (s *SDK) ListInstanceProfiles(ctx context.Context, request operations.ListI
 	return res, nil
 }
 
+// ListJobs - Gets information about jobs for a given test run.
 func (s *SDK) ListJobs(ctx context.Context, request operations.ListJobsRequest) (*operations.ListJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListJobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3873,7 +3942,7 @@ func (s *SDK) ListJobs(ctx context.Context, request operations.ListJobsRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3943,8 +4012,9 @@ func (s *SDK) ListJobs(ctx context.Context, request operations.ListJobsRequest) 
 	return res, nil
 }
 
+// ListNetworkProfiles - Returns the list of available network profiles.
 func (s *SDK) ListNetworkProfiles(ctx context.Context, request operations.ListNetworkProfilesRequest) (*operations.ListNetworkProfilesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListNetworkProfiles"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3964,7 +4034,7 @@ func (s *SDK) ListNetworkProfiles(ctx context.Context, request operations.ListNe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4034,8 +4104,9 @@ func (s *SDK) ListNetworkProfiles(ctx context.Context, request operations.ListNe
 	return res, nil
 }
 
+// ListOfferingPromotions - Returns a list of offering promotions. Each offering promotion record contains the ID and description of the promotion. The API returns a <code>NotEligible</code> error if the caller is not permitted to invoke the operation. Contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a> if you must be able to invoke this operation.
 func (s *SDK) ListOfferingPromotions(ctx context.Context, request operations.ListOfferingPromotionsRequest) (*operations.ListOfferingPromotionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListOfferingPromotions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4055,7 +4126,7 @@ func (s *SDK) ListOfferingPromotions(ctx context.Context, request operations.Lis
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4135,8 +4206,9 @@ func (s *SDK) ListOfferingPromotions(ctx context.Context, request operations.Lis
 	return res, nil
 }
 
+// ListOfferingTransactions - Returns a list of all historical purchases, renewals, and system renewal transactions for an AWS account. The list is paginated and ordered by a descending timestamp (most recent transactions are first). The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. If you must be able to invoke this operation, contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a>.
 func (s *SDK) ListOfferingTransactions(ctx context.Context, request operations.ListOfferingTransactionsRequest) (*operations.ListOfferingTransactionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListOfferingTransactions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4158,7 +4230,7 @@ func (s *SDK) ListOfferingTransactions(ctx context.Context, request operations.L
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4238,8 +4310,9 @@ func (s *SDK) ListOfferingTransactions(ctx context.Context, request operations.L
 	return res, nil
 }
 
+// ListOfferings - Returns a list of products or offerings that the user can manage through the API. Each offering record indicates the recurring price per unit and the frequency for that offering. The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. If you must be able to invoke this operation, contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a>.
 func (s *SDK) ListOfferings(ctx context.Context, request operations.ListOfferingsRequest) (*operations.ListOfferingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListOfferings"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4261,7 +4334,7 @@ func (s *SDK) ListOfferings(ctx context.Context, request operations.ListOffering
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4341,8 +4414,9 @@ func (s *SDK) ListOfferings(ctx context.Context, request operations.ListOffering
 	return res, nil
 }
 
+// ListProjects - Gets information about projects.
 func (s *SDK) ListProjects(ctx context.Context, request operations.ListProjectsRequest) (*operations.ListProjectsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListProjects"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4364,7 +4438,7 @@ func (s *SDK) ListProjects(ctx context.Context, request operations.ListProjectsR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4434,8 +4508,9 @@ func (s *SDK) ListProjects(ctx context.Context, request operations.ListProjectsR
 	return res, nil
 }
 
+// ListRemoteAccessSessions - Returns a list of all currently running remote access sessions.
 func (s *SDK) ListRemoteAccessSessions(ctx context.Context, request operations.ListRemoteAccessSessionsRequest) (*operations.ListRemoteAccessSessionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListRemoteAccessSessions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4455,7 +4530,7 @@ func (s *SDK) ListRemoteAccessSessions(ctx context.Context, request operations.L
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4525,8 +4600,9 @@ func (s *SDK) ListRemoteAccessSessions(ctx context.Context, request operations.L
 	return res, nil
 }
 
+// ListRuns - Gets information about runs, given an AWS Device Farm project ARN.
 func (s *SDK) ListRuns(ctx context.Context, request operations.ListRunsRequest) (*operations.ListRunsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListRuns"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4548,7 +4624,7 @@ func (s *SDK) ListRuns(ctx context.Context, request operations.ListRunsRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4618,8 +4694,9 @@ func (s *SDK) ListRuns(ctx context.Context, request operations.ListRunsRequest) 
 	return res, nil
 }
 
+// ListSamples - Gets information about samples, given an AWS Device Farm job ARN.
 func (s *SDK) ListSamples(ctx context.Context, request operations.ListSamplesRequest) (*operations.ListSamplesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListSamples"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4641,7 +4718,7 @@ func (s *SDK) ListSamples(ctx context.Context, request operations.ListSamplesReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4711,8 +4788,9 @@ func (s *SDK) ListSamples(ctx context.Context, request operations.ListSamplesReq
 	return res, nil
 }
 
+// ListSuites - Gets information about test suites for a given job.
 func (s *SDK) ListSuites(ctx context.Context, request operations.ListSuitesRequest) (*operations.ListSuitesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListSuites"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4734,7 +4812,7 @@ func (s *SDK) ListSuites(ctx context.Context, request operations.ListSuitesReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4804,8 +4882,9 @@ func (s *SDK) ListSuites(ctx context.Context, request operations.ListSuitesReque
 	return res, nil
 }
 
+// ListTagsForResource - List the tags for an AWS Device Farm resource.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4825,7 +4904,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4885,8 +4964,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// ListTestGridProjects - Gets a list of all Selenium testing projects in your account.
 func (s *SDK) ListTestGridProjects(ctx context.Context, request operations.ListTestGridProjectsRequest) (*operations.ListTestGridProjectsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListTestGridProjects"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4908,7 +4988,7 @@ func (s *SDK) ListTestGridProjects(ctx context.Context, request operations.ListT
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4958,8 +5038,9 @@ func (s *SDK) ListTestGridProjects(ctx context.Context, request operations.ListT
 	return res, nil
 }
 
+// ListTestGridSessionActions - Returns a list of the actions taken in a <a>TestGridSession</a>.
 func (s *SDK) ListTestGridSessionActions(ctx context.Context, request operations.ListTestGridSessionActionsRequest) (*operations.ListTestGridSessionActionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListTestGridSessionActions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4981,7 +5062,7 @@ func (s *SDK) ListTestGridSessionActions(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5041,8 +5122,9 @@ func (s *SDK) ListTestGridSessionActions(ctx context.Context, request operations
 	return res, nil
 }
 
+// ListTestGridSessionArtifacts - Retrieves a list of artifacts created during the session.
 func (s *SDK) ListTestGridSessionArtifacts(ctx context.Context, request operations.ListTestGridSessionArtifactsRequest) (*operations.ListTestGridSessionArtifactsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListTestGridSessionArtifacts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5064,7 +5146,7 @@ func (s *SDK) ListTestGridSessionArtifacts(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5124,8 +5206,9 @@ func (s *SDK) ListTestGridSessionArtifacts(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ListTestGridSessions - Retrieves a list of sessions for a <a>TestGridProject</a>.
 func (s *SDK) ListTestGridSessions(ctx context.Context, request operations.ListTestGridSessionsRequest) (*operations.ListTestGridSessionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListTestGridSessions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5147,7 +5230,7 @@ func (s *SDK) ListTestGridSessions(ctx context.Context, request operations.ListT
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5207,8 +5290,9 @@ func (s *SDK) ListTestGridSessions(ctx context.Context, request operations.ListT
 	return res, nil
 }
 
+// ListTests - Gets information about tests in a given test suite.
 func (s *SDK) ListTests(ctx context.Context, request operations.ListTestsRequest) (*operations.ListTestsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListTests"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5230,7 +5314,7 @@ func (s *SDK) ListTests(ctx context.Context, request operations.ListTestsRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5300,8 +5384,9 @@ func (s *SDK) ListTests(ctx context.Context, request operations.ListTestsRequest
 	return res, nil
 }
 
+// ListUniqueProblems - <p>Gets information about unique problems, such as exceptions or crashes.</p> <p>Unique problems are defined as a single instance of an error across a run, job, or suite. For example, if a call in your application consistently raises an exception (<code>OutOfBoundsException in MyActivity.java:386</code>), <code>ListUniqueProblems</code> returns a single entry instead of many individual entries for that exception.</p>
 func (s *SDK) ListUniqueProblems(ctx context.Context, request operations.ListUniqueProblemsRequest) (*operations.ListUniqueProblemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListUniqueProblems"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5323,7 +5408,7 @@ func (s *SDK) ListUniqueProblems(ctx context.Context, request operations.ListUni
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5393,8 +5478,9 @@ func (s *SDK) ListUniqueProblems(ctx context.Context, request operations.ListUni
 	return res, nil
 }
 
+// ListUploads - Gets information about uploads, given an AWS Device Farm project ARN.
 func (s *SDK) ListUploads(ctx context.Context, request operations.ListUploadsRequest) (*operations.ListUploadsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListUploads"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5416,7 +5502,7 @@ func (s *SDK) ListUploads(ctx context.Context, request operations.ListUploadsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5486,8 +5572,9 @@ func (s *SDK) ListUploads(ctx context.Context, request operations.ListUploadsReq
 	return res, nil
 }
 
+// ListVpceConfigurations - Returns information about all Amazon Virtual Private Cloud (VPC) endpoint configurations in the AWS account.
 func (s *SDK) ListVpceConfigurations(ctx context.Context, request operations.ListVpceConfigurationsRequest) (*operations.ListVpceConfigurationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ListVPCEConfigurations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5507,7 +5594,7 @@ func (s *SDK) ListVpceConfigurations(ctx context.Context, request operations.Lis
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5557,8 +5644,9 @@ func (s *SDK) ListVpceConfigurations(ctx context.Context, request operations.Lis
 	return res, nil
 }
 
+// PurchaseOffering - Immediately purchases offerings for an AWS account. Offerings renew with the latest total purchased quantity for an offering, unless the renewal was overridden. The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. If you must be able to invoke this operation, contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a>.
 func (s *SDK) PurchaseOffering(ctx context.Context, request operations.PurchaseOfferingRequest) (*operations.PurchaseOfferingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.PurchaseOffering"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5578,7 +5666,7 @@ func (s *SDK) PurchaseOffering(ctx context.Context, request operations.PurchaseO
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5658,8 +5746,9 @@ func (s *SDK) PurchaseOffering(ctx context.Context, request operations.PurchaseO
 	return res, nil
 }
 
+// RenewOffering - Explicitly sets the quantity of devices to renew for an offering, starting from the <code>effectiveDate</code> of the next period. The API returns a <code>NotEligible</code> error if the user is not permitted to invoke the operation. If you must be able to invoke this operation, contact <a href="mailto:aws-devicefarm-support@amazon.com">aws-devicefarm-support@amazon.com</a>.
 func (s *SDK) RenewOffering(ctx context.Context, request operations.RenewOfferingRequest) (*operations.RenewOfferingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.RenewOffering"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5679,7 +5768,7 @@ func (s *SDK) RenewOffering(ctx context.Context, request operations.RenewOfferin
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5759,8 +5848,9 @@ func (s *SDK) RenewOffering(ctx context.Context, request operations.RenewOfferin
 	return res, nil
 }
 
+// ScheduleRun - Schedules a run.
 func (s *SDK) ScheduleRun(ctx context.Context, request operations.ScheduleRunRequest) (*operations.ScheduleRunResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.ScheduleRun"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5780,7 +5870,7 @@ func (s *SDK) ScheduleRun(ctx context.Context, request operations.ScheduleRunReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5860,8 +5950,9 @@ func (s *SDK) ScheduleRun(ctx context.Context, request operations.ScheduleRunReq
 	return res, nil
 }
 
+// StopJob - Initiates a stop request for the current job. AWS Device Farm immediately stops the job on the device where tests have not started. You are not billed for this device. On the device where tests have started, setup suite and teardown suite tests run to completion on the device. You are billed for setup, teardown, and any tests that were in progress or already completed.
 func (s *SDK) StopJob(ctx context.Context, request operations.StopJobRequest) (*operations.StopJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.StopJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5881,7 +5972,7 @@ func (s *SDK) StopJob(ctx context.Context, request operations.StopJobRequest) (*
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5951,8 +6042,9 @@ func (s *SDK) StopJob(ctx context.Context, request operations.StopJobRequest) (*
 	return res, nil
 }
 
+// StopRemoteAccessSession - Ends a specified remote access session.
 func (s *SDK) StopRemoteAccessSession(ctx context.Context, request operations.StopRemoteAccessSessionRequest) (*operations.StopRemoteAccessSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.StopRemoteAccessSession"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5972,7 +6064,7 @@ func (s *SDK) StopRemoteAccessSession(ctx context.Context, request operations.St
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6042,8 +6134,9 @@ func (s *SDK) StopRemoteAccessSession(ctx context.Context, request operations.St
 	return res, nil
 }
 
+// StopRun - Initiates a stop request for the current test run. AWS Device Farm immediately stops the run on devices where tests have not started. You are not billed for these devices. On devices where tests have started executing, setup suite and teardown suite tests run to completion on those devices. You are billed for setup, teardown, and any tests that were in progress or already completed.
 func (s *SDK) StopRun(ctx context.Context, request operations.StopRunRequest) (*operations.StopRunResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.StopRun"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6063,7 +6156,7 @@ func (s *SDK) StopRun(ctx context.Context, request operations.StopRunRequest) (*
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6133,8 +6226,9 @@ func (s *SDK) StopRun(ctx context.Context, request operations.StopRunRequest) (*
 	return res, nil
 }
 
+// TagResource - Associates the specified tags to a resource with the specified <code>resourceArn</code>. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are also deleted.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6154,7 +6248,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6234,8 +6328,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Deletes the specified tags from a resource.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6255,7 +6350,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6315,8 +6410,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateDeviceInstance - Updates information about a private device instance.
 func (s *SDK) UpdateDeviceInstance(ctx context.Context, request operations.UpdateDeviceInstanceRequest) (*operations.UpdateDeviceInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.UpdateDeviceInstance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6336,7 +6432,7 @@ func (s *SDK) UpdateDeviceInstance(ctx context.Context, request operations.Updat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6406,8 +6502,9 @@ func (s *SDK) UpdateDeviceInstance(ctx context.Context, request operations.Updat
 	return res, nil
 }
 
+// UpdateDevicePool - Modifies the name, description, and rules in a device pool given the attributes and the pool ARN. Rule updates are all-or-nothing, meaning they can only be updated as a whole (or not at all).
 func (s *SDK) UpdateDevicePool(ctx context.Context, request operations.UpdateDevicePoolRequest) (*operations.UpdateDevicePoolResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.UpdateDevicePool"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6427,7 +6524,7 @@ func (s *SDK) UpdateDevicePool(ctx context.Context, request operations.UpdateDev
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6497,8 +6594,9 @@ func (s *SDK) UpdateDevicePool(ctx context.Context, request operations.UpdateDev
 	return res, nil
 }
 
+// UpdateInstanceProfile - Updates information about an existing private device instance profile.
 func (s *SDK) UpdateInstanceProfile(ctx context.Context, request operations.UpdateInstanceProfileRequest) (*operations.UpdateInstanceProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.UpdateInstanceProfile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6518,7 +6616,7 @@ func (s *SDK) UpdateInstanceProfile(ctx context.Context, request operations.Upda
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6588,8 +6686,9 @@ func (s *SDK) UpdateInstanceProfile(ctx context.Context, request operations.Upda
 	return res, nil
 }
 
+// UpdateNetworkProfile - Updates the network profile.
 func (s *SDK) UpdateNetworkProfile(ctx context.Context, request operations.UpdateNetworkProfileRequest) (*operations.UpdateNetworkProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.UpdateNetworkProfile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6609,7 +6708,7 @@ func (s *SDK) UpdateNetworkProfile(ctx context.Context, request operations.Updat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6679,8 +6778,9 @@ func (s *SDK) UpdateNetworkProfile(ctx context.Context, request operations.Updat
 	return res, nil
 }
 
+// UpdateProject - Modifies the specified project name, given the project ARN and a new name.
 func (s *SDK) UpdateProject(ctx context.Context, request operations.UpdateProjectRequest) (*operations.UpdateProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.UpdateProject"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6700,7 +6800,7 @@ func (s *SDK) UpdateProject(ctx context.Context, request operations.UpdateProjec
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6770,8 +6870,9 @@ func (s *SDK) UpdateProject(ctx context.Context, request operations.UpdateProjec
 	return res, nil
 }
 
+// UpdateTestGridProject - Change details of a project.
 func (s *SDK) UpdateTestGridProject(ctx context.Context, request operations.UpdateTestGridProjectRequest) (*operations.UpdateTestGridProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.UpdateTestGridProject"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6791,7 +6892,7 @@ func (s *SDK) UpdateTestGridProject(ctx context.Context, request operations.Upda
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6861,8 +6962,9 @@ func (s *SDK) UpdateTestGridProject(ctx context.Context, request operations.Upda
 	return res, nil
 }
 
+// UpdateUpload - Updates an uploaded test spec.
 func (s *SDK) UpdateUpload(ctx context.Context, request operations.UpdateUploadRequest) (*operations.UpdateUploadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.UpdateUpload"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6882,7 +6984,7 @@ func (s *SDK) UpdateUpload(ctx context.Context, request operations.UpdateUploadR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6952,8 +7054,9 @@ func (s *SDK) UpdateUpload(ctx context.Context, request operations.UpdateUploadR
 	return res, nil
 }
 
+// UpdateVpceConfiguration - Updates information about an Amazon Virtual Private Cloud (VPC) endpoint configuration.
 func (s *SDK) UpdateVpceConfiguration(ctx context.Context, request operations.UpdateVpceConfigurationRequest) (*operations.UpdateVpceConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=DeviceFarm_20150623.UpdateVPCEConfiguration"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6973,7 +7076,7 @@ func (s *SDK) UpdateVpceConfiguration(ctx context.Context, request operations.Up
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

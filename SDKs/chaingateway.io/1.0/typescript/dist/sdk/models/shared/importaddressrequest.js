@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Content } from "./content";
 var ImportAddressRequest = /** @class */ (function (_super) {
     __extends(ImportAddressRequest, _super);
@@ -30,15 +30,15 @@ var ImportAddressRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=content" }),
+        SpeakeasyMetadata({ data: "json, name=content" }),
         __metadata("design:type", Content)
     ], ImportAddressRequest.prototype, "content", void 0);
     __decorate([
-        Metadata({ data: "json, name=filename" }),
+        SpeakeasyMetadata({ data: "json, name=filename" }),
         __metadata("design:type", String)
     ], ImportAddressRequest.prototype, "filename", void 0);
     __decorate([
-        Metadata({ data: "json, name=password" }),
+        SpeakeasyMetadata({ data: "json, name=password" }),
         __metadata("design:type", String)
     ], ImportAddressRequest.prototype, "password", void 0);
     return ImportAddressRequest;

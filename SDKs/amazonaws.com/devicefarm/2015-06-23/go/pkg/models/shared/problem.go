@@ -1,5 +1,7 @@
 package shared
 
+// Problem
+// Represents a specific warning or failure.
 type Problem struct {
 	Device  *Device              `json:"device,omitempty"`
 	Job     *ProblemDetail       `json:"job,omitempty"`

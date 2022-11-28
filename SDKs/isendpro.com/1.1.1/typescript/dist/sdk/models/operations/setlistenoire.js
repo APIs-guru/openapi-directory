@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var SetListeNoireSetlisteNoireEnum;
 (function (SetListeNoireSetlisteNoireEnum) {
@@ -34,15 +34,15 @@ var SetListeNoireQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=keyid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=keyid" }),
         __metadata("design:type", String)
     ], SetListeNoireQueryParams.prototype, "keyid", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=num" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=num" }),
         __metadata("design:type", String)
     ], SetListeNoireQueryParams.prototype, "num", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=setlisteNoire" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=setlisteNoire" }),
         __metadata("design:type", String)
     ], SetListeNoireQueryParams.prototype, "setlisteNoire", void 0);
     return SetListeNoireQueryParams;
@@ -54,7 +54,7 @@ var SetListeNoireRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SetListeNoireQueryParams)
     ], SetListeNoireRequest.prototype, "queryParams", void 0);
     return SetListeNoireRequest;
@@ -66,19 +66,19 @@ var SetListeNoireResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SetListeNoireResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Erreur)
     ], SetListeNoireResponse.prototype, "erreur", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListenoireReponse)
     ], SetListeNoireResponse.prototype, "listenoireReponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SetListeNoireResponse.prototype, "statusCode", void 0);
     return SetListeNoireResponse;

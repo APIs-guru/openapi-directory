@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .agentpool import *
 from .alt_enum import *
 from .awsaccesskey import *
@@ -7,7 +7,7 @@ from .awss3data import *
 from .azureblobstoragedata import *
 from .azurecredentials import *
 from .bandwidthlimit import *
-from .date import *
+from .date_ import *
 from .gcsdata import *
 from .googleserviceaccount import *
 from .httpdata import *

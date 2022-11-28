@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudDialogflowCxV3NluSettingsModelTrainingModeEnum(str, Enum):
     MODEL_TRAINING_MODE_UNSPECIFIED = "MODEL_TRAINING_MODE_UNSPECIFIED"
@@ -16,7 +18,11 @@ class GoogleCloudDialogflowCxV3NluSettingsModelTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowCxV3NluSettings:
-    classification_threshold: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'classificationThreshold' }})
-    model_training_mode: Optional[GoogleCloudDialogflowCxV3NluSettingsModelTrainingModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modelTrainingMode' }})
-    model_type: Optional[GoogleCloudDialogflowCxV3NluSettingsModelTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modelType' }})
+    r"""GoogleCloudDialogflowCxV3NluSettings
+    Settings related to NLU.
+    """
+    
+    classification_threshold: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('classificationThreshold') }})
+    model_training_mode: Optional[GoogleCloudDialogflowCxV3NluSettingsModelTrainingModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('modelTrainingMode') }})
+    model_type: Optional[GoogleCloudDialogflowCxV3NluSettingsModelTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('modelType') }})
     

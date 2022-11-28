@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Field
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A (sub) field of a type.
 **/
 export class Field extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxOccurs" })
+  @SpeakeasyMetadata({ data: "json, name=maxOccurs" })
   maxOccurs?: number;
 
-  @Metadata({ data: "json, name=minOccurs" })
+  @SpeakeasyMetadata({ data: "json, name=minOccurs" })
   minOccurs?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=table" })
+  @SpeakeasyMetadata({ data: "json, name=table" })
   table?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

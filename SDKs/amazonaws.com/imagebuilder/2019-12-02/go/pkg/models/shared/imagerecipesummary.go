@@ -1,5 +1,7 @@
 package shared
 
+// ImageRecipeSummary
+// A summary of an image recipe.
 type ImageRecipeSummary struct {
 	Arn         *string           `json:"arn,omitempty"`
 	DateCreated *string           `json:"dateCreated,omitempty"`

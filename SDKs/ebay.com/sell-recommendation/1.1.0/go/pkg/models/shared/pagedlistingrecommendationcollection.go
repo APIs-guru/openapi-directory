@@ -1,5 +1,7 @@
 package shared
 
+// PagedListingRecommendationCollection
+// The high-level object used to return a set of Promoted Listings ad recommendations.
 type PagedListingRecommendationCollection struct {
 	Href                   *string                 `json:"href,omitempty"`
 	Limit                  *int32                  `json:"limit,omitempty"`

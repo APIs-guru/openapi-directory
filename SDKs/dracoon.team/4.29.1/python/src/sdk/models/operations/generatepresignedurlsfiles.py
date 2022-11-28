@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class GeneratePresignedUrlsFilesPathParams:
-    upload_id: str = field(default=None, metadata={'path_param': { 'field_name': 'upload_id', 'style': 'simple', 'explode': False }})
+    upload_id: str = field(metadata={'path_param': { 'field_name': 'upload_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,15 +15,15 @@ class GeneratePresignedUrlsFilesHeaders:
 
 @dataclass
 class GeneratePresignedUrlsFilesRequest:
-    path_params: GeneratePresignedUrlsFilesPathParams = field(default=None)
-    headers: GeneratePresignedUrlsFilesHeaders = field(default=None)
-    request: shared.GeneratePresignedUrlsRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GeneratePresignedUrlsFilesHeaders = field()
+    path_params: GeneratePresignedUrlsFilesPathParams = field()
+    request: shared.GeneratePresignedUrlsRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GeneratePresignedUrlsFilesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     presigned_url_list: Optional[shared.PresignedURLList] = field(default=None)
-    status_code: int = field(default=None)
     

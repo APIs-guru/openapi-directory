@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SearchOrganizationsRequest
 /**
  * The request sent to the `SearchOrganizations` method.
@@ -33,15 +33,15 @@ var SearchOrganizationsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=filter" }),
+        SpeakeasyMetadata({ data: "json, name=filter" }),
         __metadata("design:type", String)
     ], SearchOrganizationsRequest.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "json, name=pageSize" }),
+        SpeakeasyMetadata({ data: "json, name=pageSize" }),
         __metadata("design:type", Number)
     ], SearchOrganizationsRequest.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=pageToken" }),
+        SpeakeasyMetadata({ data: "json, name=pageToken" }),
         __metadata("design:type", String)
     ], SearchOrganizationsRequest.prototype, "pageToken", void 0);
     return SearchOrganizationsRequest;

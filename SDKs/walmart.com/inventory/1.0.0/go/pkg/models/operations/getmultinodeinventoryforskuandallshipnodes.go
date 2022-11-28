@@ -16,12 +16,6 @@ type GetMultiNodeInventoryForSkuAndAllShipnodesHeaders struct {
 	WmSvcName             string `header:"style=simple,explode=false,name=WM_SVC.NAME"`
 }
 
-type GetMultiNodeInventoryForSkuAndAllShipnodesRequest struct {
-	PathParams  GetMultiNodeInventoryForSkuAndAllShipnodesPathParams
-	QueryParams GetMultiNodeInventoryForSkuAndAllShipnodesQueryParams
-	Headers     GetMultiNodeInventoryForSkuAndAllShipnodesHeaders
-}
-
 type GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesAvailToSellQtyUnitEnum string
 
 const (
@@ -57,6 +51,8 @@ const (
 	GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesErrorsSeverityEnumError GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesErrorsSeverityEnum = "ERROR"
 )
 
+// GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesErrors
+// Node Update Error description.
 type GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesErrors struct {
 	Category         *GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesErrorsCategoryEnum `json:"category,omitempty"`
 	Causes           []GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodesErrorsCauses      `json:"causes,omitempty"`
@@ -89,6 +85,12 @@ type GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodes struct {
 type GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSON struct {
 	Nodes []GetMultiNodeInventoryForSkuAndAllShipnodes200ApplicationJSONNodes `json:"nodes,omitempty"`
 	Sku   *string                                                             `json:"sku,omitempty"`
+}
+
+type GetMultiNodeInventoryForSkuAndAllShipnodesRequest struct {
+	PathParams  GetMultiNodeInventoryForSkuAndAllShipnodesPathParams
+	QueryParams GetMultiNodeInventoryForSkuAndAllShipnodesQueryParams
+	Headers     GetMultiNodeInventoryForSkuAndAllShipnodesHeaders
 }
 
 type GetMultiNodeInventoryForSkuAndAllShipnodesResponse struct {

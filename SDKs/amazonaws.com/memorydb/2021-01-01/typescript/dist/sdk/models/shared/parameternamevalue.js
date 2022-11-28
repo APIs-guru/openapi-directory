@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ParameterNameValue
 /**
  * Describes a name-value pair that is used to update the value of a parameter.
@@ -33,11 +33,11 @@ var ParameterNameValue = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ParameterName" }),
+        SpeakeasyMetadata({ data: "json, name=ParameterName" }),
         __metadata("design:type", String)
     ], ParameterNameValue.prototype, "parameterName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParameterValue" }),
+        SpeakeasyMetadata({ data: "json, name=ParameterValue" }),
         __metadata("design:type", String)
     ], ParameterNameValue.prototype, "parameterValue", void 0);
     return ParameterNameValue;

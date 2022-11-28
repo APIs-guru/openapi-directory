@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1EnvironmentGroup } from "./googlecloudapigeev1environmentgroup";
+
 
 
 // GoogleCloudApigeeV1ListEnvironmentGroupsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudApigeeV1EnvironmentGroup } from "./googlecloudapigeev1enviro
  * Response for ListEnvironmentGroups.
 **/
 export class GoogleCloudApigeeV1ListEnvironmentGroupsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environmentGroups", elemType: shared.GoogleCloudApigeeV1EnvironmentGroup })
+  @SpeakeasyMetadata({ data: "json, name=environmentGroups", elemType: GoogleCloudApigeeV1EnvironmentGroup })
   environmentGroups?: GoogleCloudApigeeV1EnvironmentGroup[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

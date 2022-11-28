@@ -11,22 +11,10 @@ type GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDCommentsCommentIDP
 	Workspace     string `pathParam:"style=simple,explode=false,name=workspace"`
 }
 
-type GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDCommentsCommentIDSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDCommentsCommentIDSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDCommentsCommentIDSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDCommentsCommentIDSecurity struct {
-	Option1 *GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDCommentsCommentIDSecurityOption1 `security:"option"`
-	Option2 *GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDCommentsCommentIDSecurityOption2 `security:"option"`
-	Option3 *GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDCommentsCommentIDSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDCommentsCommentIDRequest struct {

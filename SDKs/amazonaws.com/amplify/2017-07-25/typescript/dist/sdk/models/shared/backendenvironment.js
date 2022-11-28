@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // BackendEnvironment
 /**
  *  Describes the backend environment for an Amplify app.
@@ -33,27 +33,27 @@ var BackendEnvironment = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=backendEnvironmentArn" }),
+        SpeakeasyMetadata({ data: "json, name=backendEnvironmentArn" }),
         __metadata("design:type", String)
     ], BackendEnvironment.prototype, "backendEnvironmentArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", Date)
     ], BackendEnvironment.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=deploymentArtifacts" }),
+        SpeakeasyMetadata({ data: "json, name=deploymentArtifacts" }),
         __metadata("design:type", String)
     ], BackendEnvironment.prototype, "deploymentArtifacts", void 0);
     __decorate([
-        Metadata({ data: "json, name=environmentName" }),
+        SpeakeasyMetadata({ data: "json, name=environmentName" }),
         __metadata("design:type", String)
     ], BackendEnvironment.prototype, "environmentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=stackName" }),
+        SpeakeasyMetadata({ data: "json, name=stackName" }),
         __metadata("design:type", String)
     ], BackendEnvironment.prototype, "stackName", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", Date)
     ], BackendEnvironment.prototype, "updateTime", void 0);
     return BackendEnvironment;

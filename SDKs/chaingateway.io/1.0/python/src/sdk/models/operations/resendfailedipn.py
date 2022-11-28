@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class ResendFailedIpnHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ResendFailedIpnRequest:
-    headers: ResendFailedIpnHeaders = field(default=None)
-    request: shared.ResendFailedIpnRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ResendFailedIpnHeaders = field()
+    request: shared.ResendFailedIpnRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ResendFailedIpnResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     resend_failed_ipn: Optional[shared.ResendFailedIpn] = field(default=None)
     

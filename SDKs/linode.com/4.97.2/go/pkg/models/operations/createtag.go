@@ -12,26 +12,18 @@ type CreateTagRequestBody struct {
 	Volumes       []int64 `json:"volumes,omitempty"`
 }
 
-type CreateTagSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type CreateTagSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type CreateTagSecurity struct {
-	Option1 *CreateTagSecurityOption1 `security:"option"`
-	Option2 *CreateTagSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type CreateTagDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateTagRequest struct {
 	Request  *CreateTagRequestBody `request:"mediaType=application/json"`
 	Security CreateTagSecurity
-}
-
-type CreateTagDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateTagResponse struct {

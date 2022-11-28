@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TranslationKeysUpdateTranslationKeyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ID" })
   id: number;
 }
 
 
 export class TranslationKeysUpdateTranslationKeyRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   oasSupportSharedModelsTranslationKey?: shared.OasSupportSharedModelsTranslationKey;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   oasSupportSharedModelsTranslationKey1?: shared.OasSupportSharedModelsTranslationKey;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   oasSupportSharedModelsTranslationKey2?: shared.OasSupportSharedModelsTranslationKey;
 
-  @Metadata({ data: "request, media_type=text/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/xml" })
   textXml: Uint8Array;
 }
 
 
 export class TranslationKeysUpdateTranslationKeyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TranslationKeysUpdateTranslationKeyPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: TranslationKeysUpdateTranslationKeyRequests;
 }
 
 
 export class TranslationKeysUpdateTranslationKeyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -18,6 +18,8 @@ type UpdateProfileHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateProfileRequestBodyAddress
+// Updates associated with the address properties of a customer profile.
 type UpdateProfileRequestBodyAddress struct {
 	Address1   *string `json:"Address1,omitempty"`
 	Address2   *string `json:"Address2,omitempty"`
@@ -31,6 +33,8 @@ type UpdateProfileRequestBodyAddress struct {
 	State      *string `json:"State,omitempty"`
 }
 
+// UpdateProfileRequestBodyBillingAddress
+// Updates associated with the address properties of a customer profile.
 type UpdateProfileRequestBodyBillingAddress struct {
 	Address1   *string `json:"Address1,omitempty"`
 	Address2   *string `json:"Address2,omitempty"`
@@ -52,6 +56,8 @@ const (
 	UpdateProfileRequestBodyGenderEnumUnspecified UpdateProfileRequestBodyGenderEnum = "UNSPECIFIED"
 )
 
+// UpdateProfileRequestBodyMailingAddress
+// Updates associated with the address properties of a customer profile.
 type UpdateProfileRequestBodyMailingAddress struct {
 	Address1   *string `json:"Address1,omitempty"`
 	Address2   *string `json:"Address2,omitempty"`
@@ -73,6 +79,8 @@ const (
 	UpdateProfileRequestBodyPartyTypeEnumOther      UpdateProfileRequestBodyPartyTypeEnum = "OTHER"
 )
 
+// UpdateProfileRequestBodyShippingAddress
+// Updates associated with the address properties of a customer profile.
 type UpdateProfileRequestBodyShippingAddress struct {
 	Address1   *string `json:"Address1,omitempty"`
 	Address2   *string `json:"Address2,omitempty"`

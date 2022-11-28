@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudVideointelligenceV1beta2ShotChangeDetectionConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Config for SHOT_CHANGE_DETECTION.
 **/
 export class GoogleCloudVideointelligenceV1beta2ShotChangeDetectionConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model?: string;
 }

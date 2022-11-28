@@ -15,15 +15,15 @@ type VirtualizationInterfacesListQueryParams struct {
 	VirtualMachineID *string  `queryParam:"style=form,explode=true,name=virtual_machine_id"`
 }
 
-type VirtualizationInterfacesListRequest struct {
-	QueryParams VirtualizationInterfacesListQueryParams
-}
-
 type VirtualizationInterfacesList200ApplicationJSON struct {
 	Count    int64              `json:"count"`
 	Next     *string            `json:"next,omitempty"`
 	Previous *string            `json:"previous,omitempty"`
 	Results  []shared.Interface `json:"results"`
+}
+
+type VirtualizationInterfacesListRequest struct {
+	QueryParams VirtualizationInterfacesListQueryParams
 }
 
 type VirtualizationInterfacesListResponse struct {

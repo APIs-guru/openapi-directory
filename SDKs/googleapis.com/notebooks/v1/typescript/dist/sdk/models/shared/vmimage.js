@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // VmImage
 /**
  * Definition of a custom Compute Engine virtual machine image for starting a notebook instance with the environment installed directly on the VM.
@@ -33,15 +33,15 @@ var VmImage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=imageFamily" }),
+        SpeakeasyMetadata({ data: "json, name=imageFamily" }),
         __metadata("design:type", String)
     ], VmImage.prototype, "imageFamily", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageName" }),
+        SpeakeasyMetadata({ data: "json, name=imageName" }),
         __metadata("design:type", String)
     ], VmImage.prototype, "imageName", void 0);
     __decorate([
-        Metadata({ data: "json, name=project" }),
+        SpeakeasyMetadata({ data: "json, name=project" }),
         __metadata("design:type", String)
     ], VmImage.prototype, "project", void 0);
     return VmImage;

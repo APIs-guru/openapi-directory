@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import color
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class OptionalColor:
-    color: Optional[color.Color] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'color' }})
+    r"""OptionalColor
+    A color that can either be fully opaque or fully transparent.
+    """
+    
+    color: Optional[Color] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('color') }})
     

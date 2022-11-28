@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SyntaxLanguageCodeEnum } from "./syntaxlanguagecodeenum";
 
 
+
 export class DetectSyntaxRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageCode" })
   languageCode: SyntaxLanguageCodeEnum;
 
-  @Metadata({ data: "json, name=Text" })
+  @SpeakeasyMetadata({ data: "json, name=Text" })
   text: string;
 }

@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LinkConfirmationRequestConfirmation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=linkRefNumber" })
+  @SpeakeasyMetadata({ data: "json, name=linkRefNumber" })
   linkRefNumber: string;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token: string;
 }
 
 
 export class LinkConfirmationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=confirmation" })
+  @SpeakeasyMetadata({ data: "json, name=confirmation" })
   confirmation: LinkConfirmationRequestConfirmation;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: Date;
 }

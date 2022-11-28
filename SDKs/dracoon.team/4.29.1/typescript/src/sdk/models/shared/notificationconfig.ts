@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NotificationConfig
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Notification configuration information
 **/
 export class NotificationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channelIds" })
+  @SpeakeasyMetadata({ data: "json, name=channelIds" })
   channelIds: number[];
 
-  @Metadata({ data: "json, name=eventTypeName" })
+  @SpeakeasyMetadata({ data: "json, name=eventTypeName" })
   eventTypeName: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=scopeId" })
+  @SpeakeasyMetadata({ data: "json, name=scopeId" })
   scopeId: number;
 }

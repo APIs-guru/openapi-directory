@@ -1,6 +1,7 @@
 
 
+
 export enum TaskDefinitionStatusEnum {
-    Active = "ACTIVE"
-,    Inactive = "INACTIVE"
+    Active = "ACTIVE",
+    Inactive = "INACTIVE"
 }

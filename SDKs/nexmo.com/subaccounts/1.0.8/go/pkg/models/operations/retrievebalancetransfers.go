@@ -18,12 +18,6 @@ type RetrieveBalanceTransfersSecurity struct {
 	BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
 }
 
-type RetrieveBalanceTransfersRequest struct {
-	PathParams  RetrieveBalanceTransfersPathParams
-	QueryParams RetrieveBalanceTransfersQueryParams
-	Security    RetrieveBalanceTransfersSecurity
-}
-
 type RetrieveBalanceTransfers401ApplicationJSON struct {
 	Detail   string `json:"detail"`
 	Instance string `json:"instance"`
@@ -31,11 +25,19 @@ type RetrieveBalanceTransfers401ApplicationJSON struct {
 	Type     string `json:"type"`
 }
 
+// RetrieveBalanceTransfers404ApplicationJSON
+// Invalid API Key
 type RetrieveBalanceTransfers404ApplicationJSON struct {
 	Detail   string `json:"detail"`
 	Instance string `json:"instance"`
 	Title    string `json:"title"`
 	Type     string `json:"type"`
+}
+
+type RetrieveBalanceTransfersRequest struct {
+	PathParams  RetrieveBalanceTransfersPathParams
+	QueryParams RetrieveBalanceTransfersQueryParams
+	Security    RetrieveBalanceTransfersSecurity
 }
 
 type RetrieveBalanceTransfersResponse struct {

@@ -1,0 +1,5 @@
+package shared
+
+type CreateLocalGatewayRouteTableVpcAssociationResult struct {
+	LocalGatewayRouteTableVpcAssociation *LocalGatewayRouteTableVpcAssociation
+}

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Group
+// The representation of an Amazon WorkMail group.
 type Group struct {
 	DisabledDate *time.Time       `json:"DisabledDate,omitempty"`
 	Email        *string          `json:"Email,omitempty"`

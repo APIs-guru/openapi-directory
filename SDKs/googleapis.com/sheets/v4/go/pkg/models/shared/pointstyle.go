@@ -14,6 +14,8 @@ const (
 	PointStyleShapeEnumXMark                 PointStyleShapeEnum = "X_MARK"
 )
 
+// PointStyle
+// The style of a point on the chart.
 type PointStyle struct {
 	Shape *PointStyleShapeEnum `json:"shape,omitempty"`
 	Size  *float64             `json:"size,omitempty"`

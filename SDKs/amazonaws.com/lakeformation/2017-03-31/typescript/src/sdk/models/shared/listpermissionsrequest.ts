@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataLakePrincipal } from "./datalakeprincipal";
 import { Resource } from "./resource";
 import { DataLakeResourceTypeEnum } from "./datalakeresourcetypeenum";
 
 
+
 export class ListPermissionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CatalogId" })
+  @SpeakeasyMetadata({ data: "json, name=CatalogId" })
   catalogId?: string;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Principal" })
+  @SpeakeasyMetadata({ data: "json, name=Principal" })
   principal?: DataLakePrincipal;
 
-  @Metadata({ data: "json, name=Resource" })
+  @SpeakeasyMetadata({ data: "json, name=Resource" })
   resource?: Resource;
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType?: DataLakeResourceTypeEnum;
 }

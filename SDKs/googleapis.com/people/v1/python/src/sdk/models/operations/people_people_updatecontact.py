@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PeoplePeopleUpdateContactPathParams:
-    resource_name: str = field(default=None, metadata={'path_param': { 'field_name': 'resourceName', 'style': 'simple', 'explode': False }})
+    resource_name: str = field(metadata={'path_param': { 'field_name': 'resourceName', 'style': 'simple', 'explode': False }})
     
 class PeoplePeopleUpdateContactSourcesEnum(str, Enum):
     READ_SOURCE_TYPE_UNSPECIFIED = "READ_SOURCE_TYPE_UNSPECIFIED"
@@ -34,21 +38,21 @@ class PeoplePeopleUpdateContactQueryParams:
 
 @dataclass
 class PeoplePeopleUpdateContactSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PeoplePeopleUpdateContactRequest:
-    path_params: PeoplePeopleUpdateContactPathParams = field(default=None)
-    query_params: PeoplePeopleUpdateContactQueryParams = field(default=None)
-    request: Optional[shared.Person] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PeoplePeopleUpdateContactSecurity = field(default=None)
+    path_params: PeoplePeopleUpdateContactPathParams = field()
+    query_params: PeoplePeopleUpdateContactQueryParams = field()
+    security: PeoplePeopleUpdateContactSecurity = field()
+    request: Optional[shared.PersonInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PeoplePeopleUpdateContactResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     person: Optional[shared.Person] = field(default=None)
-    status_code: int = field(default=None)
     

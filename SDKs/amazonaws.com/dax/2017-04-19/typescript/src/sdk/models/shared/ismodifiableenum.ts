@@ -1,7 +1,8 @@
 
 
+
 export enum IsModifiableEnum {
-    True = "TRUE"
-,    False = "FALSE"
-,    Conditional = "CONDITIONAL"
+    True = "TRUE",
+    False = "FALSE",
+    Conditional = "CONDITIONAL"
 }

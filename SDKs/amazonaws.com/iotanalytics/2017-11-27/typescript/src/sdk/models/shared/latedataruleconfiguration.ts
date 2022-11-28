@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeltaTimeSessionWindowConfiguration } from "./deltatimesessionwindowconfiguration";
+
 
 
 // LateDataRuleConfiguration
@@ -7,6 +8,6 @@ import { DeltaTimeSessionWindowConfiguration } from "./deltatimesessionwindowcon
  * The information needed to configure a delta time session window.
 **/
 export class LateDataRuleConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deltaTimeSessionWindowConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=deltaTimeSessionWindowConfiguration" })
   deltaTimeSessionWindowConfiguration?: DeltaTimeSessionWindowConfiguration;
 }

@@ -1,17 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ControllersSystemItem } from "./controllerssystemitem";
 import { ControllersLinks } from "./controllerslinks";
 import { ControllersListMeta } from "./controllerslistmeta";
 
 
+
 export class ControllersAdvisorySystemsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.ControllersSystemItem })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: ControllersSystemItem })
   data?: ControllersSystemItem[];
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: ControllersLinks;
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: ControllersListMeta;
 }

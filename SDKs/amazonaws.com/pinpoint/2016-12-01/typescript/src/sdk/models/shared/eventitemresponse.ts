@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EventItemResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides the status code and message that result from processing an event.
 **/
 export class EventItemResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 
-  @Metadata({ data: "json, name=StatusCode" })
+  @SpeakeasyMetadata({ data: "json, name=StatusCode" })
   statusCode?: number;
 }

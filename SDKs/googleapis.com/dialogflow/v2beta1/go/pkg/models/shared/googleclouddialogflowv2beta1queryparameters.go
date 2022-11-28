@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2beta1QueryParameters
+// Represents the parameters of the conversational query.
 type GoogleCloudDialogflowV2beta1QueryParameters struct {
 	Contexts                       []GoogleCloudDialogflowV2beta1Context                       `json:"contexts,omitempty"`
 	GeoLocation                    *GoogleTypeLatLng                                           `json:"geoLocation,omitempty"`

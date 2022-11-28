@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ItvEntitlementCancelation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cancelled_at" })
+  @SpeakeasyMetadata({ data: "json, name=cancelled_at" })
   cancelledAt: Date;
 
-  @Metadata({ data: "json, name=itvId" })
+  @SpeakeasyMetadata({ data: "json, name=itvId" })
   itvId: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source: string;
 
-  @Metadata({ data: "json, name=subscriptionId" })
+  @SpeakeasyMetadata({ data: "json, name=subscriptionId" })
   subscriptionId: string;
 }

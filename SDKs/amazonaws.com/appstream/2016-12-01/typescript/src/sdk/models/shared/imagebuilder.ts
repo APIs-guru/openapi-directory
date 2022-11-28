@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessEndpoint } from "./accessendpoint";
 import { DomainJoinInfo } from "./domainjoininfo";
 import { ResourceError } from "./resourceerror";
@@ -10,62 +9,63 @@ import { ImageBuilderStateChangeReason } from "./imagebuilderstatechangereason";
 import { VpcConfig } from "./vpcconfig";
 
 
+
 // ImageBuilder
 /** 
  * Describes a virtual machine that is used to create an image. 
 **/
 export class ImageBuilder extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessEndpoints", elemType: shared.AccessEndpoint })
+  @SpeakeasyMetadata({ data: "json, name=AccessEndpoints", elemType: AccessEndpoint })
   accessEndpoints?: AccessEndpoint[];
 
-  @Metadata({ data: "json, name=AppstreamAgentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=AppstreamAgentVersion" })
   appstreamAgentVersion?: string;
 
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=CreatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedTime" })
   createdTime?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=DisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=DomainJoinInfo" })
+  @SpeakeasyMetadata({ data: "json, name=DomainJoinInfo" })
   domainJoinInfo?: DomainJoinInfo;
 
-  @Metadata({ data: "json, name=EnableDefaultInternetAccess" })
+  @SpeakeasyMetadata({ data: "json, name=EnableDefaultInternetAccess" })
   enableDefaultInternetAccess?: boolean;
 
-  @Metadata({ data: "json, name=IamRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=IamRoleArn" })
   iamRoleArn?: string;
 
-  @Metadata({ data: "json, name=ImageArn" })
+  @SpeakeasyMetadata({ data: "json, name=ImageArn" })
   imageArn?: string;
 
-  @Metadata({ data: "json, name=ImageBuilderErrors", elemType: shared.ResourceError })
+  @SpeakeasyMetadata({ data: "json, name=ImageBuilderErrors", elemType: ResourceError })
   imageBuilderErrors?: ResourceError[];
 
-  @Metadata({ data: "json, name=InstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceType" })
   instanceType?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=NetworkAccessConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkAccessConfiguration" })
   networkAccessConfiguration?: NetworkAccessConfiguration;
 
-  @Metadata({ data: "json, name=Platform" })
+  @SpeakeasyMetadata({ data: "json, name=Platform" })
   platform?: PlatformTypeEnum;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: ImageBuilderStateEnum;
 
-  @Metadata({ data: "json, name=StateChangeReason" })
+  @SpeakeasyMetadata({ data: "json, name=StateChangeReason" })
   stateChangeReason?: ImageBuilderStateChangeReason;
 
-  @Metadata({ data: "json, name=VpcConfig" })
+  @SpeakeasyMetadata({ data: "json, name=VpcConfig" })
   vpcConfig?: VpcConfig;
 }

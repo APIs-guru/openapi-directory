@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NamespaceDeletionStatusErrorCodesEnum } from "./namespacedeletionstatuserrorcodesenum";
 import { NamespaceDeletionStatusEnum } from "./namespacedeletionstatusenum";
 
 
+
 export class GetNamespaceDeletionStatusResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorCode" })
+  @SpeakeasyMetadata({ data: "json, name=errorCode" })
   errorCode?: NamespaceDeletionStatusErrorCodesEnum;
 
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=namespaceArn" })
+  @SpeakeasyMetadata({ data: "json, name=namespaceArn" })
   namespaceArn?: string;
 
-  @Metadata({ data: "json, name=namespaceName" })
+  @SpeakeasyMetadata({ data: "json, name=namespaceName" })
   namespaceName?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: NamespaceDeletionStatusEnum;
 }

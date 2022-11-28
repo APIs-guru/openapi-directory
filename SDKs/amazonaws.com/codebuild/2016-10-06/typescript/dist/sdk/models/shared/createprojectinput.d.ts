@@ -1,0 +1,34 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { ProjectArtifacts } from "./projectartifacts";
+import { ProjectBuildBatchConfig } from "./projectbuildbatchconfig";
+import { ProjectCache } from "./projectcache";
+import { ProjectEnvironment } from "./projectenvironment";
+import { ProjectFileSystemLocation } from "./projectfilesystemlocation";
+import { LogsConfig } from "./logsconfig";
+import { ProjectSourceVersion } from "./projectsourceversion";
+import { ProjectSource } from "./projectsource";
+import { Tag } from "./tag";
+import { VpcConfig } from "./vpcconfig";
+export declare class CreateProjectInput extends SpeakeasyBase {
+    artifacts: ProjectArtifacts;
+    badgeEnabled?: boolean;
+    buildBatchConfig?: ProjectBuildBatchConfig;
+    cache?: ProjectCache;
+    concurrentBuildLimit?: number;
+    description?: string;
+    encryptionKey?: string;
+    environment: ProjectEnvironment;
+    fileSystemLocations?: ProjectFileSystemLocation[];
+    logsConfig?: LogsConfig;
+    name: string;
+    queuedTimeoutInMinutes?: number;
+    secondaryArtifacts?: ProjectArtifacts[];
+    secondarySourceVersions?: ProjectSourceVersion[];
+    secondarySources?: ProjectSource[];
+    serviceRole: string;
+    source: ProjectSource;
+    sourceVersion?: string;
+    tags?: Tag[];
+    timeoutInMinutes?: number;
+    vpcConfig?: VpcConfig;
+}

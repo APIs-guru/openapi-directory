@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigChange } from "./configchange";
+
 
 
 // ChangeReport
@@ -8,6 +8,6 @@ import { ConfigChange } from "./configchange";
  * Change report associated with a particular service configuration. It contains a list of ConfigChanges based on the comparison between two service configurations.
 **/
 export class ChangeReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configChanges", elemType: shared.ConfigChange })
+  @SpeakeasyMetadata({ data: "json, name=configChanges", elemType: ConfigChange })
   configChanges?: ConfigChange[];
 }

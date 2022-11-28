@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionKey } from "./encryptionkey";
 import { NamespacedNames } from "./namespacednames";
 import { Namespaces } from "./namespaces";
@@ -36,27 +36,27 @@ var BackupConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allNamespaces" }),
+        SpeakeasyMetadata({ data: "json, name=allNamespaces" }),
         __metadata("design:type", Boolean)
     ], BackupConfig.prototype, "allNamespaces", void 0);
     __decorate([
-        Metadata({ data: "json, name=encryptionKey" }),
+        SpeakeasyMetadata({ data: "json, name=encryptionKey" }),
         __metadata("design:type", EncryptionKey)
     ], BackupConfig.prototype, "encryptionKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=includeSecrets" }),
+        SpeakeasyMetadata({ data: "json, name=includeSecrets" }),
         __metadata("design:type", Boolean)
     ], BackupConfig.prototype, "includeSecrets", void 0);
     __decorate([
-        Metadata({ data: "json, name=includeVolumeData" }),
+        SpeakeasyMetadata({ data: "json, name=includeVolumeData" }),
         __metadata("design:type", Boolean)
     ], BackupConfig.prototype, "includeVolumeData", void 0);
     __decorate([
-        Metadata({ data: "json, name=selectedApplications" }),
+        SpeakeasyMetadata({ data: "json, name=selectedApplications" }),
         __metadata("design:type", NamespacedNames)
     ], BackupConfig.prototype, "selectedApplications", void 0);
     __decorate([
-        Metadata({ data: "json, name=selectedNamespaces" }),
+        SpeakeasyMetadata({ data: "json, name=selectedNamespaces" }),
         __metadata("design:type", Namespaces)
     ], BackupConfig.prototype, "selectedNamespaces", void 0);
     return BackupConfig;

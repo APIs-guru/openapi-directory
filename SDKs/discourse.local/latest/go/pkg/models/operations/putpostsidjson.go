@@ -18,12 +18,6 @@ type PutPostsIDJSONRequestBody struct {
 	Post *PutPostsIDJSONRequestBodyPost `json:"post,omitempty"`
 }
 
-type PutPostsIDJSONRequest struct {
-	PathParams PutPostsIDJSONPathParams
-	Headers    PutPostsIDJSONHeaders
-	Request    *PutPostsIDJSONRequestBody `request:"mediaType=application/json"`
-}
-
 type PutPostsIDJSON200ApplicationJSONPostActionsSummary struct {
 	CanAct *bool  `json:"can_act,omitempty"`
 	ID     *int64 `json:"id,omitempty"`
@@ -80,6 +74,12 @@ type PutPostsIDJSON200ApplicationJSONPost struct {
 
 type PutPostsIDJSON200ApplicationJSON struct {
 	Post *PutPostsIDJSON200ApplicationJSONPost `json:"post,omitempty"`
+}
+
+type PutPostsIDJSONRequest struct {
+	PathParams PutPostsIDJSONPathParams
+	Headers    PutPostsIDJSONHeaders
+	Request    *PutPostsIDJSONRequestBody `request:"mediaType=application/json"`
 }
 
 type PutPostsIDJSONResponse struct {

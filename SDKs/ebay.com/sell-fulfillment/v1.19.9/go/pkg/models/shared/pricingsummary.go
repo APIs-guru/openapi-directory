@@ -1,5 +1,7 @@
 package shared
 
+// PricingSummary
+// This type contains a summary of cumulative costs and charges for all line items of an order, including item price, price adjustments, sales taxes, delivery costs, and order discounts.
 type PricingSummary struct {
 	Adjustment            *Amount `json:"adjustment,omitempty"`
 	DeliveryCost          *Amount `json:"deliveryCost,omitempty"`

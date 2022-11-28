@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import clusterresourcerestorescope
-from . import namespacednames
-from . import namespaces
-from . import substitutionrule
+from sdk import utils
+from . import *
 
 class RestoreConfigClusterResourceConflictPolicyEnum(str, Enum):
     CLUSTER_RESOURCE_CONFLICT_POLICY_UNSPECIFIED = "CLUSTER_RESOURCE_CONFLICT_POLICY_UNSPECIFIED"
@@ -26,12 +25,16 @@ class RestoreConfigVolumeDataRestorePolicyEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RestoreConfig:
-    all_namespaces: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allNamespaces' }})
-    cluster_resource_conflict_policy: Optional[RestoreConfigClusterResourceConflictPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clusterResourceConflictPolicy' }})
-    cluster_resource_restore_scope: Optional[clusterresourcerestorescope.ClusterResourceRestoreScope] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clusterResourceRestoreScope' }})
-    namespaced_resource_restore_mode: Optional[RestoreConfigNamespacedResourceRestoreModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'namespacedResourceRestoreMode' }})
-    selected_applications: Optional[namespacednames.NamespacedNames] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selectedApplications' }})
-    selected_namespaces: Optional[namespaces.Namespaces] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selectedNamespaces' }})
-    substitution_rules: Optional[List[substitutionrule.SubstitutionRule]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'substitutionRules' }})
-    volume_data_restore_policy: Optional[RestoreConfigVolumeDataRestorePolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'volumeDataRestorePolicy' }})
+    r"""RestoreConfig
+    Configuration of a restore. Next id: 9
+    """
+    
+    all_namespaces: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allNamespaces') }})
+    cluster_resource_conflict_policy: Optional[RestoreConfigClusterResourceConflictPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clusterResourceConflictPolicy') }})
+    cluster_resource_restore_scope: Optional[ClusterResourceRestoreScope] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clusterResourceRestoreScope') }})
+    namespaced_resource_restore_mode: Optional[RestoreConfigNamespacedResourceRestoreModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('namespacedResourceRestoreMode') }})
+    selected_applications: Optional[NamespacedNames] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('selectedApplications') }})
+    selected_namespaces: Optional[Namespaces] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('selectedNamespaces') }})
+    substitution_rules: Optional[List[SubstitutionRule]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('substitutionRules') }})
+    volume_data_restore_policy: Optional[RestoreConfigVolumeDataRestorePolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('volumeDataRestorePolicy') }})
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DatasetTypeEnum } from "./datasettypeenum";
 import { DomainEnum } from "./domainenum";
 import { EncryptionConfig } from "./encryptionconfig";

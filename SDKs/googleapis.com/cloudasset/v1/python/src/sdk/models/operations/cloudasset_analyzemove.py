@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudassetAnalyzeMovePathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 class CloudassetAnalyzeMoveViewEnum(str, Enum):
     ANALYSIS_VIEW_UNSPECIFIED = "ANALYSIS_VIEW_UNSPECIFIED"
@@ -32,20 +33,20 @@ class CloudassetAnalyzeMoveQueryParams:
 
 @dataclass
 class CloudassetAnalyzeMoveSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudassetAnalyzeMoveRequest:
-    path_params: CloudassetAnalyzeMovePathParams = field(default=None)
-    query_params: CloudassetAnalyzeMoveQueryParams = field(default=None)
-    security: CloudassetAnalyzeMoveSecurity = field(default=None)
+    path_params: CloudassetAnalyzeMovePathParams = field()
+    query_params: CloudassetAnalyzeMoveQueryParams = field()
+    security: CloudassetAnalyzeMoveSecurity = field()
     
 
 @dataclass
 class CloudassetAnalyzeMoveResponse:
+    content_type: str = field()
+    status_code: int = field()
     analyze_move_response: Optional[shared.AnalyzeMoveResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

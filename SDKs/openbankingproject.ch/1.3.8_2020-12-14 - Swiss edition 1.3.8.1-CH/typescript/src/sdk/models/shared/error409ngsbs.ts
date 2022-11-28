@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HrefType } from "./hreftype";
 import { TppMessage409Sbs } from "./tppmessage409sbs";
+
 
 
 // Error409NgSbs
@@ -10,9 +10,9 @@ import { TppMessage409Sbs } from "./tppmessage409sbs";
  * 
 **/
 export class Error409NgSbs extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_links", elemType: shared.HrefType })
+  @SpeakeasyMetadata({ data: "json, name=_links", elemType: HrefType })
   links?: Map<string, HrefType>;
 
-  @Metadata({ data: "json, name=tppMessages", elemType: shared.TppMessage409Sbs })
+  @SpeakeasyMetadata({ data: "json, name=tppMessages", elemType: TppMessage409Sbs })
   tppMessages?: TppMessage409Sbs[];
 }

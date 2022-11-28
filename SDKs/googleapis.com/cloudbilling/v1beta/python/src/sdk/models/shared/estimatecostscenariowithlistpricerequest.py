@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
-from . import costscenario
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EstimateCostScenarioWithListPriceRequest:
-    cost_scenario: Optional[costscenario.CostScenario] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'costScenario' }})
+    r"""EstimateCostScenarioWithListPriceRequest
+    Request for EstimateCostScenarioWithListPrice.
+    """
+    
+    cost_scenario: Optional[CostScenario] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('costScenario') }})
     

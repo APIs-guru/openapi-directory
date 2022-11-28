@@ -1,5 +1,7 @@
 package shared
 
+// ActionDeclaration
+// Represents information about an action declaration.
 type ActionDeclaration struct {
 	ActionTypeID    ActionTypeID      `json:"actionTypeId"`
 	Configuration   map[string]string `json:"configuration,omitempty"`

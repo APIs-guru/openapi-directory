@@ -29,15 +29,15 @@ type ExtrasExportTemplatesListQueryParams struct {
 	TemplateLanguageN *string `queryParam:"style=form,explode=true,name=template_language__n"`
 }
 
-type ExtrasExportTemplatesListRequest struct {
-	QueryParams ExtrasExportTemplatesListQueryParams
-}
-
 type ExtrasExportTemplatesList200ApplicationJSON struct {
 	Count    int64                   `json:"count"`
 	Next     *string                 `json:"next,omitempty"`
 	Previous *string                 `json:"previous,omitempty"`
 	Results  []shared.ExportTemplate `json:"results"`
+}
+
+type ExtrasExportTemplatesListRequest struct {
+	QueryParams ExtrasExportTemplatesListQueryParams
 }
 
 type ExtrasExportTemplatesListResponse struct {

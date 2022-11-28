@@ -1,5 +1,7 @@
 package shared
 
+// CanarySettings
+// Configuration settings of a canary deployment.
 type CanarySettings struct {
 	DeploymentID           *string           `json:"deploymentId,omitempty"`
 	PercentTraffic         *float64          `json:"percentTraffic,omitempty"`

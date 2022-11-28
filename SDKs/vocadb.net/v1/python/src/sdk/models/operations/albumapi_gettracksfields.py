@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 
 
 @dataclass
 class AlbumAPIGetTracksFieldsPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class AlbumAPIGetTracksFieldsLangEnum(str, Enum):
     DEFAULT = "Default"
@@ -22,16 +23,16 @@ class AlbumAPIGetTracksFieldsQueryParams:
 
 @dataclass
 class AlbumAPIGetTracksFieldsRequest:
-    path_params: AlbumAPIGetTracksFieldsPathParams = field(default=None)
-    query_params: AlbumAPIGetTracksFieldsQueryParams = field(default=None)
+    path_params: AlbumAPIGetTracksFieldsPathParams = field()
+    query_params: AlbumAPIGetTracksFieldsQueryParams = field()
     
 
 @dataclass
 class AlbumAPIGetTracksFieldsResponse:
+    content_type: str = field()
+    status_code: int = field()
     album_api_get_tracks_fields_200_application_json_objects: Optional[List[dict[str, str]]] = field(default=None)
     album_api_get_tracks_fields_200_application_jsonp_objects: Optional[List[dict[str, str]]] = field(default=None)
     album_api_get_tracks_fields_200_text_json_objects: Optional[List[dict[str, str]]] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

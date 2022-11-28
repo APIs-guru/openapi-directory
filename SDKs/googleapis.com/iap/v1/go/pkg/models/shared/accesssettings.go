@@ -1,5 +1,7 @@
 package shared
 
+// AccessSettings
+// Access related settings for IAP protected apps.
 type AccessSettings struct {
 	AllowedDomainsSettings   *AllowedDomainsSettings   `json:"allowedDomainsSettings,omitempty"`
 	CorsSettings             *CorsSettings             `json:"corsSettings,omitempty"`

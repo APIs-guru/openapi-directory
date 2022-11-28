@@ -12,11 +12,6 @@ type GetDatasetExportSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetDatasetExportRequest struct {
-	QueryParams GetDatasetExportQueryParams
-	Security    GetDatasetExportSecurity
-}
-
 type GetDatasetExport400ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -31,6 +26,11 @@ type GetDatasetExport404ApplicationJSON struct {
 
 type GetDatasetExport500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetDatasetExportRequest struct {
+	QueryParams GetDatasetExportQueryParams
+	Security    GetDatasetExportSecurity
 }
 
 type GetDatasetExportResponse struct {

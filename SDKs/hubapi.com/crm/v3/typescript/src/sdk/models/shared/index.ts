@@ -11,6 +11,8 @@ export * from "./cardobjecttypebody";
 export * from "./cardpatchrequest";
 export * from "./cardresponse";
 export * from "./displayoption";
+export * from "./error";
+export * from "./errordetail";
 export * from "./iframeactionbody";
 export * from "./integratorcardpayloadresponse";
 export * from "./integratorobjectresult";

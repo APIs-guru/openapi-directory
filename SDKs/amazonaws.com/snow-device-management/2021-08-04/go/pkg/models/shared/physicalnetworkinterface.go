@@ -1,5 +1,7 @@
 package shared
 
+// PhysicalNetworkInterface
+// The details about the physical network interface for the device.
 type PhysicalNetworkInterface struct {
 	DefaultGateway             *string                    `json:"defaultGateway,omitempty"`
 	IPAddress                  *string                    `json:"ipAddress,omitempty"`

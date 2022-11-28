@@ -1,5 +1,7 @@
 package shared
 
+// AwsEcsTaskDefinitionContainerDefinitionsDetails
+// A container definition that describes a container in the task.
 type AwsEcsTaskDefinitionContainerDefinitionsDetails struct {
 	Command                []string                                                              `json:"Command,omitempty"`
 	CPU                    *int64                                                                `json:"Cpu,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails
+// Result of a risk analysis operation request.
 type GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails struct {
 	CategoricalStatsResult        *GooglePrivacyDlpV2CategoricalStatsResult        `json:"categoricalStatsResult,omitempty"`
 	DeltaPresenceEstimationResult *GooglePrivacyDlpV2DeltaPresenceEstimationResult `json:"deltaPresenceEstimationResult,omitempty"`

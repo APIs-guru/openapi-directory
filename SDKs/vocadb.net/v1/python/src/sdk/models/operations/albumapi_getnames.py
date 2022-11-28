@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 
 class AlbumAPIGetNamesNameMatchModeEnum(str, Enum):
     AUTO = "Auto"
@@ -18,15 +19,15 @@ class AlbumAPIGetNamesQueryParams:
 
 @dataclass
 class AlbumAPIGetNamesRequest:
-    query_params: AlbumAPIGetNamesQueryParams = field(default=None)
+    query_params: AlbumAPIGetNamesQueryParams = field()
     
 
 @dataclass
 class AlbumAPIGetNamesResponse:
+    content_type: str = field()
+    status_code: int = field()
     album_api_get_names_200_application_json_strings: Optional[List[str]] = field(default=None)
     album_api_get_names_200_application_jsonp_strings: Optional[List[str]] = field(default=None)
     album_api_get_names_200_text_json_strings: Optional[List[str]] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

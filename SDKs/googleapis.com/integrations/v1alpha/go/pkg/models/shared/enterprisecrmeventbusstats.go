@@ -1,5 +1,7 @@
 package shared
 
+// EnterpriseCrmEventbusStats
+// Stats for the requested dimensions: QPS, duration, and error/warning rate
 type EnterpriseCrmEventbusStats struct {
 	Dimensions        *EnterpriseCrmEventbusStatsDimensions `json:"dimensions,omitempty"`
 	DurationInSeconds *float64                              `json:"durationInSeconds,omitempty"`

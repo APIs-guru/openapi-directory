@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MetricValue
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The value to be compared with the <code>metric</code>.
 **/
 export class MetricValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cidrs" })
+  @SpeakeasyMetadata({ data: "json, name=cidrs" })
   cidrs?: string[];
 
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=number" })
+  @SpeakeasyMetadata({ data: "json, name=number" })
   number?: number;
 
-  @Metadata({ data: "json, name=numbers" })
+  @SpeakeasyMetadata({ data: "json, name=numbers" })
   numbers?: number[];
 
-  @Metadata({ data: "json, name=ports" })
+  @SpeakeasyMetadata({ data: "json, name=ports" })
   ports?: number[];
 
-  @Metadata({ data: "json, name=strings" })
+  @SpeakeasyMetadata({ data: "json, name=strings" })
   strings?: string[];
 }

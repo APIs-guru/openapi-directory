@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PublisherProfileMobileApplicationAppStoreEnum(str, Enum):
     APP_STORE_TYPE_UNSPECIFIED = "APP_STORE_TYPE_UNSPECIFIED"
@@ -21,7 +23,11 @@ class PublisherProfileMobileApplicationAppStoreEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PublisherProfileMobileApplication:
-    app_store: Optional[PublisherProfileMobileApplicationAppStoreEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appStore' }})
-    external_app_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'externalAppId' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    r"""PublisherProfileMobileApplication
+    A mobile application that contains a external app ID, name, and app store.
+    """
+    
+    app_store: Optional[PublisherProfileMobileApplicationAppStoreEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('appStore') }})
+    external_app_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('externalAppId') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     

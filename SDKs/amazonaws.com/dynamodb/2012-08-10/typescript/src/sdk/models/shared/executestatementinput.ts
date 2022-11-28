@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeValue } from "./attributevalue";
 
 
+
 export class ExecuteStatementInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConsistentRead" })
+  @SpeakeasyMetadata({ data: "json, name=ConsistentRead" })
   consistentRead?: boolean;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Parameters", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=Parameters", elemType: AttributeValue })
   parameters?: AttributeValue[];
 
-  @Metadata({ data: "json, name=Statement" })
+  @SpeakeasyMetadata({ data: "json, name=Statement" })
   statement: string;
 }

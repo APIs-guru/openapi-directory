@@ -4,29 +4,19 @@ from sdk.models import shared
 
 
 @dataclass
-class GetTaxSettingsSecurityOption1:
-    zettle_oauth: shared.SchemeZettleOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetTaxSettingsSecurityOption2:
-    zettle_api_key: shared.SchemeZettleAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
 class GetTaxSettingsSecurity:
-    option1: Optional[GetTaxSettingsSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetTaxSettingsSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    zettle_api_key: Optional[shared.SchemeZettleAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    zettle_oauth: Optional[shared.SchemeZettleOauth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetTaxSettingsRequest:
-    security: GetTaxSettingsSecurity = field(default=None)
+    security: GetTaxSettingsSecurity = field()
     
 
 @dataclass
 class GetTaxSettingsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     tax_settings_response: Optional[shared.TaxSettingsResponse] = field(default=None)
     

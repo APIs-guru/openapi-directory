@@ -9,11 +9,11 @@ class PostInventoryFillRateHeaders:
 
 @dataclass
 class PostInventoryFillRateRequest:
-    headers: PostInventoryFillRateHeaders = field(default=None)
+    headers: PostInventoryFillRateHeaders = field()
     
 
 @dataclass
 class PostInventoryFillRateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

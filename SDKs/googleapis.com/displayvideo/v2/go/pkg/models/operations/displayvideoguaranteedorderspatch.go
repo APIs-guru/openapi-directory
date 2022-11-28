@@ -33,7 +33,7 @@ type DisplayvideoGuaranteedOrdersPatchSecurity struct {
 type DisplayvideoGuaranteedOrdersPatchRequest struct {
 	PathParams  DisplayvideoGuaranteedOrdersPatchPathParams
 	QueryParams DisplayvideoGuaranteedOrdersPatchQueryParams
-	Request     *shared.GuaranteedOrder `request:"mediaType=application/json"`
+	Request     *shared.GuaranteedOrderInput `request:"mediaType=application/json"`
 	Security    DisplayvideoGuaranteedOrdersPatchSecurity
 }
 

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateSmtpDomainRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hostname" })
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
   hostname?: string;
 }

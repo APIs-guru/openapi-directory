@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Destiny2GetActivityHistoryPathParams = /** @class */ (function (_super) {
     __extends(Destiny2GetActivityHistoryPathParams, _super);
     function Destiny2GetActivityHistoryPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=characterId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=characterId" }),
         __metadata("design:type", Number)
     ], Destiny2GetActivityHistoryPathParams.prototype, "characterId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" }),
         __metadata("design:type", Number)
     ], Destiny2GetActivityHistoryPathParams.prototype, "destinyMembershipId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
         __metadata("design:type", Number)
     ], Destiny2GetActivityHistoryPathParams.prototype, "membershipType", void 0);
     return Destiny2GetActivityHistoryPathParams;
@@ -49,15 +49,15 @@ var Destiny2GetActivityHistoryQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=count" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=count" }),
         __metadata("design:type", Number)
     ], Destiny2GetActivityHistoryQueryParams.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=mode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mode" }),
         __metadata("design:type", Number)
     ], Destiny2GetActivityHistoryQueryParams.prototype, "mode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], Destiny2GetActivityHistoryQueryParams.prototype, "page", void 0);
     return Destiny2GetActivityHistoryQueryParams;
@@ -69,11 +69,11 @@ var Destiny2GetActivityHistoryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetActivityHistoryPathParams)
     ], Destiny2GetActivityHistoryRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetActivityHistoryQueryParams)
     ], Destiny2GetActivityHistoryRequest.prototype, "queryParams", void 0);
     return Destiny2GetActivityHistoryRequest;
@@ -85,15 +85,15 @@ var Destiny2GetActivityHistoryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], Destiny2GetActivityHistoryResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], Destiny2GetActivityHistoryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], Destiny2GetActivityHistoryResponse.prototype, "statusCode", void 0);
     return Destiny2GetActivityHistoryResponse;

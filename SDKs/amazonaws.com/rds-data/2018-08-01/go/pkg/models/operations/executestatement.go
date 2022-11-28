@@ -14,6 +14,8 @@ type ExecuteStatementHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ExecuteStatementRequestBodyResultSetOptions
+// Options that control how the result set is returned.
 type ExecuteStatementRequestBodyResultSetOptions struct {
 	DecimalReturnType *shared.DecimalReturnTypeEnum `json:"decimalReturnType,omitempty"`
 }

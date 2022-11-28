@@ -16,6 +16,8 @@ const (
 	OtoroshiHealthOtoroshiEnumDown      OtoroshiHealthOtoroshiEnum = "down"
 )
 
+// OtoroshiHealth
+// The structure that represent current Otoroshi health
 type OtoroshiHealth struct {
 	Datastore OtoroshiHealthDatastoreEnum `json:"datastore"`
 	Otoroshi  OtoroshiHealthOtoroshiEnum  `json:"otoroshi"`

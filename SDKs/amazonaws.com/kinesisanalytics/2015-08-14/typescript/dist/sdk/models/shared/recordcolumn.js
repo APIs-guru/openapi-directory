@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RecordColumn
 /**
  * <p>Describes the mapping of each data element in the streaming source to the corresponding column in the in-application stream.</p> <p>Also used to describe the format of the reference data source.</p>
@@ -33,15 +33,15 @@ var RecordColumn = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Mapping" }),
+        SpeakeasyMetadata({ data: "json, name=Mapping" }),
         __metadata("design:type", String)
     ], RecordColumn.prototype, "mapping", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], RecordColumn.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=SqlType" }),
+        SpeakeasyMetadata({ data: "json, name=SqlType" }),
         __metadata("design:type", String)
     ], RecordColumn.prototype, "sqlType", void 0);
     return RecordColumn;

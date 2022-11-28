@@ -1,6 +1,6 @@
 package operations
 
-var AirtravelCoordinatesServers = []string{
+var AirtravelCoordinatesServerList = []string{
 	"http://api.climatekuul.com:8000/footprint",
 }
 

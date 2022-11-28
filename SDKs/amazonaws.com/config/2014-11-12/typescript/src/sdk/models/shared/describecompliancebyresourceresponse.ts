@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComplianceByResource } from "./compliancebyresource";
+
 
 
 // DescribeComplianceByResourceResponse
@@ -8,9 +8,9 @@ import { ComplianceByResource } from "./compliancebyresource";
  * <p/>
 **/
 export class DescribeComplianceByResourceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComplianceByResources", elemType: shared.ComplianceByResource })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceByResources", elemType: ComplianceByResource })
   complianceByResources?: ComplianceByResource[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

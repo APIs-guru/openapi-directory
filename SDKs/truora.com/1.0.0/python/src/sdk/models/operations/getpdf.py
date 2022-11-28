@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetPdfPathParams:
-    check_id: str = field(default=None, metadata={'path_param': { 'field_name': 'check_id', 'style': 'simple', 'explode': False }})
+    check_id: str = field(metadata={'path_param': { 'field_name': 'check_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,12 +14,12 @@ class GetPdfQueryParams:
 
 @dataclass
 class GetPdfRequest:
-    path_params: GetPdfPathParams = field(default=None)
-    query_params: GetPdfQueryParams = field(default=None)
+    path_params: GetPdfPathParams = field()
+    query_params: GetPdfQueryParams = field()
     
 
 @dataclass
 class GetPdfResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class RetrievePrefixPricingPathParams extends SpeakeasyBase {
     type: string;
 }
@@ -6,10 +6,6 @@ export declare class RetrievePrefixPricingQueryParams extends SpeakeasyBase {
     apiKey: string;
     apiSecret: string;
     prefix: string;
-}
-export declare class RetrievePrefixPricingRequest extends SpeakeasyBase {
-    pathParams: RetrievePrefixPricingPathParams;
-    queryParams: RetrievePrefixPricingQueryParams;
 }
 export declare class RetrievePrefixPricing400ApplicationJsonInvalidParameters extends SpeakeasyBase {
     message?: string;
@@ -24,6 +20,10 @@ export declare class RetrievePrefixPricing401ApplicationJson extends SpeakeasyBa
     code: string;
     currency: string;
     errorCodeLabel: string;
+}
+export declare class RetrievePrefixPricingRequest extends SpeakeasyBase {
+    pathParams: RetrievePrefixPricingPathParams;
+    queryParams: RetrievePrefixPricingQueryParams;
 }
 export declare class RetrievePrefixPricingResponse extends SpeakeasyBase {
     contentType: string;

@@ -1,5 +1,7 @@
 package shared
 
+// UserDefinedFunctionInput
+// A structure used to create or update a user-defined function.
 type UserDefinedFunctionInput struct {
 	ClassName    *string            `json:"ClassName,omitempty"`
 	FunctionName *string            `json:"FunctionName,omitempty"`

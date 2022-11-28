@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetVolumesFsJsonHeaders = /** @class */ (function (_super) {
     __extends(GetVolumesFsJsonHeaders, _super);
@@ -30,11 +30,11 @@ var GetVolumesFsJsonHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" }),
         __metadata("design:type", String)
     ], GetVolumesFsJsonHeaders.prototype, "xAuthProjectId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" }),
         __metadata("design:type", String)
     ], GetVolumesFsJsonHeaders.prototype, "xAuthToken", void 0);
     return GetVolumesFsJsonHeaders;
@@ -46,7 +46,7 @@ var GetVolumesFsJsonRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetVolumesFsJsonHeaders)
     ], GetVolumesFsJsonRequest.prototype, "headers", void 0);
     return GetVolumesFsJsonRequest;
@@ -58,15 +58,15 @@ var GetVolumesFsJsonResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetVolumesFsJsonResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.Fileshare }),
+        SpeakeasyMetadata({ elemType: shared.Fileshare }),
         __metadata("design:type", Array)
     ], GetVolumesFsJsonResponse.prototype, "fileshares", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetVolumesFsJsonResponse.prototype, "statusCode", void 0);
     return GetVolumesFsJsonResponse;

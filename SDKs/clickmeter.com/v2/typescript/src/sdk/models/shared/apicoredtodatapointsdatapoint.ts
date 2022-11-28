@@ -1,110 +1,110 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiCoreDtoTagsTag } from "./apicoredtotagstag";
 import { ApiCoreDtoDatapointsTrackingLinkSpecifics } from "./apicoredtodatapointstrackinglinkspecifics";
 import { ApiCoreDtoDatapointsTrackingPixelSpecifics } from "./apicoredtodatapointstrackingpixelspecifics";
 
+
 export enum ApiCoreDtoDatapointsDatapointStatusEnum {
-    Active = "Active"
-,    Paused = "Paused"
-,    Abuse = "Abuse"
-,    Deleted = "Deleted"
+    Active = "Active",
+    Paused = "Paused",
+    Abuse = "Abuse",
+    Deleted = "Deleted"
 }
 
 export enum ApiCoreDtoDatapointsDatapointTypeEnum {
-    TrackingLink = "TrackingLink"
-,    TrackingPixel = "TrackingPixel"
+    TrackingLink = "TrackingLink",
+    TrackingPixel = "TrackingPixel"
 }
 
 
 export class ApiCoreDtoDatapointsDatapoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: string;
 
-  @Metadata({ data: "json, name=encodeIp" })
+  @SpeakeasyMetadata({ data: "json, name=encodeIp" })
   encodeIp?: boolean;
 
-  @Metadata({ data: "json, name=fifthConversionId" })
+  @SpeakeasyMetadata({ data: "json, name=fifthConversionId" })
   fifthConversionId?: number;
 
-  @Metadata({ data: "json, name=fifthConversionName" })
+  @SpeakeasyMetadata({ data: "json, name=fifthConversionName" })
   fifthConversionName?: string;
 
-  @Metadata({ data: "json, name=firstConversionId" })
+  @SpeakeasyMetadata({ data: "json, name=firstConversionId" })
   firstConversionId?: number;
 
-  @Metadata({ data: "json, name=firstConversionName" })
+  @SpeakeasyMetadata({ data: "json, name=firstConversionName" })
   firstConversionName?: string;
 
-  @Metadata({ data: "json, name=fourthConversionId" })
+  @SpeakeasyMetadata({ data: "json, name=fourthConversionId" })
   fourthConversionId?: number;
 
-  @Metadata({ data: "json, name=fourthConversionName" })
+  @SpeakeasyMetadata({ data: "json, name=fourthConversionName" })
   fourthConversionName?: string;
 
-  @Metadata({ data: "json, name=groupId" })
+  @SpeakeasyMetadata({ data: "json, name=groupId" })
   groupId?: number;
 
-  @Metadata({ data: "json, name=groupName" })
+  @SpeakeasyMetadata({ data: "json, name=groupName" })
   groupName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=isPublic" })
+  @SpeakeasyMetadata({ data: "json, name=isPublic" })
   isPublic?: boolean;
 
-  @Metadata({ data: "json, name=isSecured" })
+  @SpeakeasyMetadata({ data: "json, name=isSecured" })
   isSecured?: boolean;
 
-  @Metadata({ data: "json, name=lightTracking" })
+  @SpeakeasyMetadata({ data: "json, name=lightTracking" })
   lightTracking?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=preferred" })
+  @SpeakeasyMetadata({ data: "json, name=preferred" })
   preferred?: boolean;
 
-  @Metadata({ data: "json, name=redirectOnly" })
+  @SpeakeasyMetadata({ data: "json, name=redirectOnly" })
   redirectOnly?: boolean;
 
-  @Metadata({ data: "json, name=secondConversionId" })
+  @SpeakeasyMetadata({ data: "json, name=secondConversionId" })
   secondConversionId?: number;
 
-  @Metadata({ data: "json, name=secondConversionName" })
+  @SpeakeasyMetadata({ data: "json, name=secondConversionName" })
   secondConversionName?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ApiCoreDtoDatapointsDatapointStatusEnum;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.ApiCoreDtoTagsTag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: ApiCoreDtoTagsTag })
   tags?: ApiCoreDtoTagsTag[];
 
-  @Metadata({ data: "json, name=thirdConversionId" })
+  @SpeakeasyMetadata({ data: "json, name=thirdConversionId" })
   thirdConversionId?: number;
 
-  @Metadata({ data: "json, name=thirdConversionName" })
+  @SpeakeasyMetadata({ data: "json, name=thirdConversionName" })
   thirdConversionName?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=trackingCode" })
+  @SpeakeasyMetadata({ data: "json, name=trackingCode" })
   trackingCode?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ApiCoreDtoDatapointsDatapointTypeEnum;
 
-  @Metadata({ data: "json, name=typeTL" })
+  @SpeakeasyMetadata({ data: "json, name=typeTL" })
   typeTl?: ApiCoreDtoDatapointsTrackingLinkSpecifics;
 
-  @Metadata({ data: "json, name=typeTP" })
+  @SpeakeasyMetadata({ data: "json, name=typeTP" })
   typeTp?: ApiCoreDtoDatapointsTrackingPixelSpecifics;
 
-  @Metadata({ data: "json, name=writePermited" })
+  @SpeakeasyMetadata({ data: "json, name=writePermited" })
   writePermited?: boolean;
 }

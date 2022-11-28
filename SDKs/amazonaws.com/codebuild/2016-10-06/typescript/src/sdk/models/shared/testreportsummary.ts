@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TestReportSummary
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Information about a test report. 
 **/
 export class TestReportSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=durationInNanoSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=durationInNanoSeconds" })
   durationInNanoSeconds: number;
 
-  @Metadata({ data: "json, name=statusCounts" })
+  @SpeakeasyMetadata({ data: "json, name=statusCounts" })
   statusCounts: Map<string, number>;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 }

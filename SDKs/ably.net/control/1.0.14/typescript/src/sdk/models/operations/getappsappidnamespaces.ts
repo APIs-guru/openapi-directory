@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAppsAppIdNamespacesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=app_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=app_id" })
   appId: string;
 }
 
 
 export class GetAppsAppIdNamespacesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
 export class GetAppsAppIdNamespacesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAppsAppIdNamespacesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetAppsAppIdNamespacesSecurity;
 }
 
 
 export class GetAppsAppIdNamespacesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata({ elemType: shared.NamespaceResponse })
+  @SpeakeasyMetadata({ elemType: shared.NamespaceResponse })
   namespaceResponses?: shared.NamespaceResponse[];
 }

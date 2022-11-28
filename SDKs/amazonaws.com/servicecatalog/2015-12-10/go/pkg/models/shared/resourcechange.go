@@ -1,5 +1,7 @@
 package shared
 
+// ResourceChange
+// Information about a resource change that will occur when a plan is executed.
 type ResourceChange struct {
 	Action             *ChangeActionEnum       `json:"Action,omitempty"`
 	Details            []ResourceChangeDetail  `json:"Details,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2InspectTemplate } from "./googleprivacydlpv2inspecttemplate";
+
 
 
 // GooglePrivacyDlpV2ListInspectTemplatesResponse
@@ -8,9 +8,9 @@ import { GooglePrivacyDlpV2InspectTemplate } from "./googleprivacydlpv2inspectte
  * Response message for ListInspectTemplates.
 **/
 export class GooglePrivacyDlpV2ListInspectTemplatesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inspectTemplates", elemType: shared.GooglePrivacyDlpV2InspectTemplate })
+  @SpeakeasyMetadata({ data: "json, name=inspectTemplates", elemType: GooglePrivacyDlpV2InspectTemplate })
   inspectTemplates?: GooglePrivacyDlpV2InspectTemplate[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

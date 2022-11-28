@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Tmpfs
 /**
  * <p>The container path, mount options, and size of the tmpfs mount.</p> <note> <p>This object isn't applicable to jobs that are running on Fargate resources.</p> </note>
@@ -33,15 +33,15 @@ var Tmpfs = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=containerPath" }),
+        SpeakeasyMetadata({ data: "json, name=containerPath" }),
         __metadata("design:type", String)
     ], Tmpfs.prototype, "containerPath", void 0);
     __decorate([
-        Metadata({ data: "json, name=mountOptions" }),
+        SpeakeasyMetadata({ data: "json, name=mountOptions" }),
         __metadata("design:type", Array)
     ], Tmpfs.prototype, "mountOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=size" }),
+        SpeakeasyMetadata({ data: "json, name=size" }),
         __metadata("design:type", Number)
     ], Tmpfs.prototype, "size", void 0);
     return Tmpfs;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataItem } from "./dataitem";
+
 
 
 // ResultRow
@@ -8,9 +8,9 @@ import { DataItem } from "./dataitem";
  * A single row in the ResultSet.
 **/
 export class ResultRow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataItems", elemType: shared.DataItem })
+  @SpeakeasyMetadata({ data: "json, name=dataItems", elemType: DataItem })
   dataItems: DataItem[];
 
-  @Metadata({ data: "json, name=rowId" })
+  @SpeakeasyMetadata({ data: "json, name=rowId" })
   rowId?: string;
 }

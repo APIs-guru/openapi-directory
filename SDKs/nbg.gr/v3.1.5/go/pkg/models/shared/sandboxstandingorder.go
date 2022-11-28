@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SandboxStandingOrder
+// Standing order information
 type SandboxStandingOrder struct {
 	Amount           *float64   `json:"amount,omitempty"`
 	Description      *string    `json:"description,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetSectionsForSchoolPathParams = /** @class */ (function (_super) {
     __extends(GetSectionsForSchoolPathParams, _super);
@@ -30,7 +30,7 @@ var GetSectionsForSchoolPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], GetSectionsForSchoolPathParams.prototype, "id", void 0);
     return GetSectionsForSchoolPathParams;
@@ -42,19 +42,19 @@ var GetSectionsForSchoolQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ending_before" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ending_before" }),
         __metadata("design:type", String)
     ], GetSectionsForSchoolQueryParams.prototype, "endingBefore", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetSectionsForSchoolQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=starting_after" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=starting_after" }),
         __metadata("design:type", String)
     ], GetSectionsForSchoolQueryParams.prototype, "startingAfter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=where" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=where" }),
         __metadata("design:type", String)
     ], GetSectionsForSchoolQueryParams.prototype, "where", void 0);
     return GetSectionsForSchoolQueryParams;
@@ -66,11 +66,11 @@ var GetSectionsForSchoolRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSectionsForSchoolPathParams)
     ], GetSectionsForSchoolRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSectionsForSchoolQueryParams)
     ], GetSectionsForSchoolRequest.prototype, "queryParams", void 0);
     return GetSectionsForSchoolRequest;
@@ -82,19 +82,19 @@ var GetSectionsForSchoolResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSectionsForSchoolResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.NotFound)
     ], GetSectionsForSchoolResponse.prototype, "notFound", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SectionsResponse)
     ], GetSectionsForSchoolResponse.prototype, "sectionsResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSectionsForSchoolResponse.prototype, "statusCode", void 0);
     return GetSectionsForSchoolResponse;

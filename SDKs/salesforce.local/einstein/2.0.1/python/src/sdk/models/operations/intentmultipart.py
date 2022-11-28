@@ -11,19 +11,19 @@ class IntentMultipartRequests:
 
 @dataclass
 class IntentMultipartSecurity:
-    bearer_token: shared.SchemeBearerToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_token: shared.SchemeBearerToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class IntentMultipartRequest:
+    security: IntentMultipartSecurity = field()
     request: Optional[IntentMultipartRequests] = field(default=None)
-    security: IntentMultipartSecurity = field(default=None)
     
 
 @dataclass
 class IntentMultipartResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     intent_predict_response: Optional[shared.IntentPredictResponse] = field(default=None)
     prediction_error_response: Optional[shared.PredictionErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

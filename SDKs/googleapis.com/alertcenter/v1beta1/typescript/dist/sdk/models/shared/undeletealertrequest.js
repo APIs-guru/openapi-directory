@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // UndeleteAlertRequest
 /**
  * A request to undelete a specific alert that was marked for deletion.
@@ -33,7 +33,7 @@ var UndeleteAlertRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customerId" }),
+        SpeakeasyMetadata({ data: "json, name=customerId" }),
         __metadata("design:type", String)
     ], UndeleteAlertRequest.prototype, "customerId", void 0);
     return UndeleteAlertRequest;

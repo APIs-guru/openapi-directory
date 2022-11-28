@@ -1,5 +1,7 @@
 package shared
 
+// FindingFilter
+// This data type is used as a request parameter in the <a>ListFindings</a> action.
 type FindingFilter struct {
 	AgentIds          []string        `json:"agentIds,omitempty"`
 	Attributes        []Attribute     `json:"attributes,omitempty"`

@@ -10,10 +10,6 @@ type GetRestMethodEqualFlickrGroupsPoolsGetContextQueryParams struct {
 	PhotoID string  `queryParam:"style=form,explode=true,name=photo_id"`
 }
 
-type GetRestMethodEqualFlickrGroupsPoolsGetContextRequest struct {
-	QueryParams GetRestMethodEqualFlickrGroupsPoolsGetContextQueryParams
-}
-
 type GetRestMethodEqualFlickrGroupsPoolsGetContext200ApplicationJSONCount struct {
 	Content *string `json:"_content,omitempty"`
 }
@@ -23,6 +19,10 @@ type GetRestMethodEqualFlickrGroupsPoolsGetContext200ApplicationJSON struct {
 	Nextphoto *shared.ContextPhoto                                                  `json:"nextphoto,omitempty"`
 	Prevphoto *shared.ContextPhoto                                                  `json:"prevphoto,omitempty"`
 	Stat      *string                                                               `json:"stat,omitempty"`
+}
+
+type GetRestMethodEqualFlickrGroupsPoolsGetContextRequest struct {
+	QueryParams GetRestMethodEqualFlickrGroupsPoolsGetContextQueryParams
 }
 
 type GetRestMethodEqualFlickrGroupsPoolsGetContextResponse struct {

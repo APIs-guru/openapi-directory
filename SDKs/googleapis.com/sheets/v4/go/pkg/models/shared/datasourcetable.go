@@ -8,6 +8,8 @@ const (
 	DataSourceTableColumnSelectionTypeEnumSyncAll                                       DataSourceTableColumnSelectionTypeEnum = "SYNC_ALL"
 )
 
+// DataSourceTable
+// A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
 type DataSourceTable struct {
 	ColumnSelectionType *DataSourceTableColumnSelectionTypeEnum `json:"columnSelectionType,omitempty"`
 	Columns             []DataSourceColumnReference             `json:"columns,omitempty"`

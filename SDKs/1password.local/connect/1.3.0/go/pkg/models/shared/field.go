@@ -26,6 +26,17 @@ const (
 	FieldTypeEnumMenu      FieldTypeEnum = "MENU"
 )
 
+type FieldInput struct {
+	Generate *bool             `json:"generate,omitempty"`
+	ID       string            `json:"id"`
+	Label    *string           `json:"label,omitempty"`
+	Purpose  *FieldPurposeEnum `json:"purpose,omitempty"`
+	Recipe   *GeneratorRecipe  `json:"recipe,omitempty"`
+	Section  *FieldSection     `json:"section,omitempty"`
+	Type     FieldTypeEnum     `json:"type"`
+	Value    *string           `json:"value,omitempty"`
+}
+
 type Field struct {
 	Entropy  *float64          `json:"entropy,omitempty"`
 	Generate *bool             `json:"generate,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum GetMessagesSortOrderEnum {
     Ascending = "ASCENDING"
@@ -7,42 +8,42 @@ export enum GetMessagesSortOrderEnum {
 
 
 export class GetMessagesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
   sortOrder?: GetMessagesSortOrderEnum;
 }
 
 
 export class GetMessagesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
 export class GetMessagesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetMessagesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetMessagesSecurity;
 }
 
 
 export class GetMessagesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata({ elemType: shared.Message })
+  @SpeakeasyMetadata({ elemType: shared.Message })
   messages?: shared.Message[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

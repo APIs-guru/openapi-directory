@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RedisAuthTypeValueEnum } from "./redisauthtypevalueenum";
 import { SslSecurityProtocolValueEnum } from "./sslsecurityprotocolvalueenum";
+
 
 
 // RedisSettings
@@ -8,24 +9,24 @@ import { SslSecurityProtocolValueEnum } from "./sslsecurityprotocolvalueenum";
  * Provides information that defines a Redis target endpoint.
 **/
 export class RedisSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AuthPassword" })
+  @SpeakeasyMetadata({ data: "json, name=AuthPassword" })
   authPassword?: string;
 
-  @Metadata({ data: "json, name=AuthType" })
+  @SpeakeasyMetadata({ data: "json, name=AuthType" })
   authType?: RedisAuthTypeValueEnum;
 
-  @Metadata({ data: "json, name=AuthUserName" })
+  @SpeakeasyMetadata({ data: "json, name=AuthUserName" })
   authUserName?: string;
 
-  @Metadata({ data: "json, name=Port" })
+  @SpeakeasyMetadata({ data: "json, name=Port" })
   port: number;
 
-  @Metadata({ data: "json, name=ServerName" })
+  @SpeakeasyMetadata({ data: "json, name=ServerName" })
   serverName: string;
 
-  @Metadata({ data: "json, name=SslCaCertificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=SslCaCertificateArn" })
   sslCaCertificateArn?: string;
 
-  @Metadata({ data: "json, name=SslSecurityProtocol" })
+  @SpeakeasyMetadata({ data: "json, name=SslSecurityProtocol" })
   sslSecurityProtocol?: SslSecurityProtocolValueEnum;
 }

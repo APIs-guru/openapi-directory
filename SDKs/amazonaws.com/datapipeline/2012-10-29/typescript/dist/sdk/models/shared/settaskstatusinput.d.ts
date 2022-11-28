@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TaskStatusEnum } from "./taskstatusenum";
 /**
  * Contains the parameters for SetTaskStatus.

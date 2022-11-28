@@ -1,5 +1,7 @@
 package shared
 
+// AwsSecretsManagerSecretDetails
+// Details about an Secrets Manager secret.
 type AwsSecretsManagerSecretDetails struct {
 	Deleted                         *bool                                 `json:"Deleted,omitempty"`
 	Description                     *string                               `json:"Description,omitempty"`

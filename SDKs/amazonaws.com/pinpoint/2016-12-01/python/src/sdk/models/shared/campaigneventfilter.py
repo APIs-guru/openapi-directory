@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import eventdimensions
-from . import filtertype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CampaignEventFilter:
-    dimensions: eventdimensions.EventDimensions = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Dimensions' }})
-    filter_type: filtertype_enum.FilterTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FilterType' }})
+    r"""CampaignEventFilter
+    Specifies the settings for events that cause a campaign to be sent.
+    """
+    
+    dimensions: EventDimensions = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Dimensions') }})
+    filter_type: FilterTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FilterType') }})
     

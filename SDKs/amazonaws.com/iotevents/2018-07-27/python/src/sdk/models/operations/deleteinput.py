@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteInputPathParams:
-    input_name: str = field(default=None, metadata={'path_param': { 'field_name': 'inputName', 'style': 'simple', 'explode': False }})
+    input_name: str = field(metadata={'path_param': { 'field_name': 'inputName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,19 +23,19 @@ class DeleteInputHeaders:
 
 @dataclass
 class DeleteInputRequest:
-    path_params: DeleteInputPathParams = field(default=None)
-    headers: DeleteInputHeaders = field(default=None)
+    headers: DeleteInputHeaders = field()
+    path_params: DeleteInputPathParams = field()
     
 
 @dataclass
 class DeleteInputResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_input_response: Optional[dict[str, Any]] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_in_use_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

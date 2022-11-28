@@ -22,42 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ServiceGroupViewModel = /** @class */ (function (_super) {
     __extends(ServiceGroupViewModel, _super);
     function ServiceGroupViewModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=companyId" }),
+        SpeakeasyMetadata({ data: "json, name=companyId" }),
         __metadata("design:type", String)
     ], ServiceGroupViewModel.prototype, "companyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], ServiceGroupViewModel.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], ServiceGroupViewModel.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageUrl" }),
+        SpeakeasyMetadata({ data: "json, name=imageUrl" }),
         __metadata("design:type", String)
     ], ServiceGroupViewModel.prototype, "imageUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=label" }),
+        SpeakeasyMetadata({ data: "json, name=label" }),
         __metadata("design:type", String)
     ], ServiceGroupViewModel.prototype, "label", void 0);
     __decorate([
-        Metadata({ data: "json, name=locationId" }),
+        SpeakeasyMetadata({ data: "json, name=locationId" }),
         __metadata("design:type", String)
     ], ServiceGroupViewModel.prototype, "locationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ServiceGroupViewModel.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=objectName" }),
+        SpeakeasyMetadata({ data: "json, name=objectName" }),
         __metadata("design:type", String)
     ], ServiceGroupViewModel.prototype, "objectName", void 0);
     return ServiceGroupViewModel;

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IpAddressAssignmentEnum } from "./ipaddressassignmentenum";
 import { PhysicalConnectorTypeEnum } from "./physicalconnectortypeenum";
+
 
 
 // PhysicalNetworkInterface
@@ -8,24 +9,24 @@ import { PhysicalConnectorTypeEnum } from "./physicalconnectortypeenum";
  * The details about the physical network interface for the device.
 **/
 export class PhysicalNetworkInterface extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultGateway" })
+  @SpeakeasyMetadata({ data: "json, name=defaultGateway" })
   defaultGateway?: string;
 
-  @Metadata({ data: "json, name=ipAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=ipAddressAssignment" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddressAssignment" })
   ipAddressAssignment?: IpAddressAssignmentEnum;
 
-  @Metadata({ data: "json, name=macAddress" })
+  @SpeakeasyMetadata({ data: "json, name=macAddress" })
   macAddress?: string;
 
-  @Metadata({ data: "json, name=netmask" })
+  @SpeakeasyMetadata({ data: "json, name=netmask" })
   netmask?: string;
 
-  @Metadata({ data: "json, name=physicalConnectorType" })
+  @SpeakeasyMetadata({ data: "json, name=physicalConnectorType" })
   physicalConnectorType?: PhysicalConnectorTypeEnum;
 
-  @Metadata({ data: "json, name=physicalNetworkInterfaceId" })
+  @SpeakeasyMetadata({ data: "json, name=physicalNetworkInterfaceId" })
   physicalNetworkInterfaceId?: string;
 }

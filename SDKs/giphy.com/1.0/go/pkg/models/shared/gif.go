@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GifImages
+// An object containing data for various available formats and sizes of this GIF.
 type GifImages struct {
 	Downsized              *Image `json:"downsized,omitempty"`
 	DownsizedLarge         *Image `json:"downsized_large,omitempty"`

@@ -1,89 +1,90 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class IssuesListForRepoPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 export enum IssuesListForRepoSortEnum {
-    Created = "created"
-,    Updated = "updated"
-,    Comments = "comments"
+    Created = "created",
+    Updated = "updated",
+    Comments = "comments"
 }
 
 export enum IssuesListForRepoStateEnum {
-    Open = "open"
-,    Closed = "closed"
-,    All = "all"
+    Open = "open",
+    Closed = "closed",
+    All = "all"
 }
 
 
 export class IssuesListForRepoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=assignee" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=assignee" })
   assignee?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=creator" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=creator" })
   creator?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: shared.DirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=labels" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=labels" })
   labels?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=mentioned" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mentioned" })
   mentioned?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=milestone" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=milestone" })
   milestone?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=since" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=since" })
   since?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: IssuesListForRepoSortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state?: IssuesListForRepoStateEnum;
 }
 
 
 export class IssuesListForRepoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: IssuesListForRepoPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: IssuesListForRepoQueryParams;
 }
 
 
 export class IssuesListForRepoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata({ elemType: shared.IssueSimple })
+  @SpeakeasyMetadata({ elemType: shared.IssueSimple })
   issueSimples?: shared.IssueSimple[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

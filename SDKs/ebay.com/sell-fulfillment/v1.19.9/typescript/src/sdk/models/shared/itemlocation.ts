@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ItemLocation
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This type describes the physical location of an order.
 **/
 export class ItemLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=countryCode" })
+  @SpeakeasyMetadata({ data: "json, name=countryCode" })
   countryCode?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=postalCode" })
+  @SpeakeasyMetadata({ data: "json, name=postalCode" })
   postalCode?: string;
 }

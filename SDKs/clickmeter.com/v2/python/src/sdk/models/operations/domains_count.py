@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class DomainsCountTypeEnum(str, Enum):
@@ -17,13 +18,13 @@ class DomainsCountQueryParams:
 
 @dataclass
 class DomainsCountRequest:
-    query_params: DomainsCountQueryParams = field(default=None)
+    query_params: DomainsCountQueryParams = field()
     
 
 @dataclass
 class DomainsCountResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_responses_count_responce: Optional[shared.APICoreResponsesCountResponce] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

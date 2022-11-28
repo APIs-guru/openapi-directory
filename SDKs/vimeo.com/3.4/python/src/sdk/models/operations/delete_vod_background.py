@@ -5,25 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class DeleteVodBackgroundPathParams:
-    background_id: float = field(default=None, metadata={'path_param': { 'field_name': 'background_id', 'style': 'simple', 'explode': False }})
-    ondemand_id: float = field(default=None, metadata={'path_param': { 'field_name': 'ondemand_id', 'style': 'simple', 'explode': False }})
+    background_id: float = field(metadata={'path_param': { 'field_name': 'background_id', 'style': 'simple', 'explode': False }})
+    ondemand_id: float = field(metadata={'path_param': { 'field_name': 'ondemand_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteVodBackgroundSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeleteVodBackgroundRequest:
-    path_params: DeleteVodBackgroundPathParams = field(default=None)
-    security: DeleteVodBackgroundSecurity = field(default=None)
+    path_params: DeleteVodBackgroundPathParams = field()
+    security: DeleteVodBackgroundSecurity = field()
     
 
 @dataclass
 class DeleteVodBackgroundResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     picture: Optional[shared.Picture] = field(default=None)
     

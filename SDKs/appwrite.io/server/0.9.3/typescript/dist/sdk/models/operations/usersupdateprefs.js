@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UsersUpdatePrefsPathParams = /** @class */ (function (_super) {
     __extends(UsersUpdatePrefsPathParams, _super);
@@ -30,7 +30,7 @@ var UsersUpdatePrefsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=userId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" }),
         __metadata("design:type", String)
     ], UsersUpdatePrefsPathParams.prototype, "userId", void 0);
     return UsersUpdatePrefsPathParams;
@@ -42,7 +42,7 @@ var UsersUpdatePrefsRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=prefs" }),
+        SpeakeasyMetadata({ data: "json, name=prefs" }),
         __metadata("design:type", Map)
     ], UsersUpdatePrefsRequestBody.prototype, "prefs", void 0);
     return UsersUpdatePrefsRequestBody;
@@ -54,11 +54,11 @@ var UsersUpdatePrefsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeKey)
     ], UsersUpdatePrefsSecurity.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], UsersUpdatePrefsSecurity.prototype, "project", void 0);
     return UsersUpdatePrefsSecurity;
@@ -70,15 +70,15 @@ var UsersUpdatePrefsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UsersUpdatePrefsPathParams)
     ], UsersUpdatePrefsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UsersUpdatePrefsRequestBody)
     ], UsersUpdatePrefsRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UsersUpdatePrefsSecurity)
     ], UsersUpdatePrefsRequest.prototype, "security", void 0);
     return UsersUpdatePrefsRequest;
@@ -90,15 +90,15 @@ var UsersUpdatePrefsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UsersUpdatePrefsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UsersUpdatePrefsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], UsersUpdatePrefsResponse.prototype, "preferences", void 0);
     return UsersUpdatePrefsResponse;

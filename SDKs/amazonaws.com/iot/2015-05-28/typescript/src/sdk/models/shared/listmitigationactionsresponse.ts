@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MitigationActionIdentifier } from "./mitigationactionidentifier";
 
 
+
 export class ListMitigationActionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionIdentifiers", elemType: shared.MitigationActionIdentifier })
+  @SpeakeasyMetadata({ data: "json, name=actionIdentifiers", elemType: MitigationActionIdentifier })
   actionIdentifiers?: MitigationActionIdentifier[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

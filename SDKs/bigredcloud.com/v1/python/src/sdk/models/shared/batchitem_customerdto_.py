@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import customerdto
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchItemCustomerDto:
-    item: Optional[customerdto.CustomerDto] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'item' }})
-    op_code: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'opCode' }})
+    item: Optional[CustomerDto] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('item') }})
+    op_code: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('opCode') }})
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomClass } from "./customclass";
+
 
 
 // ListCustomClassesResponse
@@ -8,9 +8,9 @@ import { CustomClass } from "./customclass";
  * Message returned to the client by the `ListCustomClasses` method.
 **/
 export class ListCustomClassesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customClasses", elemType: shared.CustomClass })
+  @SpeakeasyMetadata({ data: "json, name=customClasses", elemType: CustomClass })
   customClasses?: CustomClass[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UsageReportScheduleEnum } from "./usagereportscheduleenum";
+import { LastReportGenerationExecutionError } from "./lastreportgenerationexecutionerror";
 // UsageReportSubscription
 /**
  * Describes information about the usage report subscription.
@@ -35,19 +35,19 @@ var UsageReportSubscription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=LastGeneratedReportDate" }),
+        SpeakeasyMetadata({ data: "json, name=LastGeneratedReportDate" }),
         __metadata("design:type", Date)
     ], UsageReportSubscription.prototype, "lastGeneratedReportDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3BucketName" }),
+        SpeakeasyMetadata({ data: "json, name=S3BucketName" }),
         __metadata("design:type", String)
     ], UsageReportSubscription.prototype, "s3BucketName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Schedule" }),
+        SpeakeasyMetadata({ data: "json, name=Schedule" }),
         __metadata("design:type", String)
     ], UsageReportSubscription.prototype, "schedule", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubscriptionErrors", elemType: shared.LastReportGenerationExecutionError }),
+        SpeakeasyMetadata({ data: "json, name=SubscriptionErrors", elemType: LastReportGenerationExecutionError }),
         __metadata("design:type", Array)
     ], UsageReportSubscription.prototype, "subscriptionErrors", void 0);
     return UsageReportSubscription;

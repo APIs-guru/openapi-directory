@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RetentionIntervalUnitValuesEnum } from "./retentionintervalunitvaluesenum";
+
 
 
 // DeprecateRule
@@ -7,12 +8,12 @@ import { RetentionIntervalUnitValuesEnum } from "./retentionintervalunitvaluesen
  * Specifies an AMI deprecation rule for a schedule.
 **/
 export class DeprecateRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Count" })
+  @SpeakeasyMetadata({ data: "json, name=Count" })
   count?: number;
 
-  @Metadata({ data: "json, name=Interval" })
+  @SpeakeasyMetadata({ data: "json, name=Interval" })
   interval?: number;
 
-  @Metadata({ data: "json, name=IntervalUnit" })
+  @SpeakeasyMetadata({ data: "json, name=IntervalUnit" })
   intervalUnit?: RetentionIntervalUnitValuesEnum;
 }

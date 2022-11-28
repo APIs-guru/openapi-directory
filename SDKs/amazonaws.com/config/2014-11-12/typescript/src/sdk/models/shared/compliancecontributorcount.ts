@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ComplianceContributorCount
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The number of Amazon Web Services resources or Config rules responsible for the current compliance of the item, up to a maximum number.
 **/
 export class ComplianceContributorCount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CapExceeded" })
+  @SpeakeasyMetadata({ data: "json, name=CapExceeded" })
   capExceeded?: boolean;
 
-  @Metadata({ data: "json, name=CappedCount" })
+  @SpeakeasyMetadata({ data: "json, name=CappedCount" })
   cappedCount?: number;
 }

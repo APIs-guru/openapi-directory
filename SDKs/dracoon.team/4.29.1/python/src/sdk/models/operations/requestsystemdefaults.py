@@ -10,13 +10,13 @@ class RequestSystemDefaultsHeaders:
 
 @dataclass
 class RequestSystemDefaultsRequest:
-    headers: RequestSystemDefaultsHeaders = field(default=None)
+    headers: RequestSystemDefaultsHeaders = field()
     
 
 @dataclass
 class RequestSystemDefaultsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     system_defaults: Optional[shared.SystemDefaults] = field(default=None)
     

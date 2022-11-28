@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LiveStream } from "./livestream";
 import { Pagination } from "./pagination";
 
 
+
 export class LiveStreamListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.LiveStream })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: LiveStream })
   data: LiveStream[];
 
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination: Pagination;
 }

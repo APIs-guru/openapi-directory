@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SageMakerPipelineParameter } from "./sagemakerpipelineparameter";
 // SageMakerPipelineParameters
 /**
  * These are custom parameters to use when the target is a SageMaker Model Building Pipeline that starts based on EventBridge events.
@@ -34,7 +34,7 @@ var SageMakerPipelineParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PipelineParameterList", elemType: shared.SageMakerPipelineParameter }),
+        SpeakeasyMetadata({ data: "json, name=PipelineParameterList", elemType: SageMakerPipelineParameter }),
         __metadata("design:type", Array)
     ], SageMakerPipelineParameters.prototype, "pipelineParameterList", void 0);
     return SageMakerPipelineParameters;

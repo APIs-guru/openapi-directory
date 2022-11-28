@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PageEntry } from "./pageentry";
 import { ItemDetail } from "./itemdetail";
 import { ItemList } from "./itemlist";
@@ -7,43 +6,44 @@ import { PageMetadata } from "./pagemetadata";
 import { Theme } from "./theme";
 
 
+
 export class Page extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customFields" })
+  @SpeakeasyMetadata({ data: "json, name=customFields" })
   customFields?: Map<string, any>;
 
-  @Metadata({ data: "json, name=entries", elemType: shared.PageEntry })
+  @SpeakeasyMetadata({ data: "json, name=entries", elemType: PageEntry })
   entries: PageEntry[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=isStatic" })
+  @SpeakeasyMetadata({ data: "json, name=isStatic" })
   isStatic: boolean;
 
-  @Metadata({ data: "json, name=isSystemPage" })
+  @SpeakeasyMetadata({ data: "json, name=isSystemPage" })
   isSystemPage: boolean;
 
-  @Metadata({ data: "json, name=item" })
+  @SpeakeasyMetadata({ data: "json, name=item" })
   item?: ItemDetail;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=list" })
+  @SpeakeasyMetadata({ data: "json, name=list" })
   list?: ItemList;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: PageMetadata;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path: string;
 
-  @Metadata({ data: "json, name=template" })
+  @SpeakeasyMetadata({ data: "json, name=template" })
   template: string;
 
-  @Metadata({ data: "json, name=themes", elemType: shared.Theme })
+  @SpeakeasyMetadata({ data: "json, name=themes", elemType: Theme })
   themes?: Theme[];
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 }

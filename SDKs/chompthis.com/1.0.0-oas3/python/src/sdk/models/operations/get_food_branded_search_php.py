@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetFoodBrandedSearchPhpDietEnum(str, Enum):
@@ -28,18 +29,18 @@ class GetFoodBrandedSearchPhpQueryParams:
 
 @dataclass
 class GetFoodBrandedSearchPhpSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
     
 
 @dataclass
 class GetFoodBrandedSearchPhpRequest:
-    query_params: GetFoodBrandedSearchPhpQueryParams = field(default=None)
-    security: GetFoodBrandedSearchPhpSecurity = field(default=None)
+    query_params: GetFoodBrandedSearchPhpQueryParams = field()
+    security: GetFoodBrandedSearchPhpSecurity = field()
     
 
 @dataclass
 class GetFoodBrandedSearchPhpResponse:
+    content_type: str = field()
+    status_code: int = field()
     branded_food_object: Optional[shared.BrandedFoodObject] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

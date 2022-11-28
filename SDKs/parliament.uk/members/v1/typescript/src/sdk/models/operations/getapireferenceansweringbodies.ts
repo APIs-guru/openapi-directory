@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiReferenceAnsweringBodiesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nameContains" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nameContains" })
   nameContains?: string;
 }
 
 
 export class GetApiReferenceAnsweringBodiesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiReferenceAnsweringBodiesQueryParams;
 }
 
 
 export class GetApiReferenceAnsweringBodiesResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.AnsweringBody })
+  @SpeakeasyMetadata({ elemType: shared.AnsweringBody })
   answeringBodies?: shared.AnsweringBody[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

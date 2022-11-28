@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GroupKind } from "./groupkind";
 /**
  * Identifies the cluster-scoped resources to restore from the Backup.

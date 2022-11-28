@@ -8,6 +8,8 @@ const (
 	DataFilterValueRangeMajorDimensionEnumColumns              DataFilterValueRangeMajorDimensionEnum = "COLUMNS"
 )
 
+// DataFilterValueRange
+// A range of values whose location is specified by a DataFilter.
 type DataFilterValueRange struct {
 	DataFilter     *DataFilter                             `json:"dataFilter,omitempty"`
 	MajorDimension *DataFilterValueRangeMajorDimensionEnum `json:"majorDimension,omitempty"`

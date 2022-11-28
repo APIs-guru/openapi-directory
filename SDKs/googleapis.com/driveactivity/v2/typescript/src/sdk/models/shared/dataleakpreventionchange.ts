@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DataLeakPreventionChangeTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Flagged = "FLAGGED"
-,    Cleared = "CLEARED"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Flagged = "FLAGGED",
+    Cleared = "CLEARED"
 }
 
 
@@ -12,6 +13,6 @@ export enum DataLeakPreventionChangeTypeEnum {
  * A change in the object's data leak prevention status.
 **/
 export class DataLeakPreventionChange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: DataLeakPreventionChangeTypeEnum;
 }

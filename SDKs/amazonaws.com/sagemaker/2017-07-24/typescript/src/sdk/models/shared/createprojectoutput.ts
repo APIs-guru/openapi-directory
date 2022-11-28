@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateProjectOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProjectArn" })
+  @SpeakeasyMetadata({ data: "json, name=ProjectArn" })
   projectArn: string;
 
-  @Metadata({ data: "json, name=ProjectId" })
+  @SpeakeasyMetadata({ data: "json, name=ProjectId" })
   projectId: string;
 }

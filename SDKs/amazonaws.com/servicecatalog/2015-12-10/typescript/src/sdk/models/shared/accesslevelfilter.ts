@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessLevelFilterKeyEnum } from "./accesslevelfilterkeyenum";
+
 
 
 // AccessLevelFilter
@@ -7,9 +8,9 @@ import { AccessLevelFilterKeyEnum } from "./accesslevelfilterkeyenum";
  * The access level to use to filter results.
 **/
 export class AccessLevelFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key?: AccessLevelFilterKeyEnum;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

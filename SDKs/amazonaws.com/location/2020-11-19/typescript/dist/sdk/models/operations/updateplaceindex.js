@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdatePlaceIndexPathParams = /** @class */ (function (_super) {
     __extends(UpdatePlaceIndexPathParams, _super);
@@ -30,7 +30,7 @@ var UpdatePlaceIndexPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=IndexName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=IndexName" }),
         __metadata("design:type", String)
     ], UpdatePlaceIndexPathParams.prototype, "indexName", void 0);
     return UpdatePlaceIndexPathParams;
@@ -42,31 +42,31 @@ var UpdatePlaceIndexHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdatePlaceIndexHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdatePlaceIndexHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdatePlaceIndexHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdatePlaceIndexHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdatePlaceIndexHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdatePlaceIndexHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdatePlaceIndexHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdatePlaceIndexHeaders;
@@ -82,7 +82,7 @@ var UpdatePlaceIndexRequestBodyDataSourceConfiguration = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=IntendedUse" }),
+        SpeakeasyMetadata({ data: "json, name=IntendedUse" }),
         __metadata("design:type", String)
     ], UpdatePlaceIndexRequestBodyDataSourceConfiguration.prototype, "intendedUse", void 0);
     return UpdatePlaceIndexRequestBodyDataSourceConfiguration;
@@ -100,15 +100,15 @@ var UpdatePlaceIndexRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DataSourceConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=DataSourceConfiguration" }),
         __metadata("design:type", UpdatePlaceIndexRequestBodyDataSourceConfiguration)
     ], UpdatePlaceIndexRequestBody.prototype, "dataSourceConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], UpdatePlaceIndexRequestBody.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=PricingPlan" }),
+        SpeakeasyMetadata({ data: "json, name=PricingPlan" }),
         __metadata("design:type", String)
     ], UpdatePlaceIndexRequestBody.prototype, "pricingPlan", void 0);
     return UpdatePlaceIndexRequestBody;
@@ -120,15 +120,15 @@ var UpdatePlaceIndexRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdatePlaceIndexPathParams)
     ], UpdatePlaceIndexRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdatePlaceIndexHeaders)
     ], UpdatePlaceIndexRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdatePlaceIndexRequestBody)
     ], UpdatePlaceIndexRequest.prototype, "request", void 0);
     return UpdatePlaceIndexRequest;
@@ -140,35 +140,35 @@ var UpdatePlaceIndexResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdatePlaceIndexResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdatePlaceIndexResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdatePlaceIndexResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdatePlaceIndexResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdatePlaceIndexResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdatePlaceIndexResponse.prototype, "throttlingException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdatePlaceIndexResponse)
     ], UpdatePlaceIndexResponse.prototype, "updatePlaceIndexResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdatePlaceIndexResponse.prototype, "validationException", void 0);
     return UpdatePlaceIndexResponse;

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IoTJobAbortConfig } from "./iotjobabortconfig";
 import { IoTJobExecutionsRolloutConfig } from "./iotjobexecutionsrolloutconfig";
 import { IoTJobTimeoutConfig } from "./iotjobtimeoutconfig";
+
 
 
 // DeploymentIoTJobConfiguration
@@ -9,12 +10,12 @@ import { IoTJobTimeoutConfig } from "./iotjobtimeoutconfig";
  * Contains information about an IoT job configuration.
 **/
 export class DeploymentIoTJobConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=abortConfig" })
+  @SpeakeasyMetadata({ data: "json, name=abortConfig" })
   abortConfig?: IoTJobAbortConfig;
 
-  @Metadata({ data: "json, name=jobExecutionsRolloutConfig" })
+  @SpeakeasyMetadata({ data: "json, name=jobExecutionsRolloutConfig" })
   jobExecutionsRolloutConfig?: IoTJobExecutionsRolloutConfig;
 
-  @Metadata({ data: "json, name=timeoutConfig" })
+  @SpeakeasyMetadata({ data: "json, name=timeoutConfig" })
   timeoutConfig?: IoTJobTimeoutConfig;
 }

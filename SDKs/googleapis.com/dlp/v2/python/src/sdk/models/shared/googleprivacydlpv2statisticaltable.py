@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleprivacydlpv2quasiidentifierfield
-from . import googleprivacydlpv2fieldid
-from . import googleprivacydlpv2bigquerytable
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GooglePrivacyDlpV2StatisticalTable:
-    quasi_ids: Optional[List[googleprivacydlpv2quasiidentifierfield.GooglePrivacyDlpV2QuasiIdentifierField]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'quasiIds' }})
-    relative_frequency: Optional[googleprivacydlpv2fieldid.GooglePrivacyDlpV2FieldID] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relativeFrequency' }})
-    table: Optional[googleprivacydlpv2bigquerytable.GooglePrivacyDlpV2BigQueryTable] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'table' }})
+    r"""GooglePrivacyDlpV2StatisticalTable
+    An auxiliary table containing statistical information on the relative frequency of different quasi-identifiers values. It has one or several quasi-identifiers columns, and one column that indicates the relative frequency of each quasi-identifier tuple. If a tuple is present in the data but not in the auxiliary table, the corresponding relative frequency is assumed to be zero (and thus, the tuple is highly reidentifiable).
+    """
+    
+    quasi_ids: Optional[List[GooglePrivacyDlpV2QuasiIdentifierField]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('quasiIds') }})
+    relative_frequency: Optional[GooglePrivacyDlpV2FieldID] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relativeFrequency') }})
+    table: Optional[GooglePrivacyDlpV2BigQueryTable] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('table') }})
     

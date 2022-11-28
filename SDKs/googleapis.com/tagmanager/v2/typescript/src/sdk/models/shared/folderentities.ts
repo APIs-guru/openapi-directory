@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
 import { Trigger } from "./trigger";
 import { Variable } from "./variable";
+
 
 
 // FolderEntities
@@ -10,15 +10,15 @@ import { Variable } from "./variable";
  * Represents a Google Tag Manager Folder's contents.
 **/
 export class FolderEntities extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=tag", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tag", elemType: Tag })
   tag?: Tag[];
 
-  @Metadata({ data: "json, name=trigger", elemType: shared.Trigger })
+  @SpeakeasyMetadata({ data: "json, name=trigger", elemType: Trigger })
   trigger?: Trigger[];
 
-  @Metadata({ data: "json, name=variable", elemType: shared.Variable })
+  @SpeakeasyMetadata({ data: "json, name=variable", elemType: Variable })
   variable?: Variable[];
 }

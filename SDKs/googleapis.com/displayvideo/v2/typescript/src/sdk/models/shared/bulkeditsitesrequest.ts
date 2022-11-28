@@ -1,22 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Site } from "./site";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SiteInput } from "./site";
 
 
-// BulkEditSitesRequest
+
+// BulkEditSitesRequestInput
 /** 
  * Request message for SiteService.BulkEditSites.
 **/
-export class BulkEditSitesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=advertiserId" })
+export class BulkEditSitesRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string;
 
-  @Metadata({ data: "json, name=createdSites", elemType: shared.Site })
-  createdSites?: Site[];
+  @SpeakeasyMetadata({ data: "json, name=createdSites", elemType: SiteInput })
+  createdSites?: SiteInput[];
 
-  @Metadata({ data: "json, name=deletedSites" })
+  @SpeakeasyMetadata({ data: "json, name=deletedSites" })
   deletedSites?: string[];
 
-  @Metadata({ data: "json, name=partnerId" })
+  @SpeakeasyMetadata({ data: "json, name=partnerId" })
   partnerId?: string;
 }

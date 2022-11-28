@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VpcConfiguration } from "./vpcconfiguration";
+
 
 
 // RedshiftSourceConfig
@@ -7,27 +8,27 @@ import { VpcConfiguration } from "./vpcconfiguration";
  * Provides information about the Amazon Redshift database configuration.
 **/
 export class RedshiftSourceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterIdentifier" })
   clusterIdentifier: string;
 
-  @Metadata({ data: "json, name=DatabaseHost" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseHost" })
   databaseHost: string;
 
-  @Metadata({ data: "json, name=DatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseName" })
   databaseName: string;
 
-  @Metadata({ data: "json, name=DatabasePort" })
+  @SpeakeasyMetadata({ data: "json, name=DatabasePort" })
   databasePort: number;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=SecretManagerArn" })
+  @SpeakeasyMetadata({ data: "json, name=SecretManagerArn" })
   secretManagerArn: string;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName: string;
 
-  @Metadata({ data: "json, name=VpcConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=VpcConfiguration" })
   vpcConfiguration: VpcConfiguration;
 }

@@ -33,6 +33,8 @@ const (
 	SubscriptionResponseEventTypeEnumConversationPropertyChange  SubscriptionResponseEventTypeEnum = "conversation.propertyChange"
 )
 
+// SubscriptionResponse
+// Complete details for an event subscription.
 type SubscriptionResponse struct {
 	Active       bool                              `json:"active"`
 	CreatedAt    time.Time                         `json:"createdAt"`

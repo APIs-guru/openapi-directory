@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCopyFpgaImageActionEnum(str, Enum):
     COPY_FPGA_IMAGE = "CopyFpgaImage"
@@ -10,14 +14,14 @@ class GetCopyFpgaImageVersionEnum(str, Enum):
 
 @dataclass
 class GetCopyFpgaImageQueryParams:
-    action: GetCopyFpgaImageActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetCopyFpgaImageActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    source_fpga_image_id: str = field(metadata={'query_param': { 'field_name': 'SourceFpgaImageId', 'style': 'form', 'explode': True }})
+    source_region: str = field(metadata={'query_param': { 'field_name': 'SourceRegion', 'style': 'form', 'explode': True }})
+    version: GetCopyFpgaImageVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     client_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ClientToken', 'style': 'form', 'explode': True }})
     description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Description', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Name', 'style': 'form', 'explode': True }})
-    source_fpga_image_id: str = field(default=None, metadata={'query_param': { 'field_name': 'SourceFpgaImageId', 'style': 'form', 'explode': True }})
-    source_region: str = field(default=None, metadata={'query_param': { 'field_name': 'SourceRegion', 'style': 'form', 'explode': True }})
-    version: GetCopyFpgaImageVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -33,13 +37,13 @@ class GetCopyFpgaImageHeaders:
 
 @dataclass
 class GetCopyFpgaImageRequest:
-    query_params: GetCopyFpgaImageQueryParams = field(default=None)
-    headers: GetCopyFpgaImageHeaders = field(default=None)
+    headers: GetCopyFpgaImageHeaders = field()
+    query_params: GetCopyFpgaImageQueryParams = field()
     
 
 @dataclass
 class GetCopyFpgaImageResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

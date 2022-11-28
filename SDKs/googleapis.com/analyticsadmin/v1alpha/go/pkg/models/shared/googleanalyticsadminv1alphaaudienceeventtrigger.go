@@ -8,6 +8,8 @@ const (
 	GoogleAnalyticsAdminV1alphaAudienceEventTriggerLogConditionEnumAudienceMembershipRenewed GoogleAnalyticsAdminV1alphaAudienceEventTriggerLogConditionEnum = "AUDIENCE_MEMBERSHIP_RENEWED"
 )
 
+// GoogleAnalyticsAdminV1alphaAudienceEventTrigger
+// Specifies an event to log when a user joins the Audience.
 type GoogleAnalyticsAdminV1alphaAudienceEventTrigger struct {
 	EventName    *string                                                          `json:"eventName,omitempty"`
 	LogCondition *GoogleAnalyticsAdminV1alphaAudienceEventTriggerLogConditionEnum `json:"logCondition,omitempty"`

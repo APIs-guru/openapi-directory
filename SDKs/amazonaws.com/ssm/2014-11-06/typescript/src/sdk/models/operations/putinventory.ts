@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum PutInventoryXAmzTargetEnum {
     AmazonSsmPutInventory = "AmazonSSM.PutInventory"
@@ -7,84 +8,84 @@ export enum PutInventoryXAmzTargetEnum {
 
 
 export class PutInventoryHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: PutInventoryXAmzTargetEnum;
 }
 
 
 export class PutInventoryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PutInventoryHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.PutInventoryRequest;
 }
 
 
 export class PutInventoryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   customSchemaCountLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerError?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidInstanceId?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidInventoryItemContextException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidItemContentException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidTypeNameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   itemContentMismatchException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   itemSizeLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putInventoryResult?: shared.PutInventoryResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   subTypeCountLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   totalSizeLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unsupportedInventoryItemContextException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unsupportedInventorySchemaVersionException?: any;
 }

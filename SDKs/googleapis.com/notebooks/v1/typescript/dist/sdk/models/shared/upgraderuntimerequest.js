@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // UpgradeRuntimeRequest
 /**
  * Request for upgrading a Managed Notebook Runtime to the latest version. option (google.api.message_visibility).restriction = "TRUSTED_TESTER,SPECIAL_TESTER";
@@ -33,7 +33,7 @@ var UpgradeRuntimeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=requestId" }),
+        SpeakeasyMetadata({ data: "json, name=requestId" }),
         __metadata("design:type", String)
     ], UpgradeRuntimeRequest.prototype, "requestId", void 0);
     return UpgradeRuntimeRequest;

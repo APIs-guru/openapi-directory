@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class FirmwareInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=download_url" })
+  @SpeakeasyMetadata({ data: "json, name=download_url" })
   downloadUrl?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=release_date" })
+  @SpeakeasyMetadata({ data: "json, name=release_date" })
   releaseDate?: string;
 
-  @Metadata({ data: "json, name=sha2" })
+  @SpeakeasyMetadata({ data: "json, name=sha2" })
   sha2?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

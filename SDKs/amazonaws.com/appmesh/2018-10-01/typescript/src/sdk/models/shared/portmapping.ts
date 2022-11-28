@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PortProtocolEnum } from "./portprotocolenum";
+
 
 
 // PortMapping
@@ -7,9 +8,9 @@ import { PortProtocolEnum } from "./portprotocolenum";
  * An object representing a virtual node listener port mapping.
 **/
 export class PortMapping extends SpeakeasyBase {
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol?: PortProtocolEnum;
 }

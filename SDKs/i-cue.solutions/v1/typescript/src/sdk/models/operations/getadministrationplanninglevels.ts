@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAdministrationPlanningLevelsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Token" })
   token?: string;
 }
 
 
 export class GetAdministrationPlanningLevelsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetAdministrationPlanningLevelsHeaders;
 }
 
 
 export class GetAdministrationPlanningLevelsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.PlanningLevelInfoResponse })
+  @SpeakeasyMetadata({ elemType: shared.PlanningLevelInfoResponse })
   planningLevelInfoResponses?: shared.PlanningLevelInfoResponse[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

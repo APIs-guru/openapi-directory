@@ -1,30 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ScheduleFormatEnum {
-    Xml = "XML"
-,    Json = "JSON"
+    Xml = "XML",
+    Json = "JSON"
 }
 
 
 export class SchedulePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: ScheduleFormatEnum;
 }
 
 
 export class ScheduleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SchedulePathParams;
 }
 
 
 export class ScheduleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tournaments?: any[];
 }

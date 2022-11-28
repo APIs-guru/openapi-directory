@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PostTruckRouteOutputFormatOutputFormatEnum;
 (function (PostTruckRouteOutputFormatOutputFormatEnum) {
     PostTruckRouteOutputFormatOutputFormatEnum["Json"] = "json";
@@ -35,7 +35,7 @@ var PostTruckRouteOutputFormatPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" }),
         __metadata("design:type", String)
     ], PostTruckRouteOutputFormatPathParams.prototype, "outputFormat", void 0);
     return PostTruckRouteOutputFormatPathParams;
@@ -57,39 +57,39 @@ var PostTruckRouteOutputFormatQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=correctSide" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=correctSide" }),
         __metadata("design:type", Boolean)
     ], PostTruckRouteOutputFormatQueryParams.prototype, "correctSide", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=criteria" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=criteria" }),
         __metadata("design:type", String)
     ], PostTruckRouteOutputFormatQueryParams.prototype, "criteria", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=departure" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=departure" }),
         __metadata("design:type", Date)
     ], PostTruckRouteOutputFormatQueryParams.prototype, "departure", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=disable" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=disable" }),
         __metadata("design:type", String)
     ], PostTruckRouteOutputFormatQueryParams.prototype, "disable", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=distanceUnit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=distanceUnit" }),
         __metadata("design:type", String)
     ], PostTruckRouteOutputFormatQueryParams.prototype, "distanceUnit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
         __metadata("design:type", Number)
     ], PostTruckRouteOutputFormatQueryParams.prototype, "outputSrs", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=points" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=points" }),
         __metadata("design:type", String)
     ], PostTruckRouteOutputFormatQueryParams.prototype, "points", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=roundTrip" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=roundTrip" }),
         __metadata("design:type", Boolean)
     ], PostTruckRouteOutputFormatQueryParams.prototype, "roundTrip", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=routeDescription" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=routeDescription" }),
         __metadata("design:type", String)
     ], PostTruckRouteOutputFormatQueryParams.prototype, "routeDescription", void 0);
     return PostTruckRouteOutputFormatQueryParams;
@@ -101,11 +101,11 @@ var PostTruckRouteOutputFormatRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostTruckRouteOutputFormatPathParams)
     ], PostTruckRouteOutputFormatRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostTruckRouteOutputFormatQueryParams)
     ], PostTruckRouteOutputFormatRequest.prototype, "queryParams", void 0);
     return PostTruckRouteOutputFormatRequest;
@@ -117,11 +117,11 @@ var PostTruckRouteOutputFormatResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostTruckRouteOutputFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostTruckRouteOutputFormatResponse.prototype, "statusCode", void 0);
     return PostTruckRouteOutputFormatResponse;

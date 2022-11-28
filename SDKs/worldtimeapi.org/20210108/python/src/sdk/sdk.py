@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,List,Optional
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,26 +14,48 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_ip(self) -> operations.GetIPResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""request the current time based on the ip of the request. note: this is a \"best guess\" obtained from open-source data.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ip"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -49,13 +74,16 @@ class SDK:
 
     
     def get_ip_ipv4_(self, request: operations.GetIPIpv4Request) -> operations.GetIPIpv4Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""request the current time based on the ip of the request. note: this is a \"best guess\" obtained from open-source data.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/ip/{ipv4}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -74,13 +102,16 @@ class SDK:
 
     
     def get_ip_ipv4_txt(self, request: operations.GetIPIpv4TxtRequest) -> operations.GetIPIpv4TxtResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""request the current time based on the ip of the request. note: this is a \"best guess\" obtained from open-source data.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/ip/{ipv4}.txt", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -97,13 +128,16 @@ class SDK:
 
     
     def get_ip_txt(self) -> operations.GetIPTxtResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""request the current time based on the ip of the request. note: this is a \"best guess\" obtained from open-source data.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ip.txt"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -120,13 +154,16 @@ class SDK:
 
     
     def get_timezone(self) -> operations.GetTimezoneResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""a listing of all timezones.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/timezone"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -141,13 +178,16 @@ class SDK:
 
     
     def get_timezone_area_(self, request: operations.GetTimezoneAreaRequest) -> operations.GetTimezoneAreaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""a listing of all timezones available for that area.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/timezone/{area}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -166,13 +206,16 @@ class SDK:
 
     
     def get_timezone_area_location_(self, request: operations.GetTimezoneAreaLocationRequest) -> operations.GetTimezoneAreaLocationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""request the current time for a timezone.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/timezone/{area}/{location}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -191,13 +234,16 @@ class SDK:
 
     
     def get_timezone_area_location_region_(self, request: operations.GetTimezoneAreaLocationRegionRequest) -> operations.GetTimezoneAreaLocationRegionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""request the current time for a timezone.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/timezone/{area}/{location}/{region}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -216,13 +262,16 @@ class SDK:
 
     
     def get_timezone_area_location_region_txt(self, request: operations.GetTimezoneAreaLocationRegionTxtRequest) -> operations.GetTimezoneAreaLocationRegionTxtResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""request the current time for a timezone.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/timezone/{area}/{location}/{region}.txt", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -239,13 +288,16 @@ class SDK:
 
     
     def get_timezone_area_location_txt(self, request: operations.GetTimezoneAreaLocationTxtRequest) -> operations.GetTimezoneAreaLocationTxtResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""request the current time for a timezone.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/timezone/{area}/{location}.txt", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -262,13 +314,16 @@ class SDK:
 
     
     def get_timezone_area_txt(self, request: operations.GetTimezoneAreaTxtRequest) -> operations.GetTimezoneAreaTxtResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""a listing of all timezones available for that area.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/timezone/{area}.txt", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -285,13 +340,16 @@ class SDK:
 
     
     def get_timezone_txt(self) -> operations.GetTimezoneTxtResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""a listing of all timezones.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/timezone.txt"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 

@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetNetworkEventsEventTypesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class GetNetworkEventsEventTypesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetNetworkEventsEventTypesPathParams;
 }
 
 
 export class GetNetworkEventsEventTypesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getNetworkEventsEventTypes200ApplicationJsonObject?: Map<string, any>;
 }

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudMlV1MetricSpecNameEnum {
-    MetricNameUnspecified = "METRIC_NAME_UNSPECIFIED"
-,    CpuUsage = "CPU_USAGE"
-,    GpuDutyCycle = "GPU_DUTY_CYCLE"
+    MetricNameUnspecified = "METRIC_NAME_UNSPECIFIED",
+    CpuUsage = "CPU_USAGE",
+    GpuDutyCycle = "GPU_DUTY_CYCLE"
 }
 
 
@@ -12,9 +13,9 @@ export enum GoogleCloudMlV1MetricSpecNameEnum {
  * MetricSpec contains the specifications to use to calculate the desired nodes count when autoscaling is enabled.
 **/
 export class GoogleCloudMlV1MetricSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: GoogleCloudMlV1MetricSpecNameEnum;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target?: number;
 }

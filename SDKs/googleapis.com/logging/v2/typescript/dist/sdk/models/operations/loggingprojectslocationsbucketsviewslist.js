@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var LoggingProjectsLocationsBucketsViewsListPathParams = /** @class */ (function (_super) {
     __extends(LoggingProjectsLocationsBucketsViewsListPathParams, _super);
@@ -30,7 +30,7 @@ var LoggingProjectsLocationsBucketsViewsListPathParams = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], LoggingProjectsLocationsBucketsViewsListPathParams.prototype, "parent", void 0);
     return LoggingProjectsLocationsBucketsViewsListPathParams;
@@ -42,55 +42,55 @@ var LoggingProjectsLocationsBucketsViewsListQueryParams = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], LoggingProjectsLocationsBucketsViewsListQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], LoggingProjectsLocationsBucketsViewsListQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], LoggingProjectsLocationsBucketsViewsListQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], LoggingProjectsLocationsBucketsViewsListQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], LoggingProjectsLocationsBucketsViewsListQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], LoggingProjectsLocationsBucketsViewsListQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], LoggingProjectsLocationsBucketsViewsListQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
         __metadata("design:type", Number)
     ], LoggingProjectsLocationsBucketsViewsListQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
         __metadata("design:type", String)
     ], LoggingProjectsLocationsBucketsViewsListQueryParams.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], LoggingProjectsLocationsBucketsViewsListQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], LoggingProjectsLocationsBucketsViewsListQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], LoggingProjectsLocationsBucketsViewsListQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], LoggingProjectsLocationsBucketsViewsListQueryParams.prototype, "uploadProtocol", void 0);
     return LoggingProjectsLocationsBucketsViewsListQueryParams;
@@ -102,11 +102,11 @@ var LoggingProjectsLocationsBucketsViewsListSecurityOption1 = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], LoggingProjectsLocationsBucketsViewsListSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], LoggingProjectsLocationsBucketsViewsListSecurityOption1.prototype, "oauth2c", void 0);
     return LoggingProjectsLocationsBucketsViewsListSecurityOption1;
@@ -118,11 +118,11 @@ var LoggingProjectsLocationsBucketsViewsListSecurityOption2 = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], LoggingProjectsLocationsBucketsViewsListSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], LoggingProjectsLocationsBucketsViewsListSecurityOption2.prototype, "oauth2c", void 0);
     return LoggingProjectsLocationsBucketsViewsListSecurityOption2;
@@ -134,11 +134,11 @@ var LoggingProjectsLocationsBucketsViewsListSecurityOption3 = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], LoggingProjectsLocationsBucketsViewsListSecurityOption3.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], LoggingProjectsLocationsBucketsViewsListSecurityOption3.prototype, "oauth2c", void 0);
     return LoggingProjectsLocationsBucketsViewsListSecurityOption3;
@@ -150,11 +150,11 @@ var LoggingProjectsLocationsBucketsViewsListSecurityOption4 = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], LoggingProjectsLocationsBucketsViewsListSecurityOption4.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], LoggingProjectsLocationsBucketsViewsListSecurityOption4.prototype, "oauth2c", void 0);
     return LoggingProjectsLocationsBucketsViewsListSecurityOption4;
@@ -166,19 +166,19 @@ var LoggingProjectsLocationsBucketsViewsListSecurity = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", LoggingProjectsLocationsBucketsViewsListSecurityOption1)
     ], LoggingProjectsLocationsBucketsViewsListSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", LoggingProjectsLocationsBucketsViewsListSecurityOption2)
     ], LoggingProjectsLocationsBucketsViewsListSecurity.prototype, "option2", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", LoggingProjectsLocationsBucketsViewsListSecurityOption3)
     ], LoggingProjectsLocationsBucketsViewsListSecurity.prototype, "option3", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", LoggingProjectsLocationsBucketsViewsListSecurityOption4)
     ], LoggingProjectsLocationsBucketsViewsListSecurity.prototype, "option4", void 0);
     return LoggingProjectsLocationsBucketsViewsListSecurity;
@@ -190,15 +190,15 @@ var LoggingProjectsLocationsBucketsViewsListRequest = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LoggingProjectsLocationsBucketsViewsListPathParams)
     ], LoggingProjectsLocationsBucketsViewsListRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LoggingProjectsLocationsBucketsViewsListQueryParams)
     ], LoggingProjectsLocationsBucketsViewsListRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LoggingProjectsLocationsBucketsViewsListSecurity)
     ], LoggingProjectsLocationsBucketsViewsListRequest.prototype, "security", void 0);
     return LoggingProjectsLocationsBucketsViewsListRequest;
@@ -210,15 +210,15 @@ var LoggingProjectsLocationsBucketsViewsListResponse = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], LoggingProjectsLocationsBucketsViewsListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListViewsResponse)
     ], LoggingProjectsLocationsBucketsViewsListResponse.prototype, "listViewsResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], LoggingProjectsLocationsBucketsViewsListResponse.prototype, "statusCode", void 0);
     return LoggingProjectsLocationsBucketsViewsListResponse;

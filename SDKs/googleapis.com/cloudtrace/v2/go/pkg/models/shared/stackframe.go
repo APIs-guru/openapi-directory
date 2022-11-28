@@ -1,5 +1,7 @@
 package shared
 
+// StackFrame
+// Represents a single stack frame in a stack trace.
 type StackFrame struct {
 	ColumnNumber         *string            `json:"columnNumber,omitempty"`
 	FileName             *TruncatableString `json:"fileName,omitempty"`

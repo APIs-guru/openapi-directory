@@ -1,98 +1,99 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetJourneyDateRangeKpiPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=application-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=application-id" })
   applicationId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=journey-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=journey-id" })
   journeyId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=kpi-name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=kpi-name" })
   kpiName: string;
 }
 
 
 export class GetJourneyDateRangeKpiQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end-time" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end-time" })
   endTime?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=next-token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=next-token" })
   nextToken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page-size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page-size" })
   pageSize?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start-time" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start-time" })
   startTime?: Date;
 }
 
 
 export class GetJourneyDateRangeKpiHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetJourneyDateRangeKpiRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetJourneyDateRangeKpiPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetJourneyDateRangeKpiQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetJourneyDateRangeKpiHeaders;
 }
 
 
 export class GetJourneyDateRangeKpiResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   forbiddenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getJourneyDateRangeKpiResponse?: shared.GetJourneyDateRangeKpiResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   methodNotAllowedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   payloadTooLargeException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateSystemDefaults
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request model for updating system defaults
 **/
 export class UpdateSystemDefaults extends SpeakeasyBase {
-  @Metadata({ data: "json, name=downloadShareDefaultExpirationPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=downloadShareDefaultExpirationPeriod" })
   downloadShareDefaultExpirationPeriod?: number;
 
-  @Metadata({ data: "json, name=fileDefaultExpirationPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=fileDefaultExpirationPeriod" })
   fileDefaultExpirationPeriod?: number;
 
-  @Metadata({ data: "json, name=languageDefault" })
+  @SpeakeasyMetadata({ data: "json, name=languageDefault" })
   languageDefault?: string;
 
-  @Metadata({ data: "json, name=nonmemberViewerDefault" })
+  @SpeakeasyMetadata({ data: "json, name=nonmemberViewerDefault" })
   nonmemberViewerDefault?: boolean;
 
-  @Metadata({ data: "json, name=uploadShareDefaultExpirationPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=uploadShareDefaultExpirationPeriod" })
   uploadShareDefaultExpirationPeriod?: number;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MigrationTask
+// Represents a migration task in a migration tool.
 type MigrationTask struct {
 	MigrationTaskName     *string             `json:"MigrationTaskName,omitempty"`
 	ProgressUpdateStream  *string             `json:"ProgressUpdateStream,omitempty"`

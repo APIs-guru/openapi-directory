@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CompanyNotificationRegisterPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class CompanyNotificationRegisterRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=callbackUrl;" })
+  @SpeakeasyMetadata({ data: "form, name=callbackUrl;" })
   callbackUrl: string;
 }
 
 
 export class CompanyNotificationRegisterSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   userKey: shared.SchemeUserKey;
 }
 
 
 export class CompanyNotificationRegisterRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CompanyNotificationRegisterPathParams;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: CompanyNotificationRegisterRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CompanyNotificationRegisterSecurity;
 }
 
 
 export class CompanyNotificationRegisterResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   companyNotificationRegister200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   companyNotificationRegisterDefaultApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

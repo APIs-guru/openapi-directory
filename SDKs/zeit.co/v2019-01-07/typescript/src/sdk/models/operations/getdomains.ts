@@ -1,85 +1,86 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetDomainsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=teamId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=teamId" })
   teamId?: string;
 }
 
-
-export class GetDomainsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetDomainsQueryParams;
-}
-
 export enum GetDomains200ApplicationJsonDomainsServiceTypeEnum {
-    ZeitWorld = "zeit.world"
-,    External = "external"
-,    Na = "na"
+    ZeitWorld = "zeit.world",
+    External = "external",
+    Na = "na"
 }
 
 
 export class GetDomains200ApplicationJsonDomains extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boughtAt" })
+  @SpeakeasyMetadata({ data: "json, name=boughtAt" })
   boughtAt: number;
 
-  @Metadata({ data: "json, name=cdnEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=cdnEnabled" })
   cdnEnabled: boolean;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: number;
 
-  @Metadata({ data: "json, name=expiresAt" })
+  @SpeakeasyMetadata({ data: "json, name=expiresAt" })
   expiresAt: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=intendedNameservers" })
+  @SpeakeasyMetadata({ data: "json, name=intendedNameservers" })
   intendedNameservers: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=nameservers" })
+  @SpeakeasyMetadata({ data: "json, name=nameservers" })
   nameservers: string[];
 
-  @Metadata({ data: "json, name=nsVerifiedAt" })
+  @SpeakeasyMetadata({ data: "json, name=nsVerifiedAt" })
   nsVerifiedAt: number;
 
-  @Metadata({ data: "json, name=orderedAt" })
+  @SpeakeasyMetadata({ data: "json, name=orderedAt" })
   orderedAt?: number;
 
-  @Metadata({ data: "json, name=serviceType" })
+  @SpeakeasyMetadata({ data: "json, name=serviceType" })
   serviceType: GetDomains200ApplicationJsonDomainsServiceTypeEnum;
 
-  @Metadata({ data: "json, name=transferredAt" })
+  @SpeakeasyMetadata({ data: "json, name=transferredAt" })
   transferredAt?: number;
 
-  @Metadata({ data: "json, name=txtVerifiedAt" })
+  @SpeakeasyMetadata({ data: "json, name=txtVerifiedAt" })
   txtVerifiedAt: number;
 
-  @Metadata({ data: "json, name=verificationRecord" })
+  @SpeakeasyMetadata({ data: "json, name=verificationRecord" })
   verificationRecord: string;
 
-  @Metadata({ data: "json, name=verified" })
+  @SpeakeasyMetadata({ data: "json, name=verified" })
   verified: boolean;
 }
 
 
 export class GetDomains200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domains", elemType: operations.GetDomains200ApplicationJsonDomains })
+  @SpeakeasyMetadata({ data: "json, name=domains", elemType: GetDomains200ApplicationJsonDomains })
   domains: GetDomains200ApplicationJsonDomains[];
 }
 
 
+export class GetDomainsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetDomainsQueryParams;
+}
+
+
 export class GetDomainsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDomains200ApplicationJsonObject?: GetDomains200ApplicationJson;
 }

@@ -1,65 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetLinodeStatsByYearMonthPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
   linodeId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=month" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=month" })
   month: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=year" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=year" })
   year: number;
 }
 
 
-export class GetLinodeStatsByYearMonthSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class GetLinodeStatsByYearMonthSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class GetLinodeStatsByYearMonthSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetLinodeStatsByYearMonthSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetLinodeStatsByYearMonthSecurityOption2;
-}
-
-
-export class GetLinodeStatsByYearMonthRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetLinodeStatsByYearMonthPathParams;
-
-  @Metadata()
-  security: GetLinodeStatsByYearMonthSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class GetLinodeStatsByYearMonthDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class GetLinodeStatsByYearMonthRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetLinodeStatsByYearMonthPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetLinodeStatsByYearMonthSecurity;
+}
+
+
 export class GetLinodeStatsByYearMonthResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   linodeStats?: shared.LinodeStats;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLinodeStatsByYearMonthDefaultApplicationJsonObject?: GetLinodeStatsByYearMonthDefaultApplicationJson;
 }

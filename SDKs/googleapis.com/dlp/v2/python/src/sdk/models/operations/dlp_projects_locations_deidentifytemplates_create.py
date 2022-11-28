@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DlpProjectsLocationsDeidentifyTemplatesCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DlpProjectsLocationsDeidentifyTemplatesCreateQueryParams:
 
 @dataclass
 class DlpProjectsLocationsDeidentifyTemplatesCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DlpProjectsLocationsDeidentifyTemplatesCreateRequest:
-    path_params: DlpProjectsLocationsDeidentifyTemplatesCreatePathParams = field(default=None)
-    query_params: DlpProjectsLocationsDeidentifyTemplatesCreateQueryParams = field(default=None)
-    request: Optional[shared.GooglePrivacyDlpV2CreateDeidentifyTemplateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DlpProjectsLocationsDeidentifyTemplatesCreateSecurity = field(default=None)
+    path_params: DlpProjectsLocationsDeidentifyTemplatesCreatePathParams = field()
+    query_params: DlpProjectsLocationsDeidentifyTemplatesCreateQueryParams = field()
+    security: DlpProjectsLocationsDeidentifyTemplatesCreateSecurity = field()
+    request: Optional[shared.GooglePrivacyDlpV2CreateDeidentifyTemplateRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DlpProjectsLocationsDeidentifyTemplatesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_privacy_dlp_v2_deidentify_template: Optional[shared.GooglePrivacyDlpV2DeidentifyTemplate] = field(default=None)
-    status_code: int = field(default=None)
     

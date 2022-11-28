@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Assignment } from "./assignment";
+
 
 
 // SearchAssignmentsResponse
@@ -8,9 +8,9 @@ import { Assignment } from "./assignment";
  * The response for ReservationService.SearchAssignments.
 **/
 export class SearchAssignmentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assignments", elemType: shared.Assignment })
+  @SpeakeasyMetadata({ data: "json, name=assignments", elemType: Assignment })
   assignments?: Assignment[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

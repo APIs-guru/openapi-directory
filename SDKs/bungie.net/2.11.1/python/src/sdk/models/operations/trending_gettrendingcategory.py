@@ -1,21 +1,21 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class TrendingGetTrendingCategoryPathParams:
-    category_id: str = field(default=None, metadata={'path_param': { 'field_name': 'categoryId', 'style': 'simple', 'explode': False }})
-    page_number: int = field(default=None, metadata={'path_param': { 'field_name': 'pageNumber', 'style': 'simple', 'explode': False }})
+    category_id: str = field(metadata={'path_param': { 'field_name': 'categoryId', 'style': 'simple', 'explode': False }})
+    page_number: int = field(metadata={'path_param': { 'field_name': 'pageNumber', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class TrendingGetTrendingCategoryRequest:
-    path_params: TrendingGetTrendingCategoryPathParams = field(default=None)
+    path_params: TrendingGetTrendingCategoryPathParams = field()
     
 
 @dataclass
 class TrendingGetTrendingCategoryResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Sentiment } from "./sentiment";
 import { Topic } from "./topic";
 var TopicSentiment = /** @class */ (function (_super) {
@@ -31,15 +31,15 @@ var TopicSentiment = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=sentence" }),
+        SpeakeasyMetadata({ data: "json, name=sentence" }),
         __metadata("design:type", String)
     ], TopicSentiment.prototype, "sentence", void 0);
     __decorate([
-        Metadata({ data: "json, name=sentiment" }),
+        SpeakeasyMetadata({ data: "json, name=sentiment" }),
         __metadata("design:type", Sentiment)
     ], TopicSentiment.prototype, "sentiment", void 0);
     __decorate([
-        Metadata({ data: "json, name=topic" }),
+        SpeakeasyMetadata({ data: "json, name=topic" }),
         __metadata("design:type", Topic)
     ], TopicSentiment.prototype, "topic", void 0);
     return TopicSentiment;

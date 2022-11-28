@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ConversionErrorCodeEnum {
-    InvalidArgument = "INVALID_ARGUMENT"
-,    Internal = "INTERNAL"
-,    PermissionDenied = "PERMISSION_DENIED"
-,    NotFound = "NOT_FOUND"
+    InvalidArgument = "INVALID_ARGUMENT",
+    Internal = "INTERNAL",
+    PermissionDenied = "PERMISSION_DENIED",
+    NotFound = "NOT_FOUND"
 }
 
 
@@ -13,12 +14,12 @@ export enum ConversionErrorCodeEnum {
  * The error code and description for a conversion that failed to insert or update.
 **/
 export class ConversionError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: ConversionErrorCodeEnum;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }

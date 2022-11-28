@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListApplicationsOutput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the output of a ListApplications operation.
 **/
 export class ListApplicationsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applications" })
+  @SpeakeasyMetadata({ data: "json, name=applications" })
   applications?: string[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

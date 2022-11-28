@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UploadLayerPartRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=layerPartBlob" })
+  @SpeakeasyMetadata({ data: "json, name=layerPartBlob" })
   layerPartBlob: string;
 
-  @Metadata({ data: "json, name=partFirstByte" })
+  @SpeakeasyMetadata({ data: "json, name=partFirstByte" })
   partFirstByte: number;
 
-  @Metadata({ data: "json, name=partLastByte" })
+  @SpeakeasyMetadata({ data: "json, name=partLastByte" })
   partLastByte: number;
 
-  @Metadata({ data: "json, name=registryId" })
+  @SpeakeasyMetadata({ data: "json, name=registryId" })
   registryId?: string;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName: string;
 
-  @Metadata({ data: "json, name=uploadId" })
+  @SpeakeasyMetadata({ data: "json, name=uploadId" })
   uploadId: string;
 }

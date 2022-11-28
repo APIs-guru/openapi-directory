@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetCisJobProgressPathParams = /** @class */ (function (_super) {
     __extends(GetCisJobProgressPathParams, _super);
@@ -30,7 +30,7 @@ var GetCisJobProgressPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=JobId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=JobId" }),
         __metadata("design:type", String)
     ], GetCisJobProgressPathParams.prototype, "jobId", void 0);
     return GetCisJobProgressPathParams;
@@ -42,11 +42,11 @@ var GetCisJobProgressHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetCisJobProgressHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetCisJobProgressHeaders.prototype, "authorization", void 0);
     return GetCisJobProgressHeaders;
@@ -58,11 +58,11 @@ var GetCisJobProgressRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCisJobProgressPathParams)
     ], GetCisJobProgressRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCisJobProgressHeaders)
     ], GetCisJobProgressRequest.prototype, "headers", void 0);
     return GetCisJobProgressRequest;
@@ -74,15 +74,15 @@ var GetCisJobProgressResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetCisJobProgressResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetCisJobProgressResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetCisJobProgressResponse.prototype, "statusCode", void 0);
     return GetCisJobProgressResponse;

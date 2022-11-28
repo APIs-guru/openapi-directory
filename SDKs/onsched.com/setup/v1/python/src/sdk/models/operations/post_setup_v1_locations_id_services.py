@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostSetupV1LocationsIDServicesPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class PostSetupV1LocationsIDServicesRequests:
 
 @dataclass
 class PostSetupV1LocationsIDServicesRequest:
-    path_params: PostSetupV1LocationsIDServicesPathParams = field(default=None)
+    path_params: PostSetupV1LocationsIDServicesPathParams = field()
     request: Optional[PostSetupV1LocationsIDServicesRequests] = field(default=None)
     
 
 @dataclass
 class PostSetupV1LocationsIDServicesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     location_view_model: Optional[shared.LocationViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

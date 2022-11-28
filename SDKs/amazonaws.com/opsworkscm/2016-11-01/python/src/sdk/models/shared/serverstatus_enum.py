@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ServerStatusEnum(str, Enum):
     BACKING_UP = "BACKING_UP"

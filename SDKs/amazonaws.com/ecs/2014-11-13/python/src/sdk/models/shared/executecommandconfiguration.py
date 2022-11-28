@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import executecommandlogconfiguration
-from . import executecommandlogging_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ExecuteCommandConfiguration:
-    kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kmsKeyId' }})
-    log_configuration: Optional[executecommandlogconfiguration.ExecuteCommandLogConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logConfiguration' }})
-    logging: Optional[executecommandlogging_enum.ExecuteCommandLoggingEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logging' }})
+    r"""ExecuteCommandConfiguration
+    The details of the execute command configuration.
+    """
+    
+    kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kmsKeyId') }})
+    log_configuration: Optional[ExecuteCommandLogConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('logConfiguration') }})
+    logging: Optional[ExecuteCommandLoggingEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('logging') }})
     

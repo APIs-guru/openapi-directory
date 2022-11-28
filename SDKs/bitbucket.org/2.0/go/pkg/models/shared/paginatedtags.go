@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedTags
+// A paginated list of tags.
 type PaginatedTags struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

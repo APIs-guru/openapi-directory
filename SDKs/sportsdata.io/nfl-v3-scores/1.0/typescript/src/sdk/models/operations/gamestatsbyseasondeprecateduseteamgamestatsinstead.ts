@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GameStatsBySeasonDeprecatedUseTeamGameStatsInsteadFormatEnum {
-    Xml = "XML"
-,    Json = "JSON"
+    Xml = "XML",
+    Json = "JSON"
 }
 
 
 export class GameStatsBySeasonDeprecatedUseTeamGameStatsInsteadPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: GameStatsBySeasonDeprecatedUseTeamGameStatsInsteadFormatEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=season" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=season" })
   season: string;
 }
 
 
 export class GameStatsBySeasonDeprecatedUseTeamGameStatsInsteadRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GameStatsBySeasonDeprecatedUseTeamGameStatsInsteadPathParams;
 }
 
 
 export class GameStatsBySeasonDeprecatedUseTeamGameStatsInsteadResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   games?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

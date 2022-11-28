@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { XssMatchSetUpdate } from "./xssmatchsetupdate";
+
 
 
 // UpdateXssMatchSetRequest
@@ -8,12 +8,12 @@ import { XssMatchSetUpdate } from "./xssmatchsetupdate";
  * A request to update an <a>XssMatchSet</a>.
 **/
 export class UpdateXssMatchSetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChangeToken" })
+  @SpeakeasyMetadata({ data: "json, name=ChangeToken" })
   changeToken: string;
 
-  @Metadata({ data: "json, name=Updates", elemType: shared.XssMatchSetUpdate })
+  @SpeakeasyMetadata({ data: "json, name=Updates", elemType: XssMatchSetUpdate })
   updates: XssMatchSetUpdate[];
 
-  @Metadata({ data: "json, name=XssMatchSetId" })
+  @SpeakeasyMetadata({ data: "json, name=XssMatchSetId" })
   xssMatchSetId: string;
 }

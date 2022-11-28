@@ -4,8 +4,8 @@ from typing import List,Optional
 
 @dataclass
 class GetInstancesIDAttachmentsNameIsCompressedPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class GetInstancesIDAttachmentsNameIsCompressedHeaders:
 
 @dataclass
 class GetInstancesIDAttachmentsNameIsCompressedRequest:
-    path_params: GetInstancesIDAttachmentsNameIsCompressedPathParams = field(default=None)
-    headers: GetInstancesIDAttachmentsNameIsCompressedHeaders = field(default=None)
+    headers: GetInstancesIDAttachmentsNameIsCompressedHeaders = field()
+    path_params: GetInstancesIDAttachmentsNameIsCompressedPathParams = field()
     
 
 @dataclass
 class GetInstancesIDAttachmentsNameIsCompressedResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

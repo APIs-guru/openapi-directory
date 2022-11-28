@@ -1,5 +1,7 @@
 package shared
 
+// InitiateAuthRequest
+// Initiates the authentication request.
 type InitiateAuthRequest struct {
 	AnalyticsMetadata *AnalyticsMetadataType `json:"AnalyticsMetadata,omitempty"`
 	AuthFlow          AuthFlowTypeEnum       `json:"AuthFlow"`

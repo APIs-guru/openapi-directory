@@ -10,6 +10,8 @@ const (
 	GoogleCloudContactcenterinsightsV1ConversationParticipantRoleEnumAnyAgent        GoogleCloudContactcenterinsightsV1ConversationParticipantRoleEnum = "ANY_AGENT"
 )
 
+// GoogleCloudContactcenterinsightsV1ConversationParticipant
+// The call participant speaking for a given utterance.
 type GoogleCloudContactcenterinsightsV1ConversationParticipant struct {
 	DialogflowParticipant     *string                                                            `json:"dialogflowParticipant,omitempty"`
 	DialogflowParticipantName *string                                                            `json:"dialogflowParticipantName,omitempty"`

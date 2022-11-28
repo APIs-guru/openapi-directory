@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ImportComponentHeaders = /** @class */ (function (_super) {
     __extends(ImportComponentHeaders, _super);
@@ -30,31 +30,31 @@ var ImportComponentHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], ImportComponentHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], ImportComponentHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], ImportComponentHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], ImportComponentHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], ImportComponentHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], ImportComponentHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], ImportComponentHeaders.prototype, "xAmzSignedHeaders", void 0);
     return ImportComponentHeaders;
@@ -80,51 +80,51 @@ var ImportComponentRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=changeDescription" }),
+        SpeakeasyMetadata({ data: "json, name=changeDescription" }),
         __metadata("design:type", String)
     ], ImportComponentRequestBody.prototype, "changeDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientToken" }),
+        SpeakeasyMetadata({ data: "json, name=clientToken" }),
         __metadata("design:type", String)
     ], ImportComponentRequestBody.prototype, "clientToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=data" }),
+        SpeakeasyMetadata({ data: "json, name=data" }),
         __metadata("design:type", String)
     ], ImportComponentRequestBody.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], ImportComponentRequestBody.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], ImportComponentRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=kmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=kmsKeyId" }),
         __metadata("design:type", String)
     ], ImportComponentRequestBody.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ImportComponentRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=platform" }),
+        SpeakeasyMetadata({ data: "json, name=platform" }),
         __metadata("design:type", String)
     ], ImportComponentRequestBody.prototype, "platform", void 0);
     __decorate([
-        Metadata({ data: "json, name=semanticVersion" }),
+        SpeakeasyMetadata({ data: "json, name=semanticVersion" }),
         __metadata("design:type", String)
     ], ImportComponentRequestBody.prototype, "semanticVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], ImportComponentRequestBody.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], ImportComponentRequestBody.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=uri" }),
+        SpeakeasyMetadata({ data: "json, name=uri" }),
         __metadata("design:type", String)
     ], ImportComponentRequestBody.prototype, "uri", void 0);
     return ImportComponentRequestBody;
@@ -136,11 +136,11 @@ var ImportComponentRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ImportComponentHeaders)
     ], ImportComponentRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", ImportComponentRequestBody)
     ], ImportComponentRequest.prototype, "request", void 0);
     return ImportComponentRequest;
@@ -152,55 +152,55 @@ var ImportComponentResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ImportComponentResponse.prototype, "callRateLimitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ImportComponentResponse.prototype, "clientException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ImportComponentResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ImportComponentResponse.prototype, "forbiddenException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ImportComponentResponse.prototype, "idempotentParameterMismatchException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ImportComponentResponse)
     ], ImportComponentResponse.prototype, "importComponentResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ImportComponentResponse.prototype, "invalidParameterCombinationException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ImportComponentResponse.prototype, "invalidRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ImportComponentResponse.prototype, "invalidVersionNumberException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ImportComponentResponse.prototype, "resourceInUseException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ImportComponentResponse.prototype, "serviceException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ImportComponentResponse.prototype, "serviceUnavailableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ImportComponentResponse.prototype, "statusCode", void 0);
     return ImportComponentResponse;

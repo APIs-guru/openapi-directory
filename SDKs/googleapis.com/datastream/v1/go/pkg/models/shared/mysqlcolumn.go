@@ -1,5 +1,7 @@
 package shared
 
+// MysqlColumn
+// MySQL Column.
 type MysqlColumn struct {
 	Collation       *string `json:"collation,omitempty"`
 	Column          *string `json:"column,omitempty"`

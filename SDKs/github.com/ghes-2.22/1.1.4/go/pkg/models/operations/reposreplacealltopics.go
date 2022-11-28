@@ -13,14 +13,14 @@ type ReposReplaceAllTopicsRequestBody struct {
 	Names []string `json:"names"`
 }
 
-type ReposReplaceAllTopicsRequest struct {
-	PathParams ReposReplaceAllTopicsPathParams
-	Request    *ReposReplaceAllTopicsRequestBody `request:"mediaType=application/json"`
-}
-
 type ReposReplaceAllTopics415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type ReposReplaceAllTopicsRequest struct {
+	PathParams ReposReplaceAllTopicsPathParams
+	Request    *ReposReplaceAllTopicsRequestBody `request:"mediaType=application/json"`
 }
 
 type ReposReplaceAllTopicsResponse struct {

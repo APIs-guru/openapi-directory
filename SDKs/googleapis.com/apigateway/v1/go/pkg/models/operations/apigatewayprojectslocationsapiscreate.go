@@ -31,7 +31,7 @@ type ApigatewayProjectsLocationsApisCreateSecurity struct {
 type ApigatewayProjectsLocationsApisCreateRequest struct {
 	PathParams  ApigatewayProjectsLocationsApisCreatePathParams
 	QueryParams ApigatewayProjectsLocationsApisCreateQueryParams
-	Request     *shared.ApigatewayAPI `request:"mediaType=application/json"`
+	Request     *shared.ApigatewayAPIInput `request:"mediaType=application/json"`
 	Security    ApigatewayProjectsLocationsApisCreateSecurity
 }
 

@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetFundingAccountPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=fundingAccountId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fundingAccountId" })
   fundingAccountId: string;
 }
 
 
 export class GetFundingAccountQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sensitive" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sensitive" })
   sensitive?: boolean;
 }
 
 
 export class GetFundingAccountRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetFundingAccountPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetFundingAccountQueryParams;
 }
 
 
 export class GetFundingAccountResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fundingAccountResponse?: shared.FundingAccountResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse401?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse403?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse404?: any;
 }

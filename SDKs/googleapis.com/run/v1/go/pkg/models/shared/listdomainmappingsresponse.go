@@ -1,5 +1,7 @@
 package shared
 
+// ListDomainMappingsResponse
+// ListDomainMappingsResponse is a list of DomainMapping resources.
 type ListDomainMappingsResponse struct {
 	APIVersion  *string         `json:"apiVersion,omitempty"`
 	Items       []DomainMapping `json:"items,omitempty"`

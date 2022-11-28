@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ExecuteProvisionedProductServiceActionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcceptLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=AcceptLanguage" })
   acceptLanguage?: string;
 
-  @Metadata({ data: "json, name=ExecuteToken" })
+  @SpeakeasyMetadata({ data: "json, name=ExecuteToken" })
   executeToken: string;
 
-  @Metadata({ data: "json, name=Parameters" })
+  @SpeakeasyMetadata({ data: "json, name=Parameters" })
   parameters?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=ProvisionedProductId" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedProductId" })
   provisionedProductId: string;
 
-  @Metadata({ data: "json, name=ServiceActionId" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceActionId" })
   serviceActionId: string;
 }

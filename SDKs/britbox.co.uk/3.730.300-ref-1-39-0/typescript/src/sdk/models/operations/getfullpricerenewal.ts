@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetFullPriceRenewalQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: string;
 }
 
 
 export class GetFullPriceRenewalSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   accountAuth: shared.SchemeAccountAuth;
 }
 
 
 export class GetFullPriceRenewalRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetFullPriceRenewalQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetFullPriceRenewalSecurity;
 }
 
 
 export class GetFullPriceRenewalResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   itvSubscriptionFullPriceRenewal?: shared.ItvSubscriptionFullPriceRenewal;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

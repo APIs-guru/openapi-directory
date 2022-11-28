@@ -31,7 +31,7 @@ type NetworksecurityProjectsLocationsServerTLSPoliciesPatchSecurity struct {
 type NetworksecurityProjectsLocationsServerTLSPoliciesPatchRequest struct {
 	PathParams  NetworksecurityProjectsLocationsServerTLSPoliciesPatchPathParams
 	QueryParams NetworksecurityProjectsLocationsServerTLSPoliciesPatchQueryParams
-	Request     *shared.ServerTLSPolicy `request:"mediaType=application/json"`
+	Request     *shared.ServerTLSPolicyInput `request:"mediaType=application/json"`
 	Security    NetworksecurityProjectsLocationsServerTLSPoliciesPatchSecurity
 }
 

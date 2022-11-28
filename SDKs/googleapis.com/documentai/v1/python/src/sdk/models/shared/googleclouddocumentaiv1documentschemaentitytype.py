@@ -1,18 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddocumentaiv1entitytypemetadata
-from . import googleclouddocumentaiv1documentschemaentitytypeenumvalues
-from . import googleclouddocumentaiv1documentschemaentitytypeproperty
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDocumentaiV1DocumentSchemaEntityType:
-    base_types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'baseTypes' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    entity_type_metadata: Optional[googleclouddocumentaiv1entitytypemetadata.GoogleCloudDocumentaiV1EntityTypeMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entityTypeMetadata' }})
-    enum_values: Optional[googleclouddocumentaiv1documentschemaentitytypeenumvalues.GoogleCloudDocumentaiV1DocumentSchemaEntityTypeEnumValues] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enumValues' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    properties: Optional[List[googleclouddocumentaiv1documentschemaentitytypeproperty.GoogleCloudDocumentaiV1DocumentSchemaEntityTypeProperty]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'properties' }})
+    r"""GoogleCloudDocumentaiV1DocumentSchemaEntityType
+    EntityType is the wrapper of a label of the corresponding model with detailed attributes and limitations for entity-based processors. Multiple types can also compose a dependency tree to represent nested types.
+    """
+    
+    base_types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('baseTypes') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    enum_values: Optional[GoogleCloudDocumentaiV1DocumentSchemaEntityTypeEnumValues] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enumValues') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    properties: Optional[List[GoogleCloudDocumentaiV1DocumentSchemaEntityTypeProperty]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('properties') }})
     

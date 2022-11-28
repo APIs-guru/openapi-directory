@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AutoMlOutputDataConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The output data configuration.
 **/
 export class AutoMlOutputDataConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=S3OutputPath" })
+  @SpeakeasyMetadata({ data: "json, name=S3OutputPath" })
   s3OutputPath: string;
 }

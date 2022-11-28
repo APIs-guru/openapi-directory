@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum DeleteClusterXAmzTargetEnum {
     AmazonMemoryDbDeleteCluster = "AmazonMemoryDB.DeleteCluster"
@@ -7,66 +8,66 @@ export enum DeleteClusterXAmzTargetEnum {
 
 
 export class DeleteClusterHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: DeleteClusterXAmzTargetEnum;
 }
 
 
 export class DeleteClusterRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: DeleteClusterHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.DeleteClusterRequest;
 }
 
 
 export class DeleteClusterResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   clusterNotFoundFault?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteClusterResponse?: shared.DeleteClusterResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidClusterStateFault?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterCombinationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterValueException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceLinkedRoleNotFoundFault?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   snapshotAlreadyExistsFault?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

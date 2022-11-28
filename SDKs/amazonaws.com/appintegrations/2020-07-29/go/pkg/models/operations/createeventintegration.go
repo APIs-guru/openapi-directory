@@ -14,6 +14,8 @@ type CreateEventIntegrationHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateEventIntegrationRequestBodyEventFilter
+// The event filter.
 type CreateEventIntegrationRequestBodyEventFilter struct {
 	Source *string `json:"Source,omitempty"`
 }

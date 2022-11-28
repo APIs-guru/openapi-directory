@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutSubscriptionsSubscriptionIdProfilePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" })
   subscriptionId: string;
 }
 
 
 export class PutSubscriptionsSubscriptionIdProfileRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   subscriptionProfile?: shared.SubscriptionProfile;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   subscriptionProfile1?: shared.SubscriptionProfile;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   subscriptionProfile2?: shared.SubscriptionProfile;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   subscriptionProfile3?: shared.SubscriptionProfile;
 }
 
 
 export class PutSubscriptionsSubscriptionIdProfileRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutSubscriptionsSubscriptionIdProfilePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PutSubscriptionsSubscriptionIdProfileRequests;
 }
 
 
 export class PutSubscriptionsSubscriptionIdProfileResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   subscriptionInfo?: shared.SubscriptionInfo;
 }

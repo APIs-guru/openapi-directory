@@ -19,6 +19,8 @@ type PutBotAliasHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// PutBotAliasRequestBodyConversationLogs
+// Provides the settings needed for conversation logs.
 type PutBotAliasRequestBodyConversationLogs struct {
 	IamRoleArn  *string                     `json:"iamRoleArn,omitempty"`
 	LogSettings []shared.LogSettingsRequest `json:"logSettings,omitempty"`

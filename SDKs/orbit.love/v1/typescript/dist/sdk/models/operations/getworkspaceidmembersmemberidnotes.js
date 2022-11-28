@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetWorkspaceIdMembersMemberIdNotesPathParams = /** @class */ (function (_super) {
     __extends(GetWorkspaceIdMembersMemberIdNotesPathParams, _super);
@@ -30,11 +30,11 @@ var GetWorkspaceIdMembersMemberIdNotesPathParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=member_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=member_id" }),
         __metadata("design:type", String)
     ], GetWorkspaceIdMembersMemberIdNotesPathParams.prototype, "memberId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=workspace_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspace_id" }),
         __metadata("design:type", String)
     ], GetWorkspaceIdMembersMemberIdNotesPathParams.prototype, "workspaceId", void 0);
     return GetWorkspaceIdMembersMemberIdNotesPathParams;
@@ -46,7 +46,7 @@ var GetWorkspaceIdMembersMemberIdNotesQueryParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", String)
     ], GetWorkspaceIdMembersMemberIdNotesQueryParams.prototype, "page", void 0);
     return GetWorkspaceIdMembersMemberIdNotesQueryParams;
@@ -58,7 +58,7 @@ var GetWorkspaceIdMembersMemberIdNotesSecurity = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeBearer)
     ], GetWorkspaceIdMembersMemberIdNotesSecurity.prototype, "bearer", void 0);
     return GetWorkspaceIdMembersMemberIdNotesSecurity;
@@ -70,15 +70,15 @@ var GetWorkspaceIdMembersMemberIdNotesRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWorkspaceIdMembersMemberIdNotesPathParams)
     ], GetWorkspaceIdMembersMemberIdNotesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWorkspaceIdMembersMemberIdNotesQueryParams)
     ], GetWorkspaceIdMembersMemberIdNotesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWorkspaceIdMembersMemberIdNotesSecurity)
     ], GetWorkspaceIdMembersMemberIdNotesRequest.prototype, "security", void 0);
     return GetWorkspaceIdMembersMemberIdNotesRequest;
@@ -90,11 +90,11 @@ var GetWorkspaceIdMembersMemberIdNotesResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetWorkspaceIdMembersMemberIdNotesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetWorkspaceIdMembersMemberIdNotesResponse.prototype, "statusCode", void 0);
     return GetWorkspaceIdMembersMemberIdNotesResponse;

@@ -1,19 +1,21 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import slotdefaultvaluespecification
-from . import promptspecification
-from . import sampleutterance
-from . import slotconstraint_enum
-from . import waitandcontinuespecification
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SlotValueElicitationSetting:
-    default_value_specification: Optional[slotdefaultvaluespecification.SlotDefaultValueSpecification] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultValueSpecification' }})
-    prompt_specification: Optional[promptspecification.PromptSpecification] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'promptSpecification' }})
-    sample_utterances: Optional[List[sampleutterance.SampleUtterance]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sampleUtterances' }})
-    slot_constraint: slotconstraint_enum.SlotConstraintEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'slotConstraint' }})
-    wait_and_continue_specification: Optional[waitandcontinuespecification.WaitAndContinueSpecification] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'waitAndContinueSpecification' }})
+    r"""SlotValueElicitationSetting
+    Settings that you can use for eliciting a slot value.
+    """
+    
+    slot_constraint: SlotConstraintEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('slotConstraint') }})
+    default_value_specification: Optional[SlotDefaultValueSpecification] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultValueSpecification') }})
+    prompt_specification: Optional[PromptSpecification] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('promptSpecification') }})
+    sample_utterances: Optional[List[SampleUtterance]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sampleUtterances') }})
+    wait_and_continue_specification: Optional[WaitAndContinueSpecification] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('waitAndContinueSpecification') }})
     

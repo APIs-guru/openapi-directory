@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AccessapprovalProjectsApprovalRequestsInvalidatePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +29,21 @@ class AccessapprovalProjectsApprovalRequestsInvalidateQueryParams:
 
 @dataclass
 class AccessapprovalProjectsApprovalRequestsInvalidateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AccessapprovalProjectsApprovalRequestsInvalidateRequest:
-    path_params: AccessapprovalProjectsApprovalRequestsInvalidatePathParams = field(default=None)
-    query_params: AccessapprovalProjectsApprovalRequestsInvalidateQueryParams = field(default=None)
+    path_params: AccessapprovalProjectsApprovalRequestsInvalidatePathParams = field()
+    query_params: AccessapprovalProjectsApprovalRequestsInvalidateQueryParams = field()
+    security: AccessapprovalProjectsApprovalRequestsInvalidateSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AccessapprovalProjectsApprovalRequestsInvalidateSecurity = field(default=None)
     
 
 @dataclass
 class AccessapprovalProjectsApprovalRequestsInvalidateResponse:
+    content_type: str = field()
+    status_code: int = field()
     approval_request: Optional[shared.ApprovalRequest] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

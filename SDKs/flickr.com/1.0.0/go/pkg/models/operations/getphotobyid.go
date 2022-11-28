@@ -9,13 +9,13 @@ type GetPhotoByIDQueryParams struct {
 	PhotoID string `queryParam:"style=form,explode=true,name=photo_id"`
 }
 
-type GetPhotoByIDRequest struct {
-	QueryParams GetPhotoByIDQueryParams
-}
-
 type GetPhotoByID200ApplicationJSON struct {
 	Photo *shared.Photo `json:"photo,omitempty"`
 	Stat  *string       `json:"stat,omitempty"`
+}
+
+type GetPhotoByIDRequest struct {
+	QueryParams GetPhotoByIDQueryParams
 }
 
 type GetPhotoByIDResponse struct {

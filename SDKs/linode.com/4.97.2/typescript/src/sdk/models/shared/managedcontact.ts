@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ManagedContactPhone
@@ -7,11 +8,31 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class ManagedContactPhone extends SpeakeasyBase {
-  @Metadata({ data: "json, name=primary" })
+  @SpeakeasyMetadata({ data: "json, name=primary" })
   primary?: string;
 
-  @Metadata({ data: "json, name=secondary" })
+  @SpeakeasyMetadata({ data: "json, name=secondary" })
   secondary?: string;
+}
+
+
+// ManagedContactInput
+/** 
+ * Information about someone Linode's special forces may contact in case an issue is detected with a manager service.
+ * 
+**/
+export class ManagedContactInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=email" })
+  email?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=group" })
+  group?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=phone" })
+  phone?: ManagedContactPhone;
 }
 
 
@@ -21,21 +42,21 @@ export class ManagedContactPhone extends SpeakeasyBase {
  * 
 **/
 export class ManagedContact extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=phone" })
+  @SpeakeasyMetadata({ data: "json, name=phone" })
   phone?: ManagedContactPhone;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 }

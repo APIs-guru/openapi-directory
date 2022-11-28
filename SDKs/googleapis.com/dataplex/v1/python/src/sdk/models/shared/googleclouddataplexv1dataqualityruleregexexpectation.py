@@ -1,0 +1,15 @@
+from dataclasses import dataclass, field
+from typing import Optional
+from dataclasses_json import dataclass_json
+from sdk import utils
+
+
+@dataclass_json
+@dataclass
+class GoogleCloudDataplexV1DataQualityRuleRegexExpectation:
+    r"""GoogleCloudDataplexV1DataQualityRuleRegexExpectation
+    Evaluates whether each column value matches a specified regex.
+    """
+    
+    regex: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('regex') }})
+    

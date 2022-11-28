@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Question } from "./question";
+
 
 
 // ListQuestionsResponse
@@ -8,12 +8,12 @@ import { Question } from "./question";
  * Response message for QuestionsAndAnswers.ListQuestions
 **/
 export class ListQuestionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=questions", elemType: shared.Question })
+  @SpeakeasyMetadata({ data: "json, name=questions", elemType: Question })
   questions?: Question[];
 
-  @Metadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata({ data: "json, name=totalSize" })
   totalSize?: number;
 }

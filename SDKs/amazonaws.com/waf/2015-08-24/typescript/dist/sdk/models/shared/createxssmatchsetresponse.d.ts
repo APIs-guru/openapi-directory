@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { XssMatchSet } from "./xssmatchset";
 /**
  * The response to a <code>CreateXssMatchSet</code> request.

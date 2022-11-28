@@ -1,16 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UnloadServicePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serviceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serviceId" })
   serviceId: string;
-}
-
-
-export class UnloadServiceRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UnloadServicePathParams;
 }
 
 export enum UnloadService200ApplicationJsonStatusEnum {
@@ -19,30 +14,36 @@ export enum UnloadService200ApplicationJsonStatusEnum {
 
 
 export class UnloadService200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=api" })
+  @SpeakeasyMetadata({ data: "json, name=api" })
   api: string;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method: string;
 
-  @Metadata({ data: "json, name=response" })
+  @SpeakeasyMetadata({ data: "json, name=response" })
   response: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: UnloadService200ApplicationJsonStatusEnum;
 }
 
 
+export class UnloadServiceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UnloadServicePathParams;
+}
+
+
 export class UnloadServiceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unloadService200ApplicationJsonObject?: UnloadService200ApplicationJson;
 }

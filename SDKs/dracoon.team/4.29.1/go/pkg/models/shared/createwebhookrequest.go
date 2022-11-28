@@ -1,5 +1,7 @@
 package shared
 
+// CreateWebhookRequest
+// Request model for creating a webhook
 type CreateWebhookRequest struct {
 	EventTypeNames      []string `json:"eventTypeNames"`
 	IsEnabled           *bool    `json:"isEnabled,omitempty"`

@@ -14,6 +14,8 @@ type UpdateAnomalyDetectorHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateAnomalyDetectorRequestBodyAnomalyDetectorConfig
+// Contains information about a detector's configuration.
 type UpdateAnomalyDetectorRequestBodyAnomalyDetectorConfig struct {
 	AnomalyDetectorFrequency *shared.FrequencyEnum `json:"AnomalyDetectorFrequency,omitempty"`
 }

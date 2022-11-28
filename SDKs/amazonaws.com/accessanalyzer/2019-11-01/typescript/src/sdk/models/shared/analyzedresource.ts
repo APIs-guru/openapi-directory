@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceTypeEnum } from "./resourcetypeenum";
 import { FindingStatusEnum } from "./findingstatusenum";
+
 
 
 // AnalyzedResource
@@ -8,36 +9,36 @@ import { FindingStatusEnum } from "./findingstatusenum";
  * Contains details about the analyzed resource.
 **/
 export class AnalyzedResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions" })
+  @SpeakeasyMetadata({ data: "json, name=actions" })
   actions?: string[];
 
-  @Metadata({ data: "json, name=analyzedAt" })
+  @SpeakeasyMetadata({ data: "json, name=analyzedAt" })
   analyzedAt: Date;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=isPublic" })
+  @SpeakeasyMetadata({ data: "json, name=isPublic" })
   isPublic: boolean;
 
-  @Metadata({ data: "json, name=resourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=resourceArn" })
   resourceArn: string;
 
-  @Metadata({ data: "json, name=resourceOwnerAccount" })
+  @SpeakeasyMetadata({ data: "json, name=resourceOwnerAccount" })
   resourceOwnerAccount: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType: ResourceTypeEnum;
 
-  @Metadata({ data: "json, name=sharedVia" })
+  @SpeakeasyMetadata({ data: "json, name=sharedVia" })
   sharedVia?: string[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: FindingStatusEnum;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt: Date;
 }

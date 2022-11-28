@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Provides feature transformation information. Feature transformation is the process of modifying raw input data into a form more suitable for model training.
 **/

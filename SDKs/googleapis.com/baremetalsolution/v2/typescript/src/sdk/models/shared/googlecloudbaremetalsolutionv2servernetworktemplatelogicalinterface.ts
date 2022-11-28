@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudBaremetalsolutionV2ServerNetworkTemplateLogicalInterfaceTypeEnum {
-    InterfaceTypeUnspecified = "INTERFACE_TYPE_UNSPECIFIED"
-,    Bond = "BOND"
-,    Nic = "NIC"
+    InterfaceTypeUnspecified = "INTERFACE_TYPE_UNSPECIFIED",
+    Bond = "BOND",
+    Nic = "NIC"
 }
 
 
@@ -12,12 +13,12 @@ export enum GoogleCloudBaremetalsolutionV2ServerNetworkTemplateLogicalInterfaceT
  * Logical interface.
 **/
 export class GoogleCloudBaremetalsolutionV2ServerNetworkTemplateLogicalInterface extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=required" })
+  @SpeakeasyMetadata({ data: "json, name=required" })
   required?: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GoogleCloudBaremetalsolutionV2ServerNetworkTemplateLogicalInterfaceTypeEnum;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GrpcRouteFaultInjectionPolicyAbort
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specification of how client requests are aborted as part of fault injection before being sent to a destination.
 **/
 export class GrpcRouteFaultInjectionPolicyAbort extends SpeakeasyBase {
-  @Metadata({ data: "json, name=httpStatus" })
+  @SpeakeasyMetadata({ data: "json, name=httpStatus" })
   httpStatus?: number;
 
-  @Metadata({ data: "json, name=percentage" })
+  @SpeakeasyMetadata({ data: "json, name=percentage" })
   percentage?: number;
 }

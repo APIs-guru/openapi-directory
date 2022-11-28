@@ -1,7 +1,8 @@
 
 
+
 export enum RepeatModeEnum {
-    RepeatNone = "RepeatNone"
-,    RepeatAll = "RepeatAll"
-,    RepeatOne = "RepeatOne"
+    RepeatNone = "RepeatNone",
+    RepeatAll = "RepeatAll",
+    RepeatOne = "RepeatOne"
 }

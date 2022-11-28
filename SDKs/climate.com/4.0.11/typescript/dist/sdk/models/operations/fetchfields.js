@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FetchFieldsQueryParams = /** @class */ (function (_super) {
     __extends(FetchFieldsQueryParams, _super);
@@ -30,7 +30,7 @@ var FetchFieldsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fieldName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fieldName" }),
         __metadata("design:type", String)
     ], FetchFieldsQueryParams.prototype, "fieldName", void 0);
     return FetchFieldsQueryParams;
@@ -42,53 +42,29 @@ var FetchFieldsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Limit" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Limit" }),
         __metadata("design:type", Number)
     ], FetchFieldsHeaders.prototype, "xLimit", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Next-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Next-Token" }),
         __metadata("design:type", String)
     ], FetchFieldsHeaders.prototype, "xNextToken", void 0);
     return FetchFieldsHeaders;
 }(SpeakeasyBase));
 export { FetchFieldsHeaders };
-var FetchFieldsSecurityOption1 = /** @class */ (function (_super) {
-    __extends(FetchFieldsSecurityOption1, _super);
-    function FetchFieldsSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKey)
-    ], FetchFieldsSecurityOption1.prototype, "apiKey", void 0);
-    return FetchFieldsSecurityOption1;
-}(SpeakeasyBase));
-export { FetchFieldsSecurityOption1 };
-var FetchFieldsSecurityOption2 = /** @class */ (function (_super) {
-    __extends(FetchFieldsSecurityOption2, _super);
-    function FetchFieldsSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", shared.SchemeOauth2AuthorizationCode)
-    ], FetchFieldsSecurityOption2.prototype, "oauth2AuthorizationCode", void 0);
-    return FetchFieldsSecurityOption2;
-}(SpeakeasyBase));
-export { FetchFieldsSecurityOption2 };
 var FetchFieldsSecurity = /** @class */ (function (_super) {
     __extends(FetchFieldsSecurity, _super);
     function FetchFieldsSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", FetchFieldsSecurityOption1)
-    ], FetchFieldsSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKey)
+    ], FetchFieldsSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", FetchFieldsSecurityOption2)
-    ], FetchFieldsSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2AuthorizationCode)
+    ], FetchFieldsSecurity.prototype, "oauth2AuthorizationCode", void 0);
     return FetchFieldsSecurity;
 }(SpeakeasyBase));
 export { FetchFieldsSecurity };
@@ -98,15 +74,15 @@ var FetchFieldsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FetchFieldsQueryParams)
     ], FetchFieldsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FetchFieldsHeaders)
     ], FetchFieldsRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FetchFieldsSecurity)
     ], FetchFieldsRequest.prototype, "security", void 0);
     return FetchFieldsRequest;
@@ -118,27 +94,27 @@ var FetchFieldsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FetchFieldsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], FetchFieldsResponse.prototype, "empty", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], FetchFieldsResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], FetchFieldsResponse.prototype, "fields", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], FetchFieldsResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FetchFieldsResponse.prototype, "statusCode", void 0);
     return FetchFieldsResponse;

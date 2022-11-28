@@ -1,0 +1,8 @@
+package shared
+
+type PredictiveScalingMaxCapacityBreachBehaviorEnum string
+
+const (
+	PredictiveScalingMaxCapacityBreachBehaviorEnumHonorMaxCapacity    PredictiveScalingMaxCapacityBreachBehaviorEnum = "HonorMaxCapacity"
+	PredictiveScalingMaxCapacityBreachBehaviorEnumIncreaseMaxCapacity PredictiveScalingMaxCapacityBreachBehaviorEnum = "IncreaseMaxCapacity"
+)

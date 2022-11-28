@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PrivateConnectionProvisioningFailureCauseEnum } from "./privateconnectionprovisioningfailurecauseenum";
 import { PrivateConnectionProvisioningStatusEnum } from "./privateconnectionprovisioningstatusenum";
+
 
 
 // PrivateConnectionProvisioningState
@@ -8,12 +9,12 @@ import { PrivateConnectionProvisioningStatusEnum } from "./privateconnectionprov
  *  Specifies the private connection provisioning state. 
 **/
 export class PrivateConnectionProvisioningState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failureCause" })
+  @SpeakeasyMetadata({ data: "json, name=failureCause" })
   failureCause?: PrivateConnectionProvisioningFailureCauseEnum;
 
-  @Metadata({ data: "json, name=failureMessage" })
+  @SpeakeasyMetadata({ data: "json, name=failureMessage" })
   failureMessage?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: PrivateConnectionProvisioningStatusEnum;
 }

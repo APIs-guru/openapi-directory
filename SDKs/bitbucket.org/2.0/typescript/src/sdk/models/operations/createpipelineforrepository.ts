@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreatePipelineForRepositoryPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo_slug" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo_slug" })
   repoSlug: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=workspace" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspace" })
   workspace: string;
 }
 
 
 export class CreatePipelineForRepositoryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreatePipelineForRepositoryPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: Map<string, any>;
 }
 
 
 export class CreatePipelineForRepositoryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pipeline?: Map<string, any>;
 }

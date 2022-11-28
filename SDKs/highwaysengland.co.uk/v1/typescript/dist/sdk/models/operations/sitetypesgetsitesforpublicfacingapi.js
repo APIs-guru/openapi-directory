@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SiteTypesGetSitesForPublicFacingApiPathParams = /** @class */ (function (_super) {
     __extends(SiteTypesGetSitesForPublicFacingApiPathParams, _super);
@@ -30,11 +30,11 @@ var SiteTypesGetSitesForPublicFacingApiPathParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=siteType_Id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=siteType_Id" }),
         __metadata("design:type", Number)
     ], SiteTypesGetSitesForPublicFacingApiPathParams.prototype, "siteTypeId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=version" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" }),
         __metadata("design:type", String)
     ], SiteTypesGetSitesForPublicFacingApiPathParams.prototype, "version", void 0);
     return SiteTypesGetSitesForPublicFacingApiPathParams;
@@ -46,7 +46,7 @@ var SiteTypesGetSitesForPublicFacingApiRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SiteTypesGetSitesForPublicFacingApiPathParams)
     ], SiteTypesGetSitesForPublicFacingApiRequest.prototype, "pathParams", void 0);
     return SiteTypesGetSitesForPublicFacingApiRequest;
@@ -58,15 +58,15 @@ var SiteTypesGetSitesForPublicFacingApiResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SiteTypesGetSitesForPublicFacingApiResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SiteTypeLayer)
     ], SiteTypesGetSitesForPublicFacingApiResponse.prototype, "siteTypeLayer", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SiteTypesGetSitesForPublicFacingApiResponse.prototype, "statusCode", void 0);
     return SiteTypesGetSitesForPublicFacingApiResponse;

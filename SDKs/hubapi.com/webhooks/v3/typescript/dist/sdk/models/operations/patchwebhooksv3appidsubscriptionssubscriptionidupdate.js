@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdatePathParams = /** @class */ (function (_super) {
     __extends(PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdatePathParams, _super);
@@ -30,11 +30,11 @@ var PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdatePathParams = /** @class
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
         __metadata("design:type", Number)
     ], PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdatePathParams.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subscriptionId" }),
         __metadata("design:type", Number)
     ], PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdatePathParams.prototype, "subscriptionId", void 0);
     return PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdatePathParams;
@@ -46,7 +46,7 @@ var PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdateSecurity = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeDeveloperHapikey)
     ], PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdateSecurity.prototype, "developerHapikey", void 0);
     return PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdateSecurity;
@@ -58,15 +58,15 @@ var PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdateRequest = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdatePathParams)
     ], PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdateRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.SubscriptionPatchRequest)
     ], PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdateRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdateSecurity)
     ], PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdateRequest.prototype, "security", void 0);
     return PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdateRequest;
@@ -78,19 +78,19 @@ var PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdateResponse = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdateResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdateResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SubscriptionResponse)
     ], PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdateResponse.prototype, "subscriptionResponse", void 0);
     return PatchWebhooksV3AppIdSubscriptionsSubscriptionIdUpdateResponse;

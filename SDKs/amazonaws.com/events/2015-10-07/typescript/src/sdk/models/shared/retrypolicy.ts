@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RetryPolicy
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A <code>RetryPolicy</code> object that includes information about the retry policy settings.
 **/
 export class RetryPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaximumEventAgeInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=MaximumEventAgeInSeconds" })
   maximumEventAgeInSeconds?: number;
 
-  @Metadata({ data: "json, name=MaximumRetryAttempts" })
+  @SpeakeasyMetadata({ data: "json, name=MaximumRetryAttempts" })
   maximumRetryAttempts?: number;
 }

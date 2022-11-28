@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TranslationSetsPostTranslationSetAttributePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ID" })
   id: number;
 }
 
 
 export class TranslationSetsPostTranslationSetAttributeRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   globalResourcesSharedModelsTranslationSetAttribute?: shared.GlobalResourcesSharedModelsTranslationSetAttribute;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   globalResourcesSharedModelsTranslationSetAttribute1?: shared.GlobalResourcesSharedModelsTranslationSetAttribute;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   globalResourcesSharedModelsTranslationSetAttribute2?: shared.GlobalResourcesSharedModelsTranslationSetAttribute;
 
-  @Metadata({ data: "request, media_type=text/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/xml" })
   textXml: Uint8Array;
 }
 
 
 export class TranslationSetsPostTranslationSetAttributeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TranslationSetsPostTranslationSetAttributePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: TranslationSetsPostTranslationSetAttributeRequests;
 }
 
 
 export class TranslationSetsPostTranslationSetAttributeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   translationSetsPostTranslationSetAttribute200ApplicationJsonInt32Integer?: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   translationSetsPostTranslationSetAttribute200TextJsonInt32Integer?: number;
 }

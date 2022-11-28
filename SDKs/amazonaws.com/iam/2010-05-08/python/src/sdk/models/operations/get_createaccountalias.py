@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreateAccountAliasActionEnum(str, Enum):
     CREATE_ACCOUNT_ALIAS = "CreateAccountAlias"
@@ -10,9 +14,9 @@ class GetCreateAccountAliasVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateAccountAliasQueryParams:
-    account_alias: str = field(default=None, metadata={'query_param': { 'field_name': 'AccountAlias', 'style': 'form', 'explode': True }})
-    action: GetCreateAccountAliasActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: GetCreateAccountAliasVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    account_alias: str = field(metadata={'query_param': { 'field_name': 'AccountAlias', 'style': 'form', 'explode': True }})
+    action: GetCreateAccountAliasActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetCreateAccountAliasVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetCreateAccountAliasHeaders:
 
 @dataclass
 class GetCreateAccountAliasRequest:
-    query_params: GetCreateAccountAliasQueryParams = field(default=None)
-    headers: GetCreateAccountAliasHeaders = field(default=None)
+    headers: GetCreateAccountAliasHeaders = field()
+    query_params: GetCreateAccountAliasQueryParams = field()
     
 
 @dataclass
 class GetCreateAccountAliasResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

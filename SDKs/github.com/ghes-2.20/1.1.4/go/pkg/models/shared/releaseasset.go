@@ -33,6 +33,8 @@ type ReleaseAssetSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// ReleaseAsset
+// Data related to a release.
 type ReleaseAsset struct {
 	BrowserDownloadURL string                 `json:"browser_download_url"`
 	ContentType        string                 `json:"content_type"`

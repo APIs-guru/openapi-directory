@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateFunctionEventInvokeConfigPathParams = /** @class */ (function (_super) {
     __extends(UpdateFunctionEventInvokeConfigPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateFunctionEventInvokeConfigPathParams = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=FunctionName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FunctionName" }),
         __metadata("design:type", String)
     ], UpdateFunctionEventInvokeConfigPathParams.prototype, "functionName", void 0);
     return UpdateFunctionEventInvokeConfigPathParams;
@@ -42,7 +42,7 @@ var UpdateFunctionEventInvokeConfigQueryParams = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Qualifier" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Qualifier" }),
         __metadata("design:type", String)
     ], UpdateFunctionEventInvokeConfigQueryParams.prototype, "qualifier", void 0);
     return UpdateFunctionEventInvokeConfigQueryParams;
@@ -54,31 +54,31 @@ var UpdateFunctionEventInvokeConfigHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateFunctionEventInvokeConfigHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateFunctionEventInvokeConfigHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateFunctionEventInvokeConfigHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateFunctionEventInvokeConfigHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateFunctionEventInvokeConfigHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateFunctionEventInvokeConfigHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateFunctionEventInvokeConfigHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateFunctionEventInvokeConfigHeaders;
@@ -94,11 +94,11 @@ var UpdateFunctionEventInvokeConfigRequestBodyDestinationConfig = /** @class */ 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=OnFailure" }),
+        SpeakeasyMetadata({ data: "json, name=OnFailure" }),
         __metadata("design:type", shared.OnFailure)
     ], UpdateFunctionEventInvokeConfigRequestBodyDestinationConfig.prototype, "onFailure", void 0);
     __decorate([
-        Metadata({ data: "json, name=OnSuccess" }),
+        SpeakeasyMetadata({ data: "json, name=OnSuccess" }),
         __metadata("design:type", shared.OnSuccess)
     ], UpdateFunctionEventInvokeConfigRequestBodyDestinationConfig.prototype, "onSuccess", void 0);
     return UpdateFunctionEventInvokeConfigRequestBodyDestinationConfig;
@@ -110,15 +110,15 @@ var UpdateFunctionEventInvokeConfigRequestBody = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DestinationConfig" }),
+        SpeakeasyMetadata({ data: "json, name=DestinationConfig" }),
         __metadata("design:type", UpdateFunctionEventInvokeConfigRequestBodyDestinationConfig)
     ], UpdateFunctionEventInvokeConfigRequestBody.prototype, "destinationConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaximumEventAgeInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=MaximumEventAgeInSeconds" }),
         __metadata("design:type", Number)
     ], UpdateFunctionEventInvokeConfigRequestBody.prototype, "maximumEventAgeInSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaximumRetryAttempts" }),
+        SpeakeasyMetadata({ data: "json, name=MaximumRetryAttempts" }),
         __metadata("design:type", Number)
     ], UpdateFunctionEventInvokeConfigRequestBody.prototype, "maximumRetryAttempts", void 0);
     return UpdateFunctionEventInvokeConfigRequestBody;
@@ -130,19 +130,19 @@ var UpdateFunctionEventInvokeConfigRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateFunctionEventInvokeConfigPathParams)
     ], UpdateFunctionEventInvokeConfigRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateFunctionEventInvokeConfigQueryParams)
     ], UpdateFunctionEventInvokeConfigRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateFunctionEventInvokeConfigHeaders)
     ], UpdateFunctionEventInvokeConfigRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateFunctionEventInvokeConfigRequestBody)
     ], UpdateFunctionEventInvokeConfigRequest.prototype, "request", void 0);
     return UpdateFunctionEventInvokeConfigRequest;
@@ -154,35 +154,35 @@ var UpdateFunctionEventInvokeConfigResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateFunctionEventInvokeConfigResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.FunctionEventInvokeConfig)
     ], UpdateFunctionEventInvokeConfigResponse.prototype, "functionEventInvokeConfig", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateFunctionEventInvokeConfigResponse.prototype, "invalidParameterValueException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateFunctionEventInvokeConfigResponse.prototype, "resourceConflictException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateFunctionEventInvokeConfigResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateFunctionEventInvokeConfigResponse.prototype, "serviceException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateFunctionEventInvokeConfigResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateFunctionEventInvokeConfigResponse.prototype, "tooManyRequestsException", void 0);
     return UpdateFunctionEventInvokeConfigResponse;

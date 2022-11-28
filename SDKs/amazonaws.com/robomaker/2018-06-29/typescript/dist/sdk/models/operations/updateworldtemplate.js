@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateWorldTemplateHeaders = /** @class */ (function (_super) {
     __extends(UpdateWorldTemplateHeaders, _super);
@@ -30,31 +30,31 @@ var UpdateWorldTemplateHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateWorldTemplateHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateWorldTemplateHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateWorldTemplateHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateWorldTemplateHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateWorldTemplateHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateWorldTemplateHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateWorldTemplateHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateWorldTemplateHeaders;
@@ -70,11 +70,11 @@ var UpdateWorldTemplateRequestBodyTemplateLocation = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=s3Bucket" }),
+        SpeakeasyMetadata({ data: "json, name=s3Bucket" }),
         __metadata("design:type", String)
     ], UpdateWorldTemplateRequestBodyTemplateLocation.prototype, "s3Bucket", void 0);
     __decorate([
-        Metadata({ data: "json, name=s3Key" }),
+        SpeakeasyMetadata({ data: "json, name=s3Key" }),
         __metadata("design:type", String)
     ], UpdateWorldTemplateRequestBodyTemplateLocation.prototype, "s3Key", void 0);
     return UpdateWorldTemplateRequestBodyTemplateLocation;
@@ -86,19 +86,19 @@ var UpdateWorldTemplateRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], UpdateWorldTemplateRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=template" }),
+        SpeakeasyMetadata({ data: "json, name=template" }),
         __metadata("design:type", String)
     ], UpdateWorldTemplateRequestBody.prototype, "template", void 0);
     __decorate([
-        Metadata({ data: "json, name=templateBody" }),
+        SpeakeasyMetadata({ data: "json, name=templateBody" }),
         __metadata("design:type", String)
     ], UpdateWorldTemplateRequestBody.prototype, "templateBody", void 0);
     __decorate([
-        Metadata({ data: "json, name=templateLocation" }),
+        SpeakeasyMetadata({ data: "json, name=templateLocation" }),
         __metadata("design:type", UpdateWorldTemplateRequestBodyTemplateLocation)
     ], UpdateWorldTemplateRequestBody.prototype, "templateLocation", void 0);
     return UpdateWorldTemplateRequestBody;
@@ -110,11 +110,11 @@ var UpdateWorldTemplateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateWorldTemplateHeaders)
     ], UpdateWorldTemplateRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateWorldTemplateRequestBody)
     ], UpdateWorldTemplateRequest.prototype, "request", void 0);
     return UpdateWorldTemplateRequest;
@@ -126,31 +126,31 @@ var UpdateWorldTemplateResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateWorldTemplateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateWorldTemplateResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateWorldTemplateResponse.prototype, "invalidParameterException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateWorldTemplateResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateWorldTemplateResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateWorldTemplateResponse.prototype, "throttlingException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdateWorldTemplateResponse)
     ], UpdateWorldTemplateResponse.prototype, "updateWorldTemplateResponse", void 0);
     return UpdateWorldTemplateResponse;

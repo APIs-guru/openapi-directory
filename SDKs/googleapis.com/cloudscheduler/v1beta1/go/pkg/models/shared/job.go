@@ -10,6 +10,8 @@ const (
 	JobStateEnumUpdateFailed     JobStateEnum = "UPDATE_FAILED"
 )
 
+// Job
+// Configuration for a job. The maximum allowed size for a job is 1MB.
 type Job struct {
 	AppEngineHTTPTarget *AppEngineHTTPTarget `json:"appEngineHttpTarget,omitempty"`
 	AttemptDeadline     *string              `json:"attemptDeadline,omitempty"`

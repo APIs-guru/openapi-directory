@@ -14,23 +14,9 @@ type GetNodeBalancerConfigNodesQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetNodeBalancerConfigNodesSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetNodeBalancerConfigNodesSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetNodeBalancerConfigNodesSecurity struct {
-	Option1 *GetNodeBalancerConfigNodesSecurityOption1 `security:"option"`
-	Option2 *GetNodeBalancerConfigNodesSecurityOption2 `security:"option"`
-}
-
-type GetNodeBalancerConfigNodesRequest struct {
-	PathParams  GetNodeBalancerConfigNodesPathParams
-	QueryParams GetNodeBalancerConfigNodesQueryParams
-	Security    GetNodeBalancerConfigNodesSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetNodeBalancerConfigNodes200ApplicationJSON struct {
@@ -42,6 +28,12 @@ type GetNodeBalancerConfigNodes200ApplicationJSON struct {
 
 type GetNodeBalancerConfigNodesDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetNodeBalancerConfigNodesRequest struct {
+	PathParams  GetNodeBalancerConfigNodesPathParams
+	QueryParams GetNodeBalancerConfigNodesQueryParams
+	Security    GetNodeBalancerConfigNodesSecurity
 }
 
 type GetNodeBalancerConfigNodesResponse struct {

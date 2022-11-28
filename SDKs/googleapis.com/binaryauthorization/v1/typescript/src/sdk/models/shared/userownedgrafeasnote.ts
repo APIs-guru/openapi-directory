@@ -1,6 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttestorPublicKey } from "./attestorpublickey";
+
+
+
+// UserOwnedGrafeasNoteInput
+/** 
+ * An user owned Grafeas note references a Grafeas Attestation.Authority Note created by the user.
+**/
+export class UserOwnedGrafeasNoteInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=noteReference" })
+  noteReference?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=publicKeys", elemType: AttestorPublicKey })
+  publicKeys?: AttestorPublicKey[];
+}
 
 
 // UserOwnedGrafeasNote
@@ -8,12 +21,12 @@ import { AttestorPublicKey } from "./attestorpublickey";
  * An user owned Grafeas note references a Grafeas Attestation.Authority Note created by the user.
 **/
 export class UserOwnedGrafeasNote extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delegationServiceAccountEmail" })
+  @SpeakeasyMetadata({ data: "json, name=delegationServiceAccountEmail" })
   delegationServiceAccountEmail?: string;
 
-  @Metadata({ data: "json, name=noteReference" })
+  @SpeakeasyMetadata({ data: "json, name=noteReference" })
   noteReference?: string;
 
-  @Metadata({ data: "json, name=publicKeys", elemType: shared.AttestorPublicKey })
+  @SpeakeasyMetadata({ data: "json, name=publicKeys", elemType: AttestorPublicKey })
   publicKeys?: AttestorPublicKey[];
 }

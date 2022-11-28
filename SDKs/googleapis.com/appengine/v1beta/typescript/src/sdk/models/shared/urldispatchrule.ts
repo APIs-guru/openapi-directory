@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UrlDispatchRule
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Rules to match an HTTP request and dispatch that request to a service.
 **/
 export class UrlDispatchRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service?: string;
 }

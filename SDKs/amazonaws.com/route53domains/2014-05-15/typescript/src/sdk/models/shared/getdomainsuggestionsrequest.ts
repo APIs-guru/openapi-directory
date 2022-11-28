@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetDomainSuggestionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=OnlyAvailable" })
+  @SpeakeasyMetadata({ data: "json, name=OnlyAvailable" })
   onlyAvailable: boolean;
 
-  @Metadata({ data: "json, name=SuggestionCount" })
+  @SpeakeasyMetadata({ data: "json, name=SuggestionCount" })
   suggestionCount: number;
 }

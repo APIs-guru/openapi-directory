@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum ExchangeAuthCodeRequestBodyGrantTypeEnum {
     AuthorizationCode = "authorization_code"
@@ -7,33 +8,33 @@ export enum ExchangeAuthCodeRequestBodyGrantTypeEnum {
 
 
 export class ExchangeAuthCodeRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=grant_type" })
+  @SpeakeasyMetadata({ data: "json, name=grant_type" })
   grantType: ExchangeAuthCodeRequestBodyGrantTypeEnum;
 
-  @Metadata({ data: "json, name=redirect_uri" })
+  @SpeakeasyMetadata({ data: "json, name=redirect_uri" })
   redirectUri: string;
 }
 
 
 export class ExchangeAuthCodeRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/vnd.vimeo.auth+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/vnd.vimeo.auth+json" })
   request: ExchangeAuthCodeRequestBody;
 }
 
 
 export class ExchangeAuthCodeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   auth?: shared.Auth;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   authError?: shared.AuthError;
 }

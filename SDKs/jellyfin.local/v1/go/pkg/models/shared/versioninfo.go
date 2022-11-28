@@ -1,5 +1,7 @@
 package shared
 
+// VersionInfo
+// Defines the MediaBrowser.Model.Updates.VersionInfo class.
 type VersionInfo struct {
 	VersionNumber  *Version `json:"VersionNumber,omitempty"`
 	Changelog      *string  `json:"changelog,omitempty"`

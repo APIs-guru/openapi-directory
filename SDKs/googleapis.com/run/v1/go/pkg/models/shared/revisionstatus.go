@@ -1,5 +1,7 @@
 package shared
 
+// RevisionStatus
+// RevisionStatus communicates the observed state of the Revision (from the controller).
 type RevisionStatus struct {
 	Conditions         []GoogleCloudRunV1Condition `json:"conditions,omitempty"`
 	ImageDigest        *string                     `json:"imageDigest,omitempty"`

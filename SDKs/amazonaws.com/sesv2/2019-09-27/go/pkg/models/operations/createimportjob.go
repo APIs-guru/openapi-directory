@@ -14,11 +14,15 @@ type CreateImportJobHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateImportJobRequestBodyImportDataSource
+// An object that contains details about the data source of the import job.
 type CreateImportJobRequestBodyImportDataSource struct {
 	DataFormat *shared.DataFormatEnum `json:"DataFormat,omitempty"`
 	S3URL      *string                `json:"S3Url,omitempty"`
 }
 
+// CreateImportJobRequestBodyImportDestination
+// An object that contains details about the resource destination the import job is going to target.
 type CreateImportJobRequestBodyImportDestination struct {
 	ContactListDestination     *shared.ContactListDestination     `json:"ContactListDestination,omitempty"`
 	SuppressionListDestination *shared.SuppressionListDestination `json:"SuppressionListDestination,omitempty"`

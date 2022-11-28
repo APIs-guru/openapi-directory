@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RenewDomainRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A <code>RenewDomain</code> request includes the number of years that you want to renew for and the current expiration year.
 **/
 export class RenewDomainRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CurrentExpiryYear" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentExpiryYear" })
   currentExpiryYear: number;
 
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=DurationInYears" })
+  @SpeakeasyMetadata({ data: "json, name=DurationInYears" })
   durationInYears?: number;
 }

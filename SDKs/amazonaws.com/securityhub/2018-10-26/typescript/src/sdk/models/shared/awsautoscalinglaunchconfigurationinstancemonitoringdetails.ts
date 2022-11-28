@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the type of monitoring for instances in the group.
 **/
 export class AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 }

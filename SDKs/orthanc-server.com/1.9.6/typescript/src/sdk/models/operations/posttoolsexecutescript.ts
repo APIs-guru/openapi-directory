@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostToolsExecuteScriptRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=text/plain" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/plain" })
   request?: Uint8Array;
 }
 
 
 export class PostToolsExecuteScriptResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

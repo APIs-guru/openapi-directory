@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PortfolioShareTypeEnum } from "./portfoliosharetypeenum";
 export declare class RejectPortfolioShareInput extends SpeakeasyBase {
     acceptLanguage?: string;

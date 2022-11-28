@@ -1,19 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateBulkDataExporterConfigsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   otoroshiAuth: shared.SchemeOtoroshiAuth;
-}
-
-
-export class CreateBulkDataExporterConfigsRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/ndjson" })
-  request?: shared.DataExporterConfig;
-
-  @Metadata()
-  security: CreateBulkDataExporterConfigsSecurity;
 }
 
 export enum CreateBulkDataExporterConfigs200ApplicationJsonStatusEnum {
@@ -26,24 +18,33 @@ export enum CreateBulkDataExporterConfigs200ApplicationJsonStatusEnum {
  * The bulk response
 **/
 export class CreateBulkDataExporterConfigs200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: boolean;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: CreateBulkDataExporterConfigs200ApplicationJsonStatusEnum;
 }
 
 
+export class CreateBulkDataExporterConfigsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/ndjson" })
+  request?: shared.DataExporterConfig;
+
+  @SpeakeasyMetadata()
+  security: CreateBulkDataExporterConfigsSecurity;
+}
+
+
 export class CreateBulkDataExporterConfigsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: operations.CreateBulkDataExporterConfigs200ApplicationJson })
+  @SpeakeasyMetadata({ elemType: CreateBulkDataExporterConfigs200ApplicationJson })
   createBulkDataExporterConfigs200ApplicationJsonObjects?: CreateBulkDataExporterConfigs200ApplicationJson[];
 }

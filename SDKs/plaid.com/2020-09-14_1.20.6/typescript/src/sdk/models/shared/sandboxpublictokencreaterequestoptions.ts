@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SandboxPublicTokenCreateRequestOptionsTransactions } from "./sandboxpublictokencreaterequestoptionstransactions";
+
 
 
 // SandboxPublicTokenCreateRequestOptions
@@ -7,15 +8,15 @@ import { SandboxPublicTokenCreateRequestOptionsTransactions } from "./sandboxpub
  * An optional set of options to be used when configuring the Item. If specified, must not be `null`.
 **/
 export class SandboxPublicTokenCreateRequestOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=override_password" })
+  @SpeakeasyMetadata({ data: "json, name=override_password" })
   overridePassword?: string;
 
-  @Metadata({ data: "json, name=override_username" })
+  @SpeakeasyMetadata({ data: "json, name=override_username" })
   overrideUsername?: string;
 
-  @Metadata({ data: "json, name=transactions" })
+  @SpeakeasyMetadata({ data: "json, name=transactions" })
   transactions?: SandboxPublicTokenCreateRequestOptionsTransactions;
 
-  @Metadata({ data: "json, name=webhook" })
+  @SpeakeasyMetadata({ data: "json, name=webhook" })
   webhook?: string;
 }

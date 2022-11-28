@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class GetRealmGroupsIDRoleMappingsClientsClientPathParams:
-    client: str = field(default=None, metadata={'path_param': { 'field_name': 'client', 'style': 'simple', 'explode': False }})
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    client: str = field(metadata={'path_param': { 'field_name': 'client', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetRealmGroupsIDRoleMappingsClientsClientRequest:
-    path_params: GetRealmGroupsIDRoleMappingsClientsClientPathParams = field(default=None)
+    path_params: GetRealmGroupsIDRoleMappingsClientsClientPathParams = field()
     
 
 @dataclass
 class GetRealmGroupsIDRoleMappingsClientsClientResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     role_representations: Optional[List[shared.RoleRepresentation]] = field(default=None)
-    status_code: int = field(default=None)
     

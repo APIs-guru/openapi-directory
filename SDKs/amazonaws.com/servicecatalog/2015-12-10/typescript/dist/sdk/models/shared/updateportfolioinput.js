@@ -22,39 +22,39 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Tag } from "./tag";
 var UpdatePortfolioInput = /** @class */ (function (_super) {
     __extends(UpdatePortfolioInput, _super);
     function UpdatePortfolioInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], UpdatePortfolioInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=AddTags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=AddTags", elemType: Tag }),
         __metadata("design:type", Array)
     ], UpdatePortfolioInput.prototype, "addTags", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], UpdatePortfolioInput.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=DisplayName" }),
+        SpeakeasyMetadata({ data: "json, name=DisplayName" }),
         __metadata("design:type", String)
     ], UpdatePortfolioInput.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], UpdatePortfolioInput.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProviderName" }),
+        SpeakeasyMetadata({ data: "json, name=ProviderName" }),
         __metadata("design:type", String)
     ], UpdatePortfolioInput.prototype, "providerName", void 0);
     __decorate([
-        Metadata({ data: "json, name=RemoveTags" }),
+        SpeakeasyMetadata({ data: "json, name=RemoveTags" }),
         __metadata("design:type", Array)
     ], UpdatePortfolioInput.prototype, "removeTags", void 0);
     return UpdatePortfolioInput;

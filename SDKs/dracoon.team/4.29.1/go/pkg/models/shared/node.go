@@ -12,6 +12,8 @@ const (
 	NodeTypeEnumFile   NodeTypeEnum = "file"
 )
 
+// Node
+// Node information (Node can be a room, folder or file)
 type Node struct {
 	AuthParentID              *int64           `json:"authParentId,omitempty"`
 	BranchVersion             *int64           `json:"branchVersion,omitempty"`

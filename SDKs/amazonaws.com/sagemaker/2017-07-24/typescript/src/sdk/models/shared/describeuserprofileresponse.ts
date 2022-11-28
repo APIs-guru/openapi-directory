@@ -1,39 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserProfileStatusEnum } from "./userprofilestatusenum";
 import { UserSettings } from "./usersettings";
 
 
+
 export class DescribeUserProfileResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=DomainId" })
+  @SpeakeasyMetadata({ data: "json, name=DomainId" })
   domainId?: string;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=HomeEfsFileSystemUid" })
+  @SpeakeasyMetadata({ data: "json, name=HomeEfsFileSystemUid" })
   homeEfsFileSystemUid?: string;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=SingleSignOnUserIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=SingleSignOnUserIdentifier" })
   singleSignOnUserIdentifier?: string;
 
-  @Metadata({ data: "json, name=SingleSignOnUserValue" })
+  @SpeakeasyMetadata({ data: "json, name=SingleSignOnUserValue" })
   singleSignOnUserValue?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: UserProfileStatusEnum;
 
-  @Metadata({ data: "json, name=UserProfileArn" })
+  @SpeakeasyMetadata({ data: "json, name=UserProfileArn" })
   userProfileArn?: string;
 
-  @Metadata({ data: "json, name=UserProfileName" })
+  @SpeakeasyMetadata({ data: "json, name=UserProfileName" })
   userProfileName?: string;
 
-  @Metadata({ data: "json, name=UserSettings" })
+  @SpeakeasyMetadata({ data: "json, name=UserSettings" })
   userSettings?: UserSettings;
 }

@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingPathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +29,21 @@ class ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingQueryParams:
 
 @dataclass
 class ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingRequest:
-    path_params: ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingPathParams = field(default=None)
-    query_params: ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingQueryParams = field(default=None)
+    path_params: ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingPathParams = field()
+    query_params: ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingQueryParams = field()
+    security: ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingSecurity = field()
     request: Optional[shared.GoogleChromePolicyVersionsV1UpdateGroupPriorityOrderingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingSecurity = field(default=None)
     
 
 @dataclass
 class ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_protobuf_empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

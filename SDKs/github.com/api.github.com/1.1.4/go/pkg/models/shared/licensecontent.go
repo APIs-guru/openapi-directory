@@ -15,6 +15,8 @@ type LicenseContentLicenseSimple struct {
 	URL     string  `json:"url"`
 }
 
+// LicenseContent
+// License Content
 type LicenseContent struct {
 	Links       LicenseContentLinks         `json:"_links"`
 	Content     string                      `json:"content"`

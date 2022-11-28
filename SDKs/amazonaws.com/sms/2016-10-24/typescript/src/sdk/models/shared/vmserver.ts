@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VmManagerTypeEnum } from "./vmmanagertypeenum";
 import { VmServerAddress } from "./vmserveraddress";
+
 
 
 // VmServer
@@ -8,18 +9,18 @@ import { VmServerAddress } from "./vmserveraddress";
  * Represents a VM server.
 **/
 export class VmServer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=vmManagerName" })
+  @SpeakeasyMetadata({ data: "json, name=vmManagerName" })
   vmManagerName?: string;
 
-  @Metadata({ data: "json, name=vmManagerType" })
+  @SpeakeasyMetadata({ data: "json, name=vmManagerType" })
   vmManagerType?: VmManagerTypeEnum;
 
-  @Metadata({ data: "json, name=vmName" })
+  @SpeakeasyMetadata({ data: "json, name=vmName" })
   vmName?: string;
 
-  @Metadata({ data: "json, name=vmPath" })
+  @SpeakeasyMetadata({ data: "json, name=vmPath" })
   vmPath?: string;
 
-  @Metadata({ data: "json, name=vmServerAddress" })
+  @SpeakeasyMetadata({ data: "json, name=vmServerAddress" })
   vmServerAddress?: VmServerAddress;
 }

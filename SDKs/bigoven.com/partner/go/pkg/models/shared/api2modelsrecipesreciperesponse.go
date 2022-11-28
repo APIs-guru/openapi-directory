@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Api2ModelsRecipesRecipeResponse
+// DTO used to return a recipe with videos
 type Api2ModelsRecipesRecipeResponse struct {
 	ActiveMinutes        *int32                                 `json:"ActiveMinutes,omitempty"`
 	AdTags               *string                                `json:"AdTags,omitempty"`

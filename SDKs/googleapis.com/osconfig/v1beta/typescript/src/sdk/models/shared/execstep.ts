@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExecStepConfig } from "./execstepconfig";
-import { ExecStepConfig } from "./execstepconfig";
+
 
 
 // ExecStep
@@ -8,9 +8,9 @@ import { ExecStepConfig } from "./execstepconfig";
  * A step that runs an executable for a PatchJob.
 **/
 export class ExecStep extends SpeakeasyBase {
-  @Metadata({ data: "json, name=linuxExecStepConfig" })
+  @SpeakeasyMetadata({ data: "json, name=linuxExecStepConfig" })
   linuxExecStepConfig?: ExecStepConfig;
 
-  @Metadata({ data: "json, name=windowsExecStepConfig" })
+  @SpeakeasyMetadata({ data: "json, name=windowsExecStepConfig" })
   windowsExecStepConfig?: ExecStepConfig;
 }

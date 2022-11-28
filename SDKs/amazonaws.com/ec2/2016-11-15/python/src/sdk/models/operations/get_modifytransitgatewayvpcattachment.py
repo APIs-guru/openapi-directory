@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetModifyTransitGatewayVpcAttachmentActionEnum(str, Enum):
@@ -8,6 +12,10 @@ class GetModifyTransitGatewayVpcAttachmentActionEnum(str, Enum):
 
 @dataclass
 class GetModifyTransitGatewayVpcAttachmentOptions:
+    r"""GetModifyTransitGatewayVpcAttachmentOptions
+    Describes the options for a VPC attachment.
+    """
+    
     appliance_mode_support: Optional[shared.ApplianceModeSupportValueEnum] = field(default=None, metadata={'query_param': { 'field_name': 'ApplianceModeSupport' }})
     dns_support: Optional[shared.DNSSupportValueEnum] = field(default=None, metadata={'query_param': { 'field_name': 'DnsSupport' }})
     ipv6_support: Optional[shared.Ipv6SupportValueEnum] = field(default=None, metadata={'query_param': { 'field_name': 'Ipv6Support' }})
@@ -18,13 +26,13 @@ class GetModifyTransitGatewayVpcAttachmentVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyTransitGatewayVpcAttachmentQueryParams:
-    action: GetModifyTransitGatewayVpcAttachmentActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyTransitGatewayVpcAttachmentActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    transit_gateway_attachment_id: str = field(metadata={'query_param': { 'field_name': 'TransitGatewayAttachmentId', 'style': 'form', 'explode': True }})
+    version: GetModifyTransitGatewayVpcAttachmentVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     add_subnet_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'AddSubnetIds', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     options: Optional[GetModifyTransitGatewayVpcAttachmentOptions] = field(default=None, metadata={'query_param': { 'field_name': 'Options', 'style': 'form', 'explode': True }})
     remove_subnet_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'RemoveSubnetIds', 'style': 'form', 'explode': True }})
-    transit_gateway_attachment_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayAttachmentId', 'style': 'form', 'explode': True }})
-    version: GetModifyTransitGatewayVpcAttachmentVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -40,13 +48,13 @@ class GetModifyTransitGatewayVpcAttachmentHeaders:
 
 @dataclass
 class GetModifyTransitGatewayVpcAttachmentRequest:
-    query_params: GetModifyTransitGatewayVpcAttachmentQueryParams = field(default=None)
-    headers: GetModifyTransitGatewayVpcAttachmentHeaders = field(default=None)
+    headers: GetModifyTransitGatewayVpcAttachmentHeaders = field()
+    query_params: GetModifyTransitGatewayVpcAttachmentQueryParams = field()
     
 
 @dataclass
 class GetModifyTransitGatewayVpcAttachmentResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

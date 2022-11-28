@@ -8,22 +8,12 @@ type GetFilesV3FilesImportFromURLAsyncTasksTaskIDStatusCheckImportPathParams str
 	TaskID string `pathParam:"style=simple,explode=false,name=taskId"`
 }
 
-type GetFilesV3FilesImportFromURLAsyncTasksTaskIDStatusCheckImportSecurityOption1 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
-}
-
-type GetFilesV3FilesImportFromURLAsyncTasksTaskIDStatusCheckImportSecurityOption2 struct {
-	Hapikey shared.SchemeHapikey `security:"scheme,type=apiKey,subtype=query"`
-}
-
-type GetFilesV3FilesImportFromURLAsyncTasksTaskIDStatusCheckImportSecurityOption3 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
-}
-
 type GetFilesV3FilesImportFromURLAsyncTasksTaskIDStatusCheckImportSecurity struct {
-	Option1 *GetFilesV3FilesImportFromURLAsyncTasksTaskIDStatusCheckImportSecurityOption1 `security:"option"`
-	Option2 *GetFilesV3FilesImportFromURLAsyncTasksTaskIDStatusCheckImportSecurityOption2 `security:"option"`
-	Option3 *GetFilesV3FilesImportFromURLAsyncTasksTaskIDStatusCheckImportSecurityOption3 `security:"option"`
+	PrivateAppsLegacy  *shared.SchemePrivateAppsLegacy `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2Legacy       *shared.SchemeOauth2Legacy      `security:"scheme,type=oauth2"`
+	Hapikey            *shared.SchemeHapikey           `security:"scheme,type=apiKey,subtype=query"`
+	PrivateAppsLegacy1 *shared.SchemePrivateAppsLegacy `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2Legacy1      *shared.SchemeOauth2Legacy      `security:"scheme,type=oauth2"`
 }
 
 type GetFilesV3FilesImportFromURLAsyncTasksTaskIDStatusCheckImportRequest struct {

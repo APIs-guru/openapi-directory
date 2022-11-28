@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostInstancesIdAnonymizePathParams = /** @class */ (function (_super) {
     __extends(PostInstancesIdAnonymizePathParams, _super);
     function PostInstancesIdAnonymizePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], PostInstancesIdAnonymizePathParams.prototype, "id", void 0);
     return PostInstancesIdAnonymizePathParams;
@@ -41,11 +41,11 @@ var PostInstancesIdAnonymizeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostInstancesIdAnonymizePathParams)
     ], PostInstancesIdAnonymizeRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], PostInstancesIdAnonymizeRequest.prototype, "request", void 0);
     return PostInstancesIdAnonymizeRequest;
@@ -57,15 +57,15 @@ var PostInstancesIdAnonymizeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PostInstancesIdAnonymizeResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostInstancesIdAnonymizeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostInstancesIdAnonymizeResponse.prototype, "statusCode", void 0);
     return PostInstancesIdAnonymizeResponse;

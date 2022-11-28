@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateFleetCapacityInput
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input for a request operation.
 **/
 export class UpdateFleetCapacityInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DesiredInstances" })
+  @SpeakeasyMetadata({ data: "json, name=DesiredInstances" })
   desiredInstances?: number;
 
-  @Metadata({ data: "json, name=FleetId" })
+  @SpeakeasyMetadata({ data: "json, name=FleetId" })
   fleetId: string;
 
-  @Metadata({ data: "json, name=Location" })
+  @SpeakeasyMetadata({ data: "json, name=Location" })
   location?: string;
 
-  @Metadata({ data: "json, name=MaxSize" })
+  @SpeakeasyMetadata({ data: "json, name=MaxSize" })
   maxSize?: number;
 
-  @Metadata({ data: "json, name=MinSize" })
+  @SpeakeasyMetadata({ data: "json, name=MinSize" })
   minSize?: number;
 }

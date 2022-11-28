@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import forecastoptimalparametersresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TimeSeriesOptimalParametersResponse:
-    method: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'method' }})
-    optimal_parameters: Optional[forecastoptimalparametersresponse.ForecastOptimalParametersResponse] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'optimalParameters' }})
-    time_series_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeSeriesId' }})
+    method: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('method') }})
+    optimal_parameters: Optional[ForecastOptimalParametersResponse] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('optimalParameters') }})
+    time_series_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeSeriesId') }})
     

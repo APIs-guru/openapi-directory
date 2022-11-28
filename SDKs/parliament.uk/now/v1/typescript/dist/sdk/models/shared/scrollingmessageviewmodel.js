@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ScrollingMessageViewModelAlertTypeEnum;
 (function (ScrollingMessageViewModelAlertTypeEnum) {
     ScrollingMessageViewModelAlertTypeEnum["Standard"] = "Standard";
@@ -43,27 +43,27 @@ var ScrollingMessageViewModel = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alertType" }),
+        SpeakeasyMetadata({ data: "json, name=alertType" }),
         __metadata("design:type", String)
     ], ScrollingMessageViewModel.prototype, "alertType", void 0);
     __decorate([
-        Metadata({ data: "json, name=content" }),
+        SpeakeasyMetadata({ data: "json, name=content" }),
         __metadata("design:type", String)
     ], ScrollingMessageViewModel.prototype, "content", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayFrom" }),
+        SpeakeasyMetadata({ data: "json, name=displayFrom" }),
         __metadata("design:type", Date)
     ], ScrollingMessageViewModel.prototype, "displayFrom", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayTo" }),
+        SpeakeasyMetadata({ data: "json, name=displayTo" }),
         __metadata("design:type", Date)
     ], ScrollingMessageViewModel.prototype, "displayTo", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], ScrollingMessageViewModel.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=verticalAlignment" }),
+        SpeakeasyMetadata({ data: "json, name=verticalAlignment" }),
         __metadata("design:type", String)
     ], ScrollingMessageViewModel.prototype, "verticalAlignment", void 0);
     return ScrollingMessageViewModel;

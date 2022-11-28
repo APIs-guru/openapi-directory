@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlaybackErrorCodeEnum } from "./playbackerrorcodeenum";
 import { MediaSourceInfo } from "./mediasourceinfo";
+
 
 
 // PlaybackInfoResponse
@@ -9,12 +9,12 @@ import { MediaSourceInfo } from "./mediasourceinfo";
  * Class PlaybackInfoResponse.
 **/
 export class PlaybackInfoResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ErrorCode" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorCode" })
   errorCode?: PlaybackErrorCodeEnum;
 
-  @Metadata({ data: "json, name=MediaSources", elemType: shared.MediaSourceInfo })
+  @SpeakeasyMetadata({ data: "json, name=MediaSources", elemType: MediaSourceInfo })
   mediaSources?: MediaSourceInfo[];
 
-  @Metadata({ data: "json, name=PlaySessionId" })
+  @SpeakeasyMetadata({ data: "json, name=PlaySessionId" })
   playSessionId?: string;
 }

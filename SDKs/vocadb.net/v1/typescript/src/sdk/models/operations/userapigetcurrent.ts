@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum UserApiGetCurrentFieldsEnum {
-    None = "None"
-,    KnownLanguages = "KnownLanguages"
-,    MainPicture = "MainPicture"
-,    OldUsernames = "OldUsernames"
+    None = "None",
+    KnownLanguages = "KnownLanguages",
+    MainPicture = "MainPicture",
+    OldUsernames = "OldUsernames"
 }
 
 
 export class UserApiGetCurrentQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" })
   fields?: UserApiGetCurrentFieldsEnum;
 }
 
 
 export class UserApiGetCurrentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UserApiGetCurrentQueryParams;
 }
 
 
 export class UserApiGetCurrentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   userForApiContract?: shared.UserForApiContract;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { App } from "./app";
+
 
 
 // AppList
@@ -8,18 +8,18 @@ import { App } from "./app";
  * A list of third-party applications which the user has installed or given access to Google Drive.
 **/
 export class AppList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultAppIds" })
+  @SpeakeasyMetadata({ data: "json, name=defaultAppIds" })
   defaultAppIds?: string[];
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=items", elemType: shared.App })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: App })
   items?: App[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 }

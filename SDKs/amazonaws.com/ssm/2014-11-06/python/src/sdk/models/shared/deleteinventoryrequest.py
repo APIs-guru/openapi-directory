@@ -1,14 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import inventoryschemadeleteoption_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteInventoryRequest:
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientToken' }})
-    dry_run: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DryRun' }})
-    schema_delete_option: Optional[inventoryschemadeleteoption_enum.InventorySchemaDeleteOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SchemaDeleteOption' }})
-    type_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TypeName' }})
+    type_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TypeName') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientToken') }})
+    dry_run: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DryRun') }})
+    schema_delete_option: Optional[InventorySchemaDeleteOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SchemaDeleteOption') }})
     

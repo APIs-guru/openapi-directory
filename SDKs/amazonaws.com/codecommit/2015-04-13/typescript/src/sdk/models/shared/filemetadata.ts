@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileModeTypeEnumEnum } from "./filemodetypeenumenum";
+
 
 
 // FileMetadata
@@ -7,12 +8,12 @@ import { FileModeTypeEnumEnum } from "./filemodetypeenumenum";
  * A file to be added, updated, or deleted as part of a commit.
 **/
 export class FileMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=absolutePath" })
+  @SpeakeasyMetadata({ data: "json, name=absolutePath" })
   absolutePath?: string;
 
-  @Metadata({ data: "json, name=blobId" })
+  @SpeakeasyMetadata({ data: "json, name=blobId" })
   blobId?: string;
 
-  @Metadata({ data: "json, name=fileMode" })
+  @SpeakeasyMetadata({ data: "json, name=fileMode" })
   fileMode?: FileModeTypeEnumEnum;
 }

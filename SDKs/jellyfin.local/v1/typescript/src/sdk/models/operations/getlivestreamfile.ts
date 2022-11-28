@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetLiveStreamFilePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=container" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=container" })
   container: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=streamId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=streamId" })
   streamId: string;
 }
 
 
 export class GetLiveStreamFileRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetLiveStreamFilePathParams;
 }
 
 
 export class GetLiveStreamFileResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLiveStreamFile200VideoWildcardBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

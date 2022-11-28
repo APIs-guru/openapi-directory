@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceTypeItem } from "./instancetypeitem";
 
 
+
 export class GetOutpostInstanceTypesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InstanceTypes", elemType: shared.InstanceTypeItem })
+  @SpeakeasyMetadata({ data: "json, name=InstanceTypes", elemType: InstanceTypeItem })
   instanceTypes?: InstanceTypeItem[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=OutpostArn" })
+  @SpeakeasyMetadata({ data: "json, name=OutpostArn" })
   outpostArn?: string;
 
-  @Metadata({ data: "json, name=OutpostId" })
+  @SpeakeasyMetadata({ data: "json, name=OutpostId" })
   outpostId?: string;
 }

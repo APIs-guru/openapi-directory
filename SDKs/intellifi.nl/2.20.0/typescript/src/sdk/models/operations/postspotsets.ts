@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostSpotsetsRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.SpotSetCreate;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.SpotSetCreateInput;
 }
 
 
 export class PostSpotsetsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   responseDefaultResource?: shared.ResponseDefaultResource;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

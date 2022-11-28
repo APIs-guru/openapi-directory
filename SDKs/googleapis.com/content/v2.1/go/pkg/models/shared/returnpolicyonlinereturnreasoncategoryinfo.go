@@ -17,6 +17,8 @@ const (
 	ReturnPolicyOnlineReturnReasonCategoryInfoReturnReasonCategoryEnumItemDefect                      ReturnPolicyOnlineReturnReasonCategoryInfoReturnReasonCategoryEnum = "ITEM_DEFECT"
 )
 
+// ReturnPolicyOnlineReturnReasonCategoryInfo
+// The return reason category info wrapper.
 type ReturnPolicyOnlineReturnReasonCategoryInfo struct {
 	ReturnLabelSource    *ReturnPolicyOnlineReturnReasonCategoryInfoReturnLabelSourceEnum    `json:"returnLabelSource,omitempty"`
 	ReturnReasonCategory *ReturnPolicyOnlineReturnReasonCategoryInfoReturnReasonCategoryEnum `json:"returnReasonCategory,omitempty"`

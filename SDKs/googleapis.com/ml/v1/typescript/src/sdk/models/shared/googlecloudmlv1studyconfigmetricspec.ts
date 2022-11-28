@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudMlV1StudyConfigMetricSpecGoalEnum {
-    GoalTypeUnspecified = "GOAL_TYPE_UNSPECIFIED"
-,    Maximize = "MAXIMIZE"
-,    Minimize = "MINIMIZE"
+    GoalTypeUnspecified = "GOAL_TYPE_UNSPECIFIED",
+    Maximize = "MAXIMIZE",
+    Minimize = "MINIMIZE"
 }
 
 
@@ -12,9 +13,9 @@ export enum GoogleCloudMlV1StudyConfigMetricSpecGoalEnum {
  * Represents a metric to optimize.
 **/
 export class GoogleCloudMlV1StudyConfigMetricSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=goal" })
+  @SpeakeasyMetadata({ data: "json, name=goal" })
   goal?: GoogleCloudMlV1StudyConfigMetricSpecGoalEnum;
 
-  @Metadata({ data: "json, name=metric" })
+  @SpeakeasyMetadata({ data: "json, name=metric" })
   metric?: string;
 }

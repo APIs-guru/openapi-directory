@@ -1,5 +1,7 @@
 package shared
 
+// NetworkFirewallInternetTrafficNotInspectedViolation
+// Violation detail for the subnet for which internet traffic that hasn't been inspected.
 type NetworkFirewallInternetTrafficNotInspectedViolation struct {
 	ActualFirewallSubnetRoutes       []Route         `json:"ActualFirewallSubnetRoutes,omitempty"`
 	ActualInternetGatewayRoutes      []Route         `json:"ActualInternetGatewayRoutes,omitempty"`

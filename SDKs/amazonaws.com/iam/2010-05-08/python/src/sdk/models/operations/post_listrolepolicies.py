@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostListRolePoliciesActionEnum(str, Enum):
     LIST_ROLE_POLICIES = "ListRolePolicies"
@@ -10,10 +14,10 @@ class PostListRolePoliciesVersionEnum(str, Enum):
 
 @dataclass
 class PostListRolePoliciesQueryParams:
-    action: PostListRolePoliciesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostListRolePoliciesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostListRolePoliciesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
-    version: PostListRolePoliciesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostListRolePoliciesHeaders:
 
 @dataclass
 class PostListRolePoliciesRequest:
-    query_params: PostListRolePoliciesQueryParams = field(default=None)
-    headers: PostListRolePoliciesHeaders = field(default=None)
+    headers: PostListRolePoliciesHeaders = field()
+    query_params: PostListRolePoliciesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostListRolePoliciesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

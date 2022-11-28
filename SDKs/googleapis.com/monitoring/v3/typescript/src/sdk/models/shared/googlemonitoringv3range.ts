@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleMonitoringV3Range
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Range of numerical values within min and max.
 **/
 export class GoogleMonitoringV3Range extends SpeakeasyBase {
-  @Metadata({ data: "json, name=max" })
+  @SpeakeasyMetadata({ data: "json, name=max" })
   max?: number;
 
-  @Metadata({ data: "json, name=min" })
+  @SpeakeasyMetadata({ data: "json, name=min" })
   min?: number;
 }

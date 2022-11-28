@@ -1,5 +1,7 @@
 package shared
 
+// BatchTranslateDocumentRequest
+// The BatchTranslateDocument request.
 type BatchTranslateDocumentRequest struct {
 	FormatConversions   map[string]string                      `json:"formatConversions,omitempty"`
 	Glossaries          map[string]TranslateTextGlossaryConfig `json:"glossaries,omitempty"`

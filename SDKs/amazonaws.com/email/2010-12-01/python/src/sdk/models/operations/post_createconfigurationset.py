@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateConfigurationSetActionEnum(str, Enum):
     CREATE_CONFIGURATION_SET = "CreateConfigurationSet"
@@ -10,8 +14,8 @@ class PostCreateConfigurationSetVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateConfigurationSetQueryParams:
-    action: PostCreateConfigurationSetActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateConfigurationSetVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateConfigurationSetActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateConfigurationSetVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateConfigurationSetHeaders:
 
 @dataclass
 class PostCreateConfigurationSetRequest:
-    query_params: PostCreateConfigurationSetQueryParams = field(default=None)
-    headers: PostCreateConfigurationSetHeaders = field(default=None)
+    headers: PostCreateConfigurationSetHeaders = field()
+    query_params: PostCreateConfigurationSetQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateConfigurationSetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -40,7 +40,7 @@ type ServicenetworkingServicesProjectsGlobalNetworksUpdateConsumerConfigSecurity
 type ServicenetworkingServicesProjectsGlobalNetworksUpdateConsumerConfigRequest struct {
 	PathParams  ServicenetworkingServicesProjectsGlobalNetworksUpdateConsumerConfigPathParams
 	QueryParams ServicenetworkingServicesProjectsGlobalNetworksUpdateConsumerConfigQueryParams
-	Request     *shared.UpdateConsumerConfigRequest `request:"mediaType=application/json"`
+	Request     *shared.UpdateConsumerConfigRequestInput `request:"mediaType=application/json"`
 	Security    ServicenetworkingServicesProjectsGlobalNetworksUpdateConsumerConfigSecurity
 }
 

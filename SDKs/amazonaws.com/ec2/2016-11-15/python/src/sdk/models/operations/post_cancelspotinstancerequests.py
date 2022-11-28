@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCancelSpotInstanceRequestsActionEnum(str, Enum):
     CANCEL_SPOT_INSTANCE_REQUESTS = "CancelSpotInstanceRequests"
@@ -10,8 +14,8 @@ class PostCancelSpotInstanceRequestsVersionEnum(str, Enum):
 
 @dataclass
 class PostCancelSpotInstanceRequestsQueryParams:
-    action: PostCancelSpotInstanceRequestsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCancelSpotInstanceRequestsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCancelSpotInstanceRequestsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCancelSpotInstanceRequestsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCancelSpotInstanceRequestsHeaders:
 
 @dataclass
 class PostCancelSpotInstanceRequestsRequest:
-    query_params: PostCancelSpotInstanceRequestsQueryParams = field(default=None)
-    headers: PostCancelSpotInstanceRequestsHeaders = field(default=None)
+    headers: PostCancelSpotInstanceRequestsHeaders = field()
+    query_params: PostCancelSpotInstanceRequestsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCancelSpotInstanceRequestsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

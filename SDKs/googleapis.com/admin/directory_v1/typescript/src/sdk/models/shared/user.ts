@@ -1,5 +1,100 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserName } from "./username";
+
+
+
+// UserInput
+/** 
+ * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+**/
+export class UserInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=addresses" })
+  addresses?: any;
+
+  @SpeakeasyMetadata({ data: "json, name=archived" })
+  archived?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=changePasswordAtNextLogin" })
+  changePasswordAtNextLogin?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=customSchemas" })
+  customSchemas?: Map<string, Map<string, any>>;
+
+  @SpeakeasyMetadata({ data: "json, name=emails" })
+  emails?: any;
+
+  @SpeakeasyMetadata({ data: "json, name=externalIds" })
+  externalIds?: any;
+
+  @SpeakeasyMetadata({ data: "json, name=gender" })
+  gender?: any;
+
+  @SpeakeasyMetadata({ data: "json, name=hashFunction" })
+  hashFunction?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ims" })
+  ims?: any;
+
+  @SpeakeasyMetadata({ data: "json, name=includeInGlobalAddressList" })
+  includeInGlobalAddressList?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=ipWhitelisted" })
+  ipWhitelisted?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=keywords" })
+  keywords?: any;
+
+  @SpeakeasyMetadata({ data: "json, name=languages" })
+  languages?: any;
+
+  @SpeakeasyMetadata({ data: "json, name=locations" })
+  locations?: any;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: UserName;
+
+  @SpeakeasyMetadata({ data: "json, name=notes" })
+  notes?: any;
+
+  @SpeakeasyMetadata({ data: "json, name=orgUnitPath" })
+  orgUnitPath?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=organizations" })
+  organizations?: any;
+
+  @SpeakeasyMetadata({ data: "json, name=password" })
+  password?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=phones" })
+  phones?: any;
+
+  @SpeakeasyMetadata({ data: "json, name=posixAccounts" })
+  posixAccounts?: any;
+
+  @SpeakeasyMetadata({ data: "json, name=primaryEmail" })
+  primaryEmail?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=recoveryEmail" })
+  recoveryEmail?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=recoveryPhone" })
+  recoveryPhone?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=relations" })
+  relations?: any;
+
+  @SpeakeasyMetadata({ data: "json, name=sshPublicKeys" })
+  sshPublicKeys?: any;
+
+  @SpeakeasyMetadata({ data: "json, name=suspended" })
+  suspended?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=websites" })
+  websites?: any;
+}
 
 
 // User
@@ -7,141 +102,141 @@ import { UserName } from "./username";
  * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
 **/
 export class User extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addresses" })
+  @SpeakeasyMetadata({ data: "json, name=addresses" })
   addresses?: any;
 
-  @Metadata({ data: "json, name=agreedToTerms" })
+  @SpeakeasyMetadata({ data: "json, name=agreedToTerms" })
   agreedToTerms?: boolean;
 
-  @Metadata({ data: "json, name=aliases" })
+  @SpeakeasyMetadata({ data: "json, name=aliases" })
   aliases?: string[];
 
-  @Metadata({ data: "json, name=archived" })
+  @SpeakeasyMetadata({ data: "json, name=archived" })
   archived?: boolean;
 
-  @Metadata({ data: "json, name=changePasswordAtNextLogin" })
+  @SpeakeasyMetadata({ data: "json, name=changePasswordAtNextLogin" })
   changePasswordAtNextLogin?: boolean;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=customSchemas" })
+  @SpeakeasyMetadata({ data: "json, name=customSchemas" })
   customSchemas?: Map<string, Map<string, any>>;
 
-  @Metadata({ data: "json, name=customerId" })
+  @SpeakeasyMetadata({ data: "json, name=customerId" })
   customerId?: string;
 
-  @Metadata({ data: "json, name=deletionTime" })
+  @SpeakeasyMetadata({ data: "json, name=deletionTime" })
   deletionTime?: Date;
 
-  @Metadata({ data: "json, name=emails" })
+  @SpeakeasyMetadata({ data: "json, name=emails" })
   emails?: any;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=externalIds" })
+  @SpeakeasyMetadata({ data: "json, name=externalIds" })
   externalIds?: any;
 
-  @Metadata({ data: "json, name=gender" })
+  @SpeakeasyMetadata({ data: "json, name=gender" })
   gender?: any;
 
-  @Metadata({ data: "json, name=hashFunction" })
+  @SpeakeasyMetadata({ data: "json, name=hashFunction" })
   hashFunction?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=ims" })
+  @SpeakeasyMetadata({ data: "json, name=ims" })
   ims?: any;
 
-  @Metadata({ data: "json, name=includeInGlobalAddressList" })
+  @SpeakeasyMetadata({ data: "json, name=includeInGlobalAddressList" })
   includeInGlobalAddressList?: boolean;
 
-  @Metadata({ data: "json, name=ipWhitelisted" })
+  @SpeakeasyMetadata({ data: "json, name=ipWhitelisted" })
   ipWhitelisted?: boolean;
 
-  @Metadata({ data: "json, name=isAdmin" })
+  @SpeakeasyMetadata({ data: "json, name=isAdmin" })
   isAdmin?: boolean;
 
-  @Metadata({ data: "json, name=isDelegatedAdmin" })
+  @SpeakeasyMetadata({ data: "json, name=isDelegatedAdmin" })
   isDelegatedAdmin?: boolean;
 
-  @Metadata({ data: "json, name=isEnforcedIn2Sv" })
+  @SpeakeasyMetadata({ data: "json, name=isEnforcedIn2Sv" })
   isEnforcedIn2Sv?: boolean;
 
-  @Metadata({ data: "json, name=isEnrolledIn2Sv" })
+  @SpeakeasyMetadata({ data: "json, name=isEnrolledIn2Sv" })
   isEnrolledIn2Sv?: boolean;
 
-  @Metadata({ data: "json, name=isMailboxSetup" })
+  @SpeakeasyMetadata({ data: "json, name=isMailboxSetup" })
   isMailboxSetup?: boolean;
 
-  @Metadata({ data: "json, name=keywords" })
+  @SpeakeasyMetadata({ data: "json, name=keywords" })
   keywords?: any;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=languages" })
+  @SpeakeasyMetadata({ data: "json, name=languages" })
   languages?: any;
 
-  @Metadata({ data: "json, name=lastLoginTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastLoginTime" })
   lastLoginTime?: Date;
 
-  @Metadata({ data: "json, name=locations" })
+  @SpeakeasyMetadata({ data: "json, name=locations" })
   locations?: any;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: UserName;
 
-  @Metadata({ data: "json, name=nonEditableAliases" })
+  @SpeakeasyMetadata({ data: "json, name=nonEditableAliases" })
   nonEditableAliases?: string[];
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: any;
 
-  @Metadata({ data: "json, name=orgUnitPath" })
+  @SpeakeasyMetadata({ data: "json, name=orgUnitPath" })
   orgUnitPath?: string;
 
-  @Metadata({ data: "json, name=organizations" })
+  @SpeakeasyMetadata({ data: "json, name=organizations" })
   organizations?: any;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=phones" })
+  @SpeakeasyMetadata({ data: "json, name=phones" })
   phones?: any;
 
-  @Metadata({ data: "json, name=posixAccounts" })
+  @SpeakeasyMetadata({ data: "json, name=posixAccounts" })
   posixAccounts?: any;
 
-  @Metadata({ data: "json, name=primaryEmail" })
+  @SpeakeasyMetadata({ data: "json, name=primaryEmail" })
   primaryEmail?: string;
 
-  @Metadata({ data: "json, name=recoveryEmail" })
+  @SpeakeasyMetadata({ data: "json, name=recoveryEmail" })
   recoveryEmail?: string;
 
-  @Metadata({ data: "json, name=recoveryPhone" })
+  @SpeakeasyMetadata({ data: "json, name=recoveryPhone" })
   recoveryPhone?: string;
 
-  @Metadata({ data: "json, name=relations" })
+  @SpeakeasyMetadata({ data: "json, name=relations" })
   relations?: any;
 
-  @Metadata({ data: "json, name=sshPublicKeys" })
+  @SpeakeasyMetadata({ data: "json, name=sshPublicKeys" })
   sshPublicKeys?: any;
 
-  @Metadata({ data: "json, name=suspended" })
+  @SpeakeasyMetadata({ data: "json, name=suspended" })
   suspended?: boolean;
 
-  @Metadata({ data: "json, name=suspensionReason" })
+  @SpeakeasyMetadata({ data: "json, name=suspensionReason" })
   suspensionReason?: string;
 
-  @Metadata({ data: "json, name=thumbnailPhotoEtag" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnailPhotoEtag" })
   thumbnailPhotoEtag?: string;
 
-  @Metadata({ data: "json, name=thumbnailPhotoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnailPhotoUrl" })
   thumbnailPhotoUrl?: string;
 
-  @Metadata({ data: "json, name=websites" })
+  @SpeakeasyMetadata({ data: "json, name=websites" })
   websites?: any;
 }

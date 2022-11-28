@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class NsxControllerDataCollection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=controller_password" })
+  @SpeakeasyMetadata({ data: "json, name=controller_password" })
   controllerPassword?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 }

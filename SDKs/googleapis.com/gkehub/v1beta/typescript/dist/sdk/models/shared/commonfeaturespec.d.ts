@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AnthosObservabilityFeatureSpec } from "./anthosobservabilityfeaturespec";
 import { MultiClusterIngressFeatureSpec } from "./multiclusteringressfeaturespec";
 /**
@@ -7,5 +7,6 @@ import { MultiClusterIngressFeatureSpec } from "./multiclusteringressfeaturespec
 export declare class CommonFeatureSpec extends SpeakeasyBase {
     anthosobservability?: AnthosObservabilityFeatureSpec;
     appdevexperience?: Map<string, any>;
+    fleetobservability?: Map<string, any>;
     multiclusteringress?: MultiClusterIngressFeatureSpec;
 }

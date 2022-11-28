@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualGatewayClientPolicyTls } from "./virtualgatewayclientpolicytls";
+
 
 
 // VirtualGatewayClientPolicy
@@ -7,6 +8,6 @@ import { VirtualGatewayClientPolicyTls } from "./virtualgatewayclientpolicytls";
  * An object that represents a client policy.
 **/
 export class VirtualGatewayClientPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=tls" })
+  @SpeakeasyMetadata({ data: "json, name=tls" })
   tls?: VirtualGatewayClientPolicyTls;
 }

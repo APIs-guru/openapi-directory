@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutVideoPlaylistVideoPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=playlistElementId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=playlistElementId" })
   playlistElementId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=playlistId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=playlistId" })
   playlistId: number;
 }
 
 
 export class PutVideoPlaylistVideoRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=startTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=startTimestamp" })
   startTimestamp?: number;
 
-  @Metadata({ data: "json, name=stopTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=stopTimestamp" })
   stopTimestamp?: number;
 }
 
 
 export class PutVideoPlaylistVideoSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class PutVideoPlaylistVideoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutVideoPlaylistVideoPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: PutVideoPlaylistVideoRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PutVideoPlaylistVideoSecurity;
 }
 
 
 export class PutVideoPlaylistVideoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

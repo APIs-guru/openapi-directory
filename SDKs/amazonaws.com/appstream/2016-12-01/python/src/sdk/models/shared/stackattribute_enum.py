@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class StackAttributeEnum(str, Enum):
     STORAGE_CONNECTORS = "STORAGE_CONNECTORS"

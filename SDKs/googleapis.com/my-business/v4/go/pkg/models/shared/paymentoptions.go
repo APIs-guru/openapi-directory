@@ -45,6 +45,8 @@ const (
 	PaymentOptionsMobileNfcExceptionEnumDependentOnDayOfWeek PaymentOptionsMobileNfcExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// PaymentOptions
+// Forms of payment accepted at the property.
 type PaymentOptions struct {
 	Cash                *bool                                  `json:"cash,omitempty"`
 	CashException       *PaymentOptionsCashExceptionEnum       `json:"cashException,omitempty"`

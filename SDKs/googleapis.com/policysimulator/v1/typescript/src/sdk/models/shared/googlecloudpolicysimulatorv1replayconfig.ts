@@ -1,10 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleIamV1Policy } from "./googleiamv1policy";
 
+
 export enum GoogleCloudPolicysimulatorV1ReplayConfigLogSourceEnum {
-    LogSourceUnspecified = "LOG_SOURCE_UNSPECIFIED"
-,    RecentAccesses = "RECENT_ACCESSES"
+    LogSourceUnspecified = "LOG_SOURCE_UNSPECIFIED",
+    RecentAccesses = "RECENT_ACCESSES"
 }
 
 
@@ -13,9 +13,9 @@ export enum GoogleCloudPolicysimulatorV1ReplayConfigLogSourceEnum {
  * The configuration used for a Replay.
 **/
 export class GoogleCloudPolicysimulatorV1ReplayConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=logSource" })
+  @SpeakeasyMetadata({ data: "json, name=logSource" })
   logSource?: GoogleCloudPolicysimulatorV1ReplayConfigLogSourceEnum;
 
-  @Metadata({ data: "json, name=policyOverlay", elemType: shared.GoogleIamV1Policy })
+  @SpeakeasyMetadata({ data: "json, name=policyOverlay", elemType: GoogleIamV1Policy })
   policyOverlay?: Map<string, GoogleIamV1Policy>;
 }

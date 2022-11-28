@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeployJobRun } from "./deployjobrun";
 import { VerifyJobRun } from "./verifyjobrun";
 
+
 export enum JobRunStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    InProgress = "IN_PROGRESS"
-,    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    InProgress = "IN_PROGRESS",
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED"
 }
 
 
@@ -15,36 +16,36 @@ export enum JobRunStateEnum {
  * A `JobRun` resource in the Google Cloud Deploy API. A `JobRun` contains information of a single `Rollout` job evaluation.
 **/
 export class JobRun extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=deployJobRun" })
+  @SpeakeasyMetadata({ data: "json, name=deployJobRun" })
   deployJobRun?: DeployJobRun;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=jobId" })
+  @SpeakeasyMetadata({ data: "json, name=jobId" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=phaseId" })
+  @SpeakeasyMetadata({ data: "json, name=phaseId" })
   phaseId?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: JobRunStateEnum;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 
-  @Metadata({ data: "json, name=verifyJobRun" })
+  @SpeakeasyMetadata({ data: "json, name=verifyJobRun" })
   verifyJobRun?: VerifyJobRun;
 }

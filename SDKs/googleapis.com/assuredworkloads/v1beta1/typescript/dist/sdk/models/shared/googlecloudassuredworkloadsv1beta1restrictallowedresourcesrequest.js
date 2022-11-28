@@ -22,12 +22,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GoogleCloudAssuredworkloadsV1beta1RestrictAllowedResourcesRequestRestrictionTypeEnum;
 (function (GoogleCloudAssuredworkloadsV1beta1RestrictAllowedResourcesRequestRestrictionTypeEnum) {
     GoogleCloudAssuredworkloadsV1beta1RestrictAllowedResourcesRequestRestrictionTypeEnum["RestrictionTypeUnspecified"] = "RESTRICTION_TYPE_UNSPECIFIED";
     GoogleCloudAssuredworkloadsV1beta1RestrictAllowedResourcesRequestRestrictionTypeEnum["AllowAllGcpResources"] = "ALLOW_ALL_GCP_RESOURCES";
     GoogleCloudAssuredworkloadsV1beta1RestrictAllowedResourcesRequestRestrictionTypeEnum["AllowCompliantResources"] = "ALLOW_COMPLIANT_RESOURCES";
+    GoogleCloudAssuredworkloadsV1beta1RestrictAllowedResourcesRequestRestrictionTypeEnum["AppendCompliantResources"] = "APPEND_COMPLIANT_RESOURCES";
 })(GoogleCloudAssuredworkloadsV1beta1RestrictAllowedResourcesRequestRestrictionTypeEnum || (GoogleCloudAssuredworkloadsV1beta1RestrictAllowedResourcesRequestRestrictionTypeEnum = {}));
 // GoogleCloudAssuredworkloadsV1beta1RestrictAllowedResourcesRequest
 /**
@@ -39,7 +40,7 @@ var GoogleCloudAssuredworkloadsV1beta1RestrictAllowedResourcesRequest = /** @cla
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=restrictionType" }),
+        SpeakeasyMetadata({ data: "json, name=restrictionType" }),
         __metadata("design:type", String)
     ], GoogleCloudAssuredworkloadsV1beta1RestrictAllowedResourcesRequest.prototype, "restrictionType", void 0);
     return GoogleCloudAssuredworkloadsV1beta1RestrictAllowedResourcesRequest;

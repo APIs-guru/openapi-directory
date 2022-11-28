@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Solution } from "./solution";
 export declare class Error extends SpeakeasyBase {
     code?: string;

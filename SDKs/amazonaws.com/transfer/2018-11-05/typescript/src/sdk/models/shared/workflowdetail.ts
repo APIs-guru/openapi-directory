@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WorkflowDetail
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the workflow ID for the workflow to assign and the execution role used for executing the workflow.
 **/
 export class WorkflowDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExecutionRole" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionRole" })
   executionRole: string;
 
-  @Metadata({ data: "json, name=WorkflowId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkflowId" })
   workflowId: string;
 }

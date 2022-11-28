@@ -15,6 +15,8 @@ type StartPolicyGenerationHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// StartPolicyGenerationRequestBodyCloudTrailDetails
+// Contains information about CloudTrail access.
 type StartPolicyGenerationRequestBodyCloudTrailDetails struct {
 	AccessRole *string        `json:"accessRole,omitempty"`
 	EndTime    *time.Time     `json:"endTime,omitempty"`
@@ -22,6 +24,8 @@ type StartPolicyGenerationRequestBodyCloudTrailDetails struct {
 	Trails     []shared.Trail `json:"trails,omitempty"`
 }
 
+// StartPolicyGenerationRequestBodyPolicyGenerationDetails
+// Contains the ARN details about the IAM entity for which the policy is generated.
 type StartPolicyGenerationRequestBodyPolicyGenerationDetails struct {
 	PrincipalArn *string `json:"principalArn,omitempty"`
 }

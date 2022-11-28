@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DataExchange } from "./dataexchange";
 /**
  * Message for response to listing data exchanges in an organization and location.

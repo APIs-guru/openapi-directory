@@ -22,36 +22,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResolverEndpointDirectionEnum } from "./resolverendpointdirectionenum";
+import { IpAddressRequest } from "./ipaddressrequest";
+import { Tag } from "./tag";
 var CreateResolverEndpointRequest = /** @class */ (function (_super) {
     __extends(CreateResolverEndpointRequest, _super);
     function CreateResolverEndpointRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatorRequestId" }),
+        SpeakeasyMetadata({ data: "json, name=CreatorRequestId" }),
         __metadata("design:type", String)
     ], CreateResolverEndpointRequest.prototype, "creatorRequestId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Direction" }),
+        SpeakeasyMetadata({ data: "json, name=Direction" }),
         __metadata("design:type", String)
     ], CreateResolverEndpointRequest.prototype, "direction", void 0);
     __decorate([
-        Metadata({ data: "json, name=IpAddresses", elemType: shared.IpAddressRequest }),
+        SpeakeasyMetadata({ data: "json, name=IpAddresses", elemType: IpAddressRequest }),
         __metadata("design:type", Array)
     ], CreateResolverEndpointRequest.prototype, "ipAddresses", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], CreateResolverEndpointRequest.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecurityGroupIds" }),
+        SpeakeasyMetadata({ data: "json, name=SecurityGroupIds" }),
         __metadata("design:type", Array)
     ], CreateResolverEndpointRequest.prototype, "securityGroupIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateResolverEndpointRequest.prototype, "tags", void 0);
     return CreateResolverEndpointRequest;

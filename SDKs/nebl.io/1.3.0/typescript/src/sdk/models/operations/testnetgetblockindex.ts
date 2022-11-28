@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TestnetGetBlockIndexPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=blockindex" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=blockindex" })
   blockindex: number;
 }
 
 
 export class TestnetGetBlockIndexRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TestnetGetBlockIndexPathParams;
 }
 
 
 export class TestnetGetBlockIndexResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getBlockIndexResponse?: shared.GetBlockIndexResponse;
 }

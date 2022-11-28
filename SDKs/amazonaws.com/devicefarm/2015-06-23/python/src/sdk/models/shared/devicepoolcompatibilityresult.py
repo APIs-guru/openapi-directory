@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import device
-from . import incompatibilitymessage
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DevicePoolCompatibilityResult:
-    compatible: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'compatible' }})
-    device: Optional[device.Device] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device' }})
-    incompatibility_messages: Optional[List[incompatibilitymessage.IncompatibilityMessage]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'incompatibilityMessages' }})
+    r"""DevicePoolCompatibilityResult
+    Represents a device pool compatibility result.
+    """
+    
+    compatible: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('compatible') }})
+    device: Optional[Device] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('device') }})
+    incompatibility_messages: Optional[List[IncompatibilityMessage]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('incompatibilityMessages') }})
     

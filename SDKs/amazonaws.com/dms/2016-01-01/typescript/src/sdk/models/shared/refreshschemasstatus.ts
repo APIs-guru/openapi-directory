@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RefreshSchemasStatusTypeValueEnum } from "./refreshschemasstatustypevalueenum";
+
 
 
 // RefreshSchemasStatus
@@ -7,18 +8,18 @@ import { RefreshSchemasStatusTypeValueEnum } from "./refreshschemasstatustypeval
  * Provides information that describes status of a schema at an endpoint specified by the <code>DescribeRefreshSchemaStatus</code> operation.
 **/
 export class RefreshSchemasStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndpointArn" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointArn" })
   endpointArn?: string;
 
-  @Metadata({ data: "json, name=LastFailureMessage" })
+  @SpeakeasyMetadata({ data: "json, name=LastFailureMessage" })
   lastFailureMessage?: string;
 
-  @Metadata({ data: "json, name=LastRefreshDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastRefreshDate" })
   lastRefreshDate?: Date;
 
-  @Metadata({ data: "json, name=ReplicationInstanceArn" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationInstanceArn" })
   replicationInstanceArn?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: RefreshSchemasStatusTypeValueEnum;
 }

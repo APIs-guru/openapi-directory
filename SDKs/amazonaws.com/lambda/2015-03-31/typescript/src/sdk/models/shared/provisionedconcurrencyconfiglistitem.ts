@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisionedConcurrencyStatusEnumEnum } from "./provisionedconcurrencystatusenumenum";
+
 
 
 // ProvisionedConcurrencyConfigListItem
@@ -7,24 +8,24 @@ import { ProvisionedConcurrencyStatusEnumEnum } from "./provisionedconcurrencyst
  * Details about the provisioned concurrency configuration for a function alias or version.
 **/
 export class ProvisionedConcurrencyConfigListItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllocatedProvisionedConcurrentExecutions" })
+  @SpeakeasyMetadata({ data: "json, name=AllocatedProvisionedConcurrentExecutions" })
   allocatedProvisionedConcurrentExecutions?: number;
 
-  @Metadata({ data: "json, name=AvailableProvisionedConcurrentExecutions" })
+  @SpeakeasyMetadata({ data: "json, name=AvailableProvisionedConcurrentExecutions" })
   availableProvisionedConcurrentExecutions?: number;
 
-  @Metadata({ data: "json, name=FunctionArn" })
+  @SpeakeasyMetadata({ data: "json, name=FunctionArn" })
   functionArn?: string;
 
-  @Metadata({ data: "json, name=LastModified" })
+  @SpeakeasyMetadata({ data: "json, name=LastModified" })
   lastModified?: string;
 
-  @Metadata({ data: "json, name=RequestedProvisionedConcurrentExecutions" })
+  @SpeakeasyMetadata({ data: "json, name=RequestedProvisionedConcurrentExecutions" })
   requestedProvisionedConcurrentExecutions?: number;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ProvisionedConcurrencyStatusEnumEnum;
 
-  @Metadata({ data: "json, name=StatusReason" })
+  @SpeakeasyMetadata({ data: "json, name=StatusReason" })
   statusReason?: string;
 }

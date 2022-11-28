@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScheduleRunConfiguration } from "./schedulerunconfiguration";
 import { ScheduleRunTest } from "./scheduleruntest";
 import { TestTypeEnum } from "./testtypeenum";
+
 
 
 // GetDevicePoolCompatibilityRequest
@@ -9,18 +10,18 @@ import { TestTypeEnum } from "./testtypeenum";
  * Represents a request to the get device pool compatibility operation.
 **/
 export class GetDevicePoolCompatibilityRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appArn" })
+  @SpeakeasyMetadata({ data: "json, name=appArn" })
   appArn?: string;
 
-  @Metadata({ data: "json, name=configuration" })
+  @SpeakeasyMetadata({ data: "json, name=configuration" })
   configuration?: ScheduleRunConfiguration;
 
-  @Metadata({ data: "json, name=devicePoolArn" })
+  @SpeakeasyMetadata({ data: "json, name=devicePoolArn" })
   devicePoolArn: string;
 
-  @Metadata({ data: "json, name=test" })
+  @SpeakeasyMetadata({ data: "json, name=test" })
   test?: ScheduleRunTest;
 
-  @Metadata({ data: "json, name=testType" })
+  @SpeakeasyMetadata({ data: "json, name=testType" })
   testType?: TestTypeEnum;
 }

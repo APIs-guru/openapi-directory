@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoMlJobCompletionCriteria } from "./automljobcompletioncriteria";
 import { AutoMlSecurityConfig } from "./automlsecurityconfig";
+
 
 
 // AutoMlJobConfig
@@ -8,9 +9,9 @@ import { AutoMlSecurityConfig } from "./automlsecurityconfig";
  * A collection of settings used for an AutoML job.
 **/
 export class AutoMlJobConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CompletionCriteria" })
+  @SpeakeasyMetadata({ data: "json, name=CompletionCriteria" })
   completionCriteria?: AutoMlJobCompletionCriteria;
 
-  @Metadata({ data: "json, name=SecurityConfig" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityConfig" })
   securityConfig?: AutoMlSecurityConfig;
 }

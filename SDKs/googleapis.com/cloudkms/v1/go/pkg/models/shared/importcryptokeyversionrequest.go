@@ -27,9 +27,15 @@ const (
 	ImportCryptoKeyVersionRequestAlgorithmEnumEcSignP384Sha384                     ImportCryptoKeyVersionRequestAlgorithmEnum = "EC_SIGN_P384_SHA384"
 	ImportCryptoKeyVersionRequestAlgorithmEnumEcSignSecp256K1Sha256                ImportCryptoKeyVersionRequestAlgorithmEnum = "EC_SIGN_SECP256K1_SHA256"
 	ImportCryptoKeyVersionRequestAlgorithmEnumHmacSha256                           ImportCryptoKeyVersionRequestAlgorithmEnum = "HMAC_SHA256"
+	ImportCryptoKeyVersionRequestAlgorithmEnumHmacSha1                             ImportCryptoKeyVersionRequestAlgorithmEnum = "HMAC_SHA1"
+	ImportCryptoKeyVersionRequestAlgorithmEnumHmacSha384                           ImportCryptoKeyVersionRequestAlgorithmEnum = "HMAC_SHA384"
+	ImportCryptoKeyVersionRequestAlgorithmEnumHmacSha512                           ImportCryptoKeyVersionRequestAlgorithmEnum = "HMAC_SHA512"
+	ImportCryptoKeyVersionRequestAlgorithmEnumHmacSha224                           ImportCryptoKeyVersionRequestAlgorithmEnum = "HMAC_SHA224"
 	ImportCryptoKeyVersionRequestAlgorithmEnumExternalSymmetricEncryption          ImportCryptoKeyVersionRequestAlgorithmEnum = "EXTERNAL_SYMMETRIC_ENCRYPTION"
 )
 
+// ImportCryptoKeyVersionRequest
+// Request message for KeyManagementService.ImportCryptoKeyVersion.
 type ImportCryptoKeyVersionRequest struct {
 	Algorithm        *ImportCryptoKeyVersionRequestAlgorithmEnum `json:"algorithm,omitempty"`
 	CryptoKeyVersion *string                                     `json:"cryptoKeyVersion,omitempty"`

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AccesscontextmanagerAccessPoliciesServicePerimetersListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class AccesscontextmanagerAccessPoliciesServicePerimetersListQueryParams:
 
 @dataclass
 class AccesscontextmanagerAccessPoliciesServicePerimetersListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AccesscontextmanagerAccessPoliciesServicePerimetersListRequest:
-    path_params: AccesscontextmanagerAccessPoliciesServicePerimetersListPathParams = field(default=None)
-    query_params: AccesscontextmanagerAccessPoliciesServicePerimetersListQueryParams = field(default=None)
-    security: AccesscontextmanagerAccessPoliciesServicePerimetersListSecurity = field(default=None)
+    path_params: AccesscontextmanagerAccessPoliciesServicePerimetersListPathParams = field()
+    query_params: AccesscontextmanagerAccessPoliciesServicePerimetersListQueryParams = field()
+    security: AccesscontextmanagerAccessPoliciesServicePerimetersListSecurity = field()
     
 
 @dataclass
 class AccesscontextmanagerAccessPoliciesServicePerimetersListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_service_perimeters_response: Optional[shared.ListServicePerimetersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

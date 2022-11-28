@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum BackendMetastoreMetastoreTypeEnum {
-    MetastoreTypeUnspecified = "METASTORE_TYPE_UNSPECIFIED"
-,    Bigquery = "BIGQUERY"
-,    DataprocMetastore = "DATAPROC_METASTORE"
+    MetastoreTypeUnspecified = "METASTORE_TYPE_UNSPECIFIED",
+    Bigquery = "BIGQUERY",
+    DataprocMetastore = "DATAPROC_METASTORE"
 }
 
 
@@ -12,9 +13,9 @@ export enum BackendMetastoreMetastoreTypeEnum {
  * Represents a backend metastore for the federation.
 **/
 export class BackendMetastore extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metastoreType" })
+  @SpeakeasyMetadata({ data: "json, name=metastoreType" })
   metastoreType?: BackendMetastoreMetastoreTypeEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

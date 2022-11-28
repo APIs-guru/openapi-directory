@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,26 +22,26 @@ class CommitTransactionHeaders:
 @dataclass_json
 @dataclass
 class CommitTransactionRequestBody:
-    resource_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceArn' }})
-    secret_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'secretArn' }})
-    transaction_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transactionId' }})
+    resource_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceArn') }})
+    secret_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('secretArn') }})
+    transaction_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('transactionId') }})
     
 
 @dataclass
 class CommitTransactionRequest:
-    headers: CommitTransactionHeaders = field(default=None)
-    request: CommitTransactionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CommitTransactionHeaders = field()
+    request: CommitTransactionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CommitTransactionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     commit_transaction_response: Optional[shared.CommitTransactionResponse] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_error: Optional[Any] = field(default=None)
     statement_timeout_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PredictImageURLWithNoStorePathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,30 +16,30 @@ class PredictImageURLWithNoStoreQueryParams:
 
 @dataclass
 class PredictImageURLWithNoStoreHeaders:
-    prediction_key: str = field(default=None, metadata={'header': { 'field_name': 'Prediction-Key', 'style': 'simple', 'explode': False }})
+    prediction_key: str = field(metadata={'header': { 'field_name': 'Prediction-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PredictImageURLWithNoStoreRequests:
-    application_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'application/xml' }})
+    application_xml: bytes = field(metadata={'request': { 'media_type': 'application/xml' }})
+    text_xml: bytes = field(metadata={'request': { 'media_type': 'text/xml' }})
     image_url: Optional[shared.ImageURL] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     image_url1: Optional[shared.ImageURL] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     image_url2: Optional[shared.ImageURL] = field(default=None, metadata={'request': { 'media_type': 'text/json' }})
-    text_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PredictImageURLWithNoStoreRequest:
-    path_params: PredictImageURLWithNoStorePathParams = field(default=None)
-    query_params: PredictImageURLWithNoStoreQueryParams = field(default=None)
-    headers: PredictImageURLWithNoStoreHeaders = field(default=None)
-    request: PredictImageURLWithNoStoreRequests = field(default=None)
+    headers: PredictImageURLWithNoStoreHeaders = field()
+    path_params: PredictImageURLWithNoStorePathParams = field()
+    query_params: PredictImageURLWithNoStoreQueryParams = field()
+    request: PredictImageURLWithNoStoreRequests = field()
     
 
 @dataclass
 class PredictImageURLWithNoStoreResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     image_prediction_result_model: Optional[shared.ImagePredictionResultModel] = field(default=None)
-    status_code: int = field(default=None)
     

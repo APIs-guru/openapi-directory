@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleSecuritySafebrowsingV4ThreatHitThreatSourceTypeEnum {
-    ThreatSourceTypeUnspecified = "THREAT_SOURCE_TYPE_UNSPECIFIED"
-,    MatchingUrl = "MATCHING_URL"
-,    TabUrl = "TAB_URL"
-,    TabRedirect = "TAB_REDIRECT"
-,    TabResource = "TAB_RESOURCE"
+    ThreatSourceTypeUnspecified = "THREAT_SOURCE_TYPE_UNSPECIFIED",
+    MatchingUrl = "MATCHING_URL",
+    TabUrl = "TAB_URL",
+    TabRedirect = "TAB_REDIRECT",
+    TabResource = "TAB_RESOURCE"
 }
 
 
@@ -14,15 +15,15 @@ export enum GoogleSecuritySafebrowsingV4ThreatHitThreatSourceTypeEnum {
  * A single resource related to a threat hit.
 **/
 export class GoogleSecuritySafebrowsingV4ThreatHitThreatSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=referrer" })
+  @SpeakeasyMetadata({ data: "json, name=referrer" })
   referrer?: string;
 
-  @Metadata({ data: "json, name=remoteIp" })
+  @SpeakeasyMetadata({ data: "json, name=remoteIp" })
   remoteIp?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GoogleSecuritySafebrowsingV4ThreatHitThreatSourceTypeEnum;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

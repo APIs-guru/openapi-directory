@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import customsmssenderlambdaversiontype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CustomSmsLambdaVersionConfigType:
-    lambda_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LambdaArn' }})
-    lambda_version: customsmssenderlambdaversiontype_enum.CustomSmsSenderLambdaVersionTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LambdaVersion' }})
+    r"""CustomSmsLambdaVersionConfigType
+    A custom SMS sender Lambda configuration type.
+    """
+    
+    lambda_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LambdaArn') }})
+    lambda_version: CustomSmsSenderLambdaVersionTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LambdaVersion') }})
     

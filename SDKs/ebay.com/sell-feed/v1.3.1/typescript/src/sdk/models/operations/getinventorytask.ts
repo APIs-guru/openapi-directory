@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetInventoryTaskPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=task_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=task_id" })
   taskId: string;
 }
 
 
 export class GetInventoryTaskSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetInventoryTaskRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetInventoryTaskPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetInventoryTaskSecurity;
 }
 
 
 export class GetInventoryTaskResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inventoryTask?: shared.InventoryTask;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

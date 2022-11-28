@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyGlobalReplicationGroupActionEnum(str, Enum):
     MODIFY_GLOBAL_REPLICATION_GROUP = "ModifyGlobalReplicationGroup"
@@ -10,15 +14,15 @@ class GetModifyGlobalReplicationGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyGlobalReplicationGroupQueryParams:
-    action: GetModifyGlobalReplicationGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    apply_immediately: bool = field(default=None, metadata={'query_param': { 'field_name': 'ApplyImmediately', 'style': 'form', 'explode': True }})
+    action: GetModifyGlobalReplicationGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    apply_immediately: bool = field(metadata={'query_param': { 'field_name': 'ApplyImmediately', 'style': 'form', 'explode': True }})
+    global_replication_group_id: str = field(metadata={'query_param': { 'field_name': 'GlobalReplicationGroupId', 'style': 'form', 'explode': True }})
+    version: GetModifyGlobalReplicationGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     automatic_failover_enabled: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AutomaticFailoverEnabled', 'style': 'form', 'explode': True }})
     cache_node_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CacheNodeType', 'style': 'form', 'explode': True }})
     cache_parameter_group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CacheParameterGroupName', 'style': 'form', 'explode': True }})
     engine_version: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'EngineVersion', 'style': 'form', 'explode': True }})
     global_replication_group_description: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'GlobalReplicationGroupDescription', 'style': 'form', 'explode': True }})
-    global_replication_group_id: str = field(default=None, metadata={'query_param': { 'field_name': 'GlobalReplicationGroupId', 'style': 'form', 'explode': True }})
-    version: GetModifyGlobalReplicationGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,13 +38,13 @@ class GetModifyGlobalReplicationGroupHeaders:
 
 @dataclass
 class GetModifyGlobalReplicationGroupRequest:
-    query_params: GetModifyGlobalReplicationGroupQueryParams = field(default=None)
-    headers: GetModifyGlobalReplicationGroupHeaders = field(default=None)
+    headers: GetModifyGlobalReplicationGroupHeaders = field()
+    query_params: GetModifyGlobalReplicationGroupQueryParams = field()
     
 
 @dataclass
 class GetModifyGlobalReplicationGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

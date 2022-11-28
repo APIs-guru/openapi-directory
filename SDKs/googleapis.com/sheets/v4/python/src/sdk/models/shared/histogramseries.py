@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import color
-from . import colorstyle
-from . import chartdata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class HistogramSeries:
-    bar_color: Optional[color.Color] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'barColor' }})
-    bar_color_style: Optional[colorstyle.ColorStyle] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'barColorStyle' }})
-    data: Optional[chartdata.ChartData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    r"""HistogramSeries
+    A histogram series containing the series color and data.
+    """
+    
+    bar_color: Optional[Color] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('barColor') }})
+    bar_color_style: Optional[ColorStyle] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('barColorStyle') }})
+    data: Optional[ChartData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
     

@@ -1,72 +1,73 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetJournalEntriesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=telephonyConversationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=telephonyConversationId" })
   telephonyConversationId: string;
 }
 
 export enum GetJournalEntriesDirectionEnum {
-    After = "AFTER"
-,    Before = "BEFORE"
-,    Both = "BOTH"
+    After = "AFTER",
+    Before = "BEFORE",
+    Both = "BOTH"
 }
 
 export enum GetJournalEntriesJournalFilterEnum {
-    All = "ALL"
-,    Missed = "MISSED"
-,    Dialed = "DIALED"
-,    Received = "RECEIVED"
-,    Diverted = "DIVERTED"
-,    Voicemails = "VOICEMAILS"
-,    UnheradVoicemails = "UNHERAD_VOICEMAILS"
+    All = "ALL",
+    Missed = "MISSED",
+    Dialed = "DIALED",
+    Received = "RECEIVED",
+    Diverted = "DIVERTED",
+    Voicemails = "VOICEMAILS",
+    UnheradVoicemails = "UNHERAD_VOICEMAILS"
 }
 
 
 export class GetJournalEntriesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: GetJournalEntriesDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=journalFilter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=journalFilter" })
   journalFilter?: GetJournalEntriesJournalFilterEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=numberOfEntries" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=numberOfEntries" })
   numberOfEntries?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timestamp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timestamp" })
   timestamp?: number;
 }
 
 
 export class GetJournalEntriesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class GetJournalEntriesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetJournalEntriesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetJournalEntriesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetJournalEntriesSecurity;
 }
 
 
 export class GetJournalEntriesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conversationItems?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

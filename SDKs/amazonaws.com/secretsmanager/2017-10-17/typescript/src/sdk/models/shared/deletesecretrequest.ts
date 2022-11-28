@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteSecretRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ForceDeleteWithoutRecovery" })
+  @SpeakeasyMetadata({ data: "json, name=ForceDeleteWithoutRecovery" })
   forceDeleteWithoutRecovery?: boolean;
 
-  @Metadata({ data: "json, name=RecoveryWindowInDays" })
+  @SpeakeasyMetadata({ data: "json, name=RecoveryWindowInDays" })
   recoveryWindowInDays?: number;
 
-  @Metadata({ data: "json, name=SecretId" })
+  @SpeakeasyMetadata({ data: "json, name=SecretId" })
   secretId: string;
 }

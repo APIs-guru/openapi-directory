@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://a2i-runtime.sagemaker.{region}.amazonaws.com",
 	"https://a2i-runtime.sagemaker.{region}.amazonaws.com",
 	"http://a2i-runtime.sagemaker.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/sagemaker/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DeleteHumanLoop - <p>Deletes the specified human loop for a flow definition.</p> <p>If the human loop was deleted, this operation will return a <code>ResourceNotFoundException</code>. </p>
 func (s *SDK) DeleteHumanLoop(ctx context.Context, request operations.DeleteHumanLoopRequest) (*operations.DeleteHumanLoopResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/human-loops/{HumanLoopName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -71,7 +98,7 @@ func (s *SDK) DeleteHumanLoop(ctx context.Context, request operations.DeleteHuma
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -141,8 +168,9 @@ func (s *SDK) DeleteHumanLoop(ctx context.Context, request operations.DeleteHuma
 	return res, nil
 }
 
+// DescribeHumanLoop - Returns information about the specified human loop. If the human loop was deleted, this operation will return a <code>ResourceNotFoundException</code> error.
 func (s *SDK) DescribeHumanLoop(ctx context.Context, request operations.DescribeHumanLoopRequest) (*operations.DescribeHumanLoopResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/human-loops/{HumanLoopName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -152,7 +180,7 @@ func (s *SDK) DescribeHumanLoop(ctx context.Context, request operations.Describe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -222,8 +250,9 @@ func (s *SDK) DescribeHumanLoop(ctx context.Context, request operations.Describe
 	return res, nil
 }
 
+// ListHumanLoops - Returns information about human loops, given the specified parameters. If a human loop was deleted, it will not be included.
 func (s *SDK) ListHumanLoops(ctx context.Context, request operations.ListHumanLoopsRequest) (*operations.ListHumanLoopsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/human-loops#FlowDefinitionArn"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -235,7 +264,7 @@ func (s *SDK) ListHumanLoops(ctx context.Context, request operations.ListHumanLo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -305,8 +334,9 @@ func (s *SDK) ListHumanLoops(ctx context.Context, request operations.ListHumanLo
 	return res, nil
 }
 
+// StartHumanLoop - Starts a human loop, provided that at least one activation condition is met.
 func (s *SDK) StartHumanLoop(ctx context.Context, request operations.StartHumanLoopRequest) (*operations.StartHumanLoopResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/human-loops"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -326,7 +356,7 @@ func (s *SDK) StartHumanLoop(ctx context.Context, request operations.StartHumanL
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -406,8 +436,9 @@ func (s *SDK) StartHumanLoop(ctx context.Context, request operations.StartHumanL
 	return res, nil
 }
 
+// StopHumanLoop - Stops the specified human loop.
 func (s *SDK) StopHumanLoop(ctx context.Context, request operations.StopHumanLoopRequest) (*operations.StopHumanLoopResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/human-loops/stop"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -427,7 +458,7 @@ func (s *SDK) StopHumanLoop(ctx context.Context, request operations.StopHumanLoo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

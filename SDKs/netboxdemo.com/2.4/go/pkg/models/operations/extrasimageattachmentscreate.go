@@ -5,7 +5,7 @@ import (
 )
 
 type ExtrasImageAttachmentsCreateRequest struct {
-	Request shared.ImageAttachment `request:"mediaType=application/json"`
+	Request shared.ImageAttachmentInput `request:"mediaType=application/json"`
 }
 
 type ExtrasImageAttachmentsCreateResponse struct {

@@ -1,101 +1,102 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDashboardInfoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=q" })
   q?: shared.GetInfoSchema;
 }
 
 
 export class GetDashboardInfoSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetDashboardInfoRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetDashboardInfoQueryParams;
-
-  @Metadata()
-  security: GetDashboardInfoSecurity;
-}
-
-
 export class GetDashboardInfo200ApplicationJsonFiltersColumnName extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=operator" })
+  @SpeakeasyMetadata({ data: "json, name=operator" })
   operator?: string;
 }
 
 
 export class GetDashboardInfo200ApplicationJsonFilters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=column_name", elemType: operations.GetDashboardInfo200ApplicationJsonFiltersColumnName })
+  @SpeakeasyMetadata({ data: "json, name=column_name", elemType: GetDashboardInfo200ApplicationJsonFiltersColumnName })
   columnName?: GetDashboardInfo200ApplicationJsonFiltersColumnName[];
 }
 
 
 export class GetDashboardInfo200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=add_columns" })
+  @SpeakeasyMetadata({ data: "json, name=add_columns" })
   addColumns?: Map<string, any>;
 
-  @Metadata({ data: "json, name=edit_columns" })
+  @SpeakeasyMetadata({ data: "json, name=edit_columns" })
   editColumns?: Map<string, any>;
 
-  @Metadata({ data: "json, name=filters" })
+  @SpeakeasyMetadata({ data: "json, name=filters" })
   filters?: GetDashboardInfo200ApplicationJsonFilters;
 
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions?: string[];
 }
 
 
 export class GetDashboardInfo400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDashboardInfo401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDashboardInfo422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetDashboardInfo500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetDashboardInfoRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetDashboardInfoQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetDashboardInfoSecurity;
+}
+
+
 export class GetDashboardInfoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDashboardInfo200ApplicationJsonObject?: GetDashboardInfo200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDashboardInfo400ApplicationJsonObject?: GetDashboardInfo400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDashboardInfo401ApplicationJsonObject?: GetDashboardInfo401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDashboardInfo422ApplicationJsonObject?: GetDashboardInfo422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDashboardInfo500ApplicationJsonObject?: GetDashboardInfo500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

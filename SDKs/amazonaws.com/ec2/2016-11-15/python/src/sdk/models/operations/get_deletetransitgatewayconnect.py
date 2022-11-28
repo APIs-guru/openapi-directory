@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteTransitGatewayConnectActionEnum(str, Enum):
     DELETE_TRANSIT_GATEWAY_CONNECT = "DeleteTransitGatewayConnect"
@@ -10,10 +14,10 @@ class GetDeleteTransitGatewayConnectVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteTransitGatewayConnectQueryParams:
-    action: GetDeleteTransitGatewayConnectActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteTransitGatewayConnectActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    transit_gateway_attachment_id: str = field(metadata={'query_param': { 'field_name': 'TransitGatewayAttachmentId', 'style': 'form', 'explode': True }})
+    version: GetDeleteTransitGatewayConnectVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    transit_gateway_attachment_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayAttachmentId', 'style': 'form', 'explode': True }})
-    version: GetDeleteTransitGatewayConnectVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteTransitGatewayConnectHeaders:
 
 @dataclass
 class GetDeleteTransitGatewayConnectRequest:
-    query_params: GetDeleteTransitGatewayConnectQueryParams = field(default=None)
-    headers: GetDeleteTransitGatewayConnectHeaders = field(default=None)
+    headers: GetDeleteTransitGatewayConnectHeaders = field()
+    query_params: GetDeleteTransitGatewayConnectQueryParams = field()
     
 
 @dataclass
 class GetDeleteTransitGatewayConnectResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

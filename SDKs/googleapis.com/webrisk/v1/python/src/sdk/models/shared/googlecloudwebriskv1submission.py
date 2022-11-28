@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudWebriskV1SubmissionThreatTypesEnum(str, Enum):
     THREAT_TYPE_UNSPECIFIED = "THREAT_TYPE_UNSPECIFIED"
@@ -13,6 +15,10 @@ class GoogleCloudWebriskV1SubmissionThreatTypesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudWebriskV1Submission:
-    threat_types: Optional[List[GoogleCloudWebriskV1SubmissionThreatTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'threatTypes' }})
-    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GoogleCloudWebriskV1Submission
+    Wraps a URI that might be displaying malicious content.
+    """
+    
+    threat_types: Optional[List[GoogleCloudWebriskV1SubmissionThreatTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('threatTypes') }})
+    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     

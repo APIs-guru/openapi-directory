@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetVeteranStatusSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apikey: shared.SchemeApikey;
 }
 
 
 export class GetVeteranStatusRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.VeteranStatusRequest;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetVeteranStatusSecurity;
 }
 
 
 export class GetVeteranStatusResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiError?: shared.ApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   authorizationError?: shared.AuthorizationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   veteranStatusConfirmation?: shared.VeteranStatusConfirmation;
 }

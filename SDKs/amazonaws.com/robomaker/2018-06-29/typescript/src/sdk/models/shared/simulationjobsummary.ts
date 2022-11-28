@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SimulationJobStatusEnum } from "./simulationjobstatusenum";
+
 
 
 // SimulationJobSummary
@@ -7,24 +8,24 @@ import { SimulationJobStatusEnum } from "./simulationjobstatusenum";
  * Summary information for a simulation job.
 **/
 export class SimulationJobSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=dataSourceNames" })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceNames" })
   dataSourceNames?: string[];
 
-  @Metadata({ data: "json, name=lastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=robotApplicationNames" })
+  @SpeakeasyMetadata({ data: "json, name=robotApplicationNames" })
   robotApplicationNames?: string[];
 
-  @Metadata({ data: "json, name=simulationApplicationNames" })
+  @SpeakeasyMetadata({ data: "json, name=simulationApplicationNames" })
   simulationApplicationNames?: string[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: SimulationJobStatusEnum;
 }

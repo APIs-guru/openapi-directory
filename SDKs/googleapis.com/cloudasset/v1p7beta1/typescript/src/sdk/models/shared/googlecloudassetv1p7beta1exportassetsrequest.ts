@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudAssetV1p7beta1OutputConfig } from "./googlecloudassetv1p7beta1outputconfig";
 
+
 export enum GoogleCloudAssetV1p7beta1ExportAssetsRequestContentTypeEnum {
-    ContentTypeUnspecified = "CONTENT_TYPE_UNSPECIFIED"
-,    Resource = "RESOURCE"
-,    IamPolicy = "IAM_POLICY"
-,    OrgPolicy = "ORG_POLICY"
-,    AccessPolicy = "ACCESS_POLICY"
-,    Relationship = "RELATIONSHIP"
+    ContentTypeUnspecified = "CONTENT_TYPE_UNSPECIFIED",
+    Resource = "RESOURCE",
+    IamPolicy = "IAM_POLICY",
+    OrgPolicy = "ORG_POLICY",
+    AccessPolicy = "ACCESS_POLICY",
+    Relationship = "RELATIONSHIP"
 }
 
 
@@ -16,18 +17,18 @@ export enum GoogleCloudAssetV1p7beta1ExportAssetsRequestContentTypeEnum {
  * Export asset request.
 **/
 export class GoogleCloudAssetV1p7beta1ExportAssetsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetTypes" })
+  @SpeakeasyMetadata({ data: "json, name=assetTypes" })
   assetTypes?: string[];
 
-  @Metadata({ data: "json, name=contentType" })
+  @SpeakeasyMetadata({ data: "json, name=contentType" })
   contentType?: GoogleCloudAssetV1p7beta1ExportAssetsRequestContentTypeEnum;
 
-  @Metadata({ data: "json, name=outputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=outputConfig" })
   outputConfig?: GoogleCloudAssetV1p7beta1OutputConfig;
 
-  @Metadata({ data: "json, name=readTime" })
+  @SpeakeasyMetadata({ data: "json, name=readTime" })
   readTime?: string;
 
-  @Metadata({ data: "json, name=relationshipTypes" })
+  @SpeakeasyMetadata({ data: "json, name=relationshipTypes" })
   relationshipTypes?: string[];
 }

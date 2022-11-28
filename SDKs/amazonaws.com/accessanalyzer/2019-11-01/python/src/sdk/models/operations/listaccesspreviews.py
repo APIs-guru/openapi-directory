@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListAccessPreviewsQueryParams:
-    analyzer_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'analyzerArn', 'style': 'form', 'explode': True }})
+    analyzer_arn: str = field(metadata={'query_param': { 'field_name': 'analyzerArn', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'nextToken', 'style': 'form', 'explode': True }})
     
@@ -23,18 +26,18 @@ class ListAccessPreviewsHeaders:
 
 @dataclass
 class ListAccessPreviewsRequest:
-    query_params: ListAccessPreviewsQueryParams = field(default=None)
-    headers: ListAccessPreviewsHeaders = field(default=None)
+    headers: ListAccessPreviewsHeaders = field()
+    query_params: ListAccessPreviewsQueryParams = field()
     
 
 @dataclass
 class ListAccessPreviewsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_access_previews_response: Optional[shared.ListAccessPreviewsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

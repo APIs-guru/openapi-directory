@@ -1,5 +1,7 @@
 package shared
 
+// Metro
+// Contains information about a metro region that can be targeted by ads.
 type Metro struct {
 	CountryCode   *string `json:"countryCode,omitempty"`
 	CountryDartID *string `json:"countryDartId,omitempty"`

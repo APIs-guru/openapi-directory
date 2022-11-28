@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CreateBehaviorInput
+// Represents paramaters required to give behavior feedback
 type CreateBehaviorInput struct {
 	BirthDate    time.Time   `form:"name=birth_date"`
 	Country      interface{} `form:"name=country"`

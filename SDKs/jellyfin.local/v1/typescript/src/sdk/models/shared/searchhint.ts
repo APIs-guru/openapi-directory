@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SearchHint
@@ -6,90 +7,90 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Class SearchHintResult.
 **/
 export class SearchHint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Album" })
+  @SpeakeasyMetadata({ data: "json, name=Album" })
   album?: string;
 
-  @Metadata({ data: "json, name=AlbumArtist" })
+  @SpeakeasyMetadata({ data: "json, name=AlbumArtist" })
   albumArtist?: string;
 
-  @Metadata({ data: "json, name=AlbumId" })
+  @SpeakeasyMetadata({ data: "json, name=AlbumId" })
   albumId?: string;
 
-  @Metadata({ data: "json, name=Artists" })
+  @SpeakeasyMetadata({ data: "json, name=Artists" })
   artists?: string[];
 
-  @Metadata({ data: "json, name=BackdropImageItemId" })
+  @SpeakeasyMetadata({ data: "json, name=BackdropImageItemId" })
   backdropImageItemId?: string;
 
-  @Metadata({ data: "json, name=BackdropImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=BackdropImageTag" })
   backdropImageTag?: string;
 
-  @Metadata({ data: "json, name=ChannelId" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelId" })
   channelId?: string;
 
-  @Metadata({ data: "json, name=ChannelName" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelName" })
   channelName?: string;
 
-  @Metadata({ data: "json, name=EndDate" })
+  @SpeakeasyMetadata({ data: "json, name=EndDate" })
   endDate?: Date;
 
-  @Metadata({ data: "json, name=EpisodeCount" })
+  @SpeakeasyMetadata({ data: "json, name=EpisodeCount" })
   episodeCount?: number;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=IndexNumber" })
+  @SpeakeasyMetadata({ data: "json, name=IndexNumber" })
   indexNumber?: number;
 
-  @Metadata({ data: "json, name=IsFolder" })
+  @SpeakeasyMetadata({ data: "json, name=IsFolder" })
   isFolder?: boolean;
 
-  @Metadata({ data: "json, name=ItemId" })
+  @SpeakeasyMetadata({ data: "json, name=ItemId" })
   itemId?: string;
 
-  @Metadata({ data: "json, name=MatchedTerm" })
+  @SpeakeasyMetadata({ data: "json, name=MatchedTerm" })
   matchedTerm?: string;
 
-  @Metadata({ data: "json, name=MediaType" })
+  @SpeakeasyMetadata({ data: "json, name=MediaType" })
   mediaType?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ParentIndexNumber" })
+  @SpeakeasyMetadata({ data: "json, name=ParentIndexNumber" })
   parentIndexNumber?: number;
 
-  @Metadata({ data: "json, name=PrimaryImageAspectRatio" })
+  @SpeakeasyMetadata({ data: "json, name=PrimaryImageAspectRatio" })
   primaryImageAspectRatio?: number;
 
-  @Metadata({ data: "json, name=PrimaryImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=PrimaryImageTag" })
   primaryImageTag?: string;
 
-  @Metadata({ data: "json, name=ProductionYear" })
+  @SpeakeasyMetadata({ data: "json, name=ProductionYear" })
   productionYear?: number;
 
-  @Metadata({ data: "json, name=RunTimeTicks" })
+  @SpeakeasyMetadata({ data: "json, name=RunTimeTicks" })
   runTimeTicks?: number;
 
-  @Metadata({ data: "json, name=Series" })
+  @SpeakeasyMetadata({ data: "json, name=Series" })
   series?: string;
 
-  @Metadata({ data: "json, name=SongCount" })
+  @SpeakeasyMetadata({ data: "json, name=SongCount" })
   songCount?: number;
 
-  @Metadata({ data: "json, name=StartDate" })
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
   startDate?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 
-  @Metadata({ data: "json, name=ThumbImageItemId" })
+  @SpeakeasyMetadata({ data: "json, name=ThumbImageItemId" })
   thumbImageItemId?: string;
 
-  @Metadata({ data: "json, name=ThumbImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=ThumbImageTag" })
   thumbImageTag?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 }

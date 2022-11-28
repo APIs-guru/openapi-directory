@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ProvisionedProductPlanDetails
+// Information about a plan.
 type ProvisionedProductPlanDetails struct {
 	CreatedTime            *time.Time                        `json:"CreatedTime,omitempty"`
 	NotificationArns       []string                          `json:"NotificationArns,omitempty"`

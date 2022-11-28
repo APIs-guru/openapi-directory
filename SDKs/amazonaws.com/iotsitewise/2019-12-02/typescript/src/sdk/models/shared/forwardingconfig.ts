@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ForwardingConfigStateEnum } from "./forwardingconfigstateenum";
+
 
 
 // ForwardingConfig
@@ -7,6 +8,6 @@ import { ForwardingConfigStateEnum } from "./forwardingconfigstateenum";
  * The forwarding configuration for a given property.
 **/
 export class ForwardingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state: ForwardingConfigStateEnum;
 }

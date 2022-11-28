@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetHostPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetHostQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=time" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=time" })
   time?: number;
 }
 
 
 export class GetHostSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKeyAuth: shared.SchemeApiKeyAuth;
 }
 
 
 export class GetHostRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetHostPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetHostQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetHostSecurity;
 }
 
 
 export class GetHostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiError?: shared.ApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   host?: shared.Host;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

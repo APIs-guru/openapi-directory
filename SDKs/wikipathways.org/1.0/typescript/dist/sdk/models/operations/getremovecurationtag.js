@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetRemoveCurationTagFormatEnum;
 (function (GetRemoveCurationTagFormatEnum) {
     GetRemoveCurationTagFormatEnum["Json"] = "json";
@@ -38,23 +38,23 @@ var GetRemoveCurationTagQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=auth" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=auth" }),
         __metadata("design:type", String)
     ], GetRemoveCurationTagQueryParams.prototype, "auth", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetRemoveCurationTagQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pwId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pwId" }),
         __metadata("design:type", String)
     ], GetRemoveCurationTagQueryParams.prototype, "pwId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=tagName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tagName" }),
         __metadata("design:type", String)
     ], GetRemoveCurationTagQueryParams.prototype, "tagName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=username" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=username" }),
         __metadata("design:type", String)
     ], GetRemoveCurationTagQueryParams.prototype, "username", void 0);
     return GetRemoveCurationTagQueryParams;
@@ -66,7 +66,7 @@ var GetRemoveCurationTagRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRemoveCurationTagQueryParams)
     ], GetRemoveCurationTagRequest.prototype, "queryParams", void 0);
     return GetRemoveCurationTagRequest;
@@ -78,11 +78,11 @@ var GetRemoveCurationTagResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetRemoveCurationTagResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetRemoveCurationTagResponse.prototype, "statusCode", void 0);
     return GetRemoveCurationTagResponse;

@@ -15,6 +15,8 @@ const (
 	ReplaceAllShapesWithImageRequestReplaceMethodEnumCenterCrop   ReplaceAllShapesWithImageRequestReplaceMethodEnum = "CENTER_CROP"
 )
 
+// ReplaceAllShapesWithImageRequest
+// Replaces all shapes that match the given criteria with the provided image. The images replacing the shapes are rectangular after being inserted into the presentation and do not take on the forms of the shapes.
 type ReplaceAllShapesWithImageRequest struct {
 	ContainsText       *SubstringMatchCriteria                                 `json:"containsText,omitempty"`
 	ImageReplaceMethod *ReplaceAllShapesWithImageRequestImageReplaceMethodEnum `json:"imageReplaceMethod,omitempty"`

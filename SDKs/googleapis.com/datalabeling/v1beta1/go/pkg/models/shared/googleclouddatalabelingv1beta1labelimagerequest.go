@@ -12,6 +12,8 @@ const (
 	GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnumSegmentation        GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum = "SEGMENTATION"
 )
 
+// GoogleCloudDatalabelingV1beta1LabelImageRequest
+// Request message for starting an image labeling task.
 type GoogleCloudDatalabelingV1beta1LabelImageRequest struct {
 	BasicConfig               *GoogleCloudDatalabelingV1beta1HumanAnnotationConfig        `json:"basicConfig,omitempty"`
 	BoundingPolyConfig        *GoogleCloudDatalabelingV1beta1BoundingPolyConfig           `json:"boundingPolyConfig,omitempty"`

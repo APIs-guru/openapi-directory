@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppliedLabelChangeDetail } from "./appliedlabelchangedetail";
+
 
 
 // AppliedLabelChange
@@ -8,6 +8,6 @@ import { AppliedLabelChangeDetail } from "./appliedlabelchangedetail";
  * Label changes that were made on the Target.
 **/
 export class AppliedLabelChange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=changes", elemType: shared.AppliedLabelChangeDetail })
+  @SpeakeasyMetadata({ data: "json, name=changes", elemType: AppliedLabelChangeDetail })
   changes?: AppliedLabelChangeDetail[];
 }

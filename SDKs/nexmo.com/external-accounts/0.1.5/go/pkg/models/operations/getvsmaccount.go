@@ -8,17 +8,9 @@ type GetVsmAccountPathParams struct {
 	ExternalID string `pathParam:"style=simple,explode=false,name=external_id"`
 }
 
-type GetVsmAccountSecurityOption1 struct {
-	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetVsmAccountSecurityOption2 struct {
-	BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
-}
-
 type GetVsmAccountSecurity struct {
-	Option1 *GetVsmAccountSecurityOption1 `security:"option"`
-	Option2 *GetVsmAccountSecurityOption2 `security:"option"`
+	BearerAuth *shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
+	BasicAuth  *shared.SchemeBasicAuth  `security:"scheme,type=http,subtype=basic"`
 }
 
 type GetVsmAccountRequest struct {

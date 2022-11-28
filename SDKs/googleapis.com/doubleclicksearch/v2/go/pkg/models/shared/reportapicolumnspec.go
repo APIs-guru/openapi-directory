@@ -1,5 +1,7 @@
 package shared
 
+// ReportAPIColumnSpec
+// A request object used to create a DoubleClick Search report.
 type ReportAPIColumnSpec struct {
 	ColumnName               *string `json:"columnName,omitempty"`
 	CustomDimensionName      *string `json:"customDimensionName,omitempty"`

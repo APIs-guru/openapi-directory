@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutCoursesContentIdMetadataTopicPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=contentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=contentId" })
   contentId: string;
 }
 
 
 export class PutCoursesContentIdMetadataTopicRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=topic" })
+  @SpeakeasyMetadata({ data: "json, name=topic" })
   topic?: string;
 }
 
 
 export class PutCoursesContentIdMetadataTopicRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutCoursesContentIdMetadataTopicPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: PutCoursesContentIdMetadataTopicRequestBody;
 }
 
 
 export class PutCoursesContentIdMetadataTopicResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   courseMetaResponse?: shared.CourseMetaResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

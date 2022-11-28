@@ -1,5 +1,7 @@
 export * from "./accesstokentoput";
 export * from "./actioninformation";
+export * from "./actiontopost";
+export * from "./actiontopostitem";
 export * from "./additionaldeviceinformation";
 export * from "./autoexportsettings";
 export * from "./customdevicetopost";

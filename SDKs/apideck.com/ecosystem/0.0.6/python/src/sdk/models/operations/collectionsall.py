@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class CollectionsAllPathParams:
-    ecosystem_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ecosystem_id', 'style': 'simple', 'explode': False }})
+    ecosystem_id: str = field(metadata={'path_param': { 'field_name': 'ecosystem_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class CollectionsAllQueryParams:
 
 @dataclass
 class CollectionsAllRequest:
-    path_params: CollectionsAllPathParams = field(default=None)
-    query_params: CollectionsAllQueryParams = field(default=None)
+    path_params: CollectionsAllPathParams = field()
+    query_params: CollectionsAllQueryParams = field()
     
 
 @dataclass
 class CollectionsAllResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_collections_response: Optional[shared.GetCollectionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

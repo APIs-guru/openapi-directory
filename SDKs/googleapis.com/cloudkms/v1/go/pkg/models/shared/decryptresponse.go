@@ -10,6 +10,8 @@ const (
 	DecryptResponseProtectionLevelEnumExternalVpc                DecryptResponseProtectionLevelEnum = "EXTERNAL_VPC"
 )
 
+// DecryptResponse
+// Response message for KeyManagementService.Decrypt.
 type DecryptResponse struct {
 	Plaintext       *string                             `json:"plaintext,omitempty"`
 	PlaintextCrc32c *string                             `json:"plaintextCrc32c,omitempty"`

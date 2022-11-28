@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SqlIntegrationStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Deleting = "DELETING"
-,    Ready = "READY"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Deleting = "DELETING",
+    Ready = "READY"
 }
 
 
@@ -13,18 +14,18 @@ export enum SqlIntegrationStateEnum {
  * Represents the Sql instance integrated with AD.
 **/
 export class SqlIntegration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=sqlInstance" })
+  @SpeakeasyMetadata({ data: "json, name=sqlInstance" })
   sqlInstance?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: SqlIntegrationStateEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

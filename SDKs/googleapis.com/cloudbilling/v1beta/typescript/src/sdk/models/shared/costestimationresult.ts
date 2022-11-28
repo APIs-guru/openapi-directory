@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SegmentCostEstimate } from "./segmentcostestimate";
 import { Sku } from "./sku";
+
 
 
 // CostEstimationResult
@@ -9,12 +9,12 @@ import { Sku } from "./sku";
  * The result of a estimating the costs of a `CostScenario`.
 **/
 export class CostEstimationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode?: string;
 
-  @Metadata({ data: "json, name=segmentCostEstimates", elemType: shared.SegmentCostEstimate })
+  @SpeakeasyMetadata({ data: "json, name=segmentCostEstimates", elemType: SegmentCostEstimate })
   segmentCostEstimates?: SegmentCostEstimate[];
 
-  @Metadata({ data: "json, name=skus", elemType: shared.Sku })
+  @SpeakeasyMetadata({ data: "json, name=skus", elemType: Sku })
   skus?: Sku[];
 }

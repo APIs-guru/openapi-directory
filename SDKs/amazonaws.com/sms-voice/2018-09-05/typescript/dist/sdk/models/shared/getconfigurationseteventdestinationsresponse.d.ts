@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EventDestination } from "./eventdestination";
 /**
  * An object that contains information about an event destination.

@@ -1,5 +1,7 @@
 package shared
 
+// GetSyncResponse
+// Object containing node sync status
 type GetSyncResponse struct {
 	BlockChainHeight *float64 `json:"blockChainHeight,omitempty"`
 	Error            *string  `json:"error,omitempty"`

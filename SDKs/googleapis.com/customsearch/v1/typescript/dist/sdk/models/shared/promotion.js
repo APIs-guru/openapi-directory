@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // PromotionBodyLines
 /**
  * Block object belonging to a promotion.
@@ -34,19 +33,19 @@ var PromotionBodyLines = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=htmlTitle" }),
+        SpeakeasyMetadata({ data: "json, name=htmlTitle" }),
         __metadata("design:type", String)
     ], PromotionBodyLines.prototype, "htmlTitle", void 0);
     __decorate([
-        Metadata({ data: "json, name=link" }),
+        SpeakeasyMetadata({ data: "json, name=link" }),
         __metadata("design:type", String)
     ], PromotionBodyLines.prototype, "link", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], PromotionBodyLines.prototype, "title", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], PromotionBodyLines.prototype, "url", void 0);
     return PromotionBodyLines;
@@ -62,15 +61,15 @@ var PromotionImage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=height" }),
+        SpeakeasyMetadata({ data: "json, name=height" }),
         __metadata("design:type", Number)
     ], PromotionImage.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", String)
     ], PromotionImage.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "json, name=width" }),
+        SpeakeasyMetadata({ data: "json, name=width" }),
         __metadata("design:type", Number)
     ], PromotionImage.prototype, "width", void 0);
     return PromotionImage;
@@ -86,27 +85,27 @@ var Promotion = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bodyLines", elemType: shared.PromotionBodyLines }),
+        SpeakeasyMetadata({ data: "json, name=bodyLines", elemType: PromotionBodyLines }),
         __metadata("design:type", Array)
     ], Promotion.prototype, "bodyLines", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayLink" }),
+        SpeakeasyMetadata({ data: "json, name=displayLink" }),
         __metadata("design:type", String)
     ], Promotion.prototype, "displayLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=htmlTitle" }),
+        SpeakeasyMetadata({ data: "json, name=htmlTitle" }),
         __metadata("design:type", String)
     ], Promotion.prototype, "htmlTitle", void 0);
     __decorate([
-        Metadata({ data: "json, name=image" }),
+        SpeakeasyMetadata({ data: "json, name=image" }),
         __metadata("design:type", PromotionImage)
     ], Promotion.prototype, "image", void 0);
     __decorate([
-        Metadata({ data: "json, name=link" }),
+        SpeakeasyMetadata({ data: "json, name=link" }),
         __metadata("design:type", String)
     ], Promotion.prototype, "link", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], Promotion.prototype, "title", void 0);
     return Promotion;

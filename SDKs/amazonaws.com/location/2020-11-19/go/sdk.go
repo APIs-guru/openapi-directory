@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://geo.{region}.amazonaws.com",
 	"https://geo.{region}.amazonaws.com",
 	"http://geo.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/geo/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AssociateTrackerConsumer - <p>Creates an association between a geofence collection and a tracker resource. This allows the tracker resource to communicate location data to the linked geofence collection. </p> <p>You can associate up to five geofence collections to each tracker resource.</p> <note> <p>Currently not supported — Cross-account configurations, such as creating associations between a tracker resource in one account and a geofence collection in another account.</p> </note>
 func (s *SDK) AssociateTrackerConsumer(ctx context.Context, request operations.AssociateTrackerConsumerRequest) (*operations.AssociateTrackerConsumerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tracking/v0/trackers/{TrackerName}/consumers", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) AssociateTrackerConsumer(ctx context.Context, request operations.A
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -181,8 +208,9 @@ func (s *SDK) AssociateTrackerConsumer(ctx context.Context, request operations.A
 	return res, nil
 }
 
+// BatchDeleteDevicePositionHistory - Deletes the position history of one or more devices from a tracker resource.
 func (s *SDK) BatchDeleteDevicePositionHistory(ctx context.Context, request operations.BatchDeleteDevicePositionHistoryRequest) (*operations.BatchDeleteDevicePositionHistoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tracking/v0/trackers/{TrackerName}/delete-positions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -202,7 +230,7 @@ func (s *SDK) BatchDeleteDevicePositionHistory(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -282,8 +310,9 @@ func (s *SDK) BatchDeleteDevicePositionHistory(ctx context.Context, request oper
 	return res, nil
 }
 
+// BatchDeleteGeofence - <p>Deletes a batch of geofences from a geofence collection.</p> <note> <p>This operation deletes the resource permanently.</p> </note>
 func (s *SDK) BatchDeleteGeofence(ctx context.Context, request operations.BatchDeleteGeofenceRequest) (*operations.BatchDeleteGeofenceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/geofencing/v0/collections/{CollectionName}/delete-geofences", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -303,7 +332,7 @@ func (s *SDK) BatchDeleteGeofence(ctx context.Context, request operations.BatchD
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -383,8 +412,9 @@ func (s *SDK) BatchDeleteGeofence(ctx context.Context, request operations.BatchD
 	return res, nil
 }
 
+// BatchEvaluateGeofences - <p>Evaluates device positions against the geofence geometries from a given geofence collection.</p> <p>This operation always returns an empty response because geofences are asynchronously evaluated. The evaluation determines if the device has entered or exited a geofenced area, and then publishes one of the following events to Amazon EventBridge:</p> <ul> <li> <p> <code>ENTER</code> if Amazon Location determines that the tracked device has entered a geofenced area.</p> </li> <li> <p> <code>EXIT</code> if Amazon Location determines that the tracked device has exited a geofenced area.</p> </li> </ul> <note> <p>The last geofence that a device was observed within is tracked for 30 days after the most recent device position update.</p> </note>
 func (s *SDK) BatchEvaluateGeofences(ctx context.Context, request operations.BatchEvaluateGeofencesRequest) (*operations.BatchEvaluateGeofencesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/geofencing/v0/collections/{CollectionName}/positions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -404,7 +434,7 @@ func (s *SDK) BatchEvaluateGeofences(ctx context.Context, request operations.Bat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -484,8 +514,9 @@ func (s *SDK) BatchEvaluateGeofences(ctx context.Context, request operations.Bat
 	return res, nil
 }
 
+// BatchGetDevicePosition - Lists the latest device positions for requested devices.
 func (s *SDK) BatchGetDevicePosition(ctx context.Context, request operations.BatchGetDevicePositionRequest) (*operations.BatchGetDevicePositionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tracking/v0/trackers/{TrackerName}/get-positions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -505,7 +536,7 @@ func (s *SDK) BatchGetDevicePosition(ctx context.Context, request operations.Bat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -585,8 +616,9 @@ func (s *SDK) BatchGetDevicePosition(ctx context.Context, request operations.Bat
 	return res, nil
 }
 
+// BatchPutGeofence - A batch request for storing geofence geometries into a given geofence collection, or updates the geometry of an existing geofence if a geofence ID is included in the request.
 func (s *SDK) BatchPutGeofence(ctx context.Context, request operations.BatchPutGeofenceRequest) (*operations.BatchPutGeofenceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/geofencing/v0/collections/{CollectionName}/put-geofences", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -606,7 +638,7 @@ func (s *SDK) BatchPutGeofence(ctx context.Context, request operations.BatchPutG
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -686,8 +718,9 @@ func (s *SDK) BatchPutGeofence(ctx context.Context, request operations.BatchPutG
 	return res, nil
 }
 
+// BatchUpdateDevicePosition - <p>Uploads position update data for one or more devices to a tracker resource. Amazon Location uses the data when reporting the last known device position and position history.</p> <note> <p>Only one position update is stored per sample time. Location data is sampled at a fixed rate of one position per 30-second interval and retained for 30 days before it's deleted.</p> </note>
 func (s *SDK) BatchUpdateDevicePosition(ctx context.Context, request operations.BatchUpdateDevicePositionRequest) (*operations.BatchUpdateDevicePositionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tracking/v0/trackers/{TrackerName}/positions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -707,7 +740,7 @@ func (s *SDK) BatchUpdateDevicePosition(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -787,8 +820,9 @@ func (s *SDK) BatchUpdateDevicePosition(ctx context.Context, request operations.
 	return res, nil
 }
 
+// CalculateRoute - <p> <a href="https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html">Calculates a route</a> given the following required parameters: <code>DeparturePostiton</code> and <code>DestinationPosition</code>. Requires that you first <a href="https://docs.aws.amazon.com/location-routes/latest/APIReference/API_CreateRouteCalculator.html">create a route calculator resource</a> </p> <p>By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route.</p> <p>Additional options include:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#departure-time">Specifying a departure time</a> using either <code>DepartureTime</code> or <code>DepartureNow</code>. This calculates a route based on predictive traffic data at the given time. </p> <note> <p>You can't specify both <code>DepartureTime</code> and <code>DepartureNow</code> in a single request. Specifying both parameters returns an error message.</p> </note> </li> <li> <p> <a href="https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#travel-mode">Specifying a travel mode</a> using TravelMode. This lets you specify an additional route preference such as <code>CarModeOptions</code> if traveling by <code>Car</code>, or <code>TruckModeOptions</code> if traveling by <code>Truck</code>.</p> </li> </ul> <p> </p>
 func (s *SDK) CalculateRoute(ctx context.Context, request operations.CalculateRouteRequest) (*operations.CalculateRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/routes/v0/calculators/{CalculatorName}/calculate/route", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -808,7 +842,7 @@ func (s *SDK) CalculateRoute(ctx context.Context, request operations.CalculateRo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -888,8 +922,9 @@ func (s *SDK) CalculateRoute(ctx context.Context, request operations.CalculateRo
 	return res, nil
 }
 
+// CreateGeofenceCollection - Creates a geofence collection, which manages and stores geofences.
 func (s *SDK) CreateGeofenceCollection(ctx context.Context, request operations.CreateGeofenceCollectionRequest) (*operations.CreateGeofenceCollectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/geofencing/v0/collections"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -909,7 +944,7 @@ func (s *SDK) CreateGeofenceCollection(ctx context.Context, request operations.C
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -989,8 +1024,9 @@ func (s *SDK) CreateGeofenceCollection(ctx context.Context, request operations.C
 	return res, nil
 }
 
+// CreateMap - Creates a map resource in your AWS account, which provides map tiles of different styles sourced from global location data providers.
 func (s *SDK) CreateMap(ctx context.Context, request operations.CreateMapRequest) (*operations.CreateMapResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/maps/v0/maps"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1010,7 +1046,7 @@ func (s *SDK) CreateMap(ctx context.Context, request operations.CreateMapRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1090,8 +1126,9 @@ func (s *SDK) CreateMap(ctx context.Context, request operations.CreateMapRequest
 	return res, nil
 }
 
+// CreatePlaceIndex - Creates a place index resource in your AWS account, which supports functions with geospatial data sourced from your chosen data provider.
 func (s *SDK) CreatePlaceIndex(ctx context.Context, request operations.CreatePlaceIndexRequest) (*operations.CreatePlaceIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/places/v0/indexes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1111,7 +1148,7 @@ func (s *SDK) CreatePlaceIndex(ctx context.Context, request operations.CreatePla
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1191,8 +1228,9 @@ func (s *SDK) CreatePlaceIndex(ctx context.Context, request operations.CreatePla
 	return res, nil
 }
 
+// CreateRouteCalculator - <p>Creates a route calculator resource in your AWS account.</p> <p>You can send requests to a route calculator resource to estimate travel time, distance, and get directions. A route calculator sources traffic and road network data from your chosen data provider.</p>
 func (s *SDK) CreateRouteCalculator(ctx context.Context, request operations.CreateRouteCalculatorRequest) (*operations.CreateRouteCalculatorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/routes/v0/calculators"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1212,7 +1250,7 @@ func (s *SDK) CreateRouteCalculator(ctx context.Context, request operations.Crea
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1292,8 +1330,9 @@ func (s *SDK) CreateRouteCalculator(ctx context.Context, request operations.Crea
 	return res, nil
 }
 
+// CreateTracker - Creates a tracker resource in your AWS account, which lets you retrieve current and historical location of devices.
 func (s *SDK) CreateTracker(ctx context.Context, request operations.CreateTrackerRequest) (*operations.CreateTrackerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tracking/v0/trackers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1313,7 +1352,7 @@ func (s *SDK) CreateTracker(ctx context.Context, request operations.CreateTracke
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1393,8 +1432,9 @@ func (s *SDK) CreateTracker(ctx context.Context, request operations.CreateTracke
 	return res, nil
 }
 
+// DeleteGeofenceCollection - <p>Deletes a geofence collection from your AWS account.</p> <note> <p>This operation deletes the resource permanently. If the geofence collection is the target of a tracker resource, the devices will no longer be monitored.</p> </note>
 func (s *SDK) DeleteGeofenceCollection(ctx context.Context, request operations.DeleteGeofenceCollectionRequest) (*operations.DeleteGeofenceCollectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/geofencing/v0/collections/{CollectionName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1404,7 +1444,7 @@ func (s *SDK) DeleteGeofenceCollection(ctx context.Context, request operations.D
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1484,8 +1524,9 @@ func (s *SDK) DeleteGeofenceCollection(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DeleteMap - <p>Deletes a map resource from your AWS account.</p> <note> <p>This operation deletes the resource permanently. If the map is being used in an application, the map may not render.</p> </note>
 func (s *SDK) DeleteMap(ctx context.Context, request operations.DeleteMapRequest) (*operations.DeleteMapResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/maps/v0/maps/{MapName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1495,7 +1536,7 @@ func (s *SDK) DeleteMap(ctx context.Context, request operations.DeleteMapRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1575,8 +1616,9 @@ func (s *SDK) DeleteMap(ctx context.Context, request operations.DeleteMapRequest
 	return res, nil
 }
 
+// DeletePlaceIndex - <p>Deletes a place index resource from your AWS account.</p> <note> <p>This operation deletes the resource permanently.</p> </note>
 func (s *SDK) DeletePlaceIndex(ctx context.Context, request operations.DeletePlaceIndexRequest) (*operations.DeletePlaceIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/places/v0/indexes/{IndexName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1586,7 +1628,7 @@ func (s *SDK) DeletePlaceIndex(ctx context.Context, request operations.DeletePla
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1666,8 +1708,9 @@ func (s *SDK) DeletePlaceIndex(ctx context.Context, request operations.DeletePla
 	return res, nil
 }
 
+// DeleteRouteCalculator - <p>Deletes a route calculator resource from your AWS account.</p> <note> <p>This operation deletes the resource permanently.</p> </note>
 func (s *SDK) DeleteRouteCalculator(ctx context.Context, request operations.DeleteRouteCalculatorRequest) (*operations.DeleteRouteCalculatorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/routes/v0/calculators/{CalculatorName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1677,7 +1720,7 @@ func (s *SDK) DeleteRouteCalculator(ctx context.Context, request operations.Dele
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1757,8 +1800,9 @@ func (s *SDK) DeleteRouteCalculator(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// DeleteTracker - <p>Deletes a tracker resource from your AWS account.</p> <note> <p>This operation deletes the resource permanently. If the tracker resource is in use, you may encounter an error. Make sure that the target resource isn't a dependency for your applications.</p> </note>
 func (s *SDK) DeleteTracker(ctx context.Context, request operations.DeleteTrackerRequest) (*operations.DeleteTrackerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tracking/v0/trackers/{TrackerName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1768,7 +1812,7 @@ func (s *SDK) DeleteTracker(ctx context.Context, request operations.DeleteTracke
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1848,8 +1892,9 @@ func (s *SDK) DeleteTracker(ctx context.Context, request operations.DeleteTracke
 	return res, nil
 }
 
+// DescribeGeofenceCollection - Retrieves the geofence collection details.
 func (s *SDK) DescribeGeofenceCollection(ctx context.Context, request operations.DescribeGeofenceCollectionRequest) (*operations.DescribeGeofenceCollectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/geofencing/v0/collections/{CollectionName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1859,7 +1904,7 @@ func (s *SDK) DescribeGeofenceCollection(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1939,8 +1984,9 @@ func (s *SDK) DescribeGeofenceCollection(ctx context.Context, request operations
 	return res, nil
 }
 
+// DescribeMap - Retrieves the map resource details.
 func (s *SDK) DescribeMap(ctx context.Context, request operations.DescribeMapRequest) (*operations.DescribeMapResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/maps/v0/maps/{MapName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1950,7 +1996,7 @@ func (s *SDK) DescribeMap(ctx context.Context, request operations.DescribeMapReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2030,8 +2076,9 @@ func (s *SDK) DescribeMap(ctx context.Context, request operations.DescribeMapReq
 	return res, nil
 }
 
+// DescribePlaceIndex - Retrieves the place index resource details.
 func (s *SDK) DescribePlaceIndex(ctx context.Context, request operations.DescribePlaceIndexRequest) (*operations.DescribePlaceIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/places/v0/indexes/{IndexName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2041,7 +2088,7 @@ func (s *SDK) DescribePlaceIndex(ctx context.Context, request operations.Describ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2121,8 +2168,9 @@ func (s *SDK) DescribePlaceIndex(ctx context.Context, request operations.Describ
 	return res, nil
 }
 
+// DescribeRouteCalculator - Retrieves the route calculator resource details.
 func (s *SDK) DescribeRouteCalculator(ctx context.Context, request operations.DescribeRouteCalculatorRequest) (*operations.DescribeRouteCalculatorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/routes/v0/calculators/{CalculatorName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2132,7 +2180,7 @@ func (s *SDK) DescribeRouteCalculator(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2212,8 +2260,9 @@ func (s *SDK) DescribeRouteCalculator(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DescribeTracker - Retrieves the tracker resource details.
 func (s *SDK) DescribeTracker(ctx context.Context, request operations.DescribeTrackerRequest) (*operations.DescribeTrackerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tracking/v0/trackers/{TrackerName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2223,7 +2272,7 @@ func (s *SDK) DescribeTracker(ctx context.Context, request operations.DescribeTr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2303,8 +2352,9 @@ func (s *SDK) DescribeTracker(ctx context.Context, request operations.DescribeTr
 	return res, nil
 }
 
+// DisassociateTrackerConsumer - <p>Removes the association between a tracker resource and a geofence collection.</p> <note> <p>Once you unlink a tracker resource from a geofence collection, the tracker positions will no longer be automatically evaluated against geofences.</p> </note>
 func (s *SDK) DisassociateTrackerConsumer(ctx context.Context, request operations.DisassociateTrackerConsumerRequest) (*operations.DisassociateTrackerConsumerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tracking/v0/trackers/{TrackerName}/consumers/{ConsumerArn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2314,7 +2364,7 @@ func (s *SDK) DisassociateTrackerConsumer(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2394,8 +2444,9 @@ func (s *SDK) DisassociateTrackerConsumer(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetDevicePosition - <p>Retrieves a device's most recent position according to its sample time.</p> <note> <p>Device positions are deleted after 30 days.</p> </note>
 func (s *SDK) GetDevicePosition(ctx context.Context, request operations.GetDevicePositionRequest) (*operations.GetDevicePositionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tracking/v0/trackers/{TrackerName}/devices/{DeviceId}/positions/latest", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2405,7 +2456,7 @@ func (s *SDK) GetDevicePosition(ctx context.Context, request operations.GetDevic
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2485,8 +2536,9 @@ func (s *SDK) GetDevicePosition(ctx context.Context, request operations.GetDevic
 	return res, nil
 }
 
+// GetDevicePositionHistory - <p>Retrieves the device position history from a tracker resource within a specified range of time.</p> <note> <p>Device positions are deleted after 30 days.</p> </note>
 func (s *SDK) GetDevicePositionHistory(ctx context.Context, request operations.GetDevicePositionHistoryRequest) (*operations.GetDevicePositionHistoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tracking/v0/trackers/{TrackerName}/devices/{DeviceId}/list-positions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2508,7 +2560,7 @@ func (s *SDK) GetDevicePositionHistory(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2588,8 +2640,9 @@ func (s *SDK) GetDevicePositionHistory(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetGeofence - Retrieves the geofence details from a geofence collection.
 func (s *SDK) GetGeofence(ctx context.Context, request operations.GetGeofenceRequest) (*operations.GetGeofenceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/geofencing/v0/collections/{CollectionName}/geofences/{GeofenceId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2599,7 +2652,7 @@ func (s *SDK) GetGeofence(ctx context.Context, request operations.GetGeofenceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2679,8 +2732,9 @@ func (s *SDK) GetGeofence(ctx context.Context, request operations.GetGeofenceReq
 	return res, nil
 }
 
+// GetMapGlyphs - Retrieves glyphs used to display labels on a map.
 func (s *SDK) GetMapGlyphs(ctx context.Context, request operations.GetMapGlyphsRequest) (*operations.GetMapGlyphsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/maps/v0/maps/{MapName}/glyphs/{FontStack}/{FontUnicodeRange}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2690,7 +2744,7 @@ func (s *SDK) GetMapGlyphs(ctx context.Context, request operations.GetMapGlyphsR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2770,8 +2824,9 @@ func (s *SDK) GetMapGlyphs(ctx context.Context, request operations.GetMapGlyphsR
 	return res, nil
 }
 
+// GetMapSprites - Retrieves the sprite sheet corresponding to a map resource. The sprite sheet is a PNG image paired with a JSON document describing the offsets of individual icons that will be displayed on a rendered map.
 func (s *SDK) GetMapSprites(ctx context.Context, request operations.GetMapSpritesRequest) (*operations.GetMapSpritesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/maps/v0/maps/{MapName}/sprites/{FileName}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2781,7 +2836,7 @@ func (s *SDK) GetMapSprites(ctx context.Context, request operations.GetMapSprite
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2861,8 +2916,9 @@ func (s *SDK) GetMapSprites(ctx context.Context, request operations.GetMapSprite
 	return res, nil
 }
 
+// GetMapStyleDescriptor - <p>Retrieves the map style descriptor from a map resource. </p> <p>The style descriptor contains speciﬁcations on how features render on a map. For example, what data to display, what order to display the data in, and the style for the data. Style descriptors follow the Mapbox Style Specification.</p>
 func (s *SDK) GetMapStyleDescriptor(ctx context.Context, request operations.GetMapStyleDescriptorRequest) (*operations.GetMapStyleDescriptorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/maps/v0/maps/{MapName}/style-descriptor", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2872,7 +2928,7 @@ func (s *SDK) GetMapStyleDescriptor(ctx context.Context, request operations.GetM
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2952,8 +3008,9 @@ func (s *SDK) GetMapStyleDescriptor(ctx context.Context, request operations.GetM
 	return res, nil
 }
 
+// GetMapTile - <p>Retrieves a vector data tile from the map resource. Map tiles are used by clients to render a map. they're addressed using a grid arrangement with an X coordinate, Y coordinate, and Z (zoom) level. </p> <p>The origin (0, 0) is the top left of the map. Increasing the zoom level by 1 doubles both the X and Y dimensions, so a tile containing data for the entire world at (0/0/0) will be split into 4 tiles at zoom 1 (1/0/0, 1/0/1, 1/1/0, 1/1/1).</p>
 func (s *SDK) GetMapTile(ctx context.Context, request operations.GetMapTileRequest) (*operations.GetMapTileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/maps/v0/maps/{MapName}/tiles/{Z}/{X}/{Y}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2963,7 +3020,7 @@ func (s *SDK) GetMapTile(ctx context.Context, request operations.GetMapTileReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3043,8 +3100,9 @@ func (s *SDK) GetMapTile(ctx context.Context, request operations.GetMapTileReque
 	return res, nil
 }
 
+// ListDevicePositions - A batch request to retrieve all device positions.
 func (s *SDK) ListDevicePositions(ctx context.Context, request operations.ListDevicePositionsRequest) (*operations.ListDevicePositionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tracking/v0/trackers/{TrackerName}/list-positions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3066,7 +3124,7 @@ func (s *SDK) ListDevicePositions(ctx context.Context, request operations.ListDe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3136,8 +3194,9 @@ func (s *SDK) ListDevicePositions(ctx context.Context, request operations.ListDe
 	return res, nil
 }
 
+// ListGeofenceCollections - Lists geofence collections in your AWS account.
 func (s *SDK) ListGeofenceCollections(ctx context.Context, request operations.ListGeofenceCollectionsRequest) (*operations.ListGeofenceCollectionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/geofencing/v0/list-collections"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3159,7 +3218,7 @@ func (s *SDK) ListGeofenceCollections(ctx context.Context, request operations.Li
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3229,8 +3288,9 @@ func (s *SDK) ListGeofenceCollections(ctx context.Context, request operations.Li
 	return res, nil
 }
 
+// ListGeofences - Lists geofences stored in a given geofence collection.
 func (s *SDK) ListGeofences(ctx context.Context, request operations.ListGeofencesRequest) (*operations.ListGeofencesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/geofencing/v0/collections/{CollectionName}/list-geofences", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3252,7 +3312,7 @@ func (s *SDK) ListGeofences(ctx context.Context, request operations.ListGeofence
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3332,8 +3392,9 @@ func (s *SDK) ListGeofences(ctx context.Context, request operations.ListGeofence
 	return res, nil
 }
 
+// ListMaps - Lists map resources in your AWS account.
 func (s *SDK) ListMaps(ctx context.Context, request operations.ListMapsRequest) (*operations.ListMapsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/maps/v0/list-maps"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3355,7 +3416,7 @@ func (s *SDK) ListMaps(ctx context.Context, request operations.ListMapsRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3425,8 +3486,9 @@ func (s *SDK) ListMaps(ctx context.Context, request operations.ListMapsRequest) 
 	return res, nil
 }
 
+// ListPlaceIndexes - Lists place index resources in your AWS account.
 func (s *SDK) ListPlaceIndexes(ctx context.Context, request operations.ListPlaceIndexesRequest) (*operations.ListPlaceIndexesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/places/v0/list-indexes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3448,7 +3510,7 @@ func (s *SDK) ListPlaceIndexes(ctx context.Context, request operations.ListPlace
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3518,8 +3580,9 @@ func (s *SDK) ListPlaceIndexes(ctx context.Context, request operations.ListPlace
 	return res, nil
 }
 
+// ListRouteCalculators - Lists route calculator resources in your AWS account.
 func (s *SDK) ListRouteCalculators(ctx context.Context, request operations.ListRouteCalculatorsRequest) (*operations.ListRouteCalculatorsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/routes/v0/list-calculators"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3541,7 +3604,7 @@ func (s *SDK) ListRouteCalculators(ctx context.Context, request operations.ListR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3611,8 +3674,9 @@ func (s *SDK) ListRouteCalculators(ctx context.Context, request operations.ListR
 	return res, nil
 }
 
+// ListTagsForResource - Returns a list of tags that are applied to the specified Amazon Location resource.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{ResourceArn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3622,7 +3686,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3702,8 +3766,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// ListTrackerConsumers - Lists geofence collections currently associated to the given tracker resource.
 func (s *SDK) ListTrackerConsumers(ctx context.Context, request operations.ListTrackerConsumersRequest) (*operations.ListTrackerConsumersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tracking/v0/trackers/{TrackerName}/list-consumers", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3725,7 +3790,7 @@ func (s *SDK) ListTrackerConsumers(ctx context.Context, request operations.ListT
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3805,8 +3870,9 @@ func (s *SDK) ListTrackerConsumers(ctx context.Context, request operations.ListT
 	return res, nil
 }
 
+// ListTrackers - Lists tracker resources in your AWS account.
 func (s *SDK) ListTrackers(ctx context.Context, request operations.ListTrackersRequest) (*operations.ListTrackersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tracking/v0/list-trackers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3828,7 +3894,7 @@ func (s *SDK) ListTrackers(ctx context.Context, request operations.ListTrackersR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3898,8 +3964,9 @@ func (s *SDK) ListTrackers(ctx context.Context, request operations.ListTrackersR
 	return res, nil
 }
 
+// PutGeofence - Stores a geofence geometry in a given geofence collection, or updates the geometry of an existing geofence if a geofence ID is included in the request.
 func (s *SDK) PutGeofence(ctx context.Context, request operations.PutGeofenceRequest) (*operations.PutGeofenceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/geofencing/v0/collections/{CollectionName}/geofences/{GeofenceId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3919,7 +3986,7 @@ func (s *SDK) PutGeofence(ctx context.Context, request operations.PutGeofenceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4009,8 +4076,9 @@ func (s *SDK) PutGeofence(ctx context.Context, request operations.PutGeofenceReq
 	return res, nil
 }
 
+// SearchPlaceIndexForPosition - Reverse geocodes a given coordinate and returns a legible address. Allows you to search for Places or points of interest near a given position.
 func (s *SDK) SearchPlaceIndexForPosition(ctx context.Context, request operations.SearchPlaceIndexForPositionRequest) (*operations.SearchPlaceIndexForPositionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/places/v0/indexes/{IndexName}/search/position", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4030,7 +4098,7 @@ func (s *SDK) SearchPlaceIndexForPosition(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4110,8 +4178,9 @@ func (s *SDK) SearchPlaceIndexForPosition(ctx context.Context, request operation
 	return res, nil
 }
 
+// SearchPlaceIndexForText - <p>Geocodes free-form text, such as an address, name, city, or region to allow you to search for Places or points of interest. </p> <p>Includes the option to apply additional parameters to narrow your list of results.</p> <note> <p>You can search for places near a given position using <code>BiasPosition</code>, or filter results within a bounding box using <code>FilterBBox</code>. Providing both parameters simultaneously returns an error.</p> </note>
 func (s *SDK) SearchPlaceIndexForText(ctx context.Context, request operations.SearchPlaceIndexForTextRequest) (*operations.SearchPlaceIndexForTextResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/places/v0/indexes/{IndexName}/search/text", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4131,7 +4200,7 @@ func (s *SDK) SearchPlaceIndexForText(ctx context.Context, request operations.Se
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4211,8 +4280,9 @@ func (s *SDK) SearchPlaceIndexForText(ctx context.Context, request operations.Se
 	return res, nil
 }
 
+// TagResource - <p>Assigns one or more tags (key-value pairs) to the specified Amazon Location Service resource.</p> <pre><code> &lt;p&gt;Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.&lt;/p&gt; &lt;p&gt;You can use the &lt;code&gt;TagResource&lt;/code&gt; operation with an Amazon Location Service resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the tags already associated with the resource. If you specify a tag key that's already associated with the resource, the new tag value that you specify replaces the previous value for that tag. &lt;/p&gt; &lt;p&gt;You can associate up to 50 tags with a resource.&lt;/p&gt; </code></pre>
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{ResourceArn}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4232,7 +4302,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4312,8 +4382,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Removes one or more tags from the specified Amazon Location resource.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{ResourceArn}#tagKeys", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4325,7 +4396,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4405,8 +4476,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateGeofenceCollection - Updates the specified properties of a given geofence collection.
 func (s *SDK) UpdateGeofenceCollection(ctx context.Context, request operations.UpdateGeofenceCollectionRequest) (*operations.UpdateGeofenceCollectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/geofencing/v0/collections/{CollectionName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4426,7 +4498,7 @@ func (s *SDK) UpdateGeofenceCollection(ctx context.Context, request operations.U
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4506,8 +4578,9 @@ func (s *SDK) UpdateGeofenceCollection(ctx context.Context, request operations.U
 	return res, nil
 }
 
+// UpdateMap - Updates the specified properties of a given map resource.
 func (s *SDK) UpdateMap(ctx context.Context, request operations.UpdateMapRequest) (*operations.UpdateMapResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/maps/v0/maps/{MapName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4527,7 +4600,7 @@ func (s *SDK) UpdateMap(ctx context.Context, request operations.UpdateMapRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4607,8 +4680,9 @@ func (s *SDK) UpdateMap(ctx context.Context, request operations.UpdateMapRequest
 	return res, nil
 }
 
+// UpdatePlaceIndex - Updates the specified properties of a given place index resource.
 func (s *SDK) UpdatePlaceIndex(ctx context.Context, request operations.UpdatePlaceIndexRequest) (*operations.UpdatePlaceIndexResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/places/v0/indexes/{IndexName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4628,7 +4702,7 @@ func (s *SDK) UpdatePlaceIndex(ctx context.Context, request operations.UpdatePla
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4708,8 +4782,9 @@ func (s *SDK) UpdatePlaceIndex(ctx context.Context, request operations.UpdatePla
 	return res, nil
 }
 
+// UpdateRouteCalculator - Updates the specified properties for a given route calculator resource.
 func (s *SDK) UpdateRouteCalculator(ctx context.Context, request operations.UpdateRouteCalculatorRequest) (*operations.UpdateRouteCalculatorResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/routes/v0/calculators/{CalculatorName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4729,7 +4804,7 @@ func (s *SDK) UpdateRouteCalculator(ctx context.Context, request operations.Upda
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4809,8 +4884,9 @@ func (s *SDK) UpdateRouteCalculator(ctx context.Context, request operations.Upda
 	return res, nil
 }
 
+// UpdateTracker - Updates the specified properties of a given tracker resource.
 func (s *SDK) UpdateTracker(ctx context.Context, request operations.UpdateTrackerRequest) (*operations.UpdateTrackerResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tracking/v0/trackers/{TrackerName}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4830,7 +4906,7 @@ func (s *SDK) UpdateTracker(ctx context.Context, request operations.UpdateTracke
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

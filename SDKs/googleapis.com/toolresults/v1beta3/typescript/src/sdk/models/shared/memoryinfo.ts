@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MemoryInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=memoryCapInKibibyte" })
+  @SpeakeasyMetadata({ data: "json, name=memoryCapInKibibyte" })
   memoryCapInKibibyte?: string;
 
-  @Metadata({ data: "json, name=memoryTotalInKibibyte" })
+  @SpeakeasyMetadata({ data: "json, name=memoryTotalInKibibyte" })
   memoryTotalInKibibyte?: string;
 }

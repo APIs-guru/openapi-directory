@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchResponse
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A response object returned from a batch request.
 **/
 export class BatchResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: Map<string, any>;
 
-  @Metadata({ data: "json, name=headers" })
+  @SpeakeasyMetadata({ data: "json, name=headers" })
   headers?: Map<string, any>;
 
-  @Metadata({ data: "json, name=status_code" })
+  @SpeakeasyMetadata({ data: "json, name=status_code" })
   statusCode?: number;
 }

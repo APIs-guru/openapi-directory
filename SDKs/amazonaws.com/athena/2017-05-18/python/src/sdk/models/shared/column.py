@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class Column:
-    comment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Comment' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""Column
+    Contains metadata for a column in a table.
+    """
+    
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    comment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Comment') }})
+    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

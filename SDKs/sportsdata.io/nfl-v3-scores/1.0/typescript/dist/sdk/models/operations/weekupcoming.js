@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var WeekUpcomingFormatEnum;
 (function (WeekUpcomingFormatEnum) {
     WeekUpcomingFormatEnum["Xml"] = "XML";
@@ -34,7 +34,7 @@ var WeekUpcomingPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], WeekUpcomingPathParams.prototype, "format", void 0);
     return WeekUpcomingPathParams;
@@ -46,7 +46,7 @@ var WeekUpcomingRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", WeekUpcomingPathParams)
     ], WeekUpcomingRequest.prototype, "pathParams", void 0);
     return WeekUpcomingRequest;
@@ -58,15 +58,15 @@ var WeekUpcomingResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], WeekUpcomingResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], WeekUpcomingResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], WeekUpcomingResponse.prototype, "weekUpcoming200ApplicationJsonInteger", void 0);
     return WeekUpcomingResponse;

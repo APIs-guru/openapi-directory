@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum InstanceMessageCodeEnum {
     CodeUnspecified = "CODE_UNSPECIFIED",
     ZoneDistributionUnbalanced = "ZONE_DISTRIBUTION_UNBALANCED"

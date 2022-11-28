@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum AddAccountNewAccountCurrencyEnum {
-    Eur = "EUR"
-,    Gbp = "GBP"
+    Eur = "EUR",
+    Gbp = "GBP"
 }
 
 
 export class AddAccountNewAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acceptFeesAndCharges" })
+  @SpeakeasyMetadata({ data: "json, name=acceptFeesAndCharges" })
   acceptFeesAndCharges?: boolean;
 
-  @Metadata({ data: "json, name=accountName" })
+  @SpeakeasyMetadata({ data: "json, name=accountName" })
   accountName?: string;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: AddAccountNewAccountCurrencyEnum;
 }
 
 
 export class AddAccountRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: AddAccountNewAccount;
 }
 
 
 export class AddAccountResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   oneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItems?: shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItems;
 }

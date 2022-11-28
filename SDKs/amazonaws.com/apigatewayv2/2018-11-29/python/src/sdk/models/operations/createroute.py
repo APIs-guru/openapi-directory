@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateRoutePathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,33 +34,33 @@ class CreateRouteRequestBodyAuthorizationTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateRouteRequestBody:
-    api_key_required: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apiKeyRequired' }})
-    authorization_scopes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorizationScopes' }})
-    authorization_type: Optional[CreateRouteRequestBodyAuthorizationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorizationType' }})
-    authorizer_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorizerId' }})
-    model_selection_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modelSelectionExpression' }})
-    operation_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operationName' }})
-    request_models: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestModels' }})
-    request_parameters: Optional[dict[str, shared.ParameterConstraints]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestParameters' }})
-    route_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'routeKey' }})
-    route_response_selection_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'routeResponseSelectionExpression' }})
-    target: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target' }})
+    route_key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('routeKey') }})
+    api_key_required: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('apiKeyRequired') }})
+    authorization_scopes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authorizationScopes') }})
+    authorization_type: Optional[CreateRouteRequestBodyAuthorizationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authorizationType') }})
+    authorizer_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authorizerId') }})
+    model_selection_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('modelSelectionExpression') }})
+    operation_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('operationName') }})
+    request_models: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestModels') }})
+    request_parameters: Optional[dict[str, shared.ParameterConstraints]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestParameters') }})
+    route_response_selection_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('routeResponseSelectionExpression') }})
+    target: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('target') }})
     
 
 @dataclass
 class CreateRouteRequest:
-    path_params: CreateRoutePathParams = field(default=None)
-    headers: CreateRouteHeaders = field(default=None)
-    request: CreateRouteRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateRouteHeaders = field()
+    path_params: CreateRoutePathParams = field()
+    request: CreateRouteRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateRouteResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_route_result: Optional[shared.CreateRouteResult] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

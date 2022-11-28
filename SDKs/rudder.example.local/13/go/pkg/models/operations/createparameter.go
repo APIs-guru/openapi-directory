@@ -4,16 +4,14 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type CreateParameterRequest struct {
-	Request shared.Parameter `request:"mediaType=application/json"`
-}
-
 type CreateParameter200ApplicationJSONActionEnum string
 
 const (
 	CreateParameter200ApplicationJSONActionEnumCreateParameter CreateParameter200ApplicationJSONActionEnum = "createParameter"
 )
 
+// CreateParameter200ApplicationJSONData
+// Parameters
 type CreateParameter200ApplicationJSONData struct {
 	Parameters []shared.Parameter `json:"parameters"`
 }
@@ -30,6 +28,10 @@ type CreateParameter200ApplicationJSON struct {
 	Data   CreateParameter200ApplicationJSONData       `json:"data"`
 	ID     string                                      `json:"id"`
 	Result CreateParameter200ApplicationJSONResultEnum `json:"result"`
+}
+
+type CreateParameterRequest struct {
+	Request shared.Parameter `request:"mediaType=application/json"`
 }
 
 type CreateParameterResponse struct {

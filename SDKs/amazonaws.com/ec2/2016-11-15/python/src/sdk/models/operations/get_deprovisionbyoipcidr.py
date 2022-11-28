@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeprovisionByoipCidrActionEnum(str, Enum):
     DEPROVISION_BYOIP_CIDR = "DeprovisionByoipCidr"
@@ -10,10 +14,10 @@ class GetDeprovisionByoipCidrVersionEnum(str, Enum):
 
 @dataclass
 class GetDeprovisionByoipCidrQueryParams:
-    action: GetDeprovisionByoipCidrActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    cidr: str = field(default=None, metadata={'query_param': { 'field_name': 'Cidr', 'style': 'form', 'explode': True }})
+    action: GetDeprovisionByoipCidrActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cidr: str = field(metadata={'query_param': { 'field_name': 'Cidr', 'style': 'form', 'explode': True }})
+    version: GetDeprovisionByoipCidrVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetDeprovisionByoipCidrVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeprovisionByoipCidrHeaders:
 
 @dataclass
 class GetDeprovisionByoipCidrRequest:
-    query_params: GetDeprovisionByoipCidrQueryParams = field(default=None)
-    headers: GetDeprovisionByoipCidrHeaders = field(default=None)
+    headers: GetDeprovisionByoipCidrHeaders = field()
+    query_params: GetDeprovisionByoipCidrQueryParams = field()
     
 
 @dataclass
 class GetDeprovisionByoipCidrResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

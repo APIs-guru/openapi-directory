@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Color } from "./color";
 import { ColorStyle } from "./colorstyle";
+
 
 
 // WaterfallChartColumnStyle
@@ -8,12 +9,12 @@ import { ColorStyle } from "./colorstyle";
  * Styles for a waterfall chart column.
 **/
 export class WaterfallChartColumnStyle extends SpeakeasyBase {
-  @Metadata({ data: "json, name=color" })
+  @SpeakeasyMetadata({ data: "json, name=color" })
   color?: Color;
 
-  @Metadata({ data: "json, name=colorStyle" })
+  @SpeakeasyMetadata({ data: "json, name=colorStyle" })
   colorStyle?: ColorStyle;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 }

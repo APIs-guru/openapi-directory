@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * The RxNorm concept that the entity could refer to, along with a score indicating the likelihood of the match.
 **/

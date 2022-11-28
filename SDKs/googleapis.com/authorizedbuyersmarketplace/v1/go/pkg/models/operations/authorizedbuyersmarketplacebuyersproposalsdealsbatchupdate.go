@@ -30,7 +30,7 @@ type AuthorizedbuyersmarketplaceBuyersProposalsDealsBatchUpdateSecurity struct {
 type AuthorizedbuyersmarketplaceBuyersProposalsDealsBatchUpdateRequest struct {
 	PathParams  AuthorizedbuyersmarketplaceBuyersProposalsDealsBatchUpdatePathParams
 	QueryParams AuthorizedbuyersmarketplaceBuyersProposalsDealsBatchUpdateQueryParams
-	Request     *shared.BatchUpdateDealsRequest `request:"mediaType=application/json"`
+	Request     *shared.BatchUpdateDealsRequestInput `request:"mediaType=application/json"`
 	Security    AuthorizedbuyersmarketplaceBuyersProposalsDealsBatchUpdateSecurity
 }
 

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PartitionConfig } from "./partitionconfig";
 import { ReservationConfig } from "./reservationconfig";
 import { RetentionConfig } from "./retentionconfig";
+
 
 
 // Topic
@@ -9,15 +10,15 @@ import { RetentionConfig } from "./retentionconfig";
  * Metadata about a topic resource.
 **/
 export class Topic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=partitionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=partitionConfig" })
   partitionConfig?: PartitionConfig;
 
-  @Metadata({ data: "json, name=reservationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=reservationConfig" })
   reservationConfig?: ReservationConfig;
 
-  @Metadata({ data: "json, name=retentionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=retentionConfig" })
   retentionConfig?: RetentionConfig;
 }

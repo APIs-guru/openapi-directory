@@ -1,5 +1,7 @@
 package shared
 
+// ContactDetail
+// ContactDetail includes the following elements.
 type ContactDetail struct {
 	AddressLine1     *string          `json:"AddressLine1,omitempty"`
 	AddressLine2     *string          `json:"AddressLine2,omitempty"`

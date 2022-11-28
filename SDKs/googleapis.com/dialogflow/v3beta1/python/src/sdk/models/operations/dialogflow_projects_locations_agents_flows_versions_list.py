@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsVersionsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class DialogflowProjectsLocationsAgentsFlowsVersionsListQueryParams:
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsVersionsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsVersionsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class DialogflowProjectsLocationsAgentsFlowsVersionsListSecurity:
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsVersionsListRequest:
-    path_params: DialogflowProjectsLocationsAgentsFlowsVersionsListPathParams = field(default=None)
-    query_params: DialogflowProjectsLocationsAgentsFlowsVersionsListQueryParams = field(default=None)
-    security: DialogflowProjectsLocationsAgentsFlowsVersionsListSecurity = field(default=None)
+    path_params: DialogflowProjectsLocationsAgentsFlowsVersionsListPathParams = field()
+    query_params: DialogflowProjectsLocationsAgentsFlowsVersionsListQueryParams = field()
+    security: DialogflowProjectsLocationsAgentsFlowsVersionsListSecurity = field()
     
 
 @dataclass
 class DialogflowProjectsLocationsAgentsFlowsVersionsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_dialogflow_cx_v3beta1_list_versions_response: Optional[shared.GoogleCloudDialogflowCxV3beta1ListVersionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

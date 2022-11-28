@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRecommendationengineV1beta1CreatePredictionAPIKeyRegistrationRequest
+// Request message for the `CreatePredictionApiKeyRegistration` method.
 type GoogleCloudRecommendationengineV1beta1CreatePredictionAPIKeyRegistrationRequest struct {
 	PredictionAPIKeyRegistration *GoogleCloudRecommendationengineV1beta1PredictionAPIKeyRegistration `json:"predictionApiKeyRegistration,omitempty"`
 }

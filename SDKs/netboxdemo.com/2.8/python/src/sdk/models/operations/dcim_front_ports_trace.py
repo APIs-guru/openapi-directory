@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class DcimFrontPortsTracePathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DcimFrontPortsTraceRequest:
-    path_params: DcimFrontPortsTracePathParams = field(default=None)
+    path_params: DcimFrontPortsTracePathParams = field()
     
 
 @dataclass
 class DcimFrontPortsTraceResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     front_port: Optional[shared.FrontPort] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SelfMfaTypeUnregisterRequestMfaTypeEnum(str, Enum):
     SMS = "SMS"
@@ -11,5 +12,5 @@ class SelfMfaTypeUnregisterRequestMfaTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SelfMfaTypeUnregisterRequest:
-    mfa_type: SelfMfaTypeUnregisterRequestMfaTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mfaType' }})
+    mfa_type: SelfMfaTypeUnregisterRequestMfaTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('mfaType') }})
     

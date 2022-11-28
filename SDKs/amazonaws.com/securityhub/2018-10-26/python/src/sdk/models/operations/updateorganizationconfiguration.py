@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -17,22 +21,22 @@ class UpdateOrganizationConfigurationHeaders:
 @dataclass_json
 @dataclass
 class UpdateOrganizationConfigurationRequestBody:
-    auto_enable: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AutoEnable' }})
+    auto_enable: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AutoEnable') }})
     
 
 @dataclass
 class UpdateOrganizationConfigurationRequest:
-    headers: UpdateOrganizationConfigurationHeaders = field(default=None)
-    request: UpdateOrganizationConfigurationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateOrganizationConfigurationHeaders = field()
+    request: UpdateOrganizationConfigurationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateOrganizationConfigurationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_organization_configuration_response: Optional[dict[str, Any]] = field(default=None)
     

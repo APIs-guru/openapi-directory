@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/marketplace/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,32 +17,59 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/marketplace/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def cancel_change_set(self, request: operations.CancelChangeSetRequest) -> operations.CancelChangeSetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Used to cancel an open change request. Must be sent before the status of the request changes to <code>APPLYING</code>, the final stage of completing your change request. You can describe a change during the 60-day request history retention period for API calls.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/CancelChangeSet#catalog&changeSetId"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PATCH", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -78,17 +108,18 @@ class SDK:
 
     
     def describe_change_set(self, request: operations.DescribeChangeSetRequest) -> operations.DescribeChangeSetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Provides information about a given change set.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/DescribeChangeSet#catalog&changeSetId"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -123,17 +154,18 @@ class SDK:
 
     
     def describe_entity(self, request: operations.DescribeEntityRequest) -> operations.DescribeEntityResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the metadata and content of the entity.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/DescribeEntity#catalog&entityId"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -172,24 +204,23 @@ class SDK:
 
     
     def list_change_sets(self, request: operations.ListChangeSetsRequest) -> operations.ListChangeSetsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Returns the list of change sets owned by the account being used to make the call. You can filter this list by providing any combination of <code>entityId</code>, <code>ChangeSetName</code>, and status. If you provide more than one filter, the API operation applies a logical AND between the filters.</p> <p>You can describe a change during the 60-day request history retention period for API calls.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ListChangeSets"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -220,24 +251,23 @@ class SDK:
 
     
     def list_entities(self, request: operations.ListEntitiesRequest) -> operations.ListEntitiesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Provides the list of entities of a given type.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ListEntities"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -272,22 +302,22 @@ class SDK:
 
     
     def start_change_set(self, request: operations.StartChangeSetRequest) -> operations.StartChangeSetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>This operation allows you to request changes for your entities. Within a single ChangeSet, you cannot start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If you try to start a ChangeSet containing a change against an entity that is already locked, you will receive a <code>ResourceInUseException</code>.</p> <p>For example, you cannot start the ChangeSet described in the <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples\">example</a> later in this topic, because it contains two changes to execute the same change type (<code>AddRevisions</code>) against the same entity (<code>entity-id@1)</code>.</p> <p>For more information about working with change sets, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets\"> Working with change sets</a>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/StartChangeSet"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

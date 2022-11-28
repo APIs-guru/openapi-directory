@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsSnsTopicSubscription } from "./awssnstopicsubscription";
+
 
 
 // AwsSnsTopicDetails
@@ -8,15 +8,15 @@ import { AwsSnsTopicSubscription } from "./awssnstopicsubscription";
  * A wrapper type for the topic's ARN.
 **/
 export class AwsSnsTopicDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=KmsMasterKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsMasterKeyId" })
   kmsMasterKeyId?: string;
 
-  @Metadata({ data: "json, name=Owner" })
+  @SpeakeasyMetadata({ data: "json, name=Owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=Subscription", elemType: shared.AwsSnsTopicSubscription })
+  @SpeakeasyMetadata({ data: "json, name=Subscription", elemType: AwsSnsTopicSubscription })
   subscription?: AwsSnsTopicSubscription[];
 
-  @Metadata({ data: "json, name=TopicName" })
+  @SpeakeasyMetadata({ data: "json, name=TopicName" })
   topicName?: string;
 }

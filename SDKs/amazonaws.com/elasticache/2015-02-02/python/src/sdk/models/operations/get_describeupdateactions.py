@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetDescribeUpdateActionsActionEnum(str, Enum):
@@ -11,6 +12,10 @@ class GetDescribeUpdateActionsActionEnum(str, Enum):
 
 @dataclass
 class GetDescribeUpdateActionsServiceUpdateTimeRange:
+    r"""GetDescribeUpdateActionsServiceUpdateTimeRange
+    Filters update actions from the service updates that are in available status during the time range.
+    """
+    
     end_time: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'EndTime' }})
     start_time: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'StartTime' }})
     
@@ -20,7 +25,8 @@ class GetDescribeUpdateActionsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeUpdateActionsQueryParams:
-    action: GetDescribeUpdateActionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeUpdateActionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeUpdateActionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cache_cluster_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'CacheClusterIds', 'style': 'form', 'explode': True }})
     engine: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Engine', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
@@ -31,7 +37,6 @@ class GetDescribeUpdateActionsQueryParams:
     service_update_time_range: Optional[GetDescribeUpdateActionsServiceUpdateTimeRange] = field(default=None, metadata={'query_param': { 'field_name': 'ServiceUpdateTimeRange', 'style': 'form', 'explode': True }})
     show_node_level_update_status: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'ShowNodeLevelUpdateStatus', 'style': 'form', 'explode': True }})
     update_action_status: Optional[List[shared.UpdateActionStatusEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'UpdateActionStatus', 'style': 'form', 'explode': True }})
-    version: GetDescribeUpdateActionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -47,13 +52,13 @@ class GetDescribeUpdateActionsHeaders:
 
 @dataclass
 class GetDescribeUpdateActionsRequest:
-    query_params: GetDescribeUpdateActionsQueryParams = field(default=None)
-    headers: GetDescribeUpdateActionsHeaders = field(default=None)
+    headers: GetDescribeUpdateActionsHeaders = field()
+    query_params: GetDescribeUpdateActionsQueryParams = field()
     
 
 @dataclass
 class GetDescribeUpdateActionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

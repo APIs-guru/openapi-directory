@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDisassociateClientVpnTargetNetworkActionEnum(str, Enum):
     DISASSOCIATE_CLIENT_VPN_TARGET_NETWORK = "DisassociateClientVpnTargetNetwork"
@@ -10,11 +14,11 @@ class GetDisassociateClientVpnTargetNetworkVersionEnum(str, Enum):
 
 @dataclass
 class GetDisassociateClientVpnTargetNetworkQueryParams:
-    action: GetDisassociateClientVpnTargetNetworkActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    association_id: str = field(default=None, metadata={'query_param': { 'field_name': 'AssociationId', 'style': 'form', 'explode': True }})
-    client_vpn_endpoint_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ClientVpnEndpointId', 'style': 'form', 'explode': True }})
+    action: GetDisassociateClientVpnTargetNetworkActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    association_id: str = field(metadata={'query_param': { 'field_name': 'AssociationId', 'style': 'form', 'explode': True }})
+    client_vpn_endpoint_id: str = field(metadata={'query_param': { 'field_name': 'ClientVpnEndpointId', 'style': 'form', 'explode': True }})
+    version: GetDisassociateClientVpnTargetNetworkVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetDisassociateClientVpnTargetNetworkVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDisassociateClientVpnTargetNetworkHeaders:
 
 @dataclass
 class GetDisassociateClientVpnTargetNetworkRequest:
-    query_params: GetDisassociateClientVpnTargetNetworkQueryParams = field(default=None)
-    headers: GetDisassociateClientVpnTargetNetworkHeaders = field(default=None)
+    headers: GetDisassociateClientVpnTargetNetworkHeaders = field()
+    query_params: GetDisassociateClientVpnTargetNetworkQueryParams = field()
     
 
 @dataclass
 class GetDisassociateClientVpnTargetNetworkResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

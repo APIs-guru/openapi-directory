@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EeCreatePinRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessToken" })
+  @SpeakeasyMetadata({ data: "json, name=accessToken" })
   accessToken: string;
 
-  @Metadata({ data: "json, name=msisdn" })
+  @SpeakeasyMetadata({ data: "json, name=msisdn" })
   msisdn: string;
 
-  @Metadata({ data: "json, name=trackingHeader" })
+  @SpeakeasyMetadata({ data: "json, name=trackingHeader" })
   trackingHeader?: string;
 }

@@ -11,6 +11,8 @@ const (
 	GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnumCustomDateRange        GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum = "CUSTOM_DATE_RANGE"
 )
 
+// GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfig
+// The configuration that was applied to generate the result.
 type GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfig struct {
 	Aggregation    *GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum `json:"aggregation,omitempty"`
 	CustomGrouping *GoogleCloudBeyondcorpSaasplatformInsightsV1alphaCustomGrouping               `json:"customGrouping,omitempty"`

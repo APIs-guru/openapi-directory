@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class FailedIpn extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: string;
 
-  @Metadata({ data: "json, name=amount" })
+  @SpeakeasyMetadata({ data: "json, name=amount" })
   amount: string;
 
-  @Metadata({ data: "json, name=contractaddress" })
+  @SpeakeasyMetadata({ data: "json, name=contractaddress" })
   contractaddress: string;
 
-  @Metadata({ data: "json, name=ethereumaddress" })
+  @SpeakeasyMetadata({ data: "json, name=ethereumaddress" })
   ethereumaddress: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

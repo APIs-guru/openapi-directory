@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ProjectStatusRequestColorEnum(str, Enum):
     GREEN = "green"
@@ -11,11 +13,9 @@ class ProjectStatusRequestColorEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class ProjectStatusRequest:
-    color: ProjectStatusRequestColorEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'color' }})
-    gid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gid' }})
-    html_text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_text' }})
-    resource_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_type' }})
-    text: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'text' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+class ProjectStatusRequestInput:
+    color: ProjectStatusRequestColorEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('color') }})
+    text: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('text') }})
+    html_text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('html_text') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     

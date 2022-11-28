@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OutputContext
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The specification of an output context that is set when an intent is fulfilled.
 **/
 export class OutputContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=timeToLiveInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=timeToLiveInSeconds" })
   timeToLiveInSeconds: number;
 
-  @Metadata({ data: "json, name=turnsToLive" })
+  @SpeakeasyMetadata({ data: "json, name=turnsToLive" })
   turnsToLive: number;
 }

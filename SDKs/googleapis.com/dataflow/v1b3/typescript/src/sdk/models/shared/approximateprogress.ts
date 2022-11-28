@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Position } from "./position";
+
 
 
 // ApproximateProgress
@@ -7,12 +8,12 @@ import { Position } from "./position";
  * Obsolete in favor of ApproximateReportedProgress and ApproximateSplitRequest.
 **/
 export class ApproximateProgress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=percentComplete" })
+  @SpeakeasyMetadata({ data: "json, name=percentComplete" })
   percentComplete?: number;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: Position;
 
-  @Metadata({ data: "json, name=remainingTime" })
+  @SpeakeasyMetadata({ data: "json, name=remainingTime" })
   remainingTime?: string;
 }

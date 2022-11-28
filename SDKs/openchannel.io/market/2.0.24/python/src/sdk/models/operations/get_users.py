@@ -12,12 +12,12 @@ class GetUsersQueryParams:
 
 @dataclass
 class GetUsersRequest:
-    query_params: GetUsersQueryParams = field(default=None)
+    query_params: GetUsersQueryParams = field()
     
 
 @dataclass
 class GetUsersResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

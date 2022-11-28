@@ -13,12 +13,12 @@ class GetSchoolAdminsQueryParams:
 
 @dataclass
 class GetSchoolAdminsRequest:
-    query_params: GetSchoolAdminsQueryParams = field(default=None)
+    query_params: GetSchoolAdminsQueryParams = field()
     
 
 @dataclass
 class GetSchoolAdminsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     school_admins_response: Optional[shared.SchoolAdminsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

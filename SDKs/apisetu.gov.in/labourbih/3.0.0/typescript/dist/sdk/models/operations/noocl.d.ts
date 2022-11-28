@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class NooclRequestBodyCertificateParameters extends SpeakeasyBase {
     refNo: string;
@@ -16,10 +16,6 @@ export declare class NooclRequestBody extends SpeakeasyBase {
 export declare class NooclSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class NooclRequest extends SpeakeasyBase {
-    request?: NooclRequestBody;
-    security: NooclSecurity;
 }
 export declare enum Noocl400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Noocl504ApplicationJsonErrorDescriptionEnum {
 export declare class Noocl504ApplicationJson extends SpeakeasyBase {
     error?: Noocl504ApplicationJsonErrorEnum;
     errorDescription?: Noocl504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class NooclRequest extends SpeakeasyBase {
+    request?: NooclRequestBody;
+    security: NooclSecurity;
 }
 export declare class NooclResponse extends SpeakeasyBase {
     contentType: string;

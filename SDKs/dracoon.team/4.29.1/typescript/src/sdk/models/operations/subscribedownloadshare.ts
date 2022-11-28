@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SubscribeDownloadSharePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=share_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=share_id" })
   shareId: number;
 }
 
 
 export class SubscribeDownloadShareHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
   xSdsAuthToken?: string;
 }
 
 
 export class SubscribeDownloadShareRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SubscribeDownloadSharePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: SubscribeDownloadShareHeaders;
 }
 
 
 export class SubscribeDownloadShareResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   subscribedDownloadShare?: shared.SubscribedDownloadShare;
 }

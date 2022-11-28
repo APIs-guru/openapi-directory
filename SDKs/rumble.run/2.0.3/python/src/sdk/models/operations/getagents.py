@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetAgentsSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetAgentsRequest:
-    security: GetAgentsSecurity = field(default=None)
+    security: GetAgentsSecurity = field()
     
 
 @dataclass
 class GetAgentsResponse:
+    content_type: str = field()
+    status_code: int = field()
     agents: Optional[List[shared.Agent]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

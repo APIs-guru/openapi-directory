@@ -36,15 +36,15 @@ type DcimRearPortTemplatesListQueryParams struct {
 	TypeN         *string `queryParam:"style=form,explode=true,name=type__n"`
 }
 
-type DcimRearPortTemplatesListRequest struct {
-	QueryParams DcimRearPortTemplatesListQueryParams
-}
-
 type DcimRearPortTemplatesList200ApplicationJSON struct {
 	Count    int64                     `json:"count"`
 	Next     *string                   `json:"next,omitempty"`
 	Previous *string                   `json:"previous,omitempty"`
 	Results  []shared.RearPortTemplate `json:"results"`
+}
+
+type DcimRearPortTemplatesListRequest struct {
+	QueryParams DcimRearPortTemplatesListQueryParams
 }
 
 type DcimRearPortTemplatesListResponse struct {

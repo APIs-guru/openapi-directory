@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResultSet } from "./resultset";
 
 
+
 export class GetScreenDataResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=results", elemType: shared.ResultSet })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: ResultSet })
   results: Map<string, ResultSet>;
 
-  @Metadata({ data: "json, name=workbookCursor" })
+  @SpeakeasyMetadata({ data: "json, name=workbookCursor" })
   workbookCursor: number;
 }

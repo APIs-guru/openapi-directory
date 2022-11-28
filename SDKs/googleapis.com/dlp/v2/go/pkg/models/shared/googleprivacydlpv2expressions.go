@@ -7,6 +7,8 @@ const (
 	GooglePrivacyDlpV2ExpressionsLogicalOperatorEnumAnd                        GooglePrivacyDlpV2ExpressionsLogicalOperatorEnum = "AND"
 )
 
+// GooglePrivacyDlpV2Expressions
+// An expression, consisting of an operator and conditions.
 type GooglePrivacyDlpV2Expressions struct {
 	Conditions      *GooglePrivacyDlpV2Conditions                     `json:"conditions,omitempty"`
 	LogicalOperator *GooglePrivacyDlpV2ExpressionsLogicalOperatorEnum `json:"logicalOperator,omitempty"`

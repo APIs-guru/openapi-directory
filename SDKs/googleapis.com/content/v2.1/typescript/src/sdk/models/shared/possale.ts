@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Price } from "./price";
+
 
 
 // PosSale
@@ -7,33 +8,33 @@ import { Price } from "./price";
  * The change of the available quantity of an item at the given store.
 **/
 export class PosSale extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contentLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=contentLanguage" })
   contentLanguage?: string;
 
-  @Metadata({ data: "json, name=gtin" })
+  @SpeakeasyMetadata({ data: "json, name=gtin" })
   gtin?: string;
 
-  @Metadata({ data: "json, name=itemId" })
+  @SpeakeasyMetadata({ data: "json, name=itemId" })
   itemId?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: Price;
 
-  @Metadata({ data: "json, name=quantity" })
+  @SpeakeasyMetadata({ data: "json, name=quantity" })
   quantity?: string;
 
-  @Metadata({ data: "json, name=saleId" })
+  @SpeakeasyMetadata({ data: "json, name=saleId" })
   saleId?: string;
 
-  @Metadata({ data: "json, name=storeCode" })
+  @SpeakeasyMetadata({ data: "json, name=storeCode" })
   storeCode?: string;
 
-  @Metadata({ data: "json, name=targetCountry" })
+  @SpeakeasyMetadata({ data: "json, name=targetCountry" })
   targetCountry?: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: string;
 }

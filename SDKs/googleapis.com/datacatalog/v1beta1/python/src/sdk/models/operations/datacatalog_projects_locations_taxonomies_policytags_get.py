@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DatacatalogProjectsLocationsTaxonomiesPolicyTagsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class DatacatalogProjectsLocationsTaxonomiesPolicyTagsGetQueryParams:
 
 @dataclass
 class DatacatalogProjectsLocationsTaxonomiesPolicyTagsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DatacatalogProjectsLocationsTaxonomiesPolicyTagsGetRequest:
-    path_params: DatacatalogProjectsLocationsTaxonomiesPolicyTagsGetPathParams = field(default=None)
-    query_params: DatacatalogProjectsLocationsTaxonomiesPolicyTagsGetQueryParams = field(default=None)
-    security: DatacatalogProjectsLocationsTaxonomiesPolicyTagsGetSecurity = field(default=None)
+    path_params: DatacatalogProjectsLocationsTaxonomiesPolicyTagsGetPathParams = field()
+    query_params: DatacatalogProjectsLocationsTaxonomiesPolicyTagsGetQueryParams = field()
+    security: DatacatalogProjectsLocationsTaxonomiesPolicyTagsGetSecurity = field()
     
 
 @dataclass
 class DatacatalogProjectsLocationsTaxonomiesPolicyTagsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_datacatalog_v1beta1_policy_tag: Optional[shared.GoogleCloudDatacatalogV1beta1PolicyTag] = field(default=None)
-    status_code: int = field(default=None)
     

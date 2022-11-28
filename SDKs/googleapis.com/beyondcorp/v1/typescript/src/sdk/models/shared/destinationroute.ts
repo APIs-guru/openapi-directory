@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DestinationRoute
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The setting used to configure ClientGateways. It is adding routes to the client's routing table after the connection is established.
 **/
 export class DestinationRoute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=netmask" })
+  @SpeakeasyMetadata({ data: "json, name=netmask" })
   netmask?: string;
 }

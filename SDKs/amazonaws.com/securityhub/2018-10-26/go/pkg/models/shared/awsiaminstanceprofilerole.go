@@ -1,5 +1,7 @@
 package shared
 
+// AwsIamInstanceProfileRole
+// Information about a role associated with an instance profile.
 type AwsIamInstanceProfileRole struct {
 	Arn                      *string `json:"Arn,omitempty"`
 	AssumeRolePolicyDocument *string `json:"AssumeRolePolicyDocument,omitempty"`

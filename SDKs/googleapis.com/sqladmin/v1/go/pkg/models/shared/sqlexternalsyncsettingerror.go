@@ -33,6 +33,8 @@ const (
 	SQLExternalSyncSettingErrorTypeEnumLimitedSupportTables                       SQLExternalSyncSettingErrorTypeEnum = "LIMITED_SUPPORT_TABLES"
 )
 
+// SQLExternalSyncSettingError
+// External primary instance migration setting error/warning.
 type SQLExternalSyncSettingError struct {
 	Detail *string                              `json:"detail,omitempty"`
 	Kind   *string                              `json:"kind,omitempty"`

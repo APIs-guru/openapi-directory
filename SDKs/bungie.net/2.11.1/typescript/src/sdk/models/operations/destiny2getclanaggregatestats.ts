@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Destiny2GetClanAggregateStatsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=groupId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupId" })
   groupId: number;
 }
 
 
 export class Destiny2GetClanAggregateStatsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=modes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modes" })
   modes?: string;
 }
 
 
 export class Destiny2GetClanAggregateStatsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: Destiny2GetClanAggregateStatsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: Destiny2GetClanAggregateStatsQueryParams;
 }
 
 
 export class Destiny2GetClanAggregateStatsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

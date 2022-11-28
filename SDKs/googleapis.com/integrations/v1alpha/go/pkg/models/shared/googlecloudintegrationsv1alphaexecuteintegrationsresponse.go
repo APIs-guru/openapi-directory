@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudIntegrationsV1alphaExecuteIntegrationsResponse
+// The response for executing an integration.
 type GoogleCloudIntegrationsV1alphaExecuteIntegrationsResponse struct {
 	EventParameters  *EnterpriseCrmFrontendsEventbusProtoEventParameters `json:"eventParameters,omitempty"`
 	ExecutionFailed  *bool                                               `json:"executionFailed,omitempty"`

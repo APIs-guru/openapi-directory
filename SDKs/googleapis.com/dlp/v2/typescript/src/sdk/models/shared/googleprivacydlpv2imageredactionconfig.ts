@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2InfoType } from "./googleprivacydlpv2infotype";
 import { GooglePrivacyDlpV2Color } from "./googleprivacydlpv2color";
+
 
 
 // GooglePrivacyDlpV2ImageRedactionConfig
@@ -8,12 +9,12 @@ import { GooglePrivacyDlpV2Color } from "./googleprivacydlpv2color";
  * Configuration for determining how redaction of images should occur.
 **/
 export class GooglePrivacyDlpV2ImageRedactionConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=infoType" })
+  @SpeakeasyMetadata({ data: "json, name=infoType" })
   infoType?: GooglePrivacyDlpV2InfoType;
 
-  @Metadata({ data: "json, name=redactAllText" })
+  @SpeakeasyMetadata({ data: "json, name=redactAllText" })
   redactAllText?: boolean;
 
-  @Metadata({ data: "json, name=redactionColor" })
+  @SpeakeasyMetadata({ data: "json, name=redactionColor" })
   redactionColor?: GooglePrivacyDlpV2Color;
 }

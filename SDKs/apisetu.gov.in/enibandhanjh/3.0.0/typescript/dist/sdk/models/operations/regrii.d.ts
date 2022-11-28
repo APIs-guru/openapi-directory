@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class RegriiRequestBodyCertificateParameters extends SpeakeasyBase {
     fullName: string;
@@ -18,10 +18,6 @@ export declare class RegriiRequestBody extends SpeakeasyBase {
 export declare class RegriiSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class RegriiRequest extends SpeakeasyBase {
-    request?: RegriiRequestBody;
-    security: RegriiSecurity;
 }
 export declare enum Regrii400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -104,6 +100,10 @@ export declare enum Regrii504ApplicationJsonErrorDescriptionEnum {
 export declare class Regrii504ApplicationJson extends SpeakeasyBase {
     error?: Regrii504ApplicationJsonErrorEnum;
     errorDescription?: Regrii504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class RegriiRequest extends SpeakeasyBase {
+    request?: RegriiRequestBody;
+    security: RegriiSecurity;
 }
 export declare class RegriiResponse extends SpeakeasyBase {
     contentType: string;

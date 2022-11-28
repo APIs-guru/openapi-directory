@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListMfaDeviceTagsActionEnum(str, Enum):
     LIST_MFA_DEVICE_TAGS = "ListMFADeviceTags"
@@ -10,11 +14,11 @@ class GetListMfaDeviceTagsVersionEnum(str, Enum):
 
 @dataclass
 class GetListMfaDeviceTagsQueryParams:
-    action: GetListMfaDeviceTagsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetListMfaDeviceTagsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    serial_number: str = field(metadata={'query_param': { 'field_name': 'SerialNumber', 'style': 'form', 'explode': True }})
+    version: GetListMfaDeviceTagsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
-    serial_number: str = field(default=None, metadata={'query_param': { 'field_name': 'SerialNumber', 'style': 'form', 'explode': True }})
-    version: GetListMfaDeviceTagsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetListMfaDeviceTagsHeaders:
 
 @dataclass
 class GetListMfaDeviceTagsRequest:
-    query_params: GetListMfaDeviceTagsQueryParams = field(default=None)
-    headers: GetListMfaDeviceTagsHeaders = field(default=None)
+    headers: GetListMfaDeviceTagsHeaders = field()
+    query_params: GetListMfaDeviceTagsQueryParams = field()
     
 
 @dataclass
 class GetListMfaDeviceTagsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

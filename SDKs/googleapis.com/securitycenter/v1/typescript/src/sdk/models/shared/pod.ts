@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Container } from "./container";
 import { Label } from "./label";
+
 
 
 // Pod
@@ -9,15 +9,15 @@ import { Label } from "./label";
  * Kubernetes Pod.
 **/
 export class Pod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containers", elemType: shared.Container })
+  @SpeakeasyMetadata({ data: "json, name=containers", elemType: Container })
   containers?: Container[];
 
-  @Metadata({ data: "json, name=labels", elemType: shared.Label })
+  @SpeakeasyMetadata({ data: "json, name=labels", elemType: Label })
   labels?: Label[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ns" })
+  @SpeakeasyMetadata({ data: "json, name=ns" })
   ns?: string;
 }

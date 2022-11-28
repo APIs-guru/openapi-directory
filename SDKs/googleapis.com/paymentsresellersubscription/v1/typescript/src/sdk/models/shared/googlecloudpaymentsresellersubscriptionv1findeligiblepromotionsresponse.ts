@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudPaymentsResellerSubscriptionV1Promotion } from "./googlecloudpaymentsresellersubscriptionv1promotion";
+
 
 
 // GoogleCloudPaymentsResellerSubscriptionV1FindEligiblePromotionsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudPaymentsResellerSubscriptionV1Promotion } from "./googleclou
  * Response containing the found promotions for the current user.
 **/
 export class GoogleCloudPaymentsResellerSubscriptionV1FindEligiblePromotionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=promotions", elemType: shared.GoogleCloudPaymentsResellerSubscriptionV1Promotion })
+  @SpeakeasyMetadata({ data: "json, name=promotions", elemType: GoogleCloudPaymentsResellerSubscriptionV1Promotion })
   promotions?: GoogleCloudPaymentsResellerSubscriptionV1Promotion[];
 }

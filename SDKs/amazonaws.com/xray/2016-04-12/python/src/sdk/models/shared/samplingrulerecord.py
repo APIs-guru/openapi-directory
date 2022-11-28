@@ -1,16 +1,21 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import samplingrule
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SamplingRuleRecord:
-    created_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreatedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    modified_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ModifiedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    sampling_rule: Optional[samplingrule.SamplingRule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SamplingRule' }})
+    r"""SamplingRuleRecord
+    A <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_SamplingRule.html\">SamplingRule</a> and its metadata.
+    """
+    
+    created_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreatedAt'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    modified_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ModifiedAt'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    sampling_rule: Optional[SamplingRule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SamplingRule') }})
     

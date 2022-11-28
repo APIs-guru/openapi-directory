@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParagraphStyle } from "./paragraphstyle";
 import { ParagraphStyleSuggestionState } from "./paragraphstylesuggestionstate";
+
 
 
 // SuggestedParagraphStyle
@@ -8,9 +9,9 @@ import { ParagraphStyleSuggestionState } from "./paragraphstylesuggestionstate";
  * A suggested change to a ParagraphStyle.
 **/
 export class SuggestedParagraphStyle extends SpeakeasyBase {
-  @Metadata({ data: "json, name=paragraphStyle" })
+  @SpeakeasyMetadata({ data: "json, name=paragraphStyle" })
   paragraphStyle?: ParagraphStyle;
 
-  @Metadata({ data: "json, name=paragraphStyleSuggestionState" })
+  @SpeakeasyMetadata({ data: "json, name=paragraphStyleSuggestionState" })
   paragraphStyleSuggestionState?: ParagraphStyleSuggestionState;
 }

@@ -4,16 +4,16 @@ from dataclasses import dataclass, field
 
 @dataclass
 class DcimDeviceBayTemplatesDeletePathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DcimDeviceBayTemplatesDeleteRequest:
-    path_params: DcimDeviceBayTemplatesDeletePathParams = field(default=None)
+    path_params: DcimDeviceBayTemplatesDeletePathParams = field()
     
 
 @dataclass
 class DcimDeviceBayTemplatesDeleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import field
+from sdk import utils
+from . import *
 
 class TypePrimitiveEnum(str, Enum):
     PRIMITIVE_UNSPECIFIED = "PRIMITIVE_UNSPECIFIED"
@@ -13,7 +15,11 @@ class TypePrimitiveEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Type:
-    fields: Optional[List[field.Field]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fields' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    primitive: Optional[TypePrimitiveEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primitive' }})
+    r"""Type
+    A type definition for some HL7v2 type (incl. Segments and Datatypes).
+    """
+    
+    fields: Optional[List[Field]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fields') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    primitive: Optional[TypePrimitiveEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('primitive') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateProjectRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a request to the update project operation.
 **/
 export class UpdateProjectRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=defaultJobTimeoutMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=defaultJobTimeoutMinutes" })
   defaultJobTimeoutMinutes?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

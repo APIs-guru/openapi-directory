@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RollbackInstanceRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for rollbacking a notebook instance
 **/
 export class RollbackInstanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=targetSnapshot" })
+  @SpeakeasyMetadata({ data: "json, name=targetSnapshot" })
   targetSnapshot?: string;
 }

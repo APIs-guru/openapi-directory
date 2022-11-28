@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GitRepoSourceRepoTypeEnum {
-    Unknown = "UNKNOWN"
-,    CloudSourceRepositories = "CLOUD_SOURCE_REPOSITORIES"
-,    Github = "GITHUB"
-,    BitbucketServer = "BITBUCKET_SERVER"
+    Unknown = "UNKNOWN",
+    CloudSourceRepositories = "CLOUD_SOURCE_REPOSITORIES",
+    Github = "GITHUB",
+    BitbucketServer = "BITBUCKET_SERVER"
 }
 
 
@@ -13,18 +14,18 @@ export enum GitRepoSourceRepoTypeEnum {
  * GitRepoSource describes a repo and ref of a code repository.
 **/
 export class GitRepoSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bitbucketServerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=bitbucketServerConfig" })
   bitbucketServerConfig?: string;
 
-  @Metadata({ data: "json, name=githubEnterpriseConfig" })
+  @SpeakeasyMetadata({ data: "json, name=githubEnterpriseConfig" })
   githubEnterpriseConfig?: string;
 
-  @Metadata({ data: "json, name=ref" })
+  @SpeakeasyMetadata({ data: "json, name=ref" })
   ref?: string;
 
-  @Metadata({ data: "json, name=repoType" })
+  @SpeakeasyMetadata({ data: "json, name=repoType" })
   repoType?: GitRepoSourceRepoTypeEnum;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

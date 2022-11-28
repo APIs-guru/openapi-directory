@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetExportXlsRegistrierkassenRegistrierkasseUuidBelegePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=registrierkasseUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=registrierkasseUuid" })
   registrierkasseUuid: string;
 }
 
 
 export class GetExportXlsRegistrierkassenRegistrierkasseUuidBelegeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=after" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=after" })
   after?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=before" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=before" })
   before?: string;
 }
 
 
 export class GetExportXlsRegistrierkassenRegistrierkasseUuidBelegeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetExportXlsRegistrierkassenRegistrierkasseUuidBelegePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetExportXlsRegistrierkassenRegistrierkasseUuidBelegeQueryParams;
 }
 
 
 export class GetExportXlsRegistrierkassenRegistrierkasseUuidBelegeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

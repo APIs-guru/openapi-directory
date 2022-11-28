@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AuthorizerConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object that specifies the authorization service for a domain.
 **/
 export class AuthorizerConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowAuthorizerOverride" })
+  @SpeakeasyMetadata({ data: "json, name=allowAuthorizerOverride" })
   allowAuthorizerOverride?: boolean;
 
-  @Metadata({ data: "json, name=defaultAuthorizerName" })
+  @SpeakeasyMetadata({ data: "json, name=defaultAuthorizerName" })
   defaultAuthorizerName?: string;
 }

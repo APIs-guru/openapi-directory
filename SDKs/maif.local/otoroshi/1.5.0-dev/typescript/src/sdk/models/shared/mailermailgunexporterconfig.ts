@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum MailerMailgunExporterConfigTypeEnum {
     Mailgun = "mailgun"
@@ -6,18 +7,18 @@ export enum MailerMailgunExporterConfigTypeEnum {
 
 
 export class MailerMailgunExporterConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiKey" })
+  @SpeakeasyMetadata({ data: "json, name=apiKey" })
   apiKey?: string;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=eu" })
+  @SpeakeasyMetadata({ data: "json, name=eu" })
   eu?: boolean;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: string[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: MailerMailgunExporterConfigTypeEnum;
 }

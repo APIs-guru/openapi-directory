@@ -18,7 +18,7 @@ class PostSetupV1ServicesCalendarRequest:
 
 @dataclass
 class PostSetupV1ServicesCalendarResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_calendar_view_model: Optional[shared.ServiceCalendarViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

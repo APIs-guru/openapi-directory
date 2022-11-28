@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,21 +22,21 @@ class UpdateEventConfigurationsHeaders:
 @dataclass_json
 @dataclass
 class UpdateEventConfigurationsRequestBody:
-    event_configurations: Optional[dict[str, shared.Configuration]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventConfigurations' }})
+    event_configurations: Optional[dict[str, shared.Configuration]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventConfigurations') }})
     
 
 @dataclass
 class UpdateEventConfigurationsRequest:
-    headers: UpdateEventConfigurationsHeaders = field(default=None)
-    request: UpdateEventConfigurationsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateEventConfigurationsHeaders = field()
+    request: UpdateEventConfigurationsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateEventConfigurationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     update_event_configurations_response: Optional[dict[str, Any]] = field(default=None)
     

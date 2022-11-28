@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BigqueryRoutinesUpdatePathParams:
-    dataset_id: str = field(default=None, metadata={'path_param': { 'field_name': 'datasetId', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    routine_id: str = field(default=None, metadata={'path_param': { 'field_name': 'routineId', 'style': 'simple', 'explode': False }})
+    dataset_id: str = field(metadata={'path_param': { 'field_name': 'datasetId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    routine_id: str = field(metadata={'path_param': { 'field_name': 'routineId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,14 +27,14 @@ class BigqueryRoutinesUpdateQueryParams:
 
 @dataclass
 class BigqueryRoutinesUpdateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BigqueryRoutinesUpdateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -41,15 +45,15 @@ class BigqueryRoutinesUpdateSecurity:
 
 @dataclass
 class BigqueryRoutinesUpdateRequest:
-    path_params: BigqueryRoutinesUpdatePathParams = field(default=None)
-    query_params: BigqueryRoutinesUpdateQueryParams = field(default=None)
-    request: Optional[shared.Routine] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: BigqueryRoutinesUpdateSecurity = field(default=None)
+    path_params: BigqueryRoutinesUpdatePathParams = field()
+    query_params: BigqueryRoutinesUpdateQueryParams = field()
+    security: BigqueryRoutinesUpdateSecurity = field()
+    request: Optional[shared.RoutineInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BigqueryRoutinesUpdateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     routine: Optional[shared.Routine] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HighShelf1 } from "./highshelf1";
 import { LowShelf1 } from "./lowshelf1";
 var SetEqualizerValuesRequest = /** @class */ (function (_super) {
@@ -31,11 +31,11 @@ var SetEqualizerValuesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=high_shelf" }),
+        SpeakeasyMetadata({ data: "json, name=high_shelf" }),
         __metadata("design:type", HighShelf1)
     ], SetEqualizerValuesRequest.prototype, "highShelf", void 0);
     __decorate([
-        Metadata({ data: "json, name=low_shelf" }),
+        SpeakeasyMetadata({ data: "json, name=low_shelf" }),
         __metadata("design:type", LowShelf1)
     ], SetEqualizerValuesRequest.prototype, "lowShelf", void 0);
     return SetEqualizerValuesRequest;

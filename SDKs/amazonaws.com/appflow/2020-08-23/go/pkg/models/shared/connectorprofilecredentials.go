@@ -1,5 +1,8 @@
 package shared
 
+// ConnectorProfileCredentials
+//
+//	The connector-specific credentials required by a connector.
 type ConnectorProfileCredentials struct {
 	Amplitude       *AmplitudeConnectorProfileCredentials       `json:"Amplitude,omitempty"`
 	Datadog         *DatadogConnectorProfileCredentials         `json:"Datadog,omitempty"`

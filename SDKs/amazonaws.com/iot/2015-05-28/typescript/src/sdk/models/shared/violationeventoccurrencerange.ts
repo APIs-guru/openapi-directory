@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ViolationEventOccurrenceRange
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Specifies the time period of which violation events occurred between. 
 **/
 export class ViolationEventOccurrenceRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime: Date;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime: Date;
 }

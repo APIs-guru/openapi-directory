@@ -9,6 +9,8 @@ const (
 	ConfigManagementBinauthzStateWebhookEnumError                      ConfigManagementBinauthzStateWebhookEnum = "ERROR"
 )
 
+// ConfigManagementBinauthzState
+// State for Binauthz
 type ConfigManagementBinauthzState struct {
 	Version *ConfigManagementBinauthzVersion          `json:"version,omitempty"`
 	Webhook *ConfigManagementBinauthzStateWebhookEnum `json:"webhook,omitempty"`

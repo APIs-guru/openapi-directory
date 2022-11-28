@@ -10,6 +10,8 @@ const (
 	LandlordPhotoModelPhotoTypeEnumAerialPhoto LandlordPhotoModelPhotoTypeEnum = "AerialPhoto"
 )
 
+// LandlordPhotoModel
+// Stores a photo related to a property structure.
 type LandlordPhotoModel struct {
 	ETag      *string                          `json:"ETag,omitempty"`
 	FileName  *string                          `json:"FileName,omitempty"`

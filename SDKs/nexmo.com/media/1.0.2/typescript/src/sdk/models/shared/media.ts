@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Media extends SpeakeasyBase {
-  @Metadata({ data: "json, name=account_id" })
+  @SpeakeasyMetadata({ data: "json, name=account_id" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=max_downloads_allowed" })
+  @SpeakeasyMetadata({ data: "json, name=max_downloads_allowed" })
   maxDownloadsAllowed?: number;
 
-  @Metadata({ data: "json, name=media_size" })
+  @SpeakeasyMetadata({ data: "json, name=media_size" })
   mediaSize?: number;
 
-  @Metadata({ data: "json, name=metadata_primary" })
+  @SpeakeasyMetadata({ data: "json, name=metadata_primary" })
   metadataPrimary?: string;
 
-  @Metadata({ data: "json, name=metadata_secondary" })
+  @SpeakeasyMetadata({ data: "json, name=metadata_secondary" })
   metadataSecondary?: string;
 
-  @Metadata({ data: "json, name=mime_type" })
+  @SpeakeasyMetadata({ data: "json, name=mime_type" })
   mimeType?: string;
 
-  @Metadata({ data: "json, name=original_file_name" })
+  @SpeakeasyMetadata({ data: "json, name=original_file_name" })
   originalFileName?: string;
 
-  @Metadata({ data: "json, name=public" })
+  @SpeakeasyMetadata({ data: "json, name=public" })
   public?: boolean;
 
-  @Metadata({ data: "json, name=store_id" })
+  @SpeakeasyMetadata({ data: "json, name=store_id" })
   storeId?: string;
 
-  @Metadata({ data: "json, name=time_created" })
+  @SpeakeasyMetadata({ data: "json, name=time_created" })
   timeCreated?: string;
 
-  @Metadata({ data: "json, name=time_last_updated" })
+  @SpeakeasyMetadata({ data: "json, name=time_last_updated" })
   timeLastUpdated?: string;
 
-  @Metadata({ data: "json, name=times_downloaded" })
+  @SpeakeasyMetadata({ data: "json, name=times_downloaded" })
   timesDownloaded?: number;
 }

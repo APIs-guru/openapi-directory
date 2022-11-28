@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RequestPasswordPoliciesForPasswordTypePathParams:
-    password_type: Any = field(default=None, metadata={'path_param': { 'field_name': 'password_type', 'style': 'simple', 'explode': False }})
+    password_type: Any = field(metadata={'path_param': { 'field_name': 'password_type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class RequestPasswordPoliciesForPasswordTypeHeaders:
 
 @dataclass
 class RequestPasswordPoliciesForPasswordTypeRequest:
-    path_params: RequestPasswordPoliciesForPasswordTypePathParams = field(default=None)
-    headers: RequestPasswordPoliciesForPasswordTypeHeaders = field(default=None)
+    headers: RequestPasswordPoliciesForPasswordTypeHeaders = field()
+    path_params: RequestPasswordPoliciesForPasswordTypePathParams = field()
     
 
 @dataclass
 class RequestPasswordPoliciesForPasswordTypeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     password_policies_config: Optional[shared.PasswordPoliciesConfig] = field(default=None)
-    status_code: int = field(default=None)
     

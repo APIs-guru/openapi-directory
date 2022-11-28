@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// OrganizationConformancePackStatus
+// Returns the status for an organization conformance pack in an organization.
 type OrganizationConformancePackStatus struct {
 	ErrorCode                       *string                        `json:"ErrorCode,omitempty"`
 	ErrorMessage                    *string                        `json:"ErrorMessage,omitempty"`

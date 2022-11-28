@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var RegriiRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(RegriiRequestBodyCertificateParameters, _super);
@@ -30,19 +30,19 @@ var RegriiRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FullName" }),
+        SpeakeasyMetadata({ data: "json, name=FullName" }),
         __metadata("design:type", String)
     ], RegriiRequestBodyCertificateParameters.prototype, "fullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=regno" }),
+        SpeakeasyMetadata({ data: "json, name=regno" }),
         __metadata("design:type", String)
     ], RegriiRequestBodyCertificateParameters.prototype, "regno", void 0);
     __decorate([
-        Metadata({ data: "json, name=sro_id" }),
+        SpeakeasyMetadata({ data: "json, name=sro_id" }),
         __metadata("design:type", String)
     ], RegriiRequestBodyCertificateParameters.prototype, "sroId", void 0);
     __decorate([
-        Metadata({ data: "json, name=yr" }),
+        SpeakeasyMetadata({ data: "json, name=yr" }),
         __metadata("design:type", String)
     ], RegriiRequestBodyCertificateParameters.prototype, "yr", void 0);
     return RegriiRequestBodyCertificateParameters;
@@ -58,19 +58,19 @@ var RegriiRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", RegriiRequestBodyCertificateParameters)
     ], RegriiRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], RegriiRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], RegriiRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], RegriiRequestBody.prototype, "txnId", void 0);
     return RegriiRequestBody;
@@ -82,32 +82,16 @@ var RegriiSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], RegriiSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], RegriiSecurity.prototype, "clientId", void 0);
     return RegriiSecurity;
 }(SpeakeasyBase));
 export { RegriiSecurity };
-var RegriiRequest = /** @class */ (function (_super) {
-    __extends(RegriiRequest, _super);
-    function RegriiRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", RegriiRequestBody)
-    ], RegriiRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", RegriiSecurity)
-    ], RegriiRequest.prototype, "security", void 0);
-    return RegriiRequest;
-}(SpeakeasyBase));
-export { RegriiRequest };
 export var Regrii400ApplicationJsonErrorEnum;
 (function (Regrii400ApplicationJsonErrorEnum) {
     Regrii400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -130,11 +114,11 @@ var Regrii400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Regrii400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Regrii400ApplicationJson.prototype, "errorDescription", void 0);
     return Regrii400ApplicationJson;
@@ -156,11 +140,11 @@ var Regrii401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Regrii401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Regrii401ApplicationJson.prototype, "errorDescription", void 0);
     return Regrii401ApplicationJson;
@@ -182,11 +166,11 @@ var Regrii404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Regrii404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Regrii404ApplicationJson.prototype, "errorDescription", void 0);
     return Regrii404ApplicationJson;
@@ -206,11 +190,11 @@ var Regrii500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Regrii500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Regrii500ApplicationJson.prototype, "errorDescription", void 0);
     return Regrii500ApplicationJson;
@@ -230,11 +214,11 @@ var Regrii502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Regrii502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Regrii502ApplicationJson.prototype, "errorDescription", void 0);
     return Regrii502ApplicationJson;
@@ -254,11 +238,11 @@ var Regrii503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Regrii503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Regrii503ApplicationJson.prototype, "errorDescription", void 0);
     return Regrii503ApplicationJson;
@@ -278,55 +262,71 @@ var Regrii504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Regrii504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Regrii504ApplicationJson.prototype, "errorDescription", void 0);
     return Regrii504ApplicationJson;
 }(SpeakeasyBase));
 export { Regrii504ApplicationJson };
+var RegriiRequest = /** @class */ (function (_super) {
+    __extends(RegriiRequest, _super);
+    function RegriiRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", RegriiRequestBody)
+    ], RegriiRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", RegriiSecurity)
+    ], RegriiRequest.prototype, "security", void 0);
+    return RegriiRequest;
+}(SpeakeasyBase));
+export { RegriiRequest };
 var RegriiResponse = /** @class */ (function (_super) {
     __extends(RegriiResponse, _super);
     function RegriiResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RegriiResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RegriiResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Regrii400ApplicationJson)
     ], RegriiResponse.prototype, "regrii400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Regrii401ApplicationJson)
     ], RegriiResponse.prototype, "regrii401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Regrii404ApplicationJson)
     ], RegriiResponse.prototype, "regrii404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Regrii500ApplicationJson)
     ], RegriiResponse.prototype, "regrii500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Regrii502ApplicationJson)
     ], RegriiResponse.prototype, "regrii502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Regrii503ApplicationJson)
     ], RegriiResponse.prototype, "regrii503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Regrii504ApplicationJson)
     ], RegriiResponse.prototype, "regrii504ApplicationJsonObject", void 0);
     return RegriiResponse;

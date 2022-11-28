@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class JobsProjectsTenantsJobsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class JobsProjectsTenantsJobsGetQueryParams:
 
 @dataclass
 class JobsProjectsTenantsJobsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class JobsProjectsTenantsJobsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class JobsProjectsTenantsJobsGetSecurity:
 
 @dataclass
 class JobsProjectsTenantsJobsGetRequest:
-    path_params: JobsProjectsTenantsJobsGetPathParams = field(default=None)
-    query_params: JobsProjectsTenantsJobsGetQueryParams = field(default=None)
-    security: JobsProjectsTenantsJobsGetSecurity = field(default=None)
+    path_params: JobsProjectsTenantsJobsGetPathParams = field()
+    query_params: JobsProjectsTenantsJobsGetQueryParams = field()
+    security: JobsProjectsTenantsJobsGetSecurity = field()
     
 
 @dataclass
 class JobsProjectsTenantsJobsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     job: Optional[shared.Job] = field(default=None)
-    status_code: int = field(default=None)
     

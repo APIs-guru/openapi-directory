@@ -1,11 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import firewallrule
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchUpdateIngressRulesRequest:
-    ingress_rules: Optional[List[firewallrule.FirewallRule]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ingressRules' }})
+    r"""BatchUpdateIngressRulesRequest
+    Request message for Firewall.BatchUpdateIngressRules.
+    """
+    
+    ingress_rules: Optional[List[FirewallRule]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ingressRules') }})
     

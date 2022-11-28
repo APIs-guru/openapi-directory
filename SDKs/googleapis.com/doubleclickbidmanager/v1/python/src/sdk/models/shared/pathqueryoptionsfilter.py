@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PathQueryOptionsFilterFilterEnum(str, Enum):
     FILTER_UNKNOWN = "FILTER_UNKNOWN"
@@ -305,7 +307,11 @@ class PathQueryOptionsFilterMatchEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PathQueryOptionsFilter:
-    filter: Optional[PathQueryOptionsFilterFilterEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filter' }})
-    match: Optional[PathQueryOptionsFilterMatchEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'match' }})
-    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""PathQueryOptionsFilter
+    Dimension Filter on path events.
+    """
+    
+    filter: Optional[PathQueryOptionsFilterFilterEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filter') }})
+    match: Optional[PathQueryOptionsFilterMatchEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('match') }})
+    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

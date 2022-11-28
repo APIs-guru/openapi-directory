@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WebhookResponse } from "./webhookresponse";
+
 
 
 // WebhooksResponse
@@ -8,12 +8,12 @@ import { WebhookResponse } from "./webhookresponse";
  * List Webhooks Object
 **/
 export class WebhooksResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content", elemType: shared.WebhookResponse })
+  @SpeakeasyMetadata({ data: "json, name=content", elemType: WebhookResponse })
   content?: WebhookResponse[];
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: any[];
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: any;
 }

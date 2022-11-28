@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IdentitytoolkitRelyingpartyDownloadAccountRequest
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request to download user account in batch.
 **/
 export class IdentitytoolkitRelyingpartyDownloadAccountRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delegatedProjectNumber" })
+  @SpeakeasyMetadata({ data: "json, name=delegatedProjectNumber" })
   delegatedProjectNumber?: string;
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=targetProjectId" })
+  @SpeakeasyMetadata({ data: "json, name=targetProjectId" })
   targetProjectId?: string;
 }

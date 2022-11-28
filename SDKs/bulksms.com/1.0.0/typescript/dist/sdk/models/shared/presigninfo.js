@@ -22,19 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PreSignInfoFields = /** @class */ (function (_super) {
     __extends(PreSignInfoFields, _super);
     function PreSignInfoFields() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], PreSignInfoFields.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], PreSignInfoFields.prototype, "value", void 0);
     return PreSignInfoFields;
@@ -46,15 +45,15 @@ var PreSignInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fetchUrl" }),
+        SpeakeasyMetadata({ data: "json, name=fetchUrl" }),
         __metadata("design:type", String)
     ], PreSignInfo.prototype, "fetchUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=fields", elemType: shared.PreSignInfoFields }),
+        SpeakeasyMetadata({ data: "json, name=fields", elemType: PreSignInfoFields }),
         __metadata("design:type", Array)
     ], PreSignInfo.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "json, name=putUrl" }),
+        SpeakeasyMetadata({ data: "json, name=putUrl" }),
         __metadata("design:type", String)
     ], PreSignInfo.prototype, "putUrl", void 0);
     return PreSignInfo;

@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContentTypeEnum } from "./contenttypeenum";
+import { GenericAttachment } from "./genericattachment";
 // ResponseCard
 /**
  * If you configure a response card when creating your bots, Amazon Lex substitutes the session attributes and slot values that are available, and then returns it. The response card can also come from a Lambda function ( <code>dialogCodeHook</code> and <code>fulfillmentActivity</code> on an intent).
@@ -35,15 +35,15 @@ var ResponseCard = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=contentType" }),
+        SpeakeasyMetadata({ data: "json, name=contentType" }),
         __metadata("design:type", String)
     ], ResponseCard.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ data: "json, name=genericAttachments", elemType: shared.GenericAttachment }),
+        SpeakeasyMetadata({ data: "json, name=genericAttachments", elemType: GenericAttachment }),
         __metadata("design:type", Array)
     ], ResponseCard.prototype, "genericAttachments", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], ResponseCard.prototype, "version", void 0);
     return ResponseCard;

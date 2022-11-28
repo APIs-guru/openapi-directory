@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum EnvironmentTypeEnum {
-    User = "user"
-,    Live = "live"
-,    Latest = "latest"
-,    Draft = "draft"
+    User = "user",
+    Live = "live",
+    Latest = "latest",
+    Draft = "draft"
 }
 
 
@@ -13,39 +14,39 @@ export enum EnvironmentTypeEnum {
  * Represents a Google Tag Manager Environment. Note that a user can create, delete and update environments of type USER, but can only update the enable_debug and url fields of environments of other types.
 **/
 export class Environment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=authorizationCode" })
+  @SpeakeasyMetadata({ data: "json, name=authorizationCode" })
   authorizationCode?: string;
 
-  @Metadata({ data: "json, name=authorizationTimestampMs" })
+  @SpeakeasyMetadata({ data: "json, name=authorizationTimestampMs" })
   authorizationTimestampMs?: string;
 
-  @Metadata({ data: "json, name=containerId" })
+  @SpeakeasyMetadata({ data: "json, name=containerId" })
   containerId?: string;
 
-  @Metadata({ data: "json, name=containerVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=containerVersionId" })
   containerVersionId?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=enableDebug" })
+  @SpeakeasyMetadata({ data: "json, name=enableDebug" })
   enableDebug?: boolean;
 
-  @Metadata({ data: "json, name=environmentId" })
+  @SpeakeasyMetadata({ data: "json, name=environmentId" })
   environmentId?: string;
 
-  @Metadata({ data: "json, name=fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=fingerprint" })
   fingerprint?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: EnvironmentTypeEnum;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

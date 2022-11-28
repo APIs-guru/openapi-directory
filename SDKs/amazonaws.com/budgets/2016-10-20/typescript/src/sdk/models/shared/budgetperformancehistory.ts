@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BudgetTypeEnum } from "./budgettypeenum";
 import { BudgetedAndActualAmounts } from "./budgetedandactualamounts";
 import { CostTypes } from "./costtypes";
 import { TimeUnitEnum } from "./timeunitenum";
+
 
 
 // BudgetPerformanceHistory
@@ -11,21 +11,21 @@ import { TimeUnitEnum } from "./timeunitenum";
  * A history of the state of a budget at the end of the budget's specified time period.
 **/
 export class BudgetPerformanceHistory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BudgetName" })
+  @SpeakeasyMetadata({ data: "json, name=BudgetName" })
   budgetName?: string;
 
-  @Metadata({ data: "json, name=BudgetType" })
+  @SpeakeasyMetadata({ data: "json, name=BudgetType" })
   budgetType?: BudgetTypeEnum;
 
-  @Metadata({ data: "json, name=BudgetedAndActualAmountsList", elemType: shared.BudgetedAndActualAmounts })
+  @SpeakeasyMetadata({ data: "json, name=BudgetedAndActualAmountsList", elemType: BudgetedAndActualAmounts })
   budgetedAndActualAmountsList?: BudgetedAndActualAmounts[];
 
-  @Metadata({ data: "json, name=CostFilters" })
+  @SpeakeasyMetadata({ data: "json, name=CostFilters" })
   costFilters?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=CostTypes" })
+  @SpeakeasyMetadata({ data: "json, name=CostTypes" })
   costTypes?: CostTypes;
 
-  @Metadata({ data: "json, name=TimeUnit" })
+  @SpeakeasyMetadata({ data: "json, name=TimeUnit" })
   timeUnit?: TimeUnitEnum;
 }

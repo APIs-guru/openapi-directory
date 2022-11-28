@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateExperimentTemplatePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,26 +27,26 @@ class UpdateExperimentTemplateHeaders:
 @dataclass_json
 @dataclass
 class UpdateExperimentTemplateRequestBody:
-    actions: Optional[dict[str, shared.UpdateExperimentTemplateActionInputItem]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actions' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roleArn' }})
-    stop_conditions: Optional[List[shared.UpdateExperimentTemplateStopConditionInput]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stopConditions' }})
-    targets: Optional[dict[str, shared.UpdateExperimentTemplateTargetInput]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targets' }})
+    actions: Optional[dict[str, shared.UpdateExperimentTemplateActionInputItem]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('actions') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('roleArn') }})
+    stop_conditions: Optional[List[shared.UpdateExperimentTemplateStopConditionInput]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stopConditions') }})
+    targets: Optional[dict[str, shared.UpdateExperimentTemplateTargetInput]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targets') }})
     
 
 @dataclass
 class UpdateExperimentTemplateRequest:
-    path_params: UpdateExperimentTemplatePathParams = field(default=None)
-    headers: UpdateExperimentTemplateHeaders = field(default=None)
-    request: UpdateExperimentTemplateRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateExperimentTemplateHeaders = field()
+    path_params: UpdateExperimentTemplatePathParams = field()
+    request: UpdateExperimentTemplateRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateExperimentTemplateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_experiment_template_response: Optional[shared.UpdateExperimentTemplateResponse] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

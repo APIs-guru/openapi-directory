@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDocumentaiV1beta3DocumentRevisionHumanReview
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Human Review information of the document.
 **/
 export class GoogleCloudDocumentaiV1beta3DocumentRevisionHumanReview extends SpeakeasyBase {
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 
-  @Metadata({ data: "json, name=stateMessage" })
+  @SpeakeasyMetadata({ data: "json, name=stateMessage" })
   stateMessage?: string;
 }

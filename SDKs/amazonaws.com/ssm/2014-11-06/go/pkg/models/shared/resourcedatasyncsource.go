@@ -1,5 +1,7 @@
 package shared
 
+// ResourceDataSyncSource
+// Information about the source of the data included in the resource data sync.
 type ResourceDataSyncSource struct {
 	AwsOrganizationsSource  *ResourceDataSyncAwsOrganizationsSource `json:"AwsOrganizationsSource,omitempty"`
 	EnableAllOpsDataSources *bool                                   `json:"EnableAllOpsDataSources,omitempty"`

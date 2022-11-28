@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleExampleLibraryagentV1Book } from "./googleexamplelibraryagentv1book";
 // GoogleExampleLibraryagentV1ListBooksResponse
 /**
  * Response message for LibraryAgent.ListBooks.
@@ -34,11 +34,11 @@ var GoogleExampleLibraryagentV1ListBooksResponse = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=books", elemType: shared.GoogleExampleLibraryagentV1Book }),
+        SpeakeasyMetadata({ data: "json, name=books", elemType: GoogleExampleLibraryagentV1Book }),
         __metadata("design:type", Array)
     ], GoogleExampleLibraryagentV1ListBooksResponse.prototype, "books", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], GoogleExampleLibraryagentV1ListBooksResponse.prototype, "nextPageToken", void 0);
     return GoogleExampleLibraryagentV1ListBooksResponse;

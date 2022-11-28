@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ServicemanagementServicesConfigsListPathParams:
-    service_name: str = field(default=None, metadata={'path_param': { 'field_name': 'serviceName', 'style': 'simple', 'explode': False }})
+    service_name: str = field(metadata={'path_param': { 'field_name': 'serviceName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,26 +28,26 @@ class ServicemanagementServicesConfigsListQueryParams:
 
 @dataclass
 class ServicemanagementServicesConfigsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ServicemanagementServicesConfigsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ServicemanagementServicesConfigsListSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ServicemanagementServicesConfigsListSecurityOption4:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -59,14 +60,14 @@ class ServicemanagementServicesConfigsListSecurity:
 
 @dataclass
 class ServicemanagementServicesConfigsListRequest:
-    path_params: ServicemanagementServicesConfigsListPathParams = field(default=None)
-    query_params: ServicemanagementServicesConfigsListQueryParams = field(default=None)
-    security: ServicemanagementServicesConfigsListSecurity = field(default=None)
+    path_params: ServicemanagementServicesConfigsListPathParams = field()
+    query_params: ServicemanagementServicesConfigsListQueryParams = field()
+    security: ServicemanagementServicesConfigsListSecurity = field()
     
 
 @dataclass
 class ServicemanagementServicesConfigsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_service_configs_response: Optional[shared.ListServiceConfigsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

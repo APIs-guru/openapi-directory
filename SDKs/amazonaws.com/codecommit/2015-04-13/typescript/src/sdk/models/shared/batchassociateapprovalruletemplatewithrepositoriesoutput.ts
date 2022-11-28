@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchAssociateApprovalRuleTemplateWithRepositoriesError } from "./batchassociateapprovalruletemplatewithrepositorieserror";
 
 
+
 export class BatchAssociateApprovalRuleTemplateWithRepositoriesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=associatedRepositoryNames" })
+  @SpeakeasyMetadata({ data: "json, name=associatedRepositoryNames" })
   associatedRepositoryNames: string[];
 
-  @Metadata({ data: "json, name=errors", elemType: shared.BatchAssociateApprovalRuleTemplateWithRepositoriesError })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: BatchAssociateApprovalRuleTemplateWithRepositoriesError })
   errors: BatchAssociateApprovalRuleTemplateWithRepositoriesError[];
 }

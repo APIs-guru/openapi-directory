@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GeoRegionTargetingOptionDetailsGeoRegionTypeEnum(str, Enum):
     GEO_REGION_TYPE_UNKNOWN = "GEO_REGION_TYPE_UNKNOWN"
@@ -37,6 +39,10 @@ class GeoRegionTargetingOptionDetailsGeoRegionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GeoRegionTargetingOptionDetails:
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    geo_region_type: Optional[GeoRegionTargetingOptionDetailsGeoRegionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'geoRegionType' }})
+    r"""GeoRegionTargetingOptionDetails
+    Represents a targetable geographic region. This will be populated in the geo_region_details field when targeting_type is `TARGETING_TYPE_GEO_REGION`.
+    """
+    
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    geo_region_type: Optional[GeoRegionTargetingOptionDetailsGeoRegionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('geoRegionType') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GcsSource
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Google Cloud Storage location for the input content.
 **/
 export class GcsSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inputUri" })
+  @SpeakeasyMetadata({ data: "json, name=inputUri" })
   inputUri?: string;
 }

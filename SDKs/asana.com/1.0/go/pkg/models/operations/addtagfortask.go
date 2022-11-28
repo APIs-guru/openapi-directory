@@ -17,14 +17,14 @@ type AddTagForTaskRequestBody struct {
 	Data *shared.TaskAddTagRequest `json:"data,omitempty"`
 }
 
+type AddTagForTask200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type AddTagForTaskRequest struct {
 	PathParams  AddTagForTaskPathParams
 	QueryParams AddTagForTaskQueryParams
 	Request     AddTagForTaskRequestBody `request:"mediaType=application/json"`
-}
-
-type AddTagForTask200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type AddTagForTaskResponse struct {

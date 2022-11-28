@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ValidationResultValidatorEnum {
-    ValidatorTypeUnspecified = "VALIDATOR_TYPE_UNSPECIFIED"
-,    MembershipId = "MEMBERSHIP_ID"
-,    CrossProjectPermission = "CROSS_PROJECT_PERMISSION"
+    ValidatorTypeUnspecified = "VALIDATOR_TYPE_UNSPECIFIED",
+    MembershipId = "MEMBERSHIP_ID",
+    CrossProjectPermission = "CROSS_PROJECT_PERMISSION"
 }
 
 
@@ -12,12 +13,12 @@ export enum ValidationResultValidatorEnum {
  * ValidationResults are results set by each validator running during ValidateCreateMembership.
 **/
 export class ValidationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: string;
 
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: boolean;
 
-  @Metadata({ data: "json, name=validator" })
+  @SpeakeasyMetadata({ data: "json, name=validator" })
   validator?: ValidationResultValidatorEnum;
 }

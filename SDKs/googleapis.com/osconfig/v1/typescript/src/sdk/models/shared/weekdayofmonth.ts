@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum WeekDayOfMonthDayOfWeekEnum {
-    DayOfWeekUnspecified = "DAY_OF_WEEK_UNSPECIFIED"
-,    Monday = "MONDAY"
-,    Tuesday = "TUESDAY"
-,    Wednesday = "WEDNESDAY"
-,    Thursday = "THURSDAY"
-,    Friday = "FRIDAY"
-,    Saturday = "SATURDAY"
-,    Sunday = "SUNDAY"
+    DayOfWeekUnspecified = "DAY_OF_WEEK_UNSPECIFIED",
+    Monday = "MONDAY",
+    Tuesday = "TUESDAY",
+    Wednesday = "WEDNESDAY",
+    Thursday = "THURSDAY",
+    Friday = "FRIDAY",
+    Saturday = "SATURDAY",
+    Sunday = "SUNDAY"
 }
 
 
@@ -17,12 +18,12 @@ export enum WeekDayOfMonthDayOfWeekEnum {
  * Represents one week day in a month. An example is "the 4th Sunday".
 **/
 export class WeekDayOfMonth extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dayOfWeek" })
+  @SpeakeasyMetadata({ data: "json, name=dayOfWeek" })
   dayOfWeek?: WeekDayOfMonthDayOfWeekEnum;
 
-  @Metadata({ data: "json, name=dayOffset" })
+  @SpeakeasyMetadata({ data: "json, name=dayOffset" })
   dayOffset?: number;
 
-  @Metadata({ data: "json, name=weekOrdinal" })
+  @SpeakeasyMetadata({ data: "json, name=weekOrdinal" })
   weekOrdinal?: number;
 }

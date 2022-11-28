@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // PostUserRequestBodyAddress
 /**
  * The user's preferred postal address.
@@ -33,27 +33,27 @@ var PostUserRequestBodyAddress = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=country" }),
+        SpeakeasyMetadata({ data: "json, name=country" }),
         __metadata("design:type", String)
     ], PostUserRequestBodyAddress.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "json, name=formatted" }),
+        SpeakeasyMetadata({ data: "json, name=formatted" }),
         __metadata("design:type", String)
     ], PostUserRequestBodyAddress.prototype, "formatted", void 0);
     __decorate([
-        Metadata({ data: "json, name=locality" }),
+        SpeakeasyMetadata({ data: "json, name=locality" }),
         __metadata("design:type", String)
     ], PostUserRequestBodyAddress.prototype, "locality", void 0);
     __decorate([
-        Metadata({ data: "json, name=postal_code" }),
+        SpeakeasyMetadata({ data: "json, name=postal_code" }),
         __metadata("design:type", String)
     ], PostUserRequestBodyAddress.prototype, "postalCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=region" }),
+        SpeakeasyMetadata({ data: "json, name=region" }),
         __metadata("design:type", String)
     ], PostUserRequestBodyAddress.prototype, "region", void 0);
     __decorate([
-        Metadata({ data: "json, name=street_address" }),
+        SpeakeasyMetadata({ data: "json, name=street_address" }),
         __metadata("design:type", String)
     ], PostUserRequestBodyAddress.prototype, "streetAddress", void 0);
     return PostUserRequestBodyAddress;
@@ -65,103 +65,103 @@ var PostUserRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=@id" }),
+        SpeakeasyMetadata({ data: "json, name=@id" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "atId", void 0);
     __decorate([
-        Metadata({ data: "json, name=address" }),
+        SpeakeasyMetadata({ data: "json, name=address" }),
         __metadata("design:type", PostUserRequestBodyAddress)
     ], PostUserRequestBody.prototype, "address", void 0);
     __decorate([
-        Metadata({ data: "json, name=birthdate" }),
+        SpeakeasyMetadata({ data: "json, name=birthdate" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "birthdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=email" }),
+        SpeakeasyMetadata({ data: "json, name=email" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=email_verified" }),
+        SpeakeasyMetadata({ data: "json, name=email_verified" }),
         __metadata("design:type", Boolean)
     ], PostUserRequestBody.prototype, "emailVerified", void 0);
     __decorate([
-        Metadata({ data: "json, name=family_name" }),
+        SpeakeasyMetadata({ data: "json, name=family_name" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "familyName", void 0);
     __decorate([
-        Metadata({ data: "json, name=gender" }),
+        SpeakeasyMetadata({ data: "json, name=gender" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "gender", void 0);
     __decorate([
-        Metadata({ data: "json, name=given_name" }),
+        SpeakeasyMetadata({ data: "json, name=given_name" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "givenName", void 0);
     __decorate([
-        Metadata({ data: "json, name=locale" }),
+        SpeakeasyMetadata({ data: "json, name=locale" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "locale", void 0);
     __decorate([
-        Metadata({ data: "json, name=me" }),
+        SpeakeasyMetadata({ data: "json, name=me" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "me", void 0);
     __decorate([
-        Metadata({ data: "json, name=middle_name" }),
+        SpeakeasyMetadata({ data: "json, name=middle_name" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "middleName", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=nickname" }),
+        SpeakeasyMetadata({ data: "json, name=nickname" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "nickname", void 0);
     __decorate([
-        Metadata({ data: "json, name=password" }),
+        SpeakeasyMetadata({ data: "json, name=password" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "password", void 0);
     __decorate([
-        Metadata({ data: "json, name=phone_number" }),
+        SpeakeasyMetadata({ data: "json, name=phone_number" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "phoneNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=phone_number_verified" }),
+        SpeakeasyMetadata({ data: "json, name=phone_number_verified" }),
         __metadata("design:type", Boolean)
     ], PostUserRequestBody.prototype, "phoneNumberVerified", void 0);
     __decorate([
-        Metadata({ data: "json, name=picture" }),
+        SpeakeasyMetadata({ data: "json, name=picture" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "picture", void 0);
     __decorate([
-        Metadata({ data: "json, name=preferred_username" }),
+        SpeakeasyMetadata({ data: "json, name=preferred_username" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "preferredUsername", void 0);
     __decorate([
-        Metadata({ data: "json, name=profile" }),
+        SpeakeasyMetadata({ data: "json, name=profile" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "profile", void 0);
     __decorate([
-        Metadata({ data: "json, name=sub" }),
+        SpeakeasyMetadata({ data: "json, name=sub" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "sub", void 0);
     __decorate([
-        Metadata({ data: "json, name=uid" }),
+        SpeakeasyMetadata({ data: "json, name=uid" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "uid", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated_at" }),
+        SpeakeasyMetadata({ data: "json, name=updated_at" }),
         __metadata("design:type", Number)
     ], PostUserRequestBody.prototype, "updatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=webmail" }),
+        SpeakeasyMetadata({ data: "json, name=webmail" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "webmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=website" }),
+        SpeakeasyMetadata({ data: "json, name=website" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "website", void 0);
     __decorate([
-        Metadata({ data: "json, name=zoneinfo" }),
+        SpeakeasyMetadata({ data: "json, name=zoneinfo" }),
         __metadata("design:type", String)
     ], PostUserRequestBody.prototype, "zoneinfo", void 0);
     return PostUserRequestBody;
@@ -173,7 +173,7 @@ var PostUserRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", PostUserRequestBody)
     ], PostUserRequest.prototype, "request", void 0);
     return PostUserRequest;
@@ -185,11 +185,11 @@ var PostUserResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostUserResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostUserResponse.prototype, "statusCode", void 0);
     return PostUserResponse;

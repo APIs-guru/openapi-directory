@@ -74,15 +74,15 @@ type DcimDeviceTypesListQueryParams struct {
 	UHeightN           *string `queryParam:"style=form,explode=true,name=u_height__n"`
 }
 
-type DcimDeviceTypesListRequest struct {
-	QueryParams DcimDeviceTypesListQueryParams
-}
-
 type DcimDeviceTypesList200ApplicationJSON struct {
 	Count    int64               `json:"count"`
 	Next     *string             `json:"next,omitempty"`
 	Previous *string             `json:"previous,omitempty"`
 	Results  []shared.DeviceType `json:"results"`
+}
+
+type DcimDeviceTypesListRequest struct {
+	QueryParams DcimDeviceTypesListQueryParams
 }
 
 type DcimDeviceTypesListResponse struct {

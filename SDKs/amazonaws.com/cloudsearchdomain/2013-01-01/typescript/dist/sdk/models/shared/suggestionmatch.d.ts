@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * An autocomplete suggestion that matches the query string specified in a <code>SuggestRequest</code>.
 **/

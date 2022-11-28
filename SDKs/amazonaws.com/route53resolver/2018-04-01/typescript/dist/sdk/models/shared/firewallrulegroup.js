@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShareStatusEnum } from "./sharestatusenum";
 import { FirewallRuleGroupStatusEnum } from "./firewallrulegroupstatusenum";
 // FirewallRuleGroup
@@ -35,47 +35,47 @@ var FirewallRuleGroup = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Arn" }),
+        SpeakeasyMetadata({ data: "json, name=Arn" }),
         __metadata("design:type", String)
     ], FirewallRuleGroup.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", String)
     ], FirewallRuleGroup.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatorRequestId" }),
+        SpeakeasyMetadata({ data: "json, name=CreatorRequestId" }),
         __metadata("design:type", String)
     ], FirewallRuleGroup.prototype, "creatorRequestId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], FirewallRuleGroup.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModificationTime" }),
+        SpeakeasyMetadata({ data: "json, name=ModificationTime" }),
         __metadata("design:type", String)
     ], FirewallRuleGroup.prototype, "modificationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], FirewallRuleGroup.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=OwnerId" }),
+        SpeakeasyMetadata({ data: "json, name=OwnerId" }),
         __metadata("design:type", String)
     ], FirewallRuleGroup.prototype, "ownerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=RuleCount" }),
+        SpeakeasyMetadata({ data: "json, name=RuleCount" }),
         __metadata("design:type", Number)
     ], FirewallRuleGroup.prototype, "ruleCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=ShareStatus" }),
+        SpeakeasyMetadata({ data: "json, name=ShareStatus" }),
         __metadata("design:type", String)
     ], FirewallRuleGroup.prototype, "shareStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], FirewallRuleGroup.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=StatusMessage" }),
         __metadata("design:type", String)
     ], FirewallRuleGroup.prototype, "statusMessage", void 0);
     return FirewallRuleGroup;

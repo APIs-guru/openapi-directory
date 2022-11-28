@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReleaseStatusValuesEnum } from "./releasestatusvaluesenum";
 // OrderableReplicationInstance
 /**
@@ -34,39 +34,39 @@ var OrderableReplicationInstance = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AvailabilityZones" }),
+        SpeakeasyMetadata({ data: "json, name=AvailabilityZones" }),
         __metadata("design:type", Array)
     ], OrderableReplicationInstance.prototype, "availabilityZones", void 0);
     __decorate([
-        Metadata({ data: "json, name=DefaultAllocatedStorage" }),
+        SpeakeasyMetadata({ data: "json, name=DefaultAllocatedStorage" }),
         __metadata("design:type", Number)
     ], OrderableReplicationInstance.prototype, "defaultAllocatedStorage", void 0);
     __decorate([
-        Metadata({ data: "json, name=EngineVersion" }),
+        SpeakeasyMetadata({ data: "json, name=EngineVersion" }),
         __metadata("design:type", String)
     ], OrderableReplicationInstance.prototype, "engineVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=IncludedAllocatedStorage" }),
+        SpeakeasyMetadata({ data: "json, name=IncludedAllocatedStorage" }),
         __metadata("design:type", Number)
     ], OrderableReplicationInstance.prototype, "includedAllocatedStorage", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxAllocatedStorage" }),
+        SpeakeasyMetadata({ data: "json, name=MaxAllocatedStorage" }),
         __metadata("design:type", Number)
     ], OrderableReplicationInstance.prototype, "maxAllocatedStorage", void 0);
     __decorate([
-        Metadata({ data: "json, name=MinAllocatedStorage" }),
+        SpeakeasyMetadata({ data: "json, name=MinAllocatedStorage" }),
         __metadata("design:type", Number)
     ], OrderableReplicationInstance.prototype, "minAllocatedStorage", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReleaseStatus" }),
+        SpeakeasyMetadata({ data: "json, name=ReleaseStatus" }),
         __metadata("design:type", String)
     ], OrderableReplicationInstance.prototype, "releaseStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplicationInstanceClass" }),
+        SpeakeasyMetadata({ data: "json, name=ReplicationInstanceClass" }),
         __metadata("design:type", String)
     ], OrderableReplicationInstance.prototype, "replicationInstanceClass", void 0);
     __decorate([
-        Metadata({ data: "json, name=StorageType" }),
+        SpeakeasyMetadata({ data: "json, name=StorageType" }),
         __metadata("design:type", String)
     ], OrderableReplicationInstance.prototype, "storageType", void 0);
     return OrderableReplicationInstance;

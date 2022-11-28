@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TeamsListMembersPathParams:
-    team_id: int = field(default=None, metadata={'path_param': { 'field_name': 'team_id', 'style': 'simple', 'explode': False }})
+    team_id: int = field(metadata={'path_param': { 'field_name': 'team_id', 'style': 'simple', 'explode': False }})
     
 class TeamsListMembersRoleEnum(str, Enum):
     MEMBER = "member"
@@ -22,14 +23,14 @@ class TeamsListMembersQueryParams:
 
 @dataclass
 class TeamsListMembersRequest:
-    path_params: TeamsListMembersPathParams = field(default=None)
-    query_params: TeamsListMembersQueryParams = field(default=None)
+    path_params: TeamsListMembersPathParams = field()
+    query_params: TeamsListMembersQueryParams = field()
     
 
 @dataclass
 class TeamsListMembersResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     simple_users: Optional[List[shared.SimpleUser]] = field(default=None)
     

@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SeeEmailTemplateInformationQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=email_template_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email_template_id" })
   emailTemplateId?: string;
 }
 
 
 export class SeeEmailTemplateInformationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SeeEmailTemplateInformationQueryParams;
 }
 
 
 export class SeeEmailTemplateInformationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -4,15 +4,15 @@ type QuittungTseQueryParams struct {
 	Account *string `queryParam:"style=form,explode=true,name=account"`
 }
 
-type QuittungTseRequest struct {
-	QueryParams QuittungTseQueryParams
-}
-
 type QuittungTse200ApplicationJSON struct {
 	Data      *interface{} `json:"data,omitempty"`
 	Publickey *string      `json:"publickey,omitempty"`
 	Raw       *string      `json:"raw,omitempty"`
 	Signature *string      `json:"signature,omitempty"`
+}
+
+type QuittungTseRequest struct {
+	QueryParams QuittungTseQueryParams
 }
 
 type QuittungTseResponse struct {

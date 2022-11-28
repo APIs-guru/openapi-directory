@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApiV1BillTypesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Category" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Category" })
   category?: shared.BillTypeCategoryEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Skip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Skip" })
   skip?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Take" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Take" })
   take?: number;
 }
 
 
 export class GetApiV1BillTypesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiV1BillTypesQueryParams;
 }
 
 
 export class GetApiV1BillTypesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   billTypeSearchResult?: shared.BillTypeSearchResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

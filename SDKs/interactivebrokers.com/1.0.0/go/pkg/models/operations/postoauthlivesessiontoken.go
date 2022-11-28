@@ -10,13 +10,13 @@ type PostOauthLiveSessionTokenRequestBody struct {
 	OauthToken             *string `json:"oauth_token,omitempty"`
 }
 
-type PostOauthLiveSessionTokenRequest struct {
-	Request PostOauthLiveSessionTokenRequestBody `request:"mediaType=application/json"`
-}
-
 type PostOauthLiveSessionToken200ApplicationJSON struct {
 	DiffieHellmanResponse     *string `json:"diffie_hellman_response,omitempty"`
 	LiveSessionTokenSignature *string `json:"live_session_token_signature,omitempty"`
+}
+
+type PostOauthLiveSessionTokenRequest struct {
+	Request PostOauthLiveSessionTokenRequestBody `request:"mediaType=application/json"`
 }
 
 type PostOauthLiveSessionTokenResponse struct {

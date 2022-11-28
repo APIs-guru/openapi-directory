@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Promoter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=organisationName" })
+  @SpeakeasyMetadata({ data: "json, name=organisationName" })
   organisationName?: string;
 
-  @Metadata({ data: "json, name=organisationUrl" })
+  @SpeakeasyMetadata({ data: "json, name=organisationUrl" })
   organisationUrl?: string;
 }

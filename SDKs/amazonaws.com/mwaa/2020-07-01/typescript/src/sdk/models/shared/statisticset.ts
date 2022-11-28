@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StatisticSet
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Internal only API.
 **/
 export class StatisticSet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Maximum" })
+  @SpeakeasyMetadata({ data: "json, name=Maximum" })
   maximum?: number;
 
-  @Metadata({ data: "json, name=Minimum" })
+  @SpeakeasyMetadata({ data: "json, name=Minimum" })
   minimum?: number;
 
-  @Metadata({ data: "json, name=SampleCount" })
+  @SpeakeasyMetadata({ data: "json, name=SampleCount" })
   sampleCount?: number;
 
-  @Metadata({ data: "json, name=Sum" })
+  @SpeakeasyMetadata({ data: "json, name=Sum" })
   sum?: number;
 }

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class UpdateTenantWebhookPathParams:
-    webhook_id: int = field(default=None, metadata={'path_param': { 'field_name': 'webhook_id', 'style': 'simple', 'explode': False }})
+    webhook_id: int = field(metadata={'path_param': { 'field_name': 'webhook_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,15 +19,15 @@ class UpdateTenantWebhookHeaders:
 
 @dataclass
 class UpdateTenantWebhookRequest:
-    path_params: UpdateTenantWebhookPathParams = field(default=None)
-    headers: UpdateTenantWebhookHeaders = field(default=None)
-    request: shared.UpdateWebhookRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateTenantWebhookHeaders = field()
+    path_params: UpdateTenantWebhookPathParams = field()
+    request: shared.UpdateWebhookRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateTenantWebhookResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     webhook: Optional[shared.Webhook] = field(default=None)
     

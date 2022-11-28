@@ -9,11 +9,8 @@ type PostServersIDActionsChangeTypeRequestBody struct {
 	UpgradeDisk bool   `json:"upgrade_disk"`
 }
 
-type PostServersIDActionsChangeTypeRequest struct {
-	PathParams PostServersIDActionsChangeTypePathParams
-	Request    *PostServersIDActionsChangeTypeRequestBody `request:"mediaType=application/json"`
-}
-
+// PostServersIDActionsChangeTypeActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersIDActionsChangeTypeActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -45,6 +42,11 @@ type PostServersIDActionsChangeTypeActionResponseAction struct {
 
 type PostServersIDActionsChangeTypeActionResponse struct {
 	Action PostServersIDActionsChangeTypeActionResponseAction `json:"action"`
+}
+
+type PostServersIDActionsChangeTypeRequest struct {
+	PathParams PostServersIDActionsChangeTypePathParams
+	Request    *PostServersIDActionsChangeTypeRequestBody `request:"mediaType=application/json"`
 }
 
 type PostServersIDActionsChangeTypeResponse struct {

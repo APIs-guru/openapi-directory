@@ -67,6 +67,8 @@ const (
 	CrmlogErrorCodeCommonErrorCodeEnumExecutionCancelled                 CrmlogErrorCodeCommonErrorCodeEnum = "EXECUTION_CANCELLED"
 )
 
+// CrmlogErrorCode
+// Registered ids for errors, as "oneof" enums. Each task or logical grouping of tasks may share the same enum.
 type CrmlogErrorCode struct {
 	CommonErrorCode *CrmlogErrorCodeCommonErrorCodeEnum `json:"commonErrorCode,omitempty"`
 }

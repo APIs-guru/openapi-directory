@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SongAPIGetByIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class SongAPIGetByIDFieldsEnum(str, Enum):
     NONE = "None"
@@ -36,14 +37,14 @@ class SongAPIGetByIDQueryParams:
 
 @dataclass
 class SongAPIGetByIDRequest:
-    path_params: SongAPIGetByIDPathParams = field(default=None)
-    query_params: SongAPIGetByIDQueryParams = field(default=None)
+    path_params: SongAPIGetByIDPathParams = field()
+    query_params: SongAPIGetByIDQueryParams = field()
     
 
 @dataclass
 class SongAPIGetByIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     song_for_api_contract: Optional[shared.SongForAPIContract] = field(default=None)
-    status_code: int = field(default=None)
     

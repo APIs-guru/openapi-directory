@@ -1,5 +1,7 @@
 package shared
 
+// Options
+// Contains request options.
 type Options struct {
 	AnalyzeServiceAccountImpersonation *bool `json:"analyzeServiceAccountImpersonation,omitempty"`
 	ExpandGroups                       *bool `json:"expandGroups,omitempty"`

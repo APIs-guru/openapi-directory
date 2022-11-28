@@ -30,6 +30,8 @@ const (
 	RecolorNameEnumCustom    RecolorNameEnum = "CUSTOM"
 )
 
+// Recolor
+// A recolor effect applied on an image.
 type Recolor struct {
 	Name         *RecolorNameEnum `json:"name,omitempty"`
 	RecolorStops []ColorStop      `json:"recolorStops,omitempty"`

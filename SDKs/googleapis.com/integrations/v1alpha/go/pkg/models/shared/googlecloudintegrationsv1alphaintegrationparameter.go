@@ -26,6 +26,8 @@ const (
 	GoogleCloudIntegrationsV1alphaIntegrationParameterInputOutputTypeEnumInOut                GoogleCloudIntegrationsV1alphaIntegrationParameterInputOutputTypeEnum = "IN_OUT"
 )
 
+// GoogleCloudIntegrationsV1alphaIntegrationParameter
+// Integration Parameter is defined in the integration config and are used to provide information about data types of the expected parameters and provide any default values if needed. They can also be used to add custom attributes. These are static in nature and should not be used for dynamic event definition.
 type GoogleCloudIntegrationsV1alphaIntegrationParameter struct {
 	DataType        *GoogleCloudIntegrationsV1alphaIntegrationParameterDataTypeEnum        `json:"dataType,omitempty"`
 	DefaultValue    *GoogleCloudIntegrationsV1alphaValueType                               `json:"defaultValue,omitempty"`

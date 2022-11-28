@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -11,46 +12,36 @@ class GetManagedLinodeSettingsQueryParams:
     
 
 @dataclass
-class GetManagedLinodeSettingsSecurityOption1:
-    personal_access_token: shared.SchemePersonalAccessToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
-    
-
-@dataclass
-class GetManagedLinodeSettingsSecurityOption2:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
 class GetManagedLinodeSettingsSecurity:
-    option1: Optional[GetManagedLinodeSettingsSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetManagedLinodeSettingsSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    
-
-@dataclass
-class GetManagedLinodeSettingsRequest:
-    query_params: GetManagedLinodeSettingsQueryParams = field(default=None)
-    security: GetManagedLinodeSettingsSecurity = field(default=None)
+    oauth: Optional[shared.SchemeOauth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    personal_access_token: Optional[shared.SchemePersonalAccessToken] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass_json
 @dataclass
 class GetManagedLinodeSettings200ApplicationJSON:
-    data: Optional[List[shared.ManagedLinodeSettings]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
-    pages: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pages' }})
-    results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    data: Optional[List[shared.ManagedLinodeSettings]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('page') }})
+    pages: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pages') }})
+    results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
     
 
 @dataclass_json
 @dataclass
 class GetManagedLinodeSettingsDefaultApplicationJSON:
-    errors: Optional[List[shared.ErrorObject]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
+    errors: Optional[List[shared.ErrorObject]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
+    
+
+@dataclass
+class GetManagedLinodeSettingsRequest:
+    query_params: GetManagedLinodeSettingsQueryParams = field()
+    security: GetManagedLinodeSettingsSecurity = field()
     
 
 @dataclass
 class GetManagedLinodeSettingsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_managed_linode_settings_200_application_json_object: Optional[GetManagedLinodeSettings200ApplicationJSON] = field(default=None)
     get_managed_linode_settings_default_application_json_object: Optional[GetManagedLinodeSettingsDefaultApplicationJSON] = field(default=None)
     

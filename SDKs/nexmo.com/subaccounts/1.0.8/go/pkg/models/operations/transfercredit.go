@@ -12,12 +12,6 @@ type TransferCreditSecurity struct {
 	BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
 }
 
-type TransferCreditRequest struct {
-	PathParams TransferCreditPathParams
-	Request    shared.TransferBalanceOrCreditRequest `request:"mediaType=application/json"`
-	Security   TransferCreditSecurity
-}
-
 type TransferCredit401ApplicationJSON struct {
 	Detail   string `json:"detail"`
 	Instance string `json:"instance"`
@@ -25,6 +19,8 @@ type TransferCredit401ApplicationJSON struct {
 	Type     string `json:"type"`
 }
 
+// TransferCredit404ApplicationJSON
+// Invalid API Key
 type TransferCredit404ApplicationJSON struct {
 	Detail   string `json:"detail"`
 	Instance string `json:"instance"`
@@ -43,6 +39,12 @@ type TransferCredit422ApplicationJSON struct {
 	InvalidParameters []TransferCredit422ApplicationJSONInvalidParameters `json:"invalid_parameters"`
 	Title             string                                              `json:"title"`
 	Type              string                                              `json:"type"`
+}
+
+type TransferCreditRequest struct {
+	PathParams TransferCreditPathParams
+	Request    shared.TransferBalanceOrCreditRequest `request:"mediaType=application/json"`
+	Security   TransferCreditSecurity
 }
 
 type TransferCreditResponse struct {

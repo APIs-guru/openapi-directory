@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetRealmClientsIDManagementPermissionsPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetRealmClientsIDManagementPermissionsRequest:
-    path_params: GetRealmClientsIDManagementPermissionsPathParams = field(default=None)
+    path_params: GetRealmClientsIDManagementPermissionsPathParams = field()
     
 
 @dataclass
 class GetRealmClientsIDManagementPermissionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     management_permission_reference: Optional[shared.ManagementPermissionReference] = field(default=None)
-    status_code: int = field(default=None)
     

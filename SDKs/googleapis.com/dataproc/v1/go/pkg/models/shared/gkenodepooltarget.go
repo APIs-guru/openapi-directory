@@ -10,6 +10,8 @@ const (
 	GkeNodePoolTargetRolesEnumSparkExecutor   GkeNodePoolTargetRolesEnum = "SPARK_EXECUTOR"
 )
 
+// GkeNodePoolTarget
+// GKE node pools that Dataproc workloads run on.
 type GkeNodePoolTarget struct {
 	NodePool       *string                      `json:"nodePool,omitempty"`
 	NodePoolConfig *GkeNodePoolConfig           `json:"nodePoolConfig,omitempty"`

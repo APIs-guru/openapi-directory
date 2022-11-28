@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleGroup } from "./rulegroup";
 
 
+
 export class CreateRuleGroupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChangeToken" })
+  @SpeakeasyMetadata({ data: "json, name=ChangeToken" })
   changeToken?: string;
 
-  @Metadata({ data: "json, name=RuleGroup" })
+  @SpeakeasyMetadata({ data: "json, name=RuleGroup" })
   ruleGroup?: RuleGroup;
 }

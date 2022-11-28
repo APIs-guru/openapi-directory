@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CustomDeviceToPost
+// Container Class for the Web API
 type CustomDeviceToPost struct {
 	ID        *string              `json:"Id,omitempty"`
 	Name      *string              `json:"Name,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// BehaviorEntity
+// List Behaviors
 type BehaviorEntity struct {
 	AttachmentURL *string                `json:"attachment_url,omitempty"`
 	Behavior      *string                `json:"behavior,omitempty"`

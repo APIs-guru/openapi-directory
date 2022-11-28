@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetUpdateSamlProviderActionEnum(str, Enum):
     UPDATE_SAML_PROVIDER = "UpdateSAMLProvider"
@@ -10,10 +14,10 @@ class GetUpdateSamlProviderVersionEnum(str, Enum):
 
 @dataclass
 class GetUpdateSamlProviderQueryParams:
-    action: GetUpdateSamlProviderActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    saml_metadata_document: str = field(default=None, metadata={'query_param': { 'field_name': 'SAMLMetadataDocument', 'style': 'form', 'explode': True }})
-    saml_provider_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'SAMLProviderArn', 'style': 'form', 'explode': True }})
-    version: GetUpdateSamlProviderVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetUpdateSamlProviderActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    saml_metadata_document: str = field(metadata={'query_param': { 'field_name': 'SAMLMetadataDocument', 'style': 'form', 'explode': True }})
+    saml_provider_arn: str = field(metadata={'query_param': { 'field_name': 'SAMLProviderArn', 'style': 'form', 'explode': True }})
+    version: GetUpdateSamlProviderVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetUpdateSamlProviderHeaders:
 
 @dataclass
 class GetUpdateSamlProviderRequest:
-    query_params: GetUpdateSamlProviderQueryParams = field(default=None)
-    headers: GetUpdateSamlProviderHeaders = field(default=None)
+    headers: GetUpdateSamlProviderHeaders = field()
+    query_params: GetUpdateSamlProviderQueryParams = field()
     
 
 @dataclass
 class GetUpdateSamlProviderResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

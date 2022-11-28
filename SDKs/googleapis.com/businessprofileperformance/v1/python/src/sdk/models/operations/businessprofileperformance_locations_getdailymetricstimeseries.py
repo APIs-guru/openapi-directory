@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 class BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesDailyMetricEnum(str, Enum):
     DAILY_METRIC_UNKNOWN = "DAILY_METRIC_UNKNOWN"
@@ -60,13 +64,13 @@ class BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams:
 
 @dataclass
 class BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesRequest:
-    path_params: BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesPathParams = field(default=None)
-    query_params: BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams = field(default=None)
+    path_params: BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesPathParams = field()
+    query_params: BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesQueryParams = field()
     
 
 @dataclass
 class BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_daily_metrics_time_series_response: Optional[shared.GetDailyMetricsTimeSeriesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

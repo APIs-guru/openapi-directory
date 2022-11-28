@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var BacerRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(BacerRequestBodyCertificateParameters, _super);
@@ -30,7 +30,7 @@ var BacerRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=UDF1" }),
+        SpeakeasyMetadata({ data: "json, name=UDF1" }),
         __metadata("design:type", String)
     ], BacerRequestBodyCertificateParameters.prototype, "udf1", void 0);
     return BacerRequestBodyCertificateParameters;
@@ -46,19 +46,19 @@ var BacerRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", BacerRequestBodyCertificateParameters)
     ], BacerRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], BacerRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], BacerRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], BacerRequestBody.prototype, "txnId", void 0);
     return BacerRequestBody;
@@ -70,32 +70,16 @@ var BacerSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], BacerSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], BacerSecurity.prototype, "clientId", void 0);
     return BacerSecurity;
 }(SpeakeasyBase));
 export { BacerSecurity };
-var BacerRequest = /** @class */ (function (_super) {
-    __extends(BacerRequest, _super);
-    function BacerRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", BacerRequestBody)
-    ], BacerRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", BacerSecurity)
-    ], BacerRequest.prototype, "security", void 0);
-    return BacerRequest;
-}(SpeakeasyBase));
-export { BacerRequest };
 export var Bacer400ApplicationJsonErrorEnum;
 (function (Bacer400ApplicationJsonErrorEnum) {
     Bacer400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -118,11 +102,11 @@ var Bacer400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bacer400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bacer400ApplicationJson.prototype, "errorDescription", void 0);
     return Bacer400ApplicationJson;
@@ -144,11 +128,11 @@ var Bacer401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bacer401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bacer401ApplicationJson.prototype, "errorDescription", void 0);
     return Bacer401ApplicationJson;
@@ -170,11 +154,11 @@ var Bacer404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bacer404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bacer404ApplicationJson.prototype, "errorDescription", void 0);
     return Bacer404ApplicationJson;
@@ -194,11 +178,11 @@ var Bacer500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bacer500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bacer500ApplicationJson.prototype, "errorDescription", void 0);
     return Bacer500ApplicationJson;
@@ -218,11 +202,11 @@ var Bacer502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bacer502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bacer502ApplicationJson.prototype, "errorDescription", void 0);
     return Bacer502ApplicationJson;
@@ -242,11 +226,11 @@ var Bacer503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bacer503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bacer503ApplicationJson.prototype, "errorDescription", void 0);
     return Bacer503ApplicationJson;
@@ -266,55 +250,71 @@ var Bacer504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bacer504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bacer504ApplicationJson.prototype, "errorDescription", void 0);
     return Bacer504ApplicationJson;
 }(SpeakeasyBase));
 export { Bacer504ApplicationJson };
+var BacerRequest = /** @class */ (function (_super) {
+    __extends(BacerRequest, _super);
+    function BacerRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", BacerRequestBody)
+    ], BacerRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", BacerSecurity)
+    ], BacerRequest.prototype, "security", void 0);
+    return BacerRequest;
+}(SpeakeasyBase));
+export { BacerRequest };
 var BacerResponse = /** @class */ (function (_super) {
     __extends(BacerResponse, _super);
     function BacerResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], BacerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], BacerResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bacer400ApplicationJson)
     ], BacerResponse.prototype, "bacer400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bacer401ApplicationJson)
     ], BacerResponse.prototype, "bacer401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bacer404ApplicationJson)
     ], BacerResponse.prototype, "bacer404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bacer500ApplicationJson)
     ], BacerResponse.prototype, "bacer500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bacer502ApplicationJson)
     ], BacerResponse.prototype, "bacer502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bacer503ApplicationJson)
     ], BacerResponse.prototype, "bacer503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bacer504ApplicationJson)
     ], BacerResponse.prototype, "bacer504ApplicationJsonObject", void 0);
     return BacerResponse;

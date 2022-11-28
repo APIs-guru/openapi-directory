@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class CheckStatusEnum(str, Enum):
     CRITICAL = "Critical"
@@ -11,7 +12,7 @@ class CheckStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Check:
-    msg: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'msg' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    status: CheckStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    msg: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('msg') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    status: CheckStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

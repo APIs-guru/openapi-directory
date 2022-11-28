@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class UsageTypeEnum(str, Enum):
     DATA_INVENTORY_EVALUATION = "DATA_INVENTORY_EVALUATION"

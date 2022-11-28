@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CloudWatchMetricsDetail } from "./cloudwatchmetricsdetail";
 // AnomalySourceDetails
 /**
  *  Details about the source of the anomalous operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics.
@@ -34,7 +34,7 @@ var AnomalySourceDetails = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CloudWatchMetrics", elemType: shared.CloudWatchMetricsDetail }),
+        SpeakeasyMetadata({ data: "json, name=CloudWatchMetrics", elemType: CloudWatchMetricsDetail }),
         __metadata("design:type", Array)
     ], AnomalySourceDetails.prototype, "cloudWatchMetrics", void 0);
     return AnomalySourceDetails;

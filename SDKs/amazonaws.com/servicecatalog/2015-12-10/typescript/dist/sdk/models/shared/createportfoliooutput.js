@@ -22,20 +22,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PortfolioDetail } from "./portfoliodetail";
+import { Tag } from "./tag";
 var CreatePortfolioOutput = /** @class */ (function (_super) {
     __extends(CreatePortfolioOutput, _super);
     function CreatePortfolioOutput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PortfolioDetail" }),
+        SpeakeasyMetadata({ data: "json, name=PortfolioDetail" }),
         __metadata("design:type", PortfolioDetail)
     ], CreatePortfolioOutput.prototype, "portfolioDetail", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreatePortfolioOutput.prototype, "tags", void 0);
     return CreatePortfolioOutput;

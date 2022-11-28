@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AgentHealthCodeEnum } from "./agenthealthcodeenum";
 import { AgentHealthEnum } from "./agenthealthenum";
+
 
 
 // AgentFilter
@@ -8,9 +9,9 @@ import { AgentHealthEnum } from "./agenthealthenum";
  * Contains information about an Amazon Inspector agent. This data type is used as a request parameter in the <a>ListAssessmentRunAgents</a> action.
 **/
 export class AgentFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agentHealthCodes" })
+  @SpeakeasyMetadata({ data: "json, name=agentHealthCodes" })
   agentHealthCodes: AgentHealthCodeEnum[];
 
-  @Metadata({ data: "json, name=agentHealths" })
+  @SpeakeasyMetadata({ data: "json, name=agentHealths" })
   agentHealths: AgentHealthEnum[];
 }

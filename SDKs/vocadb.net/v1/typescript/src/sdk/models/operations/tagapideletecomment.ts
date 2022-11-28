@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TagApiDeleteCommentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=commentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=commentId" })
   commentId: number;
 }
 
 
 export class TagApiDeleteCommentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TagApiDeleteCommentPathParams;
 }
 
 
 export class TagApiDeleteCommentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

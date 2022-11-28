@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TrialComponentSource
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Amazon Resource Name (ARN) and job type of the source of a trial component.
 **/
 export class TrialComponentSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=SourceArn" })
   sourceArn: string;
 
-  @Metadata({ data: "json, name=SourceType" })
+  @SpeakeasyMetadata({ data: "json, name=SourceType" })
   sourceType?: string;
 }

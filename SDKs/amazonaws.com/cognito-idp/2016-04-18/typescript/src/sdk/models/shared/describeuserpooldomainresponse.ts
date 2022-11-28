@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainDescriptionType } from "./domaindescriptiontype";
 
 
+
 export class DescribeUserPoolDomainResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DomainDescription" })
+  @SpeakeasyMetadata({ data: "json, name=DomainDescription" })
   domainDescription?: DomainDescriptionType;
 }

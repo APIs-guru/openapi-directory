@@ -1,5 +1,7 @@
 package shared
 
+// MatchingJob
+// Job entry with metadata inside SearchJobsResponse.
 type MatchingJob struct {
 	CommuteInfo       *CommuteInfo `json:"commuteInfo,omitempty"`
 	Job               *Job         `json:"job,omitempty"`

@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import batchitemerror
-from . import batchdetectentitiesitemresult
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchDetectEntitiesResponse:
-    error_list: List[batchitemerror.BatchItemError] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ErrorList' }})
-    result_list: List[batchdetectentitiesitemresult.BatchDetectEntitiesItemResult] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResultList' }})
+    error_list: List[BatchItemError] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ErrorList') }})
+    result_list: List[BatchDetectEntitiesItemResult] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResultList') }})
     

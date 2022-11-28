@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsScriptTypeFunction } from "./googleappsscripttypefunction";
+
 
 
 // GoogleAppsScriptTypeFunctionSet
@@ -8,6 +8,6 @@ import { GoogleAppsScriptTypeFunction } from "./googleappsscripttypefunction";
  * A set of functions. No duplicates are permitted.
 **/
 export class GoogleAppsScriptTypeFunctionSet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=values", elemType: shared.GoogleAppsScriptTypeFunction })
+  @SpeakeasyMetadata({ data: "json, name=values", elemType: GoogleAppsScriptTypeFunction })
   values?: GoogleAppsScriptTypeFunction[];
 }

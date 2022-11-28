@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationConfigurationUpdate } from "./applicationconfigurationupdate";
+import { CloudWatchLoggingOptionUpdate } from "./cloudwatchloggingoptionupdate";
 import { RunConfigurationUpdate } from "./runconfigurationupdate";
 var UpdateApplicationRequest = /** @class */ (function (_super) {
     __extends(UpdateApplicationRequest, _super);
@@ -32,31 +32,31 @@ var UpdateApplicationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApplicationConfigurationUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationConfigurationUpdate" }),
         __metadata("design:type", ApplicationConfigurationUpdate)
     ], UpdateApplicationRequest.prototype, "applicationConfigurationUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationName" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationName" }),
         __metadata("design:type", String)
     ], UpdateApplicationRequest.prototype, "applicationName", void 0);
     __decorate([
-        Metadata({ data: "json, name=CloudWatchLoggingOptionUpdates", elemType: shared.CloudWatchLoggingOptionUpdate }),
+        SpeakeasyMetadata({ data: "json, name=CloudWatchLoggingOptionUpdates", elemType: CloudWatchLoggingOptionUpdate }),
         __metadata("design:type", Array)
     ], UpdateApplicationRequest.prototype, "cloudWatchLoggingOptionUpdates", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConditionalToken" }),
+        SpeakeasyMetadata({ data: "json, name=ConditionalToken" }),
         __metadata("design:type", String)
     ], UpdateApplicationRequest.prototype, "conditionalToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=CurrentApplicationVersionId" }),
+        SpeakeasyMetadata({ data: "json, name=CurrentApplicationVersionId" }),
         __metadata("design:type", Number)
     ], UpdateApplicationRequest.prototype, "currentApplicationVersionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=RunConfigurationUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=RunConfigurationUpdate" }),
         __metadata("design:type", RunConfigurationUpdate)
     ], UpdateApplicationRequest.prototype, "runConfigurationUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceExecutionRoleUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceExecutionRoleUpdate" }),
         __metadata("design:type", String)
     ], UpdateApplicationRequest.prototype, "serviceExecutionRoleUpdate", void 0);
     return UpdateApplicationRequest;

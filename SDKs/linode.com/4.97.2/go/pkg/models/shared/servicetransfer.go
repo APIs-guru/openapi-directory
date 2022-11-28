@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ServiceTransferEntities
+// A collection of the services to include in this transfer request, separated by type.
 type ServiceTransferEntities struct {
 	Linodes []int64 `json:"linodes,omitempty"`
 }
@@ -19,6 +21,8 @@ const (
 	ServiceTransferStatusEnumStale     ServiceTransferStatusEnum = "stale"
 )
 
+// ServiceTransfer
+// An object representing a Service Transfer.
 type ServiceTransfer struct {
 	Created  *time.Time                 `json:"created,omitempty"`
 	Entities *ServiceTransferEntities   `json:"entities,omitempty"`

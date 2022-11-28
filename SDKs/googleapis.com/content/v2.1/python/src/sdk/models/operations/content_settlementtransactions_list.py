@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContentSettlementtransactionsListPathParams:
-    merchant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
-    settlement_id: str = field(default=None, metadata={'path_param': { 'field_name': 'settlementId', 'style': 'simple', 'explode': False }})
+    merchant_id: str = field(metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
+    settlement_id: str = field(metadata={'path_param': { 'field_name': 'settlementId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class ContentSettlementtransactionsListQueryParams:
 
 @dataclass
 class ContentSettlementtransactionsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContentSettlementtransactionsListRequest:
-    path_params: ContentSettlementtransactionsListPathParams = field(default=None)
-    query_params: ContentSettlementtransactionsListQueryParams = field(default=None)
-    security: ContentSettlementtransactionsListSecurity = field(default=None)
+    path_params: ContentSettlementtransactionsListPathParams = field()
+    query_params: ContentSettlementtransactionsListQueryParams = field()
+    security: ContentSettlementtransactionsListSecurity = field()
     
 
 @dataclass
 class ContentSettlementtransactionsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     settlementtransactions_list_response: Optional[shared.SettlementtransactionsListResponse] = field(default=None)
-    status_code: int = field(default=None)
     

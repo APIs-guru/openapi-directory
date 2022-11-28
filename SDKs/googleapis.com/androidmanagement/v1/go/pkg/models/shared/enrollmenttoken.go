@@ -8,6 +8,8 @@ const (
 	EnrollmentTokenAllowPersonalUsageEnumPersonalUsageDisallowed       EnrollmentTokenAllowPersonalUsageEnum = "PERSONAL_USAGE_DISALLOWED"
 )
 
+// EnrollmentToken
+// An enrollment token.
 type EnrollmentToken struct {
 	AdditionalData      *string                                `json:"additionalData,omitempty"`
 	AllowPersonalUsage  *EnrollmentTokenAllowPersonalUsageEnum `json:"allowPersonalUsage,omitempty"`

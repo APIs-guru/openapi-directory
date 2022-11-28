@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EventSourceConfiguration
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes mapping between an Amazon Kinesis stream and a Lambda function.
 **/
 export class EventSourceConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BatchSize" })
+  @SpeakeasyMetadata({ data: "json, name=BatchSize" })
   batchSize?: number;
 
-  @Metadata({ data: "json, name=EventSource" })
+  @SpeakeasyMetadata({ data: "json, name=EventSource" })
   eventSource?: string;
 
-  @Metadata({ data: "json, name=FunctionName" })
+  @SpeakeasyMetadata({ data: "json, name=FunctionName" })
   functionName?: string;
 
-  @Metadata({ data: "json, name=IsActive" })
+  @SpeakeasyMetadata({ data: "json, name=IsActive" })
   isActive?: boolean;
 
-  @Metadata({ data: "json, name=LastModified" })
+  @SpeakeasyMetadata({ data: "json, name=LastModified" })
   lastModified?: Date;
 
-  @Metadata({ data: "json, name=Parameters" })
+  @SpeakeasyMetadata({ data: "json, name=Parameters" })
   parameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Role" })
+  @SpeakeasyMetadata({ data: "json, name=Role" })
   role?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 
-  @Metadata({ data: "json, name=UUID" })
+  @SpeakeasyMetadata({ data: "json, name=UUID" })
   uuid?: string;
 }

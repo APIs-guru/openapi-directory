@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DocumentDimensions } from "./documentdimensions";
 import { TextSnippet } from "./textsnippet";
 import { DocumentInputConfig } from "./documentinputconfig";
 import { Layout } from "./layout";
+
 
 
 // Document
@@ -11,18 +11,18 @@ import { Layout } from "./layout";
  * A structured text document e.g. a PDF.
 **/
 export class Document extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentDimensions" })
+  @SpeakeasyMetadata({ data: "json, name=documentDimensions" })
   documentDimensions?: DocumentDimensions;
 
-  @Metadata({ data: "json, name=documentText" })
+  @SpeakeasyMetadata({ data: "json, name=documentText" })
   documentText?: TextSnippet;
 
-  @Metadata({ data: "json, name=inputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=inputConfig" })
   inputConfig?: DocumentInputConfig;
 
-  @Metadata({ data: "json, name=layout", elemType: shared.Layout })
+  @SpeakeasyMetadata({ data: "json, name=layout", elemType: Layout })
   layout?: Layout[];
 
-  @Metadata({ data: "json, name=pageCount" })
+  @SpeakeasyMetadata({ data: "json, name=pageCount" })
   pageCount?: number;
 }

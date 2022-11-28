@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpdateError } from "./updateerror";
 import { UpdateStatusEnum } from "./updatestatusenum";
+
 
 
 // LastUpdate
@@ -8,12 +9,12 @@ import { UpdateStatusEnum } from "./updatestatusenum";
  * The status of the last update on the environment, and any errors that were encountered.
 **/
 export class LastUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=Error" })
+  @SpeakeasyMetadata({ data: "json, name=Error" })
   error?: UpdateError;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: UpdateStatusEnum;
 }

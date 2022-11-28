@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ResponseTimeRootCauseEntity
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A collection of segments and corresponding subsegments associated to a response time warning.
 **/
 export class ResponseTimeRootCauseEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Coverage" })
+  @SpeakeasyMetadata({ data: "json, name=Coverage" })
   coverage?: number;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Remote" })
+  @SpeakeasyMetadata({ data: "json, name=Remote" })
   remote?: boolean;
 }

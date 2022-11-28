@@ -21,6 +21,8 @@ type WorkflowRunUsageBillable struct {
 	Windows *WorkflowRunUsageBillableWindows `json:"WINDOWS,omitempty"`
 }
 
+// WorkflowRunUsage
+// Workflow Run Usage
 type WorkflowRunUsage struct {
 	Billable      WorkflowRunUsageBillable `json:"billable"`
 	RunDurationMs int64                    `json:"run_duration_ms"`

@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class DcimDevicesCreateRequest:
-    request: shared.WritableDeviceWithConfigContext = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WritableDeviceWithConfigContextInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DcimDevicesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     device_with_config_context: Optional[shared.DeviceWithConfigContext] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SummarizedCounter
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The counter that describes a DDoS attack.
 **/
 export class SummarizedCounter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Average" })
+  @SpeakeasyMetadata({ data: "json, name=Average" })
   average?: number;
 
-  @Metadata({ data: "json, name=Max" })
+  @SpeakeasyMetadata({ data: "json, name=Max" })
   max?: number;
 
-  @Metadata({ data: "json, name=N" })
+  @SpeakeasyMetadata({ data: "json, name=N" })
   n?: number;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Sum" })
+  @SpeakeasyMetadata({ data: "json, name=Sum" })
   sum?: number;
 
-  @Metadata({ data: "json, name=Unit" })
+  @SpeakeasyMetadata({ data: "json, name=Unit" })
   unit?: string;
 }

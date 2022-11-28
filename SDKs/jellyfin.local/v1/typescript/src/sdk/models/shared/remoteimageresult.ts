@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RemoteImageInfo } from "./remoteimageinfo";
+
 
 
 // RemoteImageResult
@@ -8,12 +8,12 @@ import { RemoteImageInfo } from "./remoteimageinfo";
  * Class RemoteImageResult.
 **/
 export class RemoteImageResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Images", elemType: shared.RemoteImageInfo })
+  @SpeakeasyMetadata({ data: "json, name=Images", elemType: RemoteImageInfo })
   images?: RemoteImageInfo[];
 
-  @Metadata({ data: "json, name=Providers" })
+  @SpeakeasyMetadata({ data: "json, name=Providers" })
   providers?: string[];
 
-  @Metadata({ data: "json, name=TotalRecordCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalRecordCount" })
   totalRecordCount?: number;
 }

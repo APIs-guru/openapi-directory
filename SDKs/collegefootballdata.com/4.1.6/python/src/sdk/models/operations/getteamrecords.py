@@ -12,12 +12,12 @@ class GetTeamRecordsQueryParams:
 
 @dataclass
 class GetTeamRecordsRequest:
-    query_params: GetTeamRecordsQueryParams = field(default=None)
+    query_params: GetTeamRecordsQueryParams = field()
     
 
 @dataclass
 class GetTeamRecordsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     team_records: Optional[List[shared.TeamRecord]] = field(default=None)
     

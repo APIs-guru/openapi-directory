@@ -1,5 +1,7 @@
 package shared
 
+// Folder
+// Represents a Google Tag Manager Folder.
 type Folder struct {
 	AccountID   *string `json:"accountId,omitempty"`
 	ContainerID *string `json:"containerId,omitempty"`

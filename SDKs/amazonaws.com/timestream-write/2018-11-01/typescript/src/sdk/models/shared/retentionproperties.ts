@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RetentionProperties
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Retention properties contain the duration for which your time series data must be stored in the magnetic store and the memory store. 
 **/
 export class RetentionProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MagneticStoreRetentionPeriodInDays" })
+  @SpeakeasyMetadata({ data: "json, name=MagneticStoreRetentionPeriodInDays" })
   magneticStoreRetentionPeriodInDays: number;
 
-  @Metadata({ data: "json, name=MemoryStoreRetentionPeriodInHours" })
+  @SpeakeasyMetadata({ data: "json, name=MemoryStoreRetentionPeriodInHours" })
   memoryStoreRetentionPeriodInHours: number;
 }

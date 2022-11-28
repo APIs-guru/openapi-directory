@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class PostClickwrapsRequestBodyUseWithBundlesEnum(str, Enum):
@@ -33,7 +34,7 @@ class PostClickwrapsRequest:
 
 @dataclass
 class PostClickwrapsResponse:
+    content_type: str = field()
+    status_code: int = field()
     clickwrap_entity: Optional[shared.ClickwrapEntity] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AmpIssue } from "./ampissue";
 export var AmpInspectionResultAmpIndexStatusVerdictEnum;
 (function (AmpInspectionResultAmpIndexStatusVerdictEnum) {
     AmpInspectionResultAmpIndexStatusVerdictEnum["VerdictUnspecified"] = "VERDICT_UNSPECIFIED";
@@ -78,35 +78,35 @@ var AmpInspectionResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ampIndexStatusVerdict" }),
+        SpeakeasyMetadata({ data: "json, name=ampIndexStatusVerdict" }),
         __metadata("design:type", String)
     ], AmpInspectionResult.prototype, "ampIndexStatusVerdict", void 0);
     __decorate([
-        Metadata({ data: "json, name=ampUrl" }),
+        SpeakeasyMetadata({ data: "json, name=ampUrl" }),
         __metadata("design:type", String)
     ], AmpInspectionResult.prototype, "ampUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=indexingState" }),
+        SpeakeasyMetadata({ data: "json, name=indexingState" }),
         __metadata("design:type", String)
     ], AmpInspectionResult.prototype, "indexingState", void 0);
     __decorate([
-        Metadata({ data: "json, name=issues", elemType: shared.AmpIssue }),
+        SpeakeasyMetadata({ data: "json, name=issues", elemType: AmpIssue }),
         __metadata("design:type", Array)
     ], AmpInspectionResult.prototype, "issues", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastCrawlTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastCrawlTime" }),
         __metadata("design:type", String)
     ], AmpInspectionResult.prototype, "lastCrawlTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=pageFetchState" }),
+        SpeakeasyMetadata({ data: "json, name=pageFetchState" }),
         __metadata("design:type", String)
     ], AmpInspectionResult.prototype, "pageFetchState", void 0);
     __decorate([
-        Metadata({ data: "json, name=robotsTxtState" }),
+        SpeakeasyMetadata({ data: "json, name=robotsTxtState" }),
         __metadata("design:type", String)
     ], AmpInspectionResult.prototype, "robotsTxtState", void 0);
     __decorate([
-        Metadata({ data: "json, name=verdict" }),
+        SpeakeasyMetadata({ data: "json, name=verdict" }),
         __metadata("design:type", String)
     ], AmpInspectionResult.prototype, "verdict", void 0);
     return AmpInspectionResult;

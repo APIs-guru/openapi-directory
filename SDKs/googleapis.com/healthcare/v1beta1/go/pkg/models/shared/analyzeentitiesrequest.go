@@ -8,6 +8,8 @@ const (
 	AnalyzeEntitiesRequestLicensedVocabulariesEnumSnomedctUs                    AnalyzeEntitiesRequestLicensedVocabulariesEnum = "SNOMEDCT_US"
 )
 
+// AnalyzeEntitiesRequest
+// The request to analyze healthcare entities in a document.
 type AnalyzeEntitiesRequest struct {
 	DocumentContent      *string                                          `json:"documentContent,omitempty"`
 	LicensedVocabularies []AnalyzeEntitiesRequestLicensedVocabulariesEnum `json:"licensedVocabularies,omitempty"`

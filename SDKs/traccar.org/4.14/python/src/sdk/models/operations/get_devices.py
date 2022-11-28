@@ -13,12 +13,12 @@ class GetDevicesQueryParams:
 
 @dataclass
 class GetDevicesRequest:
-    query_params: GetDevicesQueryParams = field(default=None)
+    query_params: GetDevicesQueryParams = field()
     
 
 @dataclass
 class GetDevicesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     devices: Optional[List[shared.Device]] = field(default=None)
-    status_code: int = field(default=None)
     

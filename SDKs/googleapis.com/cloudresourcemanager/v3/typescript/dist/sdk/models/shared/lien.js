@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Lien
 /**
  * A Lien represents an encumbrance on the actions that can be performed on a resource.
@@ -33,27 +33,27 @@ var Lien = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Lien.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Lien.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=origin" }),
+        SpeakeasyMetadata({ data: "json, name=origin" }),
         __metadata("design:type", String)
     ], Lien.prototype, "origin", void 0);
     __decorate([
-        Metadata({ data: "json, name=parent" }),
+        SpeakeasyMetadata({ data: "json, name=parent" }),
         __metadata("design:type", String)
     ], Lien.prototype, "parent", void 0);
     __decorate([
-        Metadata({ data: "json, name=reason" }),
+        SpeakeasyMetadata({ data: "json, name=reason" }),
         __metadata("design:type", String)
     ], Lien.prototype, "reason", void 0);
     __decorate([
-        Metadata({ data: "json, name=restrictions" }),
+        SpeakeasyMetadata({ data: "json, name=restrictions" }),
         __metadata("design:type", Array)
     ], Lien.prototype, "restrictions", void 0);
     return Lien;

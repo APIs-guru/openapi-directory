@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScriptTypeEnum } from "./scripttypeenum";
 import { Source } from "./source";
 // SsmValidationParameters
@@ -35,27 +35,27 @@ var SsmValidationParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=command" }),
+        SpeakeasyMetadata({ data: "json, name=command" }),
         __metadata("design:type", String)
     ], SsmValidationParameters.prototype, "command", void 0);
     __decorate([
-        Metadata({ data: "json, name=executionTimeoutSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=executionTimeoutSeconds" }),
         __metadata("design:type", Number)
     ], SsmValidationParameters.prototype, "executionTimeoutSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceId" }),
+        SpeakeasyMetadata({ data: "json, name=instanceId" }),
         __metadata("design:type", String)
     ], SsmValidationParameters.prototype, "instanceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=outputS3BucketName" }),
+        SpeakeasyMetadata({ data: "json, name=outputS3BucketName" }),
         __metadata("design:type", String)
     ], SsmValidationParameters.prototype, "outputS3BucketName", void 0);
     __decorate([
-        Metadata({ data: "json, name=scriptType" }),
+        SpeakeasyMetadata({ data: "json, name=scriptType" }),
         __metadata("design:type", String)
     ], SsmValidationParameters.prototype, "scriptType", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", Source)
     ], SsmValidationParameters.prototype, "source", void 0);
     return SsmValidationParameters;

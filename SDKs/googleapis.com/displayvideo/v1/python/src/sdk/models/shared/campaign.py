@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import campaignbudget
-from . import campaignflight
-from . import campaigngoal
-from . import frequencycap
+from sdk import utils
+from . import *
 
 class CampaignEntityStatusEnum(str, Enum):
     ENTITY_STATUS_UNSPECIFIED = "ENTITY_STATUS_UNSPECIFIED"
@@ -17,15 +19,34 @@ class CampaignEntityStatusEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class CampaignInput:
+    r"""CampaignInput
+    A single campaign.
+    """
+    
+    campaign_budgets: Optional[List[CampaignBudget]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('campaignBudgets') }})
+    campaign_flight: Optional[CampaignFlight] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('campaignFlight') }})
+    campaign_goal: Optional[CampaignGoal] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('campaignGoal') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    entity_status: Optional[CampaignEntityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entityStatus') }})
+    frequency_cap: Optional[FrequencyCap] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('frequencyCap') }})
+    
+
+@dataclass_json
+@dataclass
 class Campaign:
-    advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'advertiserId' }})
-    campaign_budgets: Optional[List[campaignbudget.CampaignBudget]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'campaignBudgets' }})
-    campaign_flight: Optional[campaignflight.CampaignFlight] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'campaignFlight' }})
-    campaign_goal: Optional[campaigngoal.CampaignGoal] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'campaignGoal' }})
-    campaign_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'campaignId' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    entity_status: Optional[CampaignEntityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entityStatus' }})
-    frequency_cap: Optional[frequencycap.FrequencyCap] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'frequencyCap' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
+    r"""Campaign
+    A single campaign.
+    """
+    
+    advertiser_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('advertiserId') }})
+    campaign_budgets: Optional[List[CampaignBudget]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('campaignBudgets') }})
+    campaign_flight: Optional[CampaignFlight] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('campaignFlight') }})
+    campaign_goal: Optional[CampaignGoal] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('campaignGoal') }})
+    campaign_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('campaignId') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    entity_status: Optional[CampaignEntityStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entityStatus') }})
+    frequency_cap: Optional[FrequencyCap] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('frequencyCap') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
     

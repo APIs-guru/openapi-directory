@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AppConfigPlayback extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chainPlayCountdown" })
+  @SpeakeasyMetadata({ data: "json, name=chainPlayCountdown" })
   chainPlayCountdown: number;
 
-  @Metadata({ data: "json, name=chainPlaySqueezeback" })
+  @SpeakeasyMetadata({ data: "json, name=chainPlaySqueezeback" })
   chainPlaySqueezeback: number;
 
-  @Metadata({ data: "json, name=chainPlayTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=chainPlayTimeout" })
   chainPlayTimeout: number;
 
-  @Metadata({ data: "json, name=heartbeatFrequency" })
+  @SpeakeasyMetadata({ data: "json, name=heartbeatFrequency" })
   heartbeatFrequency: number;
 
-  @Metadata({ data: "json, name=viewEventPoints" })
+  @SpeakeasyMetadata({ data: "json, name=viewEventPoints" })
   viewEventPoints: number[];
 }

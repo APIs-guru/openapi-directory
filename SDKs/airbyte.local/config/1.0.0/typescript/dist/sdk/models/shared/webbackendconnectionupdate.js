@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NamespaceDefinitionTypeEnum } from "./namespacedefinitiontypeenum";
+import { WebBackendOperationCreateOrUpdate } from "./webbackendoperationcreateorupdate";
 import { ResourceRequirements } from "./resourcerequirements";
 import { ConnectionSchedule } from "./connectionschedule";
 import { ConnectionStatusEnum } from "./connectionstatusenum";
@@ -35,47 +35,47 @@ var WebBackendConnectionUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=connectionId" }),
+        SpeakeasyMetadata({ data: "json, name=connectionId" }),
         __metadata("design:type", String)
     ], WebBackendConnectionUpdate.prototype, "connectionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=namespaceDefinition" }),
+        SpeakeasyMetadata({ data: "json, name=namespaceDefinition" }),
         __metadata("design:type", String)
     ], WebBackendConnectionUpdate.prototype, "namespaceDefinition", void 0);
     __decorate([
-        Metadata({ data: "json, name=namespaceFormat" }),
+        SpeakeasyMetadata({ data: "json, name=namespaceFormat" }),
         __metadata("design:type", String)
     ], WebBackendConnectionUpdate.prototype, "namespaceFormat", void 0);
     __decorate([
-        Metadata({ data: "json, name=operationIds" }),
+        SpeakeasyMetadata({ data: "json, name=operationIds" }),
         __metadata("design:type", Array)
     ], WebBackendConnectionUpdate.prototype, "operationIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=operations", elemType: shared.WebBackendOperationCreateOrUpdate }),
+        SpeakeasyMetadata({ data: "json, name=operations", elemType: WebBackendOperationCreateOrUpdate }),
         __metadata("design:type", Array)
     ], WebBackendConnectionUpdate.prototype, "operations", void 0);
     __decorate([
-        Metadata({ data: "json, name=prefix" }),
+        SpeakeasyMetadata({ data: "json, name=prefix" }),
         __metadata("design:type", String)
     ], WebBackendConnectionUpdate.prototype, "prefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceRequirements" }),
+        SpeakeasyMetadata({ data: "json, name=resourceRequirements" }),
         __metadata("design:type", ResourceRequirements)
     ], WebBackendConnectionUpdate.prototype, "resourceRequirements", void 0);
     __decorate([
-        Metadata({ data: "json, name=schedule" }),
+        SpeakeasyMetadata({ data: "json, name=schedule" }),
         __metadata("design:type", ConnectionSchedule)
     ], WebBackendConnectionUpdate.prototype, "schedule", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], WebBackendConnectionUpdate.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=syncCatalog" }),
+        SpeakeasyMetadata({ data: "json, name=syncCatalog" }),
         __metadata("design:type", AirbyteCatalog)
     ], WebBackendConnectionUpdate.prototype, "syncCatalog", void 0);
     __decorate([
-        Metadata({ data: "json, name=withRefreshedCatalog" }),
+        SpeakeasyMetadata({ data: "json, name=withRefreshedCatalog" }),
         __metadata("design:type", Boolean)
     ], WebBackendConnectionUpdate.prototype, "withRefreshedCatalog", void 0);
     return WebBackendConnectionUpdate;

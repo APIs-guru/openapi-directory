@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CandidateStepTypeEnum } from "./candidatesteptypeenum";
+
 
 
 // AutoMlCandidateStep
@@ -7,12 +8,12 @@ import { CandidateStepTypeEnum } from "./candidatesteptypeenum";
  * Information about the steps for a candidate and what step it is working on.
 **/
 export class AutoMlCandidateStep extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CandidateStepArn" })
+  @SpeakeasyMetadata({ data: "json, name=CandidateStepArn" })
   candidateStepArn: string;
 
-  @Metadata({ data: "json, name=CandidateStepName" })
+  @SpeakeasyMetadata({ data: "json, name=CandidateStepName" })
   candidateStepName: string;
 
-  @Metadata({ data: "json, name=CandidateStepType" })
+  @SpeakeasyMetadata({ data: "json, name=CandidateStepType" })
   candidateStepType: CandidateStepTypeEnum;
 }

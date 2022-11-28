@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudchannelAccountsCustomersEntitlementsLookupOfferPathParams:
-    entitlement: str = field(default=None, metadata={'path_param': { 'field_name': 'entitlement', 'style': 'simple', 'explode': False }})
+    entitlement: str = field(metadata={'path_param': { 'field_name': 'entitlement', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class CloudchannelAccountsCustomersEntitlementsLookupOfferQueryParams:
 
 @dataclass
 class CloudchannelAccountsCustomersEntitlementsLookupOfferSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudchannelAccountsCustomersEntitlementsLookupOfferRequest:
-    path_params: CloudchannelAccountsCustomersEntitlementsLookupOfferPathParams = field(default=None)
-    query_params: CloudchannelAccountsCustomersEntitlementsLookupOfferQueryParams = field(default=None)
-    security: CloudchannelAccountsCustomersEntitlementsLookupOfferSecurity = field(default=None)
+    path_params: CloudchannelAccountsCustomersEntitlementsLookupOfferPathParams = field()
+    query_params: CloudchannelAccountsCustomersEntitlementsLookupOfferQueryParams = field()
+    security: CloudchannelAccountsCustomersEntitlementsLookupOfferSecurity = field()
     
 
 @dataclass
 class CloudchannelAccountsCustomersEntitlementsLookupOfferResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_channel_v1_offer: Optional[shared.GoogleCloudChannelV1Offer] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,16 +1,25 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class SecretMgmtLinksSelf:
-    href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'href' }})
+    r"""SecretMgmtLinksSelf
+    This resource
+    """
+    
+    href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('href') }})
     
 
 @dataclass_json
 @dataclass
 class SecretMgmtLinks:
-    self: Optional[SecretMgmtLinksSelf] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'self' }})
+    r"""SecretMgmtLinks
+    Links related to this resource
+    """
+    
+    self: Optional[SecretMgmtLinksSelf] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('self') }})
     

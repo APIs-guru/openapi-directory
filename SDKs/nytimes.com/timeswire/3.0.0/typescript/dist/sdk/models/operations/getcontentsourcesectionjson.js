@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var GetContentSourceSectionJsonSourceEnum;
 (function (GetContentSourceSectionJsonSourceEnum) {
@@ -36,11 +36,11 @@ var GetContentSourceSectionJsonPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=section" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=section" }),
         __metadata("design:type", String)
     ], GetContentSourceSectionJsonPathParams.prototype, "section", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=source" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=source" }),
         __metadata("design:type", String)
     ], GetContentSourceSectionJsonPathParams.prototype, "source", void 0);
     return GetContentSourceSectionJsonPathParams;
@@ -52,71 +52,71 @@ var GetContentSourceSectionJsonQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetContentSourceSectionJsonQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], GetContentSourceSectionJsonQueryParams.prototype, "offset", void 0);
     return GetContentSourceSectionJsonQueryParams;
 }(SpeakeasyBase));
 export { GetContentSourceSectionJsonQueryParams };
-var GetContentSourceSectionJsonRequest = /** @class */ (function (_super) {
-    __extends(GetContentSourceSectionJsonRequest, _super);
-    function GetContentSourceSectionJsonRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetContentSourceSectionJsonPathParams)
-    ], GetContentSourceSectionJsonRequest.prototype, "pathParams", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetContentSourceSectionJsonQueryParams)
-    ], GetContentSourceSectionJsonRequest.prototype, "queryParams", void 0);
-    return GetContentSourceSectionJsonRequest;
-}(SpeakeasyBase));
-export { GetContentSourceSectionJsonRequest };
 var GetContentSourceSectionJson200ApplicationJson = /** @class */ (function (_super) {
     __extends(GetContentSourceSectionJson200ApplicationJson, _super);
     function GetContentSourceSectionJson200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=copyright" }),
+        SpeakeasyMetadata({ data: "json, name=copyright" }),
         __metadata("design:type", String)
     ], GetContentSourceSectionJson200ApplicationJson.prototype, "copyright", void 0);
     __decorate([
-        Metadata({ data: "json, name=num_results" }),
+        SpeakeasyMetadata({ data: "json, name=num_results" }),
         __metadata("design:type", Number)
     ], GetContentSourceSectionJson200ApplicationJson.prototype, "numResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=results", elemType: shared.Article }),
+        SpeakeasyMetadata({ data: "json, name=results", elemType: shared.Article }),
         __metadata("design:type", Array)
     ], GetContentSourceSectionJson200ApplicationJson.prototype, "results", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], GetContentSourceSectionJson200ApplicationJson.prototype, "status", void 0);
     return GetContentSourceSectionJson200ApplicationJson;
 }(SpeakeasyBase));
 export { GetContentSourceSectionJson200ApplicationJson };
+var GetContentSourceSectionJsonRequest = /** @class */ (function (_super) {
+    __extends(GetContentSourceSectionJsonRequest, _super);
+    function GetContentSourceSectionJsonRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetContentSourceSectionJsonPathParams)
+    ], GetContentSourceSectionJsonRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetContentSourceSectionJsonQueryParams)
+    ], GetContentSourceSectionJsonRequest.prototype, "queryParams", void 0);
+    return GetContentSourceSectionJsonRequest;
+}(SpeakeasyBase));
+export { GetContentSourceSectionJsonRequest };
 var GetContentSourceSectionJsonResponse = /** @class */ (function (_super) {
     __extends(GetContentSourceSectionJsonResponse, _super);
     function GetContentSourceSectionJsonResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetContentSourceSectionJsonResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetContentSourceSectionJson200ApplicationJson)
     ], GetContentSourceSectionJsonResponse.prototype, "getContentSourceSectionJson200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetContentSourceSectionJsonResponse.prototype, "statusCode", void 0);
     return GetContentSourceSectionJsonResponse;

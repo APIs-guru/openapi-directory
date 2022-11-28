@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OnDemandRegion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=country_code" })
+  @SpeakeasyMetadata({ data: "json, name=country_code" })
   countryCode: string;
 
-  @Metadata({ data: "json, name=country_name" })
+  @SpeakeasyMetadata({ data: "json, name=country_name" })
   countryName: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri: string;
 }

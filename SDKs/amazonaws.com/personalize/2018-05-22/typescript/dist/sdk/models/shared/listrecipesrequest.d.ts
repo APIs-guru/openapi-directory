@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RecipeProviderEnum } from "./recipeproviderenum";
 export declare class ListRecipesRequest extends SpeakeasyBase {
     maxResults?: number;

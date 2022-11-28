@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var FindDevicesByOwnerRequestSectionTypeEnum;
 (function (FindDevicesByOwnerRequestSectionTypeEnum) {
     FindDevicesByOwnerRequestSectionTypeEnum["SectionTypeUnspecified"] = "SECTION_TYPE_UNSPECIFIED";
@@ -39,19 +39,23 @@ var FindDevicesByOwnerRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customerId" }),
+        SpeakeasyMetadata({ data: "json, name=customerId" }),
         __metadata("design:type", Array)
     ], FindDevicesByOwnerRequest.prototype, "customerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=limit" }),
+        SpeakeasyMetadata({ data: "json, name=googleWorkspaceCustomerId" }),
+        __metadata("design:type", Array)
+    ], FindDevicesByOwnerRequest.prototype, "googleWorkspaceCustomerId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=limit" }),
         __metadata("design:type", String)
     ], FindDevicesByOwnerRequest.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "json, name=pageToken" }),
+        SpeakeasyMetadata({ data: "json, name=pageToken" }),
         __metadata("design:type", String)
     ], FindDevicesByOwnerRequest.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=sectionType" }),
+        SpeakeasyMetadata({ data: "json, name=sectionType" }),
         __metadata("design:type", String)
     ], FindDevicesByOwnerRequest.prototype, "sectionType", void 0);
     return FindDevicesByOwnerRequest;

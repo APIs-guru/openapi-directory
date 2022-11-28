@@ -16,6 +16,8 @@ const (
 	CreativeRotationWeightCalculationStrategyEnumWeightStrategyOptimized  CreativeRotationWeightCalculationStrategyEnum = "WEIGHT_STRATEGY_OPTIMIZED"
 )
 
+// CreativeRotation
+// Creative Rotation.
 type CreativeRotation struct {
 	CreativeAssignments                 []CreativeAssignment                           `json:"creativeAssignments,omitempty"`
 	CreativeOptimizationConfigurationID *string                                        `json:"creativeOptimizationConfigurationId,omitempty"`

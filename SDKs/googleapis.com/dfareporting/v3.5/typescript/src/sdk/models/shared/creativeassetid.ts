@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CreativeAssetIdTypeEnum {
-    Image = "IMAGE"
-,    Flash = "FLASH"
-,    Video = "VIDEO"
-,    Html = "HTML"
-,    HtmlImage = "HTML_IMAGE"
-,    Audio = "AUDIO"
+    Image = "IMAGE",
+    Flash = "FLASH",
+    Video = "VIDEO",
+    Html = "HTML",
+    HtmlImage = "HTML_IMAGE",
+    Audio = "AUDIO"
 }
 
 
@@ -15,9 +16,9 @@ export enum CreativeAssetIdTypeEnum {
  * Creative Asset ID.
 **/
 export class CreativeAssetId extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: CreativeAssetIdTypeEnum;
 }

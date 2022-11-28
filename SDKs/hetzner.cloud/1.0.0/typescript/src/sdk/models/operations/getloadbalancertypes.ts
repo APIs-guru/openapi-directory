@@ -1,15 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetLoadBalancerTypesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
-}
-
-
-export class GetLoadBalancerTypesRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetLoadBalancerTypesQueryParams;
 }
 
 
@@ -18,10 +13,10 @@ export class GetLoadBalancerTypesRequest extends SpeakeasyBase {
  * Hourly costs for a Resource in this Location
 **/
 export class GetLoadBalancerTypes200ApplicationJsonLoadBalancerTypesPricesPriceHourly extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gross" })
+  @SpeakeasyMetadata({ data: "json, name=gross" })
   gross: string;
 
-  @Metadata({ data: "json, name=net" })
+  @SpeakeasyMetadata({ data: "json, name=net" })
   net: string;
 }
 
@@ -31,69 +26,75 @@ export class GetLoadBalancerTypes200ApplicationJsonLoadBalancerTypesPricesPriceH
  * Monthly costs for a Resource in this Location
 **/
 export class GetLoadBalancerTypes200ApplicationJsonLoadBalancerTypesPricesPriceMonthly extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gross" })
+  @SpeakeasyMetadata({ data: "json, name=gross" })
   gross: string;
 
-  @Metadata({ data: "json, name=net" })
+  @SpeakeasyMetadata({ data: "json, name=net" })
   net: string;
 }
 
 
 export class GetLoadBalancerTypes200ApplicationJsonLoadBalancerTypesPrices extends SpeakeasyBase {
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location: string;
 
-  @Metadata({ data: "json, name=price_hourly" })
+  @SpeakeasyMetadata({ data: "json, name=price_hourly" })
   priceHourly: GetLoadBalancerTypes200ApplicationJsonLoadBalancerTypesPricesPriceHourly;
 
-  @Metadata({ data: "json, name=price_monthly" })
+  @SpeakeasyMetadata({ data: "json, name=price_monthly" })
   priceMonthly: GetLoadBalancerTypes200ApplicationJsonLoadBalancerTypesPricesPriceMonthly;
 }
 
 
 export class GetLoadBalancerTypes200ApplicationJsonLoadBalancerTypes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deprecated" })
+  @SpeakeasyMetadata({ data: "json, name=deprecated" })
   deprecated: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=max_assigned_certificates" })
+  @SpeakeasyMetadata({ data: "json, name=max_assigned_certificates" })
   maxAssignedCertificates: number;
 
-  @Metadata({ data: "json, name=max_connections" })
+  @SpeakeasyMetadata({ data: "json, name=max_connections" })
   maxConnections: number;
 
-  @Metadata({ data: "json, name=max_services" })
+  @SpeakeasyMetadata({ data: "json, name=max_services" })
   maxServices: number;
 
-  @Metadata({ data: "json, name=max_targets" })
+  @SpeakeasyMetadata({ data: "json, name=max_targets" })
   maxTargets: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=prices", elemType: operations.GetLoadBalancerTypes200ApplicationJsonLoadBalancerTypesPrices })
+  @SpeakeasyMetadata({ data: "json, name=prices", elemType: GetLoadBalancerTypes200ApplicationJsonLoadBalancerTypesPrices })
   prices: GetLoadBalancerTypes200ApplicationJsonLoadBalancerTypesPrices[];
 }
 
 
 export class GetLoadBalancerTypes200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=load_balancer_types", elemType: operations.GetLoadBalancerTypes200ApplicationJsonLoadBalancerTypes })
+  @SpeakeasyMetadata({ data: "json, name=load_balancer_types", elemType: GetLoadBalancerTypes200ApplicationJsonLoadBalancerTypes })
   loadBalancerTypes: GetLoadBalancerTypes200ApplicationJsonLoadBalancerTypes[];
 }
 
 
+export class GetLoadBalancerTypesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetLoadBalancerTypesQueryParams;
+}
+
+
 export class GetLoadBalancerTypesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLoadBalancerTypes200ApplicationJsonObject?: GetLoadBalancerTypes200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,10 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SnapshotStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Ready = "READY"
-,    Deleting = "DELETING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Ready = "READY",
+    Deleting = "DELETING"
+}
+
+
+// SnapshotInput
+/** 
+ * A Filestore snapshot.
+**/
+export class SnapshotInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
 }
 
 
@@ -13,21 +27,21 @@ export enum SnapshotStateEnum {
  * A Filestore snapshot.
 **/
 export class Snapshot extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=filesystemUsedBytes" })
+  @SpeakeasyMetadata({ data: "json, name=filesystemUsedBytes" })
   filesystemUsedBytes?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: SnapshotStateEnum;
 }

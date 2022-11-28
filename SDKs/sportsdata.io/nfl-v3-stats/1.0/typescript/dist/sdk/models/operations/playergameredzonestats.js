@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PlayerGameRedZoneStatsFormatEnum;
 (function (PlayerGameRedZoneStatsFormatEnum) {
     PlayerGameRedZoneStatsFormatEnum["Xml"] = "XML";
@@ -34,15 +34,15 @@ var PlayerGameRedZoneStatsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], PlayerGameRedZoneStatsPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=season" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=season" }),
         __metadata("design:type", String)
     ], PlayerGameRedZoneStatsPathParams.prototype, "season", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=week" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=week" }),
         __metadata("design:type", String)
     ], PlayerGameRedZoneStatsPathParams.prototype, "week", void 0);
     return PlayerGameRedZoneStatsPathParams;
@@ -54,7 +54,7 @@ var PlayerGameRedZoneStatsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PlayerGameRedZoneStatsPathParams)
     ], PlayerGameRedZoneStatsRequest.prototype, "pathParams", void 0);
     return PlayerGameRedZoneStatsRequest;
@@ -66,15 +66,15 @@ var PlayerGameRedZoneStatsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PlayerGameRedZoneStatsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], PlayerGameRedZoneStatsResponse.prototype, "playerGameRedZones", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PlayerGameRedZoneStatsResponse.prototype, "statusCode", void 0);
     return PlayerGameRedZoneStatsResponse;

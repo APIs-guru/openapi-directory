@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EventLink } from "./eventlink";
 import { EventTypesEnum } from "./eventtypesenum";
 export declare enum AuditEventSourceEnum {

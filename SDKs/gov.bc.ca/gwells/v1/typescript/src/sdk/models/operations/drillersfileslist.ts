@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DrillersFilesListPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=person_guid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=person_guid" })
   personGuid: string;
 }
 
 
-export class DrillersFilesListRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DrillersFilesListPathParams;
-}
-
-
 export class DrillersFilesList200ApplicationJsonPrivate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
 
 export class DrillersFilesList200ApplicationJsonPublic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
 
 export class DrillersFilesList200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=private", elemType: operations.DrillersFilesList200ApplicationJsonPrivate })
+  @SpeakeasyMetadata({ data: "json, name=private", elemType: DrillersFilesList200ApplicationJsonPrivate })
   private?: DrillersFilesList200ApplicationJsonPrivate[];
 
-  @Metadata({ data: "json, name=public", elemType: operations.DrillersFilesList200ApplicationJsonPublic })
+  @SpeakeasyMetadata({ data: "json, name=public", elemType: DrillersFilesList200ApplicationJsonPublic })
   public?: DrillersFilesList200ApplicationJsonPublic[];
 }
 
 
+export class DrillersFilesListRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DrillersFilesListPathParams;
+}
+
+
 export class DrillersFilesListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   drillersFilesList200ApplicationJsonObject?: DrillersFilesList200ApplicationJson;
 }

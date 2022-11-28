@@ -1,5 +1,7 @@
 package shared
 
+// DirectDeal
+// The configuration data for an Ad Exchange direct deal.
 type DirectDeal struct {
 	AccountID                *int32  `json:"accountId,omitempty"`
 	Advertiser               *string `json:"advertiser,omitempty"`

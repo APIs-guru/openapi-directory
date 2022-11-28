@@ -18,12 +18,12 @@ class PostAPITextHumanizeRequests:
 
 @dataclass
 class PostAPITextHumanizeRequest:
-    headers: PostAPITextHumanizeHeaders = field(default=None)
-    request: PostAPITextHumanizeRequests = field(default=None)
+    headers: PostAPITextHumanizeHeaders = field()
+    request: PostAPITextHumanizeRequests = field()
     
 
 @dataclass
 class PostAPITextHumanizeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

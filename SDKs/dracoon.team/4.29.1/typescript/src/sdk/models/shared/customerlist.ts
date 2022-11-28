@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Customer } from "./customer";
 import { Range } from "./range";
+
 
 
 // CustomerList
@@ -9,9 +9,9 @@ import { Range } from "./range";
  * List of customers
 **/
 export class CustomerList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.Customer })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Customer })
   items: Customer[];
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range: Range;
 }

@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteHumanLoopPathParams:
-    human_loop_name: str = field(default=None, metadata={'path_param': { 'field_name': 'HumanLoopName', 'style': 'simple', 'explode': False }})
+    human_loop_name: str = field(metadata={'path_param': { 'field_name': 'HumanLoopName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,17 +23,17 @@ class DeleteHumanLoopHeaders:
 
 @dataclass
 class DeleteHumanLoopRequest:
-    path_params: DeleteHumanLoopPathParams = field(default=None)
-    headers: DeleteHumanLoopHeaders = field(default=None)
+    headers: DeleteHumanLoopHeaders = field()
+    path_params: DeleteHumanLoopPathParams = field()
     
 
 @dataclass
 class DeleteHumanLoopResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_human_loop_response: Optional[dict[str, Any]] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -9,6 +9,8 @@ const (
 	FolderTypeEnumStandardFolder  FolderTypeEnum = "STANDARD_FOLDER"
 )
 
+// Folder
+// This item is deprecated; please see `DriveFolder` instead.
 type Folder struct {
 	Type *FolderTypeEnum `json:"type,omitempty"`
 }

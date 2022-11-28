@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum ConsumerInfoTypeEnum {
     ConsumerTypeUnspecified = "CONSUMER_TYPE_UNSPECIFIED",
     Project = "PROJECT",

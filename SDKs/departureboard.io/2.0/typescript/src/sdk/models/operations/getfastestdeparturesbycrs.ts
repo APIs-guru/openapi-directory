@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetFastestDeparturesByCrsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=CRS" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=CRS" })
   crs: string;
 }
 
 
 export class GetFastestDeparturesByCrsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=apiKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apiKey" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filterList" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filterList" })
   filterList: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=serviceDetails" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=serviceDetails" })
   serviceDetails?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timeOffset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeOffset" })
   timeOffset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timeWindow" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeWindow" })
   timeWindow?: number;
 }
 
 
 export class GetFastestDeparturesByCrsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetFastestDeparturesByCrsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetFastestDeparturesByCrsQueryParams;
 }
 
 
 export class GetFastestDeparturesByCrsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FederationParameters
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration information when authentication mode is FEDERATED.
 **/
 export class FederationParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicationCallBackURL" })
+  @SpeakeasyMetadata({ data: "json, name=applicationCallBackURL" })
   applicationCallBackUrl?: string;
 
-  @Metadata({ data: "json, name=attributeMap" })
+  @SpeakeasyMetadata({ data: "json, name=attributeMap" })
   attributeMap?: Map<string, string>;
 
-  @Metadata({ data: "json, name=federationProviderName" })
+  @SpeakeasyMetadata({ data: "json, name=federationProviderName" })
   federationProviderName?: string;
 
-  @Metadata({ data: "json, name=federationURN" })
+  @SpeakeasyMetadata({ data: "json, name=federationURN" })
   federationUrn?: string;
 
-  @Metadata({ data: "json, name=samlMetadataDocument" })
+  @SpeakeasyMetadata({ data: "json, name=samlMetadataDocument" })
   samlMetadataDocument?: string;
 
-  @Metadata({ data: "json, name=samlMetadataURL" })
+  @SpeakeasyMetadata({ data: "json, name=samlMetadataURL" })
   samlMetadataUrl?: string;
 }

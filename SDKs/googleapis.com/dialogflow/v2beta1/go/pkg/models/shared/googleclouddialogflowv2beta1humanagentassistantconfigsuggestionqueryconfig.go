@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfig
+// Config for suggestion query.
 type GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfig struct {
 	ConfidenceThreshold      *float32                                                                                            `json:"confidenceThreshold,omitempty"`
 	ContextFilterSettings    *GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfigContextFilterSettings    `json:"contextFilterSettings,omitempty"`

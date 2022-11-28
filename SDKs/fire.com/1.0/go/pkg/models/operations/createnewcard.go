@@ -20,10 +20,6 @@ type CreateNewCardNewCard struct {
 	UserID               *float64                             `json:"userId,omitempty"`
 }
 
-type CreateNewCardRequest struct {
-	Request CreateNewCardNewCard `request:"mediaType=application/json"`
-}
-
 type CreateNewCardNewCardResponseStatusEnum string
 
 const (
@@ -36,6 +32,10 @@ type CreateNewCardNewCardResponse struct {
 	ExpiryDate *time.Time                              `json:"expiryDate,omitempty"`
 	MaskedPan  *string                                 `json:"maskedPan,omitempty"`
 	Status     *CreateNewCardNewCardResponseStatusEnum `json:"status,omitempty"`
+}
+
+type CreateNewCardRequest struct {
+	Request CreateNewCardNewCard `request:"mediaType=application/json"`
 }
 
 type CreateNewCardResponse struct {

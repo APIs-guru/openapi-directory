@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ThirdPartyJob
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A response to a <code>PollForThirdPartyJobs</code> request returned by AWS CodePipeline when there is a job to be worked on by a partner action.
 **/
 export class ThirdPartyJob extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=jobId" })
+  @SpeakeasyMetadata({ data: "json, name=jobId" })
   jobId?: string;
 }

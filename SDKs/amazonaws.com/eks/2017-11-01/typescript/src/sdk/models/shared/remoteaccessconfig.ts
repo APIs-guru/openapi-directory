@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RemoteAccessConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object representing the remote access configuration for the managed node group.
 **/
 export class RemoteAccessConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ec2SshKey" })
+  @SpeakeasyMetadata({ data: "json, name=ec2SshKey" })
   ec2SshKey?: string;
 
-  @Metadata({ data: "json, name=sourceSecurityGroups" })
+  @SpeakeasyMetadata({ data: "json, name=sourceSecurityGroups" })
   sourceSecurityGroups?: string[];
 }

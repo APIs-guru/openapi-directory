@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=carrier" })
+  @SpeakeasyMetadata({ data: "json, name=carrier" })
   carrier?: string;
 
-  @Metadata({ data: "json, name=shipmentId" })
+  @SpeakeasyMetadata({ data: "json, name=shipmentId" })
   shipmentId?: string;
 
-  @Metadata({ data: "json, name=trackingId" })
+  @SpeakeasyMetadata({ data: "json, name=trackingId" })
   trackingId?: string;
 }

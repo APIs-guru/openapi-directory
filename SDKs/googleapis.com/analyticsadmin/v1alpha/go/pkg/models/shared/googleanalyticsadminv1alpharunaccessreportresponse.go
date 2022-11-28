@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAnalyticsAdminV1alphaRunAccessReportResponse
+// The customized Data Access Record Report response.
 type GoogleAnalyticsAdminV1alphaRunAccessReportResponse struct {
 	DimensionHeaders []GoogleAnalyticsAdminV1alphaAccessDimensionHeader `json:"dimensionHeaders,omitempty"`
 	MetricHeaders    []GoogleAnalyticsAdminV1alphaAccessMetricHeader    `json:"metricHeaders,omitempty"`

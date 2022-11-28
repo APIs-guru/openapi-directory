@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateCustomMetricPathParams:
-    metric_name: str = field(default=None, metadata={'path_param': { 'field_name': 'metricName', 'style': 'simple', 'explode': False }})
+    metric_name: str = field(metadata={'path_param': { 'field_name': 'metricName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,27 +34,27 @@ class CreateCustomMetricRequestBodyMetricTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateCustomMetricRequestBody:
-    client_request_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientRequestToken' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    metric_type: CreateCustomMetricRequestBodyMetricTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metricType' }})
-    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    client_request_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientRequestToken') }})
+    metric_type: CreateCustomMetricRequestBodyMetricTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('metricType') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateCustomMetricRequest:
-    path_params: CreateCustomMetricPathParams = field(default=None)
-    headers: CreateCustomMetricHeaders = field(default=None)
-    request: CreateCustomMetricRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateCustomMetricHeaders = field()
+    path_params: CreateCustomMetricPathParams = field()
+    request: CreateCustomMetricRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateCustomMetricResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_custom_metric_response: Optional[shared.CreateCustomMetricResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_already_exists_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

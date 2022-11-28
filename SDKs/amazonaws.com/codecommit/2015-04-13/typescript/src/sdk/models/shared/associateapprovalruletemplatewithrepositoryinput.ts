@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AssociateApprovalRuleTemplateWithRepositoryInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approvalRuleTemplateName" })
+  @SpeakeasyMetadata({ data: "json, name=approvalRuleTemplateName" })
   approvalRuleTemplateName: string;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName: string;
 }

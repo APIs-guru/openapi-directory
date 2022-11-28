@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// RtiTransactionBaseRtiTransactionBaseEmployerCore
+// The rti transaction bases' employer core
 type RtiTransactionBaseRtiTransactionBaseEmployerCore struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`

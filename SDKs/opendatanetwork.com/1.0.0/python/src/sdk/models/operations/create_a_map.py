@@ -4,10 +4,10 @@ from typing import Optional
 
 @dataclass
 class CreateAMapQueryParams:
+    entity_id: str = field(metadata={'query_param': { 'field_name': 'entity_id', 'style': 'form', 'explode': True }})
+    variable: str = field(metadata={'query_param': { 'field_name': 'variable', 'style': 'form', 'explode': True }})
     app_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'app_token', 'style': 'form', 'explode': True }})
     constraint: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'constraint', 'style': 'form', 'explode': True }})
-    entity_id: str = field(default=None, metadata={'query_param': { 'field_name': 'entity_id', 'style': 'form', 'explode': True }})
-    variable: str = field(default=None, metadata={'query_param': { 'field_name': 'variable', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -17,12 +17,12 @@ class CreateAMapHeaders:
 
 @dataclass
 class CreateAMapRequest:
-    query_params: CreateAMapQueryParams = field(default=None)
-    headers: CreateAMapHeaders = field(default=None)
+    headers: CreateAMapHeaders = field()
+    query_params: CreateAMapQueryParams = field()
     
 
 @dataclass
 class CreateAMapResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

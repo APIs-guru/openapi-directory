@@ -33,6 +33,8 @@ type GoalResponseOwner struct {
 	ResourceType *string `json:"resource_type,omitempty"`
 }
 
+// GoalResponseTeam
+// *Conditional*. This property is only present when the `workspace` provided is an organization.
 type GoalResponseTeam struct {
 	Gid          *string `json:"gid,omitempty"`
 	Name         *string `json:"name,omitempty"`

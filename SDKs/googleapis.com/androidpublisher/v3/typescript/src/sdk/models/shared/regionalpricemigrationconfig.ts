@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RegionalPriceMigrationConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for a price migration.
 **/
 export class RegionalPriceMigrationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=oldestAllowedPriceVersionTime" })
+  @SpeakeasyMetadata({ data: "json, name=oldestAllowedPriceVersionTime" })
   oldestAllowedPriceVersionTime?: string;
 
-  @Metadata({ data: "json, name=regionCode" })
+  @SpeakeasyMetadata({ data: "json, name=regionCode" })
   regionCode?: string;
 }

@@ -1,15 +1,11 @@
 package sdk
 
 import (
-	"context"
-	"fmt"
 	"net/http"
-
 	"openapi/internal/utils"
-	"openapi/pkg/models/operations"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.ntropy.network",
 }
 
@@ -18,9 +14,19 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	Batch      *Batch
+	Batch1     *Batch1
+	Business   *Business
+	Classifier *Classifier
+	Consumer   *Consumer
+
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,103 +37,83 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
 	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
+	}
+
+	sdk.Batch = NewBatch(
+		sdk._defaultClient,
+		sdk._securityClient,
+		sdk._serverURL,
+		sdk._language,
+		sdk._sdkVersion,
+		sdk._genVersion,
+	)
+
+	sdk.Batch1 = NewBatch1(
+		sdk._defaultClient,
+		sdk._securityClient,
+		sdk._serverURL,
+		sdk._language,
+		sdk._sdkVersion,
+		sdk._genVersion,
+	)
+
+	sdk.Business = NewBusiness(
+		sdk._defaultClient,
+		sdk._securityClient,
+		sdk._serverURL,
+		sdk._language,
+		sdk._sdkVersion,
+		sdk._genVersion,
+	)
+
+	sdk.Classifier = NewClassifier(
+		sdk._defaultClient,
+		sdk._securityClient,
+		sdk._serverURL,
+		sdk._language,
+		sdk._sdkVersion,
+		sdk._genVersion,
+	)
+
+	sdk.Consumer = NewConsumer(
+		sdk._defaultClient,
+		sdk._securityClient,
+		sdk._serverURL,
+		sdk._language,
+		sdk._sdkVersion,
+		sdk._genVersion,
+	)
 
 	return sdk
-}
-
-func (s *SDK) GetABatchOfBusinessTransactionClassificationResults(ctx context.Context, request operations.GetABatchOfBusinessTransactionClassificationResultsRequest) (*operations.GetABatchOfBusinessTransactionClassificationResultsResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/classifier/business/batch/{id}", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.GetABatchOfBusinessTransactionClassificationResultsResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetABatchOfBusinessTransactionClassificationResults200ApplicationJSON
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.GetABatchOfBusinessTransactionClassificationResults200ApplicationJSONObject = out
-		}
-	case httpRes.StatusCode == 404:
-	case httpRes.StatusCode == 500:
-	}
-
-	return res, nil
-}
-
-func (s *SDK) GetABatchOfConsumerTransactionClassificationResults(ctx context.Context, request operations.GetABatchOfConsumerTransactionClassificationResultsRequest) (*operations.GetABatchOfConsumerTransactionClassificationResultsResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/classifier/consumer/batch/{id}", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	client := s.defaultClient
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.GetABatchOfConsumerTransactionClassificationResultsResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetABatchOfConsumerTransactionClassificationResults200ApplicationJSON
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.GetABatchOfConsumerTransactionClassificationResults200ApplicationJSONObject = out
-		}
-	case httpRes.StatusCode == 404:
-	case httpRes.StatusCode == 500:
-	}
-
-	return res, nil
 }

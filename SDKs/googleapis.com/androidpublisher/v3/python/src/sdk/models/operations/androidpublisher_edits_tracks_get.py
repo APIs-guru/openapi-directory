@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidpublisherEditsTracksGetPathParams:
-    edit_id: str = field(default=None, metadata={'path_param': { 'field_name': 'editId', 'style': 'simple', 'explode': False }})
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
-    track: str = field(default=None, metadata={'path_param': { 'field_name': 'track', 'style': 'simple', 'explode': False }})
+    edit_id: str = field(metadata={'path_param': { 'field_name': 'editId', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    track: str = field(metadata={'path_param': { 'field_name': 'track', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class AndroidpublisherEditsTracksGetQueryParams:
 
 @dataclass
 class AndroidpublisherEditsTracksGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherEditsTracksGetRequest:
-    path_params: AndroidpublisherEditsTracksGetPathParams = field(default=None)
-    query_params: AndroidpublisherEditsTracksGetQueryParams = field(default=None)
-    security: AndroidpublisherEditsTracksGetSecurity = field(default=None)
+    path_params: AndroidpublisherEditsTracksGetPathParams = field()
+    query_params: AndroidpublisherEditsTracksGetQueryParams = field()
+    security: AndroidpublisherEditsTracksGetSecurity = field()
     
 
 @dataclass
 class AndroidpublisherEditsTracksGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     track: Optional[shared.Track] = field(default=None)
     

@@ -16,12 +16,12 @@ class GetPlayerSeasonPpaQueryParams:
 
 @dataclass
 class GetPlayerSeasonPpaRequest:
-    query_params: GetPlayerSeasonPpaQueryParams = field(default=None)
+    query_params: GetPlayerSeasonPpaQueryParams = field()
     
 
 @dataclass
 class GetPlayerSeasonPpaResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     player_season_ppas: Optional[List[shared.PlayerSeasonPpa]] = field(default=None)
-    status_code: int = field(default=None)
     

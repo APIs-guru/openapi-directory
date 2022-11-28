@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StageReference } from "./stagereference";
 
 
+
 export class StageReferenceSearchResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.StageReference })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: StageReference })
   items?: StageReference[];
 
-  @Metadata({ data: "json, name=itemsPerPage" })
+  @SpeakeasyMetadata({ data: "json, name=itemsPerPage" })
   itemsPerPage?: number;
 
-  @Metadata({ data: "json, name=totalResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalResults" })
   totalResults?: number;
 }

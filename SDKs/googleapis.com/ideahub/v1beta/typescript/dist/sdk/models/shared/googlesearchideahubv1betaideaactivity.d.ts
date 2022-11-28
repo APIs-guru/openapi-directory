@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum GoogleSearchIdeahubV1betaIdeaActivityTypeEnum {
     TypeUnspecified = "TYPE_UNSPECIFIED",
     PostDrafted = "POST_DRAFTED",

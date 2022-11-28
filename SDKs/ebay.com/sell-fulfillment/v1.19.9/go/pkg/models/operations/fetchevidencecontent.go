@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var FetchEvidenceContentServers = []string{
+var FetchEvidenceContentServerList = []string{
 	"https://apiz.ebay.com{basePath}",
 }
 

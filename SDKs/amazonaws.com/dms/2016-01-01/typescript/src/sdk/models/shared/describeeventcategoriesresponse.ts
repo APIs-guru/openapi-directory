@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventCategoryGroup } from "./eventcategorygroup";
+
 
 
 // DescribeEventCategoriesResponse
@@ -8,6 +8,6 @@ import { EventCategoryGroup } from "./eventcategorygroup";
  * <p/>
 **/
 export class DescribeEventCategoriesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EventCategoryGroupList", elemType: shared.EventCategoryGroup })
+  @SpeakeasyMetadata({ data: "json, name=EventCategoryGroupList", elemType: EventCategoryGroup })
   eventCategoryGroupList?: EventCategoryGroup[];
 }

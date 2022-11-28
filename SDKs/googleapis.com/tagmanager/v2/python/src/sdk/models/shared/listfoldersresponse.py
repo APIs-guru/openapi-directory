@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import folder
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListFoldersResponse:
-    folder: Optional[List[folder.Folder]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'folder' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""ListFoldersResponse
+    List Folders Response.
+    """
+    
+    folder: Optional[List[Folder]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('folder') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

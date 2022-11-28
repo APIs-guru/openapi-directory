@@ -15,13 +15,13 @@ type GetTeamMembershipsForTeamQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetTeamMembershipsForTeam200ApplicationJSON struct {
+	Data []shared.TeamMembershipCompact `json:"data,omitempty"`
+}
+
 type GetTeamMembershipsForTeamRequest struct {
 	PathParams  GetTeamMembershipsForTeamPathParams
 	QueryParams GetTeamMembershipsForTeamQueryParams
-}
-
-type GetTeamMembershipsForTeam200ApplicationJSON struct {
-	Data []shared.TeamMembershipCompact `json:"data,omitempty"`
 }
 
 type GetTeamMembershipsForTeamResponse struct {

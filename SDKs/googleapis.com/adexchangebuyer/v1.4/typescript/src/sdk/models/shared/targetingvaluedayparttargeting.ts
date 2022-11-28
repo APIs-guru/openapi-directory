@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TargetingValueDayPartTargetingDayPart } from "./targetingvaluedayparttargetingdaypart";
 
 
+
 export class TargetingValueDayPartTargeting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dayParts", elemType: shared.TargetingValueDayPartTargetingDayPart })
+  @SpeakeasyMetadata({ data: "json, name=dayParts", elemType: TargetingValueDayPartTargetingDayPart })
   dayParts?: TargetingValueDayPartTargetingDayPart[];
 
-  @Metadata({ data: "json, name=timeZoneType" })
+  @SpeakeasyMetadata({ data: "json, name=timeZoneType" })
   timeZoneType?: string;
 }

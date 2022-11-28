@@ -17,14 +17,14 @@ type SetParentForTaskRequestBody struct {
 	Data *shared.TaskSetParentRequest `json:"data,omitempty"`
 }
 
+type SetParentForTask200ApplicationJSON struct {
+	Data *shared.TaskResponse `json:"data,omitempty"`
+}
+
 type SetParentForTaskRequest struct {
 	PathParams  SetParentForTaskPathParams
 	QueryParams SetParentForTaskQueryParams
 	Request     SetParentForTaskRequestBody `request:"mediaType=application/json"`
-}
-
-type SetParentForTask200ApplicationJSON struct {
-	Data *shared.TaskResponse `json:"data,omitempty"`
 }
 
 type SetParentForTaskResponse struct {

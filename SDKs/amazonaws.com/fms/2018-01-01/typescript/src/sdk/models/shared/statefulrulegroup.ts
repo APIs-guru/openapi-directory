@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StatefulRuleGroup
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Network Firewall stateful rule group, used in a <a>NetworkFirewallPolicyDescription</a>. 
 **/
 export class StatefulRuleGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=RuleGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=RuleGroupName" })
   ruleGroupName?: string;
 }

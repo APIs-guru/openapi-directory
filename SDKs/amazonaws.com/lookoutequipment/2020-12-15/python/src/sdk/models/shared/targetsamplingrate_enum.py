@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class TargetSamplingRateEnum(str, Enum):
     PT1_S = "PT1S"

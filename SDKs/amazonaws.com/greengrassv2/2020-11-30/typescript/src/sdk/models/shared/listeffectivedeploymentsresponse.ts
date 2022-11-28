@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EffectiveDeployment } from "./effectivedeployment";
 
 
+
 export class ListEffectiveDeploymentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=effectiveDeployments", elemType: shared.EffectiveDeployment })
+  @SpeakeasyMetadata({ data: "json, name=effectiveDeployments", elemType: EffectiveDeployment })
   effectiveDeployments?: EffectiveDeployment[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

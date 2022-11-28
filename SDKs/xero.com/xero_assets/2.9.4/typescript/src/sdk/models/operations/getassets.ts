@@ -1,74 +1,75 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetAssetsOrderByEnum {
-    AssetType = "AssetType"
-,    AssetName = "AssetName"
-,    AssetNumber = "AssetNumber"
-,    PurchaseDate = "PurchaseDate"
-,    PurchasePrice = "PurchasePrice"
-,    DisposalDate = "DisposalDate"
-,    DisposalPrice = "DisposalPrice"
+    AssetType = "AssetType",
+    AssetName = "AssetName",
+    AssetNumber = "AssetNumber",
+    PurchaseDate = "PurchaseDate",
+    PurchasePrice = "PurchasePrice",
+    DisposalDate = "DisposalDate",
+    DisposalPrice = "DisposalPrice"
 }
 
 export enum GetAssetsSortDirectionEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 
 export class GetAssetsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filterBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filterBy" })
   filterBy?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=orderBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=orderBy" })
   orderBy?: GetAssetsOrderByEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortDirection" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortDirection" })
   sortDirection?: GetAssetsSortDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
   status: shared.AssetStatusQueryParamEnum;
 }
 
 
 export class GetAssetsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" })
   xeroTenantId: string;
 }
 
 
 export class GetAssetsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class GetAssetsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAssetsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetAssetsHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetAssetsSecurity;
 }
 
 
 export class GetAssetsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   assets?: shared.Assets;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

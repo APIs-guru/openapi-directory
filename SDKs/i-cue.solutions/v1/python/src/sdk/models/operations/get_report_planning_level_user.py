@@ -9,11 +9,11 @@ class GetReportPlanningLevelUserHeaders:
 
 @dataclass
 class GetReportPlanningLevelUserRequest:
-    headers: GetReportPlanningLevelUserHeaders = field(default=None)
+    headers: GetReportPlanningLevelUserHeaders = field()
     
 
 @dataclass
 class GetReportPlanningLevelUserResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

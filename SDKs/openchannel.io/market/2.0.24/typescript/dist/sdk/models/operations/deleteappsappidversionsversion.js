@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteAppsAppIdVersionsVersionPathParams = /** @class */ (function (_super) {
     __extends(DeleteAppsAppIdVersionsVersionPathParams, _super);
     function DeleteAppsAppIdVersionsVersionPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
         __metadata("design:type", String)
     ], DeleteAppsAppIdVersionsVersionPathParams.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=version" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" }),
         __metadata("design:type", String)
     ], DeleteAppsAppIdVersionsVersionPathParams.prototype, "version", void 0);
     return DeleteAppsAppIdVersionsVersionPathParams;
@@ -45,7 +45,7 @@ var DeleteAppsAppIdVersionsVersionQueryParams = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=developerId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=developerId" }),
         __metadata("design:type", String)
     ], DeleteAppsAppIdVersionsVersionQueryParams.prototype, "developerId", void 0);
     return DeleteAppsAppIdVersionsVersionQueryParams;
@@ -57,11 +57,11 @@ var DeleteAppsAppIdVersionsVersionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteAppsAppIdVersionsVersionPathParams)
     ], DeleteAppsAppIdVersionsVersionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteAppsAppIdVersionsVersionQueryParams)
     ], DeleteAppsAppIdVersionsVersionRequest.prototype, "queryParams", void 0);
     return DeleteAppsAppIdVersionsVersionRequest;
@@ -73,11 +73,11 @@ var DeleteAppsAppIdVersionsVersionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteAppsAppIdVersionsVersionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteAppsAppIdVersionsVersionResponse.prototype, "statusCode", void 0);
     return DeleteAppsAppIdVersionsVersionResponse;

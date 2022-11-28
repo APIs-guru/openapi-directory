@@ -54,15 +54,15 @@ type IpamVlanGroupsListQueryParams struct {
 	SlugNisw        *string `queryParam:"style=form,explode=true,name=slug__nisw"`
 }
 
-type IpamVlanGroupsListRequest struct {
-	QueryParams IpamVlanGroupsListQueryParams
-}
-
 type IpamVlanGroupsList200ApplicationJSON struct {
 	Count    int64              `json:"count"`
 	Next     *string            `json:"next,omitempty"`
 	Previous *string            `json:"previous,omitempty"`
 	Results  []shared.VlanGroup `json:"results"`
+}
+
+type IpamVlanGroupsListRequest struct {
+	QueryParams IpamVlanGroupsListQueryParams
 }
 
 type IpamVlanGroupsListResponse struct {

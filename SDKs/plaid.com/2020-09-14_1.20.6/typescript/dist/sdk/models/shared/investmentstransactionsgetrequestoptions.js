@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // InvestmentsTransactionsGetRequestOptions
 /**
  * An optional object to filter `/investments/transactions/get` results. If provided, must be non-`null`.
@@ -33,15 +33,15 @@ var InvestmentsTransactionsGetRequestOptions = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=account_ids" }),
+        SpeakeasyMetadata({ data: "json, name=account_ids" }),
         __metadata("design:type", Array)
     ], InvestmentsTransactionsGetRequestOptions.prototype, "accountIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", Number)
     ], InvestmentsTransactionsGetRequestOptions.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=offset" }),
+        SpeakeasyMetadata({ data: "json, name=offset" }),
         __metadata("design:type", Number)
     ], InvestmentsTransactionsGetRequestOptions.prototype, "offset", void 0);
     return InvestmentsTransactionsGetRequestOptions;

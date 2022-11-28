@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // WkHtmlToPdfRequestDto
 /**
  * WkHtmlToPdfRequestDto is the data transfer object for generating a pdf using wkhtmltopdf;
@@ -33,19 +33,19 @@ var WkHtmlToPdfRequestDto = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=HtmlBase64String" }),
+        SpeakeasyMetadata({ data: "json, name=HtmlBase64String" }),
         __metadata("design:type", String)
     ], WkHtmlToPdfRequestDto.prototype, "htmlBase64String", void 0);
     __decorate([
-        Metadata({ data: "json, name=Resources" }),
+        SpeakeasyMetadata({ data: "json, name=Resources" }),
         __metadata("design:type", Map)
     ], WkHtmlToPdfRequestDto.prototype, "resources", void 0);
     __decorate([
-        Metadata({ data: "json, name=Url" }),
+        SpeakeasyMetadata({ data: "json, name=Url" }),
         __metadata("design:type", String)
     ], WkHtmlToPdfRequestDto.prototype, "url", void 0);
     __decorate([
-        Metadata({ data: "json, name=WkHtmlToPdfArguments" }),
+        SpeakeasyMetadata({ data: "json, name=WkHtmlToPdfArguments" }),
         __metadata("design:type", Map)
     ], WkHtmlToPdfRequestDto.prototype, "wkHtmlToPdfArguments", void 0);
     return WkHtmlToPdfRequestDto;

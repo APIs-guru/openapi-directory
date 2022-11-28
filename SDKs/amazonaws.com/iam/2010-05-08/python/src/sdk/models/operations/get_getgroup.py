@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetGroupActionEnum(str, Enum):
     GET_GROUP = "GetGroup"
@@ -10,11 +14,11 @@ class GetGetGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetGetGroupQueryParams:
-    action: GetGetGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'GroupName', 'style': 'form', 'explode': True }})
+    action: GetGetGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    group_name: str = field(metadata={'query_param': { 'field_name': 'GroupName', 'style': 'form', 'explode': True }})
+    version: GetGetGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
-    version: GetGetGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetGetGroupHeaders:
 
 @dataclass
 class GetGetGroupRequest:
-    query_params: GetGetGroupQueryParams = field(default=None)
-    headers: GetGetGroupHeaders = field(default=None)
+    headers: GetGetGroupHeaders = field()
+    query_params: GetGetGroupQueryParams = field()
     
 
 @dataclass
 class GetGetGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TaskFailedEventDetails
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains details about a task failure event.
 **/
 export class TaskFailedEventDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cause" })
+  @SpeakeasyMetadata({ data: "json, name=cause" })
   cause?: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType: string;
 }

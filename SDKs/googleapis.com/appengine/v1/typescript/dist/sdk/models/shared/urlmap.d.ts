@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApiEndpointHandler } from "./apiendpointhandler";
 import { ScriptHandler } from "./scripthandler";
 import { StaticFilesHandler } from "./staticfileshandler";

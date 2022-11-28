@@ -8,6 +8,8 @@ const (
 	PubsubConfigMessageFormatEnumJSON                     PubsubConfigMessageFormatEnum = "JSON"
 )
 
+// PubsubConfig
+// Configuration to publish a Cloud Pub/Sub message.
 type PubsubConfig struct {
 	MessageFormat       *PubsubConfigMessageFormatEnum `json:"messageFormat,omitempty"`
 	ServiceAccountEmail *string                        `json:"serviceAccountEmail,omitempty"`

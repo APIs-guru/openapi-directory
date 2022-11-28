@@ -24,6 +24,8 @@ const (
 	GooglePrivacyDlpV2CloudStorageOptionsSampleMethodEnumRandomStart             GooglePrivacyDlpV2CloudStorageOptionsSampleMethodEnum = "RANDOM_START"
 )
 
+// GooglePrivacyDlpV2CloudStorageOptions
+// Options defining a file or a set of files within a Cloud Storage bucket.
 type GooglePrivacyDlpV2CloudStorageOptions struct {
 	BytesLimitPerFile        *string                                                `json:"bytesLimitPerFile,omitempty"`
 	BytesLimitPerFilePercent *int32                                                 `json:"bytesLimitPerFilePercent,omitempty"`

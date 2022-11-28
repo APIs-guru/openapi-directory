@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PublicKey } from "./publickey";
+
 
 
 // ListPublicKeysResponse
@@ -8,9 +8,9 @@ import { PublicKey } from "./publickey";
  * Returns the objects or data listed below if successful. Otherwise, returns an error.
 **/
 export class ListPublicKeysResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=PublicKeyList", elemType: shared.PublicKey })
+  @SpeakeasyMetadata({ data: "json, name=PublicKeyList", elemType: PublicKey })
   publicKeyList?: PublicKey[];
 }

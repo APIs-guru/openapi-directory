@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class CreateProductPathParams:
-    organization_uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationUuid', 'style': 'simple', 'explode': False }})
+    organization_uuid: str = field(metadata={'path_param': { 'field_name': 'organizationUuid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,33 +14,23 @@ class CreateProductQueryParams:
     
 
 @dataclass
-class CreateProductSecurityOption1:
-    zettle_api_key: shared.SchemeZettleAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
-class CreateProductSecurityOption2:
-    zettle_oauth: shared.SchemeZettleOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
 class CreateProductSecurity:
-    option1: Optional[CreateProductSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[CreateProductSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    zettle_api_key: Optional[shared.SchemeZettleAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    zettle_oauth: Optional[shared.SchemeZettleOauth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CreateProductRequest:
-    path_params: CreateProductPathParams = field(default=None)
-    query_params: CreateProductQueryParams = field(default=None)
-    request: shared.ProductCreateRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CreateProductSecurity = field(default=None)
+    path_params: CreateProductPathParams = field()
+    query_params: CreateProductQueryParams = field()
+    request: shared.ProductCreateRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: CreateProductSecurity = field()
     
 
 @dataclass
 class CreateProductResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     product_response: Optional[shared.ProductResponse] = field(default=None)
-    status_code: int = field(default=None)
     

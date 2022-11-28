@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IamPolicyAnalysisQuery } from "./iampolicyanalysisquery";
 import { IamPolicyAnalysisOutputConfig } from "./iampolicyanalysisoutputconfig";
+
 
 
 // AnalyzeIamPolicyLongrunningRequest
@@ -8,12 +9,12 @@ import { IamPolicyAnalysisOutputConfig } from "./iampolicyanalysisoutputconfig";
  * A request message for AssetService.AnalyzeIamPolicyLongrunning.
 **/
 export class AnalyzeIamPolicyLongrunningRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analysisQuery" })
+  @SpeakeasyMetadata({ data: "json, name=analysisQuery" })
   analysisQuery?: IamPolicyAnalysisQuery;
 
-  @Metadata({ data: "json, name=outputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=outputConfig" })
   outputConfig?: IamPolicyAnalysisOutputConfig;
 
-  @Metadata({ data: "json, name=savedAnalysisQuery" })
+  @SpeakeasyMetadata({ data: "json, name=savedAnalysisQuery" })
   savedAnalysisQuery?: string;
 }

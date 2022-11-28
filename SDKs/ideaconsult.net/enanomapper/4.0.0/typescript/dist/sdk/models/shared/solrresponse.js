@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SolrResponseResponse = /** @class */ (function (_super) {
     __extends(SolrResponseResponse, _super);
     function SolrResponseResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=docs" }),
+        SpeakeasyMetadata({ data: "json, name=docs" }),
         __metadata("design:type", Array)
     ], SolrResponseResponse.prototype, "docs", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxScore" }),
+        SpeakeasyMetadata({ data: "json, name=maxScore" }),
         __metadata("design:type", Number)
     ], SolrResponseResponse.prototype, "maxScore", void 0);
     __decorate([
-        Metadata({ data: "json, name=numFound" }),
+        SpeakeasyMetadata({ data: "json, name=numFound" }),
         __metadata("design:type", Number)
     ], SolrResponseResponse.prototype, "numFound", void 0);
     __decorate([
-        Metadata({ data: "json, name=start" }),
+        SpeakeasyMetadata({ data: "json, name=start" }),
         __metadata("design:type", Number)
     ], SolrResponseResponse.prototype, "start", void 0);
     return SolrResponseResponse;
@@ -53,19 +53,19 @@ var SolrResponseResponseHeader = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=QTime" }),
+        SpeakeasyMetadata({ data: "json, name=QTime" }),
         __metadata("design:type", Number)
     ], SolrResponseResponseHeader.prototype, "qTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=params" }),
+        SpeakeasyMetadata({ data: "json, name=params" }),
         __metadata("design:type", Map)
     ], SolrResponseResponseHeader.prototype, "params", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], SolrResponseResponseHeader.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=zkConnected" }),
+        SpeakeasyMetadata({ data: "json, name=zkConnected" }),
         __metadata("design:type", Boolean)
     ], SolrResponseResponseHeader.prototype, "zkConnected", void 0);
     return SolrResponseResponseHeader;
@@ -77,11 +77,11 @@ var SolrResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=response" }),
+        SpeakeasyMetadata({ data: "json, name=response" }),
         __metadata("design:type", SolrResponseResponse)
     ], SolrResponse.prototype, "response", void 0);
     __decorate([
-        Metadata({ data: "json, name=responseHeader" }),
+        SpeakeasyMetadata({ data: "json, name=responseHeader" }),
         __metadata("design:type", SolrResponseResponseHeader)
     ], SolrResponse.prototype, "responseHeader", void 0);
     return SolrResponse;

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SecuritycenterProjectsSourcesFindingsSetMutePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class SecuritycenterProjectsSourcesFindingsSetMuteQueryParams:
 
 @dataclass
 class SecuritycenterProjectsSourcesFindingsSetMuteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SecuritycenterProjectsSourcesFindingsSetMuteRequest:
-    path_params: SecuritycenterProjectsSourcesFindingsSetMutePathParams = field(default=None)
-    query_params: SecuritycenterProjectsSourcesFindingsSetMuteQueryParams = field(default=None)
+    path_params: SecuritycenterProjectsSourcesFindingsSetMutePathParams = field()
+    query_params: SecuritycenterProjectsSourcesFindingsSetMuteQueryParams = field()
+    security: SecuritycenterProjectsSourcesFindingsSetMuteSecurity = field()
     request: Optional[shared.SetMuteRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: SecuritycenterProjectsSourcesFindingsSetMuteSecurity = field(default=None)
     
 
 @dataclass
 class SecuritycenterProjectsSourcesFindingsSetMuteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     finding: Optional[shared.Finding] = field(default=None)
-    status_code: int = field(default=None)
     

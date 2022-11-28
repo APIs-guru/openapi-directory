@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostAlertsAlertIdAnnotatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=alertId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=alertId" })
   alertId: string;
 }
 
 
 export class PostAlertsAlertIdAnnotateRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   alertAnnotationInfo?: shared.AlertAnnotationInfo;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   alertAnnotationInfo1?: shared.AlertAnnotationInfo;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   alertAnnotationInfo2?: shared.AlertAnnotationInfo;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   alertAnnotationInfo3?: shared.AlertAnnotationInfo;
 }
 
 
 export class PostAlertsAlertIdAnnotateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostAlertsAlertIdAnnotatePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PostAlertsAlertIdAnnotateRequests;
 }
 
 
 export class PostAlertsAlertIdAnnotateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   alertAnnotationInfo?: shared.AlertAnnotationInfo;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,7 +1,10 @@
-import warnings
+
+
 import requests
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -10,28 +13,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_arrivals_and_departures_by_crs(self, request: operations.GetArrivalsAndDeparturesByCrsRequest) -> operations.GetArrivalsAndDeparturesByCrsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getArrivalsAndDeparturesByCRS is used to get a list of services arriving to and departing from a UK train station by the CRS (Computer Reservation System) code. This will typically return a list of train services, but will also return any replacement bus or ferry services that are in place.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/getArrivalsAndDeparturesByCRS/{CRS}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -54,15 +78,17 @@ class SDK:
 
     
     def get_arrivals_by_crs(self, request: operations.GetArrivalsByCrsRequest) -> operations.GetArrivalsByCrsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getArrivalsByCRS is used to get a list of services arriving to a UK train station by the CRS (Computer Reservation System) code. This will typically return a list of train services, but will also return any replacement bus or ferry services that are in place.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/getArrivalsByCRS/{CRS}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -85,15 +111,17 @@ class SDK:
 
     
     def get_departures_by_crs(self, request: operations.GetDeparturesByCrsRequest) -> operations.GetDeparturesByCrsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getDeparturesByCRS is used to get a list of services departing from a UK train station by the CRS (Computer Reservation System) code. This will typically return a list of train services, but will also return any replacement bus or ferry services that are in place.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/getDeparturesByCRS/{CRS}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -116,15 +144,17 @@ class SDK:
 
     
     def get_fastest_departures_by_crs(self, request: operations.GetFastestDeparturesByCrsRequest) -> operations.GetFastestDeparturesByCrsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getFastestDeparturesByCRS is used to get the fastest next service running between two stations. Multiple destinations can be specified. This will typically return a single train service, but will also return a replacement bus or ferry service if in place.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/getFastestDeparturesByCRS/{CRS}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -147,15 +177,17 @@ class SDK:
 
     
     def get_next_departures_by_crs(self, request: operations.GetNextDeparturesByCrsRequest) -> operations.GetNextDeparturesByCrsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getNextDeparturesByCRS is used to get the next service running between two stations. Multiple destinations can be specified. This will typically return a single train service, but will also return a replacement bus or ferry service if in place. This will return the next departures for each of the filterList stations specified. It may not return the fastest next service. To get the fastest next service use the getFastestDeparturesByCRS endpoint.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/getNextDeparturesByCRS/{CRS}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -178,15 +210,17 @@ class SDK:
 
     
     def get_service_details_by_id(self, request: operations.GetServiceDetailsByIDRequest) -> operations.GetServiceDetailsByIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""getServiceDetailsByID is used to get information on a service, by the Service ID. This will typically return a train service, but will also return a bus and ferry services. The Service ID must be provided in the serviceIDUrlSafe format that is provided in the response for Arrival and Departure Boards. A service ID is specific to a station, and can only be looked up for a short time after a train/bus/ferry arrives at, or departs from a station. This is a National Rail limitation.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/getServiceDetailsByID/{serviceID}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

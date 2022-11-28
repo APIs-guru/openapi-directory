@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetRegionsQueryParams = /** @class */ (function (_super) {
     __extends(GetRegionsQueryParams, _super);
@@ -30,7 +30,7 @@ var GetRegionsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lang" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" }),
         __metadata("design:type", String)
     ], GetRegionsQueryParams.prototype, "lang", void 0);
     return GetRegionsQueryParams;
@@ -42,7 +42,7 @@ var GetRegionsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRegionsQueryParams)
     ], GetRegionsRequest.prototype, "queryParams", void 0);
     return GetRegionsRequest;
@@ -54,15 +54,15 @@ var GetRegionsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetRegionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetRegionsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetRegionsResponse.prototype, "ibl", void 0);
     return GetRegionsResponse;

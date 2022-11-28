@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MemberDetail } from "./memberdetail";
 import { UnprocessedAccount } from "./unprocessedaccount";
 
 
+
 export class CreateMembersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Members", elemType: shared.MemberDetail })
+  @SpeakeasyMetadata({ data: "json, name=Members", elemType: MemberDetail })
   members?: MemberDetail[];
 
-  @Metadata({ data: "json, name=UnprocessedAccounts", elemType: shared.UnprocessedAccount })
+  @SpeakeasyMetadata({ data: "json, name=UnprocessedAccounts", elemType: UnprocessedAccount })
   unprocessedAccounts?: UnprocessedAccount[];
 }

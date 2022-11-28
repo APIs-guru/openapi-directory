@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,32 +22,36 @@ class UpdateWorldTemplateHeaders:
 @dataclass_json
 @dataclass
 class UpdateWorldTemplateRequestBodyTemplateLocation:
-    s3_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3Bucket' }})
-    s3_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3Key' }})
+    r"""UpdateWorldTemplateRequestBodyTemplateLocation
+    Information about a template location.
+    """
+    
+    s3_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3Bucket') }})
+    s3_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3Key') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateWorldTemplateRequestBody:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    template: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template' }})
-    template_body: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'templateBody' }})
-    template_location: Optional[UpdateWorldTemplateRequestBodyTemplateLocation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'templateLocation' }})
+    template: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('template') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    template_body: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('templateBody') }})
+    template_location: Optional[UpdateWorldTemplateRequestBodyTemplateLocation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('templateLocation') }})
     
 
 @dataclass
 class UpdateWorldTemplateRequest:
-    headers: UpdateWorldTemplateHeaders = field(default=None)
-    request: UpdateWorldTemplateRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateWorldTemplateHeaders = field()
+    request: UpdateWorldTemplateRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateWorldTemplateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     update_world_template_response: Optional[shared.UpdateWorldTemplateResponse] = field(default=None)
     

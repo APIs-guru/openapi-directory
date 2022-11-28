@@ -25,6 +25,8 @@ const (
 	LiveChatMessageSnippetTypeEnumSuperStickerEvent           LiveChatMessageSnippetTypeEnum = "superStickerEvent"
 )
 
+// LiveChatMessageSnippet
+// Next ID: 33
 type LiveChatMessageSnippet struct {
 	AuthorChannelID               *string                                `json:"authorChannelId,omitempty"`
 	DisplayMessage                *string                                `json:"displayMessage,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // QuotaLimit
@@ -6,33 +7,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * `QuotaLimit` defines a specific limit that applies over a specified duration for a limit type. There can be at most one limit for a duration and limit type combination defined within a `QuotaGroup`.
 **/
 export class QuotaLimit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultLimit" })
+  @SpeakeasyMetadata({ data: "json, name=defaultLimit" })
   defaultLimit?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=duration" })
+  @SpeakeasyMetadata({ data: "json, name=duration" })
   duration?: string;
 
-  @Metadata({ data: "json, name=freeTier" })
+  @SpeakeasyMetadata({ data: "json, name=freeTier" })
   freeTier?: string;
 
-  @Metadata({ data: "json, name=maxLimit" })
+  @SpeakeasyMetadata({ data: "json, name=maxLimit" })
   maxLimit?: string;
 
-  @Metadata({ data: "json, name=metric" })
+  @SpeakeasyMetadata({ data: "json, name=metric" })
   metric?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=unit" })
+  @SpeakeasyMetadata({ data: "json, name=unit" })
   unit?: string;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values?: Map<string, string>;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ListJobsForRequest = /** @class */ (function (_super) {
     __extends(ListJobsForRequest, _super);
@@ -30,7 +30,7 @@ var ListJobsForRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.JobListRequestBody)
     ], ListJobsForRequest.prototype, "request", void 0);
     return ListJobsForRequest;
@@ -42,23 +42,23 @@ var ListJobsForResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListJobsForResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.InvalidInputExceptionInfo)
     ], ListJobsForResponse.prototype, "invalidInputExceptionInfo", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.JobReadList)
     ], ListJobsForResponse.prototype, "jobReadList", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.NotFoundKnownExceptionInfo)
     ], ListJobsForResponse.prototype, "notFoundKnownExceptionInfo", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListJobsForResponse.prototype, "statusCode", void 0);
     return ListJobsForResponse;

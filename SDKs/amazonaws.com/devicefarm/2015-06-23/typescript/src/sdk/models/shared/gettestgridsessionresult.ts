@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TestGridSession } from "./testgridsession";
 
 
+
 export class GetTestGridSessionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=testGridSession" })
+  @SpeakeasyMetadata({ data: "json, name=testGridSession" })
   testGridSession?: TestGridSession;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LookupAttributeKeyEnum } from "./lookupattributekeyenum";
 /**
  * Specifies an attribute and value that filter the events returned.

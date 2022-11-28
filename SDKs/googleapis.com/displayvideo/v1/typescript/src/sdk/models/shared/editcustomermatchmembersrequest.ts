@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContactInfoList } from "./contactinfolist";
 import { MobileDeviceIdList } from "./mobiledeviceidlist";
+
 
 
 // EditCustomerMatchMembersRequest
@@ -8,12 +9,12 @@ import { MobileDeviceIdList } from "./mobiledeviceidlist";
  * Request message for FirstAndThirdPartyAudienceService.EditCustomerMatchMembers.
 **/
 export class EditCustomerMatchMembersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addedContactInfoList" })
+  @SpeakeasyMetadata({ data: "json, name=addedContactInfoList" })
   addedContactInfoList?: ContactInfoList;
 
-  @Metadata({ data: "json, name=addedMobileDeviceIdList" })
+  @SpeakeasyMetadata({ data: "json, name=addedMobileDeviceIdList" })
   addedMobileDeviceIdList?: MobileDeviceIdList;
 
-  @Metadata({ data: "json, name=advertiserId" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string;
 }

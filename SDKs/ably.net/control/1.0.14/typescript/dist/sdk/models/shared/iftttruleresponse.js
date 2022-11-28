@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleSource } from "./rulesource";
 export var IftttRuleResponseRequestModeEnum;
 (function (IftttRuleResponseRequestModeEnum) {
@@ -43,11 +43,11 @@ var IftttRuleResponseTarget = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=eventName" }),
+        SpeakeasyMetadata({ data: "json, name=eventName" }),
         __metadata("design:type", String)
     ], IftttRuleResponseTarget.prototype, "eventName", void 0);
     __decorate([
-        Metadata({ data: "json, name=webhookKey" }),
+        SpeakeasyMetadata({ data: "json, name=webhookKey" }),
         __metadata("design:type", String)
     ], IftttRuleResponseTarget.prototype, "webhookKey", void 0);
     return IftttRuleResponseTarget;
@@ -59,47 +59,47 @@ var IftttRuleResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=_links" }),
+        SpeakeasyMetadata({ data: "json, name=_links" }),
         __metadata("design:type", Map)
     ], IftttRuleResponse.prototype, "links", void 0);
     __decorate([
-        Metadata({ data: "json, name=appId" }),
+        SpeakeasyMetadata({ data: "json, name=appId" }),
         __metadata("design:type", String)
     ], IftttRuleResponse.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "json, name=created" }),
+        SpeakeasyMetadata({ data: "json, name=created" }),
         __metadata("design:type", Number)
     ], IftttRuleResponse.prototype, "created", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], IftttRuleResponse.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=modified" }),
+        SpeakeasyMetadata({ data: "json, name=modified" }),
         __metadata("design:type", Number)
     ], IftttRuleResponse.prototype, "modified", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestMode" }),
+        SpeakeasyMetadata({ data: "json, name=requestMode" }),
         __metadata("design:type", String)
     ], IftttRuleResponse.prototype, "requestMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ruleType" }),
+        SpeakeasyMetadata({ data: "json, name=ruleType" }),
         __metadata("design:type", String)
     ], IftttRuleResponse.prototype, "ruleType", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", RuleSource)
     ], IftttRuleResponse.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], IftttRuleResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=target" }),
+        SpeakeasyMetadata({ data: "json, name=target" }),
         __metadata("design:type", IftttRuleResponseTarget)
     ], IftttRuleResponse.prototype, "target", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], IftttRuleResponse.prototype, "version", void 0);
     return IftttRuleResponse;

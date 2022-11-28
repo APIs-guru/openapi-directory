@@ -4,26 +4,18 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type UpdateAccountSettingsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type UpdateAccountSettingsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type UpdateAccountSettingsSecurity struct {
-	Option1 *UpdateAccountSettingsSecurityOption1 `security:"option"`
-	Option2 *UpdateAccountSettingsSecurityOption2 `security:"option"`
-}
-
-type UpdateAccountSettingsRequest struct {
-	Request  shared.AccountSettings `request:"mediaType=application/json"`
-	Security UpdateAccountSettingsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type UpdateAccountSettingsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type UpdateAccountSettingsRequest struct {
+	Request  shared.AccountSettingsInput `request:"mediaType=application/json"`
+	Security UpdateAccountSettingsSecurity
 }
 
 type UpdateAccountSettingsResponse struct {

@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetBotAliasPathParams:
-    bot_name: str = field(default=None, metadata={'path_param': { 'field_name': 'botName', 'style': 'simple', 'explode': False }})
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    bot_name: str = field(metadata={'path_param': { 'field_name': 'botName', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,17 +25,17 @@ class GetBotAliasHeaders:
 
 @dataclass
 class GetBotAliasRequest:
-    path_params: GetBotAliasPathParams = field(default=None)
-    headers: GetBotAliasHeaders = field(default=None)
+    headers: GetBotAliasHeaders = field()
+    path_params: GetBotAliasPathParams = field()
     
 
 @dataclass
 class GetBotAliasResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_bot_alias_response: Optional[shared.GetBotAliasResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

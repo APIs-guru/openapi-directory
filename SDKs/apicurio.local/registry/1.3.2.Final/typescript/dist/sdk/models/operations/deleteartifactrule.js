@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var DeleteArtifactRuleRuleEnum;
 (function (DeleteArtifactRuleRuleEnum) {
@@ -35,11 +35,11 @@ var DeleteArtifactRulePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=artifactId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=artifactId" }),
         __metadata("design:type", String)
     ], DeleteArtifactRulePathParams.prototype, "artifactId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=rule" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=rule" }),
         __metadata("design:type", String)
     ], DeleteArtifactRulePathParams.prototype, "rule", void 0);
     return DeleteArtifactRulePathParams;
@@ -51,7 +51,7 @@ var DeleteArtifactRuleRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteArtifactRulePathParams)
     ], DeleteArtifactRuleRequest.prototype, "pathParams", void 0);
     return DeleteArtifactRuleRequest;
@@ -63,15 +63,15 @@ var DeleteArtifactRuleResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteArtifactRuleResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], DeleteArtifactRuleResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteArtifactRuleResponse.prototype, "statusCode", void 0);
     return DeleteArtifactRuleResponse;

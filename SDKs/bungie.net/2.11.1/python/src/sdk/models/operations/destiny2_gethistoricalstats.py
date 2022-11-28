@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import List,Optional
@@ -7,9 +7,9 @@ from typing import List,Optional
 
 @dataclass
 class Destiny2GetHistoricalStatsPathParams:
-    character_id: int = field(default=None, metadata={'path_param': { 'field_name': 'characterId', 'style': 'simple', 'explode': False }})
-    destiny_membership_id: int = field(default=None, metadata={'path_param': { 'field_name': 'destinyMembershipId', 'style': 'simple', 'explode': False }})
-    membership_type: int = field(default=None, metadata={'path_param': { 'field_name': 'membershipType', 'style': 'simple', 'explode': False }})
+    character_id: int = field(metadata={'path_param': { 'field_name': 'characterId', 'style': 'simple', 'explode': False }})
+    destiny_membership_id: int = field(metadata={'path_param': { 'field_name': 'destinyMembershipId', 'style': 'simple', 'explode': False }})
+    membership_type: int = field(metadata={'path_param': { 'field_name': 'membershipType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,13 +23,13 @@ class Destiny2GetHistoricalStatsQueryParams:
 
 @dataclass
 class Destiny2GetHistoricalStatsRequest:
-    path_params: Destiny2GetHistoricalStatsPathParams = field(default=None)
-    query_params: Destiny2GetHistoricalStatsQueryParams = field(default=None)
+    path_params: Destiny2GetHistoricalStatsPathParams = field()
+    query_params: Destiny2GetHistoricalStatsQueryParams = field()
     
 
 @dataclass
 class Destiny2GetHistoricalStatsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

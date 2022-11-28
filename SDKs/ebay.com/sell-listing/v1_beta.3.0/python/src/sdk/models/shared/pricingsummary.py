@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import amount
-from . import amount
-from . import amount
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PricingSummary:
-    auction_reserve_price: Optional[amount.Amount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auctionReservePrice' }})
-    auction_start_price: Optional[amount.Amount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auctionStartPrice' }})
-    price: Optional[amount.Amount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'price' }})
+    r"""PricingSummary
+    The type that defines the fields for the price details for an item.
+    """
+    
+    auction_reserve_price: Optional[Amount] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('auctionReservePrice') }})
+    auction_start_price: Optional[Amount] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('auctionStartPrice') }})
+    price: Optional[Amount] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('price') }})
     

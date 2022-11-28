@@ -18,6 +18,8 @@ const (
 	TeamEventStatusPlayoffStatusEnumPlaying    TeamEventStatusPlayoffStatusEnum = "playing"
 )
 
+// TeamEventStatusPlayoff
+// Playoff status for this team, may be null if the team did not make playoffs, or playoffs have not begun.
 type TeamEventStatusPlayoff struct {
 	CurrentLevelRecord *WltRecord                        `json:"current_level_record,omitempty"`
 	Level              *TeamEventStatusPlayoffLevelEnum  `json:"level,omitempty"`

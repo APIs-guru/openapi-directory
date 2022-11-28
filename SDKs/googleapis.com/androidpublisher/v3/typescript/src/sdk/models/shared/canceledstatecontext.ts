@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserInitiatedCancellation } from "./userinitiatedcancellation";
+
 
 
 // CanceledStateContext
@@ -7,15 +8,15 @@ import { UserInitiatedCancellation } from "./userinitiatedcancellation";
  * Information specific to a subscription in canceled state.
 **/
 export class CanceledStateContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=developerInitiatedCancellation" })
+  @SpeakeasyMetadata({ data: "json, name=developerInitiatedCancellation" })
   developerInitiatedCancellation?: Map<string, any>;
 
-  @Metadata({ data: "json, name=replacementCancellation" })
+  @SpeakeasyMetadata({ data: "json, name=replacementCancellation" })
   replacementCancellation?: Map<string, any>;
 
-  @Metadata({ data: "json, name=systemInitiatedCancellation" })
+  @SpeakeasyMetadata({ data: "json, name=systemInitiatedCancellation" })
   systemInitiatedCancellation?: Map<string, any>;
 
-  @Metadata({ data: "json, name=userInitiatedCancellation" })
+  @SpeakeasyMetadata({ data: "json, name=userInitiatedCancellation" })
   userInitiatedCancellation?: UserInitiatedCancellation;
 }

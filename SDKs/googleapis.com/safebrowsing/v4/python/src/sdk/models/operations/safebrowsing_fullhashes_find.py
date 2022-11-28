@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,13 +21,13 @@ class SafebrowsingFullHashesFindQueryParams:
 
 @dataclass
 class SafebrowsingFullHashesFindRequest:
-    query_params: SafebrowsingFullHashesFindQueryParams = field(default=None)
+    query_params: SafebrowsingFullHashesFindQueryParams = field()
     request: Optional[shared.GoogleSecuritySafebrowsingV4FindFullHashesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SafebrowsingFullHashesFindResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_security_safebrowsing_v4_find_full_hashes_response: Optional[shared.GoogleSecuritySafebrowsingV4FindFullHashesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

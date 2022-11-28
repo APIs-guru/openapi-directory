@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import exclusionrule
+from sdk import utils
+from . import *
 
 class OfferAvailabilityEnum(str, Enum):
     AVAILABLE = "Available"
@@ -36,21 +38,21 @@ class OfferResolutionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Offer:
-    availability: OfferAvailabilityEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'availability' }})
-    custom_fields: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customFields' }})
-    delivery_type: OfferDeliveryTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deliveryType' }})
-    end_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    exclusion_rules: Optional[List[exclusionrule.ExclusionRule]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'exclusionRules' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    max_downloads: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxDownloads' }})
-    max_plays: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxPlays' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    ownership: OfferOwnershipEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ownership' }})
-    play_period: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'playPeriod' }})
-    price: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'price' }})
-    rental_period: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rentalPeriod' }})
-    resolution: OfferResolutionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resolution' }})
-    scopes: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scopes' }})
-    start_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    subscription_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subscriptionCode' }})
+    availability: OfferAvailabilityEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('availability') }})
+    delivery_type: OfferDeliveryTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('deliveryType') }})
+    ownership: OfferOwnershipEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ownership') }})
+    price: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('price') }})
+    resolution: OfferResolutionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resolution') }})
+    scopes: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('scopes') }})
+    custom_fields: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customFields') }})
+    end_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endDate'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    exclusion_rules: Optional[List[ExclusionRule]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('exclusionRules') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    max_downloads: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxDownloads') }})
+    max_plays: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxPlays') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    play_period: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('playPeriod') }})
+    rental_period: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rentalPeriod') }})
+    start_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startDate'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    subscription_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subscriptionCode') }})
     

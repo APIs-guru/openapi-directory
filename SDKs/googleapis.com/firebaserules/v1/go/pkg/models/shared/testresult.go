@@ -8,6 +8,8 @@ const (
 	TestResultStateEnumFailure          TestResultStateEnum = "FAILURE"
 )
 
+// TestResult
+// Test result message containing the state of the test as well as a description and source position for test failures.
 type TestResult struct {
 	DebugMessages      []string             `json:"debugMessages,omitempty"`
 	ErrorPosition      *SourcePosition      `json:"errorPosition,omitempty"`

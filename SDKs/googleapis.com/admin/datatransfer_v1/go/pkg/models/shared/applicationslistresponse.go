@@ -1,5 +1,7 @@
 package shared
 
+// ApplicationsListResponse
+// Template for a collection of Applications.
 type ApplicationsListResponse struct {
 	Applications  []Application `json:"applications,omitempty"`
 	Etag          *string       `json:"etag,omitempty"`

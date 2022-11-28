@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingAccountUserProfilesListPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 class DfareportingAccountUserProfilesListSortFieldEnum(str, Enum):
     ID = "ID"
@@ -42,20 +43,20 @@ class DfareportingAccountUserProfilesListQueryParams:
 
 @dataclass
 class DfareportingAccountUserProfilesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingAccountUserProfilesListRequest:
-    path_params: DfareportingAccountUserProfilesListPathParams = field(default=None)
-    query_params: DfareportingAccountUserProfilesListQueryParams = field(default=None)
-    security: DfareportingAccountUserProfilesListSecurity = field(default=None)
+    path_params: DfareportingAccountUserProfilesListPathParams = field()
+    query_params: DfareportingAccountUserProfilesListQueryParams = field()
+    security: DfareportingAccountUserProfilesListSecurity = field()
     
 
 @dataclass
 class DfareportingAccountUserProfilesListResponse:
+    content_type: str = field()
+    status_code: int = field()
     account_user_profiles_list_response: Optional[shared.AccountUserProfilesListResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

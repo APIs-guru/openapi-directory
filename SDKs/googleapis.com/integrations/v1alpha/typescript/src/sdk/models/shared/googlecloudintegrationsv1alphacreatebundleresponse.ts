@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIntegrationsV1alphaIntegrationBundleConfig } from "./googlecloudintegrationsv1alphaintegrationbundleconfig";
+
 
 
 // GoogleCloudIntegrationsV1alphaCreateBundleResponse
@@ -7,9 +8,9 @@ import { GoogleCloudIntegrationsV1alphaIntegrationBundleConfig } from "./googlec
  * Response for create bundle.
 **/
 export class GoogleCloudIntegrationsV1alphaCreateBundleResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: GoogleCloudIntegrationsV1alphaIntegrationBundleConfig;
 
-  @Metadata({ data: "json, name=triggerId" })
+  @SpeakeasyMetadata({ data: "json, name=triggerId" })
   triggerId?: string;
 }

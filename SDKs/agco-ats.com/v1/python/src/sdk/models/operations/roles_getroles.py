@@ -12,12 +12,12 @@ class RolesGetRolesQueryParams:
 
 @dataclass
 class RolesGetRolesRequest:
-    query_params: RolesGetRolesQueryParams = field(default=None)
+    query_params: RolesGetRolesQueryParams = field()
     
 
 @dataclass
 class RolesGetRolesResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_paged_response_api_models_role_: Optional[shared.APIPagedResponseAPIModelsRole] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

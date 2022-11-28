@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ComparisonOperatorEnum(str, Enum):
     LESS_THAN = "less-than"

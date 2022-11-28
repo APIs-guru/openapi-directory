@@ -18,6 +18,8 @@ type UpdateThingGroupHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateThingGroupRequestBodyThingGroupProperties
+// Thing group properties.
 type UpdateThingGroupRequestBodyThingGroupProperties struct {
 	AttributePayload      *shared.AttributePayload `json:"attributePayload,omitempty"`
 	ThingGroupDescription *string                  `json:"thingGroupDescription,omitempty"`

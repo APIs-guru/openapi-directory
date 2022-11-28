@@ -1,6 +1,7 @@
 
 
+
 export enum ResourceTypeEnum {
-    Room = "ROOM"
-,    Equipment = "EQUIPMENT"
+    Room = "ROOM",
+    Equipment = "EQUIPMENT"
 }

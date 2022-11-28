@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetUserFollowsWebchannelsEmbedEnum(str, Enum):
@@ -13,12 +14,12 @@ class GetUserFollowsWebchannelsQueryParams:
 
 @dataclass
 class GetUserFollowsWebchannelsRequest:
-    query_params: GetUserFollowsWebchannelsQueryParams = field(default=None)
+    query_params: GetUserFollowsWebchannelsQueryParams = field()
     
 
 @dataclass
 class GetUserFollowsWebchannelsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     webchannel_follows: Optional[List[shared.WebchannelFollow]] = field(default=None)
     

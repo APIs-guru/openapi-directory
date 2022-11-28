@@ -1,16 +1,24 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import securitystyle_enum
-from . import tieringpolicy
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateOntapVolumeConfiguration:
-    junction_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'JunctionPath' }})
-    security_style: Optional[securitystyle_enum.SecurityStyleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SecurityStyle' }})
-    size_in_megabytes: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SizeInMegabytes' }})
-    storage_efficiency_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StorageEfficiencyEnabled' }})
-    tiering_policy: Optional[tieringpolicy.TieringPolicy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TieringPolicy' }})
+    r"""UpdateOntapVolumeConfiguration
+    Used to specify changes to the ONTAP configuration for the volume you are updating.
+    """
+    
+    junction_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('JunctionPath') }})
+    security_style: Optional[SecurityStyleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SecurityStyle') }})
+    size_in_megabytes: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SizeInMegabytes') }})
+    storage_efficiency_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StorageEfficiencyEnabled') }})
+    tiering_policy: Optional[TieringPolicy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TieringPolicy') }})
     

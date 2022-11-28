@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AccountDeleteIpBlacklistPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=blacklistId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=blacklistId" })
   blacklistId: string;
 }
 
 
 export class AccountDeleteIpBlacklistRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AccountDeleteIpBlacklistPathParams;
 }
 
 
 export class AccountDeleteIpBlacklistResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiCoreDtoAccountingIpBlacklistEntry?: shared.ApiCoreDtoAccountingIpBlacklistEntry;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

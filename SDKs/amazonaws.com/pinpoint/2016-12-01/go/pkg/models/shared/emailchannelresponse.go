@@ -1,5 +1,7 @@
 package shared
 
+// EmailChannelResponse
+// Provides information about the status and settings of the email channel for an application.
 type EmailChannelResponse struct {
 	ApplicationID     *string `json:"ApplicationId,omitempty"`
 	ConfigurationSet  *string `json:"ConfigurationSet,omitempty"`

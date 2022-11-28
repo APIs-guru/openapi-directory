@@ -9,12 +9,12 @@ class MetaGetOctocatQueryParams:
 
 @dataclass
 class MetaGetOctocatRequest:
-    query_params: MetaGetOctocatQueryParams = field(default=None)
+    query_params: MetaGetOctocatQueryParams = field()
     
 
 @dataclass
 class MetaGetOctocatResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     meta_get_octocat_200_application_octocat_stream_string: Optional[str] = field(default=None)
     

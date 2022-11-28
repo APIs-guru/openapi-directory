@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CloudbillingBillingAccountsCreateQueryParams extends SpeakeasyBase {
     dollarXgafv?: shared.XgafvEnum;
@@ -27,7 +27,7 @@ export declare class CloudbillingBillingAccountsCreateSecurity extends Speakeasy
 }
 export declare class CloudbillingBillingAccountsCreateRequest extends SpeakeasyBase {
     queryParams: CloudbillingBillingAccountsCreateQueryParams;
-    request?: shared.BillingAccount;
+    request?: shared.BillingAccountInput;
     security: CloudbillingBillingAccountsCreateSecurity;
 }
 export declare class CloudbillingBillingAccountsCreateResponse extends SpeakeasyBase {

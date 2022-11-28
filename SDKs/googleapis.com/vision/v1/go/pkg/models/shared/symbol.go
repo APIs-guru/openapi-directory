@@ -1,5 +1,7 @@
 package shared
 
+// Symbol
+// A single symbol representation.
 type Symbol struct {
 	BoundingBox *BoundingPoly `json:"boundingBox,omitempty"`
 	Confidence  *float32      `json:"confidence,omitempty"`

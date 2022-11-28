@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ClassroomInvitationsAcceptPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class ClassroomInvitationsAcceptQueryParams:
 
 @dataclass
 class ClassroomInvitationsAcceptSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ClassroomInvitationsAcceptRequest:
-    path_params: ClassroomInvitationsAcceptPathParams = field(default=None)
-    query_params: ClassroomInvitationsAcceptQueryParams = field(default=None)
-    security: ClassroomInvitationsAcceptSecurity = field(default=None)
+    path_params: ClassroomInvitationsAcceptPathParams = field()
+    query_params: ClassroomInvitationsAcceptQueryParams = field()
+    security: ClassroomInvitationsAcceptSecurity = field()
     
 
 @dataclass
 class ClassroomInvitationsAcceptResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

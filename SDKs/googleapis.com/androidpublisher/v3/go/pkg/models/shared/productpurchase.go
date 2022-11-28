@@ -1,5 +1,7 @@
 package shared
 
+// ProductPurchase
+// A ProductPurchase resource indicates the status of a user's inapp product purchase.
 type ProductPurchase struct {
 	AcknowledgementState        *int32  `json:"acknowledgementState,omitempty"`
 	ConsumptionState            *int32  `json:"consumptionState,omitempty"`

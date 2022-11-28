@@ -1,5 +1,7 @@
 package shared
 
+// GdataObjectID
+// gdata
 type GdataObjectID struct {
 	BucketName *string `json:"bucketName,omitempty"`
 	Generation *string `json:"generation,omitempty"`

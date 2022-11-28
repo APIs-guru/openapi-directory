@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // NetworkUtilization
 /**
  * Target scaling by network usage. Only applicable in the App Engine flexible environment.
@@ -33,19 +33,19 @@ var NetworkUtilization = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=targetReceivedBytesPerSecond" }),
+        SpeakeasyMetadata({ data: "json, name=targetReceivedBytesPerSecond" }),
         __metadata("design:type", Number)
     ], NetworkUtilization.prototype, "targetReceivedBytesPerSecond", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetReceivedPacketsPerSecond" }),
+        SpeakeasyMetadata({ data: "json, name=targetReceivedPacketsPerSecond" }),
         __metadata("design:type", Number)
     ], NetworkUtilization.prototype, "targetReceivedPacketsPerSecond", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetSentBytesPerSecond" }),
+        SpeakeasyMetadata({ data: "json, name=targetSentBytesPerSecond" }),
         __metadata("design:type", Number)
     ], NetworkUtilization.prototype, "targetSentBytesPerSecond", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetSentPacketsPerSecond" }),
+        SpeakeasyMetadata({ data: "json, name=targetSentPacketsPerSecond" }),
         __metadata("design:type", Number)
     ], NetworkUtilization.prototype, "targetSentPacketsPerSecond", void 0);
     return NetworkUtilization;

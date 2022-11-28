@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreateCustomAvailabilityZoneActionEnum(str, Enum):
     CREATE_CUSTOM_AVAILABILITY_ZONE = "CreateCustomAvailabilityZone"
@@ -10,11 +14,11 @@ class GetCreateCustomAvailabilityZoneVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateCustomAvailabilityZoneQueryParams:
-    action: GetCreateCustomAvailabilityZoneActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    custom_availability_zone_name: str = field(default=None, metadata={'query_param': { 'field_name': 'CustomAvailabilityZoneName', 'style': 'form', 'explode': True }})
+    action: GetCreateCustomAvailabilityZoneActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    custom_availability_zone_name: str = field(metadata={'query_param': { 'field_name': 'CustomAvailabilityZoneName', 'style': 'form', 'explode': True }})
+    version: GetCreateCustomAvailabilityZoneVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     existing_vpn_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ExistingVpnId', 'style': 'form', 'explode': True }})
     new_vpn_tunnel_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NewVpnTunnelName', 'style': 'form', 'explode': True }})
-    version: GetCreateCustomAvailabilityZoneVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     vpn_tunnel_originator_ip: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'VpnTunnelOriginatorIP', 'style': 'form', 'explode': True }})
     
 
@@ -31,13 +35,13 @@ class GetCreateCustomAvailabilityZoneHeaders:
 
 @dataclass
 class GetCreateCustomAvailabilityZoneRequest:
-    query_params: GetCreateCustomAvailabilityZoneQueryParams = field(default=None)
-    headers: GetCreateCustomAvailabilityZoneHeaders = field(default=None)
+    headers: GetCreateCustomAvailabilityZoneHeaders = field()
+    query_params: GetCreateCustomAvailabilityZoneQueryParams = field()
     
 
 @dataclass
 class GetCreateCustomAvailabilityZoneResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -40,6 +40,8 @@ const (
 	ConnectSettingsDatabaseVersionEnumSqlserver2019Web              ConnectSettingsDatabaseVersionEnum = "SQLSERVER_2019_WEB"
 )
 
+// ConnectSettings
+// Connect settings retrieval response.
 type ConnectSettings struct {
 	BackendType     *ConnectSettingsBackendTypeEnum     `json:"backendType,omitempty"`
 	DatabaseVersion *ConnectSettingsDatabaseVersionEnum `json:"databaseVersion,omitempty"`

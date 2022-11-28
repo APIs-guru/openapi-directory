@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RegionStatusEnum } from "./regionstatusenum";
+
 
 
 // RegionInfo
@@ -7,15 +8,15 @@ import { RegionStatusEnum } from "./regionstatusenum";
  * Information about a Region in your replication set.
 **/
 export class RegionInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sseKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=sseKmsKeyId" })
   sseKmsKeyId?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: RegionStatusEnum;
 
-  @Metadata({ data: "json, name=statusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=statusUpdateDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=statusUpdateDateTime" })
   statusUpdateDateTime: Date;
 }

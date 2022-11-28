@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Destiny2GetClanAggregateStatsPathParams = /** @class */ (function (_super) {
     __extends(Destiny2GetClanAggregateStatsPathParams, _super);
     function Destiny2GetClanAggregateStatsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=groupId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupId" }),
         __metadata("design:type", Number)
     ], Destiny2GetClanAggregateStatsPathParams.prototype, "groupId", void 0);
     return Destiny2GetClanAggregateStatsPathParams;
@@ -41,7 +41,7 @@ var Destiny2GetClanAggregateStatsQueryParams = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=modes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modes" }),
         __metadata("design:type", String)
     ], Destiny2GetClanAggregateStatsQueryParams.prototype, "modes", void 0);
     return Destiny2GetClanAggregateStatsQueryParams;
@@ -53,11 +53,11 @@ var Destiny2GetClanAggregateStatsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetClanAggregateStatsPathParams)
     ], Destiny2GetClanAggregateStatsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetClanAggregateStatsQueryParams)
     ], Destiny2GetClanAggregateStatsRequest.prototype, "queryParams", void 0);
     return Destiny2GetClanAggregateStatsRequest;
@@ -69,15 +69,15 @@ var Destiny2GetClanAggregateStatsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], Destiny2GetClanAggregateStatsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], Destiny2GetClanAggregateStatsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], Destiny2GetClanAggregateStatsResponse.prototype, "statusCode", void 0);
     return Destiny2GetClanAggregateStatsResponse;

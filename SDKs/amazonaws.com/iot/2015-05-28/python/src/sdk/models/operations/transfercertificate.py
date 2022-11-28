@@ -1,17 +1,21 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class TransferCertificatePathParams:
-    certificate_id: str = field(default=None, metadata={'path_param': { 'field_name': 'certificateId', 'style': 'simple', 'explode': False }})
+    certificate_id: str = field(metadata={'path_param': { 'field_name': 'certificateId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class TransferCertificateQueryParams:
-    target_aws_account: str = field(default=None, metadata={'query_param': { 'field_name': 'targetAwsAccount', 'style': 'form', 'explode': True }})
+    target_aws_account: str = field(metadata={'query_param': { 'field_name': 'targetAwsAccount', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,26 +32,26 @@ class TransferCertificateHeaders:
 @dataclass_json
 @dataclass
 class TransferCertificateRequestBody:
-    transfer_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transferMessage' }})
+    transfer_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transferMessage') }})
     
 
 @dataclass
 class TransferCertificateRequest:
-    path_params: TransferCertificatePathParams = field(default=None)
-    query_params: TransferCertificateQueryParams = field(default=None)
-    headers: TransferCertificateHeaders = field(default=None)
-    request: TransferCertificateRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: TransferCertificateHeaders = field()
+    path_params: TransferCertificatePathParams = field()
+    query_params: TransferCertificateQueryParams = field()
+    request: TransferCertificateRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class TransferCertificateResponse:
+    content_type: str = field()
+    status_code: int = field()
     certificate_state_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     transfer_certificate_response: Optional[shared.TransferCertificateResponse] = field(default=None)
     transfer_conflict_exception: Optional[Any] = field(default=None)

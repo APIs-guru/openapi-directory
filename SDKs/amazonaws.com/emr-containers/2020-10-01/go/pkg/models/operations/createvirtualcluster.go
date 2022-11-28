@@ -14,6 +14,8 @@ type CreateVirtualClusterHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateVirtualClusterRequestBodyContainerProvider
+// The information about the container provider.
 type CreateVirtualClusterRequestBodyContainerProvider struct {
 	ID   *string                           `json:"id,omitempty"`
 	Info *shared.ContainerInfo             `json:"info,omitempty"`

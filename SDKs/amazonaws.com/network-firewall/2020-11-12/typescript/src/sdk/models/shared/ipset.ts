@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IpSet
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A list of IP addresses and address ranges, in CIDR notation. This is part of a <a>RuleVariables</a>. 
 **/
 export class IpSet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Definition" })
+  @SpeakeasyMetadata({ data: "json, name=Definition" })
   definition: string[];
 }

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -48,11 +48,11 @@ class SearchTmdbmoviesQueryParams:
 
 @dataclass
 class SearchTmdbmoviesRequest:
-    query_params: SearchTmdbmoviesQueryParams = field(default=None)
+    query_params: SearchTmdbmoviesQueryParams = field()
     
 
 @dataclass
 class SearchTmdbmoviesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

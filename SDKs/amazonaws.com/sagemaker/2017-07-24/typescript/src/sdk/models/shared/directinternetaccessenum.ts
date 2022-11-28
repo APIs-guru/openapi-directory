@@ -1,6 +1,7 @@
 
 
+
 export enum DirectInternetAccessEnum {
-    Enabled = "Enabled"
-,    Disabled = "Disabled"
+    Enabled = "Enabled",
+    Disabled = "Disabled"
 }

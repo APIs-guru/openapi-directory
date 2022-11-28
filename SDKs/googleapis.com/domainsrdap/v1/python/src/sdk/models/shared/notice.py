@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import link
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Notice:
-    description: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    links: Optional[List[link.Link]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
-    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""Notice
+    Notices object defined in [section 4.3 of RFC 7483](https://tools.ietf.org/html/rfc7483#section-4.3).
+    """
+    
+    description: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    links: Optional[List[Link]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('links') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
+    type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

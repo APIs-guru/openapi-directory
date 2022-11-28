@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ImageScanningConfiguration
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The image scanning configuration for a repository.
 **/
 export class ImageScanningConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=scanOnPush" })
+  @SpeakeasyMetadata({ data: "json, name=scanOnPush" })
   scanOnPush?: boolean;
 }

@@ -4,17 +4,17 @@ from typing import List,Optional
 
 @dataclass
 class TrapListPathParams:
-    agent_num: int = field(default=None, metadata={'path_param': { 'field_name': 'agentNum', 'style': 'simple', 'explode': False }})
+    agent_num: int = field(metadata={'path_param': { 'field_name': 'agentNum', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class TrapListRequest:
-    path_params: TrapListPathParams = field(default=None)
+    path_params: TrapListPathParams = field()
     
 
 @dataclass
 class TrapListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     trap_list_200_application_json_strings: Optional[List[str]] = field(default=None)
     

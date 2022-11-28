@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MonitoringResources } from "./monitoringresources";
 import { ModelExplainabilityAppSpecification } from "./modelexplainabilityappspecification";
 import { ModelExplainabilityBaselineConfig } from "./modelexplainabilitybaselineconfig";
@@ -8,37 +8,38 @@ import { MonitoringNetworkConfig } from "./monitoringnetworkconfig";
 import { MonitoringStoppingCondition } from "./monitoringstoppingcondition";
 
 
+
 export class DescribeModelExplainabilityJobDefinitionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=JobDefinitionArn" })
+  @SpeakeasyMetadata({ data: "json, name=JobDefinitionArn" })
   jobDefinitionArn: string;
 
-  @Metadata({ data: "json, name=JobDefinitionName" })
+  @SpeakeasyMetadata({ data: "json, name=JobDefinitionName" })
   jobDefinitionName: string;
 
-  @Metadata({ data: "json, name=JobResources" })
+  @SpeakeasyMetadata({ data: "json, name=JobResources" })
   jobResources: MonitoringResources;
 
-  @Metadata({ data: "json, name=ModelExplainabilityAppSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=ModelExplainabilityAppSpecification" })
   modelExplainabilityAppSpecification: ModelExplainabilityAppSpecification;
 
-  @Metadata({ data: "json, name=ModelExplainabilityBaselineConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ModelExplainabilityBaselineConfig" })
   modelExplainabilityBaselineConfig?: ModelExplainabilityBaselineConfig;
 
-  @Metadata({ data: "json, name=ModelExplainabilityJobInput" })
+  @SpeakeasyMetadata({ data: "json, name=ModelExplainabilityJobInput" })
   modelExplainabilityJobInput: ModelExplainabilityJobInput;
 
-  @Metadata({ data: "json, name=ModelExplainabilityJobOutputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ModelExplainabilityJobOutputConfig" })
   modelExplainabilityJobOutputConfig: MonitoringOutputConfig;
 
-  @Metadata({ data: "json, name=NetworkConfig" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkConfig" })
   networkConfig?: MonitoringNetworkConfig;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=StoppingCondition" })
+  @SpeakeasyMetadata({ data: "json, name=StoppingCondition" })
   stoppingCondition?: MonitoringStoppingCondition;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum SecretScanningAlertStateEnum {
-    Open = "open"
-,    Resolved = "resolved"
+    Open = "open",
+    Resolved = "resolved"
 }

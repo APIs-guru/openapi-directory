@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InsightTypeEnum } from "./insighttypeenum";
+
 
 
 // InsightSelector
@@ -7,6 +8,6 @@ import { InsightTypeEnum } from "./insighttypeenum";
  * A JSON string that contains a list of insight types that are logged on a trail.
 **/
 export class InsightSelector extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InsightType" })
+  @SpeakeasyMetadata({ data: "json, name=InsightType" })
   insightType?: InsightTypeEnum;
 }

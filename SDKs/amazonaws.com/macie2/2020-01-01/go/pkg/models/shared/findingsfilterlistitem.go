@@ -1,5 +1,7 @@
 package shared
 
+// FindingsFilterListItem
+// Provides information about a findings filter.
 type FindingsFilterListItem struct {
 	Action *FindingsFilterActionEnum `json:"action,omitempty"`
 	Arn    *string                   `json:"arn,omitempty"`

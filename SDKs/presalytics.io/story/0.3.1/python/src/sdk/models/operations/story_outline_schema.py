@@ -4,17 +4,17 @@ from typing import Any,Optional
 
 @dataclass
 class StoryOutlineSchemaPathParams:
-    schema_version: str = field(default=None, metadata={'path_param': { 'field_name': 'schema_version', 'style': 'simple', 'explode': False }})
+    schema_version: str = field(metadata={'path_param': { 'field_name': 'schema_version', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class StoryOutlineSchemaRequest:
-    path_params: StoryOutlineSchemaPathParams = field(default=None)
+    path_params: StoryOutlineSchemaPathParams = field()
     
 
 @dataclass
 class StoryOutlineSchemaResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     problem_detail: Optional[Any] = field(default=None)
     

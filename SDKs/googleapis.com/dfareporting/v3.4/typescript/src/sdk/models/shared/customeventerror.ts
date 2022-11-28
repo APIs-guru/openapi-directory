@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CustomEventErrorCodeEnum {
-    Unknown = "UNKNOWN"
-,    InvalidArgument = "INVALID_ARGUMENT"
-,    Internal = "INTERNAL"
-,    PermissionDenied = "PERMISSION_DENIED"
-,    NotFound = "NOT_FOUND"
+    Unknown = "UNKNOWN",
+    InvalidArgument = "INVALID_ARGUMENT",
+    Internal = "INTERNAL",
+    PermissionDenied = "PERMISSION_DENIED",
+    NotFound = "NOT_FOUND"
 }
 
 
@@ -14,12 +15,12 @@ export enum CustomEventErrorCodeEnum {
  * The error code and description for a custom event that failed to insert.
 **/
 export class CustomEventError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: CustomEventErrorCodeEnum;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }

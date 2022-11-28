@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetRemoveUserFromGroupActionEnum(str, Enum):
     REMOVE_USER_FROM_GROUP = "RemoveUserFromGroup"
@@ -10,10 +14,10 @@ class GetRemoveUserFromGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetRemoveUserFromGroupQueryParams:
-    action: GetRemoveUserFromGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'GroupName', 'style': 'form', 'explode': True }})
-    user_name: str = field(default=None, metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
-    version: GetRemoveUserFromGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetRemoveUserFromGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    group_name: str = field(metadata={'query_param': { 'field_name': 'GroupName', 'style': 'form', 'explode': True }})
+    user_name: str = field(metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
+    version: GetRemoveUserFromGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetRemoveUserFromGroupHeaders:
 
 @dataclass
 class GetRemoveUserFromGroupRequest:
-    query_params: GetRemoveUserFromGroupQueryParams = field(default=None)
-    headers: GetRemoveUserFromGroupHeaders = field(default=None)
+    headers: GetRemoveUserFromGroupHeaders = field()
+    query_params: GetRemoveUserFromGroupQueryParams = field()
     
 
 @dataclass
 class GetRemoveUserFromGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

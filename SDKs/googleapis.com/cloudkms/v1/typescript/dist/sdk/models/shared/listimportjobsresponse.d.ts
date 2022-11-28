@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ImportJob } from "./importjob";
 /**
  * Response message for KeyManagementService.ListImportJobs.

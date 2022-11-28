@@ -1,101 +1,102 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListBackendJobsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=appId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" })
   appId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=backendEnvironmentName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=backendEnvironmentName" })
   backendEnvironmentName: string;
 }
 
 
 export class ListBackendJobsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MaxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxResults" })
   maxResults?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=NextToken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NextToken" })
   nextToken?: string;
 }
 
 
 export class ListBackendJobsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class ListBackendJobsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobId" })
+  @SpeakeasyMetadata({ data: "json, name=jobId" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=operation" })
+  @SpeakeasyMetadata({ data: "json, name=operation" })
   operation?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
 export class ListBackendJobsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ListBackendJobsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListBackendJobsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ListBackendJobsHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: ListBackendJobsRequestBody;
 }
 
 
 export class ListBackendJobsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   gatewayTimeoutException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listBackendJobsResponse?: shared.ListBackendJobsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

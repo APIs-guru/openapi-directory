@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CalculateItineraryProgramResult } from "./calculateitineraryprogramresult";
 var CalculateItineraryResult = /** @class */ (function (_super) {
     __extends(CalculateItineraryResult, _super);
     function CalculateItineraryResult() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], CalculateItineraryResult.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=totals", elemType: shared.CalculateItineraryProgramResult }),
+        SpeakeasyMetadata({ data: "json, name=totals", elemType: CalculateItineraryProgramResult }),
         __metadata("design:type", Array)
     ], CalculateItineraryResult.prototype, "totals", void 0);
     return CalculateItineraryResult;

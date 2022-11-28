@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class AppengineAppsCreateQueryParams extends SpeakeasyBase {
     dollarXgafv?: shared.XgafvEnum;
@@ -8,6 +8,7 @@ export declare class AppengineAppsCreateQueryParams extends SpeakeasyBase {
     fields?: string;
     key?: string;
     oauthToken?: string;
+    parent?: string;
     prettyPrint?: boolean;
     quotaUser?: string;
     uploadType?: string;
@@ -19,7 +20,7 @@ export declare class AppengineAppsCreateSecurity extends SpeakeasyBase {
 }
 export declare class AppengineAppsCreateRequest extends SpeakeasyBase {
     queryParams: AppengineAppsCreateQueryParams;
-    request?: shared.Application;
+    request?: shared.ApplicationInput;
     security: AppengineAppsCreateSecurity;
 }
 export declare class AppengineAppsCreateResponse extends SpeakeasyBase {

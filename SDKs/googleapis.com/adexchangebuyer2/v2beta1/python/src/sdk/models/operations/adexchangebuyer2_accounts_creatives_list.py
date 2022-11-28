@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class Adexchangebuyer2AccountsCreativesListPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class Adexchangebuyer2AccountsCreativesListQueryParams:
 
 @dataclass
 class Adexchangebuyer2AccountsCreativesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class Adexchangebuyer2AccountsCreativesListRequest:
-    path_params: Adexchangebuyer2AccountsCreativesListPathParams = field(default=None)
-    query_params: Adexchangebuyer2AccountsCreativesListQueryParams = field(default=None)
-    security: Adexchangebuyer2AccountsCreativesListSecurity = field(default=None)
+    path_params: Adexchangebuyer2AccountsCreativesListPathParams = field()
+    query_params: Adexchangebuyer2AccountsCreativesListQueryParams = field()
+    security: Adexchangebuyer2AccountsCreativesListSecurity = field()
     
 
 @dataclass
 class Adexchangebuyer2AccountsCreativesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_creatives_response: Optional[shared.ListCreativesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

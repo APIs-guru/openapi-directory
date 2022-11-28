@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GamesListQueryParams extends SpeakeasyBase {
     creators?: string;
@@ -25,14 +25,14 @@ export declare class GamesListQueryParams extends SpeakeasyBase {
     tags?: string;
     updated?: string;
 }
-export declare class GamesListRequest extends SpeakeasyBase {
-    queryParams: GamesListQueryParams;
-}
 export declare class GamesList200ApplicationJson extends SpeakeasyBase {
     count: number;
     next?: string;
     previous?: string;
     results: shared.Game[];
+}
+export declare class GamesListRequest extends SpeakeasyBase {
+    queryParams: GamesListQueryParams;
 }
 export declare class GamesListResponse extends SpeakeasyBase {
     contentType: string;

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssessmentReportsDestination } from "./assessmentreportsdestination";
 import { Delegation } from "./delegation";
 import { Role } from "./role";
@@ -7,41 +6,42 @@ import { Scope } from "./scope";
 import { AssessmentStatusEnum } from "./assessmentstatusenum";
 
 
+
 // AssessmentMetadata
 /** 
  *  The metadata associated with the specified assessment. 
 **/
 export class AssessmentMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assessmentReportsDestination" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentReportsDestination" })
   assessmentReportsDestination?: AssessmentReportsDestination;
 
-  @Metadata({ data: "json, name=complianceType" })
+  @SpeakeasyMetadata({ data: "json, name=complianceType" })
   complianceType?: string;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=delegations", elemType: shared.Delegation })
+  @SpeakeasyMetadata({ data: "json, name=delegations", elemType: Delegation })
   delegations?: Delegation[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lastUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdated" })
   lastUpdated?: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=roles", elemType: shared.Role })
+  @SpeakeasyMetadata({ data: "json, name=roles", elemType: Role })
   roles?: Role[];
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope?: Scope;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: AssessmentStatusEnum;
 }

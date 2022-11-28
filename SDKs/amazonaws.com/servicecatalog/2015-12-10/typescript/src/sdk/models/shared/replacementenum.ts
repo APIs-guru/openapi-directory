@@ -1,7 +1,8 @@
 
 
+
 export enum ReplacementEnum {
-    True = "TRUE"
-,    False = "FALSE"
-,    Conditional = "CONDITIONAL"
+    True = "TRUE",
+    False = "FALSE",
+    Conditional = "CONDITIONAL"
 }

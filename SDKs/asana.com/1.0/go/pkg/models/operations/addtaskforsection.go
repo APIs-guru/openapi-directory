@@ -17,14 +17,14 @@ type AddTaskForSectionRequestBody struct {
 	Data *shared.SectionTaskInsertRequest `json:"data,omitempty"`
 }
 
+type AddTaskForSection200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type AddTaskForSectionRequest struct {
 	PathParams  AddTaskForSectionPathParams
 	QueryParams AddTaskForSectionQueryParams
 	Request     AddTaskForSectionRequestBody `request:"mediaType=application/json"`
-}
-
-type AddTaskForSection200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type AddTaskForSectionResponse struct {

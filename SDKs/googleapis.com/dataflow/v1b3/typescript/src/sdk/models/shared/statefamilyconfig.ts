@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StateFamilyConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * State family configuration.
 **/
 export class StateFamilyConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isRead" })
+  @SpeakeasyMetadata({ data: "json, name=isRead" })
   isRead?: boolean;
 
-  @Metadata({ data: "json, name=stateFamily" })
+  @SpeakeasyMetadata({ data: "json, name=stateFamily" })
   stateFamily?: string;
 }

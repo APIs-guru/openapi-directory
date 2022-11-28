@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedRepositoryPermissions
+// A paginated list of repository permissions.
 type PaginatedRepositoryPermissions struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

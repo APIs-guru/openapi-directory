@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MlUserDataEncryptionModeStringEnum } from "./mluserdataencryptionmodestringenum";
+
 
 
 // MlUserDataEncryption
@@ -7,9 +8,9 @@ import { MlUserDataEncryptionModeStringEnum } from "./mluserdataencryptionmodest
  * The encryption-at-rest settings of the transform that apply to accessing user data.
 **/
 export class MlUserDataEncryption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=MlUserDataEncryptionMode" })
+  @SpeakeasyMetadata({ data: "json, name=MlUserDataEncryptionMode" })
   mlUserDataEncryptionMode: MlUserDataEncryptionModeStringEnum;
 }

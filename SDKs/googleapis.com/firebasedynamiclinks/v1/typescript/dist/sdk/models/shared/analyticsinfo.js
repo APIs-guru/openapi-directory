@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePlayAnalytics } from "./googleplayanalytics";
 import { ITunesConnectAnalytics } from "./itunesconnectanalytics";
 // AnalyticsInfo
@@ -35,11 +35,11 @@ var AnalyticsInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=googlePlayAnalytics" }),
+        SpeakeasyMetadata({ data: "json, name=googlePlayAnalytics" }),
         __metadata("design:type", GooglePlayAnalytics)
     ], AnalyticsInfo.prototype, "googlePlayAnalytics", void 0);
     __decorate([
-        Metadata({ data: "json, name=itunesConnectAnalytics" }),
+        SpeakeasyMetadata({ data: "json, name=itunesConnectAnalytics" }),
         __metadata("design:type", ITunesConnectAnalytics)
     ], AnalyticsInfo.prototype, "itunesConnectAnalytics", void 0);
     return AnalyticsInfo;

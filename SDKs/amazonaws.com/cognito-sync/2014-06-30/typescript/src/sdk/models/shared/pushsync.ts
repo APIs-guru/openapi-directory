@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PushSync
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration options to be applied to the identity pool.
 **/
 export class PushSync extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationArns" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationArns" })
   applicationArns?: string[];
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn?: string;
 }

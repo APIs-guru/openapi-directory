@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ConnectionStatusStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Active = "ACTIVE"
-,    Inactive = "INACTIVE"
-,    Deleting = "DELETING"
-,    Updating = "UPDATING"
-,    Error = "ERROR"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Active = "ACTIVE",
+    Inactive = "INACTIVE",
+    Deleting = "DELETING",
+    Updating = "UPDATING",
+    Error = "ERROR"
 }
 
 
@@ -16,12 +17,12 @@ export enum ConnectionStatusStateEnum {
  * ConnectionStatus indicates the state of the connection.
 **/
 export class ConnectionStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ConnectionStatusStateEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }

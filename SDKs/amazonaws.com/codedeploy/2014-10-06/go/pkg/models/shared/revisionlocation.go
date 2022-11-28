@@ -1,5 +1,7 @@
 package shared
 
+// RevisionLocation
+// Information about the location of an application revision.
 type RevisionLocation struct {
 	AppSpecContent *AppSpecContent           `json:"appSpecContent,omitempty"`
 	GitHubLocation *GitHubLocation           `json:"gitHubLocation,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SslSettings
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * SSL configuration for a DomainMapping resource.
 **/
 export class SslSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateId" })
+  @SpeakeasyMetadata({ data: "json, name=certificateId" })
   certificateId?: string;
 
-  @Metadata({ data: "json, name=isManagedCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=isManagedCertificate" })
   isManagedCertificate?: boolean;
 }

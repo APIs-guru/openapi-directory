@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomRoutingEndpointDescription } from "./customroutingendpointdescription";
 
 
+
 export class AddCustomRoutingEndpointsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EndpointDescriptions", elemType: shared.CustomRoutingEndpointDescription })
+  @SpeakeasyMetadata({ data: "json, name=EndpointDescriptions", elemType: CustomRoutingEndpointDescription })
   endpointDescriptions?: CustomRoutingEndpointDescription[];
 
-  @Metadata({ data: "json, name=EndpointGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointGroupArn" })
   endpointGroupArn?: string;
 }

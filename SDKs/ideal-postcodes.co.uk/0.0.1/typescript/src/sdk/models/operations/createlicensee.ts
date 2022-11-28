@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateLicenseePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=key" })
   key: string;
 }
 
 
 export class CreateLicenseeSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   apiKey: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   userToken: shared.SchemeUserToken;
 }
 
 
 export class CreateLicenseeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateLicenseePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.CreateLicenseeSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateLicenseeSecurity;
 }
 
 
 export class CreateLicenseeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   addressLookupResponseSchema?: shared.AddressLookupResponseSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   licenseeResponseSchema?: shared.LicenseeResponseSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

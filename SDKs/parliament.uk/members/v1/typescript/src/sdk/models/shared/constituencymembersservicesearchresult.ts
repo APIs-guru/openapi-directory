@@ -1,25 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConstituencyItem } from "./constituencyitem";
 import { Link } from "./link";
 
 
+
 export class ConstituencyMembersServiceSearchResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.ConstituencyItem })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: ConstituencyItem })
   items?: ConstituencyItem[];
 
-  @Metadata({ data: "json, name=links", elemType: shared.Link })
+  @SpeakeasyMetadata({ data: "json, name=links", elemType: Link })
   links?: Link[];
 
-  @Metadata({ data: "json, name=resultContext" })
+  @SpeakeasyMetadata({ data: "json, name=resultContext" })
   resultContext?: string;
 
-  @Metadata({ data: "json, name=skip" })
+  @SpeakeasyMetadata({ data: "json, name=skip" })
   skip?: number;
 
-  @Metadata({ data: "json, name=take" })
+  @SpeakeasyMetadata({ data: "json, name=take" })
   take?: number;
 
-  @Metadata({ data: "json, name=totalResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalResults" })
   totalResults?: number;
 }

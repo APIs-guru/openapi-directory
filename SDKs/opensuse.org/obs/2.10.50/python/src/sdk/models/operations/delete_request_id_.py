@@ -1,26 +1,27 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
 class DeleteRequestIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteRequestIDSecurity:
-    basic_authentication: shared.SchemeBasicAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_authentication: shared.SchemeBasicAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class DeleteRequestIDRequest:
-    path_params: DeleteRequestIDPathParams = field(default=None)
-    security: DeleteRequestIDSecurity = field(default=None)
+    path_params: DeleteRequestIDPathParams = field()
+    security: DeleteRequestIDSecurity = field()
     
 
 @dataclass
 class DeleteRequestIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

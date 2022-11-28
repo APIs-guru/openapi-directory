@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,Optional
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,26 +14,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def head_key_pk_(self, request: operations.HeadKeyPkRequest) -> operations.HeadKeyPkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""HEAD info on Authentiq ID
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/key/{PK}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("HEAD", url)
         content_type = r.headers.get("Content-Type")
 
@@ -52,22 +78,30 @@ class SDK:
 
     
     def key_bind(self, request: operations.KeyBindRequest) -> operations.KeyBindResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update Authentiq ID by replacing the object.
+        
+        v4: `JWT(sub,email,phone)` to bind email/phone hash; 
+        
+        v5: POST issuer-signed email & phone scopes
+        and PUT to update registration `JWT(sub, pk, devtoken, ...)`
+        
+        See: https://github.com/skion/authentiq/wiki/JWT-Examples
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/key/{PK}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -93,22 +127,27 @@ class SDK:
 
     
     def key_register(self, request: operations.KeyRegisterRequest) -> operations.KeyRegisterResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Register a new ID `JWT(sub, devtoken)`
+        
+        v5: `JWT(sub, pk, devtoken, ...)`
+        
+        See: https://github.com/skion/authentiq/wiki/JWT-Examples
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/key"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -130,13 +169,17 @@ class SDK:
 
     
     def key_retrieve(self, request: operations.KeyRetrieveRequest) -> operations.KeyRetrieveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get public details of an Authentiq ID.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/key/{PK}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -162,15 +205,17 @@ class SDK:
 
     
     def key_revoke(self, request: operations.KeyRevokeRequest) -> operations.KeyRevokeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Revoke an Identity (Key) with a revocation secret
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/key/{PK}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -196,15 +241,22 @@ class SDK:
 
     
     def key_revoke_nosecret(self, request: operations.KeyRevokeNosecretRequest) -> operations.KeyRevokeNosecretResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Revoke an Authentiq ID using email & phone.
+        
+        If called with `email` and `phone` only, a verification code 
+        will be sent by email. Do a second call adding `code` to 
+        complete the revocation.
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/key"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -234,22 +286,29 @@ class SDK:
 
     
     def key_update(self, request: operations.KeyUpdateRequest) -> operations.KeyUpdateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""update properties of an Authentiq ID.
+        (not operational in v4; use PUT for now)
+        
+        v5: POST issuer-signed email & phone scopes in
+        a self-signed JWT
+        
+        See: https://github.com/skion/authentiq/wiki/JWT-Examples
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/key/{PK}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -271,24 +330,25 @@ class SDK:
 
     
     def push_login_request(self, request: operations.PushLoginRequestRequest) -> operations.PushLoginRequestResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""push sign-in request
+        See: https://github.com/skion/authentiq/wiki/JWT-Examples
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/login"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -310,13 +370,16 @@ class SDK:
 
     
     def sign_confirm(self, request: operations.SignConfirmRequest) -> operations.SignConfirmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""this is a scope confirmation
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/scope/{job}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -346,13 +409,16 @@ class SDK:
 
     
     def sign_delete(self, request: operations.SignDeleteRequest) -> operations.SignDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""delete a verification job
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/scope/{job}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -374,24 +440,25 @@ class SDK:
 
     
     def sign_request(self, request: operations.SignRequestRequest) -> operations.SignRequestResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""scope verification request
+        See: https://github.com/skion/authentiq/wiki/JWT-Examples
+        
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/scope"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -413,13 +480,16 @@ class SDK:
 
     
     def sign_retrieve(self, request: operations.SignRetrieveRequest) -> operations.SignRetrieveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""get the status / current content of a verification job
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/scope/{job}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -447,13 +517,16 @@ class SDK:
 
     
     def sign_retrieve_head(self, request: operations.SignRetrieveHeadRequest) -> operations.SignRetrieveHeadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""HEAD to get the status of a verification job
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/scope/{job}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("HEAD", url)
         content_type = r.headers.get("Content-Type")
 
@@ -475,13 +548,18 @@ class SDK:
 
     
     def sign_update(self, request: operations.SignUpdateRequest) -> operations.SignUpdateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""authority updates a JWT with its signature
+        See: https://github.com/skion/authentiq/wiki/JWT-Examples
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/scope/{job}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 

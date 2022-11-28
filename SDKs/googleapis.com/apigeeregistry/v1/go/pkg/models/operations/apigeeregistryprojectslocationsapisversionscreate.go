@@ -31,7 +31,7 @@ type ApigeeregistryProjectsLocationsApisVersionsCreateSecurity struct {
 type ApigeeregistryProjectsLocationsApisVersionsCreateRequest struct {
 	PathParams  ApigeeregistryProjectsLocationsApisVersionsCreatePathParams
 	QueryParams ApigeeregistryProjectsLocationsApisVersionsCreateQueryParams
-	Request     *shared.APIVersion `request:"mediaType=application/json"`
+	Request     *shared.APIVersionInput `request:"mediaType=application/json"`
 	Security    ApigeeregistryProjectsLocationsApisVersionsCreateSecurity
 }
 

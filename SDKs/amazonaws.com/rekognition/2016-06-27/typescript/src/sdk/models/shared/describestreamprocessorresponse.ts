@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StreamProcessorInput } from "./streamprocessorinput";
 import { StreamProcessorOutput } from "./streamprocessoroutput";
 import { StreamProcessorSettings } from "./streamprocessorsettings";
 import { StreamProcessorStatusEnum } from "./streamprocessorstatusenum";
 
 
+
 export class DescribeStreamProcessorResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTimestamp" })
   creationTimestamp?: Date;
 
-  @Metadata({ data: "json, name=Input" })
+  @SpeakeasyMetadata({ data: "json, name=Input" })
   input?: StreamProcessorInput;
 
-  @Metadata({ data: "json, name=LastUpdateTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdateTimestamp" })
   lastUpdateTimestamp?: Date;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Output" })
+  @SpeakeasyMetadata({ data: "json, name=Output" })
   output?: StreamProcessorOutput;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=Settings" })
+  @SpeakeasyMetadata({ data: "json, name=Settings" })
   settings?: StreamProcessorSettings;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: StreamProcessorStatusEnum;
 
-  @Metadata({ data: "json, name=StatusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=StatusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=StreamProcessorArn" })
+  @SpeakeasyMetadata({ data: "json, name=StreamProcessorArn" })
   streamProcessorArn?: string;
 }

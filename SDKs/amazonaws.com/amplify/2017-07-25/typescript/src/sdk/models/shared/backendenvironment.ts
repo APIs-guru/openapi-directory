@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BackendEnvironment
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Describes the backend environment for an Amplify app. 
 **/
 export class BackendEnvironment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backendEnvironmentArn" })
+  @SpeakeasyMetadata({ data: "json, name=backendEnvironmentArn" })
   backendEnvironmentArn: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime: Date;
 
-  @Metadata({ data: "json, name=deploymentArtifacts" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentArtifacts" })
   deploymentArtifacts?: string;
 
-  @Metadata({ data: "json, name=environmentName" })
+  @SpeakeasyMetadata({ data: "json, name=environmentName" })
   environmentName: string;
 
-  @Metadata({ data: "json, name=stackName" })
+  @SpeakeasyMetadata({ data: "json, name=stackName" })
   stackName?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime: Date;
 }

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleprivacydlpv2finding
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GooglePrivacyDlpV2InspectResult:
-    findings: Optional[List[googleprivacydlpv2finding.GooglePrivacyDlpV2Finding]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'findings' }})
-    findings_truncated: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'findingsTruncated' }})
+    r"""GooglePrivacyDlpV2InspectResult
+    All the findings for a single scanned item.
+    """
+    
+    findings: Optional[List[GooglePrivacyDlpV2Finding]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('findings') }})
+    findings_truncated: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('findingsTruncated') }})
     

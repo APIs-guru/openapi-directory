@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ExportSnapshotRecordSourceTypeEnum(str, Enum):
     INSTANCE_SNAPSHOT = "InstanceSnapshot"

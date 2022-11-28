@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReportTaskProgressOutput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the output of ReportTaskProgress.
 **/
 export class ReportTaskProgressOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=canceled" })
+  @SpeakeasyMetadata({ data: "json, name=canceled" })
   canceled: boolean;
 }

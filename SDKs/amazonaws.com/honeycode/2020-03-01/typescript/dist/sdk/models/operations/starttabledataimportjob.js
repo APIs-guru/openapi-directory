@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var StartTableDataImportJobPathParams = /** @class */ (function (_super) {
     __extends(StartTableDataImportJobPathParams, _super);
@@ -30,11 +30,11 @@ var StartTableDataImportJobPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=tableId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tableId" }),
         __metadata("design:type", String)
     ], StartTableDataImportJobPathParams.prototype, "tableId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=workbookId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workbookId" }),
         __metadata("design:type", String)
     ], StartTableDataImportJobPathParams.prototype, "workbookId", void 0);
     return StartTableDataImportJobPathParams;
@@ -46,31 +46,31 @@ var StartTableDataImportJobHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], StartTableDataImportJobHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], StartTableDataImportJobHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], StartTableDataImportJobHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], StartTableDataImportJobHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], StartTableDataImportJobHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], StartTableDataImportJobHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], StartTableDataImportJobHeaders.prototype, "xAmzSignedHeaders", void 0);
     return StartTableDataImportJobHeaders;
@@ -90,7 +90,7 @@ var StartTableDataImportJobRequestBodyDataSource = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dataSourceConfig" }),
+        SpeakeasyMetadata({ data: "json, name=dataSourceConfig" }),
         __metadata("design:type", shared.ImportDataSourceConfig)
     ], StartTableDataImportJobRequestBodyDataSource.prototype, "dataSourceConfig", void 0);
     return StartTableDataImportJobRequestBodyDataSource;
@@ -106,11 +106,11 @@ var StartTableDataImportJobRequestBodyImportOptions = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=delimitedTextOptions" }),
+        SpeakeasyMetadata({ data: "json, name=delimitedTextOptions" }),
         __metadata("design:type", shared.DelimitedTextImportOptions)
     ], StartTableDataImportJobRequestBodyImportOptions.prototype, "delimitedTextOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=destinationOptions" }),
+        SpeakeasyMetadata({ data: "json, name=destinationOptions" }),
         __metadata("design:type", shared.DestinationOptions)
     ], StartTableDataImportJobRequestBodyImportOptions.prototype, "destinationOptions", void 0);
     return StartTableDataImportJobRequestBodyImportOptions;
@@ -122,19 +122,19 @@ var StartTableDataImportJobRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clientRequestToken" }),
+        SpeakeasyMetadata({ data: "json, name=clientRequestToken" }),
         __metadata("design:type", String)
     ], StartTableDataImportJobRequestBody.prototype, "clientRequestToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataFormat" }),
+        SpeakeasyMetadata({ data: "json, name=dataFormat" }),
         __metadata("design:type", String)
     ], StartTableDataImportJobRequestBody.prototype, "dataFormat", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataSource" }),
+        SpeakeasyMetadata({ data: "json, name=dataSource" }),
         __metadata("design:type", StartTableDataImportJobRequestBodyDataSource)
     ], StartTableDataImportJobRequestBody.prototype, "dataSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=importOptions" }),
+        SpeakeasyMetadata({ data: "json, name=importOptions" }),
         __metadata("design:type", StartTableDataImportJobRequestBodyImportOptions)
     ], StartTableDataImportJobRequestBody.prototype, "importOptions", void 0);
     return StartTableDataImportJobRequestBody;
@@ -146,15 +146,15 @@ var StartTableDataImportJobRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StartTableDataImportJobPathParams)
     ], StartTableDataImportJobRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StartTableDataImportJobHeaders)
     ], StartTableDataImportJobRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", StartTableDataImportJobRequestBody)
     ], StartTableDataImportJobRequest.prototype, "request", void 0);
     return StartTableDataImportJobRequest;
@@ -166,39 +166,39 @@ var StartTableDataImportJobResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StartTableDataImportJobResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StartTableDataImportJobResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StartTableDataImportJobResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StartTableDataImportJobResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StartTableDataImportJobResponse.prototype, "serviceUnavailableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.StartTableDataImportJobResult)
     ], StartTableDataImportJobResponse.prototype, "startTableDataImportJobResult", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StartTableDataImportJobResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StartTableDataImportJobResponse.prototype, "throttlingException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StartTableDataImportJobResponse.prototype, "validationException", void 0);
     return StartTableDataImportJobResponse;

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class MembershipsByCompetitionHistoricalFormatEnum(str, Enum):
     XML = "xml"
@@ -8,18 +9,18 @@ class MembershipsByCompetitionHistoricalFormatEnum(str, Enum):
 
 @dataclass
 class MembershipsByCompetitionHistoricalPathParams:
-    competition: str = field(default=None, metadata={'path_param': { 'field_name': 'competition', 'style': 'simple', 'explode': False }})
-    format: MembershipsByCompetitionHistoricalFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    competition: str = field(metadata={'path_param': { 'field_name': 'competition', 'style': 'simple', 'explode': False }})
+    format: MembershipsByCompetitionHistoricalFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class MembershipsByCompetitionHistoricalRequest:
-    path_params: MembershipsByCompetitionHistoricalPathParams = field(default=None)
+    path_params: MembershipsByCompetitionHistoricalPathParams = field()
     
 
 @dataclass
 class MembershipsByCompetitionHistoricalResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     memberships: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

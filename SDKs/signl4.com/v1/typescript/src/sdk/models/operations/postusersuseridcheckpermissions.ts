@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostUsersUserIdCheckPermissionsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" })
   userId: string;
 }
 
 
 export class PostUsersUserIdCheckPermissionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=teamId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=teamId" })
   teamId?: string;
 }
 
 
 export class PostUsersUserIdCheckPermissionsRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   stringItemsWrapper?: shared.StringItemsWrapper;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   stringItemsWrapper1?: shared.StringItemsWrapper;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   stringItemsWrapper2?: shared.StringItemsWrapper;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   stringItemsWrapper3?: shared.StringItemsWrapper;
 }
 
 
 export class PostUsersUserIdCheckPermissionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostUsersUserIdCheckPermissionsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostUsersUserIdCheckPermissionsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PostUsersUserIdCheckPermissionsRequests;
 }
 
 
 export class PostUsersUserIdCheckPermissionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   userImage?: shared.UserImage;
 }

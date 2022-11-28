@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Condition } from "./condition";
 import { LogConfig } from "./logconfig";
 export declare enum RuleActionEnum {

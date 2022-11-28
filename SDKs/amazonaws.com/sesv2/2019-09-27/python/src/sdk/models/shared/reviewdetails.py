@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import reviewstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ReviewDetails:
-    case_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CaseId' }})
-    status: Optional[reviewstatus_enum.ReviewStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
+    r"""ReviewDetails
+    An object that contains information about your account details review.
+    """
+    
+    case_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CaseId') }})
+    status: Optional[ReviewStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
     

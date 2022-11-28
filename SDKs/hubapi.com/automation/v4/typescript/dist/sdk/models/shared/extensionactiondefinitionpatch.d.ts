@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InputFieldDefinition } from "./inputfielddefinition";
 import { ActionLabels } from "./actionlabels";
 import { ObjectRequestOptions } from "./objectrequestoptions";

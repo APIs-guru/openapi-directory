@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TensorflowResourceHandleProto
@@ -8,18 +9,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * a single run.
 **/
 export class TensorflowResourceHandleProto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=container" })
+  @SpeakeasyMetadata({ data: "json, name=container" })
   container?: string;
 
-  @Metadata({ data: "json, name=device" })
+  @SpeakeasyMetadata({ data: "json, name=device" })
   device?: string;
 
-  @Metadata({ data: "json, name=hash_code" })
+  @SpeakeasyMetadata({ data: "json, name=hash_code" })
   hashCode?: string;
 
-  @Metadata({ data: "json, name=maybe_type_name" })
+  @SpeakeasyMetadata({ data: "json, name=maybe_type_name" })
   maybeTypeName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

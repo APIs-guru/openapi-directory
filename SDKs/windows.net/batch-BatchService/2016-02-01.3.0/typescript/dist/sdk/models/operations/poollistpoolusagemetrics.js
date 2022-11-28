@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PoolListPoolUsageMetricsQueryParams = /** @class */ (function (_super) {
     __extends(PoolListPoolUsageMetricsQueryParams, _super);
     function PoolListPoolUsageMetricsQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$filter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$filter" }),
         __metadata("design:type", String)
     ], PoolListPoolUsageMetricsQueryParams.prototype, "dollarFilter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api-version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" }),
         __metadata("design:type", String)
     ], PoolListPoolUsageMetricsQueryParams.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=endtime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endtime" }),
         __metadata("design:type", Date)
     ], PoolListPoolUsageMetricsQueryParams.prototype, "endtime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxresults" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxresults" }),
         __metadata("design:type", Number)
     ], PoolListPoolUsageMetricsQueryParams.prototype, "maxresults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=starttime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=starttime" }),
         __metadata("design:type", Date)
     ], PoolListPoolUsageMetricsQueryParams.prototype, "starttime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
         __metadata("design:type", Number)
     ], PoolListPoolUsageMetricsQueryParams.prototype, "timeout", void 0);
     return PoolListPoolUsageMetricsQueryParams;
@@ -61,15 +61,15 @@ var PoolListPoolUsageMetricsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=client-request-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=client-request-id" }),
         __metadata("design:type", String)
     ], PoolListPoolUsageMetricsHeaders.prototype, "clientRequestId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=ocp-date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=ocp-date" }),
         __metadata("design:type", String)
     ], PoolListPoolUsageMetricsHeaders.prototype, "ocpDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=return-client-request-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=return-client-request-id" }),
         __metadata("design:type", Boolean)
     ], PoolListPoolUsageMetricsHeaders.prototype, "returnClientRequestId", void 0);
     return PoolListPoolUsageMetricsHeaders;
@@ -81,11 +81,11 @@ var PoolListPoolUsageMetricsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PoolListPoolUsageMetricsQueryParams)
     ], PoolListPoolUsageMetricsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PoolListPoolUsageMetricsHeaders)
     ], PoolListPoolUsageMetricsRequest.prototype, "headers", void 0);
     return PoolListPoolUsageMetricsRequest;
@@ -97,23 +97,23 @@ var PoolListPoolUsageMetricsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PoolListPoolUsageMetricsResponse.prototype, "batchError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PoolListPoolUsageMetricsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], PoolListPoolUsageMetricsResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PoolListPoolUsageMetricsResponse.prototype, "poolListPoolUsageMetricsResult", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PoolListPoolUsageMetricsResponse.prototype, "statusCode", void 0);
     return PoolListPoolUsageMetricsResponse;

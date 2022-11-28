@@ -7,6 +7,8 @@ const (
 	ConfigureContactSettingsRequestContactNoticesEnumPublicContactDataAcknowledgement ConfigureContactSettingsRequestContactNoticesEnum = "PUBLIC_CONTACT_DATA_ACKNOWLEDGEMENT"
 )
 
+// ConfigureContactSettingsRequest
+// Request for the `ConfigureContactSettings` method.
 type ConfigureContactSettingsRequest struct {
 	ContactNotices  []ConfigureContactSettingsRequestContactNoticesEnum `json:"contactNotices,omitempty"`
 	ContactSettings *ContactSettings                                    `json:"contactSettings,omitempty"`

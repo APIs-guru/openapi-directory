@@ -1,104 +1,267 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AgeRangeAssignedTargetingOptionDetails } from "./agerangeassignedtargetingoptiondetails";
-import { AppCategoryAssignedTargetingOptionDetails } from "./appcategoryassignedtargetingoptiondetails";
-import { AppAssignedTargetingOptionDetails } from "./appassignedtargetingoptiondetails";
+import { AppCategoryAssignedTargetingOptionDetailsInput } from "./appcategoryassignedtargetingoptiondetails";
+import { AppAssignedTargetingOptionDetailsInput } from "./appassignedtargetingoptiondetails";
 import { AudienceGroupAssignedTargetingOptionDetails } from "./audiencegroupassignedtargetingoptiondetails";
 import { AudioContentTypeAssignedTargetingOptionDetails } from "./audiocontenttypeassignedtargetingoptiondetails";
-import { AuthorizedSellerStatusAssignedTargetingOptionDetails } from "./authorizedsellerstatusassignedtargetingoptiondetails";
-import { BrowserAssignedTargetingOptionDetails } from "./browserassignedtargetingoptiondetails";
-import { BusinessChainAssignedTargetingOptionDetails } from "./businesschainassignedtargetingoptiondetails";
-import { CarrierAndIspAssignedTargetingOptionDetails } from "./carrierandispassignedtargetingoptiondetails";
-import { CategoryAssignedTargetingOptionDetails } from "./categoryassignedtargetingoptiondetails";
+import { AuthorizedSellerStatusAssignedTargetingOptionDetailsInput } from "./authorizedsellerstatusassignedtargetingoptiondetails";
+import { BrowserAssignedTargetingOptionDetailsInput } from "./browserassignedtargetingoptiondetails";
+import { BusinessChainAssignedTargetingOptionDetailsInput } from "./businesschainassignedtargetingoptiondetails";
+import { CarrierAndIspAssignedTargetingOptionDetailsInput } from "./carrierandispassignedtargetingoptiondetails";
+import { CategoryAssignedTargetingOptionDetailsInput } from "./categoryassignedtargetingoptiondetails";
 import { ChannelAssignedTargetingOptionDetails } from "./channelassignedtargetingoptiondetails";
-import { ContentDurationAssignedTargetingOptionDetails } from "./contentdurationassignedtargetingoptiondetails";
-import { ContentGenreAssignedTargetingOptionDetails } from "./contentgenreassignedtargetingoptiondetails";
-import { ContentInstreamPositionAssignedTargetingOptionDetails } from "./contentinstreampositionassignedtargetingoptiondetails";
-import { ContentOutstreamPositionAssignedTargetingOptionDetails } from "./contentoutstreampositionassignedtargetingoptiondetails";
-import { ContentStreamTypeAssignedTargetingOptionDetails } from "./contentstreamtypeassignedtargetingoptiondetails";
+import { ContentDurationAssignedTargetingOptionDetailsInput } from "./contentdurationassignedtargetingoptiondetails";
+import { ContentGenreAssignedTargetingOptionDetailsInput } from "./contentgenreassignedtargetingoptiondetails";
+import { ContentInstreamPositionAssignedTargetingOptionDetailsInput } from "./contentinstreampositionassignedtargetingoptiondetails";
+import { ContentOutstreamPositionAssignedTargetingOptionDetailsInput } from "./contentoutstreampositionassignedtargetingoptiondetails";
+import { ContentStreamTypeAssignedTargetingOptionDetailsInput } from "./contentstreamtypeassignedtargetingoptiondetails";
 import { DayAndTimeAssignedTargetingOptionDetails } from "./dayandtimeassignedtargetingoptiondetails";
-import { DeviceMakeModelAssignedTargetingOptionDetails } from "./devicemakemodelassignedtargetingoptiondetails";
-import { DeviceTypeAssignedTargetingOptionDetails } from "./devicetypeassignedtargetingoptiondetails";
+import { DeviceMakeModelAssignedTargetingOptionDetailsInput } from "./devicemakemodelassignedtargetingoptiondetails";
+import { DeviceTypeAssignedTargetingOptionDetailsInput } from "./devicetypeassignedtargetingoptiondetails";
 import { DigitalContentLabelAssignedTargetingOptionDetails } from "./digitalcontentlabelassignedtargetingoptiondetails";
 import { EnvironmentAssignedTargetingOptionDetails } from "./environmentassignedtargetingoptiondetails";
 import { ExchangeAssignedTargetingOptionDetails } from "./exchangeassignedtargetingoptiondetails";
 import { GenderAssignedTargetingOptionDetails } from "./genderassignedtargetingoptiondetails";
-import { GeoRegionAssignedTargetingOptionDetails } from "./georegionassignedtargetingoptiondetails";
+import { GeoRegionAssignedTargetingOptionDetailsInput } from "./georegionassignedtargetingoptiondetails";
 import { HouseholdIncomeAssignedTargetingOptionDetails } from "./householdincomeassignedtargetingoptiondetails";
 import { InventorySourceAssignedTargetingOptionDetails } from "./inventorysourceassignedtargetingoptiondetails";
 import { InventorySourceGroupAssignedTargetingOptionDetails } from "./inventorysourcegroupassignedtargetingoptiondetails";
 import { KeywordAssignedTargetingOptionDetails } from "./keywordassignedtargetingoptiondetails";
-import { LanguageAssignedTargetingOptionDetails } from "./languageassignedtargetingoptiondetails";
+import { LanguageAssignedTargetingOptionDetailsInput } from "./languageassignedtargetingoptiondetails";
 import { NativeContentPositionAssignedTargetingOptionDetails } from "./nativecontentpositionassignedtargetingoptiondetails";
 import { NegativeKeywordListAssignedTargetingOptionDetails } from "./negativekeywordlistassignedtargetingoptiondetails";
 import { OmidAssignedTargetingOptionDetails } from "./omidassignedtargetingoptiondetails";
-import { OnScreenPositionAssignedTargetingOptionDetails } from "./onscreenpositionassignedtargetingoptiondetails";
-import { OperatingSystemAssignedTargetingOptionDetails } from "./operatingsystemassignedtargetingoptiondetails";
+import { OnScreenPositionAssignedTargetingOptionDetailsInput } from "./onscreenpositionassignedtargetingoptiondetails";
+import { OperatingSystemAssignedTargetingOptionDetailsInput } from "./operatingsystemassignedtargetingoptiondetails";
 import { ParentalStatusAssignedTargetingOptionDetails } from "./parentalstatusassignedtargetingoptiondetails";
-import { PoiAssignedTargetingOptionDetails } from "./poiassignedtargetingoptiondetails";
+import { PoiAssignedTargetingOptionDetailsInput } from "./poiassignedtargetingoptiondetails";
 import { ProximityLocationListAssignedTargetingOptionDetails } from "./proximitylocationlistassignedtargetingoptiondetails";
 import { RegionalLocationListAssignedTargetingOptionDetails } from "./regionallocationlistassignedtargetingoptiondetails";
 import { SensitiveCategoryAssignedTargetingOptionDetails } from "./sensitivecategoryassignedtargetingoptiondetails";
 import { SubExchangeAssignedTargetingOptionDetails } from "./subexchangeassignedtargetingoptiondetails";
 import { ThirdPartyVerifierAssignedTargetingOptionDetails } from "./thirdpartyverifierassignedtargetingoptiondetails";
 import { UrlAssignedTargetingOptionDetails } from "./urlassignedtargetingoptiondetails";
-import { UserRewardedContentAssignedTargetingOptionDetails } from "./userrewardedcontentassignedtargetingoptiondetails";
+import { UserRewardedContentAssignedTargetingOptionDetailsInput } from "./userrewardedcontentassignedtargetingoptiondetails";
 import { VideoPlayerSizeAssignedTargetingOptionDetails } from "./videoplayersizeassignedtargetingoptiondetails";
 import { ViewabilityAssignedTargetingOptionDetails } from "./viewabilityassignedtargetingoptiondetails";
+import { AppCategoryAssignedTargetingOptionDetails } from "./appcategoryassignedtargetingoptiondetails";
+import { AppAssignedTargetingOptionDetails } from "./appassignedtargetingoptiondetails";
+import { AuthorizedSellerStatusAssignedTargetingOptionDetails } from "./authorizedsellerstatusassignedtargetingoptiondetails";
+import { BrowserAssignedTargetingOptionDetails } from "./browserassignedtargetingoptiondetails";
+import { BusinessChainAssignedTargetingOptionDetails } from "./businesschainassignedtargetingoptiondetails";
+import { CarrierAndIspAssignedTargetingOptionDetails } from "./carrierandispassignedtargetingoptiondetails";
+import { CategoryAssignedTargetingOptionDetails } from "./categoryassignedtargetingoptiondetails";
+import { ContentDurationAssignedTargetingOptionDetails } from "./contentdurationassignedtargetingoptiondetails";
+import { ContentGenreAssignedTargetingOptionDetails } from "./contentgenreassignedtargetingoptiondetails";
+import { ContentInstreamPositionAssignedTargetingOptionDetails } from "./contentinstreampositionassignedtargetingoptiondetails";
+import { ContentOutstreamPositionAssignedTargetingOptionDetails } from "./contentoutstreampositionassignedtargetingoptiondetails";
+import { ContentStreamTypeAssignedTargetingOptionDetails } from "./contentstreamtypeassignedtargetingoptiondetails";
+import { DeviceMakeModelAssignedTargetingOptionDetails } from "./devicemakemodelassignedtargetingoptiondetails";
+import { DeviceTypeAssignedTargetingOptionDetails } from "./devicetypeassignedtargetingoptiondetails";
+import { GeoRegionAssignedTargetingOptionDetails } from "./georegionassignedtargetingoptiondetails";
+import { LanguageAssignedTargetingOptionDetails } from "./languageassignedtargetingoptiondetails";
+import { OnScreenPositionAssignedTargetingOptionDetails } from "./onscreenpositionassignedtargetingoptiondetails";
+import { OperatingSystemAssignedTargetingOptionDetails } from "./operatingsystemassignedtargetingoptiondetails";
+import { PoiAssignedTargetingOptionDetails } from "./poiassignedtargetingoptiondetails";
+import { UserRewardedContentAssignedTargetingOptionDetails } from "./userrewardedcontentassignedtargetingoptiondetails";
+
 
 export enum AssignedTargetingOptionInheritanceEnum {
-    InheritanceUnspecified = "INHERITANCE_UNSPECIFIED"
-,    NotInherited = "NOT_INHERITED"
-,    InheritedFromPartner = "INHERITED_FROM_PARTNER"
-,    InheritedFromAdvertiser = "INHERITED_FROM_ADVERTISER"
+    InheritanceUnspecified = "INHERITANCE_UNSPECIFIED",
+    NotInherited = "NOT_INHERITED",
+    InheritedFromPartner = "INHERITED_FROM_PARTNER",
+    InheritedFromAdvertiser = "INHERITED_FROM_ADVERTISER"
 }
 
 export enum AssignedTargetingOptionTargetingTypeEnum {
-    TargetingTypeUnspecified = "TARGETING_TYPE_UNSPECIFIED"
-,    TargetingTypeChannel = "TARGETING_TYPE_CHANNEL"
-,    TargetingTypeAppCategory = "TARGETING_TYPE_APP_CATEGORY"
-,    TargetingTypeApp = "TARGETING_TYPE_APP"
-,    TargetingTypeUrl = "TARGETING_TYPE_URL"
-,    TargetingTypeDayAndTime = "TARGETING_TYPE_DAY_AND_TIME"
-,    TargetingTypeAgeRange = "TARGETING_TYPE_AGE_RANGE"
-,    TargetingTypeRegionalLocationList = "TARGETING_TYPE_REGIONAL_LOCATION_LIST"
-,    TargetingTypeProximityLocationList = "TARGETING_TYPE_PROXIMITY_LOCATION_LIST"
-,    TargetingTypeGender = "TARGETING_TYPE_GENDER"
-,    TargetingTypeVideoPlayerSize = "TARGETING_TYPE_VIDEO_PLAYER_SIZE"
-,    TargetingTypeUserRewardedContent = "TARGETING_TYPE_USER_REWARDED_CONTENT"
-,    TargetingTypeParentalStatus = "TARGETING_TYPE_PARENTAL_STATUS"
-,    TargetingTypeContentInstreamPosition = "TARGETING_TYPE_CONTENT_INSTREAM_POSITION"
-,    TargetingTypeContentOutstreamPosition = "TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION"
-,    TargetingTypeDeviceType = "TARGETING_TYPE_DEVICE_TYPE"
-,    TargetingTypeAudienceGroup = "TARGETING_TYPE_AUDIENCE_GROUP"
-,    TargetingTypeBrowser = "TARGETING_TYPE_BROWSER"
-,    TargetingTypeHouseholdIncome = "TARGETING_TYPE_HOUSEHOLD_INCOME"
-,    TargetingTypeOnScreenPosition = "TARGETING_TYPE_ON_SCREEN_POSITION"
-,    TargetingTypeThirdPartyVerifier = "TARGETING_TYPE_THIRD_PARTY_VERIFIER"
-,    TargetingTypeDigitalContentLabelExclusion = "TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION"
-,    TargetingTypeSensitiveCategoryExclusion = "TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION"
-,    TargetingTypeEnvironment = "TARGETING_TYPE_ENVIRONMENT"
-,    TargetingTypeCarrierAndIsp = "TARGETING_TYPE_CARRIER_AND_ISP"
-,    TargetingTypeOperatingSystem = "TARGETING_TYPE_OPERATING_SYSTEM"
-,    TargetingTypeDeviceMakeModel = "TARGETING_TYPE_DEVICE_MAKE_MODEL"
-,    TargetingTypeKeyword = "TARGETING_TYPE_KEYWORD"
-,    TargetingTypeNegativeKeywordList = "TARGETING_TYPE_NEGATIVE_KEYWORD_LIST"
-,    TargetingTypeViewability = "TARGETING_TYPE_VIEWABILITY"
-,    TargetingTypeCategory = "TARGETING_TYPE_CATEGORY"
-,    TargetingTypeInventorySource = "TARGETING_TYPE_INVENTORY_SOURCE"
-,    TargetingTypeLanguage = "TARGETING_TYPE_LANGUAGE"
-,    TargetingTypeAuthorizedSellerStatus = "TARGETING_TYPE_AUTHORIZED_SELLER_STATUS"
-,    TargetingTypeGeoRegion = "TARGETING_TYPE_GEO_REGION"
-,    TargetingTypeInventorySourceGroup = "TARGETING_TYPE_INVENTORY_SOURCE_GROUP"
-,    TargetingTypeExchange = "TARGETING_TYPE_EXCHANGE"
-,    TargetingTypeSubExchange = "TARGETING_TYPE_SUB_EXCHANGE"
-,    TargetingTypePoi = "TARGETING_TYPE_POI"
-,    TargetingTypeBusinessChain = "TARGETING_TYPE_BUSINESS_CHAIN"
-,    TargetingTypeContentDuration = "TARGETING_TYPE_CONTENT_DURATION"
-,    TargetingTypeContentStreamType = "TARGETING_TYPE_CONTENT_STREAM_TYPE"
-,    TargetingTypeNativeContentPosition = "TARGETING_TYPE_NATIVE_CONTENT_POSITION"
-,    TargetingTypeOmid = "TARGETING_TYPE_OMID"
-,    TargetingTypeAudioContentType = "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
-,    TargetingTypeContentGenre = "TARGETING_TYPE_CONTENT_GENRE"
+    TargetingTypeUnspecified = "TARGETING_TYPE_UNSPECIFIED",
+    TargetingTypeChannel = "TARGETING_TYPE_CHANNEL",
+    TargetingTypeAppCategory = "TARGETING_TYPE_APP_CATEGORY",
+    TargetingTypeApp = "TARGETING_TYPE_APP",
+    TargetingTypeUrl = "TARGETING_TYPE_URL",
+    TargetingTypeDayAndTime = "TARGETING_TYPE_DAY_AND_TIME",
+    TargetingTypeAgeRange = "TARGETING_TYPE_AGE_RANGE",
+    TargetingTypeRegionalLocationList = "TARGETING_TYPE_REGIONAL_LOCATION_LIST",
+    TargetingTypeProximityLocationList = "TARGETING_TYPE_PROXIMITY_LOCATION_LIST",
+    TargetingTypeGender = "TARGETING_TYPE_GENDER",
+    TargetingTypeVideoPlayerSize = "TARGETING_TYPE_VIDEO_PLAYER_SIZE",
+    TargetingTypeUserRewardedContent = "TARGETING_TYPE_USER_REWARDED_CONTENT",
+    TargetingTypeParentalStatus = "TARGETING_TYPE_PARENTAL_STATUS",
+    TargetingTypeContentInstreamPosition = "TARGETING_TYPE_CONTENT_INSTREAM_POSITION",
+    TargetingTypeContentOutstreamPosition = "TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION",
+    TargetingTypeDeviceType = "TARGETING_TYPE_DEVICE_TYPE",
+    TargetingTypeAudienceGroup = "TARGETING_TYPE_AUDIENCE_GROUP",
+    TargetingTypeBrowser = "TARGETING_TYPE_BROWSER",
+    TargetingTypeHouseholdIncome = "TARGETING_TYPE_HOUSEHOLD_INCOME",
+    TargetingTypeOnScreenPosition = "TARGETING_TYPE_ON_SCREEN_POSITION",
+    TargetingTypeThirdPartyVerifier = "TARGETING_TYPE_THIRD_PARTY_VERIFIER",
+    TargetingTypeDigitalContentLabelExclusion = "TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION",
+    TargetingTypeSensitiveCategoryExclusion = "TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION",
+    TargetingTypeEnvironment = "TARGETING_TYPE_ENVIRONMENT",
+    TargetingTypeCarrierAndIsp = "TARGETING_TYPE_CARRIER_AND_ISP",
+    TargetingTypeOperatingSystem = "TARGETING_TYPE_OPERATING_SYSTEM",
+    TargetingTypeDeviceMakeModel = "TARGETING_TYPE_DEVICE_MAKE_MODEL",
+    TargetingTypeKeyword = "TARGETING_TYPE_KEYWORD",
+    TargetingTypeNegativeKeywordList = "TARGETING_TYPE_NEGATIVE_KEYWORD_LIST",
+    TargetingTypeViewability = "TARGETING_TYPE_VIEWABILITY",
+    TargetingTypeCategory = "TARGETING_TYPE_CATEGORY",
+    TargetingTypeInventorySource = "TARGETING_TYPE_INVENTORY_SOURCE",
+    TargetingTypeLanguage = "TARGETING_TYPE_LANGUAGE",
+    TargetingTypeAuthorizedSellerStatus = "TARGETING_TYPE_AUTHORIZED_SELLER_STATUS",
+    TargetingTypeGeoRegion = "TARGETING_TYPE_GEO_REGION",
+    TargetingTypeInventorySourceGroup = "TARGETING_TYPE_INVENTORY_SOURCE_GROUP",
+    TargetingTypeExchange = "TARGETING_TYPE_EXCHANGE",
+    TargetingTypeSubExchange = "TARGETING_TYPE_SUB_EXCHANGE",
+    TargetingTypePoi = "TARGETING_TYPE_POI",
+    TargetingTypeBusinessChain = "TARGETING_TYPE_BUSINESS_CHAIN",
+    TargetingTypeContentDuration = "TARGETING_TYPE_CONTENT_DURATION",
+    TargetingTypeContentStreamType = "TARGETING_TYPE_CONTENT_STREAM_TYPE",
+    TargetingTypeNativeContentPosition = "TARGETING_TYPE_NATIVE_CONTENT_POSITION",
+    TargetingTypeOmid = "TARGETING_TYPE_OMID",
+    TargetingTypeAudioContentType = "TARGETING_TYPE_AUDIO_CONTENT_TYPE",
+    TargetingTypeContentGenre = "TARGETING_TYPE_CONTENT_GENRE"
+}
+
+
+// AssignedTargetingOptionInput
+/** 
+ * A single assigned targeting option, which defines the state of a targeting option for an entity with targeting settings.
+**/
+export class AssignedTargetingOptionInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=ageRangeDetails" })
+  ageRangeDetails?: AgeRangeAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=appCategoryDetails" })
+  appCategoryDetails?: AppCategoryAssignedTargetingOptionDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=appDetails" })
+  appDetails?: AppAssignedTargetingOptionDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=audienceGroupDetails" })
+  audienceGroupDetails?: AudienceGroupAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=audioContentTypeDetails" })
+  audioContentTypeDetails?: AudioContentTypeAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=authorizedSellerStatusDetails" })
+  authorizedSellerStatusDetails?: AuthorizedSellerStatusAssignedTargetingOptionDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=browserDetails" })
+  browserDetails?: BrowserAssignedTargetingOptionDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=businessChainDetails" })
+  businessChainDetails?: BusinessChainAssignedTargetingOptionDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=carrierAndIspDetails" })
+  carrierAndIspDetails?: CarrierAndIspAssignedTargetingOptionDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=categoryDetails" })
+  categoryDetails?: CategoryAssignedTargetingOptionDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=channelDetails" })
+  channelDetails?: ChannelAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=contentDurationDetails" })
+  contentDurationDetails?: ContentDurationAssignedTargetingOptionDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=contentGenreDetails" })
+  contentGenreDetails?: ContentGenreAssignedTargetingOptionDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=contentInstreamPositionDetails" })
+  contentInstreamPositionDetails?: ContentInstreamPositionAssignedTargetingOptionDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=contentOutstreamPositionDetails" })
+  contentOutstreamPositionDetails?: ContentOutstreamPositionAssignedTargetingOptionDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=contentStreamTypeDetails" })
+  contentStreamTypeDetails?: ContentStreamTypeAssignedTargetingOptionDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=dayAndTimeDetails" })
+  dayAndTimeDetails?: DayAndTimeAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=deviceMakeModelDetails" })
+  deviceMakeModelDetails?: DeviceMakeModelAssignedTargetingOptionDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=deviceTypeDetails" })
+  deviceTypeDetails?: DeviceTypeAssignedTargetingOptionDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=digitalContentLabelExclusionDetails" })
+  digitalContentLabelExclusionDetails?: DigitalContentLabelAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=environmentDetails" })
+  environmentDetails?: EnvironmentAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=exchangeDetails" })
+  exchangeDetails?: ExchangeAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=genderDetails" })
+  genderDetails?: GenderAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=geoRegionDetails" })
+  geoRegionDetails?: GeoRegionAssignedTargetingOptionDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=householdIncomeDetails" })
+  householdIncomeDetails?: HouseholdIncomeAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=inventorySourceDetails" })
+  inventorySourceDetails?: InventorySourceAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=inventorySourceGroupDetails" })
+  inventorySourceGroupDetails?: InventorySourceGroupAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=keywordDetails" })
+  keywordDetails?: KeywordAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=languageDetails" })
+  languageDetails?: LanguageAssignedTargetingOptionDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=nativeContentPositionDetails" })
+  nativeContentPositionDetails?: NativeContentPositionAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=negativeKeywordListDetails" })
+  negativeKeywordListDetails?: NegativeKeywordListAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=omidDetails" })
+  omidDetails?: OmidAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=onScreenPositionDetails" })
+  onScreenPositionDetails?: OnScreenPositionAssignedTargetingOptionDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=operatingSystemDetails" })
+  operatingSystemDetails?: OperatingSystemAssignedTargetingOptionDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=parentalStatusDetails" })
+  parentalStatusDetails?: ParentalStatusAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=poiDetails" })
+  poiDetails?: PoiAssignedTargetingOptionDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=proximityLocationListDetails" })
+  proximityLocationListDetails?: ProximityLocationListAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=regionalLocationListDetails" })
+  regionalLocationListDetails?: RegionalLocationListAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=sensitiveCategoryExclusionDetails" })
+  sensitiveCategoryExclusionDetails?: SensitiveCategoryAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=subExchangeDetails" })
+  subExchangeDetails?: SubExchangeAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=thirdPartyVerifierDetails" })
+  thirdPartyVerifierDetails?: ThirdPartyVerifierAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=urlDetails" })
+  urlDetails?: UrlAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=userRewardedContentDetails" })
+  userRewardedContentDetails?: UserRewardedContentAssignedTargetingOptionDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=videoPlayerSizeDetails" })
+  videoPlayerSizeDetails?: VideoPlayerSizeAssignedTargetingOptionDetails;
+
+  @SpeakeasyMetadata({ data: "json, name=viewabilityDetails" })
+  viewabilityDetails?: ViewabilityAssignedTargetingOptionDetails;
 }
 
 
@@ -107,150 +270,150 @@ export enum AssignedTargetingOptionTargetingTypeEnum {
  * A single assigned targeting option, which defines the state of a targeting option for an entity with targeting settings.
 **/
 export class AssignedTargetingOption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ageRangeDetails" })
+  @SpeakeasyMetadata({ data: "json, name=ageRangeDetails" })
   ageRangeDetails?: AgeRangeAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=appCategoryDetails" })
+  @SpeakeasyMetadata({ data: "json, name=appCategoryDetails" })
   appCategoryDetails?: AppCategoryAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=appDetails" })
+  @SpeakeasyMetadata({ data: "json, name=appDetails" })
   appDetails?: AppAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=assignedTargetingOptionId" })
+  @SpeakeasyMetadata({ data: "json, name=assignedTargetingOptionId" })
   assignedTargetingOptionId?: string;
 
-  @Metadata({ data: "json, name=audienceGroupDetails" })
+  @SpeakeasyMetadata({ data: "json, name=audienceGroupDetails" })
   audienceGroupDetails?: AudienceGroupAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=audioContentTypeDetails" })
+  @SpeakeasyMetadata({ data: "json, name=audioContentTypeDetails" })
   audioContentTypeDetails?: AudioContentTypeAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=authorizedSellerStatusDetails" })
+  @SpeakeasyMetadata({ data: "json, name=authorizedSellerStatusDetails" })
   authorizedSellerStatusDetails?: AuthorizedSellerStatusAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=browserDetails" })
+  @SpeakeasyMetadata({ data: "json, name=browserDetails" })
   browserDetails?: BrowserAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=businessChainDetails" })
+  @SpeakeasyMetadata({ data: "json, name=businessChainDetails" })
   businessChainDetails?: BusinessChainAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=carrierAndIspDetails" })
+  @SpeakeasyMetadata({ data: "json, name=carrierAndIspDetails" })
   carrierAndIspDetails?: CarrierAndIspAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=categoryDetails" })
+  @SpeakeasyMetadata({ data: "json, name=categoryDetails" })
   categoryDetails?: CategoryAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=channelDetails" })
+  @SpeakeasyMetadata({ data: "json, name=channelDetails" })
   channelDetails?: ChannelAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=contentDurationDetails" })
+  @SpeakeasyMetadata({ data: "json, name=contentDurationDetails" })
   contentDurationDetails?: ContentDurationAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=contentGenreDetails" })
+  @SpeakeasyMetadata({ data: "json, name=contentGenreDetails" })
   contentGenreDetails?: ContentGenreAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=contentInstreamPositionDetails" })
+  @SpeakeasyMetadata({ data: "json, name=contentInstreamPositionDetails" })
   contentInstreamPositionDetails?: ContentInstreamPositionAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=contentOutstreamPositionDetails" })
+  @SpeakeasyMetadata({ data: "json, name=contentOutstreamPositionDetails" })
   contentOutstreamPositionDetails?: ContentOutstreamPositionAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=contentStreamTypeDetails" })
+  @SpeakeasyMetadata({ data: "json, name=contentStreamTypeDetails" })
   contentStreamTypeDetails?: ContentStreamTypeAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=dayAndTimeDetails" })
+  @SpeakeasyMetadata({ data: "json, name=dayAndTimeDetails" })
   dayAndTimeDetails?: DayAndTimeAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=deviceMakeModelDetails" })
+  @SpeakeasyMetadata({ data: "json, name=deviceMakeModelDetails" })
   deviceMakeModelDetails?: DeviceMakeModelAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=deviceTypeDetails" })
+  @SpeakeasyMetadata({ data: "json, name=deviceTypeDetails" })
   deviceTypeDetails?: DeviceTypeAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=digitalContentLabelExclusionDetails" })
+  @SpeakeasyMetadata({ data: "json, name=digitalContentLabelExclusionDetails" })
   digitalContentLabelExclusionDetails?: DigitalContentLabelAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=environmentDetails" })
+  @SpeakeasyMetadata({ data: "json, name=environmentDetails" })
   environmentDetails?: EnvironmentAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=exchangeDetails" })
+  @SpeakeasyMetadata({ data: "json, name=exchangeDetails" })
   exchangeDetails?: ExchangeAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=genderDetails" })
+  @SpeakeasyMetadata({ data: "json, name=genderDetails" })
   genderDetails?: GenderAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=geoRegionDetails" })
+  @SpeakeasyMetadata({ data: "json, name=geoRegionDetails" })
   geoRegionDetails?: GeoRegionAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=householdIncomeDetails" })
+  @SpeakeasyMetadata({ data: "json, name=householdIncomeDetails" })
   householdIncomeDetails?: HouseholdIncomeAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=inheritance" })
+  @SpeakeasyMetadata({ data: "json, name=inheritance" })
   inheritance?: AssignedTargetingOptionInheritanceEnum;
 
-  @Metadata({ data: "json, name=inventorySourceDetails" })
+  @SpeakeasyMetadata({ data: "json, name=inventorySourceDetails" })
   inventorySourceDetails?: InventorySourceAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=inventorySourceGroupDetails" })
+  @SpeakeasyMetadata({ data: "json, name=inventorySourceGroupDetails" })
   inventorySourceGroupDetails?: InventorySourceGroupAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=keywordDetails" })
+  @SpeakeasyMetadata({ data: "json, name=keywordDetails" })
   keywordDetails?: KeywordAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=languageDetails" })
+  @SpeakeasyMetadata({ data: "json, name=languageDetails" })
   languageDetails?: LanguageAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nativeContentPositionDetails" })
+  @SpeakeasyMetadata({ data: "json, name=nativeContentPositionDetails" })
   nativeContentPositionDetails?: NativeContentPositionAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=negativeKeywordListDetails" })
+  @SpeakeasyMetadata({ data: "json, name=negativeKeywordListDetails" })
   negativeKeywordListDetails?: NegativeKeywordListAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=omidDetails" })
+  @SpeakeasyMetadata({ data: "json, name=omidDetails" })
   omidDetails?: OmidAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=onScreenPositionDetails" })
+  @SpeakeasyMetadata({ data: "json, name=onScreenPositionDetails" })
   onScreenPositionDetails?: OnScreenPositionAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=operatingSystemDetails" })
+  @SpeakeasyMetadata({ data: "json, name=operatingSystemDetails" })
   operatingSystemDetails?: OperatingSystemAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=parentalStatusDetails" })
+  @SpeakeasyMetadata({ data: "json, name=parentalStatusDetails" })
   parentalStatusDetails?: ParentalStatusAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=poiDetails" })
+  @SpeakeasyMetadata({ data: "json, name=poiDetails" })
   poiDetails?: PoiAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=proximityLocationListDetails" })
+  @SpeakeasyMetadata({ data: "json, name=proximityLocationListDetails" })
   proximityLocationListDetails?: ProximityLocationListAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=regionalLocationListDetails" })
+  @SpeakeasyMetadata({ data: "json, name=regionalLocationListDetails" })
   regionalLocationListDetails?: RegionalLocationListAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=sensitiveCategoryExclusionDetails" })
+  @SpeakeasyMetadata({ data: "json, name=sensitiveCategoryExclusionDetails" })
   sensitiveCategoryExclusionDetails?: SensitiveCategoryAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=subExchangeDetails" })
+  @SpeakeasyMetadata({ data: "json, name=subExchangeDetails" })
   subExchangeDetails?: SubExchangeAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=targetingType" })
+  @SpeakeasyMetadata({ data: "json, name=targetingType" })
   targetingType?: AssignedTargetingOptionTargetingTypeEnum;
 
-  @Metadata({ data: "json, name=thirdPartyVerifierDetails" })
+  @SpeakeasyMetadata({ data: "json, name=thirdPartyVerifierDetails" })
   thirdPartyVerifierDetails?: ThirdPartyVerifierAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=urlDetails" })
+  @SpeakeasyMetadata({ data: "json, name=urlDetails" })
   urlDetails?: UrlAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=userRewardedContentDetails" })
+  @SpeakeasyMetadata({ data: "json, name=userRewardedContentDetails" })
   userRewardedContentDetails?: UserRewardedContentAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=videoPlayerSizeDetails" })
+  @SpeakeasyMetadata({ data: "json, name=videoPlayerSizeDetails" })
   videoPlayerSizeDetails?: VideoPlayerSizeAssignedTargetingOptionDetails;
 
-  @Metadata({ data: "json, name=viewabilityDetails" })
+  @SpeakeasyMetadata({ data: "json, name=viewabilityDetails" })
   viewabilityDetails?: ViewabilityAssignedTargetingOptionDetails;
 }

@@ -1,31 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntityTypeEnum } from "./entitytypeenum";
 import { IpV4Address } from "./ipv4address";
 import { Reference } from "./reference";
 import { Vlan } from "./vlan";
-import { Reference } from "./reference";
+
 
 
 export class BaseVnic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=entity_id" })
+  @SpeakeasyMetadata({ data: "json, name=entity_id" })
   entityId?: string;
 
-  @Metadata({ data: "json, name=entity_type" })
+  @SpeakeasyMetadata({ data: "json, name=entity_type" })
   entityType?: EntityTypeEnum;
 
-  @Metadata({ data: "json, name=ip_addresses", elemType: shared.IpV4Address })
+  @SpeakeasyMetadata({ data: "json, name=ip_addresses", elemType: IpV4Address })
   ipAddresses?: IpV4Address[];
 
-  @Metadata({ data: "json, name=layer2_network" })
+  @SpeakeasyMetadata({ data: "json, name=layer2_network" })
   layer2Network?: Reference;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=vlan" })
+  @SpeakeasyMetadata({ data: "json, name=vlan" })
   vlan?: Vlan;
 
-  @Metadata({ data: "json, name=vm" })
+  @SpeakeasyMetadata({ data: "json, name=vm" })
   vm?: Reference;
 }

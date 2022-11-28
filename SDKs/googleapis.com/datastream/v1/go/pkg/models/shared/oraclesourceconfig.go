@@ -1,5 +1,7 @@
 package shared
 
+// OracleSourceConfig
+// Oracle data source configuration
 type OracleSourceConfig struct {
 	DropLargeObjects      map[string]interface{} `json:"dropLargeObjects,omitempty"`
 	ExcludeObjects        *OracleRdbms           `json:"excludeObjects,omitempty"`

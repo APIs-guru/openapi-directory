@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class Deblock:
-    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
-    strength: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'strength' }})
+    r"""Deblock
+    Deblock preprocessing configuration. **Note:** This configuration is not supported.
+    """
+    
+    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabled') }})
+    strength: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('strength') }})
     

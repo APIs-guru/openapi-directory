@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/servicequotas/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/servicequotas/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def associate_service_quota_template(self, request: operations.AssociateServiceQuotaTemplateRequest) -> operations.AssociateServiceQuotaTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Associates your quota request template with your organization. When a new account is created in your organization, the quota increase requests in the template are automatically applied to the account. You can add a quota increase request for any adjustable quota to your template.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=ServiceQuotasV20190624.AssociateServiceQuotaTemplate"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -91,22 +120,22 @@ class SDK:
 
     
     def delete_service_quota_increase_request_from_template(self, request: operations.DeleteServiceQuotaIncreaseRequestFromTemplateRequest) -> operations.DeleteServiceQuotaIncreaseRequestFromTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes the quota increase request for the specified quota from your quota request template.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=ServiceQuotasV20190624.DeleteServiceQuotaIncreaseRequestFromTemplate"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -157,22 +186,22 @@ class SDK:
 
     
     def disassociate_service_quota_template(self, request: operations.DisassociateServiceQuotaTemplateRequest) -> operations.DisassociateServiceQuotaTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disables your quota request template. After a template is disabled, the quota increase requests in the template are not applied to new accounts in your organization. Disabling a quota request template does not apply its quota increase requests.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=ServiceQuotasV20190624.DisassociateServiceQuotaTemplate"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -219,22 +248,22 @@ class SDK:
 
     
     def get_aws_default_service_quota(self, request: operations.GetAwsDefaultServiceQuotaRequest) -> operations.GetAwsDefaultServiceQuotaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the default value for the specified quota. The default value does not reflect any quota increases.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=ServiceQuotasV20190624.GetAWSDefaultServiceQuota"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -269,22 +298,22 @@ class SDK:
 
     
     def get_association_for_service_quota_template(self, request: operations.GetAssociationForServiceQuotaTemplateRequest) -> operations.GetAssociationForServiceQuotaTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the status of the association for the quota request template.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=ServiceQuotasV20190624.GetAssociationForServiceQuotaTemplate"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -331,22 +360,22 @@ class SDK:
 
     
     def get_requested_service_quota_change(self, request: operations.GetRequestedServiceQuotaChangeRequest) -> operations.GetRequestedServiceQuotaChangeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the specified quota increase request.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=ServiceQuotasV20190624.GetRequestedServiceQuotaChange"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -381,22 +410,22 @@ class SDK:
 
     
     def get_service_quota(self, request: operations.GetServiceQuotaRequest) -> operations.GetServiceQuotaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the applied quota value for the specified quota. For some quotas, only the default values are available. If the applied quota value is not available for a quota, the quota is not retrieved.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=ServiceQuotasV20190624.GetServiceQuota"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -431,22 +460,22 @@ class SDK:
 
     
     def get_service_quota_increase_request_from_template(self, request: operations.GetServiceQuotaIncreaseRequestFromTemplateRequest) -> operations.GetServiceQuotaIncreaseRequestFromTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about the specified quota increase request in your quota request template.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=ServiceQuotasV20190624.GetServiceQuotaIncreaseRequestFromTemplate"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -497,24 +526,23 @@ class SDK:
 
     
     def list_aws_default_service_quotas(self, request: operations.ListAwsDefaultServiceQuotasRequest) -> operations.ListAwsDefaultServiceQuotasResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the default values for the quotas for the specified AWS service. A default value does not reflect any quota increases.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=ServiceQuotasV20190624.ListAWSDefaultServiceQuotas"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -553,24 +581,23 @@ class SDK:
 
     
     def list_requested_service_quota_change_history(self, request: operations.ListRequestedServiceQuotaChangeHistoryRequest) -> operations.ListRequestedServiceQuotaChangeHistoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the quota increase requests for the specified service.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=ServiceQuotasV20190624.ListRequestedServiceQuotaChangeHistory"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -609,24 +636,23 @@ class SDK:
 
     
     def list_requested_service_quota_change_history_by_quota(self, request: operations.ListRequestedServiceQuotaChangeHistoryByQuotaRequest) -> operations.ListRequestedServiceQuotaChangeHistoryByQuotaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the quota increase requests for the specified quota.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=ServiceQuotasV20190624.ListRequestedServiceQuotaChangeHistoryByQuota"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -665,24 +691,23 @@ class SDK:
 
     
     def list_service_quota_increase_requests_in_template(self, request: operations.ListServiceQuotaIncreaseRequestsInTemplateRequest) -> operations.ListServiceQuotaIncreaseRequestsInTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the quota increase requests in the specified quota request template.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=ServiceQuotasV20190624.ListServiceQuotaIncreaseRequestsInTemplate"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -729,24 +754,23 @@ class SDK:
 
     
     def list_service_quotas(self, request: operations.ListServiceQuotasRequest) -> operations.ListServiceQuotasResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the applied quota values for the specified AWS service. For some quotas, only the default values are available. If the applied quota value is not available for a quota, the quota is not retrieved.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=ServiceQuotasV20190624.ListServiceQuotas"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -785,24 +809,23 @@ class SDK:
 
     
     def list_services(self, request: operations.ListServicesRequest) -> operations.ListServicesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the names and codes for the services integrated with Service Quotas.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=ServiceQuotasV20190624.ListServices"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -837,22 +860,22 @@ class SDK:
 
     
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of the tags assigned to the specified applied quota.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=ServiceQuotasV20190624.ListTagsForResource"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -887,22 +910,22 @@ class SDK:
 
     
     def put_service_quota_increase_request_into_template(self, request: operations.PutServiceQuotaIncreaseRequestIntoTemplateRequest) -> operations.PutServiceQuotaIncreaseRequestIntoTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds a quota increase request to your quota request template.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=ServiceQuotasV20190624.PutServiceQuotaIncreaseRequestIntoTemplate"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -957,22 +980,22 @@ class SDK:
 
     
     def request_service_quota_increase(self, request: operations.RequestServiceQuotaIncreaseRequest) -> operations.RequestServiceQuotaIncreaseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Submits a quota increase request for the specified quota.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=ServiceQuotasV20190624.RequestServiceQuotaIncrease"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1023,22 +1046,22 @@ class SDK:
 
     
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds tags to the specified applied quota. You can include one or more tags to add to the quota.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=ServiceQuotasV20190624.TagResource"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1081,22 +1104,22 @@ class SDK:
 
     
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes tags from the specified applied quota. You can specify one or more tags to remove.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=ServiceQuotasV20190624.UntagResource"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

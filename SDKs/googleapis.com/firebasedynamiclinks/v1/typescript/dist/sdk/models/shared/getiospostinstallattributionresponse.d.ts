@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum GetIosPostInstallAttributionResponseAttributionConfidenceEnum {
     UnknownAttributionConfidence = "UNKNOWN_ATTRIBUTION_CONFIDENCE",
     Weak = "WEAK",

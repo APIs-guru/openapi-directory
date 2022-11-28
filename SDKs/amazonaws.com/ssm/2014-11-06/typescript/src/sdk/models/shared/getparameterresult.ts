@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Parameter } from "./parameter";
 
 
+
 export class GetParameterResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Parameter" })
+  @SpeakeasyMetadata({ data: "json, name=Parameter" })
   parameter?: Parameter;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// GroupInformation
+// Information about a group.
 type GroupInformation struct {
 	Arn                  *string `json:"Arn,omitempty"`
 	CreationTimestamp    *string `json:"CreationTimestamp,omitempty"`

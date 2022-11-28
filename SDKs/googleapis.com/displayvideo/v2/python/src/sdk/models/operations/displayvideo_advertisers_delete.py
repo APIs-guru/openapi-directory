@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersDeletePathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class DisplayvideoAdvertisersDeleteQueryParams:
 
 @dataclass
 class DisplayvideoAdvertisersDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersDeleteRequest:
-    path_params: DisplayvideoAdvertisersDeletePathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersDeleteQueryParams = field(default=None)
-    security: DisplayvideoAdvertisersDeleteSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersDeletePathParams = field()
+    query_params: DisplayvideoAdvertisersDeleteQueryParams = field()
+    security: DisplayvideoAdvertisersDeleteSecurity = field()
     
 
 @dataclass
 class DisplayvideoAdvertisersDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BookingWindowUpdateModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fromTime" })
+  @SpeakeasyMetadata({ data: "json, name=fromTime" })
   fromTime?: number;
 
-  @Metadata({ data: "json, name=maxBookings" })
+  @SpeakeasyMetadata({ data: "json, name=maxBookings" })
   maxBookings?: number;
 
-  @Metadata({ data: "json, name=serviceId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceId" })
   serviceId?: string;
 
-  @Metadata({ data: "json, name=toTime" })
+  @SpeakeasyMetadata({ data: "json, name=toTime" })
   toTime?: number;
 }

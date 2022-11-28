@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetWeatherDisplayPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=stationName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=stationName" })
   stationName: string;
 }
 
 
 export class GetWeatherDisplayQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=period" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=period" })
   period: string;
 }
 
 
 export class GetWeatherDisplayRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetWeatherDisplayPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetWeatherDisplayQueryParams;
 }
 
 
 export class GetWeatherDisplayResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

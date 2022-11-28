@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ColumnNullableEnum } from "./columnnullableenum";
+
 
 
 // ColumnInfo
@@ -7,33 +8,33 @@ import { ColumnNullableEnum } from "./columnnullableenum";
  * Information about the columns in a query execution result.
 **/
 export class ColumnInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CaseSensitive" })
+  @SpeakeasyMetadata({ data: "json, name=CaseSensitive" })
   caseSensitive?: boolean;
 
-  @Metadata({ data: "json, name=CatalogName" })
+  @SpeakeasyMetadata({ data: "json, name=CatalogName" })
   catalogName?: string;
 
-  @Metadata({ data: "json, name=Label" })
+  @SpeakeasyMetadata({ data: "json, name=Label" })
   label?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=Nullable" })
+  @SpeakeasyMetadata({ data: "json, name=Nullable" })
   nullable?: ColumnNullableEnum;
 
-  @Metadata({ data: "json, name=Precision" })
+  @SpeakeasyMetadata({ data: "json, name=Precision" })
   precision?: number;
 
-  @Metadata({ data: "json, name=Scale" })
+  @SpeakeasyMetadata({ data: "json, name=Scale" })
   scale?: number;
 
-  @Metadata({ data: "json, name=SchemaName" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaName" })
   schemaName?: string;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: string;
 }

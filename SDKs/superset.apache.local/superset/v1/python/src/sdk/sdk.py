@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -12,28 +15,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def delete_annotation_layer_(self, request: operations.DeleteAnnotationLayerRequest) -> operations.DeleteAnnotationLayerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes multiple annotation layers in a bulk operation.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/annotation_layer/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -64,13 +88,16 @@ class SDK:
 
     
     def delete_annotation_layer_pk_(self, request: operations.DeleteAnnotationLayerPkRequest) -> operations.DeleteAnnotationLayerPkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete Annotation layer
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/annotation_layer/{pk}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -97,15 +124,17 @@ class SDK:
 
     
     def delete_annotation_layer_pk_annotation_(self, request: operations.DeleteAnnotationLayerPkAnnotationRequest) -> operations.DeleteAnnotationLayerPkAnnotationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes multiple annotation in a bulk operation.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/annotation_layer/{pk}/annotation/", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -136,13 +165,16 @@ class SDK:
 
     
     def delete_annotation_layer_pk_annotation_annotation_id_(self, request: operations.DeleteAnnotationLayerPkAnnotationAnnotationIDRequest) -> operations.DeleteAnnotationLayerPkAnnotationAnnotationIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete Annotation layer
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/annotation_layer/{pk}/annotation/{annotation_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -169,15 +201,17 @@ class SDK:
 
     
     def delete_chart_(self, request: operations.DeleteChartRequest) -> operations.DeleteChartResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes multiple Charts in a bulk operation.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/chart/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -212,13 +246,16 @@ class SDK:
 
     
     def delete_chart_pk_(self, request: operations.DeleteChartPkRequest) -> operations.DeleteChartPkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a Chart.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/chart/{pk}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -253,15 +290,17 @@ class SDK:
 
     
     def delete_css_template_(self, request: operations.DeleteCSSTemplateRequest) -> operations.DeleteCSSTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes multiple css templates in a bulk operation.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/css_template/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -292,13 +331,16 @@ class SDK:
 
     
     def delete_css_template_pk_(self, request: operations.DeleteCSSTemplatePkRequest) -> operations.DeleteCSSTemplatePkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete CSS template
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/css_template/{pk}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -325,15 +367,17 @@ class SDK:
 
     
     def delete_dashboard_(self, request: operations.DeleteDashboardRequest) -> operations.DeleteDashboardResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes multiple Dashboards in a bulk operation.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/dashboard/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -368,13 +412,16 @@ class SDK:
 
     
     def delete_dashboard_pk_(self, request: operations.DeleteDashboardPkRequest) -> operations.DeleteDashboardPkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a Dashboard.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/dashboard/{pk}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -409,13 +456,16 @@ class SDK:
 
     
     def delete_database_pk_(self, request: operations.DeleteDatabasePkRequest) -> operations.DeleteDatabasePkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a Database.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/database/{pk}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -450,15 +500,17 @@ class SDK:
 
     
     def delete_dataset_(self, request: operations.DeleteDatasetRequest) -> operations.DeleteDatasetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes multiple Datasets in a bulk operation.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/dataset/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -497,13 +549,16 @@ class SDK:
 
     
     def delete_dataset_pk_(self, request: operations.DeleteDatasetPkRequest) -> operations.DeleteDatasetPkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a Dataset
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/dataset/{pk}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -538,13 +593,16 @@ class SDK:
 
     
     def delete_dataset_pk_column_column_id_(self, request: operations.DeleteDatasetPkColumnColumnIDRequest) -> operations.DeleteDatasetPkColumnColumnIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a Dataset column
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/dataset/{pk}/column/{column_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -579,13 +637,16 @@ class SDK:
 
     
     def delete_dataset_pk_metric_metric_id_(self, request: operations.DeleteDatasetPkMetricMetricIDRequest) -> operations.DeleteDatasetPkMetricMetricIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a Dataset metric
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/dataset/{pk}/metric/{metric_id}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -620,15 +681,17 @@ class SDK:
 
     
     def delete_report_(self, request: operations.DeleteReportRequest) -> operations.DeleteReportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes multiple report schedules in a bulk operation.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/report/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -663,13 +726,16 @@ class SDK:
 
     
     def delete_report_pk_(self, request: operations.DeleteReportPkRequest) -> operations.DeleteReportPkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a report schedule
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/report/{pk}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -700,15 +766,17 @@ class SDK:
 
     
     def delete_saved_query_(self, request: operations.DeleteSavedQueryRequest) -> operations.DeleteSavedQueryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes multiple saved queries in a bulk operation.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/saved_query/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -739,13 +807,16 @@ class SDK:
 
     
     def delete_saved_query_pk_(self, request: operations.DeleteSavedQueryPkRequest) -> operations.DeleteSavedQueryPkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete saved query
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/saved_query/{pk}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -772,15 +843,17 @@ class SDK:
 
     
     def get_annotation_layer_(self, request: operations.GetAnnotationLayerRequest) -> operations.GetAnnotationLayerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of Annotation layers, use Rison or JSON query parameters for filtering, sorting, pagination and for selecting specific columns and metadata.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/annotation_layer/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -811,15 +884,17 @@ class SDK:
 
     
     def get_annotation_layer_info(self, request: operations.GetAnnotationLayerInfoRequest) -> operations.GetAnnotationLayerInfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get metadata information about this API resource
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/annotation_layer/_info"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -850,15 +925,17 @@ class SDK:
 
     
     def get_annotation_layer_pk_(self, request: operations.GetAnnotationLayerPkRequest) -> operations.GetAnnotationLayerPkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get an Annotation layer
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/annotation_layer/{pk}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -893,15 +970,17 @@ class SDK:
 
     
     def get_annotation_layer_pk_annotation_(self, request: operations.GetAnnotationLayerPkAnnotationRequest) -> operations.GetAnnotationLayerPkAnnotationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of Annotation layers, use Rison or JSON query parameters for filtering, sorting, pagination and for selecting specific columns and metadata.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/annotation_layer/{pk}/annotation/", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -932,15 +1011,17 @@ class SDK:
 
     
     def get_annotation_layer_pk_annotation_annotation_id_(self, request: operations.GetAnnotationLayerPkAnnotationAnnotationIDRequest) -> operations.GetAnnotationLayerPkAnnotationAnnotationIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get an Annotation layer
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/annotation_layer/{pk}/annotation/{annotation_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -975,15 +1056,14 @@ class SDK:
 
     
     def get_annotation_layer_related_column_name_(self, request: operations.GetAnnotationLayerRelatedColumnNameRequest) -> operations.GetAnnotationLayerRelatedColumnNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/annotation_layer/related/{column_name}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1014,15 +1094,17 @@ class SDK:
 
     
     def get_async_event_(self, request: operations.GetAsyncEventRequest) -> operations.GetAsyncEventResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Reads off of the Redis events stream, using the user's JWT token and optional query params for last event received.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/async_event/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1045,15 +1127,17 @@ class SDK:
 
     
     def get_chart_(self, request: operations.GetChartRequest) -> operations.GetChartResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of charts, use Rison or JSON query parameters for filtering, sorting, pagination and  for selecting specific columns and metadata.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/chart/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1084,13 +1168,16 @@ class SDK:
 
     
     def get_chart_data_cache_key_(self, request: operations.GetChartDataCacheKeyRequest) -> operations.GetChartDataCacheKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Takes a query context cache key and returns payload data response for the given query.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/chart/data/{cache_key}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1125,15 +1212,17 @@ class SDK:
 
     
     def get_chart_export_(self, request: operations.GetChartExportRequest) -> operations.GetChartExportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Exports multiple charts and downloads them as YAML files
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/chart/export/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1163,15 +1252,17 @@ class SDK:
 
     
     def get_chart_favorite_status_(self, request: operations.GetChartFavoriteStatusRequest) -> operations.GetChartFavoriteStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Check favorited dashboards for current user
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/chart/favorite_status/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1202,15 +1293,17 @@ class SDK:
 
     
     def get_chart_info(self, request: operations.GetChartInfoRequest) -> operations.GetChartInfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Several metadata information about chart API endpoints.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/chart/_info"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1241,15 +1334,17 @@ class SDK:
 
     
     def get_chart_pk_(self, request: operations.GetChartPkRequest) -> operations.GetChartPkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a chart detail information.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/chart/{pk}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1284,15 +1379,17 @@ class SDK:
 
     
     def get_chart_pk_cache_screenshot_(self, request: operations.GetChartPkCacheScreenshotRequest) -> operations.GetChartPkCacheScreenshotResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Compute and cache a screenshot.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/chart/{pk}/cache_screenshot/", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1325,15 +1422,17 @@ class SDK:
 
     
     def get_chart_pk_data_(self, request: operations.GetChartPkDataRequest) -> operations.GetChartPkDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Takes a chart ID and uses the query context stored when the chart was saved to return payload data response.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/chart/{pk}/data/", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1364,13 +1463,16 @@ class SDK:
 
     
     def get_chart_pk_screenshot_digest_(self, request: operations.GetChartPkScreenshotDigestRequest) -> operations.GetChartPkScreenshotDigestResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a computed screenshot from cache.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/chart/{pk}/screenshot/{digest}/", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1402,13 +1504,16 @@ class SDK:
 
     
     def get_chart_pk_thumbnail_digest_(self, request: operations.GetChartPkThumbnailDigestRequest) -> operations.GetChartPkThumbnailDigestResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Compute or get already computed chart thumbnail from cache.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/chart/{pk}/thumbnail/{digest}/", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1440,15 +1545,17 @@ class SDK:
 
     
     def get_chart_related_column_name_(self, request: operations.GetChartRelatedColumnNameRequest) -> operations.GetChartRelatedColumnNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of all possible owners for a chart. Use `owners` has the `column_name` parameter
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/chart/related/{column_name}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1479,15 +1586,17 @@ class SDK:
 
     
     def get_css_template_(self, request: operations.GetCSSTemplateRequest) -> operations.GetCSSTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of CSS templates, use Rison or JSON query parameters for filtering, sorting, pagination and for selecting specific columns and metadata.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/css_template/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1518,15 +1627,17 @@ class SDK:
 
     
     def get_css_template_info(self, request: operations.GetCSSTemplateInfoRequest) -> operations.GetCSSTemplateInfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get metadata information about this API resource
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/css_template/_info"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1557,15 +1668,17 @@ class SDK:
 
     
     def get_css_template_pk_(self, request: operations.GetCSSTemplatePkRequest) -> operations.GetCSSTemplatePkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a CSS template
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/css_template/{pk}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1600,15 +1713,14 @@ class SDK:
 
     
     def get_css_template_related_column_name_(self, request: operations.GetCSSTemplateRelatedColumnNameRequest) -> operations.GetCSSTemplateRelatedColumnNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/css_template/related/{column_name}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1639,15 +1751,17 @@ class SDK:
 
     
     def get_dashboard_(self, request: operations.GetDashboardRequest) -> operations.GetDashboardResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of dashboards, use Rison or JSON query parameters for filtering, sorting, pagination and  for selecting specific columns and metadata.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/dashboard/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1678,15 +1792,17 @@ class SDK:
 
     
     def get_dashboard_export_(self, request: operations.GetDashboardExportRequest) -> operations.GetDashboardExportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Exports multiple Dashboards and downloads them as YAML files.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/dashboard/export/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1720,15 +1836,17 @@ class SDK:
 
     
     def get_dashboard_favorite_status_(self, request: operations.GetDashboardFavoriteStatusRequest) -> operations.GetDashboardFavoriteStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Check favorited dashboards for current user
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/dashboard/favorite_status/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1759,13 +1877,16 @@ class SDK:
 
     
     def get_dashboard_id_or_slug_(self, request: operations.GetDashboardIDOrSlugRequest) -> operations.GetDashboardIDOrSlugResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a dashboard detail information.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/dashboard/{id_or_slug}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1794,13 +1915,16 @@ class SDK:
 
     
     def get_dashboard_id_or_slug_charts(self, request: operations.GetDashboardIDOrSlugChartsRequest) -> operations.GetDashboardIDOrSlugChartsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the chart definitions for a given dashboard
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/dashboard/{id_or_slug}/charts", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1829,13 +1953,16 @@ class SDK:
 
     
     def get_dashboard_id_or_slug_datasets(self, request: operations.GetDashboardIDOrSlugDatasetsRequest) -> operations.GetDashboardIDOrSlugDatasetsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of a dashboard's datasets. Each dataset includes only the information necessary to render the dashboard's charts.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/dashboard/{id_or_slug}/datasets", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1864,15 +1991,17 @@ class SDK:
 
     
     def get_dashboard_info(self, request: operations.GetDashboardInfoRequest) -> operations.GetDashboardInfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Several metadata information about dashboard API endpoints.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/dashboard/_info"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1903,15 +2032,17 @@ class SDK:
 
     
     def get_dashboard_pk_thumbnail_digest_(self, request: operations.GetDashboardPkThumbnailDigestRequest) -> operations.GetDashboardPkThumbnailDigestResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Compute async or get already computed dashboard thumbnail from cache.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/dashboard/{pk}/thumbnail/{digest}/", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1945,15 +2076,17 @@ class SDK:
 
     
     def get_dashboard_related_column_name_(self, request: operations.GetDashboardRelatedColumnNameRequest) -> operations.GetDashboardRelatedColumnNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of all possible owners for a dashboard.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/dashboard/related/{column_name}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1984,15 +2117,17 @@ class SDK:
 
     
     def get_database_(self, request: operations.GetDatabaseRequest) -> operations.GetDatabaseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of models
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/database/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2023,13 +2158,16 @@ class SDK:
 
     
     def get_database_available_(self, request: operations.GetDatabaseAvailableRequest) -> operations.GetDatabaseAvailableResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get names of databases currently available
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/database/available/"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2052,15 +2190,17 @@ class SDK:
 
     
     def get_database_export_(self, request: operations.GetDatabaseExportRequest) -> operations.GetDatabaseExportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Download database(s) and associated dataset(s) as a zip file
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/database/export/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2086,15 +2226,17 @@ class SDK:
 
     
     def get_database_info(self, request: operations.GetDatabaseInfoRequest) -> operations.GetDatabaseInfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get metadata information about this API resource
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/database/_info"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2125,15 +2267,17 @@ class SDK:
 
     
     def get_database_pk_(self, request: operations.GetDatabasePkRequest) -> operations.GetDatabasePkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get an item model
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/database/{pk}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2168,13 +2312,16 @@ class SDK:
 
     
     def get_database_pk_function_names_(self, request: operations.GetDatabasePkFunctionNamesRequest) -> operations.GetDatabasePkFunctionNamesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get function names supported by a database
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/database/{pk}/function_names/", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2201,13 +2348,16 @@ class SDK:
 
     
     def get_database_pk_related_objects_(self, request: operations.GetDatabasePkRelatedObjectsRequest) -> operations.GetDatabasePkRelatedObjectsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get charts and dashboards count associated to a database
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/database/{pk}/related_objects/", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2234,15 +2384,17 @@ class SDK:
 
     
     def get_database_pk_schemas_(self, request: operations.GetDatabasePkSchemasRequest) -> operations.GetDatabasePkSchemasResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all schemas from a database
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/database/{pk}/schemas/", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2273,15 +2425,17 @@ class SDK:
 
     
     def get_database_pk_select_star_table_name_(self, request: operations.GetDatabasePkSelectStarTableNameRequest) -> operations.GetDatabasePkSelectStarTableNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get database select star for table
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/database/{pk}/select_star/{table_name}/", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2316,13 +2470,16 @@ class SDK:
 
     
     def get_database_pk_select_star_table_name_schema_name_(self, request: operations.GetDatabasePkSelectStarTableNameSchemaNameRequest) -> operations.GetDatabasePkSelectStarTableNameSchemaNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get database select star for table
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/database/{pk}/select_star/{table_name}/{schema_name}/", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2357,13 +2514,16 @@ class SDK:
 
     
     def get_database_pk_table_table_name_schema_name_(self, request: operations.GetDatabasePkTableTableNameSchemaNameRequest) -> operations.GetDatabasePkTableTableNameSchemaNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get database table metadata
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/database/{pk}/table/{table_name}/{schema_name}/", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2398,15 +2558,17 @@ class SDK:
 
     
     def get_dataset_(self, request: operations.GetDatasetRequest) -> operations.GetDatasetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of models
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/dataset/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2437,15 +2599,14 @@ class SDK:
 
     
     def get_dataset_distinct_column_name_(self, request: operations.GetDatasetDistinctColumnNameRequest) -> operations.GetDatasetDistinctColumnNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/dataset/distinct/{column_name}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2476,15 +2637,17 @@ class SDK:
 
     
     def get_dataset_export_(self, request: operations.GetDatasetExportRequest) -> operations.GetDatasetExportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Exports multiple datasets and downloads them as YAML files
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/dataset/export/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2514,15 +2677,17 @@ class SDK:
 
     
     def get_dataset_info(self, request: operations.GetDatasetInfoRequest) -> operations.GetDatasetInfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get metadata information about this API resource
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/dataset/_info"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2553,15 +2718,17 @@ class SDK:
 
     
     def get_dataset_pk_(self, request: operations.GetDatasetPkRequest) -> operations.GetDatasetPkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get an item model
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/dataset/{pk}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2596,13 +2763,16 @@ class SDK:
 
     
     def get_dataset_pk_related_objects(self, request: operations.GetDatasetPkRelatedObjectsRequest) -> operations.GetDatasetPkRelatedObjectsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get charts and dashboards count associated to a dataset
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/dataset/{pk}/related_objects", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2629,15 +2799,14 @@ class SDK:
 
     
     def get_dataset_related_column_name_(self, request: operations.GetDatasetRelatedColumnNameRequest) -> operations.GetDatasetRelatedColumnNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/dataset/related/{column_name}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2668,15 +2837,17 @@ class SDK:
 
     
     def get_log_(self, request: operations.GetLogRequest) -> operations.GetLogResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of models
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/log/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2707,15 +2878,17 @@ class SDK:
 
     
     def get_log_pk_(self, request: operations.GetLogPkRequest) -> operations.GetLogPkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get an item model
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/log/{pk}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2750,13 +2923,16 @@ class SDK:
 
     
     def get_menu_(self, request: operations.GetMenuRequest) -> operations.GetMenuResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the menu data structure. Returns a forest like structure with the menu the user has access to
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/menu/"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2775,13 +2951,16 @@ class SDK:
 
     
     def get_openapi_version_openapi(self, request: operations.GetOpenapiVersionOpenapiRequest) -> operations.GetOpenapiVersionOpenapiResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the OpenAPI spec for a specific API version
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/openapi/{version}/_openapi", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2804,15 +2983,17 @@ class SDK:
 
     
     def get_query_(self, request: operations.GetQueryRequest) -> operations.GetQueryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of queries, use Rison or JSON query parameters for filtering, sorting, pagination and  for selecting specific columns and metadata.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/query/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2843,15 +3024,14 @@ class SDK:
 
     
     def get_query_distinct_column_name_(self, request: operations.GetQueryDistinctColumnNameRequest) -> operations.GetQueryDistinctColumnNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/query/distinct/{column_name}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2882,15 +3062,17 @@ class SDK:
 
     
     def get_query_pk_(self, request: operations.GetQueryPkRequest) -> operations.GetQueryPkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get query detail information.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/query/{pk}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2925,15 +3107,14 @@ class SDK:
 
     
     def get_query_related_column_name_(self, request: operations.GetQueryRelatedColumnNameRequest) -> operations.GetQueryRelatedColumnNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/query/related/{column_name}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2964,15 +3145,17 @@ class SDK:
 
     
     def get_report_(self, request: operations.GetReportRequest) -> operations.GetReportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of report schedules, use Rison or JSON query parameters for filtering, sorting, pagination and for selecting specific columns and metadata.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/report/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3003,15 +3186,17 @@ class SDK:
 
     
     def get_report_info(self, request: operations.GetReportInfoRequest) -> operations.GetReportInfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get metadata information about this API resource
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/report/_info"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3042,15 +3227,17 @@ class SDK:
 
     
     def get_report_pk_(self, request: operations.GetReportPkRequest) -> operations.GetReportPkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a report schedule
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/report/{pk}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3085,15 +3272,17 @@ class SDK:
 
     
     def get_report_pk_log_(self, request: operations.GetReportPkLogRequest) -> operations.GetReportPkLogResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of report schedule logs, use Rison or JSON query parameters for filtering, sorting, pagination and for selecting specific columns and metadata.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/report/{pk}/log/", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3124,15 +3313,17 @@ class SDK:
 
     
     def get_report_pk_log_log_id_(self, request: operations.GetReportPkLogLogIDRequest) -> operations.GetReportPkLogLogIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a report schedule log
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/report/{pk}/log/{log_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3167,15 +3358,14 @@ class SDK:
 
     
     def get_report_related_column_name_(self, request: operations.GetReportRelatedColumnNameRequest) -> operations.GetReportRelatedColumnNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/report/related/{column_name}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3206,15 +3396,17 @@ class SDK:
 
     
     def get_saved_query_(self, request: operations.GetSavedQueryRequest) -> operations.GetSavedQueryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of saved queries, use Rison or JSON query parameters for filtering, sorting, pagination and for selecting specific columns and metadata.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/saved_query/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3245,15 +3437,14 @@ class SDK:
 
     
     def get_saved_query_distinct_column_name_(self, request: operations.GetSavedQueryDistinctColumnNameRequest) -> operations.GetSavedQueryDistinctColumnNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/saved_query/distinct/{column_name}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3284,15 +3475,17 @@ class SDK:
 
     
     def get_saved_query_export_(self, request: operations.GetSavedQueryExportRequest) -> operations.GetSavedQueryExportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Exports multiple saved queries and downloads them as YAML files
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/saved_query/export/"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3322,15 +3515,17 @@ class SDK:
 
     
     def get_saved_query_info(self, request: operations.GetSavedQueryInfoRequest) -> operations.GetSavedQueryInfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get metadata information about this API resource
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/saved_query/_info"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3361,15 +3556,17 @@ class SDK:
 
     
     def get_saved_query_pk_(self, request: operations.GetSavedQueryPkRequest) -> operations.GetSavedQueryPkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a saved query
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/saved_query/{pk}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3404,15 +3601,14 @@ class SDK:
 
     
     def get_saved_query_related_column_name_(self, request: operations.GetSavedQueryRelatedColumnNameRequest) -> operations.GetSavedQueryRelatedColumnNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/saved_query/related/{column_name}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3443,13 +3639,16 @@ class SDK:
 
     
     def get_security_csrf_token_(self, request: operations.GetSecurityCsrfTokenRequest) -> operations.GetSecurityCsrfTokenResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Fetch the CSRF token
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/security/csrf_token/"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3472,22 +3671,22 @@ class SDK:
 
     
     def post_annotation_layer_(self, request: operations.PostAnnotationLayerRequest) -> operations.PostAnnotationLayerResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create an Annotation layer
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/annotation_layer/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3518,22 +3717,22 @@ class SDK:
 
     
     def post_annotation_layer_pk_annotation_(self, request: operations.PostAnnotationLayerPkAnnotationRequest) -> operations.PostAnnotationLayerPkAnnotationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create an Annotation layer
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/annotation_layer/{pk}/annotation/", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3564,22 +3763,22 @@ class SDK:
 
     
     def post_cachekey_invalidate(self, request: operations.PostCachekeyInvalidateRequest) -> operations.PostCachekeyInvalidateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Takes a list of datasources, finds the associated cache records and invalidates them and removes the database records
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/cachekey/invalidate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3600,22 +3799,22 @@ class SDK:
 
     
     def post_chart_(self, request: operations.PostChartRequest) -> operations.PostChartResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Chart.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/chart/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3646,22 +3845,22 @@ class SDK:
 
     
     def post_chart_data(self, request: operations.PostChartDataRequest) -> operations.PostChartDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Takes a query context constructed in the client and returns payload data response for the given query.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/chart/data"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3692,22 +3891,19 @@ class SDK:
 
     
     def post_chart_import_(self, request: operations.PostChartImportRequest) -> operations.PostChartImportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/chart/import/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3738,22 +3934,22 @@ class SDK:
 
     
     def post_css_template_(self, request: operations.PostCSSTemplateRequest) -> operations.PostCSSTemplateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a CSS template
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/css_template/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3784,22 +3980,22 @@ class SDK:
 
     
     def post_dashboard_(self, request: operations.PostDashboardRequest) -> operations.PostDashboardResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Dashboard.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/dashboard/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3832,22 +4028,19 @@ class SDK:
 
     
     def post_dashboard_import_(self, request: operations.PostDashboardImportRequest) -> operations.PostDashboardImportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/dashboard/import/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3878,22 +4071,22 @@ class SDK:
 
     
     def post_database_(self, request: operations.PostDatabaseRequest) -> operations.PostDatabaseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Database.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/database/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3926,22 +4119,19 @@ class SDK:
 
     
     def post_database_import_(self, request: operations.PostDatabaseImportRequest) -> operations.PostDatabaseImportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/database/import/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3972,22 +4162,22 @@ class SDK:
 
     
     def post_database_test_connection(self, request: operations.PostDatabaseTestConnectionRequest) -> operations.PostDatabaseTestConnectionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Tests a database connection
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/database/test_connection"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4014,22 +4204,22 @@ class SDK:
 
     
     def post_database_validate_parameters(self, request: operations.PostDatabaseValidateParametersRequest) -> operations.PostDatabaseValidateParametersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Validates parameters used to connect to a database
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/database/validate_parameters"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4056,22 +4246,22 @@ class SDK:
 
     
     def post_dataset_(self, request: operations.PostDatasetRequest) -> operations.PostDatasetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Dataset
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/dataset/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4102,22 +4292,19 @@ class SDK:
 
     
     def post_dataset_import_(self, request: operations.PostDatasetImportRequest) -> operations.PostDatasetImportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/dataset/import/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4148,22 +4335,19 @@ class SDK:
 
     
     def post_log_(self, request: operations.PostLogRequest) -> operations.PostLogResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/log/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4194,22 +4378,22 @@ class SDK:
 
     
     def post_report_(self, request: operations.PostReportRequest) -> operations.PostReportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a report schedule
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/report/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4240,22 +4424,22 @@ class SDK:
 
     
     def post_saved_query_(self, request: operations.PostSavedQueryRequest) -> operations.PostSavedQueryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a saved query
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/saved_query/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4286,22 +4470,19 @@ class SDK:
 
     
     def post_saved_query_import_(self, request: operations.PostSavedQueryImportRequest) -> operations.PostSavedQueryImportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/saved_query/import/"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4332,22 +4513,22 @@ class SDK:
 
     
     def post_security_login(self, request: operations.PostSecurityLoginRequest) -> operations.PostSecurityLoginResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Authenticate and get a JWT access and refresh token
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/security/login"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4374,13 +4555,16 @@ class SDK:
 
     
     def post_security_refresh(self, request: operations.PostSecurityRefreshRequest) -> operations.PostSecurityRefreshResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Use the refresh token to get a new JWT access token
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/security/refresh"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4403,22 +4587,22 @@ class SDK:
 
     
     def put_annotation_layer_pk_(self, request: operations.PutAnnotationLayerPkRequest) -> operations.PutAnnotationLayerPkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update an Annotation layer
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/annotation_layer/{pk}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4449,22 +4633,22 @@ class SDK:
 
     
     def put_annotation_layer_pk_annotation_annotation_id_(self, request: operations.PutAnnotationLayerPkAnnotationAnnotationIDRequest) -> operations.PutAnnotationLayerPkAnnotationAnnotationIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update an Annotation layer
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/annotation_layer/{pk}/annotation/{annotation_id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4495,22 +4679,22 @@ class SDK:
 
     
     def put_chart_pk_(self, request: operations.PutChartPkRequest) -> operations.PutChartPkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Changes a Chart.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/chart/{pk}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4549,22 +4733,22 @@ class SDK:
 
     
     def put_css_template_pk_(self, request: operations.PutCSSTemplatePkRequest) -> operations.PutCSSTemplatePkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a CSS template
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/css_template/{pk}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4599,22 +4783,22 @@ class SDK:
 
     
     def put_dashboard_pk_(self, request: operations.PutDashboardPkRequest) -> operations.PutDashboardPkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Changes a Dashboard.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/dashboard/{pk}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4653,22 +4837,22 @@ class SDK:
 
     
     def put_database_pk_(self, request: operations.PutDatabasePkRequest) -> operations.PutDatabasePkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Changes a Database.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/database/{pk}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4707,24 +4891,23 @@ class SDK:
 
     
     def put_dataset_pk_(self, request: operations.PutDatasetPkRequest) -> operations.PutDatasetPkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Changes a Dataset
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/dataset/{pk}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4763,13 +4946,16 @@ class SDK:
 
     
     def put_dataset_pk_refresh(self, request: operations.PutDatasetPkRefreshRequest) -> operations.PutDatasetPkRefreshResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Refreshes and updates columns of a dataset
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/dataset/{pk}/refresh", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4804,22 +4990,22 @@ class SDK:
 
     
     def put_report_pk_(self, request: operations.PutReportPkRequest) -> operations.PutReportPkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a report schedule
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/report/{pk}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4854,22 +5040,22 @@ class SDK:
 
     
     def put_saved_query_pk_(self, request: operations.PutSavedQueryPkRequest) -> operations.PutSavedQueryPkResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a saved query
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/saved_query/{pk}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ManagedLinodeSettingsSsh
@@ -7,17 +8,28 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class ManagedLinodeSettingsSsh extends SpeakeasyBase {
-  @Metadata({ data: "json, name=access" })
+  @SpeakeasyMetadata({ data: "json, name=access" })
   access?: boolean;
 
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip?: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: string;
+}
+
+
+// ManagedLinodeSettingsInput
+/** 
+ * Settings for a specific Linode related to Managed Services. There is one ManagedLinodeSettings object for each Linode on your Account.
+ * 
+**/
+export class ManagedLinodeSettingsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=ssh" })
+  ssh?: ManagedLinodeSettingsSsh;
 }
 
 
@@ -27,15 +39,15 @@ export class ManagedLinodeSettingsSsh extends SpeakeasyBase {
  * 
 **/
 export class ManagedLinodeSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=ssh" })
+  @SpeakeasyMetadata({ data: "json, name=ssh" })
   ssh?: ManagedLinodeSettingsSsh;
 }

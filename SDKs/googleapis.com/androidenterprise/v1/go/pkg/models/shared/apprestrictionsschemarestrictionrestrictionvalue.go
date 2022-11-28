@@ -13,6 +13,8 @@ const (
 	AppRestrictionsSchemaRestrictionRestrictionValueTypeEnumBundleArray AppRestrictionsSchemaRestrictionRestrictionValueTypeEnum = "bundleArray"
 )
 
+// AppRestrictionsSchemaRestrictionRestrictionValue
+// A typed value for the restriction.
 type AppRestrictionsSchemaRestrictionRestrictionValue struct {
 	Type             *AppRestrictionsSchemaRestrictionRestrictionValueTypeEnum `json:"type,omitempty"`
 	ValueBool        *bool                                                     `json:"valueBool,omitempty"`

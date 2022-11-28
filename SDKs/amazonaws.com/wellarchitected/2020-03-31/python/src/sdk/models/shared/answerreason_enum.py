@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class AnswerReasonEnum(str, Enum):
     OUT_OF_SCOPE = "OUT_OF_SCOPE"

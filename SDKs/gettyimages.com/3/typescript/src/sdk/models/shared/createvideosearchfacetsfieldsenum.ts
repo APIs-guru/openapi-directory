@@ -1,6 +1,7 @@
 
 
+
 export enum CreateVideoSearchFacetsFieldsEnum {
-    Artists = "artists"
-,    Locations = "locations"
+    Artists = "artists",
+    Locations = "locations"
 }

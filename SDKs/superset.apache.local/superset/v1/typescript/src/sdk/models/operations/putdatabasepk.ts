@@ -1,101 +1,102 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutDatabasePkPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class PutDatabasePkSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class PutDatabasePkRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PutDatabasePkPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.DatabaseRestApiPut;
-
-  @Metadata()
-  security: PutDatabasePkSecurity;
-}
-
-
 export class PutDatabasePk200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: shared.DatabaseRestApiPut;
 }
 
 
 export class PutDatabasePk400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutDatabasePk401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutDatabasePk403ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutDatabasePk404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutDatabasePk422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutDatabasePk500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class PutDatabasePkRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PutDatabasePkPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.DatabaseRestApiPut;
+
+  @SpeakeasyMetadata()
+  security: PutDatabasePkSecurity;
+}
+
+
 export class PutDatabasePkResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putDatabasePk200ApplicationJsonObject?: PutDatabasePk200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putDatabasePk400ApplicationJsonObject?: PutDatabasePk400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putDatabasePk401ApplicationJsonObject?: PutDatabasePk401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putDatabasePk403ApplicationJsonObject?: PutDatabasePk403ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putDatabasePk404ApplicationJsonObject?: PutDatabasePk404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putDatabasePk422ApplicationJsonObject?: PutDatabasePk422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putDatabasePk500ApplicationJsonObject?: PutDatabasePk500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

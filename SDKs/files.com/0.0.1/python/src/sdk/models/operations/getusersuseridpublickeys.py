@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetUsersUserIDPublicKeysPathParams:
-    user_id: int = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    user_id: int = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class GetUsersUserIDPublicKeysQueryParams:
 
 @dataclass
 class GetUsersUserIDPublicKeysRequest:
-    path_params: GetUsersUserIDPublicKeysPathParams = field(default=None)
-    query_params: GetUsersUserIDPublicKeysQueryParams = field(default=None)
+    path_params: GetUsersUserIDPublicKeysPathParams = field()
+    query_params: GetUsersUserIDPublicKeysQueryParams = field()
     
 
 @dataclass
 class GetUsersUserIDPublicKeysResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     public_key_entities: Optional[List[shared.PublicKeyEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

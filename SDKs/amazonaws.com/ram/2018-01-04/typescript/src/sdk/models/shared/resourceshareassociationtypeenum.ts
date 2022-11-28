@@ -1,6 +1,7 @@
 
 
+
 export enum ResourceShareAssociationTypeEnum {
-    Principal = "PRINCIPAL"
-,    Resource = "RESOURCE"
+    Principal = "PRINCIPAL",
+    Resource = "RESOURCE"
 }

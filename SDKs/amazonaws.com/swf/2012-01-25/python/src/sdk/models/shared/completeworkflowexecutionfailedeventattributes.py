@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import completeworkflowexecutionfailedcause_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CompleteWorkflowExecutionFailedEventAttributes:
-    cause: completeworkflowexecutionfailedcause_enum.CompleteWorkflowExecutionFailedCauseEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cause' }})
-    decision_task_completed_event_id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'decisionTaskCompletedEventId' }})
+    r"""CompleteWorkflowExecutionFailedEventAttributes
+    Provides the details of the <code>CompleteWorkflowExecutionFailed</code> event.
+    """
+    
+    cause: CompleteWorkflowExecutionFailedCauseEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('cause') }})
+    decision_task_completed_event_id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('decisionTaskCompletedEventId') }})
     

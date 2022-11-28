@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirebaserulesProjectsReleasesListPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class FirebaserulesProjectsReleasesListQueryParams:
 
 @dataclass
 class FirebaserulesProjectsReleasesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebaserulesProjectsReleasesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebaserulesProjectsReleasesListSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -53,14 +54,14 @@ class FirebaserulesProjectsReleasesListSecurity:
 
 @dataclass
 class FirebaserulesProjectsReleasesListRequest:
-    path_params: FirebaserulesProjectsReleasesListPathParams = field(default=None)
-    query_params: FirebaserulesProjectsReleasesListQueryParams = field(default=None)
-    security: FirebaserulesProjectsReleasesListSecurity = field(default=None)
+    path_params: FirebaserulesProjectsReleasesListPathParams = field()
+    query_params: FirebaserulesProjectsReleasesListQueryParams = field()
+    security: FirebaserulesProjectsReleasesListSecurity = field()
     
 
 @dataclass
 class FirebaserulesProjectsReleasesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_releases_response: Optional[shared.ListReleasesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

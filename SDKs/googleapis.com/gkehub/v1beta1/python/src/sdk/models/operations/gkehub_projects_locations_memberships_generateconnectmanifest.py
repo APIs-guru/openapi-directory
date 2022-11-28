@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GkehubProjectsLocationsMembershipsGenerateConnectManifestPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -32,20 +33,20 @@ class GkehubProjectsLocationsMembershipsGenerateConnectManifestQueryParams:
 
 @dataclass
 class GkehubProjectsLocationsMembershipsGenerateConnectManifestSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GkehubProjectsLocationsMembershipsGenerateConnectManifestRequest:
-    path_params: GkehubProjectsLocationsMembershipsGenerateConnectManifestPathParams = field(default=None)
-    query_params: GkehubProjectsLocationsMembershipsGenerateConnectManifestQueryParams = field(default=None)
-    security: GkehubProjectsLocationsMembershipsGenerateConnectManifestSecurity = field(default=None)
+    path_params: GkehubProjectsLocationsMembershipsGenerateConnectManifestPathParams = field()
+    query_params: GkehubProjectsLocationsMembershipsGenerateConnectManifestQueryParams = field()
+    security: GkehubProjectsLocationsMembershipsGenerateConnectManifestSecurity = field()
     
 
 @dataclass
 class GkehubProjectsLocationsMembershipsGenerateConnectManifestResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     generate_connect_manifest_response: Optional[shared.GenerateConnectManifestResponse] = field(default=None)
-    status_code: int = field(default=None)
     

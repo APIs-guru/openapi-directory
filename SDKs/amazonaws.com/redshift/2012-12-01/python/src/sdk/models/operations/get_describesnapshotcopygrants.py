@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeSnapshotCopyGrantsActionEnum(str, Enum):
     DESCRIBE_SNAPSHOT_COPY_GRANTS = "DescribeSnapshotCopyGrants"
@@ -10,13 +14,13 @@ class GetDescribeSnapshotCopyGrantsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeSnapshotCopyGrantsQueryParams:
-    action: GetDescribeSnapshotCopyGrantsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeSnapshotCopyGrantsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeSnapshotCopyGrantsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
     snapshot_copy_grant_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SnapshotCopyGrantName', 'style': 'form', 'explode': True }})
     tag_keys: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
     tag_values: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'TagValues', 'style': 'form', 'explode': True }})
-    version: GetDescribeSnapshotCopyGrantsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,13 +36,13 @@ class GetDescribeSnapshotCopyGrantsHeaders:
 
 @dataclass
 class GetDescribeSnapshotCopyGrantsRequest:
-    query_params: GetDescribeSnapshotCopyGrantsQueryParams = field(default=None)
-    headers: GetDescribeSnapshotCopyGrantsHeaders = field(default=None)
+    headers: GetDescribeSnapshotCopyGrantsHeaders = field()
+    query_params: GetDescribeSnapshotCopyGrantsQueryParams = field()
     
 
 @dataclass
 class GetDescribeSnapshotCopyGrantsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

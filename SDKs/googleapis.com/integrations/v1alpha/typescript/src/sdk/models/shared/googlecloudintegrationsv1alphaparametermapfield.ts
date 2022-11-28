@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIntegrationsV1alphaValueType } from "./googlecloudintegrationsv1alphavaluetype";
+
 
 
 // GoogleCloudIntegrationsV1alphaParameterMapField
@@ -7,9 +8,9 @@ import { GoogleCloudIntegrationsV1alphaValueType } from "./googlecloudintegratio
  * Field represents either the key or value in an entry.
 **/
 export class GoogleCloudIntegrationsV1alphaParameterMapField extends SpeakeasyBase {
-  @Metadata({ data: "json, name=literalValue" })
+  @SpeakeasyMetadata({ data: "json, name=literalValue" })
   literalValue?: GoogleCloudIntegrationsV1alphaValueType;
 
-  @Metadata({ data: "json, name=referenceKey" })
+  @SpeakeasyMetadata({ data: "json, name=referenceKey" })
   referenceKey?: string;
 }

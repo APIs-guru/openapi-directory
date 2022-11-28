@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BillingAccount } from "./billingaccount";
 /**
  * Response message for `ListBillingAccounts`.

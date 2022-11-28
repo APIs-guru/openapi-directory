@@ -1,5 +1,7 @@
 package shared
 
+// OAuth2Permission
+// Represents an OAuth 2.0 delegated permission scope. The specified OAuth 2.0 delegated permission scopes may be requested by client applications (through the requiredResourceAccess collection on the Application object) when calling a resource application. The oauth2Permissions property of the ServicePrincipal entity and of the Application entity is a collection of OAuth2Permission.
 type OAuth2Permission struct {
 	AdminConsentDescription *string `json:"adminConsentDescription,omitempty"`
 	AdminConsentDisplayName *string `json:"adminConsentDisplayName,omitempty"`

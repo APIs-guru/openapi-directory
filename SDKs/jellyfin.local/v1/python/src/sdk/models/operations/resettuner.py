@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class ResetTunerPathParams:
-    tuner_id: str = field(default=None, metadata={'path_param': { 'field_name': 'tunerId', 'style': 'simple', 'explode': False }})
+    tuner_id: str = field(metadata={'path_param': { 'field_name': 'tunerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ResetTunerSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class ResetTunerRequest:
-    path_params: ResetTunerPathParams = field(default=None)
-    security: ResetTunerSecurity = field(default=None)
+    path_params: ResetTunerPathParams = field()
+    security: ResetTunerSecurity = field()
     
 
 @dataclass
 class ResetTunerResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PlatformPlatformTypeEnum;
 (function (PlatformPlatformTypeEnum) {
     PlatformPlatformTypeEnum["PlatformTypeUnspecified"] = "PLATFORM_TYPE_UNSPECIFIED";
@@ -39,6 +39,7 @@ export var PlatformPlatformTypeEnum;
     PlatformPlatformTypeEnum["LacrosArm32"] = "LACROS_ARM32";
     PlatformPlatformTypeEnum["Chromeos"] = "CHROMEOS";
     PlatformPlatformTypeEnum["LacrosArm64"] = "LACROS_ARM64";
+    PlatformPlatformTypeEnum["Fuchsia"] = "FUCHSIA";
 })(PlatformPlatformTypeEnum || (PlatformPlatformTypeEnum = {}));
 // Platform
 /**
@@ -50,11 +51,11 @@ var Platform = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Platform.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=platformType" }),
+        SpeakeasyMetadata({ data: "json, name=platformType" }),
         __metadata("design:type", String)
     ], Platform.prototype, "platformType", void 0);
     return Platform;

@@ -22,10 +22,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchPolicy } from "./batchpolicy";
+import { SimulationJobSummary } from "./simulationjobsummary";
+import { FailedCreateSimulationJobRequest } from "./failedcreatesimulationjobrequest";
 import { SimulationJobBatchErrorCodeEnum } from "./simulationjobbatcherrorcodeenum";
+import { SimulationJobRequest } from "./simulationjobrequest";
 import { SimulationJobBatchStatusEnum } from "./simulationjobbatchstatusenum";
 var StartSimulationJobBatchResponse = /** @class */ (function (_super) {
     __extends(StartSimulationJobBatchResponse, _super);
@@ -33,47 +35,47 @@ var StartSimulationJobBatchResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], StartSimulationJobBatchResponse.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=batchPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=batchPolicy" }),
         __metadata("design:type", BatchPolicy)
     ], StartSimulationJobBatchResponse.prototype, "batchPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientRequestToken" }),
+        SpeakeasyMetadata({ data: "json, name=clientRequestToken" }),
         __metadata("design:type", String)
     ], StartSimulationJobBatchResponse.prototype, "clientRequestToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], StartSimulationJobBatchResponse.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdRequests", elemType: shared.SimulationJobSummary }),
+        SpeakeasyMetadata({ data: "json, name=createdRequests", elemType: SimulationJobSummary }),
         __metadata("design:type", Array)
     ], StartSimulationJobBatchResponse.prototype, "createdRequests", void 0);
     __decorate([
-        Metadata({ data: "json, name=failedRequests", elemType: shared.FailedCreateSimulationJobRequest }),
+        SpeakeasyMetadata({ data: "json, name=failedRequests", elemType: FailedCreateSimulationJobRequest }),
         __metadata("design:type", Array)
     ], StartSimulationJobBatchResponse.prototype, "failedRequests", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureCode" }),
+        SpeakeasyMetadata({ data: "json, name=failureCode" }),
         __metadata("design:type", String)
     ], StartSimulationJobBatchResponse.prototype, "failureCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureReason" }),
+        SpeakeasyMetadata({ data: "json, name=failureReason" }),
         __metadata("design:type", String)
     ], StartSimulationJobBatchResponse.prototype, "failureReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=pendingRequests", elemType: shared.SimulationJobRequest }),
+        SpeakeasyMetadata({ data: "json, name=pendingRequests", elemType: SimulationJobRequest }),
         __metadata("design:type", Array)
     ], StartSimulationJobBatchResponse.prototype, "pendingRequests", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], StartSimulationJobBatchResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], StartSimulationJobBatchResponse.prototype, "tags", void 0);
     return StartSimulationJobBatchResponse;

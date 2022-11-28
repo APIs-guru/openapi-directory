@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClientEvent } from "./clientevent";
+
 
 
 // CreateClientEventRequest
@@ -7,6 +8,6 @@ import { ClientEvent } from "./clientevent";
  * The report event request.
 **/
 export class CreateClientEventRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientEvent" })
+  @SpeakeasyMetadata({ data: "json, name=clientEvent" })
   clientEvent?: ClientEvent;
 }

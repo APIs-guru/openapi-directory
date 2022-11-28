@@ -1,84 +1,84 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NestedProvider } from "./nestedprovider";
 import { NestedTenant } from "./nestedtenant";
 import { CircuitCircuitTermination } from "./circuitcircuittermination";
-import { CircuitCircuitTermination } from "./circuitcircuittermination";
 import { NestedCircuitType } from "./nestedcircuittype";
 
+
 export enum CircuitStatusLabelEnum {
-    Planned = "Planned"
-,    Provisioning = "Provisioning"
-,    Active = "Active"
-,    Offline = "Offline"
-,    Deprovisioning = "Deprovisioning"
-,    Decommissioned = "Decommissioned"
+    Planned = "Planned",
+    Provisioning = "Provisioning",
+    Active = "Active",
+    Offline = "Offline",
+    Deprovisioning = "Deprovisioning",
+    Decommissioned = "Decommissioned"
 }
 
 export enum CircuitStatusValueEnum {
-    Planned = "planned"
-,    Provisioning = "provisioning"
-,    Active = "active"
-,    Offline = "offline"
-,    Deprovisioning = "deprovisioning"
-,    Decommissioned = "decommissioned"
+    Planned = "planned",
+    Provisioning = "provisioning",
+    Active = "active",
+    Offline = "offline",
+    Deprovisioning = "deprovisioning",
+    Decommissioned = "decommissioned"
 }
 
 
 export class CircuitStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: CircuitStatusLabelEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: CircuitStatusValueEnum;
 }
 
 
 export class Circuit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cid" })
+  @SpeakeasyMetadata({ data: "json, name=cid" })
   cid: string;
 
-  @Metadata({ data: "json, name=comments" })
+  @SpeakeasyMetadata({ data: "json, name=comments" })
   comments?: string;
 
-  @Metadata({ data: "json, name=commit_rate" })
+  @SpeakeasyMetadata({ data: "json, name=commit_rate" })
   commitRate?: number;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=custom_fields" })
+  @SpeakeasyMetadata({ data: "json, name=custom_fields" })
   customFields?: Map<string, any>;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=install_date" })
+  @SpeakeasyMetadata({ data: "json, name=install_date" })
   installDate?: Date;
 
-  @Metadata({ data: "json, name=last_updated" })
+  @SpeakeasyMetadata({ data: "json, name=last_updated" })
   lastUpdated?: Date;
 
-  @Metadata({ data: "json, name=provider" })
+  @SpeakeasyMetadata({ data: "json, name=provider" })
   provider: NestedProvider;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: CircuitStatus;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=tenant" })
+  @SpeakeasyMetadata({ data: "json, name=tenant" })
   tenant?: NestedTenant;
 
-  @Metadata({ data: "json, name=termination_a" })
+  @SpeakeasyMetadata({ data: "json, name=termination_a" })
   terminationA?: CircuitCircuitTermination;
 
-  @Metadata({ data: "json, name=termination_z" })
+  @SpeakeasyMetadata({ data: "json, name=termination_z" })
   terminationZ?: CircuitCircuitTermination;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: NestedCircuitType;
 }

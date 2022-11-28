@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Amount } from "./amount";
-import { Amount } from "./amount";
+
 
 
 // MarketingPrice
@@ -8,15 +8,15 @@ import { Amount } from "./amount";
  * A type that describes the seller discount.
 **/
 export class MarketingPrice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=discountAmount" })
+  @SpeakeasyMetadata({ data: "json, name=discountAmount" })
   discountAmount?: Amount;
 
-  @Metadata({ data: "json, name=discountPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=discountPercentage" })
   discountPercentage?: string;
 
-  @Metadata({ data: "json, name=originalPrice" })
+  @SpeakeasyMetadata({ data: "json, name=originalPrice" })
   originalPrice?: Amount;
 
-  @Metadata({ data: "json, name=priceTreatment" })
+  @SpeakeasyMetadata({ data: "json, name=priceTreatment" })
   priceTreatment?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// PagedEligibleItemCollection
+// This complex type defines a collection of listings that are eligible for an offer to a buyer.
 type PagedEligibleItemCollection struct {
 	EligibleItems []EligibleItem `json:"eligibleItems,omitempty"`
 	Href          *string        `json:"href,omitempty"`

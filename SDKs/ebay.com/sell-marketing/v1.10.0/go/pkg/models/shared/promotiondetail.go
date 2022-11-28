@@ -1,5 +1,7 @@
 package shared
 
+// PromotionDetail
+// This type defines the fields that describe a promotion. This includes all the information about a promotion except for the listings that are a part of the promotion.
 type PromotionDetail struct {
 	CouponCode        *string `json:"couponCode,omitempty"`
 	Description       *string `json:"description,omitempty"`

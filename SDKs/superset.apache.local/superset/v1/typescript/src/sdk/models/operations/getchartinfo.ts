@@ -1,101 +1,102 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetChartInfoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=q" })
   q?: shared.GetInfoSchema;
 }
 
 
 export class GetChartInfoSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetChartInfoRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetChartInfoQueryParams;
-
-  @Metadata()
-  security: GetChartInfoSecurity;
-}
-
-
 export class GetChartInfo200ApplicationJsonFiltersColumnName extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=operator" })
+  @SpeakeasyMetadata({ data: "json, name=operator" })
   operator?: string;
 }
 
 
 export class GetChartInfo200ApplicationJsonFilters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=column_name", elemType: operations.GetChartInfo200ApplicationJsonFiltersColumnName })
+  @SpeakeasyMetadata({ data: "json, name=column_name", elemType: GetChartInfo200ApplicationJsonFiltersColumnName })
   columnName?: GetChartInfo200ApplicationJsonFiltersColumnName[];
 }
 
 
 export class GetChartInfo200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=add_columns" })
+  @SpeakeasyMetadata({ data: "json, name=add_columns" })
   addColumns?: Map<string, any>;
 
-  @Metadata({ data: "json, name=edit_columns" })
+  @SpeakeasyMetadata({ data: "json, name=edit_columns" })
   editColumns?: Map<string, any>;
 
-  @Metadata({ data: "json, name=filters" })
+  @SpeakeasyMetadata({ data: "json, name=filters" })
   filters?: GetChartInfo200ApplicationJsonFilters;
 
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions?: string[];
 }
 
 
 export class GetChartInfo400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChartInfo401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChartInfo422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetChartInfo500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetChartInfoRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetChartInfoQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetChartInfoSecurity;
+}
+
+
 export class GetChartInfoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartInfo200ApplicationJsonObject?: GetChartInfo200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartInfo400ApplicationJsonObject?: GetChartInfo400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartInfo401ApplicationJsonObject?: GetChartInfo401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartInfo422ApplicationJsonObject?: GetChartInfo422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getChartInfo500ApplicationJsonObject?: GetChartInfo500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostPackageServiceQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cmd" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cmd" })
   cmd: string;
 }
 
 
 export class PostPackageServiceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostPackageServiceQueryParams;
 }
 
 
 export class PostPackageServiceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postPackageServiceDefaultTextXmlString?: string;
 }

@@ -1,7 +1,8 @@
 
 
+
 export enum AssociationStatusNameEnum {
-    Pending = "Pending"
-,    Success = "Success"
-,    Failed = "Failed"
+    Pending = "Pending",
+    Success = "Success",
+    Failed = "Failed"
 }

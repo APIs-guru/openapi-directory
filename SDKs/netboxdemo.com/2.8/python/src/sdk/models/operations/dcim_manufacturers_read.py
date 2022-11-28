@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class DcimManufacturersReadPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DcimManufacturersReadRequest:
-    path_params: DcimManufacturersReadPathParams = field(default=None)
+    path_params: DcimManufacturersReadPathParams = field()
     
 
 @dataclass
 class DcimManufacturersReadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     manufacturer: Optional[shared.Manufacturer] = field(default=None)
-    status_code: int = field(default=None)
     

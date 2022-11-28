@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateComputeEnvironmentHeaders = /** @class */ (function (_super) {
     __extends(UpdateComputeEnvironmentHeaders, _super);
@@ -30,31 +30,31 @@ var UpdateComputeEnvironmentHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateComputeEnvironmentHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateComputeEnvironmentHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateComputeEnvironmentHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateComputeEnvironmentHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateComputeEnvironmentHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateComputeEnvironmentHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateComputeEnvironmentHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateComputeEnvironmentHeaders;
@@ -70,23 +70,23 @@ var UpdateComputeEnvironmentRequestBodyComputeResources = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=desiredvCpus" }),
+        SpeakeasyMetadata({ data: "json, name=desiredvCpus" }),
         __metadata("design:type", Number)
     ], UpdateComputeEnvironmentRequestBodyComputeResources.prototype, "desiredvCpus", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxvCpus" }),
+        SpeakeasyMetadata({ data: "json, name=maxvCpus" }),
         __metadata("design:type", Number)
     ], UpdateComputeEnvironmentRequestBodyComputeResources.prototype, "maxvCpus", void 0);
     __decorate([
-        Metadata({ data: "json, name=minvCpus" }),
+        SpeakeasyMetadata({ data: "json, name=minvCpus" }),
         __metadata("design:type", Number)
     ], UpdateComputeEnvironmentRequestBodyComputeResources.prototype, "minvCpus", void 0);
     __decorate([
-        Metadata({ data: "json, name=securityGroupIds" }),
+        SpeakeasyMetadata({ data: "json, name=securityGroupIds" }),
         __metadata("design:type", Array)
     ], UpdateComputeEnvironmentRequestBodyComputeResources.prototype, "securityGroupIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=subnets" }),
+        SpeakeasyMetadata({ data: "json, name=subnets" }),
         __metadata("design:type", Array)
     ], UpdateComputeEnvironmentRequestBodyComputeResources.prototype, "subnets", void 0);
     return UpdateComputeEnvironmentRequestBodyComputeResources;
@@ -103,19 +103,19 @@ var UpdateComputeEnvironmentRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=computeEnvironment" }),
+        SpeakeasyMetadata({ data: "json, name=computeEnvironment" }),
         __metadata("design:type", String)
     ], UpdateComputeEnvironmentRequestBody.prototype, "computeEnvironment", void 0);
     __decorate([
-        Metadata({ data: "json, name=computeResources" }),
+        SpeakeasyMetadata({ data: "json, name=computeResources" }),
         __metadata("design:type", UpdateComputeEnvironmentRequestBodyComputeResources)
     ], UpdateComputeEnvironmentRequestBody.prototype, "computeResources", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceRole" }),
+        SpeakeasyMetadata({ data: "json, name=serviceRole" }),
         __metadata("design:type", String)
     ], UpdateComputeEnvironmentRequestBody.prototype, "serviceRole", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], UpdateComputeEnvironmentRequestBody.prototype, "state", void 0);
     return UpdateComputeEnvironmentRequestBody;
@@ -127,11 +127,11 @@ var UpdateComputeEnvironmentRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateComputeEnvironmentHeaders)
     ], UpdateComputeEnvironmentRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateComputeEnvironmentRequestBody)
     ], UpdateComputeEnvironmentRequest.prototype, "request", void 0);
     return UpdateComputeEnvironmentRequest;
@@ -143,23 +143,23 @@ var UpdateComputeEnvironmentResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateComputeEnvironmentResponse.prototype, "clientException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateComputeEnvironmentResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateComputeEnvironmentResponse.prototype, "serverException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateComputeEnvironmentResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdateComputeEnvironmentResponse)
     ], UpdateComputeEnvironmentResponse.prototype, "updateComputeEnvironmentResponse", void 0);
     return UpdateComputeEnvironmentResponse;

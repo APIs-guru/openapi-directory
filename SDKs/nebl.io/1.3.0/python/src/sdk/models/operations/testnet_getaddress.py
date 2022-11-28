@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class TestnetGetAddressPathParams:
-    address: str = field(default=None, metadata={'path_param': { 'field_name': 'address', 'style': 'simple', 'explode': False }})
+    address: str = field(metadata={'path_param': { 'field_name': 'address', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class TestnetGetAddressRequest:
-    path_params: TestnetGetAddressPathParams = field(default=None)
+    path_params: TestnetGetAddressPathParams = field()
     
 
 @dataclass
 class TestnetGetAddressResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_address_response: Optional[shared.GetAddressResponse] = field(default=None)
     

@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetFindInteractionsFormatEnum {
-    Json = "json"
-,    Xml = "xml"
-,    Html = "html"
-,    Dump = "dump"
-,    Jpg = "jpg"
-,    Pdf = "pdf"
+    Json = "json",
+    Xml = "xml",
+    Html = "html",
+    Dump = "dump",
+    Jpg = "jpg",
+    Pdf = "pdf"
 }
 
 
 export class GetFindInteractionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format?: GetFindInteractionsFormatEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query: string;
 }
 
 
 export class GetFindInteractionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetFindInteractionsQueryParams;
 }
 
 
 export class GetFindInteractionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

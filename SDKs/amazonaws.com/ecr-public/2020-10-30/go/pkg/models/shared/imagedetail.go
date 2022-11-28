@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ImageDetail
+// An object that describes an image returned by a <a>DescribeImages</a> operation.
 type ImageDetail struct {
 	ArtifactMediaType      *string    `json:"artifactMediaType,omitempty"`
 	ImageDigest            *string    `json:"imageDigest,omitempty"`

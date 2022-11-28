@@ -1,5 +1,7 @@
 package shared
 
+// Dataset
+// A workspace for solving a single, particular machine learning (ML) problem. A workspace contains examples that may be annotated.
 type Dataset struct {
 	CreateTime                          *string                             `json:"createTime,omitempty"`
 	Description                         *string                             `json:"description,omitempty"`

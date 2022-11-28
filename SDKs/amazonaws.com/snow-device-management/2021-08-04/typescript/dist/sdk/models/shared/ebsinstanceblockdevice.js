@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttachmentStatusEnum } from "./attachmentstatusenum";
 // EbsInstanceBlockDevice
 /**
@@ -34,19 +34,19 @@ var EbsInstanceBlockDevice = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attachTime" }),
+        SpeakeasyMetadata({ data: "json, name=attachTime" }),
         __metadata("design:type", Date)
     ], EbsInstanceBlockDevice.prototype, "attachTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=deleteOnTermination" }),
+        SpeakeasyMetadata({ data: "json, name=deleteOnTermination" }),
         __metadata("design:type", Boolean)
     ], EbsInstanceBlockDevice.prototype, "deleteOnTermination", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], EbsInstanceBlockDevice.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=volumeId" }),
+        SpeakeasyMetadata({ data: "json, name=volumeId" }),
         __metadata("design:type", String)
     ], EbsInstanceBlockDevice.prototype, "volumeId", void 0);
     return EbsInstanceBlockDevice;

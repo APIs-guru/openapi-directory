@@ -38,14 +38,14 @@ class PostSamlConfigurationQueryParams:
 
 @dataclass
 class PostSamlConfigurationRequest:
-    query_params: PostSamlConfigurationQueryParams = field(default=None)
+    query_params: PostSamlConfigurationQueryParams = field()
     
 
 @dataclass
 class PostSamlConfigurationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     post_saml_configuration_302_text_plain_string: Optional[str] = field(default=None)
     post_saml_configuration_default_text_plain_string: Optional[str] = field(default=None)
     

@@ -1,70 +1,71 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostUsersJsonHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Key" })
   apiKey: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Username" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Username" })
   apiUsername: string;
 }
 
 
 export class PostUsersJsonRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=approved" })
+  @SpeakeasyMetadata({ data: "json, name=approved" })
   approved?: boolean;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password: string;
 
-  @Metadata({ data: "json, name=user_fields[1]" })
+  @SpeakeasyMetadata({ data: "json, name=user_fields[1]" })
   userFields1?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username: string;
 }
 
 
-export class PostUsersJsonRequest extends SpeakeasyBase {
-  @Metadata()
-  headers: PostUsersJsonHeaders;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PostUsersJsonRequestBody;
-}
-
-
 export class PostUsersJson200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: boolean;
 
-  @Metadata({ data: "json, name=user_id" })
+  @SpeakeasyMetadata({ data: "json, name=user_id" })
   userId?: number;
 }
 
 
+export class PostUsersJsonRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  headers: PostUsersJsonHeaders;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PostUsersJsonRequestBody;
+}
+
+
 export class PostUsersJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postUsersJson200ApplicationJsonObject?: PostUsersJson200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

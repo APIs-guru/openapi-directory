@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum ListTechniques200ApplicationJsonActionEnum {
     ListTechniques = "listTechniques"
@@ -7,35 +8,35 @@ export enum ListTechniques200ApplicationJsonActionEnum {
 
 
 export class ListTechniques200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=techniques", elemType: shared.Techniques })
+  @SpeakeasyMetadata({ data: "json, name=techniques", elemType: shared.Techniques })
   techniques: shared.Techniques[];
 }
 
 export enum ListTechniques200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class ListTechniques200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: ListTechniques200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: ListTechniques200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: ListTechniques200ApplicationJsonResultEnum;
 }
 
 
 export class ListTechniquesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listTechniques200ApplicationJsonObject?: ListTechniques200ApplicationJson;
 }

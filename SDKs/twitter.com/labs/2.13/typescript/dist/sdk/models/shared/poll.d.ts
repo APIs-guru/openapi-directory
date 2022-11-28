@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PollOption } from "./polloption";
 export declare enum PollVotingStatusEnum {
     Open = "open",

@@ -1,5 +1,7 @@
 package shared
 
+// CalculateRouteSummary
+// A summary of the calculated route.
 type CalculateRouteSummary struct {
 	DataSource      string           `json:"DataSource"`
 	Distance        float64          `json:"Distance"`

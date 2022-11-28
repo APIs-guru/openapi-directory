@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { InputParameter } from "./inputparameter";
+import { ResultMetadata } from "./resultmetadata";
 // Action
 /**
  * Action message contains metadata information about a single action present in the external system.
@@ -34,15 +35,15 @@ var Action = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=inputParameters", elemType: shared.InputParameter }),
+        SpeakeasyMetadata({ data: "json, name=inputParameters", elemType: InputParameter }),
         __metadata("design:type", Array)
     ], Action.prototype, "inputParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Action.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=resultMetadata", elemType: shared.ResultMetadata }),
+        SpeakeasyMetadata({ data: "json, name=resultMetadata", elemType: ResultMetadata }),
         __metadata("design:type", Array)
     ], Action.prototype, "resultMetadata", void 0);
     return Action;

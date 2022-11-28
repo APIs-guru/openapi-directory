@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Expr } from "./expr";
 /**
  * Associates `members`, or principals, with a `role`.

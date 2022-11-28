@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuntimeEnum } from "./runtimeenum";
 // CodeConfigurationValues
 /**
@@ -34,23 +34,23 @@ var CodeConfigurationValues = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BuildCommand" }),
+        SpeakeasyMetadata({ data: "json, name=BuildCommand" }),
         __metadata("design:type", String)
     ], CodeConfigurationValues.prototype, "buildCommand", void 0);
     __decorate([
-        Metadata({ data: "json, name=Port" }),
+        SpeakeasyMetadata({ data: "json, name=Port" }),
         __metadata("design:type", String)
     ], CodeConfigurationValues.prototype, "port", void 0);
     __decorate([
-        Metadata({ data: "json, name=Runtime" }),
+        SpeakeasyMetadata({ data: "json, name=Runtime" }),
         __metadata("design:type", String)
     ], CodeConfigurationValues.prototype, "runtime", void 0);
     __decorate([
-        Metadata({ data: "json, name=RuntimeEnvironmentVariables" }),
+        SpeakeasyMetadata({ data: "json, name=RuntimeEnvironmentVariables" }),
         __metadata("design:type", Map)
     ], CodeConfigurationValues.prototype, "runtimeEnvironmentVariables", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartCommand" }),
+        SpeakeasyMetadata({ data: "json, name=StartCommand" }),
         __metadata("design:type", String)
     ], CodeConfigurationValues.prototype, "startCommand", void 0);
     return CodeConfigurationValues;

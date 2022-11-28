@@ -32,7 +32,7 @@ type PrivatecaProjectsLocationsCaPoolsCreateSecurity struct {
 type PrivatecaProjectsLocationsCaPoolsCreateRequest struct {
 	PathParams  PrivatecaProjectsLocationsCaPoolsCreatePathParams
 	QueryParams PrivatecaProjectsLocationsCaPoolsCreateQueryParams
-	Request     *shared.CaPool `request:"mediaType=application/json"`
+	Request     *shared.CaPoolInput `request:"mediaType=application/json"`
 	Security    PrivatecaProjectsLocationsCaPoolsCreateSecurity
 }
 

@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteV3BoardsBoardIdCommentsCommentIdPathParams = /** @class */ (function (_super) {
     __extends(DeleteV3BoardsBoardIdCommentsCommentIdPathParams, _super);
     function DeleteV3BoardsBoardIdCommentsCommentIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=board_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=board_id" }),
         __metadata("design:type", String)
     ], DeleteV3BoardsBoardIdCommentsCommentIdPathParams.prototype, "boardId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=comment_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=comment_id" }),
         __metadata("design:type", String)
     ], DeleteV3BoardsBoardIdCommentsCommentIdPathParams.prototype, "commentId", void 0);
     return DeleteV3BoardsBoardIdCommentsCommentIdPathParams;
@@ -45,7 +45,7 @@ var DeleteV3BoardsBoardIdCommentsCommentIdRequest = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteV3BoardsBoardIdCommentsCommentIdPathParams)
     ], DeleteV3BoardsBoardIdCommentsCommentIdRequest.prototype, "pathParams", void 0);
     return DeleteV3BoardsBoardIdCommentsCommentIdRequest;
@@ -57,11 +57,11 @@ var DeleteV3BoardsBoardIdCommentsCommentIdResponse = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteV3BoardsBoardIdCommentsCommentIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteV3BoardsBoardIdCommentsCommentIdResponse.prototype, "statusCode", void 0);
     return DeleteV3BoardsBoardIdCommentsCommentIdResponse;

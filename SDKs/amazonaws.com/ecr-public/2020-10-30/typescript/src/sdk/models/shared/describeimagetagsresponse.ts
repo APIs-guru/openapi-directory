@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageTagDetail } from "./imagetagdetail";
 
 
+
 export class DescribeImageTagsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageTagDetails", elemType: shared.ImageTagDetail })
+  @SpeakeasyMetadata({ data: "json, name=imageTagDetails", elemType: ImageTagDetail })
   imageTagDetails?: ImageTagDetail[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

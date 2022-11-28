@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StackFrame } from "./stackframe";
+
 
 
 // StackFrames
@@ -8,9 +8,9 @@ import { StackFrame } from "./stackframe";
  * A collection of stack frames, which can be truncated.
 **/
 export class StackFrames extends SpeakeasyBase {
-  @Metadata({ data: "json, name=droppedFramesCount" })
+  @SpeakeasyMetadata({ data: "json, name=droppedFramesCount" })
   droppedFramesCount?: number;
 
-  @Metadata({ data: "json, name=frame", elemType: shared.StackFrame })
+  @SpeakeasyMetadata({ data: "json, name=frame", elemType: StackFrame })
   frame?: StackFrame[];
 }

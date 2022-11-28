@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetWorkspaceMembershipPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=workspace_membership_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspace_membership_gid" })
   workspaceMembershipGid: string;
 }
 
 
 export class GetWorkspaceMembershipQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class GetWorkspaceMembershipRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetWorkspaceMembershipPathParams;
-
-  @Metadata()
-  queryParams: GetWorkspaceMembershipQueryParams;
-}
-
-
 export class GetWorkspaceMembership200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.WorkspaceMembershipResponse;
 }
 
 
+export class GetWorkspaceMembershipRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetWorkspaceMembershipPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetWorkspaceMembershipQueryParams;
+}
+
+
 export class GetWorkspaceMembershipResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getWorkspaceMembership200ApplicationJsonObject?: GetWorkspaceMembership200ApplicationJson;
 }

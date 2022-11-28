@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import childpolicy_enum
-from . import workflowexecutiontimeouttype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class WorkflowExecutionTimedOutEventAttributes:
-    child_policy: childpolicy_enum.ChildPolicyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'childPolicy' }})
-    timeout_type: workflowexecutiontimeouttype_enum.WorkflowExecutionTimeoutTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeoutType' }})
+    r"""WorkflowExecutionTimedOutEventAttributes
+    Provides the details of the <code>WorkflowExecutionTimedOut</code> event.
+    """
+    
+    child_policy: ChildPolicyEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('childPolicy') }})
+    timeout_type: WorkflowExecutionTimeoutTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeoutType') }})
     

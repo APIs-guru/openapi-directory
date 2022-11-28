@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class ClickStreamGetFilterEnum(str, Enum):
@@ -21,12 +22,12 @@ class ClickStreamGetQueryParams:
 
 @dataclass
 class ClickStreamGetRequest:
-    query_params: ClickStreamGetQueryParams = field(default=None)
+    query_params: ClickStreamGetQueryParams = field()
     
 
 @dataclass
 class ClickStreamGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_responses_entities_response_api_core_dto_click_stream_hit_: Optional[shared.APICoreResponsesEntitiesResponseAPICoreDtoClickStreamHit] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

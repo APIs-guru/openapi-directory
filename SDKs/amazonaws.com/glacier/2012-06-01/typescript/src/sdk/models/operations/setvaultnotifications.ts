@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SetVaultNotificationsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=accountId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accountId" })
   accountId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=vaultName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=vaultName" })
   vaultName: string;
 }
 
 
 export class SetVaultNotificationsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -39,48 +40,48 @@ export class SetVaultNotificationsHeaders extends SpeakeasyBase {
  * Represents a vault's notification configuration.
 **/
 export class SetVaultNotificationsRequestBodyVaultNotificationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Events" })
+  @SpeakeasyMetadata({ data: "json, name=Events" })
   events?: string[];
 
-  @Metadata({ data: "json, name=SNSTopic" })
+  @SpeakeasyMetadata({ data: "json, name=SNSTopic" })
   snsTopic?: string;
 }
 
 
 export class SetVaultNotificationsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=vaultNotificationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=vaultNotificationConfig" })
   vaultNotificationConfig?: SetVaultNotificationsRequestBodyVaultNotificationConfig;
 }
 
 
 export class SetVaultNotificationsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SetVaultNotificationsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: SetVaultNotificationsHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: SetVaultNotificationsRequestBody;
 }
 
 
 export class SetVaultNotificationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterValueException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   missingParameterValueException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum VehicleEngineTypeEnum {
-    Combustion = "combustion"
-,    Electric = "electric"
+    Combustion = "combustion",
+    Electric = "electric"
 }

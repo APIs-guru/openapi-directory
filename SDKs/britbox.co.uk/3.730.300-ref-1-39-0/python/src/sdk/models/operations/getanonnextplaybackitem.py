@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetAnonNextPlaybackItemPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 class GetAnonNextPlaybackItemExpandEnum(str, Enum):
     PARENT = "parent"
@@ -24,14 +25,14 @@ class GetAnonNextPlaybackItemQueryParams:
 
 @dataclass
 class GetAnonNextPlaybackItemRequest:
-    path_params: GetAnonNextPlaybackItemPathParams = field(default=None)
-    query_params: GetAnonNextPlaybackItemQueryParams = field(default=None)
+    path_params: GetAnonNextPlaybackItemPathParams = field()
+    query_params: GetAnonNextPlaybackItemQueryParams = field()
     
 
 @dataclass
 class GetAnonNextPlaybackItemResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     next_playback_item: Optional[shared.NextPlaybackItem] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

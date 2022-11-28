@@ -1,5 +1,7 @@
 package shared
 
+// AwsEcsTaskDefinitionDetails
+// details about a task definition. A task definition describes the container and volume definitions of an Amazon Elastic Container Service task.
 type AwsEcsTaskDefinitionDetails struct {
 	ContainerDefinitions    []AwsEcsTaskDefinitionContainerDefinitionsDetails  `json:"ContainerDefinitions,omitempty"`
 	CPU                     *string                                            `json:"Cpu,omitempty"`

@@ -13,12 +13,12 @@ class GetSetupV1LocationsQueryParams:
 
 @dataclass
 class GetSetupV1LocationsRequest:
-    query_params: GetSetupV1LocationsQueryParams = field(default=None)
+    query_params: GetSetupV1LocationsQueryParams = field()
     
 
 @dataclass
 class GetSetupV1LocationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     location_list_view_model: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

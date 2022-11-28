@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Name } from "./name";
 export declare class DistrictAdmin extends SpeakeasyBase {
     district?: string;

@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class MeterFolderInformationGetPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class MeterFolderInformationGetRequest:
-    path_params: MeterFolderInformationGetPathParams = field(default=None)
+    path_params: MeterFolderInformationGetPathParams = field()
     
 
 @dataclass
 class MeterFolderInformationGetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     meter_folder_information: Optional[shared.MeterFolderInformation] = field(default=None)
-    status_code: int = field(default=None)
     

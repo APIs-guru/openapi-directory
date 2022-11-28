@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RelatedFinding
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about a related finding.
 **/
 export class RelatedFinding extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: string;
 
-  @Metadata({ data: "json, name=ProductArn" })
+  @SpeakeasyMetadata({ data: "json, name=ProductArn" })
   productArn: string;
 }

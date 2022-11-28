@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchEncryption } from "./cloudwatchencryption";
 import { JobBookmarksEncryption } from "./jobbookmarksencryption";
 import { S3Encryption } from "./s3encryption";
+
 
 
 // EncryptionConfiguration
@@ -10,12 +10,12 @@ import { S3Encryption } from "./s3encryption";
  * Specifies an encryption configuration.
 **/
 export class EncryptionConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudWatchEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchEncryption" })
   cloudWatchEncryption?: CloudWatchEncryption;
 
-  @Metadata({ data: "json, name=JobBookmarksEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=JobBookmarksEncryption" })
   jobBookmarksEncryption?: JobBookmarksEncryption;
 
-  @Metadata({ data: "json, name=S3Encryption", elemType: shared.S3Encryption })
+  @SpeakeasyMetadata({ data: "json, name=S3Encryption", elemType: S3Encryption })
   s3Encryption?: S3Encryption[];
 }

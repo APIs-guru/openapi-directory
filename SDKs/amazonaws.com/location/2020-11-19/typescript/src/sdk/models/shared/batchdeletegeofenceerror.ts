@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchItemError } from "./batchitemerror";
+
 
 
 // BatchDeleteGeofenceError
@@ -7,9 +8,9 @@ import { BatchItemError } from "./batchitemerror";
  * Contains error details for each geofence that failed to delete from the geofence collection.
 **/
 export class BatchDeleteGeofenceError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Error" })
+  @SpeakeasyMetadata({ data: "json, name=Error" })
   error: BatchItemError;
 
-  @Metadata({ data: "json, name=GeofenceId" })
+  @SpeakeasyMetadata({ data: "json, name=GeofenceId" })
   geofenceId: string;
 }

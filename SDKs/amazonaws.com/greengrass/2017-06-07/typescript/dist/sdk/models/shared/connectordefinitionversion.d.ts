@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Connector } from "./connector";
 /**
  * Information about the connector definition version, which is a container for connectors.

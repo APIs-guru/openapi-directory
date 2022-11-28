@@ -1,6 +1,7 @@
 
 
+
 export enum SuppressionListReasonEnum {
-    Bounce = "BOUNCE"
-,    Complaint = "COMPLAINT"
+    Bounce = "BOUNCE",
+    Complaint = "COMPLAINT"
 }

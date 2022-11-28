@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateApiPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
   apiId: string;
 }
 
 
 export class UpdateApiHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,93 +38,93 @@ export class UpdateApiHeaders extends SpeakeasyBase {
  * Represents a CORS configuration. Supported only for HTTP APIs. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html">Configuring CORS</a> for more information.
 **/
 export class UpdateApiRequestBodyCorsConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowCredentials" })
+  @SpeakeasyMetadata({ data: "json, name=AllowCredentials" })
   allowCredentials?: boolean;
 
-  @Metadata({ data: "json, name=AllowHeaders" })
+  @SpeakeasyMetadata({ data: "json, name=AllowHeaders" })
   allowHeaders?: string[];
 
-  @Metadata({ data: "json, name=AllowMethods" })
+  @SpeakeasyMetadata({ data: "json, name=AllowMethods" })
   allowMethods?: string[];
 
-  @Metadata({ data: "json, name=AllowOrigins" })
+  @SpeakeasyMetadata({ data: "json, name=AllowOrigins" })
   allowOrigins?: string[];
 
-  @Metadata({ data: "json, name=ExposeHeaders" })
+  @SpeakeasyMetadata({ data: "json, name=ExposeHeaders" })
   exposeHeaders?: string[];
 
-  @Metadata({ data: "json, name=MaxAge" })
+  @SpeakeasyMetadata({ data: "json, name=MaxAge" })
   maxAge?: number;
 }
 
 
 export class UpdateApiRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiKeySelectionExpression" })
+  @SpeakeasyMetadata({ data: "json, name=apiKeySelectionExpression" })
   apiKeySelectionExpression?: string;
 
-  @Metadata({ data: "json, name=corsConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=corsConfiguration" })
   corsConfiguration?: UpdateApiRequestBodyCorsConfiguration;
 
-  @Metadata({ data: "json, name=credentialsArn" })
+  @SpeakeasyMetadata({ data: "json, name=credentialsArn" })
   credentialsArn?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=disableExecuteApiEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=disableExecuteApiEndpoint" })
   disableExecuteApiEndpoint?: boolean;
 
-  @Metadata({ data: "json, name=disableSchemaValidation" })
+  @SpeakeasyMetadata({ data: "json, name=disableSchemaValidation" })
   disableSchemaValidation?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=routeKey" })
+  @SpeakeasyMetadata({ data: "json, name=routeKey" })
   routeKey?: string;
 
-  @Metadata({ data: "json, name=routeSelectionExpression" })
+  @SpeakeasyMetadata({ data: "json, name=routeSelectionExpression" })
   routeSelectionExpression?: string;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }
 
 
 export class UpdateApiRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateApiPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateApiHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateApiRequestBody;
 }
 
 
 export class UpdateApiResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateApiResponse?: shared.UpdateApiResponse;
 }

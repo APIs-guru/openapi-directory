@@ -30,7 +30,7 @@ type ContentAccountsLabelsCreateSecurity struct {
 type ContentAccountsLabelsCreateRequest struct {
 	PathParams  ContentAccountsLabelsCreatePathParams
 	QueryParams ContentAccountsLabelsCreateQueryParams
-	Request     *shared.AccountLabel `request:"mediaType=application/json"`
+	Request     *shared.AccountLabelInput `request:"mediaType=application/json"`
 	Security    ContentAccountsLabelsCreateSecurity
 }
 

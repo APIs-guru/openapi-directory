@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ProjectedPlayerSeasonStatsByPlayerFormatEnum;
 (function (ProjectedPlayerSeasonStatsByPlayerFormatEnum) {
     ProjectedPlayerSeasonStatsByPlayerFormatEnum["Xml"] = "XML";
@@ -34,15 +34,15 @@ var ProjectedPlayerSeasonStatsByPlayerPathParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], ProjectedPlayerSeasonStatsByPlayerPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=playerid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=playerid" }),
         __metadata("design:type", String)
     ], ProjectedPlayerSeasonStatsByPlayerPathParams.prototype, "playerid", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=season" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=season" }),
         __metadata("design:type", String)
     ], ProjectedPlayerSeasonStatsByPlayerPathParams.prototype, "season", void 0);
     return ProjectedPlayerSeasonStatsByPlayerPathParams;
@@ -54,7 +54,7 @@ var ProjectedPlayerSeasonStatsByPlayerRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProjectedPlayerSeasonStatsByPlayerPathParams)
     ], ProjectedPlayerSeasonStatsByPlayerRequest.prototype, "pathParams", void 0);
     return ProjectedPlayerSeasonStatsByPlayerRequest;
@@ -66,15 +66,15 @@ var ProjectedPlayerSeasonStatsByPlayerResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProjectedPlayerSeasonStatsByPlayerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ProjectedPlayerSeasonStatsByPlayerResponse.prototype, "playerSeasonProjection", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProjectedPlayerSeasonStatsByPlayerResponse.prototype, "statusCode", void 0);
     return ProjectedPlayerSeasonStatsByPlayerResponse;

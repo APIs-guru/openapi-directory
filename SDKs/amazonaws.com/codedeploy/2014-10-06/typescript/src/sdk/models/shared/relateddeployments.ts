@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RelatedDeployments
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about deployments related to the specified deployment.
 **/
 export class RelatedDeployments extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoUpdateOutdatedInstancesDeploymentIds" })
+  @SpeakeasyMetadata({ data: "json, name=autoUpdateOutdatedInstancesDeploymentIds" })
   autoUpdateOutdatedInstancesDeploymentIds?: string[];
 
-  @Metadata({ data: "json, name=autoUpdateOutdatedInstancesRootDeploymentId" })
+  @SpeakeasyMetadata({ data: "json, name=autoUpdateOutdatedInstancesRootDeploymentId" })
   autoUpdateOutdatedInstancesRootDeploymentId?: string;
 }

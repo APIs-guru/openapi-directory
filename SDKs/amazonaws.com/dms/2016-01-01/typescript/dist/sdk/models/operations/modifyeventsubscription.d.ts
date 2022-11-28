@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum ModifyEventSubscriptionXAmzTargetEnum {
     AmazonDmSv20160101ModifyEventSubscription = "AmazonDMSv20160101.ModifyEventSubscription"

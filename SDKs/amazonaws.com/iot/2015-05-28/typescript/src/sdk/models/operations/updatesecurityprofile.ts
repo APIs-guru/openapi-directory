@@ -1,107 +1,108 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateSecurityProfilePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=securityProfileName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=securityProfileName" })
   securityProfileName: string;
 }
 
 
 export class UpdateSecurityProfileQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=expectedVersion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=expectedVersion" })
   expectedVersion?: number;
 }
 
 
 export class UpdateSecurityProfileHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class UpdateSecurityProfileRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalMetricsToRetain" })
+  @SpeakeasyMetadata({ data: "json, name=additionalMetricsToRetain" })
   additionalMetricsToRetain?: string[];
 
-  @Metadata({ data: "json, name=additionalMetricsToRetainV2", elemType: shared.MetricToRetain })
+  @SpeakeasyMetadata({ data: "json, name=additionalMetricsToRetainV2", elemType: shared.MetricToRetain })
   additionalMetricsToRetainV2?: shared.MetricToRetain[];
 
-  @Metadata({ data: "json, name=alertTargets", elemType: shared.AlertTarget })
+  @SpeakeasyMetadata({ data: "json, name=alertTargets", elemType: shared.AlertTarget })
   alertTargets?: Map<string, shared.AlertTarget>;
 
-  @Metadata({ data: "json, name=behaviors", elemType: shared.Behavior })
+  @SpeakeasyMetadata({ data: "json, name=behaviors", elemType: shared.Behavior })
   behaviors?: shared.Behavior[];
 
-  @Metadata({ data: "json, name=deleteAdditionalMetricsToRetain" })
+  @SpeakeasyMetadata({ data: "json, name=deleteAdditionalMetricsToRetain" })
   deleteAdditionalMetricsToRetain?: boolean;
 
-  @Metadata({ data: "json, name=deleteAlertTargets" })
+  @SpeakeasyMetadata({ data: "json, name=deleteAlertTargets" })
   deleteAlertTargets?: boolean;
 
-  @Metadata({ data: "json, name=deleteBehaviors" })
+  @SpeakeasyMetadata({ data: "json, name=deleteBehaviors" })
   deleteBehaviors?: boolean;
 
-  @Metadata({ data: "json, name=securityProfileDescription" })
+  @SpeakeasyMetadata({ data: "json, name=securityProfileDescription" })
   securityProfileDescription?: string;
 }
 
 
 export class UpdateSecurityProfileRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateSecurityProfilePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UpdateSecurityProfileQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateSecurityProfileHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateSecurityProfileRequestBody;
 }
 
 
 export class UpdateSecurityProfileResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateSecurityProfileResponse?: shared.UpdateSecurityProfileResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   versionConflictException?: any;
 }

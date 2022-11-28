@@ -1,73 +1,78 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnterpriseCrmEventbusProtoWorkflowAlertConfig } from "./enterprisecrmeventbusprotoworkflowalertconfig";
+import { EnterpriseCrmEventbusProtoCloudSchedulerConfig } from "./enterprisecrmeventbusprotocloudschedulerconfig";
 import { EnterpriseCrmEventbusProtoCoordinate } from "./enterprisecrmeventbusprotocoordinate";
 import { EnterpriseCrmEventbusProtoNextTask } from "./enterprisecrmeventbusprotonexttask";
 import { EnterpriseCrmEventbusProtoTriggerCriteria } from "./enterprisecrmeventbusprototriggercriteria";
 
+
 export enum EnterpriseCrmFrontendsEventbusProtoTriggerConfigNextTasksExecutionPolicyEnum {
-    Unspecified = "UNSPECIFIED"
-,    RunAllMatch = "RUN_ALL_MATCH"
-,    RunFirstMatch = "RUN_FIRST_MATCH"
+    Unspecified = "UNSPECIFIED",
+    RunAllMatch = "RUN_ALL_MATCH",
+    RunFirstMatch = "RUN_FIRST_MATCH"
 }
 
 export enum EnterpriseCrmFrontendsEventbusProtoTriggerConfigTriggerTypeEnum {
-    Unknown = "UNKNOWN"
-,    CloudPubsub = "CLOUD_PUBSUB"
-,    Goops = "GOOPS"
-,    SfdcSync = "SFDC_SYNC"
-,    Cron = "CRON"
-,    Api = "API"
-,    ManifoldTrigger = "MANIFOLD_TRIGGER"
-,    DatalayerDataChange = "DATALAYER_DATA_CHANGE"
-,    SfdcChannel = "SFDC_CHANNEL"
-,    CloudPubsubExternal = "CLOUD_PUBSUB_EXTERNAL"
-,    SfdcCdcChannel = "SFDC_CDC_CHANNEL"
-,    SfdcPlatformEventsChannel = "SFDC_PLATFORM_EVENTS_CHANNEL"
+    Unknown = "UNKNOWN",
+    CloudPubsub = "CLOUD_PUBSUB",
+    Goops = "GOOPS",
+    SfdcSync = "SFDC_SYNC",
+    Cron = "CRON",
+    Api = "API",
+    ManifoldTrigger = "MANIFOLD_TRIGGER",
+    DatalayerDataChange = "DATALAYER_DATA_CHANGE",
+    SfdcChannel = "SFDC_CHANNEL",
+    CloudPubsubExternal = "CLOUD_PUBSUB_EXTERNAL",
+    SfdcCdcChannel = "SFDC_CDC_CHANNEL",
+    SfdcPlatformEventsChannel = "SFDC_PLATFORM_EVENTS_CHANNEL",
+    CloudScheduler = "CLOUD_SCHEDULER"
 }
 
 
 // EnterpriseCrmFrontendsEventbusProtoTriggerConfig
 /** 
- * Configuration detail of a trigger. Next available id: 16
+ * Configuration detail of a trigger. Next available id: 17
 **/
 export class EnterpriseCrmFrontendsEventbusProtoTriggerConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alertConfig", elemType: shared.EnterpriseCrmEventbusProtoWorkflowAlertConfig })
+  @SpeakeasyMetadata({ data: "json, name=alertConfig", elemType: EnterpriseCrmEventbusProtoWorkflowAlertConfig })
   alertConfig?: EnterpriseCrmEventbusProtoWorkflowAlertConfig[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=cloudSchedulerConfig" })
+  cloudSchedulerConfig?: EnterpriseCrmEventbusProtoCloudSchedulerConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=enabledClients" })
+  @SpeakeasyMetadata({ data: "json, name=enabledClients" })
   enabledClients?: string[];
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=nextTasksExecutionPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=nextTasksExecutionPolicy" })
   nextTasksExecutionPolicy?: EnterpriseCrmFrontendsEventbusProtoTriggerConfigNextTasksExecutionPolicyEnum;
 
-  @Metadata({ data: "json, name=pauseWorkflowExecutions" })
+  @SpeakeasyMetadata({ data: "json, name=pauseWorkflowExecutions" })
   pauseWorkflowExecutions?: boolean;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: EnterpriseCrmEventbusProtoCoordinate;
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: Map<string, string>;
 
-  @Metadata({ data: "json, name=startTasks", elemType: shared.EnterpriseCrmEventbusProtoNextTask })
+  @SpeakeasyMetadata({ data: "json, name=startTasks", elemType: EnterpriseCrmEventbusProtoNextTask })
   startTasks?: EnterpriseCrmEventbusProtoNextTask[];
 
-  @Metadata({ data: "json, name=triggerCriteria" })
+  @SpeakeasyMetadata({ data: "json, name=triggerCriteria" })
   triggerCriteria?: EnterpriseCrmEventbusProtoTriggerCriteria;
 
-  @Metadata({ data: "json, name=triggerId" })
+  @SpeakeasyMetadata({ data: "json, name=triggerId" })
   triggerId?: string;
 
-  @Metadata({ data: "json, name=triggerNumber" })
+  @SpeakeasyMetadata({ data: "json, name=triggerNumber" })
   triggerNumber?: string;
 
-  @Metadata({ data: "json, name=triggerType" })
+  @SpeakeasyMetadata({ data: "json, name=triggerType" })
   triggerType?: EnterpriseCrmFrontendsEventbusProtoTriggerConfigTriggerTypeEnum;
 }

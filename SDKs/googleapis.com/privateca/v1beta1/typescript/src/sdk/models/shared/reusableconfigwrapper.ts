@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReusableConfigValues } from "./reusableconfigvalues";
+
 
 
 // ReusableConfigWrapper
@@ -7,9 +8,9 @@ import { ReusableConfigValues } from "./reusableconfigvalues";
  * A ReusableConfigWrapper describes values that may assist in creating an X.509 certificate, or a reference to a pre-defined set of values.
 **/
 export class ReusableConfigWrapper extends SpeakeasyBase {
-  @Metadata({ data: "json, name=reusableConfig" })
+  @SpeakeasyMetadata({ data: "json, name=reusableConfig" })
   reusableConfig?: string;
 
-  @Metadata({ data: "json, name=reusableConfigValues" })
+  @SpeakeasyMetadata({ data: "json, name=reusableConfigValues" })
   reusableConfigValues?: ReusableConfigValues;
 }

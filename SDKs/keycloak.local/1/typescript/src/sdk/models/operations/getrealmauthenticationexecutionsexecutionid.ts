@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetRealmAuthenticationExecutionsExecutionIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=executionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=executionId" })
   executionId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=realm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=realm" })
   realm: string;
 }
 
 
 export class GetRealmAuthenticationExecutionsExecutionIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetRealmAuthenticationExecutionsExecutionIdPathParams;
 }
 
 
 export class GetRealmAuthenticationExecutionsExecutionIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateAssetTypeHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" })
   xeroTenantId: string;
 }
 
 
 export class CreateAssetTypeSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class CreateAssetTypeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateAssetTypeHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: shared.AssetType;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateAssetTypeSecurity;
 }
 
 
 export class CreateAssetTypeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   assetType?: shared.AssetType;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

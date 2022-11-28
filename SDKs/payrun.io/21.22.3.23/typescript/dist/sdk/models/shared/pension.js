@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // PensionPensionPensionablePayCodes
 /**
  * The pensions' pensionable pay codes
@@ -33,7 +33,7 @@ var PensionPensionPensionablePayCodes = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PayCode" }),
+        SpeakeasyMetadata({ data: "json, name=PayCode" }),
         __metadata("design:type", Array)
     ], PensionPensionPensionablePayCodes.prototype, "payCode", void 0);
     return PensionPensionPensionablePayCodes;
@@ -60,7 +60,7 @@ var PensionPensionQualifyingPayCodes = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PayCode" }),
+        SpeakeasyMetadata({ data: "json, name=PayCode" }),
         __metadata("design:type", Array)
     ], PensionPensionQualifyingPayCodes.prototype, "payCode", void 0);
     return PensionPensionQualifyingPayCodes;
@@ -101,111 +101,111 @@ var PensionPension = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AECompatible" }),
+        SpeakeasyMetadata({ data: "json, name=AECompatible" }),
         __metadata("design:type", Boolean)
     ], PensionPension.prototype, "aeCompatible", void 0);
     __decorate([
-        Metadata({ data: "json, name=Code" }),
+        SpeakeasyMetadata({ data: "json, name=Code" }),
         __metadata("design:type", String)
     ], PensionPension.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=ContributionDeductionDay" }),
+        SpeakeasyMetadata({ data: "json, name=ContributionDeductionDay" }),
         __metadata("design:type", Number)
     ], PensionPension.prototype, "contributionDeductionDay", void 0);
     __decorate([
-        Metadata({ data: "json, name=EffectiveDate" }),
+        SpeakeasyMetadata({ data: "json, name=EffectiveDate" }),
         __metadata("design:type", Date)
     ], PensionPension.prototype, "effectiveDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=EmployeeContributionCash" }),
+        SpeakeasyMetadata({ data: "json, name=EmployeeContributionCash" }),
         __metadata("design:type", Number)
     ], PensionPension.prototype, "employeeContributionCash", void 0);
     __decorate([
-        Metadata({ data: "json, name=EmployeeContributionPercent" }),
+        SpeakeasyMetadata({ data: "json, name=EmployeeContributionPercent" }),
         __metadata("design:type", Number)
     ], PensionPension.prototype, "employeeContributionPercent", void 0);
     __decorate([
-        Metadata({ data: "json, name=EmployerContributionCash" }),
+        SpeakeasyMetadata({ data: "json, name=EmployerContributionCash" }),
         __metadata("design:type", Number)
     ], PensionPension.prototype, "employerContributionCash", void 0);
     __decorate([
-        Metadata({ data: "json, name=EmployerContributionPercent" }),
+        SpeakeasyMetadata({ data: "json, name=EmployerContributionPercent" }),
         __metadata("design:type", Number)
     ], PensionPension.prototype, "employerContributionPercent", void 0);
     __decorate([
-        Metadata({ data: "json, name=EmployerNiSaving" }),
+        SpeakeasyMetadata({ data: "json, name=EmployerNiSaving" }),
         __metadata("design:type", Boolean)
     ], PensionPension.prototype, "employerNiSaving", void 0);
     __decorate([
-        Metadata({ data: "json, name=EmployerNiSavingPercentage" }),
+        SpeakeasyMetadata({ data: "json, name=EmployerNiSavingPercentage" }),
         __metadata("design:type", Number)
     ], PensionPension.prototype, "employerNiSavingPercentage", void 0);
     __decorate([
-        Metadata({ data: "json, name=Group" }),
+        SpeakeasyMetadata({ data: "json, name=Group" }),
         __metadata("design:type", String)
     ], PensionPension.prototype, "group", void 0);
     __decorate([
-        Metadata({ data: "json, name=LowerThreshold" }),
+        SpeakeasyMetadata({ data: "json, name=LowerThreshold" }),
         __metadata("design:type", Number)
     ], PensionPension.prototype, "lowerThreshold", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetaData" }),
+        SpeakeasyMetadata({ data: "json, name=MetaData" }),
         __metadata("design:type", Map)
     ], PensionPension.prototype, "metaData", void 0);
     __decorate([
-        Metadata({ data: "json, name=PensionablePayCodes" }),
+        SpeakeasyMetadata({ data: "json, name=PensionablePayCodes" }),
         __metadata("design:type", PensionPensionPensionablePayCodes)
     ], PensionPension.prototype, "pensionablePayCodes", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProRataMethod" }),
+        SpeakeasyMetadata({ data: "json, name=ProRataMethod" }),
         __metadata("design:type", String)
     ], PensionPension.prototype, "proRataMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProviderEmployerRef" }),
+        SpeakeasyMetadata({ data: "json, name=ProviderEmployerRef" }),
         __metadata("design:type", String)
     ], PensionPension.prototype, "providerEmployerRef", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProviderName" }),
+        SpeakeasyMetadata({ data: "json, name=ProviderName" }),
         __metadata("design:type", String)
     ], PensionPension.prototype, "providerName", void 0);
     __decorate([
-        Metadata({ data: "json, name=QualifyingPayCodes" }),
+        SpeakeasyMetadata({ data: "json, name=QualifyingPayCodes" }),
         __metadata("design:type", PensionPensionQualifyingPayCodes)
     ], PensionPension.prototype, "qualifyingPayCodes", void 0);
     __decorate([
-        Metadata({ data: "json, name=RasRoundingOverride" }),
+        SpeakeasyMetadata({ data: "json, name=RasRoundingOverride" }),
         __metadata("design:type", String)
     ], PensionPension.prototype, "rasRoundingOverride", void 0);
     __decorate([
-        Metadata({ data: "json, name=Revision" }),
+        SpeakeasyMetadata({ data: "json, name=Revision" }),
         __metadata("design:type", Number)
     ], PensionPension.prototype, "revision", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoundingOption" }),
+        SpeakeasyMetadata({ data: "json, name=RoundingOption" }),
         __metadata("design:type", String)
     ], PensionPension.prototype, "roundingOption", void 0);
     __decorate([
-        Metadata({ data: "json, name=SalarySacrifice" }),
+        SpeakeasyMetadata({ data: "json, name=SalarySacrifice" }),
         __metadata("design:type", Boolean)
     ], PensionPension.prototype, "salarySacrifice", void 0);
     __decorate([
-        Metadata({ data: "json, name=SchemeName" }),
+        SpeakeasyMetadata({ data: "json, name=SchemeName" }),
         __metadata("design:type", String)
     ], PensionPension.prototype, "schemeName", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubGroup" }),
+        SpeakeasyMetadata({ data: "json, name=SubGroup" }),
         __metadata("design:type", String)
     ], PensionPension.prototype, "subGroup", void 0);
     __decorate([
-        Metadata({ data: "json, name=TaxationMethod" }),
+        SpeakeasyMetadata({ data: "json, name=TaxationMethod" }),
         __metadata("design:type", String)
     ], PensionPension.prototype, "taxationMethod", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpperThreshold" }),
+        SpeakeasyMetadata({ data: "json, name=UpperThreshold" }),
         __metadata("design:type", Number)
     ], PensionPension.prototype, "upperThreshold", void 0);
     __decorate([
-        Metadata({ data: "json, name=UseAEThresholds" }),
+        SpeakeasyMetadata({ data: "json, name=UseAEThresholds" }),
         __metadata("design:type", Boolean)
     ], PensionPension.prototype, "useAeThresholds", void 0);
     return PensionPension;
@@ -217,7 +217,7 @@ var Pension = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Pension" }),
+        SpeakeasyMetadata({ data: "json, name=Pension" }),
         __metadata("design:type", PensionPension)
     ], Pension.prototype, "pension", void 0);
     return Pension;

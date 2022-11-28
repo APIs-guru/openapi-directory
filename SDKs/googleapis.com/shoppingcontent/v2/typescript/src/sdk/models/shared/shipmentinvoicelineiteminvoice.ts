@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UnitInvoice } from "./unitinvoice";
 
 
+
 export class ShipmentInvoiceLineItemInvoice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lineItemId" })
+  @SpeakeasyMetadata({ data: "json, name=lineItemId" })
   lineItemId?: string;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=shipmentUnitIds" })
+  @SpeakeasyMetadata({ data: "json, name=shipmentUnitIds" })
   shipmentUnitIds?: string[];
 
-  @Metadata({ data: "json, name=unitInvoice" })
+  @SpeakeasyMetadata({ data: "json, name=unitInvoice" })
   unitInvoice?: UnitInvoice;
 }

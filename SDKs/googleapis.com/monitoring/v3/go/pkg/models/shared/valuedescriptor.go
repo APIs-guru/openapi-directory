@@ -21,6 +21,8 @@ const (
 	ValueDescriptorValueTypeEnumMoney                ValueDescriptorValueTypeEnum = "MONEY"
 )
 
+// ValueDescriptor
+// A descriptor for the value columns in a data point.
 type ValueDescriptor struct {
 	Key        *string                        `json:"key,omitempty"`
 	MetricKind *ValueDescriptorMetricKindEnum `json:"metricKind,omitempty"`

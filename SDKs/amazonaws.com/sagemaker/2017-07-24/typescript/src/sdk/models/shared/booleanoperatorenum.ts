@@ -1,6 +1,7 @@
 
 
+
 export enum BooleanOperatorEnum {
-    And = "And"
-,    Or = "Or"
+    And = "And",
+    Or = "Or"
 }

@@ -40,11 +40,8 @@ type GetServersIDActionsQueryParams struct {
 	Status *GetServersIDActionsStatusParameterStatusEnum `queryParam:"style=form,explode=true,name=status"`
 }
 
-type GetServersIDActionsRequest struct {
-	PathParams  GetServersIDActionsPathParams
-	QueryParams GetServersIDActionsQueryParams
-}
-
+// GetServersIDActionsActionsResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type GetServersIDActionsActionsResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -90,6 +87,11 @@ type GetServersIDActionsActionsResponseMeta struct {
 type GetServersIDActionsActionsResponse struct {
 	Actions []GetServersIDActionsActionsResponseAction `json:"actions"`
 	Meta    *GetServersIDActionsActionsResponseMeta    `json:"meta,omitempty"`
+}
+
+type GetServersIDActionsRequest struct {
+	PathParams  GetServersIDActionsPathParams
+	QueryParams GetServersIDActionsQueryParams
 }
 
 type GetServersIDActionsResponse struct {

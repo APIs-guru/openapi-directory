@@ -6,6 +6,8 @@ const (
 	InvoiceSubmissionModeEnumDirect InvoiceSubmissionModeEnum = "direct"
 )
 
+// InvoiceSubmission
+// The invoice you want Storecove to process, with some meta-data.
 type InvoiceSubmission struct {
 	Attachments        []Attachment               `json:"attachments,omitempty"`
 	CreatePrimaryImage *bool                      `json:"createPrimaryImage,omitempty"`

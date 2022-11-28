@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Specifies options for initializing Link for use with the Income (beta) product. This field is required if `income_verification` is included in the `products` array.
 **/

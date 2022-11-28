@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsAnalyticsExportsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ApigeeOrganizationsEnvironmentsAnalyticsExportsCreateQueryParams:
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsAnalyticsExportsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsAnalyticsExportsCreateRequest:
-    path_params: ApigeeOrganizationsEnvironmentsAnalyticsExportsCreatePathParams = field(default=None)
-    query_params: ApigeeOrganizationsEnvironmentsAnalyticsExportsCreateQueryParams = field(default=None)
+    path_params: ApigeeOrganizationsEnvironmentsAnalyticsExportsCreatePathParams = field()
+    query_params: ApigeeOrganizationsEnvironmentsAnalyticsExportsCreateQueryParams = field()
+    security: ApigeeOrganizationsEnvironmentsAnalyticsExportsCreateSecurity = field()
     request: Optional[shared.GoogleCloudApigeeV1ExportRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ApigeeOrganizationsEnvironmentsAnalyticsExportsCreateSecurity = field(default=None)
     
 
 @dataclass
 class ApigeeOrganizationsEnvironmentsAnalyticsExportsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_apigee_v1_export: Optional[shared.GoogleCloudApigeeV1Export] = field(default=None)
-    status_code: int = field(default=None)
     

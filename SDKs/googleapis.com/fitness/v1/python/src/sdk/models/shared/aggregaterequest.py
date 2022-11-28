@@ -1,11 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import aggregateby
-from . import bucketbyactivity
-from . import bucketbyactivity
-from . import bucketbysession
-from . import bucketbytime
+from sdk import utils
+from . import *
 
 class AggregateRequestFilteredDataQualityStandardEnum(str, Enum):
     DATA_QUALITY_UNKNOWN = "dataQualityUnknown"
@@ -23,12 +21,16 @@ class AggregateRequestFilteredDataQualityStandardEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AggregateRequest:
-    aggregate_by: Optional[List[aggregateby.AggregateBy]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'aggregateBy' }})
-    bucket_by_activity_segment: Optional[bucketbyactivity.BucketByActivity] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bucketByActivitySegment' }})
-    bucket_by_activity_type: Optional[bucketbyactivity.BucketByActivity] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bucketByActivityType' }})
-    bucket_by_session: Optional[bucketbysession.BucketBySession] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bucketBySession' }})
-    bucket_by_time: Optional[bucketbytime.BucketByTime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bucketByTime' }})
-    end_time_millis: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endTimeMillis' }})
-    filtered_data_quality_standard: Optional[List[AggregateRequestFilteredDataQualityStandardEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filteredDataQualityStandard' }})
-    start_time_millis: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTimeMillis' }})
+    r"""AggregateRequest
+    Next id: 10
+    """
+    
+    aggregate_by: Optional[List[AggregateBy]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('aggregateBy') }})
+    bucket_by_activity_segment: Optional[BucketByActivity] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bucketByActivitySegment') }})
+    bucket_by_activity_type: Optional[BucketByActivity] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bucketByActivityType') }})
+    bucket_by_session: Optional[BucketBySession] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bucketBySession') }})
+    bucket_by_time: Optional[BucketByTime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bucketByTime') }})
+    end_time_millis: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endTimeMillis') }})
+    filtered_data_quality_standard: Optional[List[AggregateRequestFilteredDataQualityStandardEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filteredDataQualityStandard') }})
+    start_time_millis: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTimeMillis') }})
     

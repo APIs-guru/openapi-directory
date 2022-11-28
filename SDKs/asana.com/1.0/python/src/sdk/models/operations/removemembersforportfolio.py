@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class RemoveMembersForPortfolioPathParams:
-    portfolio_gid: str = field(default=None, metadata={'path_param': { 'field_name': 'portfolio_gid', 'style': 'simple', 'explode': False }})
+    portfolio_gid: str = field(metadata={'path_param': { 'field_name': 'portfolio_gid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,26 +19,26 @@ class RemoveMembersForPortfolioQueryParams:
 @dataclass_json
 @dataclass
 class RemoveMembersForPortfolioRequestBody:
-    data: Optional[shared.RemoveMembersRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    
-
-@dataclass
-class RemoveMembersForPortfolioRequest:
-    path_params: RemoveMembersForPortfolioPathParams = field(default=None)
-    query_params: RemoveMembersForPortfolioQueryParams = field(default=None)
-    request: RemoveMembersForPortfolioRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    data: Optional[shared.RemoveMembersRequest] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
     
 
 @dataclass_json
 @dataclass
 class RemoveMembersForPortfolio200ApplicationJSON:
-    data: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    data: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    
+
+@dataclass
+class RemoveMembersForPortfolioRequest:
+    path_params: RemoveMembersForPortfolioPathParams = field()
+    query_params: RemoveMembersForPortfolioQueryParams = field()
+    request: RemoveMembersForPortfolioRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RemoveMembersForPortfolioResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     remove_members_for_portfolio_200_application_json_object: Optional[RemoveMembersForPortfolio200ApplicationJSON] = field(default=None)
     

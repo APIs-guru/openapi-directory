@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { AnthosVmMembershipState } from "./anthosvmmembershipstate";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppDevExperienceFeatureState } from "./appdevexperiencefeaturestate";
 import { ConfigManagementMembershipState } from "./configmanagementmembershipstate";
 import { IdentityServiceMembershipState } from "./identityservicemembershipstate";
@@ -41,35 +40,35 @@ var MembershipFeatureState = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=anthosvm" }),
-        __metadata("design:type", AnthosVmMembershipState)
-    ], MembershipFeatureState.prototype, "anthosvm", void 0);
-    __decorate([
-        Metadata({ data: "json, name=appdevexperience" }),
+        SpeakeasyMetadata({ data: "json, name=appdevexperience" }),
         __metadata("design:type", AppDevExperienceFeatureState)
     ], MembershipFeatureState.prototype, "appdevexperience", void 0);
     __decorate([
-        Metadata({ data: "json, name=configmanagement" }),
+        SpeakeasyMetadata({ data: "json, name=configmanagement" }),
         __metadata("design:type", ConfigManagementMembershipState)
     ], MembershipFeatureState.prototype, "configmanagement", void 0);
     __decorate([
-        Metadata({ data: "json, name=identityservice" }),
+        SpeakeasyMetadata({ data: "json, name=fleetobservability" }),
+        __metadata("design:type", Map)
+    ], MembershipFeatureState.prototype, "fleetobservability", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=identityservice" }),
         __metadata("design:type", IdentityServiceMembershipState)
     ], MembershipFeatureState.prototype, "identityservice", void 0);
     __decorate([
-        Metadata({ data: "json, name=metering" }),
+        SpeakeasyMetadata({ data: "json, name=metering" }),
         __metadata("design:type", MeteringMembershipState)
     ], MembershipFeatureState.prototype, "metering", void 0);
     __decorate([
-        Metadata({ data: "json, name=policycontroller" }),
+        SpeakeasyMetadata({ data: "json, name=policycontroller" }),
         __metadata("design:type", PolicyControllerMembershipState)
     ], MembershipFeatureState.prototype, "policycontroller", void 0);
     __decorate([
-        Metadata({ data: "json, name=servicemesh" }),
+        SpeakeasyMetadata({ data: "json, name=servicemesh" }),
         __metadata("design:type", ServiceMeshMembershipState)
     ], MembershipFeatureState.prototype, "servicemesh", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", FeatureState)
     ], MembershipFeatureState.prototype, "state", void 0);
     return MembershipFeatureState;

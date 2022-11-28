@@ -12,6 +12,8 @@ type EnterpriseAdminUpdateGlobalWebhookHeaders struct {
 	Accept string `header:"style=simple,explode=false,name=accept"`
 }
 
+// EnterpriseAdminUpdateGlobalWebhookRequestBodyConfig
+// Key/value pairs to provide settings for this webhook.
 type EnterpriseAdminUpdateGlobalWebhookRequestBodyConfig struct {
 	ContentType *string `json:"content_type,omitempty"`
 	InsecureSsl *string `json:"insecure_ssl,omitempty"`

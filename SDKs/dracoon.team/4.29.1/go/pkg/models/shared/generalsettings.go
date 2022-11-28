@@ -1,5 +1,7 @@
 package shared
 
+// GeneralSettings
+// General settings
 type GeneralSettings struct {
 	AuthTokenRestrictions          *AuthTokenRestrictions `json:"authTokenRestrictions,omitempty"`
 	CryptoEnabled                  *bool                  `json:"cryptoEnabled,omitempty"`

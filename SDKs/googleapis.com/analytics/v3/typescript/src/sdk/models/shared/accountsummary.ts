@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WebPropertySummary } from "./webpropertysummary";
+
 
 
 // AccountSummary
@@ -8,18 +8,18 @@ import { WebPropertySummary } from "./webpropertysummary";
  * JSON template for an Analytics AccountSummary. An AccountSummary is a lightweight tree comprised of properties/profiles.
 **/
 export class AccountSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=starred" })
+  @SpeakeasyMetadata({ data: "json, name=starred" })
   starred?: boolean;
 
-  @Metadata({ data: "json, name=webProperties", elemType: shared.WebPropertySummary })
+  @SpeakeasyMetadata({ data: "json, name=webProperties", elemType: WebPropertySummary })
   webProperties?: WebPropertySummary[];
 }

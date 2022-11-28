@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TimeSeriesFeedback
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about feedback submitted for an anomalous metric.
 **/
 export class TimeSeriesFeedback extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IsAnomaly" })
+  @SpeakeasyMetadata({ data: "json, name=IsAnomaly" })
   isAnomaly?: boolean;
 
-  @Metadata({ data: "json, name=TimeSeriesId" })
+  @SpeakeasyMetadata({ data: "json, name=TimeSeriesId" })
   timeSeriesId?: string;
 }

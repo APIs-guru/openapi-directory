@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ContainerServiceStateDetailCodeEnum(str, Enum):
     CREATING_SYSTEM_RESOURCES = "CREATING_SYSTEM_RESOURCES"

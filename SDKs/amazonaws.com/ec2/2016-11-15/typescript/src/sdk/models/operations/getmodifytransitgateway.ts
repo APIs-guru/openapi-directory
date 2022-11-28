@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum GetModifyTransitGatewayActionEnum {
     ModifyTransitGateway = "ModifyTransitGateway"
@@ -11,31 +12,31 @@ export enum GetModifyTransitGatewayActionEnum {
  * The transit gateway options.
 **/
 export class GetModifyTransitGatewayOptions extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=AddTransitGatewayCidrBlocks" })
+  @SpeakeasyMetadata({ data: "queryParam, name=AddTransitGatewayCidrBlocks" })
   addTransitGatewayCidrBlocks?: string[];
 
-  @Metadata({ data: "queryParam, name=AssociationDefaultRouteTableId" })
+  @SpeakeasyMetadata({ data: "queryParam, name=AssociationDefaultRouteTableId" })
   associationDefaultRouteTableId?: string;
 
-  @Metadata({ data: "queryParam, name=AutoAcceptSharedAttachments" })
+  @SpeakeasyMetadata({ data: "queryParam, name=AutoAcceptSharedAttachments" })
   autoAcceptSharedAttachments?: shared.AutoAcceptSharedAttachmentsValueEnum;
 
-  @Metadata({ data: "queryParam, name=DefaultRouteTableAssociation" })
+  @SpeakeasyMetadata({ data: "queryParam, name=DefaultRouteTableAssociation" })
   defaultRouteTableAssociation?: shared.DefaultRouteTableAssociationValueEnum;
 
-  @Metadata({ data: "queryParam, name=DefaultRouteTablePropagation" })
+  @SpeakeasyMetadata({ data: "queryParam, name=DefaultRouteTablePropagation" })
   defaultRouteTablePropagation?: shared.DefaultRouteTablePropagationValueEnum;
 
-  @Metadata({ data: "queryParam, name=DnsSupport" })
+  @SpeakeasyMetadata({ data: "queryParam, name=DnsSupport" })
   dnsSupport?: shared.DnsSupportValueEnum;
 
-  @Metadata({ data: "queryParam, name=PropagationDefaultRouteTableId" })
+  @SpeakeasyMetadata({ data: "queryParam, name=PropagationDefaultRouteTableId" })
   propagationDefaultRouteTableId?: string;
 
-  @Metadata({ data: "queryParam, name=RemoveTransitGatewayCidrBlocks" })
+  @SpeakeasyMetadata({ data: "queryParam, name=RemoveTransitGatewayCidrBlocks" })
   removeTransitGatewayCidrBlocks?: string[];
 
-  @Metadata({ data: "queryParam, name=VpnEcmpSupport" })
+  @SpeakeasyMetadata({ data: "queryParam, name=VpnEcmpSupport" })
   vpnEcmpSupport?: shared.VpnEcmpSupportValueEnum;
 }
 
@@ -45,66 +46,66 @@ export enum GetModifyTransitGatewayVersionEnum {
 
 
 export class GetModifyTransitGatewayQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetModifyTransitGatewayActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Description" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Description" })
   description?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Options" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Options" })
   options?: GetModifyTransitGatewayOptions;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=TransitGatewayId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TransitGatewayId" })
   transitGatewayId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetModifyTransitGatewayVersionEnum;
 }
 
 
 export class GetModifyTransitGatewayHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetModifyTransitGatewayRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetModifyTransitGatewayQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetModifyTransitGatewayHeaders;
 }
 
 
 export class GetModifyTransitGatewayResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

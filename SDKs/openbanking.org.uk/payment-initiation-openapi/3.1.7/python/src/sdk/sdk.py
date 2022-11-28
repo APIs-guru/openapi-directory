@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -12,35 +15,54 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def create_domestic_payment_consents(self, request: operations.CreateDomesticPaymentConsentsRequest) -> operations.CreateDomesticPaymentConsentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create Domestic Payment Consents
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/domestic-payment-consents"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -110,22 +132,22 @@ class SDK:
 
     
     def create_domestic_payments(self, request: operations.CreateDomesticPaymentsRequest) -> operations.CreateDomesticPaymentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create Domestic Payments
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/domestic-payments"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -195,22 +217,22 @@ class SDK:
 
     
     def create_domestic_scheduled_payment_consents(self, request: operations.CreateDomesticScheduledPaymentConsentsRequest) -> operations.CreateDomesticScheduledPaymentConsentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create Domestic Scheduled Payment Consents
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/domestic-scheduled-payment-consents"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -283,22 +305,22 @@ class SDK:
 
     
     def create_domestic_scheduled_payments(self, request: operations.CreateDomesticScheduledPaymentsRequest) -> operations.CreateDomesticScheduledPaymentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create Domestic Scheduled Payments
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/domestic-scheduled-payments"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -371,22 +393,22 @@ class SDK:
 
     
     def create_domestic_standing_order_consents(self, request: operations.CreateDomesticStandingOrderConsentsRequest) -> operations.CreateDomesticStandingOrderConsentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create Domestic Standing Order Consents
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/domestic-standing-order-consents"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -459,22 +481,22 @@ class SDK:
 
     
     def create_domestic_standing_orders(self, request: operations.CreateDomesticStandingOrdersRequest) -> operations.CreateDomesticStandingOrdersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create Domestic Standing Orders
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/domestic-standing-orders"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -547,22 +569,22 @@ class SDK:
 
     
     def create_file_payment_consents(self, request: operations.CreateFilePaymentConsentsRequest) -> operations.CreateFilePaymentConsentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create File Payment Consents
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/file-payment-consents"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -635,22 +657,22 @@ class SDK:
 
     
     def create_file_payment_consents_consent_id_file(self, request: operations.CreateFilePaymentConsentsConsentIDFileRequest) -> operations.CreateFilePaymentConsentsConsentIDFileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create File Payment Consents
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/file-payment-consents/{ConsentId}/file", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -715,22 +737,22 @@ class SDK:
 
     
     def create_file_payments(self, request: operations.CreateFilePaymentsRequest) -> operations.CreateFilePaymentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create File Payments
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/file-payments"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -803,22 +825,22 @@ class SDK:
 
     
     def create_international_payment_consents(self, request: operations.CreateInternationalPaymentConsentsRequest) -> operations.CreateInternationalPaymentConsentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create International Payment Consents
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/international-payment-consents"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -891,22 +913,22 @@ class SDK:
 
     
     def create_international_payments(self, request: operations.CreateInternationalPaymentsRequest) -> operations.CreateInternationalPaymentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create International Payments
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/international-payments"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -979,22 +1001,22 @@ class SDK:
 
     
     def create_international_scheduled_payment_consents(self, request: operations.CreateInternationalScheduledPaymentConsentsRequest) -> operations.CreateInternationalScheduledPaymentConsentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create International Scheduled Payment Consents
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/international-scheduled-payment-consents"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1067,22 +1089,22 @@ class SDK:
 
     
     def create_international_scheduled_payments(self, request: operations.CreateInternationalScheduledPaymentsRequest) -> operations.CreateInternationalScheduledPaymentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create International Scheduled Payments
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/international-scheduled-payments"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1155,22 +1177,22 @@ class SDK:
 
     
     def create_international_standing_order_consents(self, request: operations.CreateInternationalStandingOrderConsentsRequest) -> operations.CreateInternationalStandingOrderConsentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create International Standing Order Consents
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/international-standing-order-consents"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1243,22 +1265,22 @@ class SDK:
 
     
     def create_international_standing_orders(self, request: operations.CreateInternationalStandingOrdersRequest) -> operations.CreateInternationalStandingOrdersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create International Standing Orders
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/international-standing-orders"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1331,15 +1353,17 @@ class SDK:
 
     
     def get_domestic_payment_consents_consent_id(self, request: operations.GetDomesticPaymentConsentsConsentIDRequest) -> operations.GetDomesticPaymentConsentsConsentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Domestic Payment Consents
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domestic-payment-consents/{ConsentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1406,15 +1430,17 @@ class SDK:
 
     
     def get_domestic_payment_consents_consent_id_funds_confirmation(self, request: operations.GetDomesticPaymentConsentsConsentIDFundsConfirmationRequest) -> operations.GetDomesticPaymentConsentsConsentIDFundsConfirmationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Domestic Payment Consents Funds Confirmation
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domestic-payment-consents/{ConsentId}/funds-confirmation", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1481,15 +1507,17 @@ class SDK:
 
     
     def get_domestic_payments_domestic_payment_id(self, request: operations.GetDomesticPaymentsDomesticPaymentIDRequest) -> operations.GetDomesticPaymentsDomesticPaymentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Domestic Payments
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domestic-payments/{DomesticPaymentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1556,15 +1584,17 @@ class SDK:
 
     
     def get_domestic_payments_domestic_payment_id_payment_details(self, request: operations.GetDomesticPaymentsDomesticPaymentIDPaymentDetailsRequest) -> operations.GetDomesticPaymentsDomesticPaymentIDPaymentDetailsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Payment Details
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domestic-payments/{DomesticPaymentId}/payment-details", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1634,15 +1664,17 @@ class SDK:
 
     
     def get_domestic_scheduled_payment_consents_consent_id(self, request: operations.GetDomesticScheduledPaymentConsentsConsentIDRequest) -> operations.GetDomesticScheduledPaymentConsentsConsentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Domestic Scheduled Payment Consents
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domestic-scheduled-payment-consents/{ConsentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1712,15 +1744,17 @@ class SDK:
 
     
     def get_domestic_scheduled_payments_domestic_scheduled_payment_id(self, request: operations.GetDomesticScheduledPaymentsDomesticScheduledPaymentIDRequest) -> operations.GetDomesticScheduledPaymentsDomesticScheduledPaymentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Domestic Scheduled Payments
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domestic-scheduled-payments/{DomesticScheduledPaymentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1790,15 +1824,17 @@ class SDK:
 
     
     def get_domestic_scheduled_payments_domestic_scheduled_payment_id_payment_details(self, request: operations.GetDomesticScheduledPaymentsDomesticScheduledPaymentIDPaymentDetailsRequest) -> operations.GetDomesticScheduledPaymentsDomesticScheduledPaymentIDPaymentDetailsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Payment Details
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domestic-scheduled-payments/{DomesticScheduledPaymentId}/payment-details", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1868,15 +1904,17 @@ class SDK:
 
     
     def get_domestic_standing_order_consents_consent_id(self, request: operations.GetDomesticStandingOrderConsentsConsentIDRequest) -> operations.GetDomesticStandingOrderConsentsConsentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Domestic Standing Order Consents
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domestic-standing-order-consents/{ConsentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1946,15 +1984,17 @@ class SDK:
 
     
     def get_domestic_standing_orders_domestic_standing_order_id(self, request: operations.GetDomesticStandingOrdersDomesticStandingOrderIDRequest) -> operations.GetDomesticStandingOrdersDomesticStandingOrderIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Domestic Standing Orders
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domestic-standing-orders/{DomesticStandingOrderId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2024,15 +2064,17 @@ class SDK:
 
     
     def get_domestic_standing_orders_domestic_standing_order_id_payment_details(self, request: operations.GetDomesticStandingOrdersDomesticStandingOrderIDPaymentDetailsRequest) -> operations.GetDomesticStandingOrdersDomesticStandingOrderIDPaymentDetailsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Payment Details
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/domestic-standing-orders/{DomesticStandingOrderId}/payment-details", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2102,15 +2144,17 @@ class SDK:
 
     
     def get_file_payment_consents_consent_id(self, request: operations.GetFilePaymentConsentsConsentIDRequest) -> operations.GetFilePaymentConsentsConsentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get File Payment Consents
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/file-payment-consents/{ConsentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2180,15 +2224,17 @@ class SDK:
 
     
     def get_file_payment_consents_consent_id_file(self, request: operations.GetFilePaymentConsentsConsentIDFileRequest) -> operations.GetFilePaymentConsentsConsentIDFileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get File Payment Consents
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/file-payment-consents/{ConsentId}/file", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2258,15 +2304,17 @@ class SDK:
 
     
     def get_file_payments_file_payment_id(self, request: operations.GetFilePaymentsFilePaymentIDRequest) -> operations.GetFilePaymentsFilePaymentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get File Payments
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/file-payments/{FilePaymentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2336,15 +2384,17 @@ class SDK:
 
     
     def get_file_payments_file_payment_id_payment_details(self, request: operations.GetFilePaymentsFilePaymentIDPaymentDetailsRequest) -> operations.GetFilePaymentsFilePaymentIDPaymentDetailsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Payment Details
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/file-payments/{FilePaymentId}/payment-details", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2414,15 +2464,17 @@ class SDK:
 
     
     def get_file_payments_file_payment_id_report_file(self, request: operations.GetFilePaymentsFilePaymentIDReportFileRequest) -> operations.GetFilePaymentsFilePaymentIDReportFileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get File Payments
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/file-payments/{FilePaymentId}/report-file", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2492,15 +2544,17 @@ class SDK:
 
     
     def get_international_payment_consents_consent_id(self, request: operations.GetInternationalPaymentConsentsConsentIDRequest) -> operations.GetInternationalPaymentConsentsConsentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get International Payment Consents
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/international-payment-consents/{ConsentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2570,15 +2624,17 @@ class SDK:
 
     
     def get_international_payment_consents_consent_id_funds_confirmation(self, request: operations.GetInternationalPaymentConsentsConsentIDFundsConfirmationRequest) -> operations.GetInternationalPaymentConsentsConsentIDFundsConfirmationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get International Payment Consents Funds Confirmation
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/international-payment-consents/{ConsentId}/funds-confirmation", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2648,15 +2704,17 @@ class SDK:
 
     
     def get_international_payments_international_payment_id(self, request: operations.GetInternationalPaymentsInternationalPaymentIDRequest) -> operations.GetInternationalPaymentsInternationalPaymentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get International Payments
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/international-payments/{InternationalPaymentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2726,15 +2784,17 @@ class SDK:
 
     
     def get_international_payments_international_payment_id_payment_details(self, request: operations.GetInternationalPaymentsInternationalPaymentIDPaymentDetailsRequest) -> operations.GetInternationalPaymentsInternationalPaymentIDPaymentDetailsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Payment Details
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/international-payments/{InternationalPaymentId}/payment-details", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2804,15 +2864,17 @@ class SDK:
 
     
     def get_international_scheduled_payment_consents_consent_id(self, request: operations.GetInternationalScheduledPaymentConsentsConsentIDRequest) -> operations.GetInternationalScheduledPaymentConsentsConsentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get International Scheduled Payment Consents
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/international-scheduled-payment-consents/{ConsentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2882,15 +2944,17 @@ class SDK:
 
     
     def get_international_scheduled_payment_consents_consent_id_funds_confirmation(self, request: operations.GetInternationalScheduledPaymentConsentsConsentIDFundsConfirmationRequest) -> operations.GetInternationalScheduledPaymentConsentsConsentIDFundsConfirmationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get International Scheduled Payment Consents Funds Confirmation
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/international-scheduled-payment-consents/{ConsentId}/funds-confirmation", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2960,15 +3024,17 @@ class SDK:
 
     
     def get_international_scheduled_payments_international_scheduled_payment_id(self, request: operations.GetInternationalScheduledPaymentsInternationalScheduledPaymentIDRequest) -> operations.GetInternationalScheduledPaymentsInternationalScheduledPaymentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get International Scheduled Payments
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/international-scheduled-payments/{InternationalScheduledPaymentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3038,15 +3104,17 @@ class SDK:
 
     
     def get_international_scheduled_payments_international_scheduled_payment_id_payment_details(self, request: operations.GetInternationalScheduledPaymentsInternationalScheduledPaymentIDPaymentDetailsRequest) -> operations.GetInternationalScheduledPaymentsInternationalScheduledPaymentIDPaymentDetailsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Payment Details
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/international-scheduled-payments/{InternationalScheduledPaymentId}/payment-details", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3116,15 +3184,17 @@ class SDK:
 
     
     def get_international_standing_order_consents_consent_id(self, request: operations.GetInternationalStandingOrderConsentsConsentIDRequest) -> operations.GetInternationalStandingOrderConsentsConsentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get International Standing Order Consents
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/international-standing-order-consents/{ConsentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3194,15 +3264,17 @@ class SDK:
 
     
     def get_international_standing_orders_international_standing_order_payment_id(self, request: operations.GetInternationalStandingOrdersInternationalStandingOrderPaymentIDRequest) -> operations.GetInternationalStandingOrdersInternationalStandingOrderPaymentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get International Standing Orders
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/international-standing-orders/{InternationalStandingOrderPaymentId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3272,15 +3344,17 @@ class SDK:
 
     
     def get_international_standing_orders_international_standing_order_payment_id_payment_details(self, request: operations.GetInternationalStandingOrdersInternationalStandingOrderPaymentIDPaymentDetailsRequest) -> operations.GetInternationalStandingOrdersInternationalStandingOrderPaymentIDPaymentDetailsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Payment Details
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/international-standing-orders/{InternationalStandingOrderPaymentId}/payment-details", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 

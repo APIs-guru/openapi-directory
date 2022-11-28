@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetRemoveOntologyTagFormatEnum;
 (function (GetRemoveOntologyTagFormatEnum) {
     GetRemoveOntologyTagFormatEnum["Json"] = "json";
@@ -38,23 +38,23 @@ var GetRemoveOntologyTagQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=auth" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=auth" }),
         __metadata("design:type", String)
     ], GetRemoveOntologyTagQueryParams.prototype, "auth", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetRemoveOntologyTagQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pwId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pwId" }),
         __metadata("design:type", String)
     ], GetRemoveOntologyTagQueryParams.prototype, "pwId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=termId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=termId" }),
         __metadata("design:type", String)
     ], GetRemoveOntologyTagQueryParams.prototype, "termId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=user" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=user" }),
         __metadata("design:type", String)
     ], GetRemoveOntologyTagQueryParams.prototype, "user", void 0);
     return GetRemoveOntologyTagQueryParams;
@@ -66,7 +66,7 @@ var GetRemoveOntologyTagRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRemoveOntologyTagQueryParams)
     ], GetRemoveOntologyTagRequest.prototype, "queryParams", void 0);
     return GetRemoveOntologyTagRequest;
@@ -78,11 +78,11 @@ var GetRemoveOntologyTagResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetRemoveOntologyTagResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetRemoveOntologyTagResponse.prototype, "statusCode", void 0);
     return GetRemoveOntologyTagResponse;

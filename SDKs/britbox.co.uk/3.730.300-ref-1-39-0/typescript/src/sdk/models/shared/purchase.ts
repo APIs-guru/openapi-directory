@@ -1,30 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ItemPurchase } from "./itempurchase";
 import { PlanPurchase } from "./planpurchase";
 
 
+
 export class Purchase extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizationDate" })
+  @SpeakeasyMetadata({ data: "json, name=authorizationDate" })
   authorizationDate?: Date;
 
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate: Date;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=item" })
+  @SpeakeasyMetadata({ data: "json, name=item" })
   item?: ItemPurchase;
 
-  @Metadata({ data: "json, name=paymentMethodId" })
+  @SpeakeasyMetadata({ data: "json, name=paymentMethodId" })
   paymentMethodId?: string;
 
-  @Metadata({ data: "json, name=plan" })
+  @SpeakeasyMetadata({ data: "json, name=plan" })
   plan?: PlanPurchase;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 }

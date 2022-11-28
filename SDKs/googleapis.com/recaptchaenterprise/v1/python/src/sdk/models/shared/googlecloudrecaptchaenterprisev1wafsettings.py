@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudRecaptchaenterpriseV1WafSettingsWafFeatureEnum(str, Enum):
     WAF_FEATURE_UNSPECIFIED = "WAF_FEATURE_UNSPECIFIED"
@@ -16,6 +18,10 @@ class GoogleCloudRecaptchaenterpriseV1WafSettingsWafServiceEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudRecaptchaenterpriseV1WafSettings:
-    waf_feature: Optional[GoogleCloudRecaptchaenterpriseV1WafSettingsWafFeatureEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wafFeature' }})
-    waf_service: Optional[GoogleCloudRecaptchaenterpriseV1WafSettingsWafServiceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wafService' }})
+    r"""GoogleCloudRecaptchaenterpriseV1WafSettings
+    Settings specific to keys that can be used for WAF (Web Application Firewall).
+    """
+    
+    waf_feature: Optional[GoogleCloudRecaptchaenterpriseV1WafSettingsWafFeatureEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('wafFeature') }})
+    waf_service: Optional[GoogleCloudRecaptchaenterpriseV1WafSettingsWafServiceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('wafService') }})
     

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import builtinvariable
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateBuiltInVariableResponse:
-    built_in_variable: Optional[List[builtinvariable.BuiltInVariable]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'builtInVariable' }})
+    built_in_variable: Optional[List[BuiltInVariable]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('builtInVariable') }})
     

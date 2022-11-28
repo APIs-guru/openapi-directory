@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PubsubDestination } from "./pubsubdestination";
+
 
 
 // FeedOutputConfig
@@ -7,6 +8,6 @@ import { PubsubDestination } from "./pubsubdestination";
  * Output configuration for asset feed destination.
 **/
 export class FeedOutputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pubsubDestination" })
+  @SpeakeasyMetadata({ data: "json, name=pubsubDestination" })
   pubsubDestination?: PubsubDestination;
 }

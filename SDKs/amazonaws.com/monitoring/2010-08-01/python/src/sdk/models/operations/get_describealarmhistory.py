@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetDescribeAlarmHistoryActionEnum(str, Enum):
@@ -23,7 +24,8 @@ class GetDescribeAlarmHistoryVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeAlarmHistoryQueryParams:
-    action: GetDescribeAlarmHistoryActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeAlarmHistoryActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeAlarmHistoryVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     alarm_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'AlarmName', 'style': 'form', 'explode': True }})
     alarm_types: Optional[List[shared.AlarmTypeEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'AlarmTypes', 'style': 'form', 'explode': True }})
     end_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'EndDate', 'style': 'form', 'explode': True }})
@@ -32,7 +34,6 @@ class GetDescribeAlarmHistoryQueryParams:
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
     scan_by: Optional[GetDescribeAlarmHistoryScanByEnum] = field(default=None, metadata={'query_param': { 'field_name': 'ScanBy', 'style': 'form', 'explode': True }})
     start_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'StartDate', 'style': 'form', 'explode': True }})
-    version: GetDescribeAlarmHistoryVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -48,13 +49,13 @@ class GetDescribeAlarmHistoryHeaders:
 
 @dataclass
 class GetDescribeAlarmHistoryRequest:
-    query_params: GetDescribeAlarmHistoryQueryParams = field(default=None)
-    headers: GetDescribeAlarmHistoryHeaders = field(default=None)
+    headers: GetDescribeAlarmHistoryHeaders = field()
+    query_params: GetDescribeAlarmHistoryQueryParams = field()
     
 
 @dataclass
 class GetDescribeAlarmHistoryResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

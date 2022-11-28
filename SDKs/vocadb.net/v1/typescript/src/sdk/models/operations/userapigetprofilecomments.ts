@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UserApiGetProfileCommentsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class UserApiGetProfileCommentsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=getTotalCount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=getTotalCount" })
   getTotalCount?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" })
   start?: number;
 }
 
 
 export class UserApiGetProfileCommentsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UserApiGetProfileCommentsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UserApiGetProfileCommentsQueryParams;
 }
 
 
 export class UserApiGetProfileCommentsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   partialFindResultCommentForApiContract?: shared.PartialFindResultCommentForApiContract;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

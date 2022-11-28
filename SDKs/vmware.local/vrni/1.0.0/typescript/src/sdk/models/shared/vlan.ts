@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Vlan extends SpeakeasyBase {
-  @Metadata({ data: "json, name=begin" })
+  @SpeakeasyMetadata({ data: "json, name=begin" })
   begin?: number;
 
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end?: number;
 }

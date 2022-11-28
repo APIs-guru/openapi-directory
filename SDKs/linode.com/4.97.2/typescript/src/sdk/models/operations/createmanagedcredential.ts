@@ -1,71 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class CreateManagedCredentialRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
-  id?: number;
 
-  @Metadata({ data: "json, name=label" })
+export class CreateManagedCredentialRequestBodyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 
-  @Metadata({ data: "json, name=last_decrypted" })
-  lastDecrypted?: Date;
-
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }
 
 
-export class CreateManagedCredentialSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class CreateManagedCredentialSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class CreateManagedCredentialSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: CreateManagedCredentialSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: CreateManagedCredentialSecurityOption2;
-}
-
-
-export class CreateManagedCredentialRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: CreateManagedCredentialRequestBody;
-
-  @Metadata()
-  security: CreateManagedCredentialSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class CreateManagedCredentialDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class CreateManagedCredentialRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: CreateManagedCredentialRequestBodyInput;
+
+  @SpeakeasyMetadata()
+  security: CreateManagedCredentialSecurity;
+}
+
+
 export class CreateManagedCredentialResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   managedCredential?: shared.ManagedCredential;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createManagedCredentialDefaultApplicationJsonObject?: CreateManagedCredentialDefaultApplicationJson;
 }

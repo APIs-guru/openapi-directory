@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
 class GetListingSetPathParams:
-    promotion_id: str = field(default=None, metadata={'path_param': { 'field_name': 'promotion_id', 'style': 'simple', 'explode': False }})
+    promotion_id: str = field(metadata={'path_param': { 'field_name': 'promotion_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,18 +19,18 @@ class GetListingSetQueryParams:
 
 @dataclass
 class GetListingSetSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetListingSetRequest:
-    path_params: GetListingSetPathParams = field(default=None)
-    query_params: GetListingSetQueryParams = field(default=None)
-    security: GetListingSetSecurity = field(default=None)
+    path_params: GetListingSetPathParams = field()
+    query_params: GetListingSetQueryParams = field()
+    security: GetListingSetSecurity = field()
     
 
 @dataclass
 class GetListingSetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

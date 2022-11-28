@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://apisetu.gov.in/newindia/v3",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// Cripc - Insurance Policy - Car
+// API to verify Insurance Policy - Car.
 func (s *SDK) Cripc(ctx context.Context, request operations.CripcRequest) (*operations.CripcResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/cripc/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -66,7 +89,7 @@ func (s *SDK) Cripc(ctx context.Context, request operations.CripcRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -157,8 +180,10 @@ func (s *SDK) Cripc(ctx context.Context, request operations.CripcRequest) (*oper
 	return res, nil
 }
 
+// Cvipc - Insurance Policy - Commercial Vehicle
+// API to verify Insurance Policy - Commercial Vehicle.
 func (s *SDK) Cvipc(ctx context.Context, request operations.CvipcRequest) (*operations.CvipcResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/cvipc/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -173,7 +198,7 @@ func (s *SDK) Cvipc(ctx context.Context, request operations.CvipcRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -264,8 +289,10 @@ func (s *SDK) Cvipc(ctx context.Context, request operations.CvipcRequest) (*oper
 	return res, nil
 }
 
+// Egipc - Insurance Policy - Engineering
+// API to verify Insurance Policy - Engineering.
 func (s *SDK) Egipc(ctx context.Context, request operations.EgipcRequest) (*operations.EgipcResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/egipc/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -280,7 +307,7 @@ func (s *SDK) Egipc(ctx context.Context, request operations.EgipcRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -371,8 +398,10 @@ func (s *SDK) Egipc(ctx context.Context, request operations.EgipcRequest) (*oper
 	return res, nil
 }
 
+// Hlipc - Insurance Policy - Health
+// API to verify Insurance Policy - Health.
 func (s *SDK) Hlipc(ctx context.Context, request operations.HlipcRequest) (*operations.HlipcResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/hlipc/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -387,7 +416,7 @@ func (s *SDK) Hlipc(ctx context.Context, request operations.HlipcRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -478,8 +507,10 @@ func (s *SDK) Hlipc(ctx context.Context, request operations.HlipcRequest) (*oper
 	return res, nil
 }
 
+// Miipc - Insurance Policy - Miscellaneous
+// API to verify Insurance Policy - Miscellaneous.
 func (s *SDK) Miipc(ctx context.Context, request operations.MiipcRequest) (*operations.MiipcResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/miipc/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -494,7 +525,7 @@ func (s *SDK) Miipc(ctx context.Context, request operations.MiipcRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -585,8 +616,10 @@ func (s *SDK) Miipc(ctx context.Context, request operations.MiipcRequest) (*oper
 	return res, nil
 }
 
+// Tripc - Insurance Policy - Travel
+// API to verify Insurance Policy - Travel.
 func (s *SDK) Tripc(ctx context.Context, request operations.TripcRequest) (*operations.TripcResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tripc/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -601,7 +634,7 @@ func (s *SDK) Tripc(ctx context.Context, request operations.TripcRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -692,8 +725,10 @@ func (s *SDK) Tripc(ctx context.Context, request operations.TripcRequest) (*oper
 	return res, nil
 }
 
+// Twipc - Insurance Policy - Two Wheeler
+// API to verify Insurance Policy - Two Wheeler.
 func (s *SDK) Twipc(ctx context.Context, request operations.TwipcRequest) (*operations.TwipcResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/twipc/certificate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -708,7 +743,7 @@ func (s *SDK) Twipc(ctx context.Context, request operations.TwipcRequest) (*oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

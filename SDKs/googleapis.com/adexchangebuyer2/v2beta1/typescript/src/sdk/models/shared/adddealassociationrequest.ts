@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreativeDealAssociation } from "./creativedealassociation";
+
 
 
 // AddDealAssociationRequest
@@ -7,6 +8,6 @@ import { CreativeDealAssociation } from "./creativedealassociation";
  * A request for associating a deal and a creative.
 **/
 export class AddDealAssociationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=association" })
+  @SpeakeasyMetadata({ data: "json, name=association" })
   association?: CreativeDealAssociation;
 }

@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ContentSearchContentWithTextPathParams = /** @class */ (function (_super) {
     __extends(ContentSearchContentWithTextPathParams, _super);
     function ContentSearchContentWithTextPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=locale" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=locale" }),
         __metadata("design:type", String)
     ], ContentSearchContentWithTextPathParams.prototype, "locale", void 0);
     return ContentSearchContentWithTextPathParams;
@@ -41,27 +41,27 @@ var ContentSearchContentWithTextQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ctype" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ctype" }),
         __metadata("design:type", String)
     ], ContentSearchContentWithTextQueryParams.prototype, "ctype", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=currentpage" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currentpage" }),
         __metadata("design:type", Number)
     ], ContentSearchContentWithTextQueryParams.prototype, "currentpage", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=head" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=head" }),
         __metadata("design:type", Boolean)
     ], ContentSearchContentWithTextQueryParams.prototype, "head", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=searchtext" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchtext" }),
         __metadata("design:type", String)
     ], ContentSearchContentWithTextQueryParams.prototype, "searchtext", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=source" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=source" }),
         __metadata("design:type", String)
     ], ContentSearchContentWithTextQueryParams.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=tag" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tag" }),
         __metadata("design:type", String)
     ], ContentSearchContentWithTextQueryParams.prototype, "tag", void 0);
     return ContentSearchContentWithTextQueryParams;
@@ -73,11 +73,11 @@ var ContentSearchContentWithTextRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ContentSearchContentWithTextPathParams)
     ], ContentSearchContentWithTextRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ContentSearchContentWithTextQueryParams)
     ], ContentSearchContentWithTextRequest.prototype, "queryParams", void 0);
     return ContentSearchContentWithTextRequest;
@@ -89,15 +89,15 @@ var ContentSearchContentWithTextResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ContentSearchContentWithTextResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ContentSearchContentWithTextResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ContentSearchContentWithTextResponse.prototype, "statusCode", void 0);
     return ContentSearchContentWithTextResponse;

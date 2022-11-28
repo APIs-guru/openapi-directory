@@ -12,11 +12,6 @@ type DeleteDashboardSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type DeleteDashboardRequest struct {
-	QueryParams DeleteDashboardQueryParams
-	Security    DeleteDashboardSecurity
-}
-
 type DeleteDashboard200ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -39,6 +34,11 @@ type DeleteDashboard422ApplicationJSON struct {
 
 type DeleteDashboard500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type DeleteDashboardRequest struct {
+	QueryParams DeleteDashboardQueryParams
+	Security    DeleteDashboardSecurity
 }
 
 type DeleteDashboardResponse struct {

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkflowGraph } from "./workflowgraph";
 import { StartingEventBatchCondition } from "./startingeventbatchcondition";
 import { WorkflowRunStatistics } from "./workflowrunstatistics";
 import { WorkflowRunStatusEnum } from "./workflowrunstatusenum";
+
 
 
 // WorkflowRun
@@ -10,36 +11,36 @@ import { WorkflowRunStatusEnum } from "./workflowrunstatusenum";
  * A workflow run is an execution of a workflow providing all the runtime information.
 **/
 export class WorkflowRun extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CompletedOn" })
+  @SpeakeasyMetadata({ data: "json, name=CompletedOn" })
   completedOn?: Date;
 
-  @Metadata({ data: "json, name=ErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=Graph" })
+  @SpeakeasyMetadata({ data: "json, name=Graph" })
   graph?: WorkflowGraph;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=PreviousRunId" })
+  @SpeakeasyMetadata({ data: "json, name=PreviousRunId" })
   previousRunId?: string;
 
-  @Metadata({ data: "json, name=StartedOn" })
+  @SpeakeasyMetadata({ data: "json, name=StartedOn" })
   startedOn?: Date;
 
-  @Metadata({ data: "json, name=StartingEventBatchCondition" })
+  @SpeakeasyMetadata({ data: "json, name=StartingEventBatchCondition" })
   startingEventBatchCondition?: StartingEventBatchCondition;
 
-  @Metadata({ data: "json, name=Statistics" })
+  @SpeakeasyMetadata({ data: "json, name=Statistics" })
   statistics?: WorkflowRunStatistics;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: WorkflowRunStatusEnum;
 
-  @Metadata({ data: "json, name=WorkflowRunId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkflowRunId" })
   workflowRunId?: string;
 
-  @Metadata({ data: "json, name=WorkflowRunProperties" })
+  @SpeakeasyMetadata({ data: "json, name=WorkflowRunProperties" })
   workflowRunProperties?: Map<string, string>;
 }

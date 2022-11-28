@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostPortfolioAnalysisTrackingErrorRequestBodyPortfolios extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portfolioReturns" })
+  @SpeakeasyMetadata({ data: "json, name=portfolioReturns" })
   portfolioReturns: number[];
 }
 
 
 export class PostPortfolioAnalysisTrackingErrorRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=benchmarkReturns" })
+  @SpeakeasyMetadata({ data: "json, name=benchmarkReturns" })
   benchmarkReturns: number[];
 
-  @Metadata({ data: "json, name=portfolios", elemType: operations.PostPortfolioAnalysisTrackingErrorRequestBodyPortfolios })
+  @SpeakeasyMetadata({ data: "json, name=portfolios", elemType: PostPortfolioAnalysisTrackingErrorRequestBodyPortfolios })
   portfolios: PostPortfolioAnalysisTrackingErrorRequestBodyPortfolios[];
 }
 
 
-export class PostPortfolioAnalysisTrackingErrorRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PostPortfolioAnalysisTrackingErrorRequestBody;
-}
-
-
 export class PostPortfolioAnalysisTrackingError200ApplicationJsonPortfolios extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portfolioTrackingError" })
+  @SpeakeasyMetadata({ data: "json, name=portfolioTrackingError" })
   portfolioTrackingError: number;
 }
 
 
 export class PostPortfolioAnalysisTrackingError200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portfolios", elemType: operations.PostPortfolioAnalysisTrackingError200ApplicationJsonPortfolios })
+  @SpeakeasyMetadata({ data: "json, name=portfolios", elemType: PostPortfolioAnalysisTrackingError200ApplicationJsonPortfolios })
   portfolios: PostPortfolioAnalysisTrackingError200ApplicationJsonPortfolios[];
 }
 
 
+export class PostPortfolioAnalysisTrackingErrorRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PostPortfolioAnalysisTrackingErrorRequestBody;
+}
+
+
 export class PostPortfolioAnalysisTrackingErrorResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postPortfolioAnalysisTrackingError200ApplicationJsonObject?: PostPortfolioAnalysisTrackingError200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

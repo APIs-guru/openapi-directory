@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2Finding } from "./googleprivacydlpv2finding";
+
 
 
 // GooglePrivacyDlpV2InspectResult
@@ -8,9 +8,9 @@ import { GooglePrivacyDlpV2Finding } from "./googleprivacydlpv2finding";
  * All the findings for a single scanned item.
 **/
 export class GooglePrivacyDlpV2InspectResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=findings", elemType: shared.GooglePrivacyDlpV2Finding })
+  @SpeakeasyMetadata({ data: "json, name=findings", elemType: GooglePrivacyDlpV2Finding })
   findings?: GooglePrivacyDlpV2Finding[];
 
-  @Metadata({ data: "json, name=findingsTruncated" })
+  @SpeakeasyMetadata({ data: "json, name=findingsTruncated" })
   findingsTruncated?: boolean;
 }

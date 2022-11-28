@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import beacon
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListBeaconsResponse:
-    beacons: Optional[List[beacon.Beacon]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'beacons' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    total_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'totalCount' }})
+    r"""ListBeaconsResponse
+    Response that contains list beacon results and pagination help.
+    """
+    
+    beacons: Optional[List[Beacon]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('beacons') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    total_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('totalCount') }})
     

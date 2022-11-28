@@ -17,12 +17,6 @@ type CopyTemplateSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type CopyTemplateRequest struct {
-	PathParams CopyTemplatePathParams
-	Request    *CopyTemplateCopyTemplateData `request:"mediaType=application/json"`
-	Security   CopyTemplateSecurity
-}
-
 type CopyTemplateTemplateExpirationIntervalEnum string
 
 const (
@@ -52,6 +46,12 @@ type CopyTemplateTemplate struct {
 	SlackWebhookURL           string                                      `json:"slack_webhook_url"`
 	TemplateType              string                                      `json:"template_type"`
 	WebhookURL                string                                      `json:"webhook_url"`
+}
+
+type CopyTemplateRequest struct {
+	PathParams CopyTemplatePathParams
+	Request    *CopyTemplateCopyTemplateData `request:"mediaType=application/json"`
+	Security   CopyTemplateSecurity
 }
 
 type CopyTemplateResponse struct {

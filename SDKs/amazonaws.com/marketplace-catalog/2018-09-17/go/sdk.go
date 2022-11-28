@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://catalog.marketplace.{region}.amazonaws.com",
 	"https://catalog.marketplace.{region}.amazonaws.com",
 	"http://catalog.marketplace.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/marketplace/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CancelChangeSet - Used to cancel an open change request. Must be sent before the status of the request changes to <code>APPLYING</code>, the final stage of completing your change request. You can describe a change during the 60-day request history retention period for API calls.
 func (s *SDK) CancelChangeSet(ctx context.Context, request operations.CancelChangeSetRequest) (*operations.CancelChangeSetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/CancelChangeSet#catalog&changeSetId"
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -73,7 +100,7 @@ func (s *SDK) CancelChangeSet(ctx context.Context, request operations.CancelChan
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -163,8 +190,9 @@ func (s *SDK) CancelChangeSet(ctx context.Context, request operations.CancelChan
 	return res, nil
 }
 
+// DescribeChangeSet - Provides information about a given change set.
 func (s *SDK) DescribeChangeSet(ctx context.Context, request operations.DescribeChangeSetRequest) (*operations.DescribeChangeSetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DescribeChangeSet#catalog&changeSetId"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -176,7 +204,7 @@ func (s *SDK) DescribeChangeSet(ctx context.Context, request operations.Describe
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -256,8 +284,9 @@ func (s *SDK) DescribeChangeSet(ctx context.Context, request operations.Describe
 	return res, nil
 }
 
+// DescribeEntity - Returns the metadata and content of the entity.
 func (s *SDK) DescribeEntity(ctx context.Context, request operations.DescribeEntityRequest) (*operations.DescribeEntityResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/DescribeEntity#catalog&entityId"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -269,7 +298,7 @@ func (s *SDK) DescribeEntity(ctx context.Context, request operations.DescribeEnt
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -359,8 +388,9 @@ func (s *SDK) DescribeEntity(ctx context.Context, request operations.DescribeEnt
 	return res, nil
 }
 
+// ListChangeSets - <p>Returns the list of change sets owned by the account being used to make the call. You can filter this list by providing any combination of <code>entityId</code>, <code>ChangeSetName</code>, and status. If you provide more than one filter, the API operation applies a logical AND between the filters.</p> <p>You can describe a change during the 60-day request history retention period for API calls.</p>
 func (s *SDK) ListChangeSets(ctx context.Context, request operations.ListChangeSetsRequest) (*operations.ListChangeSetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ListChangeSets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -382,7 +412,7 @@ func (s *SDK) ListChangeSets(ctx context.Context, request operations.ListChangeS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -452,8 +482,9 @@ func (s *SDK) ListChangeSets(ctx context.Context, request operations.ListChangeS
 	return res, nil
 }
 
+// ListEntities - Provides the list of entities of a given type.
 func (s *SDK) ListEntities(ctx context.Context, request operations.ListEntitiesRequest) (*operations.ListEntitiesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/ListEntities"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -475,7 +506,7 @@ func (s *SDK) ListEntities(ctx context.Context, request operations.ListEntitiesR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -555,8 +586,9 @@ func (s *SDK) ListEntities(ctx context.Context, request operations.ListEntitiesR
 	return res, nil
 }
 
+// StartChangeSet - <p>This operation allows you to request changes for your entities. Within a single ChangeSet, you cannot start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If you try to start a ChangeSet containing a change against an entity that is already locked, you will receive a <code>ResourceInUseException</code>.</p> <p>For example, you cannot start the ChangeSet described in the <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples">example</a> later in this topic, because it contains two changes to execute the same change type (<code>AddRevisions</code>) against the same entity (<code>entity-id@1)</code>.</p> <p>For more information about working with change sets, see <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets"> Working with change sets</a>.</p>
 func (s *SDK) StartChangeSet(ctx context.Context, request operations.StartChangeSetRequest) (*operations.StartChangeSetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/StartChangeSet"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -576,7 +608,7 @@ func (s *SDK) StartChangeSet(ctx context.Context, request operations.StartChange
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

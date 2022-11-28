@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAnalyticsAdminV1alphaAccessMetric
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The quantitative measurements of a report. For example, the metric `accessCount` is the total number of data access records.
 **/
 export class GoogleAnalyticsAdminV1alphaAccessMetric extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metricName" })
+  @SpeakeasyMetadata({ data: "json, name=metricName" })
   metricName?: string;
 }

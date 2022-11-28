@@ -9,6 +9,8 @@ const (
 	PlayerAchievementAchievementStateEnumUnlocked         PlayerAchievementAchievementStateEnum = "UNLOCKED"
 )
 
+// PlayerAchievement
+// An achievement object.
 type PlayerAchievement struct {
 	AchievementState            *PlayerAchievementAchievementStateEnum `json:"achievementState,omitempty"`
 	CurrentSteps                *int32                                 `json:"currentSteps,omitempty"`

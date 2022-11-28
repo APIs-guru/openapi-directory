@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionLocalPortDetails } from "./actionlocalportdetails";
 import { ActionRemoteIpDetails } from "./actionremoteipdetails";
 import { ActionRemotePortDetails } from "./actionremoteportdetails";
+
 
 
 // NetworkConnectionAction
@@ -9,21 +10,21 @@ import { ActionRemotePortDetails } from "./actionremoteportdetails";
  * Provided if <code>ActionType</code> is <code>NETWORK_CONNECTION</code>. It provides details about the attempted network connection that was detected.
 **/
 export class NetworkConnectionAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Blocked" })
+  @SpeakeasyMetadata({ data: "json, name=Blocked" })
   blocked?: boolean;
 
-  @Metadata({ data: "json, name=ConnectionDirection" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionDirection" })
   connectionDirection?: string;
 
-  @Metadata({ data: "json, name=LocalPortDetails" })
+  @SpeakeasyMetadata({ data: "json, name=LocalPortDetails" })
   localPortDetails?: ActionLocalPortDetails;
 
-  @Metadata({ data: "json, name=Protocol" })
+  @SpeakeasyMetadata({ data: "json, name=Protocol" })
   protocol?: string;
 
-  @Metadata({ data: "json, name=RemoteIpDetails" })
+  @SpeakeasyMetadata({ data: "json, name=RemoteIpDetails" })
   remoteIpDetails?: ActionRemoteIpDetails;
 
-  @Metadata({ data: "json, name=RemotePortDetails" })
+  @SpeakeasyMetadata({ data: "json, name=RemotePortDetails" })
   remotePortDetails?: ActionRemotePortDetails;
 }

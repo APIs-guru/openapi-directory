@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ServiceAccountKey } from "./serviceaccountkey";
 /**
  * The service account keys list response.

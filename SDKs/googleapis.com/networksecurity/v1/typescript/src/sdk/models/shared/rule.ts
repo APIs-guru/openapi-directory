@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Destination } from "./destination";
 import { Source } from "./source";
+
 
 
 // Rule
@@ -9,9 +9,9 @@ import { Source } from "./source";
  * Specification of rules.
 **/
 export class Rule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinations", elemType: shared.Destination })
+  @SpeakeasyMetadata({ data: "json, name=destinations", elemType: Destination })
   destinations?: Destination[];
 
-  @Metadata({ data: "json, name=sources", elemType: shared.Source })
+  @SpeakeasyMetadata({ data: "json, name=sources", elemType: Source })
   sources?: Source[];
 }

@@ -5,9 +5,9 @@ from sdk.models import shared
 
 @dataclass
 class GitGetAllRefsPathParams:
-    namespace: str = field(default=None, metadata={'path_param': { 'field_name': 'namespace', 'style': 'simple', 'explode': False }})
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    namespace: str = field(metadata={'path_param': { 'field_name': 'namespace', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class GitGetAllRefsQueryParams:
 
 @dataclass
 class GitGetAllRefsRequest:
-    path_params: GitGetAllRefsPathParams = field(default=None)
-    query_params: GitGetAllRefsQueryParams = field(default=None)
+    path_params: GitGetAllRefsPathParams = field()
+    query_params: GitGetAllRefsQueryParams = field()
     
 
 @dataclass
 class GitGetAllRefsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     git_refs: Optional[List[shared.GitRef]] = field(default=None)
     

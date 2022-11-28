@@ -1,5 +1,7 @@
 package shared
 
+// Session
+// Sessions contain metadata, such as a user-friendly name and time interval information.
 type Session struct {
 	ActiveTimeMillis   *string      `json:"activeTimeMillis,omitempty"`
 	ActivityType       *int32       `json:"activityType,omitempty"`

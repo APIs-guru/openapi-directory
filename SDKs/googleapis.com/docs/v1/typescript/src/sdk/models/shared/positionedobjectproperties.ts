@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EmbeddedObject } from "./embeddedobject";
 import { PositionedObjectPositioning } from "./positionedobjectpositioning";
+
 
 
 // PositionedObjectProperties
@@ -8,9 +9,9 @@ import { PositionedObjectPositioning } from "./positionedobjectpositioning";
  * Properties of a PositionedObject.
 **/
 export class PositionedObjectProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=embeddedObject" })
+  @SpeakeasyMetadata({ data: "json, name=embeddedObject" })
   embeddedObject?: EmbeddedObject;
 
-  @Metadata({ data: "json, name=positioning" })
+  @SpeakeasyMetadata({ data: "json, name=positioning" })
   positioning?: PositionedObjectPositioning;
 }

@@ -1,133 +1,134 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UserStatisticsAccumulatedValueV1StatisticsIndividualQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endDate" })
   endDate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startDate" })
   startDate?: string;
 }
 
 
-export class UserStatisticsAccumulatedValueV1StatisticsIndividualRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: UserStatisticsAccumulatedValueV1StatisticsIndividualQueryParams;
-}
-
-
 export class UserStatisticsAccumulatedValueV1StatisticsIndividual200ApplicationJsonResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccelerationCount" })
+  @SpeakeasyMetadata({ data: "json, name=AccelerationCount" })
   accelerationCount?: number;
 
-  @Metadata({ data: "json, name=AppId" })
+  @SpeakeasyMetadata({ data: "json, name=AppId" })
   appId?: string;
 
-  @Metadata({ data: "json, name=AverageSpeedKmh" })
+  @SpeakeasyMetadata({ data: "json, name=AverageSpeedKmh" })
   averageSpeedKmh?: number;
 
-  @Metadata({ data: "json, name=AverageSpeedMileh" })
+  @SpeakeasyMetadata({ data: "json, name=AverageSpeedMileh" })
   averageSpeedMileh?: number;
 
-  @Metadata({ data: "json, name=BreakingCount" })
+  @SpeakeasyMetadata({ data: "json, name=BreakingCount" })
   breakingCount?: number;
 
-  @Metadata({ data: "json, name=CompanyId" })
+  @SpeakeasyMetadata({ data: "json, name=CompanyId" })
   companyId?: string;
 
-  @Metadata({ data: "json, name=CorneringCount" })
+  @SpeakeasyMetadata({ data: "json, name=CorneringCount" })
   corneringCount?: number;
 
-  @Metadata({ data: "json, name=DayDrivingTime" })
+  @SpeakeasyMetadata({ data: "json, name=DayDrivingTime" })
   dayDrivingTime?: number;
 
-  @Metadata({ data: "json, name=DeviceToken" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceToken" })
   deviceToken?: string;
 
-  @Metadata({ data: "json, name=DriverTripsCount" })
+  @SpeakeasyMetadata({ data: "json, name=DriverTripsCount" })
   driverTripsCount?: number;
 
-  @Metadata({ data: "json, name=DrivingTime" })
+  @SpeakeasyMetadata({ data: "json, name=DrivingTime" })
   drivingTime?: number;
 
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=MaxSpeedKmh" })
+  @SpeakeasyMetadata({ data: "json, name=MaxSpeedKmh" })
   maxSpeedKmh?: number;
 
-  @Metadata({ data: "json, name=MaxSpeedMileh" })
+  @SpeakeasyMetadata({ data: "json, name=MaxSpeedMileh" })
   maxSpeedMileh?: number;
 
-  @Metadata({ data: "json, name=MileageKm" })
+  @SpeakeasyMetadata({ data: "json, name=MileageKm" })
   mileageKm?: number;
 
-  @Metadata({ data: "json, name=MileageMile" })
+  @SpeakeasyMetadata({ data: "json, name=MileageMile" })
   mileageMile?: number;
 
-  @Metadata({ data: "json, name=NightDrivingTime" })
+  @SpeakeasyMetadata({ data: "json, name=NightDrivingTime" })
   nightDrivingTime?: number;
 
-  @Metadata({ data: "json, name=OtherTripsCount" })
+  @SpeakeasyMetadata({ data: "json, name=OtherTripsCount" })
   otherTripsCount?: number;
 
-  @Metadata({ data: "json, name=PhoneUsageDistanceKm" })
+  @SpeakeasyMetadata({ data: "json, name=PhoneUsageDistanceKm" })
   phoneUsageDistanceKm?: number;
 
-  @Metadata({ data: "json, name=PhoneUsageDistanceMile" })
+  @SpeakeasyMetadata({ data: "json, name=PhoneUsageDistanceMile" })
   phoneUsageDistanceMile?: number;
 
-  @Metadata({ data: "json, name=PhoneUsageDurationMin" })
+  @SpeakeasyMetadata({ data: "json, name=PhoneUsageDurationMin" })
   phoneUsageDurationMin?: number;
 
-  @Metadata({ data: "json, name=PhoneUsageOverSpeedDistanceKm" })
+  @SpeakeasyMetadata({ data: "json, name=PhoneUsageOverSpeedDistanceKm" })
   phoneUsageOverSpeedDistanceKm?: number;
 
-  @Metadata({ data: "json, name=PhoneUsageOverSpeedDistanceMile" })
+  @SpeakeasyMetadata({ data: "json, name=PhoneUsageOverSpeedDistanceMile" })
   phoneUsageOverSpeedDistanceMile?: number;
 
-  @Metadata({ data: "json, name=PhoneUsageOverSpeedDurationMin" })
+  @SpeakeasyMetadata({ data: "json, name=PhoneUsageOverSpeedDurationMin" })
   phoneUsageOverSpeedDurationMin?: number;
 
-  @Metadata({ data: "json, name=RushHoursDrivingTime" })
+  @SpeakeasyMetadata({ data: "json, name=RushHoursDrivingTime" })
   rushHoursDrivingTime?: number;
 
-  @Metadata({ data: "json, name=TotalSpeedingKm" })
+  @SpeakeasyMetadata({ data: "json, name=TotalSpeedingKm" })
   totalSpeedingKm?: number;
 
-  @Metadata({ data: "json, name=TotalSpeedingMile" })
+  @SpeakeasyMetadata({ data: "json, name=TotalSpeedingMile" })
   totalSpeedingMile?: number;
 
-  @Metadata({ data: "json, name=TripsCount" })
+  @SpeakeasyMetadata({ data: "json, name=TripsCount" })
   tripsCount?: number;
 }
 
 
 export class UserStatisticsAccumulatedValueV1StatisticsIndividual200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Errors" })
+  @SpeakeasyMetadata({ data: "json, name=Errors" })
   errors?: any[];
 
-  @Metadata({ data: "json, name=Result" })
+  @SpeakeasyMetadata({ data: "json, name=Result" })
   result?: UserStatisticsAccumulatedValueV1StatisticsIndividual200ApplicationJsonResult;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: number;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 }
 
 
+export class UserStatisticsAccumulatedValueV1StatisticsIndividualRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: UserStatisticsAccumulatedValueV1StatisticsIndividualQueryParams;
+}
+
+
 export class UserStatisticsAccumulatedValueV1StatisticsIndividualResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   userStatisticsAccumulatedValueV1StatisticsIndividual200ApplicationJsonObject?: UserStatisticsAccumulatedValueV1StatisticsIndividual200ApplicationJson;
 }

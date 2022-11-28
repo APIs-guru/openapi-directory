@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeletePensionRevisionPathParams = /** @class */ (function (_super) {
     __extends(DeletePensionRevisionPathParams, _super);
@@ -30,15 +30,15 @@ var DeletePensionRevisionPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EffectiveDate" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EffectiveDate" }),
         __metadata("design:type", Date)
     ], DeletePensionRevisionPathParams.prototype, "effectiveDate", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
         __metadata("design:type", String)
     ], DeletePensionRevisionPathParams.prototype, "employerId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=PensionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=PensionId" }),
         __metadata("design:type", String)
     ], DeletePensionRevisionPathParams.prototype, "pensionId", void 0);
     return DeletePensionRevisionPathParams;
@@ -50,11 +50,11 @@ var DeletePensionRevisionHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], DeletePensionRevisionHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], DeletePensionRevisionHeaders.prototype, "authorization", void 0);
     return DeletePensionRevisionHeaders;
@@ -66,11 +66,11 @@ var DeletePensionRevisionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeletePensionRevisionPathParams)
     ], DeletePensionRevisionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeletePensionRevisionHeaders)
     ], DeletePensionRevisionRequest.prototype, "headers", void 0);
     return DeletePensionRevisionRequest;
@@ -82,15 +82,15 @@ var DeletePensionRevisionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeletePensionRevisionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], DeletePensionRevisionResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeletePensionRevisionResponse.prototype, "statusCode", void 0);
     return DeletePensionRevisionResponse;

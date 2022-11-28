@@ -13,6 +13,8 @@ const (
 	NiInitialCarrierPropertiesNetworkTypeEnumNull             NiInitialCarrierPropertiesNetworkTypeEnum = "null"
 )
 
+// NiInitialCarrierProperties
+// Information about the network `number` was initially connected to.
 type NiInitialCarrierProperties struct {
 	Country     *string                                    `json:"country,omitempty"`
 	Name        *string                                    `json:"name,omitempty"`

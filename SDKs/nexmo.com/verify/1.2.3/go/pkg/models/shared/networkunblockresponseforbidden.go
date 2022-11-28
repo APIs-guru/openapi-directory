@@ -1,5 +1,7 @@
 package shared
 
+// NetworkUnblockResponseForbidden
+// Forbidden
 type NetworkUnblockResponseForbidden struct {
 	Detail   *string `json:"detail,omitempty"`
 	Instance *string `json:"instance,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AdditionalConstraintsElementEnum } from "./additionalconstraintselementenum";
+
 
 
 // CreateBackendAuthPasswordPolicyConfig
@@ -7,9 +8,9 @@ import { AdditionalConstraintsElementEnum } from "./additionalconstraintselement
  * The password policy configuration for the backend to your Amplify project.
 **/
 export class CreateBackendAuthPasswordPolicyConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AdditionalConstraints" })
+  @SpeakeasyMetadata({ data: "json, name=AdditionalConstraints" })
   additionalConstraints?: AdditionalConstraintsElementEnum[];
 
-  @Metadata({ data: "json, name=MinimumLength" })
+  @SpeakeasyMetadata({ data: "json, name=MinimumLength" })
   minimumLength: number;
 }

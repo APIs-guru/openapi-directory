@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ValueRangeMajorDimensionEnum(str, Enum):
     DIMENSION_UNSPECIFIED = "DIMENSION_UNSPECIFIED"
@@ -11,7 +13,11 @@ class ValueRangeMajorDimensionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ValueRange:
-    major_dimension: Optional[ValueRangeMajorDimensionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'majorDimension' }})
-    range: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'range' }})
-    values: Optional[List[List[Any]]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'values' }})
+    r"""ValueRange
+    Data within a range of the spreadsheet.
+    """
+    
+    major_dimension: Optional[ValueRangeMajorDimensionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('majorDimension') }})
+    range: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('range') }})
+    values: Optional[List[List[Any]]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('values') }})
     

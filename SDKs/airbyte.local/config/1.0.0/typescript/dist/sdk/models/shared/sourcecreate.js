@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SourceCreate = /** @class */ (function (_super) {
     __extends(SourceCreate, _super);
     function SourceCreate() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=connectionConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=connectionConfiguration" }),
         __metadata("design:type", Object)
     ], SourceCreate.prototype, "connectionConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], SourceCreate.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceDefinitionId" }),
+        SpeakeasyMetadata({ data: "json, name=sourceDefinitionId" }),
         __metadata("design:type", String)
     ], SourceCreate.prototype, "sourceDefinitionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=workspaceId" }),
+        SpeakeasyMetadata({ data: "json, name=workspaceId" }),
         __metadata("design:type", String)
     ], SourceCreate.prototype, "workspaceId", void 0);
     return SourceCreate;

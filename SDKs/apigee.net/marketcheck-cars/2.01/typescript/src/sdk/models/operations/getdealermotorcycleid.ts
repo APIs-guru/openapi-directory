@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDealerMotorcycleIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetDealerMotorcycleIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=provider" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=provider" })
   provider?: boolean;
 }
 
 
 export class GetDealerMotorcycleIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDealerMotorcycleIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetDealerMotorcycleIdQueryParams;
 }
 
 
 export class GetDealerMotorcycleIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dealer?: shared.Dealer;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

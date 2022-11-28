@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ExportPackageSystemsPathParams = /** @class */ (function (_super) {
     __extends(ExportPackageSystemsPathParams, _super);
@@ -30,7 +30,7 @@ var ExportPackageSystemsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=package_name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=package_name" }),
         __metadata("design:type", String)
     ], ExportPackageSystemsPathParams.prototype, "packageName", void 0);
     return ExportPackageSystemsPathParams;
@@ -42,15 +42,15 @@ var ExportPackageSystemsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter[system_profile][sap_sids][in]" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[system_profile][sap_sids][in]" }),
         __metadata("design:type", Array)
     ], ExportPackageSystemsQueryParams.prototype, "filterSystemProfileSapSidsIn", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter[system_profile][sap_system]" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter[system_profile][sap_system]" }),
         __metadata("design:type", String)
     ], ExportPackageSystemsQueryParams.prototype, "filterSystemProfileSapSystem", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=tags" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tags" }),
         __metadata("design:type", Array)
     ], ExportPackageSystemsQueryParams.prototype, "tags", void 0);
     return ExportPackageSystemsQueryParams;
@@ -62,7 +62,7 @@ var ExportPackageSystemsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeRhIdentity)
     ], ExportPackageSystemsSecurity.prototype, "rhIdentity", void 0);
     return ExportPackageSystemsSecurity;
@@ -74,15 +74,15 @@ var ExportPackageSystemsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ExportPackageSystemsPathParams)
     ], ExportPackageSystemsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ExportPackageSystemsQueryParams)
     ], ExportPackageSystemsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ExportPackageSystemsSecurity)
     ], ExportPackageSystemsRequest.prototype, "security", void 0);
     return ExportPackageSystemsRequest;
@@ -94,15 +94,15 @@ var ExportPackageSystemsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ExportPackageSystemsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ExportPackageSystemsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.ControllersPackageSystemItem }),
+        SpeakeasyMetadata({ elemType: shared.ControllersPackageSystemItem }),
         __metadata("design:type", Array)
     ], ExportPackageSystemsResponse.prototype, "controllersPackageSystemItems", void 0);
     return ExportPackageSystemsResponse;

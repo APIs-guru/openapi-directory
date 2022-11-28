@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteUserPermissionsBoundaryActionEnum(str, Enum):
     DELETE_USER_PERMISSIONS_BOUNDARY = "DeleteUserPermissionsBoundary"
@@ -10,8 +14,8 @@ class PostDeleteUserPermissionsBoundaryVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteUserPermissionsBoundaryQueryParams:
-    action: PostDeleteUserPermissionsBoundaryActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteUserPermissionsBoundaryVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteUserPermissionsBoundaryActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteUserPermissionsBoundaryVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteUserPermissionsBoundaryHeaders:
 
 @dataclass
 class PostDeleteUserPermissionsBoundaryRequest:
-    query_params: PostDeleteUserPermissionsBoundaryQueryParams = field(default=None)
-    headers: PostDeleteUserPermissionsBoundaryHeaders = field(default=None)
+    headers: PostDeleteUserPermissionsBoundaryHeaders = field()
+    query_params: PostDeleteUserPermissionsBoundaryQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteUserPermissionsBoundaryResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

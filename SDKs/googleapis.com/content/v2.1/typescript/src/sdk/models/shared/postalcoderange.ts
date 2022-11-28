@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostalCodeRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=postalCodeRangeBegin" })
+  @SpeakeasyMetadata({ data: "json, name=postalCodeRangeBegin" })
   postalCodeRangeBegin?: string;
 
-  @Metadata({ data: "json, name=postalCodeRangeEnd" })
+  @SpeakeasyMetadata({ data: "json, name=postalCodeRangeEnd" })
   postalCodeRangeEnd?: string;
 }

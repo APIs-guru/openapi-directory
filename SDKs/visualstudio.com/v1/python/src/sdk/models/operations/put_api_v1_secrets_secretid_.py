@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class PutAPIV1SecretsSecretIDPathParams:
-    secret_id: str = field(default=None, metadata={'path_param': { 'field_name': 'secretId', 'style': 'simple', 'explode': False }})
+    secret_id: str = field(metadata={'path_param': { 'field_name': 'secretId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,16 +26,16 @@ class PutAPIV1SecretsSecretIDRequests:
 
 @dataclass
 class PutAPIV1SecretsSecretIDRequest:
-    path_params: PutAPIV1SecretsSecretIDPathParams = field(default=None)
-    query_params: PutAPIV1SecretsSecretIDQueryParams = field(default=None)
+    path_params: PutAPIV1SecretsSecretIDPathParams = field()
+    query_params: PutAPIV1SecretsSecretIDQueryParams = field()
     request: Optional[PutAPIV1SecretsSecretIDRequests] = field(default=None)
     
 
 @dataclass
 class PutAPIV1SecretsSecretIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
     scoped_secret_result_body: Optional[shared.ScopedSecretResultBody] = field(default=None)
-    status_code: int = field(default=None)
     

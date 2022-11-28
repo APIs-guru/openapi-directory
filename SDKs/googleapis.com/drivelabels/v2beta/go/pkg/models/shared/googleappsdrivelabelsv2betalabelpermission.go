@@ -10,6 +10,8 @@ const (
 	GoogleAppsDriveLabelsV2betaLabelPermissionRoleEnumEditor               GoogleAppsDriveLabelsV2betaLabelPermissionRoleEnum = "EDITOR"
 )
 
+// GoogleAppsDriveLabelsV2betaLabelPermission
+// The permission that applies to a principal (user, group, audience) on a label.
 type GoogleAppsDriveLabelsV2betaLabelPermission struct {
 	Audience *string                                             `json:"audience,omitempty"`
 	Email    *string                                             `json:"email,omitempty"`

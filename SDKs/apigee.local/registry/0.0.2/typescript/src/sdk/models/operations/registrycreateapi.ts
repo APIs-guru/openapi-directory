@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegistryCreateApiPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project" })
   project: string;
 }
 
 
 export class RegistryCreateApiQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_id" })
   apiId?: string;
 }
 
 
 export class RegistryCreateApiRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RegistryCreateApiPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RegistryCreateApiQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: any;
 }
 
 
 export class RegistryCreateApiResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   api?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

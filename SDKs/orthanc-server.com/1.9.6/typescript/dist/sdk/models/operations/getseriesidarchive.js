@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetSeriesIdArchivePathParams = /** @class */ (function (_super) {
     __extends(GetSeriesIdArchivePathParams, _super);
     function GetSeriesIdArchivePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], GetSeriesIdArchivePathParams.prototype, "id", void 0);
     return GetSeriesIdArchivePathParams;
@@ -41,7 +41,7 @@ var GetSeriesIdArchiveQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=transcode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=transcode" }),
         __metadata("design:type", String)
     ], GetSeriesIdArchiveQueryParams.prototype, "transcode", void 0);
     return GetSeriesIdArchiveQueryParams;
@@ -53,11 +53,11 @@ var GetSeriesIdArchiveRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSeriesIdArchivePathParams)
     ], GetSeriesIdArchiveRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSeriesIdArchiveQueryParams)
     ], GetSeriesIdArchiveRequest.prototype, "queryParams", void 0);
     return GetSeriesIdArchiveRequest;
@@ -69,15 +69,15 @@ var GetSeriesIdArchiveResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetSeriesIdArchiveResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSeriesIdArchiveResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSeriesIdArchiveResponse.prototype, "statusCode", void 0);
     return GetSeriesIdArchiveResponse;

@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteDistributionsDistributionIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=distribution_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=distribution_id" })
   distributionId: number;
 }
 
 
 export class DeleteDistributionsDistributionIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuthentication: shared.SchemeBasicAuthentication;
 }
 
 
 export class DeleteDistributionsDistributionIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteDistributionsDistributionIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DeleteDistributionsDistributionIdSecurity;
 }
 
 
 export class DeleteDistributionsDistributionIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRegisterTransitGatewayMulticastGroupMembersActionEnum(str, Enum):
     REGISTER_TRANSIT_GATEWAY_MULTICAST_GROUP_MEMBERS = "RegisterTransitGatewayMulticastGroupMembers"
@@ -10,8 +14,8 @@ class PostRegisterTransitGatewayMulticastGroupMembersVersionEnum(str, Enum):
 
 @dataclass
 class PostRegisterTransitGatewayMulticastGroupMembersQueryParams:
-    action: PostRegisterTransitGatewayMulticastGroupMembersActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRegisterTransitGatewayMulticastGroupMembersVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRegisterTransitGatewayMulticastGroupMembersActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRegisterTransitGatewayMulticastGroupMembersVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRegisterTransitGatewayMulticastGroupMembersHeaders:
 
 @dataclass
 class PostRegisterTransitGatewayMulticastGroupMembersRequest:
-    query_params: PostRegisterTransitGatewayMulticastGroupMembersQueryParams = field(default=None)
-    headers: PostRegisterTransitGatewayMulticastGroupMembersHeaders = field(default=None)
+    headers: PostRegisterTransitGatewayMulticastGroupMembersHeaders = field()
+    query_params: PostRegisterTransitGatewayMulticastGroupMembersQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRegisterTransitGatewayMulticastGroupMembersResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

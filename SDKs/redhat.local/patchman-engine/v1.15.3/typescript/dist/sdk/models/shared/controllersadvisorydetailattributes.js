@@ -22,54 +22,54 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ControllersAdvisoryDetailAttributes = /** @class */ (function (_super) {
     __extends(ControllersAdvisoryDetailAttributes, _super);
     function ControllersAdvisoryDetailAttributes() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cves" }),
+        SpeakeasyMetadata({ data: "json, name=cves" }),
         __metadata("design:type", Array)
     ], ControllersAdvisoryDetailAttributes.prototype, "cves", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], ControllersAdvisoryDetailAttributes.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=fixes" }),
+        SpeakeasyMetadata({ data: "json, name=fixes" }),
         __metadata("design:type", String)
     ], ControllersAdvisoryDetailAttributes.prototype, "fixes", void 0);
     __decorate([
-        Metadata({ data: "json, name=modified_date" }),
+        SpeakeasyMetadata({ data: "json, name=modified_date" }),
         __metadata("design:type", String)
     ], ControllersAdvisoryDetailAttributes.prototype, "modifiedDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=packages" }),
+        SpeakeasyMetadata({ data: "json, name=packages" }),
         __metadata("design:type", Map)
     ], ControllersAdvisoryDetailAttributes.prototype, "packages", void 0);
     __decorate([
-        Metadata({ data: "json, name=public_date" }),
+        SpeakeasyMetadata({ data: "json, name=public_date" }),
         __metadata("design:type", String)
     ], ControllersAdvisoryDetailAttributes.prototype, "publicDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=references" }),
+        SpeakeasyMetadata({ data: "json, name=references" }),
         __metadata("design:type", Array)
     ], ControllersAdvisoryDetailAttributes.prototype, "references", void 0);
     __decorate([
-        Metadata({ data: "json, name=severity" }),
+        SpeakeasyMetadata({ data: "json, name=severity" }),
         __metadata("design:type", Number)
     ], ControllersAdvisoryDetailAttributes.prototype, "severity", void 0);
     __decorate([
-        Metadata({ data: "json, name=solution" }),
+        SpeakeasyMetadata({ data: "json, name=solution" }),
         __metadata("design:type", String)
     ], ControllersAdvisoryDetailAttributes.prototype, "solution", void 0);
     __decorate([
-        Metadata({ data: "json, name=synopsis" }),
+        SpeakeasyMetadata({ data: "json, name=synopsis" }),
         __metadata("design:type", String)
     ], ControllersAdvisoryDetailAttributes.prototype, "synopsis", void 0);
     __decorate([
-        Metadata({ data: "json, name=topic" }),
+        SpeakeasyMetadata({ data: "json, name=topic" }),
         __metadata("design:type", String)
     ], ControllersAdvisoryDetailAttributes.prototype, "topic", void 0);
     return ControllersAdvisoryDetailAttributes;

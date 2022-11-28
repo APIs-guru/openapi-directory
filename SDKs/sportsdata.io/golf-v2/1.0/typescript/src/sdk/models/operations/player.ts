@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PlayerFormatEnum {
-    Xml = "XML"
-,    Json = "JSON"
+    Xml = "XML",
+    Json = "JSON"
 }
 
 
 export class PlayerPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: PlayerFormatEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=playerid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=playerid" })
   playerid: string;
 }
 
 
 export class PlayerRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PlayerPathParams;
 }
 
 
 export class PlayerResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   player?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

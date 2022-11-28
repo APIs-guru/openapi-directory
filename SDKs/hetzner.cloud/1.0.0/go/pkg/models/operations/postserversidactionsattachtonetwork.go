@@ -10,11 +10,8 @@ type PostServersIDActionsAttachToNetworkAttachToNetworkRequest struct {
 	Network  int64    `json:"network"`
 }
 
-type PostServersIDActionsAttachToNetworkRequest struct {
-	PathParams PostServersIDActionsAttachToNetworkPathParams
-	Request    *PostServersIDActionsAttachToNetworkAttachToNetworkRequest `request:"mediaType=application/json"`
-}
-
+// PostServersIDActionsAttachToNetworkActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersIDActionsAttachToNetworkActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -46,6 +43,11 @@ type PostServersIDActionsAttachToNetworkActionResponseAction struct {
 
 type PostServersIDActionsAttachToNetworkActionResponse struct {
 	Action PostServersIDActionsAttachToNetworkActionResponseAction `json:"action"`
+}
+
+type PostServersIDActionsAttachToNetworkRequest struct {
+	PathParams PostServersIDActionsAttachToNetworkPathParams
+	Request    *PostServersIDActionsAttachToNetworkAttachToNetworkRequest `request:"mediaType=application/json"`
 }
 
 type PostServersIDActionsAttachToNetworkResponse struct {

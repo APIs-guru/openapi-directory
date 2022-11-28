@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContentOrderreturnsProcessPathParams:
-    merchant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
-    return_id: str = field(default=None, metadata={'path_param': { 'field_name': 'returnId', 'style': 'simple', 'explode': False }})
+    merchant_id: str = field(metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
+    return_id: str = field(metadata={'path_param': { 'field_name': 'returnId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class ContentOrderreturnsProcessQueryParams:
 
 @dataclass
 class ContentOrderreturnsProcessSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContentOrderreturnsProcessRequest:
-    path_params: ContentOrderreturnsProcessPathParams = field(default=None)
-    query_params: ContentOrderreturnsProcessQueryParams = field(default=None)
+    path_params: ContentOrderreturnsProcessPathParams = field()
+    query_params: ContentOrderreturnsProcessQueryParams = field()
+    security: ContentOrderreturnsProcessSecurity = field()
     request: Optional[shared.OrderreturnsProcessRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ContentOrderreturnsProcessSecurity = field(default=None)
     
 
 @dataclass
 class ContentOrderreturnsProcessResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     orderreturns_process_response: Optional[shared.OrderreturnsProcessResponse] = field(default=None)
-    status_code: int = field(default=None)
     

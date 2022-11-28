@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DeleteExportPathParams:
-    export_id: str = field(default=None, metadata={'path_param': { 'field_name': 'exportId', 'style': 'simple', 'explode': False }})
+    export_id: str = field(metadata={'path_param': { 'field_name': 'exportId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,18 +24,18 @@ class DeleteExportHeaders:
 
 @dataclass
 class DeleteExportRequest:
-    path_params: DeleteExportPathParams = field(default=None)
-    headers: DeleteExportHeaders = field(default=None)
+    headers: DeleteExportHeaders = field()
+    path_params: DeleteExportPathParams = field()
     
 
 @dataclass
 class DeleteExportResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_export_response: Optional[shared.DeleteExportResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     precondition_failed_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

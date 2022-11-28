@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MobileDeviceAccessRuleEffectEnum } from "./mobiledeviceaccessruleeffectenum";
 export declare class UpdateMobileDeviceAccessRuleRequest extends SpeakeasyBase {
     description?: string;

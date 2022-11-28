@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2IntentMessageListSelectItem } from "./googleclouddialogflowv2intentmessagelistselectitem";
+
 
 
 // GoogleCloudDialogflowV2IntentMessageListSelect
@@ -8,12 +8,12 @@ import { GoogleCloudDialogflowV2IntentMessageListSelectItem } from "./googleclou
  * The card for presenting a list of options to select from.
 **/
 export class GoogleCloudDialogflowV2IntentMessageListSelect extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.GoogleCloudDialogflowV2IntentMessageListSelectItem })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: GoogleCloudDialogflowV2IntentMessageListSelectItem })
   items?: GoogleCloudDialogflowV2IntentMessageListSelectItem[];
 
-  @Metadata({ data: "json, name=subtitle" })
+  @SpeakeasyMetadata({ data: "json, name=subtitle" })
   subtitle?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

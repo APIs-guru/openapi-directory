@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AlertSummary
+// Provides a summary of an alert's configuration.
 type AlertSummary struct {
 	AlertArn                  *string           `json:"AlertArn,omitempty"`
 	AlertName                 *string           `json:"AlertName,omitempty"`

@@ -1,12 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Amount } from "./amount";
-import { Amount } from "./amount";
-import { Amount } from "./amount";
-import { Amount } from "./amount";
-import { Amount } from "./amount";
-import { Amount } from "./amount";
-import { Amount } from "./amount";
-import { Amount } from "./amount";
+
 
 
 // PromotionReportDetail
@@ -14,51 +8,51 @@ import { Amount } from "./amount";
  * This type defines the fields in a promotion-level report.
 **/
 export class PromotionReportDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=averageItemDiscount" })
+  @SpeakeasyMetadata({ data: "json, name=averageItemDiscount" })
   averageItemDiscount?: Amount;
 
-  @Metadata({ data: "json, name=averageItemRevenue" })
+  @SpeakeasyMetadata({ data: "json, name=averageItemRevenue" })
   averageItemRevenue?: Amount;
 
-  @Metadata({ data: "json, name=averageOrderDiscount" })
+  @SpeakeasyMetadata({ data: "json, name=averageOrderDiscount" })
   averageOrderDiscount?: Amount;
 
-  @Metadata({ data: "json, name=averageOrderRevenue" })
+  @SpeakeasyMetadata({ data: "json, name=averageOrderRevenue" })
   averageOrderRevenue?: Amount;
 
-  @Metadata({ data: "json, name=averageOrderSize" })
+  @SpeakeasyMetadata({ data: "json, name=averageOrderSize" })
   averageOrderSize?: string;
 
-  @Metadata({ data: "json, name=baseSale" })
+  @SpeakeasyMetadata({ data: "json, name=baseSale" })
   baseSale?: Amount;
 
-  @Metadata({ data: "json, name=itemsSoldQuantity" })
+  @SpeakeasyMetadata({ data: "json, name=itemsSoldQuantity" })
   itemsSoldQuantity?: number;
 
-  @Metadata({ data: "json, name=numberOfOrdersSold" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfOrdersSold" })
   numberOfOrdersSold?: number;
 
-  @Metadata({ data: "json, name=percentageSalesLift" })
+  @SpeakeasyMetadata({ data: "json, name=percentageSalesLift" })
   percentageSalesLift?: string;
 
-  @Metadata({ data: "json, name=promotionHref" })
+  @SpeakeasyMetadata({ data: "json, name=promotionHref" })
   promotionHref?: string;
 
-  @Metadata({ data: "json, name=promotionId" })
+  @SpeakeasyMetadata({ data: "json, name=promotionId" })
   promotionId?: string;
 
-  @Metadata({ data: "json, name=promotionReportId" })
+  @SpeakeasyMetadata({ data: "json, name=promotionReportId" })
   promotionReportId?: string;
 
-  @Metadata({ data: "json, name=promotionSale" })
+  @SpeakeasyMetadata({ data: "json, name=promotionSale" })
   promotionSale?: Amount;
 
-  @Metadata({ data: "json, name=promotionType" })
+  @SpeakeasyMetadata({ data: "json, name=promotionType" })
   promotionType?: string;
 
-  @Metadata({ data: "json, name=totalDiscount" })
+  @SpeakeasyMetadata({ data: "json, name=totalDiscount" })
   totalDiscount?: Amount;
 
-  @Metadata({ data: "json, name=totalSale" })
+  @SpeakeasyMetadata({ data: "json, name=totalSale" })
   totalSale?: Amount;
 }

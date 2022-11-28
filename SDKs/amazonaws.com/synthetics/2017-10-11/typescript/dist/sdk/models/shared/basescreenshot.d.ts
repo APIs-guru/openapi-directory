@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * A structure representing a screenshot that is used as a baseline during visual monitoring comparisons made by the canary.
 **/

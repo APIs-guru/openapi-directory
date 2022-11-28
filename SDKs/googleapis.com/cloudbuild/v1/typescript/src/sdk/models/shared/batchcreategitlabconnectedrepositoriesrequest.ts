@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { CreateGitLabConnectedRepositoryRequest } from "./creategitlabconnectedrepositoryrequest";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CreateGitLabConnectedRepositoryRequestInput } from "./creategitlabconnectedrepositoryrequest";
 
 
-// BatchCreateGitLabConnectedRepositoriesRequest
+
+// BatchCreateGitLabConnectedRepositoriesRequestInput
 /** 
  * RPC request object accepted by BatchCreateGitLabConnectedRepositories RPC method.
 **/
-export class BatchCreateGitLabConnectedRepositoriesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requests", elemType: shared.CreateGitLabConnectedRepositoryRequest })
-  requests?: CreateGitLabConnectedRepositoryRequest[];
+export class BatchCreateGitLabConnectedRepositoriesRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: CreateGitLabConnectedRepositoryRequestInput })
+  requests?: CreateGitLabConnectedRepositoryRequestInput[];
 }

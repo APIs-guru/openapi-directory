@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleTypeMoney } from "./googletypemoney";
+
 
 
 // GoogleCloudApigeeV1DeveloperBalanceWallet
@@ -7,9 +8,9 @@ import { GoogleTypeMoney } from "./googletypemoney";
  * Wallet used to manage an account balance for a particular currency.
 **/
 export class GoogleCloudApigeeV1DeveloperBalanceWallet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=balance" })
+  @SpeakeasyMetadata({ data: "json, name=balance" })
   balance?: GoogleTypeMoney;
 
-  @Metadata({ data: "json, name=lastCreditTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastCreditTime" })
   lastCreditTime?: string;
 }

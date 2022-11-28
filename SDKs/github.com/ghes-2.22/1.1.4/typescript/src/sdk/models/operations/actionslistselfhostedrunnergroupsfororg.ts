@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ActionsListSelfHostedRunnerGroupsForOrgPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=org" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=org" })
   org: string;
 }
 
 
 export class ActionsListSelfHostedRunnerGroupsForOrgQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
-export class ActionsListSelfHostedRunnerGroupsForOrgRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ActionsListSelfHostedRunnerGroupsForOrgPathParams;
-
-  @Metadata()
-  queryParams: ActionsListSelfHostedRunnerGroupsForOrgQueryParams;
-}
-
-
 export class ActionsListSelfHostedRunnerGroupsForOrg200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=runner_groups", elemType: shared.RunnerGroupsOrg })
+  @SpeakeasyMetadata({ data: "json, name=runner_groups", elemType: shared.RunnerGroupsOrg })
   runnerGroups: shared.RunnerGroupsOrg[];
 
-  @Metadata({ data: "json, name=total_count" })
+  @SpeakeasyMetadata({ data: "json, name=total_count" })
   totalCount: number;
 }
 
 
+export class ActionsListSelfHostedRunnerGroupsForOrgRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ActionsListSelfHostedRunnerGroupsForOrgPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: ActionsListSelfHostedRunnerGroupsForOrgQueryParams;
+}
+
+
 export class ActionsListSelfHostedRunnerGroupsForOrgResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   actionsListSelfHostedRunnerGroupsForOrg200ApplicationJsonObject?: ActionsListSelfHostedRunnerGroupsForOrg200ApplicationJson;
 }

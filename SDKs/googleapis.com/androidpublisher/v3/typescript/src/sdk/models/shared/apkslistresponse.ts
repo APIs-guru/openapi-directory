@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Apk } from "./apk";
+
 
 
 // ApksListResponse
@@ -8,9 +8,9 @@ import { Apk } from "./apk";
  * Response listing all APKs.
 **/
 export class ApksListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apks", elemType: shared.Apk })
+  @SpeakeasyMetadata({ data: "json, name=apks", elemType: Apk })
   apks?: Apk[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

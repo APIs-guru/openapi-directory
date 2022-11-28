@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class LccepRequestBodyCertificateParameters extends SpeakeasyBase {
     certificateNumber: string;
@@ -15,10 +15,6 @@ export declare class LccepRequestBody extends SpeakeasyBase {
 export declare class LccepSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class LccepRequest extends SpeakeasyBase {
-    request?: LccepRequestBody;
-    security: LccepSecurity;
 }
 export declare enum Lccep400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -101,6 +97,10 @@ export declare enum Lccep504ApplicationJsonErrorDescriptionEnum {
 export declare class Lccep504ApplicationJson extends SpeakeasyBase {
     error?: Lccep504ApplicationJsonErrorEnum;
     errorDescription?: Lccep504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class LccepRequest extends SpeakeasyBase {
+    request?: LccepRequestBody;
+    security: LccepSecurity;
 }
 export declare class LccepResponse extends SpeakeasyBase {
     contentType: string;

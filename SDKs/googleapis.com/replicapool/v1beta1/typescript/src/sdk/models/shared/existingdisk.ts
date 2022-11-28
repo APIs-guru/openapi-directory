@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DiskAttachment } from "./diskattachment";
+
 
 
 // ExistingDisk
@@ -7,9 +8,9 @@ import { DiskAttachment } from "./diskattachment";
  * A pre-existing persistent disk that will be attached to every Replica in the Pool in READ_ONLY mode.
 **/
 export class ExistingDisk extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachment" })
+  @SpeakeasyMetadata({ data: "json, name=attachment" })
   attachment?: DiskAttachment;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 }

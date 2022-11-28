@@ -1,15 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import diskencryptionconfiguration
-from . import diskencryptionstatus
-from . import ipmapping
-from . import onpremisesconfiguration
-from . import sqloutofdiskreport
-from . import replicaconfiguration
-from . import sqlscheduledmaintenance
-from . import sslcert
-from . import settings
+from sdk import utils
+from . import *
 
 class DatabaseInstanceBackendTypeEnum(str, Enum):
     SQL_BACKEND_TYPE_UNSPECIFIED = "SQL_BACKEND_TYPE_UNSPECIFIED"
@@ -49,8 +43,12 @@ class DatabaseInstanceDatabaseVersionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DatabaseInstanceFailoverReplica:
-    available: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'available' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    r"""DatabaseInstanceFailoverReplica
+    The name and status of the failover replica.
+    """
+    
+    available: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('available') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     
 class DatabaseInstanceInstanceTypeEnum(str, Enum):
     SQL_INSTANCE_TYPE_UNSPECIFIED = "SQL_INSTANCE_TYPE_UNSPECIFIED"
@@ -78,41 +76,88 @@ class DatabaseInstanceSuspensionReasonEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class DatabaseInstanceInput:
+    r"""DatabaseInstanceInput
+    A Cloud SQL instance resource.
+    """
+    
+    available_maintenance_versions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('availableMaintenanceVersions') }})
+    backend_type: Optional[DatabaseInstanceBackendTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('backendType') }})
+    connection_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectionName') }})
+    current_disk_size: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currentDiskSize') }})
+    database_version: Optional[DatabaseInstanceDatabaseVersionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('databaseVersion') }})
+    disk_encryption_configuration: Optional[DiskEncryptionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('diskEncryptionConfiguration') }})
+    disk_encryption_status: Optional[DiskEncryptionStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('diskEncryptionStatus') }})
+    etag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('etag') }})
+    failover_replica: Optional[DatabaseInstanceFailoverReplica] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('failoverReplica') }})
+    gce_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gceZone') }})
+    instance_type: Optional[DatabaseInstanceInstanceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('instanceType') }})
+    ip_addresses: Optional[List[IPMapping]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipAddresses') }})
+    ipv6_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipv6Address') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    maintenance_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maintenanceVersion') }})
+    master_instance_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('masterInstanceName') }})
+    max_disk_size: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxDiskSize') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    on_premises_configuration: Optional[OnPremisesConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('onPremisesConfiguration') }})
+    out_of_disk_report: Optional[SQLOutOfDiskReport] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outOfDiskReport') }})
+    project: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('project') }})
+    region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('region') }})
+    replica_configuration: Optional[ReplicaConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('replicaConfiguration') }})
+    replica_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('replicaNames') }})
+    root_password: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rootPassword') }})
+    satisfies_pzs: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('satisfiesPzs') }})
+    scheduled_maintenance: Optional[SQLScheduledMaintenance] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scheduledMaintenance') }})
+    secondary_gce_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('secondaryGceZone') }})
+    self_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('selfLink') }})
+    server_ca_cert: Optional[SslCert] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serverCaCert') }})
+    service_account_email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serviceAccountEmailAddress') }})
+    settings: Optional[Settings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settings') }})
+    state: Optional[DatabaseInstanceStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    suspension_reason: Optional[List[DatabaseInstanceSuspensionReasonEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('suspensionReason') }})
+    
+
+@dataclass_json
+@dataclass
 class DatabaseInstance:
-    available_maintenance_versions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'availableMaintenanceVersions' }})
-    backend_type: Optional[DatabaseInstanceBackendTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backendType' }})
-    connection_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectionName' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    current_disk_size: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currentDiskSize' }})
-    database_installed_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'databaseInstalledVersion' }})
-    database_version: Optional[DatabaseInstanceDatabaseVersionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'databaseVersion' }})
-    disk_encryption_configuration: Optional[diskencryptionconfiguration.DiskEncryptionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'diskEncryptionConfiguration' }})
-    disk_encryption_status: Optional[diskencryptionstatus.DiskEncryptionStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'diskEncryptionStatus' }})
-    etag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'etag' }})
-    failover_replica: Optional[DatabaseInstanceFailoverReplica] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failoverReplica' }})
-    gce_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gceZone' }})
-    instance_type: Optional[DatabaseInstanceInstanceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instanceType' }})
-    ip_addresses: Optional[List[ipmapping.IPMapping]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipAddresses' }})
-    ipv6_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipv6Address' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    maintenance_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maintenanceVersion' }})
-    master_instance_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'masterInstanceName' }})
-    max_disk_size: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxDiskSize' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    on_premises_configuration: Optional[onpremisesconfiguration.OnPremisesConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'onPremisesConfiguration' }})
-    out_of_disk_report: Optional[sqloutofdiskreport.SQLOutOfDiskReport] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outOfDiskReport' }})
-    project: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'project' }})
-    region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'region' }})
-    replica_configuration: Optional[replicaconfiguration.ReplicaConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'replicaConfiguration' }})
-    replica_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'replicaNames' }})
-    root_password: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rootPassword' }})
-    satisfies_pzs: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'satisfiesPzs' }})
-    scheduled_maintenance: Optional[sqlscheduledmaintenance.SQLScheduledMaintenance] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scheduledMaintenance' }})
-    secondary_gce_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'secondaryGceZone' }})
-    self_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selfLink' }})
-    server_ca_cert: Optional[sslcert.SslCert] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serverCaCert' }})
-    service_account_email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serviceAccountEmailAddress' }})
-    settings: Optional[settings.Settings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settings' }})
-    state: Optional[DatabaseInstanceStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    suspension_reason: Optional[List[DatabaseInstanceSuspensionReasonEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'suspensionReason' }})
+    r"""DatabaseInstance
+    A Cloud SQL instance resource.
+    """
+    
+    available_maintenance_versions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('availableMaintenanceVersions') }})
+    backend_type: Optional[DatabaseInstanceBackendTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('backendType') }})
+    connection_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectionName') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    current_disk_size: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currentDiskSize') }})
+    database_installed_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('databaseInstalledVersion') }})
+    database_version: Optional[DatabaseInstanceDatabaseVersionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('databaseVersion') }})
+    disk_encryption_configuration: Optional[DiskEncryptionConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('diskEncryptionConfiguration') }})
+    disk_encryption_status: Optional[DiskEncryptionStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('diskEncryptionStatus') }})
+    etag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('etag') }})
+    failover_replica: Optional[DatabaseInstanceFailoverReplica] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('failoverReplica') }})
+    gce_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gceZone') }})
+    instance_type: Optional[DatabaseInstanceInstanceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('instanceType') }})
+    ip_addresses: Optional[List[IPMapping]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipAddresses') }})
+    ipv6_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipv6Address') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    maintenance_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maintenanceVersion') }})
+    master_instance_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('masterInstanceName') }})
+    max_disk_size: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxDiskSize') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    on_premises_configuration: Optional[OnPremisesConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('onPremisesConfiguration') }})
+    out_of_disk_report: Optional[SQLOutOfDiskReport] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outOfDiskReport') }})
+    project: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('project') }})
+    region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('region') }})
+    replica_configuration: Optional[ReplicaConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('replicaConfiguration') }})
+    replica_names: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('replicaNames') }})
+    root_password: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rootPassword') }})
+    satisfies_pzs: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('satisfiesPzs') }})
+    scheduled_maintenance: Optional[SQLScheduledMaintenance] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scheduledMaintenance') }})
+    secondary_gce_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('secondaryGceZone') }})
+    self_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('selfLink') }})
+    server_ca_cert: Optional[SslCert] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serverCaCert') }})
+    service_account_email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serviceAccountEmailAddress') }})
+    settings: Optional[Settings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settings') }})
+    state: Optional[DatabaseInstanceStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    suspension_reason: Optional[List[DatabaseInstanceSuspensionReasonEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('suspensionReason') }})
     

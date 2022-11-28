@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AssociateIdentityProviderConfigPathParams = /** @class */ (function (_super) {
     __extends(AssociateIdentityProviderConfigPathParams, _super);
@@ -30,7 +30,7 @@ var AssociateIdentityProviderConfigPathParams = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], AssociateIdentityProviderConfigPathParams.prototype, "name", void 0);
     return AssociateIdentityProviderConfigPathParams;
@@ -42,31 +42,31 @@ var AssociateIdentityProviderConfigHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], AssociateIdentityProviderConfigHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], AssociateIdentityProviderConfigHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], AssociateIdentityProviderConfigHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], AssociateIdentityProviderConfigHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], AssociateIdentityProviderConfigHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], AssociateIdentityProviderConfigHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], AssociateIdentityProviderConfigHeaders.prototype, "xAmzSignedHeaders", void 0);
     return AssociateIdentityProviderConfigHeaders;
@@ -82,35 +82,35 @@ var AssociateIdentityProviderConfigRequestBodyOidc = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clientId" }),
+        SpeakeasyMetadata({ data: "json, name=clientId" }),
         __metadata("design:type", String)
     ], AssociateIdentityProviderConfigRequestBodyOidc.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=groupsClaim" }),
+        SpeakeasyMetadata({ data: "json, name=groupsClaim" }),
         __metadata("design:type", String)
     ], AssociateIdentityProviderConfigRequestBodyOidc.prototype, "groupsClaim", void 0);
     __decorate([
-        Metadata({ data: "json, name=groupsPrefix" }),
+        SpeakeasyMetadata({ data: "json, name=groupsPrefix" }),
         __metadata("design:type", String)
     ], AssociateIdentityProviderConfigRequestBodyOidc.prototype, "groupsPrefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=identityProviderConfigName" }),
+        SpeakeasyMetadata({ data: "json, name=identityProviderConfigName" }),
         __metadata("design:type", String)
     ], AssociateIdentityProviderConfigRequestBodyOidc.prototype, "identityProviderConfigName", void 0);
     __decorate([
-        Metadata({ data: "json, name=issuerUrl" }),
+        SpeakeasyMetadata({ data: "json, name=issuerUrl" }),
         __metadata("design:type", String)
     ], AssociateIdentityProviderConfigRequestBodyOidc.prototype, "issuerUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=requiredClaims" }),
+        SpeakeasyMetadata({ data: "json, name=requiredClaims" }),
         __metadata("design:type", Map)
     ], AssociateIdentityProviderConfigRequestBodyOidc.prototype, "requiredClaims", void 0);
     __decorate([
-        Metadata({ data: "json, name=usernameClaim" }),
+        SpeakeasyMetadata({ data: "json, name=usernameClaim" }),
         __metadata("design:type", String)
     ], AssociateIdentityProviderConfigRequestBodyOidc.prototype, "usernameClaim", void 0);
     __decorate([
-        Metadata({ data: "json, name=usernamePrefix" }),
+        SpeakeasyMetadata({ data: "json, name=usernamePrefix" }),
         __metadata("design:type", String)
     ], AssociateIdentityProviderConfigRequestBodyOidc.prototype, "usernamePrefix", void 0);
     return AssociateIdentityProviderConfigRequestBodyOidc;
@@ -122,15 +122,15 @@ var AssociateIdentityProviderConfigRequestBody = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clientRequestToken" }),
+        SpeakeasyMetadata({ data: "json, name=clientRequestToken" }),
         __metadata("design:type", String)
     ], AssociateIdentityProviderConfigRequestBody.prototype, "clientRequestToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=oidc" }),
+        SpeakeasyMetadata({ data: "json, name=oidc" }),
         __metadata("design:type", AssociateIdentityProviderConfigRequestBodyOidc)
     ], AssociateIdentityProviderConfigRequestBody.prototype, "oidc", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], AssociateIdentityProviderConfigRequestBody.prototype, "tags", void 0);
     return AssociateIdentityProviderConfigRequestBody;
@@ -142,15 +142,15 @@ var AssociateIdentityProviderConfigRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AssociateIdentityProviderConfigPathParams)
     ], AssociateIdentityProviderConfigRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AssociateIdentityProviderConfigHeaders)
     ], AssociateIdentityProviderConfigRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", AssociateIdentityProviderConfigRequestBody)
     ], AssociateIdentityProviderConfigRequest.prototype, "request", void 0);
     return AssociateIdentityProviderConfigRequest;
@@ -162,39 +162,39 @@ var AssociateIdentityProviderConfigResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AssociateIdentityProviderConfigResponse)
     ], AssociateIdentityProviderConfigResponse.prototype, "associateIdentityProviderConfigResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], AssociateIdentityProviderConfigResponse.prototype, "clientException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AssociateIdentityProviderConfigResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], AssociateIdentityProviderConfigResponse.prototype, "invalidParameterException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], AssociateIdentityProviderConfigResponse.prototype, "invalidRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], AssociateIdentityProviderConfigResponse.prototype, "resourceInUseException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], AssociateIdentityProviderConfigResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], AssociateIdentityProviderConfigResponse.prototype, "serverException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AssociateIdentityProviderConfigResponse.prototype, "statusCode", void 0);
     return AssociateIdentityProviderConfigResponse;

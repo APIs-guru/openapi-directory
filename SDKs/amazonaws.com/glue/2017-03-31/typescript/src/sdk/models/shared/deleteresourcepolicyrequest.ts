@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteResourcePolicyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PolicyHashCondition" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyHashCondition" })
   policyHashCondition?: string;
 
-  @Metadata({ data: "json, name=ResourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceArn" })
   resourceArn?: string;
 }

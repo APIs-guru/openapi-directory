@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchPutAssetPropertyErrorEntry } from "./batchputassetpropertyerrorentry";
 
 
+
 export class BatchPutAssetPropertyValueResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorEntries", elemType: shared.BatchPutAssetPropertyErrorEntry })
+  @SpeakeasyMetadata({ data: "json, name=errorEntries", elemType: BatchPutAssetPropertyErrorEntry })
   errorEntries: BatchPutAssetPropertyErrorEntry[];
 }

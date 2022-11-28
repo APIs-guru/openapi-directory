@@ -29,6 +29,8 @@ const (
 	BackupTypeEnumSnapshot BackupTypeEnum = "snapshot"
 )
 
+// Backup
+// An object representing a Backup or snapshot for a Linode with Backup service enabled.
 type Backup struct {
 	Configs  []string          `json:"configs,omitempty"`
 	Created  *time.Time        `json:"created,omitempty"`

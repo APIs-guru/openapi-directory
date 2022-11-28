@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var StoryIdGetPathParams = /** @class */ (function (_super) {
     __extends(StoryIdGetPathParams, _super);
@@ -30,7 +30,7 @@ var StoryIdGetPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], StoryIdGetPathParams.prototype, "id", void 0);
     return StoryIdGetPathParams;
@@ -42,19 +42,19 @@ var StoryIdGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=full" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=full" }),
         __metadata("design:type", Boolean)
     ], StoryIdGetQueryParams.prototype, "full", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=include_outline" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_outline" }),
         __metadata("design:type", Boolean)
     ], StoryIdGetQueryParams.prototype, "includeOutline", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=include_relationships" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_relationships" }),
         __metadata("design:type", Boolean)
     ], StoryIdGetQueryParams.prototype, "includeRelationships", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=refresh_cache" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=refresh_cache" }),
         __metadata("design:type", Boolean)
     ], StoryIdGetQueryParams.prototype, "refreshCache", void 0);
     return StoryIdGetQueryParams;
@@ -66,11 +66,11 @@ var StoryIdGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StoryIdGetPathParams)
     ], StoryIdGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StoryIdGetQueryParams)
     ], StoryIdGetRequest.prototype, "queryParams", void 0);
     return StoryIdGetRequest;
@@ -82,19 +82,19 @@ var StoryIdGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StoryIdGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StoryIdGetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StoryIdGetResponse.prototype, "problemDetail", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Story)
     ], StoryIdGetResponse.prototype, "story", void 0);
     return StoryIdGetResponse;

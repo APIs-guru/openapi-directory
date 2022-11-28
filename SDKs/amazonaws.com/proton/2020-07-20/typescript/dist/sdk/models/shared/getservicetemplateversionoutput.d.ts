@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ServiceTemplateVersion } from "./servicetemplateversion";
 export declare class GetServiceTemplateVersionOutput extends SpeakeasyBase {
     serviceTemplateVersion: ServiceTemplateVersion;

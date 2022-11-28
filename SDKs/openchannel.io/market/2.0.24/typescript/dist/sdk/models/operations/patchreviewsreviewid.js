@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PatchReviewsReviewIdPathParams = /** @class */ (function (_super) {
     __extends(PatchReviewsReviewIdPathParams, _super);
     function PatchReviewsReviewIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=reviewId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=reviewId" }),
         __metadata("design:type", String)
     ], PatchReviewsReviewIdPathParams.prototype, "reviewId", void 0);
     return PatchReviewsReviewIdPathParams;
@@ -41,27 +41,27 @@ var PatchReviewsReviewIdQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=customData" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=customData" }),
         __metadata("design:type", String)
     ], PatchReviewsReviewIdQueryParams.prototype, "customData", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=description" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=description" }),
         __metadata("design:type", String)
     ], PatchReviewsReviewIdQueryParams.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=headline" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=headline" }),
         __metadata("design:type", String)
     ], PatchReviewsReviewIdQueryParams.prototype, "headline", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rating" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rating" }),
         __metadata("design:type", Number)
     ], PatchReviewsReviewIdQueryParams.prototype, "rating", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userAccountId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userAccountId" }),
         __metadata("design:type", String)
     ], PatchReviewsReviewIdQueryParams.prototype, "userAccountId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" }),
         __metadata("design:type", String)
     ], PatchReviewsReviewIdQueryParams.prototype, "userId", void 0);
     return PatchReviewsReviewIdQueryParams;
@@ -73,11 +73,11 @@ var PatchReviewsReviewIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PatchReviewsReviewIdPathParams)
     ], PatchReviewsReviewIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PatchReviewsReviewIdQueryParams)
     ], PatchReviewsReviewIdRequest.prototype, "queryParams", void 0);
     return PatchReviewsReviewIdRequest;
@@ -89,15 +89,15 @@ var PatchReviewsReviewIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PatchReviewsReviewIdResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PatchReviewsReviewIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PatchReviewsReviewIdResponse.prototype, "statusCode", void 0);
     return PatchReviewsReviewIdResponse;

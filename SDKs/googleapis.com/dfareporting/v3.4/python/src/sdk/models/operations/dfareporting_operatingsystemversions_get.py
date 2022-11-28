@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingOperatingSystemVersionsGetPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class DfareportingOperatingSystemVersionsGetQueryParams:
 
 @dataclass
 class DfareportingOperatingSystemVersionsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingOperatingSystemVersionsGetRequest:
-    path_params: DfareportingOperatingSystemVersionsGetPathParams = field(default=None)
-    query_params: DfareportingOperatingSystemVersionsGetQueryParams = field(default=None)
-    security: DfareportingOperatingSystemVersionsGetSecurity = field(default=None)
+    path_params: DfareportingOperatingSystemVersionsGetPathParams = field()
+    query_params: DfareportingOperatingSystemVersionsGetQueryParams = field()
+    security: DfareportingOperatingSystemVersionsGetSecurity = field()
     
 
 @dataclass
 class DfareportingOperatingSystemVersionsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operating_system_version: Optional[shared.OperatingSystemVersion] = field(default=None)
-    status_code: int = field(default=None)
     

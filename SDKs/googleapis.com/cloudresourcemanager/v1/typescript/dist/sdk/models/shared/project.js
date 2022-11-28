@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceId } from "./resourceid";
 export var ProjectLifecycleStateEnum;
 (function (ProjectLifecycleStateEnum) {
@@ -41,31 +41,31 @@ var Project = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Project.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Project.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=lifecycleState" }),
+        SpeakeasyMetadata({ data: "json, name=lifecycleState" }),
         __metadata("design:type", String)
     ], Project.prototype, "lifecycleState", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Project.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=parent" }),
+        SpeakeasyMetadata({ data: "json, name=parent" }),
         __metadata("design:type", ResourceId)
     ], Project.prototype, "parent", void 0);
     __decorate([
-        Metadata({ data: "json, name=projectId" }),
+        SpeakeasyMetadata({ data: "json, name=projectId" }),
         __metadata("design:type", String)
     ], Project.prototype, "projectId", void 0);
     __decorate([
-        Metadata({ data: "json, name=projectNumber" }),
+        SpeakeasyMetadata({ data: "json, name=projectNumber" }),
         __metadata("design:type", String)
     ], Project.prototype, "projectNumber", void 0);
     return Project;

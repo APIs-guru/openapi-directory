@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import directoryconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateDirectoryConfigResult:
-    directory_config: Optional[directoryconfig.DirectoryConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DirectoryConfig' }})
+    directory_config: Optional[DirectoryConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DirectoryConfig') }})
     

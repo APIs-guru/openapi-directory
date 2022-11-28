@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ScoresByWeekFormatEnum {
-    Xml = "XML"
-,    Json = "JSON"
+    Xml = "XML",
+    Json = "JSON"
 }
 
 
 export class ScoresByWeekPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: ScoresByWeekFormatEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=season" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=season" })
   season: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=week" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=week" })
   week: string;
 }
 
 
 export class ScoresByWeekRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ScoresByWeekPathParams;
 }
 
 
 export class ScoresByWeekResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scores?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

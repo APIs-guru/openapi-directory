@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import approvalruletemplate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetApprovalRuleTemplateOutput:
-    approval_rule_template: approvalruletemplate.ApprovalRuleTemplate = field(default=None, metadata={'dataclasses_json': { 'field_name': 'approvalRuleTemplate' }})
+    approval_rule_template: ApprovalRuleTemplate = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('approvalRuleTemplate') }})
     

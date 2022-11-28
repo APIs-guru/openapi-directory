@@ -1,6 +1,7 @@
 
 
+
 export enum ChannelTypeEnum {
-    Tv = "TV"
-,    Radio = "Radio"
+    Tv = "TV",
+    Radio = "Radio"
 }

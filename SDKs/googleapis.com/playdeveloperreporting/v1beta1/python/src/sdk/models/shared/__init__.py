@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .googleplaydeveloperreportingv1beta1anomaly import *
 from .googleplaydeveloperreportingv1beta1dimensionvalue import *

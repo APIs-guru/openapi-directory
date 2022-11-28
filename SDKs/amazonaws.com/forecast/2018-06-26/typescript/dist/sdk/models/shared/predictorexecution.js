@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { TestWindowSummary } from "./testwindowsummary";
 // PredictorExecution
 /**
  * The algorithm used to perform a backtest and the status of those tests.
@@ -34,11 +34,11 @@ var PredictorExecution = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AlgorithmArn" }),
+        SpeakeasyMetadata({ data: "json, name=AlgorithmArn" }),
         __metadata("design:type", String)
     ], PredictorExecution.prototype, "algorithmArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=TestWindows", elemType: shared.TestWindowSummary }),
+        SpeakeasyMetadata({ data: "json, name=TestWindows", elemType: TestWindowSummary }),
         __metadata("design:type", Array)
     ], PredictorExecution.prototype, "testWindows", void 0);
     return PredictorExecution;

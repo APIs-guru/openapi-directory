@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class LpgsvRequestBodyCertificateParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DOB" })
+  @SpeakeasyMetadata({ data: "json, name=DOB" })
   dob: string;
 
-  @Metadata({ data: "json, name=FullName" })
+  @SpeakeasyMetadata({ data: "json, name=FullName" })
   fullName: string;
 
-  @Metadata({ data: "json, name=GENDER" })
+  @SpeakeasyMetadata({ data: "json, name=GENDER" })
   gender: string;
 
-  @Metadata({ data: "json, name=LPGId" })
+  @SpeakeasyMetadata({ data: "json, name=LPGId" })
   lpgId: string;
 
-  @Metadata({ data: "json, name=SVNo" })
+  @SpeakeasyMetadata({ data: "json, name=SVNo" })
   svNo: string;
 
-  @Metadata({ data: "json, name=UID" })
+  @SpeakeasyMetadata({ data: "json, name=UID" })
   uid: string;
 }
 
@@ -28,97 +29,88 @@ export enum LpgsvRequestBodyFormatEnum {
 
 
 export class LpgsvRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateParameters" })
+  @SpeakeasyMetadata({ data: "json, name=certificateParameters" })
   certificateParameters?: LpgsvRequestBodyCertificateParameters;
 
-  @Metadata({ data: "json, name=consentArtifact" })
+  @SpeakeasyMetadata({ data: "json, name=consentArtifact" })
   consentArtifact?: any;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format: LpgsvRequestBodyFormatEnum;
 
-  @Metadata({ data: "json, name=txnId" })
+  @SpeakeasyMetadata({ data: "json, name=txnId" })
   txnId: string;
 }
 
 
 export class LpgsvSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   clientId: shared.SchemeClientId;
 }
 
-
-export class LpgsvRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: LpgsvRequestBody;
-
-  @Metadata()
-  security: LpgsvSecurity;
-}
-
 export enum Lpgsv400ApplicationJsonErrorEnum {
-    MissingParameter = "missing_parameter"
-,    InvalidParameter = "invalid_parameter"
-,    InvalidFormat = "invalid_format"
-,    InvalidTxnid = "invalid_txnid"
-,    InvalidConsentid = "invalid_consentid"
+    MissingParameter = "missing_parameter",
+    InvalidParameter = "invalid_parameter",
+    InvalidFormat = "invalid_format",
+    InvalidTxnid = "invalid_txnid",
+    InvalidConsentid = "invalid_consentid"
 }
 
 export enum Lpgsv400ApplicationJsonErrorDescriptionEnum {
-    PleaseProvideAllMandatoryParameters = "Please provide all mandatory parameters"
-,    BadRequest = "Bad request"
-,    TheFormatParameterIsInvalid = "The format parameter is invalid"
-,    TheTxnIdParameterMustBeInUuidFormat = "The txnId parameter must be in UUID format"
-,    TheConsentIdParameterMustBeInUuidFormat = "The consentId parameter must be in UUID format"
+    PleaseProvideAllMandatoryParameters = "Please provide all mandatory parameters",
+    BadRequest = "Bad request",
+    TheFormatParameterIsInvalid = "The format parameter is invalid",
+    TheTxnIdParameterMustBeInUuidFormat = "The txnId parameter must be in UUID format",
+    TheConsentIdParameterMustBeInUuidFormat = "The consentId parameter must be in UUID format"
 }
 
 
 export class Lpgsv400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Lpgsv400ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Lpgsv400ApplicationJsonErrorDescriptionEnum;
 }
 
 export enum Lpgsv401ApplicationJsonErrorEnum {
-    InvalidAuthentication = "invalid_authentication"
-,    InvalidAuthorization = "invalid_authorization"
+    InvalidAuthentication = "invalid_authentication",
+    InvalidAuthorization = "invalid_authorization"
 }
 
 export enum Lpgsv401ApplicationJsonErrorDescriptionEnum {
-    AuthenticationFailed = "Authentication failed"
-,    YouAreNotAuthorizedToUseThisApi = "You are not authorized to use this API"
+    AuthenticationFailed = "Authentication failed",
+    YouAreNotAuthorizedToUseThisApi = "You are not authorized to use this API"
 }
 
 
 export class Lpgsv401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Lpgsv401ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Lpgsv401ApplicationJsonErrorDescriptionEnum;
 }
 
 export enum Lpgsv404ApplicationJsonErrorEnum {
-    RecordNotFound = "record_not_found"
-,    UrlNotFound = "url_not_found"
+    RecordNotFound = "record_not_found",
+    UrlNotFound = "url_not_found"
 }
 
 export enum Lpgsv404ApplicationJsonErrorDescriptionEnum {
-    NoRecordFound = "No record found"
-,    YourApiUrlOrPathIsIncorrect = "Your API url or path is incorrect"
+    NoRecordFound = "No record found",
+    YourApiUrlOrPathIsIncorrect = "Your API url or path is incorrect"
 }
 
 
 export class Lpgsv404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Lpgsv404ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Lpgsv404ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -132,10 +124,10 @@ export enum Lpgsv500ApplicationJsonErrorDescriptionEnum {
 
 
 export class Lpgsv500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Lpgsv500ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Lpgsv500ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -149,10 +141,10 @@ export enum Lpgsv502ApplicationJsonErrorDescriptionEnum {
 
 
 export class Lpgsv502ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Lpgsv502ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Lpgsv502ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -166,10 +158,10 @@ export enum Lpgsv503ApplicationJsonErrorDescriptionEnum {
 
 
 export class Lpgsv503ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Lpgsv503ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Lpgsv503ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -183,39 +175,48 @@ export enum Lpgsv504ApplicationJsonErrorDescriptionEnum {
 
 
 export class Lpgsv504ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Lpgsv504ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Lpgsv504ApplicationJsonErrorDescriptionEnum;
 }
 
 
+export class LpgsvRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: LpgsvRequestBody;
+
+  @SpeakeasyMetadata()
+  security: LpgsvSecurity;
+}
+
+
 export class LpgsvResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   lpgsv400ApplicationJsonObject?: Lpgsv400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   lpgsv401ApplicationJsonObject?: Lpgsv401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   lpgsv404ApplicationJsonObject?: Lpgsv404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   lpgsv500ApplicationJsonObject?: Lpgsv500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   lpgsv502ApplicationJsonObject?: Lpgsv502ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   lpgsv503ApplicationJsonObject?: Lpgsv503ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   lpgsv504ApplicationJsonObject?: Lpgsv504ApplicationJson;
 }

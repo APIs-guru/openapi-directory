@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSpacesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=numberOfResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=numberOfResults" })
   numberOfResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timestamp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timestamp" })
   timestamp?: Date;
 }
 
 
 export class GetSpacesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class GetSpacesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSpacesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetSpacesSecurity;
 }
 
 
 export class GetSpacesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSpacesResult?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

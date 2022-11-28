@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsRedshiftClusterElasticIpStatus
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The status of the elastic IP (EIP) address for an Amazon Redshift cluster.
 **/
 export class AwsRedshiftClusterElasticIpStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ElasticIp" })
+  @SpeakeasyMetadata({ data: "json, name=ElasticIp" })
   elasticIp?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

@@ -1,123 +1,124 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCommitteeCommitteeIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=committee_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=committee_id" })
   committeeId: string;
 }
 
 export enum GetCommitteeCommitteeIdCommitteeTypeEnum {
-    Unknown = ""
-,    C = "C"
-,    D = "D"
-,    E = "E"
-,    H = "H"
-,    I = "I"
-,    N = "N"
-,    O = "O"
-,    P = "P"
-,    Q = "Q"
-,    S = "S"
-,    U = "U"
-,    V = "V"
-,    W = "W"
-,    X = "X"
-,    Y = "Y"
-,    Z = "Z"
+    Unknown = "",
+    C = "C",
+    D = "D",
+    E = "E",
+    H = "H",
+    I = "I",
+    N = "N",
+    O = "O",
+    P = "P",
+    Q = "Q",
+    S = "S",
+    U = "U",
+    V = "V",
+    W = "W",
+    X = "X",
+    Y = "Y",
+    Z = "Z"
 }
 
 export enum GetCommitteeCommitteeIdDesignationEnum {
-    Unknown = ""
-,    A = "A"
-,    J = "J"
-,    P = "P"
-,    U = "U"
-,    B = "B"
-,    D = "D"
+    Unknown = "",
+    A = "A",
+    J = "J",
+    P = "P",
+    U = "U",
+    B = "B",
+    D = "D"
 }
 
 export enum GetCommitteeCommitteeIdFilingFrequencyEnum {
-    Unknown = ""
-,    A = "A"
-,    M = "M"
-,    N = "N"
-,    Q = "Q"
-,    T = "T"
-,    W = "W"
-,    MinusA = "-A"
-,    MinusT = "-T"
+    Unknown = "",
+    A = "A",
+    M = "M",
+    N = "N",
+    Q = "Q",
+    T = "T",
+    W = "W",
+    MinusA = "-A",
+    MinusT = "-T"
 }
 
 export enum GetCommitteeCommitteeIdOrganizationTypeEnum {
-    Unknown = ""
-,    C = "C"
-,    L = "L"
-,    M = "M"
-,    T = "T"
-,    V = "V"
-,    W = "W"
+    Unknown = "",
+    C = "C",
+    L = "L",
+    M = "M",
+    T = "T",
+    V = "V",
+    W = "W"
 }
 
 
 export class GetCommitteeCommitteeIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=committee_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=committee_type" })
   committeeType?: GetCommitteeCommitteeIdCommitteeTypeEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cycle" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cycle" })
   cycle?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=designation" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=designation" })
   designation?: GetCommitteeCommitteeIdDesignationEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filing_frequency" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filing_frequency" })
   filingFrequency?: GetCommitteeCommitteeIdFilingFrequencyEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=organization_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=organization_type" })
   organizationType?: GetCommitteeCommitteeIdOrganizationTypeEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_hide_null" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_hide_null" })
   sortHideNull?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_null_only" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_null_only" })
   sortNullOnly?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_nulls_last" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_nulls_last" })
   sortNullsLast?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=year" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" })
   year?: number[];
 }
 
 
 export class GetCommitteeCommitteeIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetCommitteeCommitteeIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCommitteeCommitteeIdQueryParams;
 }
 
 
 export class GetCommitteeCommitteeIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   committeeDetailPage?: shared.CommitteeDetailPage;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

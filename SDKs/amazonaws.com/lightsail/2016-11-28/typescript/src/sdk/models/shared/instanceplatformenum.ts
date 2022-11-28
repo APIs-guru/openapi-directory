@@ -1,6 +1,7 @@
 
 
+
 export enum InstancePlatformEnum {
-    LinuxUnix = "LINUX_UNIX"
-,    Windows = "WINDOWS"
+    LinuxUnix = "LINUX_UNIX",
+    Windows = "WINDOWS"
 }

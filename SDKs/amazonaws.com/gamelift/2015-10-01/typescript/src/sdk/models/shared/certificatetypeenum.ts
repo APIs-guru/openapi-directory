@@ -1,6 +1,7 @@
 
 
+
 export enum CertificateTypeEnum {
-    Disabled = "DISABLED"
-,    Generated = "GENERATED"
+    Disabled = "DISABLED",
+    Generated = "GENERATED"
 }

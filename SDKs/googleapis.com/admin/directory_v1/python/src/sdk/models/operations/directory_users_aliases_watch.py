@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryUsersAliasesWatchPathParams:
-    user_key: str = field(default=None, metadata={'path_param': { 'field_name': 'userKey', 'style': 'simple', 'explode': False }})
+    user_key: str = field(metadata={'path_param': { 'field_name': 'userKey', 'style': 'simple', 'explode': False }})
     
 class DirectoryUsersAliasesWatchEventEnum(str, Enum):
     ADD = "add"
@@ -30,26 +31,26 @@ class DirectoryUsersAliasesWatchQueryParams:
 
 @dataclass
 class DirectoryUsersAliasesWatchSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryUsersAliasesWatchSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryUsersAliasesWatchSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryUsersAliasesWatchSecurityOption4:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -62,15 +63,15 @@ class DirectoryUsersAliasesWatchSecurity:
 
 @dataclass
 class DirectoryUsersAliasesWatchRequest:
-    path_params: DirectoryUsersAliasesWatchPathParams = field(default=None)
-    query_params: DirectoryUsersAliasesWatchQueryParams = field(default=None)
+    path_params: DirectoryUsersAliasesWatchPathParams = field()
+    query_params: DirectoryUsersAliasesWatchQueryParams = field()
+    security: DirectoryUsersAliasesWatchSecurity = field()
     request: Optional[shared.Channel] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DirectoryUsersAliasesWatchSecurity = field(default=None)
     
 
 @dataclass
 class DirectoryUsersAliasesWatchResponse:
+    content_type: str = field()
+    status_code: int = field()
     channel: Optional[shared.Channel] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

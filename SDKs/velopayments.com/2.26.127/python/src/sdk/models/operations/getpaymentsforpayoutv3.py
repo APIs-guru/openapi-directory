@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetPaymentsForPayoutV3PathParams:
-    payout_id: str = field(default=None, metadata={'path_param': { 'field_name': 'payoutId', 'style': 'simple', 'explode': False }})
+    payout_id: str = field(metadata={'path_param': { 'field_name': 'payoutId', 'style': 'simple', 'explode': False }})
     
 class GetPaymentsForPayoutV3StatusEnum(str, Enum):
     ACCEPTED = "ACCEPTED"
@@ -33,14 +34,14 @@ class GetPaymentsForPayoutV3QueryParams:
 
 @dataclass
 class GetPaymentsForPayoutV3Request:
-    path_params: GetPaymentsForPayoutV3PathParams = field(default=None)
-    query_params: GetPaymentsForPayoutV3QueryParams = field(default=None)
+    path_params: GetPaymentsForPayoutV3PathParams = field()
+    query_params: GetPaymentsForPayoutV3QueryParams = field()
     
 
 @dataclass
 class GetPaymentsForPayoutV3Response:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     paged_payments_response_v3: Optional[shared.PagedPaymentsResponseV3] = field(default=None)
-    status_code: int = field(default=None)
     inline_response_404: Optional[Any] = field(default=None)
     

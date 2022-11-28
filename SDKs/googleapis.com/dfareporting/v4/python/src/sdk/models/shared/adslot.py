@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AdSlotCompatibilityEnum(str, Enum):
     DISPLAY = "DISPLAY"
@@ -18,12 +20,16 @@ class AdSlotPaymentSourceTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AdSlot:
-    comment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comment' }})
-    compatibility: Optional[AdSlotCompatibilityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'compatibility' }})
-    height: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'height' }})
-    linked_placement_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'linkedPlacementId' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    payment_source_type: Optional[AdSlotPaymentSourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentSourceType' }})
-    primary: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primary' }})
-    width: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
+    r"""AdSlot
+    Ad Slot
+    """
+    
+    comment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('comment') }})
+    compatibility: Optional[AdSlotCompatibilityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('compatibility') }})
+    height: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('height') }})
+    linked_placement_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('linkedPlacementId') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    payment_source_type: Optional[AdSlotPaymentSourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentSourceType') }})
+    primary: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('primary') }})
+    width: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('width') }})
     

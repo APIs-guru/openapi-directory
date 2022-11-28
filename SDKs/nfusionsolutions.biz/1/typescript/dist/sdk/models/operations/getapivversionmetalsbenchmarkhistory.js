@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetApiVVersionMetalsBenchmarkHistoryPathParams = /** @class */ (function (_super) {
     __extends(GetApiVVersionMetalsBenchmarkHistoryPathParams, _super);
@@ -30,7 +30,7 @@ var GetApiVVersionMetalsBenchmarkHistoryPathParams = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=version" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" }),
         __metadata("design:type", String)
     ], GetApiVVersionMetalsBenchmarkHistoryPathParams.prototype, "version", void 0);
     return GetApiVVersionMetalsBenchmarkHistoryPathParams;
@@ -42,39 +42,39 @@ var GetApiVVersionMetalsBenchmarkHistoryQueryParams = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=currency" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currency" }),
         __metadata("design:type", String)
     ], GetApiVVersionMetalsBenchmarkHistoryQueryParams.prototype, "currency", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=end" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end" }),
         __metadata("design:type", Date)
     ], GetApiVVersionMetalsBenchmarkHistoryQueryParams.prototype, "end", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetApiVVersionMetalsBenchmarkHistoryQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=historicalfx" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=historicalfx" }),
         __metadata("design:type", Boolean)
     ], GetApiVVersionMetalsBenchmarkHistoryQueryParams.prototype, "historicalfx", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=interval" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=interval" }),
         __metadata("design:type", String)
     ], GetApiVVersionMetalsBenchmarkHistoryQueryParams.prototype, "interval", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=metals" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=metals" }),
         __metadata("design:type", String)
     ], GetApiVVersionMetalsBenchmarkHistoryQueryParams.prototype, "metals", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=start" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" }),
         __metadata("design:type", Date)
     ], GetApiVVersionMetalsBenchmarkHistoryQueryParams.prototype, "start", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" }),
         __metadata("design:type", String)
     ], GetApiVVersionMetalsBenchmarkHistoryQueryParams.prototype, "token", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=unitofmeasure" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=unitofmeasure" }),
         __metadata("design:type", String)
     ], GetApiVVersionMetalsBenchmarkHistoryQueryParams.prototype, "unitofmeasure", void 0);
     return GetApiVVersionMetalsBenchmarkHistoryQueryParams;
@@ -86,11 +86,11 @@ var GetApiVVersionMetalsBenchmarkHistoryRequest = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiVVersionMetalsBenchmarkHistoryPathParams)
     ], GetApiVVersionMetalsBenchmarkHistoryRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiVVersionMetalsBenchmarkHistoryQueryParams)
     ], GetApiVVersionMetalsBenchmarkHistoryRequest.prototype, "queryParams", void 0);
     return GetApiVVersionMetalsBenchmarkHistoryRequest;
@@ -102,23 +102,23 @@ var GetApiVVersionMetalsBenchmarkHistoryResponse = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetApiVVersionMetalsBenchmarkHistoryResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiVVersionMetalsBenchmarkHistoryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.IntervalCollectionResponse }),
+        SpeakeasyMetadata({ elemType: shared.IntervalCollectionResponse }),
         __metadata("design:type", Array)
     ], GetApiVVersionMetalsBenchmarkHistoryResponse.prototype, "intervalCollectionResponses", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetApiVVersionMetalsBenchmarkHistoryResponse.prototype, "problemDetails", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiVVersionMetalsBenchmarkHistoryResponse.prototype, "statusCode", void 0);
     return GetApiVVersionMetalsBenchmarkHistoryResponse;

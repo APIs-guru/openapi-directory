@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TransformFilterCriteria } from "./transformfiltercriteria";
 import { TransformSortCriteria } from "./transformsortcriteria";
 
 
+
 export class ListMlTransformsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Filter" })
+  @SpeakeasyMetadata({ data: "json, name=Filter" })
   filter?: TransformFilterCriteria;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Sort" })
+  @SpeakeasyMetadata({ data: "json, name=Sort" })
   sort?: TransformSortCriteria;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 }

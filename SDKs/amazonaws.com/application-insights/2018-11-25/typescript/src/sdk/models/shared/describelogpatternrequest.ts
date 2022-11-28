@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeLogPatternRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PatternName" })
+  @SpeakeasyMetadata({ data: "json, name=PatternName" })
   patternName: string;
 
-  @Metadata({ data: "json, name=PatternSetName" })
+  @SpeakeasyMetadata({ data: "json, name=PatternSetName" })
   patternSetName: string;
 
-  @Metadata({ data: "json, name=ResourceGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceGroupName" })
   resourceGroupName: string;
 }

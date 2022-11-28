@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostSetAlarmStateActionEnum(str, Enum):
     SET_ALARM_STATE = "SetAlarmState"
@@ -10,8 +14,8 @@ class PostSetAlarmStateVersionEnum(str, Enum):
 
 @dataclass
 class PostSetAlarmStateQueryParams:
-    action: PostSetAlarmStateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostSetAlarmStateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostSetAlarmStateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostSetAlarmStateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostSetAlarmStateHeaders:
 
 @dataclass
 class PostSetAlarmStateRequest:
-    query_params: PostSetAlarmStateQueryParams = field(default=None)
-    headers: PostSetAlarmStateHeaders = field(default=None)
+    headers: PostSetAlarmStateHeaders = field()
+    query_params: PostSetAlarmStateQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostSetAlarmStateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

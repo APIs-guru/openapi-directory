@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteCacheClusterActionEnum(str, Enum):
     DELETE_CACHE_CLUSTER = "DeleteCacheCluster"
@@ -10,8 +14,8 @@ class PostDeleteCacheClusterVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteCacheClusterQueryParams:
-    action: PostDeleteCacheClusterActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteCacheClusterVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteCacheClusterActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteCacheClusterVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteCacheClusterHeaders:
 
 @dataclass
 class PostDeleteCacheClusterRequest:
-    query_params: PostDeleteCacheClusterQueryParams = field(default=None)
-    headers: PostDeleteCacheClusterHeaders = field(default=None)
+    headers: PostDeleteCacheClusterHeaders = field()
+    query_params: PostDeleteCacheClusterQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteCacheClusterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

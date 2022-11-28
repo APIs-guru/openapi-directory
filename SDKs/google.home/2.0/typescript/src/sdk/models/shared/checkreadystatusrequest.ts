@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CheckReadyStatusRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=play_ready_message" })
+  @SpeakeasyMetadata({ data: "json, name=play_ready_message" })
   playReadyMessage: boolean;
 
-  @Metadata({ data: "json, name=user_id" })
+  @SpeakeasyMetadata({ data: "json, name=user_id" })
   userId: string;
 }

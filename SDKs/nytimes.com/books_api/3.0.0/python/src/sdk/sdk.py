@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: http://developer.nytimes.com/"""
 import requests
-from typing import List,Optional
+from typing import Optional
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: http://developer.nytimes.com/"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_lists_best_sellers_history_json(self, request: operations.GetListsBestSellersHistoryJSONRequest) -> operations.GetListsBestSellersHistoryJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Best Seller History List
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/lists/best-sellers/history.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -47,15 +71,17 @@ class SDK:
 
     
     def get_lists_date_list_json(self, request: operations.GetListsDateListJSONRequest) -> operations.GetListsDateListJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Best Seller List by Date
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/lists/{date}/{list}.json", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -70,15 +96,17 @@ class SDK:
 
     
     def get_lists_format(self, request: operations.GetListsFormatRequest) -> operations.GetListsFormatResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Best Seller List
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/lists.{format}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -93,15 +121,17 @@ class SDK:
 
     
     def get_lists_names_format(self, request: operations.GetListsNamesFormatRequest) -> operations.GetListsNamesFormatResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Best Seller List Names
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/lists/names.{format}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -116,15 +146,17 @@ class SDK:
 
     
     def get_lists_overview_format(self, request: operations.GetListsOverviewFormatRequest) -> operations.GetListsOverviewFormatResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Best Seller List Overview
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/lists/overview.{format}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -139,15 +171,17 @@ class SDK:
 
     
     def get_reviews_format(self, request: operations.GetReviewsFormatRequest) -> operations.GetReviewsFormatResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Reviews
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/reviews.{format}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

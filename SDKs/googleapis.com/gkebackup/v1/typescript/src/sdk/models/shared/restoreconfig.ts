@@ -1,27 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClusterResourceRestoreScope } from "./clusterresourcerestorescope";
 import { NamespacedNames } from "./namespacednames";
 import { Namespaces } from "./namespaces";
 import { SubstitutionRule } from "./substitutionrule";
 
+
 export enum RestoreConfigClusterResourceConflictPolicyEnum {
-    ClusterResourceConflictPolicyUnspecified = "CLUSTER_RESOURCE_CONFLICT_POLICY_UNSPECIFIED"
-,    UseExistingVersion = "USE_EXISTING_VERSION"
-,    UseBackupVersion = "USE_BACKUP_VERSION"
+    ClusterResourceConflictPolicyUnspecified = "CLUSTER_RESOURCE_CONFLICT_POLICY_UNSPECIFIED",
+    UseExistingVersion = "USE_EXISTING_VERSION",
+    UseBackupVersion = "USE_BACKUP_VERSION"
 }
 
 export enum RestoreConfigNamespacedResourceRestoreModeEnum {
-    NamespacedResourceRestoreModeUnspecified = "NAMESPACED_RESOURCE_RESTORE_MODE_UNSPECIFIED"
-,    DeleteAndRestore = "DELETE_AND_RESTORE"
-,    FailOnConflict = "FAIL_ON_CONFLICT"
+    NamespacedResourceRestoreModeUnspecified = "NAMESPACED_RESOURCE_RESTORE_MODE_UNSPECIFIED",
+    DeleteAndRestore = "DELETE_AND_RESTORE",
+    FailOnConflict = "FAIL_ON_CONFLICT"
 }
 
 export enum RestoreConfigVolumeDataRestorePolicyEnum {
-    VolumeDataRestorePolicyUnspecified = "VOLUME_DATA_RESTORE_POLICY_UNSPECIFIED"
-,    RestoreVolumeDataFromBackup = "RESTORE_VOLUME_DATA_FROM_BACKUP"
-,    ReuseVolumeHandleFromBackup = "REUSE_VOLUME_HANDLE_FROM_BACKUP"
-,    NoVolumeDataRestoration = "NO_VOLUME_DATA_RESTORATION"
+    VolumeDataRestorePolicyUnspecified = "VOLUME_DATA_RESTORE_POLICY_UNSPECIFIED",
+    RestoreVolumeDataFromBackup = "RESTORE_VOLUME_DATA_FROM_BACKUP",
+    ReuseVolumeHandleFromBackup = "REUSE_VOLUME_HANDLE_FROM_BACKUP",
+    NoVolumeDataRestoration = "NO_VOLUME_DATA_RESTORATION"
 }
 
 
@@ -30,27 +30,27 @@ export enum RestoreConfigVolumeDataRestorePolicyEnum {
  * Configuration of a restore. Next id: 9
 **/
 export class RestoreConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allNamespaces" })
+  @SpeakeasyMetadata({ data: "json, name=allNamespaces" })
   allNamespaces?: boolean;
 
-  @Metadata({ data: "json, name=clusterResourceConflictPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=clusterResourceConflictPolicy" })
   clusterResourceConflictPolicy?: RestoreConfigClusterResourceConflictPolicyEnum;
 
-  @Metadata({ data: "json, name=clusterResourceRestoreScope" })
+  @SpeakeasyMetadata({ data: "json, name=clusterResourceRestoreScope" })
   clusterResourceRestoreScope?: ClusterResourceRestoreScope;
 
-  @Metadata({ data: "json, name=namespacedResourceRestoreMode" })
+  @SpeakeasyMetadata({ data: "json, name=namespacedResourceRestoreMode" })
   namespacedResourceRestoreMode?: RestoreConfigNamespacedResourceRestoreModeEnum;
 
-  @Metadata({ data: "json, name=selectedApplications" })
+  @SpeakeasyMetadata({ data: "json, name=selectedApplications" })
   selectedApplications?: NamespacedNames;
 
-  @Metadata({ data: "json, name=selectedNamespaces" })
+  @SpeakeasyMetadata({ data: "json, name=selectedNamespaces" })
   selectedNamespaces?: Namespaces;
 
-  @Metadata({ data: "json, name=substitutionRules", elemType: shared.SubstitutionRule })
+  @SpeakeasyMetadata({ data: "json, name=substitutionRules", elemType: SubstitutionRule })
   substitutionRules?: SubstitutionRule[];
 
-  @Metadata({ data: "json, name=volumeDataRestorePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=volumeDataRestorePolicy" })
   volumeDataRestorePolicy?: RestoreConfigVolumeDataRestorePolicyEnum;
 }

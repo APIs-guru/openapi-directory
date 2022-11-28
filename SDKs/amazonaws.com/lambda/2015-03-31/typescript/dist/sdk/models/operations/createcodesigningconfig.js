@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateCodeSigningConfigHeaders = /** @class */ (function (_super) {
     __extends(CreateCodeSigningConfigHeaders, _super);
@@ -30,31 +30,31 @@ var CreateCodeSigningConfigHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateCodeSigningConfigHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateCodeSigningConfigHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateCodeSigningConfigHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateCodeSigningConfigHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateCodeSigningConfigHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateCodeSigningConfigHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateCodeSigningConfigHeaders.prototype, "xAmzSignedHeaders", void 0);
     return CreateCodeSigningConfigHeaders;
@@ -70,7 +70,7 @@ var CreateCodeSigningConfigRequestBodyAllowedPublishers = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=SigningProfileVersionArns" }),
+        SpeakeasyMetadata({ data: "json, name=SigningProfileVersionArns" }),
         __metadata("design:type", Array)
     ], CreateCodeSigningConfigRequestBodyAllowedPublishers.prototype, "signingProfileVersionArns", void 0);
     return CreateCodeSigningConfigRequestBodyAllowedPublishers;
@@ -86,7 +86,7 @@ var CreateCodeSigningConfigRequestBodyCodeSigningPolicies = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=UntrustedArtifactOnDeployment" }),
+        SpeakeasyMetadata({ data: "json, name=UntrustedArtifactOnDeployment" }),
         __metadata("design:type", String)
     ], CreateCodeSigningConfigRequestBodyCodeSigningPolicies.prototype, "untrustedArtifactOnDeployment", void 0);
     return CreateCodeSigningConfigRequestBodyCodeSigningPolicies;
@@ -98,15 +98,15 @@ var CreateCodeSigningConfigRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AllowedPublishers" }),
+        SpeakeasyMetadata({ data: "json, name=AllowedPublishers" }),
         __metadata("design:type", CreateCodeSigningConfigRequestBodyAllowedPublishers)
     ], CreateCodeSigningConfigRequestBody.prototype, "allowedPublishers", void 0);
     __decorate([
-        Metadata({ data: "json, name=CodeSigningPolicies" }),
+        SpeakeasyMetadata({ data: "json, name=CodeSigningPolicies" }),
         __metadata("design:type", CreateCodeSigningConfigRequestBodyCodeSigningPolicies)
     ], CreateCodeSigningConfigRequestBody.prototype, "codeSigningPolicies", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], CreateCodeSigningConfigRequestBody.prototype, "description", void 0);
     return CreateCodeSigningConfigRequestBody;
@@ -118,11 +118,11 @@ var CreateCodeSigningConfigRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateCodeSigningConfigHeaders)
     ], CreateCodeSigningConfigRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateCodeSigningConfigRequestBody)
     ], CreateCodeSigningConfigRequest.prototype, "request", void 0);
     return CreateCodeSigningConfigRequest;
@@ -134,23 +134,23 @@ var CreateCodeSigningConfigResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateCodeSigningConfigResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreateCodeSigningConfigResponse)
     ], CreateCodeSigningConfigResponse.prototype, "createCodeSigningConfigResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateCodeSigningConfigResponse.prototype, "invalidParameterValueException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateCodeSigningConfigResponse.prototype, "serviceException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateCodeSigningConfigResponse.prototype, "statusCode", void 0);
     return CreateCodeSigningConfigResponse;

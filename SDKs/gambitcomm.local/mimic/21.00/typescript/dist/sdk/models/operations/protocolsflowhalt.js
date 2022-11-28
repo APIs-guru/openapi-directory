@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolSflowHaltPathParams = /** @class */ (function (_super) {
     __extends(ProtocolSflowHaltPathParams, _super);
     function ProtocolSflowHaltPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolSflowHaltPathParams.prototype, "agentNum", void 0);
     return ProtocolSflowHaltPathParams;
@@ -41,7 +41,7 @@ var ProtocolSflowHaltRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolSflowHaltPathParams)
     ], ProtocolSflowHaltRequest.prototype, "pathParams", void 0);
     return ProtocolSflowHaltRequest;
@@ -53,15 +53,15 @@ var ProtocolSflowHaltResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolSflowHaltResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolSflowHaltResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolSflowHaltResponse.prototype, "protocolSflowHalt200ApplicationJsonString", void 0);
     return ProtocolSflowHaltResponse;

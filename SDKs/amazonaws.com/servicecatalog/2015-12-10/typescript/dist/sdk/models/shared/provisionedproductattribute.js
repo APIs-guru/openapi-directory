@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProvisionedProductStatusEnum } from "./provisionedproductstatusenum";
+import { Tag } from "./tag";
 // ProvisionedProductAttribute
 /**
  * Information about a provisioned product.
@@ -35,79 +35,79 @@ var ProvisionedProductAttribute = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Arn" }),
+        SpeakeasyMetadata({ data: "json, name=Arn" }),
         __metadata("design:type", String)
     ], ProvisionedProductAttribute.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedTime" }),
         __metadata("design:type", Date)
     ], ProvisionedProductAttribute.prototype, "createdTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], ProvisionedProductAttribute.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=IdempotencyToken" }),
+        SpeakeasyMetadata({ data: "json, name=IdempotencyToken" }),
         __metadata("design:type", String)
     ], ProvisionedProductAttribute.prototype, "idempotencyToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastProvisioningRecordId" }),
+        SpeakeasyMetadata({ data: "json, name=LastProvisioningRecordId" }),
         __metadata("design:type", String)
     ], ProvisionedProductAttribute.prototype, "lastProvisioningRecordId", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastRecordId" }),
+        SpeakeasyMetadata({ data: "json, name=LastRecordId" }),
         __metadata("design:type", String)
     ], ProvisionedProductAttribute.prototype, "lastRecordId", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastSuccessfulProvisioningRecordId" }),
+        SpeakeasyMetadata({ data: "json, name=LastSuccessfulProvisioningRecordId" }),
         __metadata("design:type", String)
     ], ProvisionedProductAttribute.prototype, "lastSuccessfulProvisioningRecordId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], ProvisionedProductAttribute.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=PhysicalId" }),
+        SpeakeasyMetadata({ data: "json, name=PhysicalId" }),
         __metadata("design:type", String)
     ], ProvisionedProductAttribute.prototype, "physicalId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProductId" }),
+        SpeakeasyMetadata({ data: "json, name=ProductId" }),
         __metadata("design:type", String)
     ], ProvisionedProductAttribute.prototype, "productId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProductName" }),
+        SpeakeasyMetadata({ data: "json, name=ProductName" }),
         __metadata("design:type", String)
     ], ProvisionedProductAttribute.prototype, "productName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisioningArtifactId" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactId" }),
         __metadata("design:type", String)
     ], ProvisionedProductAttribute.prototype, "provisioningArtifactId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProvisioningArtifactName" }),
+        SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactName" }),
         __metadata("design:type", String)
     ], ProvisionedProductAttribute.prototype, "provisioningArtifactName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], ProvisionedProductAttribute.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=StatusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=StatusMessage" }),
         __metadata("design:type", String)
     ], ProvisionedProductAttribute.prototype, "statusMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], ProvisionedProductAttribute.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], ProvisionedProductAttribute.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=UserArn" }),
+        SpeakeasyMetadata({ data: "json, name=UserArn" }),
         __metadata("design:type", String)
     ], ProvisionedProductAttribute.prototype, "userArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=UserArnSession" }),
+        SpeakeasyMetadata({ data: "json, name=UserArnSession" }),
         __metadata("design:type", String)
     ], ProvisionedProductAttribute.prototype, "userArnSession", void 0);
     return ProvisionedProductAttribute;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // QueryExecutionContext
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The database and data catalog context in which the query execution occurs.
 **/
 export class QueryExecutionContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Catalog" })
+  @SpeakeasyMetadata({ data: "json, name=Catalog" })
   catalog?: string;
 
-  @Metadata({ data: "json, name=Database" })
+  @SpeakeasyMetadata({ data: "json, name=Database" })
   database?: string;
 }

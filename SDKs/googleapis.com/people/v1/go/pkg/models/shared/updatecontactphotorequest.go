@@ -9,6 +9,8 @@ const (
 	UpdateContactPhotoRequestSourcesEnumReadSourceTypeDomainContact UpdateContactPhotoRequestSourcesEnum = "READ_SOURCE_TYPE_DOMAIN_CONTACT"
 )
 
+// UpdateContactPhotoRequest
+// A request to update an existing contact's photo. All requests must have a valid photo format: JPEG or PNG.
 type UpdateContactPhotoRequest struct {
 	PersonFields *string                                `json:"personFields,omitempty"`
 	PhotoBytes   *string                                `json:"photoBytes,omitempty"`

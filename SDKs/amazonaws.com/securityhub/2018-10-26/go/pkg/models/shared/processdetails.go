@@ -1,5 +1,7 @@
 package shared
 
+// ProcessDetails
+// The details of process-related information about a finding.
 type ProcessDetails struct {
 	LaunchedAt   *string `json:"LaunchedAt,omitempty"`
 	Name         *string `json:"Name,omitempty"`

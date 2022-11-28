@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAccountPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=accountId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accountId" })
   accountId: string;
 }
 
 
 export class GetAccountQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=account_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=account_id" })
   accountId: number;
 }
 
 
 export class GetAccountRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAccountPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAccountQueryParams;
 }
 
 
 export class GetAccountResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accountDetail?: shared.AccountDetail;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

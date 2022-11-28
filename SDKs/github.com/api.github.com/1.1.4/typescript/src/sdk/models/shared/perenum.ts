@@ -1,7 +1,8 @@
 
 
+
 export enum PerEnum {
-    Unknown = ""
-,    Day = "day"
-,    Week = "week"
+    Unknown = "",
+    Day = "day",
+    Week = "week"
 }

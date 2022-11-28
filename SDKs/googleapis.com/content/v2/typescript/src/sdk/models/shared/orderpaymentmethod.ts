@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrderAddress } from "./orderaddress";
 
 
+
 export class OrderPaymentMethod extends SpeakeasyBase {
-  @Metadata({ data: "json, name=billingAddress" })
+  @SpeakeasyMetadata({ data: "json, name=billingAddress" })
   billingAddress?: OrderAddress;
 
-  @Metadata({ data: "json, name=expirationMonth" })
+  @SpeakeasyMetadata({ data: "json, name=expirationMonth" })
   expirationMonth?: number;
 
-  @Metadata({ data: "json, name=expirationYear" })
+  @SpeakeasyMetadata({ data: "json, name=expirationYear" })
   expirationYear?: number;
 
-  @Metadata({ data: "json, name=lastFourDigits" })
+  @SpeakeasyMetadata({ data: "json, name=lastFourDigits" })
   lastFourDigits?: string;
 
-  @Metadata({ data: "json, name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

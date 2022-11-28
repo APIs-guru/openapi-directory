@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum GetPullRequestApprovalStatesXAmzTargetEnum {
     CodeCommit20150413GetPullRequestApprovalStates = "CodeCommit_20150413.GetPullRequestApprovalStates"
@@ -7,78 +8,78 @@ export enum GetPullRequestApprovalStatesXAmzTargetEnum {
 
 
 export class GetPullRequestApprovalStatesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: GetPullRequestApprovalStatesXAmzTargetEnum;
 }
 
 
 export class GetPullRequestApprovalStatesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetPullRequestApprovalStatesHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.GetPullRequestApprovalStatesInput;
 }
 
 
 export class GetPullRequestApprovalStatesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionIntegrityChecksFailedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyAccessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyDisabledException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPullRequestApprovalStatesOutput?: shared.GetPullRequestApprovalStatesOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidPullRequestIdException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRevisionIdException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullRequestDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullRequestIdRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   revisionIdRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

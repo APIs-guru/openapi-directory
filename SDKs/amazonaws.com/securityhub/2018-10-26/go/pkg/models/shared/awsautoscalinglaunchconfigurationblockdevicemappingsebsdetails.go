@@ -1,5 +1,7 @@
 package shared
 
+// AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails
+// Parameters that are used to automatically set up EBS volumes when an instance is launched.
 type AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails struct {
 	DeleteOnTermination *bool   `json:"DeleteOnTermination,omitempty"`
 	Encrypted           *bool   `json:"Encrypted,omitempty"`

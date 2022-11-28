@@ -1,24 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UsageAllocation } from "./usageallocation";
 
 
+
 export class MeterUsageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DryRun" })
+  @SpeakeasyMetadata({ data: "json, name=DryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "json, name=ProductCode" })
+  @SpeakeasyMetadata({ data: "json, name=ProductCode" })
   productCode: string;
 
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp: Date;
 
-  @Metadata({ data: "json, name=UsageAllocations", elemType: shared.UsageAllocation })
+  @SpeakeasyMetadata({ data: "json, name=UsageAllocations", elemType: UsageAllocation })
   usageAllocations?: UsageAllocation[];
 
-  @Metadata({ data: "json, name=UsageDimension" })
+  @SpeakeasyMetadata({ data: "json, name=UsageDimension" })
   usageDimension: string;
 
-  @Metadata({ data: "json, name=UsageQuantity" })
+  @SpeakeasyMetadata({ data: "json, name=UsageQuantity" })
   usageQuantity?: number;
 }

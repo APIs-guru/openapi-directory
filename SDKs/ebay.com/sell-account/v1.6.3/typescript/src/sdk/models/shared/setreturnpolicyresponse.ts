@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CategoryType } from "./categorytype";
 import { InternationalReturnOverrideType } from "./internationalreturnoverridetype";
 import { TimeDuration } from "./timeduration";
 import { Error } from "./error";
+
 
 
 // SetReturnPolicyResponse
@@ -11,48 +11,48 @@ import { Error } from "./error";
  * Complex type that that gets populated with a response containing a return policy.
 **/
 export class SetReturnPolicyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categoryTypes", elemType: shared.CategoryType })
+  @SpeakeasyMetadata({ data: "json, name=categoryTypes", elemType: CategoryType })
   categoryTypes?: CategoryType[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=extendedHolidayReturnsOffered" })
+  @SpeakeasyMetadata({ data: "json, name=extendedHolidayReturnsOffered" })
   extendedHolidayReturnsOffered?: boolean;
 
-  @Metadata({ data: "json, name=internationalOverride" })
+  @SpeakeasyMetadata({ data: "json, name=internationalOverride" })
   internationalOverride?: InternationalReturnOverrideType;
 
-  @Metadata({ data: "json, name=marketplaceId" })
+  @SpeakeasyMetadata({ data: "json, name=marketplaceId" })
   marketplaceId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=refundMethod" })
+  @SpeakeasyMetadata({ data: "json, name=refundMethod" })
   refundMethod?: string;
 
-  @Metadata({ data: "json, name=restockingFeePercentage" })
+  @SpeakeasyMetadata({ data: "json, name=restockingFeePercentage" })
   restockingFeePercentage?: string;
 
-  @Metadata({ data: "json, name=returnInstructions" })
+  @SpeakeasyMetadata({ data: "json, name=returnInstructions" })
   returnInstructions?: string;
 
-  @Metadata({ data: "json, name=returnMethod" })
+  @SpeakeasyMetadata({ data: "json, name=returnMethod" })
   returnMethod?: string;
 
-  @Metadata({ data: "json, name=returnPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=returnPeriod" })
   returnPeriod?: TimeDuration;
 
-  @Metadata({ data: "json, name=returnPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=returnPolicyId" })
   returnPolicyId?: string;
 
-  @Metadata({ data: "json, name=returnShippingCostPayer" })
+  @SpeakeasyMetadata({ data: "json, name=returnShippingCostPayer" })
   returnShippingCostPayer?: string;
 
-  @Metadata({ data: "json, name=returnsAccepted" })
+  @SpeakeasyMetadata({ data: "json, name=returnsAccepted" })
   returnsAccepted?: boolean;
 
-  @Metadata({ data: "json, name=warnings", elemType: shared.Error })
+  @SpeakeasyMetadata({ data: "json, name=warnings", elemType: Error })
   warnings?: Error[];
 }

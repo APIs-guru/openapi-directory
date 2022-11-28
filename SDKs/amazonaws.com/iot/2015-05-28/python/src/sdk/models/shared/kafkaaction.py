@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class KafkaAction:
-    client_properties: dict[str, str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientProperties' }})
-    destination_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destinationArn' }})
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    partition: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'partition' }})
-    topic: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'topic' }})
+    r"""KafkaAction
+    Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or self-managed Apache Kafka cluster.
+    """
+    
+    client_properties: dict[str, str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientProperties') }})
+    destination_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('destinationArn') }})
+    topic: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('topic') }})
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    partition: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('partition') }})
     

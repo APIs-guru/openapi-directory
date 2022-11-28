@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAccessTokenRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Token" })
+  @SpeakeasyMetadata({ data: "json, name=Token" })
   token: string;
 
-  @Metadata({ data: "json, name=TokenProperties" })
+  @SpeakeasyMetadata({ data: "json, name=TokenProperties" })
   tokenProperties?: string[];
 }

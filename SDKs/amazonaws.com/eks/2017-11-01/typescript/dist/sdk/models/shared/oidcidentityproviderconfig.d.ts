@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConfigStatusEnum } from "./configstatusenum";
 /**
  * An object that represents the configuration for an OpenID Connect (OIDC) identity provider.

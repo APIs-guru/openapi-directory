@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConsolidationStrategy } from "./consolidationstrategy";
+
 
 
 // QueryDriveActivityRequest
@@ -7,21 +8,21 @@ import { ConsolidationStrategy } from "./consolidationstrategy";
  * The request message for querying Drive activity.
 **/
 export class QueryDriveActivityRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ancestorName" })
+  @SpeakeasyMetadata({ data: "json, name=ancestorName" })
   ancestorName?: string;
 
-  @Metadata({ data: "json, name=consolidationStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=consolidationStrategy" })
   consolidationStrategy?: ConsolidationStrategy;
 
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=itemName" })
+  @SpeakeasyMetadata({ data: "json, name=itemName" })
   itemName?: string;
 
-  @Metadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata({ data: "json, name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "json, name=pageToken" })
+  @SpeakeasyMetadata({ data: "json, name=pageToken" })
   pageToken?: string;
 }

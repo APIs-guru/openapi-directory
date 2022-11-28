@@ -26,6 +26,8 @@ type ProjectCardSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// ProjectCard
+// Project cards represent a scope of work.
 type ProjectCard struct {
 	Archived   *bool                 `json:"archived,omitempty"`
 	ColumnURL  string                `json:"column_url"`

@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum LegacyBoxScoresDeltaCurrentWeekFormatEnum {
-    Xml = "XML"
-,    Json = "JSON"
+    Xml = "XML",
+    Json = "JSON"
 }
 
 
 export class LegacyBoxScoresDeltaCurrentWeekPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: LegacyBoxScoresDeltaCurrentWeekFormatEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=minutes" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=minutes" })
   minutes: string;
 }
 
 
 export class LegacyBoxScoresDeltaCurrentWeekRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: LegacyBoxScoresDeltaCurrentWeekPathParams;
 }
 
 
 export class LegacyBoxScoresDeltaCurrentWeekResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   boxScores?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

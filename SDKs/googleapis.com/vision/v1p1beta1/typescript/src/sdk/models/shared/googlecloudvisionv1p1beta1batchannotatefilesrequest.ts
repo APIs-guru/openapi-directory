@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudVisionV1p1beta1AnnotateFileRequest } from "./googlecloudvisionv1p1beta1annotatefilerequest";
+
 
 
 // GoogleCloudVisionV1p1beta1BatchAnnotateFilesRequest
@@ -8,9 +8,9 @@ import { GoogleCloudVisionV1p1beta1AnnotateFileRequest } from "./googlecloudvisi
  * A list of requests to annotate files using the BatchAnnotateFiles API.
 **/
 export class GoogleCloudVisionV1p1beta1BatchAnnotateFilesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=requests", elemType: shared.GoogleCloudVisionV1p1beta1AnnotateFileRequest })
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: GoogleCloudVisionV1p1beta1AnnotateFileRequest })
   requests?: GoogleCloudVisionV1p1beta1AnnotateFileRequest[];
 }

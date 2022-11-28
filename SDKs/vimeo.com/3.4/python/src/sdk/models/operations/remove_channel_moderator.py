@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class RemoveChannelModeratorPathParams:
-    channel_id: float = field(default=None, metadata={'path_param': { 'field_name': 'channel_id', 'style': 'simple', 'explode': False }})
-    user_id: float = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    channel_id: float = field(metadata={'path_param': { 'field_name': 'channel_id', 'style': 'simple', 'explode': False }})
+    user_id: float = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class RemoveChannelModeratorSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RemoveChannelModeratorRequest:
-    path_params: RemoveChannelModeratorPathParams = field(default=None)
-    security: RemoveChannelModeratorSecurity = field(default=None)
+    path_params: RemoveChannelModeratorPathParams = field()
+    security: RemoveChannelModeratorSecurity = field()
     
 
 @dataclass
 class RemoveChannelModeratorResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     

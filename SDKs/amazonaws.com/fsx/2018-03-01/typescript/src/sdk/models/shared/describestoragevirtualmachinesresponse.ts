@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StorageVirtualMachine } from "./storagevirtualmachine";
 
 
+
 export class DescribeStorageVirtualMachinesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=StorageVirtualMachines", elemType: shared.StorageVirtualMachine })
+  @SpeakeasyMetadata({ data: "json, name=StorageVirtualMachines", elemType: StorageVirtualMachine })
   storageVirtualMachines?: StorageVirtualMachine[];
 }

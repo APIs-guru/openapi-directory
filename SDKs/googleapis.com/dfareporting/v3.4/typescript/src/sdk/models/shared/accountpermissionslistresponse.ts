@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountPermission } from "./accountpermission";
+
 
 
 // AccountPermissionsListResponse
@@ -8,9 +8,9 @@ import { AccountPermission } from "./accountpermission";
  * Account Permission List Response
 **/
 export class AccountPermissionsListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountPermissions", elemType: shared.AccountPermission })
+  @SpeakeasyMetadata({ data: "json, name=accountPermissions", elemType: AccountPermission })
   accountPermissions?: AccountPermission[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

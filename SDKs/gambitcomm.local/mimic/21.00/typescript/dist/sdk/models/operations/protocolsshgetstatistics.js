@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolSshGetStatisticsPathParams = /** @class */ (function (_super) {
     __extends(ProtocolSshGetStatisticsPathParams, _super);
     function ProtocolSshGetStatisticsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolSshGetStatisticsPathParams.prototype, "agentNum", void 0);
     return ProtocolSshGetStatisticsPathParams;
@@ -41,7 +41,7 @@ var ProtocolSshGetStatisticsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolSshGetStatisticsPathParams)
     ], ProtocolSshGetStatisticsRequest.prototype, "pathParams", void 0);
     return ProtocolSshGetStatisticsRequest;
@@ -53,15 +53,15 @@ var ProtocolSshGetStatisticsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolSshGetStatisticsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolSshGetStatisticsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], ProtocolSshGetStatisticsResponse.prototype, "protocolSshGetStatistics200ApplicationJsonInt32Integers", void 0);
     return ProtocolSshGetStatisticsResponse;

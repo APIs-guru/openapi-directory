@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostPortfolioOptimizationMarketCapitalizationWeightedRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets" })
+  @SpeakeasyMetadata({ data: "json, name=assets" })
   assets: number;
 
-  @Metadata({ data: "json, name=assetsMarketCapitalizations" })
+  @SpeakeasyMetadata({ data: "json, name=assetsMarketCapitalizations" })
   assetsMarketCapitalizations: number[];
 }
 
 
-export class PostPortfolioOptimizationMarketCapitalizationWeightedRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PostPortfolioOptimizationMarketCapitalizationWeightedRequestBody;
-}
-
-
 export class PostPortfolioOptimizationMarketCapitalizationWeighted200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetsWeights" })
+  @SpeakeasyMetadata({ data: "json, name=assetsWeights" })
   assetsWeights: number[];
 }
 
 
+export class PostPortfolioOptimizationMarketCapitalizationWeightedRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PostPortfolioOptimizationMarketCapitalizationWeightedRequestBody;
+}
+
+
 export class PostPortfolioOptimizationMarketCapitalizationWeightedResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postPortfolioOptimizationMarketCapitalizationWeighted200ApplicationJsonObject?: PostPortfolioOptimizationMarketCapitalizationWeighted200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -26,11 +26,6 @@ type AecmwSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type AecmwRequest struct {
-	Request  *AecmwRequestBody `request:"mediaType=application/json"`
-	Security AecmwSecurity
-}
-
 type Aecmw400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Aecmw504ApplicationJSON struct {
 	Error            *Aecmw504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Aecmw504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type AecmwRequest struct {
+	Request  *AecmwRequestBody `request:"mediaType=application/json"`
+	Security AecmwSecurity
 }
 
 type AecmwResponse struct {

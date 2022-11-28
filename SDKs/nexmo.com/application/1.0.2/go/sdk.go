@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.nexmo.com/v1/applications",
 }
 
@@ -18,10 +18,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://developer.nexmo.com/api/developer/application
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +37,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateApplication - Create Application
+// You use a `POST` request to create a new application.
 func (s *SDK) CreateApplication(ctx context.Context, request operations.CreateApplicationRequest) (*operations.CreateApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -67,7 +91,7 @@ func (s *SDK) CreateApplication(ctx context.Context, request operations.CreateAp
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -97,8 +121,10 @@ func (s *SDK) CreateApplication(ctx context.Context, request operations.CreateAp
 	return res, nil
 }
 
+// DeleteApplication - Destroy Application
+// You use a `DELETE` request to delete a single application.
 func (s *SDK) DeleteApplication(ctx context.Context, request operations.DeleteApplicationRequest) (*operations.DeleteApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{app_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -106,7 +132,7 @@ func (s *SDK) DeleteApplication(ctx context.Context, request operations.DeleteAp
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -127,8 +153,10 @@ func (s *SDK) DeleteApplication(ctx context.Context, request operations.DeleteAp
 	return res, nil
 }
 
+// RetrieveApplication - Retrieve Application
+// You use a `GET` request to retrieve details about a single application.
 func (s *SDK) RetrieveApplication(ctx context.Context, request operations.RetrieveApplicationRequest) (*operations.RetrieveApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{app_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -138,7 +166,7 @@ func (s *SDK) RetrieveApplication(ctx context.Context, request operations.Retrie
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -168,8 +196,10 @@ func (s *SDK) RetrieveApplication(ctx context.Context, request operations.Retrie
 	return res, nil
 }
 
+// RetrieveApplications - Retrieve all Applications
+// You use a `GET` request to retrieve details of all applications associated with your account.
 func (s *SDK) RetrieveApplications(ctx context.Context, request operations.RetrieveApplicationsRequest) (*operations.RetrieveApplicationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -179,7 +209,7 @@ func (s *SDK) RetrieveApplications(ctx context.Context, request operations.Retri
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -209,8 +239,10 @@ func (s *SDK) RetrieveApplications(ctx context.Context, request operations.Retri
 	return res, nil
 }
 
+// UpdateApplication - Update Application
+// You use a `PUT` request to update an existing application.
 func (s *SDK) UpdateApplication(ctx context.Context, request operations.UpdateApplicationRequest) (*operations.UpdateApplicationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{app_id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -225,7 +257,7 @@ func (s *SDK) UpdateApplication(ctx context.Context, request operations.UpdateAp
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

@@ -1,5 +1,7 @@
 package shared
 
+// MetricSource
+// Contains information about source data used to generate a metric.
 type MetricSource struct {
 	AppFlowConfig        *AppFlowConfig        `json:"AppFlowConfig,omitempty"`
 	CloudWatchConfig     *CloudWatchConfig     `json:"CloudWatchConfig,omitempty"`

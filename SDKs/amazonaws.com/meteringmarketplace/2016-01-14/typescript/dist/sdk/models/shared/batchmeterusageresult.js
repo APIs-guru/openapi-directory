@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { UsageRecordResult } from "./usagerecordresult";
+import { UsageRecord } from "./usagerecord";
 // BatchMeterUsageResult
 /**
  * Contains the UsageRecords processed by BatchMeterUsage and any records that have failed due to transient error.
@@ -34,11 +35,11 @@ var BatchMeterUsageResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Results", elemType: shared.UsageRecordResult }),
+        SpeakeasyMetadata({ data: "json, name=Results", elemType: UsageRecordResult }),
         __metadata("design:type", Array)
     ], BatchMeterUsageResult.prototype, "results", void 0);
     __decorate([
-        Metadata({ data: "json, name=UnprocessedRecords", elemType: shared.UsageRecord }),
+        SpeakeasyMetadata({ data: "json, name=UnprocessedRecords", elemType: UsageRecord }),
         __metadata("design:type", Array)
     ], BatchMeterUsageResult.prototype, "unprocessedRecords", void 0);
     return BatchMeterUsageResult;

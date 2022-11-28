@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class BusinessChainTargetingOptionDetailsGeoRegionTypeEnum(str, Enum):
     GEO_REGION_TYPE_UNKNOWN = "GEO_REGION_TYPE_UNKNOWN"
@@ -37,7 +39,11 @@ class BusinessChainTargetingOptionDetailsGeoRegionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class BusinessChainTargetingOptionDetails:
-    business_chain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'businessChain' }})
-    geo_region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'geoRegion' }})
-    geo_region_type: Optional[BusinessChainTargetingOptionDetailsGeoRegionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'geoRegionType' }})
+    r"""BusinessChainTargetingOptionDetails
+    Represents a targetable business chain within a geo region. This will be populated in the business_chain_details field when targeting_type is `TARGETING_TYPE_BUSINESS_CHAIN`.
+    """
+    
+    business_chain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('businessChain') }})
+    geo_region: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('geoRegion') }})
+    geo_region_type: Optional[BusinessChainTargetingOptionDetailsGeoRegionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('geoRegionType') }})
     

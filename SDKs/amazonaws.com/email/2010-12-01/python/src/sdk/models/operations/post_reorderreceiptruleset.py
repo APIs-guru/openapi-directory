@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostReorderReceiptRuleSetActionEnum(str, Enum):
     REORDER_RECEIPT_RULE_SET = "ReorderReceiptRuleSet"
@@ -10,8 +14,8 @@ class PostReorderReceiptRuleSetVersionEnum(str, Enum):
 
 @dataclass
 class PostReorderReceiptRuleSetQueryParams:
-    action: PostReorderReceiptRuleSetActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostReorderReceiptRuleSetVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostReorderReceiptRuleSetActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostReorderReceiptRuleSetVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostReorderReceiptRuleSetHeaders:
 
 @dataclass
 class PostReorderReceiptRuleSetRequest:
-    query_params: PostReorderReceiptRuleSetQueryParams = field(default=None)
-    headers: PostReorderReceiptRuleSetHeaders = field(default=None)
+    headers: PostReorderReceiptRuleSetHeaders = field()
+    query_params: PostReorderReceiptRuleSetQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostReorderReceiptRuleSetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

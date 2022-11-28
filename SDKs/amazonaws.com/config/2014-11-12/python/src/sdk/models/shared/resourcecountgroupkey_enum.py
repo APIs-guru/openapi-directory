@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ResourceCountGroupKeyEnum(str, Enum):
     RESOURCE_TYPE = "RESOURCE_TYPE"

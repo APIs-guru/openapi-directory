@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import subnetwork
+from sdk import utils
+from . import *
 
 class ValidateConsumerConfigResponseValidationErrorEnum(str, Enum):
     VALIDATION_ERROR_UNSPECIFIED = "VALIDATION_ERROR_UNSPECIFIED"
@@ -24,7 +29,7 @@ class ValidateConsumerConfigResponseValidationErrorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ValidateConsumerConfigResponse:
-    existing_subnetwork_candidates: Optional[List[subnetwork.Subnetwork]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'existingSubnetworkCandidates' }})
-    is_valid: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isValid' }})
-    validation_error: Optional[ValidateConsumerConfigResponseValidationErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'validationError' }})
+    existing_subnetwork_candidates: Optional[List[Subnetwork]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('existingSubnetworkCandidates') }})
+    is_valid: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isValid') }})
+    validation_error: Optional[ValidateConsumerConfigResponseValidationErrorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('validationError') }})
     

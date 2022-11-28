@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImagePermissions } from "./imagepermissions";
+
 
 
 // SharedImagePermissions
@@ -7,9 +8,9 @@ import { ImagePermissions } from "./imagepermissions";
  * Describes the permissions that are available to the specified AWS account for a shared image.
 **/
 export class SharedImagePermissions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imagePermissions" })
+  @SpeakeasyMetadata({ data: "json, name=imagePermissions" })
   imagePermissions: ImagePermissions;
 
-  @Metadata({ data: "json, name=sharedAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=sharedAccountId" })
   sharedAccountId: string;
 }

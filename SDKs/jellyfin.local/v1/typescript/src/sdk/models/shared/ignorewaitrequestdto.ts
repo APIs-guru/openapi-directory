@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IgnoreWaitRequestDto
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Class IgnoreWaitRequestDto.
 **/
 export class IgnoreWaitRequestDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IgnoreWait" })
+  @SpeakeasyMetadata({ data: "json, name=IgnoreWait" })
   ignoreWait?: boolean;
 }

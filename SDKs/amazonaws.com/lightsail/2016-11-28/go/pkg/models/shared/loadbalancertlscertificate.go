@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LoadBalancerTLSCertificate
+// <p>Describes a load balancer SSL/TLS certificate.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>
 type LoadBalancerTLSCertificate struct {
 	Arn                     *string                                            `json:"arn,omitempty"`
 	CreatedAt               *time.Time                                         `json:"createdAt,omitempty"`

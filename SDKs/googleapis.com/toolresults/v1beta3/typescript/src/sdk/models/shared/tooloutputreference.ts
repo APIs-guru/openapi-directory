@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Timestamp } from "./timestamp";
 import { FileReference } from "./filereference";
 import { TestCaseReference } from "./testcasereference";
+
 
 
 // ToolOutputReference
@@ -9,12 +10,12 @@ import { TestCaseReference } from "./testcasereference";
  * A reference to a ToolExecution output file.
 **/
 export class ToolOutputReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Timestamp;
 
-  @Metadata({ data: "json, name=output" })
+  @SpeakeasyMetadata({ data: "json, name=output" })
   output?: FileReference;
 
-  @Metadata({ data: "json, name=testCase" })
+  @SpeakeasyMetadata({ data: "json, name=testCase" })
   testCase?: TestCaseReference;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AccountYouTubeChannelLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channelId" })
+  @SpeakeasyMetadata({ data: "json, name=channelId" })
   channelId?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }

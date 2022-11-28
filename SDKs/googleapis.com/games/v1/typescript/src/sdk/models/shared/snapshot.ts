@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SnapshotImage } from "./snapshotimage";
 
+
 export enum SnapshotTypeEnum {
-    SnapshotTypeUnspecified = "SNAPSHOT_TYPE_UNSPECIFIED"
-,    SaveGame = "SAVE_GAME"
+    SnapshotTypeUnspecified = "SNAPSHOT_TYPE_UNSPECIFIED",
+    SaveGame = "SAVE_GAME"
 }
 
 
@@ -12,36 +13,36 @@ export enum SnapshotTypeEnum {
  * An snapshot object.
 **/
 export class Snapshot extends SpeakeasyBase {
-  @Metadata({ data: "json, name=coverImage" })
+  @SpeakeasyMetadata({ data: "json, name=coverImage" })
   coverImage?: SnapshotImage;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=driveId" })
+  @SpeakeasyMetadata({ data: "json, name=driveId" })
   driveId?: string;
 
-  @Metadata({ data: "json, name=durationMillis" })
+  @SpeakeasyMetadata({ data: "json, name=durationMillis" })
   durationMillis?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=lastModifiedMillis" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedMillis" })
   lastModifiedMillis?: string;
 
-  @Metadata({ data: "json, name=progressValue" })
+  @SpeakeasyMetadata({ data: "json, name=progressValue" })
   progressValue?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: SnapshotTypeEnum;
 
-  @Metadata({ data: "json, name=uniqueName" })
+  @SpeakeasyMetadata({ data: "json, name=uniqueName" })
   uniqueName?: string;
 }

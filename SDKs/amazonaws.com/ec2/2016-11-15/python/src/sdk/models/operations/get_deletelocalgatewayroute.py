@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteLocalGatewayRouteActionEnum(str, Enum):
     DELETE_LOCAL_GATEWAY_ROUTE = "DeleteLocalGatewayRoute"
@@ -10,11 +14,11 @@ class GetDeleteLocalGatewayRouteVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteLocalGatewayRouteQueryParams:
-    action: GetDeleteLocalGatewayRouteActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    destination_cidr_block: str = field(default=None, metadata={'query_param': { 'field_name': 'DestinationCidrBlock', 'style': 'form', 'explode': True }})
+    action: GetDeleteLocalGatewayRouteActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    destination_cidr_block: str = field(metadata={'query_param': { 'field_name': 'DestinationCidrBlock', 'style': 'form', 'explode': True }})
+    local_gateway_route_table_id: str = field(metadata={'query_param': { 'field_name': 'LocalGatewayRouteTableId', 'style': 'form', 'explode': True }})
+    version: GetDeleteLocalGatewayRouteVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    local_gateway_route_table_id: str = field(default=None, metadata={'query_param': { 'field_name': 'LocalGatewayRouteTableId', 'style': 'form', 'explode': True }})
-    version: GetDeleteLocalGatewayRouteVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDeleteLocalGatewayRouteHeaders:
 
 @dataclass
 class GetDeleteLocalGatewayRouteRequest:
-    query_params: GetDeleteLocalGatewayRouteQueryParams = field(default=None)
-    headers: GetDeleteLocalGatewayRouteHeaders = field(default=None)
+    headers: GetDeleteLocalGatewayRouteHeaders = field()
+    query_params: GetDeleteLocalGatewayRouteQueryParams = field()
     
 
 @dataclass
 class GetDeleteLocalGatewayRouteResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

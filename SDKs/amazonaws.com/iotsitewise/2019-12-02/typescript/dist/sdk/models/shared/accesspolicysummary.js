@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Identity } from "./identity";
 import { PermissionEnum } from "./permissionenum";
 import { Resource } from "./resource";
@@ -36,27 +36,27 @@ var AccessPolicySummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=creationDate" }),
+        SpeakeasyMetadata({ data: "json, name=creationDate" }),
         __metadata("design:type", Date)
     ], AccessPolicySummary.prototype, "creationDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], AccessPolicySummary.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=identity" }),
+        SpeakeasyMetadata({ data: "json, name=identity" }),
         __metadata("design:type", Identity)
     ], AccessPolicySummary.prototype, "identity", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdateDate" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdateDate" }),
         __metadata("design:type", Date)
     ], AccessPolicySummary.prototype, "lastUpdateDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=permission" }),
+        SpeakeasyMetadata({ data: "json, name=permission" }),
         __metadata("design:type", String)
     ], AccessPolicySummary.prototype, "permission", void 0);
     __decorate([
-        Metadata({ data: "json, name=resource" }),
+        SpeakeasyMetadata({ data: "json, name=resource" }),
         __metadata("design:type", Resource)
     ], AccessPolicySummary.prototype, "resource", void 0);
     return AccessPolicySummary;

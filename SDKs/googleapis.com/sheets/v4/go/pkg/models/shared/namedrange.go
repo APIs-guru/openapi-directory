@@ -1,5 +1,7 @@
 package shared
 
+// NamedRange
+// A named range.
 type NamedRange struct {
 	Name         *string    `json:"name,omitempty"`
 	NamedRangeID *string    `json:"namedRangeId,omitempty"`

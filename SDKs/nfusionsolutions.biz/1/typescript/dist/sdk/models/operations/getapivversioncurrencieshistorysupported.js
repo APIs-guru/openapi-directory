@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetApiVVersionCurrenciesHistorySupportedPathParams = /** @class */ (function (_super) {
     __extends(GetApiVVersionCurrenciesHistorySupportedPathParams, _super);
@@ -30,7 +30,7 @@ var GetApiVVersionCurrenciesHistorySupportedPathParams = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=version" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" }),
         __metadata("design:type", String)
     ], GetApiVVersionCurrenciesHistorySupportedPathParams.prototype, "version", void 0);
     return GetApiVVersionCurrenciesHistorySupportedPathParams;
@@ -42,11 +42,11 @@ var GetApiVVersionCurrenciesHistorySupportedQueryParams = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetApiVVersionCurrenciesHistorySupportedQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" }),
         __metadata("design:type", String)
     ], GetApiVVersionCurrenciesHistorySupportedQueryParams.prototype, "token", void 0);
     return GetApiVVersionCurrenciesHistorySupportedQueryParams;
@@ -58,11 +58,11 @@ var GetApiVVersionCurrenciesHistorySupportedRequest = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiVVersionCurrenciesHistorySupportedPathParams)
     ], GetApiVVersionCurrenciesHistorySupportedRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiVVersionCurrenciesHistorySupportedQueryParams)
     ], GetApiVVersionCurrenciesHistorySupportedRequest.prototype, "queryParams", void 0);
     return GetApiVVersionCurrenciesHistorySupportedRequest;
@@ -74,23 +74,23 @@ var GetApiVVersionCurrenciesHistorySupportedResponse = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetApiVVersionCurrenciesHistorySupportedResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiVVersionCurrenciesHistorySupportedResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], GetApiVVersionCurrenciesHistorySupportedResponse.prototype, "getApiVVersionCurrenciesHistorySupported200ApplicationJsonStrings", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetApiVVersionCurrenciesHistorySupportedResponse.prototype, "problemDetails", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiVVersionCurrenciesHistorySupportedResponse.prototype, "statusCode", void 0);
     return GetApiVVersionCurrenciesHistorySupportedResponse;

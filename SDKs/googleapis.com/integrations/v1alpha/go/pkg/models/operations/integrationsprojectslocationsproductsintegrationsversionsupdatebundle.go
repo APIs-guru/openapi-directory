@@ -30,7 +30,7 @@ type IntegrationsProjectsLocationsProductsIntegrationsVersionsUpdateBundleSecuri
 type IntegrationsProjectsLocationsProductsIntegrationsVersionsUpdateBundleRequest struct {
 	PathParams  IntegrationsProjectsLocationsProductsIntegrationsVersionsUpdateBundlePathParams
 	QueryParams IntegrationsProjectsLocationsProductsIntegrationsVersionsUpdateBundleQueryParams
-	Request     *shared.GoogleCloudIntegrationsV1alphaUpdateBundleRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudIntegrationsV1alphaUpdateBundleRequestInput `request:"mediaType=application/json"`
 	Security    IntegrationsProjectsLocationsProductsIntegrationsVersionsUpdateBundleSecurity
 }
 

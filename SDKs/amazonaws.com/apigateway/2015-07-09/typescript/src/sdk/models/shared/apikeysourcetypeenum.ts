@@ -1,6 +1,7 @@
 
 
+
 export enum ApiKeySourceTypeEnum {
-    Header = "HEADER"
-,    Authorizer = "AUTHORIZER"
+    Header = "HEADER",
+    Authorizer = "AUTHORIZER"
 }

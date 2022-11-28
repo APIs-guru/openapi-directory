@@ -31,7 +31,7 @@ type EventarcProjectsLocationsChannelConnectionsCreateSecurity struct {
 type EventarcProjectsLocationsChannelConnectionsCreateRequest struct {
 	PathParams  EventarcProjectsLocationsChannelConnectionsCreatePathParams
 	QueryParams EventarcProjectsLocationsChannelConnectionsCreateQueryParams
-	Request     *shared.ChannelConnection `request:"mediaType=application/json"`
+	Request     *shared.ChannelConnectionInput `request:"mediaType=application/json"`
 	Security    EventarcProjectsLocationsChannelConnectionsCreateSecurity
 }
 

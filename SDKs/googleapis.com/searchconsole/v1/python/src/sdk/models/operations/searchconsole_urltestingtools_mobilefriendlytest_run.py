@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,13 +21,13 @@ class SearchconsoleURLTestingToolsMobileFriendlyTestRunQueryParams:
 
 @dataclass
 class SearchconsoleURLTestingToolsMobileFriendlyTestRunRequest:
-    query_params: SearchconsoleURLTestingToolsMobileFriendlyTestRunQueryParams = field(default=None)
+    query_params: SearchconsoleURLTestingToolsMobileFriendlyTestRunQueryParams = field()
     request: Optional[shared.RunMobileFriendlyTestRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SearchconsoleURLTestingToolsMobileFriendlyTestRunResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     run_mobile_friendly_test_response: Optional[shared.RunMobileFriendlyTestResponse] = field(default=None)
-    status_code: int = field(default=None)
     

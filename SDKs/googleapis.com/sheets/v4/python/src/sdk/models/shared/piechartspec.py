@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import chartdata
-from . import chartdata
+from sdk import utils
+from . import *
 
 class PieChartSpecLegendPositionEnum(str, Enum):
     PIE_CHART_LEGEND_POSITION_UNSPECIFIED = "PIE_CHART_LEGEND_POSITION_UNSPECIFIED"
@@ -17,9 +18,13 @@ class PieChartSpecLegendPositionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PieChartSpec:
-    domain: Optional[chartdata.ChartData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domain' }})
-    legend_position: Optional[PieChartSpecLegendPositionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'legendPosition' }})
-    pie_hole: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pieHole' }})
-    series: Optional[chartdata.ChartData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'series' }})
-    three_dimensional: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'threeDimensional' }})
+    r"""PieChartSpec
+    A pie chart.
+    """
+    
+    domain: Optional[ChartData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('domain') }})
+    legend_position: Optional[PieChartSpecLegendPositionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('legendPosition') }})
+    pie_hole: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pieHole') }})
+    series: Optional[ChartData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('series') }})
+    three_dimensional: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('threeDimensional') }})
     

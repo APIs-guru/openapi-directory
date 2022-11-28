@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3OutputAudioConfig } from "./googleclouddialogflowcxv3outputaudioconfig";
 import { GoogleCloudDialogflowCxV3QueryResult } from "./googleclouddialogflowcxv3queryresult";
 
+
 export enum GoogleCloudDialogflowCxV3DetectIntentResponseResponseTypeEnum {
-    ResponseTypeUnspecified = "RESPONSE_TYPE_UNSPECIFIED"
-,    Partial = "PARTIAL"
-,    Final = "FINAL"
+    ResponseTypeUnspecified = "RESPONSE_TYPE_UNSPECIFIED",
+    Partial = "PARTIAL",
+    Final = "FINAL"
 }
 
 
@@ -14,21 +15,21 @@ export enum GoogleCloudDialogflowCxV3DetectIntentResponseResponseTypeEnum {
  * The message returned from the DetectIntent method.
 **/
 export class GoogleCloudDialogflowCxV3DetectIntentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowCancellation" })
+  @SpeakeasyMetadata({ data: "json, name=allowCancellation" })
   allowCancellation?: boolean;
 
-  @Metadata({ data: "json, name=outputAudio" })
+  @SpeakeasyMetadata({ data: "json, name=outputAudio" })
   outputAudio?: string;
 
-  @Metadata({ data: "json, name=outputAudioConfig" })
+  @SpeakeasyMetadata({ data: "json, name=outputAudioConfig" })
   outputAudioConfig?: GoogleCloudDialogflowCxV3OutputAudioConfig;
 
-  @Metadata({ data: "json, name=queryResult" })
+  @SpeakeasyMetadata({ data: "json, name=queryResult" })
   queryResult?: GoogleCloudDialogflowCxV3QueryResult;
 
-  @Metadata({ data: "json, name=responseId" })
+  @SpeakeasyMetadata({ data: "json, name=responseId" })
   responseId?: string;
 
-  @Metadata({ data: "json, name=responseType" })
+  @SpeakeasyMetadata({ data: "json, name=responseType" })
   responseType?: GoogleCloudDialogflowCxV3DetectIntentResponseResponseTypeEnum;
 }

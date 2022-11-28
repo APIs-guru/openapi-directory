@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EditCustomerMatchMembersResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The response of FirstAndThirdPartyAudienceService.EditCustomerMatchMembers.
 **/
 export class EditCustomerMatchMembersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=firstAndThirdPartyAudienceId" })
+  @SpeakeasyMetadata({ data: "json, name=firstAndThirdPartyAudienceId" })
   firstAndThirdPartyAudienceId?: string;
 }

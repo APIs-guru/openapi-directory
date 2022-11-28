@@ -1,0 +1,121 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+export var CreateTokenServerList = [
+    "https://oauth.twilio.com",
+];
+var CreateTokenCreateTokenRequest = /** @class */ (function (_super) {
+    __extends(CreateTokenCreateTokenRequest, _super);
+    function CreateTokenCreateTokenRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "form, name=ClientSecret;" }),
+        __metadata("design:type", String)
+    ], CreateTokenCreateTokenRequest.prototype, "clientSecret", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "form, name=ClientSid;" }),
+        __metadata("design:type", String)
+    ], CreateTokenCreateTokenRequest.prototype, "clientSid", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "form, name=Code;" }),
+        __metadata("design:type", String)
+    ], CreateTokenCreateTokenRequest.prototype, "code", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "form, name=CodeVerifier;" }),
+        __metadata("design:type", String)
+    ], CreateTokenCreateTokenRequest.prototype, "codeVerifier", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "form, name=DeviceCode;" }),
+        __metadata("design:type", String)
+    ], CreateTokenCreateTokenRequest.prototype, "deviceCode", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "form, name=DeviceId;" }),
+        __metadata("design:type", String)
+    ], CreateTokenCreateTokenRequest.prototype, "deviceId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "form, name=GrantType;" }),
+        __metadata("design:type", String)
+    ], CreateTokenCreateTokenRequest.prototype, "grantType", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "form, name=RefreshToken;" }),
+        __metadata("design:type", String)
+    ], CreateTokenCreateTokenRequest.prototype, "refreshToken", void 0);
+    return CreateTokenCreateTokenRequest;
+}(SpeakeasyBase));
+export { CreateTokenCreateTokenRequest };
+var CreateTokenSecurity = /** @class */ (function (_super) {
+    __extends(CreateTokenSecurity, _super);
+    function CreateTokenSecurity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeAccountSidAuthToken)
+    ], CreateTokenSecurity.prototype, "accountSidAuthToken", void 0);
+    return CreateTokenSecurity;
+}(SpeakeasyBase));
+export { CreateTokenSecurity };
+var CreateTokenRequest = /** @class */ (function (_super) {
+    __extends(CreateTokenRequest, _super);
+    function CreateTokenRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], CreateTokenRequest.prototype, "serverUrl", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        __metadata("design:type", CreateTokenCreateTokenRequest)
+    ], CreateTokenRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", CreateTokenSecurity)
+    ], CreateTokenRequest.prototype, "security", void 0);
+    return CreateTokenRequest;
+}(SpeakeasyBase));
+export { CreateTokenRequest };
+var CreateTokenResponse = /** @class */ (function (_super) {
+    __extends(CreateTokenResponse, _super);
+    function CreateTokenResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], CreateTokenResponse.prototype, "contentType", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], CreateTokenResponse.prototype, "statusCode", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", shared.OauthV1Token)
+    ], CreateTokenResponse.prototype, "oauthV1Token", void 0);
+    return CreateTokenResponse;
+}(SpeakeasyBase));
+export { CreateTokenResponse };

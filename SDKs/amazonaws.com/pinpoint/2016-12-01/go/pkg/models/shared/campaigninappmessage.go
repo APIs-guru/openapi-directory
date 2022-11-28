@@ -1,5 +1,7 @@
 package shared
 
+// CampaignInAppMessage
+// In-app message configuration.
 type CampaignInAppMessage struct {
 	Body         *string               `json:"Body,omitempty"`
 	Content      []InAppMessageContent `json:"Content,omitempty"`

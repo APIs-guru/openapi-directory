@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AndroidFcmOptions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Options for features provided by the FCM SDK for Android.
 **/
 export class AndroidFcmOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analyticsLabel" })
+  @SpeakeasyMetadata({ data: "json, name=analyticsLabel" })
   analyticsLabel?: string;
 }

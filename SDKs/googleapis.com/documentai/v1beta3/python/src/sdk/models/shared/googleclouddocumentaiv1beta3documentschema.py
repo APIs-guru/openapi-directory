@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleclouddocumentaiv1beta3documentschemaentitytype
-from . import googleclouddocumentaiv1beta3documentschemametadata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDocumentaiV1beta3DocumentSchema:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    entity_types: Optional[List[googleclouddocumentaiv1beta3documentschemaentitytype.GoogleCloudDocumentaiV1beta3DocumentSchemaEntityType]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entityTypes' }})
-    metadata: Optional[googleclouddocumentaiv1beta3documentschemametadata.GoogleCloudDocumentaiV1beta3DocumentSchemaMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
+    r"""GoogleCloudDocumentaiV1beta3DocumentSchema
+    The schema defines the output of the processed document by a processor.
+    """
+    
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    entity_types: Optional[List[GoogleCloudDocumentaiV1beta3DocumentSchemaEntityType]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entityTypes') }})
+    metadata: Optional[GoogleCloudDocumentaiV1beta3DocumentSchemaMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
     

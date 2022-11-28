@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingSubaccountsGetPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class DfareportingSubaccountsGetQueryParams:
 
 @dataclass
 class DfareportingSubaccountsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingSubaccountsGetRequest:
-    path_params: DfareportingSubaccountsGetPathParams = field(default=None)
-    query_params: DfareportingSubaccountsGetQueryParams = field(default=None)
-    security: DfareportingSubaccountsGetSecurity = field(default=None)
+    path_params: DfareportingSubaccountsGetPathParams = field()
+    query_params: DfareportingSubaccountsGetQueryParams = field()
+    security: DfareportingSubaccountsGetSecurity = field()
     
 
 @dataclass
 class DfareportingSubaccountsGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     subaccount: Optional[shared.Subaccount] = field(default=None)
     

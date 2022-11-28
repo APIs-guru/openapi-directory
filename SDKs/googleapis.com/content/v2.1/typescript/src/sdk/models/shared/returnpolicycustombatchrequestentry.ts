@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReturnPolicy } from "./returnpolicy";
 
 
+
 export class ReturnpolicyCustomBatchRequestEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=batchId" })
+  @SpeakeasyMetadata({ data: "json, name=batchId" })
   batchId?: number;
 
-  @Metadata({ data: "json, name=merchantId" })
+  @SpeakeasyMetadata({ data: "json, name=merchantId" })
   merchantId?: string;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method?: string;
 
-  @Metadata({ data: "json, name=returnPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=returnPolicy" })
   returnPolicy?: ReturnPolicy;
 
-  @Metadata({ data: "json, name=returnPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=returnPolicyId" })
   returnPolicyId?: string;
 }

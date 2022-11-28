@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnalyticsMetadataType } from "./analyticsmetadatatype";
 import { UserContextDataType } from "./usercontextdatatype";
+
 
 
 // ConfirmSignUpRequest
@@ -8,27 +9,27 @@ import { UserContextDataType } from "./usercontextdatatype";
  * Represents the request to confirm registration of a user.
 **/
 export class ConfirmSignUpRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AnalyticsMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=AnalyticsMetadata" })
   analyticsMetadata?: AnalyticsMetadataType;
 
-  @Metadata({ data: "json, name=ClientId" })
+  @SpeakeasyMetadata({ data: "json, name=ClientId" })
   clientId: string;
 
-  @Metadata({ data: "json, name=ClientMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=ClientMetadata" })
   clientMetadata?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ConfirmationCode" })
+  @SpeakeasyMetadata({ data: "json, name=ConfirmationCode" })
   confirmationCode: string;
 
-  @Metadata({ data: "json, name=ForceAliasCreation" })
+  @SpeakeasyMetadata({ data: "json, name=ForceAliasCreation" })
   forceAliasCreation?: boolean;
 
-  @Metadata({ data: "json, name=SecretHash" })
+  @SpeakeasyMetadata({ data: "json, name=SecretHash" })
   secretHash?: string;
 
-  @Metadata({ data: "json, name=UserContextData" })
+  @SpeakeasyMetadata({ data: "json, name=UserContextData" })
   userContextData?: UserContextDataType;
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username: string;
 }

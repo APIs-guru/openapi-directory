@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PolicysimulatorProjectsLocationsReplaysResultsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class PolicysimulatorProjectsLocationsReplaysResultsListQueryParams:
 
 @dataclass
 class PolicysimulatorProjectsLocationsReplaysResultsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PolicysimulatorProjectsLocationsReplaysResultsListRequest:
-    path_params: PolicysimulatorProjectsLocationsReplaysResultsListPathParams = field(default=None)
-    query_params: PolicysimulatorProjectsLocationsReplaysResultsListQueryParams = field(default=None)
-    security: PolicysimulatorProjectsLocationsReplaysResultsListSecurity = field(default=None)
+    path_params: PolicysimulatorProjectsLocationsReplaysResultsListPathParams = field()
+    query_params: PolicysimulatorProjectsLocationsReplaysResultsListQueryParams = field()
+    security: PolicysimulatorProjectsLocationsReplaysResultsListSecurity = field()
     
 
 @dataclass
 class PolicysimulatorProjectsLocationsReplaysResultsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_policysimulator_v1_list_replay_results_response: Optional[shared.GoogleCloudPolicysimulatorV1ListReplayResultsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

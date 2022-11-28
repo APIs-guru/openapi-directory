@@ -17,6 +17,22 @@ const (
 	MigratingVMStateEnumError            MigratingVMStateEnum = "ERROR"
 )
 
+// MigratingVMInput
+// MigratingVm describes the VM that will be migrated from a Source environment and its replication state.
+type MigratingVMInput struct {
+	ComputeEngineTargetDefaults *ComputeEngineTargetDefaultsInput `json:"computeEngineTargetDefaults,omitempty"`
+	CurrentSyncInfo             *ReplicationCycle                 `json:"currentSyncInfo,omitempty"`
+	Description                 *string                           `json:"description,omitempty"`
+	DisplayName                 *string                           `json:"displayName,omitempty"`
+	Error                       *Status                           `json:"error,omitempty"`
+	Labels                      map[string]string                 `json:"labels,omitempty"`
+	LastSync                    *ReplicationSync                  `json:"lastSync,omitempty"`
+	Policy                      *SchedulePolicy                   `json:"policy,omitempty"`
+	SourceVMID                  *string                           `json:"sourceVmId,omitempty"`
+}
+
+// MigratingVM
+// MigratingVm describes the VM that will be migrated from a Source environment and its replication state.
 type MigratingVM struct {
 	ComputeEngineTargetDefaults *ComputeEngineTargetDefaults `json:"computeEngineTargetDefaults,omitempty"`
 	CreateTime                  *string                      `json:"createTime,omitempty"`

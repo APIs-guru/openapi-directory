@@ -8,6 +8,8 @@ const (
 	BelegdatenUnternehmenIDTypEnumGln          BelegdatenUnternehmenIDTypEnum = "gln"
 )
 
+// Belegdaten
+// The `Beleg` to be signed by the "Signaturerstellungseinheit" and stored in the "Datenerfassungsprotokoll".
 type Belegdaten struct {
 	ExternerBelegBelegkreis  *string                         `json:"Externer-Beleg-Belegkreis,omitempty"`
 	ExternerBelegBezeichnung *string                         `json:"Externer-Beleg-Bezeichnung,omitempty"`

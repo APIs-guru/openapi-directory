@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AddHeldAccountResult } from "./addheldaccountresult";
 // AddHeldAccountsResponse
 /**
  * Response for batch create held accounts.
@@ -34,7 +34,7 @@ var AddHeldAccountsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=responses", elemType: shared.AddHeldAccountResult }),
+        SpeakeasyMetadata({ data: "json, name=responses", elemType: AddHeldAccountResult }),
         __metadata("design:type", Array)
     ], AddHeldAccountsResponse.prototype, "responses", void 0);
     return AddHeldAccountsResponse;

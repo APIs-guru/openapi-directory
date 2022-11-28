@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DeviceState
 /**
  * The device state, as reported by the device.
@@ -33,11 +33,11 @@ var DeviceState = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=binaryData" }),
+        SpeakeasyMetadata({ data: "json, name=binaryData" }),
         __metadata("design:type", String)
     ], DeviceState.prototype, "binaryData", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], DeviceState.prototype, "updateTime", void 0);
     return DeviceState;

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeBatchInferenceJobRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=batchInferenceJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=batchInferenceJobArn" })
   batchInferenceJobArn: string;
 }

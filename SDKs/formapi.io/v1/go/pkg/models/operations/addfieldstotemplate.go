@@ -217,12 +217,6 @@ type AddFieldsToTemplateSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type AddFieldsToTemplateRequest struct {
-	PathParams AddFieldsToTemplatePathParams
-	Request    AddFieldsToTemplateAddFieldsData `request:"mediaType=application/json"`
-	Security   AddFieldsToTemplateSecurity
-}
-
 type AddFieldsToTemplateAddFieldsTemplateResponseStatusEnum string
 
 const (
@@ -234,6 +228,12 @@ type AddFieldsToTemplateAddFieldsTemplateResponse struct {
 	Errors      []string                                               `json:"errors,omitempty"`
 	NewFieldIds []int64                                                `json:"new_field_ids,omitempty"`
 	Status      AddFieldsToTemplateAddFieldsTemplateResponseStatusEnum `json:"status"`
+}
+
+type AddFieldsToTemplateRequest struct {
+	PathParams AddFieldsToTemplatePathParams
+	Request    AddFieldsToTemplateAddFieldsData `request:"mediaType=application/json"`
+	Security   AddFieldsToTemplateSecurity
 }
 
 type AddFieldsToTemplateResponse struct {

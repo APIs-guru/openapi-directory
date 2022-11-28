@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SoundtrackEffectEnum {
-    FadeIn = "fadeIn"
-,    FadeOut = "fadeOut"
-,    FadeInFadeOut = "fadeInFadeOut"
+    FadeIn = "fadeIn",
+    FadeOut = "fadeOut",
+    FadeInFadeOut = "fadeInFadeOut"
 }
 
 
@@ -12,12 +13,12 @@ export enum SoundtrackEffectEnum {
  * A music or audio file in mp3 format that plays for the duration of the rendered video or the length of the audio file, which ever is shortest.
 **/
 export class Soundtrack extends SpeakeasyBase {
-  @Metadata({ data: "json, name=effect" })
+  @SpeakeasyMetadata({ data: "json, name=effect" })
   effect?: SoundtrackEffectEnum;
 
-  @Metadata({ data: "json, name=src" })
+  @SpeakeasyMetadata({ data: "json, name=src" })
   src: string;
 
-  @Metadata({ data: "json, name=volume" })
+  @SpeakeasyMetadata({ data: "json, name=volume" })
   volume?: number;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingSubaccountsListPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 class DfareportingSubaccountsListSortFieldEnum(str, Enum):
     ID = "ID"
@@ -39,20 +40,20 @@ class DfareportingSubaccountsListQueryParams:
 
 @dataclass
 class DfareportingSubaccountsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingSubaccountsListRequest:
-    path_params: DfareportingSubaccountsListPathParams = field(default=None)
-    query_params: DfareportingSubaccountsListQueryParams = field(default=None)
-    security: DfareportingSubaccountsListSecurity = field(default=None)
+    path_params: DfareportingSubaccountsListPathParams = field()
+    query_params: DfareportingSubaccountsListQueryParams = field()
+    security: DfareportingSubaccountsListSecurity = field()
     
 
 @dataclass
 class DfareportingSubaccountsListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     subaccounts_list_response: Optional[shared.SubaccountsListResponse] = field(default=None)
     

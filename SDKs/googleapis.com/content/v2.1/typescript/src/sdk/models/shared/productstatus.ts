@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProductStatusDestinationStatus } from "./productstatusdestinationstatus";
 import { ProductStatusItemLevelIssue } from "./productstatusitemlevelissue";
+
 
 
 // ProductStatus
@@ -9,30 +9,30 @@ import { ProductStatusItemLevelIssue } from "./productstatusitemlevelissue";
  * The status of a product, that is, information about a product computed asynchronously.
 **/
 export class ProductStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: string;
 
-  @Metadata({ data: "json, name=destinationStatuses", elemType: shared.ProductStatusDestinationStatus })
+  @SpeakeasyMetadata({ data: "json, name=destinationStatuses", elemType: ProductStatusDestinationStatus })
   destinationStatuses?: ProductStatusDestinationStatus[];
 
-  @Metadata({ data: "json, name=googleExpirationDate" })
+  @SpeakeasyMetadata({ data: "json, name=googleExpirationDate" })
   googleExpirationDate?: string;
 
-  @Metadata({ data: "json, name=itemLevelIssues", elemType: shared.ProductStatusItemLevelIssue })
+  @SpeakeasyMetadata({ data: "json, name=itemLevelIssues", elemType: ProductStatusItemLevelIssue })
   itemLevelIssues?: ProductStatusItemLevelIssue[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=lastUpdateDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateDate" })
   lastUpdateDate?: string;
 
-  @Metadata({ data: "json, name=link" })
+  @SpeakeasyMetadata({ data: "json, name=link" })
   link?: string;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

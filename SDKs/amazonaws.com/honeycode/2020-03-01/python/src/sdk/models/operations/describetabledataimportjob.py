@@ -1,13 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeTableDataImportJobPathParams:
-    job_id: str = field(default=None, metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
-    table_id: str = field(default=None, metadata={'path_param': { 'field_name': 'tableId', 'style': 'simple', 'explode': False }})
-    workbook_id: str = field(default=None, metadata={'path_param': { 'field_name': 'workbookId', 'style': 'simple', 'explode': False }})
+    job_id: str = field(metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
+    table_id: str = field(metadata={'path_param': { 'field_name': 'tableId', 'style': 'simple', 'explode': False }})
+    workbook_id: str = field(metadata={'path_param': { 'field_name': 'workbookId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,19 +26,19 @@ class DescribeTableDataImportJobHeaders:
 
 @dataclass
 class DescribeTableDataImportJobRequest:
-    path_params: DescribeTableDataImportJobPathParams = field(default=None)
-    headers: DescribeTableDataImportJobHeaders = field(default=None)
+    headers: DescribeTableDataImportJobHeaders = field()
+    path_params: DescribeTableDataImportJobPathParams = field()
     
 
 @dataclass
 class DescribeTableDataImportJobResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_table_data_import_job_result: Optional[shared.DescribeTableDataImportJobResult] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationTypeEnum } from "./configurationtypeenum";
 import { LogLevelEnum } from "./loglevelenum";
 import { MetricsLevelEnum } from "./metricslevelenum";
+
 
 
 // MonitoringConfigurationUpdate
@@ -9,12 +10,12 @@ import { MetricsLevelEnum } from "./metricslevelenum";
  * Describes updates to configuration parameters for Amazon CloudWatch logging for an application.
 **/
 export class MonitoringConfigurationUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigurationTypeUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationTypeUpdate" })
   configurationTypeUpdate?: ConfigurationTypeEnum;
 
-  @Metadata({ data: "json, name=LogLevelUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=LogLevelUpdate" })
   logLevelUpdate?: LogLevelEnum;
 
-  @Metadata({ data: "json, name=MetricsLevelUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=MetricsLevelUpdate" })
   metricsLevelUpdate?: MetricsLevelEnum;
 }

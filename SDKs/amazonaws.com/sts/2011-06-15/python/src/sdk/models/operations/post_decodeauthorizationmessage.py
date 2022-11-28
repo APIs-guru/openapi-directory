@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDecodeAuthorizationMessageActionEnum(str, Enum):
     DECODE_AUTHORIZATION_MESSAGE = "DecodeAuthorizationMessage"
@@ -10,8 +14,8 @@ class PostDecodeAuthorizationMessageVersionEnum(str, Enum):
 
 @dataclass
 class PostDecodeAuthorizationMessageQueryParams:
-    action: PostDecodeAuthorizationMessageActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDecodeAuthorizationMessageVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDecodeAuthorizationMessageActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDecodeAuthorizationMessageVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDecodeAuthorizationMessageHeaders:
 
 @dataclass
 class PostDecodeAuthorizationMessageRequest:
-    query_params: PostDecodeAuthorizationMessageQueryParams = field(default=None)
-    headers: PostDecodeAuthorizationMessageHeaders = field(default=None)
+    headers: PostDecodeAuthorizationMessageHeaders = field()
+    query_params: PostDecodeAuthorizationMessageQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDecodeAuthorizationMessageResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

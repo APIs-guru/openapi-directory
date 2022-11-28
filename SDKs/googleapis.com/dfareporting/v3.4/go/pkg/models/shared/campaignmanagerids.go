@@ -1,5 +1,7 @@
 package shared
 
+// CampaignManagerIds
+// Campaign Manager IDs related to the custom event.
 type CampaignManagerIds struct {
 	AdID        *string `json:"adId,omitempty"`
 	CampaignID  *string `json:"campaignId,omitempty"`

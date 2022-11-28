@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OutputConfig } from "./outputconfig";
 // TraceSink
 /**
@@ -34,17 +34,37 @@ var TraceSink = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], TraceSink.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=outputConfig" }),
+        SpeakeasyMetadata({ data: "json, name=outputConfig" }),
         __metadata("design:type", OutputConfig)
     ], TraceSink.prototype, "outputConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=writerIdentity" }),
+        SpeakeasyMetadata({ data: "json, name=writerIdentity" }),
         __metadata("design:type", String)
     ], TraceSink.prototype, "writerIdentity", void 0);
     return TraceSink;
 }(SpeakeasyBase));
 export { TraceSink };
+// TraceSinkInput
+/**
+ * Describes a sink used to export traces to a BigQuery dataset. The sink must be created within a project.
+**/
+var TraceSinkInput = /** @class */ (function (_super) {
+    __extends(TraceSinkInput, _super);
+    function TraceSinkInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], TraceSinkInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=outputConfig" }),
+        __metadata("design:type", OutputConfig)
+    ], TraceSinkInput.prototype, "outputConfig", void 0);
+    return TraceSinkInput;
+}(SpeakeasyBase));
+export { TraceSinkInput };

@@ -12,11 +12,6 @@ type DeleteSavedQueryPkSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type DeleteSavedQueryPkRequest struct {
-	PathParams DeleteSavedQueryPkPathParams
-	Security   DeleteSavedQueryPkSecurity
-}
-
 type DeleteSavedQueryPk200ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -31,6 +26,11 @@ type DeleteSavedQueryPk422ApplicationJSON struct {
 
 type DeleteSavedQueryPk500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type DeleteSavedQueryPkRequest struct {
+	PathParams DeleteSavedQueryPkPathParams
+	Security   DeleteSavedQueryPkSecurity
 }
 
 type DeleteSavedQueryPkResponse struct {

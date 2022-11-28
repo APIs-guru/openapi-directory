@@ -1,21 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteProjectUsernameProjectCheckoutKeyFingerprintPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=fingerprint" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=fingerprint" })
   fingerprint: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project" })
   project: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=username" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" })
   username: string;
-}
-
-
-export class DeleteProjectUsernameProjectCheckoutKeyFingerprintRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteProjectUsernameProjectCheckoutKeyFingerprintPathParams;
 }
 
 export enum DeleteProjectUsernameProjectCheckoutKeyFingerprint200ApplicationJsonMessageEnum {
@@ -24,18 +19,24 @@ export enum DeleteProjectUsernameProjectCheckoutKeyFingerprint200ApplicationJson
 
 
 export class DeleteProjectUsernameProjectCheckoutKeyFingerprint200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: DeleteProjectUsernameProjectCheckoutKeyFingerprint200ApplicationJsonMessageEnum;
 }
 
 
+export class DeleteProjectUsernameProjectCheckoutKeyFingerprintRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteProjectUsernameProjectCheckoutKeyFingerprintPathParams;
+}
+
+
 export class DeleteProjectUsernameProjectCheckoutKeyFingerprintResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteProjectUsernameProjectCheckoutKeyFingerprint200ApplicationJsonObject?: DeleteProjectUsernameProjectCheckoutKeyFingerprint200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

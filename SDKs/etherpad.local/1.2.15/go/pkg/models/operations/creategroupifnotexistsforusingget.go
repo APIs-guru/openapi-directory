@@ -4,10 +4,6 @@ type CreateGroupIfNotExistsForUsingGetQueryParams struct {
 	GroupMapper *string `queryParam:"style=form,explode=true,name=groupMapper"`
 }
 
-type CreateGroupIfNotExistsForUsingGetRequest struct {
-	QueryParams CreateGroupIfNotExistsForUsingGetQueryParams
-}
-
 type CreateGroupIfNotExistsForUsingGet200ApplicationJSONData struct {
 	GroupID *string `json:"groupID,omitempty"`
 }
@@ -34,6 +30,10 @@ type CreateGroupIfNotExistsForUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type CreateGroupIfNotExistsForUsingGetRequest struct {
+	QueryParams CreateGroupIfNotExistsForUsingGetQueryParams
 }
 
 type CreateGroupIfNotExistsForUsingGetResponse struct {

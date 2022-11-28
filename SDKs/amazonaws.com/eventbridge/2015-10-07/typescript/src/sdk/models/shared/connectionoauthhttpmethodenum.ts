@@ -1,7 +1,8 @@
 
 
+
 export enum ConnectionOAuthHttpMethodEnum {
-    Get = "GET"
-,    Post = "POST"
-,    Put = "PUT"
+    Get = "GET",
+    Post = "POST",
+    Put = "PUT"
 }

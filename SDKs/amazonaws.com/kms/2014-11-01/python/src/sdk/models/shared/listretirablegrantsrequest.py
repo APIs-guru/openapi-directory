@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ListRetirableGrantsRequest:
-    limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Limit' }})
-    marker: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Marker' }})
-    retiring_principal: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RetiringPrincipal' }})
+    retiring_principal: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RetiringPrincipal') }})
+    limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Limit') }})
+    marker: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Marker') }})
     

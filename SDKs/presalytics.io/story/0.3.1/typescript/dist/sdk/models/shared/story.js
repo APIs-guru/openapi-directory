@@ -22,8 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { StoryCollaborator } from "./storycollaborator";
+import { OoxmlDocument } from "./ooxmldocument";
+import { StoryOutlineHistory } from "./storyoutlinehistory";
 // Story
 /**
  * Model for story objects
@@ -34,51 +36,51 @@ var Story = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=collaborators", elemType: shared.StoryCollaborator }),
+        SpeakeasyMetadata({ data: "json, name=collaborators", elemType: StoryCollaborator }),
         __metadata("design:type", Array)
     ], Story.prototype, "collaborators", void 0);
     __decorate([
-        Metadata({ data: "json, name=created_at" }),
+        SpeakeasyMetadata({ data: "json, name=created_at" }),
         __metadata("design:type", Date)
     ], Story.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=created_by" }),
+        SpeakeasyMetadata({ data: "json, name=created_by" }),
         __metadata("design:type", String)
     ], Story.prototype, "createdBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Story.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=is_public" }),
+        SpeakeasyMetadata({ data: "json, name=is_public" }),
         __metadata("design:type", Boolean)
     ], Story.prototype, "isPublic", void 0);
     __decorate([
-        Metadata({ data: "json, name=ooxml_documents", elemType: shared.OoxmlDocument }),
+        SpeakeasyMetadata({ data: "json, name=ooxml_documents", elemType: OoxmlDocument }),
         __metadata("design:type", Array)
     ], Story.prototype, "ooxmlDocuments", void 0);
     __decorate([
-        Metadata({ data: "json, name=outline" }),
+        SpeakeasyMetadata({ data: "json, name=outline" }),
         __metadata("design:type", String)
     ], Story.prototype, "outline", void 0);
     __decorate([
-        Metadata({ data: "json, name=outline_history", elemType: shared.StoryOutlineHistory }),
+        SpeakeasyMetadata({ data: "json, name=outline_history", elemType: StoryOutlineHistory }),
         __metadata("design:type", Array)
     ], Story.prototype, "outlineHistory", void 0);
     __decorate([
-        Metadata({ data: "json, name=revision" }),
+        SpeakeasyMetadata({ data: "json, name=revision" }),
         __metadata("design:type", Number)
     ], Story.prototype, "revision", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], Story.prototype, "title", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated_at" }),
+        SpeakeasyMetadata({ data: "json, name=updated_at" }),
         __metadata("design:type", Date)
     ], Story.prototype, "updatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated_by" }),
+        SpeakeasyMetadata({ data: "json, name=updated_by" }),
         __metadata("design:type", String)
     ], Story.prototype, "updatedBy", void 0);
     return Story;

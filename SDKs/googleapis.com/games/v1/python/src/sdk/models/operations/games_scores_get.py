@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GamesScoresGetTimeSpanEnum(str, Enum):
@@ -12,9 +13,9 @@ class GamesScoresGetTimeSpanEnum(str, Enum):
 
 @dataclass
 class GamesScoresGetPathParams:
-    leaderboard_id: str = field(default=None, metadata={'path_param': { 'field_name': 'leaderboardId', 'style': 'simple', 'explode': False }})
-    player_id: str = field(default=None, metadata={'path_param': { 'field_name': 'playerId', 'style': 'simple', 'explode': False }})
-    time_span: GamesScoresGetTimeSpanEnum = field(default=None, metadata={'path_param': { 'field_name': 'timeSpan', 'style': 'simple', 'explode': False }})
+    leaderboard_id: str = field(metadata={'path_param': { 'field_name': 'leaderboardId', 'style': 'simple', 'explode': False }})
+    player_id: str = field(metadata={'path_param': { 'field_name': 'playerId', 'style': 'simple', 'explode': False }})
+    time_span: GamesScoresGetTimeSpanEnum = field(metadata={'path_param': { 'field_name': 'timeSpan', 'style': 'simple', 'explode': False }})
     
 class GamesScoresGetIncludeRankTypeEnum(str, Enum):
     INCLUDE_RANK_TYPE_UNSPECIFIED = "INCLUDE_RANK_TYPE_UNSPECIFIED"
@@ -45,20 +46,20 @@ class GamesScoresGetQueryParams:
 
 @dataclass
 class GamesScoresGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GamesScoresGetRequest:
-    path_params: GamesScoresGetPathParams = field(default=None)
-    query_params: GamesScoresGetQueryParams = field(default=None)
-    security: GamesScoresGetSecurity = field(default=None)
+    path_params: GamesScoresGetPathParams = field()
+    query_params: GamesScoresGetQueryParams = field()
+    security: GamesScoresGetSecurity = field()
     
 
 @dataclass
 class GamesScoresGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     player_leaderboard_score_list_response: Optional[shared.PlayerLeaderboardScoreListResponse] = field(default=None)
-    status_code: int = field(default=None)
     

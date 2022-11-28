@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetTeachersForStudentPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,14 +17,14 @@ class GetTeachersForStudentQueryParams:
 
 @dataclass
 class GetTeachersForStudentRequest:
-    path_params: GetTeachersForStudentPathParams = field(default=None)
-    query_params: GetTeachersForStudentQueryParams = field(default=None)
+    path_params: GetTeachersForStudentPathParams = field()
+    query_params: GetTeachersForStudentQueryParams = field()
     
 
 @dataclass
 class GetTeachersForStudentResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     not_found: Optional[shared.NotFound] = field(default=None)
-    status_code: int = field(default=None)
     teachers_response: Optional[shared.TeachersResponse] = field(default=None)
     

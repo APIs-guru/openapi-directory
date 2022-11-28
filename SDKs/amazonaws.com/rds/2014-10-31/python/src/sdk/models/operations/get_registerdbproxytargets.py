@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetRegisterDbProxyTargetsActionEnum(str, Enum):
     REGISTER_DB_PROXY_TARGETS = "RegisterDBProxyTargets"
@@ -10,12 +14,12 @@ class GetRegisterDbProxyTargetsVersionEnum(str, Enum):
 
 @dataclass
 class GetRegisterDbProxyTargetsQueryParams:
-    action: GetRegisterDbProxyTargetsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetRegisterDbProxyTargetsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_proxy_name: str = field(metadata={'query_param': { 'field_name': 'DBProxyName', 'style': 'form', 'explode': True }})
+    version: GetRegisterDbProxyTargetsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     db_cluster_identifiers: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'DBClusterIdentifiers', 'style': 'form', 'explode': True }})
     db_instance_identifiers: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'DBInstanceIdentifiers', 'style': 'form', 'explode': True }})
-    db_proxy_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DBProxyName', 'style': 'form', 'explode': True }})
     target_group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TargetGroupName', 'style': 'form', 'explode': True }})
-    version: GetRegisterDbProxyTargetsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetRegisterDbProxyTargetsHeaders:
 
 @dataclass
 class GetRegisterDbProxyTargetsRequest:
-    query_params: GetRegisterDbProxyTargetsQueryParams = field(default=None)
-    headers: GetRegisterDbProxyTargetsHeaders = field(default=None)
+    headers: GetRegisterDbProxyTargetsHeaders = field()
+    query_params: GetRegisterDbProxyTargetsQueryParams = field()
     
 
 @dataclass
 class GetRegisterDbProxyTargetsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

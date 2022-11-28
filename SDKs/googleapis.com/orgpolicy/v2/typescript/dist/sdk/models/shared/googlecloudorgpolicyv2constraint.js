@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudOrgpolicyV2ConstraintListConstraint } from "./googlecloudorgpolicyv2constraintlistconstraint";
 export var GoogleCloudOrgpolicyV2ConstraintConstraintDefaultEnum;
 (function (GoogleCloudOrgpolicyV2ConstraintConstraintDefaultEnum) {
@@ -40,27 +40,27 @@ var GoogleCloudOrgpolicyV2Constraint = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=booleanConstraint" }),
+        SpeakeasyMetadata({ data: "json, name=booleanConstraint" }),
         __metadata("design:type", Map)
     ], GoogleCloudOrgpolicyV2Constraint.prototype, "booleanConstraint", void 0);
     __decorate([
-        Metadata({ data: "json, name=constraintDefault" }),
+        SpeakeasyMetadata({ data: "json, name=constraintDefault" }),
         __metadata("design:type", String)
     ], GoogleCloudOrgpolicyV2Constraint.prototype, "constraintDefault", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], GoogleCloudOrgpolicyV2Constraint.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], GoogleCloudOrgpolicyV2Constraint.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=listConstraint" }),
+        SpeakeasyMetadata({ data: "json, name=listConstraint" }),
         __metadata("design:type", GoogleCloudOrgpolicyV2ConstraintListConstraint)
     ], GoogleCloudOrgpolicyV2Constraint.prototype, "listConstraint", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleCloudOrgpolicyV2Constraint.prototype, "name", void 0);
     return GoogleCloudOrgpolicyV2Constraint;

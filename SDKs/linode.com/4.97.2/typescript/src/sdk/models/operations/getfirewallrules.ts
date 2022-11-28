@@ -1,66 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const GETFIREWALLRULES_SERVERS = [
-	"https://api.linode.com/v4",
-];
 
+export const GetFirewallRulesServerList = [
+	"https://api.linode.com/v4",
+] as const;
 
 
 export class GetFirewallRulesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=firewallId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=firewallId" })
   firewallId: number;
 }
 
 
-export class GetFirewallRulesSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class GetFirewallRulesSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class GetFirewallRulesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetFirewallRulesSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetFirewallRulesSecurityOption2;
-}
-
-
-export class GetFirewallRulesRequest extends SpeakeasyBase {
-  @Metadata()
-  serverUrl?: string;
-
-  @Metadata()
-  pathParams: GetFirewallRulesPathParams;
-
-  @Metadata()
-  security: GetFirewallRulesSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class GetFirewallRulesDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class GetFirewallRulesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  serverUrl?: string;
+
+  @SpeakeasyMetadata()
+  pathParams: GetFirewallRulesPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetFirewallRulesSecurity;
+}
+
+
 export class GetFirewallRulesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getFirewallRulesDefaultApplicationJsonObject?: GetFirewallRulesDefaultApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   rules?: shared.Rules;
 }

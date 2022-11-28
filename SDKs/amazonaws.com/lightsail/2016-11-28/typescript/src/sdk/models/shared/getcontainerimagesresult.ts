@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContainerImage } from "./containerimage";
 
 
+
 export class GetContainerImagesResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerImages", elemType: shared.ContainerImage })
+  @SpeakeasyMetadata({ data: "json, name=containerImages", elemType: ContainerImage })
   containerImages?: ContainerImage[];
 }

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchMetricsDimension } from "./cloudwatchmetricsdimension";
 import { CloudWatchMetricsStatEnum } from "./cloudwatchmetricsstatenum";
+
 
 
 // CloudWatchMetricsDetail
@@ -9,21 +9,21 @@ import { CloudWatchMetricsStatEnum } from "./cloudwatchmetricsstatenum";
  *  Information about an Amazon CloudWatch metric. 
 **/
 export class CloudWatchMetricsDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Dimensions", elemType: shared.CloudWatchMetricsDimension })
+  @SpeakeasyMetadata({ data: "json, name=Dimensions", elemType: CloudWatchMetricsDimension })
   dimensions?: CloudWatchMetricsDimension[];
 
-  @Metadata({ data: "json, name=MetricName" })
+  @SpeakeasyMetadata({ data: "json, name=MetricName" })
   metricName?: string;
 
-  @Metadata({ data: "json, name=Namespace" })
+  @SpeakeasyMetadata({ data: "json, name=Namespace" })
   namespace?: string;
 
-  @Metadata({ data: "json, name=Period" })
+  @SpeakeasyMetadata({ data: "json, name=Period" })
   period?: number;
 
-  @Metadata({ data: "json, name=Stat" })
+  @SpeakeasyMetadata({ data: "json, name=Stat" })
   stat?: CloudWatchMetricsStatEnum;
 
-  @Metadata({ data: "json, name=Unit" })
+  @SpeakeasyMetadata({ data: "json, name=Unit" })
   unit?: string;
 }

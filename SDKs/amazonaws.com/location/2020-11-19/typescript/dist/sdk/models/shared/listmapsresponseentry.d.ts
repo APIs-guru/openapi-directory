@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PricingPlanEnum } from "./pricingplanenum";
 /**
  * Contains details of an existing map resource in your AWS account.

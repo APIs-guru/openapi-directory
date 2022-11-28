@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SimilarCompany extends SpeakeasyBase {
-  @Metadata({ data: "json, name=companyName" })
+  @SpeakeasyMetadata({ data: "json, name=companyName" })
   companyName?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=employee" })
+  @SpeakeasyMetadata({ data: "json, name=employee" })
   employee?: string;
 
-  @Metadata({ data: "json, name=industry" })
+  @SpeakeasyMetadata({ data: "json, name=industry" })
   industry?: string;
 
-  @Metadata({ data: "json, name=linkedin" })
+  @SpeakeasyMetadata({ data: "json, name=linkedin" })
   linkedin?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=twitter" })
+  @SpeakeasyMetadata({ data: "json, name=twitter" })
   twitter?: string;
 
-  @Metadata({ data: "json, name=website" })
+  @SpeakeasyMetadata({ data: "json, name=website" })
   website?: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Pub/Sub target. The job will be delivered by publishing a message to the given Pub/Sub topic.
 **/

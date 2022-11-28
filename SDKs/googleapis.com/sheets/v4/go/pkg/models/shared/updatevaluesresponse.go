@@ -1,5 +1,7 @@
 package shared
 
+// UpdateValuesResponse
+// The response when updating a range of values in a spreadsheet.
 type UpdateValuesResponse struct {
 	SpreadsheetID  *string     `json:"spreadsheetId,omitempty"`
 	UpdatedCells   *int32      `json:"updatedCells,omitempty"`

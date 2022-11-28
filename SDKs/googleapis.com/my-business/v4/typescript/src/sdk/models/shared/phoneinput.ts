@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PhoneInput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Input for PHONE_CALL/SMS verification.
 **/
 export class PhoneInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
   phoneNumber?: string;
 }

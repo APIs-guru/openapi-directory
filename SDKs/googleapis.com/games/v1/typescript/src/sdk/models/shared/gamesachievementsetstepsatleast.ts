@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GamesAchievementSetStepsAtLeast
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The payload to request to increment an achievement.
 **/
 export class GamesAchievementSetStepsAtLeast extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=steps" })
+  @SpeakeasyMetadata({ data: "json, name=steps" })
   steps?: number;
 }

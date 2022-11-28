@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetReplaceRouteActionEnum;
 (function (GetReplaceRouteActionEnum) {
     GetReplaceRouteActionEnum["ReplaceRoute"] = "ReplaceRoute";
@@ -37,75 +37,75 @@ var GetReplaceRouteQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetReplaceRouteQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=CarrierGatewayId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CarrierGatewayId" }),
         __metadata("design:type", String)
     ], GetReplaceRouteQueryParams.prototype, "carrierGatewayId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DestinationCidrBlock" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DestinationCidrBlock" }),
         __metadata("design:type", String)
     ], GetReplaceRouteQueryParams.prototype, "destinationCidrBlock", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DestinationIpv6CidrBlock" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DestinationIpv6CidrBlock" }),
         __metadata("design:type", String)
     ], GetReplaceRouteQueryParams.prototype, "destinationIpv6CidrBlock", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DestinationPrefixListId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DestinationPrefixListId" }),
         __metadata("design:type", String)
     ], GetReplaceRouteQueryParams.prototype, "destinationPrefixListId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
         __metadata("design:type", Boolean)
     ], GetReplaceRouteQueryParams.prototype, "dryRun", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EgressOnlyInternetGatewayId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EgressOnlyInternetGatewayId" }),
         __metadata("design:type", String)
     ], GetReplaceRouteQueryParams.prototype, "egressOnlyInternetGatewayId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=GatewayId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=GatewayId" }),
         __metadata("design:type", String)
     ], GetReplaceRouteQueryParams.prototype, "gatewayId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=InstanceId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=InstanceId" }),
         __metadata("design:type", String)
     ], GetReplaceRouteQueryParams.prototype, "instanceId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=LocalGatewayId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=LocalGatewayId" }),
         __metadata("design:type", String)
     ], GetReplaceRouteQueryParams.prototype, "localGatewayId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=LocalTarget" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=LocalTarget" }),
         __metadata("design:type", Boolean)
     ], GetReplaceRouteQueryParams.prototype, "localTarget", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NatGatewayId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NatGatewayId" }),
         __metadata("design:type", String)
     ], GetReplaceRouteQueryParams.prototype, "natGatewayId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NetworkInterfaceId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NetworkInterfaceId" }),
         __metadata("design:type", String)
     ], GetReplaceRouteQueryParams.prototype, "networkInterfaceId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=RouteTableId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=RouteTableId" }),
         __metadata("design:type", String)
     ], GetReplaceRouteQueryParams.prototype, "routeTableId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TransitGatewayId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TransitGatewayId" }),
         __metadata("design:type", String)
     ], GetReplaceRouteQueryParams.prototype, "transitGatewayId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetReplaceRouteQueryParams.prototype, "version", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=VpcEndpointId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=VpcEndpointId" }),
         __metadata("design:type", String)
     ], GetReplaceRouteQueryParams.prototype, "vpcEndpointId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=VpcPeeringConnectionId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=VpcPeeringConnectionId" }),
         __metadata("design:type", String)
     ], GetReplaceRouteQueryParams.prototype, "vpcPeeringConnectionId", void 0);
     return GetReplaceRouteQueryParams;
@@ -117,31 +117,31 @@ var GetReplaceRouteHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetReplaceRouteHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetReplaceRouteHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetReplaceRouteHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetReplaceRouteHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetReplaceRouteHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetReplaceRouteHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetReplaceRouteHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetReplaceRouteHeaders;
@@ -153,11 +153,11 @@ var GetReplaceRouteRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetReplaceRouteQueryParams)
     ], GetReplaceRouteRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetReplaceRouteHeaders)
     ], GetReplaceRouteRequest.prototype, "headers", void 0);
     return GetReplaceRouteRequest;
@@ -169,11 +169,11 @@ var GetReplaceRouteResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetReplaceRouteResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetReplaceRouteResponse.prototype, "statusCode", void 0);
     return GetReplaceRouteResponse;

@@ -32,6 +32,18 @@ const (
 	BuyOnGoogleProgramStatusParticipationStageEnumPaused                               BuyOnGoogleProgramStatusParticipationStageEnum = "PAUSED"
 )
 
+// BuyOnGoogleProgramStatusInput
+// Response message for the GetProgramStatus method.
+type BuyOnGoogleProgramStatusInput struct {
+	BusinessModel                         []BuyOnGoogleProgramStatusBusinessModelEnum     `json:"businessModel,omitempty"`
+	CustomerServicePendingEmail           *string                                         `json:"customerServicePendingEmail,omitempty"`
+	CustomerServicePendingPhoneNumber     *string                                         `json:"customerServicePendingPhoneNumber,omitempty"`
+	CustomerServicePendingPhoneRegionCode *string                                         `json:"customerServicePendingPhoneRegionCode,omitempty"`
+	OnlineSalesChannel                    *BuyOnGoogleProgramStatusOnlineSalesChannelEnum `json:"onlineSalesChannel,omitempty"`
+}
+
+// BuyOnGoogleProgramStatus
+// Response message for the GetProgramStatus method.
 type BuyOnGoogleProgramStatus struct {
 	BusinessModel                          []BuyOnGoogleProgramStatusBusinessModelEnum     `json:"businessModel,omitempty"`
 	CustomerServicePendingEmail            *string                                         `json:"customerServicePendingEmail,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// ParallelInstruction
+// Describes a particular operation comprising a MapTask.
 type ParallelInstruction struct {
 	Flatten           *FlattenInstruction           `json:"flatten,omitempty"`
 	Name              *string                       `json:"name,omitempty"`

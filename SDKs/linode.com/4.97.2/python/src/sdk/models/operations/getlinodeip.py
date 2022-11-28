@@ -1,47 +1,38 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class GetLinodeIPPathParams:
-    address: str = field(default=None, metadata={'path_param': { 'field_name': 'address', 'style': 'simple', 'explode': False }})
-    linode_id: int = field(default=None, metadata={'path_param': { 'field_name': 'linodeId', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class GetLinodeIPSecurityOption1:
-    personal_access_token: shared.SchemePersonalAccessToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
-    
-
-@dataclass
-class GetLinodeIPSecurityOption2:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    address: str = field(metadata={'path_param': { 'field_name': 'address', 'style': 'simple', 'explode': False }})
+    linode_id: int = field(metadata={'path_param': { 'field_name': 'linodeId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetLinodeIPSecurity:
-    option1: Optional[GetLinodeIPSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetLinodeIPSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    
-
-@dataclass
-class GetLinodeIPRequest:
-    path_params: GetLinodeIPPathParams = field(default=None)
-    security: GetLinodeIPSecurity = field(default=None)
+    oauth: Optional[shared.SchemeOauth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    personal_access_token: Optional[shared.SchemePersonalAccessToken] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass_json
 @dataclass
 class GetLinodeIPDefaultApplicationJSON:
-    errors: Optional[List[shared.ErrorObject]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
+    errors: Optional[List[shared.ErrorObject]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
+    
+
+@dataclass
+class GetLinodeIPRequest:
+    path_params: GetLinodeIPPathParams = field()
+    security: GetLinodeIPSecurity = field()
     
 
 @dataclass
 class GetLinodeIPResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ip_address: Optional[shared.IPAddress] = field(default=None)
-    status_code: int = field(default=None)
     get_linode_ip_default_application_json_object: Optional[GetLinodeIPDefaultApplicationJSON] = field(default=None)
     

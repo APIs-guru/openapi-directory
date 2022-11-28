@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class OrgsListMembersPathParams:
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
     
 class OrgsListMembersFilterEnum(str, Enum):
     TWOFA_DISABLED = "2fa_disabled"
@@ -27,15 +28,15 @@ class OrgsListMembersQueryParams:
 
 @dataclass
 class OrgsListMembersRequest:
-    path_params: OrgsListMembersPathParams = field(default=None)
-    query_params: OrgsListMembersQueryParams = field(default=None)
+    path_params: OrgsListMembersPathParams = field()
+    query_params: OrgsListMembersQueryParams = field()
     
 
 @dataclass
 class OrgsListMembersResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     simple_users: Optional[List[shared.SimpleUser]] = field(default=None)
     validation_error: Optional[shared.ValidationError] = field(default=None)
     

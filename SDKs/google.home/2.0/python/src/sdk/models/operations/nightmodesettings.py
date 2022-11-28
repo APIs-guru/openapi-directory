@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class NightModesettingsRequest:
-    request: shared.NightModesettingsRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.NightModesettingsRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class NightModesettingsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     example17: Optional[shared.Example17] = field(default=None)
-    status_code: int = field(default=None)
     

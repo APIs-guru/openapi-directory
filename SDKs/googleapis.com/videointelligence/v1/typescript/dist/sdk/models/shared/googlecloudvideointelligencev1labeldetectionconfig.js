@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnum;
 (function (GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnum) {
     GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnum["LabelDetectionModeUnspecified"] = "LABEL_DETECTION_MODE_UNSPECIFIED";
@@ -40,23 +40,23 @@ var GoogleCloudVideointelligenceV1LabelDetectionConfig = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=frameConfidenceThreshold" }),
+        SpeakeasyMetadata({ data: "json, name=frameConfidenceThreshold" }),
         __metadata("design:type", Number)
     ], GoogleCloudVideointelligenceV1LabelDetectionConfig.prototype, "frameConfidenceThreshold", void 0);
     __decorate([
-        Metadata({ data: "json, name=labelDetectionMode" }),
+        SpeakeasyMetadata({ data: "json, name=labelDetectionMode" }),
         __metadata("design:type", String)
     ], GoogleCloudVideointelligenceV1LabelDetectionConfig.prototype, "labelDetectionMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=model" }),
+        SpeakeasyMetadata({ data: "json, name=model" }),
         __metadata("design:type", String)
     ], GoogleCloudVideointelligenceV1LabelDetectionConfig.prototype, "model", void 0);
     __decorate([
-        Metadata({ data: "json, name=stationaryCamera" }),
+        SpeakeasyMetadata({ data: "json, name=stationaryCamera" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudVideointelligenceV1LabelDetectionConfig.prototype, "stationaryCamera", void 0);
     __decorate([
-        Metadata({ data: "json, name=videoConfidenceThreshold" }),
+        SpeakeasyMetadata({ data: "json, name=videoConfidenceThreshold" }),
         __metadata("design:type", Number)
     ], GoogleCloudVideointelligenceV1LabelDetectionConfig.prototype, "videoConfidenceThreshold", void 0);
     return GoogleCloudVideointelligenceV1LabelDetectionConfig;

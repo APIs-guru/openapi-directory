@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateScanPathParams = /** @class */ (function (_super) {
     __extends(CreateScanPathParams, _super);
@@ -30,7 +30,7 @@ var CreateScanPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=site_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=site_id" }),
         __metadata("design:type", String)
     ], CreateScanPathParams.prototype, "siteId", void 0);
     return CreateScanPathParams;
@@ -42,7 +42,7 @@ var CreateScanSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], CreateScanSecurity.prototype, "bearerAuth", void 0);
     return CreateScanSecurity;
@@ -54,15 +54,15 @@ var CreateScanRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateScanPathParams)
     ], CreateScanRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/json" }),
         __metadata("design:type", shared.ScanOptions)
     ], CreateScanRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateScanSecurity)
     ], CreateScanRequest.prototype, "security", void 0);
     return CreateScanRequest;
@@ -74,15 +74,15 @@ var CreateScanResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateScanResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateScanResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Task)
     ], CreateScanResponse.prototype, "task", void 0);
     return CreateScanResponse;

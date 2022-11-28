@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SasPortalGetPolicyRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for `GetPolicy` method.
 **/
 export class SasPortalGetPolicyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource?: string;
 }

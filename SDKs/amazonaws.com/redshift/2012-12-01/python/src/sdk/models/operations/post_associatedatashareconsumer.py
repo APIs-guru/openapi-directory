@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostAssociateDataShareConsumerActionEnum(str, Enum):
     ASSOCIATE_DATA_SHARE_CONSUMER = "AssociateDataShareConsumer"
@@ -10,8 +14,8 @@ class PostAssociateDataShareConsumerVersionEnum(str, Enum):
 
 @dataclass
 class PostAssociateDataShareConsumerQueryParams:
-    action: PostAssociateDataShareConsumerActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostAssociateDataShareConsumerVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostAssociateDataShareConsumerActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostAssociateDataShareConsumerVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostAssociateDataShareConsumerHeaders:
 
 @dataclass
 class PostAssociateDataShareConsumerRequest:
-    query_params: PostAssociateDataShareConsumerQueryParams = field(default=None)
-    headers: PostAssociateDataShareConsumerHeaders = field(default=None)
+    headers: PostAssociateDataShareConsumerHeaders = field()
+    query_params: PostAssociateDataShareConsumerQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostAssociateDataShareConsumerResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDataplexV1AssetStatus
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Aggregated status of the underlying assets of a lake or zone.
 **/
 export class GoogleCloudDataplexV1AssetStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeAssets" })
+  @SpeakeasyMetadata({ data: "json, name=activeAssets" })
   activeAssets?: number;
 
-  @Metadata({ data: "json, name=securityPolicyApplyingAssets" })
+  @SpeakeasyMetadata({ data: "json, name=securityPolicyApplyingAssets" })
   securityPolicyApplyingAssets?: number;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceUpdateStatusEnum } from "./serviceupdatestatusenum";
 
 
+
 export class DescribeServiceUpdatesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterNames" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterNames" })
   clusterNames?: string[];
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ServiceUpdateName" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceUpdateName" })
   serviceUpdateName?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ServiceUpdateStatusEnum[];
 }

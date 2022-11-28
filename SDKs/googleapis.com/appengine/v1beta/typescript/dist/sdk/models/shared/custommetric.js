@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CustomMetric
 /**
  * Allows autoscaling based on Stackdriver metrics.
@@ -33,23 +33,23 @@ var CustomMetric = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=filter" }),
+        SpeakeasyMetadata({ data: "json, name=filter" }),
         __metadata("design:type", String)
     ], CustomMetric.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "json, name=metricName" }),
+        SpeakeasyMetadata({ data: "json, name=metricName" }),
         __metadata("design:type", String)
     ], CustomMetric.prototype, "metricName", void 0);
     __decorate([
-        Metadata({ data: "json, name=singleInstanceAssignment" }),
+        SpeakeasyMetadata({ data: "json, name=singleInstanceAssignment" }),
         __metadata("design:type", Number)
     ], CustomMetric.prototype, "singleInstanceAssignment", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetType" }),
+        SpeakeasyMetadata({ data: "json, name=targetType" }),
         __metadata("design:type", String)
     ], CustomMetric.prototype, "targetType", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetUtilization" }),
+        SpeakeasyMetadata({ data: "json, name=targetUtilization" }),
         __metadata("design:type", Number)
     ], CustomMetric.prototype, "targetUtilization", void 0);
     return CustomMetric;

@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsTestCasesListPathParams:
-    execution_id: str = field(default=None, metadata={'path_param': { 'field_name': 'executionId', 'style': 'simple', 'explode': False }})
-    history_id: str = field(default=None, metadata={'path_param': { 'field_name': 'historyId', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    step_id: str = field(default=None, metadata={'path_param': { 'field_name': 'stepId', 'style': 'simple', 'explode': False }})
+    execution_id: str = field(metadata={'path_param': { 'field_name': 'executionId', 'style': 'simple', 'explode': False }})
+    history_id: str = field(metadata={'path_param': { 'field_name': 'historyId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    step_id: str = field(metadata={'path_param': { 'field_name': 'stepId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,20 +31,20 @@ class ToolresultsProjectsHistoriesExecutionsStepsTestCasesListQueryParams:
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsTestCasesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsTestCasesListRequest:
-    path_params: ToolresultsProjectsHistoriesExecutionsStepsTestCasesListPathParams = field(default=None)
-    query_params: ToolresultsProjectsHistoriesExecutionsStepsTestCasesListQueryParams = field(default=None)
-    security: ToolresultsProjectsHistoriesExecutionsStepsTestCasesListSecurity = field(default=None)
+    path_params: ToolresultsProjectsHistoriesExecutionsStepsTestCasesListPathParams = field()
+    query_params: ToolresultsProjectsHistoriesExecutionsStepsTestCasesListQueryParams = field()
+    security: ToolresultsProjectsHistoriesExecutionsStepsTestCasesListSecurity = field()
     
 
 @dataclass
 class ToolresultsProjectsHistoriesExecutionsStepsTestCasesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_test_cases_response: Optional[shared.ListTestCasesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

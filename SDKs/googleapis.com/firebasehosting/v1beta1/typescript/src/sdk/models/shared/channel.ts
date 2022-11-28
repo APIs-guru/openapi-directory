@@ -1,5 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Release } from "./release";
+
+
+
+// ChannelInput
+/** 
+ * A `Channel` represents a stream of releases for a site. All sites have a default `live` channel that serves content to the Firebase-provided subdomains and any connected custom domains.
+**/
+export class ChannelInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=expireTime" })
+  expireTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=release" })
+  release?: Release;
+
+  @SpeakeasyMetadata({ data: "json, name=retainedReleaseCount" })
+  retainedReleaseCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=ttl" })
+  ttl?: string;
+}
 
 
 // Channel
@@ -7,30 +33,30 @@ import { Release } from "./release";
  * A `Channel` represents a stream of releases for a site. All sites have a default `live` channel that serves content to the Firebase-provided subdomains and any connected custom domains.
 **/
 export class Channel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=expireTime" })
+  @SpeakeasyMetadata({ data: "json, name=expireTime" })
   expireTime?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=release" })
+  @SpeakeasyMetadata({ data: "json, name=release" })
   release?: Release;
 
-  @Metadata({ data: "json, name=retainedReleaseCount" })
+  @SpeakeasyMetadata({ data: "json, name=retainedReleaseCount" })
   retainedReleaseCount?: number;
 
-  @Metadata({ data: "json, name=ttl" })
+  @SpeakeasyMetadata({ data: "json, name=ttl" })
   ttl?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

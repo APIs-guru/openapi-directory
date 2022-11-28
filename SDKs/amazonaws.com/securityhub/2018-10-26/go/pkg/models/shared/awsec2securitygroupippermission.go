@@ -1,5 +1,7 @@
 package shared
 
+// AwsEc2SecurityGroupIPPermission
+// An IP permission for an EC2 security group.
 type AwsEc2SecurityGroupIPPermission struct {
 	FromPort         *int64                               `json:"FromPort,omitempty"`
 	IPProtocol       *string                              `json:"IpProtocol,omitempty"`

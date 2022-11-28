@@ -1,5 +1,7 @@
 package shared
 
+// OnPremisesConfiguration
+// On-premises instance configuration.
 type OnPremisesConfiguration struct {
 	CaCertificate     *string            `json:"caCertificate,omitempty"`
 	ClientCertificate *string            `json:"clientCertificate,omitempty"`

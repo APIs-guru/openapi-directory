@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ServiceDirectoryConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * ServiceDirectoryConfig represents Service Directory configuration for a SCM host connection.
 **/
 export class ServiceDirectoryConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service?: string;
 }

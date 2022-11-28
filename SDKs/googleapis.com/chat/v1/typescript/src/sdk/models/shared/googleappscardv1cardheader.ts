@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleAppsCardV1CardHeaderImageTypeEnum {
-    Square = "SQUARE"
-,    Circle = "CIRCLE"
+    Square = "SQUARE",
+    Circle = "CIRCLE"
 }
 
 
@@ -11,18 +12,18 @@ export enum GoogleAppsCardV1CardHeaderImageTypeEnum {
  * Represents a card header.
 **/
 export class GoogleAppsCardV1CardHeader extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageAltText" })
+  @SpeakeasyMetadata({ data: "json, name=imageAltText" })
   imageAltText?: string;
 
-  @Metadata({ data: "json, name=imageType" })
+  @SpeakeasyMetadata({ data: "json, name=imageType" })
   imageType?: GoogleAppsCardV1CardHeaderImageTypeEnum;
 
-  @Metadata({ data: "json, name=imageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=imageUrl" })
   imageUrl?: string;
 
-  @Metadata({ data: "json, name=subtitle" })
+  @SpeakeasyMetadata({ data: "json, name=subtitle" })
   subtitle?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

@@ -1,9 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HrefType } from "./hreftype";
 import { Transactions } from "./transactions";
-import { Transactions } from "./transactions";
-import { Transactions } from "./transactions";
+
 
 
 // AccountReport
@@ -19,15 +17,15 @@ import { Transactions } from "./transactions";
  * 
 **/
 export class AccountReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_links", elemType: shared.HrefType })
+  @SpeakeasyMetadata({ data: "json, name=_links", elemType: HrefType })
   links: Map<string, HrefType>;
 
-  @Metadata({ data: "json, name=booked", elemType: shared.Transactions })
+  @SpeakeasyMetadata({ data: "json, name=booked", elemType: Transactions })
   booked?: Transactions[];
 
-  @Metadata({ data: "json, name=information", elemType: shared.Transactions })
+  @SpeakeasyMetadata({ data: "json, name=information", elemType: Transactions })
   information?: Transactions[];
 
-  @Metadata({ data: "json, name=pending", elemType: shared.Transactions })
+  @SpeakeasyMetadata({ data: "json, name=pending", elemType: Transactions })
   pending?: Transactions[];
 }

@@ -8,10 +8,6 @@ type DeleteRuleCategoryPathParams struct {
 	RuleCategoryID string `pathParam:"style=simple,explode=false,name=ruleCategoryId"`
 }
 
-type DeleteRuleCategoryRequest struct {
-	PathParams DeleteRuleCategoryPathParams
-}
-
 type DeleteRuleCategory200ApplicationJSONActionEnum string
 
 const (
@@ -33,6 +29,10 @@ type DeleteRuleCategory200ApplicationJSON struct {
 	Action DeleteRuleCategory200ApplicationJSONActionEnum `json:"action"`
 	Data   DeleteRuleCategory200ApplicationJSONData       `json:"data"`
 	Result DeleteRuleCategory200ApplicationJSONResultEnum `json:"result"`
+}
+
+type DeleteRuleCategoryRequest struct {
+	PathParams DeleteRuleCategoryPathParams
 }
 
 type DeleteRuleCategoryResponse struct {

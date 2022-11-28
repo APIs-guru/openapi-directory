@@ -1,5 +1,7 @@
 package shared
 
+// Order
+// Order. Production access (all methods) requires the order manager role. Sandbox access does not.
 type Order struct {
 	Acknowledged    *bool                  `json:"acknowledged,omitempty"`
 	ChannelType     *string                `json:"channelType,omitempty"`

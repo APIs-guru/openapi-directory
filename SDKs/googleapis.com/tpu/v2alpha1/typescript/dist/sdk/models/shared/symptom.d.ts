@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum SymptomSymptomTypeEnum {
     SymptomTypeUnspecified = "SYMPTOM_TYPE_UNSPECIFIED",
     LowMemory = "LOW_MEMORY",

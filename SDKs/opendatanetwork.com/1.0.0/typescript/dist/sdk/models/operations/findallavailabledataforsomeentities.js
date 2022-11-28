@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var FindAllAvailableDataForSomeEntitiesQueryParams = /** @class */ (function (_super) {
     __extends(FindAllAvailableDataForSomeEntitiesQueryParams, _super);
     function FindAllAvailableDataForSomeEntitiesQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=app_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=app_token" }),
         __metadata("design:type", String)
     ], FindAllAvailableDataForSomeEntitiesQueryParams.prototype, "appToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=entity_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entity_id" }),
         __metadata("design:type", String)
     ], FindAllAvailableDataForSomeEntitiesQueryParams.prototype, "entityId", void 0);
     return FindAllAvailableDataForSomeEntitiesQueryParams;
@@ -45,7 +45,7 @@ var FindAllAvailableDataForSomeEntitiesHeaders = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-App-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-App-Token" }),
         __metadata("design:type", String)
     ], FindAllAvailableDataForSomeEntitiesHeaders.prototype, "xAppToken", void 0);
     return FindAllAvailableDataForSomeEntitiesHeaders;
@@ -57,11 +57,11 @@ var FindAllAvailableDataForSomeEntitiesRequest = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FindAllAvailableDataForSomeEntitiesQueryParams)
     ], FindAllAvailableDataForSomeEntitiesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FindAllAvailableDataForSomeEntitiesHeaders)
     ], FindAllAvailableDataForSomeEntitiesRequest.prototype, "headers", void 0);
     return FindAllAvailableDataForSomeEntitiesRequest;
@@ -73,11 +73,11 @@ var FindAllAvailableDataForSomeEntitiesResponse = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FindAllAvailableDataForSomeEntitiesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FindAllAvailableDataForSomeEntitiesResponse.prototype, "statusCode", void 0);
     return FindAllAvailableDataForSomeEntitiesResponse;

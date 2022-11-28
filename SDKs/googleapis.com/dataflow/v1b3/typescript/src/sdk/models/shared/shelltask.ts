@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ShellTask
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A task which consists of a shell command for the worker to execute.
 **/
 export class ShellTask extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command?: string;
 
-  @Metadata({ data: "json, name=exitCode" })
+  @SpeakeasyMetadata({ data: "json, name=exitCode" })
   exitCode?: number;
 }

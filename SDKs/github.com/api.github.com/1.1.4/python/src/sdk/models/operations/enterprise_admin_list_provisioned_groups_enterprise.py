@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class EnterpriseAdminListProvisionedGroupsEnterprisePathParams:
-    enterprise: str = field(default=None, metadata={'path_param': { 'field_name': 'enterprise', 'style': 'simple', 'explode': False }})
+    enterprise: str = field(metadata={'path_param': { 'field_name': 'enterprise', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class EnterpriseAdminListProvisionedGroupsEnterpriseQueryParams:
 
 @dataclass
 class EnterpriseAdminListProvisionedGroupsEnterpriseRequest:
-    path_params: EnterpriseAdminListProvisionedGroupsEnterprisePathParams = field(default=None)
-    query_params: EnterpriseAdminListProvisionedGroupsEnterpriseQueryParams = field(default=None)
+    path_params: EnterpriseAdminListProvisionedGroupsEnterprisePathParams = field()
+    query_params: EnterpriseAdminListProvisionedGroupsEnterpriseQueryParams = field()
     
 
 @dataclass
 class EnterpriseAdminListProvisionedGroupsEnterpriseResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     scim_group_list_enterprise: Optional[shared.ScimGroupListEnterprise] = field(default=None)
     

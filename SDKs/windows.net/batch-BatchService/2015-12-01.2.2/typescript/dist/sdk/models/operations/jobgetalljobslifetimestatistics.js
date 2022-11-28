@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var JobGetAllJobsLifetimeStatisticsQueryParams = /** @class */ (function (_super) {
     __extends(JobGetAllJobsLifetimeStatisticsQueryParams, _super);
     function JobGetAllJobsLifetimeStatisticsQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api-version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" }),
         __metadata("design:type", String)
     ], JobGetAllJobsLifetimeStatisticsQueryParams.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
         __metadata("design:type", Number)
     ], JobGetAllJobsLifetimeStatisticsQueryParams.prototype, "timeout", void 0);
     return JobGetAllJobsLifetimeStatisticsQueryParams;
@@ -45,15 +45,15 @@ var JobGetAllJobsLifetimeStatisticsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=client-request-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=client-request-id" }),
         __metadata("design:type", String)
     ], JobGetAllJobsLifetimeStatisticsHeaders.prototype, "clientRequestId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=ocp-date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=ocp-date" }),
         __metadata("design:type", String)
     ], JobGetAllJobsLifetimeStatisticsHeaders.prototype, "ocpDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=return-client-request-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=return-client-request-id" }),
         __metadata("design:type", Boolean)
     ], JobGetAllJobsLifetimeStatisticsHeaders.prototype, "returnClientRequestId", void 0);
     return JobGetAllJobsLifetimeStatisticsHeaders;
@@ -65,11 +65,11 @@ var JobGetAllJobsLifetimeStatisticsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", JobGetAllJobsLifetimeStatisticsQueryParams)
     ], JobGetAllJobsLifetimeStatisticsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", JobGetAllJobsLifetimeStatisticsHeaders)
     ], JobGetAllJobsLifetimeStatisticsRequest.prototype, "headers", void 0);
     return JobGetAllJobsLifetimeStatisticsRequest;
@@ -81,23 +81,23 @@ var JobGetAllJobsLifetimeStatisticsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], JobGetAllJobsLifetimeStatisticsResponse.prototype, "batchError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], JobGetAllJobsLifetimeStatisticsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], JobGetAllJobsLifetimeStatisticsResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], JobGetAllJobsLifetimeStatisticsResponse.prototype, "jobStatistics", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], JobGetAllJobsLifetimeStatisticsResponse.prototype, "statusCode", void 0);
     return JobGetAllJobsLifetimeStatisticsResponse;

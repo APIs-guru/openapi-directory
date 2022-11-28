@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PutContainersQuotaHeaders = /** @class */ (function (_super) {
     __extends(PutContainersQuotaHeaders, _super);
     function PutContainersQuotaHeaders() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" }),
         __metadata("design:type", String)
     ], PutContainersQuotaHeaders.prototype, "xAuthProjectId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" }),
         __metadata("design:type", String)
     ], PutContainersQuotaHeaders.prototype, "xAuthToken", void 0);
     return PutContainersQuotaHeaders;
@@ -45,11 +45,11 @@ var PutContainersQuotaRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutContainersQuotaHeaders)
     ], PutContainersQuotaRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], PutContainersQuotaRequest.prototype, "request", void 0);
     return PutContainersQuotaRequest;
@@ -61,11 +61,11 @@ var PutContainersQuotaResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutContainersQuotaResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutContainersQuotaResponse.prototype, "statusCode", void 0);
     return PutContainersQuotaResponse;

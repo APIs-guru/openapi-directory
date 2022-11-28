@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Field } from "./field";
+
 
 
 // StructType
@@ -8,6 +8,6 @@ import { Field } from "./field";
  * `StructType` defines the fields of a STRUCT type.
 **/
 export class StructType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields", elemType: shared.Field })
+  @SpeakeasyMetadata({ data: "json, name=fields", elemType: Field })
   fields?: Field[];
 }

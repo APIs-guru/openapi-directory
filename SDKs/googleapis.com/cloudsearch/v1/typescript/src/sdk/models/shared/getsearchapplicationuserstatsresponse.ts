@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SearchApplicationUserStats } from "./searchapplicationuserstats";
 
 
+
 export class GetSearchApplicationUserStatsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=stats", elemType: shared.SearchApplicationUserStats })
+  @SpeakeasyMetadata({ data: "json, name=stats", elemType: SearchApplicationUserStats })
   stats?: SearchApplicationUserStats[];
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleFirebaseAppcheckV1betaAttestationTokenResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Encapsulates an *App Check token*, which are used to access Firebase services protected by App Check.
 **/
 export class GoogleFirebaseAppcheckV1betaAttestationTokenResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attestationToken" })
+  @SpeakeasyMetadata({ data: "json, name=attestationToken" })
   attestationToken?: string;
 
-  @Metadata({ data: "json, name=ttl" })
+  @SpeakeasyMetadata({ data: "json, name=ttl" })
   ttl?: string;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// WorkflowExecutionDetail
+// Contains details about a workflow execution.
 type WorkflowExecutionDetail struct {
 	ExecutionConfiguration      WorkflowExecutionConfiguration `json:"executionConfiguration"`
 	ExecutionInfo               WorkflowExecutionInfo          `json:"executionInfo"`

@@ -1,5 +1,7 @@
 package shared
 
+// FormRecognitionResult
+// The result of extracting form field values
 type FormRecognitionResult struct {
 	BestMatchFormSettingName    *string       `json:"BestMatchFormSettingName,omitempty"`
 	Diagnostics                 []string      `json:"Diagnostics,omitempty"`

@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetUserResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     user_response: Optional[shared.UserResponse] = field(default=None)
     

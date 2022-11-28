@@ -1,6 +1,7 @@
 
 
+
 export enum TypeEnum {
-    PullRequest = "PullRequest"
-,    RepositoryAnalysis = "RepositoryAnalysis"
+    PullRequest = "PullRequest",
+    RepositoryAnalysis = "RepositoryAnalysis"
 }

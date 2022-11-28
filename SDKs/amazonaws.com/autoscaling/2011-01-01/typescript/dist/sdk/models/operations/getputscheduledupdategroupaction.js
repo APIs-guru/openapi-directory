@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetPutScheduledUpdateGroupActionActionEnum;
 (function (GetPutScheduledUpdateGroupActionActionEnum) {
     GetPutScheduledUpdateGroupActionActionEnum["PutScheduledUpdateGroupAction"] = "PutScheduledUpdateGroupAction";
@@ -37,51 +37,51 @@ var GetPutScheduledUpdateGroupActionQueryParams = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetPutScheduledUpdateGroupActionQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AutoScalingGroupName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AutoScalingGroupName" }),
         __metadata("design:type", String)
     ], GetPutScheduledUpdateGroupActionQueryParams.prototype, "autoScalingGroupName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DesiredCapacity" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DesiredCapacity" }),
         __metadata("design:type", Number)
     ], GetPutScheduledUpdateGroupActionQueryParams.prototype, "desiredCapacity", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EndTime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EndTime" }),
         __metadata("design:type", Date)
     ], GetPutScheduledUpdateGroupActionQueryParams.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MaxSize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxSize" }),
         __metadata("design:type", Number)
     ], GetPutScheduledUpdateGroupActionQueryParams.prototype, "maxSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MinSize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MinSize" }),
         __metadata("design:type", Number)
     ], GetPutScheduledUpdateGroupActionQueryParams.prototype, "minSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Recurrence" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Recurrence" }),
         __metadata("design:type", String)
     ], GetPutScheduledUpdateGroupActionQueryParams.prototype, "recurrence", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ScheduledActionName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ScheduledActionName" }),
         __metadata("design:type", String)
     ], GetPutScheduledUpdateGroupActionQueryParams.prototype, "scheduledActionName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=StartTime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=StartTime" }),
         __metadata("design:type", Date)
     ], GetPutScheduledUpdateGroupActionQueryParams.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Time" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Time" }),
         __metadata("design:type", Date)
     ], GetPutScheduledUpdateGroupActionQueryParams.prototype, "time", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TimeZone" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TimeZone" }),
         __metadata("design:type", String)
     ], GetPutScheduledUpdateGroupActionQueryParams.prototype, "timeZone", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetPutScheduledUpdateGroupActionQueryParams.prototype, "version", void 0);
     return GetPutScheduledUpdateGroupActionQueryParams;
@@ -93,31 +93,31 @@ var GetPutScheduledUpdateGroupActionHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetPutScheduledUpdateGroupActionHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetPutScheduledUpdateGroupActionHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetPutScheduledUpdateGroupActionHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetPutScheduledUpdateGroupActionHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetPutScheduledUpdateGroupActionHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetPutScheduledUpdateGroupActionHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetPutScheduledUpdateGroupActionHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetPutScheduledUpdateGroupActionHeaders;
@@ -129,11 +129,11 @@ var GetPutScheduledUpdateGroupActionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPutScheduledUpdateGroupActionQueryParams)
     ], GetPutScheduledUpdateGroupActionRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPutScheduledUpdateGroupActionHeaders)
     ], GetPutScheduledUpdateGroupActionRequest.prototype, "headers", void 0);
     return GetPutScheduledUpdateGroupActionRequest;
@@ -145,15 +145,15 @@ var GetPutScheduledUpdateGroupActionResponse = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetPutScheduledUpdateGroupActionResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetPutScheduledUpdateGroupActionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetPutScheduledUpdateGroupActionResponse.prototype, "statusCode", void 0);
     return GetPutScheduledUpdateGroupActionResponse;

@@ -1,5 +1,7 @@
 package shared
 
+// TableRow
+// The contents and style of a row in a Table.
 type TableRow struct {
 	EndIndex                      *int32                            `json:"endIndex,omitempty"`
 	StartIndex                    *int32                            `json:"startIndex,omitempty"`

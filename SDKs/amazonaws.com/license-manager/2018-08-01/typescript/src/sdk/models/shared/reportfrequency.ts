@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReportFrequencyTypeEnum } from "./reportfrequencytypeenum";
+
 
 
 // ReportFrequency
@@ -7,9 +8,9 @@ import { ReportFrequencyTypeEnum } from "./reportfrequencytypeenum";
  * Details on how frequently reports are generated.
 **/
 export class ReportFrequency extends SpeakeasyBase {
-  @Metadata({ data: "json, name=period" })
+  @SpeakeasyMetadata({ data: "json, name=period" })
   period?: ReportFrequencyTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }

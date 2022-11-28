@@ -1,5 +1,7 @@
 package shared
 
+// SetAddonsConfigRequest
+// SetAddonsRequest sets the addons associated with the cluster.
 type SetAddonsConfigRequest struct {
 	AddonsConfig *AddonsConfig `json:"addonsConfig,omitempty"`
 	ClusterID    *string       `json:"clusterId,omitempty"`

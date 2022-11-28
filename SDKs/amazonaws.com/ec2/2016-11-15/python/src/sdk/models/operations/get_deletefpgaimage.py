@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteFpgaImageActionEnum(str, Enum):
     DELETE_FPGA_IMAGE = "DeleteFpgaImage"
@@ -10,10 +14,10 @@ class GetDeleteFpgaImageVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteFpgaImageQueryParams:
-    action: GetDeleteFpgaImageActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteFpgaImageActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    fpga_image_id: str = field(metadata={'query_param': { 'field_name': 'FpgaImageId', 'style': 'form', 'explode': True }})
+    version: GetDeleteFpgaImageVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    fpga_image_id: str = field(default=None, metadata={'query_param': { 'field_name': 'FpgaImageId', 'style': 'form', 'explode': True }})
-    version: GetDeleteFpgaImageVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteFpgaImageHeaders:
 
 @dataclass
 class GetDeleteFpgaImageRequest:
-    query_params: GetDeleteFpgaImageQueryParams = field(default=None)
-    headers: GetDeleteFpgaImageHeaders = field(default=None)
+    headers: GetDeleteFpgaImageHeaders = field()
+    query_params: GetDeleteFpgaImageQueryParams = field()
     
 
 @dataclass
 class GetDeleteFpgaImageResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

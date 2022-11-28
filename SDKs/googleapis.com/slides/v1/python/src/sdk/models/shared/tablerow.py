@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import dimension
-from . import tablecell
-from . import tablerowproperties
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TableRow:
-    row_height: Optional[dimension.Dimension] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rowHeight' }})
-    table_cells: Optional[List[tablecell.TableCell]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tableCells' }})
-    table_row_properties: Optional[tablerowproperties.TableRowProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tableRowProperties' }})
+    r"""TableRow
+    Properties and contents of each row in a table.
+    """
+    
+    row_height: Optional[Dimension] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rowHeight') }})
+    table_cells: Optional[List[TableCell]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tableCells') }})
+    table_row_properties: Optional[TableRowProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tableRowProperties') }})
     

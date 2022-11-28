@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostV05ConsentRequestsOnInitHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-HIU-ID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-HIU-ID" })
   xHiuId: string;
 }
 
 
 export class PostV05ConsentRequestsOnInitRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   consentRequestInitResponse?: shared.ConsentRequestInitResponse;
 }
 
 
 export class PostV05ConsentRequestsOnInitRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PostV05ConsentRequestsOnInitHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: PostV05ConsentRequestsOnInitRequests;
 }
 
 
 export class PostV05ConsentRequestsOnInitResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

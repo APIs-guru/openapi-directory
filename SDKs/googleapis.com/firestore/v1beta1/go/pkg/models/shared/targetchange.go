@@ -10,6 +10,8 @@ const (
 	TargetChangeTargetChangeTypeEnumReset    TargetChangeTargetChangeTypeEnum = "RESET"
 )
 
+// TargetChange
+// Targets being watched have changed.
 type TargetChange struct {
 	Cause            *Status                           `json:"cause,omitempty"`
 	ReadTime         *string                           `json:"readTime,omitempty"`

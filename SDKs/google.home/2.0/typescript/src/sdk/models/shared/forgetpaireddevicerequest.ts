@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ForgetpaireddeviceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bond" })
+  @SpeakeasyMetadata({ data: "json, name=bond" })
   bond: boolean;
 
-  @Metadata({ data: "json, name=mac_address" })
+  @SpeakeasyMetadata({ data: "json, name=mac_address" })
   macAddress: string;
 }

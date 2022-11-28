@@ -1,5 +1,7 @@
 package shared
 
+// LambdaFunctionScheduledEventAttributes
+// Provides the details of the <code>LambdaFunctionScheduled</code> event. It isn't set for other event types.
 type LambdaFunctionScheduledEventAttributes struct {
 	Control                      *string `json:"control,omitempty"`
 	DecisionTaskCompletedEventID int64   `json:"decisionTaskCompletedEventId"`

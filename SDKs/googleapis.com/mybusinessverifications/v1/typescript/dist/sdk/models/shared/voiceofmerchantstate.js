@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComplyWithGuidelines } from "./complywithguidelines";
 import { Verify } from "./verify";
 // VoiceOfMerchantState
@@ -35,27 +35,27 @@ var VoiceOfMerchantState = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=complyWithGuidelines" }),
+        SpeakeasyMetadata({ data: "json, name=complyWithGuidelines" }),
         __metadata("design:type", ComplyWithGuidelines)
     ], VoiceOfMerchantState.prototype, "complyWithGuidelines", void 0);
     __decorate([
-        Metadata({ data: "json, name=hasBusinessAuthority" }),
+        SpeakeasyMetadata({ data: "json, name=hasBusinessAuthority" }),
         __metadata("design:type", Boolean)
     ], VoiceOfMerchantState.prototype, "hasBusinessAuthority", void 0);
     __decorate([
-        Metadata({ data: "json, name=hasVoiceOfMerchant" }),
+        SpeakeasyMetadata({ data: "json, name=hasVoiceOfMerchant" }),
         __metadata("design:type", Boolean)
     ], VoiceOfMerchantState.prototype, "hasVoiceOfMerchant", void 0);
     __decorate([
-        Metadata({ data: "json, name=resolveOwnershipConflict" }),
+        SpeakeasyMetadata({ data: "json, name=resolveOwnershipConflict" }),
         __metadata("design:type", Map)
     ], VoiceOfMerchantState.prototype, "resolveOwnershipConflict", void 0);
     __decorate([
-        Metadata({ data: "json, name=verify" }),
+        SpeakeasyMetadata({ data: "json, name=verify" }),
         __metadata("design:type", Verify)
     ], VoiceOfMerchantState.prototype, "verify", void 0);
     __decorate([
-        Metadata({ data: "json, name=waitForVoiceOfMerchant" }),
+        SpeakeasyMetadata({ data: "json, name=waitForVoiceOfMerchant" }),
         __metadata("design:type", Map)
     ], VoiceOfMerchantState.prototype, "waitForVoiceOfMerchant", void 0);
     return VoiceOfMerchantState;

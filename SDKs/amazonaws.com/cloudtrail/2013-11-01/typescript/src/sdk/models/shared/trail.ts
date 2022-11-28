@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Trail
@@ -6,51 +7,51 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The settings for a trail.
 **/
 export class Trail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudWatchLogsLogGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchLogsLogGroupArn" })
   cloudWatchLogsLogGroupArn?: string;
 
-  @Metadata({ data: "json, name=CloudWatchLogsRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchLogsRoleArn" })
   cloudWatchLogsRoleArn?: string;
 
-  @Metadata({ data: "json, name=HasCustomEventSelectors" })
+  @SpeakeasyMetadata({ data: "json, name=HasCustomEventSelectors" })
   hasCustomEventSelectors?: boolean;
 
-  @Metadata({ data: "json, name=HasInsightSelectors" })
+  @SpeakeasyMetadata({ data: "json, name=HasInsightSelectors" })
   hasInsightSelectors?: boolean;
 
-  @Metadata({ data: "json, name=HomeRegion" })
+  @SpeakeasyMetadata({ data: "json, name=HomeRegion" })
   homeRegion?: string;
 
-  @Metadata({ data: "json, name=IncludeGlobalServiceEvents" })
+  @SpeakeasyMetadata({ data: "json, name=IncludeGlobalServiceEvents" })
   includeGlobalServiceEvents?: boolean;
 
-  @Metadata({ data: "json, name=IsMultiRegionTrail" })
+  @SpeakeasyMetadata({ data: "json, name=IsMultiRegionTrail" })
   isMultiRegionTrail?: boolean;
 
-  @Metadata({ data: "json, name=IsOrganizationTrail" })
+  @SpeakeasyMetadata({ data: "json, name=IsOrganizationTrail" })
   isOrganizationTrail?: boolean;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=LogFileValidationEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=LogFileValidationEnabled" })
   logFileValidationEnabled?: boolean;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=S3BucketName" })
+  @SpeakeasyMetadata({ data: "json, name=S3BucketName" })
   s3BucketName?: string;
 
-  @Metadata({ data: "json, name=S3KeyPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=S3KeyPrefix" })
   s3KeyPrefix?: string;
 
-  @Metadata({ data: "json, name=SnsTopicARN" })
+  @SpeakeasyMetadata({ data: "json, name=SnsTopicARN" })
   snsTopicArn?: string;
 
-  @Metadata({ data: "json, name=SnsTopicName" })
+  @SpeakeasyMetadata({ data: "json, name=SnsTopicName" })
   snsTopicName?: string;
 
-  @Metadata({ data: "json, name=TrailARN" })
+  @SpeakeasyMetadata({ data: "json, name=TrailARN" })
   trailArn?: string;
 }

@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateDomainNameHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,60 +32,60 @@ export class CreateDomainNameHeaders extends SpeakeasyBase {
  * The mutual TLS authentication configuration for a custom domain name.
 **/
 export class CreateDomainNameRequestBodyMutualTlsAuthentication extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TruststoreUri" })
+  @SpeakeasyMetadata({ data: "json, name=TruststoreUri" })
   truststoreUri?: string;
 
-  @Metadata({ data: "json, name=TruststoreVersion" })
+  @SpeakeasyMetadata({ data: "json, name=TruststoreVersion" })
   truststoreVersion?: string;
 }
 
 
 export class CreateDomainNameRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domainName" })
+  @SpeakeasyMetadata({ data: "json, name=domainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=domainNameConfigurations", elemType: shared.DomainNameConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=domainNameConfigurations", elemType: shared.DomainNameConfiguration })
   domainNameConfigurations?: shared.DomainNameConfiguration[];
 
-  @Metadata({ data: "json, name=mutualTlsAuthentication" })
+  @SpeakeasyMetadata({ data: "json, name=mutualTlsAuthentication" })
   mutualTlsAuthentication?: CreateDomainNameRequestBodyMutualTlsAuthentication;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }
 
 
 export class CreateDomainNameRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateDomainNameHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateDomainNameRequestBody;
 }
 
 
 export class CreateDomainNameResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createDomainNameResponse?: shared.CreateDomainNameResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

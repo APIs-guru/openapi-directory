@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CocerRequestBodyCertificateParameters extends SpeakeasyBase {
     certType: string;
@@ -18,10 +18,6 @@ export declare class CocerRequestBody extends SpeakeasyBase {
 export declare class CocerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class CocerRequest extends SpeakeasyBase {
-    request?: CocerRequestBody;
-    security: CocerSecurity;
 }
 export declare enum Cocer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -104,6 +100,10 @@ export declare enum Cocer504ApplicationJsonErrorDescriptionEnum {
 export declare class Cocer504ApplicationJson extends SpeakeasyBase {
     error?: Cocer504ApplicationJsonErrorEnum;
     errorDescription?: Cocer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class CocerRequest extends SpeakeasyBase {
+    request?: CocerRequestBody;
+    security: CocerSecurity;
 }
 export declare class CocerResponse extends SpeakeasyBase {
     contentType: string;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleIamV2betaDenyRule } from "./googleiamv2betadenyrule";
 /**
  * A single rule in a `Policy`.

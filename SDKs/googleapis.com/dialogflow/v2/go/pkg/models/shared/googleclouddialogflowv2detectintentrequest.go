@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2DetectIntentRequest
+// The request to detect user's intent.
 type GoogleCloudDialogflowV2DetectIntentRequest struct {
 	InputAudio            *string                                   `json:"inputAudio,omitempty"`
 	OutputAudioConfig     *GoogleCloudDialogflowV2OutputAudioConfig `json:"outputAudioConfig,omitempty"`

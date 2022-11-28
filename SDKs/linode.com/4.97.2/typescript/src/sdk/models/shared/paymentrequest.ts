@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PaymentRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Payment object request.
 **/
 export class PaymentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cvv" })
+  @SpeakeasyMetadata({ data: "json, name=cvv" })
   cvv?: string;
 
-  @Metadata({ data: "json, name=usd" })
+  @SpeakeasyMetadata({ data: "json, name=usd" })
   usd: string;
 }

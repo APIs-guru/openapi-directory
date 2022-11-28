@@ -1,67 +1,68 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ScanOptionsScanFrequencyEnum {
-    Once = "once"
-,    Hourly = "hourly"
-,    Daily = "daily"
-,    Weekly = "weekly"
-,    Monthly = "monthly"
-,    Continuous = "continuous"
+    Once = "once",
+    Hourly = "hourly",
+    Daily = "daily",
+    Weekly = "weekly",
+    Monthly = "monthly",
+    Continuous = "continuous"
 }
 
 
 export class ScanOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=agent" })
+  @SpeakeasyMetadata({ data: "json, name=agent" })
   agent?: string;
 
-  @Metadata({ data: "json, name=excludes" })
+  @SpeakeasyMetadata({ data: "json, name=excludes" })
   excludes?: string;
 
-  @Metadata({ data: "json, name=max-group-size" })
+  @SpeakeasyMetadata({ data: "json, name=max-group-size" })
   maxGroupSize?: string;
 
-  @Metadata({ data: "json, name=max-host-rate" })
+  @SpeakeasyMetadata({ data: "json, name=max-host-rate" })
   maxHostRate?: string;
 
-  @Metadata({ data: "json, name=max-sockets" })
+  @SpeakeasyMetadata({ data: "json, name=max-sockets" })
   maxSockets?: string;
 
-  @Metadata({ data: "json, name=nameservers" })
+  @SpeakeasyMetadata({ data: "json, name=nameservers" })
   nameservers?: string;
 
-  @Metadata({ data: "json, name=passes" })
+  @SpeakeasyMetadata({ data: "json, name=passes" })
   passes?: string;
 
-  @Metadata({ data: "json, name=probes" })
+  @SpeakeasyMetadata({ data: "json, name=probes" })
   probes?: string;
 
-  @Metadata({ data: "json, name=rate" })
+  @SpeakeasyMetadata({ data: "json, name=rate" })
   rate?: string;
 
-  @Metadata({ data: "json, name=scan-description" })
+  @SpeakeasyMetadata({ data: "json, name=scan-description" })
   scanDescription?: string;
 
-  @Metadata({ data: "json, name=scan-frequency" })
+  @SpeakeasyMetadata({ data: "json, name=scan-frequency" })
   scanFrequency?: ScanOptionsScanFrequencyEnum;
 
-  @Metadata({ data: "json, name=scan-grace-period" })
+  @SpeakeasyMetadata({ data: "json, name=scan-grace-period" })
   scanGracePeriod?: string;
 
-  @Metadata({ data: "json, name=scan-name" })
+  @SpeakeasyMetadata({ data: "json, name=scan-name" })
   scanName?: string;
 
-  @Metadata({ data: "json, name=scan-start" })
+  @SpeakeasyMetadata({ data: "json, name=scan-start" })
   scanStart?: string;
 
-  @Metadata({ data: "json, name=scan-tags" })
+  @SpeakeasyMetadata({ data: "json, name=scan-tags" })
   scanTags?: string;
 
-  @Metadata({ data: "json, name=screenshots" })
+  @SpeakeasyMetadata({ data: "json, name=screenshots" })
   screenshots?: string;
 
-  @Metadata({ data: "json, name=targets" })
+  @SpeakeasyMetadata({ data: "json, name=targets" })
   targets: string;
 
-  @Metadata({ data: "json, name=tcp-ports" })
+  @SpeakeasyMetadata({ data: "json, name=tcp-ports" })
   tcpPorts?: string;
 }

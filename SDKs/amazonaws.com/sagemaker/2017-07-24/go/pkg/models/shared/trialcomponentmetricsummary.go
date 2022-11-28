@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TrialComponentMetricSummary
+// A summary of the metrics of a trial component.
 type TrialComponentMetricSummary struct {
 	Avg        *float64   `json:"Avg,omitempty"`
 	Count      *int64     `json:"Count,omitempty"`

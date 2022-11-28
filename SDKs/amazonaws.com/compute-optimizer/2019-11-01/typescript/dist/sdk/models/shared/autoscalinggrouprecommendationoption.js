@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoScalingGroupConfiguration } from "./autoscalinggroupconfiguration";
+import { UtilizationMetric } from "./utilizationmetric";
 // AutoScalingGroupRecommendationOption
 /**
  * Describes a recommendation option for an Auto Scaling group.
@@ -35,19 +35,19 @@ var AutoScalingGroupRecommendationOption = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=configuration" }),
+        SpeakeasyMetadata({ data: "json, name=configuration" }),
         __metadata("design:type", AutoScalingGroupConfiguration)
     ], AutoScalingGroupRecommendationOption.prototype, "configuration", void 0);
     __decorate([
-        Metadata({ data: "json, name=performanceRisk" }),
+        SpeakeasyMetadata({ data: "json, name=performanceRisk" }),
         __metadata("design:type", Number)
     ], AutoScalingGroupRecommendationOption.prototype, "performanceRisk", void 0);
     __decorate([
-        Metadata({ data: "json, name=projectedUtilizationMetrics", elemType: shared.UtilizationMetric }),
+        SpeakeasyMetadata({ data: "json, name=projectedUtilizationMetrics", elemType: UtilizationMetric }),
         __metadata("design:type", Array)
     ], AutoScalingGroupRecommendationOption.prototype, "projectedUtilizationMetrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=rank" }),
+        SpeakeasyMetadata({ data: "json, name=rank" }),
         __metadata("design:type", Number)
     ], AutoScalingGroupRecommendationOption.prototype, "rank", void 0);
     return AutoScalingGroupRecommendationOption;

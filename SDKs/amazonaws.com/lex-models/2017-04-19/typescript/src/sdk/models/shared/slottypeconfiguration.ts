@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SlotTypeRegexConfiguration } from "./slottyperegexconfiguration";
+
 
 
 // SlotTypeConfiguration
@@ -7,6 +8,6 @@ import { SlotTypeRegexConfiguration } from "./slottyperegexconfiguration";
  * Provides configuration information for a slot type.
 **/
 export class SlotTypeConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=regexConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=regexConfiguration" })
   regexConfiguration?: SlotTypeRegexConfiguration;
 }

@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PoolListQueryParams = /** @class */ (function (_super) {
     __extends(PoolListQueryParams, _super);
     function PoolListQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$expand" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$expand" }),
         __metadata("design:type", String)
     ], PoolListQueryParams.prototype, "dollarExpand", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$filter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$filter" }),
         __metadata("design:type", String)
     ], PoolListQueryParams.prototype, "dollarFilter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$select" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$select" }),
         __metadata("design:type", String)
     ], PoolListQueryParams.prototype, "dollarSelect", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api-version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" }),
         __metadata("design:type", String)
     ], PoolListQueryParams.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxresults" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxresults" }),
         __metadata("design:type", Number)
     ], PoolListQueryParams.prototype, "maxresults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
         __metadata("design:type", Number)
     ], PoolListQueryParams.prototype, "timeout", void 0);
     return PoolListQueryParams;
@@ -61,15 +61,15 @@ var PoolListHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=client-request-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=client-request-id" }),
         __metadata("design:type", String)
     ], PoolListHeaders.prototype, "clientRequestId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=ocp-date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=ocp-date" }),
         __metadata("design:type", String)
     ], PoolListHeaders.prototype, "ocpDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=return-client-request-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=return-client-request-id" }),
         __metadata("design:type", Boolean)
     ], PoolListHeaders.prototype, "returnClientRequestId", void 0);
     return PoolListHeaders;
@@ -81,11 +81,11 @@ var PoolListRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PoolListQueryParams)
     ], PoolListRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PoolListHeaders)
     ], PoolListRequest.prototype, "headers", void 0);
     return PoolListRequest;
@@ -97,23 +97,23 @@ var PoolListResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PoolListResponse.prototype, "batchError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PoolListResponse.prototype, "cloudPoolListResult", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PoolListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], PoolListResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PoolListResponse.prototype, "statusCode", void 0);
     return PoolListResponse;

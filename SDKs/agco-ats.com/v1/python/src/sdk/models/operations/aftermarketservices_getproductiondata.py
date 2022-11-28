@@ -5,25 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class AftermarketServicesGetProductionDataPathParams:
-    serial_number: str = field(default=None, metadata={'path_param': { 'field_name': 'serialNumber', 'style': 'simple', 'explode': False }})
+    serial_number: str = field(metadata={'path_param': { 'field_name': 'serialNumber', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AftermarketServicesGetProductionDataQueryParams:
-    edt_instance_id: str = field(default=None, metadata={'query_param': { 'field_name': 'EDTInstanceId', 'style': 'form', 'explode': True }})
+    edt_instance_id: str = field(metadata={'query_param': { 'field_name': 'EDTInstanceId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class AftermarketServicesGetProductionDataRequest:
-    path_params: AftermarketServicesGetProductionDataPathParams = field(default=None)
-    query_params: AftermarketServicesGetProductionDataQueryParams = field(default=None)
+    path_params: AftermarketServicesGetProductionDataPathParams = field()
+    query_params: AftermarketServicesGetProductionDataQueryParams = field()
     
 
 @dataclass
 class AftermarketServicesGetProductionDataResponse:
+    content_type: str = field()
+    status_code: int = field()
     agco_power_services_models_production_data: Optional[List[shared.AgcoPowerServicesModelsProductionData]] = field(default=None)
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

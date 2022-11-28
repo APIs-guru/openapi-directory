@@ -1,17 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AdBlockingConfiguration } from "./adblockingconfiguration";
 import { CreativeOptimizationConfiguration } from "./creativeoptimizationconfiguration";
 import { DimensionValue } from "./dimensionvalue";
 import { AudienceSegmentGroup } from "./audiencesegmentgroup";
 import { ClickThroughUrlSuffixProperties } from "./clickthroughurlsuffixproperties";
 import { LastModifiedInfo } from "./lastmodifiedinfo";
-import { CreativeOptimizationConfiguration } from "./creativeoptimizationconfiguration";
 import { DefaultClickThroughEventTagProperties } from "./defaultclickthrougheventtagproperties";
 import { EventTagOverride } from "./eventtagoverride";
-import { DimensionValue } from "./dimensionvalue";
-import { LastModifiedInfo } from "./lastmodifiedinfo";
 import { MeasurementPartnerCampaignLink } from "./measurementpartnercampaignlink";
+
 
 
 // Campaign
@@ -19,90 +16,90 @@ import { MeasurementPartnerCampaignLink } from "./measurementpartnercampaignlink
  * Contains properties of a Campaign Manager campaign.
 **/
 export class Campaign extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=adBlockingConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=adBlockingConfiguration" })
   adBlockingConfiguration?: AdBlockingConfiguration;
 
-  @Metadata({ data: "json, name=additionalCreativeOptimizationConfigurations", elemType: shared.CreativeOptimizationConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=additionalCreativeOptimizationConfigurations", elemType: CreativeOptimizationConfiguration })
   additionalCreativeOptimizationConfigurations?: CreativeOptimizationConfiguration[];
 
-  @Metadata({ data: "json, name=advertiserGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserGroupId" })
   advertiserGroupId?: string;
 
-  @Metadata({ data: "json, name=advertiserId" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string;
 
-  @Metadata({ data: "json, name=advertiserIdDimensionValue" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserIdDimensionValue" })
   advertiserIdDimensionValue?: DimensionValue;
 
-  @Metadata({ data: "json, name=archived" })
+  @SpeakeasyMetadata({ data: "json, name=archived" })
   archived?: boolean;
 
-  @Metadata({ data: "json, name=audienceSegmentGroups", elemType: shared.AudienceSegmentGroup })
+  @SpeakeasyMetadata({ data: "json, name=audienceSegmentGroups", elemType: AudienceSegmentGroup })
   audienceSegmentGroups?: AudienceSegmentGroup[];
 
-  @Metadata({ data: "json, name=billingInvoiceCode" })
+  @SpeakeasyMetadata({ data: "json, name=billingInvoiceCode" })
   billingInvoiceCode?: string;
 
-  @Metadata({ data: "json, name=clickThroughUrlSuffixProperties" })
+  @SpeakeasyMetadata({ data: "json, name=clickThroughUrlSuffixProperties" })
   clickThroughUrlSuffixProperties?: ClickThroughUrlSuffixProperties;
 
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment?: string;
 
-  @Metadata({ data: "json, name=createInfo" })
+  @SpeakeasyMetadata({ data: "json, name=createInfo" })
   createInfo?: LastModifiedInfo;
 
-  @Metadata({ data: "json, name=creativeGroupIds" })
+  @SpeakeasyMetadata({ data: "json, name=creativeGroupIds" })
   creativeGroupIds?: string[];
 
-  @Metadata({ data: "json, name=creativeOptimizationConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=creativeOptimizationConfiguration" })
   creativeOptimizationConfiguration?: CreativeOptimizationConfiguration;
 
-  @Metadata({ data: "json, name=defaultClickThroughEventTagProperties" })
+  @SpeakeasyMetadata({ data: "json, name=defaultClickThroughEventTagProperties" })
   defaultClickThroughEventTagProperties?: DefaultClickThroughEventTagProperties;
 
-  @Metadata({ data: "json, name=defaultLandingPageId" })
+  @SpeakeasyMetadata({ data: "json, name=defaultLandingPageId" })
   defaultLandingPageId?: string;
 
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: Date;
 
-  @Metadata({ data: "json, name=eventTagOverrides", elemType: shared.EventTagOverride })
+  @SpeakeasyMetadata({ data: "json, name=eventTagOverrides", elemType: EventTagOverride })
   eventTagOverrides?: EventTagOverride[];
 
-  @Metadata({ data: "json, name=externalId" })
+  @SpeakeasyMetadata({ data: "json, name=externalId" })
   externalId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=idDimensionValue" })
+  @SpeakeasyMetadata({ data: "json, name=idDimensionValue" })
   idDimensionValue?: DimensionValue;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=lastModifiedInfo" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedInfo" })
   lastModifiedInfo?: LastModifiedInfo;
 
-  @Metadata({ data: "json, name=measurementPartnerLink" })
+  @SpeakeasyMetadata({ data: "json, name=measurementPartnerLink" })
   measurementPartnerLink?: MeasurementPartnerCampaignLink;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nielsenOcrEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=nielsenOcrEnabled" })
   nielsenOcrEnabled?: boolean;
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate?: Date;
 
-  @Metadata({ data: "json, name=subaccountId" })
+  @SpeakeasyMetadata({ data: "json, name=subaccountId" })
   subaccountId?: string;
 
-  @Metadata({ data: "json, name=traffickerEmails" })
+  @SpeakeasyMetadata({ data: "json, name=traffickerEmails" })
   traffickerEmails?: string[];
 }

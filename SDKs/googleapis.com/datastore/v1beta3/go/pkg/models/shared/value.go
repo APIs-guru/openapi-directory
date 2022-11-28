@@ -6,6 +6,8 @@ const (
 	ValueNullValueEnumNullValue ValueNullValueEnum = "NULL_VALUE"
 )
 
+// Value
+// A message that can hold any of the supported value types and associated metadata.
 type Value struct {
 	ArrayValue         *ArrayValue         `json:"arrayValue,omitempty"`
 	BlobValue          *string             `json:"blobValue,omitempty"`

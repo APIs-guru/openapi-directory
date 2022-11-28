@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QualificationTypeStatusEnum } from "./qualificationtypestatusenum";
 
 
+
 export class UpdateQualificationTypeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AnswerKey" })
+  @SpeakeasyMetadata({ data: "json, name=AnswerKey" })
   answerKey?: string;
 
-  @Metadata({ data: "json, name=AutoGranted" })
+  @SpeakeasyMetadata({ data: "json, name=AutoGranted" })
   autoGranted?: boolean;
 
-  @Metadata({ data: "json, name=AutoGrantedValue" })
+  @SpeakeasyMetadata({ data: "json, name=AutoGrantedValue" })
   autoGrantedValue?: number;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=QualificationTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=QualificationTypeId" })
   qualificationTypeId: string;
 
-  @Metadata({ data: "json, name=QualificationTypeStatus" })
+  @SpeakeasyMetadata({ data: "json, name=QualificationTypeStatus" })
   qualificationTypeStatus?: QualificationTypeStatusEnum;
 
-  @Metadata({ data: "json, name=RetryDelayInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=RetryDelayInSeconds" })
   retryDelayInSeconds?: number;
 
-  @Metadata({ data: "json, name=Test" })
+  @SpeakeasyMetadata({ data: "json, name=Test" })
   test?: string;
 
-  @Metadata({ data: "json, name=TestDurationInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=TestDurationInSeconds" })
   testDurationInSeconds?: number;
 }

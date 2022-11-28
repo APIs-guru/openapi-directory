@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlarmModelVersionStatusEnum } from "./alarmmodelversionstatusenum";
+
 
 
 // AlarmModelVersionSummary
@@ -7,27 +8,27 @@ import { AlarmModelVersionStatusEnum } from "./alarmmodelversionstatusenum";
  * Contains a summary of an alarm model version.
 **/
 export class AlarmModelVersionSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alarmModelArn" })
+  @SpeakeasyMetadata({ data: "json, name=alarmModelArn" })
   alarmModelArn?: string;
 
-  @Metadata({ data: "json, name=alarmModelName" })
+  @SpeakeasyMetadata({ data: "json, name=alarmModelName" })
   alarmModelName?: string;
 
-  @Metadata({ data: "json, name=alarmModelVersion" })
+  @SpeakeasyMetadata({ data: "json, name=alarmModelVersion" })
   alarmModelVersion?: string;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=lastUpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateTime" })
   lastUpdateTime?: Date;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: AlarmModelVersionStatusEnum;
 
-  @Metadata({ data: "json, name=statusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
   statusMessage?: string;
 }

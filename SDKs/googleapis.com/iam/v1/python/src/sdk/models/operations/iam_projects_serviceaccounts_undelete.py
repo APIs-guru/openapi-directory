@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IamProjectsServiceAccountsUndeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class IamProjectsServiceAccountsUndeleteQueryParams:
 
 @dataclass
 class IamProjectsServiceAccountsUndeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IamProjectsServiceAccountsUndeleteRequest:
-    path_params: IamProjectsServiceAccountsUndeletePathParams = field(default=None)
-    query_params: IamProjectsServiceAccountsUndeleteQueryParams = field(default=None)
+    path_params: IamProjectsServiceAccountsUndeletePathParams = field()
+    query_params: IamProjectsServiceAccountsUndeleteQueryParams = field()
+    security: IamProjectsServiceAccountsUndeleteSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IamProjectsServiceAccountsUndeleteSecurity = field(default=None)
     
 
 @dataclass
 class IamProjectsServiceAccountsUndeleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     undelete_service_account_response: Optional[shared.UndeleteServiceAccountResponse] = field(default=None)
     

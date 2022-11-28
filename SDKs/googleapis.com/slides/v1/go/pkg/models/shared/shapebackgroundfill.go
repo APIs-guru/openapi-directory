@@ -8,6 +8,8 @@ const (
 	ShapeBackgroundFillPropertyStateEnumInherit     ShapeBackgroundFillPropertyStateEnum = "INHERIT"
 )
 
+// ShapeBackgroundFill
+// The shape background fill.
 type ShapeBackgroundFill struct {
 	PropertyState *ShapeBackgroundFillPropertyStateEnum `json:"propertyState,omitempty"`
 	SolidFill     *SolidFill                            `json:"solidFill,omitempty"`

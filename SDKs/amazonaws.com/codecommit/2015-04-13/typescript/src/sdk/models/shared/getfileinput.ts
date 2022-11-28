@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetFileInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commitSpecifier" })
+  @SpeakeasyMetadata({ data: "json, name=commitSpecifier" })
   commitSpecifier?: string;
 
-  @Metadata({ data: "json, name=filePath" })
+  @SpeakeasyMetadata({ data: "json, name=filePath" })
   filePath: string;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName: string;
 }

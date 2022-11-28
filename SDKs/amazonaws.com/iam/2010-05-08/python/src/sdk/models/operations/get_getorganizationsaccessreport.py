@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetOrganizationsAccessReportActionEnum(str, Enum):
     GET_ORGANIZATIONS_ACCESS_REPORT = "GetOrganizationsAccessReport"
@@ -16,12 +20,12 @@ class GetGetOrganizationsAccessReportVersionEnum(str, Enum):
 
 @dataclass
 class GetGetOrganizationsAccessReportQueryParams:
-    action: GetGetOrganizationsAccessReportActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    job_id: str = field(default=None, metadata={'query_param': { 'field_name': 'JobId', 'style': 'form', 'explode': True }})
+    action: GetGetOrganizationsAccessReportActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    job_id: str = field(metadata={'query_param': { 'field_name': 'JobId', 'style': 'form', 'explode': True }})
+    version: GetGetOrganizationsAccessReportVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
     sort_key: Optional[GetGetOrganizationsAccessReportSortKeyEnum] = field(default=None, metadata={'query_param': { 'field_name': 'SortKey', 'style': 'form', 'explode': True }})
-    version: GetGetOrganizationsAccessReportVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -37,13 +41,13 @@ class GetGetOrganizationsAccessReportHeaders:
 
 @dataclass
 class GetGetOrganizationsAccessReportRequest:
-    query_params: GetGetOrganizationsAccessReportQueryParams = field(default=None)
-    headers: GetGetOrganizationsAccessReportHeaders = field(default=None)
+    headers: GetGetOrganizationsAccessReportHeaders = field()
+    query_params: GetGetOrganizationsAccessReportQueryParams = field()
     
 
 @dataclass
 class GetGetOrganizationsAccessReportResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

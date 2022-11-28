@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AttachmentStateChange
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object representing a change in state for a task attachment.
 **/
 export class AttachmentStateChange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachmentArn" })
+  @SpeakeasyMetadata({ data: "json, name=attachmentArn" })
   attachmentArn: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: string;
 }

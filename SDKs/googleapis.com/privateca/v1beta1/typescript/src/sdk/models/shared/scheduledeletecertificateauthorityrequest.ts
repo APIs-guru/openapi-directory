@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ScheduleDeleteCertificateAuthorityRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for CertificateAuthorityService.ScheduleDeleteCertificateAuthority.
 **/
 export class ScheduleDeleteCertificateAuthorityRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ignoreActiveCertificates" })
+  @SpeakeasyMetadata({ data: "json, name=ignoreActiveCertificates" })
   ignoreActiveCertificates?: boolean;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 }

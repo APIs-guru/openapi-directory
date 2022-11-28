@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ErrorMetric } from "./errormetric";
+import { WeightedQuantileLoss } from "./weightedquantileloss";
 // Metrics
 /**
  * Provides metrics that are used to evaluate the performance of a predictor. This object is part of the <a>WindowSummary</a> object.
@@ -34,19 +35,19 @@ var Metrics = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AverageWeightedQuantileLoss" }),
+        SpeakeasyMetadata({ data: "json, name=AverageWeightedQuantileLoss" }),
         __metadata("design:type", Number)
     ], Metrics.prototype, "averageWeightedQuantileLoss", void 0);
     __decorate([
-        Metadata({ data: "json, name=ErrorMetrics", elemType: shared.ErrorMetric }),
+        SpeakeasyMetadata({ data: "json, name=ErrorMetrics", elemType: ErrorMetric }),
         __metadata("design:type", Array)
     ], Metrics.prototype, "errorMetrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=RMSE" }),
+        SpeakeasyMetadata({ data: "json, name=RMSE" }),
         __metadata("design:type", Number)
     ], Metrics.prototype, "rmse", void 0);
     __decorate([
-        Metadata({ data: "json, name=WeightedQuantileLosses", elemType: shared.WeightedQuantileLoss }),
+        SpeakeasyMetadata({ data: "json, name=WeightedQuantileLosses", elemType: WeightedQuantileLoss }),
         __metadata("design:type", Array)
     ], Metrics.prototype, "weightedQuantileLosses", void 0);
     return Metrics;

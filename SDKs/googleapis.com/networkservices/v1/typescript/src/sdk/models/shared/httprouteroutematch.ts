@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HttpRouteHeaderMatch } from "./httprouteheadermatch";
 import { HttpRouteQueryParameterMatch } from "./httproutequeryparametermatch";
+
 
 
 // HttpRouteRouteMatch
@@ -9,21 +9,21 @@ import { HttpRouteQueryParameterMatch } from "./httproutequeryparametermatch";
  * RouteMatch defines specifications used to match requests. If multiple match types are set, this RouteMatch will match if ALL type of matches are matched.
 **/
 export class HttpRouteRouteMatch extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fullPathMatch" })
+  @SpeakeasyMetadata({ data: "json, name=fullPathMatch" })
   fullPathMatch?: string;
 
-  @Metadata({ data: "json, name=headers", elemType: shared.HttpRouteHeaderMatch })
+  @SpeakeasyMetadata({ data: "json, name=headers", elemType: HttpRouteHeaderMatch })
   headers?: HttpRouteHeaderMatch[];
 
-  @Metadata({ data: "json, name=ignoreCase" })
+  @SpeakeasyMetadata({ data: "json, name=ignoreCase" })
   ignoreCase?: boolean;
 
-  @Metadata({ data: "json, name=prefixMatch" })
+  @SpeakeasyMetadata({ data: "json, name=prefixMatch" })
   prefixMatch?: string;
 
-  @Metadata({ data: "json, name=queryParameters", elemType: shared.HttpRouteQueryParameterMatch })
+  @SpeakeasyMetadata({ data: "json, name=queryParameters", elemType: HttpRouteQueryParameterMatch })
   queryParameters?: HttpRouteQueryParameterMatch[];
 
-  @Metadata({ data: "json, name=regexMatch" })
+  @SpeakeasyMetadata({ data: "json, name=regexMatch" })
   regexMatch?: string;
 }

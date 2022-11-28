@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateTrustResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RequestId" })
+  @SpeakeasyMetadata({ data: "json, name=RequestId" })
   requestId?: string;
 
-  @Metadata({ data: "json, name=TrustId" })
+  @SpeakeasyMetadata({ data: "json, name=TrustId" })
   trustId?: string;
 }

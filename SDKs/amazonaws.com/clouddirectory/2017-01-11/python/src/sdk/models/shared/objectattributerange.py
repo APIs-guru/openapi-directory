@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import attributekey
-from . import typedattributevaluerange
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ObjectAttributeRange:
-    attribute_key: Optional[attributekey.AttributeKey] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AttributeKey' }})
-    range: Optional[typedattributevaluerange.TypedAttributeValueRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Range' }})
+    r"""ObjectAttributeRange
+    A range of attributes.
+    """
+    
+    attribute_key: Optional[AttributeKey] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AttributeKey') }})
+    range: Optional[TypedAttributeValueRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Range') }})
     

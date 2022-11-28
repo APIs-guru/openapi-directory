@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIntegrationsV1alphaRuntimeEntitySchema } from "./googlecloudintegrationsv1alpharuntimeentityschema";
+
 
 
 // GoogleCloudIntegrationsV1alphaListRuntimeEntitySchemasResponse
@@ -8,9 +8,9 @@ import { GoogleCloudIntegrationsV1alphaRuntimeEntitySchema } from "./googlecloud
  * Response for listing RuntimeEntitySchemas for a specific Connection.
 **/
 export class GoogleCloudIntegrationsV1alphaListRuntimeEntitySchemasResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=runtimeEntitySchemas", elemType: shared.GoogleCloudIntegrationsV1alphaRuntimeEntitySchema })
+  @SpeakeasyMetadata({ data: "json, name=runtimeEntitySchemas", elemType: GoogleCloudIntegrationsV1alphaRuntimeEntitySchema })
   runtimeEntitySchemas?: GoogleCloudIntegrationsV1alphaRuntimeEntitySchema[];
 }

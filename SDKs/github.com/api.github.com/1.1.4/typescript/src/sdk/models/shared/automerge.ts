@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SimpleUser } from "./simpleuser";
 
+
 export enum AutoMergeMergeMethodEnum {
-    Merge = "merge"
-,    Squash = "squash"
-,    Rebase = "rebase"
+    Merge = "merge",
+    Squash = "squash",
+    Rebase = "rebase"
 }
 
 
@@ -13,15 +14,15 @@ export enum AutoMergeMergeMethodEnum {
  * The status of auto merging a pull request.
 **/
 export class AutoMerge extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commit_message" })
+  @SpeakeasyMetadata({ data: "json, name=commit_message" })
   commitMessage: string;
 
-  @Metadata({ data: "json, name=commit_title" })
+  @SpeakeasyMetadata({ data: "json, name=commit_title" })
   commitTitle: string;
 
-  @Metadata({ data: "json, name=enabled_by" })
+  @SpeakeasyMetadata({ data: "json, name=enabled_by" })
   enabledBy: SimpleUser;
 
-  @Metadata({ data: "json, name=merge_method" })
+  @SpeakeasyMetadata({ data: "json, name=merge_method" })
   mergeMethod: AutoMergeMergeMethodEnum;
 }

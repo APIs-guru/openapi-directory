@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ActiveViolation
+// Information about an active Device Defender security profile behavior violation.
 type ActiveViolation struct {
 	Behavior                     *Behavior                     `json:"behavior,omitempty"`
 	LastViolationTime            *time.Time                    `json:"lastViolationTime,omitempty"`

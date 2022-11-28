@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetOwnedNumbersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=application_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=application_id" })
   applicationId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=country" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" })
   country?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=has_application" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=has_application" })
   hasApplication?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=index" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=index" })
   index?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pattern" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pattern" })
   pattern?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search_pattern" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search_pattern" })
   searchPattern?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=size" })
   size?: number;
 }
 
 
 export class GetOwnedNumbersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetOwnedNumbersQueryParams;
 }
 
 
 export class GetOwnedNumbersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   accountUnauthorized?: shared.AccountUnauthorized;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inboundNumbers?: shared.InboundNumbers;
 }

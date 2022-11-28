@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetLocalTrailersPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
   itemId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" })
   userId: string;
 }
 
 
 export class GetLocalTrailersSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetLocalTrailersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetLocalTrailersPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetLocalTrailersSecurity;
 }
 
 
 export class GetLocalTrailersResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.BaseItemDto })
+  @SpeakeasyMetadata({ elemType: shared.BaseItemDto })
   baseItemDtos?: shared.BaseItemDto[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,26 +1,63 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
 import { Security } from "./models/shared";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["http://lambda.{region}.amazonaws.com", "https://lambda.{region}.amazonaws.com", "http://lambda.{region}.amazonaws.com.cn", "https://lambda.{region}.amazonaws.com.cn"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare function WithSecurity(security: Security): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _security?: Security;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    AddEventSource(req: operations.AddEventSourceRequest, config?: AxiosRequestConfig): Promise<operations.AddEventSourceResponse>;
-    DeleteFunction(req: operations.DeleteFunctionRequest, config?: AxiosRequestConfig): Promise<operations.DeleteFunctionResponse>;
-    GetEventSource(req: operations.GetEventSourceRequest, config?: AxiosRequestConfig): Promise<operations.GetEventSourceResponse>;
-    GetFunction(req: operations.GetFunctionRequest, config?: AxiosRequestConfig): Promise<operations.GetFunctionResponse>;
-    GetFunctionConfiguration(req: operations.GetFunctionConfigurationRequest, config?: AxiosRequestConfig): Promise<operations.GetFunctionConfigurationResponse>;
-    InvokeAsync(req: operations.InvokeAsyncRequest, config?: AxiosRequestConfig): Promise<operations.InvokeAsyncResponse>;
-    ListEventSources(req: operations.ListEventSourcesRequest, config?: AxiosRequestConfig): Promise<operations.ListEventSourcesResponse>;
-    ListFunctions(req: operations.ListFunctionsRequest, config?: AxiosRequestConfig): Promise<operations.ListFunctionsResponse>;
-    RemoveEventSource(req: operations.RemoveEventSourceRequest, config?: AxiosRequestConfig): Promise<operations.RemoveEventSourceResponse>;
-    UpdateFunctionConfiguration(req: operations.UpdateFunctionConfigurationRequest, config?: AxiosRequestConfig): Promise<operations.UpdateFunctionConfigurationResponse>;
-    UploadFunction(req: operations.UploadFunctionRequest, config?: AxiosRequestConfig): Promise<operations.UploadFunctionResponse>;
+    /**
+     * addEventSource - <p>Identifies a stream as an event source for an AWS Lambda function. It can be either an Amazon Kinesis stream or a Amazon DynamoDB stream. AWS Lambda invokes the specified function when records are posted to the stream.</p> <p>This is the pull model, where AWS Lambda invokes the function. For more information, go to <a href="http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html">AWS Lambda: How it Works</a> in the AWS Lambda Developer Guide.</p> <p>This association between an Amazon Kinesis stream and an AWS Lambda function is called the event source mapping. You provide the configuration information (for example, which stream to read from and which AWS Lambda function to invoke) for the event source mapping in the request body.</p> <p> Each event source, such as a Kinesis stream, can only be associated with one AWS Lambda function. If you call <a>AddEventSource</a> for an event source that is already mapped to another AWS Lambda function, the existing mapping is updated to call the new function instead of the old one. </p> <p>This operation requires permission for the <code>iam:PassRole</code> action for the IAM role. It also requires permission for the <code>lambda:AddEventSource</code> action.</p>
+    **/
+    addEventSource(req: operations.AddEventSourceRequest, config?: AxiosRequestConfig): Promise<operations.AddEventSourceResponse>;
+    /**
+     * deleteFunction - <p>Deletes the specified Lambda function code and configuration.</p> <p>This operation requires permission for the <code>lambda:DeleteFunction</code> action.</p>
+    **/
+    deleteFunction(req: operations.DeleteFunctionRequest, config?: AxiosRequestConfig): Promise<operations.DeleteFunctionResponse>;
+    /**
+     * getEventSource - <p>Returns configuration information for the specified event source mapping (see <a>AddEventSource</a>).</p> <p>This operation requires permission for the <code>lambda:GetEventSource</code> action.</p>
+    **/
+    getEventSource(req: operations.GetEventSourceRequest, config?: AxiosRequestConfig): Promise<operations.GetEventSourceResponse>;
+    /**
+     * getFunction - <p>Returns the configuration information of the Lambda function and a presigned URL link to the .zip file you uploaded with <a>UploadFunction</a> so you can download the .zip file. Note that the URL is valid for up to 10 minutes. The configuration information is the same information you provided as parameters when uploading the function.</p> <p>This operation requires permission for the <code>lambda:GetFunction</code> action.</p>
+    **/
+    getFunction(req: operations.GetFunctionRequest, config?: AxiosRequestConfig): Promise<operations.GetFunctionResponse>;
+    /**
+     * getFunctionConfiguration - <p>Returns the configuration information of the Lambda function. This the same information you provided as parameters when uploading the function by using <a>UploadFunction</a>.</p> <p>This operation requires permission for the <code>lambda:GetFunctionConfiguration</code> operation.</p>
+    **/
+    getFunctionConfiguration(req: operations.GetFunctionConfigurationRequest, config?: AxiosRequestConfig): Promise<operations.GetFunctionConfigurationResponse>;
+    /**
+     * invokeAsync - <p>Submits an invocation request to AWS Lambda. Upon receiving the request, Lambda executes the specified function asynchronously. To see the logs generated by the Lambda function execution, see the CloudWatch logs console.</p> <p>This operation requires permission for the <code>lambda:InvokeAsync</code> action.</p>
+    **/
+    invokeAsync(req: operations.InvokeAsyncRequest, config?: AxiosRequestConfig): Promise<operations.InvokeAsyncResponse>;
+    /**
+     * listEventSources - <p>Returns a list of event source mappings you created using the <code>AddEventSource</code> (see <a>AddEventSource</a>), where you identify a stream as event source. This list does not include Amazon S3 event sources. </p> <p>For each mapping, the API returns configuration information. You can optionally specify filters to retrieve specific event source mappings.</p> <p>This operation requires permission for the <code>lambda:ListEventSources</code> action.</p>
+    **/
+    listEventSources(req: operations.ListEventSourcesRequest, config?: AxiosRequestConfig): Promise<operations.ListEventSourcesResponse>;
+    /**
+     * listFunctions - <p>Returns a list of your Lambda functions. For each function, the response includes the function configuration information. You must use <a>GetFunction</a> to retrieve the code for your function.</p> <p>This operation requires permission for the <code>lambda:ListFunctions</code> action.</p>
+    **/
+    listFunctions(req: operations.ListFunctionsRequest, config?: AxiosRequestConfig): Promise<operations.ListFunctionsResponse>;
+    /**
+     * removeEventSource - <p>Removes an event source mapping. This means AWS Lambda will no longer invoke the function for events in the associated source.</p> <p>This operation requires permission for the <code>lambda:RemoveEventSource</code> action.</p>
+    **/
+    removeEventSource(req: operations.RemoveEventSourceRequest, config?: AxiosRequestConfig): Promise<operations.RemoveEventSourceResponse>;
+    /**
+     * updateFunctionConfiguration - <p>Updates the configuration parameters for the specified Lambda function by using the values provided in the request. You provide only the parameters you want to change. This operation must only be used on an existing Lambda function and cannot be used to update the function's code. </p> <p>This operation requires permission for the <code>lambda:UpdateFunctionConfiguration</code> action.</p>
+    **/
+    updateFunctionConfiguration(req: operations.UpdateFunctionConfigurationRequest, config?: AxiosRequestConfig): Promise<operations.UpdateFunctionConfigurationResponse>;
+    /**
+     * uploadFunction - <p>Creates a new Lambda function or updates an existing function. The function metadata is created from the request parameters, and the code for the function is provided by a .zip file in the request body. If the function name already exists, the existing Lambda function is updated with the new code and metadata. </p> <p>This operation requires permission for the <code>lambda:UploadFunction</code> action.</p>
+    **/
+    uploadFunction(req: operations.UploadFunctionRequest, config?: AxiosRequestConfig): Promise<operations.UploadFunctionResponse>;
 }
 export {};

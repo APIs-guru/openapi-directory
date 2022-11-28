@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.docspring.com/api/v1",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AddFieldsToTemplate - Add new fields to a Template
 func (s *SDK) AddFieldsToTemplate(ctx context.Context, request operations.AddFieldsToTemplateRequest) (*operations.AddFieldsToTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/templates/{template_id}/add_fields", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -70,7 +92,7 @@ func (s *SDK) AddFieldsToTemplate(ctx context.Context, request operations.AddFie
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -110,8 +132,9 @@ func (s *SDK) AddFieldsToTemplate(ctx context.Context, request operations.AddFie
 	return res, nil
 }
 
+// BatchGeneratePdfV1 - Generates multiple PDFs
 func (s *SDK) BatchGeneratePdfV1(ctx context.Context, request operations.BatchGeneratePdfV1Request) (*operations.BatchGeneratePdfV1Response, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/templates/{template_id}/submissions/batch", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -129,7 +152,7 @@ func (s *SDK) BatchGeneratePdfV1(ctx context.Context, request operations.BatchGe
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -189,8 +212,9 @@ func (s *SDK) BatchGeneratePdfV1(ctx context.Context, request operations.BatchGe
 	return res, nil
 }
 
+// BatchGeneratePdfs - Generates multiple PDFs
 func (s *SDK) BatchGeneratePdfs(ctx context.Context, request operations.BatchGeneratePdfsRequest) (*operations.BatchGeneratePdfsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/submissions/batches"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -208,7 +232,7 @@ func (s *SDK) BatchGeneratePdfs(ctx context.Context, request operations.BatchGen
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -268,8 +292,9 @@ func (s *SDK) BatchGeneratePdfs(ctx context.Context, request operations.BatchGen
 	return res, nil
 }
 
+// CombinePdfs - Merge submission PDFs, template PDFs, or custom files
 func (s *SDK) CombinePdfs(ctx context.Context, request operations.CombinePdfsRequest) (*operations.CombinePdfsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/combined_submissions?v=2"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -287,7 +312,7 @@ func (s *SDK) CombinePdfs(ctx context.Context, request operations.CombinePdfsReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -347,8 +372,9 @@ func (s *SDK) CombinePdfs(ctx context.Context, request operations.CombinePdfsReq
 	return res, nil
 }
 
+// CombineSubmissions - Merge generated PDFs together
 func (s *SDK) CombineSubmissions(ctx context.Context, request operations.CombineSubmissionsRequest) (*operations.CombineSubmissionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/combined_submissions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -366,7 +392,7 @@ func (s *SDK) CombineSubmissions(ctx context.Context, request operations.Combine
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -426,8 +452,9 @@ func (s *SDK) CombineSubmissions(ctx context.Context, request operations.Combine
 	return res, nil
 }
 
+// CopyTemplate - Copy a Template
 func (s *SDK) CopyTemplate(ctx context.Context, request operations.CopyTemplateRequest) (*operations.CopyTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/templates/{template_id}/copy", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -442,7 +469,7 @@ func (s *SDK) CopyTemplate(ctx context.Context, request operations.CopyTemplateR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -482,8 +509,9 @@ func (s *SDK) CopyTemplate(ctx context.Context, request operations.CopyTemplateR
 	return res, nil
 }
 
+// CreateCustomFileFromUpload - Create a new custom file from a cached presign upload
 func (s *SDK) CreateCustomFileFromUpload(ctx context.Context, request operations.CreateCustomFileFromUploadRequest) (*operations.CreateCustomFileFromUploadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/custom_files"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -501,7 +529,7 @@ func (s *SDK) CreateCustomFileFromUpload(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -541,8 +569,9 @@ func (s *SDK) CreateCustomFileFromUpload(ctx context.Context, request operations
 	return res, nil
 }
 
+// CreateDataRequestToken - Creates a new data request token for form authentication
 func (s *SDK) CreateDataRequestToken(ctx context.Context, request operations.CreateDataRequestTokenRequest) (*operations.CreateDataRequestTokenResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/data_requests/{data_request_id}/tokens", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -550,7 +579,7 @@ func (s *SDK) CreateDataRequestToken(ctx context.Context, request operations.Cre
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -590,8 +619,9 @@ func (s *SDK) CreateDataRequestToken(ctx context.Context, request operations.Cre
 	return res, nil
 }
 
+// CreateFolder - Create a folder
 func (s *SDK) CreateFolder(ctx context.Context, request operations.CreateFolderRequest) (*operations.CreateFolderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/folders/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -609,7 +639,7 @@ func (s *SDK) CreateFolder(ctx context.Context, request operations.CreateFolderR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -669,8 +699,9 @@ func (s *SDK) CreateFolder(ctx context.Context, request operations.CreateFolderR
 	return res, nil
 }
 
+// CreateHTMLTemplate - Create a new HTML template
 func (s *SDK) CreateHTMLTemplate(ctx context.Context, request operations.CreateHTMLTemplateRequest) (*operations.CreateHTMLTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/templates?desc=html"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -688,7 +719,7 @@ func (s *SDK) CreateHTMLTemplate(ctx context.Context, request operations.CreateH
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -728,8 +759,9 @@ func (s *SDK) CreateHTMLTemplate(ctx context.Context, request operations.CreateH
 	return res, nil
 }
 
+// CreatePdfTemplate - Create a new PDF template with a form POST file upload
 func (s *SDK) CreatePdfTemplate(ctx context.Context, request operations.CreatePdfTemplateRequest) (*operations.CreatePdfTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/templates"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -747,7 +779,7 @@ func (s *SDK) CreatePdfTemplate(ctx context.Context, request operations.CreatePd
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -787,8 +819,9 @@ func (s *SDK) CreatePdfTemplate(ctx context.Context, request operations.CreatePd
 	return res, nil
 }
 
+// CreatePdfTemplateFromUpload - Create a new PDF template from a cached presign upload
 func (s *SDK) CreatePdfTemplateFromUpload(ctx context.Context, request operations.CreatePdfTemplateFromUploadRequest) (*operations.CreatePdfTemplateFromUploadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/templates?desc=cached_upload"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -806,7 +839,7 @@ func (s *SDK) CreatePdfTemplateFromUpload(ctx context.Context, request operation
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -846,8 +879,9 @@ func (s *SDK) CreatePdfTemplateFromUpload(ctx context.Context, request operation
 	return res, nil
 }
 
+// DeleteFolder - Delete a folder
 func (s *SDK) DeleteFolder(ctx context.Context, request operations.DeleteFolderRequest) (*operations.DeleteFolderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/folders/{folder_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -855,7 +889,7 @@ func (s *SDK) DeleteFolder(ctx context.Context, request operations.DeleteFolderR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -915,8 +949,9 @@ func (s *SDK) DeleteFolder(ctx context.Context, request operations.DeleteFolderR
 	return res, nil
 }
 
+// ExpireCombinedSubmission - Expire a combined submission
 func (s *SDK) ExpireCombinedSubmission(ctx context.Context, request operations.ExpireCombinedSubmissionRequest) (*operations.ExpireCombinedSubmissionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/combined_submissions/{combined_submission_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -924,7 +959,7 @@ func (s *SDK) ExpireCombinedSubmission(ctx context.Context, request operations.E
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -984,8 +1019,9 @@ func (s *SDK) ExpireCombinedSubmission(ctx context.Context, request operations.E
 	return res, nil
 }
 
+// ExpireSubmission - Expire a PDF submission
 func (s *SDK) ExpireSubmission(ctx context.Context, request operations.ExpireSubmissionRequest) (*operations.ExpireSubmissionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/submissions/{submission_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -993,7 +1029,7 @@ func (s *SDK) ExpireSubmission(ctx context.Context, request operations.ExpireSub
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1053,8 +1089,9 @@ func (s *SDK) ExpireSubmission(ctx context.Context, request operations.ExpireSub
 	return res, nil
 }
 
+// GeneratePdf - Generates a new PDF
 func (s *SDK) GeneratePdf(ctx context.Context, request operations.GeneratePdfRequest) (*operations.GeneratePdfResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/templates/{template_id}/submissions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1072,7 +1109,7 @@ func (s *SDK) GeneratePdf(ctx context.Context, request operations.GeneratePdfReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1132,8 +1169,9 @@ func (s *SDK) GeneratePdf(ctx context.Context, request operations.GeneratePdfReq
 	return res, nil
 }
 
+// GetCombinedSubmission - Check the status of a combined submission (merged PDFs)
 func (s *SDK) GetCombinedSubmission(ctx context.Context, request operations.GetCombinedSubmissionRequest) (*operations.GetCombinedSubmissionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/combined_submissions/{combined_submission_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1141,7 +1179,7 @@ func (s *SDK) GetCombinedSubmission(ctx context.Context, request operations.GetC
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1191,8 +1229,9 @@ func (s *SDK) GetCombinedSubmission(ctx context.Context, request operations.GetC
 	return res, nil
 }
 
+// GetDataRequest - Look up a submission data request
 func (s *SDK) GetDataRequest(ctx context.Context, request operations.GetDataRequestRequest) (*operations.GetDataRequestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/data_requests/{data_request_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1200,7 +1239,7 @@ func (s *SDK) GetDataRequest(ctx context.Context, request operations.GetDataRequ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1250,8 +1289,9 @@ func (s *SDK) GetDataRequest(ctx context.Context, request operations.GetDataRequ
 	return res, nil
 }
 
+// GetPresignURL - Get a presigned URL so that you can upload a file to our AWS S3 bucket
 func (s *SDK) GetPresignURL(ctx context.Context, request operations.GetPresignURLRequest) (*operations.GetPresignURLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/uploads/presign"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1259,7 +1299,7 @@ func (s *SDK) GetPresignURL(ctx context.Context, request operations.GetPresignUR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1299,8 +1339,9 @@ func (s *SDK) GetPresignURL(ctx context.Context, request operations.GetPresignUR
 	return res, nil
 }
 
+// GetSubmission - Check the status of a PDF
 func (s *SDK) GetSubmission(ctx context.Context, request operations.GetSubmissionRequest) (*operations.GetSubmissionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/submissions/{submission_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1310,7 +1351,7 @@ func (s *SDK) GetSubmission(ctx context.Context, request operations.GetSubmissio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1360,8 +1401,9 @@ func (s *SDK) GetSubmission(ctx context.Context, request operations.GetSubmissio
 	return res, nil
 }
 
+// GetSubmissionBatch - Check the status of a submission batch job
 func (s *SDK) GetSubmissionBatch(ctx context.Context, request operations.GetSubmissionBatchRequest) (*operations.GetSubmissionBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/submissions/batches/{submission_batch_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1371,7 +1413,7 @@ func (s *SDK) GetSubmissionBatch(ctx context.Context, request operations.GetSubm
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1421,8 +1463,9 @@ func (s *SDK) GetSubmissionBatch(ctx context.Context, request operations.GetSubm
 	return res, nil
 }
 
+// GetTemplate - Get a single template
 func (s *SDK) GetTemplate(ctx context.Context, request operations.GetTemplateRequest) (*operations.GetTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/templates/{template_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1430,7 +1473,7 @@ func (s *SDK) GetTemplate(ctx context.Context, request operations.GetTemplateReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1480,8 +1523,9 @@ func (s *SDK) GetTemplate(ctx context.Context, request operations.GetTemplateReq
 	return res, nil
 }
 
+// GetTemplateSchema - Fetch the JSON schema for a template
 func (s *SDK) GetTemplateSchema(ctx context.Context, request operations.GetTemplateSchemaRequest) (*operations.GetTemplateSchemaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/templates/{template_id}/schema", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1489,7 +1533,7 @@ func (s *SDK) GetTemplateSchema(ctx context.Context, request operations.GetTempl
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1539,8 +1583,9 @@ func (s *SDK) GetTemplateSchema(ctx context.Context, request operations.GetTempl
 	return res, nil
 }
 
+// ListFolders - Get a list of all folders
 func (s *SDK) ListFolders(ctx context.Context, request operations.ListFoldersRequest) (*operations.ListFoldersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/folders/"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1550,7 +1595,7 @@ func (s *SDK) ListFolders(ctx context.Context, request operations.ListFoldersReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1590,8 +1635,9 @@ func (s *SDK) ListFolders(ctx context.Context, request operations.ListFoldersReq
 	return res, nil
 }
 
+// ListTemplates - Get a list of all templates
 func (s *SDK) ListTemplates(ctx context.Context, request operations.ListTemplatesRequest) (*operations.ListTemplatesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/templates"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1601,7 +1647,7 @@ func (s *SDK) ListTemplates(ctx context.Context, request operations.ListTemplate
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1651,8 +1697,9 @@ func (s *SDK) ListTemplates(ctx context.Context, request operations.ListTemplate
 	return res, nil
 }
 
+// MoveFolderToFolder - Move a folder
 func (s *SDK) MoveFolderToFolder(ctx context.Context, request operations.MoveFolderToFolderRequest) (*operations.MoveFolderToFolderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/folders/{folder_id}/move", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1670,7 +1717,7 @@ func (s *SDK) MoveFolderToFolder(ctx context.Context, request operations.MoveFol
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1720,8 +1767,9 @@ func (s *SDK) MoveFolderToFolder(ctx context.Context, request operations.MoveFol
 	return res, nil
 }
 
+// MoveTemplateToFolder - Move Template to folder
 func (s *SDK) MoveTemplateToFolder(ctx context.Context, request operations.MoveTemplateToFolderRequest) (*operations.MoveTemplateToFolderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/templates/{template_id}/move", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1739,7 +1787,7 @@ func (s *SDK) MoveTemplateToFolder(ctx context.Context, request operations.MoveT
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1779,8 +1827,9 @@ func (s *SDK) MoveTemplateToFolder(ctx context.Context, request operations.MoveT
 	return res, nil
 }
 
+// RenameFolder - Rename a folder
 func (s *SDK) RenameFolder(ctx context.Context, request operations.RenameFolderRequest) (*operations.RenameFolderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/folders/{folder_id}/rename", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1798,7 +1847,7 @@ func (s *SDK) RenameFolder(ctx context.Context, request operations.RenameFolderR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1831,8 +1880,9 @@ func (s *SDK) RenameFolder(ctx context.Context, request operations.RenameFolderR
 	return res, nil
 }
 
+// TestAuthentication - Test Authentication
 func (s *SDK) TestAuthentication(ctx context.Context, request operations.TestAuthenticationRequest) (*operations.TestAuthenticationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/authentication"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1840,7 +1890,7 @@ func (s *SDK) TestAuthentication(ctx context.Context, request operations.TestAut
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1880,8 +1930,9 @@ func (s *SDK) TestAuthentication(ctx context.Context, request operations.TestAut
 	return res, nil
 }
 
+// UpdateDataRequest - Update a submission data request
 func (s *SDK) UpdateDataRequest(ctx context.Context, request operations.UpdateDataRequestRequest) (*operations.UpdateDataRequestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/data_requests/{data_request_id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1899,7 +1950,7 @@ func (s *SDK) UpdateDataRequest(ctx context.Context, request operations.UpdateDa
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1959,8 +2010,9 @@ func (s *SDK) UpdateDataRequest(ctx context.Context, request operations.UpdateDa
 	return res, nil
 }
 
+// UpdateTemplate - Update a Template
 func (s *SDK) UpdateTemplate(ctx context.Context, request operations.UpdateTemplateRequest) (*operations.UpdateTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/templates/{template_id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1978,7 +2030,7 @@ func (s *SDK) UpdateTemplate(ctx context.Context, request operations.UpdateTempl
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

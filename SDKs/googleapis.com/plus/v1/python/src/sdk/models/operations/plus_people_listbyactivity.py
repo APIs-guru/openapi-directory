@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class PlusPeopleListByActivityCollectionEnum(str, Enum):
@@ -9,8 +10,8 @@ class PlusPeopleListByActivityCollectionEnum(str, Enum):
 
 @dataclass
 class PlusPeopleListByActivityPathParams:
-    activity_id: str = field(default=None, metadata={'path_param': { 'field_name': 'activityId', 'style': 'simple', 'explode': False }})
-    collection: PlusPeopleListByActivityCollectionEnum = field(default=None, metadata={'path_param': { 'field_name': 'collection', 'style': 'simple', 'explode': False }})
+    activity_id: str = field(metadata={'path_param': { 'field_name': 'activityId', 'style': 'simple', 'explode': False }})
+    collection: PlusPeopleListByActivityCollectionEnum = field(metadata={'path_param': { 'field_name': 'collection', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,14 +29,14 @@ class PlusPeopleListByActivityQueryParams:
 
 @dataclass
 class PlusPeopleListByActivitySecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PlusPeopleListByActivitySecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -46,14 +47,14 @@ class PlusPeopleListByActivitySecurity:
 
 @dataclass
 class PlusPeopleListByActivityRequest:
-    path_params: PlusPeopleListByActivityPathParams = field(default=None)
-    query_params: PlusPeopleListByActivityQueryParams = field(default=None)
-    security: PlusPeopleListByActivitySecurity = field(default=None)
+    path_params: PlusPeopleListByActivityPathParams = field()
+    query_params: PlusPeopleListByActivityQueryParams = field()
+    security: PlusPeopleListByActivitySecurity = field()
     
 
 @dataclass
 class PlusPeopleListByActivityResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     people_feed: Optional[shared.PeopleFeed] = field(default=None)
-    status_code: int = field(default=None)
     

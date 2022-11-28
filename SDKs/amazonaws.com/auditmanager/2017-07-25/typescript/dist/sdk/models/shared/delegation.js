@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RoleTypeEnum } from "./roletypeenum";
 import { DelegationStatusEnum } from "./delegationstatusenum";
 // Delegation
@@ -35,47 +35,47 @@ var Delegation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=assessmentId" }),
+        SpeakeasyMetadata({ data: "json, name=assessmentId" }),
         __metadata("design:type", String)
     ], Delegation.prototype, "assessmentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=assessmentName" }),
+        SpeakeasyMetadata({ data: "json, name=assessmentName" }),
         __metadata("design:type", String)
     ], Delegation.prototype, "assessmentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=comment" }),
+        SpeakeasyMetadata({ data: "json, name=comment" }),
         __metadata("design:type", String)
     ], Delegation.prototype, "comment", void 0);
     __decorate([
-        Metadata({ data: "json, name=controlSetId" }),
+        SpeakeasyMetadata({ data: "json, name=controlSetId" }),
         __metadata("design:type", String)
     ], Delegation.prototype, "controlSetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdBy" }),
+        SpeakeasyMetadata({ data: "json, name=createdBy" }),
         __metadata("design:type", String)
     ], Delegation.prototype, "createdBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], Delegation.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Delegation.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdated" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdated" }),
         __metadata("design:type", Date)
     ], Delegation.prototype, "lastUpdated", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleArn" }),
+        SpeakeasyMetadata({ data: "json, name=roleArn" }),
         __metadata("design:type", String)
     ], Delegation.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleType" }),
+        SpeakeasyMetadata({ data: "json, name=roleType" }),
         __metadata("design:type", String)
     ], Delegation.prototype, "roleType", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], Delegation.prototype, "status", void 0);
     return Delegation;

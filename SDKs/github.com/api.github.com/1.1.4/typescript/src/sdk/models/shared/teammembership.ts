@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TeamMembershipRoleEnum {
-    Member = "member"
-,    Maintainer = "maintainer"
+    Member = "member",
+    Maintainer = "maintainer"
 }
 
 
@@ -11,12 +12,12 @@ export enum TeamMembershipRoleEnum {
  * Team Membership
 **/
 export class TeamMembership extends SpeakeasyBase {
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role: TeamMembershipRoleEnum;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

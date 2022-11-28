@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DescribeSnapshotsRequest = /** @class */ (function (_super) {
     __extends(DescribeSnapshotsRequest, _super);
     function DescribeSnapshotsRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClusterName" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterName" }),
         __metadata("design:type", String)
     ], DescribeSnapshotsRequest.prototype, "clusterName", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], DescribeSnapshotsRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], DescribeSnapshotsRequest.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=ShowDetail" }),
+        SpeakeasyMetadata({ data: "json, name=ShowDetail" }),
         __metadata("design:type", Boolean)
     ], DescribeSnapshotsRequest.prototype, "showDetail", void 0);
     __decorate([
-        Metadata({ data: "json, name=SnapshotName" }),
+        SpeakeasyMetadata({ data: "json, name=SnapshotName" }),
         __metadata("design:type", String)
     ], DescribeSnapshotsRequest.prototype, "snapshotName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Source" }),
+        SpeakeasyMetadata({ data: "json, name=Source" }),
         __metadata("design:type", String)
     ], DescribeSnapshotsRequest.prototype, "source", void 0);
     return DescribeSnapshotsRequest;

@@ -16,11 +16,8 @@ type AvailableProductsRequestBody struct {
 	StartDate    *string  `json:"startDate,omitempty"`
 }
 
-type AvailableProductsRequest struct {
-	Headers AvailableProductsHeaders
-	Request *AvailableProductsRequestBody `request:"mediaType=application/json"`
-}
-
+// AvailableProducts200ApplicationJSONDataPasTourGradesAvailDatesPriceQuote
+// **pricing object** for *this* tour grade
 type AvailableProducts200ApplicationJSONDataPasTourGradesAvailDatesPriceQuote struct {
 	GeneralRetailPrice *string `json:"generalRetailPrice,omitempty"`
 	MerchantNetPrice   *string `json:"merchantNetPrice,omitempty"`
@@ -43,6 +40,9 @@ type AvailableProducts200ApplicationJSONDataPasTourGrades struct {
 	TourGradeCode    *string                                                          `json:"tourGradeCode,omitempty"`
 }
 
+// AvailableProducts200ApplicationJSONDataPas
+// **object** detailing product availability
+// - `pas` stands for Product Availability Schema
 type AvailableProducts200ApplicationJSONDataPas struct {
 	IncompleteQuote  *bool                                                           `json:"incompleteQuote,omitempty"`
 	ProductCode      *string                                                         `json:"productCode,omitempty"`
@@ -114,6 +114,11 @@ type AvailableProducts200ApplicationJSON struct {
 	Success          *bool                                     `json:"success,omitempty"`
 	TotalCount       *int64                                    `json:"totalCount,omitempty"`
 	Vmid             *string                                   `json:"vmid,omitempty"`
+}
+
+type AvailableProductsRequest struct {
+	Headers AvailableProductsHeaders
+	Request *AvailableProductsRequestBody `request:"mediaType=application/json"`
 }
 
 type AvailableProductsResponse struct {

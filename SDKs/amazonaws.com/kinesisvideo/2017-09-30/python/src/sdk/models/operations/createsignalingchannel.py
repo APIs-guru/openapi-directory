@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -21,33 +26,37 @@ class CreateSignalingChannelRequestBodyChannelTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateSignalingChannelRequestBodySingleMasterConfiguration:
-    message_ttl_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MessageTtlSeconds' }})
+    r"""CreateSignalingChannelRequestBodySingleMasterConfiguration
+    A structure that contains the configuration for the <code>SINGLE_MASTER</code> channel type.
+    """
+    
+    message_ttl_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MessageTtlSeconds') }})
     
 
 @dataclass_json
 @dataclass
 class CreateSignalingChannelRequestBody:
-    channel_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChannelName' }})
-    channel_type: Optional[CreateSignalingChannelRequestBodyChannelTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChannelType' }})
-    single_master_configuration: Optional[CreateSignalingChannelRequestBodySingleMasterConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SingleMasterConfiguration' }})
-    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
+    channel_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ChannelName') }})
+    channel_type: Optional[CreateSignalingChannelRequestBodyChannelTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ChannelType') }})
+    single_master_configuration: Optional[CreateSignalingChannelRequestBodySingleMasterConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SingleMasterConfiguration') }})
+    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     
 
 @dataclass
 class CreateSignalingChannelRequest:
-    headers: CreateSignalingChannelHeaders = field(default=None)
-    request: CreateSignalingChannelRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateSignalingChannelHeaders = field()
+    request: CreateSignalingChannelRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateSignalingChannelResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     account_channel_limit_exceeded_exception: Optional[Any] = field(default=None)
     client_limit_exceeded_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_signaling_channel_output: Optional[shared.CreateSignalingChannelOutput] = field(default=None)
     invalid_argument_exception: Optional[Any] = field(default=None)
     resource_in_use_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     tags_per_resource_exceeded_limit_exception: Optional[Any] = field(default=None)
     

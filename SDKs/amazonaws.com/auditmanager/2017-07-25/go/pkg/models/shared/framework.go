@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// Framework
+//
+//	The file used to structure and automate Audit Manager assessments for a given compliance standard.
 type Framework struct {
 	Arn            *string            `json:"arn,omitempty"`
 	ComplianceType *string            `json:"complianceType,omitempty"`

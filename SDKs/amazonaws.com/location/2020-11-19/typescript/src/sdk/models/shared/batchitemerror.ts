@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchItemErrorCodeEnum } from "./batchitemerrorcodeenum";
+
 
 
 // BatchItemError
@@ -7,9 +8,9 @@ import { BatchItemErrorCodeEnum } from "./batchitemerrorcodeenum";
  * Contains the batch request error details associated with the request.
 **/
 export class BatchItemError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: BatchItemErrorCodeEnum;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DeviceConfig } from "./deviceconfig";
 import { DeviceCredential } from "./devicecredential";
 import { GatewayConfig } from "./gatewayconfig";

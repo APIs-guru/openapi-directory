@@ -1,5 +1,7 @@
 package shared
 
+// SendRfpRequest
+// Request to send an RFP. All fields in this request are proposed to publisher and subject to changes by publisher during later negotiation.
 type SendRfpRequest struct {
 	BuyerContacts               []Contact                    `json:"buyerContacts,omitempty"`
 	Client                      *string                      `json:"client,omitempty"`

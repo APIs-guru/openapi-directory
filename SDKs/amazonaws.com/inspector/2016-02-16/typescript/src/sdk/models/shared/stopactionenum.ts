@@ -1,6 +1,7 @@
 
 
+
 export enum StopActionEnum {
-    StartEvaluation = "START_EVALUATION"
-,    SkipEvaluation = "SKIP_EVALUATION"
+    StartEvaluation = "START_EVALUATION",
+    SkipEvaluation = "SKIP_EVALUATION"
 }

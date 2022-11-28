@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostAppsAppIdPublishPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=appId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" })
   appId: string;
 }
 
 
 export class PostAppsAppIdPublishQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=autoApprove" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=autoApprove" })
   autoApprove?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=developerId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=developerId" })
   developerId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=version" })
   version: number;
 }
 
 
 export class PostAppsAppIdPublishRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostAppsAppIdPublishPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostAppsAppIdPublishQueryParams;
 }
 
 
 export class PostAppsAppIdPublishResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

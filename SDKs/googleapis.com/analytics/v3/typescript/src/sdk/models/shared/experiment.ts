@@ -1,5 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ExperimentParentLink
@@ -7,28 +7,28 @@ import * as shared from "../shared";
  * Parent link for an experiment. Points to the view (profile) to which this experiment belongs.
 **/
 export class ExperimentParentLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class ExperimentVariations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=weight" })
+  @SpeakeasyMetadata({ data: "json, name=weight" })
   weight?: number;
 
-  @Metadata({ data: "json, name=won" })
+  @SpeakeasyMetadata({ data: "json, name=won" })
   won?: boolean;
 }
 
@@ -38,87 +38,87 @@ export class ExperimentVariations extends SpeakeasyBase {
  * JSON template for Analytics experiment resource.
 **/
 export class Experiment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=editableInGaUi" })
+  @SpeakeasyMetadata({ data: "json, name=editableInGaUi" })
   editableInGaUi?: boolean;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=equalWeighting" })
+  @SpeakeasyMetadata({ data: "json, name=equalWeighting" })
   equalWeighting?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=internalWebPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=internalWebPropertyId" })
   internalWebPropertyId?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=minimumExperimentLengthInDays" })
+  @SpeakeasyMetadata({ data: "json, name=minimumExperimentLengthInDays" })
   minimumExperimentLengthInDays?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=objectiveMetric" })
+  @SpeakeasyMetadata({ data: "json, name=objectiveMetric" })
   objectiveMetric?: string;
 
-  @Metadata({ data: "json, name=optimizationType" })
+  @SpeakeasyMetadata({ data: "json, name=optimizationType" })
   optimizationType?: string;
 
-  @Metadata({ data: "json, name=parentLink" })
+  @SpeakeasyMetadata({ data: "json, name=parentLink" })
   parentLink?: ExperimentParentLink;
 
-  @Metadata({ data: "json, name=profileId" })
+  @SpeakeasyMetadata({ data: "json, name=profileId" })
   profileId?: string;
 
-  @Metadata({ data: "json, name=reasonExperimentEnded" })
+  @SpeakeasyMetadata({ data: "json, name=reasonExperimentEnded" })
   reasonExperimentEnded?: string;
 
-  @Metadata({ data: "json, name=rewriteVariationUrlsAsOriginal" })
+  @SpeakeasyMetadata({ data: "json, name=rewriteVariationUrlsAsOriginal" })
   rewriteVariationUrlsAsOriginal?: boolean;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=servingFramework" })
+  @SpeakeasyMetadata({ data: "json, name=servingFramework" })
   servingFramework?: string;
 
-  @Metadata({ data: "json, name=snippet" })
+  @SpeakeasyMetadata({ data: "json, name=snippet" })
   snippet?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=trafficCoverage" })
+  @SpeakeasyMetadata({ data: "json, name=trafficCoverage" })
   trafficCoverage?: number;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 
-  @Metadata({ data: "json, name=variations", elemType: shared.ExperimentVariations })
+  @SpeakeasyMetadata({ data: "json, name=variations", elemType: ExperimentVariations })
   variations?: ExperimentVariations[];
 
-  @Metadata({ data: "json, name=webPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=webPropertyId" })
   webPropertyId?: string;
 
-  @Metadata({ data: "json, name=winnerConfidenceLevel" })
+  @SpeakeasyMetadata({ data: "json, name=winnerConfidenceLevel" })
   winnerConfidenceLevel?: number;
 
-  @Metadata({ data: "json, name=winnerFound" })
+  @SpeakeasyMetadata({ data: "json, name=winnerFound" })
   winnerFound?: boolean;
 }

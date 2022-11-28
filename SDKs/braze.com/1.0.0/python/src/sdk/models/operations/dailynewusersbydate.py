@@ -11,11 +11,11 @@ class DailyNewUsersByDateQueryParams:
 
 @dataclass
 class DailyNewUsersByDateRequest:
-    query_params: DailyNewUsersByDateQueryParams = field(default=None)
+    query_params: DailyNewUsersByDateQueryParams = field()
     
 
 @dataclass
 class DailyNewUsersByDateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

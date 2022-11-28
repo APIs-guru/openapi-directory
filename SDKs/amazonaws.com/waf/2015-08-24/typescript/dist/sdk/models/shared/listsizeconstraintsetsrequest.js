@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ListSizeConstraintSetsRequest = /** @class */ (function (_super) {
     __extends(ListSizeConstraintSetsRequest, _super);
     function ListSizeConstraintSetsRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Limit" }),
+        SpeakeasyMetadata({ data: "json, name=Limit" }),
         __metadata("design:type", Number)
     ], ListSizeConstraintSetsRequest.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextMarker" }),
+        SpeakeasyMetadata({ data: "json, name=NextMarker" }),
         __metadata("design:type", String)
     ], ListSizeConstraintSetsRequest.prototype, "nextMarker", void 0);
     return ListSizeConstraintSetsRequest;

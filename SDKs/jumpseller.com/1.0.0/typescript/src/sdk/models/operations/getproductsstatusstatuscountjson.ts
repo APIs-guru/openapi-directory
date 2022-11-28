@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetProductsStatusStatusCountJsonStatusEnum {
-    Available = "available"
-,    NotAvailable = "not-available"
-,    Disabled = "disabled"
+    Available = "available",
+    NotAvailable = "not-available",
+    Disabled = "disabled"
 }
 
 
 export class GetProductsStatusStatusCountJsonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=status" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=status" })
   status: GetProductsStatusStatusCountJsonStatusEnum;
 }
 
 
 export class GetProductsStatusStatusCountJsonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=authtoken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authtoken" })
   authtoken: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=locale" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locale" })
   locale?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=login" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=login" })
   login: string;
 }
 
 
 export class GetProductsStatusStatusCountJsonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetProductsStatusStatusCountJsonPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetProductsStatusStatusCountJsonQueryParams;
 }
 
 
 export class GetProductsStatusStatusCountJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   count?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusInvalid?: any;
 }

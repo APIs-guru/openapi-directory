@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeDefaultSearchFieldActionEnum(str, Enum):
     DESCRIBE_DEFAULT_SEARCH_FIELD = "DescribeDefaultSearchField"
@@ -10,8 +14,8 @@ class PostDescribeDefaultSearchFieldVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeDefaultSearchFieldQueryParams:
-    action: PostDescribeDefaultSearchFieldActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeDefaultSearchFieldVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeDefaultSearchFieldActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeDefaultSearchFieldVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeDefaultSearchFieldHeaders:
 
 @dataclass
 class PostDescribeDefaultSearchFieldRequest:
-    query_params: PostDescribeDefaultSearchFieldQueryParams = field(default=None)
-    headers: PostDescribeDefaultSearchFieldHeaders = field(default=None)
+    headers: PostDescribeDefaultSearchFieldHeaders = field()
+    query_params: PostDescribeDefaultSearchFieldQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeDefaultSearchFieldResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

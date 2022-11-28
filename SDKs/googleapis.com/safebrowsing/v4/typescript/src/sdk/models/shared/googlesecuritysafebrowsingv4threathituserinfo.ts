@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleSecuritySafebrowsingV4ThreatHitUserInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about the user that encountered the threat.
 **/
 export class GoogleSecuritySafebrowsingV4ThreatHitUserInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=regionCode" })
+  @SpeakeasyMetadata({ data: "json, name=regionCode" })
   regionCode?: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 }

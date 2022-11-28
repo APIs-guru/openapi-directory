@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var StartDeviceAuthorizationResponse = /** @class */ (function (_super) {
     __extends(StartDeviceAuthorizationResponse, _super);
     function StartDeviceAuthorizationResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deviceCode" }),
+        SpeakeasyMetadata({ data: "json, name=deviceCode" }),
         __metadata("design:type", String)
     ], StartDeviceAuthorizationResponse.prototype, "deviceCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=expiresIn" }),
+        SpeakeasyMetadata({ data: "json, name=expiresIn" }),
         __metadata("design:type", Number)
     ], StartDeviceAuthorizationResponse.prototype, "expiresIn", void 0);
     __decorate([
-        Metadata({ data: "json, name=interval" }),
+        SpeakeasyMetadata({ data: "json, name=interval" }),
         __metadata("design:type", Number)
     ], StartDeviceAuthorizationResponse.prototype, "interval", void 0);
     __decorate([
-        Metadata({ data: "json, name=userCode" }),
+        SpeakeasyMetadata({ data: "json, name=userCode" }),
         __metadata("design:type", String)
     ], StartDeviceAuthorizationResponse.prototype, "userCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=verificationUri" }),
+        SpeakeasyMetadata({ data: "json, name=verificationUri" }),
         __metadata("design:type", String)
     ], StartDeviceAuthorizationResponse.prototype, "verificationUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=verificationUriComplete" }),
+        SpeakeasyMetadata({ data: "json, name=verificationUriComplete" }),
         __metadata("design:type", String)
     ], StartDeviceAuthorizationResponse.prototype, "verificationUriComplete", void 0);
     return StartDeviceAuthorizationResponse;

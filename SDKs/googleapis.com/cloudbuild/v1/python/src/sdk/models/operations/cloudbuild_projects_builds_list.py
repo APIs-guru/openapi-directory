@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudbuildProjectsBuildsListPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class CloudbuildProjectsBuildsListQueryParams:
 
 @dataclass
 class CloudbuildProjectsBuildsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudbuildProjectsBuildsListRequest:
-    path_params: CloudbuildProjectsBuildsListPathParams = field(default=None)
-    query_params: CloudbuildProjectsBuildsListQueryParams = field(default=None)
-    security: CloudbuildProjectsBuildsListSecurity = field(default=None)
+    path_params: CloudbuildProjectsBuildsListPathParams = field()
+    query_params: CloudbuildProjectsBuildsListQueryParams = field()
+    security: CloudbuildProjectsBuildsListSecurity = field()
     
 
 @dataclass
 class CloudbuildProjectsBuildsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_builds_response: Optional[shared.ListBuildsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

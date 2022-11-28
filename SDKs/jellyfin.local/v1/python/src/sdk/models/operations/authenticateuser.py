@@ -5,25 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class AuthenticateUserPathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AuthenticateUserQueryParams:
+    pw: str = field(metadata={'query_param': { 'field_name': 'pw', 'style': 'form', 'explode': True }})
     password: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'password', 'style': 'form', 'explode': True }})
-    pw: str = field(default=None, metadata={'query_param': { 'field_name': 'pw', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class AuthenticateUserRequest:
-    path_params: AuthenticateUserPathParams = field(default=None)
-    query_params: AuthenticateUserQueryParams = field(default=None)
+    path_params: AuthenticateUserPathParams = field()
+    query_params: AuthenticateUserQueryParams = field()
     
 
 @dataclass
 class AuthenticateUserResponse:
+    content_type: str = field()
+    status_code: int = field()
     authentication_result: Optional[shared.AuthenticationResult] = field(default=None)
-    content_type: str = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

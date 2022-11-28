@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomerSettingsResponse
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Customer settings
 **/
 export class CustomerSettingsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=homeRoomParentId" })
+  @SpeakeasyMetadata({ data: "json, name=homeRoomParentId" })
   homeRoomParentId?: number;
 
-  @Metadata({ data: "json, name=homeRoomParentName" })
+  @SpeakeasyMetadata({ data: "json, name=homeRoomParentName" })
   homeRoomParentName?: string;
 
-  @Metadata({ data: "json, name=homeRoomQuota" })
+  @SpeakeasyMetadata({ data: "json, name=homeRoomQuota" })
   homeRoomQuota?: number;
 
-  @Metadata({ data: "json, name=homeRoomsActive" })
+  @SpeakeasyMetadata({ data: "json, name=homeRoomsActive" })
   homeRoomsActive: boolean;
 }

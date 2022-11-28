@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import errormessage
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class OdataError:
-    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    message: Optional[errormessage.ErrorMessage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    r"""OdataError
+    Active Directory OData error information.
+    """
+    
+    code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    message: Optional[ErrorMessage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
     

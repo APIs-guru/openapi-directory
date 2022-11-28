@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IndexedHotKey
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A message representing a (sparse) collection of hot keys for specific key buckets.
 **/
 export class IndexedHotKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sparseHotKeys" })
+  @SpeakeasyMetadata({ data: "json, name=sparseHotKeys" })
   sparseHotKeys?: Map<string, number>;
 }

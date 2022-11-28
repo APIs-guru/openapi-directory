@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostNewThirdPartyJobHeaders = /** @class */ (function (_super) {
     __extends(PostNewThirdPartyJobHeaders, _super);
@@ -30,11 +30,11 @@ var PostNewThirdPartyJobHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], PostNewThirdPartyJobHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], PostNewThirdPartyJobHeaders.prototype, "authorization", void 0);
     return PostNewThirdPartyJobHeaders;
@@ -46,11 +46,11 @@ var PostNewThirdPartyJobRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostNewThirdPartyJobHeaders)
     ], PostNewThirdPartyJobRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.ThirdPartyJobInstruction)
     ], PostNewThirdPartyJobRequest.prototype, "request", void 0);
     return PostNewThirdPartyJobRequest;
@@ -62,19 +62,19 @@ var PostNewThirdPartyJobResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostNewThirdPartyJobResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], PostNewThirdPartyJobResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Link)
     ], PostNewThirdPartyJobResponse.prototype, "link", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostNewThirdPartyJobResponse.prototype, "statusCode", void 0);
     return PostNewThirdPartyJobResponse;

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KernelGatewayImageConfig } from "./kernelgatewayimageconfig";
 
 
+
 export class UpdateAppImageConfigRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppImageConfigName" })
+  @SpeakeasyMetadata({ data: "json, name=AppImageConfigName" })
   appImageConfigName: string;
 
-  @Metadata({ data: "json, name=KernelGatewayImageConfig" })
+  @SpeakeasyMetadata({ data: "json, name=KernelGatewayImageConfig" })
   kernelGatewayImageConfig?: KernelGatewayImageConfig;
 }

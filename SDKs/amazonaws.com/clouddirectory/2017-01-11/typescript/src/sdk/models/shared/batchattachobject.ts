@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectReference } from "./objectreference";
-import { ObjectReference } from "./objectreference";
+
 
 
 // BatchAttachObject
@@ -8,12 +8,12 @@ import { ObjectReference } from "./objectreference";
  * Represents the output of an <a>AttachObject</a> operation.
 **/
 export class BatchAttachObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChildReference" })
+  @SpeakeasyMetadata({ data: "json, name=ChildReference" })
   childReference: ObjectReference;
 
-  @Metadata({ data: "json, name=LinkName" })
+  @SpeakeasyMetadata({ data: "json, name=LinkName" })
   linkName: string;
 
-  @Metadata({ data: "json, name=ParentReference" })
+  @SpeakeasyMetadata({ data: "json, name=ParentReference" })
   parentReference: ObjectReference;
 }

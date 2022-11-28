@@ -8,6 +8,16 @@ const (
 	GoogleCloudDatacatalogV1DataSourceServiceEnumBigquery           GoogleCloudDatacatalogV1DataSourceServiceEnum = "BIGQUERY"
 )
 
+// GoogleCloudDatacatalogV1DataSourceInput
+// Physical location of an entry.
+type GoogleCloudDatacatalogV1DataSourceInput struct {
+	Resource          *string                                        `json:"resource,omitempty"`
+	Service           *GoogleCloudDatacatalogV1DataSourceServiceEnum `json:"service,omitempty"`
+	StorageProperties *GoogleCloudDatacatalogV1StorageProperties     `json:"storageProperties,omitempty"`
+}
+
+// GoogleCloudDatacatalogV1DataSource
+// Physical location of an entry.
 type GoogleCloudDatacatalogV1DataSource struct {
 	Resource          *string                                        `json:"resource,omitempty"`
 	Service           *GoogleCloudDatacatalogV1DataSourceServiceEnum `json:"service,omitempty"`

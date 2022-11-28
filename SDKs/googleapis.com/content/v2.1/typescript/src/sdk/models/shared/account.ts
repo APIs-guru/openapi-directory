@@ -1,11 +1,64 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountAdsLink } from "./accountadslink";
-import { AccountAutomaticImprovements } from "./accountautomaticimprovements";
+import { AccountAutomaticImprovementsInput } from "./accountautomaticimprovements";
 import { AccountBusinessInformation } from "./accountbusinessinformation";
 import { AccountGoogleMyBusinessLink } from "./accountgooglemybusinesslink";
 import { AccountUser } from "./accountuser";
 import { AccountYouTubeChannelLink } from "./accountyoutubechannellink";
+import { AccountAutomaticImprovements } from "./accountautomaticimprovements";
+
+
+
+// AccountInput
+/** 
+ * Account data. After the creation of a new account it may take a few minutes before it's fully operational. The methods delete, insert, and update require the admin role.
+**/
+export class AccountInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=adsLinks", elemType: AccountAdsLink })
+  adsLinks?: AccountAdsLink[];
+
+  @SpeakeasyMetadata({ data: "json, name=adultContent" })
+  adultContent?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=automaticImprovements" })
+  automaticImprovements?: AccountAutomaticImprovementsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=automaticLabelIds" })
+  automaticLabelIds?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=businessInformation" })
+  businessInformation?: AccountBusinessInformation;
+
+  @SpeakeasyMetadata({ data: "json, name=cssId" })
+  cssId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=googleMyBusinessLink" })
+  googleMyBusinessLink?: AccountGoogleMyBusinessLink;
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=kind" })
+  kind?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labelIds" })
+  labelIds?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=sellerId" })
+  sellerId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=users", elemType: AccountUser })
+  users?: AccountUser[];
+
+  @SpeakeasyMetadata({ data: "json, name=websiteUrl" })
+  websiteUrl?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=youtubeChannelLinks", elemType: AccountYouTubeChannelLink })
+  youtubeChannelLinks?: AccountYouTubeChannelLink[];
+}
 
 
 // Account
@@ -13,51 +66,51 @@ import { AccountYouTubeChannelLink } from "./accountyoutubechannellink";
  * Account data. After the creation of a new account it may take a few minutes before it's fully operational. The methods delete, insert, and update require the admin role.
 **/
 export class Account extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountManagement" })
+  @SpeakeasyMetadata({ data: "json, name=accountManagement" })
   accountManagement?: string;
 
-  @Metadata({ data: "json, name=adsLinks", elemType: shared.AccountAdsLink })
+  @SpeakeasyMetadata({ data: "json, name=adsLinks", elemType: AccountAdsLink })
   adsLinks?: AccountAdsLink[];
 
-  @Metadata({ data: "json, name=adultContent" })
+  @SpeakeasyMetadata({ data: "json, name=adultContent" })
   adultContent?: boolean;
 
-  @Metadata({ data: "json, name=automaticImprovements" })
+  @SpeakeasyMetadata({ data: "json, name=automaticImprovements" })
   automaticImprovements?: AccountAutomaticImprovements;
 
-  @Metadata({ data: "json, name=automaticLabelIds" })
+  @SpeakeasyMetadata({ data: "json, name=automaticLabelIds" })
   automaticLabelIds?: string[];
 
-  @Metadata({ data: "json, name=businessInformation" })
+  @SpeakeasyMetadata({ data: "json, name=businessInformation" })
   businessInformation?: AccountBusinessInformation;
 
-  @Metadata({ data: "json, name=cssId" })
+  @SpeakeasyMetadata({ data: "json, name=cssId" })
   cssId?: string;
 
-  @Metadata({ data: "json, name=googleMyBusinessLink" })
+  @SpeakeasyMetadata({ data: "json, name=googleMyBusinessLink" })
   googleMyBusinessLink?: AccountGoogleMyBusinessLink;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=labelIds" })
+  @SpeakeasyMetadata({ data: "json, name=labelIds" })
   labelIds?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=sellerId" })
+  @SpeakeasyMetadata({ data: "json, name=sellerId" })
   sellerId?: string;
 
-  @Metadata({ data: "json, name=users", elemType: shared.AccountUser })
+  @SpeakeasyMetadata({ data: "json, name=users", elemType: AccountUser })
   users?: AccountUser[];
 
-  @Metadata({ data: "json, name=websiteUrl" })
+  @SpeakeasyMetadata({ data: "json, name=websiteUrl" })
   websiteUrl?: string;
 
-  @Metadata({ data: "json, name=youtubeChannelLinks", elemType: shared.AccountYouTubeChannelLink })
+  @SpeakeasyMetadata({ data: "json, name=youtubeChannelLinks", elemType: AccountYouTubeChannelLink })
   youtubeChannelLinks?: AccountYouTubeChannelLink[];
 }

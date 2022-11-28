@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserFileKeySetRequest } from "./userfilekeysetrequest";
+
 
 
 // UserFileKeySetBatchRequest
@@ -8,6 +8,6 @@ import { UserFileKeySetRequest } from "./userfilekeysetrequest";
  * List of request models for setting a user file key(s)
 **/
 export class UserFileKeySetBatchRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.UserFileKeySetRequest })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: UserFileKeySetRequest })
   items: UserFileKeySetRequest[];
 }

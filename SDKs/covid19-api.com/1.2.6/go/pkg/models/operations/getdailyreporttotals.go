@@ -22,10 +22,6 @@ type GetDailyReportTotalsQueryParams struct {
 	Format     *GetDailyReportTotalsFormatEnum     `queryParam:"style=form,explode=true,name=format"`
 }
 
-type GetDailyReportTotalsRequest struct {
-	QueryParams GetDailyReportTotalsQueryParams
-}
-
 type GetDailyReportTotals200ApplicationJSON struct {
 	Active    *int64  `json:"active,omitempty"`
 	Confirmed *int64  `json:"confirmed,omitempty"`
@@ -33,6 +29,10 @@ type GetDailyReportTotals200ApplicationJSON struct {
 	Date      *string `json:"date,omitempty"`
 	Deaths    *int64  `json:"deaths,omitempty"`
 	Recovered *int64  `json:"recovered,omitempty"`
+}
+
+type GetDailyReportTotalsRequest struct {
+	QueryParams GetDailyReportTotalsQueryParams
 }
 
 type GetDailyReportTotalsResponse struct {

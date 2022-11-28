@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class PullRequestMergeResult:
-    merged: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merged' }})
-    message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
-    sha: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sha' }})
+    r"""PullRequestMergeResult
+    Pull Request Merge Result
+    """
+    
+    merged: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('merged') }})
+    message: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
+    sha: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('sha') }})
     

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DeviceStateAccountStateEnum {
-    Enabled = "enabled"
-,    Disabled = "disabled"
+    Enabled = "enabled",
+    Disabled = "disabled"
 }
 
 
@@ -11,6 +12,6 @@ export enum DeviceStateAccountStateEnum {
  * The state of a user's device, as accessed by the getState and setState methods on device resources.
 **/
 export class DeviceState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountState" })
+  @SpeakeasyMetadata({ data: "json, name=accountState" })
   accountState?: DeviceStateAccountStateEnum;
 }

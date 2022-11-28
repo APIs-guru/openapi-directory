@@ -8,19 +8,8 @@ const (
 	GoogleCloudRunV2TaskExecutionEnvironmentEnumExecutionEnvironmentGen2        GoogleCloudRunV2TaskExecutionEnvironmentEnum = "EXECUTION_ENVIRONMENT_GEN2"
 )
 
-type GoogleCloudRunV2TaskLaunchStageEnum string
-
-const (
-	GoogleCloudRunV2TaskLaunchStageEnumLaunchStageUnspecified GoogleCloudRunV2TaskLaunchStageEnum = "LAUNCH_STAGE_UNSPECIFIED"
-	GoogleCloudRunV2TaskLaunchStageEnumUnimplemented          GoogleCloudRunV2TaskLaunchStageEnum = "UNIMPLEMENTED"
-	GoogleCloudRunV2TaskLaunchStageEnumPrelaunch              GoogleCloudRunV2TaskLaunchStageEnum = "PRELAUNCH"
-	GoogleCloudRunV2TaskLaunchStageEnumEarlyAccess            GoogleCloudRunV2TaskLaunchStageEnum = "EARLY_ACCESS"
-	GoogleCloudRunV2TaskLaunchStageEnumAlpha                  GoogleCloudRunV2TaskLaunchStageEnum = "ALPHA"
-	GoogleCloudRunV2TaskLaunchStageEnumBeta                   GoogleCloudRunV2TaskLaunchStageEnum = "BETA"
-	GoogleCloudRunV2TaskLaunchStageEnumGa                     GoogleCloudRunV2TaskLaunchStageEnum = "GA"
-	GoogleCloudRunV2TaskLaunchStageEnumDeprecated             GoogleCloudRunV2TaskLaunchStageEnum = "DEPRECATED"
-)
-
+// GoogleCloudRunV2Task
+// Task represents a single run of a container to completion.
 type GoogleCloudRunV2Task struct {
 	Annotations          map[string]string                             `json:"annotations,omitempty"`
 	CompletionTime       *string                                       `json:"completionTime,omitempty"`
@@ -38,7 +27,6 @@ type GoogleCloudRunV2Task struct {
 	Job                  *string                                       `json:"job,omitempty"`
 	Labels               map[string]string                             `json:"labels,omitempty"`
 	LastAttemptResult    *GoogleCloudRunV2TaskAttemptResult            `json:"lastAttemptResult,omitempty"`
-	LaunchStage          *GoogleCloudRunV2TaskLaunchStageEnum          `json:"launchStage,omitempty"`
 	MaxRetries           *int32                                        `json:"maxRetries,omitempty"`
 	Name                 *string                                       `json:"name,omitempty"`
 	ObservedGeneration   *string                                       `json:"observedGeneration,omitempty"`

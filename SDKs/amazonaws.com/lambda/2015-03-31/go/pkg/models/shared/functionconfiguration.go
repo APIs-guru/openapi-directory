@@ -1,5 +1,7 @@
 package shared
 
+// FunctionConfiguration
+// Details about a function's configuration.
 type FunctionConfiguration struct {
 	CodeSha256                 *string                         `json:"CodeSha256,omitempty"`
 	CodeSize                   *int64                          `json:"CodeSize,omitempty"`

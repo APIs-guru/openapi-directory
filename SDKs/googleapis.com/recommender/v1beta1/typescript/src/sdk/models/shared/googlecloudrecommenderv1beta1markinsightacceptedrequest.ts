@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRecommenderV1beta1MarkInsightAcceptedRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for the `MarkInsightAccepted` method.
 **/
 export class GoogleCloudRecommenderV1beta1MarkInsightAcceptedRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=stateMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=stateMetadata" })
   stateMetadata?: Map<string, string>;
 }

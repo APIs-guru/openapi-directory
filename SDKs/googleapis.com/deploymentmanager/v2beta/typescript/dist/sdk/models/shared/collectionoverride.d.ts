@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Options } from "./options";
 /**
  * CollectionOverride allows resource handling overrides for specific resources within a BaseType

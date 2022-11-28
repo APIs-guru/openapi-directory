@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var SymptomSymptomTypeEnum;
 (function (SymptomSymptomTypeEnum) {
     SymptomSymptomTypeEnum["SymptomTypeUnspecified"] = "SYMPTOM_TYPE_UNSPECIFIED";
@@ -43,19 +43,19 @@ var Symptom = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Symptom.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=details" }),
+        SpeakeasyMetadata({ data: "json, name=details" }),
         __metadata("design:type", String)
     ], Symptom.prototype, "details", void 0);
     __decorate([
-        Metadata({ data: "json, name=symptomType" }),
+        SpeakeasyMetadata({ data: "json, name=symptomType" }),
         __metadata("design:type", String)
     ], Symptom.prototype, "symptomType", void 0);
     __decorate([
-        Metadata({ data: "json, name=workerId" }),
+        SpeakeasyMetadata({ data: "json, name=workerId" }),
         __metadata("design:type", String)
     ], Symptom.prototype, "workerId", void 0);
     return Symptom;

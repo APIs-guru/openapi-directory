@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // JourneyLimits
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies limits on the messages that a journey can send and the number of times participants can enter a journey.
 **/
 export class JourneyLimits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DailyCap" })
+  @SpeakeasyMetadata({ data: "json, name=DailyCap" })
   dailyCap?: number;
 
-  @Metadata({ data: "json, name=EndpointReentryCap" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointReentryCap" })
   endpointReentryCap?: number;
 
-  @Metadata({ data: "json, name=EndpointReentryInterval" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointReentryInterval" })
   endpointReentryInterval?: string;
 
-  @Metadata({ data: "json, name=MessagesPerSecond" })
+  @SpeakeasyMetadata({ data: "json, name=MessagesPerSecond" })
   messagesPerSecond?: number;
 }

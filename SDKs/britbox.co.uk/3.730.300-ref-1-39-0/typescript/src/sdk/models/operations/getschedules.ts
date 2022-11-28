@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSchedulesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=channels" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=channels" })
   channels: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date" })
   date: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=device" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=device" })
   device?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=duration" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=duration" })
   duration: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=ff" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=ff" })
   ff?: shared.FeatureFlagsEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=hour" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=hour" })
   hour: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=intersect" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=intersect" })
   intersect?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=segments" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=segments" })
   segments?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sub" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sub" })
   sub?: string;
 }
 
 
 export class GetSchedulesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSchedulesQueryParams;
 }
 
 
 export class GetSchedulesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.ItemScheduleList })
+  @SpeakeasyMetadata({ elemType: shared.ItemScheduleList })
   itemScheduleLists?: shared.ItemScheduleList[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceError?: shared.ServiceError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

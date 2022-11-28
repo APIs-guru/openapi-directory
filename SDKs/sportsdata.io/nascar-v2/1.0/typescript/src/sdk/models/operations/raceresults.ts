@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum RaceResultsFormatEnum {
-    Xml = "xml"
-,    Json = "json"
+    Xml = "xml",
+    Json = "json"
 }
 
 
 export class RaceResultsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: RaceResultsFormatEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=raceid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=raceid" })
   raceid: string;
 }
 
 
 export class RaceResultsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RaceResultsPathParams;
 }
 
 
 export class RaceResultsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   raceResult?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

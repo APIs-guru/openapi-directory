@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SessionMappingSummary } from "./sessionmappingsummary";
 
 
+
 export class ListStudioSessionMappingsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=SessionMappings", elemType: shared.SessionMappingSummary })
+  @SpeakeasyMetadata({ data: "json, name=SessionMappings", elemType: SessionMappingSummary })
   sessionMappings?: SessionMappingSummary[];
 }

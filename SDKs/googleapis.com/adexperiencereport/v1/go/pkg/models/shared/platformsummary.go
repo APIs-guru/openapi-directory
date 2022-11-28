@@ -28,6 +28,8 @@ const (
 	PlatformSummaryRegionEnumRegionC       PlatformSummaryRegionEnum = "REGION_C"
 )
 
+// PlatformSummary
+// A site's Ad Experience Report summary on a single platform.
 type PlatformSummary struct {
 	BetterAdsStatus *PlatformSummaryBetterAdsStatusEnum `json:"betterAdsStatus,omitempty"`
 	EnforcementTime *string                             `json:"enforcementTime,omitempty"`

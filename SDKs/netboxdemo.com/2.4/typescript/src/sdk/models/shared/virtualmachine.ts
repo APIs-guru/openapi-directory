@@ -1,81 +1,80 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NestedCluster } from "./nestedcluster";
 import { NestedPlatform } from "./nestedplatform";
-import { VirtualMachineIpAddress } from "./virtualmachineipaddress";
-import { VirtualMachineIpAddress } from "./virtualmachineipaddress";
 import { VirtualMachineIpAddress } from "./virtualmachineipaddress";
 import { NestedDeviceRole } from "./nesteddevicerole";
 import { NestedSite } from "./nestedsite";
 import { NestedTenant } from "./nestedtenant";
 
 
+
 export class VirtualMachineStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: number;
 }
 
 
 export class VirtualMachine extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cluster" })
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
   cluster: NestedCluster;
 
-  @Metadata({ data: "json, name=comments" })
+  @SpeakeasyMetadata({ data: "json, name=comments" })
   comments?: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=custom_fields" })
+  @SpeakeasyMetadata({ data: "json, name=custom_fields" })
   customFields?: Map<string, any>;
 
-  @Metadata({ data: "json, name=disk" })
+  @SpeakeasyMetadata({ data: "json, name=disk" })
   disk?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=last_updated" })
+  @SpeakeasyMetadata({ data: "json, name=last_updated" })
   lastUpdated?: Date;
 
-  @Metadata({ data: "json, name=local_context_data" })
+  @SpeakeasyMetadata({ data: "json, name=local_context_data" })
   localContextData?: string;
 
-  @Metadata({ data: "json, name=memory" })
+  @SpeakeasyMetadata({ data: "json, name=memory" })
   memory?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=platform" })
+  @SpeakeasyMetadata({ data: "json, name=platform" })
   platform?: NestedPlatform;
 
-  @Metadata({ data: "json, name=primary_ip" })
+  @SpeakeasyMetadata({ data: "json, name=primary_ip" })
   primaryIp?: VirtualMachineIpAddress;
 
-  @Metadata({ data: "json, name=primary_ip4" })
+  @SpeakeasyMetadata({ data: "json, name=primary_ip4" })
   primaryIp4?: VirtualMachineIpAddress;
 
-  @Metadata({ data: "json, name=primary_ip6" })
+  @SpeakeasyMetadata({ data: "json, name=primary_ip6" })
   primaryIp6?: VirtualMachineIpAddress;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: NestedDeviceRole;
 
-  @Metadata({ data: "json, name=site" })
+  @SpeakeasyMetadata({ data: "json, name=site" })
   site?: NestedSite;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: VirtualMachineStatus;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=tenant" })
+  @SpeakeasyMetadata({ data: "json, name=tenant" })
   tenant?: NestedTenant;
 
-  @Metadata({ data: "json, name=vcpus" })
+  @SpeakeasyMetadata({ data: "json, name=vcpus" })
   vcpus?: number;
 }

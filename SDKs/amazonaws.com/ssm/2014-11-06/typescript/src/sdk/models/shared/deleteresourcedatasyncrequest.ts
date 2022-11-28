@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteResourceDataSyncRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SyncName" })
+  @SpeakeasyMetadata({ data: "json, name=SyncName" })
   syncName: string;
 
-  @Metadata({ data: "json, name=SyncType" })
+  @SpeakeasyMetadata({ data: "json, name=SyncType" })
   syncType?: string;
 }

@@ -19,11 +19,10 @@ const (
 	WritableRearPortTypeEnumSt                    WritableRearPortTypeEnum = "st"
 )
 
-type WritableRearPort struct {
-	Cable       *NestedCable             `json:"cable,omitempty"`
+type WritableRearPortInput struct {
+	Cable       *NestedCableInput        `json:"cable,omitempty"`
 	Description *string                  `json:"description,omitempty"`
 	Device      int64                    `json:"device"`
-	ID          *int64                   `json:"id,omitempty"`
 	Name        string                   `json:"name"`
 	Positions   *int64                   `json:"positions,omitempty"`
 	Tags        []string                 `json:"tags,omitempty"`

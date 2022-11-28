@@ -15,6 +15,8 @@ const (
 	ParameterMetadataParamTypeEnumPubsubSubscription ParameterMetadataParamTypeEnum = "PUBSUB_SUBSCRIPTION"
 )
 
+// ParameterMetadata
+// Metadata for a specific parameter.
 type ParameterMetadata struct {
 	CustomMetadata map[string]string               `json:"customMetadata,omitempty"`
 	HelpText       *string                         `json:"helpText,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Did } from "./did";
 export declare class UserExtension extends SpeakeasyBase {
     dids?: Did[];

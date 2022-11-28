@@ -1,5 +1,7 @@
 package shared
 
+// TableCell
+// The contents and style of a cell in a Table.
 type TableCell struct {
 	Content                        []StructuralElement                `json:"content,omitempty"`
 	EndIndex                       *int32                             `json:"endIndex,omitempty"`

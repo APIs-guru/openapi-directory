@@ -9,22 +9,9 @@ type GetManagedCredentialsQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetManagedCredentialsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetManagedCredentialsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetManagedCredentialsSecurity struct {
-	Option1 *GetManagedCredentialsSecurityOption1 `security:"option"`
-	Option2 *GetManagedCredentialsSecurityOption2 `security:"option"`
-}
-
-type GetManagedCredentialsRequest struct {
-	QueryParams GetManagedCredentialsQueryParams
-	Security    GetManagedCredentialsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetManagedCredentials200ApplicationJSON struct {
@@ -36,6 +23,11 @@ type GetManagedCredentials200ApplicationJSON struct {
 
 type GetManagedCredentialsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetManagedCredentialsRequest struct {
+	QueryParams GetManagedCredentialsQueryParams
+	Security    GetManagedCredentialsSecurity
 }
 
 type GetManagedCredentialsResponse struct {

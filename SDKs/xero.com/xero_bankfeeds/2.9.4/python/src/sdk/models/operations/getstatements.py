@@ -11,26 +11,26 @@ class GetStatementsQueryParams:
 
 @dataclass
 class GetStatementsHeaders:
+    xero_tenant_id: str = field(metadata={'header': { 'field_name': 'Xero-Tenant-Id', 'style': 'simple', 'explode': False }})
     xero_application_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Xero-Application-Id', 'style': 'simple', 'explode': False }})
-    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'Xero-Tenant-Id', 'style': 'simple', 'explode': False }})
     xero_user_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Xero-User-Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetStatementsSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetStatementsRequest:
-    query_params: GetStatementsQueryParams = field(default=None)
-    headers: GetStatementsHeaders = field(default=None)
-    security: GetStatementsSecurity = field(default=None)
+    headers: GetStatementsHeaders = field()
+    query_params: GetStatementsQueryParams = field()
+    security: GetStatementsSecurity = field()
     
 
 @dataclass
 class GetStatementsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     statements: Optional[shared.Statements] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LaunchPermissionConfiguration
 /**
  * Describes the configuration for a launch permission. The launch permission modification request is sent to the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html">Amazon EC2 ModifyImageAttribute</a> API on behalf of the user for each Region they have selected to distribute the AMI. To make an AMI public, set the launch permission authorized accounts to <code>all</code>. See the examples for making an AMI public at <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html">Amazon EC2 ModifyImageAttribute</a>.
@@ -33,11 +33,11 @@ var LaunchPermissionConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=userGroups" }),
+        SpeakeasyMetadata({ data: "json, name=userGroups" }),
         __metadata("design:type", Array)
     ], LaunchPermissionConfiguration.prototype, "userGroups", void 0);
     __decorate([
-        Metadata({ data: "json, name=userIds" }),
+        SpeakeasyMetadata({ data: "json, name=userIds" }),
         __metadata("design:type", Array)
     ], LaunchPermissionConfiguration.prototype, "userIds", void 0);
     return LaunchPermissionConfiguration;

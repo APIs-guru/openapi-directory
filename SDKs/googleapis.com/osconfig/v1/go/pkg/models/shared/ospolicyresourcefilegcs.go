@@ -1,5 +1,7 @@
 package shared
 
+// OsPolicyResourceFileGcs
+// Specifies a file available as a Cloud Storage Object.
 type OsPolicyResourceFileGcs struct {
 	Bucket     *string `json:"bucket,omitempty"`
 	Generation *string `json:"generation,omitempty"`

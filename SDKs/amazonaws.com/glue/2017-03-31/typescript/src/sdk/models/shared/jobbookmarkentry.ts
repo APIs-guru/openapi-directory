@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // JobBookmarkEntry
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines a point that a job can resume processing.
 **/
 export class JobBookmarkEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Attempt" })
+  @SpeakeasyMetadata({ data: "json, name=Attempt" })
   attempt?: number;
 
-  @Metadata({ data: "json, name=JobBookmark" })
+  @SpeakeasyMetadata({ data: "json, name=JobBookmark" })
   jobBookmark?: string;
 
-  @Metadata({ data: "json, name=JobName" })
+  @SpeakeasyMetadata({ data: "json, name=JobName" })
   jobName?: string;
 
-  @Metadata({ data: "json, name=PreviousRunId" })
+  @SpeakeasyMetadata({ data: "json, name=PreviousRunId" })
   previousRunId?: string;
 
-  @Metadata({ data: "json, name=Run" })
+  @SpeakeasyMetadata({ data: "json, name=Run" })
   run?: number;
 
-  @Metadata({ data: "json, name=RunId" })
+  @SpeakeasyMetadata({ data: "json, name=RunId" })
   runId?: string;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: number;
 }

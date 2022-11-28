@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApigatewayApiConfigFile } from "./apigatewayapiconfigfile";
-import { ApigatewayApiConfigFile } from "./apigatewayapiconfigfile";
+
 
 
 // ApigatewayApiConfigGrpcServiceDefinition
@@ -9,9 +8,9 @@ import { ApigatewayApiConfigFile } from "./apigatewayapiconfigfile";
  * A gRPC service definition.
 **/
 export class ApigatewayApiConfigGrpcServiceDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileDescriptorSet" })
+  @SpeakeasyMetadata({ data: "json, name=fileDescriptorSet" })
   fileDescriptorSet?: ApigatewayApiConfigFile;
 
-  @Metadata({ data: "json, name=source", elemType: shared.ApigatewayApiConfigFile })
+  @SpeakeasyMetadata({ data: "json, name=source", elemType: ApigatewayApiConfigFile })
   source?: ApigatewayApiConfigFile[];
 }

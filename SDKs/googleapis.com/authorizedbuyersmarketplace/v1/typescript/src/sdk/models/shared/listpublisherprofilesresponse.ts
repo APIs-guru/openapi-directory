@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PublisherProfile } from "./publisherprofile";
+
 
 
 // ListPublisherProfilesResponse
@@ -8,9 +8,9 @@ import { PublisherProfile } from "./publisherprofile";
  * Response message for profiles visible to the buyer.
 **/
 export class ListPublisherProfilesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=publisherProfiles", elemType: shared.PublisherProfile })
+  @SpeakeasyMetadata({ data: "json, name=publisherProfiles", elemType: PublisherProfile })
   publisherProfiles?: PublisherProfile[];
 }

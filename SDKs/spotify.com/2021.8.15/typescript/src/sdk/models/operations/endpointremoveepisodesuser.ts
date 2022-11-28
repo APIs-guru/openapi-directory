@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EndpointRemoveEpisodesUserQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ids" })
   ids: string;
 }
 
 
 export class EndpointRemoveEpisodesUserHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Content-Type" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Content-Type" })
   contentType?: string;
 }
 
 
 export class EndpointRemoveEpisodesUserRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ids" })
+  @SpeakeasyMetadata({ data: "json, name=ids" })
   ids?: string[];
 }
 
 
 export class EndpointRemoveEpisodesUserSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   spotifyAuth: shared.SchemeSpotifyAuth;
 }
 
 
 export class EndpointRemoveEpisodesUserRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: EndpointRemoveEpisodesUserQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: EndpointRemoveEpisodesUserHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: EndpointRemoveEpisodesUserRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: EndpointRemoveEpisodesUserSecurity;
 }
 
 
 export class EndpointRemoveEpisodesUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseObject?: shared.ErrorResponseObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

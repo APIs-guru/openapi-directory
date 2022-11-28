@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -17,21 +21,21 @@ class TerminateJobHeaders:
 @dataclass_json
 @dataclass
 class TerminateJobRequestBody:
-    job_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobId' }})
-    reason: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
+    job_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobId') }})
+    reason: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('reason') }})
     
 
 @dataclass
 class TerminateJobRequest:
-    headers: TerminateJobHeaders = field(default=None)
-    request: TerminateJobRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: TerminateJobHeaders = field()
+    request: TerminateJobRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class TerminateJobResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     terminate_job_response: Optional[dict[str, Any]] = field(default=None)
     

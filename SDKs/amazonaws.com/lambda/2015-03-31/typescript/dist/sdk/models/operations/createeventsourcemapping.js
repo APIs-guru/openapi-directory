@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateEventSourceMappingHeaders = /** @class */ (function (_super) {
     __extends(CreateEventSourceMappingHeaders, _super);
@@ -30,31 +30,31 @@ var CreateEventSourceMappingHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateEventSourceMappingHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateEventSourceMappingHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateEventSourceMappingHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateEventSourceMappingHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateEventSourceMappingHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateEventSourceMappingHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateEventSourceMappingHeaders.prototype, "xAmzSignedHeaders", void 0);
     return CreateEventSourceMappingHeaders;
@@ -70,11 +70,11 @@ var CreateEventSourceMappingRequestBodyDestinationConfig = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=OnFailure" }),
+        SpeakeasyMetadata({ data: "json, name=OnFailure" }),
         __metadata("design:type", shared.OnFailure)
     ], CreateEventSourceMappingRequestBodyDestinationConfig.prototype, "onFailure", void 0);
     __decorate([
-        Metadata({ data: "json, name=OnSuccess" }),
+        SpeakeasyMetadata({ data: "json, name=OnSuccess" }),
         __metadata("design:type", shared.OnSuccess)
     ], CreateEventSourceMappingRequestBodyDestinationConfig.prototype, "onSuccess", void 0);
     return CreateEventSourceMappingRequestBodyDestinationConfig;
@@ -90,7 +90,7 @@ var CreateEventSourceMappingRequestBodySelfManagedEventSource = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Endpoints" }),
+        SpeakeasyMetadata({ data: "json, name=Endpoints" }),
         __metadata("design:type", Map)
     ], CreateEventSourceMappingRequestBodySelfManagedEventSource.prototype, "endpoints", void 0);
     return CreateEventSourceMappingRequestBodySelfManagedEventSource;
@@ -108,75 +108,75 @@ var CreateEventSourceMappingRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BatchSize" }),
+        SpeakeasyMetadata({ data: "json, name=BatchSize" }),
         __metadata("design:type", Number)
     ], CreateEventSourceMappingRequestBody.prototype, "batchSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=BisectBatchOnFunctionError" }),
+        SpeakeasyMetadata({ data: "json, name=BisectBatchOnFunctionError" }),
         __metadata("design:type", Boolean)
     ], CreateEventSourceMappingRequestBody.prototype, "bisectBatchOnFunctionError", void 0);
     __decorate([
-        Metadata({ data: "json, name=DestinationConfig" }),
+        SpeakeasyMetadata({ data: "json, name=DestinationConfig" }),
         __metadata("design:type", CreateEventSourceMappingRequestBodyDestinationConfig)
     ], CreateEventSourceMappingRequestBody.prototype, "destinationConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=Enabled" }),
+        SpeakeasyMetadata({ data: "json, name=Enabled" }),
         __metadata("design:type", Boolean)
     ], CreateEventSourceMappingRequestBody.prototype, "enabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventSourceArn" }),
+        SpeakeasyMetadata({ data: "json, name=EventSourceArn" }),
         __metadata("design:type", String)
     ], CreateEventSourceMappingRequestBody.prototype, "eventSourceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=FunctionName" }),
+        SpeakeasyMetadata({ data: "json, name=FunctionName" }),
         __metadata("design:type", String)
     ], CreateEventSourceMappingRequestBody.prototype, "functionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=FunctionResponseTypes" }),
+        SpeakeasyMetadata({ data: "json, name=FunctionResponseTypes" }),
         __metadata("design:type", Array)
     ], CreateEventSourceMappingRequestBody.prototype, "functionResponseTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaximumBatchingWindowInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=MaximumBatchingWindowInSeconds" }),
         __metadata("design:type", Number)
     ], CreateEventSourceMappingRequestBody.prototype, "maximumBatchingWindowInSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaximumRecordAgeInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=MaximumRecordAgeInSeconds" }),
         __metadata("design:type", Number)
     ], CreateEventSourceMappingRequestBody.prototype, "maximumRecordAgeInSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaximumRetryAttempts" }),
+        SpeakeasyMetadata({ data: "json, name=MaximumRetryAttempts" }),
         __metadata("design:type", Number)
     ], CreateEventSourceMappingRequestBody.prototype, "maximumRetryAttempts", void 0);
     __decorate([
-        Metadata({ data: "json, name=ParallelizationFactor" }),
+        SpeakeasyMetadata({ data: "json, name=ParallelizationFactor" }),
         __metadata("design:type", Number)
     ], CreateEventSourceMappingRequestBody.prototype, "parallelizationFactor", void 0);
     __decorate([
-        Metadata({ data: "json, name=Queues" }),
+        SpeakeasyMetadata({ data: "json, name=Queues" }),
         __metadata("design:type", Array)
     ], CreateEventSourceMappingRequestBody.prototype, "queues", void 0);
     __decorate([
-        Metadata({ data: "json, name=SelfManagedEventSource" }),
+        SpeakeasyMetadata({ data: "json, name=SelfManagedEventSource" }),
         __metadata("design:type", CreateEventSourceMappingRequestBodySelfManagedEventSource)
     ], CreateEventSourceMappingRequestBody.prototype, "selfManagedEventSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceAccessConfigurations", elemType: shared.SourceAccessConfiguration }),
+        SpeakeasyMetadata({ data: "json, name=SourceAccessConfigurations", elemType: shared.SourceAccessConfiguration }),
         __metadata("design:type", Array)
     ], CreateEventSourceMappingRequestBody.prototype, "sourceAccessConfigurations", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartingPosition" }),
+        SpeakeasyMetadata({ data: "json, name=StartingPosition" }),
         __metadata("design:type", String)
     ], CreateEventSourceMappingRequestBody.prototype, "startingPosition", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartingPositionTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=StartingPositionTimestamp" }),
         __metadata("design:type", Date)
     ], CreateEventSourceMappingRequestBody.prototype, "startingPositionTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=Topics" }),
+        SpeakeasyMetadata({ data: "json, name=Topics" }),
         __metadata("design:type", Array)
     ], CreateEventSourceMappingRequestBody.prototype, "topics", void 0);
     __decorate([
-        Metadata({ data: "json, name=TumblingWindowInSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=TumblingWindowInSeconds" }),
         __metadata("design:type", Number)
     ], CreateEventSourceMappingRequestBody.prototype, "tumblingWindowInSeconds", void 0);
     return CreateEventSourceMappingRequestBody;
@@ -188,11 +188,11 @@ var CreateEventSourceMappingRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateEventSourceMappingHeaders)
     ], CreateEventSourceMappingRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateEventSourceMappingRequestBody)
     ], CreateEventSourceMappingRequest.prototype, "request", void 0);
     return CreateEventSourceMappingRequest;
@@ -204,35 +204,35 @@ var CreateEventSourceMappingResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateEventSourceMappingResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.EventSourceMappingConfiguration)
     ], CreateEventSourceMappingResponse.prototype, "eventSourceMappingConfiguration", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateEventSourceMappingResponse.prototype, "invalidParameterValueException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateEventSourceMappingResponse.prototype, "resourceConflictException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateEventSourceMappingResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateEventSourceMappingResponse.prototype, "serviceException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateEventSourceMappingResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateEventSourceMappingResponse.prototype, "tooManyRequestsException", void 0);
     return CreateEventSourceMappingResponse;

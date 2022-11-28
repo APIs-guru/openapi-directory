@@ -10,6 +10,8 @@ const (
 	GoogleCloudDocumentaiV1HumanReviewStatusStateEnumError            GoogleCloudDocumentaiV1HumanReviewStatusStateEnum = "ERROR"
 )
 
+// GoogleCloudDocumentaiV1HumanReviewStatus
+// The status of human review on a processed document.
 type GoogleCloudDocumentaiV1HumanReviewStatus struct {
 	HumanReviewOperation *string                                            `json:"humanReviewOperation,omitempty"`
 	State                *GoogleCloudDocumentaiV1HumanReviewStatusStateEnum `json:"state,omitempty"`

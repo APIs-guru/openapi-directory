@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  *  Identifies a Kinesis data stream as the streaming source. You provide the stream's Amazon Resource Name (ARN).
 **/

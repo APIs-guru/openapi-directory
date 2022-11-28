@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RequestDeletedNodesSummaryPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=node_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=node_id" })
   nodeId: number;
 }
 
 
 export class RequestDeletedNodesSummaryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 }
 
 
 export class RequestDeletedNodesSummaryHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
   xSdsAuthToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Date-Format" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Date-Format" })
   xSdsDateFormat?: any;
 }
 
 
 export class RequestDeletedNodesSummaryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RequestDeletedNodesSummaryPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RequestDeletedNodesSummaryQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: RequestDeletedNodesSummaryHeaders;
 }
 
 
 export class RequestDeletedNodesSummaryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deletedNodeSummaryList?: shared.DeletedNodeSummaryList;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

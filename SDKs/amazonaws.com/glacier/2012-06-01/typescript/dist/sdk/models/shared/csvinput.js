@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileHeaderInfoEnum } from "./fileheaderinfoenum";
 // CsvInput
 /**
@@ -34,27 +34,27 @@ var CsvInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Comments" }),
+        SpeakeasyMetadata({ data: "json, name=Comments" }),
         __metadata("design:type", String)
     ], CsvInput.prototype, "comments", void 0);
     __decorate([
-        Metadata({ data: "json, name=FieldDelimiter" }),
+        SpeakeasyMetadata({ data: "json, name=FieldDelimiter" }),
         __metadata("design:type", String)
     ], CsvInput.prototype, "fieldDelimiter", void 0);
     __decorate([
-        Metadata({ data: "json, name=FileHeaderInfo" }),
+        SpeakeasyMetadata({ data: "json, name=FileHeaderInfo" }),
         __metadata("design:type", String)
     ], CsvInput.prototype, "fileHeaderInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=QuoteCharacter" }),
+        SpeakeasyMetadata({ data: "json, name=QuoteCharacter" }),
         __metadata("design:type", String)
     ], CsvInput.prototype, "quoteCharacter", void 0);
     __decorate([
-        Metadata({ data: "json, name=QuoteEscapeCharacter" }),
+        SpeakeasyMetadata({ data: "json, name=QuoteEscapeCharacter" }),
         __metadata("design:type", String)
     ], CsvInput.prototype, "quoteEscapeCharacter", void 0);
     __decorate([
-        Metadata({ data: "json, name=RecordDelimiter" }),
+        SpeakeasyMetadata({ data: "json, name=RecordDelimiter" }),
         __metadata("design:type", String)
     ], CsvInput.prototype, "recordDelimiter", void 0);
     return CsvInput;

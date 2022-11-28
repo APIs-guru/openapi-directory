@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ResourceTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    GcpProject = "GCP_PROJECT"
-,    GcpResource = "GCP_RESOURCE"
-,    GcpSecretmanagerSecret = "GCP_SECRETMANAGER_SECRET"
-,    GcpSecretmanagerSecretVersion = "GCP_SECRETMANAGER_SECRET_VERSION"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    GcpProject = "GCP_PROJECT",
+    GcpResource = "GCP_RESOURCE",
+    GcpSecretmanagerSecret = "GCP_SECRETMANAGER_SECRET",
+    GcpSecretmanagerSecretVersion = "GCP_SECRETMANAGER_SECRET_VERSION"
 }
 
 
@@ -14,9 +15,9 @@ export enum ResourceTypeEnum {
  * Resource definition
 **/
 export class Resource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pathTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=pathTemplate" })
   pathTemplate?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ResourceTypeEnum;
 }

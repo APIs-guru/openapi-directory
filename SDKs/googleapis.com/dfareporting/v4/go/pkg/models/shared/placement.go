@@ -73,6 +73,8 @@ const (
 	PlacementVpaidAdapterChoiceEnumBoth    PlacementVpaidAdapterChoiceEnum = "BOTH"
 )
 
+// Placement
+// Contains properties of a placement.
 type Placement struct {
 	AccountID                      *string                          `json:"accountId,omitempty"`
 	ActiveStatus                   *PlacementActiveStatusEnum       `json:"activeStatus,omitempty"`

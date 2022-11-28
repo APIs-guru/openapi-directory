@@ -1,0 +1,8 @@
+package shared
+
+type LaunchTemplateInstanceMetadataProtocolIpv6Enum string
+
+const (
+	LaunchTemplateInstanceMetadataProtocolIpv6EnumDisabled LaunchTemplateInstanceMetadataProtocolIpv6Enum = "disabled"
+	LaunchTemplateInstanceMetadataProtocolIpv6EnumEnabled  LaunchTemplateInstanceMetadataProtocolIpv6Enum = "enabled"
+)

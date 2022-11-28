@@ -19,6 +19,8 @@ const (
 	ImagePublicTypeEnumAutomatic ImagePublicTypeEnum = "automatic"
 )
 
+// ImagePublic
+// Public Image object
 type ImagePublic struct {
 	Created     *time.Time             `json:"created,omitempty"`
 	CreatedBy   *string                `json:"created_by,omitempty"`

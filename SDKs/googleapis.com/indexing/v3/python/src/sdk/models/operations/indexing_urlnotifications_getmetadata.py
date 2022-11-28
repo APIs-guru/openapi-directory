@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -21,19 +22,19 @@ class IndexingURLNotificationsGetMetadataQueryParams:
 
 @dataclass
 class IndexingURLNotificationsGetMetadataSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IndexingURLNotificationsGetMetadataRequest:
-    query_params: IndexingURLNotificationsGetMetadataQueryParams = field(default=None)
-    security: IndexingURLNotificationsGetMetadataSecurity = field(default=None)
+    query_params: IndexingURLNotificationsGetMetadataQueryParams = field()
+    security: IndexingURLNotificationsGetMetadataSecurity = field()
     
 
 @dataclass
 class IndexingURLNotificationsGetMetadataResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     url_notification_metadata: Optional[shared.URLNotificationMetadata] = field(default=None)
     

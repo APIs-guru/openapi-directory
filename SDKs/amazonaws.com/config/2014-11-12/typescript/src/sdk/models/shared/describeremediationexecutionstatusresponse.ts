@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RemediationExecutionStatus } from "./remediationexecutionstatus";
 
 
+
 export class DescribeRemediationExecutionStatusResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=RemediationExecutionStatuses", elemType: shared.RemediationExecutionStatus })
+  @SpeakeasyMetadata({ data: "json, name=RemediationExecutionStatuses", elemType: RemediationExecutionStatus })
   remediationExecutionStatuses?: RemediationExecutionStatus[];
 }

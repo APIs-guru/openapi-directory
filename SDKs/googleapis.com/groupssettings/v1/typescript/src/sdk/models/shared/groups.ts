@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Groups
@@ -6,189 +7,189 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * JSON template for Group resource
 **/
 export class Groups extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowExternalMembers" })
+  @SpeakeasyMetadata({ data: "json, name=allowExternalMembers" })
   allowExternalMembers?: string;
 
-  @Metadata({ data: "json, name=allowGoogleCommunication" })
+  @SpeakeasyMetadata({ data: "json, name=allowGoogleCommunication" })
   allowGoogleCommunication?: string;
 
-  @Metadata({ data: "json, name=allowWebPosting" })
+  @SpeakeasyMetadata({ data: "json, name=allowWebPosting" })
   allowWebPosting?: string;
 
-  @Metadata({ data: "json, name=archiveOnly" })
+  @SpeakeasyMetadata({ data: "json, name=archiveOnly" })
   archiveOnly?: string;
 
-  @Metadata({ data: "json, name=customFooterText" })
+  @SpeakeasyMetadata({ data: "json, name=customFooterText" })
   customFooterText?: string;
 
-  @Metadata({ data: "json, name=customReplyTo" })
+  @SpeakeasyMetadata({ data: "json, name=customReplyTo" })
   customReplyTo?: string;
 
-  @Metadata({ data: "json, name=customRolesEnabledForSettingsToBeMerged" })
+  @SpeakeasyMetadata({ data: "json, name=customRolesEnabledForSettingsToBeMerged" })
   customRolesEnabledForSettingsToBeMerged?: string;
 
-  @Metadata({ data: "json, name=defaultMessageDenyNotificationText" })
+  @SpeakeasyMetadata({ data: "json, name=defaultMessageDenyNotificationText" })
   defaultMessageDenyNotificationText?: string;
 
-  @Metadata({ data: "json, name=default_sender" })
+  @SpeakeasyMetadata({ data: "json, name=default_sender" })
   defaultSender?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=enableCollaborativeInbox" })
+  @SpeakeasyMetadata({ data: "json, name=enableCollaborativeInbox" })
   enableCollaborativeInbox?: string;
 
-  @Metadata({ data: "json, name=favoriteRepliesOnTop" })
+  @SpeakeasyMetadata({ data: "json, name=favoriteRepliesOnTop" })
   favoriteRepliesOnTop?: string;
 
-  @Metadata({ data: "json, name=includeCustomFooter" })
+  @SpeakeasyMetadata({ data: "json, name=includeCustomFooter" })
   includeCustomFooter?: string;
 
-  @Metadata({ data: "json, name=includeInGlobalAddressList" })
+  @SpeakeasyMetadata({ data: "json, name=includeInGlobalAddressList" })
   includeInGlobalAddressList?: string;
 
-  @Metadata({ data: "json, name=isArchived" })
+  @SpeakeasyMetadata({ data: "json, name=isArchived" })
   isArchived?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=maxMessageBytes" })
+  @SpeakeasyMetadata({ data: "json, name=maxMessageBytes" })
   maxMessageBytes?: number;
 
-  @Metadata({ data: "json, name=membersCanPostAsTheGroup" })
+  @SpeakeasyMetadata({ data: "json, name=membersCanPostAsTheGroup" })
   membersCanPostAsTheGroup?: string;
 
-  @Metadata({ data: "json, name=messageDisplayFont" })
+  @SpeakeasyMetadata({ data: "json, name=messageDisplayFont" })
   messageDisplayFont?: string;
 
-  @Metadata({ data: "json, name=messageModerationLevel" })
+  @SpeakeasyMetadata({ data: "json, name=messageModerationLevel" })
   messageModerationLevel?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=primaryLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=primaryLanguage" })
   primaryLanguage?: string;
 
-  @Metadata({ data: "json, name=replyTo" })
+  @SpeakeasyMetadata({ data: "json, name=replyTo" })
   replyTo?: string;
 
-  @Metadata({ data: "json, name=sendMessageDenyNotification" })
+  @SpeakeasyMetadata({ data: "json, name=sendMessageDenyNotification" })
   sendMessageDenyNotification?: string;
 
-  @Metadata({ data: "json, name=showInGroupDirectory" })
+  @SpeakeasyMetadata({ data: "json, name=showInGroupDirectory" })
   showInGroupDirectory?: string;
 
-  @Metadata({ data: "json, name=spamModerationLevel" })
+  @SpeakeasyMetadata({ data: "json, name=spamModerationLevel" })
   spamModerationLevel?: string;
 
-  @Metadata({ data: "json, name=whoCanAdd" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanAdd" })
   whoCanAdd?: string;
 
-  @Metadata({ data: "json, name=whoCanAddReferences" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanAddReferences" })
   whoCanAddReferences?: string;
 
-  @Metadata({ data: "json, name=whoCanApproveMembers" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanApproveMembers" })
   whoCanApproveMembers?: string;
 
-  @Metadata({ data: "json, name=whoCanApproveMessages" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanApproveMessages" })
   whoCanApproveMessages?: string;
 
-  @Metadata({ data: "json, name=whoCanAssignTopics" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanAssignTopics" })
   whoCanAssignTopics?: string;
 
-  @Metadata({ data: "json, name=whoCanAssistContent" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanAssistContent" })
   whoCanAssistContent?: string;
 
-  @Metadata({ data: "json, name=whoCanBanUsers" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanBanUsers" })
   whoCanBanUsers?: string;
 
-  @Metadata({ data: "json, name=whoCanContactOwner" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanContactOwner" })
   whoCanContactOwner?: string;
 
-  @Metadata({ data: "json, name=whoCanDeleteAnyPost" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanDeleteAnyPost" })
   whoCanDeleteAnyPost?: string;
 
-  @Metadata({ data: "json, name=whoCanDeleteTopics" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanDeleteTopics" })
   whoCanDeleteTopics?: string;
 
-  @Metadata({ data: "json, name=whoCanDiscoverGroup" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanDiscoverGroup" })
   whoCanDiscoverGroup?: string;
 
-  @Metadata({ data: "json, name=whoCanEnterFreeFormTags" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanEnterFreeFormTags" })
   whoCanEnterFreeFormTags?: string;
 
-  @Metadata({ data: "json, name=whoCanHideAbuse" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanHideAbuse" })
   whoCanHideAbuse?: string;
 
-  @Metadata({ data: "json, name=whoCanInvite" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanInvite" })
   whoCanInvite?: string;
 
-  @Metadata({ data: "json, name=whoCanJoin" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanJoin" })
   whoCanJoin?: string;
 
-  @Metadata({ data: "json, name=whoCanLeaveGroup" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanLeaveGroup" })
   whoCanLeaveGroup?: string;
 
-  @Metadata({ data: "json, name=whoCanLockTopics" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanLockTopics" })
   whoCanLockTopics?: string;
 
-  @Metadata({ data: "json, name=whoCanMakeTopicsSticky" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanMakeTopicsSticky" })
   whoCanMakeTopicsSticky?: string;
 
-  @Metadata({ data: "json, name=whoCanMarkDuplicate" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanMarkDuplicate" })
   whoCanMarkDuplicate?: string;
 
-  @Metadata({ data: "json, name=whoCanMarkFavoriteReplyOnAnyTopic" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanMarkFavoriteReplyOnAnyTopic" })
   whoCanMarkFavoriteReplyOnAnyTopic?: string;
 
-  @Metadata({ data: "json, name=whoCanMarkFavoriteReplyOnOwnTopic" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanMarkFavoriteReplyOnOwnTopic" })
   whoCanMarkFavoriteReplyOnOwnTopic?: string;
 
-  @Metadata({ data: "json, name=whoCanMarkNoResponseNeeded" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanMarkNoResponseNeeded" })
   whoCanMarkNoResponseNeeded?: string;
 
-  @Metadata({ data: "json, name=whoCanModerateContent" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanModerateContent" })
   whoCanModerateContent?: string;
 
-  @Metadata({ data: "json, name=whoCanModerateMembers" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanModerateMembers" })
   whoCanModerateMembers?: string;
 
-  @Metadata({ data: "json, name=whoCanModifyMembers" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanModifyMembers" })
   whoCanModifyMembers?: string;
 
-  @Metadata({ data: "json, name=whoCanModifyTagsAndCategories" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanModifyTagsAndCategories" })
   whoCanModifyTagsAndCategories?: string;
 
-  @Metadata({ data: "json, name=whoCanMoveTopicsIn" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanMoveTopicsIn" })
   whoCanMoveTopicsIn?: string;
 
-  @Metadata({ data: "json, name=whoCanMoveTopicsOut" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanMoveTopicsOut" })
   whoCanMoveTopicsOut?: string;
 
-  @Metadata({ data: "json, name=whoCanPostAnnouncements" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanPostAnnouncements" })
   whoCanPostAnnouncements?: string;
 
-  @Metadata({ data: "json, name=whoCanPostMessage" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanPostMessage" })
   whoCanPostMessage?: string;
 
-  @Metadata({ data: "json, name=whoCanTakeTopics" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanTakeTopics" })
   whoCanTakeTopics?: string;
 
-  @Metadata({ data: "json, name=whoCanUnassignTopic" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanUnassignTopic" })
   whoCanUnassignTopic?: string;
 
-  @Metadata({ data: "json, name=whoCanUnmarkFavoriteReplyOnAnyTopic" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanUnmarkFavoriteReplyOnAnyTopic" })
   whoCanUnmarkFavoriteReplyOnAnyTopic?: string;
 
-  @Metadata({ data: "json, name=whoCanViewGroup" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanViewGroup" })
   whoCanViewGroup?: string;
 
-  @Metadata({ data: "json, name=whoCanViewMembership" })
+  @SpeakeasyMetadata({ data: "json, name=whoCanViewMembership" })
   whoCanViewMembership?: string;
 }

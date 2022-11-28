@@ -1,20 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetServerTypesIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
-
-export class GetServerTypesIdRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetServerTypesIdPathParams;
-}
-
 export enum GetServerTypesId200ApplicationJsonServerTypeCpuTypeEnum {
-    Shared = "shared"
-,    Dedicated = "dedicated"
+    Shared = "shared",
+    Dedicated = "dedicated"
 }
 
 
@@ -23,10 +18,10 @@ export enum GetServerTypesId200ApplicationJsonServerTypeCpuTypeEnum {
  * Hourly costs for a Server type in this Location
 **/
 export class GetServerTypesId200ApplicationJsonServerTypePricesPriceHourly extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gross" })
+  @SpeakeasyMetadata({ data: "json, name=gross" })
   gross: string;
 
-  @Metadata({ data: "json, name=net" })
+  @SpeakeasyMetadata({ data: "json, name=net" })
   net: string;
 }
 
@@ -36,77 +31,83 @@ export class GetServerTypesId200ApplicationJsonServerTypePricesPriceHourly exten
  * Monthly costs for a Server type in this Location
 **/
 export class GetServerTypesId200ApplicationJsonServerTypePricesPriceMonthly extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gross" })
+  @SpeakeasyMetadata({ data: "json, name=gross" })
   gross: string;
 
-  @Metadata({ data: "json, name=net" })
+  @SpeakeasyMetadata({ data: "json, name=net" })
   net: string;
 }
 
 
 export class GetServerTypesId200ApplicationJsonServerTypePrices extends SpeakeasyBase {
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location: string;
 
-  @Metadata({ data: "json, name=price_hourly" })
+  @SpeakeasyMetadata({ data: "json, name=price_hourly" })
   priceHourly: GetServerTypesId200ApplicationJsonServerTypePricesPriceHourly;
 
-  @Metadata({ data: "json, name=price_monthly" })
+  @SpeakeasyMetadata({ data: "json, name=price_monthly" })
   priceMonthly: GetServerTypesId200ApplicationJsonServerTypePricesPriceMonthly;
 }
 
 export enum GetServerTypesId200ApplicationJsonServerTypeStorageTypeEnum {
-    Local = "local"
-,    Network = "network"
+    Local = "local",
+    Network = "network"
 }
 
 
 export class GetServerTypesId200ApplicationJsonServerType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cores" })
+  @SpeakeasyMetadata({ data: "json, name=cores" })
   cores: number;
 
-  @Metadata({ data: "json, name=cpu_type" })
+  @SpeakeasyMetadata({ data: "json, name=cpu_type" })
   cpuType: GetServerTypesId200ApplicationJsonServerTypeCpuTypeEnum;
 
-  @Metadata({ data: "json, name=deprecated" })
+  @SpeakeasyMetadata({ data: "json, name=deprecated" })
   deprecated: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=disk" })
+  @SpeakeasyMetadata({ data: "json, name=disk" })
   disk: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=memory" })
+  @SpeakeasyMetadata({ data: "json, name=memory" })
   memory: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=prices", elemType: operations.GetServerTypesId200ApplicationJsonServerTypePrices })
+  @SpeakeasyMetadata({ data: "json, name=prices", elemType: GetServerTypesId200ApplicationJsonServerTypePrices })
   prices: GetServerTypesId200ApplicationJsonServerTypePrices[];
 
-  @Metadata({ data: "json, name=storage_type" })
+  @SpeakeasyMetadata({ data: "json, name=storage_type" })
   storageType: GetServerTypesId200ApplicationJsonServerTypeStorageTypeEnum;
 }
 
 
 export class GetServerTypesId200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=server_type" })
+  @SpeakeasyMetadata({ data: "json, name=server_type" })
   serverType: GetServerTypesId200ApplicationJsonServerType;
 }
 
 
+export class GetServerTypesIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetServerTypesIdPathParams;
+}
+
+
 export class GetServerTypesIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getServerTypesId200ApplicationJsonObject?: GetServerTypesId200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

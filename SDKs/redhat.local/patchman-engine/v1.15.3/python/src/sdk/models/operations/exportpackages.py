@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ExportPackagesSortEnum(str, Enum):
@@ -21,19 +22,19 @@ class ExportPackagesQueryParams:
 
 @dataclass
 class ExportPackagesSecurity:
-    rh_identity: shared.SchemeRhIdentity = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    rh_identity: shared.SchemeRhIdentity = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class ExportPackagesRequest:
-    query_params: ExportPackagesQueryParams = field(default=None)
-    security: ExportPackagesSecurity = field(default=None)
+    query_params: ExportPackagesQueryParams = field()
+    security: ExportPackagesSecurity = field()
     
 
 @dataclass
 class ExportPackagesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     controllers_package_items: Optional[List[shared.ControllersPackageItem]] = field(default=None)
     

@@ -10,16 +10,13 @@ type PutFloatingIpsIDUpdateFloatingIPRequest struct {
 	Name        *string                `json:"name,omitempty"`
 }
 
-type PutFloatingIpsIDRequest struct {
-	PathParams PutFloatingIpsIDPathParams
-	Request    *PutFloatingIpsIDUpdateFloatingIPRequest `request:"mediaType=application/json"`
-}
-
 type PutFloatingIpsID200ApplicationJSONFloatingIPDNSPtr struct {
 	DNSPtr string `json:"dns_ptr"`
 	IP     string `json:"ip"`
 }
 
+// PutFloatingIpsID200ApplicationJSONFloatingIPHomeLocation
+// Location the Floating IP was created in. Routing is optimized for this Location.
 type PutFloatingIpsID200ApplicationJSONFloatingIPHomeLocation struct {
 	City        string  `json:"city"`
 	Country     string  `json:"country"`
@@ -31,6 +28,8 @@ type PutFloatingIpsID200ApplicationJSONFloatingIPHomeLocation struct {
 	NetworkZone string  `json:"network_zone"`
 }
 
+// PutFloatingIpsID200ApplicationJSONFloatingIPProtection
+// Protection configuration for the Resource
 type PutFloatingIpsID200ApplicationJSONFloatingIPProtection struct {
 	Delete bool `json:"delete"`
 }
@@ -59,6 +58,11 @@ type PutFloatingIpsID200ApplicationJSONFloatingIP struct {
 
 type PutFloatingIpsID200ApplicationJSON struct {
 	FloatingIP PutFloatingIpsID200ApplicationJSONFloatingIP `json:"floating_ip"`
+}
+
+type PutFloatingIpsIDRequest struct {
+	PathParams PutFloatingIpsIDPathParams
+	Request    *PutFloatingIpsIDUpdateFloatingIPRequest `request:"mediaType=application/json"`
 }
 
 type PutFloatingIpsIDResponse struct {

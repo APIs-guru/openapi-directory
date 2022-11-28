@@ -1,14 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import firewalldomainliststatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ImportFirewallDomainsResponse:
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Id' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    status: Optional[firewalldomainliststatus_enum.FirewallDomainListStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
-    status_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StatusMessage' }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Id') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    status: Optional[FirewallDomainListStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
+    status_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StatusMessage') }})
     

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class JsApp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=element" })
+  @SpeakeasyMetadata({ data: "json, name=element" })
   element?: string;
 
-  @Metadata({ data: "json, name=template" })
+  @SpeakeasyMetadata({ data: "json, name=template" })
   template?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

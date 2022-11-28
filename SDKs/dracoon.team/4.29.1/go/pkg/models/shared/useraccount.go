@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// UserAccount
+// User information
 type UserAccount struct {
 	AuthData              UserAuthData     `json:"authData"`
 	AuthMethods           []UserAuthMethod `json:"authMethods,omitempty"`

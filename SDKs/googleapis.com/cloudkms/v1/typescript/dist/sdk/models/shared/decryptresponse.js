@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var DecryptResponseProtectionLevelEnum;
 (function (DecryptResponseProtectionLevelEnum) {
     DecryptResponseProtectionLevelEnum["ProtectionLevelUnspecified"] = "PROTECTION_LEVEL_UNSPECIFIED";
@@ -41,19 +41,19 @@ var DecryptResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=plaintext" }),
+        SpeakeasyMetadata({ data: "json, name=plaintext" }),
         __metadata("design:type", String)
     ], DecryptResponse.prototype, "plaintext", void 0);
     __decorate([
-        Metadata({ data: "json, name=plaintextCrc32c" }),
+        SpeakeasyMetadata({ data: "json, name=plaintextCrc32c" }),
         __metadata("design:type", String)
     ], DecryptResponse.prototype, "plaintextCrc32c", void 0);
     __decorate([
-        Metadata({ data: "json, name=protectionLevel" }),
+        SpeakeasyMetadata({ data: "json, name=protectionLevel" }),
         __metadata("design:type", String)
     ], DecryptResponse.prototype, "protectionLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=usedPrimary" }),
+        SpeakeasyMetadata({ data: "json, name=usedPrimary" }),
         __metadata("design:type", Boolean)
     ], DecryptResponse.prototype, "usedPrimary", void 0);
     return DecryptResponse;

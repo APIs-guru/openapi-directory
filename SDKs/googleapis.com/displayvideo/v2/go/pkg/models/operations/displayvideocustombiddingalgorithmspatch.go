@@ -31,7 +31,7 @@ type DisplayvideoCustomBiddingAlgorithmsPatchSecurity struct {
 type DisplayvideoCustomBiddingAlgorithmsPatchRequest struct {
 	PathParams  DisplayvideoCustomBiddingAlgorithmsPatchPathParams
 	QueryParams DisplayvideoCustomBiddingAlgorithmsPatchQueryParams
-	Request     *shared.CustomBiddingAlgorithm `request:"mediaType=application/json"`
+	Request     *shared.CustomBiddingAlgorithmInput `request:"mediaType=application/json"`
 	Security    DisplayvideoCustomBiddingAlgorithmsPatchSecurity
 }
 

@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ControllersPackageSystemItem = /** @class */ (function (_super) {
     __extends(ControllersPackageSystemItem, _super);
     function ControllersPackageSystemItem() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=available_evra" }),
+        SpeakeasyMetadata({ data: "json, name=available_evra" }),
         __metadata("design:type", String)
     ], ControllersPackageSystemItem.prototype, "availableEvra", void 0);
     __decorate([
-        Metadata({ data: "json, name=display_name" }),
+        SpeakeasyMetadata({ data: "json, name=display_name" }),
         __metadata("design:type", String)
     ], ControllersPackageSystemItem.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], ControllersPackageSystemItem.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=installed_evra" }),
+        SpeakeasyMetadata({ data: "json, name=installed_evra" }),
         __metadata("design:type", String)
     ], ControllersPackageSystemItem.prototype, "installedEvra", void 0);
     __decorate([
-        Metadata({ data: "json, name=updatable" }),
+        SpeakeasyMetadata({ data: "json, name=updatable" }),
         __metadata("design:type", Boolean)
     ], ControllersPackageSystemItem.prototype, "updatable", void 0);
     return ControllersPackageSystemItem;

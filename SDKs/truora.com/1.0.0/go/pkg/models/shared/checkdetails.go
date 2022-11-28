@@ -1,5 +1,7 @@
 package shared
 
+// CheckDetails
+// Represents background check details
 type CheckDetails struct {
 	CheckID      string      `json:"check_id"`
 	DataSet      string      `json:"data_set"`

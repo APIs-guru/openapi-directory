@@ -42,7 +42,7 @@ type DrivePermissionsPatchSecurity struct {
 type DrivePermissionsPatchRequest struct {
 	PathParams  DrivePermissionsPatchPathParams
 	QueryParams DrivePermissionsPatchQueryParams
-	Request     *shared.Permission `request:"mediaType=application/json"`
+	Request     *shared.PermissionInput `request:"mediaType=application/json"`
 	Security    DrivePermissionsPatchSecurity
 }
 

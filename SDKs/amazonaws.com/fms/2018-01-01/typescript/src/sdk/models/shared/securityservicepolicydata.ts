@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SecurityServiceTypeEnum } from "./securityservicetypeenum";
+
 
 
 // SecurityServicePolicyData
@@ -7,9 +8,9 @@ import { SecurityServiceTypeEnum } from "./securityservicetypeenum";
  * Details about the security service that is being used to protect the resources.
 **/
 export class SecurityServicePolicyData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ManagedServiceData" })
+  @SpeakeasyMetadata({ data: "json, name=ManagedServiceData" })
   managedServiceData?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: SecurityServiceTypeEnum;
 }

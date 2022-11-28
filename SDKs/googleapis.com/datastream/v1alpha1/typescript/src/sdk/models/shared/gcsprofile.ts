@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GcsProfile
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Cloud Storage bucket profile.
 **/
 export class GcsProfile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucketName" })
+  @SpeakeasyMetadata({ data: "json, name=bucketName" })
   bucketName?: string;
 
-  @Metadata({ data: "json, name=rootPath" })
+  @SpeakeasyMetadata({ data: "json, name=rootPath" })
   rootPath?: string;
 }

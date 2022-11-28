@@ -1,0 +1,13 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { GoogleTypeDate } from "./googletypedate";
+/**
+ * BigQuery source import data from.
+**/
+export declare class GoogleCloudDiscoveryengineV1alphaBigQuerySource extends SpeakeasyBase {
+    dataSchema?: string;
+    datasetId?: string;
+    gcsStagingDir?: string;
+    partitionDate?: GoogleTypeDate;
+    projectId?: string;
+    tableId?: string;
+}

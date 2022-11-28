@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class LoggingProjectsLocationsBucketsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class LoggingProjectsLocationsBucketsCreateQueryParams:
 
 @dataclass
 class LoggingProjectsLocationsBucketsCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class LoggingProjectsLocationsBucketsCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,15 +45,15 @@ class LoggingProjectsLocationsBucketsCreateSecurity:
 
 @dataclass
 class LoggingProjectsLocationsBucketsCreateRequest:
-    path_params: LoggingProjectsLocationsBucketsCreatePathParams = field(default=None)
-    query_params: LoggingProjectsLocationsBucketsCreateQueryParams = field(default=None)
-    request: Optional[shared.LogBucket] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: LoggingProjectsLocationsBucketsCreateSecurity = field(default=None)
+    path_params: LoggingProjectsLocationsBucketsCreatePathParams = field()
+    query_params: LoggingProjectsLocationsBucketsCreateQueryParams = field()
+    security: LoggingProjectsLocationsBucketsCreateSecurity = field()
+    request: Optional[shared.LogBucketInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class LoggingProjectsLocationsBucketsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     log_bucket: Optional[shared.LogBucket] = field(default=None)
-    status_code: int = field(default=None)
     

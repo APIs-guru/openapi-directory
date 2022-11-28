@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomPluginDescription } from "./customplugindescription";
+
 
 
 // PluginDescription
@@ -7,6 +8,6 @@ import { CustomPluginDescription } from "./customplugindescription";
  * The description of the plugin.
 **/
 export class PluginDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customPlugin" })
+  @SpeakeasyMetadata({ data: "json, name=customPlugin" })
   customPlugin?: CustomPluginDescription;
 }

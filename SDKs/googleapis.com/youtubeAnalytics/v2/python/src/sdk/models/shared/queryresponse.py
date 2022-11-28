@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
-from . import resulttablecolumnheader
-from . import errors
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class QueryResponse:
-    column_headers: Optional[List[resulttablecolumnheader.ResultTableColumnHeader]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'columnHeaders' }})
-    errors: Optional[errors.Errors] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    rows: Optional[List[List[Any]]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rows' }})
+    r"""QueryResponse
+    Response message for TargetedQueriesService.Query.
+    """
+    
+    column_headers: Optional[List[ResultTableColumnHeader]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('columnHeaders') }})
+    errors: Optional[Errors] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    rows: Optional[List[List[Any]]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rows') }})
     

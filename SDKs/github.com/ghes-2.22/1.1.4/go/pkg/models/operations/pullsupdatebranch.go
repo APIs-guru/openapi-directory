@@ -14,11 +14,6 @@ type PullsUpdateBranchRequestBody struct {
 	ExpectedHeadSha *string `json:"expected_head_sha,omitempty"`
 }
 
-type PullsUpdateBranchRequest struct {
-	PathParams PullsUpdateBranchPathParams
-	Request    *PullsUpdateBranchRequestBody `request:"mediaType=application/json"`
-}
-
 type PullsUpdateBranch202ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 	URL     *string `json:"url,omitempty"`
@@ -27,6 +22,11 @@ type PullsUpdateBranch202ApplicationJSON struct {
 type PullsUpdateBranch415ApplicationJSON struct {
 	DocumentationURL string `json:"documentation_url"`
 	Message          string `json:"message"`
+}
+
+type PullsUpdateBranchRequest struct {
+	PathParams PullsUpdateBranchPathParams
+	Request    *PullsUpdateBranchRequestBody `request:"mediaType=application/json"`
 }
 
 type PullsUpdateBranchResponse struct {

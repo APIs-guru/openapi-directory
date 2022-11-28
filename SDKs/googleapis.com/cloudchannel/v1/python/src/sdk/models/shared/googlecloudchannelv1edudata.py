@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudChannelV1EduDataInstituteSizeEnum(str, Enum):
     INSTITUTE_SIZE_UNSPECIFIED = "INSTITUTE_SIZE_UNSPECIFIED"
@@ -21,7 +23,11 @@ class GoogleCloudChannelV1EduDataInstituteTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudChannelV1EduData:
-    institute_size: Optional[GoogleCloudChannelV1EduDataInstituteSizeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instituteSize' }})
-    institute_type: Optional[GoogleCloudChannelV1EduDataInstituteTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instituteType' }})
-    website: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'website' }})
+    r"""GoogleCloudChannelV1EduData
+    Required Edu Attributes
+    """
+    
+    institute_size: Optional[GoogleCloudChannelV1EduDataInstituteSizeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('instituteSize') }})
+    institute_type: Optional[GoogleCloudChannelV1EduDataInstituteTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('instituteType') }})
+    website: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('website') }})
     

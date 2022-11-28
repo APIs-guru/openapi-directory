@@ -1,88 +1,89 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateGroupPadUsingGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=groupID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=groupID" })
   groupId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=padName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=padName" })
   padName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=text" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=text" })
   text?: string;
 }
 
 
-export class CreateGroupPadUsingGetRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: CreateGroupPadUsingGetQueryParams;
-}
-
-
 export class CreateGroupPadUsingGet200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class CreateGroupPadUsingGet400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class CreateGroupPadUsingGet401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class CreateGroupPadUsingGet500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class CreateGroupPadUsingGetRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: CreateGroupPadUsingGetQueryParams;
+}
+
+
 export class CreateGroupPadUsingGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createGroupPadUsingGet200ApplicationJsonObject?: CreateGroupPadUsingGet200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createGroupPadUsingGet400ApplicationJsonObject?: CreateGroupPadUsingGet400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createGroupPadUsingGet401ApplicationJsonObject?: CreateGroupPadUsingGet401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createGroupPadUsingGet500ApplicationJsonObject?: CreateGroupPadUsingGet500ApplicationJson;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// DetectedProperties
+// The detected properties of the input file. Elastic Transcoder identifies these values from the input file.
 type DetectedProperties struct {
 	DurationMillis *int64  `json:"DurationMillis,omitempty"`
 	FileSize       *int64  `json:"FileSize,omitempty"`

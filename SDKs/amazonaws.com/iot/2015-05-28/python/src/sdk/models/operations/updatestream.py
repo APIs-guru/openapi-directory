@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateStreamPathParams:
-    stream_id: str = field(default=None, metadata={'path_param': { 'field_name': 'streamId', 'style': 'simple', 'explode': False }})
+    stream_id: str = field(metadata={'path_param': { 'field_name': 'streamId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,26 +27,26 @@ class UpdateStreamHeaders:
 @dataclass_json
 @dataclass
 class UpdateStreamRequestBody:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    files: Optional[List[shared.StreamFile]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'files' }})
-    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roleArn' }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    files: Optional[List[shared.StreamFile]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('files') }})
+    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('roleArn') }})
     
 
 @dataclass
 class UpdateStreamRequest:
-    path_params: UpdateStreamPathParams = field(default=None)
-    headers: UpdateStreamHeaders = field(default=None)
-    request: UpdateStreamRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateStreamHeaders = field()
+    path_params: UpdateStreamPathParams = field()
+    request: UpdateStreamRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateStreamResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     update_stream_response: Optional[shared.UpdateStreamResponse] = field(default=None)

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import timeofday
-from . import timeofday
+from sdk import utils
+from . import *
 
 class DayPartDayOfWeekEnum(str, Enum):
     DAY_OF_WEEK_UNSPECIFIED = "DAY_OF_WEEK_UNSPECIFIED"
@@ -18,7 +19,11 @@ class DayPartDayOfWeekEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DayPart:
-    day_of_week: Optional[DayPartDayOfWeekEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dayOfWeek' }})
-    end_time: Optional[timeofday.TimeOfDay] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endTime' }})
-    start_time: Optional[timeofday.TimeOfDay] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTime' }})
+    r"""DayPart
+    Daypart targeting message that specifies if the ad can be shown only during certain parts of a day/week.
+    """
+    
+    day_of_week: Optional[DayPartDayOfWeekEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dayOfWeek') }})
+    end_time: Optional[TimeOfDay] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endTime') }})
+    start_time: Optional[TimeOfDay] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime') }})
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StateMachineTypeEnum } from "./statemachinetypeenum";
+
 
 
 // StateMachineListItem
@@ -7,15 +8,15 @@ import { StateMachineTypeEnum } from "./statemachinetypeenum";
  * Contains details about the state machine.
 **/
 export class StateMachineListItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=stateMachineArn" })
+  @SpeakeasyMetadata({ data: "json, name=stateMachineArn" })
   stateMachineArn: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: StateMachineTypeEnum;
 }

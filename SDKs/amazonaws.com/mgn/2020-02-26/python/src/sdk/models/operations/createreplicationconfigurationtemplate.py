@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -30,33 +35,33 @@ class CreateReplicationConfigurationTemplateRequestBodyEbsEncryptionEnum(str, En
 @dataclass_json
 @dataclass
 class CreateReplicationConfigurationTemplateRequestBody:
-    associate_default_security_group: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'associateDefaultSecurityGroup' }})
-    bandwidth_throttling: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bandwidthThrottling' }})
-    create_public_ip: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createPublicIP' }})
-    data_plane_routing: CreateReplicationConfigurationTemplateRequestBodyDataPlaneRoutingEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataPlaneRouting' }})
-    default_large_staging_disk_type: CreateReplicationConfigurationTemplateRequestBodyDefaultLargeStagingDiskTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultLargeStagingDiskType' }})
-    ebs_encryption: CreateReplicationConfigurationTemplateRequestBodyEbsEncryptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ebsEncryption' }})
-    ebs_encryption_key_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ebsEncryptionKeyArn' }})
-    replication_server_instance_type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'replicationServerInstanceType' }})
-    replication_servers_security_groups_i_ds: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'replicationServersSecurityGroupsIDs' }})
-    staging_area_subnet_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stagingAreaSubnetId' }})
-    staging_area_tags: dict[str, str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stagingAreaTags' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    use_dedicated_replication_server: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'useDedicatedReplicationServer' }})
+    associate_default_security_group: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('associateDefaultSecurityGroup') }})
+    bandwidth_throttling: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('bandwidthThrottling') }})
+    create_public_ip: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('createPublicIP') }})
+    data_plane_routing: CreateReplicationConfigurationTemplateRequestBodyDataPlaneRoutingEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataPlaneRouting') }})
+    default_large_staging_disk_type: CreateReplicationConfigurationTemplateRequestBodyDefaultLargeStagingDiskTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultLargeStagingDiskType') }})
+    ebs_encryption: CreateReplicationConfigurationTemplateRequestBodyEbsEncryptionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ebsEncryption') }})
+    replication_server_instance_type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('replicationServerInstanceType') }})
+    replication_servers_security_groups_i_ds: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('replicationServersSecurityGroupsIDs') }})
+    staging_area_subnet_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('stagingAreaSubnetId') }})
+    staging_area_tags: dict[str, str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('stagingAreaTags') }})
+    use_dedicated_replication_server: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('useDedicatedReplicationServer') }})
+    ebs_encryption_key_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ebsEncryptionKeyArn') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateReplicationConfigurationTemplateRequest:
-    headers: CreateReplicationConfigurationTemplateHeaders = field(default=None)
-    request: CreateReplicationConfigurationTemplateRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateReplicationConfigurationTemplateHeaders = field()
+    request: CreateReplicationConfigurationTemplateRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateReplicationConfigurationTemplateResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     replication_configuration_template: Optional[shared.ReplicationConfigurationTemplate] = field(default=None)
-    status_code: int = field(default=None)
     uninitialized_account_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

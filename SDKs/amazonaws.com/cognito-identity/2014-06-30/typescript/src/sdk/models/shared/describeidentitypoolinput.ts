@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DescribeIdentityPoolInput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Input to the DescribeIdentityPool action.
 **/
 export class DescribeIdentityPoolInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IdentityPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityPoolId" })
   identityPoolId: string;
 }

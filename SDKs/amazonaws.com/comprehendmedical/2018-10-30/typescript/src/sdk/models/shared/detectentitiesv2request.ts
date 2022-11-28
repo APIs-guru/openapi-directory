@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DetectEntitiesV2Request extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Text" })
+  @SpeakeasyMetadata({ data: "json, name=Text" })
   text: string;
 }

@@ -18,16 +18,16 @@ type AuthenticateAuthentication struct {
 	RefreshToken *string                                  `json:"refreshToken,omitempty"`
 }
 
-type AuthenticateRequest struct {
-	Request AuthenticateAuthentication `request:"mediaType=application/json"`
-}
-
 type AuthenticateAccessToken struct {
 	AccessToken      *string    `json:"accessToken,omitempty"`
 	APIApplicationID *int64     `json:"apiApplicationId,omitempty"`
 	BusinessID       *int64     `json:"businessId,omitempty"`
 	Expiry           *time.Time `json:"expiry,omitempty"`
 	Permissions      []string   `json:"permissions,omitempty"`
+}
+
+type AuthenticateRequest struct {
+	Request AuthenticateAuthentication `request:"mediaType=application/json"`
 }
 
 type AuthenticateResponse struct {

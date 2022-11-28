@@ -16,12 +16,6 @@ type GetDashboardRelatedColumnNameSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetDashboardRelatedColumnNameRequest struct {
-	PathParams  GetDashboardRelatedColumnNamePathParams
-	QueryParams GetDashboardRelatedColumnNameQueryParams
-	Security    GetDashboardRelatedColumnNameSecurity
-}
-
 type GetDashboardRelatedColumnName400ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -36,6 +30,12 @@ type GetDashboardRelatedColumnName404ApplicationJSON struct {
 
 type GetDashboardRelatedColumnName500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetDashboardRelatedColumnNameRequest struct {
+	PathParams  GetDashboardRelatedColumnNamePathParams
+	QueryParams GetDashboardRelatedColumnNameQueryParams
+	Security    GetDashboardRelatedColumnNameSecurity
 }
 
 type GetDashboardRelatedColumnNameResponse struct {

@@ -1,5 +1,7 @@
 package shared
 
+// CreateDownloadShareRequest
+// Request model for creating a Download Share
 type CreateDownloadShareRequest struct {
 	CreatorLanguage       *string               `json:"creatorLanguage,omitempty"`
 	Expiration            *ObjectExpiration     `json:"expiration,omitempty"`

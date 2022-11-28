@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import remarketinglist
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RemarketingListsListResponse:
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    remarketing_lists: Optional[List[remarketinglist.RemarketingList]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'remarketingLists' }})
+    r"""RemarketingListsListResponse
+    Remarketing list response
+    """
+    
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    remarketing_lists: Optional[List[RemarketingList]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('remarketingLists') }})
     

@@ -180,6 +180,8 @@ const (
 	LivingAreaFeaturesWasherExceptionEnumDependentOnDayOfWeek LivingAreaFeaturesWasherExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// LivingAreaFeatures
+// Features in the living area.
 type LivingAreaFeatures struct {
 	AirConditioning                 *bool                                                  `json:"airConditioning,omitempty"`
 	AirConditioningException        *LivingAreaFeaturesAirConditioningExceptionEnum        `json:"airConditioningException,omitempty"`

@@ -5,25 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class GetProductsIDImagesJSONPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetProductsIDImagesJSONQueryParams:
-    authtoken: str = field(default=None, metadata={'query_param': { 'field_name': 'authtoken', 'style': 'form', 'explode': True }})
-    login: str = field(default=None, metadata={'query_param': { 'field_name': 'login', 'style': 'form', 'explode': True }})
+    authtoken: str = field(metadata={'query_param': { 'field_name': 'authtoken', 'style': 'form', 'explode': True }})
+    login: str = field(metadata={'query_param': { 'field_name': 'login', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetProductsIDImagesJSONRequest:
-    path_params: GetProductsIDImagesJSONPathParams = field(default=None)
-    query_params: GetProductsIDImagesJSONQueryParams = field(default=None)
+    path_params: GetProductsIDImagesJSONPathParams = field()
+    query_params: GetProductsIDImagesJSONQueryParams = field()
     
 
 @dataclass
 class GetProductsIDImagesJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     images: Optional[List[shared.Image]] = field(default=None)
     not_found: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

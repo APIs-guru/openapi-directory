@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BidMetricsRow } from "./bidmetricsrow";
+
 
 
 // ListBidMetricsResponse
@@ -8,9 +8,9 @@ import { BidMetricsRow } from "./bidmetricsrow";
  * Response message for listing the metrics that are measured in number of bids.
 **/
 export class ListBidMetricsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bidMetricsRows", elemType: shared.BidMetricsRow })
+  @SpeakeasyMetadata({ data: "json, name=bidMetricsRows", elemType: BidMetricsRow })
   bidMetricsRows?: BidMetricsRow[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

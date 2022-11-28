@@ -21,14 +21,14 @@ type GetVehiclesQueryParams struct {
 	UpdatedAtDollarLte  *time.Time             `queryParam:"style=form,explode=true,name=updatedAt[$lte]"`
 }
 
-type GetVehiclesRequest struct {
-	QueryParams GetVehiclesQueryParams
-}
-
 type GetVehicles200ApplicationJSON struct {
 	Message *string       `json:"message,omitempty"`
 	Ok      *bool         `json:"ok,omitempty"`
 	Result  []interface{} `json:"result,omitempty"`
+}
+
+type GetVehiclesRequest struct {
+	QueryParams GetVehiclesQueryParams
 }
 
 type GetVehiclesResponse struct {

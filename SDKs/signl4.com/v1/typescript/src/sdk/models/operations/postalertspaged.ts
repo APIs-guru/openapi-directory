@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostAlertsPagedQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" })
   userId?: string;
 }
 
 
 export class PostAlertsPagedRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   alertFilterPublic?: shared.AlertFilterPublic;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   alertFilterPublic1?: shared.AlertFilterPublic;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   alertFilterPublic2?: shared.AlertFilterPublic;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   alertFilterPublic3?: shared.AlertFilterPublic;
 }
 
 
 export class PostAlertsPagedRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostAlertsPagedQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PostAlertsPagedRequests;
 }
 
 
 export class PostAlertsPagedResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   overviewAlertPagedResultsPublic?: shared.OverviewAlertPagedResultsPublic;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

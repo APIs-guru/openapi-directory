@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DcimVirtualChassisListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 }
 
 
-export class DcimVirtualChassisListRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: DcimVirtualChassisListQueryParams;
-}
-
-
 export class DcimVirtualChassisList200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count: number;
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata({ data: "json, name=previous" })
   previous?: string;
 
-  @Metadata({ data: "json, name=results", elemType: shared.VirtualChassis })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: shared.VirtualChassis })
   results: shared.VirtualChassis[];
 }
 
 
+export class DcimVirtualChassisListRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: DcimVirtualChassisListQueryParams;
+}
+
+
 export class DcimVirtualChassisListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dcimVirtualChassisList200ApplicationJsonObject?: DcimVirtualChassisList200ApplicationJson;
 }

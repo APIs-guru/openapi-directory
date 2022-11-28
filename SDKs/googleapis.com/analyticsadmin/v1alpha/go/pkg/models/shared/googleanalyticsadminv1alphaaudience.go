@@ -8,6 +8,8 @@ const (
 	GoogleAnalyticsAdminV1alphaAudienceExclusionDurationModeEnumExcludePermanently                       GoogleAnalyticsAdminV1alphaAudienceExclusionDurationModeEnum = "EXCLUDE_PERMANENTLY"
 )
 
+// GoogleAnalyticsAdminV1alphaAudience
+// A resource message representing a GA4 Audience.
 type GoogleAnalyticsAdminV1alphaAudience struct {
 	AdsPersonalizationEnabled *bool                                                         `json:"adsPersonalizationEnabled,omitempty"`
 	Description               *string                                                       `json:"description,omitempty"`
@@ -17,4 +19,15 @@ type GoogleAnalyticsAdminV1alphaAudience struct {
 	FilterClauses             []GoogleAnalyticsAdminV1alphaAudienceFilterClause             `json:"filterClauses,omitempty"`
 	MembershipDurationDays    *int32                                                        `json:"membershipDurationDays,omitempty"`
 	Name                      *string                                                       `json:"name,omitempty"`
+}
+
+// GoogleAnalyticsAdminV1alphaAudienceInput
+// A resource message representing a GA4 Audience.
+type GoogleAnalyticsAdminV1alphaAudienceInput struct {
+	Description            *string                                                       `json:"description,omitempty"`
+	DisplayName            *string                                                       `json:"displayName,omitempty"`
+	EventTrigger           *GoogleAnalyticsAdminV1alphaAudienceEventTrigger              `json:"eventTrigger,omitempty"`
+	ExclusionDurationMode  *GoogleAnalyticsAdminV1alphaAudienceExclusionDurationModeEnum `json:"exclusionDurationMode,omitempty"`
+	FilterClauses          []GoogleAnalyticsAdminV1alphaAudienceFilterClause             `json:"filterClauses,omitempty"`
+	MembershipDurationDays *int32                                                        `json:"membershipDurationDays,omitempty"`
 }

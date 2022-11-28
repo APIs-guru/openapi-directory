@@ -1,30 +1,25 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import dataqualityappspecification
-from . import dataqualitybaselineconfig
-from . import dataqualityjobinput
-from . import monitoringoutputconfig
-from . import monitoringresources
-from . import monitoringnetworkconfig
-from . import monitoringstoppingcondition
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeDataQualityJobDefinitionResponse:
-    creation_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreationTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    data_quality_app_specification: dataqualityappspecification.DataQualityAppSpecification = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DataQualityAppSpecification' }})
-    data_quality_baseline_config: Optional[dataqualitybaselineconfig.DataQualityBaselineConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DataQualityBaselineConfig' }})
-    data_quality_job_input: dataqualityjobinput.DataQualityJobInput = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DataQualityJobInput' }})
-    data_quality_job_output_config: monitoringoutputconfig.MonitoringOutputConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DataQualityJobOutputConfig' }})
-    job_definition_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'JobDefinitionArn' }})
-    job_definition_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'JobDefinitionName' }})
-    job_resources: monitoringresources.MonitoringResources = field(default=None, metadata={'dataclasses_json': { 'field_name': 'JobResources' }})
-    network_config: Optional[monitoringnetworkconfig.MonitoringNetworkConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NetworkConfig' }})
-    role_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RoleArn' }})
-    stopping_condition: Optional[monitoringstoppingcondition.MonitoringStoppingCondition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StoppingCondition' }})
+    creation_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreationTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    data_quality_app_specification: DataQualityAppSpecification = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DataQualityAppSpecification') }})
+    data_quality_job_input: DataQualityJobInput = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DataQualityJobInput') }})
+    data_quality_job_output_config: MonitoringOutputConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DataQualityJobOutputConfig') }})
+    job_definition_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('JobDefinitionArn') }})
+    job_definition_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('JobDefinitionName') }})
+    job_resources: MonitoringResources = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('JobResources') }})
+    role_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RoleArn') }})
+    data_quality_baseline_config: Optional[DataQualityBaselineConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DataQualityBaselineConfig') }})
+    network_config: Optional[MonitoringNetworkConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NetworkConfig') }})
+    stopping_condition: Optional[MonitoringStoppingCondition] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StoppingCondition') }})
     

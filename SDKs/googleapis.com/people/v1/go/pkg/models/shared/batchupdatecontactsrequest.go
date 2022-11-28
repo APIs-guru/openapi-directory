@@ -9,8 +9,10 @@ const (
 	BatchUpdateContactsRequestSourcesEnumReadSourceTypeDomainContact BatchUpdateContactsRequestSourcesEnum = "READ_SOURCE_TYPE_DOMAIN_CONTACT"
 )
 
-type BatchUpdateContactsRequest struct {
-	Contacts   map[string]Person                       `json:"contacts,omitempty"`
+// BatchUpdateContactsRequestInput
+// A request to update a batch of contacts.
+type BatchUpdateContactsRequestInput struct {
+	Contacts   map[string]PersonInput                  `json:"contacts,omitempty"`
 	ReadMask   *string                                 `json:"readMask,omitempty"`
 	Sources    []BatchUpdateContactsRequestSourcesEnum `json:"sources,omitempty"`
 	UpdateMask *string                                 `json:"updateMask,omitempty"`

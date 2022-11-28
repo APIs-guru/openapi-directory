@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ReplicationInstanceTaskLog } from "./replicationinstancetasklog";
 var DescribeReplicationInstanceTaskLogsResponse = /** @class */ (function (_super) {
     __extends(DescribeReplicationInstanceTaskLogsResponse, _super);
     function DescribeReplicationInstanceTaskLogsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Marker" }),
+        SpeakeasyMetadata({ data: "json, name=Marker" }),
         __metadata("design:type", String)
     ], DescribeReplicationInstanceTaskLogsResponse.prototype, "marker", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplicationInstanceArn" }),
+        SpeakeasyMetadata({ data: "json, name=ReplicationInstanceArn" }),
         __metadata("design:type", String)
     ], DescribeReplicationInstanceTaskLogsResponse.prototype, "replicationInstanceArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplicationInstanceTaskLogs", elemType: shared.ReplicationInstanceTaskLog }),
+        SpeakeasyMetadata({ data: "json, name=ReplicationInstanceTaskLogs", elemType: ReplicationInstanceTaskLog }),
         __metadata("design:type", Array)
     ], DescribeReplicationInstanceTaskLogsResponse.prototype, "replicationInstanceTaskLogs", void 0);
     return DescribeReplicationInstanceTaskLogsResponse;

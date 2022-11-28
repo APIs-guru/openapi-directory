@@ -1,27 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReportApiColumnSpec } from "./reportapicolumnspec";
-import { ReportApiColumnSpec } from "./reportapicolumnspec";
-import { ReportApiColumnSpec } from "./reportapicolumnspec";
+
 
 
 export class ReportRequestFilters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=column" })
+  @SpeakeasyMetadata({ data: "json, name=column" })
   column?: ReportApiColumnSpec;
 
-  @Metadata({ data: "json, name=operator" })
+  @SpeakeasyMetadata({ data: "json, name=operator" })
   operator?: string;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values?: any[];
 }
 
 
 export class ReportRequestOrderBy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=column" })
+  @SpeakeasyMetadata({ data: "json, name=column" })
   column?: ReportApiColumnSpec;
 
-  @Metadata({ data: "json, name=sortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=sortOrder" })
   sortOrder?: string;
 }
 
@@ -31,25 +29,25 @@ export class ReportRequestOrderBy extends SpeakeasyBase {
  * The reportScope is a set of IDs that are used to determine which subset of entities will be returned in the report. The full lineage of IDs from the lowest scoped level desired up through agency is required.
 **/
 export class ReportRequestReportScope extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=adGroupId" })
   adGroupId?: string;
 
-  @Metadata({ data: "json, name=adId" })
+  @SpeakeasyMetadata({ data: "json, name=adId" })
   adId?: string;
 
-  @Metadata({ data: "json, name=advertiserId" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string;
 
-  @Metadata({ data: "json, name=agencyId" })
+  @SpeakeasyMetadata({ data: "json, name=agencyId" })
   agencyId?: string;
 
-  @Metadata({ data: "json, name=campaignId" })
+  @SpeakeasyMetadata({ data: "json, name=campaignId" })
   campaignId?: string;
 
-  @Metadata({ data: "json, name=engineAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=engineAccountId" })
   engineAccountId?: string;
 
-  @Metadata({ data: "json, name=keywordId" })
+  @SpeakeasyMetadata({ data: "json, name=keywordId" })
   keywordId?: string;
 }
 
@@ -59,16 +57,16 @@ export class ReportRequestReportScope extends SpeakeasyBase {
  * If metrics are requested in a report, this argument will be used to restrict the metrics to a specific time range.
 **/
 export class ReportRequestTimeRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=changedAttributesSinceTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=changedAttributesSinceTimestamp" })
   changedAttributesSinceTimestamp?: string;
 
-  @Metadata({ data: "json, name=changedMetricsSinceTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=changedMetricsSinceTimestamp" })
   changedMetricsSinceTimestamp?: string;
 
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: string;
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate?: string;
 }
 
@@ -78,45 +76,45 @@ export class ReportRequestTimeRange extends SpeakeasyBase {
  * A request object used to create a DoubleClick Search report.
 **/
 export class ReportRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columns", elemType: shared.ReportApiColumnSpec })
+  @SpeakeasyMetadata({ data: "json, name=columns", elemType: ReportApiColumnSpec })
   columns?: ReportApiColumnSpec[];
 
-  @Metadata({ data: "json, name=downloadFormat" })
+  @SpeakeasyMetadata({ data: "json, name=downloadFormat" })
   downloadFormat?: string;
 
-  @Metadata({ data: "json, name=filters", elemType: shared.ReportRequestFilters })
+  @SpeakeasyMetadata({ data: "json, name=filters", elemType: ReportRequestFilters })
   filters?: ReportRequestFilters[];
 
-  @Metadata({ data: "json, name=includeDeletedEntities" })
+  @SpeakeasyMetadata({ data: "json, name=includeDeletedEntities" })
   includeDeletedEntities?: boolean;
 
-  @Metadata({ data: "json, name=includeRemovedEntities" })
+  @SpeakeasyMetadata({ data: "json, name=includeRemovedEntities" })
   includeRemovedEntities?: boolean;
 
-  @Metadata({ data: "json, name=maxRowsPerFile" })
+  @SpeakeasyMetadata({ data: "json, name=maxRowsPerFile" })
   maxRowsPerFile?: number;
 
-  @Metadata({ data: "json, name=orderBy", elemType: shared.ReportRequestOrderBy })
+  @SpeakeasyMetadata({ data: "json, name=orderBy", elemType: ReportRequestOrderBy })
   orderBy?: ReportRequestOrderBy[];
 
-  @Metadata({ data: "json, name=reportScope" })
+  @SpeakeasyMetadata({ data: "json, name=reportScope" })
   reportScope?: ReportRequestReportScope;
 
-  @Metadata({ data: "json, name=reportType" })
+  @SpeakeasyMetadata({ data: "json, name=reportType" })
   reportType?: string;
 
-  @Metadata({ data: "json, name=rowCount" })
+  @SpeakeasyMetadata({ data: "json, name=rowCount" })
   rowCount?: number;
 
-  @Metadata({ data: "json, name=startRow" })
+  @SpeakeasyMetadata({ data: "json, name=startRow" })
   startRow?: number;
 
-  @Metadata({ data: "json, name=statisticsCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=statisticsCurrency" })
   statisticsCurrency?: string;
 
-  @Metadata({ data: "json, name=timeRange" })
+  @SpeakeasyMetadata({ data: "json, name=timeRange" })
   timeRange?: ReportRequestTimeRange;
 
-  @Metadata({ data: "json, name=verifySingleTimeZone" })
+  @SpeakeasyMetadata({ data: "json, name=verifySingleTimeZone" })
   verifySingleTimeZone?: boolean;
 }

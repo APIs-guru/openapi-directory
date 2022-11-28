@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RuleSource } from "./rulesource";
 export declare enum AwsSqsRulePatchRequestModeEnum {
     Single = "single"

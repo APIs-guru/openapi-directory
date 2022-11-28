@@ -1,0 +1,81 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+var AuthorizationCodesSharedModelsAuthorizationContactInformation = /** @class */ (function (_super) {
+    __extends(AuthorizationCodesSharedModelsAuthorizationContactInformation, _super);
+    function AuthorizationCodesSharedModelsAuthorizationContactInformation() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=AuthorizationCodeID, form, name=AuthorizationCodeID;" }),
+        __metadata("design:type", Number)
+    ], AuthorizationCodesSharedModelsAuthorizationContactInformation.prototype, "authorizationCodeId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Code, form, name=Code;" }),
+        __metadata("design:type", String)
+    ], AuthorizationCodesSharedModelsAuthorizationContactInformation.prototype, "code", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Contact, form, name=Contact;" }),
+        __metadata("design:type", String)
+    ], AuthorizationCodesSharedModelsAuthorizationContactInformation.prototype, "contact", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=CreatedBy, form, name=CreatedBy;" }),
+        __metadata("design:type", String)
+    ], AuthorizationCodesSharedModelsAuthorizationContactInformation.prototype, "createdBy", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=CreatedDate, form, name=CreatedDate;" }),
+        __metadata("design:type", Date)
+    ], AuthorizationCodesSharedModelsAuthorizationContactInformation.prototype, "createdDate", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=DealerCode, form, name=DealerCode;" }),
+        __metadata("design:type", String)
+    ], AuthorizationCodesSharedModelsAuthorizationContactInformation.prototype, "dealerCode", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Dealership, form, name=Dealership;" }),
+        __metadata("design:type", String)
+    ], AuthorizationCodesSharedModelsAuthorizationContactInformation.prototype, "dealership", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=DefinitionName, form, name=DefinitionName;" }),
+        __metadata("design:type", String)
+    ], AuthorizationCodesSharedModelsAuthorizationContactInformation.prototype, "definitionName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Email, form, name=Email;" }),
+        __metadata("design:type", String)
+    ], AuthorizationCodesSharedModelsAuthorizationContactInformation.prototype, "email", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=ID, form, name=ID;" }),
+        __metadata("design:type", Number)
+    ], AuthorizationCodesSharedModelsAuthorizationContactInformation.prototype, "id", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Notes, form, name=Notes;" }),
+        __metadata("design:type", String)
+    ], AuthorizationCodesSharedModelsAuthorizationContactInformation.prototype, "notes", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Phone, form, name=Phone;" }),
+        __metadata("design:type", String)
+    ], AuthorizationCodesSharedModelsAuthorizationContactInformation.prototype, "phone", void 0);
+    return AuthorizationCodesSharedModelsAuthorizationContactInformation;
+}(SpeakeasyBase));
+export { AuthorizationCodesSharedModelsAuthorizationContactInformation };

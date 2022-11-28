@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudBeyondcorpAppconnectorsV1alphaImageConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * ImageConfig defines the control plane images to run.
 **/
 export class GoogleCloudBeyondcorpAppconnectorsV1alphaImageConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=stableImage" })
+  @SpeakeasyMetadata({ data: "json, name=stableImage" })
   stableImage?: string;
 
-  @Metadata({ data: "json, name=targetImage" })
+  @SpeakeasyMetadata({ data: "json, name=targetImage" })
   targetImage?: string;
 }

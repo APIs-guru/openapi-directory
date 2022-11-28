@@ -1,77 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostLkeClusterPoolsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=clusterId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=clusterId" })
   clusterId: number;
 }
 
 
 export class PostLkeClusterPoolsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count: number;
 
-  @Metadata({ data: "json, name=disks", elemType: shared.Items })
+  @SpeakeasyMetadata({ data: "json, name=disks", elemType: shared.Items })
   disks?: shared.Items[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 
-export class PostLkeClusterPoolsSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class PostLkeClusterPoolsSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class PostLkeClusterPoolsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: PostLkeClusterPoolsSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: PostLkeClusterPoolsSecurityOption2;
-}
-
-
-export class PostLkeClusterPoolsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PostLkeClusterPoolsPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PostLkeClusterPoolsRequestBody;
-
-  @Metadata()
-  security: PostLkeClusterPoolsSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class PostLkeClusterPoolsDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class PostLkeClusterPoolsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PostLkeClusterPoolsPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PostLkeClusterPoolsRequestBody;
+
+  @SpeakeasyMetadata()
+  security: PostLkeClusterPoolsSecurity;
+}
+
+
 export class PostLkeClusterPoolsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   lkeNodePool?: shared.LkeNodePool;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postLkeClusterPoolsDefaultApplicationJsonObject?: PostLkeClusterPoolsDefaultApplicationJson;
 }

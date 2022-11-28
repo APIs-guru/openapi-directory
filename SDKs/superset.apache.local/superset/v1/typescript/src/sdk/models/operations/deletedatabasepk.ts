@@ -1,86 +1,87 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteDatabasePkPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class DeleteDatabasePkSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class DeleteDatabasePkRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteDatabasePkPathParams;
-
-  @Metadata()
-  security: DeleteDatabasePkSecurity;
-}
-
-
 export class DeleteDatabasePk200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteDatabasePk401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteDatabasePk403ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteDatabasePk404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteDatabasePk422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class DeleteDatabasePk500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class DeleteDatabasePkRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteDatabasePkPathParams;
+
+  @SpeakeasyMetadata()
+  security: DeleteDatabasePkSecurity;
+}
+
+
 export class DeleteDatabasePkResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDatabasePk200ApplicationJsonObject?: DeleteDatabasePk200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDatabasePk401ApplicationJsonObject?: DeleteDatabasePk401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDatabasePk403ApplicationJsonObject?: DeleteDatabasePk403ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDatabasePk404ApplicationJsonObject?: DeleteDatabasePk404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDatabasePk422ApplicationJsonObject?: DeleteDatabasePk422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteDatabasePk500ApplicationJsonObject?: DeleteDatabasePk500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

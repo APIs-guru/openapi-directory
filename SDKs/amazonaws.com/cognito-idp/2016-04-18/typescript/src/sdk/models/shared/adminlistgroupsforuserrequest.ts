@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AdminListGroupsForUserRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=UserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolId" })
   userPoolId: string;
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username: string;
 }

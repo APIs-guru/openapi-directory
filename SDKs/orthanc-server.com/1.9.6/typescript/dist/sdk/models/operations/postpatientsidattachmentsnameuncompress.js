@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostPatientsIdAttachmentsNameUncompressPathParams = /** @class */ (function (_super) {
     __extends(PostPatientsIdAttachmentsNameUncompressPathParams, _super);
     function PostPatientsIdAttachmentsNameUncompressPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], PostPatientsIdAttachmentsNameUncompressPathParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], PostPatientsIdAttachmentsNameUncompressPathParams.prototype, "name", void 0);
     return PostPatientsIdAttachmentsNameUncompressPathParams;
@@ -45,7 +45,7 @@ var PostPatientsIdAttachmentsNameUncompressRequest = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostPatientsIdAttachmentsNameUncompressPathParams)
     ], PostPatientsIdAttachmentsNameUncompressRequest.prototype, "pathParams", void 0);
     return PostPatientsIdAttachmentsNameUncompressRequest;
@@ -57,11 +57,11 @@ var PostPatientsIdAttachmentsNameUncompressResponse = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostPatientsIdAttachmentsNameUncompressResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostPatientsIdAttachmentsNameUncompressResponse.prototype, "statusCode", void 0);
     return PostPatientsIdAttachmentsNameUncompressResponse;

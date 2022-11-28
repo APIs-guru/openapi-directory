@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class IncreaseReplicationFactorRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AvailabilityZones" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZones" })
   availabilityZones?: string[];
 
-  @Metadata({ data: "json, name=ClusterName" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterName" })
   clusterName: string;
 
-  @Metadata({ data: "json, name=NewReplicationFactor" })
+  @SpeakeasyMetadata({ data: "json, name=NewReplicationFactor" })
   newReplicationFactor: number;
 }

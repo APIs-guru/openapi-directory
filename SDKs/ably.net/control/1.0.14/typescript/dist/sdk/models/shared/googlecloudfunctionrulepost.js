@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleSource } from "./rulesource";
 export var GoogleCloudFunctionRulePostRequestModeEnum;
 (function (GoogleCloudFunctionRulePostRequestModeEnum) {
@@ -44,11 +43,11 @@ var GoogleCloudFunctionRulePostTargetHeaders = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleCloudFunctionRulePostTargetHeaders.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], GoogleCloudFunctionRulePostTargetHeaders.prototype, "value", void 0);
     return GoogleCloudFunctionRulePostTargetHeaders;
@@ -60,31 +59,31 @@ var GoogleCloudFunctionRulePostTarget = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=enveloped" }),
+        SpeakeasyMetadata({ data: "json, name=enveloped" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudFunctionRulePostTarget.prototype, "enveloped", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], GoogleCloudFunctionRulePostTarget.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=functionName" }),
+        SpeakeasyMetadata({ data: "json, name=functionName" }),
         __metadata("design:type", String)
     ], GoogleCloudFunctionRulePostTarget.prototype, "functionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=headers", elemType: shared.GoogleCloudFunctionRulePostTargetHeaders }),
+        SpeakeasyMetadata({ data: "json, name=headers", elemType: GoogleCloudFunctionRulePostTargetHeaders }),
         __metadata("design:type", Array)
     ], GoogleCloudFunctionRulePostTarget.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "json, name=projectId" }),
+        SpeakeasyMetadata({ data: "json, name=projectId" }),
         __metadata("design:type", String)
     ], GoogleCloudFunctionRulePostTarget.prototype, "projectId", void 0);
     __decorate([
-        Metadata({ data: "json, name=region" }),
+        SpeakeasyMetadata({ data: "json, name=region" }),
         __metadata("design:type", String)
     ], GoogleCloudFunctionRulePostTarget.prototype, "region", void 0);
     __decorate([
-        Metadata({ data: "json, name=signingKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=signingKeyId" }),
         __metadata("design:type", String)
     ], GoogleCloudFunctionRulePostTarget.prototype, "signingKeyId", void 0);
     return GoogleCloudFunctionRulePostTarget;
@@ -96,19 +95,19 @@ var GoogleCloudFunctionRulePost = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=requestMode" }),
+        SpeakeasyMetadata({ data: "json, name=requestMode" }),
         __metadata("design:type", String)
     ], GoogleCloudFunctionRulePost.prototype, "requestMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ruleType" }),
+        SpeakeasyMetadata({ data: "json, name=ruleType" }),
         __metadata("design:type", String)
     ], GoogleCloudFunctionRulePost.prototype, "ruleType", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", RuleSource)
     ], GoogleCloudFunctionRulePost.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "json, name=target" }),
+        SpeakeasyMetadata({ data: "json, name=target" }),
         __metadata("design:type", GoogleCloudFunctionRulePostTarget)
     ], GoogleCloudFunctionRulePost.prototype, "target", void 0);
     return GoogleCloudFunctionRulePost;

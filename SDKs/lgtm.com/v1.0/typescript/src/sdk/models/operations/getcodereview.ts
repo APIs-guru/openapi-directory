@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCodeReviewPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=review-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=review-id" })
   reviewId: string;
 }
 
 
 export class GetCodeReviewSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   accessToken: shared.SchemeAccessToken;
 }
 
 
 export class GetCodeReviewRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetCodeReviewPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetCodeReviewSecurity;
 }
 
 
 export class GetCodeReviewResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.CodeReview })
+  @SpeakeasyMetadata({ elemType: shared.CodeReview })
   codeReviews?: shared.CodeReview[];
 }

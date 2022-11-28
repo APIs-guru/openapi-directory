@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FirstAndThirdPartyAudienceTargetingSetting } from "./firstandthirdpartyaudiencetargetingsetting";
+
 
 
 // FirstAndThirdPartyAudienceGroup
@@ -8,6 +8,6 @@ import { FirstAndThirdPartyAudienceTargetingSetting } from "./firstandthirdparty
  * Details of first and third party audience group. All first and third party audience targeting settings are logically ‘OR’ of each other.
 **/
 export class FirstAndThirdPartyAudienceGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=settings", elemType: shared.FirstAndThirdPartyAudienceTargetingSetting })
+  @SpeakeasyMetadata({ data: "json, name=settings", elemType: FirstAndThirdPartyAudienceTargetingSetting })
   settings?: FirstAndThirdPartyAudienceTargetingSetting[];
 }

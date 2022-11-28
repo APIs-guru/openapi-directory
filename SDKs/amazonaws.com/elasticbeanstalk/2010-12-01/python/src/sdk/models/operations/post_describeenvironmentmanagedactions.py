@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeEnvironmentManagedActionsActionEnum(str, Enum):
     DESCRIBE_ENVIRONMENT_MANAGED_ACTIONS = "DescribeEnvironmentManagedActions"
@@ -10,8 +14,8 @@ class PostDescribeEnvironmentManagedActionsVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeEnvironmentManagedActionsQueryParams:
-    action: PostDescribeEnvironmentManagedActionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeEnvironmentManagedActionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeEnvironmentManagedActionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeEnvironmentManagedActionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeEnvironmentManagedActionsHeaders:
 
 @dataclass
 class PostDescribeEnvironmentManagedActionsRequest:
-    query_params: PostDescribeEnvironmentManagedActionsQueryParams = field(default=None)
-    headers: PostDescribeEnvironmentManagedActionsHeaders = field(default=None)
+    headers: PostDescribeEnvironmentManagedActionsHeaders = field()
+    query_params: PostDescribeEnvironmentManagedActionsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeEnvironmentManagedActionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

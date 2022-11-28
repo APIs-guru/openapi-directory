@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAuthorizeSnapshotAccessActionEnum(str, Enum):
     AUTHORIZE_SNAPSHOT_ACCESS = "AuthorizeSnapshotAccess"
@@ -10,11 +14,11 @@ class GetAuthorizeSnapshotAccessVersionEnum(str, Enum):
 
 @dataclass
 class GetAuthorizeSnapshotAccessQueryParams:
-    account_with_restore_access: str = field(default=None, metadata={'query_param': { 'field_name': 'AccountWithRestoreAccess', 'style': 'form', 'explode': True }})
-    action: GetAuthorizeSnapshotAccessActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    account_with_restore_access: str = field(metadata={'query_param': { 'field_name': 'AccountWithRestoreAccess', 'style': 'form', 'explode': True }})
+    action: GetAuthorizeSnapshotAccessActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    snapshot_identifier: str = field(metadata={'query_param': { 'field_name': 'SnapshotIdentifier', 'style': 'form', 'explode': True }})
+    version: GetAuthorizeSnapshotAccessVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     snapshot_cluster_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SnapshotClusterIdentifier', 'style': 'form', 'explode': True }})
-    snapshot_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'SnapshotIdentifier', 'style': 'form', 'explode': True }})
-    version: GetAuthorizeSnapshotAccessVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetAuthorizeSnapshotAccessHeaders:
 
 @dataclass
 class GetAuthorizeSnapshotAccessRequest:
-    query_params: GetAuthorizeSnapshotAccessQueryParams = field(default=None)
-    headers: GetAuthorizeSnapshotAccessHeaders = field(default=None)
+    headers: GetAuthorizeSnapshotAccessHeaders = field()
+    query_params: GetAuthorizeSnapshotAccessQueryParams = field()
     
 
 @dataclass
 class GetAuthorizeSnapshotAccessResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

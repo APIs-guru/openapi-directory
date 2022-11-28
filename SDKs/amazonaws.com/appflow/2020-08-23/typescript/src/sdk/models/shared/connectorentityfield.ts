@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DestinationFieldProperties } from "./destinationfieldproperties";
 import { SourceFieldProperties } from "./sourcefieldproperties";
 import { SupportedFieldTypeDetails } from "./supportedfieldtypedetails";
+
 
 
 // ConnectorEntityField
@@ -9,21 +10,21 @@ import { SupportedFieldTypeDetails } from "./supportedfieldtypedetails";
  *  Describes the data model of a connector field. For example, for an <i>account</i> entity, the fields would be <i>account name</i>, <i>account ID</i>, and so on. 
 **/
 export class ConnectorEntityField extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=destinationProperties" })
+  @SpeakeasyMetadata({ data: "json, name=destinationProperties" })
   destinationProperties?: DestinationFieldProperties;
 
-  @Metadata({ data: "json, name=identifier" })
+  @SpeakeasyMetadata({ data: "json, name=identifier" })
   identifier: string;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=sourceProperties" })
+  @SpeakeasyMetadata({ data: "json, name=sourceProperties" })
   sourceProperties?: SourceFieldProperties;
 
-  @Metadata({ data: "json, name=supportedFieldTypeDetails" })
+  @SpeakeasyMetadata({ data: "json, name=supportedFieldTypeDetails" })
   supportedFieldTypeDetails?: SupportedFieldTypeDetails;
 }

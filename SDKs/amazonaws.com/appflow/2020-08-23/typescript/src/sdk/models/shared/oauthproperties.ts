@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OAuthProperties
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The OAuth properties required for OAuth type authentication. 
 **/
 export class OAuthProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authCodeUrl" })
+  @SpeakeasyMetadata({ data: "json, name=authCodeUrl" })
   authCodeUrl: string;
 
-  @Metadata({ data: "json, name=oAuthScopes" })
+  @SpeakeasyMetadata({ data: "json, name=oAuthScopes" })
   oAuthScopes: string[];
 
-  @Metadata({ data: "json, name=tokenUrl" })
+  @SpeakeasyMetadata({ data: "json, name=tokenUrl" })
   tokenUrl: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SasPortalDeviceModel
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the model of the device.
 **/
 export class SasPortalDeviceModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=firmwareVersion" })
+  @SpeakeasyMetadata({ data: "json, name=firmwareVersion" })
   firmwareVersion?: string;
 
-  @Metadata({ data: "json, name=hardwareVersion" })
+  @SpeakeasyMetadata({ data: "json, name=hardwareVersion" })
   hardwareVersion?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=softwareVersion" })
+  @SpeakeasyMetadata({ data: "json, name=softwareVersion" })
   softwareVersion?: string;
 
-  @Metadata({ data: "json, name=vendor" })
+  @SpeakeasyMetadata({ data: "json, name=vendor" })
   vendor?: string;
 }

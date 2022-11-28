@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EventDataSourceEnum } from "./eventdatasourceenum";
 import { EventClassEnum } from "./eventclassenum";
 import { ResourceCollection } from "./resourcecollection";

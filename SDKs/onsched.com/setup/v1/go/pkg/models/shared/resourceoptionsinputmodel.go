@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ResourceOptionsInputModel
+// Options for the new resource
 type ResourceOptionsInputModel struct {
 	BioLink              *string    `json:"bioLink,omitempty"`
 	BookingNotification  *int32     `json:"bookingNotification,omitempty"`

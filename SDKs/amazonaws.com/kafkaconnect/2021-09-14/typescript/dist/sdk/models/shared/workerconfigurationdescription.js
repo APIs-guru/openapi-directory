@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // WorkerConfigurationDescription
 /**
  * The description of the worker configuration.
@@ -33,11 +33,11 @@ var WorkerConfigurationDescription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=revision" }),
+        SpeakeasyMetadata({ data: "json, name=revision" }),
         __metadata("design:type", Number)
     ], WorkerConfigurationDescription.prototype, "revision", void 0);
     __decorate([
-        Metadata({ data: "json, name=workerConfigurationArn" }),
+        SpeakeasyMetadata({ data: "json, name=workerConfigurationArn" }),
         __metadata("design:type", String)
     ], WorkerConfigurationDescription.prototype, "workerConfigurationArn", void 0);
     return WorkerConfigurationDescription;

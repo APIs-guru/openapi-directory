@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def averages_v2_get_v2_averages_get(self, request: operations.AveragesV2GetV2AveragesGetRequest) -> operations.AveragesV2GetV2AveragesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Averages V2 Get
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v2/averages"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -51,15 +75,17 @@ class SDK:
 
     
     def cities_get_v2_cities_get(self, request: operations.CitiesGetV2CitiesGetRequest) -> operations.CitiesGetV2CitiesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Provides a simple listing of cities within the platform
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v2/cities"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -78,15 +104,17 @@ class SDK:
 
     
     def cities_getv1_v1_cities_get(self, request: operations.CitiesGetv1V1CitiesGetRequest) -> operations.CitiesGetv1V1CitiesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Provides a simple listing of cities within the platform
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/cities"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -105,15 +133,17 @@ class SDK:
 
     
     def countries_get_v1_countries_country_id_get(self, request: operations.CountriesGetV1CountriesCountryIDGetRequest) -> operations.CountriesGetV1CountriesCountryIDGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Countries Get
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/countries/{country_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -132,15 +162,17 @@ class SDK:
 
     
     def countries_get_v2_countries_country_id_get(self, request: operations.CountriesGetV2CountriesCountryIDGetRequest) -> operations.CountriesGetV2CountriesCountryIDGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Countries Get
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/countries/{country_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -159,15 +191,17 @@ class SDK:
 
     
     def countries_get_v2_countries_get(self, request: operations.CountriesGetV2CountriesGetRequest) -> operations.CountriesGetV2CountriesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Countries Get
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v2/countries"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -186,15 +220,17 @@ class SDK:
 
     
     def countries_getv1_v1_countries_get(self, request: operations.CountriesGetv1V1CountriesGetRequest) -> operations.CountriesGetv1V1CountriesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Countries Getv1
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/countries"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -213,13 +249,16 @@ class SDK:
 
     
     def demo_v2_locations_tiles_viewer_get(self) -> operations.DemoV2LocationsTilesViewerGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Demo
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v2/locations/tiles/viewer"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -233,13 +272,16 @@ class SDK:
 
     
     def favico_favicon_ico_get(self) -> operations.FavicoFaviconIcoGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Favico
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/favicon.ico"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -254,15 +296,17 @@ class SDK:
 
     
     def get_mobilegentile_v2_locations_tiles_mobile_generalized_z_x_y_pbf_get(self, request: operations.GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetRequest) -> operations.GetMobilegentileV2LocationsTilesMobileGeneralizedZXYPbfGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Mobilegentile
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/locations/tiles/mobile-generalized/{z}/{x}/{y}.pbf", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -279,15 +323,17 @@ class SDK:
 
     
     def get_mobiletile_v2_locations_tiles_mobile_z_x_y_pbf_get(self, request: operations.GetMobiletileV2LocationsTilesMobileZXYPbfGetRequest) -> operations.GetMobiletileV2LocationsTilesMobileZXYPbfGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Mobiletile
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/locations/tiles/mobile/{z}/{x}/{y}.pbf", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -304,15 +350,17 @@ class SDK:
 
     
     def get_tile_v2_locations_tiles_z_x_y_pbf_get(self, request: operations.GetTileV2LocationsTilesZXYPbfGetRequest) -> operations.GetTileV2LocationsTilesZXYPbfGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Tile
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/locations/tiles/{z}/{x}/{y}.pbf", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -329,15 +377,17 @@ class SDK:
 
     
     def latest_get_v2_latest_location_id_get(self, request: operations.LatestGetV2LatestLocationIDGetRequest) -> operations.LatestGetV2LatestLocationIDGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Latest Get
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/latest/{location_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -356,15 +406,17 @@ class SDK:
 
     
     def latest_get_v2_latest_get(self, request: operations.LatestGetV2LatestGetRequest) -> operations.LatestGetV2LatestGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Latest Get
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v2/latest"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -383,15 +435,17 @@ class SDK:
 
     
     def latest_v1_get_v1_latest_location_id_get(self, request: operations.LatestV1GetV1LatestLocationIDGetRequest) -> operations.LatestV1GetV1LatestLocationIDGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Latest V1 Get
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/latest/{location_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -410,15 +464,17 @@ class SDK:
 
     
     def latest_v1_get_v1_latest_get(self, request: operations.LatestV1GetV1LatestGetRequest) -> operations.LatestV1GetV1LatestGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Latest V1 Get
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/latest"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -437,15 +493,17 @@ class SDK:
 
     
     def locations_get_v2_locations_location_id_get(self, request: operations.LocationsGetV2LocationsLocationIDGetRequest) -> operations.LocationsGetV2LocationsLocationIDGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Locations Get
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/locations/{location_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -464,15 +522,17 @@ class SDK:
 
     
     def locations_get_v2_locations_get(self, request: operations.LocationsGetV2LocationsGetRequest) -> operations.LocationsGetV2LocationsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Locations Get
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v2/locations"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -491,15 +551,17 @@ class SDK:
 
     
     def locationsv1_get_v1_locations_location_id_get(self, request: operations.Locationsv1GetV1LocationsLocationIDGetRequest) -> operations.Locationsv1GetV1LocationsLocationIDGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Locationsv1 Get
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v1/locations/{location_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -518,15 +580,17 @@ class SDK:
 
     
     def locationsv1_get_v1_locations_get(self, request: operations.Locationsv1GetV1LocationsGetRequest) -> operations.Locationsv1GetV1LocationsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Locationsv1 Get
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/locations"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -545,15 +609,17 @@ class SDK:
 
     
     def measurements_get_v1_v1_measurements_get(self, request: operations.MeasurementsGetV1V1MeasurementsGetRequest) -> operations.MeasurementsGetV1V1MeasurementsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Measurements Get V1
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/measurements"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -572,15 +638,17 @@ class SDK:
 
     
     def measurements_get_v2_measurements_get(self, request: operations.MeasurementsGetV2MeasurementsGetRequest) -> operations.MeasurementsGetV2MeasurementsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Measurements Get
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v2/measurements"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -599,13 +667,16 @@ class SDK:
 
     
     def mfr_get_v2_manufacturers_get(self) -> operations.MfrGetV2ManufacturersGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Mfr Get
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v2/manufacturers"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -620,13 +691,16 @@ class SDK:
 
     
     def mobilegentilejson_v2_locations_tiles_mobile_generalized_tiles_json_get(self) -> operations.MobilegentilejsonV2LocationsTilesMobileGeneralizedTilesJSONGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Mobilegentilejson
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v2/locations/tiles/mobile-generalized/tiles.json"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -641,13 +715,16 @@ class SDK:
 
     
     def mobiletilejson_v2_locations_tiles_mobile_tiles_json_get(self) -> operations.MobiletilejsonV2LocationsTilesMobileTilesJSONGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Mobiletilejson
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v2/locations/tiles/mobile/tiles.json"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -662,13 +739,16 @@ class SDK:
 
     
     def model_get_v2_models_get(self) -> operations.ModelGetV2ModelsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Model Get
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v2/models"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -683,15 +763,17 @@ class SDK:
 
     
     def parameters_get_v2_parameters_get(self, request: operations.ParametersGetV2ParametersGetRequest) -> operations.ParametersGetV2ParametersGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Parameters Get
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v2/parameters"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -710,15 +792,17 @@ class SDK:
 
     
     def parameters_getv1_v1_parameters_get(self, request: operations.ParametersGetv1V1ParametersGetRequest) -> operations.ParametersGetv1V1ParametersGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Parameters Getv1
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/parameters"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -737,13 +821,20 @@ class SDK:
 
     
     def pong_ping_get(self) -> operations.PongPingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Pong
+        Sanity check.
+        This will let the user know that the service is operational.
+        And this path operation will:
+        * show a lifesign
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/ping"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -758,15 +849,17 @@ class SDK:
 
     
     def projects_get_v2_projects_project_id_get(self, request: operations.ProjectsGetV2ProjectsProjectIDGetRequest) -> operations.ProjectsGetV2ProjectsProjectIDGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Projects Get
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/projects/{project_id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -785,15 +878,17 @@ class SDK:
 
     
     def projects_get_v2_projects_get(self, request: operations.ProjectsGetV2ProjectsGetRequest) -> operations.ProjectsGetV2ProjectsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Projects Get
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v2/projects"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -812,13 +907,16 @@ class SDK:
 
     
     def readme_get_v2_sources_readme_slug_get(self, request: operations.ReadmeGetV2SourcesReadmeSlugGetRequest) -> operations.ReadmeGetV2SourcesReadmeSlugGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Readme Get
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/v2/sources/readme/{slug}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -837,15 +935,17 @@ class SDK:
 
     
     def sources_get_v2_sources_get(self, request: operations.SourcesGetV2SourcesGetRequest) -> operations.SourcesGetV2SourcesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Sources Get
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v2/sources"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -864,15 +964,17 @@ class SDK:
 
     
     def sources_v1_get_v1_sources_get(self, request: operations.SourcesV1GetV1SourcesGetRequest) -> operations.SourcesV1GetV1SourcesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Sources V1 Get
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v1/sources"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -891,13 +993,16 @@ class SDK:
 
     
     def summary_get_v2_summary_get(self) -> operations.SummaryGetV2SummaryGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Summary Get
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v2/summary"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -912,13 +1017,16 @@ class SDK:
 
     
     def tilejson_v2_locations_tiles_tiles_json_get(self) -> operations.TilejsonV2LocationsTilesTilesJSONGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Tilejson
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/v2/locations/tiles/tiles.json"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 

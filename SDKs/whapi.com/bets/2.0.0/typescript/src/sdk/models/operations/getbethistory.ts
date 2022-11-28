@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetBetHistoryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dateFrom" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dateFrom" })
   dateFrom: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dateTo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dateTo" })
   dateTo: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=exclude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=exclude" })
   exclude?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=fields" })
   fields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=include" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=include" })
   include?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=settled" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=settled" })
   settled?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 }
 
 
 export class GetBetHistoryHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=apiKey" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiKey" })
   apiKey: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=apiSecret" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiSecret" })
   apiSecret: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=apiTicket" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiTicket" })
   apiTicket: string;
 }
 
 
 export class GetBetHistoryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetBetHistoryQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetBetHistoryHeaders;
 }
 
 
 export class GetBetHistoryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   betHistoryResponse?: shared.BetHistoryResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errors?: shared.Errors;
 }

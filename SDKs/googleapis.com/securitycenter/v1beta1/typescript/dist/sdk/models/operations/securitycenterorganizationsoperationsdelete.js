@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SecuritycenterOrganizationsOperationsDeletePathParams = /** @class */ (function (_super) {
     __extends(SecuritycenterOrganizationsOperationsDeletePathParams, _super);
@@ -30,7 +30,7 @@ var SecuritycenterOrganizationsOperationsDeletePathParams = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], SecuritycenterOrganizationsOperationsDeletePathParams.prototype, "name", void 0);
     return SecuritycenterOrganizationsOperationsDeletePathParams;
@@ -42,47 +42,47 @@ var SecuritycenterOrganizationsOperationsDeleteQueryParams = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], SecuritycenterOrganizationsOperationsDeleteQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], SecuritycenterOrganizationsOperationsDeleteQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], SecuritycenterOrganizationsOperationsDeleteQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], SecuritycenterOrganizationsOperationsDeleteQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], SecuritycenterOrganizationsOperationsDeleteQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], SecuritycenterOrganizationsOperationsDeleteQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], SecuritycenterOrganizationsOperationsDeleteQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], SecuritycenterOrganizationsOperationsDeleteQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], SecuritycenterOrganizationsOperationsDeleteQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], SecuritycenterOrganizationsOperationsDeleteQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], SecuritycenterOrganizationsOperationsDeleteQueryParams.prototype, "uploadProtocol", void 0);
     return SecuritycenterOrganizationsOperationsDeleteQueryParams;
@@ -94,11 +94,11 @@ var SecuritycenterOrganizationsOperationsDeleteSecurity = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], SecuritycenterOrganizationsOperationsDeleteSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], SecuritycenterOrganizationsOperationsDeleteSecurity.prototype, "oauth2c", void 0);
     return SecuritycenterOrganizationsOperationsDeleteSecurity;
@@ -110,15 +110,15 @@ var SecuritycenterOrganizationsOperationsDeleteRequest = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SecuritycenterOrganizationsOperationsDeletePathParams)
     ], SecuritycenterOrganizationsOperationsDeleteRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SecuritycenterOrganizationsOperationsDeleteQueryParams)
     ], SecuritycenterOrganizationsOperationsDeleteRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SecuritycenterOrganizationsOperationsDeleteSecurity)
     ], SecuritycenterOrganizationsOperationsDeleteRequest.prototype, "security", void 0);
     return SecuritycenterOrganizationsOperationsDeleteRequest;
@@ -130,15 +130,15 @@ var SecuritycenterOrganizationsOperationsDeleteResponse = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SecuritycenterOrganizationsOperationsDeleteResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], SecuritycenterOrganizationsOperationsDeleteResponse.prototype, "empty", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SecuritycenterOrganizationsOperationsDeleteResponse.prototype, "statusCode", void 0);
     return SecuritycenterOrganizationsOperationsDeleteResponse;

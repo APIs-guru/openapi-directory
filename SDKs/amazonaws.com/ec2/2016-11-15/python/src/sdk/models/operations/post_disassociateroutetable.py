@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDisassociateRouteTableActionEnum(str, Enum):
     DISASSOCIATE_ROUTE_TABLE = "DisassociateRouteTable"
@@ -10,8 +14,8 @@ class PostDisassociateRouteTableVersionEnum(str, Enum):
 
 @dataclass
 class PostDisassociateRouteTableQueryParams:
-    action: PostDisassociateRouteTableActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDisassociateRouteTableVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDisassociateRouteTableActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDisassociateRouteTableVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostDisassociateRouteTableHeaders:
 
 @dataclass
 class PostDisassociateRouteTableRequest:
-    query_params: PostDisassociateRouteTableQueryParams = field(default=None)
-    headers: PostDisassociateRouteTableHeaders = field(default=None)
+    headers: PostDisassociateRouteTableHeaders = field()
+    query_params: PostDisassociateRouteTableQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDisassociateRouteTableResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

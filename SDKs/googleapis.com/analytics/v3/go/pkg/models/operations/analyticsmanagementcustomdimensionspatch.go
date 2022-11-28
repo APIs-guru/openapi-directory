@@ -29,7 +29,7 @@ type AnalyticsManagementCustomDimensionsPatchSecurity struct {
 type AnalyticsManagementCustomDimensionsPatchRequest struct {
 	PathParams  AnalyticsManagementCustomDimensionsPatchPathParams
 	QueryParams AnalyticsManagementCustomDimensionsPatchQueryParams
-	Request     *shared.CustomDimension `request:"mediaType=application/json"`
+	Request     *shared.CustomDimensionInput `request:"mediaType=application/json"`
 	Security    AnalyticsManagementCustomDimensionsPatchSecurity
 }
 

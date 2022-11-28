@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateThingGroupPathParams:
-    thing_group_name: str = field(default=None, metadata={'path_param': { 'field_name': 'thingGroupName', 'style': 'simple', 'explode': False }})
+    thing_group_name: str = field(metadata={'path_param': { 'field_name': 'thingGroupName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,31 +27,35 @@ class UpdateThingGroupHeaders:
 @dataclass_json
 @dataclass
 class UpdateThingGroupRequestBodyThingGroupProperties:
-    attribute_payload: Optional[shared.AttributePayload] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributePayload' }})
-    thing_group_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thingGroupDescription' }})
+    r"""UpdateThingGroupRequestBodyThingGroupProperties
+    Thing group properties.
+    """
+    
+    attribute_payload: Optional[shared.AttributePayload] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attributePayload') }})
+    thing_group_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thingGroupDescription') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateThingGroupRequestBody:
-    expected_version: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expectedVersion' }})
-    thing_group_properties: UpdateThingGroupRequestBodyThingGroupProperties = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thingGroupProperties' }})
+    thing_group_properties: UpdateThingGroupRequestBodyThingGroupProperties = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('thingGroupProperties') }})
+    expected_version: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expectedVersion') }})
     
 
 @dataclass
 class UpdateThingGroupRequest:
-    path_params: UpdateThingGroupPathParams = field(default=None)
-    headers: UpdateThingGroupHeaders = field(default=None)
-    request: UpdateThingGroupRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateThingGroupHeaders = field()
+    path_params: UpdateThingGroupPathParams = field()
+    request: UpdateThingGroupRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateThingGroupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     update_thing_group_response: Optional[shared.UpdateThingGroupResponse] = field(default=None)
     version_conflict_exception: Optional[Any] = field(default=None)

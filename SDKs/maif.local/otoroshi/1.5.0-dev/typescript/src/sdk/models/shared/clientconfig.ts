@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ClientConfig
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The configuration of the circuit breaker for a service descriptor
 **/
 export class ClientConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backoffFactor" })
+  @SpeakeasyMetadata({ data: "json, name=backoffFactor" })
   backoffFactor: number;
 
-  @Metadata({ data: "json, name=callTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=callTimeout" })
   callTimeout: number;
 
-  @Metadata({ data: "json, name=globalTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=globalTimeout" })
   globalTimeout: number;
 
-  @Metadata({ data: "json, name=maxErrors" })
+  @SpeakeasyMetadata({ data: "json, name=maxErrors" })
   maxErrors: number;
 
-  @Metadata({ data: "json, name=retries" })
+  @SpeakeasyMetadata({ data: "json, name=retries" })
   retries: number;
 
-  @Metadata({ data: "json, name=retryInitialDelay" })
+  @SpeakeasyMetadata({ data: "json, name=retryInitialDelay" })
   retryInitialDelay: number;
 
-  @Metadata({ data: "json, name=sampleInterval" })
+  @SpeakeasyMetadata({ data: "json, name=sampleInterval" })
   sampleInterval: number;
 
-  @Metadata({ data: "json, name=useCircuitBreaker" })
+  @SpeakeasyMetadata({ data: "json, name=useCircuitBreaker" })
   useCircuitBreaker: boolean;
 }

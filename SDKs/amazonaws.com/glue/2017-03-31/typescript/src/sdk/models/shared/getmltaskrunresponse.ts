@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskRunProperties } from "./taskrunproperties";
 import { TaskStatusTypeEnum } from "./taskstatustypeenum";
 
 
+
 export class GetMlTaskRunResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CompletedOn" })
+  @SpeakeasyMetadata({ data: "json, name=CompletedOn" })
   completedOn?: Date;
 
-  @Metadata({ data: "json, name=ErrorString" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorString" })
   errorString?: string;
 
-  @Metadata({ data: "json, name=ExecutionTime" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionTime" })
   executionTime?: number;
 
-  @Metadata({ data: "json, name=LastModifiedOn" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedOn" })
   lastModifiedOn?: Date;
 
-  @Metadata({ data: "json, name=LogGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=LogGroupName" })
   logGroupName?: string;
 
-  @Metadata({ data: "json, name=Properties" })
+  @SpeakeasyMetadata({ data: "json, name=Properties" })
   properties?: TaskRunProperties;
 
-  @Metadata({ data: "json, name=StartedOn" })
+  @SpeakeasyMetadata({ data: "json, name=StartedOn" })
   startedOn?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: TaskStatusTypeEnum;
 
-  @Metadata({ data: "json, name=TaskRunId" })
+  @SpeakeasyMetadata({ data: "json, name=TaskRunId" })
   taskRunId?: string;
 
-  @Metadata({ data: "json, name=TransformId" })
+  @SpeakeasyMetadata({ data: "json, name=TransformId" })
   transformId?: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class CreatePublicKey20171030Headers extends SpeakeasyBase {
     xAmzAlgorithm?: string;
     xAmzContentSha256?: string;

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteAutoScalingGroupActionEnum(str, Enum):
     DELETE_AUTO_SCALING_GROUP = "DeleteAutoScalingGroup"
@@ -10,8 +14,8 @@ class PostDeleteAutoScalingGroupVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteAutoScalingGroupQueryParams:
-    action: PostDeleteAutoScalingGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteAutoScalingGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteAutoScalingGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteAutoScalingGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteAutoScalingGroupHeaders:
 
 @dataclass
 class PostDeleteAutoScalingGroupRequest:
-    query_params: PostDeleteAutoScalingGroupQueryParams = field(default=None)
-    headers: PostDeleteAutoScalingGroupHeaders = field(default=None)
+    headers: PostDeleteAutoScalingGroupHeaders = field()
+    query_params: PostDeleteAutoScalingGroupQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteAutoScalingGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

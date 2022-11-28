@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var StartDtmfPathParams = /** @class */ (function (_super) {
     __extends(StartDtmfPathParams, _super);
@@ -30,7 +30,7 @@ var StartDtmfPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=uuid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=uuid" }),
         __metadata("design:type", String)
     ], StartDtmfPathParams.prototype, "uuid", void 0);
     return StartDtmfPathParams;
@@ -42,7 +42,7 @@ var StartDtmfSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], StartDtmfSecurity.prototype, "bearerAuth", void 0);
     return StartDtmfSecurity;
@@ -54,15 +54,15 @@ var StartDtmfRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StartDtmfPathParams)
     ], StartDtmfRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.DtmfRequest)
     ], StartDtmfRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StartDtmfSecurity)
     ], StartDtmfRequest.prototype, "security", void 0);
     return StartDtmfRequest;
@@ -74,15 +74,15 @@ var StartDtmfResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StartDtmfResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.DtmfResponse)
     ], StartDtmfResponse.prototype, "dtmfResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StartDtmfResponse.prototype, "statusCode", void 0);
     return StartDtmfResponse;

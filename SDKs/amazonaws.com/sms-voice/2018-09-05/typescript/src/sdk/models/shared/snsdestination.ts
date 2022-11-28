@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SnsDestination
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object that contains information about an event destination that sends data to Amazon SNS.
 **/
 export class SnsDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TopicArn" })
+  @SpeakeasyMetadata({ data: "json, name=TopicArn" })
   topicArn?: string;
 }

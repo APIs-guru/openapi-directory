@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatalabelingV1beta1TextPayload
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Container of information about a piece of text.
 **/
 export class GoogleCloudDatalabelingV1beta1TextPayload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=textContent" })
+  @SpeakeasyMetadata({ data: "json, name=textContent" })
   textContent?: string;
 }

@@ -11,12 +11,12 @@ class GetUsageSnapshotsQueryParams:
 
 @dataclass
 class GetUsageSnapshotsRequest:
-    query_params: GetUsageSnapshotsQueryParams = field(default=None)
+    query_params: GetUsageSnapshotsQueryParams = field()
     
 
 @dataclass
 class GetUsageSnapshotsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     usage_snapshot_entities: Optional[List[shared.UsageSnapshotEntity]] = field(default=None)
     

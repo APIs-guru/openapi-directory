@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Assignment } from "./assignment";
 import { Date } from "./date";
 import { TimeOfDay } from "./timeofday";

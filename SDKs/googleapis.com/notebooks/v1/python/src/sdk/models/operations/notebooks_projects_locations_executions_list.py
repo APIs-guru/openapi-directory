@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class NotebooksProjectsLocationsExecutionsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class NotebooksProjectsLocationsExecutionsListQueryParams:
 
 @dataclass
 class NotebooksProjectsLocationsExecutionsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class NotebooksProjectsLocationsExecutionsListRequest:
-    path_params: NotebooksProjectsLocationsExecutionsListPathParams = field(default=None)
-    query_params: NotebooksProjectsLocationsExecutionsListQueryParams = field(default=None)
-    security: NotebooksProjectsLocationsExecutionsListSecurity = field(default=None)
+    path_params: NotebooksProjectsLocationsExecutionsListPathParams = field()
+    query_params: NotebooksProjectsLocationsExecutionsListQueryParams = field()
+    security: NotebooksProjectsLocationsExecutionsListSecurity = field()
     
 
 @dataclass
 class NotebooksProjectsLocationsExecutionsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_executions_response: Optional[shared.ListExecutionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

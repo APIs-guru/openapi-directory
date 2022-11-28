@@ -1,74 +1,75 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostLogSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class PostLogRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.LogRestApiPost;
-
-  @Metadata()
-  security: PostLogSecurity;
-}
-
-
 export class PostLog201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: shared.LogRestApiPost;
 }
 
 
 export class PostLog400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostLog401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostLog422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostLog500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class PostLogRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.LogRestApiPost;
+
+  @SpeakeasyMetadata()
+  security: PostLogSecurity;
+}
+
+
 export class PostLogResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postLog201ApplicationJsonObject?: PostLog201ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postLog400ApplicationJsonObject?: PostLog400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postLog401ApplicationJsonObject?: PostLog401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postLog422ApplicationJsonObject?: PostLog422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postLog500ApplicationJsonObject?: PostLog500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class BatchUpdateFindingsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,10 +32,10 @@ export class BatchUpdateFindingsHeaders extends SpeakeasyBase {
  * The updated note.
 **/
 export class BatchUpdateFindingsRequestBodyNote extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Text" })
+  @SpeakeasyMetadata({ data: "json, name=Text" })
   text?: string;
 
-  @Metadata({ data: "json, name=UpdatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedBy" })
   updatedBy?: string;
 }
 
@@ -44,21 +45,21 @@ export class BatchUpdateFindingsRequestBodyNote extends SpeakeasyBase {
  * Updates to the severity information for a finding.
 **/
 export class BatchUpdateFindingsRequestBodySeverity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Label" })
+  @SpeakeasyMetadata({ data: "json, name=Label" })
   label?: shared.SeverityLabelEnum;
 
-  @Metadata({ data: "json, name=Normalized" })
+  @SpeakeasyMetadata({ data: "json, name=Normalized" })
   normalized?: number;
 
-  @Metadata({ data: "json, name=Product" })
+  @SpeakeasyMetadata({ data: "json, name=Product" })
   product?: number;
 }
 
 export enum BatchUpdateFindingsRequestBodyVerificationStateEnum {
-    Unknown = "UNKNOWN"
-,    TruePositive = "TRUE_POSITIVE"
-,    FalsePositive = "FALSE_POSITIVE"
-,    BenignPositive = "BENIGN_POSITIVE"
+    Unknown = "UNKNOWN",
+    TruePositive = "TRUE_POSITIVE",
+    FalsePositive = "FALSE_POSITIVE",
+    BenignPositive = "BENIGN_POSITIVE"
 }
 
 
@@ -67,72 +68,72 @@ export enum BatchUpdateFindingsRequestBodyVerificationStateEnum {
  * Used to update information about the investigation into the finding.
 **/
 export class BatchUpdateFindingsRequestBodyWorkflow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: shared.WorkflowStatusEnum;
 }
 
 
 export class BatchUpdateFindingsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Confidence" })
+  @SpeakeasyMetadata({ data: "json, name=Confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=Criticality" })
+  @SpeakeasyMetadata({ data: "json, name=Criticality" })
   criticality?: number;
 
-  @Metadata({ data: "json, name=FindingIdentifiers", elemType: shared.AwsSecurityFindingIdentifier })
+  @SpeakeasyMetadata({ data: "json, name=FindingIdentifiers", elemType: shared.AwsSecurityFindingIdentifier })
   findingIdentifiers: shared.AwsSecurityFindingIdentifier[];
 
-  @Metadata({ data: "json, name=Note" })
+  @SpeakeasyMetadata({ data: "json, name=Note" })
   note?: BatchUpdateFindingsRequestBodyNote;
 
-  @Metadata({ data: "json, name=RelatedFindings", elemType: shared.RelatedFinding })
+  @SpeakeasyMetadata({ data: "json, name=RelatedFindings", elemType: shared.RelatedFinding })
   relatedFindings?: shared.RelatedFinding[];
 
-  @Metadata({ data: "json, name=Severity" })
+  @SpeakeasyMetadata({ data: "json, name=Severity" })
   severity?: BatchUpdateFindingsRequestBodySeverity;
 
-  @Metadata({ data: "json, name=Types" })
+  @SpeakeasyMetadata({ data: "json, name=Types" })
   types?: string[];
 
-  @Metadata({ data: "json, name=UserDefinedFields" })
+  @SpeakeasyMetadata({ data: "json, name=UserDefinedFields" })
   userDefinedFields?: Map<string, string>;
 
-  @Metadata({ data: "json, name=VerificationState" })
+  @SpeakeasyMetadata({ data: "json, name=VerificationState" })
   verificationState?: BatchUpdateFindingsRequestBodyVerificationStateEnum;
 
-  @Metadata({ data: "json, name=Workflow" })
+  @SpeakeasyMetadata({ data: "json, name=Workflow" })
   workflow?: BatchUpdateFindingsRequestBodyWorkflow;
 }
 
 
 export class BatchUpdateFindingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: BatchUpdateFindingsHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: BatchUpdateFindingsRequestBody;
 }
 
 
 export class BatchUpdateFindingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   batchUpdateFindingsResponse?: shared.BatchUpdateFindingsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidAccessException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidInputException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

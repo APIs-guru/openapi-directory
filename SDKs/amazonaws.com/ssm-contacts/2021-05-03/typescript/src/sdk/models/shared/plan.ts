@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Stage } from "./stage";
+
 
 
 // Plan
@@ -8,6 +8,6 @@ import { Stage } from "./stage";
  * The stages that an escalation plan or engagement plan engages contacts and contact methods in.
 **/
 export class Plan extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Stages", elemType: shared.Stage })
+  @SpeakeasyMetadata({ data: "json, name=Stages", elemType: Stage })
   stages: Stage[];
 }

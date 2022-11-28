@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AttachLoadBalancerTlsCertificateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateName" })
+  @SpeakeasyMetadata({ data: "json, name=certificateName" })
   certificateName: string;
 
-  @Metadata({ data: "json, name=loadBalancerName" })
+  @SpeakeasyMetadata({ data: "json, name=loadBalancerName" })
   loadBalancerName: string;
 }

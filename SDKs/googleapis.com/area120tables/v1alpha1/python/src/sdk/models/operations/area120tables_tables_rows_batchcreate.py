@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class Area120tablesTablesRowsBatchCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,26 +26,26 @@ class Area120tablesTablesRowsBatchCreateQueryParams:
 
 @dataclass
 class Area120tablesTablesRowsBatchCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class Area120tablesTablesRowsBatchCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class Area120tablesTablesRowsBatchCreateSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class Area120tablesTablesRowsBatchCreateSecurityOption4:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -57,15 +58,15 @@ class Area120tablesTablesRowsBatchCreateSecurity:
 
 @dataclass
 class Area120tablesTablesRowsBatchCreateRequest:
-    path_params: Area120tablesTablesRowsBatchCreatePathParams = field(default=None)
-    query_params: Area120tablesTablesRowsBatchCreateQueryParams = field(default=None)
+    path_params: Area120tablesTablesRowsBatchCreatePathParams = field()
+    query_params: Area120tablesTablesRowsBatchCreateQueryParams = field()
+    security: Area120tablesTablesRowsBatchCreateSecurity = field()
     request: Optional[shared.BatchCreateRowsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: Area120tablesTablesRowsBatchCreateSecurity = field(default=None)
     
 
 @dataclass
 class Area120tablesTablesRowsBatchCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_create_rows_response: Optional[shared.BatchCreateRowsResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

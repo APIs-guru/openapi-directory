@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum PlanDataTypeOfPlanBasedOnTheSourceEnum {
     Starter = "STARTER",
     Sfdc1MEdition = "SFDC_1M_EDITION",

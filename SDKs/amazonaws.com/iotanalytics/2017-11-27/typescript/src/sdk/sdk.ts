@@ -1,22 +1,18 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import {GetHeadersFromRequest} from "../internal/utils/headers";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "http://iotanalytics.{region}.amazonaws.com",
-  "https://iotanalytics.{region}.amazonaws.com",
-  "http://iotanalytics.{region}.amazonaws.com.cn",
-  "https://iotanalytics.{region}.amazonaws.com.cn",
+export const ServerList = [
+	"http://iotanalytics.{region}.amazonaws.com",
+	"https://iotanalytics.{region}.amazonaws.com",
+	"http://iotanalytics.{region}.amazonaws.com.cn",
+	"https://iotanalytics.{region}.amazonaws.com.cn",
 ] as const;
 
 export function WithServerURL(
@@ -27,13 +23,13 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
@@ -42,41 +38,48 @@ export function WithSecurity(security: Security): OptsFunc {
     security = new Security(security);
   }
   return (sdk: SDK) => {
-    sdk.security = security;
+    sdk._security = security;
   };
 }
 
-// SDK Documentation: https://docs.aws.amazon.com/iotanalytics/ - Amazon Web Services documentation
+/* SDK Documentation: https://docs.aws.amazon.com/iotanalytics/ - Amazon Web Services documentation*/
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  public _security?: Security;
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
+    if (!this._securityClient) {
+      if (this._security) {
+        this._securityClient = utils.CreateSecurityClient(
+          this._defaultClient,
+          this._security
         );
       } else {
-        this.securityClient = this.defaultClient;
+        this._securityClient = this._defaultClient;
       }
     }
+    
   }
   
-  // BatchPutMessage - Sends messages to a channel.
-  BatchPutMessage(
+  /**
+   * batchPutMessage - Sends messages to a channel.
+  **/
+  batchPutMessage(
     req: operations.BatchPutMessageRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.BatchPutMessageResponse> {
@@ -84,65 +87,65 @@ export class SDK {
       req = new operations.BatchPutMessageRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/messages/batch";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.BatchPutMessageResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.BatchPutMessageResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchPutMessageResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -154,8 +157,10 @@ export class SDK {
   }
 
   
-  // CancelPipelineReprocessing - Cancels the reprocessing of data through the pipeline.
-  CancelPipelineReprocessing(
+  /**
+   * cancelPipelineReprocessing - Cancels the reprocessing of data through the pipeline.
+  **/
+  cancelPipelineReprocessing(
     req: operations.CancelPipelineReprocessingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CancelPipelineReprocessingResponse> {
@@ -163,48 +168,50 @@ export class SDK {
       req = new operations.CancelPipelineReprocessingRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pipelines/{pipelineName}/reprocessing/{reprocessingId}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CancelPipelineReprocessingResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CancelPipelineReprocessingResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cancelPipelineReprocessingResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -216,8 +223,10 @@ export class SDK {
   }
 
   
-  // CreateChannel - Used to create a channel. A channel collects data from an MQTT topic and archives the raw, unprocessed messages before publishing the data to a pipeline.
-  CreateChannel(
+  /**
+   * createChannel - Used to create a channel. A channel collects data from an MQTT topic and archives the raw, unprocessed messages before publishing the data to a pipeline.
+  **/
+  createChannel(
     req: operations.CreateChannelRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateChannelResponse> {
@@ -225,70 +234,70 @@ export class SDK {
       req = new operations.CreateChannelRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/channels";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateChannelResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateChannelResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createChannelResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceAlreadyExistsException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.limitExceededException = httpRes?.data;
             }
             break;
@@ -300,8 +309,10 @@ export class SDK {
   }
 
   
-  // CreateDataset - Used to create a dataset. A dataset stores data retrieved from a data store by applying a <code>queryAction</code> (a SQL query) or a <code>containerAction</code> (executing a containerized application). This operation creates the skeleton of a dataset. The dataset can be populated manually by calling <code>CreateDatasetContent</code> or automatically according to a trigger you specify.
-  CreateDataset(
+  /**
+   * createDataset - Used to create a dataset. A dataset stores data retrieved from a data store by applying a <code>queryAction</code> (a SQL query) or a <code>containerAction</code> (executing a containerized application). This operation creates the skeleton of a dataset. The dataset can be populated manually by calling <code>CreateDatasetContent</code> or automatically according to a trigger you specify.
+  **/
+  createDataset(
     req: operations.CreateDatasetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateDatasetResponse> {
@@ -309,70 +320,70 @@ export class SDK {
       req = new operations.CreateDatasetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/datasets";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateDatasetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateDatasetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createDatasetResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceAlreadyExistsException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.limitExceededException = httpRes?.data;
             }
             break;
@@ -384,8 +395,10 @@ export class SDK {
   }
 
   
-  // CreateDatasetContent - Creates the content of a dataset by applying a <code>queryAction</code> (a SQL query) or a <code>containerAction</code> (executing a containerized application).
-  CreateDatasetContent(
+  /**
+   * createDatasetContent - Creates the content of a dataset by applying a <code>queryAction</code> (a SQL query) or a <code>containerAction</code> (executing a containerized application).
+  **/
+  createDatasetContent(
     req: operations.CreateDatasetContentRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateDatasetContentResponse> {
@@ -393,65 +406,65 @@ export class SDK {
       req = new operations.CreateDatasetContentRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/datasets/{datasetName}/content", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateDatasetContentResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateDatasetContentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createDatasetContentResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -463,8 +476,10 @@ export class SDK {
   }
 
   
-  // CreateDatastore - Creates a data store, which is a repository for messages.
-  CreateDatastore(
+  /**
+   * createDatastore - Creates a data store, which is a repository for messages.
+  **/
+  createDatastore(
     req: operations.CreateDatastoreRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateDatastoreResponse> {
@@ -472,70 +487,70 @@ export class SDK {
       req = new operations.CreateDatastoreRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/datastores";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateDatastoreResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateDatastoreResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createDatastoreResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceAlreadyExistsException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.limitExceededException = httpRes?.data;
             }
             break;
@@ -547,8 +562,10 @@ export class SDK {
   }
 
   
-  // CreatePipeline - Creates a pipeline. A pipeline consumes messages from a channel and allows you to process the messages before storing them in a data store. You must specify both a <code>channel</code> and a <code>datastore</code> activity and, optionally, as many as 23 additional activities in the <code>pipelineActivities</code> array.
-  CreatePipeline(
+  /**
+   * createPipeline - Creates a pipeline. A pipeline consumes messages from a channel and allows you to process the messages before storing them in a data store. You must specify both a <code>channel</code> and a <code>datastore</code> activity and, optionally, as many as 23 additional activities in the <code>pipelineActivities</code> array.
+  **/
+  createPipeline(
     req: operations.CreatePipelineRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreatePipelineResponse> {
@@ -556,70 +573,70 @@ export class SDK {
       req = new operations.CreatePipelineRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/pipelines";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreatePipelineResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreatePipelineResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createPipelineResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceAlreadyExistsException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.limitExceededException = httpRes?.data;
             }
             break;
@@ -631,8 +648,10 @@ export class SDK {
   }
 
   
-  // DeleteChannel - Deletes the specified channel.
-  DeleteChannel(
+  /**
+   * deleteChannel - Deletes the specified channel.
+  **/
+  deleteChannel(
     req: operations.DeleteChannelRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteChannelResponse> {
@@ -640,45 +659,47 @@ export class SDK {
       req = new operations.DeleteChannelRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/channels/{channelName}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteChannelResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeleteChannelResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -690,8 +711,10 @@ export class SDK {
   }
 
   
-  // DeleteDataset - <p>Deletes the specified dataset.</p> <p>You do not have to delete the content of the dataset before you perform this operation.</p>
-  DeleteDataset(
+  /**
+   * deleteDataset - <p>Deletes the specified dataset.</p> <p>You do not have to delete the content of the dataset before you perform this operation.</p>
+  **/
+  deleteDataset(
     req: operations.DeleteDatasetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteDatasetResponse> {
@@ -699,45 +722,47 @@ export class SDK {
       req = new operations.DeleteDatasetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/datasets/{datasetName}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteDatasetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeleteDatasetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -749,8 +774,10 @@ export class SDK {
   }
 
   
-  // DeleteDatasetContent - Deletes the content of the specified dataset.
-  DeleteDatasetContent(
+  /**
+   * deleteDatasetContent - Deletes the content of the specified dataset.
+  **/
+  deleteDatasetContent(
     req: operations.DeleteDatasetContentRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteDatasetContentResponse> {
@@ -758,12 +785,12 @@ export class SDK {
       req = new operations.DeleteDatasetContentRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/datasets/{datasetName}/content", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -772,39 +799,41 @@ export class SDK {
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteDatasetContentResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeleteDatasetContentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -816,8 +845,10 @@ export class SDK {
   }
 
   
-  // DeleteDatastore - Deletes the specified data store.
-  DeleteDatastore(
+  /**
+   * deleteDatastore - Deletes the specified data store.
+  **/
+  deleteDatastore(
     req: operations.DeleteDatastoreRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteDatastoreResponse> {
@@ -825,45 +856,47 @@ export class SDK {
       req = new operations.DeleteDatastoreRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/datastores/{datastoreName}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteDatastoreResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeleteDatastoreResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -875,8 +908,10 @@ export class SDK {
   }
 
   
-  // DeletePipeline - Deletes the specified pipeline.
-  DeletePipeline(
+  /**
+   * deletePipeline - Deletes the specified pipeline.
+  **/
+  deletePipeline(
     req: operations.DeletePipelineRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeletePipelineResponse> {
@@ -884,45 +919,47 @@ export class SDK {
       req = new operations.DeletePipelineRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pipelines/{pipelineName}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeletePipelineResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeletePipelineResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -934,8 +971,10 @@ export class SDK {
   }
 
   
-  // DescribeChannel - Retrieves information about a channel.
-  DescribeChannel(
+  /**
+   * describeChannel - Retrieves information about a channel.
+  **/
+  describeChannel(
     req: operations.DescribeChannelRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeChannelResponse> {
@@ -943,12 +982,12 @@ export class SDK {
       req = new operations.DescribeChannelRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/channels/{channelName}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -957,42 +996,44 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeChannelResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeChannelResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeChannelResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -1004,8 +1045,10 @@ export class SDK {
   }
 
   
-  // DescribeDataset - Retrieves information about a dataset.
-  DescribeDataset(
+  /**
+   * describeDataset - Retrieves information about a dataset.
+  **/
+  describeDataset(
     req: operations.DescribeDatasetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeDatasetResponse> {
@@ -1013,48 +1056,50 @@ export class SDK {
       req = new operations.DescribeDatasetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/datasets/{datasetName}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeDatasetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeDatasetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeDatasetResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -1066,8 +1111,10 @@ export class SDK {
   }
 
   
-  // DescribeDatastore - Retrieves information about a data store.
-  DescribeDatastore(
+  /**
+   * describeDatastore - Retrieves information about a data store.
+  **/
+  describeDatastore(
     req: operations.DescribeDatastoreRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeDatastoreResponse> {
@@ -1075,12 +1122,12 @@ export class SDK {
       req = new operations.DescribeDatastoreRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/datastores/{datastoreName}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1089,42 +1136,44 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeDatastoreResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeDatastoreResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeDatastoreResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -1136,8 +1185,10 @@ export class SDK {
   }
 
   
-  // DescribeLoggingOptions - Retrieves the current settings of the IoT Analytics logging options.
-  DescribeLoggingOptions(
+  /**
+   * describeLoggingOptions - Retrieves the current settings of the IoT Analytics logging options.
+  **/
+  describeLoggingOptions(
     req: operations.DescribeLoggingOptionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeLoggingOptionsResponse> {
@@ -1145,48 +1196,50 @@ export class SDK {
       req = new operations.DescribeLoggingOptionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/logging";
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeLoggingOptionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeLoggingOptionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeLoggingOptionsResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -1198,8 +1251,10 @@ export class SDK {
   }
 
   
-  // DescribePipeline - Retrieves information about a pipeline.
-  DescribePipeline(
+  /**
+   * describePipeline - Retrieves information about a pipeline.
+  **/
+  describePipeline(
     req: operations.DescribePipelineRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribePipelineResponse> {
@@ -1207,48 +1262,50 @@ export class SDK {
       req = new operations.DescribePipelineRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pipelines/{pipelineName}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribePipelineResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribePipelineResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describePipelineResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -1260,8 +1317,10 @@ export class SDK {
   }
 
   
-  // GetDatasetContent - Retrieves the contents of a dataset as presigned URIs.
-  GetDatasetContent(
+  /**
+   * getDatasetContent - Retrieves the contents of a dataset as presigned URIs.
+  **/
+  getDatasetContent(
     req: operations.GetDatasetContentRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetDatasetContentResponse> {
@@ -1269,12 +1328,12 @@ export class SDK {
       req = new operations.GetDatasetContentRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/datasets/{datasetName}/content", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1283,42 +1342,44 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDatasetContentResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetDatasetContentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getDatasetContentResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -1330,8 +1391,10 @@ export class SDK {
   }
 
   
-  // ListChannels - Retrieves a list of channels.
-  ListChannels(
+  /**
+   * listChannels - Retrieves a list of channels.
+  **/
+  listChannels(
     req: operations.ListChannelsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListChannelsResponse> {
@@ -1339,12 +1402,12 @@ export class SDK {
       req = new operations.ListChannelsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/channels";
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1353,37 +1416,39 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListChannelsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListChannelsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listChannelsResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -1395,8 +1460,10 @@ export class SDK {
   }
 
   
-  // ListDatasetContents - Lists information about dataset contents that have been created.
-  ListDatasetContents(
+  /**
+   * listDatasetContents - Lists information about dataset contents that have been created.
+  **/
+  listDatasetContents(
     req: operations.ListDatasetContentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListDatasetContentsResponse> {
@@ -1404,12 +1471,12 @@ export class SDK {
       req = new operations.ListDatasetContentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/datasets/{datasetName}/contents", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1418,42 +1485,44 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListDatasetContentsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListDatasetContentsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listDatasetContentsResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
@@ -1465,8 +1534,10 @@ export class SDK {
   }
 
   
-  // ListDatasets - Retrieves information about datasets.
-  ListDatasets(
+  /**
+   * listDatasets - Retrieves information about datasets.
+  **/
+  listDatasets(
     req: operations.ListDatasetsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListDatasetsResponse> {
@@ -1474,12 +1545,12 @@ export class SDK {
       req = new operations.ListDatasetsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/datasets";
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1488,37 +1559,39 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListDatasetsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListDatasetsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listDatasetsResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -1530,8 +1603,10 @@ export class SDK {
   }
 
   
-  // ListDatastores - Retrieves a list of data stores.
-  ListDatastores(
+  /**
+   * listDatastores - Retrieves a list of data stores.
+  **/
+  listDatastores(
     req: operations.ListDatastoresRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListDatastoresResponse> {
@@ -1539,12 +1614,12 @@ export class SDK {
       req = new operations.ListDatastoresRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/datastores";
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1553,37 +1628,39 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListDatastoresResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListDatastoresResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listDatastoresResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -1595,8 +1672,10 @@ export class SDK {
   }
 
   
-  // ListPipelines - Retrieves a list of pipelines.
-  ListPipelines(
+  /**
+   * listPipelines - Retrieves a list of pipelines.
+  **/
+  listPipelines(
     req: operations.ListPipelinesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListPipelinesResponse> {
@@ -1604,12 +1683,12 @@ export class SDK {
       req = new operations.ListPipelinesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/pipelines";
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1618,37 +1697,39 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListPipelinesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListPipelinesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listPipelinesResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -1660,8 +1741,10 @@ export class SDK {
   }
 
   
-  // ListTagsForResource - Lists the tags (metadata) that you have assigned to the resource.
-  ListTagsForResource(
+  /**
+   * listTagsForResource - Lists the tags (metadata) that you have assigned to the resource.
+  **/
+  listTagsForResource(
     req: operations.ListTagsForResourceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListTagsForResourceResponse> {
@@ -1669,12 +1752,12 @@ export class SDK {
       req = new operations.ListTagsForResourceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/tags#resourceArn";
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1683,47 +1766,49 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListTagsForResourceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListTagsForResourceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listTagsForResourceResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.limitExceededException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
@@ -1735,8 +1820,10 @@ export class SDK {
   }
 
   
-  // PutLoggingOptions - <p>Sets or updates the IoT Analytics logging options.</p> <p>If you update the value of any <code>loggingOptions</code> field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the <code>roleArn</code> field (for example, to correct an invalid policy), it takes up to five minutes for that change to take effect. </p>
-  PutLoggingOptions(
+  /**
+   * putLoggingOptions - <p>Sets or updates the IoT Analytics logging options.</p> <p>If you update the value of any <code>loggingOptions</code> field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the <code>roleArn</code> field (for example, to correct an invalid policy), it takes up to five minutes for that change to take effect. </p>
+  **/
+  putLoggingOptions(
     req: operations.PutLoggingOptionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutLoggingOptionsResponse> {
@@ -1744,57 +1831,57 @@ export class SDK {
       req = new operations.PutLoggingOptionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/logging";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutLoggingOptionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PutLoggingOptionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -1806,8 +1893,10 @@ export class SDK {
   }
 
   
-  // RunPipelineActivity - Simulates the results of running a pipeline activity on a message payload.
-  RunPipelineActivity(
+  /**
+   * runPipelineActivity - Simulates the results of running a pipeline activity on a message payload.
+  **/
+  runPipelineActivity(
     req: operations.RunPipelineActivityRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RunPipelineActivityResponse> {
@@ -1815,60 +1904,60 @@ export class SDK {
       req = new operations.RunPipelineActivityRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/pipelineactivities/run";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RunPipelineActivityResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RunPipelineActivityResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.runPipelineActivityResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -1880,8 +1969,10 @@ export class SDK {
   }
 
   
-  // SampleChannelData - Retrieves a sample of messages from the specified channel ingested during the specified timeframe. Up to 10 messages can be retrieved.
-  SampleChannelData(
+  /**
+   * sampleChannelData - Retrieves a sample of messages from the specified channel ingested during the specified timeframe. Up to 10 messages can be retrieved.
+  **/
+  sampleChannelData(
     req: operations.SampleChannelDataRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SampleChannelDataResponse> {
@@ -1889,12 +1980,12 @@ export class SDK {
       req = new operations.SampleChannelDataRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/channels/{channelName}/sample", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1903,42 +1994,44 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SampleChannelDataResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SampleChannelDataResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sampleChannelDataResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -1950,8 +2043,10 @@ export class SDK {
   }
 
   
-  // StartPipelineReprocessing - Starts the reprocessing of raw message data through the pipeline.
-  StartPipelineReprocessing(
+  /**
+   * startPipelineReprocessing - Starts the reprocessing of raw message data through the pipeline.
+  **/
+  startPipelineReprocessing(
     req: operations.StartPipelineReprocessingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.StartPipelineReprocessingResponse> {
@@ -1959,70 +2054,70 @@ export class SDK {
       req = new operations.StartPipelineReprocessingRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pipelines/{pipelineName}/reprocessing", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.StartPipelineReprocessingResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.StartPipelineReprocessingResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.startPipelineReprocessingResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceAlreadyExistsException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -2034,8 +2129,10 @@ export class SDK {
   }
 
   
-  // TagResource - Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource.
-  TagResource(
+  /**
+   * tagResource - Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource.
+  **/
+  tagResource(
     req: operations.TagResourceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TagResourceResponse> {
@@ -2043,22 +2140,22 @@ export class SDK {
       req = new operations.TagResourceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/tags#resourceArn";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2069,52 +2166,52 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TagResourceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TagResourceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tagResourceResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.limitExceededException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
@@ -2126,8 +2223,10 @@ export class SDK {
   }
 
   
-  // UntagResource - Removes the given tags (metadata) from the resource.
-  UntagResource(
+  /**
+   * untagResource - Removes the given tags (metadata) from the resource.
+  **/
+  untagResource(
     req: operations.UntagResourceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UntagResourceResponse> {
@@ -2135,12 +2234,12 @@ export class SDK {
       req = new operations.UntagResourceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/tags#resourceArn&tagKeys";
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2149,47 +2248,49 @@ export class SDK {
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UntagResourceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UntagResourceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.untagResourceResponse = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.limitExceededException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
@@ -2201,8 +2302,10 @@ export class SDK {
   }
 
   
-  // UpdateChannel - Used to update the settings of a channel.
-  UpdateChannel(
+  /**
+   * updateChannel - Used to update the settings of a channel.
+  **/
+  updateChannel(
     req: operations.UpdateChannelRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateChannelResponse> {
@@ -2210,62 +2313,62 @@ export class SDK {
       req = new operations.UpdateChannelRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/channels/{channelName}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateChannelResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.UpdateChannelResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -2277,8 +2380,10 @@ export class SDK {
   }
 
   
-  // UpdateDataset - Updates the settings of a dataset.
-  UpdateDataset(
+  /**
+   * updateDataset - Updates the settings of a dataset.
+  **/
+  updateDataset(
     req: operations.UpdateDatasetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateDatasetResponse> {
@@ -2286,62 +2391,62 @@ export class SDK {
       req = new operations.UpdateDatasetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/datasets/{datasetName}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateDatasetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.UpdateDatasetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -2353,8 +2458,10 @@ export class SDK {
   }
 
   
-  // UpdateDatastore - Used to update the settings of a data store.
-  UpdateDatastore(
+  /**
+   * updateDatastore - Used to update the settings of a data store.
+  **/
+  updateDatastore(
     req: operations.UpdateDatastoreRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateDatastoreResponse> {
@@ -2362,62 +2469,62 @@ export class SDK {
       req = new operations.UpdateDatastoreRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/datastores/{datastoreName}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateDatastoreResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.UpdateDatastoreResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
@@ -2429,8 +2536,10 @@ export class SDK {
   }
 
   
-  // UpdatePipeline - Updates the settings of a pipeline. You must specify both a <code>channel</code> and a <code>datastore</code> activity and, optionally, as many as 23 additional activities in the <code>pipelineActivities</code> array.
-  UpdatePipeline(
+  /**
+   * updatePipeline - Updates the settings of a pipeline. You must specify both a <code>channel</code> and a <code>datastore</code> activity and, optionally, as many as 23 additional activities in the <code>pipelineActivities</code> array.
+  **/
+  updatePipeline(
     req: operations.UpdatePipelineRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdatePipelineResponse> {
@@ -2438,67 +2547,67 @@ export class SDK {
       req = new operations.UpdatePipelineRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/pipelines/{pipelineName}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdatePipelineResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.UpdatePipelineResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRequestException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceNotFoundException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.internalFailureException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.serviceUnavailableException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.throttlingException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.limitExceededException = httpRes?.data;
             }
             break;

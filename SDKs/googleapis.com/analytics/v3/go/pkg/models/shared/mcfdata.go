@@ -6,6 +6,8 @@ type McfDataColumnHeaders struct {
 	Name       *string `json:"name,omitempty"`
 }
 
+// McfDataProfileInfo
+// Information for the view (profile), for which the Analytics data was requested.
 type McfDataProfileInfo struct {
 	AccountID             *string `json:"accountId,omitempty"`
 	InternalWebPropertyID *string `json:"internalWebPropertyId,omitempty"`
@@ -15,6 +17,8 @@ type McfDataProfileInfo struct {
 	WebPropertyID         *string `json:"webPropertyId,omitempty"`
 }
 
+// McfDataQuery
+// Analytics data request query parameters.
 type McfDataQuery struct {
 	Dimensions    *string  `json:"dimensions,omitempty"`
 	EndDate       *string  `json:"end-date,omitempty"`
@@ -34,11 +38,15 @@ type McfDataRowsConversionPathValue struct {
 	NodeValue       *string `json:"nodeValue,omitempty"`
 }
 
+// McfDataRows
+// A union object representing a dimension or metric value. Only one of "primitiveValue" or "conversionPathValue" attribute will be populated.
 type McfDataRows struct {
 	ConversionPathValue []McfDataRowsConversionPathValue `json:"conversionPathValue,omitempty"`
 	PrimitiveValue      *string                          `json:"primitiveValue,omitempty"`
 }
 
+// McfData
+// Multi-Channel Funnels data for a given view (profile).
 type McfData struct {
 	ColumnHeaders       []McfDataColumnHeaders `json:"columnHeaders,omitempty"`
 	ContainsSampledData *bool                  `json:"containsSampledData,omitempty"`

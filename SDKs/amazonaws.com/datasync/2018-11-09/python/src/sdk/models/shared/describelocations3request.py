@@ -1,9 +1,14 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class DescribeLocationS3Request:
-    location_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LocationArn' }})
+    r"""DescribeLocationS3Request
+    DescribeLocationS3Request
+    """
+    
+    location_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LocationArn') }})
     

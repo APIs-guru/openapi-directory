@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ResourceMetadata
+// An object representing metadata for a resource.
 type ResourceMetadata struct {
 	Arn           *string    `json:"arn,omitempty"`
 	CreatedAt     *time.Time `json:"createdAt,omitempty"`

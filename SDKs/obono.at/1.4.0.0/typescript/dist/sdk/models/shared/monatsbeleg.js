@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Monatsbeleg = /** @class */ (function (_super) {
     __extends(Monatsbeleg, _super);
     function Monatsbeleg() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Beleg-UUID" }),
+        SpeakeasyMetadata({ data: "json, name=Beleg-UUID" }),
         __metadata("design:type", String)
     ], Monatsbeleg.prototype, "belegUuid", void 0);
     __decorate([
-        Metadata({ data: "json, name=FON-Geprueft-Datum-Uhrzeit" }),
+        SpeakeasyMetadata({ data: "json, name=FON-Geprueft-Datum-Uhrzeit" }),
         __metadata("design:type", String)
     ], Monatsbeleg.prototype, "fonGeprueftDatumUhrzeit", void 0);
     __decorate([
-        Metadata({ data: "json, name=FON-Geprueft-Erfolgreich" }),
+        SpeakeasyMetadata({ data: "json, name=FON-Geprueft-Erfolgreich" }),
         __metadata("design:type", Boolean)
     ], Monatsbeleg.prototype, "fonGeprueftErfolgreich", void 0);
     __decorate([
-        Metadata({ data: "json, name=Jahr" }),
+        SpeakeasyMetadata({ data: "json, name=Jahr" }),
         __metadata("design:type", Number)
     ], Monatsbeleg.prototype, "jahr", void 0);
     __decorate([
-        Metadata({ data: "json, name=Monat" }),
+        SpeakeasyMetadata({ data: "json, name=Monat" }),
         __metadata("design:type", Number)
     ], Monatsbeleg.prototype, "monat", void 0);
     return Monatsbeleg;

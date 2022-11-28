@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var GetAvailableNumbersFeaturesEnum;
 (function (GetAvailableNumbersFeaturesEnum) {
@@ -40,31 +40,31 @@ var GetAvailableNumbersQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" }),
         __metadata("design:type", String)
     ], GetAvailableNumbersQueryParams.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=features" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=features" }),
         __metadata("design:type", String)
     ], GetAvailableNumbersQueryParams.prototype, "features", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=index" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=index" }),
         __metadata("design:type", Number)
     ], GetAvailableNumbersQueryParams.prototype, "index", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pattern" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pattern" }),
         __metadata("design:type", String)
     ], GetAvailableNumbersQueryParams.prototype, "pattern", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search_pattern" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search_pattern" }),
         __metadata("design:type", Number)
     ], GetAvailableNumbersQueryParams.prototype, "searchPattern", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=size" }),
         __metadata("design:type", Number)
     ], GetAvailableNumbersQueryParams.prototype, "size", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" }),
         __metadata("design:type", String)
     ], GetAvailableNumbersQueryParams.prototype, "type", void 0);
     return GetAvailableNumbersQueryParams;
@@ -76,7 +76,7 @@ var GetAvailableNumbersRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAvailableNumbersQueryParams)
     ], GetAvailableNumbersRequest.prototype, "queryParams", void 0);
     return GetAvailableNumbersRequest;
@@ -88,23 +88,23 @@ var GetAvailableNumbersResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetAvailableNumbersResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAvailableNumbersResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAvailableNumbersResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AccountUnauthorized)
     ], GetAvailableNumbersResponse.prototype, "accountUnauthorized", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AvailableNumbers)
     ], GetAvailableNumbersResponse.prototype, "availableNumbers", void 0);
     return GetAvailableNumbersResponse;

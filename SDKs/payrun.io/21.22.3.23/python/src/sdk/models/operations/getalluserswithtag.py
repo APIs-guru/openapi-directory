@@ -5,25 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class GetAllUsersWithTagPathParams:
-    tag_id: str = field(default=None, metadata={'path_param': { 'field_name': 'TagId', 'style': 'simple', 'explode': False }})
+    tag_id: str = field(metadata={'path_param': { 'field_name': 'TagId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetAllUsersWithTagHeaders:
-    api_version: str = field(default=None, metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    api_version: str = field(metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetAllUsersWithTagRequest:
-    path_params: GetAllUsersWithTagPathParams = field(default=None)
-    headers: GetAllUsersWithTagHeaders = field(default=None)
+    headers: GetAllUsersWithTagHeaders = field()
+    path_params: GetAllUsersWithTagPathParams = field()
     
 
 @dataclass
 class GetAllUsersWithTagResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_model: Optional[shared.ErrorModel] = field(default=None)
     link_collection: Optional[shared.LinkCollection] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NetworkAccessConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the network details of the fleet or image builder instance.
 **/
 export class NetworkAccessConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EniId" })
+  @SpeakeasyMetadata({ data: "json, name=EniId" })
   eniId?: string;
 
-  @Metadata({ data: "json, name=EniPrivateIpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=EniPrivateIpAddress" })
   eniPrivateIpAddress?: string;
 }

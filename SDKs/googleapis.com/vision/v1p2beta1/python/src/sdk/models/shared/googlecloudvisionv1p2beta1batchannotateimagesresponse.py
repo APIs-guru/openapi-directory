@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudvisionv1p2beta1annotateimageresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse:
-    responses: Optional[List[googlecloudvisionv1p2beta1annotateimageresponse.GoogleCloudVisionV1p2beta1AnnotateImageResponse]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responses' }})
+    r"""GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse
+    Response to a batch image annotation request.
+    """
+    
+    responses: Optional[List[GoogleCloudVisionV1p2beta1AnnotateImageResponse]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('responses') }})
     

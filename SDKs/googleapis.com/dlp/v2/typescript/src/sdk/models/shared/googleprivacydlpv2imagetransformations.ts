@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2ImageTransformation } from "./googleprivacydlpv2imagetransformation";
+
 
 
 // GooglePrivacyDlpV2ImageTransformations
@@ -8,6 +8,6 @@ import { GooglePrivacyDlpV2ImageTransformation } from "./googleprivacydlpv2image
  * A type of transformation that is applied over images.
 **/
 export class GooglePrivacyDlpV2ImageTransformations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=transforms", elemType: shared.GooglePrivacyDlpV2ImageTransformation })
+  @SpeakeasyMetadata({ data: "json, name=transforms", elemType: GooglePrivacyDlpV2ImageTransformation })
   transforms?: GooglePrivacyDlpV2ImageTransformation[];
 }

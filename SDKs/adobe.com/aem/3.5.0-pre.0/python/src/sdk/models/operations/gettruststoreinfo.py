@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetTruststoreInfoResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     truststore_info: Optional[shared.TruststoreInfo] = field(default=None)
     get_truststore_info_default_application_json_string: Optional[str] = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DimensionValueContribution
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The severity of a value of a dimension that contributed to an anomaly.
 **/
 export class DimensionValueContribution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContributionScore" })
+  @SpeakeasyMetadata({ data: "json, name=ContributionScore" })
   contributionScore?: number;
 
-  @Metadata({ data: "json, name=DimensionValue" })
+  @SpeakeasyMetadata({ data: "json, name=DimensionValue" })
   dimensionValue?: string;
 }

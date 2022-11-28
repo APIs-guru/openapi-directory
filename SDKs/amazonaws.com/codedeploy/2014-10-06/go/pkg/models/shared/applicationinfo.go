@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ApplicationInfo
+// Information about an application.
 type ApplicationInfo struct {
 	ApplicationID     *string              `json:"applicationId,omitempty"`
 	ApplicationName   *string              `json:"applicationName,omitempty"`

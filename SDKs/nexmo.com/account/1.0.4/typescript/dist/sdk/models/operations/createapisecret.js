@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateApiSecretPathParams = /** @class */ (function (_super) {
     __extends(CreateApiSecretPathParams, _super);
@@ -30,7 +30,7 @@ var CreateApiSecretPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=api_key" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=api_key" }),
         __metadata("design:type", String)
     ], CreateApiSecretPathParams.prototype, "apiKey", void 0);
     return CreateApiSecretPathParams;
@@ -42,7 +42,7 @@ var CreateApiSecretSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuth)
     ], CreateApiSecretSecurity.prototype, "basicAuth", void 0);
     return CreateApiSecretSecurity;
@@ -54,15 +54,15 @@ var CreateApiSecretRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateApiSecretPathParams)
     ], CreateApiSecretRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.CreateSecretRequest)
     ], CreateApiSecretRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateApiSecretSecurity)
     ], CreateApiSecretRequest.prototype, "security", void 0);
     return CreateApiSecretRequest;
@@ -74,27 +74,27 @@ var CreateApiSecretResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateApiSecretResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorApiKeyNotFound)
     ], CreateApiSecretResponse.prototype, "errorApiKeyNotFound", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateApiSecretResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateApiSecretResponse.prototype, "createApiSecret400ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateApiSecretResponse.prototype, "createApiSecret401ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SecretInfo)
     ], CreateApiSecretResponse.prototype, "secretInfo", void 0);
     return CreateApiSecretResponse;

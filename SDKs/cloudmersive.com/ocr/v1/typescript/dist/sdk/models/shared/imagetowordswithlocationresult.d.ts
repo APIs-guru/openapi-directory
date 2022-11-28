@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { OcrWordElement } from "./ocrwordelement";
 /**
  * Result of an image to words-with-location OCR operation

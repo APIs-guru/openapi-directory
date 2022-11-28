@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Profile
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Profile for a Gmail user.
 **/
 export class Profile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=emailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=emailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=historyId" })
+  @SpeakeasyMetadata({ data: "json, name=historyId" })
   historyId?: string;
 
-  @Metadata({ data: "json, name=messagesTotal" })
+  @SpeakeasyMetadata({ data: "json, name=messagesTotal" })
   messagesTotal?: number;
 
-  @Metadata({ data: "json, name=threadsTotal" })
+  @SpeakeasyMetadata({ data: "json, name=threadsTotal" })
   threadsTotal?: number;
 }

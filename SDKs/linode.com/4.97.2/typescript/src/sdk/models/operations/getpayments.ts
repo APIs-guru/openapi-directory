@@ -1,77 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPaymentsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
   pageSize?: number;
 }
 
 
-export class GetPaymentsSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class GetPaymentsSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class GetPaymentsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetPaymentsSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetPaymentsSecurityOption2;
-}
-
-
-export class GetPaymentsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetPaymentsQueryParams;
-
-  @Metadata()
-  security: GetPaymentsSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class GetPayments200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.Payment })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: shared.Payment })
   data?: shared.Payment[];
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: number;
 
-  @Metadata({ data: "json, name=pages" })
+  @SpeakeasyMetadata({ data: "json, name=pages" })
   pages?: number;
 
-  @Metadata({ data: "json, name=results" })
+  @SpeakeasyMetadata({ data: "json, name=results" })
   results?: number;
 }
 
 
 export class GetPaymentsDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class GetPaymentsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetPaymentsQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetPaymentsSecurity;
+}
+
+
 export class GetPaymentsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPayments200ApplicationJsonObject?: GetPayments200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPaymentsDefaultApplicationJsonObject?: GetPaymentsDefaultApplicationJson;
 }

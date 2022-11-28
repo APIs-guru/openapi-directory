@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsCreateQueryP
 
 @dataclass
 class AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsCreateRequest:
-    path_params: AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsCreatePathParams = field(default=None)
-    query_params: AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsCreateQueryParams = field(default=None)
-    request: Optional[shared.GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLinkProposal] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsCreateSecurity = field(default=None)
+    path_params: AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsCreatePathParams = field()
+    query_params: AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsCreateQueryParams = field()
+    security: AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsCreateSecurity = field()
+    request: Optional[shared.GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLinkProposalInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesDisplayVideo360AdvertiserLinkProposalsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_display_video360_advertiser_link_proposal: Optional[shared.GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLinkProposal] = field(default=None)
-    status_code: int = field(default=None)
     

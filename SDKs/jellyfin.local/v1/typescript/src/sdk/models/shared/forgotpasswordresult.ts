@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ForgotPasswordActionEnum } from "./forgotpasswordactionenum";
 
 
+
 export class ForgotPasswordResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action?: ForgotPasswordActionEnum;
 
-  @Metadata({ data: "json, name=PinExpirationDate" })
+  @SpeakeasyMetadata({ data: "json, name=PinExpirationDate" })
   pinExpirationDate?: Date;
 
-  @Metadata({ data: "json, name=PinFile" })
+  @SpeakeasyMetadata({ data: "json, name=PinFile" })
   pinFile?: string;
 }

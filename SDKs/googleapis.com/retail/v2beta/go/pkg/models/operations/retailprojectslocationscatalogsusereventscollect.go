@@ -17,8 +17,10 @@ type RetailProjectsLocationsCatalogsUserEventsCollectQueryParams struct {
 	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
 	Key            *string           `queryParam:"style=form,explode=true,name=key"`
 	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
+	PrebuiltRule   *string           `queryParam:"style=form,explode=true,name=prebuiltRule"`
 	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
 	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
+	RawJSON        *string           `queryParam:"style=form,explode=true,name=rawJson"`
 	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
 	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
 	URI            *string           `queryParam:"style=form,explode=true,name=uri"`

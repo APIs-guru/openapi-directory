@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlesecuritysafebrowsingv4fetchthreatlistupdatesrequestlistupdaterequestconstraints
+from sdk import utils
+from . import *
 
 class GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestPlatformTypeEnum(str, Enum):
     PLATFORM_TYPE_UNSPECIFIED = "PLATFORM_TYPE_UNSPECIFIED"
@@ -48,9 +53,13 @@ class GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest
 @dataclass_json
 @dataclass
 class GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest:
-    constraints: Optional[googlesecuritysafebrowsingv4fetchthreatlistupdatesrequestlistupdaterequestconstraints.GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'constraints' }})
-    platform_type: Optional[GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestPlatformTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'platformType' }})
-    state: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    threat_entry_type: Optional[GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestThreatEntryTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'threatEntryType' }})
-    threat_type: Optional[GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestThreatTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'threatType' }})
+    r"""GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest
+    A single list update request.
+    """
+    
+    constraints: Optional[GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('constraints') }})
+    platform_type: Optional[GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestPlatformTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('platformType') }})
+    state: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    threat_entry_type: Optional[GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestThreatEntryTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('threatEntryType') }})
+    threat_type: Optional[GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestThreatTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('threatType') }})
     

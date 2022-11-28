@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetModifyClusterMaintenanceActionEnum;
 (function (GetModifyClusterMaintenanceActionEnum) {
     GetModifyClusterMaintenanceActionEnum["ModifyClusterMaintenance"] = "ModifyClusterMaintenance";
@@ -37,35 +37,35 @@ var GetModifyClusterMaintenanceQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetModifyClusterMaintenanceQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ClusterIdentifier" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClusterIdentifier" }),
         __metadata("design:type", String)
     ], GetModifyClusterMaintenanceQueryParams.prototype, "clusterIdentifier", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DeferMaintenance" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DeferMaintenance" }),
         __metadata("design:type", Boolean)
     ], GetModifyClusterMaintenanceQueryParams.prototype, "deferMaintenance", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DeferMaintenanceDuration" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DeferMaintenanceDuration" }),
         __metadata("design:type", Number)
     ], GetModifyClusterMaintenanceQueryParams.prototype, "deferMaintenanceDuration", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DeferMaintenanceEndTime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DeferMaintenanceEndTime" }),
         __metadata("design:type", Date)
     ], GetModifyClusterMaintenanceQueryParams.prototype, "deferMaintenanceEndTime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DeferMaintenanceIdentifier" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DeferMaintenanceIdentifier" }),
         __metadata("design:type", String)
     ], GetModifyClusterMaintenanceQueryParams.prototype, "deferMaintenanceIdentifier", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DeferMaintenanceStartTime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DeferMaintenanceStartTime" }),
         __metadata("design:type", Date)
     ], GetModifyClusterMaintenanceQueryParams.prototype, "deferMaintenanceStartTime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetModifyClusterMaintenanceQueryParams.prototype, "version", void 0);
     return GetModifyClusterMaintenanceQueryParams;
@@ -77,31 +77,31 @@ var GetModifyClusterMaintenanceHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetModifyClusterMaintenanceHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetModifyClusterMaintenanceHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetModifyClusterMaintenanceHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetModifyClusterMaintenanceHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetModifyClusterMaintenanceHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetModifyClusterMaintenanceHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetModifyClusterMaintenanceHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetModifyClusterMaintenanceHeaders;
@@ -113,11 +113,11 @@ var GetModifyClusterMaintenanceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModifyClusterMaintenanceQueryParams)
     ], GetModifyClusterMaintenanceRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModifyClusterMaintenanceHeaders)
     ], GetModifyClusterMaintenanceRequest.prototype, "headers", void 0);
     return GetModifyClusterMaintenanceRequest;
@@ -129,15 +129,15 @@ var GetModifyClusterMaintenanceResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetModifyClusterMaintenanceResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetModifyClusterMaintenanceResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetModifyClusterMaintenanceResponse.prototype, "statusCode", void 0);
     return GetModifyClusterMaintenanceResponse;

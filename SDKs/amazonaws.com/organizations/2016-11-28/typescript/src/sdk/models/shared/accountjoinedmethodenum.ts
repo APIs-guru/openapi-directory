@@ -1,6 +1,7 @@
 
 
+
 export enum AccountJoinedMethodEnum {
-    Invited = "INVITED"
-,    Created = "CREATED"
+    Invited = "INVITED",
+    Created = "CREATED"
 }

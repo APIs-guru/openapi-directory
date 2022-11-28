@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class FlagAppliesToEnum(str, Enum):
     SQL_DATABASE_VERSION_UNSPECIFIED = "SQL_DATABASE_VERSION_UNSPECIFIED"
@@ -44,14 +46,18 @@ class FlagTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Flag:
-    allowed_int_values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allowedIntValues' }})
-    allowed_string_values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allowedStringValues' }})
-    applies_to: Optional[List[FlagAppliesToEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appliesTo' }})
-    in_beta: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inBeta' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    max_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxValue' }})
-    min_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minValue' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    requires_restart: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requiresRestart' }})
-    type: Optional[FlagTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""Flag
+    A flag resource.
+    """
+    
+    allowed_int_values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allowedIntValues') }})
+    allowed_string_values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allowedStringValues') }})
+    applies_to: Optional[List[FlagAppliesToEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('appliesTo') }})
+    in_beta: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inBeta') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    max_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxValue') }})
+    min_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minValue') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    requires_restart: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requiresRestart') }})
+    type: Optional[FlagTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

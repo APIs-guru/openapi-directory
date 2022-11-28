@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Event extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: Map<string, any>;
 
-  @Metadata({ data: "json, name=deviceId" })
+  @SpeakeasyMetadata({ data: "json, name=deviceId" })
   deviceId?: number;
 
-  @Metadata({ data: "json, name=eventTime" })
+  @SpeakeasyMetadata({ data: "json, name=eventTime" })
   eventTime?: Date;
 
-  @Metadata({ data: "json, name=geofenceId" })
+  @SpeakeasyMetadata({ data: "json, name=geofenceId" })
   geofenceId?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=maintenanceId" })
+  @SpeakeasyMetadata({ data: "json, name=maintenanceId" })
   maintenanceId?: number;
 
-  @Metadata({ data: "json, name=positionId" })
+  @SpeakeasyMetadata({ data: "json, name=positionId" })
   positionId?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2beta1IntentMessageMediaContentResponseMediaObject
+// Response media object for media content card.
 type GoogleCloudDialogflowV2beta1IntentMessageMediaContentResponseMediaObject struct {
 	ContentURL  *string                                         `json:"contentUrl,omitempty"`
 	Description *string                                         `json:"description,omitempty"`

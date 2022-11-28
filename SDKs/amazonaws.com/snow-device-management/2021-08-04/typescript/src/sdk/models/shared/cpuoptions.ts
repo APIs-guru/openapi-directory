@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CpuOptions
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The options for how a device's CPU is configured.
 **/
 export class CpuOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=coreCount" })
+  @SpeakeasyMetadata({ data: "json, name=coreCount" })
   coreCount?: number;
 
-  @Metadata({ data: "json, name=threadsPerCore" })
+  @SpeakeasyMetadata({ data: "json, name=threadsPerCore" })
   threadsPerCore?: number;
 }

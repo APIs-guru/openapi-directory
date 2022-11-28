@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import fieldvaluechange
+from sdk import utils
+from . import *
 
 class AppliedLabelChangeDetailTypesEnum(str, Enum):
     TYPE_UNSPECIFIED = "TYPE_UNSPECIFIED"
@@ -14,8 +16,12 @@ class AppliedLabelChangeDetailTypesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AppliedLabelChangeDetail:
-    field_changes: Optional[List[fieldvaluechange.FieldValueChange]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fieldChanges' }})
-    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
-    types: Optional[List[AppliedLabelChangeDetailTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'types' }})
+    r"""AppliedLabelChangeDetail
+    A change made to a Label on the Target.
+    """
+    
+    field_changes: Optional[List[FieldValueChange]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fieldChanges') }})
+    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
+    types: Optional[List[AppliedLabelChangeDetailTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('types') }})
     

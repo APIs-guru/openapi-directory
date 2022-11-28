@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://models-v2-lex.{region}.amazonaws.com",
 	"https://models-v2-lex.{region}.amazonaws.com",
 	"http://models-v2-lex.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/models-v2-lex/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// BuildBotLocale - Builds a bot, its intents, and its slot types into a specific locale. A bot can be built into multiple locales. At runtime the locale is used to choose a specific build of the bot.
 func (s *SDK) BuildBotLocale(ctx context.Context, request operations.BuildBotLocaleRequest) (*operations.BuildBotLocaleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -71,7 +98,7 @@ func (s *SDK) BuildBotLocale(ctx context.Context, request operations.BuildBotLoc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -161,8 +188,9 @@ func (s *SDK) BuildBotLocale(ctx context.Context, request operations.BuildBotLoc
 	return res, nil
 }
 
+// CreateBot - Creates an Amazon Lex conversational bot.
 func (s *SDK) CreateBot(ctx context.Context, request operations.CreateBotRequest) (*operations.CreateBotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/bots/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -182,7 +210,7 @@ func (s *SDK) CreateBot(ctx context.Context, request operations.CreateBotRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -272,8 +300,9 @@ func (s *SDK) CreateBot(ctx context.Context, request operations.CreateBotRequest
 	return res, nil
 }
 
+// CreateBotAlias - <p>Creates an alias for the specified version of a bot. Use an alias to enable you to change the version of a bot without updating applications that use the bot.</p> <p>For example, you can create an alias called "PROD" that your applications use to call the Amazon Lex bot. </p>
 func (s *SDK) CreateBotAlias(ctx context.Context, request operations.CreateBotAliasRequest) (*operations.CreateBotAliasResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botaliases/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -293,7 +322,7 @@ func (s *SDK) CreateBotAlias(ctx context.Context, request operations.CreateBotAl
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -383,8 +412,9 @@ func (s *SDK) CreateBotAlias(ctx context.Context, request operations.CreateBotAl
 	return res, nil
 }
 
+// CreateBotLocale - Creates a locale in the bot. The locale contains the intents and slot types that the bot uses in conversations with users in the specified language and locale. You must add a locale to a bot before you can add intents and slot types to the bot.
 func (s *SDK) CreateBotLocale(ctx context.Context, request operations.CreateBotLocaleRequest) (*operations.CreateBotLocaleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -404,7 +434,7 @@ func (s *SDK) CreateBotLocale(ctx context.Context, request operations.CreateBotL
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -494,8 +524,9 @@ func (s *SDK) CreateBotLocale(ctx context.Context, request operations.CreateBotL
 	return res, nil
 }
 
+// CreateBotVersion - <p>Creates a new version of the bot based on the <code>DRAFT</code> version. If the <code>DRAFT</code> version of this resource hasn't changed since you created the last version, Amazon Lex doesn't create a new version, it returns the last created version.</p> <p>When you create the first version of a bot, Amazon Lex sets the version to 1. Subsequent versions increment by 1.</p>
 func (s *SDK) CreateBotVersion(ctx context.Context, request operations.CreateBotVersionRequest) (*operations.CreateBotVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -515,7 +546,7 @@ func (s *SDK) CreateBotVersion(ctx context.Context, request operations.CreateBot
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -605,8 +636,9 @@ func (s *SDK) CreateBotVersion(ctx context.Context, request operations.CreateBot
 	return res, nil
 }
 
+// CreateExport - <p>Creates a zip archive containing the contents of a bot or a bot locale. The archive contains a directory structure that contains JSON files that define the bot.</p> <p>You can create an archive that contains the complete definition of a bot, or you can specify that the archive contain only the definition of a single bot locale.</p> <p>For more information about exporting bots, and about the structure of the export archive, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/importing-exporting.html"> Importing and exporting bots </a> </p>
 func (s *SDK) CreateExport(ctx context.Context, request operations.CreateExportRequest) (*operations.CreateExportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/exports/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -626,7 +658,7 @@ func (s *SDK) CreateExport(ctx context.Context, request operations.CreateExportR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -716,8 +748,9 @@ func (s *SDK) CreateExport(ctx context.Context, request operations.CreateExportR
 	return res, nil
 }
 
+// CreateIntent - <p>Creates an intent.</p> <p>To define the interaction between the user and your bot, you define one or more intents. For example, for a pizza ordering bot you would create an <code>OrderPizza</code> intent.</p> <p>When you create an intent, you must provide a name. You can optionally provide the following:</p> <ul> <li> <p>Sample utterances. For example, "I want to order a pizza" and "Can I order a pizza." You can't provide utterances for built-in intents.</p> </li> <li> <p>Information to be gathered. You specify slots for the information that you bot requests from the user. You can specify standard slot types, such as date and time, or custom slot types for your application.</p> </li> <li> <p>How the intent is fulfilled. You can provide a Lambda function or configure the intent to return the intent information to your client application. If you use a Lambda function, Amazon Lex invokes the function when all of the intent information is available.</p> </li> <li> <p>A confirmation prompt to send to the user to confirm an intent. For example, "Shall I order your pizza?"</p> </li> <li> <p>A conclusion statement to send to the user after the intent is fulfilled. For example, "I ordered your pizza."</p> </li> <li> <p>A follow-up prompt that asks the user for additional activity. For example, "Do you want a drink with your pizza?"</p> </li> </ul>
 func (s *SDK) CreateIntent(ctx context.Context, request operations.CreateIntentRequest) (*operations.CreateIntentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -737,7 +770,7 @@ func (s *SDK) CreateIntent(ctx context.Context, request operations.CreateIntentR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -827,8 +860,9 @@ func (s *SDK) CreateIntent(ctx context.Context, request operations.CreateIntentR
 	return res, nil
 }
 
+// CreateResourcePolicy - Creates a new resource policy with the specified policy statements.
 func (s *SDK) CreateResourcePolicy(ctx context.Context, request operations.CreateResourcePolicyRequest) (*operations.CreateResourcePolicyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/policy/{resourceArn}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -848,7 +882,7 @@ func (s *SDK) CreateResourcePolicy(ctx context.Context, request operations.Creat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -938,8 +972,9 @@ func (s *SDK) CreateResourcePolicy(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateResourcePolicyStatement - <p>Adds a new resource policy statement to a bot or bot alias. If a resource policy exists, the statement is added to the current resource policy. If a policy doesn't exist, a new policy is created.</p> <p>You can't create a resource policy statement that allows cross-account access.</p>
 func (s *SDK) CreateResourcePolicyStatement(ctx context.Context, request operations.CreateResourcePolicyStatementRequest) (*operations.CreateResourcePolicyStatementResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/policy/{resourceArn}/statements/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -961,7 +996,7 @@ func (s *SDK) CreateResourcePolicyStatement(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1061,8 +1096,9 @@ func (s *SDK) CreateResourcePolicyStatement(ctx context.Context, request operati
 	return res, nil
 }
 
+// CreateSlot - Creates a slot in an intent. A slot is a variable needed to fulfill an intent. For example, an <code>OrderPizza</code> intent might need slots for size, crust, and number of pizzas. For each slot, you define one or more utterances that Amazon Lex uses to elicit a response from the user.
 func (s *SDK) CreateSlot(ctx context.Context, request operations.CreateSlotRequest) (*operations.CreateSlotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/slots/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1082,7 +1118,7 @@ func (s *SDK) CreateSlot(ctx context.Context, request operations.CreateSlotReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1172,8 +1208,9 @@ func (s *SDK) CreateSlot(ctx context.Context, request operations.CreateSlotReque
 	return res, nil
 }
 
+// CreateSlotType - <p>Creates a custom slot type</p> <p> To create a custom slot type, specify a name for the slot type and a set of enumeration values, the values that a slot of this type can assume. </p>
 func (s *SDK) CreateSlotType(ctx context.Context, request operations.CreateSlotTypeRequest) (*operations.CreateSlotTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/slottypes/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1193,7 +1230,7 @@ func (s *SDK) CreateSlotType(ctx context.Context, request operations.CreateSlotT
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1283,8 +1320,9 @@ func (s *SDK) CreateSlotType(ctx context.Context, request operations.CreateSlotT
 	return res, nil
 }
 
+// CreateUploadURL - Gets a pre-signed S3 write URL that you use to upload the zip archive when importing a bot or a bot locale.
 func (s *SDK) CreateUploadURL(ctx context.Context, request operations.CreateUploadURLRequest) (*operations.CreateUploadURLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createuploadurl/"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1294,7 +1332,7 @@ func (s *SDK) CreateUploadURL(ctx context.Context, request operations.CreateUplo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1374,8 +1412,9 @@ func (s *SDK) CreateUploadURL(ctx context.Context, request operations.CreateUplo
 	return res, nil
 }
 
+// DeleteBot - <p>Deletes all versions of a bot, including the <code>Draft</code> version. To delete a specific version, use the <code>DeleteBotVersion</code> operation.</p> <p>When you delete a bot, all of the resources contained in the bot are also deleted. Deleting a bot removes all locales, intents, slot, and slot types defined for the bot.</p> <p>If a bot has an alias, the <code>DeleteBot</code> operation returns a <code>ResourceInUseException</code> exception. If you want to delete the bot and the alias, set the <code>skipResourceInUseCheck</code> parameter to <code>true</code>.</p>
 func (s *SDK) DeleteBot(ctx context.Context, request operations.DeleteBotRequest) (*operations.DeleteBotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1387,7 +1426,7 @@ func (s *SDK) DeleteBot(ctx context.Context, request operations.DeleteBotRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1477,8 +1516,9 @@ func (s *SDK) DeleteBot(ctx context.Context, request operations.DeleteBotRequest
 	return res, nil
 }
 
+// DeleteBotAlias - Deletes the specified bot alias.
 func (s *SDK) DeleteBotAlias(ctx context.Context, request operations.DeleteBotAliasRequest) (*operations.DeleteBotAliasResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botaliases/{botAliasId}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1490,7 +1530,7 @@ func (s *SDK) DeleteBotAlias(ctx context.Context, request operations.DeleteBotAl
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1580,8 +1620,9 @@ func (s *SDK) DeleteBotAlias(ctx context.Context, request operations.DeleteBotAl
 	return res, nil
 }
 
+// DeleteBotLocale - <p>Removes a locale from a bot.</p> <p>When you delete a locale, all intents, slots, and slot types defined for the locale are also deleted.</p>
 func (s *SDK) DeleteBotLocale(ctx context.Context, request operations.DeleteBotLocaleRequest) (*operations.DeleteBotLocaleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1591,7 +1632,7 @@ func (s *SDK) DeleteBotLocale(ctx context.Context, request operations.DeleteBotL
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1681,8 +1722,9 @@ func (s *SDK) DeleteBotLocale(ctx context.Context, request operations.DeleteBotL
 	return res, nil
 }
 
+// DeleteBotVersion - Deletes a specific version of a bot. To delete all version of a bot, use the <a>DeleteBot</a> operation.
 func (s *SDK) DeleteBotVersion(ctx context.Context, request operations.DeleteBotVersionRequest) (*operations.DeleteBotVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1694,7 +1736,7 @@ func (s *SDK) DeleteBotVersion(ctx context.Context, request operations.DeleteBot
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1784,8 +1826,9 @@ func (s *SDK) DeleteBotVersion(ctx context.Context, request operations.DeleteBot
 	return res, nil
 }
 
+// DeleteExport - Removes a previous export and the associated files stored in an S3 bucket.
 func (s *SDK) DeleteExport(ctx context.Context, request operations.DeleteExportRequest) (*operations.DeleteExportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/exports/{exportId}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1795,7 +1838,7 @@ func (s *SDK) DeleteExport(ctx context.Context, request operations.DeleteExportR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1875,8 +1918,9 @@ func (s *SDK) DeleteExport(ctx context.Context, request operations.DeleteExportR
 	return res, nil
 }
 
+// DeleteImport - Removes a previous import and the associated file stored in an S3 bucket.
 func (s *SDK) DeleteImport(ctx context.Context, request operations.DeleteImportRequest) (*operations.DeleteImportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/imports/{importId}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1886,7 +1930,7 @@ func (s *SDK) DeleteImport(ctx context.Context, request operations.DeleteImportR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1966,8 +2010,9 @@ func (s *SDK) DeleteImport(ctx context.Context, request operations.DeleteImportR
 	return res, nil
 }
 
+// DeleteIntent - <p>Removes the specified intent.</p> <p>Deleting an intent also deletes the slots associated with the intent.</p>
 func (s *SDK) DeleteIntent(ctx context.Context, request operations.DeleteIntentRequest) (*operations.DeleteIntentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1977,7 +2022,7 @@ func (s *SDK) DeleteIntent(ctx context.Context, request operations.DeleteIntentR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2058,8 +2103,9 @@ func (s *SDK) DeleteIntent(ctx context.Context, request operations.DeleteIntentR
 	return res, nil
 }
 
+// DeleteResourcePolicy - Removes an existing policy from a bot or bot alias. If the resource doesn't have a policy attached, Amazon Lex returns an exception.
 func (s *SDK) DeleteResourcePolicy(ctx context.Context, request operations.DeleteResourcePolicyRequest) (*operations.DeleteResourcePolicyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/policy/{resourceArn}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2071,7 +2117,7 @@ func (s *SDK) DeleteResourcePolicy(ctx context.Context, request operations.Delet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2141,8 +2187,9 @@ func (s *SDK) DeleteResourcePolicy(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteResourcePolicyStatement - Deletes a policy statement from a resource policy. If you delete the last statement from a policy, the policy is deleted. If you specify a statement ID that doesn't exist in the policy, or if the bot or bot alias doesn't have a policy attached, Amazon Lex returns an exception.
 func (s *SDK) DeleteResourcePolicyStatement(ctx context.Context, request operations.DeleteResourcePolicyStatementRequest) (*operations.DeleteResourcePolicyStatementResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/policy/{resourceArn}/statements/{statementId}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2154,7 +2201,7 @@ func (s *SDK) DeleteResourcePolicyStatement(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2224,8 +2271,9 @@ func (s *SDK) DeleteResourcePolicyStatement(ctx context.Context, request operati
 	return res, nil
 }
 
+// DeleteSlot - Deletes the specified slot from an intent.
 func (s *SDK) DeleteSlot(ctx context.Context, request operations.DeleteSlotRequest) (*operations.DeleteSlotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/slots/{slotId}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2235,7 +2283,7 @@ func (s *SDK) DeleteSlot(ctx context.Context, request operations.DeleteSlotReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2316,8 +2364,9 @@ func (s *SDK) DeleteSlot(ctx context.Context, request operations.DeleteSlotReque
 	return res, nil
 }
 
+// DeleteSlotType - <p>Deletes a slot type from a bot locale.</p> <p>If a slot is using the slot type, Amazon Lex throws a <code>ResourceInUseException</code> exception. To avoid the exception, set the <code>skipResourceInUseCheck</code> parameter to <code>true</code>.</p>
 func (s *SDK) DeleteSlotType(ctx context.Context, request operations.DeleteSlotTypeRequest) (*operations.DeleteSlotTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/slottypes/{slotTypeId}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2329,7 +2378,7 @@ func (s *SDK) DeleteSlotType(ctx context.Context, request operations.DeleteSlotT
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2410,8 +2459,9 @@ func (s *SDK) DeleteSlotType(ctx context.Context, request operations.DeleteSlotT
 	return res, nil
 }
 
+// DescribeBot - Provides metadata information about a bot.
 func (s *SDK) DescribeBot(ctx context.Context, request operations.DescribeBotRequest) (*operations.DescribeBotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2421,7 +2471,7 @@ func (s *SDK) DescribeBot(ctx context.Context, request operations.DescribeBotReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2501,8 +2551,9 @@ func (s *SDK) DescribeBot(ctx context.Context, request operations.DescribeBotReq
 	return res, nil
 }
 
+// DescribeBotAlias - Get information about a specific bot alias.
 func (s *SDK) DescribeBotAlias(ctx context.Context, request operations.DescribeBotAliasRequest) (*operations.DescribeBotAliasResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botaliases/{botAliasId}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2512,7 +2563,7 @@ func (s *SDK) DescribeBotAlias(ctx context.Context, request operations.DescribeB
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2592,8 +2643,9 @@ func (s *SDK) DescribeBotAlias(ctx context.Context, request operations.DescribeB
 	return res, nil
 }
 
+// DescribeBotLocale - Describes the settings that a bot has for a specific locale.
 func (s *SDK) DescribeBotLocale(ctx context.Context, request operations.DescribeBotLocaleRequest) (*operations.DescribeBotLocaleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2603,7 +2655,7 @@ func (s *SDK) DescribeBotLocale(ctx context.Context, request operations.Describe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2683,8 +2735,9 @@ func (s *SDK) DescribeBotLocale(ctx context.Context, request operations.Describe
 	return res, nil
 }
 
+// DescribeBotVersion - Provides metadata about a version of a bot.
 func (s *SDK) DescribeBotVersion(ctx context.Context, request operations.DescribeBotVersionRequest) (*operations.DescribeBotVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2694,7 +2747,7 @@ func (s *SDK) DescribeBotVersion(ctx context.Context, request operations.Describ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2774,8 +2827,9 @@ func (s *SDK) DescribeBotVersion(ctx context.Context, request operations.Describ
 	return res, nil
 }
 
+// DescribeExport - Gets information about a specific export.
 func (s *SDK) DescribeExport(ctx context.Context, request operations.DescribeExportRequest) (*operations.DescribeExportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/exports/{exportId}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2785,7 +2839,7 @@ func (s *SDK) DescribeExport(ctx context.Context, request operations.DescribeExp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2855,8 +2909,9 @@ func (s *SDK) DescribeExport(ctx context.Context, request operations.DescribeExp
 	return res, nil
 }
 
+// DescribeImport - Gets information about a specific import.
 func (s *SDK) DescribeImport(ctx context.Context, request operations.DescribeImportRequest) (*operations.DescribeImportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/imports/{importId}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2866,7 +2921,7 @@ func (s *SDK) DescribeImport(ctx context.Context, request operations.DescribeImp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2936,8 +2991,9 @@ func (s *SDK) DescribeImport(ctx context.Context, request operations.DescribeImp
 	return res, nil
 }
 
+// DescribeIntent - Returns metadata about an intent.
 func (s *SDK) DescribeIntent(ctx context.Context, request operations.DescribeIntentRequest) (*operations.DescribeIntentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2947,7 +3003,7 @@ func (s *SDK) DescribeIntent(ctx context.Context, request operations.DescribeInt
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3027,8 +3083,9 @@ func (s *SDK) DescribeIntent(ctx context.Context, request operations.DescribeInt
 	return res, nil
 }
 
+// DescribeResourcePolicy - Gets the resource policy and policy revision for a bot or bot alias.
 func (s *SDK) DescribeResourcePolicy(ctx context.Context, request operations.DescribeResourcePolicyRequest) (*operations.DescribeResourcePolicyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/policy/{resourceArn}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3038,7 +3095,7 @@ func (s *SDK) DescribeResourcePolicy(ctx context.Context, request operations.Des
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3098,8 +3155,9 @@ func (s *SDK) DescribeResourcePolicy(ctx context.Context, request operations.Des
 	return res, nil
 }
 
+// DescribeSlot - Gets metadata information about a slot.
 func (s *SDK) DescribeSlot(ctx context.Context, request operations.DescribeSlotRequest) (*operations.DescribeSlotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/slots/{slotId}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3109,7 +3167,7 @@ func (s *SDK) DescribeSlot(ctx context.Context, request operations.DescribeSlotR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3189,8 +3247,9 @@ func (s *SDK) DescribeSlot(ctx context.Context, request operations.DescribeSlotR
 	return res, nil
 }
 
+// DescribeSlotType - Gets metadata information about a slot type.
 func (s *SDK) DescribeSlotType(ctx context.Context, request operations.DescribeSlotTypeRequest) (*operations.DescribeSlotTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/slottypes/{slotTypeId}/", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3200,7 +3259,7 @@ func (s *SDK) DescribeSlotType(ctx context.Context, request operations.DescribeS
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3280,8 +3339,9 @@ func (s *SDK) DescribeSlotType(ctx context.Context, request operations.DescribeS
 	return res, nil
 }
 
+// ListBotAliases - Gets a list of aliases for the specified bot.
 func (s *SDK) ListBotAliases(ctx context.Context, request operations.ListBotAliasesRequest) (*operations.ListBotAliasesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botaliases/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3303,7 +3363,7 @@ func (s *SDK) ListBotAliases(ctx context.Context, request operations.ListBotAlia
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3373,8 +3433,9 @@ func (s *SDK) ListBotAliases(ctx context.Context, request operations.ListBotAlia
 	return res, nil
 }
 
+// ListBotLocales - Gets a list of locales for the specified bot.
 func (s *SDK) ListBotLocales(ctx context.Context, request operations.ListBotLocalesRequest) (*operations.ListBotLocalesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3396,7 +3457,7 @@ func (s *SDK) ListBotLocales(ctx context.Context, request operations.ListBotLoca
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3466,8 +3527,9 @@ func (s *SDK) ListBotLocales(ctx context.Context, request operations.ListBotLoca
 	return res, nil
 }
 
+// ListBotVersions - <p>Gets information about all of the versions of a bot.</p> <p>The <code>ListBotVersions</code> operation returns a summary of each version of a bot. For example, if a bot has three numbered versions, the <code>ListBotVersions</code> operation returns for summaries, one for each numbered version and one for the <code>DRAFT</code> version.</p> <p>The <code>ListBotVersions</code> operation always returns at least one version, the <code>DRAFT</code> version.</p>
 func (s *SDK) ListBotVersions(ctx context.Context, request operations.ListBotVersionsRequest) (*operations.ListBotVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3489,7 +3551,7 @@ func (s *SDK) ListBotVersions(ctx context.Context, request operations.ListBotVer
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3559,8 +3621,9 @@ func (s *SDK) ListBotVersions(ctx context.Context, request operations.ListBotVer
 	return res, nil
 }
 
+// ListBots - Gets a list of available bots.
 func (s *SDK) ListBots(ctx context.Context, request operations.ListBotsRequest) (*operations.ListBotsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/bots/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3582,7 +3645,7 @@ func (s *SDK) ListBots(ctx context.Context, request operations.ListBotsRequest) 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3652,8 +3715,9 @@ func (s *SDK) ListBots(ctx context.Context, request operations.ListBotsRequest) 
 	return res, nil
 }
 
+// ListBuiltInIntents - <p>Gets a list of built-in intents provided by Amazon Lex that you can use in your bot. </p> <p>To use a built-in intent as a the base for your own intent, include the built-in intent signature in the <code>parentIntentSignature</code> parameter when you call the <code>CreateIntent</code> operation. For more information, see <a>CreateIntent</a>.</p>
 func (s *SDK) ListBuiltInIntents(ctx context.Context, request operations.ListBuiltInIntentsRequest) (*operations.ListBuiltInIntentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/builtins/locales/{localeId}/intents/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3675,7 +3739,7 @@ func (s *SDK) ListBuiltInIntents(ctx context.Context, request operations.ListBui
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3745,8 +3809,9 @@ func (s *SDK) ListBuiltInIntents(ctx context.Context, request operations.ListBui
 	return res, nil
 }
 
+// ListBuiltInSlotTypes - Gets a list of built-in slot types that meet the specified criteria.
 func (s *SDK) ListBuiltInSlotTypes(ctx context.Context, request operations.ListBuiltInSlotTypesRequest) (*operations.ListBuiltInSlotTypesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/builtins/locales/{localeId}/slottypes/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3768,7 +3833,7 @@ func (s *SDK) ListBuiltInSlotTypes(ctx context.Context, request operations.ListB
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3838,8 +3903,9 @@ func (s *SDK) ListBuiltInSlotTypes(ctx context.Context, request operations.ListB
 	return res, nil
 }
 
+// ListExports - Lists the exports for a bot or bot locale. Exports are kept in the list for 7 days.
 func (s *SDK) ListExports(ctx context.Context, request operations.ListExportsRequest) (*operations.ListExportsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/exports/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3861,7 +3927,7 @@ func (s *SDK) ListExports(ctx context.Context, request operations.ListExportsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3921,8 +3987,9 @@ func (s *SDK) ListExports(ctx context.Context, request operations.ListExportsReq
 	return res, nil
 }
 
+// ListImports - Lists the imports for a bot or bot locale. Imports are kept in the list for 7 days.
 func (s *SDK) ListImports(ctx context.Context, request operations.ListImportsRequest) (*operations.ListImportsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/imports/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3944,7 +4011,7 @@ func (s *SDK) ListImports(ctx context.Context, request operations.ListImportsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4004,8 +4071,9 @@ func (s *SDK) ListImports(ctx context.Context, request operations.ListImportsReq
 	return res, nil
 }
 
+// ListIntents - Get a list of intents that meet the specified criteria.
 func (s *SDK) ListIntents(ctx context.Context, request operations.ListIntentsRequest) (*operations.ListIntentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4027,7 +4095,7 @@ func (s *SDK) ListIntents(ctx context.Context, request operations.ListIntentsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4097,8 +4165,9 @@ func (s *SDK) ListIntents(ctx context.Context, request operations.ListIntentsReq
 	return res, nil
 }
 
+// ListSlotTypes - Gets a list of slot types that match the specified criteria.
 func (s *SDK) ListSlotTypes(ctx context.Context, request operations.ListSlotTypesRequest) (*operations.ListSlotTypesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/slottypes/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4120,7 +4189,7 @@ func (s *SDK) ListSlotTypes(ctx context.Context, request operations.ListSlotType
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4190,8 +4259,9 @@ func (s *SDK) ListSlotTypes(ctx context.Context, request operations.ListSlotType
 	return res, nil
 }
 
+// ListSlots - Gets a list of slots that match the specified criteria.
 func (s *SDK) ListSlots(ctx context.Context, request operations.ListSlotsRequest) (*operations.ListSlotsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/slots/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4213,7 +4283,7 @@ func (s *SDK) ListSlots(ctx context.Context, request operations.ListSlotsRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4283,8 +4353,9 @@ func (s *SDK) ListSlots(ctx context.Context, request operations.ListSlotsRequest
 	return res, nil
 }
 
+// ListTagsForResource - Gets a list of tags associated with a resource. Only bots, bot aliases, and bot channels can have tags associated with them.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceARN}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4294,7 +4365,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4364,8 +4435,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// StartImport - Starts importing a bot or bot locale from a zip archive that you uploaded to an S3 bucket.
 func (s *SDK) StartImport(ctx context.Context, request operations.StartImportRequest) (*operations.StartImportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/imports/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4385,7 +4457,7 @@ func (s *SDK) StartImport(ctx context.Context, request operations.StartImportReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4475,8 +4547,9 @@ func (s *SDK) StartImport(ctx context.Context, request operations.StartImportReq
 	return res, nil
 }
 
+// TagResource - Adds the specified tags to the specified resource. If a tag key already exists, the existing value is replaced with the new value.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceARN}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4496,7 +4569,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4566,8 +4639,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Removes tags from a bot, bot alias, or bot channel.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resourceARN}#tagKeys", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4579,7 +4653,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4649,8 +4723,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateBot - Updates the configuration of an existing bot.
 func (s *SDK) UpdateBot(ctx context.Context, request operations.UpdateBotRequest) (*operations.UpdateBotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4670,7 +4745,7 @@ func (s *SDK) UpdateBot(ctx context.Context, request operations.UpdateBotRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4760,8 +4835,9 @@ func (s *SDK) UpdateBot(ctx context.Context, request operations.UpdateBotRequest
 	return res, nil
 }
 
+// UpdateBotAlias - Updates the configuration of an existing bot alias.
 func (s *SDK) UpdateBotAlias(ctx context.Context, request operations.UpdateBotAliasRequest) (*operations.UpdateBotAliasResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botaliases/{botAliasId}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4781,7 +4857,7 @@ func (s *SDK) UpdateBotAlias(ctx context.Context, request operations.UpdateBotAl
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4871,8 +4947,9 @@ func (s *SDK) UpdateBotAlias(ctx context.Context, request operations.UpdateBotAl
 	return res, nil
 }
 
+// UpdateBotLocale - Updates the settings that a bot has for a specific locale.
 func (s *SDK) UpdateBotLocale(ctx context.Context, request operations.UpdateBotLocaleRequest) (*operations.UpdateBotLocaleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4892,7 +4969,7 @@ func (s *SDK) UpdateBotLocale(ctx context.Context, request operations.UpdateBotL
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4982,8 +5059,9 @@ func (s *SDK) UpdateBotLocale(ctx context.Context, request operations.UpdateBotL
 	return res, nil
 }
 
+// UpdateExport - <p>Updates the password used to protect an export zip archive.</p> <p>The password is not required. If you don't supply a password, Amazon Lex generates a zip file that is not protected by a password. This is the archive that is available at the pre-signed S3 URL provided by the operation.</p>
 func (s *SDK) UpdateExport(ctx context.Context, request operations.UpdateExportRequest) (*operations.UpdateExportResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/exports/{exportId}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5003,7 +5081,7 @@ func (s *SDK) UpdateExport(ctx context.Context, request operations.UpdateExportR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5093,8 +5171,9 @@ func (s *SDK) UpdateExport(ctx context.Context, request operations.UpdateExportR
 	return res, nil
 }
 
+// UpdateIntent - Updates the settings for an intent.
 func (s *SDK) UpdateIntent(ctx context.Context, request operations.UpdateIntentRequest) (*operations.UpdateIntentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5114,7 +5193,7 @@ func (s *SDK) UpdateIntent(ctx context.Context, request operations.UpdateIntentR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5204,8 +5283,9 @@ func (s *SDK) UpdateIntent(ctx context.Context, request operations.UpdateIntentR
 	return res, nil
 }
 
+// UpdateResourcePolicy - Replaces the existing resource policy for a bot or bot alias with a new one. If the policy doesn't exist, Amazon Lex returns an exception.
 func (s *SDK) UpdateResourcePolicy(ctx context.Context, request operations.UpdateResourcePolicyRequest) (*operations.UpdateResourcePolicyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/policy/{resourceArn}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5227,7 +5307,7 @@ func (s *SDK) UpdateResourcePolicy(ctx context.Context, request operations.Updat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5317,8 +5397,9 @@ func (s *SDK) UpdateResourcePolicy(ctx context.Context, request operations.Updat
 	return res, nil
 }
 
+// UpdateSlot - Updates the settings for a slot.
 func (s *SDK) UpdateSlot(ctx context.Context, request operations.UpdateSlotRequest) (*operations.UpdateSlotResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/slots/{slotId}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5338,7 +5419,7 @@ func (s *SDK) UpdateSlot(ctx context.Context, request operations.UpdateSlotReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5428,8 +5509,9 @@ func (s *SDK) UpdateSlot(ctx context.Context, request operations.UpdateSlotReque
 	return res, nil
 }
 
+// UpdateSlotType - Updates the configuration of an existing slot type.
 func (s *SDK) UpdateSlotType(ctx context.Context, request operations.UpdateSlotTypeRequest) (*operations.UpdateSlotTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/slottypes/{slotTypeId}/", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5449,7 +5531,7 @@ func (s *SDK) UpdateSlotType(ctx context.Context, request operations.UpdateSlotT
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

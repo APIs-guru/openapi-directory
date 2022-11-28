@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RemoveCustomFieldSettingForPortfolioPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=portfolio_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=portfolio_gid" })
   portfolioGid: string;
 }
 
 
 export class RemoveCustomFieldSettingForPortfolioQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
 export class RemoveCustomFieldSettingForPortfolioRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.RemoveCustomFieldSettingRequest;
 }
 
 
-export class RemoveCustomFieldSettingForPortfolioRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: RemoveCustomFieldSettingForPortfolioPathParams;
-
-  @Metadata()
-  queryParams: RemoveCustomFieldSettingForPortfolioQueryParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: RemoveCustomFieldSettingForPortfolioRequestBody;
-}
-
-
 export class RemoveCustomFieldSettingForPortfolio200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 }
 
 
+export class RemoveCustomFieldSettingForPortfolioRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: RemoveCustomFieldSettingForPortfolioPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: RemoveCustomFieldSettingForPortfolioQueryParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: RemoveCustomFieldSettingForPortfolioRequestBody;
+}
+
+
 export class RemoveCustomFieldSettingForPortfolioResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   removeCustomFieldSettingForPortfolio200ApplicationJsonObject?: RemoveCustomFieldSettingForPortfolio200ApplicationJson;
 }

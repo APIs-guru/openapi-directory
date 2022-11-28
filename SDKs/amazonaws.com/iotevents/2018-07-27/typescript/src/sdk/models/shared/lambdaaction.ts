@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Payload } from "./payload";
+
 
 
 // LambdaAction
@@ -7,9 +8,9 @@ import { Payload } from "./payload";
  * Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.
 **/
 export class LambdaAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=functionArn" })
+  @SpeakeasyMetadata({ data: "json, name=functionArn" })
   functionArn: string;
 
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: Payload;
 }

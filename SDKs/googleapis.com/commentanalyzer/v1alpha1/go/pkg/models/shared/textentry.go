@@ -8,6 +8,8 @@ const (
 	TextEntryTypeEnumHTML                TextEntryTypeEnum = "HTML"
 )
 
+// TextEntry
+// Represents a body of text.
 type TextEntry struct {
 	Text *string            `json:"text,omitempty"`
 	Type *TextEntryTypeEnum `json:"type,omitempty"`

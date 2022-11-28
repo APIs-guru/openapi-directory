@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPortfolioPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=portfolio_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=portfolio_gid" })
   portfolioGid: string;
 }
 
 
 export class GetPortfolioQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class GetPortfolioRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetPortfolioPathParams;
-
-  @Metadata()
-  queryParams: GetPortfolioQueryParams;
-}
-
-
 export class GetPortfolio200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.PortfolioResponse;
 }
 
 
+export class GetPortfolioRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetPortfolioPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetPortfolioQueryParams;
+}
+
+
 export class GetPortfolioResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPortfolio200ApplicationJsonObject?: GetPortfolio200ApplicationJson;
 }

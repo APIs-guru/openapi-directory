@@ -32,7 +32,7 @@ type DisplayvideoAdvertisersManualTriggersPatchSecurity struct {
 type DisplayvideoAdvertisersManualTriggersPatchRequest struct {
 	PathParams  DisplayvideoAdvertisersManualTriggersPatchPathParams
 	QueryParams DisplayvideoAdvertisersManualTriggersPatchQueryParams
-	Request     *shared.ManualTrigger `request:"mediaType=application/json"`
+	Request     *shared.ManualTriggerInput `request:"mediaType=application/json"`
 	Security    DisplayvideoAdvertisersManualTriggersPatchSecurity
 }
 

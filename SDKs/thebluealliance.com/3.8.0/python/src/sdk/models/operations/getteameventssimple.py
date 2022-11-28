@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetTeamEventsSimplePathParams:
-    team_key: str = field(default=None, metadata={'path_param': { 'field_name': 'team_key', 'style': 'simple', 'explode': False }})
+    team_key: str = field(metadata={'path_param': { 'field_name': 'team_key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetTeamEventsSimpleHeaders:
 
 @dataclass
 class GetTeamEventsSimpleSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetTeamEventsSimpleRequest:
-    path_params: GetTeamEventsSimplePathParams = field(default=None)
-    headers: GetTeamEventsSimpleHeaders = field(default=None)
-    security: GetTeamEventsSimpleSecurity = field(default=None)
+    headers: GetTeamEventsSimpleHeaders = field()
+    path_params: GetTeamEventsSimplePathParams = field()
+    security: GetTeamEventsSimpleSecurity = field()
     
 
 @dataclass
 class GetTeamEventsSimpleResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     event_simples: Optional[List[shared.EventSimple]] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

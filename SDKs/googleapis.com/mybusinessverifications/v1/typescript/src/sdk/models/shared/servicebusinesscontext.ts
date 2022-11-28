@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PostalAddress } from "./postaladdress";
+
 
 
 // ServiceBusinessContext
@@ -7,6 +8,6 @@ import { PostalAddress } from "./postaladdress";
  * Additional data for service business verification.
 **/
 export class ServiceBusinessContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: PostalAddress;
 }

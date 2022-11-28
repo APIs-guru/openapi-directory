@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CareContextDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=careContextReference" })
+  @SpeakeasyMetadata({ data: "json, name=careContextReference" })
   careContextReference: string;
 
-  @Metadata({ data: "json, name=patientReference" })
+  @SpeakeasyMetadata({ data: "json, name=patientReference" })
   patientReference: string;
 }

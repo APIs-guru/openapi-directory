@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EnabledServicePrincipal
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A structure that contains details of a service principal that represents an AWS service that is enabled to integrate with AWS Organizations.
 **/
 export class EnabledServicePrincipal extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DateEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=DateEnabled" })
   dateEnabled?: Date;
 
-  @Metadata({ data: "json, name=ServicePrincipal" })
+  @SpeakeasyMetadata({ data: "json, name=ServicePrincipal" })
   servicePrincipal?: string;
 }

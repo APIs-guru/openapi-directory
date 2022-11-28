@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnterpriseCrmCardsRow } from "./enterprisecrmcardsrow";
+
 
 
 // EnterpriseCrmCardsTabularData
@@ -8,9 +8,9 @@ import { EnterpriseCrmCardsRow } from "./enterprisecrmcardsrow";
  * The generic data format returned from all connectors.
 **/
 export class EnterpriseCrmCardsTabularData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=headers" })
+  @SpeakeasyMetadata({ data: "json, name=headers" })
   headers?: string[];
 
-  @Metadata({ data: "json, name=rows", elemType: shared.EnterpriseCrmCardsRow })
+  @SpeakeasyMetadata({ data: "json, name=rows", elemType: EnterpriseCrmCardsRow })
   rows?: EnterpriseCrmCardsRow[];
 }

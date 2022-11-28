@@ -1,5 +1,7 @@
 package shared
 
+// StatusReportingSettings
+// Settings controlling the behavior of status reports.
 type StatusReportingSettings struct {
 	ApplicationReportingSettings *ApplicationReportingSettings `json:"applicationReportingSettings,omitempty"`
 	ApplicationReportsEnabled    *bool                         `json:"applicationReportsEnabled,omitempty"`

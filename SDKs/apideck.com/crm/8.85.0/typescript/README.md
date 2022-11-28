@@ -1,0 +1,226 @@
+# openapi
+
+<!-- Start SDK Installation -->
+## SDK Installation
+
+### NPM
+
+```bash
+npm add openapi
+```
+
+### Yarn
+
+```bash
+yarn add openapi
+```
+<!-- End SDK Installation -->
+
+<!-- Start SDK Example Usage -->
+## SDK Example Usage
+
+```typescript
+import { SDK, WithSecurity} from "openapi";
+import { ActivitiesAddRequest, ActivitiesAddResponse } from "openapi/src/sdk/models/operations";
+import { AxiosError } from "axios";
+
+const sdk = new SDK(WithSecurity(
+  security: {
+    apiKey: {
+      apiKey: "YOUR_API_KEY_HERE",
+    }
+    applicationId: {
+      apiKey: "YOUR_API_KEY_HERE",
+    }
+    consumerId: {
+      apiKey: "YOUR_API_KEY_HERE",
+    },
+  }
+));
+    
+const req: ActivitiesAddRequest = {
+  security: {
+    apiKey: {
+      apiKey: "YOUR_API_KEY_HERE",
+    },
+  },
+  queryParams: {
+    raw: false,
+  },
+  headers: {
+    xApideckAppId: "et",
+    xApideckConsumerId: "beatae",
+    xApideckServiceId: "fuga",
+  },
+  request: {
+    accountId: "perspiciatis",
+    activityDate: "quas",
+    activityDatetime: "incidunt",
+    allDayEvent: true,
+    archived: true,
+    assetId: "culpa",
+    attendees: [
+      {
+        emailAddress: "quae",
+        firstName: "quaerat",
+        isOrganizer: true,
+        lastName: "iusto",
+        middleName: "nihil",
+        name: "ab",
+        prefix: "veritatis",
+        status: "accepted",
+        suffix: "natus",
+      },
+    ],
+    campaignId: "quo",
+    caseId: "error",
+    child: false,
+    companyId: "deserunt",
+    contactId: "doloribus",
+    contractId: "qui",
+    customFields: [
+      {
+        description: "occaecati",
+        id: "dolore",
+        name: "dolor",
+        value: "beatae",
+      },
+      {
+        description: "aspernatur",
+        id: "non",
+        name: "sint",
+        value: "laboriosam",
+      },
+    ],
+    customObjectId: "quia",
+    deleted: false,
+    description: "inventore",
+    done: true,
+    durationSeconds: 2380683085597594969,
+    endDate: "perferendis",
+    endDatetime: "sapiente",
+    eventSubType: "similique",
+    groupEvent: false,
+    groupEventType: "alias",
+    leadId: "dignissimos",
+    location: "fugiat",
+    locationAddress: {
+      city: "nihil",
+      contactName: "nulla",
+      country: "consequatur",
+      county: "dolorem",
+      email: "voluptatibus",
+      fax: "provident",
+      id: "nostrum",
+      latitude: "itaque",
+      line1: "laudantium",
+      line2: "et",
+      line3: "omnis",
+      line4: "et",
+      longitude: "eius",
+      name: "earum",
+      phoneNumber: "error",
+      postalCode: "et",
+      rowVersion: "nesciunt",
+      salutation: "dolores",
+      state: "voluptas",
+      streetNumber: "ipsam",
+      string: "ipsam",
+      type: "other",
+      website: "corrupti",
+    },
+    note: "iure",
+    opportunityId: "eligendi",
+    ownerId: "consequatur",
+    private: true,
+    productId: "et",
+    recurrent: false,
+    reminderDatetime: "delectus",
+    reminderSet: false,
+    showAs: "free",
+    solutionId: "in",
+    startDatetime: "voluptas",
+    title: "dolorem",
+    type: "call",
+    userId: "aut",
+    videoConferenceId: "aut",
+    videoConferenceUrl: "saepe",
+  },
+};
+
+sdk.activities.activitiesAdd(req).then((res: ActivitiesAddResponse | AxiosError) => {
+   // handle response
+});
+```
+<!-- End SDK Example Usage -->
+
+<!-- Start SDK Available Operations -->
+## SDK Available Operations
+
+### Activities
+
+* `activitiesAdd` - Create activity
+* `activitiesAll` - List activities
+* `activitiesDelete` - Delete activity
+* `activitiesOne` - Get activity
+* `activitiesUpdate` - Update activity
+
+### Companies
+
+* `companiesAdd` - Create company
+* `companiesAll` - List companies
+* `companiesDelete` - Delete company
+* `companiesOne` - Get company
+* `companiesUpdate` - Update company
+
+### Contacts
+
+* `contactsAdd` - Create contact
+* `contactsAll` - List contacts
+* `contactsDelete` - Delete contact
+* `contactsOne` - Get contact
+* `contactsUpdate` - Update contact
+
+### Leads
+
+* `leadsAdd` - Create lead
+* `leadsAll` - List leads
+* `leadsDelete` - Delete lead
+* `leadsOne` - Get lead
+* `leadsUpdate` - Update lead
+
+### Notes
+
+* `notesAdd` - Create note
+* `notesAll` - List notes
+* `notesDelete` - Delete note
+* `notesOne` - Get note
+* `notesUpdate` - Update note
+
+### Opportunities
+
+* `opportunitiesAdd` - Create opportunity
+* `opportunitiesAll` - List opportunities
+* `opportunitiesDelete` - Delete opportunity
+* `opportunitiesOne` - Get opportunity
+* `opportunitiesUpdate` - Update opportunity
+
+### Pipelines
+
+* `pipelinesAdd` - Create pipeline
+* `pipelinesAll` - List pipelines
+* `pipelinesDelete` - Delete pipeline
+* `pipelinesOne` - Get pipeline
+* `pipelinesUpdate` - Update pipeline
+
+### Users
+
+* `usersAdd` - Create user
+* `usersAll` - List users
+* `usersDelete` - Delete user
+* `usersOne` - Get user
+* `usersUpdate` - Update user
+
+<!-- End SDK Available Operations -->
+
+### SDK Generated by [Speakeasy](https://docs.speakeasyapi.dev/docs/using-speakeasy/client-sdks)

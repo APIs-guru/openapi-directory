@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiDestinationStateEnum } from "./apidestinationstateenum";
 var UpdateApiDestinationResponse = /** @class */ (function (_super) {
     __extends(UpdateApiDestinationResponse, _super);
@@ -30,19 +30,19 @@ var UpdateApiDestinationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApiDestinationArn" }),
+        SpeakeasyMetadata({ data: "json, name=ApiDestinationArn" }),
         __metadata("design:type", String)
     ], UpdateApiDestinationResponse.prototype, "apiDestinationArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApiDestinationState" }),
+        SpeakeasyMetadata({ data: "json, name=ApiDestinationState" }),
         __metadata("design:type", String)
     ], UpdateApiDestinationResponse.prototype, "apiDestinationState", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", Date)
     ], UpdateApiDestinationResponse.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModifiedTime" }),
+        SpeakeasyMetadata({ data: "json, name=LastModifiedTime" }),
         __metadata("design:type", Date)
     ], UpdateApiDestinationResponse.prototype, "lastModifiedTime", void 0);
     return UpdateApiDestinationResponse;

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ThingConnectivity } from "./thingconnectivity";
+
 
 
 // ThingDocument
@@ -7,24 +8,24 @@ import { ThingConnectivity } from "./thingconnectivity";
  * The thing search index document.
 **/
 export class ThingDocument extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=connectivity" })
+  @SpeakeasyMetadata({ data: "json, name=connectivity" })
   connectivity?: ThingConnectivity;
 
-  @Metadata({ data: "json, name=shadow" })
+  @SpeakeasyMetadata({ data: "json, name=shadow" })
   shadow?: string;
 
-  @Metadata({ data: "json, name=thingGroupNames" })
+  @SpeakeasyMetadata({ data: "json, name=thingGroupNames" })
   thingGroupNames?: string[];
 
-  @Metadata({ data: "json, name=thingId" })
+  @SpeakeasyMetadata({ data: "json, name=thingId" })
   thingId?: string;
 
-  @Metadata({ data: "json, name=thingName" })
+  @SpeakeasyMetadata({ data: "json, name=thingName" })
   thingName?: string;
 
-  @Metadata({ data: "json, name=thingTypeName" })
+  @SpeakeasyMetadata({ data: "json, name=thingTypeName" })
   thingTypeName?: string;
 }

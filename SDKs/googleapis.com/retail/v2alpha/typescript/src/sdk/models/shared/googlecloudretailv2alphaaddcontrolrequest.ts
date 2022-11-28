@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2alphaAddControlRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for AddControl method.
 **/
 export class GoogleCloudRetailV2alphaAddControlRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=controlId" })
+  @SpeakeasyMetadata({ data: "json, name=controlId" })
   controlId?: string;
 }

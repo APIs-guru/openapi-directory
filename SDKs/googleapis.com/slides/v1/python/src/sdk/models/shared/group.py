@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import pageelement
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Group:
-    children: Optional[List[pageelement.PageElement]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'children' }})
+    r"""Group
+    A PageElement kind representing a joined collection of PageElements.
+    """
+    
+    children: Optional[List[PageElement]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('children') }})
     

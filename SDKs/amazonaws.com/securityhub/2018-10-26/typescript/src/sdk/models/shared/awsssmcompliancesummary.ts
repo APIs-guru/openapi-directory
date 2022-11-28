@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsSsmComplianceSummary
@@ -6,57 +7,57 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides the details about the compliance status for a patch.
 **/
 export class AwsSsmComplianceSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComplianceType" })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceType" })
   complianceType?: string;
 
-  @Metadata({ data: "json, name=CompliantCriticalCount" })
+  @SpeakeasyMetadata({ data: "json, name=CompliantCriticalCount" })
   compliantCriticalCount?: number;
 
-  @Metadata({ data: "json, name=CompliantHighCount" })
+  @SpeakeasyMetadata({ data: "json, name=CompliantHighCount" })
   compliantHighCount?: number;
 
-  @Metadata({ data: "json, name=CompliantInformationalCount" })
+  @SpeakeasyMetadata({ data: "json, name=CompliantInformationalCount" })
   compliantInformationalCount?: number;
 
-  @Metadata({ data: "json, name=CompliantLowCount" })
+  @SpeakeasyMetadata({ data: "json, name=CompliantLowCount" })
   compliantLowCount?: number;
 
-  @Metadata({ data: "json, name=CompliantMediumCount" })
+  @SpeakeasyMetadata({ data: "json, name=CompliantMediumCount" })
   compliantMediumCount?: number;
 
-  @Metadata({ data: "json, name=CompliantUnspecifiedCount" })
+  @SpeakeasyMetadata({ data: "json, name=CompliantUnspecifiedCount" })
   compliantUnspecifiedCount?: number;
 
-  @Metadata({ data: "json, name=ExecutionType" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionType" })
   executionType?: string;
 
-  @Metadata({ data: "json, name=NonCompliantCriticalCount" })
+  @SpeakeasyMetadata({ data: "json, name=NonCompliantCriticalCount" })
   nonCompliantCriticalCount?: number;
 
-  @Metadata({ data: "json, name=NonCompliantHighCount" })
+  @SpeakeasyMetadata({ data: "json, name=NonCompliantHighCount" })
   nonCompliantHighCount?: number;
 
-  @Metadata({ data: "json, name=NonCompliantInformationalCount" })
+  @SpeakeasyMetadata({ data: "json, name=NonCompliantInformationalCount" })
   nonCompliantInformationalCount?: number;
 
-  @Metadata({ data: "json, name=NonCompliantLowCount" })
+  @SpeakeasyMetadata({ data: "json, name=NonCompliantLowCount" })
   nonCompliantLowCount?: number;
 
-  @Metadata({ data: "json, name=NonCompliantMediumCount" })
+  @SpeakeasyMetadata({ data: "json, name=NonCompliantMediumCount" })
   nonCompliantMediumCount?: number;
 
-  @Metadata({ data: "json, name=NonCompliantUnspecifiedCount" })
+  @SpeakeasyMetadata({ data: "json, name=NonCompliantUnspecifiedCount" })
   nonCompliantUnspecifiedCount?: number;
 
-  @Metadata({ data: "json, name=OverallSeverity" })
+  @SpeakeasyMetadata({ data: "json, name=OverallSeverity" })
   overallSeverity?: string;
 
-  @Metadata({ data: "json, name=PatchBaselineId" })
+  @SpeakeasyMetadata({ data: "json, name=PatchBaselineId" })
   patchBaselineId?: string;
 
-  @Metadata({ data: "json, name=PatchGroup" })
+  @SpeakeasyMetadata({ data: "json, name=PatchGroup" })
   patchGroup?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

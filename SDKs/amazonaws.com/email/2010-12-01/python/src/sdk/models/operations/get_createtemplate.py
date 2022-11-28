@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCreateTemplateActionEnum(str, Enum):
     CREATE_TEMPLATE = "CreateTemplate"
@@ -7,9 +11,13 @@ class GetCreateTemplateActionEnum(str, Enum):
 
 @dataclass
 class GetCreateTemplateTemplate:
+    r"""GetCreateTemplateTemplate
+    The content of the email, composed of a subject line, an HTML part, and a text-only part.
+    """
+    
+    template_name: str = field(metadata={'query_param': { 'field_name': 'TemplateName' }})
     html_part: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'HtmlPart' }})
     subject_part: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SubjectPart' }})
-    template_name: str = field(default=None, metadata={'query_param': { 'field_name': 'TemplateName' }})
     text_part: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TextPart' }})
     
 class GetCreateTemplateVersionEnum(str, Enum):
@@ -18,9 +26,9 @@ class GetCreateTemplateVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateTemplateQueryParams:
-    action: GetCreateTemplateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    template: GetCreateTemplateTemplate = field(default=None, metadata={'query_param': { 'field_name': 'Template', 'style': 'form', 'explode': True }})
-    version: GetCreateTemplateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetCreateTemplateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    template: GetCreateTemplateTemplate = field(metadata={'query_param': { 'field_name': 'Template', 'style': 'form', 'explode': True }})
+    version: GetCreateTemplateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -36,13 +44,13 @@ class GetCreateTemplateHeaders:
 
 @dataclass
 class GetCreateTemplateRequest:
-    query_params: GetCreateTemplateQueryParams = field(default=None)
-    headers: GetCreateTemplateHeaders = field(default=None)
+    headers: GetCreateTemplateHeaders = field()
+    query_params: GetCreateTemplateQueryParams = field()
     
 
 @dataclass
 class GetCreateTemplateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

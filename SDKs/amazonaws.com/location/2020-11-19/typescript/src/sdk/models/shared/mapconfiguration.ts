@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MapConfiguration
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the map tile style selected from an available provider.
 **/
 export class MapConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Style" })
+  @SpeakeasyMetadata({ data: "json, name=Style" })
   style: string;
 }

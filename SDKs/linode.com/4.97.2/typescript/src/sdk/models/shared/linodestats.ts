@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LinodeStatsIo
@@ -6,10 +7,10 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Input/Output statistics.
 **/
 export class LinodeStatsIo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=io" })
+  @SpeakeasyMetadata({ data: "json, name=io" })
   io?: number[][];
 
-  @Metadata({ data: "json, name=swap" })
+  @SpeakeasyMetadata({ data: "json, name=swap" })
   swap?: number[][];
 }
 
@@ -19,16 +20,16 @@ export class LinodeStatsIo extends SpeakeasyBase {
  * IPv4 statistics.
 **/
 export class LinodeStatsNetv4 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=in" })
+  @SpeakeasyMetadata({ data: "json, name=in" })
   in?: number[][];
 
-  @Metadata({ data: "json, name=out" })
+  @SpeakeasyMetadata({ data: "json, name=out" })
   out?: number[][];
 
-  @Metadata({ data: "json, name=private_in" })
+  @SpeakeasyMetadata({ data: "json, name=private_in" })
   privateIn?: number[][];
 
-  @Metadata({ data: "json, name=private_out" })
+  @SpeakeasyMetadata({ data: "json, name=private_out" })
   privateOut?: number[][];
 }
 
@@ -38,16 +39,16 @@ export class LinodeStatsNetv4 extends SpeakeasyBase {
  * IPv6 statistics.
 **/
 export class LinodeStatsNetv6 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=in" })
+  @SpeakeasyMetadata({ data: "json, name=in" })
   in?: number[][];
 
-  @Metadata({ data: "json, name=out" })
+  @SpeakeasyMetadata({ data: "json, name=out" })
   out?: number[][];
 
-  @Metadata({ data: "json, name=private_in" })
+  @SpeakeasyMetadata({ data: "json, name=private_in" })
   privateIn?: number[][];
 
-  @Metadata({ data: "json, name=private_out" })
+  @SpeakeasyMetadata({ data: "json, name=private_out" })
   privateOut?: number[][];
 }
 
@@ -58,18 +59,18 @@ export class LinodeStatsNetv6 extends SpeakeasyBase {
  * 
 **/
 export class LinodeStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpu" })
+  @SpeakeasyMetadata({ data: "json, name=cpu" })
   cpu?: number[][];
 
-  @Metadata({ data: "json, name=io" })
+  @SpeakeasyMetadata({ data: "json, name=io" })
   io?: LinodeStatsIo;
 
-  @Metadata({ data: "json, name=netv4" })
+  @SpeakeasyMetadata({ data: "json, name=netv4" })
   netv4?: LinodeStatsNetv4;
 
-  @Metadata({ data: "json, name=netv6" })
+  @SpeakeasyMetadata({ data: "json, name=netv6" })
   netv6?: LinodeStatsNetv6;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

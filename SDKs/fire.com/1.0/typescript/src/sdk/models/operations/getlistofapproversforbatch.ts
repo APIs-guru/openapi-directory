@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetListofApproversForBatchPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=batchUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=batchUuid" })
   batchUuid: string;
 }
 
 
-export class GetListofApproversForBatchRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetListofApproversForBatchPathParams;
-}
-
-
 export class GetListofApproversForBatchBatchApproversApprovals extends SpeakeasyBase {
-  @Metadata({ data: "json, name=emailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=emailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=lastUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdated" })
   lastUpdated?: Date;
 
-  @Metadata({ data: "json, name=mobileNumber" })
+  @SpeakeasyMetadata({ data: "json, name=mobileNumber" })
   mobileNumber?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: number;
 }
 
 
 export class GetListofApproversForBatchBatchApprovers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approvals", elemType: operations.GetListofApproversForBatchBatchApproversApprovals })
+  @SpeakeasyMetadata({ data: "json, name=approvals", elemType: GetListofApproversForBatchBatchApproversApprovals })
   approvals?: GetListofApproversForBatchBatchApproversApprovals[];
 }
 
 
+export class GetListofApproversForBatchRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetListofApproversForBatchPathParams;
+}
+
+
 export class GetListofApproversForBatchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   batchApprovers?: GetListofApproversForBatchBatchApprovers;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

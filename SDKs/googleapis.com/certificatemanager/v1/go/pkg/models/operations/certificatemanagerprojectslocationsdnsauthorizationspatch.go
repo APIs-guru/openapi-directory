@@ -31,7 +31,7 @@ type CertificatemanagerProjectsLocationsDNSAuthorizationsPatchSecurity struct {
 type CertificatemanagerProjectsLocationsDNSAuthorizationsPatchRequest struct {
 	PathParams  CertificatemanagerProjectsLocationsDNSAuthorizationsPatchPathParams
 	QueryParams CertificatemanagerProjectsLocationsDNSAuthorizationsPatchQueryParams
-	Request     *shared.DNSAuthorization `request:"mediaType=application/json"`
+	Request     *shared.DNSAuthorizationInput `request:"mediaType=application/json"`
 	Security    CertificatemanagerProjectsLocationsDNSAuthorizationsPatchSecurity
 }
 

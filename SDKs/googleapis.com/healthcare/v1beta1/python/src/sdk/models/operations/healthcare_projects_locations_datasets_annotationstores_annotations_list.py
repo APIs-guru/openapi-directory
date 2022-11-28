@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsAnnotationStoresAnnotationsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 class HealthcareProjectsLocationsDatasetsAnnotationStoresAnnotationsListViewEnum(str, Enum):
     ANNOTATION_VIEW_UNSPECIFIED = "ANNOTATION_VIEW_UNSPECIFIED"
@@ -34,20 +35,20 @@ class HealthcareProjectsLocationsDatasetsAnnotationStoresAnnotationsListQueryPar
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsAnnotationStoresAnnotationsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsAnnotationStoresAnnotationsListRequest:
-    path_params: HealthcareProjectsLocationsDatasetsAnnotationStoresAnnotationsListPathParams = field(default=None)
-    query_params: HealthcareProjectsLocationsDatasetsAnnotationStoresAnnotationsListQueryParams = field(default=None)
-    security: HealthcareProjectsLocationsDatasetsAnnotationStoresAnnotationsListSecurity = field(default=None)
+    path_params: HealthcareProjectsLocationsDatasetsAnnotationStoresAnnotationsListPathParams = field()
+    query_params: HealthcareProjectsLocationsDatasetsAnnotationStoresAnnotationsListQueryParams = field()
+    security: HealthcareProjectsLocationsDatasetsAnnotationStoresAnnotationsListSecurity = field()
     
 
 @dataclass
 class HealthcareProjectsLocationsDatasetsAnnotationStoresAnnotationsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_annotations_response: Optional[shared.ListAnnotationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

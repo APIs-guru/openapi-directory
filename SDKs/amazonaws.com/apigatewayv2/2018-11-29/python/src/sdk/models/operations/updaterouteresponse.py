@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateRouteResponsePathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
-    route_id: str = field(default=None, metadata={'path_param': { 'field_name': 'routeId', 'style': 'simple', 'explode': False }})
-    route_response_id: str = field(default=None, metadata={'path_param': { 'field_name': 'routeResponseId', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    route_id: str = field(metadata={'path_param': { 'field_name': 'routeId', 'style': 'simple', 'explode': False }})
+    route_response_id: str = field(metadata={'path_param': { 'field_name': 'routeResponseId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,26 +29,26 @@ class UpdateRouteResponseHeaders:
 @dataclass_json
 @dataclass
 class UpdateRouteResponseRequestBody:
-    model_selection_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modelSelectionExpression' }})
-    response_models: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responseModels' }})
-    response_parameters: Optional[dict[str, shared.ParameterConstraints]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responseParameters' }})
-    route_response_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'routeResponseKey' }})
+    model_selection_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('modelSelectionExpression') }})
+    response_models: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('responseModels') }})
+    response_parameters: Optional[dict[str, shared.ParameterConstraints]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('responseParameters') }})
+    route_response_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('routeResponseKey') }})
     
 
 @dataclass
 class UpdateRouteResponseRequest:
-    path_params: UpdateRouteResponsePathParams = field(default=None)
-    headers: UpdateRouteResponseHeaders = field(default=None)
-    request: UpdateRouteResponseRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateRouteResponseHeaders = field()
+    path_params: UpdateRouteResponsePathParams = field()
+    request: UpdateRouteResponseRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateRouteResponseResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     update_route_response_response: Optional[shared.UpdateRouteResponseResponse] = field(default=None)
     

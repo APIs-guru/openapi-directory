@@ -1,19 +1,24 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import date
-from . import hourlymetrics
-from . import date
-from . import weekdaymetrics
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AggregateMetrics:
-    answered_calls_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'answeredCallsCount' }})
-    end_date: Optional[date.Date] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endDate' }})
-    hourly_metrics: Optional[List[hourlymetrics.HourlyMetrics]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hourlyMetrics' }})
-    missed_calls_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'missedCallsCount' }})
-    start_date: Optional[date.Date] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startDate' }})
-    weekday_metrics: Optional[List[weekdaymetrics.WeekDayMetrics]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'weekdayMetrics' }})
+    r"""AggregateMetrics
+    Metrics aggregated over the input time range.
+    """
+    
+    answered_calls_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('answeredCallsCount') }})
+    end_date: Optional[Date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endDate') }})
+    hourly_metrics: Optional[List[HourlyMetrics]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hourlyMetrics') }})
+    missed_calls_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('missedCallsCount') }})
+    start_date: Optional[Date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startDate') }})
+    weekday_metrics: Optional[List[WeekDayMetrics]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('weekdayMetrics') }})
     

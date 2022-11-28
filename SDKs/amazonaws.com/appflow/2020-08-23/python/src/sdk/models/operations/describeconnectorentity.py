@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -42,25 +47,25 @@ class DescribeConnectorEntityRequestBodyConnectorTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DescribeConnectorEntityRequestBody:
-    connector_entity_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectorEntityName' }})
-    connector_profile_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectorProfileName' }})
-    connector_type: Optional[DescribeConnectorEntityRequestBodyConnectorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectorType' }})
+    connector_entity_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectorEntityName') }})
+    connector_profile_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectorProfileName') }})
+    connector_type: Optional[DescribeConnectorEntityRequestBodyConnectorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectorType') }})
     
 
 @dataclass
 class DescribeConnectorEntityRequest:
-    headers: DescribeConnectorEntityHeaders = field(default=None)
-    request: DescribeConnectorEntityRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DescribeConnectorEntityHeaders = field()
+    request: DescribeConnectorEntityRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DescribeConnectorEntityResponse:
+    content_type: str = field()
+    status_code: int = field()
     connector_authentication_exception: Optional[Any] = field(default=None)
     connector_server_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_connector_entity_response: Optional[shared.DescribeConnectorEntityResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

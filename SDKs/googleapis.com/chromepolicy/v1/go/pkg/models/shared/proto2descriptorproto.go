@@ -1,5 +1,7 @@
 package shared
 
+// Proto2DescriptorProto
+// Describes a message type.
 type Proto2DescriptorProto struct {
 	EnumType   []Proto2EnumDescriptorProto  `json:"enumType,omitempty"`
 	Field      []Proto2FieldDescriptorProto `json:"field,omitempty"`

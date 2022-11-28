@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AdUnit
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an AdMob ad unit.
 **/
 export class AdUnit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adFormat" })
+  @SpeakeasyMetadata({ data: "json, name=adFormat" })
   adFormat?: string;
 
-  @Metadata({ data: "json, name=adTypes" })
+  @SpeakeasyMetadata({ data: "json, name=adTypes" })
   adTypes?: string[];
 
-  @Metadata({ data: "json, name=adUnitId" })
+  @SpeakeasyMetadata({ data: "json, name=adUnitId" })
   adUnitId?: string;
 
-  @Metadata({ data: "json, name=appId" })
+  @SpeakeasyMetadata({ data: "json, name=appId" })
   appId?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

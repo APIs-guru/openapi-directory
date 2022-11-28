@@ -14,12 +14,12 @@ class GetMaintenanceQueryParams:
 
 @dataclass
 class GetMaintenanceRequest:
-    query_params: GetMaintenanceQueryParams = field(default=None)
+    query_params: GetMaintenanceQueryParams = field()
     
 
 @dataclass
 class GetMaintenanceResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     maintenances: Optional[List[shared.Maintenance]] = field(default=None)
-    status_code: int = field(default=None)
     

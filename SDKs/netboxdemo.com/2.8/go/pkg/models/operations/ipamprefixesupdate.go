@@ -10,7 +10,7 @@ type IpamPrefixesUpdatePathParams struct {
 
 type IpamPrefixesUpdateRequest struct {
 	PathParams IpamPrefixesUpdatePathParams
-	Request    shared.WritablePrefix `request:"mediaType=application/json"`
+	Request    shared.WritablePrefixInput `request:"mediaType=application/json"`
 }
 
 type IpamPrefixesUpdateResponse struct {

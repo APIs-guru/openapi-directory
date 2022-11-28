@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BloggerBlogsGetPathParams:
-    blog_id: str = field(default=None, metadata={'path_param': { 'field_name': 'blogId', 'style': 'simple', 'explode': False }})
+    blog_id: str = field(metadata={'path_param': { 'field_name': 'blogId', 'style': 'simple', 'explode': False }})
     
 class BloggerBlogsGetViewEnum(str, Enum):
     VIEW_TYPE_UNSPECIFIED = "VIEW_TYPE_UNSPECIFIED"
@@ -33,14 +34,14 @@ class BloggerBlogsGetQueryParams:
 
 @dataclass
 class BloggerBlogsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BloggerBlogsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -51,14 +52,14 @@ class BloggerBlogsGetSecurity:
 
 @dataclass
 class BloggerBlogsGetRequest:
-    path_params: BloggerBlogsGetPathParams = field(default=None)
-    query_params: BloggerBlogsGetQueryParams = field(default=None)
-    security: BloggerBlogsGetSecurity = field(default=None)
+    path_params: BloggerBlogsGetPathParams = field()
+    query_params: BloggerBlogsGetQueryParams = field()
+    security: BloggerBlogsGetSecurity = field()
     
 
 @dataclass
 class BloggerBlogsGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     blog: Optional[shared.Blog] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

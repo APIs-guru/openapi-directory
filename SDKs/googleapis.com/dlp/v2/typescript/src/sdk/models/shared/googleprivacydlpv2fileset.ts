@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2CloudStorageRegexFileSet } from "./googleprivacydlpv2cloudstorageregexfileset";
+
 
 
 // GooglePrivacyDlpV2FileSet
@@ -7,9 +8,9 @@ import { GooglePrivacyDlpV2CloudStorageRegexFileSet } from "./googleprivacydlpv2
  * Set of files to scan.
 **/
 export class GooglePrivacyDlpV2FileSet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=regexFileSet" })
+  @SpeakeasyMetadata({ data: "json, name=regexFileSet" })
   regexFileSet?: GooglePrivacyDlpV2CloudStorageRegexFileSet;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

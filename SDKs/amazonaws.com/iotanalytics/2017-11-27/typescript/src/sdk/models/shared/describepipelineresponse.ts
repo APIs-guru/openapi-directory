@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Pipeline } from "./pipeline";
 
 
+
 export class DescribePipelineResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pipeline" })
+  @SpeakeasyMetadata({ data: "json, name=pipeline" })
   pipeline?: Pipeline;
 }

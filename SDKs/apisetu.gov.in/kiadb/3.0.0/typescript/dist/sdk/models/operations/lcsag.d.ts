@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class LcsagRequestBodyCertificateParameters extends SpeakeasyBase {
     dob: string;
@@ -18,10 +18,6 @@ export declare class LcsagRequestBody extends SpeakeasyBase {
 export declare class LcsagSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class LcsagRequest extends SpeakeasyBase {
-    request?: LcsagRequestBody;
-    security: LcsagSecurity;
 }
 export declare enum Lcsag400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -104,6 +100,10 @@ export declare enum Lcsag504ApplicationJsonErrorDescriptionEnum {
 export declare class Lcsag504ApplicationJson extends SpeakeasyBase {
     error?: Lcsag504ApplicationJsonErrorEnum;
     errorDescription?: Lcsag504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class LcsagRequest extends SpeakeasyBase {
+    request?: LcsagRequestBody;
+    security: LcsagSecurity;
 }
 export declare class LcsagResponse extends SpeakeasyBase {
     contentType: string;

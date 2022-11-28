@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteRouteActionEnum(str, Enum):
     DELETE_ROUTE = "DeleteRoute"
@@ -10,13 +14,13 @@ class GetDeleteRouteVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteRouteQueryParams:
-    action: GetDeleteRouteActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteRouteActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    route_table_id: str = field(metadata={'query_param': { 'field_name': 'RouteTableId', 'style': 'form', 'explode': True }})
+    version: GetDeleteRouteVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     destination_cidr_block: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DestinationCidrBlock', 'style': 'form', 'explode': True }})
     destination_ipv6_cidr_block: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DestinationIpv6CidrBlock', 'style': 'form', 'explode': True }})
     destination_prefix_list_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DestinationPrefixListId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    route_table_id: str = field(default=None, metadata={'query_param': { 'field_name': 'RouteTableId', 'style': 'form', 'explode': True }})
-    version: GetDeleteRouteVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,12 +36,12 @@ class GetDeleteRouteHeaders:
 
 @dataclass
 class GetDeleteRouteRequest:
-    query_params: GetDeleteRouteQueryParams = field(default=None)
-    headers: GetDeleteRouteHeaders = field(default=None)
+    headers: GetDeleteRouteHeaders = field()
+    query_params: GetDeleteRouteQueryParams = field()
     
 
 @dataclass
 class GetDeleteRouteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

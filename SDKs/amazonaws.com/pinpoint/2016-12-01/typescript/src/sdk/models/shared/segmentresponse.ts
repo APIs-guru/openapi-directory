@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SegmentDimensions } from "./segmentdimensions";
 import { SegmentImportResource } from "./segmentimportresource";
 import { SegmentGroupList } from "./segmentgrouplist";
 import { SegmentTypeEnum } from "./segmenttypeenum";
+
 
 
 // SegmentResponse
@@ -10,39 +11,39 @@ import { SegmentTypeEnum } from "./segmenttypeenum";
  * Provides information about the configuration, dimension, and other settings for a segment.
 **/
 export class SegmentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationId" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationId" })
   applicationId: string;
 
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate: string;
 
-  @Metadata({ data: "json, name=Dimensions" })
+  @SpeakeasyMetadata({ data: "json, name=Dimensions" })
   dimensions?: SegmentDimensions;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: string;
 
-  @Metadata({ data: "json, name=ImportDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=ImportDefinition" })
   importDefinition?: SegmentImportResource;
 
-  @Metadata({ data: "json, name=LastModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedDate" })
   lastModifiedDate?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=SegmentGroups" })
+  @SpeakeasyMetadata({ data: "json, name=SegmentGroups" })
   segmentGroups?: SegmentGroupList;
 
-  @Metadata({ data: "json, name=SegmentType" })
+  @SpeakeasyMetadata({ data: "json, name=SegmentType" })
   segmentType: SegmentTypeEnum;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: number;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class HandleRoomWebhookAssignmentsPathParams:
-    room_id: int = field(default=None, metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
+    room_id: int = field(metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,15 +19,15 @@ class HandleRoomWebhookAssignmentsHeaders:
 
 @dataclass
 class HandleRoomWebhookAssignmentsRequest:
-    path_params: HandleRoomWebhookAssignmentsPathParams = field(default=None)
-    headers: HandleRoomWebhookAssignmentsHeaders = field(default=None)
-    request: shared.UpdateRoomWebhookRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: HandleRoomWebhookAssignmentsHeaders = field()
+    path_params: HandleRoomWebhookAssignmentsPathParams = field()
+    request: shared.UpdateRoomWebhookRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class HandleRoomWebhookAssignmentsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     room_webhook_list: Optional[shared.RoomWebhookList] = field(default=None)
-    status_code: int = field(default=None)
     

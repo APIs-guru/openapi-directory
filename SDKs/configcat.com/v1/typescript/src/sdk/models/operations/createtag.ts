@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateTagPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=productId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=productId" })
   productId: string;
 }
 
 
 export class CreateTagRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   createTagModel?: shared.CreateTagModel;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   createTagModel1?: shared.CreateTagModel;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   createTagModel2?: shared.CreateTagModel;
 }
 
 
 export class CreateTagRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateTagPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: CreateTagRequests;
 }
 
 
 export class CreateTagResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tagModel?: shared.TagModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tagModelHaljson?: shared.TagModelHaljson;
 }

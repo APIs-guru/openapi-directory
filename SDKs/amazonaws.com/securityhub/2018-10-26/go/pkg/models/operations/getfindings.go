@@ -19,6 +19,8 @@ type GetFindingsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// GetFindingsRequestBodyFilters
+// <p>A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight.</p> <p>You can filter by up to 10 finding attributes. For each attribute, you can provide up to 20 filter values.</p>
 type GetFindingsRequestBodyFilters struct {
 	AwsAccountID                                   []shared.StringFilter  `json:"AwsAccountId,omitempty"`
 	CompanyName                                    []shared.StringFilter  `json:"CompanyName,omitempty"`

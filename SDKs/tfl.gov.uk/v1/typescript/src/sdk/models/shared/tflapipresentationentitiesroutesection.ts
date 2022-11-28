@@ -1,39 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesRouteSectionNaptanEntrySequence } from "./tflapipresentationentitiesroutesectionnaptanentrysequence";
 
 
+
 export class TflApiPresentationEntitiesRouteSection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationName" })
+  @SpeakeasyMetadata({ data: "json, name=destinationName" })
   destinationName?: string;
 
-  @Metadata({ data: "json, name=direction" })
+  @SpeakeasyMetadata({ data: "json, name=direction" })
   direction?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lineId" })
+  @SpeakeasyMetadata({ data: "json, name=lineId" })
   lineId?: string;
 
-  @Metadata({ data: "json, name=lineString" })
+  @SpeakeasyMetadata({ data: "json, name=lineString" })
   lineString?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=originationName" })
+  @SpeakeasyMetadata({ data: "json, name=originationName" })
   originationName?: string;
 
-  @Metadata({ data: "json, name=routeCode" })
+  @SpeakeasyMetadata({ data: "json, name=routeCode" })
   routeCode?: string;
 
-  @Metadata({ data: "json, name=routeSectionNaptanEntrySequence", elemType: shared.TflApiPresentationEntitiesRouteSectionNaptanEntrySequence })
+  @SpeakeasyMetadata({ data: "json, name=routeSectionNaptanEntrySequence", elemType: TflApiPresentationEntitiesRouteSectionNaptanEntrySequence })
   routeSectionNaptanEntrySequence?: TflApiPresentationEntitiesRouteSectionNaptanEntrySequence[];
 
-  @Metadata({ data: "json, name=validFrom" })
+  @SpeakeasyMetadata({ data: "json, name=validFrom" })
   validFrom?: Date;
 
-  @Metadata({ data: "json, name=validTo" })
+  @SpeakeasyMetadata({ data: "json, name=validTo" })
   validTo?: Date;
 }

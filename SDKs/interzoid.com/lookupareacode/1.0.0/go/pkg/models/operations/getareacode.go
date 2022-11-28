@@ -5,10 +5,6 @@ type GetareacodeQueryParams struct {
 	License  string `queryParam:"style=form,explode=true,name=license"`
 }
 
-type GetareacodeRequest struct {
-	QueryParams GetareacodeQueryParams
-}
-
 type Getareacode200ApplicationJSON struct {
 	Abbreviation *string `json:"Abbreviation,omitempty"`
 	AreaCode     *string `json:"AreaCode,omitempty"`
@@ -16,6 +12,10 @@ type Getareacode200ApplicationJSON struct {
 	Credits      *string `json:"Credits,omitempty"`
 	Locale       *string `json:"Locale,omitempty"`
 	PrimaryCity  *string `json:"PrimaryCity,omitempty"`
+}
+
+type GetareacodeRequest struct {
+	QueryParams GetareacodeQueryParams
 }
 
 type GetareacodeResponse struct {

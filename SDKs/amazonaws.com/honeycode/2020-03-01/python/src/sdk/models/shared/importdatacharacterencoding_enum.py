@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ImportDataCharacterEncodingEnum(str, Enum):
     UTF_8 = "UTF-8"

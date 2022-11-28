@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PersonalNameParsedOut } from "./personalnameparsedout";
 
 
+
 export class BatchPersonalNameParsedOut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=personalNames", elemType: shared.PersonalNameParsedOut })
+  @SpeakeasyMetadata({ data: "json, name=personalNames", elemType: PersonalNameParsedOut })
   personalNames?: PersonalNameParsedOut[];
 }

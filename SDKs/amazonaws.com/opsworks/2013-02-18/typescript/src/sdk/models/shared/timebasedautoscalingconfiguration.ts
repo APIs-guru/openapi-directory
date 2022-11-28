@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WeeklyAutoScalingSchedule } from "./weeklyautoscalingschedule";
+
 
 
 // TimeBasedAutoScalingConfiguration
@@ -7,9 +8,9 @@ import { WeeklyAutoScalingSchedule } from "./weeklyautoscalingschedule";
  * Describes an instance's time-based auto scaling configuration.
 **/
 export class TimeBasedAutoScalingConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoScalingSchedule" })
+  @SpeakeasyMetadata({ data: "json, name=AutoScalingSchedule" })
   autoScalingSchedule?: WeeklyAutoScalingSchedule;
 
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId?: string;
 }

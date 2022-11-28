@@ -23,9 +23,9 @@ type RequestUserRequest struct {
 	Headers     RequestUserHeaders
 }
 
-type RequestUserResponse struct {
+type RequestUserResponseOutput struct {
 	ContentType   string
 	ErrorResponse *shared.ErrorResponse
 	StatusCode    int64
-	UserData      *shared.UserData
+	UserData      *shared.UserDataOutput
 }

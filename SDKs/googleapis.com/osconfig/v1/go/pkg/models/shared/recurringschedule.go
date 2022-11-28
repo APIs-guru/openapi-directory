@@ -9,6 +9,20 @@ const (
 	RecurringScheduleFrequencyEnumDaily                RecurringScheduleFrequencyEnum = "DAILY"
 )
 
+// RecurringScheduleInput
+// Sets the time for recurring patch deployments.
+type RecurringScheduleInput struct {
+	EndTime   *string                         `json:"endTime,omitempty"`
+	Frequency *RecurringScheduleFrequencyEnum `json:"frequency,omitempty"`
+	Monthly   *MonthlySchedule                `json:"monthly,omitempty"`
+	StartTime *string                         `json:"startTime,omitempty"`
+	TimeOfDay *TimeOfDay                      `json:"timeOfDay,omitempty"`
+	TimeZone  *TimeZone                       `json:"timeZone,omitempty"`
+	Weekly    *WeeklySchedule                 `json:"weekly,omitempty"`
+}
+
+// RecurringSchedule
+// Sets the time for recurring patch deployments.
 type RecurringSchedule struct {
 	EndTime         *string                         `json:"endTime,omitempty"`
 	Frequency       *RecurringScheduleFrequencyEnum `json:"frequency,omitempty"`

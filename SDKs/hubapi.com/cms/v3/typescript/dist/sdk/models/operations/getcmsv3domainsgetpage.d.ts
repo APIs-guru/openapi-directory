@@ -1,18 +1,16 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetCmsV3DomainsGetPageQueryParams extends SpeakeasyBase {
     after?: string;
     archived?: boolean;
-    before?: string;
-    createdAfter?: number;
-    createdAt?: number;
-    createdBefore?: number;
+    createdAfter?: Date;
+    createdAt?: Date;
+    createdBefore?: Date;
     limit?: number;
-    properties?: string[];
     sort?: string[];
-    updatedAfter?: number;
-    updatedAt?: number;
-    updatedBefore?: number;
+    updatedAfter?: Date;
+    updatedAt?: Date;
+    updatedBefore?: Date;
 }
 export declare class GetCmsV3DomainsGetPageSecurity extends SpeakeasyBase {
     hapikey: shared.SchemeHapikey;
@@ -23,7 +21,7 @@ export declare class GetCmsV3DomainsGetPageRequest extends SpeakeasyBase {
 }
 export declare class GetCmsV3DomainsGetPageResponse extends SpeakeasyBase {
     body?: Uint8Array;
-    collectionResponseWithTotalDomain?: shared.CollectionResponseWithTotalDomain;
+    collectionResponseWithTotalDomainForwardPaging?: shared.CollectionResponseWithTotalDomainForwardPaging;
     contentType: string;
     statusCode: number;
 }

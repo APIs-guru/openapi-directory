@@ -7,6 +7,8 @@ const (
 	SnapshotTypeEnumSaveGame                SnapshotTypeEnum = "SAVE_GAME"
 )
 
+// Snapshot
+// An snapshot object.
 type Snapshot struct {
 	CoverImage         *SnapshotImage    `json:"coverImage,omitempty"`
 	Description        *string           `json:"description,omitempty"`

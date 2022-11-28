@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PostDeleteSpotDatafeedSubscriptionActionEnum;
 (function (PostDeleteSpotDatafeedSubscriptionActionEnum) {
     PostDeleteSpotDatafeedSubscriptionActionEnum["DeleteSpotDatafeedSubscription"] = "DeleteSpotDatafeedSubscription";
@@ -37,11 +37,11 @@ var PostDeleteSpotDatafeedSubscriptionQueryParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], PostDeleteSpotDatafeedSubscriptionQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], PostDeleteSpotDatafeedSubscriptionQueryParams.prototype, "version", void 0);
     return PostDeleteSpotDatafeedSubscriptionQueryParams;
@@ -53,31 +53,31 @@ var PostDeleteSpotDatafeedSubscriptionHeaders = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], PostDeleteSpotDatafeedSubscriptionHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], PostDeleteSpotDatafeedSubscriptionHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], PostDeleteSpotDatafeedSubscriptionHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], PostDeleteSpotDatafeedSubscriptionHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], PostDeleteSpotDatafeedSubscriptionHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], PostDeleteSpotDatafeedSubscriptionHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], PostDeleteSpotDatafeedSubscriptionHeaders.prototype, "xAmzSignedHeaders", void 0);
     return PostDeleteSpotDatafeedSubscriptionHeaders;
@@ -89,15 +89,15 @@ var PostDeleteSpotDatafeedSubscriptionRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostDeleteSpotDatafeedSubscriptionQueryParams)
     ], PostDeleteSpotDatafeedSubscriptionRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostDeleteSpotDatafeedSubscriptionHeaders)
     ], PostDeleteSpotDatafeedSubscriptionRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/xml" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/xml" }),
         __metadata("design:type", Uint8Array)
     ], PostDeleteSpotDatafeedSubscriptionRequest.prototype, "request", void 0);
     return PostDeleteSpotDatafeedSubscriptionRequest;
@@ -109,11 +109,11 @@ var PostDeleteSpotDatafeedSubscriptionResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostDeleteSpotDatafeedSubscriptionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostDeleteSpotDatafeedSubscriptionResponse.prototype, "statusCode", void 0);
     return PostDeleteSpotDatafeedSubscriptionResponse;

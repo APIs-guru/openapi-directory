@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VmmigrationProjectsLocationsTargetProjectsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,21 +28,21 @@ class VmmigrationProjectsLocationsTargetProjectsCreateQueryParams:
 
 @dataclass
 class VmmigrationProjectsLocationsTargetProjectsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VmmigrationProjectsLocationsTargetProjectsCreateRequest:
-    path_params: VmmigrationProjectsLocationsTargetProjectsCreatePathParams = field(default=None)
-    query_params: VmmigrationProjectsLocationsTargetProjectsCreateQueryParams = field(default=None)
-    request: Optional[shared.TargetProject] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: VmmigrationProjectsLocationsTargetProjectsCreateSecurity = field(default=None)
+    path_params: VmmigrationProjectsLocationsTargetProjectsCreatePathParams = field()
+    query_params: VmmigrationProjectsLocationsTargetProjectsCreateQueryParams = field()
+    security: VmmigrationProjectsLocationsTargetProjectsCreateSecurity = field()
+    request: Optional[shared.TargetProjectInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class VmmigrationProjectsLocationsTargetProjectsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

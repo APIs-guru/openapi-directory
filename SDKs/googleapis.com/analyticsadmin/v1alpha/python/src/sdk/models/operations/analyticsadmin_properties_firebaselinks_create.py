@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsadminPropertiesFirebaseLinksCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class AnalyticsadminPropertiesFirebaseLinksCreateQueryParams:
 
 @dataclass
 class AnalyticsadminPropertiesFirebaseLinksCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesFirebaseLinksCreateRequest:
-    path_params: AnalyticsadminPropertiesFirebaseLinksCreatePathParams = field(default=None)
-    query_params: AnalyticsadminPropertiesFirebaseLinksCreateQueryParams = field(default=None)
-    request: Optional[shared.GoogleAnalyticsAdminV1alphaFirebaseLink] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AnalyticsadminPropertiesFirebaseLinksCreateSecurity = field(default=None)
+    path_params: AnalyticsadminPropertiesFirebaseLinksCreatePathParams = field()
+    query_params: AnalyticsadminPropertiesFirebaseLinksCreateQueryParams = field()
+    security: AnalyticsadminPropertiesFirebaseLinksCreateSecurity = field()
+    request: Optional[shared.GoogleAnalyticsAdminV1alphaFirebaseLinkInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AnalyticsadminPropertiesFirebaseLinksCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_analytics_admin_v1alpha_firebase_link: Optional[shared.GoogleAnalyticsAdminV1alphaFirebaseLink] = field(default=None)
-    status_code: int = field(default=None)
     

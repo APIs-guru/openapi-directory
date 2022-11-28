@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Branch } from "./branch";
+
 
 
 // UpdateBranchResult
@@ -7,6 +8,6 @@ import { Branch } from "./branch";
  *  The result structure for the update branch request. 
 **/
 export class UpdateBranchResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=branch" })
+  @SpeakeasyMetadata({ data: "json, name=branch" })
   branch: Branch;
 }

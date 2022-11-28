@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HttpRouteRouteAction } from "./httprouterouteaction";
 import { HttpRouteRouteMatch } from "./httprouteroutematch";
+
 
 
 // HttpRouteRouteRule
@@ -9,9 +9,9 @@ import { HttpRouteRouteMatch } from "./httprouteroutematch";
  * Specifies how to match traffic and how to route traffic when traffic is matched.
 **/
 export class HttpRouteRouteRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: HttpRouteRouteAction;
 
-  @Metadata({ data: "json, name=matches", elemType: shared.HttpRouteRouteMatch })
+  @SpeakeasyMetadata({ data: "json, name=matches", elemType: HttpRouteRouteMatch })
   matches?: HttpRouteRouteMatch[];
 }

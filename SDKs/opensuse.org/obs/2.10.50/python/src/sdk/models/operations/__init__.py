@@ -78,3 +78,4 @@ from .put_group_group_title_ import *
 from .put_issue_trackers_issue_tracker_name_ import *
 from .put_person_login_ import *
 from .put_request_id_ import *
+from .putbuildprojectrepositoryarchitecturepackagefile import *

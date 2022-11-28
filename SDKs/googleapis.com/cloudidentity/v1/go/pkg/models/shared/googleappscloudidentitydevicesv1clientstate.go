@@ -35,6 +35,8 @@ const (
 	GoogleAppsCloudidentityDevicesV1ClientStateOwnerTypeEnumOwnerTypePartner     GoogleAppsCloudidentityDevicesV1ClientStateOwnerTypeEnum = "OWNER_TYPE_PARTNER"
 )
 
+// GoogleAppsCloudidentityDevicesV1ClientState
+// Represents the state associated with an API client calling the Devices API. Resource representing ClientState and supports updates from API users
 type GoogleAppsCloudidentityDevicesV1ClientState struct {
 	AssetTags       []string                                                        `json:"assetTags,omitempty"`
 	ComplianceState *GoogleAppsCloudidentityDevicesV1ClientStateComplianceStateEnum `json:"complianceState,omitempty"`

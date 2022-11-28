@@ -1,17 +1,17 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
 import * as operations from "./models/operations";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "http://api.sportsdata.io",
-  "https://api.sportsdata.io",
-  "http://azure-api.sportsdata.io",
-  "https://azure-api.sportsdata.io",
+export const ServerList = [
+	"http://api.sportsdata.io",
+	"https://api.sportsdata.io",
+	"http://azure-api.sportsdata.io",
+	"https://azure-api.sportsdata.io",
 ] as const;
 
 export function WithServerURL(
@@ -22,13 +22,13 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
@@ -37,41 +37,48 @@ export function WithSecurity(security: Security): OptsFunc {
     security = new Security(security);
   }
   return (sdk: SDK) => {
-    sdk.security = security;
+    sdk._security = security;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  public _security?: Security;
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
+    if (!this._securityClient) {
+      if (this._security) {
+        this._securityClient = utils.CreateSecurityClient(
+          this._defaultClient,
+          this._security
         );
       } else {
-        this.securityClient = this.defaultClient;
+        this._securityClient = this._defaultClient;
       }
     }
+    
   }
   
-  // CurrentSeason - Current Season
-  CurrentSeason(
+  /**
+   * currentSeason - Current Season
+  **/
+  currentSeason(
     req: operations.CurrentSeasonRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CurrentSeasonResponse> {
@@ -79,22 +86,24 @@ export class SDK {
       req = new operations.CurrentSeasonRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/CurrentSeason", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CurrentSeasonResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CurrentSeasonResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.season = httpRes?.data;
             }
             break;
@@ -106,8 +115,10 @@ export class SDK {
   }
 
   
-  // DfsSlates - DFS Slates
-  DfsSlates(
+  /**
+   * dfsSlates - DFS Slates
+  **/
+  dfsSlates(
     req: operations.DfsSlatesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DfsSlatesResponse> {
@@ -115,22 +126,24 @@ export class SDK {
       req = new operations.DfsSlatesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/DfsSlatesByTournament/{tournamentid}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DfsSlatesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DfsSlatesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.dfsSlates = httpRes?.data;
             }
             break;
@@ -142,8 +155,10 @@ export class SDK {
   }
 
   
-  // Injuries - Injuries
-  Injuries(
+  /**
+   * injuries - Injuries
+  **/
+  injuries(
     req: operations.InjuriesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.InjuriesResponse> {
@@ -151,22 +166,24 @@ export class SDK {
       req = new operations.InjuriesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/Injuries", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.InjuriesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.InjuriesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.injuries = httpRes?.data;
             }
             break;
@@ -178,8 +195,10 @@ export class SDK {
   }
 
   
-  // InjuriesHistorical - Injuries (Historical)
-  InjuriesHistorical(
+  /**
+   * injuriesHistorical - Injuries (Historical)
+  **/
+  injuriesHistorical(
     req: operations.InjuriesHistoricalRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.InjuriesHistoricalResponse> {
@@ -187,22 +206,24 @@ export class SDK {
       req = new operations.InjuriesHistoricalRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/InjuriesByHistorical", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.InjuriesHistoricalResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.InjuriesHistoricalResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.injuries = httpRes?.data;
             }
             break;
@@ -214,8 +235,10 @@ export class SDK {
   }
 
   
-  // Leaderboard - Leaderboard
-  Leaderboard(
+  /**
+   * leaderboard - Leaderboard
+  **/
+  leaderboard(
     req: operations.LeaderboardRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.LeaderboardResponse> {
@@ -223,22 +246,24 @@ export class SDK {
       req = new operations.LeaderboardRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/Leaderboard/{tournamentid}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.LeaderboardResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.LeaderboardResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.leaderboard = httpRes?.data;
             }
             break;
@@ -250,8 +275,10 @@ export class SDK {
   }
 
   
-  // News - News
-  News(
+  /**
+   * news - News
+  **/
+  news(
     req: operations.NewsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NewsResponse> {
@@ -259,22 +286,24 @@ export class SDK {
       req = new operations.NewsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/News", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NewsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.NewsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.news = httpRes?.data;
             }
             break;
@@ -286,8 +315,10 @@ export class SDK {
   }
 
   
-  // NewsByDate - News by Date
-  NewsByDate(
+  /**
+   * newsByDate - News by Date
+  **/
+  newsByDate(
     req: operations.NewsByDateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NewsByDateResponse> {
@@ -295,22 +326,24 @@ export class SDK {
       req = new operations.NewsByDateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/NewsByDate/{date}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NewsByDateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.NewsByDateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.news = httpRes?.data;
             }
             break;
@@ -322,8 +355,10 @@ export class SDK {
   }
 
   
-  // NewsByPlayer - News by Player
-  NewsByPlayer(
+  /**
+   * newsByPlayer - News by Player
+  **/
+  newsByPlayer(
     req: operations.NewsByPlayerRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NewsByPlayerResponse> {
@@ -331,22 +366,24 @@ export class SDK {
       req = new operations.NewsByPlayerRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/NewsByPlayerID/{playerid}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NewsByPlayerResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.NewsByPlayerResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.news = httpRes?.data;
             }
             break;
@@ -358,8 +395,10 @@ export class SDK {
   }
 
   
-  // Player - Player
-  Player(
+  /**
+   * player - Player
+  **/
+  player(
     req: operations.PlayerRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PlayerResponse> {
@@ -367,22 +406,24 @@ export class SDK {
       req = new operations.PlayerRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/Player/{playerid}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PlayerResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PlayerResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.player = httpRes?.data;
             }
             break;
@@ -394,8 +435,10 @@ export class SDK {
   }
 
   
-  // PlayerSeasonStatsWWorldGolfRankings - Player Season Stats (w/ World Golf Rankings)
-  PlayerSeasonStatsWWorldGolfRankings(
+  /**
+   * playerSeasonStatsWWorldGolfRankings - Player Season Stats (w/ World Golf Rankings)
+  **/
+  playerSeasonStatsWWorldGolfRankings(
     req: operations.PlayerSeasonStatsWWorldGolfRankingsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PlayerSeasonStatsWWorldGolfRankingsResponse> {
@@ -403,22 +446,24 @@ export class SDK {
       req = new operations.PlayerSeasonStatsWWorldGolfRankingsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/PlayerSeasonStats/{season}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PlayerSeasonStatsWWorldGolfRankingsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PlayerSeasonStatsWWorldGolfRankingsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.playerSeasons = httpRes?.data;
             }
             break;
@@ -430,8 +475,10 @@ export class SDK {
   }
 
   
-  // PlayerTournamentProjectedStatsWDraftkingsSalaries - Player Tournament Projected Stats (w/ DraftKings Salaries)
-  PlayerTournamentProjectedStatsWDraftkingsSalaries(
+  /**
+   * playerTournamentProjectedStatsWDraftkingsSalaries - Player Tournament Projected Stats (w/ DraftKings Salaries)
+  **/
+  playerTournamentProjectedStatsWDraftkingsSalaries(
     req: operations.PlayerTournamentProjectedStatsWDraftkingsSalariesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PlayerTournamentProjectedStatsWDraftkingsSalariesResponse> {
@@ -439,22 +486,24 @@ export class SDK {
       req = new operations.PlayerTournamentProjectedStatsWDraftkingsSalariesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/PlayerTournamentProjectionStats/{tournamentid}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PlayerTournamentProjectedStatsWDraftkingsSalariesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PlayerTournamentProjectedStatsWDraftkingsSalariesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.playerTournamentProjections = httpRes?.data;
             }
             break;
@@ -466,8 +515,10 @@ export class SDK {
   }
 
   
-  // PlayerTournamentStatsByPlayer - Player Tournament Stats By Player
-  PlayerTournamentStatsByPlayer(
+  /**
+   * playerTournamentStatsByPlayer - Player Tournament Stats By Player
+  **/
+  playerTournamentStatsByPlayer(
     req: operations.PlayerTournamentStatsByPlayerRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PlayerTournamentStatsByPlayerResponse> {
@@ -475,22 +526,24 @@ export class SDK {
       req = new operations.PlayerTournamentStatsByPlayerRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/PlayerTournamentStatsByPlayer/{tournamentid}/{playerid}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PlayerTournamentStatsByPlayerResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PlayerTournamentStatsByPlayerResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.playerTournament = httpRes?.data;
             }
             break;
@@ -502,8 +555,10 @@ export class SDK {
   }
 
   
-  // Players - Players
-  Players(
+  /**
+   * players - Players
+  **/
+  players(
     req: operations.PlayersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PlayersResponse> {
@@ -511,22 +566,24 @@ export class SDK {
       req = new operations.PlayersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/Players", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PlayersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PlayersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.players = httpRes?.data;
             }
             break;
@@ -538,8 +595,10 @@ export class SDK {
   }
 
   
-  // Schedule - Schedule
-  Schedule(
+  /**
+   * schedule - Schedule
+  **/
+  schedule(
     req: operations.ScheduleRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ScheduleResponse> {
@@ -547,22 +606,24 @@ export class SDK {
       req = new operations.ScheduleRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/Tournaments", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ScheduleResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ScheduleResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tournaments = httpRes?.data;
             }
             break;
@@ -574,8 +635,10 @@ export class SDK {
   }
 
   
-  // ScheduleBySeason - Schedule by Season
-  ScheduleBySeason(
+  /**
+   * scheduleBySeason - Schedule by Season
+  **/
+  scheduleBySeason(
     req: operations.ScheduleBySeasonRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ScheduleBySeasonResponse> {
@@ -583,22 +646,24 @@ export class SDK {
       req = new operations.ScheduleBySeasonRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/{format}/Tournaments/{season}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ScheduleBySeasonResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ScheduleBySeasonResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tournaments = httpRes?.data;
             }
             break;

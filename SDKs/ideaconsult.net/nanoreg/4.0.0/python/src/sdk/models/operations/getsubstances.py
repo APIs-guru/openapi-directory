@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetSubstancesPathParams:
-    db: shared.AmbitDatabaseIDEnum = field(default=None, metadata={'path_param': { 'field_name': 'db', 'style': 'simple', 'explode': False }})
+    db: shared.AmbitDatabaseIDEnum = field(metadata={'path_param': { 'field_name': 'db', 'style': 'simple', 'explode': False }})
     
 class GetSubstancesTypeEnum(str, Enum):
     SUBSTANCETYPE = "substancetype"
@@ -45,13 +46,13 @@ class GetSubstancesQueryParams:
 
 @dataclass
 class GetSubstancesRequest:
-    path_params: GetSubstancesPathParams = field(default=None)
-    query_params: GetSubstancesQueryParams = field(default=None)
+    path_params: GetSubstancesPathParams = field()
+    query_params: GetSubstancesQueryParams = field()
     
 
 @dataclass
 class GetSubstancesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     substance: Optional[shared.Substance] = field(default=None)
     

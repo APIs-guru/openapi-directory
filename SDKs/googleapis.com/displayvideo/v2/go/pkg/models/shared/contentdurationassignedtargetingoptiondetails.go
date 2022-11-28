@@ -13,7 +13,15 @@ const (
 	ContentDurationAssignedTargetingOptionDetailsContentDurationEnumContentDurationOver60Min   ContentDurationAssignedTargetingOptionDetailsContentDurationEnum = "CONTENT_DURATION_OVER_60_MIN"
 )
 
+// ContentDurationAssignedTargetingOptionDetails
+// Details for content duration assigned targeting option. This will be populated in the content_duration_details field when targeting_type is `TARGETING_TYPE_CONTENT_DURATION`. Explicitly targeting all options is not supported. Remove all content duration targeting options to achieve this effect.
 type ContentDurationAssignedTargetingOptionDetails struct {
 	ContentDuration   *ContentDurationAssignedTargetingOptionDetailsContentDurationEnum `json:"contentDuration,omitempty"`
 	TargetingOptionID *string                                                           `json:"targetingOptionId,omitempty"`
+}
+
+// ContentDurationAssignedTargetingOptionDetailsInput
+// Details for content duration assigned targeting option. This will be populated in the content_duration_details field when targeting_type is `TARGETING_TYPE_CONTENT_DURATION`. Explicitly targeting all options is not supported. Remove all content duration targeting options to achieve this effect.
+type ContentDurationAssignedTargetingOptionDetailsInput struct {
+	TargetingOptionID *string `json:"targetingOptionId,omitempty"`
 }

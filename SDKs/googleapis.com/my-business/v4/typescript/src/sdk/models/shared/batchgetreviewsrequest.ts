@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchGetReviewsRequest
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for Reviews.BatchGetReviews.
 **/
 export class BatchGetReviewsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ignoreRatingOnlyReviews" })
+  @SpeakeasyMetadata({ data: "json, name=ignoreRatingOnlyReviews" })
   ignoreRatingOnlyReviews?: boolean;
 
-  @Metadata({ data: "json, name=locationNames" })
+  @SpeakeasyMetadata({ data: "json, name=locationNames" })
   locationNames?: string[];
 
-  @Metadata({ data: "json, name=orderBy" })
+  @SpeakeasyMetadata({ data: "json, name=orderBy" })
   orderBy?: string;
 
-  @Metadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata({ data: "json, name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "json, name=pageToken" })
+  @SpeakeasyMetadata({ data: "json, name=pageToken" })
   pageToken?: string;
 }

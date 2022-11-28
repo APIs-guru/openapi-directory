@@ -1,5 +1,8 @@
 package shared
 
+// SimplifiedPlaylistObject
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedplaylistobject - Find more info on the official Spotify Web API Reference
 type SimplifiedPlaylistObject struct {
 	Collaborative *bool                    `json:"collaborative,omitempty"`
 	Description   *string                  `json:"description,omitempty"`

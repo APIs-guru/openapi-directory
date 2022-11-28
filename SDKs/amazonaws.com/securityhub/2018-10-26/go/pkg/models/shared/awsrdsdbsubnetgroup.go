@@ -1,5 +1,7 @@
 package shared
 
+// AwsRdsDbSubnetGroup
+// Information about the subnet group for the database instance.
 type AwsRdsDbSubnetGroup struct {
 	DbSubnetGroupArn         *string                     `json:"DbSubnetGroupArn,omitempty"`
 	DbSubnetGroupDescription *string                     `json:"DbSubnetGroupDescription,omitempty"`

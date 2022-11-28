@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedRefs
+// A paginated list of refs.
 type PaginatedRefs struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

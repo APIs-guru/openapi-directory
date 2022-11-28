@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateDomainAssociationPathParams:
-    app_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
-    domain_name: str = field(default=None, metadata={'path_param': { 'field_name': 'domainName', 'style': 'simple', 'explode': False }})
+    app_id: str = field(metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
+    domain_name: str = field(metadata={'path_param': { 'field_name': 'domainName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,27 +28,27 @@ class UpdateDomainAssociationHeaders:
 @dataclass_json
 @dataclass
 class UpdateDomainAssociationRequestBody:
-    auto_sub_domain_creation_patterns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'autoSubDomainCreationPatterns' }})
-    auto_sub_domain_iam_role: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'autoSubDomainIAMRole' }})
-    enable_auto_sub_domain: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enableAutoSubDomain' }})
-    sub_domain_settings: List[shared.SubDomainSetting] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subDomainSettings' }})
+    sub_domain_settings: List[shared.SubDomainSetting] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('subDomainSettings') }})
+    auto_sub_domain_creation_patterns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('autoSubDomainCreationPatterns') }})
+    auto_sub_domain_iam_role: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('autoSubDomainIAMRole') }})
+    enable_auto_sub_domain: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enableAutoSubDomain') }})
     
 
 @dataclass
 class UpdateDomainAssociationRequest:
-    path_params: UpdateDomainAssociationPathParams = field(default=None)
-    headers: UpdateDomainAssociationHeaders = field(default=None)
-    request: UpdateDomainAssociationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateDomainAssociationHeaders = field()
+    path_params: UpdateDomainAssociationPathParams = field()
+    request: UpdateDomainAssociationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateDomainAssociationResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     dependent_service_failure_exception: Optional[Any] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     update_domain_association_result: Optional[shared.UpdateDomainAssociationResult] = field(default=None)
     

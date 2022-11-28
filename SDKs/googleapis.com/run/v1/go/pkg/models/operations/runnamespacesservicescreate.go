@@ -31,7 +31,7 @@ type RunNamespacesServicesCreateSecurity struct {
 type RunNamespacesServicesCreateRequest struct {
 	PathParams  RunNamespacesServicesCreatePathParams
 	QueryParams RunNamespacesServicesCreateQueryParams
-	Request     *shared.Service `request:"mediaType=application/json"`
+	Request     *shared.ServiceInput `request:"mediaType=application/json"`
 	Security    RunNamespacesServicesCreateSecurity
 }
 

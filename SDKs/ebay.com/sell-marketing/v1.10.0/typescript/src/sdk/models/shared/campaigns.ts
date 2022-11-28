@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Campaign } from "./campaign";
+
 
 
 // Campaigns
@@ -8,6 +8,6 @@ import { Campaign } from "./campaign";
  * This type contains a list of campaigns.
 **/
 export class Campaigns extends SpeakeasyBase {
-  @Metadata({ data: "json, name=campaigns", elemType: shared.Campaign })
+  @SpeakeasyMetadata({ data: "json, name=campaigns", elemType: Campaign })
   campaigns?: Campaign[];
 }

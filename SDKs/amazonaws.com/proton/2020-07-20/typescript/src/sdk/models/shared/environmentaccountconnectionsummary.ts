@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnvironmentAccountConnectionStatusEnum } from "./environmentaccountconnectionstatusenum";
+
 
 
 // EnvironmentAccountConnectionSummary
@@ -7,30 +8,30 @@ import { EnvironmentAccountConnectionStatusEnum } from "./environmentaccountconn
  * A summary of the environment account connection detail data.
 **/
 export class EnvironmentAccountConnectionSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=environmentAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=environmentAccountId" })
   environmentAccountId: string;
 
-  @Metadata({ data: "json, name=environmentName" })
+  @SpeakeasyMetadata({ data: "json, name=environmentName" })
   environmentName: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=lastModifiedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedAt" })
   lastModifiedAt: Date;
 
-  @Metadata({ data: "json, name=managementAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=managementAccountId" })
   managementAccountId: string;
 
-  @Metadata({ data: "json, name=requestedAt" })
+  @SpeakeasyMetadata({ data: "json, name=requestedAt" })
   requestedAt: Date;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: EnvironmentAccountConnectionStatusEnum;
 }

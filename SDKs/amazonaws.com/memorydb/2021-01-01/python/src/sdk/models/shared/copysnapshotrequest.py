@@ -1,15 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import tag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CopySnapshotRequest:
-    kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KmsKeyId' }})
-    source_snapshot_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SourceSnapshotName' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
-    target_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TargetBucket' }})
-    target_snapshot_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TargetSnapshotName' }})
+    source_snapshot_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SourceSnapshotName') }})
+    target_snapshot_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TargetSnapshotName') }})
+    kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('KmsKeyId') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
+    target_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TargetBucket') }})
     

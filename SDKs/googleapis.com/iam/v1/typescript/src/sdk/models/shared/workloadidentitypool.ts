@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum WorkloadIdentityPoolStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    Deleted = "DELETED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    Deleted = "DELETED"
 }
 
 
@@ -12,18 +13,34 @@ export enum WorkloadIdentityPoolStateEnum {
  * Represents a collection of external workload identities. You can define IAM policies to grant these identities access to Google Cloud resources.
 **/
 export class WorkloadIdentityPool extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=disabled" })
+  @SpeakeasyMetadata({ data: "json, name=disabled" })
   disabled?: boolean;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: WorkloadIdentityPoolStateEnum;
+}
+
+
+// WorkloadIdentityPoolInput
+/** 
+ * Represents a collection of external workload identities. You can define IAM policies to grant these identities access to Google Cloud resources.
+**/
+export class WorkloadIdentityPoolInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=disabled" })
+  disabled?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
 }

@@ -9,6 +9,8 @@ const (
 	RestoreDatabaseEncryptionConfigEncryptionTypeEnumCustomerManagedEncryption          RestoreDatabaseEncryptionConfigEncryptionTypeEnum = "CUSTOMER_MANAGED_ENCRYPTION"
 )
 
+// RestoreDatabaseEncryptionConfig
+// Encryption configuration for the restored database.
 type RestoreDatabaseEncryptionConfig struct {
 	EncryptionType *RestoreDatabaseEncryptionConfigEncryptionTypeEnum `json:"encryptionType,omitempty"`
 	KmsKeyName     *string                                            `json:"kmsKeyName,omitempty"`

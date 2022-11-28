@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ModelSettings
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The object used to call your custom language model to your transcription job.
 **/
 export class ModelSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LanguageModelName" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageModelName" })
   languageModelName?: string;
 }

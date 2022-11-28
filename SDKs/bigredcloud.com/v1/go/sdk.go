@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://app.bigredcloud.com/API",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,47 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AccountsGet - Returns a list of company's Accounts. Supports OData querying protocol.
+// Filtering is forbidden.
+// Ordering is allowed by "id" and "code" fields.
 func (s *SDK) AccountsGet(ctx context.Context) (*operations.AccountsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/accounts"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -60,7 +84,7 @@ func (s *SDK) AccountsGet(ctx context.Context) (*operations.AccountsGetResponse,
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -90,8 +114,11 @@ func (s *SDK) AccountsGet(ctx context.Context) (*operations.AccountsGetResponse,
 	return res, nil
 }
 
+// AnalysisCategoriesGet - Returns a list of company's Analysis Categories. Supports OData querying protocol.
+// Filtering is allowed by "categoryTypeId" field.
+// Ordering is allowed by "id" and "orderIndex" fields.
 func (s *SDK) AnalysisCategoriesGet(ctx context.Context) (*operations.AnalysisCategoriesGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/analysisCategories"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -99,7 +126,7 @@ func (s *SDK) AnalysisCategoriesGet(ctx context.Context) (*operations.AnalysisCa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -129,8 +156,9 @@ func (s *SDK) AnalysisCategoriesGet(ctx context.Context) (*operations.AnalysisCa
 	return res, nil
 }
 
+// BankAccountsDelete - Removes an existing Bank Account.
 func (s *SDK) BankAccountsDelete(ctx context.Context, request operations.BankAccountsDeleteRequest) (*operations.BankAccountsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/bankAccounts/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -140,7 +168,7 @@ func (s *SDK) BankAccountsDelete(ctx context.Context, request operations.BankAcc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -170,8 +198,11 @@ func (s *SDK) BankAccountsDelete(ctx context.Context, request operations.BankAcc
 	return res, nil
 }
 
+// BankAccountsGet - Returns a list of company's Bank Account. Supports OData querying protocol.
+// Filtering is forbidden.
+// Ordering is allowed by "id" and "acCode" fields.
 func (s *SDK) BankAccountsGet(ctx context.Context) (*operations.BankAccountsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/bankAccounts"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -179,7 +210,7 @@ func (s *SDK) BankAccountsGet(ctx context.Context) (*operations.BankAccountsGetR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -209,8 +240,9 @@ func (s *SDK) BankAccountsGet(ctx context.Context) (*operations.BankAccountsGetR
 	return res, nil
 }
 
+// BankAccountsPost - Creates a new Bank Account.
 func (s *SDK) BankAccountsPost(ctx context.Context, request operations.BankAccountsPostRequest) (*operations.BankAccountsPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/bankAccounts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -228,7 +260,7 @@ func (s *SDK) BankAccountsPost(ctx context.Context, request operations.BankAccou
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -258,8 +290,9 @@ func (s *SDK) BankAccountsPost(ctx context.Context, request operations.BankAccou
 	return res, nil
 }
 
+// BankAccountsProcessBatch - Processes a batch of Bank Accounts.
 func (s *SDK) BankAccountsProcessBatch(ctx context.Context, request operations.BankAccountsProcessBatchRequest) (*operations.BankAccountsProcessBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/bankAccounts/batch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -277,7 +310,7 @@ func (s *SDK) BankAccountsProcessBatch(ctx context.Context, request operations.B
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -307,8 +340,9 @@ func (s *SDK) BankAccountsProcessBatch(ctx context.Context, request operations.B
 	return res, nil
 }
 
+// BankAccountsPut - Updates an existing Bank Account.
 func (s *SDK) BankAccountsPut(ctx context.Context, request operations.BankAccountsPutRequest) (*operations.BankAccountsPutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/bankAccounts/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -326,7 +360,7 @@ func (s *SDK) BankAccountsPut(ctx context.Context, request operations.BankAccoun
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -356,8 +390,11 @@ func (s *SDK) BankAccountsPut(ctx context.Context, request operations.BankAccoun
 	return res, nil
 }
 
+// BookTranTypesGet - Returns a list of global Book Transactions' Types. Supports OData querying protocol.
+// Filtering is forbidden.
+// Ordering is allowed by "id" field.
 func (s *SDK) BookTranTypesGet(ctx context.Context) (*operations.BookTranTypesGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/bookTranTypes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -365,7 +402,7 @@ func (s *SDK) BookTranTypesGet(ctx context.Context) (*operations.BookTranTypesGe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -395,8 +432,9 @@ func (s *SDK) BookTranTypesGet(ctx context.Context) (*operations.BookTranTypesGe
 	return res, nil
 }
 
+// CashPaymentsDelete - Removes an existing Cash Payment.
 func (s *SDK) CashPaymentsDelete(ctx context.Context, request operations.CashPaymentsDeleteRequest) (*operations.CashPaymentsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/cashPayments/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -406,7 +444,7 @@ func (s *SDK) CashPaymentsDelete(ctx context.Context, request operations.CashPay
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -436,8 +474,11 @@ func (s *SDK) CashPaymentsDelete(ctx context.Context, request operations.CashPay
 	return res, nil
 }
 
+// CashPaymentsGet - Returns a list of company's Cash Payments. Supports OData querying protocol.
+// Filtering is allowed by "entryDate" field.
+// Ordering is allowed by "id" field.
 func (s *SDK) CashPaymentsGet(ctx context.Context) (*operations.CashPaymentsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/cashPayments"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -445,7 +486,7 @@ func (s *SDK) CashPaymentsGet(ctx context.Context) (*operations.CashPaymentsGetR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -475,8 +516,9 @@ func (s *SDK) CashPaymentsGet(ctx context.Context) (*operations.CashPaymentsGetR
 	return res, nil
 }
 
+// CashPaymentsPost - Creates a new Cash Payment.
 func (s *SDK) CashPaymentsPost(ctx context.Context, request operations.CashPaymentsPostRequest) (*operations.CashPaymentsPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/cashPayments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -494,7 +536,7 @@ func (s *SDK) CashPaymentsPost(ctx context.Context, request operations.CashPayme
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -524,8 +566,9 @@ func (s *SDK) CashPaymentsPost(ctx context.Context, request operations.CashPayme
 	return res, nil
 }
 
+// CashPaymentsProcessBatch - Processes a batch of Cash Payments.
 func (s *SDK) CashPaymentsProcessBatch(ctx context.Context, request operations.CashPaymentsProcessBatchRequest) (*operations.CashPaymentsProcessBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/cashPayments/batch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -543,7 +586,7 @@ func (s *SDK) CashPaymentsProcessBatch(ctx context.Context, request operations.C
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -573,8 +616,9 @@ func (s *SDK) CashPaymentsProcessBatch(ctx context.Context, request operations.C
 	return res, nil
 }
 
+// CashPaymentsPut - Updates an existing Cash Payment.
 func (s *SDK) CashPaymentsPut(ctx context.Context, request operations.CashPaymentsPutRequest) (*operations.CashPaymentsPutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/cashPayments/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -592,7 +636,7 @@ func (s *SDK) CashPaymentsPut(ctx context.Context, request operations.CashPaymen
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -622,8 +666,9 @@ func (s *SDK) CashPaymentsPut(ctx context.Context, request operations.CashPaymen
 	return res, nil
 }
 
+// CashReceiptsDelete - Removes an existing Cash Receipt.
 func (s *SDK) CashReceiptsDelete(ctx context.Context, request operations.CashReceiptsDeleteRequest) (*operations.CashReceiptsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/cashReceipts/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -633,7 +678,7 @@ func (s *SDK) CashReceiptsDelete(ctx context.Context, request operations.CashRec
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -663,8 +708,11 @@ func (s *SDK) CashReceiptsDelete(ctx context.Context, request operations.CashRec
 	return res, nil
 }
 
+// CashReceiptsGet - Returns a list of company's Cash Receipts. Supports OData querying protocol.
+// Filtering is allowed by "entryDate" field.
+// Ordering is allowed by "id" field.
 func (s *SDK) CashReceiptsGet(ctx context.Context) (*operations.CashReceiptsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/cashReceipts"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -672,7 +720,7 @@ func (s *SDK) CashReceiptsGet(ctx context.Context) (*operations.CashReceiptsGetR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -702,8 +750,9 @@ func (s *SDK) CashReceiptsGet(ctx context.Context) (*operations.CashReceiptsGetR
 	return res, nil
 }
 
+// CashReceiptsPost - Creates a new Cash Receipt.
 func (s *SDK) CashReceiptsPost(ctx context.Context, request operations.CashReceiptsPostRequest) (*operations.CashReceiptsPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/cashReceipts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -721,7 +770,7 @@ func (s *SDK) CashReceiptsPost(ctx context.Context, request operations.CashRecei
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -751,8 +800,9 @@ func (s *SDK) CashReceiptsPost(ctx context.Context, request operations.CashRecei
 	return res, nil
 }
 
+// CashReceiptsProcessBatch - Processes a batch of Cash Receipts.
 func (s *SDK) CashReceiptsProcessBatch(ctx context.Context, request operations.CashReceiptsProcessBatchRequest) (*operations.CashReceiptsProcessBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/cashReceipts/batch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -770,7 +820,7 @@ func (s *SDK) CashReceiptsProcessBatch(ctx context.Context, request operations.C
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -800,8 +850,9 @@ func (s *SDK) CashReceiptsProcessBatch(ctx context.Context, request operations.C
 	return res, nil
 }
 
+// CashReceiptsPut - Updates an existing Cash Receipt.
 func (s *SDK) CashReceiptsPut(ctx context.Context, request operations.CashReceiptsPutRequest) (*operations.CashReceiptsPutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/cashReceipts/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -819,7 +870,7 @@ func (s *SDK) CashReceiptsPut(ctx context.Context, request operations.CashReceip
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -849,8 +900,11 @@ func (s *SDK) CashReceiptsPut(ctx context.Context, request operations.CashReceip
 	return res, nil
 }
 
+// CategoryTypesGet - Returns a list of company's Category Types. Supports OData querying protocol.
+// Filtering is forbidden.
+// Ordering is allowed by "id" field.
 func (s *SDK) CategoryTypesGet(ctx context.Context) (*operations.CategoryTypesGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/categoryTypes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -858,7 +912,7 @@ func (s *SDK) CategoryTypesGet(ctx context.Context) (*operations.CategoryTypesGe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -888,8 +942,10 @@ func (s *SDK) CategoryTypesGet(ctx context.Context) (*operations.CategoryTypesGe
 	return res, nil
 }
 
+// CompanySettingsGet - Returns a list of company settings. Supports OData querying protocol.
+// Filtering is forbidden.
 func (s *SDK) CompanySettingsGet(ctx context.Context) (*operations.CompanySettingsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/companySettings"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -897,7 +953,7 @@ func (s *SDK) CompanySettingsGet(ctx context.Context) (*operations.CompanySettin
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -927,8 +983,9 @@ func (s *SDK) CompanySettingsGet(ctx context.Context) (*operations.CompanySettin
 	return res, nil
 }
 
+// CompanySetupConfigGet - Returns the company configuration settings.
 func (s *SDK) CompanySetupConfigGet(ctx context.Context) (*operations.CompanySetupConfigGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/companySetupConfig"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -936,7 +993,7 @@ func (s *SDK) CompanySetupConfigGet(ctx context.Context) (*operations.CompanySet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -966,8 +1023,9 @@ func (s *SDK) CompanySetupConfigGet(ctx context.Context) (*operations.CompanySet
 	return res, nil
 }
 
+// CompanySetupConfigGetCompanyOptions - Returns the company option setting.
 func (s *SDK) CompanySetupConfigGetCompanyOptions(ctx context.Context) (*operations.CompanySetupConfigGetCompanyOptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/companySetupConfig/getCompanyOptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -975,7 +1033,7 @@ func (s *SDK) CompanySetupConfigGetCompanyOptions(ctx context.Context) (*operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1005,8 +1063,9 @@ func (s *SDK) CompanySetupConfigGetCompanyOptions(ctx context.Context) (*operati
 	return res, nil
 }
 
+// CompanySetupConfigGetFinancialYear - Returns the financial year.
 func (s *SDK) CompanySetupConfigGetFinancialYear(ctx context.Context) (*operations.CompanySetupConfigGetFinancialYearResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/companySetupConfig/getFinancialYear"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1014,7 +1073,7 @@ func (s *SDK) CompanySetupConfigGetFinancialYear(ctx context.Context) (*operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1044,8 +1103,9 @@ func (s *SDK) CompanySetupConfigGetFinancialYear(ctx context.Context) (*operatio
 	return res, nil
 }
 
+// CustomersDelete - Removes an existing Customer.
 func (s *SDK) CustomersDelete(ctx context.Context, request operations.CustomersDeleteRequest) (*operations.CustomersDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/customers/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1055,7 +1115,7 @@ func (s *SDK) CustomersDelete(ctx context.Context, request operations.CustomersD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1085,8 +1145,11 @@ func (s *SDK) CustomersDelete(ctx context.Context, request operations.CustomersD
 	return res, nil
 }
 
+// CustomersGet - Returns a list of company's Customers. Supports OData querying protocol.
+// Filtering is forbidden.
+// Ordering is allowed by "id" and "code" fields.
 func (s *SDK) CustomersGet(ctx context.Context) (*operations.CustomersGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/customers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1094,7 +1157,7 @@ func (s *SDK) CustomersGet(ctx context.Context) (*operations.CustomersGetRespons
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1124,8 +1187,9 @@ func (s *SDK) CustomersGet(ctx context.Context) (*operations.CustomersGetRespons
 	return res, nil
 }
 
+// CustomersGetAccountTrans - Returns a list of Customer's account transactions.
 func (s *SDK) CustomersGetAccountTrans(ctx context.Context, request operations.CustomersGetAccountTransRequest) (*operations.CustomersGetAccountTransResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/customers/{itemId}/accountTrans", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1133,7 +1197,7 @@ func (s *SDK) CustomersGetAccountTrans(ctx context.Context, request operations.C
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1163,8 +1227,9 @@ func (s *SDK) CustomersGetAccountTrans(ctx context.Context, request operations.C
 	return res, nil
 }
 
+// CustomersGetOpeningBalance - Returns a Customer's opening balances, calculated for the next periods: current month, one month old, two months old, three and more months old.
 func (s *SDK) CustomersGetOpeningBalance(ctx context.Context, request operations.CustomersGetOpeningBalanceRequest) (*operations.CustomersGetOpeningBalanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/customers/{itemId}/openingBalance", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1172,7 +1237,7 @@ func (s *SDK) CustomersGetOpeningBalance(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1202,8 +1267,9 @@ func (s *SDK) CustomersGetOpeningBalance(ctx context.Context, request operations
 	return res, nil
 }
 
+// CustomersGetOpeningBalanceList - Returns a list of Customer's opening balance transactions.
 func (s *SDK) CustomersGetOpeningBalanceList(ctx context.Context, request operations.CustomersGetOpeningBalanceListRequest) (*operations.CustomersGetOpeningBalanceListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/customers/{itemId}/openingBalanceList", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1211,7 +1277,7 @@ func (s *SDK) CustomersGetOpeningBalanceList(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1241,8 +1307,9 @@ func (s *SDK) CustomersGetOpeningBalanceList(ctx context.Context, request operat
 	return res, nil
 }
 
+// CustomersGetQuotes - Returns a list of Customer's quotes.
 func (s *SDK) CustomersGetQuotes(ctx context.Context, request operations.CustomersGetQuotesRequest) (*operations.CustomersGetQuotesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/customers/{itemId}/quotes", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1250,7 +1317,7 @@ func (s *SDK) CustomersGetQuotes(ctx context.Context, request operations.Custome
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1280,8 +1347,9 @@ func (s *SDK) CustomersGetQuotes(ctx context.Context, request operations.Custome
 	return res, nil
 }
 
+// CustomersPost - Creates a new Customer.
 func (s *SDK) CustomersPost(ctx context.Context, request operations.CustomersPostRequest) (*operations.CustomersPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/customers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1299,7 +1367,7 @@ func (s *SDK) CustomersPost(ctx context.Context, request operations.CustomersPos
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1329,8 +1397,9 @@ func (s *SDK) CustomersPost(ctx context.Context, request operations.CustomersPos
 	return res, nil
 }
 
+// CustomersProcessBatch - Processes a batch of Customers.
 func (s *SDK) CustomersProcessBatch(ctx context.Context, request operations.CustomersProcessBatchRequest) (*operations.CustomersProcessBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/customers/batch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1348,7 +1417,7 @@ func (s *SDK) CustomersProcessBatch(ctx context.Context, request operations.Cust
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1378,8 +1447,9 @@ func (s *SDK) CustomersProcessBatch(ctx context.Context, request operations.Cust
 	return res, nil
 }
 
+// CustomersPut - Updates an existing Customer.
 func (s *SDK) CustomersPut(ctx context.Context, request operations.CustomersPutRequest) (*operations.CustomersPutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/customers/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1397,7 +1467,7 @@ func (s *SDK) CustomersPut(ctx context.Context, request operations.CustomersPutR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1427,8 +1497,10 @@ func (s *SDK) CustomersPut(ctx context.Context, request operations.CustomersPutR
 	return res, nil
 }
 
+// EmailSendEmailStatement - Sends a Statement email.
+// If "toAddress" is not empty then email will be sent to this address. Otherwise email will be sent to Statement Customer's address.
 func (s *SDK) EmailSendEmailStatement(ctx context.Context, request operations.EmailSendEmailStatementRequest) (*operations.EmailSendEmailStatementResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/email/sendEmailStatement"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1446,7 +1518,7 @@ func (s *SDK) EmailSendEmailStatement(ctx context.Context, request operations.Em
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1476,8 +1548,10 @@ func (s *SDK) EmailSendEmailStatement(ctx context.Context, request operations.Em
 	return res, nil
 }
 
+// EmailSendQuote - Sends a Quote email.
+// If "toAddress" is not empty then email will be sent to this address. Otherwise email will be sent to Statement Customer's address.
 func (s *SDK) EmailSendQuote(ctx context.Context, request operations.EmailSendQuoteRequest) (*operations.EmailSendQuoteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/email/sendQuote"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1495,7 +1569,7 @@ func (s *SDK) EmailSendQuote(ctx context.Context, request operations.EmailSendQu
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1525,8 +1599,10 @@ func (s *SDK) EmailSendQuote(ctx context.Context, request operations.EmailSendQu
 	return res, nil
 }
 
+// EmailSendSalesInvoice - Sends a Sales Invoice email.
+// If "toAddress" is not empty then email will be sent to this address. Otherwise email will be sent to Sales Invoice Customer's address.
 func (s *SDK) EmailSendSalesInvoice(ctx context.Context, request operations.EmailSendSalesInvoiceRequest) (*operations.EmailSendSalesInvoiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/email/sendSalesInvoice"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1544,7 +1620,7 @@ func (s *SDK) EmailSendSalesInvoice(ctx context.Context, request operations.Emai
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1574,8 +1650,9 @@ func (s *SDK) EmailSendSalesInvoice(ctx context.Context, request operations.Emai
 	return res, nil
 }
 
+// GetV1BankAccountsID - Returns information about a single Bank Account.
 func (s *SDK) GetV1BankAccountsID(ctx context.Context, request operations.GetV1BankAccountsIDRequest) (*operations.GetV1BankAccountsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/bankAccounts/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1583,7 +1660,7 @@ func (s *SDK) GetV1BankAccountsID(ctx context.Context, request operations.GetV1B
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1613,8 +1690,9 @@ func (s *SDK) GetV1BankAccountsID(ctx context.Context, request operations.GetV1B
 	return res, nil
 }
 
+// GetV1CashPaymentsID - Returns information about a single Cash Payment.
 func (s *SDK) GetV1CashPaymentsID(ctx context.Context, request operations.GetV1CashPaymentsIDRequest) (*operations.GetV1CashPaymentsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/cashPayments/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1622,7 +1700,7 @@ func (s *SDK) GetV1CashPaymentsID(ctx context.Context, request operations.GetV1C
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1652,8 +1730,9 @@ func (s *SDK) GetV1CashPaymentsID(ctx context.Context, request operations.GetV1C
 	return res, nil
 }
 
+// GetV1CashReceiptsID - Returns information about a single Cash Receipt.
 func (s *SDK) GetV1CashReceiptsID(ctx context.Context, request operations.GetV1CashReceiptsIDRequest) (*operations.GetV1CashReceiptsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/cashReceipts/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1661,7 +1740,7 @@ func (s *SDK) GetV1CashReceiptsID(ctx context.Context, request operations.GetV1C
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1691,8 +1770,9 @@ func (s *SDK) GetV1CashReceiptsID(ctx context.Context, request operations.GetV1C
 	return res, nil
 }
 
+// GetV1CustomersID - Returns information about a single Customer. You may specify that Customer's ledger balance should be calculated.
 func (s *SDK) GetV1CustomersID(ctx context.Context, request operations.GetV1CustomersIDRequest) (*operations.GetV1CustomersIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/customers/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1702,7 +1782,7 @@ func (s *SDK) GetV1CustomersID(ctx context.Context, request operations.GetV1Cust
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1732,8 +1812,9 @@ func (s *SDK) GetV1CustomersID(ctx context.Context, request operations.GetV1Cust
 	return res, nil
 }
 
+// GetV1PaymentsID - Returns information about a single Payments.
 func (s *SDK) GetV1PaymentsID(ctx context.Context, request operations.GetV1PaymentsIDRequest) (*operations.GetV1PaymentsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/payments/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1741,7 +1822,7 @@ func (s *SDK) GetV1PaymentsID(ctx context.Context, request operations.GetV1Payme
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1771,8 +1852,9 @@ func (s *SDK) GetV1PaymentsID(ctx context.Context, request operations.GetV1Payme
 	return res, nil
 }
 
+// GetV1ProductsID - Returns information about a single Product.
 func (s *SDK) GetV1ProductsID(ctx context.Context, request operations.GetV1ProductsIDRequest) (*operations.GetV1ProductsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/products/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1780,7 +1862,7 @@ func (s *SDK) GetV1ProductsID(ctx context.Context, request operations.GetV1Produ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1810,8 +1892,9 @@ func (s *SDK) GetV1ProductsID(ctx context.Context, request operations.GetV1Produ
 	return res, nil
 }
 
+// GetV1PurchasesID - Returns information about a single Purchases.
 func (s *SDK) GetV1PurchasesID(ctx context.Context, request operations.GetV1PurchasesIDRequest) (*operations.GetV1PurchasesIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/purchases/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1819,7 +1902,7 @@ func (s *SDK) GetV1PurchasesID(ctx context.Context, request operations.GetV1Purc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1849,8 +1932,9 @@ func (s *SDK) GetV1PurchasesID(ctx context.Context, request operations.GetV1Purc
 	return res, nil
 }
 
+// GetV1QuotesID - Returns information about a single Quote.
 func (s *SDK) GetV1QuotesID(ctx context.Context, request operations.GetV1QuotesIDRequest) (*operations.GetV1QuotesIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/quotes/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1858,7 +1942,7 @@ func (s *SDK) GetV1QuotesID(ctx context.Context, request operations.GetV1QuotesI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1888,8 +1972,9 @@ func (s *SDK) GetV1QuotesID(ctx context.Context, request operations.GetV1QuotesI
 	return res, nil
 }
 
+// GetV1SalesCreditNotesID - Returns information about a single Sales Credit Note.
 func (s *SDK) GetV1SalesCreditNotesID(ctx context.Context, request operations.GetV1SalesCreditNotesIDRequest) (*operations.GetV1SalesCreditNotesIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/salesCreditNotes/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1897,7 +1982,7 @@ func (s *SDK) GetV1SalesCreditNotesID(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1927,8 +2012,9 @@ func (s *SDK) GetV1SalesCreditNotesID(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetV1SalesEntriesID - Returns information about a single Sales Entry.
 func (s *SDK) GetV1SalesEntriesID(ctx context.Context, request operations.GetV1SalesEntriesIDRequest) (*operations.GetV1SalesEntriesIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/salesEntries/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1936,7 +2022,7 @@ func (s *SDK) GetV1SalesEntriesID(ctx context.Context, request operations.GetV1S
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1966,8 +2052,9 @@ func (s *SDK) GetV1SalesEntriesID(ctx context.Context, request operations.GetV1S
 	return res, nil
 }
 
+// GetV1SalesInvoicesID - Returns information about a single Sales Invoice.
 func (s *SDK) GetV1SalesInvoicesID(ctx context.Context, request operations.GetV1SalesInvoicesIDRequest) (*operations.GetV1SalesInvoicesIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/salesInvoices/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1975,7 +2062,7 @@ func (s *SDK) GetV1SalesInvoicesID(ctx context.Context, request operations.GetV1
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2005,8 +2092,9 @@ func (s *SDK) GetV1SalesInvoicesID(ctx context.Context, request operations.GetV1
 	return res, nil
 }
 
+// GetV1SalesRepsID - Returns information about a single SaleRep.
 func (s *SDK) GetV1SalesRepsID(ctx context.Context, request operations.GetV1SalesRepsIDRequest) (*operations.GetV1SalesRepsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/salesReps/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2014,7 +2102,7 @@ func (s *SDK) GetV1SalesRepsID(ctx context.Context, request operations.GetV1Sale
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2044,8 +2132,9 @@ func (s *SDK) GetV1SalesRepsID(ctx context.Context, request operations.GetV1Sale
 	return res, nil
 }
 
+// GetV1SuppliersID - Returns information about a single Supplier. You may specify that Supplier's ledger balance should be calculated.
 func (s *SDK) GetV1SuppliersID(ctx context.Context, request operations.GetV1SuppliersIDRequest) (*operations.GetV1SuppliersIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/suppliers/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2055,7 +2144,7 @@ func (s *SDK) GetV1SuppliersID(ctx context.Context, request operations.GetV1Supp
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2085,8 +2174,11 @@ func (s *SDK) GetV1SuppliersID(ctx context.Context, request operations.GetV1Supp
 	return res, nil
 }
 
+// OwnerTypeGroupsGet - Returns a list of global Owner Type Groups. Supports OData querying protocol.
+// Filtering is forbidden.
+// Ordering is allowed by "id" field.
 func (s *SDK) OwnerTypeGroupsGet(ctx context.Context) (*operations.OwnerTypeGroupsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/ownerTypeGroups"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2094,7 +2186,7 @@ func (s *SDK) OwnerTypeGroupsGet(ctx context.Context) (*operations.OwnerTypeGrou
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2124,8 +2216,11 @@ func (s *SDK) OwnerTypeGroupsGet(ctx context.Context) (*operations.OwnerTypeGrou
 	return res, nil
 }
 
+// OwnerTypesGet - Returns a list of global Owner Types. Supports OData querying protocol.
+// Filtering is forbidden.
+// Ordering is allowed by "id" field.
 func (s *SDK) OwnerTypesGet(ctx context.Context) (*operations.OwnerTypesGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/ownerTypes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2133,7 +2228,7 @@ func (s *SDK) OwnerTypesGet(ctx context.Context) (*operations.OwnerTypesGetRespo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2163,8 +2258,9 @@ func (s *SDK) OwnerTypesGet(ctx context.Context) (*operations.OwnerTypesGetRespo
 	return res, nil
 }
 
+// PaymentsDelete - Removes an existing Payment.
 func (s *SDK) PaymentsDelete(ctx context.Context, request operations.PaymentsDeleteRequest) (*operations.PaymentsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/payments/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2174,7 +2270,7 @@ func (s *SDK) PaymentsDelete(ctx context.Context, request operations.PaymentsDel
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2204,8 +2300,11 @@ func (s *SDK) PaymentsDelete(ctx context.Context, request operations.PaymentsDel
 	return res, nil
 }
 
+// PaymentsGet - Returns a list of company's Payments. Supports OData querying protocol.
+// Filtering is allowed by "entryDate" field.
+// Ordering is allowed by "id" field.
 func (s *SDK) PaymentsGet(ctx context.Context) (*operations.PaymentsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/payments"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2213,7 +2312,7 @@ func (s *SDK) PaymentsGet(ctx context.Context) (*operations.PaymentsGetResponse,
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2243,8 +2342,9 @@ func (s *SDK) PaymentsGet(ctx context.Context) (*operations.PaymentsGetResponse,
 	return res, nil
 }
 
+// PaymentsPost - Creates a new Payment.
 func (s *SDK) PaymentsPost(ctx context.Context, request operations.PaymentsPostRequest) (*operations.PaymentsPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/payments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2262,7 +2362,7 @@ func (s *SDK) PaymentsPost(ctx context.Context, request operations.PaymentsPostR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2292,8 +2392,9 @@ func (s *SDK) PaymentsPost(ctx context.Context, request operations.PaymentsPostR
 	return res, nil
 }
 
+// PaymentsProcessBatch - Processes a batch of Payments.
 func (s *SDK) PaymentsProcessBatch(ctx context.Context, request operations.PaymentsProcessBatchRequest) (*operations.PaymentsProcessBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/payments/batch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2311,7 +2412,7 @@ func (s *SDK) PaymentsProcessBatch(ctx context.Context, request operations.Payme
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2341,8 +2442,9 @@ func (s *SDK) PaymentsProcessBatch(ctx context.Context, request operations.Payme
 	return res, nil
 }
 
+// PaymentsPut - Updates an existing Payment.
 func (s *SDK) PaymentsPut(ctx context.Context, request operations.PaymentsPutRequest) (*operations.PaymentsPutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/payments/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2360,7 +2462,7 @@ func (s *SDK) PaymentsPut(ctx context.Context, request operations.PaymentsPutReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2390,8 +2492,9 @@ func (s *SDK) PaymentsPut(ctx context.Context, request operations.PaymentsPutReq
 	return res, nil
 }
 
+// ProductsDelete - Removes an existing Product.
 func (s *SDK) ProductsDelete(ctx context.Context, request operations.ProductsDeleteRequest) (*operations.ProductsDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/products/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2401,7 +2504,7 @@ func (s *SDK) ProductsDelete(ctx context.Context, request operations.ProductsDel
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2431,8 +2534,11 @@ func (s *SDK) ProductsDelete(ctx context.Context, request operations.ProductsDel
 	return res, nil
 }
 
+// ProductsGet - Returns a list of company's Products. Supports OData querying protocol.
+// Filtering is forbidden.
+// Ordering is allowed by "id" and "stockCode" fields.
 func (s *SDK) ProductsGet(ctx context.Context) (*operations.ProductsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/products"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2440,7 +2546,7 @@ func (s *SDK) ProductsGet(ctx context.Context) (*operations.ProductsGetResponse,
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2470,8 +2576,9 @@ func (s *SDK) ProductsGet(ctx context.Context) (*operations.ProductsGetResponse,
 	return res, nil
 }
 
+// ProductsPost - Creates a new Product.
 func (s *SDK) ProductsPost(ctx context.Context, request operations.ProductsPostRequest) (*operations.ProductsPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/products"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2489,7 +2596,7 @@ func (s *SDK) ProductsPost(ctx context.Context, request operations.ProductsPostR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2519,8 +2626,9 @@ func (s *SDK) ProductsPost(ctx context.Context, request operations.ProductsPostR
 	return res, nil
 }
 
+// ProductsProcessBatch - Processes a batch of Products.
 func (s *SDK) ProductsProcessBatch(ctx context.Context, request operations.ProductsProcessBatchRequest) (*operations.ProductsProcessBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/products/batch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2538,7 +2646,7 @@ func (s *SDK) ProductsProcessBatch(ctx context.Context, request operations.Produ
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2568,8 +2676,9 @@ func (s *SDK) ProductsProcessBatch(ctx context.Context, request operations.Produ
 	return res, nil
 }
 
+// ProductsPut - Updates an existing Product.
 func (s *SDK) ProductsPut(ctx context.Context, request operations.ProductsPutRequest) (*operations.ProductsPutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/products/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2587,7 +2696,7 @@ func (s *SDK) ProductsPut(ctx context.Context, request operations.ProductsPutReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2617,8 +2726,9 @@ func (s *SDK) ProductsPut(ctx context.Context, request operations.ProductsPutReq
 	return res, nil
 }
 
+// PurchasesDelete - Removes an existing Purchase.
 func (s *SDK) PurchasesDelete(ctx context.Context, request operations.PurchasesDeleteRequest) (*operations.PurchasesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/purchases/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2628,7 +2738,7 @@ func (s *SDK) PurchasesDelete(ctx context.Context, request operations.PurchasesD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2658,8 +2768,11 @@ func (s *SDK) PurchasesDelete(ctx context.Context, request operations.PurchasesD
 	return res, nil
 }
 
+// PurchasesGet - Returns a list of company's Purchases. Supports OData querying protocol.
+// Filtering is allowed by "entryDate" field.
+// Ordering is allowed by "id" field.
 func (s *SDK) PurchasesGet(ctx context.Context) (*operations.PurchasesGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/purchases"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2667,7 +2780,7 @@ func (s *SDK) PurchasesGet(ctx context.Context) (*operations.PurchasesGetRespons
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2697,8 +2810,9 @@ func (s *SDK) PurchasesGet(ctx context.Context) (*operations.PurchasesGetRespons
 	return res, nil
 }
 
+// PurchasesPost - Creates a new Purchase.
 func (s *SDK) PurchasesPost(ctx context.Context, request operations.PurchasesPostRequest) (*operations.PurchasesPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/purchases"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2716,7 +2830,7 @@ func (s *SDK) PurchasesPost(ctx context.Context, request operations.PurchasesPos
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2746,8 +2860,9 @@ func (s *SDK) PurchasesPost(ctx context.Context, request operations.PurchasesPos
 	return res, nil
 }
 
+// PurchasesProcessBatch - Processes a batch of Purchases.
 func (s *SDK) PurchasesProcessBatch(ctx context.Context, request operations.PurchasesProcessBatchRequest) (*operations.PurchasesProcessBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/purchases/batch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2765,7 +2880,7 @@ func (s *SDK) PurchasesProcessBatch(ctx context.Context, request operations.Purc
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2795,8 +2910,9 @@ func (s *SDK) PurchasesProcessBatch(ctx context.Context, request operations.Purc
 	return res, nil
 }
 
+// PurchasesPut - Updates an existing Purchase.
 func (s *SDK) PurchasesPut(ctx context.Context, request operations.PurchasesPutRequest) (*operations.PurchasesPutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/purchases/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2814,7 +2930,7 @@ func (s *SDK) PurchasesPut(ctx context.Context, request operations.PurchasesPutR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2844,8 +2960,9 @@ func (s *SDK) PurchasesPut(ctx context.Context, request operations.PurchasesPutR
 	return res, nil
 }
 
+// QuoteClose - Close a Quote.
 func (s *SDK) QuoteClose(ctx context.Context, request operations.QuoteCloseRequest) (*operations.QuoteCloseResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/quotes/close/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -2853,7 +2970,7 @@ func (s *SDK) QuoteClose(ctx context.Context, request operations.QuoteCloseReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2883,8 +3000,9 @@ func (s *SDK) QuoteClose(ctx context.Context, request operations.QuoteCloseReque
 	return res, nil
 }
 
+// QuoteDelete - Removes an existing Quote.
 func (s *SDK) QuoteDelete(ctx context.Context, request operations.QuoteDeleteRequest) (*operations.QuoteDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/quotes/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -2894,7 +3012,7 @@ func (s *SDK) QuoteDelete(ctx context.Context, request operations.QuoteDeleteReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2924,8 +3042,11 @@ func (s *SDK) QuoteDelete(ctx context.Context, request operations.QuoteDeleteReq
 	return res, nil
 }
 
+// QuoteGet - Returns a list of company's Quotes.
+// Filtering is forbidden.
+// Ordering is allowed by "id".
 func (s *SDK) QuoteGet(ctx context.Context) (*operations.QuoteGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/quotes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2933,7 +3054,7 @@ func (s *SDK) QuoteGet(ctx context.Context) (*operations.QuoteGetResponse, error
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2963,8 +3084,9 @@ func (s *SDK) QuoteGet(ctx context.Context) (*operations.QuoteGetResponse, error
 	return res, nil
 }
 
+// QuotePost - Creates a new Quote.
 func (s *SDK) QuotePost(ctx context.Context, request operations.QuotePostRequest) (*operations.QuotePostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/quotes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2982,7 +3104,7 @@ func (s *SDK) QuotePost(ctx context.Context, request operations.QuotePostRequest
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3012,8 +3134,9 @@ func (s *SDK) QuotePost(ctx context.Context, request operations.QuotePostRequest
 	return res, nil
 }
 
+// QuotePostCreateQuoteWithGeneratingReference - Creates a new Quote with auto generating reference.
 func (s *SDK) QuotePostCreateQuoteWithGeneratingReference(ctx context.Context, request operations.QuotePostCreateQuoteWithGeneratingReferenceRequest) (*operations.QuotePostCreateQuoteWithGeneratingReferenceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/quotes/createQuoteWithGeneratingReference"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3031,7 +3154,7 @@ func (s *SDK) QuotePostCreateQuoteWithGeneratingReference(ctx context.Context, r
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3061,8 +3184,10 @@ func (s *SDK) QuotePostCreateQuoteWithGeneratingReference(ctx context.Context, r
 	return res, nil
 }
 
+// QuotePostGenerateSaleInvoice - Generate a sale invoice from a Quote.
+// When sale invoice is empty, new sale invoice will be generated from Quote.
 func (s *SDK) QuotePostGenerateSaleInvoice(ctx context.Context, request operations.QuotePostGenerateSaleInvoiceRequest) (*operations.QuotePostGenerateSaleInvoiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/quotes/generateSaleInvoice"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3080,7 +3205,7 @@ func (s *SDK) QuotePostGenerateSaleInvoice(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3110,8 +3235,9 @@ func (s *SDK) QuotePostGenerateSaleInvoice(ctx context.Context, request operatio
 	return res, nil
 }
 
+// QuoteProcessBatch - Processes a batch of Quote.
 func (s *SDK) QuoteProcessBatch(ctx context.Context, request operations.QuoteProcessBatchRequest) (*operations.QuoteProcessBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/quotes/batch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3129,7 +3255,7 @@ func (s *SDK) QuoteProcessBatch(ctx context.Context, request operations.QuotePro
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3159,8 +3285,9 @@ func (s *SDK) QuoteProcessBatch(ctx context.Context, request operations.QuotePro
 	return res, nil
 }
 
+// QuotePut - Updates an existing Quote.
 func (s *SDK) QuotePut(ctx context.Context, request operations.QuotePutRequest) (*operations.QuotePutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/quotes/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3178,7 +3305,7 @@ func (s *SDK) QuotePut(ctx context.Context, request operations.QuotePutRequest) 
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3208,8 +3335,9 @@ func (s *SDK) QuotePut(ctx context.Context, request operations.QuotePutRequest) 
 	return res, nil
 }
 
+// QuoteReopen - Reopen a Quote.
 func (s *SDK) QuoteReopen(ctx context.Context, request operations.QuoteReopenRequest) (*operations.QuoteReopenResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/quotes/reopen/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -3217,7 +3345,7 @@ func (s *SDK) QuoteReopen(ctx context.Context, request operations.QuoteReopenReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3247,8 +3375,9 @@ func (s *SDK) QuoteReopen(ctx context.Context, request operations.QuoteReopenReq
 	return res, nil
 }
 
+// SalesCreditNotesDelete - Removes an existing Sales Credit Note.
 func (s *SDK) SalesCreditNotesDelete(ctx context.Context, request operations.SalesCreditNotesDeleteRequest) (*operations.SalesCreditNotesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/salesCreditNotes/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3258,7 +3387,7 @@ func (s *SDK) SalesCreditNotesDelete(ctx context.Context, request operations.Sal
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3288,8 +3417,11 @@ func (s *SDK) SalesCreditNotesDelete(ctx context.Context, request operations.Sal
 	return res, nil
 }
 
+// SalesCreditNotesGet - Returns a list of company's Sales Credit Notes. Supports OData querying protocol.
+// Filtering is allowed by "entryDate" field.
+// Ordering is allowed by "id" field.
 func (s *SDK) SalesCreditNotesGet(ctx context.Context) (*operations.SalesCreditNotesGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/salesCreditNotes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3297,7 +3429,7 @@ func (s *SDK) SalesCreditNotesGet(ctx context.Context) (*operations.SalesCreditN
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3327,8 +3459,9 @@ func (s *SDK) SalesCreditNotesGet(ctx context.Context) (*operations.SalesCreditN
 	return res, nil
 }
 
+// SalesCreditNotesPost - Creates a new Sales Credit Note.
 func (s *SDK) SalesCreditNotesPost(ctx context.Context, request operations.SalesCreditNotesPostRequest) (*operations.SalesCreditNotesPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/salesCreditNotes"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3346,7 +3479,7 @@ func (s *SDK) SalesCreditNotesPost(ctx context.Context, request operations.Sales
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3376,8 +3509,9 @@ func (s *SDK) SalesCreditNotesPost(ctx context.Context, request operations.Sales
 	return res, nil
 }
 
+// SalesCreditNotesProcessBatch - Processes a batch of Sales Credit Notes.
 func (s *SDK) SalesCreditNotesProcessBatch(ctx context.Context, request operations.SalesCreditNotesProcessBatchRequest) (*operations.SalesCreditNotesProcessBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/salesCreditNotes/batch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3395,7 +3529,7 @@ func (s *SDK) SalesCreditNotesProcessBatch(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3425,8 +3559,9 @@ func (s *SDK) SalesCreditNotesProcessBatch(ctx context.Context, request operatio
 	return res, nil
 }
 
+// SalesCreditNotesPut - Updates an existing Sales Credit Note.
 func (s *SDK) SalesCreditNotesPut(ctx context.Context, request operations.SalesCreditNotesPutRequest) (*operations.SalesCreditNotesPutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/salesCreditNotes/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3444,7 +3579,7 @@ func (s *SDK) SalesCreditNotesPut(ctx context.Context, request operations.SalesC
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3474,8 +3609,9 @@ func (s *SDK) SalesCreditNotesPut(ctx context.Context, request operations.SalesC
 	return res, nil
 }
 
+// SalesEntriesDelete - Removes an existing Sales Entry.
 func (s *SDK) SalesEntriesDelete(ctx context.Context, request operations.SalesEntriesDeleteRequest) (*operations.SalesEntriesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/salesEntries/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3485,7 +3621,7 @@ func (s *SDK) SalesEntriesDelete(ctx context.Context, request operations.SalesEn
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3515,8 +3651,11 @@ func (s *SDK) SalesEntriesDelete(ctx context.Context, request operations.SalesEn
 	return res, nil
 }
 
+// SalesEntriesGet - Returns a list of company's Sales Entries. Supports OData querying protocol.
+// Filtering is allowed by "entryDate" field.
+// Ordering is allowed by "id" field.
 func (s *SDK) SalesEntriesGet(ctx context.Context) (*operations.SalesEntriesGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/salesEntries"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3524,7 +3663,7 @@ func (s *SDK) SalesEntriesGet(ctx context.Context) (*operations.SalesEntriesGetR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3554,8 +3693,9 @@ func (s *SDK) SalesEntriesGet(ctx context.Context) (*operations.SalesEntriesGetR
 	return res, nil
 }
 
+// SalesEntriesPost - Creates a new Sales Entry.
 func (s *SDK) SalesEntriesPost(ctx context.Context, request operations.SalesEntriesPostRequest) (*operations.SalesEntriesPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/salesEntries"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3573,7 +3713,7 @@ func (s *SDK) SalesEntriesPost(ctx context.Context, request operations.SalesEntr
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3603,8 +3743,9 @@ func (s *SDK) SalesEntriesPost(ctx context.Context, request operations.SalesEntr
 	return res, nil
 }
 
+// SalesEntriesProcessBatch - Processes a batch of Sales Entries.
 func (s *SDK) SalesEntriesProcessBatch(ctx context.Context, request operations.SalesEntriesProcessBatchRequest) (*operations.SalesEntriesProcessBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/salesEntries/batch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3622,7 +3763,7 @@ func (s *SDK) SalesEntriesProcessBatch(ctx context.Context, request operations.S
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3652,8 +3793,9 @@ func (s *SDK) SalesEntriesProcessBatch(ctx context.Context, request operations.S
 	return res, nil
 }
 
+// SalesEntriesPut - Updates an existing Sales Entry.
 func (s *SDK) SalesEntriesPut(ctx context.Context, request operations.SalesEntriesPutRequest) (*operations.SalesEntriesPutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/salesEntries/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3671,7 +3813,7 @@ func (s *SDK) SalesEntriesPut(ctx context.Context, request operations.SalesEntri
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3701,8 +3843,9 @@ func (s *SDK) SalesEntriesPut(ctx context.Context, request operations.SalesEntri
 	return res, nil
 }
 
+// SalesInvoicesDelete - Removes an existing Sales Invoice.
 func (s *SDK) SalesInvoicesDelete(ctx context.Context, request operations.SalesInvoicesDeleteRequest) (*operations.SalesInvoicesDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/salesInvoices/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3712,7 +3855,7 @@ func (s *SDK) SalesInvoicesDelete(ctx context.Context, request operations.SalesI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3742,8 +3885,11 @@ func (s *SDK) SalesInvoicesDelete(ctx context.Context, request operations.SalesI
 	return res, nil
 }
 
+// SalesInvoicesGet - Returns a list of company's Sales Invoices. Supports OData querying protocol.
+// Filtering is allowed by "entryDate" field.
+// Ordering is allowed by "id" field.
 func (s *SDK) SalesInvoicesGet(ctx context.Context) (*operations.SalesInvoicesGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/salesInvoices"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3751,7 +3897,7 @@ func (s *SDK) SalesInvoicesGet(ctx context.Context) (*operations.SalesInvoicesGe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3781,8 +3927,9 @@ func (s *SDK) SalesInvoicesGet(ctx context.Context) (*operations.SalesInvoicesGe
 	return res, nil
 }
 
+// SalesInvoicesPost - Creates a new Sales Invoice.
 func (s *SDK) SalesInvoicesPost(ctx context.Context, request operations.SalesInvoicesPostRequest) (*operations.SalesInvoicesPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/salesInvoices"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3800,7 +3947,7 @@ func (s *SDK) SalesInvoicesPost(ctx context.Context, request operations.SalesInv
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3830,8 +3977,9 @@ func (s *SDK) SalesInvoicesPost(ctx context.Context, request operations.SalesInv
 	return res, nil
 }
 
+// SalesInvoicesPostCreateSaleInvoiceWithGeneratingReference - Creates a new Sale Invoice with auto generating reference.
 func (s *SDK) SalesInvoicesPostCreateSaleInvoiceWithGeneratingReference(ctx context.Context, request operations.SalesInvoicesPostCreateSaleInvoiceWithGeneratingReferenceRequest) (*operations.SalesInvoicesPostCreateSaleInvoiceWithGeneratingReferenceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/salesInvoices/createSaleInvoiceWithGeneratingReference"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3849,7 +3997,7 @@ func (s *SDK) SalesInvoicesPostCreateSaleInvoiceWithGeneratingReference(ctx cont
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3879,8 +4027,9 @@ func (s *SDK) SalesInvoicesPostCreateSaleInvoiceWithGeneratingReference(ctx cont
 	return res, nil
 }
 
+// SalesInvoicesProcessBatch - Processes a batch of Sales Invoices.
 func (s *SDK) SalesInvoicesProcessBatch(ctx context.Context, request operations.SalesInvoicesProcessBatchRequest) (*operations.SalesInvoicesProcessBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/salesInvoices/batch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3898,7 +4047,7 @@ func (s *SDK) SalesInvoicesProcessBatch(ctx context.Context, request operations.
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3928,8 +4077,9 @@ func (s *SDK) SalesInvoicesProcessBatch(ctx context.Context, request operations.
 	return res, nil
 }
 
+// SalesInvoicesPut - Updates an existing Sales Invoice.
 func (s *SDK) SalesInvoicesPut(ctx context.Context, request operations.SalesInvoicesPutRequest) (*operations.SalesInvoicesPutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/salesInvoices/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3947,7 +4097,7 @@ func (s *SDK) SalesInvoicesPut(ctx context.Context, request operations.SalesInvo
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3977,8 +4127,9 @@ func (s *SDK) SalesInvoicesPut(ctx context.Context, request operations.SalesInvo
 	return res, nil
 }
 
+// SalesRepDelete - Removes an existing Sale Rep.
 func (s *SDK) SalesRepDelete(ctx context.Context, request operations.SalesRepDeleteRequest) (*operations.SalesRepDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/salesReps/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -3988,7 +4139,7 @@ func (s *SDK) SalesRepDelete(ctx context.Context, request operations.SalesRepDel
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4018,8 +4169,11 @@ func (s *SDK) SalesRepDelete(ctx context.Context, request operations.SalesRepDel
 	return res, nil
 }
 
+// SalesRepGet - Returns a list of company's SaleRep.
+// Filtering is forbidden.
+// Ordering is allowed by "id".
 func (s *SDK) SalesRepGet(ctx context.Context) (*operations.SalesRepGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/salesReps"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4027,7 +4181,7 @@ func (s *SDK) SalesRepGet(ctx context.Context) (*operations.SalesRepGetResponse,
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4057,8 +4211,9 @@ func (s *SDK) SalesRepGet(ctx context.Context) (*operations.SalesRepGetResponse,
 	return res, nil
 }
 
+// SalesRepPost - Creates a new SaleRep.
 func (s *SDK) SalesRepPost(ctx context.Context, request operations.SalesRepPostRequest) (*operations.SalesRepPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/salesReps"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4076,7 +4231,7 @@ func (s *SDK) SalesRepPost(ctx context.Context, request operations.SalesRepPostR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4106,8 +4261,9 @@ func (s *SDK) SalesRepPost(ctx context.Context, request operations.SalesRepPostR
 	return res, nil
 }
 
+// SalesRepProcessBatch - Processes a batch of Sale Rep.
 func (s *SDK) SalesRepProcessBatch(ctx context.Context, request operations.SalesRepProcessBatchRequest) (*operations.SalesRepProcessBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/salesReps/batch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4125,7 +4281,7 @@ func (s *SDK) SalesRepProcessBatch(ctx context.Context, request operations.Sales
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4155,8 +4311,9 @@ func (s *SDK) SalesRepProcessBatch(ctx context.Context, request operations.Sales
 	return res, nil
 }
 
+// SalesRepPut - Updates an existing Sale Rep.
 func (s *SDK) SalesRepPut(ctx context.Context, request operations.SalesRepPutRequest) (*operations.SalesRepPutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/salesReps/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4174,7 +4331,7 @@ func (s *SDK) SalesRepPut(ctx context.Context, request operations.SalesRepPutReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4204,8 +4361,11 @@ func (s *SDK) SalesRepPut(ctx context.Context, request operations.SalesRepPutReq
 	return res, nil
 }
 
+// SalesGet - Returns a list of company's Sales Entries, Sales Invoices and Sales Credit Notes. Supports OData querying protocol.
+// Filtering is allowed by "entryDate" field.
+// Ordering is allowed by "id" field.
 func (s *SDK) SalesGet(ctx context.Context) (*operations.SalesGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/sales"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4213,7 +4373,7 @@ func (s *SDK) SalesGet(ctx context.Context) (*operations.SalesGetResponse, error
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4243,8 +4403,9 @@ func (s *SDK) SalesGet(ctx context.Context) (*operations.SalesGetResponse, error
 	return res, nil
 }
 
+// SuppliersDelete - Removes an existing Supplier.
 func (s *SDK) SuppliersDelete(ctx context.Context, request operations.SuppliersDeleteRequest) (*operations.SuppliersDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/suppliers/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4254,7 +4415,7 @@ func (s *SDK) SuppliersDelete(ctx context.Context, request operations.SuppliersD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4284,8 +4445,11 @@ func (s *SDK) SuppliersDelete(ctx context.Context, request operations.SuppliersD
 	return res, nil
 }
 
+// SuppliersGet - Returns a list of company's Suppliers. Supports OData querying protocol.
+// Filtering is forbidden.
+// Ordering is allowed by "id" and "code" fields.
 func (s *SDK) SuppliersGet(ctx context.Context) (*operations.SuppliersGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/suppliers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4293,7 +4457,7 @@ func (s *SDK) SuppliersGet(ctx context.Context) (*operations.SuppliersGetRespons
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4323,8 +4487,9 @@ func (s *SDK) SuppliersGet(ctx context.Context) (*operations.SuppliersGetRespons
 	return res, nil
 }
 
+// SuppliersGetAccountTrans - Returns a list of Supplier's account transactions.
 func (s *SDK) SuppliersGetAccountTrans(ctx context.Context, request operations.SuppliersGetAccountTransRequest) (*operations.SuppliersGetAccountTransResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/suppliers/{itemId}/accountTrans", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4332,7 +4497,7 @@ func (s *SDK) SuppliersGetAccountTrans(ctx context.Context, request operations.S
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4362,8 +4527,9 @@ func (s *SDK) SuppliersGetAccountTrans(ctx context.Context, request operations.S
 	return res, nil
 }
 
+// SuppliersGetOpeningBalance - Returns a Supplier's opening balances, calculated for the next periods: current month, one month old, two months old, three and more months old.
 func (s *SDK) SuppliersGetOpeningBalance(ctx context.Context, request operations.SuppliersGetOpeningBalanceRequest) (*operations.SuppliersGetOpeningBalanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/suppliers/{itemId}/openingBalance", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4371,7 +4537,7 @@ func (s *SDK) SuppliersGetOpeningBalance(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4401,8 +4567,9 @@ func (s *SDK) SuppliersGetOpeningBalance(ctx context.Context, request operations
 	return res, nil
 }
 
+// SuppliersGetOpeningBalanceList - Returns a list of Supplier's opening balance transactions.
 func (s *SDK) SuppliersGetOpeningBalanceList(ctx context.Context, request operations.SuppliersGetOpeningBalanceListRequest) (*operations.SuppliersGetOpeningBalanceListResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/suppliers/{itemId}/openingBalanceList", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4410,7 +4577,7 @@ func (s *SDK) SuppliersGetOpeningBalanceList(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4440,8 +4607,9 @@ func (s *SDK) SuppliersGetOpeningBalanceList(ctx context.Context, request operat
 	return res, nil
 }
 
+// SuppliersPost - Creates a new Supplier.
 func (s *SDK) SuppliersPost(ctx context.Context, request operations.SuppliersPostRequest) (*operations.SuppliersPostResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/suppliers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4459,7 +4627,7 @@ func (s *SDK) SuppliersPost(ctx context.Context, request operations.SuppliersPos
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4489,8 +4657,9 @@ func (s *SDK) SuppliersPost(ctx context.Context, request operations.SuppliersPos
 	return res, nil
 }
 
+// SuppliersProcessBatch - Processes a batch of Suppliers.
 func (s *SDK) SuppliersProcessBatch(ctx context.Context, request operations.SuppliersProcessBatchRequest) (*operations.SuppliersProcessBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/suppliers/batch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4508,7 +4677,7 @@ func (s *SDK) SuppliersProcessBatch(ctx context.Context, request operations.Supp
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4538,8 +4707,9 @@ func (s *SDK) SuppliersProcessBatch(ctx context.Context, request operations.Supp
 	return res, nil
 }
 
+// SuppliersPut - Updates an existing Supplier.
 func (s *SDK) SuppliersPut(ctx context.Context, request operations.SuppliersPutRequest) (*operations.SuppliersPutResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/suppliers/{id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4557,7 +4727,7 @@ func (s *SDK) SuppliersPut(ctx context.Context, request operations.SuppliersPutR
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4587,8 +4757,11 @@ func (s *SDK) SuppliersPut(ctx context.Context, request operations.SuppliersPutR
 	return res, nil
 }
 
+// UserDefinedFieldsGet - Returns a list of company's User Defined Fields. Supports OData querying protocol.
+// Filtering is allowed by "categoryTypeId" field.
+// Ordering is allowed by "id" and "orderIndex" fields.
 func (s *SDK) UserDefinedFieldsGet(ctx context.Context) (*operations.UserDefinedFieldsGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/userDefinedFields"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4596,7 +4769,7 @@ func (s *SDK) UserDefinedFieldsGet(ctx context.Context) (*operations.UserDefined
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4626,8 +4799,11 @@ func (s *SDK) UserDefinedFieldsGet(ctx context.Context) (*operations.UserDefined
 	return res, nil
 }
 
+// VatAnalysisTypesGet - Returns a list of global Vat Analysis Types. Supports OData querying protocol.
+// Filtering is forbidden.
+// Ordering is allowed by "id" field.
 func (s *SDK) VatAnalysisTypesGet(ctx context.Context) (*operations.VatAnalysisTypesGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/vatAnalysisTypes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4635,7 +4811,7 @@ func (s *SDK) VatAnalysisTypesGet(ctx context.Context) (*operations.VatAnalysisT
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4665,8 +4841,11 @@ func (s *SDK) VatAnalysisTypesGet(ctx context.Context) (*operations.VatAnalysisT
 	return res, nil
 }
 
+// VatCategoriesGet - Returns a list of global Vat Categories. Supports OData querying protocol.
+// Filtering is forbidden.
+// Ordering is allowed by "id" field.
 func (s *SDK) VatCategoriesGet(ctx context.Context) (*operations.VatCategoriesGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/vatCategories"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4674,7 +4853,7 @@ func (s *SDK) VatCategoriesGet(ctx context.Context) (*operations.VatCategoriesGe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4704,8 +4883,9 @@ func (s *SDK) VatCategoriesGet(ctx context.Context) (*operations.VatCategoriesGe
 	return res, nil
 }
 
+// VatCategoriesProcessVatRates - Process Vat Rates
 func (s *SDK) VatCategoriesProcessVatRates(ctx context.Context, request operations.VatCategoriesProcessVatRatesRequest) (*operations.VatCategoriesProcessVatRatesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/vatCategories/vatRates"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4723,7 +4903,7 @@ func (s *SDK) VatCategoriesProcessVatRates(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4753,8 +4933,11 @@ func (s *SDK) VatCategoriesProcessVatRates(ctx context.Context, request operatio
 	return res, nil
 }
 
+// VatRatesGet - Returns a list of company's Vat Rates. Supports OData querying protocol.
+// Filtering is allowed by "vatCategoryId" field.
+// Ordering is allowed by "id" and "orderIndex" fields.
 func (s *SDK) VatRatesGet(ctx context.Context) (*operations.VatRatesGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/vatRates"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4762,7 +4945,7 @@ func (s *SDK) VatRatesGet(ctx context.Context) (*operations.VatRatesGetResponse,
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4792,8 +4975,11 @@ func (s *SDK) VatRatesGet(ctx context.Context) (*operations.VatRatesGetResponse,
 	return res, nil
 }
 
+// VatTypesGet - Returns a list of global Vat Types. Supports OData querying protocol.
+// Filtering is forbidden.
+// Ordering is allowed by "id" field.
 func (s *SDK) VatTypesGet(ctx context.Context) (*operations.VatTypesGetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/vatTypes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4801,7 +4987,7 @@ func (s *SDK) VatTypesGet(ctx context.Context) (*operations.VatTypesGetResponse,
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

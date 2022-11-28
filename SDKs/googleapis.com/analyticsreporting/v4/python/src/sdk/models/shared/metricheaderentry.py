@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MetricHeaderEntryTypeEnum(str, Enum):
     METRIC_TYPE_UNSPECIFIED = "METRIC_TYPE_UNSPECIFIED"
@@ -14,6 +16,10 @@ class MetricHeaderEntryTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MetricHeaderEntry:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: Optional[MetricHeaderEntryTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""MetricHeaderEntry
+    Header for the metrics.
+    """
+    
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    type: Optional[MetricHeaderEntryTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

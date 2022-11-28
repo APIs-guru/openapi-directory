@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateAPIMappingPathParams:
-    domain_name: str = field(default=None, metadata={'path_param': { 'field_name': 'domainName', 'style': 'simple', 'explode': False }})
+    domain_name: str = field(metadata={'path_param': { 'field_name': 'domainName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,25 +27,25 @@ class CreateAPIMappingHeaders:
 @dataclass_json
 @dataclass
 class CreateAPIMappingRequestBody:
-    api_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apiId' }})
-    api_mapping_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apiMappingKey' }})
-    stage: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stage' }})
+    api_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('apiId') }})
+    stage: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('stage') }})
+    api_mapping_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('apiMappingKey') }})
     
 
 @dataclass
 class CreateAPIMappingRequest:
-    path_params: CreateAPIMappingPathParams = field(default=None)
-    headers: CreateAPIMappingHeaders = field(default=None)
-    request: CreateAPIMappingRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateAPIMappingHeaders = field()
+    path_params: CreateAPIMappingPathParams = field()
+    request: CreateAPIMappingRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateAPIMappingResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_api_mapping_response: Optional[shared.CreateAPIMappingResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

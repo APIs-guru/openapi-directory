@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DetectorModelVersionSummary
+// Information about the detector model version.
 type DetectorModelVersionSummary struct {
 	CreationTime         *time.Time                      `json:"creationTime,omitempty"`
 	DetectorModelArn     *string                         `json:"detectorModelArn,omitempty"`

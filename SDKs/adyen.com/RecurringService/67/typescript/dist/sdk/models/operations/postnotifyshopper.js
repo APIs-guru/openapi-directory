@@ -22,45 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var PostNotifyShopperSecurityOption1 = /** @class */ (function (_super) {
-    __extends(PostNotifyShopperSecurityOption1, _super);
-    function PostNotifyShopperSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
-        __metadata("design:type", shared.SchemeBasicAuth)
-    ], PostNotifyShopperSecurityOption1.prototype, "basicAuth", void 0);
-    return PostNotifyShopperSecurityOption1;
-}(SpeakeasyBase));
-export { PostNotifyShopperSecurityOption1 };
-var PostNotifyShopperSecurityOption2 = /** @class */ (function (_super) {
-    __extends(PostNotifyShopperSecurityOption2, _super);
-    function PostNotifyShopperSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKeyAuth)
-    ], PostNotifyShopperSecurityOption2.prototype, "apiKeyAuth", void 0);
-    return PostNotifyShopperSecurityOption2;
-}(SpeakeasyBase));
-export { PostNotifyShopperSecurityOption2 };
 var PostNotifyShopperSecurity = /** @class */ (function (_super) {
     __extends(PostNotifyShopperSecurity, _super);
     function PostNotifyShopperSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostNotifyShopperSecurityOption1)
-    ], PostNotifyShopperSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeBasicAuth)
+    ], PostNotifyShopperSecurity.prototype, "basicAuth", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", PostNotifyShopperSecurityOption2)
-    ], PostNotifyShopperSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKeyAuth)
+    ], PostNotifyShopperSecurity.prototype, "apiKeyAuth", void 0);
     return PostNotifyShopperSecurity;
 }(SpeakeasyBase));
 export { PostNotifyShopperSecurity };
@@ -70,11 +46,11 @@ var PostNotifyShopperRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], PostNotifyShopperRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostNotifyShopperSecurity)
     ], PostNotifyShopperRequest.prototype, "security", void 0);
     return PostNotifyShopperRequest;
@@ -86,19 +62,19 @@ var PostNotifyShopperResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostNotifyShopperResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostNotifyShopperResponse.prototype, "notifyShopperResult", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], PostNotifyShopperResponse.prototype, "serviceError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostNotifyShopperResponse.prototype, "statusCode", void 0);
     return PostNotifyShopperResponse;

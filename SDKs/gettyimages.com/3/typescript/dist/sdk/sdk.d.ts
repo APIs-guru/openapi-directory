@@ -1,17 +1,23 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
 import { Security } from "./models/shared";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://gettyimages.com"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare function WithSecurity(security: Security): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _security?: Security;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
     /**
+     * deleteV3AssetChangesChangeSetsChangeSetId - Confirm asset change notifications.
+     *
      * # Delete Asset Changes
      *
      * Confirm asset changes acknowledges receipt of asset changes (from the PUT asset changes endpoint).
@@ -21,16 +27,36 @@ export declare class SDK {
      * You'll need an API key and an access token to use this resource.
      *
     **/
-    DeleteV3AssetChangesChangeSetsChangeSetId(req: operations.DeleteV3AssetChangesChangeSetsChangeSetIdRequest, config?: AxiosRequestConfig): Promise<operations.DeleteV3AssetChangesChangeSetsChangeSetIdResponse>;
-    DeleteV3BoardsBoardId(req: operations.DeleteV3BoardsBoardIdRequest, config?: AxiosRequestConfig): Promise<operations.DeleteV3BoardsBoardIdResponse>;
-    DeleteV3BoardsBoardIdAssets(req: operations.DeleteV3BoardsBoardIdAssetsRequest, config?: AxiosRequestConfig): Promise<operations.DeleteV3BoardsBoardIdAssetsResponse>;
-    DeleteV3BoardsBoardIdAssetsAssetId(req: operations.DeleteV3BoardsBoardIdAssetsAssetIdRequest, config?: AxiosRequestConfig): Promise<operations.DeleteV3BoardsBoardIdAssetsAssetIdResponse>;
-    DeleteV3BoardsBoardIdCommentsCommentId(req: operations.DeleteV3BoardsBoardIdCommentsCommentIdRequest, config?: AxiosRequestConfig): Promise<operations.DeleteV3BoardsBoardIdCommentsCommentIdResponse>;
-    GetV3AffiliatesSearchImages(req: operations.GetV3AffiliatesSearchImagesRequest, config?: AxiosRequestConfig): Promise<operations.GetV3AffiliatesSearchImagesResponse>;
-    GetV3AffiliatesSearchVideos(req: operations.GetV3AffiliatesSearchVideosRequest, config?: AxiosRequestConfig): Promise<operations.GetV3AffiliatesSearchVideosResponse>;
-    GetV3ArtistsImages(req: operations.GetV3ArtistsImagesRequest, config?: AxiosRequestConfig): Promise<operations.GetV3ArtistsImagesResponse>;
-    GetV3ArtistsVideos(req: operations.GetV3ArtistsVideosRequest, config?: AxiosRequestConfig): Promise<operations.GetV3ArtistsVideosResponse>;
+    deleteV3AssetChangesChangeSetsChangeSetId(req: operations.DeleteV3AssetChangesChangeSetsChangeSetIdRequest, config?: AxiosRequestConfig): Promise<operations.DeleteV3AssetChangesChangeSetsChangeSetIdResponse>;
     /**
+     * deleteV3BoardsBoardId - Delete a board
+    **/
+    deleteV3BoardsBoardId(req: operations.DeleteV3BoardsBoardIdRequest, config?: AxiosRequestConfig): Promise<operations.DeleteV3BoardsBoardIdResponse>;
+    /**
+     * deleteV3BoardsBoardIdAssets - Remove assets from a board
+    **/
+    deleteV3BoardsBoardIdAssets(req: operations.DeleteV3BoardsBoardIdAssetsRequest, config?: AxiosRequestConfig): Promise<operations.DeleteV3BoardsBoardIdAssetsResponse>;
+    /**
+     * deleteV3BoardsBoardIdAssetsAssetId - Remove an asset from a board
+    **/
+    deleteV3BoardsBoardIdAssetsAssetId(req: operations.DeleteV3BoardsBoardIdAssetsAssetIdRequest, config?: AxiosRequestConfig): Promise<operations.DeleteV3BoardsBoardIdAssetsAssetIdResponse>;
+    /**
+     * deleteV3BoardsBoardIdCommentsCommentId - Delete a comment from a board
+    **/
+    deleteV3BoardsBoardIdCommentsCommentId(req: operations.DeleteV3BoardsBoardIdCommentsCommentIdRequest, config?: AxiosRequestConfig): Promise<operations.DeleteV3BoardsBoardIdCommentsCommentIdResponse>;
+    getV3AffiliatesSearchImages(req: operations.GetV3AffiliatesSearchImagesRequest, config?: AxiosRequestConfig): Promise<operations.GetV3AffiliatesSearchImagesResponse>;
+    getV3AffiliatesSearchVideos(req: operations.GetV3AffiliatesSearchVideosRequest, config?: AxiosRequestConfig): Promise<operations.GetV3AffiliatesSearchVideosResponse>;
+    /**
+     * getV3ArtistsImages - Search for images by a photographer
+    **/
+    getV3ArtistsImages(req: operations.GetV3ArtistsImagesRequest, config?: AxiosRequestConfig): Promise<operations.GetV3ArtistsImagesResponse>;
+    /**
+     * getV3ArtistsVideos - Search for videos by a photographer
+    **/
+    getV3ArtistsVideos(req: operations.GetV3ArtistsVideosRequest, config?: AxiosRequestConfig): Promise<operations.GetV3ArtistsVideosResponse>;
+    /**
+     * getV3AssetChangesChannels - Get a list of asset change notification channels.
+     *
      * # Get Partner Channels
      *
      * Retrieves the channel data for the partner. This data can be used to populate the channel_id parameter in the Put Asset Changes query.
@@ -43,25 +69,40 @@ export declare class SDK {
      *
      *
     **/
-    GetV3AssetChangesChannels(config?: AxiosRequestConfig): Promise<operations.GetV3AssetChangesChannelsResponse>;
-    GetV3Boards(req: operations.GetV3BoardsRequest, config?: AxiosRequestConfig): Promise<operations.GetV3BoardsResponse>;
-    GetV3BoardsBoardId(req: operations.GetV3BoardsBoardIdRequest, config?: AxiosRequestConfig): Promise<operations.GetV3BoardsBoardIdResponse>;
-    GetV3BoardsBoardIdComments(req: operations.GetV3BoardsBoardIdCommentsRequest, config?: AxiosRequestConfig): Promise<operations.GetV3BoardsBoardIdCommentsResponse>;
+    getV3AssetChangesChannels(config?: AxiosRequestConfig): Promise<operations.GetV3AssetChangesChannelsResponse>;
     /**
+     * getV3Boards - Get all boards that the user participates in
+    **/
+    getV3Boards(req: operations.GetV3BoardsRequest, config?: AxiosRequestConfig): Promise<operations.GetV3BoardsResponse>;
+    /**
+     * getV3BoardsBoardId - Get assets and metadata for a specific board
+    **/
+    getV3BoardsBoardId(req: operations.GetV3BoardsBoardIdRequest, config?: AxiosRequestConfig): Promise<operations.GetV3BoardsBoardIdResponse>;
+    /**
+     * getV3BoardsBoardIdComments - Get comments from a board
+    **/
+    getV3BoardsBoardIdComments(req: operations.GetV3BoardsBoardIdCommentsRequest, config?: AxiosRequestConfig): Promise<operations.GetV3BoardsBoardIdCommentsResponse>;
+    /**
+     * getV3Collections - Gets collections applicable for the customer.
+     *
      * Use this endpoint to retrieve collections associated with your Getty Images account. To browse available collections see our [Image collections page]( http://www.gettyimages.com/creative-images/collections).
      *
      * You'll need an API key and access token to use this resource.
      *
     **/
-    GetV3Collections(req: operations.GetV3CollectionsRequest, config?: AxiosRequestConfig): Promise<operations.GetV3CollectionsResponse>;
+    getV3Collections(req: operations.GetV3CollectionsRequest, config?: AxiosRequestConfig): Promise<operations.GetV3CollectionsResponse>;
     /**
+     * getV3Countries - Gets countries codes and names.
+     *
      * Returns a list of country objects that contains country name, two letter ISO abbreviation and three letter ISO abbreviation.
      *
      * You'll need an API key and access token to use this resource.
      *
     **/
-    GetV3Countries(req: operations.GetV3CountriesRequest, config?: AxiosRequestConfig): Promise<operations.GetV3CountriesResponse>;
+    getV3Countries(req: operations.GetV3CountriesRequest, config?: AxiosRequestConfig): Promise<operations.GetV3CountriesResponse>;
     /**
+     * getV3CustomersCurrent - Returns information about the current user.
+     *
      * Returns the first, middle and last name of the authenticated user.
      *
      * You'll need an API key and access token to use this resource.
@@ -69,8 +110,10 @@ export declare class SDK {
      * Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens.
      *
     **/
-    GetV3CustomersCurrent(req: operations.GetV3CustomersCurrentRequest, config?: AxiosRequestConfig): Promise<operations.GetV3CustomersCurrentResponse>;
+    getV3CustomersCurrent(req: operations.GetV3CustomersCurrentRequest, config?: AxiosRequestConfig): Promise<operations.GetV3CustomersCurrentResponse>;
     /**
+     * getV3Downloads - Returns information about a customer's downloaded assets.
+     *
      * Returns information about a customer's previously downloaded assets.
      *
      * You'll need an API key and access token to use this resource.
@@ -81,8 +124,10 @@ export declare class SDK {
      * Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens.
      *
     **/
-    GetV3Downloads(req: operations.GetV3DownloadsRequest, config?: AxiosRequestConfig): Promise<operations.GetV3DownloadsResponse>;
+    getV3Downloads(req: operations.GetV3DownloadsRequest, config?: AxiosRequestConfig): Promise<operations.GetV3DownloadsResponse>;
     /**
+     * getV3Events - Get metadata for multiple events
+     *
      * This endpoint returns the detailed event metadata for all specified events. Getty Images news, sports and entertainment photographers and
      * videographers cover editorially relevant events occurring around the world.  All images or video clips produced in association with
      * an event, are assigned the same EventID. EventIDs are part of the meta-data returned in SearchForImages Results. Only content
@@ -93,8 +138,10 @@ export declare class SDK {
      * You'll need an API key and access token to use this resource.
      *
     **/
-    GetV3Events(req: operations.GetV3EventsRequest, config?: AxiosRequestConfig): Promise<operations.GetV3EventsResponse>;
+    getV3Events(req: operations.GetV3EventsRequest, config?: AxiosRequestConfig): Promise<operations.GetV3EventsResponse>;
     /**
+     * getV3EventsId - Get metadata for a single event
+     *
      * This endpoint returns the detailed event metadata for a specified event. Getty Images news, sports and entertainment
      * photographers and videographers cover editorially relevant events occurring around the world.
      * All images or video clips produced in association with an event, are assigned the same EventID.
@@ -106,8 +153,10 @@ export declare class SDK {
      * You'll need an API key and access token to use this resource.
      *
     **/
-    GetV3EventsId(req: operations.GetV3EventsIdRequest, config?: AxiosRequestConfig): Promise<operations.GetV3EventsIdResponse>;
+    getV3EventsId(req: operations.GetV3EventsIdRequest, config?: AxiosRequestConfig): Promise<operations.GetV3EventsIdResponse>;
     /**
+     * getV3Images - Get metadata for multiple images by supplying multiple image ids
+     *
      * This endpoint returns the detailed image metadata for all specified images.
      *
      * You'll need an API key and access token to use this resource.
@@ -210,8 +259,10 @@ export declare class SDK {
      * - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
      *
     **/
-    GetV3Images(req: operations.GetV3ImagesRequest, config?: AxiosRequestConfig): Promise<operations.GetV3ImagesResponse>;
+    getV3Images(req: operations.GetV3ImagesRequest, config?: AxiosRequestConfig): Promise<operations.GetV3ImagesResponse>;
     /**
+     * getV3ImagesId - Get metadata for a single image by supplying one image id
+     *
      * This endpoint returns the detailed image metadata for a specified image.
      *
      * You'll need an API key and access token to use this resource.
@@ -316,9 +367,14 @@ export declare class SDK {
      * - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
      *
     **/
-    GetV3ImagesId(req: operations.GetV3ImagesIdRequest, config?: AxiosRequestConfig): Promise<operations.GetV3ImagesIdResponse>;
-    GetV3ImagesIdDownloadhistory(req: operations.GetV3ImagesIdDownloadhistoryRequest, config?: AxiosRequestConfig): Promise<operations.GetV3ImagesIdDownloadhistoryResponse>;
+    getV3ImagesId(req: operations.GetV3ImagesIdRequest, config?: AxiosRequestConfig): Promise<operations.GetV3ImagesIdResponse>;
     /**
+     * getV3ImagesIdDownloadhistory - Returns information about a customer's download history for a specific asset
+    **/
+    getV3ImagesIdDownloadhistory(req: operations.GetV3ImagesIdDownloadhistoryRequest, config?: AxiosRequestConfig): Promise<operations.GetV3ImagesIdDownloadhistoryResponse>;
+    /**
+     * getV3ImagesIdSameSeries - Retrieve creative images from the same series
+     *
      * This endpoint will provide the list of images, if any exist, from the same series as the specified creative asset id. These images are typically from the same photo shoot. This functionality will not work for editorial assets.
      *
      * You'll need an API key and access token to use this resource.
@@ -425,8 +481,10 @@ export declare class SDK {
      * }
      * ```
     **/
-    GetV3ImagesIdSameSeries(req: operations.GetV3ImagesIdSameSeriesRequest, config?: AxiosRequestConfig): Promise<operations.GetV3ImagesIdSameSeriesResponse>;
+    getV3ImagesIdSameSeries(req: operations.GetV3ImagesIdSameSeriesRequest, config?: AxiosRequestConfig): Promise<operations.GetV3ImagesIdSameSeriesResponse>;
     /**
+     * getV3ImagesIdSimilar - Retrieve similar images
+     *
      * This endpoint will provide a list of images that are similar to the specified asset id.
      *
      * You'll need an API key and access token to use this resource.
@@ -533,23 +591,29 @@ export declare class SDK {
      * }
      * ```
     **/
-    GetV3ImagesIdSimilar(req: operations.GetV3ImagesIdSimilarRequest, config?: AxiosRequestConfig): Promise<operations.GetV3ImagesIdSimilarResponse>;
+    getV3ImagesIdSimilar(req: operations.GetV3ImagesIdSimilarRequest, config?: AxiosRequestConfig): Promise<operations.GetV3ImagesIdSimilarResponse>;
     /**
+     * getV3OrdersId - Get order metadata
+     *
      * This endpoint returns detailed order metadata for a specified order.
      * Use of this endpoint requires configuration changes to your API key.
      *
      * You'll need an API key and access token to use this resource.
     **/
-    GetV3OrdersId(req: operations.GetV3OrdersIdRequest, config?: AxiosRequestConfig): Promise<operations.GetV3OrdersIdResponse>;
+    getV3OrdersId(req: operations.GetV3OrdersIdRequest, config?: AxiosRequestConfig): Promise<operations.GetV3OrdersIdResponse>;
     /**
+     * getV3Products - Get Products
+     *
      * This endpoint returns all products available to the username used during authentication. As such, this endpoint requires the use of
      * a fully authorized access_token. The product data can then be used as search filters, restricting results to images from a specific product.
      *
      * You'll need an API key and access token to use this resource.
      *
     **/
-    GetV3Products(req: operations.GetV3ProductsRequest, config?: AxiosRequestConfig): Promise<operations.GetV3ProductsResponse>;
+    getV3Products(req: operations.GetV3ProductsRequest, config?: AxiosRequestConfig): Promise<operations.GetV3ProductsResponse>;
     /**
+     * getV3PurchasedAssets - Get Previously Purchased Images and Video
+     *
      * This endpoint returns a list of all assets purchased on gettyimages.com by the username used for authentication.
      * Use of this endpoint requires configuration changes to your API key. Please contact your sales representative
      * to learn more.
@@ -557,8 +621,10 @@ export declare class SDK {
      * You'll need an API key and access token to use this resource.
      *
     **/
-    GetV3PurchasedAssets(req: operations.GetV3PurchasedAssetsRequest, config?: AxiosRequestConfig): Promise<operations.GetV3PurchasedAssetsResponse>;
+    getV3PurchasedAssets(req: operations.GetV3PurchasedAssetsRequest, config?: AxiosRequestConfig): Promise<operations.GetV3PurchasedAssetsResponse>;
     /**
+     * getV3SearchEvents - Search for events
+     *
      * Use this endpoint to search Getty Images news, sports and entertainment events. Getty Images photographers and videographers cover editorially relevant events occurring around the world.  All images or video clips produced in association with an event, are assigned the same EventID. EventIDs are part of the meta-data returned in Search Results. Only content produced under a Getty Images brand name (Getty Images News, Getty Images Sports, Getty Images Entertainment, Film Magic, Wire Image) will be consistently assigned an EventID. The Event framework may also be used to group similar content, such as "Hats from the Royal Wedding" or "Odd-ballOffbeat images of the week".
      *
      * You'll need an API key and access token to use this resource.
@@ -568,8 +634,10 @@ export declare class SDK {
      * You can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.
      *
     **/
-    GetV3SearchEvents(req: operations.GetV3SearchEventsRequest, config?: AxiosRequestConfig): Promise<operations.GetV3SearchEventsResponse>;
+    getV3SearchEvents(req: operations.GetV3SearchEventsRequest, config?: AxiosRequestConfig): Promise<operations.GetV3SearchEventsResponse>;
     /**
+     * getV3SearchImages - Search for both creative and editorial images
+     *
      * Use this endpoint to search over a blend of our contemporary stock photos, illustrations, archival images, editorial photos, illustrations and archival images. Because this draws from such a large diversity of content, the results will not be as relevant as when the more specific Creative or Editorial endpoints are used. Additionally, the response time for this endpoint is slower compared to that for Creative and Editorial-specific endpoints. For these reasons, it is highly recommended that those endpoints are used instead of this blended endpoint.
      *
      * You'll need an API key and access token to use this resource.
@@ -686,8 +754,10 @@ export declare class SDK {
      * - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
      *
     **/
-    GetV3SearchImages(req: operations.GetV3SearchImagesRequest, config?: AxiosRequestConfig): Promise<operations.GetV3SearchImagesResponse>;
+    getV3SearchImages(req: operations.GetV3SearchImagesRequest, config?: AxiosRequestConfig): Promise<operations.GetV3SearchImagesResponse>;
     /**
+     * getV3SearchImagesCreative - Search for creative images only
+     *
      * Use this endpoint to search our contemporary stock photos, illustrations and archival images.
      *
      * You'll need an API key and access token to use this resource.
@@ -798,8 +868,10 @@ export declare class SDK {
      * ```
      *
     **/
-    GetV3SearchImagesCreative(req: operations.GetV3SearchImagesCreativeRequest, config?: AxiosRequestConfig): Promise<operations.GetV3SearchImagesCreativeResponse>;
+    getV3SearchImagesCreative(req: operations.GetV3SearchImagesCreativeRequest, config?: AxiosRequestConfig): Promise<operations.GetV3SearchImagesCreativeResponse>;
     /**
+     * getV3SearchImagesCreativeByImage - Search for creative images based on url
+     *
      * Allows searching for similar creative images by passing the URL to an existing image. All responses will have the exclude_nudity filter automatically applied.
      *
      * Before calling the search by image endpoint, an image must be uploaded to a specific AWS S3 bucket. The bucket name is `search-by-image.s3.amazonaws.com`.
@@ -816,8 +888,10 @@ export declare class SDK {
      * <!-- Subsequent searches for the same image can be executed using the `image_fingerprint` that is returned by the initial search. -->
      *
     **/
-    GetV3SearchImagesCreativeByImage(req: operations.GetV3SearchImagesCreativeByImageRequest, config?: AxiosRequestConfig): Promise<operations.GetV3SearchImagesCreativeByImageResponse>;
+    getV3SearchImagesCreativeByImage(req: operations.GetV3SearchImagesCreativeByImageRequest, config?: AxiosRequestConfig): Promise<operations.GetV3SearchImagesCreativeByImageResponse>;
     /**
+     * getV3SearchImagesEditorial - Search for editorial images only
+     *
      * Use this endpoint to search our editorial stock photos, illustrations and archival images.  Editorial images represent newsworthy events or illustrate matters of general interest, such as news, sport and entertainment and are generally intended for editorial use.
      *
      * You'll need an API key and access token to use this resource.
@@ -931,8 +1005,10 @@ export declare class SDK {
      * - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
      *
     **/
-    GetV3SearchImagesEditorial(req: operations.GetV3SearchImagesEditorialRequest, config?: AxiosRequestConfig): Promise<operations.GetV3SearchImagesEditorialResponse>;
+    getV3SearchImagesEditorial(req: operations.GetV3SearchImagesEditorialRequest, config?: AxiosRequestConfig): Promise<operations.GetV3SearchImagesEditorialResponse>;
     /**
+     * getV3SearchVideosCreative - Search for creative videos
+     *
      * Use this endpoint to search premium stock video, from archival film to contemporary 4K and HD footage.
      *
      * You'll need an API key and access token to use this resource.
@@ -1050,8 +1126,10 @@ export declare class SDK {
      * }
      * ```
     **/
-    GetV3SearchVideosCreative(req: operations.GetV3SearchVideosCreativeRequest, config?: AxiosRequestConfig): Promise<operations.GetV3SearchVideosCreativeResponse>;
+    getV3SearchVideosCreative(req: operations.GetV3SearchVideosCreativeRequest, config?: AxiosRequestConfig): Promise<operations.GetV3SearchVideosCreativeResponse>;
     /**
+     * getV3SearchVideosCreativeByImage - Search for creative videos based on url
+     *
      * Search for **similar creative videos** by passing an `asset_id` to an asset in our catalog OR `image_url` to any image or a frame grab from a video. All responses will have the exclude_nudity filter automatically applied.
      *
      * ## Searching by URL
@@ -1070,8 +1148,10 @@ export declare class SDK {
      *
      * When searching by `asset_id`, any image or video asset id in the Getty/iStock catalog can be used.
     **/
-    GetV3SearchVideosCreativeByImage(req: operations.GetV3SearchVideosCreativeByImageRequest, config?: AxiosRequestConfig): Promise<operations.GetV3SearchVideosCreativeByImageResponse>;
+    getV3SearchVideosCreativeByImage(req: operations.GetV3SearchVideosCreativeByImageRequest, config?: AxiosRequestConfig): Promise<operations.GetV3SearchVideosCreativeByImageResponse>;
     /**
+     * getV3SearchVideosEditorial - Search for editorial videos
+     *
      * Use this endpoint to search current and archival video clips of celebrities, newsmakers, and events.
      *
      * You'll need an API key and access token to use this resource.
@@ -1188,8 +1268,10 @@ export declare class SDK {
      * - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
      *
     **/
-    GetV3SearchVideosEditorial(req: operations.GetV3SearchVideosEditorialRequest, config?: AxiosRequestConfig): Promise<operations.GetV3SearchVideosEditorialResponse>;
+    getV3SearchVideosEditorial(req: operations.GetV3SearchVideosEditorialRequest, config?: AxiosRequestConfig): Promise<operations.GetV3SearchVideosEditorialResponse>;
     /**
+     * getV3Videos - Get metadata for multiple videos by supplying multiple video ids
+     *
      * Use this endpoint to return detailed video metadata for all the specified video ids.
      *
      * You'll need an API key and access token to use this resource.
@@ -1307,8 +1389,10 @@ export declare class SDK {
      * - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
      *
     **/
-    GetV3Videos(req: operations.GetV3VideosRequest, config?: AxiosRequestConfig): Promise<operations.GetV3VideosResponse>;
+    getV3Videos(req: operations.GetV3VideosRequest, config?: AxiosRequestConfig): Promise<operations.GetV3VideosResponse>;
     /**
+     * getV3VideosId - Get metadata for a single video by supplying one video id
+     *
      * Use this endpoint to return detailed video metadata for the specified video id.
      *
      * You'll need an API key and access token to use this resource.
@@ -1426,9 +1510,14 @@ export declare class SDK {
      * - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
      *
     **/
-    GetV3VideosId(req: operations.GetV3VideosIdRequest, config?: AxiosRequestConfig): Promise<operations.GetV3VideosIdResponse>;
-    GetV3VideosIdDownloadhistory(req: operations.GetV3VideosIdDownloadhistoryRequest, config?: AxiosRequestConfig): Promise<operations.GetV3VideosIdDownloadhistoryResponse>;
+    getV3VideosId(req: operations.GetV3VideosIdRequest, config?: AxiosRequestConfig): Promise<operations.GetV3VideosIdResponse>;
     /**
+     * getV3VideosIdDownloadhistory - Returns information about a customer's download history for a specific asset
+    **/
+    getV3VideosIdDownloadhistory(req: operations.GetV3VideosIdDownloadhistoryRequest, config?: AxiosRequestConfig): Promise<operations.GetV3VideosIdDownloadhistoryResponse>;
+    /**
+     * getV3VideosIdSameSeries - Retrieve creative videos from the same series
+     *
      * This endpoint will provide the list of videos, if any exist, from the same series as the specified creative asset id. These images are typically from the same photo shoot. This functionality will not work for editorial assets.
      *
      * You'll need an API key and access token to use this resource.
@@ -1537,8 +1626,10 @@ export declare class SDK {
      * }
      * ```
     **/
-    GetV3VideosIdSameSeries(req: operations.GetV3VideosIdSameSeriesRequest, config?: AxiosRequestConfig): Promise<operations.GetV3VideosIdSameSeriesResponse>;
+    getV3VideosIdSameSeries(req: operations.GetV3VideosIdSameSeriesRequest, config?: AxiosRequestConfig): Promise<operations.GetV3VideosIdSameSeriesResponse>;
     /**
+     * getV3VideosIdSimilar - Retrieve similar videos
+     *
      * This endpoint will provide a list of videos that are similar to the specified asset id.
      *
      * You'll need an API key and access token to use this resource.
@@ -1648,11 +1739,22 @@ export declare class SDK {
      * }
      * ```
     **/
-    GetV3VideosIdSimilar(req: operations.GetV3VideosIdSimilarRequest, config?: AxiosRequestConfig): Promise<operations.GetV3VideosIdSimilarResponse>;
-    PostV3AssetLicensingAssetId(req: operations.PostV3AssetLicensingAssetIdRequest, config?: AxiosRequestConfig): Promise<operations.PostV3AssetLicensingAssetIdResponse>;
-    PostV3Boards(req: operations.PostV3BoardsRequest, config?: AxiosRequestConfig): Promise<operations.PostV3BoardsResponse>;
-    PostV3BoardsBoardIdComments(req: operations.PostV3BoardsBoardIdCommentsRequest, config?: AxiosRequestConfig): Promise<operations.PostV3BoardsBoardIdCommentsResponse>;
+    getV3VideosIdSimilar(req: operations.GetV3VideosIdSimilarRequest, config?: AxiosRequestConfig): Promise<operations.GetV3VideosIdSimilarResponse>;
     /**
+     * postV3AssetLicensingAssetId - Endpoint for acquiring extended licenses with iStock credits for an asset.
+    **/
+    postV3AssetLicensingAssetId(req: operations.PostV3AssetLicensingAssetIdRequest, config?: AxiosRequestConfig): Promise<operations.PostV3AssetLicensingAssetIdResponse>;
+    /**
+     * postV3Boards - Create a new board
+    **/
+    postV3Boards(req: operations.PostV3BoardsRequest, config?: AxiosRequestConfig): Promise<operations.PostV3BoardsResponse>;
+    /**
+     * postV3BoardsBoardIdComments - Add a comment to a board
+    **/
+    postV3BoardsBoardIdComments(req: operations.PostV3BoardsBoardIdCommentsRequest, config?: AxiosRequestConfig): Promise<operations.PostV3BoardsBoardIdCommentsResponse>;
+    /**
+     * postV3DownloadsImagesId - Download an image
+     *
      * Use this endpoint to generate download URLs and related data for images you are authorized to download.
      *
      * Most product offerings have enforced periodic download limits such as monthly, weekly, and daily. When this operation executes, the count of allowed downloads is decremented by one for the product offering. Once the download limit is reached for a given product offering, no further downloads may be requested for that product offering until the next download period.
@@ -1714,8 +1816,10 @@ export declare class SDK {
      * Download URIs are _**only valid for 24 hours**_, starting from the moment they are returned from this call.
      *
     **/
-    PostV3DownloadsImagesId(req: operations.PostV3DownloadsImagesIdRequest, config?: AxiosRequestConfig): Promise<operations.PostV3DownloadsImagesIdResponse>;
+    postV3DownloadsImagesId(req: operations.PostV3DownloadsImagesIdRequest, config?: AxiosRequestConfig): Promise<operations.PostV3DownloadsImagesIdResponse>;
     /**
+     * postV3DownloadsVideosId - Download a video
+     *
      * Use this endpoint to generate download URLs and related data for videos you are authorized to download.
      *
      * Most product offerings have enforced periodic download limits such as monthly, weekly, and daily. When this operation executes, the count of allowed downloads is decremented by one for the product offering. Once the download limit is reached for a given product offering, no further downloads may be requested for that product offering until the next download period.
@@ -1778,8 +1882,10 @@ export declare class SDK {
      * Download URIs are _**only valid for 24 hours**_, starting from the moment they are returned from this call.
      *
     **/
-    PostV3DownloadsVideosId(req: operations.PostV3DownloadsVideosIdRequest, config?: AxiosRequestConfig): Promise<operations.PostV3DownloadsVideosIdResponse>;
+    postV3DownloadsVideosId(req: operations.PostV3DownloadsVideosIdRequest, config?: AxiosRequestConfig): Promise<operations.PostV3DownloadsVideosIdResponse>;
     /**
+     * putV3AssetChangesChangeSets - Get asset change notifications.
+     *
      * # Asset Changes
      *
      * Get notifications about new, updated or deleted assets.
@@ -1791,11 +1897,22 @@ export declare class SDK {
      * Notifications older than 60 days will be removed from partner channels.
      *
     **/
-    PutV3AssetChangesChangeSets(req: operations.PutV3AssetChangesChangeSetsRequest, config?: AxiosRequestConfig): Promise<operations.PutV3AssetChangesChangeSetsResponse>;
-    PutV3BoardsBoardId(req: operations.PutV3BoardsBoardIdRequest, config?: AxiosRequestConfig): Promise<operations.PutV3BoardsBoardIdResponse>;
-    PutV3BoardsBoardIdAssets(req: operations.PutV3BoardsBoardIdAssetsRequest, config?: AxiosRequestConfig): Promise<operations.PutV3BoardsBoardIdAssetsResponse>;
-    PutV3BoardsBoardIdAssetsAssetId(req: operations.PutV3BoardsBoardIdAssetsAssetIdRequest, config?: AxiosRequestConfig): Promise<operations.PutV3BoardsBoardIdAssetsAssetIdResponse>;
+    putV3AssetChangesChangeSets(req: operations.PutV3AssetChangesChangeSetsRequest, config?: AxiosRequestConfig): Promise<operations.PutV3AssetChangesChangeSetsResponse>;
     /**
+     * putV3BoardsBoardId - Update a board
+    **/
+    putV3BoardsBoardId(req: operations.PutV3BoardsBoardIdRequest, config?: AxiosRequestConfig): Promise<operations.PutV3BoardsBoardIdResponse>;
+    /**
+     * putV3BoardsBoardIdAssets - Add assets to a board
+    **/
+    putV3BoardsBoardIdAssets(req: operations.PutV3BoardsBoardIdAssetsRequest, config?: AxiosRequestConfig): Promise<operations.PutV3BoardsBoardIdAssetsResponse>;
+    /**
+     * putV3BoardsBoardIdAssetsAssetId - Add an asset to a board
+    **/
+    putV3BoardsBoardIdAssetsAssetId(req: operations.PutV3BoardsBoardIdAssetsAssetIdRequest, config?: AxiosRequestConfig): Promise<operations.PutV3BoardsBoardIdAssetsAssetIdResponse>;
+    /**
+     * putV3UsageBatchesId - Report usage of assets via a batch format.
+     *
      * # Report Usage
      *
      * Use this endpoint to report the usages of a set of assets. The count of assets submitted in a single batch to this endpoint is limited to 1000. Note that all asset Ids specified must be valid or the operation will fail causing no usages to be recorded. In this case, you will need to remove the invalid asset Ids from the query request and re-submit the query.
@@ -1808,6 +1925,6 @@ export declare class SDK {
      * _Note_: Date of use can be in any unambiguous date format.
      *
     **/
-    PutV3UsageBatchesId(req: operations.PutV3UsageBatchesIdRequest, config?: AxiosRequestConfig): Promise<operations.PutV3UsageBatchesIdResponse>;
+    putV3UsageBatchesId(req: operations.PutV3UsageBatchesIdRequest, config?: AxiosRequestConfig): Promise<operations.PutV3UsageBatchesIdResponse>;
 }
 export {};

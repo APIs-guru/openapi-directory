@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutStorageConfigurationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,62 +32,62 @@ export class PutStorageConfigurationHeaders extends SpeakeasyBase {
  * Contains information about the storage destination.
 **/
 export class PutStorageConfigurationRequestBodyMultiLayerStorage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customerManagedS3Storage" })
+  @SpeakeasyMetadata({ data: "json, name=customerManagedS3Storage" })
   customerManagedS3Storage?: shared.CustomerManagedS3Storage;
 }
 
 export enum PutStorageConfigurationRequestBodyStorageTypeEnum {
-    SitewiseDefaultStorage = "SITEWISE_DEFAULT_STORAGE"
-,    MultiLayerStorage = "MULTI_LAYER_STORAGE"
+    SitewiseDefaultStorage = "SITEWISE_DEFAULT_STORAGE",
+    MultiLayerStorage = "MULTI_LAYER_STORAGE"
 }
 
 
 export class PutStorageConfigurationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=multiLayerStorage" })
+  @SpeakeasyMetadata({ data: "json, name=multiLayerStorage" })
   multiLayerStorage?: PutStorageConfigurationRequestBodyMultiLayerStorage;
 
-  @Metadata({ data: "json, name=storageType" })
+  @SpeakeasyMetadata({ data: "json, name=storageType" })
   storageType: PutStorageConfigurationRequestBodyStorageTypeEnum;
 }
 
 
 export class PutStorageConfigurationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PutStorageConfigurationHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: PutStorageConfigurationRequestBody;
 }
 
 
 export class PutStorageConfigurationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictingOperationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putStorageConfigurationResponse?: shared.PutStorageConfigurationResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceAlreadyExistsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

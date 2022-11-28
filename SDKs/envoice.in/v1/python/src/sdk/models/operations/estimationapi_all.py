@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -11,20 +11,20 @@ class EstimationAPIAllQueryParams:
 
 @dataclass
 class EstimationAPIAllHeaders:
-    x_auth_key: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-key', 'style': 'simple', 'explode': False }})
-    x_auth_secret: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-secret', 'style': 'simple', 'explode': False }})
+    x_auth_key: str = field(metadata={'header': { 'field_name': 'x-auth-key', 'style': 'simple', 'explode': False }})
+    x_auth_secret: str = field(metadata={'header': { 'field_name': 'x-auth-secret', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EstimationAPIAllRequest:
-    query_params: EstimationAPIAllQueryParams = field(default=None)
-    headers: EstimationAPIAllHeaders = field(default=None)
+    headers: EstimationAPIAllHeaders = field()
+    query_params: EstimationAPIAllQueryParams = field()
     
 
 @dataclass
 class EstimationAPIAllResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     list_result_estimation_details_api_model_: Optional[shared.ListResultEstimationDetailsAPIModel] = field(default=None)
-    status_code: int = field(default=None)
     

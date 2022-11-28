@@ -18,6 +18,8 @@ const (
 	AdSlotPaymentSourceTypeEnumPlanningPaymentSourceTypePublisherPaid AdSlotPaymentSourceTypeEnum = "PLANNING_PAYMENT_SOURCE_TYPE_PUBLISHER_PAID"
 )
 
+// AdSlot
+// Ad Slot
 type AdSlot struct {
 	Comment           *string                      `json:"comment,omitempty"`
 	Compatibility     *AdSlotCompatibilityEnum     `json:"compatibility,omitempty"`

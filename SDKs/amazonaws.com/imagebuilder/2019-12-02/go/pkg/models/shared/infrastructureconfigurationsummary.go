@@ -1,5 +1,7 @@
 package shared
 
+// InfrastructureConfigurationSummary
+// The infrastructure used when building Amazon EC2 AMIs.
 type InfrastructureConfigurationSummary struct {
 	Arn                 *string           `json:"arn,omitempty"`
 	DateCreated         *string           `json:"dateCreated,omitempty"`

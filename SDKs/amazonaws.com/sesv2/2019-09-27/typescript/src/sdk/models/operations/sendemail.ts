@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SendEmailHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,13 +32,13 @@ export class SendEmailHeaders extends SpeakeasyBase {
  * An object that defines the entire content of the email, including the message headers and the body content. You can create a simple email message, in which you specify the subject and the text and HTML versions of the message body. You can also create raw messages, in which you specify a complete MIME-formatted message. Raw messages can include attachments and custom headers.
 **/
 export class SendEmailRequestBodyContent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Raw" })
+  @SpeakeasyMetadata({ data: "json, name=Raw" })
   raw?: shared.RawMessage;
 
-  @Metadata({ data: "json, name=Simple" })
+  @SpeakeasyMetadata({ data: "json, name=Simple" })
   simple?: shared.Message;
 
-  @Metadata({ data: "json, name=Template" })
+  @SpeakeasyMetadata({ data: "json, name=Template" })
   template?: shared.Template;
 }
 
@@ -47,13 +48,13 @@ export class SendEmailRequestBodyContent extends SpeakeasyBase {
  * An object that describes the recipients for an email.
 **/
 export class SendEmailRequestBodyDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BccAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=BccAddresses" })
   bccAddresses?: string[];
 
-  @Metadata({ data: "json, name=CcAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=CcAddresses" })
   ccAddresses?: string[];
 
-  @Metadata({ data: "json, name=ToAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=ToAddresses" })
   toAddresses?: string[];
 }
 
@@ -63,87 +64,87 @@ export class SendEmailRequestBodyDestination extends SpeakeasyBase {
  * An object used to specify a list or topic to which an email belongs, which will be used when a contact chooses to unsubscribe.
 **/
 export class SendEmailRequestBodyListManagementOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContactListName" })
+  @SpeakeasyMetadata({ data: "json, name=ContactListName" })
   contactListName?: string;
 
-  @Metadata({ data: "json, name=TopicName" })
+  @SpeakeasyMetadata({ data: "json, name=TopicName" })
   topicName?: string;
 }
 
 
 export class SendEmailRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigurationSetName" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationSetName" })
   configurationSetName?: string;
 
-  @Metadata({ data: "json, name=Content" })
+  @SpeakeasyMetadata({ data: "json, name=Content" })
   content: SendEmailRequestBodyContent;
 
-  @Metadata({ data: "json, name=Destination" })
+  @SpeakeasyMetadata({ data: "json, name=Destination" })
   destination?: SendEmailRequestBodyDestination;
 
-  @Metadata({ data: "json, name=EmailTags", elemType: shared.MessageTag })
+  @SpeakeasyMetadata({ data: "json, name=EmailTags", elemType: shared.MessageTag })
   emailTags?: shared.MessageTag[];
 
-  @Metadata({ data: "json, name=FeedbackForwardingEmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=FeedbackForwardingEmailAddress" })
   feedbackForwardingEmailAddress?: string;
 
-  @Metadata({ data: "json, name=FeedbackForwardingEmailAddressIdentityArn" })
+  @SpeakeasyMetadata({ data: "json, name=FeedbackForwardingEmailAddressIdentityArn" })
   feedbackForwardingEmailAddressIdentityArn?: string;
 
-  @Metadata({ data: "json, name=FromEmailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=FromEmailAddress" })
   fromEmailAddress?: string;
 
-  @Metadata({ data: "json, name=FromEmailAddressIdentityArn" })
+  @SpeakeasyMetadata({ data: "json, name=FromEmailAddressIdentityArn" })
   fromEmailAddressIdentityArn?: string;
 
-  @Metadata({ data: "json, name=ListManagementOptions" })
+  @SpeakeasyMetadata({ data: "json, name=ListManagementOptions" })
   listManagementOptions?: SendEmailRequestBodyListManagementOptions;
 
-  @Metadata({ data: "json, name=ReplyToAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=ReplyToAddresses" })
   replyToAddresses?: string[];
 }
 
 
 export class SendEmailRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: SendEmailHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: SendEmailRequestBody;
 }
 
 
 export class SendEmailResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accountSuspendedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   mailFromDomainNotVerifiedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   messageRejected?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sendEmailResponse?: shared.SendEmailResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sendingPausedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

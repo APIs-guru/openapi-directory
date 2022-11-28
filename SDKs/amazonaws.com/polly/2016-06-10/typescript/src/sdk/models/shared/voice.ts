@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LanguageCodeEnum } from "./languagecodeenum";
 import { GenderEnum } from "./genderenum";
 import { VoiceIdEnum } from "./voiceidenum";
-import { LanguageCodeEnum } from "./languagecodeenum";
 import { EngineEnum } from "./engineenum";
+
 
 
 // Voice
@@ -11,24 +11,24 @@ import { EngineEnum } from "./engineenum";
  * Description of the voice.
 **/
 export class Voice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AdditionalLanguageCodes" })
+  @SpeakeasyMetadata({ data: "json, name=AdditionalLanguageCodes" })
   additionalLanguageCodes?: LanguageCodeEnum[];
 
-  @Metadata({ data: "json, name=Gender" })
+  @SpeakeasyMetadata({ data: "json, name=Gender" })
   gender?: GenderEnum;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: VoiceIdEnum;
 
-  @Metadata({ data: "json, name=LanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageCode" })
   languageCode?: LanguageCodeEnum;
 
-  @Metadata({ data: "json, name=LanguageName" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageName" })
   languageName?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=SupportedEngines" })
+  @SpeakeasyMetadata({ data: "json, name=SupportedEngines" })
   supportedEngines?: EngineEnum[];
 }

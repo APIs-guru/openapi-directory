@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionDetails } from "./connectiondetails";
+
 
 
 // ResolveConnectionsResponse
@@ -8,12 +8,12 @@ import { ConnectionDetails } from "./connectiondetails";
  * Response message for BeyondCorp.ResolveConnections.
 **/
 export class ResolveConnectionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectionDetails", elemType: shared.ConnectionDetails })
+  @SpeakeasyMetadata({ data: "json, name=connectionDetails", elemType: ConnectionDetails })
   connectionDetails?: ConnectionDetails[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

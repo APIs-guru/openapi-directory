@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ModelCacheSettingEnum } from "./modelcachesettingenum";
+
 
 
 // MultiModelConfig
@@ -7,6 +8,6 @@ import { ModelCacheSettingEnum } from "./modelcachesettingenum";
  * Specifies additional configuration for hosting multi-model endpoints.
 **/
 export class MultiModelConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ModelCacheSetting" })
+  @SpeakeasyMetadata({ data: "json, name=ModelCacheSetting" })
   modelCacheSetting?: ModelCacheSettingEnum;
 }

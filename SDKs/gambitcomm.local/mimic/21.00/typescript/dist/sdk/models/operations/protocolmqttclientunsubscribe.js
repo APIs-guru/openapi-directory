@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolMqttClientUnsubscribePathParams = /** @class */ (function (_super) {
     __extends(ProtocolMqttClientUnsubscribePathParams, _super);
     function ProtocolMqttClientUnsubscribePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolMqttClientUnsubscribePathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=subNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subNum" }),
         __metadata("design:type", Number)
     ], ProtocolMqttClientUnsubscribePathParams.prototype, "subNum", void 0);
     return ProtocolMqttClientUnsubscribePathParams;
@@ -45,7 +45,7 @@ var ProtocolMqttClientUnsubscribeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolMqttClientUnsubscribePathParams)
     ], ProtocolMqttClientUnsubscribeRequest.prototype, "pathParams", void 0);
     return ProtocolMqttClientUnsubscribeRequest;
@@ -57,15 +57,15 @@ var ProtocolMqttClientUnsubscribeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolMqttClientUnsubscribeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolMqttClientUnsubscribeResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolMqttClientUnsubscribeResponse.prototype, "protocolMqttClientUnsubscribe200ApplicationJsonString", void 0);
     return ProtocolMqttClientUnsubscribeResponse;

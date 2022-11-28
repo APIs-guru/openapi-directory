@@ -17,12 +17,6 @@ type GetAnnotationLayerPkAnnotationAnnotationIDSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetAnnotationLayerPkAnnotationAnnotationIDRequest struct {
-	PathParams  GetAnnotationLayerPkAnnotationAnnotationIDPathParams
-	QueryParams GetAnnotationLayerPkAnnotationAnnotationIDQueryParams
-	Security    GetAnnotationLayerPkAnnotationAnnotationIDSecurity
-}
-
 type GetAnnotationLayerPkAnnotationAnnotationID200ApplicationJSON struct {
 	ID     *string                      `json:"id,omitempty"`
 	Result *shared.AnnotationRestAPIGet `json:"result,omitempty"`
@@ -46,6 +40,12 @@ type GetAnnotationLayerPkAnnotationAnnotationID422ApplicationJSON struct {
 
 type GetAnnotationLayerPkAnnotationAnnotationID500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetAnnotationLayerPkAnnotationAnnotationIDRequest struct {
+	PathParams  GetAnnotationLayerPkAnnotationAnnotationIDPathParams
+	QueryParams GetAnnotationLayerPkAnnotationAnnotationIDQueryParams
+	Security    GetAnnotationLayerPkAnnotationAnnotationIDSecurity
 }
 
 type GetAnnotationLayerPkAnnotationAnnotationIDResponse struct {

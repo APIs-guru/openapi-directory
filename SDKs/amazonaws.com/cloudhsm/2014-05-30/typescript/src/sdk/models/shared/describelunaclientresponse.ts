@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeLunaClientResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Certificate" })
+  @SpeakeasyMetadata({ data: "json, name=Certificate" })
   certificate?: string;
 
-  @Metadata({ data: "json, name=CertificateFingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateFingerprint" })
   certificateFingerprint?: string;
 
-  @Metadata({ data: "json, name=ClientArn" })
+  @SpeakeasyMetadata({ data: "json, name=ClientArn" })
   clientArn?: string;
 
-  @Metadata({ data: "json, name=Label" })
+  @SpeakeasyMetadata({ data: "json, name=Label" })
   label?: string;
 
-  @Metadata({ data: "json, name=LastModifiedTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTimestamp" })
   lastModifiedTimestamp?: string;
 }

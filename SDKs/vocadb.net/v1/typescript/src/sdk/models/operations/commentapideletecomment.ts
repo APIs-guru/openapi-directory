@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CommentApiDeleteCommentEntryTypeEnum {
-    Undefined = "Undefined"
-,    Album = "Album"
-,    Artist = "Artist"
-,    DiscussionTopic = "DiscussionTopic"
-,    Pv = "PV"
-,    ReleaseEvent = "ReleaseEvent"
-,    ReleaseEventSeries = "ReleaseEventSeries"
-,    Song = "Song"
-,    SongList = "SongList"
-,    Tag = "Tag"
-,    User = "User"
-,    Venue = "Venue"
+    Undefined = "Undefined",
+    Album = "Album",
+    Artist = "Artist",
+    DiscussionTopic = "DiscussionTopic",
+    Pv = "PV",
+    ReleaseEvent = "ReleaseEvent",
+    ReleaseEventSeries = "ReleaseEventSeries",
+    Song = "Song",
+    SongList = "SongList",
+    Tag = "Tag",
+    User = "User",
+    Venue = "Venue"
 }
 
 
 export class CommentApiDeleteCommentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=commentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=commentId" })
   commentId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=entryType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=entryType" })
   entryType: CommentApiDeleteCommentEntryTypeEnum;
 }
 
 
 export class CommentApiDeleteCommentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CommentApiDeleteCommentPathParams;
 }
 
 
 export class CommentApiDeleteCommentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

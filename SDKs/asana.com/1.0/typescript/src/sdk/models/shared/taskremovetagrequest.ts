@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TaskRemoveTagRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=tag" })
+  @SpeakeasyMetadata({ data: "json, name=tag" })
   tag: string;
 }

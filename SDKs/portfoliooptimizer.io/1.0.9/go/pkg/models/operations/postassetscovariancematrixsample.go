@@ -8,12 +8,12 @@ type PostAssetsCovarianceMatrixSampleRequestBody struct {
 	Assets []PostAssetsCovarianceMatrixSampleRequestBodyAssets `json:"assets"`
 }
 
-type PostAssetsCovarianceMatrixSampleRequest struct {
-	Request PostAssetsCovarianceMatrixSampleRequestBody `request:"mediaType=application/json"`
-}
-
 type PostAssetsCovarianceMatrixSample200ApplicationJSON struct {
 	AssetsCovarianceMatrix [][]float64 `json:"assetsCovarianceMatrix"`
+}
+
+type PostAssetsCovarianceMatrixSampleRequest struct {
+	Request PostAssetsCovarianceMatrixSampleRequestBody `request:"mediaType=application/json"`
 }
 
 type PostAssetsCovarianceMatrixSampleResponse struct {

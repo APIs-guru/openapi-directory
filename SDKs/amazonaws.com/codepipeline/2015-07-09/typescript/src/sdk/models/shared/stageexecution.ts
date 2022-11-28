@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StageExecutionStatusEnum } from "./stageexecutionstatusenum";
+
 
 
 // StageExecution
@@ -7,9 +8,9 @@ import { StageExecutionStatusEnum } from "./stageexecutionstatusenum";
  * Represents information about the run of a stage.
 **/
 export class StageExecution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pipelineExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineExecutionId" })
   pipelineExecutionId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: StageExecutionStatusEnum;
 }

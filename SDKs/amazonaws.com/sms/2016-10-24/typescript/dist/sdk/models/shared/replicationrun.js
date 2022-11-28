@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationRunStageDetails } from "./replicationrunstagedetails";
 import { ReplicationRunStateEnum } from "./replicationrunstateenum";
 import { ReplicationRunTypeEnum } from "./replicationruntypeenum";
@@ -36,47 +36,47 @@ var ReplicationRun = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=amiId" }),
+        SpeakeasyMetadata({ data: "json, name=amiId" }),
         __metadata("design:type", String)
     ], ReplicationRun.prototype, "amiId", void 0);
     __decorate([
-        Metadata({ data: "json, name=completedTime" }),
+        SpeakeasyMetadata({ data: "json, name=completedTime" }),
         __metadata("design:type", Date)
     ], ReplicationRun.prototype, "completedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], ReplicationRun.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=encrypted" }),
+        SpeakeasyMetadata({ data: "json, name=encrypted" }),
         __metadata("design:type", Boolean)
     ], ReplicationRun.prototype, "encrypted", void 0);
     __decorate([
-        Metadata({ data: "json, name=kmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=kmsKeyId" }),
         __metadata("design:type", String)
     ], ReplicationRun.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=replicationRunId" }),
+        SpeakeasyMetadata({ data: "json, name=replicationRunId" }),
         __metadata("design:type", String)
     ], ReplicationRun.prototype, "replicationRunId", void 0);
     __decorate([
-        Metadata({ data: "json, name=scheduledStartTime" }),
+        SpeakeasyMetadata({ data: "json, name=scheduledStartTime" }),
         __metadata("design:type", Date)
     ], ReplicationRun.prototype, "scheduledStartTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=stageDetails" }),
+        SpeakeasyMetadata({ data: "json, name=stageDetails" }),
         __metadata("design:type", ReplicationRunStageDetails)
     ], ReplicationRun.prototype, "stageDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], ReplicationRun.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=statusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=statusMessage" }),
         __metadata("design:type", String)
     ], ReplicationRun.prototype, "statusMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], ReplicationRun.prototype, "type", void 0);
     return ReplicationRun;

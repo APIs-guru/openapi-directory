@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import boundingpoly
-from . import objectannotation
-from . import result
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GroupedResult:
-    bounding_poly: Optional[boundingpoly.BoundingPoly] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'boundingPoly' }})
-    object_annotations: Optional[List[objectannotation.ObjectAnnotation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'objectAnnotations' }})
-    results: Optional[List[result.Result]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    r"""GroupedResult
+    Information about the products similar to a single product in a query image.
+    """
+    
+    bounding_poly: Optional[BoundingPoly] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('boundingPoly') }})
+    object_annotations: Optional[List[ObjectAnnotation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('objectAnnotations') }})
+    results: Optional[List[Result]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
     

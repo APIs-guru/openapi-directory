@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import status
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchDeletePhotosResponse:
-    status: Optional[List[status.Status]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""BatchDeletePhotosResponse
+    Response to batch delete of one or more Photos.
+    """
+    
+    status: Optional[List[Status]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

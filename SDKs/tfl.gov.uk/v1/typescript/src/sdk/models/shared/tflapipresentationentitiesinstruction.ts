@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesInstructionStep } from "./tflapipresentationentitiesinstructionstep";
 
 
+
 export class TflApiPresentationEntitiesInstruction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detailed" })
+  @SpeakeasyMetadata({ data: "json, name=detailed" })
   detailed?: string;
 
-  @Metadata({ data: "json, name=steps", elemType: shared.TflApiPresentationEntitiesInstructionStep })
+  @SpeakeasyMetadata({ data: "json, name=steps", elemType: TflApiPresentationEntitiesInstructionStep })
   steps?: TflApiPresentationEntitiesInstructionStep[];
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: string;
 }

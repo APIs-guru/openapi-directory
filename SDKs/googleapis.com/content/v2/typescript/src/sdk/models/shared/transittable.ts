@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TransitTableTransitTimeRow } from "./transittabletransittimerow";
 
 
+
 export class TransitTable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=postalCodeGroupNames" })
+  @SpeakeasyMetadata({ data: "json, name=postalCodeGroupNames" })
   postalCodeGroupNames?: string[];
 
-  @Metadata({ data: "json, name=rows", elemType: shared.TransitTableTransitTimeRow })
+  @SpeakeasyMetadata({ data: "json, name=rows", elemType: TransitTableTransitTimeRow })
   rows?: TransitTableTransitTimeRow[];
 
-  @Metadata({ data: "json, name=transitTimeLabels" })
+  @SpeakeasyMetadata({ data: "json, name=transitTimeLabels" })
   transitTimeLabels?: string[];
 }

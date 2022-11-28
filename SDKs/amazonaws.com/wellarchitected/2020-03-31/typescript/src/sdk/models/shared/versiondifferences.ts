@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PillarDifference } from "./pillardifference";
+
 
 
 // VersionDifferences
@@ -8,6 +8,6 @@ import { PillarDifference } from "./pillardifference";
  * The differences between the base and latest versions of the lens.
 **/
 export class VersionDifferences extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PillarDifferences", elemType: shared.PillarDifference })
+  @SpeakeasyMetadata({ data: "json, name=PillarDifferences", elemType: PillarDifference })
   pillarDifferences?: PillarDifference[];
 }

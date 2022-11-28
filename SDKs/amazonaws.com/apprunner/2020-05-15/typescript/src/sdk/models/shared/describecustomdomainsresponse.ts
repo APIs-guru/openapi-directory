@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomDomain } from "./customdomain";
 
 
+
 export class DescribeCustomDomainsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CustomDomains", elemType: shared.CustomDomain })
+  @SpeakeasyMetadata({ data: "json, name=CustomDomains", elemType: CustomDomain })
   customDomains: CustomDomain[];
 
-  @Metadata({ data: "json, name=DNSTarget" })
+  @SpeakeasyMetadata({ data: "json, name=DNSTarget" })
   dnsTarget: string;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ServiceArn" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceArn" })
   serviceArn: string;
 }

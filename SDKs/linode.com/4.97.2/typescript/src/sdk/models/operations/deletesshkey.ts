@@ -1,59 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteSshKeyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=sshKeyId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sshKeyId" })
   sshKeyId: number;
 }
 
 
-export class DeleteSshKeySecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class DeleteSshKeySecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class DeleteSshKeySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: DeleteSshKeySecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: DeleteSshKeySecurityOption2;
-}
-
-
-export class DeleteSshKeyRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteSshKeyPathParams;
-
-  @Metadata()
-  security: DeleteSshKeySecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class DeleteSshKeyDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class DeleteSshKeyRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteSshKeyPathParams;
+
+  @SpeakeasyMetadata()
+  security: DeleteSshKeySecurity;
+}
+
+
 export class DeleteSshKeyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteSshKey200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteSshKeyDefaultApplicationJsonObject?: DeleteSshKeyDefaultApplicationJson;
 }

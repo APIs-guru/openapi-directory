@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifyDbClusterEndpointActionEnum(str, Enum):
     MODIFY_DB_CLUSTER_ENDPOINT = "ModifyDBClusterEndpoint"
@@ -10,12 +14,12 @@ class GetModifyDbClusterEndpointVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyDbClusterEndpointQueryParams:
-    action: GetModifyDbClusterEndpointActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    db_cluster_endpoint_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'DBClusterEndpointIdentifier', 'style': 'form', 'explode': True }})
+    action: GetModifyDbClusterEndpointActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_cluster_endpoint_identifier: str = field(metadata={'query_param': { 'field_name': 'DBClusterEndpointIdentifier', 'style': 'form', 'explode': True }})
+    version: GetModifyDbClusterEndpointVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     endpoint_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'EndpointType', 'style': 'form', 'explode': True }})
     excluded_members: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'ExcludedMembers', 'style': 'form', 'explode': True }})
     static_members: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'StaticMembers', 'style': 'form', 'explode': True }})
-    version: GetModifyDbClusterEndpointVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetModifyDbClusterEndpointHeaders:
 
 @dataclass
 class GetModifyDbClusterEndpointRequest:
-    query_params: GetModifyDbClusterEndpointQueryParams = field(default=None)
-    headers: GetModifyDbClusterEndpointHeaders = field(default=None)
+    headers: GetModifyDbClusterEndpointHeaders = field()
+    query_params: GetModifyDbClusterEndpointQueryParams = field()
     
 
 @dataclass
 class GetModifyDbClusterEndpointResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

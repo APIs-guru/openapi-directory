@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AutoMlJobArtifacts
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The artifacts that are generated during an AutoML job.
 **/
 export class AutoMlJobArtifacts extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CandidateDefinitionNotebookLocation" })
+  @SpeakeasyMetadata({ data: "json, name=CandidateDefinitionNotebookLocation" })
   candidateDefinitionNotebookLocation?: string;
 
-  @Metadata({ data: "json, name=DataExplorationNotebookLocation" })
+  @SpeakeasyMetadata({ data: "json, name=DataExplorationNotebookLocation" })
   dataExplorationNotebookLocation?: string;
 }

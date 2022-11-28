@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeliveryArea } from "./deliveryarea";
 import { ProductDeliveryTimeAreaDeliveryTimeDeliveryTime } from "./productdeliverytimeareadeliverytimedeliverytime";
+
 
 
 // ProductDeliveryTimeAreaDeliveryTime
@@ -8,9 +9,9 @@ import { ProductDeliveryTimeAreaDeliveryTimeDeliveryTime } from "./productdelive
  * A pairing of `DeliveryArea` associated with a `DeliveryTime` for this product.
 **/
 export class ProductDeliveryTimeAreaDeliveryTime extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deliveryArea" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryArea" })
   deliveryArea?: DeliveryArea;
 
-  @Metadata({ data: "json, name=deliveryTime" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryTime" })
   deliveryTime?: ProductDeliveryTimeAreaDeliveryTimeDeliveryTime;
 }

@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EndpointGetSeveralTracksQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ids" })
   ids: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=market" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=market" })
   market?: string;
 }
 
 
 export class EndpointGetSeveralTracksHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class EndpointGetSeveralTracksSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   spotifyAuth: shared.SchemeSpotifyAuth;
 }
 
 
 export class EndpointGetSeveralTracksRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: EndpointGetSeveralTracksQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: EndpointGetSeveralTracksHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: EndpointGetSeveralTracksSecurity;
 }
 
 
 export class EndpointGetSeveralTracksResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseObject?: shared.ErrorResponseObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tracksObject?: shared.TracksObject;
 }

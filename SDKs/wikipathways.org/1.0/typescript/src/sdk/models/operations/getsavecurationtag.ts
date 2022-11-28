@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetSaveCurationTagFormatEnum {
-    Json = "json"
-,    Xml = "xml"
-,    Html = "html"
-,    Dump = "dump"
-,    Jpg = "jpg"
-,    Pdf = "pdf"
+    Json = "json",
+    Xml = "xml",
+    Html = "html",
+    Dump = "dump",
+    Jpg = "jpg",
+    Pdf = "pdf"
 }
 
 
 export class GetSaveCurationTagQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=auth" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=auth" })
   auth: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format?: GetSaveCurationTagFormatEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pwId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pwId" })
   pwId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=revision" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=revision" })
   revision: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tagName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tagName" })
   tagName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=text" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=text" })
   text: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=username" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=username" })
   username: string;
 }
 
 
 export class GetSaveCurationTagRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSaveCurationTagQueryParams;
 }
 
 
 export class GetSaveCurationTagResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

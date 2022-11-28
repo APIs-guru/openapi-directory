@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Activity } from "./activity";
+
 
 
 // ListActivitiesResponse
@@ -8,9 +8,9 @@ import { Activity } from "./activity";
  * The response from the list request. Contains a list of activities and a token to retrieve the next page of results.
 **/
 export class ListActivitiesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activities", elemType: shared.Activity })
+  @SpeakeasyMetadata({ data: "json, name=activities", elemType: Activity })
   activities?: Activity[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

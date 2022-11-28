@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MacVerifyRequest
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for KeyManagementService.MacVerify.
 **/
 export class MacVerifyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: string;
 
-  @Metadata({ data: "json, name=dataCrc32c" })
+  @SpeakeasyMetadata({ data: "json, name=dataCrc32c" })
   dataCrc32c?: string;
 
-  @Metadata({ data: "json, name=mac" })
+  @SpeakeasyMetadata({ data: "json, name=mac" })
   mac?: string;
 
-  @Metadata({ data: "json, name=macCrc32c" })
+  @SpeakeasyMetadata({ data: "json, name=macCrc32c" })
   macCrc32c?: string;
 }

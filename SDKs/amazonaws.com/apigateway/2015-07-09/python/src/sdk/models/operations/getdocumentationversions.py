@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetDocumentationVersionsPathParams:
-    restapi_id: str = field(default=None, metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
+    restapi_id: str = field(metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,18 +30,18 @@ class GetDocumentationVersionsHeaders:
 
 @dataclass
 class GetDocumentationVersionsRequest:
-    path_params: GetDocumentationVersionsPathParams = field(default=None)
-    query_params: GetDocumentationVersionsQueryParams = field(default=None)
-    headers: GetDocumentationVersionsHeaders = field(default=None)
+    headers: GetDocumentationVersionsHeaders = field()
+    path_params: GetDocumentationVersionsPathParams = field()
+    query_params: GetDocumentationVersionsQueryParams = field()
     
 
 @dataclass
 class GetDocumentationVersionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     documentation_versions: Optional[shared.DocumentationVersions] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

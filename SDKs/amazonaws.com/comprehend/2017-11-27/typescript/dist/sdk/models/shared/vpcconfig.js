@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // VpcConfig
 /**
  *  Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for the job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>.
@@ -33,11 +33,11 @@ var VpcConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=SecurityGroupIds" }),
+        SpeakeasyMetadata({ data: "json, name=SecurityGroupIds" }),
         __metadata("design:type", Array)
     ], VpcConfig.prototype, "securityGroupIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=Subnets" }),
+        SpeakeasyMetadata({ data: "json, name=Subnets" }),
         __metadata("design:type", Array)
     ], VpcConfig.prototype, "subnets", void 0);
     return VpcConfig;

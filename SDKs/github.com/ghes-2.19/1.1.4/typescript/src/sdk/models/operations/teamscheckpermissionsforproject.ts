@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TeamsCheckPermissionsForProjectPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_id" })
   projectId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
   teamId: number;
 }
 
 
 export class TeamsCheckPermissionsForProjectHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=accept" })
   accept: string;
 }
 
 
 export class TeamsCheckPermissionsForProjectRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TeamsCheckPermissionsForProjectPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: TeamsCheckPermissionsForProjectHeaders;
 }
 
 
 export class TeamsCheckPermissionsForProjectResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   teamProject?: shared.TeamProject;
 }

@@ -22,10 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceInfo } from "./deviceinfo";
 import { DeviceNames } from "./devicenames";
+import { AgentOtherDeviceId } from "./agentotherdeviceid";
 // Device
 /**
  * Third-party device definition. Next ID = 14
@@ -36,51 +36,51 @@ var Device = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attributes" }),
+        SpeakeasyMetadata({ data: "json, name=attributes" }),
         __metadata("design:type", Map)
     ], Device.prototype, "attributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=customData" }),
+        SpeakeasyMetadata({ data: "json, name=customData" }),
         __metadata("design:type", Map)
     ], Device.prototype, "customData", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceInfo" }),
+        SpeakeasyMetadata({ data: "json, name=deviceInfo" }),
         __metadata("design:type", DeviceInfo)
     ], Device.prototype, "deviceInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Device.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", DeviceNames)
     ], Device.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=notificationSupportedByAgent" }),
+        SpeakeasyMetadata({ data: "json, name=notificationSupportedByAgent" }),
         __metadata("design:type", Boolean)
     ], Device.prototype, "notificationSupportedByAgent", void 0);
     __decorate([
-        Metadata({ data: "json, name=otherDeviceIds", elemType: shared.AgentOtherDeviceId }),
+        SpeakeasyMetadata({ data: "json, name=otherDeviceIds", elemType: AgentOtherDeviceId }),
         __metadata("design:type", Array)
     ], Device.prototype, "otherDeviceIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=roomHint" }),
+        SpeakeasyMetadata({ data: "json, name=roomHint" }),
         __metadata("design:type", String)
     ], Device.prototype, "roomHint", void 0);
     __decorate([
-        Metadata({ data: "json, name=structureHint" }),
+        SpeakeasyMetadata({ data: "json, name=structureHint" }),
         __metadata("design:type", String)
     ], Device.prototype, "structureHint", void 0);
     __decorate([
-        Metadata({ data: "json, name=traits" }),
+        SpeakeasyMetadata({ data: "json, name=traits" }),
         __metadata("design:type", Array)
     ], Device.prototype, "traits", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Device.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=willReportState" }),
+        SpeakeasyMetadata({ data: "json, name=willReportState" }),
         __metadata("design:type", Boolean)
     ], Device.prototype, "willReportState", void 0);
     return Device;

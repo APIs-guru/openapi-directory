@@ -1,0 +1,86 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Money } from "./money";
+import { CompensationRange } from "./compensationrange";
+export var CompensationEntryTypeEnum;
+(function (CompensationEntryTypeEnum) {
+    CompensationEntryTypeEnum["CompensationTypeUnspecified"] = "COMPENSATION_TYPE_UNSPECIFIED";
+    CompensationEntryTypeEnum["Base"] = "BASE";
+    CompensationEntryTypeEnum["Bonus"] = "BONUS";
+    CompensationEntryTypeEnum["SigningBonus"] = "SIGNING_BONUS";
+    CompensationEntryTypeEnum["Equity"] = "EQUITY";
+    CompensationEntryTypeEnum["ProfitSharing"] = "PROFIT_SHARING";
+    CompensationEntryTypeEnum["Commissions"] = "COMMISSIONS";
+    CompensationEntryTypeEnum["Tips"] = "TIPS";
+    CompensationEntryTypeEnum["OtherCompensationType"] = "OTHER_COMPENSATION_TYPE";
+})(CompensationEntryTypeEnum || (CompensationEntryTypeEnum = {}));
+export var CompensationEntryUnitEnum;
+(function (CompensationEntryUnitEnum) {
+    CompensationEntryUnitEnum["CompensationUnitUnspecified"] = "COMPENSATION_UNIT_UNSPECIFIED";
+    CompensationEntryUnitEnum["Hourly"] = "HOURLY";
+    CompensationEntryUnitEnum["Daily"] = "DAILY";
+    CompensationEntryUnitEnum["Weekly"] = "WEEKLY";
+    CompensationEntryUnitEnum["Monthly"] = "MONTHLY";
+    CompensationEntryUnitEnum["Yearly"] = "YEARLY";
+    CompensationEntryUnitEnum["OneTime"] = "ONE_TIME";
+    CompensationEntryUnitEnum["OtherCompensationUnit"] = "OTHER_COMPENSATION_UNIT";
+})(CompensationEntryUnitEnum || (CompensationEntryUnitEnum = {}));
+// CompensationEntry
+/**
+ * A compensation entry that represents one component of compensation, such as base pay, bonus, or other compensation type. Annualization: One compensation entry can be annualized if - it contains valid amount or range. - and its expected_units_per_year is set or can be derived. Its annualized range is determined as (amount or range) times expected_units_per_year.
+**/
+var CompensationEntry = /** @class */ (function (_super) {
+    __extends(CompensationEntry, _super);
+    function CompensationEntry() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=amount" }),
+        __metadata("design:type", Money)
+    ], CompensationEntry.prototype, "amount", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], CompensationEntry.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=expectedUnitsPerYear" }),
+        __metadata("design:type", Number)
+    ], CompensationEntry.prototype, "expectedUnitsPerYear", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=range" }),
+        __metadata("design:type", CompensationRange)
+    ], CompensationEntry.prototype, "range", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=type" }),
+        __metadata("design:type", String)
+    ], CompensationEntry.prototype, "type", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=unit" }),
+        __metadata("design:type", String)
+    ], CompensationEntry.prototype, "unit", void 0);
+    return CompensationEntry;
+}(SpeakeasyBase));
+export { CompensationEntry };

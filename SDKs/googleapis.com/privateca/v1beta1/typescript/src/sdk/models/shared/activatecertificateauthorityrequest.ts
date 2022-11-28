@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubordinateConfig } from "./subordinateconfig";
+
 
 
 // ActivateCertificateAuthorityRequest
@@ -7,12 +8,12 @@ import { SubordinateConfig } from "./subordinateconfig";
  * Request message for CertificateAuthorityService.ActivateCertificateAuthority.
 **/
 export class ActivateCertificateAuthorityRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pemCaCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=pemCaCertificate" })
   pemCaCertificate?: string;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 
-  @Metadata({ data: "json, name=subordinateConfig" })
+  @SpeakeasyMetadata({ data: "json, name=subordinateConfig" })
   subordinateConfig?: SubordinateConfig;
 }

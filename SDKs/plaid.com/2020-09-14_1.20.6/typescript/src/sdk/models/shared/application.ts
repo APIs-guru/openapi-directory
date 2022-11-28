@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Application
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Metadata about the application
 **/
 export class Application extends SpeakeasyBase {
-  @Metadata({ data: "json, name=application_id" })
+  @SpeakeasyMetadata({ data: "json, name=application_id" })
   applicationId: string;
 
-  @Metadata({ data: "json, name=application_url" })
+  @SpeakeasyMetadata({ data: "json, name=application_url" })
   applicationUrl: string;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=logo_url" })
+  @SpeakeasyMetadata({ data: "json, name=logo_url" })
   logoUrl: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=reason_for_access" })
+  @SpeakeasyMetadata({ data: "json, name=reason_for_access" })
   reasonForAccess: string;
 }

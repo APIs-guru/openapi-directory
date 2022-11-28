@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CertificateDeletePathParams = /** @class */ (function (_super) {
     __extends(CertificateDeletePathParams, _super);
     function CertificateDeletePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=thumbprint" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=thumbprint" }),
         __metadata("design:type", String)
     ], CertificateDeletePathParams.prototype, "thumbprint", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=thumbprintAlgorithm" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=thumbprintAlgorithm" }),
         __metadata("design:type", String)
     ], CertificateDeletePathParams.prototype, "thumbprintAlgorithm", void 0);
     return CertificateDeletePathParams;
@@ -45,11 +45,11 @@ var CertificateDeleteQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api-version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" }),
         __metadata("design:type", String)
     ], CertificateDeleteQueryParams.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeout" }),
         __metadata("design:type", Number)
     ], CertificateDeleteQueryParams.prototype, "timeout", void 0);
     return CertificateDeleteQueryParams;
@@ -61,15 +61,15 @@ var CertificateDeleteHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=client-request-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=client-request-id" }),
         __metadata("design:type", String)
     ], CertificateDeleteHeaders.prototype, "clientRequestId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=ocp-date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=ocp-date" }),
         __metadata("design:type", String)
     ], CertificateDeleteHeaders.prototype, "ocpDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=return-client-request-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=return-client-request-id" }),
         __metadata("design:type", Boolean)
     ], CertificateDeleteHeaders.prototype, "returnClientRequestId", void 0);
     return CertificateDeleteHeaders;
@@ -81,15 +81,15 @@ var CertificateDeleteRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CertificateDeletePathParams)
     ], CertificateDeleteRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CertificateDeleteQueryParams)
     ], CertificateDeleteRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CertificateDeleteHeaders)
     ], CertificateDeleteRequest.prototype, "headers", void 0);
     return CertificateDeleteRequest;
@@ -101,19 +101,19 @@ var CertificateDeleteResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CertificateDeleteResponse.prototype, "batchError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CertificateDeleteResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], CertificateDeleteResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CertificateDeleteResponse.prototype, "statusCode", void 0);
     return CertificateDeleteResponse;

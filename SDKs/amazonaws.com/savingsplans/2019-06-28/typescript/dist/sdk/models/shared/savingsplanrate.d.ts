@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CurrencyCodeEnum } from "./currencycodeenum";
 import { SavingsPlanProductTypeEnum } from "./savingsplanproducttypeenum";
 import { SavingsPlanRateServiceCodeEnum } from "./savingsplanrateservicecodeenum";

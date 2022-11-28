@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteContainersNameOrIdPathParams = /** @class */ (function (_super) {
     __extends(DeleteContainersNameOrIdPathParams, _super);
     function DeleteContainersNameOrIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name_or_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name_or_id" }),
         __metadata("design:type", String)
     ], DeleteContainersNameOrIdPathParams.prototype, "nameOrId", void 0);
     return DeleteContainersNameOrIdPathParams;
@@ -41,7 +41,7 @@ var DeleteContainersNameOrIdQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=force" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=force" }),
         __metadata("design:type", Boolean)
     ], DeleteContainersNameOrIdQueryParams.prototype, "force", void 0);
     return DeleteContainersNameOrIdQueryParams;
@@ -53,11 +53,11 @@ var DeleteContainersNameOrIdHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" }),
         __metadata("design:type", String)
     ], DeleteContainersNameOrIdHeaders.prototype, "xAuthProjectId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" }),
         __metadata("design:type", String)
     ], DeleteContainersNameOrIdHeaders.prototype, "xAuthToken", void 0);
     return DeleteContainersNameOrIdHeaders;
@@ -69,15 +69,15 @@ var DeleteContainersNameOrIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteContainersNameOrIdPathParams)
     ], DeleteContainersNameOrIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteContainersNameOrIdQueryParams)
     ], DeleteContainersNameOrIdRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteContainersNameOrIdHeaders)
     ], DeleteContainersNameOrIdRequest.prototype, "headers", void 0);
     return DeleteContainersNameOrIdRequest;
@@ -89,11 +89,11 @@ var DeleteContainersNameOrIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteContainersNameOrIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteContainersNameOrIdResponse.prototype, "statusCode", void 0);
     return DeleteContainersNameOrIdResponse;

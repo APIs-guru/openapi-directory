@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MemberForDate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Constituency" })
+  @SpeakeasyMetadata({ data: "json, name=Constituency" })
   constituency?: string;
 
-  @Metadata({ data: "json, name=ListAs" })
+  @SpeakeasyMetadata({ data: "json, name=ListAs" })
   listAs?: string;
 
-  @Metadata({ data: "json, name=MnisId" })
+  @SpeakeasyMetadata({ data: "json, name=MnisId" })
   mnisId?: number;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Party" })
+  @SpeakeasyMetadata({ data: "json, name=Party" })
   party?: string;
 
-  @Metadata({ data: "json, name=PartyColour" })
+  @SpeakeasyMetadata({ data: "json, name=PartyColour" })
   partyColour?: string;
 
-  @Metadata({ data: "json, name=PartyId" })
+  @SpeakeasyMetadata({ data: "json, name=PartyId" })
   partyId?: number;
 
-  @Metadata({ data: "json, name=PhotoUrl" })
+  @SpeakeasyMetadata({ data: "json, name=PhotoUrl" })
   photoUrl?: string;
 
-  @Metadata({ data: "json, name=PimsId" })
+  @SpeakeasyMetadata({ data: "json, name=PimsId" })
   pimsId?: number;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

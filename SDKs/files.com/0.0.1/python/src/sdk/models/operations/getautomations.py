@@ -19,12 +19,12 @@ class GetAutomationsQueryParams:
 
 @dataclass
 class GetAutomationsRequest:
-    query_params: GetAutomationsQueryParams = field(default=None)
+    query_params: GetAutomationsQueryParams = field()
     
 
 @dataclass
 class GetAutomationsResponse:
+    content_type: str = field()
+    status_code: int = field()
     automation_entities: Optional[List[shared.AutomationEntity]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

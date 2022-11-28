@@ -26,6 +26,8 @@ type IssueCommentSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// IssueComment
+// Comments provide a way for people to collaborate on an issue.
 type IssueComment struct {
 	AuthorAssociation     AuthorAssociationEnum  `json:"author_association"`
 	Body                  *string                `json:"body,omitempty"`

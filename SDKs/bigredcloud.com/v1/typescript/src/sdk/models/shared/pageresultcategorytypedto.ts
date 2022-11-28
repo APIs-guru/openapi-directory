@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CategoryTypeDto } from "./categorytypedto";
 
 
+
 export class PageResultCategoryTypeDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Count" })
+  @SpeakeasyMetadata({ data: "json, name=Count" })
   count?: number;
 
-  @Metadata({ data: "json, name=Items", elemType: shared.CategoryTypeDto })
+  @SpeakeasyMetadata({ data: "json, name=Items", elemType: CategoryTypeDto })
   items?: CategoryTypeDto[];
 
-  @Metadata({ data: "json, name=NextPageLink" })
+  @SpeakeasyMetadata({ data: "json, name=NextPageLink" })
   nextPageLink?: string;
 }

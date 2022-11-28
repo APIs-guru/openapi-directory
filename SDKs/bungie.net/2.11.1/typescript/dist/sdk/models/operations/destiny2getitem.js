@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Destiny2GetItemPathParams = /** @class */ (function (_super) {
     __extends(Destiny2GetItemPathParams, _super);
     function Destiny2GetItemPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" }),
         __metadata("design:type", Number)
     ], Destiny2GetItemPathParams.prototype, "destinyMembershipId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=itemInstanceId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemInstanceId" }),
         __metadata("design:type", Number)
     ], Destiny2GetItemPathParams.prototype, "itemInstanceId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
         __metadata("design:type", Number)
     ], Destiny2GetItemPathParams.prototype, "membershipType", void 0);
     return Destiny2GetItemPathParams;
@@ -49,7 +49,7 @@ var Destiny2GetItemQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=components" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=components" }),
         __metadata("design:type", Array)
     ], Destiny2GetItemQueryParams.prototype, "components", void 0);
     return Destiny2GetItemQueryParams;
@@ -61,11 +61,11 @@ var Destiny2GetItemRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetItemPathParams)
     ], Destiny2GetItemRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetItemQueryParams)
     ], Destiny2GetItemRequest.prototype, "queryParams", void 0);
     return Destiny2GetItemRequest;
@@ -77,15 +77,15 @@ var Destiny2GetItemResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], Destiny2GetItemResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], Destiny2GetItemResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], Destiny2GetItemResponse.prototype, "statusCode", void 0);
     return Destiny2GetItemResponse;

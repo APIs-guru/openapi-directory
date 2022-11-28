@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RepeatInputModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=frequency" })
+  @SpeakeasyMetadata({ data: "json, name=frequency" })
   frequency?: string;
 
-  @Metadata({ data: "json, name=interval" })
+  @SpeakeasyMetadata({ data: "json, name=interval" })
   interval?: number;
 
-  @Metadata({ data: "json, name=monthDay" })
+  @SpeakeasyMetadata({ data: "json, name=monthDay" })
   monthDay?: number;
 
-  @Metadata({ data: "json, name=monthType" })
+  @SpeakeasyMetadata({ data: "json, name=monthType" })
   monthType?: string;
 
-  @Metadata({ data: "json, name=weekdays" })
+  @SpeakeasyMetadata({ data: "json, name=weekdays" })
   weekdays?: string;
 }

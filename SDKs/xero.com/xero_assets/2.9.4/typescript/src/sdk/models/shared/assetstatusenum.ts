@@ -1,7 +1,8 @@
 
 
+
 export enum AssetStatusEnum {
-    Draft = "Draft"
-,    Registered = "Registered"
-,    Disposed = "Disposed"
+    Draft = "Draft",
+    Registered = "Registered",
+    Disposed = "Disposed"
 }

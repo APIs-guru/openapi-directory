@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -16,14 +19,14 @@ class DescribeAccountAuditConfigurationHeaders:
 
 @dataclass
 class DescribeAccountAuditConfigurationRequest:
-    headers: DescribeAccountAuditConfigurationHeaders = field(default=None)
+    headers: DescribeAccountAuditConfigurationHeaders = field()
     
 
 @dataclass
 class DescribeAccountAuditConfigurationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_account_audit_configuration_response: Optional[shared.DescribeAccountAuditConfigurationResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

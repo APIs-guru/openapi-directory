@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CompanySearchNumberPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=country" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=country" })
   country: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=number" })
   number: string;
 }
 
 
 export class CompanySearchNumberQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 }
 
 
 export class CompanySearchNumberSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   userKey: shared.SchemeUserKey;
 }
 
 
 export class CompanySearchNumberRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CompanySearchNumberPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: CompanySearchNumberQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CompanySearchNumberSecurity;
 }
 
 
 export class CompanySearchNumberResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   companySearchNumber200ApplicationJsonAnies?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   companySearchNumberDefaultApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

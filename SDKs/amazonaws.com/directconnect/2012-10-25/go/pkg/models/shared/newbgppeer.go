@@ -1,5 +1,7 @@
 package shared
 
+// NewBgpPeer
+// Information about a new BGP peer.
 type NewBgpPeer struct {
 	AddressFamily   *AddressFamilyEnum `json:"addressFamily,omitempty"`
 	AmazonAddress   *string            `json:"amazonAddress,omitempty"`

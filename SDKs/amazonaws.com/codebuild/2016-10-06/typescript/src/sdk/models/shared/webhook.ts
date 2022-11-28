@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WebhookBuildTypeEnum } from "./webhookbuildtypeenum";
 import { WebhookFilter } from "./webhookfilter";
+
 
 
 // Webhook
@@ -9,24 +9,24 @@ import { WebhookFilter } from "./webhookfilter";
  * Information about a webhook that connects repository events to a build project in CodeBuild.
 **/
 export class Webhook extends SpeakeasyBase {
-  @Metadata({ data: "json, name=branchFilter" })
+  @SpeakeasyMetadata({ data: "json, name=branchFilter" })
   branchFilter?: string;
 
-  @Metadata({ data: "json, name=buildType" })
+  @SpeakeasyMetadata({ data: "json, name=buildType" })
   buildType?: WebhookBuildTypeEnum;
 
-  @Metadata({ data: "json, name=filterGroups", elemType: shared.WebhookFilter, elemDepth: 2 })
+  @SpeakeasyMetadata({ data: "json, name=filterGroups", elemType: WebhookFilter, elemDepth: 2 })
   filterGroups?: WebhookFilter[][];
 
-  @Metadata({ data: "json, name=lastModifiedSecret" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedSecret" })
   lastModifiedSecret?: Date;
 
-  @Metadata({ data: "json, name=payloadUrl" })
+  @SpeakeasyMetadata({ data: "json, name=payloadUrl" })
   payloadUrl?: string;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

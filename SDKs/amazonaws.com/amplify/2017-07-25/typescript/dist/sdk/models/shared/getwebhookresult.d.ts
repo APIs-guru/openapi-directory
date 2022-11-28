@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Webhook } from "./webhook";
 /**
  *  The result structure for the get webhook request.

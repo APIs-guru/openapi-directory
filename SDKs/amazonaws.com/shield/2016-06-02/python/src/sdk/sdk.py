@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/shield/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/shield/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def associate_drt_log_bucket(self, request: operations.AssociateDrtLogBucketRequest) -> operations.AssociateDrtLogBucketResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Authorizes the Shield Response Team (SRT) to access the specified Amazon S3 bucket containing log data such as Application Load Balancer access logs, CloudFront logs, or logs from third party sources. You can associate up to 10 Amazon S3 buckets with your subscription.</p> <p>To use the services of the SRT and make an <code>AssociateDRTLogBucket</code> request, you must be subscribed to the <a href=\"https://aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"https://aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.AssociateDRTLogBucket"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -91,22 +120,22 @@ class SDK:
 
     
     def associate_drt_role(self, request: operations.AssociateDrtRoleRequest) -> operations.AssociateDrtRoleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Authorizes the Shield Response Team (SRT) using the specified role, to access your Amazon Web Services account to assist with DDoS attack mitigation during potential attacks. This enables the SRT to inspect your WAF configuration and create or update WAF rules and web ACLs.</p> <p>You can associate only one <code>RoleArn</code> with your subscription. If you submit an <code>AssociateDRTRole</code> request for an account that already has an associated role, the new <code>RoleArn</code> will replace the existing <code>RoleArn</code>. </p> <p>Prior to making the <code>AssociateDRTRole</code> request, you must attach the <a href=\"https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy\">AWSShieldDRTAccessPolicy</a> managed policy to the role you will specify in the request. For more information see <a href=\" https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html\">Attaching and Detaching IAM Policies</a>. The role must also trust the service principal <code> drt.shield.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html\">IAM JSON Policy Elements: Principal</a>.</p> <p>The SRT will have access only to your WAF and Shield resources. By submitting this request, you authorize the SRT to inspect your WAF and Shield configuration and create and update WAF rules and web ACLs on your behalf. The SRT takes these actions only if explicitly authorized by you.</p> <p>You must have the <code>iam:PassRole</code> permission to make an <code>AssociateDRTRole</code> request. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html\">Granting a User Permissions to Pass a Role to an Amazon Web Services Service</a>. </p> <p>To use the services of the SRT and make an <code>AssociateDRTRole</code> request, you must be subscribed to the <a href=\"https://aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"https://aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.AssociateDRTRole"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -145,22 +174,22 @@ class SDK:
 
     
     def associate_health_check(self, request: operations.AssociateHealthCheckRequest) -> operations.AssociateHealthCheckResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Adds health-based detection to the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your Amazon Web Services resource to improve responsiveness and accuracy in attack detection and mitigation. </p> <p>You define the health check in Route 53 and then associate it with your Shield Advanced protection. For more information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option\">Shield Advanced Health-Based Detection</a> in the <i>WAF Developer Guide</i>. </p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.AssociateHealthCheck"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -195,22 +224,22 @@ class SDK:
 
     
     def associate_proactive_engagement_details(self, request: operations.AssociateProactiveEngagementDetailsRequest) -> operations.AssociateProactiveEngagementDetailsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Initializes proactive engagement and sets the list of contacts for the Shield Response Team (SRT) to use. You must provide at least one phone number in the emergency contact list. </p> <p>After you have initialized proactive engagement using this call, to disable or enable proactive engagement, use the calls <code>DisableProactiveEngagement</code> and <code>EnableProactiveEngagement</code>. </p> <note> <p>This call defines the list of email addresses and phone numbers that the SRT can use to contact you for escalations to the SRT and to initiate proactive customer support.</p> <p>The contacts that you provide in the request replace any contacts that were already defined. If you already have contacts defined and want to use them, retrieve the list using <code>DescribeEmergencyContactSettings</code> and then provide it to this call. </p> </note>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.AssociateProactiveEngagementDetails"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -245,22 +274,22 @@ class SDK:
 
     
     def create_protection(self, request: operations.CreateProtectionRequest) -> operations.CreateProtectionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Enables Shield Advanced for a specific Amazon Web Services resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, Global Accelerator accelerator, Elastic IP Address, or an Amazon Route 53 hosted zone.</p> <p>You can add protection to only a single resource with each CreateProtection request. If you want to add protection to multiple resources at once, use the <a href=\"https://console.aws.amazon.com/waf/\">WAF console</a>. For more information see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html\">Getting Started with Shield Advanced</a> and <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html\">Add Shield Advanced Protection to more Amazon Web Services Resources</a>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.CreateProtection"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -307,22 +336,22 @@ class SDK:
 
     
     def create_protection_group(self, request: operations.CreateProtectionGroupRequest) -> operations.CreateProtectionGroupResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a grouping of protected resources so they can be handled as a collective. This resource grouping improves the accuracy of detection and reduces false positives. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.CreateProtectionGroup"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -361,22 +390,22 @@ class SDK:
 
     
     def create_subscription(self, request: operations.CreateSubscriptionRequest) -> operations.CreateSubscriptionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Activates Shield Advanced for an account.</p> <p>When you initally create a subscription, your subscription is set to be automatically renewed at the end of the existing subscription period. You can change this by submitting an <code>UpdateSubscription</code> request. </p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.CreateSubscription"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -399,22 +428,22 @@ class SDK:
 
     
     def delete_protection(self, request: operations.DeleteProtectionRequest) -> operations.DeleteProtectionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an Shield Advanced <a>Protection</a>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.DeleteProtection"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -441,22 +470,22 @@ class SDK:
 
     
     def delete_protection_group(self, request: operations.DeleteProtectionGroupRequest) -> operations.DeleteProtectionGroupResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes the specified protection group.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.DeleteProtectionGroup"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -483,22 +512,22 @@ class SDK:
 
     
     def delete_subscription(self, request: operations.DeleteSubscriptionRequest) -> operations.DeleteSubscriptionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes Shield Advanced from an account. Shield Advanced requires a 1-year subscription commitment. You cannot delete a subscription prior to the completion of that commitment. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.DeleteSubscription"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -525,22 +554,22 @@ class SDK:
 
     
     def describe_attack(self, request: operations.DescribeAttackRequest) -> operations.DescribeAttackResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describes the details of a DDoS attack. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.DescribeAttack"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -563,22 +592,22 @@ class SDK:
 
     
     def describe_attack_statistics(self, request: operations.DescribeAttackStatisticsRequest) -> operations.DescribeAttackStatisticsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Provides information about the number and type of attacks Shield has detected in the last year for all resources that belong to your account, regardless of whether you've defined Shield protections for them. This operation is available to Shield customers as well as to Shield Advanced customers.</p> <p>The operation returns data for the time range of midnight UTC, one year ago, to midnight UTC, today. For example, if the current time is <code>2020-10-26 15:39:32 PDT</code>, equal to <code>2020-10-26 22:39:32 UTC</code>, then the time range for the attack data returned is from <code>2019-10-26 00:00:00 UTC</code> to <code>2020-10-26 00:00:00 UTC</code>. </p> <p>The time range indicates the period covered by the attack statistics data items.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.DescribeAttackStatistics"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -597,22 +626,22 @@ class SDK:
 
     
     def describe_drt_access(self, request: operations.DescribeDrtAccessRequest) -> operations.DescribeDrtAccessResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the current role and list of Amazon S3 log buckets used by the Shield Response Team (SRT) to access your Amazon Web Services account while assisting with attack mitigation.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.DescribeDRTAccess"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -635,22 +664,22 @@ class SDK:
 
     
     def describe_emergency_contact_settings(self, request: operations.DescribeEmergencyContactSettingsRequest) -> operations.DescribeEmergencyContactSettingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you if you have proactive engagement enabled, for escalations to the SRT and to initiate proactive customer support.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.DescribeEmergencyContactSettings"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -673,22 +702,22 @@ class SDK:
 
     
     def describe_protection(self, request: operations.DescribeProtectionRequest) -> operations.DescribeProtectionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the details of a <a>Protection</a> object.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.DescribeProtection"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -715,22 +744,22 @@ class SDK:
 
     
     def describe_protection_group(self, request: operations.DescribeProtectionGroupRequest) -> operations.DescribeProtectionGroupResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the specification for the specified protection group.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.DescribeProtectionGroup"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -753,22 +782,22 @@ class SDK:
 
     
     def describe_subscription(self, request: operations.DescribeSubscriptionRequest) -> operations.DescribeSubscriptionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Provides details about the Shield Advanced subscription for an account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.DescribeSubscription"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -791,22 +820,22 @@ class SDK:
 
     
     def disable_proactive_engagement(self, request: operations.DisableProactiveEngagementRequest) -> operations.DisableProactiveEngagementResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes authorization from the Shield Response Team (SRT) to notify contacts about escalations to the SRT and to initiate proactive customer support.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.DisableProactiveEngagement"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -841,22 +870,22 @@ class SDK:
 
     
     def disassociate_drt_log_bucket(self, request: operations.DisassociateDrtLogBucketRequest) -> operations.DisassociateDrtLogBucketResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Removes the Shield Response Team's (SRT) access to the specified Amazon S3 bucket containing the logs that you shared previously.</p> <p>To make a <code>DisassociateDRTLogBucket</code> request, you must be subscribed to the <a href=\"https://aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"https://aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>. However, if you are not subscribed to one of these support plans, but had been previously and had granted the SRT access to your account, you can submit a <code>DisassociateDRTLogBucket</code> request to remove this access.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.DisassociateDRTLogBucket"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -895,22 +924,22 @@ class SDK:
 
     
     def disassociate_drt_role(self, request: operations.DisassociateDrtRoleRequest) -> operations.DisassociateDrtRoleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Removes the Shield Response Team's (SRT) access to your Amazon Web Services account.</p> <p>To make a <code>DisassociateDRTRole</code> request, you must be subscribed to the <a href=\"https://aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"https://aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>. However, if you are not subscribed to one of these support plans, but had been previously and had granted the SRT access to your account, you can submit a <code>DisassociateDRTRole</code> request to remove this access.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.DisassociateDRTRole"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -941,22 +970,22 @@ class SDK:
 
     
     def disassociate_health_check(self, request: operations.DisassociateHealthCheckRequest) -> operations.DisassociateHealthCheckResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Removes health-based detection from the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your Amazon Web Services resource to improve responsiveness and accuracy in attack detection and mitigation. </p> <p>You define the health check in Route 53 and then associate or disassociate it with your Shield Advanced protection. For more information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option\">Shield Advanced Health-Based Detection</a> in the <i>WAF Developer Guide</i>. </p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.DisassociateHealthCheck"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -987,22 +1016,22 @@ class SDK:
 
     
     def enable_proactive_engagement(self, request: operations.EnableProactiveEngagementRequest) -> operations.EnableProactiveEngagementResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Authorizes the Shield Response Team (SRT) to use email and phone to notify contacts about escalations to the SRT and to initiate proactive customer support.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.EnableProactiveEngagement"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1037,22 +1066,22 @@ class SDK:
 
     
     def get_subscription_state(self, request: operations.GetSubscriptionStateRequest) -> operations.GetSubscriptionStateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the <code>SubscriptionState</code>, either <code>Active</code> or <code>Inactive</code>.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.GetSubscriptionState"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1071,24 +1100,23 @@ class SDK:
 
     
     def list_attacks(self, request: operations.ListAttacksRequest) -> operations.ListAttacksResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns all ongoing DDoS attacks or all DDoS attacks during a specified time period.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.ListAttacks"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1115,24 +1143,23 @@ class SDK:
 
     
     def list_protection_groups(self, request: operations.ListProtectionGroupsRequest) -> operations.ListProtectionGroupsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the <a>ProtectionGroup</a> objects for the account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.ListProtectionGroups"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1159,24 +1186,23 @@ class SDK:
 
     
     def list_protections(self, request: operations.ListProtectionsRequest) -> operations.ListProtectionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists all <a>Protection</a> objects for the account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.ListProtections"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1203,24 +1229,23 @@ class SDK:
 
     
     def list_resources_in_protection_group(self, request: operations.ListResourcesInProtectionGroupRequest) -> operations.ListResourcesInProtectionGroupResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the resources that are included in the protection group. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.ListResourcesInProtectionGroup"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1247,22 +1272,22 @@ class SDK:
 
     
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about Amazon Web Services tags for a specified Amazon Resource Name (ARN) in Shield.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.ListTagsForResource"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1289,22 +1314,22 @@ class SDK:
 
     
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds or updates tags for a resource in Shield.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.TagResource"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1335,22 +1360,22 @@ class SDK:
 
     
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes tags from a resource in Shield.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.UntagResource"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1381,22 +1406,22 @@ class SDK:
 
     
     def update_emergency_contact_settings(self, request: operations.UpdateEmergencyContactSettingsRequest) -> operations.UpdateEmergencyContactSettingsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the details of the list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you if you have proactive engagement enabled, for escalations to the SRT and to initiate proactive customer support.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.UpdateEmergencyContactSettings"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1427,22 +1452,22 @@ class SDK:
 
     
     def update_protection_group(self, request: operations.UpdateProtectionGroupRequest) -> operations.UpdateProtectionGroupResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates an existing protection group. A protection group is a grouping of protected resources so they can be handled as a collective. This resource grouping improves the accuracy of detection and reduces false positives. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.UpdateProtectionGroup"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1473,22 +1498,22 @@ class SDK:
 
     
     def update_subscription(self, request: operations.UpdateSubscriptionRequest) -> operations.UpdateSubscriptionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the details of an existing subscription. Only enter values for parameters you want to change. Empty parameters are not updated.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/#X-Amz-Target=AWSShield_20160616.UpdateSubscription"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

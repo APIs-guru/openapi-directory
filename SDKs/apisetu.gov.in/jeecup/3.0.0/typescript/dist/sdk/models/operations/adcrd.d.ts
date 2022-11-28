@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class AdcrdRequestBodyCertificateParameters extends SpeakeasyBase {
     applicationNo: string;
@@ -18,10 +18,6 @@ export declare class AdcrdRequestBody extends SpeakeasyBase {
 export declare class AdcrdSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class AdcrdRequest extends SpeakeasyBase {
-    request?: AdcrdRequestBody;
-    security: AdcrdSecurity;
 }
 export declare enum Adcrd400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -104,6 +100,10 @@ export declare enum Adcrd504ApplicationJsonErrorDescriptionEnum {
 export declare class Adcrd504ApplicationJson extends SpeakeasyBase {
     error?: Adcrd504ApplicationJsonErrorEnum;
     errorDescription?: Adcrd504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class AdcrdRequest extends SpeakeasyBase {
+    request?: AdcrdRequestBody;
+    security: AdcrdSecurity;
 }
 export declare class AdcrdResponse extends SpeakeasyBase {
     contentType: string;

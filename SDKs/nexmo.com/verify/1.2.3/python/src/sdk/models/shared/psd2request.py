@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class Psd2RequestLgEnum(str, Enum):
     EN_GB = "en-gb"
@@ -27,15 +28,15 @@ class Psd2RequestLgEnum(str, Enum):
 
 @dataclass
 class Psd2Request:
-    amount: float = field(default=None, metadata={'form': { 'field_name': 'amount' }})
-    api_key: str = field(default=None, metadata={'form': { 'field_name': 'api_key' }})
-    api_secret: str = field(default=None, metadata={'form': { 'field_name': 'api_secret' }})
+    amount: float = field(metadata={'form': { 'field_name': 'amount' }})
+    api_key: str = field(metadata={'form': { 'field_name': 'api_key' }})
+    api_secret: str = field(metadata={'form': { 'field_name': 'api_secret' }})
+    number: str = field(metadata={'form': { 'field_name': 'number' }})
+    payee: str = field(metadata={'form': { 'field_name': 'payee' }})
     code_length: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'code_length' }})
     country: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'country' }})
     lg: Optional[Psd2RequestLgEnum] = field(default=None, metadata={'form': { 'field_name': 'lg' }})
     next_event_wait: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'next_event_wait' }})
-    number: str = field(default=None, metadata={'form': { 'field_name': 'number' }})
-    payee: str = field(default=None, metadata={'form': { 'field_name': 'payee' }})
     pin_expiry: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'pin_expiry' }})
     workflow_id: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'workflow_id' }})
     

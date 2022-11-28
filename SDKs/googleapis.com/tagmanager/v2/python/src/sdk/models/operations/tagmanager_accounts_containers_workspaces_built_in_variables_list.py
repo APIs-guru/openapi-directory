@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesBuiltInVariablesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class TagmanagerAccountsContainersWorkspacesBuiltInVariablesListQueryParams:
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesBuiltInVariablesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesBuiltInVariablesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class TagmanagerAccountsContainersWorkspacesBuiltInVariablesListSecurity:
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesBuiltInVariablesListRequest:
-    path_params: TagmanagerAccountsContainersWorkspacesBuiltInVariablesListPathParams = field(default=None)
-    query_params: TagmanagerAccountsContainersWorkspacesBuiltInVariablesListQueryParams = field(default=None)
-    security: TagmanagerAccountsContainersWorkspacesBuiltInVariablesListSecurity = field(default=None)
+    path_params: TagmanagerAccountsContainersWorkspacesBuiltInVariablesListPathParams = field()
+    query_params: TagmanagerAccountsContainersWorkspacesBuiltInVariablesListQueryParams = field()
+    security: TagmanagerAccountsContainersWorkspacesBuiltInVariablesListSecurity = field()
     
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesBuiltInVariablesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_enabled_built_in_variables_response: Optional[shared.ListEnabledBuiltInVariablesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

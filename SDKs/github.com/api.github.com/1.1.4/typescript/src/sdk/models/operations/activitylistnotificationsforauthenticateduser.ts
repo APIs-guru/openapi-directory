@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ActivityListNotificationsForAuthenticatedUserQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=all" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=all" })
   all?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=before" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=before" })
   before?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=participating" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=participating" })
   participating?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=since" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=since" })
   since?: string;
 }
 
 
 export class ActivityListNotificationsForAuthenticatedUserRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ActivityListNotificationsForAuthenticatedUserQueryParams;
 }
 
 
 export class ActivityListNotificationsForAuthenticatedUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata({ elemType: shared.Thread })
+  @SpeakeasyMetadata({ elemType: shared.Thread })
   threads?: shared.Thread[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

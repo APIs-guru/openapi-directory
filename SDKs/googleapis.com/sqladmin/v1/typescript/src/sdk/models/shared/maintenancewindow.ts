@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum MaintenanceWindowUpdateTrackEnum {
-    SqlUpdateTrackUnspecified = "SQL_UPDATE_TRACK_UNSPECIFIED"
-,    Canary = "canary"
-,    Stable = "stable"
+    SqlUpdateTrackUnspecified = "SQL_UPDATE_TRACK_UNSPECIFIED",
+    Canary = "canary",
+    Stable = "stable"
 }
 
 
@@ -12,15 +13,15 @@ export enum MaintenanceWindowUpdateTrackEnum {
  * Maintenance window. This specifies when a Cloud SQL instance is restarted for system maintenance purposes.
 **/
 export class MaintenanceWindow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=day" })
+  @SpeakeasyMetadata({ data: "json, name=day" })
   day?: number;
 
-  @Metadata({ data: "json, name=hour" })
+  @SpeakeasyMetadata({ data: "json, name=hour" })
   hour?: number;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=updateTrack" })
+  @SpeakeasyMetadata({ data: "json, name=updateTrack" })
   updateTrack?: MaintenanceWindowUpdateTrackEnum;
 }

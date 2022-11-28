@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetDeregisterTransitGatewayMulticastGroupSourcesActionEnum;
 (function (GetDeregisterTransitGatewayMulticastGroupSourcesActionEnum) {
     GetDeregisterTransitGatewayMulticastGroupSourcesActionEnum["DeregisterTransitGatewayMulticastGroupSources"] = "DeregisterTransitGatewayMulticastGroupSources";
@@ -37,27 +37,27 @@ var GetDeregisterTransitGatewayMulticastGroupSourcesQueryParams = /** @class */ 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetDeregisterTransitGatewayMulticastGroupSourcesQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
         __metadata("design:type", Boolean)
     ], GetDeregisterTransitGatewayMulticastGroupSourcesQueryParams.prototype, "dryRun", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=GroupIpAddress" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=GroupIpAddress" }),
         __metadata("design:type", String)
     ], GetDeregisterTransitGatewayMulticastGroupSourcesQueryParams.prototype, "groupIpAddress", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NetworkInterfaceIds" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NetworkInterfaceIds" }),
         __metadata("design:type", Array)
     ], GetDeregisterTransitGatewayMulticastGroupSourcesQueryParams.prototype, "networkInterfaceIds", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TransitGatewayMulticastDomainId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TransitGatewayMulticastDomainId" }),
         __metadata("design:type", String)
     ], GetDeregisterTransitGatewayMulticastGroupSourcesQueryParams.prototype, "transitGatewayMulticastDomainId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetDeregisterTransitGatewayMulticastGroupSourcesQueryParams.prototype, "version", void 0);
     return GetDeregisterTransitGatewayMulticastGroupSourcesQueryParams;
@@ -69,31 +69,31 @@ var GetDeregisterTransitGatewayMulticastGroupSourcesHeaders = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetDeregisterTransitGatewayMulticastGroupSourcesHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetDeregisterTransitGatewayMulticastGroupSourcesHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetDeregisterTransitGatewayMulticastGroupSourcesHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetDeregisterTransitGatewayMulticastGroupSourcesHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetDeregisterTransitGatewayMulticastGroupSourcesHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetDeregisterTransitGatewayMulticastGroupSourcesHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetDeregisterTransitGatewayMulticastGroupSourcesHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetDeregisterTransitGatewayMulticastGroupSourcesHeaders;
@@ -105,11 +105,11 @@ var GetDeregisterTransitGatewayMulticastGroupSourcesRequest = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDeregisterTransitGatewayMulticastGroupSourcesQueryParams)
     ], GetDeregisterTransitGatewayMulticastGroupSourcesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDeregisterTransitGatewayMulticastGroupSourcesHeaders)
     ], GetDeregisterTransitGatewayMulticastGroupSourcesRequest.prototype, "headers", void 0);
     return GetDeregisterTransitGatewayMulticastGroupSourcesRequest;
@@ -121,15 +121,15 @@ var GetDeregisterTransitGatewayMulticastGroupSourcesResponse = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetDeregisterTransitGatewayMulticastGroupSourcesResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDeregisterTransitGatewayMulticastGroupSourcesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDeregisterTransitGatewayMulticastGroupSourcesResponse.prototype, "statusCode", void 0);
     return GetDeregisterTransitGatewayMulticastGroupSourcesResponse;

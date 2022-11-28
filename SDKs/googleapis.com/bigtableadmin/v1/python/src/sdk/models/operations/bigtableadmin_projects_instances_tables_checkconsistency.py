@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BigtableadminProjectsInstancesTablesCheckConsistencyPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,32 +26,32 @@ class BigtableadminProjectsInstancesTablesCheckConsistencyQueryParams:
 
 @dataclass
 class BigtableadminProjectsInstancesTablesCheckConsistencySecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BigtableadminProjectsInstancesTablesCheckConsistencySecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BigtableadminProjectsInstancesTablesCheckConsistencySecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BigtableadminProjectsInstancesTablesCheckConsistencySecurityOption4:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BigtableadminProjectsInstancesTablesCheckConsistencySecurityOption5:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -64,15 +65,15 @@ class BigtableadminProjectsInstancesTablesCheckConsistencySecurity:
 
 @dataclass
 class BigtableadminProjectsInstancesTablesCheckConsistencyRequest:
-    path_params: BigtableadminProjectsInstancesTablesCheckConsistencyPathParams = field(default=None)
-    query_params: BigtableadminProjectsInstancesTablesCheckConsistencyQueryParams = field(default=None)
+    path_params: BigtableadminProjectsInstancesTablesCheckConsistencyPathParams = field()
+    query_params: BigtableadminProjectsInstancesTablesCheckConsistencyQueryParams = field()
+    security: BigtableadminProjectsInstancesTablesCheckConsistencySecurity = field()
     request: Optional[shared.CheckConsistencyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: BigtableadminProjectsInstancesTablesCheckConsistencySecurity = field(default=None)
     
 
 @dataclass
 class BigtableadminProjectsInstancesTablesCheckConsistencyResponse:
+    content_type: str = field()
+    status_code: int = field()
     check_consistency_response: Optional[shared.CheckConsistencyResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

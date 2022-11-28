@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Column } from "./column";
 import { StorageDescriptor } from "./storagedescriptor";
 import { TableIdentifier } from "./tableidentifier";
+
 
 
 // Table
@@ -10,60 +10,60 @@ import { TableIdentifier } from "./tableidentifier";
  * Represents a collection of related data organized in columns and rows.
 **/
 export class Table extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CatalogId" })
+  @SpeakeasyMetadata({ data: "json, name=CatalogId" })
   catalogId?: string;
 
-  @Metadata({ data: "json, name=CreateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreateTime" })
   createTime?: Date;
 
-  @Metadata({ data: "json, name=CreatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedBy" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=DatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseName" })
   databaseName?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=IsRegisteredWithLakeFormation" })
+  @SpeakeasyMetadata({ data: "json, name=IsRegisteredWithLakeFormation" })
   isRegisteredWithLakeFormation?: boolean;
 
-  @Metadata({ data: "json, name=LastAccessTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastAccessTime" })
   lastAccessTime?: Date;
 
-  @Metadata({ data: "json, name=LastAnalyzedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastAnalyzedTime" })
   lastAnalyzedTime?: Date;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=Owner" })
+  @SpeakeasyMetadata({ data: "json, name=Owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=Parameters" })
+  @SpeakeasyMetadata({ data: "json, name=Parameters" })
   parameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=PartitionKeys", elemType: shared.Column })
+  @SpeakeasyMetadata({ data: "json, name=PartitionKeys", elemType: Column })
   partitionKeys?: Column[];
 
-  @Metadata({ data: "json, name=Retention" })
+  @SpeakeasyMetadata({ data: "json, name=Retention" })
   retention?: number;
 
-  @Metadata({ data: "json, name=StorageDescriptor" })
+  @SpeakeasyMetadata({ data: "json, name=StorageDescriptor" })
   storageDescriptor?: StorageDescriptor;
 
-  @Metadata({ data: "json, name=TableType" })
+  @SpeakeasyMetadata({ data: "json, name=TableType" })
   tableType?: string;
 
-  @Metadata({ data: "json, name=TargetTable" })
+  @SpeakeasyMetadata({ data: "json, name=TargetTable" })
   targetTable?: TableIdentifier;
 
-  @Metadata({ data: "json, name=UpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateTime" })
   updateTime?: Date;
 
-  @Metadata({ data: "json, name=ViewExpandedText" })
+  @SpeakeasyMetadata({ data: "json, name=ViewExpandedText" })
   viewExpandedText?: string;
 
-  @Metadata({ data: "json, name=ViewOriginalText" })
+  @SpeakeasyMetadata({ data: "json, name=ViewOriginalText" })
   viewOriginalText?: string;
 }

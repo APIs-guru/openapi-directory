@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NodePermissions } from "./nodepermissions";
 
+
 export enum RoomGroupNewGroupMemberAcceptanceEnum {
-    Autoallow = "autoallow"
-,    Pending = "pending"
+    Autoallow = "autoallow",
+    Pending = "pending"
 }
 
 
@@ -12,18 +13,18 @@ export enum RoomGroupNewGroupMemberAcceptanceEnum {
  * Group information
 **/
 export class RoomGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=isGranted" })
+  @SpeakeasyMetadata({ data: "json, name=isGranted" })
   isGranted: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=newGroupMemberAcceptance" })
+  @SpeakeasyMetadata({ data: "json, name=newGroupMemberAcceptance" })
   newGroupMemberAcceptance?: RoomGroupNewGroupMemberAcceptanceEnum;
 
-  @Metadata({ data: "json, name=permissions" })
+  @SpeakeasyMetadata({ data: "json, name=permissions" })
   permissions?: NodePermissions;
 }

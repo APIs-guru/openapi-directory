@@ -4,10 +4,6 @@ type DeletePadUsingPostQueryParams struct {
 	PadID *string `queryParam:"style=form,explode=true,name=padID"`
 }
 
-type DeletePadUsingPostRequest struct {
-	QueryParams DeletePadUsingPostQueryParams
-}
-
 type DeletePadUsingPost200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -30,6 +26,10 @@ type DeletePadUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type DeletePadUsingPostRequest struct {
+	QueryParams DeletePadUsingPostQueryParams
 }
 
 type DeletePadUsingPostResponse struct {

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Principal
+// Describes a principal for use with Resource Access Manager.
 type Principal struct {
 	CreationTime     *time.Time `json:"creationTime,omitempty"`
 	External         *bool      `json:"external,omitempty"`

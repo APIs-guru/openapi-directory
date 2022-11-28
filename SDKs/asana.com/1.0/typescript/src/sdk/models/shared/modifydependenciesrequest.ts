@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ModifyDependenciesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dependencies" })
+  @SpeakeasyMetadata({ data: "json, name=dependencies" })
   dependencies?: string[];
 }

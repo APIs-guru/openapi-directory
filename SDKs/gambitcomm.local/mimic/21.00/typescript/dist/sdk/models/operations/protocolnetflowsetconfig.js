@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolNetflowSetConfigPathParams = /** @class */ (function (_super) {
     __extends(ProtocolNetflowSetConfigPathParams, _super);
     function ProtocolNetflowSetConfigPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolNetflowSetConfigPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=argument" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=argument" }),
         __metadata("design:type", String)
     ], ProtocolNetflowSetConfigPathParams.prototype, "argument", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=value" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=value" }),
         __metadata("design:type", String)
     ], ProtocolNetflowSetConfigPathParams.prototype, "value", void 0);
     return ProtocolNetflowSetConfigPathParams;
@@ -49,7 +49,7 @@ var ProtocolNetflowSetConfigRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolNetflowSetConfigPathParams)
     ], ProtocolNetflowSetConfigRequest.prototype, "pathParams", void 0);
     return ProtocolNetflowSetConfigRequest;
@@ -61,15 +61,15 @@ var ProtocolNetflowSetConfigResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolNetflowSetConfigResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolNetflowSetConfigResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolNetflowSetConfigResponse.prototype, "protocolNetflowSetConfig200ApplicationJsonString", void 0);
     return ProtocolNetflowSetConfigResponse;

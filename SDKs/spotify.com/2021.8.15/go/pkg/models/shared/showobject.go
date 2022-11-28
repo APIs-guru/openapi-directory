@@ -1,5 +1,8 @@
 package shared
 
+// ShowObjectEpisodes
+// A list of the show's episodes.
+// https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
 type ShowObjectEpisodes struct {
 	Href     *string                   `json:"href,omitempty"`
 	Items    []SimplifiedEpisodeObject `json:"items,omitempty"`
@@ -10,6 +13,9 @@ type ShowObjectEpisodes struct {
 	Total    *int32                    `json:"total,omitempty"`
 }
 
+// ShowObject
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-showobject - Find more info on the official Spotify Web API Reference
 type ShowObject struct {
 	AvailableMarkets   []string            `json:"available_markets,omitempty"`
 	Copyrights         []CopyrightObject   `json:"copyrights,omitempty"`

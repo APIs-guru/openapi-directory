@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FacilityAttributes } from "./facilityattributes";
+
 
 export enum FacilityTypeEnum {
     VaFacilities = "va_facilities"
@@ -11,12 +12,12 @@ export enum FacilityTypeEnum {
  * JSON API-compliant object describing a VA facility
 **/
 export class Facility extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes: FacilityAttributes;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: FacilityTypeEnum;
 }

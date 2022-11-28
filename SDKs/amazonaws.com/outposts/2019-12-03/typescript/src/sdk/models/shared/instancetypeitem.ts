@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InstanceTypeItem
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about an instance type.
 **/
 export class InstanceTypeItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceType" })
   instanceType?: string;
 }

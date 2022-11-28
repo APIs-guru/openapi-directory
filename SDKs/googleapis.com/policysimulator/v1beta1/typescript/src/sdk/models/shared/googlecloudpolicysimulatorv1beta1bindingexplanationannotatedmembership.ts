@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudPolicysimulatorV1beta1BindingExplanationAnnotatedMembershipMembershipEnum {
-    MembershipUnspecified = "MEMBERSHIP_UNSPECIFIED"
-,    MembershipIncluded = "MEMBERSHIP_INCLUDED"
-,    MembershipNotIncluded = "MEMBERSHIP_NOT_INCLUDED"
-,    MembershipUnknownInfoDenied = "MEMBERSHIP_UNKNOWN_INFO_DENIED"
-,    MembershipUnknownUnsupported = "MEMBERSHIP_UNKNOWN_UNSUPPORTED"
+    MembershipUnspecified = "MEMBERSHIP_UNSPECIFIED",
+    MembershipIncluded = "MEMBERSHIP_INCLUDED",
+    MembershipNotIncluded = "MEMBERSHIP_NOT_INCLUDED",
+    MembershipUnknownInfoDenied = "MEMBERSHIP_UNKNOWN_INFO_DENIED",
+    MembershipUnknownUnsupported = "MEMBERSHIP_UNKNOWN_UNSUPPORTED"
 }
 
 export enum GoogleCloudPolicysimulatorV1beta1BindingExplanationAnnotatedMembershipRelevanceEnum {
-    HeuristicRelevanceUnspecified = "HEURISTIC_RELEVANCE_UNSPECIFIED"
-,    Normal = "NORMAL"
-,    High = "HIGH"
+    HeuristicRelevanceUnspecified = "HEURISTIC_RELEVANCE_UNSPECIFIED",
+    Normal = "NORMAL",
+    High = "HIGH"
 }
 
 
@@ -20,9 +21,9 @@ export enum GoogleCloudPolicysimulatorV1beta1BindingExplanationAnnotatedMembersh
  * Details about whether the binding includes the principal.
 **/
 export class GoogleCloudPolicysimulatorV1beta1BindingExplanationAnnotatedMembership extends SpeakeasyBase {
-  @Metadata({ data: "json, name=membership" })
+  @SpeakeasyMetadata({ data: "json, name=membership" })
   membership?: GoogleCloudPolicysimulatorV1beta1BindingExplanationAnnotatedMembershipMembershipEnum;
 
-  @Metadata({ data: "json, name=relevance" })
+  @SpeakeasyMetadata({ data: "json, name=relevance" })
   relevance?: GoogleCloudPolicysimulatorV1beta1BindingExplanationAnnotatedMembershipRelevanceEnum;
 }

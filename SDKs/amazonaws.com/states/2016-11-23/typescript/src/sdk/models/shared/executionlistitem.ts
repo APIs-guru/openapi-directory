@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExecutionStatusEnum } from "./executionstatusenum";
+
 
 
 // ExecutionListItem
@@ -7,21 +8,21 @@ import { ExecutionStatusEnum } from "./executionstatusenum";
  * Contains details about an execution.
 **/
 export class ExecutionListItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=executionArn" })
+  @SpeakeasyMetadata({ data: "json, name=executionArn" })
   executionArn: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate: Date;
 
-  @Metadata({ data: "json, name=stateMachineArn" })
+  @SpeakeasyMetadata({ data: "json, name=stateMachineArn" })
   stateMachineArn: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: ExecutionStatusEnum;
 
-  @Metadata({ data: "json, name=stopDate" })
+  @SpeakeasyMetadata({ data: "json, name=stopDate" })
   stopDate?: Date;
 }

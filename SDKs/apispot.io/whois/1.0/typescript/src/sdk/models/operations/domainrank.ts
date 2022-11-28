@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DomainRankPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=domain" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=domain" })
   domain: string;
 }
 
 
-export class DomainRankRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DomainRankPathParams;
-}
-
-
 export class DomainRank200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rank" })
+  @SpeakeasyMetadata({ data: "json, name=rank" })
   rank?: number;
 }
 
 
+export class DomainRankRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DomainRankPathParams;
+}
+
+
 export class DomainRankResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   domainRank200ApplicationJsonObject?: DomainRank200ApplicationJson;
 }

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersInsertionOrdersDeletePathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
-    insertion_order_id: str = field(default=None, metadata={'path_param': { 'field_name': 'insertionOrderId', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    insertion_order_id: str = field(metadata={'path_param': { 'field_name': 'insertionOrderId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class DisplayvideoAdvertisersInsertionOrdersDeleteQueryParams:
 
 @dataclass
 class DisplayvideoAdvertisersInsertionOrdersDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersInsertionOrdersDeleteRequest:
-    path_params: DisplayvideoAdvertisersInsertionOrdersDeletePathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersInsertionOrdersDeleteQueryParams = field(default=None)
-    security: DisplayvideoAdvertisersInsertionOrdersDeleteSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersInsertionOrdersDeletePathParams = field()
+    query_params: DisplayvideoAdvertisersInsertionOrdersDeleteQueryParams = field()
+    security: DisplayvideoAdvertisersInsertionOrdersDeleteSecurity = field()
     
 
 @dataclass
 class DisplayvideoAdvertisersInsertionOrdersDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

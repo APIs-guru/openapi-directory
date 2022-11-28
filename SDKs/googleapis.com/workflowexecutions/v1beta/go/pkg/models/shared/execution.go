@@ -18,6 +18,17 @@ const (
 	ExecutionStateEnumCancelled        ExecutionStateEnum = "CANCELLED"
 )
 
+// ExecutionInput
+// A running instance of a [Workflow](/workflows/docs/reference/rest/v1beta/projects.locations.workflows).
+type ExecutionInput struct {
+	Argument     *string                    `json:"argument,omitempty"`
+	CallLogLevel *ExecutionCallLogLevelEnum `json:"callLogLevel,omitempty"`
+	Error        *Error                     `json:"error,omitempty"`
+	Status       *Status                    `json:"status,omitempty"`
+}
+
+// Execution
+// A running instance of a [Workflow](/workflows/docs/reference/rest/v1beta/projects.locations.workflows).
 type Execution struct {
 	Argument           *string                    `json:"argument,omitempty"`
 	CallLogLevel       *ExecutionCallLogLevelEnum `json:"callLogLevel,omitempty"`

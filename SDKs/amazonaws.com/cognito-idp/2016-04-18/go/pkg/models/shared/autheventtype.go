@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AuthEventType
+// The authentication event type.
 type AuthEventType struct {
 	ChallengeResponses []ChallengeResponseType `json:"ChallengeResponses,omitempty"`
 	CreationDate       *time.Time              `json:"CreationDate,omitempty"`

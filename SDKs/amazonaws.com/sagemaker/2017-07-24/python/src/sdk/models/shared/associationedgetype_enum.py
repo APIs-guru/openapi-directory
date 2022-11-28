@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class AssociationEdgeTypeEnum(str, Enum):
     CONTRIBUTED_TO = "ContributedTo"

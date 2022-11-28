@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ParallelDataProperties
+// The properties of a parallel data resource.
 type ParallelDataProperties struct {
 	Arn                       *string                 `json:"Arn,omitempty"`
 	CreatedAt                 *time.Time              `json:"CreatedAt,omitempty"`

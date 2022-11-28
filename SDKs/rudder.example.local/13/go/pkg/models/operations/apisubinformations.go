@@ -8,10 +8,6 @@ type APISubInformationsPathParams struct {
 	SectionID string `pathParam:"style=simple,explode=false,name=sectionId"`
 }
 
-type APISubInformationsRequest struct {
-	PathParams APISubInformationsPathParams
-}
-
 type APISubInformations200ApplicationJSONActionEnum string
 
 const (
@@ -35,6 +31,10 @@ type APISubInformations200ApplicationJSON struct {
 	Action APISubInformations200ApplicationJSONActionEnum `json:"action"`
 	Data   APISubInformations200ApplicationJSONData       `json:"data"`
 	Result APISubInformations200ApplicationJSONResultEnum `json:"result"`
+}
+
+type APISubInformationsRequest struct {
+	PathParams APISubInformationsPathParams
 }
 
 type APISubInformationsResponse struct {

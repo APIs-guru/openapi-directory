@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class AccountCtrlGetLocationsByAccountIDPathParams:
-    account_id: float = field(default=None, metadata={'path_param': { 'field_name': 'account_id', 'style': 'simple', 'explode': False }})
+    account_id: float = field(metadata={'path_param': { 'field_name': 'account_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AccountCtrlGetLocationsByAccountIDSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class AccountCtrlGetLocationsByAccountIDRequest:
-    path_params: AccountCtrlGetLocationsByAccountIDPathParams = field(default=None)
-    security: AccountCtrlGetLocationsByAccountIDSecurity = field(default=None)
+    path_params: AccountCtrlGetLocationsByAccountIDPathParams = field()
+    security: AccountCtrlGetLocationsByAccountIDSecurity = field()
     
 
 @dataclass
 class AccountCtrlGetLocationsByAccountIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     locations_hal_response: Optional[shared.LocationsHalResponse] = field(default=None)
-    status_code: int = field(default=None)
     

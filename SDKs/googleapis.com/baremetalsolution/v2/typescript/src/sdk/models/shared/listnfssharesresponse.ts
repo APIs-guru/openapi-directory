@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NfsShare } from "./nfsshare";
+
 
 
 // ListNfsSharesResponse
@@ -8,12 +8,12 @@ import { NfsShare } from "./nfsshare";
  * Response message containing the list of NFS shares.
 **/
 export class ListNfsSharesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=nfsShares", elemType: shared.NfsShare })
+  @SpeakeasyMetadata({ data: "json, name=nfsShares", elemType: NfsShare })
   nfsShares?: NfsShare[];
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

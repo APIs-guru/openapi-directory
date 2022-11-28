@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Sites = /** @class */ (function (_super) {
     __extends(Sites, _super);
     function Sites() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Active" }),
+        SpeakeasyMetadata({ data: "json, name=Active" }),
         __metadata("design:type", Array)
     ], Sites.prototype, "active", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", Array)
     ], Sites.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", Array)
     ], Sites.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=Lattitude" }),
+        SpeakeasyMetadata({ data: "json, name=Lattitude" }),
         __metadata("design:type", Array)
     ], Sites.prototype, "lattitude", void 0);
     __decorate([
-        Metadata({ data: "json, name=Longitude" }),
+        SpeakeasyMetadata({ data: "json, name=Longitude" }),
         __metadata("design:type", Array)
     ], Sites.prototype, "longitude", void 0);
     __decorate([
-        Metadata({ data: "json, name=SiteId" }),
+        SpeakeasyMetadata({ data: "json, name=SiteId" }),
         __metadata("design:type", Array)
     ], Sites.prototype, "siteId", void 0);
     return Sites;

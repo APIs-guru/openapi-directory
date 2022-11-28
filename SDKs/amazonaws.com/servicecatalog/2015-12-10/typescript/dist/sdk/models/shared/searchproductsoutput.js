@@ -22,23 +22,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ProductViewAggregationValue } from "./productviewaggregationvalue";
+import { ProductViewSummary } from "./productviewsummary";
 var SearchProductsOutput = /** @class */ (function (_super) {
     __extends(SearchProductsOutput, _super);
     function SearchProductsOutput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=NextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextPageToken" }),
         __metadata("design:type", String)
     ], SearchProductsOutput.prototype, "nextPageToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProductViewAggregations", elemType: shared.ProductViewAggregationValue, elemDepth: 2 }),
+        SpeakeasyMetadata({ data: "json, name=ProductViewAggregations", elemType: ProductViewAggregationValue, elemDepth: 2 }),
         __metadata("design:type", Map)
     ], SearchProductsOutput.prototype, "productViewAggregations", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProductViewSummaries", elemType: shared.ProductViewSummary }),
+        SpeakeasyMetadata({ data: "json, name=ProductViewSummaries", elemType: ProductViewSummary }),
         __metadata("design:type", Array)
     ], SearchProductsOutput.prototype, "productViewSummaries", void 0);
     return SearchProductsOutput;

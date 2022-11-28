@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ActivityStartedEventDetails
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains details about the start of an activity during an execution.
 **/
 export class ActivityStartedEventDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=workerName" })
+  @SpeakeasyMetadata({ data: "json, name=workerName" })
   workerName?: string;
 }

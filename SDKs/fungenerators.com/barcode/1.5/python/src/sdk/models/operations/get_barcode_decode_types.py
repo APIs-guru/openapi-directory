@@ -1,19 +1,19 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class GetBarcodeDecodeTypesSecurity:
-    x_fungenerators_api_secret: shared.SchemeXFungeneratorsAPISecret = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    x_fungenerators_api_secret: shared.SchemeXFungeneratorsAPISecret = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetBarcodeDecodeTypesRequest:
-    security: GetBarcodeDecodeTypesSecurity = field(default=None)
+    security: GetBarcodeDecodeTypesSecurity = field()
     
 
 @dataclass
 class GetBarcodeDecodeTypesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

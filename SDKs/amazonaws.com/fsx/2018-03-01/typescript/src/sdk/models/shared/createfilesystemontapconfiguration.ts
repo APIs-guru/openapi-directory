@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OntapDeploymentTypeEnum } from "./ontapdeploymenttypeenum";
 import { DiskIopsConfiguration } from "./diskiopsconfiguration";
+
 
 
 // CreateFileSystemOntapConfiguration
@@ -8,33 +9,33 @@ import { DiskIopsConfiguration } from "./diskiopsconfiguration";
  * The ONTAP configuration properties of the FSx for NetApp ONTAP file system that you are creating.
 **/
 export class CreateFileSystemOntapConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutomaticBackupRetentionDays" })
+  @SpeakeasyMetadata({ data: "json, name=AutomaticBackupRetentionDays" })
   automaticBackupRetentionDays?: number;
 
-  @Metadata({ data: "json, name=DailyAutomaticBackupStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=DailyAutomaticBackupStartTime" })
   dailyAutomaticBackupStartTime?: string;
 
-  @Metadata({ data: "json, name=DeploymentType" })
+  @SpeakeasyMetadata({ data: "json, name=DeploymentType" })
   deploymentType: OntapDeploymentTypeEnum;
 
-  @Metadata({ data: "json, name=DiskIopsConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=DiskIopsConfiguration" })
   diskIopsConfiguration?: DiskIopsConfiguration;
 
-  @Metadata({ data: "json, name=EndpointIpAddressRange" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointIpAddressRange" })
   endpointIpAddressRange?: string;
 
-  @Metadata({ data: "json, name=FsxAdminPassword" })
+  @SpeakeasyMetadata({ data: "json, name=FsxAdminPassword" })
   fsxAdminPassword?: string;
 
-  @Metadata({ data: "json, name=PreferredSubnetId" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredSubnetId" })
   preferredSubnetId?: string;
 
-  @Metadata({ data: "json, name=RouteTableIds" })
+  @SpeakeasyMetadata({ data: "json, name=RouteTableIds" })
   routeTableIds?: string[];
 
-  @Metadata({ data: "json, name=ThroughputCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=ThroughputCapacity" })
   throughputCapacity: number;
 
-  @Metadata({ data: "json, name=WeeklyMaintenanceStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=WeeklyMaintenanceStartTime" })
   weeklyMaintenanceStartTime?: string;
 }

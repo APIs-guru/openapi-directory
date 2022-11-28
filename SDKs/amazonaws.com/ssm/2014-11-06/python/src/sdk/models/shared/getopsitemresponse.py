@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import opsitem
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetOpsItemResponse:
-    ops_item: Optional[opsitem.OpsItem] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OpsItem' }})
+    ops_item: Optional[OpsItem] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OpsItem') }})
     

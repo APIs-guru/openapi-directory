@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DetectMultipartRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   objectDetectionRequest?: shared.ObjectDetectionRequest;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   objectDetectionRequest1?: shared.ObjectDetectionRequest;
 }
 
 
 export class DetectMultipartSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerToken: shared.SchemeBearerToken;
 }
 
 
 export class DetectMultipartRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: DetectMultipartRequests;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DetectMultipartSecurity;
 }
 
 
 export class DetectMultipartResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   objectDetectionResponse?: shared.ObjectDetectionResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AccessEndpoint } from "./accessendpoint";
 import { ApplicationSettings } from "./applicationsettings";
 import { StackAttributeEnum } from "./stackattributeenum";

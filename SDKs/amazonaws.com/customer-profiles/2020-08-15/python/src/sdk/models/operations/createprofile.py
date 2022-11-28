@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateProfilePathParams:
-    domain_name: str = field(default=None, metadata={'path_param': { 'field_name': 'DomainName', 'style': 'simple', 'explode': False }})
+    domain_name: str = field(metadata={'path_param': { 'field_name': 'DomainName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,31 +28,39 @@ class CreateProfileHeaders:
 @dataclass_json
 @dataclass
 class CreateProfileRequestBodyAddress:
-    address1: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address1' }})
-    address2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address2' }})
-    address3: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address3' }})
-    address4: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address4' }})
-    city: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'City' }})
-    country: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Country' }})
-    county: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'County' }})
-    postal_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PostalCode' }})
-    province: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Province' }})
-    state: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'State' }})
+    r"""CreateProfileRequestBodyAddress
+    A generic address associated with the customer that is not mailing, shipping, or billing.
+    """
+    
+    address1: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Address1') }})
+    address2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Address2') }})
+    address3: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Address3') }})
+    address4: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Address4') }})
+    city: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('City') }})
+    country: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Country') }})
+    county: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('County') }})
+    postal_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PostalCode') }})
+    province: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Province') }})
+    state: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('State') }})
     
 
 @dataclass_json
 @dataclass
 class CreateProfileRequestBodyBillingAddress:
-    address1: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address1' }})
-    address2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address2' }})
-    address3: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address3' }})
-    address4: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address4' }})
-    city: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'City' }})
-    country: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Country' }})
-    county: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'County' }})
-    postal_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PostalCode' }})
-    province: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Province' }})
-    state: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'State' }})
+    r"""CreateProfileRequestBodyBillingAddress
+    A generic address associated with the customer that is not mailing, shipping, or billing.
+    """
+    
+    address1: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Address1') }})
+    address2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Address2') }})
+    address3: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Address3') }})
+    address4: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Address4') }})
+    city: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('City') }})
+    country: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Country') }})
+    county: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('County') }})
+    postal_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PostalCode') }})
+    province: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Province') }})
+    state: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('State') }})
     
 class CreateProfileRequestBodyGenderEnum(str, Enum):
     MALE = "MALE"
@@ -58,16 +71,20 @@ class CreateProfileRequestBodyGenderEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateProfileRequestBodyMailingAddress:
-    address1: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address1' }})
-    address2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address2' }})
-    address3: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address3' }})
-    address4: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address4' }})
-    city: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'City' }})
-    country: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Country' }})
-    county: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'County' }})
-    postal_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PostalCode' }})
-    province: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Province' }})
-    state: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'State' }})
+    r"""CreateProfileRequestBodyMailingAddress
+    A generic address associated with the customer that is not mailing, shipping, or billing.
+    """
+    
+    address1: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Address1') }})
+    address2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Address2') }})
+    address3: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Address3') }})
+    address4: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Address4') }})
+    city: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('City') }})
+    country: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Country') }})
+    county: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('County') }})
+    postal_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PostalCode') }})
+    province: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Province') }})
+    state: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('State') }})
     
 class CreateProfileRequestBodyPartyTypeEnum(str, Enum):
     INDIVIDUAL = "INDIVIDUAL"
@@ -78,59 +95,63 @@ class CreateProfileRequestBodyPartyTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateProfileRequestBodyShippingAddress:
-    address1: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address1' }})
-    address2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address2' }})
-    address3: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address3' }})
-    address4: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address4' }})
-    city: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'City' }})
-    country: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Country' }})
-    county: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'County' }})
-    postal_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PostalCode' }})
-    province: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Province' }})
-    state: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'State' }})
+    r"""CreateProfileRequestBodyShippingAddress
+    A generic address associated with the customer that is not mailing, shipping, or billing.
+    """
+    
+    address1: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Address1') }})
+    address2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Address2') }})
+    address3: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Address3') }})
+    address4: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Address4') }})
+    city: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('City') }})
+    country: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Country') }})
+    county: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('County') }})
+    postal_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PostalCode') }})
+    province: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Province') }})
+    state: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('State') }})
     
 
 @dataclass_json
 @dataclass
 class CreateProfileRequestBody:
-    account_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccountNumber' }})
-    additional_information: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AdditionalInformation' }})
-    address: Optional[CreateProfileRequestBodyAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address' }})
-    attributes: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Attributes' }})
-    billing_address: Optional[CreateProfileRequestBodyBillingAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BillingAddress' }})
-    birth_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BirthDate' }})
-    business_email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BusinessEmailAddress' }})
-    business_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BusinessName' }})
-    business_phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BusinessPhoneNumber' }})
-    email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EmailAddress' }})
-    first_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FirstName' }})
-    gender: Optional[CreateProfileRequestBodyGenderEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Gender' }})
-    home_phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HomePhoneNumber' }})
-    last_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastName' }})
-    mailing_address: Optional[CreateProfileRequestBodyMailingAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MailingAddress' }})
-    middle_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MiddleName' }})
-    mobile_phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MobilePhoneNumber' }})
-    party_type: Optional[CreateProfileRequestBodyPartyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PartyType' }})
-    personal_email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PersonalEmailAddress' }})
-    phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PhoneNumber' }})
-    shipping_address: Optional[CreateProfileRequestBodyShippingAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ShippingAddress' }})
+    account_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AccountNumber') }})
+    additional_information: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AdditionalInformation') }})
+    address: Optional[CreateProfileRequestBodyAddress] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Address') }})
+    attributes: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Attributes') }})
+    billing_address: Optional[CreateProfileRequestBodyBillingAddress] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BillingAddress') }})
+    birth_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BirthDate') }})
+    business_email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BusinessEmailAddress') }})
+    business_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BusinessName') }})
+    business_phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BusinessPhoneNumber') }})
+    email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EmailAddress') }})
+    first_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FirstName') }})
+    gender: Optional[CreateProfileRequestBodyGenderEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Gender') }})
+    home_phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('HomePhoneNumber') }})
+    last_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('LastName') }})
+    mailing_address: Optional[CreateProfileRequestBodyMailingAddress] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MailingAddress') }})
+    middle_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MiddleName') }})
+    mobile_phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MobilePhoneNumber') }})
+    party_type: Optional[CreateProfileRequestBodyPartyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PartyType') }})
+    personal_email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PersonalEmailAddress') }})
+    phone_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PhoneNumber') }})
+    shipping_address: Optional[CreateProfileRequestBodyShippingAddress] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ShippingAddress') }})
     
 
 @dataclass
 class CreateProfileRequest:
-    path_params: CreateProfilePathParams = field(default=None)
-    headers: CreateProfileHeaders = field(default=None)
-    request: CreateProfileRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateProfileHeaders = field()
+    path_params: CreateProfilePathParams = field()
+    request: CreateProfileRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateProfileResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_profile_response: Optional[shared.CreateProfileResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

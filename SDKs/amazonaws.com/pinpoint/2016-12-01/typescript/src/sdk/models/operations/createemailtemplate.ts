@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateEmailTemplatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=template-name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=template-name" })
   templateName: string;
 }
 
 
 export class CreateEmailTemplateHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,69 +38,69 @@ export class CreateEmailTemplateHeaders extends SpeakeasyBase {
  * Specifies the content and settings for a message template that can be used in messages that are sent through the email channel.
 **/
 export class CreateEmailTemplateRequestBodyEmailTemplateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DefaultSubstitutions" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultSubstitutions" })
   defaultSubstitutions?: string;
 
-  @Metadata({ data: "json, name=HtmlPart" })
+  @SpeakeasyMetadata({ data: "json, name=HtmlPart" })
   htmlPart?: string;
 
-  @Metadata({ data: "json, name=RecommenderId" })
+  @SpeakeasyMetadata({ data: "json, name=RecommenderId" })
   recommenderId?: string;
 
-  @Metadata({ data: "json, name=Subject" })
+  @SpeakeasyMetadata({ data: "json, name=Subject" })
   subject?: string;
 
-  @Metadata({ data: "json, name=TemplateDescription" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateDescription" })
   templateDescription?: string;
 
-  @Metadata({ data: "json, name=TextPart" })
+  @SpeakeasyMetadata({ data: "json, name=TextPart" })
   textPart?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }
 
 
 export class CreateEmailTemplateRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EmailTemplateRequest" })
+  @SpeakeasyMetadata({ data: "json, name=EmailTemplateRequest" })
   emailTemplateRequest: CreateEmailTemplateRequestBodyEmailTemplateRequest;
 }
 
 
 export class CreateEmailTemplateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateEmailTemplatePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateEmailTemplateHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateEmailTemplateRequestBody;
 }
 
 
 export class CreateEmailTemplateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createEmailTemplateResponse?: shared.CreateEmailTemplateResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   forbiddenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   methodNotAllowedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

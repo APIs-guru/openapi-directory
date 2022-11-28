@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
@@ -15,17 +18,17 @@ class DisassociateFromAdministratorAccountHeaders:
 
 @dataclass
 class DisassociateFromAdministratorAccountRequest:
-    headers: DisassociateFromAdministratorAccountHeaders = field(default=None)
+    headers: DisassociateFromAdministratorAccountHeaders = field()
     
 
 @dataclass
 class DisassociateFromAdministratorAccountResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     disassociate_from_administrator_account_response: Optional[dict[str, Any]] = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

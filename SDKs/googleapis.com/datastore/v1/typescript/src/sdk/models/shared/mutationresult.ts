@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Key } from "./key";
+
 
 
 // MutationResult
@@ -7,15 +8,15 @@ import { Key } from "./key";
  * The result of applying a mutation.
 **/
 export class MutationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conflictDetected" })
+  @SpeakeasyMetadata({ data: "json, name=conflictDetected" })
   conflictDetected?: boolean;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: Key;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum GoogleAnalyticsConnectorOperatorEnum {
-    Projection = "PROJECTION"
-,    Between = "BETWEEN"
+    Projection = "PROJECTION",
+    Between = "BETWEEN"
 }

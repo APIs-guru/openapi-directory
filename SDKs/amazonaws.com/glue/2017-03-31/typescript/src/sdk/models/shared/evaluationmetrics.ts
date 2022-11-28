@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FindMatchesMetrics } from "./findmatchesmetrics";
 import { TransformTypeEnum } from "./transformtypeenum";
+
 
 
 // EvaluationMetrics
@@ -8,9 +9,9 @@ import { TransformTypeEnum } from "./transformtypeenum";
  * Evaluation metrics provide an estimate of the quality of your machine learning transform.
 **/
 export class EvaluationMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FindMatchesMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=FindMatchesMetrics" })
   findMatchesMetrics?: FindMatchesMetrics;
 
-  @Metadata({ data: "json, name=TransformType" })
+  @SpeakeasyMetadata({ data: "json, name=TransformType" })
   transformType: TransformTypeEnum;
 }

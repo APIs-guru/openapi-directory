@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoscalingLimits } from "./autoscalinglimits";
 import { AutoscalingTargets } from "./autoscalingtargets";
+
 
 
 // ClusterAutoscalingConfig
@@ -8,9 +9,9 @@ import { AutoscalingTargets } from "./autoscalingtargets";
  * Autoscaling config for a cluster.
 **/
 export class ClusterAutoscalingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoscalingLimits" })
+  @SpeakeasyMetadata({ data: "json, name=autoscalingLimits" })
   autoscalingLimits?: AutoscalingLimits;
 
-  @Metadata({ data: "json, name=autoscalingTargets" })
+  @SpeakeasyMetadata({ data: "json, name=autoscalingTargets" })
   autoscalingTargets?: AutoscalingTargets;
 }

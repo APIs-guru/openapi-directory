@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Image } from "./image";
 
+
 export enum ImageCreateResultStatusEnum {
-    Ok = "OK"
-,    OkDuplicate = "OKDuplicate"
-,    ErrorSource = "ErrorSource"
-,    ErrorImageFormat = "ErrorImageFormat"
-,    ErrorImageSize = "ErrorImageSize"
-,    ErrorStorage = "ErrorStorage"
-,    ErrorLimitExceed = "ErrorLimitExceed"
-,    ErrorTagLimitExceed = "ErrorTagLimitExceed"
-,    ErrorRegionLimitExceed = "ErrorRegionLimitExceed"
-,    ErrorUnknown = "ErrorUnknown"
+    Ok = "OK",
+    OkDuplicate = "OKDuplicate",
+    ErrorSource = "ErrorSource",
+    ErrorImageFormat = "ErrorImageFormat",
+    ErrorImageSize = "ErrorImageSize",
+    ErrorStorage = "ErrorStorage",
+    ErrorLimitExceed = "ErrorLimitExceed",
+    ErrorTagLimitExceed = "ErrorTagLimitExceed",
+    ErrorRegionLimitExceed = "ErrorRegionLimitExceed",
+    ErrorUnknown = "ErrorUnknown"
 }
 
 
 export class ImageCreateResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: Image;
 
-  @Metadata({ data: "json, name=sourceUrl" })
+  @SpeakeasyMetadata({ data: "json, name=sourceUrl" })
   sourceUrl?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ImageCreateResultStatusEnum;
 }

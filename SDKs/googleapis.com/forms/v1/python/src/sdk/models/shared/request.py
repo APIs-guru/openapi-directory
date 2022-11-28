@@ -1,21 +1,24 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import createitemrequest
-from . import deleteitemrequest
-from . import moveitemrequest
-from . import updateforminforequest
-from . import updateitemrequest
-from . import updatesettingsrequest
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class Request:
-    create_item: Optional[createitemrequest.CreateItemRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createItem' }})
-    delete_item: Optional[deleteitemrequest.DeleteItemRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deleteItem' }})
-    move_item: Optional[moveitemrequest.MoveItemRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'moveItem' }})
-    update_form_info: Optional[updateforminforequest.UpdateFormInfoRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateFormInfo' }})
-    update_item: Optional[updateitemrequest.UpdateItemRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateItem' }})
-    update_settings: Optional[updatesettingsrequest.UpdateSettingsRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateSettings' }})
+class RequestInput:
+    r"""RequestInput
+    The kinds of update requests that can be made.
+    """
+    
+    create_item: Optional[CreateItemRequestInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createItem') }})
+    delete_item: Optional[DeleteItemRequest] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deleteItem') }})
+    move_item: Optional[MoveItemRequest] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('moveItem') }})
+    update_form_info: Optional[UpdateFormInfoRequestInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateFormInfo') }})
+    update_item: Optional[UpdateItemRequestInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateItem') }})
+    update_settings: Optional[UpdateSettingsRequest] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateSettings') }})
     

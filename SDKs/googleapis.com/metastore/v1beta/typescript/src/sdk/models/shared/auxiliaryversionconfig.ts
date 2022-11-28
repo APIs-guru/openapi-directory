@@ -1,5 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NetworkConfig } from "./networkconfig";
+import { NetworkConfigInput } from "./networkconfig";
+
 
 
 // AuxiliaryVersionConfig
@@ -7,12 +9,28 @@ import { NetworkConfig } from "./networkconfig";
  * Configuration information for the auxiliary service versions.
 **/
 export class AuxiliaryVersionConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configOverrides" })
+  @SpeakeasyMetadata({ data: "json, name=configOverrides" })
   configOverrides?: Map<string, string>;
 
-  @Metadata({ data: "json, name=networkConfig" })
+  @SpeakeasyMetadata({ data: "json, name=networkConfig" })
   networkConfig?: NetworkConfig;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
+  version?: string;
+}
+
+
+// AuxiliaryVersionConfigInput
+/** 
+ * Configuration information for the auxiliary service versions.
+**/
+export class AuxiliaryVersionConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=configOverrides" })
+  configOverrides?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=networkConfig" })
+  networkConfig?: NetworkConfigInput;
+
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

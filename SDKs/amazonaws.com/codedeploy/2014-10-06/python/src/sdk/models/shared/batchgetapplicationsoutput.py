@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import applicationinfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchGetApplicationsOutput:
-    applications_info: Optional[List[applicationinfo.ApplicationInfo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applicationsInfo' }})
+    r"""BatchGetApplicationsOutput
+    Represents the output of a <code>BatchGetApplications</code> operation.
+    """
+    
+    applications_info: Optional[List[ApplicationInfo]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('applicationsInfo') }})
     

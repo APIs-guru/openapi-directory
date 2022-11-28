@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AchievementRevealResponseCurrentStateEnum {
-    RevealAchievementStateUnspecified = "REVEAL_ACHIEVEMENT_STATE_UNSPECIFIED"
-,    Revealed = "REVEALED"
-,    Unlocked = "UNLOCKED"
+    RevealAchievementStateUnspecified = "REVEAL_ACHIEVEMENT_STATE_UNSPECIFIED",
+    Revealed = "REVEALED",
+    Unlocked = "UNLOCKED"
 }
 
 
@@ -12,9 +13,9 @@ export enum AchievementRevealResponseCurrentStateEnum {
  * An achievement reveal response
 **/
 export class AchievementRevealResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currentState" })
+  @SpeakeasyMetadata({ data: "json, name=currentState" })
   currentState?: AchievementRevealResponseCurrentStateEnum;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

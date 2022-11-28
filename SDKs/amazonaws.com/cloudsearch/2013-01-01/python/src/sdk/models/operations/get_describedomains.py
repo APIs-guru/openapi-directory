@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeDomainsActionEnum(str, Enum):
     DESCRIBE_DOMAINS = "DescribeDomains"
@@ -10,9 +14,9 @@ class GetDescribeDomainsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeDomainsQueryParams:
-    action: GetDescribeDomainsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeDomainsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeDomainsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     domain_names: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'DomainNames', 'style': 'form', 'explode': True }})
-    version: GetDescribeDomainsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDescribeDomainsHeaders:
 
 @dataclass
 class GetDescribeDomainsRequest:
-    query_params: GetDescribeDomainsQueryParams = field(default=None)
-    headers: GetDescribeDomainsHeaders = field(default=None)
+    headers: GetDescribeDomainsHeaders = field()
+    query_params: GetDescribeDomainsQueryParams = field()
     
 
 @dataclass
 class GetDescribeDomainsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

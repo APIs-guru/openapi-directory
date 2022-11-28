@@ -1,11 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class RelativeDateRange:
-    duration_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'durationDays' }})
-    offset_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'offsetDays' }})
+    r"""RelativeDateRange
+    A relative date range, specified by an offset and a duration. The supported range of dates begins 30 days before today and ends today, for example, the limits for these values are: offset_days >= 0 duration_days >= 1 offset_days + duration_days <= 30
+    """
+    
+    duration_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('durationDays') }})
+    offset_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('offsetDays') }})
     

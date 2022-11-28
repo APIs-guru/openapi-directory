@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteSettingPathParams = /** @class */ (function (_super) {
     __extends(DeleteSettingPathParams, _super);
     function DeleteSettingPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=settingId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=settingId" }),
         __metadata("design:type", Number)
     ], DeleteSettingPathParams.prototype, "settingId", void 0);
     return DeleteSettingPathParams;
@@ -41,7 +41,7 @@ var DeleteSettingRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteSettingPathParams)
     ], DeleteSettingRequest.prototype, "pathParams", void 0);
     return DeleteSettingRequest;
@@ -53,11 +53,11 @@ var DeleteSettingResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteSettingResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteSettingResponse.prototype, "statusCode", void 0);
     return DeleteSettingResponse;

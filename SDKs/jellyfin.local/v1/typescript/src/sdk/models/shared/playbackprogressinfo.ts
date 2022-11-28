@@ -1,73 +1,73 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { BaseItemDto } from "./baseitemdto";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { BaseItemDtoInput } from "./baseitemdto";
 import { QueueItem } from "./queueitem";
 import { PlayMethodEnum } from "./playmethodenum";
 import { RepeatModeEnum } from "./repeatmodeenum";
 
 
-// PlaybackProgressInfo
+
+// PlaybackProgressInfoInput
 /** 
  * Class PlaybackProgressInfo.
 **/
-export class PlaybackProgressInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AspectRatio" })
+export class PlaybackProgressInfoInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=AspectRatio" })
   aspectRatio?: string;
 
-  @Metadata({ data: "json, name=AudioStreamIndex" })
+  @SpeakeasyMetadata({ data: "json, name=AudioStreamIndex" })
   audioStreamIndex?: number;
 
-  @Metadata({ data: "json, name=Brightness" })
+  @SpeakeasyMetadata({ data: "json, name=Brightness" })
   brightness?: number;
 
-  @Metadata({ data: "json, name=CanSeek" })
+  @SpeakeasyMetadata({ data: "json, name=CanSeek" })
   canSeek?: boolean;
 
-  @Metadata({ data: "json, name=IsMuted" })
+  @SpeakeasyMetadata({ data: "json, name=IsMuted" })
   isMuted?: boolean;
 
-  @Metadata({ data: "json, name=IsPaused" })
+  @SpeakeasyMetadata({ data: "json, name=IsPaused" })
   isPaused?: boolean;
 
-  @Metadata({ data: "json, name=Item" })
-  item?: BaseItemDto;
+  @SpeakeasyMetadata({ data: "json, name=Item" })
+  item?: BaseItemDtoInput;
 
-  @Metadata({ data: "json, name=ItemId" })
+  @SpeakeasyMetadata({ data: "json, name=ItemId" })
   itemId?: string;
 
-  @Metadata({ data: "json, name=LiveStreamId" })
+  @SpeakeasyMetadata({ data: "json, name=LiveStreamId" })
   liveStreamId?: string;
 
-  @Metadata({ data: "json, name=MediaSourceId" })
+  @SpeakeasyMetadata({ data: "json, name=MediaSourceId" })
   mediaSourceId?: string;
 
-  @Metadata({ data: "json, name=NowPlayingQueue", elemType: shared.QueueItem })
+  @SpeakeasyMetadata({ data: "json, name=NowPlayingQueue", elemType: QueueItem })
   nowPlayingQueue?: QueueItem[];
 
-  @Metadata({ data: "json, name=PlayMethod" })
+  @SpeakeasyMetadata({ data: "json, name=PlayMethod" })
   playMethod?: PlayMethodEnum;
 
-  @Metadata({ data: "json, name=PlaySessionId" })
+  @SpeakeasyMetadata({ data: "json, name=PlaySessionId" })
   playSessionId?: string;
 
-  @Metadata({ data: "json, name=PlaybackStartTimeTicks" })
+  @SpeakeasyMetadata({ data: "json, name=PlaybackStartTimeTicks" })
   playbackStartTimeTicks?: number;
 
-  @Metadata({ data: "json, name=PlaylistItemId" })
+  @SpeakeasyMetadata({ data: "json, name=PlaylistItemId" })
   playlistItemId?: string;
 
-  @Metadata({ data: "json, name=PositionTicks" })
+  @SpeakeasyMetadata({ data: "json, name=PositionTicks" })
   positionTicks?: number;
 
-  @Metadata({ data: "json, name=RepeatMode" })
+  @SpeakeasyMetadata({ data: "json, name=RepeatMode" })
   repeatMode?: RepeatModeEnum;
 
-  @Metadata({ data: "json, name=SessionId" })
+  @SpeakeasyMetadata({ data: "json, name=SessionId" })
   sessionId?: string;
 
-  @Metadata({ data: "json, name=SubtitleStreamIndex" })
+  @SpeakeasyMetadata({ data: "json, name=SubtitleStreamIndex" })
   subtitleStreamIndex?: number;
 
-  @Metadata({ data: "json, name=VolumeLevel" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeLevel" })
   volumeLevel?: number;
 }

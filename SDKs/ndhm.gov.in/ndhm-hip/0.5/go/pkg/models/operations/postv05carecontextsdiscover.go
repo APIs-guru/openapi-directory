@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var PostV05CareContextsDiscoverServers = []string{
+var PostV05CareContextsDiscoverServerList = []string{
 	"https://your-hrp-server.com",
 }
 

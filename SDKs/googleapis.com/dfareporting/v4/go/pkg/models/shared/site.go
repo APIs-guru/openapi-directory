@@ -1,5 +1,7 @@
 package shared
 
+// Site
+// Contains properties of a site.
 type Site struct {
 	AccountID                     *string            `json:"accountId,omitempty"`
 	Approved                      *bool              `json:"approved,omitempty"`

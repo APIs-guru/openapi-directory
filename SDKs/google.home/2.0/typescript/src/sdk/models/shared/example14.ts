@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Example14 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=display_string" })
+  @SpeakeasyMetadata({ data: "json, name=display_string" })
   displayString: string;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset: number;
 
-  @Metadata({ data: "json, name=timezone" })
+  @SpeakeasyMetadata({ data: "json, name=timezone" })
   timezone: string;
 }

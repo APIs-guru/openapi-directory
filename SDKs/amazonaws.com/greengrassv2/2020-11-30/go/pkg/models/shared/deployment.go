@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Deployment
+// Contains information about a deployment.
 type Deployment struct {
 	CreationTimestamp *time.Time            `json:"creationTimestamp,omitempty"`
 	DeploymentID      *string               `json:"deploymentId,omitempty"`

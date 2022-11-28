@@ -7,7 +7,8 @@ const (
 	RestoreInfoSourceTypeEnumBackup                       RestoreInfoSourceTypeEnum = "BACKUP"
 )
 
+// RestoreInfo
+// Information about a table restore.
 type RestoreInfo struct {
-	BackupInfo *BackupInfo                `json:"backupInfo,omitempty"`
 	SourceType *RestoreInfoSourceTypeEnum `json:"sourceType,omitempty"`
 }

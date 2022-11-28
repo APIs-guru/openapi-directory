@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetExamples1PathParams:
-    dataset_id: str = field(default=None, metadata={'path_param': { 'field_name': 'datasetId', 'style': 'simple', 'explode': False }})
+    dataset_id: str = field(metadata={'path_param': { 'field_name': 'datasetId', 'style': 'simple', 'explode': False }})
     
 class GetExamples1SourceEnum(str, Enum):
     ALL = "all"
@@ -22,19 +23,19 @@ class GetExamples1QueryParams:
 
 @dataclass
 class GetExamples1Security:
-    bearer_token: shared.SchemeBearerToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_token: shared.SchemeBearerToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetExamples1Request:
-    path_params: GetExamples1PathParams = field(default=None)
-    query_params: GetExamples1QueryParams = field(default=None)
-    security: GetExamples1Security = field(default=None)
+    path_params: GetExamples1PathParams = field()
+    query_params: GetExamples1QueryParams = field()
+    security: GetExamples1Security = field()
     
 
 @dataclass
 class GetExamples1Response:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     example_list: Optional[shared.ExampleList] = field(default=None)
-    status_code: int = field(default=None)
     

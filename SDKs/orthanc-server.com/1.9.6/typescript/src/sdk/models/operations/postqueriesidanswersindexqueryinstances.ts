@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostQueriesIdAnswersIndexQueryInstancesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=index" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=index" })
   index: string;
 }
 
 
 export class PostQueriesIdAnswersIndexQueryInstancesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostQueriesIdAnswersIndexQueryInstancesPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: any;
 }
 
 
 export class PostQueriesIdAnswersIndexQueryInstancesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postQueriesIdAnswersIndexQueryInstances200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

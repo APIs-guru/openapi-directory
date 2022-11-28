@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -28,25 +33,26 @@ class ListResourcesRequestBodyResourceOwnerEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ListResourcesRequestBody:
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    principal: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'principal' }})
-    resource_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceArns' }})
-    resource_owner: ListResourcesRequestBodyResourceOwnerEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceOwner' }})
-    resource_share_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceShareArns' }})
-    resource_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceType' }})
+    resource_owner: ListResourcesRequestBodyResourceOwnerEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceOwner') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    principal: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('principal') }})
+    resource_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceArns') }})
+    resource_share_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceShareArns') }})
+    resource_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceType') }})
     
 
 @dataclass
 class ListResourcesRequest:
-    query_params: ListResourcesQueryParams = field(default=None)
-    headers: ListResourcesHeaders = field(default=None)
-    request: ListResourcesRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListResourcesHeaders = field()
+    query_params: ListResourcesQueryParams = field()
+    request: ListResourcesRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListResourcesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_next_token_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     invalid_resource_type_exception: Optional[Any] = field(default=None)
@@ -54,6 +60,5 @@ class ListResourcesResponse:
     malformed_arn_exception: Optional[Any] = field(default=None)
     server_internal_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unknown_resource_exception: Optional[Any] = field(default=None)
     

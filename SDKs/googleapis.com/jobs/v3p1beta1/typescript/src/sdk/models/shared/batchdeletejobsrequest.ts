@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchDeleteJobsRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Input only. Batch delete jobs request.
 **/
 export class BatchDeleteJobsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 }

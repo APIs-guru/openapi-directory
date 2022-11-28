@@ -22,20 +22,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Paging } from "./paging";
+import { Folder } from "./folder";
 var CollectionResponseFolder = /** @class */ (function (_super) {
     __extends(CollectionResponseFolder, _super);
     function CollectionResponseFolder() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=paging" }),
+        SpeakeasyMetadata({ data: "json, name=paging" }),
         __metadata("design:type", Paging)
     ], CollectionResponseFolder.prototype, "paging", void 0);
     __decorate([
-        Metadata({ data: "json, name=results", elemType: shared.Folder }),
+        SpeakeasyMetadata({ data: "json, name=results", elemType: Folder }),
         __metadata("design:type", Array)
     ], CollectionResponseFolder.prototype, "results", void 0);
     return CollectionResponseFolder;

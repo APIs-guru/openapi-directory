@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NumberFilter
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A number filter for querying findings.
 **/
 export class NumberFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Eq" })
+  @SpeakeasyMetadata({ data: "json, name=Eq" })
   eq?: number;
 
-  @Metadata({ data: "json, name=Gte" })
+  @SpeakeasyMetadata({ data: "json, name=Gte" })
   gte?: number;
 
-  @Metadata({ data: "json, name=Lte" })
+  @SpeakeasyMetadata({ data: "json, name=Lte" })
   lte?: number;
 }

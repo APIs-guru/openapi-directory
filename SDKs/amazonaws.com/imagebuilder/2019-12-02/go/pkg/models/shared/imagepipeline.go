@@ -1,5 +1,7 @@
 package shared
 
+// ImagePipeline
+// Details of an image pipeline.
 type ImagePipeline struct {
 	Arn                            *string                  `json:"arn,omitempty"`
 	ContainerRecipeArn             *string                  `json:"containerRecipeArn,omitempty"`

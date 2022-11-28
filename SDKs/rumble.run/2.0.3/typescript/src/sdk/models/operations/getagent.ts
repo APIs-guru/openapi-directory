@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAgentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=agent_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agent_id" })
   agentId: string;
 }
 
 
 export class GetAgentSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
 export class GetAgentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAgentPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetAgentSecurity;
 }
 
 
 export class GetAgentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   agent?: shared.Agent;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

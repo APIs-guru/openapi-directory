@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// RecordPatch
+// An update operation for a record.
 type RecordPatch struct {
 	DeviceLastModifiedDate *time.Time    `json:"DeviceLastModifiedDate,omitempty"`
 	Key                    string        `json:"Key"`

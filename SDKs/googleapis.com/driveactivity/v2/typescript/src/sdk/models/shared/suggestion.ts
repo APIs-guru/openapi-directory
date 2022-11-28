@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SuggestionSubtypeEnum {
-    SubtypeUnspecified = "SUBTYPE_UNSPECIFIED"
-,    Added = "ADDED"
-,    Deleted = "DELETED"
-,    ReplyAdded = "REPLY_ADDED"
-,    ReplyDeleted = "REPLY_DELETED"
-,    Accepted = "ACCEPTED"
-,    Rejected = "REJECTED"
-,    AcceptDeleted = "ACCEPT_DELETED"
-,    RejectDeleted = "REJECT_DELETED"
+    SubtypeUnspecified = "SUBTYPE_UNSPECIFIED",
+    Added = "ADDED",
+    Deleted = "DELETED",
+    ReplyAdded = "REPLY_ADDED",
+    ReplyDeleted = "REPLY_DELETED",
+    Accepted = "ACCEPTED",
+    Rejected = "REJECTED",
+    AcceptDeleted = "ACCEPT_DELETED",
+    RejectDeleted = "REJECT_DELETED"
 }
 
 
@@ -18,6 +19,6 @@ export enum SuggestionSubtypeEnum {
  * A suggestion.
 **/
 export class Suggestion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=subtype" })
+  @SpeakeasyMetadata({ data: "json, name=subtype" })
   subtype?: SuggestionSubtypeEnum;
 }

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -15,19 +15,19 @@ class GetListingViolationsSummaryHeaders:
 
 @dataclass
 class GetListingViolationsSummarySecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetListingViolationsSummaryRequest:
-    query_params: GetListingViolationsSummaryQueryParams = field(default=None)
-    headers: GetListingViolationsSummaryHeaders = field(default=None)
-    security: GetListingViolationsSummarySecurity = field(default=None)
+    headers: GetListingViolationsSummaryHeaders = field()
+    query_params: GetListingViolationsSummaryQueryParams = field()
+    security: GetListingViolationsSummarySecurity = field()
     
 
 @dataclass
 class GetListingViolationsSummaryResponse:
+    content_type: str = field()
+    status_code: int = field()
     compliance_summary: Optional[shared.ComplianceSummary] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

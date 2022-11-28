@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SystemPricelistSecurity = /** @class */ (function (_super) {
     __extends(SystemPricelistSecurity, _super);
@@ -30,7 +30,7 @@ var SystemPricelistSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], SystemPricelistSecurity.prototype, "userKey", void 0);
     return SystemPricelistSecurity;
@@ -42,7 +42,7 @@ var SystemPricelistRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SystemPricelistSecurity)
     ], SystemPricelistRequest.prototype, "security", void 0);
     return SystemPricelistRequest;
@@ -54,19 +54,19 @@ var SystemPricelistResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SystemPricelistResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SystemPricelistResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], SystemPricelistResponse.prototype, "systemPricelist200ApplicationJsonAnies", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], SystemPricelistResponse.prototype, "systemPricelistDefaultApplicationJsonAny", void 0);
     return SystemPricelistResponse;

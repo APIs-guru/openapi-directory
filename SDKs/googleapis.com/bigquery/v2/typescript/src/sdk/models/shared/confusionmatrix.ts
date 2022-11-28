@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Row } from "./row";
+
 
 
 // ConfusionMatrix
@@ -8,9 +8,9 @@ import { Row } from "./row";
  * Confusion matrix for multi-class classification models.
 **/
 export class ConfusionMatrix extends SpeakeasyBase {
-  @Metadata({ data: "json, name=confidenceThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=confidenceThreshold" })
   confidenceThreshold?: number;
 
-  @Metadata({ data: "json, name=rows", elemType: shared.Row })
+  @SpeakeasyMetadata({ data: "json, name=rows", elemType: Row })
   rows?: Row[];
 }

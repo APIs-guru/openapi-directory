@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IpSetUpdate } from "./ipsetupdate";
 
 
+
 export class UpdateIpSetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChangeToken" })
+  @SpeakeasyMetadata({ data: "json, name=ChangeToken" })
   changeToken: string;
 
-  @Metadata({ data: "json, name=IPSetId" })
+  @SpeakeasyMetadata({ data: "json, name=IPSetId" })
   ipSetId: string;
 
-  @Metadata({ data: "json, name=Updates", elemType: shared.IpSetUpdate })
+  @SpeakeasyMetadata({ data: "json, name=Updates", elemType: IpSetUpdate })
   updates: IpSetUpdate[];
 }

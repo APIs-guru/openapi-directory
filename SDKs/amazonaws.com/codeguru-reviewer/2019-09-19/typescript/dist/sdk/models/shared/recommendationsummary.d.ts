@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RecommendationCategoryEnum } from "./recommendationcategoryenum";
 import { RuleMetadata } from "./rulemetadata";
 import { SeverityEnum } from "./severityenum";

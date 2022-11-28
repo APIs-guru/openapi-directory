@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetEnableFastSnapshotRestoresActionEnum(str, Enum):
     ENABLE_FAST_SNAPSHOT_RESTORES = "EnableFastSnapshotRestores"
@@ -10,11 +14,11 @@ class GetEnableFastSnapshotRestoresVersionEnum(str, Enum):
 
 @dataclass
 class GetEnableFastSnapshotRestoresQueryParams:
-    action: GetEnableFastSnapshotRestoresActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    availability_zone: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'AvailabilityZone', 'style': 'form', 'explode': True }})
+    action: GetEnableFastSnapshotRestoresActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    availability_zone: List[str] = field(metadata={'query_param': { 'field_name': 'AvailabilityZone', 'style': 'form', 'explode': True }})
+    source_snapshot_id: List[str] = field(metadata={'query_param': { 'field_name': 'SourceSnapshotId', 'style': 'form', 'explode': True }})
+    version: GetEnableFastSnapshotRestoresVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    source_snapshot_id: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'SourceSnapshotId', 'style': 'form', 'explode': True }})
-    version: GetEnableFastSnapshotRestoresVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetEnableFastSnapshotRestoresHeaders:
 
 @dataclass
 class GetEnableFastSnapshotRestoresRequest:
-    query_params: GetEnableFastSnapshotRestoresQueryParams = field(default=None)
-    headers: GetEnableFastSnapshotRestoresHeaders = field(default=None)
+    headers: GetEnableFastSnapshotRestoresHeaders = field()
+    query_params: GetEnableFastSnapshotRestoresQueryParams = field()
     
 
 @dataclass
 class GetEnableFastSnapshotRestoresResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

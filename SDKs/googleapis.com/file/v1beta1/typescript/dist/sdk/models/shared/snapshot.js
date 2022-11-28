@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var SnapshotStateEnum;
 (function (SnapshotStateEnum) {
     SnapshotStateEnum["StateUnspecified"] = "STATE_UNSPECIFIED";
@@ -30,6 +30,26 @@ export var SnapshotStateEnum;
     SnapshotStateEnum["Ready"] = "READY";
     SnapshotStateEnum["Deleting"] = "DELETING";
 })(SnapshotStateEnum || (SnapshotStateEnum = {}));
+// SnapshotInput
+/**
+ * A Filestore snapshot.
+**/
+var SnapshotInput = /** @class */ (function (_super) {
+    __extends(SnapshotInput, _super);
+    function SnapshotInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], SnapshotInput.prototype, "description", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], SnapshotInput.prototype, "labels", void 0);
+    return SnapshotInput;
+}(SpeakeasyBase));
+export { SnapshotInput };
 // Snapshot
 /**
  * A Filestore snapshot.
@@ -40,27 +60,27 @@ var Snapshot = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Snapshot.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Snapshot.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=filesystemUsedBytes" }),
+        SpeakeasyMetadata({ data: "json, name=filesystemUsedBytes" }),
         __metadata("design:type", String)
     ], Snapshot.prototype, "filesystemUsedBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Snapshot.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Snapshot.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Snapshot.prototype, "state", void 0);
     return Snapshot;

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Certificate } from "./certificate";
 
 
+
 export class ImportCertificateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Certificate" })
+  @SpeakeasyMetadata({ data: "json, name=Certificate" })
   certificate?: Certificate;
 }

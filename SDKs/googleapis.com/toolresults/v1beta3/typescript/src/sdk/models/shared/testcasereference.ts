@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TestCaseReference
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A reference to a test case. Test case references are canonically ordered lexicographically by these three factors: * First, by test_suite_name. * Second, by class_name. * Third, by name.
 **/
 export class TestCaseReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=className" })
+  @SpeakeasyMetadata({ data: "json, name=className" })
   className?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=testSuiteName" })
+  @SpeakeasyMetadata({ data: "json, name=testSuiteName" })
   testSuiteName?: string;
 }

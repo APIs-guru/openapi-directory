@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PortInfo } from "./portinfo";
 
 
+
 export class PutInstancePublicPortsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceName" })
+  @SpeakeasyMetadata({ data: "json, name=instanceName" })
   instanceName: string;
 
-  @Metadata({ data: "json, name=portInfos", elemType: shared.PortInfo })
+  @SpeakeasyMetadata({ data: "json, name=portInfos", elemType: PortInfo })
   portInfos: PortInfo[];
 }

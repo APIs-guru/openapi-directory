@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,11 +23,15 @@ class UpdateComputeEnvironmentHeaders:
 @dataclass_json
 @dataclass
 class UpdateComputeEnvironmentRequestBodyComputeResources:
-    desiredv_cpus: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'desiredvCpus' }})
-    maxv_cpus: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxvCpus' }})
-    minv_cpus: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minvCpus' }})
-    security_group_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'securityGroupIds' }})
-    subnets: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subnets' }})
+    r"""UpdateComputeEnvironmentRequestBodyComputeResources
+    An object representing the attributes of a compute environment that can be updated. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html\">Compute Environments</a> in the <i>Batch User Guide</i>.
+    """
+    
+    desiredv_cpus: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('desiredvCpus') }})
+    maxv_cpus: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxvCpus') }})
+    minv_cpus: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minvCpus') }})
+    security_group_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('securityGroupIds') }})
+    subnets: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('subnets') }})
     
 class UpdateComputeEnvironmentRequestBodyStateEnum(str, Enum):
     ENABLED = "ENABLED"
@@ -32,23 +41,23 @@ class UpdateComputeEnvironmentRequestBodyStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateComputeEnvironmentRequestBody:
-    compute_environment: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'computeEnvironment' }})
-    compute_resources: Optional[UpdateComputeEnvironmentRequestBodyComputeResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'computeResources' }})
-    service_role: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serviceRole' }})
-    state: Optional[UpdateComputeEnvironmentRequestBodyStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    compute_environment: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('computeEnvironment') }})
+    compute_resources: Optional[UpdateComputeEnvironmentRequestBodyComputeResources] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('computeResources') }})
+    service_role: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serviceRole') }})
+    state: Optional[UpdateComputeEnvironmentRequestBodyStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
     
 
 @dataclass
 class UpdateComputeEnvironmentRequest:
-    headers: UpdateComputeEnvironmentHeaders = field(default=None)
-    request: UpdateComputeEnvironmentRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateComputeEnvironmentHeaders = field()
+    request: UpdateComputeEnvironmentRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateComputeEnvironmentResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_compute_environment_response: Optional[shared.UpdateComputeEnvironmentResponse] = field(default=None)
     

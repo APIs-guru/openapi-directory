@@ -1,5 +1,7 @@
 package shared
 
+// Word
+// A word representation.
 type Word struct {
 	BoundingBox *BoundingPoly `json:"boundingBox,omitempty"`
 	Confidence  *float32      `json:"confidence,omitempty"`

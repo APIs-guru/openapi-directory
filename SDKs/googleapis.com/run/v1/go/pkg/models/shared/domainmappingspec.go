@@ -8,6 +8,8 @@ const (
 	DomainMappingSpecCertificateModeEnumAutomatic                  DomainMappingSpecCertificateModeEnum = "AUTOMATIC"
 )
 
+// DomainMappingSpec
+// The desired state of the Domain Mapping.
 type DomainMappingSpec struct {
 	CertificateMode *DomainMappingSpecCertificateModeEnum `json:"certificateMode,omitempty"`
 	ForceOverride   *bool                                 `json:"forceOverride,omitempty"`

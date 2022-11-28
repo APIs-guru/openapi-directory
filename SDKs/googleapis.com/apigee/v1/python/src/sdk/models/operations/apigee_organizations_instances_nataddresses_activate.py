@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ApigeeOrganizationsInstancesNatAddressesActivatePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ApigeeOrganizationsInstancesNatAddressesActivateQueryParams:
 
 @dataclass
 class ApigeeOrganizationsInstancesNatAddressesActivateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApigeeOrganizationsInstancesNatAddressesActivateRequest:
-    path_params: ApigeeOrganizationsInstancesNatAddressesActivatePathParams = field(default=None)
-    query_params: ApigeeOrganizationsInstancesNatAddressesActivateQueryParams = field(default=None)
+    path_params: ApigeeOrganizationsInstancesNatAddressesActivatePathParams = field()
+    query_params: ApigeeOrganizationsInstancesNatAddressesActivateQueryParams = field()
+    security: ApigeeOrganizationsInstancesNatAddressesActivateSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ApigeeOrganizationsInstancesNatAddressesActivateSecurity = field(default=None)
     
 
 @dataclass
 class ApigeeOrganizationsInstancesNatAddressesActivateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_operation: Optional[shared.GoogleLongrunningOperation] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -10,6 +10,8 @@ const (
 	ObaIconPositionEnumObaIconPositionLowerLeft   ObaIconPositionEnum = "OBA_ICON_POSITION_LOWER_LEFT"
 )
 
+// ObaIcon
+// OBA Icon for a Creative
 type ObaIcon struct {
 	ClickTrackingURL *string              `json:"clickTrackingUrl,omitempty"`
 	Dimensions       *Dimensions          `json:"dimensions,omitempty"`

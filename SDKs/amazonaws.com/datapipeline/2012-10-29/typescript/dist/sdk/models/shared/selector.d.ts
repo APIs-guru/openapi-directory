@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Operator } from "./operator";
 /**
  * A comparision that is used to determine whether a query should return this object.

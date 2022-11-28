@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AttachmentDetails } from "./attachmentdetails";
 // Communication
 /**
  * A communication associated with a support case. The communication consists of the case ID, the message body, attachment information, the submitter of the communication, and the date and time of the communication.
@@ -34,23 +34,23 @@ var Communication = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attachmentSet", elemType: shared.AttachmentDetails }),
+        SpeakeasyMetadata({ data: "json, name=attachmentSet", elemType: AttachmentDetails }),
         __metadata("design:type", Array)
     ], Communication.prototype, "attachmentSet", void 0);
     __decorate([
-        Metadata({ data: "json, name=body" }),
+        SpeakeasyMetadata({ data: "json, name=body" }),
         __metadata("design:type", String)
     ], Communication.prototype, "body", void 0);
     __decorate([
-        Metadata({ data: "json, name=caseId" }),
+        SpeakeasyMetadata({ data: "json, name=caseId" }),
         __metadata("design:type", String)
     ], Communication.prototype, "caseId", void 0);
     __decorate([
-        Metadata({ data: "json, name=submittedBy" }),
+        SpeakeasyMetadata({ data: "json, name=submittedBy" }),
         __metadata("design:type", String)
     ], Communication.prototype, "submittedBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeCreated" }),
+        SpeakeasyMetadata({ data: "json, name=timeCreated" }),
         __metadata("design:type", String)
     ], Communication.prototype, "timeCreated", void 0);
     return Communication;

@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import cloudwatchmonitoringconfiguration
-from . import persistentappui_enum
-from . import s3monitoringconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MonitoringConfiguration:
-    cloud_watch_monitoring_configuration: Optional[cloudwatchmonitoringconfiguration.CloudWatchMonitoringConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cloudWatchMonitoringConfiguration' }})
-    persistent_app_ui: Optional[persistentappui_enum.PersistentAppUIEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'persistentAppUI' }})
-    s3_monitoring_configuration: Optional[s3monitoringconfiguration.S3MonitoringConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3MonitoringConfiguration' }})
+    r"""MonitoringConfiguration
+    Configuration setting for monitoring.
+    """
+    
+    cloud_watch_monitoring_configuration: Optional[CloudWatchMonitoringConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cloudWatchMonitoringConfiguration') }})
+    persistent_app_ui: Optional[PersistentAppUIEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('persistentAppUI') }})
+    s3_monitoring_configuration: Optional[S3MonitoringConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3MonitoringConfiguration') }})
     

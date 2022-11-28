@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DetachFromIndexResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DetachedObjectIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=DetachedObjectIdentifier" })
   detachedObjectIdentifier?: string;
 }

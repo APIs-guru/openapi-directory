@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkerConfig } from "./workerconfig";
 export var WorkerPoolRegionsEnum;
 (function (WorkerPoolRegionsEnum) {
@@ -50,43 +50,43 @@ var WorkerPool = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], WorkerPool.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=deleteTime" }),
+        SpeakeasyMetadata({ data: "json, name=deleteTime" }),
         __metadata("design:type", String)
     ], WorkerPool.prototype, "deleteTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], WorkerPool.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=projectId" }),
+        SpeakeasyMetadata({ data: "json, name=projectId" }),
         __metadata("design:type", String)
     ], WorkerPool.prototype, "projectId", void 0);
     __decorate([
-        Metadata({ data: "json, name=regions" }),
+        SpeakeasyMetadata({ data: "json, name=regions" }),
         __metadata("design:type", Array)
     ], WorkerPool.prototype, "regions", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccountEmail" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccountEmail" }),
         __metadata("design:type", String)
     ], WorkerPool.prototype, "serviceAccountEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], WorkerPool.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], WorkerPool.prototype, "updateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=workerConfig" }),
+        SpeakeasyMetadata({ data: "json, name=workerConfig" }),
         __metadata("design:type", WorkerConfig)
     ], WorkerPool.prototype, "workerConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=workerCount" }),
+        SpeakeasyMetadata({ data: "json, name=workerCount" }),
         __metadata("design:type", String)
     ], WorkerPool.prototype, "workerCount", void 0);
     return WorkerPool;

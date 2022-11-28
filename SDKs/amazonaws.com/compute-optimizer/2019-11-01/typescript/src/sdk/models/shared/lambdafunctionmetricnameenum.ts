@@ -1,6 +1,7 @@
 
 
+
 export enum LambdaFunctionMetricNameEnum {
-    Duration = "Duration"
-,    Memory = "Memory"
+    Duration = "Duration",
+    Memory = "Memory"
 }

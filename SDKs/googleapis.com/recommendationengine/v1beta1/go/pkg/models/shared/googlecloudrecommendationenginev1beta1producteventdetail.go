@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudRecommendationengineV1beta1ProductEventDetail
+// ProductEventDetail captures user event information specific to retail products.
 type GoogleCloudRecommendationengineV1beta1ProductEventDetail struct {
 	CartID              *string                                                              `json:"cartId,omitempty"`
 	ListID              *string                                                              `json:"listId,omitempty"`

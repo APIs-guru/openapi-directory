@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class IpamVlanGroupsCreateRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.WritableVlanGroup;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.WritableVlanGroupInput;
 }
 
 
 export class IpamVlanGroupsCreateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   vlanGroup?: shared.VlanGroup;
 }

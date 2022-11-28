@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetRouteResponsesPathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
-    route_id: str = field(default=None, metadata={'path_param': { 'field_name': 'routeId', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    route_id: str = field(metadata={'path_param': { 'field_name': 'routeId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,17 +31,17 @@ class GetRouteResponsesHeaders:
 
 @dataclass
 class GetRouteResponsesRequest:
-    path_params: GetRouteResponsesPathParams = field(default=None)
-    query_params: GetRouteResponsesQueryParams = field(default=None)
-    headers: GetRouteResponsesHeaders = field(default=None)
+    headers: GetRouteResponsesHeaders = field()
+    path_params: GetRouteResponsesPathParams = field()
+    query_params: GetRouteResponsesQueryParams = field()
     
 
 @dataclass
 class GetRouteResponsesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_route_responses_response: Optional[shared.GetRouteResponsesResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

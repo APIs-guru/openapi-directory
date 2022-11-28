@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SchedulerResource } from "./schedulerresource";
 import { WebServerResource } from "./webserverresource";
 import { WorkerResource } from "./workerresource";

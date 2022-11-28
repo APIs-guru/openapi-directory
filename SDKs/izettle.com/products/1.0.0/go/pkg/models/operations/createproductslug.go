@@ -8,17 +8,9 @@ type CreateProductSlugPathParams struct {
 	OrganizationUUID string `pathParam:"style=simple,explode=false,name=organizationUuid"`
 }
 
-type CreateProductSlugSecurityOption1 struct {
-	ZettleOauth shared.SchemeZettleOauth `security:"scheme,type=oauth2"`
-}
-
-type CreateProductSlugSecurityOption2 struct {
-	ZettleAPIKey shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type CreateProductSlugSecurity struct {
-	Option1 *CreateProductSlugSecurityOption1 `security:"option"`
-	Option2 *CreateProductSlugSecurityOption2 `security:"option"`
+	ZettleOauth  *shared.SchemeZettleOauth  `security:"scheme,type=oauth2"`
+	ZettleAPIKey *shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type CreateProductSlugRequest struct {

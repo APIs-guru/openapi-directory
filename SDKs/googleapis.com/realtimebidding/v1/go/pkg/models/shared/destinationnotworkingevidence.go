@@ -43,6 +43,8 @@ const (
 	DestinationNotWorkingEvidenceURLRejectedEnumURLRejectedUnknown     DestinationNotWorkingEvidenceURLRejectedEnum = "URL_REJECTED_UNKNOWN"
 )
 
+// DestinationNotWorkingEvidence
+// Evidence of the creative's destination URL not functioning properly or having been incorrectly set up.
 type DestinationNotWorkingEvidence struct {
 	DNSError         *DestinationNotWorkingEvidenceDNSErrorEnum         `json:"dnsError,omitempty"`
 	ExpandedURL      *string                                            `json:"expandedUrl,omitempty"`

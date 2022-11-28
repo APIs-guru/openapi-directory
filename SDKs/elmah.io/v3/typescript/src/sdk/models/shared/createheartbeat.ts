@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateHeartbeat extends SpeakeasyBase {
-  @Metadata({ data: "json, name=application" })
+  @SpeakeasyMetadata({ data: "json, name=application" })
   application?: string;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: string;
 
-  @Metadata({ data: "json, name=took" })
+  @SpeakeasyMetadata({ data: "json, name=took" })
   took?: number;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

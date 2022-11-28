@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainSummary } from "./domainsummary";
+
 
 
 // ListDomainsResponse
@@ -8,9 +8,9 @@ import { DomainSummary } from "./domainsummary";
  * The ListDomains response includes the following elements.
 **/
 export class ListDomainsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Domains", elemType: shared.DomainSummary })
+  @SpeakeasyMetadata({ data: "json, name=Domains", elemType: DomainSummary })
   domains: DomainSummary[];
 
-  @Metadata({ data: "json, name=NextPageMarker" })
+  @SpeakeasyMetadata({ data: "json, name=NextPageMarker" })
   nextPageMarker?: string;
 }

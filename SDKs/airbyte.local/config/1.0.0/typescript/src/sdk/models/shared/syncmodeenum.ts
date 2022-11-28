@@ -1,6 +1,7 @@
 
 
+
 export enum SyncModeEnum {
-    FullRefresh = "full_refresh"
-,    Incremental = "incremental"
+    FullRefresh = "full_refresh",
+    Incremental = "incremental"
 }

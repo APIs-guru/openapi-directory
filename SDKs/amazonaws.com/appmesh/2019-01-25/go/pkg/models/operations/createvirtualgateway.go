@@ -22,6 +22,8 @@ type CreateVirtualGatewayHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateVirtualGatewayRequestBodySpec
+// An object that represents the specification of a service mesh resource.
 type CreateVirtualGatewayRequestBodySpec struct {
 	BackendDefaults *shared.VirtualGatewayBackendDefaults `json:"backendDefaults,omitempty"`
 	Listeners       []shared.VirtualGatewayListener       `json:"listeners,omitempty"`

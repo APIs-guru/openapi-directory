@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class StopPointSearchPathParams:
-    query: str = field(default=None, metadata={'path_param': { 'field_name': 'query', 'style': 'simple', 'explode': False }})
+    query: str = field(metadata={'path_param': { 'field_name': 'query', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,14 +20,14 @@ class StopPointSearchQueryParams:
 
 @dataclass
 class StopPointSearchRequest:
-    path_params: StopPointSearchPathParams = field(default=None)
-    query_params: StopPointSearchQueryParams = field(default=None)
+    path_params: StopPointSearchPathParams = field()
+    query_params: StopPointSearchQueryParams = field()
     
 
 @dataclass
 class StopPointSearchResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     tfl_api_presentation_entities_search_response: Optional[shared.TflAPIPresentationEntitiesSearchResponse] = field(default=None)
     

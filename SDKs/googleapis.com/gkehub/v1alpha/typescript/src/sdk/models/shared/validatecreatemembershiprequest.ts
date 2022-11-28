@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Membership } from "./membership";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { MembershipInput } from "./membership";
 
 
-// ValidateCreateMembershipRequest
+
+// ValidateCreateMembershipRequestInput
 /** 
  * Request message for the `GkeHub.ValidateCreateMembership` method.
 **/
-export class ValidateCreateMembershipRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=membership" })
-  membership?: Membership;
+export class ValidateCreateMembershipRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=membership" })
+  membership?: MembershipInput;
 
-  @Metadata({ data: "json, name=membershipId" })
+  @SpeakeasyMetadata({ data: "json, name=membershipId" })
   membershipId?: string;
 }

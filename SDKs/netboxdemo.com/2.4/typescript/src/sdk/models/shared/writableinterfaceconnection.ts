@@ -1,16 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
-export class WritableInterfaceConnection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connection_status" })
+
+export class WritableInterfaceConnectionInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=connection_status" })
   connectionStatus?: boolean;
 
-  @Metadata({ data: "json, name=id" })
-  id?: number;
-
-  @Metadata({ data: "json, name=interface_a" })
+  @SpeakeasyMetadata({ data: "json, name=interface_a" })
   interfaceA: number;
 
-  @Metadata({ data: "json, name=interface_b" })
+  @SpeakeasyMetadata({ data: "json, name=interface_b" })
   interfaceB: number;
 }

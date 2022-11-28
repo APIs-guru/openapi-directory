@@ -1,77 +1,78 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCategoryVideosPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=category" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=category" })
   category: string;
 }
 
 export enum GetCategoryVideosDirectionEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 export enum GetCategoryVideosFilterEnum {
-    ConditionalFeatured = "conditional_featured"
-,    Embeddable = "embeddable"
+    ConditionalFeatured = "conditional_featured",
+    Embeddable = "embeddable"
 }
 
 export enum GetCategoryVideosSortEnum {
-    Alphabetical = "alphabetical"
-,    Comments = "comments"
-,    Date = "date"
-,    Duration = "duration"
-,    Featured = "featured"
-,    Likes = "likes"
-,    Plays = "plays"
-,    Relevant = "relevant"
+    Alphabetical = "alphabetical",
+    Comments = "comments",
+    Date = "date",
+    Duration = "duration",
+    Featured = "featured",
+    Likes = "likes",
+    Plays = "plays",
+    Relevant = "relevant"
 }
 
 
 export class GetCategoryVideosQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: GetCategoryVideosDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: GetCategoryVideosFilterEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter_embeddable" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter_embeddable" })
   filterEmbeddable?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: GetCategoryVideosSortEnum;
 }
 
 
 export class GetCategoryVideosRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetCategoryVideosPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCategoryVideosQueryParams;
 }
 
 
 export class GetCategoryVideosResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   legacyError?: shared.LegacyError;
 
-  @Metadata({ elemType: shared.Video })
+  @SpeakeasyMetadata({ elemType: shared.Video })
   videos?: shared.Video[];
 }

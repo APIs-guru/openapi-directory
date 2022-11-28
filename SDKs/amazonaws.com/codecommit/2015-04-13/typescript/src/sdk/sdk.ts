@@ -1,22 +1,18 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import {GetHeadersFromRequest} from "../internal/utils/headers";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "http://codecommit.{region}.amazonaws.com",
-  "https://codecommit.{region}.amazonaws.com",
-  "http://codecommit.{region}.amazonaws.com.cn",
-  "https://codecommit.{region}.amazonaws.com.cn",
+export const ServerList = [
+	"http://codecommit.{region}.amazonaws.com",
+	"https://codecommit.{region}.amazonaws.com",
+	"http://codecommit.{region}.amazonaws.com.cn",
+	"https://codecommit.{region}.amazonaws.com.cn",
 ] as const;
 
 export function WithServerURL(
@@ -27,13 +23,13 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
@@ -42,41 +38,48 @@ export function WithSecurity(security: Security): OptsFunc {
     security = new Security(security);
   }
   return (sdk: SDK) => {
-    sdk.security = security;
+    sdk._security = security;
   };
 }
 
-// SDK Documentation: https://docs.aws.amazon.com/codecommit/ - Amazon Web Services documentation
+/* SDK Documentation: https://docs.aws.amazon.com/codecommit/ - Amazon Web Services documentation*/
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  public _security?: Security;
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
+    if (!this._securityClient) {
+      if (this._security) {
+        this._securityClient = utils.CreateSecurityClient(
+          this._defaultClient,
+          this._security
         );
       } else {
-        this.securityClient = this.defaultClient;
+        this._securityClient = this._defaultClient;
       }
     }
+    
   }
   
-  // AssociateApprovalRuleTemplateWithRepository - Creates an association between an approval rule template and a specified repository. Then, the next time a pull request is created in the repository where the destination reference (if specified) matches the destination reference (branch) for the pull request, an approval rule that matches the template conditions is automatically created for that pull request. If no destination references are specified in the template, an approval rule that matches the template contents is created for all pull requests in that repository.
-  AssociateApprovalRuleTemplateWithRepository(
+  /**
+   * associateApprovalRuleTemplateWithRepository - Creates an association between an approval rule template and a specified repository. Then, the next time a pull request is created in the repository where the destination reference (if specified) matches the destination reference (branch) for the pull request, an approval rule that matches the template conditions is automatically created for that pull request. If no destination references are specified in the template, an approval rule that matches the template contents is created for all pull requests in that repository.
+  **/
+  associateApprovalRuleTemplateWithRepository(
     req: operations.AssociateApprovalRuleTemplateWithRepositoryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AssociateApprovalRuleTemplateWithRepositoryResponse> {
@@ -84,97 +87,97 @@ export class SDK {
       req = new operations.AssociateApprovalRuleTemplateWithRepositoryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.AssociateApprovalRuleTemplateWithRepository";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AssociateApprovalRuleTemplateWithRepositoryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.AssociateApprovalRuleTemplateWithRepositoryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalRuleTemplateNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumRuleTemplatesAssociatedWithRepositoryException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -186,8 +189,10 @@ export class SDK {
   }
 
   
-  // BatchAssociateApprovalRuleTemplateWithRepositories - Creates an association between an approval rule template and one or more specified repositories. 
-  BatchAssociateApprovalRuleTemplateWithRepositories(
+  /**
+   * batchAssociateApprovalRuleTemplateWithRepositories - Creates an association between an approval rule template and one or more specified repositories. 
+  **/
+  batchAssociateApprovalRuleTemplateWithRepositories(
     req: operations.BatchAssociateApprovalRuleTemplateWithRepositoriesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.BatchAssociateApprovalRuleTemplateWithRepositoriesResponse> {
@@ -195,90 +200,90 @@ export class SDK {
       req = new operations.BatchAssociateApprovalRuleTemplateWithRepositoriesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.BatchAssociateApprovalRuleTemplateWithRepositories";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.BatchAssociateApprovalRuleTemplateWithRepositoriesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.BatchAssociateApprovalRuleTemplateWithRepositoriesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchAssociateApprovalRuleTemplateWithRepositoriesOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalRuleTemplateNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNamesRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumRepositoryNamesExceededException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -290,8 +295,10 @@ export class SDK {
   }
 
   
-  // BatchDescribeMergeConflicts - Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy.
-  BatchDescribeMergeConflicts(
+  /**
+   * batchDescribeMergeConflicts - Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy.
+  **/
+  batchDescribeMergeConflicts(
     req: operations.BatchDescribeMergeConflictsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.BatchDescribeMergeConflictsResponse> {
@@ -299,145 +306,145 @@ export class SDK {
       req = new operations.BatchDescribeMergeConflictsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.BatchDescribeMergeConflicts";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.BatchDescribeMergeConflictsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.BatchDescribeMergeConflictsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchDescribeMergeConflictsOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.mergeOptionRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidMergeOptionException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidContinuationTokenException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitRequiredException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitDoesNotExistException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tipsDivergenceExceededException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidMaxConflictFilesException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidMaxMergeHunksException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictDetailLevelException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictResolutionStrategyException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumFileContentToLoadExceededException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumItemsToCompareExceededException = httpRes?.data;
             }
             break;
-          case 496:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 496:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 497:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 497:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 498:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 498:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 499:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 499:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -449,8 +456,10 @@ export class SDK {
   }
 
   
-  // BatchDisassociateApprovalRuleTemplateFromRepositories - Removes the association between an approval rule template and one or more specified repositories. 
-  BatchDisassociateApprovalRuleTemplateFromRepositories(
+  /**
+   * batchDisassociateApprovalRuleTemplateFromRepositories - Removes the association between an approval rule template and one or more specified repositories. 
+  **/
+  batchDisassociateApprovalRuleTemplateFromRepositories(
     req: operations.BatchDisassociateApprovalRuleTemplateFromRepositoriesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.BatchDisassociateApprovalRuleTemplateFromRepositoriesResponse> {
@@ -458,90 +467,90 @@ export class SDK {
       req = new operations.BatchDisassociateApprovalRuleTemplateFromRepositoriesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.BatchDisassociateApprovalRuleTemplateFromRepositories";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.BatchDisassociateApprovalRuleTemplateFromRepositoriesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.BatchDisassociateApprovalRuleTemplateFromRepositoriesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchDisassociateApprovalRuleTemplateFromRepositoriesOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalRuleTemplateNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNamesRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumRepositoryNamesExceededException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -553,8 +562,10 @@ export class SDK {
   }
 
   
-  // BatchGetCommits - Returns information about the contents of one or more commits in a repository.
-  BatchGetCommits(
+  /**
+   * batchGetCommits - Returns information about the contents of one or more commits in a repository.
+  **/
+  batchGetCommits(
     req: operations.BatchGetCommitsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.BatchGetCommitsResponse> {
@@ -562,90 +573,90 @@ export class SDK {
       req = new operations.BatchGetCommitsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.BatchGetCommits";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.BatchGetCommitsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.BatchGetCommitsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchGetCommitsOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitIdsListRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitIdsLimitExceededException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -657,8 +668,10 @@ export class SDK {
   }
 
   
-  // BatchGetRepositories - <p>Returns information about one or more repositories.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a webpage can expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a webpage.</p> </note>
-  BatchGetRepositories(
+  /**
+   * batchGetRepositories - <p>Returns information about one or more repositories.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a webpage can expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a webpage.</p> </note>
+  **/
+  batchGetRepositories(
     req: operations.BatchGetRepositoriesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.BatchGetRepositoriesResponse> {
@@ -666,80 +679,80 @@ export class SDK {
       req = new operations.BatchGetRepositoriesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.BatchGetRepositories";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.BatchGetRepositoriesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.BatchGetRepositoriesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.batchGetRepositoriesOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNamesRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumRepositoryNamesExceededException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -751,8 +764,10 @@ export class SDK {
   }
 
   
-  // CreateApprovalRuleTemplate - Creates a template for approval rules that can then be associated with one or more repositories in your AWS account. When you associate a template with a repository, AWS CodeCommit creates an approval rule that matches the conditions of the template for all pull requests that meet the conditions of the template. For more information, see <a>AssociateApprovalRuleTemplateWithRepository</a>.
-  CreateApprovalRuleTemplate(
+  /**
+   * createApprovalRuleTemplate - Creates a template for approval rules that can then be associated with one or more repositories in your AWS account. When you associate a template with a repository, AWS CodeCommit creates an approval rule that matches the conditions of the template for all pull requests that meet the conditions of the template. For more information, see <a>AssociateApprovalRuleTemplateWithRepository</a>.
+  **/
+  createApprovalRuleTemplate(
     req: operations.CreateApprovalRuleTemplateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateApprovalRuleTemplateResponse> {
@@ -760,75 +775,75 @@ export class SDK {
       req = new operations.CreateApprovalRuleTemplateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.CreateApprovalRuleTemplate";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateApprovalRuleTemplateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateApprovalRuleTemplateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createApprovalRuleTemplateOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalRuleTemplateNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateNameAlreadyExistsException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateContentRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalRuleTemplateContentException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalRuleTemplateDescriptionException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.numberOfRuleTemplatesExceededException = httpRes?.data;
             }
             break;
@@ -840,8 +855,10 @@ export class SDK {
   }
 
   
-  // CreateBranch - <p>Creates a branch in a repository and points the branch to a commit.</p> <note> <p>Calling the create branch operation does not set a repository's default branch. To do this, call the update default branch operation.</p> </note>
-  CreateBranch(
+  /**
+   * createBranch - <p>Creates a branch in a repository and points the branch to a commit.</p> <note> <p>Calling the create branch operation does not set a repository's default branch. To do this, call the update default branch operation.</p> </note>
+  **/
+  createBranch(
     req: operations.CreateBranchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateBranchResponse> {
@@ -849,107 +866,107 @@ export class SDK {
       req = new operations.CreateBranchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.CreateBranch";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateBranchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CreateBranchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchNameRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchNameExistsException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidBranchNameException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitIdRequiredException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitDoesNotExistException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitIdException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -961,8 +978,10 @@ export class SDK {
   }
 
   
-  // CreateCommit - Creates a commit for a repository on the tip of a specified branch.
-  CreateCommit(
+  /**
+   * createCommit - Creates a commit for a repository on the tip of a specified branch.
+  **/
+  createCommit(
     req: operations.CreateCommitRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateCommitResponse> {
@@ -970,230 +989,230 @@ export class SDK {
       req = new operations.CreateCommitRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.CreateCommit";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateCommitResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateCommitResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createCommitOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.parentCommitIdRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParentCommitIdException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.parentCommitDoesNotExistException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.parentCommitIdOutdatedException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchNameRequiredException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidBranchNameException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchDoesNotExistException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchNameIsTagNameException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileEntryRequiredException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumFileEntriesExceededException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.putFileEntryConflictException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sourceFileOrContentRequiredException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileContentAndSourceFileSpecifiedException = httpRes?.data;
             }
             break;
-          case 496:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 496:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pathRequiredException = httpRes?.data;
             }
             break;
-          case 497:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 497:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPathException = httpRes?.data;
             }
             break;
-          case 498:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 498:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.samePathRequestException = httpRes?.data;
             }
             break;
-          case 499:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 499:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileDoesNotExistException = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileContentSizeLimitExceededException = httpRes?.data;
             }
             break;
-          case 501:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 501:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.folderContentSizeLimitExceededException = httpRes?.data;
             }
             break;
-          case 502:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 502:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidDeletionParameterException = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.restrictedSourceFileException = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileModeRequiredException = httpRes?.data;
             }
             break;
-          case 505:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 505:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidFileModeException = httpRes?.data;
             }
             break;
-          case 506:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 506:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nameLengthExceededException = httpRes?.data;
             }
             break;
-          case 507:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 507:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidEmailException = httpRes?.data;
             }
             break;
-          case 508:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 508:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitMessageLengthExceededException = httpRes?.data;
             }
             break;
-          case 509:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 509:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 510:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 510:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 511:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 511:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 512:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 512:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 513:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 513:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
-          case 514:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 514:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.noChangeException = httpRes?.data;
             }
             break;
-          case 515:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 515:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileNameConflictsWithDirectoryNameException = httpRes?.data;
             }
             break;
-          case 516:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 516:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.directoryNameConflictsWithFileNameException = httpRes?.data;
             }
             break;
-          case 517:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 517:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.filePathConflictsWithSubmodulePathException = httpRes?.data;
             }
             break;
@@ -1205,8 +1224,10 @@ export class SDK {
   }
 
   
-  // CreatePullRequest - Creates a pull request in the specified repository.
-  CreatePullRequest(
+  /**
+   * createPullRequest - Creates a pull request in the specified repository.
+  **/
+  createPullRequest(
     req: operations.CreatePullRequestRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreatePullRequestResponse> {
@@ -1214,165 +1235,165 @@ export class SDK {
       req = new operations.CreatePullRequestRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.CreatePullRequest";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreatePullRequestResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreatePullRequestResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createPullRequestOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.clientRequestTokenRequiredException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidClientRequestTokenException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.idempotencyParameterMismatchException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.referenceNameRequiredException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidReferenceNameException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.referenceDoesNotExistException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.referenceTypeNotSupportedException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.titleRequiredException = httpRes?.data;
             }
             break;
-          case 496:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 496:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidTitleException = httpRes?.data;
             }
             break;
-          case 497:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 497:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidDescriptionException = httpRes?.data;
             }
             break;
-          case 498:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 498:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.targetsRequiredException = httpRes?.data;
             }
             break;
-          case 499:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 499:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidTargetsException = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.targetRequiredException = httpRes?.data;
             }
             break;
-          case 501:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 501:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidTargetException = httpRes?.data;
             }
             break;
-          case 502:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 502:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.multipleRepositoriesInPullRequestException = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumOpenPullRequestsExceededException = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sourceAndDestinationAreSameException = httpRes?.data;
             }
             break;
@@ -1384,8 +1405,10 @@ export class SDK {
   }
 
   
-  // CreatePullRequestApprovalRule - Creates an approval rule for a pull request.
-  CreatePullRequestApprovalRule(
+  /**
+   * createPullRequestApprovalRule - Creates an approval rule for a pull request.
+  **/
+  createPullRequestApprovalRule(
     req: operations.CreatePullRequestApprovalRuleRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreatePullRequestApprovalRuleResponse> {
@@ -1393,115 +1416,115 @@ export class SDK {
       req = new operations.CreatePullRequestApprovalRuleRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.CreatePullRequestApprovalRule";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreatePullRequestApprovalRuleResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreatePullRequestApprovalRuleResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createPullRequestApprovalRuleOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalRuleNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleNameAlreadyExistsException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleContentRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalRuleContentException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.numberOfRulesExceededException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestDoesNotExistException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestIdException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestIdRequiredException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestAlreadyClosedException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -1513,8 +1536,10 @@ export class SDK {
   }
 
   
-  // CreateRepository - Creates a new, empty repository.
-  CreateRepository(
+  /**
+   * createRepository - Creates a new, empty repository.
+  **/
+  createRepository(
     req: operations.CreateRepositoryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateRepositoryResponse> {
@@ -1522,110 +1547,110 @@ export class SDK {
       req = new operations.CreateRepositoryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.CreateRepository";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateRepositoryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateRepositoryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createRepositoryOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameExistsException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryDescriptionException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryLimitExceededException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidTagsMapException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tooManyTagsException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidSystemTagUsageException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tagPolicyException = httpRes?.data;
             }
             break;
@@ -1637,8 +1662,10 @@ export class SDK {
   }
 
   
-  // CreateUnreferencedMergeCommit - <p>Creates an unreferenced commit that represents the result of merging two branches using a specified merge strategy. This can help you determine the outcome of a potential merge. This API cannot be used with the fast-forward merge strategy because that strategy does not create a merge commit.</p> <note> <p>This unreferenced merge commit can only be accessed using the GetCommit API or through git commands such as git fetch. To retrieve this commit, you must specify its commit ID or otherwise reference it.</p> </note>
-  CreateUnreferencedMergeCommit(
+  /**
+   * createUnreferencedMergeCommit - <p>Creates an unreferenced commit that represents the result of merging two branches using a specified merge strategy. This can help you determine the outcome of a potential merge. This API cannot be used with the fast-forward merge strategy because that strategy does not create a merge commit.</p> <note> <p>This unreferenced merge commit can only be accessed using the GetCommit API or through git commands such as git fetch. To retrieve this commit, you must specify its commit ID or otherwise reference it.</p> </note>
+  **/
+  createUnreferencedMergeCommit(
     req: operations.CreateUnreferencedMergeCommitRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateUnreferencedMergeCommitResponse> {
@@ -1646,220 +1673,220 @@ export class SDK {
       req = new operations.CreateUnreferencedMergeCommitRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.CreateUnreferencedMergeCommit";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateUnreferencedMergeCommitResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateUnreferencedMergeCommitResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createUnreferencedMergeCommitOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tipsDivergenceExceededException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitRequiredException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitDoesNotExistException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.mergeOptionRequiredException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidMergeOptionException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictDetailLevelException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictResolutionStrategyException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictResolutionException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.manualMergeRequiredException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumConflictResolutionEntriesExceededException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.multipleConflictResolutionEntriesException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.replacementTypeRequiredException = httpRes?.data;
             }
             break;
-          case 496:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 496:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidReplacementTypeException = httpRes?.data;
             }
             break;
-          case 497:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 497:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.replacementContentRequiredException = httpRes?.data;
             }
             break;
-          case 498:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 498:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidReplacementContentException = httpRes?.data;
             }
             break;
-          case 499:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 499:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pathRequiredException = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPathException = httpRes?.data;
             }
             break;
-          case 501:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 501:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileContentSizeLimitExceededException = httpRes?.data;
             }
             break;
-          case 502:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 502:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.folderContentSizeLimitExceededException = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumFileContentToLoadExceededException = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumItemsToCompareExceededException = httpRes?.data;
             }
             break;
-          case 505:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 505:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.concurrentReferenceUpdateException = httpRes?.data;
             }
             break;
-          case 506:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 506:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileModeRequiredException = httpRes?.data;
             }
             break;
-          case 507:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 507:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidFileModeException = httpRes?.data;
             }
             break;
-          case 508:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 508:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nameLengthExceededException = httpRes?.data;
             }
             break;
-          case 509:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 509:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidEmailException = httpRes?.data;
             }
             break;
-          case 510:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 510:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitMessageLengthExceededException = httpRes?.data;
             }
             break;
-          case 511:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 511:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 512:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 512:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 513:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 513:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 514:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 514:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 515:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 515:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -1871,8 +1898,10 @@ export class SDK {
   }
 
   
-  // DeleteApprovalRuleTemplate - Deletes a specified approval rule template. Deleting a template does not remove approval rules on pull requests already created with the template.
-  DeleteApprovalRuleTemplate(
+  /**
+   * deleteApprovalRuleTemplate - Deletes a specified approval rule template. Deleting a template does not remove approval rules on pull requests already created with the template.
+  **/
+  deleteApprovalRuleTemplate(
     req: operations.DeleteApprovalRuleTemplateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteApprovalRuleTemplateResponse> {
@@ -1880,55 +1909,55 @@ export class SDK {
       req = new operations.DeleteApprovalRuleTemplateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.DeleteApprovalRuleTemplate";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteApprovalRuleTemplateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteApprovalRuleTemplateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteApprovalRuleTemplateOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalRuleTemplateNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateInUseException = httpRes?.data;
             }
             break;
@@ -1940,8 +1969,10 @@ export class SDK {
   }
 
   
-  // DeleteBranch - Deletes a branch from a repository, unless that branch is the default branch for the repository. 
-  DeleteBranch(
+  /**
+   * deleteBranch - Deletes a branch from a repository, unless that branch is the default branch for the repository. 
+  **/
+  deleteBranch(
     req: operations.DeleteBranchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteBranchResponse> {
@@ -1949,95 +1980,95 @@ export class SDK {
       req = new operations.DeleteBranchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.DeleteBranch";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteBranchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteBranchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteBranchOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchNameRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidBranchNameException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.defaultBranchCannotBeDeletedException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -2049,8 +2080,10 @@ export class SDK {
   }
 
   
-  // DeleteCommentContent - Deletes the content of a comment made on a change, file, or commit in a repository.
-  DeleteCommentContent(
+  /**
+   * deleteCommentContent - Deletes the content of a comment made on a change, file, or commit in a repository.
+  **/
+  deleteCommentContent(
     req: operations.DeleteCommentContentRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteCommentContentResponse> {
@@ -2058,60 +2091,60 @@ export class SDK {
       req = new operations.DeleteCommentContentRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.DeleteCommentContent";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteCommentContentResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteCommentContentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteCommentContentOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentIdRequiredException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommentIdException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentDeletedException = httpRes?.data;
             }
             break;
@@ -2123,8 +2156,10 @@ export class SDK {
   }
 
   
-  // DeleteFile - Deletes a specified file from a specified branch. A commit is created on the branch that contains the revision. The file still exists in the commits earlier to the commit that contains the deletion.
-  DeleteFile(
+  /**
+   * deleteFile - Deletes a specified file from a specified branch. A commit is created on the branch that contains the revision. The file still exists in the commits earlier to the commit that contains the deletion.
+  **/
+  deleteFile(
     req: operations.DeleteFileRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteFileResponse> {
@@ -2132,150 +2167,150 @@ export class SDK {
       req = new operations.DeleteFileRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.DeleteFile";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteFileResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteFileResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteFileOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.parentCommitIdRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParentCommitIdException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.parentCommitDoesNotExistException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.parentCommitIdOutdatedException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pathRequiredException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPathException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileDoesNotExistException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchNameRequiredException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidBranchNameException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchDoesNotExistException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchNameIsTagNameException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nameLengthExceededException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidEmailException = httpRes?.data;
             }
             break;
-          case 496:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 496:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitMessageLengthExceededException = httpRes?.data;
             }
             break;
-          case 497:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 497:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 498:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 498:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 499:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 499:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 501:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 501:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -2287,8 +2322,10 @@ export class SDK {
   }
 
   
-  // DeletePullRequestApprovalRule - Deletes an approval rule from a specified pull request. Approval rules can be deleted from a pull request only if the pull request is open, and if the approval rule was created specifically for a pull request and not generated from an approval rule template associated with the repository where the pull request was created. You cannot delete an approval rule from a merged or closed pull request.
-  DeletePullRequestApprovalRule(
+  /**
+   * deletePullRequestApprovalRule - Deletes an approval rule from a specified pull request. Approval rules can be deleted from a pull request only if the pull request is open, and if the approval rule was created specifically for a pull request and not generated from an approval rule template associated with the repository where the pull request was created. You cannot delete an approval rule from a merged or closed pull request.
+  **/
+  deletePullRequestApprovalRule(
     req: operations.DeletePullRequestApprovalRuleRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeletePullRequestApprovalRuleResponse> {
@@ -2296,100 +2333,100 @@ export class SDK {
       req = new operations.DeletePullRequestApprovalRuleRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.DeletePullRequestApprovalRule";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeletePullRequestApprovalRuleResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeletePullRequestApprovalRuleResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deletePullRequestApprovalRuleOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestIdException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestIdRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestAlreadyClosedException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleNameRequiredException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalRuleNameException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cannotDeleteApprovalRuleFromTemplateException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -2401,8 +2438,10 @@ export class SDK {
   }
 
   
-  // DeleteRepository - <p>Deletes a repository. If a specified repository was already deleted, a null repository ID is returned.</p> <important> <p>Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository fail.</p> </important>
-  DeleteRepository(
+  /**
+   * deleteRepository - <p>Deletes a repository. If a specified repository was already deleted, a null repository ID is returned.</p> <important> <p>Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository fail.</p> </important>
+  **/
+  deleteRepository(
     req: operations.DeleteRepositoryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteRepositoryResponse> {
@@ -2410,75 +2449,75 @@ export class SDK {
       req = new operations.DeleteRepositoryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.DeleteRepository";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteRepositoryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteRepositoryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteRepositoryOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -2490,8 +2529,10 @@ export class SDK {
   }
 
   
-  // DescribeMergeConflicts - Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy. If the merge option for the attempted merge is specified as FAST_FORWARD_MERGE, an exception is thrown.
-  DescribeMergeConflicts(
+  /**
+   * describeMergeConflicts - Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy. If the merge option for the attempted merge is specified as FAST_FORWARD_MERGE, an exception is thrown.
+  **/
+  describeMergeConflicts(
     req: operations.DescribeMergeConflictsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribeMergeConflictsResponse> {
@@ -2499,22 +2540,22 @@ export class SDK {
       req = new operations.DescribeMergeConflictsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.DescribeMergeConflicts";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2525,137 +2566,137 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribeMergeConflictsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribeMergeConflictsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describeMergeConflictsOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.mergeOptionRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidMergeOptionException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidContinuationTokenException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitRequiredException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitDoesNotExistException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tipsDivergenceExceededException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pathRequiredException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPathException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileDoesNotExistException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidMaxMergeHunksException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictDetailLevelException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictResolutionStrategyException = httpRes?.data;
             }
             break;
-          case 496:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 496:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumFileContentToLoadExceededException = httpRes?.data;
             }
             break;
-          case 497:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 497:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumItemsToCompareExceededException = httpRes?.data;
             }
             break;
-          case 498:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 498:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 499:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 499:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 501:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 501:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 502:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 502:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -2667,8 +2708,10 @@ export class SDK {
   }
 
   
-  // DescribePullRequestEvents - Returns information about one or more pull request events.
-  DescribePullRequestEvents(
+  /**
+   * describePullRequestEvents - Returns information about one or more pull request events.
+  **/
+  describePullRequestEvents(
     req: operations.DescribePullRequestEventsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DescribePullRequestEventsResponse> {
@@ -2676,22 +2719,22 @@ export class SDK {
       req = new operations.DescribePullRequestEventsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.DescribePullRequestEvents";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2702,87 +2745,87 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DescribePullRequestEventsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DescribePullRequestEventsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.describePullRequestEventsOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestIdException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestIdRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestEventTypeException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidActorArnException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.actorDoesNotExistException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidMaxResultsException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidContinuationTokenException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -2794,8 +2837,10 @@ export class SDK {
   }
 
   
-  // DisassociateApprovalRuleTemplateFromRepository - Removes the association between a template and a repository so that approval rules based on the template are not automatically created when pull requests are created in the specified repository. This does not delete any approval rules previously created for pull requests through the template association.
-  DisassociateApprovalRuleTemplateFromRepository(
+  /**
+   * disassociateApprovalRuleTemplateFromRepository - Removes the association between a template and a repository so that approval rules based on the template are not automatically created when pull requests are created in the specified repository. This does not delete any approval rules previously created for pull requests through the template association.
+  **/
+  disassociateApprovalRuleTemplateFromRepository(
     req: operations.DisassociateApprovalRuleTemplateFromRepositoryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DisassociateApprovalRuleTemplateFromRepositoryResponse> {
@@ -2803,92 +2848,92 @@ export class SDK {
       req = new operations.DisassociateApprovalRuleTemplateFromRepositoryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.DisassociateApprovalRuleTemplateFromRepository";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DisassociateApprovalRuleTemplateFromRepositoryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.DisassociateApprovalRuleTemplateFromRepositoryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalRuleTemplateNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -2900,8 +2945,10 @@ export class SDK {
   }
 
   
-  // EvaluatePullRequestApprovalRules - Evaluates whether a pull request has met all the conditions specified in its associated approval rules.
-  EvaluatePullRequestApprovalRules(
+  /**
+   * evaluatePullRequestApprovalRules - Evaluates whether a pull request has met all the conditions specified in its associated approval rules.
+  **/
+  evaluatePullRequestApprovalRules(
     req: operations.EvaluatePullRequestApprovalRulesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.EvaluatePullRequestApprovalRulesResponse> {
@@ -2909,95 +2956,95 @@ export class SDK {
       req = new operations.EvaluatePullRequestApprovalRulesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.EvaluatePullRequestApprovalRules";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.EvaluatePullRequestApprovalRulesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.EvaluatePullRequestApprovalRulesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.evaluatePullRequestApprovalRulesOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestIdException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestIdRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRevisionIdException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.revisionIdRequiredException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.revisionNotCurrentException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -3009,8 +3056,10 @@ export class SDK {
   }
 
   
-  // GetApprovalRuleTemplate - Returns information about a specified approval rule template.
-  GetApprovalRuleTemplate(
+  /**
+   * getApprovalRuleTemplate - Returns information about a specified approval rule template.
+  **/
+  getApprovalRuleTemplate(
     req: operations.GetApprovalRuleTemplateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApprovalRuleTemplateResponse> {
@@ -3018,55 +3067,55 @@ export class SDK {
       req = new operations.GetApprovalRuleTemplateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.GetApprovalRuleTemplate";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApprovalRuleTemplateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApprovalRuleTemplateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getApprovalRuleTemplateOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalRuleTemplateNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateDoesNotExistException = httpRes?.data;
             }
             break;
@@ -3078,8 +3127,10 @@ export class SDK {
   }
 
   
-  // GetBlob - Returns the base-64 encoded content of an individual blob in a repository.
-  GetBlob(
+  /**
+   * getBlob - Returns the base-64 encoded content of an individual blob in a repository.
+  **/
+  getBlob(
     req: operations.GetBlobRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBlobResponse> {
@@ -3087,100 +3138,100 @@ export class SDK {
       req = new operations.GetBlobRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.GetBlob";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBlobResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetBlobResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getBlobOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.blobIdRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidBlobIdException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.blobIdDoesNotExistException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileTooLargeException = httpRes?.data;
             }
             break;
@@ -3192,8 +3243,10 @@ export class SDK {
   }
 
   
-  // GetBranch - Returns information about a repository branch, including its name and the last commit ID.
-  GetBranch(
+  /**
+   * getBranch - Returns information about a repository branch, including its name and the last commit ID.
+  **/
+  getBranch(
     req: operations.GetBranchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBranchResponse> {
@@ -3201,95 +3254,95 @@ export class SDK {
       req = new operations.GetBranchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.GetBranch";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBranchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetBranchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getBranchOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchNameRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidBranchNameException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchDoesNotExistException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -3301,8 +3354,10 @@ export class SDK {
   }
 
   
-  // GetComment - <p>Returns the content of a comment made on a change, file, or commit in a repository. </p> <note> <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions.</p> </note>
-  GetComment(
+  /**
+   * getComment - <p>Returns the content of a comment made on a change, file, or commit in a repository. </p> <note> <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions.</p> </note>
+  **/
+  getComment(
     req: operations.GetCommentRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetCommentResponse> {
@@ -3310,85 +3365,85 @@ export class SDK {
       req = new operations.GetCommentRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.GetComment";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetCommentResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetCommentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getCommentOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentDeletedException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentIdRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommentIdException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -3400,8 +3455,10 @@ export class SDK {
   }
 
   
-  // GetCommentReactions - Returns information about reactions to a specified comment ID. Reactions from users who have been deleted will not be included in the count.
-  GetCommentReactions(
+  /**
+   * getCommentReactions - Returns information about reactions to a specified comment ID. Reactions from users who have been deleted will not be included in the count.
+  **/
+  getCommentReactions(
     req: operations.GetCommentReactionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetCommentReactionsResponse> {
@@ -3409,22 +3466,22 @@ export class SDK {
       req = new operations.GetCommentReactionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.GetCommentReactions";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3435,57 +3492,57 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetCommentReactionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetCommentReactionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getCommentReactionsOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentIdRequiredException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommentIdException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidReactionUserArnException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidMaxResultsException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidContinuationTokenException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentDeletedException = httpRes?.data;
             }
             break;
@@ -3497,8 +3554,10 @@ export class SDK {
   }
 
   
-  // GetCommentsForComparedCommit - <p>Returns information about comments made on the comparison between two commits.</p> <note> <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions.</p> </note>
-  GetCommentsForComparedCommit(
+  /**
+   * getCommentsForComparedCommit - <p>Returns information about comments made on the comparison between two commits.</p> <note> <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions.</p> </note>
+  **/
+  getCommentsForComparedCommit(
     req: operations.GetCommentsForComparedCommitRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetCommentsForComparedCommitResponse> {
@@ -3506,22 +3565,22 @@ export class SDK {
       req = new operations.GetCommentsForComparedCommitRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.GetCommentsForComparedCommit";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3532,87 +3591,87 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetCommentsForComparedCommitResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetCommentsForComparedCommitResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getCommentsForComparedCommitOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitIdRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitIdException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitDoesNotExistException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidMaxResultsException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidContinuationTokenException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -3624,8 +3683,10 @@ export class SDK {
   }
 
   
-  // GetCommentsForPullRequest - <p>Returns comments made on a pull request.</p> <note> <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions.</p> </note>
-  GetCommentsForPullRequest(
+  /**
+   * getCommentsForPullRequest - <p>Returns comments made on a pull request.</p> <note> <p>Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions.</p> </note>
+  **/
+  getCommentsForPullRequest(
     req: operations.GetCommentsForPullRequestRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetCommentsForPullRequestResponse> {
@@ -3633,22 +3694,22 @@ export class SDK {
       req = new operations.GetCommentsForPullRequestRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.GetCommentsForPullRequest";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3659,107 +3720,107 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetCommentsForPullRequestResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetCommentsForPullRequestResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getCommentsForPullRequestOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestIdRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestDoesNotExistException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestIdException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitIdRequiredException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitIdException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitDoesNotExistException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidMaxResultsException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidContinuationTokenException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNotAssociatedWithPullRequestException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 496:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 496:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -3771,8 +3832,10 @@ export class SDK {
   }
 
   
-  // GetCommit - Returns information about a commit, including commit message and committer information.
-  GetCommit(
+  /**
+   * getCommit - Returns information about a commit, including commit message and committer information.
+  **/
+  getCommit(
     req: operations.GetCommitRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetCommitResponse> {
@@ -3780,95 +3843,95 @@ export class SDK {
       req = new operations.GetCommitRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.GetCommit";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetCommitResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetCommitResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getCommitOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitIdRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitIdException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitIdDoesNotExistException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -3880,8 +3943,10 @@ export class SDK {
   }
 
   
-  // GetDifferences - Returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID, or other fully qualified reference). Results can be limited to a specified path.
-  GetDifferences(
+  /**
+   * getDifferences - Returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID, or other fully qualified reference). Results can be limited to a specified path.
+  **/
+  getDifferences(
     req: operations.GetDifferencesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetDifferencesResponse> {
@@ -3889,22 +3954,22 @@ export class SDK {
       req = new operations.GetDifferencesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.GetDifferences";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3915,102 +3980,102 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDifferencesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetDifferencesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getDifferencesOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidContinuationTokenException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidMaxResultsException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitIdException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitRequiredException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitDoesNotExistException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPathException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pathDoesNotExistException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -4022,8 +4087,10 @@ export class SDK {
   }
 
   
-  // GetFile - Returns the base-64 encoded contents of a specified file and its metadata.
-  GetFile(
+  /**
+   * getFile - Returns the base-64 encoded contents of a specified file and its metadata.
+  **/
+  getFile(
     req: operations.GetFileRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetFileResponse> {
@@ -4031,110 +4098,110 @@ export class SDK {
       req = new operations.GetFileRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.GetFile";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetFileResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetFileResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getFileOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitDoesNotExistException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pathRequiredException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPathException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileDoesNotExistException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileTooLargeException = httpRes?.data;
             }
             break;
@@ -4146,8 +4213,10 @@ export class SDK {
   }
 
   
-  // GetFolder - Returns the contents of a specified folder in a repository.
-  GetFolder(
+  /**
+   * getFolder - Returns the contents of a specified folder in a repository.
+  **/
+  getFolder(
     req: operations.GetFolderRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetFolderResponse> {
@@ -4155,105 +4224,105 @@ export class SDK {
       req = new operations.GetFolderRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.GetFolder";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetFolderResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetFolderResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getFolderOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitDoesNotExistException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pathRequiredException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPathException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.folderDoesNotExistException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -4265,8 +4334,10 @@ export class SDK {
   }
 
   
-  // GetMergeCommit - Returns information about a specified merge commit.
-  GetMergeCommit(
+  /**
+   * getMergeCommit - Returns information about a specified merge commit.
+  **/
+  getMergeCommit(
     req: operations.GetMergeCommitRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMergeCommitResponse> {
@@ -4274,105 +4345,105 @@ export class SDK {
       req = new operations.GetMergeCommitRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.GetMergeCommit";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMergeCommitResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetMergeCommitResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getMergeCommitOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitDoesNotExistException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictDetailLevelException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictResolutionStrategyException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -4384,8 +4455,10 @@ export class SDK {
   }
 
   
-  // GetMergeConflicts - Returns information about merge conflicts between the before and after commit IDs for a pull request in a repository.
-  GetMergeConflicts(
+  /**
+   * getMergeConflicts - Returns information about merge conflicts between the before and after commit IDs for a pull request in a repository.
+  **/
+  getMergeConflicts(
     req: operations.GetMergeConflictsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMergeConflictsResponse> {
@@ -4393,22 +4466,22 @@ export class SDK {
       req = new operations.GetMergeConflictsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.GetMergeConflicts";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4419,132 +4492,132 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMergeConflictsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetMergeConflictsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getMergeConflictsOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.mergeOptionRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidMergeOptionException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidContinuationTokenException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitRequiredException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitDoesNotExistException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tipsDivergenceExceededException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidMaxConflictFilesException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictDetailLevelException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidDestinationCommitSpecifierException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidSourceCommitSpecifierException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictResolutionStrategyException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumFileContentToLoadExceededException = httpRes?.data;
             }
             break;
-          case 496:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 496:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumItemsToCompareExceededException = httpRes?.data;
             }
             break;
-          case 497:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 497:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 498:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 498:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 499:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 499:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 501:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 501:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -4556,8 +4629,10 @@ export class SDK {
   }
 
   
-  // GetMergeOptions - Returns information about the merge options available for merging two specified branches. For details about why a merge option is not available, use GetMergeConflicts or DescribeMergeConflicts.
-  GetMergeOptions(
+  /**
+   * getMergeOptions - Returns information about the merge options available for merging two specified branches. For details about why a merge option is not available, use GetMergeConflicts or DescribeMergeConflicts.
+  **/
+  getMergeOptions(
     req: operations.GetMergeOptionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMergeOptionsResponse> {
@@ -4565,120 +4640,120 @@ export class SDK {
       req = new operations.GetMergeOptionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.GetMergeOptions";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMergeOptionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetMergeOptionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getMergeOptionsOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitDoesNotExistException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tipsDivergenceExceededException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictDetailLevelException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictResolutionStrategyException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumFileContentToLoadExceededException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumItemsToCompareExceededException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -4690,8 +4765,10 @@ export class SDK {
   }
 
   
-  // GetPullRequest - Gets information about a pull request in a specified repository.
-  GetPullRequest(
+  /**
+   * getPullRequest - Gets information about a pull request in a specified repository.
+  **/
+  getPullRequest(
     req: operations.GetPullRequestRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPullRequestResponse> {
@@ -4699,80 +4776,80 @@ export class SDK {
       req = new operations.GetPullRequestRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.GetPullRequest";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPullRequestResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPullRequestResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPullRequestOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestIdException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestIdRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -4784,8 +4861,10 @@ export class SDK {
   }
 
   
-  // GetPullRequestApprovalStates - Gets information about the approval states for a specified pull request. Approval states only apply to pull requests that have one or more approval rules applied to them.
-  GetPullRequestApprovalStates(
+  /**
+   * getPullRequestApprovalStates - Gets information about the approval states for a specified pull request. Approval states only apply to pull requests that have one or more approval rules applied to them.
+  **/
+  getPullRequestApprovalStates(
     req: operations.GetPullRequestApprovalStatesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPullRequestApprovalStatesResponse> {
@@ -4793,90 +4872,90 @@ export class SDK {
       req = new operations.GetPullRequestApprovalStatesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.GetPullRequestApprovalStates";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPullRequestApprovalStatesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPullRequestApprovalStatesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPullRequestApprovalStatesOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestIdException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestIdRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRevisionIdException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.revisionIdRequiredException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -4888,8 +4967,10 @@ export class SDK {
   }
 
   
-  // GetPullRequestOverrideState - Returns information about whether approval rules have been set aside (overridden) for a pull request, and if so, the Amazon Resource Name (ARN) of the user or identity that overrode the rules and their requirements for the pull request.
-  GetPullRequestOverrideState(
+  /**
+   * getPullRequestOverrideState - Returns information about whether approval rules have been set aside (overridden) for a pull request, and if so, the Amazon Resource Name (ARN) of the user or identity that overrode the rules and their requirements for the pull request.
+  **/
+  getPullRequestOverrideState(
     req: operations.GetPullRequestOverrideStateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPullRequestOverrideStateResponse> {
@@ -4897,90 +4978,90 @@ export class SDK {
       req = new operations.GetPullRequestOverrideStateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.GetPullRequestOverrideState";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPullRequestOverrideStateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPullRequestOverrideStateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPullRequestOverrideStateOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestIdException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestIdRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRevisionIdException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.revisionIdRequiredException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -4992,8 +5073,10 @@ export class SDK {
   }
 
   
-  // GetRepository - <p>Returns information about a repository.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a webpage can expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a webpage.</p> </note>
-  GetRepository(
+  /**
+   * getRepository - <p>Returns information about a repository.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a webpage can expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a webpage.</p> </note>
+  **/
+  getRepository(
     req: operations.GetRepositoryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRepositoryResponse> {
@@ -5001,80 +5084,80 @@ export class SDK {
       req = new operations.GetRepositoryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.GetRepository";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRepositoryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetRepositoryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRepositoryOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -5086,8 +5169,10 @@ export class SDK {
   }
 
   
-  // GetRepositoryTriggers - Gets information about triggers configured for a repository.
-  GetRepositoryTriggers(
+  /**
+   * getRepositoryTriggers - Gets information about triggers configured for a repository.
+  **/
+  getRepositoryTriggers(
     req: operations.GetRepositoryTriggersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRepositoryTriggersResponse> {
@@ -5095,80 +5180,80 @@ export class SDK {
       req = new operations.GetRepositoryTriggersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.GetRepositoryTriggers";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRepositoryTriggersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetRepositoryTriggersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRepositoryTriggersOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -5180,8 +5265,10 @@ export class SDK {
   }
 
   
-  // ListApprovalRuleTemplates - Lists all approval rule templates in the specified AWS Region in your AWS account. If an AWS Region is not specified, the AWS Region where you are signed in is used.
-  ListApprovalRuleTemplates(
+  /**
+   * listApprovalRuleTemplates - Lists all approval rule templates in the specified AWS Region in your AWS account. If an AWS Region is not specified, the AWS Region where you are signed in is used.
+  **/
+  listApprovalRuleTemplates(
     req: operations.ListApprovalRuleTemplatesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListApprovalRuleTemplatesResponse> {
@@ -5189,22 +5276,22 @@ export class SDK {
       req = new operations.ListApprovalRuleTemplatesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.ListApprovalRuleTemplates";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5215,32 +5302,32 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListApprovalRuleTemplatesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListApprovalRuleTemplatesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listApprovalRuleTemplatesOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidMaxResultsException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidContinuationTokenException = httpRes?.data;
             }
             break;
@@ -5252,8 +5339,10 @@ export class SDK {
   }
 
   
-  // ListAssociatedApprovalRuleTemplatesForRepository - Lists all approval rule templates that are associated with a specified repository.
-  ListAssociatedApprovalRuleTemplatesForRepository(
+  /**
+   * listAssociatedApprovalRuleTemplatesForRepository - Lists all approval rule templates that are associated with a specified repository.
+  **/
+  listAssociatedApprovalRuleTemplatesForRepository(
     req: operations.ListAssociatedApprovalRuleTemplatesForRepositoryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListAssociatedApprovalRuleTemplatesForRepositoryResponse> {
@@ -5261,22 +5350,22 @@ export class SDK {
       req = new operations.ListAssociatedApprovalRuleTemplatesForRepositoryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.ListAssociatedApprovalRuleTemplatesForRepository";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5287,72 +5376,72 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListAssociatedApprovalRuleTemplatesForRepositoryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListAssociatedApprovalRuleTemplatesForRepositoryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAssociatedApprovalRuleTemplatesForRepositoryOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidMaxResultsException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidContinuationTokenException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -5364,8 +5453,10 @@ export class SDK {
   }
 
   
-  // ListBranches - Gets information about one or more branches in a repository.
-  ListBranches(
+  /**
+   * listBranches - Gets information about one or more branches in a repository.
+  **/
+  listBranches(
     req: operations.ListBranchesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListBranchesResponse> {
@@ -5373,22 +5464,22 @@ export class SDK {
       req = new operations.ListBranchesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.ListBranches";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5399,67 +5490,67 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListBranchesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListBranchesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listBranchesOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidContinuationTokenException = httpRes?.data;
             }
             break;
@@ -5471,8 +5562,10 @@ export class SDK {
   }
 
   
-  // ListPullRequests - Returns a list of pull requests for a specified repository. The return list can be refined by pull request status or pull request author ARN.
-  ListPullRequests(
+  /**
+   * listPullRequests - Returns a list of pull requests for a specified repository. The return list can be refined by pull request status or pull request author ARN.
+  **/
+  listPullRequests(
     req: operations.ListPullRequestsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListPullRequestsResponse> {
@@ -5480,22 +5573,22 @@ export class SDK {
       req = new operations.ListPullRequestsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.ListPullRequests";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5506,87 +5599,87 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListPullRequestsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListPullRequestsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listPullRequestsOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestStatusException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidAuthorArnException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.authorDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidMaxResultsException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidContinuationTokenException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -5598,8 +5691,10 @@ export class SDK {
   }
 
   
-  // ListRepositories - Gets information about one or more repositories.
-  ListRepositories(
+  /**
+   * listRepositories - Gets information about one or more repositories.
+  **/
+  listRepositories(
     req: operations.ListRepositoriesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListRepositoriesResponse> {
@@ -5607,22 +5702,22 @@ export class SDK {
       req = new operations.ListRepositoriesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.ListRepositories";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5633,37 +5728,37 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListRepositoriesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListRepositoriesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listRepositoriesOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidSortByException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidOrderException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidContinuationTokenException = httpRes?.data;
             }
             break;
@@ -5675,8 +5770,10 @@ export class SDK {
   }
 
   
-  // ListRepositoriesForApprovalRuleTemplate - Lists all repositories associated with the specified approval rule template.
-  ListRepositoriesForApprovalRuleTemplate(
+  /**
+   * listRepositoriesForApprovalRuleTemplate - Lists all repositories associated with the specified approval rule template.
+  **/
+  listRepositoriesForApprovalRuleTemplate(
     req: operations.ListRepositoriesForApprovalRuleTemplateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListRepositoriesForApprovalRuleTemplateResponse> {
@@ -5684,22 +5781,22 @@ export class SDK {
       req = new operations.ListRepositoriesForApprovalRuleTemplateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.ListRepositoriesForApprovalRuleTemplate";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5710,72 +5807,72 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListRepositoriesForApprovalRuleTemplateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListRepositoriesForApprovalRuleTemplateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listRepositoriesForApprovalRuleTemplateOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalRuleTemplateNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidMaxResultsException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidContinuationTokenException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -5787,8 +5884,10 @@ export class SDK {
   }
 
   
-  // ListTagsForResource - Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats">CodeCommit Resources and Operations</a> in the<i> AWS CodeCommit User Guide</i>.
-  ListTagsForResource(
+  /**
+   * listTagsForResource - Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats">CodeCommit Resources and Operations</a> in the<i> AWS CodeCommit User Guide</i>.
+  **/
+  listTagsForResource(
     req: operations.ListTagsForResourceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListTagsForResourceResponse> {
@@ -5796,60 +5895,60 @@ export class SDK {
       req = new operations.ListTagsForResourceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.ListTagsForResource";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListTagsForResourceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListTagsForResourceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listTagsForResourceOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceArnRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidResourceArnException = httpRes?.data;
             }
             break;
@@ -5861,8 +5960,10 @@ export class SDK {
   }
 
   
-  // MergeBranchesByFastForward - Merges two branches using the fast-forward merge strategy.
-  MergeBranchesByFastForward(
+  /**
+   * mergeBranchesByFastForward - Merges two branches using the fast-forward merge strategy.
+  **/
+  mergeBranchesByFastForward(
     req: operations.MergeBranchesByFastForwardRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.MergeBranchesByFastForwardResponse> {
@@ -5870,135 +5971,135 @@ export class SDK {
       req = new operations.MergeBranchesByFastForwardRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.MergeBranchesByFastForward";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.MergeBranchesByFastForwardResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.MergeBranchesByFastForwardResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.mergeBranchesByFastForwardOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tipsDivergenceExceededException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitRequiredException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitDoesNotExistException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidTargetBranchException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidBranchNameException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchNameRequiredException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchNameIsTagNameException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchDoesNotExistException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.manualMergeRequiredException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.concurrentReferenceUpdateException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 496:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 496:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 497:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 497:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 498:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 498:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -6010,8 +6111,10 @@ export class SDK {
   }
 
   
-  // MergeBranchesBySquash - Merges two branches using the squash merge strategy.
-  MergeBranchesBySquash(
+  /**
+   * mergeBranchesBySquash - Merges two branches using the squash merge strategy.
+  **/
+  mergeBranchesBySquash(
     req: operations.MergeBranchesBySquashRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.MergeBranchesBySquashResponse> {
@@ -6019,235 +6122,235 @@ export class SDK {
       req = new operations.MergeBranchesBySquashRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.MergeBranchesBySquash";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.MergeBranchesBySquashResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.MergeBranchesBySquashResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.mergeBranchesBySquashOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tipsDivergenceExceededException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitRequiredException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitDoesNotExistException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidTargetBranchException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidBranchNameException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchNameRequiredException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchNameIsTagNameException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchDoesNotExistException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.manualMergeRequiredException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictDetailLevelException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictResolutionStrategyException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictResolutionException = httpRes?.data;
             }
             break;
-          case 496:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 496:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumConflictResolutionEntriesExceededException = httpRes?.data;
             }
             break;
-          case 497:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 497:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.multipleConflictResolutionEntriesException = httpRes?.data;
             }
             break;
-          case 498:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 498:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.replacementTypeRequiredException = httpRes?.data;
             }
             break;
-          case 499:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 499:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidReplacementTypeException = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.replacementContentRequiredException = httpRes?.data;
             }
             break;
-          case 501:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 501:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidReplacementContentException = httpRes?.data;
             }
             break;
-          case 502:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 502:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pathRequiredException = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPathException = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileContentSizeLimitExceededException = httpRes?.data;
             }
             break;
-          case 505:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 505:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.folderContentSizeLimitExceededException = httpRes?.data;
             }
             break;
-          case 506:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 506:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumFileContentToLoadExceededException = httpRes?.data;
             }
             break;
-          case 507:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 507:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumItemsToCompareExceededException = httpRes?.data;
             }
             break;
-          case 508:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 508:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileModeRequiredException = httpRes?.data;
             }
             break;
-          case 509:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 509:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidFileModeException = httpRes?.data;
             }
             break;
-          case 510:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 510:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nameLengthExceededException = httpRes?.data;
             }
             break;
-          case 511:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 511:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidEmailException = httpRes?.data;
             }
             break;
-          case 512:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 512:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitMessageLengthExceededException = httpRes?.data;
             }
             break;
-          case 513:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 513:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.concurrentReferenceUpdateException = httpRes?.data;
             }
             break;
-          case 514:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 514:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 515:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 515:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 516:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 516:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 517:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 517:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 518:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 518:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -6259,8 +6362,10 @@ export class SDK {
   }
 
   
-  // MergeBranchesByThreeWay - Merges two specified branches using the three-way merge strategy.
-  MergeBranchesByThreeWay(
+  /**
+   * mergeBranchesByThreeWay - Merges two specified branches using the three-way merge strategy.
+  **/
+  mergeBranchesByThreeWay(
     req: operations.MergeBranchesByThreeWayRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.MergeBranchesByThreeWayResponse> {
@@ -6268,235 +6373,235 @@ export class SDK {
       req = new operations.MergeBranchesByThreeWayRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.MergeBranchesByThreeWay";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.MergeBranchesByThreeWayResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.MergeBranchesByThreeWayResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.mergeBranchesByThreeWayOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tipsDivergenceExceededException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitRequiredException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitDoesNotExistException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidTargetBranchException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidBranchNameException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchNameRequiredException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchNameIsTagNameException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchDoesNotExistException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.manualMergeRequiredException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.concurrentReferenceUpdateException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictDetailLevelException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictResolutionStrategyException = httpRes?.data;
             }
             break;
-          case 496:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 496:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictResolutionException = httpRes?.data;
             }
             break;
-          case 497:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 497:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumConflictResolutionEntriesExceededException = httpRes?.data;
             }
             break;
-          case 498:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 498:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.multipleConflictResolutionEntriesException = httpRes?.data;
             }
             break;
-          case 499:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 499:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.replacementTypeRequiredException = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidReplacementTypeException = httpRes?.data;
             }
             break;
-          case 501:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 501:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.replacementContentRequiredException = httpRes?.data;
             }
             break;
-          case 502:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 502:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidReplacementContentException = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pathRequiredException = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPathException = httpRes?.data;
             }
             break;
-          case 505:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 505:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileContentSizeLimitExceededException = httpRes?.data;
             }
             break;
-          case 506:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 506:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.folderContentSizeLimitExceededException = httpRes?.data;
             }
             break;
-          case 507:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 507:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumFileContentToLoadExceededException = httpRes?.data;
             }
             break;
-          case 508:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 508:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumItemsToCompareExceededException = httpRes?.data;
             }
             break;
-          case 509:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 509:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileModeRequiredException = httpRes?.data;
             }
             break;
-          case 510:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 510:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidFileModeException = httpRes?.data;
             }
             break;
-          case 511:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 511:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nameLengthExceededException = httpRes?.data;
             }
             break;
-          case 512:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 512:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidEmailException = httpRes?.data;
             }
             break;
-          case 513:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 513:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitMessageLengthExceededException = httpRes?.data;
             }
             break;
-          case 514:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 514:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 515:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 515:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 516:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 516:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 517:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 517:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 518:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 518:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -6508,8 +6613,10 @@ export class SDK {
   }
 
   
-  // MergePullRequestByFastForward - Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge strategy. If the merge is successful, it closes the pull request.
-  MergePullRequestByFastForward(
+  /**
+   * mergePullRequestByFastForward - Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge strategy. If the merge is successful, it closes the pull request.
+  **/
+  mergePullRequestByFastForward(
     req: operations.MergePullRequestByFastForwardRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.MergePullRequestByFastForwardResponse> {
@@ -6517,135 +6624,135 @@ export class SDK {
       req = new operations.MergePullRequestByFastForwardRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.MergePullRequestByFastForward";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.MergePullRequestByFastForwardResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.MergePullRequestByFastForwardResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.mergePullRequestByFastForwardOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.manualMergeRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestAlreadyClosedException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestIdException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestIdRequiredException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tipOfSourceReferenceIsDifferentException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.referenceDoesNotExistException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitIdException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNotAssociatedWithPullRequestException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.concurrentReferenceUpdateException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestApprovalRulesNotSatisfiedException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 496:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 496:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 497:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 497:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 498:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 498:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -6657,8 +6764,10 @@ export class SDK {
   }
 
   
-  // MergePullRequestBySquash - Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the squash merge strategy. If the merge is successful, it closes the pull request.
-  MergePullRequestBySquash(
+  /**
+   * mergePullRequestBySquash - Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the squash merge strategy. If the merge is successful, it closes the pull request.
+  **/
+  mergePullRequestBySquash(
     req: operations.MergePullRequestBySquashRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.MergePullRequestBySquashResponse> {
@@ -6666,230 +6775,230 @@ export class SDK {
       req = new operations.MergePullRequestBySquashRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.MergePullRequestBySquash";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.MergePullRequestBySquashResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.MergePullRequestBySquashResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.mergePullRequestBySquashOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestAlreadyClosedException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestDoesNotExistException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestIdRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestIdException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitIdException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.manualMergeRequiredException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tipOfSourceReferenceIsDifferentException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tipsDivergenceExceededException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nameLengthExceededException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidEmailException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitMessageLengthExceededException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictDetailLevelException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictResolutionStrategyException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictResolutionException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.replacementTypeRequiredException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidReplacementTypeException = httpRes?.data;
             }
             break;
-          case 496:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 496:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.multipleConflictResolutionEntriesException = httpRes?.data;
             }
             break;
-          case 497:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 497:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.replacementContentRequiredException = httpRes?.data;
             }
             break;
-          case 498:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 498:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumConflictResolutionEntriesExceededException = httpRes?.data;
             }
             break;
-          case 499:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 499:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.concurrentReferenceUpdateException = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pathRequiredException = httpRes?.data;
             }
             break;
-          case 501:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 501:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPathException = httpRes?.data;
             }
             break;
-          case 502:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 502:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidFileModeException = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidReplacementContentException = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileContentSizeLimitExceededException = httpRes?.data;
             }
             break;
-          case 505:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 505:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.folderContentSizeLimitExceededException = httpRes?.data;
             }
             break;
-          case 506:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 506:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumFileContentToLoadExceededException = httpRes?.data;
             }
             break;
-          case 507:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 507:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumItemsToCompareExceededException = httpRes?.data;
             }
             break;
-          case 508:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 508:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 509:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 509:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 510:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 510:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 511:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 511:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNotAssociatedWithPullRequestException = httpRes?.data;
             }
             break;
-          case 512:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 512:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestApprovalRulesNotSatisfiedException = httpRes?.data;
             }
             break;
-          case 513:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 513:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 514:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 514:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 515:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 515:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 516:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 516:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 517:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 517:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -6901,8 +7010,10 @@ export class SDK {
   }
 
   
-  // MergePullRequestByThreeWay - Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the three-way merge strategy. If the merge is successful, it closes the pull request.
-  MergePullRequestByThreeWay(
+  /**
+   * mergePullRequestByThreeWay - Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the three-way merge strategy. If the merge is successful, it closes the pull request.
+  **/
+  mergePullRequestByThreeWay(
     req: operations.MergePullRequestByThreeWayRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.MergePullRequestByThreeWayResponse> {
@@ -6910,230 +7021,230 @@ export class SDK {
       req = new operations.MergePullRequestByThreeWayRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.MergePullRequestByThreeWay";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.MergePullRequestByThreeWayResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.MergePullRequestByThreeWayResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.mergePullRequestByThreeWayOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestAlreadyClosedException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestDoesNotExistException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestIdRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestIdException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitIdException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.manualMergeRequiredException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tipOfSourceReferenceIsDifferentException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tipsDivergenceExceededException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nameLengthExceededException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidEmailException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitMessageLengthExceededException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictDetailLevelException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictResolutionStrategyException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidConflictResolutionException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.replacementTypeRequiredException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidReplacementTypeException = httpRes?.data;
             }
             break;
-          case 496:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 496:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.multipleConflictResolutionEntriesException = httpRes?.data;
             }
             break;
-          case 497:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 497:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.replacementContentRequiredException = httpRes?.data;
             }
             break;
-          case 498:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 498:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumConflictResolutionEntriesExceededException = httpRes?.data;
             }
             break;
-          case 499:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 499:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pathRequiredException = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPathException = httpRes?.data;
             }
             break;
-          case 501:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 501:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidFileModeException = httpRes?.data;
             }
             break;
-          case 502:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 502:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidReplacementContentException = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileContentSizeLimitExceededException = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.folderContentSizeLimitExceededException = httpRes?.data;
             }
             break;
-          case 505:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 505:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumFileContentToLoadExceededException = httpRes?.data;
             }
             break;
-          case 506:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 506:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumItemsToCompareExceededException = httpRes?.data;
             }
             break;
-          case 507:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 507:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 508:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 508:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 509:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 509:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 510:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 510:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNotAssociatedWithPullRequestException = httpRes?.data;
             }
             break;
-          case 511:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 511:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.concurrentReferenceUpdateException = httpRes?.data;
             }
             break;
-          case 512:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 512:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestApprovalRulesNotSatisfiedException = httpRes?.data;
             }
             break;
-          case 513:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 513:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 514:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 514:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 515:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 515:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 516:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 516:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 517:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 517:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -7145,8 +7256,10 @@ export class SDK {
   }
 
   
-  // OverridePullRequestApprovalRules - Sets aside (overrides) all approval rule requirements for a specified pull request.
-  OverridePullRequestApprovalRules(
+  /**
+   * overridePullRequestApprovalRules - Sets aside (overrides) all approval rule requirements for a specified pull request.
+  **/
+  overridePullRequestApprovalRules(
     req: operations.OverridePullRequestApprovalRulesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.OverridePullRequestApprovalRulesResponse> {
@@ -7154,112 +7267,112 @@ export class SDK {
       req = new operations.OverridePullRequestApprovalRulesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.OverridePullRequestApprovalRules";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.OverridePullRequestApprovalRulesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.OverridePullRequestApprovalRulesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestIdException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestIdRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRevisionIdException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.revisionIdRequiredException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidOverrideStatusException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.overrideStatusRequiredException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.overrideAlreadySetException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.revisionNotCurrentException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestAlreadyClosedException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -7271,8 +7384,10 @@ export class SDK {
   }
 
   
-  // PostCommentForComparedCommit - Posts a comment on the comparison between two commits.
-  PostCommentForComparedCommit(
+  /**
+   * postCommentForComparedCommit - Posts a comment on the comparison between two commits.
+  **/
+  postCommentForComparedCommit(
     req: operations.PostCommentForComparedCommitRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostCommentForComparedCommitResponse> {
@@ -7280,160 +7395,160 @@ export class SDK {
       req = new operations.PostCommentForComparedCommitRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.PostCommentForComparedCommit";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostCommentForComparedCommitResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostCommentForComparedCommitResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postCommentForComparedCommitOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.clientRequestTokenRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidClientRequestTokenException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.idempotencyParameterMismatchException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentContentRequiredException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentContentSizeLimitExceededException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidFileLocationException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRelativeFileVersionEnumException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pathRequiredException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidFilePositionException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitIdRequiredException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitIdException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.beforeCommitIdAndAfterCommitIdAreSameException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 496:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 496:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 497:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 497:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 498:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 498:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 499:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 499:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitDoesNotExistException = httpRes?.data;
             }
             break;
-          case 501:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 501:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPathException = httpRes?.data;
             }
             break;
-          case 502:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 502:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pathDoesNotExistException = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pathRequiredException = httpRes?.data;
             }
             break;
@@ -7445,8 +7560,10 @@ export class SDK {
   }
 
   
-  // PostCommentForPullRequest - Posts a comment on a pull request.
-  PostCommentForPullRequest(
+  /**
+   * postCommentForPullRequest - Posts a comment on a pull request.
+  **/
+  postCommentForPullRequest(
     req: operations.PostCommentForPullRequestRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostCommentForPullRequestResponse> {
@@ -7454,180 +7571,180 @@ export class SDK {
       req = new operations.PostCommentForPullRequestRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.PostCommentForPullRequest";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostCommentForPullRequestResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostCommentForPullRequestResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postCommentForPullRequestOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestIdException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestIdRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNotAssociatedWithPullRequestException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.clientRequestTokenRequiredException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidClientRequestTokenException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.idempotencyParameterMismatchException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentContentRequiredException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentContentSizeLimitExceededException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidFileLocationException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRelativeFileVersionEnumException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pathRequiredException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidFilePositionException = httpRes?.data;
             }
             break;
-          case 496:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 496:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitIdRequiredException = httpRes?.data;
             }
             break;
-          case 497:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 497:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommitIdException = httpRes?.data;
             }
             break;
-          case 498:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 498:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.beforeCommitIdAndAfterCommitIdAreSameException = httpRes?.data;
             }
             break;
-          case 499:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 499:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 501:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 501:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 502:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 502:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitDoesNotExistException = httpRes?.data;
             }
             break;
-          case 505:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 505:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPathException = httpRes?.data;
             }
             break;
-          case 506:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 506:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pathDoesNotExistException = httpRes?.data;
             }
             break;
-          case 507:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 507:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pathRequiredException = httpRes?.data;
             }
             break;
@@ -7639,8 +7756,10 @@ export class SDK {
   }
 
   
-  // PostCommentReply - Posts a comment in reply to an existing comment on a comparison between commits or a pull request.
-  PostCommentReply(
+  /**
+   * postCommentReply - Posts a comment in reply to an existing comment on a comparison between commits or a pull request.
+  **/
+  postCommentReply(
     req: operations.PostCommentReplyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostCommentReplyResponse> {
@@ -7648,80 +7767,80 @@ export class SDK {
       req = new operations.PostCommentReplyRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.PostCommentReply";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostCommentReplyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostCommentReplyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postCommentReplyOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.clientRequestTokenRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidClientRequestTokenException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.idempotencyParameterMismatchException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentContentRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentContentSizeLimitExceededException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentDoesNotExistException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentIdRequiredException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommentIdException = httpRes?.data;
             }
             break;
@@ -7733,8 +7852,10 @@ export class SDK {
   }
 
   
-  // PutCommentReaction - Adds or updates a reaction to a specified comment for the user whose identity is used to make the request. You can only add or update a reaction for yourself. You cannot add, modify, or delete a reaction for another user.
-  PutCommentReaction(
+  /**
+   * putCommentReaction - Adds or updates a reaction to a specified comment for the user whose identity is used to make the request. You can only add or update a reaction for yourself. You cannot add, modify, or delete a reaction for another user.
+  **/
+  putCommentReaction(
     req: operations.PutCommentReactionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutCommentReactionResponse> {
@@ -7742,72 +7863,72 @@ export class SDK {
       req = new operations.PutCommentReactionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.PutCommentReaction";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutCommentReactionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PutCommentReactionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentIdRequiredException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommentIdException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidReactionValueException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.reactionValueRequiredException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.reactionLimitExceededException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentDeletedException = httpRes?.data;
             }
             break;
@@ -7819,8 +7940,10 @@ export class SDK {
   }
 
   
-  // PutFile - Adds or updates a file in a branch in an AWS CodeCommit repository, and generates a commit for the addition in the specified branch.
-  PutFile(
+  /**
+   * putFile - Adds or updates a file in a branch in an AWS CodeCommit repository, and generates a commit for the addition in the specified branch.
+  **/
+  putFile(
     req: operations.PutFileRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutFileResponse> {
@@ -7828,190 +7951,190 @@ export class SDK {
       req = new operations.PutFileRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.PutFile";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutFileResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PutFileResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.putFileOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.parentCommitIdRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidParentCommitIdException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.parentCommitDoesNotExistException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.parentCommitIdOutdatedException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileContentRequiredException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileContentSizeLimitExceededException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.folderContentSizeLimitExceededException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pathRequiredException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPathException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchNameRequiredException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidBranchNameException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchDoesNotExistException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchNameIsTagNameException = httpRes?.data;
             }
             break;
-          case 496:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 496:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidFileModeException = httpRes?.data;
             }
             break;
-          case 497:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 497:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.nameLengthExceededException = httpRes?.data;
             }
             break;
-          case 498:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 498:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidEmailException = httpRes?.data;
             }
             break;
-          case 499:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 499:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commitMessageLengthExceededException = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidDeletionParameterException = httpRes?.data;
             }
             break;
-          case 501:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 501:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 502:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 502:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 505:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 505:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
-          case 506:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 506:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sameFileContentException = httpRes?.data;
             }
             break;
-          case 507:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 507:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fileNameConflictsWithDirectoryNameException = httpRes?.data;
             }
             break;
-          case 508:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 508:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.directoryNameConflictsWithFileNameException = httpRes?.data;
             }
             break;
-          case 509:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 509:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.filePathConflictsWithSubmodulePathException = httpRes?.data;
             }
             break;
@@ -8023,8 +8146,10 @@ export class SDK {
   }
 
   
-  // PutRepositoryTriggers - Replaces all triggers for a repository. Used to create or delete triggers.
-  PutRepositoryTriggers(
+  /**
+   * putRepositoryTriggers - Replaces all triggers for a repository. Used to create or delete triggers.
+  **/
+  putRepositoryTriggers(
     req: operations.PutRepositoryTriggersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutRepositoryTriggersResponse> {
@@ -8032,145 +8157,145 @@ export class SDK {
       req = new operations.PutRepositoryTriggersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.PutRepositoryTriggers";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutRepositoryTriggersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PutRepositoryTriggersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.putRepositoryTriggersOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryTriggersListRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumRepositoryTriggersExceededException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryTriggerNameException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryTriggerDestinationArnException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryTriggerRegionException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryTriggerCustomDataException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumBranchesExceededException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryTriggerBranchNameException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryTriggerEventsException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryTriggerNameRequiredException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryTriggerDestinationArnRequiredException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryTriggerBranchNameListRequiredException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryTriggerEventsListRequiredException = httpRes?.data;
             }
             break;
-          case 496:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 496:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 497:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 497:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 498:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 498:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 499:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 499:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -8182,8 +8307,10 @@ export class SDK {
   }
 
   
-  // TagResource - Adds or updates tags for a resource in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats">CodeCommit Resources and Operations</a> in the <i>AWS CodeCommit User Guide</i>.
-  TagResource(
+  /**
+   * tagResource - Adds or updates tags for a resource in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats">CodeCommit Resources and Operations</a> in the <i>AWS CodeCommit User Guide</i>.
+  **/
+  tagResource(
     req: operations.TagResourceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TagResourceResponse> {
@@ -8191,82 +8318,82 @@ export class SDK {
       req = new operations.TagResourceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.TagResource";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TagResourceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.TagResourceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceArnRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidResourceArnException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tagsMapRequiredException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidTagsMapException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tooManyTagsException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidSystemTagUsageException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tagPolicyException = httpRes?.data;
             }
             break;
@@ -8278,8 +8405,10 @@ export class SDK {
   }
 
   
-  // TestRepositoryTriggers - Tests the functionality of repository triggers by sending information to the trigger target. If real data is available in the repository, the test sends data from the last commit. If no data is available, sample data is generated.
-  TestRepositoryTriggers(
+  /**
+   * testRepositoryTriggers - Tests the functionality of repository triggers by sending information to the trigger target. If real data is available in the repository, the test sends data from the last commit. If no data is available, sample data is generated.
+  **/
+  testRepositoryTriggers(
     req: operations.TestRepositoryTriggersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TestRepositoryTriggersResponse> {
@@ -8287,145 +8416,145 @@ export class SDK {
       req = new operations.TestRepositoryTriggersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.TestRepositoryTriggers";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TestRepositoryTriggersResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.TestRepositoryTriggersResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.testRepositoryTriggersOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryTriggersListRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumRepositoryTriggersExceededException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryTriggerNameException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryTriggerDestinationArnException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryTriggerRegionException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryTriggerCustomDataException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumBranchesExceededException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryTriggerBranchNameException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryTriggerEventsException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryTriggerNameRequiredException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryTriggerDestinationArnRequiredException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryTriggerBranchNameListRequiredException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryTriggerEventsListRequiredException = httpRes?.data;
             }
             break;
-          case 496:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 496:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 497:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 497:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 498:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 498:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 499:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 499:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -8437,8 +8566,10 @@ export class SDK {
   }
 
   
-  // UntagResource - Removes tags for a resource in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats">CodeCommit Resources and Operations</a> in the <i>AWS CodeCommit User Guide</i>.
-  UntagResource(
+  /**
+   * untagResource - Removes tags for a resource in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats">CodeCommit Resources and Operations</a> in the <i>AWS CodeCommit User Guide</i>.
+  **/
+  untagResource(
     req: operations.UntagResourceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UntagResourceResponse> {
@@ -8446,82 +8577,82 @@ export class SDK {
       req = new operations.UntagResourceRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.UntagResource";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UntagResourceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.UntagResourceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.resourceArnRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidResourceArnException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tagKeysListRequiredException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidTagKeysListException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tooManyTagsException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidSystemTagUsageException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tagPolicyException = httpRes?.data;
             }
             break;
@@ -8533,8 +8664,10 @@ export class SDK {
   }
 
   
-  // UpdateApprovalRuleTemplateContent - Updates the content of an approval rule template. You can change the number of required approvals, the membership of the approval rule, and whether an approval pool is defined.
-  UpdateApprovalRuleTemplateContent(
+  /**
+   * updateApprovalRuleTemplateContent - Updates the content of an approval rule template. You can change the number of required approvals, the membership of the approval rule, and whether an approval pool is defined.
+  **/
+  updateApprovalRuleTemplateContent(
     req: operations.UpdateApprovalRuleTemplateContentRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateApprovalRuleTemplateContentResponse> {
@@ -8542,70 +8675,70 @@ export class SDK {
       req = new operations.UpdateApprovalRuleTemplateContentRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.UpdateApprovalRuleTemplateContent";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateApprovalRuleTemplateContentResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateApprovalRuleTemplateContentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateApprovalRuleTemplateContentOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalRuleTemplateNameException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateNameRequiredException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalRuleTemplateContentException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRuleContentSha256Exception = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateContentRequiredException = httpRes?.data;
             }
             break;
@@ -8617,8 +8750,10 @@ export class SDK {
   }
 
   
-  // UpdateApprovalRuleTemplateDescription - Updates the description for a specified approval rule template.
-  UpdateApprovalRuleTemplateDescription(
+  /**
+   * updateApprovalRuleTemplateDescription - Updates the description for a specified approval rule template.
+  **/
+  updateApprovalRuleTemplateDescription(
     req: operations.UpdateApprovalRuleTemplateDescriptionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateApprovalRuleTemplateDescriptionResponse> {
@@ -8626,60 +8761,60 @@ export class SDK {
       req = new operations.UpdateApprovalRuleTemplateDescriptionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.UpdateApprovalRuleTemplateDescription";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateApprovalRuleTemplateDescriptionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateApprovalRuleTemplateDescriptionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateApprovalRuleTemplateDescriptionOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalRuleTemplateNameException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateNameRequiredException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalRuleTemplateDescriptionException = httpRes?.data;
             }
             break;
@@ -8691,8 +8826,10 @@ export class SDK {
   }
 
   
-  // UpdateApprovalRuleTemplateName - Updates the name of a specified approval rule template.
-  UpdateApprovalRuleTemplateName(
+  /**
+   * updateApprovalRuleTemplateName - Updates the name of a specified approval rule template.
+  **/
+  updateApprovalRuleTemplateName(
     req: operations.UpdateApprovalRuleTemplateNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateApprovalRuleTemplateNameResponse> {
@@ -8700,60 +8837,60 @@ export class SDK {
       req = new operations.UpdateApprovalRuleTemplateNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.UpdateApprovalRuleTemplateName";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateApprovalRuleTemplateNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateApprovalRuleTemplateNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateApprovalRuleTemplateNameOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalRuleTemplateNameException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateNameRequiredException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleTemplateNameAlreadyExistsException = httpRes?.data;
             }
             break;
@@ -8765,8 +8902,10 @@ export class SDK {
   }
 
   
-  // UpdateComment - Replaces the contents of a comment.
-  UpdateComment(
+  /**
+   * updateComment - Replaces the contents of a comment.
+  **/
+  updateComment(
     req: operations.UpdateCommentRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateCommentResponse> {
@@ -8774,75 +8913,75 @@ export class SDK {
       req = new operations.UpdateCommentRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.UpdateComment";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateCommentResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateCommentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updateCommentOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentContentRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentContentSizeLimitExceededException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentDoesNotExistException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentIdRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidCommentIdException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentNotCreatedByCallerException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.commentDeletedException = httpRes?.data;
             }
             break;
@@ -8854,8 +8993,10 @@ export class SDK {
   }
 
   
-  // UpdateDefaultBranch - <p>Sets or changes the default branch name for the specified repository.</p> <note> <p>If you use this operation to change the default branch name to the current default branch name, a success message is returned even though the default branch did not change.</p> </note>
-  UpdateDefaultBranch(
+  /**
+   * updateDefaultBranch - <p>Sets or changes the default branch name for the specified repository.</p> <note> <p>If you use this operation to change the default branch name to the current default branch name, a success message is returned even though the default branch did not change.</p> </note>
+  **/
+  updateDefaultBranch(
     req: operations.UpdateDefaultBranchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateDefaultBranchResponse> {
@@ -8863,92 +9004,92 @@ export class SDK {
       req = new operations.UpdateDefaultBranchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.UpdateDefaultBranch";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateDefaultBranchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.UpdateDefaultBranchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchNameRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidBranchNameException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.branchDoesNotExistException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -8960,8 +9101,10 @@ export class SDK {
   }
 
   
-  // UpdatePullRequestApprovalRuleContent - Updates the structure of an approval rule created specifically for a pull request. For example, you can change the number of required approvers and the approval pool for approvers. 
-  UpdatePullRequestApprovalRuleContent(
+  /**
+   * updatePullRequestApprovalRuleContent - Updates the structure of an approval rule created specifically for a pull request. For example, you can change the number of required approvers and the approval pool for approvers. 
+  **/
+  updatePullRequestApprovalRuleContent(
     req: operations.UpdatePullRequestApprovalRuleContentRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdatePullRequestApprovalRuleContentResponse> {
@@ -8969,120 +9112,120 @@ export class SDK {
       req = new operations.UpdatePullRequestApprovalRuleContentRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestApprovalRuleContent";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdatePullRequestApprovalRuleContentResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdatePullRequestApprovalRuleContentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updatePullRequestApprovalRuleContentOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestIdException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestIdRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestAlreadyClosedException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleNameRequiredException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalRuleNameException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleDoesNotExistException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRuleContentSha256Exception = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalRuleContentRequiredException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalRuleContentException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cannotModifyApprovalRuleFromTemplateException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -9094,8 +9237,10 @@ export class SDK {
   }
 
   
-  // UpdatePullRequestApprovalState - Updates the state of a user's approval on a pull request. The user is derived from the signed-in account when the request is made.
-  UpdatePullRequestApprovalState(
+  /**
+   * updatePullRequestApprovalState - Updates the state of a user's approval on a pull request. The user is derived from the signed-in account when the request is made.
+  **/
+  updatePullRequestApprovalState(
     req: operations.UpdatePullRequestApprovalStateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdatePullRequestApprovalStateResponse> {
@@ -9103,117 +9248,117 @@ export class SDK {
       req = new operations.UpdatePullRequestApprovalStateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestApprovalState";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdatePullRequestApprovalStateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.UpdatePullRequestApprovalStateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestIdException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestIdRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRevisionIdException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.revisionIdRequiredException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidApprovalStateException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.approvalStateRequiredException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestCannotBeApprovedByAuthorException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.revisionNotCurrentException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestAlreadyClosedException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.maximumNumberOfApprovalsExceededException = httpRes?.data;
             }
             break;
-          case 491:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 491:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 492:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 492:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 493:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 493:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 494:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 494:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 495:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 495:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -9225,8 +9370,10 @@ export class SDK {
   }
 
   
-  // UpdatePullRequestDescription - Replaces the contents of the description of a pull request.
-  UpdatePullRequestDescription(
+  /**
+   * updatePullRequestDescription - Replaces the contents of the description of a pull request.
+  **/
+  updatePullRequestDescription(
     req: operations.UpdatePullRequestDescriptionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdatePullRequestDescriptionResponse> {
@@ -9234,65 +9381,65 @@ export class SDK {
       req = new operations.UpdatePullRequestDescriptionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestDescription";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdatePullRequestDescriptionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdatePullRequestDescriptionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updatePullRequestDescriptionOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestIdException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestIdRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidDescriptionException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestAlreadyClosedException = httpRes?.data;
             }
             break;
@@ -9304,8 +9451,10 @@ export class SDK {
   }
 
   
-  // UpdatePullRequestStatus - Updates the status of a pull request. 
-  UpdatePullRequestStatus(
+  /**
+   * updatePullRequestStatus - Updates the status of a pull request. 
+  **/
+  updatePullRequestStatus(
     req: operations.UpdatePullRequestStatusRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdatePullRequestStatusResponse> {
@@ -9313,95 +9462,95 @@ export class SDK {
       req = new operations.UpdatePullRequestStatusRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestStatus";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdatePullRequestStatusResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdatePullRequestStatusResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updatePullRequestStatusOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestIdException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestIdRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestStatusUpdateException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestStatusException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestStatusRequiredException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 489:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 489:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 490:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 490:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -9413,8 +9562,10 @@ export class SDK {
   }
 
   
-  // UpdatePullRequestTitle - Replaces the title of a pull request.
-  UpdatePullRequestTitle(
+  /**
+   * updatePullRequestTitle - Replaces the title of a pull request.
+  **/
+  updatePullRequestTitle(
     req: operations.UpdatePullRequestTitleRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdatePullRequestTitleResponse> {
@@ -9422,70 +9573,70 @@ export class SDK {
       req = new operations.UpdatePullRequestTitleRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.UpdatePullRequestTitle";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdatePullRequestTitleResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdatePullRequestTitleResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.updatePullRequestTitleOutput = httpRes?.data;
             }
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidPullRequestIdException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestIdRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.titleRequiredException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidTitleException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.pullRequestAlreadyClosedException = httpRes?.data;
             }
             break;
@@ -9497,8 +9648,10 @@ export class SDK {
   }
 
   
-  // UpdateRepositoryDescription - <p>Sets or changes the comment or description for a repository.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a webpage can expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a webpage.</p> </note>
-  UpdateRepositoryDescription(
+  /**
+   * updateRepositoryDescription - <p>Sets or changes the comment or description for a repository.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a webpage can expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a webpage.</p> </note>
+  **/
+  updateRepositoryDescription(
     req: operations.UpdateRepositoryDescriptionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateRepositoryDescriptionResponse> {
@@ -9506,82 +9659,82 @@ export class SDK {
       req = new operations.UpdateRepositoryDescriptionRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.UpdateRepositoryDescription";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateRepositoryDescriptionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.UpdateRepositoryDescriptionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryDescriptionException = httpRes?.data;
             }
             break;
-          case 484:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 484:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionIntegrityChecksFailedException = httpRes?.data;
             }
             break;
-          case 485:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 485:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyAccessDeniedException = httpRes?.data;
             }
             break;
-          case 486:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 486:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyDisabledException = httpRes?.data;
             }
             break;
-          case 487:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 487:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyNotFoundException = httpRes?.data;
             }
             break;
-          case 488:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 488:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.encryptionKeyUnavailableException = httpRes?.data;
             }
             break;
@@ -9593,8 +9746,10 @@ export class SDK {
   }
 
   
-  // UpdateRepositoryName - Renames a repository. The repository name must be unique across the calling AWS account. Repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. The suffix .git is prohibited. For more information about the limits on repository names, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">Limits</a> in the AWS CodeCommit User Guide.
-  UpdateRepositoryName(
+  /**
+   * updateRepositoryName - Renames a repository. The repository name must be unique across the calling AWS account. Repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. The suffix .git is prohibited. For more information about the limits on repository names, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">Limits</a> in the AWS CodeCommit User Guide.
+  **/
+  updateRepositoryName(
     req: operations.UpdateRepositoryNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateRepositoryNameResponse> {
@@ -9602,57 +9757,57 @@ export class SDK {
       req = new operations.UpdateRepositoryNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/#X-Amz-Target=CodeCommit_20150413.UpdateRepositoryName";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateRepositoryNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.UpdateRepositoryNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 480:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 480:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryDoesNotExistException = httpRes?.data;
             }
             break;
-          case 481:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 481:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameExistsException = httpRes?.data;
             }
             break;
-          case 482:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 482:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.repositoryNameRequiredException = httpRes?.data;
             }
             break;
-          case 483:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 483:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.invalidRepositoryNameException = httpRes?.data;
             }
             break;

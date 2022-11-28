@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class UploadBehaviorEnum(str, Enum):
     UPLOAD_ON_TERMINATE = "UPLOAD_ON_TERMINATE"

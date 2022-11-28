@@ -1,5 +1,7 @@
 package shared
 
+// TopologyConfig
+// Global topology of the streaming Dataflow job, including all computations and their sharded locations.
 type TopologyConfig struct {
 	Computations                  []ComputationTopology `json:"computations,omitempty"`
 	DataDiskAssignments           []DataDiskAssignment  `json:"dataDiskAssignments,omitempty"`

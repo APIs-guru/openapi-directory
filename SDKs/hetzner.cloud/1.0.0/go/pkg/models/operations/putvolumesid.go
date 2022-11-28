@@ -4,6 +4,8 @@ type PutVolumesIDPathParams struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
+// PutVolumesIDUpdateVolumeRequestLabels
+// User-defined labels (key-value pairs)
 type PutVolumesIDUpdateVolumeRequestLabels struct {
 	Labelkey *string `json:"labelkey,omitempty"`
 }
@@ -13,11 +15,8 @@ type PutVolumesIDUpdateVolumeRequest struct {
 	Name   string                                 `json:"name"`
 }
 
-type PutVolumesIDRequest struct {
-	PathParams PutVolumesIDPathParams
-	Request    *PutVolumesIDUpdateVolumeRequest `request:"mediaType=application/json"`
-}
-
+// PutVolumesID200ApplicationJSONVolumeLocation
+// Location of the Volume. Volume can only be attached to Servers in the same Location.
 type PutVolumesID200ApplicationJSONVolumeLocation struct {
 	City        string  `json:"city"`
 	Country     string  `json:"country"`
@@ -29,6 +28,8 @@ type PutVolumesID200ApplicationJSONVolumeLocation struct {
 	NetworkZone string  `json:"network_zone"`
 }
 
+// PutVolumesID200ApplicationJSONVolumeProtection
+// Protection configuration for the Resource
 type PutVolumesID200ApplicationJSONVolumeProtection struct {
 	Delete bool `json:"delete"`
 }
@@ -56,6 +57,11 @@ type PutVolumesID200ApplicationJSONVolume struct {
 
 type PutVolumesID200ApplicationJSON struct {
 	Volume PutVolumesID200ApplicationJSONVolume `json:"volume"`
+}
+
+type PutVolumesIDRequest struct {
+	PathParams PutVolumesIDPathParams
+	Request    *PutVolumesIDUpdateVolumeRequest `request:"mediaType=application/json"`
 }
 
 type PutVolumesIDResponse struct {

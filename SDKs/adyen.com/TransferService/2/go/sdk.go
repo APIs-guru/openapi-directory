@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://balanceplatform-api-test.adyen.com/btl/v2",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,54 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetTransactions - Get all transactions.
+// Returns transactions that match the query parameters. The following query parameters are required when making a request:
+//
+// * One of `accountHolderId`, `balanceAccountId` or `balancePlatform`
+//
+// * `createdUntil`
+//
+// * `createdSince`
+//
+// This endpoint supports cursor-based pagination. The response returns the first page of results, and returns links to the next page when applicable. You can use the links to page through the results. The response also returns links to the previous page when applicable.
 func (s *SDK) GetTransactions(ctx context.Context, request operations.GetTransactionsRequest) (*operations.GetTransactionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/transactions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -61,7 +92,7 @@ func (s *SDK) GetTransactions(ctx context.Context, request operations.GetTransac
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -131,8 +162,10 @@ func (s *SDK) GetTransactions(ctx context.Context, request operations.GetTransac
 	return res, nil
 }
 
+// GetTransactionsID - Get a transaction.
+// Returns a specific transaction.
 func (s *SDK) GetTransactionsID(ctx context.Context, request operations.GetTransactionsIDRequest) (*operations.GetTransactionsIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/transactions/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -140,7 +173,7 @@ func (s *SDK) GetTransactionsID(ctx context.Context, request operations.GetTrans
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -210,8 +243,12 @@ func (s *SDK) GetTransactionsID(ctx context.Context, request operations.GetTrans
 	return res, nil
 }
 
+// PostTransfers - Transfer funds.
+// Starts a request to transfer funds to [balance accounts](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts), [transfer instruments](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/transferInstruments), or bank accounts. Adyen sends the outcome of the transfer request through webhooks.
+//
+// To use this endpoint, you need an additional role for your API credential and transfers must be enabled for the source balance account. Your Adyen contact will set these up for you.
 func (s *SDK) PostTransfers(ctx context.Context, request operations.PostTransfersRequest) (*operations.PostTransfersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/transfers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -226,7 +263,7 @@ func (s *SDK) PostTransfers(ctx context.Context, request operations.PostTransfer
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

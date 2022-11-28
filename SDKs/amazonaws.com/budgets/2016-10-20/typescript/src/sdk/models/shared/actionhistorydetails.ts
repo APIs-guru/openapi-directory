@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Action } from "./action";
+
 
 
 // ActionHistoryDetails
@@ -7,9 +8,9 @@ import { Action } from "./action";
  *  The description of details of the event. 
 **/
 export class ActionHistoryDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action: Action;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message: string;
 }

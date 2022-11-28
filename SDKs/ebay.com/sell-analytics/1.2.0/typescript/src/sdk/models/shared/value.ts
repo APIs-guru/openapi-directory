@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Value
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A complex type that contains a value, plus the veracity of that value.
 **/
 export class Value extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicable" })
+  @SpeakeasyMetadata({ data: "json, name=applicable" })
   applicable?: boolean;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: Map<string, any>;
 }

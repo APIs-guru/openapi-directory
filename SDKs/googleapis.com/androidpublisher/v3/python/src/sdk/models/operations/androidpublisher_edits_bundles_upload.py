@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidpublisherEditsBundlesUploadPathParams:
-    edit_id: str = field(default=None, metadata={'path_param': { 'field_name': 'editId', 'style': 'simple', 'explode': False }})
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    edit_id: str = field(metadata={'path_param': { 'field_name': 'editId', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class AndroidpublisherEditsBundlesUploadQueryParams:
 
 @dataclass
 class AndroidpublisherEditsBundlesUploadSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherEditsBundlesUploadRequest:
-    path_params: AndroidpublisherEditsBundlesUploadPathParams = field(default=None)
-    query_params: AndroidpublisherEditsBundlesUploadQueryParams = field(default=None)
-    security: AndroidpublisherEditsBundlesUploadSecurity = field(default=None)
+    path_params: AndroidpublisherEditsBundlesUploadPathParams = field()
+    query_params: AndroidpublisherEditsBundlesUploadQueryParams = field()
+    security: AndroidpublisherEditsBundlesUploadSecurity = field()
     
 
 @dataclass
 class AndroidpublisherEditsBundlesUploadResponse:
+    content_type: str = field()
+    status_code: int = field()
     bundle: Optional[shared.Bundle] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

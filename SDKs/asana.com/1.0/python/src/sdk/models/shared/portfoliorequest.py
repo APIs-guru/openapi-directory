@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PortfolioRequestColorEnum(str, Enum):
     DARK_PINK = "dark-pink"
@@ -25,11 +27,9 @@ class PortfolioRequestColorEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PortfolioRequest:
-    color: Optional[PortfolioRequestColorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'color' }})
-    gid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gid' }})
-    members: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'members' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    resource_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_type' }})
-    workspace: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workspace' }})
+class PortfolioRequestInput:
+    color: Optional[PortfolioRequestColorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('color') }})
+    members: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('members') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    workspace: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workspace') }})
     

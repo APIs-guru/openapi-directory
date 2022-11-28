@@ -1,5 +1,7 @@
 package shared
 
+// AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails
+// A block device for the instance.
 type AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails struct {
 	DeviceName  *string                                                         `json:"DeviceName,omitempty"`
 	Ebs         *AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails `json:"Ebs,omitempty"`

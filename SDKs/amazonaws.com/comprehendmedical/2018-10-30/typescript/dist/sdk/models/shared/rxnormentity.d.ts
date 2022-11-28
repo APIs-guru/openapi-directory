@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RxNormAttribute } from "./rxnormattribute";
 import { RxNormEntityCategoryEnum } from "./rxnormentitycategoryenum";
 import { RxNormConcept } from "./rxnormconcept";

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationEventResourceTypeEnum } from "./configurationeventresourcetypeenum";
 import { ConfigurationEventStatusEnum } from "./configurationeventstatusenum";
 // ConfigurationEvent
@@ -35,27 +35,27 @@ var ConfigurationEvent = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EventDetail" }),
+        SpeakeasyMetadata({ data: "json, name=EventDetail" }),
         __metadata("design:type", String)
     ], ConfigurationEvent.prototype, "eventDetail", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventResourceName" }),
+        SpeakeasyMetadata({ data: "json, name=EventResourceName" }),
         __metadata("design:type", String)
     ], ConfigurationEvent.prototype, "eventResourceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventResourceType" }),
+        SpeakeasyMetadata({ data: "json, name=EventResourceType" }),
         __metadata("design:type", String)
     ], ConfigurationEvent.prototype, "eventResourceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventStatus" }),
+        SpeakeasyMetadata({ data: "json, name=EventStatus" }),
         __metadata("design:type", String)
     ], ConfigurationEvent.prototype, "eventStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventTime" }),
+        SpeakeasyMetadata({ data: "json, name=EventTime" }),
         __metadata("design:type", Date)
     ], ConfigurationEvent.prototype, "eventTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=MonitoredResourceARN" }),
+        SpeakeasyMetadata({ data: "json, name=MonitoredResourceARN" }),
         __metadata("design:type", String)
     ], ConfigurationEvent.prototype, "monitoredResourceArn", void 0);
     return ConfigurationEvent;

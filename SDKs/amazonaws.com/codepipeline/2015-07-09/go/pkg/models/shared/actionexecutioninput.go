@@ -1,5 +1,7 @@
 package shared
 
+// ActionExecutionInput
+// Input information used for an action execution.
 type ActionExecutionInput struct {
 	ActionTypeID          *ActionTypeID     `json:"actionTypeId,omitempty"`
 	Configuration         map[string]string `json:"configuration,omitempty"`

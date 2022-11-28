@@ -4,13 +4,13 @@ type PushLoginRequestQueryParams struct {
 	Callback string `queryParam:"style=form,explode=true,name=callback"`
 }
 
+type PushLoginRequest200ApplicationJSON struct {
+	Status *string `json:"status,omitempty"`
+}
+
 type PushLoginRequestRequest struct {
 	QueryParams PushLoginRequestQueryParams
 	Request     []byte `request:"mediaType=application/jwt"`
-}
-
-type PushLoginRequest200ApplicationJSON struct {
-	Status *string `json:"status,omitempty"`
 }
 
 type PushLoginRequestResponse struct {

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
+
 
 
 // DeleteVolumeOntapConfiguration
@@ -8,9 +8,9 @@ import { Tag } from "./tag";
  * Use to specify skipping a final backup, or to add tags to a final backup.
 **/
 export class DeleteVolumeOntapConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FinalBackupTags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=FinalBackupTags", elemType: Tag })
   finalBackupTags?: Tag[];
 
-  @Metadata({ data: "json, name=SkipFinalBackup" })
+  @SpeakeasyMetadata({ data: "json, name=SkipFinalBackup" })
   skipFinalBackup?: boolean;
 }

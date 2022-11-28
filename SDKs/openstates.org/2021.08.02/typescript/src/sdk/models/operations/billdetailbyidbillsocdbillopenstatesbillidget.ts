@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class BillDetailByIdBillsOcdBillOpenstatesBillIdGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=openstates_bill_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=openstates_bill_id" })
   openstatesBillId: string;
 }
 
 
 export class BillDetailByIdBillsOcdBillOpenstatesBillIdGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=apikey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apikey" })
   apikey?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include" })
   include?: shared.BillIncludeEnum[];
 }
 
 
 export class BillDetailByIdBillsOcdBillOpenstatesBillIdGetHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=x-api-key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-api-key" })
   xApiKey?: string;
 }
 
 
 export class BillDetailByIdBillsOcdBillOpenstatesBillIdGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: BillDetailByIdBillsOcdBillOpenstatesBillIdGetPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: BillDetailByIdBillsOcdBillOpenstatesBillIdGetQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: BillDetailByIdBillsOcdBillOpenstatesBillIdGetHeaders;
 }
 
 
 export class BillDetailByIdBillsOcdBillOpenstatesBillIdGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   bill?: shared.Bill;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

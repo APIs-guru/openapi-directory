@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorDetail } from "./errordetail";
 import { UpdateParam } from "./updateparam";
 import { UpdateStatusEnum } from "./updatestatusenum";
 import { UpdateTypeEnum } from "./updatetypeenum";
+
 
 
 // Update
@@ -11,21 +11,21 @@ import { UpdateTypeEnum } from "./updatetypeenum";
  * An object representing an asynchronous update.
 **/
 export class Update extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorDetail })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: ErrorDetail })
   errors?: ErrorDetail[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=params", elemType: shared.UpdateParam })
+  @SpeakeasyMetadata({ data: "json, name=params", elemType: UpdateParam })
   params?: UpdateParam[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: UpdateStatusEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: UpdateTypeEnum;
 }

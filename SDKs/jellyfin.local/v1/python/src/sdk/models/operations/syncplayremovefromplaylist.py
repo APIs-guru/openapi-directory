@@ -12,17 +12,17 @@ class SyncPlayRemoveFromPlaylistRequests:
 
 @dataclass
 class SyncPlayRemoveFromPlaylistSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class SyncPlayRemoveFromPlaylistRequest:
-    request: SyncPlayRemoveFromPlaylistRequests = field(default=None)
-    security: SyncPlayRemoveFromPlaylistSecurity = field(default=None)
+    request: SyncPlayRemoveFromPlaylistRequests = field()
+    security: SyncPlayRemoveFromPlaylistSecurity = field()
     
 
 @dataclass
 class SyncPlayRemoveFromPlaylistResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PreviewsReadPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=file_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=file_id" })
   fileId: string;
 }
 
 
 export class PreviewsReadRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PreviewsReadPathParams;
 }
 
 
 export class PreviewsReadResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   previewResponse?: shared.PreviewResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

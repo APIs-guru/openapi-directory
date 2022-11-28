@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class AssociateRoleToGroupPathParams:
-    group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'GroupId', 'style': 'simple', 'explode': False }})
+    group_id: str = field(metadata={'path_param': { 'field_name': 'GroupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,21 +27,21 @@ class AssociateRoleToGroupHeaders:
 @dataclass_json
 @dataclass
 class AssociateRoleToGroupRequestBody:
-    role_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RoleArn' }})
+    role_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RoleArn') }})
     
 
 @dataclass
 class AssociateRoleToGroupRequest:
-    path_params: AssociateRoleToGroupPathParams = field(default=None)
-    headers: AssociateRoleToGroupHeaders = field(default=None)
-    request: AssociateRoleToGroupRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: AssociateRoleToGroupHeaders = field()
+    path_params: AssociateRoleToGroupPathParams = field()
+    request: AssociateRoleToGroupRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AssociateRoleToGroupResponse:
+    content_type: str = field()
+    status_code: int = field()
     associate_role_to_group_response: Optional[shared.AssociateRoleToGroupResponse] = field(default=None)
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListBootstrapActionsInput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This input determines which bootstrap actions to retrieve.
 **/
 export class ListBootstrapActionsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterId" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterId" })
   clusterId: string;
 
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 }

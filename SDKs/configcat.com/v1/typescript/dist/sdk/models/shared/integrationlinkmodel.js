@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IntegrationLinkTypeEnum } from "./integrationlinktypeenum";
 var IntegrationLinkModel = /** @class */ (function (_super) {
     __extends(IntegrationLinkModel, _super);
@@ -30,19 +30,19 @@ var IntegrationLinkModel = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], IntegrationLinkModel.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=integrationLinkType" }),
+        SpeakeasyMetadata({ data: "json, name=integrationLinkType" }),
         __metadata("design:type", String)
     ], IntegrationLinkModel.prototype, "integrationLinkType", void 0);
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], IntegrationLinkModel.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], IntegrationLinkModel.prototype, "url", void 0);
     return IntegrationLinkModel;

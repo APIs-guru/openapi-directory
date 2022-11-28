@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // FilterSummary
 /**
  * A short summary of a filter's attributes.
@@ -33,31 +33,31 @@ var FilterSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=creationDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationDateTime" }),
         __metadata("design:type", Date)
     ], FilterSummary.prototype, "creationDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=datasetGroupArn" }),
+        SpeakeasyMetadata({ data: "json, name=datasetGroupArn" }),
         __metadata("design:type", String)
     ], FilterSummary.prototype, "datasetGroupArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=failureReason" }),
+        SpeakeasyMetadata({ data: "json, name=failureReason" }),
         __metadata("design:type", String)
     ], FilterSummary.prototype, "failureReason", void 0);
     __decorate([
-        Metadata({ data: "json, name=filterArn" }),
+        SpeakeasyMetadata({ data: "json, name=filterArn" }),
         __metadata("design:type", String)
     ], FilterSummary.prototype, "filterArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdatedDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" }),
         __metadata("design:type", Date)
     ], FilterSummary.prototype, "lastUpdatedDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], FilterSummary.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], FilterSummary.prototype, "status", void 0);
     return FilterSummary;

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BandedRange } from "./bandedrange";
+
 
 
 // AddBandingRequest
@@ -7,6 +8,6 @@ import { BandedRange } from "./bandedrange";
  * Adds a new banded range to the spreadsheet.
 **/
 export class AddBandingRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bandedRange" })
+  @SpeakeasyMetadata({ data: "json, name=bandedRange" })
   bandedRange?: BandedRange;
 }

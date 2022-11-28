@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// EmployerEmployerAddress
+// The employers' address
 type EmployerEmployerAddress struct {
 	Address1 *string `json:"Address1,omitempty"`
 	Address2 *string `json:"Address2,omitempty"`
@@ -13,12 +15,16 @@ type EmployerEmployerAddress struct {
 	Postcode *string `json:"Postcode,omitempty"`
 }
 
+// EmployerEmployerAutoEnrolmentPension
+// The employer auto enrolments' pension
 type EmployerEmployerAutoEnrolmentPension struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`
 	AtTitle *string `json:"@title,omitempty"`
 }
 
+// EmployerEmployerAutoEnrolment
+// The employers' auto enrolment
 type EmployerEmployerAutoEnrolment struct {
 	Pension                *EmployerEmployerAutoEnrolmentPension `json:"Pension,omitempty"`
 	PostponementDate       *time.Time                            `json:"PostponementDate,omitempty"`
@@ -37,6 +43,8 @@ type EmployerEmployerAutoEnrolment struct {
 	StagingDate            *time.Time                            `json:"StagingDate,omitempty"`
 }
 
+// EmployerEmployerBankAccount
+// The employers' bank account
 type EmployerEmployerBankAccount struct {
 	AccountName   *string `json:"AccountName,omitempty"`
 	AccountNumber *string `json:"AccountNumber,omitempty"`
@@ -69,6 +77,8 @@ const (
 	EmployerEmployerHmrcSettingsStateAidSectorEnumNotApplicable        EmployerEmployerHmrcSettingsStateAidSectorEnum = "NotApplicable"
 )
 
+// EmployerEmployerHmrcSettings
+// The employers' hmrc settings
 type EmployerEmployerHmrcSettings struct {
 	AccountingOfficeRef         *string                                         `json:"AccountingOfficeRef,omitempty"`
 	CotaxRef                    *string                                         `json:"COTAXRef,omitempty"`

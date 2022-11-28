@@ -1,9 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocalizedProperty } from "./localizedproperty";
-import { LocalizedProperty } from "./localizedproperty";
-import { LocalizedProperty } from "./localizedproperty";
-import { LocalizedProperty } from "./localizedproperty";
-import { LocalizedProperty } from "./localizedproperty";
+
 
 
 // ImageSettings
@@ -11,69 +8,69 @@ import { LocalizedProperty } from "./localizedproperty";
  * Branding properties for images associated with the channel.
 **/
 export class ImageSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backgroundImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=backgroundImageUrl" })
   backgroundImageUrl?: LocalizedProperty;
 
-  @Metadata({ data: "json, name=bannerExternalUrl" })
+  @SpeakeasyMetadata({ data: "json, name=bannerExternalUrl" })
   bannerExternalUrl?: string;
 
-  @Metadata({ data: "json, name=bannerImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=bannerImageUrl" })
   bannerImageUrl?: string;
 
-  @Metadata({ data: "json, name=bannerMobileExtraHdImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=bannerMobileExtraHdImageUrl" })
   bannerMobileExtraHdImageUrl?: string;
 
-  @Metadata({ data: "json, name=bannerMobileHdImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=bannerMobileHdImageUrl" })
   bannerMobileHdImageUrl?: string;
 
-  @Metadata({ data: "json, name=bannerMobileImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=bannerMobileImageUrl" })
   bannerMobileImageUrl?: string;
 
-  @Metadata({ data: "json, name=bannerMobileLowImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=bannerMobileLowImageUrl" })
   bannerMobileLowImageUrl?: string;
 
-  @Metadata({ data: "json, name=bannerMobileMediumHdImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=bannerMobileMediumHdImageUrl" })
   bannerMobileMediumHdImageUrl?: string;
 
-  @Metadata({ data: "json, name=bannerTabletExtraHdImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=bannerTabletExtraHdImageUrl" })
   bannerTabletExtraHdImageUrl?: string;
 
-  @Metadata({ data: "json, name=bannerTabletHdImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=bannerTabletHdImageUrl" })
   bannerTabletHdImageUrl?: string;
 
-  @Metadata({ data: "json, name=bannerTabletImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=bannerTabletImageUrl" })
   bannerTabletImageUrl?: string;
 
-  @Metadata({ data: "json, name=bannerTabletLowImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=bannerTabletLowImageUrl" })
   bannerTabletLowImageUrl?: string;
 
-  @Metadata({ data: "json, name=bannerTvHighImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=bannerTvHighImageUrl" })
   bannerTvHighImageUrl?: string;
 
-  @Metadata({ data: "json, name=bannerTvImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=bannerTvImageUrl" })
   bannerTvImageUrl?: string;
 
-  @Metadata({ data: "json, name=bannerTvLowImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=bannerTvLowImageUrl" })
   bannerTvLowImageUrl?: string;
 
-  @Metadata({ data: "json, name=bannerTvMediumImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=bannerTvMediumImageUrl" })
   bannerTvMediumImageUrl?: string;
 
-  @Metadata({ data: "json, name=largeBrandedBannerImageImapScript" })
+  @SpeakeasyMetadata({ data: "json, name=largeBrandedBannerImageImapScript" })
   largeBrandedBannerImageImapScript?: LocalizedProperty;
 
-  @Metadata({ data: "json, name=largeBrandedBannerImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=largeBrandedBannerImageUrl" })
   largeBrandedBannerImageUrl?: LocalizedProperty;
 
-  @Metadata({ data: "json, name=smallBrandedBannerImageImapScript" })
+  @SpeakeasyMetadata({ data: "json, name=smallBrandedBannerImageImapScript" })
   smallBrandedBannerImageImapScript?: LocalizedProperty;
 
-  @Metadata({ data: "json, name=smallBrandedBannerImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=smallBrandedBannerImageUrl" })
   smallBrandedBannerImageUrl?: LocalizedProperty;
 
-  @Metadata({ data: "json, name=trackingImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=trackingImageUrl" })
   trackingImageUrl?: string;
 
-  @Metadata({ data: "json, name=watchIconImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=watchIconImageUrl" })
   watchIconImageUrl?: string;
 }

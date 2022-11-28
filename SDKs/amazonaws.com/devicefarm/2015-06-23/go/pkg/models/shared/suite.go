@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Suite
+// Represents a collection of one or more tests.
 type Suite struct {
 	Arn           *string              `json:"arn,omitempty"`
 	Counters      *Counters            `json:"counters,omitempty"`

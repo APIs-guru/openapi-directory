@@ -12,12 +12,12 @@ class GetTxsQueryParams:
 
 @dataclass
 class GetTxsRequest:
-    query_params: GetTxsQueryParams = field(default=None)
+    query_params: GetTxsQueryParams = field()
     
 
 @dataclass
 class GetTxsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_txs_response: Optional[shared.GetTxsResponse] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleChromeManagementV1DiskInfo
+// Status of the single storage device.
 type GoogleChromeManagementV1DiskInfo struct {
 	BytesReadThisSession    *string  `json:"bytesReadThisSession,omitempty"`
 	BytesWrittenThisSession *string  `json:"bytesWrittenThisSession,omitempty"`

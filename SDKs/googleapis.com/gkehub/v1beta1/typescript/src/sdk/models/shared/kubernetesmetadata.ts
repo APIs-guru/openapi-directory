@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // KubernetesMetadata
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * KubernetesMetadata provides informational metadata for Memberships representing Kubernetes clusters.
 **/
 export class KubernetesMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kubernetesApiServerVersion" })
+  @SpeakeasyMetadata({ data: "json, name=kubernetesApiServerVersion" })
   kubernetesApiServerVersion?: string;
 
-  @Metadata({ data: "json, name=memoryMb" })
+  @SpeakeasyMetadata({ data: "json, name=memoryMb" })
   memoryMb?: number;
 
-  @Metadata({ data: "json, name=nodeCount" })
+  @SpeakeasyMetadata({ data: "json, name=nodeCount" })
   nodeCount?: number;
 
-  @Metadata({ data: "json, name=nodeProviderId" })
+  @SpeakeasyMetadata({ data: "json, name=nodeProviderId" })
   nodeProviderId?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=vcpuCount" })
+  @SpeakeasyMetadata({ data: "json, name=vcpuCount" })
   vcpuCount?: number;
 }

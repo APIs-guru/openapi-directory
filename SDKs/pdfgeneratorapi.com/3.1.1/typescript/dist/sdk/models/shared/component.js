@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ComponentClsEnum;
 (function (ComponentClsEnum) {
     ComponentClsEnum["LabelComponent"] = "labelComponent";
@@ -53,39 +53,39 @@ var Component = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cls" }),
+        SpeakeasyMetadata({ data: "json, name=cls" }),
         __metadata("design:type", String)
     ], Component.prototype, "cls", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataIndex" }),
+        SpeakeasyMetadata({ data: "json, name=dataIndex" }),
         __metadata("design:type", String)
     ], Component.prototype, "dataIndex", void 0);
     __decorate([
-        Metadata({ data: "json, name=height" }),
+        SpeakeasyMetadata({ data: "json, name=height" }),
         __metadata("design:type", Number)
     ], Component.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Component.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=left" }),
+        SpeakeasyMetadata({ data: "json, name=left" }),
         __metadata("design:type", Number)
     ], Component.prototype, "left", void 0);
     __decorate([
-        Metadata({ data: "json, name=top" }),
+        SpeakeasyMetadata({ data: "json, name=top" }),
         __metadata("design:type", Number)
     ], Component.prototype, "top", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], Component.prototype, "value", void 0);
     __decorate([
-        Metadata({ data: "json, name=width" }),
+        SpeakeasyMetadata({ data: "json, name=width" }),
         __metadata("design:type", Number)
     ], Component.prototype, "width", void 0);
     __decorate([
-        Metadata({ data: "json, name=zindex" }),
+        SpeakeasyMetadata({ data: "json, name=zindex" }),
         __metadata("design:type", Number)
     ], Component.prototype, "zindex", void 0);
     return Component;

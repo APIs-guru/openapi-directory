@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddatacatalogv1dataplextablespec
+from sdk import utils
+from . import *
 
 class GoogleCloudDatacatalogV1DatabaseTableSpecTypeEnum(str, Enum):
     TABLE_TYPE_UNSPECIFIED = "TABLE_TYPE_UNSPECIFIED"
@@ -12,6 +14,10 @@ class GoogleCloudDatacatalogV1DatabaseTableSpecTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDatacatalogV1DatabaseTableSpec:
-    dataplex_table: Optional[googleclouddatacatalogv1dataplextablespec.GoogleCloudDatacatalogV1DataplexTableSpec] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataplexTable' }})
-    type: Optional[GoogleCloudDatacatalogV1DatabaseTableSpecTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""GoogleCloudDatacatalogV1DatabaseTableSpec
+    Specification that applies to a table resource. Valid only for entries with the `TABLE` type.
+    """
+    
+    dataplex_table: Optional[GoogleCloudDatacatalogV1DataplexTableSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataplexTable') }})
+    type: Optional[GoogleCloudDatacatalogV1DatabaseTableSpecTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

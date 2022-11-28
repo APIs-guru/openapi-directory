@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BranchDiffSourceCodeType } from "./branchdiffsourcecodetype";
 import { CommitDiffSourceCodeType } from "./commitdiffsourcecodetype";
 import { RepositoryHeadSourceCodeType } from "./repositoryheadsourcecodetype";
@@ -38,23 +38,23 @@ var SourceCodeType = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BranchDiff" }),
+        SpeakeasyMetadata({ data: "json, name=BranchDiff" }),
         __metadata("design:type", BranchDiffSourceCodeType)
     ], SourceCodeType.prototype, "branchDiff", void 0);
     __decorate([
-        Metadata({ data: "json, name=CommitDiff" }),
+        SpeakeasyMetadata({ data: "json, name=CommitDiff" }),
         __metadata("design:type", CommitDiffSourceCodeType)
     ], SourceCodeType.prototype, "commitDiff", void 0);
     __decorate([
-        Metadata({ data: "json, name=RepositoryHead" }),
+        SpeakeasyMetadata({ data: "json, name=RepositoryHead" }),
         __metadata("design:type", RepositoryHeadSourceCodeType)
     ], SourceCodeType.prototype, "repositoryHead", void 0);
     __decorate([
-        Metadata({ data: "json, name=RequestMetadata" }),
+        SpeakeasyMetadata({ data: "json, name=RequestMetadata" }),
         __metadata("design:type", RequestMetadata)
     ], SourceCodeType.prototype, "requestMetadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3BucketRepository" }),
+        SpeakeasyMetadata({ data: "json, name=S3BucketRepository" }),
         __metadata("design:type", S3BucketRepository)
     ], SourceCodeType.prototype, "s3BucketRepository", void 0);
     return SourceCodeType;

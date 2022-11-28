@@ -1,34 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Service extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boot_count" })
+  @SpeakeasyMetadata({ data: "json, name=boot_count" })
   bootCount?: number;
 
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: Map<string, any>;
 
-  @Metadata({ data: "json, name=config_request" })
+  @SpeakeasyMetadata({ data: "json, name=config_request" })
   configRequest?: Map<string, any>;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=restart_request" })
+  @SpeakeasyMetadata({ data: "json, name=restart_request" })
   restartRequest?: boolean;
 
-  @Metadata({ data: "json, name=time_created" })
+  @SpeakeasyMetadata({ data: "json, name=time_created" })
   timeCreated?: string;
 
-  @Metadata({ data: "json, name=time_updated" })
+  @SpeakeasyMetadata({ data: "json, name=time_updated" })
   timeUpdated?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
+}
+
+
+export class ServiceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=config_request" })
+  configRequest?: Map<string, any>;
+
+  @SpeakeasyMetadata({ data: "json, name=restart_request" })
+  restartRequest?: boolean;
 }

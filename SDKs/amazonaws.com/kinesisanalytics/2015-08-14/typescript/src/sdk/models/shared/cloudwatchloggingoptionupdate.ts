@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CloudWatchLoggingOptionUpdate
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes CloudWatch logging option updates.
 **/
 export class CloudWatchLoggingOptionUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudWatchLoggingOptionId" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchLoggingOptionId" })
   cloudWatchLoggingOptionId: string;
 
-  @Metadata({ data: "json, name=LogStreamARNUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=LogStreamARNUpdate" })
   logStreamArnUpdate?: string;
 
-  @Metadata({ data: "json, name=RoleARNUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=RoleARNUpdate" })
   roleArnUpdate?: string;
 }

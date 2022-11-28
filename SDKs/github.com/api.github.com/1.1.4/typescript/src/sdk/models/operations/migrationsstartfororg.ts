@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class MigrationsStartForOrgPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=org" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=org" })
   org: string;
 }
 
 
 export class MigrationsStartForOrgRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exclude" })
+  @SpeakeasyMetadata({ data: "json, name=exclude" })
   exclude?: string[];
 
-  @Metadata({ data: "json, name=exclude_attachments" })
+  @SpeakeasyMetadata({ data: "json, name=exclude_attachments" })
   excludeAttachments?: boolean;
 
-  @Metadata({ data: "json, name=lock_repositories" })
+  @SpeakeasyMetadata({ data: "json, name=lock_repositories" })
   lockRepositories?: boolean;
 
-  @Metadata({ data: "json, name=repositories" })
+  @SpeakeasyMetadata({ data: "json, name=repositories" })
   repositories: string[];
 }
 
 
 export class MigrationsStartForOrgRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: MigrationsStartForOrgPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: MigrationsStartForOrgRequestBody;
 }
 
 
 export class MigrationsStartForOrgResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   migration?: shared.Migration;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

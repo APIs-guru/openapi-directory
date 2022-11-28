@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class TeamsListReposLegacyPathParams:
-    team_id: int = field(default=None, metadata={'path_param': { 'field_name': 'team_id', 'style': 'simple', 'explode': False }})
+    team_id: int = field(metadata={'path_param': { 'field_name': 'team_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,15 +16,15 @@ class TeamsListReposLegacyQueryParams:
 
 @dataclass
 class TeamsListReposLegacyRequest:
-    path_params: TeamsListReposLegacyPathParams = field(default=None)
-    query_params: TeamsListReposLegacyQueryParams = field(default=None)
+    path_params: TeamsListReposLegacyPathParams = field()
+    query_params: TeamsListReposLegacyQueryParams = field()
     
 
 @dataclass
 class TeamsListReposLegacyResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     minimal_repositories: Optional[List[shared.MinimalRepository]] = field(default=None)
     

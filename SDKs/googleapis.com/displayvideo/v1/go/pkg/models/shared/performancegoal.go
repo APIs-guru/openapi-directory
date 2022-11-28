@@ -20,6 +20,8 @@ const (
 	PerformanceGoalPerformanceGoalTypeEnumPerformanceGoalTypeOther               PerformanceGoalPerformanceGoalTypeEnum = "PERFORMANCE_GOAL_TYPE_OTHER"
 )
 
+// PerformanceGoal
+// Settings that control the performance goal of a campaign or insertion order.
 type PerformanceGoal struct {
 	PerformanceGoalAmountMicros     *string                                 `json:"performanceGoalAmountMicros,omitempty"`
 	PerformanceGoalPercentageMicros *string                                 `json:"performanceGoalPercentageMicros,omitempty"`

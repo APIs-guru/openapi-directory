@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GroundStationData
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the ground station data.
 **/
 export class GroundStationData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groundStationId" })
+  @SpeakeasyMetadata({ data: "json, name=groundStationId" })
   groundStationId?: string;
 
-  @Metadata({ data: "json, name=groundStationName" })
+  @SpeakeasyMetadata({ data: "json, name=groundStationName" })
   groundStationName?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 }

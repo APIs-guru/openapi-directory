@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppDevExperienceFeatureState } from "./appdevexperiencefeaturestate";
 import { FeatureState } from "./featurestate";
+
 
 
 // CommonFeatureState
@@ -8,9 +9,12 @@ import { FeatureState } from "./featurestate";
  * CommonFeatureState contains Hub-wide Feature status information.
 **/
 export class CommonFeatureState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appdevexperience" })
+  @SpeakeasyMetadata({ data: "json, name=appdevexperience" })
   appdevexperience?: AppDevExperienceFeatureState;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=fleetobservability" })
+  fleetobservability?: Map<string, any>;
+
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: FeatureState;
 }

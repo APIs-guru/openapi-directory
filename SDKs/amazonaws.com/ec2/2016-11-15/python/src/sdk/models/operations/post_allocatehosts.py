@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostAllocateHostsActionEnum(str, Enum):
     ALLOCATE_HOSTS = "AllocateHosts"
@@ -10,8 +14,8 @@ class PostAllocateHostsVersionEnum(str, Enum):
 
 @dataclass
 class PostAllocateHostsQueryParams:
-    action: PostAllocateHostsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostAllocateHostsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostAllocateHostsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostAllocateHostsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostAllocateHostsHeaders:
 
 @dataclass
 class PostAllocateHostsRequest:
-    query_params: PostAllocateHostsQueryParams = field(default=None)
-    headers: PostAllocateHostsHeaders = field(default=None)
+    headers: PostAllocateHostsHeaders = field()
+    query_params: PostAllocateHostsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostAllocateHostsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

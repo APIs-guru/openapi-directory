@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateDatasetGroupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=datasetGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=datasetGroupArn" })
   datasetGroupArn?: string;
 }

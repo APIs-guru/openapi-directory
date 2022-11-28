@@ -15,6 +15,7 @@ type ContentDatafeedstatusesGetQueryParams struct {
 	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
 	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
 	Country        *string           `queryParam:"style=form,explode=true,name=country"`
+	FeedLabel      *string           `queryParam:"style=form,explode=true,name=feedLabel"`
 	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
 	Key            *string           `queryParam:"style=form,explode=true,name=key"`
 	Language       *string           `queryParam:"style=form,explode=true,name=language"`

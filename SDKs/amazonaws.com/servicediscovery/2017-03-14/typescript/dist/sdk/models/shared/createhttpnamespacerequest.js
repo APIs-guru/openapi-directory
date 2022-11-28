@@ -22,27 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Tag } from "./tag";
 var CreateHttpNamespaceRequest = /** @class */ (function (_super) {
     __extends(CreateHttpNamespaceRequest, _super);
     function CreateHttpNamespaceRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatorRequestId" }),
+        SpeakeasyMetadata({ data: "json, name=CreatorRequestId" }),
         __metadata("design:type", String)
     ], CreateHttpNamespaceRequest.prototype, "creatorRequestId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], CreateHttpNamespaceRequest.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], CreateHttpNamespaceRequest.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateHttpNamespaceRequest.prototype, "tags", void 0);
     return CreateHttpNamespaceRequest;

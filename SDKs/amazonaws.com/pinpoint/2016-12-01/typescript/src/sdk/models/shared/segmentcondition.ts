@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SegmentCondition
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies a segment to associate with an activity in a journey.
 **/
 export class SegmentCondition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SegmentId" })
+  @SpeakeasyMetadata({ data: "json, name=SegmentId" })
   segmentId: string;
 }

@@ -12,11 +12,6 @@ type GetChartExportSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetChartExportRequest struct {
-	QueryParams GetChartExportQueryParams
-	Security    GetChartExportSecurity
-}
-
 type GetChartExport400ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -31,6 +26,11 @@ type GetChartExport404ApplicationJSON struct {
 
 type GetChartExport500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetChartExportRequest struct {
+	QueryParams GetChartExportQueryParams
+	Security    GetChartExportSecurity
 }
 
 type GetChartExportResponse struct {

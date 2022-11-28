@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -17,14 +18,14 @@ class GetSittingsQueryParams:
 
 @dataclass
 class GetSittingsRequest:
-    query_params: GetSittingsQueryParams = field(default=None)
+    query_params: GetSittingsQueryParams = field()
     
 
 @dataclass
 class GetSittingsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bill_stage_sitting_search_result: Optional[shared.BillStageSittingSearchResult] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -6,7 +6,7 @@ type GetQuoteListPathParams struct {
 }
 
 type GetQuoteListQueryParams struct {
-	QuoteStateIDUseFiltersEqualQuoteStateID111111 *string `queryParam:"style=form,explode=true,name=quote_state_id, use filters={"quote_state_id":111111}"`
+	QuoteStateIDUseFiltersEqualQuoteStateID111111 *string `queryParam:"style=form,explode=true,name=quote_state_id, use filters={\"quote_state_id\":111111}"`
 }
 
 type GetQuoteListRequest struct {

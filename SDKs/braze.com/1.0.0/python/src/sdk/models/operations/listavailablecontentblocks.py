@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 
 
 @dataclass
@@ -12,11 +12,11 @@ class ListAvailableContentBlocksQueryParams:
 
 @dataclass
 class ListAvailableContentBlocksRequest:
-    query_params: ListAvailableContentBlocksQueryParams = field(default=None)
+    query_params: ListAvailableContentBlocksQueryParams = field()
     
 
 @dataclass
 class ListAvailableContentBlocksResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

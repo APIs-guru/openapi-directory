@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetV3AssetChangesChannelsResponse:
+    content_type: str = field()
+    status_code: int = field()
     channels: Optional[List[shared.Channel]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

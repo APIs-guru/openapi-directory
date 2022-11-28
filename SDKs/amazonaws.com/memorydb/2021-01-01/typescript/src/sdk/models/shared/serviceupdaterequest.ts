@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ServiceUpdateRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A request to apply a service update
 **/
 export class ServiceUpdateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ServiceUpdateNameToApply" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceUpdateNameToApply" })
   serviceUpdateNameToApply?: string;
 }

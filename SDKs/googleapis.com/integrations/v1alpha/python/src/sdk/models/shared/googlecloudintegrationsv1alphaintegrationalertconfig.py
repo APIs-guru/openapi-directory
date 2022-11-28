@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudintegrationsv1alphaintegrationalertconfigthresholdvalue
+from sdk import utils
+from . import *
 
 class GoogleCloudIntegrationsV1alphaIntegrationAlertConfigMetricTypeEnum(str, Enum):
     METRIC_TYPE_UNSPECIFIED = "METRIC_TYPE_UNSPECIFIED"
@@ -25,13 +27,17 @@ class GoogleCloudIntegrationsV1alphaIntegrationAlertConfigThresholdTypeEnum(str,
 @dataclass_json
 @dataclass
 class GoogleCloudIntegrationsV1alphaIntegrationAlertConfig:
-    aggregation_period: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'aggregationPeriod' }})
-    alert_threshold: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alertThreshold' }})
-    disable_alert: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disableAlert' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    duration_threshold: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'durationThreshold' }})
-    metric_type: Optional[GoogleCloudIntegrationsV1alphaIntegrationAlertConfigMetricTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metricType' }})
-    only_final_attempt: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'onlyFinalAttempt' }})
-    threshold_type: Optional[GoogleCloudIntegrationsV1alphaIntegrationAlertConfigThresholdTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thresholdType' }})
-    threshold_value: Optional[googlecloudintegrationsv1alphaintegrationalertconfigthresholdvalue.GoogleCloudIntegrationsV1alphaIntegrationAlertConfigThresholdValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thresholdValue' }})
+    r"""GoogleCloudIntegrationsV1alphaIntegrationAlertConfig
+    Message to be used to configure custom alerting in the {@code EventConfig} protos for an event.
+    """
+    
+    aggregation_period: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('aggregationPeriod') }})
+    alert_threshold: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('alertThreshold') }})
+    disable_alert: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('disableAlert') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    duration_threshold: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('durationThreshold') }})
+    metric_type: Optional[GoogleCloudIntegrationsV1alphaIntegrationAlertConfigMetricTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metricType') }})
+    only_final_attempt: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('onlyFinalAttempt') }})
+    threshold_type: Optional[GoogleCloudIntegrationsV1alphaIntegrationAlertConfigThresholdTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thresholdType') }})
+    threshold_value: Optional[GoogleCloudIntegrationsV1alphaIntegrationAlertConfigThresholdValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thresholdValue') }})
     

@@ -11,13 +11,13 @@ type AddInternalTransferBatchPaymentBatchItemInternalTransfer struct {
 	Ref      *string `json:"ref,omitempty"`
 }
 
+type AddInternalTransferBatchPaymentNewBatchItemResponse struct {
+	BatchItemUUID *string `json:"batchItemUuid,omitempty"`
+}
+
 type AddInternalTransferBatchPaymentRequest struct {
 	PathParams AddInternalTransferBatchPaymentPathParams
 	Request    AddInternalTransferBatchPaymentBatchItemInternalTransfer `request:"mediaType=application/json"`
-}
-
-type AddInternalTransferBatchPaymentNewBatchItemResponse struct {
-	BatchItemUUID *string `json:"batchItemUuid,omitempty"`
 }
 
 type AddInternalTransferBatchPaymentResponse struct {

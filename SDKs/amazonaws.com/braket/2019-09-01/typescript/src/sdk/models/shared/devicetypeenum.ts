@@ -1,6 +1,7 @@
 
 
+
 export enum DeviceTypeEnum {
-    Qpu = "QPU"
-,    Simulator = "SIMULATOR"
+    Qpu = "QPU",
+    Simulator = "SIMULATOR"
 }

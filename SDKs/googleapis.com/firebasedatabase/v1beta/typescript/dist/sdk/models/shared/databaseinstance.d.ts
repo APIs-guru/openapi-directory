@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum DatabaseInstanceStateEnum {
     LifecycleStateUnspecified = "LIFECYCLE_STATE_UNSPECIFIED",
     Active = "ACTIVE",
@@ -18,5 +18,12 @@ export declare class DatabaseInstance extends SpeakeasyBase {
     name?: string;
     project?: string;
     state?: DatabaseInstanceStateEnum;
+    type?: DatabaseInstanceTypeEnum;
+}
+/**
+ * Representation of a Realtime Database instance. Details on interacting with contents of a DatabaseInstance can be found at: https://firebase.google.com/docs/database/rest/start.
+**/
+export declare class DatabaseInstanceInput extends SpeakeasyBase {
+    name?: string;
     type?: DatabaseInstanceTypeEnum;
 }

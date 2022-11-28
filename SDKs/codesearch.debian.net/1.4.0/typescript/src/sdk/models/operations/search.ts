@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum SearchMatchModeEnum {
-    Literal = "literal"
-,    Regexp = "regexp"
+    Literal = "literal",
+    Regexp = "regexp"
 }
 
 
 export class SearchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=match_mode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=match_mode" })
   matchMode?: SearchMatchModeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query: string;
 }
 
 
 export class SearchSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class SearchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SearchQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: SearchSecurity;
 }
 
 
 export class SearchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.SearchResult })
+  @SpeakeasyMetadata({ elemType: shared.SearchResult })
   searchResults?: shared.SearchResult[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

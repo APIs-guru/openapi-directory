@@ -8,11 +8,6 @@ type UpdateRulePathParams struct {
 	RuleID string `pathParam:"style=simple,explode=false,name=ruleId"`
 }
 
-type UpdateRuleRequest struct {
-	PathParams UpdateRulePathParams
-	Request    shared.RuleWithCategory `request:"mediaType=application/json"`
-}
-
 type UpdateRule200ApplicationJSONActionEnum string
 
 const (
@@ -34,6 +29,11 @@ type UpdateRule200ApplicationJSON struct {
 	Action UpdateRule200ApplicationJSONActionEnum `json:"action"`
 	Data   UpdateRule200ApplicationJSONData       `json:"data"`
 	Result UpdateRule200ApplicationJSONResultEnum `json:"result"`
+}
+
+type UpdateRuleRequest struct {
+	PathParams UpdateRulePathParams
+	Request    shared.RuleWithCategory `request:"mediaType=application/json"`
 }
 
 type UpdateRuleResponse struct {

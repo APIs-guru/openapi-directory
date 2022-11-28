@@ -61,12 +61,6 @@ type GeneratePdfSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type GeneratePdfRequest struct {
-	PathParams GeneratePdfPathParams
-	Request    GeneratePdfSubmissionData `request:"mediaType=application/json"`
-	Security   GeneratePdfSecurity
-}
-
 type GeneratePdfCreateSubmissionResponseStatusEnum string
 
 const (
@@ -78,6 +72,12 @@ type GeneratePdfCreateSubmissionResponse struct {
 	Errors     []string                                      `json:"errors,omitempty"`
 	Status     GeneratePdfCreateSubmissionResponseStatusEnum `json:"status"`
 	Submission shared.Submission                             `json:"submission"`
+}
+
+type GeneratePdfRequest struct {
+	PathParams GeneratePdfPathParams
+	Request    GeneratePdfSubmissionData `request:"mediaType=application/json"`
+	Security   GeneratePdfSecurity
 }
 
 type GeneratePdfResponse struct {

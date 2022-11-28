@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * The Rice-Golomb encoded data. Used for sending compressed 4-byte hashes or compressed removal indices.
 **/

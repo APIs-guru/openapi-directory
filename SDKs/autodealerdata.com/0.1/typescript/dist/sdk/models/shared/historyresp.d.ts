@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { VehHistoryData } from "./vehhistorydata";
 export declare class HistoryResp extends SpeakeasyBase {
     brandName?: string;

@@ -41,7 +41,7 @@ type LoggingEntriesWriteSecurity struct {
 
 type LoggingEntriesWriteRequest struct {
 	QueryParams LoggingEntriesWriteQueryParams
-	Request     *shared.WriteLogEntriesRequest `request:"mediaType=application/json"`
+	Request     *shared.WriteLogEntriesRequestInput `request:"mediaType=application/json"`
 	Security    LoggingEntriesWriteSecurity
 }
 

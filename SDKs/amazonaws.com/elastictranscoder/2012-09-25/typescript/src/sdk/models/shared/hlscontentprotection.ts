@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HlsContentProtection
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The HLS content protection settings, if any, that you want Elastic Transcoder to apply to your output files.
 **/
 export class HlsContentProtection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InitializationVector" })
+  @SpeakeasyMetadata({ data: "json, name=InitializationVector" })
   initializationVector?: string;
 
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key?: string;
 
-  @Metadata({ data: "json, name=KeyMd5" })
+  @SpeakeasyMetadata({ data: "json, name=KeyMd5" })
   keyMd5?: string;
 
-  @Metadata({ data: "json, name=KeyStoragePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=KeyStoragePolicy" })
   keyStoragePolicy?: string;
 
-  @Metadata({ data: "json, name=LicenseAcquisitionUrl" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseAcquisitionUrl" })
   licenseAcquisitionUrl?: string;
 
-  @Metadata({ data: "json, name=Method" })
+  @SpeakeasyMetadata({ data: "json, name=Method" })
   method?: string;
 }

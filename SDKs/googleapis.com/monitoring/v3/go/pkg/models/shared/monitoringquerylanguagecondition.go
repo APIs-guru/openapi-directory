@@ -9,6 +9,8 @@ const (
 	MonitoringQueryLanguageConditionEvaluationMissingDataEnumEvaluationMissingDataNoOp        MonitoringQueryLanguageConditionEvaluationMissingDataEnum = "EVALUATION_MISSING_DATA_NO_OP"
 )
 
+// MonitoringQueryLanguageCondition
+// A condition type that allows alert policies to be defined using Monitoring Query Language (https://cloud.google.com/monitoring/mql).
 type MonitoringQueryLanguageCondition struct {
 	Duration              *string                                                    `json:"duration,omitempty"`
 	EvaluationMissingData *MonitoringQueryLanguageConditionEvaluationMissingDataEnum `json:"evaluationMissingData,omitempty"`

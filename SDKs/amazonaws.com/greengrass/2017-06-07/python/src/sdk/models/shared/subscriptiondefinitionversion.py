@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import subscription
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SubscriptionDefinitionVersion:
-    subscriptions: Optional[List[subscription.Subscription]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Subscriptions' }})
+    r"""SubscriptionDefinitionVersion
+    Information about a subscription definition version.
+    """
+    
+    subscriptions: Optional[List[Subscription]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Subscriptions') }})
     

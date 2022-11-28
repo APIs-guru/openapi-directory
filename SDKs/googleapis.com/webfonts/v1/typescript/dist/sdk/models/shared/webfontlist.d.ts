@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Webfont } from "./webfont";
 /**
  * Response containing the list of fonts currently served by the Google Fonts API.

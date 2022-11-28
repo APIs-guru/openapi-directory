@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ActivityTypeEnum(str, Enum):
     CREATED = "Created"
@@ -56,15 +61,15 @@ class ActivityTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Activity:
-    estimation_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EstimationId' }})
-    estimation_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EstimationNumber' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Id' }})
-    invoice_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InvoiceId' }})
-    invoice_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'InvoiceNumber' }})
-    link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Link' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Message' }})
-    order_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OrderId' }})
-    order_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OrderNumber' }})
-    type: Optional[ActivityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
-    user_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UserId' }})
+    estimation_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EstimationId') }})
+    estimation_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EstimationNumber') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Id') }})
+    invoice_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InvoiceId') }})
+    invoice_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('InvoiceNumber') }})
+    link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Link') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Message') }})
+    order_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OrderId') }})
+    order_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OrderNumber') }})
+    type: Optional[ActivityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    user_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('UserId') }})
     

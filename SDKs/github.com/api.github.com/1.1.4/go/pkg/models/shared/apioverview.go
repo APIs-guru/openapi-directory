@@ -5,6 +5,8 @@ type APIOverviewSSHKeyFingerprints struct {
 	Sha256Rsa *string `json:"SHA256_RSA,omitempty"`
 }
 
+// APIOverview
+// Api Overview
 type APIOverview struct {
 	Actions                          []string                       `json:"actions,omitempty"`
 	API                              []string                       `json:"api,omitempty"`

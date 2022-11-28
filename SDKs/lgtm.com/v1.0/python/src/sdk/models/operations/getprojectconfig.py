@@ -1,10 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
+from sdk.models import shared
 
 
 @dataclass
 class GetProjectConfigPathParams:
-    project_id: int = field(default=None, metadata={'path_param': { 'field_name': 'project-id', 'style': 'simple', 'explode': False }})
+    project_id: int = field(metadata={'path_param': { 'field_name': 'project-id', 'style': 'simple', 'explode': False }})
     
 class GetProjectConfigSourceEnum(str, Enum):
     REPOSITORY = "repository"
@@ -18,20 +20,20 @@ class GetProjectConfigQueryParams:
 
 @dataclass
 class GetProjectConfigSecurity:
-    access_token: shared.SchemeAccessToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    access_token: shared.SchemeAccessToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetProjectConfigRequest:
-    path_params: GetProjectConfigPathParams = field(default=None)
-    query_params: GetProjectConfigQueryParams = field(default=None)
-    security: GetProjectConfigSecurity = field(default=None)
+    path_params: GetProjectConfigPathParams = field()
+    query_params: GetProjectConfigQueryParams = field()
+    security: GetProjectConfigSecurity = field()
     
 
 @dataclass
 class GetProjectConfigResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     get_project_config_400_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

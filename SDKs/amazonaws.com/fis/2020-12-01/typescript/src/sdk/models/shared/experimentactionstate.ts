@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExperimentActionStatusEnum } from "./experimentactionstatusenum";
+
 
 
 // ExperimentActionState
@@ -7,9 +8,9 @@ import { ExperimentActionStatusEnum } from "./experimentactionstatusenum";
  * Describes the state of an action.
 **/
 export class ExperimentActionState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ExperimentActionStatusEnum;
 }

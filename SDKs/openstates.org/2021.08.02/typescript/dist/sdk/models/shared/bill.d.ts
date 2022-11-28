@@ -1,0 +1,38 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { BillAbstract } from "./billabstract";
+import { BillAction } from "./billaction";
+import { BillDocumentOrVersion } from "./billdocumentorversion";
+import { Organization } from "./organization";
+import { CompactJurisdiction } from "./compactjurisdiction";
+import { BillIdentifier } from "./billidentifier";
+import { BillTitle } from "./billtitle";
+import { Link } from "./link";
+import { BillSponsorship } from "./billsponsorship";
+import { VoteEvent } from "./voteevent";
+export declare class Bill extends SpeakeasyBase {
+    abstracts?: BillAbstract[];
+    actions?: BillAction[];
+    classification?: string[];
+    createdAt: Date;
+    documents?: BillDocumentOrVersion[];
+    extras?: Map<string, any>;
+    firstActionDate?: string;
+    fromOrganization: Organization;
+    id: string;
+    identifier: string;
+    jurisdiction: CompactJurisdiction;
+    latestActionDate?: string;
+    latestActionDescription?: string;
+    latestPassageDate?: string;
+    openstatesUrl: string;
+    otherIdentifiers?: BillIdentifier[];
+    otherTitles?: BillTitle[];
+    session: string;
+    sources?: Link[];
+    sponsorships?: BillSponsorship[];
+    subject?: string[];
+    title: string;
+    updatedAt: Date;
+    versions?: BillDocumentOrVersion[];
+    votes?: VoteEvent[];
+}

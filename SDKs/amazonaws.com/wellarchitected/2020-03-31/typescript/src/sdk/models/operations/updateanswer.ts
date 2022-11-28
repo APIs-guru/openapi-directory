@@ -1,106 +1,107 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateAnswerPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=LensAlias" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=LensAlias" })
   lensAlias: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=QuestionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=QuestionId" })
   questionId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=WorkloadId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=WorkloadId" })
   workloadId: string;
 }
 
 
 export class UpdateAnswerHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum UpdateAnswerRequestBodyReasonEnum {
-    OutOfScope = "OUT_OF_SCOPE"
-,    BusinessPriorities = "BUSINESS_PRIORITIES"
-,    ArchitectureConstraints = "ARCHITECTURE_CONSTRAINTS"
-,    Other = "OTHER"
-,    None = "NONE"
+    OutOfScope = "OUT_OF_SCOPE",
+    BusinessPriorities = "BUSINESS_PRIORITIES",
+    ArchitectureConstraints = "ARCHITECTURE_CONSTRAINTS",
+    Other = "OTHER",
+    None = "NONE"
 }
 
 
 export class UpdateAnswerRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ChoiceUpdates", elemType: shared.ChoiceUpdate })
+  @SpeakeasyMetadata({ data: "json, name=ChoiceUpdates", elemType: shared.ChoiceUpdate })
   choiceUpdates?: Map<string, shared.ChoiceUpdate>;
 
-  @Metadata({ data: "json, name=IsApplicable" })
+  @SpeakeasyMetadata({ data: "json, name=IsApplicable" })
   isApplicable?: boolean;
 
-  @Metadata({ data: "json, name=Notes" })
+  @SpeakeasyMetadata({ data: "json, name=Notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=Reason" })
+  @SpeakeasyMetadata({ data: "json, name=Reason" })
   reason?: UpdateAnswerRequestBodyReasonEnum;
 
-  @Metadata({ data: "json, name=SelectedChoices" })
+  @SpeakeasyMetadata({ data: "json, name=SelectedChoices" })
   selectedChoices?: string[];
 }
 
 
 export class UpdateAnswerRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateAnswerPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateAnswerHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateAnswerRequestBody;
 }
 
 
 export class UpdateAnswerResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateAnswerOutput?: shared.UpdateAnswerOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

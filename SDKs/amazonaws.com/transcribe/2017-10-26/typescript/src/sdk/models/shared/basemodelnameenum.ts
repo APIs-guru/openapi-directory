@@ -1,6 +1,7 @@
 
 
+
 export enum BaseModelNameEnum {
-    NarrowBand = "NarrowBand"
-,    WideBand = "WideBand"
+    NarrowBand = "NarrowBand",
+    WideBand = "WideBand"
 }

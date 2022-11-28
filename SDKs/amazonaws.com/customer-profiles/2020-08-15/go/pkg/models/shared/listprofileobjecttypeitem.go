@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ListProfileObjectTypeItem
+// A ProfileObjectType instance.
 type ListProfileObjectTypeItem struct {
 	CreatedAt      *time.Time        `json:"CreatedAt,omitempty"`
 	Description    string            `json:"Description"`

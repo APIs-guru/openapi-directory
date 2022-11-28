@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RepositoryCredentials
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The repository credentials for private registry authentication.
 **/
 export class RepositoryCredentials extends SpeakeasyBase {
-  @Metadata({ data: "json, name=credentialsParameter" })
+  @SpeakeasyMetadata({ data: "json, name=credentialsParameter" })
   credentialsParameter: string;
 }

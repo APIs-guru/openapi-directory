@@ -10,8 +10,8 @@ class LibreConvertPostRequest:
 
 @dataclass
 class LibreConvertPostResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_response_failure: Optional[shared.APIResponseFailure] = field(default=None)
     api_response_success: Optional[shared.APIResponseSuccess] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

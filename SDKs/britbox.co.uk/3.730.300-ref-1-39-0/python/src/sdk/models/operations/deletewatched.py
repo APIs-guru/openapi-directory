@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -12,18 +13,18 @@ class DeleteWatchedQueryParams:
 
 @dataclass
 class DeleteWatchedSecurity:
-    profile_auth: shared.SchemeProfileAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    profile_auth: shared.SchemeProfileAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeleteWatchedRequest:
-    query_params: DeleteWatchedQueryParams = field(default=None)
-    security: DeleteWatchedSecurity = field(default=None)
+    query_params: DeleteWatchedQueryParams = field()
+    security: DeleteWatchedSecurity = field()
     
 
 @dataclass
 class DeleteWatchedResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

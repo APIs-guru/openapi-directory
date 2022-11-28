@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PatchAnythingAnythingPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=anything" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=anything" })
   anything: string;
 }
 
 
 export class PatchAnythingAnythingRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PatchAnythingAnythingPathParams;
 }
 
 
 export class PatchAnythingAnythingResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

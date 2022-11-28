@@ -10,14 +10,14 @@ class EnableCustomerEncryptionHeaders:
 
 @dataclass
 class EnableCustomerEncryptionRequest:
-    headers: EnableCustomerEncryptionHeaders = field(default=None)
-    request: shared.EnableCustomerEncryptionRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: EnableCustomerEncryptionHeaders = field()
+    request: shared.EnableCustomerEncryptionRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class EnableCustomerEncryptionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     customer_data: Optional[shared.CustomerData] = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

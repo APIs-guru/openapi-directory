@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetUsersUserIDAs2KeysPathParams:
-    user_id: int = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    user_id: int = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,13 +16,13 @@ class GetUsersUserIDAs2KeysQueryParams:
 
 @dataclass
 class GetUsersUserIDAs2KeysRequest:
-    path_params: GetUsersUserIDAs2KeysPathParams = field(default=None)
-    query_params: GetUsersUserIDAs2KeysQueryParams = field(default=None)
+    path_params: GetUsersUserIDAs2KeysPathParams = field()
+    query_params: GetUsersUserIDAs2KeysQueryParams = field()
     
 
 @dataclass
 class GetUsersUserIDAs2KeysResponse:
+    content_type: str = field()
+    status_code: int = field()
     as2_key_entities: Optional[List[shared.As2KeyEntity]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

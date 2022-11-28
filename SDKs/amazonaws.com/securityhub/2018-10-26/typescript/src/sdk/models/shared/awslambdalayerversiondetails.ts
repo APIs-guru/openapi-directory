@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsLambdaLayerVersionDetails
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about a Lambda layer version.
 **/
 export class AwsLambdaLayerVersionDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CompatibleRuntimes" })
+  @SpeakeasyMetadata({ data: "json, name=CompatibleRuntimes" })
   compatibleRuntimes?: string[];
 
-  @Metadata({ data: "json, name=CreatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedDate" })
   createdDate?: string;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: number;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class RucerRequestBodyCertificateParameters extends SpeakeasyBase {
     certificateNumber: string;
@@ -15,10 +15,6 @@ export declare class RucerRequestBody extends SpeakeasyBase {
 export declare class RucerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class RucerRequest extends SpeakeasyBase {
-    request?: RucerRequestBody;
-    security: RucerSecurity;
 }
 export declare enum Rucer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -101,6 +97,10 @@ export declare enum Rucer504ApplicationJsonErrorDescriptionEnum {
 export declare class Rucer504ApplicationJson extends SpeakeasyBase {
     error?: Rucer504ApplicationJsonErrorEnum;
     errorDescription?: Rucer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class RucerRequest extends SpeakeasyBase {
+    request?: RucerRequestBody;
+    security: RucerSecurity;
 }
 export declare class RucerResponse extends SpeakeasyBase {
     contentType: string;

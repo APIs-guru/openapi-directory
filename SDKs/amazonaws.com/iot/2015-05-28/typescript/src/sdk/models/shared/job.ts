@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AbortConfig } from "./abortconfig";
 import { JobExecutionsRolloutConfig } from "./jobexecutionsrolloutconfig";
 import { JobProcessDetails } from "./jobprocessdetails";
@@ -8,65 +8,66 @@ import { TargetSelectionEnum } from "./targetselectionenum";
 import { TimeoutConfig } from "./timeoutconfig";
 
 
+
 // Job
 /** 
  * The <code>Job</code> object contains details about a job.
 **/
 export class Job extends SpeakeasyBase {
-  @Metadata({ data: "json, name=abortConfig" })
+  @SpeakeasyMetadata({ data: "json, name=abortConfig" })
   abortConfig?: AbortConfig;
 
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment?: string;
 
-  @Metadata({ data: "json, name=completedAt" })
+  @SpeakeasyMetadata({ data: "json, name=completedAt" })
   completedAt?: Date;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=forceCanceled" })
+  @SpeakeasyMetadata({ data: "json, name=forceCanceled" })
   forceCanceled?: boolean;
 
-  @Metadata({ data: "json, name=jobArn" })
+  @SpeakeasyMetadata({ data: "json, name=jobArn" })
   jobArn?: string;
 
-  @Metadata({ data: "json, name=jobExecutionsRolloutConfig" })
+  @SpeakeasyMetadata({ data: "json, name=jobExecutionsRolloutConfig" })
   jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig;
 
-  @Metadata({ data: "json, name=jobId" })
+  @SpeakeasyMetadata({ data: "json, name=jobId" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=jobProcessDetails" })
+  @SpeakeasyMetadata({ data: "json, name=jobProcessDetails" })
   jobProcessDetails?: JobProcessDetails;
 
-  @Metadata({ data: "json, name=jobTemplateArn" })
+  @SpeakeasyMetadata({ data: "json, name=jobTemplateArn" })
   jobTemplateArn?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=namespaceId" })
+  @SpeakeasyMetadata({ data: "json, name=namespaceId" })
   namespaceId?: string;
 
-  @Metadata({ data: "json, name=presignedUrlConfig" })
+  @SpeakeasyMetadata({ data: "json, name=presignedUrlConfig" })
   presignedUrlConfig?: PresignedUrlConfig;
 
-  @Metadata({ data: "json, name=reasonCode" })
+  @SpeakeasyMetadata({ data: "json, name=reasonCode" })
   reasonCode?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: JobStatusEnum;
 
-  @Metadata({ data: "json, name=targetSelection" })
+  @SpeakeasyMetadata({ data: "json, name=targetSelection" })
   targetSelection?: TargetSelectionEnum;
 
-  @Metadata({ data: "json, name=targets" })
+  @SpeakeasyMetadata({ data: "json, name=targets" })
   targets?: string[];
 
-  @Metadata({ data: "json, name=timeoutConfig" })
+  @SpeakeasyMetadata({ data: "json, name=timeoutConfig" })
   timeoutConfig?: TimeoutConfig;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DataPoint
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A timestamp, and a single numerical value, which together represent a measurement at a particular point in time.
 **/
 export class DataPoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp: Date;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value: number;
 }

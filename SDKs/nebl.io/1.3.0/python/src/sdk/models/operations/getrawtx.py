@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetRawTxPathParams:
-    txid: str = field(default=None, metadata={'path_param': { 'field_name': 'txid', 'style': 'simple', 'explode': False }})
+    txid: str = field(metadata={'path_param': { 'field_name': 'txid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetRawTxRequest:
-    path_params: GetRawTxPathParams = field(default=None)
+    path_params: GetRawTxPathParams = field()
     
 
 @dataclass
 class GetRawTxResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_raw_tx_response: Optional[shared.GetRawTxResponse] = field(default=None)
     

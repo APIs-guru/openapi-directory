@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SheetsSpreadsheetsValuesBatchUpdatePathParams:
-    spreadsheet_id: str = field(default=None, metadata={'path_param': { 'field_name': 'spreadsheetId', 'style': 'simple', 'explode': False }})
+    spreadsheet_id: str = field(metadata={'path_param': { 'field_name': 'spreadsheetId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +29,20 @@ class SheetsSpreadsheetsValuesBatchUpdateQueryParams:
 
 @dataclass
 class SheetsSpreadsheetsValuesBatchUpdateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SheetsSpreadsheetsValuesBatchUpdateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SheetsSpreadsheetsValuesBatchUpdateSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -50,15 +54,15 @@ class SheetsSpreadsheetsValuesBatchUpdateSecurity:
 
 @dataclass
 class SheetsSpreadsheetsValuesBatchUpdateRequest:
-    path_params: SheetsSpreadsheetsValuesBatchUpdatePathParams = field(default=None)
-    query_params: SheetsSpreadsheetsValuesBatchUpdateQueryParams = field(default=None)
+    path_params: SheetsSpreadsheetsValuesBatchUpdatePathParams = field()
+    query_params: SheetsSpreadsheetsValuesBatchUpdateQueryParams = field()
+    security: SheetsSpreadsheetsValuesBatchUpdateSecurity = field()
     request: Optional[shared.BatchUpdateValuesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: SheetsSpreadsheetsValuesBatchUpdateSecurity = field(default=None)
     
 
 @dataclass
 class SheetsSpreadsheetsValuesBatchUpdateResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_update_values_response: Optional[shared.BatchUpdateValuesResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -20,6 +20,8 @@ const (
 	EncryptionInfoEncryptionSourceEnumDataTransfer           EncryptionInfoEncryptionSourceEnum = "DATA_TRANSFER"
 )
 
+// EncryptionInfo
+// A description of how user IDs are encrypted.
 type EncryptionInfo struct {
 	EncryptionEntityID   *string                                 `json:"encryptionEntityId,omitempty"`
 	EncryptionEntityType *EncryptionInfoEncryptionEntityTypeEnum `json:"encryptionEntityType,omitempty"`

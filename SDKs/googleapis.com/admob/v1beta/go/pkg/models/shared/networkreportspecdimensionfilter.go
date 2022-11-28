@@ -19,6 +19,8 @@ const (
 	NetworkReportSpecDimensionFilterDimensionEnumServingRestriction   NetworkReportSpecDimensionFilterDimensionEnum = "SERVING_RESTRICTION"
 )
 
+// NetworkReportSpecDimensionFilter
+// Describes which report rows to match based on their dimension values.
 type NetworkReportSpecDimensionFilter struct {
 	Dimension  *NetworkReportSpecDimensionFilterDimensionEnum `json:"dimension,omitempty"`
 	MatchesAny *StringList                                    `json:"matchesAny,omitempty"`

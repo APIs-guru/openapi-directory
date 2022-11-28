@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DistanceUnitEnum } from "./distanceunitenum";
 // CalculateRouteSummary
 /**
@@ -34,23 +34,23 @@ var CalculateRouteSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DataSource" }),
+        SpeakeasyMetadata({ data: "json, name=DataSource" }),
         __metadata("design:type", String)
     ], CalculateRouteSummary.prototype, "dataSource", void 0);
     __decorate([
-        Metadata({ data: "json, name=Distance" }),
+        SpeakeasyMetadata({ data: "json, name=Distance" }),
         __metadata("design:type", Number)
     ], CalculateRouteSummary.prototype, "distance", void 0);
     __decorate([
-        Metadata({ data: "json, name=DistanceUnit" }),
+        SpeakeasyMetadata({ data: "json, name=DistanceUnit" }),
         __metadata("design:type", String)
     ], CalculateRouteSummary.prototype, "distanceUnit", void 0);
     __decorate([
-        Metadata({ data: "json, name=DurationSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=DurationSeconds" }),
         __metadata("design:type", Number)
     ], CalculateRouteSummary.prototype, "durationSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=RouteBBox" }),
+        SpeakeasyMetadata({ data: "json, name=RouteBBox" }),
         __metadata("design:type", Array)
     ], CalculateRouteSummary.prototype, "routeBBox", void 0);
     return CalculateRouteSummary;

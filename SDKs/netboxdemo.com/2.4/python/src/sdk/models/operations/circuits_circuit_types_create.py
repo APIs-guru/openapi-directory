@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class CircuitsCircuitTypesCreateRequest:
-    request: shared.CircuitType = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.CircuitTypeInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CircuitsCircuitTypesCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     circuit_type: Optional[shared.CircuitType] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

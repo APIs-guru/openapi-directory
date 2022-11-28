@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RequestUserInfoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=more_info" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=more_info" })
   moreInfo?: boolean;
 }
 
 
 export class RequestUserInfoHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
   xSdsAuthToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Date-Format" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Date-Format" })
   xSdsDateFormat?: any;
 }
 
 
 export class RequestUserInfoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RequestUserInfoQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: RequestUserInfoHeaders;
 }
 
 
 export class RequestUserInfoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   userAccount?: shared.UserAccount;
 }

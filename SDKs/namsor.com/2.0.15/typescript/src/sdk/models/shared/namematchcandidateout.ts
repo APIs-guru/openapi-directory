@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NameMatchCandidateOut
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The ordered list of name matching candidates
 **/
 export class NameMatchCandidateOut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=candidateName" })
+  @SpeakeasyMetadata({ data: "json, name=candidateName" })
   candidateName?: string;
 
-  @Metadata({ data: "json, name=predScoreFamilyName" })
+  @SpeakeasyMetadata({ data: "json, name=predScoreFamilyName" })
   predScoreFamilyName?: number;
 
-  @Metadata({ data: "json, name=predScoreGivenName" })
+  @SpeakeasyMetadata({ data: "json, name=predScoreGivenName" })
   predScoreGivenName?: number;
 
-  @Metadata({ data: "json, name=probability" })
+  @SpeakeasyMetadata({ data: "json, name=probability" })
   probability?: number;
 }

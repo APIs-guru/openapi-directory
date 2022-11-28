@@ -25,6 +25,8 @@ const (
 	CrossProfilePoliciesShowWorkContactsInPersonalProfileEnumShowWorkContactsInPersonalProfileAllowed     CrossProfilePoliciesShowWorkContactsInPersonalProfileEnum = "SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_ALLOWED"
 )
 
+// CrossProfilePolicies
+// Cross-profile policies applied on the device.
 type CrossProfilePolicies struct {
 	CrossProfileCopyPaste             *CrossProfilePoliciesCrossProfileCopyPasteEnum             `json:"crossProfileCopyPaste,omitempty"`
 	CrossProfileDataSharing           *CrossProfilePoliciesCrossProfileDataSharingEnum           `json:"crossProfileDataSharing,omitempty"`

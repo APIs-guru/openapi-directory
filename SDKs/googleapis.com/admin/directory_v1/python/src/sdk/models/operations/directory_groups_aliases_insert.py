@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryGroupsAliasesInsertPathParams:
-    group_key: str = field(default=None, metadata={'path_param': { 'field_name': 'groupKey', 'style': 'simple', 'explode': False }})
+    group_key: str = field(metadata={'path_param': { 'field_name': 'groupKey', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DirectoryGroupsAliasesInsertQueryParams:
 
 @dataclass
 class DirectoryGroupsAliasesInsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryGroupsAliasesInsertRequest:
-    path_params: DirectoryGroupsAliasesInsertPathParams = field(default=None)
-    query_params: DirectoryGroupsAliasesInsertQueryParams = field(default=None)
+    path_params: DirectoryGroupsAliasesInsertPathParams = field()
+    query_params: DirectoryGroupsAliasesInsertQueryParams = field()
+    security: DirectoryGroupsAliasesInsertSecurity = field()
     request: Optional[shared.Alias] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DirectoryGroupsAliasesInsertSecurity = field(default=None)
     
 
 @dataclass
 class DirectoryGroupsAliasesInsertResponse:
+    content_type: str = field()
+    status_code: int = field()
     alias: Optional[shared.Alias] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NamespacedGkeDeploymentTarget
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Deprecated. Used only for the deprecated beta. A full, namespace-isolated deployment target for an existing GKE cluster.
 **/
 export class NamespacedGkeDeploymentTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterNamespace" })
+  @SpeakeasyMetadata({ data: "json, name=clusterNamespace" })
   clusterNamespace?: string;
 
-  @Metadata({ data: "json, name=targetGkeCluster" })
+  @SpeakeasyMetadata({ data: "json, name=targetGkeCluster" })
   targetGkeCluster?: string;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum TransferMessageSeverityEnum {
-    MessageSeverityUnspecified = "MESSAGE_SEVERITY_UNSPECIFIED"
-,    Info = "INFO"
-,    Warning = "WARNING"
-,    Error = "ERROR"
+    MessageSeverityUnspecified = "MESSAGE_SEVERITY_UNSPECIFIED",
+    Info = "INFO",
+    Warning = "WARNING",
+    Error = "ERROR"
 }
 
 
@@ -13,12 +14,12 @@ export enum TransferMessageSeverityEnum {
  * Represents a user facing message for a particular data transfer run.
 **/
 export class TransferMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=messageText" })
+  @SpeakeasyMetadata({ data: "json, name=messageText" })
   messageText?: string;
 
-  @Metadata({ data: "json, name=messageTime" })
+  @SpeakeasyMetadata({ data: "json, name=messageTime" })
   messageTime?: string;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: TransferMessageSeverityEnum;
 }

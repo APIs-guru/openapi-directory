@@ -9,13 +9,13 @@ type V3CreatePayeeMultipartFormData struct {
 	PayorID *string                         `multipartForm:"name=payorId"`
 }
 
-type V3CreatePayeeRequests struct {
-	CreatePayeesRequest *shared.CreatePayeesRequest     `request:"mediaType=application/json"`
-	Object              *V3CreatePayeeMultipartFormData `request:"mediaType=multipart/form-data"`
+type V3CreatePayeeRequestsInput struct {
+	CreatePayeesRequest *shared.CreatePayeesRequestInput `request:"mediaType=application/json"`
+	Object              *V3CreatePayeeMultipartFormData  `request:"mediaType=multipart/form-data"`
 }
 
 type V3CreatePayeeRequest struct {
-	Request *V3CreatePayeeRequests
+	Request *V3CreatePayeeRequestsInput
 }
 
 type V3CreatePayeeResponse struct {

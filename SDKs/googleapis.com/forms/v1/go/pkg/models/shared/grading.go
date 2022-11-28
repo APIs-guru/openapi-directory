@@ -1,5 +1,7 @@
 package shared
 
+// Grading
+// Grading for a single question
 type Grading struct {
 	CorrectAnswers  *CorrectAnswers `json:"correctAnswers,omitempty"`
 	GeneralFeedback *Feedback       `json:"generalFeedback,omitempty"`

@@ -1,122 +1,123 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetLogPkPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class GetLogPkQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=q" })
   q?: shared.GetItemSchema;
 }
 
 
 export class GetLogPkSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetLogPkRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetLogPkPathParams;
-
-  @Metadata()
-  queryParams: GetLogPkQueryParams;
-
-  @Metadata()
-  security: GetLogPkSecurity;
-}
-
-
 export class GetLogPk200ApplicationJsonDescriptionColumns extends SpeakeasyBase {
-  @Metadata({ data: "json, name=column_name" })
+  @SpeakeasyMetadata({ data: "json, name=column_name" })
   columnName?: string;
 }
 
 
 export class GetLogPk200ApplicationJsonLabelColumns extends SpeakeasyBase {
-  @Metadata({ data: "json, name=column_name" })
+  @SpeakeasyMetadata({ data: "json, name=column_name" })
   columnName?: string;
 }
 
 
 export class GetLogPk200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description_columns" })
+  @SpeakeasyMetadata({ data: "json, name=description_columns" })
   descriptionColumns?: GetLogPk200ApplicationJsonDescriptionColumns;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=label_columns" })
+  @SpeakeasyMetadata({ data: "json, name=label_columns" })
   labelColumns?: GetLogPk200ApplicationJsonLabelColumns;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: shared.LogRestApiGet;
 
-  @Metadata({ data: "json, name=show_columns" })
+  @SpeakeasyMetadata({ data: "json, name=show_columns" })
   showColumns?: string[];
 
-  @Metadata({ data: "json, name=show_title" })
+  @SpeakeasyMetadata({ data: "json, name=show_title" })
   showTitle?: string;
 }
 
 
 export class GetLogPk400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetLogPk401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetLogPk404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetLogPk422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetLogPk500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetLogPkRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetLogPkPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetLogPkQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetLogPkSecurity;
+}
+
+
 export class GetLogPkResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLogPk200ApplicationJsonObject?: GetLogPk200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLogPk400ApplicationJsonObject?: GetLogPk400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLogPk401ApplicationJsonObject?: GetLogPk401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLogPk404ApplicationJsonObject?: GetLogPk404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLogPk422ApplicationJsonObject?: GetLogPk422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLogPk500ApplicationJsonObject?: GetLogPk500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProjectReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 }

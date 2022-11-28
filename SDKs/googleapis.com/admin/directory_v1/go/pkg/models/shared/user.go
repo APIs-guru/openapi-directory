@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// User
+// The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
 type User struct {
 	Addresses                  *interface{}                      `json:"addresses,omitempty"`
 	AgreedToTerms              *bool                             `json:"agreedToTerms,omitempty"`
@@ -50,5 +52,39 @@ type User struct {
 	SuspensionReason           *string                           `json:"suspensionReason,omitempty"`
 	ThumbnailPhotoEtag         *string                           `json:"thumbnailPhotoEtag,omitempty"`
 	ThumbnailPhotoURL          *string                           `json:"thumbnailPhotoUrl,omitempty"`
+	Websites                   *interface{}                      `json:"websites,omitempty"`
+}
+
+// UserInput
+// The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
+type UserInput struct {
+	Addresses                  *interface{}                      `json:"addresses,omitempty"`
+	Archived                   *bool                             `json:"archived,omitempty"`
+	ChangePasswordAtNextLogin  *bool                             `json:"changePasswordAtNextLogin,omitempty"`
+	CustomSchemas              map[string]map[string]interface{} `json:"customSchemas,omitempty"`
+	Emails                     *interface{}                      `json:"emails,omitempty"`
+	ExternalIds                *interface{}                      `json:"externalIds,omitempty"`
+	Gender                     *interface{}                      `json:"gender,omitempty"`
+	HashFunction               *string                           `json:"hashFunction,omitempty"`
+	ID                         *string                           `json:"id,omitempty"`
+	Ims                        *interface{}                      `json:"ims,omitempty"`
+	IncludeInGlobalAddressList *bool                             `json:"includeInGlobalAddressList,omitempty"`
+	IPWhitelisted              *bool                             `json:"ipWhitelisted,omitempty"`
+	Keywords                   *interface{}                      `json:"keywords,omitempty"`
+	Languages                  *interface{}                      `json:"languages,omitempty"`
+	Locations                  *interface{}                      `json:"locations,omitempty"`
+	Name                       *UserName                         `json:"name,omitempty"`
+	Notes                      *interface{}                      `json:"notes,omitempty"`
+	OrgUnitPath                *string                           `json:"orgUnitPath,omitempty"`
+	Organizations              *interface{}                      `json:"organizations,omitempty"`
+	Password                   *string                           `json:"password,omitempty"`
+	Phones                     *interface{}                      `json:"phones,omitempty"`
+	PosixAccounts              *interface{}                      `json:"posixAccounts,omitempty"`
+	PrimaryEmail               *string                           `json:"primaryEmail,omitempty"`
+	RecoveryEmail              *string                           `json:"recoveryEmail,omitempty"`
+	RecoveryPhone              *string                           `json:"recoveryPhone,omitempty"`
+	Relations                  *interface{}                      `json:"relations,omitempty"`
+	SSHPublicKeys              *interface{}                      `json:"sshPublicKeys,omitempty"`
+	Suspended                  *bool                             `json:"suspended,omitempty"`
 	Websites                   *interface{}                      `json:"websites,omitempty"`
 }

@@ -17,18 +17,18 @@ class SearchQueryParams:
 
 @dataclass
 class SearchSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SearchRequest:
-    query_params: SearchQueryParams = field(default=None)
-    security: SearchSecurity = field(default=None)
+    query_params: SearchQueryParams = field()
+    security: SearchSecurity = field()
     
 
 @dataclass
 class SearchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     product_search_response: Optional[shared.ProductSearchResponse] = field(default=None)
-    status_code: int = field(default=None)
     

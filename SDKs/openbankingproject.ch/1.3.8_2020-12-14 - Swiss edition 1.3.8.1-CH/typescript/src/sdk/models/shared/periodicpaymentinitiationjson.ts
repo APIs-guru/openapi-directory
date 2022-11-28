@@ -1,19 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChargeBearerEnum } from "./chargebearerenum";
 import { AccountReference16Ch } from "./accountreference16ch";
 import { Address } from "./address";
 import { CreditorAgent7Ch } from "./creditoragent7ch";
 import { DayOfExecutionEnum } from "./dayofexecutionenum";
-import { AccountReference16Ch } from "./accountreference16ch";
 import { DebtorAgent7Ch } from "./debtoragent7ch";
 import { Amount } from "./amount";
 import { ExchangeRateInformation1 } from "./exchangerateinformation1";
 import { ExecutionRuleEnum } from "./executionruleenum";
 import { FrequencyCodeEnum } from "./frequencycodeenum";
-import { Amount } from "./amount";
 import { PurposeCodeEnum } from "./purposecodeenum";
 import { RemittanceInformationStructured } from "./remittanceinformationstructured";
 import { ExternalServiceLevel1CodeEnum } from "./externalservicelevel1codeenum";
+
 
 
 // PeriodicPaymentInitiationJson
@@ -104,90 +103,90 @@ import { ExternalServiceLevel1CodeEnum } from "./externalservicelevel1codeenum";
  * 
 **/
 export class PeriodicPaymentInitiationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chargeBearer" })
+  @SpeakeasyMetadata({ data: "json, name=chargeBearer" })
   chargeBearer?: ChargeBearerEnum;
 
-  @Metadata({ data: "json, name=creditorAccount" })
+  @SpeakeasyMetadata({ data: "json, name=creditorAccount" })
   creditorAccount: AccountReference16Ch;
 
-  @Metadata({ data: "json, name=creditorAddress" })
+  @SpeakeasyMetadata({ data: "json, name=creditorAddress" })
   creditorAddress?: Address;
 
-  @Metadata({ data: "json, name=creditorAgent" })
+  @SpeakeasyMetadata({ data: "json, name=creditorAgent" })
   creditorAgent?: CreditorAgent7Ch;
 
-  @Metadata({ data: "json, name=creditorAgentName" })
+  @SpeakeasyMetadata({ data: "json, name=creditorAgentName" })
   creditorAgentName?: string;
 
-  @Metadata({ data: "json, name=creditorId" })
+  @SpeakeasyMetadata({ data: "json, name=creditorId" })
   creditorId?: string;
 
-  @Metadata({ data: "json, name=creditorName" })
+  @SpeakeasyMetadata({ data: "json, name=creditorName" })
   creditorName: string;
 
-  @Metadata({ data: "json, name=creditorNameAndAddress" })
+  @SpeakeasyMetadata({ data: "json, name=creditorNameAndAddress" })
   creditorNameAndAddress?: string;
 
-  @Metadata({ data: "json, name=dayOfExecution" })
+  @SpeakeasyMetadata({ data: "json, name=dayOfExecution" })
   dayOfExecution?: DayOfExecutionEnum;
 
-  @Metadata({ data: "json, name=debtorAccount" })
+  @SpeakeasyMetadata({ data: "json, name=debtorAccount" })
   debtorAccount: AccountReference16Ch;
 
-  @Metadata({ data: "json, name=debtorAgent" })
+  @SpeakeasyMetadata({ data: "json, name=debtorAgent" })
   debtorAgent?: DebtorAgent7Ch;
 
-  @Metadata({ data: "json, name=debtorId" })
+  @SpeakeasyMetadata({ data: "json, name=debtorId" })
   debtorId?: string;
 
-  @Metadata({ data: "json, name=debtorName" })
+  @SpeakeasyMetadata({ data: "json, name=debtorName" })
   debtorName: string;
 
-  @Metadata({ data: "json, name=endDate" })
+  @SpeakeasyMetadata({ data: "json, name=endDate" })
   endDate?: Date;
 
-  @Metadata({ data: "json, name=endToEndIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=endToEndIdentification" })
   endToEndIdentification: string;
 
-  @Metadata({ data: "json, name=equivalentAmount" })
+  @SpeakeasyMetadata({ data: "json, name=equivalentAmount" })
   equivalentAmount?: Amount;
 
-  @Metadata({ data: "json, name=exchangeRateInformation" })
+  @SpeakeasyMetadata({ data: "json, name=exchangeRateInformation" })
   exchangeRateInformation?: ExchangeRateInformation1;
 
-  @Metadata({ data: "json, name=executionRule" })
+  @SpeakeasyMetadata({ data: "json, name=executionRule" })
   executionRule?: ExecutionRuleEnum;
 
-  @Metadata({ data: "json, name=frequency" })
+  @SpeakeasyMetadata({ data: "json, name=frequency" })
   frequency: FrequencyCodeEnum;
 
-  @Metadata({ data: "json, name=instructedAmount" })
+  @SpeakeasyMetadata({ data: "json, name=instructedAmount" })
   instructedAmount?: Amount;
 
-  @Metadata({ data: "json, name=intermediaryAgent" })
+  @SpeakeasyMetadata({ data: "json, name=intermediaryAgent" })
   intermediaryAgent?: string;
 
-  @Metadata({ data: "json, name=purposeCode" })
+  @SpeakeasyMetadata({ data: "json, name=purposeCode" })
   purposeCode?: PurposeCodeEnum;
 
-  @Metadata({ data: "json, name=remittanceInformationStructured" })
+  @SpeakeasyMetadata({ data: "json, name=remittanceInformationStructured" })
   remittanceInformationStructured?: RemittanceInformationStructured;
 
-  @Metadata({ data: "json, name=remittanceInformationUnstructured" })
+  @SpeakeasyMetadata({ data: "json, name=remittanceInformationUnstructured" })
   remittanceInformationUnstructured?: string;
 
-  @Metadata({ data: "json, name=serviceLevel" })
+  @SpeakeasyMetadata({ data: "json, name=serviceLevel" })
   serviceLevel?: ExternalServiceLevel1CodeEnum;
 
-  @Metadata({ data: "json, name=startDate" })
+  @SpeakeasyMetadata({ data: "json, name=startDate" })
   startDate: Date;
 
-  @Metadata({ data: "json, name=transactionCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=transactionCurrency" })
   transactionCurrency?: string;
 
-  @Metadata({ data: "json, name=ultimateCreditor" })
+  @SpeakeasyMetadata({ data: "json, name=ultimateCreditor" })
   ultimateCreditor?: string;
 
-  @Metadata({ data: "json, name=ultimateDebtor" })
+  @SpeakeasyMetadata({ data: "json, name=ultimateDebtor" })
   ultimateDebtor?: string;
 }

@@ -13,17 +13,9 @@ type FetchFieldsHeaders struct {
 	XNextToken *string `header:"style=simple,explode=false,name=X-Next-Token"`
 }
 
-type FetchFieldsSecurityOption1 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
-type FetchFieldsSecurityOption2 struct {
-	Oauth2AuthorizationCode shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
-}
-
 type FetchFieldsSecurity struct {
-	Option1 *FetchFieldsSecurityOption1 `security:"option"`
-	Option2 *FetchFieldsSecurityOption2 `security:"option"`
+	APIKey                  *shared.SchemeAPIKey                  `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2AuthorizationCode *shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
 }
 
 type FetchFieldsRequest struct {

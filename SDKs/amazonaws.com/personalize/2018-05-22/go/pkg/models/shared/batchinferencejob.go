@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BatchInferenceJob
+// Contains information on a batch inference job.
 type BatchInferenceJob struct {
 	BatchInferenceJobArn    *string                  `json:"batchInferenceJobArn,omitempty"`
 	BatchInferenceJobConfig *BatchInferenceJobConfig `json:"batchInferenceJobConfig,omitempty"`

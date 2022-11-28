@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 
 
 @dataclass
@@ -11,11 +11,11 @@ class GetActionPackageRelationshipsListQueryParams:
 
 @dataclass
 class GetActionPackageRelationshipsListRequest:
-    query_params: GetActionPackageRelationshipsListQueryParams = field(default=None)
+    query_params: GetActionPackageRelationshipsListQueryParams = field()
     
 
 @dataclass
 class GetActionPackageRelationshipsListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

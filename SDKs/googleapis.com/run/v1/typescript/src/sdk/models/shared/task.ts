@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectMeta } from "./objectmeta";
 import { TaskSpec } from "./taskspec";
 import { TaskStatus } from "./taskstatus";
+
 
 
 // Task
@@ -9,18 +10,18 @@ import { TaskStatus } from "./taskstatus";
  * Task represents a single run of a container to completion.
 **/
 export class Task extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiVersion" })
+  @SpeakeasyMetadata({ data: "json, name=apiVersion" })
   apiVersion?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: ObjectMeta;
 
-  @Metadata({ data: "json, name=spec" })
+  @SpeakeasyMetadata({ data: "json, name=spec" })
   spec?: TaskSpec;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: TaskStatus;
 }

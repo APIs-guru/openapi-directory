@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TypedLinkAttributeRange } from "./typedlinkattributerange";
 import { TypedLinkSchemaAndFacetName } from "./typedlinkschemaandfacetname";
 import { ObjectReference } from "./objectreference";
+
 
 
 // BatchListIncomingTypedLinks
@@ -10,18 +10,18 @@ import { ObjectReference } from "./objectreference";
  * Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object inside a <a>BatchRead</a> operation. For more information, see <a>ListIncomingTypedLinks</a> and <a>BatchReadRequest$Operations</a>.
 **/
 export class BatchListIncomingTypedLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FilterAttributeRanges", elemType: shared.TypedLinkAttributeRange })
+  @SpeakeasyMetadata({ data: "json, name=FilterAttributeRanges", elemType: TypedLinkAttributeRange })
   filterAttributeRanges?: TypedLinkAttributeRange[];
 
-  @Metadata({ data: "json, name=FilterTypedLink" })
+  @SpeakeasyMetadata({ data: "json, name=FilterTypedLink" })
   filterTypedLink?: TypedLinkSchemaAndFacetName;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ObjectReference" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectReference" })
   objectReference: ObjectReference;
 }

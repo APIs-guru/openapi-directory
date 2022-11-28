@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GroupV2GetMembersOfGroupPathParams = /** @class */ (function (_super) {
     __extends(GroupV2GetMembersOfGroupPathParams, _super);
     function GroupV2GetMembersOfGroupPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=groupId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupId" }),
         __metadata("design:type", Number)
     ], GroupV2GetMembersOfGroupPathParams.prototype, "groupId", void 0);
     return GroupV2GetMembersOfGroupPathParams;
@@ -41,15 +41,15 @@ var GroupV2GetMembersOfGroupQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=currentpage" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currentpage" }),
         __metadata("design:type", Number)
     ], GroupV2GetMembersOfGroupQueryParams.prototype, "currentpage", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=memberType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=memberType" }),
         __metadata("design:type", Number)
     ], GroupV2GetMembersOfGroupQueryParams.prototype, "memberType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=nameSearch" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nameSearch" }),
         __metadata("design:type", String)
     ], GroupV2GetMembersOfGroupQueryParams.prototype, "nameSearch", void 0);
     return GroupV2GetMembersOfGroupQueryParams;
@@ -61,11 +61,11 @@ var GroupV2GetMembersOfGroupRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GroupV2GetMembersOfGroupPathParams)
     ], GroupV2GetMembersOfGroupRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GroupV2GetMembersOfGroupQueryParams)
     ], GroupV2GetMembersOfGroupRequest.prototype, "queryParams", void 0);
     return GroupV2GetMembersOfGroupRequest;
@@ -77,15 +77,15 @@ var GroupV2GetMembersOfGroupResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GroupV2GetMembersOfGroupResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GroupV2GetMembersOfGroupResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GroupV2GetMembersOfGroupResponse.prototype, "statusCode", void 0);
     return GroupV2GetMembersOfGroupResponse;

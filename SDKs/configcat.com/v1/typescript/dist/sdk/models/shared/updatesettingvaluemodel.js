@@ -22,23 +22,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { RolloutPercentageItemModel } from "./rolloutpercentageitemmodel";
+import { RolloutRuleModel } from "./rolloutrulemodel";
 var UpdateSettingValueModel = /** @class */ (function (_super) {
     __extends(UpdateSettingValueModel, _super);
     function UpdateSettingValueModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=rolloutPercentageItems", elemType: shared.RolloutPercentageItemModel }),
+        SpeakeasyMetadata({ data: "json, name=rolloutPercentageItems", elemType: RolloutPercentageItemModel }),
         __metadata("design:type", Array)
     ], UpdateSettingValueModel.prototype, "rolloutPercentageItems", void 0);
     __decorate([
-        Metadata({ data: "json, name=rolloutRules", elemType: shared.RolloutRuleModel }),
+        SpeakeasyMetadata({ data: "json, name=rolloutRules", elemType: RolloutRuleModel }),
         __metadata("design:type", Array)
     ], UpdateSettingValueModel.prototype, "rolloutRules", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", Map)
     ], UpdateSettingValueModel.prototype, "value", void 0);
     return UpdateSettingValueModel;

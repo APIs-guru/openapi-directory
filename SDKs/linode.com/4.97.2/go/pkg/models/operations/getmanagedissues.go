@@ -9,22 +9,9 @@ type GetManagedIssuesQueryParams struct {
 	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GetManagedIssuesSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetManagedIssuesSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetManagedIssuesSecurity struct {
-	Option1 *GetManagedIssuesSecurityOption1 `security:"option"`
-	Option2 *GetManagedIssuesSecurityOption2 `security:"option"`
-}
-
-type GetManagedIssuesRequest struct {
-	QueryParams GetManagedIssuesQueryParams
-	Security    GetManagedIssuesSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetManagedIssues200ApplicationJSON struct {
@@ -36,6 +23,11 @@ type GetManagedIssues200ApplicationJSON struct {
 
 type GetManagedIssuesDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetManagedIssuesRequest struct {
+	QueryParams GetManagedIssuesQueryParams
+	Security    GetManagedIssuesSecurity
 }
 
 type GetManagedIssuesResponse struct {

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LogGroup
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a log group.
 **/
 export class LogGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: number;
 
-  @Metadata({ data: "json, name=kmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=logGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=logGroupName" })
   logGroupName?: string;
 
-  @Metadata({ data: "json, name=metricFilterCount" })
+  @SpeakeasyMetadata({ data: "json, name=metricFilterCount" })
   metricFilterCount?: number;
 
-  @Metadata({ data: "json, name=retentionInDays" })
+  @SpeakeasyMetadata({ data: "json, name=retentionInDays" })
   retentionInDays?: number;
 
-  @Metadata({ data: "json, name=storedBytes" })
+  @SpeakeasyMetadata({ data: "json, name=storedBytes" })
   storedBytes?: number;
 }

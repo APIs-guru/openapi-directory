@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AllowedIpRange } from "./allowediprange";
 // WebServerNetworkAccessControl
 /**
  * Network-level access control policy for the Airflow web server.
@@ -34,7 +34,7 @@ var WebServerNetworkAccessControl = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allowedIpRanges", elemType: shared.AllowedIpRange }),
+        SpeakeasyMetadata({ data: "json, name=allowedIpRanges", elemType: AllowedIpRange }),
         __metadata("design:type", Array)
     ], WebServerNetworkAccessControl.prototype, "allowedIpRanges", void 0);
     return WebServerNetworkAccessControl;

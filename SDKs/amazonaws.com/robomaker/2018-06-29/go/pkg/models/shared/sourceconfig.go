@@ -1,5 +1,7 @@
 package shared
 
+// SourceConfig
+// Information about a source configuration.
 type SourceConfig struct {
 	Architecture *ArchitectureEnum `json:"architecture,omitempty"`
 	S3Bucket     *string           `json:"s3Bucket,omitempty"`

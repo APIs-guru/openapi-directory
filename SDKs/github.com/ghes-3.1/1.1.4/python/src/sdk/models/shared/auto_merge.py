@@ -1,7 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import simple_user
+from sdk import utils
+from . import *
 
 class AutoMergeMergeMethodEnum(str, Enum):
     MERGE = "merge"
@@ -12,8 +13,12 @@ class AutoMergeMergeMethodEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AutoMerge:
-    commit_message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commit_message' }})
-    commit_title: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commit_title' }})
-    enabled_by: simple_user.SimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled_by' }})
-    merge_method: AutoMergeMergeMethodEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merge_method' }})
+    r"""AutoMerge
+    The status of auto merging a pull request.
+    """
+    
+    commit_message: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('commit_message') }})
+    commit_title: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('commit_title') }})
+    enabled_by: SimpleUser = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabled_by') }})
+    merge_method: AutoMergeMergeMethodEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('merge_method') }})
     

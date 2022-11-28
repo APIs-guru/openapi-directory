@@ -1,5 +1,7 @@
 package shared
 
+// TrainingSpecification
+// Defines how the algorithm is used for a training job.
 type TrainingSpecification struct {
 	MetricDefinitions                  []MetricDefinition                 `json:"MetricDefinitions,omitempty"`
 	SupportedHyperParameters           []HyperParameterSpecification      `json:"SupportedHyperParameters,omitempty"`

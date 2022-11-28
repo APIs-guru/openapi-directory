@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class PutEmailIdentityFeedbackAttributesPathParams:
-    email_identity: str = field(default=None, metadata={'path_param': { 'field_name': 'EmailIdentity', 'style': 'simple', 'explode': False }})
+    email_identity: str = field(metadata={'path_param': { 'field_name': 'EmailIdentity', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,22 +26,22 @@ class PutEmailIdentityFeedbackAttributesHeaders:
 @dataclass_json
 @dataclass
 class PutEmailIdentityFeedbackAttributesRequestBody:
-    email_forwarding_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EmailForwardingEnabled' }})
+    email_forwarding_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EmailForwardingEnabled') }})
     
 
 @dataclass
 class PutEmailIdentityFeedbackAttributesRequest:
-    path_params: PutEmailIdentityFeedbackAttributesPathParams = field(default=None)
-    headers: PutEmailIdentityFeedbackAttributesHeaders = field(default=None)
-    request: PutEmailIdentityFeedbackAttributesRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutEmailIdentityFeedbackAttributesHeaders = field()
+    path_params: PutEmailIdentityFeedbackAttributesPathParams = field()
+    request: PutEmailIdentityFeedbackAttributesRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutEmailIdentityFeedbackAttributesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     put_email_identity_feedback_attributes_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

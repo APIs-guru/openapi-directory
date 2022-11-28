@@ -1,5 +1,7 @@
 package shared
 
+// AutoScalingUpdate
+// The updates to the auto scaling parameters for the connector.
 type AutoScalingUpdate struct {
 	MaxWorkerCount int64                `json:"maxWorkerCount"`
 	McuCount       int64                `json:"mcuCount"`

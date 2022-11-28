@@ -1,5 +1,7 @@
 package shared
 
+// UpdateDeploymentGroupInput
+// Represents the input of an <code>UpdateDeploymentGroup</code> operation.
 type UpdateDeploymentGroupInput struct {
 	AlarmConfiguration               *AlarmConfiguration               `json:"alarmConfiguration,omitempty"`
 	ApplicationName                  string                            `json:"applicationName"`

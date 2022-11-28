@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails } from "./awsecstaskdefinitionvolumesdockervolumeconfigurationdetails";
 import { AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails } from "./awsecstaskdefinitionvolumesefsvolumeconfigurationdetails";
 import { AwsEcsTaskDefinitionVolumesHostDetails } from "./awsecstaskdefinitionvolumeshostdetails";
+
 
 
 // AwsEcsTaskDefinitionVolumesDetails
@@ -9,15 +10,15 @@ import { AwsEcsTaskDefinitionVolumesHostDetails } from "./awsecstaskdefinitionvo
  * A data volume to mount from another container.
 **/
 export class AwsEcsTaskDefinitionVolumesDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DockerVolumeConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=DockerVolumeConfiguration" })
   dockerVolumeConfiguration?: AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails;
 
-  @Metadata({ data: "json, name=EfsVolumeConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=EfsVolumeConfiguration" })
   efsVolumeConfiguration?: AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails;
 
-  @Metadata({ data: "json, name=Host" })
+  @SpeakeasyMetadata({ data: "json, name=Host" })
   host?: AwsEcsTaskDefinitionVolumesHostDetails;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 }

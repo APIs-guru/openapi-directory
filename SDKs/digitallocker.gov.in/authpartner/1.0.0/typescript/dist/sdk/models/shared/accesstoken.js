@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var AccessTokenGrantTypeEnum;
 (function (AccessTokenGrantTypeEnum) {
     AccessTokenGrantTypeEnum["AuthorizationCode"] = "authorization_code";
@@ -33,27 +33,27 @@ var AccessToken = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=client_id" }),
+        SpeakeasyMetadata({ data: "json, name=client_id" }),
         __metadata("design:type", String)
     ], AccessToken.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=client_secret" }),
+        SpeakeasyMetadata({ data: "json, name=client_secret" }),
         __metadata("design:type", String)
     ], AccessToken.prototype, "clientSecret", void 0);
     __decorate([
-        Metadata({ data: "json, name=code" }),
+        SpeakeasyMetadata({ data: "json, name=code" }),
         __metadata("design:type", String)
     ], AccessToken.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=code_verifier" }),
+        SpeakeasyMetadata({ data: "json, name=code_verifier" }),
         __metadata("design:type", String)
     ], AccessToken.prototype, "codeVerifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=grant_type" }),
+        SpeakeasyMetadata({ data: "json, name=grant_type" }),
         __metadata("design:type", String)
     ], AccessToken.prototype, "grantType", void 0);
     __decorate([
-        Metadata({ data: "json, name=redirect_uri" }),
+        SpeakeasyMetadata({ data: "json, name=redirect_uri" }),
         __metadata("design:type", String)
     ], AccessToken.prototype, "redirectUri", void 0);
     return AccessToken;

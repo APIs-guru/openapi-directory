@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
+from sdk.models import shared
 
 
 @dataclass
 class PutVideosIDRatePathParams:
-    id: Any = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: Any = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class PutVideosIDRateRequestBodyRatingEnum(str, Enum):
     LIKE = "like"
@@ -15,23 +18,23 @@ class PutVideosIDRateRequestBodyRatingEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PutVideosIDRateRequestBody:
-    rating: PutVideosIDRateRequestBodyRatingEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rating' }})
+    rating: PutVideosIDRateRequestBodyRatingEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('rating') }})
     
 
 @dataclass
 class PutVideosIDRateSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PutVideosIDRateRequest:
-    path_params: PutVideosIDRatePathParams = field(default=None)
+    path_params: PutVideosIDRatePathParams = field()
+    security: PutVideosIDRateSecurity = field()
     request: Optional[PutVideosIDRateRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PutVideosIDRateSecurity = field(default=None)
     
 
 @dataclass
 class PutVideosIDRateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

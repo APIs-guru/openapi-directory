@@ -40,7 +40,7 @@ type DatastoreProjectsIndexesCreateSecurity struct {
 type DatastoreProjectsIndexesCreateRequest struct {
 	PathParams  DatastoreProjectsIndexesCreatePathParams
 	QueryParams DatastoreProjectsIndexesCreateQueryParams
-	Request     *shared.GoogleDatastoreAdminV1Index `request:"mediaType=application/json"`
+	Request     *shared.GoogleDatastoreAdminV1IndexInput `request:"mediaType=application/json"`
 	Security    DatastoreProjectsIndexesCreateSecurity
 }
 

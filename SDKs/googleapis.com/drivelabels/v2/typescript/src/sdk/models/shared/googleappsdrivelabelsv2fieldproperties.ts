@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAppsDriveLabelsV2FieldProperties
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The basic properties of the field.
 **/
 export class GoogleAppsDriveLabelsV2FieldProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=insertBeforeField" })
+  @SpeakeasyMetadata({ data: "json, name=insertBeforeField" })
   insertBeforeField?: string;
 
-  @Metadata({ data: "json, name=required" })
+  @SpeakeasyMetadata({ data: "json, name=required" })
   required?: boolean;
 }

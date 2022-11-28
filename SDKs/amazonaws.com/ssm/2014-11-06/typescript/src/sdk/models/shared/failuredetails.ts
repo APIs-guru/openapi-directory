@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FailureDetails
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about an Automation failure.
 **/
 export class FailureDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Details" })
+  @SpeakeasyMetadata({ data: "json, name=Details" })
   details?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=FailureStage" })
+  @SpeakeasyMetadata({ data: "json, name=FailureStage" })
   failureStage?: string;
 
-  @Metadata({ data: "json, name=FailureType" })
+  @SpeakeasyMetadata({ data: "json, name=FailureType" })
   failureType?: string;
 }

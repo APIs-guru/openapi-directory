@@ -7,6 +7,8 @@ const (
 	SiteContactContactTypeEnumTrafficker  SiteContactContactTypeEnum = "TRAFFICKER"
 )
 
+// SiteContact
+// Site Contact
 type SiteContact struct {
 	Address     *string                     `json:"address,omitempty"`
 	ContactType *SiteContactContactTypeEnum `json:"contactType,omitempty"`

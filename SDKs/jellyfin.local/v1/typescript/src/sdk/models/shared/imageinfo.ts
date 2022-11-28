@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageTypeEnum } from "./imagetypeenum";
+
 
 
 // ImageInfo
@@ -7,27 +8,27 @@ import { ImageTypeEnum } from "./imagetypeenum";
  * Class ImageInfo.
 **/
 export class ImageInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BlurHash" })
+  @SpeakeasyMetadata({ data: "json, name=BlurHash" })
   blurHash?: string;
 
-  @Metadata({ data: "json, name=Height" })
+  @SpeakeasyMetadata({ data: "json, name=Height" })
   height?: number;
 
-  @Metadata({ data: "json, name=ImageIndex" })
+  @SpeakeasyMetadata({ data: "json, name=ImageIndex" })
   imageIndex?: number;
 
-  @Metadata({ data: "json, name=ImageTag" })
+  @SpeakeasyMetadata({ data: "json, name=ImageTag" })
   imageTag?: string;
 
-  @Metadata({ data: "json, name=ImageType" })
+  @SpeakeasyMetadata({ data: "json, name=ImageType" })
   imageType?: ImageTypeEnum;
 
-  @Metadata({ data: "json, name=Path" })
+  @SpeakeasyMetadata({ data: "json, name=Path" })
   path?: string;
 
-  @Metadata({ data: "json, name=Size" })
+  @SpeakeasyMetadata({ data: "json, name=Size" })
   size?: number;
 
-  @Metadata({ data: "json, name=Width" })
+  @SpeakeasyMetadata({ data: "json, name=Width" })
   width?: number;
 }

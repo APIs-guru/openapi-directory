@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LinkType } from "./linktype";
 import { SubscriptionsAppPkgSubscription } from "./subscriptionsapppkgsubscription";
+
 
 
 // AppPkgSubscriptionLinkListLinks
@@ -9,9 +9,9 @@ import { SubscriptionsAppPkgSubscription } from "./subscriptionsapppkgsubscripti
  * Links to resources related to this resource.
 **/
 export class AppPkgSubscriptionLinkListLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self: LinkType;
 
-  @Metadata({ data: "json, name=subscriptions", elemType: shared.SubscriptionsAppPkgSubscription })
+  @SpeakeasyMetadata({ data: "json, name=subscriptions", elemType: SubscriptionsAppPkgSubscription })
   subscriptions?: SubscriptionsAppPkgSubscription[];
 }

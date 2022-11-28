@@ -1,89 +1,90 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CircuitsCircuitsListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cid" })
   cid?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=commit_rate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=commit_rate" })
   commitRate?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id__in" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id__in" })
   idIn?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=install_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=install_date" })
   installDate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=provider" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=provider" })
   provider?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=provider_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=provider_id" })
   providerId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" })
   q?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=site" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=site" })
   site?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=site_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=site_id" })
   siteId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
   status?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tag" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tag" })
   tag?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tenant" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tenant" })
   tenant?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tenant_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tenant_id" })
   tenantId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type_id" })
   typeId?: string;
 }
 
 
-export class CircuitsCircuitsListRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: CircuitsCircuitsListQueryParams;
-}
-
-
 export class CircuitsCircuitsList200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count: number;
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata({ data: "json, name=previous" })
   previous?: string;
 
-  @Metadata({ data: "json, name=results", elemType: shared.Circuit })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: shared.Circuit })
   results: shared.Circuit[];
 }
 
 
+export class CircuitsCircuitsListRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: CircuitsCircuitsListQueryParams;
+}
+
+
 export class CircuitsCircuitsListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   circuitsCircuitsList200ApplicationJsonObject?: CircuitsCircuitsList200ApplicationJson;
 }

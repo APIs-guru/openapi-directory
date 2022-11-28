@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import cancellationreason
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CancellationReasonsResponse:
-    reasons: Optional[List[cancellationreason.CancellationReason]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reasons' }})
+    reasons: Optional[List[CancellationReason]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reasons') }})
     

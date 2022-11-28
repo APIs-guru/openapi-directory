@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class BatchCreateDelegationByAssessmentPathParams:
-    assessment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'assessmentId', 'style': 'simple', 'explode': False }})
+    assessment_id: str = field(metadata={'path_param': { 'field_name': 'assessmentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,23 +27,23 @@ class BatchCreateDelegationByAssessmentHeaders:
 @dataclass_json
 @dataclass
 class BatchCreateDelegationByAssessmentRequestBody:
-    create_delegation_requests: List[shared.CreateDelegationRequest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createDelegationRequests' }})
+    create_delegation_requests: List[shared.CreateDelegationRequest] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('createDelegationRequests') }})
     
 
 @dataclass
 class BatchCreateDelegationByAssessmentRequest:
-    path_params: BatchCreateDelegationByAssessmentPathParams = field(default=None)
-    headers: BatchCreateDelegationByAssessmentHeaders = field(default=None)
-    request: BatchCreateDelegationByAssessmentRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: BatchCreateDelegationByAssessmentHeaders = field()
+    path_params: BatchCreateDelegationByAssessmentPathParams = field()
+    request: BatchCreateDelegationByAssessmentRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BatchCreateDelegationByAssessmentResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     batch_create_delegation_by_assessment_response: Optional[shared.BatchCreateDelegationByAssessmentResponse] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

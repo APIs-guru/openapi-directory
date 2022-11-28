@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudassetv1bigquerydestination
-from . import googlecloudassetv1gcsdestination
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class IamPolicyAnalysisOutputConfig:
-    bigquery_destination: Optional[googlecloudassetv1bigquerydestination.GoogleCloudAssetV1BigQueryDestination] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bigqueryDestination' }})
-    gcs_destination: Optional[googlecloudassetv1gcsdestination.GoogleCloudAssetV1GcsDestination] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gcsDestination' }})
+    r"""IamPolicyAnalysisOutputConfig
+    Output configuration for export IAM policy analysis destination.
+    """
+    
+    bigquery_destination: Optional[GoogleCloudAssetV1BigQueryDestination] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bigqueryDestination') }})
+    gcs_destination: Optional[GoogleCloudAssetV1GcsDestination] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gcsDestination') }})
     

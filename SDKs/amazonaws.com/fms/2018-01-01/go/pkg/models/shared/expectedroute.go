@@ -1,5 +1,7 @@
 package shared
 
+// ExpectedRoute
+// Information about the expected route in the route table.
 type ExpectedRoute struct {
 	AllowedTargets      []string `json:"AllowedTargets,omitempty"`
 	ContributingSubnets []string `json:"ContributingSubnets,omitempty"`

@@ -1,20 +1,15 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import {GetHeadersFromRequest} from "../internal/utils/headers";
-import {GetHeadersFromResponse} from "../internal/utils/headers";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://openbanking.org.uk",
-  "https://openbanking.org.uk/open-banking/v3.1/aisp",
+export const ServerList = [
+	"https://openbanking.org.uk",
+	"https://openbanking.org.uk/open-banking/v3.1/aisp",
 ] as const;
 
 export function WithServerURL(
@@ -25,47 +20,47 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // CreateAccountAccessConsents - Create Account Access Consents
-  CreateAccountAccessConsents(
+  /**
+   * createAccountAccessConsents - Create Account Access Consents
+  **/
+  createAccountAccessConsents(
     req: operations.CreateAccountAccessConsentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateAccountAccessConsentsResponse> {
@@ -73,101 +68,101 @@ export class SDK {
       req = new operations.CreateAccountAccessConsentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/account-access-consents";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateAccountAccessConsentsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.CreateAccountAccessConsentsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadConsentResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadConsentResponse1 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 415:
+          case httpRes?.status == 415:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -179,8 +174,10 @@ export class SDK {
   }
 
   
-  // DeleteAccountAccessConsentsConsentId - Delete Account Access Consents
-  DeleteAccountAccessConsentsConsentId(
+  /**
+   * deleteAccountAccessConsentsConsentId - Delete Account Access Consents
+  **/
+  deleteAccountAccessConsentsConsentId(
     req: operations.DeleteAccountAccessConsentsConsentIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteAccountAccessConsentsConsentIdResponse> {
@@ -188,70 +185,72 @@ export class SDK {
       req = new operations.DeleteAccountAccessConsentsConsentIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account-access-consents/{ConsentId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteAccountAccessConsentsConsentIdResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeleteAccountAccessConsentsConsentIdResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -263,8 +262,10 @@ export class SDK {
   }
 
   
-  // GetAccountAccessConsentsConsentId - Get Account Access Consents
-  GetAccountAccessConsentsConsentId(
+  /**
+   * getAccountAccessConsentsConsentId - Get Account Access Consents
+  **/
+  getAccountAccessConsentsConsentId(
     req: operations.GetAccountAccessConsentsConsentIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountAccessConsentsConsentIdResponse> {
@@ -272,82 +273,84 @@ export class SDK {
       req = new operations.GetAccountAccessConsentsConsentIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/account-access-consents/{ConsentId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountAccessConsentsConsentIdResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetAccountAccessConsentsConsentIdResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadConsentResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadConsentResponse1 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -359,8 +362,10 @@ export class SDK {
   }
 
   
-  // GetAccounts - Get Accounts
-  GetAccounts(
+  /**
+   * getAccounts - Get Accounts
+  **/
+  getAccounts(
     req: operations.GetAccountsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountsResponse> {
@@ -368,82 +373,84 @@ export class SDK {
       req = new operations.GetAccountsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/accounts";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetAccountsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadAccount6 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadAccount6 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -455,8 +462,10 @@ export class SDK {
   }
 
   
-  // GetAccountsAccountId - Get Accounts
-  GetAccountsAccountId(
+  /**
+   * getAccountsAccountId - Get Accounts
+  **/
+  getAccountsAccountId(
     req: operations.GetAccountsAccountIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountsAccountIdResponse> {
@@ -464,82 +473,84 @@ export class SDK {
       req = new operations.GetAccountsAccountIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/accounts/{AccountId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountsAccountIdResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetAccountsAccountIdResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadAccount6 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadAccount6 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -551,8 +562,10 @@ export class SDK {
   }
 
   
-  // GetAccountsAccountIdBalances - Get Balances
-  GetAccountsAccountIdBalances(
+  /**
+   * getAccountsAccountIdBalances - Get Balances
+  **/
+  getAccountsAccountIdBalances(
     req: operations.GetAccountsAccountIdBalancesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountsAccountIdBalancesResponse> {
@@ -560,82 +573,84 @@ export class SDK {
       req = new operations.GetAccountsAccountIdBalancesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/accounts/{AccountId}/balances", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountsAccountIdBalancesResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetAccountsAccountIdBalancesResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadBalance1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadBalance1 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -647,8 +662,10 @@ export class SDK {
   }
 
   
-  // GetAccountsAccountIdBeneficiaries - Get Beneficiaries
-  GetAccountsAccountIdBeneficiaries(
+  /**
+   * getAccountsAccountIdBeneficiaries - Get Beneficiaries
+  **/
+  getAccountsAccountIdBeneficiaries(
     req: operations.GetAccountsAccountIdBeneficiariesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountsAccountIdBeneficiariesResponse> {
@@ -656,84 +673,86 @@ export class SDK {
       req = new operations.GetAccountsAccountIdBeneficiariesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/accounts/{AccountId}/beneficiaries", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountsAccountIdBeneficiariesResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetAccountsAccountIdBeneficiariesResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadBeneficiary5 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadBeneficiary5 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -745,8 +764,10 @@ export class SDK {
   }
 
   
-  // GetAccountsAccountIdDirectDebits - Get Direct Debits
-  GetAccountsAccountIdDirectDebits(
+  /**
+   * getAccountsAccountIdDirectDebits - Get Direct Debits
+  **/
+  getAccountsAccountIdDirectDebits(
     req: operations.GetAccountsAccountIdDirectDebitsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountsAccountIdDirectDebitsResponse> {
@@ -754,84 +775,86 @@ export class SDK {
       req = new operations.GetAccountsAccountIdDirectDebitsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/accounts/{AccountId}/direct-debits", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountsAccountIdDirectDebitsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetAccountsAccountIdDirectDebitsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadDirectDebit2 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadDirectDebit2 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -843,8 +866,10 @@ export class SDK {
   }
 
   
-  // GetAccountsAccountIdOffers - Get Offers
-  GetAccountsAccountIdOffers(
+  /**
+   * getAccountsAccountIdOffers - Get Offers
+  **/
+  getAccountsAccountIdOffers(
     req: operations.GetAccountsAccountIdOffersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountsAccountIdOffersResponse> {
@@ -852,84 +877,86 @@ export class SDK {
       req = new operations.GetAccountsAccountIdOffersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/accounts/{AccountId}/offers", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountsAccountIdOffersResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetAccountsAccountIdOffersResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadOffer1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadOffer1 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -941,8 +968,10 @@ export class SDK {
   }
 
   
-  // GetAccountsAccountIdParties - Get Parties
-  GetAccountsAccountIdParties(
+  /**
+   * getAccountsAccountIdParties - Get Parties
+  **/
+  getAccountsAccountIdParties(
     req: operations.GetAccountsAccountIdPartiesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountsAccountIdPartiesResponse> {
@@ -950,84 +979,86 @@ export class SDK {
       req = new operations.GetAccountsAccountIdPartiesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/accounts/{AccountId}/parties", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountsAccountIdPartiesResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetAccountsAccountIdPartiesResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadParty3 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadParty3 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -1039,8 +1070,10 @@ export class SDK {
   }
 
   
-  // GetAccountsAccountIdParty - Get Parties
-  GetAccountsAccountIdParty(
+  /**
+   * getAccountsAccountIdParty - Get Parties
+  **/
+  getAccountsAccountIdParty(
     req: operations.GetAccountsAccountIdPartyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountsAccountIdPartyResponse> {
@@ -1048,84 +1081,86 @@ export class SDK {
       req = new operations.GetAccountsAccountIdPartyRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/accounts/{AccountId}/party", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountsAccountIdPartyResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetAccountsAccountIdPartyResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadParty2 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadParty2 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -1137,8 +1172,10 @@ export class SDK {
   }
 
   
-  // GetAccountsAccountIdProduct - Get Products
-  GetAccountsAccountIdProduct(
+  /**
+   * getAccountsAccountIdProduct - Get Products
+  **/
+  getAccountsAccountIdProduct(
     req: operations.GetAccountsAccountIdProductRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountsAccountIdProductResponse> {
@@ -1146,84 +1183,86 @@ export class SDK {
       req = new operations.GetAccountsAccountIdProductRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/accounts/{AccountId}/product", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountsAccountIdProductResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetAccountsAccountIdProductResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadProduct2 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadProduct2 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -1235,8 +1274,10 @@ export class SDK {
   }
 
   
-  // GetAccountsAccountIdScheduledPayments - Get Scheduled Payments
-  GetAccountsAccountIdScheduledPayments(
+  /**
+   * getAccountsAccountIdScheduledPayments - Get Scheduled Payments
+  **/
+  getAccountsAccountIdScheduledPayments(
     req: operations.GetAccountsAccountIdScheduledPaymentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountsAccountIdScheduledPaymentsResponse> {
@@ -1244,84 +1285,86 @@ export class SDK {
       req = new operations.GetAccountsAccountIdScheduledPaymentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/accounts/{AccountId}/scheduled-payments", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountsAccountIdScheduledPaymentsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetAccountsAccountIdScheduledPaymentsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadScheduledPayment3 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadScheduledPayment3 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -1333,8 +1376,10 @@ export class SDK {
   }
 
   
-  // GetAccountsAccountIdStandingOrders - Get Standing Orders
-  GetAccountsAccountIdStandingOrders(
+  /**
+   * getAccountsAccountIdStandingOrders - Get Standing Orders
+  **/
+  getAccountsAccountIdStandingOrders(
     req: operations.GetAccountsAccountIdStandingOrdersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountsAccountIdStandingOrdersResponse> {
@@ -1342,84 +1387,86 @@ export class SDK {
       req = new operations.GetAccountsAccountIdStandingOrdersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/accounts/{AccountId}/standing-orders", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountsAccountIdStandingOrdersResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetAccountsAccountIdStandingOrdersResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadStandingOrder6 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadStandingOrder6 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -1431,8 +1478,10 @@ export class SDK {
   }
 
   
-  // GetAccountsAccountIdStatements - Get Statements
-  GetAccountsAccountIdStatements(
+  /**
+   * getAccountsAccountIdStatements - Get Statements
+  **/
+  getAccountsAccountIdStatements(
     req: operations.GetAccountsAccountIdStatementsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountsAccountIdStatementsResponse> {
@@ -1440,12 +1489,12 @@ export class SDK {
       req = new operations.GetAccountsAccountIdStatementsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/accounts/{AccountId}/statements", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1454,78 +1503,80 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountsAccountIdStatementsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetAccountsAccountIdStatementsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadStatement2 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadStatement2 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -1537,8 +1588,10 @@ export class SDK {
   }
 
   
-  // GetAccountsAccountIdStatementsStatementId - Get Statements
-  GetAccountsAccountIdStatementsStatementId(
+  /**
+   * getAccountsAccountIdStatementsStatementId - Get Statements
+  **/
+  getAccountsAccountIdStatementsStatementId(
     req: operations.GetAccountsAccountIdStatementsStatementIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountsAccountIdStatementsStatementIdResponse> {
@@ -1546,84 +1599,86 @@ export class SDK {
       req = new operations.GetAccountsAccountIdStatementsStatementIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/accounts/{AccountId}/statements/{StatementId}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountsAccountIdStatementsStatementIdResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetAccountsAccountIdStatementsStatementIdResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadStatement2 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadStatement2 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -1635,8 +1690,10 @@ export class SDK {
   }
 
   
-  // GetAccountsAccountIdStatementsStatementIdFile - Get Statements
-  GetAccountsAccountIdStatementsStatementIdFile(
+  /**
+   * getAccountsAccountIdStatementsStatementIdFile - Get Statements
+  **/
+  getAccountsAccountIdStatementsStatementIdFile(
     req: operations.GetAccountsAccountIdStatementsStatementIdFileRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountsAccountIdStatementsStatementIdFileResponse> {
@@ -1644,84 +1701,86 @@ export class SDK {
       req = new operations.GetAccountsAccountIdStatementsStatementIdFileRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/accounts/{AccountId}/statements/{StatementId}/file", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountsAccountIdStatementsStatementIdFileResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetAccountsAccountIdStatementsStatementIdFileResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.file = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.file = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -1733,8 +1792,10 @@ export class SDK {
   }
 
   
-  // GetAccountsAccountIdStatementsStatementIdTransactions - Get Transactions
-  GetAccountsAccountIdStatementsStatementIdTransactions(
+  /**
+   * getAccountsAccountIdStatementsStatementIdTransactions - Get Transactions
+  **/
+  getAccountsAccountIdStatementsStatementIdTransactions(
     req: operations.GetAccountsAccountIdStatementsStatementIdTransactionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountsAccountIdStatementsStatementIdTransactionsResponse> {
@@ -1742,84 +1803,86 @@ export class SDK {
       req = new operations.GetAccountsAccountIdStatementsStatementIdTransactionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/accounts/{AccountId}/statements/{StatementId}/transactions", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountsAccountIdStatementsStatementIdTransactionsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetAccountsAccountIdStatementsStatementIdTransactionsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadTransaction6 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadTransaction6 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -1831,8 +1894,10 @@ export class SDK {
   }
 
   
-  // GetAccountsAccountIdTransactions - Get Transactions
-  GetAccountsAccountIdTransactions(
+  /**
+   * getAccountsAccountIdTransactions - Get Transactions
+  **/
+  getAccountsAccountIdTransactions(
     req: operations.GetAccountsAccountIdTransactionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountsAccountIdTransactionsResponse> {
@@ -1840,12 +1905,12 @@ export class SDK {
       req = new operations.GetAccountsAccountIdTransactionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/accounts/{AccountId}/transactions", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1854,76 +1919,78 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountsAccountIdTransactionsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetAccountsAccountIdTransactionsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadTransaction6 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadTransaction6 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -1935,8 +2002,10 @@ export class SDK {
   }
 
   
-  // GetBalances - Get Balances
-  GetBalances(
+  /**
+   * getBalances - Get Balances
+  **/
+  getBalances(
     req: operations.GetBalancesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBalancesResponse> {
@@ -1944,84 +2013,86 @@ export class SDK {
       req = new operations.GetBalancesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/balances";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBalancesResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetBalancesResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadBalance1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadBalance1 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -2033,8 +2104,10 @@ export class SDK {
   }
 
   
-  // GetBeneficiaries - Get Beneficiaries
-  GetBeneficiaries(
+  /**
+   * getBeneficiaries - Get Beneficiaries
+  **/
+  getBeneficiaries(
     req: operations.GetBeneficiariesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetBeneficiariesResponse> {
@@ -2042,84 +2115,86 @@ export class SDK {
       req = new operations.GetBeneficiariesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/beneficiaries";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetBeneficiariesResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetBeneficiariesResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadBeneficiary5 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadBeneficiary5 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -2131,8 +2206,10 @@ export class SDK {
   }
 
   
-  // GetDirectDebits - Get Direct Debits
-  GetDirectDebits(
+  /**
+   * getDirectDebits - Get Direct Debits
+  **/
+  getDirectDebits(
     req: operations.GetDirectDebitsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetDirectDebitsResponse> {
@@ -2140,84 +2217,86 @@ export class SDK {
       req = new operations.GetDirectDebitsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/direct-debits";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetDirectDebitsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetDirectDebitsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadDirectDebit2 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadDirectDebit2 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -2229,8 +2308,10 @@ export class SDK {
   }
 
   
-  // GetOffers - Get Offers
-  GetOffers(
+  /**
+   * getOffers - Get Offers
+  **/
+  getOffers(
     req: operations.GetOffersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetOffersResponse> {
@@ -2238,84 +2319,86 @@ export class SDK {
       req = new operations.GetOffersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/offers";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetOffersResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetOffersResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadOffer1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadOffer1 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -2327,8 +2410,10 @@ export class SDK {
   }
 
   
-  // GetParty - Get Parties
-  GetParty(
+  /**
+   * getParty - Get Parties
+  **/
+  getParty(
     req: operations.GetPartyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPartyResponse> {
@@ -2336,84 +2421,86 @@ export class SDK {
       req = new operations.GetPartyRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/party";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPartyResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetPartyResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadParty2 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadParty2 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -2425,8 +2512,10 @@ export class SDK {
   }
 
   
-  // GetProducts - Get Products
-  GetProducts(
+  /**
+   * getProducts - Get Products
+  **/
+  getProducts(
     req: operations.GetProductsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetProductsResponse> {
@@ -2434,84 +2523,86 @@ export class SDK {
       req = new operations.GetProductsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/products";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetProductsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetProductsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadProduct2 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadProduct2 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -2523,8 +2614,10 @@ export class SDK {
   }
 
   
-  // GetScheduledPayments - Get Scheduled Payments
-  GetScheduledPayments(
+  /**
+   * getScheduledPayments - Get Scheduled Payments
+  **/
+  getScheduledPayments(
     req: operations.GetScheduledPaymentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetScheduledPaymentsResponse> {
@@ -2532,84 +2625,86 @@ export class SDK {
       req = new operations.GetScheduledPaymentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/scheduled-payments";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetScheduledPaymentsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetScheduledPaymentsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadScheduledPayment3 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadScheduledPayment3 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -2621,8 +2716,10 @@ export class SDK {
   }
 
   
-  // GetStandingOrders - Get Standing Orders
-  GetStandingOrders(
+  /**
+   * getStandingOrders - Get Standing Orders
+  **/
+  getStandingOrders(
     req: operations.GetStandingOrdersRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetStandingOrdersResponse> {
@@ -2630,84 +2727,86 @@ export class SDK {
       req = new operations.GetStandingOrdersRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/standing-orders";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetStandingOrdersResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetStandingOrdersResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadStandingOrder6 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadStandingOrder6 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -2719,8 +2818,10 @@ export class SDK {
   }
 
   
-  // GetStatements - Get Statements
-  GetStatements(
+  /**
+   * getStatements - Get Statements
+  **/
+  getStatements(
     req: operations.GetStatementsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetStatementsResponse> {
@@ -2728,12 +2829,12 @@ export class SDK {
       req = new operations.GetStatementsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/statements";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2742,78 +2843,80 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetStatementsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetStatementsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadStatement2 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadStatement2 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
@@ -2825,8 +2928,10 @@ export class SDK {
   }
 
   
-  // GetTransactions - Get Transactions
-  GetTransactions(
+  /**
+   * getTransactions - Get Transactions
+  **/
+  getTransactions(
     req: operations.GetTransactionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTransactionsResponse> {
@@ -2834,12 +2939,12 @@ export class SDK {
       req = new operations.GetTransactionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/transactions";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2848,78 +2953,80 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTransactionsResponse = {statusCode: httpRes.status, contentType: contentType, headers: GetHeadersFromResponse(httpRes.headers)};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+        const res: operations.GetTransactionsResponse = {statusCode: httpRes.status, contentType: contentType, headers: utils.GetHeadersFromResponse(httpRes.headers)};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obReadTransaction6 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obReadTransaction6 = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 401:
+          case httpRes?.status == 401:
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 406:
+          case httpRes?.status == 406:
             break;
-          case 429:
+          case httpRes?.status == 429:
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/jose+jwe`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/jose+jwe`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/json; charset=utf-8`)) {
+            if (utils.MatchContentType(contentType, `application/json; charset=utf-8`)) {
                 res.obErrorResponse1 = httpRes?.data;
             }
             break;

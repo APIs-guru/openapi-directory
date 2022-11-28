@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetCalendarStateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AtTime" })
+  @SpeakeasyMetadata({ data: "json, name=AtTime" })
   atTime?: string;
 
-  @Metadata({ data: "json, name=CalendarNames" })
+  @SpeakeasyMetadata({ data: "json, name=CalendarNames" })
   calendarNames: string[];
 }

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContentBuyongoogleprogramsPausePathParams:
-    merchant_id: str = field(default=None, metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
-    region_code: str = field(default=None, metadata={'path_param': { 'field_name': 'regionCode', 'style': 'simple', 'explode': False }})
+    merchant_id: str = field(metadata={'path_param': { 'field_name': 'merchantId', 'style': 'simple', 'explode': False }})
+    region_code: str = field(metadata={'path_param': { 'field_name': 'regionCode', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class ContentBuyongoogleprogramsPauseQueryParams:
 
 @dataclass
 class ContentBuyongoogleprogramsPauseSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContentBuyongoogleprogramsPauseRequest:
-    path_params: ContentBuyongoogleprogramsPausePathParams = field(default=None)
-    query_params: ContentBuyongoogleprogramsPauseQueryParams = field(default=None)
+    path_params: ContentBuyongoogleprogramsPausePathParams = field()
+    query_params: ContentBuyongoogleprogramsPauseQueryParams = field()
+    security: ContentBuyongoogleprogramsPauseSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ContentBuyongoogleprogramsPauseSecurity = field(default=None)
     
 
 @dataclass
 class ContentBuyongoogleprogramsPauseResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

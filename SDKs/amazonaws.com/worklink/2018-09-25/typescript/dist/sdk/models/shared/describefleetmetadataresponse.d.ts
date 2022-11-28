@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FleetStatusEnum } from "./fleetstatusenum";
 export declare class DescribeFleetMetadataResponse extends SpeakeasyBase {
     companyCode?: string;

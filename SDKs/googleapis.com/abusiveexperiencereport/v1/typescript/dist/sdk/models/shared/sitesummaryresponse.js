@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var SiteSummaryResponseAbusiveStatusEnum;
 (function (SiteSummaryResponseAbusiveStatusEnum) {
     SiteSummaryResponseAbusiveStatusEnum["Unknown"] = "UNKNOWN";
@@ -47,31 +47,31 @@ var SiteSummaryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=abusiveStatus" }),
+        SpeakeasyMetadata({ data: "json, name=abusiveStatus" }),
         __metadata("design:type", String)
     ], SiteSummaryResponse.prototype, "abusiveStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=enforcementTime" }),
+        SpeakeasyMetadata({ data: "json, name=enforcementTime" }),
         __metadata("design:type", String)
     ], SiteSummaryResponse.prototype, "enforcementTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=filterStatus" }),
+        SpeakeasyMetadata({ data: "json, name=filterStatus" }),
         __metadata("design:type", String)
     ], SiteSummaryResponse.prototype, "filterStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastChangeTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastChangeTime" }),
         __metadata("design:type", String)
     ], SiteSummaryResponse.prototype, "lastChangeTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=reportUrl" }),
+        SpeakeasyMetadata({ data: "json, name=reportUrl" }),
         __metadata("design:type", String)
     ], SiteSummaryResponse.prototype, "reportUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=reviewedSite" }),
+        SpeakeasyMetadata({ data: "json, name=reviewedSite" }),
         __metadata("design:type", String)
     ], SiteSummaryResponse.prototype, "reviewedSite", void 0);
     __decorate([
-        Metadata({ data: "json, name=underReview" }),
+        SpeakeasyMetadata({ data: "json, name=underReview" }),
         __metadata("design:type", Boolean)
     ], SiteSummaryResponse.prototype, "underReview", void 0);
     return SiteSummaryResponse;

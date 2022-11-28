@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetProtocolsListRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DefaultList" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultList" })
   defaultList?: boolean;
 
-  @Metadata({ data: "json, name=ListId" })
+  @SpeakeasyMetadata({ data: "json, name=ListId" })
   listId: string;
 }

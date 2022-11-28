@@ -12,6 +12,8 @@ const (
 	GoogleCloudDocumentaiV1beta3DocumentProvenanceTypeEnumEvalSkipped              GoogleCloudDocumentaiV1beta3DocumentProvenanceTypeEnum = "EVAL_SKIPPED"
 )
 
+// GoogleCloudDocumentaiV1beta3DocumentProvenance
+// Structure to identify provenance relationships between annotations in different revisions.
 type GoogleCloudDocumentaiV1beta3DocumentProvenance struct {
 	ID       *int32                                                  `json:"id,omitempty"`
 	Parents  []GoogleCloudDocumentaiV1beta3DocumentProvenanceParent  `json:"parents,omitempty"`

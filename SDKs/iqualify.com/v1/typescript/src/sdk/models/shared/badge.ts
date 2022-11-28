@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BadgeExpiry } from "./badgeexpiry";
 import { Criteria } from "./criteria";
 import { OpenBadgeClass } from "./openbadgeclass";
 
 
+
 export class Badge extends SpeakeasyBase {
-  @Metadata({ data: "json, name=badgeExpiry" })
+  @SpeakeasyMetadata({ data: "json, name=badgeExpiry" })
   badgeExpiry?: BadgeExpiry;
 
-  @Metadata({ data: "json, name=badgeUrl" })
+  @SpeakeasyMetadata({ data: "json, name=badgeUrl" })
   badgeUrl?: string;
 
-  @Metadata({ data: "json, name=criterias" })
+  @SpeakeasyMetadata({ data: "json, name=criterias" })
   criterias?: Criteria;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=openBadge" })
+  @SpeakeasyMetadata({ data: "json, name=openBadge" })
   openBadge?: OpenBadgeClass;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

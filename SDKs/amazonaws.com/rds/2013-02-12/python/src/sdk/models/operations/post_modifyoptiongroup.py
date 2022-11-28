@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyOptionGroupActionEnum(str, Enum):
     MODIFY_OPTION_GROUP = "ModifyOptionGroup"
@@ -10,8 +14,8 @@ class PostModifyOptionGroupVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyOptionGroupQueryParams:
-    action: PostModifyOptionGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyOptionGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyOptionGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyOptionGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyOptionGroupHeaders:
 
 @dataclass
 class PostModifyOptionGroupRequest:
-    query_params: PostModifyOptionGroupQueryParams = field(default=None)
-    headers: PostModifyOptionGroupHeaders = field(default=None)
+    headers: PostModifyOptionGroupHeaders = field()
+    query_params: PostModifyOptionGroupQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyOptionGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -8,11 +8,6 @@ type GetDomainQueryParams struct {
 	TeamID *string `queryParam:"style=form,explode=true,name=teamId"`
 }
 
-type GetDomainRequest struct {
-	PathParams  GetDomainPathParams
-	QueryParams GetDomainQueryParams
-}
-
 type GetDomain200ApplicationJSONDomainAliases struct {
 	Alias   string `json:"alias"`
 	Created int64  `json:"created"`
@@ -25,6 +20,8 @@ type GetDomain200ApplicationJSONDomainCerts struct {
 	ID      string   `json:"id"`
 }
 
+// GetDomain200ApplicationJSONDomainCreator
+// Information about who added the domain
 type GetDomain200ApplicationJSONDomainCreator struct {
 	CustomerID       *string `json:"customerId,omitempty"`
 	Email            string  `json:"email"`
@@ -41,6 +38,8 @@ const (
 	GetDomain200ApplicationJSONDomainServiceTypeEnumNa        GetDomain200ApplicationJSONDomainServiceTypeEnum = "na"
 )
 
+// GetDomain200ApplicationJSONDomain
+// The domain information
 type GetDomain200ApplicationJSONDomain struct {
 	Aliases             []GetDomain200ApplicationJSONDomainAliases       `json:"aliases"`
 	BoughtAt            int64                                            `json:"boughtAt"`
@@ -81,6 +80,11 @@ type GetDomain404ApplicationJSONError struct {
 
 type GetDomain404ApplicationJSON struct {
 	Error GetDomain404ApplicationJSONError `json:"error"`
+}
+
+type GetDomainRequest struct {
+	PathParams  GetDomainPathParams
+	QueryParams GetDomainQueryParams
 }
 
 type GetDomainResponse struct {

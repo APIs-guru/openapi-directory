@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ResolutionStrategyEnum(str, Enum):
     OPTIMISTIC_CONCURRENCY = "OPTIMISTIC_CONCURRENCY"

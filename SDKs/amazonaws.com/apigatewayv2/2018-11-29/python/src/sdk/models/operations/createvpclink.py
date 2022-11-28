@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,23 +22,23 @@ class CreateVpcLinkHeaders:
 @dataclass_json
 @dataclass
 class CreateVpcLinkRequestBody:
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    security_group_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'securityGroupIds' }})
-    subnet_ids: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subnetIds' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    subnet_ids: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('subnetIds') }})
+    security_group_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('securityGroupIds') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateVpcLinkRequest:
-    headers: CreateVpcLinkHeaders = field(default=None)
-    request: CreateVpcLinkRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateVpcLinkHeaders = field()
+    request: CreateVpcLinkRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateVpcLinkResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_vpc_link_response: Optional[shared.CreateVpcLinkResponse] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

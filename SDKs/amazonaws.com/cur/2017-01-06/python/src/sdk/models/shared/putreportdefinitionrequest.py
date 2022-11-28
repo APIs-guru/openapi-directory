@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import reportdefinition
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PutReportDefinitionRequest:
-    report_definition: reportdefinition.ReportDefinition = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReportDefinition' }})
+    r"""PutReportDefinitionRequest
+    Creates a Cost and Usage Report.
+    """
+    
+    report_definition: ReportDefinition = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReportDefinition') }})
     

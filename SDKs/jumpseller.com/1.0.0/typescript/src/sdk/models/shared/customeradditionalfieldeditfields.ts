@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CustomerAdditionalFieldEditFields extends SpeakeasyBase {
-  @Metadata({ data: "json, name=checkout_custom_field_id" })
+  @SpeakeasyMetadata({ data: "json, name=checkout_custom_field_id" })
   checkoutCustomFieldId?: number;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

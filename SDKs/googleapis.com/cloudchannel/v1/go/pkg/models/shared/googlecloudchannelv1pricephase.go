@@ -9,6 +9,8 @@ const (
 	GoogleCloudChannelV1PricePhasePeriodTypeEnumYear                  GoogleCloudChannelV1PricePhasePeriodTypeEnum = "YEAR"
 )
 
+// GoogleCloudChannelV1PricePhase
+// Specifies the price by the duration of months. For example, a 20% discount for the first six months, then a 10% discount starting on the seventh month.
 type GoogleCloudChannelV1PricePhase struct {
 	FirstPeriod *int32                                        `json:"firstPeriod,omitempty"`
 	LastPeriod  *int32                                        `json:"lastPeriod,omitempty"`

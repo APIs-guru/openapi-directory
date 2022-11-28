@@ -1,6 +1,7 @@
 
 
+
 export enum TranscodeSeekInfoEnum {
-    Auto = "Auto"
-,    Bytes = "Bytes"
+    Auto = "Auto",
+    Bytes = "Bytes"
 }

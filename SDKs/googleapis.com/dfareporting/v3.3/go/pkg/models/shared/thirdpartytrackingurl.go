@@ -24,6 +24,8 @@ const (
 	ThirdPartyTrackingURLThirdPartyURLTypeEnumVideoProgress             ThirdPartyTrackingURLThirdPartyURLTypeEnum = "VIDEO_PROGRESS"
 )
 
+// ThirdPartyTrackingURL
+// Third-party Tracking URL.
 type ThirdPartyTrackingURL struct {
 	ThirdPartyURLType *ThirdPartyTrackingURLThirdPartyURLTypeEnum `json:"thirdPartyUrlType,omitempty"`
 	URL               *string                                     `json:"url,omitempty"`

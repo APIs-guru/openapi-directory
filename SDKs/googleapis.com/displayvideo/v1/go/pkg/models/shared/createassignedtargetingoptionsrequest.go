@@ -51,7 +51,9 @@ const (
 	CreateAssignedTargetingOptionsRequestTargetingTypeEnumTargetingTypeContentGenre                 CreateAssignedTargetingOptionsRequestTargetingTypeEnum = "TARGETING_TYPE_CONTENT_GENRE"
 )
 
-type CreateAssignedTargetingOptionsRequest struct {
-	AssignedTargetingOptions []AssignedTargetingOption                               `json:"assignedTargetingOptions,omitempty"`
+// CreateAssignedTargetingOptionsRequestInput
+// A request listing which assigned targeting options of a given targeting type should be created and added.
+type CreateAssignedTargetingOptionsRequestInput struct {
+	AssignedTargetingOptions []AssignedTargetingOptionInput                          `json:"assignedTargetingOptions,omitempty"`
 	TargetingType            *CreateAssignedTargetingOptionsRequestTargetingTypeEnum `json:"targetingType,omitempty"`
 }

@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// Hit
+//
+//	The HIT data structure represents a single HIT, including all the information necessary for a Worker to accept and complete the HIT.
 type Hit struct {
 	AssignmentDurationInSeconds  *int64                     `json:"AssignmentDurationInSeconds,omitempty"`
 	AutoApprovalDelayInSeconds   *int64                     `json:"AutoApprovalDelayInSeconds,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthenticationMode } from "./authenticationmode";
 var UpdateUserRequest = /** @class */ (function (_super) {
     __extends(UpdateUserRequest, _super);
@@ -30,15 +30,15 @@ var UpdateUserRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AccessString" }),
+        SpeakeasyMetadata({ data: "json, name=AccessString" }),
         __metadata("design:type", String)
     ], UpdateUserRequest.prototype, "accessString", void 0);
     __decorate([
-        Metadata({ data: "json, name=AuthenticationMode" }),
+        SpeakeasyMetadata({ data: "json, name=AuthenticationMode" }),
         __metadata("design:type", AuthenticationMode)
     ], UpdateUserRequest.prototype, "authenticationMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=UserName" }),
+        SpeakeasyMetadata({ data: "json, name=UserName" }),
         __metadata("design:type", String)
     ], UpdateUserRequest.prototype, "userName", void 0);
     return UpdateUserRequest;

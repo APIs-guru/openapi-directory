@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSourceAccountsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=payorId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=payorId" })
   payorId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=physicalAccountName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=physicalAccountName" })
   physicalAccountName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 }
 
 
 export class GetSourceAccountsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSourceAccountsQueryParams;
 }
 
 
 export class GetSourceAccountsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listSourceAccountResponse?: shared.ListSourceAccountResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse401?: any;
 }

@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParameterObject } from "./parameterobject";
 import { ParameterValue } from "./parametervalue";
 import { PipelineObject } from "./pipelineobject";
+
 
 
 // PutPipelineDefinitionInput
@@ -10,15 +10,15 @@ import { PipelineObject } from "./pipelineobject";
  * Contains the parameters for PutPipelineDefinition.
 **/
 export class PutPipelineDefinitionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parameterObjects", elemType: shared.ParameterObject })
+  @SpeakeasyMetadata({ data: "json, name=parameterObjects", elemType: ParameterObject })
   parameterObjects?: ParameterObject[];
 
-  @Metadata({ data: "json, name=parameterValues", elemType: shared.ParameterValue })
+  @SpeakeasyMetadata({ data: "json, name=parameterValues", elemType: ParameterValue })
   parameterValues?: ParameterValue[];
 
-  @Metadata({ data: "json, name=pipelineId" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineId" })
   pipelineId: string;
 
-  @Metadata({ data: "json, name=pipelineObjects", elemType: shared.PipelineObject })
+  @SpeakeasyMetadata({ data: "json, name=pipelineObjects", elemType: PipelineObject })
   pipelineObjects: PipelineObject[];
 }

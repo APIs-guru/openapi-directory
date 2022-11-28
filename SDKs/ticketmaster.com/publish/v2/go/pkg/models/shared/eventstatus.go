@@ -10,6 +10,8 @@ const (
 	EventStatusCodeEnumRescheduled EventStatusCodeEnum = "rescheduled"
 )
 
+// EventStatus
+// Event's Status
 type EventStatus struct {
 	Code *EventStatusCodeEnum `json:"code,omitempty"`
 }

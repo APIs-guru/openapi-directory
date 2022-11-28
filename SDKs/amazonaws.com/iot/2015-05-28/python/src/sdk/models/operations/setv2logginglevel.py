@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -25,30 +30,34 @@ class SetV2LoggingLevelRequestBodyLogLevelEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SetV2LoggingLevelRequestBodyLogTarget:
-    target_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetName' }})
-    target_type: Optional[shared.LogTargetTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetType' }})
+    r"""SetV2LoggingLevelRequestBodyLogTarget
+    A log target.
+    """
+    
+    target_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetName') }})
+    target_type: Optional[shared.LogTargetTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetType') }})
     
 
 @dataclass_json
 @dataclass
 class SetV2LoggingLevelRequestBody:
-    log_level: SetV2LoggingLevelRequestBodyLogLevelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logLevel' }})
-    log_target: SetV2LoggingLevelRequestBodyLogTarget = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logTarget' }})
+    log_level: SetV2LoggingLevelRequestBodyLogLevelEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('logLevel') }})
+    log_target: SetV2LoggingLevelRequestBodyLogTarget = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('logTarget') }})
     
 
 @dataclass
 class SetV2LoggingLevelRequest:
-    headers: SetV2LoggingLevelHeaders = field(default=None)
-    request: SetV2LoggingLevelRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SetV2LoggingLevelHeaders = field()
+    request: SetV2LoggingLevelRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SetV2LoggingLevelResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_configured_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

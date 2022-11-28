@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class PutSetupV1CompaniesRegionsIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +21,13 @@ class PutSetupV1CompaniesRegionsIDRequests:
 
 @dataclass
 class PutSetupV1CompaniesRegionsIDRequest:
-    path_params: PutSetupV1CompaniesRegionsIDPathParams = field(default=None)
+    path_params: PutSetupV1CompaniesRegionsIDPathParams = field()
     request: Optional[PutSetupV1CompaniesRegionsIDRequests] = field(default=None)
     
 
 @dataclass
 class PutSetupV1CompaniesRegionsIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     region_view_model: Optional[shared.RegionViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

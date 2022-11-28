@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateParticipantConnectionHeaders:
+    x_amz_bearer: str = field(metadata={'header': { 'field_name': 'X-Amz-Bearer', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
-    x_amz_bearer: str = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Bearer', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
     x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date', 'style': 'simple', 'explode': False }})
@@ -19,22 +24,22 @@ class CreateParticipantConnectionHeaders:
 @dataclass_json
 @dataclass
 class CreateParticipantConnectionRequestBody:
-    type: List[shared.ConnectionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    type: List[shared.ConnectionTypeEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     
 
 @dataclass
 class CreateParticipantConnectionRequest:
-    headers: CreateParticipantConnectionHeaders = field(default=None)
-    request: CreateParticipantConnectionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateParticipantConnectionHeaders = field()
+    request: CreateParticipantConnectionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateParticipantConnectionResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_participant_connection_response: Optional[shared.CreateParticipantConnectionResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

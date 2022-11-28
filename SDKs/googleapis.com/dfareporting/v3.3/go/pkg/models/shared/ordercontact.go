@@ -8,6 +8,8 @@ const (
 	OrderContactContactTypeEnumPlanningOrderContactSellerContact       OrderContactContactTypeEnum = "PLANNING_ORDER_CONTACT_SELLER_CONTACT"
 )
 
+// OrderContact
+// Contact of an order.
 type OrderContact struct {
 	ContactInfo            *string                      `json:"contactInfo,omitempty"`
 	ContactName            *string                      `json:"contactName,omitempty"`

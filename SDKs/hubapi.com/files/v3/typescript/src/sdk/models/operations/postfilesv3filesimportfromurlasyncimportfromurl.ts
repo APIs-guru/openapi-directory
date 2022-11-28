@@ -1,47 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class PostFilesV3FilesImportFromUrlAsyncImportFromUrlSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  hapikey: shared.SchemeHapikey;
-}
-
-
-export class PostFilesV3FilesImportFromUrlAsyncImportFromUrlSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Legacy: shared.SchemeOauth2Legacy;
-}
-
 
 export class PostFilesV3FilesImportFromUrlAsyncImportFromUrlSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: PostFilesV3FilesImportFromUrlAsyncImportFromUrlSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  hapikey?: shared.SchemeHapikey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: PostFilesV3FilesImportFromUrlAsyncImportFromUrlSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
+
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Legacy?: shared.SchemeOauth2Legacy;
 }
 
 
 export class PostFilesV3FilesImportFromUrlAsyncImportFromUrlRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.ImportFromUrlInput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PostFilesV3FilesImportFromUrlAsyncImportFromUrlSecurity;
 }
 
 
 export class PostFilesV3FilesImportFromUrlAsyncImportFromUrlResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   importFromUrlTaskLocator?: shared.ImportFromUrlTaskLocator;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UnauthorizedCacheControlHeaderStrategyEnum } from "./unauthorizedcachecontrolheaderstrategyenum";
+
 
 
 // MethodSetting
@@ -7,33 +8,33 @@ import { UnauthorizedCacheControlHeaderStrategyEnum } from "./unauthorizedcachec
  * Specifies the method setting properties.
 **/
 export class MethodSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cacheDataEncrypted" })
+  @SpeakeasyMetadata({ data: "json, name=cacheDataEncrypted" })
   cacheDataEncrypted?: boolean;
 
-  @Metadata({ data: "json, name=cacheTtlInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=cacheTtlInSeconds" })
   cacheTtlInSeconds?: number;
 
-  @Metadata({ data: "json, name=cachingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=cachingEnabled" })
   cachingEnabled?: boolean;
 
-  @Metadata({ data: "json, name=dataTraceEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=dataTraceEnabled" })
   dataTraceEnabled?: boolean;
 
-  @Metadata({ data: "json, name=loggingLevel" })
+  @SpeakeasyMetadata({ data: "json, name=loggingLevel" })
   loggingLevel?: string;
 
-  @Metadata({ data: "json, name=metricsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=metricsEnabled" })
   metricsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=requireAuthorizationForCacheControl" })
+  @SpeakeasyMetadata({ data: "json, name=requireAuthorizationForCacheControl" })
   requireAuthorizationForCacheControl?: boolean;
 
-  @Metadata({ data: "json, name=throttlingBurstLimit" })
+  @SpeakeasyMetadata({ data: "json, name=throttlingBurstLimit" })
   throttlingBurstLimit?: number;
 
-  @Metadata({ data: "json, name=throttlingRateLimit" })
+  @SpeakeasyMetadata({ data: "json, name=throttlingRateLimit" })
   throttlingRateLimit?: number;
 
-  @Metadata({ data: "json, name=unauthorizedCacheControlHeaderStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=unauthorizedCacheControlHeaderStrategy" })
   unauthorizedCacheControlHeaderStrategy?: UnauthorizedCacheControlHeaderStrategyEnum;
 }

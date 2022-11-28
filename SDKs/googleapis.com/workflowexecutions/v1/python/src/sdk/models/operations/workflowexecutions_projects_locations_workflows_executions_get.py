@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class WorkflowexecutionsProjectsLocationsWorkflowsExecutionsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 class WorkflowexecutionsProjectsLocationsWorkflowsExecutionsGetViewEnum(str, Enum):
     EXECUTION_VIEW_UNSPECIFIED = "EXECUTION_VIEW_UNSPECIFIED"
@@ -31,20 +32,20 @@ class WorkflowexecutionsProjectsLocationsWorkflowsExecutionsGetQueryParams:
 
 @dataclass
 class WorkflowexecutionsProjectsLocationsWorkflowsExecutionsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class WorkflowexecutionsProjectsLocationsWorkflowsExecutionsGetRequest:
-    path_params: WorkflowexecutionsProjectsLocationsWorkflowsExecutionsGetPathParams = field(default=None)
-    query_params: WorkflowexecutionsProjectsLocationsWorkflowsExecutionsGetQueryParams = field(default=None)
-    security: WorkflowexecutionsProjectsLocationsWorkflowsExecutionsGetSecurity = field(default=None)
+    path_params: WorkflowexecutionsProjectsLocationsWorkflowsExecutionsGetPathParams = field()
+    query_params: WorkflowexecutionsProjectsLocationsWorkflowsExecutionsGetQueryParams = field()
+    security: WorkflowexecutionsProjectsLocationsWorkflowsExecutionsGetSecurity = field()
     
 
 @dataclass
 class WorkflowexecutionsProjectsLocationsWorkflowsExecutionsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     execution: Optional[shared.Execution] = field(default=None)
-    status_code: int = field(default=None)
     

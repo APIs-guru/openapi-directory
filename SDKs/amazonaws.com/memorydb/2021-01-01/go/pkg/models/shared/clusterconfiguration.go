@@ -1,5 +1,7 @@
 package shared
 
+// ClusterConfiguration
+// A list of cluster configuration options.
 type ClusterConfiguration struct {
 	Description            *string       `json:"Description,omitempty"`
 	EngineVersion          *string       `json:"EngineVersion,omitempty"`

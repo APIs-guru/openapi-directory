@@ -15,6 +15,8 @@ type CreateDeviceDefinitionHeaders struct {
 	XAmznClientToken  *string `header:"style=simple,explode=false,name=X-Amzn-Client-Token"`
 }
 
+// CreateDeviceDefinitionRequestBodyInitialVersion
+// Information about a device definition version.
 type CreateDeviceDefinitionRequestBodyInitialVersion struct {
 	Devices []shared.Device `json:"Devices,omitempty"`
 }

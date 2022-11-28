@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApplySchemaResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppliedSchemaArn" })
+  @SpeakeasyMetadata({ data: "json, name=AppliedSchemaArn" })
   appliedSchemaArn?: string;
 
-  @Metadata({ data: "json, name=DirectoryArn" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryArn" })
   directoryArn?: string;
 }

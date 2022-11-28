@@ -1,6 +1,7 @@
 
 
+
 export enum JobFilterNameEnum {
-    ResourceType = "ResourceType"
-,    JobStatus = "JobStatus"
+    ResourceType = "ResourceType",
+    JobStatus = "JobStatus"
 }

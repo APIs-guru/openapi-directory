@@ -1,14 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProcessingError } from "./processingerror";
 import { RepositoryError } from "./repositoryerror";
 
+
 export enum ItemStatusCodeEnum {
-    CodeUnspecified = "CODE_UNSPECIFIED"
-,    Error = "ERROR"
-,    Modified = "MODIFIED"
-,    NewItem = "NEW_ITEM"
-,    Accepted = "ACCEPTED"
+    CodeUnspecified = "CODE_UNSPECIFIED",
+    Error = "ERROR",
+    Modified = "MODIFIED",
+    NewItem = "NEW_ITEM",
+    Accepted = "ACCEPTED"
 }
 
 
@@ -17,12 +17,12 @@ export enum ItemStatusCodeEnum {
  * This contains item's status and any errors.
 **/
 export class ItemStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: ItemStatusCodeEnum;
 
-  @Metadata({ data: "json, name=processingErrors", elemType: shared.ProcessingError })
+  @SpeakeasyMetadata({ data: "json, name=processingErrors", elemType: ProcessingError })
   processingErrors?: ProcessingError[];
 
-  @Metadata({ data: "json, name=repositoryErrors", elemType: shared.RepositoryError })
+  @SpeakeasyMetadata({ data: "json, name=repositoryErrors", elemType: RepositoryError })
   repositoryErrors?: RepositoryError[];
 }

@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BooleanRule } from "./booleanrule";
 import { GradientRule } from "./gradientrule";
 import { GridRange } from "./gridrange";
+
 
 
 // ConditionalFormatRule
@@ -10,12 +10,12 @@ import { GridRange } from "./gridrange";
  * A rule describing a conditional format.
 **/
 export class ConditionalFormatRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=booleanRule" })
+  @SpeakeasyMetadata({ data: "json, name=booleanRule" })
   booleanRule?: BooleanRule;
 
-  @Metadata({ data: "json, name=gradientRule" })
+  @SpeakeasyMetadata({ data: "json, name=gradientRule" })
   gradientRule?: GradientRule;
 
-  @Metadata({ data: "json, name=ranges", elemType: shared.GridRange })
+  @SpeakeasyMetadata({ data: "json, name=ranges", elemType: GridRange })
   ranges?: GridRange[];
 }

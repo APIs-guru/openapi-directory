@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudBaremetalsolutionV2ServerNetworkTemplateLogicalInterface } from "./googlecloudbaremetalsolutionv2servernetworktemplatelogicalinterface";
+
 
 
 // ServerNetworkTemplate
@@ -8,12 +8,12 @@ import { GoogleCloudBaremetalsolutionV2ServerNetworkTemplateLogicalInterface } f
  * Network template.
 **/
 export class ServerNetworkTemplate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applicableInstanceTypes" })
+  @SpeakeasyMetadata({ data: "json, name=applicableInstanceTypes" })
   applicableInstanceTypes?: string[];
 
-  @Metadata({ data: "json, name=logicalInterfaces", elemType: shared.GoogleCloudBaremetalsolutionV2ServerNetworkTemplateLogicalInterface })
+  @SpeakeasyMetadata({ data: "json, name=logicalInterfaces", elemType: GoogleCloudBaremetalsolutionV2ServerNetworkTemplateLogicalInterface })
   logicalInterfaces?: GoogleCloudBaremetalsolutionV2ServerNetworkTemplateLogicalInterface[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

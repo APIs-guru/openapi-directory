@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ResolverEndpoint } from "./resolverendpoint";
 var ListResolverEndpointsResponse = /** @class */ (function (_super) {
     __extends(ListResolverEndpointsResponse, _super);
     function ListResolverEndpointsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], ListResolverEndpointsResponse.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListResolverEndpointsResponse.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResolverEndpoints", elemType: shared.ResolverEndpoint }),
+        SpeakeasyMetadata({ data: "json, name=ResolverEndpoints", elemType: ResolverEndpoint }),
         __metadata("design:type", Array)
     ], ListResolverEndpointsResponse.prototype, "resolverEndpoints", void 0);
     return ListResolverEndpointsResponse;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Namespaces
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A list of Kubernetes Namespaces
 **/
 export class Namespaces extends SpeakeasyBase {
-  @Metadata({ data: "json, name=namespaces" })
+  @SpeakeasyMetadata({ data: "json, name=namespaces" })
   namespaces?: string[];
 }

@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
-from . import scale
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateTaskSetRequest:
-    cluster: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cluster' }})
-    scale: scale.Scale = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scale' }})
-    service: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'service' }})
-    task_set: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskSet' }})
+    cluster: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('cluster') }})
+    scale: Scale = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('scale') }})
+    service: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('service') }})
+    task_set: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskSet') }})
     

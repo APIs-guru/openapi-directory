@@ -1,74 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class CancelAccountSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class CancelAccountSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
 
 export class CancelAccountSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: CancelAccountSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: CancelAccountSecurityOption2;
-}
-
-
-export class CancelAccountRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: any;
-
-  @Metadata()
-  security: CancelAccountSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class CancelAccount200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=survey_link" })
+  @SpeakeasyMetadata({ data: "json, name=survey_link" })
   surveyLink?: string;
 }
 
 
 export class CancelAccount409ApplicationJsonErrors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 }
 
 
 export class CancelAccount409ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: operations.CancelAccount409ApplicationJsonErrors })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: CancelAccount409ApplicationJsonErrors })
   errors?: CancelAccount409ApplicationJsonErrors[];
 }
 
 
 export class CancelAccountDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class CancelAccountRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: any;
+
+  @SpeakeasyMetadata()
+  security: CancelAccountSecurity;
+}
+
+
 export class CancelAccountResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cancelAccount200ApplicationJsonObject?: CancelAccount200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cancelAccount409ApplicationJsonObject?: CancelAccount409ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cancelAccountDefaultApplicationJsonObject?: CancelAccountDefaultApplicationJson;
 }

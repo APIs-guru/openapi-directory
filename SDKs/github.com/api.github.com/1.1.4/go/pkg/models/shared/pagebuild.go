@@ -30,6 +30,8 @@ type PageBuildSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// PageBuild
+// Page Build
 type PageBuild struct {
 	Commit    string              `json:"commit"`
 	CreatedAt time.Time           `json:"created_at"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FormFieldSetEntity } from "./formfieldsetentity";
+
 
 
 // BundleEntity
@@ -7,63 +8,63 @@ import { FormFieldSetEntity } from "./formfieldsetentity";
  * Create Bundle
 **/
 export class BundleEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clickwrap_body" })
+  @SpeakeasyMetadata({ data: "json, name=clickwrap_body" })
   clickwrapBody?: string;
 
-  @Metadata({ data: "json, name=clickwrap_id" })
+  @SpeakeasyMetadata({ data: "json, name=clickwrap_id" })
   clickwrapId?: number;
 
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=expires_at" })
+  @SpeakeasyMetadata({ data: "json, name=expires_at" })
   expiresAt?: Date;
 
-  @Metadata({ data: "json, name=form_field_set" })
+  @SpeakeasyMetadata({ data: "json, name=form_field_set" })
   formFieldSet?: FormFieldSetEntity;
 
-  @Metadata({ data: "json, name=has_inbox" })
+  @SpeakeasyMetadata({ data: "json, name=has_inbox" })
   hasInbox?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=inbox_id" })
+  @SpeakeasyMetadata({ data: "json, name=inbox_id" })
   inboxId?: number;
 
-  @Metadata({ data: "json, name=max_uses" })
+  @SpeakeasyMetadata({ data: "json, name=max_uses" })
   maxUses?: number;
 
-  @Metadata({ data: "json, name=note" })
+  @SpeakeasyMetadata({ data: "json, name=note" })
   note?: string;
 
-  @Metadata({ data: "json, name=password_protected" })
+  @SpeakeasyMetadata({ data: "json, name=password_protected" })
   passwordProtected?: boolean;
 
-  @Metadata({ data: "json, name=paths" })
+  @SpeakeasyMetadata({ data: "json, name=paths" })
   paths?: string[];
 
-  @Metadata({ data: "json, name=preview_only" })
+  @SpeakeasyMetadata({ data: "json, name=preview_only" })
   previewOnly?: boolean;
 
-  @Metadata({ data: "json, name=require_registration" })
+  @SpeakeasyMetadata({ data: "json, name=require_registration" })
   requireRegistration?: boolean;
 
-  @Metadata({ data: "json, name=require_share_recipient" })
+  @SpeakeasyMetadata({ data: "json, name=require_share_recipient" })
   requireShareRecipient?: boolean;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 
-  @Metadata({ data: "json, name=user_id" })
+  @SpeakeasyMetadata({ data: "json, name=user_id" })
   userId?: number;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }

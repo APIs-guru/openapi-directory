@@ -10,12 +10,12 @@ class HeadCommercialCreditCardsHeaders:
 
 @dataclass
 class HeadCommercialCreditCardsRequest:
-    headers: HeadCommercialCreditCardsHeaders = field(default=None)
+    headers: HeadCommercialCreditCardsHeaders = field()
     
 
 @dataclass
 class HeadCommercialCreditCardsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     no_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,0 +1,148 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ObActiveOrHistoricCurrencyAndAmount9 } from "./obactiveorhistoriccurrencyandamount9";
+import { ObTransactionCashBalance } from "./obtransactioncashbalance";
+import { ObBankTransactionCodeStructure1 } from "./obbanktransactioncodestructure1";
+import { ObTransactionCardInstrument1 } from "./obtransactioncardinstrument1";
+import { ObActiveOrHistoricCurrencyAndAmount10 } from "./obactiveorhistoriccurrencyandamount10";
+import { ObCreditDebitCode1Enum } from "./obcreditdebitcode1enum";
+import { ObCashAccount60 } from "./obcashaccount60";
+import { ObBranchAndFinancialInstitutionIdentification61 } from "./obbranchandfinancialinstitutionidentification61";
+import { ObCurrencyExchange5 } from "./obcurrencyexchange5";
+import { ObCashAccount61 } from "./obcashaccount61";
+import { ObBranchAndFinancialInstitutionIdentification62 } from "./obbranchandfinancialinstitutionidentification62";
+import { ObMerchantDetails1 } from "./obmerchantdetails1";
+import { ProprietaryBankTransactionCodeStructure1 } from "./proprietarybanktransactioncodestructure1";
+import { ObEntryStatus1CodeEnum } from "./obentrystatus1codeenum";
+import { ObTransactionMutability1CodeEnum } from "./obtransactionmutability1codeenum";
+// ObTransaction6
+/**
+ * Provides further details on an entry in the report.
+**/
+var ObTransaction6 = /** @class */ (function (_super) {
+    __extends(ObTransaction6, _super);
+    function ObTransaction6() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=AccountId" }),
+        __metadata("design:type", String)
+    ], ObTransaction6.prototype, "accountId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=AddressLine" }),
+        __metadata("design:type", String)
+    ], ObTransaction6.prototype, "addressLine", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Amount" }),
+        __metadata("design:type", ObActiveOrHistoricCurrencyAndAmount9)
+    ], ObTransaction6.prototype, "amount", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Balance" }),
+        __metadata("design:type", ObTransactionCashBalance)
+    ], ObTransaction6.prototype, "balance", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=BankTransactionCode" }),
+        __metadata("design:type", ObBankTransactionCodeStructure1)
+    ], ObTransaction6.prototype, "bankTransactionCode", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=BookingDateTime" }),
+        __metadata("design:type", Date)
+    ], ObTransaction6.prototype, "bookingDateTime", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=CardInstrument" }),
+        __metadata("design:type", ObTransactionCardInstrument1)
+    ], ObTransaction6.prototype, "cardInstrument", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=ChargeAmount" }),
+        __metadata("design:type", ObActiveOrHistoricCurrencyAndAmount10)
+    ], ObTransaction6.prototype, "chargeAmount", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=CreditDebitIndicator" }),
+        __metadata("design:type", String)
+    ], ObTransaction6.prototype, "creditDebitIndicator", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=CreditorAccount" }),
+        __metadata("design:type", ObCashAccount60)
+    ], ObTransaction6.prototype, "creditorAccount", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=CreditorAgent" }),
+        __metadata("design:type", ObBranchAndFinancialInstitutionIdentification61)
+    ], ObTransaction6.prototype, "creditorAgent", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=CurrencyExchange" }),
+        __metadata("design:type", ObCurrencyExchange5)
+    ], ObTransaction6.prototype, "currencyExchange", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=DebtorAccount" }),
+        __metadata("design:type", ObCashAccount61)
+    ], ObTransaction6.prototype, "debtorAccount", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=DebtorAgent" }),
+        __metadata("design:type", ObBranchAndFinancialInstitutionIdentification62)
+    ], ObTransaction6.prototype, "debtorAgent", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=MerchantDetails" }),
+        __metadata("design:type", ObMerchantDetails1)
+    ], ObTransaction6.prototype, "merchantDetails", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=ProprietaryBankTransactionCode" }),
+        __metadata("design:type", ProprietaryBankTransactionCodeStructure1)
+    ], ObTransaction6.prototype, "proprietaryBankTransactionCode", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=StatementReference" }),
+        __metadata("design:type", Array)
+    ], ObTransaction6.prototype, "statementReference", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=Status" }),
+        __metadata("design:type", String)
+    ], ObTransaction6.prototype, "status", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=SupplementaryData" }),
+        __metadata("design:type", Map)
+    ], ObTransaction6.prototype, "supplementaryData", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=TransactionId" }),
+        __metadata("design:type", String)
+    ], ObTransaction6.prototype, "transactionId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=TransactionInformation" }),
+        __metadata("design:type", String)
+    ], ObTransaction6.prototype, "transactionInformation", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=TransactionMutability" }),
+        __metadata("design:type", String)
+    ], ObTransaction6.prototype, "transactionMutability", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=TransactionReference" }),
+        __metadata("design:type", String)
+    ], ObTransaction6.prototype, "transactionReference", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=ValueDateTime" }),
+        __metadata("design:type", Date)
+    ], ObTransaction6.prototype, "valueDateTime", void 0);
+    return ObTransaction6;
+}(SpeakeasyBase));
+export { ObTransaction6 };

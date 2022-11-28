@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchGetCommitsError
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Returns information about errors in a BatchGetCommits operation.
 **/
 export class BatchGetCommitsError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commitId" })
+  @SpeakeasyMetadata({ data: "json, name=commitId" })
   commitId?: string;
 
-  @Metadata({ data: "json, name=errorCode" })
+  @SpeakeasyMetadata({ data: "json, name=errorCode" })
   errorCode?: string;
 
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage?: string;
 }

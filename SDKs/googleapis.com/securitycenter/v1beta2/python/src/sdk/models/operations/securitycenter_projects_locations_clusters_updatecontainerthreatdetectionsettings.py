@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettingsPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +30,21 @@ class SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSetti
 
 @dataclass
 class SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettingsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettingsRequest:
-    path_params: SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettingsPathParams = field(default=None)
-    query_params: SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettingsQueryParams = field(default=None)
-    request: Optional[shared.ContainerThreatDetectionSettings] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettingsSecurity = field(default=None)
+    path_params: SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettingsPathParams = field()
+    query_params: SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettingsQueryParams = field()
+    security: SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettingsSecurity = field()
+    request: Optional[shared.ContainerThreatDetectionSettingsInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SecuritycenterProjectsLocationsClustersUpdateContainerThreatDetectionSettingsResponse:
+    content_type: str = field()
+    status_code: int = field()
     container_threat_detection_settings: Optional[shared.ContainerThreatDetectionSettings] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

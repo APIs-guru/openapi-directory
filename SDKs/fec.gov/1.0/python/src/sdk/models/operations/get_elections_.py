@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetElectionsOfficeEnum(str, Enum):
@@ -10,11 +11,11 @@ class GetElectionsOfficeEnum(str, Enum):
 
 @dataclass
 class GetElectionsQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
-    cycle: int = field(default=None, metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    cycle: int = field(metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
+    office: GetElectionsOfficeEnum = field(metadata={'query_param': { 'field_name': 'office', 'style': 'form', 'explode': True }})
     district: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'district', 'style': 'form', 'explode': True }})
     election_full: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'election_full', 'style': 'form', 'explode': True }})
-    office: GetElectionsOfficeEnum = field(default=None, metadata={'query_param': { 'field_name': 'office', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
     per_page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'per_page', 'style': 'form', 'explode': True }})
     sort: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'sort', 'style': 'form', 'explode': True }})
@@ -26,12 +27,12 @@ class GetElectionsQueryParams:
 
 @dataclass
 class GetElectionsRequest:
-    query_params: GetElectionsQueryParams = field(default=None)
+    query_params: GetElectionsQueryParams = field()
     
 
 @dataclass
 class GetElectionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     election_page: Optional[shared.ElectionPage] = field(default=None)
-    status_code: int = field(default=None)
     

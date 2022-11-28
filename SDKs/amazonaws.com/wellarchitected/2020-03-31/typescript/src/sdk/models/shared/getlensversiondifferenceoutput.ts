@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VersionDifferences } from "./versiondifferences";
 
 
+
 export class GetLensVersionDifferenceOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BaseLensVersion" })
+  @SpeakeasyMetadata({ data: "json, name=BaseLensVersion" })
   baseLensVersion?: string;
 
-  @Metadata({ data: "json, name=LatestLensVersion" })
+  @SpeakeasyMetadata({ data: "json, name=LatestLensVersion" })
   latestLensVersion?: string;
 
-  @Metadata({ data: "json, name=LensAlias" })
+  @SpeakeasyMetadata({ data: "json, name=LensAlias" })
   lensAlias?: string;
 
-  @Metadata({ data: "json, name=VersionDifferences" })
+  @SpeakeasyMetadata({ data: "json, name=VersionDifferences" })
   versionDifferences?: VersionDifferences;
 }

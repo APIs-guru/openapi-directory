@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationStatusEnum } from "./applicationstatusenum";
 
 
+
 export class DescribeApplicationStateResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationStatus" })
   applicationStatus?: ApplicationStatusEnum;
 
-  @Metadata({ data: "json, name=LastUpdatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedTime" })
   lastUpdatedTime?: Date;
 }

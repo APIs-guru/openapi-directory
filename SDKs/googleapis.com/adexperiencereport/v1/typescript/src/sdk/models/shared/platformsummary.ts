@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PlatformSummaryBetterAdsStatusEnum {
-    Unknown = "UNKNOWN"
-,    Passing = "PASSING"
-,    Warning = "WARNING"
-,    Failing = "FAILING"
+    Unknown = "UNKNOWN",
+    Passing = "PASSING",
+    Warning = "WARNING",
+    Failing = "FAILING"
 }
 
 export enum PlatformSummaryFilterStatusEnum {
-    Unknown = "UNKNOWN"
-,    On = "ON"
-,    Off = "OFF"
-,    Paused = "PAUSED"
-,    Pending = "PENDING"
+    Unknown = "UNKNOWN",
+    On = "ON",
+    Off = "OFF",
+    Paused = "PAUSED",
+    Pending = "PENDING"
 }
 
 export enum PlatformSummaryRegionEnum {
-    RegionUnknown = "REGION_UNKNOWN"
-,    RegionA = "REGION_A"
-,    RegionB = "REGION_B"
-,    RegionC = "REGION_C"
+    RegionUnknown = "REGION_UNKNOWN",
+    RegionA = "REGION_A",
+    RegionB = "REGION_B",
+    RegionC = "REGION_C"
 }
 
 
@@ -28,24 +29,24 @@ export enum PlatformSummaryRegionEnum {
  * A site's Ad Experience Report summary on a single platform.
 **/
 export class PlatformSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=betterAdsStatus" })
+  @SpeakeasyMetadata({ data: "json, name=betterAdsStatus" })
   betterAdsStatus?: PlatformSummaryBetterAdsStatusEnum;
 
-  @Metadata({ data: "json, name=enforcementTime" })
+  @SpeakeasyMetadata({ data: "json, name=enforcementTime" })
   enforcementTime?: string;
 
-  @Metadata({ data: "json, name=filterStatus" })
+  @SpeakeasyMetadata({ data: "json, name=filterStatus" })
   filterStatus?: PlatformSummaryFilterStatusEnum;
 
-  @Metadata({ data: "json, name=lastChangeTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastChangeTime" })
   lastChangeTime?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: PlatformSummaryRegionEnum[];
 
-  @Metadata({ data: "json, name=reportUrl" })
+  @SpeakeasyMetadata({ data: "json, name=reportUrl" })
   reportUrl?: string;
 
-  @Metadata({ data: "json, name=underReview" })
+  @SpeakeasyMetadata({ data: "json, name=underReview" })
   underReview?: boolean;
 }

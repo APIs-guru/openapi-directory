@@ -16,6 +16,8 @@ const (
 	CreateServiceAccountKeyRequestPrivateKeyTypeEnumTypeGoogleCredentialsFile CreateServiceAccountKeyRequestPrivateKeyTypeEnum = "TYPE_GOOGLE_CREDENTIALS_FILE"
 )
 
+// CreateServiceAccountKeyRequest
+// The service account key create request.
 type CreateServiceAccountKeyRequest struct {
 	KeyAlgorithm   *CreateServiceAccountKeyRequestKeyAlgorithmEnum   `json:"keyAlgorithm,omitempty"`
 	PrivateKeyType *CreateServiceAccountKeyRequestPrivateKeyTypeEnum `json:"privateKeyType,omitempty"`

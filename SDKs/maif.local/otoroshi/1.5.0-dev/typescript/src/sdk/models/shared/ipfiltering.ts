@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IpFiltering
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The filtering configuration block for a service of globally.
 **/
 export class IpFiltering extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blacklist" })
+  @SpeakeasyMetadata({ data: "json, name=blacklist" })
   blacklist: string[];
 
-  @Metadata({ data: "json, name=whitelist" })
+  @SpeakeasyMetadata({ data: "json, name=whitelist" })
   whitelist: string[];
 }

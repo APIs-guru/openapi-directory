@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDatacatalogV1beta1SearchCatalogResultSearchResultTypeEnum {
-    SearchResultTypeUnspecified = "SEARCH_RESULT_TYPE_UNSPECIFIED"
-,    Entry = "ENTRY"
-,    TagTemplate = "TAG_TEMPLATE"
-,    EntryGroup = "ENTRY_GROUP"
+    SearchResultTypeUnspecified = "SEARCH_RESULT_TYPE_UNSPECIFIED",
+    Entry = "ENTRY",
+    TagTemplate = "TAG_TEMPLATE",
+    EntryGroup = "ENTRY_GROUP"
 }
 
 
@@ -13,18 +14,18 @@ export enum GoogleCloudDatacatalogV1beta1SearchCatalogResultSearchResultTypeEnum
  * A result that appears in the response of a search request. Each result captures details of one entry that matches the search.
 **/
 export class GoogleCloudDatacatalogV1beta1SearchCatalogResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=linkedResource" })
+  @SpeakeasyMetadata({ data: "json, name=linkedResource" })
   linkedResource?: string;
 
-  @Metadata({ data: "json, name=modifyTime" })
+  @SpeakeasyMetadata({ data: "json, name=modifyTime" })
   modifyTime?: string;
 
-  @Metadata({ data: "json, name=relativeResourceName" })
+  @SpeakeasyMetadata({ data: "json, name=relativeResourceName" })
   relativeResourceName?: string;
 
-  @Metadata({ data: "json, name=searchResultSubtype" })
+  @SpeakeasyMetadata({ data: "json, name=searchResultSubtype" })
   searchResultSubtype?: string;
 
-  @Metadata({ data: "json, name=searchResultType" })
+  @SpeakeasyMetadata({ data: "json, name=searchResultType" })
   searchResultType?: GoogleCloudDatacatalogV1beta1SearchCatalogResultSearchResultTypeEnum;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// Error
+// This type defines the fields that can be returned in an error.
 type Error struct {
 	Category     *string          `json:"category,omitempty"`
 	Domain       *string          `json:"domain,omitempty"`

@@ -1,115 +1,116 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TaxonomyCategoriesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=destId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=destId" })
   destId?: number;
 }
 
 
 export class TaxonomyCategoriesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
   acceptLanguage: string;
 }
 
 
-export class TaxonomyCategoriesRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: TaxonomyCategoriesQueryParams;
-
-  @Metadata()
-  headers: TaxonomyCategoriesHeaders;
-}
-
-
 export class TaxonomyCategories200ApplicationJsonDataSubcategories extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categoryId" })
+  @SpeakeasyMetadata({ data: "json, name=categoryId" })
   categoryId?: number;
 
-  @Metadata({ data: "json, name=sortorder" })
+  @SpeakeasyMetadata({ data: "json, name=sortorder" })
   sortorder?: number;
 
-  @Metadata({ data: "json, name=subCategoryUrlName" })
+  @SpeakeasyMetadata({ data: "json, name=subCategoryUrlName" })
   subCategoryUrlName?: string;
 
-  @Metadata({ data: "json, name=subcategoryId" })
+  @SpeakeasyMetadata({ data: "json, name=subcategoryId" })
   subcategoryId?: number;
 
-  @Metadata({ data: "json, name=subcategoryName" })
+  @SpeakeasyMetadata({ data: "json, name=subcategoryName" })
   subcategoryName?: string;
 }
 
 
 export class TaxonomyCategories200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groupName" })
+  @SpeakeasyMetadata({ data: "json, name=groupName" })
   groupName?: string;
 
-  @Metadata({ data: "json, name=groupUrlName" })
+  @SpeakeasyMetadata({ data: "json, name=groupUrlName" })
   groupUrlName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=productCount" })
+  @SpeakeasyMetadata({ data: "json, name=productCount" })
   productCount?: number;
 
-  @Metadata({ data: "json, name=subcategories", elemType: operations.TaxonomyCategories200ApplicationJsonDataSubcategories })
+  @SpeakeasyMetadata({ data: "json, name=subcategories", elemType: TaxonomyCategories200ApplicationJsonDataSubcategories })
   subcategories?: TaxonomyCategories200ApplicationJsonDataSubcategories[];
 
-  @Metadata({ data: "json, name=thumbnailURL" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnailURL" })
   thumbnailUrl?: string;
 }
 
 
 export class TaxonomyCategories200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: operations.TaxonomyCategories200ApplicationJsonData })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: TaxonomyCategories200ApplicationJsonData })
   data?: TaxonomyCategories200ApplicationJsonData[];
 
-  @Metadata({ data: "json, name=dateStamp" })
+  @SpeakeasyMetadata({ data: "json, name=dateStamp" })
   dateStamp?: string;
 
-  @Metadata({ data: "json, name=errorCodes" })
+  @SpeakeasyMetadata({ data: "json, name=errorCodes" })
   errorCodes?: string[];
 
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage?: any[];
 
-  @Metadata({ data: "json, name=errorMessageText" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessageText" })
   errorMessageText?: string;
 
-  @Metadata({ data: "json, name=errorName" })
+  @SpeakeasyMetadata({ data: "json, name=errorName" })
   errorName?: string;
 
-  @Metadata({ data: "json, name=errorReference" })
+  @SpeakeasyMetadata({ data: "json, name=errorReference" })
   errorReference?: string;
 
-  @Metadata({ data: "json, name=errorType" })
+  @SpeakeasyMetadata({ data: "json, name=errorType" })
   errorType?: string;
 
-  @Metadata({ data: "json, name=extraInfo" })
+  @SpeakeasyMetadata({ data: "json, name=extraInfo" })
   extraInfo?: Map<string, any>;
 
-  @Metadata({ data: "json, name=extraObject" })
+  @SpeakeasyMetadata({ data: "json, name=extraObject" })
   extraObject?: Map<string, any>;
 
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: boolean;
 
-  @Metadata({ data: "json, name=totalCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalCount" })
   totalCount?: number;
 
-  @Metadata({ data: "json, name=vmid" })
+  @SpeakeasyMetadata({ data: "json, name=vmid" })
   vmid?: string;
 }
 
 
+export class TaxonomyCategoriesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: TaxonomyCategoriesQueryParams;
+
+  @SpeakeasyMetadata()
+  headers: TaxonomyCategoriesHeaders;
+}
+
+
 export class TaxonomyCategoriesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   taxonomyCategories200ApplicationJsonObject?: TaxonomyCategories200ApplicationJson;
 }

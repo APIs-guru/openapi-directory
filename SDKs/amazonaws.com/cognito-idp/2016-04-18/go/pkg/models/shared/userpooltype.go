@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// UserPoolType
+// A container for information about the user pool.
 type UserPoolType struct {
 	AccountRecoverySetting      *AccountRecoverySettingType      `json:"AccountRecoverySetting,omitempty"`
 	AdminCreateUserConfig       *AdminCreateUserConfigType       `json:"AdminCreateUserConfig,omitempty"`

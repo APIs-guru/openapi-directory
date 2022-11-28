@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Lun } from "./lun";
+
 
 
 // ListLunsResponse
@@ -8,12 +8,12 @@ import { Lun } from "./lun";
  * Response message containing the list of storage volume luns.
 **/
 export class ListLunsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=luns", elemType: shared.Lun })
+  @SpeakeasyMetadata({ data: "json, name=luns", elemType: Lun })
   luns?: Lun[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

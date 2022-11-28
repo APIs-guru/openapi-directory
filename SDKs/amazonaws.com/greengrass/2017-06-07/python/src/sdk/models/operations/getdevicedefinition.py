@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetDeviceDefinitionPathParams:
-    device_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'DeviceDefinitionId', 'style': 'simple', 'explode': False }})
+    device_definition_id: str = field(metadata={'path_param': { 'field_name': 'DeviceDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,14 +24,14 @@ class GetDeviceDefinitionHeaders:
 
 @dataclass
 class GetDeviceDefinitionRequest:
-    path_params: GetDeviceDefinitionPathParams = field(default=None)
-    headers: GetDeviceDefinitionHeaders = field(default=None)
+    headers: GetDeviceDefinitionHeaders = field()
+    path_params: GetDeviceDefinitionPathParams = field()
     
 
 @dataclass
 class GetDeviceDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_device_definition_response: Optional[shared.GetDeviceDefinitionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

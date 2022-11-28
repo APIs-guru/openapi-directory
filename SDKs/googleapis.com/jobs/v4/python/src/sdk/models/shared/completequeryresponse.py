@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import completionresult
-from . import responsemetadata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CompleteQueryResponse:
-    completion_results: Optional[List[completionresult.CompletionResult]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'completionResults' }})
-    metadata: Optional[responsemetadata.ResponseMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
+    r"""CompleteQueryResponse
+    Response of auto-complete query.
+    """
+    
+    completion_results: Optional[List[CompletionResult]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('completionResults') }})
+    metadata: Optional[ResponseMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
     

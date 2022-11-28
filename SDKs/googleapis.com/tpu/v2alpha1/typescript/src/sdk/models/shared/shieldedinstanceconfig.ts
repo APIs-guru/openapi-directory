@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ShieldedInstanceConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A set of Shielded Instance options.
 **/
 export class ShieldedInstanceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableSecureBoot" })
+  @SpeakeasyMetadata({ data: "json, name=enableSecureBoot" })
   enableSecureBoot?: boolean;
 }

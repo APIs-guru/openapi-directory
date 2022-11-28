@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReportDefinitionReportDefinitionReportQueryGroup
@@ -6,7 +7,7 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The querys' groups
 **/
 export class ReportDefinitionReportDefinitionReportQueryGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Group" })
+  @SpeakeasyMetadata({ data: "json, name=Group" })
   group?: any[];
 }
 
@@ -16,7 +17,7 @@ export class ReportDefinitionReportDefinitionReportQueryGroup extends SpeakeasyB
  * The querys' variables
 **/
 export class ReportDefinitionReportDefinitionReportQueryVariable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Variable" })
+  @SpeakeasyMetadata({ data: "json, name=Variable" })
   variable?: any[];
 }
 
@@ -26,45 +27,45 @@ export class ReportDefinitionReportDefinitionReportQueryVariable extends Speakea
  * The report definitions' report query
 **/
 export class ReportDefinitionReportDefinitionReportQuery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExcludeNullOrEmptyElements" })
+  @SpeakeasyMetadata({ data: "json, name=ExcludeNullOrEmptyElements" })
   excludeNullOrEmptyElements?: boolean;
 
-  @Metadata({ data: "json, name=Groups" })
+  @SpeakeasyMetadata({ data: "json, name=Groups" })
   groups?: ReportDefinitionReportDefinitionReportQueryGroup;
 
-  @Metadata({ data: "json, name=RootNodeName" })
+  @SpeakeasyMetadata({ data: "json, name=RootNodeName" })
   rootNodeName?: string;
 
-  @Metadata({ data: "json, name=SuppressMetricAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=SuppressMetricAttributes" })
   suppressMetricAttributes?: boolean;
 
-  @Metadata({ data: "json, name=Variables" })
+  @SpeakeasyMetadata({ data: "json, name=Variables" })
   variables?: ReportDefinitionReportDefinitionReportQueryVariable;
 }
 
 
 export class ReportDefinitionReportDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Active" })
+  @SpeakeasyMetadata({ data: "json, name=Active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=Readonly" })
+  @SpeakeasyMetadata({ data: "json, name=Readonly" })
   readonly?: boolean;
 
-  @Metadata({ data: "json, name=ReportQuery" })
+  @SpeakeasyMetadata({ data: "json, name=ReportQuery" })
   reportQuery?: ReportDefinitionReportDefinitionReportQuery;
 
-  @Metadata({ data: "json, name=SupportedTransforms" })
+  @SpeakeasyMetadata({ data: "json, name=SupportedTransforms" })
   supportedTransforms?: string;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: string;
 }
 
 
 export class ReportDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReportDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=ReportDefinition" })
   reportDefinition?: ReportDefinitionReportDefinition;
 }

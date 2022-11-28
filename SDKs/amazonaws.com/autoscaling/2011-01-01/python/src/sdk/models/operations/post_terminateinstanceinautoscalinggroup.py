@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostTerminateInstanceInAutoScalingGroupActionEnum(str, Enum):
     TERMINATE_INSTANCE_IN_AUTO_SCALING_GROUP = "TerminateInstanceInAutoScalingGroup"
@@ -10,8 +14,8 @@ class PostTerminateInstanceInAutoScalingGroupVersionEnum(str, Enum):
 
 @dataclass
 class PostTerminateInstanceInAutoScalingGroupQueryParams:
-    action: PostTerminateInstanceInAutoScalingGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostTerminateInstanceInAutoScalingGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostTerminateInstanceInAutoScalingGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostTerminateInstanceInAutoScalingGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostTerminateInstanceInAutoScalingGroupHeaders:
 
 @dataclass
 class PostTerminateInstanceInAutoScalingGroupRequest:
-    query_params: PostTerminateInstanceInAutoScalingGroupQueryParams = field(default=None)
-    headers: PostTerminateInstanceInAutoScalingGroupHeaders = field(default=None)
+    headers: PostTerminateInstanceInAutoScalingGroupHeaders = field()
+    query_params: PostTerminateInstanceInAutoScalingGroupQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostTerminateInstanceInAutoScalingGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

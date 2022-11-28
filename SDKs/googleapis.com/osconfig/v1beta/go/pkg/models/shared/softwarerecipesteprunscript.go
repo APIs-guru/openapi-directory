@@ -8,6 +8,8 @@ const (
 	SoftwareRecipeStepRunScriptInterpreterEnumPowershell             SoftwareRecipeStepRunScriptInterpreterEnum = "POWERSHELL"
 )
 
+// SoftwareRecipeStepRunScript
+// Runs a script through an interpreter.
 type SoftwareRecipeStepRunScript struct {
 	AllowedExitCodes []int32                                     `json:"allowedExitCodes,omitempty"`
 	Interpreter      *SoftwareRecipeStepRunScriptInterpreterEnum `json:"interpreter,omitempty"`

@@ -1,6 +1,7 @@
 
 
+
 export enum PermissionEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribePlacementPathParams:
-    placement_name: str = field(default=None, metadata={'path_param': { 'field_name': 'placementName', 'style': 'simple', 'explode': False }})
-    project_name: str = field(default=None, metadata={'path_param': { 'field_name': 'projectName', 'style': 'simple', 'explode': False }})
+    placement_name: str = field(metadata={'path_param': { 'field_name': 'placementName', 'style': 'simple', 'explode': False }})
+    project_name: str = field(metadata={'path_param': { 'field_name': 'projectName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,16 +25,16 @@ class DescribePlacementHeaders:
 
 @dataclass
 class DescribePlacementRequest:
-    path_params: DescribePlacementPathParams = field(default=None)
-    headers: DescribePlacementHeaders = field(default=None)
+    headers: DescribePlacementHeaders = field()
+    path_params: DescribePlacementPathParams = field()
     
 
 @dataclass
 class DescribePlacementResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_placement_response: Optional[shared.DescribePlacementResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

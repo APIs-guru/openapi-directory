@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DestinationSchema } from "./destinationschema";
 import { KinesisFirehoseOutputUpdate } from "./kinesisfirehoseoutputupdate";
 import { KinesisStreamsOutputUpdate } from "./kinesisstreamsoutputupdate";
@@ -37,27 +37,27 @@ var OutputUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DestinationSchemaUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=DestinationSchemaUpdate" }),
         __metadata("design:type", DestinationSchema)
     ], OutputUpdate.prototype, "destinationSchemaUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=KinesisFirehoseOutputUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=KinesisFirehoseOutputUpdate" }),
         __metadata("design:type", KinesisFirehoseOutputUpdate)
     ], OutputUpdate.prototype, "kinesisFirehoseOutputUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=KinesisStreamsOutputUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=KinesisStreamsOutputUpdate" }),
         __metadata("design:type", KinesisStreamsOutputUpdate)
     ], OutputUpdate.prototype, "kinesisStreamsOutputUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=LambdaOutputUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=LambdaOutputUpdate" }),
         __metadata("design:type", LambdaOutputUpdate)
     ], OutputUpdate.prototype, "lambdaOutputUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=NameUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=NameUpdate" }),
         __metadata("design:type", String)
     ], OutputUpdate.prototype, "nameUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=OutputId" }),
+        SpeakeasyMetadata({ data: "json, name=OutputId" }),
         __metadata("design:type", String)
     ], OutputUpdate.prototype, "outputId", void 0);
     return OutputUpdate;

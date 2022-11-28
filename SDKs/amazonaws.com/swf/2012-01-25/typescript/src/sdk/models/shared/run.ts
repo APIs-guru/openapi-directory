@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Run
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the <code>runId</code> of a workflow execution.
 **/
 export class Run extends SpeakeasyBase {
-  @Metadata({ data: "json, name=runId" })
+  @SpeakeasyMetadata({ data: "json, name=runId" })
   runId?: string;
 }

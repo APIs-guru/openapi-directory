@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import executiontemplate
+from sdk import utils
+from . import *
 
 class ExecutionStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -18,14 +23,30 @@ class ExecutionStateEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class ExecutionInput:
+    r"""ExecutionInput
+    The definition of a single executed notebook.
+    """
+    
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    execution_template: Optional[ExecutionTemplate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('executionTemplate') }})
+    output_notebook_file: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outputNotebookFile') }})
+    
+
+@dataclass_json
+@dataclass
 class Execution:
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    execution_template: Optional[executiontemplate.ExecutionTemplate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'executionTemplate' }})
-    job_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobUri' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    output_notebook_file: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outputNotebookFile' }})
-    state: Optional[ExecutionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
+    r"""Execution
+    The definition of a single executed notebook.
+    """
+    
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    execution_template: Optional[ExecutionTemplate] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('executionTemplate') }})
+    job_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobUri') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    output_notebook_file: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outputNotebookFile') }})
+    state: Optional[ExecutionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
     

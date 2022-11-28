@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CompilationJobStatusEnum } from "./compilationjobstatusenum";
 import { InputConfig } from "./inputconfig";
 import { ModelArtifacts } from "./modelartifacts";
@@ -8,52 +8,53 @@ import { StoppingCondition } from "./stoppingcondition";
 import { NeoVpcConfig } from "./neovpcconfig";
 
 
+
 export class DescribeCompilationJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CompilationEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=CompilationEndTime" })
   compilationEndTime?: Date;
 
-  @Metadata({ data: "json, name=CompilationJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=CompilationJobArn" })
   compilationJobArn: string;
 
-  @Metadata({ data: "json, name=CompilationJobName" })
+  @SpeakeasyMetadata({ data: "json, name=CompilationJobName" })
   compilationJobName: string;
 
-  @Metadata({ data: "json, name=CompilationJobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=CompilationJobStatus" })
   compilationJobStatus: CompilationJobStatusEnum;
 
-  @Metadata({ data: "json, name=CompilationStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=CompilationStartTime" })
   compilationStartTime?: Date;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason: string;
 
-  @Metadata({ data: "json, name=InferenceImage" })
+  @SpeakeasyMetadata({ data: "json, name=InferenceImage" })
   inferenceImage?: string;
 
-  @Metadata({ data: "json, name=InputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=InputConfig" })
   inputConfig: InputConfig;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime: Date;
 
-  @Metadata({ data: "json, name=ModelArtifacts" })
+  @SpeakeasyMetadata({ data: "json, name=ModelArtifacts" })
   modelArtifacts: ModelArtifacts;
 
-  @Metadata({ data: "json, name=ModelDigests" })
+  @SpeakeasyMetadata({ data: "json, name=ModelDigests" })
   modelDigests?: ModelDigests;
 
-  @Metadata({ data: "json, name=OutputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=OutputConfig" })
   outputConfig: OutputConfig;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=StoppingCondition" })
+  @SpeakeasyMetadata({ data: "json, name=StoppingCondition" })
   stoppingCondition: StoppingCondition;
 
-  @Metadata({ data: "json, name=VpcConfig" })
+  @SpeakeasyMetadata({ data: "json, name=VpcConfig" })
   vpcConfig?: NeoVpcConfig;
 }

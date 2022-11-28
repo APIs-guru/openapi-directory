@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Aspect } from "./aspect";
+
 
 
 // Product
@@ -8,21 +8,21 @@ import { Aspect } from "./aspect";
  * The type that defines the fields for the aspects of a product.
 **/
 export class Product extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aspects", elemType: shared.Aspect })
+  @SpeakeasyMetadata({ data: "json, name=aspects", elemType: Aspect })
   aspects?: Aspect[];
 
-  @Metadata({ data: "json, name=brand" })
+  @SpeakeasyMetadata({ data: "json, name=brand" })
   brand?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=epid" })
+  @SpeakeasyMetadata({ data: "json, name=epid" })
   epid?: string;
 
-  @Metadata({ data: "json, name=imageUrls" })
+  @SpeakeasyMetadata({ data: "json, name=imageUrls" })
   imageUrls?: string[];
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

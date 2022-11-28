@@ -1,15 +1,20 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import inspectorevent_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EventSubscription:
-    event: inspectorevent_enum.InspectorEventEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'event' }})
-    subscribed_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subscribedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    r"""EventSubscription
+    This data type is used in the <a>Subscription</a> data type.
+    """
+    
+    event: InspectorEventEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('event') }})
+    subscribed_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('subscribedAt'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

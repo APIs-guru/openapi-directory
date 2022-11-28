@@ -27,7 +27,7 @@ type MybusinessbusinessinformationAccountsLocationsCreateQueryParams struct {
 type MybusinessbusinessinformationAccountsLocationsCreateRequest struct {
 	PathParams  MybusinessbusinessinformationAccountsLocationsCreatePathParams
 	QueryParams MybusinessbusinessinformationAccountsLocationsCreateQueryParams
-	Request     *shared.Location `request:"mediaType=application/json"`
+	Request     *shared.LocationInput `request:"mediaType=application/json"`
 }
 
 type MybusinessbusinessinformationAccountsLocationsCreateResponse struct {

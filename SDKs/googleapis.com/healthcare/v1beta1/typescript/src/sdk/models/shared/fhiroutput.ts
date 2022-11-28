@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FhirOutput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about the FHIR store to write the output to.
 **/
 export class FhirOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fhirStore" })
+  @SpeakeasyMetadata({ data: "json, name=fhirStore" })
   fhirStore?: string;
 }

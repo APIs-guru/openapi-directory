@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class PostPlayersSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class PostPlayersRequest:
-    request: shared.Playerinput = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PostPlayersSecurity = field(default=None)
+    request: shared.Playerinput = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: PostPlayersSecurity = field()
     
 
 @dataclass
 class PostPlayersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     player: Optional[shared.Player] = field(default=None)
     

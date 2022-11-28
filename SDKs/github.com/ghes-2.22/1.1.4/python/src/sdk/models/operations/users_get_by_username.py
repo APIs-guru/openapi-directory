@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class UsersGetByUsernamePathParams:
-    username: str = field(default=None, metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
+    username: str = field(metadata={'path_param': { 'field_name': 'username', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class UsersGetByUsernameRequest:
-    path_params: UsersGetByUsernamePathParams = field(default=None)
+    path_params: UsersGetByUsernamePathParams = field()
     
 
 @dataclass
 class UsersGetByUsernameResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     users_get_by_username_200_application_json_one_of: Optional[Any] = field(default=None)
     users_get_by_username_202_application_json_object: Optional[dict[str, Any]] = field(default=None)

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Terms
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The terms for the event, provided in a full-text description and summary.
 **/
 export class Terms extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fullText" })
+  @SpeakeasyMetadata({ data: "json, name=fullText" })
   fullText?: string;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: string;
 }

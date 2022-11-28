@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Trust
+// Describes a trust relationship between an Managed Microsoft AD directory and an external domain.
 type Trust struct {
 	CreatedDateTime          *time.Time          `json:"CreatedDateTime,omitempty"`
 	DirectoryID              *string             `json:"DirectoryId,omitempty"`

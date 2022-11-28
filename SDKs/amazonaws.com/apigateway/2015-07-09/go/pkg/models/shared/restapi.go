@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// RestAPI
+// <p>Represents a REST API.</p> <div class="seeAlso"> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html">Create an API</a> </div>
 type RestAPI struct {
 	APIKeySource              *APIKeySourceTypeEnum  `json:"apiKeySource,omitempty"`
 	BinaryMediaTypes          []string               `json:"binaryMediaTypes,omitempty"`

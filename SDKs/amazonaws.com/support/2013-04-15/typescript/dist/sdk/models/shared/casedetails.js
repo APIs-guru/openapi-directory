@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RecentCaseCommunications } from "./recentcasecommunications";
 // CaseDetails
 /**
@@ -34,51 +34,51 @@ var CaseDetails = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=caseId" }),
+        SpeakeasyMetadata({ data: "json, name=caseId" }),
         __metadata("design:type", String)
     ], CaseDetails.prototype, "caseId", void 0);
     __decorate([
-        Metadata({ data: "json, name=categoryCode" }),
+        SpeakeasyMetadata({ data: "json, name=categoryCode" }),
         __metadata("design:type", String)
     ], CaseDetails.prototype, "categoryCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ccEmailAddresses" }),
+        SpeakeasyMetadata({ data: "json, name=ccEmailAddresses" }),
         __metadata("design:type", Array)
     ], CaseDetails.prototype, "ccEmailAddresses", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayId" }),
+        SpeakeasyMetadata({ data: "json, name=displayId" }),
         __metadata("design:type", String)
     ], CaseDetails.prototype, "displayId", void 0);
     __decorate([
-        Metadata({ data: "json, name=language" }),
+        SpeakeasyMetadata({ data: "json, name=language" }),
         __metadata("design:type", String)
     ], CaseDetails.prototype, "language", void 0);
     __decorate([
-        Metadata({ data: "json, name=recentCommunications" }),
+        SpeakeasyMetadata({ data: "json, name=recentCommunications" }),
         __metadata("design:type", RecentCaseCommunications)
     ], CaseDetails.prototype, "recentCommunications", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceCode" }),
+        SpeakeasyMetadata({ data: "json, name=serviceCode" }),
         __metadata("design:type", String)
     ], CaseDetails.prototype, "serviceCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=severityCode" }),
+        SpeakeasyMetadata({ data: "json, name=severityCode" }),
         __metadata("design:type", String)
     ], CaseDetails.prototype, "severityCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], CaseDetails.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=subject" }),
+        SpeakeasyMetadata({ data: "json, name=subject" }),
         __metadata("design:type", String)
     ], CaseDetails.prototype, "subject", void 0);
     __decorate([
-        Metadata({ data: "json, name=submittedBy" }),
+        SpeakeasyMetadata({ data: "json, name=submittedBy" }),
         __metadata("design:type", String)
     ], CaseDetails.prototype, "submittedBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeCreated" }),
+        SpeakeasyMetadata({ data: "json, name=timeCreated" }),
         __metadata("design:type", String)
     ], CaseDetails.prototype, "timeCreated", void 0);
     return CaseDetails;

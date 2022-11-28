@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RestoreInstanceRequest
 /**
  * RestoreInstanceRequest restores an existing instance's file share from a backup.
@@ -33,11 +33,11 @@ var RestoreInstanceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fileShare" }),
+        SpeakeasyMetadata({ data: "json, name=fileShare" }),
         __metadata("design:type", String)
     ], RestoreInstanceRequest.prototype, "fileShare", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceBackup" }),
+        SpeakeasyMetadata({ data: "json, name=sourceBackup" }),
         __metadata("design:type", String)
     ], RestoreInstanceRequest.prototype, "sourceBackup", void 0);
     return RestoreInstanceRequest;

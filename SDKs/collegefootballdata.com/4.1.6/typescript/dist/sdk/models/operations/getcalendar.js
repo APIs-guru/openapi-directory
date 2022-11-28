@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetCalendarQueryParams = /** @class */ (function (_super) {
     __extends(GetCalendarQueryParams, _super);
@@ -30,7 +30,7 @@ var GetCalendarQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=year" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" }),
         __metadata("design:type", Number)
     ], GetCalendarQueryParams.prototype, "year", void 0);
     return GetCalendarQueryParams;
@@ -42,7 +42,7 @@ var GetCalendarRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCalendarQueryParams)
     ], GetCalendarRequest.prototype, "queryParams", void 0);
     return GetCalendarRequest;
@@ -54,15 +54,15 @@ var GetCalendarResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetCalendarResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetCalendarResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.Week }),
+        SpeakeasyMetadata({ elemType: shared.Week }),
         __metadata("design:type", Array)
     ], GetCalendarResponse.prototype, "weeks", void 0);
     return GetCalendarResponse;

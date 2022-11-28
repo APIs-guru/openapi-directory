@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://ssm.{region}.amazonaws.com",
 	"https://ssm.{region}.amazonaws.com",
 	"http://ssm.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/ssm/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AddTagsToResource - <p>Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed instances, maintenance windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed instances that helps you track each instance's owner and stack level. For example:</p> <ul> <li> <p> <code>Key=Owner,Value=DbAdmin</code> </p> </li> <li> <p> <code>Key=Owner,Value=SysAdmin</code> </p> </li> <li> <p> <code>Key=Owner,Value=Dev</code> </p> </li> <li> <p> <code>Key=Stack,Value=Production</code> </p> </li> <li> <p> <code>Key=Stack,Value=Pre-Production</code> </p> </li> <li> <p> <code>Key=Stack,Value=Test</code> </p> </li> </ul> <p>Each resource can have a maximum of 50 tags.</p> <p>We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to and are interpreted strictly as a string of characters. </p> <p>For more information about using tags with Amazon Elastic Compute Cloud (Amazon EC2) instances, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tagging your Amazon EC2 resources</a> in the <i>Amazon EC2 User Guide</i>.</p>
 func (s *SDK) AddTagsToResource(ctx context.Context, request operations.AddTagsToResourceRequest) (*operations.AddTagsToResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.AddTagsToResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) AddTagsToResource(ctx context.Context, request operations.AddTagsT
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -161,8 +188,9 @@ func (s *SDK) AddTagsToResource(ctx context.Context, request operations.AddTagsT
 	return res, nil
 }
 
+// AssociateOpsItemRelatedItem - Associates a related resource to a Systems Manager OpsCenter OpsItem. For example, you can associate an Incident Manager incident or analysis with an OpsItem. Incident Manager is a capability of Amazon Web Services Systems Manager.
 func (s *SDK) AssociateOpsItemRelatedItem(ctx context.Context, request operations.AssociateOpsItemRelatedItemRequest) (*operations.AssociateOpsItemRelatedItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.AssociateOpsItemRelatedItem"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -182,7 +210,7 @@ func (s *SDK) AssociateOpsItemRelatedItem(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -262,8 +290,9 @@ func (s *SDK) AssociateOpsItemRelatedItem(ctx context.Context, request operation
 	return res, nil
 }
 
+// CancelCommand - Attempts to cancel the command specified by the Command ID. There is no guarantee that the command will be terminated and the underlying process stopped.
 func (s *SDK) CancelCommand(ctx context.Context, request operations.CancelCommandRequest) (*operations.CancelCommandResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.CancelCommand"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -283,7 +312,7 @@ func (s *SDK) CancelCommand(ctx context.Context, request operations.CancelComman
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -353,8 +382,9 @@ func (s *SDK) CancelCommand(ctx context.Context, request operations.CancelComman
 	return res, nil
 }
 
+// CancelMaintenanceWindowExecution - Stops a maintenance window execution that is already in progress and cancels any tasks in the window that haven't already starting running. Tasks already in progress will continue to completion.
 func (s *SDK) CancelMaintenanceWindowExecution(ctx context.Context, request operations.CancelMaintenanceWindowExecutionRequest) (*operations.CancelMaintenanceWindowExecutionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.CancelMaintenanceWindowExecution"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -374,7 +404,7 @@ func (s *SDK) CancelMaintenanceWindowExecution(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -424,8 +454,9 @@ func (s *SDK) CancelMaintenanceWindowExecution(ctx context.Context, request oper
 	return res, nil
 }
 
+// CreateActivation - <p>Generates an activation code and activation ID you can use to register your on-premises server or virtual machine (VM) with Amazon Web Services Systems Manager. Registering these machines with Systems Manager makes it possible to manage them using Systems Manager capabilities. You use the activation code and ID when installing SSM Agent on machines in your hybrid environment. For more information about requirements for managing on-premises instances and VMs using Systems Manager, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html">Setting up Amazon Web Services Systems Manager for hybrid environments</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p> <note> <p>On-premises servers or VMs that are registered with Systems Manager and Amazon Elastic Compute Cloud (Amazon EC2) instances that you manage with Systems Manager are all called <i>managed instances</i>.</p> </note>
 func (s *SDK) CreateActivation(ctx context.Context, request operations.CreateActivationRequest) (*operations.CreateActivationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.CreateActivation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -445,7 +476,7 @@ func (s *SDK) CreateActivation(ctx context.Context, request operations.CreateAct
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -485,8 +516,9 @@ func (s *SDK) CreateActivation(ctx context.Context, request operations.CreateAct
 	return res, nil
 }
 
+// CreateAssociation - A State Manager association defines the state that you want to maintain on your instances. For example, an association can specify that anti-virus software must be installed and running on your instances, or that certain ports must be closed. For static targets, the association specifies a schedule for when the configuration is reapplied. For dynamic targets, such as an Amazon Web Services resource group or an Amazon Web Services autoscaling group, State Manager, a capability of Amazon Web Services Systems Manager applies the configuration when new instances are added to the group. The association also specifies actions to take when applying the configuration. For example, an association for anti-virus software might run once a day. If the software isn't installed, then State Manager installs it. If the software is installed, but the service isn't running, then the association might instruct State Manager to start the service.
 func (s *SDK) CreateAssociation(ctx context.Context, request operations.CreateAssociationRequest) (*operations.CreateAssociationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.CreateAssociation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -506,7 +538,7 @@ func (s *SDK) CreateAssociation(ctx context.Context, request operations.CreateAs
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -646,8 +678,9 @@ func (s *SDK) CreateAssociation(ctx context.Context, request operations.CreateAs
 	return res, nil
 }
 
+// CreateAssociationBatch - <p>Associates the specified Amazon Web Services Systems Manager document (SSM document) with the specified instances or targets.</p> <p>When you associate a document with one or more instances using instance IDs or tags, Amazon Web Services Systems Manager Agent (SSM Agent) running on the instance processes the document and configures the instance as specified.</p> <p>If you associate a document with an instance that already has an associated document, the system returns the AssociationAlreadyExists exception.</p>
 func (s *SDK) CreateAssociationBatch(ctx context.Context, request operations.CreateAssociationBatchRequest) (*operations.CreateAssociationBatchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.CreateAssociationBatch"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -667,7 +700,7 @@ func (s *SDK) CreateAssociationBatch(ctx context.Context, request operations.Cre
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -807,8 +840,9 @@ func (s *SDK) CreateAssociationBatch(ctx context.Context, request operations.Cre
 	return res, nil
 }
 
+// CreateDocument - Creates a Amazon Web Services Systems Manager (SSM document). An SSM document defines the actions that Systems Manager performs on your managed instances. For more information about SSM documents, including information about supported schemas, features, and syntax, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-ssm-docs.html">Amazon Web Services Systems Manager Documents</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.
 func (s *SDK) CreateDocument(ctx context.Context, request operations.CreateDocumentRequest) (*operations.CreateDocumentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.CreateDocument"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -828,7 +862,7 @@ func (s *SDK) CreateDocument(ctx context.Context, request operations.CreateDocum
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -918,8 +952,9 @@ func (s *SDK) CreateDocument(ctx context.Context, request operations.CreateDocum
 	return res, nil
 }
 
+// CreateMaintenanceWindow - <p>Creates a new maintenance window.</p> <note> <p>The value you specify for <code>Duration</code> determines the specific end time for the maintenance window based on the time it begins. No maintenance window tasks are permitted to start after the resulting endtime minus the number of hours you specify for <code>Cutoff</code>. For example, if the maintenance window starts at 3 PM, the duration is three hours, and the value you specify for <code>Cutoff</code> is one hour, no maintenance window tasks can start after 5 PM.</p> </note>
 func (s *SDK) CreateMaintenanceWindow(ctx context.Context, request operations.CreateMaintenanceWindowRequest) (*operations.CreateMaintenanceWindowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.CreateMaintenanceWindow"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -939,7 +974,7 @@ func (s *SDK) CreateMaintenanceWindow(ctx context.Context, request operations.Cr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -999,8 +1034,9 @@ func (s *SDK) CreateMaintenanceWindow(ctx context.Context, request operations.Cr
 	return res, nil
 }
 
+// CreateOpsItem - <p>Creates a new OpsItem. You must have permission in Identity and Access Management (IAM) to create a new OpsItem. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html">Getting started with OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their Amazon Web Services resources. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html">Amazon Web Services Systems Manager OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p>
 func (s *SDK) CreateOpsItem(ctx context.Context, request operations.CreateOpsItemRequest) (*operations.CreateOpsItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.CreateOpsItem"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1020,7 +1056,7 @@ func (s *SDK) CreateOpsItem(ctx context.Context, request operations.CreateOpsIte
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1090,8 +1126,9 @@ func (s *SDK) CreateOpsItem(ctx context.Context, request operations.CreateOpsIte
 	return res, nil
 }
 
+// CreateOpsMetadata - If you create a new application in Application Manager, Amazon Web Services Systems Manager calls this API operation to specify information about the new application, including the application type.
 func (s *SDK) CreateOpsMetadata(ctx context.Context, request operations.CreateOpsMetadataRequest) (*operations.CreateOpsMetadataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.CreateOpsMetadata"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1111,7 +1148,7 @@ func (s *SDK) CreateOpsMetadata(ctx context.Context, request operations.CreateOp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1191,8 +1228,9 @@ func (s *SDK) CreateOpsMetadata(ctx context.Context, request operations.CreateOp
 	return res, nil
 }
 
+// CreatePatchBaseline - <p>Creates a patch baseline.</p> <note> <p>For information about valid key-value pairs in <code>PatchFilters</code> for each supported operating system type, see <a>PatchFilter</a>.</p> </note>
 func (s *SDK) CreatePatchBaseline(ctx context.Context, request operations.CreatePatchBaselineRequest) (*operations.CreatePatchBaselineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.CreatePatchBaseline"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1212,7 +1250,7 @@ func (s *SDK) CreatePatchBaseline(ctx context.Context, request operations.Create
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1272,8 +1310,9 @@ func (s *SDK) CreatePatchBaseline(ctx context.Context, request operations.Create
 	return res, nil
 }
 
+// CreateResourceDataSync - <p>A resource data sync helps you view data from multiple sources in a single location. Amazon Web Services Systems Manager offers two types of resource data sync: <code>SyncToDestination</code> and <code>SyncFromSource</code>.</p> <p>You can configure Systems Manager Inventory to use the <code>SyncToDestination</code> type to synchronize Inventory data from multiple Amazon Web Services Regions to a single Amazon Simple Storage Service (Amazon S3) bucket. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync.html">Configuring resource data sync for Inventory</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p> <p>You can configure Systems Manager Explorer to use the <code>SyncFromSource</code> type to synchronize operational work items (OpsItems) and operational data (OpsData) from multiple Amazon Web Services Regions to a single Amazon S3 bucket. This type can synchronize OpsItems and OpsData from multiple Amazon Web Services accounts and Amazon Web Services Regions or <code>EntireOrganization</code> by using Organizations. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html">Setting up Systems Manager Explorer to display data from multiple accounts and Regions</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p> <p>A resource data sync is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data. To check the status of a sync, use the <a>ListResourceDataSync</a>.</p> <note> <p>By default, data isn't encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. </p> </note>
 func (s *SDK) CreateResourceDataSync(ctx context.Context, request operations.CreateResourceDataSyncRequest) (*operations.CreateResourceDataSyncResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.CreateResourceDataSync"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1293,7 +1332,7 @@ func (s *SDK) CreateResourceDataSync(ctx context.Context, request operations.Cre
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1363,8 +1402,9 @@ func (s *SDK) CreateResourceDataSync(ctx context.Context, request operations.Cre
 	return res, nil
 }
 
+// DeleteActivation - Deletes an activation. You aren't required to delete an activation. If you delete an activation, you can no longer use it to register additional managed instances. Deleting an activation doesn't de-register managed instances. You must manually de-register managed instances.
 func (s *SDK) DeleteActivation(ctx context.Context, request operations.DeleteActivationRequest) (*operations.DeleteActivationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DeleteActivation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1384,7 +1424,7 @@ func (s *SDK) DeleteActivation(ctx context.Context, request operations.DeleteAct
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1454,8 +1494,9 @@ func (s *SDK) DeleteActivation(ctx context.Context, request operations.DeleteAct
 	return res, nil
 }
 
+// DeleteAssociation - <p>Disassociates the specified Amazon Web Services Systems Manager document (SSM document) from the specified instance. If you created the association by using the <code>Targets</code> parameter, then you must delete the association by using the association ID.</p> <p>When you disassociate a document from an instance, it doesn't change the configuration of the instance. To change the configuration state of an instance after you disassociate a document, you must create a new document with the desired configuration and associate it with the instance.</p>
 func (s *SDK) DeleteAssociation(ctx context.Context, request operations.DeleteAssociationRequest) (*operations.DeleteAssociationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DeleteAssociation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1475,7 +1516,7 @@ func (s *SDK) DeleteAssociation(ctx context.Context, request operations.DeleteAs
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1555,8 +1596,9 @@ func (s *SDK) DeleteAssociation(ctx context.Context, request operations.DeleteAs
 	return res, nil
 }
 
+// DeleteDocument - <p>Deletes the Amazon Web Services Systems Manager document (SSM document) and all instance associations to the document.</p> <p>Before you delete the document, we recommend that you use <a>DeleteAssociation</a> to disassociate all instances that are associated with the document.</p>
 func (s *SDK) DeleteDocument(ctx context.Context, request operations.DeleteDocumentRequest) (*operations.DeleteDocumentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DeleteDocument"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1576,7 +1618,7 @@ func (s *SDK) DeleteDocument(ctx context.Context, request operations.DeleteDocum
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1646,8 +1688,9 @@ func (s *SDK) DeleteDocument(ctx context.Context, request operations.DeleteDocum
 	return res, nil
 }
 
+// DeleteInventory - Delete a custom inventory type or the data associated with a custom Inventory type. Deleting a custom inventory type is also referred to as deleting a custom inventory schema.
 func (s *SDK) DeleteInventory(ctx context.Context, request operations.DeleteInventoryRequest) (*operations.DeleteInventoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DeleteInventory"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1667,7 +1710,7 @@ func (s *SDK) DeleteInventory(ctx context.Context, request operations.DeleteInve
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1747,8 +1790,9 @@ func (s *SDK) DeleteInventory(ctx context.Context, request operations.DeleteInve
 	return res, nil
 }
 
+// DeleteMaintenanceWindow - Deletes a maintenance window.
 func (s *SDK) DeleteMaintenanceWindow(ctx context.Context, request operations.DeleteMaintenanceWindowRequest) (*operations.DeleteMaintenanceWindowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DeleteMaintenanceWindow"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1768,7 +1812,7 @@ func (s *SDK) DeleteMaintenanceWindow(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1808,8 +1852,9 @@ func (s *SDK) DeleteMaintenanceWindow(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DeleteOpsMetadata - Delete OpsMetadata related to an application.
 func (s *SDK) DeleteOpsMetadata(ctx context.Context, request operations.DeleteOpsMetadataRequest) (*operations.DeleteOpsMetadataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DeleteOpsMetadata"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1829,7 +1874,7 @@ func (s *SDK) DeleteOpsMetadata(ctx context.Context, request operations.DeleteOp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1889,8 +1934,9 @@ func (s *SDK) DeleteOpsMetadata(ctx context.Context, request operations.DeleteOp
 	return res, nil
 }
 
+// DeleteParameter - Delete a parameter from the system. After deleting a parameter, wait for at least 30 seconds to create a parameter with the same name.
 func (s *SDK) DeleteParameter(ctx context.Context, request operations.DeleteParameterRequest) (*operations.DeleteParameterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DeleteParameter"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1910,7 +1956,7 @@ func (s *SDK) DeleteParameter(ctx context.Context, request operations.DeletePara
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1960,8 +2006,9 @@ func (s *SDK) DeleteParameter(ctx context.Context, request operations.DeletePara
 	return res, nil
 }
 
+// DeleteParameters - Delete a list of parameters. After deleting a parameter, wait for at least 30 seconds to create a parameter with the same name.
 func (s *SDK) DeleteParameters(ctx context.Context, request operations.DeleteParametersRequest) (*operations.DeleteParametersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DeleteParameters"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1981,7 +2028,7 @@ func (s *SDK) DeleteParameters(ctx context.Context, request operations.DeletePar
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2021,8 +2068,9 @@ func (s *SDK) DeleteParameters(ctx context.Context, request operations.DeletePar
 	return res, nil
 }
 
+// DeletePatchBaseline - Deletes a patch baseline.
 func (s *SDK) DeletePatchBaseline(ctx context.Context, request operations.DeletePatchBaselineRequest) (*operations.DeletePatchBaselineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DeletePatchBaseline"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2042,7 +2090,7 @@ func (s *SDK) DeletePatchBaseline(ctx context.Context, request operations.Delete
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2092,8 +2140,9 @@ func (s *SDK) DeletePatchBaseline(ctx context.Context, request operations.Delete
 	return res, nil
 }
 
+// DeleteResourceDataSync - Deletes a resource data sync configuration. After the configuration is deleted, changes to data on managed instances are no longer synced to or from the target. Deleting a sync configuration doesn't delete data.
 func (s *SDK) DeleteResourceDataSync(ctx context.Context, request operations.DeleteResourceDataSyncRequest) (*operations.DeleteResourceDataSyncResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DeleteResourceDataSync"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2113,7 +2162,7 @@ func (s *SDK) DeleteResourceDataSync(ctx context.Context, request operations.Del
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2173,8 +2222,9 @@ func (s *SDK) DeleteResourceDataSync(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeregisterManagedInstance - Removes the server or virtual machine from the list of registered servers. You can reregister the instance again at any time. If you don't plan to use Run Command on the server, we suggest uninstalling SSM Agent first.
 func (s *SDK) DeregisterManagedInstance(ctx context.Context, request operations.DeregisterManagedInstanceRequest) (*operations.DeregisterManagedInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DeregisterManagedInstance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2194,7 +2244,7 @@ func (s *SDK) DeregisterManagedInstance(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2244,8 +2294,9 @@ func (s *SDK) DeregisterManagedInstance(ctx context.Context, request operations.
 	return res, nil
 }
 
+// DeregisterPatchBaselineForPatchGroup - Removes a patch group from a patch baseline.
 func (s *SDK) DeregisterPatchBaselineForPatchGroup(ctx context.Context, request operations.DeregisterPatchBaselineForPatchGroupRequest) (*operations.DeregisterPatchBaselineForPatchGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DeregisterPatchBaselineForPatchGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2265,7 +2316,7 @@ func (s *SDK) DeregisterPatchBaselineForPatchGroup(ctx context.Context, request 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2315,8 +2366,9 @@ func (s *SDK) DeregisterPatchBaselineForPatchGroup(ctx context.Context, request 
 	return res, nil
 }
 
+// DeregisterTargetFromMaintenanceWindow - Removes a target from a maintenance window.
 func (s *SDK) DeregisterTargetFromMaintenanceWindow(ctx context.Context, request operations.DeregisterTargetFromMaintenanceWindowRequest) (*operations.DeregisterTargetFromMaintenanceWindowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DeregisterTargetFromMaintenanceWindow"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2336,7 +2388,7 @@ func (s *SDK) DeregisterTargetFromMaintenanceWindow(ctx context.Context, request
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2396,8 +2448,9 @@ func (s *SDK) DeregisterTargetFromMaintenanceWindow(ctx context.Context, request
 	return res, nil
 }
 
+// DeregisterTaskFromMaintenanceWindow - Removes a task from a maintenance window.
 func (s *SDK) DeregisterTaskFromMaintenanceWindow(ctx context.Context, request operations.DeregisterTaskFromMaintenanceWindowRequest) (*operations.DeregisterTaskFromMaintenanceWindowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DeregisterTaskFromMaintenanceWindow"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2417,7 +2470,7 @@ func (s *SDK) DeregisterTaskFromMaintenanceWindow(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2467,8 +2520,9 @@ func (s *SDK) DeregisterTaskFromMaintenanceWindow(ctx context.Context, request o
 	return res, nil
 }
 
+// DescribeActivations - Describes details about the activation, such as the date and time the activation was created, its expiration date, the Identity and Access Management (IAM) role assigned to the instances in the activation, and the number of instances registered by using this activation.
 func (s *SDK) DescribeActivations(ctx context.Context, request operations.DescribeActivationsRequest) (*operations.DescribeActivationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeActivations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2490,7 +2544,7 @@ func (s *SDK) DescribeActivations(ctx context.Context, request operations.Descri
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2550,8 +2604,9 @@ func (s *SDK) DescribeActivations(ctx context.Context, request operations.Descri
 	return res, nil
 }
 
+// DescribeAssociation - Describes the association for the specified target or instance. If you created the association by using the <code>Targets</code> parameter, then you must retrieve the association by using the association ID.
 func (s *SDK) DescribeAssociation(ctx context.Context, request operations.DescribeAssociationRequest) (*operations.DescribeAssociationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeAssociation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2571,7 +2626,7 @@ func (s *SDK) DescribeAssociation(ctx context.Context, request operations.Descri
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2651,8 +2706,9 @@ func (s *SDK) DescribeAssociation(ctx context.Context, request operations.Descri
 	return res, nil
 }
 
+// DescribeAssociationExecutionTargets - Views information about a specific execution of a specific association.
 func (s *SDK) DescribeAssociationExecutionTargets(ctx context.Context, request operations.DescribeAssociationExecutionTargetsRequest) (*operations.DescribeAssociationExecutionTargetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeAssociationExecutionTargets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2674,7 +2730,7 @@ func (s *SDK) DescribeAssociationExecutionTargets(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2744,8 +2800,9 @@ func (s *SDK) DescribeAssociationExecutionTargets(ctx context.Context, request o
 	return res, nil
 }
 
+// DescribeAssociationExecutions - Views all executions for a specific association ID.
 func (s *SDK) DescribeAssociationExecutions(ctx context.Context, request operations.DescribeAssociationExecutionsRequest) (*operations.DescribeAssociationExecutionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeAssociationExecutions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2767,7 +2824,7 @@ func (s *SDK) DescribeAssociationExecutions(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2827,8 +2884,9 @@ func (s *SDK) DescribeAssociationExecutions(ctx context.Context, request operati
 	return res, nil
 }
 
+// DescribeAutomationExecutions - Provides details about all active and terminated Automation executions.
 func (s *SDK) DescribeAutomationExecutions(ctx context.Context, request operations.DescribeAutomationExecutionsRequest) (*operations.DescribeAutomationExecutionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeAutomationExecutions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2850,7 +2908,7 @@ func (s *SDK) DescribeAutomationExecutions(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2920,8 +2978,9 @@ func (s *SDK) DescribeAutomationExecutions(ctx context.Context, request operatio
 	return res, nil
 }
 
+// DescribeAutomationStepExecutions - Information about all active and terminated step executions in an Automation workflow.
 func (s *SDK) DescribeAutomationStepExecutions(ctx context.Context, request operations.DescribeAutomationStepExecutionsRequest) (*operations.DescribeAutomationStepExecutionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeAutomationStepExecutions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2943,7 +3002,7 @@ func (s *SDK) DescribeAutomationStepExecutions(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3023,8 +3082,9 @@ func (s *SDK) DescribeAutomationStepExecutions(ctx context.Context, request oper
 	return res, nil
 }
 
+// DescribeAvailablePatches - Lists all patches eligible to be included in a patch baseline.
 func (s *SDK) DescribeAvailablePatches(ctx context.Context, request operations.DescribeAvailablePatchesRequest) (*operations.DescribeAvailablePatchesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeAvailablePatches"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3046,7 +3106,7 @@ func (s *SDK) DescribeAvailablePatches(ctx context.Context, request operations.D
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3086,8 +3146,9 @@ func (s *SDK) DescribeAvailablePatches(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DescribeDocument - Describes the specified Amazon Web Services Systems Manager document (SSM document).
 func (s *SDK) DescribeDocument(ctx context.Context, request operations.DescribeDocumentRequest) (*operations.DescribeDocumentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeDocument"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3107,7 +3168,7 @@ func (s *SDK) DescribeDocument(ctx context.Context, request operations.DescribeD
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3167,8 +3228,9 @@ func (s *SDK) DescribeDocument(ctx context.Context, request operations.DescribeD
 	return res, nil
 }
 
+// DescribeDocumentPermission - Describes the permissions for a Amazon Web Services Systems Manager document (SSM document). If you created the document, you are the owner. If a document is shared, it can either be shared privately (by specifying a user's Amazon Web Services account ID) or publicly (<i>All</i>).
 func (s *SDK) DescribeDocumentPermission(ctx context.Context, request operations.DescribeDocumentPermissionRequest) (*operations.DescribeDocumentPermissionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeDocumentPermission"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3188,7 +3250,7 @@ func (s *SDK) DescribeDocumentPermission(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3268,8 +3330,9 @@ func (s *SDK) DescribeDocumentPermission(ctx context.Context, request operations
 	return res, nil
 }
 
+// DescribeEffectiveInstanceAssociations - All associations for the instance(s).
 func (s *SDK) DescribeEffectiveInstanceAssociations(ctx context.Context, request operations.DescribeEffectiveInstanceAssociationsRequest) (*operations.DescribeEffectiveInstanceAssociationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeEffectiveInstanceAssociations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3291,7 +3354,7 @@ func (s *SDK) DescribeEffectiveInstanceAssociations(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3351,8 +3414,9 @@ func (s *SDK) DescribeEffectiveInstanceAssociations(ctx context.Context, request
 	return res, nil
 }
 
+// DescribeEffectivePatchesForPatchBaseline - Retrieves the current effective patches (the patch and the approval state) for the specified patch baseline. Applies to patch baselines for Windows only.
 func (s *SDK) DescribeEffectivePatchesForPatchBaseline(ctx context.Context, request operations.DescribeEffectivePatchesForPatchBaselineRequest) (*operations.DescribeEffectivePatchesForPatchBaselineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeEffectivePatchesForPatchBaseline"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3374,7 +3438,7 @@ func (s *SDK) DescribeEffectivePatchesForPatchBaseline(ctx context.Context, requ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3444,8 +3508,9 @@ func (s *SDK) DescribeEffectivePatchesForPatchBaseline(ctx context.Context, requ
 	return res, nil
 }
 
+// DescribeInstanceAssociationsStatus - The status of the associations for the instance(s).
 func (s *SDK) DescribeInstanceAssociationsStatus(ctx context.Context, request operations.DescribeInstanceAssociationsStatusRequest) (*operations.DescribeInstanceAssociationsStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeInstanceAssociationsStatus"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3467,7 +3532,7 @@ func (s *SDK) DescribeInstanceAssociationsStatus(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3527,8 +3592,9 @@ func (s *SDK) DescribeInstanceAssociationsStatus(ctx context.Context, request op
 	return res, nil
 }
 
+// DescribeInstanceInformation - <p>Describes one or more of your instances, including information about the operating system platform, the version of SSM Agent installed on the instance, instance status, and so on.</p> <p>If you specify one or more instance IDs, it returns information for those instances. If you don't specify instance IDs, it returns information for all your instances. If you specify an instance ID that isn't valid or an instance that you don't own, you receive an error.</p> <note> <p>The <code>IamRole</code> field for this API operation is the Identity and Access Management (IAM) role assigned to on-premises instances. This call doesn't return the IAM role for EC2 instances.</p> </note>
 func (s *SDK) DescribeInstanceInformation(ctx context.Context, request operations.DescribeInstanceInformationRequest) (*operations.DescribeInstanceInformationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeInstanceInformation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3550,7 +3616,7 @@ func (s *SDK) DescribeInstanceInformation(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3630,8 +3696,9 @@ func (s *SDK) DescribeInstanceInformation(ctx context.Context, request operation
 	return res, nil
 }
 
+// DescribeInstancePatchStates - Retrieves the high-level patch state of one or more instances.
 func (s *SDK) DescribeInstancePatchStates(ctx context.Context, request operations.DescribeInstancePatchStatesRequest) (*operations.DescribeInstancePatchStatesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeInstancePatchStates"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3653,7 +3720,7 @@ func (s *SDK) DescribeInstancePatchStates(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3703,8 +3770,9 @@ func (s *SDK) DescribeInstancePatchStates(ctx context.Context, request operation
 	return res, nil
 }
 
+// DescribeInstancePatchStatesForPatchGroup - Retrieves the high-level patch state for the instances in the specified patch group.
 func (s *SDK) DescribeInstancePatchStatesForPatchGroup(ctx context.Context, request operations.DescribeInstancePatchStatesForPatchGroupRequest) (*operations.DescribeInstancePatchStatesForPatchGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeInstancePatchStatesForPatchGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3726,7 +3794,7 @@ func (s *SDK) DescribeInstancePatchStatesForPatchGroup(ctx context.Context, requ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3786,8 +3854,9 @@ func (s *SDK) DescribeInstancePatchStatesForPatchGroup(ctx context.Context, requ
 	return res, nil
 }
 
+// DescribeInstancePatches - Retrieves information about the patches on the specified instance and their state relative to the patch baseline being used for the instance.
 func (s *SDK) DescribeInstancePatches(ctx context.Context, request operations.DescribeInstancePatchesRequest) (*operations.DescribeInstancePatchesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeInstancePatches"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3809,7 +3878,7 @@ func (s *SDK) DescribeInstancePatches(ctx context.Context, request operations.De
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3879,8 +3948,9 @@ func (s *SDK) DescribeInstancePatches(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DescribeInventoryDeletions - Describes a specific delete inventory operation.
 func (s *SDK) DescribeInventoryDeletions(ctx context.Context, request operations.DescribeInventoryDeletionsRequest) (*operations.DescribeInventoryDeletionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeInventoryDeletions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3902,7 +3972,7 @@ func (s *SDK) DescribeInventoryDeletions(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3962,8 +4032,9 @@ func (s *SDK) DescribeInventoryDeletions(ctx context.Context, request operations
 	return res, nil
 }
 
+// DescribeMaintenanceWindowExecutionTaskInvocations - Retrieves the individual task executions (one per target) for a particular task run as part of a maintenance window execution.
 func (s *SDK) DescribeMaintenanceWindowExecutionTaskInvocations(ctx context.Context, request operations.DescribeMaintenanceWindowExecutionTaskInvocationsRequest) (*operations.DescribeMaintenanceWindowExecutionTaskInvocationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeMaintenanceWindowExecutionTaskInvocations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3985,7 +4056,7 @@ func (s *SDK) DescribeMaintenanceWindowExecutionTaskInvocations(ctx context.Cont
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4035,8 +4106,9 @@ func (s *SDK) DescribeMaintenanceWindowExecutionTaskInvocations(ctx context.Cont
 	return res, nil
 }
 
+// DescribeMaintenanceWindowExecutionTasks - For a given maintenance window execution, lists the tasks that were run.
 func (s *SDK) DescribeMaintenanceWindowExecutionTasks(ctx context.Context, request operations.DescribeMaintenanceWindowExecutionTasksRequest) (*operations.DescribeMaintenanceWindowExecutionTasksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeMaintenanceWindowExecutionTasks"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4058,7 +4130,7 @@ func (s *SDK) DescribeMaintenanceWindowExecutionTasks(ctx context.Context, reque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4108,8 +4180,9 @@ func (s *SDK) DescribeMaintenanceWindowExecutionTasks(ctx context.Context, reque
 	return res, nil
 }
 
+// DescribeMaintenanceWindowExecutions - Lists the executions of a maintenance window. This includes information about when the maintenance window was scheduled to be active, and information about tasks registered and run with the maintenance window.
 func (s *SDK) DescribeMaintenanceWindowExecutions(ctx context.Context, request operations.DescribeMaintenanceWindowExecutionsRequest) (*operations.DescribeMaintenanceWindowExecutionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeMaintenanceWindowExecutions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4131,7 +4204,7 @@ func (s *SDK) DescribeMaintenanceWindowExecutions(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4171,8 +4244,9 @@ func (s *SDK) DescribeMaintenanceWindowExecutions(ctx context.Context, request o
 	return res, nil
 }
 
+// DescribeMaintenanceWindowSchedule - Retrieves information about upcoming executions of a maintenance window.
 func (s *SDK) DescribeMaintenanceWindowSchedule(ctx context.Context, request operations.DescribeMaintenanceWindowScheduleRequest) (*operations.DescribeMaintenanceWindowScheduleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeMaintenanceWindowSchedule"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4194,7 +4268,7 @@ func (s *SDK) DescribeMaintenanceWindowSchedule(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4244,8 +4318,9 @@ func (s *SDK) DescribeMaintenanceWindowSchedule(ctx context.Context, request ope
 	return res, nil
 }
 
+// DescribeMaintenanceWindowTargets - Lists the targets registered with the maintenance window.
 func (s *SDK) DescribeMaintenanceWindowTargets(ctx context.Context, request operations.DescribeMaintenanceWindowTargetsRequest) (*operations.DescribeMaintenanceWindowTargetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeMaintenanceWindowTargets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4267,7 +4342,7 @@ func (s *SDK) DescribeMaintenanceWindowTargets(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4317,8 +4392,9 @@ func (s *SDK) DescribeMaintenanceWindowTargets(ctx context.Context, request oper
 	return res, nil
 }
 
+// DescribeMaintenanceWindowTasks - <p>Lists the tasks in a maintenance window.</p> <note> <p>For maintenance window tasks without a specified target, you can't supply values for <code>--max-errors</code> and <code>--max-concurrency</code>. Instead, the system inserts a placeholder value of <code>1</code>, which may be reported in the response to this command. These values don't affect the running of your task and can be ignored.</p> </note>
 func (s *SDK) DescribeMaintenanceWindowTasks(ctx context.Context, request operations.DescribeMaintenanceWindowTasksRequest) (*operations.DescribeMaintenanceWindowTasksResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeMaintenanceWindowTasks"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4340,7 +4416,7 @@ func (s *SDK) DescribeMaintenanceWindowTasks(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4390,8 +4466,9 @@ func (s *SDK) DescribeMaintenanceWindowTasks(ctx context.Context, request operat
 	return res, nil
 }
 
+// DescribeMaintenanceWindows - Retrieves the maintenance windows in an Amazon Web Services account.
 func (s *SDK) DescribeMaintenanceWindows(ctx context.Context, request operations.DescribeMaintenanceWindowsRequest) (*operations.DescribeMaintenanceWindowsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeMaintenanceWindows"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4413,7 +4490,7 @@ func (s *SDK) DescribeMaintenanceWindows(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4453,8 +4530,9 @@ func (s *SDK) DescribeMaintenanceWindows(ctx context.Context, request operations
 	return res, nil
 }
 
+// DescribeMaintenanceWindowsForTarget - Retrieves information about the maintenance window targets or tasks that an instance is associated with.
 func (s *SDK) DescribeMaintenanceWindowsForTarget(ctx context.Context, request operations.DescribeMaintenanceWindowsForTargetRequest) (*operations.DescribeMaintenanceWindowsForTargetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeMaintenanceWindowsForTarget"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4476,7 +4554,7 @@ func (s *SDK) DescribeMaintenanceWindowsForTarget(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4516,8 +4594,9 @@ func (s *SDK) DescribeMaintenanceWindowsForTarget(ctx context.Context, request o
 	return res, nil
 }
 
+// DescribeOpsItems - <p>Query a set of OpsItems. You must have permission in Identity and Access Management (IAM) to query a list of OpsItems. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html">Getting started with OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their Amazon Web Services resources. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html">OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p>
 func (s *SDK) DescribeOpsItems(ctx context.Context, request operations.DescribeOpsItemsRequest) (*operations.DescribeOpsItemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeOpsItems"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4539,7 +4618,7 @@ func (s *SDK) DescribeOpsItems(ctx context.Context, request operations.DescribeO
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4579,8 +4658,9 @@ func (s *SDK) DescribeOpsItems(ctx context.Context, request operations.DescribeO
 	return res, nil
 }
 
+// DescribeParameters - <p>Get information about a parameter.</p> <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code> in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of <code>MaxResults</code>. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a <code>NextToken</code>. You can specify the <code>NextToken</code> in a subsequent call to get the next set of results.</p>
 func (s *SDK) DescribeParameters(ctx context.Context, request operations.DescribeParametersRequest) (*operations.DescribeParametersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeParameters"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4602,7 +4682,7 @@ func (s *SDK) DescribeParameters(ctx context.Context, request operations.Describ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4682,8 +4762,9 @@ func (s *SDK) DescribeParameters(ctx context.Context, request operations.Describ
 	return res, nil
 }
 
+// DescribePatchBaselines - Lists the patch baselines in your Amazon Web Services account.
 func (s *SDK) DescribePatchBaselines(ctx context.Context, request operations.DescribePatchBaselinesRequest) (*operations.DescribePatchBaselinesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribePatchBaselines"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4705,7 +4786,7 @@ func (s *SDK) DescribePatchBaselines(ctx context.Context, request operations.Des
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4745,8 +4826,9 @@ func (s *SDK) DescribePatchBaselines(ctx context.Context, request operations.Des
 	return res, nil
 }
 
+// DescribePatchGroupState - Returns high-level aggregated patch compliance state information for a patch group.
 func (s *SDK) DescribePatchGroupState(ctx context.Context, request operations.DescribePatchGroupStateRequest) (*operations.DescribePatchGroupStateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribePatchGroupState"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4766,7 +4848,7 @@ func (s *SDK) DescribePatchGroupState(ctx context.Context, request operations.De
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4816,8 +4898,9 @@ func (s *SDK) DescribePatchGroupState(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DescribePatchGroups - Lists all patch groups that have been registered with patch baselines.
 func (s *SDK) DescribePatchGroups(ctx context.Context, request operations.DescribePatchGroupsRequest) (*operations.DescribePatchGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribePatchGroups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4839,7 +4922,7 @@ func (s *SDK) DescribePatchGroups(ctx context.Context, request operations.Descri
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4879,8 +4962,9 @@ func (s *SDK) DescribePatchGroups(ctx context.Context, request operations.Descri
 	return res, nil
 }
 
+// DescribePatchProperties - <p>Lists the properties of available patches organized by product, product family, classification, severity, and other properties of available patches. You can use the reported properties in the filters you specify in requests for operations such as <a>CreatePatchBaseline</a>, <a>UpdatePatchBaseline</a>, <a>DescribeAvailablePatches</a>, and <a>DescribePatchBaselines</a>.</p> <p>The following section lists the properties that can be used in filters for each major operating system type:</p> <dl> <dt>AMAZON_LINUX</dt> <dd> <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> | <code>SEVERITY</code> </p> </dd> <dt>AMAZON_LINUX_2</dt> <dd> <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> | <code>SEVERITY</code> </p> </dd> <dt>CENTOS</dt> <dd> <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> | <code>SEVERITY</code> </p> </dd> <dt>DEBIAN</dt> <dd> <p>Valid properties: <code>PRODUCT</code> | <code>PRIORITY</code> </p> </dd> <dt>MACOS</dt> <dd> <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> </p> </dd> <dt>ORACLE_LINUX</dt> <dd> <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> | <code>SEVERITY</code> </p> </dd> <dt>REDHAT_ENTERPRISE_LINUX</dt> <dd> <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> | <code>SEVERITY</code> </p> </dd> <dt>SUSE</dt> <dd> <p>Valid properties: <code>PRODUCT</code> | <code>CLASSIFICATION</code> | <code>SEVERITY</code> </p> </dd> <dt>UBUNTU</dt> <dd> <p>Valid properties: <code>PRODUCT</code> | <code>PRIORITY</code> </p> </dd> <dt>WINDOWS</dt> <dd> <p>Valid properties: <code>PRODUCT</code> | <code>PRODUCT_FAMILY</code> | <code>CLASSIFICATION</code> | <code>MSRC_SEVERITY</code> </p> </dd> </dl>
 func (s *SDK) DescribePatchProperties(ctx context.Context, request operations.DescribePatchPropertiesRequest) (*operations.DescribePatchPropertiesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribePatchProperties"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4902,7 +4986,7 @@ func (s *SDK) DescribePatchProperties(ctx context.Context, request operations.De
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4942,8 +5026,9 @@ func (s *SDK) DescribePatchProperties(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DescribeSessions - Retrieves a list of all active sessions (both connected and disconnected) or terminated sessions from the past 30 days.
 func (s *SDK) DescribeSessions(ctx context.Context, request operations.DescribeSessionsRequest) (*operations.DescribeSessionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DescribeSessions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4965,7 +5050,7 @@ func (s *SDK) DescribeSessions(ctx context.Context, request operations.DescribeS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5025,8 +5110,9 @@ func (s *SDK) DescribeSessions(ctx context.Context, request operations.DescribeS
 	return res, nil
 }
 
+// DisassociateOpsItemRelatedItem - Deletes the association between an OpsItem and a related resource. For example, this API operation can delete an Incident Manager incident from an OpsItem. Incident Manager is a capability of Amazon Web Services Systems Manager.
 func (s *SDK) DisassociateOpsItemRelatedItem(ctx context.Context, request operations.DisassociateOpsItemRelatedItemRequest) (*operations.DisassociateOpsItemRelatedItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.DisassociateOpsItemRelatedItem"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5046,7 +5132,7 @@ func (s *SDK) DisassociateOpsItemRelatedItem(ctx context.Context, request operat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5116,8 +5202,9 @@ func (s *SDK) DisassociateOpsItemRelatedItem(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetAutomationExecution - Get detailed information about a particular Automation execution.
 func (s *SDK) GetAutomationExecution(ctx context.Context, request operations.GetAutomationExecutionRequest) (*operations.GetAutomationExecutionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetAutomationExecution"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5137,7 +5224,7 @@ func (s *SDK) GetAutomationExecution(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5187,8 +5274,9 @@ func (s *SDK) GetAutomationExecution(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetCalendarState - <p>Gets the state of a Amazon Web Services Systems Manager change calendar at the current time or a specified time. If you specify a time, <code>GetCalendarState</code> returns the state of the calendar at that specific time, and returns the next time that the change calendar state will transition. If you don't specify a time, <code>GetCalendarState</code> uses the current time. Change Calendar entries have two possible states: <code>OPEN</code> or <code>CLOSED</code>.</p> <p>If you specify more than one calendar in a request, the command returns the status of <code>OPEN</code> only if all calendars in the request are open. If one or more calendars in the request are closed, the status returned is <code>CLOSED</code>.</p> <p>For more information about Change Calendar, a capability of Amazon Web Services Systems Manager, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar.html">Amazon Web Services Systems Manager Change Calendar</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
 func (s *SDK) GetCalendarState(ctx context.Context, request operations.GetCalendarStateRequest) (*operations.GetCalendarStateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetCalendarState"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5208,7 +5296,7 @@ func (s *SDK) GetCalendarState(ctx context.Context, request operations.GetCalend
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5278,8 +5366,9 @@ func (s *SDK) GetCalendarState(ctx context.Context, request operations.GetCalend
 	return res, nil
 }
 
+// GetCommandInvocation - <p>Returns detailed information about command execution for an invocation or plugin.</p> <p> <code>GetCommandInvocation</code> only gives the execution status of a plugin in a document. To get the command execution status on a specific instance, use <a>ListCommandInvocations</a>. To get the command execution status across instances, use <a>ListCommands</a>.</p>
 func (s *SDK) GetCommandInvocation(ctx context.Context, request operations.GetCommandInvocationRequest) (*operations.GetCommandInvocationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetCommandInvocation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5299,7 +5388,7 @@ func (s *SDK) GetCommandInvocation(ctx context.Context, request operations.GetCo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5379,8 +5468,9 @@ func (s *SDK) GetCommandInvocation(ctx context.Context, request operations.GetCo
 	return res, nil
 }
 
+// GetConnectionStatus - Retrieves the Session Manager connection status for an instance to determine whether it is running and ready to receive Session Manager connections.
 func (s *SDK) GetConnectionStatus(ctx context.Context, request operations.GetConnectionStatusRequest) (*operations.GetConnectionStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetConnectionStatus"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5400,7 +5490,7 @@ func (s *SDK) GetConnectionStatus(ctx context.Context, request operations.GetCon
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5440,8 +5530,9 @@ func (s *SDK) GetConnectionStatus(ctx context.Context, request operations.GetCon
 	return res, nil
 }
 
+// GetDefaultPatchBaseline - <p>Retrieves the default patch baseline. Amazon Web Services Systems Manager supports creating multiple default patch baselines. For example, you can create a default patch baseline for each operating system.</p> <p>If you don't specify an operating system value, the default patch baseline for Windows is returned.</p>
 func (s *SDK) GetDefaultPatchBaseline(ctx context.Context, request operations.GetDefaultPatchBaselineRequest) (*operations.GetDefaultPatchBaselineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetDefaultPatchBaseline"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5461,7 +5552,7 @@ func (s *SDK) GetDefaultPatchBaseline(ctx context.Context, request operations.Ge
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5501,8 +5592,9 @@ func (s *SDK) GetDefaultPatchBaseline(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetDeployablePatchSnapshotForInstance - <p>Retrieves the current snapshot for the patch baseline the instance uses. This API is primarily used by the <code>AWS-RunPatchBaseline</code> Systems Manager document (SSM document).</p> <note> <p>If you run the command locally, such as with the Command Line Interface (CLI), the system attempts to use your local Amazon Web Services credentials and the operation fails. To avoid this, you can run the command in the Amazon Web Services Systems Manager console. Use Run Command, a capability of Amazon Web Services Systems Manager, with an SSM document that enables you to target an instance with a script or command. For example, run the command using the <code>AWS-RunShellScript</code> document or the <code>AWS-RunPowerShellScript</code> document.</p> </note>
 func (s *SDK) GetDeployablePatchSnapshotForInstance(ctx context.Context, request operations.GetDeployablePatchSnapshotForInstanceRequest) (*operations.GetDeployablePatchSnapshotForInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetDeployablePatchSnapshotForInstance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5522,7 +5614,7 @@ func (s *SDK) GetDeployablePatchSnapshotForInstance(ctx context.Context, request
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5582,8 +5674,9 @@ func (s *SDK) GetDeployablePatchSnapshotForInstance(ctx context.Context, request
 	return res, nil
 }
 
+// GetDocument - Gets the contents of the specified Amazon Web Services Systems Manager document (SSM document).
 func (s *SDK) GetDocument(ctx context.Context, request operations.GetDocumentRequest) (*operations.GetDocumentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetDocument"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5603,7 +5696,7 @@ func (s *SDK) GetDocument(ctx context.Context, request operations.GetDocumentReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5663,8 +5756,9 @@ func (s *SDK) GetDocument(ctx context.Context, request operations.GetDocumentReq
 	return res, nil
 }
 
+// GetInventory - Query inventory information. This includes instance status, such as <code>Stopped</code> or <code>Terminated</code>.
 func (s *SDK) GetInventory(ctx context.Context, request operations.GetInventoryRequest) (*operations.GetInventoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetInventory"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5686,7 +5780,7 @@ func (s *SDK) GetInventory(ctx context.Context, request operations.GetInventoryR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5786,8 +5880,9 @@ func (s *SDK) GetInventory(ctx context.Context, request operations.GetInventoryR
 	return res, nil
 }
 
+// GetInventorySchema - Return a list of inventory type names for the account, or return a list of attribute names for a specific Inventory item type.
 func (s *SDK) GetInventorySchema(ctx context.Context, request operations.GetInventorySchemaRequest) (*operations.GetInventorySchemaResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetInventorySchema"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5809,7 +5904,7 @@ func (s *SDK) GetInventorySchema(ctx context.Context, request operations.GetInve
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5869,8 +5964,9 @@ func (s *SDK) GetInventorySchema(ctx context.Context, request operations.GetInve
 	return res, nil
 }
 
+// GetMaintenanceWindow - Retrieves a maintenance window.
 func (s *SDK) GetMaintenanceWindow(ctx context.Context, request operations.GetMaintenanceWindowRequest) (*operations.GetMaintenanceWindowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetMaintenanceWindow"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5890,7 +5986,7 @@ func (s *SDK) GetMaintenanceWindow(ctx context.Context, request operations.GetMa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5940,8 +6036,9 @@ func (s *SDK) GetMaintenanceWindow(ctx context.Context, request operations.GetMa
 	return res, nil
 }
 
+// GetMaintenanceWindowExecution - Retrieves details about a specific a maintenance window execution.
 func (s *SDK) GetMaintenanceWindowExecution(ctx context.Context, request operations.GetMaintenanceWindowExecutionRequest) (*operations.GetMaintenanceWindowExecutionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetMaintenanceWindowExecution"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5961,7 +6058,7 @@ func (s *SDK) GetMaintenanceWindowExecution(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6011,8 +6108,9 @@ func (s *SDK) GetMaintenanceWindowExecution(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetMaintenanceWindowExecutionTask - Retrieves the details about a specific task run as part of a maintenance window execution.
 func (s *SDK) GetMaintenanceWindowExecutionTask(ctx context.Context, request operations.GetMaintenanceWindowExecutionTaskRequest) (*operations.GetMaintenanceWindowExecutionTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetMaintenanceWindowExecutionTask"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6032,7 +6130,7 @@ func (s *SDK) GetMaintenanceWindowExecutionTask(ctx context.Context, request ope
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6082,8 +6180,9 @@ func (s *SDK) GetMaintenanceWindowExecutionTask(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetMaintenanceWindowExecutionTaskInvocation - Retrieves information about a specific task running on a specific target.
 func (s *SDK) GetMaintenanceWindowExecutionTaskInvocation(ctx context.Context, request operations.GetMaintenanceWindowExecutionTaskInvocationRequest) (*operations.GetMaintenanceWindowExecutionTaskInvocationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetMaintenanceWindowExecutionTaskInvocation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6103,7 +6202,7 @@ func (s *SDK) GetMaintenanceWindowExecutionTaskInvocation(ctx context.Context, r
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6153,8 +6252,9 @@ func (s *SDK) GetMaintenanceWindowExecutionTaskInvocation(ctx context.Context, r
 	return res, nil
 }
 
+// GetMaintenanceWindowTask - <p>Lists the tasks in a maintenance window.</p> <note> <p>For maintenance window tasks without a specified target, you can't supply values for <code>--max-errors</code> and <code>--max-concurrency</code>. Instead, the system inserts a placeholder value of <code>1</code>, which may be reported in the response to this command. These values don't affect the running of your task and can be ignored.</p> </note>
 func (s *SDK) GetMaintenanceWindowTask(ctx context.Context, request operations.GetMaintenanceWindowTaskRequest) (*operations.GetMaintenanceWindowTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetMaintenanceWindowTask"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6174,7 +6274,7 @@ func (s *SDK) GetMaintenanceWindowTask(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6224,8 +6324,9 @@ func (s *SDK) GetMaintenanceWindowTask(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetOpsItem - <p>Get information about an OpsItem by using the ID. You must have permission in Identity and Access Management (IAM) to view information about an OpsItem. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html">Getting started with OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their Amazon Web Services resources. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html">OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p>
 func (s *SDK) GetOpsItem(ctx context.Context, request operations.GetOpsItemRequest) (*operations.GetOpsItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetOpsItem"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6245,7 +6346,7 @@ func (s *SDK) GetOpsItem(ctx context.Context, request operations.GetOpsItemReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6295,8 +6396,9 @@ func (s *SDK) GetOpsItem(ctx context.Context, request operations.GetOpsItemReque
 	return res, nil
 }
 
+// GetOpsMetadata - View operational metadata related to an application in Application Manager.
 func (s *SDK) GetOpsMetadata(ctx context.Context, request operations.GetOpsMetadataRequest) (*operations.GetOpsMetadataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetOpsMetadata"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6316,7 +6418,7 @@ func (s *SDK) GetOpsMetadata(ctx context.Context, request operations.GetOpsMetad
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6376,8 +6478,9 @@ func (s *SDK) GetOpsMetadata(ctx context.Context, request operations.GetOpsMetad
 	return res, nil
 }
 
+// GetOpsSummary - View a summary of operations metadata (OpsData) based on specified filters and aggregators. OpsData can include information about Amazon Web Services Systems Manager OpsCenter operational workitems (OpsItems) as well as information about any Amazon Web Services resource or service configured to report OpsData to Amazon Web Services Systems Manager Explorer.
 func (s *SDK) GetOpsSummary(ctx context.Context, request operations.GetOpsSummaryRequest) (*operations.GetOpsSummaryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetOpsSummary"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6399,7 +6502,7 @@ func (s *SDK) GetOpsSummary(ctx context.Context, request operations.GetOpsSummar
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6489,8 +6592,9 @@ func (s *SDK) GetOpsSummary(ctx context.Context, request operations.GetOpsSummar
 	return res, nil
 }
 
+// GetParameter - <p>Get information about a single parameter by specifying the parameter name.</p> <note> <p>To get information about more than one parameter at a time, use the <a>GetParameters</a> operation.</p> </note>
 func (s *SDK) GetParameter(ctx context.Context, request operations.GetParameterRequest) (*operations.GetParameterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetParameter"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6510,7 +6614,7 @@ func (s *SDK) GetParameter(ctx context.Context, request operations.GetParameterR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6580,8 +6684,9 @@ func (s *SDK) GetParameter(ctx context.Context, request operations.GetParameterR
 	return res, nil
 }
 
+// GetParameterHistory - Retrieves the history of all changes to a parameter.
 func (s *SDK) GetParameterHistory(ctx context.Context, request operations.GetParameterHistoryRequest) (*operations.GetParameterHistoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetParameterHistory"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6603,7 +6708,7 @@ func (s *SDK) GetParameterHistory(ctx context.Context, request operations.GetPar
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6673,8 +6778,9 @@ func (s *SDK) GetParameterHistory(ctx context.Context, request operations.GetPar
 	return res, nil
 }
 
+// GetParameters - <p>Get information about one or more parameters by specifying multiple parameter names.</p> <note> <p>To get information about a single parameter, you can use the <a>GetParameter</a> operation instead.</p> </note>
 func (s *SDK) GetParameters(ctx context.Context, request operations.GetParametersRequest) (*operations.GetParametersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetParameters"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6694,7 +6800,7 @@ func (s *SDK) GetParameters(ctx context.Context, request operations.GetParameter
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6744,8 +6850,9 @@ func (s *SDK) GetParameters(ctx context.Context, request operations.GetParameter
 	return res, nil
 }
 
+// GetParametersByPath - <p>Retrieve information about one or more parameters in a specific hierarchy. </p> <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code> in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of <code>MaxResults</code>. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a <code>NextToken</code>. You can specify the <code>NextToken</code> in a subsequent call to get the next set of results.</p>
 func (s *SDK) GetParametersByPath(ctx context.Context, request operations.GetParametersByPathRequest) (*operations.GetParametersByPathResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetParametersByPath"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6767,7 +6874,7 @@ func (s *SDK) GetParametersByPath(ctx context.Context, request operations.GetPar
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6857,8 +6964,9 @@ func (s *SDK) GetParametersByPath(ctx context.Context, request operations.GetPar
 	return res, nil
 }
 
+// GetPatchBaseline - Retrieves information about a patch baseline.
 func (s *SDK) GetPatchBaseline(ctx context.Context, request operations.GetPatchBaselineRequest) (*operations.GetPatchBaselineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetPatchBaseline"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6878,7 +6986,7 @@ func (s *SDK) GetPatchBaseline(ctx context.Context, request operations.GetPatchB
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6938,8 +7046,9 @@ func (s *SDK) GetPatchBaseline(ctx context.Context, request operations.GetPatchB
 	return res, nil
 }
 
+// GetPatchBaselineForPatchGroup - Retrieves the patch baseline that should be used for the specified patch group.
 func (s *SDK) GetPatchBaselineForPatchGroup(ctx context.Context, request operations.GetPatchBaselineForPatchGroupRequest) (*operations.GetPatchBaselineForPatchGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetPatchBaselineForPatchGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6959,7 +7068,7 @@ func (s *SDK) GetPatchBaselineForPatchGroup(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6999,8 +7108,9 @@ func (s *SDK) GetPatchBaselineForPatchGroup(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetServiceSetting - <p> <code>ServiceSetting</code> is an account-level setting for an Amazon Web Services service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an Amazon Web Services service charges money to the account based on feature or service usage, then the Amazon Web Services service team might create a default setting of <code>false</code>. This means the user can't use this feature unless they change the setting to <code>true</code> and intentionally opt in for a paid feature.</p> <p>Services map a <code>SettingId</code> object to a setting value. Amazon Web Services services teams define the default value for a <code>SettingId</code>. You can't create a new <code>SettingId</code>, but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code> permission for the setting. Use the <a>UpdateServiceSetting</a> API operation to change the default setting. Or use the <a>ResetServiceSetting</a> to change the value back to the original value defined by the Amazon Web Services service team.</p> <p>Query the current service setting for the Amazon Web Services account. </p>
 func (s *SDK) GetServiceSetting(ctx context.Context, request operations.GetServiceSettingRequest) (*operations.GetServiceSettingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.GetServiceSetting"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7020,7 +7130,7 @@ func (s *SDK) GetServiceSetting(ctx context.Context, request operations.GetServi
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7070,8 +7180,9 @@ func (s *SDK) GetServiceSetting(ctx context.Context, request operations.GetServi
 	return res, nil
 }
 
+// LabelParameterVersion - <p>A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Amazon Web Services Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions. </p> <p>Parameter labels have the following requirements and restrictions.</p> <ul> <li> <p>A version of a parameter can have a maximum of 10 labels.</p> </li> <li> <p>You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.</p> </li> <li> <p>You can move a label from one version of a parameter to another.</p> </li> <li> <p>You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.</p> </li> <li> <p>If you no longer want to use a parameter label, then you can either delete it or move it to a different version of a parameter.</p> </li> <li> <p>A label can have a maximum of 100 characters.</p> </li> <li> <p>Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).</p> </li> <li> <p>Labels can't begin with a number, "<code>aws</code>" or "<code>ssm</code>" (not case sensitive). If a label fails to meet these requirements, then the label isn't associated with a parameter and the system displays it in the list of InvalidLabels.</p> </li> </ul>
 func (s *SDK) LabelParameterVersion(ctx context.Context, request operations.LabelParameterVersionRequest) (*operations.LabelParameterVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.LabelParameterVersion"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7091,7 +7202,7 @@ func (s *SDK) LabelParameterVersion(ctx context.Context, request operations.Labe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7171,8 +7282,9 @@ func (s *SDK) LabelParameterVersion(ctx context.Context, request operations.Labe
 	return res, nil
 }
 
+// ListAssociationVersions - Retrieves all versions of an association for a specific association ID.
 func (s *SDK) ListAssociationVersions(ctx context.Context, request operations.ListAssociationVersionsRequest) (*operations.ListAssociationVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.ListAssociationVersions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7194,7 +7306,7 @@ func (s *SDK) ListAssociationVersions(ctx context.Context, request operations.Li
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7254,8 +7366,9 @@ func (s *SDK) ListAssociationVersions(ctx context.Context, request operations.Li
 	return res, nil
 }
 
+// ListAssociations - Returns all State Manager associations in the current Amazon Web Services account and Amazon Web Services Region. You can limit the results to a specific State Manager association document or instance by specifying a filter. State Manager is a capability of Amazon Web Services Systems Manager.
 func (s *SDK) ListAssociations(ctx context.Context, request operations.ListAssociationsRequest) (*operations.ListAssociationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.ListAssociations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7277,7 +7390,7 @@ func (s *SDK) ListAssociations(ctx context.Context, request operations.ListAssoc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7327,8 +7440,9 @@ func (s *SDK) ListAssociations(ctx context.Context, request operations.ListAssoc
 	return res, nil
 }
 
+// ListCommandInvocations - An invocation is copy of a command sent to a specific instance. A command can apply to one or more instances. A command invocation applies to one instance. For example, if a user runs <code>SendCommand</code> against three instances, then a command invocation is created for each requested instance ID. <code>ListCommandInvocations</code> provide status about command execution.
 func (s *SDK) ListCommandInvocations(ctx context.Context, request operations.ListCommandInvocationsRequest) (*operations.ListCommandInvocationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.ListCommandInvocations"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7350,7 +7464,7 @@ func (s *SDK) ListCommandInvocations(ctx context.Context, request operations.Lis
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7430,8 +7544,9 @@ func (s *SDK) ListCommandInvocations(ctx context.Context, request operations.Lis
 	return res, nil
 }
 
+// ListCommands - Lists the commands requested by users of the Amazon Web Services account.
 func (s *SDK) ListCommands(ctx context.Context, request operations.ListCommandsRequest) (*operations.ListCommandsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.ListCommands"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7453,7 +7568,7 @@ func (s *SDK) ListCommands(ctx context.Context, request operations.ListCommandsR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7533,8 +7648,9 @@ func (s *SDK) ListCommands(ctx context.Context, request operations.ListCommandsR
 	return res, nil
 }
 
+// ListComplianceItems - For a specified resource ID, this API operation returns a list of compliance statuses for different resource types. Currently, you can only specify one resource ID per call. List results depend on the criteria specified in the filter.
 func (s *SDK) ListComplianceItems(ctx context.Context, request operations.ListComplianceItemsRequest) (*operations.ListComplianceItemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.ListComplianceItems"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7556,7 +7672,7 @@ func (s *SDK) ListComplianceItems(ctx context.Context, request operations.ListCo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7636,8 +7752,9 @@ func (s *SDK) ListComplianceItems(ctx context.Context, request operations.ListCo
 	return res, nil
 }
 
+// ListComplianceSummaries - Returns a summary count of compliant and non-compliant resources for a compliance type. For example, this call can return State Manager associations, patches, or custom compliance types according to the filter criteria that you specify.
 func (s *SDK) ListComplianceSummaries(ctx context.Context, request operations.ListComplianceSummariesRequest) (*operations.ListComplianceSummariesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.ListComplianceSummaries"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7659,7 +7776,7 @@ func (s *SDK) ListComplianceSummaries(ctx context.Context, request operations.Li
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7719,8 +7836,9 @@ func (s *SDK) ListComplianceSummaries(ctx context.Context, request operations.Li
 	return res, nil
 }
 
+// ListDocumentMetadataHistory - Information about approval reviews for a version of a change template in Change Manager.
 func (s *SDK) ListDocumentMetadataHistory(ctx context.Context, request operations.ListDocumentMetadataHistoryRequest) (*operations.ListDocumentMetadataHistoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.ListDocumentMetadataHistory"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7740,7 +7858,7 @@ func (s *SDK) ListDocumentMetadataHistory(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7810,8 +7928,9 @@ func (s *SDK) ListDocumentMetadataHistory(ctx context.Context, request operation
 	return res, nil
 }
 
+// ListDocumentVersions - List all versions for a document.
 func (s *SDK) ListDocumentVersions(ctx context.Context, request operations.ListDocumentVersionsRequest) (*operations.ListDocumentVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.ListDocumentVersions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7833,7 +7952,7 @@ func (s *SDK) ListDocumentVersions(ctx context.Context, request operations.ListD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7893,8 +8012,9 @@ func (s *SDK) ListDocumentVersions(ctx context.Context, request operations.ListD
 	return res, nil
 }
 
+// ListDocuments - Returns all Systems Manager (SSM) documents in the current Amazon Web Services account and Amazon Web Services Region. You can limit the results of this request by using a filter.
 func (s *SDK) ListDocuments(ctx context.Context, request operations.ListDocumentsRequest) (*operations.ListDocumentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.ListDocuments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7916,7 +8036,7 @@ func (s *SDK) ListDocuments(ctx context.Context, request operations.ListDocument
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7976,8 +8096,9 @@ func (s *SDK) ListDocuments(ctx context.Context, request operations.ListDocument
 	return res, nil
 }
 
+// ListInventoryEntries - A list of inventory items returned by the request.
 func (s *SDK) ListInventoryEntries(ctx context.Context, request operations.ListInventoryEntriesRequest) (*operations.ListInventoryEntriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.ListInventoryEntries"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7997,7 +8118,7 @@ func (s *SDK) ListInventoryEntries(ctx context.Context, request operations.ListI
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8077,8 +8198,9 @@ func (s *SDK) ListInventoryEntries(ctx context.Context, request operations.ListI
 	return res, nil
 }
 
+// ListOpsItemEvents - Returns a list of all OpsItem events in the current Amazon Web Services Region and Amazon Web Services account. You can limit the results to events associated with specific OpsItems by specifying a filter.
 func (s *SDK) ListOpsItemEvents(ctx context.Context, request operations.ListOpsItemEventsRequest) (*operations.ListOpsItemEventsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.ListOpsItemEvents"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8100,7 +8222,7 @@ func (s *SDK) ListOpsItemEvents(ctx context.Context, request operations.ListOpsI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8170,8 +8292,9 @@ func (s *SDK) ListOpsItemEvents(ctx context.Context, request operations.ListOpsI
 	return res, nil
 }
 
+// ListOpsItemRelatedItems - Lists all related-item resources associated with an OpsItem.
 func (s *SDK) ListOpsItemRelatedItems(ctx context.Context, request operations.ListOpsItemRelatedItemsRequest) (*operations.ListOpsItemRelatedItemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.ListOpsItemRelatedItems"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8193,7 +8316,7 @@ func (s *SDK) ListOpsItemRelatedItems(ctx context.Context, request operations.Li
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8243,8 +8366,9 @@ func (s *SDK) ListOpsItemRelatedItems(ctx context.Context, request operations.Li
 	return res, nil
 }
 
+// ListOpsMetadata - Amazon Web Services Systems Manager calls this API operation when displaying all Application Manager OpsMetadata objects or blobs.
 func (s *SDK) ListOpsMetadata(ctx context.Context, request operations.ListOpsMetadataRequest) (*operations.ListOpsMetadataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.ListOpsMetadata"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8266,7 +8390,7 @@ func (s *SDK) ListOpsMetadata(ctx context.Context, request operations.ListOpsMet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8316,8 +8440,9 @@ func (s *SDK) ListOpsMetadata(ctx context.Context, request operations.ListOpsMet
 	return res, nil
 }
 
+// ListResourceComplianceSummaries - Returns a resource-level summary count. The summary includes information about compliant and non-compliant statuses and detailed compliance-item severity counts, according to the filter criteria you specify.
 func (s *SDK) ListResourceComplianceSummaries(ctx context.Context, request operations.ListResourceComplianceSummariesRequest) (*operations.ListResourceComplianceSummariesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.ListResourceComplianceSummaries"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8339,7 +8464,7 @@ func (s *SDK) ListResourceComplianceSummaries(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8399,8 +8524,9 @@ func (s *SDK) ListResourceComplianceSummaries(ctx context.Context, request opera
 	return res, nil
 }
 
+// ListResourceDataSync - <p>Lists your resource data sync configurations. Includes information about the last time a sync attempted to start, the last sync status, and the last time a sync successfully completed.</p> <p>The number of sync configurations might be too large to return using a single call to <code>ListResourceDataSync</code>. You can limit the number of sync configurations returned by using the <code>MaxResults</code> parameter. To determine whether there are more sync configurations to list, check the value of <code>NextToken</code> in the output. If there are more sync configurations to list, you can request them by specifying the <code>NextToken</code> returned in the call to the parameter of a subsequent call. </p>
 func (s *SDK) ListResourceDataSync(ctx context.Context, request operations.ListResourceDataSyncRequest) (*operations.ListResourceDataSyncResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.ListResourceDataSync"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8422,7 +8548,7 @@ func (s *SDK) ListResourceDataSync(ctx context.Context, request operations.ListR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8482,8 +8608,9 @@ func (s *SDK) ListResourceDataSync(ctx context.Context, request operations.ListR
 	return res, nil
 }
 
+// ListTagsForResource - <p>Returns a list of the tags assigned to the specified resource.</p> <p>For information about the ID format for each supported resource type, see <a>AddTagsToResource</a>.</p>
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8503,7 +8630,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8563,8 +8690,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// ModifyDocumentPermission - Shares a Amazon Web Services Systems Manager document (SSM document)publicly or privately. If you share a document privately, you must specify the Amazon Web Services user account IDs for those people who can use the document. If you share a document publicly, you must specify <i>All</i> as the account ID.
 func (s *SDK) ModifyDocumentPermission(ctx context.Context, request operations.ModifyDocumentPermissionRequest) (*operations.ModifyDocumentPermissionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.ModifyDocumentPermission"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8584,7 +8712,7 @@ func (s *SDK) ModifyDocumentPermission(ctx context.Context, request operations.M
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8664,8 +8792,9 @@ func (s *SDK) ModifyDocumentPermission(ctx context.Context, request operations.M
 	return res, nil
 }
 
+// PutComplianceItems - <p>Registers a compliance type and other compliance details on a designated resource. This operation lets you register custom compliance details with a resource. This call overwrites existing compliance information on the resource, so you must provide a full list of compliance items each time that you send the request.</p> <p>ComplianceType can be one of the following:</p> <ul> <li> <p>ExecutionId: The execution ID when the patch, association, or custom compliance item was applied.</p> </li> <li> <p>ExecutionType: Specify patch, association, or Custom:<code>string</code>.</p> </li> <li> <p>ExecutionTime. The time the patch, association, or custom compliance item was applied to the instance.</p> </li> <li> <p>Id: The patch, association, or custom compliance ID.</p> </li> <li> <p>Title: A title.</p> </li> <li> <p>Status: The status of the compliance item. For example, <code>approved</code> for patches, or <code>Failed</code> for associations.</p> </li> <li> <p>Severity: A patch severity. For example, <code>critical</code>.</p> </li> <li> <p>DocumentName: An SSM document name. For example, <code>AWS-RunPatchBaseline</code>.</p> </li> <li> <p>DocumentVersion: An SSM document version number. For example, 4.</p> </li> <li> <p>Classification: A patch classification. For example, <code>security updates</code>.</p> </li> <li> <p>PatchBaselineId: A patch baseline ID.</p> </li> <li> <p>PatchSeverity: A patch severity. For example, <code>Critical</code>.</p> </li> <li> <p>PatchState: A patch state. For example, <code>InstancesWithFailedPatches</code>.</p> </li> <li> <p>PatchGroup: The name of a patch group.</p> </li> <li> <p>InstalledTime: The time the association, patch, or custom compliance item was applied to the resource. Specify the time by using the following format: yyyy-MM-dd'T'HH:mm:ss'Z'</p> </li> </ul>
 func (s *SDK) PutComplianceItems(ctx context.Context, request operations.PutComplianceItemsRequest) (*operations.PutComplianceItemsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.PutComplianceItems"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8685,7 +8814,7 @@ func (s *SDK) PutComplianceItems(ctx context.Context, request operations.PutComp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8785,8 +8914,9 @@ func (s *SDK) PutComplianceItems(ctx context.Context, request operations.PutComp
 	return res, nil
 }
 
+// PutInventory - Bulk update custom inventory items on one more instance. The request adds an inventory item, if it doesn't already exist, or updates an inventory item, if it does exist.
 func (s *SDK) PutInventory(ctx context.Context, request operations.PutInventoryRequest) (*operations.PutInventoryResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.PutInventory"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8806,7 +8936,7 @@ func (s *SDK) PutInventory(ctx context.Context, request operations.PutInventoryR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -8956,8 +9086,9 @@ func (s *SDK) PutInventory(ctx context.Context, request operations.PutInventoryR
 	return res, nil
 }
 
+// PutParameter - Add a parameter to the system.
 func (s *SDK) PutParameter(ctx context.Context, request operations.PutParameterRequest) (*operations.PutParameterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.PutParameter"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -8977,7 +9108,7 @@ func (s *SDK) PutParameter(ctx context.Context, request operations.PutParameterR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9157,8 +9288,9 @@ func (s *SDK) PutParameter(ctx context.Context, request operations.PutParameterR
 	return res, nil
 }
 
+// RegisterDefaultPatchBaseline - <p>Defines the default patch baseline for the relevant operating system.</p> <p>To reset the Amazon Web Services-predefined patch baseline as the default, specify the full patch baseline Amazon Resource Name (ARN) as the baseline ID value. For example, for CentOS, specify <code>arn:aws:ssm:us-east-2:733109147000:patchbaseline/pb-0574b43a65ea646ed</code> instead of <code>pb-0574b43a65ea646ed</code>.</p>
 func (s *SDK) RegisterDefaultPatchBaseline(ctx context.Context, request operations.RegisterDefaultPatchBaselineRequest) (*operations.RegisterDefaultPatchBaselineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.RegisterDefaultPatchBaseline"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9178,7 +9310,7 @@ func (s *SDK) RegisterDefaultPatchBaseline(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9238,8 +9370,9 @@ func (s *SDK) RegisterDefaultPatchBaseline(ctx context.Context, request operatio
 	return res, nil
 }
 
+// RegisterPatchBaselineForPatchGroup - Registers a patch baseline for a patch group.
 func (s *SDK) RegisterPatchBaselineForPatchGroup(ctx context.Context, request operations.RegisterPatchBaselineForPatchGroupRequest) (*operations.RegisterPatchBaselineForPatchGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.RegisterPatchBaselineForPatchGroup"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9259,7 +9392,7 @@ func (s *SDK) RegisterPatchBaselineForPatchGroup(ctx context.Context, request op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9339,8 +9472,9 @@ func (s *SDK) RegisterPatchBaselineForPatchGroup(ctx context.Context, request op
 	return res, nil
 }
 
+// RegisterTargetWithMaintenanceWindow - Registers a target with a maintenance window.
 func (s *SDK) RegisterTargetWithMaintenanceWindow(ctx context.Context, request operations.RegisterTargetWithMaintenanceWindowRequest) (*operations.RegisterTargetWithMaintenanceWindowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.RegisterTargetWithMaintenanceWindow"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9360,7 +9494,7 @@ func (s *SDK) RegisterTargetWithMaintenanceWindow(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9430,8 +9564,9 @@ func (s *SDK) RegisterTargetWithMaintenanceWindow(ctx context.Context, request o
 	return res, nil
 }
 
+// RegisterTaskWithMaintenanceWindow - Adds a new task to a maintenance window.
 func (s *SDK) RegisterTaskWithMaintenanceWindow(ctx context.Context, request operations.RegisterTaskWithMaintenanceWindowRequest) (*operations.RegisterTaskWithMaintenanceWindowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.RegisterTaskWithMaintenanceWindow"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9451,7 +9586,7 @@ func (s *SDK) RegisterTaskWithMaintenanceWindow(ctx context.Context, request ope
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9531,8 +9666,9 @@ func (s *SDK) RegisterTaskWithMaintenanceWindow(ctx context.Context, request ope
 	return res, nil
 }
 
+// RemoveTagsFromResource - Removes tag keys from the specified resource.
 func (s *SDK) RemoveTagsFromResource(ctx context.Context, request operations.RemoveTagsFromResourceRequest) (*operations.RemoveTagsFromResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.RemoveTagsFromResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9552,7 +9688,7 @@ func (s *SDK) RemoveTagsFromResource(ctx context.Context, request operations.Rem
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9622,8 +9758,9 @@ func (s *SDK) RemoveTagsFromResource(ctx context.Context, request operations.Rem
 	return res, nil
 }
 
+// ResetServiceSetting - <p> <code>ServiceSetting</code> is an account-level setting for an Amazon Web Services service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an Amazon Web Services service charges money to the account based on feature or service usage, then the Amazon Web Services service team might create a default setting of "false". This means the user can't use this feature unless they change the setting to "true" and intentionally opt in for a paid feature.</p> <p>Services map a <code>SettingId</code> object to a setting value. Amazon Web Services services teams define the default value for a <code>SettingId</code>. You can't create a new <code>SettingId</code>, but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code> permission for the setting. Use the <a>GetServiceSetting</a> API operation to view the current value. Use the <a>UpdateServiceSetting</a> API operation to change the default setting. </p> <p>Reset the service setting for the account to the default value as provisioned by the Amazon Web Services service team. </p>
 func (s *SDK) ResetServiceSetting(ctx context.Context, request operations.ResetServiceSettingRequest) (*operations.ResetServiceSettingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.ResetServiceSetting"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9643,7 +9780,7 @@ func (s *SDK) ResetServiceSetting(ctx context.Context, request operations.ResetS
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9703,8 +9840,9 @@ func (s *SDK) ResetServiceSetting(ctx context.Context, request operations.ResetS
 	return res, nil
 }
 
+// ResumeSession - <p>Reconnects a session to an instance after it has been disconnected. Connections can be resumed for disconnected sessions, but not terminated sessions.</p> <note> <p>This command is primarily for use by client machines to automatically reconnect during intermittent network issues. It isn't intended for any other use.</p> </note>
 func (s *SDK) ResumeSession(ctx context.Context, request operations.ResumeSessionRequest) (*operations.ResumeSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.ResumeSession"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9724,7 +9862,7 @@ func (s *SDK) ResumeSession(ctx context.Context, request operations.ResumeSessio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9774,8 +9912,9 @@ func (s *SDK) ResumeSession(ctx context.Context, request operations.ResumeSessio
 	return res, nil
 }
 
+// SendAutomationSignal - Sends a signal to an Automation execution to change the current behavior or status of the execution.
 func (s *SDK) SendAutomationSignal(ctx context.Context, request operations.SendAutomationSignalRequest) (*operations.SendAutomationSignalResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.SendAutomationSignal"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9795,7 +9934,7 @@ func (s *SDK) SendAutomationSignal(ctx context.Context, request operations.SendA
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -9865,8 +10004,9 @@ func (s *SDK) SendAutomationSignal(ctx context.Context, request operations.SendA
 	return res, nil
 }
 
+// SendCommand - Runs commands on one or more managed instances.
 func (s *SDK) SendCommand(ctx context.Context, request operations.SendCommandRequest) (*operations.SendCommandResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.SendCommand"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -9886,7 +10026,7 @@ func (s *SDK) SendCommand(ctx context.Context, request operations.SendCommandReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10026,8 +10166,9 @@ func (s *SDK) SendCommand(ctx context.Context, request operations.SendCommandReq
 	return res, nil
 }
 
+// StartAssociationsOnce - Runs an association immediately and only one time. This operation can be helpful when troubleshooting associations.
 func (s *SDK) StartAssociationsOnce(ctx context.Context, request operations.StartAssociationsOnceRequest) (*operations.StartAssociationsOnceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.StartAssociationsOnce"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10047,7 +10188,7 @@ func (s *SDK) StartAssociationsOnce(ctx context.Context, request operations.Star
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10097,8 +10238,9 @@ func (s *SDK) StartAssociationsOnce(ctx context.Context, request operations.Star
 	return res, nil
 }
 
+// StartAutomationExecution - Initiates execution of an Automation runbook.
 func (s *SDK) StartAutomationExecution(ctx context.Context, request operations.StartAutomationExecutionRequest) (*operations.StartAutomationExecutionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.StartAutomationExecution"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10118,7 +10260,7 @@ func (s *SDK) StartAutomationExecution(ctx context.Context, request operations.S
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10218,8 +10360,9 @@ func (s *SDK) StartAutomationExecution(ctx context.Context, request operations.S
 	return res, nil
 }
 
+// StartChangeRequestExecution - Creates a change request for Change Manager. The Automation runbooks specified in the change request run only after all required approvals for the change request have been received.
 func (s *SDK) StartChangeRequestExecution(ctx context.Context, request operations.StartChangeRequestExecutionRequest) (*operations.StartChangeRequestExecutionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.StartChangeRequestExecution"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10239,7 +10382,7 @@ func (s *SDK) StartChangeRequestExecution(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10339,8 +10482,9 @@ func (s *SDK) StartChangeRequestExecution(ctx context.Context, request operation
 	return res, nil
 }
 
+// StartSession - <p>Initiates a connection to a target (for example, an instance) for a Session Manager session. Returns a URL and token that can be used to open a WebSocket connection for sending input and receiving outputs.</p> <note> <p>Amazon Web Services CLI usage: <code>start-session</code> is an interactive command that requires the Session Manager plugin to be installed on the client machine making the call. For information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html">Install the Session Manager plugin for the Amazon Web Services CLI</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p> <p>Amazon Web Services Tools for PowerShell usage: Start-SSMSession isn't currently supported by Amazon Web Services Tools for PowerShell on Windows local machines.</p> </note>
 func (s *SDK) StartSession(ctx context.Context, request operations.StartSessionRequest) (*operations.StartSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.StartSession"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10360,7 +10504,7 @@ func (s *SDK) StartSession(ctx context.Context, request operations.StartSessionR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10420,8 +10564,9 @@ func (s *SDK) StartSession(ctx context.Context, request operations.StartSessionR
 	return res, nil
 }
 
+// StopAutomationExecution - Stop an Automation that is currently running.
 func (s *SDK) StopAutomationExecution(ctx context.Context, request operations.StopAutomationExecutionRequest) (*operations.StopAutomationExecutionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.StopAutomationExecution"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10441,7 +10586,7 @@ func (s *SDK) StopAutomationExecution(ctx context.Context, request operations.St
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10501,8 +10646,9 @@ func (s *SDK) StopAutomationExecution(ctx context.Context, request operations.St
 	return res, nil
 }
 
+// TerminateSession - Permanently ends a session and closes the data connection between the Session Manager client and SSM Agent on the instance. A terminated session isn't be resumed.
 func (s *SDK) TerminateSession(ctx context.Context, request operations.TerminateSessionRequest) (*operations.TerminateSessionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.TerminateSession"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10522,7 +10668,7 @@ func (s *SDK) TerminateSession(ctx context.Context, request operations.Terminate
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10572,8 +10718,9 @@ func (s *SDK) TerminateSession(ctx context.Context, request operations.Terminate
 	return res, nil
 }
 
+// UnlabelParameterVersion - Remove a label or labels from a parameter.
 func (s *SDK) UnlabelParameterVersion(ctx context.Context, request operations.UnlabelParameterVersionRequest) (*operations.UnlabelParameterVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.UnlabelParameterVersion"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10593,7 +10740,7 @@ func (s *SDK) UnlabelParameterVersion(ctx context.Context, request operations.Un
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10663,8 +10810,9 @@ func (s *SDK) UnlabelParameterVersion(ctx context.Context, request operations.Un
 	return res, nil
 }
 
+// UpdateAssociation - <p>Updates an association. You can update the association name and version, the document version, schedule, parameters, and Amazon Simple Storage Service (Amazon S3) output. </p> <p>In order to call this API operation, your Identity and Access Management (IAM) user account, group, or role must be configured with permission to call the <a>DescribeAssociation</a> API operation. If you don't have permission to call <code>DescribeAssociation</code>, then you receive the following error: <code>An error occurred (AccessDeniedException) when calling the UpdateAssociation operation: User: &lt;user_arn&gt; isn't authorized to perform: ssm:DescribeAssociation on resource: &lt;resource_arn&gt;</code> </p> <important> <p>When you update an association, the association immediately runs against the specified targets.</p> </important>
 func (s *SDK) UpdateAssociation(ctx context.Context, request operations.UpdateAssociationRequest) (*operations.UpdateAssociationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.UpdateAssociation"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10684,7 +10832,7 @@ func (s *SDK) UpdateAssociation(ctx context.Context, request operations.UpdateAs
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10834,8 +10982,9 @@ func (s *SDK) UpdateAssociation(ctx context.Context, request operations.UpdateAs
 	return res, nil
 }
 
+// UpdateAssociationStatus - <p>Updates the status of the Amazon Web Services Systems Manager document (SSM document) associated with the specified instance.</p> <p> <code>UpdateAssociationStatus</code> is primarily used by the Amazon Web Services Systems Manager Agent (SSM Agent) to report status updates about your associations and is only used for associations created with the <code>InstanceId</code> legacy parameter.</p>
 func (s *SDK) UpdateAssociationStatus(ctx context.Context, request operations.UpdateAssociationStatusRequest) (*operations.UpdateAssociationStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.UpdateAssociationStatus"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10855,7 +11004,7 @@ func (s *SDK) UpdateAssociationStatus(ctx context.Context, request operations.Up
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -10945,8 +11094,9 @@ func (s *SDK) UpdateAssociationStatus(ctx context.Context, request operations.Up
 	return res, nil
 }
 
+// UpdateDocument - Updates one or more values for an SSM document.
 func (s *SDK) UpdateDocument(ctx context.Context, request operations.UpdateDocumentRequest) (*operations.UpdateDocumentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.UpdateDocument"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -10966,7 +11116,7 @@ func (s *SDK) UpdateDocument(ctx context.Context, request operations.UpdateDocum
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11096,8 +11246,9 @@ func (s *SDK) UpdateDocument(ctx context.Context, request operations.UpdateDocum
 	return res, nil
 }
 
+// UpdateDocumentDefaultVersion - Set the default version of a document.
 func (s *SDK) UpdateDocumentDefaultVersion(ctx context.Context, request operations.UpdateDocumentDefaultVersionRequest) (*operations.UpdateDocumentDefaultVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.UpdateDocumentDefaultVersion"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11117,7 +11268,7 @@ func (s *SDK) UpdateDocumentDefaultVersion(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11187,8 +11338,9 @@ func (s *SDK) UpdateDocumentDefaultVersion(ctx context.Context, request operatio
 	return res, nil
 }
 
+// UpdateDocumentMetadata - Updates information related to approval reviews for a specific version of a change template in Change Manager.
 func (s *SDK) UpdateDocumentMetadata(ctx context.Context, request operations.UpdateDocumentMetadataRequest) (*operations.UpdateDocumentMetadataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.UpdateDocumentMetadata"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11208,7 +11360,7 @@ func (s *SDK) UpdateDocumentMetadata(ctx context.Context, request operations.Upd
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11278,8 +11430,9 @@ func (s *SDK) UpdateDocumentMetadata(ctx context.Context, request operations.Upd
 	return res, nil
 }
 
+// UpdateMaintenanceWindow - <p>Updates an existing maintenance window. Only specified parameters are modified.</p> <note> <p>The value you specify for <code>Duration</code> determines the specific end time for the maintenance window based on the time it begins. No maintenance window tasks are permitted to start after the resulting endtime minus the number of hours you specify for <code>Cutoff</code>. For example, if the maintenance window starts at 3 PM, the duration is three hours, and the value you specify for <code>Cutoff</code> is one hour, no maintenance window tasks can start after 5 PM.</p> </note>
 func (s *SDK) UpdateMaintenanceWindow(ctx context.Context, request operations.UpdateMaintenanceWindowRequest) (*operations.UpdateMaintenanceWindowResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.UpdateMaintenanceWindow"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11299,7 +11452,7 @@ func (s *SDK) UpdateMaintenanceWindow(ctx context.Context, request operations.Up
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11349,8 +11502,9 @@ func (s *SDK) UpdateMaintenanceWindow(ctx context.Context, request operations.Up
 	return res, nil
 }
 
+// UpdateMaintenanceWindowTarget - <p>Modifies the target of an existing maintenance window. You can change the following:</p> <ul> <li> <p>Name</p> </li> <li> <p>Description</p> </li> <li> <p>Owner</p> </li> <li> <p>IDs for an ID target</p> </li> <li> <p>Tags for a Tag target</p> </li> <li> <p>From any supported tag type to another. The three supported tag types are ID target, Tag target, and resource group. For more information, see <a>Target</a>.</p> </li> </ul> <note> <p>If a parameter is null, then the corresponding field isn't modified.</p> </note>
 func (s *SDK) UpdateMaintenanceWindowTarget(ctx context.Context, request operations.UpdateMaintenanceWindowTargetRequest) (*operations.UpdateMaintenanceWindowTargetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.UpdateMaintenanceWindowTarget"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11370,7 +11524,7 @@ func (s *SDK) UpdateMaintenanceWindowTarget(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11420,8 +11574,9 @@ func (s *SDK) UpdateMaintenanceWindowTarget(ctx context.Context, request operati
 	return res, nil
 }
 
+// UpdateMaintenanceWindowTask - <p>Modifies a task assigned to a maintenance window. You can't change the task type, but you can change the following values:</p> <ul> <li> <p> <code>TaskARN</code>. For example, you can change a <code>RUN_COMMAND</code> task from <code>AWS-RunPowerShellScript</code> to <code>AWS-RunShellScript</code>.</p> </li> <li> <p> <code>ServiceRoleArn</code> </p> </li> <li> <p> <code>TaskInvocationParameters</code> </p> </li> <li> <p> <code>Priority</code> </p> </li> <li> <p> <code>MaxConcurrency</code> </p> </li> <li> <p> <code>MaxErrors</code> </p> </li> </ul> <note> <p>One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, Lambda, and Step Functions). For more information about running tasks that don't specify targets, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html">Registering maintenance window tasks without targets</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p> </note> <p>If the value for a parameter in <code>UpdateMaintenanceWindowTask</code> is null, then the corresponding field isn't modified. If you set <code>Replace</code> to true, then all fields required by the <a>RegisterTaskWithMaintenanceWindow</a> operation are required for this request. Optional fields that aren't specified are set to null.</p> <important> <p>When you update a maintenance window task that has options specified in <code>TaskInvocationParameters</code>, you must provide again all the <code>TaskInvocationParameters</code> values that you want to retain. The values you don't specify again are removed. For example, suppose that when you registered a Run Command task, you specified <code>TaskInvocationParameters</code> values for <code>Comment</code>, <code>NotificationConfig</code>, and <code>OutputS3BucketName</code>. If you update the maintenance window task and specify only a different <code>OutputS3BucketName</code> value, the values for <code>Comment</code> and <code>NotificationConfig</code> are removed.</p> </important>
 func (s *SDK) UpdateMaintenanceWindowTask(ctx context.Context, request operations.UpdateMaintenanceWindowTaskRequest) (*operations.UpdateMaintenanceWindowTaskResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.UpdateMaintenanceWindowTask"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11441,7 +11596,7 @@ func (s *SDK) UpdateMaintenanceWindowTask(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11491,8 +11646,9 @@ func (s *SDK) UpdateMaintenanceWindowTask(ctx context.Context, request operation
 	return res, nil
 }
 
+// UpdateManagedInstanceRole - Changes the Identity and Access Management (IAM) role that is assigned to the on-premises instance or virtual machines (VM). IAM roles are first assigned to these hybrid instances during the activation process. For more information, see <a>CreateActivation</a>.
 func (s *SDK) UpdateManagedInstanceRole(ctx context.Context, request operations.UpdateManagedInstanceRoleRequest) (*operations.UpdateManagedInstanceRoleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.UpdateManagedInstanceRole"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11512,7 +11668,7 @@ func (s *SDK) UpdateManagedInstanceRole(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11562,8 +11718,9 @@ func (s *SDK) UpdateManagedInstanceRole(ctx context.Context, request operations.
 	return res, nil
 }
 
+// UpdateOpsItem - <p>Edit or change an OpsItem. You must have permission in Identity and Access Management (IAM) to update an OpsItem. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html">Getting started with OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their Amazon Web Services resources. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html">OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p>
 func (s *SDK) UpdateOpsItem(ctx context.Context, request operations.UpdateOpsItemRequest) (*operations.UpdateOpsItemResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.UpdateOpsItem"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11583,7 +11740,7 @@ func (s *SDK) UpdateOpsItem(ctx context.Context, request operations.UpdateOpsIte
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11663,8 +11820,9 @@ func (s *SDK) UpdateOpsItem(ctx context.Context, request operations.UpdateOpsIte
 	return res, nil
 }
 
+// UpdateOpsMetadata - Amazon Web Services Systems Manager calls this API operation when you edit OpsMetadata in Application Manager.
 func (s *SDK) UpdateOpsMetadata(ctx context.Context, request operations.UpdateOpsMetadataRequest) (*operations.UpdateOpsMetadataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.UpdateOpsMetadata"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11684,7 +11842,7 @@ func (s *SDK) UpdateOpsMetadata(ctx context.Context, request operations.UpdateOp
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11764,8 +11922,9 @@ func (s *SDK) UpdateOpsMetadata(ctx context.Context, request operations.UpdateOp
 	return res, nil
 }
 
+// UpdatePatchBaseline - <p>Modifies an existing patch baseline. Fields not specified in the request are left unchanged.</p> <note> <p>For information about valid key-value pairs in <code>PatchFilters</code> for each supported operating system type, see <a>PatchFilter</a>.</p> </note>
 func (s *SDK) UpdatePatchBaseline(ctx context.Context, request operations.UpdatePatchBaselineRequest) (*operations.UpdatePatchBaselineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.UpdatePatchBaseline"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11785,7 +11944,7 @@ func (s *SDK) UpdatePatchBaseline(ctx context.Context, request operations.Update
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11835,8 +11994,9 @@ func (s *SDK) UpdatePatchBaseline(ctx context.Context, request operations.Update
 	return res, nil
 }
 
+// UpdateResourceDataSync - <p>Update a resource data sync. After you create a resource data sync for a Region, you can't change the account options for that sync. For example, if you create a sync in the us-east-2 (Ohio) Region and you choose the <code>Include only the current account</code> option, you can't edit that sync later and choose the <code>Include all accounts from my Organizations configuration</code> option. Instead, you must delete the first resource data sync, and create a new one.</p> <note> <p>This API operation only supports a resource data sync that was created with a SyncFromSource <code>SyncType</code>.</p> </note>
 func (s *SDK) UpdateResourceDataSync(ctx context.Context, request operations.UpdateResourceDataSyncRequest) (*operations.UpdateResourceDataSyncResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.UpdateResourceDataSync"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11856,7 +12016,7 @@ func (s *SDK) UpdateResourceDataSync(ctx context.Context, request operations.Upd
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -11926,8 +12086,9 @@ func (s *SDK) UpdateResourceDataSync(ctx context.Context, request operations.Upd
 	return res, nil
 }
 
+// UpdateServiceSetting - <p> <code>ServiceSetting</code> is an account-level setting for an Amazon Web Services service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an Amazon Web Services service charges money to the account based on feature or service usage, then the Amazon Web Services service team might create a default setting of "false". This means the user can't use this feature unless they change the setting to "true" and intentionally opt in for a paid feature.</p> <p>Services map a <code>SettingId</code> object to a setting value. Amazon Web Services services teams define the default value for a <code>SettingId</code>. You can't create a new <code>SettingId</code>, but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code> permission for the setting. Use the <a>GetServiceSetting</a> API operation to view the current value. Or, use the <a>ResetServiceSetting</a> to change the value back to the original value defined by the Amazon Web Services service team.</p> <p>Update the service setting for the account. </p>
 func (s *SDK) UpdateServiceSetting(ctx context.Context, request operations.UpdateServiceSettingRequest) (*operations.UpdateServiceSettingResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AmazonSSM.UpdateServiceSetting"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -11947,7 +12108,7 @@ func (s *SDK) UpdateServiceSetting(ctx context.Context, request operations.Updat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

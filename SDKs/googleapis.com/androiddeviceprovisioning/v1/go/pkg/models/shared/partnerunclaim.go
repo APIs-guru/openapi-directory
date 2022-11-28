@@ -8,6 +8,8 @@ const (
 	PartnerUnclaimSectionTypeEnumSectionTypeZeroTouch   PartnerUnclaimSectionTypeEnum = "SECTION_TYPE_ZERO_TOUCH"
 )
 
+// PartnerUnclaim
+// Identifies one unclaim request.
 type PartnerUnclaim struct {
 	DeviceID               *string                        `json:"deviceId,omitempty"`
 	DeviceIdentifier       *DeviceIdentifier              `json:"deviceIdentifier,omitempty"`

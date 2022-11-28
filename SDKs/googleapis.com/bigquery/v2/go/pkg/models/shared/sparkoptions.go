@@ -1,5 +1,7 @@
 package shared
 
+// SparkOptions
+// Options for a user-defined Spark routine.
 type SparkOptions struct {
 	ArchiveUris    []string          `json:"archiveUris,omitempty"`
 	Connection     *string           `json:"connection,omitempty"`

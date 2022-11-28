@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetClipsPathParams = /** @class */ (function (_super) {
     __extends(GetClipsPathParams, _super);
@@ -30,7 +30,7 @@ var GetClipsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=pid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pid" }),
         __metadata("design:type", String)
     ], GetClipsPathParams.prototype, "pid", void 0);
     return GetClipsPathParams;
@@ -42,11 +42,11 @@ var GetClipsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=availability" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability" }),
         __metadata("design:type", String)
     ], GetClipsQueryParams.prototype, "availability", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rights" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rights" }),
         __metadata("design:type", String)
     ], GetClipsQueryParams.prototype, "rights", void 0);
     return GetClipsQueryParams;
@@ -58,11 +58,11 @@ var GetClipsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetClipsPathParams)
     ], GetClipsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetClipsQueryParams)
     ], GetClipsRequest.prototype, "queryParams", void 0);
     return GetClipsRequest;
@@ -74,15 +74,15 @@ var GetClipsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetClipsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetClipsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetClipsResponse.prototype, "ibl", void 0);
     return GetClipsResponse;

@@ -19,11 +19,15 @@ type ListClassificationJobsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ListClassificationJobsRequestBodyFilterCriteria
+// Specifies criteria for filtering the results of a request for information about classification jobs.
 type ListClassificationJobsRequestBodyFilterCriteria struct {
 	Excludes []shared.ListJobsFilterTerm `json:"excludes,omitempty"`
 	Includes []shared.ListJobsFilterTerm `json:"includes,omitempty"`
 }
 
+// ListClassificationJobsRequestBodySortCriteria
+// Specifies criteria for sorting the results of a request for information about classification jobs.
 type ListClassificationJobsRequestBodySortCriteria struct {
 	AttributeName *shared.ListJobsSortAttributeNameEnum `json:"attributeName,omitempty"`
 	OrderBy       *shared.OrderByEnum                   `json:"orderBy,omitempty"`

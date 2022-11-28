@@ -8,6 +8,8 @@ const (
 	GoogleMapsPlayablelocationsV3SampleSpacingOptionsPointTypeEnumSnappedPoint         GoogleMapsPlayablelocationsV3SampleSpacingOptionsPointTypeEnum = "SNAPPED_POINT"
 )
 
+// GoogleMapsPlayablelocationsV3SampleSpacingOptions
+// A set of options that specifies the separation between playable locations.
 type GoogleMapsPlayablelocationsV3SampleSpacingOptions struct {
 	MinSpacingMeters *float64                                                        `json:"minSpacingMeters,omitempty"`
 	PointType        *GoogleMapsPlayablelocationsV3SampleSpacingOptionsPointTypeEnum `json:"pointType,omitempty"`

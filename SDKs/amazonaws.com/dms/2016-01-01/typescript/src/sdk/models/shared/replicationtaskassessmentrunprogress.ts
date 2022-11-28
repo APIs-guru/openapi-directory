@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReplicationTaskAssessmentRunProgress
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The progress values reported by the <code>AssessmentProgress</code> response element.
 **/
 export class ReplicationTaskAssessmentRunProgress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IndividualAssessmentCompletedCount" })
+  @SpeakeasyMetadata({ data: "json, name=IndividualAssessmentCompletedCount" })
   individualAssessmentCompletedCount?: number;
 
-  @Metadata({ data: "json, name=IndividualAssessmentCount" })
+  @SpeakeasyMetadata({ data: "json, name=IndividualAssessmentCount" })
   individualAssessmentCount?: number;
 }

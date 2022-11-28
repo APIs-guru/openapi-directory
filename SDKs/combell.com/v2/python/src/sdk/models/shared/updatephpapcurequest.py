@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class UpdatePhpAPcuRequest:
-    apcu_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apcu_size' }})
-    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
+    apcu_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('apcu_size') }})
+    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabled') }})
     

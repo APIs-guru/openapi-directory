@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountAccess } from "./accountaccess";
 import { ContainerAccess } from "./containeraccess";
+
 
 
 // UserPermission
@@ -9,18 +9,18 @@ import { ContainerAccess } from "./containeraccess";
  * Represents a user's permissions to an account and its container.
 **/
 export class UserPermission extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountAccess" })
+  @SpeakeasyMetadata({ data: "json, name=accountAccess" })
   accountAccess?: AccountAccess;
 
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=containerAccess", elemType: shared.ContainerAccess })
+  @SpeakeasyMetadata({ data: "json, name=containerAccess", elemType: ContainerAccess })
   containerAccess?: ContainerAccess[];
 
-  @Metadata({ data: "json, name=emailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=emailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 }

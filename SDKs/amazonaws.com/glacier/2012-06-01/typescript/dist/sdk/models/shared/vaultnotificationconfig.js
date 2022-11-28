@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // VaultNotificationConfig
 /**
  * Represents a vault's notification configuration.
@@ -33,11 +33,11 @@ var VaultNotificationConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Events" }),
+        SpeakeasyMetadata({ data: "json, name=Events" }),
         __metadata("design:type", Array)
     ], VaultNotificationConfig.prototype, "events", void 0);
     __decorate([
-        Metadata({ data: "json, name=SNSTopic" }),
+        SpeakeasyMetadata({ data: "json, name=SNSTopic" }),
         __metadata("design:type", String)
     ], VaultNotificationConfig.prototype, "snsTopic", void 0);
     return VaultNotificationConfig;

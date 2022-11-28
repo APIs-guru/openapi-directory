@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AlertcenterAlertsDeletePathParams:
-    alert_id: str = field(default=None, metadata={'path_param': { 'field_name': 'alertId', 'style': 'simple', 'explode': False }})
+    alert_id: str = field(metadata={'path_param': { 'field_name': 'alertId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class AlertcenterAlertsDeleteQueryParams:
 
 @dataclass
 class AlertcenterAlertsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AlertcenterAlertsDeleteRequest:
-    path_params: AlertcenterAlertsDeletePathParams = field(default=None)
-    query_params: AlertcenterAlertsDeleteQueryParams = field(default=None)
-    security: AlertcenterAlertsDeleteSecurity = field(default=None)
+    path_params: AlertcenterAlertsDeletePathParams = field()
+    query_params: AlertcenterAlertsDeleteQueryParams = field()
+    security: AlertcenterAlertsDeleteSecurity = field()
     
 
 @dataclass
 class AlertcenterAlertsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

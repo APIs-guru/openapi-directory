@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceConfiguration } from "./resourceconfiguration";
 import { Variable } from "./variable";
+
 
 
 // ContainerDatasetAction
@@ -9,15 +9,15 @@ import { Variable } from "./variable";
  * Information required to run the <code>containerAction</code> to produce dataset contents.
 **/
 export class ContainerDatasetAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=executionRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=executionRoleArn" })
   executionRoleArn: string;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image: string;
 
-  @Metadata({ data: "json, name=resourceConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=resourceConfiguration" })
   resourceConfiguration: ResourceConfiguration;
 
-  @Metadata({ data: "json, name=variables", elemType: shared.Variable })
+  @SpeakeasyMetadata({ data: "json, name=variables", elemType: Variable })
   variables?: Variable[];
 }

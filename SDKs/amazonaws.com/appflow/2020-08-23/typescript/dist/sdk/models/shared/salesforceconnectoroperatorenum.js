@@ -1,0 +1,24 @@
+export var SalesforceConnectorOperatorEnum;
+(function (SalesforceConnectorOperatorEnum) {
+    SalesforceConnectorOperatorEnum["Projection"] = "PROJECTION";
+    SalesforceConnectorOperatorEnum["LessThan"] = "LESS_THAN";
+    SalesforceConnectorOperatorEnum["Contains"] = "CONTAINS";
+    SalesforceConnectorOperatorEnum["GreaterThan"] = "GREATER_THAN";
+    SalesforceConnectorOperatorEnum["Between"] = "BETWEEN";
+    SalesforceConnectorOperatorEnum["LessThanOrEqualTo"] = "LESS_THAN_OR_EQUAL_TO";
+    SalesforceConnectorOperatorEnum["GreaterThanOrEqualTo"] = "GREATER_THAN_OR_EQUAL_TO";
+    SalesforceConnectorOperatorEnum["EqualTo"] = "EQUAL_TO";
+    SalesforceConnectorOperatorEnum["NotEqualTo"] = "NOT_EQUAL_TO";
+    SalesforceConnectorOperatorEnum["Addition"] = "ADDITION";
+    SalesforceConnectorOperatorEnum["Multiplication"] = "MULTIPLICATION";
+    SalesforceConnectorOperatorEnum["Division"] = "DIVISION";
+    SalesforceConnectorOperatorEnum["Subtraction"] = "SUBTRACTION";
+    SalesforceConnectorOperatorEnum["MaskAll"] = "MASK_ALL";
+    SalesforceConnectorOperatorEnum["MaskFirstN"] = "MASK_FIRST_N";
+    SalesforceConnectorOperatorEnum["MaskLastN"] = "MASK_LAST_N";
+    SalesforceConnectorOperatorEnum["ValidateNonNull"] = "VALIDATE_NON_NULL";
+    SalesforceConnectorOperatorEnum["ValidateNonZero"] = "VALIDATE_NON_ZERO";
+    SalesforceConnectorOperatorEnum["ValidateNonNegative"] = "VALIDATE_NON_NEGATIVE";
+    SalesforceConnectorOperatorEnum["ValidateNumeric"] = "VALIDATE_NUMERIC";
+    SalesforceConnectorOperatorEnum["NoOp"] = "NO_OP";
+})(SalesforceConnectorOperatorEnum || (SalesforceConnectorOperatorEnum = {}));

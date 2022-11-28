@@ -1,10 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
-from . import environmentaccountconnection
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateEnvironmentAccountConnectionOutput:
-    environment_account_connection: environmentaccountconnection.EnvironmentAccountConnection = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environmentAccountConnection' }})
+    environment_account_connection: EnvironmentAccountConnection = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('environmentAccountConnection') }})
     

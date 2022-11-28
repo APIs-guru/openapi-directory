@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Response extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: Map<string, any>;
 
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success: boolean;
 }

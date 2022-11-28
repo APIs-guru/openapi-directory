@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetMonitorRelationsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
   apiId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiVersionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiVersionId" })
   apiVersionId: string;
 }
 
 
-export class GetMonitorRelationsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetMonitorRelationsPathParams;
-}
-
-
 export class GetMonitorRelations200ApplicationJsonMonitor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=monitorId" })
+  @SpeakeasyMetadata({ data: "json, name=monitorId" })
   monitorId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: string;
 }
 
 
 export class GetMonitorRelations200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=monitor", elemType: operations.GetMonitorRelations200ApplicationJsonMonitor })
+  @SpeakeasyMetadata({ data: "json, name=monitor", elemType: GetMonitorRelations200ApplicationJsonMonitor })
   monitor?: GetMonitorRelations200ApplicationJsonMonitor[];
 }
 
 
+export class GetMonitorRelationsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetMonitorRelationsPathParams;
+}
+
+
 export class GetMonitorRelationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getMonitorRelations200ApplicationJsonObject?: GetMonitorRelations200ApplicationJson;
 }

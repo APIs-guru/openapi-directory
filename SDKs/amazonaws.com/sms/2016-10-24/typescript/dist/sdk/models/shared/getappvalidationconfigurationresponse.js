@@ -22,19 +22,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AppValidationConfiguration } from "./appvalidationconfiguration";
+import { ServerGroupValidationConfiguration } from "./servergroupvalidationconfiguration";
 var GetAppValidationConfigurationResponse = /** @class */ (function (_super) {
     __extends(GetAppValidationConfigurationResponse, _super);
     function GetAppValidationConfigurationResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=appValidationConfigurations", elemType: shared.AppValidationConfiguration }),
+        SpeakeasyMetadata({ data: "json, name=appValidationConfigurations", elemType: AppValidationConfiguration }),
         __metadata("design:type", Array)
     ], GetAppValidationConfigurationResponse.prototype, "appValidationConfigurations", void 0);
     __decorate([
-        Metadata({ data: "json, name=serverGroupValidationConfigurations", elemType: shared.ServerGroupValidationConfiguration }),
+        SpeakeasyMetadata({ data: "json, name=serverGroupValidationConfigurations", elemType: ServerGroupValidationConfiguration }),
         __metadata("design:type", Array)
     ], GetAppValidationConfigurationResponse.prototype, "serverGroupValidationConfigurations", void 0);
     return GetAppValidationConfigurationResponse;

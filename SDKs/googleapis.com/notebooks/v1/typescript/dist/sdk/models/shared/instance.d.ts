@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AcceleratorConfig } from "./acceleratorconfig";
 import { ContainerImage } from "./containerimage";
 import { Disk } from "./disk";
@@ -82,6 +82,40 @@ export declare class Instance extends SpeakeasyBase {
     subnet?: string;
     tags?: string[];
     updateTime?: string;
+    upgradeHistory?: UpgradeHistoryEntry[];
+    vmImage?: VmImage;
+}
+/**
+ * The definition of a notebook instance.
+**/
+export declare class InstanceInput extends SpeakeasyBase {
+    acceleratorConfig?: AcceleratorConfig;
+    bootDiskSizeGb?: string;
+    bootDiskType?: InstanceBootDiskTypeEnum;
+    canIpForward?: boolean;
+    containerImage?: ContainerImage;
+    customGpuDriverPath?: string;
+    dataDiskSizeGb?: string;
+    dataDiskType?: InstanceDataDiskTypeEnum;
+    diskEncryption?: InstanceDiskEncryptionEnum;
+    installGpuDriver?: boolean;
+    instanceOwners?: string[];
+    kmsKey?: string;
+    labels?: Map<string, string>;
+    machineType?: string;
+    metadata?: Map<string, string>;
+    network?: string;
+    nicType?: InstanceNicTypeEnum;
+    noProxyAccess?: boolean;
+    noPublicIp?: boolean;
+    noRemoveDataDisk?: boolean;
+    postStartupScript?: string;
+    reservationAffinity?: ReservationAffinity;
+    serviceAccount?: string;
+    serviceAccountScopes?: string[];
+    shieldedInstanceConfig?: ShieldedInstanceConfig;
+    subnet?: string;
+    tags?: string[];
     upgradeHistory?: UpgradeHistoryEntry[];
     vmImage?: VmImage;
 }

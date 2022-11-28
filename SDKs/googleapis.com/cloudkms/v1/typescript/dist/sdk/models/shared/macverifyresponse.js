@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var MacVerifyResponseProtectionLevelEnum;
 (function (MacVerifyResponseProtectionLevelEnum) {
     MacVerifyResponseProtectionLevelEnum["ProtectionLevelUnspecified"] = "PROTECTION_LEVEL_UNSPECIFIED";
@@ -41,27 +41,27 @@ var MacVerifyResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], MacVerifyResponse.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=protectionLevel" }),
+        SpeakeasyMetadata({ data: "json, name=protectionLevel" }),
         __metadata("design:type", String)
     ], MacVerifyResponse.prototype, "protectionLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=success" }),
+        SpeakeasyMetadata({ data: "json, name=success" }),
         __metadata("design:type", Boolean)
     ], MacVerifyResponse.prototype, "success", void 0);
     __decorate([
-        Metadata({ data: "json, name=verifiedDataCrc32c" }),
+        SpeakeasyMetadata({ data: "json, name=verifiedDataCrc32c" }),
         __metadata("design:type", Boolean)
     ], MacVerifyResponse.prototype, "verifiedDataCrc32c", void 0);
     __decorate([
-        Metadata({ data: "json, name=verifiedMacCrc32c" }),
+        SpeakeasyMetadata({ data: "json, name=verifiedMacCrc32c" }),
         __metadata("design:type", Boolean)
     ], MacVerifyResponse.prototype, "verifiedMacCrc32c", void 0);
     __decorate([
-        Metadata({ data: "json, name=verifiedSuccessIntegrity" }),
+        SpeakeasyMetadata({ data: "json, name=verifiedSuccessIntegrity" }),
         __metadata("design:type", Boolean)
     ], MacVerifyResponse.prototype, "verifiedSuccessIntegrity", void 0);
     return MacVerifyResponse;

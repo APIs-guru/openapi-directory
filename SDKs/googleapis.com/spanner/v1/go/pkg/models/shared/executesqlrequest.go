@@ -8,6 +8,8 @@ const (
 	ExecuteSQLRequestQueryModeEnumProfile ExecuteSQLRequestQueryModeEnum = "PROFILE"
 )
 
+// ExecuteSQLRequest
+// The request for ExecuteSql and ExecuteStreamingSql.
 type ExecuteSQLRequest struct {
 	ParamTypes     map[string]Type                 `json:"paramTypes,omitempty"`
 	Params         map[string]interface{}          `json:"params,omitempty"`

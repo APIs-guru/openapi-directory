@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class Endpoint:
-    address: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address' }})
-    cache_period_in_minutes: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CachePeriodInMinutes' }})
+    r"""Endpoint
+    Represents an available endpoint against which to make API calls agaisnt, as well as the TTL for that endpoint.
+    """
+    
+    address: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Address') }})
+    cache_period_in_minutes: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CachePeriodInMinutes') }})
     

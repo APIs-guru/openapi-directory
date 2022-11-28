@@ -11,11 +11,6 @@ type MergeTemplateQueryParams struct {
 	TemplateID int64              `queryParam:"style=form,explode=true,name=templateId"`
 }
 
-type MergeTemplateRequest struct {
-	QueryParams MergeTemplateQueryParams
-	Request     shared.Data `request:"mediaType=application/json"`
-}
-
 type MergeTemplate200ApplicationJSONMeta struct {
 	ContentType *string `json:"content-type,omitempty"`
 	DisplayName *string `json:"display_name,omitempty"`
@@ -89,6 +84,11 @@ type MergeTemplate422ApplicationJSON struct {
 type MergeTemplate500ApplicationJSON struct {
 	Error  *string `json:"error,omitempty"`
 	Status *int64  `json:"status,omitempty"`
+}
+
+type MergeTemplateRequest struct {
+	QueryParams MergeTemplateQueryParams
+	Request     shared.Data `request:"mediaType=application/json"`
 }
 
 type MergeTemplateResponse struct {

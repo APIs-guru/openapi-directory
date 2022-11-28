@@ -1,31 +1,29 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import featuredefinition
-from . import featuregroupstatus_enum
-from . import offlinestoreconfig
-from . import offlinestorestatus
-from . import onlinestoreconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeFeatureGroupResponse:
-    creation_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreationTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    event_time_feature_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EventTimeFeatureName' }})
-    failure_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FailureReason' }})
-    feature_definitions: List[featuredefinition.FeatureDefinition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeatureDefinitions' }})
-    feature_group_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeatureGroupArn' }})
-    feature_group_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeatureGroupName' }})
-    feature_group_status: Optional[featuregroupstatus_enum.FeatureGroupStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeatureGroupStatus' }})
-    next_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    offline_store_config: Optional[offlinestoreconfig.OfflineStoreConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OfflineStoreConfig' }})
-    offline_store_status: Optional[offlinestorestatus.OfflineStoreStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OfflineStoreStatus' }})
-    online_store_config: Optional[onlinestoreconfig.OnlineStoreConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OnlineStoreConfig' }})
-    record_identifier_feature_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RecordIdentifierFeatureName' }})
-    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RoleArn' }})
+    creation_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreationTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    event_time_feature_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('EventTimeFeatureName') }})
+    feature_definitions: List[FeatureDefinition] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeatureDefinitions') }})
+    feature_group_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeatureGroupArn') }})
+    feature_group_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeatureGroupName') }})
+    next_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
+    record_identifier_feature_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RecordIdentifierFeatureName') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    failure_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FailureReason') }})
+    feature_group_status: Optional[FeatureGroupStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeatureGroupStatus') }})
+    offline_store_config: Optional[OfflineStoreConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OfflineStoreConfig') }})
+    offline_store_status: Optional[OfflineStoreStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OfflineStoreStatus') }})
+    online_store_config: Optional[OnlineStoreConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OnlineStoreConfig') }})
+    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RoleArn') }})
     

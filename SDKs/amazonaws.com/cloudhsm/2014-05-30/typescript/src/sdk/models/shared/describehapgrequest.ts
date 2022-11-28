@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DescribeHapgRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the inputs for the <a>DescribeHapg</a> action.
 **/
 export class DescribeHapgRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HapgArn" })
+  @SpeakeasyMetadata({ data: "json, name=HapgArn" })
   hapgArn: string;
 }

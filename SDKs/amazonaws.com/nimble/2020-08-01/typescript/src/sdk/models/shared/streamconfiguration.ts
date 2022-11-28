@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StreamingClipboardModeEnum } from "./streamingclipboardmodeenum";
 import { StreamingInstanceTypeEnum } from "./streaminginstancetypeenum";
+
 
 
 // StreamConfiguration
@@ -8,15 +9,15 @@ import { StreamingInstanceTypeEnum } from "./streaminginstancetypeenum";
  * A configuration for a streaming session.
 **/
 export class StreamConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clipboardMode" })
+  @SpeakeasyMetadata({ data: "json, name=clipboardMode" })
   clipboardMode?: StreamingClipboardModeEnum;
 
-  @Metadata({ data: "json, name=ec2InstanceTypes" })
+  @SpeakeasyMetadata({ data: "json, name=ec2InstanceTypes" })
   ec2InstanceTypes?: StreamingInstanceTypeEnum[];
 
-  @Metadata({ data: "json, name=maxSessionLengthInMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=maxSessionLengthInMinutes" })
   maxSessionLengthInMinutes?: number;
 
-  @Metadata({ data: "json, name=streamingImageIds" })
+  @SpeakeasyMetadata({ data: "json, name=streamingImageIds" })
   streamingImageIds?: string[];
 }

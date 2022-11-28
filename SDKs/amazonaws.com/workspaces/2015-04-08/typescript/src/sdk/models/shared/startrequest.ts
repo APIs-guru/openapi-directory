@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StartRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information used to start a WorkSpace.
 **/
 export class StartRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=WorkspaceId" })
+  @SpeakeasyMetadata({ data: "json, name=WorkspaceId" })
   workspaceId?: string;
 }

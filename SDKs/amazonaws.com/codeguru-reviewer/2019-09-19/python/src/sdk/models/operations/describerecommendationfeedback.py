@@ -1,16 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeRecommendationFeedbackPathParams:
-    code_review_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'CodeReviewArn', 'style': 'simple', 'explode': False }})
+    code_review_arn: str = field(metadata={'path_param': { 'field_name': 'CodeReviewArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DescribeRecommendationFeedbackQueryParams:
-    recommendation_id: str = field(default=None, metadata={'query_param': { 'field_name': 'RecommendationId', 'style': 'form', 'explode': True }})
+    recommendation_id: str = field(metadata={'query_param': { 'field_name': 'RecommendationId', 'style': 'form', 'explode': True }})
     user_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'UserId', 'style': 'form', 'explode': True }})
     
 
@@ -27,19 +30,19 @@ class DescribeRecommendationFeedbackHeaders:
 
 @dataclass
 class DescribeRecommendationFeedbackRequest:
-    path_params: DescribeRecommendationFeedbackPathParams = field(default=None)
-    query_params: DescribeRecommendationFeedbackQueryParams = field(default=None)
-    headers: DescribeRecommendationFeedbackHeaders = field(default=None)
+    headers: DescribeRecommendationFeedbackHeaders = field()
+    path_params: DescribeRecommendationFeedbackPathParams = field()
+    query_params: DescribeRecommendationFeedbackQueryParams = field()
     
 
 @dataclass
 class DescribeRecommendationFeedbackResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_recommendation_feedback_response: Optional[shared.DescribeRecommendationFeedbackResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

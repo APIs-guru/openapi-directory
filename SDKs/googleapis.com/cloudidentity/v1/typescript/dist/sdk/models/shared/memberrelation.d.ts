@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EntityKey } from "./entitykey";
 import { TransitiveMembershipRole } from "./transitivemembershiprole";
 export declare enum MemberRelationRelationTypeEnum {

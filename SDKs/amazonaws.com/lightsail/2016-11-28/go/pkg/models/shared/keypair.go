@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// KeyPair
+// Describes an SSH key pair.
 type KeyPair struct {
 	Arn          *string           `json:"arn,omitempty"`
 	CreatedAt    *time.Time        `json:"createdAt,omitempty"`

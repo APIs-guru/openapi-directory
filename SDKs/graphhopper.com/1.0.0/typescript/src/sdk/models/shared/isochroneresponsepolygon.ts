@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Polygon } from "./polygon";
 
 
+
 export class IsochroneResponsePolygonProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucket" })
+  @SpeakeasyMetadata({ data: "json, name=bucket" })
   bucket?: number;
 }
 
@@ -13,12 +14,12 @@ export class IsochroneResponsePolygonProperties extends SpeakeasyBase {
  * A found path
 **/
 export class IsochroneResponsePolygon extends SpeakeasyBase {
-  @Metadata({ data: "json, name=geometry" })
+  @SpeakeasyMetadata({ data: "json, name=geometry" })
   geometry?: Polygon;
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: IsochroneResponsePolygonProperties;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

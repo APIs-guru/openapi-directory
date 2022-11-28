@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Comment } from "./comment";
 import { BoardCommentPermissions } from "./boardcommentpermissions";
 var CommentsList = /** @class */ (function (_super) {
     __extends(CommentsList, _super);
@@ -31,11 +31,11 @@ var CommentsList = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=comments", elemType: shared.Comment }),
+        SpeakeasyMetadata({ data: "json, name=comments", elemType: Comment }),
         __metadata("design:type", Array)
     ], CommentsList.prototype, "comments", void 0);
     __decorate([
-        Metadata({ data: "json, name=permissions" }),
+        SpeakeasyMetadata({ data: "json, name=permissions" }),
         __metadata("design:type", BoardCommentPermissions)
     ], CommentsList.prototype, "permissions", void 0);
     return CommentsList;

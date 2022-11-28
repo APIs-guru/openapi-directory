@@ -1,5 +1,7 @@
 package shared
 
+// SetPaymentPolicyResponse
+// Complex type that that gets populated with a response containing a payment policy.
 type SetPaymentPolicyResponse struct {
 	CategoryTypes       []CategoryType  `json:"categoryTypes,omitempty"`
 	Deposit             *Deposit        `json:"deposit,omitempty"`

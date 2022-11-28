@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetPublicSystemInfoResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     public_system_info: Optional[shared.PublicSystemInfo] = field(default=None)
-    status_code: int = field(default=None)
     

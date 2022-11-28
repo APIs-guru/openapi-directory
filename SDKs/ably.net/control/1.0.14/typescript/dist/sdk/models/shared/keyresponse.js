@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var KeyResponseCapabilityEnum;
 (function (KeyResponseCapabilityEnum) {
     KeyResponseCapabilityEnum["Publish"] = "publish";
@@ -40,31 +40,31 @@ var KeyResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=appId" }),
+        SpeakeasyMetadata({ data: "json, name=appId" }),
         __metadata("design:type", String)
     ], KeyResponse.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "json, name=capability" }),
+        SpeakeasyMetadata({ data: "json, name=capability" }),
         __metadata("design:type", Map)
     ], KeyResponse.prototype, "capability", void 0);
     __decorate([
-        Metadata({ data: "json, name=created" }),
+        SpeakeasyMetadata({ data: "json, name=created" }),
         __metadata("design:type", Number)
     ], KeyResponse.prototype, "created", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], KeyResponse.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], KeyResponse.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=modified" }),
+        SpeakeasyMetadata({ data: "json, name=modified" }),
         __metadata("design:type", Number)
     ], KeyResponse.prototype, "modified", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], KeyResponse.prototype, "name", void 0);
     return KeyResponse;

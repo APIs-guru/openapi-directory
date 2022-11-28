@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PatchRuleGroup } from "./patchrulegroup";
 import { PatchComplianceLevelEnum } from "./patchcompliancelevelenum";
 import { PatchFilterGroup } from "./patchfiltergroup";
@@ -8,46 +7,47 @@ import { PatchActionEnum } from "./patchactionenum";
 import { PatchSource } from "./patchsource";
 
 
+
 export class UpdatePatchBaselineResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApprovalRules" })
+  @SpeakeasyMetadata({ data: "json, name=ApprovalRules" })
   approvalRules?: PatchRuleGroup;
 
-  @Metadata({ data: "json, name=ApprovedPatches" })
+  @SpeakeasyMetadata({ data: "json, name=ApprovedPatches" })
   approvedPatches?: string[];
 
-  @Metadata({ data: "json, name=ApprovedPatchesComplianceLevel" })
+  @SpeakeasyMetadata({ data: "json, name=ApprovedPatchesComplianceLevel" })
   approvedPatchesComplianceLevel?: PatchComplianceLevelEnum;
 
-  @Metadata({ data: "json, name=ApprovedPatchesEnableNonSecurity" })
+  @SpeakeasyMetadata({ data: "json, name=ApprovedPatchesEnableNonSecurity" })
   approvedPatchesEnableNonSecurity?: boolean;
 
-  @Metadata({ data: "json, name=BaselineId" })
+  @SpeakeasyMetadata({ data: "json, name=BaselineId" })
   baselineId?: string;
 
-  @Metadata({ data: "json, name=CreatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedDate" })
   createdDate?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=GlobalFilters" })
+  @SpeakeasyMetadata({ data: "json, name=GlobalFilters" })
   globalFilters?: PatchFilterGroup;
 
-  @Metadata({ data: "json, name=ModifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=ModifiedDate" })
   modifiedDate?: Date;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=OperatingSystem" })
+  @SpeakeasyMetadata({ data: "json, name=OperatingSystem" })
   operatingSystem?: OperatingSystemEnum;
 
-  @Metadata({ data: "json, name=RejectedPatches" })
+  @SpeakeasyMetadata({ data: "json, name=RejectedPatches" })
   rejectedPatches?: string[];
 
-  @Metadata({ data: "json, name=RejectedPatchesAction" })
+  @SpeakeasyMetadata({ data: "json, name=RejectedPatchesAction" })
   rejectedPatchesAction?: PatchActionEnum;
 
-  @Metadata({ data: "json, name=Sources", elemType: shared.PatchSource })
+  @SpeakeasyMetadata({ data: "json, name=Sources", elemType: PatchSource })
   sources?: PatchSource[];
 }

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssetLicenseNameEnum } from "./assetlicensenameenum";
 
 
+
 export class IStockLicense extends SpeakeasyBase {
-  @Metadata({ data: "json, name=credits" })
+  @SpeakeasyMetadata({ data: "json, name=credits" })
   credits?: number;
 
-  @Metadata({ data: "json, name=license_type" })
+  @SpeakeasyMetadata({ data: "json, name=license_type" })
   licenseType?: AssetLicenseNameEnum;
 }

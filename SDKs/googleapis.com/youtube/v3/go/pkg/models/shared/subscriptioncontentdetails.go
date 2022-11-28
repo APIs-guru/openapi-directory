@@ -8,6 +8,8 @@ const (
 	SubscriptionContentDetailsActivityTypeEnumUploads                             SubscriptionContentDetailsActivityTypeEnum = "uploads"
 )
 
+// SubscriptionContentDetails
+// Details about the content to witch a subscription refers.
 type SubscriptionContentDetails struct {
 	ActivityType   *SubscriptionContentDetailsActivityTypeEnum `json:"activityType,omitempty"`
 	NewItemCount   *int64                                      `json:"newItemCount,omitempty"`

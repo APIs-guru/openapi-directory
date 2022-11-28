@@ -1,5 +1,7 @@
 package shared
 
+// Column
+// A column in a <code>Table</code>.
 type Column struct {
 	Comment    *string           `json:"Comment,omitempty"`
 	Name       string            `json:"Name"`

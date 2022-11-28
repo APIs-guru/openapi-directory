@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ChecksSetSuitesPreferencesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class ChecksSetSuitesPreferencesRequestBodyAutoTriggerChecks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=app_id" })
+  @SpeakeasyMetadata({ data: "json, name=app_id" })
   appId: number;
 
-  @Metadata({ data: "json, name=setting" })
+  @SpeakeasyMetadata({ data: "json, name=setting" })
   setting: boolean;
 }
 
 
 export class ChecksSetSuitesPreferencesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=auto_trigger_checks", elemType: operations.ChecksSetSuitesPreferencesRequestBodyAutoTriggerChecks })
+  @SpeakeasyMetadata({ data: "json, name=auto_trigger_checks", elemType: ChecksSetSuitesPreferencesRequestBodyAutoTriggerChecks })
   autoTriggerChecks?: ChecksSetSuitesPreferencesRequestBodyAutoTriggerChecks[];
 }
 
 
 export class ChecksSetSuitesPreferencesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ChecksSetSuitesPreferencesPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: ChecksSetSuitesPreferencesRequestBody;
 }
 
 
 export class ChecksSetSuitesPreferencesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   checkSuitePreference?: shared.CheckSuitePreference;
 }

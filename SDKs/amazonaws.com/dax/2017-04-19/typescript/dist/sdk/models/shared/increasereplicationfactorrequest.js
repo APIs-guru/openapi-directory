@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var IncreaseReplicationFactorRequest = /** @class */ (function (_super) {
     __extends(IncreaseReplicationFactorRequest, _super);
     function IncreaseReplicationFactorRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AvailabilityZones" }),
+        SpeakeasyMetadata({ data: "json, name=AvailabilityZones" }),
         __metadata("design:type", Array)
     ], IncreaseReplicationFactorRequest.prototype, "availabilityZones", void 0);
     __decorate([
-        Metadata({ data: "json, name=ClusterName" }),
+        SpeakeasyMetadata({ data: "json, name=ClusterName" }),
         __metadata("design:type", String)
     ], IncreaseReplicationFactorRequest.prototype, "clusterName", void 0);
     __decorate([
-        Metadata({ data: "json, name=NewReplicationFactor" }),
+        SpeakeasyMetadata({ data: "json, name=NewReplicationFactor" }),
         __metadata("design:type", Number)
     ], IncreaseReplicationFactorRequest.prototype, "newReplicationFactor", void 0);
     return IncreaseReplicationFactorRequest;

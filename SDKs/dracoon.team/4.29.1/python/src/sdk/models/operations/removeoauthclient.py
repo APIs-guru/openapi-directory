@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RemoveOAuthClientPathParams:
-    client_id: str = field(default=None, metadata={'path_param': { 'field_name': 'client_id', 'style': 'simple', 'explode': False }})
+    client_id: str = field(metadata={'path_param': { 'field_name': 'client_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class RemoveOAuthClientHeaders:
 
 @dataclass
 class RemoveOAuthClientRequest:
-    path_params: RemoveOAuthClientPathParams = field(default=None)
-    headers: RemoveOAuthClientHeaders = field(default=None)
+    headers: RemoveOAuthClientHeaders = field()
+    path_params: RemoveOAuthClientPathParams = field()
     
 
 @dataclass
 class RemoveOAuthClientResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

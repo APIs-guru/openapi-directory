@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimingInformation } from "./timinginformation";
+
 
 
 // StartSessionResult
@@ -7,9 +8,9 @@ import { TimingInformation } from "./timinginformation";
  * Contains the details of the started session.
 **/
 export class StartSessionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SessionToken" })
+  @SpeakeasyMetadata({ data: "json, name=SessionToken" })
   sessionToken?: string;
 
-  @Metadata({ data: "json, name=TimingInformation" })
+  @SpeakeasyMetadata({ data: "json, name=TimingInformation" })
   timingInformation?: TimingInformation;
 }

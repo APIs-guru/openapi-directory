@@ -22,6 +22,7 @@ export * from "./finddevicesbydeviceidentifierrequest";
 export * from "./finddevicesbydeviceidentifierresponse";
 export * from "./finddevicesbyownerrequest";
 export * from "./finddevicesbyownerresponse";
+export * from "./googleworkspaceaccount";
 export * from "./listcustomersresponse";
 export * from "./listvendorcustomersresponse";
 export * from "./listvendorsresponse";

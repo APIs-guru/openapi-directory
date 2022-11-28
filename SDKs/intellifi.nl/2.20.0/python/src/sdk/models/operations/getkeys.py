@@ -1,9 +1,10 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -34,30 +35,30 @@ class GetKeysQueryParams:
 
 @dataclass
 class GetKeysSecurity:
-    cookie_sid: shared.SchemeCookieSid = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'cookie' }})
-    
-
-@dataclass
-class GetKeysRequest:
-    query_params: GetKeysQueryParams = field(default=None)
-    security: GetKeysSecurity = field(default=None)
+    cookie_sid: shared.SchemeCookieSid = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'cookie' }})
     
 
 @dataclass_json
 @dataclass
 class GetKeys200ApplicationJSON:
-    count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count' }})
-    count_current: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count_current' }})
-    is_limited: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'is_limited' }})
-    next_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_url' }})
-    query_duration_ms: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'query_duration_ms' }})
-    results: Optional[List[shared.Key]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('count') }})
+    count_current: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('count_current') }})
+    is_limited: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('is_limited') }})
+    next_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('next_url') }})
+    query_duration_ms: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('query_duration_ms') }})
+    results: Optional[List[shared.Key]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
+    
+
+@dataclass
+class GetKeysRequest:
+    query_params: GetKeysQueryParams = field()
+    security: GetKeysSecurity = field()
     
 
 @dataclass
 class GetKeysResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_keys_200_application_json_object: Optional[GetKeys200ApplicationJSON] = field(default=None)
     

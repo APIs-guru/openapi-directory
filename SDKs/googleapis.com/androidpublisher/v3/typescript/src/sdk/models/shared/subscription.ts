@@ -1,8 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { BasePlan } from "./baseplan";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { BasePlanInput } from "./baseplan";
 import { SubscriptionListing } from "./subscriptionlisting";
 import { SubscriptionTaxAndComplianceSettings } from "./subscriptiontaxandcompliancesettings";
+import { BasePlan } from "./baseplan";
+
+
+
+// SubscriptionInput
+/** 
+ * A single subscription for an app.
+**/
+export class SubscriptionInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=basePlans", elemType: BasePlanInput })
+  basePlans?: BasePlanInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=listings", elemType: SubscriptionListing })
+  listings?: SubscriptionListing[];
+
+  @SpeakeasyMetadata({ data: "json, name=packageName" })
+  packageName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=productId" })
+  productId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=taxAndComplianceSettings" })
+  taxAndComplianceSettings?: SubscriptionTaxAndComplianceSettings;
+}
 
 
 // Subscription
@@ -10,21 +33,21 @@ import { SubscriptionTaxAndComplianceSettings } from "./subscriptiontaxandcompli
  * A single subscription for an app.
 **/
 export class Subscription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=archived" })
+  @SpeakeasyMetadata({ data: "json, name=archived" })
   archived?: boolean;
 
-  @Metadata({ data: "json, name=basePlans", elemType: shared.BasePlan })
+  @SpeakeasyMetadata({ data: "json, name=basePlans", elemType: BasePlan })
   basePlans?: BasePlan[];
 
-  @Metadata({ data: "json, name=listings", elemType: shared.SubscriptionListing })
+  @SpeakeasyMetadata({ data: "json, name=listings", elemType: SubscriptionListing })
   listings?: SubscriptionListing[];
 
-  @Metadata({ data: "json, name=packageName" })
+  @SpeakeasyMetadata({ data: "json, name=packageName" })
   packageName?: string;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=taxAndComplianceSettings" })
+  @SpeakeasyMetadata({ data: "json, name=taxAndComplianceSettings" })
   taxAndComplianceSettings?: SubscriptionTaxAndComplianceSettings;
 }

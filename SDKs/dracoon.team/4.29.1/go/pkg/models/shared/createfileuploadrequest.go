@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CreateFileUploadRequest
+// Request model for creating an upload channel
 type CreateFileUploadRequest struct {
 	Classification        *int32            `json:"classification,omitempty"`
 	DirectS3Upload        *bool             `json:"directS3Upload,omitempty"`

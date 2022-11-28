@@ -1,5 +1,7 @@
 package shared
 
+// VerificationMessageTemplateType
+// The template for verification messages.
 type VerificationMessageTemplateType struct {
 	DefaultEmailOption *DefaultEmailOptionTypeEnum `json:"DefaultEmailOption,omitempty"`
 	EmailMessage       *string                     `json:"EmailMessage,omitempty"`

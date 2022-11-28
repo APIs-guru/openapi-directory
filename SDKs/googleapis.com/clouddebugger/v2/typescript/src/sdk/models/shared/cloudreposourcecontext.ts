@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AliasContext } from "./aliascontext";
 import { RepoId } from "./repoid";
+
 
 
 // CloudRepoSourceContext
@@ -8,15 +9,15 @@ import { RepoId } from "./repoid";
  * A CloudRepoSourceContext denotes a particular revision in a cloud repo (a repo hosted by the Google Cloud Platform).
 **/
 export class CloudRepoSourceContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aliasContext" })
+  @SpeakeasyMetadata({ data: "json, name=aliasContext" })
   aliasContext?: AliasContext;
 
-  @Metadata({ data: "json, name=aliasName" })
+  @SpeakeasyMetadata({ data: "json, name=aliasName" })
   aliasName?: string;
 
-  @Metadata({ data: "json, name=repoId" })
+  @SpeakeasyMetadata({ data: "json, name=repoId" })
   repoId?: RepoId;
 
-  @Metadata({ data: "json, name=revisionId" })
+  @SpeakeasyMetadata({ data: "json, name=revisionId" })
   revisionId?: string;
 }

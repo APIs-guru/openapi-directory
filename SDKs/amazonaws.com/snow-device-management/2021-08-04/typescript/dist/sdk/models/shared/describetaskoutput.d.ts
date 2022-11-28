@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TaskStateEnum } from "./taskstateenum";
 export declare class DescribeTaskOutput extends SpeakeasyBase {
     completedAt?: Date;

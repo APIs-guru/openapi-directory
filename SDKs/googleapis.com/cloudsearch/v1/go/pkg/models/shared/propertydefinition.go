@@ -1,5 +1,7 @@
 package shared
 
+// PropertyDefinition
+// The definition of a property within an object.
 type PropertyDefinition struct {
 	BooleanPropertyOptions   *BooleanPropertyOptions   `json:"booleanPropertyOptions,omitempty"`
 	DatePropertyOptions      *DatePropertyOptions      `json:"datePropertyOptions,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GatewayRouteVirtualService } from "./gatewayroutevirtualservice";
+
 
 
 // GatewayRouteTarget
@@ -7,6 +8,6 @@ import { GatewayRouteVirtualService } from "./gatewayroutevirtualservice";
  * An object that represents a gateway route target.
 **/
 export class GatewayRouteTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=virtualService" })
+  @SpeakeasyMetadata({ data: "json, name=virtualService" })
   virtualService: GatewayRouteVirtualService;
 }

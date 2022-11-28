@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeAnalysisSchemesActionEnum(str, Enum):
     DESCRIBE_ANALYSIS_SCHEMES = "DescribeAnalysisSchemes"
@@ -10,8 +14,8 @@ class PostDescribeAnalysisSchemesVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeAnalysisSchemesQueryParams:
-    action: PostDescribeAnalysisSchemesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeAnalysisSchemesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeAnalysisSchemesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeAnalysisSchemesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeAnalysisSchemesHeaders:
 
 @dataclass
 class PostDescribeAnalysisSchemesRequest:
-    query_params: PostDescribeAnalysisSchemesQueryParams = field(default=None)
-    headers: PostDescribeAnalysisSchemesHeaders = field(default=None)
+    headers: PostDescribeAnalysisSchemesHeaders = field()
+    query_params: PostDescribeAnalysisSchemesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeAnalysisSchemesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

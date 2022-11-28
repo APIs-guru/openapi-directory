@@ -12,13 +12,13 @@ class GetAPIV2UsersCurrentPermissionsQueryParams:
 
 @dataclass
 class GetAPIV2UsersCurrentPermissionsRequest:
-    query_params: GetAPIV2UsersCurrentPermissionsQueryParams = field(default=None)
+    query_params: GetAPIV2UsersCurrentPermissionsQueryParams = field()
     
 
 @dataclass
 class GetAPIV2UsersCurrentPermissionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     api_paged_response_api_models_user_effective_permission_: Optional[shared.APIPagedResponseAPIModelsUserEffectivePermission] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

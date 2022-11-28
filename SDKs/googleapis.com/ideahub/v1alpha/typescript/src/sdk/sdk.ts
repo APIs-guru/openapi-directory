@@ -1,17 +1,13 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
-import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import axios, { AxiosInstance } from "axios";
+import * as utils from "../internal/utils";
+
+import { Ideas } from "./ideas";
+import { Platforms } from "./platforms";
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://ideahub.googleapis.com/",
+export const ServerList = [
+	"https://ideahub.googleapis.com/",
 ] as const;
 
 export function WithServerURL(
@@ -22,299 +18,59 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
-// SDK Documentation: https://console.cloud.google.com/apis/library/ideahub.googleapis.com
+/* SDK Documentation: https://console.cloud.google.com/apis/library/ideahub.googleapis.com*/
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+  public ideas: Ideas;
+  public platforms: Platforms;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
+    this.ideas = new Ideas(
+      this._defaultClient,
+      this._securityClient,
+      this._serverURL,
+      this._language,
+      this._sdkVersion,
+      this._genVersion
+    );
+    
+    this.platforms = new Platforms(
+      this._defaultClient,
+      this._securityClient,
+      this._serverURL,
+      this._language,
+      this._sdkVersion,
+      this._genVersion
+    );
   }
-  
-  // IdeahubIdeasList - List ideas for a given Creator and filter and sort options.
-  IdeahubIdeasList(
-    req: operations.IdeahubIdeasListRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.IdeahubIdeasListResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.IdeahubIdeasListRequest(req);
-    }
-    
-    let baseURL: string = this.serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/v1alpha/ideas";
-    
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
-    
-    return client
-      .get(url, {
-        ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IdeahubIdeasListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
-                res.googleSearchIdeahubV1alphaListIdeasResponse = httpRes?.data;
-            }
-            break;
-        }
-
-        return res;
-      })
-      .catch((error: AxiosError) => {throw error});
-  }
-
-  
-  // IdeahubPlatformsPropertiesIdeaActivitiesCreate - Creates an idea activity entry.
-  IdeahubPlatformsPropertiesIdeaActivitiesCreate(
-    req: operations.IdeahubPlatformsPropertiesIdeaActivitiesCreateRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.IdeahubPlatformsPropertiesIdeaActivitiesCreateResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.IdeahubPlatformsPropertiesIdeaActivitiesCreateRequest(req);
-    }
-    
-    let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1alpha/{parent}/ideaActivities", req.pathParams);
-    
-    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
-
-    try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        throw new Error(`Error serializing request body, cause: ${e.message}`);
-      }
-    }
-    
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
-    
-    let body: any;
-    if (reqBody instanceof FormData) body = reqBody;
-    else body = {...reqBody};
-    
-    return client
-      .post(url, body, {
-        headers: headers,
-        ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IdeahubPlatformsPropertiesIdeaActivitiesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
-                res.googleSearchIdeahubV1alphaIdeaActivity = httpRes?.data;
-            }
-            break;
-        }
-
-        return res;
-      })
-      .catch((error: AxiosError) => {throw error});
-  }
-
-  
-  // IdeahubPlatformsPropertiesIdeasList - List ideas for a given Creator and filter and sort options.
-  IdeahubPlatformsPropertiesIdeasList(
-    req: operations.IdeahubPlatformsPropertiesIdeasListRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.IdeahubPlatformsPropertiesIdeasListResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.IdeahubPlatformsPropertiesIdeasListRequest(req);
-    }
-    
-    let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1alpha/{parent}/ideas", req.pathParams);
-    
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
-    
-    return client
-      .get(url, {
-        ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IdeahubPlatformsPropertiesIdeasListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
-                res.googleSearchIdeahubV1alphaListIdeasResponse = httpRes?.data;
-            }
-            break;
-        }
-
-        return res;
-      })
-      .catch((error: AxiosError) => {throw error});
-  }
-
-  
-  // IdeahubPlatformsPropertiesLocalesList - Returns which locales ideas are available in for a given Creator.
-  IdeahubPlatformsPropertiesLocalesList(
-    req: operations.IdeahubPlatformsPropertiesLocalesListRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.IdeahubPlatformsPropertiesLocalesListResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.IdeahubPlatformsPropertiesLocalesListRequest(req);
-    }
-    
-    let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1alpha/{parent}/locales", req.pathParams);
-    
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
-    
-    return client
-      .get(url, {
-        ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IdeahubPlatformsPropertiesLocalesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
-                res.googleSearchIdeahubV1alphaListAvailableLocalesResponse = httpRes?.data;
-            }
-            break;
-        }
-
-        return res;
-      })
-      .catch((error: AxiosError) => {throw error});
-  }
-
-  
-  // IdeahubPlatformsPropertiesTopicStatesPatch - Update a topic state resource.
-  IdeahubPlatformsPropertiesTopicStatesPatch(
-    req: operations.IdeahubPlatformsPropertiesTopicStatesPatchRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.IdeahubPlatformsPropertiesTopicStatesPatchResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.IdeahubPlatformsPropertiesTopicStatesPatchRequest(req);
-    }
-    
-    let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1alpha/{name}", req.pathParams);
-    
-    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
-
-    try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        throw new Error(`Error serializing request body, cause: ${e.message}`);
-      }
-    }
-    
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
-    
-    let body: any;
-    if (reqBody instanceof FormData) body = reqBody;
-    else body = {...reqBody};
-    
-    return client
-      .patch(url, body, {
-        headers: headers,
-        ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.IdeahubPlatformsPropertiesTopicStatesPatchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
-                res.googleSearchIdeahubV1alphaTopicState = httpRes?.data;
-            }
-            break;
-        }
-
-        return res;
-      })
-      .catch((error: AxiosError) => {throw error});
-  }
-
 }

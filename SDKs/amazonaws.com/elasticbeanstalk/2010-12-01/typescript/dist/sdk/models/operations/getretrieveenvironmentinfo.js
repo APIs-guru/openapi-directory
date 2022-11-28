@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetRetrieveEnvironmentInfoActionEnum;
 (function (GetRetrieveEnvironmentInfoActionEnum) {
     GetRetrieveEnvironmentInfoActionEnum["RetrieveEnvironmentInfo"] = "RetrieveEnvironmentInfo";
@@ -42,23 +42,23 @@ var GetRetrieveEnvironmentInfoQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetRetrieveEnvironmentInfoQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EnvironmentId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EnvironmentId" }),
         __metadata("design:type", String)
     ], GetRetrieveEnvironmentInfoQueryParams.prototype, "environmentId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EnvironmentName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EnvironmentName" }),
         __metadata("design:type", String)
     ], GetRetrieveEnvironmentInfoQueryParams.prototype, "environmentName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=InfoType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=InfoType" }),
         __metadata("design:type", String)
     ], GetRetrieveEnvironmentInfoQueryParams.prototype, "infoType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetRetrieveEnvironmentInfoQueryParams.prototype, "version", void 0);
     return GetRetrieveEnvironmentInfoQueryParams;
@@ -70,31 +70,31 @@ var GetRetrieveEnvironmentInfoHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetRetrieveEnvironmentInfoHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetRetrieveEnvironmentInfoHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetRetrieveEnvironmentInfoHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetRetrieveEnvironmentInfoHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetRetrieveEnvironmentInfoHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetRetrieveEnvironmentInfoHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetRetrieveEnvironmentInfoHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetRetrieveEnvironmentInfoHeaders;
@@ -106,11 +106,11 @@ var GetRetrieveEnvironmentInfoRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRetrieveEnvironmentInfoQueryParams)
     ], GetRetrieveEnvironmentInfoRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRetrieveEnvironmentInfoHeaders)
     ], GetRetrieveEnvironmentInfoRequest.prototype, "headers", void 0);
     return GetRetrieveEnvironmentInfoRequest;
@@ -122,15 +122,15 @@ var GetRetrieveEnvironmentInfoResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetRetrieveEnvironmentInfoResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetRetrieveEnvironmentInfoResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetRetrieveEnvironmentInfoResponse.prototype, "statusCode", void 0);
     return GetRetrieveEnvironmentInfoResponse;

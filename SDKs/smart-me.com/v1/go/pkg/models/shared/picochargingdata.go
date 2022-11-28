@@ -15,6 +15,8 @@ const (
 	PicoChargingDataStateEnumOffline             PicoChargingDataStateEnum = "Offline"
 )
 
+// PicoChargingData
+// Container class for the pico charging station API
 type PicoChargingData struct {
 	ActiveChargingEnergy *float64                   `json:"ActiveChargingEnergy,omitempty"`
 	ActiveChargingPower  *float64                   `json:"ActiveChargingPower,omitempty"`

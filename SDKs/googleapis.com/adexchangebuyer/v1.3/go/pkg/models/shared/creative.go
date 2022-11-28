@@ -24,29 +24,39 @@ type CreativeFilteringReasonsReasons struct {
 	FilteringStatus *int32  `json:"filteringStatus,omitempty"`
 }
 
+// CreativeFilteringReasons
+// The filtering reasons for the creative. Read-only. This field should not be set in requests.
 type CreativeFilteringReasons struct {
 	Date    *string                           `json:"date,omitempty"`
 	Reasons []CreativeFilteringReasonsReasons `json:"reasons,omitempty"`
 }
 
+// CreativeNativeAdAppIcon
+// The app icon, for app download ads.
 type CreativeNativeAdAppIcon struct {
 	Height *int32  `json:"height,omitempty"`
 	URL    *string `json:"url,omitempty"`
 	Width  *int32  `json:"width,omitempty"`
 }
 
+// CreativeNativeAdImage
+// A large image.
 type CreativeNativeAdImage struct {
 	Height *int32  `json:"height,omitempty"`
 	URL    *string `json:"url,omitempty"`
 	Width  *int32  `json:"width,omitempty"`
 }
 
+// CreativeNativeAdLogo
+// A smaller image, for the advertiser logo.
 type CreativeNativeAdLogo struct {
 	Height *int32  `json:"height,omitempty"`
 	URL    *string `json:"url,omitempty"`
 	Width  *int32  `json:"width,omitempty"`
 }
 
+// CreativeNativeAd
+// If nativeAd is set, HTMLSnippet and videoURL should not be set.
 type CreativeNativeAd struct {
 	Advertiser            *string                  `json:"advertiser,omitempty"`
 	AppIcon               *CreativeNativeAdAppIcon `json:"appIcon,omitempty"`
@@ -61,6 +71,8 @@ type CreativeNativeAd struct {
 	StarRating            *float64                 `json:"starRating,omitempty"`
 }
 
+// Creative
+// A creative and its classification data.
 type Creative struct {
 	HTMLSnippet           *string                        `json:"HTMLSnippet,omitempty"`
 	AccountID             *int32                         `json:"accountId,omitempty"`

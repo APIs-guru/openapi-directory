@@ -1,59 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPostPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=post_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=post_id" })
   postId: string;
 }
 
 
-export class GetPostSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Implicit: shared.SchemeOauth2Implicit;
-}
-
-
-export class GetPostSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Code: shared.SchemeOauth2Code;
-}
-
-
-export class GetPostSecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
 export class GetPostSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetPostSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Implicit?: shared.SchemeOauth2Implicit;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetPostSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Code?: shared.SchemeOauth2Code;
 
-  @Metadata({ data: "security, option=true" })
-  option3?: GetPostSecurityOption3;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  apiKey?: shared.SchemeApiKey;
 }
 
 
 export class GetPostRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPostPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPostSecurity;
 }
 
 
 export class GetPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   post?: shared.Post;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

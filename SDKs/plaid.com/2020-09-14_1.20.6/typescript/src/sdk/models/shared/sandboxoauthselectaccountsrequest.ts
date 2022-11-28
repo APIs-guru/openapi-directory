@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SandboxOauthSelectAccountsRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines the request schema for `sandbox/oauth/select_accounts`
 **/
 export class SandboxOauthSelectAccountsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accounts" })
+  @SpeakeasyMetadata({ data: "json, name=accounts" })
   accounts: string[];
 
-  @Metadata({ data: "json, name=oauth_state_id" })
+  @SpeakeasyMetadata({ data: "json, name=oauth_state_id" })
   oauthStateId: string;
 }

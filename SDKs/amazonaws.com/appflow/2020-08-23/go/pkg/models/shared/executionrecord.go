@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// ExecutionRecord
+//
+//	Specifies information about the past flow run instances for a given flow.
 type ExecutionRecord struct {
 	DataPullEndTime   *time.Time           `json:"dataPullEndTime,omitempty"`
 	DataPullStartTime *time.Time           `json:"dataPullStartTime,omitempty"`

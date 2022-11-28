@@ -8,11 +8,6 @@ type PostDatabaseValidateParametersSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PostDatabaseValidateParametersRequest struct {
-	Request  shared.DatabaseValidateParametersSchema `request:"mediaType=application/json"`
-	Security PostDatabaseValidateParametersSecurity
-}
-
 type PostDatabaseValidateParameters200ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -27,6 +22,11 @@ type PostDatabaseValidateParameters422ApplicationJSON struct {
 
 type PostDatabaseValidateParameters500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PostDatabaseValidateParametersRequest struct {
+	Request  shared.DatabaseValidateParametersSchema `request:"mediaType=application/json"`
+	Security PostDatabaseValidateParametersSecurity
 }
 
 type PostDatabaseValidateParametersResponse struct {

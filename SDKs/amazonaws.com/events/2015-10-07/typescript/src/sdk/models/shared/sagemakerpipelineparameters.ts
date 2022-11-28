@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SageMakerPipelineParameter } from "./sagemakerpipelineparameter";
+
 
 
 // SageMakerPipelineParameters
@@ -8,6 +8,6 @@ import { SageMakerPipelineParameter } from "./sagemakerpipelineparameter";
  * These are custom parameters to use when the target is a SageMaker Model Building Pipeline that starts based on EventBridge events.
 **/
 export class SageMakerPipelineParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PipelineParameterList", elemType: shared.SageMakerPipelineParameter })
+  @SpeakeasyMetadata({ data: "json, name=PipelineParameterList", elemType: SageMakerPipelineParameter })
   pipelineParameterList?: SageMakerPipelineParameter[];
 }

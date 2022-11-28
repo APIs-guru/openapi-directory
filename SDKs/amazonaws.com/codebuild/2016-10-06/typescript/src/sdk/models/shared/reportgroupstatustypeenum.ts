@@ -1,6 +1,7 @@
 
 
+
 export enum ReportGroupStatusTypeEnum {
-    Active = "ACTIVE"
-,    Deleting = "DELETING"
+    Active = "ACTIVE",
+    Deleting = "DELETING"
 }

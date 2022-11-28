@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetDevicePathParams:
-    device_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'deviceArn', 'style': 'simple', 'explode': False }})
+    device_arn: str = field(metadata={'path_param': { 'field_name': 'deviceArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,20 +24,20 @@ class GetDeviceHeaders:
 
 @dataclass
 class GetDeviceRequest:
-    path_params: GetDevicePathParams = field(default=None)
-    headers: GetDeviceHeaders = field(default=None)
+    headers: GetDeviceHeaders = field()
+    path_params: GetDevicePathParams = field()
     
 
 @dataclass
 class GetDeviceResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     device_offline_exception: Optional[Any] = field(default=None)
     device_retired_exception: Optional[Any] = field(default=None)
     get_device_response: Optional[shared.GetDeviceResponse] = field(default=None)
     internal_service_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

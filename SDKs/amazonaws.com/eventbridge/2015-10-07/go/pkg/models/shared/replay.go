@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Replay
+// A <code>Replay</code> object that contains details about a replay.
 type Replay struct {
 	EventEndTime          *time.Time       `json:"EventEndTime,omitempty"`
 	EventLastReplayedTime *time.Time       `json:"EventLastReplayedTime,omitempty"`

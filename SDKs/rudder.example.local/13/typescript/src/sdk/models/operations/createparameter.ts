@@ -1,11 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
-
-export class CreateParameterRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.Parameter;
-}
 
 export enum CreateParameter200ApplicationJsonActionEnum {
     CreateParameter = "createParameter"
@@ -17,38 +12,44 @@ export enum CreateParameter200ApplicationJsonActionEnum {
  * Parameters
 **/
 export class CreateParameter200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parameters", elemType: shared.Parameter })
+  @SpeakeasyMetadata({ data: "json, name=parameters", elemType: shared.Parameter })
   parameters: shared.Parameter[];
 }
 
 export enum CreateParameter200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class CreateParameter200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: CreateParameter200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: CreateParameter200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: CreateParameter200ApplicationJsonResultEnum;
 }
 
 
+export class CreateParameterRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.Parameter;
+}
+
+
 export class CreateParameterResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createParameter200ApplicationJsonObject?: CreateParameter200ApplicationJson;
 }

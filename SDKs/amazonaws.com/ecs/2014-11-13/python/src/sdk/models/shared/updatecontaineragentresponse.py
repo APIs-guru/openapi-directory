@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import containerinstance
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateContainerAgentResponse:
-    container_instance: Optional[containerinstance.ContainerInstance] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'containerInstance' }})
+    container_instance: Optional[ContainerInstance] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('containerInstance') }})
     

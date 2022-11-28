@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkspaceStatus } from "./workspacestatus";
 // WorkspaceDescription
 /**
@@ -34,31 +34,31 @@ var WorkspaceDescription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alias" }),
+        SpeakeasyMetadata({ data: "json, name=alias" }),
         __metadata("design:type", String)
     ], WorkspaceDescription.prototype, "alias", void 0);
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], WorkspaceDescription.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdAt" }),
+        SpeakeasyMetadata({ data: "json, name=createdAt" }),
         __metadata("design:type", Date)
     ], WorkspaceDescription.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=prometheusEndpoint" }),
+        SpeakeasyMetadata({ data: "json, name=prometheusEndpoint" }),
         __metadata("design:type", String)
     ], WorkspaceDescription.prototype, "prometheusEndpoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", WorkspaceStatus)
     ], WorkspaceDescription.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], WorkspaceDescription.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=workspaceId" }),
+        SpeakeasyMetadata({ data: "json, name=workspaceId" }),
         __metadata("design:type", String)
     ], WorkspaceDescription.prototype, "workspaceId", void 0);
     return WorkspaceDescription;

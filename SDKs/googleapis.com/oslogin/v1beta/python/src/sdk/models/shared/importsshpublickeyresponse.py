@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import loginprofile
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ImportSSHPublicKeyResponse:
-    details: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'details' }})
-    login_profile: Optional[loginprofile.LoginProfile] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'loginProfile' }})
+    r"""ImportSSHPublicKeyResponse
+    A response message for importing an SSH public key.
+    """
+    
+    details: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('details') }})
+    login_profile: Optional[LoginProfile] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('loginProfile') }})
     

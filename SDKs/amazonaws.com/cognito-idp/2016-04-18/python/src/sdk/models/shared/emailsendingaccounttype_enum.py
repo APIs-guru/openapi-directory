@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class EmailSendingAccountTypeEnum(str, Enum):
     COGNITO_DEFAULT = "COGNITO_DEFAULT"

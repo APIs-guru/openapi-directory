@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAuthorizationCodeIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Code_challenge" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Code_challenge" })
   codeChallenge?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Code_challenge_method" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Code_challenge_method" })
   codeChallengeMethod?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Verified_mobile" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Verified_mobile" })
   verifiedMobile?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=client_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=client_id" })
   clientId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dl_flow" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dl_flow" })
   dlFlow?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=redirect_uri" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=redirect_uri" })
   redirectUri: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=response_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=response_type" })
   responseType: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state: string;
 }
 
 
 export class GetAuthorizationCodeIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauthAuthorizeCode: shared.SchemeOauthAuthorizeCode;
 }
 
 
 export class GetAuthorizationCodeIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAuthorizationCodeIdQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetAuthorizationCodeIdSecurity;
 }
 
 
 export class GetAuthorizationCodeIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sample?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

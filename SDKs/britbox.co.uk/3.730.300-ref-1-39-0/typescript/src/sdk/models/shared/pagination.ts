@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PaginationAuth } from "./paginationauth";
 import { PaginationOptions } from "./paginationoptions";
 
 
+
 export class Pagination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorization" })
+  @SpeakeasyMetadata({ data: "json, name=authorization" })
   authorization?: PaginationAuth;
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: PaginationOptions;
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page: number;
 
-  @Metadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata({ data: "json, name=previous" })
   previous?: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total: number;
 }

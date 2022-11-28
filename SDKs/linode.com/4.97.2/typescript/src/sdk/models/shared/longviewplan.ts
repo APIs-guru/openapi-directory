@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum LongviewPlanLongviewSubscriptionEnum {
-    Longview3 = "longview-3"
-,    Longview10 = "longview-10"
-,    Longview40 = "longview-40"
-,    Longview100 = "longview-100"
+    Longview3 = "longview-3",
+    Longview10 = "longview-10",
+    Longview40 = "longview-40",
+    Longview100 = "longview-100"
 }
 
 
@@ -14,6 +15,6 @@ export enum LongviewPlanLongviewSubscriptionEnum {
  * 
 **/
 export class LongviewPlan extends SpeakeasyBase {
-  @Metadata({ data: "json, name=longview_subscription" })
+  @SpeakeasyMetadata({ data: "json, name=longview_subscription" })
   longviewSubscription?: LongviewPlanLongviewSubscriptionEnum;
 }

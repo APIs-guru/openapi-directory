@@ -1,5 +1,7 @@
 package shared
 
+// Candidate
+// Information about a candidate running for elected office.
 type Candidate struct {
 	CandidateURL  *string   `json:"candidateUrl,omitempty"`
 	Channels      []Channel `json:"channels,omitempty"`

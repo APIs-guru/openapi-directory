@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DurationUnitEnum } from "./durationunitenum";
+
 
 
 // Duration
@@ -7,9 +8,9 @@ import { DurationUnitEnum } from "./durationunitenum";
  * An object that represents a duration of time.
 **/
 export class Duration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=unit" })
+  @SpeakeasyMetadata({ data: "json, name=unit" })
   unit?: DurationUnitEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }

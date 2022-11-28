@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LettingsLandlordDocument } from "./lettingslandlorddocument";
+
 
 
 // LandlordMaintenanceCertificateModel
@@ -8,15 +8,15 @@ import { LettingsLandlordDocument } from "./lettingslandlorddocument";
  * Maintenance Certificate
 **/
 export class LandlordMaintenanceCertificateModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Due" })
+  @SpeakeasyMetadata({ data: "json, name=Due" })
   due?: Date;
 
-  @Metadata({ data: "json, name=Files", elemType: shared.LettingsLandlordDocument })
+  @SpeakeasyMetadata({ data: "json, name=Files", elemType: LettingsLandlordDocument })
   files?: LettingsLandlordDocument[];
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 }

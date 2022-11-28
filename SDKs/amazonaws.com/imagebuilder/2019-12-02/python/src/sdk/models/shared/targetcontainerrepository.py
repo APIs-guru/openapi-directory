@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import containerrepositoryservice_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TargetContainerRepository:
-    repository_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repositoryName' }})
-    service: containerrepositoryservice_enum.ContainerRepositoryServiceEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'service' }})
+    r"""TargetContainerRepository
+    The container repository where the output container image is stored.
+    """
+    
+    repository_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('repositoryName') }})
+    service: ContainerRepositoryServiceEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('service') }})
     

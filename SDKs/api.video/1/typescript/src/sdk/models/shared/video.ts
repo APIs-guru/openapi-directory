@@ -1,47 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VideoAssets } from "./videoassets";
 import { Metadata } from "./metadata";
 import { VideoSource } from "./videosource";
 
 
+
 export class Video extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets" })
+  @SpeakeasyMetadata({ data: "json, name=assets" })
   assets?: VideoAssets;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=metadata", elemType: shared.Metadata })
+  @SpeakeasyMetadata({ data: "json, name=metadata", elemType: Metadata })
   metadata?: Metadata[];
 
-  @Metadata({ data: "json, name=mp4Support" })
+  @SpeakeasyMetadata({ data: "json, name=mp4Support" })
   mp4Support?: boolean;
 
-  @Metadata({ data: "json, name=panoramic" })
+  @SpeakeasyMetadata({ data: "json, name=panoramic" })
   panoramic?: boolean;
 
-  @Metadata({ data: "json, name=playerId" })
+  @SpeakeasyMetadata({ data: "json, name=playerId" })
   playerId?: string;
 
-  @Metadata({ data: "json, name=public" })
+  @SpeakeasyMetadata({ data: "json, name=public" })
   public?: boolean;
 
-  @Metadata({ data: "json, name=publishedAt" })
+  @SpeakeasyMetadata({ data: "json, name=publishedAt" })
   publishedAt?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: VideoSource;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: any[];
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: Date;
 
-  @Metadata({ data: "json, name=videoId" })
+  @SpeakeasyMetadata({ data: "json, name=videoId" })
   videoId?: string;
 }

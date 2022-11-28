@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var PostV05ConsentRequestsOnStatusServers = []string{
+var PostV05ConsentRequestsOnStatusServerList = []string{
 	"https://dev.ndhm.gov.in/hiu",
 }
 

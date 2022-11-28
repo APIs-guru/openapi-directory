@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetNetworkSmBypassActivationLockAttemptPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=attemptId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=attemptId" })
   attemptId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class GetNetworkSmBypassActivationLockAttemptRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetNetworkSmBypassActivationLockAttemptPathParams;
 }
 
 
 export class GetNetworkSmBypassActivationLockAttemptResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getNetworkSmBypassActivationLockAttempt200ApplicationJsonObject?: Map<string, any>;
 }

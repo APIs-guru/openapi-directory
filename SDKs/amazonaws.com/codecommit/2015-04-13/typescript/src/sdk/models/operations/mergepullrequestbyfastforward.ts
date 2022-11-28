@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum MergePullRequestByFastForwardXAmzTargetEnum {
     CodeCommit20150413MergePullRequestByFastForward = "CodeCommit_20150413.MergePullRequestByFastForward"
@@ -7,105 +8,105 @@ export enum MergePullRequestByFastForwardXAmzTargetEnum {
 
 
 export class MergePullRequestByFastForwardHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: MergePullRequestByFastForwardXAmzTargetEnum;
 }
 
 
 export class MergePullRequestByFastForwardRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: MergePullRequestByFastForwardHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.MergePullRequestByFastForwardInput;
 }
 
 
 export class MergePullRequestByFastForwardResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   concurrentReferenceUpdateException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionIntegrityChecksFailedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyAccessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyDisabledException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidCommitIdException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidPullRequestIdException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRepositoryNameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   manualMergeRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   mergePullRequestByFastForwardOutput?: shared.MergePullRequestByFastForwardOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullRequestAlreadyClosedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullRequestApprovalRulesNotSatisfiedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullRequestDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullRequestIdRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   referenceDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   repositoryDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   repositoryNameRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   repositoryNotAssociatedWithPullRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tipOfSourceReferenceIsDifferentException?: any;
 }

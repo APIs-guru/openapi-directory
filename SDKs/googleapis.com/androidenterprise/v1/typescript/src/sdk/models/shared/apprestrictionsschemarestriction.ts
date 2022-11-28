@@ -1,17 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppRestrictionsSchemaRestrictionRestrictionValue } from "./apprestrictionsschemarestrictionrestrictionvalue";
-import { AppRestrictionsSchemaRestriction } from "./apprestrictionsschemarestriction";
+
 
 export enum AppRestrictionsSchemaRestrictionRestrictionTypeEnum {
-    Bool = "bool"
-,    String = "string"
-,    Integer = "integer"
-,    Choice = "choice"
-,    Multiselect = "multiselect"
-,    Hidden = "hidden"
-,    Bundle = "bundle"
-,    BundleArray = "bundleArray"
+    Bool = "bool",
+    String = "string",
+    Integer = "integer",
+    Choice = "choice",
+    Multiselect = "multiselect",
+    Hidden = "hidden",
+    Bundle = "bundle",
+    BundleArray = "bundleArray"
 }
 
 
@@ -20,27 +19,27 @@ export enum AppRestrictionsSchemaRestrictionRestrictionTypeEnum {
  * A restriction in the App Restriction Schema represents a piece of configuration that may be pre-applied.
 **/
 export class AppRestrictionsSchemaRestriction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultValue" })
+  @SpeakeasyMetadata({ data: "json, name=defaultValue" })
   defaultValue?: AppRestrictionsSchemaRestrictionRestrictionValue;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=entry" })
+  @SpeakeasyMetadata({ data: "json, name=entry" })
   entry?: string[];
 
-  @Metadata({ data: "json, name=entryValue" })
+  @SpeakeasyMetadata({ data: "json, name=entryValue" })
   entryValue?: string[];
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=nestedRestriction", elemType: shared.AppRestrictionsSchemaRestriction })
+  @SpeakeasyMetadata({ data: "json, name=nestedRestriction", elemType: AppRestrictionsSchemaRestriction })
   nestedRestriction?: AppRestrictionsSchemaRestriction[];
 
-  @Metadata({ data: "json, name=restrictionType" })
+  @SpeakeasyMetadata({ data: "json, name=restrictionType" })
   restrictionType?: AppRestrictionsSchemaRestrictionRestrictionTypeEnum;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

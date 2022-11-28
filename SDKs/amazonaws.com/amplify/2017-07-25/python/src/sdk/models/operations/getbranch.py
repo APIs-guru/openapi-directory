@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetBranchPathParams:
-    app_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
-    branch_name: str = field(default=None, metadata={'path_param': { 'field_name': 'branchName', 'style': 'simple', 'explode': False }})
+    app_id: str = field(metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
+    branch_name: str = field(metadata={'path_param': { 'field_name': 'branchName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,17 +25,17 @@ class GetBranchHeaders:
 
 @dataclass
 class GetBranchRequest:
-    path_params: GetBranchPathParams = field(default=None)
-    headers: GetBranchHeaders = field(default=None)
+    headers: GetBranchHeaders = field()
+    path_params: GetBranchPathParams = field()
     
 
 @dataclass
 class GetBranchResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_branch_result: Optional[shared.GetBranchResult] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

@@ -22,24 +22,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppSummary } from "./appsummary";
+import { ServerGroup } from "./servergroup";
+import { Tag } from "./tag";
 var UpdateAppResponse = /** @class */ (function (_super) {
     __extends(UpdateAppResponse, _super);
     function UpdateAppResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=appSummary" }),
+        SpeakeasyMetadata({ data: "json, name=appSummary" }),
         __metadata("design:type", AppSummary)
     ], UpdateAppResponse.prototype, "appSummary", void 0);
     __decorate([
-        Metadata({ data: "json, name=serverGroups", elemType: shared.ServerGroup }),
+        SpeakeasyMetadata({ data: "json, name=serverGroups", elemType: ServerGroup }),
         __metadata("design:type", Array)
     ], UpdateAppResponse.prototype, "serverGroups", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], UpdateAppResponse.prototype, "tags", void 0);
     return UpdateAppResponse;

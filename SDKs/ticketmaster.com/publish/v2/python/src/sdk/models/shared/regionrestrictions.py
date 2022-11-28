@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class RegionRestrictions:
-    allowed: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allowed' }})
+    r"""RegionRestrictions
+    This class defines an entitlement data on the Publish API
+    """
+    
+    allowed: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allowed') }})
     

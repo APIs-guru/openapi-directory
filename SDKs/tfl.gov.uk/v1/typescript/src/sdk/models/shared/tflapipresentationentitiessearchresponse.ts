@@ -1,30 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesSearchMatch } from "./tflapipresentationentitiessearchmatch";
 
 
+
 export class TflApiPresentationEntitiesSearchResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: number;
 
-  @Metadata({ data: "json, name=matches", elemType: shared.TflApiPresentationEntitiesSearchMatch })
+  @SpeakeasyMetadata({ data: "json, name=matches", elemType: TflApiPresentationEntitiesSearchMatch })
   matches?: TflApiPresentationEntitiesSearchMatch[];
 
-  @Metadata({ data: "json, name=maxScore" })
+  @SpeakeasyMetadata({ data: "json, name=maxScore" })
   maxScore?: number;
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: number;
 
-  @Metadata({ data: "json, name=pageSize" })
+  @SpeakeasyMetadata({ data: "json, name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "json, name=provider" })
+  @SpeakeasyMetadata({ data: "json, name=provider" })
   provider?: string;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: string;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }

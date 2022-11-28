@@ -10,11 +10,11 @@ class GetTokenQueryParams:
 
 @dataclass
 class GetTokenRequest:
-    query_params: GetTokenQueryParams = field(default=None)
+    query_params: GetTokenQueryParams = field()
     
 
 @dataclass
 class GetTokenResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

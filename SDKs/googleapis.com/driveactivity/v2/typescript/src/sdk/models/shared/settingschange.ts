@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RestrictionChange } from "./restrictionchange";
+
 
 
 // SettingsChange
@@ -8,6 +8,6 @@ import { RestrictionChange } from "./restrictionchange";
  * Information about settings changes.
 **/
 export class SettingsChange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=restrictionChanges", elemType: shared.RestrictionChange })
+  @SpeakeasyMetadata({ data: "json, name=restrictionChanges", elemType: RestrictionChange })
   restrictionChanges?: RestrictionChange[];
 }

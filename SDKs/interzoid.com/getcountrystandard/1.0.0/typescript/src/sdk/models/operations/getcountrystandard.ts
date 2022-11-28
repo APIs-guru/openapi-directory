@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetcountrystandardQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=country" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" })
   country: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=license" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" })
   license: string;
 }
 
 
-export class GetcountrystandardRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetcountrystandardQueryParams;
-}
-
-
 export class Getcountrystandard200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: string;
 
-  @Metadata({ data: "json, name=CountryStandard" })
+  @SpeakeasyMetadata({ data: "json, name=CountryStandard" })
   countryStandard?: string;
 
-  @Metadata({ data: "json, name=Credits" })
+  @SpeakeasyMetadata({ data: "json, name=Credits" })
   credits?: string;
 }
 
 
+export class GetcountrystandardRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetcountrystandardQueryParams;
+}
+
+
 export class GetcountrystandardResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getcountrystandard200ApplicationJsonObject?: Getcountrystandard200ApplicationJson;
 }

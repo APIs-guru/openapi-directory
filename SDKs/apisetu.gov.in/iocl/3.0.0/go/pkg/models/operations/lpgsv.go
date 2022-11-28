@@ -26,11 +26,6 @@ type LpgsvSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type LpgsvRequest struct {
-	Request  *LpgsvRequestBody `request:"mediaType=application/json"`
-	Security LpgsvSecurity
-}
-
 type Lpgsv400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Lpgsv504ApplicationJSON struct {
 	Error            *Lpgsv504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Lpgsv504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type LpgsvRequest struct {
+	Request  *LpgsvRequestBody `request:"mediaType=application/json"`
+	Security LpgsvSecurity
 }
 
 type LpgsvResponse struct {

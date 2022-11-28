@@ -28,11 +28,6 @@ type TetcrSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type TetcrRequest struct {
-	Request  *TetcrRequestBody `request:"mediaType=application/json"`
-	Security TetcrSecurity
-}
-
 type Tetcr400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Tetcr504ApplicationJSON struct {
 	Error            *Tetcr504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Tetcr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type TetcrRequest struct {
+	Request  *TetcrRequestBody `request:"mediaType=application/json"`
+	Security TetcrSecurity
 }
 
 type TetcrResponse struct {

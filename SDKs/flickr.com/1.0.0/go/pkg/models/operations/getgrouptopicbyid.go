@@ -10,13 +10,13 @@ type GetGroupTopicByIDQueryParams struct {
 	TopicID string  `queryParam:"style=form,explode=true,name=topic_id"`
 }
 
-type GetGroupTopicByIDRequest struct {
-	QueryParams GetGroupTopicByIDQueryParams
-}
-
 type GetGroupTopicByID200ApplicationJSON struct {
 	Stat  *string       `json:"stat,omitempty"`
 	Topic *shared.Topic `json:"topic,omitempty"`
+}
+
+type GetGroupTopicByIDRequest struct {
+	QueryParams GetGroupTopicByIDQueryParams
 }
 
 type GetGroupTopicByIDResponse struct {

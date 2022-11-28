@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SearchParametersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=example" })
+  @SpeakeasyMetadata({ data: "json, name=example" })
   example: string;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 
-  @Metadata({ data: "json, name=paramname" })
+  @SpeakeasyMetadata({ data: "json, name=paramname" })
   paramname: string;
 
-  @Metadata({ data: "json, name=valuelist" })
+  @SpeakeasyMetadata({ data: "json, name=valuelist" })
   valuelist?: any;
 }

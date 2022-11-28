@@ -4,10 +4,8 @@ type PostServersIDActionsResetPasswordPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostServersIDActionsResetPasswordRequest struct {
-	PathParams PostServersIDActionsResetPasswordPathParams
-}
-
+// PostServersIDActionsResetPassword201ApplicationJSONActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersIDActionsResetPassword201ApplicationJSONActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -40,6 +38,10 @@ type PostServersIDActionsResetPassword201ApplicationJSONAction struct {
 type PostServersIDActionsResetPassword201ApplicationJSON struct {
 	Action       *PostServersIDActionsResetPassword201ApplicationJSONAction `json:"action,omitempty"`
 	RootPassword *string                                                    `json:"root_password,omitempty"`
+}
+
+type PostServersIDActionsResetPasswordRequest struct {
+	PathParams PostServersIDActionsResetPasswordPathParams
 }
 
 type PostServersIDActionsResetPasswordResponse struct {

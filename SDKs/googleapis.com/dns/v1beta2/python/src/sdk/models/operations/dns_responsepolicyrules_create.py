@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DNSResponsePolicyRulesCreatePathParams:
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
-    response_policy: str = field(default=None, metadata={'path_param': { 'field_name': 'responsePolicy', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    response_policy: str = field(metadata={'path_param': { 'field_name': 'responsePolicy', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class DNSResponsePolicyRulesCreateQueryParams:
 
 @dataclass
 class DNSResponsePolicyRulesCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DNSResponsePolicyRulesCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,15 +46,15 @@ class DNSResponsePolicyRulesCreateSecurity:
 
 @dataclass
 class DNSResponsePolicyRulesCreateRequest:
-    path_params: DNSResponsePolicyRulesCreatePathParams = field(default=None)
-    query_params: DNSResponsePolicyRulesCreateQueryParams = field(default=None)
+    path_params: DNSResponsePolicyRulesCreatePathParams = field()
+    query_params: DNSResponsePolicyRulesCreateQueryParams = field()
+    security: DNSResponsePolicyRulesCreateSecurity = field()
     request: Optional[shared.ResponsePolicyRule] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DNSResponsePolicyRulesCreateSecurity = field(default=None)
     
 
 @dataclass
 class DNSResponsePolicyRulesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     response_policy_rule: Optional[shared.ResponsePolicyRule] = field(default=None)
-    status_code: int = field(default=None)
     

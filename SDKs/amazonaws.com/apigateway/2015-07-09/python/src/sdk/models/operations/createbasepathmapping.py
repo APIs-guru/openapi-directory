@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateBasePathMappingPathParams:
-    domain_name: str = field(default=None, metadata={'path_param': { 'field_name': 'domain_name', 'style': 'simple', 'explode': False }})
+    domain_name: str = field(metadata={'path_param': { 'field_name': 'domain_name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,27 +27,27 @@ class CreateBasePathMappingHeaders:
 @dataclass_json
 @dataclass
 class CreateBasePathMappingRequestBody:
-    base_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'basePath' }})
-    rest_api_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'restApiId' }})
-    stage: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stage' }})
+    rest_api_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('restApiId') }})
+    base_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('basePath') }})
+    stage: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stage') }})
     
 
 @dataclass
 class CreateBasePathMappingRequest:
-    path_params: CreateBasePathMappingPathParams = field(default=None)
-    headers: CreateBasePathMappingHeaders = field(default=None)
-    request: CreateBasePathMappingRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateBasePathMappingHeaders = field()
+    path_params: CreateBasePathMappingPathParams = field()
+    request: CreateBasePathMappingRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateBasePathMappingResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     base_path_mapping: Optional[shared.BasePathMapping] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

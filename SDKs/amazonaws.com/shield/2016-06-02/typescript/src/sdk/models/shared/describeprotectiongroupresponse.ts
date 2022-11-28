@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProtectionGroup } from "./protectiongroup";
 
 
+
 export class DescribeProtectionGroupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProtectionGroup" })
+  @SpeakeasyMetadata({ data: "json, name=ProtectionGroup" })
   protectionGroup: ProtectionGroup;
 }

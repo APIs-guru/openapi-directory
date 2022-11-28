@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RequestedScopes } from "./requestedscopes";
 export declare enum ConnectedApplicationProductDataTypesEnum {
     AccountBalance = "ACCOUNT_BALANCE",

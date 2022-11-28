@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class SolrqueryGetWtEnum(str, Enum):
@@ -17,13 +18,13 @@ class SolrqueryGetQueryParams:
 
 @dataclass
 class SolrqueryGetRequest:
-    query_params: SolrqueryGetQueryParams = field(default=None)
+    query_params: SolrqueryGetQueryParams = field()
     
 
 @dataclass
 class SolrqueryGetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     solr_response: Optional[shared.SolrResponse] = field(default=None)
-    status_code: int = field(default=None)
     

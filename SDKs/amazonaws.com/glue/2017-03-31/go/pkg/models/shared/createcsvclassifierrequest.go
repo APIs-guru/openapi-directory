@@ -1,5 +1,7 @@
 package shared
 
+// CreateCsvClassifierRequest
+// Specifies a custom CSV classifier for <code>CreateClassifier</code> to create.
 type CreateCsvClassifierRequest struct {
 	AllowSingleColumn    *bool                `json:"AllowSingleColumn,omitempty"`
 	ContainsHeader       *CsvHeaderOptionEnum `json:"ContainsHeader,omitempty"`

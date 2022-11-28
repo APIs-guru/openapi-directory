@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MeteringGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=account" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=account" })
   account?: string;
-}
-
-
-export class MeteringGetRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: MeteringGetQueryParams;
 }
 
 
 export class MeteringGet200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=1.8.0" })
+  @SpeakeasyMetadata({ data: "json, name=1.8.0" })
   one80?: number;
 
-  @Metadata({ data: "json, name=1.8.1" })
+  @SpeakeasyMetadata({ data: "json, name=1.8.1" })
   one81?: number;
 
-  @Metadata({ data: "json, name=1.8.2" })
+  @SpeakeasyMetadata({ data: "json, name=1.8.2" })
   one82?: number;
 
-  @Metadata({ data: "json, name=_processingTime" })
+  @SpeakeasyMetadata({ data: "json, name=_processingTime" })
   processingTime?: number;
 
-  @Metadata({ data: "json, name=account" })
+  @SpeakeasyMetadata({ data: "json, name=account" })
   account?: string;
 
-  @Metadata({ data: "json, name=co2_g_oekostrom" })
+  @SpeakeasyMetadata({ data: "json, name=co2_g_oekostrom" })
   co2GOekostrom?: number;
 
-  @Metadata({ data: "json, name=co2_g_standard" })
+  @SpeakeasyMetadata({ data: "json, name=co2_g_standard" })
   co2GStandard?: number;
 
-  @Metadata({ data: "json, name=credits" })
+  @SpeakeasyMetadata({ data: "json, name=credits" })
   credits?: any;
 
-  @Metadata({ data: "json, name=timeStamp" })
+  @SpeakeasyMetadata({ data: "json, name=timeStamp" })
   timeStamp?: number;
 
-  @Metadata({ data: "json, name=ttl" })
+  @SpeakeasyMetadata({ data: "json, name=ttl" })
   ttl?: number;
 }
 
 
+export class MeteringGetRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: MeteringGetQueryParams;
+}
+
+
 export class MeteringGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   meteringGet200ApplicationJsonObject?: MeteringGet200ApplicationJson;
 }

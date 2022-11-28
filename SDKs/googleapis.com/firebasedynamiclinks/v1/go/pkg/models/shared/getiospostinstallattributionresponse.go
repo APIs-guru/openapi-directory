@@ -17,6 +17,8 @@ const (
 	GetIosPostInstallAttributionResponseRequestIPVersionEnumIpv6             GetIosPostInstallAttributionResponseRequestIPVersionEnum = "IP_V6"
 )
 
+// GetIosPostInstallAttributionResponse
+// Response for iSDK to execute strong match flow for post-install attribution.
 type GetIosPostInstallAttributionResponse struct {
 	AppMinimumVersion              *string                                                        `json:"appMinimumVersion,omitempty"`
 	AttributionConfidence          *GetIosPostInstallAttributionResponseAttributionConfidenceEnum `json:"attributionConfidence,omitempty"`

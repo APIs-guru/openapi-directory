@@ -1,16 +1,22 @@
 package shared
 
+// BlogLocale
+// The locale this Blog is set to.
 type BlogLocale struct {
 	Country  *string `json:"country,omitempty"`
 	Language *string `json:"language,omitempty"`
 	Variant  *string `json:"variant,omitempty"`
 }
 
+// BlogPages
+// The container of pages in this blog.
 type BlogPages struct {
 	SelfLink   *string `json:"selfLink,omitempty"`
 	TotalItems *int32  `json:"totalItems,omitempty"`
 }
 
+// BlogPosts
+// The container of posts in this blog.
 type BlogPosts struct {
 	Items      []Post  `json:"items,omitempty"`
 	SelfLink   *string `json:"selfLink,omitempty"`

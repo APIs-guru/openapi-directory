@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import authenticationtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Authentication:
-    password_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PasswordCount' }})
-    type: Optional[authenticationtype_enum.AuthenticationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    r"""Authentication
+    Denotes the user's authentication properties, such as whether it requires a password to authenticate. Used in output responses.
+    """
+    
+    password_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PasswordCount') }})
+    type: Optional[AuthenticationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

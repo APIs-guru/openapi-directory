@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TableRow } from "./tablerow";
 export declare class QueryTableRowsResult extends SpeakeasyBase {
     columnIds: string[];

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleChromeManagementV1AudioStatusReport } from "./googlechromemanagementv1audiostatusreport";
 import { GoogleChromeManagementV1BatteryInfo } from "./googlechromemanagementv1batteryinfo";
 import { GoogleChromeManagementV1BatteryStatusReport } from "./googlechromemanagementv1batterystatusreport";
@@ -19,74 +18,75 @@ import { GoogleChromeManagementV1StorageStatusReport } from "./googlechromemanag
 import { GoogleChromeManagementV1ThunderboltInfo } from "./googlechromemanagementv1thunderboltinfo";
 
 
+
 // GoogleChromeManagementV1TelemetryDevice
 /** 
  * Telemetry data collected from a managed device.
 **/
 export class GoogleChromeManagementV1TelemetryDevice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audioStatusReport", elemType: shared.GoogleChromeManagementV1AudioStatusReport })
+  @SpeakeasyMetadata({ data: "json, name=audioStatusReport", elemType: GoogleChromeManagementV1AudioStatusReport })
   audioStatusReport?: GoogleChromeManagementV1AudioStatusReport[];
 
-  @Metadata({ data: "json, name=batteryInfo", elemType: shared.GoogleChromeManagementV1BatteryInfo })
+  @SpeakeasyMetadata({ data: "json, name=batteryInfo", elemType: GoogleChromeManagementV1BatteryInfo })
   batteryInfo?: GoogleChromeManagementV1BatteryInfo[];
 
-  @Metadata({ data: "json, name=batteryStatusReport", elemType: shared.GoogleChromeManagementV1BatteryStatusReport })
+  @SpeakeasyMetadata({ data: "json, name=batteryStatusReport", elemType: GoogleChromeManagementV1BatteryStatusReport })
   batteryStatusReport?: GoogleChromeManagementV1BatteryStatusReport[];
 
-  @Metadata({ data: "json, name=bootPerformanceReport", elemType: shared.GoogleChromeManagementV1BootPerformanceReport })
+  @SpeakeasyMetadata({ data: "json, name=bootPerformanceReport", elemType: GoogleChromeManagementV1BootPerformanceReport })
   bootPerformanceReport?: GoogleChromeManagementV1BootPerformanceReport[];
 
-  @Metadata({ data: "json, name=cpuInfo", elemType: shared.GoogleChromeManagementV1CpuInfo })
+  @SpeakeasyMetadata({ data: "json, name=cpuInfo", elemType: GoogleChromeManagementV1CpuInfo })
   cpuInfo?: GoogleChromeManagementV1CpuInfo[];
 
-  @Metadata({ data: "json, name=cpuStatusReport", elemType: shared.GoogleChromeManagementV1CpuStatusReport })
+  @SpeakeasyMetadata({ data: "json, name=cpuStatusReport", elemType: GoogleChromeManagementV1CpuStatusReport })
   cpuStatusReport?: GoogleChromeManagementV1CpuStatusReport[];
 
-  @Metadata({ data: "json, name=customer" })
+  @SpeakeasyMetadata({ data: "json, name=customer" })
   customer?: string;
 
-  @Metadata({ data: "json, name=deviceId" })
+  @SpeakeasyMetadata({ data: "json, name=deviceId" })
   deviceId?: string;
 
-  @Metadata({ data: "json, name=graphicsInfo" })
+  @SpeakeasyMetadata({ data: "json, name=graphicsInfo" })
   graphicsInfo?: GoogleChromeManagementV1GraphicsInfo;
 
-  @Metadata({ data: "json, name=graphicsStatusReport", elemType: shared.GoogleChromeManagementV1GraphicsStatusReport })
+  @SpeakeasyMetadata({ data: "json, name=graphicsStatusReport", elemType: GoogleChromeManagementV1GraphicsStatusReport })
   graphicsStatusReport?: GoogleChromeManagementV1GraphicsStatusReport[];
 
-  @Metadata({ data: "json, name=memoryInfo" })
+  @SpeakeasyMetadata({ data: "json, name=memoryInfo" })
   memoryInfo?: GoogleChromeManagementV1MemoryInfo;
 
-  @Metadata({ data: "json, name=memoryStatusReport", elemType: shared.GoogleChromeManagementV1MemoryStatusReport })
+  @SpeakeasyMetadata({ data: "json, name=memoryStatusReport", elemType: GoogleChromeManagementV1MemoryStatusReport })
   memoryStatusReport?: GoogleChromeManagementV1MemoryStatusReport[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=networkDiagnosticsReport", elemType: shared.GoogleChromeManagementV1NetworkDiagnosticsReport })
+  @SpeakeasyMetadata({ data: "json, name=networkDiagnosticsReport", elemType: GoogleChromeManagementV1NetworkDiagnosticsReport })
   networkDiagnosticsReport?: GoogleChromeManagementV1NetworkDiagnosticsReport[];
 
-  @Metadata({ data: "json, name=networkInfo" })
+  @SpeakeasyMetadata({ data: "json, name=networkInfo" })
   networkInfo?: GoogleChromeManagementV1NetworkInfo;
 
-  @Metadata({ data: "json, name=networkStatusReport", elemType: shared.GoogleChromeManagementV1NetworkStatusReport })
+  @SpeakeasyMetadata({ data: "json, name=networkStatusReport", elemType: GoogleChromeManagementV1NetworkStatusReport })
   networkStatusReport?: GoogleChromeManagementV1NetworkStatusReport[];
 
-  @Metadata({ data: "json, name=orgUnitId" })
+  @SpeakeasyMetadata({ data: "json, name=orgUnitId" })
   orgUnitId?: string;
 
-  @Metadata({ data: "json, name=osUpdateStatus", elemType: shared.GoogleChromeManagementV1OsUpdateStatus })
+  @SpeakeasyMetadata({ data: "json, name=osUpdateStatus", elemType: GoogleChromeManagementV1OsUpdateStatus })
   osUpdateStatus?: GoogleChromeManagementV1OsUpdateStatus[];
 
-  @Metadata({ data: "json, name=serialNumber" })
+  @SpeakeasyMetadata({ data: "json, name=serialNumber" })
   serialNumber?: string;
 
-  @Metadata({ data: "json, name=storageInfo" })
+  @SpeakeasyMetadata({ data: "json, name=storageInfo" })
   storageInfo?: GoogleChromeManagementV1StorageInfo;
 
-  @Metadata({ data: "json, name=storageStatusReport", elemType: shared.GoogleChromeManagementV1StorageStatusReport })
+  @SpeakeasyMetadata({ data: "json, name=storageStatusReport", elemType: GoogleChromeManagementV1StorageStatusReport })
   storageStatusReport?: GoogleChromeManagementV1StorageStatusReport[];
 
-  @Metadata({ data: "json, name=thunderboltInfo", elemType: shared.GoogleChromeManagementV1ThunderboltInfo })
+  @SpeakeasyMetadata({ data: "json, name=thunderboltInfo", elemType: GoogleChromeManagementV1ThunderboltInfo })
   thunderboltInfo?: GoogleChromeManagementV1ThunderboltInfo[];
 }

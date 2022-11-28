@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import payitem
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PayItems:
-    pay_items: Optional[payitem.PayItem] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayItems' }})
+    pay_items: Optional[PayItem] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PayItems') }})
     

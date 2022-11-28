@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MemberDetail
+// Details about a member account that was invited to contribute to a behavior graph.
 type MemberDetail struct {
 	AccountID                            *string                   `json:"AccountId,omitempty"`
 	AdministratorID                      *string                   `json:"AdministratorId,omitempty"`

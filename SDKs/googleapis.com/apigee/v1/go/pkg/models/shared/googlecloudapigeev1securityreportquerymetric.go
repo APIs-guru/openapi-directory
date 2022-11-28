@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudApigeeV1SecurityReportQueryMetric
+// Metric of the Query
 type GoogleCloudApigeeV1SecurityReportQueryMetric struct {
 	AggregationFunction *string `json:"aggregationFunction,omitempty"`
 	Alias               *string `json:"alias,omitempty"`

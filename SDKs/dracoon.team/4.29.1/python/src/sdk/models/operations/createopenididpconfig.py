@@ -10,14 +10,14 @@ class CreateOpenIDIdpConfigHeaders:
 
 @dataclass
 class CreateOpenIDIdpConfigRequest:
-    headers: CreateOpenIDIdpConfigHeaders = field(default=None)
-    request: shared.CreateOpenIDIdpConfigRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateOpenIDIdpConfigHeaders = field()
+    request: shared.CreateOpenIDIdpConfigRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateOpenIDIdpConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     open_id_idp_config: Optional[shared.OpenIDIdpConfig] = field(default=None)
-    status_code: int = field(default=None)
     

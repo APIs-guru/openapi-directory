@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class SortOrderReviewEnum(str, Enum):
     REVIEW_RATING_A = "REVIEW_RATING_A"

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AddressVerificationData } from "./addressverificationdata";
 import { EmailVerificationData } from "./emailverificationdata";
 export declare enum VerificationOptionVerificationMethodEnum {

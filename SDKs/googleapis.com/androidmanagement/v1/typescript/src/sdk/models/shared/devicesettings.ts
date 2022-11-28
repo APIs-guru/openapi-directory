@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DeviceSettingsEncryptionStatusEnum {
-    EncryptionStatusUnspecified = "ENCRYPTION_STATUS_UNSPECIFIED"
-,    Unsupported = "UNSUPPORTED"
-,    Inactive = "INACTIVE"
-,    Activating = "ACTIVATING"
-,    Active = "ACTIVE"
-,    ActiveDefaultKey = "ACTIVE_DEFAULT_KEY"
-,    ActivePerUser = "ACTIVE_PER_USER"
+    EncryptionStatusUnspecified = "ENCRYPTION_STATUS_UNSPECIFIED",
+    Unsupported = "UNSUPPORTED",
+    Inactive = "INACTIVE",
+    Activating = "ACTIVATING",
+    Active = "ACTIVE",
+    ActiveDefaultKey = "ACTIVE_DEFAULT_KEY",
+    ActivePerUser = "ACTIVE_PER_USER"
 }
 
 
@@ -16,24 +17,24 @@ export enum DeviceSettingsEncryptionStatusEnum {
  * Information about security related device settings on device.
 **/
 export class DeviceSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adbEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=adbEnabled" })
   adbEnabled?: boolean;
 
-  @Metadata({ data: "json, name=developmentSettingsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=developmentSettingsEnabled" })
   developmentSettingsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=encryptionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionStatus" })
   encryptionStatus?: DeviceSettingsEncryptionStatusEnum;
 
-  @Metadata({ data: "json, name=isDeviceSecure" })
+  @SpeakeasyMetadata({ data: "json, name=isDeviceSecure" })
   isDeviceSecure?: boolean;
 
-  @Metadata({ data: "json, name=isEncrypted" })
+  @SpeakeasyMetadata({ data: "json, name=isEncrypted" })
   isEncrypted?: boolean;
 
-  @Metadata({ data: "json, name=unknownSourcesEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=unknownSourcesEnabled" })
   unknownSourcesEnabled?: boolean;
 
-  @Metadata({ data: "json, name=verifyAppsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=verifyAppsEnabled" })
   verifyAppsEnabled?: boolean;
 }

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessReview } from "./accessreview";
 import { GoogleCloudSecuritycenterV1Binding } from "./googlecloudsecuritycenterv1binding";
 import { NodePool } from "./nodepool";
@@ -8,26 +7,27 @@ import { Pod } from "./pod";
 import { Role } from "./role";
 
 
+
 // Kubernetes
 /** 
  * Kubernetes related attributes.
 **/
 export class Kubernetes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessReviews", elemType: shared.AccessReview })
+  @SpeakeasyMetadata({ data: "json, name=accessReviews", elemType: AccessReview })
   accessReviews?: AccessReview[];
 
-  @Metadata({ data: "json, name=bindings", elemType: shared.GoogleCloudSecuritycenterV1Binding })
+  @SpeakeasyMetadata({ data: "json, name=bindings", elemType: GoogleCloudSecuritycenterV1Binding })
   bindings?: GoogleCloudSecuritycenterV1Binding[];
 
-  @Metadata({ data: "json, name=nodePools", elemType: shared.NodePool })
+  @SpeakeasyMetadata({ data: "json, name=nodePools", elemType: NodePool })
   nodePools?: NodePool[];
 
-  @Metadata({ data: "json, name=nodes", elemType: shared.Node })
+  @SpeakeasyMetadata({ data: "json, name=nodes", elemType: Node })
   nodes?: Node[];
 
-  @Metadata({ data: "json, name=pods", elemType: shared.Pod })
+  @SpeakeasyMetadata({ data: "json, name=pods", elemType: Pod })
   pods?: Pod[];
 
-  @Metadata({ data: "json, name=roles", elemType: shared.Role })
+  @SpeakeasyMetadata({ data: "json, name=roles", elemType: Role })
   roles?: Role[];
 }

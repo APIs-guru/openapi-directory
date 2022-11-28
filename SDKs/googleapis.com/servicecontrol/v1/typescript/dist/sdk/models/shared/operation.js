@@ -22,9 +22,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { LogEntry } from "./logentry";
+import { MetricValueSet } from "./metricvalueset";
 import { QuotaProperties } from "./quotaproperties";
+import { ResourceInfo } from "./resourceinfo";
+import { TraceSpan } from "./tracespan";
 export var OperationImportanceEnum;
 (function (OperationImportanceEnum) {
     OperationImportanceEnum["Low"] = "LOW";
@@ -41,55 +44,55 @@ var Operation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=consumerId" }),
+        SpeakeasyMetadata({ data: "json, name=consumerId" }),
         __metadata("design:type", String)
     ], Operation.prototype, "consumerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", String)
     ], Operation.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=importance" }),
+        SpeakeasyMetadata({ data: "json, name=importance" }),
         __metadata("design:type", String)
     ], Operation.prototype, "importance", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Operation.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=logEntries", elemType: shared.LogEntry }),
+        SpeakeasyMetadata({ data: "json, name=logEntries", elemType: LogEntry }),
         __metadata("design:type", Array)
     ], Operation.prototype, "logEntries", void 0);
     __decorate([
-        Metadata({ data: "json, name=metricValueSets", elemType: shared.MetricValueSet }),
+        SpeakeasyMetadata({ data: "json, name=metricValueSets", elemType: MetricValueSet }),
         __metadata("design:type", Array)
     ], Operation.prototype, "metricValueSets", void 0);
     __decorate([
-        Metadata({ data: "json, name=operationId" }),
+        SpeakeasyMetadata({ data: "json, name=operationId" }),
         __metadata("design:type", String)
     ], Operation.prototype, "operationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=operationName" }),
+        SpeakeasyMetadata({ data: "json, name=operationName" }),
         __metadata("design:type", String)
     ], Operation.prototype, "operationName", void 0);
     __decorate([
-        Metadata({ data: "json, name=quotaProperties" }),
+        SpeakeasyMetadata({ data: "json, name=quotaProperties" }),
         __metadata("design:type", QuotaProperties)
     ], Operation.prototype, "quotaProperties", void 0);
     __decorate([
-        Metadata({ data: "json, name=resources", elemType: shared.ResourceInfo }),
+        SpeakeasyMetadata({ data: "json, name=resources", elemType: ResourceInfo }),
         __metadata("design:type", Array)
     ], Operation.prototype, "resources", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", String)
     ], Operation.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=traceSpans", elemType: shared.TraceSpan }),
+        SpeakeasyMetadata({ data: "json, name=traceSpans", elemType: TraceSpan }),
         __metadata("design:type", Array)
     ], Operation.prototype, "traceSpans", void 0);
     __decorate([
-        Metadata({ data: "json, name=userLabels" }),
+        SpeakeasyMetadata({ data: "json, name=userLabels" }),
         __metadata("design:type", Map)
     ], Operation.prototype, "userLabels", void 0);
     return Operation;

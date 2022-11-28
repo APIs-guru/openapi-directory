@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProcessingStoppingCondition
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configures conditions under which the processing job should be stopped, such as how long the processing job has been running. After the condition is met, the processing job is stopped.
 **/
 export class ProcessingStoppingCondition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxRuntimeInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=MaxRuntimeInSeconds" })
   maxRuntimeInSeconds: number;
 }

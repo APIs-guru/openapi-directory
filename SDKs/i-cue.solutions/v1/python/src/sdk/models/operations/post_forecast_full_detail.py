@@ -17,14 +17,14 @@ class PostForecastFullDetailRequests:
 
 @dataclass
 class PostForecastFullDetailRequest:
-    headers: PostForecastFullDetailHeaders = field(default=None)
+    headers: PostForecastFullDetailHeaders = field()
     request: Optional[PostForecastFullDetailRequests] = field(default=None)
     
 
 @dataclass
 class PostForecastFullDetailResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     full_details_forecast_response: Optional[shared.FullDetailsForecastResponse] = field(default=None)
-    status_code: int = field(default=None)
     

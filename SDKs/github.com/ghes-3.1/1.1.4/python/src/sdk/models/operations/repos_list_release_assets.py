@@ -5,9 +5,9 @@ from sdk.models import shared
 
 @dataclass
 class ReposListReleaseAssetsPathParams:
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    release_id: int = field(default=None, metadata={'path_param': { 'field_name': 'release_id', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    release_id: int = field(metadata={'path_param': { 'field_name': 'release_id', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,14 +18,14 @@ class ReposListReleaseAssetsQueryParams:
 
 @dataclass
 class ReposListReleaseAssetsRequest:
-    path_params: ReposListReleaseAssetsPathParams = field(default=None)
-    query_params: ReposListReleaseAssetsQueryParams = field(default=None)
+    path_params: ReposListReleaseAssetsPathParams = field()
+    query_params: ReposListReleaseAssetsQueryParams = field()
     
 
 @dataclass
 class ReposListReleaseAssetsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     release_assets: Optional[List[shared.ReleaseAsset]] = field(default=None)
     

@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -11,14 +14,14 @@ class CreateRoomHeaders:
 
 @dataclass
 class CreateRoomRequest:
-    headers: CreateRoomHeaders = field(default=None)
-    request: shared.CreateRoomRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateRoomHeaders = field()
+    request: shared.CreateRoomRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateRoomResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     node: Optional[shared.Node] = field(default=None)
-    status_code: int = field(default=None)
     

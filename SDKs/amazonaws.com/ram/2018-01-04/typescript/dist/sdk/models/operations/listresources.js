@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ListResourcesQueryParams = /** @class */ (function (_super) {
     __extends(ListResourcesQueryParams, _super);
@@ -30,11 +30,11 @@ var ListResourcesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" }),
         __metadata("design:type", String)
     ], ListResourcesQueryParams.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=nextToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nextToken" }),
         __metadata("design:type", String)
     ], ListResourcesQueryParams.prototype, "nextToken", void 0);
     return ListResourcesQueryParams;
@@ -46,31 +46,31 @@ var ListResourcesHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], ListResourcesHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], ListResourcesHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], ListResourcesHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], ListResourcesHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], ListResourcesHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], ListResourcesHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], ListResourcesHeaders.prototype, "xAmzSignedHeaders", void 0);
     return ListResourcesHeaders;
@@ -87,31 +87,31 @@ var ListResourcesRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=maxResults" }),
+        SpeakeasyMetadata({ data: "json, name=maxResults" }),
         __metadata("design:type", Number)
     ], ListResourcesRequestBody.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], ListResourcesRequestBody.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=principal" }),
+        SpeakeasyMetadata({ data: "json, name=principal" }),
         __metadata("design:type", String)
     ], ListResourcesRequestBody.prototype, "principal", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceArns" }),
+        SpeakeasyMetadata({ data: "json, name=resourceArns" }),
         __metadata("design:type", Array)
     ], ListResourcesRequestBody.prototype, "resourceArns", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceOwner" }),
+        SpeakeasyMetadata({ data: "json, name=resourceOwner" }),
         __metadata("design:type", String)
     ], ListResourcesRequestBody.prototype, "resourceOwner", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceShareArns" }),
+        SpeakeasyMetadata({ data: "json, name=resourceShareArns" }),
         __metadata("design:type", Array)
     ], ListResourcesRequestBody.prototype, "resourceShareArns", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceType" }),
+        SpeakeasyMetadata({ data: "json, name=resourceType" }),
         __metadata("design:type", String)
     ], ListResourcesRequestBody.prototype, "resourceType", void 0);
     return ListResourcesRequestBody;
@@ -123,15 +123,15 @@ var ListResourcesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListResourcesQueryParams)
     ], ListResourcesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListResourcesHeaders)
     ], ListResourcesRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", ListResourcesRequestBody)
     ], ListResourcesRequest.prototype, "request", void 0);
     return ListResourcesRequest;
@@ -143,43 +143,43 @@ var ListResourcesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListResourcesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListResourcesResponse.prototype, "invalidNextTokenException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListResourcesResponse.prototype, "invalidParameterException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListResourcesResponse.prototype, "invalidResourceTypeException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListResourcesResponse)
     ], ListResourcesResponse.prototype, "listResourcesResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListResourcesResponse.prototype, "malformedArnException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListResourcesResponse.prototype, "serverInternalException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListResourcesResponse.prototype, "serviceUnavailableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListResourcesResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListResourcesResponse.prototype, "unknownResourceException", void 0);
     return ListResourcesResponse;

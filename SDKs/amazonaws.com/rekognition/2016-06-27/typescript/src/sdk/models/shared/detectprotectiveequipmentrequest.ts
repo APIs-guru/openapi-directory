@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Image } from "./image";
 import { ProtectiveEquipmentSummarizationAttributes } from "./protectiveequipmentsummarizationattributes";
 
 
+
 export class DetectProtectiveEquipmentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Image" })
+  @SpeakeasyMetadata({ data: "json, name=Image" })
   image: Image;
 
-  @Metadata({ data: "json, name=SummarizationAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=SummarizationAttributes" })
   summarizationAttributes?: ProtectiveEquipmentSummarizationAttributes;
 }

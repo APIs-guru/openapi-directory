@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetFeatureCategoriesOutputFormatEnum;
 (function (GetFeatureCategoriesOutputFormatEnum) {
     GetFeatureCategoriesOutputFormatEnum["Json"] = "json";
@@ -34,7 +34,7 @@ var GetFeatureCategoriesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outputFormat" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputFormat" }),
         __metadata("design:type", String)
     ], GetFeatureCategoriesQueryParams.prototype, "outputFormat", void 0);
     return GetFeatureCategoriesQueryParams;
@@ -46,7 +46,7 @@ var GetFeatureCategoriesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFeatureCategoriesQueryParams)
     ], GetFeatureCategoriesRequest.prototype, "queryParams", void 0);
     return GetFeatureCategoriesRequest;
@@ -58,11 +58,11 @@ var GetFeatureCategoriesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetFeatureCategoriesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetFeatureCategoriesResponse.prototype, "statusCode", void 0);
     return GetFeatureCategoriesResponse;

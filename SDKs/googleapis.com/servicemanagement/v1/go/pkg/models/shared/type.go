@@ -7,6 +7,8 @@ const (
 	TypeSyntaxEnumSyntaxProto3 TypeSyntaxEnum = "SYNTAX_PROTO3"
 )
 
+// Type
+// A protocol buffer message type.
 type Type struct {
 	Fields        []Field         `json:"fields,omitempty"`
 	Name          *string         `json:"name,omitempty"`

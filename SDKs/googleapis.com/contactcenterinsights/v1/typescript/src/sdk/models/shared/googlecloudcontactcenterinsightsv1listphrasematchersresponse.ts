@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudContactcenterinsightsV1PhraseMatcher } from "./googlecloudcontactcenterinsightsv1phrasematcher";
+
 
 
 // GoogleCloudContactcenterinsightsV1ListPhraseMatchersResponse
@@ -8,9 +8,9 @@ import { GoogleCloudContactcenterinsightsV1PhraseMatcher } from "./googlecloudco
  * The response of listing phrase matchers.
 **/
 export class GoogleCloudContactcenterinsightsV1ListPhraseMatchersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=phraseMatchers", elemType: shared.GoogleCloudContactcenterinsightsV1PhraseMatcher })
+  @SpeakeasyMetadata({ data: "json, name=phraseMatchers", elemType: GoogleCloudContactcenterinsightsV1PhraseMatcher })
   phraseMatchers?: GoogleCloudContactcenterinsightsV1PhraseMatcher[];
 }

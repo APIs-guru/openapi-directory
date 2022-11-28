@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetProgramPathParams:
-    program_id: str = field(default=None, metadata={'path_param': { 'field_name': 'programId', 'style': 'simple', 'explode': False }})
+    program_id: str = field(metadata={'path_param': { 'field_name': 'programId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,19 +15,19 @@ class GetProgramQueryParams:
 
 @dataclass
 class GetProgramSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetProgramRequest:
-    path_params: GetProgramPathParams = field(default=None)
-    query_params: GetProgramQueryParams = field(default=None)
-    security: GetProgramSecurity = field(default=None)
+    path_params: GetProgramPathParams = field()
+    query_params: GetProgramQueryParams = field()
+    security: GetProgramSecurity = field()
     
 
 @dataclass
 class GetProgramResponse:
+    content_type: str = field()
+    status_code: int = field()
     base_item_dto: Optional[shared.BaseItemDto] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

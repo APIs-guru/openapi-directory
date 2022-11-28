@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import targetplatformaccelerator_enum
-from . import targetplatformarch_enum
-from . import targetplatformos_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TargetPlatform:
-    accelerator: Optional[targetplatformaccelerator_enum.TargetPlatformAcceleratorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Accelerator' }})
-    arch: targetplatformarch_enum.TargetPlatformArchEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Arch' }})
-    os: targetplatformos_enum.TargetPlatformOsEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Os' }})
+    r"""TargetPlatform
+    Contains information about a target platform that you want your model to run on, such as OS, architecture, and accelerators. It is an alternative of <code>TargetDevice</code>.
+    """
+    
+    arch: TargetPlatformArchEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Arch') }})
+    os: TargetPlatformOsEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Os') }})
+    accelerator: Optional[TargetPlatformAcceleratorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Accelerator') }})
     

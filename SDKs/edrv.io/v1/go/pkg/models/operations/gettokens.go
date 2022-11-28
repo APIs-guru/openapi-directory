@@ -19,14 +19,14 @@ type GetTokensQueryParams struct {
 	UpdatedAtDollarLte  *time.Time             `queryParam:"style=form,explode=true,name=updatedAt[$lte]"`
 }
 
-type GetTokensRequest struct {
-	QueryParams GetTokensQueryParams
-}
-
 type GetTokens200ApplicationJSON struct {
 	Message *string       `json:"message,omitempty"`
 	Ok      *bool         `json:"ok,omitempty"`
 	Result  []interface{} `json:"result,omitempty"`
+}
+
+type GetTokensRequest struct {
+	QueryParams GetTokensQueryParams
 }
 
 type GetTokensResponse struct {

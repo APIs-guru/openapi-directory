@@ -1,5 +1,7 @@
 package shared
 
+// SearchJobsResponse
+// Output only. Response for SearchJob method.
 type SearchJobsResponse struct {
 	BroadenedQueryJobsCount *int32              `json:"broadenedQueryJobsCount,omitempty"`
 	EstimatedTotalSize      *int32              `json:"estimatedTotalSize,omitempty"`

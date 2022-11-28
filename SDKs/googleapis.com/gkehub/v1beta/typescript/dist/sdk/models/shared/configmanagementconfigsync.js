@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigManagementGitConfig } from "./configmanagementgitconfig";
 import { ConfigManagementOciConfig } from "./configmanagementociconfig";
 // ConfigManagementConfigSync
@@ -35,27 +35,27 @@ var ConfigManagementConfigSync = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allowVerticalScale" }),
+        SpeakeasyMetadata({ data: "json, name=allowVerticalScale" }),
         __metadata("design:type", Boolean)
     ], ConfigManagementConfigSync.prototype, "allowVerticalScale", void 0);
     __decorate([
-        Metadata({ data: "json, name=enabled" }),
+        SpeakeasyMetadata({ data: "json, name=enabled" }),
         __metadata("design:type", Boolean)
     ], ConfigManagementConfigSync.prototype, "enabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=git" }),
+        SpeakeasyMetadata({ data: "json, name=git" }),
         __metadata("design:type", ConfigManagementGitConfig)
     ], ConfigManagementConfigSync.prototype, "git", void 0);
     __decorate([
-        Metadata({ data: "json, name=oci" }),
+        SpeakeasyMetadata({ data: "json, name=oci" }),
         __metadata("design:type", ConfigManagementOciConfig)
     ], ConfigManagementConfigSync.prototype, "oci", void 0);
     __decorate([
-        Metadata({ data: "json, name=preventDrift" }),
+        SpeakeasyMetadata({ data: "json, name=preventDrift" }),
         __metadata("design:type", Boolean)
     ], ConfigManagementConfigSync.prototype, "preventDrift", void 0);
     __decorate([
-        Metadata({ data: "json, name=sourceFormat" }),
+        SpeakeasyMetadata({ data: "json, name=sourceFormat" }),
         __metadata("design:type", String)
     ], ConfigManagementConfigSync.prototype, "sourceFormat", void 0);
     return ConfigManagementConfigSync;

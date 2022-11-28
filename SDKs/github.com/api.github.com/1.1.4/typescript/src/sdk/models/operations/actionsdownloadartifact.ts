@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ActionsDownloadArtifactPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=archive_format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=archive_format" })
   archiveFormat: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=artifact_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=artifact_id" })
   artifactId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class ActionsDownloadArtifactRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ActionsDownloadArtifactPathParams;
 }
 
 
 export class ActionsDownloadArtifactResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessSelector } from "./accessselector";
 import { ConditionContext } from "./conditioncontext";
 import { IdentitySelector } from "./identityselector";
@@ -6,26 +6,27 @@ import { Options } from "./options";
 import { ResourceSelector } from "./resourceselector";
 
 
+
 // IamPolicyAnalysisQuery
 /** 
  * IAM policy analysis query message.
 **/
 export class IamPolicyAnalysisQuery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessSelector" })
+  @SpeakeasyMetadata({ data: "json, name=accessSelector" })
   accessSelector?: AccessSelector;
 
-  @Metadata({ data: "json, name=conditionContext" })
+  @SpeakeasyMetadata({ data: "json, name=conditionContext" })
   conditionContext?: ConditionContext;
 
-  @Metadata({ data: "json, name=identitySelector" })
+  @SpeakeasyMetadata({ data: "json, name=identitySelector" })
   identitySelector?: IdentitySelector;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: Options;
 
-  @Metadata({ data: "json, name=resourceSelector" })
+  @SpeakeasyMetadata({ data: "json, name=resourceSelector" })
   resourceSelector?: ResourceSelector;
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope?: string;
 }

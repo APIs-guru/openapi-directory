@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ImageScanningConfiguration:
-    scan_on_push: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scanOnPush' }})
+    r"""ImageScanningConfiguration
+    The image scanning configuration for a repository.
+    """
+    
+    scan_on_push: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scanOnPush') }})
     

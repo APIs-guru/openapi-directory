@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class ReportsGetTimeframeEnum(str, Enum):
@@ -34,24 +35,24 @@ class ReportsGetTypeEnum(str, Enum):
 
 @dataclass
 class ReportsGetQueryParams:
+    timeframe: ReportsGetTimeframeEnum = field(metadata={'query_param': { 'field_name': 'timeframe', 'style': 'form', 'explode': True }})
+    type: ReportsGetTypeEnum = field(metadata={'query_param': { 'field_name': 'type', 'style': 'form', 'explode': True }})
     conversion: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'conversion', 'style': 'form', 'explode': True }})
     datapoint: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'datapoint', 'style': 'form', 'explode': True }})
     from_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fromDay', 'style': 'form', 'explode': True }})
     group: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'group', 'style': 'form', 'explode': True }})
     hittype: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'hittype', 'style': 'form', 'explode': True }})
-    timeframe: ReportsGetTimeframeEnum = field(default=None, metadata={'query_param': { 'field_name': 'timeframe', 'style': 'form', 'explode': True }})
     to_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'toDay', 'style': 'form', 'explode': True }})
-    type: ReportsGetTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'type', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class ReportsGetRequest:
-    query_params: ReportsGetQueryParams = field(default=None)
+    query_params: ReportsGetQueryParams = field()
     
 
 @dataclass
 class ReportsGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_dto_tops_top: Optional[shared.APICoreDtoTopsTop] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

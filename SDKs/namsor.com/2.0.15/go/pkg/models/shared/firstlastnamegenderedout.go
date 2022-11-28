@@ -8,6 +8,8 @@ const (
 	FirstLastNameGenderedOutLikelyGenderEnumUnknown FirstLastNameGenderedOutLikelyGenderEnum = "unknown"
 )
 
+// FirstLastNameGenderedOut
+// Represents the output of inferring the LIKELY gender from a personal name.
 type FirstLastNameGenderedOut struct {
 	FirstName             *string                                   `json:"firstName,omitempty"`
 	GenderScale           *float64                                  `json:"genderScale,omitempty"`

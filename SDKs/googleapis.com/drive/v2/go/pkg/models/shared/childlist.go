@@ -1,5 +1,7 @@
 package shared
 
+// ChildList
+// A list of children of a file.
 type ChildList struct {
 	Etag          *string          `json:"etag,omitempty"`
 	Items         []ChildReference `json:"items,omitempty"`

@@ -1,7 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { RuntimeGuestOsFeature } from "./runtimeguestosfeature";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocalDiskInitializeParams } from "./localdiskinitializeparams";
+import { RuntimeGuestOsFeature } from "./runtimeguestosfeature";
+
+
+
+// LocalDiskInput
+/** 
+ * A Local attached disk resource.
+**/
+export class LocalDiskInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=initializeParams" })
+  initializeParams?: LocalDiskInitializeParams;
+
+  @SpeakeasyMetadata({ data: "json, name=interface" })
+  interface?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=mode" })
+  mode?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=source" })
+  source?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: string;
+}
 
 
 // LocalDisk
@@ -9,39 +31,39 @@ import { LocalDiskInitializeParams } from "./localdiskinitializeparams";
  * A Local attached disk resource.
 **/
 export class LocalDisk extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoDelete" })
+  @SpeakeasyMetadata({ data: "json, name=autoDelete" })
   autoDelete?: boolean;
 
-  @Metadata({ data: "json, name=boot" })
+  @SpeakeasyMetadata({ data: "json, name=boot" })
   boot?: boolean;
 
-  @Metadata({ data: "json, name=deviceName" })
+  @SpeakeasyMetadata({ data: "json, name=deviceName" })
   deviceName?: string;
 
-  @Metadata({ data: "json, name=guestOsFeatures", elemType: shared.RuntimeGuestOsFeature })
+  @SpeakeasyMetadata({ data: "json, name=guestOsFeatures", elemType: RuntimeGuestOsFeature })
   guestOsFeatures?: RuntimeGuestOsFeature[];
 
-  @Metadata({ data: "json, name=index" })
+  @SpeakeasyMetadata({ data: "json, name=index" })
   index?: number;
 
-  @Metadata({ data: "json, name=initializeParams" })
+  @SpeakeasyMetadata({ data: "json, name=initializeParams" })
   initializeParams?: LocalDiskInitializeParams;
 
-  @Metadata({ data: "json, name=interface" })
+  @SpeakeasyMetadata({ data: "json, name=interface" })
   interface?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=licenses" })
+  @SpeakeasyMetadata({ data: "json, name=licenses" })
   licenses?: string[];
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

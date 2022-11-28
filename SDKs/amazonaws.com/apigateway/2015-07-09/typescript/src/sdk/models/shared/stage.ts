@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessLogSettings } from "./accesslogsettings";
 import { CacheClusterSizeEnum } from "./cacheclustersizeenum";
 import { CacheClusterStatusEnum } from "./cacheclusterstatusenum";
@@ -7,59 +6,60 @@ import { CanarySettings } from "./canarysettings";
 import { MethodSetting } from "./methodsetting";
 
 
+
 // Stage
 /** 
  * <p>Represents a unique identifier for a version of a deployed <a>RestApi</a> that is callable by users.</p> <div class="seeAlso"> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html">Deploy an API</a> </div>
 **/
 export class Stage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessLogSettings" })
+  @SpeakeasyMetadata({ data: "json, name=accessLogSettings" })
   accessLogSettings?: AccessLogSettings;
 
-  @Metadata({ data: "json, name=cacheClusterEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=cacheClusterEnabled" })
   cacheClusterEnabled?: boolean;
 
-  @Metadata({ data: "json, name=cacheClusterSize" })
+  @SpeakeasyMetadata({ data: "json, name=cacheClusterSize" })
   cacheClusterSize?: CacheClusterSizeEnum;
 
-  @Metadata({ data: "json, name=cacheClusterStatus" })
+  @SpeakeasyMetadata({ data: "json, name=cacheClusterStatus" })
   cacheClusterStatus?: CacheClusterStatusEnum;
 
-  @Metadata({ data: "json, name=canarySettings" })
+  @SpeakeasyMetadata({ data: "json, name=canarySettings" })
   canarySettings?: CanarySettings;
 
-  @Metadata({ data: "json, name=clientCertificateId" })
+  @SpeakeasyMetadata({ data: "json, name=clientCertificateId" })
   clientCertificateId?: string;
 
-  @Metadata({ data: "json, name=createdDate" })
+  @SpeakeasyMetadata({ data: "json, name=createdDate" })
   createdDate?: Date;
 
-  @Metadata({ data: "json, name=deploymentId" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentId" })
   deploymentId?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=documentationVersion" })
+  @SpeakeasyMetadata({ data: "json, name=documentationVersion" })
   documentationVersion?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDate" })
   lastUpdatedDate?: Date;
 
-  @Metadata({ data: "json, name=methodSettings", elemType: shared.MethodSetting })
+  @SpeakeasyMetadata({ data: "json, name=methodSettings", elemType: MethodSetting })
   methodSettings?: Map<string, MethodSetting>;
 
-  @Metadata({ data: "json, name=stageName" })
+  @SpeakeasyMetadata({ data: "json, name=stageName" })
   stageName?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=tracingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=tracingEnabled" })
   tracingEnabled?: boolean;
 
-  @Metadata({ data: "json, name=variables" })
+  @SpeakeasyMetadata({ data: "json, name=variables" })
   variables?: Map<string, string>;
 
-  @Metadata({ data: "json, name=webAclArn" })
+  @SpeakeasyMetadata({ data: "json, name=webAclArn" })
   webAclArn?: string;
 }

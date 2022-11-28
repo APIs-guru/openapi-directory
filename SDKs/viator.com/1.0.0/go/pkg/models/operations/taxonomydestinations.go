@@ -8,10 +8,6 @@ type TaxonomyDestinationsHeaders struct {
 	AcceptLanguage string `header:"style=simple,explode=false,name=Accept-Language"`
 }
 
-type TaxonomyDestinationsRequest struct {
-	Headers TaxonomyDestinationsHeaders
-}
-
 type TaxonomyDestinations200ApplicationJSONData struct {
 	DefaultCurrencyCode *string                     `json:"defaultCurrencyCode,omitempty"`
 	DestinationID       *int64                      `json:"destinationId,omitempty"`
@@ -42,6 +38,10 @@ type TaxonomyDestinations200ApplicationJSON struct {
 	Success          *bool                                        `json:"success,omitempty"`
 	TotalCount       *int64                                       `json:"totalCount,omitempty"`
 	Vmid             *string                                      `json:"vmid,omitempty"`
+}
+
+type TaxonomyDestinationsRequest struct {
+	Headers TaxonomyDestinationsHeaders
 }
 
 type TaxonomyDestinationsResponse struct {

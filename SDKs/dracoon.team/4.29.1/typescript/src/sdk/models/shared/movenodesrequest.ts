@@ -1,11 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MoveNode } from "./movenode";
 
+
 export enum MoveNodesRequestResolutionStrategyEnum {
-    Autorename = "autorename"
-,    Overwrite = "overwrite"
-,    Fail = "fail"
+    Autorename = "autorename",
+    Overwrite = "overwrite",
+    Fail = "fail"
 }
 
 
@@ -14,15 +14,15 @@ export enum MoveNodesRequestResolutionStrategyEnum {
  * Request model for moving nodes
 **/
 export class MoveNodesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.MoveNode })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: MoveNode })
   items?: MoveNode[];
 
-  @Metadata({ data: "json, name=keepShareLinks" })
+  @SpeakeasyMetadata({ data: "json, name=keepShareLinks" })
   keepShareLinks?: boolean;
 
-  @Metadata({ data: "json, name=nodeIds" })
+  @SpeakeasyMetadata({ data: "json, name=nodeIds" })
   nodeIds?: number[];
 
-  @Metadata({ data: "json, name=resolutionStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=resolutionStrategy" })
   resolutionStrategy?: MoveNodesRequestResolutionStrategyEnum;
 }

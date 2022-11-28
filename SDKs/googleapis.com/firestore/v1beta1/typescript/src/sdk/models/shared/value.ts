@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArrayValue } from "./arrayvalue";
 import { LatLng } from "./latlng";
 import { MapValue } from "./mapvalue";
+
 
 export enum ValueNullValueEnum {
     NullValue = "NULL_VALUE"
@@ -13,36 +14,36 @@ export enum ValueNullValueEnum {
  * A message that can hold any of the supported value types.
 **/
 export class Value extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arrayValue" })
+  @SpeakeasyMetadata({ data: "json, name=arrayValue" })
   arrayValue?: ArrayValue;
 
-  @Metadata({ data: "json, name=booleanValue" })
+  @SpeakeasyMetadata({ data: "json, name=booleanValue" })
   booleanValue?: boolean;
 
-  @Metadata({ data: "json, name=bytesValue" })
+  @SpeakeasyMetadata({ data: "json, name=bytesValue" })
   bytesValue?: string;
 
-  @Metadata({ data: "json, name=doubleValue" })
+  @SpeakeasyMetadata({ data: "json, name=doubleValue" })
   doubleValue?: number;
 
-  @Metadata({ data: "json, name=geoPointValue" })
+  @SpeakeasyMetadata({ data: "json, name=geoPointValue" })
   geoPointValue?: LatLng;
 
-  @Metadata({ data: "json, name=integerValue" })
+  @SpeakeasyMetadata({ data: "json, name=integerValue" })
   integerValue?: string;
 
-  @Metadata({ data: "json, name=mapValue" })
+  @SpeakeasyMetadata({ data: "json, name=mapValue" })
   mapValue?: MapValue;
 
-  @Metadata({ data: "json, name=nullValue" })
+  @SpeakeasyMetadata({ data: "json, name=nullValue" })
   nullValue?: ValueNullValueEnum;
 
-  @Metadata({ data: "json, name=referenceValue" })
+  @SpeakeasyMetadata({ data: "json, name=referenceValue" })
   referenceValue?: string;
 
-  @Metadata({ data: "json, name=stringValue" })
+  @SpeakeasyMetadata({ data: "json, name=stringValue" })
   stringValue?: string;
 
-  @Metadata({ data: "json, name=timestampValue" })
+  @SpeakeasyMetadata({ data: "json, name=timestampValue" })
   timestampValue?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// ComputeVMWorkload
+// Specificies usage of a set of identical compute VM instances.
 type ComputeVMWorkload struct {
 	EnableConfidentialCompute *bool             `json:"enableConfidentialCompute,omitempty"`
 	GuestAccelerator          *GuestAccelerator `json:"guestAccelerator,omitempty"`

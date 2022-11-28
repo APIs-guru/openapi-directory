@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import nestedcable
+from sdk import utils
+from . import *
 
 class WritablePowerPortTypeEnum(str, Enum):
     IEC_60320_C6 = "iec-60320-c6"
@@ -74,17 +76,14 @@ class WritablePowerPortTypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class WritablePowerPort:
-    allocated_draw: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allocated_draw' }})
-    cable: Optional[nestedcable.NestedCable] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cable' }})
-    connected_endpoint: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connected_endpoint' }})
-    connected_endpoint_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connected_endpoint_type' }})
-    connection_status: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_status' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    device: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    maximum_draw: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maximum_draw' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: Optional[WritablePowerPortTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class WritablePowerPortInput:
+    device: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('device') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    allocated_draw: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allocated_draw') }})
+    cable: Optional[NestedCableInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cable') }})
+    connection_status: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connection_status') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    maximum_draw: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maximum_draw') }})
+    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    type: Optional[WritablePowerPortTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

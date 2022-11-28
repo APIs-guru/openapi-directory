@@ -26,6 +26,20 @@ const (
 	InstanceConfigStateEnumReady            InstanceConfigStateEnum = "READY"
 )
 
+// InstanceConfigInput
+// A possible configuration for a Cloud Spanner instance. Configurations define the geographic placement of nodes and their replication.
+type InstanceConfigInput struct {
+	BaseConfig    *string           `json:"baseConfig,omitempty"`
+	DisplayName   *string           `json:"displayName,omitempty"`
+	Etag          *string           `json:"etag,omitempty"`
+	Labels        map[string]string `json:"labels,omitempty"`
+	LeaderOptions []string          `json:"leaderOptions,omitempty"`
+	Name          *string           `json:"name,omitempty"`
+	Replicas      []ReplicaInfo     `json:"replicas,omitempty"`
+}
+
+// InstanceConfig
+// A possible configuration for a Cloud Spanner instance. Configurations define the geographic placement of nodes and their replication.
 type InstanceConfig struct {
 	BaseConfig               *string                                     `json:"baseConfig,omitempty"`
 	ConfigType               *InstanceConfigConfigTypeEnum               `json:"configType,omitempty"`

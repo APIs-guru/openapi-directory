@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1Instance } from "./googlecloudapigeev1instance";
+
 
 
 // GoogleCloudApigeeV1ListInstancesResponse
@@ -8,9 +8,9 @@ import { GoogleCloudApigeeV1Instance } from "./googlecloudapigeev1instance";
  * Response for ListInstances.
 **/
 export class GoogleCloudApigeeV1ListInstancesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instances", elemType: shared.GoogleCloudApigeeV1Instance })
+  @SpeakeasyMetadata({ data: "json, name=instances", elemType: GoogleCloudApigeeV1Instance })
   instances?: GoogleCloudApigeeV1Instance[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

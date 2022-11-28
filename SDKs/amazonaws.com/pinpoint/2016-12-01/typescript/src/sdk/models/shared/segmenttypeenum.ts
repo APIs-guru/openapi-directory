@@ -1,6 +1,7 @@
 
 
+
 export enum SegmentTypeEnum {
-    Dimensional = "DIMENSIONAL"
-,    Import = "IMPORT"
+    Dimensional = "DIMENSIONAL",
+    Import = "IMPORT"
 }

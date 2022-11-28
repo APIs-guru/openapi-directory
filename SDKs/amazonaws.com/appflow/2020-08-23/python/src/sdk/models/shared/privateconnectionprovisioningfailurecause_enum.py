@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class PrivateConnectionProvisioningFailureCauseEnum(str, Enum):
     CONNECTOR_AUTHENTICATION = "CONNECTOR_AUTHENTICATION"

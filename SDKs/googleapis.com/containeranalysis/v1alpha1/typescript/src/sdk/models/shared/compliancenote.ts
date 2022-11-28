@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CisBenchmark } from "./cisbenchmark";
 import { ComplianceVersion } from "./complianceversion";
+
 
 
 // ComplianceNote
@@ -9,24 +9,24 @@ import { ComplianceVersion } from "./complianceversion";
  * ComplianceNote encapsulates all information about a specific compliance check.
 **/
 export class ComplianceNote extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cisBenchmark" })
+  @SpeakeasyMetadata({ data: "json, name=cisBenchmark" })
   cisBenchmark?: CisBenchmark;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=rationale" })
+  @SpeakeasyMetadata({ data: "json, name=rationale" })
   rationale?: string;
 
-  @Metadata({ data: "json, name=remediation" })
+  @SpeakeasyMetadata({ data: "json, name=remediation" })
   remediation?: string;
 
-  @Metadata({ data: "json, name=scanInstructions" })
+  @SpeakeasyMetadata({ data: "json, name=scanInstructions" })
   scanInstructions?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=version", elemType: shared.ComplianceVersion })
+  @SpeakeasyMetadata({ data: "json, name=version", elemType: ComplianceVersion })
   version?: ComplianceVersion[];
 }

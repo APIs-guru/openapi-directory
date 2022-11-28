@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateUserRequestBody
@@ -6,39 +7,39 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Create a Member in invite state 
 **/
 export class CreateUserRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=display_name" })
+  @SpeakeasyMetadata({ data: "json, name=display_name" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=image_url" })
+  @SpeakeasyMetadata({ data: "json, name=image_url" })
   imageUrl?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
-export class CreateUserRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: CreateUserRequestBody;
-}
-
-
 export class CreateUser200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }
 
 
+export class CreateUserRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: CreateUserRequestBody;
+}
+
+
 export class CreateUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createUser200ApplicationJsonObject?: CreateUser200ApplicationJson;
 }

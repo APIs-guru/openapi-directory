@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Escalation } from "./escalation";
+
 
 
 // EscalateCaseRequest
@@ -7,6 +8,6 @@ import { Escalation } from "./escalation";
  * The request message for the EscalateCase endpoint.
 **/
 export class EscalateCaseRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=escalation" })
+  @SpeakeasyMetadata({ data: "json, name=escalation" })
   escalation?: Escalation;
 }

@@ -22,11 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CapacityProviderStrategyItem } from "./capacityproviderstrategyitem";
 import { LaunchTypeEnum } from "./launchtypeenum";
 import { NetworkConfiguration } from "./networkconfiguration";
+import { PlacementConstraint } from "./placementconstraint";
+import { PlacementStrategy } from "./placementstrategy";
 import { PropagateTagsEnum } from "./propagatetagsenum";
+import { Tag } from "./tag";
 // EcsParameters
 /**
  * The custom parameters to be used when the target is an Amazon ECS task.
@@ -37,59 +40,59 @@ var EcsParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CapacityProviderStrategy", elemType: shared.CapacityProviderStrategyItem }),
+        SpeakeasyMetadata({ data: "json, name=CapacityProviderStrategy", elemType: CapacityProviderStrategyItem }),
         __metadata("design:type", Array)
     ], EcsParameters.prototype, "capacityProviderStrategy", void 0);
     __decorate([
-        Metadata({ data: "json, name=EnableECSManagedTags" }),
+        SpeakeasyMetadata({ data: "json, name=EnableECSManagedTags" }),
         __metadata("design:type", Boolean)
     ], EcsParameters.prototype, "enableEcsManagedTags", void 0);
     __decorate([
-        Metadata({ data: "json, name=EnableExecuteCommand" }),
+        SpeakeasyMetadata({ data: "json, name=EnableExecuteCommand" }),
         __metadata("design:type", Boolean)
     ], EcsParameters.prototype, "enableExecuteCommand", void 0);
     __decorate([
-        Metadata({ data: "json, name=Group" }),
+        SpeakeasyMetadata({ data: "json, name=Group" }),
         __metadata("design:type", String)
     ], EcsParameters.prototype, "group", void 0);
     __decorate([
-        Metadata({ data: "json, name=LaunchType" }),
+        SpeakeasyMetadata({ data: "json, name=LaunchType" }),
         __metadata("design:type", String)
     ], EcsParameters.prototype, "launchType", void 0);
     __decorate([
-        Metadata({ data: "json, name=NetworkConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=NetworkConfiguration" }),
         __metadata("design:type", NetworkConfiguration)
     ], EcsParameters.prototype, "networkConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=PlacementConstraints", elemType: shared.PlacementConstraint }),
+        SpeakeasyMetadata({ data: "json, name=PlacementConstraints", elemType: PlacementConstraint }),
         __metadata("design:type", Array)
     ], EcsParameters.prototype, "placementConstraints", void 0);
     __decorate([
-        Metadata({ data: "json, name=PlacementStrategy", elemType: shared.PlacementStrategy }),
+        SpeakeasyMetadata({ data: "json, name=PlacementStrategy", elemType: PlacementStrategy }),
         __metadata("design:type", Array)
     ], EcsParameters.prototype, "placementStrategy", void 0);
     __decorate([
-        Metadata({ data: "json, name=PlatformVersion" }),
+        SpeakeasyMetadata({ data: "json, name=PlatformVersion" }),
         __metadata("design:type", String)
     ], EcsParameters.prototype, "platformVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=PropagateTags" }),
+        SpeakeasyMetadata({ data: "json, name=PropagateTags" }),
         __metadata("design:type", String)
     ], EcsParameters.prototype, "propagateTags", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReferenceId" }),
+        SpeakeasyMetadata({ data: "json, name=ReferenceId" }),
         __metadata("design:type", String)
     ], EcsParameters.prototype, "referenceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], EcsParameters.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=TaskCount" }),
+        SpeakeasyMetadata({ data: "json, name=TaskCount" }),
         __metadata("design:type", Number)
     ], EcsParameters.prototype, "taskCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=TaskDefinitionArn" }),
+        SpeakeasyMetadata({ data: "json, name=TaskDefinitionArn" }),
         __metadata("design:type", String)
     ], EcsParameters.prototype, "taskDefinitionArn", void 0);
     return EcsParameters;

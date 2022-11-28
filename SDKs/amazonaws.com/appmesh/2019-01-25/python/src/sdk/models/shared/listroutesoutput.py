@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import routeref
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListRoutesOutput:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    routes: List[routeref.RouteRef] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'routes' }})
+    r"""ListRoutesOutput
+    <zonbook></zonbook><xhtml></xhtml>
+    """
+    
+    routes: List[RouteRef] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('routes') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     

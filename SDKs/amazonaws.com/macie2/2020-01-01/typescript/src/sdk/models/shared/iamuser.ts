@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IamUser
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about an Identity and Access Management (IAM) user who performed an action on an affected resource.
 **/
 export class IamUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=principalId" })
+  @SpeakeasyMetadata({ data: "json, name=principalId" })
   principalId?: string;
 
-  @Metadata({ data: "json, name=userName" })
+  @SpeakeasyMetadata({ data: "json, name=userName" })
   userName?: string;
 }

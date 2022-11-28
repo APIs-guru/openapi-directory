@@ -4,10 +4,6 @@ type SingleWorkspacePathParams struct {
 	WorkspaceID string `pathParam:"style=simple,explode=false,name=workspace_id"`
 }
 
-type SingleWorkspaceRequest struct {
-	PathParams SingleWorkspacePathParams
-}
-
 type SingleWorkspace200ApplicationJSONWorkspaceCollections struct {
 	ID   *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
@@ -40,6 +36,10 @@ type SingleWorkspace404ApplicationJSONError struct {
 
 type SingleWorkspace404ApplicationJSON struct {
 	Error *SingleWorkspace404ApplicationJSONError `json:"error,omitempty"`
+}
+
+type SingleWorkspaceRequest struct {
+	PathParams SingleWorkspacePathParams
 }
 
 type SingleWorkspaceResponse struct {

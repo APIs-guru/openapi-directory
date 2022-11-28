@@ -1,9 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageOption } from "./imageoption";
 import { LibraryOptionInfoDto } from "./libraryoptioninfodto";
-import { LibraryOptionInfoDto } from "./libraryoptioninfodto";
 import { ImageTypeEnum } from "./imagetypeenum";
+
 
 
 // LibraryTypeOptionsDto
@@ -11,18 +10,18 @@ import { ImageTypeEnum } from "./imagetypeenum";
  * Library type options dto.
 **/
 export class LibraryTypeOptionsDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DefaultImageOptions", elemType: shared.ImageOption })
+  @SpeakeasyMetadata({ data: "json, name=DefaultImageOptions", elemType: ImageOption })
   defaultImageOptions?: ImageOption[];
 
-  @Metadata({ data: "json, name=ImageFetchers", elemType: shared.LibraryOptionInfoDto })
+  @SpeakeasyMetadata({ data: "json, name=ImageFetchers", elemType: LibraryOptionInfoDto })
   imageFetchers?: LibraryOptionInfoDto[];
 
-  @Metadata({ data: "json, name=MetadataFetchers", elemType: shared.LibraryOptionInfoDto })
+  @SpeakeasyMetadata({ data: "json, name=MetadataFetchers", elemType: LibraryOptionInfoDto })
   metadataFetchers?: LibraryOptionInfoDto[];
 
-  @Metadata({ data: "json, name=SupportedImageTypes" })
+  @SpeakeasyMetadata({ data: "json, name=SupportedImageTypes" })
   supportedImageTypes?: ImageTypeEnum[];
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 }

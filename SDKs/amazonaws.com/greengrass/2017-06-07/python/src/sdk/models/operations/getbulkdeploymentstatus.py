@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetBulkDeploymentStatusPathParams:
-    bulk_deployment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'BulkDeploymentId', 'style': 'simple', 'explode': False }})
+    bulk_deployment_id: str = field(metadata={'path_param': { 'field_name': 'BulkDeploymentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,14 +24,14 @@ class GetBulkDeploymentStatusHeaders:
 
 @dataclass
 class GetBulkDeploymentStatusRequest:
-    path_params: GetBulkDeploymentStatusPathParams = field(default=None)
-    headers: GetBulkDeploymentStatusHeaders = field(default=None)
+    headers: GetBulkDeploymentStatusHeaders = field()
+    path_params: GetBulkDeploymentStatusPathParams = field()
     
 
 @dataclass
 class GetBulkDeploymentStatusResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_bulk_deployment_status_response: Optional[shared.GetBulkDeploymentStatusResponse] = field(default=None)
-    status_code: int = field(default=None)
     

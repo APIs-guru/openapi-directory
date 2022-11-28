@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Url
 /**
  *  A uniform resource locator, used as a unique identifier to locate a resource on the internet.
@@ -33,11 +33,11 @@ var Url = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=hyperlinkName" }),
+        SpeakeasyMetadata({ data: "json, name=hyperlinkName" }),
         __metadata("design:type", String)
     ], Url.prototype, "hyperlinkName", void 0);
     __decorate([
-        Metadata({ data: "json, name=link" }),
+        SpeakeasyMetadata({ data: "json, name=link" }),
         __metadata("design:type", String)
     ], Url.prototype, "link", void 0);
     return Url;

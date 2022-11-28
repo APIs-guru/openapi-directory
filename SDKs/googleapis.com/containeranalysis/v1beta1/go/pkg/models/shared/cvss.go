@@ -86,6 +86,8 @@ const (
 	CvssUserInteractionEnumUserInteractionRequired    CvssUserInteractionEnum = "USER_INTERACTION_REQUIRED"
 )
 
+// Cvss
+// Common Vulnerability Scoring System. This message is compatible with CVSS v2 and v3. For CVSS v2 details, see https://www.first.org/cvss/v2/guide CVSS v2 calculator: https://nvd.nist.gov/vuln-metrics/cvss/v2-calculator For CVSS v3 details, see https://www.first.org/cvss/specification-document CVSS v3 calculator: https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator
 type Cvss struct {
 	AttackComplexity      *CvssAttackComplexityEnum      `json:"attackComplexity,omitempty"`
 	AttackVector          *CvssAttackVectorEnum          `json:"attackVector,omitempty"`

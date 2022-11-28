@@ -1,6 +1,7 @@
 
 
+
 export enum DocumentParameterTypeEnum {
-    String = "String"
-,    StringList = "StringList"
+    String = "String",
+    StringList = "StringList"
 }

@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class GetChannelVideoPathParams:
-    channel_id: float = field(default=None, metadata={'path_param': { 'field_name': 'channel_id', 'style': 'simple', 'explode': False }})
-    video_id: float = field(default=None, metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
+    channel_id: float = field(metadata={'path_param': { 'field_name': 'channel_id', 'style': 'simple', 'explode': False }})
+    video_id: float = field(metadata={'path_param': { 'field_name': 'video_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetChannelVideoRequest:
-    path_params: GetChannelVideoPathParams = field(default=None)
+    path_params: GetChannelVideoPathParams = field()
     
 
 @dataclass
 class GetChannelVideoResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     legacy_error: Optional[shared.LegacyError] = field(default=None)
     video: Optional[shared.Video] = field(default=None)
     

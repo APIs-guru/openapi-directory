@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ImportDataCharacterEncodingEnum } from "./importdatacharacterencodingenum";
 /**
  *  An object that contains the options relating to parsing delimited text as part of an import request.

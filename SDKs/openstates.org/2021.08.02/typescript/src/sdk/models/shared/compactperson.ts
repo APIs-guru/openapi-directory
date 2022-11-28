@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CurrentRole } from "./currentrole";
 
 
+
 export class CompactPerson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=current_role" })
+  @SpeakeasyMetadata({ data: "json, name=current_role" })
   currentRole?: CurrentRole;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=party" })
+  @SpeakeasyMetadata({ data: "json, name=party" })
   party: string;
 }

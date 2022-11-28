@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EnterpriseAdminSyncLdapMappingForTeamPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
   teamId: number;
 }
 
 
-export class EnterpriseAdminSyncLdapMappingForTeamRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: EnterpriseAdminSyncLdapMappingForTeamPathParams;
-}
-
-
 export class EnterpriseAdminSyncLdapMappingForTeam201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
+export class EnterpriseAdminSyncLdapMappingForTeamRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: EnterpriseAdminSyncLdapMappingForTeamPathParams;
+}
+
+
 export class EnterpriseAdminSyncLdapMappingForTeamResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   enterpriseAdminSyncLdapMappingForTeam201ApplicationJsonObject?: EnterpriseAdminSyncLdapMappingForTeam201ApplicationJson;
 }

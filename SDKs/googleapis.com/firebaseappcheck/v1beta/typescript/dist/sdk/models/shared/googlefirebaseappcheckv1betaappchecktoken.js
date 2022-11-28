@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleFirebaseAppcheckV1betaAppCheckToken
 /**
  * Encapsulates an *App Check token*, which are used to access Firebase services protected by App Check.
@@ -33,15 +33,15 @@ var GoogleFirebaseAppcheckV1betaAppCheckToken = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attestationToken" }),
+        SpeakeasyMetadata({ data: "json, name=attestationToken" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1betaAppCheckToken.prototype, "attestationToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=token" }),
+        SpeakeasyMetadata({ data: "json, name=token" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1betaAppCheckToken.prototype, "token", void 0);
     __decorate([
-        Metadata({ data: "json, name=ttl" }),
+        SpeakeasyMetadata({ data: "json, name=ttl" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1betaAppCheckToken.prototype, "ttl", void 0);
     return GoogleFirebaseAppcheckV1betaAppCheckToken;

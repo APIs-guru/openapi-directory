@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComponentParameterDetail } from "./componentparameterdetail";
 import { PlatformEnum } from "./platformenum";
 import { ComponentTypeEnum } from "./componenttypeenum";
+
 
 
 // Component
@@ -10,48 +10,48 @@ import { ComponentTypeEnum } from "./componenttypeenum";
  * A detailed view of a component.
 **/
 export class Component extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=changeDescription" })
+  @SpeakeasyMetadata({ data: "json, name=changeDescription" })
   changeDescription?: string;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: string;
 
-  @Metadata({ data: "json, name=dateCreated" })
+  @SpeakeasyMetadata({ data: "json, name=dateCreated" })
   dateCreated?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=encrypted" })
+  @SpeakeasyMetadata({ data: "json, name=encrypted" })
   encrypted?: boolean;
 
-  @Metadata({ data: "json, name=kmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=owner" })
+  @SpeakeasyMetadata({ data: "json, name=owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=parameters", elemType: shared.ComponentParameterDetail })
+  @SpeakeasyMetadata({ data: "json, name=parameters", elemType: ComponentParameterDetail })
   parameters?: ComponentParameterDetail[];
 
-  @Metadata({ data: "json, name=platform" })
+  @SpeakeasyMetadata({ data: "json, name=platform" })
   platform?: PlatformEnum;
 
-  @Metadata({ data: "json, name=supportedOsVersions" })
+  @SpeakeasyMetadata({ data: "json, name=supportedOsVersions" })
   supportedOsVersions?: string[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ComponentTypeEnum;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

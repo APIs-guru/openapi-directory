@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import query
+from sdk import utils
+from . import *
 
 class CountArtifactsRequestViewEnum(str, Enum):
     COUNT_RESULT_VIEW_UNSPECIFIED = "COUNT_RESULT_VIEW_UNSPECIFIED"
@@ -12,6 +14,10 @@ class CountArtifactsRequestViewEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CountArtifactsRequest:
-    query: Optional[query.Query] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'query' }})
-    view: Optional[CountArtifactsRequestViewEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'view' }})
+    r"""CountArtifactsRequest
+    Count artifacts request.
+    """
+    
+    query: Optional[Query] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('query') }})
+    view: Optional[CountArtifactsRequestViewEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('view') }})
     

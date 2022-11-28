@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetTagsPathParams:
-    resource_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'resource_arn', 'style': 'simple', 'explode': False }})
+    resource_arn: str = field(metadata={'path_param': { 'field_name': 'resource_arn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,17 +30,17 @@ class GetTagsHeaders:
 
 @dataclass
 class GetTagsRequest:
-    path_params: GetTagsPathParams = field(default=None)
-    query_params: GetTagsQueryParams = field(default=None)
-    headers: GetTagsHeaders = field(default=None)
+    headers: GetTagsHeaders = field()
+    path_params: GetTagsPathParams = field()
+    query_params: GetTagsQueryParams = field()
     
 
 @dataclass
 class GetTagsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     tags: Optional[shared.Tags] = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)

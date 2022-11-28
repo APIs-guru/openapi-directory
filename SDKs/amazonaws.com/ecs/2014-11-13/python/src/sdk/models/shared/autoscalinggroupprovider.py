@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import managedscaling
-from . import managedterminationprotection_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AutoScalingGroupProvider:
-    auto_scaling_group_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'autoScalingGroupArn' }})
-    managed_scaling: Optional[managedscaling.ManagedScaling] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'managedScaling' }})
-    managed_termination_protection: Optional[managedterminationprotection_enum.ManagedTerminationProtectionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'managedTerminationProtection' }})
+    r"""AutoScalingGroupProvider
+    The details of the Auto Scaling group for the capacity provider.
+    """
+    
+    auto_scaling_group_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('autoScalingGroupArn') }})
+    managed_scaling: Optional[ManagedScaling] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('managedScaling') }})
+    managed_termination_protection: Optional[ManagedTerminationProtectionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('managedTerminationProtection') }})
     

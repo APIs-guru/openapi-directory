@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class VoiceQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=from" })
   from?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=text" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=text" })
   text: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=to" })
   to: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=xml" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=xml" })
   xml?: number;
 }
 
 
 export class VoiceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: VoiceQueryParams;
 }
 
 
 export class VoiceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   voice200TextPlainString?: string;
 }

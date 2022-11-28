@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EdgePresetDeploymentStatusEnum } from "./edgepresetdeploymentstatusenum";
 import { EdgePresetDeploymentTypeEnum } from "./edgepresetdeploymenttypeenum";
+
 
 
 // EdgePresetDeploymentOutput
@@ -8,15 +9,15 @@ import { EdgePresetDeploymentTypeEnum } from "./edgepresetdeploymenttypeenum";
  * The output of a SageMaker Edge Manager deployable resource.
 **/
 export class EdgePresetDeploymentOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Artifact" })
+  @SpeakeasyMetadata({ data: "json, name=Artifact" })
   artifact?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: EdgePresetDeploymentStatusEnum;
 
-  @Metadata({ data: "json, name=StatusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=StatusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: EdgePresetDeploymentTypeEnum;
 }

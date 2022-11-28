@@ -8,26 +8,18 @@ type CreatePromoCreditRequestBody struct {
 	PromoCode string `json:"promo_code"`
 }
 
-type CreatePromoCreditSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type CreatePromoCreditSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type CreatePromoCreditSecurity struct {
-	Option1 *CreatePromoCreditSecurityOption1 `security:"option"`
-	Option2 *CreatePromoCreditSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type CreatePromoCreditDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreatePromoCreditRequest struct {
 	Request  *CreatePromoCreditRequestBody `request:"mediaType=application/json"`
 	Security CreatePromoCreditSecurity
-}
-
-type CreatePromoCreditDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreatePromoCreditResponse struct {

@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SecretEnvVar } from "./secretenvvar";
+import { SecretVolume } from "./secretvolume";
 export var ServiceConfigIngressSettingsEnum;
 (function (ServiceConfigIngressSettingsEnum) {
     ServiceConfigIngressSettingsEnum["IngressSettingsUnspecified"] = "INGRESS_SETTINGS_UNSPECIFIED";
@@ -31,6 +32,12 @@ export var ServiceConfigIngressSettingsEnum;
     ServiceConfigIngressSettingsEnum["AllowInternalOnly"] = "ALLOW_INTERNAL_ONLY";
     ServiceConfigIngressSettingsEnum["AllowInternalAndGclb"] = "ALLOW_INTERNAL_AND_GCLB";
 })(ServiceConfigIngressSettingsEnum || (ServiceConfigIngressSettingsEnum = {}));
+export var ServiceConfigSecurityLevelEnum;
+(function (ServiceConfigSecurityLevelEnum) {
+    ServiceConfigSecurityLevelEnum["SecurityLevelUnspecified"] = "SECURITY_LEVEL_UNSPECIFIED";
+    ServiceConfigSecurityLevelEnum["SecureAlways"] = "SECURE_ALWAYS";
+    ServiceConfigSecurityLevelEnum["SecureOptional"] = "SECURE_OPTIONAL";
+})(ServiceConfigSecurityLevelEnum || (ServiceConfigSecurityLevelEnum = {}));
 export var ServiceConfigVpcConnectorEgressSettingsEnum;
 (function (ServiceConfigVpcConnectorEgressSettingsEnum) {
     ServiceConfigVpcConnectorEgressSettingsEnum["VpcConnectorEgressSettingsUnspecified"] = "VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED";
@@ -39,7 +46,7 @@ export var ServiceConfigVpcConnectorEgressSettingsEnum;
 })(ServiceConfigVpcConnectorEgressSettingsEnum || (ServiceConfigVpcConnectorEgressSettingsEnum = {}));
 // ServiceConfig
 /**
- * Describes the Service being deployed. Currently Supported : Cloud Run (fully managed).
+ * Describes the Service being deployed. Currently Supported : Cloud Run (fully managed). Next tag: 23
 **/
 var ServiceConfig = /** @class */ (function (_super) {
     __extends(ServiceConfig, _super);
@@ -47,65 +54,133 @@ var ServiceConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allTrafficOnLatestRevision" }),
+        SpeakeasyMetadata({ data: "json, name=allTrafficOnLatestRevision" }),
         __metadata("design:type", Boolean)
     ], ServiceConfig.prototype, "allTrafficOnLatestRevision", void 0);
     __decorate([
-        Metadata({ data: "json, name=availableMemory" }),
+        SpeakeasyMetadata({ data: "json, name=availableMemory" }),
         __metadata("design:type", String)
     ], ServiceConfig.prototype, "availableMemory", void 0);
     __decorate([
-        Metadata({ data: "json, name=environmentVariables" }),
+        SpeakeasyMetadata({ data: "json, name=environmentVariables" }),
         __metadata("design:type", Map)
     ], ServiceConfig.prototype, "environmentVariables", void 0);
     __decorate([
-        Metadata({ data: "json, name=ingressSettings" }),
+        SpeakeasyMetadata({ data: "json, name=ingressSettings" }),
         __metadata("design:type", String)
     ], ServiceConfig.prototype, "ingressSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxInstanceCount" }),
+        SpeakeasyMetadata({ data: "json, name=maxInstanceCount" }),
         __metadata("design:type", Number)
     ], ServiceConfig.prototype, "maxInstanceCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=minInstanceCount" }),
+        SpeakeasyMetadata({ data: "json, name=minInstanceCount" }),
         __metadata("design:type", Number)
     ], ServiceConfig.prototype, "minInstanceCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=revision" }),
+        SpeakeasyMetadata({ data: "json, name=revision" }),
         __metadata("design:type", String)
     ], ServiceConfig.prototype, "revision", void 0);
     __decorate([
-        Metadata({ data: "json, name=secretEnvironmentVariables", elemType: shared.SecretEnvVar }),
+        SpeakeasyMetadata({ data: "json, name=secretEnvironmentVariables", elemType: SecretEnvVar }),
         __metadata("design:type", Array)
     ], ServiceConfig.prototype, "secretEnvironmentVariables", void 0);
     __decorate([
-        Metadata({ data: "json, name=secretVolumes", elemType: shared.SecretVolume }),
+        SpeakeasyMetadata({ data: "json, name=secretVolumes", elemType: SecretVolume }),
         __metadata("design:type", Array)
     ], ServiceConfig.prototype, "secretVolumes", void 0);
     __decorate([
-        Metadata({ data: "json, name=service" }),
+        SpeakeasyMetadata({ data: "json, name=securityLevel" }),
+        __metadata("design:type", String)
+    ], ServiceConfig.prototype, "securityLevel", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=service" }),
         __metadata("design:type", String)
     ], ServiceConfig.prototype, "service", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccountEmail" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccountEmail" }),
         __metadata("design:type", String)
     ], ServiceConfig.prototype, "serviceAccountEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeoutSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=timeoutSeconds" }),
         __metadata("design:type", Number)
     ], ServiceConfig.prototype, "timeoutSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=uri" }),
+        SpeakeasyMetadata({ data: "json, name=uri" }),
         __metadata("design:type", String)
     ], ServiceConfig.prototype, "uri", void 0);
     __decorate([
-        Metadata({ data: "json, name=vpcConnector" }),
+        SpeakeasyMetadata({ data: "json, name=vpcConnector" }),
         __metadata("design:type", String)
     ], ServiceConfig.prototype, "vpcConnector", void 0);
     __decorate([
-        Metadata({ data: "json, name=vpcConnectorEgressSettings" }),
+        SpeakeasyMetadata({ data: "json, name=vpcConnectorEgressSettings" }),
         __metadata("design:type", String)
     ], ServiceConfig.prototype, "vpcConnectorEgressSettings", void 0);
     return ServiceConfig;
 }(SpeakeasyBase));
 export { ServiceConfig };
+// ServiceConfigInput
+/**
+ * Describes the Service being deployed. Currently Supported : Cloud Run (fully managed). Next tag: 23
+**/
+var ServiceConfigInput = /** @class */ (function (_super) {
+    __extends(ServiceConfigInput, _super);
+    function ServiceConfigInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=allTrafficOnLatestRevision" }),
+        __metadata("design:type", Boolean)
+    ], ServiceConfigInput.prototype, "allTrafficOnLatestRevision", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=availableMemory" }),
+        __metadata("design:type", String)
+    ], ServiceConfigInput.prototype, "availableMemory", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=environmentVariables" }),
+        __metadata("design:type", Map)
+    ], ServiceConfigInput.prototype, "environmentVariables", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=ingressSettings" }),
+        __metadata("design:type", String)
+    ], ServiceConfigInput.prototype, "ingressSettings", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=maxInstanceCount" }),
+        __metadata("design:type", Number)
+    ], ServiceConfigInput.prototype, "maxInstanceCount", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=minInstanceCount" }),
+        __metadata("design:type", Number)
+    ], ServiceConfigInput.prototype, "minInstanceCount", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=secretEnvironmentVariables", elemType: SecretEnvVar }),
+        __metadata("design:type", Array)
+    ], ServiceConfigInput.prototype, "secretEnvironmentVariables", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=secretVolumes", elemType: SecretVolume }),
+        __metadata("design:type", Array)
+    ], ServiceConfigInput.prototype, "secretVolumes", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=securityLevel" }),
+        __metadata("design:type", String)
+    ], ServiceConfigInput.prototype, "securityLevel", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=serviceAccountEmail" }),
+        __metadata("design:type", String)
+    ], ServiceConfigInput.prototype, "serviceAccountEmail", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=timeoutSeconds" }),
+        __metadata("design:type", Number)
+    ], ServiceConfigInput.prototype, "timeoutSeconds", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=vpcConnector" }),
+        __metadata("design:type", String)
+    ], ServiceConfigInput.prototype, "vpcConnector", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=vpcConnectorEgressSettings" }),
+        __metadata("design:type", String)
+    ], ServiceConfigInput.prototype, "vpcConnectorEgressSettings", void 0);
+    return ServiceConfigInput;
+}(SpeakeasyBase));
+export { ServiceConfigInput };

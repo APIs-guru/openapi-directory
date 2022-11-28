@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
-// SdkHarnessContainerImage
+
+// SDKHarnessContainerImage
 /** 
  * Defines an SDK harness container for executing Dataflow pipelines.
 **/
-export class SdkHarnessContainerImage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=capabilities" })
+export class SDKHarnessContainerImage extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=capabilities" })
   capabilities?: string[];
 
-  @Metadata({ data: "json, name=containerImage" })
+  @SpeakeasyMetadata({ data: "json, name=containerImage" })
   containerImage?: string;
 
-  @Metadata({ data: "json, name=environmentId" })
+  @SpeakeasyMetadata({ data: "json, name=environmentId" })
   environmentId?: string;
 
-  @Metadata({ data: "json, name=useSingleCorePerContainer" })
+  @SpeakeasyMetadata({ data: "json, name=useSingleCorePerContainer" })
   useSingleCorePerContainer?: boolean;
 }

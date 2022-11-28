@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -22,14 +23,14 @@ class AdsenseAccountsListQueryParams:
 
 @dataclass
 class AdsenseAccountsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdsenseAccountsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -40,13 +41,13 @@ class AdsenseAccountsListSecurity:
 
 @dataclass
 class AdsenseAccountsListRequest:
-    query_params: AdsenseAccountsListQueryParams = field(default=None)
-    security: AdsenseAccountsListSecurity = field(default=None)
+    query_params: AdsenseAccountsListQueryParams = field()
+    security: AdsenseAccountsListSecurity = field()
     
 
 @dataclass
 class AdsenseAccountsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_accounts_response: Optional[shared.ListAccountsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

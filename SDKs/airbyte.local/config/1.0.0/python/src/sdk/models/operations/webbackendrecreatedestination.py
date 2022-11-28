@@ -5,13 +5,13 @@ from sdk.models import shared
 
 @dataclass
 class WebBackendRecreateDestinationRequest:
-    request: shared.DestinationRecreate = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.DestinationRecreate = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class WebBackendRecreateDestinationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     destination_read: Optional[shared.DestinationRead] = field(default=None)
     invalid_input_exception_info: Optional[shared.InvalidInputExceptionInfo] = field(default=None)
-    status_code: int = field(default=None)
     

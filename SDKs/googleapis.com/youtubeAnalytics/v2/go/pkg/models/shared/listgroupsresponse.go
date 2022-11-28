@@ -1,5 +1,7 @@
 package shared
 
+// ListGroupsResponse
+// Response message for GroupsService.ListGroups.
 type ListGroupsResponse struct {
 	Errors        *Errors `json:"errors,omitempty"`
 	Etag          *string `json:"etag,omitempty"`

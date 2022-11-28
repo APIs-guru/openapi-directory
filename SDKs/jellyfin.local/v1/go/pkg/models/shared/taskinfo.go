@@ -1,5 +1,7 @@
 package shared
 
+// TaskInfo
+// Class TaskInfo.
 type TaskInfo struct {
 	Category                  *string           `json:"Category,omitempty"`
 	CurrentProgressPercentage *float64          `json:"CurrentProgressPercentage,omitempty"`

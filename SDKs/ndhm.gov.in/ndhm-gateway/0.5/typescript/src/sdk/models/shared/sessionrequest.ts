@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SessionRequestGrantTypeEnum {
-    ClientCredentials = "client_credentials"
-,    RefreshToken = "refresh_token"
+    ClientCredentials = "client_credentials",
+    RefreshToken = "refresh_token"
 }
 
 
 export class SessionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId: string;
 
-  @Metadata({ data: "json, name=clientSecret" })
+  @SpeakeasyMetadata({ data: "json, name=clientSecret" })
   clientSecret: string;
 
-  @Metadata({ data: "json, name=grantType" })
+  @SpeakeasyMetadata({ data: "json, name=grantType" })
   grantType: SessionRequestGrantTypeEnum;
 
-  @Metadata({ data: "json, name=refreshToken" })
+  @SpeakeasyMetadata({ data: "json, name=refreshToken" })
   refreshToken?: string;
 }

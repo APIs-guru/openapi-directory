@@ -1,9 +1,8 @@
 from dataclasses import dataclass, field
-from datetime import datetime
-from marshmallow import fields
-import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class WritableServiceProtocolEnum(str, Enum):
     TCP = "tcp"
@@ -12,17 +11,14 @@ class WritableServiceProtocolEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class WritableService:
-    created: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    custom_fields: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'custom_fields' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    device: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    ipaddresses: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipaddresses' }})
-    last_updated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_updated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    port: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'port' }})
-    protocol: WritableServiceProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
-    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    virtual_machine: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'virtual_machine' }})
+class WritableServiceInput:
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    port: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('port') }})
+    protocol: WritableServiceProtocolEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('protocol') }})
+    custom_fields: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('custom_fields') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    device: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('device') }})
+    ipaddresses: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipaddresses') }})
+    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    virtual_machine: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('virtual_machine') }})
     

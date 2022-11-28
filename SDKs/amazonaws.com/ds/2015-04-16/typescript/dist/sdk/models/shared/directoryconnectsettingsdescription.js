@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DirectoryConnectSettingsDescription
 /**
  * Contains information about an AD Connector directory.
@@ -33,27 +33,27 @@ var DirectoryConnectSettingsDescription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AvailabilityZones" }),
+        SpeakeasyMetadata({ data: "json, name=AvailabilityZones" }),
         __metadata("design:type", Array)
     ], DirectoryConnectSettingsDescription.prototype, "availabilityZones", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConnectIps" }),
+        SpeakeasyMetadata({ data: "json, name=ConnectIps" }),
         __metadata("design:type", Array)
     ], DirectoryConnectSettingsDescription.prototype, "connectIps", void 0);
     __decorate([
-        Metadata({ data: "json, name=CustomerUserName" }),
+        SpeakeasyMetadata({ data: "json, name=CustomerUserName" }),
         __metadata("design:type", String)
     ], DirectoryConnectSettingsDescription.prototype, "customerUserName", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecurityGroupId" }),
+        SpeakeasyMetadata({ data: "json, name=SecurityGroupId" }),
         __metadata("design:type", String)
     ], DirectoryConnectSettingsDescription.prototype, "securityGroupId", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetIds" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetIds" }),
         __metadata("design:type", Array)
     ], DirectoryConnectSettingsDescription.prototype, "subnetIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcId" }),
+        SpeakeasyMetadata({ data: "json, name=VpcId" }),
         __metadata("design:type", String)
     ], DirectoryConnectSettingsDescription.prototype, "vpcId", void 0);
     return DirectoryConnectSettingsDescription;

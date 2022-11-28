@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import updatesvmactivedirectoryconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateStorageVirtualMachineRequest:
-    active_directory_configuration: Optional[updatesvmactivedirectoryconfiguration.UpdateSvmActiveDirectoryConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ActiveDirectoryConfiguration' }})
-    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientRequestToken' }})
-    storage_virtual_machine_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StorageVirtualMachineId' }})
-    svm_admin_password: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SvmAdminPassword' }})
+    storage_virtual_machine_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('StorageVirtualMachineId') }})
+    active_directory_configuration: Optional[UpdateSvmActiveDirectoryConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ActiveDirectoryConfiguration') }})
+    client_request_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientRequestToken') }})
+    svm_admin_password: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SvmAdminPassword') }})
     

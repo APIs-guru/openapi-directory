@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PostV1OrderScreenFormatEnum;
 (function (PostV1OrderScreenFormatEnum) {
     PostV1OrderScreenFormatEnum["Json"] = "json";
@@ -34,135 +34,135 @@ var PostV1OrderScreenQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=amount" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=amount" }),
         __metadata("design:type", Number)
     ], PostV1OrderScreenQueryParams.prototype, "amount", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=avs_result" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=avs_result" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "avsResult", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=bill_addr" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bill_addr" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "billAddr", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=bill_city" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bill_city" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "billCity", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=bill_country" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bill_country" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "billCountry", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=bill_state" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bill_state" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "billState", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=bill_zip_code" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bill_zip_code" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "billZipCode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=bin_no" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bin_no" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "binNo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=card_hash" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=card_hash" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "cardHash", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=currency" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currency" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "currency", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=cvv_result" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cvv_result" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "cvvResult", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=department" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=department" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "department", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=email" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=email_domain" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email_domain" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "emailDomain", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=email_hash" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=email_hash" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "emailHash", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=first_name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=first_name" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "firstName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=flp_checksum" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=flp_checksum" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "flpChecksum", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ip" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ip" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "ip", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=last_name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=last_name" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "lastName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=password_hash" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=password_hash" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "passwordHash", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=payment_mode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=payment_mode" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "paymentMode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quantity" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quantity" }),
         __metadata("design:type", Number)
     ], PostV1OrderScreenQueryParams.prototype, "quantity", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ship_addr" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ship_addr" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "shipAddr", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ship_city" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ship_city" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "shipCity", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ship_country" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ship_country" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "shipCountry", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ship_state" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ship_state" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "shipState", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ship_zip_code" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ship_zip_code" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "shipZipCode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=user_order_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=user_order_id" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "userOrderId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=user_order_memo" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=user_order_memo" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "userOrderMemo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=user_phone" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=user_phone" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "userPhone", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=username_hash" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=username_hash" }),
         __metadata("design:type", String)
     ], PostV1OrderScreenQueryParams.prototype, "usernameHash", void 0);
     return PostV1OrderScreenQueryParams;
@@ -174,7 +174,7 @@ var PostV1OrderScreenRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostV1OrderScreenQueryParams)
     ], PostV1OrderScreenRequest.prototype, "queryParams", void 0);
     return PostV1OrderScreenRequest;
@@ -186,15 +186,15 @@ var PostV1OrderScreenResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostV1OrderScreenResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostV1OrderScreenResponse.prototype, "postV1OrderScreen200ApplicationJsonString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostV1OrderScreenResponse.prototype, "statusCode", void 0);
     return PostV1OrderScreenResponse;

@@ -12,6 +12,8 @@ const (
 	BubbleChartSpecLegendPositionEnumInsideLegend                         BubbleChartSpecLegendPositionEnum = "INSIDE_LEGEND"
 )
 
+// BubbleChartSpec
+// A bubble chart.
 type BubbleChartSpec struct {
 	BubbleBorderColor      *Color                             `json:"bubbleBorderColor,omitempty"`
 	BubbleBorderColorStyle *ColorStyle                        `json:"bubbleBorderColorStyle,omitempty"`

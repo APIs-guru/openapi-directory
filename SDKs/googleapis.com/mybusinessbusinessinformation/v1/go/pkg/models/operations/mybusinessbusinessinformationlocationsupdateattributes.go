@@ -26,7 +26,7 @@ type MybusinessbusinessinformationLocationsUpdateAttributesQueryParams struct {
 type MybusinessbusinessinformationLocationsUpdateAttributesRequest struct {
 	PathParams  MybusinessbusinessinformationLocationsUpdateAttributesPathParams
 	QueryParams MybusinessbusinessinformationLocationsUpdateAttributesQueryParams
-	Request     *shared.Attributes `request:"mediaType=application/json"`
+	Request     *shared.AttributesInput `request:"mediaType=application/json"`
 }
 
 type MybusinessbusinessinformationLocationsUpdateAttributesResponse struct {

@@ -1,9 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum BusinessChainAssignedTargetingOptionDetailsProximityRadiusUnitEnum {
-    DistanceUnitUnspecified = "DISTANCE_UNIT_UNSPECIFIED"
-,    DistanceUnitMiles = "DISTANCE_UNIT_MILES"
-,    DistanceUnitKilometers = "DISTANCE_UNIT_KILOMETERS"
+    DistanceUnitUnspecified = "DISTANCE_UNIT_UNSPECIFIED",
+    DistanceUnitMiles = "DISTANCE_UNIT_MILES",
+    DistanceUnitKilometers = "DISTANCE_UNIT_KILOMETERS"
+}
+
+
+// BusinessChainAssignedTargetingOptionDetailsInput
+/** 
+ * Details for assigned Business chain targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_BUSINESS_CHAIN`.
+**/
+export class BusinessChainAssignedTargetingOptionDetailsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=proximityRadiusAmount" })
+  proximityRadiusAmount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=proximityRadiusUnit" })
+  proximityRadiusUnit?: BusinessChainAssignedTargetingOptionDetailsProximityRadiusUnitEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=targetingOptionId" })
+  targetingOptionId?: string;
 }
 
 
@@ -12,15 +29,15 @@ export enum BusinessChainAssignedTargetingOptionDetailsProximityRadiusUnitEnum {
  * Details for assigned Business chain targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_BUSINESS_CHAIN`.
 **/
 export class BusinessChainAssignedTargetingOptionDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=proximityRadiusAmount" })
+  @SpeakeasyMetadata({ data: "json, name=proximityRadiusAmount" })
   proximityRadiusAmount?: number;
 
-  @Metadata({ data: "json, name=proximityRadiusUnit" })
+  @SpeakeasyMetadata({ data: "json, name=proximityRadiusUnit" })
   proximityRadiusUnit?: BusinessChainAssignedTargetingOptionDetailsProximityRadiusUnitEnum;
 
-  @Metadata({ data: "json, name=targetingOptionId" })
+  @SpeakeasyMetadata({ data: "json, name=targetingOptionId" })
   targetingOptionId?: string;
 }

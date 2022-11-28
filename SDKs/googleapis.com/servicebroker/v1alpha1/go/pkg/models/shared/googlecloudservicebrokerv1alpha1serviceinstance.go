@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudServicebrokerV1alpha1ServiceInstance
+// Message describing inputs to Provision and Update Service instance requests.
 type GoogleCloudServicebrokerV1alpha1ServiceInstance struct {
 	Context          map[string]interface{} `json:"context,omitempty"`
 	CreateTime       *string                `json:"createTime,omitempty"`

@@ -22,102 +22,102 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetweatherzipcodeQueryParams = /** @class */ (function (_super) {
     __extends(GetweatherzipcodeQueryParams, _super);
     function GetweatherzipcodeQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=license" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" }),
         __metadata("design:type", String)
     ], GetweatherzipcodeQueryParams.prototype, "license", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=zip" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=zip" }),
         __metadata("design:type", String)
     ], GetweatherzipcodeQueryParams.prototype, "zip", void 0);
     return GetweatherzipcodeQueryParams;
 }(SpeakeasyBase));
 export { GetweatherzipcodeQueryParams };
-var GetweatherzipcodeRequest = /** @class */ (function (_super) {
-    __extends(GetweatherzipcodeRequest, _super);
-    function GetweatherzipcodeRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetweatherzipcodeQueryParams)
-    ], GetweatherzipcodeRequest.prototype, "queryParams", void 0);
-    return GetweatherzipcodeRequest;
-}(SpeakeasyBase));
-export { GetweatherzipcodeRequest };
 var Getweatherzipcode200ApplicationJson = /** @class */ (function (_super) {
     __extends(Getweatherzipcode200ApplicationJson, _super);
     function Getweatherzipcode200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=City" }),
+        SpeakeasyMetadata({ data: "json, name=City" }),
         __metadata("design:type", String)
     ], Getweatherzipcode200ApplicationJson.prototype, "city", void 0);
     __decorate([
-        Metadata({ data: "json, name=Code" }),
+        SpeakeasyMetadata({ data: "json, name=Code" }),
         __metadata("design:type", String)
     ], Getweatherzipcode200ApplicationJson.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=Credits" }),
+        SpeakeasyMetadata({ data: "json, name=Credits" }),
         __metadata("design:type", String)
     ], Getweatherzipcode200ApplicationJson.prototype, "credits", void 0);
     __decorate([
-        Metadata({ data: "json, name=RelativeHumidity" }),
+        SpeakeasyMetadata({ data: "json, name=RelativeHumidity" }),
         __metadata("design:type", String)
     ], Getweatherzipcode200ApplicationJson.prototype, "relativeHumidity", void 0);
     __decorate([
-        Metadata({ data: "json, name=State" }),
+        SpeakeasyMetadata({ data: "json, name=State" }),
         __metadata("design:type", String)
     ], Getweatherzipcode200ApplicationJson.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=TempC" }),
+        SpeakeasyMetadata({ data: "json, name=TempC" }),
         __metadata("design:type", String)
     ], Getweatherzipcode200ApplicationJson.prototype, "tempC", void 0);
     __decorate([
-        Metadata({ data: "json, name=TempF" }),
+        SpeakeasyMetadata({ data: "json, name=TempF" }),
         __metadata("design:type", String)
     ], Getweatherzipcode200ApplicationJson.prototype, "tempF", void 0);
     __decorate([
-        Metadata({ data: "json, name=VisibilityMiles" }),
+        SpeakeasyMetadata({ data: "json, name=VisibilityMiles" }),
         __metadata("design:type", String)
     ], Getweatherzipcode200ApplicationJson.prototype, "visibilityMiles", void 0);
     __decorate([
-        Metadata({ data: "json, name=Weather" }),
+        SpeakeasyMetadata({ data: "json, name=Weather" }),
         __metadata("design:type", String)
     ], Getweatherzipcode200ApplicationJson.prototype, "weather", void 0);
     __decorate([
-        Metadata({ data: "json, name=WindDir" }),
+        SpeakeasyMetadata({ data: "json, name=WindDir" }),
         __metadata("design:type", String)
     ], Getweatherzipcode200ApplicationJson.prototype, "windDir", void 0);
     __decorate([
-        Metadata({ data: "json, name=WindMPH" }),
+        SpeakeasyMetadata({ data: "json, name=WindMPH" }),
         __metadata("design:type", String)
     ], Getweatherzipcode200ApplicationJson.prototype, "windMph", void 0);
     return Getweatherzipcode200ApplicationJson;
 }(SpeakeasyBase));
 export { Getweatherzipcode200ApplicationJson };
+var GetweatherzipcodeRequest = /** @class */ (function (_super) {
+    __extends(GetweatherzipcodeRequest, _super);
+    function GetweatherzipcodeRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetweatherzipcodeQueryParams)
+    ], GetweatherzipcodeRequest.prototype, "queryParams", void 0);
+    return GetweatherzipcodeRequest;
+}(SpeakeasyBase));
+export { GetweatherzipcodeRequest };
 var GetweatherzipcodeResponse = /** @class */ (function (_super) {
     __extends(GetweatherzipcodeResponse, _super);
     function GetweatherzipcodeResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetweatherzipcodeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetweatherzipcodeResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Getweatherzipcode200ApplicationJson)
     ], GetweatherzipcodeResponse.prototype, "getweatherzipcode200ApplicationJsonObject", void 0);
     return GetweatherzipcodeResponse;

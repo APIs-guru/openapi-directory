@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsPathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsQue
 
 @dataclass
 class ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsRequest:
-    path_params: ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsPathParams = field(default=None)
-    query_params: ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsQueryParams = field(default=None)
+    path_params: ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsPathParams = field()
+    query_params: ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsQueryParams = field()
+    security: ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsSecurity = field()
     request: Optional[shared.TestIamPermissionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsSecurity = field(default=None)
     
 
 @dataclass
 class ServicedirectoryProjectsLocationsRegistrationPoliciesTestIamPermissionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     test_iam_permissions_response: Optional[shared.TestIamPermissionsResponse] = field(default=None)
     

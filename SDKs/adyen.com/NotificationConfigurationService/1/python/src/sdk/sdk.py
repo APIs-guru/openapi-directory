@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
-from typing import Any,List,Optional
+from typing import Any,Optional
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,32 +14,53 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def post_create_notification_configuration(self, request: operations.PostCreateNotificationConfigurationRequest) -> operations.PostCreateNotificationConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Subscribe to notifications.
+        Creates a subscription to notifications informing you of events on your platform. After the subscription is created, the events specified in the configuration will be sent to the URL specified in the configuration. Subscriptions must be configured on a per-event basis (as opposed to, for example, a per-account holder basis), so all event notifications of a marketplace and of a given type will be sent to the same endpoint(s). A marketplace may have multiple endpoints if desired; an event notification may be sent to as many or as few different endpoints as configured.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/createNotificationConfiguration"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -71,19 +95,21 @@ class SDK:
 
     
     def post_delete_notification_configurations(self, request: operations.PostDeleteNotificationConfigurationsRequest) -> operations.PostDeleteNotificationConfigurationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an existing notification subscription configuration.
+        This endpoint is used to delete an existing notification subscription configuration. After the subscription is deleted, no further event notifications will be sent to the URL that was in the subscription.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/deleteNotificationConfigurations"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -118,19 +144,21 @@ class SDK:
 
     
     def post_get_notification_configuration(self, request: operations.PostGetNotificationConfigurationRequest) -> operations.PostGetNotificationConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve an existing notification subscription configuration.
+        This endpoint is used to retrieve the details of the configuration of a notification subscription.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getNotificationConfiguration"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -165,19 +193,21 @@ class SDK:
 
     
     def post_get_notification_configuration_list(self, request: operations.PostGetNotificationConfigurationListRequest) -> operations.PostGetNotificationConfigurationListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a list of existing notification subscription configurations.
+        This endpoint is used to retrieve the details of the configurations of all of the notification subscriptions in the marketplace of the executing user.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/getNotificationConfigurationList"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -212,19 +242,21 @@ class SDK:
 
     
     def post_test_notification_configuration(self, request: operations.PostTestNotificationConfigurationRequest) -> operations.PostTestNotificationConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Test an existing notification configuration.
+        This endpoint is used to test an existing notification subscription configuration. For each event type specified, a test notification will be generated and sent to the URL configured in the subscription specified.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/testNotificationConfiguration"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -259,19 +291,21 @@ class SDK:
 
     
     def post_update_notification_configuration(self, request: operations.PostUpdateNotificationConfigurationRequest) -> operations.PostUpdateNotificationConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update an existing notification subscription configuration.
+        This endpoint is used to update an existing notification subscription configuration. If updating the event types, all event types desired must be provided, otherwise the previous event type configuration will be overwritten.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/updateNotificationConfiguration"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

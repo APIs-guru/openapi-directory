@@ -1,5 +1,7 @@
 package shared
 
+// SnapshotImage
+// An image of a snapshot.
 type SnapshotImage struct {
 	Height   *int32  `json:"height,omitempty"`
 	Kind     *string `json:"kind,omitempty"`

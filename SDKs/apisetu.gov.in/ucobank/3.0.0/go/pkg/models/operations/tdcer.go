@@ -28,11 +28,6 @@ type TdcerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type TdcerRequest struct {
-	Request  *TdcerRequestBody `request:"mediaType=application/json"`
-	Security TdcerSecurity
-}
-
 type Tdcer400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Tdcer504ApplicationJSON struct {
 	Error            *Tdcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Tdcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type TdcerRequest struct {
+	Request  *TdcerRequestBody `request:"mediaType=application/json"`
+	Security TdcerSecurity
 }
 
 type TdcerResponse struct {

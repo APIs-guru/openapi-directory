@@ -8,6 +8,8 @@ const (
 	GoogleAppsScriptTypeAddOnEntryPointAddOnTypeEnumDataStudio       GoogleAppsScriptTypeAddOnEntryPointAddOnTypeEnum = "DATA_STUDIO"
 )
 
+// GoogleAppsScriptTypeAddOnEntryPoint
+// An add-on entry point.
 type GoogleAppsScriptTypeAddOnEntryPoint struct {
 	AddOnType         *GoogleAppsScriptTypeAddOnEntryPointAddOnTypeEnum `json:"addOnType,omitempty"`
 	Description       *string                                           `json:"description,omitempty"`

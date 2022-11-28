@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SingleFieldDependencyDependencyTypeEnum {
     SingleField = "SINGLE_FIELD"
@@ -6,12 +7,12 @@ export enum SingleFieldDependencyDependencyTypeEnum {
 
 
 export class SingleFieldDependency extends SpeakeasyBase {
-  @Metadata({ data: "json, name=controllingFieldName" })
+  @SpeakeasyMetadata({ data: "json, name=controllingFieldName" })
   controllingFieldName: string;
 
-  @Metadata({ data: "json, name=dependencyType" })
+  @SpeakeasyMetadata({ data: "json, name=dependencyType" })
   dependencyType: SingleFieldDependencyDependencyTypeEnum;
 
-  @Metadata({ data: "json, name=dependentFieldNames" })
+  @SpeakeasyMetadata({ data: "json, name=dependentFieldNames" })
   dependentFieldNames: string[];
 }

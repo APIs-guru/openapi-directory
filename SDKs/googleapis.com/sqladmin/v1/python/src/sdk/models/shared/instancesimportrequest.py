@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import importcontext
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InstancesImportRequest:
-    import_context: Optional[importcontext.ImportContext] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'importContext' }})
+    r"""InstancesImportRequest
+    Database instance import request.
+    """
+    
+    import_context: Optional[ImportContext] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('importContext') }})
     

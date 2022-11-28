@@ -1,6 +1,7 @@
 
 
+
 export enum LogTypeEnum {
-    Alert = "ALERT"
-,    Flow = "FLOW"
+    Alert = "ALERT",
+    Flow = "FLOW"
 }

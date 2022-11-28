@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import attemptread
-from . import jobread
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class JobWithAttemptsRead:
-    attempts: Optional[List[attemptread.AttemptRead]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attempts' }})
-    job: Optional[jobread.JobRead] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'job' }})
+    attempts: Optional[List[AttemptRead]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attempts') }})
+    job: Optional[JobRead] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('job') }})
     

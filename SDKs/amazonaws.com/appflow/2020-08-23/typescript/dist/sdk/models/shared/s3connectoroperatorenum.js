@@ -1,0 +1,23 @@
+export var S3ConnectorOperatorEnum;
+(function (S3ConnectorOperatorEnum) {
+    S3ConnectorOperatorEnum["Projection"] = "PROJECTION";
+    S3ConnectorOperatorEnum["LessThan"] = "LESS_THAN";
+    S3ConnectorOperatorEnum["GreaterThan"] = "GREATER_THAN";
+    S3ConnectorOperatorEnum["Between"] = "BETWEEN";
+    S3ConnectorOperatorEnum["LessThanOrEqualTo"] = "LESS_THAN_OR_EQUAL_TO";
+    S3ConnectorOperatorEnum["GreaterThanOrEqualTo"] = "GREATER_THAN_OR_EQUAL_TO";
+    S3ConnectorOperatorEnum["EqualTo"] = "EQUAL_TO";
+    S3ConnectorOperatorEnum["NotEqualTo"] = "NOT_EQUAL_TO";
+    S3ConnectorOperatorEnum["Addition"] = "ADDITION";
+    S3ConnectorOperatorEnum["Multiplication"] = "MULTIPLICATION";
+    S3ConnectorOperatorEnum["Division"] = "DIVISION";
+    S3ConnectorOperatorEnum["Subtraction"] = "SUBTRACTION";
+    S3ConnectorOperatorEnum["MaskAll"] = "MASK_ALL";
+    S3ConnectorOperatorEnum["MaskFirstN"] = "MASK_FIRST_N";
+    S3ConnectorOperatorEnum["MaskLastN"] = "MASK_LAST_N";
+    S3ConnectorOperatorEnum["ValidateNonNull"] = "VALIDATE_NON_NULL";
+    S3ConnectorOperatorEnum["ValidateNonZero"] = "VALIDATE_NON_ZERO";
+    S3ConnectorOperatorEnum["ValidateNonNegative"] = "VALIDATE_NON_NEGATIVE";
+    S3ConnectorOperatorEnum["ValidateNumeric"] = "VALIDATE_NUMERIC";
+    S3ConnectorOperatorEnum["NoOp"] = "NO_OP";
+})(S3ConnectorOperatorEnum || (S3ConnectorOperatorEnum = {}));

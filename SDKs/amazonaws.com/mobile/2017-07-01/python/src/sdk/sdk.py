@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/mobile/ - Amazon Web Services documentation"""
 import requests
-from typing import List,Optional
-from sdk.models import operations, shared
+from typing import Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,39 +17,64 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/mobile/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def create_project(self, request: operations.CreateProjectRequest) -> operations.CreateProjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Creates an AWS Mobile Hub project. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/projects"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -89,15 +117,17 @@ class SDK:
 
     
     def delete_project(self, request: operations.DeleteProjectRequest) -> operations.DeleteProjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Delets a project in AWS Mobile Hub. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/projects/{projectId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -132,15 +162,17 @@ class SDK:
 
     
     def describe_bundle(self, request: operations.DescribeBundleRequest) -> operations.DescribeBundleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Get the bundle details for the requested bundle id. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/bundles/{bundleId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -179,17 +211,18 @@ class SDK:
 
     
     def describe_project(self, request: operations.DescribeProjectRequest) -> operations.DescribeProjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Gets details about a project in AWS Mobile Hub. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/project#projectId"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -228,17 +261,18 @@ class SDK:
 
     
     def export_bundle(self, request: operations.ExportBundleRequest) -> operations.ExportBundleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Generates customized software development kit (SDK) and or tool packages used to integrate mobile web or mobile app clients with backend AWS resources. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/bundles/{bundleId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -277,15 +311,17 @@ class SDK:
 
     
     def export_project(self, request: operations.ExportProjectRequest) -> operations.ExportProjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Exports project configuration to a snapshot which can be downloaded and shared. Note that mobile app push credentials are encrypted in exported projects, so they can only be shared successfully within the same AWS account. 
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/exports/{projectId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -324,17 +360,18 @@ class SDK:
 
     
     def list_bundles(self, request: operations.ListBundlesRequest) -> operations.ListBundlesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" List all available bundles. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/bundles"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -369,17 +406,18 @@ class SDK:
 
     
     def list_projects(self, request: operations.ListProjectsRequest) -> operations.ListProjectsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Lists projects in AWS Mobile Hub. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/projects"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -414,24 +452,23 @@ class SDK:
 
     
     def update_project(self, request: operations.UpdateProjectRequest) -> operations.UpdateProjectResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r""" Update an existing project. 
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/update#projectId"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

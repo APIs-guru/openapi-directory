@@ -1,14 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import riskdecisiontype_enum
-from . import riskleveltype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EventRiskType:
-    compromised_credentials_detected: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CompromisedCredentialsDetected' }})
-    risk_decision: Optional[riskdecisiontype_enum.RiskDecisionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RiskDecision' }})
-    risk_level: Optional[riskleveltype_enum.RiskLevelTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RiskLevel' }})
+    r"""EventRiskType
+    The event risk type.
+    """
+    
+    compromised_credentials_detected: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CompromisedCredentialsDetected') }})
+    risk_decision: Optional[RiskDecisionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RiskDecision') }})
+    risk_level: Optional[RiskLevelTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RiskLevel') }})
     

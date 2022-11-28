@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiEndpointHandler } from "./apiendpointhandler";
 import { ScriptHandler } from "./scripthandler";
 import { StaticFilesHandler } from "./staticfileshandler";
@@ -65,35 +65,35 @@ var UrlMap = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=apiEndpoint" }),
+        SpeakeasyMetadata({ data: "json, name=apiEndpoint" }),
         __metadata("design:type", ApiEndpointHandler)
     ], UrlMap.prototype, "apiEndpoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=authFailAction" }),
+        SpeakeasyMetadata({ data: "json, name=authFailAction" }),
         __metadata("design:type", String)
     ], UrlMap.prototype, "authFailAction", void 0);
     __decorate([
-        Metadata({ data: "json, name=login" }),
+        SpeakeasyMetadata({ data: "json, name=login" }),
         __metadata("design:type", String)
     ], UrlMap.prototype, "login", void 0);
     __decorate([
-        Metadata({ data: "json, name=redirectHttpResponseCode" }),
+        SpeakeasyMetadata({ data: "json, name=redirectHttpResponseCode" }),
         __metadata("design:type", String)
     ], UrlMap.prototype, "redirectHttpResponseCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=script" }),
+        SpeakeasyMetadata({ data: "json, name=script" }),
         __metadata("design:type", ScriptHandler)
     ], UrlMap.prototype, "script", void 0);
     __decorate([
-        Metadata({ data: "json, name=securityLevel" }),
+        SpeakeasyMetadata({ data: "json, name=securityLevel" }),
         __metadata("design:type", String)
     ], UrlMap.prototype, "securityLevel", void 0);
     __decorate([
-        Metadata({ data: "json, name=staticFiles" }),
+        SpeakeasyMetadata({ data: "json, name=staticFiles" }),
         __metadata("design:type", StaticFilesHandler)
     ], UrlMap.prototype, "staticFiles", void 0);
     __decorate([
-        Metadata({ data: "json, name=urlRegex" }),
+        SpeakeasyMetadata({ data: "json, name=urlRegex" }),
         __metadata("design:type", String)
     ], UrlMap.prototype, "urlRegex", void 0);
     return UrlMap;

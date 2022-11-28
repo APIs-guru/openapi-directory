@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudServicebrokerV1alpha1Binding
+// Describes the binding.
 type GoogleCloudServicebrokerV1alpha1Binding struct {
 	BindResource map[string]interface{} `json:"bind_resource,omitempty"`
 	BindingID    *string                `json:"binding_id,omitempty"`

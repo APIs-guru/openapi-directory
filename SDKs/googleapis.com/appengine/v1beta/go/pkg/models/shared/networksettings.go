@@ -9,6 +9,8 @@ const (
 	NetworkSettingsIngressTrafficAllowedEnumIngressTrafficAllowedInternalAndLb NetworkSettingsIngressTrafficAllowedEnum = "INGRESS_TRAFFIC_ALLOWED_INTERNAL_AND_LB"
 )
 
+// NetworkSettings
+// A NetworkSettings resource is a container for ingress settings for a version or service.
 type NetworkSettings struct {
 	IngressTrafficAllowed *NetworkSettingsIngressTrafficAllowedEnum `json:"ingressTrafficAllowed,omitempty"`
 }

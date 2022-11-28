@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateBackendJobResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppId" })
+  @SpeakeasyMetadata({ data: "json, name=AppId" })
   appId?: string;
 
-  @Metadata({ data: "json, name=BackendEnvironmentName" })
+  @SpeakeasyMetadata({ data: "json, name=BackendEnvironmentName" })
   backendEnvironmentName?: string;
 
-  @Metadata({ data: "json, name=CreateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreateTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=Error" })
+  @SpeakeasyMetadata({ data: "json, name=Error" })
   error?: string;
 
-  @Metadata({ data: "json, name=JobId" })
+  @SpeakeasyMetadata({ data: "json, name=JobId" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=Operation" })
+  @SpeakeasyMetadata({ data: "json, name=Operation" })
   operation?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 
-  @Metadata({ data: "json, name=UpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateTime" })
   updateTime?: string;
 }

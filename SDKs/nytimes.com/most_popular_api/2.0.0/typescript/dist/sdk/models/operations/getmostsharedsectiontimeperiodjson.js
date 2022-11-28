@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetMostsharedSectionTimePeriodJsonPathParams = /** @class */ (function (_super) {
     __extends(GetMostsharedSectionTimePeriodJsonPathParams, _super);
@@ -30,11 +30,11 @@ var GetMostsharedSectionTimePeriodJsonPathParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=section" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=section" }),
         __metadata("design:type", String)
     ], GetMostsharedSectionTimePeriodJsonPathParams.prototype, "section", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=time-period" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=time-period" }),
         __metadata("design:type", String)
     ], GetMostsharedSectionTimePeriodJsonPathParams.prototype, "timePeriod", void 0);
     return GetMostsharedSectionTimePeriodJsonPathParams;
@@ -46,47 +46,31 @@ var GetMostsharedSectionTimePeriodJsonSecurity = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], GetMostsharedSectionTimePeriodJsonSecurity.prototype, "apiKey", void 0);
     return GetMostsharedSectionTimePeriodJsonSecurity;
 }(SpeakeasyBase));
 export { GetMostsharedSectionTimePeriodJsonSecurity };
-var GetMostsharedSectionTimePeriodJsonRequest = /** @class */ (function (_super) {
-    __extends(GetMostsharedSectionTimePeriodJsonRequest, _super);
-    function GetMostsharedSectionTimePeriodJsonRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetMostsharedSectionTimePeriodJsonPathParams)
-    ], GetMostsharedSectionTimePeriodJsonRequest.prototype, "pathParams", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetMostsharedSectionTimePeriodJsonSecurity)
-    ], GetMostsharedSectionTimePeriodJsonRequest.prototype, "security", void 0);
-    return GetMostsharedSectionTimePeriodJsonRequest;
-}(SpeakeasyBase));
-export { GetMostsharedSectionTimePeriodJsonRequest };
 var GetMostsharedSectionTimePeriodJson200ApplicationJson = /** @class */ (function (_super) {
     __extends(GetMostsharedSectionTimePeriodJson200ApplicationJson, _super);
     function GetMostsharedSectionTimePeriodJson200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=copyright" }),
+        SpeakeasyMetadata({ data: "json, name=copyright" }),
         __metadata("design:type", String)
     ], GetMostsharedSectionTimePeriodJson200ApplicationJson.prototype, "copyright", void 0);
     __decorate([
-        Metadata({ data: "json, name=num_results" }),
+        SpeakeasyMetadata({ data: "json, name=num_results" }),
         __metadata("design:type", Number)
     ], GetMostsharedSectionTimePeriodJson200ApplicationJson.prototype, "numResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=results", elemType: shared.Article }),
+        SpeakeasyMetadata({ data: "json, name=results", elemType: shared.Article }),
         __metadata("design:type", Array)
     ], GetMostsharedSectionTimePeriodJson200ApplicationJson.prototype, "results", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], GetMostsharedSectionTimePeriodJson200ApplicationJson.prototype, "status", void 0);
     return GetMostsharedSectionTimePeriodJson200ApplicationJson;
@@ -98,43 +82,59 @@ var GetMostsharedSectionTimePeriodJson400ApplicationJson = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=copyright" }),
+        SpeakeasyMetadata({ data: "json, name=copyright" }),
         __metadata("design:type", String)
     ], GetMostsharedSectionTimePeriodJson400ApplicationJson.prototype, "copyright", void 0);
     __decorate([
-        Metadata({ data: "json, name=errors" }),
+        SpeakeasyMetadata({ data: "json, name=errors" }),
         __metadata("design:type", Array)
     ], GetMostsharedSectionTimePeriodJson400ApplicationJson.prototype, "errors", void 0);
     __decorate([
-        Metadata({ data: "json, name=results" }),
+        SpeakeasyMetadata({ data: "json, name=results" }),
         __metadata("design:type", Array)
     ], GetMostsharedSectionTimePeriodJson400ApplicationJson.prototype, "results", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], GetMostsharedSectionTimePeriodJson400ApplicationJson.prototype, "status", void 0);
     return GetMostsharedSectionTimePeriodJson400ApplicationJson;
 }(SpeakeasyBase));
 export { GetMostsharedSectionTimePeriodJson400ApplicationJson };
+var GetMostsharedSectionTimePeriodJsonRequest = /** @class */ (function (_super) {
+    __extends(GetMostsharedSectionTimePeriodJsonRequest, _super);
+    function GetMostsharedSectionTimePeriodJsonRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetMostsharedSectionTimePeriodJsonPathParams)
+    ], GetMostsharedSectionTimePeriodJsonRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetMostsharedSectionTimePeriodJsonSecurity)
+    ], GetMostsharedSectionTimePeriodJsonRequest.prototype, "security", void 0);
+    return GetMostsharedSectionTimePeriodJsonRequest;
+}(SpeakeasyBase));
+export { GetMostsharedSectionTimePeriodJsonRequest };
 var GetMostsharedSectionTimePeriodJsonResponse = /** @class */ (function (_super) {
     __extends(GetMostsharedSectionTimePeriodJsonResponse, _super);
     function GetMostsharedSectionTimePeriodJsonResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetMostsharedSectionTimePeriodJsonResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMostsharedSectionTimePeriodJson200ApplicationJson)
     ], GetMostsharedSectionTimePeriodJsonResponse.prototype, "getMostsharedSectionTimePeriodJson200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetMostsharedSectionTimePeriodJson400ApplicationJson)
     ], GetMostsharedSectionTimePeriodJsonResponse.prototype, "getMostsharedSectionTimePeriodJson400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetMostsharedSectionTimePeriodJsonResponse.prototype, "statusCode", void 0);
     return GetMostsharedSectionTimePeriodJsonResponse;

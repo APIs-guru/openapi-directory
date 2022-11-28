@@ -27,11 +27,6 @@ type MncerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type MncerRequest struct {
-	Request  *MncerRequestBody `request:"mediaType=application/json"`
-	Security MncerSecurity
-}
-
 type Mncer400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Mncer504ApplicationJSON struct {
 	Error            *Mncer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Mncer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type MncerRequest struct {
+	Request  *MncerRequestBody `request:"mediaType=application/json"`
+	Security MncerSecurity
 }
 
 type MncerResponse struct {

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileReference } from "./filereference";
+
 
 
 // PublishXunitXmlFilesRequest
@@ -8,6 +8,6 @@ import { FileReference } from "./filereference";
  * Request message for StepService.PublishXunitXmlFiles.
 **/
 export class PublishXunitXmlFilesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=xunitXmlFiles", elemType: shared.FileReference })
+  @SpeakeasyMetadata({ data: "json, name=xunitXmlFiles", elemType: FileReference })
   xunitXmlFiles?: FileReference[];
 }

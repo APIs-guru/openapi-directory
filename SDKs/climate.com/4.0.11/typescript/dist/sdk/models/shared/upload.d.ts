@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum UploadContentTypeEnum {
     ApplicationVndClimateFieldGeojson = "application/vnd.climate.field.geojson",
     ImageVndClimateThermalGeotiff = "image/vnd.climate.thermal.geotiff",

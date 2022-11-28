@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Filter } from "./filter";
 import { SourceTypeEnum } from "./sourcetypeenum";
 // DescribeEventsMessage
 /**
@@ -35,39 +35,39 @@ var DescribeEventsMessage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Duration" }),
+        SpeakeasyMetadata({ data: "json, name=Duration" }),
         __metadata("design:type", Number)
     ], DescribeEventsMessage.prototype, "duration", void 0);
     __decorate([
-        Metadata({ data: "json, name=EndTime" }),
+        SpeakeasyMetadata({ data: "json, name=EndTime" }),
         __metadata("design:type", Date)
     ], DescribeEventsMessage.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=EventCategories" }),
+        SpeakeasyMetadata({ data: "json, name=EventCategories" }),
         __metadata("design:type", Array)
     ], DescribeEventsMessage.prototype, "eventCategories", void 0);
     __decorate([
-        Metadata({ data: "json, name=Filters", elemType: shared.Filter }),
+        SpeakeasyMetadata({ data: "json, name=Filters", elemType: Filter }),
         __metadata("design:type", Array)
     ], DescribeEventsMessage.prototype, "filters", void 0);
     __decorate([
-        Metadata({ data: "json, name=Marker" }),
+        SpeakeasyMetadata({ data: "json, name=Marker" }),
         __metadata("design:type", String)
     ], DescribeEventsMessage.prototype, "marker", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxRecords" }),
+        SpeakeasyMetadata({ data: "json, name=MaxRecords" }),
         __metadata("design:type", Number)
     ], DescribeEventsMessage.prototype, "maxRecords", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=SourceIdentifier" }),
         __metadata("design:type", String)
     ], DescribeEventsMessage.prototype, "sourceIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceType" }),
+        SpeakeasyMetadata({ data: "json, name=SourceType" }),
         __metadata("design:type", String)
     ], DescribeEventsMessage.prototype, "sourceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartTime" }),
+        SpeakeasyMetadata({ data: "json, name=StartTime" }),
         __metadata("design:type", Date)
     ], DescribeEventsMessage.prototype, "startTime", void 0);
     return DescribeEventsMessage;

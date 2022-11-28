@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RadiusChallengeResponse
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * RADIUS challenge reply
 **/
 export class RadiusChallengeResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: number;
 
-  @Metadata({ data: "json, name=debugInfo" })
+  @SpeakeasyMetadata({ data: "json, name=debugInfo" })
   debugInfo?: string;
 
-  @Metadata({ data: "json, name=errorCode" })
+  @SpeakeasyMetadata({ data: "json, name=errorCode" })
   errorCode?: number;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=replyMessage" })
+  @SpeakeasyMetadata({ data: "json, name=replyMessage" })
   replyMessage: string;
 
-  @Metadata({ data: "json, name=replyState" })
+  @SpeakeasyMetadata({ data: "json, name=replyState" })
   replyState: string;
 }

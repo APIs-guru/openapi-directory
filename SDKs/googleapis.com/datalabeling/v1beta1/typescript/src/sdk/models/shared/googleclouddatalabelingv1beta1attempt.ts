@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleRpcStatus } from "./googlerpcstatus";
+
 
 
 // GoogleCloudDatalabelingV1beta1Attempt
@@ -8,9 +8,9 @@ import { GoogleRpcStatus } from "./googlerpcstatus";
  * Records a failed evaluation job run.
 **/
 export class GoogleCloudDatalabelingV1beta1Attempt extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attemptTime" })
+  @SpeakeasyMetadata({ data: "json, name=attemptTime" })
   attemptTime?: string;
 
-  @Metadata({ data: "json, name=partialFailures", elemType: shared.GoogleRpcStatus })
+  @SpeakeasyMetadata({ data: "json, name=partialFailures", elemType: GoogleRpcStatus })
   partialFailures?: GoogleRpcStatus[];
 }

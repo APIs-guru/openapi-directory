@@ -1,7 +1,8 @@
 
 
+
 export enum QuestionStatusEnumEnum {
-    NotAnswered = "NotAnswered"
-,    AnsweredOnly = "AnsweredOnly"
-,    AllQuestions = "AllQuestions"
+    NotAnswered = "NotAnswered",
+    AnsweredOnly = "AnsweredOnly",
+    AllQuestions = "AllQuestions"
 }

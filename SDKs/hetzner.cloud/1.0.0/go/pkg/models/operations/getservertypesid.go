@@ -4,10 +4,6 @@ type GetServerTypesIDPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetServerTypesIDRequest struct {
-	PathParams GetServerTypesIDPathParams
-}
-
 type GetServerTypesID200ApplicationJSONServerTypeCPUTypeEnum string
 
 const (
@@ -15,11 +11,15 @@ const (
 	GetServerTypesID200ApplicationJSONServerTypeCPUTypeEnumDedicated GetServerTypesID200ApplicationJSONServerTypeCPUTypeEnum = "dedicated"
 )
 
+// GetServerTypesID200ApplicationJSONServerTypePricesPriceHourly
+// Hourly costs for a Server type in this Location
 type GetServerTypesID200ApplicationJSONServerTypePricesPriceHourly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
 }
 
+// GetServerTypesID200ApplicationJSONServerTypePricesPriceMonthly
+// Monthly costs for a Server type in this Location
 type GetServerTypesID200ApplicationJSONServerTypePricesPriceMonthly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
@@ -53,6 +53,10 @@ type GetServerTypesID200ApplicationJSONServerType struct {
 
 type GetServerTypesID200ApplicationJSON struct {
 	ServerType GetServerTypesID200ApplicationJSONServerType `json:"server_type"`
+}
+
+type GetServerTypesIDRequest struct {
+	PathParams GetServerTypesIDPathParams
 }
 
 type GetServerTypesIDResponse struct {

@@ -9,6 +9,8 @@ const (
 	AlertSeverityEnumSevere              AlertSeverityEnum = "SEVERE"
 )
 
+// Alert
+// Representation of an alert.
 type Alert struct {
 	Message  *string            `json:"message,omitempty"`
 	Name     *string            `json:"name,omitempty"`

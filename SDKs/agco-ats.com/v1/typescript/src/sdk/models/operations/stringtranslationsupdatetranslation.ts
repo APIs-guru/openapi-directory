@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class StringTranslationsUpdateTranslationPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=languageId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=languageId" })
   languageId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=stringId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=stringId" })
   stringId: string;
 }
 
 
 export class StringTranslationsUpdateTranslationRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/xml" })
   applicationXml: Uint8Array;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   globalResourcesSharedModelsStringTranslation?: shared.GlobalResourcesSharedModelsStringTranslation;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   globalResourcesSharedModelsStringTranslation1?: shared.GlobalResourcesSharedModelsStringTranslation;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   globalResourcesSharedModelsStringTranslation2?: shared.GlobalResourcesSharedModelsStringTranslation;
 
-  @Metadata({ data: "request, media_type=text/xml" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/xml" })
   textXml: Uint8Array;
 }
 
 
 export class StringTranslationsUpdateTranslationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: StringTranslationsUpdateTranslationPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: StringTranslationsUpdateTranslationRequests;
 }
 
 
 export class StringTranslationsUpdateTranslationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

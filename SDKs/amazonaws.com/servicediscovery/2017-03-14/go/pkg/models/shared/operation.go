@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Operation
+// A complex type that contains information about a specified operation.
 type Operation struct {
 	CreateDate   *time.Time           `json:"CreateDate,omitempty"`
 	ErrorCode    *string              `json:"ErrorCode,omitempty"`

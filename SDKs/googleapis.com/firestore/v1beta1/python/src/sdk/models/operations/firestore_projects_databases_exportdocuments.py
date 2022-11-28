@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirestoreProjectsDatabasesExportDocumentsPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class FirestoreProjectsDatabasesExportDocumentsQueryParams:
 
 @dataclass
 class FirestoreProjectsDatabasesExportDocumentsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirestoreProjectsDatabasesExportDocumentsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class FirestoreProjectsDatabasesExportDocumentsSecurity:
 
 @dataclass
 class FirestoreProjectsDatabasesExportDocumentsRequest:
-    path_params: FirestoreProjectsDatabasesExportDocumentsPathParams = field(default=None)
-    query_params: FirestoreProjectsDatabasesExportDocumentsQueryParams = field(default=None)
+    path_params: FirestoreProjectsDatabasesExportDocumentsPathParams = field()
+    query_params: FirestoreProjectsDatabasesExportDocumentsQueryParams = field()
+    security: FirestoreProjectsDatabasesExportDocumentsSecurity = field()
     request: Optional[shared.GoogleFirestoreAdminV1beta1ExportDocumentsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FirestoreProjectsDatabasesExportDocumentsSecurity = field(default=None)
     
 
 @dataclass
 class FirestoreProjectsDatabasesExportDocumentsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_operation: Optional[shared.GoogleLongrunningOperation] = field(default=None)
-    status_code: int = field(default=None)
     

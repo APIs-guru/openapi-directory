@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DetectorSummary
+// Information about the detector (instance).
 type DetectorSummary struct {
 	CreationTime         *time.Time            `json:"creationTime,omitempty"`
 	DetectorModelName    *string               `json:"detectorModelName,omitempty"`

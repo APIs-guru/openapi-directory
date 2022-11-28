@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class NtltrRequestBodyCertificateParameters extends SpeakeasyBase {
     fullName: string;
@@ -17,10 +17,6 @@ export declare class NtltrRequestBody extends SpeakeasyBase {
 export declare class NtltrSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class NtltrRequest extends SpeakeasyBase {
-    request?: NtltrRequestBody;
-    security: NtltrSecurity;
 }
 export declare enum Ntltr400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -103,6 +99,10 @@ export declare enum Ntltr504ApplicationJsonErrorDescriptionEnum {
 export declare class Ntltr504ApplicationJson extends SpeakeasyBase {
     error?: Ntltr504ApplicationJsonErrorEnum;
     errorDescription?: Ntltr504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class NtltrRequest extends SpeakeasyBase {
+    request?: NtltrRequestBody;
+    security: NtltrSecurity;
 }
 export declare class NtltrResponse extends SpeakeasyBase {
     contentType: string;

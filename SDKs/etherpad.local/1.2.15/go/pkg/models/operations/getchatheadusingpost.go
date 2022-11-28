@@ -4,10 +4,6 @@ type GetChatHeadUsingPostQueryParams struct {
 	PadID *string `queryParam:"style=form,explode=true,name=padID"`
 }
 
-type GetChatHeadUsingPostRequest struct {
-	QueryParams GetChatHeadUsingPostQueryParams
-}
-
 type GetChatHeadUsingPost200ApplicationJSONDataChatHead struct {
 	Text     *string `json:"text,omitempty"`
 	Time     *int64  `json:"time,omitempty"`
@@ -41,6 +37,10 @@ type GetChatHeadUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type GetChatHeadUsingPostRequest struct {
+	QueryParams GetChatHeadUsingPostQueryParams
 }
 
 type GetChatHeadUsingPostResponse struct {

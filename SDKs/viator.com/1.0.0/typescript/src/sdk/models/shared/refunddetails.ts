@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RefundDetails
@@ -9,15 +10,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class RefundDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode?: string;
 
-  @Metadata({ data: "json, name=itemPrice" })
+  @SpeakeasyMetadata({ data: "json, name=itemPrice" })
   itemPrice?: number;
 
-  @Metadata({ data: "json, name=refundAmount" })
+  @SpeakeasyMetadata({ data: "json, name=refundAmount" })
   refundAmount?: number;
 
-  @Metadata({ data: "json, name=refundPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=refundPercentage" })
   refundPercentage?: number;
 }

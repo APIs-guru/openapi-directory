@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetAssociatedEnclaveCertificateIamRolesActionEnum(str, Enum):
     GET_ASSOCIATED_ENCLAVE_CERTIFICATE_IAM_ROLES = "GetAssociatedEnclaveCertificateIamRoles"
@@ -10,10 +14,10 @@ class GetGetAssociatedEnclaveCertificateIamRolesVersionEnum(str, Enum):
 
 @dataclass
 class GetGetAssociatedEnclaveCertificateIamRolesQueryParams:
-    action: GetGetAssociatedEnclaveCertificateIamRolesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetGetAssociatedEnclaveCertificateIamRolesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetGetAssociatedEnclaveCertificateIamRolesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     certificate_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CertificateArn', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetGetAssociatedEnclaveCertificateIamRolesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetGetAssociatedEnclaveCertificateIamRolesHeaders:
 
 @dataclass
 class GetGetAssociatedEnclaveCertificateIamRolesRequest:
-    query_params: GetGetAssociatedEnclaveCertificateIamRolesQueryParams = field(default=None)
-    headers: GetGetAssociatedEnclaveCertificateIamRolesHeaders = field(default=None)
+    headers: GetGetAssociatedEnclaveCertificateIamRolesHeaders = field()
+    query_params: GetGetAssociatedEnclaveCertificateIamRolesQueryParams = field()
     
 
 @dataclass
 class GetGetAssociatedEnclaveCertificateIamRolesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Topic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: string;
 
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end?: number;
 
-  @Metadata({ data: "json, name=polarity" })
+  @SpeakeasyMetadata({ data: "json, name=polarity" })
   polarity?: number;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start?: number;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=topic" })
+  @SpeakeasyMetadata({ data: "json, name=topic" })
   topic?: string;
 }

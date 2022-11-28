@@ -1,5 +1,7 @@
 package shared
 
+// FulfillmentPolicyResponse
+// The response payload for requests that return a list of fulfillment policies.
 type FulfillmentPolicyResponse struct {
 	FulfillmentPolicies []FulfillmentPolicy `json:"fulfillmentPolicies,omitempty"`
 	Href                *string             `json:"href,omitempty"`

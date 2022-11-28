@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClassificationAnnotation } from "./classificationannotation";
 import { TimeSegment } from "./timesegment";
+
 
 
 // VideoClassificationAnnotation
@@ -8,12 +9,12 @@ import { TimeSegment } from "./timesegment";
  * Contains annotation details specific to video classification.
 **/
 export class VideoClassificationAnnotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=classificationAnnotation" })
+  @SpeakeasyMetadata({ data: "json, name=classificationAnnotation" })
   classificationAnnotation?: ClassificationAnnotation;
 
-  @Metadata({ data: "json, name=timeSegment" })
+  @SpeakeasyMetadata({ data: "json, name=timeSegment" })
   timeSegment?: TimeSegment;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

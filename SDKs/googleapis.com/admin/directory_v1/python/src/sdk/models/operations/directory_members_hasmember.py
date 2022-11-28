@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryMembersHasMemberPathParams:
-    group_key: str = field(default=None, metadata={'path_param': { 'field_name': 'groupKey', 'style': 'simple', 'explode': False }})
-    member_key: str = field(default=None, metadata={'path_param': { 'field_name': 'memberKey', 'style': 'simple', 'explode': False }})
+    group_key: str = field(metadata={'path_param': { 'field_name': 'groupKey', 'style': 'simple', 'explode': False }})
+    member_key: str = field(metadata={'path_param': { 'field_name': 'memberKey', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,26 +27,26 @@ class DirectoryMembersHasMemberQueryParams:
 
 @dataclass
 class DirectoryMembersHasMemberSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryMembersHasMemberSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryMembersHasMemberSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryMembersHasMemberSecurityOption4:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -58,14 +59,14 @@ class DirectoryMembersHasMemberSecurity:
 
 @dataclass
 class DirectoryMembersHasMemberRequest:
-    path_params: DirectoryMembersHasMemberPathParams = field(default=None)
-    query_params: DirectoryMembersHasMemberQueryParams = field(default=None)
-    security: DirectoryMembersHasMemberSecurity = field(default=None)
+    path_params: DirectoryMembersHasMemberPathParams = field()
+    query_params: DirectoryMembersHasMemberQueryParams = field()
+    security: DirectoryMembersHasMemberSecurity = field()
     
 
 @dataclass
 class DirectoryMembersHasMemberResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     members_has_member: Optional[shared.MembersHasMember] = field(default=None)
-    status_code: int = field(default=None)
     

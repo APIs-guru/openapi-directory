@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Address } from "./address";
 import { Area } from "./area";
 import { City } from "./city";
@@ -7,32 +7,33 @@ import { Location } from "./location";
 import { State } from "./state";
 
 
+
 // Place
 /** 
  * Place
 **/
 export class Place extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: Address;
 
-  @Metadata({ data: "json, name=area" })
+  @SpeakeasyMetadata({ data: "json, name=area" })
   area?: Area;
 
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: City;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: Country;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: Location;
 
-  @Metadata({ data: "json, name=names" })
+  @SpeakeasyMetadata({ data: "json, name=names" })
   names?: Map<string, string>;
 
-  @Metadata({ data: "json, name=postalCode" })
+  @SpeakeasyMetadata({ data: "json, name=postalCode" })
   postalCode?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: State;
 }

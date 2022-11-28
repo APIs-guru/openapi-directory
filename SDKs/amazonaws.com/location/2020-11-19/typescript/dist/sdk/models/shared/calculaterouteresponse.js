@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Leg } from "./leg";
 import { CalculateRouteSummary } from "./calculateroutesummary";
 // CalculateRouteResponse
 /**
@@ -35,11 +35,11 @@ var CalculateRouteResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Legs", elemType: shared.Leg }),
+        SpeakeasyMetadata({ data: "json, name=Legs", elemType: Leg }),
         __metadata("design:type", Array)
     ], CalculateRouteResponse.prototype, "legs", void 0);
     __decorate([
-        Metadata({ data: "json, name=Summary" }),
+        SpeakeasyMetadata({ data: "json, name=Summary" }),
         __metadata("design:type", CalculateRouteSummary)
     ], CalculateRouteResponse.prototype, "summary", void 0);
     return CalculateRouteResponse;

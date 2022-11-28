@@ -1,41 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
 import { ParameterTierEnum } from "./parametertierenum";
 import { ParameterTypeEnum } from "./parametertypeenum";
 
 
+
 export class PutParameterRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowedPattern" })
+  @SpeakeasyMetadata({ data: "json, name=AllowedPattern" })
   allowedPattern?: string;
 
-  @Metadata({ data: "json, name=DataType" })
+  @SpeakeasyMetadata({ data: "json, name=DataType" })
   dataType?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=KeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KeyId" })
   keyId?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=Overwrite" })
+  @SpeakeasyMetadata({ data: "json, name=Overwrite" })
   overwrite?: boolean;
 
-  @Metadata({ data: "json, name=Policies" })
+  @SpeakeasyMetadata({ data: "json, name=Policies" })
   policies?: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=Tier" })
+  @SpeakeasyMetadata({ data: "json, name=Tier" })
   tier?: ParameterTierEnum;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: ParameterTypeEnum;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value: string;
 }

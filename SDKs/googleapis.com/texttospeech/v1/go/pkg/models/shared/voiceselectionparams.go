@@ -9,6 +9,8 @@ const (
 	VoiceSelectionParamsSsmlGenderEnumNeutral                    VoiceSelectionParamsSsmlGenderEnum = "NEUTRAL"
 )
 
+// VoiceSelectionParams
+// Description of which voice to use for a synthesis request.
 type VoiceSelectionParams struct {
 	CustomVoice  *CustomVoiceParams                  `json:"customVoice,omitempty"`
 	LanguageCode *string                             `json:"languageCode,omitempty"`

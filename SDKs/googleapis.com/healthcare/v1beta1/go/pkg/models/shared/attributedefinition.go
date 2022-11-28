@@ -8,6 +8,8 @@ const (
 	AttributeDefinitionCategoryEnumRequest             AttributeDefinitionCategoryEnum = "REQUEST"
 )
 
+// AttributeDefinition
+// A client-defined consent attribute.
 type AttributeDefinition struct {
 	AllowedValues           []string                         `json:"allowedValues,omitempty"`
 	Category                *AttributeDefinitionCategoryEnum `json:"category,omitempty"`

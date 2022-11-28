@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FailurePolicy } from "./failurepolicy";
 /**
  * Describes EventTrigger, used to request events be sent from another service.

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class CancelTimerFailedCauseEnum(str, Enum):
     TIMER_ID_UNKNOWN = "TIMER_ID_UNKNOWN"

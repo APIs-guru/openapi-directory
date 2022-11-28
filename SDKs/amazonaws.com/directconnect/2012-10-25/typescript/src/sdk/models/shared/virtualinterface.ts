@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddressFamilyEnum } from "./addressfamilyenum";
 import { BgpPeer } from "./bgppeer";
 import { RouteFilterPrefix } from "./routefilterprefix";
@@ -7,83 +6,84 @@ import { Tag } from "./tag";
 import { VirtualInterfaceStateEnum } from "./virtualinterfacestateenum";
 
 
+
 // VirtualInterface
 /** 
  * Information about a virtual interface.
 **/
 export class VirtualInterface extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addressFamily" })
+  @SpeakeasyMetadata({ data: "json, name=addressFamily" })
   addressFamily?: AddressFamilyEnum;
 
-  @Metadata({ data: "json, name=amazonAddress" })
+  @SpeakeasyMetadata({ data: "json, name=amazonAddress" })
   amazonAddress?: string;
 
-  @Metadata({ data: "json, name=amazonSideAsn" })
+  @SpeakeasyMetadata({ data: "json, name=amazonSideAsn" })
   amazonSideAsn?: number;
 
-  @Metadata({ data: "json, name=asn" })
+  @SpeakeasyMetadata({ data: "json, name=asn" })
   asn?: number;
 
-  @Metadata({ data: "json, name=authKey" })
+  @SpeakeasyMetadata({ data: "json, name=authKey" })
   authKey?: string;
 
-  @Metadata({ data: "json, name=awsDeviceV2" })
+  @SpeakeasyMetadata({ data: "json, name=awsDeviceV2" })
   awsDeviceV2?: string;
 
-  @Metadata({ data: "json, name=awsLogicalDeviceId" })
+  @SpeakeasyMetadata({ data: "json, name=awsLogicalDeviceId" })
   awsLogicalDeviceId?: string;
 
-  @Metadata({ data: "json, name=bgpPeers", elemType: shared.BgpPeer })
+  @SpeakeasyMetadata({ data: "json, name=bgpPeers", elemType: BgpPeer })
   bgpPeers?: BgpPeer[];
 
-  @Metadata({ data: "json, name=connectionId" })
+  @SpeakeasyMetadata({ data: "json, name=connectionId" })
   connectionId?: string;
 
-  @Metadata({ data: "json, name=customerAddress" })
+  @SpeakeasyMetadata({ data: "json, name=customerAddress" })
   customerAddress?: string;
 
-  @Metadata({ data: "json, name=customerRouterConfig" })
+  @SpeakeasyMetadata({ data: "json, name=customerRouterConfig" })
   customerRouterConfig?: string;
 
-  @Metadata({ data: "json, name=directConnectGatewayId" })
+  @SpeakeasyMetadata({ data: "json, name=directConnectGatewayId" })
   directConnectGatewayId?: string;
 
-  @Metadata({ data: "json, name=jumboFrameCapable" })
+  @SpeakeasyMetadata({ data: "json, name=jumboFrameCapable" })
   jumboFrameCapable?: boolean;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=mtu" })
+  @SpeakeasyMetadata({ data: "json, name=mtu" })
   mtu?: number;
 
-  @Metadata({ data: "json, name=ownerAccount" })
+  @SpeakeasyMetadata({ data: "json, name=ownerAccount" })
   ownerAccount?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=routeFilterPrefixes", elemType: shared.RouteFilterPrefix })
+  @SpeakeasyMetadata({ data: "json, name=routeFilterPrefixes", elemType: RouteFilterPrefix })
   routeFilterPrefixes?: RouteFilterPrefix[];
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=virtualGatewayId" })
+  @SpeakeasyMetadata({ data: "json, name=virtualGatewayId" })
   virtualGatewayId?: string;
 
-  @Metadata({ data: "json, name=virtualInterfaceId" })
+  @SpeakeasyMetadata({ data: "json, name=virtualInterfaceId" })
   virtualInterfaceId?: string;
 
-  @Metadata({ data: "json, name=virtualInterfaceName" })
+  @SpeakeasyMetadata({ data: "json, name=virtualInterfaceName" })
   virtualInterfaceName?: string;
 
-  @Metadata({ data: "json, name=virtualInterfaceState" })
+  @SpeakeasyMetadata({ data: "json, name=virtualInterfaceState" })
   virtualInterfaceState?: VirtualInterfaceStateEnum;
 
-  @Metadata({ data: "json, name=virtualInterfaceType" })
+  @SpeakeasyMetadata({ data: "json, name=virtualInterfaceType" })
   virtualInterfaceType?: string;
 
-  @Metadata({ data: "json, name=vlan" })
+  @SpeakeasyMetadata({ data: "json, name=vlan" })
   vlan?: number;
 }

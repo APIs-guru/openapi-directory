@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SiteVerificationWebResourceGettokenRequestSite
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The site for which a verification token will be generated.
 **/
 export class SiteVerificationWebResourceGettokenRequestSite extends SpeakeasyBase {
-  @Metadata({ data: "json, name=identifier" })
+  @SpeakeasyMetadata({ data: "json, name=identifier" })
   identifier?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class SiteVerificationWebResourceGettokenRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=site" })
+  @SpeakeasyMetadata({ data: "json, name=site" })
   site?: SiteVerificationWebResourceGettokenRequestSite;
 
-  @Metadata({ data: "json, name=verificationMethod" })
+  @SpeakeasyMetadata({ data: "json, name=verificationMethod" })
   verificationMethod?: string;
 }

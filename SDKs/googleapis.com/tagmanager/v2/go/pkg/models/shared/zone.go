@@ -1,5 +1,7 @@
 package shared
 
+// Zone
+// Represents a Google Tag Manager Zone's contents.
 type Zone struct {
 	AccountID       *string              `json:"accountId,omitempty"`
 	Boundary        *ZoneBoundary        `json:"boundary,omitempty"`

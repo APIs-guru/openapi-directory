@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VideoColorRangeEnum } from "./videocolorrangeenum";
+
 
 
 // VideoMetadata
@@ -7,24 +8,24 @@ import { VideoColorRangeEnum } from "./videocolorrangeenum";
  * Information about a video that Amazon Rekognition analyzed. <code>Videometadata</code> is returned in every page of paginated responses from a Amazon Rekognition video operation.
 **/
 export class VideoMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Codec" })
+  @SpeakeasyMetadata({ data: "json, name=Codec" })
   codec?: string;
 
-  @Metadata({ data: "json, name=ColorRange" })
+  @SpeakeasyMetadata({ data: "json, name=ColorRange" })
   colorRange?: VideoColorRangeEnum;
 
-  @Metadata({ data: "json, name=DurationMillis" })
+  @SpeakeasyMetadata({ data: "json, name=DurationMillis" })
   durationMillis?: number;
 
-  @Metadata({ data: "json, name=Format" })
+  @SpeakeasyMetadata({ data: "json, name=Format" })
   format?: string;
 
-  @Metadata({ data: "json, name=FrameHeight" })
+  @SpeakeasyMetadata({ data: "json, name=FrameHeight" })
   frameHeight?: number;
 
-  @Metadata({ data: "json, name=FrameRate" })
+  @SpeakeasyMetadata({ data: "json, name=FrameRate" })
   frameRate?: number;
 
-  @Metadata({ data: "json, name=FrameWidth" })
+  @SpeakeasyMetadata({ data: "json, name=FrameWidth" })
   frameWidth?: number;
 }

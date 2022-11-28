@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum MergeBranchesByFastForwardXAmzTargetEnum {
     CodeCommit20150413MergeBranchesByFastForward = "CodeCommit_20150413.MergeBranchesByFastForward"
@@ -7,105 +8,105 @@ export enum MergeBranchesByFastForwardXAmzTargetEnum {
 
 
 export class MergeBranchesByFastForwardHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: MergeBranchesByFastForwardXAmzTargetEnum;
 }
 
 
 export class MergeBranchesByFastForwardRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: MergeBranchesByFastForwardHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.MergeBranchesByFastForwardInput;
 }
 
 
 export class MergeBranchesByFastForwardResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   branchDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   branchNameIsTagNameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   branchNameRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   commitDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   commitRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   concurrentReferenceUpdateException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionIntegrityChecksFailedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyAccessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyDisabledException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   encryptionKeyUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidBranchNameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidCommitException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRepositoryNameException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidTargetBranchException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   manualMergeRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   mergeBranchesByFastForwardOutput?: shared.MergeBranchesByFastForwardOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   repositoryDoesNotExistException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   repositoryNameRequiredException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tipsDivergenceExceededException?: any;
 }

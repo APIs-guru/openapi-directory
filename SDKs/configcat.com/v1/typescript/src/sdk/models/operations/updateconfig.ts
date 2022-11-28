@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateConfigPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=configId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=configId" })
   configId: string;
 }
 
 
 export class UpdateConfigRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   updateConfigRequest?: shared.UpdateConfigRequest;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   updateConfigRequest1?: shared.UpdateConfigRequest;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   updateConfigRequest2?: shared.UpdateConfigRequest;
 }
 
 
 export class UpdateConfigRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateConfigPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: UpdateConfigRequests;
 }
 
 
 export class UpdateConfigResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   configModel?: shared.ConfigModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   configModelHaljson?: shared.ConfigModelHaljson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

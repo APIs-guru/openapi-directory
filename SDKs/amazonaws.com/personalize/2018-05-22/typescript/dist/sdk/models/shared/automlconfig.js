@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AutoMlConfig
 /**
  * When the solution performs AutoML (<code>performAutoML</code> is true in <a>CreateSolution</a>), Amazon Personalize determines which recipe, from the specified list, optimizes the given metric. Amazon Personalize then uses that recipe for the solution.
@@ -33,11 +33,11 @@ var AutoMlConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=metricName" }),
+        SpeakeasyMetadata({ data: "json, name=metricName" }),
         __metadata("design:type", String)
     ], AutoMlConfig.prototype, "metricName", void 0);
     __decorate([
-        Metadata({ data: "json, name=recipeList" }),
+        SpeakeasyMetadata({ data: "json, name=recipeList" }),
         __metadata("design:type", Array)
     ], AutoMlConfig.prototype, "recipeList", void 0);
     return AutoMlConfig;

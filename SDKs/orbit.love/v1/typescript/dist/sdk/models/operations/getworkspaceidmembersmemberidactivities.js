@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetWorkspaceIdMembersMemberIdActivitiesPathParams = /** @class */ (function (_super) {
     __extends(GetWorkspaceIdMembersMemberIdActivitiesPathParams, _super);
@@ -30,11 +30,11 @@ var GetWorkspaceIdMembersMemberIdActivitiesPathParams = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=member_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=member_id" }),
         __metadata("design:type", String)
     ], GetWorkspaceIdMembersMemberIdActivitiesPathParams.prototype, "memberId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=workspace_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspace_id" }),
         __metadata("design:type", String)
     ], GetWorkspaceIdMembersMemberIdActivitiesPathParams.prototype, "workspaceId", void 0);
     return GetWorkspaceIdMembersMemberIdActivitiesPathParams;
@@ -62,27 +62,27 @@ var GetWorkspaceIdMembersMemberIdActivitiesQueryParams = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=activity_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=activity_type" }),
         __metadata("design:type", String)
     ], GetWorkspaceIdMembersMemberIdActivitiesQueryParams.prototype, "activityType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=direction" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" }),
         __metadata("design:type", String)
     ], GetWorkspaceIdMembersMemberIdActivitiesQueryParams.prototype, "direction", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=items" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=items" }),
         __metadata("design:type", String)
     ], GetWorkspaceIdMembersMemberIdActivitiesQueryParams.prototype, "items", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", String)
     ], GetWorkspaceIdMembersMemberIdActivitiesQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], GetWorkspaceIdMembersMemberIdActivitiesQueryParams.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" }),
         __metadata("design:type", String)
     ], GetWorkspaceIdMembersMemberIdActivitiesQueryParams.prototype, "type", void 0);
     return GetWorkspaceIdMembersMemberIdActivitiesQueryParams;
@@ -94,7 +94,7 @@ var GetWorkspaceIdMembersMemberIdActivitiesSecurity = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeBearer)
     ], GetWorkspaceIdMembersMemberIdActivitiesSecurity.prototype, "bearer", void 0);
     return GetWorkspaceIdMembersMemberIdActivitiesSecurity;
@@ -106,15 +106,15 @@ var GetWorkspaceIdMembersMemberIdActivitiesRequest = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWorkspaceIdMembersMemberIdActivitiesPathParams)
     ], GetWorkspaceIdMembersMemberIdActivitiesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWorkspaceIdMembersMemberIdActivitiesQueryParams)
     ], GetWorkspaceIdMembersMemberIdActivitiesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetWorkspaceIdMembersMemberIdActivitiesSecurity)
     ], GetWorkspaceIdMembersMemberIdActivitiesRequest.prototype, "security", void 0);
     return GetWorkspaceIdMembersMemberIdActivitiesRequest;
@@ -126,11 +126,11 @@ var GetWorkspaceIdMembersMemberIdActivitiesResponse = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetWorkspaceIdMembersMemberIdActivitiesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetWorkspaceIdMembersMemberIdActivitiesResponse.prototype, "statusCode", void 0);
     return GetWorkspaceIdMembersMemberIdActivitiesResponse;

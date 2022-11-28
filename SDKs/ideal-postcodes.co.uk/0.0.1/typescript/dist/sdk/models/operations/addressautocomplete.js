@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AddressAutocompleteQueryParams = /** @class */ (function (_super) {
     __extends(AddressAutocompleteQueryParams, _super);
@@ -30,19 +30,19 @@ var AddressAutocompleteQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=licensee" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=licensee" }),
         __metadata("design:type", String)
     ], AddressAutocompleteQueryParams.prototype, "licensee", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], AddressAutocompleteQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=postcode_outward" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=postcode_outward" }),
         __metadata("design:type", String)
     ], AddressAutocompleteQueryParams.prototype, "postcodeOutward", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=query" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" }),
         __metadata("design:type", String)
     ], AddressAutocompleteQueryParams.prototype, "query", void 0);
     return AddressAutocompleteQueryParams;
@@ -54,11 +54,11 @@ var AddressAutocompleteSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], AddressAutocompleteSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeUserToken)
     ], AddressAutocompleteSecurity.prototype, "userToken", void 0);
     return AddressAutocompleteSecurity;
@@ -70,11 +70,11 @@ var AddressAutocompleteRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddressAutocompleteQueryParams)
     ], AddressAutocompleteRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddressAutocompleteSecurity)
     ], AddressAutocompleteRequest.prototype, "security", void 0);
     return AddressAutocompleteRequest;
@@ -86,19 +86,19 @@ var AddressAutocompleteResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AddressAutocompleteResponseSchema)
     ], AddressAutocompleteResponse.prototype, "addressAutocompleteResponseSchema", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AddressLookupResponseSchema)
     ], AddressAutocompleteResponse.prototype, "addressLookupResponseSchema", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AddressAutocompleteResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AddressAutocompleteResponse.prototype, "statusCode", void 0);
     return AddressAutocompleteResponse;

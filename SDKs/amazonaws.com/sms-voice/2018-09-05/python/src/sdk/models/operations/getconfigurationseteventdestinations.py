@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetConfigurationSetEventDestinationsPathParams:
-    configuration_set_name: str = field(default=None, metadata={'path_param': { 'field_name': 'ConfigurationSetName', 'style': 'simple', 'explode': False }})
+    configuration_set_name: str = field(metadata={'path_param': { 'field_name': 'ConfigurationSetName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class GetConfigurationSetEventDestinationsHeaders:
 
 @dataclass
 class GetConfigurationSetEventDestinationsRequest:
-    path_params: GetConfigurationSetEventDestinationsPathParams = field(default=None)
-    headers: GetConfigurationSetEventDestinationsHeaders = field(default=None)
+    headers: GetConfigurationSetEventDestinationsHeaders = field()
+    path_params: GetConfigurationSetEventDestinationsPathParams = field()
     
 
 @dataclass
 class GetConfigurationSetEventDestinationsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_configuration_set_event_destinations_response: Optional[shared.GetConfigurationSetEventDestinationsResponse] = field(default=None)
     internal_service_error_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

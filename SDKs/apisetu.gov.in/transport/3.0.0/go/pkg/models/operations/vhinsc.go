@@ -30,11 +30,6 @@ type VhinscSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type VhinscRequest struct {
-	Request  *VhinscRequestBody `request:"mediaType=application/json"`
-	Security VhinscSecurity
-}
-
 type Vhinsc400ApplicationJSONErrorEnum string
 
 const (
@@ -164,6 +159,11 @@ const (
 type Vhinsc504ApplicationJSON struct {
 	Error            *Vhinsc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Vhinsc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type VhinscRequest struct {
+	Request  *VhinscRequestBody `request:"mediaType=application/json"`
+	Security VhinscSecurity
 }
 
 type VhinscResponse struct {

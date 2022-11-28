@@ -1,7 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import actionhelp
+from sdk import utils
+from . import *
 
 class ActionHelpResponseStatusEnum(str, Enum):
     SUCCESS = "success"
@@ -10,8 +11,8 @@ class ActionHelpResponseStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ActionHelpResponse:
-    api: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'api' }})
-    method: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'method' }})
-    response: actionhelp.ActionHelp = field(default=None, metadata={'dataclasses_json': { 'field_name': 'response' }})
-    status: ActionHelpResponseStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    api: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('api') }})
+    method: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('method') }})
+    response: ActionHelp = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('response') }})
+    status: ActionHelpResponseStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

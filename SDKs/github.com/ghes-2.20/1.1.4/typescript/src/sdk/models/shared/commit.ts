@@ -1,169 +1,169 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Verification } from "./verification";
 
 
+
 export class CommitSimpleUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=avatar_url" })
+  @SpeakeasyMetadata({ data: "json, name=avatar_url" })
   avatarUrl: string;
 
-  @Metadata({ data: "json, name=events_url" })
+  @SpeakeasyMetadata({ data: "json, name=events_url" })
   eventsUrl: string;
 
-  @Metadata({ data: "json, name=followers_url" })
+  @SpeakeasyMetadata({ data: "json, name=followers_url" })
   followersUrl: string;
 
-  @Metadata({ data: "json, name=following_url" })
+  @SpeakeasyMetadata({ data: "json, name=following_url" })
   followingUrl: string;
 
-  @Metadata({ data: "json, name=gists_url" })
+  @SpeakeasyMetadata({ data: "json, name=gists_url" })
   gistsUrl: string;
 
-  @Metadata({ data: "json, name=gravatar_id" })
+  @SpeakeasyMetadata({ data: "json, name=gravatar_id" })
   gravatarId: string;
 
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=login" })
+  @SpeakeasyMetadata({ data: "json, name=login" })
   login: string;
 
-  @Metadata({ data: "json, name=node_id" })
+  @SpeakeasyMetadata({ data: "json, name=node_id" })
   nodeId: string;
 
-  @Metadata({ data: "json, name=organizations_url" })
+  @SpeakeasyMetadata({ data: "json, name=organizations_url" })
   organizationsUrl: string;
 
-  @Metadata({ data: "json, name=received_events_url" })
+  @SpeakeasyMetadata({ data: "json, name=received_events_url" })
   receivedEventsUrl: string;
 
-  @Metadata({ data: "json, name=repos_url" })
+  @SpeakeasyMetadata({ data: "json, name=repos_url" })
   reposUrl: string;
 
-  @Metadata({ data: "json, name=site_admin" })
+  @SpeakeasyMetadata({ data: "json, name=site_admin" })
   siteAdmin: boolean;
 
-  @Metadata({ data: "json, name=starred_at" })
+  @SpeakeasyMetadata({ data: "json, name=starred_at" })
   starredAt?: string;
 
-  @Metadata({ data: "json, name=starred_url" })
+  @SpeakeasyMetadata({ data: "json, name=starred_url" })
   starredUrl: string;
 
-  @Metadata({ data: "json, name=subscriptions_url" })
+  @SpeakeasyMetadata({ data: "json, name=subscriptions_url" })
   subscriptionsUrl: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }
 
 
 export class CommitCommitGitUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class CommitCommitTree extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sha" })
+  @SpeakeasyMetadata({ data: "json, name=sha" })
   sha: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }
 
 
 export class CommitCommit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author: CommitCommitGitUser;
 
-  @Metadata({ data: "json, name=comment_count" })
+  @SpeakeasyMetadata({ data: "json, name=comment_count" })
   commentCount: number;
 
-  @Metadata({ data: "json, name=committer" })
+  @SpeakeasyMetadata({ data: "json, name=committer" })
   committer: CommitCommitGitUser;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=tree" })
+  @SpeakeasyMetadata({ data: "json, name=tree" })
   tree: CommitCommitTree;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 
-  @Metadata({ data: "json, name=verification" })
+  @SpeakeasyMetadata({ data: "json, name=verification" })
   verification?: Verification;
 }
 
 
 export class CommitFiles extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additions" })
+  @SpeakeasyMetadata({ data: "json, name=additions" })
   additions?: number;
 
-  @Metadata({ data: "json, name=blob_url" })
+  @SpeakeasyMetadata({ data: "json, name=blob_url" })
   blobUrl?: string;
 
-  @Metadata({ data: "json, name=changes" })
+  @SpeakeasyMetadata({ data: "json, name=changes" })
   changes?: number;
 
-  @Metadata({ data: "json, name=contents_url" })
+  @SpeakeasyMetadata({ data: "json, name=contents_url" })
   contentsUrl?: string;
 
-  @Metadata({ data: "json, name=deletions" })
+  @SpeakeasyMetadata({ data: "json, name=deletions" })
   deletions?: number;
 
-  @Metadata({ data: "json, name=filename" })
+  @SpeakeasyMetadata({ data: "json, name=filename" })
   filename?: string;
 
-  @Metadata({ data: "json, name=patch" })
+  @SpeakeasyMetadata({ data: "json, name=patch" })
   patch?: string;
 
-  @Metadata({ data: "json, name=previous_filename" })
+  @SpeakeasyMetadata({ data: "json, name=previous_filename" })
   previousFilename?: string;
 
-  @Metadata({ data: "json, name=raw_url" })
+  @SpeakeasyMetadata({ data: "json, name=raw_url" })
   rawUrl?: string;
 
-  @Metadata({ data: "json, name=sha" })
+  @SpeakeasyMetadata({ data: "json, name=sha" })
   sha?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
 export class CommitParents extends SpeakeasyBase {
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl?: string;
 
-  @Metadata({ data: "json, name=sha" })
+  @SpeakeasyMetadata({ data: "json, name=sha" })
   sha: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }
 
 
 export class CommitStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additions" })
+  @SpeakeasyMetadata({ data: "json, name=additions" })
   additions?: number;
 
-  @Metadata({ data: "json, name=deletions" })
+  @SpeakeasyMetadata({ data: "json, name=deletions" })
   deletions?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
@@ -173,36 +173,36 @@ export class CommitStats extends SpeakeasyBase {
  * Commit
 **/
 export class Commit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author: CommitSimpleUser;
 
-  @Metadata({ data: "json, name=comments_url" })
+  @SpeakeasyMetadata({ data: "json, name=comments_url" })
   commentsUrl: string;
 
-  @Metadata({ data: "json, name=commit" })
+  @SpeakeasyMetadata({ data: "json, name=commit" })
   commit: CommitCommit;
 
-  @Metadata({ data: "json, name=committer" })
+  @SpeakeasyMetadata({ data: "json, name=committer" })
   committer: CommitSimpleUser;
 
-  @Metadata({ data: "json, name=files", elemType: shared.CommitFiles })
+  @SpeakeasyMetadata({ data: "json, name=files", elemType: CommitFiles })
   files?: CommitFiles[];
 
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl: string;
 
-  @Metadata({ data: "json, name=node_id" })
+  @SpeakeasyMetadata({ data: "json, name=node_id" })
   nodeId: string;
 
-  @Metadata({ data: "json, name=parents", elemType: shared.CommitParents })
+  @SpeakeasyMetadata({ data: "json, name=parents", elemType: CommitParents })
   parents: CommitParents[];
 
-  @Metadata({ data: "json, name=sha" })
+  @SpeakeasyMetadata({ data: "json, name=sha" })
   sha: string;
 
-  @Metadata({ data: "json, name=stats" })
+  @SpeakeasyMetadata({ data: "json, name=stats" })
   stats?: CommitStats;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

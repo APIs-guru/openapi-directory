@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SentimentDetectionJobProperties
+// Provides information about a sentiment detection job.
 type SentimentDetectionJobProperties struct {
 	DataAccessRoleArn *string           `json:"DataAccessRoleArn,omitempty"`
 	EndTime           *time.Time        `json:"EndTime,omitempty"`

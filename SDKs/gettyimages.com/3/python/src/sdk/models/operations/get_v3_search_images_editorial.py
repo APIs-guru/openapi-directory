@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -49,13 +50,13 @@ class GetV3SearchImagesEditorialHeaders:
 
 @dataclass
 class GetV3SearchImagesEditorialRequest:
-    query_params: GetV3SearchImagesEditorialQueryParams = field(default=None)
-    headers: GetV3SearchImagesEditorialHeaders = field(default=None)
+    headers: GetV3SearchImagesEditorialHeaders = field()
+    query_params: GetV3SearchImagesEditorialQueryParams = field()
     
 
 @dataclass
 class GetV3SearchImagesEditorialResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     editorial_image_search_results: Optional[shared.EditorialImageSearchResults] = field(default=None)
-    status_code: int = field(default=None)
     

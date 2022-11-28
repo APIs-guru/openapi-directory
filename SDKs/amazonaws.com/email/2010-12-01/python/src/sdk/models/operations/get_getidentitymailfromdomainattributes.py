@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetGetIdentityMailFromDomainAttributesActionEnum(str, Enum):
     GET_IDENTITY_MAIL_FROM_DOMAIN_ATTRIBUTES = "GetIdentityMailFromDomainAttributes"
@@ -10,9 +14,9 @@ class GetGetIdentityMailFromDomainAttributesVersionEnum(str, Enum):
 
 @dataclass
 class GetGetIdentityMailFromDomainAttributesQueryParams:
-    action: GetGetIdentityMailFromDomainAttributesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    identities: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'Identities', 'style': 'form', 'explode': True }})
-    version: GetGetIdentityMailFromDomainAttributesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetGetIdentityMailFromDomainAttributesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    identities: List[str] = field(metadata={'query_param': { 'field_name': 'Identities', 'style': 'form', 'explode': True }})
+    version: GetGetIdentityMailFromDomainAttributesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetGetIdentityMailFromDomainAttributesHeaders:
 
 @dataclass
 class GetGetIdentityMailFromDomainAttributesRequest:
-    query_params: GetGetIdentityMailFromDomainAttributesQueryParams = field(default=None)
-    headers: GetGetIdentityMailFromDomainAttributesHeaders = field(default=None)
+    headers: GetGetIdentityMailFromDomainAttributesHeaders = field()
+    query_params: GetGetIdentityMailFromDomainAttributesQueryParams = field()
     
 
 @dataclass
 class GetGetIdentityMailFromDomainAttributesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

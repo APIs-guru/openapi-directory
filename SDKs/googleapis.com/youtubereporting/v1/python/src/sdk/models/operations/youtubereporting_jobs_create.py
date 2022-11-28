@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -21,14 +22,14 @@ class YoutubereportingJobsCreateQueryParams:
 
 @dataclass
 class YoutubereportingJobsCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class YoutubereportingJobsCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -39,14 +40,14 @@ class YoutubereportingJobsCreateSecurity:
 
 @dataclass
 class YoutubereportingJobsCreateRequest:
-    query_params: YoutubereportingJobsCreateQueryParams = field(default=None)
+    query_params: YoutubereportingJobsCreateQueryParams = field()
+    security: YoutubereportingJobsCreateSecurity = field()
     request: Optional[shared.Job] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: YoutubereportingJobsCreateSecurity = field(default=None)
     
 
 @dataclass
 class YoutubereportingJobsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     job: Optional[shared.Job] = field(default=None)
-    status_code: int = field(default=None)
     

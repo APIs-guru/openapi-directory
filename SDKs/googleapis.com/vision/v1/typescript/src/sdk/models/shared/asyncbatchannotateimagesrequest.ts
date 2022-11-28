@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OutputConfig } from "./outputconfig";
 import { AnnotateImageRequest } from "./annotateimagerequest";
+
 
 
 // AsyncBatchAnnotateImagesRequest
@@ -9,12 +9,12 @@ import { AnnotateImageRequest } from "./annotateimagerequest";
  * Request for async image annotation for a list of images.
 **/
 export class AsyncBatchAnnotateImagesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=outputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=outputConfig" })
   outputConfig?: OutputConfig;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=requests", elemType: shared.AnnotateImageRequest })
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: AnnotateImageRequest })
   requests?: AnnotateImageRequest[];
 }

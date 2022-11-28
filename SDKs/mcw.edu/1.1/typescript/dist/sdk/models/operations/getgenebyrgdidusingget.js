@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetGeneByRgdIdUsingGetPathParams = /** @class */ (function (_super) {
     __extends(GetGeneByRgdIdUsingGetPathParams, _super);
     function GetGeneByRgdIdUsingGetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=rgdId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=rgdId" }),
         __metadata("design:type", Number)
     ], GetGeneByRgdIdUsingGetPathParams.prototype, "rgdId", void 0);
     return GetGeneByRgdIdUsingGetPathParams;
@@ -41,7 +41,7 @@ var GetGeneByRgdIdUsingGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGeneByRgdIdUsingGetPathParams)
     ], GetGeneByRgdIdUsingGetRequest.prototype, "pathParams", void 0);
     return GetGeneByRgdIdUsingGetRequest;
@@ -53,15 +53,15 @@ var GetGeneByRgdIdUsingGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetGeneByRgdIdUsingGetResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetGeneByRgdIdUsingGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetGeneByRgdIdUsingGetResponse.prototype, "statusCode", void 0);
     return GetGeneByRgdIdUsingGetResponse;

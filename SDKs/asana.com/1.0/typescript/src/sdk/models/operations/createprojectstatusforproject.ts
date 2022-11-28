@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateProjectStatusForProjectPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_gid" })
   projectGid: string;
 }
 
 
 export class CreateProjectStatusForProjectQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class CreateProjectStatusForProjectRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
-  data?: shared.ProjectStatusRequest;
-}
-
-
-export class CreateProjectStatusForProjectRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: CreateProjectStatusForProjectPathParams;
-
-  @Metadata()
-  queryParams: CreateProjectStatusForProjectQueryParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: CreateProjectStatusForProjectRequestBody;
+export class CreateProjectStatusForProjectRequestBodyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=data" })
+  data?: shared.ProjectStatusRequestInput;
 }
 
 
 export class CreateProjectStatusForProject201ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.ProjectStatusResponse;
 }
 
 
+export class CreateProjectStatusForProjectRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: CreateProjectStatusForProjectPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: CreateProjectStatusForProjectQueryParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: CreateProjectStatusForProjectRequestBodyInput;
+}
+
+
 export class CreateProjectStatusForProjectResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createProjectStatusForProject201ApplicationJsonObject?: CreateProjectStatusForProject201ApplicationJson;
 }

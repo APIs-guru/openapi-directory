@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TagmanagerAccountsUserPermissionsDeletePathParams:
-    path: str = field(default=None, metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
+    path: str = field(metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
     
 class TagmanagerAccountsUserPermissionsDeleteTypeEnum(str, Enum):
     BUILT_IN_VARIABLE_TYPE_UNSPECIFIED = "builtInVariableTypeUnspecified"
@@ -141,19 +142,19 @@ class TagmanagerAccountsUserPermissionsDeleteQueryParams:
 
 @dataclass
 class TagmanagerAccountsUserPermissionsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TagmanagerAccountsUserPermissionsDeleteRequest:
-    path_params: TagmanagerAccountsUserPermissionsDeletePathParams = field(default=None)
-    query_params: TagmanagerAccountsUserPermissionsDeleteQueryParams = field(default=None)
-    security: TagmanagerAccountsUserPermissionsDeleteSecurity = field(default=None)
+    path_params: TagmanagerAccountsUserPermissionsDeletePathParams = field()
+    query_params: TagmanagerAccountsUserPermissionsDeleteQueryParams = field()
+    security: TagmanagerAccountsUserPermissionsDeleteSecurity = field()
     
 
 @dataclass
 class TagmanagerAccountsUserPermissionsDeleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

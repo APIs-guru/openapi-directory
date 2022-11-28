@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteBillingGroupPathParams:
-    billing_group_name: str = field(default=None, metadata={'path_param': { 'field_name': 'billingGroupName', 'style': 'simple', 'explode': False }})
+    billing_group_name: str = field(metadata={'path_param': { 'field_name': 'billingGroupName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,18 +28,18 @@ class DeleteBillingGroupHeaders:
 
 @dataclass
 class DeleteBillingGroupRequest:
-    path_params: DeleteBillingGroupPathParams = field(default=None)
-    query_params: DeleteBillingGroupQueryParams = field(default=None)
-    headers: DeleteBillingGroupHeaders = field(default=None)
+    headers: DeleteBillingGroupHeaders = field()
+    path_params: DeleteBillingGroupPathParams = field()
+    query_params: DeleteBillingGroupQueryParams = field()
     
 
 @dataclass
 class DeleteBillingGroupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_billing_group_response: Optional[dict[str, Any]] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     version_conflict_exception: Optional[Any] = field(default=None)
     

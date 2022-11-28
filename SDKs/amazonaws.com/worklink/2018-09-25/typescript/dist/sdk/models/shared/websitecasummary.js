@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // WebsiteCaSummary
 /**
  * The summary of the certificate authority (CA).
@@ -33,15 +33,15 @@ var WebsiteCaSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatedTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedTime" }),
         __metadata("design:type", Date)
     ], WebsiteCaSummary.prototype, "createdTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=DisplayName" }),
+        SpeakeasyMetadata({ data: "json, name=DisplayName" }),
         __metadata("design:type", String)
     ], WebsiteCaSummary.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=WebsiteCaId" }),
+        SpeakeasyMetadata({ data: "json, name=WebsiteCaId" }),
         __metadata("design:type", String)
     ], WebsiteCaSummary.prototype, "websiteCaId", void 0);
     return WebsiteCaSummary;

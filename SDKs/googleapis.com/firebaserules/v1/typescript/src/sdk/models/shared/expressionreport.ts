@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { ExpressionReport } from "./expressionreport";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SourcePosition } from "./sourceposition";
 import { ValueCount } from "./valuecount";
+
 
 
 // ExpressionReport
@@ -10,12 +9,12 @@ import { ValueCount } from "./valuecount";
  * Describes where in a file an expression is found and what it was evaluated to over the course of its use.
 **/
 export class ExpressionReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=children", elemType: shared.ExpressionReport })
+  @SpeakeasyMetadata({ data: "json, name=children", elemType: ExpressionReport })
   children?: ExpressionReport[];
 
-  @Metadata({ data: "json, name=sourcePosition" })
+  @SpeakeasyMetadata({ data: "json, name=sourcePosition" })
   sourcePosition?: SourcePosition;
 
-  @Metadata({ data: "json, name=values", elemType: shared.ValueCount })
+  @SpeakeasyMetadata({ data: "json, name=values", elemType: ValueCount })
   values?: ValueCount[];
 }

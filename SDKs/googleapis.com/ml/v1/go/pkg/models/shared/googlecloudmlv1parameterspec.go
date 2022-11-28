@@ -19,6 +19,8 @@ const (
 	GoogleCloudMlV1ParameterSpecTypeEnumDiscrete                 GoogleCloudMlV1ParameterSpecTypeEnum = "DISCRETE"
 )
 
+// GoogleCloudMlV1ParameterSpec
+// Represents a single hyperparameter to optimize.
 type GoogleCloudMlV1ParameterSpec struct {
 	CategoricalValues []string                                   `json:"categoricalValues,omitempty"`
 	DiscreteValues    []float64                                  `json:"discreteValues,omitempty"`

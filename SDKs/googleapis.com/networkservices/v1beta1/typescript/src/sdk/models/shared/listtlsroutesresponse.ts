@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TlsRoute } from "./tlsroute";
+
 
 
 // ListTlsRoutesResponse
@@ -8,9 +8,9 @@ import { TlsRoute } from "./tlsroute";
  * Response returned by the ListTlsRoutes method.
 **/
 export class ListTlsRoutesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=tlsRoutes", elemType: shared.TlsRoute })
+  @SpeakeasyMetadata({ data: "json, name=tlsRoutes", elemType: TlsRoute })
   tlsRoutes?: TlsRoute[];
 }

@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -16,14 +19,14 @@ class RequestUserInfoHeaders:
 
 @dataclass
 class RequestUserInfoRequest:
-    query_params: RequestUserInfoQueryParams = field(default=None)
-    headers: RequestUserInfoHeaders = field(default=None)
+    headers: RequestUserInfoHeaders = field()
+    query_params: RequestUserInfoQueryParams = field()
     
 
 @dataclass
 class RequestUserInfoResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     user_account: Optional[shared.UserAccount] = field(default=None)
     

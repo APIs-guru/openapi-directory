@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AggregationConfig } from "./aggregationconfig";
 import { FileTypeEnum } from "./filetypeenum";
 import { PrefixConfig } from "./prefixconfig";
+
 
 
 // S3OutputFormatConfig
@@ -9,12 +10,12 @@ import { PrefixConfig } from "./prefixconfig";
  *  The configuration that determines how Amazon AppFlow should format the flow output data when Amazon S3 is used as the destination. 
 **/
 export class S3OutputFormatConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=aggregationConfig" })
   aggregationConfig?: AggregationConfig;
 
-  @Metadata({ data: "json, name=fileType" })
+  @SpeakeasyMetadata({ data: "json, name=fileType" })
   fileType?: FileTypeEnum;
 
-  @Metadata({ data: "json, name=prefixConfig" })
+  @SpeakeasyMetadata({ data: "json, name=prefixConfig" })
   prefixConfig?: PrefixConfig;
 }

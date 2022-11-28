@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // S3ApplicationCodeLocationDescription
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the location of an application's code stored in an S3 bucket.
 **/
 export class S3ApplicationCodeLocationDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BucketARN" })
+  @SpeakeasyMetadata({ data: "json, name=BucketARN" })
   bucketArn: string;
 
-  @Metadata({ data: "json, name=FileKey" })
+  @SpeakeasyMetadata({ data: "json, name=FileKey" })
   fileKey: string;
 
-  @Metadata({ data: "json, name=ObjectVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectVersion" })
   objectVersion?: string;
 }

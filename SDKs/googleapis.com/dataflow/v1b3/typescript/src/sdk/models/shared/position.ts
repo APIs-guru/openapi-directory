@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConcatPosition } from "./concatposition";
+
 
 
 // Position
@@ -7,21 +8,21 @@ import { ConcatPosition } from "./concatposition";
  * Position defines a position within a collection of data. The value can be either the end position, a key (used with ordered collections), a byte offset, or a record index.
 **/
 export class Position extends SpeakeasyBase {
-  @Metadata({ data: "json, name=byteOffset" })
+  @SpeakeasyMetadata({ data: "json, name=byteOffset" })
   byteOffset?: string;
 
-  @Metadata({ data: "json, name=concatPosition" })
+  @SpeakeasyMetadata({ data: "json, name=concatPosition" })
   concatPosition?: ConcatPosition;
 
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end?: boolean;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=recordIndex" })
+  @SpeakeasyMetadata({ data: "json, name=recordIndex" })
   recordIndex?: string;
 
-  @Metadata({ data: "json, name=shufflePosition" })
+  @SpeakeasyMetadata({ data: "json, name=shufflePosition" })
   shufflePosition?: string;
 }

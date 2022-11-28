@@ -1,20 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { TimeSpan } from "./timespan";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeSpan } from "./timespan";
 import { Volume } from "./volume";
 
+
 export enum BuildStepStatusEnum {
-    StatusUnknown = "STATUS_UNKNOWN"
-,    Pending = "PENDING"
-,    Queued = "QUEUED"
-,    Working = "WORKING"
-,    Success = "SUCCESS"
-,    Failure = "FAILURE"
-,    InternalError = "INTERNAL_ERROR"
-,    Timeout = "TIMEOUT"
-,    Cancelled = "CANCELLED"
-,    Expired = "EXPIRED"
+    StatusUnknown = "STATUS_UNKNOWN",
+    Pending = "PENDING",
+    Queued = "QUEUED",
+    Working = "WORKING",
+    Success = "SUCCESS",
+    Failure = "FAILURE",
+    InternalError = "INTERNAL_ERROR",
+    Timeout = "TIMEOUT",
+    Cancelled = "CANCELLED",
+    Expired = "EXPIRED"
 }
 
 
@@ -23,54 +22,106 @@ export enum BuildStepStatusEnum {
  * A step in the build pipeline.
 **/
 export class BuildStep extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowExitCodes" })
+  @SpeakeasyMetadata({ data: "json, name=allowExitCodes" })
   allowExitCodes?: number[];
 
-  @Metadata({ data: "json, name=allowFailure" })
+  @SpeakeasyMetadata({ data: "json, name=allowFailure" })
   allowFailure?: boolean;
 
-  @Metadata({ data: "json, name=args" })
+  @SpeakeasyMetadata({ data: "json, name=args" })
   args?: string[];
 
-  @Metadata({ data: "json, name=dir" })
+  @SpeakeasyMetadata({ data: "json, name=dir" })
   dir?: string;
 
-  @Metadata({ data: "json, name=entrypoint" })
+  @SpeakeasyMetadata({ data: "json, name=entrypoint" })
   entrypoint?: string;
 
-  @Metadata({ data: "json, name=env" })
+  @SpeakeasyMetadata({ data: "json, name=env" })
   env?: string[];
 
-  @Metadata({ data: "json, name=exitCode" })
+  @SpeakeasyMetadata({ data: "json, name=exitCode" })
   exitCode?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pullTiming" })
+  @SpeakeasyMetadata({ data: "json, name=pullTiming" })
   pullTiming?: TimeSpan;
 
-  @Metadata({ data: "json, name=script" })
+  @SpeakeasyMetadata({ data: "json, name=script" })
   script?: string;
 
-  @Metadata({ data: "json, name=secretEnv" })
+  @SpeakeasyMetadata({ data: "json, name=secretEnv" })
   secretEnv?: string[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: BuildStepStatusEnum;
 
-  @Metadata({ data: "json, name=timeout" })
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
   timeout?: string;
 
-  @Metadata({ data: "json, name=timing" })
+  @SpeakeasyMetadata({ data: "json, name=timing" })
   timing?: TimeSpan;
 
-  @Metadata({ data: "json, name=volumes", elemType: shared.Volume })
+  @SpeakeasyMetadata({ data: "json, name=volumes", elemType: Volume })
   volumes?: Volume[];
 
-  @Metadata({ data: "json, name=waitFor" })
+  @SpeakeasyMetadata({ data: "json, name=waitFor" })
+  waitFor?: string[];
+}
+
+
+// BuildStepInput
+/** 
+ * A step in the build pipeline.
+**/
+export class BuildStepInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=allowExitCodes" })
+  allowExitCodes?: number[];
+
+  @SpeakeasyMetadata({ data: "json, name=allowFailure" })
+  allowFailure?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=args" })
+  args?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=dir" })
+  dir?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=entrypoint" })
+  entrypoint?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=env" })
+  env?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=pullTiming" })
+  pullTiming?: TimeSpan;
+
+  @SpeakeasyMetadata({ data: "json, name=script" })
+  script?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=secretEnv" })
+  secretEnv?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
+  timeout?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=timing" })
+  timing?: TimeSpan;
+
+  @SpeakeasyMetadata({ data: "json, name=volumes", elemType: Volume })
+  volumes?: Volume[];
+
+  @SpeakeasyMetadata({ data: "json, name=waitFor" })
   waitFor?: string[];
 }

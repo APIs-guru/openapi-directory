@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeregisterInstancesFromLoadBalancerActionEnum(str, Enum):
     DEREGISTER_INSTANCES_FROM_LOAD_BALANCER = "DeregisterInstancesFromLoadBalancer"
@@ -10,8 +14,8 @@ class PostDeregisterInstancesFromLoadBalancerVersionEnum(str, Enum):
 
 @dataclass
 class PostDeregisterInstancesFromLoadBalancerQueryParams:
-    action: PostDeregisterInstancesFromLoadBalancerActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeregisterInstancesFromLoadBalancerVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeregisterInstancesFromLoadBalancerActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeregisterInstancesFromLoadBalancerVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeregisterInstancesFromLoadBalancerHeaders:
 
 @dataclass
 class PostDeregisterInstancesFromLoadBalancerRequest:
-    query_params: PostDeregisterInstancesFromLoadBalancerQueryParams = field(default=None)
-    headers: PostDeregisterInstancesFromLoadBalancerHeaders = field(default=None)
+    headers: PostDeregisterInstancesFromLoadBalancerHeaders = field()
+    query_params: PostDeregisterInstancesFromLoadBalancerQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeregisterInstancesFromLoadBalancerResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

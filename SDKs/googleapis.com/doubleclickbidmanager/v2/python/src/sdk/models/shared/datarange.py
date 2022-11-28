@@ -1,8 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import date
-from . import date
+from sdk import utils
+from . import *
 
 class DataRangeRangeEnum(str, Enum):
     RANGE_UNSPECIFIED = "RANGE_UNSPECIFIED"
@@ -29,7 +33,11 @@ class DataRangeRangeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class DataRange:
-    custom_end_date: Optional[date.Date] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customEndDate' }})
-    custom_start_date: Optional[date.Date] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customStartDate' }})
-    range: Optional[DataRangeRangeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'range' }})
+    r"""DataRange
+    Report data range.
+    """
+    
+    custom_end_date: Optional[Date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customEndDate') }})
+    custom_start_date: Optional[Date] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customStartDate') }})
+    range: Optional[DataRangeRangeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('range') }})
     

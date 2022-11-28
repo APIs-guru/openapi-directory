@@ -4,10 +4,6 @@ type GetRevisionsCountUsingPostQueryParams struct {
 	PadID *string `queryParam:"style=form,explode=true,name=padID"`
 }
 
-type GetRevisionsCountUsingPostRequest struct {
-	QueryParams GetRevisionsCountUsingPostQueryParams
-}
-
 type GetRevisionsCountUsingPost200ApplicationJSONData struct {
 	Revisions *int64 `json:"revisions,omitempty"`
 }
@@ -34,6 +30,10 @@ type GetRevisionsCountUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type GetRevisionsCountUsingPostRequest struct {
+	QueryParams GetRevisionsCountUsingPostQueryParams
 }
 
 type GetRevisionsCountUsingPostResponse struct {

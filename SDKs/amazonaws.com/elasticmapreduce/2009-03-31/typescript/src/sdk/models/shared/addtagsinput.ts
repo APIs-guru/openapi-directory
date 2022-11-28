@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
+
 
 
 // AddTagsInput
@@ -8,9 +8,9 @@ import { Tag } from "./tag";
  * This input identifies an Amazon EMR resource and a list of tags to attach.
 **/
 export class AddTagsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId" })
   resourceId: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags: Tag[];
 }

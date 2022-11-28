@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import logmetric
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListLogMetricsResponse:
-    metrics: Optional[List[logmetric.LogMetric]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metrics' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""ListLogMetricsResponse
+    Result returned from ListLogMetrics.
+    """
+    
+    metrics: Optional[List[LogMetric]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metrics') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

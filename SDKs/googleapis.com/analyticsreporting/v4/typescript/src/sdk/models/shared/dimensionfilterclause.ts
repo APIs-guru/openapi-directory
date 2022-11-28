@@ -1,11 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DimensionFilter } from "./dimensionfilter";
 
+
 export enum DimensionFilterClauseOperatorEnum {
-    OperatorUnspecified = "OPERATOR_UNSPECIFIED"
-,    Or = "OR"
-,    And = "AND"
+    OperatorUnspecified = "OPERATOR_UNSPECIFIED",
+    Or = "OR",
+    And = "AND"
 }
 
 
@@ -14,9 +14,9 @@ export enum DimensionFilterClauseOperatorEnum {
  * A group of dimension filters. Set the operator value to specify how the filters are logically combined.
 **/
 export class DimensionFilterClause extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filters", elemType: shared.DimensionFilter })
+  @SpeakeasyMetadata({ data: "json, name=filters", elemType: DimensionFilter })
   filters?: DimensionFilter[];
 
-  @Metadata({ data: "json, name=operator" })
+  @SpeakeasyMetadata({ data: "json, name=operator" })
   operator?: DimensionFilterClauseOperatorEnum;
 }

@@ -22,39 +22,39 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Schema } from "./schema";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SchemaInput } from "./schema";
 export var ValidateMessageRequestEncodingEnum;
 (function (ValidateMessageRequestEncodingEnum) {
     ValidateMessageRequestEncodingEnum["EncodingUnspecified"] = "ENCODING_UNSPECIFIED";
     ValidateMessageRequestEncodingEnum["Json"] = "JSON";
     ValidateMessageRequestEncodingEnum["Binary"] = "BINARY";
 })(ValidateMessageRequestEncodingEnum || (ValidateMessageRequestEncodingEnum = {}));
-// ValidateMessageRequest
+// ValidateMessageRequestInput
 /**
  * Request for the `ValidateMessage` method.
 **/
-var ValidateMessageRequest = /** @class */ (function (_super) {
-    __extends(ValidateMessageRequest, _super);
-    function ValidateMessageRequest() {
+var ValidateMessageRequestInput = /** @class */ (function (_super) {
+    __extends(ValidateMessageRequestInput, _super);
+    function ValidateMessageRequestInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=encoding" }),
+        SpeakeasyMetadata({ data: "json, name=encoding" }),
         __metadata("design:type", String)
-    ], ValidateMessageRequest.prototype, "encoding", void 0);
+    ], ValidateMessageRequestInput.prototype, "encoding", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
-    ], ValidateMessageRequest.prototype, "message", void 0);
+    ], ValidateMessageRequestInput.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
-    ], ValidateMessageRequest.prototype, "name", void 0);
+    ], ValidateMessageRequestInput.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=schema" }),
-        __metadata("design:type", Schema)
-    ], ValidateMessageRequest.prototype, "schema", void 0);
-    return ValidateMessageRequest;
+        SpeakeasyMetadata({ data: "json, name=schema" }),
+        __metadata("design:type", SchemaInput)
+    ], ValidateMessageRequestInput.prototype, "schema", void 0);
+    return ValidateMessageRequestInput;
 }(SpeakeasyBase));
-export { ValidateMessageRequest };
+export { ValidateMessageRequestInput };

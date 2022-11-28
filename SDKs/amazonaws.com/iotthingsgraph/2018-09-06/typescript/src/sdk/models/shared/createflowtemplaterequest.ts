@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DefinitionDocument } from "./definitiondocument";
 
 
+
 export class CreateFlowTemplateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compatibleNamespaceVersion" })
+  @SpeakeasyMetadata({ data: "json, name=compatibleNamespaceVersion" })
   compatibleNamespaceVersion?: number;
 
-  @Metadata({ data: "json, name=definition" })
+  @SpeakeasyMetadata({ data: "json, name=definition" })
   definition: DefinitionDocument;
 }

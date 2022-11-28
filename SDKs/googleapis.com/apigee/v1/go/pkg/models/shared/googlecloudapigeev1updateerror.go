@@ -22,6 +22,8 @@ const (
 	GoogleCloudApigeeV1UpdateErrorCodeEnumDataLoss           GoogleCloudApigeeV1UpdateErrorCodeEnum = "DATA_LOSS"
 )
 
+// GoogleCloudApigeeV1UpdateError
+// Details on why a resource update failed in the runtime.
 type GoogleCloudApigeeV1UpdateError struct {
 	Code     *GoogleCloudApigeeV1UpdateErrorCodeEnum `json:"code,omitempty"`
 	Message  *string                                 `json:"message,omitempty"`

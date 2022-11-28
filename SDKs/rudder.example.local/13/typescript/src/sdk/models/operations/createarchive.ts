@@ -1,69 +1,70 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateArchivePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=archiveKind" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=archiveKind" })
   archiveKind: shared.ArchiveKindEnum;
 }
 
-
-export class CreateArchiveRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: CreateArchivePathParams;
-}
-
 export enum CreateArchive200ApplicationJsonActionEnum {
-    ArchiveFull = "archiveFull"
-,    ArchiveGroups = "archiveGroups"
-,    ArchiveRules = "archiveRules"
-,    ArchiveDirectives = "archiveDirectives"
-,    ArchiveParameters = "archiveParameters"
+    ArchiveFull = "archiveFull",
+    ArchiveGroups = "archiveGroups",
+    ArchiveRules = "archiveRules",
+    ArchiveDirectives = "archiveDirectives",
+    ArchiveParameters = "archiveParameters"
 }
 
 
 export class CreateArchive200ApplicationJsonDataFull extends SpeakeasyBase {
-  @Metadata({ data: "json, name=commiter" })
+  @SpeakeasyMetadata({ data: "json, name=commiter" })
   commiter: string;
 
-  @Metadata({ data: "json, name=gitCommit" })
+  @SpeakeasyMetadata({ data: "json, name=gitCommit" })
   gitCommit: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 }
 
 
 export class CreateArchive200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=full" })
+  @SpeakeasyMetadata({ data: "json, name=full" })
   full: CreateArchive200ApplicationJsonDataFull;
 }
 
 export enum CreateArchive200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class CreateArchive200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: CreateArchive200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: CreateArchive200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: CreateArchive200ApplicationJsonResultEnum;
 }
 
 
+export class CreateArchiveRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: CreateArchivePathParams;
+}
+
+
 export class CreateArchiveResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createArchive200ApplicationJsonObject?: CreateArchive200ApplicationJson;
 }

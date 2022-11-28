@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetAppConfigIncludeEnum(str, Enum):
@@ -27,13 +28,13 @@ class GetAppConfigQueryParams:
 
 @dataclass
 class GetAppConfigRequest:
-    query_params: GetAppConfigQueryParams = field(default=None)
+    query_params: GetAppConfigQueryParams = field()
     
 
 @dataclass
 class GetAppConfigResponse:
+    content_type: str = field()
+    status_code: int = field()
     app_config: Optional[shared.AppConfig] = field(default=None)
-    content_type: str = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

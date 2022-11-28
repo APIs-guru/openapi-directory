@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudChannelV1CheckCloudIdentityAccountsExistRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for CloudChannelService.CheckCloudIdentityAccountsExist.
 **/
 export class GoogleCloudChannelV1CheckCloudIdentityAccountsExistRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 }

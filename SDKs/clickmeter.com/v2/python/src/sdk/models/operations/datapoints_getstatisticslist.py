@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DataPointsGetStatisticsListPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class DataPointsGetStatisticsListGroupByEnum(str, Enum):
     WEEK = "week"
@@ -31,21 +32,21 @@ class DataPointsGetStatisticsListTimeFrameEnum(str, Enum):
 
 @dataclass
 class DataPointsGetStatisticsListQueryParams:
+    time_frame: DataPointsGetStatisticsListTimeFrameEnum = field(metadata={'query_param': { 'field_name': 'timeFrame', 'style': 'form', 'explode': True }})
     from_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fromDay', 'style': 'form', 'explode': True }})
     group_by: Optional[DataPointsGetStatisticsListGroupByEnum] = field(default=None, metadata={'query_param': { 'field_name': 'groupBy', 'style': 'form', 'explode': True }})
-    time_frame: DataPointsGetStatisticsListTimeFrameEnum = field(default=None, metadata={'query_param': { 'field_name': 'timeFrame', 'style': 'form', 'explode': True }})
     to_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'toDay', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class DataPointsGetStatisticsListRequest:
-    path_params: DataPointsGetStatisticsListPathParams = field(default=None)
-    query_params: DataPointsGetStatisticsListQueryParams = field(default=None)
+    path_params: DataPointsGetStatisticsListPathParams = field()
+    query_params: DataPointsGetStatisticsListQueryParams = field()
     
 
 @dataclass
 class DataPointsGetStatisticsListResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_responses_entities_response_api_core_dto_aggregated_aggregated_result_: Optional[shared.APICoreResponsesEntitiesResponseAPICoreDtoAggregatedAggregatedResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

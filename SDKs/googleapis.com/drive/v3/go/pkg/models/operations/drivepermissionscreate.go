@@ -44,7 +44,7 @@ type DrivePermissionsCreateSecurity struct {
 type DrivePermissionsCreateRequest struct {
 	PathParams  DrivePermissionsCreatePathParams
 	QueryParams DrivePermissionsCreateQueryParams
-	Request     *shared.Permission `request:"mediaType=application/json"`
+	Request     *shared.PermissionInput `request:"mediaType=application/json"`
 	Security    DrivePermissionsCreateSecurity
 }
 

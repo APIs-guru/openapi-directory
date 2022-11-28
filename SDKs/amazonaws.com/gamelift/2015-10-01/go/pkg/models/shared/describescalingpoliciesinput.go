@@ -1,5 +1,7 @@
 package shared
 
+// DescribeScalingPoliciesInput
+// Represents the input for a request operation.
 type DescribeScalingPoliciesInput struct {
 	FleetID      string                 `json:"FleetId"`
 	Limit        *int64                 `json:"Limit,omitempty"`

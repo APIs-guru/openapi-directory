@@ -31,7 +31,7 @@ type AnalyticsadminPropertiesUserLinksCreateSecurity struct {
 type AnalyticsadminPropertiesUserLinksCreateRequest struct {
 	PathParams  AnalyticsadminPropertiesUserLinksCreatePathParams
 	QueryParams AnalyticsadminPropertiesUserLinksCreateQueryParams
-	Request     *shared.GoogleAnalyticsAdminV1alphaUserLink `request:"mediaType=application/json"`
+	Request     *shared.GoogleAnalyticsAdminV1alphaUserLinkInput `request:"mediaType=application/json"`
 	Security    AnalyticsadminPropertiesUserLinksCreateSecurity
 }
 

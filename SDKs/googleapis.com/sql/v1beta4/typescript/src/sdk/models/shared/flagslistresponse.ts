@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Flag } from "./flag";
+
 
 
 // FlagsListResponse
@@ -8,9 +8,9 @@ import { Flag } from "./flag";
  * Flags list response.
 **/
 export class FlagsListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.Flag })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Flag })
   items?: Flag[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

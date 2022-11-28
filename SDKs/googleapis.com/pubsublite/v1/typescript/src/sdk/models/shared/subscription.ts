@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeliveryConfig } from "./deliveryconfig";
+
 
 
 // Subscription
@@ -7,12 +8,12 @@ import { DeliveryConfig } from "./deliveryconfig";
  * Metadata about a subscription resource.
 **/
 export class Subscription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deliveryConfig" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryConfig" })
   deliveryConfig?: DeliveryConfig;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=topic" })
+  @SpeakeasyMetadata({ data: "json, name=topic" })
   topic?: string;
 }

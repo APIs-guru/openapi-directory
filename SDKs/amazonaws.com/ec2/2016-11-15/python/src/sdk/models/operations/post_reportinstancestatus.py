@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostReportInstanceStatusActionEnum(str, Enum):
     REPORT_INSTANCE_STATUS = "ReportInstanceStatus"
@@ -10,8 +14,8 @@ class PostReportInstanceStatusVersionEnum(str, Enum):
 
 @dataclass
 class PostReportInstanceStatusQueryParams:
-    action: PostReportInstanceStatusActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostReportInstanceStatusVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostReportInstanceStatusActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostReportInstanceStatusVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostReportInstanceStatusHeaders:
 
 @dataclass
 class PostReportInstanceStatusRequest:
-    query_params: PostReportInstanceStatusQueryParams = field(default=None)
-    headers: PostReportInstanceStatusHeaders = field(default=None)
+    headers: PostReportInstanceStatusHeaders = field()
+    query_params: PostReportInstanceStatusQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostReportInstanceStatusResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

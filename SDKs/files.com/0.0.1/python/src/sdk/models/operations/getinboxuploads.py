@@ -20,12 +20,12 @@ class GetInboxUploadsQueryParams:
 
 @dataclass
 class GetInboxUploadsRequest:
-    query_params: GetInboxUploadsQueryParams = field(default=None)
+    query_params: GetInboxUploadsQueryParams = field()
     
 
 @dataclass
 class GetInboxUploadsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     inbox_upload_entities: Optional[List[shared.InboxUploadEntity]] = field(default=None)
-    status_code: int = field(default=None)
     

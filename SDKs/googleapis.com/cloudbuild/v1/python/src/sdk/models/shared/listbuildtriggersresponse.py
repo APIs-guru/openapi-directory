@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import buildtrigger
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListBuildTriggersResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    triggers: Optional[List[buildtrigger.BuildTrigger]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'triggers' }})
+    r"""ListBuildTriggersResponse
+    Response containing existing `BuildTriggers`.
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    triggers: Optional[List[BuildTrigger]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('triggers') }})
     

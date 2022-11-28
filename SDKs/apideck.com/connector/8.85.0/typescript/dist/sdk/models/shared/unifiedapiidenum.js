@@ -1,0 +1,28 @@
+export var UnifiedApiIdEnum;
+(function (UnifiedApiIdEnum) {
+    UnifiedApiIdEnum["Vault"] = "vault";
+    UnifiedApiIdEnum["Lead"] = "lead";
+    UnifiedApiIdEnum["Crm"] = "crm";
+    UnifiedApiIdEnum["Accounting"] = "accounting";
+    UnifiedApiIdEnum["FileStorage"] = "file-storage";
+    UnifiedApiIdEnum["Spreadsheet"] = "spreadsheet";
+    UnifiedApiIdEnum["Email"] = "email";
+    UnifiedApiIdEnum["Script"] = "script";
+    UnifiedApiIdEnum["Sms"] = "sms";
+    UnifiedApiIdEnum["TeamMessaging"] = "team-messaging";
+    UnifiedApiIdEnum["Ecommerce"] = "ecommerce";
+    UnifiedApiIdEnum["Payroll"] = "payroll";
+    UnifiedApiIdEnum["CustomerSupport"] = "customer-support";
+    UnifiedApiIdEnum["TimeRegistration"] = "time-registration";
+    UnifiedApiIdEnum["TransactionalEmail"] = "transactional-email";
+    UnifiedApiIdEnum["Form"] = "form";
+    UnifiedApiIdEnum["Csp"] = "csp";
+    UnifiedApiIdEnum["EmailMarketing"] = "email-marketing";
+    UnifiedApiIdEnum["Ats"] = "ats";
+    UnifiedApiIdEnum["Hris"] = "hris";
+    UnifiedApiIdEnum["Pos"] = "pos";
+    UnifiedApiIdEnum["ProjectManagement"] = "project-management";
+    UnifiedApiIdEnum["ExpenseManagement"] = "expense-management";
+    UnifiedApiIdEnum["Calendar"] = "calendar";
+    UnifiedApiIdEnum["Procurement"] = "procurement";
+})(UnifiedApiIdEnum || (UnifiedApiIdEnum = {}));

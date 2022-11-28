@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TrustedAdvisorCostOptimizingSummary } from "./trustedadvisorcostoptimizingsummary";
+
 
 
 // TrustedAdvisorCategorySpecificSummary
@@ -7,6 +8,6 @@ import { TrustedAdvisorCostOptimizingSummary } from "./trustedadvisorcostoptimiz
  * The container for summary information that relates to the category of the Trusted Advisor check.
 **/
 export class TrustedAdvisorCategorySpecificSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=costOptimizing" })
+  @SpeakeasyMetadata({ data: "json, name=costOptimizing" })
   costOptimizing?: TrustedAdvisorCostOptimizingSummary;
 }

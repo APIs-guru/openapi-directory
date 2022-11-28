@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DescribeTrustedAdvisorCheckRefreshStatusesXAmzTargetEnum {
     AwsSupport20130415DescribeTrustedAdvisorCheckRefreshStatuses = "AWSSupport_20130415.DescribeTrustedAdvisorCheckRefreshStatuses"

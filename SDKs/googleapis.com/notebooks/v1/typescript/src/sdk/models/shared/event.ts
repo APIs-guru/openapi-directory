@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum EventTypeEnum {
-    EventTypeUnspecified = "EVENT_TYPE_UNSPECIFIED"
-,    Idle = "IDLE"
-,    Heartbeat = "HEARTBEAT"
-,    Health = "HEALTH"
-,    Maintenance = "MAINTENANCE"
+    EventTypeUnspecified = "EVENT_TYPE_UNSPECIFIED",
+    Idle = "IDLE",
+    Heartbeat = "HEARTBEAT",
+    Health = "HEALTH",
+    Maintenance = "MAINTENANCE"
 }
 
 
@@ -14,12 +15,12 @@ export enum EventTypeEnum {
  * The definition of an Event for a managed / semi-managed notebook instance.
 **/
 export class Event extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: Map<string, string>;
 
-  @Metadata({ data: "json, name=reportTime" })
+  @SpeakeasyMetadata({ data: "json, name=reportTime" })
   reportTime?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: EventTypeEnum;
 }

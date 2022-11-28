@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetInstancesIdPreviewPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetInstancesIdPreviewQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=quality" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quality" })
   quality?: number;
 }
 
 
 export class GetInstancesIdPreviewHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" })
   accept?: string;
 }
 
 
 export class GetInstancesIdPreviewRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetInstancesIdPreviewPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetInstancesIdPreviewQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetInstancesIdPreviewHeaders;
 }
 
 
 export class GetInstancesIdPreviewResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetDefinitionsPathParams = /** @class */ (function (_super) {
     __extends(GetDefinitionsPathParams, _super);
     function GetDefinitionsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=word" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=word" }),
         __metadata("design:type", String)
     ], GetDefinitionsPathParams.prototype, "word", void 0);
     return GetDefinitionsPathParams;
@@ -81,27 +81,27 @@ var GetDefinitionsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=includeRelated" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeRelated" }),
         __metadata("design:type", String)
     ], GetDefinitionsQueryParams.prototype, "includeRelated", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=includeTags" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeTags" }),
         __metadata("design:type", String)
     ], GetDefinitionsQueryParams.prototype, "includeTags", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetDefinitionsQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=partOfSpeech" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=partOfSpeech" }),
         __metadata("design:type", String)
     ], GetDefinitionsQueryParams.prototype, "partOfSpeech", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=sourceDictionaries" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=sourceDictionaries" }),
         __metadata("design:type", Array)
     ], GetDefinitionsQueryParams.prototype, "sourceDictionaries", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=useCanonical" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=useCanonical" }),
         __metadata("design:type", String)
     ], GetDefinitionsQueryParams.prototype, "useCanonical", void 0);
     return GetDefinitionsQueryParams;
@@ -113,11 +113,11 @@ var GetDefinitionsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDefinitionsPathParams)
     ], GetDefinitionsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDefinitionsQueryParams)
     ], GetDefinitionsRequest.prototype, "queryParams", void 0);
     return GetDefinitionsRequest;
@@ -129,15 +129,15 @@ var GetDefinitionsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetDefinitionsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDefinitionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDefinitionsResponse.prototype, "statusCode", void 0);
     return GetDefinitionsResponse;

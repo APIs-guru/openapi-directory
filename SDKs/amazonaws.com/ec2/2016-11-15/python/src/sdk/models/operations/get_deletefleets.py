@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDeleteFleetsActionEnum(str, Enum):
     DELETE_FLEETS = "DeleteFleets"
@@ -10,11 +14,11 @@ class GetDeleteFleetsVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteFleetsQueryParams:
-    action: GetDeleteFleetsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteFleetsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    fleet_id: List[str] = field(metadata={'query_param': { 'field_name': 'FleetId', 'style': 'form', 'explode': True }})
+    terminate_instances: bool = field(metadata={'query_param': { 'field_name': 'TerminateInstances', 'style': 'form', 'explode': True }})
+    version: GetDeleteFleetsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    fleet_id: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'FleetId', 'style': 'form', 'explode': True }})
-    terminate_instances: bool = field(default=None, metadata={'query_param': { 'field_name': 'TerminateInstances', 'style': 'form', 'explode': True }})
-    version: GetDeleteFleetsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDeleteFleetsHeaders:
 
 @dataclass
 class GetDeleteFleetsRequest:
-    query_params: GetDeleteFleetsQueryParams = field(default=None)
-    headers: GetDeleteFleetsHeaders = field(default=None)
+    headers: GetDeleteFleetsHeaders = field()
+    query_params: GetDeleteFleetsQueryParams = field()
     
 
 @dataclass
 class GetDeleteFleetsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

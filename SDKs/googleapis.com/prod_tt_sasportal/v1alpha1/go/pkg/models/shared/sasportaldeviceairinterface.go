@@ -14,6 +14,8 @@ const (
 	SasPortalDeviceAirInterfaceRadioTechnologyEnumTaranaWireless             SasPortalDeviceAirInterfaceRadioTechnologyEnum = "TARANA_WIRELESS"
 )
 
+// SasPortalDeviceAirInterface
+// Information about the device's air interface.
 type SasPortalDeviceAirInterface struct {
 	RadioTechnology *SasPortalDeviceAirInterfaceRadioTechnologyEnum `json:"radioTechnology,omitempty"`
 	SupportedSpec   *string                                         `json:"supportedSpec,omitempty"`

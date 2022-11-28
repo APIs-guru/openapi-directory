@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // FargatePlatformConfiguration
 /**
  * The platform configuration for jobs that are running on Fargate resources. Jobs that run on EC2 resources must not specify this parameter.
@@ -33,7 +33,7 @@ var FargatePlatformConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=platformVersion" }),
+        SpeakeasyMetadata({ data: "json, name=platformVersion" }),
         __metadata("design:type", String)
     ], FargatePlatformConfiguration.prototype, "platformVersion", void 0);
     return FargatePlatformConfiguration;

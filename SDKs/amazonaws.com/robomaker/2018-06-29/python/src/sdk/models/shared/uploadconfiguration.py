@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import uploadbehavior_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UploadConfiguration:
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    path: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'path' }})
-    upload_behavior: uploadbehavior_enum.UploadBehaviorEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uploadBehavior' }})
+    r"""UploadConfiguration
+    Provides upload configuration information. Files are uploaded from the simulation job to a location you specify. 
+    """
+    
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    path: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('path') }})
+    upload_behavior: UploadBehaviorEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uploadBehavior') }})
     

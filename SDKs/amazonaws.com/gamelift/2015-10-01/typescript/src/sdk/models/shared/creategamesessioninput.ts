@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GameProperty } from "./gameproperty";
+
 
 
 // CreateGameSessionInput
@@ -8,33 +8,33 @@ import { GameProperty } from "./gameproperty";
  * Represents the input for a request operation.
 **/
 export class CreateGameSessionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AliasId" })
+  @SpeakeasyMetadata({ data: "json, name=AliasId" })
   aliasId?: string;
 
-  @Metadata({ data: "json, name=CreatorId" })
+  @SpeakeasyMetadata({ data: "json, name=CreatorId" })
   creatorId?: string;
 
-  @Metadata({ data: "json, name=FleetId" })
+  @SpeakeasyMetadata({ data: "json, name=FleetId" })
   fleetId?: string;
 
-  @Metadata({ data: "json, name=GameProperties", elemType: shared.GameProperty })
+  @SpeakeasyMetadata({ data: "json, name=GameProperties", elemType: GameProperty })
   gameProperties?: GameProperty[];
 
-  @Metadata({ data: "json, name=GameSessionData" })
+  @SpeakeasyMetadata({ data: "json, name=GameSessionData" })
   gameSessionData?: string;
 
-  @Metadata({ data: "json, name=GameSessionId" })
+  @SpeakeasyMetadata({ data: "json, name=GameSessionId" })
   gameSessionId?: string;
 
-  @Metadata({ data: "json, name=IdempotencyToken" })
+  @SpeakeasyMetadata({ data: "json, name=IdempotencyToken" })
   idempotencyToken?: string;
 
-  @Metadata({ data: "json, name=Location" })
+  @SpeakeasyMetadata({ data: "json, name=Location" })
   location?: string;
 
-  @Metadata({ data: "json, name=MaximumPlayerSessionCount" })
+  @SpeakeasyMetadata({ data: "json, name=MaximumPlayerSessionCount" })
   maximumPlayerSessionCount: number;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 }

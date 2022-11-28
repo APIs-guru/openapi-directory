@@ -10,12 +10,9 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import axios from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
 import * as operations from "./models/operations";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
-var Servers = [
+import * as utils from "../internal/utils";
+export var ServerList = [
     "https://chompthis.com/api/v2",
 ];
 export function WithServerURL(serverURL, params) {
@@ -23,12 +20,12 @@ export function WithServerURL(serverURL, params) {
         if (params != null) {
             serverURL = utils.ReplaceParameters(serverURL, params);
         }
-        sdk.serverURL = serverURL;
+        sdk._serverURL = serverURL;
     };
 }
 export function WithClient(client) {
     return function (sdk) {
-        sdk.defaultClient = client;
+        sdk._defaultClient = client;
     };
 }
 var SDK = /** @class */ (function () {
@@ -38,24 +35,23 @@ var SDK = /** @class */ (function () {
             opts[_i] = arguments[_i];
         }
         var _this = this;
+        this._language = "typescript";
+        this._sdkVersion = "0.0.1";
+        this._genVersion = "internal";
         opts.forEach(function (o) { return o(_this); });
-        if (this.serverURL == "") {
-            this.serverURL = Servers[0];
+        if (this._serverURL == "") {
+            this._serverURL = ServerList[0];
         }
-        if (!this.defaultClient) {
-            this.defaultClient = axios.create({ baseURL: this.serverURL });
+        if (!this._defaultClient) {
+            this._defaultClient = axios.create({ baseURL: this._serverURL });
         }
-        if (!this.securityClient) {
-            if (this.security) {
-                this.securityClient = CreateSecurityClient(this.defaultClient, this.security);
-            }
-            else {
-                this.securityClient = this.defaultClient;
-            }
+        if (!this._securityClient) {
+            this._securityClient = this._defaultClient;
         }
     }
-    // GetFoodBrandedBarcodePhp - Get a branded food item using a barcode
     /**
+     * getFoodBrandedBarcodePhp - Get a branded food item using a barcode
+     *
      * ## Get data for a branded food using the food's UPC/EAN barcode.
      *
      * **Example**
@@ -65,44 +61,44 @@ var SDK = /** @class */ (function () {
      *   * Read our **[Knowledge Base article](https://desk.zoho.com/portal/chompthis/kb/articles/im-having-trouble-getting-matches-for-barcodes-what-can-id-do)** for helpful tips and tricks.
      *
     **/
-    SDK.prototype.GetFoodBrandedBarcodePhp = function (req, config) {
+    SDK.prototype.getFoodBrandedBarcodePhp = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetFoodBrandedBarcodePhpRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/food/branded/barcode.php";
-        var client = CreateSecurityClient(this.defaultClient, req.security);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = utils.CreateSecurityClient(this._defaultClient, req.security);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.brandedFoodObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 401:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 401:
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetFoodBrandedNamePhp - Get a branded food item by name
     /**
+     * getFoodBrandedNamePhp - Get a branded food item by name
+     *
      * ## Search for branded food items by name.
      *
      * **Example**
@@ -114,44 +110,44 @@ var SDK = /** @class */ (function () {
      * > This API endpoint is only available to Standard and Premium API subscribers. Please consider upgrading your subscription if you are subscribed to the Limited plan. **[Read this](https://desk.zoho.com/portal/chompthis/kb/articles/can-i-upgrade-downgrade-my-subscription)** if you aren't sure how to upgrade your subscription.
      *
     **/
-    SDK.prototype.GetFoodBrandedNamePhp = function (req, config) {
+    SDK.prototype.getFoodBrandedNamePhp = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetFoodBrandedNamePhpRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/food/branded/name.php";
-        var client = CreateSecurityClient(this.defaultClient, req.security);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = utils.CreateSecurityClient(this._defaultClient, req.security);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.brandedFoodObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 401:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 401:
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetFoodBrandedSearchPhp - Get data for branded food items using various search parameters
     /**
+     * getFoodBrandedSearchPhp - Get data for branded food items using various search parameters
+     *
      * ## Search for branded food items using various parameters.
      *
      * **Example**
@@ -163,44 +159,44 @@ var SDK = /** @class */ (function () {
      * > This API endpoint is only available to Standard and Premium API subscribers. Please consider upgrading your subscription if you are subscribed to the Limited plan. **[Read this](https://desk.zoho.com/portal/chompthis/kb/articles/can-i-upgrade-downgrade-my-subscription)** if you aren't sure how to upgrade your subscription.
      *
     **/
-    SDK.prototype.GetFoodBrandedSearchPhp = function (req, config) {
+    SDK.prototype.getFoodBrandedSearchPhp = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetFoodBrandedSearchPhpRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/food/branded/search.php";
-        var client = CreateSecurityClient(this.defaultClient, req.security);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = utils.CreateSecurityClient(this._defaultClient, req.security);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.brandedFoodObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 401:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 401:
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // GetFoodIngredientSearchPhp - Get raw/generic food ingredient item(s)
     /**
+     * getFoodIngredientSearchPhp - Get raw/generic food ingredient item(s)
+     *
      * ## Get data for a specific ingredient or a specific set of ingredients.
      *
      * **Example #1: Single Ingredient**
@@ -215,36 +211,35 @@ var SDK = /** @class */ (function () {
      * > This API endpoint is only available to Standard and Premium API subscribers. Please consider upgrading your subscription if you are subscribed to the Limited plan. **[Read this](https://desk.zoho.com/portal/chompthis/kb/articles/can-i-upgrade-downgrade-my-subscription)** if you aren't sure how to upgrade your subscription.
      *
     **/
-    SDK.prototype.GetFoodIngredientSearchPhp = function (req, config) {
+    SDK.prototype.getFoodIngredientSearchPhp = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.GetFoodIngredientSearchPhpRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/food/ingredient/search.php";
-        var client = CreateSecurityClient(this.defaultClient, req.security);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = utils.CreateSecurityClient(this._defaultClient, req.security);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.ingredientObject = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
-                case 400:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 400:
                     break;
-                case 401:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 401:
                     break;
-                case 404:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 404:
                     break;
-                case 500:
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 500:
                     break;
             }
             return res;

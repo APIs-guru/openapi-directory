@@ -22,22 +22,10 @@ type GetRepositoriesWorkspaceRepoSlugPullrequestsQueryParams struct {
 	State *GetRepositoriesWorkspaceRepoSlugPullrequestsStateEnum `queryParam:"style=form,explode=true,name=state"`
 }
 
-type GetRepositoriesWorkspaceRepoSlugPullrequestsSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type GetRepositoriesWorkspaceRepoSlugPullrequestsSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type GetRepositoriesWorkspaceRepoSlugPullrequestsSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type GetRepositoriesWorkspaceRepoSlugPullrequestsSecurity struct {
-	Option1 *GetRepositoriesWorkspaceRepoSlugPullrequestsSecurityOption1 `security:"option"`
-	Option2 *GetRepositoriesWorkspaceRepoSlugPullrequestsSecurityOption2 `security:"option"`
-	Option3 *GetRepositoriesWorkspaceRepoSlugPullrequestsSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetRepositoriesWorkspaceRepoSlugPullrequestsRequest struct {

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetTerminateInstanceInAutoScalingGroupActionEnum(str, Enum):
     TERMINATE_INSTANCE_IN_AUTO_SCALING_GROUP = "TerminateInstanceInAutoScalingGroup"
@@ -10,10 +14,10 @@ class GetTerminateInstanceInAutoScalingGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetTerminateInstanceInAutoScalingGroupQueryParams:
-    action: GetTerminateInstanceInAutoScalingGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    instance_id: str = field(default=None, metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
-    should_decrement_desired_capacity: bool = field(default=None, metadata={'query_param': { 'field_name': 'ShouldDecrementDesiredCapacity', 'style': 'form', 'explode': True }})
-    version: GetTerminateInstanceInAutoScalingGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetTerminateInstanceInAutoScalingGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    instance_id: str = field(metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
+    should_decrement_desired_capacity: bool = field(metadata={'query_param': { 'field_name': 'ShouldDecrementDesiredCapacity', 'style': 'form', 'explode': True }})
+    version: GetTerminateInstanceInAutoScalingGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetTerminateInstanceInAutoScalingGroupHeaders:
 
 @dataclass
 class GetTerminateInstanceInAutoScalingGroupRequest:
-    query_params: GetTerminateInstanceInAutoScalingGroupQueryParams = field(default=None)
-    headers: GetTerminateInstanceInAutoScalingGroupHeaders = field(default=None)
+    headers: GetTerminateInstanceInAutoScalingGroupHeaders = field()
+    query_params: GetTerminateInstanceInAutoScalingGroupQueryParams = field()
     
 
 @dataclass
 class GetTerminateInstanceInAutoScalingGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

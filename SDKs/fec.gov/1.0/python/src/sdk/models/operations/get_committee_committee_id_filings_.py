@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetCommitteeCommitteeIDFilingsPathParams:
-    committee_id: str = field(default=None, metadata={'path_param': { 'field_name': 'committee_id', 'style': 'simple', 'explode': False }})
+    committee_id: str = field(metadata={'path_param': { 'field_name': 'committee_id', 'style': 'simple', 'explode': False }})
     
 class GetCommitteeCommitteeIDFilingsAmendmentIndicatorEnum(str, Enum):
     UNKNOWN = ""
@@ -32,8 +33,8 @@ class GetCommitteeCommitteeIDFilingsOfficeEnum(str, Enum):
 
 @dataclass
 class GetCommitteeCommitteeIDFilingsQueryParams:
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     amendment_indicator: Optional[List[GetCommitteeCommitteeIDFilingsAmendmentIndicatorEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'amendment_indicator', 'style': 'form', 'explode': True }})
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     beginning_image_number: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'beginning_image_number', 'style': 'form', 'explode': True }})
     committee_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'committee_type', 'style': 'form', 'explode': True }})
     cycle: Optional[List[int]] = field(default=None, metadata={'query_param': { 'field_name': 'cycle', 'style': 'form', 'explode': True }})
@@ -44,8 +45,8 @@ class GetCommitteeCommitteeIDFilingsQueryParams:
     form_category: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'form_category', 'style': 'form', 'explode': True }})
     form_type: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'form_type', 'style': 'form', 'explode': True }})
     is_amended: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'is_amended', 'style': 'form', 'explode': True }})
-    max_receipt_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'max_receipt_date', 'style': 'form', 'explode': True }})
-    min_receipt_date: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'min_receipt_date', 'style': 'form', 'explode': True }})
+    max_receipt_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'max_receipt_date', 'style': 'form', 'explode': True }})
+    min_receipt_date: Optional[date] = field(default=None, metadata={'query_param': { 'field_name': 'min_receipt_date', 'style': 'form', 'explode': True }})
     most_recent: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'most_recent', 'style': 'form', 'explode': True }})
     office: Optional[List[GetCommitteeCommitteeIDFilingsOfficeEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'office', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
@@ -64,13 +65,13 @@ class GetCommitteeCommitteeIDFilingsQueryParams:
 
 @dataclass
 class GetCommitteeCommitteeIDFilingsRequest:
-    path_params: GetCommitteeCommitteeIDFilingsPathParams = field(default=None)
-    query_params: GetCommitteeCommitteeIDFilingsQueryParams = field(default=None)
+    path_params: GetCommitteeCommitteeIDFilingsPathParams = field()
+    query_params: GetCommitteeCommitteeIDFilingsQueryParams = field()
     
 
 @dataclass
 class GetCommitteeCommitteeIDFilingsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     filings_page: Optional[shared.FilingsPage] = field(default=None)
-    status_code: int = field(default=None)
     

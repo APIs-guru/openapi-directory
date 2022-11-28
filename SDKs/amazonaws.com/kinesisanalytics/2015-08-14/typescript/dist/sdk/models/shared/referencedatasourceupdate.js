@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SourceSchema } from "./sourceschema";
 import { S3ReferenceDataSourceUpdate } from "./s3referencedatasourceupdate";
 // ReferenceDataSourceUpdate
@@ -35,19 +35,19 @@ var ReferenceDataSourceUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ReferenceId" }),
+        SpeakeasyMetadata({ data: "json, name=ReferenceId" }),
         __metadata("design:type", String)
     ], ReferenceDataSourceUpdate.prototype, "referenceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReferenceSchemaUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=ReferenceSchemaUpdate" }),
         __metadata("design:type", SourceSchema)
     ], ReferenceDataSourceUpdate.prototype, "referenceSchemaUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3ReferenceDataSourceUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=S3ReferenceDataSourceUpdate" }),
         __metadata("design:type", S3ReferenceDataSourceUpdate)
     ], ReferenceDataSourceUpdate.prototype, "s3ReferenceDataSourceUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=TableNameUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=TableNameUpdate" }),
         __metadata("design:type", String)
     ], ReferenceDataSourceUpdate.prototype, "tableNameUpdate", void 0);
     return ReferenceDataSourceUpdate;

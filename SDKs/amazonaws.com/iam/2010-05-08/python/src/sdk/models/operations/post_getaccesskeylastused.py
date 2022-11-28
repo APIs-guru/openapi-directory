@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetAccessKeyLastUsedActionEnum(str, Enum):
     GET_ACCESS_KEY_LAST_USED = "GetAccessKeyLastUsed"
@@ -10,8 +14,8 @@ class PostGetAccessKeyLastUsedVersionEnum(str, Enum):
 
 @dataclass
 class PostGetAccessKeyLastUsedQueryParams:
-    action: PostGetAccessKeyLastUsedActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetAccessKeyLastUsedVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetAccessKeyLastUsedActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetAccessKeyLastUsedVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetAccessKeyLastUsedHeaders:
 
 @dataclass
 class PostGetAccessKeyLastUsedRequest:
-    query_params: PostGetAccessKeyLastUsedQueryParams = field(default=None)
-    headers: PostGetAccessKeyLastUsedHeaders = field(default=None)
+    headers: PostGetAccessKeyLastUsedHeaders = field()
+    query_params: PostGetAccessKeyLastUsedQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetAccessKeyLastUsedResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

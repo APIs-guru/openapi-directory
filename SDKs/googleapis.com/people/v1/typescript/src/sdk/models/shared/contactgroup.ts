@@ -1,12 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GroupClientData } from "./groupclientdata";
 import { ContactGroupMetadata } from "./contactgroupmetadata";
 
+
 export enum ContactGroupGroupTypeEnum {
-    GroupTypeUnspecified = "GROUP_TYPE_UNSPECIFIED"
-,    UserContactGroup = "USER_CONTACT_GROUP"
-,    SystemContactGroup = "SYSTEM_CONTACT_GROUP"
+    GroupTypeUnspecified = "GROUP_TYPE_UNSPECIFIED",
+    UserContactGroup = "USER_CONTACT_GROUP",
+    SystemContactGroup = "SYSTEM_CONTACT_GROUP"
+}
+
+
+// ContactGroupInput
+/** 
+ * A contact group.
+**/
+export class ContactGroupInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=clientData", elemType: GroupClientData })
+  clientData?: GroupClientData[];
+
+  @SpeakeasyMetadata({ data: "json, name=etag" })
+  etag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=resourceName" })
+  resourceName?: string;
 }
 
 
@@ -15,30 +34,30 @@ export enum ContactGroupGroupTypeEnum {
  * A contact group.
 **/
 export class ContactGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientData", elemType: shared.GroupClientData })
+  @SpeakeasyMetadata({ data: "json, name=clientData", elemType: GroupClientData })
   clientData?: GroupClientData[];
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=formattedName" })
+  @SpeakeasyMetadata({ data: "json, name=formattedName" })
   formattedName?: string;
 
-  @Metadata({ data: "json, name=groupType" })
+  @SpeakeasyMetadata({ data: "json, name=groupType" })
   groupType?: ContactGroupGroupTypeEnum;
 
-  @Metadata({ data: "json, name=memberCount" })
+  @SpeakeasyMetadata({ data: "json, name=memberCount" })
   memberCount?: number;
 
-  @Metadata({ data: "json, name=memberResourceNames" })
+  @SpeakeasyMetadata({ data: "json, name=memberResourceNames" })
   memberResourceNames?: string[];
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: ContactGroupMetadata;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=resourceName" })
+  @SpeakeasyMetadata({ data: "json, name=resourceName" })
   resourceName?: string;
 }

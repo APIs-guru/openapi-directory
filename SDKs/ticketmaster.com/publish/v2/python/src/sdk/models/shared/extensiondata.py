@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import source
+from sdk import utils
+from . import *
 
 class ExtensionDataRelatedEntityTypeEnum(str, Enum):
     EVENT = "event"
@@ -12,11 +14,15 @@ class ExtensionDataRelatedEntityTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ExtensionData:
-    data: dict[str, Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    related_entity_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relatedEntityId' }})
-    related_entity_source: Optional[source.Source] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relatedEntitySource' }})
-    related_entity_type: ExtensionDataRelatedEntityTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relatedEntityType' }})
-    source: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    version_number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'versionNumber' }})
+    r"""ExtensionData
+    This class defines an extenstion data on the Publish API
+    """
+    
+    data: dict[str, Any] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    related_entity_type: ExtensionDataRelatedEntityTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('relatedEntityType') }})
+    source: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    related_entity_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relatedEntityId') }})
+    related_entity_source: Optional[Source] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('relatedEntitySource') }})
+    version_number: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('versionNumber') }})
     

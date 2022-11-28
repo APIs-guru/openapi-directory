@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SrcSearchlyApiV1ControllersSimilarityBySongQueryParams = /** @class */ (function (_super) {
     __extends(SrcSearchlyApiV1ControllersSimilarityBySongQueryParams, _super);
@@ -30,7 +30,7 @@ var SrcSearchlyApiV1ControllersSimilarityBySongQueryParams = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=song_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=song_id" }),
         __metadata("design:type", Number)
     ], SrcSearchlyApiV1ControllersSimilarityBySongQueryParams.prototype, "songId", void 0);
     return SrcSearchlyApiV1ControllersSimilarityBySongQueryParams;
@@ -42,7 +42,7 @@ var SrcSearchlyApiV1ControllersSimilarityBySongRequest = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SrcSearchlyApiV1ControllersSimilarityBySongQueryParams)
     ], SrcSearchlyApiV1ControllersSimilarityBySongRequest.prototype, "queryParams", void 0);
     return SrcSearchlyApiV1ControllersSimilarityBySongRequest;
@@ -54,19 +54,19 @@ var SrcSearchlyApiV1ControllersSimilarityBySongResponse = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ApiResponseSimilarity)
     ], SrcSearchlyApiV1ControllersSimilarityBySongResponse.prototype, "apiResponseSimilarity", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SrcSearchlyApiV1ControllersSimilarityBySongResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SrcSearchlyApiV1ControllersSimilarityBySongResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SrcSearchlyApiV1ControllersSimilarityBySongResponse.prototype, "srcSearchlyApiV1ControllersSimilarityBySongDefaultApplicationTextString", void 0);
     return SrcSearchlyApiV1ControllersSimilarityBySongResponse;

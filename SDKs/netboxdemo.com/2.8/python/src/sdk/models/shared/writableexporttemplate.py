@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class WritableExportTemplateTemplateLanguageEnum(str, Enum):
     DJANGO = "django"
@@ -9,13 +11,12 @@ class WritableExportTemplateTemplateLanguageEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class WritableExportTemplate:
-    content_type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content_type' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    file_extension: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'file_extension' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    mime_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mime_type' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    template_code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_code' }})
-    template_language: Optional[WritableExportTemplateTemplateLanguageEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_language' }})
+class WritableExportTemplateInput:
+    content_type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('content_type') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    template_code: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('template_code') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    file_extension: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('file_extension') }})
+    mime_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mime_type') }})
+    template_language: Optional[WritableExportTemplateTemplateLanguageEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('template_language') }})
     

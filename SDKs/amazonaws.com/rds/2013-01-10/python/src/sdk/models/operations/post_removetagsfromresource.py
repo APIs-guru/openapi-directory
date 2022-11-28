@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRemoveTagsFromResourceActionEnum(str, Enum):
     REMOVE_TAGS_FROM_RESOURCE = "RemoveTagsFromResource"
@@ -10,8 +14,8 @@ class PostRemoveTagsFromResourceVersionEnum(str, Enum):
 
 @dataclass
 class PostRemoveTagsFromResourceQueryParams:
-    action: PostRemoveTagsFromResourceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRemoveTagsFromResourceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRemoveTagsFromResourceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRemoveTagsFromResourceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRemoveTagsFromResourceHeaders:
 
 @dataclass
 class PostRemoveTagsFromResourceRequest:
-    query_params: PostRemoveTagsFromResourceQueryParams = field(default=None)
-    headers: PostRemoveTagsFromResourceHeaders = field(default=None)
+    headers: PostRemoveTagsFromResourceHeaders = field()
+    query_params: PostRemoveTagsFromResourceQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRemoveTagsFromResourceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PublicUpdateSubscriptionStatusRequestLegalBasisEnum;
 (function (PublicUpdateSubscriptionStatusRequestLegalBasisEnum) {
     PublicUpdateSubscriptionStatusRequestLegalBasisEnum["LegitimateInterestPql"] = "LEGITIMATE_INTEREST_PQL";
@@ -43,19 +43,19 @@ var PublicUpdateSubscriptionStatusRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=emailAddress" }),
+        SpeakeasyMetadata({ data: "json, name=emailAddress" }),
         __metadata("design:type", String)
     ], PublicUpdateSubscriptionStatusRequest.prototype, "emailAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=legalBasis" }),
+        SpeakeasyMetadata({ data: "json, name=legalBasis" }),
         __metadata("design:type", String)
     ], PublicUpdateSubscriptionStatusRequest.prototype, "legalBasis", void 0);
     __decorate([
-        Metadata({ data: "json, name=legalBasisExplanation" }),
+        SpeakeasyMetadata({ data: "json, name=legalBasisExplanation" }),
         __metadata("design:type", String)
     ], PublicUpdateSubscriptionStatusRequest.prototype, "legalBasisExplanation", void 0);
     __decorate([
-        Metadata({ data: "json, name=subscriptionId" }),
+        SpeakeasyMetadata({ data: "json, name=subscriptionId" }),
         __metadata("design:type", String)
     ], PublicUpdateSubscriptionStatusRequest.prototype, "subscriptionId", void 0);
     return PublicUpdateSubscriptionStatusRequest;

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AdminRoleEnum {
-    AdminRoleUnspecified = "ADMIN_ROLE_UNSPECIFIED"
-,    Owner = "OWNER"
-,    CoOwner = "CO_OWNER"
-,    Manager = "MANAGER"
-,    CommunityManager = "COMMUNITY_MANAGER"
+    AdminRoleUnspecified = "ADMIN_ROLE_UNSPECIFIED",
+    Owner = "OWNER",
+    CoOwner = "CO_OWNER",
+    Manager = "MANAGER",
+    CommunityManager = "COMMUNITY_MANAGER"
 }
 
 
@@ -14,15 +15,15 @@ export enum AdminRoleEnum {
  * An administrator of an Account or a Location.
 **/
 export class Admin extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adminName" })
+  @SpeakeasyMetadata({ data: "json, name=adminName" })
   adminName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pendingInvitation" })
+  @SpeakeasyMetadata({ data: "json, name=pendingInvitation" })
   pendingInvitation?: boolean;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: AdminRoleEnum;
 }

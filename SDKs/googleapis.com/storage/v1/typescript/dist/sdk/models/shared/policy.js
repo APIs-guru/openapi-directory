@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Expr } from "./expr";
 var PolicyBindings = /** @class */ (function (_super) {
     __extends(PolicyBindings, _super);
@@ -31,15 +30,15 @@ var PolicyBindings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=condition" }),
+        SpeakeasyMetadata({ data: "json, name=condition" }),
         __metadata("design:type", Expr)
     ], PolicyBindings.prototype, "condition", void 0);
     __decorate([
-        Metadata({ data: "json, name=members" }),
+        SpeakeasyMetadata({ data: "json, name=members" }),
         __metadata("design:type", Array)
     ], PolicyBindings.prototype, "members", void 0);
     __decorate([
-        Metadata({ data: "json, name=role" }),
+        SpeakeasyMetadata({ data: "json, name=role" }),
         __metadata("design:type", String)
     ], PolicyBindings.prototype, "role", void 0);
     return PolicyBindings;
@@ -55,23 +54,23 @@ var Policy = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bindings", elemType: shared.PolicyBindings }),
+        SpeakeasyMetadata({ data: "json, name=bindings", elemType: PolicyBindings }),
         __metadata("design:type", Array)
     ], Policy.prototype, "bindings", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], Policy.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], Policy.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceId" }),
+        SpeakeasyMetadata({ data: "json, name=resourceId" }),
         __metadata("design:type", String)
     ], Policy.prototype, "resourceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", Number)
     ], Policy.prototype, "version", void 0);
     return Policy;

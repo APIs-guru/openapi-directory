@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AttackDetail
+// The details of a DDoS attack.
 type AttackDetail struct {
 	AttackCounters   []SummarizedCounter  `json:"AttackCounters,omitempty"`
 	AttackID         *string              `json:"AttackId,omitempty"`

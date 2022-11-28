@@ -1,5 +1,8 @@
 package shared
 
+// SimplifiedArtistObject
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedartistobject - Find more info on the official Spotify Web API Reference
 type SimplifiedArtistObject struct {
 	ExternalUrls *ExternalURLObject `json:"external_urls,omitempty"`
 	Href         *string            `json:"href,omitempty"`

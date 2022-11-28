@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiMapping } from "./apimapping";
 
 
+
 export class GetApiMappingsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Items", elemType: shared.ApiMapping })
+  @SpeakeasyMetadata({ data: "json, name=Items", elemType: ApiMapping })
   items?: ApiMapping[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

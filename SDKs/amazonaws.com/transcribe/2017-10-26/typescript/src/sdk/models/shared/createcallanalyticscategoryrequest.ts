@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Rule } from "./rule";
 
 
+
 export class CreateCallAnalyticsCategoryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CategoryName" })
+  @SpeakeasyMetadata({ data: "json, name=CategoryName" })
   categoryName: string;
 
-  @Metadata({ data: "json, name=Rules", elemType: shared.Rule })
+  @SpeakeasyMetadata({ data: "json, name=Rules", elemType: Rule })
   rules: Rule[];
 }

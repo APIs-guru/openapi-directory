@@ -24,6 +24,8 @@ const (
 	EncryptionInfoUserKeyStateEnumPending   EncryptionInfoUserKeyStateEnum = "pending"
 )
 
+// EncryptionInfo
+// Encryption states
 type EncryptionInfo struct {
 	DataSpaceKeyState EncryptionInfoDataSpaceKeyStateEnum `json:"dataSpaceKeyState"`
 	RoomKeyState      EncryptionInfoRoomKeyStateEnum      `json:"roomKeyState"`

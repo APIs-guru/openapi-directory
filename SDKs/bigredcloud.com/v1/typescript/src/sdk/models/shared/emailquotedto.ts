@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EmailQuoteDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bccAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=bccAddresses" })
   bccAddresses?: string[];
 
-  @Metadata({ data: "json, name=messageBody" })
+  @SpeakeasyMetadata({ data: "json, name=messageBody" })
   messageBody?: string;
 
-  @Metadata({ data: "json, name=quoteId" })
+  @SpeakeasyMetadata({ data: "json, name=quoteId" })
   quoteId?: number;
 
-  @Metadata({ data: "json, name=toAddress" })
+  @SpeakeasyMetadata({ data: "json, name=toAddress" })
   toAddress?: string;
 }

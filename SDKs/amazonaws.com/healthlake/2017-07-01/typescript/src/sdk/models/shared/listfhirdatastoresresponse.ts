@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatastoreProperties } from "./datastoreproperties";
 
 
+
 export class ListFhirDatastoresResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DatastorePropertiesList", elemType: shared.DatastoreProperties })
+  @SpeakeasyMetadata({ data: "json, name=DatastorePropertiesList", elemType: DatastoreProperties })
   datastorePropertiesList: DatastoreProperties[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

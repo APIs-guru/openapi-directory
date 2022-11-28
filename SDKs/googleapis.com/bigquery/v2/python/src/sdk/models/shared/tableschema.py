@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import tablefieldschema
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TableSchema:
-    fields: Optional[List[tablefieldschema.TableFieldSchema]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fields' }})
+    fields: Optional[List[TableFieldSchema]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fields') }})
     

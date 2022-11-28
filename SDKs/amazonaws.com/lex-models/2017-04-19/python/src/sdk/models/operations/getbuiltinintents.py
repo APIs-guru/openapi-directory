@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetBuiltinIntentsLocaleEnum(str, Enum):
@@ -39,16 +43,16 @@ class GetBuiltinIntentsHeaders:
 
 @dataclass
 class GetBuiltinIntentsRequest:
-    query_params: GetBuiltinIntentsQueryParams = field(default=None)
-    headers: GetBuiltinIntentsHeaders = field(default=None)
+    headers: GetBuiltinIntentsHeaders = field()
+    query_params: GetBuiltinIntentsQueryParams = field()
     
 
 @dataclass
 class GetBuiltinIntentsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_builtin_intents_response: Optional[shared.GetBuiltinIntentsResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

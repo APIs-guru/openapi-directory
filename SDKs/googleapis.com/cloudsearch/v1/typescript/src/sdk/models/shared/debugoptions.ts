@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DebugOptions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Shared request debug options for all cloudsearch RPC methods.
 **/
 export class DebugOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableDebugging" })
+  @SpeakeasyMetadata({ data: "json, name=enableDebugging" })
   enableDebugging?: boolean;
 }

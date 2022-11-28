@@ -1,73 +1,127 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudApigeeV1CustomReportMetric } from "./googlecloudapigeev1customreportmetric";
 import { GoogleCloudApigeeV1ReportProperty } from "./googlecloudapigeev1reportproperty";
 
 
-export class GoogleCloudApigeeV1CustomReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chartType" })
+
+export class GoogleCloudApigeeV1CustomReportInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=chartType" })
   chartType?: string;
 
-  @Metadata({ data: "json, name=comments" })
+  @SpeakeasyMetadata({ data: "json, name=comments" })
   comments?: string[];
 
-  @Metadata({ data: "json, name=createdAt" })
-  createdAt?: string;
-
-  @Metadata({ data: "json, name=dimensions" })
+  @SpeakeasyMetadata({ data: "json, name=dimensions" })
   dimensions?: string[];
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=environment" })
-  environment?: string;
-
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=fromTime" })
+  @SpeakeasyMetadata({ data: "json, name=fromTime" })
   fromTime?: string;
 
-  @Metadata({ data: "json, name=lastModifiedAt" })
-  lastModifiedAt?: string;
-
-  @Metadata({ data: "json, name=lastViewedAt" })
-  lastViewedAt?: string;
-
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: string;
 
-  @Metadata({ data: "json, name=metrics", elemType: shared.GoogleCloudApigeeV1CustomReportMetric })
+  @SpeakeasyMetadata({ data: "json, name=metrics", elemType: GoogleCloudApigeeV1CustomReportMetric })
   metrics?: GoogleCloudApigeeV1CustomReportMetric[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset?: string;
 
-  @Metadata({ data: "json, name=organization" })
-  organization?: string;
-
-  @Metadata({ data: "json, name=properties", elemType: shared.GoogleCloudApigeeV1ReportProperty })
+  @SpeakeasyMetadata({ data: "json, name=properties", elemType: GoogleCloudApigeeV1ReportProperty })
   properties?: GoogleCloudApigeeV1ReportProperty[];
 
-  @Metadata({ data: "json, name=sortByCols" })
+  @SpeakeasyMetadata({ data: "json, name=sortByCols" })
   sortByCols?: string[];
 
-  @Metadata({ data: "json, name=sortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=sortOrder" })
   sortOrder?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=timeUnit" })
+  @SpeakeasyMetadata({ data: "json, name=timeUnit" })
   timeUnit?: string;
 
-  @Metadata({ data: "json, name=toTime" })
+  @SpeakeasyMetadata({ data: "json, name=toTime" })
   toTime?: string;
 
-  @Metadata({ data: "json, name=topk" })
+  @SpeakeasyMetadata({ data: "json, name=topk" })
+  topk?: string;
+}
+
+
+export class GoogleCloudApigeeV1CustomReport extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=chartType" })
+  chartType?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=comments" })
+  comments?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
+  createdAt?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=dimensions" })
+  dimensions?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=environment" })
+  environment?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=filter" })
+  filter?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=fromTime" })
+  fromTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedAt" })
+  lastModifiedAt?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=lastViewedAt" })
+  lastViewedAt?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=limit" })
+  limit?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=metrics", elemType: GoogleCloudApigeeV1CustomReportMetric })
+  metrics?: GoogleCloudApigeeV1CustomReportMetric[];
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=offset" })
+  offset?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=organization" })
+  organization?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=properties", elemType: GoogleCloudApigeeV1ReportProperty })
+  properties?: GoogleCloudApigeeV1ReportProperty[];
+
+  @SpeakeasyMetadata({ data: "json, name=sortByCols" })
+  sortByCols?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=sortOrder" })
+  sortOrder?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=tags" })
+  tags?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=timeUnit" })
+  timeUnit?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=toTime" })
+  toTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=topk" })
   topk?: string;
 }

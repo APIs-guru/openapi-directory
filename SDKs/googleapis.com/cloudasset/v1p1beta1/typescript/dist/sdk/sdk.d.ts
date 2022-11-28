@@ -1,15 +1,19 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { IamPolicies } from "./iampolicies";
+import { Resources } from "./resources";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://cloudasset.googleapis.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    iamPolicies: IamPolicies;
+    resources: Resources;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    CloudassetIamPoliciesSearchAll(req: operations.CloudassetIamPoliciesSearchAllRequest, config?: AxiosRequestConfig): Promise<operations.CloudassetIamPoliciesSearchAllResponse>;
-    CloudassetResourcesSearchAll(req: operations.CloudassetResourcesSearchAllRequest, config?: AxiosRequestConfig): Promise<operations.CloudassetResourcesSearchAllResponse>;
 }
 export {};

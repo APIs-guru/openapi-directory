@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class ReviewGetRepliesPathParams:
-    review_id: str = field(default=None, metadata={'path_param': { 'field_name': 'reviewId', 'style': 'simple', 'explode': False }})
+    review_id: str = field(metadata={'path_param': { 'field_name': 'reviewId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +16,14 @@ class ReviewGetRepliesQueryParams:
 
 @dataclass
 class ReviewGetRepliesRequest:
-    path_params: ReviewGetRepliesPathParams = field(default=None)
-    query_params: ReviewGetRepliesQueryParams = field(default=None)
+    path_params: ReviewGetRepliesPathParams = field()
+    query_params: ReviewGetRepliesQueryParams = field()
     
 
 @dataclass
 class ReviewGetRepliesResponse:
+    content_type: str = field()
+    status_code: int = field()
     big_oven_model_api_replies: Optional[List[shared.BigOvenModelAPIReply]] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

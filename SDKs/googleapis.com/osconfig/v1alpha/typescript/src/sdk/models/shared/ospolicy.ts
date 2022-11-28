@@ -1,11 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OsPolicyResourceGroup } from "./ospolicyresourcegroup";
 
+
 export enum OsPolicyModeEnum {
-    ModeUnspecified = "MODE_UNSPECIFIED"
-,    Validation = "VALIDATION"
-,    Enforcement = "ENFORCEMENT"
+    ModeUnspecified = "MODE_UNSPECIFIED",
+    Validation = "VALIDATION",
+    Enforcement = "ENFORCEMENT"
 }
 
 
@@ -14,18 +14,18 @@ export enum OsPolicyModeEnum {
  * An OS policy defines the desired state configuration for a VM.
 **/
 export class OsPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowNoResourceGroupMatch" })
+  @SpeakeasyMetadata({ data: "json, name=allowNoResourceGroupMatch" })
   allowNoResourceGroupMatch?: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: OsPolicyModeEnum;
 
-  @Metadata({ data: "json, name=resourceGroups", elemType: shared.OsPolicyResourceGroup })
+  @SpeakeasyMetadata({ data: "json, name=resourceGroups", elemType: OsPolicyResourceGroup })
   resourceGroups?: OsPolicyResourceGroup[];
 }

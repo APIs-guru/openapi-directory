@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .aliascontext import *
 from .alt_enum import *
 from .analysiscompleted import *
@@ -67,7 +67,6 @@ from .link import *
 from .listnoteoccurrencesresponse import *
 from .listnotesresponse import *
 from .listoccurrencesresponse import *
-from .listscanconfigsresponse import *
 from .location import *
 from .note import *
 from .occurrence import *
@@ -83,7 +82,6 @@ from .relationshipnote import *
 from .relationshipoccurrence import *
 from .repoid import *
 from .resource import *
-from .scanconfig import *
 from .security import *
 from .setiampolicyrequest import *
 from .signature import *

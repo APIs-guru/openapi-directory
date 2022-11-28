@@ -1,5 +1,7 @@
 package shared
 
+// Behavior
+// A Device Defender security profile behavior.
 type Behavior struct {
 	Criteria        *BehaviorCriteria `json:"criteria,omitempty"`
 	Metric          *string           `json:"metric,omitempty"`

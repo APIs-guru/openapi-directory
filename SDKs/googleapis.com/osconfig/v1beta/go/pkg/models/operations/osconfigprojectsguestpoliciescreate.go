@@ -31,7 +31,7 @@ type OsconfigProjectsGuestPoliciesCreateSecurity struct {
 type OsconfigProjectsGuestPoliciesCreateRequest struct {
 	PathParams  OsconfigProjectsGuestPoliciesCreatePathParams
 	QueryParams OsconfigProjectsGuestPoliciesCreateQueryParams
-	Request     *shared.GuestPolicy `request:"mediaType=application/json"`
+	Request     *shared.GuestPolicyInput `request:"mediaType=application/json"`
 	Security    OsconfigProjectsGuestPoliciesCreateSecurity
 }
 

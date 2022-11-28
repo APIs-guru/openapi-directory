@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BusinessChainSearchTerms
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Search terms for Business Chain targeting options. At least one of the field should be populated.
 **/
 export class BusinessChainSearchTerms extends SpeakeasyBase {
-  @Metadata({ data: "json, name=businessChainQuery" })
+  @SpeakeasyMetadata({ data: "json, name=businessChainQuery" })
   businessChainQuery?: string;
 
-  @Metadata({ data: "json, name=regionQuery" })
+  @SpeakeasyMetadata({ data: "json, name=regionQuery" })
   regionQuery?: string;
 }

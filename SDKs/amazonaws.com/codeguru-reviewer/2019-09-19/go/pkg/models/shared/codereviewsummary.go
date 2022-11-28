@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// CodeReviewSummary
+//
+//	Information about the summary of the code review.
 type CodeReviewSummary struct {
 	CodeReviewArn        *string           `json:"CodeReviewArn,omitempty"`
 	CreatedTimeStamp     *time.Time        `json:"CreatedTimeStamp,omitempty"`

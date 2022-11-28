@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostVideosIdGiveOwnershipPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: any;
 }
 
 
 export class PostVideosIdGiveOwnershipRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=username;" })
+  @SpeakeasyMetadata({ data: "form, name=username;" })
   username: string;
 }
 
 
 export class PostVideosIdGiveOwnershipSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class PostVideosIdGiveOwnershipRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostVideosIdGiveOwnershipPathParams;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request: PostVideosIdGiveOwnershipRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PostVideosIdGiveOwnershipSecurity;
 }
 
 
 export class PostVideosIdGiveOwnershipResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

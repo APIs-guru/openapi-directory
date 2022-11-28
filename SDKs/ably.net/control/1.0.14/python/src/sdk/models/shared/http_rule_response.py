@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import rule_source
+from sdk import utils
+from . import *
 
 class HTTPRuleResponseRequestModeEnum(str, Enum):
     SINGLE = "single"
@@ -22,32 +24,32 @@ class HTTPRuleResponseTargetFormatEnum(str, Enum):
 @dataclass_json
 @dataclass
 class HTTPRuleResponseTargetHeaders:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     
 
 @dataclass_json
 @dataclass
 class HTTPRuleResponseTarget:
-    enveloped: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enveloped' }})
-    format: HTTPRuleResponseTargetFormatEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'format' }})
-    headers: Optional[List[HTTPRuleResponseTargetHeaders]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'headers' }})
-    signing_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'signingKeyId' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    format: HTTPRuleResponseTargetFormatEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('format') }})
+    url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
+    enveloped: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enveloped') }})
+    headers: Optional[List[HTTPRuleResponseTargetHeaders]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('headers') }})
+    signing_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('signingKeyId') }})
     
 
 @dataclass_json
 @dataclass
 class HTTPRuleResponse:
-    links: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': '_links' }})
-    app_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appId' }})
-    created: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    modified: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modified' }})
-    request_mode: HTTPRuleResponseRequestModeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestMode' }})
-    rule_type: HTTPRuleResponseRuleTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ruleType' }})
-    source: rule_source.RuleSource = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
-    status: Optional[HTTPRuleResponseStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    target: HTTPRuleResponseTarget = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target' }})
-    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    request_mode: HTTPRuleResponseRequestModeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestMode') }})
+    rule_type: HTTPRuleResponseRuleTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ruleType') }})
+    source: RuleSource = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
+    target: HTTPRuleResponseTarget = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('target') }})
+    links: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('_links') }})
+    app_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('appId') }})
+    created: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('created') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    modified: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('modified') }})
+    status: Optional[HTTPRuleResponseStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
     

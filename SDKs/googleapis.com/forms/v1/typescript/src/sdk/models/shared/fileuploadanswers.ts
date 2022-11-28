@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileUploadAnswer } from "./fileuploadanswer";
+
 
 
 // FileUploadAnswers
@@ -8,6 +8,6 @@ import { FileUploadAnswer } from "./fileuploadanswer";
  * All submitted files for a FileUpload question.
 **/
 export class FileUploadAnswers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=answers", elemType: shared.FileUploadAnswer })
+  @SpeakeasyMetadata({ data: "json, name=answers", elemType: FileUploadAnswer })
   answers?: FileUploadAnswer[];
 }

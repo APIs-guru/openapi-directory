@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EntityOut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end: number;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start: number;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum AutoRegistrationStatusEnum {
-    Enable = "ENABLE"
-,    Disable = "DISABLE"
+    Enable = "ENABLE",
+    Disable = "DISABLE"
 }

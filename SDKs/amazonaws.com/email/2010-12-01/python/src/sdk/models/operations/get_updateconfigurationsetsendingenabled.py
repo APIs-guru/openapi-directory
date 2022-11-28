@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetUpdateConfigurationSetSendingEnabledActionEnum(str, Enum):
     UPDATE_CONFIGURATION_SET_SENDING_ENABLED = "UpdateConfigurationSetSendingEnabled"
@@ -10,10 +14,10 @@ class GetUpdateConfigurationSetSendingEnabledVersionEnum(str, Enum):
 
 @dataclass
 class GetUpdateConfigurationSetSendingEnabledQueryParams:
-    action: GetUpdateConfigurationSetSendingEnabledActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    configuration_set_name: str = field(default=None, metadata={'query_param': { 'field_name': 'ConfigurationSetName', 'style': 'form', 'explode': True }})
-    enabled: bool = field(default=None, metadata={'query_param': { 'field_name': 'Enabled', 'style': 'form', 'explode': True }})
-    version: GetUpdateConfigurationSetSendingEnabledVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetUpdateConfigurationSetSendingEnabledActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    configuration_set_name: str = field(metadata={'query_param': { 'field_name': 'ConfigurationSetName', 'style': 'form', 'explode': True }})
+    enabled: bool = field(metadata={'query_param': { 'field_name': 'Enabled', 'style': 'form', 'explode': True }})
+    version: GetUpdateConfigurationSetSendingEnabledVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetUpdateConfigurationSetSendingEnabledHeaders:
 
 @dataclass
 class GetUpdateConfigurationSetSendingEnabledRequest:
-    query_params: GetUpdateConfigurationSetSendingEnabledQueryParams = field(default=None)
-    headers: GetUpdateConfigurationSetSendingEnabledHeaders = field(default=None)
+    headers: GetUpdateConfigurationSetSendingEnabledHeaders = field()
+    query_params: GetUpdateConfigurationSetSendingEnabledQueryParams = field()
     
 
 @dataclass
 class GetUpdateConfigurationSetSendingEnabledResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

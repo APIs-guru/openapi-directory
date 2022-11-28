@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import opsitemdatatype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class OpsItemDataValue:
-    type: Optional[opsitemdatatype_enum.OpsItemDataTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
+    r"""OpsItemDataValue
+    An object that defines the value of the key and its type in the OperationalData map.
+    """
+    
+    type: Optional[OpsItemDataTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Value') }})
     

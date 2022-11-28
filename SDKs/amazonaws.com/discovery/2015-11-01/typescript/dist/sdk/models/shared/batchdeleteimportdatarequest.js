@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var BatchDeleteImportDataRequest = /** @class */ (function (_super) {
     __extends(BatchDeleteImportDataRequest, _super);
     function BatchDeleteImportDataRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=importTaskIds" }),
+        SpeakeasyMetadata({ data: "json, name=importTaskIds" }),
         __metadata("design:type", Array)
     ], BatchDeleteImportDataRequest.prototype, "importTaskIds", void 0);
     return BatchDeleteImportDataRequest;

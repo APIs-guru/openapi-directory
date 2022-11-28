@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CommitTransactionRequest } from "./committransactionrequest";
 import { ExecuteStatementRequest } from "./executestatementrequest";
 import { FetchPageRequest } from "./fetchpagerequest";

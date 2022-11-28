@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AppPkgInfoModificationsOperationStateEnum(str, Enum):
     DISABLED = "DISABLED"
@@ -10,5 +11,9 @@ class AppPkgInfoModificationsOperationStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AppPkgInfoModifications:
-    operation_state: AppPkgInfoModificationsOperationStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operationState' }})
+    r"""AppPkgInfoModifications
+    'The data type represents the operational state for an application package resource'
+    """
+    
+    operation_state: AppPkgInfoModificationsOperationStateEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('operationState') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// CultureDto
+// Class CultureDto.
 type CultureDto struct {
 	DisplayName                 *string  `json:"DisplayName,omitempty"`
 	Name                        *string  `json:"Name,omitempty"`

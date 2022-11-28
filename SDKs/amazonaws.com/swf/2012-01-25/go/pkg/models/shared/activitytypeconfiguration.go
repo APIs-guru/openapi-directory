@@ -1,5 +1,7 @@
 package shared
 
+// ActivityTypeConfiguration
+// Configuration settings registered with the activity type.
 type ActivityTypeConfiguration struct {
 	DefaultTaskHeartbeatTimeout       *string   `json:"defaultTaskHeartbeatTimeout,omitempty"`
 	DefaultTaskList                   *TaskList `json:"defaultTaskList,omitempty"`

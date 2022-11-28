@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetSchemaCreationStatusPathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class GetSchemaCreationStatusHeaders:
 
 @dataclass
 class GetSchemaCreationStatusRequest:
-    path_params: GetSchemaCreationStatusPathParams = field(default=None)
-    headers: GetSchemaCreationStatusHeaders = field(default=None)
+    headers: GetSchemaCreationStatusHeaders = field()
+    path_params: GetSchemaCreationStatusPathParams = field()
     
 
 @dataclass
 class GetSchemaCreationStatusResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_schema_creation_status_response: Optional[shared.GetSchemaCreationStatusResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

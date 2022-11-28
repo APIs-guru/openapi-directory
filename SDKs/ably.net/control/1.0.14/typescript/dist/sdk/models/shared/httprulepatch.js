@@ -22,8 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleSource } from "./rulesource";
 export var HttpRulePatchRequestModeEnum;
 (function (HttpRulePatchRequestModeEnum) {
@@ -50,11 +49,11 @@ var HttpRulePatchTargetHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], HttpRulePatchTargetHeaders.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], HttpRulePatchTargetHeaders.prototype, "value", void 0);
     return HttpRulePatchTargetHeaders;
@@ -66,23 +65,23 @@ var HttpRulePatchTarget = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=enveloped" }),
+        SpeakeasyMetadata({ data: "json, name=enveloped" }),
         __metadata("design:type", Boolean)
     ], HttpRulePatchTarget.prototype, "enveloped", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], HttpRulePatchTarget.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=headers", elemType: shared.HttpRulePatchTargetHeaders }),
+        SpeakeasyMetadata({ data: "json, name=headers", elemType: HttpRulePatchTargetHeaders }),
         __metadata("design:type", Array)
     ], HttpRulePatchTarget.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "json, name=signingKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=signingKeyId" }),
         __metadata("design:type", String)
     ], HttpRulePatchTarget.prototype, "signingKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], HttpRulePatchTarget.prototype, "url", void 0);
     return HttpRulePatchTarget;
@@ -94,23 +93,23 @@ var HttpRulePatch = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=requestMode" }),
+        SpeakeasyMetadata({ data: "json, name=requestMode" }),
         __metadata("design:type", String)
     ], HttpRulePatch.prototype, "requestMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ruleType" }),
+        SpeakeasyMetadata({ data: "json, name=ruleType" }),
         __metadata("design:type", String)
     ], HttpRulePatch.prototype, "ruleType", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", RuleSource)
     ], HttpRulePatch.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], HttpRulePatch.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=target" }),
+        SpeakeasyMetadata({ data: "json, name=target" }),
         __metadata("design:type", HttpRulePatchTarget)
     ], HttpRulePatch.prototype, "target", void 0);
     return HttpRulePatch;

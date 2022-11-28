@@ -1,6 +1,7 @@
 
 
+
 export enum ManagedCredentialsActionEnum {
-    Enable = "ENABLE"
-,    Disable = "DISABLE"
+    Enable = "ENABLE",
+    Disable = "DISABLE"
 }

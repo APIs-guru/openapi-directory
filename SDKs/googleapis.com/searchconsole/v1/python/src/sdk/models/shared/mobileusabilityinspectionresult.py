@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import mobileusabilityissue
+from sdk import utils
+from . import *
 
 class MobileUsabilityInspectionResultVerdictEnum(str, Enum):
     VERDICT_UNSPECIFIED = "VERDICT_UNSPECIFIED"
@@ -14,6 +16,10 @@ class MobileUsabilityInspectionResultVerdictEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MobileUsabilityInspectionResult:
-    issues: Optional[List[mobileusabilityissue.MobileUsabilityIssue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'issues' }})
-    verdict: Optional[MobileUsabilityInspectionResultVerdictEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'verdict' }})
+    r"""MobileUsabilityInspectionResult
+    Mobile-usability inspection results.
+    """
+    
+    issues: Optional[List[MobileUsabilityIssue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('issues') }})
+    verdict: Optional[MobileUsabilityInspectionResultVerdictEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('verdict') }})
     

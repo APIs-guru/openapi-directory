@@ -1,5 +1,7 @@
 package shared
 
+// CampaignResponse
+// Provides information about the status, configuration, and other settings for a campaign.
 type CampaignResponse struct {
 	AdditionalTreatments        []TreatmentResource          `json:"AdditionalTreatments,omitempty"`
 	ApplicationID               string                       `json:"ApplicationId"`

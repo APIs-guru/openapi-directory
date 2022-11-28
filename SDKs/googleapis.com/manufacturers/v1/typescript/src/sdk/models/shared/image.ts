@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ImageStatusEnum {
-    StatusUnspecified = "STATUS_UNSPECIFIED"
-,    PendingProcessing = "PENDING_PROCESSING"
-,    PendingCrawl = "PENDING_CRAWL"
-,    Ok = "OK"
-,    Roboted = "ROBOTED"
-,    Xroboted = "XROBOTED"
-,    CrawlError = "CRAWL_ERROR"
-,    ProcessingError = "PROCESSING_ERROR"
-,    DecodingError = "DECODING_ERROR"
-,    TooBig = "TOO_BIG"
-,    CrawlSkipped = "CRAWL_SKIPPED"
-,    Hostloaded = "HOSTLOADED"
-,    Http404 = "HTTP_404"
+    StatusUnspecified = "STATUS_UNSPECIFIED",
+    PendingProcessing = "PENDING_PROCESSING",
+    PendingCrawl = "PENDING_CRAWL",
+    Ok = "OK",
+    Roboted = "ROBOTED",
+    Xroboted = "XROBOTED",
+    CrawlError = "CRAWL_ERROR",
+    ProcessingError = "PROCESSING_ERROR",
+    DecodingError = "DECODING_ERROR",
+    TooBig = "TOO_BIG",
+    CrawlSkipped = "CRAWL_SKIPPED",
+    Hostloaded = "HOSTLOADED",
+    Http404 = "HTTP_404"
 }
 
 export enum ImageTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Crawled = "CRAWLED"
-,    Uploaded = "UPLOADED"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Crawled = "CRAWLED",
+    Uploaded = "UPLOADED"
 }
 
 
@@ -28,12 +29,12 @@ export enum ImageTypeEnum {
  * An image.
 **/
 export class Image extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=imageUrl" })
   imageUrl?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ImageStatusEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ImageTypeEnum;
 }

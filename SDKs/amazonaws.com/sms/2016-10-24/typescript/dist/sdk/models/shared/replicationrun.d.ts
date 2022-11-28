@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationRunStageDetails } from "./replicationrunstagedetails";
 import { ReplicationRunStateEnum } from "./replicationrunstateenum";
 import { ReplicationRunTypeEnum } from "./replicationruntypeenum";

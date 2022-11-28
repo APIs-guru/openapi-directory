@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
@@ -17,18 +20,18 @@ class UpdateMediaPathRequests:
 
 @dataclass
 class UpdateMediaPathSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class UpdateMediaPathRequest:
-    query_params: UpdateMediaPathQueryParams = field(default=None)
+    query_params: UpdateMediaPathQueryParams = field()
+    security: UpdateMediaPathSecurity = field()
     request: Optional[UpdateMediaPathRequests] = field(default=None)
-    security: UpdateMediaPathSecurity = field(default=None)
     
 
 @dataclass
 class UpdateMediaPathResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

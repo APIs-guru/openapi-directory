@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
+
+
 UPDATE_EVIDENCE_SERVERS = [
 	"https://apiz.ebay.com{basePath}",
 ]
@@ -8,24 +13,24 @@ UPDATE_EVIDENCE_SERVERS = [
 
 @dataclass
 class UpdateEvidencePathParams:
-    payment_dispute_id: str = field(default=None, metadata={'path_param': { 'field_name': 'payment_dispute_id', 'style': 'simple', 'explode': False }})
+    payment_dispute_id: str = field(metadata={'path_param': { 'field_name': 'payment_dispute_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class UpdateEvidenceSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class UpdateEvidenceRequest:
-    server_url: Optional[str] = field(default=None)
-    path_params: UpdateEvidencePathParams = field(default=None)
+    path_params: UpdateEvidencePathParams = field()
+    security: UpdateEvidenceSecurity = field()
     request: Optional[shared.UpdateEvidencePaymentDisputeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: UpdateEvidenceSecurity = field(default=None)
+    server_url: Optional[str] = field(default=None)
     
 
 @dataclass
 class UpdateEvidenceResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

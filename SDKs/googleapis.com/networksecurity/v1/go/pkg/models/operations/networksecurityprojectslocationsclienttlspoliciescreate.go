@@ -31,7 +31,7 @@ type NetworksecurityProjectsLocationsClientTLSPoliciesCreateSecurity struct {
 type NetworksecurityProjectsLocationsClientTLSPoliciesCreateRequest struct {
 	PathParams  NetworksecurityProjectsLocationsClientTLSPoliciesCreatePathParams
 	QueryParams NetworksecurityProjectsLocationsClientTLSPoliciesCreateQueryParams
-	Request     *shared.ClientTLSPolicy `request:"mediaType=application/json"`
+	Request     *shared.ClientTLSPolicyInput `request:"mediaType=application/json"`
 	Security    NetworksecurityProjectsLocationsClientTLSPoliciesCreateSecurity
 }
 

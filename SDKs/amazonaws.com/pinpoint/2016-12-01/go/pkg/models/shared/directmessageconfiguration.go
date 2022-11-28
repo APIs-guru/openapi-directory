@@ -1,5 +1,7 @@
 package shared
 
+// DirectMessageConfiguration
+// Specifies the settings and content for the default message and any default messages that you tailored for specific channels.
 type DirectMessageConfiguration struct {
 	AdmMessage                     *AdmMessage                     `json:"ADMMessage,omitempty"`
 	ApnsMessage                    *ApnsMessage                    `json:"APNSMessage,omitempty"`

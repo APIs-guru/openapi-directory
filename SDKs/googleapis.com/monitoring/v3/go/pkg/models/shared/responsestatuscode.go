@@ -12,6 +12,8 @@ const (
 	ResponseStatusCodeStatusClassEnumStatusClassAny         ResponseStatusCodeStatusClassEnum = "STATUS_CLASS_ANY"
 )
 
+// ResponseStatusCode
+// A status to accept. Either a status code class like "2xx", or an integer status code like "200".
 type ResponseStatusCode struct {
 	StatusClass *ResponseStatusCodeStatusClassEnum `json:"statusClass,omitempty"`
 	StatusValue *int32                             `json:"statusValue,omitempty"`

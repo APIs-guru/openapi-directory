@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataCompressionTypeEnum } from "./datacompressiontypeenum";
 import { DataRepositoryConfiguration } from "./datarepositoryconfiguration";
 import { LustreDeploymentTypeEnum } from "./lustredeploymenttypeenum";
 import { DriveCacheTypeEnum } from "./drivecachetypeenum";
+
 
 
 // LustreFileSystemConfiguration
@@ -10,33 +11,33 @@ import { DriveCacheTypeEnum } from "./drivecachetypeenum";
  * The configuration for the Amazon FSx for Lustre file system.
 **/
 export class LustreFileSystemConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutomaticBackupRetentionDays" })
+  @SpeakeasyMetadata({ data: "json, name=AutomaticBackupRetentionDays" })
   automaticBackupRetentionDays?: number;
 
-  @Metadata({ data: "json, name=CopyTagsToBackups" })
+  @SpeakeasyMetadata({ data: "json, name=CopyTagsToBackups" })
   copyTagsToBackups?: boolean;
 
-  @Metadata({ data: "json, name=DailyAutomaticBackupStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=DailyAutomaticBackupStartTime" })
   dailyAutomaticBackupStartTime?: string;
 
-  @Metadata({ data: "json, name=DataCompressionType" })
+  @SpeakeasyMetadata({ data: "json, name=DataCompressionType" })
   dataCompressionType?: DataCompressionTypeEnum;
 
-  @Metadata({ data: "json, name=DataRepositoryConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=DataRepositoryConfiguration" })
   dataRepositoryConfiguration?: DataRepositoryConfiguration;
 
-  @Metadata({ data: "json, name=DeploymentType" })
+  @SpeakeasyMetadata({ data: "json, name=DeploymentType" })
   deploymentType?: LustreDeploymentTypeEnum;
 
-  @Metadata({ data: "json, name=DriveCacheType" })
+  @SpeakeasyMetadata({ data: "json, name=DriveCacheType" })
   driveCacheType?: DriveCacheTypeEnum;
 
-  @Metadata({ data: "json, name=MountName" })
+  @SpeakeasyMetadata({ data: "json, name=MountName" })
   mountName?: string;
 
-  @Metadata({ data: "json, name=PerUnitStorageThroughput" })
+  @SpeakeasyMetadata({ data: "json, name=PerUnitStorageThroughput" })
   perUnitStorageThroughput?: number;
 
-  @Metadata({ data: "json, name=WeeklyMaintenanceStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=WeeklyMaintenanceStartTime" })
   weeklyMaintenanceStartTime?: string;
 }

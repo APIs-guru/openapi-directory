@@ -1,5 +1,7 @@
 package shared
 
+// BackendAPIAppSyncAuthSettings
+// The authentication settings for accessing provisioned data models in your Amplify project.
 type BackendAPIAppSyncAuthSettings struct {
 	CognitoUserPoolID  *string  `json:"CognitoUserPoolId,omitempty"`
 	Description        *string  `json:"Description,omitempty"`

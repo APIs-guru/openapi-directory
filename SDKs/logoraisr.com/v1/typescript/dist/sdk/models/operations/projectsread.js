@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ProjectsReadPathParams = /** @class */ (function (_super) {
     __extends(ProjectsReadPathParams, _super);
@@ -30,7 +30,7 @@ var ProjectsReadPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=project_number" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_number" }),
         __metadata("design:type", String)
     ], ProjectsReadPathParams.prototype, "projectNumber", void 0);
     return ProjectsReadPathParams;
@@ -42,7 +42,7 @@ var ProjectsReadRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProjectsReadPathParams)
     ], ProjectsReadRequest.prototype, "pathParams", void 0);
     return ProjectsReadRequest;
@@ -54,15 +54,15 @@ var ProjectsReadResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProjectsReadResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Project)
     ], ProjectsReadResponse.prototype, "project", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProjectsReadResponse.prototype, "statusCode", void 0);
     return ProjectsReadResponse;

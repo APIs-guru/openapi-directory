@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UploadsCreateRequestBodyFile = /** @class */ (function (_super) {
     __extends(UploadsCreateRequestBodyFile, _super);
@@ -30,11 +30,11 @@ var UploadsCreateRequestBodyFile = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, content=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, content=true" }),
         __metadata("design:type", Uint8Array)
     ], UploadsCreateRequestBodyFile.prototype, "content", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=file" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=file" }),
         __metadata("design:type", String)
     ], UploadsCreateRequestBodyFile.prototype, "file", void 0);
     return UploadsCreateRequestBodyFile;
@@ -46,7 +46,7 @@ var UploadsCreateRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, file=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, file=true" }),
         __metadata("design:type", UploadsCreateRequestBodyFile)
     ], UploadsCreateRequestBody.prototype, "file", void 0);
     return UploadsCreateRequestBody;
@@ -58,7 +58,7 @@ var UploadsCreateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", UploadsCreateRequestBody)
     ], UploadsCreateRequest.prototype, "request", void 0);
     return UploadsCreateRequest;
@@ -70,15 +70,15 @@ var UploadsCreateResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UploadsCreateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.FileResponse)
     ], UploadsCreateResponse.prototype, "fileResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UploadsCreateResponse.prototype, "statusCode", void 0);
     return UploadsCreateResponse;

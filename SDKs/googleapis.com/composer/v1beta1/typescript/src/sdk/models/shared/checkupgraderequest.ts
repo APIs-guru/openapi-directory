@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CheckUpgradeRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request to check whether image upgrade will succeed.
 **/
 export class CheckUpgradeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageVersion" })
+  @SpeakeasyMetadata({ data: "json, name=imageVersion" })
   imageVersion?: string;
 }

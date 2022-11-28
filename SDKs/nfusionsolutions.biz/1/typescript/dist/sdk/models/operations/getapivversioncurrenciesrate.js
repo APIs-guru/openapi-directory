@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetApiVVersionCurrenciesRatePathParams = /** @class */ (function (_super) {
     __extends(GetApiVVersionCurrenciesRatePathParams, _super);
@@ -30,7 +30,7 @@ var GetApiVVersionCurrenciesRatePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=version" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" }),
         __metadata("design:type", String)
     ], GetApiVVersionCurrenciesRatePathParams.prototype, "version", void 0);
     return GetApiVVersionCurrenciesRatePathParams;
@@ -42,15 +42,15 @@ var GetApiVVersionCurrenciesRateQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetApiVVersionCurrenciesRateQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pairs" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pairs" }),
         __metadata("design:type", String)
     ], GetApiVVersionCurrenciesRateQueryParams.prototype, "pairs", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" }),
         __metadata("design:type", String)
     ], GetApiVVersionCurrenciesRateQueryParams.prototype, "token", void 0);
     return GetApiVVersionCurrenciesRateQueryParams;
@@ -62,11 +62,11 @@ var GetApiVVersionCurrenciesRateRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiVVersionCurrenciesRatePathParams)
     ], GetApiVVersionCurrenciesRateRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiVVersionCurrenciesRateQueryParams)
     ], GetApiVVersionCurrenciesRateRequest.prototype, "queryParams", void 0);
     return GetApiVVersionCurrenciesRateRequest;
@@ -78,23 +78,23 @@ var GetApiVVersionCurrenciesRateResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetApiVVersionCurrenciesRateResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiVVersionCurrenciesRateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetApiVVersionCurrenciesRateResponse.prototype, "problemDetails", void 0);
     __decorate([
-        Metadata({ elemType: shared.RateResponse }),
+        SpeakeasyMetadata({ elemType: shared.RateResponse }),
         __metadata("design:type", Array)
     ], GetApiVVersionCurrenciesRateResponse.prototype, "rateResponses", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiVVersionCurrenciesRateResponse.prototype, "statusCode", void 0);
     return GetApiVVersionCurrenciesRateResponse;

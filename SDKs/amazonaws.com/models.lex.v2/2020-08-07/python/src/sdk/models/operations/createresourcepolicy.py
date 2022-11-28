@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateResourcePolicyPathParams:
-    resource_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'resourceArn', 'style': 'simple', 'explode': False }})
+    resource_arn: str = field(metadata={'path_param': { 'field_name': 'resourceArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,25 +27,25 @@ class CreateResourcePolicyHeaders:
 @dataclass_json
 @dataclass
 class CreateResourcePolicyRequestBody:
-    policy: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policy' }})
+    policy: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('policy') }})
     
 
 @dataclass
 class CreateResourcePolicyRequest:
-    path_params: CreateResourcePolicyPathParams = field(default=None)
-    headers: CreateResourcePolicyHeaders = field(default=None)
-    request: CreateResourcePolicyRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateResourcePolicyHeaders = field()
+    path_params: CreateResourcePolicyPathParams = field()
+    request: CreateResourcePolicyRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateResourcePolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_resource_policy_response: Optional[shared.CreateResourcePolicyResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     precondition_failed_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

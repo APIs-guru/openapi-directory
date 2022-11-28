@@ -1,5 +1,7 @@
 package shared
 
+// DatafeedStatus
+// The status of a datafeed, i.e., the result of the last retrieval of the datafeed computed asynchronously when the feed processing is finished.
 type DatafeedStatus struct {
 	Country          *string               `json:"country,omitempty"`
 	DatafeedID       *string               `json:"datafeedId,omitempty"`

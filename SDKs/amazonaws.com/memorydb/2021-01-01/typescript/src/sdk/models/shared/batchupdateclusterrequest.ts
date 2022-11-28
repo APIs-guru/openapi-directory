@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceUpdateRequest } from "./serviceupdaterequest";
 
 
+
 export class BatchUpdateClusterRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClusterNames" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterNames" })
   clusterNames: string[];
 
-  @Metadata({ data: "json, name=ServiceUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceUpdate" })
   serviceUpdate?: ServiceUpdateRequest;
 }

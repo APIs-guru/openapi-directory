@@ -1,5 +1,7 @@
 package shared
 
+// TaskStatistics
+// Statistics for the checks performed during the audit.
 type TaskStatistics struct {
 	CanceledChecks                 *int64 `json:"canceledChecks,omitempty"`
 	CompliantChecks                *int64 `json:"compliantChecks,omitempty"`

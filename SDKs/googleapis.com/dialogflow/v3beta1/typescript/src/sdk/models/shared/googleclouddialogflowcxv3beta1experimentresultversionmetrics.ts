@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3beta1ExperimentResultMetric } from "./googleclouddialogflowcxv3beta1experimentresultmetric";
+
 
 
 // GoogleCloudDialogflowCxV3beta1ExperimentResultVersionMetrics
@@ -8,12 +8,12 @@ import { GoogleCloudDialogflowCxV3beta1ExperimentResultMetric } from "./googlecl
  * Version variant and associated metrics.
 **/
 export class GoogleCloudDialogflowCxV3beta1ExperimentResultVersionMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metrics", elemType: shared.GoogleCloudDialogflowCxV3beta1ExperimentResultMetric })
+  @SpeakeasyMetadata({ data: "json, name=metrics", elemType: GoogleCloudDialogflowCxV3beta1ExperimentResultMetric })
   metrics?: GoogleCloudDialogflowCxV3beta1ExperimentResultMetric[];
 
-  @Metadata({ data: "json, name=sessionCount" })
+  @SpeakeasyMetadata({ data: "json, name=sessionCount" })
   sessionCount?: number;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

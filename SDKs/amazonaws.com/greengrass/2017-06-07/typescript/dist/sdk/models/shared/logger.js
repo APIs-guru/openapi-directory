@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LoggerComponentEnum } from "./loggercomponentenum";
 import { LoggerLevelEnum } from "./loggerlevelenum";
 import { LoggerTypeEnum } from "./loggertypeenum";
@@ -36,23 +36,23 @@ var Logger = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Component" }),
+        SpeakeasyMetadata({ data: "json, name=Component" }),
         __metadata("design:type", String)
     ], Logger.prototype, "component", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], Logger.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=Level" }),
+        SpeakeasyMetadata({ data: "json, name=Level" }),
         __metadata("design:type", String)
     ], Logger.prototype, "level", void 0);
     __decorate([
-        Metadata({ data: "json, name=Space" }),
+        SpeakeasyMetadata({ data: "json, name=Space" }),
         __metadata("design:type", Number)
     ], Logger.prototype, "space", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], Logger.prototype, "type", void 0);
     return Logger;

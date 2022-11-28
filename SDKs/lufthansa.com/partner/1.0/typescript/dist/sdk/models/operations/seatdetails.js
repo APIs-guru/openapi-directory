@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var SeatDetailsPathParams = /** @class */ (function (_super) {
     __extends(SeatDetailsPathParams, _super);
@@ -30,11 +30,11 @@ var SeatDetailsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=aircraftCode" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=aircraftCode" }),
         __metadata("design:type", String)
     ], SeatDetailsPathParams.prototype, "aircraftCode", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=cabinCode" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=cabinCode" }),
         __metadata("design:type", String)
     ], SeatDetailsPathParams.prototype, "cabinCode", void 0);
     return SeatDetailsPathParams;
@@ -46,7 +46,7 @@ var SeatDetailsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lang" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" }),
         __metadata("design:type", String)
     ], SeatDetailsQueryParams.prototype, "lang", void 0);
     return SeatDetailsQueryParams;
@@ -58,7 +58,7 @@ var SeatDetailsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" }),
         __metadata("design:type", String)
     ], SeatDetailsHeaders.prototype, "accept", void 0);
     return SeatDetailsHeaders;
@@ -70,7 +70,7 @@ var SeatDetailsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeAuth)
     ], SeatDetailsSecurity.prototype, "auth", void 0);
     return SeatDetailsSecurity;
@@ -82,19 +82,19 @@ var SeatDetailsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SeatDetailsPathParams)
     ], SeatDetailsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SeatDetailsQueryParams)
     ], SeatDetailsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SeatDetailsHeaders)
     ], SeatDetailsRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SeatDetailsSecurity)
     ], SeatDetailsRequest.prototype, "security", void 0);
     return SeatDetailsRequest;
@@ -106,15 +106,15 @@ var SeatDetailsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SeatDetailsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SeatDetailsResponse.prototype, "seatDetails200ApplicationJsonString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SeatDetailsResponse.prototype, "statusCode", void 0);
     return SeatDetailsResponse;

@@ -11,6 +11,8 @@ const (
 	UniversalAdIDRegistryEnumUniversalAdRegistryCm          UniversalAdIDRegistryEnum = "UNIVERSAL_AD_REGISTRY_CM"
 )
 
+// UniversalAdID
+// A creative identifier provided by a registry that is unique across all platforms. This is part of the VAST 4.0 standard.
 type UniversalAdID struct {
 	ID       *string                    `json:"id,omitempty"`
 	Registry *UniversalAdIDRegistryEnum `json:"registry,omitempty"`

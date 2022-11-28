@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppEngineHttpRequest } from "./appenginehttprequest";
 import { HttpRequest } from "./httprequest";
 import { PullMessage } from "./pullmessage";
 import { TaskStatus } from "./taskstatus";
 
+
 export enum TaskViewEnum {
-    ViewUnspecified = "VIEW_UNSPECIFIED"
-,    Basic = "BASIC"
-,    Full = "FULL"
+    ViewUnspecified = "VIEW_UNSPECIFIED",
+    Basic = "BASIC",
+    Full = "FULL"
 }
 
 
@@ -16,27 +17,27 @@ export enum TaskViewEnum {
  * A unit of scheduled work.
 **/
 export class Task extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appEngineHttpRequest" })
+  @SpeakeasyMetadata({ data: "json, name=appEngineHttpRequest" })
   appEngineHttpRequest?: AppEngineHttpRequest;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=httpRequest" })
+  @SpeakeasyMetadata({ data: "json, name=httpRequest" })
   httpRequest?: HttpRequest;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pullMessage" })
+  @SpeakeasyMetadata({ data: "json, name=pullMessage" })
   pullMessage?: PullMessage;
 
-  @Metadata({ data: "json, name=scheduleTime" })
+  @SpeakeasyMetadata({ data: "json, name=scheduleTime" })
   scheduleTime?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: TaskStatus;
 
-  @Metadata({ data: "json, name=view" })
+  @SpeakeasyMetadata({ data: "json, name=view" })
   view?: TaskViewEnum;
 }

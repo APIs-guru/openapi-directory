@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateDirectoryResult
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the results of the <a>CreateDirectory</a> operation.
 **/
 export class CreateDirectoryResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DirectoryId" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryId" })
   directoryId?: string;
 }

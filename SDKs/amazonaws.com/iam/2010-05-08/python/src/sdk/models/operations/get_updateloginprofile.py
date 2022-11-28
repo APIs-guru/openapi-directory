@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetUpdateLoginProfileActionEnum(str, Enum):
     UPDATE_LOGIN_PROFILE = "UpdateLoginProfile"
@@ -10,11 +14,11 @@ class GetUpdateLoginProfileVersionEnum(str, Enum):
 
 @dataclass
 class GetUpdateLoginProfileQueryParams:
-    action: GetUpdateLoginProfileActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetUpdateLoginProfileActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    user_name: str = field(metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
+    version: GetUpdateLoginProfileVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     password: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Password', 'style': 'form', 'explode': True }})
     password_reset_required: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'PasswordResetRequired', 'style': 'form', 'explode': True }})
-    user_name: str = field(default=None, metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
-    version: GetUpdateLoginProfileVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetUpdateLoginProfileHeaders:
 
 @dataclass
 class GetUpdateLoginProfileRequest:
-    query_params: GetUpdateLoginProfileQueryParams = field(default=None)
-    headers: GetUpdateLoginProfileHeaders = field(default=None)
+    headers: GetUpdateLoginProfileHeaders = field()
+    query_params: GetUpdateLoginProfileQueryParams = field()
     
 
 @dataclass
 class GetUpdateLoginProfileResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -31,7 +31,7 @@ type AndroidpublisherApplicationsDeviceTierConfigsCreateSecurity struct {
 type AndroidpublisherApplicationsDeviceTierConfigsCreateRequest struct {
 	PathParams  AndroidpublisherApplicationsDeviceTierConfigsCreatePathParams
 	QueryParams AndroidpublisherApplicationsDeviceTierConfigsCreateQueryParams
-	Request     *shared.DeviceTierConfig `request:"mediaType=application/json"`
+	Request     *shared.DeviceTierConfigInput `request:"mediaType=application/json"`
 	Security    AndroidpublisherApplicationsDeviceTierConfigsCreateSecurity
 }
 

@@ -1,5 +1,7 @@
 package shared
 
+// Environment
+// Information about an Cloud9 development environment.
 type Environment struct {
 	Arn                      string                        `json:"arn"`
 	ConnectionType           *ConnectionTypeEnum           `json:"connectionType,omitempty"`

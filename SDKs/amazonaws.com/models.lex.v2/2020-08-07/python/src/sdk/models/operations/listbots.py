@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,33 +29,37 @@ class ListBotsHeaders:
 @dataclass_json
 @dataclass
 class ListBotsRequestBodySortBy:
-    attribute: Optional[shared.BotSortAttributeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attribute' }})
-    order: Optional[shared.SortOrderEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'order' }})
+    r"""ListBotsRequestBodySortBy
+    Specifies attributes for sorting a list of bots.
+    """
+    
+    attribute: Optional[shared.BotSortAttributeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attribute') }})
+    order: Optional[shared.SortOrderEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('order') }})
     
 
 @dataclass_json
 @dataclass
 class ListBotsRequestBody:
-    filters: Optional[List[shared.BotFilter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filters' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    sort_by: Optional[ListBotsRequestBodySortBy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sortBy' }})
+    filters: Optional[List[shared.BotFilter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filters') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    sort_by: Optional[ListBotsRequestBodySortBy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sortBy') }})
     
 
 @dataclass
 class ListBotsRequest:
-    query_params: ListBotsQueryParams = field(default=None)
-    headers: ListBotsHeaders = field(default=None)
-    request: ListBotsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListBotsHeaders = field()
+    query_params: ListBotsQueryParams = field()
+    request: ListBotsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListBotsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_exception: Optional[Any] = field(default=None)
     list_bots_response: Optional[shared.ListBotsResponse] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -31,6 +31,8 @@ const (
 	ContestRolesEnumOtherRole              ContestRolesEnum = "otherRole"
 )
 
+// Contest
+// Information about a contest that appears on a voter's ballot.
 type Contest struct {
 	BallotPlacement            *string            `json:"ballotPlacement,omitempty"`
 	BallotTitle                *string            `json:"ballotTitle,omitempty"`

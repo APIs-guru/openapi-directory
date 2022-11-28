@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetAllRtiTransactionTagsPathParams = /** @class */ (function (_super) {
     __extends(GetAllRtiTransactionTagsPathParams, _super);
@@ -30,7 +30,7 @@ var GetAllRtiTransactionTagsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
         __metadata("design:type", String)
     ], GetAllRtiTransactionTagsPathParams.prototype, "employerId", void 0);
     return GetAllRtiTransactionTagsPathParams;
@@ -42,11 +42,11 @@ var GetAllRtiTransactionTagsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetAllRtiTransactionTagsHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetAllRtiTransactionTagsHeaders.prototype, "authorization", void 0);
     return GetAllRtiTransactionTagsHeaders;
@@ -58,11 +58,11 @@ var GetAllRtiTransactionTagsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAllRtiTransactionTagsPathParams)
     ], GetAllRtiTransactionTagsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAllRtiTransactionTagsHeaders)
     ], GetAllRtiTransactionTagsRequest.prototype, "headers", void 0);
     return GetAllRtiTransactionTagsRequest;
@@ -74,19 +74,19 @@ var GetAllRtiTransactionTagsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAllRtiTransactionTagsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetAllRtiTransactionTagsResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.LinkCollection)
     ], GetAllRtiTransactionTagsResponse.prototype, "linkCollection", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAllRtiTransactionTagsResponse.prototype, "statusCode", void 0);
     return GetAllRtiTransactionTagsResponse;

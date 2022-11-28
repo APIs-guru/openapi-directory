@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApplicationSource } from "./applicationsource";
 
 
+
 export class DescribeScalingPlansRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationSources", elemType: shared.ApplicationSource })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationSources", elemType: ApplicationSource })
   applicationSources?: ApplicationSource[];
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ScalingPlanNames" })
+  @SpeakeasyMetadata({ data: "json, name=ScalingPlanNames" })
   scalingPlanNames?: string[];
 
-  @Metadata({ data: "json, name=ScalingPlanVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ScalingPlanVersion" })
   scalingPlanVersion?: number;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PrinterModel } from "./printermodel";
+
 
 
 // ListPrinterModelsResponse
@@ -8,9 +8,9 @@ import { PrinterModel } from "./printermodel";
  * Response for listing allowed printer models.
 **/
 export class ListPrinterModelsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=printerModels", elemType: shared.PrinterModel })
+  @SpeakeasyMetadata({ data: "json, name=printerModels", elemType: PrinterModel })
   printerModels?: PrinterModel[];
 }

@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetGlobalRuleConfigRuleEnum {
-    Validity = "VALIDITY"
-,    Compatibility = "COMPATIBILITY"
+    Validity = "VALIDITY",
+    Compatibility = "COMPATIBILITY"
 }
 
 
 export class GetGlobalRuleConfigPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=rule" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=rule" })
   rule: GetGlobalRuleConfigRuleEnum;
 }
 
 
 export class GetGlobalRuleConfigRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetGlobalRuleConfigPathParams;
 }
 
 
 export class GetGlobalRuleConfigResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   rule?: shared.Rule;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

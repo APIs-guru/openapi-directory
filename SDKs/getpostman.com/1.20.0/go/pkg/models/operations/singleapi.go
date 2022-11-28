@@ -4,10 +4,6 @@ type SingleAPIPathParams struct {
 	APIID string `pathParam:"style=simple,explode=false,name=apiId"`
 }
 
-type SingleAPIRequest struct {
-	PathParams SingleAPIPathParams
-}
-
 type SingleAPI200ApplicationJSONAPI struct {
 	CreatedAt   *string `json:"createdAt,omitempty"`
 	CreatedBy   *string `json:"createdBy,omitempty"`
@@ -20,6 +16,10 @@ type SingleAPI200ApplicationJSONAPI struct {
 
 type SingleAPI200ApplicationJSON struct {
 	API *SingleAPI200ApplicationJSONAPI `json:"api,omitempty"`
+}
+
+type SingleAPIRequest struct {
+	PathParams SingleAPIPathParams
 }
 
 type SingleAPIResponse struct {

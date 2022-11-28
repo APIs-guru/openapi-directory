@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsListCollectionIdsPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class FirestoreProjectsDatabasesDocumentsListCollectionIdsQueryParams:
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsListCollectionIdsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsListCollectionIdsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class FirestoreProjectsDatabasesDocumentsListCollectionIdsSecurity:
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsListCollectionIdsRequest:
-    path_params: FirestoreProjectsDatabasesDocumentsListCollectionIdsPathParams = field(default=None)
-    query_params: FirestoreProjectsDatabasesDocumentsListCollectionIdsQueryParams = field(default=None)
+    path_params: FirestoreProjectsDatabasesDocumentsListCollectionIdsPathParams = field()
+    query_params: FirestoreProjectsDatabasesDocumentsListCollectionIdsQueryParams = field()
+    security: FirestoreProjectsDatabasesDocumentsListCollectionIdsSecurity = field()
     request: Optional[shared.ListCollectionIdsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FirestoreProjectsDatabasesDocumentsListCollectionIdsSecurity = field(default=None)
     
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsListCollectionIdsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_collection_ids_response: Optional[shared.ListCollectionIdsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

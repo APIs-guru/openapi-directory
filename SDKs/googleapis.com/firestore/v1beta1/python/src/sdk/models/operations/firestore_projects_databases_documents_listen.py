@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsListenPathParams:
-    database: str = field(default=None, metadata={'path_param': { 'field_name': 'database', 'style': 'simple', 'explode': False }})
+    database: str = field(metadata={'path_param': { 'field_name': 'database', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class FirestoreProjectsDatabasesDocumentsListenQueryParams:
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsListenSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsListenSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class FirestoreProjectsDatabasesDocumentsListenSecurity:
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsListenRequest:
-    path_params: FirestoreProjectsDatabasesDocumentsListenPathParams = field(default=None)
-    query_params: FirestoreProjectsDatabasesDocumentsListenQueryParams = field(default=None)
+    path_params: FirestoreProjectsDatabasesDocumentsListenPathParams = field()
+    query_params: FirestoreProjectsDatabasesDocumentsListenQueryParams = field()
+    security: FirestoreProjectsDatabasesDocumentsListenSecurity = field()
     request: Optional[shared.ListenRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FirestoreProjectsDatabasesDocumentsListenSecurity = field(default=None)
     
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsListenResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     listen_response: Optional[shared.ListenResponse] = field(default=None)
-    status_code: int = field(default=None)
     

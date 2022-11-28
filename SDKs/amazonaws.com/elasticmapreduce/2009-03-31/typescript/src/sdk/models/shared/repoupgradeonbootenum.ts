@@ -1,6 +1,7 @@
 
 
+
 export enum RepoUpgradeOnBootEnum {
-    Security = "SECURITY"
-,    None = "NONE"
+    Security = "SECURITY",
+    None = "NONE"
 }

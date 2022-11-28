@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PackageSearchDto
@@ -8,72 +9,72 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *                
 **/
 export class PackageSearchDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeStatus" })
+  @SpeakeasyMetadata({ data: "json, name=activeStatus" })
   activeStatus?: boolean;
 
-  @Metadata({ data: "json, name=addonFee" })
+  @SpeakeasyMetadata({ data: "json, name=addonFee" })
   addonFee?: number;
 
-  @Metadata({ data: "json, name=applyForAllGyms" })
+  @SpeakeasyMetadata({ data: "json, name=applyForAllGyms" })
   applyForAllGyms?: boolean;
 
-  @Metadata({ data: "json, name=bindingPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=bindingPeriod" })
   bindingPeriod?: number;
 
-  @Metadata({ data: "json, name=createdDate" })
+  @SpeakeasyMetadata({ data: "json, name=createdDate" })
   createdDate?: Date;
 
-  @Metadata({ data: "json, name=createdUser" })
+  @SpeakeasyMetadata({ data: "json, name=createdUser" })
   createdUser?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=features" })
+  @SpeakeasyMetadata({ data: "json, name=features" })
   features?: string;
 
-  @Metadata({ data: "json, name=freeMonths" })
+  @SpeakeasyMetadata({ data: "json, name=freeMonths" })
   freeMonths?: number;
 
-  @Metadata({ data: "json, name=memberCanRemoveAddOns" })
+  @SpeakeasyMetadata({ data: "json, name=memberCanRemoveAddOns" })
   memberCanRemoveAddOns?: boolean;
 
-  @Metadata({ data: "json, name=modifiedDate" })
+  @SpeakeasyMetadata({ data: "json, name=modifiedDate" })
   modifiedDate?: Date;
 
-  @Metadata({ data: "json, name=modifiedUser" })
+  @SpeakeasyMetadata({ data: "json, name=modifiedUser" })
   modifiedUser?: string;
 
-  @Metadata({ data: "json, name=monthlyFee" })
+  @SpeakeasyMetadata({ data: "json, name=monthlyFee" })
   monthlyFee?: number;
 
-  @Metadata({ data: "json, name=numberOfVisits" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfVisits" })
   numberOfVisits?: number;
 
-  @Metadata({ data: "json, name=packageId" })
+  @SpeakeasyMetadata({ data: "json, name=packageId" })
   packageId?: number;
 
-  @Metadata({ data: "json, name=packageName" })
+  @SpeakeasyMetadata({ data: "json, name=packageName" })
   packageName?: string;
 
-  @Metadata({ data: "json, name=packageNumber" })
+  @SpeakeasyMetadata({ data: "json, name=packageNumber" })
   packageNumber?: number;
 
-  @Metadata({ data: "json, name=packageType" })
+  @SpeakeasyMetadata({ data: "json, name=packageType" })
   packageType?: string;
 
-  @Metadata({ data: "json, name=registrationFee" })
+  @SpeakeasyMetadata({ data: "json, name=registrationFee" })
   registrationFee?: number;
 
-  @Metadata({ data: "json, name=serviceFee" })
+  @SpeakeasyMetadata({ data: "json, name=serviceFee" })
   serviceFee?: number;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string;
 
-  @Metadata({ data: "json, name=totalCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalCount" })
   totalCount?: number;
 
-  @Metadata({ data: "json, name=totalPrice" })
+  @SpeakeasyMetadata({ data: "json, name=totalPrice" })
   totalPrice?: number;
 }

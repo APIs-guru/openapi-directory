@@ -12,18 +12,18 @@ class GetHealthDashboardQueryParams:
 
 @dataclass
 class GetHealthDashboardSecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetHealthDashboardRequest:
-    query_params: GetHealthDashboardQueryParams = field(default=None)
-    security: GetHealthDashboardSecurity = field(default=None)
+    query_params: GetHealthDashboardQueryParams = field()
+    security: GetHealthDashboardSecurity = field()
     
 
 @dataclass
 class GetHealthDashboardResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     databases: Optional[List[shared.Database]] = field(default=None)
-    status_code: int = field(default=None)
     

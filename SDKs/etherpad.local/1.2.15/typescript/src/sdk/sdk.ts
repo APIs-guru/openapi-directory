@@ -1,17 +1,15 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "http://etherpad.local",
-  "http://pads.mro.name/api/1.2.15",
+export const ServerList = [
+	"http://etherpad.local",
+	"http://pads.mro.name/api/1.2.15",
 ] as const;
 
 export function WithServerURL(
@@ -22,13 +20,13 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
@@ -37,41 +35,48 @@ export function WithSecurity(security: Security): OptsFunc {
     security = new Security(security);
   }
   return (sdk: SDK) => {
-    sdk.security = security;
+    sdk._security = security;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  public _security?: Security;
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
+    if (!this._securityClient) {
+      if (this._security) {
+        this._securityClient = utils.CreateSecurityClient(
+          this._defaultClient,
+          this._security
         );
       } else {
-        this.securityClient = this.defaultClient;
+        this._securityClient = this._defaultClient;
       }
     }
+    
   }
   
-  // AppendChatMessageUsingGet - appends a chat message
-  AppendChatMessageUsingGet(
+  /**
+   * appendChatMessageUsingGet - appends a chat message
+  **/
+  appendChatMessageUsingGet(
     req: operations.AppendChatMessageUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AppendChatMessageUsingGetResponse> {
@@ -79,11 +84,12 @@ export class SDK {
       req = new operations.AppendChatMessageUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/appendChatMessage";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -92,32 +98,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AppendChatMessageUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AppendChatMessageUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appendChatMessageUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appendChatMessageUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appendChatMessageUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appendChatMessageUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -129,8 +136,10 @@ export class SDK {
   }
 
   
-  // AppendChatMessageUsingPost - appends a chat message
-  AppendChatMessageUsingPost(
+  /**
+   * appendChatMessageUsingPost - appends a chat message
+  **/
+  appendChatMessageUsingPost(
     req: operations.AppendChatMessageUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AppendChatMessageUsingPostResponse> {
@@ -138,11 +147,12 @@ export class SDK {
       req = new operations.AppendChatMessageUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/appendChatMessage";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -151,32 +161,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AppendChatMessageUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AppendChatMessageUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appendChatMessageUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appendChatMessageUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appendChatMessageUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appendChatMessageUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -188,7 +199,7 @@ export class SDK {
   }
 
   
-  AppendTextUsingGet(
+  appendTextUsingGet(
     req: operations.AppendTextUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AppendTextUsingGetResponse> {
@@ -196,11 +207,12 @@ export class SDK {
       req = new operations.AppendTextUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/appendText";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -209,32 +221,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AppendTextUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AppendTextUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appendTextUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appendTextUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appendTextUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appendTextUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -246,7 +259,7 @@ export class SDK {
   }
 
   
-  AppendTextUsingPost(
+  appendTextUsingPost(
     req: operations.AppendTextUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AppendTextUsingPostResponse> {
@@ -254,11 +267,12 @@ export class SDK {
       req = new operations.AppendTextUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/appendText";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -267,32 +281,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AppendTextUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.AppendTextUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appendTextUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appendTextUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appendTextUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appendTextUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -304,42 +319,45 @@ export class SDK {
   }
 
   
-  // CheckTokenUsingGet - returns ok when the current api token is valid
-  CheckTokenUsingGet(
-    
+  /**
+   * checkTokenUsingGet - returns ok when the current api token is valid
+  **/
+  checkTokenUsingGet(
     config?: AxiosRequestConfig
   ): Promise<operations.CheckTokenUsingGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/checkToken";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CheckTokenUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CheckTokenUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.checkTokenUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.checkTokenUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.checkTokenUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.checkTokenUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -351,42 +369,45 @@ export class SDK {
   }
 
   
-  // CheckTokenUsingPost - returns ok when the current api token is valid
-  CheckTokenUsingPost(
-    
+  /**
+   * checkTokenUsingPost - returns ok when the current api token is valid
+  **/
+  checkTokenUsingPost(
     config?: AxiosRequestConfig
   ): Promise<operations.CheckTokenUsingPostResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/checkToken";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CheckTokenUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CheckTokenUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.checkTokenUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.checkTokenUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.checkTokenUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.checkTokenUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -398,7 +419,7 @@ export class SDK {
   }
 
   
-  CopyPadUsingGet(
+  copyPadUsingGet(
     req: operations.CopyPadUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CopyPadUsingGetResponse> {
@@ -406,11 +427,12 @@ export class SDK {
       req = new operations.CopyPadUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/copyPad";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -419,32 +441,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CopyPadUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CopyPadUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.copyPadUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.copyPadUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.copyPadUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.copyPadUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -456,7 +479,7 @@ export class SDK {
   }
 
   
-  CopyPadUsingPost(
+  copyPadUsingPost(
     req: operations.CopyPadUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CopyPadUsingPostResponse> {
@@ -464,11 +487,12 @@ export class SDK {
       req = new operations.CopyPadUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/copyPad";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -477,32 +501,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CopyPadUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CopyPadUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.copyPadUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.copyPadUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.copyPadUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.copyPadUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -514,7 +539,7 @@ export class SDK {
   }
 
   
-  CopyPadWithoutHistoryUsingGet(
+  copyPadWithoutHistoryUsingGet(
     req: operations.CopyPadWithoutHistoryUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CopyPadWithoutHistoryUsingGetResponse> {
@@ -522,11 +547,12 @@ export class SDK {
       req = new operations.CopyPadWithoutHistoryUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/copyPadWithoutHistory";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -535,32 +561,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CopyPadWithoutHistoryUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CopyPadWithoutHistoryUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.copyPadWithoutHistoryUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.copyPadWithoutHistoryUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.copyPadWithoutHistoryUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.copyPadWithoutHistoryUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -572,7 +599,7 @@ export class SDK {
   }
 
   
-  CopyPadWithoutHistoryUsingPost(
+  copyPadWithoutHistoryUsingPost(
     req: operations.CopyPadWithoutHistoryUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CopyPadWithoutHistoryUsingPostResponse> {
@@ -580,11 +607,12 @@ export class SDK {
       req = new operations.CopyPadWithoutHistoryUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/copyPadWithoutHistory";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -593,32 +621,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CopyPadWithoutHistoryUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CopyPadWithoutHistoryUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.copyPadWithoutHistoryUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.copyPadWithoutHistoryUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.copyPadWithoutHistoryUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.copyPadWithoutHistoryUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -630,8 +659,10 @@ export class SDK {
   }
 
   
-  // CreateAuthorIfNotExistsForUsingGet - this functions helps you to map your application author ids to Etherpad author ids
-  CreateAuthorIfNotExistsForUsingGet(
+  /**
+   * createAuthorIfNotExistsForUsingGet - this functions helps you to map your application author ids to Etherpad author ids
+  **/
+  createAuthorIfNotExistsForUsingGet(
     req: operations.CreateAuthorIfNotExistsForUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateAuthorIfNotExistsForUsingGetResponse> {
@@ -639,11 +670,12 @@ export class SDK {
       req = new operations.CreateAuthorIfNotExistsForUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/createAuthorIfNotExistsFor";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -652,32 +684,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateAuthorIfNotExistsForUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateAuthorIfNotExistsForUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createAuthorIfNotExistsForUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createAuthorIfNotExistsForUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createAuthorIfNotExistsForUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createAuthorIfNotExistsForUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -689,8 +722,10 @@ export class SDK {
   }
 
   
-  // CreateAuthorIfNotExistsForUsingPost - this functions helps you to map your application author ids to Etherpad author ids
-  CreateAuthorIfNotExistsForUsingPost(
+  /**
+   * createAuthorIfNotExistsForUsingPost - this functions helps you to map your application author ids to Etherpad author ids
+  **/
+  createAuthorIfNotExistsForUsingPost(
     req: operations.CreateAuthorIfNotExistsForUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateAuthorIfNotExistsForUsingPostResponse> {
@@ -698,11 +733,12 @@ export class SDK {
       req = new operations.CreateAuthorIfNotExistsForUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/createAuthorIfNotExistsFor";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -711,32 +747,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateAuthorIfNotExistsForUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateAuthorIfNotExistsForUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createAuthorIfNotExistsForUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createAuthorIfNotExistsForUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createAuthorIfNotExistsForUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createAuthorIfNotExistsForUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -748,8 +785,10 @@ export class SDK {
   }
 
   
-  // CreateAuthorUsingGet - creates a new author
-  CreateAuthorUsingGet(
+  /**
+   * createAuthorUsingGet - creates a new author
+  **/
+  createAuthorUsingGet(
     req: operations.CreateAuthorUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateAuthorUsingGetResponse> {
@@ -757,11 +796,12 @@ export class SDK {
       req = new operations.CreateAuthorUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/createAuthor";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -770,32 +810,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateAuthorUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateAuthorUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createAuthorUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createAuthorUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createAuthorUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createAuthorUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -807,8 +848,10 @@ export class SDK {
   }
 
   
-  // CreateAuthorUsingPost - creates a new author
-  CreateAuthorUsingPost(
+  /**
+   * createAuthorUsingPost - creates a new author
+  **/
+  createAuthorUsingPost(
     req: operations.CreateAuthorUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateAuthorUsingPostResponse> {
@@ -816,11 +859,12 @@ export class SDK {
       req = new operations.CreateAuthorUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/createAuthor";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -829,32 +873,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateAuthorUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateAuthorUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createAuthorUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createAuthorUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createAuthorUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createAuthorUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -866,7 +911,7 @@ export class SDK {
   }
 
   
-  CreateDiffHtmlUsingGet(
+  createDiffHtmlUsingGet(
     req: operations.CreateDiffHtmlUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateDiffHtmlUsingGetResponse> {
@@ -874,11 +919,12 @@ export class SDK {
       req = new operations.CreateDiffHtmlUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/createDiffHTML";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -887,32 +933,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateDiffHtmlUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateDiffHtmlUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createDiffHtmlUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createDiffHtmlUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createDiffHtmlUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createDiffHtmlUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -924,7 +971,7 @@ export class SDK {
   }
 
   
-  CreateDiffHtmlUsingPost(
+  createDiffHtmlUsingPost(
     req: operations.CreateDiffHtmlUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateDiffHtmlUsingPostResponse> {
@@ -932,11 +979,12 @@ export class SDK {
       req = new operations.CreateDiffHtmlUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/createDiffHTML";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -945,32 +993,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateDiffHtmlUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateDiffHtmlUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createDiffHtmlUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createDiffHtmlUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createDiffHtmlUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createDiffHtmlUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -982,8 +1031,10 @@ export class SDK {
   }
 
   
-  // CreateGroupIfNotExistsForUsingGet - this functions helps you to map your application group ids to Etherpad group ids
-  CreateGroupIfNotExistsForUsingGet(
+  /**
+   * createGroupIfNotExistsForUsingGet - this functions helps you to map your application group ids to Etherpad group ids
+  **/
+  createGroupIfNotExistsForUsingGet(
     req: operations.CreateGroupIfNotExistsForUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateGroupIfNotExistsForUsingGetResponse> {
@@ -991,11 +1042,12 @@ export class SDK {
       req = new operations.CreateGroupIfNotExistsForUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/createGroupIfNotExistsFor";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1004,32 +1056,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateGroupIfNotExistsForUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateGroupIfNotExistsForUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupIfNotExistsForUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupIfNotExistsForUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupIfNotExistsForUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupIfNotExistsForUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1041,8 +1094,10 @@ export class SDK {
   }
 
   
-  // CreateGroupIfNotExistsForUsingPost - this functions helps you to map your application group ids to Etherpad group ids
-  CreateGroupIfNotExistsForUsingPost(
+  /**
+   * createGroupIfNotExistsForUsingPost - this functions helps you to map your application group ids to Etherpad group ids
+  **/
+  createGroupIfNotExistsForUsingPost(
     req: operations.CreateGroupIfNotExistsForUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateGroupIfNotExistsForUsingPostResponse> {
@@ -1050,11 +1105,12 @@ export class SDK {
       req = new operations.CreateGroupIfNotExistsForUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/createGroupIfNotExistsFor";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1063,32 +1119,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateGroupIfNotExistsForUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateGroupIfNotExistsForUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupIfNotExistsForUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupIfNotExistsForUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupIfNotExistsForUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupIfNotExistsForUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1100,8 +1157,10 @@ export class SDK {
   }
 
   
-  // CreateGroupPadUsingGet - creates a new pad in this group
-  CreateGroupPadUsingGet(
+  /**
+   * createGroupPadUsingGet - creates a new pad in this group
+  **/
+  createGroupPadUsingGet(
     req: operations.CreateGroupPadUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateGroupPadUsingGetResponse> {
@@ -1109,11 +1168,12 @@ export class SDK {
       req = new operations.CreateGroupPadUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/createGroupPad";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1122,32 +1182,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateGroupPadUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateGroupPadUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupPadUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupPadUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupPadUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupPadUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1159,8 +1220,10 @@ export class SDK {
   }
 
   
-  // CreateGroupPadUsingPost - creates a new pad in this group
-  CreateGroupPadUsingPost(
+  /**
+   * createGroupPadUsingPost - creates a new pad in this group
+  **/
+  createGroupPadUsingPost(
     req: operations.CreateGroupPadUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateGroupPadUsingPostResponse> {
@@ -1168,11 +1231,12 @@ export class SDK {
       req = new operations.CreateGroupPadUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/createGroupPad";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1181,32 +1245,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateGroupPadUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateGroupPadUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupPadUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupPadUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupPadUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupPadUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1218,42 +1283,45 @@ export class SDK {
   }
 
   
-  // CreateGroupUsingGet - creates a new group
-  CreateGroupUsingGet(
-    
+  /**
+   * createGroupUsingGet - creates a new group
+  **/
+  createGroupUsingGet(
     config?: AxiosRequestConfig
   ): Promise<operations.CreateGroupUsingGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/createGroup";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateGroupUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateGroupUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1265,42 +1333,45 @@ export class SDK {
   }
 
   
-  // CreateGroupUsingPost - creates a new group
-  CreateGroupUsingPost(
-    
+  /**
+   * createGroupUsingPost - creates a new group
+  **/
+  createGroupUsingPost(
     config?: AxiosRequestConfig
   ): Promise<operations.CreateGroupUsingPostResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/createGroup";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateGroupUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateGroupUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createGroupUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1312,8 +1383,10 @@ export class SDK {
   }
 
   
-  // CreatePadUsingGet - creates a new (non-group) pad. Note that if you need to create a group Pad, you should call createGroupPad
-  CreatePadUsingGet(
+  /**
+   * createPadUsingGet - creates a new (non-group) pad. Note that if you need to create a group Pad, you should call createGroupPad
+  **/
+  createPadUsingGet(
     req: operations.CreatePadUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreatePadUsingGetResponse> {
@@ -1321,11 +1394,12 @@ export class SDK {
       req = new operations.CreatePadUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/createPad";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1334,32 +1408,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreatePadUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreatePadUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createPadUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createPadUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createPadUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createPadUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1371,8 +1446,10 @@ export class SDK {
   }
 
   
-  // CreatePadUsingPost - creates a new (non-group) pad. Note that if you need to create a group Pad, you should call createGroupPad
-  CreatePadUsingPost(
+  /**
+   * createPadUsingPost - creates a new (non-group) pad. Note that if you need to create a group Pad, you should call createGroupPad
+  **/
+  createPadUsingPost(
     req: operations.CreatePadUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreatePadUsingPostResponse> {
@@ -1380,11 +1457,12 @@ export class SDK {
       req = new operations.CreatePadUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/createPad";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1393,32 +1471,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreatePadUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreatePadUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createPadUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createPadUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createPadUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createPadUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1430,8 +1509,10 @@ export class SDK {
   }
 
   
-  // CreateSessionUsingGet - creates a new session. validUntil is an unix timestamp in seconds
-  CreateSessionUsingGet(
+  /**
+   * createSessionUsingGet - creates a new session. validUntil is an unix timestamp in seconds
+  **/
+  createSessionUsingGet(
     req: operations.CreateSessionUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateSessionUsingGetResponse> {
@@ -1439,11 +1520,12 @@ export class SDK {
       req = new operations.CreateSessionUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/createSession";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1452,32 +1534,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateSessionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateSessionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createSessionUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createSessionUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createSessionUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createSessionUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1489,8 +1572,10 @@ export class SDK {
   }
 
   
-  // CreateSessionUsingPost - creates a new session. validUntil is an unix timestamp in seconds
-  CreateSessionUsingPost(
+  /**
+   * createSessionUsingPost - creates a new session. validUntil is an unix timestamp in seconds
+  **/
+  createSessionUsingPost(
     req: operations.CreateSessionUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CreateSessionUsingPostResponse> {
@@ -1498,11 +1583,12 @@ export class SDK {
       req = new operations.CreateSessionUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/createSession";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1511,32 +1597,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CreateSessionUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.CreateSessionUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createSessionUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createSessionUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createSessionUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.createSessionUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1548,8 +1635,10 @@ export class SDK {
   }
 
   
-  // DeleteGroupUsingGet - deletes a group
-  DeleteGroupUsingGet(
+  /**
+   * deleteGroupUsingGet - deletes a group
+  **/
+  deleteGroupUsingGet(
     req: operations.DeleteGroupUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteGroupUsingGetResponse> {
@@ -1557,11 +1646,12 @@ export class SDK {
       req = new operations.DeleteGroupUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/deleteGroup";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1570,32 +1660,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteGroupUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteGroupUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteGroupUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteGroupUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteGroupUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteGroupUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1607,8 +1698,10 @@ export class SDK {
   }
 
   
-  // DeleteGroupUsingPost - deletes a group
-  DeleteGroupUsingPost(
+  /**
+   * deleteGroupUsingPost - deletes a group
+  **/
+  deleteGroupUsingPost(
     req: operations.DeleteGroupUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteGroupUsingPostResponse> {
@@ -1616,11 +1709,12 @@ export class SDK {
       req = new operations.DeleteGroupUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/deleteGroup";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1629,32 +1723,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteGroupUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteGroupUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteGroupUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteGroupUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteGroupUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteGroupUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1666,8 +1761,10 @@ export class SDK {
   }
 
   
-  // DeletePadUsingGet - deletes a pad
-  DeletePadUsingGet(
+  /**
+   * deletePadUsingGet - deletes a pad
+  **/
+  deletePadUsingGet(
     req: operations.DeletePadUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeletePadUsingGetResponse> {
@@ -1675,11 +1772,12 @@ export class SDK {
       req = new operations.DeletePadUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/deletePad";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1688,32 +1786,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeletePadUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeletePadUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deletePadUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deletePadUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deletePadUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deletePadUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1725,8 +1824,10 @@ export class SDK {
   }
 
   
-  // DeletePadUsingPost - deletes a pad
-  DeletePadUsingPost(
+  /**
+   * deletePadUsingPost - deletes a pad
+  **/
+  deletePadUsingPost(
     req: operations.DeletePadUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeletePadUsingPostResponse> {
@@ -1734,11 +1835,12 @@ export class SDK {
       req = new operations.DeletePadUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/deletePad";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1747,32 +1849,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeletePadUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeletePadUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deletePadUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deletePadUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deletePadUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deletePadUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1784,8 +1887,10 @@ export class SDK {
   }
 
   
-  // DeleteSessionUsingGet - deletes a session
-  DeleteSessionUsingGet(
+  /**
+   * deleteSessionUsingGet - deletes a session
+  **/
+  deleteSessionUsingGet(
     req: operations.DeleteSessionUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteSessionUsingGetResponse> {
@@ -1793,11 +1898,12 @@ export class SDK {
       req = new operations.DeleteSessionUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/deleteSession";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1806,32 +1912,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteSessionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteSessionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteSessionUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteSessionUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteSessionUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteSessionUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1843,8 +1950,10 @@ export class SDK {
   }
 
   
-  // DeleteSessionUsingPost - deletes a session
-  DeleteSessionUsingPost(
+  /**
+   * deleteSessionUsingPost - deletes a session
+  **/
+  deleteSessionUsingPost(
     req: operations.DeleteSessionUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteSessionUsingPostResponse> {
@@ -1852,11 +1961,12 @@ export class SDK {
       req = new operations.DeleteSessionUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/deleteSession";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1865,32 +1975,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteSessionUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.DeleteSessionUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteSessionUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteSessionUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteSessionUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.deleteSessionUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1902,7 +2013,7 @@ export class SDK {
   }
 
   
-  GetAttributePoolUsingGet(
+  getAttributePoolUsingGet(
     req: operations.GetAttributePoolUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAttributePoolUsingGetResponse> {
@@ -1910,11 +2021,12 @@ export class SDK {
       req = new operations.GetAttributePoolUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getAttributePool";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1923,32 +2035,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAttributePoolUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAttributePoolUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAttributePoolUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAttributePoolUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAttributePoolUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAttributePoolUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -1960,7 +2073,7 @@ export class SDK {
   }
 
   
-  GetAttributePoolUsingPost(
+  getAttributePoolUsingPost(
     req: operations.GetAttributePoolUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAttributePoolUsingPostResponse> {
@@ -1968,11 +2081,12 @@ export class SDK {
       req = new operations.GetAttributePoolUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getAttributePool";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1981,32 +2095,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAttributePoolUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAttributePoolUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAttributePoolUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAttributePoolUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAttributePoolUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAttributePoolUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2018,8 +2133,10 @@ export class SDK {
   }
 
   
-  // GetAuthorNameUsingGet - Returns the Author Name of the author
-  GetAuthorNameUsingGet(
+  /**
+   * getAuthorNameUsingGet - Returns the Author Name of the author
+  **/
+  getAuthorNameUsingGet(
     req: operations.GetAuthorNameUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAuthorNameUsingGetResponse> {
@@ -2027,11 +2144,12 @@ export class SDK {
       req = new operations.GetAuthorNameUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getAuthorName";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2040,32 +2158,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAuthorNameUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAuthorNameUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAuthorNameUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAuthorNameUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAuthorNameUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAuthorNameUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2077,8 +2196,10 @@ export class SDK {
   }
 
   
-  // GetAuthorNameUsingPost - Returns the Author Name of the author
-  GetAuthorNameUsingPost(
+  /**
+   * getAuthorNameUsingPost - Returns the Author Name of the author
+  **/
+  getAuthorNameUsingPost(
     req: operations.GetAuthorNameUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAuthorNameUsingPostResponse> {
@@ -2086,11 +2207,12 @@ export class SDK {
       req = new operations.GetAuthorNameUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getAuthorName";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2099,32 +2221,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAuthorNameUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAuthorNameUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAuthorNameUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAuthorNameUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAuthorNameUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getAuthorNameUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2136,8 +2259,10 @@ export class SDK {
   }
 
   
-  // GetChatHeadUsingGet - returns the chatHead (chat-message) of the pad
-  GetChatHeadUsingGet(
+  /**
+   * getChatHeadUsingGet - returns the chatHead (chat-message) of the pad
+  **/
+  getChatHeadUsingGet(
     req: operations.GetChatHeadUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetChatHeadUsingGetResponse> {
@@ -2145,11 +2270,12 @@ export class SDK {
       req = new operations.GetChatHeadUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getChatHead";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2158,32 +2284,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetChatHeadUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetChatHeadUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getChatHeadUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getChatHeadUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getChatHeadUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getChatHeadUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2195,8 +2322,10 @@ export class SDK {
   }
 
   
-  // GetChatHeadUsingPost - returns the chatHead (chat-message) of the pad
-  GetChatHeadUsingPost(
+  /**
+   * getChatHeadUsingPost - returns the chatHead (chat-message) of the pad
+  **/
+  getChatHeadUsingPost(
     req: operations.GetChatHeadUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetChatHeadUsingPostResponse> {
@@ -2204,11 +2333,12 @@ export class SDK {
       req = new operations.GetChatHeadUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getChatHead";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2217,32 +2347,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetChatHeadUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetChatHeadUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getChatHeadUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getChatHeadUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getChatHeadUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getChatHeadUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2254,8 +2385,10 @@ export class SDK {
   }
 
   
-  // GetChatHistoryUsingGet - returns the chat history
-  GetChatHistoryUsingGet(
+  /**
+   * getChatHistoryUsingGet - returns the chat history
+  **/
+  getChatHistoryUsingGet(
     req: operations.GetChatHistoryUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetChatHistoryUsingGetResponse> {
@@ -2263,11 +2396,12 @@ export class SDK {
       req = new operations.GetChatHistoryUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getChatHistory";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2276,32 +2410,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetChatHistoryUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetChatHistoryUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getChatHistoryUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getChatHistoryUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getChatHistoryUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getChatHistoryUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2313,8 +2448,10 @@ export class SDK {
   }
 
   
-  // GetChatHistoryUsingPost - returns the chat history
-  GetChatHistoryUsingPost(
+  /**
+   * getChatHistoryUsingPost - returns the chat history
+  **/
+  getChatHistoryUsingPost(
     req: operations.GetChatHistoryUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetChatHistoryUsingPostResponse> {
@@ -2322,11 +2459,12 @@ export class SDK {
       req = new operations.GetChatHistoryUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getChatHistory";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2335,32 +2473,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetChatHistoryUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetChatHistoryUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getChatHistoryUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getChatHistoryUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getChatHistoryUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getChatHistoryUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2372,8 +2511,10 @@ export class SDK {
   }
 
   
-  // GetHtmlUsingGet - returns the text of a pad formatted as HTML
-  GetHtmlUsingGet(
+  /**
+   * getHtmlUsingGet - returns the text of a pad formatted as HTML
+  **/
+  getHtmlUsingGet(
     req: operations.GetHtmlUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetHtmlUsingGetResponse> {
@@ -2381,11 +2522,12 @@ export class SDK {
       req = new operations.GetHtmlUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getHTML";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2394,32 +2536,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetHtmlUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetHtmlUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getHtmlUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getHtmlUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getHtmlUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getHtmlUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2431,8 +2574,10 @@ export class SDK {
   }
 
   
-  // GetHtmlUsingPost - returns the text of a pad formatted as HTML
-  GetHtmlUsingPost(
+  /**
+   * getHtmlUsingPost - returns the text of a pad formatted as HTML
+  **/
+  getHtmlUsingPost(
     req: operations.GetHtmlUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetHtmlUsingPostResponse> {
@@ -2440,11 +2585,12 @@ export class SDK {
       req = new operations.GetHtmlUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getHTML";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2453,32 +2599,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetHtmlUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetHtmlUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getHtmlUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getHtmlUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getHtmlUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getHtmlUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2490,8 +2637,10 @@ export class SDK {
   }
 
   
-  // GetLastEditedUsingGet - returns the timestamp of the last revision of the pad
-  GetLastEditedUsingGet(
+  /**
+   * getLastEditedUsingGet - returns the timestamp of the last revision of the pad
+  **/
+  getLastEditedUsingGet(
     req: operations.GetLastEditedUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLastEditedUsingGetResponse> {
@@ -2499,11 +2648,12 @@ export class SDK {
       req = new operations.GetLastEditedUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getLastEdited";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2512,32 +2662,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLastEditedUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLastEditedUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLastEditedUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLastEditedUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLastEditedUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLastEditedUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2549,8 +2700,10 @@ export class SDK {
   }
 
   
-  // GetLastEditedUsingPost - returns the timestamp of the last revision of the pad
-  GetLastEditedUsingPost(
+  /**
+   * getLastEditedUsingPost - returns the timestamp of the last revision of the pad
+  **/
+  getLastEditedUsingPost(
     req: operations.GetLastEditedUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetLastEditedUsingPostResponse> {
@@ -2558,11 +2711,12 @@ export class SDK {
       req = new operations.GetLastEditedUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getLastEdited";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2571,32 +2725,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetLastEditedUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetLastEditedUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLastEditedUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLastEditedUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLastEditedUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getLastEditedUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2608,7 +2763,7 @@ export class SDK {
   }
 
   
-  GetPadIdUsingGet(
+  getPadIdUsingGet(
     req: operations.GetPadIdUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPadIdUsingGetResponse> {
@@ -2616,11 +2771,12 @@ export class SDK {
       req = new operations.GetPadIdUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getPadID";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2629,32 +2785,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPadIdUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPadIdUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPadIdUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPadIdUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPadIdUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPadIdUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2666,7 +2823,7 @@ export class SDK {
   }
 
   
-  GetPadIdUsingPost(
+  getPadIdUsingPost(
     req: operations.GetPadIdUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPadIdUsingPostResponse> {
@@ -2674,11 +2831,12 @@ export class SDK {
       req = new operations.GetPadIdUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getPadID";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2687,32 +2845,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPadIdUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPadIdUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPadIdUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPadIdUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPadIdUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPadIdUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2724,8 +2883,10 @@ export class SDK {
   }
 
   
-  // GetPublicStatusUsingGet - return true of false
-  GetPublicStatusUsingGet(
+  /**
+   * getPublicStatusUsingGet - return true of false
+  **/
+  getPublicStatusUsingGet(
     req: operations.GetPublicStatusUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPublicStatusUsingGetResponse> {
@@ -2733,11 +2894,12 @@ export class SDK {
       req = new operations.GetPublicStatusUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getPublicStatus";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2746,32 +2908,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPublicStatusUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPublicStatusUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPublicStatusUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPublicStatusUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPublicStatusUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPublicStatusUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2783,8 +2946,10 @@ export class SDK {
   }
 
   
-  // GetPublicStatusUsingPost - return true of false
-  GetPublicStatusUsingPost(
+  /**
+   * getPublicStatusUsingPost - return true of false
+  **/
+  getPublicStatusUsingPost(
     req: operations.GetPublicStatusUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetPublicStatusUsingPostResponse> {
@@ -2792,11 +2957,12 @@ export class SDK {
       req = new operations.GetPublicStatusUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getPublicStatus";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2805,32 +2971,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetPublicStatusUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetPublicStatusUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPublicStatusUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPublicStatusUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPublicStatusUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getPublicStatusUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2842,8 +3009,10 @@ export class SDK {
   }
 
   
-  // GetReadOnlyIdUsingGet - returns the read only link of a pad
-  GetReadOnlyIdUsingGet(
+  /**
+   * getReadOnlyIdUsingGet - returns the read only link of a pad
+  **/
+  getReadOnlyIdUsingGet(
     req: operations.GetReadOnlyIdUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetReadOnlyIdUsingGetResponse> {
@@ -2851,11 +3020,12 @@ export class SDK {
       req = new operations.GetReadOnlyIdUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getReadOnlyID";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2864,32 +3034,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetReadOnlyIdUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetReadOnlyIdUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getReadOnlyIdUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getReadOnlyIdUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getReadOnlyIdUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getReadOnlyIdUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2901,8 +3072,10 @@ export class SDK {
   }
 
   
-  // GetReadOnlyIdUsingPost - returns the read only link of a pad
-  GetReadOnlyIdUsingPost(
+  /**
+   * getReadOnlyIdUsingPost - returns the read only link of a pad
+  **/
+  getReadOnlyIdUsingPost(
     req: operations.GetReadOnlyIdUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetReadOnlyIdUsingPostResponse> {
@@ -2910,11 +3083,12 @@ export class SDK {
       req = new operations.GetReadOnlyIdUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getReadOnlyID";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2923,32 +3097,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetReadOnlyIdUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetReadOnlyIdUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getReadOnlyIdUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getReadOnlyIdUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getReadOnlyIdUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getReadOnlyIdUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -2960,7 +3135,7 @@ export class SDK {
   }
 
   
-  GetRevisionChangesetUsingGet(
+  getRevisionChangesetUsingGet(
     req: operations.GetRevisionChangesetUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRevisionChangesetUsingGetResponse> {
@@ -2968,11 +3143,12 @@ export class SDK {
       req = new operations.GetRevisionChangesetUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getRevisionChangeset";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2981,32 +3157,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRevisionChangesetUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetRevisionChangesetUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRevisionChangesetUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRevisionChangesetUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRevisionChangesetUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRevisionChangesetUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3018,7 +3195,7 @@ export class SDK {
   }
 
   
-  GetRevisionChangesetUsingPost(
+  getRevisionChangesetUsingPost(
     req: operations.GetRevisionChangesetUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRevisionChangesetUsingPostResponse> {
@@ -3026,11 +3203,12 @@ export class SDK {
       req = new operations.GetRevisionChangesetUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getRevisionChangeset";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3039,32 +3217,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRevisionChangesetUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetRevisionChangesetUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRevisionChangesetUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRevisionChangesetUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRevisionChangesetUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRevisionChangesetUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3076,8 +3255,10 @@ export class SDK {
   }
 
   
-  // GetRevisionsCountUsingGet - returns the number of revisions of this pad
-  GetRevisionsCountUsingGet(
+  /**
+   * getRevisionsCountUsingGet - returns the number of revisions of this pad
+  **/
+  getRevisionsCountUsingGet(
     req: operations.GetRevisionsCountUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRevisionsCountUsingGetResponse> {
@@ -3085,11 +3266,12 @@ export class SDK {
       req = new operations.GetRevisionsCountUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getRevisionsCount";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3098,32 +3280,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRevisionsCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetRevisionsCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRevisionsCountUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRevisionsCountUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRevisionsCountUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRevisionsCountUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3135,8 +3318,10 @@ export class SDK {
   }
 
   
-  // GetRevisionsCountUsingPost - returns the number of revisions of this pad
-  GetRevisionsCountUsingPost(
+  /**
+   * getRevisionsCountUsingPost - returns the number of revisions of this pad
+  **/
+  getRevisionsCountUsingPost(
     req: operations.GetRevisionsCountUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRevisionsCountUsingPostResponse> {
@@ -3144,11 +3329,12 @@ export class SDK {
       req = new operations.GetRevisionsCountUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getRevisionsCount";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3157,32 +3343,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRevisionsCountUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetRevisionsCountUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRevisionsCountUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRevisionsCountUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRevisionsCountUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getRevisionsCountUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3194,7 +3381,7 @@ export class SDK {
   }
 
   
-  GetSavedRevisionsCountUsingGet(
+  getSavedRevisionsCountUsingGet(
     req: operations.GetSavedRevisionsCountUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSavedRevisionsCountUsingGetResponse> {
@@ -3202,11 +3389,12 @@ export class SDK {
       req = new operations.GetSavedRevisionsCountUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getSavedRevisionsCount";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3215,32 +3403,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSavedRevisionsCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSavedRevisionsCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getSavedRevisionsCountUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getSavedRevisionsCountUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getSavedRevisionsCountUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getSavedRevisionsCountUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3252,7 +3441,7 @@ export class SDK {
   }
 
   
-  GetSavedRevisionsCountUsingPost(
+  getSavedRevisionsCountUsingPost(
     req: operations.GetSavedRevisionsCountUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSavedRevisionsCountUsingPostResponse> {
@@ -3260,11 +3449,12 @@ export class SDK {
       req = new operations.GetSavedRevisionsCountUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getSavedRevisionsCount";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3273,32 +3463,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSavedRevisionsCountUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSavedRevisionsCountUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getSavedRevisionsCountUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getSavedRevisionsCountUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getSavedRevisionsCountUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getSavedRevisionsCountUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3310,8 +3501,10 @@ export class SDK {
   }
 
   
-  // GetSessionInfoUsingGet - returns informations about a session
-  GetSessionInfoUsingGet(
+  /**
+   * getSessionInfoUsingGet - returns informations about a session
+  **/
+  getSessionInfoUsingGet(
     req: operations.GetSessionInfoUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSessionInfoUsingGetResponse> {
@@ -3319,11 +3512,12 @@ export class SDK {
       req = new operations.GetSessionInfoUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getSessionInfo";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3332,32 +3526,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSessionInfoUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSessionInfoUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getSessionInfoUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getSessionInfoUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getSessionInfoUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getSessionInfoUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3369,8 +3564,10 @@ export class SDK {
   }
 
   
-  // GetSessionInfoUsingPost - returns informations about a session
-  GetSessionInfoUsingPost(
+  /**
+   * getSessionInfoUsingPost - returns informations about a session
+  **/
+  getSessionInfoUsingPost(
     req: operations.GetSessionInfoUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSessionInfoUsingPostResponse> {
@@ -3378,11 +3575,12 @@ export class SDK {
       req = new operations.GetSessionInfoUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getSessionInfo";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3391,32 +3589,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSessionInfoUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetSessionInfoUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getSessionInfoUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getSessionInfoUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getSessionInfoUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getSessionInfoUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3428,41 +3627,42 @@ export class SDK {
   }
 
   
-  GetStatsUsingGet(
-    
+  getStatsUsingGet(
     config?: AxiosRequestConfig
   ): Promise<operations.GetStatsUsingGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getStats";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetStatsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetStatsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getStatsUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getStatsUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getStatsUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getStatsUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3474,41 +3674,42 @@ export class SDK {
   }
 
   
-  GetStatsUsingPost(
-    
+  getStatsUsingPost(
     config?: AxiosRequestConfig
   ): Promise<operations.GetStatsUsingPostResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getStats";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetStatsUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetStatsUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getStatsUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getStatsUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getStatsUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getStatsUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3520,8 +3721,10 @@ export class SDK {
   }
 
   
-  // GetTextUsingGet - returns the text of a pad
-  GetTextUsingGet(
+  /**
+   * getTextUsingGet - returns the text of a pad
+  **/
+  getTextUsingGet(
     req: operations.GetTextUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTextUsingGetResponse> {
@@ -3529,11 +3732,12 @@ export class SDK {
       req = new operations.GetTextUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getText";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3542,32 +3746,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTextUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetTextUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getTextUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getTextUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getTextUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getTextUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3579,8 +3784,10 @@ export class SDK {
   }
 
   
-  // GetTextUsingPost - returns the text of a pad
-  GetTextUsingPost(
+  /**
+   * getTextUsingPost - returns the text of a pad
+  **/
+  getTextUsingPost(
     req: operations.GetTextUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetTextUsingPostResponse> {
@@ -3588,11 +3795,12 @@ export class SDK {
       req = new operations.GetTextUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/getText";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3601,32 +3809,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetTextUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetTextUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getTextUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getTextUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getTextUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getTextUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3638,41 +3847,42 @@ export class SDK {
   }
 
   
-  ListAllGroupsUsingGet(
-    
+  listAllGroupsUsingGet(
     config?: AxiosRequestConfig
   ): Promise<operations.ListAllGroupsUsingGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/listAllGroups";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListAllGroupsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListAllGroupsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAllGroupsUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAllGroupsUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAllGroupsUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAllGroupsUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3684,41 +3894,42 @@ export class SDK {
   }
 
   
-  ListAllGroupsUsingPost(
-    
+  listAllGroupsUsingPost(
     config?: AxiosRequestConfig
   ): Promise<operations.ListAllGroupsUsingPostResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/listAllGroups";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListAllGroupsUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListAllGroupsUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAllGroupsUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAllGroupsUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAllGroupsUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAllGroupsUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3730,42 +3941,45 @@ export class SDK {
   }
 
   
-  // ListAllPadsUsingGet - list all the pads
-  ListAllPadsUsingGet(
-    
+  /**
+   * listAllPadsUsingGet - list all the pads
+  **/
+  listAllPadsUsingGet(
     config?: AxiosRequestConfig
   ): Promise<operations.ListAllPadsUsingGetResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/listAllPads";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListAllPadsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListAllPadsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAllPadsUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAllPadsUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAllPadsUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAllPadsUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3777,42 +3991,45 @@ export class SDK {
   }
 
   
-  // ListAllPadsUsingPost - list all the pads
-  ListAllPadsUsingPost(
-    
+  /**
+   * listAllPadsUsingPost - list all the pads
+  **/
+  listAllPadsUsingPost(
     config?: AxiosRequestConfig
   ): Promise<operations.ListAllPadsUsingPostResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/listAllPads";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListAllPadsUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListAllPadsUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAllPadsUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAllPadsUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAllPadsUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAllPadsUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3824,8 +4041,10 @@ export class SDK {
   }
 
   
-  // ListAuthorsOfPadUsingGet - returns an array of authors who contributed to this pad
-  ListAuthorsOfPadUsingGet(
+  /**
+   * listAuthorsOfPadUsingGet - returns an array of authors who contributed to this pad
+  **/
+  listAuthorsOfPadUsingGet(
     req: operations.ListAuthorsOfPadUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListAuthorsOfPadUsingGetResponse> {
@@ -3833,11 +4052,12 @@ export class SDK {
       req = new operations.ListAuthorsOfPadUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/listAuthorsOfPad";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3846,32 +4066,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListAuthorsOfPadUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListAuthorsOfPadUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAuthorsOfPadUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAuthorsOfPadUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAuthorsOfPadUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAuthorsOfPadUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3883,8 +4104,10 @@ export class SDK {
   }
 
   
-  // ListAuthorsOfPadUsingPost - returns an array of authors who contributed to this pad
-  ListAuthorsOfPadUsingPost(
+  /**
+   * listAuthorsOfPadUsingPost - returns an array of authors who contributed to this pad
+  **/
+  listAuthorsOfPadUsingPost(
     req: operations.ListAuthorsOfPadUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListAuthorsOfPadUsingPostResponse> {
@@ -3892,11 +4115,12 @@ export class SDK {
       req = new operations.ListAuthorsOfPadUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/listAuthorsOfPad";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3905,32 +4129,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListAuthorsOfPadUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListAuthorsOfPadUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAuthorsOfPadUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAuthorsOfPadUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAuthorsOfPadUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listAuthorsOfPadUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -3942,8 +4167,10 @@ export class SDK {
   }
 
   
-  // ListPadsOfAuthorUsingGet - returns an array of all pads this author contributed to
-  ListPadsOfAuthorUsingGet(
+  /**
+   * listPadsOfAuthorUsingGet - returns an array of all pads this author contributed to
+  **/
+  listPadsOfAuthorUsingGet(
     req: operations.ListPadsOfAuthorUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListPadsOfAuthorUsingGetResponse> {
@@ -3951,11 +4178,12 @@ export class SDK {
       req = new operations.ListPadsOfAuthorUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/listPadsOfAuthor";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3964,32 +4192,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListPadsOfAuthorUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListPadsOfAuthorUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listPadsOfAuthorUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listPadsOfAuthorUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listPadsOfAuthorUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listPadsOfAuthorUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4001,8 +4230,10 @@ export class SDK {
   }
 
   
-  // ListPadsOfAuthorUsingPost - returns an array of all pads this author contributed to
-  ListPadsOfAuthorUsingPost(
+  /**
+   * listPadsOfAuthorUsingPost - returns an array of all pads this author contributed to
+  **/
+  listPadsOfAuthorUsingPost(
     req: operations.ListPadsOfAuthorUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListPadsOfAuthorUsingPostResponse> {
@@ -4010,11 +4241,12 @@ export class SDK {
       req = new operations.ListPadsOfAuthorUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/listPadsOfAuthor";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4023,32 +4255,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListPadsOfAuthorUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListPadsOfAuthorUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listPadsOfAuthorUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listPadsOfAuthorUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listPadsOfAuthorUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listPadsOfAuthorUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4060,8 +4293,10 @@ export class SDK {
   }
 
   
-  // ListPadsUsingGet - returns all pads of this group
-  ListPadsUsingGet(
+  /**
+   * listPadsUsingGet - returns all pads of this group
+  **/
+  listPadsUsingGet(
     req: operations.ListPadsUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListPadsUsingGetResponse> {
@@ -4069,11 +4304,12 @@ export class SDK {
       req = new operations.ListPadsUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/listPads";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4082,32 +4318,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListPadsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListPadsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listPadsUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listPadsUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listPadsUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listPadsUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4119,8 +4356,10 @@ export class SDK {
   }
 
   
-  // ListPadsUsingPost - returns all pads of this group
-  ListPadsUsingPost(
+  /**
+   * listPadsUsingPost - returns all pads of this group
+  **/
+  listPadsUsingPost(
     req: operations.ListPadsUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListPadsUsingPostResponse> {
@@ -4128,11 +4367,12 @@ export class SDK {
       req = new operations.ListPadsUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/listPads";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4141,32 +4381,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListPadsUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListPadsUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listPadsUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listPadsUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listPadsUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listPadsUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4178,7 +4419,7 @@ export class SDK {
   }
 
   
-  ListSavedRevisionsUsingGet(
+  listSavedRevisionsUsingGet(
     req: operations.ListSavedRevisionsUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListSavedRevisionsUsingGetResponse> {
@@ -4186,11 +4427,12 @@ export class SDK {
       req = new operations.ListSavedRevisionsUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/listSavedRevisions";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4199,32 +4441,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListSavedRevisionsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListSavedRevisionsUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSavedRevisionsUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSavedRevisionsUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSavedRevisionsUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSavedRevisionsUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4236,7 +4479,7 @@ export class SDK {
   }
 
   
-  ListSavedRevisionsUsingPost(
+  listSavedRevisionsUsingPost(
     req: operations.ListSavedRevisionsUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListSavedRevisionsUsingPostResponse> {
@@ -4244,11 +4487,12 @@ export class SDK {
       req = new operations.ListSavedRevisionsUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/listSavedRevisions";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4257,32 +4501,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListSavedRevisionsUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListSavedRevisionsUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSavedRevisionsUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSavedRevisionsUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSavedRevisionsUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSavedRevisionsUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4294,8 +4539,10 @@ export class SDK {
   }
 
   
-  // ListSessionsOfAuthorUsingGet - returns all sessions of an author
-  ListSessionsOfAuthorUsingGet(
+  /**
+   * listSessionsOfAuthorUsingGet - returns all sessions of an author
+  **/
+  listSessionsOfAuthorUsingGet(
     req: operations.ListSessionsOfAuthorUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListSessionsOfAuthorUsingGetResponse> {
@@ -4303,11 +4550,12 @@ export class SDK {
       req = new operations.ListSessionsOfAuthorUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/listSessionsOfAuthor";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4316,32 +4564,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListSessionsOfAuthorUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListSessionsOfAuthorUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSessionsOfAuthorUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSessionsOfAuthorUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSessionsOfAuthorUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSessionsOfAuthorUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4353,8 +4602,10 @@ export class SDK {
   }
 
   
-  // ListSessionsOfAuthorUsingPost - returns all sessions of an author
-  ListSessionsOfAuthorUsingPost(
+  /**
+   * listSessionsOfAuthorUsingPost - returns all sessions of an author
+  **/
+  listSessionsOfAuthorUsingPost(
     req: operations.ListSessionsOfAuthorUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListSessionsOfAuthorUsingPostResponse> {
@@ -4362,11 +4613,12 @@ export class SDK {
       req = new operations.ListSessionsOfAuthorUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/listSessionsOfAuthor";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4375,32 +4627,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListSessionsOfAuthorUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListSessionsOfAuthorUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSessionsOfAuthorUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSessionsOfAuthorUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSessionsOfAuthorUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSessionsOfAuthorUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4412,7 +4665,7 @@ export class SDK {
   }
 
   
-  ListSessionsOfGroupUsingGet(
+  listSessionsOfGroupUsingGet(
     req: operations.ListSessionsOfGroupUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListSessionsOfGroupUsingGetResponse> {
@@ -4420,11 +4673,12 @@ export class SDK {
       req = new operations.ListSessionsOfGroupUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/listSessionsOfGroup";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4433,32 +4687,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListSessionsOfGroupUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListSessionsOfGroupUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSessionsOfGroupUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSessionsOfGroupUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSessionsOfGroupUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSessionsOfGroupUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4470,7 +4725,7 @@ export class SDK {
   }
 
   
-  ListSessionsOfGroupUsingPost(
+  listSessionsOfGroupUsingPost(
     req: operations.ListSessionsOfGroupUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ListSessionsOfGroupUsingPostResponse> {
@@ -4478,11 +4733,12 @@ export class SDK {
       req = new operations.ListSessionsOfGroupUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/listSessionsOfGroup";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4491,32 +4747,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ListSessionsOfGroupUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.ListSessionsOfGroupUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSessionsOfGroupUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSessionsOfGroupUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSessionsOfGroupUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.listSessionsOfGroupUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4528,7 +4785,7 @@ export class SDK {
   }
 
   
-  MovePadUsingGet(
+  movePadUsingGet(
     req: operations.MovePadUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.MovePadUsingGetResponse> {
@@ -4536,11 +4793,12 @@ export class SDK {
       req = new operations.MovePadUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/movePad";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4549,32 +4807,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.MovePadUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.MovePadUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.movePadUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.movePadUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.movePadUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.movePadUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4586,7 +4845,7 @@ export class SDK {
   }
 
   
-  MovePadUsingPost(
+  movePadUsingPost(
     req: operations.MovePadUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.MovePadUsingPostResponse> {
@@ -4594,11 +4853,12 @@ export class SDK {
       req = new operations.MovePadUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/movePad";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4607,32 +4867,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.MovePadUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.MovePadUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.movePadUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.movePadUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.movePadUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.movePadUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4644,8 +4905,10 @@ export class SDK {
   }
 
   
-  // PadUsersCountUsingGet - returns the number of user that are currently editing this pad
-  PadUsersCountUsingGet(
+  /**
+   * padUsersCountUsingGet - returns the number of user that are currently editing this pad
+  **/
+  padUsersCountUsingGet(
     req: operations.PadUsersCountUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PadUsersCountUsingGetResponse> {
@@ -4653,11 +4916,12 @@ export class SDK {
       req = new operations.PadUsersCountUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/padUsersCount";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4666,32 +4930,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PadUsersCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PadUsersCountUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.padUsersCountUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.padUsersCountUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.padUsersCountUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.padUsersCountUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4703,8 +4968,10 @@ export class SDK {
   }
 
   
-  // PadUsersCountUsingPost - returns the number of user that are currently editing this pad
-  PadUsersCountUsingPost(
+  /**
+   * padUsersCountUsingPost - returns the number of user that are currently editing this pad
+  **/
+  padUsersCountUsingPost(
     req: operations.PadUsersCountUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PadUsersCountUsingPostResponse> {
@@ -4712,11 +4979,12 @@ export class SDK {
       req = new operations.PadUsersCountUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/padUsersCount";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4725,32 +4993,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PadUsersCountUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PadUsersCountUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.padUsersCountUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.padUsersCountUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.padUsersCountUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.padUsersCountUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4762,8 +5031,10 @@ export class SDK {
   }
 
   
-  // PadUsersUsingGet - returns the list of users that are currently editing this pad
-  PadUsersUsingGet(
+  /**
+   * padUsersUsingGet - returns the list of users that are currently editing this pad
+  **/
+  padUsersUsingGet(
     req: operations.PadUsersUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PadUsersUsingGetResponse> {
@@ -4771,11 +5042,12 @@ export class SDK {
       req = new operations.PadUsersUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/padUsers";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4784,32 +5056,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PadUsersUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PadUsersUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.padUsersUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.padUsersUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.padUsersUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.padUsersUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4821,8 +5094,10 @@ export class SDK {
   }
 
   
-  // PadUsersUsingPost - returns the list of users that are currently editing this pad
-  PadUsersUsingPost(
+  /**
+   * padUsersUsingPost - returns the list of users that are currently editing this pad
+  **/
+  padUsersUsingPost(
     req: operations.PadUsersUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PadUsersUsingPostResponse> {
@@ -4830,11 +5105,12 @@ export class SDK {
       req = new operations.PadUsersUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/padUsers";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4843,32 +5119,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PadUsersUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PadUsersUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.padUsersUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.padUsersUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.padUsersUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.padUsersUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4880,7 +5157,7 @@ export class SDK {
   }
 
   
-  RestoreRevisionUsingGet(
+  restoreRevisionUsingGet(
     req: operations.RestoreRevisionUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RestoreRevisionUsingGetResponse> {
@@ -4888,11 +5165,12 @@ export class SDK {
       req = new operations.RestoreRevisionUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/restoreRevision";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4901,32 +5179,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RestoreRevisionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RestoreRevisionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.restoreRevisionUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.restoreRevisionUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.restoreRevisionUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.restoreRevisionUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4938,7 +5217,7 @@ export class SDK {
   }
 
   
-  RestoreRevisionUsingPost(
+  restoreRevisionUsingPost(
     req: operations.RestoreRevisionUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RestoreRevisionUsingPostResponse> {
@@ -4946,11 +5225,12 @@ export class SDK {
       req = new operations.RestoreRevisionUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/restoreRevision";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4959,32 +5239,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RestoreRevisionUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.RestoreRevisionUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.restoreRevisionUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.restoreRevisionUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.restoreRevisionUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.restoreRevisionUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -4996,7 +5277,7 @@ export class SDK {
   }
 
   
-  SaveRevisionUsingGet(
+  saveRevisionUsingGet(
     req: operations.SaveRevisionUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SaveRevisionUsingGetResponse> {
@@ -5004,11 +5285,12 @@ export class SDK {
       req = new operations.SaveRevisionUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/saveRevision";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5017,32 +5299,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SaveRevisionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SaveRevisionUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.saveRevisionUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.saveRevisionUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.saveRevisionUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.saveRevisionUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5054,7 +5337,7 @@ export class SDK {
   }
 
   
-  SaveRevisionUsingPost(
+  saveRevisionUsingPost(
     req: operations.SaveRevisionUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SaveRevisionUsingPostResponse> {
@@ -5062,11 +5345,12 @@ export class SDK {
       req = new operations.SaveRevisionUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/saveRevision";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5075,32 +5359,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SaveRevisionUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SaveRevisionUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.saveRevisionUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.saveRevisionUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.saveRevisionUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.saveRevisionUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5112,8 +5397,10 @@ export class SDK {
   }
 
   
-  // SendClientsMessageUsingGet - sends a custom message of type msg to the pad
-  SendClientsMessageUsingGet(
+  /**
+   * sendClientsMessageUsingGet - sends a custom message of type msg to the pad
+  **/
+  sendClientsMessageUsingGet(
     req: operations.SendClientsMessageUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SendClientsMessageUsingGetResponse> {
@@ -5121,11 +5408,12 @@ export class SDK {
       req = new operations.SendClientsMessageUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/sendClientsMessage";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5134,32 +5422,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SendClientsMessageUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SendClientsMessageUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sendClientsMessageUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sendClientsMessageUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sendClientsMessageUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sendClientsMessageUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5171,8 +5460,10 @@ export class SDK {
   }
 
   
-  // SendClientsMessageUsingPost - sends a custom message of type msg to the pad
-  SendClientsMessageUsingPost(
+  /**
+   * sendClientsMessageUsingPost - sends a custom message of type msg to the pad
+  **/
+  sendClientsMessageUsingPost(
     req: operations.SendClientsMessageUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SendClientsMessageUsingPostResponse> {
@@ -5180,11 +5471,12 @@ export class SDK {
       req = new operations.SendClientsMessageUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/sendClientsMessage";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5193,32 +5485,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SendClientsMessageUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SendClientsMessageUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sendClientsMessageUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sendClientsMessageUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sendClientsMessageUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.sendClientsMessageUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5230,8 +5523,10 @@ export class SDK {
   }
 
   
-  // SetHtmlUsingGet - sets the text of a pad with HTML
-  SetHtmlUsingGet(
+  /**
+   * setHtmlUsingGet - sets the text of a pad with HTML
+  **/
+  setHtmlUsingGet(
     req: operations.SetHtmlUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SetHtmlUsingGetResponse> {
@@ -5239,11 +5534,12 @@ export class SDK {
       req = new operations.SetHtmlUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/setHTML";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5252,32 +5548,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SetHtmlUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SetHtmlUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setHtmlUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setHtmlUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setHtmlUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setHtmlUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5289,8 +5586,10 @@ export class SDK {
   }
 
   
-  // SetHtmlUsingPost - sets the text of a pad with HTML
-  SetHtmlUsingPost(
+  /**
+   * setHtmlUsingPost - sets the text of a pad with HTML
+  **/
+  setHtmlUsingPost(
     req: operations.SetHtmlUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SetHtmlUsingPostResponse> {
@@ -5298,11 +5597,12 @@ export class SDK {
       req = new operations.SetHtmlUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/setHTML";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5311,32 +5611,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SetHtmlUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SetHtmlUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setHtmlUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setHtmlUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setHtmlUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setHtmlUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5348,8 +5649,10 @@ export class SDK {
   }
 
   
-  // SetPublicStatusUsingGet - sets a boolean for the public status of a pad
-  SetPublicStatusUsingGet(
+  /**
+   * setPublicStatusUsingGet - sets a boolean for the public status of a pad
+  **/
+  setPublicStatusUsingGet(
     req: operations.SetPublicStatusUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SetPublicStatusUsingGetResponse> {
@@ -5357,11 +5660,12 @@ export class SDK {
       req = new operations.SetPublicStatusUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/setPublicStatus";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5370,32 +5674,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SetPublicStatusUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SetPublicStatusUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setPublicStatusUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setPublicStatusUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setPublicStatusUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setPublicStatusUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5407,8 +5712,10 @@ export class SDK {
   }
 
   
-  // SetPublicStatusUsingPost - sets a boolean for the public status of a pad
-  SetPublicStatusUsingPost(
+  /**
+   * setPublicStatusUsingPost - sets a boolean for the public status of a pad
+  **/
+  setPublicStatusUsingPost(
     req: operations.SetPublicStatusUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SetPublicStatusUsingPostResponse> {
@@ -5416,11 +5723,12 @@ export class SDK {
       req = new operations.SetPublicStatusUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/setPublicStatus";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5429,32 +5737,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SetPublicStatusUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SetPublicStatusUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setPublicStatusUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setPublicStatusUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setPublicStatusUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setPublicStatusUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5466,8 +5775,10 @@ export class SDK {
   }
 
   
-  // SetTextUsingGet - sets the text of a pad
-  SetTextUsingGet(
+  /**
+   * setTextUsingGet - sets the text of a pad
+  **/
+  setTextUsingGet(
     req: operations.SetTextUsingGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SetTextUsingGetResponse> {
@@ -5475,11 +5786,12 @@ export class SDK {
       req = new operations.SetTextUsingGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/setText";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5488,32 +5800,33 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SetTextUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SetTextUsingGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setTextUsingGet200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setTextUsingGet400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setTextUsingGet401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setTextUsingGet500ApplicationJsonObject = httpRes?.data;
             }
             break;
@@ -5525,8 +5838,10 @@ export class SDK {
   }
 
   
-  // SetTextUsingPost - sets the text of a pad
-  SetTextUsingPost(
+  /**
+   * setTextUsingPost - sets the text of a pad
+  **/
+  setTextUsingPost(
     req: operations.SetTextUsingPostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.SetTextUsingPostResponse> {
@@ -5534,11 +5849,12 @@ export class SDK {
       req = new operations.SetTextUsingPostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/setText";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5547,32 +5863,33 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.SetTextUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.SetTextUsingPostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setTextUsingPost200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setTextUsingPost400ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setTextUsingPost401ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.setTextUsingPost500ApplicationJsonObject = httpRes?.data;
             }
             break;

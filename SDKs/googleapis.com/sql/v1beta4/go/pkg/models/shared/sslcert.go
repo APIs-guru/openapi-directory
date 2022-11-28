@@ -1,5 +1,7 @@
 package shared
 
+// SslCert
+// SslCerts Resource
 type SslCert struct {
 	Cert             *string `json:"cert,omitempty"`
 	CertSerialNumber *string `json:"certSerialNumber,omitempty"`

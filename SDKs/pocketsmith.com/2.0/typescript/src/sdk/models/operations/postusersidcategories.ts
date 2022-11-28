@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostUsersIdCategoriesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class PostUsersIdCategoriesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=colour" })
+  @SpeakeasyMetadata({ data: "json, name=colour" })
   colour?: string;
 
-  @Metadata({ data: "json, name=parent_id" })
+  @SpeakeasyMetadata({ data: "json, name=parent_id" })
   parentId?: number;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 }
 
 
 export class PostUsersIdCategoriesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostUsersIdCategoriesPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: PostUsersIdCategoriesRequestBody;
 }
 
 
 export class PostUsersIdCategoriesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   category?: shared.Category;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

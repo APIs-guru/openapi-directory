@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkSettingsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
@@ -12,39 +13,39 @@ export class UpdateNetworkSettingsPathParams extends SpeakeasyBase {
  * A hash of SecureConnect options applied to the Network.
 **/
 export class UpdateNetworkSettingsRequestBodySecureConnect extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 }
 
 
 export class UpdateNetworkSettingsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=localStatusPageEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=localStatusPageEnabled" })
   localStatusPageEnabled?: boolean;
 
-  @Metadata({ data: "json, name=remoteStatusPageEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=remoteStatusPageEnabled" })
   remoteStatusPageEnabled?: boolean;
 
-  @Metadata({ data: "json, name=secureConnect" })
+  @SpeakeasyMetadata({ data: "json, name=secureConnect" })
   secureConnect?: UpdateNetworkSettingsRequestBodySecureConnect;
 }
 
 
 export class UpdateNetworkSettingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkSettingsPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkSettingsRequestBody;
 }
 
 
 export class UpdateNetworkSettingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkSettings200ApplicationJsonObject?: Map<string, any>;
 }

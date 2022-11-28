@@ -31,7 +31,7 @@ type ApigeeOrganizationsEnvironmentsKeystoresCreateSecurity struct {
 type ApigeeOrganizationsEnvironmentsKeystoresCreateRequest struct {
 	PathParams  ApigeeOrganizationsEnvironmentsKeystoresCreatePathParams
 	QueryParams ApigeeOrganizationsEnvironmentsKeystoresCreateQueryParams
-	Request     *shared.GoogleCloudApigeeV1Keystore `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudApigeeV1KeystoreInput `request:"mediaType=application/json"`
 	Security    ApigeeOrganizationsEnvironmentsKeystoresCreateSecurity
 }
 

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum GetServiceXAmzTargetEnum {
     AwsProton20200720GetService = "AwsProton20200720.GetService"

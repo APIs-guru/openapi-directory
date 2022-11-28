@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class GetRealmClientsIDProtocolMappersProtocolProtocolPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    protocol: str = field(default=None, metadata={'path_param': { 'field_name': 'protocol', 'style': 'simple', 'explode': False }})
-    realm: str = field(default=None, metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    protocol: str = field(metadata={'path_param': { 'field_name': 'protocol', 'style': 'simple', 'explode': False }})
+    realm: str = field(metadata={'path_param': { 'field_name': 'realm', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetRealmClientsIDProtocolMappersProtocolProtocolRequest:
-    path_params: GetRealmClientsIDProtocolMappersProtocolProtocolPathParams = field(default=None)
+    path_params: GetRealmClientsIDProtocolMappersProtocolProtocolPathParams = field()
     
 
 @dataclass
 class GetRealmClientsIDProtocolMappersProtocolProtocolResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     protocol_mapper_representations: Optional[List[shared.ProtocolMapperRepresentation]] = field(default=None)
-    status_code: int = field(default=None)
     

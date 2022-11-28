@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import attributepayload
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ThingGroupProperties:
-    attribute_payload: Optional[attributepayload.AttributePayload] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributePayload' }})
-    thing_group_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thingGroupDescription' }})
+    r"""ThingGroupProperties
+    Thing group properties.
+    """
+    
+    attribute_payload: Optional[AttributePayload] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attributePayload') }})
+    thing_group_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thingGroupDescription') }})
     

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoInventorySourceGroupsDeletePathParams:
-    inventory_source_group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'inventorySourceGroupId', 'style': 'simple', 'explode': False }})
+    inventory_source_group_id: str = field(metadata={'path_param': { 'field_name': 'inventorySourceGroupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class DisplayvideoInventorySourceGroupsDeleteQueryParams:
 
 @dataclass
 class DisplayvideoInventorySourceGroupsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoInventorySourceGroupsDeleteRequest:
-    path_params: DisplayvideoInventorySourceGroupsDeletePathParams = field(default=None)
-    query_params: DisplayvideoInventorySourceGroupsDeleteQueryParams = field(default=None)
-    security: DisplayvideoInventorySourceGroupsDeleteSecurity = field(default=None)
+    path_params: DisplayvideoInventorySourceGroupsDeletePathParams = field()
+    query_params: DisplayvideoInventorySourceGroupsDeleteQueryParams = field()
+    security: DisplayvideoInventorySourceGroupsDeleteSecurity = field()
     
 
 @dataclass
 class DisplayvideoInventorySourceGroupsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

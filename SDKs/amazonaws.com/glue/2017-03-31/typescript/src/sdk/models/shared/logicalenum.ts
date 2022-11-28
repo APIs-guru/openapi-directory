@@ -1,6 +1,7 @@
 
 
+
 export enum LogicalEnum {
-    And = "AND"
-,    Any = "ANY"
+    And = "AND",
+    Any = "ANY"
 }

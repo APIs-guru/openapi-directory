@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RunNamespacesJobsRunPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class RunNamespacesJobsRunQueryParams:
 
 @dataclass
 class RunNamespacesJobsRunSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RunNamespacesJobsRunRequest:
-    path_params: RunNamespacesJobsRunPathParams = field(default=None)
-    query_params: RunNamespacesJobsRunQueryParams = field(default=None)
+    path_params: RunNamespacesJobsRunPathParams = field()
+    query_params: RunNamespacesJobsRunQueryParams = field()
+    security: RunNamespacesJobsRunSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: RunNamespacesJobsRunSecurity = field(default=None)
     
 
 @dataclass
 class RunNamespacesJobsRunResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     execution: Optional[shared.Execution] = field(default=None)
-    status_code: int = field(default=None)
     

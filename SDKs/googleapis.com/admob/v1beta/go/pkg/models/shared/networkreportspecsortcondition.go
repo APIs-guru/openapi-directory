@@ -42,6 +42,8 @@ const (
 	NetworkReportSpecSortConditionOrderEnumDescending           NetworkReportSpecSortConditionOrderEnum = "DESCENDING"
 )
 
+// NetworkReportSpecSortCondition
+// Sorting direction to be applied on a dimension or a metric.
 type NetworkReportSpecSortCondition struct {
 	Dimension *NetworkReportSpecSortConditionDimensionEnum `json:"dimension,omitempty"`
 	Metric    *NetworkReportSpecSortConditionMetricEnum    `json:"metric,omitempty"`

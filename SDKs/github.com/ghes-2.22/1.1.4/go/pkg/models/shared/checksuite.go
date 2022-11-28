@@ -24,6 +24,8 @@ const (
 	CheckSuiteStatusEnumCompleted  CheckSuiteStatusEnum = "completed"
 )
 
+// CheckSuite
+// A suite of checks performed on the code of a given code change
 type CheckSuite struct {
 	After                string                   `json:"after"`
 	App                  map[string]interface{}   `json:"app"`

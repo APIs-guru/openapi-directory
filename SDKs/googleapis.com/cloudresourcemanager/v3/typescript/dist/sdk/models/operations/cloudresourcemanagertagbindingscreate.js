@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CloudresourcemanagerTagBindingsCreateQueryParams = /** @class */ (function (_super) {
     __extends(CloudresourcemanagerTagBindingsCreateQueryParams, _super);
@@ -30,51 +30,51 @@ var CloudresourcemanagerTagBindingsCreateQueryParams = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerTagBindingsCreateQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerTagBindingsCreateQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerTagBindingsCreateQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerTagBindingsCreateQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerTagBindingsCreateQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerTagBindingsCreateQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerTagBindingsCreateQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], CloudresourcemanagerTagBindingsCreateQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerTagBindingsCreateQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerTagBindingsCreateQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], CloudresourcemanagerTagBindingsCreateQueryParams.prototype, "uploadProtocol", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=validateOnly" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=validateOnly" }),
         __metadata("design:type", Boolean)
     ], CloudresourcemanagerTagBindingsCreateQueryParams.prototype, "validateOnly", void 0);
     return CloudresourcemanagerTagBindingsCreateQueryParams;
@@ -86,11 +86,11 @@ var CloudresourcemanagerTagBindingsCreateSecurity = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], CloudresourcemanagerTagBindingsCreateSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], CloudresourcemanagerTagBindingsCreateSecurity.prototype, "oauth2c", void 0);
     return CloudresourcemanagerTagBindingsCreateSecurity;
@@ -102,15 +102,15 @@ var CloudresourcemanagerTagBindingsCreateRequest = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CloudresourcemanagerTagBindingsCreateQueryParams)
     ], CloudresourcemanagerTagBindingsCreateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", shared.TagBinding)
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.TagBindingInput)
     ], CloudresourcemanagerTagBindingsCreateRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CloudresourcemanagerTagBindingsCreateSecurity)
     ], CloudresourcemanagerTagBindingsCreateRequest.prototype, "security", void 0);
     return CloudresourcemanagerTagBindingsCreateRequest;
@@ -122,15 +122,15 @@ var CloudresourcemanagerTagBindingsCreateResponse = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CloudresourcemanagerTagBindingsCreateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Operation)
     ], CloudresourcemanagerTagBindingsCreateResponse.prototype, "operation", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CloudresourcemanagerTagBindingsCreateResponse.prototype, "statusCode", void 0);
     return CloudresourcemanagerTagBindingsCreateResponse;

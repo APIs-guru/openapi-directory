@@ -42,6 +42,16 @@ const (
 	PromotionRedemptionChannelEnumOnline                       PromotionRedemptionChannelEnum = "ONLINE"
 )
 
+type PromotionStoreApplicabilityEnum string
+
+const (
+	PromotionStoreApplicabilityEnumStoreApplicabilityUnspecified PromotionStoreApplicabilityEnum = "STORE_APPLICABILITY_UNSPECIFIED"
+	PromotionStoreApplicabilityEnumAllStores                     PromotionStoreApplicabilityEnum = "ALL_STORES"
+	PromotionStoreApplicabilityEnumSpecificStores                PromotionStoreApplicabilityEnum = "SPECIFIC_STORES"
+)
+
+// Promotion
+// Represents a promotion. See the following articles for more details. * [Promotions feed specification](https://support.google.com/merchants/answer/2906014) * [Local promotions feed specification](https://support.google.com/merchants/answer/10146130) * [Promotions on Buy on Google product data specification](https://support.google.com/merchants/answer/9173673)
 type Promotion struct {
 	Brand                        []string                           `json:"brand,omitempty"`
 	BrandExclusion               []string                           `json:"brandExclusion,omitempty"`
@@ -76,7 +86,55 @@ type Promotion struct {
 	PromotionEffectiveDates      *string                            `json:"promotionEffectiveDates,omitempty"`
 	PromotionEffectiveTimePeriod *TimePeriod                        `json:"promotionEffectiveTimePeriod,omitempty"`
 	PromotionID                  *string                            `json:"promotionId,omitempty"`
+	PromotionURL                 *string                            `json:"promotionUrl,omitempty"`
 	RedemptionChannel            []PromotionRedemptionChannelEnum   `json:"redemptionChannel,omitempty"`
 	ShippingServiceNames         []string                           `json:"shippingServiceNames,omitempty"`
+	StoreApplicability           *PromotionStoreApplicabilityEnum   `json:"storeApplicability,omitempty"`
+	StoreCode                    []string                           `json:"storeCode,omitempty"`
+	StoreCodeExclusion           []string                           `json:"storeCodeExclusion,omitempty"`
+	TargetCountry                *string                            `json:"targetCountry,omitempty"`
+}
+
+// PromotionInput
+// Represents a promotion. See the following articles for more details. * [Promotions feed specification](https://support.google.com/merchants/answer/2906014) * [Local promotions feed specification](https://support.google.com/merchants/answer/10146130) * [Promotions on Buy on Google product data specification](https://support.google.com/merchants/answer/9173673)
+type PromotionInput struct {
+	Brand                        []string                           `json:"brand,omitempty"`
+	BrandExclusion               []string                           `json:"brandExclusion,omitempty"`
+	ContentLanguage              *string                            `json:"contentLanguage,omitempty"`
+	CouponValueType              *PromotionCouponValueTypeEnum      `json:"couponValueType,omitempty"`
+	FreeGiftDescription          *string                            `json:"freeGiftDescription,omitempty"`
+	FreeGiftItemID               *string                            `json:"freeGiftItemId,omitempty"`
+	FreeGiftValue                *PriceAmount                       `json:"freeGiftValue,omitempty"`
+	GenericRedemptionCode        *string                            `json:"genericRedemptionCode,omitempty"`
+	GetThisQuantityDiscounted    *int32                             `json:"getThisQuantityDiscounted,omitempty"`
+	ItemGroupID                  []string                           `json:"itemGroupId,omitempty"`
+	ItemGroupIDExclusion         []string                           `json:"itemGroupIdExclusion,omitempty"`
+	ItemID                       []string                           `json:"itemId,omitempty"`
+	ItemIDExclusion              []string                           `json:"itemIdExclusion,omitempty"`
+	LimitQuantity                *int32                             `json:"limitQuantity,omitempty"`
+	LimitValue                   *PriceAmount                       `json:"limitValue,omitempty"`
+	LongTitle                    *string                            `json:"longTitle,omitempty"`
+	MinimumPurchaseAmount        *PriceAmount                       `json:"minimumPurchaseAmount,omitempty"`
+	MinimumPurchaseQuantity      *int32                             `json:"minimumPurchaseQuantity,omitempty"`
+	MoneyBudget                  *PriceAmount                       `json:"moneyBudget,omitempty"`
+	MoneyOffAmount               *PriceAmount                       `json:"moneyOffAmount,omitempty"`
+	OfferType                    *PromotionOfferTypeEnum            `json:"offerType,omitempty"`
+	OrderLimit                   *int32                             `json:"orderLimit,omitempty"`
+	PercentOff                   *int32                             `json:"percentOff,omitempty"`
+	ProductApplicability         *PromotionProductApplicabilityEnum `json:"productApplicability,omitempty"`
+	ProductType                  []string                           `json:"productType,omitempty"`
+	ProductTypeExclusion         []string                           `json:"productTypeExclusion,omitempty"`
+	PromotionDestinationIds      []string                           `json:"promotionDestinationIds,omitempty"`
+	PromotionDisplayDates        *string                            `json:"promotionDisplayDates,omitempty"`
+	PromotionDisplayTimePeriod   *TimePeriod                        `json:"promotionDisplayTimePeriod,omitempty"`
+	PromotionEffectiveDates      *string                            `json:"promotionEffectiveDates,omitempty"`
+	PromotionEffectiveTimePeriod *TimePeriod                        `json:"promotionEffectiveTimePeriod,omitempty"`
+	PromotionID                  *string                            `json:"promotionId,omitempty"`
+	PromotionURL                 *string                            `json:"promotionUrl,omitempty"`
+	RedemptionChannel            []PromotionRedemptionChannelEnum   `json:"redemptionChannel,omitempty"`
+	ShippingServiceNames         []string                           `json:"shippingServiceNames,omitempty"`
+	StoreApplicability           *PromotionStoreApplicabilityEnum   `json:"storeApplicability,omitempty"`
+	StoreCode                    []string                           `json:"storeCode,omitempty"`
+	StoreCodeExclusion           []string                           `json:"storeCodeExclusion,omitempty"`
 	TargetCountry                *string                            `json:"targetCountry,omitempty"`
 }

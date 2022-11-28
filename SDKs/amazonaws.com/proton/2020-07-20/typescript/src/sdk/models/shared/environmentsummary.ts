@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentStatusEnum } from "./deploymentstatusenum";
 import { ProvisioningEnum } from "./provisioningenum";
+
 
 
 // EnvironmentSummary
@@ -8,48 +9,48 @@ import { ProvisioningEnum } from "./provisioningenum";
  * A summary of the environment detail data.
 **/
 export class EnvironmentSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=deploymentStatus" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentStatus" })
   deploymentStatus: DeploymentStatusEnum;
 
-  @Metadata({ data: "json, name=deploymentStatusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentStatusMessage" })
   deploymentStatusMessage?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=environmentAccountConnectionId" })
+  @SpeakeasyMetadata({ data: "json, name=environmentAccountConnectionId" })
   environmentAccountConnectionId?: string;
 
-  @Metadata({ data: "json, name=environmentAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=environmentAccountId" })
   environmentAccountId?: string;
 
-  @Metadata({ data: "json, name=lastDeploymentAttemptedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastDeploymentAttemptedAt" })
   lastDeploymentAttemptedAt: Date;
 
-  @Metadata({ data: "json, name=lastDeploymentSucceededAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastDeploymentSucceededAt" })
   lastDeploymentSucceededAt: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=protonServiceRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=protonServiceRoleArn" })
   protonServiceRoleArn?: string;
 
-  @Metadata({ data: "json, name=provisioning" })
+  @SpeakeasyMetadata({ data: "json, name=provisioning" })
   provisioning?: ProvisioningEnum;
 
-  @Metadata({ data: "json, name=templateMajorVersion" })
+  @SpeakeasyMetadata({ data: "json, name=templateMajorVersion" })
   templateMajorVersion: string;
 
-  @Metadata({ data: "json, name=templateMinorVersion" })
+  @SpeakeasyMetadata({ data: "json, name=templateMinorVersion" })
   templateMinorVersion: string;
 
-  @Metadata({ data: "json, name=templateName" })
+  @SpeakeasyMetadata({ data: "json, name=templateName" })
   templateName: string;
 }

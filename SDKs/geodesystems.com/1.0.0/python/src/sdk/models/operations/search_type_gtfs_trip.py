@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -32,11 +32,11 @@ class SearchTypeGtfsTripQueryParams:
 
 @dataclass
 class SearchTypeGtfsTripRequest:
-    query_params: SearchTypeGtfsTripQueryParams = field(default=None)
+    query_params: SearchTypeGtfsTripQueryParams = field()
     
 
 @dataclass
 class SearchTypeGtfsTripResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleFirebaseFcmDataV1beta1DeliveryPerformancePercents
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Overview of delivery performance for messages that were successfully delivered. All percentages are calculated with countMessagesAccepted as the denominator. These categories are not mutually exclusive; a message can be delayed for multiple reasons.
 **/
 export class GoogleFirebaseFcmDataV1beta1DeliveryPerformancePercents extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delayedDeviceDoze" })
+  @SpeakeasyMetadata({ data: "json, name=delayedDeviceDoze" })
   delayedDeviceDoze?: number;
 
-  @Metadata({ data: "json, name=delayedDeviceOffline" })
+  @SpeakeasyMetadata({ data: "json, name=delayedDeviceOffline" })
   delayedDeviceOffline?: number;
 
-  @Metadata({ data: "json, name=delayedMessageThrottled" })
+  @SpeakeasyMetadata({ data: "json, name=delayedMessageThrottled" })
   delayedMessageThrottled?: number;
 
-  @Metadata({ data: "json, name=delayedUserStopped" })
+  @SpeakeasyMetadata({ data: "json, name=delayedUserStopped" })
   delayedUserStopped?: number;
 
-  @Metadata({ data: "json, name=deliveredNoDelay" })
+  @SpeakeasyMetadata({ data: "json, name=deliveredNoDelay" })
   deliveredNoDelay?: number;
 }

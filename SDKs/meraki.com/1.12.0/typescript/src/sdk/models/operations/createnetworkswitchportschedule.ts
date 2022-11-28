@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateNetworkSwitchPortSchedulePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
@@ -12,13 +13,13 @@ export class CreateNetworkSwitchPortSchedulePathParams extends SpeakeasyBase {
  * The schedule object for Friday.
 **/
 export class CreateNetworkSwitchPortScheduleRequestBodyPortScheduleFriday extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: string;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: string;
 }
 
@@ -28,13 +29,13 @@ export class CreateNetworkSwitchPortScheduleRequestBodyPortScheduleFriday extend
  * The schedule object for Monday.
 **/
 export class CreateNetworkSwitchPortScheduleRequestBodyPortScheduleMonday extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: string;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: string;
 }
 
@@ -44,13 +45,13 @@ export class CreateNetworkSwitchPortScheduleRequestBodyPortScheduleMonday extend
  * The schedule object for Saturday.
 **/
 export class CreateNetworkSwitchPortScheduleRequestBodyPortScheduleSaturday extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: string;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: string;
 }
 
@@ -60,13 +61,13 @@ export class CreateNetworkSwitchPortScheduleRequestBodyPortScheduleSaturday exte
  * The schedule object for Sunday.
 **/
 export class CreateNetworkSwitchPortScheduleRequestBodyPortScheduleSunday extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: string;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: string;
 }
 
@@ -76,13 +77,13 @@ export class CreateNetworkSwitchPortScheduleRequestBodyPortScheduleSunday extend
  * The schedule object for Thursday.
 **/
 export class CreateNetworkSwitchPortScheduleRequestBodyPortScheduleThursday extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: string;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: string;
 }
 
@@ -92,13 +93,13 @@ export class CreateNetworkSwitchPortScheduleRequestBodyPortScheduleThursday exte
  * The schedule object for Tuesday.
 **/
 export class CreateNetworkSwitchPortScheduleRequestBodyPortScheduleTuesday extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: string;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: string;
 }
 
@@ -108,13 +109,13 @@ export class CreateNetworkSwitchPortScheduleRequestBodyPortScheduleTuesday exten
  * The schedule object for Wednesday.
 **/
 export class CreateNetworkSwitchPortScheduleRequestBodyPortScheduleWednesday extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: string;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: string;
 }
 
@@ -127,54 +128,54 @@ export class CreateNetworkSwitchPortScheduleRequestBodyPortScheduleWednesday ext
  * 
 **/
 export class CreateNetworkSwitchPortScheduleRequestBodyPortSchedule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=friday" })
+  @SpeakeasyMetadata({ data: "json, name=friday" })
   friday?: CreateNetworkSwitchPortScheduleRequestBodyPortScheduleFriday;
 
-  @Metadata({ data: "json, name=monday" })
+  @SpeakeasyMetadata({ data: "json, name=monday" })
   monday?: CreateNetworkSwitchPortScheduleRequestBodyPortScheduleMonday;
 
-  @Metadata({ data: "json, name=saturday" })
+  @SpeakeasyMetadata({ data: "json, name=saturday" })
   saturday?: CreateNetworkSwitchPortScheduleRequestBodyPortScheduleSaturday;
 
-  @Metadata({ data: "json, name=sunday" })
+  @SpeakeasyMetadata({ data: "json, name=sunday" })
   sunday?: CreateNetworkSwitchPortScheduleRequestBodyPortScheduleSunday;
 
-  @Metadata({ data: "json, name=thursday" })
+  @SpeakeasyMetadata({ data: "json, name=thursday" })
   thursday?: CreateNetworkSwitchPortScheduleRequestBodyPortScheduleThursday;
 
-  @Metadata({ data: "json, name=tuesday" })
+  @SpeakeasyMetadata({ data: "json, name=tuesday" })
   tuesday?: CreateNetworkSwitchPortScheduleRequestBodyPortScheduleTuesday;
 
-  @Metadata({ data: "json, name=wednesday" })
+  @SpeakeasyMetadata({ data: "json, name=wednesday" })
   wednesday?: CreateNetworkSwitchPortScheduleRequestBodyPortScheduleWednesday;
 }
 
 
 export class CreateNetworkSwitchPortScheduleRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=portSchedule" })
+  @SpeakeasyMetadata({ data: "json, name=portSchedule" })
   portSchedule?: CreateNetworkSwitchPortScheduleRequestBodyPortSchedule;
 }
 
 
 export class CreateNetworkSwitchPortScheduleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateNetworkSwitchPortSchedulePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateNetworkSwitchPortScheduleRequestBody;
 }
 
 
 export class CreateNetworkSwitchPortScheduleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createNetworkSwitchPortSchedule201ApplicationJsonObject?: Map<string, any>;
 }

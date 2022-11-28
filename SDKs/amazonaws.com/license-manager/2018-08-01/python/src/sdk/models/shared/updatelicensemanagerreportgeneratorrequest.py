@@ -1,19 +1,22 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import reportcontext
-from . import reportfrequency
-from . import reporttype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateLicenseManagerReportGeneratorRequest:
-    client_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClientToken' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    license_manager_report_generator_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LicenseManagerReportGeneratorArn' }})
-    report_context: reportcontext.ReportContext = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReportContext' }})
-    report_frequency: reportfrequency.ReportFrequency = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReportFrequency' }})
-    report_generator_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReportGeneratorName' }})
-    type: List[reporttype_enum.ReportTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    client_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ClientToken') }})
+    license_manager_report_generator_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LicenseManagerReportGeneratorArn') }})
+    report_context: ReportContext = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReportContext') }})
+    report_frequency: ReportFrequency = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReportFrequency') }})
+    report_generator_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReportGeneratorName') }})
+    type: List[ReportTypeEnum] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // JwtConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the configuration of a JWT authorizer. Required for the JWT authorizer type. Supported only for HTTP APIs.
 **/
 export class JwtConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Audience" })
+  @SpeakeasyMetadata({ data: "json, name=Audience" })
   audience?: string[];
 
-  @Metadata({ data: "json, name=Issuer" })
+  @SpeakeasyMetadata({ data: "json, name=Issuer" })
   issuer?: string;
 }

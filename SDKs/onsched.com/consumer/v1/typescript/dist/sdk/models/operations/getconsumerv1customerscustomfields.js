@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetConsumerV1CustomersCustomfieldsQueryParams = /** @class */ (function (_super) {
     __extends(GetConsumerV1CustomersCustomfieldsQueryParams, _super);
@@ -30,11 +30,11 @@ var GetConsumerV1CustomersCustomfieldsQueryParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=leadQuestions" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=leadQuestions" }),
         __metadata("design:type", Boolean)
     ], GetConsumerV1CustomersCustomfieldsQueryParams.prototype, "leadQuestions", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=locationId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locationId" }),
         __metadata("design:type", String)
     ], GetConsumerV1CustomersCustomfieldsQueryParams.prototype, "locationId", void 0);
     return GetConsumerV1CustomersCustomfieldsQueryParams;
@@ -46,7 +46,7 @@ var GetConsumerV1CustomersCustomfieldsRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetConsumerV1CustomersCustomfieldsQueryParams)
     ], GetConsumerV1CustomersCustomfieldsRequest.prototype, "queryParams", void 0);
     return GetConsumerV1CustomersCustomfieldsRequest;
@@ -58,15 +58,15 @@ var GetConsumerV1CustomersCustomfieldsResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetConsumerV1CustomersCustomfieldsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CustomFieldDefinitionListViewModel)
     ], GetConsumerV1CustomersCustomfieldsResponse.prototype, "customFieldDefinitionListViewModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetConsumerV1CustomersCustomfieldsResponse.prototype, "statusCode", void 0);
     return GetConsumerV1CustomersCustomfieldsResponse;

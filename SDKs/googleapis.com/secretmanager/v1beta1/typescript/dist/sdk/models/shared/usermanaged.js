@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Replica } from "./replica";
 // UserManaged
 /**
  * A replication policy that replicates the Secret payload into the locations specified in Secret.replication.user_managed.replicas
@@ -34,7 +34,7 @@ var UserManaged = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=replicas", elemType: shared.Replica }),
+        SpeakeasyMetadata({ data: "json, name=replicas", elemType: Replica }),
         __metadata("design:type", Array)
     ], UserManaged.prototype, "replicas", void 0);
     return UserManaged;

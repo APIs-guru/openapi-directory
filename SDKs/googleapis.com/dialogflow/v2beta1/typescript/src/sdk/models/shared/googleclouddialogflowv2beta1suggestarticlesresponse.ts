@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2beta1ArticleAnswer } from "./googleclouddialogflowv2beta1articleanswer";
+
 
 
 // GoogleCloudDialogflowV2beta1SuggestArticlesResponse
@@ -8,12 +8,12 @@ import { GoogleCloudDialogflowV2beta1ArticleAnswer } from "./googleclouddialogfl
  * The response message for Participants.SuggestArticles.
 **/
 export class GoogleCloudDialogflowV2beta1SuggestArticlesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=articleAnswers", elemType: shared.GoogleCloudDialogflowV2beta1ArticleAnswer })
+  @SpeakeasyMetadata({ data: "json, name=articleAnswers", elemType: GoogleCloudDialogflowV2beta1ArticleAnswer })
   articleAnswers?: GoogleCloudDialogflowV2beta1ArticleAnswer[];
 
-  @Metadata({ data: "json, name=contextSize" })
+  @SpeakeasyMetadata({ data: "json, name=contextSize" })
   contextSize?: number;
 
-  @Metadata({ data: "json, name=latestMessage" })
+  @SpeakeasyMetadata({ data: "json, name=latestMessage" })
   latestMessage?: string;
 }

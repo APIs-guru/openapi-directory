@@ -1,6 +1,7 @@
 
 
+
 export enum LogTypeEnum {
-    Audio = "AUDIO"
-,    Text = "TEXT"
+    Audio = "AUDIO",
+    Text = "TEXT"
 }

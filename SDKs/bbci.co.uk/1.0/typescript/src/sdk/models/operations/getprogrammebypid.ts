@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetProgrammeByPidPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pid" })
   pid: string;
 }
 
 
 export class GetProgrammeByPidQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=availability" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability" })
   availability: shared.AvailabilityEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=mixin" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mixin" })
   mixin?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rights" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rights" })
   rights: shared.RightsEnum;
 }
 
 
 export class GetProgrammeByPidRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetProgrammeByPidPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetProgrammeByPidQueryParams;
 }
 
 
 export class GetProgrammeByPidResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ibl?: any;
 }

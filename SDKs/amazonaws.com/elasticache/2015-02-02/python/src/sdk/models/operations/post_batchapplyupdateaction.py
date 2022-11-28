@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostBatchApplyUpdateActionActionEnum(str, Enum):
     BATCH_APPLY_UPDATE_ACTION = "BatchApplyUpdateAction"
@@ -10,8 +14,8 @@ class PostBatchApplyUpdateActionVersionEnum(str, Enum):
 
 @dataclass
 class PostBatchApplyUpdateActionQueryParams:
-    action: PostBatchApplyUpdateActionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostBatchApplyUpdateActionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostBatchApplyUpdateActionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostBatchApplyUpdateActionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostBatchApplyUpdateActionHeaders:
 
 @dataclass
 class PostBatchApplyUpdateActionRequest:
-    query_params: PostBatchApplyUpdateActionQueryParams = field(default=None)
-    headers: PostBatchApplyUpdateActionHeaders = field(default=None)
+    headers: PostBatchApplyUpdateActionHeaders = field()
+    query_params: PostBatchApplyUpdateActionQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostBatchApplyUpdateActionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

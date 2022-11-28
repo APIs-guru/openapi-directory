@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoRenewEnum } from "./autorenewenum";
 import { Limit } from "./limit";
 import { ProactiveEngagementStatusEnum } from "./proactiveengagementstatusenum";
 import { SubscriptionLimits } from "./subscriptionlimits";
+
 
 
 // Subscription
@@ -11,27 +11,27 @@ import { SubscriptionLimits } from "./subscriptionlimits";
  * Information about the Shield Advanced subscription for an account.
 **/
 export class Subscription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoRenew" })
+  @SpeakeasyMetadata({ data: "json, name=AutoRenew" })
   autoRenew?: AutoRenewEnum;
 
-  @Metadata({ data: "json, name=EndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=Limits", elemType: shared.Limit })
+  @SpeakeasyMetadata({ data: "json, name=Limits", elemType: Limit })
   limits?: Limit[];
 
-  @Metadata({ data: "json, name=ProactiveEngagementStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ProactiveEngagementStatus" })
   proactiveEngagementStatus?: ProactiveEngagementStatusEnum;
 
-  @Metadata({ data: "json, name=StartTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartTime" })
   startTime?: Date;
 
-  @Metadata({ data: "json, name=SubscriptionArn" })
+  @SpeakeasyMetadata({ data: "json, name=SubscriptionArn" })
   subscriptionArn?: string;
 
-  @Metadata({ data: "json, name=SubscriptionLimits" })
+  @SpeakeasyMetadata({ data: "json, name=SubscriptionLimits" })
   subscriptionLimits: SubscriptionLimits;
 
-  @Metadata({ data: "json, name=TimeCommitmentInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=TimeCommitmentInSeconds" })
   timeCommitmentInSeconds?: number;
 }

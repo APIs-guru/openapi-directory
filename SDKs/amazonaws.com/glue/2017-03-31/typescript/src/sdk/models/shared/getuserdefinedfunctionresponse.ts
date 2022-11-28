@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserDefinedFunction } from "./userdefinedfunction";
 
 
+
 export class GetUserDefinedFunctionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=UserDefinedFunction" })
+  @SpeakeasyMetadata({ data: "json, name=UserDefinedFunction" })
   userDefinedFunction?: UserDefinedFunction;
 }

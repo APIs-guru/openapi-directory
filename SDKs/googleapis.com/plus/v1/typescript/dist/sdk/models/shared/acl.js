@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PlusAclentryResource } from "./plusaclentryresource";
 var Acl = /** @class */ (function (_super) {
     __extends(Acl, _super);
     function Acl() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Acl.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=items", elemType: shared.PlusAclentryResource }),
+        SpeakeasyMetadata({ data: "json, name=items", elemType: PlusAclentryResource }),
         __metadata("design:type", Array)
     ], Acl.prototype, "items", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], Acl.prototype, "kind", void 0);
     return Acl;

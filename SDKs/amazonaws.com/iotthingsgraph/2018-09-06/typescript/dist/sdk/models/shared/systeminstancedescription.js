@@ -22,11 +22,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DefinitionDocument } from "./definitiondocument";
 import { MetricsConfiguration } from "./metricsconfiguration";
 import { SystemInstanceSummary } from "./systeminstancesummary";
+import { DependencyRevision } from "./dependencyrevision";
 // SystemInstanceDescription
 /**
  * An object that contains a system instance definition and summary information.
@@ -37,31 +37,31 @@ var SystemInstanceDescription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=definition" }),
+        SpeakeasyMetadata({ data: "json, name=definition" }),
         __metadata("design:type", DefinitionDocument)
     ], SystemInstanceDescription.prototype, "definition", void 0);
     __decorate([
-        Metadata({ data: "json, name=flowActionsRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=flowActionsRoleArn" }),
         __metadata("design:type", String)
     ], SystemInstanceDescription.prototype, "flowActionsRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=metricsConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=metricsConfiguration" }),
         __metadata("design:type", MetricsConfiguration)
     ], SystemInstanceDescription.prototype, "metricsConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=s3BucketName" }),
+        SpeakeasyMetadata({ data: "json, name=s3BucketName" }),
         __metadata("design:type", String)
     ], SystemInstanceDescription.prototype, "s3BucketName", void 0);
     __decorate([
-        Metadata({ data: "json, name=summary" }),
+        SpeakeasyMetadata({ data: "json, name=summary" }),
         __metadata("design:type", SystemInstanceSummary)
     ], SystemInstanceDescription.prototype, "summary", void 0);
     __decorate([
-        Metadata({ data: "json, name=validatedDependencyRevisions", elemType: shared.DependencyRevision }),
+        SpeakeasyMetadata({ data: "json, name=validatedDependencyRevisions", elemType: DependencyRevision }),
         __metadata("design:type", Array)
     ], SystemInstanceDescription.prototype, "validatedDependencyRevisions", void 0);
     __decorate([
-        Metadata({ data: "json, name=validatedNamespaceVersion" }),
+        SpeakeasyMetadata({ data: "json, name=validatedNamespaceVersion" }),
         __metadata("design:type", Number)
     ], SystemInstanceDescription.prototype, "validatedNamespaceVersion", void 0);
     return SystemInstanceDescription;

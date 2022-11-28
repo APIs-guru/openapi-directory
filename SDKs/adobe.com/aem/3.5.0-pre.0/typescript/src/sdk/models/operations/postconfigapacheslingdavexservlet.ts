@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostConfigApacheSlingDavExServletQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alias" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alias" })
   alias?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alias@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alias@TypeHint" })
   aliasAtTypeHint?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dav.create-absolute-uri" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dav.create-absolute-uri" })
   davCreateAbsoluteUri?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dav.create-absolute-uri@TypeHint" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dav.create-absolute-uri@TypeHint" })
   davCreateAbsoluteUriAtTypeHint?: string;
 }
 
 
 export class PostConfigApacheSlingDavExServletRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostConfigApacheSlingDavExServletQueryParams;
 }
 
 
 export class PostConfigApacheSlingDavExServletResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

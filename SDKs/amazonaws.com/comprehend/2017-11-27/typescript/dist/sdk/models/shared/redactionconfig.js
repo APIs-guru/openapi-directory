@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PiiEntitiesDetectionMaskModeEnum } from "./piientitiesdetectionmaskmodeenum";
 // RedactionConfig
 /**
@@ -34,15 +34,15 @@ var RedactionConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=MaskCharacter" }),
+        SpeakeasyMetadata({ data: "json, name=MaskCharacter" }),
         __metadata("design:type", String)
     ], RedactionConfig.prototype, "maskCharacter", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaskMode" }),
+        SpeakeasyMetadata({ data: "json, name=MaskMode" }),
         __metadata("design:type", String)
     ], RedactionConfig.prototype, "maskMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=PiiEntityTypes" }),
+        SpeakeasyMetadata({ data: "json, name=PiiEntityTypes" }),
         __metadata("design:type", Array)
     ], RedactionConfig.prototype, "piiEntityTypes", void 0);
     return RedactionConfig;

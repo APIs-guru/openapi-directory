@@ -1,107 +1,108 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateTokenHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class CreateTokenRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId: string;
 
-  @Metadata({ data: "json, name=clientSecret" })
+  @SpeakeasyMetadata({ data: "json, name=clientSecret" })
   clientSecret: string;
 
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=deviceCode" })
+  @SpeakeasyMetadata({ data: "json, name=deviceCode" })
   deviceCode: string;
 
-  @Metadata({ data: "json, name=grantType" })
+  @SpeakeasyMetadata({ data: "json, name=grantType" })
   grantType: string;
 
-  @Metadata({ data: "json, name=redirectUri" })
+  @SpeakeasyMetadata({ data: "json, name=redirectUri" })
   redirectUri?: string;
 
-  @Metadata({ data: "json, name=refreshToken" })
+  @SpeakeasyMetadata({ data: "json, name=refreshToken" })
   refreshToken?: string;
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope?: string[];
 }
 
 
 export class CreateTokenRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateTokenHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateTokenRequestBody;
 }
 
 
 export class CreateTokenResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   authorizationPendingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createTokenResponse?: shared.CreateTokenResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   expiredTokenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidClientException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidGrantException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidScopeException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   slowDownException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedClientException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unsupportedGrantTypeException?: any;
 }

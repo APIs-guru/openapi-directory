@@ -1,6 +1,7 @@
 
 
+
 export enum WorkspaceImageRequiredTenancyEnum {
-    Default = "DEFAULT"
-,    Dedicated = "DEDICATED"
+    Default = "DEFAULT",
+    Dedicated = "DEDICATED"
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateDatasetPathParams = /** @class */ (function (_super) {
     __extends(UpdateDatasetPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateDatasetPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=datasetName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=datasetName" }),
         __metadata("design:type", String)
     ], UpdateDatasetPathParams.prototype, "datasetName", void 0);
     return UpdateDatasetPathParams;
@@ -42,31 +42,31 @@ var UpdateDatasetHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateDatasetHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateDatasetHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateDatasetHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateDatasetHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateDatasetHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateDatasetHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateDatasetHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateDatasetHeaders;
@@ -82,11 +82,11 @@ var UpdateDatasetRequestBodyRetentionPeriod = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=numberOfDays" }),
+        SpeakeasyMetadata({ data: "json, name=numberOfDays" }),
         __metadata("design:type", Number)
     ], UpdateDatasetRequestBodyRetentionPeriod.prototype, "numberOfDays", void 0);
     __decorate([
-        Metadata({ data: "json, name=unlimited" }),
+        SpeakeasyMetadata({ data: "json, name=unlimited" }),
         __metadata("design:type", Boolean)
     ], UpdateDatasetRequestBodyRetentionPeriod.prototype, "unlimited", void 0);
     return UpdateDatasetRequestBodyRetentionPeriod;
@@ -102,11 +102,11 @@ var UpdateDatasetRequestBodyVersioningConfiguration = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=maxVersions" }),
+        SpeakeasyMetadata({ data: "json, name=maxVersions" }),
         __metadata("design:type", Number)
     ], UpdateDatasetRequestBodyVersioningConfiguration.prototype, "maxVersions", void 0);
     __decorate([
-        Metadata({ data: "json, name=unlimited" }),
+        SpeakeasyMetadata({ data: "json, name=unlimited" }),
         __metadata("design:type", Boolean)
     ], UpdateDatasetRequestBodyVersioningConfiguration.prototype, "unlimited", void 0);
     return UpdateDatasetRequestBodyVersioningConfiguration;
@@ -118,27 +118,27 @@ var UpdateDatasetRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=actions", elemType: shared.DatasetAction }),
+        SpeakeasyMetadata({ data: "json, name=actions", elemType: shared.DatasetAction }),
         __metadata("design:type", Array)
     ], UpdateDatasetRequestBody.prototype, "actions", void 0);
     __decorate([
-        Metadata({ data: "json, name=contentDeliveryRules", elemType: shared.DatasetContentDeliveryRule }),
+        SpeakeasyMetadata({ data: "json, name=contentDeliveryRules", elemType: shared.DatasetContentDeliveryRule }),
         __metadata("design:type", Array)
     ], UpdateDatasetRequestBody.prototype, "contentDeliveryRules", void 0);
     __decorate([
-        Metadata({ data: "json, name=lateDataRules", elemType: shared.LateDataRule }),
+        SpeakeasyMetadata({ data: "json, name=lateDataRules", elemType: shared.LateDataRule }),
         __metadata("design:type", Array)
     ], UpdateDatasetRequestBody.prototype, "lateDataRules", void 0);
     __decorate([
-        Metadata({ data: "json, name=retentionPeriod" }),
+        SpeakeasyMetadata({ data: "json, name=retentionPeriod" }),
         __metadata("design:type", UpdateDatasetRequestBodyRetentionPeriod)
     ], UpdateDatasetRequestBody.prototype, "retentionPeriod", void 0);
     __decorate([
-        Metadata({ data: "json, name=triggers", elemType: shared.DatasetTrigger }),
+        SpeakeasyMetadata({ data: "json, name=triggers", elemType: shared.DatasetTrigger }),
         __metadata("design:type", Array)
     ], UpdateDatasetRequestBody.prototype, "triggers", void 0);
     __decorate([
-        Metadata({ data: "json, name=versioningConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=versioningConfiguration" }),
         __metadata("design:type", UpdateDatasetRequestBodyVersioningConfiguration)
     ], UpdateDatasetRequestBody.prototype, "versioningConfiguration", void 0);
     return UpdateDatasetRequestBody;
@@ -150,15 +150,15 @@ var UpdateDatasetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateDatasetPathParams)
     ], UpdateDatasetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateDatasetHeaders)
     ], UpdateDatasetRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateDatasetRequestBody)
     ], UpdateDatasetRequest.prototype, "request", void 0);
     return UpdateDatasetRequest;
@@ -170,31 +170,31 @@ var UpdateDatasetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateDatasetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDatasetResponse.prototype, "internalFailureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDatasetResponse.prototype, "invalidRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDatasetResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDatasetResponse.prototype, "serviceUnavailableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateDatasetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateDatasetResponse.prototype, "throttlingException", void 0);
     return UpdateDatasetResponse;

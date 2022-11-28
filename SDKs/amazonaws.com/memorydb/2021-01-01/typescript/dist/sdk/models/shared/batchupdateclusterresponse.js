@@ -22,19 +22,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Cluster } from "./cluster";
+import { UnprocessedCluster } from "./unprocessedcluster";
 var BatchUpdateClusterResponse = /** @class */ (function (_super) {
     __extends(BatchUpdateClusterResponse, _super);
     function BatchUpdateClusterResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ProcessedClusters", elemType: shared.Cluster }),
+        SpeakeasyMetadata({ data: "json, name=ProcessedClusters", elemType: Cluster }),
         __metadata("design:type", Array)
     ], BatchUpdateClusterResponse.prototype, "processedClusters", void 0);
     __decorate([
-        Metadata({ data: "json, name=UnprocessedClusters", elemType: shared.UnprocessedCluster }),
+        SpeakeasyMetadata({ data: "json, name=UnprocessedClusters", elemType: UnprocessedCluster }),
         __metadata("design:type", Array)
     ], BatchUpdateClusterResponse.prototype, "unprocessedClusters", void 0);
     return BatchUpdateClusterResponse;

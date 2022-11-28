@@ -1,7 +1,8 @@
 
 
+
 export enum PaymentServiceEnum {
-    Payments = "payments"
-,    BulkPayments = "bulk-payments"
-,    PeriodicPayments = "periodic-payments"
+    Payments = "payments",
+    BulkPayments = "bulk-payments",
+    PeriodicPayments = "periodic-payments"
 }

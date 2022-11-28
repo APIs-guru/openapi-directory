@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SystemsManagerAgent } from "./systemsmanageragent";
 // AdditionalInstanceConfiguration
 /**
@@ -34,11 +34,11 @@ var AdditionalInstanceConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=systemsManagerAgent" }),
+        SpeakeasyMetadata({ data: "json, name=systemsManagerAgent" }),
         __metadata("design:type", SystemsManagerAgent)
     ], AdditionalInstanceConfiguration.prototype, "systemsManagerAgent", void 0);
     __decorate([
-        Metadata({ data: "json, name=userDataOverride" }),
+        SpeakeasyMetadata({ data: "json, name=userDataOverride" }),
         __metadata("design:type", String)
     ], AdditionalInstanceConfiguration.prototype, "userDataOverride", void 0);
     return AdditionalInstanceConfiguration;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LookupDetails
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about a lookup column whose value comes from the associated relationship.
 **/
 export class LookupDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=relationshipColumn" })
+  @SpeakeasyMetadata({ data: "json, name=relationshipColumn" })
   relationshipColumn?: string;
 
-  @Metadata({ data: "json, name=relationshipColumnId" })
+  @SpeakeasyMetadata({ data: "json, name=relationshipColumnId" })
   relationshipColumnId?: string;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceActionSummary } from "./serviceactionsummary";
+
 
 
 // ServiceActionDetail
@@ -7,9 +8,9 @@ import { ServiceActionSummary } from "./serviceactionsummary";
  * An object containing detailed information about the self-service action.
 **/
 export class ServiceActionDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Definition" })
+  @SpeakeasyMetadata({ data: "json, name=Definition" })
   definition?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ServiceActionSummary" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceActionSummary" })
   serviceActionSummary?: ServiceActionSummary;
 }

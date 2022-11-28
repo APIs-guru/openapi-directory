@@ -1,6 +1,7 @@
 
 
+
 export enum ObjectStorageServerProtocolEnum {
-    Https = "HTTPS"
-,    Http = "HTTP"
+    Https = "HTTPS",
+    Http = "HTTP"
 }

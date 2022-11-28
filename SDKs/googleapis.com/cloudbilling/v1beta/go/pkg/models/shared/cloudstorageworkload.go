@@ -1,5 +1,7 @@
 package shared
 
+// CloudStorageWorkload
+// Specifies usage of Cloud Storage resources.
 type CloudStorageWorkload struct {
 	DataRetrieval *Usage         `json:"dataRetrieval,omitempty"`
 	DataStored    *Usage         `json:"dataStored,omitempty"`

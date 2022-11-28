@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CheckError } from "./checkerror";
 import { CheckInfo } from "./checkinfo";
 import { QuotaInfo } from "./quotainfo";

@@ -15,10 +15,14 @@ type AttachObjectHeaders struct {
 	XAmzDataPartition string  `header:"style=simple,explode=false,name=x-amz-data-partition"`
 }
 
+// AttachObjectRequestBodyChildReference
+// The reference that identifies an object.
 type AttachObjectRequestBodyChildReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }
 
+// AttachObjectRequestBodyParentReference
+// The reference that identifies an object.
 type AttachObjectRequestBodyParentReference struct {
 	Selector *string `json:"Selector,omitempty"`
 }

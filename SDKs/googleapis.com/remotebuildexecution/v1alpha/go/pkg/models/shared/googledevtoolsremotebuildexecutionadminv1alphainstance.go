@@ -9,6 +9,8 @@ const (
 	GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstanceStateEnumInactive         GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstanceStateEnum = "INACTIVE"
 )
 
+// GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance
+// Instance conceptually encapsulates all Remote Build Execution resources for remote builds. An instance consists of storage and compute resources (for example, `ContentAddressableStorage`, `ActionCache`, `WorkerPools`) used for running remote builds. All Remote Build Execution API calls are scoped to an instance.
 type GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance struct {
 	FeaturePolicy  *GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy     `json:"featurePolicy,omitempty"`
 	Location       *string                                                          `json:"location,omitempty"`

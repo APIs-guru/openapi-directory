@@ -1,6 +1,7 @@
 
 
+
 export enum ManagedScalingStatusEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

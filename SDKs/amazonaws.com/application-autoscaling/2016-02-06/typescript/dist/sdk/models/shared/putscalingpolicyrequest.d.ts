@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PolicyTypeEnum } from "./policytypeenum";
 import { ScalableDimensionEnum } from "./scalabledimensionenum";
 import { ServiceNamespaceEnum } from "./servicenamespaceenum";

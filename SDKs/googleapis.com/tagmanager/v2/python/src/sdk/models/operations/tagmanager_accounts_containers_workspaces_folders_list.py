@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesFoldersListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class TagmanagerAccountsContainersWorkspacesFoldersListQueryParams:
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesFoldersListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesFoldersListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class TagmanagerAccountsContainersWorkspacesFoldersListSecurity:
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesFoldersListRequest:
-    path_params: TagmanagerAccountsContainersWorkspacesFoldersListPathParams = field(default=None)
-    query_params: TagmanagerAccountsContainersWorkspacesFoldersListQueryParams = field(default=None)
-    security: TagmanagerAccountsContainersWorkspacesFoldersListSecurity = field(default=None)
+    path_params: TagmanagerAccountsContainersWorkspacesFoldersListPathParams = field()
+    query_params: TagmanagerAccountsContainersWorkspacesFoldersListQueryParams = field()
+    security: TagmanagerAccountsContainersWorkspacesFoldersListSecurity = field()
     
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesFoldersListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_folders_response: Optional[shared.ListFoldersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

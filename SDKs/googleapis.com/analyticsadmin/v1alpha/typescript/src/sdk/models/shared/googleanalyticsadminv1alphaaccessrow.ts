@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAnalyticsAdminV1alphaAccessDimensionValue } from "./googleanalyticsadminv1alphaaccessdimensionvalue";
 import { GoogleAnalyticsAdminV1alphaAccessMetricValue } from "./googleanalyticsadminv1alphaaccessmetricvalue";
+
 
 
 // GoogleAnalyticsAdminV1alphaAccessRow
@@ -9,9 +9,9 @@ import { GoogleAnalyticsAdminV1alphaAccessMetricValue } from "./googleanalyticsa
  * Access report data for each row.
 **/
 export class GoogleAnalyticsAdminV1alphaAccessRow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensionValues", elemType: shared.GoogleAnalyticsAdminV1alphaAccessDimensionValue })
+  @SpeakeasyMetadata({ data: "json, name=dimensionValues", elemType: GoogleAnalyticsAdminV1alphaAccessDimensionValue })
   dimensionValues?: GoogleAnalyticsAdminV1alphaAccessDimensionValue[];
 
-  @Metadata({ data: "json, name=metricValues", elemType: shared.GoogleAnalyticsAdminV1alphaAccessMetricValue })
+  @SpeakeasyMetadata({ data: "json, name=metricValues", elemType: GoogleAnalyticsAdminV1alphaAccessMetricValue })
   metricValues?: GoogleAnalyticsAdminV1alphaAccessMetricValue[];
 }

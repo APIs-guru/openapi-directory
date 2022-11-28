@@ -1,5 +1,7 @@
 package shared
 
+// Pod
+// Kubernetes Pod.
 type Pod struct {
 	Containers []Container `json:"containers,omitempty"`
 	Labels     []Label     `json:"labels,omitempty"`

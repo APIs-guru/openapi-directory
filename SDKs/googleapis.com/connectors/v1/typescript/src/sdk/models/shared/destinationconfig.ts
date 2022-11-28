@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Destination } from "./destination";
+
 
 
 // DestinationConfig
@@ -8,9 +8,9 @@ import { Destination } from "./destination";
  * Define the Connectors target endpoint.
 **/
 export class DestinationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinations", elemType: shared.Destination })
+  @SpeakeasyMetadata({ data: "json, name=destinations", elemType: Destination })
   destinations?: Destination[];
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 }

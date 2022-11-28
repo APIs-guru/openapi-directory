@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class FantasyPlayersWithAdpFormatEnum(str, Enum):
     XML = "XML"
@@ -8,17 +9,17 @@ class FantasyPlayersWithAdpFormatEnum(str, Enum):
 
 @dataclass
 class FantasyPlayersWithAdpPathParams:
-    format: FantasyPlayersWithAdpFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    format: FantasyPlayersWithAdpFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class FantasyPlayersWithAdpRequest:
-    path_params: FantasyPlayersWithAdpPathParams = field(default=None)
+    path_params: FantasyPlayersWithAdpPathParams = field()
     
 
 @dataclass
 class FantasyPlayersWithAdpResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     fantasy_players: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

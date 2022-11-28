@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum EntryContentMediaEnum {
     ApplicationFhirPlusJson = "application/fhir+json"
@@ -6,15 +7,15 @@ export enum EntryContentMediaEnum {
 
 
 export class EntryContent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=careContextReference" })
+  @SpeakeasyMetadata({ data: "json, name=careContextReference" })
   careContextReference: string;
 
-  @Metadata({ data: "json, name=checksum" })
+  @SpeakeasyMetadata({ data: "json, name=checksum" })
   checksum: string;
 
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content: string;
 
-  @Metadata({ data: "json, name=media" })
+  @SpeakeasyMetadata({ data: "json, name=media" })
   media: EntryContentMediaEnum;
 }

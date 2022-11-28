@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetMessagesSortOrderEnum(str, Enum):
@@ -15,19 +16,19 @@ class GetMessagesQueryParams:
 
 @dataclass
 class GetMessagesSecurity:
-    basic_auth: shared.SchemeBasicAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_auth: shared.SchemeBasicAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class GetMessagesRequest:
-    query_params: GetMessagesQueryParams = field(default=None)
-    security: GetMessagesSecurity = field(default=None)
+    query_params: GetMessagesQueryParams = field()
+    security: GetMessagesSecurity = field()
     
 
 @dataclass
 class GetMessagesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     messages: Optional[List[shared.Message]] = field(default=None)
-    status_code: int = field(default=None)
     

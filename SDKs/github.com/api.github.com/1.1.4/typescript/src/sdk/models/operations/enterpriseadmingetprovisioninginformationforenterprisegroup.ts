@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EnterpriseAdminGetProvisioningInformationForEnterpriseGroupPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
   enterprise: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=scim_group_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=scim_group_id" })
   scimGroupId: string;
 }
 
 
 export class EnterpriseAdminGetProvisioningInformationForEnterpriseGroupQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=excludedAttributes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=excludedAttributes" })
   excludedAttributes?: string;
 }
 
 
 export class EnterpriseAdminGetProvisioningInformationForEnterpriseGroupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EnterpriseAdminGetProvisioningInformationForEnterpriseGroupPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: EnterpriseAdminGetProvisioningInformationForEnterpriseGroupQueryParams;
 }
 
 
 export class EnterpriseAdminGetProvisioningInformationForEnterpriseGroupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scimEnterpriseGroup?: shared.ScimEnterpriseGroup;
 }

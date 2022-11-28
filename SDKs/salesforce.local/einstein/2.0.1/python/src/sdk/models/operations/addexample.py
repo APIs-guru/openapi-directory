@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class AddExamplePathParams:
-    dataset_id: str = field(default=None, metadata={'path_param': { 'field_name': 'datasetId', 'style': 'simple', 'explode': False }})
+    dataset_id: str = field(metadata={'path_param': { 'field_name': 'datasetId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,19 +17,19 @@ class AddExampleRequestBody:
 
 @dataclass
 class AddExampleSecurity:
-    bearer_token: shared.SchemeBearerToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_token: shared.SchemeBearerToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class AddExampleRequest:
-    path_params: AddExamplePathParams = field(default=None)
+    path_params: AddExamplePathParams = field()
+    security: AddExampleSecurity = field()
     request: Optional[AddExampleRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
-    security: AddExampleSecurity = field(default=None)
     
 
 @dataclass
 class AddExampleResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     example: Optional[shared.Example] = field(default=None)
-    status_code: int = field(default=None)
     

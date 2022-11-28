@@ -1,4 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// GitLabRepositoryIdInput
+/** 
+ * GitLabRepositoryId identifies a specific repository hosted on GitLab.com or GitLabEnterprise
+**/
+export class GitLabRepositoryIdInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=id" })
+  id?: string;
+}
 
 
 // GitLabRepositoryId
@@ -6,9 +17,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * GitLabRepositoryId identifies a specific repository hosted on GitLab.com or GitLabEnterprise
 **/
 export class GitLabRepositoryId extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=webhookId" })
+  @SpeakeasyMetadata({ data: "json, name=webhookId" })
   webhookId?: number;
 }

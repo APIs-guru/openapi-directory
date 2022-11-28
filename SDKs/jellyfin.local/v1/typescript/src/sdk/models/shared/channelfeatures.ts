@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChannelMediaContentTypeEnum } from "./channelmediacontenttypeenum";
 import { ChannelItemSortFieldEnum } from "./channelitemsortfieldenum";
 import { ChannelMediaTypeEnum } from "./channelmediatypeenum";
 
 
+
 export class ChannelFeatures extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoRefreshLevels" })
+  @SpeakeasyMetadata({ data: "json, name=AutoRefreshLevels" })
   autoRefreshLevels?: number;
 
-  @Metadata({ data: "json, name=CanFilter" })
+  @SpeakeasyMetadata({ data: "json, name=CanFilter" })
   canFilter?: boolean;
 
-  @Metadata({ data: "json, name=CanSearch" })
+  @SpeakeasyMetadata({ data: "json, name=CanSearch" })
   canSearch?: boolean;
 
-  @Metadata({ data: "json, name=ContentTypes" })
+  @SpeakeasyMetadata({ data: "json, name=ContentTypes" })
   contentTypes?: ChannelMediaContentTypeEnum[];
 
-  @Metadata({ data: "json, name=DefaultSortFields" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultSortFields" })
   defaultSortFields?: ChannelItemSortFieldEnum[];
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=MaxPageSize" })
+  @SpeakeasyMetadata({ data: "json, name=MaxPageSize" })
   maxPageSize?: number;
 
-  @Metadata({ data: "json, name=MediaTypes" })
+  @SpeakeasyMetadata({ data: "json, name=MediaTypes" })
   mediaTypes?: ChannelMediaTypeEnum[];
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=SupportsContentDownloading" })
+  @SpeakeasyMetadata({ data: "json, name=SupportsContentDownloading" })
   supportsContentDownloading?: boolean;
 
-  @Metadata({ data: "json, name=SupportsLatestMedia" })
+  @SpeakeasyMetadata({ data: "json, name=SupportsLatestMedia" })
   supportsLatestMedia?: boolean;
 
-  @Metadata({ data: "json, name=SupportsSortOrderToggle" })
+  @SpeakeasyMetadata({ data: "json, name=SupportsSortOrderToggle" })
   supportsSortOrderToggle?: boolean;
 }

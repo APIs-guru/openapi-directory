@@ -18,7 +18,7 @@ class PostSetupV1ResourcegroupsRequest:
 
 @dataclass
 class PostSetupV1ResourcegroupsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     resource_group_view_model: Optional[shared.ResourceGroupViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

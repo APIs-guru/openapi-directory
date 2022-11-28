@@ -61,6 +61,7 @@ from .content_reference_attachment import *
 from .content_submodule import *
 from .content_symlink import *
 from .content_traffic import *
+from .content_tree import *
 from .contributor import *
 from .contributor_activity import *
 from .credential_authorization import *

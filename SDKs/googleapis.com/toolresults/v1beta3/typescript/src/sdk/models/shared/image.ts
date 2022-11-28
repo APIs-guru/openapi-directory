@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Status } from "./status";
 import { ToolOutputReference } from "./tooloutputreference";
 import { Thumbnail } from "./thumbnail";
+
 
 
 // Image
@@ -9,15 +10,15 @@ import { Thumbnail } from "./thumbnail";
  * An image, with a link to the main image and a thumbnail.
 **/
 export class Image extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Status;
 
-  @Metadata({ data: "json, name=sourceImage" })
+  @SpeakeasyMetadata({ data: "json, name=sourceImage" })
   sourceImage?: ToolOutputReference;
 
-  @Metadata({ data: "json, name=stepId" })
+  @SpeakeasyMetadata({ data: "json, name=stepId" })
   stepId?: string;
 
-  @Metadata({ data: "json, name=thumbnail" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnail" })
   thumbnail?: Thumbnail;
 }

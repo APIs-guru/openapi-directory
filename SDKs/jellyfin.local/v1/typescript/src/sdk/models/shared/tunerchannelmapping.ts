@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TunerChannelMapping extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ProviderChannelId" })
+  @SpeakeasyMetadata({ data: "json, name=ProviderChannelId" })
   providerChannelId?: string;
 
-  @Metadata({ data: "json, name=ProviderChannelName" })
+  @SpeakeasyMetadata({ data: "json, name=ProviderChannelName" })
   providerChannelName?: string;
 }

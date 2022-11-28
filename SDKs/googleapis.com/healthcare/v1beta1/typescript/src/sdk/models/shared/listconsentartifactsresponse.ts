@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConsentArtifact } from "./consentartifact";
 
 
+
 export class ListConsentArtifactsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consentArtifacts", elemType: shared.ConsentArtifact })
+  @SpeakeasyMetadata({ data: "json, name=consentArtifacts", elemType: ConsentArtifact })
   consentArtifacts?: ConsentArtifact[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

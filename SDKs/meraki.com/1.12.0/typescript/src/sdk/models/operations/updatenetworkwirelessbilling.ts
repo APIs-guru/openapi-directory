@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkWirelessBillingPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
@@ -12,61 +13,61 @@ export class UpdateNetworkWirelessBillingPathParams extends SpeakeasyBase {
  * The uplink bandwidth settings for the pricing plan.
 **/
 export class UpdateNetworkWirelessBillingRequestBodyPlansBandwidthLimits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=limitDown" })
+  @SpeakeasyMetadata({ data: "json, name=limitDown" })
   limitDown?: number;
 
-  @Metadata({ data: "json, name=limitUp" })
+  @SpeakeasyMetadata({ data: "json, name=limitUp" })
   limitUp?: number;
 }
 
 export enum UpdateNetworkWirelessBillingRequestBodyPlansTimeLimitEnum {
-    OneHour = "1 hour"
-,    OneDay = "1 day"
-,    OneWeek = "1 week"
-,    ThirtyDays = "30 days"
+    OneHour = "1 hour",
+    OneDay = "1 day",
+    OneWeek = "1 week",
+    ThirtyDays = "30 days"
 }
 
 
 export class UpdateNetworkWirelessBillingRequestBodyPlans extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bandwidthLimits" })
+  @SpeakeasyMetadata({ data: "json, name=bandwidthLimits" })
   bandwidthLimits: UpdateNetworkWirelessBillingRequestBodyPlansBandwidthLimits;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price: number;
 
-  @Metadata({ data: "json, name=timeLimit" })
+  @SpeakeasyMetadata({ data: "json, name=timeLimit" })
   timeLimit: UpdateNetworkWirelessBillingRequestBodyPlansTimeLimitEnum;
 }
 
 
 export class UpdateNetworkWirelessBillingRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: string;
 
-  @Metadata({ data: "json, name=plans", elemType: operations.UpdateNetworkWirelessBillingRequestBodyPlans })
+  @SpeakeasyMetadata({ data: "json, name=plans", elemType: UpdateNetworkWirelessBillingRequestBodyPlans })
   plans?: UpdateNetworkWirelessBillingRequestBodyPlans[];
 }
 
 
 export class UpdateNetworkWirelessBillingRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkWirelessBillingPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkWirelessBillingRequestBody;
 }
 
 
 export class UpdateNetworkWirelessBillingResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkWirelessBilling200ApplicationJsonObject?: Map<string, any>;
 }

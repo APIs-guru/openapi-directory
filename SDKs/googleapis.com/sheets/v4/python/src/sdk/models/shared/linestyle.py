@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class LineStyleTypeEnum(str, Enum):
     LINE_DASH_TYPE_UNSPECIFIED = "LINE_DASH_TYPE_UNSPECIFIED"
@@ -17,6 +19,10 @@ class LineStyleTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class LineStyle:
-    type: Optional[LineStyleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    width: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
+    r"""LineStyle
+    Properties that describe the style of a line.
+    """
+    
+    type: Optional[LineStyleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    width: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('width') }})
     

@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResponseHeader } from "./responseheader";
 import { Operation } from "./operation";
 
 
+
 export class ManagedZoneOperationsListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=header" })
+  @SpeakeasyMetadata({ data: "json, name=header" })
   header?: ResponseHeader;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=operations", elemType: shared.Operation })
+  @SpeakeasyMetadata({ data: "json, name=operations", elemType: Operation })
   operations?: Operation[];
 }

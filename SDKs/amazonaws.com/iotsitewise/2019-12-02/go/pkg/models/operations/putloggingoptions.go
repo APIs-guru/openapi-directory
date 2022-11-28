@@ -14,6 +14,8 @@ type PutLoggingOptionsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// PutLoggingOptionsRequestBodyLoggingOptions
+// Contains logging options.
 type PutLoggingOptionsRequestBodyLoggingOptions struct {
 	Level *shared.LoggingLevelEnum `json:"level,omitempty"`
 }

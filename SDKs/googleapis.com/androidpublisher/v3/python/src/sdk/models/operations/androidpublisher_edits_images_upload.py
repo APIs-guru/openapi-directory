@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class AndroidpublisherEditsImagesUploadImageTypeEnum(str, Enum):
@@ -16,10 +17,10 @@ class AndroidpublisherEditsImagesUploadImageTypeEnum(str, Enum):
 
 @dataclass
 class AndroidpublisherEditsImagesUploadPathParams:
-    edit_id: str = field(default=None, metadata={'path_param': { 'field_name': 'editId', 'style': 'simple', 'explode': False }})
-    image_type: AndroidpublisherEditsImagesUploadImageTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'imageType', 'style': 'simple', 'explode': False }})
-    language: str = field(default=None, metadata={'path_param': { 'field_name': 'language', 'style': 'simple', 'explode': False }})
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    edit_id: str = field(metadata={'path_param': { 'field_name': 'editId', 'style': 'simple', 'explode': False }})
+    image_type: AndroidpublisherEditsImagesUploadImageTypeEnum = field(metadata={'path_param': { 'field_name': 'imageType', 'style': 'simple', 'explode': False }})
+    language: str = field(metadata={'path_param': { 'field_name': 'language', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -39,20 +40,20 @@ class AndroidpublisherEditsImagesUploadQueryParams:
 
 @dataclass
 class AndroidpublisherEditsImagesUploadSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherEditsImagesUploadRequest:
-    path_params: AndroidpublisherEditsImagesUploadPathParams = field(default=None)
-    query_params: AndroidpublisherEditsImagesUploadQueryParams = field(default=None)
-    security: AndroidpublisherEditsImagesUploadSecurity = field(default=None)
+    path_params: AndroidpublisherEditsImagesUploadPathParams = field()
+    query_params: AndroidpublisherEditsImagesUploadQueryParams = field()
+    security: AndroidpublisherEditsImagesUploadSecurity = field()
     
 
 @dataclass
 class AndroidpublisherEditsImagesUploadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     images_upload_response: Optional[shared.ImagesUploadResponse] = field(default=None)
-    status_code: int = field(default=None)
     

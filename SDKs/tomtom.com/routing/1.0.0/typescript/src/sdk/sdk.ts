@@ -1,18 +1,15 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://api.tomtom.com",
+export const ServerList = [
+	"https://api.tomtom.com",
 ] as const;
 
 export function WithServerURL(
@@ -23,13 +20,13 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
@@ -38,44 +35,50 @@ export function WithSecurity(security: Security): OptsFunc {
     security = new Security(security);
   }
   return (sdk: SDK) => {
-    sdk.security = security;
+    sdk._security = security;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  public _security?: Security;
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
+    if (!this._securityClient) {
+      if (this._security) {
+        this._securityClient = utils.CreateSecurityClient(
+          this._defaultClient,
+          this._security
         );
       } else {
-        this.securityClient = this.defaultClient;
+        this._securityClient = this._defaultClient;
       }
     }
+    
   }
   
-  // GetRoutingVersionNumberCalculateReachableRangeOriginContentType - Reachable Range
-  /** 
+  /**
+   * getRoutingVersionNumberCalculateReachableRangeOriginContentType - Reachable Range
+   *
    * Calculates a set of locations that can be reached from the origin point.
   **/
-  GetRoutingVersionNumberCalculateReachableRangeOriginContentType(
+  getRoutingVersionNumberCalculateReachableRangeOriginContentType(
     req: operations.GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeResponse> {
@@ -83,11 +86,12 @@ export class SDK {
       req = new operations.GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/routing/{versionNumber}/calculateReachableRange/{origin}/{contentType}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -96,38 +100,39 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetRoutingVersionNumberCalculateReachableRangeOriginContentTypeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 408:
+          case httpRes?.status == 408:
             break;
-          case 414:
+          case httpRes?.status == 414:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
-          case 504:
+          case httpRes?.status == 504:
             break;
-          case 596:
+          case httpRes?.status == 596:
             break;
         }
 
@@ -137,11 +142,12 @@ export class SDK {
   }
 
   
-  // GetRoutingVersionNumberCalculateRouteLocationsContentType - Calculate Route
-  /** 
+  /**
+   * getRoutingVersionNumberCalculateRouteLocationsContentType - Calculate Route
+   *
    * Calculates a route between an origin and a destination.
   **/
-  GetRoutingVersionNumberCalculateRouteLocationsContentType(
+  getRoutingVersionNumberCalculateRouteLocationsContentType(
     req: operations.GetRoutingVersionNumberCalculateRouteLocationsContentTypeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRoutingVersionNumberCalculateRouteLocationsContentTypeResponse> {
@@ -149,11 +155,12 @@ export class SDK {
       req = new operations.GetRoutingVersionNumberCalculateRouteLocationsContentTypeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/routing/{versionNumber}/calculateRoute/{locations}/{contentType}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -162,38 +169,39 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRoutingVersionNumberCalculateRouteLocationsContentTypeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetRoutingVersionNumberCalculateRouteLocationsContentTypeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 408:
+          case httpRes?.status == 408:
             break;
-          case 414:
+          case httpRes?.status == 414:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
-          case 504:
+          case httpRes?.status == 504:
             break;
-          case 596:
+          case httpRes?.status == 596:
             break;
         }
 
@@ -203,11 +211,12 @@ export class SDK {
   }
 
   
-  // PostRoutingVersionNumberCalculateReachableRangeOriginContentType - Reachable Range
-  /** 
+  /**
+   * postRoutingVersionNumberCalculateReachableRangeOriginContentType - Reachable Range
+   *
    * Calculates a set of locations that can be reached from the origin point. POST method handles additionally parameters: <em>supportingPoints</em>, <em>allowVignette</em>, <em>avoidVignette</em>, <em>avoidAreas</em>.
   **/
-  PostRoutingVersionNumberCalculateReachableRangeOriginContentType(
+  postRoutingVersionNumberCalculateReachableRangeOriginContentType(
     req: operations.PostRoutingVersionNumberCalculateReachableRangeOriginContentTypeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostRoutingVersionNumberCalculateReachableRangeOriginContentTypeResponse> {
@@ -215,22 +224,22 @@ export class SDK {
       req = new operations.PostRoutingVersionNumberCalculateReachableRangeOriginContentTypeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/routing/{versionNumber}/calculateReachableRange/{origin}/{contentType}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -241,41 +250,42 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostRoutingVersionNumberCalculateReachableRangeOriginContentTypeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostRoutingVersionNumberCalculateReachableRangeOriginContentTypeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 408:
+          case httpRes?.status == 408:
             break;
-          case 414:
+          case httpRes?.status == 414:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
-          case 504:
+          case httpRes?.status == 504:
             break;
-          case 596:
+          case httpRes?.status == 596:
             break;
         }
 
@@ -285,11 +295,12 @@ export class SDK {
   }
 
   
-  // PostRoutingVersionNumberCalculateRouteLocationsContentType - Calculate Route
-  /** 
+  /**
+   * postRoutingVersionNumberCalculateRouteLocationsContentType - Calculate Route
+   *
    * Calculates a route between an origin and a destination. POST method handles additionally parameters: <em>supportingPoints</em>, <em>allowVignette</em>, <em>avoidVignette</em>, <em>avoidAreas</em>.
   **/
-  PostRoutingVersionNumberCalculateRouteLocationsContentType(
+  postRoutingVersionNumberCalculateRouteLocationsContentType(
     req: operations.PostRoutingVersionNumberCalculateRouteLocationsContentTypeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostRoutingVersionNumberCalculateRouteLocationsContentTypeResponse> {
@@ -297,22 +308,22 @@ export class SDK {
       req = new operations.PostRoutingVersionNumberCalculateRouteLocationsContentTypeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/routing/{versionNumber}/calculateRoute/{locations}/{contentType}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -323,41 +334,42 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostRoutingVersionNumberCalculateRouteLocationsContentTypeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostRoutingVersionNumberCalculateRouteLocationsContentTypeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
+          case httpRes?.status == 400:
             break;
-          case 403:
+          case httpRes?.status == 403:
             break;
-          case 404:
+          case httpRes?.status == 404:
             break;
-          case 405:
+          case httpRes?.status == 405:
             break;
-          case 408:
+          case httpRes?.status == 408:
             break;
-          case 414:
+          case httpRes?.status == 414:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 502:
+          case httpRes?.status == 502:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
-          case 504:
+          case httpRes?.status == 504:
             break;
-          case 596:
+          case httpRes?.status == 596:
             break;
         }
 

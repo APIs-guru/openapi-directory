@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ContentReferenceAttachment
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Content Reference attachments allow you to provide context around URLs posted in comments
 **/
 export class ContentReferenceAttachment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=node_id" })
+  @SpeakeasyMetadata({ data: "json, name=node_id" })
   nodeId?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 }

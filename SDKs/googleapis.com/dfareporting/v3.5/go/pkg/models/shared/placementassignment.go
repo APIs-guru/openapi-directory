@@ -1,5 +1,7 @@
 package shared
 
+// PlacementAssignment
+// Placement Assignment.
 type PlacementAssignment struct {
 	Active                    *bool           `json:"active,omitempty"`
 	PlacementID               *string         `json:"placementId,omitempty"`

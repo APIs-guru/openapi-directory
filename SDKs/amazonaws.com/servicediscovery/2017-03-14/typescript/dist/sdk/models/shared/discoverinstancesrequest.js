@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HealthStatusFilterEnum } from "./healthstatusfilterenum";
 var DiscoverInstancesRequest = /** @class */ (function (_super) {
     __extends(DiscoverInstancesRequest, _super);
@@ -30,27 +30,27 @@ var DiscoverInstancesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=HealthStatus" }),
+        SpeakeasyMetadata({ data: "json, name=HealthStatus" }),
         __metadata("design:type", String)
     ], DiscoverInstancesRequest.prototype, "healthStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], DiscoverInstancesRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=NamespaceName" }),
+        SpeakeasyMetadata({ data: "json, name=NamespaceName" }),
         __metadata("design:type", String)
     ], DiscoverInstancesRequest.prototype, "namespaceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=OptionalParameters" }),
+        SpeakeasyMetadata({ data: "json, name=OptionalParameters" }),
         __metadata("design:type", Map)
     ], DiscoverInstancesRequest.prototype, "optionalParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=QueryParameters" }),
+        SpeakeasyMetadata({ data: "json, name=QueryParameters" }),
         __metadata("design:type", Map)
     ], DiscoverInstancesRequest.prototype, "queryParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceName" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceName" }),
         __metadata("design:type", String)
     ], DiscoverInstancesRequest.prototype, "serviceName", void 0);
     return DiscoverInstancesRequest;

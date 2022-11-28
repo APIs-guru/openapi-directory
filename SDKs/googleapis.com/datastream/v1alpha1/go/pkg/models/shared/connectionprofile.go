@@ -14,3 +14,15 @@ type ConnectionProfile struct {
 	StaticServiceIPConnectivity map[string]interface{}        `json:"staticServiceIpConnectivity,omitempty"`
 	UpdateTime                  *string                       `json:"updateTime,omitempty"`
 }
+
+type ConnectionProfileInput struct {
+	DisplayName                 *string                       `json:"displayName,omitempty"`
+	ForwardSSHConnectivity      *ForwardSSHTunnelConnectivity `json:"forwardSshConnectivity,omitempty"`
+	GcsProfile                  *GcsProfile                   `json:"gcsProfile,omitempty"`
+	Labels                      map[string]string             `json:"labels,omitempty"`
+	MysqlProfile                *MysqlProfileInput            `json:"mysqlProfile,omitempty"`
+	NoConnectivity              map[string]interface{}        `json:"noConnectivity,omitempty"`
+	OracleProfile               *OracleProfile                `json:"oracleProfile,omitempty"`
+	PrivateConnectivity         *PrivateConnectivity          `json:"privateConnectivity,omitempty"`
+	StaticServiceIPConnectivity map[string]interface{}        `json:"staticServiceIpConnectivity,omitempty"`
+}

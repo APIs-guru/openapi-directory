@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ValidationResult } from "./validationresult";
+
 
 
 // ValidateCreateMembershipResponse
@@ -8,6 +8,6 @@ import { ValidationResult } from "./validationresult";
  * Response message for the `GkeHub.ValidateCreateMembership` method.
 **/
 export class ValidateCreateMembershipResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=validationResults", elemType: shared.ValidationResult })
+  @SpeakeasyMetadata({ data: "json, name=validationResults", elemType: ValidationResult })
   validationResults?: ValidationResult[];
 }

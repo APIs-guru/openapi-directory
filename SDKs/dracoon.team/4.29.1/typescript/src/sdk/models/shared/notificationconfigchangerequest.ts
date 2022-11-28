@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NotificationConfigChangeRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request model for updating notification configuration
 **/
 export class NotificationConfigChangeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channelIds" })
+  @SpeakeasyMetadata({ data: "json, name=channelIds" })
   channelIds: number[];
 }

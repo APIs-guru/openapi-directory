@@ -1,5 +1,8 @@
 package shared
 
+// Distribution
+//
+//	Defines the settings for a specific Region.
 type Distribution struct {
 	AmiDistributionConfiguration       *AmiDistributionConfiguration       `json:"amiDistributionConfiguration,omitempty"`
 	ContainerDistributionConfiguration *ContainerDistributionConfiguration `json:"containerDistributionConfiguration,omitempty"`

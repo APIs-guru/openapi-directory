@@ -26,11 +26,6 @@ type EtcerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type EtcerRequest struct {
-	Request  *EtcerRequestBody `request:"mediaType=application/json"`
-	Security EtcerSecurity
-}
-
 type Etcer400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Etcer504ApplicationJSON struct {
 	Error            *Etcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Etcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type EtcerRequest struct {
+	Request  *EtcerRequestBody `request:"mediaType=application/json"`
+	Security EtcerSecurity
 }
 
 type EtcerResponse struct {

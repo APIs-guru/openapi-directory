@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { NetworkEndpoint } from "./networkendpoint";
 import { SchedulingConfig } from "./schedulingconfig";
 import { Symptom } from "./symptom";
@@ -54,6 +54,22 @@ export declare class Node extends SpeakeasyBase {
     serviceAccount?: string;
     state?: NodeStateEnum;
     symptoms?: Symptom[];
+    tensorflowVersion?: string;
+    useServiceNetworking?: boolean;
+}
+/**
+ * A TPU instance.
+**/
+export declare class NodeInput extends SpeakeasyBase {
+    acceleratorType?: string;
+    cidrBlock?: string;
+    description?: string;
+    health?: NodeHealthEnum;
+    ipAddress?: string;
+    labels?: Map<string, string>;
+    network?: string;
+    port?: string;
+    schedulingConfig?: SchedulingConfig;
     tensorflowVersion?: string;
     useServiceNetworking?: boolean;
 }

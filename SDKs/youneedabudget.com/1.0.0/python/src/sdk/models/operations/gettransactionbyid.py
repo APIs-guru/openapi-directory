@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class GetTransactionByIDPathParams:
-    budget_id: str = field(default=None, metadata={'path_param': { 'field_name': 'budget_id', 'style': 'simple', 'explode': False }})
-    transaction_id: str = field(default=None, metadata={'path_param': { 'field_name': 'transaction_id', 'style': 'simple', 'explode': False }})
+    budget_id: str = field(metadata={'path_param': { 'field_name': 'budget_id', 'style': 'simple', 'explode': False }})
+    transaction_id: str = field(metadata={'path_param': { 'field_name': 'transaction_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTransactionByIDRequest:
-    path_params: GetTransactionByIDPathParams = field(default=None)
+    path_params: GetTransactionByIDPathParams = field()
     
 
 @dataclass
 class GetTransactionByIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     transaction_response: Optional[shared.TransactionResponse] = field(default=None)
     

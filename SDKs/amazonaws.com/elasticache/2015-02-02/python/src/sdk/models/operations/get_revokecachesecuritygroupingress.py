@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetRevokeCacheSecurityGroupIngressActionEnum(str, Enum):
     REVOKE_CACHE_SECURITY_GROUP_INGRESS = "RevokeCacheSecurityGroupIngress"
@@ -10,11 +14,11 @@ class GetRevokeCacheSecurityGroupIngressVersionEnum(str, Enum):
 
 @dataclass
 class GetRevokeCacheSecurityGroupIngressQueryParams:
-    action: GetRevokeCacheSecurityGroupIngressActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    cache_security_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'CacheSecurityGroupName', 'style': 'form', 'explode': True }})
-    ec2_security_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'EC2SecurityGroupName', 'style': 'form', 'explode': True }})
-    ec2_security_group_owner_id: str = field(default=None, metadata={'query_param': { 'field_name': 'EC2SecurityGroupOwnerId', 'style': 'form', 'explode': True }})
-    version: GetRevokeCacheSecurityGroupIngressVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetRevokeCacheSecurityGroupIngressActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cache_security_group_name: str = field(metadata={'query_param': { 'field_name': 'CacheSecurityGroupName', 'style': 'form', 'explode': True }})
+    ec2_security_group_name: str = field(metadata={'query_param': { 'field_name': 'EC2SecurityGroupName', 'style': 'form', 'explode': True }})
+    ec2_security_group_owner_id: str = field(metadata={'query_param': { 'field_name': 'EC2SecurityGroupOwnerId', 'style': 'form', 'explode': True }})
+    version: GetRevokeCacheSecurityGroupIngressVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetRevokeCacheSecurityGroupIngressHeaders:
 
 @dataclass
 class GetRevokeCacheSecurityGroupIngressRequest:
-    query_params: GetRevokeCacheSecurityGroupIngressQueryParams = field(default=None)
-    headers: GetRevokeCacheSecurityGroupIngressHeaders = field(default=None)
+    headers: GetRevokeCacheSecurityGroupIngressHeaders = field()
+    query_params: GetRevokeCacheSecurityGroupIngressQueryParams = field()
     
 
 @dataclass
 class GetRevokeCacheSecurityGroupIngressResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

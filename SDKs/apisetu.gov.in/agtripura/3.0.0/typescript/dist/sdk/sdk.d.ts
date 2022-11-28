@@ -1,21 +1,28 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://apisetu.gov.in/agtripura/v3"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
     /**
+     * pecer - Pension Certificate
+     *
      * API to verify Pension Certificate.
     **/
-    Pecer(req: operations.PecerRequest, config?: AxiosRequestConfig): Promise<operations.PecerResponse>;
+    pecer(req: operations.PecerRequest, config?: AxiosRequestConfig): Promise<operations.PecerResponse>;
     /**
+     * prfnd - Provident Fund
+     *
      * API to verify Provident Fund.
     **/
-    Prfnd(req: operations.PrfndRequest, config?: AxiosRequestConfig): Promise<operations.PrfndResponse>;
+    prfnd(req: operations.PrfndRequest, config?: AxiosRequestConfig): Promise<operations.PrfndResponse>;
 }
 export {};

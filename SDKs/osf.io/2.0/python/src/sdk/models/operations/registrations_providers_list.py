@@ -1,20 +1,20 @@
 from dataclasses import dataclass, field
-from typing import List
+from typing import Optional
 
 
 @dataclass
 class RegistrationsProvidersListPathParams:
-    registration_id: str = field(default=None, metadata={'path_param': { 'field_name': 'registration_id', 'style': 'simple', 'explode': False }})
+    registration_id: str = field(metadata={'path_param': { 'field_name': 'registration_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class RegistrationsProvidersListRequest:
-    path_params: RegistrationsProvidersListPathParams = field(default=None)
+    path_params: RegistrationsProvidersListPathParams = field()
     
 
 @dataclass
 class RegistrationsProvidersListResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

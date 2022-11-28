@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class QuizMarkResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attempts" })
+  @SpeakeasyMetadata({ data: "json, name=attempts" })
   attempts?: number;
 
-  @Metadata({ data: "json, name=lastAttemptAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastAttemptAt" })
   lastAttemptAt?: Date;
 
-  @Metadata({ data: "json, name=learnerEmail" })
+  @SpeakeasyMetadata({ data: "json, name=learnerEmail" })
   learnerEmail?: string;
 
-  @Metadata({ data: "json, name=learnerFullname" })
+  @SpeakeasyMetadata({ data: "json, name=learnerFullname" })
   learnerFullname?: string;
 
-  @Metadata({ data: "json, name=learnerPersonId" })
+  @SpeakeasyMetadata({ data: "json, name=learnerPersonId" })
   learnerPersonId?: string;
 
-  @Metadata({ data: "json, name=mark" })
+  @SpeakeasyMetadata({ data: "json, name=mark" })
   mark?: string;
 
-  @Metadata({ data: "json, name=quizId" })
+  @SpeakeasyMetadata({ data: "json, name=quizId" })
   quizId?: string;
 
-  @Metadata({ data: "json, name=quizTitle" })
+  @SpeakeasyMetadata({ data: "json, name=quizTitle" })
   quizTitle?: string;
 }

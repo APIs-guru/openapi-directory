@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
 /**
  * Associates a set of tags with an DMS resource.

@@ -1,29 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class WebhookRequestFilters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: string;
 
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string[];
 
-  @Metadata({ data: "json, name=resource_subtype" })
+  @SpeakeasyMetadata({ data: "json, name=resource_subtype" })
   resourceSubtype?: string;
 
-  @Metadata({ data: "json, name=resource_type" })
+  @SpeakeasyMetadata({ data: "json, name=resource_type" })
   resourceType?: string;
 }
 
 
 export class WebhookRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filters", elemType: shared.WebhookRequestFilters })
+  @SpeakeasyMetadata({ data: "json, name=filters", elemType: WebhookRequestFilters })
   filters?: WebhookRequestFilters[];
 
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource: string;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target: string;
 }

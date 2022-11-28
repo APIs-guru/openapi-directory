@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class RitinRequestBodyCertificateParameters extends SpeakeasyBase {
     refNo: string;
@@ -16,10 +16,6 @@ export declare class RitinRequestBody extends SpeakeasyBase {
 export declare class RitinSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class RitinRequest extends SpeakeasyBase {
-    request?: RitinRequestBody;
-    security: RitinSecurity;
 }
 export declare enum Ritin400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Ritin504ApplicationJsonErrorDescriptionEnum {
 export declare class Ritin504ApplicationJson extends SpeakeasyBase {
     error?: Ritin504ApplicationJsonErrorEnum;
     errorDescription?: Ritin504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class RitinRequest extends SpeakeasyBase {
+    request?: RitinRequestBody;
+    security: RitinSecurity;
 }
 export declare class RitinResponse extends SpeakeasyBase {
     contentType: string;

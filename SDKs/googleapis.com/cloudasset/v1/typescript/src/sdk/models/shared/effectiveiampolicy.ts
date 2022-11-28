@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PolicyInfo } from "./policyinfo";
+
 
 
 // EffectiveIamPolicy
@@ -8,9 +8,9 @@ import { PolicyInfo } from "./policyinfo";
  * The effective IAM policies on one resource.
 **/
 export class EffectiveIamPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fullResourceName" })
+  @SpeakeasyMetadata({ data: "json, name=fullResourceName" })
   fullResourceName?: string;
 
-  @Metadata({ data: "json, name=policies", elemType: shared.PolicyInfo })
+  @SpeakeasyMetadata({ data: "json, name=policies", elemType: PolicyInfo })
   policies?: PolicyInfo[];
 }

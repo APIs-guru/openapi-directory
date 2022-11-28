@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnthosObservabilityMembershipSpec } from "./anthosobservabilitymembershipspec";
+
 
 
 // AnthosObservabilityFeatureSpec
@@ -7,6 +8,6 @@ import { AnthosObservabilityMembershipSpec } from "./anthosobservabilitymembersh
  * **Anthos Observability**: Spec
 **/
 export class AnthosObservabilityFeatureSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultMembershipSpec" })
+  @SpeakeasyMetadata({ data: "json, name=defaultMembershipSpec" })
   defaultMembershipSpec?: AnthosObservabilityMembershipSpec;
 }

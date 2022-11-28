@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PreprocessingUnskewRequestBodyImageFile extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 
-  @Metadata({ data: "multipart_form, name=imageFile" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=imageFile" })
   imageFile: string;
 }
 
 
 export class PreprocessingUnskewRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   imageFile: PreprocessingUnskewRequestBodyImageFile;
 }
 
 
 export class PreprocessingUnskewSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apikey: shared.SchemeApikey;
 }
 
 
 export class PreprocessingUnskewRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request: PreprocessingUnskewRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PreprocessingUnskewSecurity;
 }
 
 
 export class PreprocessingUnskewResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preprocessingUnskew200ApplicationJsonByteString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preprocessingUnskew200ApplicationXmlByteString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preprocessingUnskew200TextJsonByteString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preprocessingUnskew200TextXmlByteString?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

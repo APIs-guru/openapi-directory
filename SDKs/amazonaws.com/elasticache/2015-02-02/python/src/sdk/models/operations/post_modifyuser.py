@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyUserActionEnum(str, Enum):
     MODIFY_USER = "ModifyUser"
@@ -10,8 +14,8 @@ class PostModifyUserVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyUserQueryParams:
-    action: PostModifyUserActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyUserVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyUserActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyUserVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyUserHeaders:
 
 @dataclass
 class PostModifyUserRequest:
-    query_params: PostModifyUserQueryParams = field(default=None)
-    headers: PostModifyUserHeaders = field(default=None)
+    headers: PostModifyUserHeaders = field()
+    query_params: PostModifyUserQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyUserResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

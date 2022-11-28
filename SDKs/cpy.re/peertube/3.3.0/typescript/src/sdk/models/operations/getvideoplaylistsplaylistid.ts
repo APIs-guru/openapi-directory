@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetVideoPlaylistsPlaylistIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=playlistId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=playlistId" })
   playlistId: number;
 }
 
 
 export class GetVideoPlaylistsPlaylistIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetVideoPlaylistsPlaylistIdPathParams;
 }
 
 
 export class GetVideoPlaylistsPlaylistIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   videoPlaylist?: any;
 }

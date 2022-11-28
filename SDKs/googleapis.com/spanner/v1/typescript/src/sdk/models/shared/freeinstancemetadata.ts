@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum FreeInstanceMetadataExpireBehaviorEnum {
-    ExpireBehaviorUnspecified = "EXPIRE_BEHAVIOR_UNSPECIFIED"
-,    FreeToProvisioned = "FREE_TO_PROVISIONED"
-,    RemoveAfterGracePeriod = "REMOVE_AFTER_GRACE_PERIOD"
+    ExpireBehaviorUnspecified = "EXPIRE_BEHAVIOR_UNSPECIFIED",
+    FreeToProvisioned = "FREE_TO_PROVISIONED",
+    RemoveAfterGracePeriod = "REMOVE_AFTER_GRACE_PERIOD"
 }
 
 
@@ -12,12 +13,22 @@ export enum FreeInstanceMetadataExpireBehaviorEnum {
  * Free instance specific metadata that is kept even after an instance has been upgraded for tracking purposes.
 **/
 export class FreeInstanceMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expireBehavior" })
+  @SpeakeasyMetadata({ data: "json, name=expireBehavior" })
   expireBehavior?: FreeInstanceMetadataExpireBehaviorEnum;
 
-  @Metadata({ data: "json, name=expireTime" })
+  @SpeakeasyMetadata({ data: "json, name=expireTime" })
   expireTime?: string;
 
-  @Metadata({ data: "json, name=upgradeTime" })
+  @SpeakeasyMetadata({ data: "json, name=upgradeTime" })
   upgradeTime?: string;
+}
+
+
+// FreeInstanceMetadataInput
+/** 
+ * Free instance specific metadata that is kept even after an instance has been upgraded for tracking purposes.
+**/
+export class FreeInstanceMetadataInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=expireBehavior" })
+  expireBehavior?: FreeInstanceMetadataExpireBehaviorEnum;
 }

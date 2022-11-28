@@ -17,11 +17,8 @@ type PostServersIDActionsEnableRescueRequestBody struct {
 	Type    *PostServersIDActionsEnableRescueRequestBodyTypeEnum `json:"type,omitempty"`
 }
 
-type PostServersIDActionsEnableRescueRequest struct {
-	PathParams PostServersIDActionsEnableRescuePathParams
-	Request    *PostServersIDActionsEnableRescueRequestBody `request:"mediaType=application/json"`
-}
-
+// PostServersIDActionsEnableRescue201ApplicationJSONActionError
+// Error message for the Action if error occurred, otherwise null
 type PostServersIDActionsEnableRescue201ApplicationJSONActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -54,6 +51,11 @@ type PostServersIDActionsEnableRescue201ApplicationJSONAction struct {
 type PostServersIDActionsEnableRescue201ApplicationJSON struct {
 	Action       *PostServersIDActionsEnableRescue201ApplicationJSONAction `json:"action,omitempty"`
 	RootPassword *string                                                   `json:"root_password,omitempty"`
+}
+
+type PostServersIDActionsEnableRescueRequest struct {
+	PathParams PostServersIDActionsEnableRescuePathParams
+	Request    *PostServersIDActionsEnableRescueRequestBody `request:"mediaType=application/json"`
 }
 
 type PostServersIDActionsEnableRescueResponse struct {

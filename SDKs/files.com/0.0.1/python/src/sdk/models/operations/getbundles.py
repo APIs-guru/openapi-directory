@@ -19,12 +19,12 @@ class GetBundlesQueryParams:
 
 @dataclass
 class GetBundlesRequest:
-    query_params: GetBundlesQueryParams = field(default=None)
+    query_params: GetBundlesQueryParams = field()
     
 
 @dataclass
 class GetBundlesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bundle_entities: Optional[List[shared.BundleEntity]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

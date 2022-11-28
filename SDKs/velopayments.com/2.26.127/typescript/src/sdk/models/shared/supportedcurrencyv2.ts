@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SupportedCurrencyV2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: string;
 
-  @Metadata({ data: "json, name=maxPaymentAmount" })
+  @SpeakeasyMetadata({ data: "json, name=maxPaymentAmount" })
   maxPaymentAmount?: number;
 }

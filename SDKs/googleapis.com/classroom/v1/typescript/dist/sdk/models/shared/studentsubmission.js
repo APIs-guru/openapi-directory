@@ -22,11 +22,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssignmentSubmission } from "./assignmentsubmission";
 import { MultipleChoiceSubmission } from "./multiplechoicesubmission";
 import { ShortAnswerSubmission } from "./shortanswersubmission";
+import { SubmissionHistory } from "./submissionhistory";
 export var StudentSubmissionCourseWorkTypeEnum;
 (function (StudentSubmissionCourseWorkTypeEnum) {
     StudentSubmissionCourseWorkTypeEnum["CourseWorkTypeUnspecified"] = "COURSE_WORK_TYPE_UNSPECIFIED";
@@ -53,71 +53,71 @@ var StudentSubmission = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alternateLink" }),
+        SpeakeasyMetadata({ data: "json, name=alternateLink" }),
         __metadata("design:type", String)
     ], StudentSubmission.prototype, "alternateLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=assignedGrade" }),
+        SpeakeasyMetadata({ data: "json, name=assignedGrade" }),
         __metadata("design:type", Number)
     ], StudentSubmission.prototype, "assignedGrade", void 0);
     __decorate([
-        Metadata({ data: "json, name=assignmentSubmission" }),
+        SpeakeasyMetadata({ data: "json, name=assignmentSubmission" }),
         __metadata("design:type", AssignmentSubmission)
     ], StudentSubmission.prototype, "assignmentSubmission", void 0);
     __decorate([
-        Metadata({ data: "json, name=associatedWithDeveloper" }),
+        SpeakeasyMetadata({ data: "json, name=associatedWithDeveloper" }),
         __metadata("design:type", Boolean)
     ], StudentSubmission.prototype, "associatedWithDeveloper", void 0);
     __decorate([
-        Metadata({ data: "json, name=courseId" }),
+        SpeakeasyMetadata({ data: "json, name=courseId" }),
         __metadata("design:type", String)
     ], StudentSubmission.prototype, "courseId", void 0);
     __decorate([
-        Metadata({ data: "json, name=courseWorkId" }),
+        SpeakeasyMetadata({ data: "json, name=courseWorkId" }),
         __metadata("design:type", String)
     ], StudentSubmission.prototype, "courseWorkId", void 0);
     __decorate([
-        Metadata({ data: "json, name=courseWorkType" }),
+        SpeakeasyMetadata({ data: "json, name=courseWorkType" }),
         __metadata("design:type", String)
     ], StudentSubmission.prototype, "courseWorkType", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", String)
     ], StudentSubmission.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=draftGrade" }),
+        SpeakeasyMetadata({ data: "json, name=draftGrade" }),
         __metadata("design:type", Number)
     ], StudentSubmission.prototype, "draftGrade", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], StudentSubmission.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=late" }),
+        SpeakeasyMetadata({ data: "json, name=late" }),
         __metadata("design:type", Boolean)
     ], StudentSubmission.prototype, "late", void 0);
     __decorate([
-        Metadata({ data: "json, name=multipleChoiceSubmission" }),
+        SpeakeasyMetadata({ data: "json, name=multipleChoiceSubmission" }),
         __metadata("design:type", MultipleChoiceSubmission)
     ], StudentSubmission.prototype, "multipleChoiceSubmission", void 0);
     __decorate([
-        Metadata({ data: "json, name=shortAnswerSubmission" }),
+        SpeakeasyMetadata({ data: "json, name=shortAnswerSubmission" }),
         __metadata("design:type", ShortAnswerSubmission)
     ], StudentSubmission.prototype, "shortAnswerSubmission", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], StudentSubmission.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=submissionHistory", elemType: shared.SubmissionHistory }),
+        SpeakeasyMetadata({ data: "json, name=submissionHistory", elemType: SubmissionHistory }),
         __metadata("design:type", Array)
     ], StudentSubmission.prototype, "submissionHistory", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], StudentSubmission.prototype, "updateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=userId" }),
+        SpeakeasyMetadata({ data: "json, name=userId" }),
         __metadata("design:type", String)
     ], StudentSubmission.prototype, "userId", void 0);
     return StudentSubmission;

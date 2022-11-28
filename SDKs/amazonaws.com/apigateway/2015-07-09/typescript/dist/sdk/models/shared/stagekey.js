@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // StageKey
 /**
  * A reference to a unique stage identified in the format <code>{restApiId}/{stage}</code>.
@@ -33,11 +33,11 @@ var StageKey = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=restApiId" }),
+        SpeakeasyMetadata({ data: "json, name=restApiId" }),
         __metadata("design:type", String)
     ], StageKey.prototype, "restApiId", void 0);
     __decorate([
-        Metadata({ data: "json, name=stageName" }),
+        SpeakeasyMetadata({ data: "json, name=stageName" }),
         __metadata("design:type", String)
     ], StageKey.prototype, "stageName", void 0);
     return StageKey;

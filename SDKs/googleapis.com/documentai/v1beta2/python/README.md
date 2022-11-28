@@ -1,0 +1,415 @@
+# openapi
+
+<!-- Start SDK Installation -->
+## SDK Installation
+
+```bash
+pip install openapi
+```
+<!-- End SDK Installation -->
+
+<!-- Start SDK Example Usage -->
+## SDK Example Usage
+
+```python
+import sdk
+from sdk.models import operations, shared
+
+s = sdk.SDK()
+    
+req = operations.DocumentaiProjectsLocationsDocumentsBatchProcessRequest(
+    security=operations.DocumentaiProjectsLocationsDocumentsBatchProcessSecurity(
+        oauth2=shared.SchemeOauth2(
+            authorization="Bearer YOUR_ACCESS_TOKEN_HERE",
+        )
+        oauth2c=shared.SchemeOauth2c(
+            authorization="Bearer YOUR_ACCESS_TOKEN_HERE",
+        ),
+    ),
+    path_params=operations.DocumentaiProjectsLocationsDocumentsBatchProcessPathParams(
+        parent="accusamus",
+    ),
+    query_params=operations.DocumentaiProjectsLocationsDocumentsBatchProcessQueryParams(
+        dollar_xgafv="1",
+        access_token="aspernatur",
+        alt="proto",
+        callback="necessitatibus",
+        fields="aut",
+        key="in",
+        oauth_token="consectetur",
+        pretty_print=False,
+        quota_user="odio",
+        upload_type="omnis",
+        upload_protocol="dolore",
+    ),
+    request=shared.GoogleCloudDocumentaiV1beta2BatchProcessDocumentsRequest(
+        requests=[
+            shared.GoogleCloudDocumentaiV1beta2ProcessDocumentRequest(
+                automl_params=shared.GoogleCloudDocumentaiV1beta2AutoMlParams(
+                    model="deserunt",
+                ),
+                document_type="ducimus",
+                entity_extraction_params=shared.GoogleCloudDocumentaiV1beta2EntityExtractionParams(
+                    enabled=False,
+                    model_version="corrupti",
+                ),
+                form_extraction_params=shared.GoogleCloudDocumentaiV1beta2FormExtractionParams(
+                    enabled=True,
+                    key_value_pair_hints=[
+                        shared.GoogleCloudDocumentaiV1beta2KeyValuePairHint(
+                            key="natus",
+                            value_types=[
+                                "officiis",
+                                "et",
+                            ],
+                        ),
+                        shared.GoogleCloudDocumentaiV1beta2KeyValuePairHint(
+                            key="tempore",
+                            value_types=[
+                                "officia",
+                                "non",
+                                "illum",
+                            ],
+                        ),
+                    ],
+                    model_version="esse",
+                ),
+                input_config=shared.GoogleCloudDocumentaiV1beta2InputConfig(
+                    contents="ut",
+                    gcs_source=shared.GoogleCloudDocumentaiV1beta2GcsSource(
+                        uri="consectetur",
+                    ),
+                    mime_type="temporibus",
+                ),
+                ocr_params=shared.GoogleCloudDocumentaiV1beta2OcrParams(
+                    language_hints=[
+                        "et",
+                        "sit",
+                        "non",
+                    ],
+                ),
+                output_config=shared.GoogleCloudDocumentaiV1beta2OutputConfig(
+                    gcs_destination=shared.GoogleCloudDocumentaiV1beta2GcsDestination(
+                        uri="libero",
+                    ),
+                    pages_per_shard=3977994518227181620,
+                ),
+                parent="perspiciatis",
+                table_extraction_params=shared.GoogleCloudDocumentaiV1beta2TableExtractionParams(
+                    enabled=True,
+                    header_hints=[
+                        "aliquam",
+                        "expedita",
+                    ],
+                    model_version="ipsam",
+                    table_bound_hints=[
+                        shared.GoogleCloudDocumentaiV1beta2TableBoundHint(
+                            bounding_box=shared.GoogleCloudDocumentaiV1beta2BoundingPoly(
+                                normalized_vertices=[
+                                    shared.GoogleCloudDocumentaiV1beta2NormalizedVertex(
+                                        x=3.200000,
+                                        y=91.099998,
+                                    ),
+                                    shared.GoogleCloudDocumentaiV1beta2NormalizedVertex(
+                                        x=55.099998,
+                                        y=79.099998,
+                                    ),
+                                    shared.GoogleCloudDocumentaiV1beta2NormalizedVertex(
+                                        x=93.199997,
+                                        y=73.199997,
+                                    ),
+                                ],
+                                vertices=[
+                                    shared.GoogleCloudDocumentaiV1beta2Vertex(
+                                        x=9153202328428070724,
+                                        y=212910970379447706,
+                                    ),
+                                ],
+                            ),
+                            page_number=4484347696836556320,
+                        ),
+                    ],
+                ),
+            ),
+            shared.GoogleCloudDocumentaiV1beta2ProcessDocumentRequest(
+                automl_params=shared.GoogleCloudDocumentaiV1beta2AutoMlParams(
+                    model="asperiores",
+                ),
+                document_type="aliquid",
+                entity_extraction_params=shared.GoogleCloudDocumentaiV1beta2EntityExtractionParams(
+                    enabled=False,
+                    model_version="saepe",
+                ),
+                form_extraction_params=shared.GoogleCloudDocumentaiV1beta2FormExtractionParams(
+                    enabled=False,
+                    key_value_pair_hints=[
+                        shared.GoogleCloudDocumentaiV1beta2KeyValuePairHint(
+                            key="vero",
+                            value_types=[
+                                "facilis",
+                                "ipsa",
+                            ],
+                        ),
+                        shared.GoogleCloudDocumentaiV1beta2KeyValuePairHint(
+                            key="animi",
+                            value_types=[
+                                "qui",
+                            ],
+                        ),
+                        shared.GoogleCloudDocumentaiV1beta2KeyValuePairHint(
+                            key="excepturi",
+                            value_types=[
+                                "aut",
+                            ],
+                        ),
+                    ],
+                    model_version="quia",
+                ),
+                input_config=shared.GoogleCloudDocumentaiV1beta2InputConfig(
+                    contents="nulla",
+                    gcs_source=shared.GoogleCloudDocumentaiV1beta2GcsSource(
+                        uri="laudantium",
+                    ),
+                    mime_type="in",
+                ),
+                ocr_params=shared.GoogleCloudDocumentaiV1beta2OcrParams(
+                    language_hints=[
+                        "necessitatibus",
+                        "aut",
+                    ],
+                ),
+                output_config=shared.GoogleCloudDocumentaiV1beta2OutputConfig(
+                    gcs_destination=shared.GoogleCloudDocumentaiV1beta2GcsDestination(
+                        uri="neque",
+                    ),
+                    pages_per_shard=7205684613211767704,
+                ),
+                parent="autem",
+                table_extraction_params=shared.GoogleCloudDocumentaiV1beta2TableExtractionParams(
+                    enabled=True,
+                    header_hints=[
+                        "ut",
+                        "id",
+                    ],
+                    model_version="laudantium",
+                    table_bound_hints=[
+                        shared.GoogleCloudDocumentaiV1beta2TableBoundHint(
+                            bounding_box=shared.GoogleCloudDocumentaiV1beta2BoundingPoly(
+                                normalized_vertices=[
+                                    shared.GoogleCloudDocumentaiV1beta2NormalizedVertex(
+                                        x=90.099998,
+                                        y=24.200001,
+                                    ),
+                                ],
+                                vertices=[
+                                    shared.GoogleCloudDocumentaiV1beta2Vertex(
+                                        x=5465762999401451180,
+                                        y=2589978446189390501,
+                                    ),
+                                    shared.GoogleCloudDocumentaiV1beta2Vertex(
+                                        x=3381153955800394242,
+                                        y=6483977066524928530,
+                                    ),
+                                    shared.GoogleCloudDocumentaiV1beta2Vertex(
+                                        x=4330030033128116391,
+                                        y=6452109320694614544,
+                                    ),
+                                ],
+                            ),
+                            page_number=3019085975435534377,
+                        ),
+                        shared.GoogleCloudDocumentaiV1beta2TableBoundHint(
+                            bounding_box=shared.GoogleCloudDocumentaiV1beta2BoundingPoly(
+                                normalized_vertices=[
+                                    shared.GoogleCloudDocumentaiV1beta2NormalizedVertex(
+                                        x=35.099998,
+                                        y=27.100000,
+                                    ),
+                                    shared.GoogleCloudDocumentaiV1beta2NormalizedVertex(
+                                        x=44.099998,
+                                        y=28.200001,
+                                    ),
+                                    shared.GoogleCloudDocumentaiV1beta2NormalizedVertex(
+                                        x=84.199997,
+                                        y=32.099998,
+                                    ),
+                                ],
+                                vertices=[
+                                    shared.GoogleCloudDocumentaiV1beta2Vertex(
+                                        x=8574942949169313192,
+                                        y=5838608827208325630,
+                                    ),
+                                ],
+                            ),
+                            page_number=821777092402364754,
+                        ),
+                        shared.GoogleCloudDocumentaiV1beta2TableBoundHint(
+                            bounding_box=shared.GoogleCloudDocumentaiV1beta2BoundingPoly(
+                                normalized_vertices=[
+                                    shared.GoogleCloudDocumentaiV1beta2NormalizedVertex(
+                                        x=2.100000,
+                                        y=60.099998,
+                                    ),
+                                    shared.GoogleCloudDocumentaiV1beta2NormalizedVertex(
+                                        x=72.199997,
+                                        y=54.200001,
+                                    ),
+                                    shared.GoogleCloudDocumentaiV1beta2NormalizedVertex(
+                                        x=25.200001,
+                                        y=63.099998,
+                                    ),
+                                ],
+                                vertices=[
+                                    shared.GoogleCloudDocumentaiV1beta2Vertex(
+                                        x=4830852428165135925,
+                                        y=5378367600433771130,
+                                    ),
+                                    shared.GoogleCloudDocumentaiV1beta2Vertex(
+                                        x=7117192674649410582,
+                                        y=3731705481196502876,
+                                    ),
+                                ],
+                            ),
+                            page_number=2769778733425732679,
+                        ),
+                    ],
+                ),
+            ),
+            shared.GoogleCloudDocumentaiV1beta2ProcessDocumentRequest(
+                automl_params=shared.GoogleCloudDocumentaiV1beta2AutoMlParams(
+                    model="beatae",
+                ),
+                document_type="dolores",
+                entity_extraction_params=shared.GoogleCloudDocumentaiV1beta2EntityExtractionParams(
+                    enabled=False,
+                    model_version="deleniti",
+                ),
+                form_extraction_params=shared.GoogleCloudDocumentaiV1beta2FormExtractionParams(
+                    enabled=False,
+                    key_value_pair_hints=[
+                        shared.GoogleCloudDocumentaiV1beta2KeyValuePairHint(
+                            key="cupiditate",
+                            value_types=[
+                                "mollitia",
+                                "facilis",
+                            ],
+                        ),
+                        shared.GoogleCloudDocumentaiV1beta2KeyValuePairHint(
+                            key="rerum",
+                            value_types=[
+                                "sunt",
+                                "delectus",
+                                "inventore",
+                            ],
+                        ),
+                    ],
+                    model_version="nulla",
+                ),
+                input_config=shared.GoogleCloudDocumentaiV1beta2InputConfig(
+                    contents="sed",
+                    gcs_source=shared.GoogleCloudDocumentaiV1beta2GcsSource(
+                        uri="possimus",
+                    ),
+                    mime_type="nobis",
+                ),
+                ocr_params=shared.GoogleCloudDocumentaiV1beta2OcrParams(
+                    language_hints=[
+                        "voluptates",
+                        "porro",
+                    ],
+                ),
+                output_config=shared.GoogleCloudDocumentaiV1beta2OutputConfig(
+                    gcs_destination=shared.GoogleCloudDocumentaiV1beta2GcsDestination(
+                        uri="et",
+                    ),
+                    pages_per_shard=8204265501301102548,
+                ),
+                parent="velit",
+                table_extraction_params=shared.GoogleCloudDocumentaiV1beta2TableExtractionParams(
+                    enabled=True,
+                    header_hints=[
+                        "enim",
+                        "molestias",
+                    ],
+                    model_version="exercitationem",
+                    table_bound_hints=[
+                        shared.GoogleCloudDocumentaiV1beta2TableBoundHint(
+                            bounding_box=shared.GoogleCloudDocumentaiV1beta2BoundingPoly(
+                                normalized_vertices=[
+                                    shared.GoogleCloudDocumentaiV1beta2NormalizedVertex(
+                                        x=64.199997,
+                                        y=45.200001,
+                                    ),
+                                    shared.GoogleCloudDocumentaiV1beta2NormalizedVertex(
+                                        x=91.099998,
+                                        y=33.099998,
+                                    ),
+                                    shared.GoogleCloudDocumentaiV1beta2NormalizedVertex(
+                                        x=44.099998,
+                                        y=68.099998,
+                                    ),
+                                ],
+                                vertices=[
+                                    shared.GoogleCloudDocumentaiV1beta2Vertex(
+                                        x=3325265499125798500,
+                                        y=794630284764646271,
+                                    ),
+                                ],
+                            ),
+                            page_number=5940557397638332803,
+                        ),
+                        shared.GoogleCloudDocumentaiV1beta2TableBoundHint(
+                            bounding_box=shared.GoogleCloudDocumentaiV1beta2BoundingPoly(
+                                normalized_vertices=[
+                                    shared.GoogleCloudDocumentaiV1beta2NormalizedVertex(
+                                        x=45.200001,
+                                        y=30.200001,
+                                    ),
+                                    shared.GoogleCloudDocumentaiV1beta2NormalizedVertex(
+                                        x=95.099998,
+                                        y=14.100000,
+                                    ),
+                                    shared.GoogleCloudDocumentaiV1beta2NormalizedVertex(
+                                        x=85.099998,
+                                        y=93.199997,
+                                    ),
+                                ],
+                                vertices=[
+                                    shared.GoogleCloudDocumentaiV1beta2Vertex(
+                                        x=934467367965716307,
+                                        y=1734915949505464922,
+                                    ),
+                                    shared.GoogleCloudDocumentaiV1beta2Vertex(
+                                        x=5980186292682469976,
+                                        y=879397370658672803,
+                                    ),
+                                ],
+                            ),
+                            page_number=2631243517115766127,
+                        ),
+                    ],
+                ),
+            ),
+        ],
+    ),
+)
+    
+res = s.projects.documentai_projects_locations_documents_batch_process(req)
+
+if res.google_longrunning_operation is not None:
+    # handle response
+```
+<!-- End SDK Example Usage -->
+
+<!-- Start SDK Available Operations -->
+## SDK Available Operations
+
+### projects
+
+* `documentai_projects_locations_documents_batch_process` - LRO endpoint to batch process many documents. The output is written to Cloud Storage as JSON in the [Document] format.
+* `documentai_projects_locations_documents_process` - Processes a single document.
+* `documentai_projects_operations_get` - Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+
+<!-- End SDK Available Operations -->
+
+### SDK Generated by [Speakeasy](https://docs.speakeasyapi.dev/docs/using-speakeasy/client-sdks)

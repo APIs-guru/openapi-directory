@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // S3Repository
 /**
  *  Information about a repository in an S3 bucket.
@@ -33,11 +33,11 @@ var S3Repository = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BucketName" }),
+        SpeakeasyMetadata({ data: "json, name=BucketName" }),
         __metadata("design:type", String)
     ], S3Repository.prototype, "bucketName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], S3Repository.prototype, "name", void 0);
     return S3Repository;

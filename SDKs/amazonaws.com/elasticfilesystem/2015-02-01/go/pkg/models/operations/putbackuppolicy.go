@@ -18,6 +18,8 @@ type PutBackupPolicyHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// PutBackupPolicyRequestBodyBackupPolicy
+// The backup policy for the file system used to create automatic daily backups. If status has a value of <code>ENABLED</code>, the file system is being automatically backed up. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups">Automatic backups</a>.
 type PutBackupPolicyRequestBodyBackupPolicy struct {
 	Status *shared.StatusEnum `json:"Status,omitempty"`
 }

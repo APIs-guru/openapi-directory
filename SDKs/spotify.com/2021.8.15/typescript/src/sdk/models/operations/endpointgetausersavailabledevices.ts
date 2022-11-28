@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EndpointGetAUsersAvailableDevicesHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class EndpointGetAUsersAvailableDevicesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   spotifyAuth: shared.SchemeSpotifyAuth;
 }
 
 
 export class EndpointGetAUsersAvailableDevicesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: EndpointGetAUsersAvailableDevicesHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: EndpointGetAUsersAvailableDevicesSecurity;
 }
 
 
 export class EndpointGetAUsersAvailableDevicesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   devicesObject?: shared.DevicesObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseObject?: shared.ErrorResponseObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

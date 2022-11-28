@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EbsMetricNameEnum } from "./ebsmetricnameenum";
 import { MetricStatisticEnum } from "./metricstatisticenum";
+
 
 
 // EbsUtilizationMetric
@@ -8,12 +9,12 @@ import { MetricStatisticEnum } from "./metricstatisticenum";
  * <p>Describes a utilization metric of an Amazon Elastic Block Store (Amazon EBS) volume.</p> <p>Compare the utilization metric data of your resource against its projected utilization metric data to determine the performance difference between your current resource and the recommended option.</p>
 **/
 export class EbsUtilizationMetric extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: EbsMetricNameEnum;
 
-  @Metadata({ data: "json, name=statistic" })
+  @SpeakeasyMetadata({ data: "json, name=statistic" })
   statistic?: MetricStatisticEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }

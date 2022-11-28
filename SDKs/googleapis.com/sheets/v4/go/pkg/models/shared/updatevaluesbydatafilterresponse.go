@@ -1,5 +1,7 @@
 package shared
 
+// UpdateValuesByDataFilterResponse
+// The response when updating a range of values by a data filter in a spreadsheet.
 type UpdateValuesByDataFilterResponse struct {
 	DataFilter     *DataFilter `json:"dataFilter,omitempty"`
 	UpdatedCells   *int32      `json:"updatedCells,omitempty"`

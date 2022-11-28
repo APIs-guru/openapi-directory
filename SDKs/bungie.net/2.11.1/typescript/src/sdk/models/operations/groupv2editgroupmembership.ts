@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GroupV2EditGroupMembershipPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=groupId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupId" })
   groupId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=memberType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=memberType" })
   memberType: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=membershipId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipId" })
   membershipId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=membershipType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipType" })
   membershipType: number;
 }
 
 
 export class GroupV2EditGroupMembershipSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 }
 
 
 export class GroupV2EditGroupMembershipRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GroupV2EditGroupMembershipPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GroupV2EditGroupMembershipSecurity;
 }
 
 
 export class GroupV2EditGroupMembershipResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

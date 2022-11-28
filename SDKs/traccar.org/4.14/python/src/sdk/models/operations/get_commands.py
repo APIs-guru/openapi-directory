@@ -14,12 +14,12 @@ class GetCommandsQueryParams:
 
 @dataclass
 class GetCommandsRequest:
-    query_params: GetCommandsQueryParams = field(default=None)
+    query_params: GetCommandsQueryParams = field()
     
 
 @dataclass
 class GetCommandsResponse:
+    content_type: str = field()
+    status_code: int = field()
     commands: Optional[List[shared.Command]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

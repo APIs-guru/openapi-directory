@@ -9,6 +9,8 @@ const (
 	GoogleFirestoreAdminV1beta1IndexFieldModeEnumArrayContains   GoogleFirestoreAdminV1beta1IndexFieldModeEnum = "ARRAY_CONTAINS"
 )
 
+// GoogleFirestoreAdminV1beta1IndexField
+// A field of an index.
 type GoogleFirestoreAdminV1beta1IndexField struct {
 	FieldPath *string                                        `json:"fieldPath,omitempty"`
 	Mode      *GoogleFirestoreAdminV1beta1IndexFieldModeEnum `json:"mode,omitempty"`

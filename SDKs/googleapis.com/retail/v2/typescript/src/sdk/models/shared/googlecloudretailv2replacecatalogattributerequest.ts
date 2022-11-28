@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GoogleCloudRetailV2CatalogAttribute } from "./googlecloudretailv2catalogattribute";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudRetailV2CatalogAttributeInput } from "./googlecloudretailv2catalogattribute";
 
 
-// GoogleCloudRetailV2ReplaceCatalogAttributeRequest
+
+// GoogleCloudRetailV2ReplaceCatalogAttributeRequestInput
 /** 
  * Request for CatalogService.ReplaceCatalogAttribute method.
 **/
-export class GoogleCloudRetailV2ReplaceCatalogAttributeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=catalogAttribute" })
-  catalogAttribute?: GoogleCloudRetailV2CatalogAttribute;
+export class GoogleCloudRetailV2ReplaceCatalogAttributeRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=catalogAttribute" })
+  catalogAttribute?: GoogleCloudRetailV2CatalogAttributeInput;
 
-  @Metadata({ data: "json, name=updateMask" })
+  @SpeakeasyMetadata({ data: "json, name=updateMask" })
   updateMask?: string;
 }

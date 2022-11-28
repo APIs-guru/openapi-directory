@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { PublicKeyContainer } from "./publickeycontainer";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PublicKeyContainerOutput } from "./publickeycontainer";
 
 
-// UserUserPublicKey
+
+// UserUserPublicKeyOutput
 /** 
  * Public key information
 **/
-export class UserUserPublicKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+export class UserUserPublicKeyOutput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=publicKeyContainer" })
-  publicKeyContainer?: PublicKeyContainer;
+  @SpeakeasyMetadata({ data: "json, name=publicKeyContainer" })
+  publicKeyContainer?: PublicKeyContainerOutput;
 }

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -16,13 +16,13 @@ class GetAPIMembersSearchHistoricalQueryParams:
 
 @dataclass
 class GetAPIMembersSearchHistoricalRequest:
-    query_params: GetAPIMembersSearchHistoricalQueryParams = field(default=None)
+    query_params: GetAPIMembersSearchHistoricalQueryParams = field()
     
 
 @dataclass
 class GetAPIMembersSearchHistoricalResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     member_members_service_search_result: Optional[shared.MemberMembersServiceSearchResult] = field(default=None)
-    status_code: int = field(default=None)
     

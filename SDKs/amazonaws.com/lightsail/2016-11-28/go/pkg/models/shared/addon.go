@@ -1,5 +1,7 @@
 package shared
 
+// AddOn
+// Describes an add-on that is enabled for an Amazon Lightsail resource.
 type AddOn struct {
 	Name                  *string `json:"name,omitempty"`
 	NextSnapshotTimeOfDay *string `json:"nextSnapshotTimeOfDay,omitempty"`

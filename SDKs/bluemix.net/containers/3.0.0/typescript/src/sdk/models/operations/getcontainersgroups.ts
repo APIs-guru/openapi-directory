@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetContainersGroupsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" })
   xAuthProjectId: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" })
   xAuthToken: string;
 }
 
 
 export class GetContainersGroupsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetContainersGroupsHeaders;
 }
 
 
 export class GetContainersGroupsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   containersGroupsGetListItems?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

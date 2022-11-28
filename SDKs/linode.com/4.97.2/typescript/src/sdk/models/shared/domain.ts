@@ -1,13 +1,61 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DomainStatusEnum {
-    Disabled = "disabled"
-,    Active = "active"
+    Disabled = "disabled",
+    Active = "active"
 }
 
 export enum DomainTypeEnum {
-    Master = "master"
-,    Slave = "slave"
+    Master = "master",
+    Slave = "slave"
+}
+
+
+// DomainInput
+/** 
+ * A domain zonefile in our DNS system.  You must own the domain name and tell your registrar to use Linode's nameservers in order for a domain in our system to be treated as authoritative.
+ * 
+**/
+export class DomainInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=axfr_ips" })
+  axfrIps?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=domain" })
+  domain?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=expire_sec" })
+  expireSec?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=group" })
+  group?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=master_ips" })
+  masterIps?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=refresh_sec" })
+  refreshSec?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=retry_sec" })
+  retrySec?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=soa_email" })
+  soaEmail?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=status" })
+  status?: DomainStatusEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=tags" })
+  tags?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=ttl_sec" })
+  ttlSec?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: DomainTypeEnum;
 }
 
 
@@ -17,45 +65,45 @@ export enum DomainTypeEnum {
  * 
 **/
 export class Domain extends SpeakeasyBase {
-  @Metadata({ data: "json, name=axfr_ips" })
+  @SpeakeasyMetadata({ data: "json, name=axfr_ips" })
   axfrIps?: string[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=expire_sec" })
+  @SpeakeasyMetadata({ data: "json, name=expire_sec" })
   expireSec?: number;
 
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=master_ips" })
+  @SpeakeasyMetadata({ data: "json, name=master_ips" })
   masterIps?: string[];
 
-  @Metadata({ data: "json, name=refresh_sec" })
+  @SpeakeasyMetadata({ data: "json, name=refresh_sec" })
   refreshSec?: number;
 
-  @Metadata({ data: "json, name=retry_sec" })
+  @SpeakeasyMetadata({ data: "json, name=retry_sec" })
   retrySec?: number;
 
-  @Metadata({ data: "json, name=soa_email" })
+  @SpeakeasyMetadata({ data: "json, name=soa_email" })
   soaEmail?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: DomainStatusEnum;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=ttl_sec" })
+  @SpeakeasyMetadata({ data: "json, name=ttl_sec" })
   ttlSec?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: DomainTypeEnum;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetAliasesQueryParams = /** @class */ (function (_super) {
     __extends(GetAliasesQueryParams, _super);
@@ -30,15 +30,15 @@ var GetAliasesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=continueFrom" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=continueFrom" }),
         __metadata("design:type", String)
     ], GetAliasesQueryParams.prototype, "continueFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=domainName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=domainName" }),
         __metadata("design:type", String)
     ], GetAliasesQueryParams.prototype, "domainName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetAliasesQueryParams.prototype, "limit", void 0);
     return GetAliasesQueryParams;
@@ -50,7 +50,7 @@ var GetAliasesSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKeyAuth)
     ], GetAliasesSecurity.prototype, "apiKeyAuth", void 0);
     return GetAliasesSecurity;
@@ -62,11 +62,11 @@ var GetAliasesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAliasesQueryParams)
     ], GetAliasesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAliasesSecurity)
     ], GetAliasesRequest.prototype, "security", void 0);
     return GetAliasesRequest;
@@ -78,15 +78,15 @@ var GetAliasesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAliasesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GetAliasesModel)
     ], GetAliasesResponse.prototype, "getAliasesModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAliasesResponse.prototype, "statusCode", void 0);
     return GetAliasesResponse;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProfileFilterLink } from "./profilefilterlink";
+
 
 
 // ProfileFilterLinks
@@ -8,27 +8,27 @@ import { ProfileFilterLink } from "./profilefilterlink";
  * A profile filter link collection lists profile filter links between profiles and filters. Each resource in the collection corresponds to a profile filter link.
 **/
 export class ProfileFilterLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.ProfileFilterLink })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: ProfileFilterLink })
   items?: ProfileFilterLink[];
 
-  @Metadata({ data: "json, name=itemsPerPage" })
+  @SpeakeasyMetadata({ data: "json, name=itemsPerPage" })
   itemsPerPage?: number;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextLink" })
+  @SpeakeasyMetadata({ data: "json, name=nextLink" })
   nextLink?: string;
 
-  @Metadata({ data: "json, name=previousLink" })
+  @SpeakeasyMetadata({ data: "json, name=previousLink" })
   previousLink?: string;
 
-  @Metadata({ data: "json, name=startIndex" })
+  @SpeakeasyMetadata({ data: "json, name=startIndex" })
   startIndex?: number;
 
-  @Metadata({ data: "json, name=totalResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalResults" })
   totalResults?: number;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }

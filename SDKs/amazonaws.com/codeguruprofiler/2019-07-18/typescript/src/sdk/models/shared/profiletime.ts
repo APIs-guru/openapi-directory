@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProfileTime
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Contains the start time of a profile. 
 **/
 export class ProfileTime extends SpeakeasyBase {
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start?: Date;
 }

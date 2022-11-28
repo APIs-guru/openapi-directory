@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class BigQueryConfigStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -13,9 +15,13 @@ class BigQueryConfigStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class BigQueryConfig:
-    drop_unknown_fields: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dropUnknownFields' }})
-    state: Optional[BigQueryConfigStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    table: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'table' }})
-    use_topic_schema: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'useTopicSchema' }})
-    write_metadata: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'writeMetadata' }})
+    r"""BigQueryConfig
+    Configuration for a BigQuery subscription.
+    """
+    
+    drop_unknown_fields: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dropUnknownFields') }})
+    state: Optional[BigQueryConfigStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    table: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('table') }})
+    use_topic_schema: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('useTopicSchema') }})
+    write_metadata: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('writeMetadata') }})
     

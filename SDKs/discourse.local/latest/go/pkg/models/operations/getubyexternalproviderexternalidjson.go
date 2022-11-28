@@ -10,11 +10,6 @@ type GetUByExternalProviderExternalIDJSONHeaders struct {
 	APIUsername string `header:"style=simple,explode=false,name=Api-Username"`
 }
 
-type GetUByExternalProviderExternalIDJSONRequest struct {
-	PathParams GetUByExternalProviderExternalIDJSONPathParams
-	Headers    GetUByExternalProviderExternalIDJSONHeaders
-}
-
 type GetUByExternalProviderExternalIDJSON200ApplicationJSONUserGroupUsers struct {
 	GroupID           *int64 `json:"group_id,omitempty"`
 	NotificationLevel *int64 `json:"notification_level,omitempty"`
@@ -176,6 +171,11 @@ type GetUByExternalProviderExternalIDJSON200ApplicationJSONUser struct {
 type GetUByExternalProviderExternalIDJSON200ApplicationJSON struct {
 	User       *GetUByExternalProviderExternalIDJSON200ApplicationJSONUser `json:"user,omitempty"`
 	UserBadges []interface{}                                               `json:"user_badges,omitempty"`
+}
+
+type GetUByExternalProviderExternalIDJSONRequest struct {
+	PathParams GetUByExternalProviderExternalIDJSONPathParams
+	Headers    GetUByExternalProviderExternalIDJSONHeaders
 }
 
 type GetUByExternalProviderExternalIDJSONResponse struct {

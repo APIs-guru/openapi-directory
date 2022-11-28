@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputStartingPositionConfiguration } from "./inputstartingpositionconfiguration";
+
 
 
 // InputConfiguration
@@ -7,9 +8,9 @@ import { InputStartingPositionConfiguration } from "./inputstartingpositionconfi
  * When you start your application, you provide this configuration, which identifies the input source and the point in the input source at which you want the application to start processing records.
 **/
 export class InputConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: string;
 
-  @Metadata({ data: "json, name=InputStartingPositionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=InputStartingPositionConfiguration" })
   inputStartingPositionConfiguration: InputStartingPositionConfiguration;
 }

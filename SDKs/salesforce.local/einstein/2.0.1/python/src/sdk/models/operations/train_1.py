@@ -15,18 +15,18 @@ class Train1RequestBody:
 
 @dataclass
 class Train1Security:
-    bearer_token: shared.SchemeBearerToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_token: shared.SchemeBearerToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class Train1Request:
+    security: Train1Security = field()
     request: Optional[Train1RequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
-    security: Train1Security = field(default=None)
     
 
 @dataclass
 class Train1Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     train_response: Optional[shared.TrainResponse] = field(default=None)
     

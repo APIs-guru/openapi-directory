@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnvironmentConfig } from "./environmentconfig";
+import { EnvironmentConfigInput } from "./environmentconfig";
 export var EnvironmentStateEnum;
 (function (EnvironmentStateEnum) {
     EnvironmentStateEnum["StateUnspecified"] = "STATE_UNSPECIFIED";
@@ -43,33 +44,61 @@ var Environment = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=config" }),
+        SpeakeasyMetadata({ data: "json, name=config" }),
         __metadata("design:type", EnvironmentConfig)
     ], Environment.prototype, "config", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Environment.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Environment.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Environment.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Environment.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Environment.prototype, "updateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=uuid" }),
+        SpeakeasyMetadata({ data: "json, name=uuid" }),
         __metadata("design:type", String)
     ], Environment.prototype, "uuid", void 0);
     return Environment;
 }(SpeakeasyBase));
 export { Environment };
+// EnvironmentInput
+/**
+ * An environment for running orchestration tasks.
+**/
+var EnvironmentInput = /** @class */ (function (_super) {
+    __extends(EnvironmentInput, _super);
+    function EnvironmentInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=config" }),
+        __metadata("design:type", EnvironmentConfigInput)
+    ], EnvironmentInput.prototype, "config", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], EnvironmentInput.prototype, "labels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], EnvironmentInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=state" }),
+        __metadata("design:type", String)
+    ], EnvironmentInput.prototype, "state", void 0);
+    return EnvironmentInput;
+}(SpeakeasyBase));
+export { EnvironmentInput };

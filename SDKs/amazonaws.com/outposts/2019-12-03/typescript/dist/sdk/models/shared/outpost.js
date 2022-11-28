@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Outpost
 /**
  * Information about an Outpost.
@@ -33,47 +33,47 @@ var Outpost = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AvailabilityZone" }),
+        SpeakeasyMetadata({ data: "json, name=AvailabilityZone" }),
         __metadata("design:type", String)
     ], Outpost.prototype, "availabilityZone", void 0);
     __decorate([
-        Metadata({ data: "json, name=AvailabilityZoneId" }),
+        SpeakeasyMetadata({ data: "json, name=AvailabilityZoneId" }),
         __metadata("design:type", String)
     ], Outpost.prototype, "availabilityZoneId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], Outpost.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=LifeCycleStatus" }),
+        SpeakeasyMetadata({ data: "json, name=LifeCycleStatus" }),
         __metadata("design:type", String)
     ], Outpost.prototype, "lifeCycleStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], Outpost.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=OutpostArn" }),
+        SpeakeasyMetadata({ data: "json, name=OutpostArn" }),
         __metadata("design:type", String)
     ], Outpost.prototype, "outpostArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=OutpostId" }),
+        SpeakeasyMetadata({ data: "json, name=OutpostId" }),
         __metadata("design:type", String)
     ], Outpost.prototype, "outpostId", void 0);
     __decorate([
-        Metadata({ data: "json, name=OwnerId" }),
+        SpeakeasyMetadata({ data: "json, name=OwnerId" }),
         __metadata("design:type", String)
     ], Outpost.prototype, "ownerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=SiteArn" }),
+        SpeakeasyMetadata({ data: "json, name=SiteArn" }),
         __metadata("design:type", String)
     ], Outpost.prototype, "siteArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SiteId" }),
+        SpeakeasyMetadata({ data: "json, name=SiteId" }),
         __metadata("design:type", String)
     ], Outpost.prototype, "siteId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags" }),
+        SpeakeasyMetadata({ data: "json, name=Tags" }),
         __metadata("design:type", Map)
     ], Outpost.prototype, "tags", void 0);
     return Outpost;

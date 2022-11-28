@@ -1,5 +1,7 @@
 package shared
 
+// EmailLinkSigninResponse
+// Response of email signIn.
 type EmailLinkSigninResponse struct {
 	Email        *string `json:"email,omitempty"`
 	ExpiresIn    *string `json:"expiresIn,omitempty"`

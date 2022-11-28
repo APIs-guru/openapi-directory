@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UserIdFileIdItem
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * User ID and file ID mapping
 **/
 export class UserIdFileIdItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileId" })
+  @SpeakeasyMetadata({ data: "json, name=fileId" })
   fileId?: number;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: number;
 }

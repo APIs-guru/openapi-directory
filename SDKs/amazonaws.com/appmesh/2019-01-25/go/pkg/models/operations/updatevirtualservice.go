@@ -23,6 +23,8 @@ type UpdateVirtualServiceHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateVirtualServiceRequestBodySpec
+// An object that represents the specification of a virtual service.
 type UpdateVirtualServiceRequestBodySpec struct {
 	Provider *shared.VirtualServiceProvider `json:"provider,omitempty"`
 }

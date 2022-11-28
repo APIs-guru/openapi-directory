@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class DeleteUserItemRatingPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteUserItemRatingSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class DeleteUserItemRatingRequest:
-    path_params: DeleteUserItemRatingPathParams = field(default=None)
-    security: DeleteUserItemRatingSecurity = field(default=None)
+    path_params: DeleteUserItemRatingPathParams = field()
+    security: DeleteUserItemRatingSecurity = field()
     
 
 @dataclass
 class DeleteUserItemRatingResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user_item_data_dto: Optional[shared.UserItemDataDto] = field(default=None)
     

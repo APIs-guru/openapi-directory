@@ -1,61 +1,62 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkSwitchQosRulePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=qosRuleId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=qosRuleId" })
   qosRuleId: string;
 }
 
 export enum UpdateNetworkSwitchQosRuleRequestBodyProtocolEnum {
-    Any = "ANY"
-,    Tcp = "TCP"
-,    Udp = "UDP"
+    Any = "ANY",
+    Tcp = "TCP",
+    Udp = "UDP"
 }
 
 
 export class UpdateNetworkSwitchQosRuleRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dscp" })
+  @SpeakeasyMetadata({ data: "json, name=dscp" })
   dscp?: number;
 
-  @Metadata({ data: "json, name=dstPort" })
+  @SpeakeasyMetadata({ data: "json, name=dstPort" })
   dstPort?: number;
 
-  @Metadata({ data: "json, name=dstPortRange" })
+  @SpeakeasyMetadata({ data: "json, name=dstPortRange" })
   dstPortRange?: string;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol?: UpdateNetworkSwitchQosRuleRequestBodyProtocolEnum;
 
-  @Metadata({ data: "json, name=srcPort" })
+  @SpeakeasyMetadata({ data: "json, name=srcPort" })
   srcPort?: number;
 
-  @Metadata({ data: "json, name=srcPortRange" })
+  @SpeakeasyMetadata({ data: "json, name=srcPortRange" })
   srcPortRange?: string;
 
-  @Metadata({ data: "json, name=vlan" })
+  @SpeakeasyMetadata({ data: "json, name=vlan" })
   vlan?: number;
 }
 
 
 export class UpdateNetworkSwitchQosRuleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkSwitchQosRulePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkSwitchQosRuleRequestBody;
 }
 
 
 export class UpdateNetworkSwitchQosRuleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkSwitchQosRule200ApplicationJsonObject?: Map<string, any>;
 }

@@ -1,16 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import authtype_enum
-from . import servertype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ImportSourceCredentialsInput:
-    auth_type: authtype_enum.AuthTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authType' }})
-    server_type: servertype_enum.ServerTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serverType' }})
-    should_overwrite: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shouldOverwrite' }})
-    token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'token' }})
-    username: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'username' }})
+    auth_type: AuthTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('authType') }})
+    server_type: ServerTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('serverType') }})
+    token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('token') }})
+    should_overwrite: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('shouldOverwrite') }})
+    username: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('username') }})
     

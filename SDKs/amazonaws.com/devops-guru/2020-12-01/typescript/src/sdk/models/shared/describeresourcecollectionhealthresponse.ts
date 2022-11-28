@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudFormationHealth } from "./cloudformationhealth";
 import { ServiceHealth } from "./servicehealth";
 
 
+
 export class DescribeResourceCollectionHealthResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudFormation", elemType: shared.CloudFormationHealth })
+  @SpeakeasyMetadata({ data: "json, name=CloudFormation", elemType: CloudFormationHealth })
   cloudFormation: CloudFormationHealth[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Service", elemType: shared.ServiceHealth })
+  @SpeakeasyMetadata({ data: "json, name=Service", elemType: ServiceHealth })
   service?: ServiceHealth[];
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostResumeProcessesActionEnum(str, Enum):
     RESUME_PROCESSES = "ResumeProcesses"
@@ -10,8 +14,8 @@ class PostResumeProcessesVersionEnum(str, Enum):
 
 @dataclass
 class PostResumeProcessesQueryParams:
-    action: PostResumeProcessesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostResumeProcessesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostResumeProcessesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostResumeProcessesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostResumeProcessesHeaders:
 
 @dataclass
 class PostResumeProcessesRequest:
-    query_params: PostResumeProcessesQueryParams = field(default=None)
-    headers: PostResumeProcessesHeaders = field(default=None)
+    headers: PostResumeProcessesHeaders = field()
+    query_params: PostResumeProcessesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostResumeProcessesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

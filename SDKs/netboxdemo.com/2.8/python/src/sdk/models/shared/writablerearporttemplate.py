@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class WritableRearPortTemplateTypeEnum(str, Enum):
     EIGHTP8C = "8p8c"
@@ -21,10 +23,9 @@ class WritableRearPortTemplateTypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class WritableRearPortTemplate:
-    device_type: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device_type' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    positions: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'positions' }})
-    type: WritableRearPortTemplateTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class WritableRearPortTemplateInput:
+    device_type: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('device_type') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    type: WritableRearPortTemplateTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    positions: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('positions') }})
     

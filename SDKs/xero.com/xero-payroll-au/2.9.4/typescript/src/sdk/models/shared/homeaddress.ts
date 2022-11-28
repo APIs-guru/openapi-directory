@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StateEnum } from "./stateenum";
 
 
+
 export class HomeAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AddressLine1" })
+  @SpeakeasyMetadata({ data: "json, name=AddressLine1" })
   addressLine1: string;
 
-  @Metadata({ data: "json, name=AddressLine2" })
+  @SpeakeasyMetadata({ data: "json, name=AddressLine2" })
   addressLine2?: string;
 
-  @Metadata({ data: "json, name=City" })
+  @SpeakeasyMetadata({ data: "json, name=City" })
   city?: string;
 
-  @Metadata({ data: "json, name=Country" })
+  @SpeakeasyMetadata({ data: "json, name=Country" })
   country?: string;
 
-  @Metadata({ data: "json, name=PostalCode" })
+  @SpeakeasyMetadata({ data: "json, name=PostalCode" })
   postalCode?: string;
 
-  @Metadata({ data: "json, name=Region" })
+  @SpeakeasyMetadata({ data: "json, name=Region" })
   region?: StateEnum;
 }

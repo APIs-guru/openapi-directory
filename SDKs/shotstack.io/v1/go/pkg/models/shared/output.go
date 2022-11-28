@@ -49,6 +49,8 @@ const (
 	OutputScaleToEnumOneThousandAndEighty OutputScaleToEnum = "1080"
 )
 
+// Output
+// The output format, render range and type of media to generate.
 type Output struct {
 	AspectRatio  *OutputAspectRatioEnum `json:"aspectRatio,omitempty"`
 	Destinations []interface{}          `json:"destinations,omitempty"`

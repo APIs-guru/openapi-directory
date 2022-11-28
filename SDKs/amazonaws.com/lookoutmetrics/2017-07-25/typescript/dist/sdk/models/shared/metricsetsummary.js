@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // MetricSetSummary
 /**
  * Contains information about a dataset.
@@ -33,31 +33,31 @@ var MetricSetSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AnomalyDetectorArn" }),
+        SpeakeasyMetadata({ data: "json, name=AnomalyDetectorArn" }),
         __metadata("design:type", String)
     ], MetricSetSummary.prototype, "anomalyDetectorArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreationTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTime" }),
         __metadata("design:type", Date)
     ], MetricSetSummary.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModificationTime" }),
+        SpeakeasyMetadata({ data: "json, name=LastModificationTime" }),
         __metadata("design:type", Date)
     ], MetricSetSummary.prototype, "lastModificationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricSetArn" }),
+        SpeakeasyMetadata({ data: "json, name=MetricSetArn" }),
         __metadata("design:type", String)
     ], MetricSetSummary.prototype, "metricSetArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricSetDescription" }),
+        SpeakeasyMetadata({ data: "json, name=MetricSetDescription" }),
         __metadata("design:type", String)
     ], MetricSetSummary.prototype, "metricSetDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=MetricSetName" }),
+        SpeakeasyMetadata({ data: "json, name=MetricSetName" }),
         __metadata("design:type", String)
     ], MetricSetSummary.prototype, "metricSetName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags" }),
+        SpeakeasyMetadata({ data: "json, name=Tags" }),
         __metadata("design:type", Map)
     ], MetricSetSummary.prototype, "tags", void 0);
     return MetricSetSummary;

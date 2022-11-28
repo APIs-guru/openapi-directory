@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetResyncMfaDeviceActionEnum {
     ResyncMfaDevice = "ResyncMFADevice"
@@ -10,66 +11,66 @@ export enum GetResyncMfaDeviceVersionEnum {
 
 
 export class GetResyncMfaDeviceQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetResyncMfaDeviceActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AuthenticationCode1" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AuthenticationCode1" })
   authenticationCode1: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=AuthenticationCode2" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AuthenticationCode2" })
   authenticationCode2: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=SerialNumber" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=SerialNumber" })
   serialNumber: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=UserName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=UserName" })
   userName: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetResyncMfaDeviceVersionEnum;
 }
 
 
 export class GetResyncMfaDeviceHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetResyncMfaDeviceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetResyncMfaDeviceQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetResyncMfaDeviceHeaders;
 }
 
 
 export class GetResyncMfaDeviceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

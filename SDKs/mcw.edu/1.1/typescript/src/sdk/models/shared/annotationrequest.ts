@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AnnotationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=evidenceCodes" })
+  @SpeakeasyMetadata({ data: "json, name=evidenceCodes" })
   evidenceCodes?: string[];
 
-  @Metadata({ data: "json, name=ids" })
+  @SpeakeasyMetadata({ data: "json, name=ids" })
   ids?: string[];
 
-  @Metadata({ data: "json, name=speciesTypeKeys" })
+  @SpeakeasyMetadata({ data: "json, name=speciesTypeKeys" })
   speciesTypeKeys?: number[];
 
-  @Metadata({ data: "json, name=termAcc" })
+  @SpeakeasyMetadata({ data: "json, name=termAcc" })
   termAcc?: string;
 }

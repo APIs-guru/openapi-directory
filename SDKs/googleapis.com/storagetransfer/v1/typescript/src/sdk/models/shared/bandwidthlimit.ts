@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BandwidthLimit
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies a bandwidth limit for an agent pool.
 **/
 export class BandwidthLimit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=limitMbps" })
+  @SpeakeasyMetadata({ data: "json, name=limitMbps" })
   limitMbps?: string;
 }

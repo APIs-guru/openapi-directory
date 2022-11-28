@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import addressinput
-from . import servicebusinesscontext
-from . import emailinput
-from . import phoneinput
+from sdk import utils
+from . import *
 
 class VerifyLocationRequestMethodEnum(str, Enum):
     VERIFICATION_METHOD_UNSPECIFIED = "VERIFICATION_METHOD_UNSPECIFIED"
@@ -18,10 +17,14 @@ class VerifyLocationRequestMethodEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VerifyLocationRequest:
-    address_input: Optional[addressinput.AddressInput] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'addressInput' }})
-    context: Optional[servicebusinesscontext.ServiceBusinessContext] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'context' }})
-    email_input: Optional[emailinput.EmailInput] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'emailInput' }})
-    language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'languageCode' }})
-    method: Optional[VerifyLocationRequestMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'method' }})
-    phone_input: Optional[phoneinput.PhoneInput] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phoneInput' }})
+    r"""VerifyLocationRequest
+    Request message for Verifications.VerifyLocation.
+    """
+    
+    address_input: Optional[AddressInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('addressInput') }})
+    context: Optional[ServiceBusinessContext] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('context') }})
+    email_input: Optional[EmailInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('emailInput') }})
+    language_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('languageCode') }})
+    method: Optional[VerifyLocationRequestMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('method') }})
+    phone_input: Optional[PhoneInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('phoneInput') }})
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteTransitGatewayVpcAttachmentActionEnum(str, Enum):
     DELETE_TRANSIT_GATEWAY_VPC_ATTACHMENT = "DeleteTransitGatewayVpcAttachment"
@@ -10,8 +14,8 @@ class PostDeleteTransitGatewayVpcAttachmentVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteTransitGatewayVpcAttachmentQueryParams:
-    action: PostDeleteTransitGatewayVpcAttachmentActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteTransitGatewayVpcAttachmentVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteTransitGatewayVpcAttachmentActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteTransitGatewayVpcAttachmentVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteTransitGatewayVpcAttachmentHeaders:
 
 @dataclass
 class PostDeleteTransitGatewayVpcAttachmentRequest:
-    query_params: PostDeleteTransitGatewayVpcAttachmentQueryParams = field(default=None)
-    headers: PostDeleteTransitGatewayVpcAttachmentHeaders = field(default=None)
+    headers: PostDeleteTransitGatewayVpcAttachmentHeaders = field()
+    query_params: PostDeleteTransitGatewayVpcAttachmentQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteTransitGatewayVpcAttachmentResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

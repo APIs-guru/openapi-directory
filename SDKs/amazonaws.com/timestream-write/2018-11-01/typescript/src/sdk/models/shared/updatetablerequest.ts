@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RetentionProperties } from "./retentionproperties";
 
 
+
 export class UpdateTableRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseName" })
   databaseName: string;
 
-  @Metadata({ data: "json, name=RetentionProperties" })
+  @SpeakeasyMetadata({ data: "json, name=RetentionProperties" })
   retentionProperties: RetentionProperties;
 
-  @Metadata({ data: "json, name=TableName" })
+  @SpeakeasyMetadata({ data: "json, name=TableName" })
   tableName: string;
 }

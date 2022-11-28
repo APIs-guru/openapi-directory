@@ -1,5 +1,7 @@
 package shared
 
+// ListConfigurationsResponse
+// ListConfigurationsResponse is a list of Configuration resources.
 type ListConfigurationsResponse struct {
 	APIVersion  *string         `json:"apiVersion,omitempty"`
 	Items       []Configuration `json:"items,omitempty"`

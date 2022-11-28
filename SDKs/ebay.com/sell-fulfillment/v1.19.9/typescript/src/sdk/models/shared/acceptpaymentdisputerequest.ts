@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReturnAddress } from "./returnaddress";
+
 
 
 // AcceptPaymentDisputeRequest
@@ -7,9 +8,9 @@ import { ReturnAddress } from "./returnaddress";
  * This type is used by base request of the acceptPaymentDispute method.
 **/
 export class AcceptPaymentDisputeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=returnAddress" })
+  @SpeakeasyMetadata({ data: "json, name=returnAddress" })
   returnAddress?: ReturnAddress;
 
-  @Metadata({ data: "json, name=revision" })
+  @SpeakeasyMetadata({ data: "json, name=revision" })
   revision?: number;
 }

@@ -10,13 +10,13 @@ class GetItvRokuPlansQueryParams:
 
 @dataclass
 class GetItvRokuPlansRequest:
-    query_params: GetItvRokuPlansQueryParams = field(default=None)
+    query_params: GetItvRokuPlansQueryParams = field()
     
 
 @dataclass
 class GetItvRokuPlansResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     roku_plans: Optional[shared.RokuPlans] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

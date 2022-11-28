@@ -19,6 +19,8 @@ const (
 	LocationAssociationCategoryEnumAdditional          LocationAssociationCategoryEnum = "ADDITIONAL"
 )
 
+// LocationAssociation
+// How the media item is associated with its location.
 type LocationAssociation struct {
 	Category        *LocationAssociationCategoryEnum `json:"category,omitempty"`
 	PriceListItemID *string                          `json:"priceListItemId,omitempty"`

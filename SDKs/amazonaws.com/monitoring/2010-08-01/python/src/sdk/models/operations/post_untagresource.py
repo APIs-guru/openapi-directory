@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostUntagResourceActionEnum(str, Enum):
     UNTAG_RESOURCE = "UntagResource"
@@ -10,8 +14,8 @@ class PostUntagResourceVersionEnum(str, Enum):
 
 @dataclass
 class PostUntagResourceQueryParams:
-    action: PostUntagResourceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostUntagResourceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostUntagResourceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostUntagResourceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostUntagResourceHeaders:
 
 @dataclass
 class PostUntagResourceRequest:
-    query_params: PostUntagResourceQueryParams = field(default=None)
-    headers: PostUntagResourceHeaders = field(default=None)
+    headers: PostUntagResourceHeaders = field()
+    query_params: PostUntagResourceQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostUntagResourceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

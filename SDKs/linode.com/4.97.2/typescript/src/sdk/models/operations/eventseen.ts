@@ -1,59 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EventSeenPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=eventId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=eventId" })
   eventId: number;
 }
 
 
-export class EventSeenSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class EventSeenSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class EventSeenSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: EventSeenSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: EventSeenSecurityOption2;
-}
-
-
-export class EventSeenRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: EventSeenPathParams;
-
-  @Metadata()
-  security: EventSeenSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class EventSeenDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class EventSeenRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: EventSeenPathParams;
+
+  @SpeakeasyMetadata()
+  security: EventSeenSecurity;
+}
+
+
 export class EventSeenResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   eventSeen200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   eventSeenDefaultApplicationJsonObject?: EventSeenDefaultApplicationJson;
 }

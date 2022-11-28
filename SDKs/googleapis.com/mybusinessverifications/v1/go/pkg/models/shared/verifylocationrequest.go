@@ -12,6 +12,8 @@ const (
 	VerifyLocationRequestMethodEnumVettedPartner                 VerifyLocationRequestMethodEnum = "VETTED_PARTNER"
 )
 
+// VerifyLocationRequest
+// Request message for Verifications.VerifyLocation.
 type VerifyLocationRequest struct {
 	Context       *ServiceBusinessContext          `json:"context,omitempty"`
 	EmailAddress  *string                          `json:"emailAddress,omitempty"`

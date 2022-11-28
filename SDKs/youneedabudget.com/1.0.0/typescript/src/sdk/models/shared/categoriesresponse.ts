@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CategoryGroupWithCategories } from "./categorygroupwithcategories";
 
 
+
 export class CategoriesResponseData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category_groups", elemType: shared.CategoryGroupWithCategories })
+  @SpeakeasyMetadata({ data: "json, name=category_groups", elemType: CategoryGroupWithCategories })
   categoryGroups: CategoryGroupWithCategories[];
 
-  @Metadata({ data: "json, name=server_knowledge" })
+  @SpeakeasyMetadata({ data: "json, name=server_knowledge" })
   serverKnowledge: number;
 }
 
 
 export class CategoriesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: CategoriesResponseData;
 }

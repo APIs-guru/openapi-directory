@@ -1,30 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpdateSystemModelsPackageStatus } from "./updatesystemmodelspackagestatus";
 
 
+
 export class UpdateSystemModelsPackageStatusSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AverageDownloadTime" })
+  @SpeakeasyMetadata({ data: "json, name=AverageDownloadTime" })
   averageDownloadTime?: string;
 
-  @Metadata({ data: "json, name=AverageInstallTime" })
+  @SpeakeasyMetadata({ data: "json, name=AverageInstallTime" })
   averageInstallTime?: string;
 
-  @Metadata({ data: "json, name=Downloaded" })
+  @SpeakeasyMetadata({ data: "json, name=Downloaded" })
   downloaded?: number;
 
-  @Metadata({ data: "json, name=Error" })
+  @SpeakeasyMetadata({ data: "json, name=Error" })
   error?: number;
 
-  @Metadata({ data: "json, name=Installed" })
+  @SpeakeasyMetadata({ data: "json, name=Installed" })
   installed?: number;
 
-  @Metadata({ data: "json, name=Package" })
+  @SpeakeasyMetadata({ data: "json, name=Package" })
   package?: string;
 
-  @Metadata({ data: "json, name=PackageID" })
+  @SpeakeasyMetadata({ data: "json, name=PackageID" })
   packageId?: string;
 
-  @Metadata({ data: "json, name=PackageStatusItems", elemType: shared.UpdateSystemModelsPackageStatus })
+  @SpeakeasyMetadata({ data: "json, name=PackageStatusItems", elemType: UpdateSystemModelsPackageStatus })
   packageStatusItems?: UpdateSystemModelsPackageStatus[];
 }

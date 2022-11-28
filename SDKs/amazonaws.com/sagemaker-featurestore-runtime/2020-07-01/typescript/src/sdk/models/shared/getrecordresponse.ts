@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FeatureValue } from "./featurevalue";
 
 
+
 export class GetRecordResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Record", elemType: shared.FeatureValue })
+  @SpeakeasyMetadata({ data: "json, name=Record", elemType: FeatureValue })
   record?: FeatureValue[];
 }

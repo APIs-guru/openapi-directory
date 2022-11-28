@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SchemaFacet } from "./schemafacet";
+
 
 
 // BatchGetObjectInformationResponse
@@ -8,9 +8,9 @@ import { SchemaFacet } from "./schemafacet";
  * Represents the output of a <a>GetObjectInformation</a> response operation.
 **/
 export class BatchGetObjectInformationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ObjectIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ObjectIdentifier" })
   objectIdentifier?: string;
 
-  @Metadata({ data: "json, name=SchemaFacets", elemType: shared.SchemaFacet })
+  @SpeakeasyMetadata({ data: "json, name=SchemaFacets", elemType: SchemaFacet })
   schemaFacets?: SchemaFacet[];
 }

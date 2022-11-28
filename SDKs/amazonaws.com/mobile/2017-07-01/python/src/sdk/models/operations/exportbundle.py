@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ExportBundlePathParams:
-    bundle_id: str = field(default=None, metadata={'path_param': { 'field_name': 'bundleId', 'style': 'simple', 'explode': False }})
+    bundle_id: str = field(metadata={'path_param': { 'field_name': 'bundleId', 'style': 'simple', 'explode': False }})
     
 class ExportBundlePlatformEnum(str, Enum):
     OSX = "OSX"
@@ -36,20 +40,20 @@ class ExportBundleHeaders:
 
 @dataclass
 class ExportBundleRequest:
-    path_params: ExportBundlePathParams = field(default=None)
-    query_params: ExportBundleQueryParams = field(default=None)
-    headers: ExportBundleHeaders = field(default=None)
+    headers: ExportBundleHeaders = field()
+    path_params: ExportBundlePathParams = field()
+    query_params: ExportBundleQueryParams = field()
     
 
 @dataclass
 class ExportBundleResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[shared.BadRequestException] = field(default=None)
-    content_type: str = field(default=None)
     export_bundle_result: Optional[shared.ExportBundleResult] = field(default=None)
     internal_failure_exception: Optional[shared.InternalFailureException] = field(default=None)
     not_found_exception: Optional[shared.NotFoundException] = field(default=None)
     service_unavailable_exception: Optional[shared.ServiceUnavailableException] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[shared.TooManyRequestsException] = field(default=None)
     unauthorized_exception: Optional[shared.UnauthorizedException] = field(default=None)
     

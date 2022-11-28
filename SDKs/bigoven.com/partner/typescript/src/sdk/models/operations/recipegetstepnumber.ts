@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RecipeGetStepNumberQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=recipeId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=recipeId" })
   recipeId: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userName" })
   userName: string;
 }
 
 
 export class RecipeGetStepNumberRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RecipeGetStepNumberQueryParams;
 }
 
 
 export class RecipeGetStepNumberResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   api2Result?: shared.Api2Result;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2IntentTrainingPhrasePart
+// Represents a part of a training phrase.
 type GoogleCloudDialogflowV2IntentTrainingPhrasePart struct {
 	Alias       *string `json:"alias,omitempty"`
 	EntityType  *string `json:"entityType,omitempty"`

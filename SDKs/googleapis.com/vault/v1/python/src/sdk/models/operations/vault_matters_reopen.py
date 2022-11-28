@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VaultMattersReopenPathParams:
-    matter_id: str = field(default=None, metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
+    matter_id: str = field(metadata={'path_param': { 'field_name': 'matterId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class VaultMattersReopenQueryParams:
 
 @dataclass
 class VaultMattersReopenSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VaultMattersReopenRequest:
-    path_params: VaultMattersReopenPathParams = field(default=None)
-    query_params: VaultMattersReopenQueryParams = field(default=None)
+    path_params: VaultMattersReopenPathParams = field()
+    query_params: VaultMattersReopenQueryParams = field()
+    security: VaultMattersReopenSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: VaultMattersReopenSecurity = field(default=None)
     
 
 @dataclass
 class VaultMattersReopenResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     reopen_matter_response: Optional[shared.ReopenMatterResponse] = field(default=None)
-    status_code: int = field(default=None)
     

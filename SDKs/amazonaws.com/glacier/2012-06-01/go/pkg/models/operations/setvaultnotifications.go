@@ -15,6 +15,8 @@ type SetVaultNotificationsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// SetVaultNotificationsRequestBodyVaultNotificationConfig
+// Represents a vault's notification configuration.
 type SetVaultNotificationsRequestBodyVaultNotificationConfig struct {
 	Events   []string `json:"Events,omitempty"`
 	SnsTopic *string  `json:"SNSTopic,omitempty"`

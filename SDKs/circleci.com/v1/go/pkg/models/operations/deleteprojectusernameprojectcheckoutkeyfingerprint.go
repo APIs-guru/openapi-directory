@@ -6,10 +6,6 @@ type DeleteProjectUsernameProjectCheckoutKeyFingerprintPathParams struct {
 	Username    string `pathParam:"style=simple,explode=false,name=username"`
 }
 
-type DeleteProjectUsernameProjectCheckoutKeyFingerprintRequest struct {
-	PathParams DeleteProjectUsernameProjectCheckoutKeyFingerprintPathParams
-}
-
 type DeleteProjectUsernameProjectCheckoutKeyFingerprint200ApplicationJSONMessageEnum string
 
 const (
@@ -18,6 +14,10 @@ const (
 
 type DeleteProjectUsernameProjectCheckoutKeyFingerprint200ApplicationJSON struct {
 	Message *DeleteProjectUsernameProjectCheckoutKeyFingerprint200ApplicationJSONMessageEnum `json:"message,omitempty"`
+}
+
+type DeleteProjectUsernameProjectCheckoutKeyFingerprintRequest struct {
+	PathParams DeleteProjectUsernameProjectCheckoutKeyFingerprintPathParams
 }
 
 type DeleteProjectUsernameProjectCheckoutKeyFingerprintResponse struct {

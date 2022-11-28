@@ -16,27 +16,10 @@ type SearchGroupsQueryParams struct {
 	Region     *string  `queryParam:"style=form,explode=true,name=region"`
 }
 
-type SearchGroupsSecurityOption1 struct {
-	Oauth2Implicit shared.SchemeOauth2Implicit `security:"scheme,type=oauth2"`
-}
-
-type SearchGroupsSecurityOption2 struct {
-	Oauth2Code shared.SchemeOauth2Code `security:"scheme,type=oauth2"`
-}
-
-type SearchGroupsSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
-}
-
 type SearchGroupsSecurity struct {
-	Option1 *SearchGroupsSecurityOption1 `security:"option"`
-	Option2 *SearchGroupsSecurityOption2 `security:"option"`
-	Option3 *SearchGroupsSecurityOption3 `security:"option"`
-}
-
-type SearchGroupsRequest struct {
-	QueryParams SearchGroupsQueryParams
-	Security    SearchGroupsSecurity
+	Oauth2Implicit *shared.SchemeOauth2Implicit `security:"scheme,type=oauth2"`
+	Oauth2Code     *shared.SchemeOauth2Code     `security:"scheme,type=oauth2"`
+	APIKey         *shared.SchemeAPIKey         `security:"scheme,type=apiKey,subtype=query"`
 }
 
 type SearchGroups200ApplicationJSON struct {
@@ -47,6 +30,11 @@ type SearchGroups200ApplicationJSON struct {
 	Page       *int64         `json:"page,omitempty"`
 	PerPage    *int64         `json:"per_page,omitempty"`
 	StartIndex *int64         `json:"start_index,omitempty"`
+}
+
+type SearchGroupsRequest struct {
+	QueryParams SearchGroupsQueryParams
+	Security    SearchGroupsSecurity
 }
 
 type SearchGroupsResponse struct {

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContainerService } from "./containerservice";
 
 
+
 export class CreateContainerServiceDeploymentResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerService" })
+  @SpeakeasyMetadata({ data: "json, name=containerService" })
   containerService?: ContainerService;
 }

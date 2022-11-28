@@ -18,12 +18,12 @@ class GetDatasetsHeaders:
 
 @dataclass
 class GetDatasetsRequest:
-    query_params: GetDatasetsQueryParams = field(default=None)
-    headers: GetDatasetsHeaders = field(default=None)
+    headers: GetDatasetsHeaders = field()
+    query_params: GetDatasetsQueryParams = field()
     
 
 @dataclass
 class GetDatasetsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

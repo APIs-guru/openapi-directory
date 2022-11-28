@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { EntityTypeEnum } from "./entitytypeenum";
 /**
  * <p>Provides information about an entity. </p> <p> </p>

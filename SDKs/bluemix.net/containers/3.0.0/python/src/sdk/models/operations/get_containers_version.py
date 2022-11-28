@@ -4,7 +4,7 @@ from typing import Any,Optional
 
 @dataclass
 class GetContainersVersionResponse:
+    content_type: str = field()
+    status_code: int = field()
     containers_version_get_info: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

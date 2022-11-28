@@ -1,5 +1,7 @@
 package shared
 
+// RelationalDatabaseBundle
+// Describes a database bundle. A bundle describes the performance specifications of the database.
 type RelationalDatabaseBundle struct {
 	BundleID             *string  `json:"bundleId,omitempty"`
 	CPUCount             *int64   `json:"cpuCount,omitempty"`

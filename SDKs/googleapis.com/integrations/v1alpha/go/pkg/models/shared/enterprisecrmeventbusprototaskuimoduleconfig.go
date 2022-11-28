@@ -25,6 +25,8 @@ const (
 	EnterpriseCrmEventbusProtoTaskUIModuleConfigModuleIDEnumGenericConnectorTask     EnterpriseCrmEventbusProtoTaskUIModuleConfigModuleIDEnum = "GENERIC_CONNECTOR_TASK"
 )
 
+// EnterpriseCrmEventbusProtoTaskUIModuleConfig
+// Task author would use this type to configure a config module.
 type EnterpriseCrmEventbusProtoTaskUIModuleConfig struct {
 	ModuleID *EnterpriseCrmEventbusProtoTaskUIModuleConfigModuleIDEnum `json:"moduleId,omitempty"`
 }

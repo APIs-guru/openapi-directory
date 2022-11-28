@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetConnectorDefinitionPathParams:
-    connector_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ConnectorDefinitionId', 'style': 'simple', 'explode': False }})
+    connector_definition_id: str = field(metadata={'path_param': { 'field_name': 'ConnectorDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,14 +24,14 @@ class GetConnectorDefinitionHeaders:
 
 @dataclass
 class GetConnectorDefinitionRequest:
-    path_params: GetConnectorDefinitionPathParams = field(default=None)
-    headers: GetConnectorDefinitionHeaders = field(default=None)
+    headers: GetConnectorDefinitionHeaders = field()
+    path_params: GetConnectorDefinitionPathParams = field()
     
 
 @dataclass
 class GetConnectorDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_connector_definition_response: Optional[shared.GetConnectorDefinitionResponse] = field(default=None)
-    status_code: int = field(default=None)
     

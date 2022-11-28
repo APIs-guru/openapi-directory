@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum ListAvailabilityAvailabilityEnum {
     Available = "available"
@@ -10,66 +11,66 @@ export enum ListAvailabilitySortEnum {
 }
 
 export enum ListAvailabilitySortDirectionEnum {
-    Ascending = "ascending"
-,    Descending = "descending"
+    Ascending = "ascending",
+    Descending = "descending"
 }
 
 export enum ListAvailabilityTerritoryEnum {
-    Uk = "uk"
-,    Nonuk = "nonuk"
-,    World = "world"
+    Uk = "uk",
+    Nonuk = "nonuk",
+    World = "world"
 }
 
 
 export class ListAvailabilityQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=availability" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=availability" })
   availability?: ListAvailabilityAvailabilityEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=debug" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=debug" })
   debug?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=descendants_of" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=descendants_of" })
   descendantsOf?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=media_set" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=media_set" })
   mediaSet?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
   pageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: ListAvailabilitySortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_direction" })
   sortDirection?: ListAvailabilitySortDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=territory" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=territory" })
   territory?: ListAvailabilityTerritoryEnum[];
 }
 
 
 export class ListAvailabilityRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListAvailabilityQueryParams;
 }
 
 
 export class ListAvailabilityResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nitro?: any;
 }

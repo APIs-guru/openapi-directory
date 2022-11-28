@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // MutualTlsAuthentication
 /**
  * If specified, API Gateway performs two-way authentication between the client and the server. Clients must present a trusted certificate to access your custom domain name.
@@ -33,15 +33,15 @@ var MutualTlsAuthentication = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=truststoreUri" }),
+        SpeakeasyMetadata({ data: "json, name=truststoreUri" }),
         __metadata("design:type", String)
     ], MutualTlsAuthentication.prototype, "truststoreUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=truststoreVersion" }),
+        SpeakeasyMetadata({ data: "json, name=truststoreVersion" }),
         __metadata("design:type", String)
     ], MutualTlsAuthentication.prototype, "truststoreVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=truststoreWarnings" }),
+        SpeakeasyMetadata({ data: "json, name=truststoreWarnings" }),
         __metadata("design:type", Array)
     ], MutualTlsAuthentication.prototype, "truststoreWarnings", void 0);
     return MutualTlsAuthentication;

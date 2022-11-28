@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListGroupCertificateAuthoritiesPathParams:
-    group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'GroupId', 'style': 'simple', 'explode': False }})
+    group_id: str = field(metadata={'path_param': { 'field_name': 'GroupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,15 +24,15 @@ class ListGroupCertificateAuthoritiesHeaders:
 
 @dataclass
 class ListGroupCertificateAuthoritiesRequest:
-    path_params: ListGroupCertificateAuthoritiesPathParams = field(default=None)
-    headers: ListGroupCertificateAuthoritiesHeaders = field(default=None)
+    headers: ListGroupCertificateAuthoritiesHeaders = field()
+    path_params: ListGroupCertificateAuthoritiesPathParams = field()
     
 
 @dataclass
 class ListGroupCertificateAuthoritiesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     list_group_certificate_authorities_response: Optional[shared.ListGroupCertificateAuthoritiesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

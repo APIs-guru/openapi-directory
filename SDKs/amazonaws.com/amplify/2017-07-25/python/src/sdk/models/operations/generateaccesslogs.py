@@ -1,15 +1,16 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class GenerateAccessLogsPathParams:
-    app_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
+    app_id: str = field(metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,25 +27,25 @@ class GenerateAccessLogsHeaders:
 @dataclass_json
 @dataclass
 class GenerateAccessLogsRequestBody:
-    domain_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domainName' }})
-    end_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    start_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'startTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    domain_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('domainName') }})
+    end_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    start_time: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('startTime'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     
 
 @dataclass
 class GenerateAccessLogsRequest:
-    path_params: GenerateAccessLogsPathParams = field(default=None)
-    headers: GenerateAccessLogsHeaders = field(default=None)
-    request: GenerateAccessLogsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GenerateAccessLogsHeaders = field()
+    path_params: GenerateAccessLogsPathParams = field()
+    request: GenerateAccessLogsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GenerateAccessLogsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     generate_access_logs_result: Optional[shared.GenerateAccessLogsResult] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

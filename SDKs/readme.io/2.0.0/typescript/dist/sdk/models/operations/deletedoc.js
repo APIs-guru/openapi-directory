@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteDocPathParams = /** @class */ (function (_super) {
     __extends(DeleteDocPathParams, _super);
@@ -30,7 +30,7 @@ var DeleteDocPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=slug" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=slug" }),
         __metadata("design:type", String)
     ], DeleteDocPathParams.prototype, "slug", void 0);
     return DeleteDocPathParams;
@@ -42,7 +42,7 @@ var DeleteDocHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=x-readme-version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-readme-version" }),
         __metadata("design:type", String)
     ], DeleteDocHeaders.prototype, "xReadmeVersion", void 0);
     return DeleteDocHeaders;
@@ -54,7 +54,7 @@ var DeleteDocSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], DeleteDocSecurity.prototype, "apiKey", void 0);
     return DeleteDocSecurity;
@@ -66,15 +66,15 @@ var DeleteDocRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteDocPathParams)
     ], DeleteDocRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteDocHeaders)
     ], DeleteDocRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteDocSecurity)
     ], DeleteDocRequest.prototype, "security", void 0);
     return DeleteDocRequest;
@@ -86,11 +86,11 @@ var DeleteDocResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteDocResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteDocResponse.prototype, "statusCode", void 0);
     return DeleteDocResponse;

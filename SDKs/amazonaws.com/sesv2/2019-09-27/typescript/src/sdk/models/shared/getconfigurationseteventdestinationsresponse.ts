@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventDestination } from "./eventdestination";
+
 
 
 // GetConfigurationSetEventDestinationsResponse
@@ -8,6 +8,6 @@ import { EventDestination } from "./eventdestination";
  * Information about an event destination for a configuration set.
 **/
 export class GetConfigurationSetEventDestinationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EventDestinations", elemType: shared.EventDestination })
+  @SpeakeasyMetadata({ data: "json, name=EventDestinations", elemType: EventDestination })
   eventDestinations?: EventDestination[];
 }

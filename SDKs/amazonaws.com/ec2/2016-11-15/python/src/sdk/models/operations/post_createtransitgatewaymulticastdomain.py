@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateTransitGatewayMulticastDomainActionEnum(str, Enum):
     CREATE_TRANSIT_GATEWAY_MULTICAST_DOMAIN = "CreateTransitGatewayMulticastDomain"
@@ -10,8 +14,8 @@ class PostCreateTransitGatewayMulticastDomainVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateTransitGatewayMulticastDomainQueryParams:
-    action: PostCreateTransitGatewayMulticastDomainActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateTransitGatewayMulticastDomainVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateTransitGatewayMulticastDomainActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateTransitGatewayMulticastDomainVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateTransitGatewayMulticastDomainHeaders:
 
 @dataclass
 class PostCreateTransitGatewayMulticastDomainRequest:
-    query_params: PostCreateTransitGatewayMulticastDomainQueryParams = field(default=None)
-    headers: PostCreateTransitGatewayMulticastDomainHeaders = field(default=None)
+    headers: PostCreateTransitGatewayMulticastDomainHeaders = field()
+    query_params: PostCreateTransitGatewayMulticastDomainQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateTransitGatewayMulticastDomainResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

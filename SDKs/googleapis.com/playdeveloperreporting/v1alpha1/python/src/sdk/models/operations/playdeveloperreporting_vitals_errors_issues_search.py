@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PlaydeveloperreportingVitalsErrorsIssuesSearchPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -48,13 +49,13 @@ class PlaydeveloperreportingVitalsErrorsIssuesSearchQueryParams:
 
 @dataclass
 class PlaydeveloperreportingVitalsErrorsIssuesSearchRequest:
-    path_params: PlaydeveloperreportingVitalsErrorsIssuesSearchPathParams = field(default=None)
-    query_params: PlaydeveloperreportingVitalsErrorsIssuesSearchQueryParams = field(default=None)
+    path_params: PlaydeveloperreportingVitalsErrorsIssuesSearchPathParams = field()
+    query_params: PlaydeveloperreportingVitalsErrorsIssuesSearchQueryParams = field()
     
 
 @dataclass
 class PlaydeveloperreportingVitalsErrorsIssuesSearchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_play_developer_reporting_v1alpha1_search_error_issues_response: Optional[shared.GooglePlayDeveloperReportingV1alpha1SearchErrorIssuesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

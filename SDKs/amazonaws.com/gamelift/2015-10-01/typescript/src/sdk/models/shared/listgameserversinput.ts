@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SortOrderEnum } from "./sortorderenum";
 
 
+
 export class ListGameServersInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GameServerGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=GameServerGroupName" })
   gameServerGroupName: string;
 
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=SortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=SortOrder" })
   sortOrder?: SortOrderEnum;
 }

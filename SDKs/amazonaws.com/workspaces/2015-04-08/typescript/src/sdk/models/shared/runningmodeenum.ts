@@ -1,6 +1,7 @@
 
 
+
 export enum RunningModeEnum {
-    AutoStop = "AUTO_STOP"
-,    AlwaysOn = "ALWAYS_ON"
+    AutoStop = "AUTO_STOP",
+    AlwaysOn = "ALWAYS_ON"
 }

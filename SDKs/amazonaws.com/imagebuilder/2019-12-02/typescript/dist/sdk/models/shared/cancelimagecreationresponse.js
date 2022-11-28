@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CancelImageCreationResponse = /** @class */ (function (_super) {
     __extends(CancelImageCreationResponse, _super);
     function CancelImageCreationResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clientToken" }),
+        SpeakeasyMetadata({ data: "json, name=clientToken" }),
         __metadata("design:type", String)
     ], CancelImageCreationResponse.prototype, "clientToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageBuildVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=imageBuildVersionArn" }),
         __metadata("design:type", String)
     ], CancelImageCreationResponse.prototype, "imageBuildVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestId" }),
+        SpeakeasyMetadata({ data: "json, name=requestId" }),
         __metadata("design:type", String)
     ], CancelImageCreationResponse.prototype, "requestId", void 0);
     return CancelImageCreationResponse;

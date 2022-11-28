@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPaymentPoliciesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=marketplace_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=marketplace_id" })
   marketplaceId: string;
 }
 
 
 export class GetPaymentPoliciesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetPaymentPoliciesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPaymentPoliciesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPaymentPoliciesSecurity;
 }
 
 
 export class GetPaymentPoliciesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   paymentPolicyResponse?: shared.PaymentPolicyResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

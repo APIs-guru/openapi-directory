@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetQueryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=count" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=count" })
   count?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=inUrlPrefixes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=inUrlPrefixes" })
   inUrlPrefixes?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" })
   q: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" })
   start?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=subdomains" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=subdomains" })
   subdomains?: string;
 }
 
 
 export class GetQueryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetQueryQueryParams;
 }
 
 
 export class GetQueryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

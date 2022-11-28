@@ -1,5 +1,7 @@
 package shared
 
+// GlacierJobDescription
+// Contains the description of an Amazon S3 Glacier job.
 type GlacierJobDescription struct {
 	Action                       *ActionCodeEnum                   `json:"Action,omitempty"`
 	ArchiveID                    *string                           `json:"ArchiveId,omitempty"`

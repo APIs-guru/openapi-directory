@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Link
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A reference to another portion of a document or an external URL resource.
 **/
 export class Link extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bookmarkId" })
+  @SpeakeasyMetadata({ data: "json, name=bookmarkId" })
   bookmarkId?: string;
 
-  @Metadata({ data: "json, name=headingId" })
+  @SpeakeasyMetadata({ data: "json, name=headingId" })
   headingId?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

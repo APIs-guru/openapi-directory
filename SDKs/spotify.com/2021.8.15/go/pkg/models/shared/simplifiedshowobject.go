@@ -1,5 +1,8 @@
 package shared
 
+// SimplifiedShowObject
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedshowobject - Find more info on the official Spotify Web API Reference
 type SimplifiedShowObject struct {
 	AvailableMarkets   []string           `json:"available_markets,omitempty"`
 	Copyrights         []CopyrightObject  `json:"copyrights,omitempty"`

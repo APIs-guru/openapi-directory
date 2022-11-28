@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DatabaseListCollectionsQueryParams = /** @class */ (function (_super) {
     __extends(DatabaseListCollectionsQueryParams, _super);
@@ -30,19 +30,19 @@ var DatabaseListCollectionsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], DatabaseListCollectionsQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], DatabaseListCollectionsQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=orderType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=orderType" }),
         __metadata("design:type", String)
     ], DatabaseListCollectionsQueryParams.prototype, "orderType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" }),
         __metadata("design:type", String)
     ], DatabaseListCollectionsQueryParams.prototype, "search", void 0);
     return DatabaseListCollectionsQueryParams;
@@ -54,11 +54,11 @@ var DatabaseListCollectionsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeKey)
     ], DatabaseListCollectionsSecurity.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], DatabaseListCollectionsSecurity.prototype, "project", void 0);
     return DatabaseListCollectionsSecurity;
@@ -70,11 +70,11 @@ var DatabaseListCollectionsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DatabaseListCollectionsQueryParams)
     ], DatabaseListCollectionsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DatabaseListCollectionsSecurity)
     ], DatabaseListCollectionsRequest.prototype, "security", void 0);
     return DatabaseListCollectionsRequest;
@@ -86,15 +86,15 @@ var DatabaseListCollectionsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DatabaseListCollectionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DatabaseListCollectionsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CollectionList)
     ], DatabaseListCollectionsResponse.prototype, "collectionList", void 0);
     return DatabaseListCollectionsResponse;

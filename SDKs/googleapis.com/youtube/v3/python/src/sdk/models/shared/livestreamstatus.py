@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import livestreamhealthstatus
+from sdk import utils
+from . import *
 
 class LiveStreamStatusStreamStatusEnum(str, Enum):
     CREATED = "created"
@@ -14,6 +16,10 @@ class LiveStreamStatusStreamStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class LiveStreamStatus:
-    health_status: Optional[livestreamhealthstatus.LiveStreamHealthStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'healthStatus' }})
-    stream_status: Optional[LiveStreamStatusStreamStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'streamStatus' }})
+    r"""LiveStreamStatus
+    Brief description of the live stream status.
+    """
+    
+    health_status: Optional[LiveStreamHealthStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('healthStatus') }})
+    stream_status: Optional[LiveStreamStatusStreamStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('streamStatus') }})
     

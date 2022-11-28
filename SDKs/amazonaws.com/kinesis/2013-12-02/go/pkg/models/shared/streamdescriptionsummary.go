@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StreamDescriptionSummary
+// Represents the output for <a>DescribeStreamSummary</a>
 type StreamDescriptionSummary struct {
 	ConsumerCount           *int64              `json:"ConsumerCount,omitempty"`
 	EncryptionType          *EncryptionTypeEnum `json:"EncryptionType,omitempty"`

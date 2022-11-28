@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetConsumerV1ServicesAllocationsIdPathParams = /** @class */ (function (_super) {
     __extends(GetConsumerV1ServicesAllocationsIdPathParams, _super);
@@ -30,7 +30,7 @@ var GetConsumerV1ServicesAllocationsIdPathParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], GetConsumerV1ServicesAllocationsIdPathParams.prototype, "id", void 0);
     return GetConsumerV1ServicesAllocationsIdPathParams;
@@ -42,7 +42,7 @@ var GetConsumerV1ServicesAllocationsIdRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetConsumerV1ServicesAllocationsIdPathParams)
     ], GetConsumerV1ServicesAllocationsIdRequest.prototype, "pathParams", void 0);
     return GetConsumerV1ServicesAllocationsIdRequest;
@@ -54,15 +54,15 @@ var GetConsumerV1ServicesAllocationsIdResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetConsumerV1ServicesAllocationsIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ServiceAllocationViewModel)
     ], GetConsumerV1ServicesAllocationsIdResponse.prototype, "serviceAllocationViewModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetConsumerV1ServicesAllocationsIdResponse.prototype, "statusCode", void 0);
     return GetConsumerV1ServicesAllocationsIdResponse;

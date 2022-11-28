@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2Interval } from "./googlecloudretailv2interval";
+
 
 
 // GoogleCloudRetailV2SearchRequestFacetSpecFacetKey
@@ -8,30 +8,30 @@ import { GoogleCloudRetailV2Interval } from "./googlecloudretailv2interval";
  * Specifies how a facet is computed.
 **/
 export class GoogleCloudRetailV2SearchRequestFacetSpecFacetKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caseInsensitive" })
+  @SpeakeasyMetadata({ data: "json, name=caseInsensitive" })
   caseInsensitive?: boolean;
 
-  @Metadata({ data: "json, name=contains" })
+  @SpeakeasyMetadata({ data: "json, name=contains" })
   contains?: string[];
 
-  @Metadata({ data: "json, name=intervals", elemType: shared.GoogleCloudRetailV2Interval })
+  @SpeakeasyMetadata({ data: "json, name=intervals", elemType: GoogleCloudRetailV2Interval })
   intervals?: GoogleCloudRetailV2Interval[];
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=orderBy" })
+  @SpeakeasyMetadata({ data: "json, name=orderBy" })
   orderBy?: string;
 
-  @Metadata({ data: "json, name=prefixes" })
+  @SpeakeasyMetadata({ data: "json, name=prefixes" })
   prefixes?: string[];
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: string;
 
-  @Metadata({ data: "json, name=restrictedValues" })
+  @SpeakeasyMetadata({ data: "json, name=restrictedValues" })
   restrictedValues?: string[];
 
-  @Metadata({ data: "json, name=returnMinMax" })
+  @SpeakeasyMetadata({ data: "json, name=returnMinMax" })
   returnMinMax?: boolean;
 }

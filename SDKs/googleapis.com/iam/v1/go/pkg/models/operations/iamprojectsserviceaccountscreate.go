@@ -30,7 +30,7 @@ type IamProjectsServiceAccountsCreateSecurity struct {
 type IamProjectsServiceAccountsCreateRequest struct {
 	PathParams  IamProjectsServiceAccountsCreatePathParams
 	QueryParams IamProjectsServiceAccountsCreateQueryParams
-	Request     *shared.CreateServiceAccountRequest `request:"mediaType=application/json"`
+	Request     *shared.CreateServiceAccountRequestInput `request:"mediaType=application/json"`
 	Security    IamProjectsServiceAccountsCreateSecurity
 }
 

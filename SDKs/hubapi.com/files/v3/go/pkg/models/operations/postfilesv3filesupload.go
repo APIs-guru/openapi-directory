@@ -4,17 +4,10 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type PostFilesV3FilesUploadSecurityOption1 struct {
-	Hapikey shared.SchemeHapikey `security:"scheme,type=apiKey,subtype=query"`
-}
-
-type PostFilesV3FilesUploadSecurityOption2 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
-}
-
 type PostFilesV3FilesUploadSecurity struct {
-	Option1 *PostFilesV3FilesUploadSecurityOption1 `security:"option"`
-	Option2 *PostFilesV3FilesUploadSecurityOption2 `security:"option"`
+	Hapikey           *shared.SchemeHapikey           `security:"scheme,type=apiKey,subtype=query"`
+	PrivateAppsLegacy *shared.SchemePrivateAppsLegacy `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2Legacy      *shared.SchemeOauth2Legacy      `security:"scheme,type=oauth2"`
 }
 
 type PostFilesV3FilesUploadRequest struct {

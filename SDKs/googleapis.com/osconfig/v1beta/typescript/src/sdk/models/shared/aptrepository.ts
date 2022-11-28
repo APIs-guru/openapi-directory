@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AptRepositoryArchiveTypeEnum {
-    ArchiveTypeUnspecified = "ARCHIVE_TYPE_UNSPECIFIED"
-,    Deb = "DEB"
-,    DebSrc = "DEB_SRC"
+    ArchiveTypeUnspecified = "ARCHIVE_TYPE_UNSPECIFIED",
+    Deb = "DEB",
+    DebSrc = "DEB_SRC"
 }
 
 
@@ -12,18 +13,18 @@ export enum AptRepositoryArchiveTypeEnum {
  * Represents a single Apt package repository. This repository is added to a repo file that is stored at `/etc/apt/sources.list.d/google_osconfig.list`.
 **/
 export class AptRepository extends SpeakeasyBase {
-  @Metadata({ data: "json, name=archiveType" })
+  @SpeakeasyMetadata({ data: "json, name=archiveType" })
   archiveType?: AptRepositoryArchiveTypeEnum;
 
-  @Metadata({ data: "json, name=components" })
+  @SpeakeasyMetadata({ data: "json, name=components" })
   components?: string[];
 
-  @Metadata({ data: "json, name=distribution" })
+  @SpeakeasyMetadata({ data: "json, name=distribution" })
   distribution?: string;
 
-  @Metadata({ data: "json, name=gpgKey" })
+  @SpeakeasyMetadata({ data: "json, name=gpgKey" })
   gpgKey?: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ITunesConnectAnalytics
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Parameters for iTunes Connect App Analytics.
 **/
 export class ITunesConnectAnalytics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=at" })
+  @SpeakeasyMetadata({ data: "json, name=at" })
   at?: string;
 
-  @Metadata({ data: "json, name=ct" })
+  @SpeakeasyMetadata({ data: "json, name=ct" })
   ct?: string;
 
-  @Metadata({ data: "json, name=mt" })
+  @SpeakeasyMetadata({ data: "json, name=mt" })
   mt?: string;
 
-  @Metadata({ data: "json, name=pt" })
+  @SpeakeasyMetadata({ data: "json, name=pt" })
   pt?: string;
 }

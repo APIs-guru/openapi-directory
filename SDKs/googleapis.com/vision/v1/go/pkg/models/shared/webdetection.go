@@ -1,5 +1,7 @@
 package shared
 
+// WebDetection
+// Relevant information for the image from the Internet.
 type WebDetection struct {
 	BestGuessLabels         []WebLabel  `json:"bestGuessLabels,omitempty"`
 	FullMatchingImages      []WebImage  `json:"fullMatchingImages,omitempty"`

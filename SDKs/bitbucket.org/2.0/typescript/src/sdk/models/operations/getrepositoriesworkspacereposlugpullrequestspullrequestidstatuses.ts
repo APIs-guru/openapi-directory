@@ -1,80 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pull_request_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pull_request_id" })
   pullRequestId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo_slug" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo_slug" })
   repoSlug: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=workspace" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspace" })
   workspace: string;
 }
 
 
 export class GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" })
   q?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 }
 
 
-export class GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2: shared.SchemeOauth2;
-}
-
-
-export class GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
-  basic: shared.SchemeBasic;
-}
-
-
-export class GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesSecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
 export class GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2?: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  basic?: shared.SchemeBasic;
 
-  @Metadata({ data: "security, option=true" })
-  option3?: GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesSecurityOption3;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey?: shared.SchemeApiKey;
 }
 
 
 export class GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesSecurity;
 }
 
 
 export class GetRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIdStatusesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   paginatedCommitstatuses?: shared.PaginatedCommitstatuses;
 }

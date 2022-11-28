@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualInterfaceTestHistory } from "./virtualinterfacetesthistory";
 
 
+
 export class ListVirtualInterfaceTestHistoryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=virtualInterfaceTestHistory", elemType: shared.VirtualInterfaceTestHistory })
+  @SpeakeasyMetadata({ data: "json, name=virtualInterfaceTestHistory", elemType: VirtualInterfaceTestHistory })
   virtualInterfaceTestHistory?: VirtualInterfaceTestHistory[];
 }

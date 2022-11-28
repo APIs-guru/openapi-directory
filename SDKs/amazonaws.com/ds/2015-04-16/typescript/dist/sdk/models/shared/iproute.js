@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // IpRoute
 /**
  * IP address block. This is often the address block of the DNS server used for your self-managed domain.
@@ -33,11 +33,11 @@ var IpRoute = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CidrIp" }),
+        SpeakeasyMetadata({ data: "json, name=CidrIp" }),
         __metadata("design:type", String)
     ], IpRoute.prototype, "cidrIp", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], IpRoute.prototype, "description", void 0);
     return IpRoute;

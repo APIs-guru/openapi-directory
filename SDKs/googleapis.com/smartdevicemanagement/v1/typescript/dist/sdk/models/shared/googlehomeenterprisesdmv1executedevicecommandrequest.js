@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleHomeEnterpriseSdmV1ExecuteDeviceCommandRequest
 /**
  * Request message for SmartDeviceManagementService.ExecuteDeviceCommand
@@ -33,11 +33,11 @@ var GoogleHomeEnterpriseSdmV1ExecuteDeviceCommandRequest = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=command" }),
+        SpeakeasyMetadata({ data: "json, name=command" }),
         __metadata("design:type", String)
     ], GoogleHomeEnterpriseSdmV1ExecuteDeviceCommandRequest.prototype, "command", void 0);
     __decorate([
-        Metadata({ data: "json, name=params" }),
+        SpeakeasyMetadata({ data: "json, name=params" }),
         __metadata("design:type", Map)
     ], GoogleHomeEnterpriseSdmV1ExecuteDeviceCommandRequest.prototype, "params", void 0);
     return GoogleHomeEnterpriseSdmV1ExecuteDeviceCommandRequest;

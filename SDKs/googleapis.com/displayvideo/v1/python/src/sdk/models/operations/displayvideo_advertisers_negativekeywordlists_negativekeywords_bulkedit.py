@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsBulkEditPathParams:
-    advertiser_id: str = field(default=None, metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
-    negative_keyword_list_id: str = field(default=None, metadata={'path_param': { 'field_name': 'negativeKeywordListId', 'style': 'simple', 'explode': False }})
+    advertiser_id: str = field(metadata={'path_param': { 'field_name': 'advertiserId', 'style': 'simple', 'explode': False }})
+    negative_keyword_list_id: str = field(metadata={'path_param': { 'field_name': 'negativeKeywordListId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsBulkEditQueryPa
 
 @dataclass
 class DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsBulkEditSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsBulkEditRequest:
-    path_params: DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsBulkEditPathParams = field(default=None)
-    query_params: DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsBulkEditQueryParams = field(default=None)
-    request: Optional[shared.BulkEditNegativeKeywordsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsBulkEditSecurity = field(default=None)
+    path_params: DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsBulkEditPathParams = field()
+    query_params: DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsBulkEditQueryParams = field()
+    security: DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsBulkEditSecurity = field()
+    request: Optional[shared.BulkEditNegativeKeywordsRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsBulkEditResponse:
+    content_type: str = field()
+    status_code: int = field()
     bulk_edit_negative_keywords_response: Optional[shared.BulkEditNegativeKeywordsResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

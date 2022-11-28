@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClusterConfig } from "./clusterconfig";
 import { EncryptionConfig } from "./encryptionconfig";
 
-export enum ClusterDefaultStorageTypeEnum {
-    StorageTypeUnspecified = "STORAGE_TYPE_UNSPECIFIED"
-,    Ssd = "SSD"
-,    Hdd = "HDD"
-}
 
 export enum ClusterStateEnum {
-    StateNotKnown = "STATE_NOT_KNOWN"
-,    Ready = "READY"
-,    Creating = "CREATING"
-,    Resizing = "RESIZING"
-,    Disabled = "DISABLED"
+    StateNotKnown = "STATE_NOT_KNOWN",
+    Ready = "READY",
+    Creating = "CREATING",
+    Resizing = "RESIZING",
+    Disabled = "DISABLED"
+}
+
+export enum ClusterDefaultStorageTypeEnum {
+    StorageTypeUnspecified = "STORAGE_TYPE_UNSPECIFIED",
+    Ssd = "SSD",
+    Hdd = "HDD"
 }
 
 
@@ -22,24 +23,49 @@ export enum ClusterStateEnum {
  * A resizable group of nodes in a particular cloud location, capable of serving all Tables in the parent Instance.
 **/
 export class Cluster extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterConfig" })
+  @SpeakeasyMetadata({ data: "json, name=clusterConfig" })
   clusterConfig?: ClusterConfig;
 
-  @Metadata({ data: "json, name=defaultStorageType" })
+  @SpeakeasyMetadata({ data: "json, name=defaultStorageType" })
   defaultStorageType?: ClusterDefaultStorageTypeEnum;
 
-  @Metadata({ data: "json, name=encryptionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionConfig" })
   encryptionConfig?: EncryptionConfig;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=serveNodes" })
+  @SpeakeasyMetadata({ data: "json, name=serveNodes" })
   serveNodes?: number;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ClusterStateEnum;
+}
+
+
+// ClusterInput
+/** 
+ * A resizable group of nodes in a particular cloud location, capable of serving all Tables in the parent Instance.
+**/
+export class ClusterInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=clusterConfig" })
+  clusterConfig?: ClusterConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=defaultStorageType" })
+  defaultStorageType?: ClusterDefaultStorageTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=encryptionConfig" })
+  encryptionConfig?: EncryptionConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=location" })
+  location?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=serveNodes" })
+  serveNodes?: number;
 }

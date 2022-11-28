@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var StoreGetPathParams = /** @class */ (function (_super) {
     __extends(StoreGetPathParams, _super);
     function StoreGetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=var" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=var" }),
         __metadata("design:type", String)
     ], StoreGetPathParams.prototype, "var", void 0);
     return StoreGetPathParams;
@@ -41,7 +41,7 @@ var StoreGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StoreGetPathParams)
     ], StoreGetRequest.prototype, "pathParams", void 0);
     return StoreGetRequest;
@@ -53,15 +53,15 @@ var StoreGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StoreGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StoreGetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StoreGetResponse.prototype, "storeGet200ApplicationJsonString", void 0);
     return StoreGetResponse;

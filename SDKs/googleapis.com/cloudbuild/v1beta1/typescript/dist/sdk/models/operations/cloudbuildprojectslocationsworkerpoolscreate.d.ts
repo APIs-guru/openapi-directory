@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CloudbuildProjectsLocationsWorkerPoolsCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -24,7 +24,7 @@ export declare class CloudbuildProjectsLocationsWorkerPoolsCreateSecurity extend
 export declare class CloudbuildProjectsLocationsWorkerPoolsCreateRequest extends SpeakeasyBase {
     pathParams: CloudbuildProjectsLocationsWorkerPoolsCreatePathParams;
     queryParams: CloudbuildProjectsLocationsWorkerPoolsCreateQueryParams;
-    request?: shared.WorkerPool;
+    request?: shared.WorkerPoolInput;
     security: CloudbuildProjectsLocationsWorkerPoolsCreateSecurity;
 }
 export declare class CloudbuildProjectsLocationsWorkerPoolsCreateResponse extends SpeakeasyBase {

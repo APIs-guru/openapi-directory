@@ -1,5 +1,7 @@
 package shared
 
+// MotorcycleBuild
+// Describes the Motorcycle specification
 type MotorcycleBuild struct {
 	BodyType     *string `json:"body_type,omitempty"`
 	Cylinders    *int64  `json:"cylinders,omitempty"`

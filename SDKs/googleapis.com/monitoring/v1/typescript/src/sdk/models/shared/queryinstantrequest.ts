@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // QueryInstantRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * QueryInstantRequest holds all parameters of the Prometheus upstream instant query API plus GCM specific parameters.
 **/
 export class QueryInstantRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: string;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: string;
 
-  @Metadata({ data: "json, name=timeout" })
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
   timeout?: string;
 }

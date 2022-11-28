@@ -22,32 +22,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatasetSchema } from "./datasetschema";
+import { Tag } from "./tag";
 var CreateDatasetRequest = /** @class */ (function (_super) {
     __extends(CreateDatasetRequest, _super);
     function CreateDatasetRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClientToken" }),
+        SpeakeasyMetadata({ data: "json, name=ClientToken" }),
         __metadata("design:type", String)
     ], CreateDatasetRequest.prototype, "clientToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatasetName" }),
+        SpeakeasyMetadata({ data: "json, name=DatasetName" }),
         __metadata("design:type", String)
     ], CreateDatasetRequest.prototype, "datasetName", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatasetSchema" }),
+        SpeakeasyMetadata({ data: "json, name=DatasetSchema" }),
         __metadata("design:type", DatasetSchema)
     ], CreateDatasetRequest.prototype, "datasetSchema", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerSideKmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=ServerSideKmsKeyId" }),
         __metadata("design:type", String)
     ], CreateDatasetRequest.prototype, "serverSideKmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateDatasetRequest.prototype, "tags", void 0);
     return CreateDatasetRequest;

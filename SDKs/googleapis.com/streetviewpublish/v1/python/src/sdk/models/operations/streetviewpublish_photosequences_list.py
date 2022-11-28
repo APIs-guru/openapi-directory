@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -23,19 +24,19 @@ class StreetviewpublishPhotoSequencesListQueryParams:
 
 @dataclass
 class StreetviewpublishPhotoSequencesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class StreetviewpublishPhotoSequencesListRequest:
-    query_params: StreetviewpublishPhotoSequencesListQueryParams = field(default=None)
-    security: StreetviewpublishPhotoSequencesListSecurity = field(default=None)
+    query_params: StreetviewpublishPhotoSequencesListQueryParams = field()
+    security: StreetviewpublishPhotoSequencesListSecurity = field()
     
 
 @dataclass
 class StreetviewpublishPhotoSequencesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_photo_sequences_response: Optional[shared.ListPhotoSequencesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

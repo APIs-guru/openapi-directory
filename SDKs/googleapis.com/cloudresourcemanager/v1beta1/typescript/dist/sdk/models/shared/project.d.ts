@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ResourceId } from "./resourceid";
 export declare enum ProjectLifecycleStateEnum {
     LifecycleStateUnspecified = "LIFECYCLE_STATE_UNSPECIFIED",

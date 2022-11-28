@@ -147,6 +147,8 @@ const (
 	FloodlightActivityUserDefinedVariableTypesEnumU100 FloodlightActivityUserDefinedVariableTypesEnum = "U100"
 )
 
+// FloodlightActivity
+// Contains properties of a Floodlight activity.
 type FloodlightActivity struct {
 	AccountID                               *string                                            `json:"accountId,omitempty"`
 	AdvertiserID                            *string                                            `json:"advertiserId,omitempty"`

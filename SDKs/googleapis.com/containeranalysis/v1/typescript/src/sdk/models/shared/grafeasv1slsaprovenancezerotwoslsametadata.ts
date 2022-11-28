@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness } from "./grafeasv1slsaprovenancezerotwoslsacompleteness";
+
 
 
 // GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata
@@ -7,18 +8,18 @@ import { GrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness } from "./grafeasv1slsap
  * Other properties of the build.
 **/
 export class GrafeasV1SlsaProvenanceZeroTwoSlsaMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buildFinishedOn" })
+  @SpeakeasyMetadata({ data: "json, name=buildFinishedOn" })
   buildFinishedOn?: string;
 
-  @Metadata({ data: "json, name=buildInvocationId" })
+  @SpeakeasyMetadata({ data: "json, name=buildInvocationId" })
   buildInvocationId?: string;
 
-  @Metadata({ data: "json, name=buildStartedOn" })
+  @SpeakeasyMetadata({ data: "json, name=buildStartedOn" })
   buildStartedOn?: string;
 
-  @Metadata({ data: "json, name=completeness" })
+  @SpeakeasyMetadata({ data: "json, name=completeness" })
   completeness?: GrafeasV1SlsaProvenanceZeroTwoSlsaCompleteness;
 
-  @Metadata({ data: "json, name=reproducible" })
+  @SpeakeasyMetadata({ data: "json, name=reproducible" })
   reproducible?: boolean;
 }

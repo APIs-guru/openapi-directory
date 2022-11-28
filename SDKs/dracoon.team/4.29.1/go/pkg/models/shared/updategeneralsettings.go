@@ -1,5 +1,7 @@
 package shared
 
+// UpdateGeneralSettings
+// Request model for updating general settings
 type UpdateGeneralSettings struct {
 	AuthTokenRestrictions          *UpdateAuthTokenRestrictions `json:"authTokenRestrictions,omitempty"`
 	CryptoEnabled                  *bool                        `json:"cryptoEnabled,omitempty"`

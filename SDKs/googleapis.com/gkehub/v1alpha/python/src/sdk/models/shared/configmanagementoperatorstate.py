@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import configmanagementinstallerror
+from sdk import utils
+from . import *
 
 class ConfigManagementOperatorStateDeploymentStateEnum(str, Enum):
     DEPLOYMENT_STATE_UNSPECIFIED = "DEPLOYMENT_STATE_UNSPECIFIED"
@@ -13,7 +15,11 @@ class ConfigManagementOperatorStateDeploymentStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ConfigManagementOperatorState:
-    deployment_state: Optional[ConfigManagementOperatorStateDeploymentStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploymentState' }})
-    errors: Optional[List[configmanagementinstallerror.ConfigManagementInstallError]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
-    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    r"""ConfigManagementOperatorState
+    State information for an ACM's Operator
+    """
+    
+    deployment_state: Optional[ConfigManagementOperatorStateDeploymentStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deploymentState') }})
+    errors: Optional[List[ConfigManagementInstallError]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
+    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
     

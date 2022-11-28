@@ -15,11 +15,8 @@ type PostLoadBalancersIDActionsChangeAlgorithmRequestBody struct {
 	Type PostLoadBalancersIDActionsChangeAlgorithmRequestBodyTypeEnum `json:"type"`
 }
 
-type PostLoadBalancersIDActionsChangeAlgorithmRequest struct {
-	PathParams PostLoadBalancersIDActionsChangeAlgorithmPathParams
-	Request    *PostLoadBalancersIDActionsChangeAlgorithmRequestBody `request:"mediaType=application/json"`
-}
-
+// PostLoadBalancersIDActionsChangeAlgorithmActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostLoadBalancersIDActionsChangeAlgorithmActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -51,6 +48,11 @@ type PostLoadBalancersIDActionsChangeAlgorithmActionResponseAction struct {
 
 type PostLoadBalancersIDActionsChangeAlgorithmActionResponse struct {
 	Action PostLoadBalancersIDActionsChangeAlgorithmActionResponseAction `json:"action"`
+}
+
+type PostLoadBalancersIDActionsChangeAlgorithmRequest struct {
+	PathParams PostLoadBalancersIDActionsChangeAlgorithmPathParams
+	Request    *PostLoadBalancersIDActionsChangeAlgorithmRequestBody `request:"mediaType=application/json"`
 }
 
 type PostLoadBalancersIDActionsChangeAlgorithmResponse struct {

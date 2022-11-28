@@ -1,7 +1,8 @@
 
 
+
 export enum WriteOperationTypeEnum {
-    Insert = "INSERT"
-,    Upsert = "UPSERT"
-,    Update = "UPDATE"
+    Insert = "INSERT",
+    Upsert = "UPSERT",
+    Update = "UPDATE"
 }

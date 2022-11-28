@@ -1,5 +1,7 @@
 package shared
 
+// AwsEc2EipDetails
+// Information about an Elastic IP address.
 type AwsEc2EipDetails struct {
 	AllocationID            *string `json:"AllocationId,omitempty"`
 	AssociationID           *string `json:"AssociationId,omitempty"`

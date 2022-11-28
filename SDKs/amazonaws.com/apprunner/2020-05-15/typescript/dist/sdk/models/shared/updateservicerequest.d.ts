@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { HealthCheckConfiguration } from "./healthcheckconfiguration";
 import { InstanceConfiguration } from "./instanceconfiguration";
 import { SourceConfiguration } from "./sourceconfiguration";

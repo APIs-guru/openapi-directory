@@ -1,74 +1,75 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EndpointAddTracksToPlaylistPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=playlist_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=playlist_id" })
   playlistId: string;
 }
 
 
 export class EndpointAddTracksToPlaylistQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=position" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=position" })
   position?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=uris" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uris" })
   uris?: string;
 }
 
 
 export class EndpointAddTracksToPlaylistHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Content-Type" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Content-Type" })
   contentType: string;
 }
 
 
 export class EndpointAddTracksToPlaylistRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: number;
 
-  @Metadata({ data: "json, name=uris" })
+  @SpeakeasyMetadata({ data: "json, name=uris" })
   uris?: string[];
 }
 
 
 export class EndpointAddTracksToPlaylistSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   spotifyAuth: shared.SchemeSpotifyAuth;
 }
 
 
 export class EndpointAddTracksToPlaylistRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EndpointAddTracksToPlaylistPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: EndpointAddTracksToPlaylistQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: EndpointAddTracksToPlaylistHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: EndpointAddTracksToPlaylistRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: EndpointAddTracksToPlaylistSecurity;
 }
 
 
 export class EndpointAddTracksToPlaylistResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseObject?: shared.ErrorResponseObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   snapshotIdObject?: shared.SnapshotIdObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

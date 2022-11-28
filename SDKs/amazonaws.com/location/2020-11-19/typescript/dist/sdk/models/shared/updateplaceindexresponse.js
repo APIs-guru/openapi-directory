@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UpdatePlaceIndexResponse = /** @class */ (function (_super) {
     __extends(UpdatePlaceIndexResponse, _super);
     function UpdatePlaceIndexResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=IndexArn" }),
+        SpeakeasyMetadata({ data: "json, name=IndexArn" }),
         __metadata("design:type", String)
     ], UpdatePlaceIndexResponse.prototype, "indexArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=IndexName" }),
+        SpeakeasyMetadata({ data: "json, name=IndexName" }),
         __metadata("design:type", String)
     ], UpdatePlaceIndexResponse.prototype, "indexName", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=UpdateTime" }),
         __metadata("design:type", Date)
     ], UpdatePlaceIndexResponse.prototype, "updateTime", void 0);
     return UpdatePlaceIndexResponse;

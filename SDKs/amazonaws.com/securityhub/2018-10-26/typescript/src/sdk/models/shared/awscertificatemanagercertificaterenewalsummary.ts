@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsCertificateManagerCertificateDomainValidationOption } from "./awscertificatemanagercertificatedomainvalidationoption";
+
 
 
 // AwsCertificateManagerCertificateRenewalSummary
@@ -8,15 +8,15 @@ import { AwsCertificateManagerCertificateDomainValidationOption } from "./awscer
  * Contains information about the Certificate Manager managed renewal for an <code>AMAZON_ISSUED</code> certificate.
 **/
 export class AwsCertificateManagerCertificateRenewalSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DomainValidationOptions", elemType: shared.AwsCertificateManagerCertificateDomainValidationOption })
+  @SpeakeasyMetadata({ data: "json, name=DomainValidationOptions", elemType: AwsCertificateManagerCertificateDomainValidationOption })
   domainValidationOptions?: AwsCertificateManagerCertificateDomainValidationOption[];
 
-  @Metadata({ data: "json, name=RenewalStatus" })
+  @SpeakeasyMetadata({ data: "json, name=RenewalStatus" })
   renewalStatus?: string;
 
-  @Metadata({ data: "json, name=RenewalStatusReason" })
+  @SpeakeasyMetadata({ data: "json, name=RenewalStatusReason" })
   renewalStatusReason?: string;
 
-  @Metadata({ data: "json, name=UpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedAt" })
   updatedAt?: string;
 }

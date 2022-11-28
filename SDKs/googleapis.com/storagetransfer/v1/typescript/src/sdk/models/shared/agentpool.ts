@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BandwidthLimit } from "./bandwidthlimit";
 
+
 export enum AgentPoolStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Created = "CREATED"
-,    Deleting = "DELETING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Created = "CREATED",
+    Deleting = "DELETING"
 }
 
 
@@ -14,15 +15,31 @@ export enum AgentPoolStateEnum {
  * Represents an On-Premises Agent pool.
 **/
 export class AgentPool extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bandwidthLimit" })
+  @SpeakeasyMetadata({ data: "json, name=bandwidthLimit" })
   bandwidthLimit?: BandwidthLimit;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: AgentPoolStateEnum;
+}
+
+
+// AgentPoolInput
+/** 
+ * Represents an On-Premises Agent pool.
+**/
+export class AgentPoolInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=bandwidthLimit" })
+  bandwidthLimit?: BandwidthLimit;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
 }

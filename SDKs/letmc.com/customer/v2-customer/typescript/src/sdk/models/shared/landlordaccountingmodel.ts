@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LandlordAccountingEntryModel } from "./landlordaccountingentrymodel";
 import { LandlordAccountingInvoiceModel } from "./landlordaccountinginvoicemodel";
+
 
 
 // LandlordAccountingModel
@@ -9,15 +9,15 @@ import { LandlordAccountingInvoiceModel } from "./landlordaccountinginvoicemodel
  * Landlord Accounting
 **/
 export class LandlordAccountingModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountBalance" })
+  @SpeakeasyMetadata({ data: "json, name=AccountBalance" })
   accountBalance?: number;
 
-  @Metadata({ data: "json, name=LastPayment" })
+  @SpeakeasyMetadata({ data: "json, name=LastPayment" })
   lastPayment?: Date;
 
-  @Metadata({ data: "json, name=PaymentHistory", elemType: shared.LandlordAccountingEntryModel })
+  @SpeakeasyMetadata({ data: "json, name=PaymentHistory", elemType: LandlordAccountingEntryModel })
   paymentHistory?: LandlordAccountingEntryModel[];
 
-  @Metadata({ data: "json, name=Statements", elemType: shared.LandlordAccountingInvoiceModel })
+  @SpeakeasyMetadata({ data: "json, name=Statements", elemType: LandlordAccountingInvoiceModel })
   statements?: LandlordAccountingInvoiceModel[];
 }

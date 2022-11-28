@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import topicsdetectionjobproperties
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeTopicsDetectionJobResponse:
-    topics_detection_job_properties: Optional[topicsdetectionjobproperties.TopicsDetectionJobProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TopicsDetectionJobProperties' }})
+    topics_detection_job_properties: Optional[TopicsDetectionJobProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TopicsDetectionJobProperties') }})
     

@@ -1,12 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
+from sdk.models import shared
 
 
 @dataclass
 class GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoPathParams:
-    architecture_name: str = field(default=None, metadata={'path_param': { 'field_name': 'architecture_name', 'style': 'simple', 'explode': False }})
-    project_name: str = field(default=None, metadata={'path_param': { 'field_name': 'project_name', 'style': 'simple', 'explode': False }})
-    repository_name: str = field(default=None, metadata={'path_param': { 'field_name': 'repository_name', 'style': 'simple', 'explode': False }})
+    architecture_name: str = field(metadata={'path_param': { 'field_name': 'architecture_name', 'style': 'simple', 'explode': False }})
+    project_name: str = field(metadata={'path_param': { 'field_name': 'project_name', 'style': 'simple', 'explode': False }})
+    repository_name: str = field(metadata={'path_param': { 'field_name': 'repository_name', 'style': 'simple', 'explode': False }})
     
 class GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoViewEnum(str, Enum):
     PKGNAMES = "pkgnames"
@@ -22,19 +24,19 @@ class GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoQueryParams:
 
 @dataclass
 class GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoSecurity:
-    basic_authentication: shared.SchemeBasicAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    basic_authentication: shared.SchemeBasicAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
     
 
 @dataclass
 class GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoRequest:
-    path_params: GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoPathParams = field(default=None)
-    query_params: GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoQueryParams = field(default=None)
-    security: GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoSecurity = field(default=None)
+    path_params: GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoPathParams = field()
+    query_params: GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoQueryParams = field()
+    security: GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoSecurity = field()
     
 
 @dataclass
 class GetBuildProjectNameRepositoryNameArchitectureNameBuilddepinfoResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

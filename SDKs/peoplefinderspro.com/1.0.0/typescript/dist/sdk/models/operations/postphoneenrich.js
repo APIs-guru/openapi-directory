@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostPhoneEnrichHeaders = /** @class */ (function (_super) {
     __extends(PostPhoneEnrichHeaders, _super);
     function PostPhoneEnrichHeaders() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=galaxy-ap-name" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=galaxy-ap-name" }),
         __metadata("design:type", String)
     ], PostPhoneEnrichHeaders.prototype, "galaxyApName", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=galaxy-ap-password" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=galaxy-ap-password" }),
         __metadata("design:type", String)
     ], PostPhoneEnrichHeaders.prototype, "galaxyApPassword", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=galaxy-search-type" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=galaxy-search-type" }),
         __metadata("design:type", String)
     ], PostPhoneEnrichHeaders.prototype, "galaxySearchType", void 0);
     return PostPhoneEnrichHeaders;
@@ -49,7 +49,7 @@ var PostPhoneEnrichRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Phone" }),
+        SpeakeasyMetadata({ data: "json, name=Phone" }),
         __metadata("design:type", String)
     ], PostPhoneEnrichRequestBody.prototype, "phone", void 0);
     return PostPhoneEnrichRequestBody;
@@ -61,11 +61,11 @@ var PostPhoneEnrichRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostPhoneEnrichHeaders)
     ], PostPhoneEnrichRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", PostPhoneEnrichRequestBody)
     ], PostPhoneEnrichRequest.prototype, "request", void 0);
     return PostPhoneEnrichRequest;
@@ -77,11 +77,11 @@ var PostPhoneEnrichResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostPhoneEnrichResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostPhoneEnrichResponse.prototype, "statusCode", void 0);
     return PostPhoneEnrichResponse;

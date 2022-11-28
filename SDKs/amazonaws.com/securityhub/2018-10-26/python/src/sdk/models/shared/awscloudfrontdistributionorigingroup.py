@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import awscloudfrontdistributionorigingroupfailover
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AwsCloudFrontDistributionOriginGroup:
-    failover_criteria: Optional[awscloudfrontdistributionorigingroupfailover.AwsCloudFrontDistributionOriginGroupFailover] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FailoverCriteria' }})
+    r"""AwsCloudFrontDistributionOriginGroup
+    Information about an origin group for the distribution.
+    """
+    
+    failover_criteria: Optional[AwsCloudFrontDistributionOriginGroupFailover] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FailoverCriteria') }})
     

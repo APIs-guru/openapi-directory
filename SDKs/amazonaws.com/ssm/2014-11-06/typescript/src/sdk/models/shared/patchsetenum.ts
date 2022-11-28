@@ -1,6 +1,7 @@
 
 
+
 export enum PatchSetEnum {
-    Os = "OS"
-,    Application = "APPLICATION"
+    Os = "OS",
+    Application = "APPLICATION"
 }

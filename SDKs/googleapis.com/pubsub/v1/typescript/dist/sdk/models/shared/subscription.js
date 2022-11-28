@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BigQueryConfig } from "./bigqueryconfig";
 import { DeadLetterPolicy } from "./deadletterpolicy";
 import { ExpirationPolicy } from "./expirationpolicy";
@@ -44,71 +44,71 @@ var Subscription = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ackDeadlineSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=ackDeadlineSeconds" }),
         __metadata("design:type", Number)
     ], Subscription.prototype, "ackDeadlineSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=bigqueryConfig" }),
+        SpeakeasyMetadata({ data: "json, name=bigqueryConfig" }),
         __metadata("design:type", BigQueryConfig)
     ], Subscription.prototype, "bigqueryConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=deadLetterPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=deadLetterPolicy" }),
         __metadata("design:type", DeadLetterPolicy)
     ], Subscription.prototype, "deadLetterPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=detached" }),
+        SpeakeasyMetadata({ data: "json, name=detached" }),
         __metadata("design:type", Boolean)
     ], Subscription.prototype, "detached", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableExactlyOnceDelivery" }),
+        SpeakeasyMetadata({ data: "json, name=enableExactlyOnceDelivery" }),
         __metadata("design:type", Boolean)
     ], Subscription.prototype, "enableExactlyOnceDelivery", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableMessageOrdering" }),
+        SpeakeasyMetadata({ data: "json, name=enableMessageOrdering" }),
         __metadata("design:type", Boolean)
     ], Subscription.prototype, "enableMessageOrdering", void 0);
     __decorate([
-        Metadata({ data: "json, name=expirationPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=expirationPolicy" }),
         __metadata("design:type", ExpirationPolicy)
     ], Subscription.prototype, "expirationPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=filter" }),
+        SpeakeasyMetadata({ data: "json, name=filter" }),
         __metadata("design:type", String)
     ], Subscription.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], Subscription.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=messageRetentionDuration" }),
+        SpeakeasyMetadata({ data: "json, name=messageRetentionDuration" }),
         __metadata("design:type", String)
     ], Subscription.prototype, "messageRetentionDuration", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Subscription.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=pushConfig" }),
+        SpeakeasyMetadata({ data: "json, name=pushConfig" }),
         __metadata("design:type", PushConfig)
     ], Subscription.prototype, "pushConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=retainAckedMessages" }),
+        SpeakeasyMetadata({ data: "json, name=retainAckedMessages" }),
         __metadata("design:type", Boolean)
     ], Subscription.prototype, "retainAckedMessages", void 0);
     __decorate([
-        Metadata({ data: "json, name=retryPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=retryPolicy" }),
         __metadata("design:type", RetryPolicy)
     ], Subscription.prototype, "retryPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Subscription.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=topic" }),
+        SpeakeasyMetadata({ data: "json, name=topic" }),
         __metadata("design:type", String)
     ], Subscription.prototype, "topic", void 0);
     __decorate([
-        Metadata({ data: "json, name=topicMessageRetentionDuration" }),
+        SpeakeasyMetadata({ data: "json, name=topicMessageRetentionDuration" }),
         __metadata("design:type", String)
     ], Subscription.prototype, "topicMessageRetentionDuration", void 0);
     return Subscription;

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DescribeFleetEventsInput
+// Represents the input for a request operation.
 type DescribeFleetEventsInput struct {
 	EndTime   *time.Time `json:"EndTime,omitempty"`
 	FleetID   string     `json:"FleetId"`

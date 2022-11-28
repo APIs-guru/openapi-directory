@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PortfolioShareTypeEnum } from "./portfoliosharetypeenum";
 var AcceptPortfolioShareInput = /** @class */ (function (_super) {
     __extends(AcceptPortfolioShareInput, _super);
@@ -30,15 +30,15 @@ var AcceptPortfolioShareInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AcceptLanguage" }),
+        SpeakeasyMetadata({ data: "json, name=AcceptLanguage" }),
         __metadata("design:type", String)
     ], AcceptPortfolioShareInput.prototype, "acceptLanguage", void 0);
     __decorate([
-        Metadata({ data: "json, name=PortfolioId" }),
+        SpeakeasyMetadata({ data: "json, name=PortfolioId" }),
         __metadata("design:type", String)
     ], AcceptPortfolioShareInput.prototype, "portfolioId", void 0);
     __decorate([
-        Metadata({ data: "json, name=PortfolioShareType" }),
+        SpeakeasyMetadata({ data: "json, name=PortfolioShareType" }),
         __metadata("design:type", String)
     ], AcceptPortfolioShareInput.prototype, "portfolioShareType", void 0);
     return AcceptPortfolioShareInput;

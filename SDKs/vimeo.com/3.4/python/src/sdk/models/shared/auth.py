@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import api_app
-from . import user
+from sdk import utils
+from . import *
 
 class AuthTokenTypeEnum(str, Enum):
     BEARER = "bearer"
@@ -11,11 +12,11 @@ class AuthTokenTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Auth:
-    access_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'access_token' }})
-    app: api_app.APIApp = field(default=None, metadata={'dataclasses_json': { 'field_name': 'app' }})
-    expires_on: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expires_on' }})
-    refresh_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'refresh_token' }})
-    scope: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scope' }})
-    token_type: AuthTokenTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'token_type' }})
-    user: Optional[user.User] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    access_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('access_token') }})
+    app: APIApp = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('app') }})
+    scope: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('scope') }})
+    token_type: AuthTokenTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('token_type') }})
+    expires_on: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expires_on') }})
+    refresh_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('refresh_token') }})
+    user: Optional[User] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('user') }})
     

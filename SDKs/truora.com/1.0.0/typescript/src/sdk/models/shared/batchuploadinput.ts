@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BatchUploadInputFile extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 
-  @Metadata({ data: "multipart_form, name=file" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=file" })
   file: string;
 }
 
@@ -16,6 +16,6 @@ export class BatchUploadInputFile extends SpeakeasyBase {
  * Represents the parameters required to perform a batch upload
 **/
 export class BatchUploadInput extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=file", elemType: shared.BatchUploadInputFile })
+  @SpeakeasyMetadata({ data: "multipart_form, name=file", elemType: BatchUploadInputFile })
   file: BatchUploadInputFile[];
 }

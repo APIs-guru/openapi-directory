@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ProvisionedProductPlanDetails } from "./provisionedproductplandetails";
 import { ResourceChange } from "./resourcechange";
 export declare class DescribeProvisionedProductPlanOutput extends SpeakeasyBase {

@@ -1,5 +1,7 @@
 package shared
 
+// Response
+// A single response from an update.
 type Response struct {
 	CreateFooter            *CreateFooterResponse            `json:"createFooter,omitempty"`
 	CreateFootnote          *CreateFootnoteResponse          `json:"createFootnote,omitempty"`

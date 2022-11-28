@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeAvailabilityZonesActionEnum(str, Enum):
     DESCRIBE_AVAILABILITY_ZONES = "DescribeAvailabilityZones"
@@ -10,8 +14,8 @@ class PostDescribeAvailabilityZonesVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeAvailabilityZonesQueryParams:
-    action: PostDescribeAvailabilityZonesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeAvailabilityZonesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeAvailabilityZonesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeAvailabilityZonesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeAvailabilityZonesHeaders:
 
 @dataclass
 class PostDescribeAvailabilityZonesRequest:
-    query_params: PostDescribeAvailabilityZonesQueryParams = field(default=None)
-    headers: PostDescribeAvailabilityZonesHeaders = field(default=None)
+    headers: PostDescribeAvailabilityZonesHeaders = field()
+    query_params: PostDescribeAvailabilityZonesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeAvailabilityZonesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserProfile } from "./userprofile";
 
 
+
 export class OfferingUserResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=avatarUrl" })
+  @SpeakeasyMetadata({ data: "json, name=avatarUrl" })
   avatarUrl?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=evaluatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=evaluatedBy" })
   evaluatedBy?: string[];
 
-  @Metadata({ data: "json, name=evaluates" })
+  @SpeakeasyMetadata({ data: "json, name=evaluates" })
   evaluates?: string[];
 
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=isFacilitator" })
+  @SpeakeasyMetadata({ data: "json, name=isFacilitator" })
   isFacilitator?: boolean;
 
-  @Metadata({ data: "json, name=isMarker" })
+  @SpeakeasyMetadata({ data: "json, name=isMarker" })
   isMarker?: boolean;
 
-  @Metadata({ data: "json, name=isReadonly" })
+  @SpeakeasyMetadata({ data: "json, name=isReadonly" })
   isReadonly?: boolean;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=markedBy" })
+  @SpeakeasyMetadata({ data: "json, name=markedBy" })
   markedBy?: string[];
 
-  @Metadata({ data: "json, name=marks" })
+  @SpeakeasyMetadata({ data: "json, name=marks" })
   marks?: string[];
 
-  @Metadata({ data: "json, name=personId" })
+  @SpeakeasyMetadata({ data: "json, name=personId" })
   personId?: string;
 
-  @Metadata({ data: "json, name=profile" })
+  @SpeakeasyMetadata({ data: "json, name=profile" })
   profile?: UserProfile;
 }

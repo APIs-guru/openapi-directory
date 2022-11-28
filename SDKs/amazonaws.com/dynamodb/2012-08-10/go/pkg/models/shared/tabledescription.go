@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TableDescription
+// Represents the properties of a table.
 type TableDescription struct {
 	ArchivalSummary        *ArchivalSummary                  `json:"ArchivalSummary,omitempty"`
 	AttributeDefinitions   []AttributeDefinition             `json:"AttributeDefinitions,omitempty"`

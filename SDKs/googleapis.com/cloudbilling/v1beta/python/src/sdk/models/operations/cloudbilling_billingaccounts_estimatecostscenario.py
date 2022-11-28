@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudbillingBillingAccountsEstimateCostScenarioPathParams:
-    billing_account: str = field(default=None, metadata={'path_param': { 'field_name': 'billingAccount', 'style': 'simple', 'explode': False }})
+    billing_account: str = field(metadata={'path_param': { 'field_name': 'billingAccount', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class CloudbillingBillingAccountsEstimateCostScenarioQueryParams:
 
 @dataclass
 class CloudbillingBillingAccountsEstimateCostScenarioSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudbillingBillingAccountsEstimateCostScenarioSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudbillingBillingAccountsEstimateCostScenarioSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -50,15 +51,15 @@ class CloudbillingBillingAccountsEstimateCostScenarioSecurity:
 
 @dataclass
 class CloudbillingBillingAccountsEstimateCostScenarioRequest:
-    path_params: CloudbillingBillingAccountsEstimateCostScenarioPathParams = field(default=None)
-    query_params: CloudbillingBillingAccountsEstimateCostScenarioQueryParams = field(default=None)
+    path_params: CloudbillingBillingAccountsEstimateCostScenarioPathParams = field()
+    query_params: CloudbillingBillingAccountsEstimateCostScenarioQueryParams = field()
+    security: CloudbillingBillingAccountsEstimateCostScenarioSecurity = field()
     request: Optional[shared.EstimateCostScenarioForBillingAccountRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudbillingBillingAccountsEstimateCostScenarioSecurity = field(default=None)
     
 
 @dataclass
 class CloudbillingBillingAccountsEstimateCostScenarioResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     estimate_cost_scenario_for_billing_account_response: Optional[shared.EstimateCostScenarioForBillingAccountResponse] = field(default=None)
-    status_code: int = field(default=None)
     

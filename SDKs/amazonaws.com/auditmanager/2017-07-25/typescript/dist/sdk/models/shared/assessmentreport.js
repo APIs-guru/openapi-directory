@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssessmentReportStatusEnum } from "./assessmentreportstatusenum";
 // AssessmentReport
 /**
@@ -34,39 +34,39 @@ var AssessmentReport = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=assessmentId" }),
+        SpeakeasyMetadata({ data: "json, name=assessmentId" }),
         __metadata("design:type", String)
     ], AssessmentReport.prototype, "assessmentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=assessmentName" }),
+        SpeakeasyMetadata({ data: "json, name=assessmentName" }),
         __metadata("design:type", String)
     ], AssessmentReport.prototype, "assessmentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=author" }),
+        SpeakeasyMetadata({ data: "json, name=author" }),
         __metadata("design:type", String)
     ], AssessmentReport.prototype, "author", void 0);
     __decorate([
-        Metadata({ data: "json, name=awsAccountId" }),
+        SpeakeasyMetadata({ data: "json, name=awsAccountId" }),
         __metadata("design:type", String)
     ], AssessmentReport.prototype, "awsAccountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], AssessmentReport.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], AssessmentReport.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], AssessmentReport.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], AssessmentReport.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], AssessmentReport.prototype, "status", void 0);
     return AssessmentReport;

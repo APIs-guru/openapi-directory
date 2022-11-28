@@ -1,6 +1,7 @@
 
 
+
 export enum StatefulRuleDirectionEnum {
-    Forward = "FORWARD"
-,    Any = "ANY"
+    Forward = "FORWARD",
+    Any = "ANY"
 }

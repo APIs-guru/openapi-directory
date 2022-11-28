@@ -11,16 +11,16 @@ type GetListOfCountriesQueryParams struct {
 	Format *GetListOfCountriesFormatEnum `queryParam:"style=form,explode=true,name=format"`
 }
 
-type GetListOfCountriesRequest struct {
-	QueryParams GetListOfCountriesQueryParams
-}
-
 type GetListOfCountries200ApplicationJSON struct {
 	Alpha2Code *string  `json:"alpha-2-code,omitempty"`
 	Alpha3Code *string  `json:"alpha-3-code,omitempty"`
 	Latitude   *float32 `json:"latitude,omitempty"`
 	Longitude  *float32 `json:"longitude,omitempty"`
 	Name       *string  `json:"name,omitempty"`
+}
+
+type GetListOfCountriesRequest struct {
+	QueryParams GetListOfCountriesQueryParams
 }
 
 type GetListOfCountriesResponse struct {

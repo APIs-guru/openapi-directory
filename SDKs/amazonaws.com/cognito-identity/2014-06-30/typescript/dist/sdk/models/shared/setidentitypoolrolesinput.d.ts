@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RoleMapping } from "./rolemapping";
 /**
  * Input to the <code>SetIdentityPoolRoles</code> action.

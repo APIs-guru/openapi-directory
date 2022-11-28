@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTeamRecordsQueryParams = /** @class */ (function (_super) {
     __extends(GetTeamRecordsQueryParams, _super);
@@ -30,15 +30,15 @@ var GetTeamRecordsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=conference" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=conference" }),
         __metadata("design:type", String)
     ], GetTeamRecordsQueryParams.prototype, "conference", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=team" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" }),
         __metadata("design:type", String)
     ], GetTeamRecordsQueryParams.prototype, "team", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=year" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" }),
         __metadata("design:type", Number)
     ], GetTeamRecordsQueryParams.prototype, "year", void 0);
     return GetTeamRecordsQueryParams;
@@ -50,7 +50,7 @@ var GetTeamRecordsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTeamRecordsQueryParams)
     ], GetTeamRecordsRequest.prototype, "queryParams", void 0);
     return GetTeamRecordsRequest;
@@ -62,15 +62,15 @@ var GetTeamRecordsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTeamRecordsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTeamRecordsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.TeamRecord }),
+        SpeakeasyMetadata({ elemType: shared.TeamRecord }),
         __metadata("design:type", Array)
     ], GetTeamRecordsResponse.prototype, "teamRecords", void 0);
     return GetTeamRecordsResponse;

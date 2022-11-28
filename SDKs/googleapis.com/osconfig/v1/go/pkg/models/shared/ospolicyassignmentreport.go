@@ -1,5 +1,7 @@
 package shared
 
+// OsPolicyAssignmentReport
+// A report of the OS policy assignment status for a given instance.
 type OsPolicyAssignmentReport struct {
 	Instance            *string                                      `json:"instance,omitempty"`
 	LastRunID           *string                                      `json:"lastRunId,omitempty"`

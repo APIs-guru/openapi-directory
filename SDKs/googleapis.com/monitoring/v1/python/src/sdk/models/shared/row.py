@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import widget
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Row:
-    weight: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'weight' }})
-    widgets: Optional[List[widget.Widget]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'widgets' }})
+    r"""Row
+    Defines the layout properties and content for a row.
+    """
+    
+    weight: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('weight') }})
+    widgets: Optional[List[Widget]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('widgets') }})
     

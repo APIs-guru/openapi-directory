@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetSetAlarmStateActionEnum(str, Enum):
     SET_ALARM_STATE = "SetAlarmState"
@@ -15,12 +19,12 @@ class GetSetAlarmStateVersionEnum(str, Enum):
 
 @dataclass
 class GetSetAlarmStateQueryParams:
-    action: GetSetAlarmStateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    alarm_name: str = field(default=None, metadata={'query_param': { 'field_name': 'AlarmName', 'style': 'form', 'explode': True }})
-    state_reason: str = field(default=None, metadata={'query_param': { 'field_name': 'StateReason', 'style': 'form', 'explode': True }})
+    action: GetSetAlarmStateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    alarm_name: str = field(metadata={'query_param': { 'field_name': 'AlarmName', 'style': 'form', 'explode': True }})
+    state_reason: str = field(metadata={'query_param': { 'field_name': 'StateReason', 'style': 'form', 'explode': True }})
+    state_value: GetSetAlarmStateStateValueEnum = field(metadata={'query_param': { 'field_name': 'StateValue', 'style': 'form', 'explode': True }})
+    version: GetSetAlarmStateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     state_reason_data: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'StateReasonData', 'style': 'form', 'explode': True }})
-    state_value: GetSetAlarmStateStateValueEnum = field(default=None, metadata={'query_param': { 'field_name': 'StateValue', 'style': 'form', 'explode': True }})
-    version: GetSetAlarmStateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -36,13 +40,13 @@ class GetSetAlarmStateHeaders:
 
 @dataclass
 class GetSetAlarmStateRequest:
-    query_params: GetSetAlarmStateQueryParams = field(default=None)
-    headers: GetSetAlarmStateHeaders = field(default=None)
+    headers: GetSetAlarmStateHeaders = field()
+    query_params: GetSetAlarmStateQueryParams = field()
     
 
 @dataclass
 class GetSetAlarmStateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

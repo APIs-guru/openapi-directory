@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudVisionV1p1beta1AsyncAnnotateFileRequest
+// An offline file annotation request.
 type GoogleCloudVisionV1p1beta1AsyncAnnotateFileRequest struct {
 	Features     []GoogleCloudVisionV1p1beta1Feature     `json:"features,omitempty"`
 	ImageContext *GoogleCloudVisionV1p1beta1ImageContext `json:"imageContext,omitempty"`

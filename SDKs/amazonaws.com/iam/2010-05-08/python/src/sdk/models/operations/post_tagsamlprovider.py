@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostTagSamlProviderActionEnum(str, Enum):
     TAG_SAML_PROVIDER = "TagSAMLProvider"
@@ -10,8 +14,8 @@ class PostTagSamlProviderVersionEnum(str, Enum):
 
 @dataclass
 class PostTagSamlProviderQueryParams:
-    action: PostTagSamlProviderActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostTagSamlProviderVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostTagSamlProviderActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostTagSamlProviderVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostTagSamlProviderHeaders:
 
 @dataclass
 class PostTagSamlProviderRequest:
-    query_params: PostTagSamlProviderQueryParams = field(default=None)
-    headers: PostTagSamlProviderHeaders = field(default=None)
+    headers: PostTagSamlProviderHeaders = field()
+    query_params: PostTagSamlProviderQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostTagSamlProviderResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

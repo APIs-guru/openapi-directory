@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryCustomersPatchPathParams:
-    customer_key: str = field(default=None, metadata={'path_param': { 'field_name': 'customerKey', 'style': 'simple', 'explode': False }})
+    customer_key: str = field(metadata={'path_param': { 'field_name': 'customerKey', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DirectoryCustomersPatchQueryParams:
 
 @dataclass
 class DirectoryCustomersPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryCustomersPatchRequest:
-    path_params: DirectoryCustomersPatchPathParams = field(default=None)
-    query_params: DirectoryCustomersPatchQueryParams = field(default=None)
+    path_params: DirectoryCustomersPatchPathParams = field()
+    query_params: DirectoryCustomersPatchQueryParams = field()
+    security: DirectoryCustomersPatchSecurity = field()
     request: Optional[shared.Customer] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DirectoryCustomersPatchSecurity = field(default=None)
     
 
 @dataclass
 class DirectoryCustomersPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     customer: Optional[shared.Customer] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EstimationTimePoint
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a point in time.
 **/
 export class EstimationTimePoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=estimationTimeFrameOffset" })
+  @SpeakeasyMetadata({ data: "json, name=estimationTimeFrameOffset" })
   estimationTimeFrameOffset?: string;
 }

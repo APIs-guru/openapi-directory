@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,8 +23,12 @@ class UpdateIncidentRecordHeaders:
 @dataclass_json
 @dataclass
 class UpdateIncidentRecordRequestBodyChatChannel:
-    chatbot_sns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'chatbotSns' }})
-    empty: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'empty' }})
+    r"""UpdateIncidentRecordRequestBodyChatChannel
+    The AWS Chatbot chat channel used for collaboration during an incident.
+    """
+    
+    chatbot_sns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('chatbotSns') }})
+    empty: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('empty') }})
     
 class UpdateIncidentRecordRequestBodyStatusEnum(str, Enum):
     OPEN = "OPEN"
@@ -29,30 +38,30 @@ class UpdateIncidentRecordRequestBodyStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateIncidentRecordRequestBody:
-    arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arn' }})
-    chat_channel: Optional[UpdateIncidentRecordRequestBodyChatChannel] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'chatChannel' }})
-    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientToken' }})
-    impact: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'impact' }})
-    notification_targets: Optional[List[shared.NotificationTargetItem]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notificationTargets' }})
-    status: Optional[UpdateIncidentRecordRequestBodyStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    summary: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'summary' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+    arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('arn') }})
+    chat_channel: Optional[UpdateIncidentRecordRequestBodyChatChannel] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('chatChannel') }})
+    client_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientToken') }})
+    impact: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('impact') }})
+    notification_targets: Optional[List[shared.NotificationTargetItem]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('notificationTargets') }})
+    status: Optional[UpdateIncidentRecordRequestBodyStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    summary: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('summary') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     
 
 @dataclass
 class UpdateIncidentRecordRequest:
-    headers: UpdateIncidentRecordHeaders = field(default=None)
-    request: UpdateIncidentRecordRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateIncidentRecordHeaders = field()
+    request: UpdateIncidentRecordRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateIncidentRecordResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     update_incident_record_output: Optional[dict[str, Any]] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)

@@ -1,8 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import tableborderproperties
-from . import tablerange
+from sdk import utils
+from . import *
 
 class UpdateTableBorderPropertiesRequestBorderPositionEnum(str, Enum):
     ALL = "ALL"
@@ -19,9 +23,13 @@ class UpdateTableBorderPropertiesRequestBorderPositionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateTableBorderPropertiesRequest:
-    border_position: Optional[UpdateTableBorderPropertiesRequestBorderPositionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'borderPosition' }})
-    fields: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fields' }})
-    object_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'objectId' }})
-    table_border_properties: Optional[tableborderproperties.TableBorderProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tableBorderProperties' }})
-    table_range: Optional[tablerange.TableRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tableRange' }})
+    r"""UpdateTableBorderPropertiesRequest
+    Updates the properties of the table borders in a Table.
+    """
+    
+    border_position: Optional[UpdateTableBorderPropertiesRequestBorderPositionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('borderPosition') }})
+    fields: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fields') }})
+    object_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('objectId') }})
+    table_border_properties: Optional[TableBorderProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tableBorderProperties') }})
+    table_range: Optional[TableRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tableRange') }})
     

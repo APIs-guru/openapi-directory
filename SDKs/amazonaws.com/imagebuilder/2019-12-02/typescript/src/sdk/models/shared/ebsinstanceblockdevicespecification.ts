@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EbsVolumeTypeEnum } from "./ebsvolumetypeenum";
+
 
 
 // EbsInstanceBlockDeviceSpecification
@@ -7,24 +8,24 @@ import { EbsVolumeTypeEnum } from "./ebsvolumetypeenum";
  * Amazon EBS-specific block device mapping specifications.
 **/
 export class EbsInstanceBlockDeviceSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deleteOnTermination" })
+  @SpeakeasyMetadata({ data: "json, name=deleteOnTermination" })
   deleteOnTermination?: boolean;
 
-  @Metadata({ data: "json, name=encrypted" })
+  @SpeakeasyMetadata({ data: "json, name=encrypted" })
   encrypted?: boolean;
 
-  @Metadata({ data: "json, name=iops" })
+  @SpeakeasyMetadata({ data: "json, name=iops" })
   iops?: number;
 
-  @Metadata({ data: "json, name=kmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=kmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=snapshotId" })
+  @SpeakeasyMetadata({ data: "json, name=snapshotId" })
   snapshotId?: string;
 
-  @Metadata({ data: "json, name=volumeSize" })
+  @SpeakeasyMetadata({ data: "json, name=volumeSize" })
   volumeSize?: number;
 
-  @Metadata({ data: "json, name=volumeType" })
+  @SpeakeasyMetadata({ data: "json, name=volumeType" })
   volumeType?: EbsVolumeTypeEnum;
 }

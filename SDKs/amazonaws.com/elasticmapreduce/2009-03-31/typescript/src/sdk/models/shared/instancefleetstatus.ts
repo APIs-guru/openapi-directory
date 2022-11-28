@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceFleetStateEnum } from "./instancefleetstateenum";
 import { InstanceFleetStateChangeReason } from "./instancefleetstatechangereason";
 import { InstanceFleetTimeline } from "./instancefleettimeline";
+
 
 
 // InstanceFleetStatus
@@ -9,12 +10,12 @@ import { InstanceFleetTimeline } from "./instancefleettimeline";
  * <p>The status of the instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>
 **/
 export class InstanceFleetStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: InstanceFleetStateEnum;
 
-  @Metadata({ data: "json, name=StateChangeReason" })
+  @SpeakeasyMetadata({ data: "json, name=StateChangeReason" })
   stateChangeReason?: InstanceFleetStateChangeReason;
 
-  @Metadata({ data: "json, name=Timeline" })
+  @SpeakeasyMetadata({ data: "json, name=Timeline" })
   timeline?: InstanceFleetTimeline;
 }

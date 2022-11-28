@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Drive } from "./drive";
+
 
 
 // DriveList
@@ -8,12 +8,12 @@ import { Drive } from "./drive";
  * A list of shared drives.
 **/
 export class DriveList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.Drive })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Drive })
   items?: Drive[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

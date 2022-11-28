@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // UnlinkIdentityInput
 /**
  * Input to the UnlinkIdentity action.
@@ -33,15 +33,15 @@ var UnlinkIdentityInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=IdentityId" }),
+        SpeakeasyMetadata({ data: "json, name=IdentityId" }),
         __metadata("design:type", String)
     ], UnlinkIdentityInput.prototype, "identityId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Logins" }),
+        SpeakeasyMetadata({ data: "json, name=Logins" }),
         __metadata("design:type", Map)
     ], UnlinkIdentityInput.prototype, "logins", void 0);
     __decorate([
-        Metadata({ data: "json, name=LoginsToRemove" }),
+        SpeakeasyMetadata({ data: "json, name=LoginsToRemove" }),
         __metadata("design:type", Array)
     ], UnlinkIdentityInput.prototype, "loginsToRemove", void 0);
     return UnlinkIdentityInput;

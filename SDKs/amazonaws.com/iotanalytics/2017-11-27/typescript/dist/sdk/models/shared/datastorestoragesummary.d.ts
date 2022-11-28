@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CustomerManagedDatastoreS3StorageSummary } from "./customermanageddatastores3storagesummary";
 import { DatastoreIotSiteWiseMultiLayerStorageSummary } from "./datastoreiotsitewisemultilayerstoragesummary";
 /**

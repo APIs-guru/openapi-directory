@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BehaviorEntity
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * List Behaviors
 **/
 export class BehaviorEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachment_url" })
+  @SpeakeasyMetadata({ data: "json, name=attachment_url" })
   attachmentUrl?: string;
 
-  @Metadata({ data: "json, name=behavior" })
+  @SpeakeasyMetadata({ data: "json, name=behavior" })
   behavior?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: Map<string, any>;
 }

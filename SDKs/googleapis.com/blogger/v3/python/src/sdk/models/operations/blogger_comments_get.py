@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BloggerCommentsGetPathParams:
-    blog_id: str = field(default=None, metadata={'path_param': { 'field_name': 'blogId', 'style': 'simple', 'explode': False }})
-    comment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'commentId', 'style': 'simple', 'explode': False }})
-    post_id: str = field(default=None, metadata={'path_param': { 'field_name': 'postId', 'style': 'simple', 'explode': False }})
+    blog_id: str = field(metadata={'path_param': { 'field_name': 'blogId', 'style': 'simple', 'explode': False }})
+    comment_id: str = field(metadata={'path_param': { 'field_name': 'commentId', 'style': 'simple', 'explode': False }})
+    post_id: str = field(metadata={'path_param': { 'field_name': 'postId', 'style': 'simple', 'explode': False }})
     
 class BloggerCommentsGetViewEnum(str, Enum):
     VIEW_TYPE_UNSPECIFIED = "VIEW_TYPE_UNSPECIFIED"
@@ -34,14 +35,14 @@ class BloggerCommentsGetQueryParams:
 
 @dataclass
 class BloggerCommentsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BloggerCommentsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -52,14 +53,14 @@ class BloggerCommentsGetSecurity:
 
 @dataclass
 class BloggerCommentsGetRequest:
-    path_params: BloggerCommentsGetPathParams = field(default=None)
-    query_params: BloggerCommentsGetQueryParams = field(default=None)
-    security: BloggerCommentsGetSecurity = field(default=None)
+    path_params: BloggerCommentsGetPathParams = field()
+    query_params: BloggerCommentsGetQueryParams = field()
+    security: BloggerCommentsGetSecurity = field()
     
 
 @dataclass
 class BloggerCommentsGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     comment: Optional[shared.Comment] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

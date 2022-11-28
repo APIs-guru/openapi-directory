@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SustainableSourcingEcoFriendlyToiletriesExceptionEnum(str, Enum):
     EXCEPTION_UNSPECIFIED = "EXCEPTION_UNSPECIFIED"
@@ -54,20 +56,24 @@ class SustainableSourcingVegetarianMealsExceptionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SustainableSourcing:
-    eco_friendly_toiletries: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ecoFriendlyToiletries' }})
-    eco_friendly_toiletries_exception: Optional[SustainableSourcingEcoFriendlyToiletriesExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ecoFriendlyToiletriesException' }})
-    locally_sourced_food_and_beverages: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locallySourcedFoodAndBeverages' }})
-    locally_sourced_food_and_beverages_exception: Optional[SustainableSourcingLocallySourcedFoodAndBeveragesExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locallySourcedFoodAndBeveragesException' }})
-    organic_cage_free_eggs: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'organicCageFreeEggs' }})
-    organic_cage_free_eggs_exception: Optional[SustainableSourcingOrganicCageFreeEggsExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'organicCageFreeEggsException' }})
-    organic_food_and_beverages: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'organicFoodAndBeverages' }})
-    organic_food_and_beverages_exception: Optional[SustainableSourcingOrganicFoodAndBeveragesExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'organicFoodAndBeveragesException' }})
-    responsible_purchasing_policy: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responsiblePurchasingPolicy' }})
-    responsible_purchasing_policy_exception: Optional[SustainableSourcingResponsiblePurchasingPolicyExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responsiblePurchasingPolicyException' }})
-    responsibly_sources_seafood: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responsiblySourcesSeafood' }})
-    responsibly_sources_seafood_exception: Optional[SustainableSourcingResponsiblySourcesSeafoodExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responsiblySourcesSeafoodException' }})
-    vegan_meals: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'veganMeals' }})
-    vegan_meals_exception: Optional[SustainableSourcingVeganMealsExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'veganMealsException' }})
-    vegetarian_meals: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vegetarianMeals' }})
-    vegetarian_meals_exception: Optional[SustainableSourcingVegetarianMealsExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vegetarianMealsException' }})
+    r"""SustainableSourcing
+    Sustainable sourcing practices implemented at the hotel.
+    """
+    
+    eco_friendly_toiletries: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ecoFriendlyToiletries') }})
+    eco_friendly_toiletries_exception: Optional[SustainableSourcingEcoFriendlyToiletriesExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ecoFriendlyToiletriesException') }})
+    locally_sourced_food_and_beverages: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('locallySourcedFoodAndBeverages') }})
+    locally_sourced_food_and_beverages_exception: Optional[SustainableSourcingLocallySourcedFoodAndBeveragesExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('locallySourcedFoodAndBeveragesException') }})
+    organic_cage_free_eggs: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('organicCageFreeEggs') }})
+    organic_cage_free_eggs_exception: Optional[SustainableSourcingOrganicCageFreeEggsExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('organicCageFreeEggsException') }})
+    organic_food_and_beverages: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('organicFoodAndBeverages') }})
+    organic_food_and_beverages_exception: Optional[SustainableSourcingOrganicFoodAndBeveragesExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('organicFoodAndBeveragesException') }})
+    responsible_purchasing_policy: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('responsiblePurchasingPolicy') }})
+    responsible_purchasing_policy_exception: Optional[SustainableSourcingResponsiblePurchasingPolicyExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('responsiblePurchasingPolicyException') }})
+    responsibly_sources_seafood: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('responsiblySourcesSeafood') }})
+    responsibly_sources_seafood_exception: Optional[SustainableSourcingResponsiblySourcesSeafoodExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('responsiblySourcesSeafoodException') }})
+    vegan_meals: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('veganMeals') }})
+    vegan_meals_exception: Optional[SustainableSourcingVeganMealsExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('veganMealsException') }})
+    vegetarian_meals: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vegetarianMeals') }})
+    vegetarian_meals_exception: Optional[SustainableSourcingVegetarianMealsExceptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vegetarianMealsException') }})
     

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class WebriskProjectsOperationsListPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,13 +29,13 @@ class WebriskProjectsOperationsListQueryParams:
 
 @dataclass
 class WebriskProjectsOperationsListRequest:
-    path_params: WebriskProjectsOperationsListPathParams = field(default=None)
-    query_params: WebriskProjectsOperationsListQueryParams = field(default=None)
+    path_params: WebriskProjectsOperationsListPathParams = field()
+    query_params: WebriskProjectsOperationsListQueryParams = field()
     
 
 @dataclass
 class WebriskProjectsOperationsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_list_operations_response: Optional[shared.GoogleLongrunningListOperationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

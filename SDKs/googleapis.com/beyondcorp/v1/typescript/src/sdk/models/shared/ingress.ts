@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Config } from "./config";
+
 
 
 // Ingress
@@ -7,6 +8,6 @@ import { Config } from "./config";
  * Settings of how to connect to the ClientGateway. One of the following options should be set.
 **/
 export class Ingress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=config" })
+  @SpeakeasyMetadata({ data: "json, name=config" })
   config?: Config;
 }

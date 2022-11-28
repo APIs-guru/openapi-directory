@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Cell } from "./cell";
+
 
 
 // TableRow
@@ -8,9 +8,9 @@ import { Cell } from "./cell";
  * An object that contains attributes about a single row in a table
 **/
 export class TableRow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cells", elemType: shared.Cell })
+  @SpeakeasyMetadata({ data: "json, name=cells", elemType: Cell })
   cells: Cell[];
 
-  @Metadata({ data: "json, name=rowId" })
+  @SpeakeasyMetadata({ data: "json, name=rowId" })
   rowId: string;
 }

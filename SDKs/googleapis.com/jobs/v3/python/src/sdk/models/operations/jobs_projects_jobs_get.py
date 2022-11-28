@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class JobsProjectsJobsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class JobsProjectsJobsGetQueryParams:
 
 @dataclass
 class JobsProjectsJobsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class JobsProjectsJobsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class JobsProjectsJobsGetSecurity:
 
 @dataclass
 class JobsProjectsJobsGetRequest:
-    path_params: JobsProjectsJobsGetPathParams = field(default=None)
-    query_params: JobsProjectsJobsGetQueryParams = field(default=None)
-    security: JobsProjectsJobsGetSecurity = field(default=None)
+    path_params: JobsProjectsJobsGetPathParams = field()
+    query_params: JobsProjectsJobsGetQueryParams = field()
+    security: JobsProjectsJobsGetSecurity = field()
     
 
 @dataclass
 class JobsProjectsJobsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     job: Optional[shared.Job] = field(default=None)
-    status_code: int = field(default=None)
     

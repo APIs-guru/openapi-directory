@@ -1,5 +1,7 @@
 package shared
 
+// ServiceQuota
+// Information about a quota.
 type ServiceQuota struct {
 	Adjustable  *bool        `json:"Adjustable,omitempty"`
 	ErrorReason *ErrorReason `json:"ErrorReason,omitempty"`

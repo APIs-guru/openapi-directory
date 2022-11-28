@@ -5,10 +5,6 @@ type AppendTextUsingPostQueryParams struct {
 	Text  *string `queryParam:"style=form,explode=true,name=text"`
 }
 
-type AppendTextUsingPostRequest struct {
-	QueryParams AppendTextUsingPostQueryParams
-}
-
 type AppendTextUsingPost200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -31,6 +27,10 @@ type AppendTextUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type AppendTextUsingPostRequest struct {
+	QueryParams AppendTextUsingPostQueryParams
 }
 
 type AppendTextUsingPostResponse struct {

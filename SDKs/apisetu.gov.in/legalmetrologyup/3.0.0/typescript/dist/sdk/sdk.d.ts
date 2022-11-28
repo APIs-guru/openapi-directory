@@ -1,29 +1,40 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://apisetu.gov.in/legalmetrologyup/v3"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
     /**
+     * delcs - Dealer License
+     *
      * API to verify Dealer License.
     **/
-    Delcs(req: operations.DelcsRequest, config?: AxiosRequestConfig): Promise<operations.DelcsResponse>;
+    delcs(req: operations.DelcsRequest, config?: AxiosRequestConfig): Promise<operations.DelcsResponse>;
     /**
+     * malcs - Manufacturer License
+     *
      * API to verify Manufacturer License.
     **/
-    Malcs(req: operations.MalcsRequest, config?: AxiosRequestConfig): Promise<operations.MalcsResponse>;
+    malcs(req: operations.MalcsRequest, config?: AxiosRequestConfig): Promise<operations.MalcsResponse>;
     /**
+     * palcs - Packers License
+     *
      * API to verify Packers License.
     **/
-    Palcs(req: operations.PalcsRequest, config?: AxiosRequestConfig): Promise<operations.PalcsResponse>;
+    palcs(req: operations.PalcsRequest, config?: AxiosRequestConfig): Promise<operations.PalcsResponse>;
     /**
+     * relcs - Repairer License
+     *
      * API to verify Repairer License.
     **/
-    Relcs(req: operations.RelcsRequest, config?: AxiosRequestConfig): Promise<operations.RelcsResponse>;
+    relcs(req: operations.RelcsRequest, config?: AxiosRequestConfig): Promise<operations.RelcsResponse>;
 }
 export {};

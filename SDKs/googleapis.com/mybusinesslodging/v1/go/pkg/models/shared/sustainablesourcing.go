@@ -72,6 +72,8 @@ const (
 	SustainableSourcingVegetarianMealsExceptionEnumDependentOnDayOfWeek SustainableSourcingVegetarianMealsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// SustainableSourcing
+// Sustainable sourcing practices implemented at the hotel.
 type SustainableSourcing struct {
 	EcoFriendlyToiletries                   *bool                                                           `json:"ecoFriendlyToiletries,omitempty"`
 	EcoFriendlyToiletriesException          *SustainableSourcingEcoFriendlyToiletriesExceptionEnum          `json:"ecoFriendlyToiletriesException,omitempty"`

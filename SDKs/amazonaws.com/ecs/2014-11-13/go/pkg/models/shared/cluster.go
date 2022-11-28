@@ -1,5 +1,7 @@
 package shared
 
+// Cluster
+// A regional grouping of one or more container instances on which you can run task requests. Each account receives a default cluster the first time you use the Amazon ECS service, but you may also create other clusters. Clusters may contain more than one instance type simultaneously.
 type Cluster struct {
 	ActiveServicesCount               *int64                         `json:"activeServicesCount,omitempty"`
 	Attachments                       []Attachment                   `json:"attachments,omitempty"`

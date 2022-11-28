@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import field
-from . import file
+from sdk import utils
+from . import *
+
+class FullItemStateEnum(str, Enum):
+    ARCHIVED = "ARCHIVED"
+    DELETED = "DELETED"
 
 class FullItemCategoryEnum(str, Enum):
     LOGIN = "LOGIN"
@@ -33,43 +38,55 @@ class FullItemCategoryEnum(str, Enum):
 @dataclass_json
 @dataclass
 class FullItemSections:
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
     
-class FullItemStateEnum(str, Enum):
-    ARCHIVED = "ARCHIVED"
-    DELETED = "DELETED"
-
 
 @dataclass_json
 @dataclass
 class FullItemUrls:
-    href: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'href' }})
-    primary: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primary' }})
+    href: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('href') }})
+    primary: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('primary') }})
     
 
 @dataclass_json
 @dataclass
 class FullItemVault:
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
     
 
 @dataclass_json
 @dataclass
 class FullItem:
-    category: FullItemCategoryEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
-    created_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createdAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    favorite: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'favorite' }})
-    fields: Optional[List[field.Field]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fields' }})
-    files: Optional[List[file.File]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'files' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    last_edited_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastEditedBy' }})
-    sections: Optional[List[FullItemSections]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sections' }})
-    state: Optional[FullItemStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
-    updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updatedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    urls: Optional[List[FullItemUrls]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'urls' }})
-    vault: FullItemVault = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vault' }})
-    version: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    category: FullItemCategoryEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('category') }})
+    vault: FullItemVault = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('vault') }})
+    created_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createdAt'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    favorite: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('favorite') }})
+    fields: Optional[List[Field]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fields') }})
+    files: Optional[List[File]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('files') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    last_edited_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastEditedBy') }})
+    sections: Optional[List[FullItemSections]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sections') }})
+    state: Optional[FullItemStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
+    updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updatedAt'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    urls: Optional[List[FullItemUrls]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('urls') }})
+    version: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
+    
+
+@dataclass_json
+@dataclass
+class FullItemInput:
+    category: FullItemCategoryEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('category') }})
+    vault: FullItemVault = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('vault') }})
+    favorite: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('favorite') }})
+    fields: Optional[List[FieldInput]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fields') }})
+    files: Optional[List[FileInput]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('files') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    sections: Optional[List[FullItemSections]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sections') }})
+    tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
+    urls: Optional[List[FullItemUrls]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('urls') }})
+    version: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
     

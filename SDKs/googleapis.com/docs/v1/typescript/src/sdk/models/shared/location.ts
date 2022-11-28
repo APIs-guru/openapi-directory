@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Location
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A particular location in the document.
 **/
 export class Location extends SpeakeasyBase {
-  @Metadata({ data: "json, name=index" })
+  @SpeakeasyMetadata({ data: "json, name=index" })
   index?: number;
 
-  @Metadata({ data: "json, name=segmentId" })
+  @SpeakeasyMetadata({ data: "json, name=segmentId" })
   segmentId?: string;
 }

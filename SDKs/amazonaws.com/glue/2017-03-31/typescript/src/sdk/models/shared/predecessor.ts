@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Predecessor
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A job run that was used in the predicate of a conditional trigger that triggered this job run.
 **/
 export class Predecessor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=JobName" })
+  @SpeakeasyMetadata({ data: "json, name=JobName" })
   jobName?: string;
 
-  @Metadata({ data: "json, name=RunId" })
+  @SpeakeasyMetadata({ data: "json, name=RunId" })
   runId?: string;
 }

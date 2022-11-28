@@ -1,0 +1,114 @@
+# openapi
+
+<!-- Start SDK Installation -->
+## SDK Installation
+```bash
+go get openapi
+```
+<!-- End SDK Installation -->
+
+<!-- Start SDK Example Usage -->
+## SDK Example Usage
+```go
+package main
+
+import (
+	"openapi"
+	"openapi/pkg/models/shared"
+	"openapi/pkg/models/operations"
+)
+
+func main() {
+	s := sdk.New()
+    
+    req := operations.CreateActivityRequest{
+        Security: operations.CreateActivitySecurity{
+            AccountSidAuthToken: shared.SchemeAccountSidAuthToken{
+                Password: "YOUR_PASSWORD_HERE",
+                Username: "YOUR_USERNAME_HERE",
+            },
+        },
+        PathParams: operations.CreateActivityPathParams{
+            WorkspaceSid: "consectetur",
+        },
+        Request: &operations.CreateActivityCreateActivityRequest{
+            Available: false,
+            FriendlyName: "porro",
+        },
+    }
+    
+    res, err := s.CreateActivity(ctx, req)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.TaskrouterV1WorkspaceActivity != nil {
+        // handle response
+    }
+```
+<!-- End SDK Example Usage -->
+
+<!-- Start SDK Available Operations -->
+## SDK Available Operations
+* `CreateActivity`
+* `CreateTask`
+* `CreateTaskChannel`
+* `CreateTaskQueue`
+* `CreateWorker`
+* `CreateWorkflow`
+* `CreateWorkspace`
+* `DeleteActivity`
+* `DeleteTask`
+* `DeleteTaskChannel`
+* `DeleteTaskQueue`
+* `DeleteWorker`
+* `DeleteWorkflow`
+* `DeleteWorkspace`
+* `FetchActivity`
+* `FetchEvent`
+* `FetchTask`
+* `FetchTaskChannel`
+* `FetchTaskQueue`
+* `FetchTaskQueueCumulativeStatistics`
+* `FetchTaskQueueRealTimeStatistics`
+* `FetchTaskQueueStatistics`
+* `FetchTaskReservation`
+* `FetchWorker`
+* `FetchWorkerChannel`
+* `FetchWorkerInstanceStatistics`
+* `FetchWorkerReservation`
+* `FetchWorkerStatistics`
+* `FetchWorkersCumulativeStatistics`
+* `FetchWorkersRealTimeStatistics`
+* `FetchWorkflow`
+* `FetchWorkflowCumulativeStatistics`
+* `FetchWorkflowRealTimeStatistics`
+* `FetchWorkflowStatistics`
+* `FetchWorkspace`
+* `FetchWorkspaceCumulativeStatistics`
+* `FetchWorkspaceRealTimeStatistics`
+* `FetchWorkspaceStatistics`
+* `ListActivity`
+* `ListEvent`
+* `ListTask`
+* `ListTaskChannel`
+* `ListTaskQueue`
+* `ListTaskQueuesStatistics`
+* `ListTaskReservation`
+* `ListWorker`
+* `ListWorkerChannel`
+* `ListWorkerReservation`
+* `ListWorkflow`
+* `ListWorkspace`
+* `UpdateActivity`
+* `UpdateTask`
+* `UpdateTaskChannel`
+* `UpdateTaskQueue`
+* `UpdateTaskReservation`
+* `UpdateWorker`
+* `UpdateWorkerChannel`
+* `UpdateWorkerReservation`
+* `UpdateWorkflow`
+* `UpdateWorkspace`
+
+<!-- End SDK Available Operations -->

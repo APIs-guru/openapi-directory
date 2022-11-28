@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class Adexchangebuyer2AccountsCreativesCreatePathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
     
 class Adexchangebuyer2AccountsCreativesCreateDuplicateIDModeEnum(str, Enum):
     NO_DUPLICATES = "NO_DUPLICATES"
@@ -30,21 +31,21 @@ class Adexchangebuyer2AccountsCreativesCreateQueryParams:
 
 @dataclass
 class Adexchangebuyer2AccountsCreativesCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class Adexchangebuyer2AccountsCreativesCreateRequest:
-    path_params: Adexchangebuyer2AccountsCreativesCreatePathParams = field(default=None)
-    query_params: Adexchangebuyer2AccountsCreativesCreateQueryParams = field(default=None)
+    path_params: Adexchangebuyer2AccountsCreativesCreatePathParams = field()
+    query_params: Adexchangebuyer2AccountsCreativesCreateQueryParams = field()
+    security: Adexchangebuyer2AccountsCreativesCreateSecurity = field()
     request: Optional[shared.Creative] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: Adexchangebuyer2AccountsCreativesCreateSecurity = field(default=None)
     
 
 @dataclass
 class Adexchangebuyer2AccountsCreativesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     creative: Optional[shared.Creative] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RoomData } from "./roomdata";
 import { Range } from "./range";
+
 
 
 // RoomTreeDataList
@@ -9,9 +9,9 @@ import { Range } from "./range";
  * List of rooms
 **/
 export class RoomTreeDataList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.RoomData })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: RoomData })
   items: RoomData[];
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range: Range;
 }

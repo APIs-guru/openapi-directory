@@ -1,0 +1,30 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { ContactPoint } from "./contactpoint";
+import { GroupFeature } from "./groupfeature";
+import { Lookup } from "./lookup";
+import { Link } from "./link";
+import { Location } from "./location";
+export declare class Group extends SpeakeasyBase {
+    address1?: string;
+    address2?: string;
+    address3?: string;
+    childGroups?: Group[];
+    code?: string;
+    contactPoints?: ContactPoint[];
+    created?: Date;
+    fhirResourceId?: string;
+    groupFeatures?: GroupFeature[];
+    groupType?: Lookup;
+    id?: number;
+    lastImportDate?: Date;
+    lastUpdate?: Date;
+    links?: Link[];
+    locations?: Location[];
+    name?: string;
+    parentGroups?: Group[];
+    postcode?: string;
+    sftpUser?: string;
+    shortName?: string;
+    visible?: boolean;
+    visibleToJoin?: boolean;
+}

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The suggestion chip message that allows the user to jump out to the app or website associated with this agent.
 **/
 export class GoogleCloudDialogflowV2beta1IntentMessageLinkOutSuggestion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationName" })
+  @SpeakeasyMetadata({ data: "json, name=destinationName" })
   destinationName?: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

@@ -10,18 +10,18 @@ class CreateTaskHeaders:
 
 @dataclass
 class CreateTaskSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CreateTaskRequest:
-    headers: CreateTaskHeaders = field(default=None)
-    request: shared.CreateTaskRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CreateTaskSecurity = field(default=None)
+    headers: CreateTaskHeaders = field()
+    request: shared.CreateTaskRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: CreateTaskSecurity = field()
     
 
 @dataclass
 class CreateTaskResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

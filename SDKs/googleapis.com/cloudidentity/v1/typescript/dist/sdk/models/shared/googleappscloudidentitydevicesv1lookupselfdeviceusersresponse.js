@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse
 /**
  * Response containing resource names of the DeviceUsers associated with the caller's credentials.
@@ -33,15 +33,15 @@ var GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse = /** @class *
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customer" }),
+        SpeakeasyMetadata({ data: "json, name=customer" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse.prototype, "customer", void 0);
     __decorate([
-        Metadata({ data: "json, name=names" }),
+        SpeakeasyMetadata({ data: "json, name=names" }),
         __metadata("design:type", Array)
     ], GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse.prototype, "names", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse.prototype, "nextPageToken", void 0);
     return GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse;

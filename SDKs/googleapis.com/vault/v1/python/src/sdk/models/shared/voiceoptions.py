@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class VoiceOptionsCoveredDataEnum(str, Enum):
     COVERED_DATA_UNSPECIFIED = "COVERED_DATA_UNSPECIFIED"
@@ -12,5 +14,9 @@ class VoiceOptionsCoveredDataEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VoiceOptions:
-    covered_data: Optional[List[VoiceOptionsCoveredDataEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'coveredData' }})
+    r"""VoiceOptions
+    Additional options for Voice search
+    """
+    
+    covered_data: Optional[List[VoiceOptionsCoveredDataEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('coveredData') }})
     

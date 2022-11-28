@@ -1,6 +1,7 @@
 
 
+
 export enum ImageSortOrderEnum {
-    Ascending = "ASCENDING"
-,    Descending = "DESCENDING"
+    Ascending = "ASCENDING",
+    Descending = "DESCENDING"
 }

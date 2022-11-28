@@ -1,7 +1,8 @@
 
 
+
 export enum DatasetContentStateEnum {
-    Creating = "CREATING"
-,    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
+    Creating = "CREATING",
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED"
 }

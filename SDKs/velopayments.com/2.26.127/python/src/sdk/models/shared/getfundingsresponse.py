@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
-from . import fundingaudit
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetFundingsResponse:
-    content: Optional[List[fundingaudit.FundingAudit]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content' }})
-    links: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
-    page: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
+    r"""GetFundingsResponse
+    List Users Response Object
+    """
+    
+    content: Optional[List[FundingAudit]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('content') }})
+    links: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('links') }})
+    page: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('page') }})
     

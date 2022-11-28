@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CharacterRulesMustContainCharactersEnum {
-    Alpha = "alpha"
-,    Uppercase = "uppercase"
-,    Lowercase = "lowercase"
-,    Numeric = "numeric"
-,    Special = "special"
-,    All = "all"
-,    None = "none"
+    Alpha = "alpha",
+    Uppercase = "uppercase",
+    Lowercase = "lowercase",
+    Numeric = "numeric",
+    Special = "special",
+    All = "all",
+    None = "none"
 }
 
 
@@ -16,9 +17,9 @@ export enum CharacterRulesMustContainCharactersEnum {
  * Password character rules
 **/
 export class CharacterRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mustContainCharacters" })
+  @SpeakeasyMetadata({ data: "json, name=mustContainCharacters" })
   mustContainCharacters: CharacterRulesMustContainCharactersEnum[];
 
-  @Metadata({ data: "json, name=numberOfCharacteristicsToEnforce" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfCharacteristicsToEnforce" })
   numberOfCharacteristicsToEnforce: number;
 }

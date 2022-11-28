@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RemoveSchemaVersionMetadataResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LatestVersion" })
+  @SpeakeasyMetadata({ data: "json, name=LatestVersion" })
   latestVersion?: boolean;
 
-  @Metadata({ data: "json, name=MetadataKey" })
+  @SpeakeasyMetadata({ data: "json, name=MetadataKey" })
   metadataKey?: string;
 
-  @Metadata({ data: "json, name=MetadataValue" })
+  @SpeakeasyMetadata({ data: "json, name=MetadataValue" })
   metadataValue?: string;
 
-  @Metadata({ data: "json, name=RegistryName" })
+  @SpeakeasyMetadata({ data: "json, name=RegistryName" })
   registryName?: string;
 
-  @Metadata({ data: "json, name=SchemaArn" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaArn" })
   schemaArn?: string;
 
-  @Metadata({ data: "json, name=SchemaName" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaName" })
   schemaName?: string;
 
-  @Metadata({ data: "json, name=SchemaVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaVersionId" })
   schemaVersionId?: string;
 
-  @Metadata({ data: "json, name=VersionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=VersionNumber" })
   versionNumber?: number;
 }

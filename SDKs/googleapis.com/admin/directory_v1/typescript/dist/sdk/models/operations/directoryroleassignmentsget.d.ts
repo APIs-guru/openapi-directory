@@ -1,0 +1,41 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+export declare class DirectoryRoleAssignmentsGetPathParams extends SpeakeasyBase {
+    customer: string;
+    roleAssignmentId: string;
+}
+export declare class DirectoryRoleAssignmentsGetQueryParams extends SpeakeasyBase {
+    dollarXgafv?: shared.XgafvEnum;
+    accessToken?: string;
+    alt?: shared.AltEnum;
+    callback?: string;
+    fields?: string;
+    key?: string;
+    oauthToken?: string;
+    prettyPrint?: boolean;
+    quotaUser?: string;
+    uploadType?: string;
+    uploadProtocol?: string;
+}
+export declare class DirectoryRoleAssignmentsGetSecurityOption1 extends SpeakeasyBase {
+    oauth2: shared.SchemeOauth2;
+    oauth2c: shared.SchemeOauth2c;
+}
+export declare class DirectoryRoleAssignmentsGetSecurityOption2 extends SpeakeasyBase {
+    oauth2: shared.SchemeOauth2;
+    oauth2c: shared.SchemeOauth2c;
+}
+export declare class DirectoryRoleAssignmentsGetSecurity extends SpeakeasyBase {
+    option1?: DirectoryRoleAssignmentsGetSecurityOption1;
+    option2?: DirectoryRoleAssignmentsGetSecurityOption2;
+}
+export declare class DirectoryRoleAssignmentsGetRequest extends SpeakeasyBase {
+    pathParams: DirectoryRoleAssignmentsGetPathParams;
+    queryParams: DirectoryRoleAssignmentsGetQueryParams;
+    security: DirectoryRoleAssignmentsGetSecurity;
+}
+export declare class DirectoryRoleAssignmentsGetResponse extends SpeakeasyBase {
+    contentType: string;
+    roleAssignment?: shared.RoleAssignment;
+    statusCode: number;
+}

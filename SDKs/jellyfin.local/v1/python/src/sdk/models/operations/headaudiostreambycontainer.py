@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class HeadAudioStreamByContainerPathParams:
-    container: str = field(default=None, metadata={'path_param': { 'field_name': 'container', 'style': 'simple', 'explode': False }})
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    container: str = field(metadata={'path_param': { 'field_name': 'container', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -62,13 +63,13 @@ class HeadAudioStreamByContainerQueryParams:
 
 @dataclass
 class HeadAudioStreamByContainerRequest:
-    path_params: HeadAudioStreamByContainerPathParams = field(default=None)
-    query_params: HeadAudioStreamByContainerQueryParams = field(default=None)
+    path_params: HeadAudioStreamByContainerPathParams = field()
+    query_params: HeadAudioStreamByContainerQueryParams = field()
     
 
 @dataclass
 class HeadAudioStreamByContainerResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     head_audio_stream_by_container_200_audio_wildcard_binary_string: Optional[bytes] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetModifyClusterMaintenanceActionEnum(str, Enum):
     MODIFY_CLUSTER_MAINTENANCE = "ModifyClusterMaintenance"
@@ -13,14 +14,14 @@ class GetModifyClusterMaintenanceVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyClusterMaintenanceQueryParams:
-    action: GetModifyClusterMaintenanceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    cluster_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
+    action: GetModifyClusterMaintenanceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cluster_identifier: str = field(metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
+    version: GetModifyClusterMaintenanceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     defer_maintenance: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DeferMaintenance', 'style': 'form', 'explode': True }})
     defer_maintenance_duration: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'DeferMaintenanceDuration', 'style': 'form', 'explode': True }})
     defer_maintenance_end_time: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'DeferMaintenanceEndTime', 'style': 'form', 'explode': True }})
     defer_maintenance_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DeferMaintenanceIdentifier', 'style': 'form', 'explode': True }})
     defer_maintenance_start_time: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'DeferMaintenanceStartTime', 'style': 'form', 'explode': True }})
-    version: GetModifyClusterMaintenanceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -36,13 +37,13 @@ class GetModifyClusterMaintenanceHeaders:
 
 @dataclass
 class GetModifyClusterMaintenanceRequest:
-    query_params: GetModifyClusterMaintenanceQueryParams = field(default=None)
-    headers: GetModifyClusterMaintenanceHeaders = field(default=None)
+    headers: GetModifyClusterMaintenanceHeaders = field()
+    query_params: GetModifyClusterMaintenanceQueryParams = field()
     
 
 @dataclass
 class GetModifyClusterMaintenanceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

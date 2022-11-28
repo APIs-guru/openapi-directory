@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import inventoryresultitem
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InventoryResultEntity:
-    data: Optional[dict[str, inventoryresultitem.InventoryResultItem]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Data' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Id' }})
+    r"""InventoryResultEntity
+    Inventory query results.
+    """
+    
+    data: Optional[dict[str, InventoryResultItem]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Data') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Id') }})
     

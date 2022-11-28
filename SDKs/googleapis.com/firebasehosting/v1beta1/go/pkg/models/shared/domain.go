@@ -10,6 +10,8 @@ const (
 	DomainStatusEnumDomainVerificationLost     DomainStatusEnum = "DOMAIN_VERIFICATION_LOST"
 )
 
+// Domain
+// The intended behavior and status information of a domain.
 type Domain struct {
 	DomainName     *string             `json:"domainName,omitempty"`
 	DomainRedirect *DomainRedirect     `json:"domainRedirect,omitempty"`

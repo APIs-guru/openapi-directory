@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { ApprovalResult } from "./approvalresult";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ApprovalResultInput } from "./approvalresult";
 
 
-// ApproveBuildRequest
+
+// ApproveBuildRequestInput
 /** 
  * Request to approve or reject a pending build.
 **/
-export class ApproveBuildRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approvalResult" })
-  approvalResult?: ApprovalResult;
+export class ApproveBuildRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=approvalResult" })
+  approvalResult?: ApprovalResultInput;
 }

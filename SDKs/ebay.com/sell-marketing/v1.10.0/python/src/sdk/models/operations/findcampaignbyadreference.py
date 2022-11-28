@@ -12,18 +12,18 @@ class FindCampaignByAdReferenceQueryParams:
 
 @dataclass
 class FindCampaignByAdReferenceSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FindCampaignByAdReferenceRequest:
-    query_params: FindCampaignByAdReferenceQueryParams = field(default=None)
-    security: FindCampaignByAdReferenceSecurity = field(default=None)
+    query_params: FindCampaignByAdReferenceQueryParams = field()
+    security: FindCampaignByAdReferenceSecurity = field()
     
 
 @dataclass
 class FindCampaignByAdReferenceResponse:
+    content_type: str = field()
+    status_code: int = field()
     campaigns: Optional[shared.Campaigns] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// ApplicationConfigurationDescription
+// Describes details about the application code and starting parameters for a Kinesis Data Analytics application.
 type ApplicationConfigurationDescription struct {
 	ApplicationCodeConfigurationDescription     *ApplicationCodeConfigurationDescription     `json:"ApplicationCodeConfigurationDescription,omitempty"`
 	ApplicationSnapshotConfigurationDescription *ApplicationSnapshotConfigurationDescription `json:"ApplicationSnapshotConfigurationDescription,omitempty"`

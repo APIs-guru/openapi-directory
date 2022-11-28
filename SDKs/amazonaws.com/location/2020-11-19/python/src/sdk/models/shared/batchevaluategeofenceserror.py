@@ -1,15 +1,20 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from dataclasses_json import dataclass_json
-from . import batchitemerror
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchEvaluateGeofencesError:
-    device_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceId' }})
-    error: batchitemerror.BatchItemError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Error' }})
-    sample_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SampleTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    r"""BatchEvaluateGeofencesError
+    Contains error details for each device that failed to evaluate its position against the geofences in a given geofence collection.
+    """
+    
+    device_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceId') }})
+    error: BatchItemError = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Error') }})
+    sample_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('SampleTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

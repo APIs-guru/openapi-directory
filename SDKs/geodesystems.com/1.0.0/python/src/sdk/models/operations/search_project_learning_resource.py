@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -30,11 +30,11 @@ class SearchProjectLearningResourceQueryParams:
 
 @dataclass
 class SearchProjectLearningResourceRequest:
-    query_params: SearchProjectLearningResourceQueryParams = field(default=None)
+    query_params: SearchProjectLearningResourceQueryParams = field()
     
 
 @dataclass
 class SearchProjectLearningResourceResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

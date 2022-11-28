@@ -1,9 +1,10 @@
 
 
+
 export enum DiskStateEnum {
-    Pending = "pending"
-,    Error = "error"
-,    Available = "available"
-,    InUse = "in-use"
-,    Unknown = "unknown"
+    Pending = "pending",
+    Error = "error",
+    Available = "available",
+    InUse = "in-use",
+    Unknown = "unknown"
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var SearchCseSiterestrictListImgColorTypeEnum;
 (function (SearchCseSiterestrictListImgColorTypeEnum) {
@@ -94,171 +94,171 @@ var SearchCseSiterestrictListQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=c2coff" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=c2coff" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "c2coff", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=cr" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cr" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "cr", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=cx" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cx" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "cx", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dateRestrict" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dateRestrict" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "dateRestrict", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=exactTerms" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=exactTerms" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "exactTerms", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=excludeTerms" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=excludeTerms" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "excludeTerms", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fileType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fileType" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "fileType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=gl" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=gl" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "gl", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=googlehost" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=googlehost" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "googlehost", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=highRange" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=highRange" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "highRange", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=hl" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=hl" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "hl", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=hq" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=hq" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "hq", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=imgColorType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=imgColorType" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "imgColorType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=imgDominantColor" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=imgDominantColor" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "imgDominantColor", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=imgSize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=imgSize" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "imgSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=imgType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=imgType" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "imgType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=linkSite" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=linkSite" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "linkSite", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lowRange" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lowRange" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "lowRange", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=lr" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lr" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "lr", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=num" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=num" }),
         __metadata("design:type", Number)
     ], SearchCseSiterestrictListQueryParams.prototype, "num", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=orTerms" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=orTerms" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "orTerms", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], SearchCseSiterestrictListQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=q" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "q", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=relatedSite" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=relatedSite" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "relatedSite", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rights" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rights" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "rights", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=safe" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=safe" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "safe", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=searchType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchType" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "searchType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=siteSearch" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=siteSearch" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "siteSearch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=siteSearchFilter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=siteSearchFilter" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "siteSearchFilter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=start" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" }),
         __metadata("design:type", Number)
     ], SearchCseSiterestrictListQueryParams.prototype, "start", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListQueryParams.prototype, "uploadProtocol", void 0);
     return SearchCseSiterestrictListQueryParams;
@@ -270,7 +270,7 @@ var SearchCseSiterestrictListRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SearchCseSiterestrictListQueryParams)
     ], SearchCseSiterestrictListRequest.prototype, "queryParams", void 0);
     return SearchCseSiterestrictListRequest;
@@ -282,15 +282,15 @@ var SearchCseSiterestrictListResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SearchCseSiterestrictListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Search)
     ], SearchCseSiterestrictListResponse.prototype, "search", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SearchCseSiterestrictListResponse.prototype, "statusCode", void 0);
     return SearchCseSiterestrictListResponse;

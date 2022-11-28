@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeregisterOnPremisesInstanceInput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input of a <code>DeregisterOnPremisesInstance</code> operation.
 **/
 export class DeregisterOnPremisesInstanceInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instanceName" })
+  @SpeakeasyMetadata({ data: "json, name=instanceName" })
   instanceName: string;
 }

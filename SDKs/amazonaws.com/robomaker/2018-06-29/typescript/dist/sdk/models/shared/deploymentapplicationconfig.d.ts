@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentLaunchConfig } from "./deploymentlaunchconfig";
 /**
  * Information about a deployment application configuration.

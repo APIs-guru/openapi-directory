@@ -8,6 +8,8 @@ const (
 	SendAsVerificationStatusEnumPending                       SendAsVerificationStatusEnum = "pending"
 )
 
+// SendAs
+// Settings associated with a send-as alias, which can be either the primary login address associated with the account or a custom "from" address. Send-as aliases correspond to the "Send Mail As" feature in the web interface.
 type SendAs struct {
 	DisplayName        *string                       `json:"displayName,omitempty"`
 	IsDefault          *bool                         `json:"isDefault,omitempty"`

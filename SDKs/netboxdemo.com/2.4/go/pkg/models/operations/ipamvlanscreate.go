@@ -5,7 +5,7 @@ import (
 )
 
 type IpamVlansCreateRequest struct {
-	Request shared.WritableVlan `request:"mediaType=application/json"`
+	Request shared.WritableVlanInput `request:"mediaType=application/json"`
 }
 
 type IpamVlansCreateResponse struct {

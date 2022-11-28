@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { RestApi } from "./restapi";
 // RestApis
 /**
  * <p>Contains references to your APIs and links that guide you in how to interact with your collection. A collection offers a paginated view of your APIs.</p> <div class="seeAlso"> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html">Create an API</a> </div>
@@ -34,11 +34,11 @@ var RestApis = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=items", elemType: shared.RestApi }),
+        SpeakeasyMetadata({ data: "json, name=items", elemType: RestApi }),
         __metadata("design:type", Array)
     ], RestApis.prototype, "items", void 0);
     __decorate([
-        Metadata({ data: "json, name=position" }),
+        SpeakeasyMetadata({ data: "json, name=position" }),
         __metadata("design:type", String)
     ], RestApis.prototype, "position", void 0);
     return RestApis;

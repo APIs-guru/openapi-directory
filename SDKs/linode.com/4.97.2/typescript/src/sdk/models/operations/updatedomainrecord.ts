@@ -1,65 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateDomainRecordPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=domainId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=domainId" })
   domainId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=recordId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=recordId" })
   recordId: number;
 }
 
 
-export class UpdateDomainRecordSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class UpdateDomainRecordSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class UpdateDomainRecordSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: UpdateDomainRecordSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: UpdateDomainRecordSecurityOption2;
-}
-
-
-export class UpdateDomainRecordRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: UpdateDomainRecordPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.DomainRecord;
-
-  @Metadata()
-  security: UpdateDomainRecordSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class UpdateDomainRecordDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class UpdateDomainRecordRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: UpdateDomainRecordPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.DomainRecordInput;
+
+  @SpeakeasyMetadata()
+  security: UpdateDomainRecordSecurity;
+}
+
+
 export class UpdateDomainRecordResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   domainRecord?: shared.DomainRecord;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateDomainRecordDefaultApplicationJsonObject?: UpdateDomainRecordDefaultApplicationJson;
 }

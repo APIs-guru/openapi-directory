@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TimeStamp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nanoSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=nanoSeconds" })
   nanoSeconds: number;
 
-  @Metadata({ data: "json, name=seconds" })
+  @SpeakeasyMetadata({ data: "json, name=seconds" })
   seconds: number;
 }

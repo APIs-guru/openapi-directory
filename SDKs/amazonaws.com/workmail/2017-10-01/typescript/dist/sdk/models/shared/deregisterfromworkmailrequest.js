@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeregisterFromWorkMailRequest = /** @class */ (function (_super) {
     __extends(DeregisterFromWorkMailRequest, _super);
     function DeregisterFromWorkMailRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EntityId" }),
+        SpeakeasyMetadata({ data: "json, name=EntityId" }),
         __metadata("design:type", String)
     ], DeregisterFromWorkMailRequest.prototype, "entityId", void 0);
     __decorate([
-        Metadata({ data: "json, name=OrganizationId" }),
+        SpeakeasyMetadata({ data: "json, name=OrganizationId" }),
         __metadata("design:type", String)
     ], DeregisterFromWorkMailRequest.prototype, "organizationId", void 0);
     return DeregisterFromWorkMailRequest;

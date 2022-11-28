@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenUriAction } from "./googleclouddialogflowv2intentmessagebasiccardbuttonopenuriaction";
+
 
 
 // GoogleCloudDialogflowV2IntentMessageBasicCardButton
@@ -7,9 +8,9 @@ import { GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenUriAction } from
  * The button object that appears at the bottom of a card.
 **/
 export class GoogleCloudDialogflowV2IntentMessageBasicCardButton extends SpeakeasyBase {
-  @Metadata({ data: "json, name=openUriAction" })
+  @SpeakeasyMetadata({ data: "json, name=openUriAction" })
   openUriAction?: GoogleCloudDialogflowV2IntentMessageBasicCardButtonOpenUriAction;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

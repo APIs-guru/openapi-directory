@@ -8,11 +8,6 @@ type GetSearchParametersForADocumentIDSecurity struct {
 	Oauthsecurity shared.SchemeOauthsecurity `security:"scheme,type=oauth2"`
 }
 
-type GetSearchParametersForADocumentIDRequest struct {
-	Request  *interface{} `request:"mediaType=application/x-www-form-urlencoded"`
-	Security GetSearchParametersForADocumentIDSecurity
-}
-
 type GetSearchParametersForADocumentID400ApplicationJSON struct {
 	Error            *interface{} `json:"error,omitempty"`
 	ErrorDescription *interface{} `json:"error_description,omitempty"`
@@ -26,6 +21,11 @@ type GetSearchParametersForADocumentID401ApplicationJSON struct {
 type GetSearchParametersForADocumentID500ApplicationJSON struct {
 	Error            *interface{} `json:"error,omitempty"`
 	ErrorDescription *interface{} `json:"error_description,omitempty"`
+}
+
+type GetSearchParametersForADocumentIDRequest struct {
+	Request  *interface{} `request:"mediaType=application/x-www-form-urlencoded"`
+	Security GetSearchParametersForADocumentIDSecurity
 }
 
 type GetSearchParametersForADocumentIDResponse struct {

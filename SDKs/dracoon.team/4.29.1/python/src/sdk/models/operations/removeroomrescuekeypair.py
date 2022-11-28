@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RemoveRoomRescueKeyPairPathParams:
-    room_id: int = field(default=None, metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
+    room_id: int = field(metadata={'path_param': { 'field_name': 'room_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,14 +20,14 @@ class RemoveRoomRescueKeyPairHeaders:
 
 @dataclass
 class RemoveRoomRescueKeyPairRequest:
-    path_params: RemoveRoomRescueKeyPairPathParams = field(default=None)
-    query_params: RemoveRoomRescueKeyPairQueryParams = field(default=None)
-    headers: RemoveRoomRescueKeyPairHeaders = field(default=None)
+    headers: RemoveRoomRescueKeyPairHeaders = field()
+    path_params: RemoveRoomRescueKeyPairPathParams = field()
+    query_params: RemoveRoomRescueKeyPairQueryParams = field()
     
 
 @dataclass
 class RemoveRoomRescueKeyPairResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

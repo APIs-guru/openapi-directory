@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ResourceUnauthorizedProblemResourceTypeEnum(str, Enum):
     TWEET = "tweet"
@@ -13,10 +14,14 @@ class ResourceUnauthorizedProblemSectionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ResourceUnauthorizedProblem:
-    detail: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detail' }})
-    resource_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_id' }})
-    resource_type: ResourceUnauthorizedProblemResourceTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_type' }})
-    section: ResourceUnauthorizedProblemSectionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'section' }})
-    title: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""ResourceUnauthorizedProblem
+    A problem that indicates you are not allowed to see a particular Tweet, User, etc.
+    """
+    
+    detail: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('detail') }})
+    resource_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource_id') }})
+    resource_type: ResourceUnauthorizedProblemResourceTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource_type') }})
+    section: ResourceUnauthorizedProblemSectionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('section') }})
+    title: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

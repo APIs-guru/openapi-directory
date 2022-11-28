@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountSharingInfo } from "./accountsharinginfo";
 
 
+
 export class DescribeDocumentPermissionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountIds" })
+  @SpeakeasyMetadata({ data: "json, name=AccountIds" })
   accountIds?: string[];
 
-  @Metadata({ data: "json, name=AccountSharingInfoList", elemType: shared.AccountSharingInfo })
+  @SpeakeasyMetadata({ data: "json, name=AccountSharingInfoList", elemType: AccountSharingInfo })
   accountSharingInfoList?: AccountSharingInfo[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

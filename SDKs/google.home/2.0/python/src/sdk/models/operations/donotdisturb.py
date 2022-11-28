@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class DoNotDisturbHeaders:
-    content_type: str = field(default=None, metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': False }})
+    content_type: str = field(metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DoNotDisturbRequest:
-    headers: DoNotDisturbHeaders = field(default=None)
+    headers: DoNotDisturbHeaders = field()
     
 
 @dataclass
 class DoNotDisturbResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     getcurrentstate: Optional[shared.Getcurrentstate] = field(default=None)
-    status_code: int = field(default=None)
     

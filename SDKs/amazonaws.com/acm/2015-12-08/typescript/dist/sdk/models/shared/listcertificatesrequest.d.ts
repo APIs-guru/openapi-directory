@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CertificateStatusEnum } from "./certificatestatusenum";
 import { Filters } from "./filters";
 export declare class ListCertificatesRequest extends SpeakeasyBase {

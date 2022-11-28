@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var RfcerRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(RfcerRequestBodyCertificateParameters, _super);
@@ -30,19 +30,19 @@ var RfcerRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cert_type" }),
+        SpeakeasyMetadata({ data: "json, name=cert_type" }),
         __metadata("design:type", String)
     ], RfcerRequestBodyCertificateParameters.prototype, "certType", void 0);
     __decorate([
-        Metadata({ data: "json, name=company_name" }),
+        SpeakeasyMetadata({ data: "json, name=company_name" }),
         __metadata("design:type", String)
     ], RfcerRequestBodyCertificateParameters.prototype, "companyName", void 0);
     __decorate([
-        Metadata({ data: "json, name=reg_no" }),
+        SpeakeasyMetadata({ data: "json, name=reg_no" }),
         __metadata("design:type", String)
     ], RfcerRequestBodyCertificateParameters.prototype, "regNo", void 0);
     __decorate([
-        Metadata({ data: "json, name=sector" }),
+        SpeakeasyMetadata({ data: "json, name=sector" }),
         __metadata("design:type", String)
     ], RfcerRequestBodyCertificateParameters.prototype, "sector", void 0);
     return RfcerRequestBodyCertificateParameters;
@@ -58,19 +58,19 @@ var RfcerRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", RfcerRequestBodyCertificateParameters)
     ], RfcerRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], RfcerRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], RfcerRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], RfcerRequestBody.prototype, "txnId", void 0);
     return RfcerRequestBody;
@@ -82,32 +82,16 @@ var RfcerSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], RfcerSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], RfcerSecurity.prototype, "clientId", void 0);
     return RfcerSecurity;
 }(SpeakeasyBase));
 export { RfcerSecurity };
-var RfcerRequest = /** @class */ (function (_super) {
-    __extends(RfcerRequest, _super);
-    function RfcerRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", RfcerRequestBody)
-    ], RfcerRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", RfcerSecurity)
-    ], RfcerRequest.prototype, "security", void 0);
-    return RfcerRequest;
-}(SpeakeasyBase));
-export { RfcerRequest };
 export var Rfcer400ApplicationJsonErrorEnum;
 (function (Rfcer400ApplicationJsonErrorEnum) {
     Rfcer400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -130,11 +114,11 @@ var Rfcer400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Rfcer400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Rfcer400ApplicationJson.prototype, "errorDescription", void 0);
     return Rfcer400ApplicationJson;
@@ -156,11 +140,11 @@ var Rfcer401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Rfcer401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Rfcer401ApplicationJson.prototype, "errorDescription", void 0);
     return Rfcer401ApplicationJson;
@@ -182,11 +166,11 @@ var Rfcer404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Rfcer404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Rfcer404ApplicationJson.prototype, "errorDescription", void 0);
     return Rfcer404ApplicationJson;
@@ -206,11 +190,11 @@ var Rfcer500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Rfcer500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Rfcer500ApplicationJson.prototype, "errorDescription", void 0);
     return Rfcer500ApplicationJson;
@@ -230,11 +214,11 @@ var Rfcer502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Rfcer502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Rfcer502ApplicationJson.prototype, "errorDescription", void 0);
     return Rfcer502ApplicationJson;
@@ -254,11 +238,11 @@ var Rfcer503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Rfcer503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Rfcer503ApplicationJson.prototype, "errorDescription", void 0);
     return Rfcer503ApplicationJson;
@@ -278,55 +262,71 @@ var Rfcer504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Rfcer504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Rfcer504ApplicationJson.prototype, "errorDescription", void 0);
     return Rfcer504ApplicationJson;
 }(SpeakeasyBase));
 export { Rfcer504ApplicationJson };
+var RfcerRequest = /** @class */ (function (_super) {
+    __extends(RfcerRequest, _super);
+    function RfcerRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", RfcerRequestBody)
+    ], RfcerRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", RfcerSecurity)
+    ], RfcerRequest.prototype, "security", void 0);
+    return RfcerRequest;
+}(SpeakeasyBase));
+export { RfcerRequest };
 var RfcerResponse = /** @class */ (function (_super) {
     __extends(RfcerResponse, _super);
     function RfcerResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RfcerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RfcerResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Rfcer400ApplicationJson)
     ], RfcerResponse.prototype, "rfcer400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Rfcer401ApplicationJson)
     ], RfcerResponse.prototype, "rfcer401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Rfcer404ApplicationJson)
     ], RfcerResponse.prototype, "rfcer404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Rfcer500ApplicationJson)
     ], RfcerResponse.prototype, "rfcer500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Rfcer502ApplicationJson)
     ], RfcerResponse.prototype, "rfcer502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Rfcer503ApplicationJson)
     ], RfcerResponse.prototype, "rfcer503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Rfcer504ApplicationJson)
     ], RfcerResponse.prototype, "rfcer504ApplicationJsonObject", void 0);
     return RfcerResponse;

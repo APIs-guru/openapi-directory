@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateSystemGetCachedFilesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ClientID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ClientID" })
   clientId: string;
 }
 
 
 export class UpdateSystemGetCachedFilesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Expired" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Expired" })
   expired: boolean;
 }
 
 
 export class UpdateSystemGetCachedFilesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateSystemGetCachedFilesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UpdateSystemGetCachedFilesQueryParams;
 }
 
 
 export class UpdateSystemGetCachedFilesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateSystemGetCachedFiles200ApplicationJsonStrings?: string[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateSystemGetCachedFiles200TextJsonStrings?: string[];
 }

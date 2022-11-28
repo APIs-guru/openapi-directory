@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class WorkType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: number;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 
-  @Metadata({ data: "json, name=UserId" })
+  @SpeakeasyMetadata({ data: "json, name=UserId" })
   userId?: number;
 }

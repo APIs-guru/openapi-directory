@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TflApiPresentationEntitiesJourneyPlannerPlannedWork extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=createdDateTime" })
   createdDateTime?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lastUpdateDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateDateTime" })
   lastUpdateDateTime?: Date;
 }

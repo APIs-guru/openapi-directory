@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class DeleteKvPairPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteKvPairRequest:
-    path_params: DeleteKvPairPathParams = field(default=None)
+    path_params: DeleteKvPairPathParams = field()
     
 
 @dataclass
 class DeleteKvPairResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     response_default_resource: Optional[shared.ResponseDefaultResource] = field(default=None)
-    status_code: int = field(default=None)
     

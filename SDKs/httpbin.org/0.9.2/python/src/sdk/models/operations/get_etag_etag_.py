@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetEtagEtagPathParams:
-    etag: str = field(default=None, metadata={'path_param': { 'field_name': 'etag', 'style': 'simple', 'explode': False }})
+    etag: str = field(metadata={'path_param': { 'field_name': 'etag', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,12 +15,12 @@ class GetEtagEtagHeaders:
 
 @dataclass
 class GetEtagEtagRequest:
-    path_params: GetEtagEtagPathParams = field(default=None)
-    headers: GetEtagEtagHeaders = field(default=None)
+    headers: GetEtagEtagHeaders = field()
+    path_params: GetEtagEtagPathParams = field()
     
 
 @dataclass
 class GetEtagEtagResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

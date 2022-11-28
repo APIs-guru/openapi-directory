@@ -1,5 +1,7 @@
 package shared
 
+// FileOccurrence
+// FileOccurrence represents an SPDX File Information section: https://spdx.github.io/spdx-spec/4-file-information/
 type FileOccurrence struct {
 	Attributions     []string `json:"attributions,omitempty"`
 	Comment          *string  `json:"comment,omitempty"`

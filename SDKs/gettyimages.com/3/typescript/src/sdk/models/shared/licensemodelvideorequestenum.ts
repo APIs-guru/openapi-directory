@@ -1,6 +1,7 @@
 
 
+
 export enum LicenseModelVideoRequestEnum {
-    Rightsready = "rightsready"
-,    Royaltyfree = "royaltyfree"
+    Rightsready = "rightsready",
+    Royaltyfree = "royaltyfree"
 }

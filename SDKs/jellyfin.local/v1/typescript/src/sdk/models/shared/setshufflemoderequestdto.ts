@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GroupShuffleModeEnum } from "./groupshufflemodeenum";
+
 
 
 // SetShuffleModeRequestDto
@@ -7,6 +8,6 @@ import { GroupShuffleModeEnum } from "./groupshufflemodeenum";
  * Class SetShuffleModeRequestDto.
 **/
 export class SetShuffleModeRequestDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Mode" })
+  @SpeakeasyMetadata({ data: "json, name=Mode" })
   mode?: GroupShuffleModeEnum;
 }

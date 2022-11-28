@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetArtifactMetaDataPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=artifactId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=artifactId" })
   artifactId: string;
 }
 
 
 export class GetArtifactMetaDataRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetArtifactMetaDataPathParams;
 }
 
 
 export class GetArtifactMetaDataResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   artifactMetaData?: shared.ArtifactMetaData;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

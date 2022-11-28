@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParametersFilterKeyEnum } from "./parametersfilterkeyenum";
+
 
 
 // ParametersFilter
@@ -7,9 +8,9 @@ import { ParametersFilterKeyEnum } from "./parametersfilterkeyenum";
  * This data type is deprecated. Instead, use <a>ParameterStringFilter</a>.
 **/
 export class ParametersFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key: ParametersFilterKeyEnum;
 
-  @Metadata({ data: "json, name=Values" })
+  @SpeakeasyMetadata({ data: "json, name=Values" })
   values: string[];
 }

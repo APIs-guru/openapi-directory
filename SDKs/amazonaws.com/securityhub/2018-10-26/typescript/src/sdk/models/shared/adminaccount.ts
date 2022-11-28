@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AdminStatusEnum } from "./adminstatusenum";
+
 
 
 // AdminAccount
@@ -7,9 +8,9 @@ import { AdminStatusEnum } from "./adminstatusenum";
  * Represents a Security Hub administrator account designated by an organization management account.
 **/
 export class AdminAccount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AccountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: AdminStatusEnum;
 }

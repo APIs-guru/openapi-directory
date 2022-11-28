@@ -1,5 +1,7 @@
 package shared
 
+// Message
+// Specifies the content and settings for a push notification that's sent to recipients of a campaign.
 type Message struct {
 	Action            *ActionEnum `json:"Action,omitempty"`
 	Body              *string     `json:"Body,omitempty"`

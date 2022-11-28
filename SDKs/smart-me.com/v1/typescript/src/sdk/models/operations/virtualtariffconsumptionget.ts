@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class VirtualTariffConsumptionGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endDate" })
   endDate: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=folderId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=folderId" })
   folderId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startDate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startDate" })
   startDate: Date;
 }
 
 
 export class VirtualTariffConsumptionGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: VirtualTariffConsumptionGetQueryParams;
 }
 
 
 export class VirtualTariffConsumptionGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.VirtualTariffConsumptionData })
+  @SpeakeasyMetadata({ elemType: shared.VirtualTariffConsumptionData })
   virtualTariffConsumptionData?: shared.VirtualTariffConsumptionData[];
 }

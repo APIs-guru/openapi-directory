@@ -1,22 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatasetSchema } from "./datasetschema";
 import { Tag } from "./tag";
 
 
+
 export class CreateDatasetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientToken" })
   clientToken: string;
 
-  @Metadata({ data: "json, name=DatasetName" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetName" })
   datasetName: string;
 
-  @Metadata({ data: "json, name=DatasetSchema" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetSchema" })
   datasetSchema: DatasetSchema;
 
-  @Metadata({ data: "json, name=ServerSideKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=ServerSideKmsKeyId" })
   serverSideKmsKeyId?: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import agent_key
-from . import os
-from . import timezone
+from sdk import utils
+from . import *
 
 class NodeAddMachineTypeEnum(str, Enum):
     VMWARE = "vmware"
@@ -28,16 +28,20 @@ class NodeAddPropertiesTagsEnum(str, Enum):
 @dataclass_json
 @dataclass
 class NodeAddPropertiesVars:
-    var1: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'var1' }})
-    vars2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vars2' }})
+    var1: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('var1') }})
+    vars2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vars2') }})
     
 
 @dataclass_json
 @dataclass
 class NodeAddProperties:
-    env: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'env' }})
-    tags: Optional[List[NodeAddPropertiesTagsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    vars: Optional[NodeAddPropertiesVars] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vars' }})
+    r"""NodeAddProperties
+    Node properties in \"key\":\"value\" format, where \"key\" is a string, and \"value\" is either a string, a json array, or a json object. The following example shows you three example of &#58; &#173; a json array on the example of \"tags\":[ \"some\", \"tags\" ] &#173; a simple string on the example of \"env\":\"prod\" &#173; a complex json object on the example of \"vars\":{ \"var1\":\"value1\", \"var2\":\"value2\" } They are optional and can be used in any combination as long the keys are unique within the properties object.
+    """
+    
+    env: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('env') }})
+    tags: Optional[List[NodeAddPropertiesTagsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
+    vars: Optional[NodeAddPropertiesVars] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('vars') }})
     
 class NodeAddStateEnum(str, Enum):
     ENABLE = "enable"
@@ -54,16 +58,16 @@ class NodeAddStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class NodeAdd:
-    agent_key: Optional[agent_key.AgentKey] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'agentKey' }})
-    hostname: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hostname' }})
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    ip_addresses: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipAddresses' }})
-    machine_type: NodeAddMachineTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'machineType' }})
-    os: os.Os = field(default=None, metadata={'dataclasses_json': { 'field_name': 'os' }})
-    policy_mode: Optional[NodeAddPolicyModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policyMode' }})
-    policy_server_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policyServerId' }})
-    properties: NodeAddProperties = field(default=None, metadata={'dataclasses_json': { 'field_name': 'properties' }})
-    state: Optional[NodeAddStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    status: NodeAddStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    timezone: Optional[timezone.Timezone] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timezone' }})
+    hostname: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('hostname') }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    ip_addresses: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipAddresses') }})
+    machine_type: NodeAddMachineTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('machineType') }})
+    os: Os = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('os') }})
+    properties: NodeAddProperties = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('properties') }})
+    status: NodeAddStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    agent_key: Optional[AgentKey] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('agentKey') }})
+    policy_mode: Optional[NodeAddPolicyModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policyMode') }})
+    policy_server_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policyServerId') }})
+    state: Optional[NodeAddStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    timezone: Optional[Timezone] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timezone') }})
     

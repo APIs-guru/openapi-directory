@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Member } from "./member";
 import { Organisation } from "./organisation";
 
 
+
 export class Sponsor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=member" })
+  @SpeakeasyMetadata({ data: "json, name=member" })
   member?: Member;
 
-  @Metadata({ data: "json, name=organisation" })
+  @SpeakeasyMetadata({ data: "json, name=organisation" })
   organisation?: Organisation;
 
-  @Metadata({ data: "json, name=sortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=sortOrder" })
   sortOrder?: number;
 }

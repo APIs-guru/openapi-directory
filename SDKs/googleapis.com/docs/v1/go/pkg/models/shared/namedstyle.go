@@ -15,6 +15,8 @@ const (
 	NamedStyleNamedStyleTypeEnumHeading6                  NamedStyleNamedStyleTypeEnum = "HEADING_6"
 )
 
+// NamedStyle
+// A named style. Paragraphs in the document can inherit their TextStyle and ParagraphStyle from this named style when they have the same named style type.
 type NamedStyle struct {
 	NamedStyleType *NamedStyleNamedStyleTypeEnum `json:"namedStyleType,omitempty"`
 	ParagraphStyle *ParagraphStyle               `json:"paragraphStyle,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetApplyPendingMaintenanceActionActionEnum;
 (function (GetApplyPendingMaintenanceActionActionEnum) {
     GetApplyPendingMaintenanceActionActionEnum["ApplyPendingMaintenanceAction"] = "ApplyPendingMaintenanceAction";
@@ -37,23 +37,23 @@ var GetApplyPendingMaintenanceActionQueryParams = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetApplyPendingMaintenanceActionQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ApplyAction" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ApplyAction" }),
         __metadata("design:type", String)
     ], GetApplyPendingMaintenanceActionQueryParams.prototype, "applyAction", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=OptInType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=OptInType" }),
         __metadata("design:type", String)
     ], GetApplyPendingMaintenanceActionQueryParams.prototype, "optInType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ResourceIdentifier" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ResourceIdentifier" }),
         __metadata("design:type", String)
     ], GetApplyPendingMaintenanceActionQueryParams.prototype, "resourceIdentifier", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetApplyPendingMaintenanceActionQueryParams.prototype, "version", void 0);
     return GetApplyPendingMaintenanceActionQueryParams;
@@ -65,31 +65,31 @@ var GetApplyPendingMaintenanceActionHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetApplyPendingMaintenanceActionHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetApplyPendingMaintenanceActionHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetApplyPendingMaintenanceActionHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetApplyPendingMaintenanceActionHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetApplyPendingMaintenanceActionHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetApplyPendingMaintenanceActionHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetApplyPendingMaintenanceActionHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetApplyPendingMaintenanceActionHeaders;
@@ -101,11 +101,11 @@ var GetApplyPendingMaintenanceActionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApplyPendingMaintenanceActionQueryParams)
     ], GetApplyPendingMaintenanceActionRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApplyPendingMaintenanceActionHeaders)
     ], GetApplyPendingMaintenanceActionRequest.prototype, "headers", void 0);
     return GetApplyPendingMaintenanceActionRequest;
@@ -117,15 +117,15 @@ var GetApplyPendingMaintenanceActionResponse = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetApplyPendingMaintenanceActionResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApplyPendingMaintenanceActionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApplyPendingMaintenanceActionResponse.prototype, "statusCode", void 0);
     return GetApplyPendingMaintenanceActionResponse;

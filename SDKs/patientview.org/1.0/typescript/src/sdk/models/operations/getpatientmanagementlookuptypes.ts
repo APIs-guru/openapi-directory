@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPatientManagementLookupTypesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.LookupType })
+  @SpeakeasyMetadata({ elemType: shared.LookupType })
   lookupTypes?: shared.LookupType[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

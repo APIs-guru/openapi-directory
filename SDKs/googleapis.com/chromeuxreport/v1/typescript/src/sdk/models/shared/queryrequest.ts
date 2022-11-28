@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum QueryRequestFormFactorEnum {
-    AllFormFactors = "ALL_FORM_FACTORS"
-,    Phone = "PHONE"
-,    Desktop = "DESKTOP"
-,    Tablet = "TABLET"
+    AllFormFactors = "ALL_FORM_FACTORS",
+    Phone = "PHONE",
+    Desktop = "DESKTOP",
+    Tablet = "TABLET"
 }
 
 
@@ -13,18 +14,18 @@ export enum QueryRequestFormFactorEnum {
  * Request payload sent by a physical web client. This request includes all necessary context to load a particular user experience record.
 **/
 export class QueryRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=effectiveConnectionType" })
+  @SpeakeasyMetadata({ data: "json, name=effectiveConnectionType" })
   effectiveConnectionType?: string;
 
-  @Metadata({ data: "json, name=formFactor" })
+  @SpeakeasyMetadata({ data: "json, name=formFactor" })
   formFactor?: QueryRequestFormFactorEnum;
 
-  @Metadata({ data: "json, name=metrics" })
+  @SpeakeasyMetadata({ data: "json, name=metrics" })
   metrics?: string[];
 
-  @Metadata({ data: "json, name=origin" })
+  @SpeakeasyMetadata({ data: "json, name=origin" })
   origin?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

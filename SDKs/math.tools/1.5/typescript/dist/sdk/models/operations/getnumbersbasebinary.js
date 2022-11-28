@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetNumbersBaseBinaryQueryParams = /** @class */ (function (_super) {
     __extends(GetNumbersBaseBinaryQueryParams, _super);
@@ -30,11 +30,11 @@ var GetNumbersBaseBinaryQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=from" }),
         __metadata("design:type", Number)
     ], GetNumbersBaseBinaryQueryParams.prototype, "from", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=number" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=number" }),
         __metadata("design:type", Number)
     ], GetNumbersBaseBinaryQueryParams.prototype, "number", void 0);
     return GetNumbersBaseBinaryQueryParams;
@@ -46,7 +46,7 @@ var GetNumbersBaseBinarySecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeXMathtoolsApiSecret)
     ], GetNumbersBaseBinarySecurity.prototype, "xMathtoolsApiSecret", void 0);
     return GetNumbersBaseBinarySecurity;
@@ -58,11 +58,11 @@ var GetNumbersBaseBinaryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetNumbersBaseBinaryQueryParams)
     ], GetNumbersBaseBinaryRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetNumbersBaseBinarySecurity)
     ], GetNumbersBaseBinaryRequest.prototype, "security", void 0);
     return GetNumbersBaseBinaryRequest;
@@ -74,11 +74,11 @@ var GetNumbersBaseBinaryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetNumbersBaseBinaryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetNumbersBaseBinaryResponse.prototype, "statusCode", void 0);
     return GetNumbersBaseBinaryResponse;

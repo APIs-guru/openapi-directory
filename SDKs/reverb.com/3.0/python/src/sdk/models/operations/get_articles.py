@@ -13,11 +13,11 @@ class GetArticlesQueryParams:
 
 @dataclass
 class GetArticlesRequest:
-    query_params: GetArticlesQueryParams = field(default=None)
+    query_params: GetArticlesQueryParams = field()
     
 
 @dataclass
 class GetArticlesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TargetLocation } from "./targetlocation";
 import { Target } from "./target";
+
 
 
 // Runbook
@@ -9,27 +9,27 @@ import { Target } from "./target";
  * <p>Information about an Automation runbook used in a runbook workflow in Change Manager.</p> <note> <p>The Automation runbooks specified for the runbook workflow can't run until all required approvals for the change request have been received.</p> </note>
 **/
 export class Runbook extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DocumentName" })
+  @SpeakeasyMetadata({ data: "json, name=DocumentName" })
   documentName: string;
 
-  @Metadata({ data: "json, name=DocumentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=DocumentVersion" })
   documentVersion?: string;
 
-  @Metadata({ data: "json, name=MaxConcurrency" })
+  @SpeakeasyMetadata({ data: "json, name=MaxConcurrency" })
   maxConcurrency?: string;
 
-  @Metadata({ data: "json, name=MaxErrors" })
+  @SpeakeasyMetadata({ data: "json, name=MaxErrors" })
   maxErrors?: string;
 
-  @Metadata({ data: "json, name=Parameters" })
+  @SpeakeasyMetadata({ data: "json, name=Parameters" })
   parameters?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=TargetLocations", elemType: shared.TargetLocation })
+  @SpeakeasyMetadata({ data: "json, name=TargetLocations", elemType: TargetLocation })
   targetLocations?: TargetLocation[];
 
-  @Metadata({ data: "json, name=TargetParameterName" })
+  @SpeakeasyMetadata({ data: "json, name=TargetParameterName" })
   targetParameterName?: string;
 
-  @Metadata({ data: "json, name=Targets", elemType: shared.Target })
+  @SpeakeasyMetadata({ data: "json, name=Targets", elemType: Target })
   targets?: Target[];
 }

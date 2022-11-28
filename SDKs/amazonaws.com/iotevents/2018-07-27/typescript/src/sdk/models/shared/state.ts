@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OnEnterLifecycle } from "./onenterlifecycle";
 import { OnExitLifecycle } from "./onexitlifecycle";
 import { OnInputLifecycle } from "./oninputlifecycle";
+
 
 
 // State
@@ -9,15 +10,15 @@ import { OnInputLifecycle } from "./oninputlifecycle";
  * Information that defines a state of a detector.
 **/
 export class State extends SpeakeasyBase {
-  @Metadata({ data: "json, name=onEnter" })
+  @SpeakeasyMetadata({ data: "json, name=onEnter" })
   onEnter?: OnEnterLifecycle;
 
-  @Metadata({ data: "json, name=onExit" })
+  @SpeakeasyMetadata({ data: "json, name=onExit" })
   onExit?: OnExitLifecycle;
 
-  @Metadata({ data: "json, name=onInput" })
+  @SpeakeasyMetadata({ data: "json, name=onInput" })
   onInput?: OnInputLifecycle;
 
-  @Metadata({ data: "json, name=stateName" })
+  @SpeakeasyMetadata({ data: "json, name=stateName" })
   stateName: string;
 }

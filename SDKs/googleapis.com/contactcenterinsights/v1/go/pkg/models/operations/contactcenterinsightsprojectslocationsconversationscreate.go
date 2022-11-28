@@ -31,7 +31,7 @@ type ContactcenterinsightsProjectsLocationsConversationsCreateSecurity struct {
 type ContactcenterinsightsProjectsLocationsConversationsCreateRequest struct {
 	PathParams  ContactcenterinsightsProjectsLocationsConversationsCreatePathParams
 	QueryParams ContactcenterinsightsProjectsLocationsConversationsCreateQueryParams
-	Request     *shared.GoogleCloudContactcenterinsightsV1Conversation `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudContactcenterinsightsV1ConversationInput `request:"mediaType=application/json"`
 	Security    ContactcenterinsightsProjectsLocationsConversationsCreateSecurity
 }
 

@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LicenseInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=days_until_expiration" })
+  @SpeakeasyMetadata({ data: "json, name=days_until_expiration" })
   daysUntilExpiration?: number;
 
-  @Metadata({ data: "json, name=expire_at" })
+  @SpeakeasyMetadata({ data: "json, name=expire_at" })
   expireAt?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=seats" })
+  @SpeakeasyMetadata({ data: "json, name=seats" })
   seats?: any;
 
-  @Metadata({ data: "json, name=seats_available" })
+  @SpeakeasyMetadata({ data: "json, name=seats_available" })
   seatsAvailable?: any;
 
-  @Metadata({ data: "json, name=seats_used" })
+  @SpeakeasyMetadata({ data: "json, name=seats_used" })
   seatsUsed?: number;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ShardDetail
+// Provides details of a shard in a snapshot
 type ShardDetail struct {
 	Configuration        *ShardConfiguration `json:"Configuration,omitempty"`
 	Name                 *string             `json:"Name,omitempty"`

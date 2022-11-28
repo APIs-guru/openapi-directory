@@ -1,5 +1,7 @@
 package shared
 
+// DatafeedstatusesCustomBatchRequestEntry
+// A batch entry encoding a single non-batch datafeedstatuses request.
 type DatafeedstatusesCustomBatchRequestEntry struct {
 	BatchID    *int64  `json:"batchId,omitempty"`
 	Country    *string `json:"country,omitempty"`

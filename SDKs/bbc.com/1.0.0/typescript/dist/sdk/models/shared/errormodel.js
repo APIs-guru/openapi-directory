@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ErrorModelFaultDetail = /** @class */ (function (_super) {
     __extends(ErrorModelFaultDetail, _super);
     function ErrorModelFaultDetail() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=errorcode" }),
+        SpeakeasyMetadata({ data: "json, name=errorcode" }),
         __metadata("design:type", String)
     ], ErrorModelFaultDetail.prototype, "errorcode", void 0);
     return ErrorModelFaultDetail;
@@ -41,11 +41,11 @@ var ErrorModelFault = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=detail" }),
+        SpeakeasyMetadata({ data: "json, name=detail" }),
         __metadata("design:type", ErrorModelFaultDetail)
     ], ErrorModelFault.prototype, "detail", void 0);
     __decorate([
-        Metadata({ data: "json, name=faultString" }),
+        SpeakeasyMetadata({ data: "json, name=faultString" }),
         __metadata("design:type", String)
     ], ErrorModelFault.prototype, "faultString", void 0);
     return ErrorModelFault;
@@ -57,7 +57,7 @@ var ErrorModel = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fault" }),
+        SpeakeasyMetadata({ data: "json, name=fault" }),
         __metadata("design:type", ErrorModelFault)
     ], ErrorModel.prototype, "fault", void 0);
     return ErrorModel;

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 
 class GetDirectoryItemsJSONAscEnum(str, Enum):
     TRUE = "true"
@@ -24,20 +25,20 @@ class GetDirectoryItemsJSONPeriodEnum(str, Enum):
 
 @dataclass
 class GetDirectoryItemsJSONQueryParams:
+    order: GetDirectoryItemsJSONOrderEnum = field(metadata={'query_param': { 'field_name': 'order', 'style': 'form', 'explode': True }})
+    period: GetDirectoryItemsJSONPeriodEnum = field(metadata={'query_param': { 'field_name': 'period', 'style': 'form', 'explode': True }})
     asc: Optional[GetDirectoryItemsJSONAscEnum] = field(default=None, metadata={'query_param': { 'field_name': 'asc', 'style': 'form', 'explode': True }})
-    order: GetDirectoryItemsJSONOrderEnum = field(default=None, metadata={'query_param': { 'field_name': 'order', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
-    period: GetDirectoryItemsJSONPeriodEnum = field(default=None, metadata={'query_param': { 'field_name': 'period', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetDirectoryItemsJSONRequest:
-    query_params: GetDirectoryItemsJSONQueryParams = field(default=None)
+    query_params: GetDirectoryItemsJSONQueryParams = field()
     
 
 @dataclass
 class GetDirectoryItemsJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_directory_items_json_200_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

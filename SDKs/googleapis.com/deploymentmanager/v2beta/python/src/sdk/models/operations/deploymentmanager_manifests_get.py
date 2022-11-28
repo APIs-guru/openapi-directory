@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DeploymentmanagerManifestsGetPathParams:
-    deployment: str = field(default=None, metadata={'path_param': { 'field_name': 'deployment', 'style': 'simple', 'explode': False }})
-    manifest: str = field(default=None, metadata={'path_param': { 'field_name': 'manifest', 'style': 'simple', 'explode': False }})
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    deployment: str = field(metadata={'path_param': { 'field_name': 'deployment', 'style': 'simple', 'explode': False }})
+    manifest: str = field(metadata={'path_param': { 'field_name': 'manifest', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,26 +28,26 @@ class DeploymentmanagerManifestsGetQueryParams:
 
 @dataclass
 class DeploymentmanagerManifestsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeploymentmanagerManifestsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeploymentmanagerManifestsGetSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeploymentmanagerManifestsGetSecurityOption4:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -59,14 +60,14 @@ class DeploymentmanagerManifestsGetSecurity:
 
 @dataclass
 class DeploymentmanagerManifestsGetRequest:
-    path_params: DeploymentmanagerManifestsGetPathParams = field(default=None)
-    query_params: DeploymentmanagerManifestsGetQueryParams = field(default=None)
-    security: DeploymentmanagerManifestsGetSecurity = field(default=None)
+    path_params: DeploymentmanagerManifestsGetPathParams = field()
+    query_params: DeploymentmanagerManifestsGetQueryParams = field()
+    security: DeploymentmanagerManifestsGetSecurity = field()
     
 
 @dataclass
 class DeploymentmanagerManifestsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     manifest: Optional[shared.Manifest] = field(default=None)
-    status_code: int = field(default=None)
     

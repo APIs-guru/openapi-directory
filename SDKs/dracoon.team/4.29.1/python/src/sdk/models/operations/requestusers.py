@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
@@ -22,14 +25,14 @@ class RequestUsersHeaders:
 
 @dataclass
 class RequestUsersRequest:
-    query_params: RequestUsersQueryParams = field(default=None)
-    headers: RequestUsersHeaders = field(default=None)
+    headers: RequestUsersHeaders = field()
+    query_params: RequestUsersQueryParams = field()
     
 
 @dataclass
 class RequestUsersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     user_list: Optional[shared.UserList] = field(default=None)
     

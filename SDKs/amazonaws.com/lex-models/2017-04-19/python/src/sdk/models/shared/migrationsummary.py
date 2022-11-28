@@ -1,24 +1,28 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import migrationstatus_enum
-from . import migrationstrategy_enum
-from . import locale_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MigrationSummary:
-    migration_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'migrationId' }})
-    migration_status: Optional[migrationstatus_enum.MigrationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'migrationStatus' }})
-    migration_strategy: Optional[migrationstrategy_enum.MigrationStrategyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'migrationStrategy' }})
-    migration_timestamp: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'migrationTimestamp', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    v1_bot_locale: Optional[locale_enum.LocaleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'v1BotLocale' }})
-    v1_bot_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'v1BotName' }})
-    v1_bot_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'v1BotVersion' }})
-    v2_bot_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'v2BotId' }})
-    v2_bot_role: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'v2BotRole' }})
+    r"""MigrationSummary
+    Provides information about migrating a bot from Amazon Lex V1 to Amazon Lex V2.
+    """
+    
+    migration_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('migrationId') }})
+    migration_status: Optional[MigrationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('migrationStatus') }})
+    migration_strategy: Optional[MigrationStrategyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('migrationStrategy') }})
+    migration_timestamp: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('migrationTimestamp'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    v1_bot_locale: Optional[LocaleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('v1BotLocale') }})
+    v1_bot_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('v1BotName') }})
+    v1_bot_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('v1BotVersion') }})
+    v2_bot_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('v2BotId') }})
+    v2_bot_role: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('v2BotRole') }})
     

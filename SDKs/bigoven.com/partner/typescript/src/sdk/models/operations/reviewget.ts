@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReviewGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=recipeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=recipeId" })
   recipeId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=reviewId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=reviewId" })
   reviewId: number;
 }
 
 
 export class ReviewGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReviewGetPathParams;
 }
 
 
 export class ReviewGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   bigOvenModelApiReview?: shared.BigOvenModelApiReview;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

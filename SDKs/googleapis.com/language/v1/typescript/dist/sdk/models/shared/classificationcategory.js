@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ClassificationCategory
 /**
  * Represents a category returned from the text classifier.
@@ -33,11 +33,11 @@ var ClassificationCategory = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=confidence" }),
+        SpeakeasyMetadata({ data: "json, name=confidence" }),
         __metadata("design:type", Number)
     ], ClassificationCategory.prototype, "confidence", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ClassificationCategory.prototype, "name", void 0);
     return ClassificationCategory;

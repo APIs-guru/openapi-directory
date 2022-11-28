@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostProjectUsernameProjectPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project" })
   project: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=username" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" })
   username: string;
 }
 
 
 export class PostProjectUsernameProjectRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=build_parameters" })
+  @SpeakeasyMetadata({ data: "json, name=build_parameters" })
   buildParameters?: Map<string, any>;
 
-  @Metadata({ data: "json, name=parallel" })
+  @SpeakeasyMetadata({ data: "json, name=parallel" })
   parallel?: string;
 
-  @Metadata({ data: "json, name=revision" })
+  @SpeakeasyMetadata({ data: "json, name=revision" })
   revision?: string;
 
-  @Metadata({ data: "json, name=tag" })
+  @SpeakeasyMetadata({ data: "json, name=tag" })
   tag?: string;
 }
 
 
 export class PostProjectUsernameProjectRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostProjectUsernameProjectPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: PostProjectUsernameProjectRequestBody;
 }
 
 
 export class PostProjectUsernameProjectResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   buildSummary?: shared.BuildSummary;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

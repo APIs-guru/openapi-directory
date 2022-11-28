@@ -1,7 +1,8 @@
 
 
+
 export enum EntityTypesEnum {
-    Government = "government"
-,    Community = "community"
-,    Research = "research"
+    Government = "government",
+    Community = "community",
+    Research = "research"
 }

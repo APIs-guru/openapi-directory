@@ -1,5 +1,7 @@
 package shared
 
+// Table
+// A PageElement kind representing a table.
 type Table struct {
 	Columns              *int32                  `json:"columns,omitempty"`
 	HorizontalBorderRows []TableBorderRow        `json:"horizontalBorderRows,omitempty"`

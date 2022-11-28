@@ -1,59 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetManagedServicePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serviceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serviceId" })
   serviceId: number;
 }
 
 
-export class GetManagedServiceSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class GetManagedServiceSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class GetManagedServiceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetManagedServiceSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetManagedServiceSecurityOption2;
-}
-
-
-export class GetManagedServiceRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetManagedServicePathParams;
-
-  @Metadata()
-  security: GetManagedServiceSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class GetManagedServiceDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class GetManagedServiceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetManagedServicePathParams;
+
+  @SpeakeasyMetadata()
+  security: GetManagedServiceSecurity;
+}
+
+
 export class GetManagedServiceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   managedService?: shared.ManagedService;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getManagedServiceDefaultApplicationJsonObject?: GetManagedServiceDefaultApplicationJson;
 }

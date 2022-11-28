@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Alarm
+// <p>Describes an alarm.</p> <p>An alarm is a way to monitor your Lightsail resource metrics. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms">Alarms in Amazon Lightsail</a>.</p>
 type Alarm struct {
 	Arn                   *string                 `json:"arn,omitempty"`
 	ComparisonOperator    *ComparisonOperatorEnum `json:"comparisonOperator,omitempty"`

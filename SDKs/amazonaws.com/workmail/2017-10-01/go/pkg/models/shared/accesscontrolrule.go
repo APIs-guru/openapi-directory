@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AccessControlRule
+// A rule that controls access to an Amazon WorkMail organization.
 type AccessControlRule struct {
 	Actions      []string                     `json:"Actions,omitempty"`
 	DateCreated  *time.Time                   `json:"DateCreated,omitempty"`

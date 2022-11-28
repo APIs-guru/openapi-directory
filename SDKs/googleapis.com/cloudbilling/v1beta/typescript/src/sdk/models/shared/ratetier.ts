@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Money } from "./money";
+
 
 
 // RateTier
@@ -7,9 +8,9 @@ import { Money } from "./money";
  * Pricing details for a service tier.
 **/
 export class RateTier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: Money;
 
-  @Metadata({ data: "json, name=startAmount" })
+  @SpeakeasyMetadata({ data: "json, name=startAmount" })
   startAmount?: number;
 }

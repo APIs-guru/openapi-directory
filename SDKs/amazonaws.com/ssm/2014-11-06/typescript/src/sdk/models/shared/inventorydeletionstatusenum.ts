@@ -1,6 +1,7 @@
 
 
+
 export enum InventoryDeletionStatusEnum {
-    InProgress = "InProgress"
-,    Complete = "Complete"
+    InProgress = "InProgress",
+    Complete = "Complete"
 }

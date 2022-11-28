@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BuildStatusEnum } from "./buildstatusenum";
+
 
 
 // ListBuildsInput
@@ -7,12 +8,12 @@ import { BuildStatusEnum } from "./buildstatusenum";
  * Represents the input for a request operation.
 **/
 export class ListBuildsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: BuildStatusEnum;
 }

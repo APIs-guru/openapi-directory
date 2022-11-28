@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatacatalogV1DataplexFilesetSpec } from "./googleclouddatacatalogv1dataplexfilesetspec";
+
 
 
 // GoogleCloudDatacatalogV1FilesetSpec
@@ -7,6 +8,6 @@ import { GoogleCloudDatacatalogV1DataplexFilesetSpec } from "./googleclouddataca
  * Specification that applies to a fileset. Valid only for entries with the 'FILESET' type.
 **/
 export class GoogleCloudDatacatalogV1FilesetSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataplexFileset" })
+  @SpeakeasyMetadata({ data: "json, name=dataplexFileset" })
   dataplexFileset?: GoogleCloudDatacatalogV1DataplexFilesetSpec;
 }

@@ -1,57 +1,58 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetPlayersSortByEnum {
-    CreatedAt = "createdAt"
-,    UpdatedAt = "updatedAt"
+    CreatedAt = "createdAt",
+    UpdatedAt = "updatedAt"
 }
 
 export enum GetPlayersSortOrderEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 
 export class GetPlayersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=currentPage" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currentPage" })
   currentPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
   sortBy?: GetPlayersSortByEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
   sortOrder?: GetPlayersSortOrderEnum;
 }
 
 
 export class GetPlayersSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
 export class GetPlayersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPlayersQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPlayersSecurity;
 }
 
 
 export class GetPlayersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequest?: shared.BadRequest;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   playersListResponse?: shared.PlayersListResponse;
 }

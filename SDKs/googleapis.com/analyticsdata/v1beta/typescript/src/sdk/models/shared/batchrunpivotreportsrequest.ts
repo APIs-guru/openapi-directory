@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RunPivotReportRequest } from "./runpivotreportrequest";
+
 
 
 // BatchRunPivotReportsRequest
@@ -8,6 +8,6 @@ import { RunPivotReportRequest } from "./runpivotreportrequest";
  * The batch request containing multiple pivot report requests.
 **/
 export class BatchRunPivotReportsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requests", elemType: shared.RunPivotReportRequest })
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: RunPivotReportRequest })
   requests?: RunPivotReportRequest[];
 }

@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ThrottlingSettingsPeriodEnum(str, Enum):
     SECONDLY = "SECONDLY"
@@ -10,6 +11,10 @@ class ThrottlingSettingsPeriodEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ThrottlingSettings:
-    max_concurrent_requests: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxConcurrentRequests' }})
-    period: ThrottlingSettingsPeriodEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'period' }})
+    r"""ThrottlingSettings
+    Configuration details for webhook throttling.
+    """
+    
+    max_concurrent_requests: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxConcurrentRequests') }})
+    period: ThrottlingSettingsPeriodEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('period') }})
     

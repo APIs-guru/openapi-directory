@@ -11,13 +11,13 @@ class LogsGetLogsQueryParams:
 
 @dataclass
 class LogsGetLogsRequest:
-    query_params: LogsGetLogsQueryParams = field(default=None)
+    query_params: LogsGetLogsQueryParams = field()
     
 
 @dataclass
 class LogsGetLogsResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     api_paged_response_api_models_log_: Optional[shared.APIPagedResponseAPIModelsLog] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

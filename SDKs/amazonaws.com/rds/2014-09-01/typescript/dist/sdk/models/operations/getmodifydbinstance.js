@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetModifyDbInstanceActionEnum;
 (function (GetModifyDbInstanceActionEnum) {
     GetModifyDbInstanceActionEnum["ModifyDbInstance"] = "ModifyDBInstance";
@@ -37,95 +37,95 @@ var GetModifyDbInstanceQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AllocatedStorage" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AllocatedStorage" }),
         __metadata("design:type", Number)
     ], GetModifyDbInstanceQueryParams.prototype, "allocatedStorage", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AllowMajorVersionUpgrade" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AllowMajorVersionUpgrade" }),
         __metadata("design:type", Boolean)
     ], GetModifyDbInstanceQueryParams.prototype, "allowMajorVersionUpgrade", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ApplyImmediately" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ApplyImmediately" }),
         __metadata("design:type", Boolean)
     ], GetModifyDbInstanceQueryParams.prototype, "applyImmediately", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AutoMinorVersionUpgrade" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AutoMinorVersionUpgrade" }),
         __metadata("design:type", Boolean)
     ], GetModifyDbInstanceQueryParams.prototype, "autoMinorVersionUpgrade", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=BackupRetentionPeriod" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=BackupRetentionPeriod" }),
         __metadata("design:type", Number)
     ], GetModifyDbInstanceQueryParams.prototype, "backupRetentionPeriod", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DBInstanceClass" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DBInstanceClass" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceQueryParams.prototype, "dbInstanceClass", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DBInstanceIdentifier" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DBInstanceIdentifier" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceQueryParams.prototype, "dbInstanceIdentifier", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DBParameterGroupName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DBParameterGroupName" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceQueryParams.prototype, "dbParameterGroupName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DBSecurityGroups" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DBSecurityGroups" }),
         __metadata("design:type", Array)
     ], GetModifyDbInstanceQueryParams.prototype, "dbSecurityGroups", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EngineVersion" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EngineVersion" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceQueryParams.prototype, "engineVersion", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Iops" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Iops" }),
         __metadata("design:type", Number)
     ], GetModifyDbInstanceQueryParams.prototype, "iops", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MasterUserPassword" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MasterUserPassword" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceQueryParams.prototype, "masterUserPassword", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MultiAZ" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MultiAZ" }),
         __metadata("design:type", Boolean)
     ], GetModifyDbInstanceQueryParams.prototype, "multiAz", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NewDBInstanceIdentifier" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NewDBInstanceIdentifier" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceQueryParams.prototype, "newDbInstanceIdentifier", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=OptionGroupName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=OptionGroupName" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceQueryParams.prototype, "optionGroupName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=PreferredBackupWindow" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PreferredBackupWindow" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceQueryParams.prototype, "preferredBackupWindow", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=PreferredMaintenanceWindow" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PreferredMaintenanceWindow" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceQueryParams.prototype, "preferredMaintenanceWindow", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=StorageType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=StorageType" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceQueryParams.prototype, "storageType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TdeCredentialArn" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TdeCredentialArn" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceQueryParams.prototype, "tdeCredentialArn", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TdeCredentialPassword" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TdeCredentialPassword" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceQueryParams.prototype, "tdeCredentialPassword", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceQueryParams.prototype, "version", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=VpcSecurityGroupIds" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=VpcSecurityGroupIds" }),
         __metadata("design:type", Array)
     ], GetModifyDbInstanceQueryParams.prototype, "vpcSecurityGroupIds", void 0);
     return GetModifyDbInstanceQueryParams;
@@ -137,31 +137,31 @@ var GetModifyDbInstanceHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetModifyDbInstanceHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetModifyDbInstanceHeaders;
@@ -173,11 +173,11 @@ var GetModifyDbInstanceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModifyDbInstanceQueryParams)
     ], GetModifyDbInstanceRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetModifyDbInstanceHeaders)
     ], GetModifyDbInstanceRequest.prototype, "headers", void 0);
     return GetModifyDbInstanceRequest;
@@ -189,15 +189,15 @@ var GetModifyDbInstanceResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetModifyDbInstanceResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetModifyDbInstanceResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetModifyDbInstanceResponse.prototype, "statusCode", void 0);
     return GetModifyDbInstanceResponse;

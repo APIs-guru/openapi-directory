@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiModelsAuthenticatedUser extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Email" })
+  @SpeakeasyMetadata({ data: "json, name=Email" })
   email?: string;
 
-  @Metadata({ data: "json, name=MACId" })
+  @SpeakeasyMetadata({ data: "json, name=MACId" })
   macId?: string;
 
-  @Metadata({ data: "json, name=MACToken" })
+  @SpeakeasyMetadata({ data: "json, name=MACToken" })
   macToken?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Token" })
+  @SpeakeasyMetadata({ data: "json, name=Token" })
   token?: string;
 
-  @Metadata({ data: "json, name=UserID" })
+  @SpeakeasyMetadata({ data: "json, name=UserID" })
   userId?: number;
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username?: string;
 }

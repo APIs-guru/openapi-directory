@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionLocalIpDetails } from "./actionlocalipdetails";
 import { ActionLocalPortDetails } from "./actionlocalportdetails";
 import { ActionRemoteIpDetails } from "./actionremoteipdetails";
+
 
 
 // PortProbeDetail
@@ -9,12 +10,12 @@ import { ActionRemoteIpDetails } from "./actionremoteipdetails";
  * A port scan that was part of the port probe. For each scan, PortProbeDetails provides information about the local IP address and port that were scanned, and the remote IP address that the scan originated from.
 **/
 export class PortProbeDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LocalIpDetails" })
+  @SpeakeasyMetadata({ data: "json, name=LocalIpDetails" })
   localIpDetails?: ActionLocalIpDetails;
 
-  @Metadata({ data: "json, name=LocalPortDetails" })
+  @SpeakeasyMetadata({ data: "json, name=LocalPortDetails" })
   localPortDetails?: ActionLocalPortDetails;
 
-  @Metadata({ data: "json, name=RemoteIpDetails" })
+  @SpeakeasyMetadata({ data: "json, name=RemoteIpDetails" })
   remoteIpDetails?: ActionRemoteIpDetails;
 }

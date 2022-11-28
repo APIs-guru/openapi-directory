@@ -1,8 +1,9 @@
 
 
+
 export enum AttachmentStatusEnum {
-    Attaching = "ATTACHING"
-,    Attached = "ATTACHED"
-,    Detaching = "DETACHING"
-,    Detached = "DETACHED"
+    Attaching = "ATTACHING",
+    Attached = "ATTACHED",
+    Detaching = "DETACHING",
+    Detached = "DETACHED"
 }

@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostMyOrdersSellingIdShipPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class PostMyOrdersSellingIdShipRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=provider" })
+  @SpeakeasyMetadata({ data: "json, name=provider" })
   provider: string;
 
-  @Metadata({ data: "json, name=send_notification" })
+  @SpeakeasyMetadata({ data: "json, name=send_notification" })
   sendNotification: boolean;
 
-  @Metadata({ data: "json, name=tracking_number" })
+  @SpeakeasyMetadata({ data: "json, name=tracking_number" })
   trackingNumber: string;
 }
 
 
 export class PostMyOrdersSellingIdShipSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 }
 
 
 export class PostMyOrdersSellingIdShipRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostMyOrdersSellingIdShipPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: PostMyOrdersSellingIdShipRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PostMyOrdersSellingIdShipSecurity;
 }
 
 
 export class PostMyOrdersSellingIdShipResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

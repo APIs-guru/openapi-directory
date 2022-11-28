@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScalableDimensionEnum } from "./scalabledimensionenum";
 import { ServiceNamespaceEnum } from "./servicenamespaceenum";
 import { SuspendedState } from "./suspendedstate";
+
 
 
 // ScalableTarget
@@ -9,27 +10,27 @@ import { SuspendedState } from "./suspendedstate";
  * Represents a scalable target.
 **/
 export class ScalableTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=MaxCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=MaxCapacity" })
   maxCapacity: number;
 
-  @Metadata({ data: "json, name=MinCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=MinCapacity" })
   minCapacity: number;
 
-  @Metadata({ data: "json, name=ResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceId" })
   resourceId: string;
 
-  @Metadata({ data: "json, name=RoleARN" })
+  @SpeakeasyMetadata({ data: "json, name=RoleARN" })
   roleArn: string;
 
-  @Metadata({ data: "json, name=ScalableDimension" })
+  @SpeakeasyMetadata({ data: "json, name=ScalableDimension" })
   scalableDimension: ScalableDimensionEnum;
 
-  @Metadata({ data: "json, name=ServiceNamespace" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceNamespace" })
   serviceNamespace: ServiceNamespaceEnum;
 
-  @Metadata({ data: "json, name=SuspendedState" })
+  @SpeakeasyMetadata({ data: "json, name=SuspendedState" })
   suspendedState?: SuspendedState;
 }

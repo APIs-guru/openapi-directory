@@ -1,0 +1,20 @@
+export var SampleTypeEnum;
+(function (SampleTypeEnum) {
+    SampleTypeEnum["Cpu"] = "CPU";
+    SampleTypeEnum["Memory"] = "MEMORY";
+    SampleTypeEnum["Threads"] = "THREADS";
+    SampleTypeEnum["RxRate"] = "RX_RATE";
+    SampleTypeEnum["TxRate"] = "TX_RATE";
+    SampleTypeEnum["Rx"] = "RX";
+    SampleTypeEnum["Tx"] = "TX";
+    SampleTypeEnum["NativeFrames"] = "NATIVE_FRAMES";
+    SampleTypeEnum["NativeFps"] = "NATIVE_FPS";
+    SampleTypeEnum["NativeMinDrawtime"] = "NATIVE_MIN_DRAWTIME";
+    SampleTypeEnum["NativeAvgDrawtime"] = "NATIVE_AVG_DRAWTIME";
+    SampleTypeEnum["NativeMaxDrawtime"] = "NATIVE_MAX_DRAWTIME";
+    SampleTypeEnum["OpenglFrames"] = "OPENGL_FRAMES";
+    SampleTypeEnum["OpenglFps"] = "OPENGL_FPS";
+    SampleTypeEnum["OpenglMinDrawtime"] = "OPENGL_MIN_DRAWTIME";
+    SampleTypeEnum["OpenglAvgDrawtime"] = "OPENGL_AVG_DRAWTIME";
+    SampleTypeEnum["OpenglMaxDrawtime"] = "OPENGL_MAX_DRAWTIME";
+})(SampleTypeEnum || (SampleTypeEnum = {}));

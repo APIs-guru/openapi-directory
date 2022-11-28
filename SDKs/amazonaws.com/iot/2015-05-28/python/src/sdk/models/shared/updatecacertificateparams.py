@@ -1,11 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import cacertificateupdateaction_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateCaCertificateParams:
-    action: cacertificateupdateaction_enum.CaCertificateUpdateActionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+    r"""UpdateCaCertificateParams
+    Parameters to define a mitigation action that changes the state of the CA certificate to inactive.
+    """
+    
+    action: CaCertificateUpdateActionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
     

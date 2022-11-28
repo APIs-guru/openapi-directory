@@ -11,6 +11,8 @@ const (
 	GoogleCloudDialogflowV2TextToSpeechSettingsOutputAudioEncodingEnumOutputAudioEncodingMulaw       GoogleCloudDialogflowV2TextToSpeechSettingsOutputAudioEncodingEnum = "OUTPUT_AUDIO_ENCODING_MULAW"
 )
 
+// GoogleCloudDialogflowV2TextToSpeechSettings
+// Instructs the speech synthesizer on how to generate the output audio content.
 type GoogleCloudDialogflowV2TextToSpeechSettings struct {
 	EnableTextToSpeech      *bool                                                               `json:"enableTextToSpeech,omitempty"`
 	OutputAudioEncoding     *GoogleCloudDialogflowV2TextToSpeechSettingsOutputAudioEncodingEnum `json:"outputAudioEncoding,omitempty"`

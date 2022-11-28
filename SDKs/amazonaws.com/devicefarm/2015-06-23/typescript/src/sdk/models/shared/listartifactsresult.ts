@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Artifact } from "./artifact";
+
 
 
 // ListArtifactsResult
@@ -8,9 +8,9 @@ import { Artifact } from "./artifact";
  * Represents the result of a list artifacts operation.
 **/
 export class ListArtifactsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=artifacts", elemType: shared.Artifact })
+  @SpeakeasyMetadata({ data: "json, name=artifacts", elemType: Artifact })
   artifacts?: Artifact[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

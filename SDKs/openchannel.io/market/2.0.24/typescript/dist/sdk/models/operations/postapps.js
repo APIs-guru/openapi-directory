@@ -22,46 +22,46 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostAppsQueryParams = /** @class */ (function (_super) {
     __extends(PostAppsQueryParams, _super);
     function PostAppsQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access" }),
         __metadata("design:type", String)
     ], PostAppsQueryParams.prototype, "access", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=allow" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allow" }),
         __metadata("design:type", String)
     ], PostAppsQueryParams.prototype, "allow", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=attributes" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=attributes" }),
         __metadata("design:type", String)
     ], PostAppsQueryParams.prototype, "attributes", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=customData" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=customData" }),
         __metadata("design:type", String)
     ], PostAppsQueryParams.prototype, "customData", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=developerId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=developerId" }),
         __metadata("design:type", String)
     ], PostAppsQueryParams.prototype, "developerId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=model" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=model" }),
         __metadata("design:type", String)
     ], PostAppsQueryParams.prototype, "model", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" }),
         __metadata("design:type", String)
     ], PostAppsQueryParams.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=restrict" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=restrict" }),
         __metadata("design:type", String)
     ], PostAppsQueryParams.prototype, "restrict", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" }),
         __metadata("design:type", String)
     ], PostAppsQueryParams.prototype, "type", void 0);
     return PostAppsQueryParams;
@@ -73,7 +73,7 @@ var PostAppsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostAppsQueryParams)
     ], PostAppsRequest.prototype, "queryParams", void 0);
     return PostAppsRequest;
@@ -85,15 +85,15 @@ var PostAppsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PostAppsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostAppsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostAppsResponse.prototype, "statusCode", void 0);
     return PostAppsResponse;

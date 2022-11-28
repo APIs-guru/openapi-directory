@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class OrganizationConfigRuleTriggerTypeEnum(str, Enum):
     CONFIGURATION_ITEM_CHANGE_NOTIFICATION = "ConfigurationItemChangeNotification"

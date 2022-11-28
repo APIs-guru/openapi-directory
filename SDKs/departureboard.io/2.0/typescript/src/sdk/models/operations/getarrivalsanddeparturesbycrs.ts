@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetArrivalsAndDeparturesByCrsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=CRS" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=CRS" })
   crs: string;
 }
 
 
 export class GetArrivalsAndDeparturesByCrsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=apiKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apiKey" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filterStation" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filterStation" })
   filterStation?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filterType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filterType" })
   filterType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=numServices" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=numServices" })
   numServices?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=serviceDetails" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=serviceDetails" })
   serviceDetails?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timeOffset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeOffset" })
   timeOffset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timeWindow" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeWindow" })
   timeWindow?: number;
 }
 
 
 export class GetArrivalsAndDeparturesByCrsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetArrivalsAndDeparturesByCrsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetArrivalsAndDeparturesByCrsQueryParams;
 }
 
 
 export class GetArrivalsAndDeparturesByCrsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

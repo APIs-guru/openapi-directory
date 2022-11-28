@@ -10,7 +10,7 @@ type TenancyTenantGroupsUpdatePathParams struct {
 
 type TenancyTenantGroupsUpdateRequest struct {
 	PathParams TenancyTenantGroupsUpdatePathParams
-	Request    shared.TenantGroup `request:"mediaType=application/json"`
+	Request    shared.TenantGroupInput `request:"mediaType=application/json"`
 }
 
 type TenancyTenantGroupsUpdateResponse struct {

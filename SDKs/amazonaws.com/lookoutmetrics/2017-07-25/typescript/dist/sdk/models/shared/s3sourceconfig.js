@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileFormatDescriptor } from "./fileformatdescriptor";
 // S3SourceConfig
 /**
@@ -34,19 +34,19 @@ var S3SourceConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FileFormatDescriptor" }),
+        SpeakeasyMetadata({ data: "json, name=FileFormatDescriptor" }),
         __metadata("design:type", FileFormatDescriptor)
     ], S3SourceConfig.prototype, "fileFormatDescriptor", void 0);
     __decorate([
-        Metadata({ data: "json, name=HistoricalDataPathList" }),
+        SpeakeasyMetadata({ data: "json, name=HistoricalDataPathList" }),
         __metadata("design:type", Array)
     ], S3SourceConfig.prototype, "historicalDataPathList", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=RoleArn" }),
         __metadata("design:type", String)
     ], S3SourceConfig.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=TemplatedPathList" }),
+        SpeakeasyMetadata({ data: "json, name=TemplatedPathList" }),
         __metadata("design:type", Array)
     ], S3SourceConfig.prototype, "templatedPathList", void 0);
     return S3SourceConfig;

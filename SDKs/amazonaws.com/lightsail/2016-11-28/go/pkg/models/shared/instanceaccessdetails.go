@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// InstanceAccessDetails
+// The parameters for gaining temporary access to one of your Amazon Lightsail instances.
 type InstanceAccessDetails struct {
 	CertKey      *string                     `json:"certKey,omitempty"`
 	ExpiresAt    *time.Time                  `json:"expiresAt,omitempty"`

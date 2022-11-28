@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AccessEndpoint } from "./accessendpoint";
 import { DomainJoinInfo } from "./domainjoininfo";
 import { VpcConfig } from "./vpcconfig";

@@ -22,28 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { BudgetDetail } from "./budgetdetail";
 import { PortfolioDetail } from "./portfoliodetail";
+import { TagOptionDetail } from "./tagoptiondetail";
+import { Tag } from "./tag";
 var DescribePortfolioOutput = /** @class */ (function (_super) {
     __extends(DescribePortfolioOutput, _super);
     function DescribePortfolioOutput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Budgets", elemType: shared.BudgetDetail }),
+        SpeakeasyMetadata({ data: "json, name=Budgets", elemType: BudgetDetail }),
         __metadata("design:type", Array)
     ], DescribePortfolioOutput.prototype, "budgets", void 0);
     __decorate([
-        Metadata({ data: "json, name=PortfolioDetail" }),
+        SpeakeasyMetadata({ data: "json, name=PortfolioDetail" }),
         __metadata("design:type", PortfolioDetail)
     ], DescribePortfolioOutput.prototype, "portfolioDetail", void 0);
     __decorate([
-        Metadata({ data: "json, name=TagOptions", elemType: shared.TagOptionDetail }),
+        SpeakeasyMetadata({ data: "json, name=TagOptions", elemType: TagOptionDetail }),
         __metadata("design:type", Array)
     ], DescribePortfolioOutput.prototype, "tagOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], DescribePortfolioOutput.prototype, "tags", void 0);
     return DescribePortfolioOutput;

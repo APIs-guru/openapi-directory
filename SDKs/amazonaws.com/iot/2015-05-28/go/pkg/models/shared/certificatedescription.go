@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CertificateDescription
+// Describes a certificate.
 type CertificateDescription struct {
 	CaCertificateID  *string                `json:"caCertificateId,omitempty"`
 	CertificateArn   *string                `json:"certificateArn,omitempty"`

@@ -10,9 +10,9 @@ class CalculateMatrixRequest:
 
 @dataclass
 class CalculateMatrixResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     gh_error: Optional[shared.GhError] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
     job_id: Optional[shared.JobID] = field(default=None)
-    status_code: int = field(default=None)
     

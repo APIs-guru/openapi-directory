@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DurationRange
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This data type is used in the <a>AssessmentTemplateFilter</a> data type.
 **/
 export class DurationRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=maxSeconds" })
   maxSeconds?: number;
 
-  @Metadata({ data: "json, name=minSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=minSeconds" })
   minSeconds?: number;
 }

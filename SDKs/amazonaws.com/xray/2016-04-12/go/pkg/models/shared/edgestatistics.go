@@ -1,5 +1,7 @@
 package shared
 
+// EdgeStatistics
+// Response statistics for an edge.
 type EdgeStatistics struct {
 	ErrorStatistics   *ErrorStatistics `json:"ErrorStatistics,omitempty"`
 	FaultStatistics   *FaultStatistics `json:"FaultStatistics,omitempty"`

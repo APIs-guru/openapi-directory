@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ParameterGroup
 /**
  * Represents the output of a CreateParameterGroup operation. A parameter group represents a combination of specific values for the parameters that are passed to the engine software during startup.
@@ -33,19 +33,19 @@ var ParameterGroup = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ARN" }),
+        SpeakeasyMetadata({ data: "json, name=ARN" }),
         __metadata("design:type", String)
     ], ParameterGroup.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], ParameterGroup.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Family" }),
+        SpeakeasyMetadata({ data: "json, name=Family" }),
         __metadata("design:type", String)
     ], ParameterGroup.prototype, "family", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], ParameterGroup.prototype, "name", void 0);
     return ParameterGroup;

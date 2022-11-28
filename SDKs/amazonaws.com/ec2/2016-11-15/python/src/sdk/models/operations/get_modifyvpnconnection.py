@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyVpnConnectionActionEnum(str, Enum):
     MODIFY_VPN_CONNECTION = "ModifyVpnConnection"
@@ -10,12 +14,12 @@ class GetModifyVpnConnectionVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyVpnConnectionQueryParams:
-    action: GetModifyVpnConnectionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyVpnConnectionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetModifyVpnConnectionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpn_connection_id: str = field(metadata={'query_param': { 'field_name': 'VpnConnectionId', 'style': 'form', 'explode': True }})
     customer_gateway_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CustomerGatewayId', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     transit_gateway_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayId', 'style': 'form', 'explode': True }})
-    version: GetModifyVpnConnectionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpn_connection_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VpnConnectionId', 'style': 'form', 'explode': True }})
     vpn_gateway_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'VpnGatewayId', 'style': 'form', 'explode': True }})
     
 
@@ -32,13 +36,13 @@ class GetModifyVpnConnectionHeaders:
 
 @dataclass
 class GetModifyVpnConnectionRequest:
-    query_params: GetModifyVpnConnectionQueryParams = field(default=None)
-    headers: GetModifyVpnConnectionHeaders = field(default=None)
+    headers: GetModifyVpnConnectionHeaders = field()
+    query_params: GetModifyVpnConnectionQueryParams = field()
     
 
 @dataclass
 class GetModifyVpnConnectionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

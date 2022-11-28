@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudApigeeV1CanaryEvaluationMetricLabels
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Labels that can be used to filter Apigee metrics.
 **/
 export class GoogleCloudApigeeV1CanaryEvaluationMetricLabels extends SpeakeasyBase {
-  @Metadata({ data: "json, name=env" })
+  @SpeakeasyMetadata({ data: "json, name=env" })
   env?: string;
 
-  @Metadata({ data: "json, name=instance_id" })
+  @SpeakeasyMetadata({ data: "json, name=instance_id" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 }

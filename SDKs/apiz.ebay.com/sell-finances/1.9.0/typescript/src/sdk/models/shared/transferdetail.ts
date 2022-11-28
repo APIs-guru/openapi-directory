@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BalanceAdjustment } from "./balanceadjustment";
 import { Charge } from "./charge";
 import { Amount } from "./amount";
+
 
 
 // TransferDetail
@@ -10,12 +10,12 @@ import { Amount } from "./amount";
  * This type is used by the transferDetail container, which provides more details about the transfer and the charge(s) associated with the transfer.
 **/
 export class TransferDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=balanceAdjustment" })
+  @SpeakeasyMetadata({ data: "json, name=balanceAdjustment" })
   balanceAdjustment?: BalanceAdjustment;
 
-  @Metadata({ data: "json, name=charges", elemType: shared.Charge })
+  @SpeakeasyMetadata({ data: "json, name=charges", elemType: Charge })
   charges?: Charge[];
 
-  @Metadata({ data: "json, name=totalChargeNetAmount" })
+  @SpeakeasyMetadata({ data: "json, name=totalChargeNetAmount" })
   totalChargeNetAmount?: Amount;
 }

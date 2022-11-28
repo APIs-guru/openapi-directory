@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://cur.{region}.amazonaws.com",
 	"https://cur.{region}.amazonaws.com",
 	"http://cur.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/cur/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DeleteReportDefinition - Deletes the specified report.
 func (s *SDK) DeleteReportDefinition(ctx context.Context, request operations.DeleteReportDefinitionRequest) (*operations.DeleteReportDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSOrigamiServiceGatewayService.DeleteReportDefinition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) DeleteReportDefinition(ctx context.Context, request operations.Del
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -131,8 +158,9 @@ func (s *SDK) DeleteReportDefinition(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DescribeReportDefinitions - Lists the AWS Cost and Usage reports available to this account.
 func (s *SDK) DescribeReportDefinitions(ctx context.Context, request operations.DescribeReportDefinitionsRequest) (*operations.DescribeReportDefinitionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSOrigamiServiceGatewayService.DescribeReportDefinitions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -154,7 +182,7 @@ func (s *SDK) DescribeReportDefinitions(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -194,8 +222,9 @@ func (s *SDK) DescribeReportDefinitions(ctx context.Context, request operations.
 	return res, nil
 }
 
+// ModifyReportDefinition - Allows you to programatically update your report preferences.
 func (s *SDK) ModifyReportDefinition(ctx context.Context, request operations.ModifyReportDefinitionRequest) (*operations.ModifyReportDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSOrigamiServiceGatewayService.ModifyReportDefinition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -215,7 +244,7 @@ func (s *SDK) ModifyReportDefinition(ctx context.Context, request operations.Mod
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -265,8 +294,9 @@ func (s *SDK) ModifyReportDefinition(ctx context.Context, request operations.Mod
 	return res, nil
 }
 
+// PutReportDefinition - Creates a new report using the description that you provide.
 func (s *SDK) PutReportDefinition(ctx context.Context, request operations.PutReportDefinitionRequest) (*operations.PutReportDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSOrigamiServiceGatewayService.PutReportDefinition"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -286,7 +316,7 @@ func (s *SDK) PutReportDefinition(ctx context.Context, request operations.PutRep
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

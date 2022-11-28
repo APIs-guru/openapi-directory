@@ -41,6 +41,8 @@ type OrgMembershipSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// OrgMembership
+// Org Membership
 type OrgMembership struct {
 	Organization    OrganizationSimple        `json:"organization"`
 	OrganizationURL string                    `json:"organization_url"`

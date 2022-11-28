@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateWorkspaceImagePermissionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowCopyImage" })
+  @SpeakeasyMetadata({ data: "json, name=AllowCopyImage" })
   allowCopyImage: boolean;
 
-  @Metadata({ data: "json, name=ImageId" })
+  @SpeakeasyMetadata({ data: "json, name=ImageId" })
   imageId: string;
 
-  @Metadata({ data: "json, name=SharedAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=SharedAccountId" })
   sharedAccountId: string;
 }

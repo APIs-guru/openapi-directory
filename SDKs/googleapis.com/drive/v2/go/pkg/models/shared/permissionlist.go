@@ -1,5 +1,7 @@
 package shared
 
+// PermissionList
+// A list of permissions associated with a file.
 type PermissionList struct {
 	Etag          *string      `json:"etag,omitempty"`
 	Items         []Permission `json:"items,omitempty"`

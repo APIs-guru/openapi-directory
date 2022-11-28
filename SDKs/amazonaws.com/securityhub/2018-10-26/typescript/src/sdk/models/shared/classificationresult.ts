@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomDataIdentifiersResult } from "./customdataidentifiersresult";
 import { SensitiveDataResult } from "./sensitivedataresult";
 import { ClassificationStatus } from "./classificationstatus";
+
 
 
 // ClassificationResult
@@ -10,21 +10,21 @@ import { ClassificationStatus } from "./classificationstatus";
  * Details about the sensitive data that was detected on the resource.
 **/
 export class ClassificationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AdditionalOccurrences" })
+  @SpeakeasyMetadata({ data: "json, name=AdditionalOccurrences" })
   additionalOccurrences?: boolean;
 
-  @Metadata({ data: "json, name=CustomDataIdentifiers" })
+  @SpeakeasyMetadata({ data: "json, name=CustomDataIdentifiers" })
   customDataIdentifiers?: CustomDataIdentifiersResult;
 
-  @Metadata({ data: "json, name=MimeType" })
+  @SpeakeasyMetadata({ data: "json, name=MimeType" })
   mimeType?: string;
 
-  @Metadata({ data: "json, name=SensitiveData", elemType: shared.SensitiveDataResult })
+  @SpeakeasyMetadata({ data: "json, name=SensitiveData", elemType: SensitiveDataResult })
   sensitiveData?: SensitiveDataResult[];
 
-  @Metadata({ data: "json, name=SizeClassified" })
+  @SpeakeasyMetadata({ data: "json, name=SizeClassified" })
   sizeClassified?: number;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ClassificationStatus;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAddRoleToInstanceProfileActionEnum(str, Enum):
     ADD_ROLE_TO_INSTANCE_PROFILE = "AddRoleToInstanceProfile"
@@ -10,10 +14,10 @@ class GetAddRoleToInstanceProfileVersionEnum(str, Enum):
 
 @dataclass
 class GetAddRoleToInstanceProfileQueryParams:
-    action: GetAddRoleToInstanceProfileActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    instance_profile_name: str = field(default=None, metadata={'query_param': { 'field_name': 'InstanceProfileName', 'style': 'form', 'explode': True }})
-    role_name: str = field(default=None, metadata={'query_param': { 'field_name': 'RoleName', 'style': 'form', 'explode': True }})
-    version: GetAddRoleToInstanceProfileVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetAddRoleToInstanceProfileActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    instance_profile_name: str = field(metadata={'query_param': { 'field_name': 'InstanceProfileName', 'style': 'form', 'explode': True }})
+    role_name: str = field(metadata={'query_param': { 'field_name': 'RoleName', 'style': 'form', 'explode': True }})
+    version: GetAddRoleToInstanceProfileVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetAddRoleToInstanceProfileHeaders:
 
 @dataclass
 class GetAddRoleToInstanceProfileRequest:
-    query_params: GetAddRoleToInstanceProfileQueryParams = field(default=None)
-    headers: GetAddRoleToInstanceProfileHeaders = field(default=None)
+    headers: GetAddRoleToInstanceProfileHeaders = field()
+    query_params: GetAddRoleToInstanceProfileQueryParams = field()
     
 
 @dataclass
 class GetAddRoleToInstanceProfileResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

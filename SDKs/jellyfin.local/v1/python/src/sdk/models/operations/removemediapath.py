@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -11,17 +12,17 @@ class RemoveMediaPathQueryParams:
 
 @dataclass
 class RemoveMediaPathSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class RemoveMediaPathRequest:
-    query_params: RemoveMediaPathQueryParams = field(default=None)
-    security: RemoveMediaPathSecurity = field(default=None)
+    query_params: RemoveMediaPathQueryParams = field()
+    security: RemoveMediaPathSecurity = field()
     
 
 @dataclass
 class RemoveMediaPathResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

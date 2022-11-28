@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class BehaviorListForPathPathParams:
-    path: str = field(default=None, metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
+    path: str = field(metadata={'path_param': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,13 +25,13 @@ class BehaviorListForPathQueryParams:
 
 @dataclass
 class BehaviorListForPathRequest:
-    path_params: BehaviorListForPathPathParams = field(default=None)
-    query_params: BehaviorListForPathQueryParams = field(default=None)
+    path_params: BehaviorListForPathPathParams = field()
+    query_params: BehaviorListForPathQueryParams = field()
     
 
 @dataclass
 class BehaviorListForPathResponse:
+    content_type: str = field()
+    status_code: int = field()
     behavior_entities: Optional[List[shared.BehaviorEntity]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

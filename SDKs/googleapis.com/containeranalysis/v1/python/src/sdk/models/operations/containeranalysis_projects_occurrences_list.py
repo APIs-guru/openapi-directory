@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContaineranalysisProjectsOccurrencesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class ContaineranalysisProjectsOccurrencesListQueryParams:
 
 @dataclass
 class ContaineranalysisProjectsOccurrencesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContaineranalysisProjectsOccurrencesListRequest:
-    path_params: ContaineranalysisProjectsOccurrencesListPathParams = field(default=None)
-    query_params: ContaineranalysisProjectsOccurrencesListQueryParams = field(default=None)
-    security: ContaineranalysisProjectsOccurrencesListSecurity = field(default=None)
+    path_params: ContaineranalysisProjectsOccurrencesListPathParams = field()
+    query_params: ContaineranalysisProjectsOccurrencesListQueryParams = field()
+    security: ContaineranalysisProjectsOccurrencesListSecurity = field()
     
 
 @dataclass
 class ContaineranalysisProjectsOccurrencesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_occurrences_response: Optional[shared.ListOccurrencesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

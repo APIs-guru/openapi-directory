@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ProductionBranch
 /**
  *  Describes the information about a production branch for an Amplify app.
@@ -33,19 +33,19 @@ var ProductionBranch = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=branchName" }),
+        SpeakeasyMetadata({ data: "json, name=branchName" }),
         __metadata("design:type", String)
     ], ProductionBranch.prototype, "branchName", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastDeployTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastDeployTime" }),
         __metadata("design:type", Date)
     ], ProductionBranch.prototype, "lastDeployTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], ProductionBranch.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=thumbnailUrl" }),
+        SpeakeasyMetadata({ data: "json, name=thumbnailUrl" }),
         __metadata("design:type", String)
     ], ProductionBranch.prototype, "thumbnailUrl", void 0);
     return ProductionBranch;

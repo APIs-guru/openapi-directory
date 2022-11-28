@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 
 @dataclass
 class GetUntagQueuePathParams:
-    account_number: int = field(default=None, metadata={'path_param': { 'field_name': 'AccountNumber', 'style': 'simple', 'explode': False }})
-    queue_name: str = field(default=None, metadata={'path_param': { 'field_name': 'QueueName', 'style': 'simple', 'explode': False }})
+    account_number: int = field(metadata={'path_param': { 'field_name': 'AccountNumber', 'style': 'simple', 'explode': False }})
+    queue_name: str = field(metadata={'path_param': { 'field_name': 'QueueName', 'style': 'simple', 'explode': False }})
     
 class GetUntagQueueActionEnum(str, Enum):
     UNTAG_QUEUE = "UntagQueue"
@@ -16,9 +20,9 @@ class GetUntagQueueVersionEnum(str, Enum):
 
 @dataclass
 class GetUntagQueueQueryParams:
-    action: GetUntagQueueActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    tag_keys: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
-    version: GetUntagQueueVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetUntagQueueActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    tag_keys: List[str] = field(metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
+    version: GetUntagQueueVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,13 +38,13 @@ class GetUntagQueueHeaders:
 
 @dataclass
 class GetUntagQueueRequest:
-    path_params: GetUntagQueuePathParams = field(default=None)
-    query_params: GetUntagQueueQueryParams = field(default=None)
-    headers: GetUntagQueueHeaders = field(default=None)
+    headers: GetUntagQueueHeaders = field()
+    path_params: GetUntagQueuePathParams = field()
+    query_params: GetUntagQueueQueryParams = field()
     
 
 @dataclass
 class GetUntagQueueResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

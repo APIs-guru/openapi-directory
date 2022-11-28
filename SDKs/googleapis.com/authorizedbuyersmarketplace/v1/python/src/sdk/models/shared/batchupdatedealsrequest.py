@@ -1,11 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import updatedealrequest
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class BatchUpdateDealsRequest:
-    requests: Optional[List[updatedealrequest.UpdateDealRequest]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requests' }})
+class BatchUpdateDealsRequestInput:
+    r"""BatchUpdateDealsRequestInput
+    Request message for batch updating deals.
+    """
+    
+    requests: Optional[List[UpdateDealRequestInput]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requests') }})
     

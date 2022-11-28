@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://extendsclass.com/api/json-storage",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DeleteBinID - Delete a json bin
 func (s *SDK) DeleteBinID(ctx context.Context, request operations.DeleteBinIDRequest) (*operations.DeleteBinIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bin/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -59,7 +81,7 @@ func (s *SDK) DeleteBinID(ctx context.Context, request operations.DeleteBinIDReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -119,8 +141,9 @@ func (s *SDK) DeleteBinID(ctx context.Context, request operations.DeleteBinIDReq
 	return res, nil
 }
 
+// GetBinID - Return a json bin
 func (s *SDK) GetBinID(ctx context.Context, request operations.GetBinIDRequest) (*operations.GetBinIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bin/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -128,7 +151,7 @@ func (s *SDK) GetBinID(ctx context.Context, request operations.GetBinIDRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -178,8 +201,9 @@ func (s *SDK) GetBinID(ctx context.Context, request operations.GetBinIDRequest) 
 	return res, nil
 }
 
+// PatchBinID - Partially update a json bin with JSON Merge Patch
 func (s *SDK) PatchBinID(ctx context.Context, request operations.PatchBinIDRequest) (*operations.PatchBinIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bin/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PATCH", url, nil)
@@ -187,7 +211,7 @@ func (s *SDK) PatchBinID(ctx context.Context, request operations.PatchBinIDReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -257,8 +281,9 @@ func (s *SDK) PatchBinID(ctx context.Context, request operations.PatchBinIDReque
 	return res, nil
 }
 
+// PostBin - Create a json bin
 func (s *SDK) PostBin(ctx context.Context) (*operations.PostBinResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/bin"
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -266,7 +291,7 @@ func (s *SDK) PostBin(ctx context.Context) (*operations.PostBinResponse, error) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -316,8 +341,9 @@ func (s *SDK) PostBin(ctx context.Context) (*operations.PostBinResponse, error) 
 	return res, nil
 }
 
+// PutBinID - Update a json bin
 func (s *SDK) PutBinID(ctx context.Context, request operations.PutBinIDRequest) (*operations.PutBinIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/bin/{id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -325,7 +351,7 @@ func (s *SDK) PutBinID(ctx context.Context, request operations.PutBinIDRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

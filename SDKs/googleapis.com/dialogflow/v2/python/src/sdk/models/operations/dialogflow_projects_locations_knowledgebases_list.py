@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DialogflowProjectsLocationsKnowledgeBasesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,14 +29,14 @@ class DialogflowProjectsLocationsKnowledgeBasesListQueryParams:
 
 @dataclass
 class DialogflowProjectsLocationsKnowledgeBasesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DialogflowProjectsLocationsKnowledgeBasesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -46,14 +47,14 @@ class DialogflowProjectsLocationsKnowledgeBasesListSecurity:
 
 @dataclass
 class DialogflowProjectsLocationsKnowledgeBasesListRequest:
-    path_params: DialogflowProjectsLocationsKnowledgeBasesListPathParams = field(default=None)
-    query_params: DialogflowProjectsLocationsKnowledgeBasesListQueryParams = field(default=None)
-    security: DialogflowProjectsLocationsKnowledgeBasesListSecurity = field(default=None)
+    path_params: DialogflowProjectsLocationsKnowledgeBasesListPathParams = field()
+    query_params: DialogflowProjectsLocationsKnowledgeBasesListQueryParams = field()
+    security: DialogflowProjectsLocationsKnowledgeBasesListSecurity = field()
     
 
 @dataclass
 class DialogflowProjectsLocationsKnowledgeBasesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_dialogflow_v2_list_knowledge_bases_response: Optional[shared.GoogleCloudDialogflowV2ListKnowledgeBasesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

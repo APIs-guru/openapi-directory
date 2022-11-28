@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatalabelingV1beta1GcsDestination
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Export destination of the data.Only gcs path is allowed in output_uri.
 **/
 export class GoogleCloudDatalabelingV1beta1GcsDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mimeType" })
+  @SpeakeasyMetadata({ data: "json, name=mimeType" })
   mimeType?: string;
 
-  @Metadata({ data: "json, name=outputUri" })
+  @SpeakeasyMetadata({ data: "json, name=outputUri" })
   outputUri?: string;
 }

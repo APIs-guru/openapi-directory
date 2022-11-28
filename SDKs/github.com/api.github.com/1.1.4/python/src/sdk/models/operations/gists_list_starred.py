@@ -12,14 +12,14 @@ class GistsListStarredQueryParams:
 
 @dataclass
 class GistsListStarredRequest:
-    query_params: GistsListStarredQueryParams = field(default=None)
+    query_params: GistsListStarredQueryParams = field()
     
 
 @dataclass
 class GistsListStarredResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     base_gists: Optional[List[shared.BaseGist]] = field(default=None)
     basic_error: Optional[shared.BasicError] = field(default=None)
     

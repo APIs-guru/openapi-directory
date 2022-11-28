@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPermissionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=PermissionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=PermissionId" })
   permissionId: string;
 }
 
 
 export class GetPermissionHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Version" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" })
   apiVersion: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class GetPermissionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPermissionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetPermissionHeaders;
 }
 
 
 export class GetPermissionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   permission?: shared.Permission;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

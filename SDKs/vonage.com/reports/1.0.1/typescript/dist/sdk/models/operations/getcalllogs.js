@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetCallLogsPathParams = /** @class */ (function (_super) {
     __extends(GetCallLogsPathParams, _super);
@@ -30,7 +30,7 @@ var GetCallLogsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=account_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=account_id" }),
         __metadata("design:type", String)
     ], GetCallLogsPathParams.prototype, "accountId", void 0);
     return GetCallLogsPathParams;
@@ -47,47 +47,47 @@ var GetCallLogsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=destination_user" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=destination_user" }),
         __metadata("design:type", String)
     ], GetCallLogsQueryParams.prototype, "destinationUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=direction" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" }),
         __metadata("design:type", String)
     ], GetCallLogsQueryParams.prototype, "direction", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=end:gte" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end:gte" }),
         __metadata("design:type", String)
     ], GetCallLogsQueryParams.prototype, "endGte", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=end:lte" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end:lte" }),
         __metadata("design:type", String)
     ], GetCallLogsQueryParams.prototype, "endLte", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=from" }),
         __metadata("design:type", String)
     ], GetCallLogsQueryParams.prototype, "from", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetCallLogsQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], GetCallLogsQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=source_user" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=source_user" }),
         __metadata("design:type", String)
     ], GetCallLogsQueryParams.prototype, "sourceUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=start:gte" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start:gte" }),
         __metadata("design:type", String)
     ], GetCallLogsQueryParams.prototype, "startGte", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=start:lte" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start:lte" }),
         __metadata("design:type", String)
     ], GetCallLogsQueryParams.prototype, "startLte", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=to" }),
         __metadata("design:type", String)
     ], GetCallLogsQueryParams.prototype, "to", void 0);
     return GetCallLogsQueryParams;
@@ -99,7 +99,7 @@ var GetCallLogsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], GetCallLogsSecurity.prototype, "bearerAuth", void 0);
     return GetCallLogsSecurity;
@@ -111,15 +111,15 @@ var GetCallLogsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCallLogsPathParams)
     ], GetCallLogsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCallLogsQueryParams)
     ], GetCallLogsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetCallLogsSecurity)
     ], GetCallLogsRequest.prototype, "security", void 0);
     return GetCallLogsRequest;
@@ -131,19 +131,19 @@ var GetCallLogsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CallLogsHalResponse)
     ], GetCallLogsResponse.prototype, "callLogsHalResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetCallLogsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetCallLogsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ValidationErrorsResponse)
     ], GetCallLogsResponse.prototype, "validationErrorsResponse", void 0);
     return GetCallLogsResponse;

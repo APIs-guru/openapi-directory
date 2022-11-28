@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeLoggingStatusActionEnum(str, Enum):
     DESCRIBE_LOGGING_STATUS = "DescribeLoggingStatus"
@@ -10,9 +14,9 @@ class GetDescribeLoggingStatusVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeLoggingStatusQueryParams:
-    action: GetDescribeLoggingStatusActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    cluster_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
-    version: GetDescribeLoggingStatusVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDescribeLoggingStatusActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    cluster_identifier: str = field(metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
+    version: GetDescribeLoggingStatusVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDescribeLoggingStatusHeaders:
 
 @dataclass
 class GetDescribeLoggingStatusRequest:
-    query_params: GetDescribeLoggingStatusQueryParams = field(default=None)
-    headers: GetDescribeLoggingStatusHeaders = field(default=None)
+    headers: GetDescribeLoggingStatusHeaders = field()
+    query_params: GetDescribeLoggingStatusQueryParams = field()
     
 
 @dataclass
 class GetDescribeLoggingStatusResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RetrieveNearEarthObjectByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=asteroid_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=asteroid_id" })
   asteroidId: string;
 }
 
 
 export class RetrieveNearEarthObjectByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RetrieveNearEarthObjectByIdPathParams;
 }
 
 
 export class RetrieveNearEarthObjectByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nearEarthObject?: shared.NearEarthObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

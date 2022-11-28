@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateNetworkSwitchRoutingMulticastRendezvousPointPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class CreateNetworkSwitchRoutingMulticastRendezvousPointRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=interfaceIp" })
+  @SpeakeasyMetadata({ data: "json, name=interfaceIp" })
   interfaceIp: string;
 
-  @Metadata({ data: "json, name=multicastGroup" })
+  @SpeakeasyMetadata({ data: "json, name=multicastGroup" })
   multicastGroup: string;
 }
 
 
 export class CreateNetworkSwitchRoutingMulticastRendezvousPointRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateNetworkSwitchRoutingMulticastRendezvousPointPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateNetworkSwitchRoutingMulticastRendezvousPointRequestBody;
 }
 
 
 export class CreateNetworkSwitchRoutingMulticastRendezvousPointResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createNetworkSwitchRoutingMulticastRendezvousPoint201ApplicationJsonObject?: Map<string, any>;
 }

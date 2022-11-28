@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudIntegrationsV1alphaAccessToken
+// The access token represents the authorization of a specific application to access specific parts of a user’s data.
 type GoogleCloudIntegrationsV1alphaAccessToken struct {
 	AccessToken            *string `json:"accessToken,omitempty"`
 	AccessTokenExpireTime  *string `json:"accessTokenExpireTime,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnvironmentAccountConnectionRequesterAccountTypeEnum } from "./environmentaccountconnectionrequesteraccounttypeenum";
 var ListEnvironmentAccountConnectionsInput = /** @class */ (function (_super) {
     __extends(ListEnvironmentAccountConnectionsInput, _super);
@@ -30,23 +30,23 @@ var ListEnvironmentAccountConnectionsInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=environmentName" }),
+        SpeakeasyMetadata({ data: "json, name=environmentName" }),
         __metadata("design:type", String)
     ], ListEnvironmentAccountConnectionsInput.prototype, "environmentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxResults" }),
+        SpeakeasyMetadata({ data: "json, name=maxResults" }),
         __metadata("design:type", Number)
     ], ListEnvironmentAccountConnectionsInput.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], ListEnvironmentAccountConnectionsInput.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestedBy" }),
+        SpeakeasyMetadata({ data: "json, name=requestedBy" }),
         __metadata("design:type", String)
     ], ListEnvironmentAccountConnectionsInput.prototype, "requestedBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=statuses" }),
+        SpeakeasyMetadata({ data: "json, name=statuses" }),
         __metadata("design:type", Array)
     ], ListEnvironmentAccountConnectionsInput.prototype, "statuses", void 0);
     return ListEnvironmentAccountConnectionsInput;

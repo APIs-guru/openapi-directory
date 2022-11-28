@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteTransitGatewayRouteActionEnum(str, Enum):
     DELETE_TRANSIT_GATEWAY_ROUTE = "DeleteTransitGatewayRoute"
@@ -10,11 +14,11 @@ class GetDeleteTransitGatewayRouteVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteTransitGatewayRouteQueryParams:
-    action: GetDeleteTransitGatewayRouteActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    destination_cidr_block: str = field(default=None, metadata={'query_param': { 'field_name': 'DestinationCidrBlock', 'style': 'form', 'explode': True }})
+    action: GetDeleteTransitGatewayRouteActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    destination_cidr_block: str = field(metadata={'query_param': { 'field_name': 'DestinationCidrBlock', 'style': 'form', 'explode': True }})
+    transit_gateway_route_table_id: str = field(metadata={'query_param': { 'field_name': 'TransitGatewayRouteTableId', 'style': 'form', 'explode': True }})
+    version: GetDeleteTransitGatewayRouteVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    transit_gateway_route_table_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TransitGatewayRouteTableId', 'style': 'form', 'explode': True }})
-    version: GetDeleteTransitGatewayRouteVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDeleteTransitGatewayRouteHeaders:
 
 @dataclass
 class GetDeleteTransitGatewayRouteRequest:
-    query_params: GetDeleteTransitGatewayRouteQueryParams = field(default=None)
-    headers: GetDeleteTransitGatewayRouteHeaders = field(default=None)
+    headers: GetDeleteTransitGatewayRouteHeaders = field()
+    query_params: GetDeleteTransitGatewayRouteQueryParams = field()
     
 
 @dataclass
 class GetDeleteTransitGatewayRouteResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

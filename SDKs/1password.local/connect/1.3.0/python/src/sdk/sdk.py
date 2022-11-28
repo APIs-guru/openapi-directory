@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -12,32 +15,52 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def create_vault_item(self, request: operations.CreateVaultItemRequest) -> operations.CreateVaultItemResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a new Item
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/vaults/{vaultUuid}/items", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -68,13 +91,16 @@ class SDK:
 
     
     def delete_vault_item(self, request: operations.DeleteVaultItemRequest) -> operations.DeleteVaultItemResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an Item
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/vaults/{vaultUuid}/items/{itemUuid}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -99,13 +125,16 @@ class SDK:
 
     
     def download_file_by_id(self, request: operations.DownloadFileByIDRequest) -> operations.DownloadFileByIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the content of a File
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/vaults/{vaultUuid}/items/{itemUuid}/files/{fileUuid}/content", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -129,15 +158,17 @@ class SDK:
 
     
     def get_api_activity(self, request: operations.GetAPIActivityRequest) -> operations.GetAPIActivityResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve a list of API Requests that have been made.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/activity"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -158,15 +189,17 @@ class SDK:
 
     
     def get_details_of_file_by_id(self, request: operations.GetDetailsOfFileByIDRequest) -> operations.GetDetailsOfFileByIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the details of a File
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/vaults/{vaultUuid}/items/{itemUuid}/files/{fileUuid}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -197,15 +230,19 @@ class SDK:
 
     
     def get_heartbeat(self, request: operations.GetHeartbeatRequest) -> operations.GetHeartbeatResponse:
-        warnings.simplefilter("ignore")
-
+        r"""Ping the server for liveness
+        """
+        
         base_url = operations.GET_HEARTBEAT_SERVERS[0]
-        if not request.server_url is None:
+        if request.server_url is not None:
             base_url = request.server_url
+        
+        
         url = base_url.removesuffix("/") + "/heartbeat"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -219,15 +256,17 @@ class SDK:
 
     
     def get_item_files(self, request: operations.GetItemFilesRequest) -> operations.GetItemFilesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all the files inside an Item
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/vaults/{vaultUuid}/items/{itemUuid}/files", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -254,15 +293,20 @@ class SDK:
 
     
     def get_prometheus_metrics(self, request: operations.GetPrometheusMetricsRequest) -> operations.GetPrometheusMetricsResponse:
-        warnings.simplefilter("ignore")
-
+        r"""Query server for exposed Prometheus metrics
+        See Prometheus documentation for a complete data model.
+        """
+        
         base_url = operations.GET_PROMETHEUS_METRICS_SERVERS[0]
-        if not request.server_url is None:
+        if request.server_url is not None:
             base_url = request.server_url
+        
+        
         url = base_url.removesuffix("/") + "/metrics"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -276,15 +320,19 @@ class SDK:
 
     
     def get_server_health(self, request: operations.GetServerHealthRequest) -> operations.GetServerHealthResponse:
-        warnings.simplefilter("ignore")
-
+        r"""Get state of the server and its dependencies.
+        """
+        
         base_url = operations.GET_SERVER_HEALTH_SERVERS[0]
-        if not request.server_url is None:
+        if request.server_url is not None:
             base_url = request.server_url
+        
+        
         url = base_url.removesuffix("/") + "/health"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -299,13 +347,16 @@ class SDK:
 
     
     def get_vault_by_id(self, request: operations.GetVaultByIDRequest) -> operations.GetVaultByIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Vault details and metadata
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/vaults/{vaultUuid}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -332,13 +383,16 @@ class SDK:
 
     
     def get_vault_item_by_id(self, request: operations.GetVaultItemByIDRequest) -> operations.GetVaultItemByIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the details of an Item
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/vaults/{vaultUuid}/items/{itemUuid}", request.path_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -365,15 +419,17 @@ class SDK:
 
     
     def get_vault_items(self, request: operations.GetVaultItemsRequest) -> operations.GetVaultItemsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all items for inside a Vault
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/vaults/{vaultUuid}/items", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -396,15 +452,17 @@ class SDK:
 
     
     def get_vaults(self, request: operations.GetVaultsRequest) -> operations.GetVaultsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all Vaults
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/vaults"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -423,19 +481,24 @@ class SDK:
 
     
     def patch_vault_item(self, request: operations.PatchVaultItemRequest) -> operations.PatchVaultItemResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a subset of Item attributes
+        Applies a modified [RFC6902 JSON Patch](https://tools.ietf.org/html/rfc6902) document to an Item or ItemField. This endpoint only supports `add`, `remove` and `replace` operations.
+        
+        When modifying a specific ItemField, the ItemField's ID in the `path` attribute of the operation object: `/fields/{fieldId}`
+        
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/vaults/{vaultUuid}/items/{itemUuid}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -462,19 +525,20 @@ class SDK:
 
     
     def update_vault_item(self, request: operations.UpdateVaultItemRequest) -> operations.UpdateVaultItemResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update an Item
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/vaults/{vaultUuid}/items/{itemUuid}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

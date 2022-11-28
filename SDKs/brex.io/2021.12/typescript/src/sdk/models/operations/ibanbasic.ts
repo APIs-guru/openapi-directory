@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class IbanBasicRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=ibanNumber;" })
+  @SpeakeasyMetadata({ data: "form, name=ibanNumber;" })
   ibanNumber: string;
 }
 
 
 export class IbanBasicSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   userKey: shared.SchemeUserKey;
 }
 
 
 export class IbanBasicRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request: IbanBasicRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: IbanBasicSecurity;
 }
 
 
 export class IbanBasicResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ibanBasic200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ibanBasicDefaultApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

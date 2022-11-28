@@ -1,0 +1,28 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+export declare enum DeleteCustomKeyStoreXAmzTargetEnum {
+    TrentServiceDeleteCustomKeyStore = "TrentService.DeleteCustomKeyStore"
+}
+export declare class DeleteCustomKeyStoreHeaders extends SpeakeasyBase {
+    xAmzAlgorithm?: string;
+    xAmzContentSha256?: string;
+    xAmzCredential?: string;
+    xAmzDate?: string;
+    xAmzSecurityToken?: string;
+    xAmzSignature?: string;
+    xAmzSignedHeaders?: string;
+    xAmzTarget: DeleteCustomKeyStoreXAmzTargetEnum;
+}
+export declare class DeleteCustomKeyStoreRequest extends SpeakeasyBase {
+    headers: DeleteCustomKeyStoreHeaders;
+    request: shared.DeleteCustomKeyStoreRequest;
+}
+export declare class DeleteCustomKeyStoreResponse extends SpeakeasyBase {
+    contentType: string;
+    customKeyStoreHasCmKsException?: any;
+    customKeyStoreInvalidStateException?: any;
+    customKeyStoreNotFoundException?: any;
+    deleteCustomKeyStoreResponse?: Map<string, any>;
+    kmsInternalException?: any;
+    statusCode: number;
+}

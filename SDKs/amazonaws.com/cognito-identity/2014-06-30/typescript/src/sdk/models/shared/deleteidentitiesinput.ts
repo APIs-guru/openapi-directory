@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteIdentitiesInput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Input to the <code>DeleteIdentities</code> action.
 **/
 export class DeleteIdentitiesInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IdentityIdsToDelete" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityIdsToDelete" })
   identityIdsToDelete: string[];
 }

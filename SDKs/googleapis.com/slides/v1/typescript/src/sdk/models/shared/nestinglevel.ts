@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TextStyle } from "./textstyle";
+
 
 
 // NestingLevel
@@ -7,6 +8,6 @@ import { TextStyle } from "./textstyle";
  * Contains properties describing the look and feel of a list bullet at a given level of nesting.
 **/
 export class NestingLevel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bulletStyle" })
+  @SpeakeasyMetadata({ data: "json, name=bulletStyle" })
   bulletStyle?: TextStyle;
 }

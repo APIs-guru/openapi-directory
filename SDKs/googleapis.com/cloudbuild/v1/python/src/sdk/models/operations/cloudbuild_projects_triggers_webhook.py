@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudbuildProjectsTriggersWebhookPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    trigger: str = field(default=None, metadata={'path_param': { 'field_name': 'trigger', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    trigger: str = field(metadata={'path_param': { 'field_name': 'trigger', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,14 +29,14 @@ class CloudbuildProjectsTriggersWebhookQueryParams:
 
 @dataclass
 class CloudbuildProjectsTriggersWebhookRequest:
-    path_params: CloudbuildProjectsTriggersWebhookPathParams = field(default=None)
-    query_params: CloudbuildProjectsTriggersWebhookQueryParams = field(default=None)
+    path_params: CloudbuildProjectsTriggersWebhookPathParams = field()
+    query_params: CloudbuildProjectsTriggersWebhookQueryParams = field()
     request: Optional[shared.HTTPBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CloudbuildProjectsTriggersWebhookResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     receive_trigger_webhook_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

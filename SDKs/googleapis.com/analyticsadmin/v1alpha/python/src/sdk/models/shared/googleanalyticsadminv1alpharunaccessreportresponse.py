@@ -1,18 +1,20 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleanalyticsadminv1alphaaccessdimensionheader
-from . import googleanalyticsadminv1alphaaccessmetricheader
-from . import googleanalyticsadminv1alphaaccessquota
-from . import googleanalyticsadminv1alphaaccessrow
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleAnalyticsAdminV1alphaRunAccessReportResponse:
-    dimension_headers: Optional[List[googleanalyticsadminv1alphaaccessdimensionheader.GoogleAnalyticsAdminV1alphaAccessDimensionHeader]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dimensionHeaders' }})
-    metric_headers: Optional[List[googleanalyticsadminv1alphaaccessmetricheader.GoogleAnalyticsAdminV1alphaAccessMetricHeader]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metricHeaders' }})
-    quota: Optional[googleanalyticsadminv1alphaaccessquota.GoogleAnalyticsAdminV1alphaAccessQuota] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'quota' }})
-    row_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rowCount' }})
-    rows: Optional[List[googleanalyticsadminv1alphaaccessrow.GoogleAnalyticsAdminV1alphaAccessRow]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rows' }})
+    r"""GoogleAnalyticsAdminV1alphaRunAccessReportResponse
+    The customized Data Access Record Report response.
+    """
+    
+    dimension_headers: Optional[List[GoogleAnalyticsAdminV1alphaAccessDimensionHeader]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dimensionHeaders') }})
+    metric_headers: Optional[List[GoogleAnalyticsAdminV1alphaAccessMetricHeader]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metricHeaders') }})
+    quota: Optional[GoogleAnalyticsAdminV1alphaAccessQuota] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('quota') }})
+    row_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rowCount') }})
+    rows: Optional[List[GoogleAnalyticsAdminV1alphaAccessRow]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rows') }})
     

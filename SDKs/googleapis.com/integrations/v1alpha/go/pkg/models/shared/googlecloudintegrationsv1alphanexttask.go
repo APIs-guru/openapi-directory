@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudIntegrationsV1alphaNextTask
+// The task that is next in line to be executed, if the condition specified evaluated to true.
 type GoogleCloudIntegrationsV1alphaNextTask struct {
 	Condition    *string `json:"condition,omitempty"`
 	Description  *string `json:"description,omitempty"`

@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAccountsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=asset_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=asset_type" })
   assetType?: shared.AssetTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=identifier" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=identifier" })
   identifier?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=skip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=skip" })
   skip?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=take" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=take" })
   take?: number;
 }
 
 
 export class GetAccountsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAccountsQueryParams;
 }
 
 
 export class GetAccountsResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.Account })
+  @SpeakeasyMetadata({ elemType: shared.Account })
   accounts?: shared.Account[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

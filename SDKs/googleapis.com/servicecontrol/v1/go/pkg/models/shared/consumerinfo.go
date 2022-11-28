@@ -10,6 +10,8 @@ const (
 	ConsumerInfoTypeEnumServiceSpecific         ConsumerInfoTypeEnum = "SERVICE_SPECIFIC"
 )
 
+// ConsumerInfo
+// `ConsumerInfo` provides information about the consumer.
 type ConsumerInfo struct {
 	ConsumerNumber *string               `json:"consumerNumber,omitempty"`
 	ProjectNumber  *string               `json:"projectNumber,omitempty"`

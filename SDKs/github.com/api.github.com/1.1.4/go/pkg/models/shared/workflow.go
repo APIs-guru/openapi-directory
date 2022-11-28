@@ -11,6 +11,8 @@ const (
 	WorkflowStateEnumDeleted WorkflowStateEnum = "deleted"
 )
 
+// Workflow
+// A GitHub Actions workflow
 type Workflow struct {
 	BadgeURL  string            `json:"badge_url"`
 	CreatedAt time.Time         `json:"created_at"`

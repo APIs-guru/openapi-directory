@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AuditAdvertiserResponse
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response message for AdvertiserService.AuditAdvertiser.
 **/
 export class AuditAdvertiserResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adGroupCriteriaCount" })
+  @SpeakeasyMetadata({ data: "json, name=adGroupCriteriaCount" })
   adGroupCriteriaCount?: string;
 
-  @Metadata({ data: "json, name=campaignCriteriaCount" })
+  @SpeakeasyMetadata({ data: "json, name=campaignCriteriaCount" })
   campaignCriteriaCount?: string;
 
-  @Metadata({ data: "json, name=channelsCount" })
+  @SpeakeasyMetadata({ data: "json, name=channelsCount" })
   channelsCount?: string;
 
-  @Metadata({ data: "json, name=negativeKeywordListsCount" })
+  @SpeakeasyMetadata({ data: "json, name=negativeKeywordListsCount" })
   negativeKeywordListsCount?: string;
 
-  @Metadata({ data: "json, name=negativelyTargetedChannelsCount" })
+  @SpeakeasyMetadata({ data: "json, name=negativelyTargetedChannelsCount" })
   negativelyTargetedChannelsCount?: string;
 
-  @Metadata({ data: "json, name=usedCampaignsCount" })
+  @SpeakeasyMetadata({ data: "json, name=usedCampaignsCount" })
   usedCampaignsCount?: string;
 
-  @Metadata({ data: "json, name=usedInsertionOrdersCount" })
+  @SpeakeasyMetadata({ data: "json, name=usedInsertionOrdersCount" })
   usedInsertionOrdersCount?: string;
 
-  @Metadata({ data: "json, name=usedLineItemsCount" })
+  @SpeakeasyMetadata({ data: "json, name=usedLineItemsCount" })
   usedLineItemsCount?: string;
 }

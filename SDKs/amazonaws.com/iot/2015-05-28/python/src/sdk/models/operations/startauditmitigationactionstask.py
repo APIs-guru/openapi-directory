@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class StartAuditMitigationActionsTaskPathParams:
-    task_id: str = field(default=None, metadata={'path_param': { 'field_name': 'taskId', 'style': 'simple', 'explode': False }})
+    task_id: str = field(metadata={'path_param': { 'field_name': 'taskId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,34 +27,38 @@ class StartAuditMitigationActionsTaskHeaders:
 @dataclass_json
 @dataclass
 class StartAuditMitigationActionsTaskRequestBodyTarget:
-    audit_check_to_reason_code_filter: Optional[dict[str, List[str]]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auditCheckToReasonCodeFilter' }})
-    audit_task_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auditTaskId' }})
-    finding_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'findingIds' }})
+    r"""StartAuditMitigationActionsTaskRequestBodyTarget
+    Used in MitigationActionParams, this information identifies the target findings to which the mitigation actions are applied. Only one entry appears.
+    """
+    
+    audit_check_to_reason_code_filter: Optional[dict[str, List[str]]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('auditCheckToReasonCodeFilter') }})
+    audit_task_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('auditTaskId') }})
+    finding_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('findingIds') }})
     
 
 @dataclass_json
 @dataclass
 class StartAuditMitigationActionsTaskRequestBody:
-    audit_check_to_actions_mapping: dict[str, List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auditCheckToActionsMapping' }})
-    client_request_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientRequestToken' }})
-    target: StartAuditMitigationActionsTaskRequestBodyTarget = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target' }})
+    audit_check_to_actions_mapping: dict[str, List[str]] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('auditCheckToActionsMapping') }})
+    client_request_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientRequestToken') }})
+    target: StartAuditMitigationActionsTaskRequestBodyTarget = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('target') }})
     
 
 @dataclass
 class StartAuditMitigationActionsTaskRequest:
-    path_params: StartAuditMitigationActionsTaskPathParams = field(default=None)
-    headers: StartAuditMitigationActionsTaskHeaders = field(default=None)
-    request: StartAuditMitigationActionsTaskRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: StartAuditMitigationActionsTaskHeaders = field()
+    path_params: StartAuditMitigationActionsTaskPathParams = field()
+    request: StartAuditMitigationActionsTaskRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class StartAuditMitigationActionsTaskResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     start_audit_mitigation_actions_task_response: Optional[shared.StartAuditMitigationActionsTaskResponse] = field(default=None)
-    status_code: int = field(default=None)
     task_already_exists_exception: Optional[Any] = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

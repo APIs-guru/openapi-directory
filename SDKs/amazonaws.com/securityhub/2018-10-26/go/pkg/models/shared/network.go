@@ -1,5 +1,7 @@
 package shared
 
+// Network
+// The details of network-related information about a finding.
 type Network struct {
 	DestinationDomain *string               `json:"DestinationDomain,omitempty"`
 	DestinationIPV4   *string               `json:"DestinationIpV4,omitempty"`

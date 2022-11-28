@@ -1,77 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetClientsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
   pageSize?: number;
 }
 
 
-export class GetClientsSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class GetClientsSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class GetClientsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetClientsSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetClientsSecurityOption2;
-}
-
-
-export class GetClientsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetClientsQueryParams;
-
-  @Metadata()
-  security: GetClientsSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class GetClients200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.OAuthClient })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: shared.OAuthClient })
   data?: shared.OAuthClient[];
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: number;
 
-  @Metadata({ data: "json, name=pages" })
+  @SpeakeasyMetadata({ data: "json, name=pages" })
   pages?: number;
 
-  @Metadata({ data: "json, name=results" })
+  @SpeakeasyMetadata({ data: "json, name=results" })
   results?: number;
 }
 
 
 export class GetClientsDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class GetClientsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetClientsQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetClientsSecurity;
+}
+
+
 export class GetClientsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getClients200ApplicationJsonObject?: GetClients200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getClientsDefaultApplicationJsonObject?: GetClientsDefaultApplicationJson;
 }

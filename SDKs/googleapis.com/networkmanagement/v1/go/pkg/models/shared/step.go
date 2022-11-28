@@ -30,6 +30,8 @@ const (
 	StepStateEnumViewerPermissionMissing      StepStateEnum = "VIEWER_PERMISSION_MISSING"
 )
 
+// Step
+// A simulated forwarding path is composed of multiple steps. Each step has a well-defined state and an associated configuration.
 type Step struct {
 	Abort            *AbortInfo            `json:"abort,omitempty"`
 	CausesDrop       *bool                 `json:"causesDrop,omitempty"`

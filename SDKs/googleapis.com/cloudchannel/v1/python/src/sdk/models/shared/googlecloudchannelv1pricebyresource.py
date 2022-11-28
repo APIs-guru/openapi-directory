@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudchannelv1price
-from . import googlecloudchannelv1pricephase
+from sdk import utils
+from . import *
 
 class GoogleCloudChannelV1PriceByResourceResourceTypeEnum(str, Enum):
     RESOURCE_TYPE_UNSPECIFIED = "RESOURCE_TYPE_UNSPECIFIED"
@@ -18,7 +19,11 @@ class GoogleCloudChannelV1PriceByResourceResourceTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudChannelV1PriceByResource:
-    price: Optional[googlecloudchannelv1price.GoogleCloudChannelV1Price] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'price' }})
-    price_phases: Optional[List[googlecloudchannelv1pricephase.GoogleCloudChannelV1PricePhase]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pricePhases' }})
-    resource_type: Optional[GoogleCloudChannelV1PriceByResourceResourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceType' }})
+    r"""GoogleCloudChannelV1PriceByResource
+    Represents price by resource type.
+    """
+    
+    price: Optional[GoogleCloudChannelV1Price] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('price') }})
+    price_phases: Optional[List[GoogleCloudChannelV1PricePhase]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pricePhases') }})
+    resource_type: Optional[GoogleCloudChannelV1PriceByResourceResourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceType') }})
     

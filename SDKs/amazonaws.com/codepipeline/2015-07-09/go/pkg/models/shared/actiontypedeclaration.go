@@ -1,5 +1,7 @@
 package shared
 
+// ActionTypeDeclaration
+// The parameters for the action type definition that are provided when the action type is created or updated.
 type ActionTypeDeclaration struct {
 	Description           *string                   `json:"description,omitempty"`
 	Executor              ActionTypeExecutor        `json:"executor"`

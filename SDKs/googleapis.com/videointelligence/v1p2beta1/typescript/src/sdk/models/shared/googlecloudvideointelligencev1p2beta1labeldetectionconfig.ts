@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudVideointelligenceV1p2beta1LabelDetectionConfigLabelDetectionModeEnum {
-    LabelDetectionModeUnspecified = "LABEL_DETECTION_MODE_UNSPECIFIED"
-,    ShotMode = "SHOT_MODE"
-,    FrameMode = "FRAME_MODE"
-,    ShotAndFrameMode = "SHOT_AND_FRAME_MODE"
+    LabelDetectionModeUnspecified = "LABEL_DETECTION_MODE_UNSPECIFIED",
+    ShotMode = "SHOT_MODE",
+    FrameMode = "FRAME_MODE",
+    ShotAndFrameMode = "SHOT_AND_FRAME_MODE"
 }
 
 
@@ -13,18 +14,18 @@ export enum GoogleCloudVideointelligenceV1p2beta1LabelDetectionConfigLabelDetect
  * Config for LABEL_DETECTION.
 **/
 export class GoogleCloudVideointelligenceV1p2beta1LabelDetectionConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=frameConfidenceThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=frameConfidenceThreshold" })
   frameConfidenceThreshold?: number;
 
-  @Metadata({ data: "json, name=labelDetectionMode" })
+  @SpeakeasyMetadata({ data: "json, name=labelDetectionMode" })
   labelDetectionMode?: GoogleCloudVideointelligenceV1p2beta1LabelDetectionConfigLabelDetectionModeEnum;
 
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model?: string;
 
-  @Metadata({ data: "json, name=stationaryCamera" })
+  @SpeakeasyMetadata({ data: "json, name=stationaryCamera" })
   stationaryCamera?: boolean;
 
-  @Metadata({ data: "json, name=videoConfidenceThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=videoConfidenceThreshold" })
   videoConfidenceThreshold?: number;
 }

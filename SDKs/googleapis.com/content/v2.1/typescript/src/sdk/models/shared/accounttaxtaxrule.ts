@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AccountTaxTaxRule
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Tax calculation rule to apply in a state or province (US only).
 **/
 export class AccountTaxTaxRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=locationId" })
+  @SpeakeasyMetadata({ data: "json, name=locationId" })
   locationId?: string;
 
-  @Metadata({ data: "json, name=ratePercent" })
+  @SpeakeasyMetadata({ data: "json, name=ratePercent" })
   ratePercent?: string;
 
-  @Metadata({ data: "json, name=shippingTaxed" })
+  @SpeakeasyMetadata({ data: "json, name=shippingTaxed" })
   shippingTaxed?: boolean;
 
-  @Metadata({ data: "json, name=useGlobalRate" })
+  @SpeakeasyMetadata({ data: "json, name=useGlobalRate" })
   useGlobalRate?: boolean;
 }

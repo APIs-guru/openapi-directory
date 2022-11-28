@@ -23,6 +23,8 @@ const (
 	LayerDirectiveEnumShell                LayerDirectiveEnum = "SHELL"
 )
 
+// Layer
+// Layer holds metadata specific to a layer of a Docker image.
 type Layer struct {
 	Arguments *string             `json:"arguments,omitempty"`
 	Directive *LayerDirectiveEnum `json:"directive,omitempty"`

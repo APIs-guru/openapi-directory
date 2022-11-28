@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RtiJobInstructionRtiJobInstructionEmployer
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The rti job instructions' employer
 **/
 export class RtiJobInstructionRtiJobInstructionEmployer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=@href" })
+  @SpeakeasyMetadata({ data: "json, name=@href" })
   atHref?: string;
 
-  @Metadata({ data: "json, name=@rel" })
+  @SpeakeasyMetadata({ data: "json, name=@rel" })
   atRel?: string;
 
-  @Metadata({ data: "json, name=@title" })
+  @SpeakeasyMetadata({ data: "json, name=@title" })
   atTitle?: string;
 }
 
 export enum RtiJobInstructionRtiJobInstructionLateReasonEnum {
-    A = "A"
-,    B = "B"
-,    C = "C"
-,    D = "D"
-,    F = "F"
-,    G = "G"
-,    H = "H"
+    A = "A",
+    B = "B",
+    C = "C",
+    D = "D",
+    F = "F",
+    G = "G",
+    H = "H"
 }
 
 
@@ -32,13 +33,13 @@ export enum RtiJobInstructionRtiJobInstructionLateReasonEnum {
  * The rti job instructions' pay schedule
 **/
 export class RtiJobInstructionRtiJobInstructionPaySchedule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=@href" })
+  @SpeakeasyMetadata({ data: "json, name=@href" })
   atHref?: string;
 
-  @Metadata({ data: "json, name=@rel" })
+  @SpeakeasyMetadata({ data: "json, name=@rel" })
   atRel?: string;
 
-  @Metadata({ data: "json, name=@title" })
+  @SpeakeasyMetadata({ data: "json, name=@title" })
   atTitle?: string;
 }
 
@@ -48,78 +49,78 @@ export class RtiJobInstructionRtiJobInstructionPaySchedule extends SpeakeasyBase
  * The rti job instructions' rti transaction
 **/
 export class RtiJobInstructionRtiJobInstructionRtiTransaction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=@href" })
+  @SpeakeasyMetadata({ data: "json, name=@href" })
   atHref?: string;
 
-  @Metadata({ data: "json, name=@rel" })
+  @SpeakeasyMetadata({ data: "json, name=@rel" })
   atRel?: string;
 
-  @Metadata({ data: "json, name=@title" })
+  @SpeakeasyMetadata({ data: "json, name=@title" })
   atTitle?: string;
 }
 
 
 export class RtiJobInstructionRtiJobInstruction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EarlierTaxYear" })
+  @SpeakeasyMetadata({ data: "json, name=EarlierTaxYear" })
   earlierTaxYear?: number;
 
-  @Metadata({ data: "json, name=Employer" })
+  @SpeakeasyMetadata({ data: "json, name=Employer" })
   employer?: RtiJobInstructionRtiJobInstructionEmployer;
 
-  @Metadata({ data: "json, name=FinalSubmissionForYear" })
+  @SpeakeasyMetadata({ data: "json, name=FinalSubmissionForYear" })
   finalSubmissionForYear?: boolean;
 
-  @Metadata({ data: "json, name=Generate" })
+  @SpeakeasyMetadata({ data: "json, name=Generate" })
   generate?: boolean;
 
-  @Metadata({ data: "json, name=HoldingDate" })
+  @SpeakeasyMetadata({ data: "json, name=HoldingDate" })
   holdingDate?: Date;
 
-  @Metadata({ data: "json, name=LateReason" })
+  @SpeakeasyMetadata({ data: "json, name=LateReason" })
   lateReason?: RtiJobInstructionRtiJobInstructionLateReasonEnum;
 
-  @Metadata({ data: "json, name=NoPaymentForPeriodFrom" })
+  @SpeakeasyMetadata({ data: "json, name=NoPaymentForPeriodFrom" })
   noPaymentForPeriodFrom?: Date;
 
-  @Metadata({ data: "json, name=NoPaymentForPeriodTo" })
+  @SpeakeasyMetadata({ data: "json, name=NoPaymentForPeriodTo" })
   noPaymentForPeriodTo?: Date;
 
-  @Metadata({ data: "json, name=PaySchedule" })
+  @SpeakeasyMetadata({ data: "json, name=PaySchedule" })
   paySchedule?: RtiJobInstructionRtiJobInstructionPaySchedule;
 
-  @Metadata({ data: "json, name=PaymentDate" })
+  @SpeakeasyMetadata({ data: "json, name=PaymentDate" })
   paymentDate?: Date;
 
-  @Metadata({ data: "json, name=PeriodOfInactivityFrom" })
+  @SpeakeasyMetadata({ data: "json, name=PeriodOfInactivityFrom" })
   periodOfInactivityFrom?: Date;
 
-  @Metadata({ data: "json, name=PeriodOfInactivityTo" })
+  @SpeakeasyMetadata({ data: "json, name=PeriodOfInactivityTo" })
   periodOfInactivityTo?: Date;
 
-  @Metadata({ data: "json, name=RtiTransaction" })
+  @SpeakeasyMetadata({ data: "json, name=RtiTransaction" })
   rtiTransaction?: RtiJobInstructionRtiJobInstructionRtiTransaction;
 
-  @Metadata({ data: "json, name=RtiType" })
+  @SpeakeasyMetadata({ data: "json, name=RtiType" })
   rtiType?: string;
 
-  @Metadata({ data: "json, name=SchemeCeased" })
+  @SpeakeasyMetadata({ data: "json, name=SchemeCeased" })
   schemeCeased?: Date;
 
-  @Metadata({ data: "json, name=TaxMonth" })
+  @SpeakeasyMetadata({ data: "json, name=TaxMonth" })
   taxMonth?: number;
 
-  @Metadata({ data: "json, name=TaxYear" })
+  @SpeakeasyMetadata({ data: "json, name=TaxYear" })
   taxYear?: number;
 
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp?: Date;
 
-  @Metadata({ data: "json, name=Transmit" })
+  @SpeakeasyMetadata({ data: "json, name=Transmit" })
   transmit?: boolean;
 }
 
 
 export class RtiJobInstruction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RtiJobInstruction" })
+  @SpeakeasyMetadata({ data: "json, name=RtiJobInstruction" })
   rtiJobInstruction?: RtiJobInstructionRtiJobInstruction;
 }

@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AlbumDiscPropertiesContractMediaTypeEnum {
-    Audio = "Audio"
-,    Video = "Video"
+    Audio = "Audio",
+    Video = "Video"
 }
 
 
 export class AlbumDiscPropertiesContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=discNumber" })
+  @SpeakeasyMetadata({ data: "json, name=discNumber" })
   discNumber?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=mediaType" })
+  @SpeakeasyMetadata({ data: "json, name=mediaType" })
   mediaType?: AlbumDiscPropertiesContractMediaTypeEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

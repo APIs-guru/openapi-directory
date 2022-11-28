@@ -1,5 +1,7 @@
 package shared
 
+// HTTPRouteRouteAction
+// The specifications for routing traffic and applying associated policies.
 type HTTPRouteRouteAction struct {
 	CorsPolicy             *HTTPRouteCorsPolicy           `json:"corsPolicy,omitempty"`
 	Destinations           []HTTPRouteDestination         `json:"destinations,omitempty"`

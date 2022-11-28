@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersFinalizedDealsSetReadyToServePathParams:
-    deal: str = field(default=None, metadata={'path_param': { 'field_name': 'deal', 'style': 'simple', 'explode': False }})
+    deal: str = field(metadata={'path_param': { 'field_name': 'deal', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class AuthorizedbuyersmarketplaceBuyersFinalizedDealsSetReadyToServeQueryParams:
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersFinalizedDealsSetReadyToServeSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersFinalizedDealsSetReadyToServeRequest:
-    path_params: AuthorizedbuyersmarketplaceBuyersFinalizedDealsSetReadyToServePathParams = field(default=None)
-    query_params: AuthorizedbuyersmarketplaceBuyersFinalizedDealsSetReadyToServeQueryParams = field(default=None)
+    path_params: AuthorizedbuyersmarketplaceBuyersFinalizedDealsSetReadyToServePathParams = field()
+    query_params: AuthorizedbuyersmarketplaceBuyersFinalizedDealsSetReadyToServeQueryParams = field()
+    security: AuthorizedbuyersmarketplaceBuyersFinalizedDealsSetReadyToServeSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AuthorizedbuyersmarketplaceBuyersFinalizedDealsSetReadyToServeSecurity = field(default=None)
     
 
 @dataclass
 class AuthorizedbuyersmarketplaceBuyersFinalizedDealsSetReadyToServeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     finalized_deal: Optional[shared.FinalizedDeal] = field(default=None)
-    status_code: int = field(default=None)
     

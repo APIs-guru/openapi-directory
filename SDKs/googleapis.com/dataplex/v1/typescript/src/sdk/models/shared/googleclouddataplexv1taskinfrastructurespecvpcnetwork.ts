@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDataplexV1TaskInfrastructureSpecVpcNetwork
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Cloud VPC Network used to run the infrastructure.
 **/
 export class GoogleCloudDataplexV1TaskInfrastructureSpecVpcNetwork extends SpeakeasyBase {
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: string;
 
-  @Metadata({ data: "json, name=networkTags" })
+  @SpeakeasyMetadata({ data: "json, name=networkTags" })
   networkTags?: string[];
 
-  @Metadata({ data: "json, name=subNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=subNetwork" })
   subNetwork?: string;
 }

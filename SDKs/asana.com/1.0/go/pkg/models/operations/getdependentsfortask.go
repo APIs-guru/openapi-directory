@@ -15,13 +15,13 @@ type GetDependentsForTaskQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetDependentsForTask200ApplicationJSON struct {
+	Data []shared.TaskCompact `json:"data,omitempty"`
+}
+
 type GetDependentsForTaskRequest struct {
 	PathParams  GetDependentsForTaskPathParams
 	QueryParams GetDependentsForTaskQueryParams
-}
-
-type GetDependentsForTask200ApplicationJSON struct {
-	Data []shared.TaskCompact `json:"data,omitempty"`
 }
 
 type GetDependentsForTaskResponse struct {

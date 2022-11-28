@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Repo } from "./repo";
+
 
 
 // ListReposResponse
@@ -8,9 +8,9 @@ import { Repo } from "./repo";
  * Response for ListRepos. The size is not set in the returned repositories.
 **/
 export class ListReposResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=repos", elemType: shared.Repo })
+  @SpeakeasyMetadata({ data: "json, name=repos", elemType: Repo })
   repos?: Repo[];
 }

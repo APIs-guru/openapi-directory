@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateDeploymentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeploymentArn" })
+  @SpeakeasyMetadata({ data: "json, name=DeploymentArn" })
   deploymentArn?: string;
 
-  @Metadata({ data: "json, name=DeploymentId" })
+  @SpeakeasyMetadata({ data: "json, name=DeploymentId" })
   deploymentId?: string;
 }

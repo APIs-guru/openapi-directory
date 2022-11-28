@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Artifact
@@ -6,33 +7,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An artifact
 **/
 export class Artifact extends SpeakeasyBase {
-  @Metadata({ data: "json, name=archive_download_url" })
+  @SpeakeasyMetadata({ data: "json, name=archive_download_url" })
   archiveDownloadUrl: string;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=expired" })
+  @SpeakeasyMetadata({ data: "json, name=expired" })
   expired: boolean;
 
-  @Metadata({ data: "json, name=expires_at" })
+  @SpeakeasyMetadata({ data: "json, name=expires_at" })
   expiresAt: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=node_id" })
+  @SpeakeasyMetadata({ data: "json, name=node_id" })
   nodeId: string;
 
-  @Metadata({ data: "json, name=size_in_bytes" })
+  @SpeakeasyMetadata({ data: "json, name=size_in_bytes" })
   sizeInBytes: number;
 
-  @Metadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata({ data: "json, name=updated_at" })
   updatedAt: Date;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

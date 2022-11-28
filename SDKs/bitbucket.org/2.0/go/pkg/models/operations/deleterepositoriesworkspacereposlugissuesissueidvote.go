@@ -10,22 +10,10 @@ type DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDVotePathParams struct {
 	Workspace string `pathParam:"style=simple,explode=false,name=workspace"`
 }
 
-type DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDVoteSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDVoteSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDVoteSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDVoteSecurity struct {
-	Option1 *DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDVoteSecurityOption1 `security:"option"`
-	Option2 *DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDVoteSecurityOption2 `security:"option"`
-	Option3 *DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDVoteSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDVoteRequest struct {

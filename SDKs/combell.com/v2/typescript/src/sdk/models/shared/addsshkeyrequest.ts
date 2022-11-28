@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AddSshKeyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=public_key" })
+  @SpeakeasyMetadata({ data: "json, name=public_key" })
   publicKey?: string;
 }

@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PatchUsersIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class PatchUsersIDRequestBodyAuthenticationMethodEnum(str, Enum):
     PASSWORD = "password"
@@ -20,8 +21,8 @@ class PatchUsersIDRequestBodyAuthenticationMethodEnum(str, Enum):
 
 @dataclass
 class PatchUsersIDRequestBodyAvatarFile:
-    avatar_file: str = field(default=None, metadata={'multipart_form': { 'field_name': 'avatar_file' }})
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
+    avatar_file: str = field(metadata={'multipart_form': { 'field_name': 'avatar_file' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
     
 class PatchUsersIDRequestBodyRequire2faEnum(str, Enum):
     USE_SYSTEM_SETTING = "use_system_setting"
@@ -83,13 +84,13 @@ class PatchUsersIDRequestBody:
 
 @dataclass
 class PatchUsersIDRequest:
-    path_params: PatchUsersIDPathParams = field(default=None)
+    path_params: PatchUsersIDPathParams = field()
     request: Optional[PatchUsersIDRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PatchUsersIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user_entity: Optional[shared.UserEntity] = field(default=None)
     

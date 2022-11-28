@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PullsDismissReviewPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pull_number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pull_number" })
   pullNumber: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=review_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=review_id" })
   reviewId: number;
 }
 
 
 export class PullsDismissReviewRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=event" })
+  @SpeakeasyMetadata({ data: "json, name=event" })
   event?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
 export class PullsDismissReviewRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PullsDismissReviewPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: PullsDismissReviewRequestBody;
 }
 
 
 export class PullsDismissReviewResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pullRequestReview?: shared.PullRequestReview;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationErrorSimple?: shared.ValidationErrorSimple;
 }

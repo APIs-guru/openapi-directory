@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPrivilegesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetPrivilegesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPrivilegesSecurity;
 }
 
 
 export class GetPrivilegesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   sellingPrivileges?: shared.SellingPrivileges;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

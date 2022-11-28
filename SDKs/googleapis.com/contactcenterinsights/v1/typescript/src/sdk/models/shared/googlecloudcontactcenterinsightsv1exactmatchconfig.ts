@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudContactcenterinsightsV1ExactMatchConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Exact match configuration.
 **/
 export class GoogleCloudContactcenterinsightsV1ExactMatchConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caseSensitive" })
+  @SpeakeasyMetadata({ data: "json, name=caseSensitive" })
   caseSensitive?: boolean;
 }

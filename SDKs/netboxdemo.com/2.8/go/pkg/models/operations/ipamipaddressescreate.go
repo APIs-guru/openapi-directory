@@ -5,7 +5,7 @@ import (
 )
 
 type IpamIPAddressesCreateRequest struct {
-	Request shared.WritableIPAddress `request:"mediaType=application/json"`
+	Request shared.WritableIPAddressInput `request:"mediaType=application/json"`
 }
 
 type IpamIPAddressesCreateResponse struct {

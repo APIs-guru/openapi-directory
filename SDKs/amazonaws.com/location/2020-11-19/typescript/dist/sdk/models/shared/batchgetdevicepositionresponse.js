@@ -22,19 +22,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DevicePosition } from "./deviceposition";
+import { BatchGetDevicePositionError } from "./batchgetdevicepositionerror";
 var BatchGetDevicePositionResponse = /** @class */ (function (_super) {
     __extends(BatchGetDevicePositionResponse, _super);
     function BatchGetDevicePositionResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DevicePositions", elemType: shared.DevicePosition }),
+        SpeakeasyMetadata({ data: "json, name=DevicePositions", elemType: DevicePosition }),
         __metadata("design:type", Array)
     ], BatchGetDevicePositionResponse.prototype, "devicePositions", void 0);
     __decorate([
-        Metadata({ data: "json, name=Errors", elemType: shared.BatchGetDevicePositionError }),
+        SpeakeasyMetadata({ data: "json, name=Errors", elemType: BatchGetDevicePositionError }),
         __metadata("design:type", Array)
     ], BatchGetDevicePositionResponse.prototype, "errors", void 0);
     return BatchGetDevicePositionResponse;

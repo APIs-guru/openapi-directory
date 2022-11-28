@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ThresholdTypeEnum } from "./thresholdtypeenum";
+
 
 
 // ActionThreshold
@@ -7,9 +8,9 @@ import { ThresholdTypeEnum } from "./thresholdtypeenum";
  *  The trigger threshold of the action. 
 **/
 export class ActionThreshold extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActionThresholdType" })
+  @SpeakeasyMetadata({ data: "json, name=ActionThresholdType" })
   actionThresholdType: ThresholdTypeEnum;
 
-  @Metadata({ data: "json, name=ActionThresholdValue" })
+  @SpeakeasyMetadata({ data: "json, name=ActionThresholdValue" })
   actionThresholdValue: number;
 }

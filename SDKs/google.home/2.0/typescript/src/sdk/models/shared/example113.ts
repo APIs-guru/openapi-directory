@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Example113 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ssid" })
+  @SpeakeasyMetadata({ data: "json, name=ssid" })
   ssid: string;
 
-  @Metadata({ data: "json, name=wpa_auth" })
+  @SpeakeasyMetadata({ data: "json, name=wpa_auth" })
   wpaAuth: number;
 
-  @Metadata({ data: "json, name=wpa_cipher" })
+  @SpeakeasyMetadata({ data: "json, name=wpa_cipher" })
   wpaCipher: number;
 
-  @Metadata({ data: "json, name=wpa_id" })
+  @SpeakeasyMetadata({ data: "json, name=wpa_id" })
   wpaId: number;
 }

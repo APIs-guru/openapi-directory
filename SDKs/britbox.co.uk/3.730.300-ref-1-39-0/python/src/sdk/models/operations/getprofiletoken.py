@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -11,20 +12,20 @@ class GetProfileTokenQueryParams:
 
 @dataclass
 class GetProfileTokenSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetProfileTokenRequest:
-    query_params: GetProfileTokenQueryParams = field(default=None)
-    request: shared.ProfileTokenRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: GetProfileTokenSecurity = field(default=None)
+    query_params: GetProfileTokenQueryParams = field()
+    request: shared.ProfileTokenRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: GetProfileTokenSecurity = field()
     
 
 @dataclass
 class GetProfileTokenResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_tokens: Optional[List[shared.AccessToken]] = field(default=None)
-    content_type: str = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

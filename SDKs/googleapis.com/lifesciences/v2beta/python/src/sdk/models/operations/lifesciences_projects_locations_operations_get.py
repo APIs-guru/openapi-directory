@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class LifesciencesProjectsLocationsOperationsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class LifesciencesProjectsLocationsOperationsGetQueryParams:
 
 @dataclass
 class LifesciencesProjectsLocationsOperationsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class LifesciencesProjectsLocationsOperationsGetRequest:
-    path_params: LifesciencesProjectsLocationsOperationsGetPathParams = field(default=None)
-    query_params: LifesciencesProjectsLocationsOperationsGetQueryParams = field(default=None)
-    security: LifesciencesProjectsLocationsOperationsGetSecurity = field(default=None)
+    path_params: LifesciencesProjectsLocationsOperationsGetPathParams = field()
+    query_params: LifesciencesProjectsLocationsOperationsGetQueryParams = field()
+    security: LifesciencesProjectsLocationsOperationsGetSecurity = field()
     
 
 @dataclass
 class LifesciencesProjectsLocationsOperationsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

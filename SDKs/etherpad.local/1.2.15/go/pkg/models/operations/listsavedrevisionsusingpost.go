@@ -4,10 +4,6 @@ type ListSavedRevisionsUsingPostQueryParams struct {
 	PadID *string `queryParam:"style=form,explode=true,name=padID"`
 }
 
-type ListSavedRevisionsUsingPostRequest struct {
-	QueryParams ListSavedRevisionsUsingPostQueryParams
-}
-
 type ListSavedRevisionsUsingPost200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -30,6 +26,10 @@ type ListSavedRevisionsUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type ListSavedRevisionsUsingPostRequest struct {
+	QueryParams ListSavedRevisionsUsingPostQueryParams
 }
 
 type ListSavedRevisionsUsingPostResponse struct {

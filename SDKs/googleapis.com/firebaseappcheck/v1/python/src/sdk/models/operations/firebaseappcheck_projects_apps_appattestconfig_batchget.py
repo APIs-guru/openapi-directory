@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirebaseappcheckProjectsAppsAppAttestConfigBatchGetPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class FirebaseappcheckProjectsAppsAppAttestConfigBatchGetQueryParams:
 
 @dataclass
 class FirebaseappcheckProjectsAppsAppAttestConfigBatchGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebaseappcheckProjectsAppsAppAttestConfigBatchGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class FirebaseappcheckProjectsAppsAppAttestConfigBatchGetSecurity:
 
 @dataclass
 class FirebaseappcheckProjectsAppsAppAttestConfigBatchGetRequest:
-    path_params: FirebaseappcheckProjectsAppsAppAttestConfigBatchGetPathParams = field(default=None)
-    query_params: FirebaseappcheckProjectsAppsAppAttestConfigBatchGetQueryParams = field(default=None)
-    security: FirebaseappcheckProjectsAppsAppAttestConfigBatchGetSecurity = field(default=None)
+    path_params: FirebaseappcheckProjectsAppsAppAttestConfigBatchGetPathParams = field()
+    query_params: FirebaseappcheckProjectsAppsAppAttestConfigBatchGetQueryParams = field()
+    security: FirebaseappcheckProjectsAppsAppAttestConfigBatchGetSecurity = field()
     
 
 @dataclass
 class FirebaseappcheckProjectsAppsAppAttestConfigBatchGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_firebase_appcheck_v1_batch_get_app_attest_configs_response: Optional[shared.GoogleFirebaseAppcheckV1BatchGetAppAttestConfigsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

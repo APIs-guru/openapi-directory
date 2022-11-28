@@ -20,6 +20,8 @@ const (
 	ScorecardChartSpecNumberFormatSourceEnumCustom                           ScorecardChartSpecNumberFormatSourceEnum = "CUSTOM"
 )
 
+// ScorecardChartSpec
+// A scorecard chart. Scorecard charts are used to highlight key performance indicators, known as KPIs, on the spreadsheet. A scorecard chart can represent things like total sales, average cost, or a top selling item. You can specify a single data value, or aggregate over a range of data. Percentage or absolute difference from a baseline value can be highlighted, like changes over time.
 type ScorecardChartSpec struct {
 	AggregateType       *ScorecardChartSpecAggregateTypeEnum      `json:"aggregateType,omitempty"`
 	BaselineValueData   *ChartData                                `json:"baselineValueData,omitempty"`

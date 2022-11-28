@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetVehicleSeenVehicleSeenGetQueryParams = /** @class */ (function (_super) {
     __extends(GetVehicleSeenVehicleSeenGetQueryParams, _super);
@@ -30,15 +30,15 @@ var GetVehicleSeenVehicleSeenGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=afterDate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=afterDate" }),
         __metadata("design:type", Date)
     ], GetVehicleSeenVehicleSeenGetQueryParams.prototype, "afterDate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" }),
         __metadata("design:type", String)
     ], GetVehicleSeenVehicleSeenGetQueryParams.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=vin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=vin" }),
         __metadata("design:type", String)
     ], GetVehicleSeenVehicleSeenGetQueryParams.prototype, "vin", void 0);
     return GetVehicleSeenVehicleSeenGetQueryParams;
@@ -50,7 +50,7 @@ var GetVehicleSeenVehicleSeenGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetVehicleSeenVehicleSeenGetQueryParams)
     ], GetVehicleSeenVehicleSeenGetRequest.prototype, "queryParams", void 0);
     return GetVehicleSeenVehicleSeenGetRequest;
@@ -62,19 +62,19 @@ var GetVehicleSeenVehicleSeenGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.BooleanResp)
     ], GetVehicleSeenVehicleSeenGetResponse.prototype, "booleanResp", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetVehicleSeenVehicleSeenGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], GetVehicleSeenVehicleSeenGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetVehicleSeenVehicleSeenGetResponse.prototype, "statusCode", void 0);
     return GetVehicleSeenVehicleSeenGetResponse;

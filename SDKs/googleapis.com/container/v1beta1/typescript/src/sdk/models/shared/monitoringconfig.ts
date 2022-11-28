@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MonitoringComponentConfig } from "./monitoringcomponentconfig";
 import { ManagedPrometheusConfig } from "./managedprometheusconfig";
+
 
 
 // MonitoringConfig
@@ -8,9 +9,9 @@ import { ManagedPrometheusConfig } from "./managedprometheusconfig";
  * MonitoringConfig is cluster monitoring configuration.
 **/
 export class MonitoringConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=componentConfig" })
+  @SpeakeasyMetadata({ data: "json, name=componentConfig" })
   componentConfig?: MonitoringComponentConfig;
 
-  @Metadata({ data: "json, name=managedPrometheusConfig" })
+  @SpeakeasyMetadata({ data: "json, name=managedPrometheusConfig" })
   managedPrometheusConfig?: ManagedPrometheusConfig;
 }

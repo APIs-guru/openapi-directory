@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatalabelingV1beta1AnnotationSpec } from "./googleclouddatalabelingv1beta1annotationspec";
+
 
 
 // GoogleCloudDatalabelingV1beta1ImageClassificationAnnotation
@@ -7,6 +8,6 @@ import { GoogleCloudDatalabelingV1beta1AnnotationSpec } from "./googleclouddatal
  * Image classification annotation definition.
 **/
 export class GoogleCloudDatalabelingV1beta1ImageClassificationAnnotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotationSpec" })
+  @SpeakeasyMetadata({ data: "json, name=annotationSpec" })
   annotationSpec?: GoogleCloudDatalabelingV1beta1AnnotationSpec;
 }

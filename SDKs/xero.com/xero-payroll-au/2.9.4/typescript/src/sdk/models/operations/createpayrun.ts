@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreatePayRunHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Xero-Tenant-Id" })
   xeroTenantId: string;
 }
 
 
 export class CreatePayRunSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class CreatePayRunRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreatePayRunHeaders;
 
-  @Metadata({ data: "request, media_type=application/json", elemType: shared.PayRun })
-  request: shared.PayRun[];
+  @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.PayRunInput })
+  request: shared.PayRunInput[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreatePayRunSecurity;
 }
 
 
 export class CreatePayRunResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   payRuns?: shared.PayRuns;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

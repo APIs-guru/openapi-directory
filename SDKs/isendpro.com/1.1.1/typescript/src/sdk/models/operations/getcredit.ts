@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetCreditCreditEnum {
-    One = "1"
-,    Two = "2"
+    One = "1",
+    Two = "2"
 }
 
 
 export class GetCreditQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=credit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=credit" })
   credit: GetCreditCreditEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=keyid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=keyid" })
   keyid: string;
 }
 
 
 export class GetCreditRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCreditQueryParams;
 }
 
 
 export class GetCreditResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   creditResponse?: shared.CreditResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   erreur?: shared.Erreur;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

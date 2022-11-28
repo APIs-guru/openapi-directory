@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // IpAllocationPolicy
 /**
  * Configuration for controlling how IPs are allocated in the GKE cluster.
@@ -33,23 +33,23 @@ var IpAllocationPolicy = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clusterIpv4CidrBlock" }),
+        SpeakeasyMetadata({ data: "json, name=clusterIpv4CidrBlock" }),
         __metadata("design:type", String)
     ], IpAllocationPolicy.prototype, "clusterIpv4CidrBlock", void 0);
     __decorate([
-        Metadata({ data: "json, name=clusterSecondaryRangeName" }),
+        SpeakeasyMetadata({ data: "json, name=clusterSecondaryRangeName" }),
         __metadata("design:type", String)
     ], IpAllocationPolicy.prototype, "clusterSecondaryRangeName", void 0);
     __decorate([
-        Metadata({ data: "json, name=servicesIpv4CidrBlock" }),
+        SpeakeasyMetadata({ data: "json, name=servicesIpv4CidrBlock" }),
         __metadata("design:type", String)
     ], IpAllocationPolicy.prototype, "servicesIpv4CidrBlock", void 0);
     __decorate([
-        Metadata({ data: "json, name=servicesSecondaryRangeName" }),
+        SpeakeasyMetadata({ data: "json, name=servicesSecondaryRangeName" }),
         __metadata("design:type", String)
     ], IpAllocationPolicy.prototype, "servicesSecondaryRangeName", void 0);
     __decorate([
-        Metadata({ data: "json, name=useIpAliases" }),
+        SpeakeasyMetadata({ data: "json, name=useIpAliases" }),
         __metadata("design:type", Boolean)
     ], IpAllocationPolicy.prototype, "useIpAliases", void 0);
     return IpAllocationPolicy;

@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteSetupV1LocationsIdDeleteallimagesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class DeleteSetupV1LocationsIdDeleteallimagesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=uppercase" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uppercase" })
   uppercase?: boolean;
 }
 
 
 export class DeleteSetupV1LocationsIdDeleteallimagesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteSetupV1LocationsIdDeleteallimagesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DeleteSetupV1LocationsIdDeleteallimagesQueryParams;
 }
 
 
 export class DeleteSetupV1LocationsIdDeleteallimagesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteSetupV1LocationsIdDeleteallimages200ApplicationJsonBoolean?: boolean;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

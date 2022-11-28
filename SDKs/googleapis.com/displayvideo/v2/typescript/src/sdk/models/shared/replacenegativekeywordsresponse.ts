@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NegativeKeyword } from "./negativekeyword";
+
 
 
 // ReplaceNegativeKeywordsResponse
@@ -8,6 +8,6 @@ import { NegativeKeyword } from "./negativekeyword";
  * Response message for NegativeKeywordService.ReplaceNegativeKeywords.
 **/
 export class ReplaceNegativeKeywordsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=negativeKeywords", elemType: shared.NegativeKeyword })
+  @SpeakeasyMetadata({ data: "json, name=negativeKeywords", elemType: NegativeKeyword })
   negativeKeywords?: NegativeKeyword[];
 }

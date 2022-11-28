@@ -1,5 +1,7 @@
 package shared
 
+// ColumnMetadata
+// The properties (metadata) of a column.
 type ColumnMetadata struct {
 	ColumnDefault   *string `json:"columnDefault,omitempty"`
 	IsCaseSensitive *bool   `json:"isCaseSensitive,omitempty"`

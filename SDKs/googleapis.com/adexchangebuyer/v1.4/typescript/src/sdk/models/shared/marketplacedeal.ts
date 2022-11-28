@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PrivateData } from "./privatedata";
 import { DealServingMetadata } from "./dealservingmetadata";
 import { DeliveryControl } from "./deliverycontrol";
@@ -8,86 +7,87 @@ import { SharedTargeting } from "./sharedtargeting";
 import { DealTerms } from "./dealterms";
 
 
+
 // MarketplaceDeal
 /** 
  * A proposal can contain multiple deals. A deal contains the terms and targeting information that is used for serving.
 **/
 export class MarketplaceDeal extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buyerPrivateData" })
+  @SpeakeasyMetadata({ data: "json, name=buyerPrivateData" })
   buyerPrivateData?: PrivateData;
 
-  @Metadata({ data: "json, name=creationTimeMs" })
+  @SpeakeasyMetadata({ data: "json, name=creationTimeMs" })
   creationTimeMs?: string;
 
-  @Metadata({ data: "json, name=creativePreApprovalPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=creativePreApprovalPolicy" })
   creativePreApprovalPolicy?: string;
 
-  @Metadata({ data: "json, name=creativeSafeFrameCompatibility" })
+  @SpeakeasyMetadata({ data: "json, name=creativeSafeFrameCompatibility" })
   creativeSafeFrameCompatibility?: string;
 
-  @Metadata({ data: "json, name=dealId" })
+  @SpeakeasyMetadata({ data: "json, name=dealId" })
   dealId?: string;
 
-  @Metadata({ data: "json, name=dealServingMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=dealServingMetadata" })
   dealServingMetadata?: DealServingMetadata;
 
-  @Metadata({ data: "json, name=deliveryControl" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryControl" })
   deliveryControl?: DeliveryControl;
 
-  @Metadata({ data: "json, name=externalDealId" })
+  @SpeakeasyMetadata({ data: "json, name=externalDealId" })
   externalDealId?: string;
 
-  @Metadata({ data: "json, name=flightEndTimeMs" })
+  @SpeakeasyMetadata({ data: "json, name=flightEndTimeMs" })
   flightEndTimeMs?: string;
 
-  @Metadata({ data: "json, name=flightStartTimeMs" })
+  @SpeakeasyMetadata({ data: "json, name=flightStartTimeMs" })
   flightStartTimeMs?: string;
 
-  @Metadata({ data: "json, name=inventoryDescription" })
+  @SpeakeasyMetadata({ data: "json, name=inventoryDescription" })
   inventoryDescription?: string;
 
-  @Metadata({ data: "json, name=isRfpTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=isRfpTemplate" })
   isRfpTemplate?: boolean;
 
-  @Metadata({ data: "json, name=isSetupComplete" })
+  @SpeakeasyMetadata({ data: "json, name=isSetupComplete" })
   isSetupComplete?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=lastUpdateTimeMs" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdateTimeMs" })
   lastUpdateTimeMs?: string;
 
-  @Metadata({ data: "json, name=makegoodRequestedReason" })
+  @SpeakeasyMetadata({ data: "json, name=makegoodRequestedReason" })
   makegoodRequestedReason?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=productRevisionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=productRevisionNumber" })
   productRevisionNumber?: string;
 
-  @Metadata({ data: "json, name=programmaticCreativeSource" })
+  @SpeakeasyMetadata({ data: "json, name=programmaticCreativeSource" })
   programmaticCreativeSource?: string;
 
-  @Metadata({ data: "json, name=proposalId" })
+  @SpeakeasyMetadata({ data: "json, name=proposalId" })
   proposalId?: string;
 
-  @Metadata({ data: "json, name=sellerContacts", elemType: shared.ContactInformation })
+  @SpeakeasyMetadata({ data: "json, name=sellerContacts", elemType: ContactInformation })
   sellerContacts?: ContactInformation[];
 
-  @Metadata({ data: "json, name=sharedTargetings", elemType: shared.SharedTargeting })
+  @SpeakeasyMetadata({ data: "json, name=sharedTargetings", elemType: SharedTargeting })
   sharedTargetings?: SharedTargeting[];
 
-  @Metadata({ data: "json, name=syndicationProduct" })
+  @SpeakeasyMetadata({ data: "json, name=syndicationProduct" })
   syndicationProduct?: string;
 
-  @Metadata({ data: "json, name=terms" })
+  @SpeakeasyMetadata({ data: "json, name=terms" })
   terms?: DealTerms;
 
-  @Metadata({ data: "json, name=webPropertyCode" })
+  @SpeakeasyMetadata({ data: "json, name=webPropertyCode" })
   webPropertyCode?: string;
 }

@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PrismaCpeCode } from "./prismacpecode";
 
+
 export enum PrismaConfigPrismaTypeEnum {
-    PrismaTypeUnspecified = "PRISMA_TYPE_UNSPECIFIED"
-,    PrismaTypeDisplay = "PRISMA_TYPE_DISPLAY"
-,    PrismaTypeSearch = "PRISMA_TYPE_SEARCH"
-,    PrismaTypeVideo = "PRISMA_TYPE_VIDEO"
-,    PrismaTypeAudio = "PRISMA_TYPE_AUDIO"
-,    PrismaTypeSocial = "PRISMA_TYPE_SOCIAL"
-,    PrismaTypeFee = "PRISMA_TYPE_FEE"
+    PrismaTypeUnspecified = "PRISMA_TYPE_UNSPECIFIED",
+    PrismaTypeDisplay = "PRISMA_TYPE_DISPLAY",
+    PrismaTypeSearch = "PRISMA_TYPE_SEARCH",
+    PrismaTypeVideo = "PRISMA_TYPE_VIDEO",
+    PrismaTypeAudio = "PRISMA_TYPE_AUDIO",
+    PrismaTypeSocial = "PRISMA_TYPE_SOCIAL",
+    PrismaTypeFee = "PRISMA_TYPE_FEE"
 }
 
 
@@ -17,12 +18,12 @@ export enum PrismaConfigPrismaTypeEnum {
  * Settings specific to the Mediaocean Prisma tool.
 **/
 export class PrismaConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=prismaCpeCode" })
+  @SpeakeasyMetadata({ data: "json, name=prismaCpeCode" })
   prismaCpeCode?: PrismaCpeCode;
 
-  @Metadata({ data: "json, name=prismaType" })
+  @SpeakeasyMetadata({ data: "json, name=prismaType" })
   prismaType?: PrismaConfigPrismaTypeEnum;
 
-  @Metadata({ data: "json, name=supplier" })
+  @SpeakeasyMetadata({ data: "json, name=supplier" })
   supplier?: string;
 }

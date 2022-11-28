@@ -1,39 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Template } from "./template";
 
 
+
 export class TemplatesResponseError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class TemplatesResponsePagination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset?: number;
 
-  @Metadata({ data: "json, name=totalCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalCount" })
   totalCount?: number;
 }
 
 
 export class TemplatesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.Template })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: Template })
   data?: Template[];
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: TemplatesResponseError;
 
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination?: TemplatesResponsePagination;
 
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: boolean;
 }

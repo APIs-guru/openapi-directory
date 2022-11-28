@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TrackTargetedCountry } from "./tracktargetedcountry";
+
 
 
 // TrackCountryAvailability
@@ -8,12 +8,12 @@ import { TrackTargetedCountry } from "./tracktargetedcountry";
  * Resource for per-track country availability information.
 **/
 export class TrackCountryAvailability extends SpeakeasyBase {
-  @Metadata({ data: "json, name=countries", elemType: shared.TrackTargetedCountry })
+  @SpeakeasyMetadata({ data: "json, name=countries", elemType: TrackTargetedCountry })
   countries?: TrackTargetedCountry[];
 
-  @Metadata({ data: "json, name=restOfWorld" })
+  @SpeakeasyMetadata({ data: "json, name=restOfWorld" })
   restOfWorld?: boolean;
 
-  @Metadata({ data: "json, name=syncWithProduction" })
+  @SpeakeasyMetadata({ data: "json, name=syncWithProduction" })
   syncWithProduction?: boolean;
 }

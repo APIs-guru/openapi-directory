@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SetReadCommunityPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
   agentNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=read" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=read" })
   read: string;
 }
 
 
 export class SetReadCommunityRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SetReadCommunityPathParams;
 }
 
 
 export class SetReadCommunityResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   setReadCommunity200ApplicationJsonString?: string;
 }

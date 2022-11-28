@@ -1,6 +1,7 @@
 
 
+
 export enum LongTermPricingTypeEnum {
-    OneYear = "OneYear"
-,    ThreeYear = "ThreeYear"
+    OneYear = "OneYear",
+    ThreeYear = "ThreeYear"
 }

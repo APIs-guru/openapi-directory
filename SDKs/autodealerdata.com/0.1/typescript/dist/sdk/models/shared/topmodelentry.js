@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var TopModelEntry = /** @class */ (function (_super) {
     __extends(TopModelEntry, _super);
     function TopModelEntry() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=brandMarketShare" }),
+        SpeakeasyMetadata({ data: "json, name=brandMarketShare" }),
         __metadata("design:type", Number)
     ], TopModelEntry.prototype, "brandMarketShare", void 0);
     __decorate([
-        Metadata({ data: "json, name=brandName" }),
+        SpeakeasyMetadata({ data: "json, name=brandName" }),
         __metadata("design:type", String)
     ], TopModelEntry.prototype, "brandName", void 0);
     __decorate([
-        Metadata({ data: "json, name=modelName" }),
+        SpeakeasyMetadata({ data: "json, name=modelName" }),
         __metadata("design:type", String)
     ], TopModelEntry.prototype, "modelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=percentOfBrandSales" }),
+        SpeakeasyMetadata({ data: "json, name=percentOfBrandSales" }),
         __metadata("design:type", Number)
     ], TopModelEntry.prototype, "percentOfBrandSales", void 0);
     __decorate([
-        Metadata({ data: "json, name=percentOfTopSales" }),
+        SpeakeasyMetadata({ data: "json, name=percentOfTopSales" }),
         __metadata("design:type", Number)
     ], TopModelEntry.prototype, "percentOfTopSales", void 0);
     return TopModelEntry;

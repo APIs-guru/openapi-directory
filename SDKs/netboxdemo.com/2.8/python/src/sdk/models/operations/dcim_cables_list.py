@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -49,23 +50,23 @@ class DcimCablesListQueryParams:
     type_n: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'type__n', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class DcimCablesListRequest:
-    query_params: DcimCablesListQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class DcimCablesList200ApplicationJSON:
-    count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count' }})
-    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next' }})
-    previous: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'previous' }})
-    results: List[shared.Cable] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    count: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('count') }})
+    results: List[shared.Cable] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
+    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('next') }})
+    previous: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('previous') }})
+    
+
+@dataclass
+class DcimCablesListRequest:
+    query_params: DcimCablesListQueryParams = field()
     
 
 @dataclass
 class DcimCablesListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dcim_cables_list_200_application_json_object: Optional[DcimCablesList200ApplicationJSON] = field(default=None)
     

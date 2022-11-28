@@ -1,5 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldMetadata } from "./fieldmetadata";
+import { FieldMetadataInput } from "./fieldmetadata";
+
 
 
 // BraggingRights
@@ -7,9 +9,22 @@ import { FieldMetadata } from "./fieldmetadata";
  * **DEPRECATED**: No data will be returned A person's bragging rights.
 **/
 export class BraggingRights extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: FieldMetadata;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
+  value?: string;
+}
+
+
+// BraggingRightsInput
+/** 
+ * **DEPRECATED**: No data will be returned A person's bragging rights.
+**/
+export class BraggingRightsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
+  metadata?: FieldMetadataInput;
+
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

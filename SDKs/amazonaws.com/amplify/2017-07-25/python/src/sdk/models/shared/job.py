@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import step
-from . import jobsummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Job:
-    steps: List[step.Step] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'steps' }})
-    summary: jobsummary.JobSummary = field(default=None, metadata={'dataclasses_json': { 'field_name': 'summary' }})
+    r"""Job
+     Describes an execution job for an Amplify app. 
+    """
+    
+    steps: List[Step] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('steps') }})
+    summary: JobSummary = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('summary') }})
     

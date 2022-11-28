@@ -1,29 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SearchResultTextMatchesMatches extends SpeakeasyBase {
-  @Metadata({ data: "json, name=indices" })
+  @SpeakeasyMetadata({ data: "json, name=indices" })
   indices?: number[];
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }
 
 
 export class SearchResultTextMatches extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fragment" })
+  @SpeakeasyMetadata({ data: "json, name=fragment" })
   fragment?: string;
 
-  @Metadata({ data: "json, name=matches", elemType: shared.SearchResultTextMatchesMatches })
+  @SpeakeasyMetadata({ data: "json, name=matches", elemType: SearchResultTextMatchesMatches })
   matches?: SearchResultTextMatchesMatches[];
 
-  @Metadata({ data: "json, name=object_type" })
+  @SpeakeasyMetadata({ data: "json, name=object_type" })
   objectType?: string;
 
-  @Metadata({ data: "json, name=object_url" })
+  @SpeakeasyMetadata({ data: "json, name=object_url" })
   objectUrl?: string;
 
-  @Metadata({ data: "json, name=property" })
+  @SpeakeasyMetadata({ data: "json, name=property" })
   property?: string;
 }

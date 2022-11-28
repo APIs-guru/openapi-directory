@@ -41,7 +41,7 @@ type DialogflowProjectsLocationsKnowledgeBasesDocumentsCreateSecurity struct {
 type DialogflowProjectsLocationsKnowledgeBasesDocumentsCreateRequest struct {
 	PathParams  DialogflowProjectsLocationsKnowledgeBasesDocumentsCreatePathParams
 	QueryParams DialogflowProjectsLocationsKnowledgeBasesDocumentsCreateQueryParams
-	Request     *shared.GoogleCloudDialogflowV2beta1Document `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudDialogflowV2beta1DocumentInput `request:"mediaType=application/json"`
 	Security    DialogflowProjectsLocationsKnowledgeBasesDocumentsCreateSecurity
 }
 

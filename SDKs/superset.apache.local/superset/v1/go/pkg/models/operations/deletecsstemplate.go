@@ -12,11 +12,6 @@ type DeleteCSSTemplateSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type DeleteCSSTemplateRequest struct {
-	QueryParams DeleteCSSTemplateQueryParams
-	Security    DeleteCSSTemplateSecurity
-}
-
 type DeleteCSSTemplate200ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -35,6 +30,11 @@ type DeleteCSSTemplate422ApplicationJSON struct {
 
 type DeleteCSSTemplate500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type DeleteCSSTemplateRequest struct {
+	QueryParams DeleteCSSTemplateQueryParams
+	Security    DeleteCSSTemplateSecurity
 }
 
 type DeleteCSSTemplateResponse struct {

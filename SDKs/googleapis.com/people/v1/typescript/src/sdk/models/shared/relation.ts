@@ -1,5 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldMetadata } from "./fieldmetadata";
+import { FieldMetadataInput } from "./fieldmetadata";
+
 
 
 // Relation
@@ -7,15 +9,31 @@ import { FieldMetadata } from "./fieldmetadata";
  * A person's relation to another person.
 **/
 export class Relation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=formattedType" })
+  @SpeakeasyMetadata({ data: "json, name=formattedType" })
   formattedType?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: FieldMetadata;
 
-  @Metadata({ data: "json, name=person" })
+  @SpeakeasyMetadata({ data: "json, name=person" })
   person?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: string;
+}
+
+
+// RelationInput
+/** 
+ * A person's relation to another person.
+**/
+export class RelationInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
+  metadata?: FieldMetadataInput;
+
+  @SpeakeasyMetadata({ data: "json, name=person" })
+  person?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

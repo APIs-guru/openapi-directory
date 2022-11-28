@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PensionPensionPensionablePayCodes
@@ -6,19 +7,19 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The pensions' pensionable pay codes
 **/
 export class PensionPensionPensionablePayCodes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PayCode" })
+  @SpeakeasyMetadata({ data: "json, name=PayCode" })
   payCode?: string[];
 }
 
 export enum PensionPensionProRataMethodEnum {
-    NotSet = "NotSet"
-,    Annual260Days = "Annual260Days"
-,    Annual365Days = "Annual365Days"
-,    AnnualQualifyingDays = "AnnualQualifyingDays"
-,    DaysPerCalendarMonth = "DaysPerCalendarMonth"
-,    DaysPerTaxPeriod = "DaysPerTaxPeriod"
-,    WorkingDaysPerCalendarMonth = "WorkingDaysPerCalendarMonth"
-,    WeekDaysPerCalendarMonth = "WeekDaysPerCalendarMonth"
+    NotSet = "NotSet",
+    Annual260Days = "Annual260Days",
+    Annual365Days = "Annual365Days",
+    AnnualQualifyingDays = "AnnualQualifyingDays",
+    DaysPerCalendarMonth = "DaysPerCalendarMonth",
+    DaysPerTaxPeriod = "DaysPerTaxPeriod",
+    WorkingDaysPerCalendarMonth = "WorkingDaysPerCalendarMonth",
+    WeekDaysPerCalendarMonth = "WeekDaysPerCalendarMonth"
 }
 
 
@@ -27,125 +28,125 @@ export enum PensionPensionProRataMethodEnum {
  * The pensions' qualifying pay codes
 **/
 export class PensionPensionQualifyingPayCodes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PayCode" })
+  @SpeakeasyMetadata({ data: "json, name=PayCode" })
   payCode?: string[];
 }
 
 export enum PensionPensionRasRoundingOverrideEnum {
-    NotSet = "NotSet"
-,    PennyUp = "PennyUp"
-,    PennyDown = "PennyDown"
-,    Bankers = "Bankers"
-,    FiveUp = "FiveUp"
-,    FiveDown = "FiveDown"
-,    Floor = "Floor"
-,    Ceiling = "Ceiling"
+    NotSet = "NotSet",
+    PennyUp = "PennyUp",
+    PennyDown = "PennyDown",
+    Bankers = "Bankers",
+    FiveUp = "FiveUp",
+    FiveDown = "FiveDown",
+    Floor = "Floor",
+    Ceiling = "Ceiling"
 }
 
 export enum PensionPensionRoundingOptionEnum {
-    NotSet = "NotSet"
-,    PennyUp = "PennyUp"
-,    PennyDown = "PennyDown"
-,    Bankers = "Bankers"
-,    FiveUp = "FiveUp"
-,    FiveDown = "FiveDown"
-,    Floor = "Floor"
-,    Ceiling = "Ceiling"
+    NotSet = "NotSet",
+    PennyUp = "PennyUp",
+    PennyDown = "PennyDown",
+    Bankers = "Bankers",
+    FiveUp = "FiveUp",
+    FiveDown = "FiveDown",
+    Floor = "Floor",
+    Ceiling = "Ceiling"
 }
 
 export enum PensionPensionTaxationMethodEnum {
-    NotSet = "NotSet"
-,    NetBased = "NetBased"
-,    ReliefAtSource = "ReliefAtSource"
-,    TaxReliefExcluded = "TaxReliefExcluded"
+    NotSet = "NotSet",
+    NetBased = "NetBased",
+    ReliefAtSource = "ReliefAtSource",
+    TaxReliefExcluded = "TaxReliefExcluded"
 }
 
 
 export class PensionPension extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AECompatible" })
+  @SpeakeasyMetadata({ data: "json, name=AECompatible" })
   aeCompatible?: boolean;
 
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: string;
 
-  @Metadata({ data: "json, name=ContributionDeductionDay" })
+  @SpeakeasyMetadata({ data: "json, name=ContributionDeductionDay" })
   contributionDeductionDay?: number;
 
-  @Metadata({ data: "json, name=EffectiveDate" })
+  @SpeakeasyMetadata({ data: "json, name=EffectiveDate" })
   effectiveDate?: Date;
 
-  @Metadata({ data: "json, name=EmployeeContributionCash" })
+  @SpeakeasyMetadata({ data: "json, name=EmployeeContributionCash" })
   employeeContributionCash?: number;
 
-  @Metadata({ data: "json, name=EmployeeContributionPercent" })
+  @SpeakeasyMetadata({ data: "json, name=EmployeeContributionPercent" })
   employeeContributionPercent?: number;
 
-  @Metadata({ data: "json, name=EmployerContributionCash" })
+  @SpeakeasyMetadata({ data: "json, name=EmployerContributionCash" })
   employerContributionCash?: number;
 
-  @Metadata({ data: "json, name=EmployerContributionPercent" })
+  @SpeakeasyMetadata({ data: "json, name=EmployerContributionPercent" })
   employerContributionPercent?: number;
 
-  @Metadata({ data: "json, name=EmployerNiSaving" })
+  @SpeakeasyMetadata({ data: "json, name=EmployerNiSaving" })
   employerNiSaving?: boolean;
 
-  @Metadata({ data: "json, name=EmployerNiSavingPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=EmployerNiSavingPercentage" })
   employerNiSavingPercentage?: number;
 
-  @Metadata({ data: "json, name=Group" })
+  @SpeakeasyMetadata({ data: "json, name=Group" })
   group?: string;
 
-  @Metadata({ data: "json, name=LowerThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=LowerThreshold" })
   lowerThreshold?: number;
 
-  @Metadata({ data: "json, name=MetaData" })
+  @SpeakeasyMetadata({ data: "json, name=MetaData" })
   metaData?: Map<string, any>;
 
-  @Metadata({ data: "json, name=PensionablePayCodes" })
+  @SpeakeasyMetadata({ data: "json, name=PensionablePayCodes" })
   pensionablePayCodes?: PensionPensionPensionablePayCodes;
 
-  @Metadata({ data: "json, name=ProRataMethod" })
+  @SpeakeasyMetadata({ data: "json, name=ProRataMethod" })
   proRataMethod?: PensionPensionProRataMethodEnum;
 
-  @Metadata({ data: "json, name=ProviderEmployerRef" })
+  @SpeakeasyMetadata({ data: "json, name=ProviderEmployerRef" })
   providerEmployerRef?: string;
 
-  @Metadata({ data: "json, name=ProviderName" })
+  @SpeakeasyMetadata({ data: "json, name=ProviderName" })
   providerName?: string;
 
-  @Metadata({ data: "json, name=QualifyingPayCodes" })
+  @SpeakeasyMetadata({ data: "json, name=QualifyingPayCodes" })
   qualifyingPayCodes?: PensionPensionQualifyingPayCodes;
 
-  @Metadata({ data: "json, name=RasRoundingOverride" })
+  @SpeakeasyMetadata({ data: "json, name=RasRoundingOverride" })
   rasRoundingOverride?: PensionPensionRasRoundingOverrideEnum;
 
-  @Metadata({ data: "json, name=Revision" })
+  @SpeakeasyMetadata({ data: "json, name=Revision" })
   revision?: number;
 
-  @Metadata({ data: "json, name=RoundingOption" })
+  @SpeakeasyMetadata({ data: "json, name=RoundingOption" })
   roundingOption?: PensionPensionRoundingOptionEnum;
 
-  @Metadata({ data: "json, name=SalarySacrifice" })
+  @SpeakeasyMetadata({ data: "json, name=SalarySacrifice" })
   salarySacrifice?: boolean;
 
-  @Metadata({ data: "json, name=SchemeName" })
+  @SpeakeasyMetadata({ data: "json, name=SchemeName" })
   schemeName?: string;
 
-  @Metadata({ data: "json, name=SubGroup" })
+  @SpeakeasyMetadata({ data: "json, name=SubGroup" })
   subGroup?: string;
 
-  @Metadata({ data: "json, name=TaxationMethod" })
+  @SpeakeasyMetadata({ data: "json, name=TaxationMethod" })
   taxationMethod?: PensionPensionTaxationMethodEnum;
 
-  @Metadata({ data: "json, name=UpperThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=UpperThreshold" })
   upperThreshold?: number;
 
-  @Metadata({ data: "json, name=UseAEThresholds" })
+  @SpeakeasyMetadata({ data: "json, name=UseAEThresholds" })
   useAeThresholds?: boolean;
 }
 
 
 export class Pension extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Pension" })
+  @SpeakeasyMetadata({ data: "json, name=Pension" })
   pension?: PensionPension;
 }

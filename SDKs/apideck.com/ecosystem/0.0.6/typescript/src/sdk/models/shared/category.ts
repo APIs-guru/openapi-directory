@@ -1,43 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Logo } from "./logo";
 import { Translation } from "./translation";
 
 
+
 export class Category extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=listing_description_text_template" })
+  @SpeakeasyMetadata({ data: "json, name=listing_description_text_template" })
   listingDescriptionTextTemplate?: string;
 
-  @Metadata({ data: "json, name=listing_features_text_template" })
+  @SpeakeasyMetadata({ data: "json, name=listing_features_text_template" })
   listingFeaturesTextTemplate?: string;
 
-  @Metadata({ data: "json, name=listing_pricing_text_template" })
+  @SpeakeasyMetadata({ data: "json, name=listing_pricing_text_template" })
   listingPricingTextTemplate?: string;
 
-  @Metadata({ data: "json, name=logo" })
+  @SpeakeasyMetadata({ data: "json, name=logo" })
   logo?: Logo;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=slug" })
+  @SpeakeasyMetadata({ data: "json, name=slug" })
   slug: string;
 
-  @Metadata({ data: "json, name=translations", elemType: shared.Translation })
+  @SpeakeasyMetadata({ data: "json, name=translations", elemType: Translation })
   translations?: Translation[];
 
-  @Metadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata({ data: "json, name=updated_at" })
   updatedAt?: Date;
 }

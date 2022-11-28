@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataSourceObjectReference } from "./datasourceobjectreference";
+
 
 
 // DataSourceObjectReferences
@@ -8,6 +8,6 @@ import { DataSourceObjectReference } from "./datasourceobjectreference";
  * A list of references to data source objects.
 **/
 export class DataSourceObjectReferences extends SpeakeasyBase {
-  @Metadata({ data: "json, name=references", elemType: shared.DataSourceObjectReference })
+  @SpeakeasyMetadata({ data: "json, name=references", elemType: DataSourceObjectReference })
   references?: DataSourceObjectReference[];
 }

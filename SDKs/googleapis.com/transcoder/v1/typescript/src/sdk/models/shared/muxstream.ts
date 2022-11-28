@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SegmentSettings } from "./segmentsettings";
+
 
 
 // MuxStream
@@ -7,18 +8,18 @@ import { SegmentSettings } from "./segmentsettings";
  * Multiplexing settings for output stream.
 **/
 export class MuxStream extends SpeakeasyBase {
-  @Metadata({ data: "json, name=container" })
+  @SpeakeasyMetadata({ data: "json, name=container" })
   container?: string;
 
-  @Metadata({ data: "json, name=elementaryStreams" })
+  @SpeakeasyMetadata({ data: "json, name=elementaryStreams" })
   elementaryStreams?: string[];
 
-  @Metadata({ data: "json, name=fileName" })
+  @SpeakeasyMetadata({ data: "json, name=fileName" })
   fileName?: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=segmentSettings" })
+  @SpeakeasyMetadata({ data: "json, name=segmentSettings" })
   segmentSettings?: SegmentSettings;
 }

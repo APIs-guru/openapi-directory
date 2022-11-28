@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ClassificationAnnotation
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains annotation details specific to classification.
 **/
 export class ClassificationAnnotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: number;
 }

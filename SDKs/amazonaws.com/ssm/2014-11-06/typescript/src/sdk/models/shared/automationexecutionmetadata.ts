@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutomationExecutionStatusEnum } from "./automationexecutionstatusenum";
 import { AutomationSubtypeEnum } from "./automationsubtypeenum";
 import { AutomationTypeEnum } from "./automationtypeenum";
@@ -9,92 +8,93 @@ import { Runbook } from "./runbook";
 import { Target } from "./target";
 
 
+
 // AutomationExecutionMetadata
 /** 
  * Details about a specific Automation execution.
 **/
 export class AutomationExecutionMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssociationId" })
+  @SpeakeasyMetadata({ data: "json, name=AssociationId" })
   associationId?: string;
 
-  @Metadata({ data: "json, name=AutomationExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=AutomationExecutionId" })
   automationExecutionId?: string;
 
-  @Metadata({ data: "json, name=AutomationExecutionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=AutomationExecutionStatus" })
   automationExecutionStatus?: AutomationExecutionStatusEnum;
 
-  @Metadata({ data: "json, name=AutomationSubtype" })
+  @SpeakeasyMetadata({ data: "json, name=AutomationSubtype" })
   automationSubtype?: AutomationSubtypeEnum;
 
-  @Metadata({ data: "json, name=AutomationType" })
+  @SpeakeasyMetadata({ data: "json, name=AutomationType" })
   automationType?: AutomationTypeEnum;
 
-  @Metadata({ data: "json, name=ChangeRequestName" })
+  @SpeakeasyMetadata({ data: "json, name=ChangeRequestName" })
   changeRequestName?: string;
 
-  @Metadata({ data: "json, name=CurrentAction" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentAction" })
   currentAction?: string;
 
-  @Metadata({ data: "json, name=CurrentStepName" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentStepName" })
   currentStepName?: string;
 
-  @Metadata({ data: "json, name=DocumentName" })
+  @SpeakeasyMetadata({ data: "json, name=DocumentName" })
   documentName?: string;
 
-  @Metadata({ data: "json, name=DocumentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=DocumentVersion" })
   documentVersion?: string;
 
-  @Metadata({ data: "json, name=ExecutedBy" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutedBy" })
   executedBy?: string;
 
-  @Metadata({ data: "json, name=ExecutionEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionEndTime" })
   executionEndTime?: Date;
 
-  @Metadata({ data: "json, name=ExecutionStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionStartTime" })
   executionStartTime?: Date;
 
-  @Metadata({ data: "json, name=FailureMessage" })
+  @SpeakeasyMetadata({ data: "json, name=FailureMessage" })
   failureMessage?: string;
 
-  @Metadata({ data: "json, name=LogFile" })
+  @SpeakeasyMetadata({ data: "json, name=LogFile" })
   logFile?: string;
 
-  @Metadata({ data: "json, name=MaxConcurrency" })
+  @SpeakeasyMetadata({ data: "json, name=MaxConcurrency" })
   maxConcurrency?: string;
 
-  @Metadata({ data: "json, name=MaxErrors" })
+  @SpeakeasyMetadata({ data: "json, name=MaxErrors" })
   maxErrors?: string;
 
-  @Metadata({ data: "json, name=Mode" })
+  @SpeakeasyMetadata({ data: "json, name=Mode" })
   mode?: ExecutionModeEnum;
 
-  @Metadata({ data: "json, name=OpsItemId" })
+  @SpeakeasyMetadata({ data: "json, name=OpsItemId" })
   opsItemId?: string;
 
-  @Metadata({ data: "json, name=Outputs" })
+  @SpeakeasyMetadata({ data: "json, name=Outputs" })
   outputs?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=ParentAutomationExecutionId" })
+  @SpeakeasyMetadata({ data: "json, name=ParentAutomationExecutionId" })
   parentAutomationExecutionId?: string;
 
-  @Metadata({ data: "json, name=ResolvedTargets" })
+  @SpeakeasyMetadata({ data: "json, name=ResolvedTargets" })
   resolvedTargets?: ResolvedTargets;
 
-  @Metadata({ data: "json, name=Runbooks", elemType: shared.Runbook })
+  @SpeakeasyMetadata({ data: "json, name=Runbooks", elemType: Runbook })
   runbooks?: Runbook[];
 
-  @Metadata({ data: "json, name=ScheduledTime" })
+  @SpeakeasyMetadata({ data: "json, name=ScheduledTime" })
   scheduledTime?: Date;
 
-  @Metadata({ data: "json, name=Target" })
+  @SpeakeasyMetadata({ data: "json, name=Target" })
   target?: string;
 
-  @Metadata({ data: "json, name=TargetMaps" })
+  @SpeakeasyMetadata({ data: "json, name=TargetMaps" })
   targetMaps?: Map<string, string[]>[];
 
-  @Metadata({ data: "json, name=TargetParameterName" })
+  @SpeakeasyMetadata({ data: "json, name=TargetParameterName" })
   targetParameterName?: string;
 
-  @Metadata({ data: "json, name=Targets", elemType: shared.Target })
+  @SpeakeasyMetadata({ data: "json, name=Targets", elemType: Target })
   targets?: Target[];
 }

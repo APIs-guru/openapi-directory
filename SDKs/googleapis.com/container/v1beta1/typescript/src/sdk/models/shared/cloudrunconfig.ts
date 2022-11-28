@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CloudRunConfigLoadBalancerTypeEnum {
-    LoadBalancerTypeUnspecified = "LOAD_BALANCER_TYPE_UNSPECIFIED"
-,    LoadBalancerTypeExternal = "LOAD_BALANCER_TYPE_EXTERNAL"
-,    LoadBalancerTypeInternal = "LOAD_BALANCER_TYPE_INTERNAL"
+    LoadBalancerTypeUnspecified = "LOAD_BALANCER_TYPE_UNSPECIFIED",
+    LoadBalancerTypeExternal = "LOAD_BALANCER_TYPE_EXTERNAL",
+    LoadBalancerTypeInternal = "LOAD_BALANCER_TYPE_INTERNAL"
 }
 
 
@@ -12,9 +13,9 @@ export enum CloudRunConfigLoadBalancerTypeEnum {
  * Configuration options for the Cloud Run feature.
 **/
 export class CloudRunConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=disabled" })
+  @SpeakeasyMetadata({ data: "json, name=disabled" })
   disabled?: boolean;
 
-  @Metadata({ data: "json, name=loadBalancerType" })
+  @SpeakeasyMetadata({ data: "json, name=loadBalancerType" })
   loadBalancerType?: CloudRunConfigLoadBalancerTypeEnum;
 }

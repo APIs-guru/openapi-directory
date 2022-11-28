@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CountriesGetV2CountriesGetQueryParams = /** @class */ (function (_super) {
     __extends(CountriesGetV2CountriesGetQueryParams, _super);
@@ -30,31 +30,31 @@ var CountriesGetV2CountriesGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" }),
         __metadata("design:type", Array)
     ], CountriesGetV2CountriesGetQueryParams.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country_id" }),
         __metadata("design:type", String)
     ], CountriesGetV2CountriesGetQueryParams.prototype, "countryId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], CountriesGetV2CountriesGetQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], CountriesGetV2CountriesGetQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=order_by" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order_by" }),
         __metadata("design:type", String)
     ], CountriesGetV2CountriesGetQueryParams.prototype, "orderBy", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], CountriesGetV2CountriesGetQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], CountriesGetV2CountriesGetQueryParams.prototype, "sort", void 0);
     return CountriesGetV2CountriesGetQueryParams;
@@ -66,7 +66,7 @@ var CountriesGetV2CountriesGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CountriesGetV2CountriesGetQueryParams)
     ], CountriesGetV2CountriesGetRequest.prototype, "queryParams", void 0);
     return CountriesGetV2CountriesGetRequest;
@@ -78,19 +78,19 @@ var CountriesGetV2CountriesGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CountriesGetV2CountriesGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], CountriesGetV2CountriesGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.OpenAqCountriesResult)
     ], CountriesGetV2CountriesGetResponse.prototype, "openAqCountriesResult", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CountriesGetV2CountriesGetResponse.prototype, "statusCode", void 0);
     return CountriesGetV2CountriesGetResponse;

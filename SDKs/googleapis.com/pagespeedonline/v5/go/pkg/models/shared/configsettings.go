@@ -1,5 +1,7 @@
 package shared
 
+// ConfigSettings
+// Message containing the configuration settings for the Lighthouse run.
 type ConfigSettings struct {
 	Channel            *string      `json:"channel,omitempty"`
 	EmulatedFormFactor *string      `json:"emulatedFormFactor,omitempty"`

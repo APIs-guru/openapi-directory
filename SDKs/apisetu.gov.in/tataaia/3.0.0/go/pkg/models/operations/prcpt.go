@@ -29,11 +29,6 @@ type PrcptSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type PrcptRequest struct {
-	Request  *PrcptRequestBody `request:"mediaType=application/json"`
-	Security PrcptSecurity
-}
-
 type Prcpt400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Prcpt504ApplicationJSON struct {
 	Error            *Prcpt504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Prcpt504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type PrcptRequest struct {
+	Request  *PrcptRequestBody `request:"mediaType=application/json"`
+	Security PrcptSecurity
 }
 
 type PrcptResponse struct {

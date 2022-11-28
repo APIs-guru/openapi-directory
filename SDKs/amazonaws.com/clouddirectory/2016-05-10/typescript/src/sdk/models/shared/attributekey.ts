@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AttributeKey
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A unique identifier for an attribute.
 **/
 export class AttributeKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FacetName" })
+  @SpeakeasyMetadata({ data: "json, name=FacetName" })
   facetName: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=SchemaArn" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaArn" })
   schemaArn: string;
 }

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DataflowProjectsJobsWorkItemsLeasePathParams:
-    job_id: str = field(default=None, metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    job_id: str = field(metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,26 +27,26 @@ class DataflowProjectsJobsWorkItemsLeaseQueryParams:
 
 @dataclass
 class DataflowProjectsJobsWorkItemsLeaseSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataflowProjectsJobsWorkItemsLeaseSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataflowProjectsJobsWorkItemsLeaseSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataflowProjectsJobsWorkItemsLeaseSecurityOption4:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -58,15 +59,15 @@ class DataflowProjectsJobsWorkItemsLeaseSecurity:
 
 @dataclass
 class DataflowProjectsJobsWorkItemsLeaseRequest:
-    path_params: DataflowProjectsJobsWorkItemsLeasePathParams = field(default=None)
-    query_params: DataflowProjectsJobsWorkItemsLeaseQueryParams = field(default=None)
+    path_params: DataflowProjectsJobsWorkItemsLeasePathParams = field()
+    query_params: DataflowProjectsJobsWorkItemsLeaseQueryParams = field()
+    security: DataflowProjectsJobsWorkItemsLeaseSecurity = field()
     request: Optional[shared.LeaseWorkItemRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DataflowProjectsJobsWorkItemsLeaseSecurity = field(default=None)
     
 
 @dataclass
 class DataflowProjectsJobsWorkItemsLeaseResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     lease_work_item_response: Optional[shared.LeaseWorkItemResponse] = field(default=None)
-    status_code: int = field(default=None)
     

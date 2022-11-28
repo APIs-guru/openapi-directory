@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SuppressionListImportActionEnum } from "./suppressionlistimportactionenum";
+
 
 
 // SuppressionListDestination
@@ -7,6 +8,6 @@ import { SuppressionListImportActionEnum } from "./suppressionlistimportactionen
  * An object that contains details about the action of suppression list.
 **/
 export class SuppressionListDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SuppressionListImportAction" })
+  @SpeakeasyMetadata({ data: "json, name=SuppressionListImportAction" })
   suppressionListImportAction: SuppressionListImportActionEnum;
 }

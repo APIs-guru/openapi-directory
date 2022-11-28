@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ConfigSyslog extends SpeakeasyBase {
-  @Metadata({ data: "json, name=client" })
+  @SpeakeasyMetadata({ data: "json, name=client" })
   client?: string;
 
-  @Metadata({ data: "json, name=hostname" })
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
   hostname?: string;
 
-  @Metadata({ data: "json, name=localport" })
+  @SpeakeasyMetadata({ data: "json, name=localport" })
   localport?: number;
 
-  @Metadata({ data: "json, name=separator" })
+  @SpeakeasyMetadata({ data: "json, name=separator" })
   separator?: string;
 
-  @Metadata({ data: "json, name=sequence" })
+  @SpeakeasyMetadata({ data: "json, name=sequence" })
   sequence?: number;
 
-  @Metadata({ data: "json, name=server" })
+  @SpeakeasyMetadata({ data: "json, name=server" })
   server?: string;
 
-  @Metadata({ data: "json, name=serverport" })
+  @SpeakeasyMetadata({ data: "json, name=serverport" })
   serverport?: number;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: string;
 }

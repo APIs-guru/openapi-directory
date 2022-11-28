@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ScriptDescriptionData } from "./scriptdescriptiondata";
 
 
+
 export class ScriptLocalizationDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=configMetadata" })
   configMetadata?: any;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: ScriptDescriptionData;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 }

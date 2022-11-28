@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetModifyDbClusterSnapshotAttributeActionEnum(str, Enum):
     MODIFY_DB_CLUSTER_SNAPSHOT_ATTRIBUTE = "ModifyDBClusterSnapshotAttribute"
@@ -10,12 +14,12 @@ class GetModifyDbClusterSnapshotAttributeVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyDbClusterSnapshotAttributeQueryParams:
-    action: GetModifyDbClusterSnapshotAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    attribute_name: str = field(default=None, metadata={'query_param': { 'field_name': 'AttributeName', 'style': 'form', 'explode': True }})
-    db_cluster_snapshot_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'DBClusterSnapshotIdentifier', 'style': 'form', 'explode': True }})
+    action: GetModifyDbClusterSnapshotAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    attribute_name: str = field(metadata={'query_param': { 'field_name': 'AttributeName', 'style': 'form', 'explode': True }})
+    db_cluster_snapshot_identifier: str = field(metadata={'query_param': { 'field_name': 'DBClusterSnapshotIdentifier', 'style': 'form', 'explode': True }})
+    version: GetModifyDbClusterSnapshotAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     values_to_add: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'ValuesToAdd', 'style': 'form', 'explode': True }})
     values_to_remove: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'ValuesToRemove', 'style': 'form', 'explode': True }})
-    version: GetModifyDbClusterSnapshotAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetModifyDbClusterSnapshotAttributeHeaders:
 
 @dataclass
 class GetModifyDbClusterSnapshotAttributeRequest:
-    query_params: GetModifyDbClusterSnapshotAttributeQueryParams = field(default=None)
-    headers: GetModifyDbClusterSnapshotAttributeHeaders = field(default=None)
+    headers: GetModifyDbClusterSnapshotAttributeHeaders = field()
+    query_params: GetModifyDbClusterSnapshotAttributeQueryParams = field()
     
 
 @dataclass
 class GetModifyDbClusterSnapshotAttributeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

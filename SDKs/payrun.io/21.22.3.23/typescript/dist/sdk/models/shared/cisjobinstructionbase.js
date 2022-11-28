@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CisJobInstructionBaseCisJobInstructionBaseEmployer
 /**
  * The cis job instruction bases' employer
@@ -33,15 +33,15 @@ var CisJobInstructionBaseCisJobInstructionBaseEmployer = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=@href" }),
+        SpeakeasyMetadata({ data: "json, name=@href" }),
         __metadata("design:type", String)
     ], CisJobInstructionBaseCisJobInstructionBaseEmployer.prototype, "atHref", void 0);
     __decorate([
-        Metadata({ data: "json, name=@rel" }),
+        SpeakeasyMetadata({ data: "json, name=@rel" }),
         __metadata("design:type", String)
     ], CisJobInstructionBaseCisJobInstructionBaseEmployer.prototype, "atRel", void 0);
     __decorate([
-        Metadata({ data: "json, name=@title" }),
+        SpeakeasyMetadata({ data: "json, name=@title" }),
         __metadata("design:type", String)
     ], CisJobInstructionBaseCisJobInstructionBaseEmployer.prototype, "atTitle", void 0);
     return CisJobInstructionBaseCisJobInstructionBaseEmployer;
@@ -57,7 +57,7 @@ var CisJobInstructionBaseCisJobInstructionBaseSubContractor = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=SubContractor" }),
+        SpeakeasyMetadata({ data: "json, name=SubContractor" }),
         __metadata("design:type", Array)
     ], CisJobInstructionBaseCisJobInstructionBaseSubContractor.prototype, "subContractor", void 0);
     return CisJobInstructionBaseCisJobInstructionBaseSubContractor;
@@ -69,15 +69,15 @@ var CisJobInstructionBaseCisJobInstructionBase = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Employer" }),
+        SpeakeasyMetadata({ data: "json, name=Employer" }),
         __metadata("design:type", CisJobInstructionBaseCisJobInstructionBaseEmployer)
     ], CisJobInstructionBaseCisJobInstructionBase.prototype, "employer", void 0);
     __decorate([
-        Metadata({ data: "json, name=HoldingDate" }),
+        SpeakeasyMetadata({ data: "json, name=HoldingDate" }),
         __metadata("design:type", Date)
     ], CisJobInstructionBaseCisJobInstructionBase.prototype, "holdingDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubContractors" }),
+        SpeakeasyMetadata({ data: "json, name=SubContractors" }),
         __metadata("design:type", CisJobInstructionBaseCisJobInstructionBaseSubContractor)
     ], CisJobInstructionBaseCisJobInstructionBase.prototype, "subContractors", void 0);
     return CisJobInstructionBaseCisJobInstructionBase;
@@ -89,7 +89,7 @@ var CisJobInstructionBase = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CisJobInstructionBase" }),
+        SpeakeasyMetadata({ data: "json, name=CisJobInstructionBase" }),
         __metadata("design:type", CisJobInstructionBaseCisJobInstructionBase)
     ], CisJobInstructionBase.prototype, "cisJobInstructionBase", void 0);
     return CisJobInstructionBase;

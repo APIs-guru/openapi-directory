@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Query } from "./query";
+
 
 
 // QueryObjectsInput
@@ -7,18 +8,18 @@ import { Query } from "./query";
  * Contains the parameters for QueryObjects.
 **/
 export class QueryObjectsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=marker" })
+  @SpeakeasyMetadata({ data: "json, name=marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=pipelineId" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineId" })
   pipelineId: string;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: Query;
 
-  @Metadata({ data: "json, name=sphere" })
+  @SpeakeasyMetadata({ data: "json, name=sphere" })
   sphere: string;
 }

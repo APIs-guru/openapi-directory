@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AccountAttribute
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Stores account attributes. 
 **/
 export class AccountAttribute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Maximum" })
+  @SpeakeasyMetadata({ data: "json, name=Maximum" })
   maximum?: number;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Used" })
+  @SpeakeasyMetadata({ data: "json, name=Used" })
   used?: number;
 }

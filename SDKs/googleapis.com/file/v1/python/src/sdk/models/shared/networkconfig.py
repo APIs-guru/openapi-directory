@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class NetworkConfigConnectModeEnum(str, Enum):
     CONNECT_MODE_UNSPECIFIED = "CONNECT_MODE_UNSPECIFIED"
@@ -15,9 +17,26 @@ class NetworkConfigModesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class NetworkConfig:
-    connect_mode: Optional[NetworkConfigConnectModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectMode' }})
-    ip_addresses: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipAddresses' }})
-    modes: Optional[List[NetworkConfigModesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modes' }})
-    network: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'network' }})
-    reserved_ip_range: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reservedIpRange' }})
+    r"""NetworkConfig
+    Network configuration for the instance.
+    """
+    
+    connect_mode: Optional[NetworkConfigConnectModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectMode') }})
+    ip_addresses: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipAddresses') }})
+    modes: Optional[List[NetworkConfigModesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('modes') }})
+    network: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('network') }})
+    reserved_ip_range: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reservedIpRange') }})
+    
+
+@dataclass_json
+@dataclass
+class NetworkConfigInput:
+    r"""NetworkConfigInput
+    Network configuration for the instance.
+    """
+    
+    connect_mode: Optional[NetworkConfigConnectModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectMode') }})
+    modes: Optional[List[NetworkConfigModesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('modes') }})
+    network: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('network') }})
+    reserved_ip_range: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('reservedIpRange') }})
     

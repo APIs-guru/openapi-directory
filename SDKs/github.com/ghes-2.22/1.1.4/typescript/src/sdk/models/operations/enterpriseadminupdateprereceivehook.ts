@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EnterpriseAdminUpdatePreReceiveHookPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pre_receive_hook_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pre_receive_hook_id" })
   preReceiveHookId: number;
 }
 
 
 export class EnterpriseAdminUpdatePreReceiveHookRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allow_downstream_configuration" })
+  @SpeakeasyMetadata({ data: "json, name=allow_downstream_configuration" })
   allowDownstreamConfiguration?: boolean;
 
-  @Metadata({ data: "json, name=enforcement" })
+  @SpeakeasyMetadata({ data: "json, name=enforcement" })
   enforcement?: string;
 
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: Map<string, any>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=script" })
+  @SpeakeasyMetadata({ data: "json, name=script" })
   script?: string;
 
-  @Metadata({ data: "json, name=script_repository" })
+  @SpeakeasyMetadata({ data: "json, name=script_repository" })
   scriptRepository?: Map<string, any>;
 }
 
 
 export class EnterpriseAdminUpdatePreReceiveHookRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EnterpriseAdminUpdatePreReceiveHookPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: EnterpriseAdminUpdatePreReceiveHookRequestBody;
 }
 
 
 export class EnterpriseAdminUpdatePreReceiveHookResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preReceiveHook?: shared.PreReceiveHook;
 }

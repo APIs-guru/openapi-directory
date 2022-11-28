@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import configfile
-from . import importfile
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TargetConfiguration:
-    config: Optional[configfile.ConfigFile] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'config' }})
-    imports: Optional[List[importfile.ImportFile]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'imports' }})
+    config: Optional[ConfigFile] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('config') }})
+    imports: Optional[List[ImportFile]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('imports') }})
     

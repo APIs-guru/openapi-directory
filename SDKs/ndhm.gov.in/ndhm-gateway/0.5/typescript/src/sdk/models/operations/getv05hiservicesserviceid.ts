@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetV05HiServicesServiceIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=service-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=service-id" })
   serviceId: string;
 }
 
 
 export class GetV05HiServicesServiceIdHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class GetV05HiServicesServiceIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetV05HiServicesServiceIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetV05HiServicesServiceIdHeaders;
 }
 
 
 export class GetV05HiServicesServiceIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceProfileResponse?: shared.ServiceProfileResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

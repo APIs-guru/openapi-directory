@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChannelLatencyModeEnum } from "./channellatencymodeenum";
 import { ChannelTypeEnum } from "./channeltypeenum";
+
 
 
 // Channel
@@ -8,30 +9,30 @@ import { ChannelTypeEnum } from "./channeltypeenum";
  * Object specifying a channel.
 **/
 export class Channel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=authorized" })
+  @SpeakeasyMetadata({ data: "json, name=authorized" })
   authorized?: boolean;
 
-  @Metadata({ data: "json, name=ingestEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=ingestEndpoint" })
   ingestEndpoint?: string;
 
-  @Metadata({ data: "json, name=latencyMode" })
+  @SpeakeasyMetadata({ data: "json, name=latencyMode" })
   latencyMode?: ChannelLatencyModeEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=playbackUrl" })
+  @SpeakeasyMetadata({ data: "json, name=playbackUrl" })
   playbackUrl?: string;
 
-  @Metadata({ data: "json, name=recordingConfigurationArn" })
+  @SpeakeasyMetadata({ data: "json, name=recordingConfigurationArn" })
   recordingConfigurationArn?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ChannelTypeEnum;
 }

@@ -1,75 +1,76 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PostSecurityLoginRequestBodyProviderEnum {
-    Db = "db"
-,    Ldap = "ldap"
+    Db = "db",
+    Ldap = "ldap"
 }
 
 
 export class PostSecurityLoginRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=provider" })
+  @SpeakeasyMetadata({ data: "json, name=provider" })
   provider?: PostSecurityLoginRequestBodyProviderEnum;
 
-  @Metadata({ data: "json, name=refresh" })
+  @SpeakeasyMetadata({ data: "json, name=refresh" })
   refresh?: boolean;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }
 
 
-export class PostSecurityLoginRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PostSecurityLoginRequestBody;
-}
-
-
 export class PostSecurityLogin200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=access_token" })
+  @SpeakeasyMetadata({ data: "json, name=access_token" })
   accessToken?: string;
 
-  @Metadata({ data: "json, name=refresh_token" })
+  @SpeakeasyMetadata({ data: "json, name=refresh_token" })
   refreshToken?: string;
 }
 
 
 export class PostSecurityLogin400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostSecurityLogin401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PostSecurityLogin500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class PostSecurityLoginRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PostSecurityLoginRequestBody;
+}
+
+
 export class PostSecurityLoginResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postSecurityLogin200ApplicationJsonObject?: PostSecurityLogin200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postSecurityLogin400ApplicationJsonObject?: PostSecurityLogin400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postSecurityLogin401ApplicationJsonObject?: PostSecurityLogin401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postSecurityLogin500ApplicationJsonObject?: PostSecurityLogin500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

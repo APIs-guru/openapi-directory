@@ -1,23 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PreSignInfoFields extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }
 
 
 export class PreSignInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fetchUrl" })
+  @SpeakeasyMetadata({ data: "json, name=fetchUrl" })
   fetchUrl?: string;
 
-  @Metadata({ data: "json, name=fields", elemType: shared.PreSignInfoFields })
+  @SpeakeasyMetadata({ data: "json, name=fields", elemType: PreSignInfoFields })
   fields?: PreSignInfoFields[];
 
-  @Metadata({ data: "json, name=putUrl" })
+  @SpeakeasyMetadata({ data: "json, name=putUrl" })
   putUrl?: string;
 }

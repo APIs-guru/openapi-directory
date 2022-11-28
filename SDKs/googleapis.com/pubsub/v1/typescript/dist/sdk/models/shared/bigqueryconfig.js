@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var BigQueryConfigStateEnum;
 (function (BigQueryConfigStateEnum) {
     BigQueryConfigStateEnum["StateUnspecified"] = "STATE_UNSPECIFIED";
@@ -41,23 +41,23 @@ var BigQueryConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dropUnknownFields" }),
+        SpeakeasyMetadata({ data: "json, name=dropUnknownFields" }),
         __metadata("design:type", Boolean)
     ], BigQueryConfig.prototype, "dropUnknownFields", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], BigQueryConfig.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=table" }),
+        SpeakeasyMetadata({ data: "json, name=table" }),
         __metadata("design:type", String)
     ], BigQueryConfig.prototype, "table", void 0);
     __decorate([
-        Metadata({ data: "json, name=useTopicSchema" }),
+        SpeakeasyMetadata({ data: "json, name=useTopicSchema" }),
         __metadata("design:type", Boolean)
     ], BigQueryConfig.prototype, "useTopicSchema", void 0);
     __decorate([
-        Metadata({ data: "json, name=writeMetadata" }),
+        SpeakeasyMetadata({ data: "json, name=writeMetadata" }),
         __metadata("design:type", Boolean)
     ], BigQueryConfig.prototype, "writeMetadata", void 0);
     return BigQueryConfig;

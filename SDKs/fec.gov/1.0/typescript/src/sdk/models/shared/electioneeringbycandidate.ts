@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ElectioneeringByCandidate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=candidate" })
+  @SpeakeasyMetadata({ data: "json, name=candidate" })
   candidate?: string;
 
-  @Metadata({ data: "json, name=candidate_id" })
+  @SpeakeasyMetadata({ data: "json, name=candidate_id" })
   candidateId?: string;
 
-  @Metadata({ data: "json, name=candidate_name" })
+  @SpeakeasyMetadata({ data: "json, name=candidate_name" })
   candidateName?: string;
 
-  @Metadata({ data: "json, name=committee" })
+  @SpeakeasyMetadata({ data: "json, name=committee" })
   committee?: string;
 
-  @Metadata({ data: "json, name=committee_id" })
+  @SpeakeasyMetadata({ data: "json, name=committee_id" })
   committeeId?: string;
 
-  @Metadata({ data: "json, name=committee_name" })
+  @SpeakeasyMetadata({ data: "json, name=committee_name" })
   committeeName?: string;
 
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=cycle" })
+  @SpeakeasyMetadata({ data: "json, name=cycle" })
   cycle?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }

@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class GetUserByEmailAddressPathParams:
-    email_address: str = field(default=None, metadata={'path_param': { 'field_name': 'emailAddress', 'style': 'simple', 'explode': False }})
+    email_address: str = field(metadata={'path_param': { 'field_name': 'emailAddress', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,20 +15,20 @@ class GetUserByEmailAddressQueryParams:
 
 @dataclass
 class GetUserByEmailAddressSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetUserByEmailAddressRequest:
-    path_params: GetUserByEmailAddressPathParams = field(default=None)
-    query_params: GetUserByEmailAddressQueryParams = field(default=None)
-    security: GetUserByEmailAddressSecurity = field(default=None)
+    path_params: GetUserByEmailAddressPathParams = field()
+    query_params: GetUserByEmailAddressQueryParams = field()
+    security: GetUserByEmailAddressSecurity = field()
     
 
 @dataclass
 class GetUserByEmailAddressResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     user: Optional[Any] = field(default=None)
     

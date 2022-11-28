@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeInstanceAttributeActionEnum(str, Enum):
     DESCRIBE_INSTANCE_ATTRIBUTE = "DescribeInstanceAttribute"
@@ -27,11 +31,11 @@ class GetDescribeInstanceAttributeVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeInstanceAttributeQueryParams:
-    action: GetDescribeInstanceAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    attribute: GetDescribeInstanceAttributeAttributeEnum = field(default=None, metadata={'query_param': { 'field_name': 'Attribute', 'style': 'form', 'explode': True }})
+    action: GetDescribeInstanceAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    attribute: GetDescribeInstanceAttributeAttributeEnum = field(metadata={'query_param': { 'field_name': 'Attribute', 'style': 'form', 'explode': True }})
+    instance_id: str = field(metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
+    version: GetDescribeInstanceAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    instance_id: str = field(default=None, metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
-    version: GetDescribeInstanceAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -47,13 +51,13 @@ class GetDescribeInstanceAttributeHeaders:
 
 @dataclass
 class GetDescribeInstanceAttributeRequest:
-    query_params: GetDescribeInstanceAttributeQueryParams = field(default=None)
-    headers: GetDescribeInstanceAttributeHeaders = field(default=None)
+    headers: GetDescribeInstanceAttributeHeaders = field()
+    query_params: GetDescribeInstanceAttributeQueryParams = field()
     
 
 @dataclass
 class GetDescribeInstanceAttributeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

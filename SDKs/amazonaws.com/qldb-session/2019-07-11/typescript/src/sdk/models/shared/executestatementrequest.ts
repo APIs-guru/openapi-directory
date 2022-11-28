@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ValueHolder } from "./valueholder";
+
 
 
 // ExecuteStatementRequest
@@ -8,12 +8,12 @@ import { ValueHolder } from "./valueholder";
  * Specifies a request to execute a statement.
 **/
 export class ExecuteStatementRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Parameters", elemType: shared.ValueHolder })
+  @SpeakeasyMetadata({ data: "json, name=Parameters", elemType: ValueHolder })
   parameters?: ValueHolder[];
 
-  @Metadata({ data: "json, name=Statement" })
+  @SpeakeasyMetadata({ data: "json, name=Statement" })
   statement: string;
 
-  @Metadata({ data: "json, name=TransactionId" })
+  @SpeakeasyMetadata({ data: "json, name=TransactionId" })
   transactionId: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// ReportMetadata
+// This type defines the fields included in the report.
 type ReportMetadata struct {
 	DimensionMetadata              []DimensionMetadata `json:"dimensionMetadata,omitempty"`
 	MaxNumberOfDimensionsToRequest *int32              `json:"maxNumberOfDimensionsToRequest,omitempty"`

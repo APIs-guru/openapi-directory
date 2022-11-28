@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateOrganizationBrandingPolicyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
   organizationId: string;
 }
 
 export enum CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnum {
-    AllOrganizationAdmins = "All organization admins"
-,    AllEnterpriseAdmins = "All enterprise admins"
-,    AllNetworkAdmins = "All network admins"
-,    AllAdminsOfNetworks = "All admins of networks..."
-,    AllAdminsOfNetworksTagged = "All admins of networks tagged..."
-,    SpecificAdmins = "Specific admins..."
-,    AllAdmins = "All admins"
-,    AllSamlAdmins = "All SAML admins"
+    AllOrganizationAdmins = "All organization admins",
+    AllEnterpriseAdmins = "All enterprise admins",
+    AllNetworkAdmins = "All network admins",
+    AllAdminsOfNetworks = "All admins of networks...",
+    AllAdminsOfNetworksTagged = "All admins of networks tagged...",
+    SpecificAdmins = "Specific admins...",
+    AllAdmins = "All admins",
+    AllSamlAdmins = "All SAML admins"
 }
 
 
@@ -23,77 +24,77 @@ export enum CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnu
  * Settings for describing which kinds of admins this policy applies to.
 **/
 export class CreateOrganizationBrandingPolicyRequestBodyAdminSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appliesTo" })
+  @SpeakeasyMetadata({ data: "json, name=appliesTo" })
   appliesTo?: CreateOrganizationBrandingPolicyRequestBodyAdminSettingsAppliesToEnum;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values?: string[];
 }
 
 export enum CreateOrganizationBrandingPolicyRequestBodyHelpSettingsApiDocsSubtabEnum {
-    DefaultOrInherit = "default or inherit"
-,    Hide = "hide"
-,    Show = "show"
+    DefaultOrInherit = "default or inherit",
+    Hide = "hide",
+    Show = "show"
 }
 
 export enum CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCasesSubtabEnum {
-    DefaultOrInherit = "default or inherit"
-,    Hide = "hide"
-,    Show = "show"
+    DefaultOrInherit = "default or inherit",
+    Hide = "hide",
+    Show = "show"
 }
 
 export enum CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCommunitySubtabEnum {
-    DefaultOrInherit = "default or inherit"
-,    Hide = "hide"
-,    Show = "show"
+    DefaultOrInherit = "default or inherit",
+    Hide = "hide",
+    Show = "show"
 }
 
 export enum CreateOrganizationBrandingPolicyRequestBodyHelpSettingsDataProtectionRequestsSubtabEnum {
-    DefaultOrInherit = "default or inherit"
-,    Hide = "hide"
-,    Show = "show"
+    DefaultOrInherit = "default or inherit",
+    Hide = "hide",
+    Show = "show"
 }
 
 export enum CreateOrganizationBrandingPolicyRequestBodyHelpSettingsFirewallInfoSubtabEnum {
-    DefaultOrInherit = "default or inherit"
-,    Hide = "hide"
-,    Show = "show"
+    DefaultOrInherit = "default or inherit",
+    Hide = "hide",
+    Show = "show"
 }
 
 export enum CreateOrganizationBrandingPolicyRequestBodyHelpSettingsGetHelpSubtabEnum {
-    DefaultOrInherit = "default or inherit"
-,    Hide = "hide"
-,    Show = "show"
+    DefaultOrInherit = "default or inherit",
+    Hide = "hide",
+    Show = "show"
 }
 
 export enum CreateOrganizationBrandingPolicyRequestBodyHelpSettingsHardwareReplacementsSubtabEnum {
-    DefaultOrInherit = "default or inherit"
-,    Hide = "hide"
-,    Show = "show"
+    DefaultOrInherit = "default or inherit",
+    Hide = "hide",
+    Show = "show"
 }
 
 export enum CreateOrganizationBrandingPolicyRequestBodyHelpSettingsHelpTabEnum {
-    DefaultOrInherit = "default or inherit"
-,    Hide = "hide"
-,    Show = "show"
+    DefaultOrInherit = "default or inherit",
+    Hide = "hide",
+    Show = "show"
 }
 
 export enum CreateOrganizationBrandingPolicyRequestBodyHelpSettingsNewFeaturesSubtabEnum {
-    DefaultOrInherit = "default or inherit"
-,    Hide = "hide"
-,    Show = "show"
+    DefaultOrInherit = "default or inherit",
+    Hide = "hide",
+    Show = "show"
 }
 
 export enum CreateOrganizationBrandingPolicyRequestBodyHelpSettingsSmForumsEnum {
-    DefaultOrInherit = "default or inherit"
-,    Hide = "hide"
-,    Show = "show"
+    DefaultOrInherit = "default or inherit",
+    Hide = "hide",
+    Show = "show"
 }
 
 export enum CreateOrganizationBrandingPolicyRequestBodyHelpSettingsUniversalSearchKnowledgeBaseSearchEnum {
-    DefaultOrInherit = "default or inherit"
-,    Hide = "hide"
-,    Show = "show"
+    DefaultOrInherit = "default or inherit",
+    Hide = "hide",
+    Show = "show"
 }
 
 
@@ -106,81 +107,81 @@ export enum CreateOrganizationBrandingPolicyRequestBodyHelpSettingsUniversalSear
  *  Each property defaults to 'default or inherit' when not provided.
 **/
 export class CreateOrganizationBrandingPolicyRequestBodyHelpSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiDocsSubtab" })
+  @SpeakeasyMetadata({ data: "json, name=apiDocsSubtab" })
   apiDocsSubtab?: CreateOrganizationBrandingPolicyRequestBodyHelpSettingsApiDocsSubtabEnum;
 
-  @Metadata({ data: "json, name=casesSubtab" })
+  @SpeakeasyMetadata({ data: "json, name=casesSubtab" })
   casesSubtab?: CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCasesSubtabEnum;
 
-  @Metadata({ data: "json, name=ciscoMerakiProductDocumentation" })
+  @SpeakeasyMetadata({ data: "json, name=ciscoMerakiProductDocumentation" })
   ciscoMerakiProductDocumentation?: string;
 
-  @Metadata({ data: "json, name=communitySubtab" })
+  @SpeakeasyMetadata({ data: "json, name=communitySubtab" })
   communitySubtab?: CreateOrganizationBrandingPolicyRequestBodyHelpSettingsCommunitySubtabEnum;
 
-  @Metadata({ data: "json, name=dataProtectionRequestsSubtab" })
+  @SpeakeasyMetadata({ data: "json, name=dataProtectionRequestsSubtab" })
   dataProtectionRequestsSubtab?: CreateOrganizationBrandingPolicyRequestBodyHelpSettingsDataProtectionRequestsSubtabEnum;
 
-  @Metadata({ data: "json, name=firewallInfoSubtab" })
+  @SpeakeasyMetadata({ data: "json, name=firewallInfoSubtab" })
   firewallInfoSubtab?: CreateOrganizationBrandingPolicyRequestBodyHelpSettingsFirewallInfoSubtabEnum;
 
-  @Metadata({ data: "json, name=getHelpSubtab" })
+  @SpeakeasyMetadata({ data: "json, name=getHelpSubtab" })
   getHelpSubtab?: CreateOrganizationBrandingPolicyRequestBodyHelpSettingsGetHelpSubtabEnum;
 
-  @Metadata({ data: "json, name=getHelpSubtabKnowledgeBaseSearch" })
+  @SpeakeasyMetadata({ data: "json, name=getHelpSubtabKnowledgeBaseSearch" })
   getHelpSubtabKnowledgeBaseSearch?: string;
 
-  @Metadata({ data: "json, name=hardwareReplacementsSubtab" })
+  @SpeakeasyMetadata({ data: "json, name=hardwareReplacementsSubtab" })
   hardwareReplacementsSubtab?: CreateOrganizationBrandingPolicyRequestBodyHelpSettingsHardwareReplacementsSubtabEnum;
 
-  @Metadata({ data: "json, name=helpTab" })
+  @SpeakeasyMetadata({ data: "json, name=helpTab" })
   helpTab?: CreateOrganizationBrandingPolicyRequestBodyHelpSettingsHelpTabEnum;
 
-  @Metadata({ data: "json, name=newFeaturesSubtab" })
+  @SpeakeasyMetadata({ data: "json, name=newFeaturesSubtab" })
   newFeaturesSubtab?: CreateOrganizationBrandingPolicyRequestBodyHelpSettingsNewFeaturesSubtabEnum;
 
-  @Metadata({ data: "json, name=smForums" })
+  @SpeakeasyMetadata({ data: "json, name=smForums" })
   smForums?: CreateOrganizationBrandingPolicyRequestBodyHelpSettingsSmForumsEnum;
 
-  @Metadata({ data: "json, name=supportContactInfo" })
+  @SpeakeasyMetadata({ data: "json, name=supportContactInfo" })
   supportContactInfo?: string;
 
-  @Metadata({ data: "json, name=universalSearchKnowledgeBaseSearch" })
+  @SpeakeasyMetadata({ data: "json, name=universalSearchKnowledgeBaseSearch" })
   universalSearchKnowledgeBaseSearch?: CreateOrganizationBrandingPolicyRequestBodyHelpSettingsUniversalSearchKnowledgeBaseSearchEnum;
 }
 
 
 export class CreateOrganizationBrandingPolicyRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adminSettings" })
+  @SpeakeasyMetadata({ data: "json, name=adminSettings" })
   adminSettings: CreateOrganizationBrandingPolicyRequestBodyAdminSettings;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled: boolean;
 
-  @Metadata({ data: "json, name=helpSettings" })
+  @SpeakeasyMetadata({ data: "json, name=helpSettings" })
   helpSettings?: CreateOrganizationBrandingPolicyRequestBodyHelpSettings;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }
 
 
 export class CreateOrganizationBrandingPolicyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateOrganizationBrandingPolicyPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateOrganizationBrandingPolicyRequestBody;
 }
 
 
 export class CreateOrganizationBrandingPolicyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createOrganizationBrandingPolicy201ApplicationJsonObject?: Map<string, any>;
 }

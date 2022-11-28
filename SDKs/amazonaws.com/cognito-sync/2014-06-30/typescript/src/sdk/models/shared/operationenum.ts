@@ -1,6 +1,7 @@
 
 
+
 export enum OperationEnum {
-    Replace = "replace"
-,    Remove = "remove"
+    Replace = "replace",
+    Remove = "remove"
 }

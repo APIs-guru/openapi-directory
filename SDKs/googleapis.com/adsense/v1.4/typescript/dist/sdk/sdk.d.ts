@@ -1,0 +1,35 @@
+import { AxiosInstance } from "axios";
+import { Accounts } from "./accounts";
+import { Adclients } from "./adclients";
+import { Adunits } from "./adunits";
+import { Alerts } from "./alerts";
+import { Customchannels } from "./customchannels";
+import { Metadata } from "./metadata";
+import { Payments } from "./payments";
+import { Reports } from "./reports";
+import { Savedadstyles } from "./savedadstyles";
+import { Urlchannels } from "./urlchannels";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://www.googleapis.com/adsense/v1.4"];
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    accounts: Accounts;
+    adclients: Adclients;
+    adunits: Adunits;
+    alerts: Alerts;
+    customchannels: Customchannels;
+    metadata: Metadata;
+    payments: Payments;
+    reports: Reports;
+    savedadstyles: Savedadstyles;
+    urlchannels: Urlchannels;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
+    constructor(...opts: OptsFunc[]);
+}
+export {};

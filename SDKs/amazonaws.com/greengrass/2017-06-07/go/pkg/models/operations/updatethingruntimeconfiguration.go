@@ -18,6 +18,8 @@ type UpdateThingRuntimeConfigurationHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateThingRuntimeConfigurationRequestBodyTelemetryConfiguration
+// Configuration settings for running telemetry.
 type UpdateThingRuntimeConfigurationRequestBodyTelemetryConfiguration struct {
 	Telemetry *shared.TelemetryEnum `json:"Telemetry,omitempty"`
 }

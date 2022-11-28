@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudPolicytroubleshooterV1betaExplainedPolicy } from "./googlecloudpolicytroubleshooterv1betaexplainedpolicy";
 export var GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyResponseAccessEnum;
 (function (GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyResponseAccessEnum) {
     GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyResponseAccessEnum["AccessStateUnspecified"] = "ACCESS_STATE_UNSPECIFIED";
@@ -42,11 +42,11 @@ var GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyResponse = /** @cl
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=access" }),
+        SpeakeasyMetadata({ data: "json, name=access" }),
         __metadata("design:type", String)
     ], GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyResponse.prototype, "access", void 0);
     __decorate([
-        Metadata({ data: "json, name=explainedPolicies", elemType: shared.GoogleCloudPolicytroubleshooterV1betaExplainedPolicy }),
+        SpeakeasyMetadata({ data: "json, name=explainedPolicies", elemType: GoogleCloudPolicytroubleshooterV1betaExplainedPolicy }),
         __metadata("design:type", Array)
     ], GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyResponse.prototype, "explainedPolicies", void 0);
     return GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyResponse;

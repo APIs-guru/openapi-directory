@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -11,15 +14,15 @@ class CreateCustomerHeaders:
 
 @dataclass
 class CreateCustomerRequest:
-    headers: CreateCustomerHeaders = field(default=None)
-    request: shared.NewCustomerRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateCustomerHeaders = field()
+    request: shared.NewCustomerRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateCustomerResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     new_customer_response: Optional[shared.NewCustomerResponse] = field(default=None)
-    status_code: int = field(default=None)
     create_customer_400_application_json_one_of: Optional[Any] = field(default=None)
     

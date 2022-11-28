@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ServicebrokerProjectsBrokersV2ServiceInstancesServiceBindingsDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class ServicebrokerProjectsBrokersV2ServiceInstancesServiceBindingsDeleteQueryPa
 
 @dataclass
 class ServicebrokerProjectsBrokersV2ServiceInstancesServiceBindingsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ServicebrokerProjectsBrokersV2ServiceInstancesServiceBindingsDeleteRequest:
-    path_params: ServicebrokerProjectsBrokersV2ServiceInstancesServiceBindingsDeletePathParams = field(default=None)
-    query_params: ServicebrokerProjectsBrokersV2ServiceInstancesServiceBindingsDeleteQueryParams = field(default=None)
-    security: ServicebrokerProjectsBrokersV2ServiceInstancesServiceBindingsDeleteSecurity = field(default=None)
+    path_params: ServicebrokerProjectsBrokersV2ServiceInstancesServiceBindingsDeletePathParams = field()
+    query_params: ServicebrokerProjectsBrokersV2ServiceInstancesServiceBindingsDeleteQueryParams = field()
+    security: ServicebrokerProjectsBrokersV2ServiceInstancesServiceBindingsDeleteSecurity = field()
     
 
 @dataclass
 class ServicebrokerProjectsBrokersV2ServiceInstancesServiceBindingsDeleteResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// GitLabSecrets
+// GitLabSecrets represents the secrets in Secret Manager for a GitLab integration.
 type GitLabSecrets struct {
 	APIAccessTokenVersion  *string `json:"apiAccessTokenVersion,omitempty"`
 	APIKeyVersion          *string `json:"apiKeyVersion,omitempty"`

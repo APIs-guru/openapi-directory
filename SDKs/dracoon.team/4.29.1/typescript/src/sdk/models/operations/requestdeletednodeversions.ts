@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RequestDeletedNodeVersionsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=node_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=node_id" })
   nodeId: number;
 }
 
 
 export class RequestDeletedNodeVersionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type: string;
 }
 
 
 export class RequestDeletedNodeVersionsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
   xSdsAuthToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Date-Format" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Date-Format" })
   xSdsDateFormat?: any;
 }
 
 
 export class RequestDeletedNodeVersionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RequestDeletedNodeVersionsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RequestDeletedNodeVersionsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: RequestDeletedNodeVersionsHeaders;
 }
 
 
 export class RequestDeletedNodeVersionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deletedNodeVersionsList?: shared.DeletedNodeVersionsList;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

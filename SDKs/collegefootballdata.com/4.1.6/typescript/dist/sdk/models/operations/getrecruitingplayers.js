@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetRecruitingPlayersQueryParams = /** @class */ (function (_super) {
     __extends(GetRecruitingPlayersQueryParams, _super);
@@ -30,23 +30,23 @@ var GetRecruitingPlayersQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=classification" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=classification" }),
         __metadata("design:type", String)
     ], GetRecruitingPlayersQueryParams.prototype, "classification", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=position" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=position" }),
         __metadata("design:type", String)
     ], GetRecruitingPlayersQueryParams.prototype, "position", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=state" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" }),
         __metadata("design:type", String)
     ], GetRecruitingPlayersQueryParams.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=team" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" }),
         __metadata("design:type", String)
     ], GetRecruitingPlayersQueryParams.prototype, "team", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=year" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" }),
         __metadata("design:type", Number)
     ], GetRecruitingPlayersQueryParams.prototype, "year", void 0);
     return GetRecruitingPlayersQueryParams;
@@ -58,7 +58,7 @@ var GetRecruitingPlayersRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRecruitingPlayersQueryParams)
     ], GetRecruitingPlayersRequest.prototype, "queryParams", void 0);
     return GetRecruitingPlayersRequest;
@@ -70,15 +70,15 @@ var GetRecruitingPlayersResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetRecruitingPlayersResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.Recruit }),
+        SpeakeasyMetadata({ elemType: shared.Recruit }),
         __metadata("design:type", Array)
     ], GetRecruitingPlayersResponse.prototype, "recruits", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetRecruitingPlayersResponse.prototype, "statusCode", void 0);
     return GetRecruitingPlayersResponse;

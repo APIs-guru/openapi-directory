@@ -1,5 +1,7 @@
 package shared
 
+// GoogleDevtoolsArtifactregistryV1beta2File
+// Files store content that is potentially associated with Packages or Versions.
 type GoogleDevtoolsArtifactregistryV1beta2File struct {
 	CreateTime *string `json:"createTime,omitempty"`
 	Hashes     []Hash  `json:"hashes,omitempty"`

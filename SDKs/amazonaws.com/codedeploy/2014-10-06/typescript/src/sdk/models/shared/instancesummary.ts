@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceTypeEnum } from "./instancetypeenum";
 import { LifecycleEvent } from "./lifecycleevent";
 import { InstanceStatusEnum } from "./instancestatusenum";
+
 
 
 // InstanceSummary
@@ -10,21 +10,21 @@ import { InstanceStatusEnum } from "./instancestatusenum";
  * Information about an instance in a deployment.InstanceSummary is deprecated, use DeploymentTarget instead.
 **/
 export class InstanceSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deploymentId" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentId" })
   deploymentId?: string;
 
-  @Metadata({ data: "json, name=instanceId" })
+  @SpeakeasyMetadata({ data: "json, name=instanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=instanceType" })
+  @SpeakeasyMetadata({ data: "json, name=instanceType" })
   instanceType?: InstanceTypeEnum;
 
-  @Metadata({ data: "json, name=lastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=lifecycleEvents", elemType: shared.LifecycleEvent })
+  @SpeakeasyMetadata({ data: "json, name=lifecycleEvents", elemType: LifecycleEvent })
   lifecycleEvents?: LifecycleEvent[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: InstanceStatusEnum;
 }

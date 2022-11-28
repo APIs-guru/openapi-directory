@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SandboxBankTransferFireWebhookRequest
 /**
  * SandboxBankTransferFireWebhookRequest defines the request schema for `/sandbox/bank_transfer/fire_webhook`
@@ -33,15 +33,15 @@ var SandboxBankTransferFireWebhookRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=client_id" }),
+        SpeakeasyMetadata({ data: "json, name=client_id" }),
         __metadata("design:type", String)
     ], SandboxBankTransferFireWebhookRequest.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=secret" }),
+        SpeakeasyMetadata({ data: "json, name=secret" }),
         __metadata("design:type", String)
     ], SandboxBankTransferFireWebhookRequest.prototype, "secret", void 0);
     __decorate([
-        Metadata({ data: "json, name=webhook" }),
+        SpeakeasyMetadata({ data: "json, name=webhook" }),
         __metadata("design:type", String)
     ], SandboxBankTransferFireWebhookRequest.prototype, "webhook", void 0);
     return SandboxBankTransferFireWebhookRequest;

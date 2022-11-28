@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Date } from "./date";
 import { ItemCountByStatus } from "./itemcountbystatus";
+
 
 
 // DataSourceIndexStats
@@ -9,9 +9,9 @@ import { ItemCountByStatus } from "./itemcountbystatus";
  * Aggregation of items by status code as of the specified date.
 **/
 export class DataSourceIndexStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=itemCountByStatus", elemType: shared.ItemCountByStatus })
+  @SpeakeasyMetadata({ data: "json, name=itemCountByStatus", elemType: ItemCountByStatus })
   itemCountByStatus?: ItemCountByStatus[];
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Document } from "./document";
+
 
 
 // RunQueryResponse
@@ -7,18 +8,18 @@ import { Document } from "./document";
  * The response for Firestore.RunQuery.
 **/
 export class RunQueryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=document" })
+  @SpeakeasyMetadata({ data: "json, name=document" })
   document?: Document;
 
-  @Metadata({ data: "json, name=done" })
+  @SpeakeasyMetadata({ data: "json, name=done" })
   done?: boolean;
 
-  @Metadata({ data: "json, name=readTime" })
+  @SpeakeasyMetadata({ data: "json, name=readTime" })
   readTime?: string;
 
-  @Metadata({ data: "json, name=skippedResults" })
+  @SpeakeasyMetadata({ data: "json, name=skippedResults" })
   skippedResults?: number;
 
-  @Metadata({ data: "json, name=transaction" })
+  @SpeakeasyMetadata({ data: "json, name=transaction" })
   transaction?: string;
 }

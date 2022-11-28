@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Lien
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A Lien represents an encumbrance on the actions that can be performed on a resource.
 **/
 export class Lien extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=origin" })
+  @SpeakeasyMetadata({ data: "json, name=origin" })
   origin?: string;
 
-  @Metadata({ data: "json, name=parent" })
+  @SpeakeasyMetadata({ data: "json, name=parent" })
   parent?: string;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 
-  @Metadata({ data: "json, name=restrictions" })
+  @SpeakeasyMetadata({ data: "json, name=restrictions" })
   restrictions?: string[];
 }

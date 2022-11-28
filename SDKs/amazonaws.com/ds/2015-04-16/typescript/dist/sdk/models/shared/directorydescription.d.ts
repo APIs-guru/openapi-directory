@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DirectoryConnectSettingsDescription } from "./directoryconnectsettingsdescription";
 import { DirectoryEditionEnum } from "./directoryeditionenum";
 import { OwnerDirectoryDescription } from "./ownerdirectorydescription";

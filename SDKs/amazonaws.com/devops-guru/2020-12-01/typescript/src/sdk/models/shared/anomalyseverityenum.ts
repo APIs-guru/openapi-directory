@@ -1,7 +1,8 @@
 
 
+
 export enum AnomalySeverityEnum {
-    Low = "LOW"
-,    Medium = "MEDIUM"
-,    High = "HIGH"
+    Low = "LOW",
+    Medium = "MEDIUM",
+    High = "HIGH"
 }

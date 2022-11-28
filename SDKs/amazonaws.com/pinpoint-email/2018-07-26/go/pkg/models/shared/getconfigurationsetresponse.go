@@ -1,5 +1,7 @@
 package shared
 
+// GetConfigurationSetResponse
+// Information about a configuration set.
 type GetConfigurationSetResponse struct {
 	ConfigurationSetName *string            `json:"ConfigurationSetName,omitempty"`
 	DeliveryOptions      *DeliveryOptions   `json:"DeliveryOptions,omitempty"`

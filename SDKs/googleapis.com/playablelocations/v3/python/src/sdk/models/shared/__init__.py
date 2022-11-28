@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .googlemapsplayablelocationsv3impression import *
 from .googlemapsplayablelocationsv3logimpressionsrequest import *

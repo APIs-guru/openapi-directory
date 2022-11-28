@@ -11,14 +11,14 @@ class OrgsListForAuthenticatedUserQueryParams:
 
 @dataclass
 class OrgsListForAuthenticatedUserRequest:
-    query_params: OrgsListForAuthenticatedUserQueryParams = field(default=None)
+    query_params: OrgsListForAuthenticatedUserQueryParams = field()
     
 
 @dataclass
 class OrgsListForAuthenticatedUserResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     organization_simples: Optional[List[shared.OrganizationSimple]] = field(default=None)
     

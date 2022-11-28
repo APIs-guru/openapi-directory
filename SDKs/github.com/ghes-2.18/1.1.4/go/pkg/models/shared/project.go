@@ -35,6 +35,8 @@ const (
 	ProjectOrganizationPermissionEnumNone  ProjectOrganizationPermissionEnum = "none"
 )
 
+// Project
+// Projects are a way to organize columns and cards of work.
 type Project struct {
 	Body                   string                             `json:"body"`
 	ColumnsURL             string                             `json:"columns_url"`

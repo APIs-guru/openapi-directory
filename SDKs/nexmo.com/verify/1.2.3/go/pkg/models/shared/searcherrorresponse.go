@@ -10,6 +10,8 @@ const (
 	SearchErrorResponseStatusEnumOneHundredAndOne SearchErrorResponseStatusEnum = "101"
 )
 
+// SearchErrorResponse
+// Error
 type SearchErrorResponse struct {
 	ErrorText *string                        `json:"error_text,omitempty"`
 	RequestID *string                        `json:"request_id,omitempty"`

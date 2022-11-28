@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TargetLocation
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The combination of Amazon Web Services Regions and Amazon Web Services accounts targeted by the current Automation execution.
 **/
 export class TargetLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Accounts" })
+  @SpeakeasyMetadata({ data: "json, name=Accounts" })
   accounts?: string[];
 
-  @Metadata({ data: "json, name=ExecutionRoleName" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionRoleName" })
   executionRoleName?: string;
 
-  @Metadata({ data: "json, name=Regions" })
+  @SpeakeasyMetadata({ data: "json, name=Regions" })
   regions?: string[];
 
-  @Metadata({ data: "json, name=TargetLocationMaxConcurrency" })
+  @SpeakeasyMetadata({ data: "json, name=TargetLocationMaxConcurrency" })
   targetLocationMaxConcurrency?: string;
 
-  @Metadata({ data: "json, name=TargetLocationMaxErrors" })
+  @SpeakeasyMetadata({ data: "json, name=TargetLocationMaxErrors" })
   targetLocationMaxErrors?: string;
 }

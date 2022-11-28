@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Environment } from "./environment";
 import { RobotSoftwareSuite } from "./robotsoftwaresuite";
 import { Source } from "./source";

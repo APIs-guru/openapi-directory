@@ -1,20 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import rulegroup
-from . import tag
-from . import rulegrouptype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateRuleGroupRequest:
-    capacity: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Capacity' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    dry_run: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DryRun' }})
-    rule_group: Optional[rulegroup.RuleGroup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RuleGroup' }})
-    rule_group_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RuleGroupName' }})
-    rules: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Rules' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
-    type: rulegrouptype_enum.RuleGroupTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    capacity: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Capacity') }})
+    rule_group_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RuleGroupName') }})
+    type: RuleGroupTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    dry_run: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DryRun') }})
+    rule_group: Optional[RuleGroup] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RuleGroup') }})
+    rules: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Rules') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     

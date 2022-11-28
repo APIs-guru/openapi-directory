@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Finding } from "./finding";
+
 
 
 // GetFindingResponse
@@ -7,6 +8,6 @@ import { Finding } from "./finding";
  * The response to the request.
 **/
 export class GetFindingResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=finding" })
+  @SpeakeasyMetadata({ data: "json, name=finding" })
   finding?: Finding;
 }

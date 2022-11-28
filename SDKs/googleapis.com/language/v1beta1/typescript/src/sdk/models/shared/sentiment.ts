@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Sentiment
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the feeling associated with the entire text or entities in the text.
 **/
 export class Sentiment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=magnitude" })
+  @SpeakeasyMetadata({ data: "json, name=magnitude" })
   magnitude?: number;
 
-  @Metadata({ data: "json, name=polarity" })
+  @SpeakeasyMetadata({ data: "json, name=polarity" })
   polarity?: number;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: number;
 }

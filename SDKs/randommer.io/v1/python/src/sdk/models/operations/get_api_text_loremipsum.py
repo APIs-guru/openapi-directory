@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetAPITextLoremIpsumQueryParams:
-    lorem_type: shared.LoremTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'loremType', 'style': 'form', 'explode': True }})
-    number: int = field(default=None, metadata={'query_param': { 'field_name': 'number', 'style': 'form', 'explode': True }})
-    type: shared.TextTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'type', 'style': 'form', 'explode': True }})
+    lorem_type: shared.LoremTypeEnum = field(metadata={'query_param': { 'field_name': 'loremType', 'style': 'form', 'explode': True }})
+    number: int = field(metadata={'query_param': { 'field_name': 'number', 'style': 'form', 'explode': True }})
+    type: shared.TextTypeEnum = field(metadata={'query_param': { 'field_name': 'type', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -17,12 +18,12 @@ class GetAPITextLoremIpsumHeaders:
 
 @dataclass
 class GetAPITextLoremIpsumRequest:
-    query_params: GetAPITextLoremIpsumQueryParams = field(default=None)
-    headers: GetAPITextLoremIpsumHeaders = field(default=None)
+    headers: GetAPITextLoremIpsumHeaders = field()
+    query_params: GetAPITextLoremIpsumQueryParams = field()
     
 
 @dataclass
 class GetAPITextLoremIpsumResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OrganizationConfiguration
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration information for AWS Organizations.
 **/
 export class OrganizationConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EnableIntegration" })
+  @SpeakeasyMetadata({ data: "json, name=EnableIntegration" })
   enableIntegration: boolean;
 }

@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetUsersForTeamPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=team_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team_gid" })
   teamGid: string;
 }
 
 
 export class GetUsersForTeamQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class GetUsersForTeamRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetUsersForTeamPathParams;
-
-  @Metadata()
-  queryParams: GetUsersForTeamQueryParams;
-}
-
-
 export class GetUsersForTeam200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.UserCompact })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: shared.UserCompact })
   data?: shared.UserCompact[];
 }
 
 
+export class GetUsersForTeamRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetUsersForTeamPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetUsersForTeamQueryParams;
+}
+
+
 export class GetUsersForTeamResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getUsersForTeam200ApplicationJsonObject?: GetUsersForTeam200ApplicationJson;
 }

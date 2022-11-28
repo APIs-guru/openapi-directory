@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class SendPostHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
-    content_type: str = field(default=None, metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': False }})
+    accept: str = field(metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
+    content_type: str = field(metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class SendPostRequest:
-    headers: SendPostHeaders = field(default=None)
-    request: shared.SendSmsRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SendPostHeaders = field()
+    request: shared.SendSmsRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SendPostResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     send_post_500_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

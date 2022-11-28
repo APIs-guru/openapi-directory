@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IdentityPoolUsage } from "./identitypoolusage";
+
 
 
 // ListIdentityPoolUsageResponse
@@ -8,15 +8,15 @@ import { IdentityPoolUsage } from "./identitypoolusage";
  * Returned for a successful ListIdentityPoolUsage request.
 **/
 export class ListIdentityPoolUsageResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Count" })
+  @SpeakeasyMetadata({ data: "json, name=Count" })
   count?: number;
 
-  @Metadata({ data: "json, name=IdentityPoolUsages", elemType: shared.IdentityPoolUsage })
+  @SpeakeasyMetadata({ data: "json, name=IdentityPoolUsages", elemType: IdentityPoolUsage })
   identityPoolUsages?: IdentityPoolUsage[];
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

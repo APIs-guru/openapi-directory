@@ -22,31 +22,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { LambdaFunctionRecommendationFilter } from "./lambdafunctionrecommendationfilter";
 var GetLambdaFunctionRecommendationsRequest = /** @class */ (function (_super) {
     __extends(GetLambdaFunctionRecommendationsRequest, _super);
     function GetLambdaFunctionRecommendationsRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountIds" }),
+        SpeakeasyMetadata({ data: "json, name=accountIds" }),
         __metadata("design:type", Array)
     ], GetLambdaFunctionRecommendationsRequest.prototype, "accountIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=filters", elemType: shared.LambdaFunctionRecommendationFilter }),
+        SpeakeasyMetadata({ data: "json, name=filters", elemType: LambdaFunctionRecommendationFilter }),
         __metadata("design:type", Array)
     ], GetLambdaFunctionRecommendationsRequest.prototype, "filters", void 0);
     __decorate([
-        Metadata({ data: "json, name=functionArns" }),
+        SpeakeasyMetadata({ data: "json, name=functionArns" }),
         __metadata("design:type", Array)
     ], GetLambdaFunctionRecommendationsRequest.prototype, "functionArns", void 0);
     __decorate([
-        Metadata({ data: "json, name=maxResults" }),
+        SpeakeasyMetadata({ data: "json, name=maxResults" }),
         __metadata("design:type", Number)
     ], GetLambdaFunctionRecommendationsRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], GetLambdaFunctionRecommendationsRequest.prototype, "nextToken", void 0);
     return GetLambdaFunctionRecommendationsRequest;

@@ -144,6 +144,8 @@ const (
 	WasteReductionWaterBottleFillingStationsExceptionEnumDependentOnDayOfWeek WasteReductionWaterBottleFillingStationsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// WasteReduction
+// Waste reduction practices implemented at the hotel.
 type WasteReduction struct {
 	CompostableFoodContainersAndCutlery          *bool                                                           `json:"compostableFoodContainersAndCutlery,omitempty"`
 	CompostableFoodContainersAndCutleryException *WasteReductionCompostableFoodContainersAndCutleryExceptionEnum `json:"compostableFoodContainersAndCutleryException,omitempty"`

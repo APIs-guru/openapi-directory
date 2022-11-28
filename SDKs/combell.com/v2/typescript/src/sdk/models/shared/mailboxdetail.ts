@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoForward } from "./autoforward";
 import { AutoReply } from "./autoreply";
 
 
+
 export class MailboxDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actual_size" })
+  @SpeakeasyMetadata({ data: "json, name=actual_size" })
   actualSize?: number;
 
-  @Metadata({ data: "json, name=auto_forward" })
+  @SpeakeasyMetadata({ data: "json, name=auto_forward" })
   autoForward?: AutoForward;
 
-  @Metadata({ data: "json, name=auto_reply" })
+  @SpeakeasyMetadata({ data: "json, name=auto_reply" })
   autoReply?: AutoReply;
 
-  @Metadata({ data: "json, name=login" })
+  @SpeakeasyMetadata({ data: "json, name=login" })
   login?: string;
 
-  @Metadata({ data: "json, name=max_size" })
+  @SpeakeasyMetadata({ data: "json, name=max_size" })
   maxSize?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

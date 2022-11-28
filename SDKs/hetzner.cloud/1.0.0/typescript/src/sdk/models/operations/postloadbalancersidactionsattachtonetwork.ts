@@ -1,27 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostLoadBalancersIdActionsAttachToNetworkPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class PostLoadBalancersIdActionsAttachToNetworkRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip?: string;
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network: number;
-}
-
-
-export class PostLoadBalancersIdActionsAttachToNetworkRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PostLoadBalancersIdActionsAttachToNetworkPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PostLoadBalancersIdActionsAttachToNetworkRequestBody;
 }
 
 
@@ -30,69 +22,78 @@ export class PostLoadBalancersIdActionsAttachToNetworkRequest extends SpeakeasyB
  * Error message for the Action if error occurred, otherwise null
 **/
 export class PostLoadBalancersIdActionsAttachToNetworkActionResponseActionError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 }
 
 
 export class PostLoadBalancersIdActionsAttachToNetworkActionResponseActionResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 export enum PostLoadBalancersIdActionsAttachToNetworkActionResponseActionStatusEnum {
-    Success = "success"
-,    Running = "running"
-,    Error = "error"
+    Success = "success",
+    Running = "running",
+    Error = "error"
 }
 
 
 export class PostLoadBalancersIdActionsAttachToNetworkActionResponseAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command: string;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error: PostLoadBalancersIdActionsAttachToNetworkActionResponseActionError;
 
-  @Metadata({ data: "json, name=finished" })
+  @SpeakeasyMetadata({ data: "json, name=finished" })
   finished: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=progress" })
+  @SpeakeasyMetadata({ data: "json, name=progress" })
   progress: number;
 
-  @Metadata({ data: "json, name=resources", elemType: operations.PostLoadBalancersIdActionsAttachToNetworkActionResponseActionResources })
+  @SpeakeasyMetadata({ data: "json, name=resources", elemType: PostLoadBalancersIdActionsAttachToNetworkActionResponseActionResources })
   resources: PostLoadBalancersIdActionsAttachToNetworkActionResponseActionResources[];
 
-  @Metadata({ data: "json, name=started" })
+  @SpeakeasyMetadata({ data: "json, name=started" })
   started: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PostLoadBalancersIdActionsAttachToNetworkActionResponseActionStatusEnum;
 }
 
 
 export class PostLoadBalancersIdActionsAttachToNetworkActionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: PostLoadBalancersIdActionsAttachToNetworkActionResponseAction;
 }
 
 
+export class PostLoadBalancersIdActionsAttachToNetworkRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PostLoadBalancersIdActionsAttachToNetworkPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PostLoadBalancersIdActionsAttachToNetworkRequestBody;
+}
+
+
 export class PostLoadBalancersIdActionsAttachToNetworkResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   actionResponse?: PostLoadBalancersIdActionsAttachToNetworkActionResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

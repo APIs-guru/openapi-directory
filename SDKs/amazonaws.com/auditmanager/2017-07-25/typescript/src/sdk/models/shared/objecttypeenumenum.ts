@@ -1,9 +1,10 @@
 
 
+
 export enum ObjectTypeEnumEnum {
-    Assessment = "ASSESSMENT"
-,    ControlSet = "CONTROL_SET"
-,    Control = "CONTROL"
-,    Delegation = "DELEGATION"
-,    AssessmentReport = "ASSESSMENT_REPORT"
+    Assessment = "ASSESSMENT",
+    ControlSet = "CONTROL_SET",
+    Control = "CONTROL",
+    Delegation = "DELEGATION",
+    AssessmentReport = "ASSESSMENT_REPORT"
 }

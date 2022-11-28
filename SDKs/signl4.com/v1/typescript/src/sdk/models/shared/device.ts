@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Device extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appVersion" })
+  @SpeakeasyMetadata({ data: "json, name=appVersion" })
   appVersion?: string;
 
-  @Metadata({ data: "json, name=deviceId" })
+  @SpeakeasyMetadata({ data: "json, name=deviceId" })
   deviceId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=osVersion" })
+  @SpeakeasyMetadata({ data: "json, name=osVersion" })
   osVersion?: string;
 
-  @Metadata({ data: "json, name=ringtone" })
+  @SpeakeasyMetadata({ data: "json, name=ringtone" })
   ringtone?: string;
 
-  @Metadata({ data: "json, name=ringtoneDisabled" })
+  @SpeakeasyMetadata({ data: "json, name=ringtoneDisabled" })
   ringtoneDisabled?: boolean;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EcsCluster
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a registered Amazon ECS cluster.
 **/
 export class EcsCluster extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EcsClusterArn" })
+  @SpeakeasyMetadata({ data: "json, name=EcsClusterArn" })
   ecsClusterArn?: string;
 
-  @Metadata({ data: "json, name=EcsClusterName" })
+  @SpeakeasyMetadata({ data: "json, name=EcsClusterName" })
   ecsClusterName?: string;
 
-  @Metadata({ data: "json, name=RegisteredAt" })
+  @SpeakeasyMetadata({ data: "json, name=RegisteredAt" })
   registeredAt?: string;
 
-  @Metadata({ data: "json, name=StackId" })
+  @SpeakeasyMetadata({ data: "json, name=StackId" })
   stackId?: string;
 }

@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class SerpRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.SerpData;
-}
-
 
 export class Serp200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: number;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: string;
 
-  @Metadata({ data: "json, name=searched_results" })
+  @SpeakeasyMetadata({ data: "json, name=searched_results" })
   searchedResults?: number;
 
-  @Metadata({ data: "json, name=website" })
+  @SpeakeasyMetadata({ data: "json, name=website" })
   website?: string;
 }
 
 
+export class SerpRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.SerpData;
+}
+
+
 export class SerpResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serp200ApplicationJsonObject?: Serp200ApplicationJson;
 }

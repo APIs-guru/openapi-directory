@@ -30,6 +30,8 @@ const (
 	ShadowTypeEnumOuter                 ShadowTypeEnum = "OUTER"
 )
 
+// Shadow
+// The shadow properties of a page element. If these fields are unset, they may be inherited from a parent placeholder if it exists. If there is no parent, the fields will default to the value used for new page elements created in the Slides editor, which may depend on the page element kind.
 type Shadow struct {
 	Alignment       *ShadowAlignmentEnum     `json:"alignment,omitempty"`
 	Alpha           *float32                 `json:"alpha,omitempty"`

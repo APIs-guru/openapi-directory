@@ -1,6 +1,7 @@
 
 
+
 export enum ChannelRoleEnum {
-    Master = "MASTER"
-,    Viewer = "VIEWER"
+    Master = "MASTER",
+    Viewer = "VIEWER"
 }

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudretailv2alphasearchrequestdynamicfacetspec
-from . import googlecloudretailv2alphasearchrequestpersonalizationspec
+from sdk import utils
+from . import *
 
 class GoogleCloudRetailV2alphaServingConfigDiversityTypeEnum(str, Enum):
     DIVERSITY_TYPE_UNSPECIFIED = "DIVERSITY_TYPE_UNSPECIFIED"
@@ -18,23 +19,27 @@ class GoogleCloudRetailV2alphaServingConfigSolutionTypesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudRetailV2alphaServingConfig:
-    boost_control_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'boostControlIds' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    diversity_level: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'diversityLevel' }})
-    diversity_type: Optional[GoogleCloudRetailV2alphaServingConfigDiversityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'diversityType' }})
-    do_not_associate_control_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'doNotAssociateControlIds' }})
-    dynamic_facet_spec: Optional[googlecloudretailv2alphasearchrequestdynamicfacetspec.GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpec] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dynamicFacetSpec' }})
-    enable_category_filter_level: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enableCategoryFilterLevel' }})
-    facet_control_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'facetControlIds' }})
-    filter_control_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filterControlIds' }})
-    ignore_control_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ignoreControlIds' }})
-    model_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modelId' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    oneway_synonyms_control_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'onewaySynonymsControlIds' }})
-    personalization_spec: Optional[googlecloudretailv2alphasearchrequestpersonalizationspec.GoogleCloudRetailV2alphaSearchRequestPersonalizationSpec] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'personalizationSpec' }})
-    price_reranking_level: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'priceRerankingLevel' }})
-    redirect_control_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'redirectControlIds' }})
-    replacement_control_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'replacementControlIds' }})
-    solution_types: Optional[List[GoogleCloudRetailV2alphaServingConfigSolutionTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'solutionTypes' }})
-    twoway_synonyms_control_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'twowaySynonymsControlIds' }})
+    r"""GoogleCloudRetailV2alphaServingConfig
+    Configures metadata that is used to generate serving time results (e.g. search results or recommendation predictions).
+    """
+    
+    boost_control_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('boostControlIds') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    diversity_level: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('diversityLevel') }})
+    diversity_type: Optional[GoogleCloudRetailV2alphaServingConfigDiversityTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('diversityType') }})
+    do_not_associate_control_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('doNotAssociateControlIds') }})
+    dynamic_facet_spec: Optional[GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dynamicFacetSpec') }})
+    enable_category_filter_level: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enableCategoryFilterLevel') }})
+    facet_control_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('facetControlIds') }})
+    filter_control_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filterControlIds') }})
+    ignore_control_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ignoreControlIds') }})
+    model_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('modelId') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    oneway_synonyms_control_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('onewaySynonymsControlIds') }})
+    personalization_spec: Optional[GoogleCloudRetailV2alphaSearchRequestPersonalizationSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('personalizationSpec') }})
+    price_reranking_level: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('priceRerankingLevel') }})
+    redirect_control_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('redirectControlIds') }})
+    replacement_control_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('replacementControlIds') }})
+    solution_types: Optional[List[GoogleCloudRetailV2alphaServingConfigSolutionTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('solutionTypes') }})
+    twoway_synonyms_control_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('twowaySynonymsControlIds') }})
     

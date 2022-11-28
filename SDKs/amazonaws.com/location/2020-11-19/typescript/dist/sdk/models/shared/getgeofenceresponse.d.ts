@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GeofenceGeometry } from "./geofencegeometry";
 export declare class GetGeofenceResponse extends SpeakeasyBase {
     createTime: Date;

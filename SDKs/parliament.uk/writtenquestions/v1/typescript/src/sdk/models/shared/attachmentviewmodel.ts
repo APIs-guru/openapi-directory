@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AttachmentViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fileSizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=fileSizeBytes" })
   fileSizeBytes?: number;
 
-  @Metadata({ data: "json, name=fileType" })
+  @SpeakeasyMetadata({ data: "json, name=fileType" })
   fileType?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

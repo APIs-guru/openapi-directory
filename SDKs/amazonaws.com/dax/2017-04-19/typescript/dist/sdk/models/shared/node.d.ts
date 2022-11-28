@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Endpoint } from "./endpoint";
 /**
  * Represents an individual node within a DAX cluster.

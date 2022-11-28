@@ -31,7 +31,7 @@ type ConnectorsProjectsLocationsConnectionsCreateSecurity struct {
 type ConnectorsProjectsLocationsConnectionsCreateRequest struct {
 	PathParams  ConnectorsProjectsLocationsConnectionsCreatePathParams
 	QueryParams ConnectorsProjectsLocationsConnectionsCreateQueryParams
-	Request     *shared.Connection `request:"mediaType=application/json"`
+	Request     *shared.ConnectionInput `request:"mediaType=application/json"`
 	Security    ConnectorsProjectsLocationsConnectionsCreateSecurity
 }
 

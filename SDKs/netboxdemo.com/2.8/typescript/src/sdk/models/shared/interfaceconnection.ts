@@ -1,29 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { NestedInterface } from "./nestedinterface";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NestedInterface } from "./nestedinterface";
 
+
 export enum InterfaceConnectionConnectionStatusLabelEnum {
-    NotConnected = "Not Connected"
-,    Connected = "Connected"
+    NotConnected = "Not Connected",
+    Connected = "Connected"
 }
 
 
 export class InterfaceConnectionConnectionStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: InterfaceConnectionConnectionStatusLabelEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: boolean;
 }
 
 
 export class InterfaceConnection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connection_status" })
+  @SpeakeasyMetadata({ data: "json, name=connection_status" })
   connectionStatus?: InterfaceConnectionConnectionStatus;
 
-  @Metadata({ data: "json, name=interface_a" })
+  @SpeakeasyMetadata({ data: "json, name=interface_a" })
   interfaceA?: NestedInterface;
 
-  @Metadata({ data: "json, name=interface_b" })
+  @SpeakeasyMetadata({ data: "json, name=interface_b" })
   interfaceB: NestedInterface;
 }

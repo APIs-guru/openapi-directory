@@ -54,7 +54,7 @@ type DataflowProjectsJobsUpdateSecurity struct {
 type DataflowProjectsJobsUpdateRequest struct {
 	PathParams  DataflowProjectsJobsUpdatePathParams
 	QueryParams DataflowProjectsJobsUpdateQueryParams
-	Request     *shared.Job `request:"mediaType=application/json"`
+	Request     *shared.JobInput `request:"mediaType=application/json"`
 	Security    DataflowProjectsJobsUpdateSecurity
 }
 

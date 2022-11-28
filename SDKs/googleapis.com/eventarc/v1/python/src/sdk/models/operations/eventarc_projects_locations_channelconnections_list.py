@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class EventarcProjectsLocationsChannelConnectionsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class EventarcProjectsLocationsChannelConnectionsListQueryParams:
 
 @dataclass
 class EventarcProjectsLocationsChannelConnectionsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class EventarcProjectsLocationsChannelConnectionsListRequest:
-    path_params: EventarcProjectsLocationsChannelConnectionsListPathParams = field(default=None)
-    query_params: EventarcProjectsLocationsChannelConnectionsListQueryParams = field(default=None)
-    security: EventarcProjectsLocationsChannelConnectionsListSecurity = field(default=None)
+    path_params: EventarcProjectsLocationsChannelConnectionsListPathParams = field()
+    query_params: EventarcProjectsLocationsChannelConnectionsListQueryParams = field()
+    security: EventarcProjectsLocationsChannelConnectionsListSecurity = field()
     
 
 @dataclass
 class EventarcProjectsLocationsChannelConnectionsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_channel_connections_response: Optional[shared.ListChannelConnectionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

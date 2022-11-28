@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTeamEventMatchesKeysPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=event_key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=event_key" })
   eventKey: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=team_key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team_key" })
   teamKey: string;
 }
 
 
 export class GetTeamEventMatchesKeysHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=If-Modified-Since" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=If-Modified-Since" })
   ifModifiedSince?: string;
 }
 
 
 export class GetTeamEventMatchesKeysSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class GetTeamEventMatchesKeysRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTeamEventMatchesKeysPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetTeamEventMatchesKeysHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetTeamEventMatchesKeysSecurity;
 }
 
 
 export class GetTeamEventMatchesKeysResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTeamEventMatchesKeys200ApplicationJsonStrings?: string[];
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PerObjectSyncStatusEnum } from "./perobjectsyncstatusenum";
+
 
 
 // PerObjectStatus
@@ -7,9 +8,9 @@ import { PerObjectSyncStatusEnum } from "./perobjectsyncstatusenum";
  * Provides configuration status for a single policy or rule group that is used for a firewall endpoint. Network Firewall provides each endpoint with the rules that are configured in the firewall policy. Each time you add a subnet or modify the associated firewall policy, Network Firewall synchronizes the rules in the endpoint, so it can properly filter network traffic. This is part of a <a>SyncState</a> for a firewall.
 **/
 export class PerObjectStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SyncStatus" })
+  @SpeakeasyMetadata({ data: "json, name=SyncStatus" })
   syncStatus?: PerObjectSyncStatusEnum;
 
-  @Metadata({ data: "json, name=UpdateToken" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateToken" })
   updateToken?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// APIKey
+// An Otoroshi Api Key. An Api Key is defined for a group of services to allow usage of the same Api Key for multiple services.
 type APIKey struct {
 	AuthorizedEntities []string          `json:"authorizedEntities"`
 	ClientID           string            `json:"clientId"`

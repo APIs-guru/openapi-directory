@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ListConstraint } from "./listconstraint";
 export declare enum ConstraintConstraintDefaultEnum {
     ConstraintDefaultUnspecified = "CONSTRAINT_DEFAULT_UNSPECIFIED",

@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateArtifactPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=artifactId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=artifactId" })
   artifactId: string;
 }
 
 export enum UpdateArtifactXRegistryArtifactTypeEnum {
-    Avro = "AVRO"
-,    Protobuf = "PROTOBUF"
-,    ProtobufFd = "PROTOBUF_FD"
-,    Json = "JSON"
-,    Openapi = "OPENAPI"
-,    Asyncapi = "ASYNCAPI"
-,    Graphql = "GRAPHQL"
-,    Kconnect = "KCONNECT"
-,    Wsdl = "WSDL"
-,    Xsd = "XSD"
-,    Xml = "XML"
+    Avro = "AVRO",
+    Protobuf = "PROTOBUF",
+    ProtobufFd = "PROTOBUF_FD",
+    Json = "JSON",
+    Openapi = "OPENAPI",
+    Asyncapi = "ASYNCAPI",
+    Graphql = "GRAPHQL",
+    Kconnect = "KCONNECT",
+    Wsdl = "WSDL",
+    Xsd = "XSD",
+    Xml = "XML"
 }
 
 
 export class UpdateArtifactHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Registry-ArtifactType" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Registry-ArtifactType" })
   xRegistryArtifactType?: UpdateArtifactXRegistryArtifactTypeEnum;
 }
 
 
 export class UpdateArtifactRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateArtifactPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateArtifactHeaders;
 
-  @Metadata({ data: "request, media_type=*/*" })
+  @SpeakeasyMetadata({ data: "request, media_type=*/*" })
   request: Uint8Array;
 }
 
 
 export class UpdateArtifactResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   artifactMetaData?: shared.ArtifactMetaData;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

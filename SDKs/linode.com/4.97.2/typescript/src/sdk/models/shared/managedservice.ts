@@ -1,15 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ManagedServiceServiceTypeEnum {
-    Url = "url"
-,    Tcp = "tcp"
+    Url = "url",
+    Tcp = "tcp"
 }
 
 export enum ManagedServiceStatusEnum {
-    Disabled = "disabled"
-,    Pending = "pending"
-,    Ok = "ok"
-,    Problem = "problem"
+    Disabled = "disabled",
+    Pending = "pending",
+    Ok = "ok",
+    Problem = "problem"
+}
+
+
+// ManagedServiceInput
+/** 
+ * A service that Linode is monitoring as part of your Managed services. If issues are detected with this service, a ManagedIssue will be opened and, optionally, Linode special forces will attempt to resolve the Issue.
+ * 
+**/
+export class ManagedServiceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=address" })
+  address?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=body" })
+  body?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=consultation_group" })
+  consultationGroup?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=credentials" })
+  credentials?: number[];
+
+  @SpeakeasyMetadata({ data: "json, name=label" })
+  label?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=notes" })
+  notes?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=region" })
+  region?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=service_type" })
+  serviceType?: ManagedServiceServiceTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
+  timeout?: number;
 }
 
 
@@ -19,42 +55,42 @@ export enum ManagedServiceStatusEnum {
  * 
 **/
 export class ManagedService extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: string;
 
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: string;
 
-  @Metadata({ data: "json, name=consultation_group" })
+  @SpeakeasyMetadata({ data: "json, name=consultation_group" })
   consultationGroup?: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=credentials" })
+  @SpeakeasyMetadata({ data: "json, name=credentials" })
   credentials?: number[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=service_type" })
+  @SpeakeasyMetadata({ data: "json, name=service_type" })
   serviceType?: ManagedServiceServiceTypeEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ManagedServiceStatusEnum;
 
-  @Metadata({ data: "json, name=timeout" })
+  @SpeakeasyMetadata({ data: "json, name=timeout" })
   timeout?: number;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 }

@@ -20,6 +20,22 @@ const (
 	ManagedServiceStatusEnumProblem  ManagedServiceStatusEnum = "problem"
 )
 
+// ManagedServiceInput
+// A service that Linode is monitoring as part of your Managed services. If issues are detected with this service, a ManagedIssue will be opened and, optionally, Linode special forces will attempt to resolve the Issue.
+type ManagedServiceInput struct {
+	Address           *string                        `json:"address,omitempty"`
+	Body              *string                        `json:"body,omitempty"`
+	ConsultationGroup *string                        `json:"consultation_group,omitempty"`
+	Credentials       []int64                        `json:"credentials,omitempty"`
+	Label             *string                        `json:"label,omitempty"`
+	Notes             *string                        `json:"notes,omitempty"`
+	Region            *string                        `json:"region,omitempty"`
+	ServiceType       *ManagedServiceServiceTypeEnum `json:"service_type,omitempty"`
+	Timeout           *int64                         `json:"timeout,omitempty"`
+}
+
+// ManagedService
+// A service that Linode is monitoring as part of your Managed services. If issues are detected with this service, a ManagedIssue will be opened and, optionally, Linode special forces will attempt to resolve the Issue.
 type ManagedService struct {
 	Address           *string                        `json:"address,omitempty"`
 	Body              *string                        `json:"body,omitempty"`

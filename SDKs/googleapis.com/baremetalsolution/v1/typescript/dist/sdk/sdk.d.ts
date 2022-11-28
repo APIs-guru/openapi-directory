@@ -1,16 +1,17 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Operations } from "./operations";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://baremetalsolution.googleapis.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    operations: Operations;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    BaremetalsolutionOperationsCancel(req: operations.BaremetalsolutionOperationsCancelRequest, config?: AxiosRequestConfig): Promise<operations.BaremetalsolutionOperationsCancelResponse>;
-    BaremetalsolutionOperationsDelete(req: operations.BaremetalsolutionOperationsDeleteRequest, config?: AxiosRequestConfig): Promise<operations.BaremetalsolutionOperationsDeleteResponse>;
-    BaremetalsolutionOperationsList(req: operations.BaremetalsolutionOperationsListRequest, config?: AxiosRequestConfig): Promise<operations.BaremetalsolutionOperationsListResponse>;
 }
 export {};

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GamesPlayersGetPathParams:
-    player_id: str = field(default=None, metadata={'path_param': { 'field_name': 'playerId', 'style': 'simple', 'explode': False }})
+    player_id: str = field(metadata={'path_param': { 'field_name': 'playerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class GamesPlayersGetQueryParams:
 
 @dataclass
 class GamesPlayersGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GamesPlayersGetRequest:
-    path_params: GamesPlayersGetPathParams = field(default=None)
-    query_params: GamesPlayersGetQueryParams = field(default=None)
-    security: GamesPlayersGetSecurity = field(default=None)
+    path_params: GamesPlayersGetPathParams = field()
+    query_params: GamesPlayersGetQueryParams = field()
+    security: GamesPlayersGetSecurity = field()
     
 
 @dataclass
 class GamesPlayersGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     player: Optional[shared.Player] = field(default=None)
-    status_code: int = field(default=None)
     

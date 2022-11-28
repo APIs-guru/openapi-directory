@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var IapProjectsBrandsIdentityAwareProxyClientsListPathParams = /** @class */ (function (_super) {
     __extends(IapProjectsBrandsIdentityAwareProxyClientsListPathParams, _super);
@@ -30,7 +30,7 @@ var IapProjectsBrandsIdentityAwareProxyClientsListPathParams = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], IapProjectsBrandsIdentityAwareProxyClientsListPathParams.prototype, "parent", void 0);
     return IapProjectsBrandsIdentityAwareProxyClientsListPathParams;
@@ -42,55 +42,55 @@ var IapProjectsBrandsIdentityAwareProxyClientsListQueryParams = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], IapProjectsBrandsIdentityAwareProxyClientsListQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], IapProjectsBrandsIdentityAwareProxyClientsListQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], IapProjectsBrandsIdentityAwareProxyClientsListQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], IapProjectsBrandsIdentityAwareProxyClientsListQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], IapProjectsBrandsIdentityAwareProxyClientsListQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], IapProjectsBrandsIdentityAwareProxyClientsListQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], IapProjectsBrandsIdentityAwareProxyClientsListQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
         __metadata("design:type", Number)
     ], IapProjectsBrandsIdentityAwareProxyClientsListQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
         __metadata("design:type", String)
     ], IapProjectsBrandsIdentityAwareProxyClientsListQueryParams.prototype, "pageToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], IapProjectsBrandsIdentityAwareProxyClientsListQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], IapProjectsBrandsIdentityAwareProxyClientsListQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], IapProjectsBrandsIdentityAwareProxyClientsListQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], IapProjectsBrandsIdentityAwareProxyClientsListQueryParams.prototype, "uploadProtocol", void 0);
     return IapProjectsBrandsIdentityAwareProxyClientsListQueryParams;
@@ -102,11 +102,11 @@ var IapProjectsBrandsIdentityAwareProxyClientsListSecurity = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], IapProjectsBrandsIdentityAwareProxyClientsListSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], IapProjectsBrandsIdentityAwareProxyClientsListSecurity.prototype, "oauth2c", void 0);
     return IapProjectsBrandsIdentityAwareProxyClientsListSecurity;
@@ -118,15 +118,15 @@ var IapProjectsBrandsIdentityAwareProxyClientsListRequest = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", IapProjectsBrandsIdentityAwareProxyClientsListPathParams)
     ], IapProjectsBrandsIdentityAwareProxyClientsListRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", IapProjectsBrandsIdentityAwareProxyClientsListQueryParams)
     ], IapProjectsBrandsIdentityAwareProxyClientsListRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", IapProjectsBrandsIdentityAwareProxyClientsListSecurity)
     ], IapProjectsBrandsIdentityAwareProxyClientsListRequest.prototype, "security", void 0);
     return IapProjectsBrandsIdentityAwareProxyClientsListRequest;
@@ -138,15 +138,15 @@ var IapProjectsBrandsIdentityAwareProxyClientsListResponse = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], IapProjectsBrandsIdentityAwareProxyClientsListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListIdentityAwareProxyClientsResponse)
     ], IapProjectsBrandsIdentityAwareProxyClientsListResponse.prototype, "listIdentityAwareProxyClientsResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], IapProjectsBrandsIdentityAwareProxyClientsListResponse.prototype, "statusCode", void 0);
     return IapProjectsBrandsIdentityAwareProxyClientsListResponse;

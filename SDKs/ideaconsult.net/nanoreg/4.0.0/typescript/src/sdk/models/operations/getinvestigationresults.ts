@@ -1,67 +1,68 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetInvestigationResultsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=db" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=db" })
   db: shared.AmbitDatabaseIdEnum;
 }
 
 export enum GetInvestigationResultsTypeEnum {
-    Byinvestigation = "byinvestigation"
-,    Byassay = "byassay"
-,    Bysubstance = "bysubstance"
-,    Byprovider = "byprovider"
-,    Bycitation = "bycitation"
-,    Bystudytype = "bystudytype"
-,    BystructureInchikey = "bystructure_inchikey"
-,    BystructureSmiles = "bystructure_smiles"
-,    BystructureName = "bystructure_name"
-,    BysubstanceName = "bysubstance_name"
-,    BysubstanceType = "bysubstance_type"
+    Byinvestigation = "byinvestigation",
+    Byassay = "byassay",
+    Bysubstance = "bysubstance",
+    Byprovider = "byprovider",
+    Bycitation = "bycitation",
+    Bystudytype = "bystudytype",
+    BystructureInchikey = "bystructure_inchikey",
+    BystructureSmiles = "bystructure_smiles",
+    BystructureName = "bystructure_name",
+    BysubstanceName = "bysubstance_name",
+    BysubstanceType = "bysubstance_type"
 }
 
 
 export class GetInvestigationResultsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=inchikey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=inchikey" })
   inchikey?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
   pagesize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" })
   search: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type: GetInvestigationResultsTypeEnum;
 }
 
 
 export class GetInvestigationResultsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetInvestigationResultsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetInvestigationResultsQueryParams;
 }
 
 
 export class GetInvestigationResultsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   investigation?: shared.Investigation;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

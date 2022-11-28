@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GatewaySummary
+// Contains a summary of a gateway.
 type GatewaySummary struct {
 	CreationDate               time.Time                  `json:"creationDate"`
 	GatewayCapabilitySummaries []GatewayCapabilitySummary `json:"gatewayCapabilitySummaries,omitempty"`

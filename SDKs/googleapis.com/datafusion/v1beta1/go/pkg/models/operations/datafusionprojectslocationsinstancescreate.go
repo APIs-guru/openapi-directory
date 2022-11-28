@@ -31,7 +31,7 @@ type DatafusionProjectsLocationsInstancesCreateSecurity struct {
 type DatafusionProjectsLocationsInstancesCreateRequest struct {
 	PathParams  DatafusionProjectsLocationsInstancesCreatePathParams
 	QueryParams DatafusionProjectsLocationsInstancesCreateQueryParams
-	Request     *shared.Instance `request:"mediaType=application/json"`
+	Request     *shared.InstanceInput `request:"mediaType=application/json"`
 	Security    DatafusionProjectsLocationsInstancesCreateSecurity
 }
 

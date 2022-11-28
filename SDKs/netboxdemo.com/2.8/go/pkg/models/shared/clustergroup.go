@@ -7,3 +7,9 @@ type ClusterGroup struct {
 	Name         string  `json:"name"`
 	Slug         string  `json:"slug"`
 }
+
+type ClusterGroupInput struct {
+	Description *string `json:"description,omitempty"`
+	Name        string  `json:"name"`
+	Slug        string  `json:"slug"`
+}

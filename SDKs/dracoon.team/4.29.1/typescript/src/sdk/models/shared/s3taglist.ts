@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { S3Tag } from "./s3tag";
+
 
 
 // S3TagList
@@ -8,6 +8,6 @@ import { S3Tag } from "./s3tag";
  * List of S3 tags
 **/
 export class S3TagList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.S3Tag })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: S3Tag })
   items?: S3Tag[];
 }

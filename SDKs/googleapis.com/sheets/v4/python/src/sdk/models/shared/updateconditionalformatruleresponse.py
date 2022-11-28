@@ -1,15 +1,22 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import conditionalformatrule
-from . import conditionalformatrule
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateConditionalFormatRuleResponse:
-    new_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'newIndex' }})
-    new_rule: Optional[conditionalformatrule.ConditionalFormatRule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'newRule' }})
-    old_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'oldIndex' }})
-    old_rule: Optional[conditionalformatrule.ConditionalFormatRule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'oldRule' }})
+    r"""UpdateConditionalFormatRuleResponse
+    The result of updating a conditional format rule.
+    """
+    
+    new_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('newIndex') }})
+    new_rule: Optional[ConditionalFormatRule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('newRule') }})
+    old_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('oldIndex') }})
+    old_rule: Optional[ConditionalFormatRule] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('oldRule') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UserProfileSummary
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a user's profile in AWS CodeStar.
 **/
 export class UserProfileSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=emailAddress" })
+  @SpeakeasyMetadata({ data: "json, name=emailAddress" })
   emailAddress?: string;
 
-  @Metadata({ data: "json, name=sshPublicKey" })
+  @SpeakeasyMetadata({ data: "json, name=sshPublicKey" })
   sshPublicKey?: string;
 
-  @Metadata({ data: "json, name=userArn" })
+  @SpeakeasyMetadata({ data: "json, name=userArn" })
   userArn?: string;
 }

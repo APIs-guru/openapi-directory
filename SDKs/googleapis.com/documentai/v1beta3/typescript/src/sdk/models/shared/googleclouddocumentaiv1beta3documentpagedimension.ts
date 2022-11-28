@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDocumentaiV1beta3DocumentPageDimension
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Dimension for the page.
 **/
 export class GoogleCloudDocumentaiV1beta3DocumentPageDimension extends SpeakeasyBase {
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=unit" })
+  @SpeakeasyMetadata({ data: "json, name=unit" })
   unit?: string;
 
-  @Metadata({ data: "json, name=width" })
+  @SpeakeasyMetadata({ data: "json, name=width" })
   width?: number;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Parameter } from "./parameter";
+
 
 
 // Variable
@@ -8,42 +8,42 @@ import { Parameter } from "./parameter";
  * Represents a Google Tag Manager Variable.
 **/
 export class Variable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=containerId" })
+  @SpeakeasyMetadata({ data: "json, name=containerId" })
   containerId?: string;
 
-  @Metadata({ data: "json, name=disablingTriggerId" })
+  @SpeakeasyMetadata({ data: "json, name=disablingTriggerId" })
   disablingTriggerId?: string[];
 
-  @Metadata({ data: "json, name=enablingTriggerId" })
+  @SpeakeasyMetadata({ data: "json, name=enablingTriggerId" })
   enablingTriggerId?: string[];
 
-  @Metadata({ data: "json, name=fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=fingerprint" })
   fingerprint?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=parameter", elemType: shared.Parameter })
+  @SpeakeasyMetadata({ data: "json, name=parameter", elemType: Parameter })
   parameter?: Parameter[];
 
-  @Metadata({ data: "json, name=parentFolderId" })
+  @SpeakeasyMetadata({ data: "json, name=parentFolderId" })
   parentFolderId?: string;
 
-  @Metadata({ data: "json, name=scheduleEndMs" })
+  @SpeakeasyMetadata({ data: "json, name=scheduleEndMs" })
   scheduleEndMs?: string;
 
-  @Metadata({ data: "json, name=scheduleStartMs" })
+  @SpeakeasyMetadata({ data: "json, name=scheduleStartMs" })
   scheduleStartMs?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=variableId" })
+  @SpeakeasyMetadata({ data: "json, name=variableId" })
   variableId?: string;
 }

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Post
+// An offer, wanted, admin, taken or received post.
 type Post struct {
 	Content    *string    `json:"content,omitempty"`
 	Date       *time.Time `json:"date,omitempty"`

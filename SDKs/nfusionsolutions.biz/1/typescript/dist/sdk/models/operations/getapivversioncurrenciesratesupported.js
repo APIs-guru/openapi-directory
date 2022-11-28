@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetApiVVersionCurrenciesRateSupportedPathParams = /** @class */ (function (_super) {
     __extends(GetApiVVersionCurrenciesRateSupportedPathParams, _super);
@@ -30,7 +30,7 @@ var GetApiVVersionCurrenciesRateSupportedPathParams = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=version" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" }),
         __metadata("design:type", String)
     ], GetApiVVersionCurrenciesRateSupportedPathParams.prototype, "version", void 0);
     return GetApiVVersionCurrenciesRateSupportedPathParams;
@@ -42,11 +42,11 @@ var GetApiVVersionCurrenciesRateSupportedQueryParams = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetApiVVersionCurrenciesRateSupportedQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" }),
         __metadata("design:type", String)
     ], GetApiVVersionCurrenciesRateSupportedQueryParams.prototype, "token", void 0);
     return GetApiVVersionCurrenciesRateSupportedQueryParams;
@@ -58,11 +58,11 @@ var GetApiVVersionCurrenciesRateSupportedRequest = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiVVersionCurrenciesRateSupportedPathParams)
     ], GetApiVVersionCurrenciesRateSupportedRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiVVersionCurrenciesRateSupportedQueryParams)
     ], GetApiVVersionCurrenciesRateSupportedRequest.prototype, "queryParams", void 0);
     return GetApiVVersionCurrenciesRateSupportedRequest;
@@ -74,23 +74,23 @@ var GetApiVVersionCurrenciesRateSupportedResponse = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetApiVVersionCurrenciesRateSupportedResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiVVersionCurrenciesRateSupportedResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], GetApiVVersionCurrenciesRateSupportedResponse.prototype, "getApiVVersionCurrenciesRateSupported200ApplicationJsonStrings", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetApiVVersionCurrenciesRateSupportedResponse.prototype, "problemDetails", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiVVersionCurrenciesRateSupportedResponse.prototype, "statusCode", void 0);
     return GetApiVVersionCurrenciesRateSupportedResponse;

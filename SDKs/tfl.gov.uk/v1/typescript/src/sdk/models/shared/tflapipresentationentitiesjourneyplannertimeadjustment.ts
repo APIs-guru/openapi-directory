@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TflApiPresentationEntitiesJourneyPlannerTimeAdjustment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: string;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: string;
 
-  @Metadata({ data: "json, name=timeIs" })
+  @SpeakeasyMetadata({ data: "json, name=timeIs" })
   timeIs?: string;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

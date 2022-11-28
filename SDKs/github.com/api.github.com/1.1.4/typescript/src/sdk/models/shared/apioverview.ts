@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiOverviewSshKeyFingerprints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SHA256_DSA" })
+  @SpeakeasyMetadata({ data: "json, name=SHA256_DSA" })
   sha256Dsa?: string;
 
-  @Metadata({ data: "json, name=SHA256_RSA" })
+  @SpeakeasyMetadata({ data: "json, name=SHA256_RSA" })
   sha256Rsa?: string;
 }
 
@@ -15,30 +16,30 @@ export class ApiOverviewSshKeyFingerprints extends SpeakeasyBase {
  * Api Overview
 **/
 export class ApiOverview extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions" })
+  @SpeakeasyMetadata({ data: "json, name=actions" })
   actions?: string[];
 
-  @Metadata({ data: "json, name=api" })
+  @SpeakeasyMetadata({ data: "json, name=api" })
   api?: string[];
 
-  @Metadata({ data: "json, name=git" })
+  @SpeakeasyMetadata({ data: "json, name=git" })
   git?: string[];
 
-  @Metadata({ data: "json, name=hooks" })
+  @SpeakeasyMetadata({ data: "json, name=hooks" })
   hooks?: string[];
 
-  @Metadata({ data: "json, name=importer" })
+  @SpeakeasyMetadata({ data: "json, name=importer" })
   importer?: string[];
 
-  @Metadata({ data: "json, name=pages" })
+  @SpeakeasyMetadata({ data: "json, name=pages" })
   pages?: string[];
 
-  @Metadata({ data: "json, name=ssh_key_fingerprints" })
+  @SpeakeasyMetadata({ data: "json, name=ssh_key_fingerprints" })
   sshKeyFingerprints?: ApiOverviewSshKeyFingerprints;
 
-  @Metadata({ data: "json, name=verifiable_password_authentication" })
+  @SpeakeasyMetadata({ data: "json, name=verifiable_password_authentication" })
   verifiablePasswordAuthentication: boolean;
 
-  @Metadata({ data: "json, name=web" })
+  @SpeakeasyMetadata({ data: "json, name=web" })
   web?: string[];
 }

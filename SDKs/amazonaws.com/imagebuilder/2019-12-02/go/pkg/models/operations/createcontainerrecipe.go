@@ -20,6 +20,8 @@ const (
 	CreateContainerRecipeRequestBodyContainerTypeEnumDocker CreateContainerRecipeRequestBodyContainerTypeEnum = "DOCKER"
 )
 
+// CreateContainerRecipeRequestBodyInstanceConfiguration
+// Defines a custom source AMI and block device mapping configurations of an instance used for building and testing container images.
 type CreateContainerRecipeRequestBodyInstanceConfiguration struct {
 	BlockDeviceMappings []shared.InstanceBlockDeviceMapping `json:"blockDeviceMappings,omitempty"`
 	Image               *string                             `json:"image,omitempty"`
@@ -32,6 +34,8 @@ const (
 	CreateContainerRecipeRequestBodyPlatformOverrideEnumLinux   CreateContainerRecipeRequestBodyPlatformOverrideEnum = "Linux"
 )
 
+// CreateContainerRecipeRequestBodyTargetRepository
+// The container repository where the output container image is stored.
 type CreateContainerRecipeRequestBodyTargetRepository struct {
 	RepositoryName *string                                `json:"repositoryName,omitempty"`
 	Service        *shared.ContainerRepositoryServiceEnum `json:"service,omitempty"`

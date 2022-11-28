@@ -1,30 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AttachTypedLinkHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-amz-data-partition" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-amz-data-partition" })
   xAmzDataPartition: string;
 }
 
@@ -34,7 +35,7 @@ export class AttachTypedLinkHeaders extends SpeakeasyBase {
  * The reference that identifies an object.
 **/
 export class AttachTypedLinkRequestBodySourceObjectReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Selector" })
+  @SpeakeasyMetadata({ data: "json, name=Selector" })
   selector?: string;
 }
 
@@ -44,7 +45,7 @@ export class AttachTypedLinkRequestBodySourceObjectReference extends SpeakeasyBa
  * The reference that identifies an object.
 **/
 export class AttachTypedLinkRequestBodyTargetObjectReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Selector" })
+  @SpeakeasyMetadata({ data: "json, name=Selector" })
   selector?: string;
 }
 
@@ -54,75 +55,75 @@ export class AttachTypedLinkRequestBodyTargetObjectReference extends SpeakeasyBa
  * Identifies the schema Amazon Resource Name (ARN) and facet name for the typed link.
 **/
 export class AttachTypedLinkRequestBodyTypedLinkFacet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SchemaArn" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaArn" })
   schemaArn?: string;
 
-  @Metadata({ data: "json, name=TypedLinkName" })
+  @SpeakeasyMetadata({ data: "json, name=TypedLinkName" })
   typedLinkName?: string;
 }
 
 
 export class AttachTypedLinkRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Attributes", elemType: shared.AttributeNameAndValue })
+  @SpeakeasyMetadata({ data: "json, name=Attributes", elemType: shared.AttributeNameAndValue })
   attributes: shared.AttributeNameAndValue[];
 
-  @Metadata({ data: "json, name=SourceObjectReference" })
+  @SpeakeasyMetadata({ data: "json, name=SourceObjectReference" })
   sourceObjectReference: AttachTypedLinkRequestBodySourceObjectReference;
 
-  @Metadata({ data: "json, name=TargetObjectReference" })
+  @SpeakeasyMetadata({ data: "json, name=TargetObjectReference" })
   targetObjectReference: AttachTypedLinkRequestBodyTargetObjectReference;
 
-  @Metadata({ data: "json, name=TypedLinkFacet" })
+  @SpeakeasyMetadata({ data: "json, name=TypedLinkFacet" })
   typedLinkFacet: AttachTypedLinkRequestBodyTypedLinkFacet;
 }
 
 
 export class AttachTypedLinkRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: AttachTypedLinkHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: AttachTypedLinkRequestBody;
 }
 
 
 export class AttachTypedLinkResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: shared.AccessDeniedException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   attachTypedLinkResponse?: shared.AttachTypedLinkResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   directoryNotEnabledException?: shared.DirectoryNotEnabledException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   facetValidationException?: shared.FacetValidationException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServiceException?: shared.InternalServiceException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidArnException?: shared.InvalidArnException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidAttachmentException?: shared.InvalidAttachmentException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: shared.LimitExceededException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: shared.ResourceNotFoundException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   retryableConflictException?: shared.RetryableConflictException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: shared.ValidationException;
 }

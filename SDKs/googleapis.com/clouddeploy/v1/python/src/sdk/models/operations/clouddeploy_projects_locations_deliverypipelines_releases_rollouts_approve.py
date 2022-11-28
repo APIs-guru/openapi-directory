@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsApprovePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsApproveQueryP
 
 @dataclass
 class ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsApproveSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsApproveRequest:
-    path_params: ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsApprovePathParams = field(default=None)
-    query_params: ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsApproveQueryParams = field(default=None)
+    path_params: ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsApprovePathParams = field()
+    query_params: ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsApproveQueryParams = field()
+    security: ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsApproveSecurity = field()
     request: Optional[shared.ApproveRolloutRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsApproveSecurity = field(default=None)
     
 
 @dataclass
 class ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsApproveResponse:
+    content_type: str = field()
+    status_code: int = field()
     approve_rollout_response: Optional[dict[str, Any]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

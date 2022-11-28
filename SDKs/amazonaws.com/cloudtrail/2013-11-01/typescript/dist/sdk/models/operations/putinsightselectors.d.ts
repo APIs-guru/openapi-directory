@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum PutInsightSelectorsXAmzTargetEnum {
     ComAmazonawsCloudtrailV20131101CloudTrail20131101PutInsightSelectors = "com.amazonaws.cloudtrail.v20131101.CloudTrail_20131101.PutInsightSelectors"

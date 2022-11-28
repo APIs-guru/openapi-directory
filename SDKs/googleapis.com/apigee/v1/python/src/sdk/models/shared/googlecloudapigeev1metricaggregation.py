@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudApigeeV1MetricAggregationAggregationEnum(str, Enum):
     AGGREGATION_FUNCTION_UNSPECIFIED = "AGGREGATION_FUNCTION_UNSPECIFIED"
@@ -19,7 +21,11 @@ class GoogleCloudApigeeV1MetricAggregationOrderEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudApigeeV1MetricAggregation:
-    aggregation: Optional[GoogleCloudApigeeV1MetricAggregationAggregationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'aggregation' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    order: Optional[GoogleCloudApigeeV1MetricAggregationOrderEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'order' }})
+    r"""GoogleCloudApigeeV1MetricAggregation
+    The optionally aggregated metric to query with its ordering.
+    """
+    
+    aggregation: Optional[GoogleCloudApigeeV1MetricAggregationAggregationEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('aggregation') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    order: Optional[GoogleCloudApigeeV1MetricAggregationOrderEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('order') }})
     

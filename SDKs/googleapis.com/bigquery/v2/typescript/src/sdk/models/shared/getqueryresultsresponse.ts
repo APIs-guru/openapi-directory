@@ -1,45 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorProto } from "./errorproto";
 import { JobReference } from "./jobreference";
 import { TableRow } from "./tablerow";
 import { TableSchema } from "./tableschema";
 
 
+
 export class GetQueryResultsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cacheHit" })
+  @SpeakeasyMetadata({ data: "json, name=cacheHit" })
   cacheHit?: boolean;
 
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorProto })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: ErrorProto })
   errors?: ErrorProto[];
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=jobComplete" })
+  @SpeakeasyMetadata({ data: "json, name=jobComplete" })
   jobComplete?: boolean;
 
-  @Metadata({ data: "json, name=jobReference" })
+  @SpeakeasyMetadata({ data: "json, name=jobReference" })
   jobReference?: JobReference;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=numDmlAffectedRows" })
+  @SpeakeasyMetadata({ data: "json, name=numDmlAffectedRows" })
   numDmlAffectedRows?: string;
 
-  @Metadata({ data: "json, name=pageToken" })
+  @SpeakeasyMetadata({ data: "json, name=pageToken" })
   pageToken?: string;
 
-  @Metadata({ data: "json, name=rows", elemType: shared.TableRow })
+  @SpeakeasyMetadata({ data: "json, name=rows", elemType: TableRow })
   rows?: TableRow[];
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: TableSchema;
 
-  @Metadata({ data: "json, name=totalBytesProcessed" })
+  @SpeakeasyMetadata({ data: "json, name=totalBytesProcessed" })
   totalBytesProcessed?: string;
 
-  @Metadata({ data: "json, name=totalRows" })
+  @SpeakeasyMetadata({ data: "json, name=totalRows" })
   totalRows?: string;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReportStatus } from "./reportstatus";
+
 
 
 // ReportMetadata
@@ -7,15 +8,15 @@ import { ReportStatus } from "./reportstatus";
  * Report metadata.
 **/
 export class ReportMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=googleCloudStoragePath" })
+  @SpeakeasyMetadata({ data: "json, name=googleCloudStoragePath" })
   googleCloudStoragePath?: string;
 
-  @Metadata({ data: "json, name=reportDataEndTimeMs" })
+  @SpeakeasyMetadata({ data: "json, name=reportDataEndTimeMs" })
   reportDataEndTimeMs?: string;
 
-  @Metadata({ data: "json, name=reportDataStartTimeMs" })
+  @SpeakeasyMetadata({ data: "json, name=reportDataStartTimeMs" })
   reportDataStartTimeMs?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ReportStatus;
 }

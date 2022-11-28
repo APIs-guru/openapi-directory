@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MailboxExportJobStateEnum } from "./mailboxexportjobstateenum";
 export declare class DescribeMailboxExportJobResponse extends SpeakeasyBase {
     description?: string;

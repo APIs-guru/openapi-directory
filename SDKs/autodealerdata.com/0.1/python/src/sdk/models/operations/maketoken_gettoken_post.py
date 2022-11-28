@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class MakeTokenGetTokenPostQueryParams:
-    api_id: str = field(default=None, metadata={'query_param': { 'field_name': 'apiID', 'style': 'form', 'explode': True }})
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'apiKey', 'style': 'form', 'explode': True }})
+    api_id: str = field(metadata={'query_param': { 'field_name': 'apiID', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'apiKey', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class MakeTokenGetTokenPostRequest:
-    query_params: MakeTokenGetTokenPostQueryParams = field(default=None)
+    query_params: MakeTokenGetTokenPostQueryParams = field()
     
 
 @dataclass
 class MakeTokenGetTokenPostResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     http_validation_error: Optional[shared.HTTPValidationError] = field(default=None)
     json_web_token: Optional[shared.JSONWebToken] = field(default=None)
-    status_code: int = field(default=None)
     

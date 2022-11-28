@@ -4,10 +4,10 @@ from typing import Optional
 
 @dataclass
 class GetAPITextPasswordQueryParams:
-    has_digits: bool = field(default=None, metadata={'query_param': { 'field_name': 'hasDigits', 'style': 'form', 'explode': True }})
-    has_special: bool = field(default=None, metadata={'query_param': { 'field_name': 'hasSpecial', 'style': 'form', 'explode': True }})
-    has_uppercase: bool = field(default=None, metadata={'query_param': { 'field_name': 'hasUppercase', 'style': 'form', 'explode': True }})
-    length: int = field(default=None, metadata={'query_param': { 'field_name': 'length', 'style': 'form', 'explode': True }})
+    has_digits: bool = field(metadata={'query_param': { 'field_name': 'hasDigits', 'style': 'form', 'explode': True }})
+    has_special: bool = field(metadata={'query_param': { 'field_name': 'hasSpecial', 'style': 'form', 'explode': True }})
+    has_uppercase: bool = field(metadata={'query_param': { 'field_name': 'hasUppercase', 'style': 'form', 'explode': True }})
+    length: int = field(metadata={'query_param': { 'field_name': 'length', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -17,12 +17,12 @@ class GetAPITextPasswordHeaders:
 
 @dataclass
 class GetAPITextPasswordRequest:
-    query_params: GetAPITextPasswordQueryParams = field(default=None)
-    headers: GetAPITextPasswordHeaders = field(default=None)
+    headers: GetAPITextPasswordHeaders = field()
+    query_params: GetAPITextPasswordQueryParams = field()
     
 
 @dataclass
 class GetAPITextPasswordResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

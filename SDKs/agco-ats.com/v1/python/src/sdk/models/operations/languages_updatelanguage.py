@@ -1,31 +1,34 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class LanguagesUpdateLanguagePathParams:
-    locale_id: int = field(default=None, metadata={'path_param': { 'field_name': 'LocaleID', 'style': 'simple', 'explode': False }})
+    locale_id: int = field(metadata={'path_param': { 'field_name': 'LocaleID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class LanguagesUpdateLanguageRequests:
-    application_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'application/xml' }})
+    application_xml: bytes = field(metadata={'request': { 'media_type': 'application/xml' }})
+    text_xml: bytes = field(metadata={'request': { 'media_type': 'text/xml' }})
     global_resources_shared_models_language: Optional[shared.GlobalResourcesSharedModelsLanguage] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     global_resources_shared_models_language1: Optional[shared.GlobalResourcesSharedModelsLanguage] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     global_resources_shared_models_language2: Optional[shared.GlobalResourcesSharedModelsLanguage] = field(default=None, metadata={'request': { 'media_type': 'text/json' }})
-    text_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class LanguagesUpdateLanguageRequest:
-    path_params: LanguagesUpdateLanguagePathParams = field(default=None)
-    request: LanguagesUpdateLanguageRequests = field(default=None)
+    path_params: LanguagesUpdateLanguagePathParams = field()
+    request: LanguagesUpdateLanguageRequests = field()
     
 
 @dataclass
 class LanguagesUpdateLanguageResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,20 +1,20 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class PriorityPackagesDeletePriorityPackagesPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'ID', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PriorityPackagesDeletePriorityPackagesRequest:
-    path_params: PriorityPackagesDeletePriorityPackagesPathParams = field(default=None)
+    path_params: PriorityPackagesDeletePriorityPackagesPathParams = field()
     
 
 @dataclass
 class PriorityPackagesDeletePriorityPackagesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

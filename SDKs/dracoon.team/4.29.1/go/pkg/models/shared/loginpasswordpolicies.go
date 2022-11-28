@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LoginPasswordPolicies
+// Login password policies
 type LoginPasswordPolicies struct {
 	CharacterRules            CharacterRules     `json:"characterRules"`
 	MinLength                 int32              `json:"minLength"`

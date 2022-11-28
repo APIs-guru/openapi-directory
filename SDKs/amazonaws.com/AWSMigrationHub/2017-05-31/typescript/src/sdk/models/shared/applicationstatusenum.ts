@@ -1,7 +1,8 @@
 
 
+
 export enum ApplicationStatusEnum {
-    NotStarted = "NOT_STARTED"
-,    InProgress = "IN_PROGRESS"
-,    Completed = "COMPLETED"
+    NotStarted = "NOT_STARTED",
+    InProgress = "IN_PROGRESS",
+    Completed = "COMPLETED"
 }

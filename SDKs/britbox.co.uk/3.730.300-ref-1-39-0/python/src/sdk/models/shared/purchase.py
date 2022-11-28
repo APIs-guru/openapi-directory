@@ -1,22 +1,22 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import itempurchase
-from . import planpurchase
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Purchase:
-    authorization_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorizationDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    creation_date: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creationDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    currency: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    item: Optional[itempurchase.ItemPurchase] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'item' }})
-    payment_method_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentMethodId' }})
-    plan: Optional[planpurchase.PlanPurchase] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'plan' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
+    creation_date: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('creationDate'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    currency: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('currency') }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    authorization_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authorizationDate'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    item: Optional[ItemPurchase] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('item') }})
+    payment_method_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentMethodId') }})
+    plan: Optional[PlanPurchase] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('plan') }})
     

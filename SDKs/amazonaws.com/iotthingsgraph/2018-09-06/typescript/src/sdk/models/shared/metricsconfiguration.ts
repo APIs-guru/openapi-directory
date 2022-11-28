@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MetricsConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object that specifies whether cloud metrics are collected in a deployment and, if so, what role is used to collect metrics.
 **/
 export class MetricsConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudMetricEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=cloudMetricEnabled" })
   cloudMetricEnabled?: boolean;
 
-  @Metadata({ data: "json, name=metricRuleRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=metricRuleRoleArn" })
   metricRuleRoleArn?: string;
 }

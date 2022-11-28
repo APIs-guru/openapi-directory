@@ -1,0 +1,8 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { RotateServerCaContext } from "./rotateservercacontext";
+/**
+ * Rotate Server CA request.
+**/
+export declare class InstancesRotateServerCaRequest extends SpeakeasyBase {
+    rotateServerCaContext?: RotateServerCaContext;
+}

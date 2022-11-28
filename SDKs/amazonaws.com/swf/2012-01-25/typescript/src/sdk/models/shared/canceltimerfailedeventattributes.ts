@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CancelTimerFailedCauseEnum } from "./canceltimerfailedcauseenum";
+
 
 
 // CancelTimerFailedEventAttributes
@@ -7,12 +8,12 @@ import { CancelTimerFailedCauseEnum } from "./canceltimerfailedcauseenum";
  * Provides the details of the <code>CancelTimerFailed</code> event.
 **/
 export class CancelTimerFailedEventAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cause" })
+  @SpeakeasyMetadata({ data: "json, name=cause" })
   cause: CancelTimerFailedCauseEnum;
 
-  @Metadata({ data: "json, name=decisionTaskCompletedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=decisionTaskCompletedEventId" })
   decisionTaskCompletedEventId: number;
 
-  @Metadata({ data: "json, name=timerId" })
+  @SpeakeasyMetadata({ data: "json, name=timerId" })
   timerId: string;
 }

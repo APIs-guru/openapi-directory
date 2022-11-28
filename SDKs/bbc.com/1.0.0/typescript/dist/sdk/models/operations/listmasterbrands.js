@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var ListMasterbrandsMixinEnum;
 (function (ListMasterbrandsMixinEnum) {
@@ -42,39 +42,39 @@ var ListMasterbrandsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=mid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mid" }),
         __metadata("design:type", Array)
     ], ListMasterbrandsQueryParams.prototype, "mid", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=mixin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mixin" }),
         __metadata("design:type", Array)
     ], ListMasterbrandsQueryParams.prototype, "mixin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], ListMasterbrandsQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], ListMasterbrandsQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=partner_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=partner_id" }),
         __metadata("design:type", Array)
     ], ListMasterbrandsQueryParams.prototype, "partnerId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=partner_pid" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=partner_pid" }),
         __metadata("design:type", Array)
     ], ListMasterbrandsQueryParams.prototype, "partnerPid", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=q" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" }),
         __metadata("design:type", String)
     ], ListMasterbrandsQueryParams.prototype, "q", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], ListMasterbrandsQueryParams.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort_direction" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_direction" }),
         __metadata("design:type", String)
     ], ListMasterbrandsQueryParams.prototype, "sortDirection", void 0);
     return ListMasterbrandsQueryParams;
@@ -86,7 +86,7 @@ var ListMasterbrandsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListMasterbrandsQueryParams)
     ], ListMasterbrandsRequest.prototype, "queryParams", void 0);
     return ListMasterbrandsRequest;
@@ -98,23 +98,23 @@ var ListMasterbrandsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ListMasterbrandsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListMasterbrandsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], ListMasterbrandsResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListMasterbrandsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListMasterbrandsResponse.prototype, "nitro", void 0);
     return ListMasterbrandsResponse;

@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDeviceCodeIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauthsecurity: shared.SchemeOauthsecurity;
 }
 
 
-export class GetDeviceCodeIdRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: any;
-
-  @Metadata()
-  security: GetDeviceCodeIdSecurity;
-}
-
-
 export class GetDeviceCodeId401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
+export class GetDeviceCodeIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: any;
+
+  @SpeakeasyMetadata()
+  security: GetDeviceCodeIdSecurity;
+}
+
+
 export class GetDeviceCodeIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deviceAuthorizationCodeResponse?: shared.DeviceAuthorizationCodeResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDeviceCodeId400ApplicationJsonOneOf?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDeviceCodeId401ApplicationJsonObject?: GetDeviceCodeId401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDeviceCodeId500ApplicationJsonOneOf?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

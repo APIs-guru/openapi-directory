@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FilterList
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * List of infoTypes to be filtered.
 **/
 export class FilterList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=infoTypes" })
+  @SpeakeasyMetadata({ data: "json, name=infoTypes" })
   infoTypes?: string[];
 }

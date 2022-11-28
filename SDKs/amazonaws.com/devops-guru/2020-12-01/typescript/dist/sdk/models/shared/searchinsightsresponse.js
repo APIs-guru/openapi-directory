@@ -22,23 +22,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ProactiveInsightSummary } from "./proactiveinsightsummary";
+import { ReactiveInsightSummary } from "./reactiveinsightsummary";
 var SearchInsightsResponse = /** @class */ (function (_super) {
     __extends(SearchInsightsResponse, _super);
     function SearchInsightsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], SearchInsightsResponse.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProactiveInsights", elemType: shared.ProactiveInsightSummary }),
+        SpeakeasyMetadata({ data: "json, name=ProactiveInsights", elemType: ProactiveInsightSummary }),
         __metadata("design:type", Array)
     ], SearchInsightsResponse.prototype, "proactiveInsights", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReactiveInsights", elemType: shared.ReactiveInsightSummary }),
+        SpeakeasyMetadata({ data: "json, name=ReactiveInsights", elemType: ReactiveInsightSummary }),
         __metadata("design:type", Array)
     ], SearchInsightsResponse.prototype, "reactiveInsights", void 0);
     return SearchInsightsResponse;

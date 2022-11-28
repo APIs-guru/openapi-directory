@@ -1,10 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 
 @dataclass
 class DescribeFunction20200531PathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'Name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'Name', 'style': 'simple', 'explode': False }})
     
 class DescribeFunction20200531StageEnum(str, Enum):
     DEVELOPMENT = "DEVELOPMENT"
@@ -29,14 +33,14 @@ class DescribeFunction20200531Headers:
 
 @dataclass
 class DescribeFunction20200531Request:
-    path_params: DescribeFunction20200531PathParams = field(default=None)
-    query_params: DescribeFunction20200531QueryParams = field(default=None)
-    headers: DescribeFunction20200531Headers = field(default=None)
+    headers: DescribeFunction20200531Headers = field()
+    path_params: DescribeFunction20200531PathParams = field()
+    query_params: DescribeFunction20200531QueryParams = field()
     
 
 @dataclass
 class DescribeFunction20200531Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

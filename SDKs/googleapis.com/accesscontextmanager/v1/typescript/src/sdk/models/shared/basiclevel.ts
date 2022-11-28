@@ -1,10 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Condition } from "./condition";
 
+
 export enum BasicLevelCombiningFunctionEnum {
-    And = "AND"
-,    Or = "OR"
+    And = "AND",
+    Or = "OR"
 }
 
 
@@ -13,9 +13,9 @@ export enum BasicLevelCombiningFunctionEnum {
  * `BasicLevel` is an `AccessLevel` using a set of recommended features.
 **/
 export class BasicLevel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=combiningFunction" })
+  @SpeakeasyMetadata({ data: "json, name=combiningFunction" })
   combiningFunction?: BasicLevelCombiningFunctionEnum;
 
-  @Metadata({ data: "json, name=conditions", elemType: shared.Condition })
+  @SpeakeasyMetadata({ data: "json, name=conditions", elemType: Condition })
   conditions?: Condition[];
 }

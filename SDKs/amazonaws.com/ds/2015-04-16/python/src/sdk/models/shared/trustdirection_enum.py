@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class TrustDirectionEnum(str, Enum):
     ONE_WAY_OUTGOING = "One-Way: Outgoing"

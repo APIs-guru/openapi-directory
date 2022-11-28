@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetSubstanceStructuresPathParams = /** @class */ (function (_super) {
     __extends(GetSubstanceStructuresPathParams, _super);
@@ -30,11 +30,11 @@ var GetSubstanceStructuresPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=db" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=db" }),
         __metadata("design:type", String)
     ], GetSubstanceStructuresPathParams.prototype, "db", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=uuid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=uuid" }),
         __metadata("design:type", String)
     ], GetSubstanceStructuresPathParams.prototype, "uuid", void 0);
     return GetSubstanceStructuresPathParams;
@@ -46,11 +46,11 @@ var GetSubstanceStructuresQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetSubstanceStructuresQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pagesize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagesize" }),
         __metadata("design:type", Number)
     ], GetSubstanceStructuresQueryParams.prototype, "pagesize", void 0);
     return GetSubstanceStructuresQueryParams;
@@ -62,11 +62,11 @@ var GetSubstanceStructuresRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSubstanceStructuresPathParams)
     ], GetSubstanceStructuresRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSubstanceStructuresQueryParams)
     ], GetSubstanceStructuresRequest.prototype, "queryParams", void 0);
     return GetSubstanceStructuresRequest;
@@ -78,15 +78,15 @@ var GetSubstanceStructuresResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSubstanceStructuresResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Dataset)
     ], GetSubstanceStructuresResponse.prototype, "dataset", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSubstanceStructuresResponse.prototype, "statusCode", void 0);
     return GetSubstanceStructuresResponse;

@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GridCoordinate } from "./gridcoordinate";
-import { GridCoordinate } from "./gridcoordinate";
-import { GridCoordinate } from "./gridcoordinate";
+
 
 
 // DataSourceObjectReference
@@ -9,18 +8,18 @@ import { GridCoordinate } from "./gridcoordinate";
  * Reference to a data source object.
 **/
 export class DataSourceObjectReference extends SpeakeasyBase {
-  @Metadata({ data: "json, name=chartId" })
+  @SpeakeasyMetadata({ data: "json, name=chartId" })
   chartId?: number;
 
-  @Metadata({ data: "json, name=dataSourceFormulaCell" })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceFormulaCell" })
   dataSourceFormulaCell?: GridCoordinate;
 
-  @Metadata({ data: "json, name=dataSourcePivotTableAnchorCell" })
+  @SpeakeasyMetadata({ data: "json, name=dataSourcePivotTableAnchorCell" })
   dataSourcePivotTableAnchorCell?: GridCoordinate;
 
-  @Metadata({ data: "json, name=dataSourceTableAnchorCell" })
+  @SpeakeasyMetadata({ data: "json, name=dataSourceTableAnchorCell" })
   dataSourceTableAnchorCell?: GridCoordinate;
 
-  @Metadata({ data: "json, name=sheetId" })
+  @SpeakeasyMetadata({ data: "json, name=sheetId" })
   sheetId?: string;
 }

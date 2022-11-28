@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PolicyParameter } from "./policyparameter";
+
 
 
 // ReviewPolicy
@@ -8,9 +8,9 @@ import { PolicyParameter } from "./policyparameter";
  *  HIT Review Policy data structures represent HIT review policies, which you specify when you create a HIT. 
 **/
 export class ReviewPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Parameters", elemType: shared.PolicyParameter })
+  @SpeakeasyMetadata({ data: "json, name=Parameters", elemType: PolicyParameter })
   parameters?: PolicyParameter[];
 
-  @Metadata({ data: "json, name=PolicyName" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyName" })
   policyName: string;
 }

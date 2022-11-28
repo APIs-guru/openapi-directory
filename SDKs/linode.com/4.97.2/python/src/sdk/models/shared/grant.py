@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GrantPermissionsEnum(str, Enum):
     READ_ONLY = "read_only"
@@ -10,7 +12,24 @@ class GrantPermissionsEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Grant:
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
-    permissions: Optional[GrantPermissionsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
+    r"""Grant
+    Represents the level of access a restricted User has to a specific resource on the Account.
+    
+    """
+    
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('label') }})
+    permissions: Optional[GrantPermissionsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('permissions') }})
+    
+
+@dataclass_json
+@dataclass
+class GrantInput:
+    r"""GrantInput
+    Represents the level of access a restricted User has to a specific resource on the Account.
+    
+    """
+    
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    permissions: Optional[GrantPermissionsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('permissions') }})
     

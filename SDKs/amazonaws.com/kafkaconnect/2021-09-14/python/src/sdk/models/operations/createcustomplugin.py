@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -22,35 +27,39 @@ class CreateCustomPluginRequestBodyContentTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateCustomPluginRequestBodyLocation:
-    s3_location: Optional[shared.S3Location] = field(default=None, metadata={'dataclasses_json': { 'field_name': 's3Location' }})
+    r"""CreateCustomPluginRequestBodyLocation
+    Information about the location of a custom plugin.
+    """
+    
+    s3_location: Optional[shared.S3Location] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('s3Location') }})
     
 
 @dataclass_json
 @dataclass
 class CreateCustomPluginRequestBody:
-    content_type: CreateCustomPluginRequestBodyContentTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contentType' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    location: CreateCustomPluginRequestBodyLocation = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    content_type: CreateCustomPluginRequestBodyContentTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('contentType') }})
+    location: CreateCustomPluginRequestBodyLocation = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
     
 
 @dataclass
 class CreateCustomPluginRequest:
-    headers: CreateCustomPluginHeaders = field(default=None)
-    request: CreateCustomPluginRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateCustomPluginHeaders = field()
+    request: CreateCustomPluginRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateCustomPluginResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_custom_plugin_response: Optional[shared.CreateCustomPluginResponse] = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

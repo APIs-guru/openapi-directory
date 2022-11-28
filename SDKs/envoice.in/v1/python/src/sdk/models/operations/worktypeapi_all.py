@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class WorkTypeAPIAllHeaders:
-    x_auth_key: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-key', 'style': 'simple', 'explode': False }})
-    x_auth_secret: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-secret', 'style': 'simple', 'explode': False }})
+    x_auth_key: str = field(metadata={'header': { 'field_name': 'x-auth-key', 'style': 'simple', 'explode': False }})
+    x_auth_secret: str = field(metadata={'header': { 'field_name': 'x-auth-secret', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class WorkTypeAPIAllRequest:
-    headers: WorkTypeAPIAllHeaders = field(default=None)
+    headers: WorkTypeAPIAllHeaders = field()
     
 
 @dataclass
 class WorkTypeAPIAllResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     work_type_details_api_models: Optional[List[shared.WorkTypeDetailsAPIModel]] = field(default=None)
     

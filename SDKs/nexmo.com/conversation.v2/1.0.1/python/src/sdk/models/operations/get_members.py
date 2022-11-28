@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetMembersPathParams:
-    conversation_id: str = field(default=None, metadata={'path_param': { 'field_name': 'conversation_id', 'style': 'simple', 'explode': False }})
+    conversation_id: str = field(metadata={'path_param': { 'field_name': 'conversation_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +18,13 @@ class GetMembersQueryParams:
 
 @dataclass
 class GetMembersRequest:
-    path_params: GetMembersPathParams = field(default=None)
-    query_params: GetMembersQueryParams = field(default=None)
+    path_params: GetMembersPathParams = field()
+    query_params: GetMembersQueryParams = field()
     
 
 @dataclass
 class GetMembersResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_members_200_application_json_any: Optional[Any] = field(default=None)
     

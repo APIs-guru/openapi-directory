@@ -4,17 +4,17 @@ from typing import Optional
 
 @dataclass
 class SeasonCurrentPathParams:
-    format: str = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    format: str = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class SeasonCurrentRequest:
-    path_params: SeasonCurrentPathParams = field(default=None)
+    path_params: SeasonCurrentPathParams = field()
     
 
 @dataclass
 class SeasonCurrentResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     season_current_200_application_json_integer: Optional[int] = field(default=None)
-    status_code: int = field(default=None)
     

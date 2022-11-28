@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkflowExecutionTerminatedCauseEnum } from "./workflowexecutionterminatedcauseenum";
 import { ChildPolicyEnum } from "./childpolicyenum";
+
 
 
 // WorkflowExecutionTerminatedEventAttributes
@@ -8,15 +9,15 @@ import { ChildPolicyEnum } from "./childpolicyenum";
  * Provides the details of the <code>WorkflowExecutionTerminated</code> event.
 **/
 export class WorkflowExecutionTerminatedEventAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cause" })
+  @SpeakeasyMetadata({ data: "json, name=cause" })
   cause?: WorkflowExecutionTerminatedCauseEnum;
 
-  @Metadata({ data: "json, name=childPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=childPolicy" })
   childPolicy: ChildPolicyEnum;
 
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: string;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 }

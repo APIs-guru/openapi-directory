@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContactInfo } from "./contactinfo";
+
 
 
 // ContactInfoList
@@ -8,6 +8,6 @@ import { ContactInfo } from "./contactinfo";
  * Wrapper message for a list of contact information defining Customer Match audience members.
 **/
 export class ContactInfoList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contactInfos", elemType: shared.ContactInfo })
+  @SpeakeasyMetadata({ data: "json, name=contactInfos", elemType: ContactInfo })
   contactInfos?: ContactInfo[];
 }

@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SandboxProcessorTokenCreateRequestOptions } from "./sandboxprocessortokencreaterequestoptions";
 
 
+
 export class SandboxProcessorTokenCreateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=client_id" })
+  @SpeakeasyMetadata({ data: "json, name=client_id" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=institution_id" })
+  @SpeakeasyMetadata({ data: "json, name=institution_id" })
   institutionId: string;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: SandboxProcessorTokenCreateRequestOptions;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 }

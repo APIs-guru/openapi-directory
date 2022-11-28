@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HistoryEventExecutionDataDetails } from "./historyeventexecutiondatadetails";
+
 
 
 // StateEnteredEventDetails
@@ -7,12 +8,12 @@ import { HistoryEventExecutionDataDetails } from "./historyeventexecutiondatadet
  * Contains details about a state entered during an execution.
 **/
 export class StateEnteredEventDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=input" })
+  @SpeakeasyMetadata({ data: "json, name=input" })
   input?: string;
 
-  @Metadata({ data: "json, name=inputDetails" })
+  @SpeakeasyMetadata({ data: "json, name=inputDetails" })
   inputDetails?: HistoryEventExecutionDataDetails;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }

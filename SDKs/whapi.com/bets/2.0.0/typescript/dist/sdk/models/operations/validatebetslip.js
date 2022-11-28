@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ValidateBetslipQueryParams = /** @class */ (function (_super) {
     __extends(ValidateBetslipQueryParams, _super);
@@ -30,7 +30,7 @@ var ValidateBetslipQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=expanded" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=expanded" }),
         __metadata("design:type", String)
     ], ValidateBetslipQueryParams.prototype, "expanded", void 0);
     return ValidateBetslipQueryParams;
@@ -42,11 +42,11 @@ var ValidateBetslipHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=apiKey" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiKey" }),
         __metadata("design:type", String)
     ], ValidateBetslipHeaders.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=apiSecret" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=apiSecret" }),
         __metadata("design:type", String)
     ], ValidateBetslipHeaders.prototype, "apiSecret", void 0);
     return ValidateBetslipHeaders;
@@ -58,15 +58,15 @@ var ValidateBetslipRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ValidateBetslipQueryParams)
     ], ValidateBetslipRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ValidateBetslipHeaders)
     ], ValidateBetslipRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.BetSlipRequest)
     ], ValidateBetslipRequest.prototype, "request", void 0);
     return ValidateBetslipRequest;
@@ -78,15 +78,15 @@ var ValidateBetslipResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ValidateBetslipResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ValidateBetslipResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.BetSlipResponse)
     ], ValidateBetslipResponse.prototype, "betSlipResponse", void 0);
     return ValidateBetslipResponse;

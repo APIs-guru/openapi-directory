@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum RetrievalImportanceImportanceEnum {
-    Default = "DEFAULT"
-,    Highest = "HIGHEST"
-,    High = "HIGH"
-,    Low = "LOW"
-,    None = "NONE"
+    Default = "DEFAULT",
+    Highest = "HIGHEST",
+    High = "HIGH",
+    Low = "LOW",
+    None = "NONE"
 }
 
 
 export class RetrievalImportance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=importance" })
+  @SpeakeasyMetadata({ data: "json, name=importance" })
   importance?: RetrievalImportanceImportanceEnum;
 }

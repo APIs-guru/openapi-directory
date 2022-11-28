@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetChannelSubscribersPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=channel_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=channel_id" })
   channelId: number;
 }
 
 export enum GetChannelSubscribersDirectionEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 export enum GetChannelSubscribersFilterEnum {
@@ -17,51 +18,51 @@ export enum GetChannelSubscribersFilterEnum {
 }
 
 export enum GetChannelSubscribersSortEnum {
-    Alphabetical = "alphabetical"
-,    Date = "date"
+    Alphabetical = "alphabetical",
+    Date = "date"
 }
 
 
 export class GetChannelSubscribersQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: GetChannelSubscribersDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter: GetChannelSubscribersFilterEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: GetChannelSubscribersSortEnum;
 }
 
 
 export class GetChannelSubscribersRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetChannelSubscribersPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetChannelSubscribersQueryParams;
 }
 
 
 export class GetChannelSubscribersResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   legacyError?: shared.LegacyError;
 
-  @Metadata({ elemType: shared.User })
+  @SpeakeasyMetadata({ elemType: shared.User })
   users?: shared.User[];
 }

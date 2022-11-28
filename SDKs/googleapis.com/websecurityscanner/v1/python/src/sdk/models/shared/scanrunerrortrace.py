@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import scanconfigerror
+from sdk import utils
+from . import *
 
 class ScanRunErrorTraceCodeEnum(str, Enum):
     CODE_UNSPECIFIED = "CODE_UNSPECIFIED"
@@ -16,7 +18,11 @@ class ScanRunErrorTraceCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ScanRunErrorTrace:
-    code: Optional[ScanRunErrorTraceCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    most_common_http_error_code: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mostCommonHttpErrorCode' }})
-    scan_config_error: Optional[scanconfigerror.ScanConfigError] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scanConfigError' }})
+    r"""ScanRunErrorTrace
+    Output only. Defines an error trace message for a ScanRun.
+    """
+    
+    code: Optional[ScanRunErrorTraceCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    most_common_http_error_code: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mostCommonHttpErrorCode') }})
+    scan_config_error: Optional[ScanConfigError] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scanConfigError') }})
     

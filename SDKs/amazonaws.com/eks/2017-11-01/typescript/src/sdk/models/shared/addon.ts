@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AddonHealth } from "./addonhealth";
 import { AddonStatusEnum } from "./addonstatusenum";
+
 
 
 // Addon
@@ -8,33 +9,33 @@ import { AddonStatusEnum } from "./addonstatusenum";
  * An Amazon EKS add-on.
 **/
 export class Addon extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addonArn" })
+  @SpeakeasyMetadata({ data: "json, name=addonArn" })
   addonArn?: string;
 
-  @Metadata({ data: "json, name=addonName" })
+  @SpeakeasyMetadata({ data: "json, name=addonName" })
   addonName?: string;
 
-  @Metadata({ data: "json, name=addonVersion" })
+  @SpeakeasyMetadata({ data: "json, name=addonVersion" })
   addonVersion?: string;
 
-  @Metadata({ data: "json, name=clusterName" })
+  @SpeakeasyMetadata({ data: "json, name=clusterName" })
   clusterName?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=health" })
+  @SpeakeasyMetadata({ data: "json, name=health" })
   health?: AddonHealth;
 
-  @Metadata({ data: "json, name=modifiedAt" })
+  @SpeakeasyMetadata({ data: "json, name=modifiedAt" })
   modifiedAt?: Date;
 
-  @Metadata({ data: "json, name=serviceAccountRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccountRoleArn" })
   serviceAccountRoleArn?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: AddonStatusEnum;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }

@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DcimRackGroupsCreateRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.WritableRackGroup;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.WritableRackGroupInput;
 }
 
 
 export class DcimRackGroupsCreateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   rackGroup?: shared.RackGroup;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

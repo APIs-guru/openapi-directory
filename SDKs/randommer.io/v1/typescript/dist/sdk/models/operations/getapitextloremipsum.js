@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetApiTextLoremIpsumQueryParams = /** @class */ (function (_super) {
     __extends(GetApiTextLoremIpsumQueryParams, _super);
@@ -30,15 +30,15 @@ var GetApiTextLoremIpsumQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=loremType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=loremType" }),
         __metadata("design:type", String)
     ], GetApiTextLoremIpsumQueryParams.prototype, "loremType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=number" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=number" }),
         __metadata("design:type", Number)
     ], GetApiTextLoremIpsumQueryParams.prototype, "number", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" }),
         __metadata("design:type", String)
     ], GetApiTextLoremIpsumQueryParams.prototype, "type", void 0);
     return GetApiTextLoremIpsumQueryParams;
@@ -50,7 +50,7 @@ var GetApiTextLoremIpsumHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
         __metadata("design:type", String)
     ], GetApiTextLoremIpsumHeaders.prototype, "xApiKey", void 0);
     return GetApiTextLoremIpsumHeaders;
@@ -62,11 +62,11 @@ var GetApiTextLoremIpsumRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiTextLoremIpsumQueryParams)
     ], GetApiTextLoremIpsumRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiTextLoremIpsumHeaders)
     ], GetApiTextLoremIpsumRequest.prototype, "headers", void 0);
     return GetApiTextLoremIpsumRequest;
@@ -78,11 +78,11 @@ var GetApiTextLoremIpsumResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiTextLoremIpsumResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiTextLoremIpsumResponse.prototype, "statusCode", void 0);
     return GetApiTextLoremIpsumResponse;

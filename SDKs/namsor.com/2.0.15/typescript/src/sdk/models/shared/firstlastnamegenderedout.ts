@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum FirstLastNameGenderedOutLikelyGenderEnum {
-    Male = "male"
-,    Female = "female"
-,    Unknown = "unknown"
+    Male = "male",
+    Female = "female",
+    Unknown = "unknown"
 }
 
 
@@ -12,27 +13,27 @@ export enum FirstLastNameGenderedOutLikelyGenderEnum {
  * Represents the output of inferring the LIKELY gender from a personal name.
 **/
 export class FirstLastNameGenderedOut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=genderScale" })
+  @SpeakeasyMetadata({ data: "json, name=genderScale" })
   genderScale?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=likelyGender" })
+  @SpeakeasyMetadata({ data: "json, name=likelyGender" })
   likelyGender?: FirstLastNameGenderedOutLikelyGenderEnum;
 
-  @Metadata({ data: "json, name=probabilityCalibrated" })
+  @SpeakeasyMetadata({ data: "json, name=probabilityCalibrated" })
   probabilityCalibrated?: number;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: number;
 
-  @Metadata({ data: "json, name=script" })
+  @SpeakeasyMetadata({ data: "json, name=script" })
   script?: string;
 }

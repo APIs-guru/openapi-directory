@@ -1,5 +1,7 @@
 package shared
 
+// StandardsSubscription
+// A resource that represents your subscription to a supported standard.
 type StandardsSubscription struct {
 	StandardsArn             string              `json:"StandardsArn"`
 	StandardsInput           map[string]string   `json:"StandardsInput"`

@@ -22,6 +22,8 @@ const (
 	GoogleCloudRecommenderV1InsightSeverityEnumCritical            GoogleCloudRecommenderV1InsightSeverityEnum = "CRITICAL"
 )
 
+// GoogleCloudRecommenderV1Insight
+// An insight along with the information used to derive the insight. The insight may have associated recommendations as well.
 type GoogleCloudRecommenderV1Insight struct {
 	AssociatedRecommendations []GoogleCloudRecommenderV1InsightRecommendationReference `json:"associatedRecommendations,omitempty"`
 	Category                  *GoogleCloudRecommenderV1InsightCategoryEnum             `json:"category,omitempty"`

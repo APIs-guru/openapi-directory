@@ -14,12 +14,16 @@ type CreateDeploymentHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateDeploymentRequestBodyDeploymentPolicies
+// Contains information about policies that define how a deployment updates components and handles failure.
 type CreateDeploymentRequestBodyDeploymentPolicies struct {
 	ComponentUpdatePolicy         *shared.DeploymentComponentUpdatePolicy         `json:"componentUpdatePolicy,omitempty"`
 	ConfigurationValidationPolicy *shared.DeploymentConfigurationValidationPolicy `json:"configurationValidationPolicy,omitempty"`
 	FailureHandlingPolicy         *shared.DeploymentFailureHandlingPolicyEnum     `json:"failureHandlingPolicy,omitempty"`
 }
 
+// CreateDeploymentRequestBodyIotJobConfiguration
+// Contains information about an IoT job configuration.
 type CreateDeploymentRequestBodyIotJobConfiguration struct {
 	AbortConfig                *shared.IoTJobAbortConfig             `json:"abortConfig,omitempty"`
 	JobExecutionsRolloutConfig *shared.IoTJobExecutionsRolloutConfig `json:"jobExecutionsRolloutConfig,omitempty"`

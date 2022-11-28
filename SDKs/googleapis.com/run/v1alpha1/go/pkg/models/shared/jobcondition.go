@@ -1,5 +1,7 @@
 package shared
 
+// JobCondition
+// JobCondition defines a readiness condition for a Revision.
 type JobCondition struct {
 	LastTransitionTime *string `json:"lastTransitionTime,omitempty"`
 	Message            *string `json:"message,omitempty"`

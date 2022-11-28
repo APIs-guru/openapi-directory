@@ -1,65 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTeamsUsernameHooksUidPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=uid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=uid" })
   uid: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=username" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=username" })
   username: string;
 }
 
 
-export class GetTeamsUsernameHooksUidSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2: shared.SchemeOauth2;
-}
-
-
-export class GetTeamsUsernameHooksUidSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
-  basic: shared.SchemeBasic;
-}
-
-
-export class GetTeamsUsernameHooksUidSecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
 export class GetTeamsUsernameHooksUidSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetTeamsUsernameHooksUidSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2?: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetTeamsUsernameHooksUidSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  basic?: shared.SchemeBasic;
 
-  @Metadata({ data: "security, option=true" })
-  option3?: GetTeamsUsernameHooksUidSecurityOption3;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey?: shared.SchemeApiKey;
 }
 
 
 export class GetTeamsUsernameHooksUidRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTeamsUsernameHooksUidPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetTeamsUsernameHooksUidSecurity;
 }
 
 
 export class GetTeamsUsernameHooksUidResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   webhookSubscription?: Map<string, any>;
 }

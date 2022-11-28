@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessPreview } from "./accesspreview";
 
 
+
 export class GetAccessPreviewResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessPreview" })
+  @SpeakeasyMetadata({ data: "json, name=accessPreview" })
   accessPreview: AccessPreview;
 }

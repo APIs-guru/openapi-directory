@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ContactGroupMembership
@@ -6,9 +7,19 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A Google contact group membership.
 **/
 export class ContactGroupMembership extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contactGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=contactGroupId" })
   contactGroupId?: string;
 
-  @Metadata({ data: "json, name=contactGroupResourceName" })
+  @SpeakeasyMetadata({ data: "json, name=contactGroupResourceName" })
+  contactGroupResourceName?: string;
+}
+
+
+// ContactGroupMembershipInput
+/** 
+ * A Google contact group membership.
+**/
+export class ContactGroupMembershipInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=contactGroupResourceName" })
   contactGroupResourceName?: string;
 }

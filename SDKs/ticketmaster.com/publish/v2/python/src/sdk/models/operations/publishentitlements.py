@@ -1,21 +1,22 @@
 from dataclasses import dataclass, field
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class PublishEntitlementsHeaders:
-    tmps_correlation_id: str = field(default=None, metadata={'header': { 'field_name': 'TMPS-Correlation-Id', 'style': 'simple', 'explode': False }})
+    tmps_correlation_id: str = field(metadata={'header': { 'field_name': 'TMPS-Correlation-Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PublishEntitlementsRequest:
-    headers: PublishEntitlementsHeaders = field(default=None)
-    request: shared.Entitlement = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PublishEntitlementsHeaders = field()
+    request: shared.Entitlement = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PublishEntitlementsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

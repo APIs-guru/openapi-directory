@@ -42,6 +42,8 @@ const (
 	GoogleCloudVisionV1p2beta1FaceAnnotationLandmarkTypeEnumRightCheekCenter          GoogleCloudVisionV1p2beta1FaceAnnotationLandmarkTypeEnum = "RIGHT_CHEEK_CENTER"
 )
 
+// GoogleCloudVisionV1p2beta1FaceAnnotationLandmark
+// A face-specific landmark (for example, a face feature).
 type GoogleCloudVisionV1p2beta1FaceAnnotationLandmark struct {
 	Position *GoogleCloudVisionV1p2beta1Position                       `json:"position,omitempty"`
 	Type     *GoogleCloudVisionV1p2beta1FaceAnnotationLandmarkTypeEnum `json:"type,omitempty"`

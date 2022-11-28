@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DiscoveredResource
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Object representing the on-premises resource being migrated.
 **/
 export class DiscoveredResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigurationId" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigurationId" })
   configurationId: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 }

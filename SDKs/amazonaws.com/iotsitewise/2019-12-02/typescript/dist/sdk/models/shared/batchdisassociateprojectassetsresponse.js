@@ -22,15 +22,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AssetErrorDetails } from "./asseterrordetails";
 var BatchDisassociateProjectAssetsResponse = /** @class */ (function (_super) {
     __extends(BatchDisassociateProjectAssetsResponse, _super);
     function BatchDisassociateProjectAssetsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=errors", elemType: shared.AssetErrorDetails }),
+        SpeakeasyMetadata({ data: "json, name=errors", elemType: AssetErrorDetails }),
         __metadata("design:type", Array)
     ], BatchDisassociateProjectAssetsResponse.prototype, "errors", void 0);
     return BatchDisassociateProjectAssetsResponse;

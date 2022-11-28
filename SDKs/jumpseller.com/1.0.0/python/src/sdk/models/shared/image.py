@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import imagefields
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Image:
-    image: Optional[imagefields.ImageFields] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image' }})
+    image: Optional[ImageFields] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('image') }})
     

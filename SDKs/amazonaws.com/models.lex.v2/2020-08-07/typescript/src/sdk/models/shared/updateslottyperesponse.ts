@@ -1,40 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SlotTypeValue } from "./slottypevalue";
 import { SlotValueSelectionSetting } from "./slotvalueselectionsetting";
 
 
+
 export class UpdateSlotTypeResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=botId" })
+  @SpeakeasyMetadata({ data: "json, name=botId" })
   botId?: string;
 
-  @Metadata({ data: "json, name=botVersion" })
+  @SpeakeasyMetadata({ data: "json, name=botVersion" })
   botVersion?: string;
 
-  @Metadata({ data: "json, name=creationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationDateTime" })
   creationDateTime?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" })
   lastUpdatedDateTime?: Date;
 
-  @Metadata({ data: "json, name=localeId" })
+  @SpeakeasyMetadata({ data: "json, name=localeId" })
   localeId?: string;
 
-  @Metadata({ data: "json, name=parentSlotTypeSignature" })
+  @SpeakeasyMetadata({ data: "json, name=parentSlotTypeSignature" })
   parentSlotTypeSignature?: string;
 
-  @Metadata({ data: "json, name=slotTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=slotTypeId" })
   slotTypeId?: string;
 
-  @Metadata({ data: "json, name=slotTypeName" })
+  @SpeakeasyMetadata({ data: "json, name=slotTypeName" })
   slotTypeName?: string;
 
-  @Metadata({ data: "json, name=slotTypeValues", elemType: shared.SlotTypeValue })
+  @SpeakeasyMetadata({ data: "json, name=slotTypeValues", elemType: SlotTypeValue })
   slotTypeValues?: SlotTypeValue[];
 
-  @Metadata({ data: "json, name=valueSelectionSetting" })
+  @SpeakeasyMetadata({ data: "json, name=valueSelectionSetting" })
   valueSelectionSetting?: SlotValueSelectionSetting;
 }

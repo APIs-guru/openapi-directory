@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostApiV1SecretsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=planId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=planId" })
   planId?: string;
 }
 
 
 export class PostApiV1SecretsRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   scopedCreateSecretBody?: shared.ScopedCreateSecretBody;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   scopedCreateSecretBody1?: shared.ScopedCreateSecretBody;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   scopedCreateSecretBody2?: shared.ScopedCreateSecretBody;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   scopedCreateSecretBody3?: shared.ScopedCreateSecretBody;
 }
 
 
 export class PostApiV1SecretsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostApiV1SecretsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PostApiV1SecretsRequests;
 }
 
 
 export class PostApiV1SecretsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scopedSecretResultBody?: shared.ScopedSecretResultBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Schema } from "./schema";
+
 
 
 // ListSchemasResponse
@@ -8,9 +8,9 @@ import { Schema } from "./schema";
  * Response for the `ListSchemas` method.
 **/
 export class ListSchemasResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=schemas", elemType: shared.Schema })
+  @SpeakeasyMetadata({ data: "json, name=schemas", elemType: Schema })
   schemas?: Schema[];
 }

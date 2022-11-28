@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // JobProcessDetails
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The job process details.
 **/
 export class JobProcessDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=numberOfCanceledThings" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfCanceledThings" })
   numberOfCanceledThings?: number;
 
-  @Metadata({ data: "json, name=numberOfFailedThings" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfFailedThings" })
   numberOfFailedThings?: number;
 
-  @Metadata({ data: "json, name=numberOfInProgressThings" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfInProgressThings" })
   numberOfInProgressThings?: number;
 
-  @Metadata({ data: "json, name=numberOfQueuedThings" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfQueuedThings" })
   numberOfQueuedThings?: number;
 
-  @Metadata({ data: "json, name=numberOfRejectedThings" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfRejectedThings" })
   numberOfRejectedThings?: number;
 
-  @Metadata({ data: "json, name=numberOfRemovedThings" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfRemovedThings" })
   numberOfRemovedThings?: number;
 
-  @Metadata({ data: "json, name=numberOfSucceededThings" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfSucceededThings" })
   numberOfSucceededThings?: number;
 
-  @Metadata({ data: "json, name=numberOfTimedOutThings" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfTimedOutThings" })
   numberOfTimedOutThings?: number;
 
-  @Metadata({ data: "json, name=processingTargets" })
+  @SpeakeasyMetadata({ data: "json, name=processingTargets" })
   processingTargets?: string[];
 }

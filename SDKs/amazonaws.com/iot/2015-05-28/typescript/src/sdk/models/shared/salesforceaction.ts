@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SalesforceAction
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an action to write a message to a Salesforce IoT Cloud Input Stream.
 **/
 export class SalesforceAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

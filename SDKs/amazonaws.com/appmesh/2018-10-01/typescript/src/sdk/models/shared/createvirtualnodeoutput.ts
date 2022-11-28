@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualNodeData } from "./virtualnodedata";
 
 
+
 export class CreateVirtualNodeOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=virtualNode" })
+  @SpeakeasyMetadata({ data: "json, name=virtualNode" })
   virtualNode?: VirtualNodeData;
 }

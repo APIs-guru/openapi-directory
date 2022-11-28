@@ -1,86 +1,87 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class GetSdkPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=restapi_id" })
+
+export class GetSDKPathParams extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=restapi_id" })
   restapiId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=sdk_type" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sdk_type" })
   sdkType: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=stage_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=stage_name" })
   stageName: string;
 }
 
 
-export class GetSdkQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=parameters" })
+export class GetSDKQueryParams extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameters" })
   parameters?: Map<string, string>;
 }
 
 
-export class GetSdkHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+export class GetSDKHeaders extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
-export class GetSdkRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetSdkPathParams;
+export class GetSDKRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetSDKPathParams;
 
-  @Metadata()
-  queryParams: GetSdkQueryParams;
+  @SpeakeasyMetadata()
+  queryParams: GetSDKQueryParams;
 
-  @Metadata()
-  headers: GetSdkHeaders;
+  @SpeakeasyMetadata()
+  headers: GetSDKHeaders;
 }
 
 
-export class GetSdkResponse extends SpeakeasyBase {
-  @Metadata()
+export class GetSDKResponse extends SpeakeasyBase {
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
-  sdkResponse?: shared.SdkResponse;
+  @SpeakeasyMetadata()
+  sdkResponse?: shared.SDKResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 }

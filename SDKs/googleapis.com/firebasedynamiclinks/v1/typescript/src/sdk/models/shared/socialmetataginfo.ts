@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SocialMetaTagInfo
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Parameters for social meta tag params. Used to set meta tag data for link previews on social sites.
 **/
 export class SocialMetaTagInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=socialDescription" })
+  @SpeakeasyMetadata({ data: "json, name=socialDescription" })
   socialDescription?: string;
 
-  @Metadata({ data: "json, name=socialImageLink" })
+  @SpeakeasyMetadata({ data: "json, name=socialImageLink" })
   socialImageLink?: string;
 
-  @Metadata({ data: "json, name=socialTitle" })
+  @SpeakeasyMetadata({ data: "json, name=socialTitle" })
   socialTitle?: string;
 }

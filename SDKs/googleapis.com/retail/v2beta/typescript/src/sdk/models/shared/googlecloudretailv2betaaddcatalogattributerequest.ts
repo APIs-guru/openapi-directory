@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { GoogleCloudRetailV2betaCatalogAttribute } from "./googlecloudretailv2betacatalogattribute";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudRetailV2betaCatalogAttributeInput } from "./googlecloudretailv2betacatalogattribute";
 
 
-// GoogleCloudRetailV2betaAddCatalogAttributeRequest
+
+// GoogleCloudRetailV2betaAddCatalogAttributeRequestInput
 /** 
  * Request for CatalogService.AddCatalogAttribute method.
 **/
-export class GoogleCloudRetailV2betaAddCatalogAttributeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=catalogAttribute" })
-  catalogAttribute?: GoogleCloudRetailV2betaCatalogAttribute;
+export class GoogleCloudRetailV2betaAddCatalogAttributeRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=catalogAttribute" })
+  catalogAttribute?: GoogleCloudRetailV2betaCatalogAttributeInput;
 }

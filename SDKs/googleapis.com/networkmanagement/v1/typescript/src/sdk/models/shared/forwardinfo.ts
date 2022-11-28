@@ -1,13 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ForwardInfoTargetEnum {
-    TargetUnspecified = "TARGET_UNSPECIFIED"
-,    PeeringVpc = "PEERING_VPC"
-,    VpnGateway = "VPN_GATEWAY"
-,    Interconnect = "INTERCONNECT"
-,    GkeMaster = "GKE_MASTER"
-,    ImportedCustomRouteNextHop = "IMPORTED_CUSTOM_ROUTE_NEXT_HOP"
-,    CloudSqlInstance = "CLOUD_SQL_INSTANCE"
+    TargetUnspecified = "TARGET_UNSPECIFIED",
+    PeeringVpc = "PEERING_VPC",
+    VpnGateway = "VPN_GATEWAY",
+    Interconnect = "INTERCONNECT",
+    GkeMaster = "GKE_MASTER",
+    ImportedCustomRouteNextHop = "IMPORTED_CUSTOM_ROUTE_NEXT_HOP",
+    CloudSqlInstance = "CLOUD_SQL_INSTANCE",
+    AnotherProject = "ANOTHER_PROJECT"
 }
 
 
@@ -16,9 +18,9 @@ export enum ForwardInfoTargetEnum {
  * Details of the final state "forward" and associated resource.
 **/
 export class ForwardInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resourceUri" })
+  @SpeakeasyMetadata({ data: "json, name=resourceUri" })
   resourceUri?: string;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target?: ForwardInfoTargetEnum;
 }

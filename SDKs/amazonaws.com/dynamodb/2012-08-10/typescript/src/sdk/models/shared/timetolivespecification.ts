@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TimeToLiveSpecification
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the settings used to enable or disable Time to Live (TTL) for the specified table.
 **/
 export class TimeToLiveSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttributeName" })
+  @SpeakeasyMetadata({ data: "json, name=AttributeName" })
   attributeName: string;
 
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled: boolean;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeleteAppsAppIdRulesRuleIdPathParams = /** @class */ (function (_super) {
     __extends(DeleteAppsAppIdRulesRuleIdPathParams, _super);
@@ -30,11 +30,11 @@ var DeleteAppsAppIdRulesRuleIdPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=app_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=app_id" }),
         __metadata("design:type", String)
     ], DeleteAppsAppIdRulesRuleIdPathParams.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=rule_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=rule_id" }),
         __metadata("design:type", String)
     ], DeleteAppsAppIdRulesRuleIdPathParams.prototype, "ruleId", void 0);
     return DeleteAppsAppIdRulesRuleIdPathParams;
@@ -46,7 +46,7 @@ var DeleteAppsAppIdRulesRuleIdSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], DeleteAppsAppIdRulesRuleIdSecurity.prototype, "bearerAuth", void 0);
     return DeleteAppsAppIdRulesRuleIdSecurity;
@@ -58,11 +58,11 @@ var DeleteAppsAppIdRulesRuleIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteAppsAppIdRulesRuleIdPathParams)
     ], DeleteAppsAppIdRulesRuleIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteAppsAppIdRulesRuleIdSecurity)
     ], DeleteAppsAppIdRulesRuleIdRequest.prototype, "security", void 0);
     return DeleteAppsAppIdRulesRuleIdRequest;
@@ -74,15 +74,15 @@ var DeleteAppsAppIdRulesRuleIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteAppsAppIdRulesRuleIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteAppsAppIdRulesRuleIdResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], DeleteAppsAppIdRulesRuleIdResponse.prototype, "error", void 0);
     return DeleteAppsAppIdRulesRuleIdResponse;

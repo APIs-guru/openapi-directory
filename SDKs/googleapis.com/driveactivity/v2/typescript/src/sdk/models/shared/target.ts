@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Drive } from "./drive";
 import { DriveItem } from "./driveitem";
 import { FileComment } from "./filecomment";
 import { TeamDrive } from "./teamdrive";
+
 
 
 // Target
@@ -10,15 +11,15 @@ import { TeamDrive } from "./teamdrive";
  * Information about the target of activity.
 **/
 export class Target extends SpeakeasyBase {
-  @Metadata({ data: "json, name=drive" })
+  @SpeakeasyMetadata({ data: "json, name=drive" })
   drive?: Drive;
 
-  @Metadata({ data: "json, name=driveItem" })
+  @SpeakeasyMetadata({ data: "json, name=driveItem" })
   driveItem?: DriveItem;
 
-  @Metadata({ data: "json, name=fileComment" })
+  @SpeakeasyMetadata({ data: "json, name=fileComment" })
   fileComment?: FileComment;
 
-  @Metadata({ data: "json, name=teamDrive" })
+  @SpeakeasyMetadata({ data: "json, name=teamDrive" })
   teamDrive?: TeamDrive;
 }

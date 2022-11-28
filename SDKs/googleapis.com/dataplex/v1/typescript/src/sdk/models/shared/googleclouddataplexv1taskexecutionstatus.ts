@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDataplexV1Job } from "./googleclouddataplexv1job";
+
 
 
 // GoogleCloudDataplexV1TaskExecutionStatus
@@ -7,9 +8,9 @@ import { GoogleCloudDataplexV1Job } from "./googleclouddataplexv1job";
  * Status of the task execution (e.g. Jobs).
 **/
 export class GoogleCloudDataplexV1TaskExecutionStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=latestJob" })
+  @SpeakeasyMetadata({ data: "json, name=latestJob" })
   latestJob?: GoogleCloudDataplexV1Job;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

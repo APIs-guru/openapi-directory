@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class PagespeedonlinePagespeedapiRunpagespeedStrategyEnum(str, Enum):
@@ -9,6 +10,7 @@ class PagespeedonlinePagespeedapiRunpagespeedStrategyEnum(str, Enum):
 
 @dataclass
 class PagespeedonlinePagespeedapiRunpagespeedQueryParams:
+    url: str = field(metadata={'query_param': { 'field_name': 'url', 'style': 'form', 'explode': True }})
     alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
     fields: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fields', 'style': 'form', 'explode': True }})
     filter_third_party_resources: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'filter_third_party_resources', 'style': 'form', 'explode': True }})
@@ -21,7 +23,6 @@ class PagespeedonlinePagespeedapiRunpagespeedQueryParams:
     screenshot: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'screenshot', 'style': 'form', 'explode': True }})
     snapshots: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'snapshots', 'style': 'form', 'explode': True }})
     strategy: Optional[PagespeedonlinePagespeedapiRunpagespeedStrategyEnum] = field(default=None, metadata={'query_param': { 'field_name': 'strategy', 'style': 'form', 'explode': True }})
-    url: str = field(default=None, metadata={'query_param': { 'field_name': 'url', 'style': 'form', 'explode': True }})
     user_ip: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'userIp', 'style': 'form', 'explode': True }})
     utm_campaign: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'utm_campaign', 'style': 'form', 'explode': True }})
     utm_source: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'utm_source', 'style': 'form', 'explode': True }})
@@ -29,12 +30,12 @@ class PagespeedonlinePagespeedapiRunpagespeedQueryParams:
 
 @dataclass
 class PagespeedonlinePagespeedapiRunpagespeedRequest:
-    query_params: PagespeedonlinePagespeedapiRunpagespeedQueryParams = field(default=None)
+    query_params: PagespeedonlinePagespeedapiRunpagespeedQueryParams = field()
     
 
 @dataclass
 class PagespeedonlinePagespeedapiRunpagespeedResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

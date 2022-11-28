@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Destiny2GetDestinyAggregateActivityStatsPathParams = /** @class */ (function (_super) {
     __extends(Destiny2GetDestinyAggregateActivityStatsPathParams, _super);
     function Destiny2GetDestinyAggregateActivityStatsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=characterId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=characterId" }),
         __metadata("design:type", Number)
     ], Destiny2GetDestinyAggregateActivityStatsPathParams.prototype, "characterId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" }),
         __metadata("design:type", Number)
     ], Destiny2GetDestinyAggregateActivityStatsPathParams.prototype, "destinyMembershipId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipType" }),
         __metadata("design:type", Number)
     ], Destiny2GetDestinyAggregateActivityStatsPathParams.prototype, "membershipType", void 0);
     return Destiny2GetDestinyAggregateActivityStatsPathParams;
@@ -49,7 +49,7 @@ var Destiny2GetDestinyAggregateActivityStatsRequest = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2GetDestinyAggregateActivityStatsPathParams)
     ], Destiny2GetDestinyAggregateActivityStatsRequest.prototype, "pathParams", void 0);
     return Destiny2GetDestinyAggregateActivityStatsRequest;
@@ -61,15 +61,15 @@ var Destiny2GetDestinyAggregateActivityStatsResponse = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], Destiny2GetDestinyAggregateActivityStatsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], Destiny2GetDestinyAggregateActivityStatsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], Destiny2GetDestinyAggregateActivityStatsResponse.prototype, "statusCode", void 0);
     return Destiny2GetDestinyAggregateActivityStatsResponse;

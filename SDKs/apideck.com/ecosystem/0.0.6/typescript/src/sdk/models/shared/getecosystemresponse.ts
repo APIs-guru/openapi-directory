@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Ecosystem } from "./ecosystem";
 
 
+
 export class GetEcosystemResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: Ecosystem;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: string;
 
-  @Metadata({ data: "json, name=status_code" })
+  @SpeakeasyMetadata({ data: "json, name=status_code" })
   statusCode: number;
 }

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import timinginformation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StartSessionResult:
-    session_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SessionToken' }})
-    timing_information: Optional[timinginformation.TimingInformation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TimingInformation' }})
+    r"""StartSessionResult
+    Contains the details of the started session.
+    """
+    
+    session_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SessionToken') }})
+    timing_information: Optional[TimingInformation] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TimingInformation') }})
     

@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MastheadSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=background" })
+  @SpeakeasyMetadata({ data: "json, name=background" })
   background?: string;
 
-  @Metadata({ data: "json, name=background_color" })
+  @SpeakeasyMetadata({ data: "json, name=background_color" })
   backgroundColor?: string;
 
-  @Metadata({ data: "json, name=color" })
+  @SpeakeasyMetadata({ data: "json, name=color" })
   color?: string;
 
-  @Metadata({ data: "json, name=columns" })
+  @SpeakeasyMetadata({ data: "json, name=columns" })
   columns?: number;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

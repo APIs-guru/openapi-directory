@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var FunctionsListExecutionsPathParams = /** @class */ (function (_super) {
     __extends(FunctionsListExecutionsPathParams, _super);
@@ -30,7 +30,7 @@ var FunctionsListExecutionsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=functionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=functionId" }),
         __metadata("design:type", String)
     ], FunctionsListExecutionsPathParams.prototype, "functionId", void 0);
     return FunctionsListExecutionsPathParams;
@@ -42,19 +42,19 @@ var FunctionsListExecutionsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], FunctionsListExecutionsQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], FunctionsListExecutionsQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=orderType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=orderType" }),
         __metadata("design:type", String)
     ], FunctionsListExecutionsQueryParams.prototype, "orderType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" }),
         __metadata("design:type", String)
     ], FunctionsListExecutionsQueryParams.prototype, "search", void 0);
     return FunctionsListExecutionsQueryParams;
@@ -66,15 +66,15 @@ var FunctionsListExecutionsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeJwt)
     ], FunctionsListExecutionsSecurity.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeKey)
     ], FunctionsListExecutionsSecurity.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], FunctionsListExecutionsSecurity.prototype, "project", void 0);
     return FunctionsListExecutionsSecurity;
@@ -86,15 +86,15 @@ var FunctionsListExecutionsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FunctionsListExecutionsPathParams)
     ], FunctionsListExecutionsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FunctionsListExecutionsQueryParams)
     ], FunctionsListExecutionsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FunctionsListExecutionsSecurity)
     ], FunctionsListExecutionsRequest.prototype, "security", void 0);
     return FunctionsListExecutionsRequest;
@@ -106,15 +106,15 @@ var FunctionsListExecutionsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FunctionsListExecutionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FunctionsListExecutionsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ExecutionList)
     ], FunctionsListExecutionsResponse.prototype, "executionList", void 0);
     return FunctionsListExecutionsResponse;

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetLiveHlsStreamPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -65,19 +66,19 @@ class GetLiveHlsStreamQueryParams:
 
 @dataclass
 class GetLiveHlsStreamSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetLiveHlsStreamRequest:
-    path_params: GetLiveHlsStreamPathParams = field(default=None)
-    query_params: GetLiveHlsStreamQueryParams = field(default=None)
-    security: GetLiveHlsStreamSecurity = field(default=None)
+    path_params: GetLiveHlsStreamPathParams = field()
+    query_params: GetLiveHlsStreamQueryParams = field()
+    security: GetLiveHlsStreamSecurity = field()
     
 
 @dataclass
 class GetLiveHlsStreamResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_live_hls_stream_200_application_x_mpegurl_binary_string: Optional[bytes] = field(default=None)
-    status_code: int = field(default=None)
     

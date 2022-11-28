@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AggregatedSourceStatus
+// The current sync status between the source and the aggregator account.
 type AggregatedSourceStatus struct {
 	AwsRegion        *string                         `json:"AwsRegion,omitempty"`
 	LastErrorCode    *string                         `json:"LastErrorCode,omitempty"`

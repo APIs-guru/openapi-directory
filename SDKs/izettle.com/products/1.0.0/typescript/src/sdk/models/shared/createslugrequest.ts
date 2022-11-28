@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateSlugRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=productName" })
+  @SpeakeasyMetadata({ data: "json, name=productName" })
   productName: string;
 }

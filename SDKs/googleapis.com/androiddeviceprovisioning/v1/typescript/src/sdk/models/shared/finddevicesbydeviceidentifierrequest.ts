@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceIdentifier } from "./deviceidentifier";
+
 
 
 // FindDevicesByDeviceIdentifierRequest
@@ -7,12 +8,12 @@ import { DeviceIdentifier } from "./deviceidentifier";
  * Request to find devices.
 **/
 export class FindDevicesByDeviceIdentifierRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=deviceIdentifier" })
   deviceIdentifier?: DeviceIdentifier;
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: string;
 
-  @Metadata({ data: "json, name=pageToken" })
+  @SpeakeasyMetadata({ data: "json, name=pageToken" })
   pageToken?: string;
 }

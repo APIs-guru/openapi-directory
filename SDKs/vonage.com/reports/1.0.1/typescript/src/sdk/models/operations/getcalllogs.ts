@@ -1,82 +1,83 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCallLogsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=account_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=account_id" })
   accountId: string;
 }
 
 export enum GetCallLogsDirectionEnum {
-    Inbound = "Inbound"
-,    Outbound = "Outbound"
+    Inbound = "Inbound",
+    Outbound = "Outbound"
 }
 
 
 export class GetCallLogsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=destination_user" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=destination_user" })
   destinationUser?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: GetCallLogsDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end:gte" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end:gte" })
   endGte?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end:lte" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end:lte" })
   endLte?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=from" })
   from?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page_size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" })
   pageSize: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=source_user" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=source_user" })
   sourceUser?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start:gte" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start:gte" })
   startGte: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start:lte" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start:lte" })
   startLte: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=to" })
   to?: string;
 }
 
 
 export class GetCallLogsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
 export class GetCallLogsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetCallLogsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCallLogsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetCallLogsSecurity;
 }
 
 
 export class GetCallLogsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   callLogsHalResponse?: shared.CallLogsHalResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationErrorsResponse?: shared.ValidationErrorsResponse;
 }

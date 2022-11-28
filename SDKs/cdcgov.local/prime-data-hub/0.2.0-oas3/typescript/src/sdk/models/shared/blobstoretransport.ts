@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BlobStoreTransport
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Moves results to a Azure Blob Store. Typcially used for HHS Protect interfaces.
 **/
 export class BlobStoreTransport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerName" })
+  @SpeakeasyMetadata({ data: "json, name=containerName" })
   containerName: string;
 
-  @Metadata({ data: "json, name=storageName" })
+  @SpeakeasyMetadata({ data: "json, name=storageName" })
   storageName: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }

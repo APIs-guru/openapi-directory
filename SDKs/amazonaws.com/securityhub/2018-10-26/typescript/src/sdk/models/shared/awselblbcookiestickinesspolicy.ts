@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsElbLbCookieStickinessPolicy
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about a stickiness policy that was created using <code>CreateLBCookieStickinessPolicy</code>.
 **/
 export class AwsElbLbCookieStickinessPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CookieExpirationPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=CookieExpirationPeriod" })
   cookieExpirationPeriod?: number;
 
-  @Metadata({ data: "json, name=PolicyName" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyName" })
   policyName?: string;
 }

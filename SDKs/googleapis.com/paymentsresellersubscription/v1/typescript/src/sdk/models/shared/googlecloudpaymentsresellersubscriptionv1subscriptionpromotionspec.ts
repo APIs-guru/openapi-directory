@@ -1,11 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudPaymentsResellerSubscriptionV1Duration } from "./googlecloudpaymentsresellersubscriptionv1duration";
 import { GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetails } from "./googlecloudpaymentsresellersubscriptionv1promotionintroductorypricingdetails";
+import { GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsInput } from "./googlecloudpaymentsresellersubscriptionv1promotionintroductorypricingdetails";
+
 
 export enum GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpecTypeEnum {
-    PromotionTypeUnspecified = "PROMOTION_TYPE_UNSPECIFIED"
-,    PromotionTypeFreeTrial = "PROMOTION_TYPE_FREE_TRIAL"
-,    PromotionTypeIntroductoryPricing = "PROMOTION_TYPE_INTRODUCTORY_PRICING"
+    PromotionTypeUnspecified = "PROMOTION_TYPE_UNSPECIFIED",
+    PromotionTypeFreeTrial = "PROMOTION_TYPE_FREE_TRIAL",
+    PromotionTypeIntroductoryPricing = "PROMOTION_TYPE_INTRODUCTORY_PRICING"
 }
 
 
@@ -14,15 +16,31 @@ export enum GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpecTy
  * Describes the spec for one promotion.
 **/
 export class GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=freeTrialDuration" })
+  @SpeakeasyMetadata({ data: "json, name=freeTrialDuration" })
   freeTrialDuration?: GoogleCloudPaymentsResellerSubscriptionV1Duration;
 
-  @Metadata({ data: "json, name=introductoryPricingDetails" })
+  @SpeakeasyMetadata({ data: "json, name=introductoryPricingDetails" })
   introductoryPricingDetails?: GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetails;
 
-  @Metadata({ data: "json, name=promotion" })
+  @SpeakeasyMetadata({ data: "json, name=promotion" })
   promotion?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpecTypeEnum;
+}
+
+
+// GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpecInput
+/** 
+ * Describes the spec for one promotion.
+**/
+export class GoogleCloudPaymentsResellerSubscriptionV1SubscriptionPromotionSpecInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=freeTrialDuration" })
+  freeTrialDuration?: GoogleCloudPaymentsResellerSubscriptionV1Duration;
+
+  @SpeakeasyMetadata({ data: "json, name=introductoryPricingDetails" })
+  introductoryPricingDetails?: GoogleCloudPaymentsResellerSubscriptionV1PromotionIntroductoryPricingDetailsInput;
+
+  @SpeakeasyMetadata({ data: "json, name=promotion" })
+  promotion?: string;
 }

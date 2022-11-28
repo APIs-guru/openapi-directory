@@ -1,95 +1,96 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TestAuthorizationQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=clientId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=clientId" })
   clientId?: string;
 }
 
 
 export class TestAuthorizationHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class TestAuthorizationRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authInfos", elemType: shared.AuthInfo })
+  @SpeakeasyMetadata({ data: "json, name=authInfos", elemType: shared.AuthInfo })
   authInfos: shared.AuthInfo[];
 
-  @Metadata({ data: "json, name=cognitoIdentityPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=cognitoIdentityPoolId" })
   cognitoIdentityPoolId?: string;
 
-  @Metadata({ data: "json, name=policyNamesToAdd" })
+  @SpeakeasyMetadata({ data: "json, name=policyNamesToAdd" })
   policyNamesToAdd?: string[];
 
-  @Metadata({ data: "json, name=policyNamesToSkip" })
+  @SpeakeasyMetadata({ data: "json, name=policyNamesToSkip" })
   policyNamesToSkip?: string[];
 
-  @Metadata({ data: "json, name=principal" })
+  @SpeakeasyMetadata({ data: "json, name=principal" })
   principal?: string;
 }
 
 
 export class TestAuthorizationRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: TestAuthorizationQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: TestAuthorizationHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: TestAuthorizationRequestBody;
 }
 
 
 export class TestAuthorizationResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   testAuthorizationResponse?: shared.TestAuthorizationResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 }

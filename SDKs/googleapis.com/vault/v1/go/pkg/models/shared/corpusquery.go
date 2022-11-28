@@ -1,5 +1,7 @@
 package shared
 
+// CorpusQuery
+// Service-specific options for holds.
 type CorpusQuery struct {
 	DriveQuery        *HeldDriveQuery        `json:"driveQuery,omitempty"`
 	GroupsQuery       *HeldGroupsQuery       `json:"groupsQuery,omitempty"`

@@ -1,39 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateJobPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=jobId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=jobId" })
   jobId: string;
 }
 
 
 export class UpdateJobQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=namespaceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=namespaceId" })
   namespaceId?: string;
 }
 
 
 export class UpdateJobHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -43,7 +44,7 @@ export class UpdateJobHeaders extends SpeakeasyBase {
  * The criteria that determine when and how a job abort takes place.
 **/
 export class UpdateJobRequestBodyAbortConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=criteriaList", elemType: shared.AbortCriteria })
+  @SpeakeasyMetadata({ data: "json, name=criteriaList", elemType: shared.AbortCriteria })
   criteriaList?: shared.AbortCriteria[];
 }
 
@@ -53,10 +54,10 @@ export class UpdateJobRequestBodyAbortConfig extends SpeakeasyBase {
  * Allows you to create a staged rollout of a job.
 **/
 export class UpdateJobRequestBodyJobExecutionsRolloutConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exponentialRate" })
+  @SpeakeasyMetadata({ data: "json, name=exponentialRate" })
   exponentialRate?: shared.ExponentialRolloutRate;
 
-  @Metadata({ data: "json, name=maximumPerMinute" })
+  @SpeakeasyMetadata({ data: "json, name=maximumPerMinute" })
   maximumPerMinute?: number;
 }
 
@@ -66,10 +67,10 @@ export class UpdateJobRequestBodyJobExecutionsRolloutConfig extends SpeakeasyBas
  * Configuration for pre-signed S3 URLs.
 **/
 export class UpdateJobRequestBodyPresignedUrlConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expiresInSec" })
+  @SpeakeasyMetadata({ data: "json, name=expiresInSec" })
   expiresInSec?: number;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 }
 
@@ -79,60 +80,60 @@ export class UpdateJobRequestBodyPresignedUrlConfig extends SpeakeasyBase {
  * Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to <code>TIMED_OUT</code>.
 **/
 export class UpdateJobRequestBodyTimeoutConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inProgressTimeoutInMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=inProgressTimeoutInMinutes" })
   inProgressTimeoutInMinutes?: number;
 }
 
 
 export class UpdateJobRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=abortConfig" })
+  @SpeakeasyMetadata({ data: "json, name=abortConfig" })
   abortConfig?: UpdateJobRequestBodyAbortConfig;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=jobExecutionsRolloutConfig" })
+  @SpeakeasyMetadata({ data: "json, name=jobExecutionsRolloutConfig" })
   jobExecutionsRolloutConfig?: UpdateJobRequestBodyJobExecutionsRolloutConfig;
 
-  @Metadata({ data: "json, name=presignedUrlConfig" })
+  @SpeakeasyMetadata({ data: "json, name=presignedUrlConfig" })
   presignedUrlConfig?: UpdateJobRequestBodyPresignedUrlConfig;
 
-  @Metadata({ data: "json, name=timeoutConfig" })
+  @SpeakeasyMetadata({ data: "json, name=timeoutConfig" })
   timeoutConfig?: UpdateJobRequestBodyTimeoutConfig;
 }
 
 
 export class UpdateJobRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateJobPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UpdateJobQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateJobHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateJobRequestBody;
 }
 
 
 export class UpdateJobResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

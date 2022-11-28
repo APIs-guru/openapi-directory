@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetServiceLastAccessedDetailsWithEntitiesActionEnum(str, Enum):
     GET_SERVICE_LAST_ACCESSED_DETAILS_WITH_ENTITIES = "GetServiceLastAccessedDetailsWithEntities"
@@ -10,12 +14,12 @@ class GetGetServiceLastAccessedDetailsWithEntitiesVersionEnum(str, Enum):
 
 @dataclass
 class GetGetServiceLastAccessedDetailsWithEntitiesQueryParams:
-    action: GetGetServiceLastAccessedDetailsWithEntitiesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    job_id: str = field(default=None, metadata={'query_param': { 'field_name': 'JobId', 'style': 'form', 'explode': True }})
+    action: GetGetServiceLastAccessedDetailsWithEntitiesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    job_id: str = field(metadata={'query_param': { 'field_name': 'JobId', 'style': 'form', 'explode': True }})
+    service_namespace: str = field(metadata={'query_param': { 'field_name': 'ServiceNamespace', 'style': 'form', 'explode': True }})
+    version: GetGetServiceLastAccessedDetailsWithEntitiesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_items: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxItems', 'style': 'form', 'explode': True }})
-    service_namespace: str = field(default=None, metadata={'query_param': { 'field_name': 'ServiceNamespace', 'style': 'form', 'explode': True }})
-    version: GetGetServiceLastAccessedDetailsWithEntitiesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetGetServiceLastAccessedDetailsWithEntitiesHeaders:
 
 @dataclass
 class GetGetServiceLastAccessedDetailsWithEntitiesRequest:
-    query_params: GetGetServiceLastAccessedDetailsWithEntitiesQueryParams = field(default=None)
-    headers: GetGetServiceLastAccessedDetailsWithEntitiesHeaders = field(default=None)
+    headers: GetGetServiceLastAccessedDetailsWithEntitiesHeaders = field()
+    query_params: GetGetServiceLastAccessedDetailsWithEntitiesQueryParams = field()
     
 
 @dataclass
 class GetGetServiceLastAccessedDetailsWithEntitiesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

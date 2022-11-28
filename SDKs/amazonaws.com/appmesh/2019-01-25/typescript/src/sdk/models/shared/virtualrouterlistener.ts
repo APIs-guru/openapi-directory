@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PortMapping } from "./portmapping";
+
 
 
 // VirtualRouterListener
@@ -7,6 +8,6 @@ import { PortMapping } from "./portmapping";
  * An object that represents a virtual router listener.
 **/
 export class VirtualRouterListener extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portMapping" })
+  @SpeakeasyMetadata({ data: "json, name=portMapping" })
   portMapping: PortMapping;
 }

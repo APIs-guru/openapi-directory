@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomViewabilityMetricConfiguration
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The attributes, like playtime and percent onscreen, that define the Custom Viewability Metric.
 **/
 export class CustomViewabilityMetricConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audible" })
+  @SpeakeasyMetadata({ data: "json, name=audible" })
   audible?: boolean;
 
-  @Metadata({ data: "json, name=timeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=timeMillis" })
   timeMillis?: number;
 
-  @Metadata({ data: "json, name=timePercent" })
+  @SpeakeasyMetadata({ data: "json, name=timePercent" })
   timePercent?: number;
 
-  @Metadata({ data: "json, name=viewabilityPercent" })
+  @SpeakeasyMetadata({ data: "json, name=viewabilityPercent" })
   viewabilityPercent?: number;
 }

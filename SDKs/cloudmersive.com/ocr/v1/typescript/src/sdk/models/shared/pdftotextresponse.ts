@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OcrPageResult } from "./ocrpageresult";
+
 
 
 // PdfToTextResponse
@@ -8,9 +8,9 @@ import { OcrPageResult } from "./ocrpageresult";
  * Response from an OCR to text operation.  Includes the confidence rating and converted text result.
 **/
 export class PdfToTextResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OcrPages", elemType: shared.OcrPageResult })
+  @SpeakeasyMetadata({ data: "json, name=OcrPages", elemType: OcrPageResult })
   ocrPages?: OcrPageResult[];
 
-  @Metadata({ data: "json, name=Successful" })
+  @SpeakeasyMetadata({ data: "json, name=Successful" })
   successful?: boolean;
 }

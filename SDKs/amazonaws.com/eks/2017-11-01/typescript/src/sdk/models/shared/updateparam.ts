@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpdateParamTypeEnum } from "./updateparamtypeenum";
+
 
 
 // UpdateParam
@@ -7,9 +8,9 @@ import { UpdateParamTypeEnum } from "./updateparamtypeenum";
  * An object representing the details of an update request.
 **/
 export class UpdateParam extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: UpdateParamTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

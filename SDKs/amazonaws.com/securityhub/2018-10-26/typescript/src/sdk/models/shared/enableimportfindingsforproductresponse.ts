@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EnableImportFindingsForProductResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProductSubscriptionArn" })
+  @SpeakeasyMetadata({ data: "json, name=ProductSubscriptionArn" })
   productSubscriptionArn?: string;
 }

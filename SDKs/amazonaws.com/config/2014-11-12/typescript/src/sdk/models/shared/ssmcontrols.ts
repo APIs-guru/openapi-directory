@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SsmControls
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Amazon Web Services Systems Manager (SSM) specific remediation controls.
 **/
 export class SsmControls extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConcurrentExecutionRatePercentage" })
+  @SpeakeasyMetadata({ data: "json, name=ConcurrentExecutionRatePercentage" })
   concurrentExecutionRatePercentage?: number;
 
-  @Metadata({ data: "json, name=ErrorPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorPercentage" })
   errorPercentage?: number;
 }

@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class DcimRegionsCreateRequest:
-    request: shared.WritableRegion = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WritableRegionInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DcimRegionsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     region: Optional[shared.Region] = field(default=None)
-    status_code: int = field(default=None)
     

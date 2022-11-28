@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  *  For an application output, describes the Amazon Kinesis stream configured as its destination.
 **/

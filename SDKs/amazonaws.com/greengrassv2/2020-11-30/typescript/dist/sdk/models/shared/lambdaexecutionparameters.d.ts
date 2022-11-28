@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LambdaEventSource } from "./lambdaeventsource";
 import { LambdaInputPayloadEncodingTypeEnum } from "./lambdainputpayloadencodingtypeenum";
 import { LambdaLinuxProcessParams } from "./lambdalinuxprocessparams";

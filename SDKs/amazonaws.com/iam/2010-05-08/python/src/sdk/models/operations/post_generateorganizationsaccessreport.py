@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGenerateOrganizationsAccessReportActionEnum(str, Enum):
     GENERATE_ORGANIZATIONS_ACCESS_REPORT = "GenerateOrganizationsAccessReport"
@@ -10,8 +14,8 @@ class PostGenerateOrganizationsAccessReportVersionEnum(str, Enum):
 
 @dataclass
 class PostGenerateOrganizationsAccessReportQueryParams:
-    action: PostGenerateOrganizationsAccessReportActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGenerateOrganizationsAccessReportVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGenerateOrganizationsAccessReportActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGenerateOrganizationsAccessReportVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGenerateOrganizationsAccessReportHeaders:
 
 @dataclass
 class PostGenerateOrganizationsAccessReportRequest:
-    query_params: PostGenerateOrganizationsAccessReportQueryParams = field(default=None)
-    headers: PostGenerateOrganizationsAccessReportHeaders = field(default=None)
+    headers: PostGenerateOrganizationsAccessReportHeaders = field()
+    query_params: PostGenerateOrganizationsAccessReportQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGenerateOrganizationsAccessReportResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

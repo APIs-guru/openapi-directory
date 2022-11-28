@@ -8,6 +8,8 @@ const (
 	ComplyWithGuidelinesRecommendationReasonEnumBusinessLocationDisabled        ComplyWithGuidelinesRecommendationReasonEnum = "BUSINESS_LOCATION_DISABLED"
 )
 
+// ComplyWithGuidelines
+// Indicates that the location fails to comply with our [guidelines](https://support.google.com/business/answer/3038177).
 type ComplyWithGuidelines struct {
 	RecommendationReason *ComplyWithGuidelinesRecommendationReasonEnum `json:"recommendationReason,omitempty"`
 }

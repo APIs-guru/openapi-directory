@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // TrustedAdvisorCheckRefreshStatus
 /**
  * The refresh status of a Trusted Advisor check.
@@ -33,15 +33,15 @@ var TrustedAdvisorCheckRefreshStatus = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=checkId" }),
+        SpeakeasyMetadata({ data: "json, name=checkId" }),
         __metadata("design:type", String)
     ], TrustedAdvisorCheckRefreshStatus.prototype, "checkId", void 0);
     __decorate([
-        Metadata({ data: "json, name=millisUntilNextRefreshable" }),
+        SpeakeasyMetadata({ data: "json, name=millisUntilNextRefreshable" }),
         __metadata("design:type", Number)
     ], TrustedAdvisorCheckRefreshStatus.prototype, "millisUntilNextRefreshable", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], TrustedAdvisorCheckRefreshStatus.prototype, "status", void 0);
     return TrustedAdvisorCheckRefreshStatus;

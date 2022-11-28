@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LabelingJobForWorkteamSummary
+// Provides summary information for a work team.
 type LabelingJobForWorkteamSummary struct {
 	CreationTime                      time.Time                 `json:"CreationTime"`
 	JobReferenceCode                  string                    `json:"JobReferenceCode"`

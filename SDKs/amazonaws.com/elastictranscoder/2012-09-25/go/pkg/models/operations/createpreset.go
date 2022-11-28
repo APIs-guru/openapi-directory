@@ -14,6 +14,8 @@ type CreatePresetHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreatePresetRequestBodyAudio
+// Parameters required for transcoding audio.
 type CreatePresetRequestBodyAudio struct {
 	AudioPackingMode *string                   `json:"AudioPackingMode,omitempty"`
 	BitRate          *string                   `json:"BitRate,omitempty"`
@@ -23,6 +25,8 @@ type CreatePresetRequestBodyAudio struct {
 	SampleRate       *string                   `json:"SampleRate,omitempty"`
 }
 
+// CreatePresetRequestBodyThumbnails
+// Thumbnails for videos.
 type CreatePresetRequestBodyThumbnails struct {
 	AspectRatio   *string `json:"AspectRatio,omitempty"`
 	Format        *string `json:"Format,omitempty"`
@@ -34,6 +38,8 @@ type CreatePresetRequestBodyThumbnails struct {
 	SizingPolicy  *string `json:"SizingPolicy,omitempty"`
 }
 
+// CreatePresetRequestBodyVideo
+// The <code>VideoParameters</code> structure.
 type CreatePresetRequestBodyVideo struct {
 	AspectRatio        *string                  `json:"AspectRatio,omitempty"`
 	BitRate            *string                  `json:"BitRate,omitempty"`

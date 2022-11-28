@@ -12,6 +12,7 @@ type AppengineAppsCreateQueryParams struct {
 	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
 	Key            *string           `queryParam:"style=form,explode=true,name=key"`
 	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
+	Parent         *string           `queryParam:"style=form,explode=true,name=parent"`
 	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
 	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
 	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
@@ -25,7 +26,7 @@ type AppengineAppsCreateSecurity struct {
 
 type AppengineAppsCreateRequest struct {
 	QueryParams AppengineAppsCreateQueryParams
-	Request     *shared.Application `request:"mediaType=application/json"`
+	Request     *shared.ApplicationInput `request:"mediaType=application/json"`
 	Security    AppengineAppsCreateSecurity
 }
 

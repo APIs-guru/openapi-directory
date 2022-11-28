@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArrayJobDependencyEnum } from "./arrayjobdependencyenum";
+
 
 
 // JobDependency
@@ -7,9 +8,9 @@ import { ArrayJobDependencyEnum } from "./arrayjobdependencyenum";
  * An object representing an Batch job dependency.
 **/
 export class JobDependency extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobId" })
+  @SpeakeasyMetadata({ data: "json, name=jobId" })
   jobId?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ArrayJobDependencyEnum;
 }

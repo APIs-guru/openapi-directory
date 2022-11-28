@@ -4,17 +4,17 @@ from typing import Any,Optional
 
 @dataclass
 class GetVideoPlaylistsPlaylistIDPathParams:
-    playlist_id: int = field(default=None, metadata={'path_param': { 'field_name': 'playlistId', 'style': 'simple', 'explode': False }})
+    playlist_id: int = field(metadata={'path_param': { 'field_name': 'playlistId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetVideoPlaylistsPlaylistIDRequest:
-    path_params: GetVideoPlaylistsPlaylistIDPathParams = field(default=None)
+    path_params: GetVideoPlaylistsPlaylistIDPathParams = field()
     
 
 @dataclass
 class GetVideoPlaylistsPlaylistIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     video_playlist: Optional[Any] = field(default=None)
     

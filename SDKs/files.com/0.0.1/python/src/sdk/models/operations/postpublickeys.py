@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class PostPublicKeysRequestBody:
-    public_key: str = field(default=None, metadata={'multipart_form': { 'field_name': 'public_key' }})
-    title: str = field(default=None, metadata={'multipart_form': { 'field_name': 'title' }})
+    public_key: str = field(metadata={'multipart_form': { 'field_name': 'public_key' }})
+    title: str = field(metadata={'multipart_form': { 'field_name': 'title' }})
     user_id: Optional[int] = field(default=None, metadata={'multipart_form': { 'field_name': 'user_id' }})
     
 
@@ -17,7 +17,7 @@ class PostPublicKeysRequest:
 
 @dataclass
 class PostPublicKeysResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     public_key_entity: Optional[shared.PublicKeyEntity] = field(default=None)
-    status_code: int = field(default=None)
     

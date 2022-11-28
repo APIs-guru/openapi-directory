@@ -10,7 +10,7 @@ type TenancyTenantsUpdatePathParams struct {
 
 type TenancyTenantsUpdateRequest struct {
 	PathParams TenancyTenantsUpdatePathParams
-	Request    shared.WritableTenant `request:"mediaType=application/json"`
+	Request    shared.WritableTenantInput `request:"mediaType=application/json"`
 }
 
 type TenancyTenantsUpdateResponse struct {

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ComponentPlatform } from "./componentplatform";
 import { CloudComponentStatus } from "./cloudcomponentstatus";
 var DescribeComponentResponse = /** @class */ (function (_super) {
     __extends(DescribeComponentResponse, _super);
@@ -31,39 +31,39 @@ var DescribeComponentResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=arn" }),
+        SpeakeasyMetadata({ data: "json, name=arn" }),
         __metadata("design:type", String)
     ], DescribeComponentResponse.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=componentName" }),
+        SpeakeasyMetadata({ data: "json, name=componentName" }),
         __metadata("design:type", String)
     ], DescribeComponentResponse.prototype, "componentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=componentVersion" }),
+        SpeakeasyMetadata({ data: "json, name=componentVersion" }),
         __metadata("design:type", String)
     ], DescribeComponentResponse.prototype, "componentVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=creationTimestamp" }),
         __metadata("design:type", Date)
     ], DescribeComponentResponse.prototype, "creationTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], DescribeComponentResponse.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=platforms", elemType: shared.ComponentPlatform }),
+        SpeakeasyMetadata({ data: "json, name=platforms", elemType: ComponentPlatform }),
         __metadata("design:type", Array)
     ], DescribeComponentResponse.prototype, "platforms", void 0);
     __decorate([
-        Metadata({ data: "json, name=publisher" }),
+        SpeakeasyMetadata({ data: "json, name=publisher" }),
         __metadata("design:type", String)
     ], DescribeComponentResponse.prototype, "publisher", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", CloudComponentStatus)
     ], DescribeComponentResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], DescribeComponentResponse.prototype, "tags", void 0);
     return DescribeComponentResponse;

@@ -16,10 +16,8 @@ type PostCertificatesCreateCertificateRequest struct {
 	Type        *PostCertificatesCreateCertificateRequestTypeEnum `json:"type,omitempty"`
 }
 
-type PostCertificatesRequest struct {
-	Request *PostCertificatesCreateCertificateRequest `request:"mediaType=application/json"`
-}
-
+// PostCertificatesCreateCertificateResponseNullableActionError
+// Error message for the Action if error occurred, otherwise null
 type PostCertificatesCreateCertificateResponseNullableActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -49,6 +47,8 @@ type PostCertificatesCreateCertificateResponseNullableAction struct {
 	Status    PostCertificatesCreateCertificateResponseNullableActionStatusEnum  `json:"status"`
 }
 
+// PostCertificatesCreateCertificateResponseCertificateStatusError
+// If issuance or renewal reports `failed`, this property contains information about what happened
 type PostCertificatesCreateCertificateResponseCertificateStatusError struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
@@ -71,6 +71,8 @@ const (
 	PostCertificatesCreateCertificateResponseCertificateStatusRenewalEnumUnavailable PostCertificatesCreateCertificateResponseCertificateStatusRenewalEnum = "unavailable"
 )
 
+// PostCertificatesCreateCertificateResponseCertificateStatus
+// Current status of a type `managed` Certificate, always *null* for type `uploaded` Certificates
 type PostCertificatesCreateCertificateResponseCertificateStatus struct {
 	Error    *PostCertificatesCreateCertificateResponseCertificateStatusError        `json:"error,omitempty"`
 	Issuance *PostCertificatesCreateCertificateResponseCertificateStatusIssuanceEnum `json:"issuance,omitempty"`
@@ -107,6 +109,10 @@ type PostCertificatesCreateCertificateResponseCertificate struct {
 type PostCertificatesCreateCertificateResponse struct {
 	Action      *PostCertificatesCreateCertificateResponseNullableAction `json:"action,omitempty"`
 	Certificate PostCertificatesCreateCertificateResponseCertificate     `json:"certificate"`
+}
+
+type PostCertificatesRequest struct {
+	Request *PostCertificatesCreateCertificateRequest `request:"mediaType=application/json"`
 }
 
 type PostCertificatesResponse struct {

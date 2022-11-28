@@ -1,5 +1,7 @@
 package shared
 
+// Kubernetes
+// Kubernetes related attributes.
 type Kubernetes struct {
 	AccessReviews []AccessReview                       `json:"accessReviews,omitempty"`
 	Bindings      []GoogleCloudSecuritycenterV1Binding `json:"bindings,omitempty"`

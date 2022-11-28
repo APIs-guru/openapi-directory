@@ -1,23 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Interpretation } from "./interpretation";
 import { Message } from "./message";
 import { SessionState } from "./sessionstate";
 
 
+
 export class RecognizeTextResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=interpretations", elemType: shared.Interpretation })
+  @SpeakeasyMetadata({ data: "json, name=interpretations", elemType: Interpretation })
   interpretations?: Interpretation[];
 
-  @Metadata({ data: "json, name=messages", elemType: shared.Message })
+  @SpeakeasyMetadata({ data: "json, name=messages", elemType: Message })
   messages?: Message[];
 
-  @Metadata({ data: "json, name=requestAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=requestAttributes" })
   requestAttributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=sessionId" })
+  @SpeakeasyMetadata({ data: "json, name=sessionId" })
   sessionId?: string;
 
-  @Metadata({ data: "json, name=sessionState" })
+  @SpeakeasyMetadata({ data: "json, name=sessionState" })
   sessionState?: SessionState;
 }

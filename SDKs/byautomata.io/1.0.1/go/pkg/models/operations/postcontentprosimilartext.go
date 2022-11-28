@@ -8,10 +8,6 @@ type PostContentproSimilarTextRequestBody struct {
 	Text string `json:"text"`
 }
 
-type PostContentproSimilarTextRequest struct {
-	Request PostContentproSimilarTextRequestBody `request:"mediaType=application/json"`
-}
-
 type PostContentproSimilarText200ApplicationJSONData struct {
 	Article  *shared.Article            `json:"article,omitempty"`
 	Company  *shared.ContentProCompany  `json:"company,omitempty"`
@@ -23,6 +19,10 @@ type PostContentproSimilarText200ApplicationJSON struct {
 	CountRemaining *string                                           `json:"count_remaining,omitempty"`
 	Data           []PostContentproSimilarText200ApplicationJSONData `json:"data,omitempty"`
 	RenewalDate    *string                                           `json:"renewal_date,omitempty"`
+}
+
+type PostContentproSimilarTextRequest struct {
+	Request PostContentproSimilarTextRequestBody `request:"mediaType=application/json"`
 }
 
 type PostContentproSimilarTextResponse struct {

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import status
+from sdk import utils
+from . import *
 
 class EncryptionInfoEncryptionTypeEnum(str, Enum):
     TYPE_UNSPECIFIED = "TYPE_UNSPECIFIED"
@@ -12,7 +14,21 @@ class EncryptionInfoEncryptionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class EncryptionInfo:
-    encryption_status: Optional[status.Status] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'encryptionStatus' }})
-    encryption_type: Optional[EncryptionInfoEncryptionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'encryptionType' }})
-    kms_key_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kmsKeyVersion' }})
+    r"""EncryptionInfo
+    Encryption information for a Cloud Spanner database or backup.
+    """
+    
+    encryption_status: Optional[Status] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('encryptionStatus') }})
+    encryption_type: Optional[EncryptionInfoEncryptionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('encryptionType') }})
+    kms_key_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kmsKeyVersion') }})
+    
+
+@dataclass_json
+@dataclass
+class EncryptionInfoInput:
+    r"""EncryptionInfoInput
+    Encryption information for a Cloud Spanner database or backup.
+    """
+    
+    encryption_status: Optional[Status] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('encryptionStatus') }})
     

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingOrdersListPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 class DfareportingOrdersListSortFieldEnum(str, Enum):
     ID = "ID"
@@ -41,20 +42,20 @@ class DfareportingOrdersListQueryParams:
 
 @dataclass
 class DfareportingOrdersListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingOrdersListRequest:
-    path_params: DfareportingOrdersListPathParams = field(default=None)
-    query_params: DfareportingOrdersListQueryParams = field(default=None)
-    security: DfareportingOrdersListSecurity = field(default=None)
+    path_params: DfareportingOrdersListPathParams = field()
+    query_params: DfareportingOrdersListQueryParams = field()
+    security: DfareportingOrdersListSecurity = field()
     
 
 @dataclass
 class DfareportingOrdersListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     orders_list_response: Optional[shared.OrdersListResponse] = field(default=None)
-    status_code: int = field(default=None)
     

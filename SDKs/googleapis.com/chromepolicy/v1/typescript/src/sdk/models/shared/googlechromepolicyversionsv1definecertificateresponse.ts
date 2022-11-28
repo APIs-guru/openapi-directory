@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleChromePolicyVersionsV1NetworkSetting } from "./googlechromepolicyversionsv1networksetting";
+
 
 
 // GoogleChromePolicyVersionsV1DefineCertificateResponse
@@ -8,12 +8,12 @@ import { GoogleChromePolicyVersionsV1NetworkSetting } from "./googlechromepolicy
  * Response object for creating a certificate.
 **/
 export class GoogleChromePolicyVersionsV1DefineCertificateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=networkId" })
+  @SpeakeasyMetadata({ data: "json, name=networkId" })
   networkId?: string;
 
-  @Metadata({ data: "json, name=settings", elemType: shared.GoogleChromePolicyVersionsV1NetworkSetting })
+  @SpeakeasyMetadata({ data: "json, name=settings", elemType: GoogleChromePolicyVersionsV1NetworkSetting })
   settings?: GoogleChromePolicyVersionsV1NetworkSetting[];
 
-  @Metadata({ data: "json, name=targetResource" })
+  @SpeakeasyMetadata({ data: "json, name=targetResource" })
   targetResource?: string;
 }

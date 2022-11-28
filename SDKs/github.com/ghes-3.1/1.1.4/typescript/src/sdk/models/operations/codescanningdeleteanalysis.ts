@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CodeScanningDeleteAnalysisPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=analysis_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=analysis_id" })
   analysisId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class CodeScanningDeleteAnalysisQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=confirm_delete" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=confirm_delete" })
   confirmDelete?: string;
 }
 
 
-export class CodeScanningDeleteAnalysisRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: CodeScanningDeleteAnalysisPathParams;
-
-  @Metadata()
-  queryParams: CodeScanningDeleteAnalysisQueryParams;
-}
-
-
 export class CodeScanningDeleteAnalysis503ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class CodeScanningDeleteAnalysisRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: CodeScanningDeleteAnalysisPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: CodeScanningDeleteAnalysisQueryParams;
+}
+
+
 export class CodeScanningDeleteAnalysisResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   codeScanningAnalysisDeletion?: shared.CodeScanningAnalysisDeletion;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   codeScanningDeleteAnalysis503ApplicationJsonObject?: CodeScanningDeleteAnalysis503ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scimError?: shared.ScimError;
 }

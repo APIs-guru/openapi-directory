@@ -18,12 +18,6 @@ type RetrieveCreditTransfersSecurity struct {
 	BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
 }
 
-type RetrieveCreditTransfersRequest struct {
-	PathParams  RetrieveCreditTransfersPathParams
-	QueryParams RetrieveCreditTransfersQueryParams
-	Security    RetrieveCreditTransfersSecurity
-}
-
 type RetrieveCreditTransfers401ApplicationJSON struct {
 	Detail   string `json:"detail"`
 	Instance string `json:"instance"`
@@ -31,11 +25,19 @@ type RetrieveCreditTransfers401ApplicationJSON struct {
 	Type     string `json:"type"`
 }
 
+// RetrieveCreditTransfers404ApplicationJSON
+// Invalid API Key
 type RetrieveCreditTransfers404ApplicationJSON struct {
 	Detail   string `json:"detail"`
 	Instance string `json:"instance"`
 	Title    string `json:"title"`
 	Type     string `json:"type"`
+}
+
+type RetrieveCreditTransfersRequest struct {
+	PathParams  RetrieveCreditTransfersPathParams
+	QueryParams RetrieveCreditTransfersQueryParams
+	Security    RetrieveCreditTransfersSecurity
 }
 
 type RetrieveCreditTransfersResponse struct {

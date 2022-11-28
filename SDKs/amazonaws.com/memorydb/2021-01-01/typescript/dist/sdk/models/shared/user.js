@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Authentication } from "./authentication";
 // User
 /**
@@ -34,31 +34,31 @@ var User = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ACLNames" }),
+        SpeakeasyMetadata({ data: "json, name=ACLNames" }),
         __metadata("design:type", Array)
     ], User.prototype, "aclNames", void 0);
     __decorate([
-        Metadata({ data: "json, name=ARN" }),
+        SpeakeasyMetadata({ data: "json, name=ARN" }),
         __metadata("design:type", String)
     ], User.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=AccessString" }),
+        SpeakeasyMetadata({ data: "json, name=AccessString" }),
         __metadata("design:type", String)
     ], User.prototype, "accessString", void 0);
     __decorate([
-        Metadata({ data: "json, name=Authentication" }),
+        SpeakeasyMetadata({ data: "json, name=Authentication" }),
         __metadata("design:type", Authentication)
     ], User.prototype, "authentication", void 0);
     __decorate([
-        Metadata({ data: "json, name=MinimumEngineVersion" }),
+        SpeakeasyMetadata({ data: "json, name=MinimumEngineVersion" }),
         __metadata("design:type", String)
     ], User.prototype, "minimumEngineVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], User.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], User.prototype, "status", void 0);
     return User;

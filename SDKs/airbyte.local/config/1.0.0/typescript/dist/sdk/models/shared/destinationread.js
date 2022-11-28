@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DestinationRead = /** @class */ (function (_super) {
     __extends(DestinationRead, _super);
     function DestinationRead() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=connectionConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=connectionConfiguration" }),
         __metadata("design:type", Object)
     ], DestinationRead.prototype, "connectionConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=destinationDefinitionId" }),
+        SpeakeasyMetadata({ data: "json, name=destinationDefinitionId" }),
         __metadata("design:type", String)
     ], DestinationRead.prototype, "destinationDefinitionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=destinationId" }),
+        SpeakeasyMetadata({ data: "json, name=destinationId" }),
         __metadata("design:type", String)
     ], DestinationRead.prototype, "destinationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=destinationName" }),
+        SpeakeasyMetadata({ data: "json, name=destinationName" }),
         __metadata("design:type", String)
     ], DestinationRead.prototype, "destinationName", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], DestinationRead.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=workspaceId" }),
+        SpeakeasyMetadata({ data: "json, name=workspaceId" }),
         __metadata("design:type", String)
     ], DestinationRead.prototype, "workspaceId", void 0);
     return DestinationRead;

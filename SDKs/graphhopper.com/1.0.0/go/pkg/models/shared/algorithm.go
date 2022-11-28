@@ -14,6 +14,8 @@ const (
 	AlgorithmProblemTypeEnumMinMax AlgorithmProblemTypeEnum = "min-max"
 )
 
+// Algorithm
+// Use `objectives` instead.
 type Algorithm struct {
 	Objective   *AlgorithmObjectiveEnum   `json:"objective,omitempty"`
 	ProblemType *AlgorithmProblemTypeEnum `json:"problem_type,omitempty"`

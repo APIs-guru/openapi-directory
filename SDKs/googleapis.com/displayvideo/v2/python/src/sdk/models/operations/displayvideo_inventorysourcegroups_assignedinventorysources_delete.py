@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoInventorySourceGroupsAssignedInventorySourcesDeletePathParams:
-    assigned_inventory_source_id: str = field(default=None, metadata={'path_param': { 'field_name': 'assignedInventorySourceId', 'style': 'simple', 'explode': False }})
-    inventory_source_group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'inventorySourceGroupId', 'style': 'simple', 'explode': False }})
+    assigned_inventory_source_id: str = field(metadata={'path_param': { 'field_name': 'assignedInventorySourceId', 'style': 'simple', 'explode': False }})
+    inventory_source_group_id: str = field(metadata={'path_param': { 'field_name': 'inventorySourceGroupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class DisplayvideoInventorySourceGroupsAssignedInventorySourcesDeleteQueryParams
 
 @dataclass
 class DisplayvideoInventorySourceGroupsAssignedInventorySourcesDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoInventorySourceGroupsAssignedInventorySourcesDeleteRequest:
-    path_params: DisplayvideoInventorySourceGroupsAssignedInventorySourcesDeletePathParams = field(default=None)
-    query_params: DisplayvideoInventorySourceGroupsAssignedInventorySourcesDeleteQueryParams = field(default=None)
-    security: DisplayvideoInventorySourceGroupsAssignedInventorySourcesDeleteSecurity = field(default=None)
+    path_params: DisplayvideoInventorySourceGroupsAssignedInventorySourcesDeletePathParams = field()
+    query_params: DisplayvideoInventorySourceGroupsAssignedInventorySourcesDeleteQueryParams = field()
+    security: DisplayvideoInventorySourceGroupsAssignedInventorySourcesDeleteSecurity = field()
     
 
 @dataclass
 class DisplayvideoInventorySourceGroupsAssignedInventorySourcesDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -12,17 +12,17 @@ class SyncPlaySetShuffleModeRequests:
 
 @dataclass
 class SyncPlaySetShuffleModeSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class SyncPlaySetShuffleModeRequest:
-    request: SyncPlaySetShuffleModeRequests = field(default=None)
-    security: SyncPlaySetShuffleModeSecurity = field(default=None)
+    request: SyncPlaySetShuffleModeRequests = field()
+    security: SyncPlaySetShuffleModeSecurity = field()
     
 
 @dataclass
 class SyncPlaySetShuffleModeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

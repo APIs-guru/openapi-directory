@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class AcceptEulasPathParams:
-    studio_id: str = field(default=None, metadata={'path_param': { 'field_name': 'studioId', 'style': 'simple', 'explode': False }})
+    studio_id: str = field(metadata={'path_param': { 'field_name': 'studioId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,26 +28,26 @@ class AcceptEulasHeaders:
 @dataclass_json
 @dataclass
 class AcceptEulasRequestBody:
-    eula_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eulaIds' }})
+    eula_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('eulaIds') }})
     
 
 @dataclass
 class AcceptEulasRequest:
-    path_params: AcceptEulasPathParams = field(default=None)
-    headers: AcceptEulasHeaders = field(default=None)
-    request: AcceptEulasRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: AcceptEulasHeaders = field()
+    path_params: AcceptEulasPathParams = field()
+    request: AcceptEulasRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AcceptEulasResponse:
+    content_type: str = field()
+    status_code: int = field()
     accept_eulas_response: Optional[shared.AcceptEulasResponse] = field(default=None)
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

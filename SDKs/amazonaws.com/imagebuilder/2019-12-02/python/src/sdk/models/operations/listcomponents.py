@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -29,30 +34,30 @@ class ListComponentsRequestBodyOwnerEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ListComponentsRequestBody:
-    by_name: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'byName' }})
-    filters: Optional[List[shared.Filter]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filters' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    owner: Optional[ListComponentsRequestBodyOwnerEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
+    by_name: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('byName') }})
+    filters: Optional[List[shared.Filter]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filters') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    owner: Optional[ListComponentsRequestBodyOwnerEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('owner') }})
     
 
 @dataclass
 class ListComponentsRequest:
-    query_params: ListComponentsQueryParams = field(default=None)
-    headers: ListComponentsHeaders = field(default=None)
-    request: ListComponentsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListComponentsHeaders = field()
+    query_params: ListComponentsQueryParams = field()
+    request: ListComponentsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListComponentsResponse:
+    content_type: str = field()
+    status_code: int = field()
     call_rate_limit_exceeded_exception: Optional[Any] = field(default=None)
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     invalid_pagination_token_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_components_response: Optional[shared.ListComponentsResponse] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

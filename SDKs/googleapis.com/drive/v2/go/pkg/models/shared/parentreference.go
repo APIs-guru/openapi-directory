@@ -1,5 +1,7 @@
 package shared
 
+// ParentReference
+// A reference to a file's parent.
 type ParentReference struct {
 	ID         *string `json:"id,omitempty"`
 	IsRoot     *bool   `json:"isRoot,omitempty"`

@@ -11,6 +11,8 @@ const (
 	CisTransactionCisTransactionCisMessageTypeEnumReturn       CisTransactionCisTransactionCisMessageTypeEnum = "Return"
 )
 
+// CisTransactionCisTransactionEmployerCore
+// The cis transactions' employer core
 type CisTransactionCisTransactionEmployerCore struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`

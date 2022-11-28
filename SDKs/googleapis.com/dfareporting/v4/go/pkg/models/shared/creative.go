@@ -138,6 +138,8 @@ const (
 	CreativeTypeEnumInstreamAudio                             CreativeTypeEnum = "INSTREAM_AUDIO"
 )
 
+// Creative
+// Contains properties of a Creative.
 type Creative struct {
 	AccountID                           *string                           `json:"accountId,omitempty"`
 	Active                              *bool                             `json:"active,omitempty"`

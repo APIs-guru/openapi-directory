@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class MakeSubUserKeyMakeSubUserKeyPostQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=apiID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apiID" })
   apiId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=apiKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apiKey" })
   apiKey: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=siteName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=siteName" })
   siteName?: string;
 }
 
 
 export class MakeSubUserKeyMakeSubUserKeyPostRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: MakeSubUserKeyMakeSubUserKeyPostQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.EndpointList;
 }
 
 
 export class MakeSubUserKeyMakeSubUserKeyPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   subUserJsonWebToken?: shared.SubUserJsonWebToken;
 }

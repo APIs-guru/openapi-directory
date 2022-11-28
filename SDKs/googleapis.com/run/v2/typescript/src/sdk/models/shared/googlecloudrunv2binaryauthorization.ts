@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRunV2BinaryAuthorization
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Settings for Binary Authorization feature.
 **/
 export class GoogleCloudRunV2BinaryAuthorization extends SpeakeasyBase {
-  @Metadata({ data: "json, name=breakglassJustification" })
+  @SpeakeasyMetadata({ data: "json, name=breakglassJustification" })
   breakglassJustification?: string;
 
-  @Metadata({ data: "json, name=useDefault" })
+  @SpeakeasyMetadata({ data: "json, name=useDefault" })
   useDefault?: boolean;
 }

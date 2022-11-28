@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListVirtualClustersContainerProviderTypeEnum(str, Enum):
@@ -33,15 +34,15 @@ class ListVirtualClustersHeaders:
 
 @dataclass
 class ListVirtualClustersRequest:
-    query_params: ListVirtualClustersQueryParams = field(default=None)
-    headers: ListVirtualClustersHeaders = field(default=None)
+    headers: ListVirtualClustersHeaders = field()
+    query_params: ListVirtualClustersQueryParams = field()
     
 
 @dataclass
 class ListVirtualClustersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_exception: Optional[Any] = field(default=None)
     list_virtual_clusters_response: Optional[shared.ListVirtualClustersResponse] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

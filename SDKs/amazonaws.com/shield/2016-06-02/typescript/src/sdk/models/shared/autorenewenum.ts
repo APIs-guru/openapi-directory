@@ -1,6 +1,7 @@
 
 
+
 export enum AutoRenewEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

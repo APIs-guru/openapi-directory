@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContainerServicePowerNameEnum } from "./containerservicepowernameenum";
 
 
+
 export class UpdateContainerServiceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isDisabled" })
+  @SpeakeasyMetadata({ data: "json, name=isDisabled" })
   isDisabled?: boolean;
 
-  @Metadata({ data: "json, name=power" })
+  @SpeakeasyMetadata({ data: "json, name=power" })
   power?: ContainerServicePowerNameEnum;
 
-  @Metadata({ data: "json, name=publicDomainNames" })
+  @SpeakeasyMetadata({ data: "json, name=publicDomainNames" })
   publicDomainNames?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=scale" })
+  @SpeakeasyMetadata({ data: "json, name=scale" })
   scale?: number;
 
-  @Metadata({ data: "json, name=serviceName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceName" })
   serviceName: string;
 }

@@ -1,11 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CampaignSummary } from "./campaignsummary";
 
+
 export enum InvoiceInvoiceTypeEnum {
-    InvoiceTypeUnspecified = "INVOICE_TYPE_UNSPECIFIED"
-,    InvoiceTypeCredit = "INVOICE_TYPE_CREDIT"
-,    InvoiceTypeInvoice = "INVOICE_TYPE_INVOICE"
+    InvoiceTypeUnspecified = "INVOICE_TYPE_UNSPECIFIED",
+    InvoiceTypeCredit = "INVOICE_TYPE_CREDIT",
+    InvoiceTypeInvoice = "INVOICE_TYPE_INVOICE"
 }
 
 
@@ -14,57 +14,57 @@ export enum InvoiceInvoiceTypeEnum {
  * Contains information about a single invoice
 **/
 export class Invoice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=campaign_summaries", elemType: shared.CampaignSummary })
+  @SpeakeasyMetadata({ data: "json, name=campaign_summaries", elemType: CampaignSummary })
   campaignSummaries?: CampaignSummary[];
 
-  @Metadata({ data: "json, name=correctedInvoiceId" })
+  @SpeakeasyMetadata({ data: "json, name=correctedInvoiceId" })
   correctedInvoiceId?: string;
 
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode?: string;
 
-  @Metadata({ data: "json, name=dueDate" })
+  @SpeakeasyMetadata({ data: "json, name=dueDate" })
   dueDate?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=invoiceType" })
+  @SpeakeasyMetadata({ data: "json, name=invoiceType" })
   invoiceType?: InvoiceInvoiceTypeEnum;
 
-  @Metadata({ data: "json, name=issueDate" })
+  @SpeakeasyMetadata({ data: "json, name=issueDate" })
   issueDate?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=paymentsAccountId" })
+  @SpeakeasyMetadata({ data: "json, name=paymentsAccountId" })
   paymentsAccountId?: string;
 
-  @Metadata({ data: "json, name=paymentsProfileId" })
+  @SpeakeasyMetadata({ data: "json, name=paymentsProfileId" })
   paymentsProfileId?: string;
 
-  @Metadata({ data: "json, name=pdfUrl" })
+  @SpeakeasyMetadata({ data: "json, name=pdfUrl" })
   pdfUrl?: string;
 
-  @Metadata({ data: "json, name=purchaseOrderNumber" })
+  @SpeakeasyMetadata({ data: "json, name=purchaseOrderNumber" })
   purchaseOrderNumber?: string;
 
-  @Metadata({ data: "json, name=replacedInvoiceIds" })
+  @SpeakeasyMetadata({ data: "json, name=replacedInvoiceIds" })
   replacedInvoiceIds?: string[];
 
-  @Metadata({ data: "json, name=serviceEndDate" })
+  @SpeakeasyMetadata({ data: "json, name=serviceEndDate" })
   serviceEndDate?: string;
 
-  @Metadata({ data: "json, name=serviceStartDate" })
+  @SpeakeasyMetadata({ data: "json, name=serviceStartDate" })
   serviceStartDate?: string;
 
-  @Metadata({ data: "json, name=subtotalAmountMicros" })
+  @SpeakeasyMetadata({ data: "json, name=subtotalAmountMicros" })
   subtotalAmountMicros?: string;
 
-  @Metadata({ data: "json, name=totalAmountMicros" })
+  @SpeakeasyMetadata({ data: "json, name=totalAmountMicros" })
   totalAmountMicros?: string;
 
-  @Metadata({ data: "json, name=totalTaxAmountMicros" })
+  @SpeakeasyMetadata({ data: "json, name=totalTaxAmountMicros" })
   totalTaxAmountMicros?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsS3ObjectDetails
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about an Amazon S3 object.
 **/
 export class AwsS3ObjectDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContentType" })
+  @SpeakeasyMetadata({ data: "json, name=ContentType" })
   contentType?: string;
 
-  @Metadata({ data: "json, name=ETag" })
+  @SpeakeasyMetadata({ data: "json, name=ETag" })
   eTag?: string;
 
-  @Metadata({ data: "json, name=LastModified" })
+  @SpeakeasyMetadata({ data: "json, name=LastModified" })
   lastModified?: string;
 
-  @Metadata({ data: "json, name=SSEKMSKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=SSEKMSKeyId" })
   ssekmsKeyId?: string;
 
-  @Metadata({ data: "json, name=ServerSideEncryption" })
+  @SpeakeasyMetadata({ data: "json, name=ServerSideEncryption" })
   serverSideEncryption?: string;
 
-  @Metadata({ data: "json, name=VersionId" })
+  @SpeakeasyMetadata({ data: "json, name=VersionId" })
   versionId?: string;
 }

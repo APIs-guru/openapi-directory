@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class HealthCheck extends SpeakeasyBase {
-  @Metadata({ data: "json, name=checkIntervalSec" })
+  @SpeakeasyMetadata({ data: "json, name=checkIntervalSec" })
   checkIntervalSec?: number;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=healthyThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=healthyThreshold" })
   healthyThreshold?: number;
 
-  @Metadata({ data: "json, name=host" })
+  @SpeakeasyMetadata({ data: "json, name=host" })
   host?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=timeoutSec" })
+  @SpeakeasyMetadata({ data: "json, name=timeoutSec" })
   timeoutSec?: number;
 
-  @Metadata({ data: "json, name=unhealthyThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=unhealthyThreshold" })
   unhealthyThreshold?: number;
 }

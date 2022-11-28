@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateAccessPolicyHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,22 +32,22 @@ export class CreateAccessPolicyHeaders extends SpeakeasyBase {
  * <p>Contains an identity that can access an IoT SiteWise Monitor resource.</p> <note> <p>Currently, you can't use Amazon Web Services APIs to retrieve Amazon Web Services SSO identity IDs. You can find the Amazon Web Services SSO identity IDs in the URL of user and group pages in the <a href="https://console.aws.amazon.com/singlesignon">Amazon Web Services SSO console</a>.</p> </note>
 **/
 export class CreateAccessPolicyRequestBodyAccessPolicyIdentity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group?: shared.GroupIdentity;
 
-  @Metadata({ data: "json, name=iamRole" })
+  @SpeakeasyMetadata({ data: "json, name=iamRole" })
   iamRole?: shared.IamRoleIdentity;
 
-  @Metadata({ data: "json, name=iamUser" })
+  @SpeakeasyMetadata({ data: "json, name=iamUser" })
   iamUser?: shared.IamUserIdentity;
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: shared.UserIdentity;
 }
 
 export enum CreateAccessPolicyRequestBodyAccessPolicyPermissionEnum {
-    Administrator = "ADMINISTRATOR"
-,    Viewer = "VIEWER"
+    Administrator = "ADMINISTRATOR",
+    Viewer = "VIEWER"
 }
 
 
@@ -55,63 +56,63 @@ export enum CreateAccessPolicyRequestBodyAccessPolicyPermissionEnum {
  * Contains an IoT SiteWise Monitor resource ID for a portal or project.
 **/
 export class CreateAccessPolicyRequestBodyAccessPolicyResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portal" })
+  @SpeakeasyMetadata({ data: "json, name=portal" })
   portal?: shared.PortalResource;
 
-  @Metadata({ data: "json, name=project" })
+  @SpeakeasyMetadata({ data: "json, name=project" })
   project?: shared.ProjectResource;
 }
 
 
 export class CreateAccessPolicyRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessPolicyIdentity" })
+  @SpeakeasyMetadata({ data: "json, name=accessPolicyIdentity" })
   accessPolicyIdentity: CreateAccessPolicyRequestBodyAccessPolicyIdentity;
 
-  @Metadata({ data: "json, name=accessPolicyPermission" })
+  @SpeakeasyMetadata({ data: "json, name=accessPolicyPermission" })
   accessPolicyPermission: CreateAccessPolicyRequestBodyAccessPolicyPermissionEnum;
 
-  @Metadata({ data: "json, name=accessPolicyResource" })
+  @SpeakeasyMetadata({ data: "json, name=accessPolicyResource" })
   accessPolicyResource: CreateAccessPolicyRequestBodyAccessPolicyResource;
 
-  @Metadata({ data: "json, name=clientToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientToken" })
   clientToken?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }
 
 
 export class CreateAccessPolicyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateAccessPolicyHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateAccessPolicyRequestBody;
 }
 
 
 export class CreateAccessPolicyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createAccessPolicyResponse?: shared.CreateAccessPolicyResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

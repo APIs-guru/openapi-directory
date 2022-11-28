@@ -4,26 +4,13 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var GetObjectStorageBucketsServers = []string{
+var GetObjectStorageBucketsServerList = []string{
 	"https://api.linode.com/v4",
 }
 
-type GetObjectStorageBucketsSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetObjectStorageBucketsSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type GetObjectStorageBucketsSecurity struct {
-	Option1 *GetObjectStorageBucketsSecurityOption1 `security:"option"`
-	Option2 *GetObjectStorageBucketsSecurityOption2 `security:"option"`
-}
-
-type GetObjectStorageBucketsRequest struct {
-	ServerURL *string
-	Security  GetObjectStorageBucketsSecurity
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
 }
 
 type GetObjectStorageBuckets200ApplicationJSON struct {
@@ -35,6 +22,11 @@ type GetObjectStorageBuckets200ApplicationJSON struct {
 
 type GetObjectStorageBucketsDefaultApplicationJSON struct {
 	Errors []shared.ErrorObject `json:"errors,omitempty"`
+}
+
+type GetObjectStorageBucketsRequest struct {
+	ServerURL *string
+	Security  GetObjectStorageBucketsSecurity
 }
 
 type GetObjectStorageBucketsResponse struct {

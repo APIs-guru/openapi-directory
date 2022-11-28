@@ -4,7 +4,7 @@ from typing import Any,Optional
 
 @dataclass
 class PutConsumerV1AppointmentsIDNoshowPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,12 +17,12 @@ class PutConsumerV1AppointmentsIDNoshowRequests:
 
 @dataclass
 class PutConsumerV1AppointmentsIDNoshowRequest:
-    path_params: PutConsumerV1AppointmentsIDNoshowPathParams = field(default=None)
+    path_params: PutConsumerV1AppointmentsIDNoshowPathParams = field()
     request: Optional[PutConsumerV1AppointmentsIDNoshowRequests] = field(default=None)
     
 
 @dataclass
 class PutConsumerV1AppointmentsIDNoshowResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

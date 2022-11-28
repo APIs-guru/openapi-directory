@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudbillingBillingAccountsSetIamPolicyPathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class CloudbillingBillingAccountsSetIamPolicyQueryParams:
 
 @dataclass
 class CloudbillingBillingAccountsSetIamPolicySecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudbillingBillingAccountsSetIamPolicySecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class CloudbillingBillingAccountsSetIamPolicySecurity:
 
 @dataclass
 class CloudbillingBillingAccountsSetIamPolicyRequest:
-    path_params: CloudbillingBillingAccountsSetIamPolicyPathParams = field(default=None)
-    query_params: CloudbillingBillingAccountsSetIamPolicyQueryParams = field(default=None)
+    path_params: CloudbillingBillingAccountsSetIamPolicyPathParams = field()
+    query_params: CloudbillingBillingAccountsSetIamPolicyQueryParams = field()
+    security: CloudbillingBillingAccountsSetIamPolicySecurity = field()
     request: Optional[shared.SetIamPolicyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudbillingBillingAccountsSetIamPolicySecurity = field(default=None)
     
 
 @dataclass
 class CloudbillingBillingAccountsSetIamPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     policy: Optional[shared.Policy] = field(default=None)
-    status_code: int = field(default=None)
     

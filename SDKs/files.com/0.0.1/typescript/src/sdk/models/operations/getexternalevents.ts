@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetExternalEventsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cursor" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cursor" })
   cursor?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: Map<string, any>;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter_gt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter_gt" })
   filterGt?: Map<string, any>;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter_gteq" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter_gteq" })
   filterGteq?: Map<string, any>;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter_like" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter_like" })
   filterLike?: Map<string, any>;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter_lt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter_lt" })
   filterLt?: Map<string, any>;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter_lteq" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter_lteq" })
   filterLteq?: Map<string, any>;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_by" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort_by" })
   sortBy?: Map<string, any>;
 }
 
 
 export class GetExternalEventsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetExternalEventsQueryParams;
 }
 
 
 export class GetExternalEventsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.ExternalEventEntity })
+  @SpeakeasyMetadata({ elemType: shared.ExternalEventEntity })
   externalEventEntities?: shared.ExternalEventEntity[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

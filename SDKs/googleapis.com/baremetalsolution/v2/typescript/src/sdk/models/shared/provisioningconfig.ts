@@ -1,18 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceConfig } from "./instanceconfig";
 import { NetworkConfig } from "./networkconfig";
 import { VolumeConfig } from "./volumeconfig";
+import { InstanceConfigInput } from "./instanceconfig";
+import { NetworkConfigInput } from "./networkconfig";
+import { VolumeConfigInput } from "./volumeconfig";
+
 
 export enum ProvisioningConfigStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Draft = "DRAFT"
-,    Submitted = "SUBMITTED"
-,    Provisioning = "PROVISIONING"
-,    Provisioned = "PROVISIONED"
-,    Validated = "VALIDATED"
-,    Cancelled = "CANCELLED"
-,    Failed = "FAILED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Draft = "DRAFT",
+    Submitted = "SUBMITTED",
+    Provisioning = "PROVISIONING",
+    Provisioned = "PROVISIONED",
+    Validated = "VALIDATED",
+    Cancelled = "CANCELLED",
+    Failed = "FAILED"
 }
 
 
@@ -21,45 +24,82 @@ export enum ProvisioningConfigStateEnum {
  * A provisioning configuration.
 **/
 export class ProvisioningConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudConsoleUri" })
+  @SpeakeasyMetadata({ data: "json, name=cloudConsoleUri" })
   cloudConsoleUri?: string;
 
-  @Metadata({ data: "json, name=customId" })
+  @SpeakeasyMetadata({ data: "json, name=customId" })
   customId?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=handoverServiceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=handoverServiceAccount" })
   handoverServiceAccount?: string;
 
-  @Metadata({ data: "json, name=instances", elemType: shared.InstanceConfig })
+  @SpeakeasyMetadata({ data: "json, name=instances", elemType: InstanceConfig })
   instances?: InstanceConfig[];
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=networks", elemType: shared.NetworkConfig })
+  @SpeakeasyMetadata({ data: "json, name=networks", elemType: NetworkConfig })
   networks?: NetworkConfig[];
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ProvisioningConfigStateEnum;
 
-  @Metadata({ data: "json, name=statusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
   statusMessage?: string;
 
-  @Metadata({ data: "json, name=ticketId" })
+  @SpeakeasyMetadata({ data: "json, name=ticketId" })
   ticketId?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=volumes", elemType: shared.VolumeConfig })
+  @SpeakeasyMetadata({ data: "json, name=volumes", elemType: VolumeConfig })
   volumes?: VolumeConfig[];
 
-  @Metadata({ data: "json, name=vpcScEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=vpcScEnabled" })
+  vpcScEnabled?: boolean;
+}
+
+
+// ProvisioningConfigInput
+/** 
+ * A provisioning configuration.
+**/
+export class ProvisioningConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=customId" })
+  customId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=email" })
+  email?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=handoverServiceAccount" })
+  handoverServiceAccount?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=instances", elemType: InstanceConfigInput })
+  instances?: InstanceConfigInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=location" })
+  location?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=networks", elemType: NetworkConfigInput })
+  networks?: NetworkConfigInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=statusMessage" })
+  statusMessage?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ticketId" })
+  ticketId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=volumes", elemType: VolumeConfigInput })
+  volumes?: VolumeConfigInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=vpcScEnabled" })
   vpcScEnabled?: boolean;
 }

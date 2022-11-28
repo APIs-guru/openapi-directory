@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Bucket } from "./bucket";
+
 
 
 // BucketInfo
@@ -8,6 +8,6 @@ import { Bucket } from "./bucket";
  * A container for the calculated facet values and counts.
 **/
 export class BucketInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buckets", elemType: shared.Bucket })
+  @SpeakeasyMetadata({ data: "json, name=buckets", elemType: Bucket })
   buckets?: Bucket[];
 }

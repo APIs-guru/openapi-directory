@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeliveryPipeline } from "./deliverypipeline";
+
 
 
 // ListDeliveryPipelinesResponse
@@ -8,12 +8,12 @@ import { DeliveryPipeline } from "./deliverypipeline";
  * The response object from `ListDeliveryPipelines`.
 **/
 export class ListDeliveryPipelinesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deliveryPipelines", elemType: shared.DeliveryPipeline })
+  @SpeakeasyMetadata({ data: "json, name=deliveryPipelines", elemType: DeliveryPipeline })
   deliveryPipelines?: DeliveryPipeline[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=unreachable" })
+  @SpeakeasyMetadata({ data: "json, name=unreachable" })
   unreachable?: string[];
 }

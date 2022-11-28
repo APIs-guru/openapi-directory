@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FirehoseLogDelivery
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The settings for delivering logs to Amazon Kinesis Data Firehose.
 **/
 export class FirehoseLogDelivery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deliveryStream" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryStream" })
   deliveryStream?: string;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled: boolean;
 }

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SpotSetUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delete" })
+  @SpeakeasyMetadata({ data: "json, name=delete" })
   delete?: boolean;
 }

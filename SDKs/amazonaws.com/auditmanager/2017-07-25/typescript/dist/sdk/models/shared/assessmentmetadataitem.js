@@ -22,8 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Delegation } from "./delegation";
+import { Role } from "./role";
 import { AssessmentStatusEnum } from "./assessmentstatusenum";
 // AssessmentMetadataItem
 /**
@@ -35,35 +36,35 @@ var AssessmentMetadataItem = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=complianceType" }),
+        SpeakeasyMetadata({ data: "json, name=complianceType" }),
         __metadata("design:type", String)
     ], AssessmentMetadataItem.prototype, "complianceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], AssessmentMetadataItem.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=delegations", elemType: shared.Delegation }),
+        SpeakeasyMetadata({ data: "json, name=delegations", elemType: Delegation }),
         __metadata("design:type", Array)
     ], AssessmentMetadataItem.prototype, "delegations", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], AssessmentMetadataItem.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdated" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdated" }),
         __metadata("design:type", Date)
     ], AssessmentMetadataItem.prototype, "lastUpdated", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], AssessmentMetadataItem.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=roles", elemType: shared.Role }),
+        SpeakeasyMetadata({ data: "json, name=roles", elemType: Role }),
         __metadata("design:type", Array)
     ], AssessmentMetadataItem.prototype, "roles", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], AssessmentMetadataItem.prototype, "status", void 0);
     return AssessmentMetadataItem;

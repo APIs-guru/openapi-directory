@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IdpCredential } from "./idpcredential";
+
 
 
 // ListIdpCredentialsResponse
@@ -8,9 +8,9 @@ import { IdpCredential } from "./idpcredential";
  * Response of the InboundSamlSsoProfilesService.ListIdpCredentials method.
 **/
 export class ListIdpCredentialsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=idpCredentials", elemType: shared.IdpCredential })
+  @SpeakeasyMetadata({ data: "json, name=idpCredentials", elemType: IdpCredential })
   idpCredentials?: IdpCredential[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

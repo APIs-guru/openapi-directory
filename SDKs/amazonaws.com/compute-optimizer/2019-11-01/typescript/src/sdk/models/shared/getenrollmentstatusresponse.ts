@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatusEnum } from "./statusenum";
 
 
+
 export class GetEnrollmentStatusResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lastUpdatedTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedTimestamp" })
   lastUpdatedTimestamp?: Date;
 
-  @Metadata({ data: "json, name=memberAccountsEnrolled" })
+  @SpeakeasyMetadata({ data: "json, name=memberAccountsEnrolled" })
   memberAccountsEnrolled?: boolean;
 
-  @Metadata({ data: "json, name=numberOfMemberAccountsOptedIn" })
+  @SpeakeasyMetadata({ data: "json, name=numberOfMemberAccountsOptedIn" })
   numberOfMemberAccountsOptedIn?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: StatusEnum;
 
-  @Metadata({ data: "json, name=statusReason" })
+  @SpeakeasyMetadata({ data: "json, name=statusReason" })
   statusReason?: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
+
 
 
 // CreateTrailRequest
@@ -8,39 +8,39 @@ import { Tag } from "./tag";
  * Specifies the settings for each trail.
 **/
 export class CreateTrailRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudWatchLogsLogGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchLogsLogGroupArn" })
   cloudWatchLogsLogGroupArn?: string;
 
-  @Metadata({ data: "json, name=CloudWatchLogsRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchLogsRoleArn" })
   cloudWatchLogsRoleArn?: string;
 
-  @Metadata({ data: "json, name=EnableLogFileValidation" })
+  @SpeakeasyMetadata({ data: "json, name=EnableLogFileValidation" })
   enableLogFileValidation?: boolean;
 
-  @Metadata({ data: "json, name=IncludeGlobalServiceEvents" })
+  @SpeakeasyMetadata({ data: "json, name=IncludeGlobalServiceEvents" })
   includeGlobalServiceEvents?: boolean;
 
-  @Metadata({ data: "json, name=IsMultiRegionTrail" })
+  @SpeakeasyMetadata({ data: "json, name=IsMultiRegionTrail" })
   isMultiRegionTrail?: boolean;
 
-  @Metadata({ data: "json, name=IsOrganizationTrail" })
+  @SpeakeasyMetadata({ data: "json, name=IsOrganizationTrail" })
   isOrganizationTrail?: boolean;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=S3BucketName" })
+  @SpeakeasyMetadata({ data: "json, name=S3BucketName" })
   s3BucketName: string;
 
-  @Metadata({ data: "json, name=S3KeyPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=S3KeyPrefix" })
   s3KeyPrefix?: string;
 
-  @Metadata({ data: "json, name=SnsTopicName" })
+  @SpeakeasyMetadata({ data: "json, name=SnsTopicName" })
   snsTopicName?: string;
 
-  @Metadata({ data: "json, name=TagsList", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=TagsList", elemType: Tag })
   tagsList?: Tag[];
 }

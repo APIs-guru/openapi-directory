@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetNextPlaybackItemPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 class GetNextPlaybackItemExpandEnum(str, Enum):
     PARENT = "parent"
@@ -25,20 +26,20 @@ class GetNextPlaybackItemQueryParams:
 
 @dataclass
 class GetNextPlaybackItemSecurity:
-    profile_auth: shared.SchemeProfileAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    profile_auth: shared.SchemeProfileAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetNextPlaybackItemRequest:
-    path_params: GetNextPlaybackItemPathParams = field(default=None)
-    query_params: GetNextPlaybackItemQueryParams = field(default=None)
-    security: GetNextPlaybackItemSecurity = field(default=None)
+    path_params: GetNextPlaybackItemPathParams = field()
+    query_params: GetNextPlaybackItemQueryParams = field()
+    security: GetNextPlaybackItemSecurity = field()
     
 
 @dataclass
 class GetNextPlaybackItemResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     next_playback_item: Optional[shared.NextPlaybackItem] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

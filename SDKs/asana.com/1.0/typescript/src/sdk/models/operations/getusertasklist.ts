@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetUserTaskListPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=user_task_list_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=user_task_list_gid" })
   userTaskListGid: string;
 }
 
 
 export class GetUserTaskListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class GetUserTaskListRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetUserTaskListPathParams;
-
-  @Metadata()
-  queryParams: GetUserTaskListQueryParams;
-}
-
-
 export class GetUserTaskList200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.UserTaskListResponse;
 }
 
 
+export class GetUserTaskListRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetUserTaskListPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetUserTaskListQueryParams;
+}
+
+
 export class GetUserTaskListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getUserTaskList200ApplicationJsonObject?: GetUserTaskList200ApplicationJson;
 }

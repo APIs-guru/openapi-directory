@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MobileAppDirectoryEnum(str, Enum):
     UNKNOWN = "UNKNOWN"
@@ -19,9 +21,13 @@ class MobileAppDirectoryEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MobileApp:
-    directory: Optional[MobileAppDirectoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'directory' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    publisher_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'publisherName' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+    r"""MobileApp
+    Contains information about a mobile app. Used as a landing page deep link.
+    """
+    
+    directory: Optional[MobileAppDirectoryEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('directory') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    publisher_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('publisherName') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     

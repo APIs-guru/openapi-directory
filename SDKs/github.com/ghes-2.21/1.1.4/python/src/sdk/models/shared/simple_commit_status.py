@@ -1,23 +1,24 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class SimpleCommitStatus:
-    avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
-    context: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'context' }})
-    created_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
-    required: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'required' }})
-    state: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    target_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target_url' }})
-    updated_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    avatar_url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('avatar_url') }})
+    context: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('context') }})
+    created_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created_at'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    node_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('node_id') }})
+    state: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    target_url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('target_url') }})
+    updated_at: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('updated_at'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
+    required: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('required') }})
     

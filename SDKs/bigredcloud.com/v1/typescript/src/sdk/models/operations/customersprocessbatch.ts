@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CustomersProcessBatchRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json", elemType: shared.BatchItemCustomerDto })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.BatchItemCustomerDto })
   request: shared.BatchItemCustomerDto[];
 }
 
 
 export class CustomersProcessBatchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   customersProcessBatch200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

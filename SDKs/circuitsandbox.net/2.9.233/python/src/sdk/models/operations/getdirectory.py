@@ -1,5 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
+from sdk.models import shared
 
 class GetDirectoryFilterEnum(str, Enum):
     NONE = "NONE"
@@ -22,29 +24,29 @@ class GetDirectorySortOrderEnum(str, Enum):
 
 @dataclass
 class GetDirectoryQueryParams:
-    filter: GetDirectoryFilterEnum = field(default=None, metadata={'query_param': { 'field_name': 'filter', 'style': 'form', 'explode': True }})
+    filter: GetDirectoryFilterEnum = field(metadata={'query_param': { 'field_name': 'filter', 'style': 'form', 'explode': True }})
+    sort_by: GetDirectorySortByEnum = field(metadata={'query_param': { 'field_name': 'sortBy', 'style': 'form', 'explode': True }})
+    sort_order: GetDirectorySortOrderEnum = field(metadata={'query_param': { 'field_name': 'sortOrder', 'style': 'form', 'explode': True }})
     number_of_results: Optional[float] = field(default=None, metadata={'query_param': { 'field_name': 'numberOfResults', 'style': 'form', 'explode': True }})
     page_pointer: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'pagePointer', 'style': 'form', 'explode': True }})
     query: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'query', 'style': 'form', 'explode': True }})
-    sort_by: GetDirectorySortByEnum = field(default=None, metadata={'query_param': { 'field_name': 'sortBy', 'style': 'form', 'explode': True }})
-    sort_order: GetDirectorySortOrderEnum = field(default=None, metadata={'query_param': { 'field_name': 'sortOrder', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetDirectorySecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetDirectoryRequest:
-    query_params: GetDirectoryQueryParams = field(default=None)
-    security: GetDirectorySecurity = field(default=None)
+    query_params: GetDirectoryQueryParams = field()
+    security: GetDirectorySecurity = field()
     
 
 @dataclass
 class GetDirectoryResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     directory_result: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

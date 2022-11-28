@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetInstancesIDImageInt16PathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -19,14 +19,14 @@ class GetInstancesIDImageInt16Headers:
 
 @dataclass
 class GetInstancesIDImageInt16Request:
-    path_params: GetInstancesIDImageInt16PathParams = field(default=None)
-    query_params: GetInstancesIDImageInt16QueryParams = field(default=None)
-    headers: GetInstancesIDImageInt16Headers = field(default=None)
+    headers: GetInstancesIDImageInt16Headers = field()
+    path_params: GetInstancesIDImageInt16PathParams = field()
+    query_params: GetInstancesIDImageInt16QueryParams = field()
     
 
 @dataclass
 class GetInstancesIDImageInt16Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -10,6 +10,8 @@ const (
 	ResourceInfoStatusEnumDegraded                ResourceInfoStatusEnum = "DEGRADED"
 )
 
+// ResourceInfo
+// ResourceInfo represents the information/status of the associated resource.
 type ResourceInfo struct {
 	ID       *string                 `json:"id,omitempty"`
 	Resource map[string]interface{}  `json:"resource,omitempty"`

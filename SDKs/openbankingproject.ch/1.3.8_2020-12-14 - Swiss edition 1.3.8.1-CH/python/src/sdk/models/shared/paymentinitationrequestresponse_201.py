@@ -1,32 +1,29 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import hreftype
-from . import challengedata
-from . import chosenscamethod
-from . import amount
-from . import amount
-from . import amount
-from . import authenticationobject
-from . import tppmessage2xx
-from . import amount
-from . import transactionstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PaymentInitationRequestResponse201:
-    links: dict[str, hreftype.HrefType] = field(default=None, metadata={'dataclasses_json': { 'field_name': '_links' }})
-    challenge_data: Optional[challengedata.ChallengeData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'challengeData' }})
-    chosen_sca_method: Optional[chosenscamethod.ChosenScaMethod] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'chosenScaMethod' }})
-    currency_conversion_fee: Optional[amount.Amount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currencyConversionFee' }})
-    estimated_interbank_settlement_amount: Optional[amount.Amount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'estimatedInterbankSettlementAmount' }})
-    estimated_total_amount: Optional[amount.Amount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'estimatedTotalAmount' }})
-    payment_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentId' }})
-    psu_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'psuMessage' }})
-    sca_methods: Optional[List[authenticationobject.AuthenticationObject]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scaMethods' }})
-    tpp_messages: Optional[List[tppmessage2xx.TppMessage2Xx]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tppMessages' }})
-    transaction_fee_indicator: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transactionFeeIndicator' }})
-    transaction_fees: Optional[amount.Amount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transactionFees' }})
-    transaction_status: transactionstatus_enum.TransactionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transactionStatus' }})
+    r"""PaymentInitationRequestResponse201
+    Body of the response for a successful payment initiation request.
+    """
+    
+    links: dict[str, HrefType] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('_links') }})
+    payment_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentId') }})
+    transaction_status: TransactionStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('transactionStatus') }})
+    challenge_data: Optional[ChallengeData] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('challengeData') }})
+    chosen_sca_method: Optional[ChosenScaMethod] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('chosenScaMethod') }})
+    currency_conversion_fee: Optional[Amount] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currencyConversionFee') }})
+    estimated_interbank_settlement_amount: Optional[Amount] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('estimatedInterbankSettlementAmount') }})
+    estimated_total_amount: Optional[Amount] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('estimatedTotalAmount') }})
+    psu_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('psuMessage') }})
+    sca_methods: Optional[List[AuthenticationObject]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scaMethods') }})
+    tpp_messages: Optional[List[TppMessage2Xx]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tppMessages') }})
+    transaction_fee_indicator: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transactionFeeIndicator') }})
+    transaction_fees: Optional[Amount] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transactionFees') }})
     

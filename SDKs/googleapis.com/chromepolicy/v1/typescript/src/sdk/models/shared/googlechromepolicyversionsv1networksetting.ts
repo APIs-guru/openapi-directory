@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleChromePolicyVersionsV1NetworkSetting
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A network setting contains network configurations.
 **/
 export class GoogleChromePolicyVersionsV1NetworkSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=policySchema" })
+  @SpeakeasyMetadata({ data: "json, name=policySchema" })
   policySchema?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: Map<string, any>;
 }

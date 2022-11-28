@@ -4,10 +4,6 @@ type ListPadsUsingPostQueryParams struct {
 	GroupID *string `queryParam:"style=form,explode=true,name=groupID"`
 }
 
-type ListPadsUsingPostRequest struct {
-	QueryParams ListPadsUsingPostQueryParams
-}
-
 type ListPadsUsingPost200ApplicationJSONData struct {
 	PadIDs []string `json:"padIDs,omitempty"`
 }
@@ -34,6 +30,10 @@ type ListPadsUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type ListPadsUsingPostRequest struct {
+	QueryParams ListPadsUsingPostQueryParams
 }
 
 type ListPadsUsingPostResponse struct {

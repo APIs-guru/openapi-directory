@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PatientSatisfaction } from "./patientsatisfaction";
 
 
+
 export class Satisfaction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=effective_date" })
+  @SpeakeasyMetadata({ data: "json, name=effective_date" })
   effectiveDate?: Date;
 
-  @Metadata({ data: "json, name=health" })
+  @SpeakeasyMetadata({ data: "json, name=health" })
   health?: PatientSatisfaction;
 }

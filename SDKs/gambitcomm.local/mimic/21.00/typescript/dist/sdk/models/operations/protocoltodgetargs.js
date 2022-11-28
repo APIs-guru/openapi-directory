@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolTodGetArgsPathParams = /** @class */ (function (_super) {
     __extends(ProtocolTodGetArgsPathParams, _super);
     function ProtocolTodGetArgsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolTodGetArgsPathParams.prototype, "agentNum", void 0);
     return ProtocolTodGetArgsPathParams;
@@ -41,7 +41,7 @@ var ProtocolTodGetArgsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolTodGetArgsPathParams)
     ], ProtocolTodGetArgsRequest.prototype, "pathParams", void 0);
     return ProtocolTodGetArgsRequest;
@@ -53,15 +53,15 @@ var ProtocolTodGetArgsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolTodGetArgsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolTodGetArgsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], ProtocolTodGetArgsResponse.prototype, "protocolTodGetArgs200ApplicationJsonObject", void 0);
     return ProtocolTodGetArgsResponse;

@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostContainersNameOrIdFloatingIpsIpBindPathParams = /** @class */ (function (_super) {
     __extends(PostContainersNameOrIdFloatingIpsIpBindPathParams, _super);
     function PostContainersNameOrIdFloatingIpsIpBindPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=ip" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ip" }),
         __metadata("design:type", String)
     ], PostContainersNameOrIdFloatingIpsIpBindPathParams.prototype, "ip", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name_or_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name_or_id" }),
         __metadata("design:type", String)
     ], PostContainersNameOrIdFloatingIpsIpBindPathParams.prototype, "nameOrId", void 0);
     return PostContainersNameOrIdFloatingIpsIpBindPathParams;
@@ -45,11 +45,11 @@ var PostContainersNameOrIdFloatingIpsIpBindHeaders = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Project-Id" }),
         __metadata("design:type", String)
     ], PostContainersNameOrIdFloatingIpsIpBindHeaders.prototype, "xAuthProjectId", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Auth-Token" }),
         __metadata("design:type", String)
     ], PostContainersNameOrIdFloatingIpsIpBindHeaders.prototype, "xAuthToken", void 0);
     return PostContainersNameOrIdFloatingIpsIpBindHeaders;
@@ -61,11 +61,11 @@ var PostContainersNameOrIdFloatingIpsIpBindRequest = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostContainersNameOrIdFloatingIpsIpBindPathParams)
     ], PostContainersNameOrIdFloatingIpsIpBindRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostContainersNameOrIdFloatingIpsIpBindHeaders)
     ], PostContainersNameOrIdFloatingIpsIpBindRequest.prototype, "headers", void 0);
     return PostContainersNameOrIdFloatingIpsIpBindRequest;
@@ -77,11 +77,11 @@ var PostContainersNameOrIdFloatingIpsIpBindResponse = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostContainersNameOrIdFloatingIpsIpBindResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostContainersNameOrIdFloatingIpsIpBindResponse.prototype, "statusCode", void 0);
     return PostContainersNameOrIdFloatingIpsIpBindResponse;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Address } from "./address";
 import { GeoCoordinates } from "./geocoordinates";
 export declare class Location extends SpeakeasyBase {

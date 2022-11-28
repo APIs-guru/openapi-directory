@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AchievementResetResponse
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An achievement reset response.
 **/
 export class AchievementResetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currentState" })
+  @SpeakeasyMetadata({ data: "json, name=currentState" })
   currentState?: string;
 
-  @Metadata({ data: "json, name=definitionId" })
+  @SpeakeasyMetadata({ data: "json, name=definitionId" })
   definitionId?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=updateOccurred" })
+  @SpeakeasyMetadata({ data: "json, name=updateOccurred" })
   updateOccurred?: boolean;
 }

@@ -11,6 +11,8 @@ const (
 	GoogleAnalyticsAdminV1alphaDataRetentionSettingsEventDataRetentionEnumFiftyMonths                  GoogleAnalyticsAdminV1alphaDataRetentionSettingsEventDataRetentionEnum = "FIFTY_MONTHS"
 )
 
+// GoogleAnalyticsAdminV1alphaDataRetentionSettings
+// Settings values for data retention. This is a singleton resource.
 type GoogleAnalyticsAdminV1alphaDataRetentionSettings struct {
 	EventDataRetention         *GoogleAnalyticsAdminV1alphaDataRetentionSettingsEventDataRetentionEnum `json:"eventDataRetention,omitempty"`
 	Name                       *string                                                                 `json:"name,omitempty"`

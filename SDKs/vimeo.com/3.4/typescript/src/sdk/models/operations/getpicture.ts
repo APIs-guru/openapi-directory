@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPicturePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=portraitset_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=portraitset_id" })
   portraitsetId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=user_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=user_id" })
   userId: number;
 }
 
 
 export class GetPictureRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPicturePathParams;
 }
 
 
 export class GetPictureResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   picture?: shared.Picture;
 }

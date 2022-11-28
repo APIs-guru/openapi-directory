@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PublicKeyTypeEnum {
-    KeyTypeUnspecified = "KEY_TYPE_UNSPECIFIED"
-,    PemRsaKey = "PEM_RSA_KEY"
-,    PemEcKey = "PEM_EC_KEY"
+    KeyTypeUnspecified = "KEY_TYPE_UNSPECIFIED",
+    PemRsaKey = "PEM_RSA_KEY",
+    PemEcKey = "PEM_EC_KEY"
 }
 
 
@@ -12,9 +13,9 @@ export enum PublicKeyTypeEnum {
  * A PublicKey describes a public key.
 **/
 export class PublicKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: PublicKeyTypeEnum;
 }

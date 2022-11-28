@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class UpdateArtifactPathParams:
-    artifact_id: str = field(default=None, metadata={'path_param': { 'field_name': 'artifactId', 'style': 'simple', 'explode': False }})
+    artifact_id: str = field(metadata={'path_param': { 'field_name': 'artifactId', 'style': 'simple', 'explode': False }})
     
 class UpdateArtifactXRegistryArtifactTypeEnum(str, Enum):
     AVRO = "AVRO"
@@ -28,15 +32,15 @@ class UpdateArtifactHeaders:
 
 @dataclass
 class UpdateArtifactRequest:
-    path_params: UpdateArtifactPathParams = field(default=None)
-    headers: UpdateArtifactHeaders = field(default=None)
-    request: bytes = field(default=None, metadata={'request': { 'media_type': '*/*' }})
+    headers: UpdateArtifactHeaders = field()
+    path_params: UpdateArtifactPathParams = field()
+    request: bytes = field(metadata={'request': { 'media_type': '*/*' }})
     
 
 @dataclass
 class UpdateArtifactResponse:
+    content_type: str = field()
+    status_code: int = field()
     artifact_meta_data: Optional[shared.ArtifactMetaData] = field(default=None)
-    content_type: str = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     

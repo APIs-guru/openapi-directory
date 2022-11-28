@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostChangeMessageVisibilityBatchActionEnum(str, Enum):
     CHANGE_MESSAGE_VISIBILITY_BATCH = "ChangeMessageVisibilityBatch"
@@ -10,8 +14,8 @@ class PostChangeMessageVisibilityBatchVersionEnum(str, Enum):
 
 @dataclass
 class PostChangeMessageVisibilityBatchQueryParams:
-    action: PostChangeMessageVisibilityBatchActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostChangeMessageVisibilityBatchVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostChangeMessageVisibilityBatchActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostChangeMessageVisibilityBatchVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostChangeMessageVisibilityBatchHeaders:
 
 @dataclass
 class PostChangeMessageVisibilityBatchRequest:
-    query_params: PostChangeMessageVisibilityBatchQueryParams = field(default=None)
-    headers: PostChangeMessageVisibilityBatchHeaders = field(default=None)
+    headers: PostChangeMessageVisibilityBatchHeaders = field()
+    query_params: PostChangeMessageVisibilityBatchQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostChangeMessageVisibilityBatchResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

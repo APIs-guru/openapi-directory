@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceError } from "./serviceerror";
+
 
 
 // DescribeServiceErrorsResult
@@ -8,6 +8,6 @@ import { ServiceError } from "./serviceerror";
  * Contains the response to a <code>DescribeServiceErrors</code> request.
 **/
 export class DescribeServiceErrorsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ServiceErrors", elemType: shared.ServiceError })
+  @SpeakeasyMetadata({ data: "json, name=ServiceErrors", elemType: ServiceError })
   serviceErrors?: ServiceError[];
 }

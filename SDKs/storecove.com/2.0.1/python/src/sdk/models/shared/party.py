@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import address
-from . import contact
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Party:
-    address: address.Address = field(default=None, metadata={'dataclasses_json': { 'field_name': 'address' }})
-    company_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'companyName' }})
-    contact: Optional[contact.Contact] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contact' }})
+    r"""Party
+    A party that can receive or send invoices
+    """
+    
+    address: Address = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('address') }})
+    company_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('companyName') }})
+    contact: Optional[Contact] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contact') }})
     

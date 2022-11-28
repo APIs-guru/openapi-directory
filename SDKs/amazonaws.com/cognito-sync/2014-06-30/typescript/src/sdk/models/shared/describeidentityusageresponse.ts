@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IdentityUsage } from "./identityusage";
+
 
 
 // DescribeIdentityUsageResponse
@@ -7,6 +8,6 @@ import { IdentityUsage } from "./identityusage";
  * The response to a successful DescribeIdentityUsage request.
 **/
 export class DescribeIdentityUsageResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IdentityUsage" })
+  @SpeakeasyMetadata({ data: "json, name=IdentityUsage" })
   identityUsage?: IdentityUsage;
 }

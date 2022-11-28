@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 
 
 @dataclass
 class ListTagsForResource20170325QueryParams:
-    resource: str = field(default=None, metadata={'query_param': { 'field_name': 'Resource', 'style': 'form', 'explode': True }})
+    resource: str = field(metadata={'query_param': { 'field_name': 'Resource', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -20,13 +23,13 @@ class ListTagsForResource20170325Headers:
 
 @dataclass
 class ListTagsForResource20170325Request:
-    query_params: ListTagsForResource20170325QueryParams = field(default=None)
-    headers: ListTagsForResource20170325Headers = field(default=None)
+    headers: ListTagsForResource20170325Headers = field()
+    query_params: ListTagsForResource20170325QueryParams = field()
     
 
 @dataclass
 class ListTagsForResource20170325Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

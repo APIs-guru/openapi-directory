@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PermissionType } from "./permissiontype";
 // StoryCollaborator
 /**
@@ -34,55 +34,55 @@ var StoryCollaborator = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=active" }),
+        SpeakeasyMetadata({ data: "json, name=active" }),
         __metadata("design:type", Boolean)
     ], StoryCollaborator.prototype, "active", void 0);
     __decorate([
-        Metadata({ data: "json, name=created_at" }),
+        SpeakeasyMetadata({ data: "json, name=created_at" }),
         __metadata("design:type", Date)
     ], StoryCollaborator.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=created_by" }),
+        SpeakeasyMetadata({ data: "json, name=created_by" }),
         __metadata("design:type", String)
     ], StoryCollaborator.prototype, "createdBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=email" }),
+        SpeakeasyMetadata({ data: "json, name=email" }),
         __metadata("design:type", String)
     ], StoryCollaborator.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], StoryCollaborator.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=lead_id" }),
+        SpeakeasyMetadata({ data: "json, name=lead_id" }),
         __metadata("design:type", Number)
     ], StoryCollaborator.prototype, "leadId", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], StoryCollaborator.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=permission_type" }),
+        SpeakeasyMetadata({ data: "json, name=permission_type" }),
         __metadata("design:type", PermissionType)
     ], StoryCollaborator.prototype, "permissionType", void 0);
     __decorate([
-        Metadata({ data: "json, name=permission_type_id" }),
+        SpeakeasyMetadata({ data: "json, name=permission_type_id" }),
         __metadata("design:type", String)
     ], StoryCollaborator.prototype, "permissionTypeId", void 0);
     __decorate([
-        Metadata({ data: "json, name=story_id" }),
+        SpeakeasyMetadata({ data: "json, name=story_id" }),
         __metadata("design:type", String)
     ], StoryCollaborator.prototype, "storyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated_at" }),
+        SpeakeasyMetadata({ data: "json, name=updated_at" }),
         __metadata("design:type", Date)
     ], StoryCollaborator.prototype, "updatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated_by" }),
+        SpeakeasyMetadata({ data: "json, name=updated_by" }),
         __metadata("design:type", String)
     ], StoryCollaborator.prototype, "updatedBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=user_id" }),
+        SpeakeasyMetadata({ data: "json, name=user_id" }),
         __metadata("design:type", String)
     ], StoryCollaborator.prototype, "userId", void 0);
     return StoryCollaborator;

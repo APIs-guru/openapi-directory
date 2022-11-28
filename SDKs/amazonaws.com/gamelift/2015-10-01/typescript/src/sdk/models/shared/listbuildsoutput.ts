@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Build } from "./build";
+
 
 
 // ListBuildsOutput
@@ -8,9 +8,9 @@ import { Build } from "./build";
  * Represents the returned data in response to a request operation.
 **/
 export class ListBuildsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Builds", elemType: shared.Build })
+  @SpeakeasyMetadata({ data: "json, name=Builds", elemType: Build })
   builds?: Build[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

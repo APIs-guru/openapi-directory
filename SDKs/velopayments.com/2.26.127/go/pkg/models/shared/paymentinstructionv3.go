@@ -1,5 +1,7 @@
 package shared
 
+// PaymentInstructionV3
+// Instruction for creating a payment
 type PaymentInstructionV3 struct {
 	Amount            int64                 `json:"amount"`
 	Currency          string                `json:"currency"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PlacementTemplate } from "./placementtemplate";
 /**
  * An object providing detailed information for a particular project associated with an AWS account and region.

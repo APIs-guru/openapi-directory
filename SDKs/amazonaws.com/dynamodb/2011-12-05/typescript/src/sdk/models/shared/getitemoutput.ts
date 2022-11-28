@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttributeValue } from "./attributevalue";
 
 
+
 export class GetItemOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConsumedCapacityUnits" })
+  @SpeakeasyMetadata({ data: "json, name=ConsumedCapacityUnits" })
   consumedCapacityUnits?: number;
 
-  @Metadata({ data: "json, name=Item", elemType: shared.AttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=Item", elemType: AttributeValue })
   item?: Map<string, AttributeValue>;
 }

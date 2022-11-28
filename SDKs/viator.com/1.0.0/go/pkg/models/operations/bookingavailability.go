@@ -17,11 +17,6 @@ type BookingAvailabilityRequestBody struct {
 	Year         *string                                  `json:"year,omitempty"`
 }
 
-type BookingAvailabilityRequest struct {
-	Headers BookingAvailabilityHeaders
-	Request *BookingAvailabilityRequestBody `request:"mediaType=application/json"`
-}
-
 type BookingAvailability200ApplicationJSONDataAvailability struct {
 	Available                 *bool    `json:"available,omitempty"`
 	BookingDate               *string  `json:"bookingDate,omitempty"`
@@ -35,6 +30,8 @@ type BookingAvailability200ApplicationJSONDataAvailability struct {
 	UnavailableReason         *string  `json:"unavailableReason,omitempty"`
 }
 
+// BookingAvailability200ApplicationJSONData
+// **object** detailing available tourgrades for the specified age bands and date range for this product
 type BookingAvailability200ApplicationJSONData struct {
 	Availability       []BookingAvailability200ApplicationJSONDataAvailability `json:"availability,omitempty"`
 	FirstAvailableDate *string                                                 `json:"firstAvailableDate,omitempty"`
@@ -56,6 +53,11 @@ type BookingAvailability200ApplicationJSON struct {
 	Success          *bool                                      `json:"success,omitempty"`
 	TotalCount       *int64                                     `json:"totalCount,omitempty"`
 	Vmid             *string                                    `json:"vmid,omitempty"`
+}
+
+type BookingAvailabilityRequest struct {
+	Headers BookingAvailabilityHeaders
+	Request *BookingAvailabilityRequestBody `request:"mediaType=application/json"`
 }
 
 type BookingAvailabilityResponse struct {

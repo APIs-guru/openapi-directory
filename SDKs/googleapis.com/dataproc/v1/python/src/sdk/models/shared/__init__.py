@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .acceleratorconfig import *
 from .alt_enum import *
 from .autoscalingconfig import *
@@ -98,6 +98,7 @@ from .templateparameter import *
 from .testiampermissionsrequest import *
 from .testiampermissionsresponse import *
 from .trinojob import *
+from .usagemetrics import *
 from .valuevalidation import *
 from .virtualclusterconfig import *
 from .workflowtemplate import *

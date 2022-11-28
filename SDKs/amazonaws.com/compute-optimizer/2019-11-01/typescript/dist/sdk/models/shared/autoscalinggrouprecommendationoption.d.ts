@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AutoScalingGroupConfiguration } from "./autoscalinggroupconfiguration";
 import { UtilizationMetric } from "./utilizationmetric";
 /**

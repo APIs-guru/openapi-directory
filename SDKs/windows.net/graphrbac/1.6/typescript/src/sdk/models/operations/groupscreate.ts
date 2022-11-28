@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GroupsCreatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tenantID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tenantID" })
   tenantId: string;
 }
 
 
 export class GroupsCreateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api-version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" })
   apiVersion: string;
 }
 
 
 export class GroupsCreateRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   groupCreateParameters?: Map<string, Map<string, any>>;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   groupCreateParameters1?: Map<string, Map<string, any>>;
 }
 
 
 export class GroupsCreateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GroupsCreatePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GroupsCreateQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: GroupsCreateRequests;
 }
 
 
 export class GroupsCreateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   adGroup?: Map<string, Map<string, any>>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   graphError?: shared.GraphError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

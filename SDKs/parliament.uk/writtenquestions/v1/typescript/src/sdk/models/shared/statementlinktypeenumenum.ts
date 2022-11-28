@@ -1,7 +1,8 @@
 
 
+
 export enum StatementLinkTypeEnumEnum {
-    CorrectedStatement = "CorrectedStatement"
-,    CorrectedAnswer = "CorrectedAnswer"
-,    JointStatement = "JointStatement"
+    CorrectedStatement = "CorrectedStatement",
+    CorrectedAnswer = "CorrectedAnswer",
+    JointStatement = "JointStatement"
 }

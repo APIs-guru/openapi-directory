@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ArrayJobDependencyEnum } from "./arrayjobdependencyenum";
 /**
  * An object representing an Batch job dependency.

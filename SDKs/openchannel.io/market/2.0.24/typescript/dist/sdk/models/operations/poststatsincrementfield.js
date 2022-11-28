@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PostStatsIncrementFieldPathParams = /** @class */ (function (_super) {
     __extends(PostStatsIncrementFieldPathParams, _super);
     function PostStatsIncrementFieldPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=field" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=field" }),
         __metadata("design:type", String)
     ], PostStatsIncrementFieldPathParams.prototype, "field", void 0);
     return PostStatsIncrementFieldPathParams;
@@ -41,19 +41,19 @@ var PostStatsIncrementFieldQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=appId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=appId" }),
         __metadata("design:type", String)
     ], PostStatsIncrementFieldQueryParams.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=date" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date" }),
         __metadata("design:type", Number)
     ], PostStatsIncrementFieldQueryParams.prototype, "date", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" }),
         __metadata("design:type", String)
     ], PostStatsIncrementFieldQueryParams.prototype, "userId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=value" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=value" }),
         __metadata("design:type", Number)
     ], PostStatsIncrementFieldQueryParams.prototype, "value", void 0);
     return PostStatsIncrementFieldQueryParams;
@@ -65,11 +65,11 @@ var PostStatsIncrementFieldRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostStatsIncrementFieldPathParams)
     ], PostStatsIncrementFieldRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostStatsIncrementFieldQueryParams)
     ], PostStatsIncrementFieldRequest.prototype, "queryParams", void 0);
     return PostStatsIncrementFieldRequest;
@@ -81,11 +81,11 @@ var PostStatsIncrementFieldResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostStatsIncrementFieldResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostStatsIncrementFieldResponse.prototype, "statusCode", void 0);
     return PostStatsIncrementFieldResponse;

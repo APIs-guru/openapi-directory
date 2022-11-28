@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AllowedDomainsSettings } from "./alloweddomainssettings";
 import { CorsSettings } from "./corssettings";
 import { GcipSettings } from "./gcipsettings";
@@ -39,27 +39,27 @@ var AccessSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=allowedDomainsSettings" }),
+        SpeakeasyMetadata({ data: "json, name=allowedDomainsSettings" }),
         __metadata("design:type", AllowedDomainsSettings)
     ], AccessSettings.prototype, "allowedDomainsSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=corsSettings" }),
+        SpeakeasyMetadata({ data: "json, name=corsSettings" }),
         __metadata("design:type", CorsSettings)
     ], AccessSettings.prototype, "corsSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=gcipSettings" }),
+        SpeakeasyMetadata({ data: "json, name=gcipSettings" }),
         __metadata("design:type", GcipSettings)
     ], AccessSettings.prototype, "gcipSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=oauthSettings" }),
+        SpeakeasyMetadata({ data: "json, name=oauthSettings" }),
         __metadata("design:type", OAuthSettings)
     ], AccessSettings.prototype, "oauthSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=policyDelegationSettings" }),
+        SpeakeasyMetadata({ data: "json, name=policyDelegationSettings" }),
         __metadata("design:type", PolicyDelegationSettings)
     ], AccessSettings.prototype, "policyDelegationSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=reauthSettings" }),
+        SpeakeasyMetadata({ data: "json, name=reauthSettings" }),
         __metadata("design:type", ReauthSettings)
     ], AccessSettings.prototype, "reauthSettings", void 0);
     return AccessSettings;

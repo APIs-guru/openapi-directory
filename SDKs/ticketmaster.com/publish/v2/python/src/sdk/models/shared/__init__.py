@@ -22,6 +22,7 @@ from .eventsalesdates import *
 from .eventstatus import *
 from .extensiondata import *
 from .image import *
+from .ingestionresult import *
 from .level import *
 from .licensinginformation import *
 from .localtime import *

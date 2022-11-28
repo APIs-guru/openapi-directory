@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BooksVolumesAssociatedListPathParams:
-    volume_id: str = field(default=None, metadata={'path_param': { 'field_name': 'volumeId', 'style': 'simple', 'explode': False }})
+    volume_id: str = field(metadata={'path_param': { 'field_name': 'volumeId', 'style': 'simple', 'explode': False }})
     
 class BooksVolumesAssociatedListAssociationEnum(str, Enum):
     ASSOCIATION_UNDEFINED = "ASSOCIATION_UNDEFINED"
@@ -40,20 +41,20 @@ class BooksVolumesAssociatedListQueryParams:
 
 @dataclass
 class BooksVolumesAssociatedListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BooksVolumesAssociatedListRequest:
-    path_params: BooksVolumesAssociatedListPathParams = field(default=None)
-    query_params: BooksVolumesAssociatedListQueryParams = field(default=None)
-    security: BooksVolumesAssociatedListSecurity = field(default=None)
+    path_params: BooksVolumesAssociatedListPathParams = field()
+    query_params: BooksVolumesAssociatedListQueryParams = field()
+    security: BooksVolumesAssociatedListSecurity = field()
     
 
 @dataclass
 class BooksVolumesAssociatedListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     volumes: Optional[shared.Volumes] = field(default=None)
     

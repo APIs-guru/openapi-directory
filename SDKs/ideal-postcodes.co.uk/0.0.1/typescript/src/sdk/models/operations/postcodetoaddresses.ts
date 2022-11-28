@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostcodeToAddressesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=postcode" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=postcode" })
   postcode: string;
 }
 
 
 export class PostcodeToAddressesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=licensee" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=licensee" })
   licensee?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 }
 
 
 export class PostcodeToAddressesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   apiKey: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   userToken: shared.SchemeUserToken;
 }
 
 
 export class PostcodeToAddressesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostcodeToAddressesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostcodeToAddressesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PostcodeToAddressesSecurity;
 }
 
 
 export class PostcodeToAddressesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   addressLookupResponseSchema?: shared.AddressLookupResponseSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseSchema?: shared.ErrorResponseSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postcodeToAddressResponseSchema?: shared.PostcodeToAddressResponseSchema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

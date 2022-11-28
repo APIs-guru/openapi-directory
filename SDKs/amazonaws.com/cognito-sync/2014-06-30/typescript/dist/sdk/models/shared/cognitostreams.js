@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StreamingStatusEnum } from "./streamingstatusenum";
 // CognitoStreams
 /**
@@ -34,15 +34,15 @@ var CognitoStreams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=RoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=RoleArn" }),
         __metadata("design:type", String)
     ], CognitoStreams.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=StreamName" }),
+        SpeakeasyMetadata({ data: "json, name=StreamName" }),
         __metadata("design:type", String)
     ], CognitoStreams.prototype, "streamName", void 0);
     __decorate([
-        Metadata({ data: "json, name=StreamingStatus" }),
+        SpeakeasyMetadata({ data: "json, name=StreamingStatus" }),
         __metadata("design:type", String)
     ], CognitoStreams.prototype, "streamingStatus", void 0);
     return CognitoStreams;

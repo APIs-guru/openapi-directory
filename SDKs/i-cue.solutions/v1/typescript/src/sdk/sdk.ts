@@ -1,16 +1,14 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import {GetHeadersFromRequest} from "../internal/utils/headers";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://i-cue.solutions",
+export const ServerList = [
+	"https://i-cue.solutions",
 ] as const;
 
 export function WithServerURL(
@@ -21,50 +19,49 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // DeleteAdministrationEntityId - Delete organization
-  /** 
+  /**
+   * deleteAdministrationEntityId - Delete organization
+   *
    * This is a iCUE only endpoint or Enterprise feature.
   **/
-  DeleteAdministrationEntityId(
+  deleteAdministrationEntityId(
     req: operations.DeleteAdministrationEntityIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteAdministrationEntityIdResponse> {
@@ -72,23 +69,23 @@ export class SDK {
       req = new operations.DeleteAdministrationEntityIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/administration/entity/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteAdministrationEntityIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.DeleteAdministrationEntityIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -98,11 +95,12 @@ export class SDK {
   }
 
   
-  // DeleteAdministrationPlanningLevel - Delete planning level
-  /** 
+  /**
+   * deleteAdministrationPlanningLevel - Delete planning level
+   *
    * Delete planning level. This is an Enterprise feature.
   **/
-  DeleteAdministrationPlanningLevel(
+  deleteAdministrationPlanningLevel(
     req: operations.DeleteAdministrationPlanningLevelRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteAdministrationPlanningLevelResponse> {
@@ -110,23 +108,23 @@ export class SDK {
       req = new operations.DeleteAdministrationPlanningLevelRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/administration/planning-level";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteAdministrationPlanningLevelResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.DeleteAdministrationPlanningLevelResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -136,11 +134,12 @@ export class SDK {
   }
 
   
-  // DeleteAdministrationUserEntityIdId - Delete user
-  /** 
+  /**
+   * deleteAdministrationUserEntityIdId - Delete user
+   *
    * Delete user
   **/
-  DeleteAdministrationUserEntityIdId(
+  deleteAdministrationUserEntityIdId(
     req: operations.DeleteAdministrationUserEntityIdIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteAdministrationUserEntityIdIdResponse> {
@@ -148,23 +147,23 @@ export class SDK {
       req = new operations.DeleteAdministrationUserEntityIdIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/administration/user/{entityId}/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteAdministrationUserEntityIdIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.DeleteAdministrationUserEntityIdIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -174,11 +173,12 @@ export class SDK {
   }
 
   
-  // GetAdministrationEntity - Get all organizations
-  /** 
+  /**
+   * getAdministrationEntity - Get all organizations
+   *
    * This is a iCUE only endpoint or Enterprise feature.
   **/
-  GetAdministrationEntity(
+  getAdministrationEntity(
     req: operations.GetAdministrationEntityRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAdministrationEntityResponse> {
@@ -186,30 +186,30 @@ export class SDK {
       req = new operations.GetAdministrationEntityRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/administration/entity";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAdministrationEntityResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAdministrationEntityResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.entities = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.entities = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -224,11 +224,12 @@ export class SDK {
   }
 
   
-  // GetAdministrationPlanningLevels - Get all planning levels
-  /** 
+  /**
+   * getAdministrationPlanningLevels - Get all planning levels
+   *
    * Get all planning levels.
   **/
-  GetAdministrationPlanningLevels(
+  getAdministrationPlanningLevels(
     req: operations.GetAdministrationPlanningLevelsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAdministrationPlanningLevelsResponse> {
@@ -236,30 +237,30 @@ export class SDK {
       req = new operations.GetAdministrationPlanningLevelsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/administration/planning-levels";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAdministrationPlanningLevelsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAdministrationPlanningLevelsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.planningLevelInfoResponses = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.planningLevelInfoResponses = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -274,11 +275,12 @@ export class SDK {
   }
 
   
-  // GetAdministrationUserEntityId - Get all users
-  /** 
+  /**
+   * getAdministrationUserEntityId - Get all users
+   *
    * Get all users
   **/
-  GetAdministrationUserEntityId(
+  getAdministrationUserEntityId(
     req: operations.GetAdministrationUserEntityIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAdministrationUserEntityIdResponse> {
@@ -286,23 +288,23 @@ export class SDK {
       req = new operations.GetAdministrationUserEntityIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/administration/user/{entityId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAdministrationUserEntityIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetAdministrationUserEntityIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -312,11 +314,12 @@ export class SDK {
   }
 
   
-  // GetForecastResultJobId - Forecast result
-  /** 
+  /**
+   * getForecastResultJobId - Forecast result
+   *
    * Get result for long running forecast job
   **/
-  GetForecastResultJobId(
+  getForecastResultJobId(
     req: operations.GetForecastResultJobIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetForecastResultJobIdResponse> {
@@ -324,23 +327,23 @@ export class SDK {
       req = new operations.GetForecastResultJobIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/forecast/result/{jobId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetForecastResultJobIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetForecastResultJobIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -350,11 +353,12 @@ export class SDK {
   }
 
   
-  // GetForecastStatusJobId - Forecast status
-  /** 
+  /**
+   * getForecastStatusJobId - Forecast status
+   *
    * Get status for long running forecast job
   **/
-  GetForecastStatusJobId(
+  getForecastStatusJobId(
     req: operations.GetForecastStatusJobIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetForecastStatusJobIdResponse> {
@@ -362,23 +366,23 @@ export class SDK {
       req = new operations.GetForecastStatusJobIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/forecast/status/{jobId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetForecastStatusJobIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetForecastStatusJobIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -388,11 +392,12 @@ export class SDK {
   }
 
   
-  // GetHyperparameter - Get hyperparameters
-  /** 
+  /**
+   * getHyperparameter - Get hyperparameters
+   *
    * Get entity global hyperparameters.
   **/
-  GetHyperparameter(
+  getHyperparameter(
     req: operations.GetHyperparameterRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetHyperparameterResponse> {
@@ -400,30 +405,30 @@ export class SDK {
       req = new operations.GetHyperparameterRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/hyperparameter";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetHyperparameterResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetHyperparameterResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.hyperparameterModel = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.hyperparameterModel = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -438,11 +443,12 @@ export class SDK {
   }
 
   
-  // GetReportPerformancePlanningLevelId - Month over month performance per planning level
-  /** 
+  /**
+   * getReportPerformancePlanningLevelId - Month over month performance per planning level
+   *
    * Month over month performance per planning level
   **/
-  GetReportPerformancePlanningLevelId(
+  getReportPerformancePlanningLevelId(
     req: operations.GetReportPerformancePlanningLevelIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetReportPerformancePlanningLevelIdResponse> {
@@ -450,23 +456,23 @@ export class SDK {
       req = new operations.GetReportPerformancePlanningLevelIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/report/performance/{planningLevelId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetReportPerformancePlanningLevelIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetReportPerformancePlanningLevelIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -476,11 +482,12 @@ export class SDK {
   }
 
   
-  // GetReportPerformanceSkuRationalizationPlanningLevelId - SKU rationalization report
-  /** 
+  /**
+   * getReportPerformanceSkuRationalizationPlanningLevelId - SKU rationalization report
+   *
    * SKU rationalization report
   **/
-  GetReportPerformanceSkuRationalizationPlanningLevelId(
+  getReportPerformanceSkuRationalizationPlanningLevelId(
     req: operations.GetReportPerformanceSkuRationalizationPlanningLevelIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetReportPerformanceSkuRationalizationPlanningLevelIdResponse> {
@@ -488,30 +495,30 @@ export class SDK {
       req = new operations.GetReportPerformanceSkuRationalizationPlanningLevelIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/report/performance/sku-rationalization/{planningLevelId}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetReportPerformanceSkuRationalizationPlanningLevelIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetReportPerformanceSkuRationalizationPlanningLevelIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.portfolioModels = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.portfolioModels = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -526,11 +533,12 @@ export class SDK {
   }
 
   
-  // GetReportPlanningLevelOrganization - Get list of plannign levels by organization
-  /** 
+  /**
+   * getReportPlanningLevelOrganization - Get list of plannign levels by organization
+   *
    * Get list of plannign levels by organization
   **/
-  GetReportPlanningLevelOrganization(
+  getReportPlanningLevelOrganization(
     req: operations.GetReportPlanningLevelOrganizationRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetReportPlanningLevelOrganizationResponse> {
@@ -538,23 +546,23 @@ export class SDK {
       req = new operations.GetReportPlanningLevelOrganizationRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/report/planning-level/organization";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetReportPlanningLevelOrganizationResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetReportPlanningLevelOrganizationResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -564,11 +572,12 @@ export class SDK {
   }
 
   
-  // GetReportPlanningLevelUser - Get list of plannign levels by user
-  /** 
+  /**
+   * getReportPlanningLevelUser - Get list of plannign levels by user
+   *
    * Get list of plannign levels by user
   **/
-  GetReportPlanningLevelUser(
+  getReportPlanningLevelUser(
     req: operations.GetReportPlanningLevelUserRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetReportPlanningLevelUserResponse> {
@@ -576,23 +585,23 @@ export class SDK {
       req = new operations.GetReportPlanningLevelUserRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/report/planning-level/user";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetReportPlanningLevelUserResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetReportPlanningLevelUserResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -602,11 +611,12 @@ export class SDK {
   }
 
   
-  // GetReportUser - Get usage statistics per user
-  /** 
+  /**
+   * getReportUser - Get usage statistics per user
+   *
    * Get usage statistics per user
   **/
-  GetReportUser(
+  getReportUser(
     req: operations.GetReportUserRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetReportUserResponse> {
@@ -614,23 +624,23 @@ export class SDK {
       req = new operations.GetReportUserRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/report/user";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetReportUserResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetReportUserResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -640,11 +650,12 @@ export class SDK {
   }
 
   
-  // PostAdministrationEntity - Create organization
-  /** 
+  /**
+   * postAdministrationEntity - Create organization
+   *
    * This is a iCUE only endpoint or Enterprise feature.
   **/
-  PostAdministrationEntity(
+  postAdministrationEntity(
     req: operations.PostAdministrationEntityRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAdministrationEntityResponse> {
@@ -652,45 +663,44 @@ export class SDK {
       req = new operations.PostAdministrationEntityRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/administration/entity";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAdministrationEntityResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAdministrationEntityResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postAdministrationEntity200ApplicationJsonUuidString = JSON.stringify(httpRes?.data);
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.postAdministrationEntity200TextJsonUuidString = JSON.stringify(httpRes?.data);
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 res.postAdministrationEntity200TextPlainUuidString = JSON.stringify(httpRes?.data);
             }
             break;
@@ -702,11 +712,12 @@ export class SDK {
   }
 
   
-  // PostAdministrationPlanningLevelLock - Lock planning level
-  /** 
+  /**
+   * postAdministrationPlanningLevelLock - Lock planning level
+   *
    * Lock planning level against modification. This is an Enterprise feature.
   **/
-  PostAdministrationPlanningLevelLock(
+  postAdministrationPlanningLevelLock(
     req: operations.PostAdministrationPlanningLevelLockRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAdministrationPlanningLevelLockResponse> {
@@ -714,23 +725,23 @@ export class SDK {
       req = new operations.PostAdministrationPlanningLevelLockRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/administration/planning-level/lock";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAdministrationPlanningLevelLockResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostAdministrationPlanningLevelLockResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -740,11 +751,12 @@ export class SDK {
   }
 
   
-  // PostAdministrationToken - Issue a token
-  /** 
+  /**
+   * postAdministrationToken - Issue a token
+   *
    * This is a iCUE only endpoint.
   **/
-  PostAdministrationToken(
+  postAdministrationToken(
     req: operations.PostAdministrationTokenRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAdministrationTokenResponse> {
@@ -752,45 +764,44 @@ export class SDK {
       req = new operations.PostAdministrationTokenRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/administration/token";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAdministrationTokenResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAdministrationTokenResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postAdministrationToken200ApplicationJsonUuidString = JSON.stringify(httpRes?.data);
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.postAdministrationToken200TextJsonUuidString = JSON.stringify(httpRes?.data);
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 res.postAdministrationToken200TextPlainUuidString = JSON.stringify(httpRes?.data);
             }
             break;
@@ -802,11 +813,12 @@ export class SDK {
   }
 
   
-  // PostAdministrationUser - Create user
-  /** 
+  /**
+   * postAdministrationUser - Create user
+   *
    * Create new user for entity/organization. This can be done by entity administrator.
   **/
-  PostAdministrationUser(
+  postAdministrationUser(
     req: operations.PostAdministrationUserRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAdministrationUserResponse> {
@@ -814,45 +826,44 @@ export class SDK {
       req = new operations.PostAdministrationUserRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/administration/user";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAdministrationUserResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAdministrationUserResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.postAdministrationUser200ApplicationJsonUuidString = JSON.stringify(httpRes?.data);
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.postAdministrationUser200TextJsonUuidString = JSON.stringify(httpRes?.data);
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 res.postAdministrationUser200TextPlainUuidString = JSON.stringify(httpRes?.data);
             }
             break;
@@ -864,11 +875,12 @@ export class SDK {
   }
 
   
-  // PostForecast - Forecasts only, for faster results
-  /** 
+  /**
+   * postForecast - Forecasts only, for faster results
+   *
    * To support maximum operation and integration speed, this endpoint only returns the calculated forecast.
   **/
-  PostForecast(
+  postForecast(
     req: operations.PostForecastRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostForecastResponse> {
@@ -876,45 +888,44 @@ export class SDK {
       req = new operations.PostForecastRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/forecast";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostForecastResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostForecastResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.forecastResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.forecastResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -929,11 +940,12 @@ export class SDK {
   }
 
   
-  // PostForecastAi - Forecast utilizing advanced machine learning models
-  /** 
+  /**
+   * postForecastAi - Forecast utilizing advanced machine learning models
+   *
    * Forecast utilizing Facebookm Prophet, UBER Orbit, amongst other advanced machine learning models. Please be mindful of enhanced execution times (~2s per timeseries).
   **/
-  PostForecastAi(
+  postForecastAi(
     req: operations.PostForecastAiRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostForecastAiResponse> {
@@ -941,45 +953,44 @@ export class SDK {
       req = new operations.PostForecastAiRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/forecast/AI";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostForecastAiResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostForecastAiResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.forecastResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.forecastResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -994,11 +1005,12 @@ export class SDK {
   }
 
   
-  // PostForecastAiHistoryAndForecast - History and forecast utilizing advanced machine learning models
-  /** 
+  /**
+   * postForecastAiHistoryAndForecast - History and forecast utilizing advanced machine learning models
+   *
    * History and forecast utilizing Facebookm Prophet, UBER Orbit, amongst other advanced machine learning models. Please be mindful of enhanced execution times (~2s per timeseries).
   **/
-  PostForecastAiHistoryAndForecast(
+  postForecastAiHistoryAndForecast(
     req: operations.PostForecastAiHistoryAndForecastRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostForecastAiHistoryAndForecastResponse> {
@@ -1006,45 +1018,44 @@ export class SDK {
       req = new operations.PostForecastAiHistoryAndForecastRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/forecast/AI/history-and-forecast";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostForecastAiHistoryAndForecastResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostForecastAiHistoryAndForecastResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.historyAndForecastResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.historyAndForecastResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -1059,11 +1070,12 @@ export class SDK {
   }
 
   
-  // PostForecastForecastBottomUp - Bottom up forecasting
-  /** 
+  /**
+   * postForecastForecastBottomUp - Bottom up forecasting
+   *
    * Calculate forecast bny timeseries and sum results up to establish forecast for top level timeseries.
   **/
-  PostForecastForecastBottomUp(
+  postForecastForecastBottomUp(
     req: operations.PostForecastForecastBottomUpRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostForecastForecastBottomUpResponse> {
@@ -1071,45 +1083,44 @@ export class SDK {
       req = new operations.PostForecastForecastBottomUpRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/forecast/forecast-bottom-up";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostForecastForecastBottomUpResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostForecastForecastBottomUpResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.forecastBottomUpResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.forecastBottomUpResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -1124,11 +1135,12 @@ export class SDK {
   }
 
   
-  // PostForecastForecastTopDown - Top down forecasting
-  /** 
+  /**
+   * postForecastForecastTopDown - Top down forecasting
+   *
    * Calculate forecast based on sum of of lower level timeseries and distribute forecast down based on ratios. Great feature for planning levels with dynamic timeseries.
   **/
-  PostForecastForecastTopDown(
+  postForecastForecastTopDown(
     req: operations.PostForecastForecastTopDownRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostForecastForecastTopDownResponse> {
@@ -1136,38 +1148,37 @@ export class SDK {
       req = new operations.PostForecastForecastTopDownRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/forecast/forecast-top-down";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostForecastForecastTopDownResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostForecastForecastTopDownResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1177,11 +1188,12 @@ export class SDK {
   }
 
   
-  // PostForecastFullDetail - Full forecast result details, including error, trend seasonality and outlier
-  /** 
+  /**
+   * postForecastFullDetail - Full forecast result details, including error, trend seasonality and outlier
+   *
    * Response provides full forecast result details, including error, trend seasonality and outlier. Great for advanced analysis.
   **/
-  PostForecastFullDetail(
+  postForecastFullDetail(
     req: operations.PostForecastFullDetailRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostForecastFullDetailResponse> {
@@ -1189,45 +1201,44 @@ export class SDK {
       req = new operations.PostForecastFullDetailRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/forecast/full-detail";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostForecastFullDetailResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostForecastFullDetailResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.fullDetailsForecastResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.fullDetailsForecastResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -1242,11 +1253,12 @@ export class SDK {
   }
 
   
-  // PostForecastHistoryAndForecast - History and forecast for fast timeseries view
-  /** 
+  /**
+   * postForecastHistoryAndForecast - History and forecast for fast timeseries view
+   *
    * Reponse provides history and forecast per timeseries. Great for visualizing results.
   **/
-  PostForecastHistoryAndForecast(
+  postForecastHistoryAndForecast(
     req: operations.PostForecastHistoryAndForecastRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostForecastHistoryAndForecastResponse> {
@@ -1254,45 +1266,44 @@ export class SDK {
       req = new operations.PostForecastHistoryAndForecastRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/forecast/history-and-forecast";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostForecastHistoryAndForecastResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostForecastHistoryAndForecastResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.historyAndForecastResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.historyAndForecastResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -1307,11 +1318,12 @@ export class SDK {
   }
 
   
-  // PostForecastOptimalParameter - Get optimal parameter per method
-  /** 
+  /**
+   * postForecastOptimalParameter - Get optimal parameter per method
+   *
    * Use the optimal parameter sets created by iCUE to set the method parameters of the internal planning system.
   **/
-  PostForecastOptimalParameter(
+  postForecastOptimalParameter(
     req: operations.PostForecastOptimalParameterRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostForecastOptimalParameterResponse> {
@@ -1319,45 +1331,44 @@ export class SDK {
       req = new operations.PostForecastOptimalParameterRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/forecast/optimal-parameter";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostForecastOptimalParameterResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostForecastOptimalParameterResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.optimalParameterResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.optimalParameterResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -1372,11 +1383,12 @@ export class SDK {
   }
 
   
-  // PostForecastRerun - Rerun previously uploaded planning level
-  /** 
+  /**
+   * postForecastRerun - Rerun previously uploaded planning level
+   *
    * Rerun previously uploaded planning level.
   **/
-  PostForecastRerun(
+  postForecastRerun(
     req: operations.PostForecastRerunRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostForecastRerunResponse> {
@@ -1384,45 +1396,44 @@ export class SDK {
       req = new operations.PostForecastRerunRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/forecast/rerun";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostForecastRerunResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostForecastRerunResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.forecastResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.forecastResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -1437,11 +1448,12 @@ export class SDK {
   }
 
   
-  // PostHyperparameter - Set hyperparameters
-  /** 
+  /**
+   * postHyperparameter - Set hyperparameters
+   *
    * Set entity global hyperparameters. Hyperparameters can be overwritten by user and planning level (add to JSON body).
   **/
-  PostHyperparameter(
+  postHyperparameter(
     req: operations.PostHyperparameterRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostHyperparameterResponse> {
@@ -1449,38 +1461,37 @@ export class SDK {
       req = new operations.PostHyperparameterRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/hyperparameter";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostHyperparameterResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostHyperparameterResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1490,11 +1501,12 @@ export class SDK {
   }
 
   
-  // PostInventoryAmazonIpi - Calculate Amazon Inventory Performance Index (IPI)
-  /** 
+  /**
+   * postInventoryAmazonIpi - Calculate Amazon Inventory Performance Index (IPI)
+   *
    * Calculate Amazon Inventory Performance Index (IPI)
   **/
-  PostInventoryAmazonIpi(
+  postInventoryAmazonIpi(
     req: operations.PostInventoryAmazonIpiRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostInventoryAmazonIpiResponse> {
@@ -1502,23 +1514,23 @@ export class SDK {
       req = new operations.PostInventoryAmazonIpiRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/inventory/amazon-ipi";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostInventoryAmazonIpiResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostInventoryAmazonIpiResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1528,11 +1540,12 @@ export class SDK {
   }
 
   
-  // PostInventoryCaryyingCost - Carrying Cost
-  /** 
+  /**
+   * postInventoryCaryyingCost - Carrying Cost
+   *
    * Carrying Cost
   **/
-  PostInventoryCaryyingCost(
+  postInventoryCaryyingCost(
     req: operations.PostInventoryCaryyingCostRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostInventoryCaryyingCostResponse> {
@@ -1540,23 +1553,23 @@ export class SDK {
       req = new operations.PostInventoryCaryyingCostRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/inventory/caryying-cost";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostInventoryCaryyingCostResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostInventoryCaryyingCostResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1566,11 +1579,12 @@ export class SDK {
   }
 
   
-  // PostInventoryEoq - Calculate economic order quantity
-  /** 
+  /**
+   * postInventoryEoq - Calculate economic order quantity
+   *
    * Calculate economic order quantity
   **/
-  PostInventoryEoq(
+  postInventoryEoq(
     req: operations.PostInventoryEoqRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostInventoryEoqResponse> {
@@ -1578,23 +1592,23 @@ export class SDK {
       req = new operations.PostInventoryEoqRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/inventory/eoq";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostInventoryEoqResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostInventoryEoqResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1604,11 +1618,12 @@ export class SDK {
   }
 
   
-  // PostInventoryFillRate - Calculate fill rate
-  /** 
+  /**
+   * postInventoryFillRate - Calculate fill rate
+   *
    * Calculate fill rate
   **/
-  PostInventoryFillRate(
+  postInventoryFillRate(
     req: operations.PostInventoryFillRateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostInventoryFillRateResponse> {
@@ -1616,23 +1631,23 @@ export class SDK {
       req = new operations.PostInventoryFillRateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/inventory/fill-rate";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostInventoryFillRateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostInventoryFillRateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1642,11 +1657,12 @@ export class SDK {
   }
 
   
-  // PostInventoryFinancialImapctForecastAccuracy - Calculate financial impact of forecast accuracy
-  /** 
+  /**
+   * postInventoryFinancialImapctForecastAccuracy - Calculate financial impact of forecast accuracy
+   *
    * Calculate financial impact of forecast accuracy
   **/
-  PostInventoryFinancialImapctForecastAccuracy(
+  postInventoryFinancialImapctForecastAccuracy(
     req: operations.PostInventoryFinancialImapctForecastAccuracyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostInventoryFinancialImapctForecastAccuracyResponse> {
@@ -1654,23 +1670,23 @@ export class SDK {
       req = new operations.PostInventoryFinancialImapctForecastAccuracyRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/inventory/financial-imapct-forecast-accuracy";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostInventoryFinancialImapctForecastAccuracyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostInventoryFinancialImapctForecastAccuracyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1680,11 +1696,12 @@ export class SDK {
   }
 
   
-  // PostInventoryInventoryTurnover - Inventroy Turn-over
-  /** 
+  /**
+   * postInventoryInventoryTurnover - Inventroy Turn-over
+   *
    * Inventroy Turn-over
   **/
-  PostInventoryInventoryTurnover(
+  postInventoryInventoryTurnover(
     req: operations.PostInventoryInventoryTurnoverRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostInventoryInventoryTurnoverResponse> {
@@ -1692,23 +1709,23 @@ export class SDK {
       req = new operations.PostInventoryInventoryTurnoverRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/inventory/inventory-turnover";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostInventoryInventoryTurnoverResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostInventoryInventoryTurnoverResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1718,11 +1735,12 @@ export class SDK {
   }
 
   
-  // PostInventoryLtd - Calculate lead time demand
-  /** 
+  /**
+   * postInventoryLtd - Calculate lead time demand
+   *
    * Calculate lead time demand
   **/
-  PostInventoryLtd(
+  postInventoryLtd(
     req: operations.PostInventoryLtdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostInventoryLtdResponse> {
@@ -1730,23 +1748,23 @@ export class SDK {
       req = new operations.PostInventoryLtdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/inventory/ltd";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostInventoryLtdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostInventoryLtdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1756,11 +1774,12 @@ export class SDK {
   }
 
   
-  // PostInventoryMoq - Calculate minimum order quantity
-  /** 
+  /**
+   * postInventoryMoq - Calculate minimum order quantity
+   *
    * Calculate minimum order quantity
   **/
-  PostInventoryMoq(
+  postInventoryMoq(
     req: operations.PostInventoryMoqRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostInventoryMoqResponse> {
@@ -1768,23 +1787,23 @@ export class SDK {
       req = new operations.PostInventoryMoqRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/inventory/moq";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostInventoryMoqResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostInventoryMoqResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1794,11 +1813,12 @@ export class SDK {
   }
 
   
-  // PostInventoryOptimalServiceLevel - Calculate optimal service level
-  /** 
+  /**
+   * postInventoryOptimalServiceLevel - Calculate optimal service level
+   *
    * Calculate optimal service level
   **/
-  PostInventoryOptimalServiceLevel(
+  postInventoryOptimalServiceLevel(
     req: operations.PostInventoryOptimalServiceLevelRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostInventoryOptimalServiceLevelResponse> {
@@ -1806,23 +1826,23 @@ export class SDK {
       req = new operations.PostInventoryOptimalServiceLevelRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/inventory/optimal-service-level";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostInventoryOptimalServiceLevelResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostInventoryOptimalServiceLevelResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1832,11 +1852,12 @@ export class SDK {
   }
 
   
-  // PostInventoryReorderPoint - Re-order Point
-  /** 
+  /**
+   * postInventoryReorderPoint - Re-order Point
+   *
    * Re-order Point
   **/
-  PostInventoryReorderPoint(
+  postInventoryReorderPoint(
     req: operations.PostInventoryReorderPointRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostInventoryReorderPointResponse> {
@@ -1844,23 +1865,23 @@ export class SDK {
       req = new operations.PostInventoryReorderPointRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/inventory/reorder-point";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostInventoryReorderPointResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostInventoryReorderPointResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1870,11 +1891,12 @@ export class SDK {
   }
 
   
-  // PostInventorySafetyStock - Safety Stock
-  /** 
+  /**
+   * postInventorySafetyStock - Safety Stock
+   *
    * Safety Stock
   **/
-  PostInventorySafetyStock(
+  postInventorySafetyStock(
     req: operations.PostInventorySafetyStockRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostInventorySafetyStockResponse> {
@@ -1882,23 +1904,23 @@ export class SDK {
       req = new operations.PostInventorySafetyStockRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/inventory/safety-stock";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostInventorySafetyStockResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostInventorySafetyStockResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1908,11 +1930,12 @@ export class SDK {
   }
 
   
-  // PostInventoryServiceLevel - Calculate service level
-  /** 
+  /**
+   * postInventoryServiceLevel - Calculate service level
+   *
    * Calculate service level
   **/
-  PostInventoryServiceLevel(
+  postInventoryServiceLevel(
     req: operations.PostInventoryServiceLevelRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostInventoryServiceLevelResponse> {
@@ -1920,23 +1943,23 @@ export class SDK {
       req = new operations.PostInventoryServiceLevelRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/inventory/service-level";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostInventoryServiceLevelResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostInventoryServiceLevelResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1946,11 +1969,12 @@ export class SDK {
   }
 
   
-  // PostInventoryTurns - Calculate inventory turns
-  /** 
+  /**
+   * postInventoryTurns - Calculate inventory turns
+   *
    * Calculate inventory turns
   **/
-  PostInventoryTurns(
+  postInventoryTurns(
     req: operations.PostInventoryTurnsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostInventoryTurnsResponse> {
@@ -1958,23 +1982,23 @@ export class SDK {
       req = new operations.PostInventoryTurnsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/inventory/turns";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostInventoryTurnsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostInventoryTurnsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1984,11 +2008,12 @@ export class SDK {
   }
 
   
-  // PostLifecycleManyToOne - Map from old product to new product to create artifical history
-  /** 
+  /**
+   * postLifecycleManyToOne - Map from old product to new product to create artifical history
+   *
    * Supports the creation of artificial startup history for new products, based on a flexible mapping of old to new. This is an Enterprise feature.
   **/
-  PostLifecycleManyToOne(
+  postLifecycleManyToOne(
     req: operations.PostLifecycleManyToOneRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostLifecycleManyToOneResponse> {
@@ -1996,45 +2021,44 @@ export class SDK {
       req = new operations.PostLifecycleManyToOneRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/lifecycle/many-to-one";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostLifecycleManyToOneResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostLifecycleManyToOneResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.planningLevelDataDto = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.planningLevelDataDto = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2049,11 +2073,12 @@ export class SDK {
   }
 
   
-  // PostLifecycleOneToOne - Map from old product to new product to create artifical history
-  /** 
+  /**
+   * postLifecycleOneToOne - Map from old product to new product to create artifical history
+   *
    * Supports the creation of artificial startup history for new products, based on a flexible mapping of old to new. This is an Enterprise feature.
   **/
-  PostLifecycleOneToOne(
+  postLifecycleOneToOne(
     req: operations.PostLifecycleOneToOneRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostLifecycleOneToOneResponse> {
@@ -2061,45 +2086,44 @@ export class SDK {
       req = new operations.PostLifecycleOneToOneRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/lifecycle/one-to-one";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostLifecycleOneToOneResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostLifecycleOneToOneResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.planningLevelDataDto = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.planningLevelDataDto = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2114,11 +2138,12 @@ export class SDK {
   }
 
   
-  // PostOutlier - Get outlier
-  /** 
+  /**
+   * postOutlier - Get outlier
+   *
    * Identify outliers (single and repetitive spikes, seasonality, masked outliers, trend and level jumps, amongst other topics) and use for cleansing of the history stream prior to forecast claculation. Depending on math model used, this approach often improves results dramatically, as it removes disturbances.
   **/
-  PostOutlier(
+  postOutlier(
     req: operations.PostOutlierRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostOutlierResponse> {
@@ -2126,45 +2151,44 @@ export class SDK {
       req = new operations.PostOutlierRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/outlier";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostOutlierResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostOutlierResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.timeSeriesOutliersResponses = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.timeSeriesOutliersResponses = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2179,11 +2203,12 @@ export class SDK {
   }
 
   
-  // PostPortfolio - ABCxyz Analysis
-  /** 
+  /**
+   * postPortfolio - ABCxyz Analysis
+   *
    * Calculate and retrieve results of ABC (pareto analysis) and xyz (Coefficient of variation) per timeseries and planning level. This analysis is a powerful means to estbalish a proper planning cadence, best accuracy messures and optimal hyperparameters for the organization. It provides a balanced and actionable overview of the entire product portfolio.
   **/
-  PostPortfolio(
+  postPortfolio(
     req: operations.PostPortfolioRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioResponse> {
@@ -2191,45 +2216,44 @@ export class SDK {
       req = new operations.PostPortfolioRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.portfolioModels = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.portfolioModels = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2244,11 +2268,12 @@ export class SDK {
   }
 
   
-  // PostPortfolioAbc - ABC Analysis
-  /** 
+  /**
+   * postPortfolioAbc - ABC Analysis
+   *
    * Calculate and retrieve results of ABC (pareto analysis) per timeseries and planning level.
   **/
-  PostPortfolioAbc(
+  postPortfolioAbc(
     req: operations.PostPortfolioAbcRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioAbcResponse> {
@@ -2256,45 +2281,44 @@ export class SDK {
       req = new operations.PostPortfolioAbcRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/abc";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioAbcResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioAbcResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.portfolioAbcModels = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.portfolioAbcModels = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2309,11 +2333,12 @@ export class SDK {
   }
 
   
-  // PostPortfolioForecastPerformanceRewind - Planning level rewind to calculate and measure performance potential (internal versus iCUE).
-  /** 
+  /**
+   * postPortfolioForecastPerformanceRewind - Planning level rewind to calculate and measure performance potential (internal versus iCUE).
+   *
    * Planning level rewind to calculate and measure performance potential (internal versus iCUE).
   **/
-  PostPortfolioForecastPerformanceRewind(
+  postPortfolioForecastPerformanceRewind(
     req: operations.PostPortfolioForecastPerformanceRewindRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioForecastPerformanceRewindResponse> {
@@ -2321,45 +2346,44 @@ export class SDK {
       req = new operations.PostPortfolioForecastPerformanceRewindRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/forecast-performance-rewind";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioForecastPerformanceRewindResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioForecastPerformanceRewindResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.rewindResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.rewindResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2374,11 +2398,12 @@ export class SDK {
   }
 
   
-  // PostPortfolioXyz - xyz Analysis
-  /** 
+  /**
+   * postPortfolioXyz - xyz Analysis
+   *
    * Calculate and retrieve results of xyz (Coefficient of variation) per timeseries and planning level.
   **/
-  PostPortfolioXyz(
+  postPortfolioXyz(
     req: operations.PostPortfolioXyzRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPortfolioXyzResponse> {
@@ -2386,45 +2411,44 @@ export class SDK {
       req = new operations.PostPortfolioXyzRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/portfolio/xyz";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPortfolioXyzResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostPortfolioXyzResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.portfolioXyzModels = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.portfolioXyzModels = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2439,11 +2463,12 @@ export class SDK {
   }
 
   
-  // PostPricingBundlePricing - Bundle pricing
-  /** 
+  /**
+   * postPricingBundlePricing - Bundle pricing
+   *
    * Bundle pricing
   **/
-  PostPricingBundlePricing(
+  postPricingBundlePricing(
     req: operations.PostPricingBundlePricingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPricingBundlePricingResponse> {
@@ -2451,23 +2476,23 @@ export class SDK {
       req = new operations.PostPricingBundlePricingRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/pricing/bundle-pricing";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPricingBundlePricingResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostPricingBundlePricingResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -2477,7 +2502,7 @@ export class SDK {
   }
 
   
-  PostPricingCompetitivePricing(
+  postPricingCompetitivePricing(
     req: operations.PostPricingCompetitivePricingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPricingCompetitivePricingResponse> {
@@ -2485,23 +2510,23 @@ export class SDK {
       req = new operations.PostPricingCompetitivePricingRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/pricing/competitive-pricing";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPricingCompetitivePricingResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostPricingCompetitivePricingResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -2511,7 +2536,7 @@ export class SDK {
   }
 
   
-  PostPricingCostPlusPricing(
+  postPricingCostPlusPricing(
     req: operations.PostPricingCostPlusPricingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPricingCostPlusPricingResponse> {
@@ -2519,23 +2544,23 @@ export class SDK {
       req = new operations.PostPricingCostPlusPricingRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/pricing/cost-plus-pricing";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPricingCostPlusPricingResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostPricingCostPlusPricingResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -2545,7 +2570,7 @@ export class SDK {
   }
 
   
-  PostPricingDecoyPricing(
+  postPricingDecoyPricing(
     req: operations.PostPricingDecoyPricingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPricingDecoyPricingResponse> {
@@ -2553,23 +2578,23 @@ export class SDK {
       req = new operations.PostPricingDecoyPricingRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/pricing/decoy-pricing";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPricingDecoyPricingResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostPricingDecoyPricingResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -2579,7 +2604,7 @@ export class SDK {
   }
 
   
-  PostPricingOddPricing(
+  postPricingOddPricing(
     req: operations.PostPricingOddPricingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPricingOddPricingResponse> {
@@ -2587,23 +2612,23 @@ export class SDK {
       req = new operations.PostPricingOddPricingRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/pricing/odd-pricing";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPricingOddPricingResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostPricingOddPricingResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -2613,7 +2638,7 @@ export class SDK {
   }
 
   
-  PostPricingPenetrationPricing(
+  postPricingPenetrationPricing(
     req: operations.PostPricingPenetrationPricingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPricingPenetrationPricingResponse> {
@@ -2621,23 +2646,23 @@ export class SDK {
       req = new operations.PostPricingPenetrationPricingRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/pricing/penetration-pricing";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPricingPenetrationPricingResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostPricingPenetrationPricingResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -2647,7 +2672,7 @@ export class SDK {
   }
 
   
-  PostPricingPriceElasticityOfDemand(
+  postPricingPriceElasticityOfDemand(
     req: operations.PostPricingPriceElasticityOfDemandRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostPricingPriceElasticityOfDemandResponse> {
@@ -2655,23 +2680,23 @@ export class SDK {
       req = new operations.PostPricingPriceElasticityOfDemandRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/pricing/price-elasticity-of-demand";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostPricingPriceElasticityOfDemandResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostPricingPriceElasticityOfDemandResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -2681,11 +2706,12 @@ export class SDK {
   }
 
   
-  // PutAdministrationEntity - Pause organization
-  /** 
+  /**
+   * putAdministrationEntity - Pause organization
+   *
    * This is a iCUE only endpoint or Enterprise feature.
   **/
-  PutAdministrationEntity(
+  putAdministrationEntity(
     req: operations.PutAdministrationEntityRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutAdministrationEntityResponse> {
@@ -2693,38 +2719,37 @@ export class SDK {
       req = new operations.PutAdministrationEntityRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/administration/entity";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutAdministrationEntityResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PutAdministrationEntityResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -2734,11 +2759,12 @@ export class SDK {
   }
 
   
-  // PutAdministrationUser - Update user
-  /** 
+  /**
+   * putAdministrationUser - Update user
+   *
    * Update user
   **/
-  PutAdministrationUser(
+  putAdministrationUser(
     req: operations.PutAdministrationUserRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutAdministrationUserResponse> {
@@ -2746,23 +2772,23 @@ export class SDK {
       req = new operations.PutAdministrationUserRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/administration/user";
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...config?.headers};
     return client
-      .put(url, {
+      .request({
+        url: url,
+        method: "put",
+        headers: headers,
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutAdministrationUserResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PutAdministrationUserResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -2772,11 +2798,12 @@ export class SDK {
   }
 
   
-  // PutAdministrationUserLock - Lock user
-  /** 
+  /**
+   * putAdministrationUserLock - Lock user
+   *
    * After lock user won't be able to use iCUE API endpoints.
   **/
-  PutAdministrationUserLock(
+  putAdministrationUserLock(
     req: operations.PutAdministrationUserLockRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutAdministrationUserLockResponse> {
@@ -2784,38 +2811,37 @@ export class SDK {
       req = new operations.PutAdministrationUserLockRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/administration/user/lock";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutAdministrationUserLockResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PutAdministrationUserLockResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 

@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VideoAsset } from "./videoasset";
 import { ImageAsset } from "./imageasset";
 import { TitleAsset } from "./titleasset";
@@ -8,42 +8,43 @@ import { LumaAsset } from "./lumaasset";
 import { Offset } from "./offset";
 import { Transition } from "./transition";
 
+
 export enum ClipEffectEnum {
-    ZoomIn = "zoomIn"
-,    ZoomOut = "zoomOut"
-,    SlideLeft = "slideLeft"
-,    SlideRight = "slideRight"
-,    SlideUp = "slideUp"
-,    SlideDown = "slideDown"
+    ZoomIn = "zoomIn",
+    ZoomOut = "zoomOut",
+    SlideLeft = "slideLeft",
+    SlideRight = "slideRight",
+    SlideUp = "slideUp",
+    SlideDown = "slideDown"
 }
 
 export enum ClipFilterEnum {
-    Boost = "boost"
-,    Contrast = "contrast"
-,    Darken = "darken"
-,    Greyscale = "greyscale"
-,    Lighten = "lighten"
-,    Muted = "muted"
-,    Negative = "negative"
+    Boost = "boost",
+    Contrast = "contrast",
+    Darken = "darken",
+    Greyscale = "greyscale",
+    Lighten = "lighten",
+    Muted = "muted",
+    Negative = "negative"
 }
 
 export enum ClipFitEnum {
-    Cover = "cover"
-,    Contain = "contain"
-,    Crop = "crop"
-,    None = "none"
+    Cover = "cover",
+    Contain = "contain",
+    Crop = "crop",
+    None = "none"
 }
 
 export enum ClipPositionEnum {
-    Top = "top"
-,    TopRight = "topRight"
-,    Right = "right"
-,    BottomRight = "bottomRight"
-,    Bottom = "bottom"
-,    BottomLeft = "bottomLeft"
-,    Left = "left"
-,    TopLeft = "topLeft"
-,    Center = "center"
+    Top = "top",
+    TopRight = "topRight",
+    Right = "right",
+    BottomRight = "bottomRight",
+    Bottom = "bottom",
+    BottomLeft = "bottomLeft",
+    Left = "left",
+    TopLeft = "topLeft",
+    Center = "center"
 }
 
 
@@ -52,36 +53,36 @@ export enum ClipPositionEnum {
  * A clip is a container for a specific type of asset, i.e. a title, image, video, audio or html. You use a Clip to define when an asset will display on the timeline, how long it will play for and transitions, filters and effects to apply to it.
 **/
 export class Clip extends SpeakeasyBase {
-  @Metadata({ data: "json, name=asset" })
+  @SpeakeasyMetadata({ data: "json, name=asset" })
   asset: any;
 
-  @Metadata({ data: "json, name=effect" })
+  @SpeakeasyMetadata({ data: "json, name=effect" })
   effect?: ClipEffectEnum;
 
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: ClipFilterEnum;
 
-  @Metadata({ data: "json, name=fit" })
+  @SpeakeasyMetadata({ data: "json, name=fit" })
   fit?: ClipFitEnum;
 
-  @Metadata({ data: "json, name=length" })
+  @SpeakeasyMetadata({ data: "json, name=length" })
   length: number;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset?: Offset;
 
-  @Metadata({ data: "json, name=opacity" })
+  @SpeakeasyMetadata({ data: "json, name=opacity" })
   opacity?: number;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: ClipPositionEnum;
 
-  @Metadata({ data: "json, name=scale" })
+  @SpeakeasyMetadata({ data: "json, name=scale" })
   scale?: number;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start: number;
 
-  @Metadata({ data: "json, name=transition" })
+  @SpeakeasyMetadata({ data: "json, name=transition" })
   transition?: Transition;
 }

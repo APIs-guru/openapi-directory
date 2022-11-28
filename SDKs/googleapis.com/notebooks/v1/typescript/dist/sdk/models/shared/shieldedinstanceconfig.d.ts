@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * A set of Shielded Instance options. Check [Images using supported Shielded VM features] Not all combinations are valid.
 **/

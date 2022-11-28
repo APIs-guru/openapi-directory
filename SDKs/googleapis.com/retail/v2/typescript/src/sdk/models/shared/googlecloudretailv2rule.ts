@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2RuleBoostAction } from "./googlecloudretailv2ruleboostaction";
 import { GoogleCloudRetailV2Condition } from "./googlecloudretailv2condition";
 import { GoogleCloudRetailV2RuleDoNotAssociateAction } from "./googlecloudretailv2ruledonotassociateaction";
@@ -10,35 +10,36 @@ import { GoogleCloudRetailV2RuleReplacementAction } from "./googlecloudretailv2r
 import { GoogleCloudRetailV2RuleTwowaySynonymsAction } from "./googlecloudretailv2ruletwowaysynonymsaction";
 
 
+
 // GoogleCloudRetailV2Rule
 /** 
  * A rule is a condition-action pair * A condition defines when a rule is to be triggered. * An action specifies what occurs on that trigger. Currently rules only work for controls with SOLUTION_TYPE_SEARCH.
 **/
 export class GoogleCloudRetailV2Rule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boostAction" })
+  @SpeakeasyMetadata({ data: "json, name=boostAction" })
   boostAction?: GoogleCloudRetailV2RuleBoostAction;
 
-  @Metadata({ data: "json, name=condition" })
+  @SpeakeasyMetadata({ data: "json, name=condition" })
   condition?: GoogleCloudRetailV2Condition;
 
-  @Metadata({ data: "json, name=doNotAssociateAction" })
+  @SpeakeasyMetadata({ data: "json, name=doNotAssociateAction" })
   doNotAssociateAction?: GoogleCloudRetailV2RuleDoNotAssociateAction;
 
-  @Metadata({ data: "json, name=filterAction" })
+  @SpeakeasyMetadata({ data: "json, name=filterAction" })
   filterAction?: GoogleCloudRetailV2RuleFilterAction;
 
-  @Metadata({ data: "json, name=ignoreAction" })
+  @SpeakeasyMetadata({ data: "json, name=ignoreAction" })
   ignoreAction?: GoogleCloudRetailV2RuleIgnoreAction;
 
-  @Metadata({ data: "json, name=onewaySynonymsAction" })
+  @SpeakeasyMetadata({ data: "json, name=onewaySynonymsAction" })
   onewaySynonymsAction?: GoogleCloudRetailV2RuleOnewaySynonymsAction;
 
-  @Metadata({ data: "json, name=redirectAction" })
+  @SpeakeasyMetadata({ data: "json, name=redirectAction" })
   redirectAction?: GoogleCloudRetailV2RuleRedirectAction;
 
-  @Metadata({ data: "json, name=replacementAction" })
+  @SpeakeasyMetadata({ data: "json, name=replacementAction" })
   replacementAction?: GoogleCloudRetailV2RuleReplacementAction;
 
-  @Metadata({ data: "json, name=twowaySynonymsAction" })
+  @SpeakeasyMetadata({ data: "json, name=twowaySynonymsAction" })
   twowaySynonymsAction?: GoogleCloudRetailV2RuleTwowaySynonymsAction;
 }

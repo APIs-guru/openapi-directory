@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .allocateinfo import *
 from .allocatequotarequest import *
 from .allocatequotaresponse import *

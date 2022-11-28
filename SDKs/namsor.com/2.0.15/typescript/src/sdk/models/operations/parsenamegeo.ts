@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ParseNameGeoPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=countryIso2" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=countryIso2" })
   countryIso2: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=nameFull" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=nameFull" })
   nameFull: string;
 }
 
 
 export class ParseNameGeoSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 }
 
 
 export class ParseNameGeoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ParseNameGeoPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ParseNameGeoSecurity;
 }
 
 
 export class ParseNameGeoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   personalNameParsedOut?: shared.PersonalNameParsedOut;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntityId } from "./entityid";
 
 
+
 export class PagedListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cursor" })
+  @SpeakeasyMetadata({ data: "json, name=cursor" })
   cursor?: string;
 
-  @Metadata({ data: "json, name=end_time" })
+  @SpeakeasyMetadata({ data: "json, name=end_time" })
   endTime?: number;
 
-  @Metadata({ data: "json, name=results", elemType: shared.EntityId })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: EntityId })
   results?: EntityId[];
 
-  @Metadata({ data: "json, name=start_time" })
+  @SpeakeasyMetadata({ data: "json, name=start_time" })
   startTime?: number;
 
-  @Metadata({ data: "json, name=total_count" })
+  @SpeakeasyMetadata({ data: "json, name=total_count" })
   totalCount?: number;
 }

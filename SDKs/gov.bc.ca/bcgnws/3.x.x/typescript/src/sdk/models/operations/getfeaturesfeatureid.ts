@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetFeaturesFeatureIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=featureId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=featureId" })
   featureId: number;
 }
 
 
 export class GetFeaturesFeatureIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetFeaturesFeatureIdPathParams;
 }
 
 
 export class GetFeaturesFeatureIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

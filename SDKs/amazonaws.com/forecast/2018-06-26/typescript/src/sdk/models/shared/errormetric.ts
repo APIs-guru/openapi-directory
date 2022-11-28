@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ErrorMetric
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  Provides detailed error metrics to evaluate the performance of a predictor. This object is part of the <a>Metrics</a> object. 
 **/
 export class ErrorMetric extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ForecastType" })
+  @SpeakeasyMetadata({ data: "json, name=ForecastType" })
   forecastType?: string;
 
-  @Metadata({ data: "json, name=MAPE" })
+  @SpeakeasyMetadata({ data: "json, name=MAPE" })
   mape?: number;
 
-  @Metadata({ data: "json, name=MASE" })
+  @SpeakeasyMetadata({ data: "json, name=MASE" })
   mase?: number;
 
-  @Metadata({ data: "json, name=RMSE" })
+  @SpeakeasyMetadata({ data: "json, name=RMSE" })
   rmse?: number;
 
-  @Metadata({ data: "json, name=WAPE" })
+  @SpeakeasyMetadata({ data: "json, name=WAPE" })
   wape?: number;
 }

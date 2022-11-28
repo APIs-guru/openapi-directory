@@ -1,6 +1,7 @@
 
 
+
 export enum OpsItemDataTypeEnum {
-    SearchableString = "SearchableString"
-,    String = "String"
+    SearchableString = "SearchableString",
+    String = "String"
 }

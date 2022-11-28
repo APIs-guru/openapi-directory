@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CheckIfUserOwnsVideoPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=user_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=user_id" })
   userId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=video_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=video_id" })
   videoId: number;
 }
 
 
 export class CheckIfUserOwnsVideoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CheckIfUserOwnsVideoPathParams;
 }
 
 
 export class CheckIfUserOwnsVideoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   legacyError?: shared.LegacyError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   video?: shared.Video;
 }

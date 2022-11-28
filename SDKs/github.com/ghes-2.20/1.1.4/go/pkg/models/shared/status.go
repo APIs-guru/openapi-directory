@@ -1,5 +1,7 @@
 package shared
 
+// Status
+// The status of a commit.
 type Status struct {
 	AvatarURL   string     `json:"avatar_url"`
 	Context     string     `json:"context"`

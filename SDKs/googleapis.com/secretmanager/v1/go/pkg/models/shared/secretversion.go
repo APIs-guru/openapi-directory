@@ -9,6 +9,8 @@ const (
 	SecretVersionStateEnumDestroyed        SecretVersionStateEnum = "DESTROYED"
 )
 
+// SecretVersion
+// A secret version resource in the Secret Manager API.
 type SecretVersion struct {
 	ClientSpecifiedPayloadChecksum *bool                   `json:"clientSpecifiedPayloadChecksum,omitempty"`
 	CreateTime                     *string                 `json:"createTime,omitempty"`

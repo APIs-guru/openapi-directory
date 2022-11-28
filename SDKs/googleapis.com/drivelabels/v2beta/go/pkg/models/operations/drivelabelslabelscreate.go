@@ -22,7 +22,7 @@ type DrivelabelsLabelsCreateQueryParams struct {
 
 type DrivelabelsLabelsCreateRequest struct {
 	QueryParams DrivelabelsLabelsCreateQueryParams
-	Request     *shared.GoogleAppsDriveLabelsV2betaLabel `request:"mediaType=application/json"`
+	Request     *shared.GoogleAppsDriveLabelsV2betaLabelInput `request:"mediaType=application/json"`
 }
 
 type DrivelabelsLabelsCreateResponse struct {

@@ -1,20 +1,21 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import rrsetroutingpolicygeopolicy
-from . import rrsetroutingpolicygeopolicy
-from . import rrsetroutingpolicyprimarybackuppolicy
-from . import rrsetroutingpolicywrrpolicy
-from . import rrsetroutingpolicywrrpolicy
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RrSetRoutingPolicy:
-    geo: Optional[rrsetroutingpolicygeopolicy.RrSetRoutingPolicyGeoPolicy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'geo' }})
-    geo_policy: Optional[rrsetroutingpolicygeopolicy.RrSetRoutingPolicyGeoPolicy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'geoPolicy' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    primary_backup: Optional[rrsetroutingpolicyprimarybackuppolicy.RrSetRoutingPolicyPrimaryBackupPolicy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primaryBackup' }})
-    wrr: Optional[rrsetroutingpolicywrrpolicy.RrSetRoutingPolicyWrrPolicy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wrr' }})
-    wrr_policy: Optional[rrsetroutingpolicywrrpolicy.RrSetRoutingPolicyWrrPolicy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wrrPolicy' }})
+    r"""RrSetRoutingPolicy
+    A RRSetRoutingPolicy represents ResourceRecordSet data that is returned dynamically with the response varying based on configured properties such as geolocation or by weighted random selection.
+    """
+    
+    geo: Optional[RrSetRoutingPolicyGeoPolicy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('geo') }})
+    geo_policy: Optional[RrSetRoutingPolicyGeoPolicy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('geoPolicy') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    primary_backup: Optional[RrSetRoutingPolicyPrimaryBackupPolicy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('primaryBackup') }})
+    wrr: Optional[RrSetRoutingPolicyWrrPolicy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('wrr') }})
+    wrr_policy: Optional[RrSetRoutingPolicyWrrPolicy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('wrrPolicy') }})
     

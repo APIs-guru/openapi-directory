@@ -1,5 +1,7 @@
 package shared
 
+// ListEnvironmentsResponse
+// Response message for EnvironmentService.ListEnvironments.
 type ListEnvironmentsResponse struct {
 	Environments  []Environment `json:"environments,omitempty"`
 	ExecutionID   *string       `json:"executionId,omitempty"`

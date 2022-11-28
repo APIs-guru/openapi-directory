@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateVolumeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MountPoint" })
+  @SpeakeasyMetadata({ data: "json, name=MountPoint" })
   mountPoint?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=VolumeId" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeId" })
   volumeId: string;
 }

@@ -40,11 +40,8 @@ type GetCertificatesIDActionsQueryParams struct {
 	Status *GetCertificatesIDActionsStatusParameterStatusEnum `queryParam:"style=form,explode=true,name=status"`
 }
 
-type GetCertificatesIDActionsRequest struct {
-	PathParams  GetCertificatesIDActionsPathParams
-	QueryParams GetCertificatesIDActionsQueryParams
-}
-
+// GetCertificatesIDActionsActionsResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type GetCertificatesIDActionsActionsResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -90,6 +87,11 @@ type GetCertificatesIDActionsActionsResponseMeta struct {
 type GetCertificatesIDActionsActionsResponse struct {
 	Actions []GetCertificatesIDActionsActionsResponseAction `json:"actions"`
 	Meta    *GetCertificatesIDActionsActionsResponseMeta    `json:"meta,omitempty"`
+}
+
+type GetCertificatesIDActionsRequest struct {
+	PathParams  GetCertificatesIDActionsPathParams
+	QueryParams GetCertificatesIDActionsQueryParams
 }
 
 type GetCertificatesIDActionsResponse struct {

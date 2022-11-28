@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeCaCertificatePathParams:
-    ca_certificate_id: str = field(default=None, metadata={'path_param': { 'field_name': 'caCertificateId', 'style': 'simple', 'explode': False }})
+    ca_certificate_id: str = field(metadata={'path_param': { 'field_name': 'caCertificateId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,19 +24,19 @@ class DescribeCaCertificateHeaders:
 
 @dataclass
 class DescribeCaCertificateRequest:
-    path_params: DescribeCaCertificatePathParams = field(default=None)
-    headers: DescribeCaCertificateHeaders = field(default=None)
+    headers: DescribeCaCertificateHeaders = field()
+    path_params: DescribeCaCertificatePathParams = field()
     
 
 @dataclass
 class DescribeCaCertificateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_ca_certificate_response: Optional[shared.DescribeCaCertificateResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

@@ -8,6 +8,8 @@ const (
 	PersonalNameGenderedOutLikelyGenderEnumUnknown PersonalNameGenderedOutLikelyGenderEnum = "unknown"
 )
 
+// PersonalNameGenderedOut
+// Classified genderized names
 type PersonalNameGenderedOut struct {
 	GenderScale           *float64                                 `json:"genderScale,omitempty"`
 	ID                    *string                                  `json:"id,omitempty"`

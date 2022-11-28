@@ -15,6 +15,8 @@ const (
 	RepositoryErrorTypeEnumClientError         RepositoryErrorTypeEnum = "CLIENT_ERROR"
 )
 
+// RepositoryError
+// Errors when the connector is communicating to the source repository.
 type RepositoryError struct {
 	ErrorMessage   *string                  `json:"errorMessage,omitempty"`
 	HTTPStatusCode *int32                   `json:"httpStatusCode,omitempty"`

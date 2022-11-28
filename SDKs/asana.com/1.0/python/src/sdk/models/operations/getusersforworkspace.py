@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class GetUsersForWorkspacePathParams:
-    workspace_gid: str = field(default=None, metadata={'path_param': { 'field_name': 'workspace_gid', 'style': 'simple', 'explode': False }})
+    workspace_gid: str = field(metadata={'path_param': { 'field_name': 'workspace_gid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,22 +17,22 @@ class GetUsersForWorkspaceQueryParams:
     opt_pretty: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'opt_pretty', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class GetUsersForWorkspaceRequest:
-    path_params: GetUsersForWorkspacePathParams = field(default=None)
-    query_params: GetUsersForWorkspaceQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class GetUsersForWorkspace200ApplicationJSON:
-    data: Optional[List[shared.UserCompact]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    data: Optional[List[shared.UserCompact]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    
+
+@dataclass
+class GetUsersForWorkspaceRequest:
+    path_params: GetUsersForWorkspacePathParams = field()
+    query_params: GetUsersForWorkspaceQueryParams = field()
     
 
 @dataclass
 class GetUsersForWorkspaceResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     get_users_for_workspace_200_application_json_object: Optional[GetUsersForWorkspace200ApplicationJSON] = field(default=None)
     

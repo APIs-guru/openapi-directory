@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EnterpriseAdminListProvisionedIdentitiesEnterprisePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=enterprise" })
   enterprise: string;
 }
 
 
 export class EnterpriseAdminListProvisionedIdentitiesEnterpriseQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=count" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=count" })
   count?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startIndex" })
   startIndex?: number;
 }
 
 
 export class EnterpriseAdminListProvisionedIdentitiesEnterpriseRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EnterpriseAdminListProvisionedIdentitiesEnterprisePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: EnterpriseAdminListProvisionedIdentitiesEnterpriseQueryParams;
 }
 
 
 export class EnterpriseAdminListProvisionedIdentitiesEnterpriseResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scimUserListEnterprise?: shared.ScimUserListEnterprise;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ShippingSettings } from "./shippingsettings";
+
 
 
 // ShippingsettingsCustomBatchRequestEntry
@@ -7,18 +8,18 @@ import { ShippingSettings } from "./shippingsettings";
  * A batch entry encoding a single non-batch shippingsettings request.
 **/
 export class ShippingsettingsCustomBatchRequestEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=batchId" })
+  @SpeakeasyMetadata({ data: "json, name=batchId" })
   batchId?: number;
 
-  @Metadata({ data: "json, name=merchantId" })
+  @SpeakeasyMetadata({ data: "json, name=merchantId" })
   merchantId?: string;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method?: string;
 
-  @Metadata({ data: "json, name=shippingSettings" })
+  @SpeakeasyMetadata({ data: "json, name=shippingSettings" })
   shippingSettings?: ShippingSettings;
 }

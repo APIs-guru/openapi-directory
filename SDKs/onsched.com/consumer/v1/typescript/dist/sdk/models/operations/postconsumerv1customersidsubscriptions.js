@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostConsumerV1CustomersIdSubscriptionsPathParams = /** @class */ (function (_super) {
     __extends(PostConsumerV1CustomersIdSubscriptionsPathParams, _super);
@@ -30,7 +30,7 @@ var PostConsumerV1CustomersIdSubscriptionsPathParams = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], PostConsumerV1CustomersIdSubscriptionsPathParams.prototype, "id", void 0);
     return PostConsumerV1CustomersIdSubscriptionsPathParams;
@@ -42,19 +42,19 @@ var PostConsumerV1CustomersIdSubscriptionsRequests = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/*+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/*+json" }),
         __metadata("design:type", shared.CustomerSubscriptionInputModel)
     ], PostConsumerV1CustomersIdSubscriptionsRequests.prototype, "customerSubscriptionInputModel", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.CustomerSubscriptionInputModel)
     ], PostConsumerV1CustomersIdSubscriptionsRequests.prototype, "customerSubscriptionInputModel1", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json-patch+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" }),
         __metadata("design:type", shared.CustomerSubscriptionInputModel)
     ], PostConsumerV1CustomersIdSubscriptionsRequests.prototype, "customerSubscriptionInputModel2", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/json" }),
         __metadata("design:type", shared.CustomerSubscriptionInputModel)
     ], PostConsumerV1CustomersIdSubscriptionsRequests.prototype, "customerSubscriptionInputModel3", void 0);
     return PostConsumerV1CustomersIdSubscriptionsRequests;
@@ -66,11 +66,11 @@ var PostConsumerV1CustomersIdSubscriptionsRequest = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostConsumerV1CustomersIdSubscriptionsPathParams)
     ], PostConsumerV1CustomersIdSubscriptionsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostConsumerV1CustomersIdSubscriptionsRequests)
     ], PostConsumerV1CustomersIdSubscriptionsRequest.prototype, "request", void 0);
     return PostConsumerV1CustomersIdSubscriptionsRequest;
@@ -82,15 +82,15 @@ var PostConsumerV1CustomersIdSubscriptionsResponse = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostConsumerV1CustomersIdSubscriptionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CustomerSubscriptionViewModel)
     ], PostConsumerV1CustomersIdSubscriptionsResponse.prototype, "customerSubscriptionViewModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostConsumerV1CustomersIdSubscriptionsResponse.prototype, "statusCode", void 0);
     return PostConsumerV1CustomersIdSubscriptionsResponse;

@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.lambdatest.com/screenshots/v1",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// Locations - Fetch Locations
+// Fetch list of available Geolocations
 func (s *SDK) Locations(ctx context.Context, request operations.LocationsRequest) (*operations.LocationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/locations"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -60,7 +83,7 @@ func (s *SDK) Locations(ctx context.Context, request operations.LocationsRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -100,8 +123,10 @@ func (s *SDK) Locations(ctx context.Context, request operations.LocationsRequest
 	return res, nil
 }
 
+// Profiles - Fetch login profiles
+// Fetch login profiles
 func (s *SDK) Profiles(ctx context.Context, request operations.ProfilesRequest) (*operations.ProfilesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/profiles"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -109,7 +134,7 @@ func (s *SDK) Profiles(ctx context.Context, request operations.ProfilesRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -149,8 +174,10 @@ func (s *SDK) Profiles(ctx context.Context, request operations.ProfilesRequest) 
 	return res, nil
 }
 
+// Resolutions - Fetch all available resolution on different OS
+// Fetch all available resolution on different OS
 func (s *SDK) Resolutions(ctx context.Context, request operations.ResolutionsRequest) (*operations.ResolutionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/resolutions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -158,7 +185,7 @@ func (s *SDK) Resolutions(ctx context.Context, request operations.ResolutionsReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -198,8 +225,10 @@ func (s *SDK) Resolutions(ctx context.Context, request operations.ResolutionsReq
 	return res, nil
 }
 
+// StartScreenshotTest - Start Screenshot Test
+// Start Screenshot Test
 func (s *SDK) StartScreenshotTest(ctx context.Context, request operations.StartScreenshotTestRequest) (*operations.StartScreenshotTestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -217,7 +246,7 @@ func (s *SDK) StartScreenshotTest(ctx context.Context, request operations.StartS
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -277,8 +306,10 @@ func (s *SDK) StartScreenshotTest(ctx context.Context, request operations.StartS
 	return res, nil
 }
 
+// ZippedScreenshots - Fetch Zipped Screenshots
+// Fetch Zipped Screenshots
 func (s *SDK) ZippedScreenshots(ctx context.Context, request operations.ZippedScreenshotsRequest) (*operations.ZippedScreenshotsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{test_id}/zip", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -286,7 +317,7 @@ func (s *SDK) ZippedScreenshots(ctx context.Context, request operations.ZippedSc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -346,8 +377,10 @@ func (s *SDK) ZippedScreenshots(ctx context.Context, request operations.ZippedSc
 	return res, nil
 }
 
+// Devices - Fetch all available device combinations.
+// Fetch all os devices combinations available on lambdatest platform.
 func (s *SDK) Devices(ctx context.Context, request operations.DevicesRequest) (*operations.DevicesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/devices"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -357,7 +390,7 @@ func (s *SDK) Devices(ctx context.Context, request operations.DevicesRequest) (*
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -397,8 +430,10 @@ func (s *SDK) Devices(ctx context.Context, request operations.DevicesRequest) (*
 	return res, nil
 }
 
+// OsBrowsers - Fetch all available os-browser combinations.
+// Fetch all os browsers combinations available on lambdatest platform.
 func (s *SDK) OsBrowsers(ctx context.Context, request operations.OsBrowsersRequest) (*operations.OsBrowsersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/os-browsers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -408,7 +443,7 @@ func (s *SDK) OsBrowsers(ctx context.Context, request operations.OsBrowsersReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -448,8 +483,10 @@ func (s *SDK) OsBrowsers(ctx context.Context, request operations.OsBrowsersReque
 	return res, nil
 }
 
+// Screenshots - Fetch specified screenshot details
+// To fetch specified screenshot details
 func (s *SDK) Screenshots(ctx context.Context, request operations.ScreenshotsRequest) (*operations.ScreenshotsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{test_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -457,7 +494,7 @@ func (s *SDK) Screenshots(ctx context.Context, request operations.ScreenshotsReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -517,8 +554,10 @@ func (s *SDK) Screenshots(ctx context.Context, request operations.ScreenshotsReq
 	return res, nil
 }
 
+// StopScreenshotsTest - Stop specified screenshot test
+// Stop specified screenshot test
 func (s *SDK) StopScreenshotsTest(ctx context.Context, request operations.StopScreenshotsTestRequest) (*operations.StopScreenshotsTestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/stop/{test_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -526,7 +565,7 @@ func (s *SDK) StopScreenshotsTest(ctx context.Context, request operations.StopSc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

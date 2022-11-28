@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import driveitem
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Drive:
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    root: Optional[driveitem.DriveItem] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'root' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+    r"""Drive
+    Information about a shared drive.
+    """
+    
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    root: Optional[DriveItem] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('root') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     

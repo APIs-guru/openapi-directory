@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetCreateEndpointAccessActionEnum(str, Enum):
     CREATE_ENDPOINT_ACCESS = "CreateEndpointAccess"
@@ -10,12 +14,12 @@ class GetCreateEndpointAccessVersionEnum(str, Enum):
 
 @dataclass
 class GetCreateEndpointAccessQueryParams:
-    action: GetCreateEndpointAccessActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetCreateEndpointAccessActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    endpoint_name: str = field(metadata={'query_param': { 'field_name': 'EndpointName', 'style': 'form', 'explode': True }})
+    subnet_group_name: str = field(metadata={'query_param': { 'field_name': 'SubnetGroupName', 'style': 'form', 'explode': True }})
+    version: GetCreateEndpointAccessVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cluster_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ClusterIdentifier', 'style': 'form', 'explode': True }})
-    endpoint_name: str = field(default=None, metadata={'query_param': { 'field_name': 'EndpointName', 'style': 'form', 'explode': True }})
     resource_owner: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ResourceOwner', 'style': 'form', 'explode': True }})
-    subnet_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'SubnetGroupName', 'style': 'form', 'explode': True }})
-    version: GetCreateEndpointAccessVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     vpc_security_group_ids: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'VpcSecurityGroupIds', 'style': 'form', 'explode': True }})
     
 
@@ -32,13 +36,13 @@ class GetCreateEndpointAccessHeaders:
 
 @dataclass
 class GetCreateEndpointAccessRequest:
-    query_params: GetCreateEndpointAccessQueryParams = field(default=None)
-    headers: GetCreateEndpointAccessHeaders = field(default=None)
+    headers: GetCreateEndpointAccessHeaders = field()
+    query_params: GetCreateEndpointAccessQueryParams = field()
     
 
 @dataclass
 class GetCreateEndpointAccessResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

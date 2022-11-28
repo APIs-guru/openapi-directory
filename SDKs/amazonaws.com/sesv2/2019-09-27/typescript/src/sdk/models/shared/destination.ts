@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Destination
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object that describes the recipients for an email.
 **/
 export class Destination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BccAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=BccAddresses" })
   bccAddresses?: string[];
 
-  @Metadata({ data: "json, name=CcAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=CcAddresses" })
   ccAddresses?: string[];
 
-  @Metadata({ data: "json, name=ToAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=ToAddresses" })
   toAddresses?: string[];
 }

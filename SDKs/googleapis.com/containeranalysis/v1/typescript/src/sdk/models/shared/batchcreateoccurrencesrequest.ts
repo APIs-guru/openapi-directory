@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Occurrence } from "./occurrence";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { OccurrenceInput } from "./occurrence";
 
 
-// BatchCreateOccurrencesRequest
+
+// BatchCreateOccurrencesRequestInput
 /** 
  * Request to create occurrences in batch.
 **/
-export class BatchCreateOccurrencesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=occurrences", elemType: shared.Occurrence })
-  occurrences?: Occurrence[];
+export class BatchCreateOccurrencesRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=occurrences", elemType: OccurrenceInput })
+  occurrences?: OccurrenceInput[];
 }

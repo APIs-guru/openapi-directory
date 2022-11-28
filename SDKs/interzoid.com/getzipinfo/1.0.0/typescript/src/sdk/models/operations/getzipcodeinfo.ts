@@ -1,76 +1,77 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetzipcodeinfoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=license" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" })
   license: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=zip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=zip" })
   zip: string;
 }
 
 
-export class GetzipcodeinfoRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetzipcodeinfoQueryParams;
-}
-
-
 export class Getzipcodeinfo200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AreaSquareMiles" })
+  @SpeakeasyMetadata({ data: "json, name=AreaSquareMiles" })
   areaSquareMiles?: string;
 
-  @Metadata({ data: "json, name=City" })
+  @SpeakeasyMetadata({ data: "json, name=City" })
   city?: string;
 
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: string;
 
-  @Metadata({ data: "json, name=Credits" })
+  @SpeakeasyMetadata({ data: "json, name=Credits" })
   credits?: string;
 
-  @Metadata({ data: "json, name=ElderlyHouseholdPercent" })
+  @SpeakeasyMetadata({ data: "json, name=ElderlyHouseholdPercent" })
   elderlyHouseholdPercent?: string;
 
-  @Metadata({ data: "json, name=FarmerHouseholdPercent" })
+  @SpeakeasyMetadata({ data: "json, name=FarmerHouseholdPercent" })
   farmerHouseholdPercent?: string;
 
-  @Metadata({ data: "json, name=IncomePercent100k" })
+  @SpeakeasyMetadata({ data: "json, name=IncomePercent100k" })
   incomePercent100k?: string;
 
-  @Metadata({ data: "json, name=IncomePercent200k" })
+  @SpeakeasyMetadata({ data: "json, name=IncomePercent200k" })
   incomePercent200k?: string;
 
-  @Metadata({ data: "json, name=IncomePercent50k" })
+  @SpeakeasyMetadata({ data: "json, name=IncomePercent50k" })
   incomePercent50k?: string;
 
-  @Metadata({ data: "json, name=Latitude" })
+  @SpeakeasyMetadata({ data: "json, name=Latitude" })
   latitude?: string;
 
-  @Metadata({ data: "json, name=Longitude" })
+  @SpeakeasyMetadata({ data: "json, name=Longitude" })
   longitude?: string;
 
-  @Metadata({ data: "json, name=MarriedHouseholdPercent" })
+  @SpeakeasyMetadata({ data: "json, name=MarriedHouseholdPercent" })
   marriedHouseholdPercent?: string;
 
-  @Metadata({ data: "json, name=Population" })
+  @SpeakeasyMetadata({ data: "json, name=Population" })
   population?: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: string;
 
-  @Metadata({ data: "json, name=ZipCode" })
+  @SpeakeasyMetadata({ data: "json, name=ZipCode" })
   zipCode?: string;
 }
 
 
+export class GetzipcodeinfoRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetzipcodeinfoQueryParams;
+}
+
+
 export class GetzipcodeinfoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getzipcodeinfo200ApplicationJsonObject?: Getzipcodeinfo200ApplicationJson;
 }

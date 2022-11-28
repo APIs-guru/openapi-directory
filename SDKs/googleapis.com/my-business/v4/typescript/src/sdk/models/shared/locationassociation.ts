@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum LocationAssociationCategoryEnum {
-    CategoryUnspecified = "CATEGORY_UNSPECIFIED"
-,    Cover = "COVER"
-,    Profile = "PROFILE"
-,    Logo = "LOGO"
-,    Exterior = "EXTERIOR"
-,    Interior = "INTERIOR"
-,    Product = "PRODUCT"
-,    AtWork = "AT_WORK"
-,    FoodAndDrink = "FOOD_AND_DRINK"
-,    Menu = "MENU"
-,    CommonArea = "COMMON_AREA"
-,    Rooms = "ROOMS"
-,    Teams = "TEAMS"
-,    Additional = "ADDITIONAL"
+    CategoryUnspecified = "CATEGORY_UNSPECIFIED",
+    Cover = "COVER",
+    Profile = "PROFILE",
+    Logo = "LOGO",
+    Exterior = "EXTERIOR",
+    Interior = "INTERIOR",
+    Product = "PRODUCT",
+    AtWork = "AT_WORK",
+    FoodAndDrink = "FOOD_AND_DRINK",
+    Menu = "MENU",
+    CommonArea = "COMMON_AREA",
+    Rooms = "ROOMS",
+    Teams = "TEAMS",
+    Additional = "ADDITIONAL"
 }
 
 
@@ -23,9 +24,9 @@ export enum LocationAssociationCategoryEnum {
  * How the media item is associated with its location.
 **/
 export class LocationAssociation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: LocationAssociationCategoryEnum;
 
-  @Metadata({ data: "json, name=priceListItemId" })
+  @SpeakeasyMetadata({ data: "json, name=priceListItemId" })
   priceListItemId?: string;
 }

@@ -22,106 +22,106 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SearchTypeBlsSeriesQueryParams = /** @class */ (function (_super) {
     __extends(SearchTypeBlsSeriesQueryParams, _super);
     function SearchTypeBlsSeriesQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=changedate.from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=changedate.from" }),
         __metadata("design:type", Date)
     ], SearchTypeBlsSeriesQueryParams.prototype, "changedateFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=changedate.to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=changedate.to" }),
         __metadata("design:type", Date)
     ], SearchTypeBlsSeriesQueryParams.prototype, "changedateTo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=createdate.from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdate.from" }),
         __metadata("design:type", Date)
     ], SearchTypeBlsSeriesQueryParams.prototype, "createdateFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=createdate.to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdate.to" }),
         __metadata("design:type", Date)
     ], SearchTypeBlsSeriesQueryParams.prototype, "createdateTo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=description" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=description" }),
         __metadata("design:type", String)
     ], SearchTypeBlsSeriesQueryParams.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filesuffix" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filesuffix" }),
         __metadata("design:type", String)
     ], SearchTypeBlsSeriesQueryParams.prototype, "filesuffix", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fromdate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromdate" }),
         __metadata("design:type", Date)
     ], SearchTypeBlsSeriesQueryParams.prototype, "fromdate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=group" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=group" }),
         __metadata("design:type", String)
     ], SearchTypeBlsSeriesQueryParams.prototype, "group", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=max" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" }),
         __metadata("design:type", Number)
     ], SearchTypeBlsSeriesQueryParams.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxlatitude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxlatitude" }),
         __metadata("design:type", Number)
     ], SearchTypeBlsSeriesQueryParams.prototype, "maxlatitude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxlongitude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxlongitude" }),
         __metadata("design:type", Number)
     ], SearchTypeBlsSeriesQueryParams.prototype, "maxlongitude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=minlatitude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minlatitude" }),
         __metadata("design:type", Number)
     ], SearchTypeBlsSeriesQueryParams.prototype, "minlatitude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=minlongitude" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minlongitude" }),
         __metadata("design:type", Number)
     ], SearchTypeBlsSeriesQueryParams.prototype, "minlongitude", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" }),
         __metadata("design:type", String)
     ], SearchTypeBlsSeriesQueryParams.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.type_bls_series.area" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.type_bls_series.area" }),
         __metadata("design:type", String)
     ], SearchTypeBlsSeriesQueryParams.prototype, "searchTypeBlsSeriesArea", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.type_bls_series.industry" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.type_bls_series.industry" }),
         __metadata("design:type", String)
     ], SearchTypeBlsSeriesQueryParams.prototype, "searchTypeBlsSeriesIndustry", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.type_bls_series.item" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.type_bls_series.item" }),
         __metadata("design:type", String)
     ], SearchTypeBlsSeriesQueryParams.prototype, "searchTypeBlsSeriesItem", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.type_bls_series.measure_data_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.type_bls_series.measure_data_type" }),
         __metadata("design:type", String)
     ], SearchTypeBlsSeriesQueryParams.prototype, "searchTypeBlsSeriesMeasureDataType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.type_bls_series.seasonality" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.type_bls_series.seasonality" }),
         __metadata("design:type", String)
     ], SearchTypeBlsSeriesQueryParams.prototype, "searchTypeBlsSeriesSeasonality", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.type_bls_series.sector" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.type_bls_series.sector" }),
         __metadata("design:type", String)
     ], SearchTypeBlsSeriesQueryParams.prototype, "searchTypeBlsSeriesSector", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search.type_bls_series.survey_name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.type_bls_series.survey_name" }),
         __metadata("design:type", String)
     ], SearchTypeBlsSeriesQueryParams.prototype, "searchTypeBlsSeriesSurveyName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=skip" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=skip" }),
         __metadata("design:type", Number)
     ], SearchTypeBlsSeriesQueryParams.prototype, "skip", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=text" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=text" }),
         __metadata("design:type", String)
     ], SearchTypeBlsSeriesQueryParams.prototype, "text", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=todate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=todate" }),
         __metadata("design:type", Date)
     ], SearchTypeBlsSeriesQueryParams.prototype, "todate", void 0);
     return SearchTypeBlsSeriesQueryParams;
@@ -133,7 +133,7 @@ var SearchTypeBlsSeriesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SearchTypeBlsSeriesQueryParams)
     ], SearchTypeBlsSeriesRequest.prototype, "queryParams", void 0);
     return SearchTypeBlsSeriesRequest;
@@ -145,11 +145,11 @@ var SearchTypeBlsSeriesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SearchTypeBlsSeriesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SearchTypeBlsSeriesResponse.prototype, "statusCode", void 0);
     return SearchTypeBlsSeriesResponse;

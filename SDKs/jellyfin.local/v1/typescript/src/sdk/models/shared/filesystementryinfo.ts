@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileSystemEntryTypeEnum } from "./filesystementrytypeenum";
+
 
 
 // FileSystemEntryInfo
@@ -7,12 +8,12 @@ import { FileSystemEntryTypeEnum } from "./filesystementrytypeenum";
  * Class FileSystemEntryInfo.
 **/
 export class FileSystemEntryInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Path" })
+  @SpeakeasyMetadata({ data: "json, name=Path" })
   path?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: FileSystemEntryTypeEnum;
 }

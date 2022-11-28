@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProtectionGroupArbitraryPatternLimits
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Limits settings on protection groups with arbitrary pattern type. 
 **/
 export class ProtectionGroupArbitraryPatternLimits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxMembers" })
+  @SpeakeasyMetadata({ data: "json, name=MaxMembers" })
   maxMembers: number;
 }

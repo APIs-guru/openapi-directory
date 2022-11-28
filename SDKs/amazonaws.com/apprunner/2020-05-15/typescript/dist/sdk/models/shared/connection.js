@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProviderTypeEnum } from "./providertypeenum";
 import { ConnectionStatusEnum } from "./connectionstatusenum";
 // Connection
@@ -35,23 +35,23 @@ var Connection = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ConnectionArn" }),
+        SpeakeasyMetadata({ data: "json, name=ConnectionArn" }),
         __metadata("design:type", String)
     ], Connection.prototype, "connectionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConnectionName" }),
+        SpeakeasyMetadata({ data: "json, name=ConnectionName" }),
         __metadata("design:type", String)
     ], Connection.prototype, "connectionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedAt" }),
         __metadata("design:type", Date)
     ], Connection.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProviderType" }),
+        SpeakeasyMetadata({ data: "json, name=ProviderType" }),
         __metadata("design:type", String)
     ], Connection.prototype, "providerType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], Connection.prototype, "status", void 0);
     return Connection;

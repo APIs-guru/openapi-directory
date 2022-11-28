@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class JobsProjectsCompletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 class JobsProjectsCompleteScopeEnum(str, Enum):
     COMPLETION_SCOPE_UNSPECIFIED = "COMPLETION_SCOPE_UNSPECIFIED"
@@ -43,14 +44,14 @@ class JobsProjectsCompleteQueryParams:
 
 @dataclass
 class JobsProjectsCompleteSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class JobsProjectsCompleteSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -61,14 +62,14 @@ class JobsProjectsCompleteSecurity:
 
 @dataclass
 class JobsProjectsCompleteRequest:
-    path_params: JobsProjectsCompletePathParams = field(default=None)
-    query_params: JobsProjectsCompleteQueryParams = field(default=None)
-    security: JobsProjectsCompleteSecurity = field(default=None)
+    path_params: JobsProjectsCompletePathParams = field()
+    query_params: JobsProjectsCompleteQueryParams = field()
+    security: JobsProjectsCompleteSecurity = field()
     
 
 @dataclass
 class JobsProjectsCompleteResponse:
+    content_type: str = field()
+    status_code: int = field()
     complete_query_response: Optional[shared.CompleteQueryResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

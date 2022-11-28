@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Assignment } from "./assignment";
 import { Date } from "./date";
 import { TimeOfDay } from "./timeofday";
@@ -8,30 +7,31 @@ import { IndividualStudentsOptions } from "./individualstudentsoptions";
 import { Material } from "./material";
 import { MultipleChoiceQuestion } from "./multiplechoicequestion";
 
+
 export enum CourseWorkAssigneeModeEnum {
-    AssigneeModeUnspecified = "ASSIGNEE_MODE_UNSPECIFIED"
-,    AllStudents = "ALL_STUDENTS"
-,    IndividualStudents = "INDIVIDUAL_STUDENTS"
+    AssigneeModeUnspecified = "ASSIGNEE_MODE_UNSPECIFIED",
+    AllStudents = "ALL_STUDENTS",
+    IndividualStudents = "INDIVIDUAL_STUDENTS"
 }
 
 export enum CourseWorkStateEnum {
-    CourseWorkStateUnspecified = "COURSE_WORK_STATE_UNSPECIFIED"
-,    Published = "PUBLISHED"
-,    Draft = "DRAFT"
-,    Deleted = "DELETED"
+    CourseWorkStateUnspecified = "COURSE_WORK_STATE_UNSPECIFIED",
+    Published = "PUBLISHED",
+    Draft = "DRAFT",
+    Deleted = "DELETED"
 }
 
 export enum CourseWorkSubmissionModificationModeEnum {
-    SubmissionModificationModeUnspecified = "SUBMISSION_MODIFICATION_MODE_UNSPECIFIED"
-,    ModifiableUntilTurnedIn = "MODIFIABLE_UNTIL_TURNED_IN"
-,    Modifiable = "MODIFIABLE"
+    SubmissionModificationModeUnspecified = "SUBMISSION_MODIFICATION_MODE_UNSPECIFIED",
+    ModifiableUntilTurnedIn = "MODIFIABLE_UNTIL_TURNED_IN",
+    Modifiable = "MODIFIABLE"
 }
 
 export enum CourseWorkWorkTypeEnum {
-    CourseWorkTypeUnspecified = "COURSE_WORK_TYPE_UNSPECIFIED"
-,    Assignment = "ASSIGNMENT"
-,    ShortAnswerQuestion = "SHORT_ANSWER_QUESTION"
-,    MultipleChoiceQuestion = "MULTIPLE_CHOICE_QUESTION"
+    CourseWorkTypeUnspecified = "COURSE_WORK_TYPE_UNSPECIFIED",
+    Assignment = "ASSIGNMENT",
+    ShortAnswerQuestion = "SHORT_ANSWER_QUESTION",
+    MultipleChoiceQuestion = "MULTIPLE_CHOICE_QUESTION"
 }
 
 
@@ -40,72 +40,72 @@ export enum CourseWorkWorkTypeEnum {
  * Course work created by a teacher for students of the course.
 **/
 export class CourseWork extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alternateLink" })
+  @SpeakeasyMetadata({ data: "json, name=alternateLink" })
   alternateLink?: string;
 
-  @Metadata({ data: "json, name=assigneeMode" })
+  @SpeakeasyMetadata({ data: "json, name=assigneeMode" })
   assigneeMode?: CourseWorkAssigneeModeEnum;
 
-  @Metadata({ data: "json, name=assignment" })
+  @SpeakeasyMetadata({ data: "json, name=assignment" })
   assignment?: Assignment;
 
-  @Metadata({ data: "json, name=associatedWithDeveloper" })
+  @SpeakeasyMetadata({ data: "json, name=associatedWithDeveloper" })
   associatedWithDeveloper?: boolean;
 
-  @Metadata({ data: "json, name=courseId" })
+  @SpeakeasyMetadata({ data: "json, name=courseId" })
   courseId?: string;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: string;
 
-  @Metadata({ data: "json, name=creatorUserId" })
+  @SpeakeasyMetadata({ data: "json, name=creatorUserId" })
   creatorUserId?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=dueDate" })
+  @SpeakeasyMetadata({ data: "json, name=dueDate" })
   dueDate?: Date;
 
-  @Metadata({ data: "json, name=dueTime" })
+  @SpeakeasyMetadata({ data: "json, name=dueTime" })
   dueTime?: TimeOfDay;
 
-  @Metadata({ data: "json, name=gradeCategory" })
+  @SpeakeasyMetadata({ data: "json, name=gradeCategory" })
   gradeCategory?: GradeCategory;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=individualStudentsOptions" })
+  @SpeakeasyMetadata({ data: "json, name=individualStudentsOptions" })
   individualStudentsOptions?: IndividualStudentsOptions;
 
-  @Metadata({ data: "json, name=materials", elemType: shared.Material })
+  @SpeakeasyMetadata({ data: "json, name=materials", elemType: Material })
   materials?: Material[];
 
-  @Metadata({ data: "json, name=maxPoints" })
+  @SpeakeasyMetadata({ data: "json, name=maxPoints" })
   maxPoints?: number;
 
-  @Metadata({ data: "json, name=multipleChoiceQuestion" })
+  @SpeakeasyMetadata({ data: "json, name=multipleChoiceQuestion" })
   multipleChoiceQuestion?: MultipleChoiceQuestion;
 
-  @Metadata({ data: "json, name=scheduledTime" })
+  @SpeakeasyMetadata({ data: "json, name=scheduledTime" })
   scheduledTime?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: CourseWorkStateEnum;
 
-  @Metadata({ data: "json, name=submissionModificationMode" })
+  @SpeakeasyMetadata({ data: "json, name=submissionModificationMode" })
   submissionModificationMode?: CourseWorkSubmissionModificationModeEnum;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=topicId" })
+  @SpeakeasyMetadata({ data: "json, name=topicId" })
   topicId?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=workType" })
+  @SpeakeasyMetadata({ data: "json, name=workType" })
   workType?: CourseWorkWorkTypeEnum;
 }

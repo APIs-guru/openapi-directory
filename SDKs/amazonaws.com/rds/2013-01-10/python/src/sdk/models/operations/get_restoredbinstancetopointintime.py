@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetRestoreDbInstanceToPointInTimeActionEnum(str, Enum):
     RESTORE_DB_INSTANCE_TO_POINT_IN_TIME = "RestoreDBInstanceToPointInTime"
@@ -13,7 +14,10 @@ class GetRestoreDbInstanceToPointInTimeVersionEnum(str, Enum):
 
 @dataclass
 class GetRestoreDbInstanceToPointInTimeQueryParams:
-    action: GetRestoreDbInstanceToPointInTimeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetRestoreDbInstanceToPointInTimeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    source_db_instance_identifier: str = field(metadata={'query_param': { 'field_name': 'SourceDBInstanceIdentifier', 'style': 'form', 'explode': True }})
+    target_db_instance_identifier: str = field(metadata={'query_param': { 'field_name': 'TargetDBInstanceIdentifier', 'style': 'form', 'explode': True }})
+    version: GetRestoreDbInstanceToPointInTimeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     auto_minor_version_upgrade: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AutoMinorVersionUpgrade', 'style': 'form', 'explode': True }})
     availability_zone: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'AvailabilityZone', 'style': 'form', 'explode': True }})
     db_instance_class: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DBInstanceClass', 'style': 'form', 'explode': True }})
@@ -27,10 +31,7 @@ class GetRestoreDbInstanceToPointInTimeQueryParams:
     port: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'Port', 'style': 'form', 'explode': True }})
     publicly_accessible: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'PubliclyAccessible', 'style': 'form', 'explode': True }})
     restore_time: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'RestoreTime', 'style': 'form', 'explode': True }})
-    source_db_instance_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'SourceDBInstanceIdentifier', 'style': 'form', 'explode': True }})
-    target_db_instance_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'TargetDBInstanceIdentifier', 'style': 'form', 'explode': True }})
     use_latest_restorable_time: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'UseLatestRestorableTime', 'style': 'form', 'explode': True }})
-    version: GetRestoreDbInstanceToPointInTimeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -46,13 +47,13 @@ class GetRestoreDbInstanceToPointInTimeHeaders:
 
 @dataclass
 class GetRestoreDbInstanceToPointInTimeRequest:
-    query_params: GetRestoreDbInstanceToPointInTimeQueryParams = field(default=None)
-    headers: GetRestoreDbInstanceToPointInTimeHeaders = field(default=None)
+    headers: GetRestoreDbInstanceToPointInTimeHeaders = field()
+    query_params: GetRestoreDbInstanceToPointInTimeQueryParams = field()
     
 
 @dataclass
 class GetRestoreDbInstanceToPointInTimeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import button
-from . import onclick
+from sdk import utils
+from . import *
 
 class KeyValueIconEnum(str, Enum):
     ICON_UNSPECIFIED = "ICON_UNSPECIFIED"
@@ -41,12 +42,16 @@ class KeyValueIconEnum(str, Enum):
 @dataclass_json
 @dataclass
 class KeyValue:
-    bottom_label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bottomLabel' }})
-    button: Optional[button.Button] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'button' }})
-    content: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content' }})
-    content_multiline: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contentMultiline' }})
-    icon: Optional[KeyValueIconEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'icon' }})
-    icon_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iconUrl' }})
-    on_click: Optional[onclick.OnClick] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'onClick' }})
-    top_label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'topLabel' }})
+    r"""KeyValue
+    A UI element contains a key (label) and a value (content). And this element may also contain some actions such as onclick button.
+    """
+    
+    bottom_label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bottomLabel') }})
+    button: Optional[Button] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('button') }})
+    content: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('content') }})
+    content_multiline: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contentMultiline') }})
+    icon: Optional[KeyValueIconEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('icon') }})
+    icon_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('iconUrl') }})
+    on_click: Optional[OnClick] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('onClick') }})
+    top_label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('topLabel') }})
     

@@ -19,6 +19,8 @@ type UpdateCampaignHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateCampaignRequestBodyWriteCampaignRequest
+// Specifies the configuration and other settings for a campaign.
 type UpdateCampaignRequestBodyWriteCampaignRequest struct {
 	AdditionalTreatments        []shared.WriteTreatmentResource     `json:"AdditionalTreatments,omitempty"`
 	CustomDeliveryConfiguration *shared.CustomDeliveryConfiguration `json:"CustomDeliveryConfiguration,omitempty"`

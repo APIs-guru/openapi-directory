@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExtendedValue } from "./extendedvalue";
+
 
 
 // PivotGroupValueMetadata
@@ -7,9 +8,9 @@ import { ExtendedValue } from "./extendedvalue";
  * Metadata about a value in a pivot grouping.
 **/
 export class PivotGroupValueMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collapsed" })
+  @SpeakeasyMetadata({ data: "json, name=collapsed" })
   collapsed?: boolean;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: ExtendedValue;
 }

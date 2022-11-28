@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostResyncMfaDeviceActionEnum(str, Enum):
     RESYNC_MFA_DEVICE = "ResyncMFADevice"
@@ -10,8 +14,8 @@ class PostResyncMfaDeviceVersionEnum(str, Enum):
 
 @dataclass
 class PostResyncMfaDeviceQueryParams:
-    action: PostResyncMfaDeviceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostResyncMfaDeviceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostResyncMfaDeviceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostResyncMfaDeviceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostResyncMfaDeviceHeaders:
 
 @dataclass
 class PostResyncMfaDeviceRequest:
-    query_params: PostResyncMfaDeviceQueryParams = field(default=None)
-    headers: PostResyncMfaDeviceHeaders = field(default=None)
+    headers: PostResyncMfaDeviceHeaders = field()
+    query_params: PostResyncMfaDeviceQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostResyncMfaDeviceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

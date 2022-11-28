@@ -1,88 +1,89 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetRevisionsCountUsingGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=padID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=padID" })
   padId?: string;
 }
 
 
-export class GetRevisionsCountUsingGetRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetRevisionsCountUsingGetQueryParams;
-}
-
-
 export class GetRevisionsCountUsingGet200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=revisions" })
+  @SpeakeasyMetadata({ data: "json, name=revisions" })
   revisions?: number;
 }
 
 
 export class GetRevisionsCountUsingGet200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: GetRevisionsCountUsingGet200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetRevisionsCountUsingGet400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetRevisionsCountUsingGet401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetRevisionsCountUsingGet500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetRevisionsCountUsingGetRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetRevisionsCountUsingGetQueryParams;
+}
+
+
 export class GetRevisionsCountUsingGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getRevisionsCountUsingGet200ApplicationJsonObject?: GetRevisionsCountUsingGet200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getRevisionsCountUsingGet400ApplicationJsonObject?: GetRevisionsCountUsingGet400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getRevisionsCountUsingGet401ApplicationJsonObject?: GetRevisionsCountUsingGet401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getRevisionsCountUsingGet500ApplicationJsonObject?: GetRevisionsCountUsingGet500ApplicationJson;
 }

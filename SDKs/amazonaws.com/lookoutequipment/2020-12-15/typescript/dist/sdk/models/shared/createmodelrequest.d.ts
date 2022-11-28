@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DataPreProcessingConfiguration } from "./datapreprocessingconfiguration";
 import { DatasetSchema } from "./datasetschema";
 import { LabelsInputConfiguration } from "./labelsinputconfiguration";

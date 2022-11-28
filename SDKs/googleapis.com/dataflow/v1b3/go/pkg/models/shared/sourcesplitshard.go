@@ -9,6 +9,8 @@ const (
 	SourceSplitShardDerivationModeEnumSourceDerivationModeSiblingOfCurrent SourceSplitShardDerivationModeEnum = "SOURCE_DERIVATION_MODE_SIBLING_OF_CURRENT"
 )
 
+// SourceSplitShard
+// DEPRECATED in favor of DerivedSource.
 type SourceSplitShard struct {
 	DerivationMode *SourceSplitShardDerivationModeEnum `json:"derivationMode,omitempty"`
 	Source         *Source                             `json:"source,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudFormationStackRecordSourceTypeEnum } from "./cloudformationstackrecordsourcetypeenum";
+
 
 
 // CloudFormationStackRecordSourceInfo
@@ -7,12 +8,12 @@ import { CloudFormationStackRecordSourceTypeEnum } from "./cloudformationstackre
  * Describes the source of a CloudFormation stack record (i.e., the export snapshot record).
 **/
 export class CloudFormationStackRecordSourceInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType?: CloudFormationStackRecordSourceTypeEnum;
 }

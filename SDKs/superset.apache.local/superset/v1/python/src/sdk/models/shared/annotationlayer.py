@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class AnnotationLayerAnnotationTypeEnum(str, Enum):
     FORMULA = "FORMULA"
@@ -30,20 +32,20 @@ class AnnotationLayerStyleEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AnnotationLayer:
-    annotation_type: Optional[AnnotationLayerAnnotationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'annotationType' }})
-    color: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'color' }})
-    description_columns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'descriptionColumns' }})
-    hide_line: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hideLine' }})
-    interval_end_column: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'intervalEndColumn' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    opacity: Optional[AnnotationLayerOpacityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'opacity' }})
-    overrides: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'overrides' }})
-    show: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'show' }})
-    show_markers: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'showMarkers' }})
-    source_type: Optional[AnnotationLayerSourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceType' }})
-    style: Optional[AnnotationLayerStyleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'style' }})
-    time_column: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeColumn' }})
-    title_column: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'titleColumn' }})
-    value: Any = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
-    width: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    show: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('show') }})
+    show_markers: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('showMarkers') }})
+    value: Any = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
+    annotation_type: Optional[AnnotationLayerAnnotationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('annotationType') }})
+    color: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('color') }})
+    description_columns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('descriptionColumns') }})
+    hide_line: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('hideLine') }})
+    interval_end_column: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('intervalEndColumn') }})
+    opacity: Optional[AnnotationLayerOpacityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('opacity') }})
+    overrides: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('overrides') }})
+    source_type: Optional[AnnotationLayerSourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceType') }})
+    style: Optional[AnnotationLayerStyleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('style') }})
+    time_column: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeColumn') }})
+    title_column: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('titleColumn') }})
+    width: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('width') }})
     

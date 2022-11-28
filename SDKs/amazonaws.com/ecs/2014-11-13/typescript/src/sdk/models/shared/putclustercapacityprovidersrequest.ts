@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CapacityProviderStrategyItem } from "./capacityproviderstrategyitem";
 
 
+
 export class PutClusterCapacityProvidersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=capacityProviders" })
+  @SpeakeasyMetadata({ data: "json, name=capacityProviders" })
   capacityProviders: string[];
 
-  @Metadata({ data: "json, name=cluster" })
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
   cluster: string;
 
-  @Metadata({ data: "json, name=defaultCapacityProviderStrategy", elemType: shared.CapacityProviderStrategyItem })
+  @SpeakeasyMetadata({ data: "json, name=defaultCapacityProviderStrategy", elemType: CapacityProviderStrategyItem })
   defaultCapacityProviderStrategy: CapacityProviderStrategyItem[];
 }

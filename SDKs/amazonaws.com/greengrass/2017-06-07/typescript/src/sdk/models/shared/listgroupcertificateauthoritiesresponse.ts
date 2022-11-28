@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GroupCertificateAuthorityProperties } from "./groupcertificateauthorityproperties";
 
 
+
 export class ListGroupCertificateAuthoritiesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GroupCertificateAuthorities", elemType: shared.GroupCertificateAuthorityProperties })
+  @SpeakeasyMetadata({ data: "json, name=GroupCertificateAuthorities", elemType: GroupCertificateAuthorityProperties })
   groupCertificateAuthorities?: GroupCertificateAuthorityProperties[];
 }

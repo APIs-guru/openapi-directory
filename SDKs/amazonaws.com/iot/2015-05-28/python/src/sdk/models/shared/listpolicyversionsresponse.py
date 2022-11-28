@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import policyversion
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListPolicyVersionsResponse:
-    policy_versions: Optional[List[policyversion.PolicyVersion]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policyVersions' }})
+    r"""ListPolicyVersionsResponse
+    The output from the ListPolicyVersions operation.
+    """
+    
+    policy_versions: Optional[List[PolicyVersion]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policyVersions') }})
     

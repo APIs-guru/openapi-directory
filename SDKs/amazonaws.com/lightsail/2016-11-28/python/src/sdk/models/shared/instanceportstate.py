@@ -1,18 +1,23 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import networkprotocol_enum
-from . import portstate_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InstancePortState:
-    cidr_list_aliases: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cidrListAliases' }})
-    cidrs: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cidrs' }})
-    from_port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fromPort' }})
-    ipv6_cidrs: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipv6Cidrs' }})
-    protocol: Optional[networkprotocol_enum.NetworkProtocolEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
-    state: Optional[portstate_enum.PortStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    to_port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'toPort' }})
+    r"""InstancePortState
+    Describes open ports on an instance, the IP addresses allowed to connect to the instance through the ports, and the protocol.
+    """
+    
+    cidr_list_aliases: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cidrListAliases') }})
+    cidrs: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cidrs') }})
+    from_port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fromPort') }})
+    ipv6_cidrs: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ipv6Cidrs') }})
+    protocol: Optional[NetworkProtocolEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('protocol') }})
+    state: Optional[PortStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    to_port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('toPort') }})
     

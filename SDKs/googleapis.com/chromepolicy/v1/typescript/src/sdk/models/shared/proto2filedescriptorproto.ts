@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Proto2EnumDescriptorProto } from "./proto2enumdescriptorproto";
 import { Proto2DescriptorProto } from "./proto2descriptorproto";
+
 
 
 // Proto2FileDescriptorProto
@@ -9,18 +9,18 @@ import { Proto2DescriptorProto } from "./proto2descriptorproto";
  * Describes a complete .proto file.
 **/
 export class Proto2FileDescriptorProto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enumType", elemType: shared.Proto2EnumDescriptorProto })
+  @SpeakeasyMetadata({ data: "json, name=enumType", elemType: Proto2EnumDescriptorProto })
   enumType?: Proto2EnumDescriptorProto[];
 
-  @Metadata({ data: "json, name=messageType", elemType: shared.Proto2DescriptorProto })
+  @SpeakeasyMetadata({ data: "json, name=messageType", elemType: Proto2DescriptorProto })
   messageType?: Proto2DescriptorProto[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=package" })
+  @SpeakeasyMetadata({ data: "json, name=package" })
   package?: string;
 
-  @Metadata({ data: "json, name=syntax" })
+  @SpeakeasyMetadata({ data: "json, name=syntax" })
   syntax?: string;
 }

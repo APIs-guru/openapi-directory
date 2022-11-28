@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DecisionTaskTimeoutTypeEnum } from "./decisiontasktimeouttypeenum";
+
 
 
 // DecisionTaskTimedOutEventAttributes
@@ -7,12 +8,12 @@ import { DecisionTaskTimeoutTypeEnum } from "./decisiontasktimeouttypeenum";
  * Provides the details of the <code>DecisionTaskTimedOut</code> event.
 **/
 export class DecisionTaskTimedOutEventAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=scheduledEventId" })
+  @SpeakeasyMetadata({ data: "json, name=scheduledEventId" })
   scheduledEventId: number;
 
-  @Metadata({ data: "json, name=startedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=startedEventId" })
   startedEventId: number;
 
-  @Metadata({ data: "json, name=timeoutType" })
+  @SpeakeasyMetadata({ data: "json, name=timeoutType" })
   timeoutType: DecisionTaskTimeoutTypeEnum;
 }

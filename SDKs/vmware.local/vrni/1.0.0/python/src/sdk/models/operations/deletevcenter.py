@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class DeleteVcenterPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteVcenterSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class DeleteVcenterRequest:
-    path_params: DeleteVcenterPathParams = field(default=None)
-    security: DeleteVcenterSecurity = field(default=None)
+    path_params: DeleteVcenterPathParams = field()
+    security: DeleteVcenterSecurity = field()
     
 
 @dataclass
 class DeleteVcenterResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

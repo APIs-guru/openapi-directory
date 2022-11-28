@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SampledHttpRequest } from "./sampledhttprequest";
 import { TimeWindow } from "./timewindow";
 var GetSampledRequestsResponse = /** @class */ (function (_super) {
     __extends(GetSampledRequestsResponse, _super);
@@ -31,15 +31,15 @@ var GetSampledRequestsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PopulationSize" }),
+        SpeakeasyMetadata({ data: "json, name=PopulationSize" }),
         __metadata("design:type", Number)
     ], GetSampledRequestsResponse.prototype, "populationSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=SampledRequests", elemType: shared.SampledHttpRequest }),
+        SpeakeasyMetadata({ data: "json, name=SampledRequests", elemType: SampledHttpRequest }),
         __metadata("design:type", Array)
     ], GetSampledRequestsResponse.prototype, "sampledRequests", void 0);
     __decorate([
-        Metadata({ data: "json, name=TimeWindow" }),
+        SpeakeasyMetadata({ data: "json, name=TimeWindow" }),
         __metadata("design:type", TimeWindow)
     ], GetSampledRequestsResponse.prototype, "timeWindow", void 0);
     return GetSampledRequestsResponse;

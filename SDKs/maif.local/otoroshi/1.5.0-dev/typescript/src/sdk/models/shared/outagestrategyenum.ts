@@ -1,6 +1,7 @@
 
 
+
 export enum OutageStrategyEnum {
-    OneServicePerGroup = "OneServicePerGroup"
-,    AllServicesPerGroup = "AllServicesPerGroup"
+    OneServicePerGroup = "OneServicePerGroup",
+    AllServicesPerGroup = "AllServicesPerGroup"
 }

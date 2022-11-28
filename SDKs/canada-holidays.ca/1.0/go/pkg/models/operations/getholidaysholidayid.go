@@ -12,17 +12,17 @@ type GetHolidaysHolidayIDQueryParams struct {
 	Year *string `queryParam:"style=form,explode=true,name=year"`
 }
 
-type GetHolidaysHolidayIDRequest struct {
-	PathParams  GetHolidaysHolidayIDPathParams
-	QueryParams GetHolidaysHolidayIDQueryParams
-}
-
 type GetHolidaysHolidayID200ApplicationJSON struct {
 	Holiday *shared.Holiday `json:"holiday,omitempty"`
 }
 
 type GetHolidaysHolidayID404ApplicationJSON struct {
 	Error *shared.Error `json:"error,omitempty"`
+}
+
+type GetHolidaysHolidayIDRequest struct {
+	PathParams  GetHolidaysHolidayIDPathParams
+	QueryParams GetHolidaysHolidayIDQueryParams
 }
 
 type GetHolidaysHolidayIDResponse struct {

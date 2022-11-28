@@ -1,5 +1,7 @@
 package shared
 
+// ChannelSummary
+// Summary information about a channel.
 type ChannelSummary struct {
 	Arn                       *string                 `json:"arn,omitempty"`
 	Authorized                *bool                   `json:"authorized,omitempty"`

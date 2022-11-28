@@ -10,6 +10,8 @@ const (
 	GoogleCloudRetailV2alphaModelPageOptimizationConfigRestrictionEnumUniqueModelTypeRestriction     GoogleCloudRetailV2alphaModelPageOptimizationConfigRestrictionEnum = "UNIQUE_MODEL_TYPE_RESTRICTION"
 )
 
+// GoogleCloudRetailV2alphaModelPageOptimizationConfig
+// The PageOptimizationConfig for model training. This determines how many panels to optimize for, and which serving configurations to consider for each panel. The purpose of this model is to optimize which ServingConfig to show on which panels in way that optimizes the visitors shopping journey.
 type GoogleCloudRetailV2alphaModelPageOptimizationConfig struct {
 	PageOptimizationEventType *string                                                             `json:"pageOptimizationEventType,omitempty"`
 	Panels                    []GoogleCloudRetailV2alphaModelPageOptimizationConfigPanel          `json:"panels,omitempty"`

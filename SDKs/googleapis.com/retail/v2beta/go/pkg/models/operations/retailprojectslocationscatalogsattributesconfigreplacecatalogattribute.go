@@ -30,7 +30,7 @@ type RetailProjectsLocationsCatalogsAttributesConfigReplaceCatalogAttributeSecur
 type RetailProjectsLocationsCatalogsAttributesConfigReplaceCatalogAttributeRequest struct {
 	PathParams  RetailProjectsLocationsCatalogsAttributesConfigReplaceCatalogAttributePathParams
 	QueryParams RetailProjectsLocationsCatalogsAttributesConfigReplaceCatalogAttributeQueryParams
-	Request     *shared.GoogleCloudRetailV2betaReplaceCatalogAttributeRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudRetailV2betaReplaceCatalogAttributeRequestInput `request:"mediaType=application/json"`
 	Security    RetailProjectsLocationsCatalogsAttributesConfigReplaceCatalogAttributeSecurity
 }
 

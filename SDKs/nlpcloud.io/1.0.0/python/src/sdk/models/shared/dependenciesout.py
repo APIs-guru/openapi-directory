@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import arc
-from . import word
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DependenciesOut:
-    arcs: List[arc.Arc] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arcs' }})
-    words: List[word.Word] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'words' }})
+    arcs: List[Arc] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('arcs') }})
+    words: List[Word] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('words') }})
     

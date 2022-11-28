@@ -10,6 +10,8 @@ const (
 	GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnumRelatedAccountsNumberHigh       GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnum = "RELATED_ACCOUNTS_NUMBER_HIGH"
 )
 
+// GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessment
+// Account defender risk assessment.
 type GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessment struct {
 	Labels []GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessmentLabelsEnum `json:"labels,omitempty"`
 }

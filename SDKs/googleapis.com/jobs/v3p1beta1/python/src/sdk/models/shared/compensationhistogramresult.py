@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import numericbucketingresult
+from sdk import utils
+from . import *
 
 class CompensationHistogramResultTypeEnum(str, Enum):
     COMPENSATION_HISTOGRAM_REQUEST_TYPE_UNSPECIFIED = "COMPENSATION_HISTOGRAM_REQUEST_TYPE_UNSPECIFIED"
@@ -13,6 +15,10 @@ class CompensationHistogramResultTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CompensationHistogramResult:
-    result: Optional[numericbucketingresult.NumericBucketingResult] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'result' }})
-    type: Optional[CompensationHistogramResultTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""CompensationHistogramResult
+    Output only. Compensation based histogram result.
+    """
+    
+    result: Optional[NumericBucketingResult] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('result') }})
+    type: Optional[CompensationHistogramResultTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthenticationConfiguration } from "./authenticationconfiguration";
 import { CodeRepository } from "./coderepository";
 import { ImageRepository } from "./imagerepository";
@@ -36,19 +36,19 @@ var SourceConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AuthenticationConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=AuthenticationConfiguration" }),
         __metadata("design:type", AuthenticationConfiguration)
     ], SourceConfiguration.prototype, "authenticationConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=AutoDeploymentsEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=AutoDeploymentsEnabled" }),
         __metadata("design:type", Boolean)
     ], SourceConfiguration.prototype, "autoDeploymentsEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=CodeRepository" }),
+        SpeakeasyMetadata({ data: "json, name=CodeRepository" }),
         __metadata("design:type", CodeRepository)
     ], SourceConfiguration.prototype, "codeRepository", void 0);
     __decorate([
-        Metadata({ data: "json, name=ImageRepository" }),
+        SpeakeasyMetadata({ data: "json, name=ImageRepository" }),
         __metadata("design:type", ImageRepository)
     ], SourceConfiguration.prototype, "imageRepository", void 0);
     return SourceConfiguration;

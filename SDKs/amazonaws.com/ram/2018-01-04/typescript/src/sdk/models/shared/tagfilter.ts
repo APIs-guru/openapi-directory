@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TagFilter
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Used to filter information based on tags.
 **/
 export class TagFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=tagKey" })
+  @SpeakeasyMetadata({ data: "json, name=tagKey" })
   tagKey?: string;
 
-  @Metadata({ data: "json, name=tagValues" })
+  @SpeakeasyMetadata({ data: "json, name=tagValues" })
   tagValues?: string[];
 }

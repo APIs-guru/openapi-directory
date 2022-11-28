@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLink } from "./googleanalyticsadminv1alphadisplayvideo360advertiserlink";
+
 
 
 // GoogleAnalyticsAdminV1alphaListDisplayVideo360AdvertiserLinksResponse
@@ -8,9 +8,9 @@ import { GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLink } from "./goog
  * Response message for ListDisplayVideo360AdvertiserLinks RPC.
 **/
 export class GoogleAnalyticsAdminV1alphaListDisplayVideo360AdvertiserLinksResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayVideo360AdvertiserLinks", elemType: shared.GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLink })
+  @SpeakeasyMetadata({ data: "json, name=displayVideo360AdvertiserLinks", elemType: GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLink })
   displayVideo360AdvertiserLinks?: GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLink[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

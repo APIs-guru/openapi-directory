@@ -1,25 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConflictMetadata } from "./conflictmetadata";
 import { MergeHunk } from "./mergehunk";
 
 
+
 export class DescribeMergeConflictsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=baseCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=baseCommitId" })
   baseCommitId?: string;
 
-  @Metadata({ data: "json, name=conflictMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=conflictMetadata" })
   conflictMetadata: ConflictMetadata;
 
-  @Metadata({ data: "json, name=destinationCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=destinationCommitId" })
   destinationCommitId: string;
 
-  @Metadata({ data: "json, name=mergeHunks", elemType: shared.MergeHunk })
+  @SpeakeasyMetadata({ data: "json, name=mergeHunks", elemType: MergeHunk })
   mergeHunks: MergeHunk[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=sourceCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=sourceCommitId" })
   sourceCommitId: string;
 }

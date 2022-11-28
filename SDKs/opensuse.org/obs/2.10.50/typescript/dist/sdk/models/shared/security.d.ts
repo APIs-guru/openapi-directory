@@ -1,4 +1,5 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class SchemeBasicAuthentication extends SpeakeasyBase {
-    authorization: string;
+    password: string;
+    username: string;
 }

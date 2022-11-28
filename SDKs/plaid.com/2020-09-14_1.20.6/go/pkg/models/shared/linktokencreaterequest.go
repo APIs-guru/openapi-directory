@@ -1,5 +1,7 @@
 package shared
 
+// LinkTokenCreateRequest
+// LinkTokenCreateRequest defines the request schema for `/link/token/create`
 type LinkTokenCreateRequest struct {
 	AccessToken           *string                                   `json:"access_token,omitempty"`
 	AccountFilters        map[string]interface{}                    `json:"account_filters,omitempty"`

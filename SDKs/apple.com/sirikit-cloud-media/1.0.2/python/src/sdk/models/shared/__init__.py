@@ -7,6 +7,7 @@ from .constraints import *
 from .content import *
 from .contentattributes import *
 from .executionmetrics import *
+from .extensionconfig import *
 from .playercontext import *
 from .playmediacontrol import *
 from .playmediacontrolactivity import *

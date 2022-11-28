@@ -4,10 +4,6 @@ type CreateAuthorUsingGetQueryParams struct {
 	Name *string `queryParam:"style=form,explode=true,name=name"`
 }
 
-type CreateAuthorUsingGetRequest struct {
-	QueryParams CreateAuthorUsingGetQueryParams
-}
-
 type CreateAuthorUsingGet200ApplicationJSONData struct {
 	AuthorID *string `json:"authorID,omitempty"`
 }
@@ -34,6 +30,10 @@ type CreateAuthorUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type CreateAuthorUsingGetRequest struct {
+	QueryParams CreateAuthorUsingGetQueryParams
 }
 
 type CreateAuthorUsingGetResponse struct {

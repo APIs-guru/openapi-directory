@@ -31,7 +31,7 @@ type MemcacheProjectsLocationsInstancesCreateSecurity struct {
 type MemcacheProjectsLocationsInstancesCreateRequest struct {
 	PathParams  MemcacheProjectsLocationsInstancesCreatePathParams
 	QueryParams MemcacheProjectsLocationsInstancesCreateQueryParams
-	Request     *shared.Instance `request:"mediaType=application/json"`
+	Request     *shared.InstanceInput `request:"mediaType=application/json"`
 	Security    MemcacheProjectsLocationsInstancesCreateSecurity
 }
 

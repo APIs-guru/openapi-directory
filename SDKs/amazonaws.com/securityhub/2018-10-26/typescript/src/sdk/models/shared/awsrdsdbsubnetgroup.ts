@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsRdsDbSubnetGroupSubnet } from "./awsrdsdbsubnetgroupsubnet";
+
 
 
 // AwsRdsDbSubnetGroup
@@ -8,21 +8,21 @@ import { AwsRdsDbSubnetGroupSubnet } from "./awsrdsdbsubnetgroupsubnet";
  * Information about the subnet group for the database instance.
 **/
 export class AwsRdsDbSubnetGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DbSubnetGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=DbSubnetGroupArn" })
   dbSubnetGroupArn?: string;
 
-  @Metadata({ data: "json, name=DbSubnetGroupDescription" })
+  @SpeakeasyMetadata({ data: "json, name=DbSubnetGroupDescription" })
   dbSubnetGroupDescription?: string;
 
-  @Metadata({ data: "json, name=DbSubnetGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=DbSubnetGroupName" })
   dbSubnetGroupName?: string;
 
-  @Metadata({ data: "json, name=SubnetGroupStatus" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetGroupStatus" })
   subnetGroupStatus?: string;
 
-  @Metadata({ data: "json, name=Subnets", elemType: shared.AwsRdsDbSubnetGroupSubnet })
+  @SpeakeasyMetadata({ data: "json, name=Subnets", elemType: AwsRdsDbSubnetGroupSubnet })
   subnets?: AwsRdsDbSubnetGroupSubnet[];
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId?: string;
 }

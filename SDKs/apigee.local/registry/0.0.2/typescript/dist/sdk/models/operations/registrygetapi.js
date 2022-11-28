@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RegistryGetApiPathParams = /** @class */ (function (_super) {
     __extends(RegistryGetApiPathParams, _super);
     function RegistryGetApiPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=api" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=api" }),
         __metadata("design:type", String)
     ], RegistryGetApiPathParams.prototype, "api", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=project" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project" }),
         __metadata("design:type", String)
     ], RegistryGetApiPathParams.prototype, "project", void 0);
     return RegistryGetApiPathParams;
@@ -45,7 +45,7 @@ var RegistryGetApiRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RegistryGetApiPathParams)
     ], RegistryGetApiRequest.prototype, "pathParams", void 0);
     return RegistryGetApiRequest;
@@ -57,15 +57,15 @@ var RegistryGetApiResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], RegistryGetApiResponse.prototype, "api", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RegistryGetApiResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RegistryGetApiResponse.prototype, "statusCode", void 0);
     return RegistryGetApiResponse;

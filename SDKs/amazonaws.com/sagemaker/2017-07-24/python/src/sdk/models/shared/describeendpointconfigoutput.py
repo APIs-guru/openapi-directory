@@ -1,22 +1,21 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import asyncinferenceconfig
-from . import datacaptureconfig
-from . import productionvariant
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeEndpointConfigOutput:
-    async_inference_config: Optional[asyncinferenceconfig.AsyncInferenceConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AsyncInferenceConfig' }})
-    creation_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreationTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    data_capture_config: Optional[datacaptureconfig.DataCaptureConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DataCaptureConfig' }})
-    endpoint_config_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EndpointConfigArn' }})
-    endpoint_config_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EndpointConfigName' }})
-    kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KmsKeyId' }})
-    production_variants: List[productionvariant.ProductionVariant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductionVariants' }})
+    creation_time: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreationTime'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    endpoint_config_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('EndpointConfigArn') }})
+    endpoint_config_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('EndpointConfigName') }})
+    production_variants: List[ProductionVariant] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProductionVariants') }})
+    async_inference_config: Optional[AsyncInferenceConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AsyncInferenceConfig') }})
+    data_capture_config: Optional[DataCaptureConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DataCaptureConfig') }})
+    kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('KmsKeyId') }})
     

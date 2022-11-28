@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CocerRequestBodyCertificateParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cert_type" })
+  @SpeakeasyMetadata({ data: "json, name=cert_type" })
   certType: string;
 
-  @Metadata({ data: "json, name=company_name" })
+  @SpeakeasyMetadata({ data: "json, name=company_name" })
   companyName: string;
 
-  @Metadata({ data: "json, name=reg_no" })
+  @SpeakeasyMetadata({ data: "json, name=reg_no" })
   regNo: string;
 
-  @Metadata({ data: "json, name=sector" })
+  @SpeakeasyMetadata({ data: "json, name=sector" })
   sector: string;
 }
 
@@ -22,97 +23,88 @@ export enum CocerRequestBodyFormatEnum {
 
 
 export class CocerRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateParameters" })
+  @SpeakeasyMetadata({ data: "json, name=certificateParameters" })
   certificateParameters?: CocerRequestBodyCertificateParameters;
 
-  @Metadata({ data: "json, name=consentArtifact" })
+  @SpeakeasyMetadata({ data: "json, name=consentArtifact" })
   consentArtifact?: any;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format: CocerRequestBodyFormatEnum;
 
-  @Metadata({ data: "json, name=txnId" })
+  @SpeakeasyMetadata({ data: "json, name=txnId" })
   txnId: string;
 }
 
 
 export class CocerSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   clientId: shared.SchemeClientId;
 }
 
-
-export class CocerRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: CocerRequestBody;
-
-  @Metadata()
-  security: CocerSecurity;
-}
-
 export enum Cocer400ApplicationJsonErrorEnum {
-    MissingParameter = "missing_parameter"
-,    InvalidParameter = "invalid_parameter"
-,    InvalidFormat = "invalid_format"
-,    InvalidTxnid = "invalid_txnid"
-,    InvalidConsentid = "invalid_consentid"
+    MissingParameter = "missing_parameter",
+    InvalidParameter = "invalid_parameter",
+    InvalidFormat = "invalid_format",
+    InvalidTxnid = "invalid_txnid",
+    InvalidConsentid = "invalid_consentid"
 }
 
 export enum Cocer400ApplicationJsonErrorDescriptionEnum {
-    PleaseProvideAllMandatoryParameters = "Please provide all mandatory parameters"
-,    BadRequest = "Bad request"
-,    TheFormatParameterIsInvalid = "The format parameter is invalid"
-,    TheTxnIdParameterMustBeInUuidFormat = "The txnId parameter must be in UUID format"
-,    TheConsentIdParameterMustBeInUuidFormat = "The consentId parameter must be in UUID format"
+    PleaseProvideAllMandatoryParameters = "Please provide all mandatory parameters",
+    BadRequest = "Bad request",
+    TheFormatParameterIsInvalid = "The format parameter is invalid",
+    TheTxnIdParameterMustBeInUuidFormat = "The txnId parameter must be in UUID format",
+    TheConsentIdParameterMustBeInUuidFormat = "The consentId parameter must be in UUID format"
 }
 
 
 export class Cocer400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Cocer400ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Cocer400ApplicationJsonErrorDescriptionEnum;
 }
 
 export enum Cocer401ApplicationJsonErrorEnum {
-    InvalidAuthentication = "invalid_authentication"
-,    InvalidAuthorization = "invalid_authorization"
+    InvalidAuthentication = "invalid_authentication",
+    InvalidAuthorization = "invalid_authorization"
 }
 
 export enum Cocer401ApplicationJsonErrorDescriptionEnum {
-    AuthenticationFailed = "Authentication failed"
-,    YouAreNotAuthorizedToUseThisApi = "You are not authorized to use this API"
+    AuthenticationFailed = "Authentication failed",
+    YouAreNotAuthorizedToUseThisApi = "You are not authorized to use this API"
 }
 
 
 export class Cocer401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Cocer401ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Cocer401ApplicationJsonErrorDescriptionEnum;
 }
 
 export enum Cocer404ApplicationJsonErrorEnum {
-    RecordNotFound = "record_not_found"
-,    UrlNotFound = "url_not_found"
+    RecordNotFound = "record_not_found",
+    UrlNotFound = "url_not_found"
 }
 
 export enum Cocer404ApplicationJsonErrorDescriptionEnum {
-    NoRecordFound = "No record found"
-,    YourApiUrlOrPathIsIncorrect = "Your API url or path is incorrect"
+    NoRecordFound = "No record found",
+    YourApiUrlOrPathIsIncorrect = "Your API url or path is incorrect"
 }
 
 
 export class Cocer404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Cocer404ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Cocer404ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -126,10 +118,10 @@ export enum Cocer500ApplicationJsonErrorDescriptionEnum {
 
 
 export class Cocer500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Cocer500ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Cocer500ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -143,10 +135,10 @@ export enum Cocer502ApplicationJsonErrorDescriptionEnum {
 
 
 export class Cocer502ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Cocer502ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Cocer502ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -160,10 +152,10 @@ export enum Cocer503ApplicationJsonErrorDescriptionEnum {
 
 
 export class Cocer503ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Cocer503ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Cocer503ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -177,39 +169,48 @@ export enum Cocer504ApplicationJsonErrorDescriptionEnum {
 
 
 export class Cocer504ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Cocer504ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Cocer504ApplicationJsonErrorDescriptionEnum;
 }
 
 
+export class CocerRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: CocerRequestBody;
+
+  @SpeakeasyMetadata()
+  security: CocerSecurity;
+}
+
+
 export class CocerResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cocer400ApplicationJsonObject?: Cocer400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cocer401ApplicationJsonObject?: Cocer401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cocer404ApplicationJsonObject?: Cocer404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cocer500ApplicationJsonObject?: Cocer500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cocer502ApplicationJsonObject?: Cocer502ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cocer503ApplicationJsonObject?: Cocer503ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cocer504ApplicationJsonObject?: Cocer504ApplicationJson;
 }

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DataprocProjectsRegionsJobsSubmitAsOperationPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    region: str = field(default=None, metadata={'path_param': { 'field_name': 'region', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    region: str = field(metadata={'path_param': { 'field_name': 'region', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,21 +27,21 @@ class DataprocProjectsRegionsJobsSubmitAsOperationQueryParams:
 
 @dataclass
 class DataprocProjectsRegionsJobsSubmitAsOperationSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataprocProjectsRegionsJobsSubmitAsOperationRequest:
-    path_params: DataprocProjectsRegionsJobsSubmitAsOperationPathParams = field(default=None)
-    query_params: DataprocProjectsRegionsJobsSubmitAsOperationQueryParams = field(default=None)
-    request: Optional[shared.SubmitJobRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DataprocProjectsRegionsJobsSubmitAsOperationSecurity = field(default=None)
+    path_params: DataprocProjectsRegionsJobsSubmitAsOperationPathParams = field()
+    query_params: DataprocProjectsRegionsJobsSubmitAsOperationQueryParams = field()
+    security: DataprocProjectsRegionsJobsSubmitAsOperationSecurity = field()
+    request: Optional[shared.SubmitJobRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DataprocProjectsRegionsJobsSubmitAsOperationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

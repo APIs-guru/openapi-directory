@@ -10,11 +10,11 @@ class GetActionPackageAutocompleteQueryParams:
 
 @dataclass
 class GetActionPackageAutocompleteRequest:
-    query_params: GetActionPackageAutocompleteQueryParams = field(default=None)
+    query_params: GetActionPackageAutocompleteQueryParams = field()
     
 
 @dataclass
 class GetActionPackageAutocompleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

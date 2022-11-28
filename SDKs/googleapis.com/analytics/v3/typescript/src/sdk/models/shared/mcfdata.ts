@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class McfDataColumnHeaders extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnType" })
+  @SpeakeasyMetadata({ data: "json, name=columnType" })
   columnType?: string;
 
-  @Metadata({ data: "json, name=dataType" })
+  @SpeakeasyMetadata({ data: "json, name=dataType" })
   dataType?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
@@ -19,22 +19,22 @@ export class McfDataColumnHeaders extends SpeakeasyBase {
  * Information for the view (profile), for which the Analytics data was requested.
 **/
 export class McfDataProfileInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=internalWebPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=internalWebPropertyId" })
   internalWebPropertyId?: string;
 
-  @Metadata({ data: "json, name=profileId" })
+  @SpeakeasyMetadata({ data: "json, name=profileId" })
   profileId?: string;
 
-  @Metadata({ data: "json, name=profileName" })
+  @SpeakeasyMetadata({ data: "json, name=profileName" })
   profileName?: string;
 
-  @Metadata({ data: "json, name=tableId" })
+  @SpeakeasyMetadata({ data: "json, name=tableId" })
   tableId?: string;
 
-  @Metadata({ data: "json, name=webPropertyId" })
+  @SpeakeasyMetadata({ data: "json, name=webPropertyId" })
   webPropertyId?: string;
 }
 
@@ -44,46 +44,46 @@ export class McfDataProfileInfo extends SpeakeasyBase {
  * Analytics data request query parameters.
 **/
 export class McfDataQuery extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensions" })
+  @SpeakeasyMetadata({ data: "json, name=dimensions" })
   dimensions?: string;
 
-  @Metadata({ data: "json, name=end-date" })
+  @SpeakeasyMetadata({ data: "json, name=end-date" })
   endDate?: string;
 
-  @Metadata({ data: "json, name=filters" })
+  @SpeakeasyMetadata({ data: "json, name=filters" })
   filters?: string;
 
-  @Metadata({ data: "json, name=ids" })
+  @SpeakeasyMetadata({ data: "json, name=ids" })
   ids?: string;
 
-  @Metadata({ data: "json, name=max-results" })
+  @SpeakeasyMetadata({ data: "json, name=max-results" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=metrics" })
+  @SpeakeasyMetadata({ data: "json, name=metrics" })
   metrics?: string[];
 
-  @Metadata({ data: "json, name=samplingLevel" })
+  @SpeakeasyMetadata({ data: "json, name=samplingLevel" })
   samplingLevel?: string;
 
-  @Metadata({ data: "json, name=segment" })
+  @SpeakeasyMetadata({ data: "json, name=segment" })
   segment?: string;
 
-  @Metadata({ data: "json, name=sort" })
+  @SpeakeasyMetadata({ data: "json, name=sort" })
   sort?: string[];
 
-  @Metadata({ data: "json, name=start-date" })
+  @SpeakeasyMetadata({ data: "json, name=start-date" })
   startDate?: string;
 
-  @Metadata({ data: "json, name=start-index" })
+  @SpeakeasyMetadata({ data: "json, name=start-index" })
   startIndex?: number;
 }
 
 
 export class McfDataRowsConversionPathValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=interactionType" })
+  @SpeakeasyMetadata({ data: "json, name=interactionType" })
   interactionType?: string;
 
-  @Metadata({ data: "json, name=nodeValue" })
+  @SpeakeasyMetadata({ data: "json, name=nodeValue" })
   nodeValue?: string;
 }
 
@@ -93,10 +93,10 @@ export class McfDataRowsConversionPathValue extends SpeakeasyBase {
  * A union object representing a dimension or metric value. Only one of "primitiveValue" or "conversionPathValue" attribute will be populated.
 **/
 export class McfDataRows extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conversionPathValue", elemType: shared.McfDataRowsConversionPathValue })
+  @SpeakeasyMetadata({ data: "json, name=conversionPathValue", elemType: McfDataRowsConversionPathValue })
   conversionPathValue?: McfDataRowsConversionPathValue[];
 
-  @Metadata({ data: "json, name=primitiveValue" })
+  @SpeakeasyMetadata({ data: "json, name=primitiveValue" })
   primitiveValue?: string;
 }
 
@@ -106,48 +106,48 @@ export class McfDataRows extends SpeakeasyBase {
  * Multi-Channel Funnels data for a given view (profile).
 **/
 export class McfData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnHeaders", elemType: shared.McfDataColumnHeaders })
+  @SpeakeasyMetadata({ data: "json, name=columnHeaders", elemType: McfDataColumnHeaders })
   columnHeaders?: McfDataColumnHeaders[];
 
-  @Metadata({ data: "json, name=containsSampledData" })
+  @SpeakeasyMetadata({ data: "json, name=containsSampledData" })
   containsSampledData?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=itemsPerPage" })
+  @SpeakeasyMetadata({ data: "json, name=itemsPerPage" })
   itemsPerPage?: number;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextLink" })
+  @SpeakeasyMetadata({ data: "json, name=nextLink" })
   nextLink?: string;
 
-  @Metadata({ data: "json, name=previousLink" })
+  @SpeakeasyMetadata({ data: "json, name=previousLink" })
   previousLink?: string;
 
-  @Metadata({ data: "json, name=profileInfo" })
+  @SpeakeasyMetadata({ data: "json, name=profileInfo" })
   profileInfo?: McfDataProfileInfo;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: McfDataQuery;
 
-  @Metadata({ data: "json, name=rows", elemType: shared.McfDataRows, elemDepth: 2 })
+  @SpeakeasyMetadata({ data: "json, name=rows", elemType: McfDataRows, elemDepth: 2 })
   rows?: McfDataRows[][];
 
-  @Metadata({ data: "json, name=sampleSize" })
+  @SpeakeasyMetadata({ data: "json, name=sampleSize" })
   sampleSize?: string;
 
-  @Metadata({ data: "json, name=sampleSpace" })
+  @SpeakeasyMetadata({ data: "json, name=sampleSpace" })
   sampleSpace?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=totalResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalResults" })
   totalResults?: number;
 
-  @Metadata({ data: "json, name=totalsForAllResults" })
+  @SpeakeasyMetadata({ data: "json, name=totalsForAllResults" })
   totalsForAllResults?: Map<string, string>;
 }

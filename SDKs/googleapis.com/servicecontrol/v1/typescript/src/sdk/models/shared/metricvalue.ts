@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Distribution } from "./distribution";
 import { Money } from "./money";
+
 
 
 // MetricValue
@@ -8,30 +9,30 @@ import { Money } from "./money";
  * Represents a single metric value.
 **/
 export class MetricValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boolValue" })
+  @SpeakeasyMetadata({ data: "json, name=boolValue" })
   boolValue?: boolean;
 
-  @Metadata({ data: "json, name=distributionValue" })
+  @SpeakeasyMetadata({ data: "json, name=distributionValue" })
   distributionValue?: Distribution;
 
-  @Metadata({ data: "json, name=doubleValue" })
+  @SpeakeasyMetadata({ data: "json, name=doubleValue" })
   doubleValue?: number;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=int64Value" })
+  @SpeakeasyMetadata({ data: "json, name=int64Value" })
   int64Value?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=moneyValue" })
+  @SpeakeasyMetadata({ data: "json, name=moneyValue" })
   moneyValue?: Money;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=stringValue" })
+  @SpeakeasyMetadata({ data: "json, name=stringValue" })
   stringValue?: string;
 }

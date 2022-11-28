@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Notification } from "./notification";
+
 
 
 // Notifications
@@ -8,9 +8,9 @@ import { Notification } from "./notification";
  * A list of notification subscriptions.
 **/
 export class Notifications extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.Notification })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Notification })
   items?: Notification[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

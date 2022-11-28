@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorParameter } from "./errorparameter";
+
 
 
 // Error
@@ -8,30 +8,30 @@ import { ErrorParameter } from "./errorparameter";
  * A container that defines the elements of error and warning message.
 **/
 export class Error extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: string;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=errorId" })
+  @SpeakeasyMetadata({ data: "json, name=errorId" })
   errorId?: number;
 
-  @Metadata({ data: "json, name=inputRefIds" })
+  @SpeakeasyMetadata({ data: "json, name=inputRefIds" })
   inputRefIds?: string[];
 
-  @Metadata({ data: "json, name=longMessage" })
+  @SpeakeasyMetadata({ data: "json, name=longMessage" })
   longMessage?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=outputRefIds" })
+  @SpeakeasyMetadata({ data: "json, name=outputRefIds" })
   outputRefIds?: string[];
 
-  @Metadata({ data: "json, name=parameters", elemType: shared.ErrorParameter })
+  @SpeakeasyMetadata({ data: "json, name=parameters", elemType: ErrorParameter })
   parameters?: ErrorParameter[];
 
-  @Metadata({ data: "json, name=subdomain" })
+  @SpeakeasyMetadata({ data: "json, name=subdomain" })
   subdomain?: string;
 }

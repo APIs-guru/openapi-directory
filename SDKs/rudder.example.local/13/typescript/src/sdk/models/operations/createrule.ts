@@ -1,11 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
-
-export class CreateRuleRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: shared.RuleNew;
-}
 
 export enum CreateRule200ApplicationJsonActionEnum {
     CreateRule = "createRule"
@@ -13,35 +8,41 @@ export enum CreateRule200ApplicationJsonActionEnum {
 
 
 export class CreateRule200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rules", elemType: shared.Rule })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: shared.Rule })
   rules: shared.Rule[];
 }
 
 export enum CreateRule200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class CreateRule200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: CreateRule200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: CreateRule200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: CreateRule200ApplicationJsonResultEnum;
 }
 
 
+export class CreateRuleRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: shared.RuleNew;
+}
+
+
 export class CreateRuleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createRule200ApplicationJsonObject?: CreateRule200ApplicationJson;
 }

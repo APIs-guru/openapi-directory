@@ -40,11 +40,8 @@ type GetFloatingIpsIDActionsQueryParams struct {
 	Status *GetFloatingIpsIDActionsStatusParameterStatusEnum `queryParam:"style=form,explode=true,name=status"`
 }
 
-type GetFloatingIpsIDActionsRequest struct {
-	PathParams  GetFloatingIpsIDActionsPathParams
-	QueryParams GetFloatingIpsIDActionsQueryParams
-}
-
+// GetFloatingIpsIDActions200ApplicationJSONActionError
+// Error message for the Action if error occurred, otherwise null
 type GetFloatingIpsIDActions200ApplicationJSONActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -76,6 +73,11 @@ type GetFloatingIpsIDActions200ApplicationJSONAction struct {
 
 type GetFloatingIpsIDActions200ApplicationJSON struct {
 	Actions []GetFloatingIpsIDActions200ApplicationJSONAction `json:"actions"`
+}
+
+type GetFloatingIpsIDActionsRequest struct {
+	PathParams  GetFloatingIpsIDActionsPathParams
+	QueryParams GetFloatingIpsIDActionsQueryParams
 }
 
 type GetFloatingIpsIDActionsResponse struct {

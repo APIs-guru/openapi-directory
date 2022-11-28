@@ -1,5 +1,7 @@
 package shared
 
+// ResourceDataSyncS3Destination
+// Information about the target S3 bucket for the resource data sync.
 type ResourceDataSyncS3Destination struct {
 	AwskmsKeyArn           *string                                 `json:"AWSKMSKeyARN,omitempty"`
 	BucketName             string                                  `json:"BucketName"`

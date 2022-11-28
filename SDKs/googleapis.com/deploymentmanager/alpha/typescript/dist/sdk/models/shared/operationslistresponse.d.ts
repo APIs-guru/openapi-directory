@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Operation } from "./operation";
 /**
  * A response containing a partial list of operations and a page token used to build the next request if the request has been truncated.

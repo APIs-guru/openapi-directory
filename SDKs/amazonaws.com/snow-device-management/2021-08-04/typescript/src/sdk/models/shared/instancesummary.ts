@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Instance } from "./instance";
+
 
 
 // InstanceSummary
@@ -7,9 +8,9 @@ import { Instance } from "./instance";
  * The details about the instance.
 **/
 export class InstanceSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=instance" })
+  @SpeakeasyMetadata({ data: "json, name=instance" })
   instance?: Instance;
 
-  @Metadata({ data: "json, name=lastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" })
   lastUpdatedAt?: Date;
 }

@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostTeamsTeamIdSchedulesMultiplePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=teamId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=teamId" })
   teamId: string;
 }
 
 
 export class PostTeamsTeamIdSchedulesMultipleQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=overrideExisting" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=overrideExisting" })
   overrideExisting?: boolean;
 }
 
 
 export class PostTeamsTeamIdSchedulesMultipleRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json", elemType: shared.ScheduleInfo })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json", elemType: shared.ScheduleInfo })
   scheduleInfos?: shared.ScheduleInfo[];
 
-  @Metadata({ data: "request, media_type=application/json", elemType: shared.ScheduleInfo })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.ScheduleInfo })
   scheduleInfos1?: shared.ScheduleInfo[];
 
-  @Metadata({ data: "request, media_type=application/json-patch+json", elemType: shared.ScheduleInfo })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json", elemType: shared.ScheduleInfo })
   scheduleInfos2?: shared.ScheduleInfo[];
 
-  @Metadata({ data: "request, media_type=text/json", elemType: shared.ScheduleInfo })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json", elemType: shared.ScheduleInfo })
   scheduleInfos3?: shared.ScheduleInfo[];
 }
 
 
 export class PostTeamsTeamIdSchedulesMultipleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostTeamsTeamIdSchedulesMultiplePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostTeamsTeamIdSchedulesMultipleQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PostTeamsTeamIdSchedulesMultipleRequests;
 }
 
 
 export class PostTeamsTeamIdSchedulesMultipleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseContent?: shared.ErrorResponseContent;
 
-  @Metadata({ elemType: shared.ScheduleInfo })
+  @SpeakeasyMetadata({ elemType: shared.ScheduleInfo })
   scheduleInfos?: shared.ScheduleInfo[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

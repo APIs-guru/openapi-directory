@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PendingModifiedRelationalDatabaseValues
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a pending database value modification.
 **/
 export class PendingModifiedRelationalDatabaseValues extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backupRetentionEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=backupRetentionEnabled" })
   backupRetentionEnabled?: boolean;
 
-  @Metadata({ data: "json, name=engineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=engineVersion" })
   engineVersion?: string;
 
-  @Metadata({ data: "json, name=masterUserPassword" })
+  @SpeakeasyMetadata({ data: "json, name=masterUserPassword" })
   masterUserPassword?: string;
 }

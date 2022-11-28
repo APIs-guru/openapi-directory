@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum TerminateAppXAmzTargetEnum {
     AwsServerMigrationServiceV20161024TerminateApp = "AWSServerMigrationService_V2016_10_24.TerminateApp"

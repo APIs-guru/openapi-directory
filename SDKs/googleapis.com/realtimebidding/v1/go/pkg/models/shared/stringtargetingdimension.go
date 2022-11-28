@@ -8,6 +8,8 @@ const (
 	StringTargetingDimensionTargetingModeEnumExclusive                StringTargetingDimensionTargetingModeEnum = "EXCLUSIVE"
 )
 
+// StringTargetingDimension
+// Generic targeting with string values used in app, website and publisher targeting.
 type StringTargetingDimension struct {
 	TargetingMode *StringTargetingDimensionTargetingModeEnum `json:"targetingMode,omitempty"`
 	Values        []string                                   `json:"values,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// EndpointSetting
+// Endpoint settings.
 type EndpointSetting struct {
 	Applicability *string                       `json:"Applicability,omitempty"`
 	DefaultValue  *string                       `json:"DefaultValue,omitempty"`

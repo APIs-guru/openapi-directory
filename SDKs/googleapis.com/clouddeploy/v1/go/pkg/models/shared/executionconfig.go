@@ -9,6 +9,8 @@ const (
 	ExecutionConfigUsagesEnumVerify                               ExecutionConfigUsagesEnum = "VERIFY"
 )
 
+// ExecutionConfig
+// Configuration of the environment to use when calling Skaffold.
 type ExecutionConfig struct {
 	ArtifactStorage  *string                     `json:"artifactStorage,omitempty"`
 	DefaultPool      *DefaultPool                `json:"defaultPool,omitempty"`

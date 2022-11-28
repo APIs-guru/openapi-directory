@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NetworkConfig } from "./networkconfig";
 import { WorkerConfig } from "./workerconfig";
+
 
 
 // PrivatePoolV1Config
@@ -8,9 +9,9 @@ import { WorkerConfig } from "./workerconfig";
  * Configuration for a V1 `PrivatePool`.
 **/
 export class PrivatePoolV1Config extends SpeakeasyBase {
-  @Metadata({ data: "json, name=networkConfig" })
+  @SpeakeasyMetadata({ data: "json, name=networkConfig" })
   networkConfig?: NetworkConfig;
 
-  @Metadata({ data: "json, name=workerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=workerConfig" })
   workerConfig?: WorkerConfig;
 }

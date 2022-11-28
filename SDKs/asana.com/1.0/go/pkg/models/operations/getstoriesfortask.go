@@ -15,13 +15,13 @@ type GetStoriesForTaskQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetStoriesForTask200ApplicationJSON struct {
+	Data *interface{} `json:"data,omitempty"`
+}
+
 type GetStoriesForTaskRequest struct {
 	PathParams  GetStoriesForTaskPathParams
 	QueryParams GetStoriesForTaskQueryParams
-}
-
-type GetStoriesForTask200ApplicationJSON struct {
-	Data *interface{} `json:"data,omitempty"`
 }
 
 type GetStoriesForTaskResponse struct {

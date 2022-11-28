@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import dealershipdata
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DealershipDataPaginated:
-    dealers: List[dealershipdata.DealershipData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dealers' }})
-    max_pages: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxPages' }})
-    page: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
+    dealers: List[DealershipData] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('dealers') }})
+    max_pages: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxPages') }})
+    page: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('page') }})
     

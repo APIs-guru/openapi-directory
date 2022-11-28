@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetGetColoredPathwayFormatEnum;
 (function (GetGetColoredPathwayFormatEnum) {
     GetGetColoredPathwayFormatEnum["Json"] = "json";
@@ -38,27 +38,27 @@ var GetGetColoredPathwayQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=color" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=color" }),
         __metadata("design:type", Array)
     ], GetGetColoredPathwayQueryParams.prototype, "color", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fileType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fileType" }),
         __metadata("design:type", String)
     ], GetGetColoredPathwayQueryParams.prototype, "fileType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetGetColoredPathwayQueryParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=graphId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=graphId" }),
         __metadata("design:type", Array)
     ], GetGetColoredPathwayQueryParams.prototype, "graphId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pwId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pwId" }),
         __metadata("design:type", String)
     ], GetGetColoredPathwayQueryParams.prototype, "pwId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=revision" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=revision" }),
         __metadata("design:type", String)
     ], GetGetColoredPathwayQueryParams.prototype, "revision", void 0);
     return GetGetColoredPathwayQueryParams;
@@ -70,7 +70,7 @@ var GetGetColoredPathwayRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGetColoredPathwayQueryParams)
     ], GetGetColoredPathwayRequest.prototype, "queryParams", void 0);
     return GetGetColoredPathwayRequest;
@@ -82,11 +82,11 @@ var GetGetColoredPathwayResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetGetColoredPathwayResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetGetColoredPathwayResponse.prototype, "statusCode", void 0);
     return GetGetColoredPathwayResponse;

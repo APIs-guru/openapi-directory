@@ -1,5 +1,7 @@
 package shared
 
+// AdminRespondToAuthChallengeRequest
+// The request to respond to the authentication challenge, as an administrator.
 type AdminRespondToAuthChallengeRequest struct {
 	AnalyticsMetadata  *AnalyticsMetadataType `json:"AnalyticsMetadata,omitempty"`
 	ChallengeName      ChallengeNameTypeEnum  `json:"ChallengeName"`

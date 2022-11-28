@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetTransactionsQueryParams = /** @class */ (function (_super) {
     __extends(GetTransactionsQueryParams, _super);
@@ -30,31 +30,31 @@ var GetTransactionsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=accountHolderId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=accountHolderId" }),
         __metadata("design:type", String)
     ], GetTransactionsQueryParams.prototype, "accountHolderId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=balanceAccountId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=balanceAccountId" }),
         __metadata("design:type", String)
     ], GetTransactionsQueryParams.prototype, "balanceAccountId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=balancePlatform" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=balancePlatform" }),
         __metadata("design:type", String)
     ], GetTransactionsQueryParams.prototype, "balancePlatform", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=createdSince" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdSince" }),
         __metadata("design:type", Date)
     ], GetTransactionsQueryParams.prototype, "createdSince", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=createdUntil" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdUntil" }),
         __metadata("design:type", Date)
     ], GetTransactionsQueryParams.prototype, "createdUntil", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=cursor" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cursor" }),
         __metadata("design:type", String)
     ], GetTransactionsQueryParams.prototype, "cursor", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetTransactionsQueryParams.prototype, "limit", void 0);
     return GetTransactionsQueryParams;
@@ -66,7 +66,7 @@ var GetTransactionsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKeyAuth)
     ], GetTransactionsSecurity.prototype, "apiKeyAuth", void 0);
     return GetTransactionsSecurity;
@@ -78,11 +78,11 @@ var GetTransactionsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTransactionsQueryParams)
     ], GetTransactionsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetTransactionsSecurity)
     ], GetTransactionsRequest.prototype, "security", void 0);
     return GetTransactionsRequest;
@@ -94,19 +94,19 @@ var GetTransactionsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetTransactionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetTransactionsResponse.prototype, "restServiceError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetTransactionsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetTransactionsResponse.prototype, "transactionSearchResponse", void 0);
     return GetTransactionsResponse;

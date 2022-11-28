@@ -13,6 +13,8 @@ const (
 	BorderStyleEnumDouble           BorderStyleEnum = "DOUBLE"
 )
 
+// Border
+// A border along a cell.
 type Border struct {
 	Color      *Color           `json:"color,omitempty"`
 	ColorStyle *ColorStyle      `json:"colorStyle,omitempty"`

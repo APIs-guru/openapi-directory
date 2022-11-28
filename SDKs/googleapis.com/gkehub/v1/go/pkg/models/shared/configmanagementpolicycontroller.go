@@ -1,5 +1,7 @@
 package shared
 
+// ConfigManagementPolicyController
+// Configuration for Policy Controller
 type ConfigManagementPolicyController struct {
 	AuditIntervalSeconds     *string                                     `json:"auditIntervalSeconds,omitempty"`
 	Enabled                  *bool                                       `json:"enabled,omitempty"`

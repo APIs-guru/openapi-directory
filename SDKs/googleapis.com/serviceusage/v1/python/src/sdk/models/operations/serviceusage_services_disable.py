@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ServiceusageServicesDisablePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class ServiceusageServicesDisableQueryParams:
 
 @dataclass
 class ServiceusageServicesDisableSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ServiceusageServicesDisableSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class ServiceusageServicesDisableSecurity:
 
 @dataclass
 class ServiceusageServicesDisableRequest:
-    path_params: ServiceusageServicesDisablePathParams = field(default=None)
-    query_params: ServiceusageServicesDisableQueryParams = field(default=None)
+    path_params: ServiceusageServicesDisablePathParams = field()
+    query_params: ServiceusageServicesDisableQueryParams = field()
+    security: ServiceusageServicesDisableSecurity = field()
     request: Optional[shared.DisableServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ServiceusageServicesDisableSecurity = field(default=None)
     
 
 @dataclass
 class ServiceusageServicesDisableResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

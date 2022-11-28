@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class KeysMetadataRepresentationKeyMetadataRepresentation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=algorithm" })
+  @SpeakeasyMetadata({ data: "json, name=algorithm" })
   algorithm?: string;
 
-  @Metadata({ data: "json, name=certificate" })
+  @SpeakeasyMetadata({ data: "json, name=certificate" })
   certificate?: string;
 
-  @Metadata({ data: "json, name=kid" })
+  @SpeakeasyMetadata({ data: "json, name=kid" })
   kid?: string;
 
-  @Metadata({ data: "json, name=providerId" })
+  @SpeakeasyMetadata({ data: "json, name=providerId" })
   providerId?: string;
 
-  @Metadata({ data: "json, name=providerPriority" })
+  @SpeakeasyMetadata({ data: "json, name=providerPriority" })
   providerPriority?: number;
 
-  @Metadata({ data: "json, name=publicKey" })
+  @SpeakeasyMetadata({ data: "json, name=publicKey" })
   publicKey?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

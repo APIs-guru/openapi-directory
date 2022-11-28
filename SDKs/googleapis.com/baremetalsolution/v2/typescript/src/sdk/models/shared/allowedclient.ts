@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AllowedClientMountPermissionsEnum {
-    MountPermissionsUnspecified = "MOUNT_PERMISSIONS_UNSPECIFIED"
-,    Read = "READ"
-,    ReadWrite = "READ_WRITE"
+    MountPermissionsUnspecified = "MOUNT_PERMISSIONS_UNSPECIFIED",
+    Read = "READ",
+    ReadWrite = "READ_WRITE"
 }
 
 
@@ -12,27 +13,52 @@ export enum AllowedClientMountPermissionsEnum {
  * Represents an 'access point' for the share.
 **/
 export class AllowedClient extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowDev" })
+  @SpeakeasyMetadata({ data: "json, name=allowDev" })
   allowDev?: boolean;
 
-  @Metadata({ data: "json, name=allowSuid" })
+  @SpeakeasyMetadata({ data: "json, name=allowSuid" })
   allowSuid?: boolean;
 
-  @Metadata({ data: "json, name=allowedClientsCidr" })
+  @SpeakeasyMetadata({ data: "json, name=allowedClientsCidr" })
   allowedClientsCidr?: string;
 
-  @Metadata({ data: "json, name=mountPermissions" })
+  @SpeakeasyMetadata({ data: "json, name=mountPermissions" })
   mountPermissions?: AllowedClientMountPermissionsEnum;
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: string;
 
-  @Metadata({ data: "json, name=nfsPath" })
+  @SpeakeasyMetadata({ data: "json, name=nfsPath" })
   nfsPath?: string;
 
-  @Metadata({ data: "json, name=noRootSquash" })
+  @SpeakeasyMetadata({ data: "json, name=noRootSquash" })
   noRootSquash?: boolean;
 
-  @Metadata({ data: "json, name=shareIp" })
+  @SpeakeasyMetadata({ data: "json, name=shareIp" })
   shareIp?: string;
+}
+
+
+// AllowedClientInput
+/** 
+ * Represents an 'access point' for the share.
+**/
+export class AllowedClientInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=allowDev" })
+  allowDev?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=allowSuid" })
+  allowSuid?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=allowedClientsCidr" })
+  allowedClientsCidr?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=mountPermissions" })
+  mountPermissions?: AllowedClientMountPermissionsEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=network" })
+  network?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=noRootSquash" })
+  noRootSquash?: boolean;
 }

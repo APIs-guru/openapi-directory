@@ -22,7 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+// TfLiteModelInput
+/**
+ * Information that is specific to TfLite models.
+**/
+var TfLiteModelInput = /** @class */ (function (_super) {
+    __extends(TfLiteModelInput, _super);
+    function TfLiteModelInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=automlModel" }),
+        __metadata("design:type", String)
+    ], TfLiteModelInput.prototype, "automlModel", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=gcsTfliteUri" }),
+        __metadata("design:type", String)
+    ], TfLiteModelInput.prototype, "gcsTfliteUri", void 0);
+    return TfLiteModelInput;
+}(SpeakeasyBase));
+export { TfLiteModelInput };
 // TfLiteModel
 /**
  * Information that is specific to TfLite models.
@@ -33,15 +53,15 @@ var TfLiteModel = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=automlModel" }),
+        SpeakeasyMetadata({ data: "json, name=automlModel" }),
         __metadata("design:type", String)
     ], TfLiteModel.prototype, "automlModel", void 0);
     __decorate([
-        Metadata({ data: "json, name=gcsTfliteUri" }),
+        SpeakeasyMetadata({ data: "json, name=gcsTfliteUri" }),
         __metadata("design:type", String)
     ], TfLiteModel.prototype, "gcsTfliteUri", void 0);
     __decorate([
-        Metadata({ data: "json, name=sizeBytes" }),
+        SpeakeasyMetadata({ data: "json, name=sizeBytes" }),
         __metadata("design:type", String)
     ], TfLiteModel.prototype, "sizeBytes", void 0);
     return TfLiteModel;

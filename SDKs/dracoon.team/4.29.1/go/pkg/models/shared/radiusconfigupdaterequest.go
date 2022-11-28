@@ -1,5 +1,7 @@
 package shared
 
+// RadiusConfigUpdateRequest
+// Request model for updating a RADIUS configuration
 type RadiusConfigUpdateRequest struct {
 	FailoverServer *FailoverServer `json:"failoverServer,omitempty"`
 	IPAddress      *string         `json:"ipAddress,omitempty"`

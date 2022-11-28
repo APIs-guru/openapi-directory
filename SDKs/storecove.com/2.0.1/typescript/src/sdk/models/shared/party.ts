@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Address } from "./address";
 import { Contact } from "./contact";
+
 
 
 // Party
@@ -8,12 +9,12 @@ import { Contact } from "./contact";
  * A party that can receive or send invoices
 **/
 export class Party extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address: Address;
 
-  @Metadata({ data: "json, name=companyName" })
+  @SpeakeasyMetadata({ data: "json, name=companyName" })
   companyName: string;
 
-  @Metadata({ data: "json, name=contact" })
+  @SpeakeasyMetadata({ data: "json, name=contact" })
   contact?: Contact;
 }

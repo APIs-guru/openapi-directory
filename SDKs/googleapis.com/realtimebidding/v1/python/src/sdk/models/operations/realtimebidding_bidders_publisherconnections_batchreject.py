@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RealtimebiddingBiddersPublisherConnectionsBatchRejectPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class RealtimebiddingBiddersPublisherConnectionsBatchRejectQueryParams:
 
 @dataclass
 class RealtimebiddingBiddersPublisherConnectionsBatchRejectSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RealtimebiddingBiddersPublisherConnectionsBatchRejectRequest:
-    path_params: RealtimebiddingBiddersPublisherConnectionsBatchRejectPathParams = field(default=None)
-    query_params: RealtimebiddingBiddersPublisherConnectionsBatchRejectQueryParams = field(default=None)
+    path_params: RealtimebiddingBiddersPublisherConnectionsBatchRejectPathParams = field()
+    query_params: RealtimebiddingBiddersPublisherConnectionsBatchRejectQueryParams = field()
+    security: RealtimebiddingBiddersPublisherConnectionsBatchRejectSecurity = field()
     request: Optional[shared.BatchRejectPublisherConnectionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: RealtimebiddingBiddersPublisherConnectionsBatchRejectSecurity = field(default=None)
     
 
 @dataclass
 class RealtimebiddingBiddersPublisherConnectionsBatchRejectResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_reject_publisher_connections_response: Optional[shared.BatchRejectPublisherConnectionsResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

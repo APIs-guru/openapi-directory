@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Money } from "./money";
+
 
 
 // CreditEstimate
@@ -7,12 +8,12 @@ import { Money } from "./money";
  * An estimated credit applied to the costs on a SKU.
 **/
 export class CreditEstimate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creditAmount" })
+  @SpeakeasyMetadata({ data: "json, name=creditAmount" })
   creditAmount?: Money;
 
-  @Metadata({ data: "json, name=creditDescription" })
+  @SpeakeasyMetadata({ data: "json, name=creditDescription" })
   creditDescription?: string;
 
-  @Metadata({ data: "json, name=creditType" })
+  @SpeakeasyMetadata({ data: "json, name=creditType" })
   creditType?: string;
 }

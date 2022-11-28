@@ -1,76 +1,77 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateApiQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=workspace" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=workspace" })
   workspace?: string;
 }
 
 
 export class CreateApiRequestBodyApi extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: string;
 }
 
 
 export class CreateApiRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=api" })
+  @SpeakeasyMetadata({ data: "json, name=api" })
   api?: CreateApiRequestBodyApi;
 }
 
 
-export class CreateApiRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: CreateApiQueryParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: CreateApiRequestBody;
-}
-
-
 export class CreateApi200ApplicationJsonApi extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=createdBy" })
+  @SpeakeasyMetadata({ data: "json, name=createdBy" })
   createdBy?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: string;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: string;
 }
 
 
 export class CreateApi200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=api" })
+  @SpeakeasyMetadata({ data: "json, name=api" })
   api?: CreateApi200ApplicationJsonApi;
 }
 
 
+export class CreateApiRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: CreateApiQueryParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: CreateApiRequestBody;
+}
+
+
 export class CreateApiResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createApi200ApplicationJsonObject?: CreateApi200ApplicationJson;
 }

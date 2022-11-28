@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class HealthCheckHealthCheck extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Info" })
+  @SpeakeasyMetadata({ data: "json, name=Info" })
   info?: string;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: string;
 }
 
 
 export class HealthCheck extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HealthCheck" })
+  @SpeakeasyMetadata({ data: "json, name=HealthCheck" })
   healthCheck?: HealthCheckHealthCheck;
 }

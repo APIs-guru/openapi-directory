@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetGetColoredPathwayFormatEnum {
-    Json = "json"
-,    Xml = "xml"
-,    Html = "html"
-,    Dump = "dump"
-,    Jpg = "jpg"
-,    Pdf = "pdf"
+    Json = "json",
+    Xml = "xml",
+    Html = "html",
+    Dump = "dump",
+    Jpg = "jpg",
+    Pdf = "pdf"
 }
 
 
 export class GetGetColoredPathwayQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=color" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=color" })
   color: any[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fileType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fileType" })
   fileType: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format?: GetGetColoredPathwayFormatEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=graphId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=graphId" })
   graphId: any[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pwId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pwId" })
   pwId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=revision" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=revision" })
   revision: string;
 }
 
 
 export class GetGetColoredPathwayRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetGetColoredPathwayQueryParams;
 }
 
 
 export class GetGetColoredPathwayResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

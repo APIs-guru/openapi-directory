@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AppsListAccountsForPlanPathParams:
-    plan_id: int = field(default=None, metadata={'path_param': { 'field_name': 'plan_id', 'style': 'simple', 'explode': False }})
+    plan_id: int = field(metadata={'path_param': { 'field_name': 'plan_id', 'style': 'simple', 'explode': False }})
     
 class AppsListAccountsForPlanDirectionEnum(str, Enum):
     ASC = "asc"
@@ -22,15 +23,15 @@ class AppsListAccountsForPlanQueryParams:
 
 @dataclass
 class AppsListAccountsForPlanRequest:
-    path_params: AppsListAccountsForPlanPathParams = field(default=None)
-    query_params: AppsListAccountsForPlanQueryParams = field(default=None)
+    path_params: AppsListAccountsForPlanPathParams = field()
+    query_params: AppsListAccountsForPlanQueryParams = field()
     
 
 @dataclass
 class AppsListAccountsForPlanResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     marketplace_purchases: Optional[List[shared.MarketplacePurchase]] = field(default=None)
     validation_error: Optional[shared.ValidationError] = field(default=None)

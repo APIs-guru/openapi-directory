@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteSuggesterActionEnum(str, Enum):
     DELETE_SUGGESTER = "DeleteSuggester"
@@ -10,10 +14,10 @@ class GetDeleteSuggesterVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteSuggesterQueryParams:
-    action: GetDeleteSuggesterActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
-    suggester_name: str = field(default=None, metadata={'query_param': { 'field_name': 'SuggesterName', 'style': 'form', 'explode': True }})
-    version: GetDeleteSuggesterVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteSuggesterActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    suggester_name: str = field(metadata={'query_param': { 'field_name': 'SuggesterName', 'style': 'form', 'explode': True }})
+    version: GetDeleteSuggesterVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteSuggesterHeaders:
 
 @dataclass
 class GetDeleteSuggesterRequest:
-    query_params: GetDeleteSuggesterQueryParams = field(default=None)
-    headers: GetDeleteSuggesterHeaders = field(default=None)
+    headers: GetDeleteSuggesterHeaders = field()
+    query_params: GetDeleteSuggesterQueryParams = field()
     
 
 @dataclass
 class GetDeleteSuggesterResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

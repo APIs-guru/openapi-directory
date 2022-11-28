@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A host device to expose to the container.
 **/
 export class AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContainerPath" })
+  @SpeakeasyMetadata({ data: "json, name=ContainerPath" })
   containerPath?: string;
 
-  @Metadata({ data: "json, name=HostPath" })
+  @SpeakeasyMetadata({ data: "json, name=HostPath" })
   hostPath?: string;
 
-  @Metadata({ data: "json, name=Permissions" })
+  @SpeakeasyMetadata({ data: "json, name=Permissions" })
   permissions?: string[];
 }

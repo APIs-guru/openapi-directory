@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class KeyObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=expiry" })
+  @SpeakeasyMetadata({ data: "json, name=expiry" })
   expiry: Date;
 
-  @Metadata({ data: "json, name=keyValue" })
+  @SpeakeasyMetadata({ data: "json, name=keyValue" })
   keyValue: string;
 
-  @Metadata({ data: "json, name=parameters" })
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
   parameters: string;
 }

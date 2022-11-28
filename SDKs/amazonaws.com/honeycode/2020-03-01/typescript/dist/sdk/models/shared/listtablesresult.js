@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Table } from "./table";
 var ListTablesResult = /** @class */ (function (_super) {
     __extends(ListTablesResult, _super);
     function ListTablesResult() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], ListTablesResult.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=tables", elemType: shared.Table }),
+        SpeakeasyMetadata({ data: "json, name=tables", elemType: Table }),
         __metadata("design:type", Array)
     ], ListTablesResult.prototype, "tables", void 0);
     __decorate([
-        Metadata({ data: "json, name=workbookCursor" }),
+        SpeakeasyMetadata({ data: "json, name=workbookCursor" }),
         __metadata("design:type", Number)
     ], ListTablesResult.prototype, "workbookCursor", void 0);
     return ListTablesResult;

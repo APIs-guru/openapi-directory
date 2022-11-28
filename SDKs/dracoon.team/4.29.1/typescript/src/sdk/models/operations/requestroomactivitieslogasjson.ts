@@ -1,71 +1,72 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RequestRoomActivitiesLogAsJsonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=room_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=room_id" })
   roomId: number;
 }
 
 
 export class RequestRoomActivitiesLogAsJsonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date_end" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_end" })
   dateEnd?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date_start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_start" })
   dateStart?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
   status?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=user_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=user_id" })
   userId?: number;
 }
 
 
 export class RequestRoomActivitiesLogAsJsonHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Auth-Token" })
   xSdsAuthToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Sds-Date-Format" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Sds-Date-Format" })
   xSdsDateFormat?: any;
 }
 
 
 export class RequestRoomActivitiesLogAsJsonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RequestRoomActivitiesLogAsJsonPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RequestRoomActivitiesLogAsJsonQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: RequestRoomActivitiesLogAsJsonHeaders;
 }
 
 
 export class RequestRoomActivitiesLogAsJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   logEventList?: shared.LogEventList;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

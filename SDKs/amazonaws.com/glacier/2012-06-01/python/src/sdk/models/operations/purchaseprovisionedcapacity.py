@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class PurchaseProvisionedCapacityPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,17 +23,17 @@ class PurchaseProvisionedCapacityHeaders:
 
 @dataclass
 class PurchaseProvisionedCapacityRequest:
-    path_params: PurchaseProvisionedCapacityPathParams = field(default=None)
-    headers: PurchaseProvisionedCapacityHeaders = field(default=None)
+    headers: PurchaseProvisionedCapacityHeaders = field()
+    path_params: PurchaseProvisionedCapacityPathParams = field()
     
 
 @dataclass
 class PurchaseProvisionedCapacityResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     missing_parameter_value_exception: Optional[Any] = field(default=None)
     purchase_provisioned_capacity_output: Optional[dict[str, Any]] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

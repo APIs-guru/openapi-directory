@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AthenaResultCompressionTypeEnum } from "./athenaresultcompressiontypeenum";
 import { AthenaResultFormatEnum } from "./athenaresultformatenum";
+
 
 
 // AthenaDatasetDefinition
@@ -8,27 +9,27 @@ import { AthenaResultFormatEnum } from "./athenaresultformatenum";
  * Configuration for Athena Dataset Definition input.
 **/
 export class AthenaDatasetDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Catalog" })
+  @SpeakeasyMetadata({ data: "json, name=Catalog" })
   catalog: string;
 
-  @Metadata({ data: "json, name=Database" })
+  @SpeakeasyMetadata({ data: "json, name=Database" })
   database: string;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=OutputCompression" })
+  @SpeakeasyMetadata({ data: "json, name=OutputCompression" })
   outputCompression?: AthenaResultCompressionTypeEnum;
 
-  @Metadata({ data: "json, name=OutputFormat" })
+  @SpeakeasyMetadata({ data: "json, name=OutputFormat" })
   outputFormat: AthenaResultFormatEnum;
 
-  @Metadata({ data: "json, name=OutputS3Uri" })
+  @SpeakeasyMetadata({ data: "json, name=OutputS3Uri" })
   outputS3Uri: string;
 
-  @Metadata({ data: "json, name=QueryString" })
+  @SpeakeasyMetadata({ data: "json, name=QueryString" })
   queryString: string;
 
-  @Metadata({ data: "json, name=WorkGroup" })
+  @SpeakeasyMetadata({ data: "json, name=WorkGroup" })
   workGroup?: string;
 }

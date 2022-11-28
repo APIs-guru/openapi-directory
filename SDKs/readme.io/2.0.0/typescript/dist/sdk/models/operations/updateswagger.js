@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateSwaggerPathParams = /** @class */ (function (_super) {
     __extends(UpdateSwaggerPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateSwaggerPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], UpdateSwaggerPathParams.prototype, "id", void 0);
     return UpdateSwaggerPathParams;
@@ -42,11 +42,11 @@ var UpdateSwaggerRequestBodySwagger = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, content=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, content=true" }),
         __metadata("design:type", Uint8Array)
     ], UpdateSwaggerRequestBodySwagger.prototype, "content", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=swagger" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=swagger" }),
         __metadata("design:type", String)
     ], UpdateSwaggerRequestBodySwagger.prototype, "swagger", void 0);
     return UpdateSwaggerRequestBodySwagger;
@@ -58,7 +58,7 @@ var UpdateSwaggerRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, file=true" }),
+        SpeakeasyMetadata({ data: "multipart_form, file=true" }),
         __metadata("design:type", UpdateSwaggerRequestBodySwagger)
     ], UpdateSwaggerRequestBody.prototype, "swagger", void 0);
     return UpdateSwaggerRequestBody;
@@ -70,7 +70,7 @@ var UpdateSwaggerSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], UpdateSwaggerSecurity.prototype, "apiKey", void 0);
     return UpdateSwaggerSecurity;
@@ -82,15 +82,15 @@ var UpdateSwaggerRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateSwaggerPathParams)
     ], UpdateSwaggerRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", UpdateSwaggerRequestBody)
     ], UpdateSwaggerRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateSwaggerSecurity)
     ], UpdateSwaggerRequest.prototype, "security", void 0);
     return UpdateSwaggerRequest;
@@ -102,11 +102,11 @@ var UpdateSwaggerResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateSwaggerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateSwaggerResponse.prototype, "statusCode", void 0);
     return UpdateSwaggerResponse;

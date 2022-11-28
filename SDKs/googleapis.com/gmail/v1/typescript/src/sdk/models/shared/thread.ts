@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Message } from "./message";
+
 
 
 // Thread
@@ -8,15 +8,15 @@ import { Message } from "./message";
  * A collection of messages representing a conversation.
 **/
 export class Thread extends SpeakeasyBase {
-  @Metadata({ data: "json, name=historyId" })
+  @SpeakeasyMetadata({ data: "json, name=historyId" })
   historyId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=messages", elemType: shared.Message })
+  @SpeakeasyMetadata({ data: "json, name=messages", elemType: Message })
   messages?: Message[];
 
-  @Metadata({ data: "json, name=snippet" })
+  @SpeakeasyMetadata({ data: "json, name=snippet" })
   snippet?: string;
 }

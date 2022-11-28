@@ -1,17 +1,22 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import attemptstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AttemptRead:
-    bytes_synced: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bytesSynced' }})
-    created_at: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createdAt' }})
-    ended_at: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endedAt' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    records_synced: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recordsSynced' }})
-    status: attemptstatus_enum.AttemptStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    updated_at: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updatedAt' }})
+    created_at: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('createdAt') }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    status: AttemptStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    updated_at: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('updatedAt') }})
+    bytes_synced: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('bytesSynced') }})
+    ended_at: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('endedAt') }})
+    records_synced: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('recordsSynced') }})
     

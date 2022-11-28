@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CemstRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(CemstRequestBodyCertificateParameters, _super);
@@ -30,19 +30,19 @@ var CemstRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FullName" }),
+        SpeakeasyMetadata({ data: "json, name=FullName" }),
         __metadata("design:type", String)
     ], CemstRequestBodyCertificateParameters.prototype, "fullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=UID" }),
+        SpeakeasyMetadata({ data: "json, name=UID" }),
         __metadata("design:type", String)
     ], CemstRequestBodyCertificateParameters.prototype, "uid", void 0);
     __decorate([
-        Metadata({ data: "json, name=rollno" }),
+        SpeakeasyMetadata({ data: "json, name=rollno" }),
         __metadata("design:type", String)
     ], CemstRequestBodyCertificateParameters.prototype, "rollno", void 0);
     __decorate([
-        Metadata({ data: "json, name=year" }),
+        SpeakeasyMetadata({ data: "json, name=year" }),
         __metadata("design:type", String)
     ], CemstRequestBodyCertificateParameters.prototype, "year", void 0);
     return CemstRequestBodyCertificateParameters;
@@ -58,19 +58,19 @@ var CemstRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", CemstRequestBodyCertificateParameters)
     ], CemstRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], CemstRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], CemstRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], CemstRequestBody.prototype, "txnId", void 0);
     return CemstRequestBody;
@@ -82,32 +82,16 @@ var CemstSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], CemstSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], CemstSecurity.prototype, "clientId", void 0);
     return CemstSecurity;
 }(SpeakeasyBase));
 export { CemstSecurity };
-var CemstRequest = /** @class */ (function (_super) {
-    __extends(CemstRequest, _super);
-    function CemstRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", CemstRequestBody)
-    ], CemstRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", CemstSecurity)
-    ], CemstRequest.prototype, "security", void 0);
-    return CemstRequest;
-}(SpeakeasyBase));
-export { CemstRequest };
 export var Cemst400ApplicationJsonErrorEnum;
 (function (Cemst400ApplicationJsonErrorEnum) {
     Cemst400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -130,11 +114,11 @@ var Cemst400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cemst400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cemst400ApplicationJson.prototype, "errorDescription", void 0);
     return Cemst400ApplicationJson;
@@ -156,11 +140,11 @@ var Cemst401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cemst401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cemst401ApplicationJson.prototype, "errorDescription", void 0);
     return Cemst401ApplicationJson;
@@ -182,11 +166,11 @@ var Cemst404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cemst404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cemst404ApplicationJson.prototype, "errorDescription", void 0);
     return Cemst404ApplicationJson;
@@ -206,11 +190,11 @@ var Cemst500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cemst500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cemst500ApplicationJson.prototype, "errorDescription", void 0);
     return Cemst500ApplicationJson;
@@ -230,11 +214,11 @@ var Cemst502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cemst502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cemst502ApplicationJson.prototype, "errorDescription", void 0);
     return Cemst502ApplicationJson;
@@ -254,11 +238,11 @@ var Cemst503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cemst503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cemst503ApplicationJson.prototype, "errorDescription", void 0);
     return Cemst503ApplicationJson;
@@ -278,55 +262,71 @@ var Cemst504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Cemst504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Cemst504ApplicationJson.prototype, "errorDescription", void 0);
     return Cemst504ApplicationJson;
 }(SpeakeasyBase));
 export { Cemst504ApplicationJson };
+var CemstRequest = /** @class */ (function (_super) {
+    __extends(CemstRequest, _super);
+    function CemstRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", CemstRequestBody)
+    ], CemstRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", CemstSecurity)
+    ], CemstRequest.prototype, "security", void 0);
+    return CemstRequest;
+}(SpeakeasyBase));
+export { CemstRequest };
 var CemstResponse = /** @class */ (function (_super) {
     __extends(CemstResponse, _super);
     function CemstResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CemstResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CemstResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cemst400ApplicationJson)
     ], CemstResponse.prototype, "cemst400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cemst401ApplicationJson)
     ], CemstResponse.prototype, "cemst401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cemst404ApplicationJson)
     ], CemstResponse.prototype, "cemst404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cemst500ApplicationJson)
     ], CemstResponse.prototype, "cemst500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cemst502ApplicationJson)
     ], CemstResponse.prototype, "cemst502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cemst503ApplicationJson)
     ], CemstResponse.prototype, "cemst503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Cemst504ApplicationJson)
     ], CemstResponse.prototype, "cemst504ApplicationJsonObject", void 0);
     return CemstResponse;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SandboxUser } from "./sandboxuser";
+
 
 
 // Sandbox
@@ -8,9 +8,9 @@ import { SandboxUser } from "./sandboxuser";
  * Sandbox model
 **/
 export class Sandbox extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sandboxId" })
+  @SpeakeasyMetadata({ data: "json, name=sandboxId" })
   sandboxId: string;
 
-  @Metadata({ data: "json, name=users", elemType: shared.SandboxUser })
+  @SpeakeasyMetadata({ data: "json, name=users", elemType: SandboxUser })
   users?: SandboxUser[];
 }

@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UsersGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tenantID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tenantID" })
   tenantId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=upnOrObjectId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=upnOrObjectId" })
   upnOrObjectId: string;
 }
 
 
 export class UsersGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api-version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" })
   apiVersion: string;
 }
 
 
 export class UsersGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UsersGetPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UsersGetQueryParams;
 }
 
 
 export class UsersGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   graphError?: shared.GraphError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   user?: Map<string, Map<string, any>>;
 }

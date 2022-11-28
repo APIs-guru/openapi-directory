@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum BatchRequestActionMethodEnum {
-    Get = "get"
-,    Post = "post"
-,    Put = "put"
-,    Delete = "delete"
-,    Patch = "patch"
-,    Head = "head"
+    Get = "get",
+    Post = "post",
+    Put = "put",
+    Delete = "delete",
+    Patch = "patch",
+    Head = "head"
 }
 
 
@@ -15,13 +16,13 @@ export enum BatchRequestActionMethodEnum {
  * Pagination (`limit` and `offset`) and output options (`fields` or `expand`) for the action. “Pretty” JSON output is not an available option on individual actions; if you want pretty output, specify that option on the parent request.
 **/
 export class BatchRequestActionOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string[];
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset?: number;
 }
 
@@ -31,15 +32,15 @@ export class BatchRequestActionOptions extends SpeakeasyBase {
  * An action object for use in a batch request.
 **/
 export class BatchRequestAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method: BatchRequestActionMethodEnum;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: BatchRequestActionOptions;
 
-  @Metadata({ data: "json, name=relative_path" })
+  @SpeakeasyMetadata({ data: "json, name=relative_path" })
   relativePath: string;
 }

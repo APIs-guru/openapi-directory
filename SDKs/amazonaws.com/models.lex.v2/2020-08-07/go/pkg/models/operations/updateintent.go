@@ -21,25 +21,35 @@ type UpdateIntentHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateIntentRequestBodyDialogCodeHook
+// Settings that determine the Lambda function that Amazon Lex uses for processing user responses.
 type UpdateIntentRequestBodyDialogCodeHook struct {
 	Enabled *bool `json:"enabled,omitempty"`
 }
 
+// UpdateIntentRequestBodyFulfillmentCodeHook
+// Determines if a Lambda function should be invoked for a specific intent.
 type UpdateIntentRequestBodyFulfillmentCodeHook struct {
 	Enabled *bool `json:"enabled,omitempty"`
 }
 
+// UpdateIntentRequestBodyIntentClosingSetting
+// Provides a statement the Amazon Lex conveys to the user when the intent is successfully fulfilled.
 type UpdateIntentRequestBodyIntentClosingSetting struct {
 	Active          *bool                         `json:"active,omitempty"`
 	ClosingResponse *shared.ResponseSpecification `json:"closingResponse,omitempty"`
 }
 
+// UpdateIntentRequestBodyIntentConfirmationSetting
+// Provides a prompt for making sure that the user is ready for the intent to be fulfilled.
 type UpdateIntentRequestBodyIntentConfirmationSetting struct {
 	Active              *bool                         `json:"active,omitempty"`
 	DeclinationResponse *shared.ResponseSpecification `json:"declinationResponse,omitempty"`
 	PromptSpecification *shared.PromptSpecification   `json:"promptSpecification,omitempty"`
 }
 
+// UpdateIntentRequestBodyKendraConfiguration
+// Provides configuration information for the AMAZON.KendraSearchIntent intent. When you use this intent, Amazon Lex searches the specified Amazon Kendra index and returns documents from the index that match the user's utterance.
 type UpdateIntentRequestBodyKendraConfiguration struct {
 	KendraIndex              *string `json:"kendraIndex,omitempty"`
 	QueryFilterString        *string `json:"queryFilterString,omitempty"`

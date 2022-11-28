@@ -20,6 +20,8 @@ const (
 	MobileUsabilityIssueSeverityEnumError               MobileUsabilityIssueSeverityEnum = "ERROR"
 )
 
+// MobileUsabilityIssue
+// Mobile-usability issue.
 type MobileUsabilityIssue struct {
 	IssueType *MobileUsabilityIssueIssueTypeEnum `json:"issueType,omitempty"`
 	Message   *string                            `json:"message,omitempty"`

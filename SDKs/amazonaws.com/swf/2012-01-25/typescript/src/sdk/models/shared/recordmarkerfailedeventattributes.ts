@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RecordMarkerFailedCauseEnum } from "./recordmarkerfailedcauseenum";
+
 
 
 // RecordMarkerFailedEventAttributes
@@ -7,12 +8,12 @@ import { RecordMarkerFailedCauseEnum } from "./recordmarkerfailedcauseenum";
  * Provides the details of the <code>RecordMarkerFailed</code> event.
 **/
 export class RecordMarkerFailedEventAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cause" })
+  @SpeakeasyMetadata({ data: "json, name=cause" })
   cause: RecordMarkerFailedCauseEnum;
 
-  @Metadata({ data: "json, name=decisionTaskCompletedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=decisionTaskCompletedEventId" })
   decisionTaskCompletedEventId: number;
 
-  @Metadata({ data: "json, name=markerName" })
+  @SpeakeasyMetadata({ data: "json, name=markerName" })
   markerName: string;
 }

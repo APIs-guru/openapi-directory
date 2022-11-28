@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribeEventsActionEnum(str, Enum):
     DESCRIBE_EVENTS = "DescribeEvents"
@@ -19,7 +20,8 @@ class GetDescribeEventsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeEventsQueryParams:
-    action: GetDescribeEventsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeEventsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeEventsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     duration: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'Duration', 'style': 'form', 'explode': True }})
     end_time: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'EndTime', 'style': 'form', 'explode': True }})
     event_categories: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'EventCategories', 'style': 'form', 'explode': True }})
@@ -28,7 +30,6 @@ class GetDescribeEventsQueryParams:
     source_identifier: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'SourceIdentifier', 'style': 'form', 'explode': True }})
     source_type: Optional[GetDescribeEventsSourceTypeEnum] = field(default=None, metadata={'query_param': { 'field_name': 'SourceType', 'style': 'form', 'explode': True }})
     start_time: Optional[datetime] = field(default=None, metadata={'query_param': { 'field_name': 'StartTime', 'style': 'form', 'explode': True }})
-    version: GetDescribeEventsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -44,13 +45,13 @@ class GetDescribeEventsHeaders:
 
 @dataclass
 class GetDescribeEventsRequest:
-    query_params: GetDescribeEventsQueryParams = field(default=None)
-    headers: GetDescribeEventsHeaders = field(default=None)
+    headers: GetDescribeEventsHeaders = field()
+    query_params: GetDescribeEventsQueryParams = field()
     
 
 @dataclass
 class GetDescribeEventsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

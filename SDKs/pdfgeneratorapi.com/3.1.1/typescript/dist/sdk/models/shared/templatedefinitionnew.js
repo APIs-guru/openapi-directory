@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Component } from "./component";
 export var TemplateDefinitionNewLayoutFormatEnum;
 (function (TemplateDefinitionNewLayoutFormatEnum) {
     TemplateDefinitionNewLayoutFormatEnum["A4"] = "A4";
@@ -40,19 +40,19 @@ var TemplateDefinitionNewLayoutMargins = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bottom" }),
+        SpeakeasyMetadata({ data: "json, name=bottom" }),
         __metadata("design:type", Number)
     ], TemplateDefinitionNewLayoutMargins.prototype, "bottom", void 0);
     __decorate([
-        Metadata({ data: "json, name=left" }),
+        SpeakeasyMetadata({ data: "json, name=left" }),
         __metadata("design:type", Number)
     ], TemplateDefinitionNewLayoutMargins.prototype, "left", void 0);
     __decorate([
-        Metadata({ data: "json, name=right" }),
+        SpeakeasyMetadata({ data: "json, name=right" }),
         __metadata("design:type", Number)
     ], TemplateDefinitionNewLayoutMargins.prototype, "right", void 0);
     __decorate([
-        Metadata({ data: "json, name=top" }),
+        SpeakeasyMetadata({ data: "json, name=top" }),
         __metadata("design:type", Number)
     ], TemplateDefinitionNewLayoutMargins.prototype, "top", void 0);
     return TemplateDefinitionNewLayoutMargins;
@@ -79,15 +79,15 @@ var TemplateDefinitionNewLayoutRepeatLayout = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], TemplateDefinitionNewLayoutRepeatLayout.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=height" }),
+        SpeakeasyMetadata({ data: "json, name=height" }),
         __metadata("design:type", Number)
     ], TemplateDefinitionNewLayoutRepeatLayout.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "json, name=width" }),
+        SpeakeasyMetadata({ data: "json, name=width" }),
         __metadata("design:type", Number)
     ], TemplateDefinitionNewLayoutRepeatLayout.prototype, "width", void 0);
     return TemplateDefinitionNewLayoutRepeatLayout;
@@ -108,39 +108,39 @@ var TemplateDefinitionNewLayout = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=emptyLabels" }),
+        SpeakeasyMetadata({ data: "json, name=emptyLabels" }),
         __metadata("design:type", Number)
     ], TemplateDefinitionNewLayout.prototype, "emptyLabels", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], TemplateDefinitionNewLayout.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=height" }),
+        SpeakeasyMetadata({ data: "json, name=height" }),
         __metadata("design:type", Number)
     ], TemplateDefinitionNewLayout.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "json, name=margins" }),
+        SpeakeasyMetadata({ data: "json, name=margins" }),
         __metadata("design:type", TemplateDefinitionNewLayoutMargins)
     ], TemplateDefinitionNewLayout.prototype, "margins", void 0);
     __decorate([
-        Metadata({ data: "json, name=orientation" }),
+        SpeakeasyMetadata({ data: "json, name=orientation" }),
         __metadata("design:type", String)
     ], TemplateDefinitionNewLayout.prototype, "orientation", void 0);
     __decorate([
-        Metadata({ data: "json, name=repeatLayout" }),
+        SpeakeasyMetadata({ data: "json, name=repeatLayout" }),
         __metadata("design:type", TemplateDefinitionNewLayoutRepeatLayout)
     ], TemplateDefinitionNewLayout.prototype, "repeatLayout", void 0);
     __decorate([
-        Metadata({ data: "json, name=rotaion" }),
+        SpeakeasyMetadata({ data: "json, name=rotaion" }),
         __metadata("design:type", Number)
     ], TemplateDefinitionNewLayout.prototype, "rotaion", void 0);
     __decorate([
-        Metadata({ data: "json, name=unit" }),
+        SpeakeasyMetadata({ data: "json, name=unit" }),
         __metadata("design:type", String)
     ], TemplateDefinitionNewLayout.prototype, "unit", void 0);
     __decorate([
-        Metadata({ data: "json, name=width" }),
+        SpeakeasyMetadata({ data: "json, name=width" }),
         __metadata("design:type", Number)
     ], TemplateDefinitionNewLayout.prototype, "width", void 0);
     return TemplateDefinitionNewLayout;
@@ -152,11 +152,11 @@ var TemplateDefinitionNewPagesMargins = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bottom" }),
+        SpeakeasyMetadata({ data: "json, name=bottom" }),
         __metadata("design:type", Number)
     ], TemplateDefinitionNewPagesMargins.prototype, "bottom", void 0);
     __decorate([
-        Metadata({ data: "json, name=right" }),
+        SpeakeasyMetadata({ data: "json, name=right" }),
         __metadata("design:type", Number)
     ], TemplateDefinitionNewPagesMargins.prototype, "right", void 0);
     return TemplateDefinitionNewPagesMargins;
@@ -168,19 +168,19 @@ var TemplateDefinitionNewPages = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=components", elemType: shared.Component }),
+        SpeakeasyMetadata({ data: "json, name=components", elemType: Component }),
         __metadata("design:type", Array)
     ], TemplateDefinitionNewPages.prototype, "components", void 0);
     __decorate([
-        Metadata({ data: "json, name=height" }),
+        SpeakeasyMetadata({ data: "json, name=height" }),
         __metadata("design:type", Number)
     ], TemplateDefinitionNewPages.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "json, name=margins" }),
+        SpeakeasyMetadata({ data: "json, name=margins" }),
         __metadata("design:type", TemplateDefinitionNewPagesMargins)
     ], TemplateDefinitionNewPages.prototype, "margins", void 0);
     __decorate([
-        Metadata({ data: "json, name=width" }),
+        SpeakeasyMetadata({ data: "json, name=width" }),
         __metadata("design:type", Number)
     ], TemplateDefinitionNewPages.prototype, "width", void 0);
     return TemplateDefinitionNewPages;
@@ -196,23 +196,23 @@ var TemplateDefinitionNew = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=isDraft" }),
+        SpeakeasyMetadata({ data: "json, name=isDraft" }),
         __metadata("design:type", Boolean)
     ], TemplateDefinitionNew.prototype, "isDraft", void 0);
     __decorate([
-        Metadata({ data: "json, name=layout" }),
+        SpeakeasyMetadata({ data: "json, name=layout" }),
         __metadata("design:type", TemplateDefinitionNewLayout)
     ], TemplateDefinitionNew.prototype, "layout", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], TemplateDefinitionNew.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=pages", elemType: shared.TemplateDefinitionNewPages }),
+        SpeakeasyMetadata({ data: "json, name=pages", elemType: TemplateDefinitionNewPages }),
         __metadata("design:type", Array)
     ], TemplateDefinitionNew.prototype, "pages", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Array)
     ], TemplateDefinitionNew.prototype, "tags", void 0);
     return TemplateDefinitionNew;

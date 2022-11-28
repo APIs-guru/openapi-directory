@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DocumentReadActionEnum } from "./documentreadactionenum";
 import { DocumentReadModeEnum } from "./documentreadmodeenum";
 // DocumentReaderConfig
@@ -35,15 +35,15 @@ var DocumentReaderConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DocumentReadAction" }),
+        SpeakeasyMetadata({ data: "json, name=DocumentReadAction" }),
         __metadata("design:type", String)
     ], DocumentReaderConfig.prototype, "documentReadAction", void 0);
     __decorate([
-        Metadata({ data: "json, name=DocumentReadMode" }),
+        SpeakeasyMetadata({ data: "json, name=DocumentReadMode" }),
         __metadata("design:type", String)
     ], DocumentReaderConfig.prototype, "documentReadMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=FeatureTypes" }),
+        SpeakeasyMetadata({ data: "json, name=FeatureTypes" }),
         __metadata("design:type", Array)
     ], DocumentReaderConfig.prototype, "featureTypes", void 0);
     return DocumentReaderConfig;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HttpRouteFaultInjectionPolicyDelay
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specification of how client requests are delayed as part of fault injection before being sent to a destination.
 **/
 export class HttpRouteFaultInjectionPolicyDelay extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fixedDelay" })
+  @SpeakeasyMetadata({ data: "json, name=fixedDelay" })
   fixedDelay?: string;
 
-  @Metadata({ data: "json, name=percentage" })
+  @SpeakeasyMetadata({ data: "json, name=percentage" })
   percentage?: number;
 }

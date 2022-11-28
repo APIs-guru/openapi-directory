@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ObCashBalance1
+// Set of elements used to define the balance details.
 type ObCashBalance1 struct {
 	AccountID            string                              `json:"AccountId"`
 	Amount               ObActiveOrHistoricCurrencyAndAmount `json:"Amount"`

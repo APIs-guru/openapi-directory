@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ListLicenseesPathParams = /** @class */ (function (_super) {
     __extends(ListLicenseesPathParams, _super);
@@ -30,7 +30,7 @@ var ListLicenseesPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=key" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=key" }),
         __metadata("design:type", String)
     ], ListLicenseesPathParams.prototype, "key", void 0);
     return ListLicenseesPathParams;
@@ -42,15 +42,15 @@ var ListLicenseesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], ListLicenseesQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=query" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" }),
         __metadata("design:type", String)
     ], ListLicenseesQueryParams.prototype, "query", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=starting_after" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=starting_after" }),
         __metadata("design:type", Number)
     ], ListLicenseesQueryParams.prototype, "startingAfter", void 0);
     return ListLicenseesQueryParams;
@@ -62,11 +62,11 @@ var ListLicenseesSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], ListLicenseesSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
         __metadata("design:type", shared.SchemeUserToken)
     ], ListLicenseesSecurity.prototype, "userToken", void 0);
     return ListLicenseesSecurity;
@@ -78,15 +78,15 @@ var ListLicenseesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListLicenseesPathParams)
     ], ListLicenseesRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListLicenseesQueryParams)
     ], ListLicenseesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListLicenseesSecurity)
     ], ListLicenseesRequest.prototype, "security", void 0);
     return ListLicenseesRequest;
@@ -98,19 +98,19 @@ var ListLicenseesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AddressLookupResponseSchema)
     ], ListLicenseesResponse.prototype, "addressLookupResponseSchema", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListLicenseesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.LicenseeListResponseSchema)
     ], ListLicenseesResponse.prototype, "licenseeListResponseSchema", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListLicenseesResponse.prototype, "statusCode", void 0);
     return ListLicenseesResponse;

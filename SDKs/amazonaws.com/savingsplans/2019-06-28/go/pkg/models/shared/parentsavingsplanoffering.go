@@ -1,5 +1,7 @@
 package shared
 
+// ParentSavingsPlanOffering
+// Information about a Savings Plan offering.
 type ParentSavingsPlanOffering struct {
 	Currency        *CurrencyCodeEnum             `json:"currency,omitempty"`
 	DurationSeconds *int64                        `json:"durationSeconds,omitempty"`

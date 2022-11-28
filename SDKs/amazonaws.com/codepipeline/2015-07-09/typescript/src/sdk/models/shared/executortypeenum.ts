@@ -1,6 +1,7 @@
 
 
+
 export enum ExecutorTypeEnum {
-    JobWorker = "JobWorker"
-,    Lambda = "Lambda"
+    JobWorker = "JobWorker",
+    Lambda = "Lambda"
 }

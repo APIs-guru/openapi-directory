@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BootstrapActionDetail } from "./bootstrapactiondetail";
 import { JobFlowExecutionStatusDetail } from "./jobflowexecutionstatusdetail";
 import { JobFlowInstancesDetail } from "./jobflowinstancesdetail";
@@ -7,53 +6,54 @@ import { ScaleDownBehaviorEnum } from "./scaledownbehaviorenum";
 import { StepDetail } from "./stepdetail";
 
 
+
 // JobFlowDetail
 /** 
  * A description of a cluster (job flow).
 **/
 export class JobFlowDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AmiVersion" })
+  @SpeakeasyMetadata({ data: "json, name=AmiVersion" })
   amiVersion?: string;
 
-  @Metadata({ data: "json, name=AutoScalingRole" })
+  @SpeakeasyMetadata({ data: "json, name=AutoScalingRole" })
   autoScalingRole?: string;
 
-  @Metadata({ data: "json, name=BootstrapActions", elemType: shared.BootstrapActionDetail })
+  @SpeakeasyMetadata({ data: "json, name=BootstrapActions", elemType: BootstrapActionDetail })
   bootstrapActions?: BootstrapActionDetail[];
 
-  @Metadata({ data: "json, name=ExecutionStatusDetail" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionStatusDetail" })
   executionStatusDetail: JobFlowExecutionStatusDetail;
 
-  @Metadata({ data: "json, name=Instances" })
+  @SpeakeasyMetadata({ data: "json, name=Instances" })
   instances: JobFlowInstancesDetail;
 
-  @Metadata({ data: "json, name=JobFlowId" })
+  @SpeakeasyMetadata({ data: "json, name=JobFlowId" })
   jobFlowId: string;
 
-  @Metadata({ data: "json, name=JobFlowRole" })
+  @SpeakeasyMetadata({ data: "json, name=JobFlowRole" })
   jobFlowRole?: string;
 
-  @Metadata({ data: "json, name=LogEncryptionKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=LogEncryptionKmsKeyId" })
   logEncryptionKmsKeyId?: string;
 
-  @Metadata({ data: "json, name=LogUri" })
+  @SpeakeasyMetadata({ data: "json, name=LogUri" })
   logUri?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=ScaleDownBehavior" })
+  @SpeakeasyMetadata({ data: "json, name=ScaleDownBehavior" })
   scaleDownBehavior?: ScaleDownBehaviorEnum;
 
-  @Metadata({ data: "json, name=ServiceRole" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceRole" })
   serviceRole?: string;
 
-  @Metadata({ data: "json, name=Steps", elemType: shared.StepDetail })
+  @SpeakeasyMetadata({ data: "json, name=Steps", elemType: StepDetail })
   steps?: StepDetail[];
 
-  @Metadata({ data: "json, name=SupportedProducts" })
+  @SpeakeasyMetadata({ data: "json, name=SupportedProducts" })
   supportedProducts?: string[];
 
-  @Metadata({ data: "json, name=VisibleToAllUsers" })
+  @SpeakeasyMetadata({ data: "json, name=VisibleToAllUsers" })
   visibleToAllUsers?: boolean;
 }

@@ -10,6 +10,8 @@ const (
 	GoogleCloudWebriskV1SearchUrisResponseThreatURIThreatTypesEnumSocialEngineeringExtendedCoverage GoogleCloudWebriskV1SearchUrisResponseThreatURIThreatTypesEnum = "SOCIAL_ENGINEERING_EXTENDED_COVERAGE"
 )
 
+// GoogleCloudWebriskV1SearchUrisResponseThreatURI
+// Contains threat information on a matching uri.
 type GoogleCloudWebriskV1SearchUrisResponseThreatURI struct {
 	ExpireTime  *string                                                          `json:"expireTime,omitempty"`
 	ThreatTypes []GoogleCloudWebriskV1SearchUrisResponseThreatURIThreatTypesEnum `json:"threatTypes,omitempty"`

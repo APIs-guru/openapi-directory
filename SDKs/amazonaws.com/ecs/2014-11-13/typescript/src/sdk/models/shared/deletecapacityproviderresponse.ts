@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CapacityProvider } from "./capacityprovider";
 
 
+
 export class DeleteCapacityProviderResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=capacityProvider" })
+  @SpeakeasyMetadata({ data: "json, name=capacityProvider" })
   capacityProvider?: CapacityProvider;
 }

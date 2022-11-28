@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var IconList = /** @class */ (function (_super) {
     __extends(IconList, _super);
     function IconList() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=depth" }),
+        SpeakeasyMetadata({ data: "json, name=depth" }),
         __metadata("design:type", Number)
     ], IconList.prototype, "depth", void 0);
     __decorate([
-        Metadata({ data: "json, name=height" }),
+        SpeakeasyMetadata({ data: "json, name=height" }),
         __metadata("design:type", Number)
     ], IconList.prototype, "height", void 0);
     __decorate([
-        Metadata({ data: "json, name=mimetype" }),
+        SpeakeasyMetadata({ data: "json, name=mimetype" }),
         __metadata("design:type", String)
     ], IconList.prototype, "mimetype", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], IconList.prototype, "url", void 0);
     __decorate([
-        Metadata({ data: "json, name=width" }),
+        SpeakeasyMetadata({ data: "json, name=width" }),
         __metadata("design:type", Number)
     ], IconList.prototype, "width", void 0);
     return IconList;

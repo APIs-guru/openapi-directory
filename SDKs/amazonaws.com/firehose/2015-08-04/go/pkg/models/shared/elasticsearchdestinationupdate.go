@@ -1,5 +1,7 @@
 package shared
 
+// ElasticsearchDestinationUpdate
+// Describes an update for a destination in Amazon ES.
 type ElasticsearchDestinationUpdate struct {
 	BufferingHints           *ElasticsearchBufferingHints          `json:"BufferingHints,omitempty"`
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions             `json:"CloudWatchLoggingOptions,omitempty"`

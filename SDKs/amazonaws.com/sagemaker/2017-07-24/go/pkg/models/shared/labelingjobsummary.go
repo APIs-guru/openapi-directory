@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LabelingJobSummary
+// Provides summary information about a labeling job.
 type LabelingJobSummary struct {
 	AnnotationConsolidationLambdaArn *string                 `json:"AnnotationConsolidationLambdaArn,omitempty"`
 	CreationTime                     time.Time               `json:"CreationTime"`

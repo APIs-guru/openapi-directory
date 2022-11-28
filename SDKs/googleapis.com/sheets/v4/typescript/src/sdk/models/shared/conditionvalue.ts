@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ConditionValueRelativeDateEnum {
-    RelativeDateUnspecified = "RELATIVE_DATE_UNSPECIFIED"
-,    PastYear = "PAST_YEAR"
-,    PastMonth = "PAST_MONTH"
-,    PastWeek = "PAST_WEEK"
-,    Yesterday = "YESTERDAY"
-,    Today = "TODAY"
-,    Tomorrow = "TOMORROW"
+    RelativeDateUnspecified = "RELATIVE_DATE_UNSPECIFIED",
+    PastYear = "PAST_YEAR",
+    PastMonth = "PAST_MONTH",
+    PastWeek = "PAST_WEEK",
+    Yesterday = "YESTERDAY",
+    Today = "TODAY",
+    Tomorrow = "TOMORROW"
 }
 
 
@@ -16,9 +17,9 @@ export enum ConditionValueRelativeDateEnum {
  * The value of the condition.
 **/
 export class ConditionValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=relativeDate" })
+  @SpeakeasyMetadata({ data: "json, name=relativeDate" })
   relativeDate?: ConditionValueRelativeDateEnum;
 
-  @Metadata({ data: "json, name=userEnteredValue" })
+  @SpeakeasyMetadata({ data: "json, name=userEnteredValue" })
   userEnteredValue?: string;
 }

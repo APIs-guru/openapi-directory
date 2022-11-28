@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrderLineItems } from "./orderlineitems";
+
 
 
 // EvidenceRequest
@@ -8,18 +8,18 @@ import { OrderLineItems } from "./orderlineitems";
  * This type is used by the evidenceRequests array that is returned in the getPaymentDispute response if one or more evidential documents are being requested to help resolve the payment dispute.
 **/
 export class EvidenceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=evidenceId" })
+  @SpeakeasyMetadata({ data: "json, name=evidenceId" })
   evidenceId?: string;
 
-  @Metadata({ data: "json, name=evidenceType" })
+  @SpeakeasyMetadata({ data: "json, name=evidenceType" })
   evidenceType?: string;
 
-  @Metadata({ data: "json, name=lineItems", elemType: shared.OrderLineItems })
+  @SpeakeasyMetadata({ data: "json, name=lineItems", elemType: OrderLineItems })
   lineItems?: OrderLineItems[];
 
-  @Metadata({ data: "json, name=requestDate" })
+  @SpeakeasyMetadata({ data: "json, name=requestDate" })
   requestDate?: string;
 
-  @Metadata({ data: "json, name=respondByDate" })
+  @SpeakeasyMetadata({ data: "json, name=respondByDate" })
   respondByDate?: string;
 }

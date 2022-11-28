@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetFactOnthisdayBornQueryParams = /** @class */ (function (_super) {
     __extends(GetFactOnthisdayBornQueryParams, _super);
@@ -30,11 +30,11 @@ var GetFactOnthisdayBornQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=day" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=day" }),
         __metadata("design:type", String)
     ], GetFactOnthisdayBornQueryParams.prototype, "day", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=month" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=month" }),
         __metadata("design:type", String)
     ], GetFactOnthisdayBornQueryParams.prototype, "month", void 0);
     return GetFactOnthisdayBornQueryParams;
@@ -46,7 +46,7 @@ var GetFactOnthisdayBornSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeXFungeneratorsApiSecret)
     ], GetFactOnthisdayBornSecurity.prototype, "xFungeneratorsApiSecret", void 0);
     return GetFactOnthisdayBornSecurity;
@@ -58,11 +58,11 @@ var GetFactOnthisdayBornRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFactOnthisdayBornQueryParams)
     ], GetFactOnthisdayBornRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFactOnthisdayBornSecurity)
     ], GetFactOnthisdayBornRequest.prototype, "security", void 0);
     return GetFactOnthisdayBornRequest;
@@ -74,11 +74,11 @@ var GetFactOnthisdayBornResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetFactOnthisdayBornResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetFactOnthisdayBornResponse.prototype, "statusCode", void 0);
     return GetFactOnthisdayBornResponse;

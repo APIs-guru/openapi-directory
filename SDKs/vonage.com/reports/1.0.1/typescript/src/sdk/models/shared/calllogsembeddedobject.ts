@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CallLog } from "./calllog";
 
 
+
 export class CallLogsEmbeddedObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=call_logs", elemType: shared.CallLog })
+  @SpeakeasyMetadata({ data: "json, name=call_logs", elemType: CallLog })
   callLogs?: CallLog[];
 }

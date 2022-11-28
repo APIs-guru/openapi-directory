@@ -1,20 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AbuseType } from "./abusetype";
 import { RelatedEntity } from "./relatedentity";
 import { Entity } from "./entity";
 
 
+
 export class AbuseReport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=abuseTypes", elemType: shared.AbuseType })
+  @SpeakeasyMetadata({ data: "json, name=abuseTypes", elemType: AbuseType })
   abuseTypes?: AbuseType[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=relatedEntities", elemType: shared.RelatedEntity })
+  @SpeakeasyMetadata({ data: "json, name=relatedEntities", elemType: RelatedEntity })
   relatedEntities?: RelatedEntity[];
 
-  @Metadata({ data: "json, name=subject" })
+  @SpeakeasyMetadata({ data: "json, name=subject" })
   subject?: Entity;
 }

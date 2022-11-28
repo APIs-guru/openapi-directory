@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetBundleRecipientsQueryParams:
-    bundle_id: int = field(default=None, metadata={'query_param': { 'field_name': 'bundle_id', 'style': 'form', 'explode': True }})
+    bundle_id: int = field(metadata={'query_param': { 'field_name': 'bundle_id', 'style': 'form', 'explode': True }})
     cursor: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'cursor', 'style': 'form', 'explode': True }})
     filter: Optional[dict[str, Any]] = field(default=None, metadata={'query_param': { 'field_name': 'filter', 'style': 'form', 'explode': True }})
     filter_gt: Optional[dict[str, Any]] = field(default=None, metadata={'query_param': { 'field_name': 'filter_gt', 'style': 'form', 'explode': True }})
@@ -20,12 +20,12 @@ class GetBundleRecipientsQueryParams:
 
 @dataclass
 class GetBundleRecipientsRequest:
-    query_params: GetBundleRecipientsQueryParams = field(default=None)
+    query_params: GetBundleRecipientsQueryParams = field()
     
 
 @dataclass
 class GetBundleRecipientsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bundle_recipient_entities: Optional[List[shared.BundleRecipientEntity]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

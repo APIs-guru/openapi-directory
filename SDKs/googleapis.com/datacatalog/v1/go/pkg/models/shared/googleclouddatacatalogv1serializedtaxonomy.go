@@ -7,6 +7,8 @@ const (
 	GoogleCloudDatacatalogV1SerializedTaxonomyActivatedPolicyTypesEnumFineGrainedAccessControl GoogleCloudDatacatalogV1SerializedTaxonomyActivatedPolicyTypesEnum = "FINE_GRAINED_ACCESS_CONTROL"
 )
 
+// GoogleCloudDatacatalogV1SerializedTaxonomy
+// A nested protocol buffer that represents a taxonomy and the hierarchy of its policy tags. Used for taxonomy replacement, import, and export.
 type GoogleCloudDatacatalogV1SerializedTaxonomy struct {
 	ActivatedPolicyTypes []GoogleCloudDatacatalogV1SerializedTaxonomyActivatedPolicyTypesEnum `json:"activatedPolicyTypes,omitempty"`
 	Description          *string                                                              `json:"description,omitempty"`

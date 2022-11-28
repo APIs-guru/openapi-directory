@@ -4,10 +4,6 @@ type GetSessionInfoUsingPostQueryParams struct {
 	SessionID *string `queryParam:"style=form,explode=true,name=sessionID"`
 }
 
-type GetSessionInfoUsingPostRequest struct {
-	QueryParams GetSessionInfoUsingPostQueryParams
-}
-
 type GetSessionInfoUsingPost200ApplicationJSONDataInfo struct {
 	AuthorID   *string `json:"authorID,omitempty"`
 	GroupID    *string `json:"groupID,omitempty"`
@@ -41,6 +37,10 @@ type GetSessionInfoUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type GetSessionInfoUsingPostRequest struct {
+	QueryParams GetSessionInfoUsingPostQueryParams
 }
 
 type GetSessionInfoUsingPostResponse struct {

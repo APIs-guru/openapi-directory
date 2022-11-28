@@ -1,83 +1,83 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReportRecipient } from "./reportrecipient";
 import { ValidatorConfigJson } from "./validatorconfigjson";
 
+
 export enum ReportScheduleRestApiPutReportFormatEnum {
-    Png = "PNG"
-,    Csv = "CSV"
-,    Text = "TEXT"
+    Png = "PNG",
+    Csv = "CSV",
+    Text = "TEXT"
 }
 
 export enum ReportScheduleRestApiPutTypeEnum {
-    Alert = "Alert"
-,    Report = "Report"
+    Alert = "Alert",
+    Report = "Report"
 }
 
 export enum ReportScheduleRestApiPutValidatorTypeEnum {
-    NotNull = "not null"
-,    Operator = "operator"
+    NotNull = "not null",
+    Operator = "operator"
 }
 
 
 export class ReportScheduleRestApiPut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active" })
+  @SpeakeasyMetadata({ data: "json, name=active" })
   active?: boolean;
 
-  @Metadata({ data: "json, name=chart" })
+  @SpeakeasyMetadata({ data: "json, name=chart" })
   chart?: number;
 
-  @Metadata({ data: "json, name=context_markdown" })
+  @SpeakeasyMetadata({ data: "json, name=context_markdown" })
   contextMarkdown?: string;
 
-  @Metadata({ data: "json, name=creation_method" })
+  @SpeakeasyMetadata({ data: "json, name=creation_method" })
   creationMethod?: any;
 
-  @Metadata({ data: "json, name=crontab" })
+  @SpeakeasyMetadata({ data: "json, name=crontab" })
   crontab?: string;
 
-  @Metadata({ data: "json, name=dashboard" })
+  @SpeakeasyMetadata({ data: "json, name=dashboard" })
   dashboard?: number;
 
-  @Metadata({ data: "json, name=database" })
+  @SpeakeasyMetadata({ data: "json, name=database" })
   database?: number;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=grace_period" })
+  @SpeakeasyMetadata({ data: "json, name=grace_period" })
   gracePeriod?: number;
 
-  @Metadata({ data: "json, name=log_retention" })
+  @SpeakeasyMetadata({ data: "json, name=log_retention" })
   logRetention?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=owners" })
+  @SpeakeasyMetadata({ data: "json, name=owners" })
   owners?: number[];
 
-  @Metadata({ data: "json, name=recipients", elemType: shared.ReportRecipient })
+  @SpeakeasyMetadata({ data: "json, name=recipients", elemType: ReportRecipient })
   recipients?: ReportRecipient[];
 
-  @Metadata({ data: "json, name=report_format" })
+  @SpeakeasyMetadata({ data: "json, name=report_format" })
   reportFormat?: ReportScheduleRestApiPutReportFormatEnum;
 
-  @Metadata({ data: "json, name=sql" })
+  @SpeakeasyMetadata({ data: "json, name=sql" })
   sql?: string;
 
-  @Metadata({ data: "json, name=timezone" })
+  @SpeakeasyMetadata({ data: "json, name=timezone" })
   timezone?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: ReportScheduleRestApiPutTypeEnum;
 
-  @Metadata({ data: "json, name=validator_config_json" })
+  @SpeakeasyMetadata({ data: "json, name=validator_config_json" })
   validatorConfigJson?: ValidatorConfigJson;
 
-  @Metadata({ data: "json, name=validator_type" })
+  @SpeakeasyMetadata({ data: "json, name=validator_type" })
   validatorType?: ReportScheduleRestApiPutValidatorTypeEnum;
 
-  @Metadata({ data: "json, name=working_timeout" })
+  @SpeakeasyMetadata({ data: "json, name=working_timeout" })
   workingTimeout?: number;
 }

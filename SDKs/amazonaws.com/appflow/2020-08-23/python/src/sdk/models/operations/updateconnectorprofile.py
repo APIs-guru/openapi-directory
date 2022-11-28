@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -22,32 +27,36 @@ class UpdateConnectorProfileRequestBodyConnectionModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateConnectorProfileRequestBodyConnectorProfileConfig:
-    connector_profile_credentials: Optional[shared.ConnectorProfileCredentials] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectorProfileCredentials' }})
-    connector_profile_properties: Optional[shared.ConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectorProfileProperties' }})
+    r"""UpdateConnectorProfileRequestBodyConnectorProfileConfig
+     Defines the connector-specific configuration and credentials for the connector profile. 
+    """
+    
+    connector_profile_credentials: Optional[shared.ConnectorProfileCredentials] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectorProfileCredentials') }})
+    connector_profile_properties: Optional[shared.ConnectorProfileProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectorProfileProperties') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateConnectorProfileRequestBody:
-    connection_mode: UpdateConnectorProfileRequestBodyConnectionModeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectionMode' }})
-    connector_profile_config: UpdateConnectorProfileRequestBodyConnectorProfileConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectorProfileConfig' }})
-    connector_profile_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectorProfileName' }})
+    connection_mode: UpdateConnectorProfileRequestBodyConnectionModeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectionMode') }})
+    connector_profile_config: UpdateConnectorProfileRequestBodyConnectorProfileConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectorProfileConfig') }})
+    connector_profile_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectorProfileName') }})
     
 
 @dataclass
 class UpdateConnectorProfileRequest:
-    headers: UpdateConnectorProfileHeaders = field(default=None)
-    request: UpdateConnectorProfileRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateConnectorProfileHeaders = field()
+    request: UpdateConnectorProfileRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateConnectorProfileResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
     connector_authentication_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     update_connector_profile_response: Optional[shared.UpdateConnectorProfileResponse] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

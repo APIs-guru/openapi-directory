@@ -22,9 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CollectionOverride } from "./collectionoverride";
 import { Credential } from "./credential";
+import { TypeProviderLabelEntry } from "./typeproviderlabelentry";
 import { Operation } from "./operation";
 import { Options } from "./options";
 // TypeProvider
@@ -37,51 +38,51 @@ var TypeProvider = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=collectionOverrides", elemType: shared.CollectionOverride }),
+        SpeakeasyMetadata({ data: "json, name=collectionOverrides", elemType: CollectionOverride }),
         __metadata("design:type", Array)
     ], TypeProvider.prototype, "collectionOverrides", void 0);
     __decorate([
-        Metadata({ data: "json, name=credential" }),
+        SpeakeasyMetadata({ data: "json, name=credential" }),
         __metadata("design:type", Credential)
     ], TypeProvider.prototype, "credential", void 0);
     __decorate([
-        Metadata({ data: "json, name=customCertificateAuthorityRoots" }),
+        SpeakeasyMetadata({ data: "json, name=customCertificateAuthorityRoots" }),
         __metadata("design:type", Array)
     ], TypeProvider.prototype, "customCertificateAuthorityRoots", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], TypeProvider.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=descriptorUrl" }),
+        SpeakeasyMetadata({ data: "json, name=descriptorUrl" }),
         __metadata("design:type", String)
     ], TypeProvider.prototype, "descriptorUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], TypeProvider.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=insertTime" }),
+        SpeakeasyMetadata({ data: "json, name=insertTime" }),
         __metadata("design:type", String)
     ], TypeProvider.prototype, "insertTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels", elemType: shared.TypeProviderLabelEntry }),
+        SpeakeasyMetadata({ data: "json, name=labels", elemType: TypeProviderLabelEntry }),
         __metadata("design:type", Array)
     ], TypeProvider.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], TypeProvider.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=operation" }),
+        SpeakeasyMetadata({ data: "json, name=operation" }),
         __metadata("design:type", Operation)
     ], TypeProvider.prototype, "operation", void 0);
     __decorate([
-        Metadata({ data: "json, name=options" }),
+        SpeakeasyMetadata({ data: "json, name=options" }),
         __metadata("design:type", Options)
     ], TypeProvider.prototype, "options", void 0);
     __decorate([
-        Metadata({ data: "json, name=selfLink" }),
+        SpeakeasyMetadata({ data: "json, name=selfLink" }),
         __metadata("design:type", String)
     ], TypeProvider.prototype, "selfLink", void 0);
     return TypeProvider;

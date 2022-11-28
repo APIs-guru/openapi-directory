@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import latlng
-from . import postaladdress
+from sdk import utils
+from . import *
 
 class LocationLocationTypeEnum(str, Enum):
     LOCATION_TYPE_UNSPECIFIED = "LOCATION_TYPE_UNSPECIFIED"
@@ -21,8 +22,12 @@ class LocationLocationTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Location:
-    lat_lng: Optional[latlng.LatLng] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'latLng' }})
-    location_type: Optional[LocationLocationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locationType' }})
-    postal_address: Optional[postaladdress.PostalAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'postalAddress' }})
-    radius_in_miles: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'radiusInMiles' }})
+    r"""Location
+    Output only. A resource that represents a location with full geographic information.
+    """
+    
+    lat_lng: Optional[LatLng] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('latLng') }})
+    location_type: Optional[LocationLocationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('locationType') }})
+    postal_address: Optional[PostalAddress] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('postalAddress') }})
+    radius_in_miles: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('radiusInMiles') }})
     

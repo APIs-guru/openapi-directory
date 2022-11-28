@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListAllowedNodeTypeModificationsActionEnum(str, Enum):
     LIST_ALLOWED_NODE_TYPE_MODIFICATIONS = "ListAllowedNodeTypeModifications"
@@ -10,10 +14,10 @@ class GetListAllowedNodeTypeModificationsVersionEnum(str, Enum):
 
 @dataclass
 class GetListAllowedNodeTypeModificationsQueryParams:
-    action: GetListAllowedNodeTypeModificationsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetListAllowedNodeTypeModificationsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetListAllowedNodeTypeModificationsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cache_cluster_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CacheClusterId', 'style': 'form', 'explode': True }})
     replication_group_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ReplicationGroupId', 'style': 'form', 'explode': True }})
-    version: GetListAllowedNodeTypeModificationsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetListAllowedNodeTypeModificationsHeaders:
 
 @dataclass
 class GetListAllowedNodeTypeModificationsRequest:
-    query_params: GetListAllowedNodeTypeModificationsQueryParams = field(default=None)
-    headers: GetListAllowedNodeTypeModificationsHeaders = field(default=None)
+    headers: GetListAllowedNodeTypeModificationsHeaders = field()
+    query_params: GetListAllowedNodeTypeModificationsQueryParams = field()
     
 
 @dataclass
 class GetListAllowedNodeTypeModificationsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

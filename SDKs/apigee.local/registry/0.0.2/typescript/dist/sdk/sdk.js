@@ -10,14 +10,10 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import axios from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
-var Servers = [
+import * as utils from "../internal/utils";
+export var ServerList = [
     "http://apigee.local",
 ];
 export function WithServerURL(serverURL, params) {
@@ -25,12 +21,12 @@ export function WithServerURL(serverURL, params) {
         if (params != null) {
             serverURL = utils.ReplaceParameters(serverURL, params);
         }
-        sdk.serverURL = serverURL;
+        sdk._serverURL = serverURL;
     };
 }
 export function WithClient(client) {
     return function (sdk) {
-        sdk.defaultClient = client;
+        sdk._defaultClient = client;
     };
 }
 var SDK = /** @class */ (function () {
@@ -40,42 +36,42 @@ var SDK = /** @class */ (function () {
             opts[_i] = arguments[_i];
         }
         var _this = this;
+        this._language = "typescript";
+        this._sdkVersion = "0.0.1";
+        this._genVersion = "internal";
         opts.forEach(function (o) { return o(_this); });
-        if (this.serverURL == "") {
-            this.serverURL = Servers[0];
+        if (this._serverURL == "") {
+            this._serverURL = ServerList[0];
         }
-        if (!this.defaultClient) {
-            this.defaultClient = axios.create({ baseURL: this.serverURL });
+        if (!this._defaultClient) {
+            this._defaultClient = axios.create({ baseURL: this._serverURL });
         }
-        if (!this.securityClient) {
-            if (this.security) {
-                this.securityClient = CreateSecurityClient(this.defaultClient, this.security);
-            }
-            else {
-                this.securityClient = this.defaultClient;
-            }
+        if (!this._securityClient) {
+            this._securityClient = this._defaultClient;
         }
     }
-    // RegistryCreateApi - CreateApi creates a specified API.
-    SDK.prototype.RegistryCreateApi = function (req, config) {
+    /**
+     * registryCreateApi - CreateApi creates a specified API.
+    **/
+    SDK.prototype.registryCreateApi = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryCreateApiRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/apis", req.pathParams);
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -85,16 +81,15 @@ var SDK = /** @class */ (function () {
         if (body == null || Object.keys(body).length === 0)
             throw new Error("request body is required");
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.api = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -103,26 +98,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryCreateApiSpec - CreateApiSpec creates a specified spec.
-    SDK.prototype.RegistryCreateApiSpec = function (req, config) {
+    /**
+     * registryCreateApiSpec - CreateApiSpec creates a specified spec.
+    **/
+    SDK.prototype.registryCreateApiSpec = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryCreateApiSpecRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/apis/{api}/versions/{version}/specs", req.pathParams);
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -132,16 +129,15 @@ var SDK = /** @class */ (function () {
         if (body == null || Object.keys(body).length === 0)
             throw new Error("request body is required");
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.apiSpec = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -150,26 +146,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryCreateApiVersion - CreateApiVersion creates a specified version.
-    SDK.prototype.RegistryCreateApiVersion = function (req, config) {
+    /**
+     * registryCreateApiVersion - CreateApiVersion creates a specified version.
+    **/
+    SDK.prototype.registryCreateApiVersion = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryCreateApiVersionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/apis/{api}/versions", req.pathParams);
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -179,16 +177,15 @@ var SDK = /** @class */ (function () {
         if (body == null || Object.keys(body).length === 0)
             throw new Error("request body is required");
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.apiVersion = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -197,26 +194,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryCreateArtifact - CreateArtifact creates a specified artifact.
-    SDK.prototype.RegistryCreateArtifact = function (req, config) {
+    /**
+     * registryCreateArtifact - CreateArtifact creates a specified artifact.
+    **/
+    SDK.prototype.registryCreateArtifact = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryCreateArtifactRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/artifacts", req.pathParams);
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -226,16 +225,15 @@ var SDK = /** @class */ (function () {
         if (body == null || Object.keys(body).length === 0)
             throw new Error("request body is required");
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.artifact = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -244,26 +242,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryCreateProject - CreateProject creates a specified project.
-    SDK.prototype.RegistryCreateProject = function (req, config) {
+    /**
+     * registryCreateProject - CreateProject creates a specified project.
+    **/
+    SDK.prototype.registryCreateProject = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryCreateProjectRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/v1/projects";
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -273,16 +273,15 @@ var SDK = /** @class */ (function () {
         if (body == null || Object.keys(body).length === 0)
             throw new Error("request body is required");
         return client
-            .post(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.project = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -291,169 +290,176 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryDeleteApi - DeleteApi removes a specified API and all of the resources that it owns.
-    SDK.prototype.RegistryDeleteApi = function (req, config) {
+    /**
+     * registryDeleteApi - DeleteApi removes a specified API and all of the resources that it owns.
+    **/
+    SDK.prototype.registryDeleteApi = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryDeleteApiRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/apis/{api}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .delete(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "delete" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryDeleteApiSpec - DeleteApiSpec removes a specified spec, all revisions, and all child resources (e.g. artifacts).
-    SDK.prototype.RegistryDeleteApiSpec = function (req, config) {
+    /**
+     * registryDeleteApiSpec - DeleteApiSpec removes a specified spec, all revisions, and all child resources (e.g. artifacts).
+    **/
+    SDK.prototype.registryDeleteApiSpec = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryDeleteApiSpecRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/apis/{api}/versions/{version}/specs/{spec}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .delete(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "delete" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryDeleteApiSpecRevision - DeleteApiSpecRevision deletes a revision of a spec.
-    SDK.prototype.RegistryDeleteApiSpecRevision = function (req, config) {
+    /**
+     * registryDeleteApiSpecRevision - DeleteApiSpecRevision deletes a revision of a spec.
+    **/
+    SDK.prototype.registryDeleteApiSpecRevision = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryDeleteApiSpecRevisionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/apis/{api}/versions/{version}/specs/{spec}:deleteRevision", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .delete(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "delete" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryDeleteApiVersion - DeleteApiVersion removes a specified version and all of the resources that it owns.
-    SDK.prototype.RegistryDeleteApiVersion = function (req, config) {
+    /**
+     * registryDeleteApiVersion - DeleteApiVersion removes a specified version and all of the resources that it owns.
+    **/
+    SDK.prototype.registryDeleteApiVersion = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryDeleteApiVersionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/apis/{api}/versions/{version}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .delete(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "delete" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryDeleteArtifact - DeleteArtifact removes a specified artifact.
-    SDK.prototype.RegistryDeleteArtifact = function (req, config) {
+    /**
+     * registryDeleteArtifact - DeleteArtifact removes a specified artifact.
+    **/
+    SDK.prototype.registryDeleteArtifact = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryDeleteArtifactRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/artifacts/{artifact}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .delete(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "delete" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryDeleteProject - DeleteProject removes a specified project and all of the resources that it owns.
-    SDK.prototype.RegistryDeleteProject = function (req, config) {
+    /**
+     * registryDeleteProject - DeleteProject removes a specified project and all of the resources that it owns.
+    **/
+    SDK.prototype.registryDeleteProject = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryDeleteProjectRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .delete(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "delete" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryGetApi - GetApi returns a specified API.
-    SDK.prototype.RegistryGetApi = function (req, config) {
+    /**
+     * registryGetApi - GetApi returns a specified API.
+    **/
+    SDK.prototype.registryGetApi = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryGetApiRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/apis/{api}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.api = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -462,25 +468,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryGetApiSpec - GetApiSpec returns a specified spec.
-    SDK.prototype.RegistryGetApiSpec = function (req, config) {
+    /**
+     * registryGetApiSpec - GetApiSpec returns a specified spec.
+    **/
+    SDK.prototype.registryGetApiSpec = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryGetApiSpecRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/apis/{api}/versions/{version}/specs/{spec}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.apiSpec = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -489,49 +496,51 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryGetApiSpecContents - GetApiSpecContents returns the contents of a specified spec.
-    SDK.prototype.RegistryGetApiSpecContents = function (req, config) {
+    /**
+     * registryGetApiSpecContents - GetApiSpecContents returns the contents of a specified spec.
+    **/
+    SDK.prototype.registryGetApiSpecContents = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryGetApiSpecContentsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/apis/{api}/versions/{version}/specs/{spec}/contents", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryGetApiVersion - GetApiVersion returns a specified version.
-    SDK.prototype.RegistryGetApiVersion = function (req, config) {
+    /**
+     * registryGetApiVersion - GetApiVersion returns a specified version.
+    **/
+    SDK.prototype.registryGetApiVersion = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryGetApiVersionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/apis/{api}/versions/{version}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.apiVersion = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -540,25 +549,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryGetArtifact - GetArtifact returns a specified artifact.
-    SDK.prototype.RegistryGetArtifact = function (req, config) {
+    /**
+     * registryGetArtifact - GetArtifact returns a specified artifact.
+    **/
+    SDK.prototype.registryGetArtifact = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryGetArtifactRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/artifacts/{artifact}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.artifact = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -567,49 +577,51 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryGetArtifactContents - GetArtifactContents returns the contents of a specified artifact.
-    SDK.prototype.RegistryGetArtifactContents = function (req, config) {
+    /**
+     * registryGetArtifactContents - GetArtifactContents returns the contents of a specified artifact.
+    **/
+    SDK.prototype.registryGetArtifactContents = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryGetArtifactContentsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/artifacts/{artifact}/contents", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
                     break;
             }
             return res;
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryGetProject - GetProject returns a specified project.
-    SDK.prototype.RegistryGetProject = function (req, config) {
+    /**
+     * registryGetProject - GetProject returns a specified project.
+    **/
+    SDK.prototype.registryGetProject = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryGetProjectRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}", req.pathParams);
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.project = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -618,22 +630,23 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryGetStatus - GetStatus returns the status of the service. GetStatus is for verifying open source deployments only and is not included in hosted versions of the API.
-    SDK.prototype.RegistryGetStatus = function (config) {
-        var baseURL = this.serverURL;
+    /**
+     * registryGetStatus - GetStatus returns the status of the service. GetStatus is for verifying open source deployments only and is not included in hosted versions of the API.
+    **/
+    SDK.prototype.registryGetStatus = function (config) {
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/v1/status";
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         return client
-            .get(url, __assign({}, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.status = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -642,27 +655,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryListApiSpecRevisions - ListApiSpecRevisions lists all revisions of a spec. Revisions are returned in descending order of revision creation time.
-    SDK.prototype.RegistryListApiSpecRevisions = function (req, config) {
+    /**
+     * registryListApiSpecRevisions - ListApiSpecRevisions lists all revisions of a spec. Revisions are returned in descending order of revision creation time.
+    **/
+    SDK.prototype.registryListApiSpecRevisions = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryListApiSpecRevisionsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/apis/{api}/versions/{version}/specs/{spec}:listRevisions", req.pathParams);
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.listApiSpecRevisionsResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -671,27 +685,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryListApiSpecs - ListApiSpecs returns matching specs.
-    SDK.prototype.RegistryListApiSpecs = function (req, config) {
+    /**
+     * registryListApiSpecs - ListApiSpecs returns matching specs.
+    **/
+    SDK.prototype.registryListApiSpecs = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryListApiSpecsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/apis/{api}/versions/{version}/specs", req.pathParams);
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.listApiSpecsResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -700,27 +715,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryListApiVersions - ListApiVersions returns matching versions.
-    SDK.prototype.RegistryListApiVersions = function (req, config) {
+    /**
+     * registryListApiVersions - ListApiVersions returns matching versions.
+    **/
+    SDK.prototype.registryListApiVersions = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryListApiVersionsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/apis/{api}/versions", req.pathParams);
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.listApiVersionsResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -729,27 +745,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryListApis - ListApis returns matching APIs.
-    SDK.prototype.RegistryListApis = function (req, config) {
+    /**
+     * registryListApis - ListApis returns matching APIs.
+    **/
+    SDK.prototype.registryListApis = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryListApisRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/apis", req.pathParams);
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.listApisResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -758,27 +775,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryListArtifacts - ListArtifacts returns matching artifacts.
-    SDK.prototype.RegistryListArtifacts = function (req, config) {
+    /**
+     * registryListArtifacts - ListArtifacts returns matching artifacts.
+    **/
+    SDK.prototype.registryListArtifacts = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryListArtifactsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/artifacts", req.pathParams);
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.listArtifactsResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -787,27 +805,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryListProjects - ListProjects returns matching projects.
-    SDK.prototype.RegistryListProjects = function (req, config) {
+    /**
+     * registryListProjects - ListProjects returns matching projects.
+    **/
+    SDK.prototype.registryListProjects = function (req, config) {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryListProjectsRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = baseURL.replace(/\/$/, "") + "/v1/projects";
-        var client = this.defaultClient;
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var client = this._defaultClient;
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         return client
-            .get(url, __assign({}, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "get" }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.listProjectsResponse = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -816,24 +835,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryReplaceArtifact - ReplaceArtifact can be used to replace a specified artifact.
-    SDK.prototype.RegistryReplaceArtifact = function (req, config) {
+    /**
+     * registryReplaceArtifact - ReplaceArtifact can be used to replace a specified artifact.
+    **/
+    SDK.prototype.registryReplaceArtifact = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryReplaceArtifactRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/artifacts/{artifact}", req.pathParams);
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
         var body;
         if (reqBody instanceof FormData)
@@ -843,16 +864,15 @@ var SDK = /** @class */ (function () {
         if (body == null || Object.keys(body).length === 0)
             throw new Error("request body is required");
         return client
-            .put(url, body, __assign({ headers: headers }, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "put", headers: headers, data: body }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.artifact = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -861,24 +881,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryRollbackApiSpec - RollbackApiSpec sets the current revision to a specified prior revision. Note that this creates a new revision with a new revision ID.
-    SDK.prototype.RegistryRollbackApiSpec = function (req, config) {
+    /**
+     * registryRollbackApiSpec - RollbackApiSpec sets the current revision to a specified prior revision. Note that this creates a new revision with a new revision ID.
+    **/
+    SDK.prototype.registryRollbackApiSpec = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryRollbackApiSpecRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/apis/{api}/versions/{version}/specs/{spec}:rollback", req.pathParams);
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
         var body;
         if (reqBody instanceof FormData)
@@ -888,16 +910,15 @@ var SDK = /** @class */ (function () {
         if (body == null || Object.keys(body).length === 0)
             throw new Error("request body is required");
         return client
-            .post(url, body, __assign({ headers: headers }, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.apiSpec = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -906,24 +927,26 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryTagApiSpecRevision - TagApiSpecRevision adds a tag to a specified revision of a spec.
-    SDK.prototype.RegistryTagApiSpecRevision = function (req, config) {
+    /**
+     * registryTagApiSpecRevision - TagApiSpecRevision adds a tag to a specified revision of a spec.
+    **/
+    SDK.prototype.registryTagApiSpecRevision = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryTagApiSpecRevisionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/apis/{api}/versions/{version}/specs/{spec}:tagRevision", req.pathParams);
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
         var body;
         if (reqBody instanceof FormData)
@@ -933,16 +956,15 @@ var SDK = /** @class */ (function () {
         if (body == null || Object.keys(body).length === 0)
             throw new Error("request body is required");
         return client
-            .post(url, body, __assign({ headers: headers }, config))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "post", headers: headers, data: body }, config)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.apiSpec = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -951,26 +973,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryUpdateApi - UpdateApi can be used to modify a specified API.
-    SDK.prototype.RegistryUpdateApi = function (req, config) {
+    /**
+     * registryUpdateApi - UpdateApi can be used to modify a specified API.
+    **/
+    SDK.prototype.registryUpdateApi = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryUpdateApiRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/apis/{api}", req.pathParams);
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -980,16 +1004,15 @@ var SDK = /** @class */ (function () {
         if (body == null || Object.keys(body).length === 0)
             throw new Error("request body is required");
         return client
-            .patch(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "patch", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.api = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -998,26 +1021,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryUpdateApiSpec - UpdateApiSpec can be used to modify a specified spec.
-    SDK.prototype.RegistryUpdateApiSpec = function (req, config) {
+    /**
+     * registryUpdateApiSpec - UpdateApiSpec can be used to modify a specified spec.
+    **/
+    SDK.prototype.registryUpdateApiSpec = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryUpdateApiSpecRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/apis/{api}/versions/{version}/specs/{spec}", req.pathParams);
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -1027,16 +1052,15 @@ var SDK = /** @class */ (function () {
         if (body == null || Object.keys(body).length === 0)
             throw new Error("request body is required");
         return client
-            .patch(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "patch", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.apiSpec = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -1045,26 +1069,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryUpdateApiVersion - UpdateApiVersion can be used to modify a specified version.
-    SDK.prototype.RegistryUpdateApiVersion = function (req, config) {
+    /**
+     * registryUpdateApiVersion - UpdateApiVersion can be used to modify a specified version.
+    **/
+    SDK.prototype.registryUpdateApiVersion = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryUpdateApiVersionRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}/apis/{api}/versions/{version}", req.pathParams);
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -1074,16 +1100,15 @@ var SDK = /** @class */ (function () {
         if (body == null || Object.keys(body).length === 0)
             throw new Error("request body is required");
         return client
-            .patch(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "patch", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.apiVersion = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;
@@ -1092,26 +1117,28 @@ var SDK = /** @class */ (function () {
         })
             .catch(function (error) { throw error; });
     };
-    // RegistryUpdateProject - UpdateProject can be used to modify a specified project.
-    SDK.prototype.RegistryUpdateProject = function (req, config) {
+    /**
+     * registryUpdateProject - UpdateProject can be used to modify a specified project.
+    **/
+    SDK.prototype.registryUpdateProject = function (req, config) {
         var _a;
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.RegistryUpdateProjectRequest(req);
         }
-        var baseURL = this.serverURL;
+        var baseURL = this._serverURL;
         var url = utils.GenerateURL(baseURL, "/v1/projects/{project}", req.pathParams);
         var _b = [{}, {}], reqBodyHeaders = _b[0], reqBody = _b[1];
         try {
-            _a = SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
+            _a = utils.SerializeRequestBody(req), reqBodyHeaders = _a[0], reqBody = _a[1];
         }
         catch (e) {
             if (e instanceof Error) {
                 throw new Error("Error serializing request body, cause: ".concat(e.message));
             }
         }
-        var client = this.defaultClient;
+        var client = this._defaultClient;
         var headers = __assign(__assign({}, reqBodyHeaders), config === null || config === void 0 ? void 0 : config.headers);
-        var qpSerializer = GetQueryParamSerializer(req.queryParams);
+        var qpSerializer = utils.GetQueryParamSerializer(req.queryParams);
         var requestConfig = __assign(__assign({}, config), { params: req.queryParams, paramsSerializer: qpSerializer });
         var body;
         if (reqBody instanceof FormData)
@@ -1121,16 +1148,15 @@ var SDK = /** @class */ (function () {
         if (body == null || Object.keys(body).length === 0)
             throw new Error("request body is required");
         return client
-            .patch(url, body, __assign({ headers: headers }, requestConfig))
-            .then(function (httpRes) {
+            .request(__assign({ url: url, method: "patch", headers: headers, data: body }, requestConfig)).then(function (httpRes) {
             var _a, _b;
             var contentType = (_b = (_a = httpRes === null || httpRes === void 0 ? void 0 : httpRes.headers) === null || _a === void 0 ? void 0 : _a["content-type"]) !== null && _b !== void 0 ? _b : "";
             if ((httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == null)
                 throw new Error("status code not found in response: ".concat(httpRes));
             var res = { statusCode: httpRes.status, contentType: contentType };
-            switch (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) {
-                case 200:
-                    if (MatchContentType(contentType, "application/json")) {
+            switch (true) {
+                case (httpRes === null || httpRes === void 0 ? void 0 : httpRes.status) == 200:
+                    if (utils.MatchContentType(contentType, "application/json")) {
                         res.project = httpRes === null || httpRes === void 0 ? void 0 : httpRes.data;
                     }
                     break;

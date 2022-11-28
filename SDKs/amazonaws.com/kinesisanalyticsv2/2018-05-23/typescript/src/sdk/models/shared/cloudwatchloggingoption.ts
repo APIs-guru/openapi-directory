@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CloudWatchLoggingOption
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides a description of Amazon CloudWatch logging options, including the log stream Amazon Resource Name (ARN). 
 **/
 export class CloudWatchLoggingOption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LogStreamARN" })
+  @SpeakeasyMetadata({ data: "json, name=LogStreamARN" })
   logStreamArn: string;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetConsoleScreenshotActionEnum(str, Enum):
     GET_CONSOLE_SCREENSHOT = "GetConsoleScreenshot"
@@ -10,8 +14,8 @@ class PostGetConsoleScreenshotVersionEnum(str, Enum):
 
 @dataclass
 class PostGetConsoleScreenshotQueryParams:
-    action: PostGetConsoleScreenshotActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetConsoleScreenshotVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetConsoleScreenshotActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetConsoleScreenshotVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetConsoleScreenshotHeaders:
 
 @dataclass
 class PostGetConsoleScreenshotRequest:
-    query_params: PostGetConsoleScreenshotQueryParams = field(default=None)
-    headers: PostGetConsoleScreenshotHeaders = field(default=None)
+    headers: PostGetConsoleScreenshotHeaders = field()
+    query_params: PostGetConsoleScreenshotQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetConsoleScreenshotResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

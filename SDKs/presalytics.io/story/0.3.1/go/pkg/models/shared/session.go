@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Session
+// A user session with an open story
 type Session struct {
 	Collaborator    *StoryCollaborator `json:"collaborator,omitempty"`
 	CollaboratorID  *string            `json:"collaborator_id,omitempty"`

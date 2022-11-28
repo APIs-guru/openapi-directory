@@ -1,5 +1,7 @@
 package shared
 
+// ListExecutionsResponse
+// ListExecutionsResponse is a list of Executions resources.
 type ListExecutionsResponse struct {
 	APIVersion  *string     `json:"apiVersion,omitempty"`
 	Items       []Execution `json:"items,omitempty"`

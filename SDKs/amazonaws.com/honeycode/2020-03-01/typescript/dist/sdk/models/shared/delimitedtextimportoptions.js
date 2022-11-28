@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImportDataCharacterEncodingEnum } from "./importdatacharacterencodingenum";
 // DelimitedTextImportOptions
 /**
@@ -34,19 +34,19 @@ var DelimitedTextImportOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dataCharacterEncoding" }),
+        SpeakeasyMetadata({ data: "json, name=dataCharacterEncoding" }),
         __metadata("design:type", String)
     ], DelimitedTextImportOptions.prototype, "dataCharacterEncoding", void 0);
     __decorate([
-        Metadata({ data: "json, name=delimiter" }),
+        SpeakeasyMetadata({ data: "json, name=delimiter" }),
         __metadata("design:type", String)
     ], DelimitedTextImportOptions.prototype, "delimiter", void 0);
     __decorate([
-        Metadata({ data: "json, name=hasHeaderRow" }),
+        SpeakeasyMetadata({ data: "json, name=hasHeaderRow" }),
         __metadata("design:type", Boolean)
     ], DelimitedTextImportOptions.prototype, "hasHeaderRow", void 0);
     __decorate([
-        Metadata({ data: "json, name=ignoreEmptyRows" }),
+        SpeakeasyMetadata({ data: "json, name=ignoreEmptyRows" }),
         __metadata("design:type", Boolean)
     ], DelimitedTextImportOptions.prototype, "ignoreEmptyRows", void 0);
     return DelimitedTextImportOptions;

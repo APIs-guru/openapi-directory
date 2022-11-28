@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlarmState } from "./alarmstate";
 // Alarm
 /**
@@ -34,31 +34,31 @@ var Alarm = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alarmModelName" }),
+        SpeakeasyMetadata({ data: "json, name=alarmModelName" }),
         __metadata("design:type", String)
     ], Alarm.prototype, "alarmModelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=alarmModelVersion" }),
+        SpeakeasyMetadata({ data: "json, name=alarmModelVersion" }),
         __metadata("design:type", String)
     ], Alarm.prototype, "alarmModelVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=alarmState" }),
+        SpeakeasyMetadata({ data: "json, name=alarmState" }),
         __metadata("design:type", AlarmState)
     ], Alarm.prototype, "alarmState", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], Alarm.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=keyValue" }),
+        SpeakeasyMetadata({ data: "json, name=keyValue" }),
         __metadata("design:type", String)
     ], Alarm.prototype, "keyValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdateTime" }),
         __metadata("design:type", Date)
     ], Alarm.prototype, "lastUpdateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=severity" }),
+        SpeakeasyMetadata({ data: "json, name=severity" }),
         __metadata("design:type", Number)
     ], Alarm.prototype, "severity", void 0);
     return Alarm;

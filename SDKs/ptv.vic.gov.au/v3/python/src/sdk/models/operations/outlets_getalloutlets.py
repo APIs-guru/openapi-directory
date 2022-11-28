@@ -13,14 +13,14 @@ class OutletsGetAllOutletsQueryParams:
 
 @dataclass
 class OutletsGetAllOutletsRequest:
-    query_params: OutletsGetAllOutletsQueryParams = field(default=None)
+    query_params: OutletsGetAllOutletsQueryParams = field()
     
 
 @dataclass
 class OutletsGetAllOutletsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     v3_error_response: Optional[shared.V3ErrorResponse] = field(default=None)
     v3_outlet_response: Optional[shared.V3OutletResponse] = field(default=None)
     

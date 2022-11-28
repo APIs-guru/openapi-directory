@@ -1,5 +1,7 @@
 package shared
 
+// Subnetwork
+// Represents a subnet that was created or discovered by a private access management service.
 type Subnetwork struct {
 	IPCidrRange       *string            `json:"ipCidrRange,omitempty"`
 	Name              *string            `json:"name,omitempty"`

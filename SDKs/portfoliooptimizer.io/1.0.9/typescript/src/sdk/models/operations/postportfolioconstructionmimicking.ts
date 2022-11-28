@@ -1,67 +1,68 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostPortfolioConstructionMimickingRequestBodyAssets extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetReturns" })
+  @SpeakeasyMetadata({ data: "json, name=assetReturns" })
   assetReturns: number[];
 }
 
 
 export class PostPortfolioConstructionMimickingRequestBodyConstraints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetsGroups" })
+  @SpeakeasyMetadata({ data: "json, name=assetsGroups" })
   assetsGroups?: number[][];
 
-  @Metadata({ data: "json, name=assetsGroupsMatrix" })
+  @SpeakeasyMetadata({ data: "json, name=assetsGroupsMatrix" })
   assetsGroupsMatrix?: number[][];
 
-  @Metadata({ data: "json, name=maximumAssetsGroupsWeights" })
+  @SpeakeasyMetadata({ data: "json, name=maximumAssetsGroupsWeights" })
   maximumAssetsGroupsWeights?: number[];
 
-  @Metadata({ data: "json, name=maximumAssetsWeights" })
+  @SpeakeasyMetadata({ data: "json, name=maximumAssetsWeights" })
   maximumAssetsWeights?: number[];
 
-  @Metadata({ data: "json, name=maximumPortfolioExposure" })
+  @SpeakeasyMetadata({ data: "json, name=maximumPortfolioExposure" })
   maximumPortfolioExposure?: number;
 
-  @Metadata({ data: "json, name=minimumAssetsWeights" })
+  @SpeakeasyMetadata({ data: "json, name=minimumAssetsWeights" })
   minimumAssetsWeights?: number[];
 
-  @Metadata({ data: "json, name=minimumPortfolioExposure" })
+  @SpeakeasyMetadata({ data: "json, name=minimumPortfolioExposure" })
   minimumPortfolioExposure?: number;
 }
 
 
 export class PostPortfolioConstructionMimickingRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets", elemType: operations.PostPortfolioConstructionMimickingRequestBodyAssets })
+  @SpeakeasyMetadata({ data: "json, name=assets", elemType: PostPortfolioConstructionMimickingRequestBodyAssets })
   assets: PostPortfolioConstructionMimickingRequestBodyAssets[];
 
-  @Metadata({ data: "json, name=benchmarkReturns" })
+  @SpeakeasyMetadata({ data: "json, name=benchmarkReturns" })
   benchmarkReturns: number[];
 
-  @Metadata({ data: "json, name=constraints" })
+  @SpeakeasyMetadata({ data: "json, name=constraints" })
   constraints?: PostPortfolioConstructionMimickingRequestBodyConstraints;
 }
 
 
-export class PostPortfolioConstructionMimickingRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: PostPortfolioConstructionMimickingRequestBody;
-}
-
-
 export class PostPortfolioConstructionMimicking200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetsWeights" })
+  @SpeakeasyMetadata({ data: "json, name=assetsWeights" })
   assetsWeights: number[];
 }
 
 
+export class PostPortfolioConstructionMimickingRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: PostPortfolioConstructionMimickingRequestBody;
+}
+
+
 export class PostPortfolioConstructionMimickingResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postPortfolioConstructionMimicking200ApplicationJsonObject?: PostPortfolioConstructionMimicking200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetPredictiveScalingForecastActionEnum(str, Enum):
     GET_PREDICTIVE_SCALING_FORECAST = "GetPredictiveScalingForecast"
@@ -10,8 +14,8 @@ class PostGetPredictiveScalingForecastVersionEnum(str, Enum):
 
 @dataclass
 class PostGetPredictiveScalingForecastQueryParams:
-    action: PostGetPredictiveScalingForecastActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetPredictiveScalingForecastVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetPredictiveScalingForecastActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetPredictiveScalingForecastVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostGetPredictiveScalingForecastHeaders:
 
 @dataclass
 class PostGetPredictiveScalingForecastRequest:
-    query_params: PostGetPredictiveScalingForecastQueryParams = field(default=None)
-    headers: PostGetPredictiveScalingForecastHeaders = field(default=None)
+    headers: PostGetPredictiveScalingForecastHeaders = field()
+    query_params: PostGetPredictiveScalingForecastQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostGetPredictiveScalingForecastResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

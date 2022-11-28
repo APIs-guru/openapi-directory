@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstancePortState } from "./instanceportstate";
 
 
+
 export class GetInstancePortStatesResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=portStates", elemType: shared.InstancePortState })
+  @SpeakeasyMetadata({ data: "json, name=portStates", elemType: InstancePortState })
   portStates?: InstancePortState[];
 }

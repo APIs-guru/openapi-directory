@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import effectivedeployment
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListEffectiveDeploymentsResponse:
-    effective_deployments: Optional[List[effectivedeployment.EffectiveDeployment]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'effectiveDeployments' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    effective_deployments: Optional[List[EffectiveDeployment]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('effectiveDeployments') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     

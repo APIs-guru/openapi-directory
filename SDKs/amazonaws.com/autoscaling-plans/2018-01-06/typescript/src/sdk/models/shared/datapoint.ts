@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Datapoint
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a single value in the forecast data used for predictive scaling.
 **/
 export class Datapoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=Timestamp" })
   timestamp?: Date;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: number;
 }

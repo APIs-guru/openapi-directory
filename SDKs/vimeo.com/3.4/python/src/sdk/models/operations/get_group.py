@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetGroupPathParams:
-    group_id: float = field(default=None, metadata={'path_param': { 'field_name': 'group_id', 'style': 'simple', 'explode': False }})
+    group_id: float = field(metadata={'path_param': { 'field_name': 'group_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetGroupRequest:
-    path_params: GetGroupPathParams = field(default=None)
+    path_params: GetGroupPathParams = field()
     
 
 @dataclass
 class GetGroupResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     group: Optional[shared.Group] = field(default=None)
     

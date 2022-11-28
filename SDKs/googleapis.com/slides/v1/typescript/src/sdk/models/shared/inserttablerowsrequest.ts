@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableCellLocation } from "./tablecelllocation";
+
 
 
 // InsertTableRowsRequest
@@ -7,15 +8,15 @@ import { TableCellLocation } from "./tablecelllocation";
  * Inserts rows into a table.
 **/
 export class InsertTableRowsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cellLocation" })
+  @SpeakeasyMetadata({ data: "json, name=cellLocation" })
   cellLocation?: TableCellLocation;
 
-  @Metadata({ data: "json, name=insertBelow" })
+  @SpeakeasyMetadata({ data: "json, name=insertBelow" })
   insertBelow?: boolean;
 
-  @Metadata({ data: "json, name=number" })
+  @SpeakeasyMetadata({ data: "json, name=number" })
   number?: number;
 
-  @Metadata({ data: "json, name=tableObjectId" })
+  @SpeakeasyMetadata({ data: "json, name=tableObjectId" })
   tableObjectId?: string;
 }

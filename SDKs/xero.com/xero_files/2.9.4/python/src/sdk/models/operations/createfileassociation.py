@@ -5,30 +5,30 @@ from sdk.models import shared
 
 @dataclass
 class CreateFileAssociationPathParams:
-    file_id: str = field(default=None, metadata={'path_param': { 'field_name': 'FileId', 'style': 'simple', 'explode': False }})
+    file_id: str = field(metadata={'path_param': { 'field_name': 'FileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CreateFileAssociationHeaders:
-    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'xero-tenant-id', 'style': 'simple', 'explode': False }})
+    xero_tenant_id: str = field(metadata={'header': { 'field_name': 'xero-tenant-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CreateFileAssociationSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CreateFileAssociationRequest:
-    path_params: CreateFileAssociationPathParams = field(default=None)
-    headers: CreateFileAssociationHeaders = field(default=None)
+    headers: CreateFileAssociationHeaders = field()
+    path_params: CreateFileAssociationPathParams = field()
+    security: CreateFileAssociationSecurity = field()
     request: Optional[shared.Association] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CreateFileAssociationSecurity = field(default=None)
     
 
 @dataclass
 class CreateFileAssociationResponse:
+    content_type: str = field()
+    status_code: int = field()
     association: Optional[shared.Association] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

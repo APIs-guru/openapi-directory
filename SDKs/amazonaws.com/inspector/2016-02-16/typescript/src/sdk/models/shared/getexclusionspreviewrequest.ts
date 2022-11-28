@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocaleEnum } from "./localeenum";
 
 
+
 export class GetExclusionsPreviewRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assessmentTemplateArn" })
+  @SpeakeasyMetadata({ data: "json, name=assessmentTemplateArn" })
   assessmentTemplateArn: string;
 
-  @Metadata({ data: "json, name=locale" })
+  @SpeakeasyMetadata({ data: "json, name=locale" })
   locale?: LocaleEnum;
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=previewToken" })
+  @SpeakeasyMetadata({ data: "json, name=previewToken" })
   previewToken: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntitiesDetectionJobFilter } from "./entitiesdetectionjobfilter";
 var ListEntitiesDetectionJobsRequest = /** @class */ (function (_super) {
     __extends(ListEntitiesDetectionJobsRequest, _super);
@@ -30,15 +30,15 @@ var ListEntitiesDetectionJobsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Filter" }),
+        SpeakeasyMetadata({ data: "json, name=Filter" }),
         __metadata("design:type", EntitiesDetectionJobFilter)
     ], ListEntitiesDetectionJobsRequest.prototype, "filter", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], ListEntitiesDetectionJobsRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListEntitiesDetectionJobsRequest.prototype, "nextToken", void 0);
     return ListEntitiesDetectionJobsRequest;

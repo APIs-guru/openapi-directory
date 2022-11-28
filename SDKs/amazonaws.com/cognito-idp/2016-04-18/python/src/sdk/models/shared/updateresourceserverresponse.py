@@ -1,10 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
-from . import resourceservertype
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateResourceServerResponse:
-    resource_server: resourceservertype.ResourceServerType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceServer' }})
+    resource_server: ResourceServerType = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceServer') }})
     

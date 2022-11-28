@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class PostMarketingV3MarketingEventsEventsExternalEventIdSubscriberStateEmailUpsertDoEmailUpsertByIdPathParams extends SpeakeasyBase {
     externalEventId: string;
@@ -7,15 +7,10 @@ export declare class PostMarketingV3MarketingEventsEventsExternalEventIdSubscrib
 export declare class PostMarketingV3MarketingEventsEventsExternalEventIdSubscriberStateEmailUpsertDoEmailUpsertByIdQueryParams extends SpeakeasyBase {
     externalAccountId: string;
 }
-export declare class PostMarketingV3MarketingEventsEventsExternalEventIdSubscriberStateEmailUpsertDoEmailUpsertByIdSecurityOption1 extends SpeakeasyBase {
-    hapikey: shared.SchemeHapikey;
-}
-export declare class PostMarketingV3MarketingEventsEventsExternalEventIdSubscriberStateEmailUpsertDoEmailUpsertByIdSecurityOption2 extends SpeakeasyBase {
-    oauth2Legacy: shared.SchemeOauth2Legacy;
-}
 export declare class PostMarketingV3MarketingEventsEventsExternalEventIdSubscriberStateEmailUpsertDoEmailUpsertByIdSecurity extends SpeakeasyBase {
-    option1?: PostMarketingV3MarketingEventsEventsExternalEventIdSubscriberStateEmailUpsertDoEmailUpsertByIdSecurityOption1;
-    option2?: PostMarketingV3MarketingEventsEventsExternalEventIdSubscriberStateEmailUpsertDoEmailUpsertByIdSecurityOption2;
+    hapikey?: shared.SchemeHapikey;
+    privateAppsLegacy?: shared.SchemePrivateAppsLegacy;
+    oauth2Legacy?: shared.SchemeOauth2Legacy;
 }
 export declare class PostMarketingV3MarketingEventsEventsExternalEventIdSubscriberStateEmailUpsertDoEmailUpsertByIdRequest extends SpeakeasyBase {
     pathParams: PostMarketingV3MarketingEventsEventsExternalEventIdSubscriberStateEmailUpsertDoEmailUpsertByIdPathParams;

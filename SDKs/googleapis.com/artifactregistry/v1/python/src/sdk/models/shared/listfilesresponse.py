@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googledevtoolsartifactregistryv1file
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListFilesResponse:
-    files: Optional[List[googledevtoolsartifactregistryv1file.GoogleDevtoolsArtifactregistryV1File]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'files' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""ListFilesResponse
+    The response from listing files.
+    """
+    
+    files: Optional[List[GoogleDevtoolsArtifactregistryV1File]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('files') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

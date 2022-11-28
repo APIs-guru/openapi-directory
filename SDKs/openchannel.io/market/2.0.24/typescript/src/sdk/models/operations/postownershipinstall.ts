@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostOwnershipInstallQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=appId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=appId" })
   appId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=customData" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=customData" })
   customData?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=model" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=model" })
   model?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=modelId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modelId" })
   modelId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" })
   userId: string;
 }
 
 
 export class PostOwnershipInstallRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostOwnershipInstallQueryParams;
 }
 
 
 export class PostOwnershipInstallResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AudioCodecOptions
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Options associated with your audio codec.
 **/
 export class AudioCodecOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BitDepth" })
+  @SpeakeasyMetadata({ data: "json, name=BitDepth" })
   bitDepth?: string;
 
-  @Metadata({ data: "json, name=BitOrder" })
+  @SpeakeasyMetadata({ data: "json, name=BitOrder" })
   bitOrder?: string;
 
-  @Metadata({ data: "json, name=Profile" })
+  @SpeakeasyMetadata({ data: "json, name=Profile" })
   profile?: string;
 
-  @Metadata({ data: "json, name=Signed" })
+  @SpeakeasyMetadata({ data: "json, name=Signed" })
   signed?: string;
 }

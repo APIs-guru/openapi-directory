@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class ForumGetPostAndParentPathParams:
-    child_post_id: int = field(default=None, metadata={'path_param': { 'field_name': 'childPostId', 'style': 'simple', 'explode': False }})
+    child_post_id: int = field(metadata={'path_param': { 'field_name': 'childPostId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,13 +14,13 @@ class ForumGetPostAndParentQueryParams:
 
 @dataclass
 class ForumGetPostAndParentRequest:
-    path_params: ForumGetPostAndParentPathParams = field(default=None)
-    query_params: ForumGetPostAndParentQueryParams = field(default=None)
+    path_params: ForumGetPostAndParentPathParams = field()
+    query_params: ForumGetPostAndParentQueryParams = field()
     
 
 @dataclass
 class ForumGetPostAndParentResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import measurement3d
-from . import measurement3d
-from . import measurement3d
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Imu:
-    accel_mpsps: Optional[List[measurement3d.Measurement3d]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accelMpsps' }})
-    gyro_rps: Optional[List[measurement3d.Measurement3d]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gyroRps' }})
-    mag_ut: Optional[List[measurement3d.Measurement3d]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'magUt' }})
+    r"""Imu
+    IMU data from the device sensors.
+    """
+    
+    accel_mpsps: Optional[List[Measurement3d]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accelMpsps') }})
+    gyro_rps: Optional[List[Measurement3d]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gyroRps') }})
+    mag_ut: Optional[List[Measurement3d]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('magUt') }})
     

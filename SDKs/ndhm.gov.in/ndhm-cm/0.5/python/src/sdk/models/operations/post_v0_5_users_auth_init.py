@@ -5,25 +5,25 @@ from sdk.models import shared
 
 @dataclass
 class PostV05UsersAuthInitHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostV05UsersAuthInitRequests:
-    application_xml: bytes = field(default=None, metadata={'request': { 'media_type': 'application/xml' }})
+    application_xml: bytes = field(metadata={'request': { 'media_type': 'application/xml' }})
     patient_auth_init_request: Optional[shared.PatientAuthInitRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PostV05UsersAuthInitRequest:
-    headers: PostV05UsersAuthInitHeaders = field(default=None)
-    request: PostV05UsersAuthInitRequests = field(default=None)
+    headers: PostV05UsersAuthInitHeaders = field()
+    request: PostV05UsersAuthInitRequests = field()
     
 
 @dataclass
 class PostV05UsersAuthInitResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

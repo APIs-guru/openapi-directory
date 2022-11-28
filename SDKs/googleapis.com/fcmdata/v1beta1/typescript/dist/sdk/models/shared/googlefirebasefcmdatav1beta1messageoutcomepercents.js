@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleFirebaseFcmDataV1beta1MessageOutcomePercents
 /**
  * Percentage breakdown of message delivery outcomes. These categories are mutually exclusive. All percentages are calculated with countMessagesAccepted as the denominator. These categories may not account for all message outcomes.
@@ -33,23 +33,23 @@ var GoogleFirebaseFcmDataV1beta1MessageOutcomePercents = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=delivered" }),
+        SpeakeasyMetadata({ data: "json, name=delivered" }),
         __metadata("design:type", Number)
     ], GoogleFirebaseFcmDataV1beta1MessageOutcomePercents.prototype, "delivered", void 0);
     __decorate([
-        Metadata({ data: "json, name=droppedAppForceStopped" }),
+        SpeakeasyMetadata({ data: "json, name=droppedAppForceStopped" }),
         __metadata("design:type", Number)
     ], GoogleFirebaseFcmDataV1beta1MessageOutcomePercents.prototype, "droppedAppForceStopped", void 0);
     __decorate([
-        Metadata({ data: "json, name=droppedDeviceInactive" }),
+        SpeakeasyMetadata({ data: "json, name=droppedDeviceInactive" }),
         __metadata("design:type", Number)
     ], GoogleFirebaseFcmDataV1beta1MessageOutcomePercents.prototype, "droppedDeviceInactive", void 0);
     __decorate([
-        Metadata({ data: "json, name=droppedTooManyPendingMessages" }),
+        SpeakeasyMetadata({ data: "json, name=droppedTooManyPendingMessages" }),
         __metadata("design:type", Number)
     ], GoogleFirebaseFcmDataV1beta1MessageOutcomePercents.prototype, "droppedTooManyPendingMessages", void 0);
     __decorate([
-        Metadata({ data: "json, name=pending" }),
+        SpeakeasyMetadata({ data: "json, name=pending" }),
         __metadata("design:type", Number)
     ], GoogleFirebaseFcmDataV1beta1MessageOutcomePercents.prototype, "pending", void 0);
     return GoogleFirebaseFcmDataV1beta1MessageOutcomePercents;

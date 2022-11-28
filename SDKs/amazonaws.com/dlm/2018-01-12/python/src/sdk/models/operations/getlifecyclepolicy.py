@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetLifecyclePolicyPathParams:
-    policy_id: str = field(default=None, metadata={'path_param': { 'field_name': 'policyId', 'style': 'simple', 'explode': False }})
+    policy_id: str = field(metadata={'path_param': { 'field_name': 'policyId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,16 +24,16 @@ class GetLifecyclePolicyHeaders:
 
 @dataclass
 class GetLifecyclePolicyRequest:
-    path_params: GetLifecyclePolicyPathParams = field(default=None)
-    headers: GetLifecyclePolicyHeaders = field(default=None)
+    headers: GetLifecyclePolicyHeaders = field()
+    path_params: GetLifecyclePolicyPathParams = field()
     
 
 @dataclass
 class GetLifecyclePolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_lifecycle_policy_response: Optional[shared.GetLifecyclePolicyResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

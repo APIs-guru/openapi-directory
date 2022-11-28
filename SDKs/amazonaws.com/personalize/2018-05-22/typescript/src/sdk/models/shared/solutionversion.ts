@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SolutionConfig } from "./solutionconfig";
 import { TrainingModeEnum } from "./trainingmodeenum";
 import { TunedHpoParams } from "./tunedhpoparams";
+
 
 
 // SolutionVersion
@@ -9,48 +10,48 @@ import { TunedHpoParams } from "./tunedhpoparams";
  * An object that provides information about a specific version of a <a>Solution</a>.
 **/
 export class SolutionVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationDateTime" })
   creationDateTime?: Date;
 
-  @Metadata({ data: "json, name=datasetGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=datasetGroupArn" })
   datasetGroupArn?: string;
 
-  @Metadata({ data: "json, name=eventType" })
+  @SpeakeasyMetadata({ data: "json, name=eventType" })
   eventType?: string;
 
-  @Metadata({ data: "json, name=failureReason" })
+  @SpeakeasyMetadata({ data: "json, name=failureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" })
   lastUpdatedDateTime?: Date;
 
-  @Metadata({ data: "json, name=performAutoML" })
+  @SpeakeasyMetadata({ data: "json, name=performAutoML" })
   performAutoMl?: boolean;
 
-  @Metadata({ data: "json, name=performHPO" })
+  @SpeakeasyMetadata({ data: "json, name=performHPO" })
   performHpo?: boolean;
 
-  @Metadata({ data: "json, name=recipeArn" })
+  @SpeakeasyMetadata({ data: "json, name=recipeArn" })
   recipeArn?: string;
 
-  @Metadata({ data: "json, name=solutionArn" })
+  @SpeakeasyMetadata({ data: "json, name=solutionArn" })
   solutionArn?: string;
 
-  @Metadata({ data: "json, name=solutionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=solutionConfig" })
   solutionConfig?: SolutionConfig;
 
-  @Metadata({ data: "json, name=solutionVersionArn" })
+  @SpeakeasyMetadata({ data: "json, name=solutionVersionArn" })
   solutionVersionArn?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=trainingHours" })
+  @SpeakeasyMetadata({ data: "json, name=trainingHours" })
   trainingHours?: number;
 
-  @Metadata({ data: "json, name=trainingMode" })
+  @SpeakeasyMetadata({ data: "json, name=trainingMode" })
   trainingMode?: TrainingModeEnum;
 
-  @Metadata({ data: "json, name=tunedHPOParams" })
+  @SpeakeasyMetadata({ data: "json, name=tunedHPOParams" })
   tunedHpoParams?: TunedHpoParams;
 }

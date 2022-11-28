@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssetResponseAttributes } from "./assetresponseattributes";
+
 
 
 // AssetResponseData
@@ -7,9 +8,9 @@ import { AssetResponseAttributes } from "./assetresponseattributes";
  * The type of resource (an asset) and attributes of the asset.
 **/
 export class AssetResponseData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: AssetResponseAttributes;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

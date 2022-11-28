@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAbortEnvironmentUpdateActionEnum(str, Enum):
     ABORT_ENVIRONMENT_UPDATE = "AbortEnvironmentUpdate"
@@ -10,10 +14,10 @@ class GetAbortEnvironmentUpdateVersionEnum(str, Enum):
 
 @dataclass
 class GetAbortEnvironmentUpdateQueryParams:
-    action: GetAbortEnvironmentUpdateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetAbortEnvironmentUpdateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetAbortEnvironmentUpdateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     environment_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'EnvironmentId', 'style': 'form', 'explode': True }})
     environment_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'EnvironmentName', 'style': 'form', 'explode': True }})
-    version: GetAbortEnvironmentUpdateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetAbortEnvironmentUpdateHeaders:
 
 @dataclass
 class GetAbortEnvironmentUpdateRequest:
-    query_params: GetAbortEnvironmentUpdateQueryParams = field(default=None)
-    headers: GetAbortEnvironmentUpdateHeaders = field(default=None)
+    headers: GetAbortEnvironmentUpdateHeaders = field()
+    query_params: GetAbortEnvironmentUpdateQueryParams = field()
     
 
 @dataclass
 class GetAbortEnvironmentUpdateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

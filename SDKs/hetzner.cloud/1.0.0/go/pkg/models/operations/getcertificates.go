@@ -28,10 +28,8 @@ type GetCertificatesQueryParams struct {
 	Type          *GetCertificatesTypeParameterTypeEnum `queryParam:"style=form,explode=true,name=type"`
 }
 
-type GetCertificatesRequest struct {
-	QueryParams GetCertificatesQueryParams
-}
-
+// GetCertificatesCertificatesResponseCertificateStatusError
+// If issuance or renewal reports `failed`, this property contains information about what happened
 type GetCertificatesCertificatesResponseCertificateStatusError struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
@@ -54,6 +52,8 @@ const (
 	GetCertificatesCertificatesResponseCertificateStatusRenewalEnumUnavailable GetCertificatesCertificatesResponseCertificateStatusRenewalEnum = "unavailable"
 )
 
+// GetCertificatesCertificatesResponseCertificateStatus
+// Current status of a type `managed` Certificate, always *null* for type `uploaded` Certificates
 type GetCertificatesCertificatesResponseCertificateStatus struct {
 	Error    *GetCertificatesCertificatesResponseCertificateStatusError        `json:"error,omitempty"`
 	Issuance *GetCertificatesCertificatesResponseCertificateStatusIssuanceEnum `json:"issuance,omitempty"`
@@ -103,6 +103,10 @@ type GetCertificatesCertificatesResponseMeta struct {
 type GetCertificatesCertificatesResponse struct {
 	Certificates []GetCertificatesCertificatesResponseCertificate `json:"certificates"`
 	Meta         *GetCertificatesCertificatesResponseMeta         `json:"meta,omitempty"`
+}
+
+type GetCertificatesRequest struct {
+	QueryParams GetCertificatesQueryParams
 }
 
 type GetCertificatesResponse struct {

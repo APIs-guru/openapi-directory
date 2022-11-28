@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReportingPackageStatusSummaryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=PackageID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PackageID" })
   packageId: string;
 }
 
 
 export class ReportingPackageStatusSummaryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReportingPackageStatusSummaryQueryParams;
 }
 
 
 export class ReportingPackageStatusSummaryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateSystemModelsPackageStatusSummary?: shared.UpdateSystemModelsPackageStatusSummary;
 }

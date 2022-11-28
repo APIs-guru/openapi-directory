@@ -13,6 +13,8 @@ const (
 	AutoExportSettingsExportIntervalEnumYearly       AutoExportSettingsExportIntervalEnum = "Yearly"
 )
 
+// AutoExportSettings
+// Settings for the auto export functionality of a meter
 type AutoExportSettings struct {
 	ExportFormat   *string                               `json:"ExportFormat,omitempty"`
 	ExportInterval *AutoExportSettingsExportIntervalEnum `json:"ExportInterval,omitempty"`

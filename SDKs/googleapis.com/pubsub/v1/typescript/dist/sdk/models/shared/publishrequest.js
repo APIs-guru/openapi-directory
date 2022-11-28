@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PubsubMessage } from "./pubsubmessage";
 // PublishRequest
 /**
  * Request for the Publish method.
@@ -34,7 +34,7 @@ var PublishRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=messages", elemType: shared.PubsubMessage }),
+        SpeakeasyMetadata({ data: "json, name=messages", elemType: PubsubMessage }),
         __metadata("design:type", Array)
     ], PublishRequest.prototype, "messages", void 0);
     return PublishRequest;

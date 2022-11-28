@@ -1,5 +1,7 @@
 package shared
 
+// BeaconAttachment
+// Project-specific data associated with a beacon.
 type BeaconAttachment struct {
 	AttachmentName    *string  `json:"attachmentName,omitempty"`
 	CreationTimeMs    *string  `json:"creationTimeMs,omitempty"`

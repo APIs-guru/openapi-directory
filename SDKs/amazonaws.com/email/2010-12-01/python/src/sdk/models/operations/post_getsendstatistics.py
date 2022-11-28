@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostGetSendStatisticsActionEnum(str, Enum):
     GET_SEND_STATISTICS = "GetSendStatistics"
@@ -10,8 +14,8 @@ class PostGetSendStatisticsVersionEnum(str, Enum):
 
 @dataclass
 class PostGetSendStatisticsQueryParams:
-    action: PostGetSendStatisticsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostGetSendStatisticsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostGetSendStatisticsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostGetSendStatisticsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostGetSendStatisticsHeaders:
 
 @dataclass
 class PostGetSendStatisticsRequest:
-    query_params: PostGetSendStatisticsQueryParams = field(default=None)
-    headers: PostGetSendStatisticsHeaders = field(default=None)
+    headers: PostGetSendStatisticsHeaders = field()
+    query_params: PostGetSendStatisticsQueryParams = field()
     
 
 @dataclass
 class PostGetSendStatisticsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

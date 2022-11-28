@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // UserBlogs
 /**
  * The container of blogs for this user.
@@ -33,7 +33,7 @@ var UserBlogs = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=selfLink" }),
+        SpeakeasyMetadata({ data: "json, name=selfLink" }),
         __metadata("design:type", String)
     ], UserBlogs.prototype, "selfLink", void 0);
     return UserBlogs;
@@ -49,15 +49,15 @@ var UserLocale = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=country" }),
+        SpeakeasyMetadata({ data: "json, name=country" }),
         __metadata("design:type", String)
     ], UserLocale.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "json, name=language" }),
+        SpeakeasyMetadata({ data: "json, name=language" }),
         __metadata("design:type", String)
     ], UserLocale.prototype, "language", void 0);
     __decorate([
-        Metadata({ data: "json, name=variant" }),
+        SpeakeasyMetadata({ data: "json, name=variant" }),
         __metadata("design:type", String)
     ], UserLocale.prototype, "variant", void 0);
     return UserLocale;
@@ -69,39 +69,39 @@ var User = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=about" }),
+        SpeakeasyMetadata({ data: "json, name=about" }),
         __metadata("design:type", String)
     ], User.prototype, "about", void 0);
     __decorate([
-        Metadata({ data: "json, name=blogs" }),
+        SpeakeasyMetadata({ data: "json, name=blogs" }),
         __metadata("design:type", UserBlogs)
     ], User.prototype, "blogs", void 0);
     __decorate([
-        Metadata({ data: "json, name=created" }),
+        SpeakeasyMetadata({ data: "json, name=created" }),
         __metadata("design:type", String)
     ], User.prototype, "created", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], User.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], User.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], User.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=locale" }),
+        SpeakeasyMetadata({ data: "json, name=locale" }),
         __metadata("design:type", UserLocale)
     ], User.prototype, "locale", void 0);
     __decorate([
-        Metadata({ data: "json, name=selfLink" }),
+        SpeakeasyMetadata({ data: "json, name=selfLink" }),
         __metadata("design:type", String)
     ], User.prototype, "selfLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], User.prototype, "url", void 0);
     return User;

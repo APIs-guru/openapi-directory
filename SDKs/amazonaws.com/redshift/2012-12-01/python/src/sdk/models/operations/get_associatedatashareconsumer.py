@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAssociateDataShareConsumerActionEnum(str, Enum):
     ASSOCIATE_DATA_SHARE_CONSUMER = "AssociateDataShareConsumer"
@@ -10,11 +14,11 @@ class GetAssociateDataShareConsumerVersionEnum(str, Enum):
 
 @dataclass
 class GetAssociateDataShareConsumerQueryParams:
-    action: GetAssociateDataShareConsumerActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetAssociateDataShareConsumerActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    data_share_arn: str = field(metadata={'query_param': { 'field_name': 'DataShareArn', 'style': 'form', 'explode': True }})
+    version: GetAssociateDataShareConsumerVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     associate_entire_account: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AssociateEntireAccount', 'style': 'form', 'explode': True }})
     consumer_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'ConsumerArn', 'style': 'form', 'explode': True }})
-    data_share_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'DataShareArn', 'style': 'form', 'explode': True }})
-    version: GetAssociateDataShareConsumerVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetAssociateDataShareConsumerHeaders:
 
 @dataclass
 class GetAssociateDataShareConsumerRequest:
-    query_params: GetAssociateDataShareConsumerQueryParams = field(default=None)
-    headers: GetAssociateDataShareConsumerHeaders = field(default=None)
+    headers: GetAssociateDataShareConsumerHeaders = field()
+    query_params: GetAssociateDataShareConsumerQueryParams = field()
     
 
 @dataclass
 class GetAssociateDataShareConsumerResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

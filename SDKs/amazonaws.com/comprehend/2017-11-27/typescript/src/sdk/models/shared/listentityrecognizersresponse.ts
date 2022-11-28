@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EntityRecognizerProperties } from "./entityrecognizerproperties";
 
 
+
 export class ListEntityRecognizersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EntityRecognizerPropertiesList", elemType: shared.EntityRecognizerProperties })
+  @SpeakeasyMetadata({ data: "json, name=EntityRecognizerPropertiesList", elemType: EntityRecognizerProperties })
   entityRecognizerPropertiesList?: EntityRecognizerProperties[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

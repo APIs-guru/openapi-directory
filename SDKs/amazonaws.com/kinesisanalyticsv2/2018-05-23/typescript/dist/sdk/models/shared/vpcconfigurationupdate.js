@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // VpcConfigurationUpdate
 /**
  * Describes updates to the VPC configuration used by the application.
@@ -33,15 +33,15 @@ var VpcConfigurationUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=SecurityGroupIdUpdates" }),
+        SpeakeasyMetadata({ data: "json, name=SecurityGroupIdUpdates" }),
         __metadata("design:type", Array)
     ], VpcConfigurationUpdate.prototype, "securityGroupIdUpdates", void 0);
     __decorate([
-        Metadata({ data: "json, name=SubnetIdUpdates" }),
+        SpeakeasyMetadata({ data: "json, name=SubnetIdUpdates" }),
         __metadata("design:type", Array)
     ], VpcConfigurationUpdate.prototype, "subnetIdUpdates", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcConfigurationId" }),
+        SpeakeasyMetadata({ data: "json, name=VpcConfigurationId" }),
         __metadata("design:type", String)
     ], VpcConfigurationUpdate.prototype, "vpcConfigurationId", void 0);
     return VpcConfigurationUpdate;

@@ -1,6 +1,7 @@
 
 
+
 export enum NotificationTypeEnum {
-    Actual = "ACTUAL"
-,    Forecasted = "FORECASTED"
+    Actual = "ACTUAL",
+    Forecasted = "FORECASTED"
 }

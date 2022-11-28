@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetLegalEntityPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetLegalEntityRequest:
-    path_params: GetLegalEntityPathParams = field(default=None)
+    path_params: GetLegalEntityPathParams = field()
     
 
 @dataclass
 class GetLegalEntityResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     legal_entity: Optional[shared.LegalEntity] = field(default=None)
-    status_code: int = field(default=None)
     

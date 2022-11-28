@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostPutAnomalyDetectorActionEnum(str, Enum):
     PUT_ANOMALY_DETECTOR = "PutAnomalyDetector"
@@ -10,8 +14,8 @@ class PostPutAnomalyDetectorVersionEnum(str, Enum):
 
 @dataclass
 class PostPutAnomalyDetectorQueryParams:
-    action: PostPutAnomalyDetectorActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostPutAnomalyDetectorVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostPutAnomalyDetectorActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostPutAnomalyDetectorVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostPutAnomalyDetectorHeaders:
 
 @dataclass
 class PostPutAnomalyDetectorRequest:
-    query_params: PostPutAnomalyDetectorQueryParams = field(default=None)
-    headers: PostPutAnomalyDetectorHeaders = field(default=None)
+    headers: PostPutAnomalyDetectorHeaders = field()
+    query_params: PostPutAnomalyDetectorQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostPutAnomalyDetectorResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

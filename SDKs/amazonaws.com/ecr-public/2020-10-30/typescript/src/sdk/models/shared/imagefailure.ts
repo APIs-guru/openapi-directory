@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageFailureCodeEnum } from "./imagefailurecodeenum";
 import { ImageIdentifier } from "./imageidentifier";
+
 
 
 // ImageFailure
@@ -8,12 +9,12 @@ import { ImageIdentifier } from "./imageidentifier";
  * An object representing an Amazon ECR image failure.
 **/
 export class ImageFailure extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failureCode" })
+  @SpeakeasyMetadata({ data: "json, name=failureCode" })
   failureCode?: ImageFailureCodeEnum;
 
-  @Metadata({ data: "json, name=failureReason" })
+  @SpeakeasyMetadata({ data: "json, name=failureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=imageId" })
+  @SpeakeasyMetadata({ data: "json, name=imageId" })
   imageId?: ImageIdentifier;
 }

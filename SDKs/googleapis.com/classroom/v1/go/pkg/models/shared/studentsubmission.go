@@ -20,6 +20,8 @@ const (
 	StudentSubmissionStateEnumReclaimedByStudent         StudentSubmissionStateEnum = "RECLAIMED_BY_STUDENT"
 )
 
+// StudentSubmission
+// Student submission for course work. StudentSubmission items are generated when a CourseWork item is created. StudentSubmissions that have never been accessed (i.e. with `state` = NEW) may not have a creation time or update time.
 type StudentSubmission struct {
 	AlternateLink            *string                              `json:"alternateLink,omitempty"`
 	AssignedGrade            *float64                             `json:"assignedGrade,omitempty"`

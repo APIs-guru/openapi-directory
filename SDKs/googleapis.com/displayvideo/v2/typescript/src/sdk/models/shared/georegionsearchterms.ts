@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GeoRegionSearchTerms
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Search terms for geo region targeting options.
 **/
 export class GeoRegionSearchTerms extends SpeakeasyBase {
-  @Metadata({ data: "json, name=geoRegionQuery" })
+  @SpeakeasyMetadata({ data: "json, name=geoRegionQuery" })
   geoRegionQuery?: string;
 }

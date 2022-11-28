@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PredictMultipartRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   imageClassificationRequest?: shared.ImageClassificationRequest;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   imageClassificationRequest1?: shared.ImageClassificationRequest;
 }
 
 
 export class PredictMultipartSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerToken: shared.SchemeBearerToken;
 }
 
 
 export class PredictMultipartRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PredictMultipartRequests;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PredictMultipartSecurity;
 }
 
 
 export class PredictMultipartResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   imageClassificationResponse?: shared.ImageClassificationResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

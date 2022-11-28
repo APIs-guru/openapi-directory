@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IapProjectsBrandsIdentityAwareProxyClientsResetSecretPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class IapProjectsBrandsIdentityAwareProxyClientsResetSecretQueryParams:
 
 @dataclass
 class IapProjectsBrandsIdentityAwareProxyClientsResetSecretSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IapProjectsBrandsIdentityAwareProxyClientsResetSecretRequest:
-    path_params: IapProjectsBrandsIdentityAwareProxyClientsResetSecretPathParams = field(default=None)
-    query_params: IapProjectsBrandsIdentityAwareProxyClientsResetSecretQueryParams = field(default=None)
+    path_params: IapProjectsBrandsIdentityAwareProxyClientsResetSecretPathParams = field()
+    query_params: IapProjectsBrandsIdentityAwareProxyClientsResetSecretQueryParams = field()
+    security: IapProjectsBrandsIdentityAwareProxyClientsResetSecretSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IapProjectsBrandsIdentityAwareProxyClientsResetSecretSecurity = field(default=None)
     
 
 @dataclass
 class IapProjectsBrandsIdentityAwareProxyClientsResetSecretResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     identity_aware_proxy_client: Optional[shared.IdentityAwareProxyClient] = field(default=None)
-    status_code: int = field(default=None)
     

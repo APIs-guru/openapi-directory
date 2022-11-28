@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DcimInventoryItemsPartialUpdatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class DcimInventoryItemsPartialUpdateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DcimInventoryItemsPartialUpdatePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.WritableInventoryItem;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.WritableInventoryItemInput;
 }
 
 
 export class DcimInventoryItemsPartialUpdateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inventoryItem?: shared.InventoryItem;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

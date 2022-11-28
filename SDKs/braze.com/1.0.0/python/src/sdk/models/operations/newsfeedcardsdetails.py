@@ -9,11 +9,11 @@ class NewsFeedCardsDetailsQueryParams:
 
 @dataclass
 class NewsFeedCardsDetailsRequest:
-    query_params: NewsFeedCardsDetailsQueryParams = field(default=None)
+    query_params: NewsFeedCardsDetailsQueryParams = field()
     
 
 @dataclass
 class NewsFeedCardsDetailsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Certificate
@@ -6,33 +7,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The SSL certificate that can be used to encrypt connections between the endpoints and the replication instance.
 **/
 export class Certificate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CertificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateArn" })
   certificateArn?: string;
 
-  @Metadata({ data: "json, name=CertificateCreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateCreationDate" })
   certificateCreationDate?: Date;
 
-  @Metadata({ data: "json, name=CertificateIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateIdentifier" })
   certificateIdentifier?: string;
 
-  @Metadata({ data: "json, name=CertificateOwner" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateOwner" })
   certificateOwner?: string;
 
-  @Metadata({ data: "json, name=CertificatePem" })
+  @SpeakeasyMetadata({ data: "json, name=CertificatePem" })
   certificatePem?: string;
 
-  @Metadata({ data: "json, name=CertificateWallet" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateWallet" })
   certificateWallet?: string;
 
-  @Metadata({ data: "json, name=KeyLength" })
+  @SpeakeasyMetadata({ data: "json, name=KeyLength" })
   keyLength?: number;
 
-  @Metadata({ data: "json, name=SigningAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=SigningAlgorithm" })
   signingAlgorithm?: string;
 
-  @Metadata({ data: "json, name=ValidFromDate" })
+  @SpeakeasyMetadata({ data: "json, name=ValidFromDate" })
   validFromDate?: Date;
 
-  @Metadata({ data: "json, name=ValidToDate" })
+  @SpeakeasyMetadata({ data: "json, name=ValidToDate" })
   validToDate?: Date;
 }

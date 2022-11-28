@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeSpan } from "./timespan";
+
 
 
 // BuiltImage
@@ -7,12 +8,12 @@ import { TimeSpan } from "./timespan";
  * An image built by the pipeline.
 **/
 export class BuiltImage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=digest" })
+  @SpeakeasyMetadata({ data: "json, name=digest" })
   digest?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pushTiming" })
+  @SpeakeasyMetadata({ data: "json, name=pushTiming" })
   pushTiming?: TimeSpan;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// ItemImportRequest
+// ItemImportRequest defines the request schema for `/item/import`
 type ItemImportRequest struct {
 	ClientID *string                   `json:"client_id,omitempty"`
 	Options  *ItemImportRequestOptions `json:"options,omitempty"`

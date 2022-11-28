@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DomainsGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=domainName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=domainName" })
   domainName: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tenantID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tenantID" })
   tenantId: string;
 }
 
 
 export class DomainsGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api-version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" })
   apiVersion: string;
 }
 
 
 export class DomainsGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DomainsGetPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DomainsGetQueryParams;
 }
 
 
 export class DomainsGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   domain?: Map<string, Map<string, any>>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

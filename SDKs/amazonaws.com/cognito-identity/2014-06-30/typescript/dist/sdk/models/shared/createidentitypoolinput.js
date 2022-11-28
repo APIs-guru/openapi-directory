@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CognitoIdentityProvider } from "./cognitoidentityprovider";
 // CreateIdentityPoolInput
 /**
  * Input to the CreateIdentityPool action.
@@ -34,39 +34,39 @@ var CreateIdentityPoolInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AllowClassicFlow" }),
+        SpeakeasyMetadata({ data: "json, name=AllowClassicFlow" }),
         __metadata("design:type", Boolean)
     ], CreateIdentityPoolInput.prototype, "allowClassicFlow", void 0);
     __decorate([
-        Metadata({ data: "json, name=AllowUnauthenticatedIdentities" }),
+        SpeakeasyMetadata({ data: "json, name=AllowUnauthenticatedIdentities" }),
         __metadata("design:type", Boolean)
     ], CreateIdentityPoolInput.prototype, "allowUnauthenticatedIdentities", void 0);
     __decorate([
-        Metadata({ data: "json, name=CognitoIdentityProviders", elemType: shared.CognitoIdentityProvider }),
+        SpeakeasyMetadata({ data: "json, name=CognitoIdentityProviders", elemType: CognitoIdentityProvider }),
         __metadata("design:type", Array)
     ], CreateIdentityPoolInput.prototype, "cognitoIdentityProviders", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeveloperProviderName" }),
+        SpeakeasyMetadata({ data: "json, name=DeveloperProviderName" }),
         __metadata("design:type", String)
     ], CreateIdentityPoolInput.prototype, "developerProviderName", void 0);
     __decorate([
-        Metadata({ data: "json, name=IdentityPoolName" }),
+        SpeakeasyMetadata({ data: "json, name=IdentityPoolName" }),
         __metadata("design:type", String)
     ], CreateIdentityPoolInput.prototype, "identityPoolName", void 0);
     __decorate([
-        Metadata({ data: "json, name=IdentityPoolTags" }),
+        SpeakeasyMetadata({ data: "json, name=IdentityPoolTags" }),
         __metadata("design:type", Map)
     ], CreateIdentityPoolInput.prototype, "identityPoolTags", void 0);
     __decorate([
-        Metadata({ data: "json, name=OpenIdConnectProviderARNs" }),
+        SpeakeasyMetadata({ data: "json, name=OpenIdConnectProviderARNs" }),
         __metadata("design:type", Array)
     ], CreateIdentityPoolInput.prototype, "openIdConnectProviderArNs", void 0);
     __decorate([
-        Metadata({ data: "json, name=SamlProviderARNs" }),
+        SpeakeasyMetadata({ data: "json, name=SamlProviderARNs" }),
         __metadata("design:type", Array)
     ], CreateIdentityPoolInput.prototype, "samlProviderArNs", void 0);
     __decorate([
-        Metadata({ data: "json, name=SupportedLoginProviders" }),
+        SpeakeasyMetadata({ data: "json, name=SupportedLoginProviders" }),
         __metadata("design:type", Map)
     ], CreateIdentityPoolInput.prototype, "supportedLoginProviders", void 0);
     return CreateIdentityPoolInput;

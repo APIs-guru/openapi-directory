@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum BuildSystemSharedDtoParameterValueDirectionEnum {
-    Input = "Input"
-,    Output = "Output"
+    Input = "Input",
+    Output = "Output"
 }
 
 
@@ -11,12 +12,12 @@ export enum BuildSystemSharedDtoParameterValueDirectionEnum {
  * A DTO for an IParameterValue
 **/
 export class BuildSystemSharedDtoParameterValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Direction" })
+  @SpeakeasyMetadata({ data: "json, name=Direction" })
   direction?: BuildSystemSharedDtoParameterValueDirectionEnum;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

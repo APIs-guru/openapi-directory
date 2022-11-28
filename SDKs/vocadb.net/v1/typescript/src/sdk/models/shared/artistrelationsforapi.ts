@@ -1,25 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlbumForApiContract } from "./albumforapicontract";
 import { ReleaseEventForApiContract } from "./releaseeventforapicontract";
 import { SongForApiContract } from "./songforapicontract";
-import { AlbumForApiContract } from "./albumforapicontract";
-import { SongForApiContract } from "./songforapicontract";
+
 
 
 export class ArtistRelationsForApi extends SpeakeasyBase {
-  @Metadata({ data: "json, name=latestAlbums", elemType: shared.AlbumForApiContract })
+  @SpeakeasyMetadata({ data: "json, name=latestAlbums", elemType: AlbumForApiContract })
   latestAlbums?: AlbumForApiContract[];
 
-  @Metadata({ data: "json, name=latestEvents", elemType: shared.ReleaseEventForApiContract })
+  @SpeakeasyMetadata({ data: "json, name=latestEvents", elemType: ReleaseEventForApiContract })
   latestEvents?: ReleaseEventForApiContract[];
 
-  @Metadata({ data: "json, name=latestSongs", elemType: shared.SongForApiContract })
+  @SpeakeasyMetadata({ data: "json, name=latestSongs", elemType: SongForApiContract })
   latestSongs?: SongForApiContract[];
 
-  @Metadata({ data: "json, name=popularAlbums", elemType: shared.AlbumForApiContract })
+  @SpeakeasyMetadata({ data: "json, name=popularAlbums", elemType: AlbumForApiContract })
   popularAlbums?: AlbumForApiContract[];
 
-  @Metadata({ data: "json, name=popularSongs", elemType: shared.SongForApiContract })
+  @SpeakeasyMetadata({ data: "json, name=popularSongs", elemType: SongForApiContract })
   popularSongs?: SongForApiContract[];
 }

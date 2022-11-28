@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationEndpointTypeValueEnum } from "./replicationendpointtypevalueenum";
 // SupportedEndpointType
 /**
@@ -34,23 +34,23 @@ var SupportedEndpointType = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EndpointType" }),
+        SpeakeasyMetadata({ data: "json, name=EndpointType" }),
         __metadata("design:type", String)
     ], SupportedEndpointType.prototype, "endpointType", void 0);
     __decorate([
-        Metadata({ data: "json, name=EngineDisplayName" }),
+        SpeakeasyMetadata({ data: "json, name=EngineDisplayName" }),
         __metadata("design:type", String)
     ], SupportedEndpointType.prototype, "engineDisplayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=EngineName" }),
+        SpeakeasyMetadata({ data: "json, name=EngineName" }),
         __metadata("design:type", String)
     ], SupportedEndpointType.prototype, "engineName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplicationInstanceEngineMinimumVersion" }),
+        SpeakeasyMetadata({ data: "json, name=ReplicationInstanceEngineMinimumVersion" }),
         __metadata("design:type", String)
     ], SupportedEndpointType.prototype, "replicationInstanceEngineMinimumVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=SupportsCDC" }),
+        SpeakeasyMetadata({ data: "json, name=SupportsCDC" }),
         __metadata("design:type", Boolean)
     ], SupportedEndpointType.prototype, "supportsCdc", void 0);
     return SupportedEndpointType;

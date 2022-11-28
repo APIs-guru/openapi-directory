@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PatchDeployment } from "./patchdeployment";
+
 
 
 // ListPatchDeploymentsResponse
@@ -8,9 +8,9 @@ import { PatchDeployment } from "./patchdeployment";
  * A response message for listing patch deployments.
 **/
 export class ListPatchDeploymentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=patchDeployments", elemType: shared.PatchDeployment })
+  @SpeakeasyMetadata({ data: "json, name=patchDeployments", elemType: PatchDeployment })
   patchDeployments?: PatchDeployment[];
 }

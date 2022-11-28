@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ArchiveStateEnum } from "./archivestateenum";
 export declare class ListArchivesRequest extends SpeakeasyBase {
     eventSourceArn?: string;

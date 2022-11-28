@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteSubnetActionEnum(str, Enum):
     DELETE_SUBNET = "DeleteSubnet"
@@ -10,8 +14,8 @@ class PostDeleteSubnetVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteSubnetQueryParams:
-    action: PostDeleteSubnetActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteSubnetVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteSubnetActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteSubnetVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostDeleteSubnetHeaders:
 
 @dataclass
 class PostDeleteSubnetRequest:
-    query_params: PostDeleteSubnetQueryParams = field(default=None)
-    headers: PostDeleteSubnetHeaders = field(default=None)
+    headers: PostDeleteSubnetHeaders = field()
+    query_params: PostDeleteSubnetQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteSubnetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

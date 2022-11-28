@@ -12,12 +12,12 @@ class GetInboxQueryParams:
 
 @dataclass
 class GetInboxRequest:
-    query_params: GetInboxQueryParams = field(default=None)
+    query_params: GetInboxQueryParams = field()
     
 
 @dataclass
 class GetInboxResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

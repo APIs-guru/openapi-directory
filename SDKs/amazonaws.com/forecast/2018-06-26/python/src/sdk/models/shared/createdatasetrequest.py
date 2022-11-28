@@ -1,21 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import datasettype_enum
-from . import domain_enum
-from . import encryptionconfig
-from . import schema
-from . import tag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateDatasetRequest:
-    data_frequency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DataFrequency' }})
-    dataset_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DatasetName' }})
-    dataset_type: datasettype_enum.DatasetTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DatasetType' }})
-    domain: domain_enum.DomainEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Domain' }})
-    encryption_config: Optional[encryptionconfig.EncryptionConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EncryptionConfig' }})
-    schema: schema.Schema = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Schema' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
+    dataset_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DatasetName') }})
+    dataset_type: DatasetTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DatasetType') }})
+    domain: DomainEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Domain') }})
+    schema: Schema = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Schema') }})
+    data_frequency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DataFrequency') }})
+    encryption_config: Optional[EncryptionConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EncryptionConfig') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     

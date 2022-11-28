@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Provider
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Identifies the Key Management Service (KMS) key used to encrypt the secrets.
 **/
 export class Provider extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keyArn" })
+  @SpeakeasyMetadata({ data: "json, name=keyArn" })
   keyArn?: string;
 }

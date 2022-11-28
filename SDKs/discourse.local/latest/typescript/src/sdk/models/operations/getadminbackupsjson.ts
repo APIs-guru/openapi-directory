@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAdminBackupsJson200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filename" })
+  @SpeakeasyMetadata({ data: "json, name=filename" })
   filename: string;
 
-  @Metadata({ data: "json, name=last_modified" })
+  @SpeakeasyMetadata({ data: "json, name=last_modified" })
   lastModified: string;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size: number;
 }
 
 
 export class GetAdminBackupsJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: operations.GetAdminBackupsJson200ApplicationJson })
+  @SpeakeasyMetadata({ elemType: GetAdminBackupsJson200ApplicationJson })
   getAdminBackupsJson200ApplicationJsonObjects?: GetAdminBackupsJson200ApplicationJson[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

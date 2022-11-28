@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class EstimationActivityAPIModelTypeEnum(str, Enum):
     CREATED = "Created"
@@ -56,9 +61,9 @@ class EstimationActivityAPIModelTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class EstimationActivityAPIModel:
-    estimation_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EstimationNumber' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Id' }})
-    link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Link' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Message' }})
-    type: Optional[EstimationActivityAPIModelTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    estimation_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EstimationNumber') }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Id') }})
+    link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Link') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Message') }})
+    type: Optional[EstimationActivityAPIModelTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

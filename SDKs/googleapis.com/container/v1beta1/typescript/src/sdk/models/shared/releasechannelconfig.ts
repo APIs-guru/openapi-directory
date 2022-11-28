@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AvailableVersion } from "./availableversion";
 
+
 export enum ReleaseChannelConfigChannelEnum {
-    Unspecified = "UNSPECIFIED"
-,    Rapid = "RAPID"
-,    Regular = "REGULAR"
-,    Stable = "STABLE"
+    Unspecified = "UNSPECIFIED",
+    Rapid = "RAPID",
+    Regular = "REGULAR",
+    Stable = "STABLE"
 }
 
 
@@ -15,15 +15,15 @@ export enum ReleaseChannelConfigChannelEnum {
  * ReleaseChannelConfig exposes configuration for a release channel.
 **/
 export class ReleaseChannelConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=availableVersions", elemType: shared.AvailableVersion })
+  @SpeakeasyMetadata({ data: "json, name=availableVersions", elemType: AvailableVersion })
   availableVersions?: AvailableVersion[];
 
-  @Metadata({ data: "json, name=channel" })
+  @SpeakeasyMetadata({ data: "json, name=channel" })
   channel?: ReleaseChannelConfigChannelEnum;
 
-  @Metadata({ data: "json, name=defaultVersion" })
+  @SpeakeasyMetadata({ data: "json, name=defaultVersion" })
   defaultVersion?: string;
 
-  @Metadata({ data: "json, name=validVersions" })
+  @SpeakeasyMetadata({ data: "json, name=validVersions" })
   validVersions?: string[];
 }

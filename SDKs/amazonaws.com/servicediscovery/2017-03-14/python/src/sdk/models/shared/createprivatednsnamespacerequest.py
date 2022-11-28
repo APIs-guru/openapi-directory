@@ -1,17 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import privatednsnamespaceproperties
-from . import tag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreatePrivateDNSNamespaceRequest:
-    creator_request_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreatorRequestId' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    properties: Optional[privatednsnamespaceproperties.PrivateDNSNamespaceProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Properties' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
-    vpc: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Vpc' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    vpc: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Vpc') }})
+    creator_request_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreatorRequestId') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    properties: Optional[PrivateDNSNamespaceProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Properties') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     

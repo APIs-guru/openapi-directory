@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetGetUsersForTopicQueryParams = /** @class */ (function (_super) {
     __extends(GetGetUsersForTopicQueryParams, _super);
     function GetGetUsersForTopicQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetGetUsersForTopicQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], GetGetUsersForTopicQueryParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=topic_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=topic_id" }),
         __metadata("design:type", Number)
     ], GetGetUsersForTopicQueryParams.prototype, "topicId", void 0);
     return GetGetUsersForTopicQueryParams;
@@ -49,7 +49,7 @@ var GetGetUsersForTopicRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetGetUsersForTopicQueryParams)
     ], GetGetUsersForTopicRequest.prototype, "queryParams", void 0);
     return GetGetUsersForTopicRequest;
@@ -61,11 +61,11 @@ var GetGetUsersForTopicResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetGetUsersForTopicResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetGetUsersForTopicResponse.prototype, "statusCode", void 0);
     return GetGetUsersForTopicResponse;

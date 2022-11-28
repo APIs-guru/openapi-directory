@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FilterConditionEnum } from "./filterconditionenum";
 import { OperationFilterNameEnum } from "./operationfilternameenum";
+
 
 
 // OperationFilter
@@ -8,12 +9,12 @@ import { OperationFilterNameEnum } from "./operationfilternameenum";
  * A complex type that lets you select the operations that you want to list.
 **/
 export class OperationFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Condition" })
+  @SpeakeasyMetadata({ data: "json, name=Condition" })
   condition?: FilterConditionEnum;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: OperationFilterNameEnum;
 
-  @Metadata({ data: "json, name=Values" })
+  @SpeakeasyMetadata({ data: "json, name=Values" })
   values: string[];
 }

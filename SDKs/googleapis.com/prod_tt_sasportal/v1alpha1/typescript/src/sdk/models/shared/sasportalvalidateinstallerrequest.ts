@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SasPortalValidateInstallerRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for ValidateInstaller.
 **/
 export class SasPortalValidateInstallerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=encodedSecret" })
+  @SpeakeasyMetadata({ data: "json, name=encodedSecret" })
   encodedSecret?: string;
 
-  @Metadata({ data: "json, name=installerId" })
+  @SpeakeasyMetadata({ data: "json, name=installerId" })
   installerId?: string;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 }

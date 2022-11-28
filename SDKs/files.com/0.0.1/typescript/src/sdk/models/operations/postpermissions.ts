@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostPermissionsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=group_id" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=group_id" })
   groupId?: number;
 
-  @Metadata({ data: "multipart_form, name=path" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=path" })
   path?: string;
 
-  @Metadata({ data: "multipart_form, name=permission" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=permission" })
   permission?: string;
 
-  @Metadata({ data: "multipart_form, name=recursive" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=recursive" })
   recursive?: boolean;
 
-  @Metadata({ data: "multipart_form, name=user_id" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=user_id" })
   userId?: number;
 
-  @Metadata({ data: "multipart_form, name=username" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=username" })
   username?: string;
 }
 
 
 export class PostPermissionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request?: PostPermissionsRequestBody;
 }
 
 
 export class PostPermissionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   permissionEntity?: shared.PermissionEntity;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

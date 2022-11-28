@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PutTargetsResultEntry } from "./puttargetsresultentry";
 
 
+
 export class PutTargetsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FailedEntries", elemType: shared.PutTargetsResultEntry })
+  @SpeakeasyMetadata({ data: "json, name=FailedEntries", elemType: PutTargetsResultEntry })
   failedEntries?: PutTargetsResultEntry[];
 
-  @Metadata({ data: "json, name=FailedEntryCount" })
+  @SpeakeasyMetadata({ data: "json, name=FailedEntryCount" })
   failedEntryCount?: number;
 }

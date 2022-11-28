@@ -11,6 +11,8 @@ const (
 	GooglePrivacyDlpV2FindingLikelihoodEnumVeryLikely            GooglePrivacyDlpV2FindingLikelihoodEnum = "VERY_LIKELY"
 )
 
+// GooglePrivacyDlpV2Finding
+// Represents a piece of potentially sensitive content.
 type GooglePrivacyDlpV2Finding struct {
 	CreateTime    *string                                  `json:"createTime,omitempty"`
 	FindingID     *string                                  `json:"findingId,omitempty"`

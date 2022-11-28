@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkWirelessSsidTrafficShapingRulesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=number" })
   number: string;
 }
 
 export enum UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRulesDefinitionsTypeEnum {
-    Application = "application"
-,    ApplicationCategory = "applicationCategory"
-,    Host = "host"
-,    Port = "port"
-,    IpRange = "ipRange"
-,    LocalNet = "localNet"
+    Application = "application",
+    ApplicationCategory = "applicationCategory",
+    Host = "host",
+    Port = "port",
+    IpRange = "ipRange",
+    LocalNet = "localNet"
 }
 
 
 export class UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRulesDefinitions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRulesDefinitionsTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: string;
 }
 
@@ -33,10 +34,10 @@ export class UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRulesDefinit
  * The bandwidth limits object, specifying the upload ('limitUp') and download ('limitDown') speed in Kbps. These are only enforced if 'settings' is set to 'custom'.
 **/
 export class UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimitsBandwidthLimits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=limitDown" })
+  @SpeakeasyMetadata({ data: "json, name=limitDown" })
   limitDown?: number;
 
-  @Metadata({ data: "json, name=limitUp" })
+  @SpeakeasyMetadata({ data: "json, name=limitUp" })
   limitUp?: number;
 }
 
@@ -47,57 +48,57 @@ export class UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRulesPerClie
  * 
 **/
 export class UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimits extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bandwidthLimits" })
+  @SpeakeasyMetadata({ data: "json, name=bandwidthLimits" })
   bandwidthLimits?: UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimitsBandwidthLimits;
 
-  @Metadata({ data: "json, name=settings" })
+  @SpeakeasyMetadata({ data: "json, name=settings" })
   settings?: string;
 }
 
 
 export class UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=definitions", elemType: operations.UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRulesDefinitions })
+  @SpeakeasyMetadata({ data: "json, name=definitions", elemType: UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRulesDefinitions })
   definitions: UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRulesDefinitions[];
 
-  @Metadata({ data: "json, name=dscpTagValue" })
+  @SpeakeasyMetadata({ data: "json, name=dscpTagValue" })
   dscpTagValue?: number;
 
-  @Metadata({ data: "json, name=pcpTagValue" })
+  @SpeakeasyMetadata({ data: "json, name=pcpTagValue" })
   pcpTagValue?: number;
 
-  @Metadata({ data: "json, name=perClientBandwidthLimits" })
+  @SpeakeasyMetadata({ data: "json, name=perClientBandwidthLimits" })
   perClientBandwidthLimits?: UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRulesPerClientBandwidthLimits;
 }
 
 
 export class UpdateNetworkWirelessSsidTrafficShapingRulesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultRulesEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=defaultRulesEnabled" })
   defaultRulesEnabled?: boolean;
 
-  @Metadata({ data: "json, name=rules", elemType: operations.UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRules })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRules })
   rules?: UpdateNetworkWirelessSsidTrafficShapingRulesRequestBodyRules[];
 
-  @Metadata({ data: "json, name=trafficShapingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=trafficShapingEnabled" })
   trafficShapingEnabled?: boolean;
 }
 
 
 export class UpdateNetworkWirelessSsidTrafficShapingRulesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkWirelessSsidTrafficShapingRulesPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkWirelessSsidTrafficShapingRulesRequestBody;
 }
 
 
 export class UpdateNetworkWirelessSsidTrafficShapingRulesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkWirelessSsidTrafficShapingRules200ApplicationJsonObject?: Map<string, any>;
 }

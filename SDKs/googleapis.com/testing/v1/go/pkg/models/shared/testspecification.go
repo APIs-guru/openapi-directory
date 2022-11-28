@@ -1,5 +1,7 @@
 package shared
 
+// TestSpecification
+// A description of how to run the test.
 type TestSpecification struct {
 	AndroidInstrumentationTest *AndroidInstrumentationTest `json:"androidInstrumentationTest,omitempty"`
 	AndroidRoboTest            *AndroidRoboTest            `json:"androidRoboTest,omitempty"`

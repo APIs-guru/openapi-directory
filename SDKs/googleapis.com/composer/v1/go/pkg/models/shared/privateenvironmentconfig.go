@@ -1,5 +1,20 @@
 package shared
 
+// PrivateEnvironmentConfigInput
+// The configuration information for configuring a Private IP Cloud Composer environment.
+type PrivateEnvironmentConfigInput struct {
+	CloudComposerConnectionSubnetwork *string                    `json:"cloudComposerConnectionSubnetwork,omitempty"`
+	CloudComposerNetworkIpv4CidrBlock *string                    `json:"cloudComposerNetworkIpv4CidrBlock,omitempty"`
+	CloudSQLIpv4CidrBlock             *string                    `json:"cloudSqlIpv4CidrBlock,omitempty"`
+	EnablePrivateEnvironment          *bool                      `json:"enablePrivateEnvironment,omitempty"`
+	EnablePrivatelyUsedPublicIps      *bool                      `json:"enablePrivatelyUsedPublicIps,omitempty"`
+	NetworkingConfig                  *NetworkingConfig          `json:"networkingConfig,omitempty"`
+	PrivateClusterConfig              *PrivateClusterConfigInput `json:"privateClusterConfig,omitempty"`
+	WebServerIpv4CidrBlock            *string                    `json:"webServerIpv4CidrBlock,omitempty"`
+}
+
+// PrivateEnvironmentConfig
+// The configuration information for configuring a Private IP Cloud Composer environment.
 type PrivateEnvironmentConfig struct {
 	CloudComposerConnectionSubnetwork     *string               `json:"cloudComposerConnectionSubnetwork,omitempty"`
 	CloudComposerNetworkIpv4CidrBlock     *string               `json:"cloudComposerNetworkIpv4CidrBlock,omitempty"`
@@ -7,6 +22,7 @@ type PrivateEnvironmentConfig struct {
 	CloudSQLIpv4CidrBlock                 *string               `json:"cloudSqlIpv4CidrBlock,omitempty"`
 	EnablePrivateEnvironment              *bool                 `json:"enablePrivateEnvironment,omitempty"`
 	EnablePrivatelyUsedPublicIps          *bool                 `json:"enablePrivatelyUsedPublicIps,omitempty"`
+	NetworkingConfig                      *NetworkingConfig     `json:"networkingConfig,omitempty"`
 	PrivateClusterConfig                  *PrivateClusterConfig `json:"privateClusterConfig,omitempty"`
 	WebServerIpv4CidrBlock                *string               `json:"webServerIpv4CidrBlock,omitempty"`
 	WebServerIpv4ReservedRange            *string               `json:"webServerIpv4ReservedRange,omitempty"`

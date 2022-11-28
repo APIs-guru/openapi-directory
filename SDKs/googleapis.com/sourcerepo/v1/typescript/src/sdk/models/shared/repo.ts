@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MirrorConfig } from "./mirrorconfig";
 import { PubsubConfig } from "./pubsubconfig";
+
 
 
 // Repo
@@ -9,18 +9,18 @@ import { PubsubConfig } from "./pubsubconfig";
  * A repository (or repo) is a Git repository storing versioned source content.
 **/
 export class Repo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mirrorConfig" })
+  @SpeakeasyMetadata({ data: "json, name=mirrorConfig" })
   mirrorConfig?: MirrorConfig;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pubsubConfigs", elemType: shared.PubsubConfig })
+  @SpeakeasyMetadata({ data: "json, name=pubsubConfigs", elemType: PubsubConfig })
   pubsubConfigs?: Map<string, PubsubConfig>;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

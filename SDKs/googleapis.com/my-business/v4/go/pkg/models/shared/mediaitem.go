@@ -8,6 +8,8 @@ const (
 	MediaItemMediaFormatEnumVideo                  MediaItemMediaFormatEnum = "VIDEO"
 )
 
+// MediaItem
+// A single media item.
 type MediaItem struct {
 	Attribution         *Attribution              `json:"attribution,omitempty"`
 	CreateTime          *string                   `json:"createTime,omitempty"`

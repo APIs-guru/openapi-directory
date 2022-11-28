@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class PutDriversIDPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PutDriversIDRequest:
-    path_params: PutDriversIDPathParams = field(default=None)
-    request: shared.Driver = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: PutDriversIDPathParams = field()
+    request: shared.Driver = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutDriversIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     driver: Optional[shared.Driver] = field(default=None)
-    status_code: int = field(default=None)
     

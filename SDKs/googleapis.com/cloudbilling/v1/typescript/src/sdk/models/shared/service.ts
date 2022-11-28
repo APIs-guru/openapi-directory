@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Service
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Encapsulates a single service in Google Cloud Platform.
 **/
 export class Service extends SpeakeasyBase {
-  @Metadata({ data: "json, name=businessEntityName" })
+  @SpeakeasyMetadata({ data: "json, name=businessEntityName" })
   businessEntityName?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=serviceId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceId" })
   serviceId?: string;
 }

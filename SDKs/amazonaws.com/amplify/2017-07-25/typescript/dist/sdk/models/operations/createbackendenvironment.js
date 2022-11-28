@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateBackendEnvironmentPathParams = /** @class */ (function (_super) {
     __extends(CreateBackendEnvironmentPathParams, _super);
@@ -30,7 +30,7 @@ var CreateBackendEnvironmentPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
         __metadata("design:type", String)
     ], CreateBackendEnvironmentPathParams.prototype, "appId", void 0);
     return CreateBackendEnvironmentPathParams;
@@ -42,31 +42,31 @@ var CreateBackendEnvironmentHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateBackendEnvironmentHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateBackendEnvironmentHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateBackendEnvironmentHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateBackendEnvironmentHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateBackendEnvironmentHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateBackendEnvironmentHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateBackendEnvironmentHeaders.prototype, "xAmzSignedHeaders", void 0);
     return CreateBackendEnvironmentHeaders;
@@ -78,15 +78,15 @@ var CreateBackendEnvironmentRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deploymentArtifacts" }),
+        SpeakeasyMetadata({ data: "json, name=deploymentArtifacts" }),
         __metadata("design:type", String)
     ], CreateBackendEnvironmentRequestBody.prototype, "deploymentArtifacts", void 0);
     __decorate([
-        Metadata({ data: "json, name=environmentName" }),
+        SpeakeasyMetadata({ data: "json, name=environmentName" }),
         __metadata("design:type", String)
     ], CreateBackendEnvironmentRequestBody.prototype, "environmentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=stackName" }),
+        SpeakeasyMetadata({ data: "json, name=stackName" }),
         __metadata("design:type", String)
     ], CreateBackendEnvironmentRequestBody.prototype, "stackName", void 0);
     return CreateBackendEnvironmentRequestBody;
@@ -98,15 +98,15 @@ var CreateBackendEnvironmentRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateBackendEnvironmentPathParams)
     ], CreateBackendEnvironmentRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateBackendEnvironmentHeaders)
     ], CreateBackendEnvironmentRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateBackendEnvironmentRequestBody)
     ], CreateBackendEnvironmentRequest.prototype, "request", void 0);
     return CreateBackendEnvironmentRequest;
@@ -118,35 +118,35 @@ var CreateBackendEnvironmentResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateBackendEnvironmentResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateBackendEnvironmentResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreateBackendEnvironmentResult)
     ], CreateBackendEnvironmentResponse.prototype, "createBackendEnvironmentResult", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateBackendEnvironmentResponse.prototype, "internalFailureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateBackendEnvironmentResponse.prototype, "limitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateBackendEnvironmentResponse.prototype, "notFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateBackendEnvironmentResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateBackendEnvironmentResponse.prototype, "unauthorizedException", void 0);
     return CreateBackendEnvironmentResponse;

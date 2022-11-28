@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ParameterConstraints
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The constraints that the administrator has put on the parameter.
 **/
 export class ParameterConstraints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowedPattern" })
+  @SpeakeasyMetadata({ data: "json, name=AllowedPattern" })
   allowedPattern?: string;
 
-  @Metadata({ data: "json, name=AllowedValues" })
+  @SpeakeasyMetadata({ data: "json, name=AllowedValues" })
   allowedValues?: string[];
 
-  @Metadata({ data: "json, name=ConstraintDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ConstraintDescription" })
   constraintDescription?: string;
 
-  @Metadata({ data: "json, name=MaxLength" })
+  @SpeakeasyMetadata({ data: "json, name=MaxLength" })
   maxLength?: string;
 
-  @Metadata({ data: "json, name=MaxValue" })
+  @SpeakeasyMetadata({ data: "json, name=MaxValue" })
   maxValue?: string;
 
-  @Metadata({ data: "json, name=MinLength" })
+  @SpeakeasyMetadata({ data: "json, name=MinLength" })
   minLength?: string;
 
-  @Metadata({ data: "json, name=MinValue" })
+  @SpeakeasyMetadata({ data: "json, name=MinValue" })
   minValue?: string;
 }

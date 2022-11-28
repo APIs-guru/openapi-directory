@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PolicyVersion
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a policy version.
 **/
 export class PolicyVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createDate" })
+  @SpeakeasyMetadata({ data: "json, name=createDate" })
   createDate?: Date;
 
-  @Metadata({ data: "json, name=isDefaultVersion" })
+  @SpeakeasyMetadata({ data: "json, name=isDefaultVersion" })
   isDefaultVersion?: boolean;
 
-  @Metadata({ data: "json, name=versionId" })
+  @SpeakeasyMetadata({ data: "json, name=versionId" })
   versionId?: string;
 }

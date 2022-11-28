@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirebaseappcheckProjectsAppsGeneratePlayIntegrityChallengePathParams:
-    app: str = field(default=None, metadata={'path_param': { 'field_name': 'app', 'style': 'simple', 'explode': False }})
+    app: str = field(metadata={'path_param': { 'field_name': 'app', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class FirebaseappcheckProjectsAppsGeneratePlayIntegrityChallengeQueryParams:
 
 @dataclass
 class FirebaseappcheckProjectsAppsGeneratePlayIntegrityChallengeSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirebaseappcheckProjectsAppsGeneratePlayIntegrityChallengeSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class FirebaseappcheckProjectsAppsGeneratePlayIntegrityChallengeSecurity:
 
 @dataclass
 class FirebaseappcheckProjectsAppsGeneratePlayIntegrityChallengeRequest:
-    path_params: FirebaseappcheckProjectsAppsGeneratePlayIntegrityChallengePathParams = field(default=None)
-    query_params: FirebaseappcheckProjectsAppsGeneratePlayIntegrityChallengeQueryParams = field(default=None)
+    path_params: FirebaseappcheckProjectsAppsGeneratePlayIntegrityChallengePathParams = field()
+    query_params: FirebaseappcheckProjectsAppsGeneratePlayIntegrityChallengeQueryParams = field()
+    security: FirebaseappcheckProjectsAppsGeneratePlayIntegrityChallengeSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FirebaseappcheckProjectsAppsGeneratePlayIntegrityChallengeSecurity = field(default=None)
     
 
 @dataclass
 class FirebaseappcheckProjectsAppsGeneratePlayIntegrityChallengeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_firebase_appcheck_v1_generate_play_integrity_challenge_response: Optional[shared.GoogleFirebaseAppcheckV1GeneratePlayIntegrityChallengeResponse] = field(default=None)
-    status_code: int = field(default=None)
     

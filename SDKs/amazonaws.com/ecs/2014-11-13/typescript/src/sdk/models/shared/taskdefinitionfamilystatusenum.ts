@@ -1,7 +1,8 @@
 
 
+
 export enum TaskDefinitionFamilyStatusEnum {
-    Active = "ACTIVE"
-,    Inactive = "INACTIVE"
-,    All = "ALL"
+    Active = "ACTIVE",
+    Inactive = "INACTIVE",
+    All = "ALL"
 }

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 class GetNameConceptTypeSpecificConceptJSONConceptTypeEnum(str, Enum):
@@ -12,8 +14,8 @@ class GetNameConceptTypeSpecificConceptJSONConceptTypeEnum(str, Enum):
 
 @dataclass
 class GetNameConceptTypeSpecificConceptJSONPathParams:
-    concept_type: GetNameConceptTypeSpecificConceptJSONConceptTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'concept-type', 'style': 'simple', 'explode': False }})
-    specific_concept: str = field(default=None, metadata={'path_param': { 'field_name': 'specific-concept', 'style': 'simple', 'explode': False }})
+    concept_type: GetNameConceptTypeSpecificConceptJSONConceptTypeEnum = field(metadata={'path_param': { 'field_name': 'concept-type', 'style': 'simple', 'explode': False }})
+    specific_concept: str = field(metadata={'path_param': { 'field_name': 'specific-concept', 'style': 'simple', 'explode': False }})
     
 class GetNameConceptTypeSpecificConceptJSONFieldsEnum(str, Enum):
     ALL = "all"
@@ -30,28 +32,28 @@ class GetNameConceptTypeSpecificConceptJSONFieldsEnum(str, Enum):
 
 @dataclass
 class GetNameConceptTypeSpecificConceptJSONQueryParams:
+    query: str = field(metadata={'query_param': { 'field_name': 'query', 'style': 'form', 'explode': True }})
     fields: Optional[GetNameConceptTypeSpecificConceptJSONFieldsEnum] = field(default=None, metadata={'query_param': { 'field_name': 'fields', 'style': 'form', 'explode': True }})
-    query: str = field(default=None, metadata={'query_param': { 'field_name': 'query', 'style': 'form', 'explode': True }})
-    
-
-@dataclass
-class GetNameConceptTypeSpecificConceptJSONRequest:
-    path_params: GetNameConceptTypeSpecificConceptJSONPathParams = field(default=None)
-    query_params: GetNameConceptTypeSpecificConceptJSONQueryParams = field(default=None)
     
 
 @dataclass_json
 @dataclass
 class GetNameConceptTypeSpecificConceptJSON200ApplicationJSON:
-    copyright: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'copyright' }})
-    num_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'num_results' }})
-    results: Optional[List[shared.Concept]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
-    status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    copyright: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('copyright') }})
+    num_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('num_results') }})
+    results: Optional[List[shared.Concept]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
+    status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
+    
+
+@dataclass
+class GetNameConceptTypeSpecificConceptJSONRequest:
+    path_params: GetNameConceptTypeSpecificConceptJSONPathParams = field()
+    query_params: GetNameConceptTypeSpecificConceptJSONQueryParams = field()
     
 
 @dataclass
 class GetNameConceptTypeSpecificConceptJSONResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_name_concept_type_specific_concept_json_200_application_json_object: Optional[GetNameConceptTypeSpecificConceptJSON200ApplicationJSON] = field(default=None)
-    status_code: int = field(default=None)
     

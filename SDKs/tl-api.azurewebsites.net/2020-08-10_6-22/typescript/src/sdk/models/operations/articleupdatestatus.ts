@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ArticleUpdateStatusQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ArticleId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ArticleId" })
   articleId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=status" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=status" })
   status?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userName" })
   userName?: string;
 }
 
 
 export class ArticleUpdateStatusRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ArticleUpdateStatusQueryParams;
 }
 
 
 export class ArticleUpdateStatusResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiException?: shared.ApiException;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   defaultResponseDtoOfInteger?: shared.DefaultResponseDtoOfInteger;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

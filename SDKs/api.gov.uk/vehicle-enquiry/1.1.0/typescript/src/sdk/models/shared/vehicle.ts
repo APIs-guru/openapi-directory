@@ -1,81 +1,82 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum VehicleMotStatusEnum {
-    NoDetailsHeldByDvla = "No details held by DVLA"
-,    NoResultsReturned = "No results returned"
-,    NotValid = "Not valid"
-,    Valid = "Valid"
+    NoDetailsHeldByDvla = "No details held by DVLA",
+    NoResultsReturned = "No results returned",
+    NotValid = "Not valid",
+    Valid = "Valid"
 }
 
 export enum VehicleTaxStatusEnum {
-    NotTaxedForOnRoadUse = "Not Taxed for on Road Use"
-,    Sorn = "SORN"
-,    Taxed = "Taxed"
-,    Untaxed = "Untaxed"
+    NotTaxedForOnRoadUse = "Not Taxed for on Road Use",
+    Sorn = "SORN",
+    Taxed = "Taxed",
+    Untaxed = "Untaxed"
 }
 
 
 export class Vehicle extends SpeakeasyBase {
-  @Metadata({ data: "json, name=artEndDate" })
+  @SpeakeasyMetadata({ data: "json, name=artEndDate" })
   artEndDate?: Date;
 
-  @Metadata({ data: "json, name=co2Emissions" })
+  @SpeakeasyMetadata({ data: "json, name=co2Emissions" })
   co2Emissions?: number;
 
-  @Metadata({ data: "json, name=colour" })
+  @SpeakeasyMetadata({ data: "json, name=colour" })
   colour?: string;
 
-  @Metadata({ data: "json, name=dateOfLastV5CIssued" })
+  @SpeakeasyMetadata({ data: "json, name=dateOfLastV5CIssued" })
   dateOfLastV5CIssued?: Date;
 
-  @Metadata({ data: "json, name=engineCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=engineCapacity" })
   engineCapacity?: number;
 
-  @Metadata({ data: "json, name=euroStatus" })
+  @SpeakeasyMetadata({ data: "json, name=euroStatus" })
   euroStatus?: string;
 
-  @Metadata({ data: "json, name=fuelType" })
+  @SpeakeasyMetadata({ data: "json, name=fuelType" })
   fuelType?: string;
 
-  @Metadata({ data: "json, name=make" })
+  @SpeakeasyMetadata({ data: "json, name=make" })
   make?: string;
 
-  @Metadata({ data: "json, name=markedForExport" })
+  @SpeakeasyMetadata({ data: "json, name=markedForExport" })
   markedForExport?: boolean;
 
-  @Metadata({ data: "json, name=monthOfFirstDvlaRegistration" })
+  @SpeakeasyMetadata({ data: "json, name=monthOfFirstDvlaRegistration" })
   monthOfFirstDvlaRegistration?: Date;
 
-  @Metadata({ data: "json, name=monthOfFirstRegistration" })
+  @SpeakeasyMetadata({ data: "json, name=monthOfFirstRegistration" })
   monthOfFirstRegistration?: Date;
 
-  @Metadata({ data: "json, name=motExpiryDate" })
+  @SpeakeasyMetadata({ data: "json, name=motExpiryDate" })
   motExpiryDate?: Date;
 
-  @Metadata({ data: "json, name=motStatus" })
+  @SpeakeasyMetadata({ data: "json, name=motStatus" })
   motStatus?: VehicleMotStatusEnum;
 
-  @Metadata({ data: "json, name=realDrivingEmissions" })
+  @SpeakeasyMetadata({ data: "json, name=realDrivingEmissions" })
   realDrivingEmissions?: string;
 
-  @Metadata({ data: "json, name=registrationNumber" })
+  @SpeakeasyMetadata({ data: "json, name=registrationNumber" })
   registrationNumber: string;
 
-  @Metadata({ data: "json, name=revenueWeight" })
+  @SpeakeasyMetadata({ data: "json, name=revenueWeight" })
   revenueWeight?: number;
 
-  @Metadata({ data: "json, name=taxDueDate" })
+  @SpeakeasyMetadata({ data: "json, name=taxDueDate" })
   taxDueDate?: Date;
 
-  @Metadata({ data: "json, name=taxStatus" })
+  @SpeakeasyMetadata({ data: "json, name=taxStatus" })
   taxStatus?: VehicleTaxStatusEnum;
 
-  @Metadata({ data: "json, name=typeApproval" })
+  @SpeakeasyMetadata({ data: "json, name=typeApproval" })
   typeApproval?: string;
 
-  @Metadata({ data: "json, name=wheelplan" })
+  @SpeakeasyMetadata({ data: "json, name=wheelplan" })
   wheelplan?: string;
 
-  @Metadata({ data: "json, name=yearOfManufacture" })
+  @SpeakeasyMetadata({ data: "json, name=yearOfManufacture" })
   yearOfManufacture?: number;
 }

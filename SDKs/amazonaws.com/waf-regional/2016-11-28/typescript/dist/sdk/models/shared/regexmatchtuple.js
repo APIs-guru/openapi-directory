@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldToMatch } from "./fieldtomatch";
 import { TextTransformationEnum } from "./texttransformationenum";
 // RegexMatchTuple
@@ -35,15 +35,15 @@ var RegexMatchTuple = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FieldToMatch" }),
+        SpeakeasyMetadata({ data: "json, name=FieldToMatch" }),
         __metadata("design:type", FieldToMatch)
     ], RegexMatchTuple.prototype, "fieldToMatch", void 0);
     __decorate([
-        Metadata({ data: "json, name=RegexPatternSetId" }),
+        SpeakeasyMetadata({ data: "json, name=RegexPatternSetId" }),
         __metadata("design:type", String)
     ], RegexMatchTuple.prototype, "regexPatternSetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=TextTransformation" }),
+        SpeakeasyMetadata({ data: "json, name=TextTransformation" }),
         __metadata("design:type", String)
     ], RegexMatchTuple.prototype, "textTransformation", void 0);
     return RegexMatchTuple;

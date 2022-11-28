@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class UpcomingDfsSlatesByCompetitionFormatEnum(str, Enum):
     JSON = "json"
@@ -8,18 +9,18 @@ class UpcomingDfsSlatesByCompetitionFormatEnum(str, Enum):
 
 @dataclass
 class UpcomingDfsSlatesByCompetitionPathParams:
-    competition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'competitionId', 'style': 'simple', 'explode': False }})
-    format: UpcomingDfsSlatesByCompetitionFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    competition_id: str = field(metadata={'path_param': { 'field_name': 'competitionId', 'style': 'simple', 'explode': False }})
+    format: UpcomingDfsSlatesByCompetitionFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class UpcomingDfsSlatesByCompetitionRequest:
-    path_params: UpcomingDfsSlatesByCompetitionPathParams = field(default=None)
+    path_params: UpcomingDfsSlatesByCompetitionPathParams = field()
     
 
 @dataclass
 class UpcomingDfsSlatesByCompetitionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dfs_slates: Optional[List[Any]] = field(default=None)
-    status_code: int = field(default=None)
     

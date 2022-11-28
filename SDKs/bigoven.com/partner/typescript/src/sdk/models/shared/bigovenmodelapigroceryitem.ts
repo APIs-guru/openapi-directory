@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BigOvenModelApiGroceryItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BigOvenObject" })
+  @SpeakeasyMetadata({ data: "json, name=BigOvenObject" })
   bigOvenObject?: string;
 
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=Department" })
+  @SpeakeasyMetadata({ data: "json, name=Department" })
   department?: string;
 
-  @Metadata({ data: "json, name=DisplayQuantity" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayQuantity" })
   displayQuantity?: string;
 
-  @Metadata({ data: "json, name=GUID" })
+  @SpeakeasyMetadata({ data: "json, name=GUID" })
   guid?: string;
 
-  @Metadata({ data: "json, name=IsChecked" })
+  @SpeakeasyMetadata({ data: "json, name=IsChecked" })
   isChecked?: boolean;
 
-  @Metadata({ data: "json, name=ItemID" })
+  @SpeakeasyMetadata({ data: "json, name=ItemID" })
   itemId?: number;
 
-  @Metadata({ data: "json, name=LastModified" })
+  @SpeakeasyMetadata({ data: "json, name=LastModified" })
   lastModified?: Date;
 
-  @Metadata({ data: "json, name=LocalStatus" })
+  @SpeakeasyMetadata({ data: "json, name=LocalStatus" })
   localStatus?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Notes" })
+  @SpeakeasyMetadata({ data: "json, name=Notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=RecipeID" })
+  @SpeakeasyMetadata({ data: "json, name=RecipeID" })
   recipeId?: number;
 
-  @Metadata({ data: "json, name=ThirdPartyURL" })
+  @SpeakeasyMetadata({ data: "json, name=ThirdPartyURL" })
   thirdPartyUrl?: string;
 }

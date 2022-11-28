@@ -18,6 +18,8 @@ type InvokeDeviceMethodHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// InvokeDeviceMethodRequestBodyDeviceMethod
+// The device method to invoke.
 type InvokeDeviceMethodRequestBodyDeviceMethod struct {
 	DeviceType *string `json:"DeviceType,omitempty"`
 	MethodName *string `json:"MethodName,omitempty"`

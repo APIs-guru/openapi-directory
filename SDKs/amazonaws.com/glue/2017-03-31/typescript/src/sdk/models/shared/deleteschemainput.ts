@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SchemaId } from "./schemaid";
 
 
+
 export class DeleteSchemaInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SchemaId" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaId" })
   schemaId: SchemaId;
 }

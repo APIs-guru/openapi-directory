@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import printer
+from sdk import utils
+from . import *
 
 class FailureInfoErrorCodeEnum(str, Enum):
     OK = "OK"
@@ -26,8 +28,12 @@ class FailureInfoErrorCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class FailureInfo:
-    error_code: Optional[FailureInfoErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorCode' }})
-    error_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errorMessage' }})
-    printer: Optional[printer.Printer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'printer' }})
-    printer_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'printerId' }})
+    r"""FailureInfo
+    Info about failures
+    """
+    
+    error_code: Optional[FailureInfoErrorCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorCode') }})
+    error_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errorMessage') }})
+    printer: Optional[Printer] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('printer') }})
+    printer_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('printerId') }})
     

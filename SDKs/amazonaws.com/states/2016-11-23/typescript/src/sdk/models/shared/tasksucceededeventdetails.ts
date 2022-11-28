@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HistoryEventExecutionDataDetails } from "./historyeventexecutiondatadetails";
+
 
 
 // TaskSucceededEventDetails
@@ -7,15 +8,15 @@ import { HistoryEventExecutionDataDetails } from "./historyeventexecutiondatadet
  * Contains details about the successful completion of a task state.
 **/
 export class TaskSucceededEventDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=output" })
+  @SpeakeasyMetadata({ data: "json, name=output" })
   output?: string;
 
-  @Metadata({ data: "json, name=outputDetails" })
+  @SpeakeasyMetadata({ data: "json, name=outputDetails" })
   outputDetails?: HistoryEventExecutionDataDetails;
 
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource: string;
 
-  @Metadata({ data: "json, name=resourceType" })
+  @SpeakeasyMetadata({ data: "json, name=resourceType" })
   resourceType: string;
 }

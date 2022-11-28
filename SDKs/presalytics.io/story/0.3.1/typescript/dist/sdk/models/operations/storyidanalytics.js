@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var StoryIdAnalyticsPathParams = /** @class */ (function (_super) {
     __extends(StoryIdAnalyticsPathParams, _super);
     function StoryIdAnalyticsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], StoryIdAnalyticsPathParams.prototype, "id", void 0);
     return StoryIdAnalyticsPathParams;
@@ -41,7 +41,7 @@ var StoryIdAnalyticsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StoryIdAnalyticsPathParams)
     ], StoryIdAnalyticsRequest.prototype, "pathParams", void 0);
     return StoryIdAnalyticsRequest;
@@ -53,23 +53,23 @@ var StoryIdAnalyticsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StoryIdAnalyticsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StoryIdAnalyticsResponse.prototype, "loginButton", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StoryIdAnalyticsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StoryIdAnalyticsResponse.prototype, "problemDetail", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StoryIdAnalyticsResponse.prototype, "revealJsPresenationWithAnalyticsData", void 0);
     return StoryIdAnalyticsResponse;

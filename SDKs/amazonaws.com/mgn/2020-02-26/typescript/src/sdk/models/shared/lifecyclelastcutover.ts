@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LifeCycleLastCutoverFinalized } from "./lifecyclelastcutoverfinalized";
 import { LifeCycleLastCutoverInitiated } from "./lifecyclelastcutoverinitiated";
 import { LifeCycleLastCutoverReverted } from "./lifecyclelastcutoverreverted";
+
 
 
 // LifeCycleLastCutover
@@ -9,12 +10,12 @@ import { LifeCycleLastCutoverReverted } from "./lifecyclelastcutoverreverted";
  * Lifecycle last Cutover .
 **/
 export class LifeCycleLastCutover extends SpeakeasyBase {
-  @Metadata({ data: "json, name=finalized" })
+  @SpeakeasyMetadata({ data: "json, name=finalized" })
   finalized?: LifeCycleLastCutoverFinalized;
 
-  @Metadata({ data: "json, name=initiated" })
+  @SpeakeasyMetadata({ data: "json, name=initiated" })
   initiated?: LifeCycleLastCutoverInitiated;
 
-  @Metadata({ data: "json, name=reverted" })
+  @SpeakeasyMetadata({ data: "json, name=reverted" })
   reverted?: LifeCycleLastCutoverReverted;
 }

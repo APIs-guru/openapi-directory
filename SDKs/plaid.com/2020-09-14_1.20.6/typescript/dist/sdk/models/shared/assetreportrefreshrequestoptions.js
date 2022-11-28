@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AssetReportRefreshRequestOptions
 /**
  * An optional object to filter `/asset_report/refresh` results. If provided, cannot be `null`. If not specified, the `options` from the original call to `/asset_report/create` will be used.
@@ -33,15 +33,15 @@ var AssetReportRefreshRequestOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=client_report_id" }),
+        SpeakeasyMetadata({ data: "json, name=client_report_id" }),
         __metadata("design:type", String)
     ], AssetReportRefreshRequestOptions.prototype, "clientReportId", void 0);
     __decorate([
-        Metadata({ data: "json, name=user" }),
+        SpeakeasyMetadata({ data: "json, name=user" }),
         __metadata("design:type", Map)
     ], AssetReportRefreshRequestOptions.prototype, "user", void 0);
     __decorate([
-        Metadata({ data: "json, name=webhook" }),
+        SpeakeasyMetadata({ data: "json, name=webhook" }),
         __metadata("design:type", String)
     ], AssetReportRefreshRequestOptions.prototype, "webhook", void 0);
     return AssetReportRefreshRequestOptions;

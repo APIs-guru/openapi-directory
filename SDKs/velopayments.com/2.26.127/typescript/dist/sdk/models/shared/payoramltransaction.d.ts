@@ -1,0 +1,30 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+export declare class PayorAmlTransaction extends SpeakeasyBase {
+    credit?: number;
+    creditCurrency?: string;
+    dateFundingRequested?: string;
+    debit?: number;
+    debitCurrency?: string;
+    fundingType?: string;
+    fxApplied?: number;
+    payeeEmail?: string;
+    payeeName?: string;
+    payeeType?: string;
+    paymentAmount?: number;
+    paymentCurrency?: string;
+    paymentMemo?: string;
+    paymentRails?: string;
+    paymentStatus?: string;
+    payorPaymentId?: string;
+    rejectReason?: string;
+    remoteId?: string;
+    reportTransactionType?: string;
+    returnCode?: string;
+    returnDescription?: string;
+    returnFee?: string;
+    returnFeeCurrency?: string;
+    returnFeeDescription?: string;
+    sourceAccount?: string;
+    transactionDate?: Date;
+    transactionTime?: string;
+}

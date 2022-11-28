@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIntegrationsV1alphaAccessToken
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The access token represents the authorization of a specific application to access specific parts of a user’s data.
 **/
 export class GoogleCloudIntegrationsV1alphaAccessToken extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessToken" })
+  @SpeakeasyMetadata({ data: "json, name=accessToken" })
   accessToken?: string;
 
-  @Metadata({ data: "json, name=accessTokenExpireTime" })
+  @SpeakeasyMetadata({ data: "json, name=accessTokenExpireTime" })
   accessTokenExpireTime?: string;
 
-  @Metadata({ data: "json, name=refreshToken" })
+  @SpeakeasyMetadata({ data: "json, name=refreshToken" })
   refreshToken?: string;
 
-  @Metadata({ data: "json, name=refreshTokenExpireTime" })
+  @SpeakeasyMetadata({ data: "json, name=refreshTokenExpireTime" })
   refreshTokenExpireTime?: string;
 
-  @Metadata({ data: "json, name=tokenType" })
+  @SpeakeasyMetadata({ data: "json, name=tokenType" })
   tokenType?: string;
 }

@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateNetworkFirmwareUpgradesRollbackPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 export enum CreateNetworkFirmwareUpgradesRollbackRequestBodyProductEnum {
-    Wireless = "wireless"
-,    Switch = "switch"
-,    Appliance = "appliance"
-,    Camera = "camera"
-,    VmxHost = "vmxHost"
-,    CellularGateway = "cellularGateway"
+    Wireless = "wireless",
+    Switch = "switch",
+    Appliance = "appliance",
+    Camera = "camera",
+    VmxHost = "vmxHost",
+    CellularGateway = "cellularGateway"
 }
 
 export enum CreateNetworkFirmwareUpgradesRollbackRequestBodyReasonsCategoryEnum {
-    Performance = "performance"
-,    Stability = "stability"
-,    BrokeOldFeatures = "broke old features"
-,    UnifyingNetworksVersions = "unifying networks versions"
-,    Testing = "testing"
-,    Other = "other"
+    Performance = "performance",
+    Stability = "stability",
+    BrokeOldFeatures = "broke old features",
+    UnifyingNetworksVersions = "unifying networks versions",
+    Testing = "testing",
+    Other = "other"
 }
 
 
 export class CreateNetworkFirmwareUpgradesRollbackRequestBodyReasons extends SpeakeasyBase {
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category: CreateNetworkFirmwareUpgradesRollbackRequestBodyReasonsCategoryEnum;
 
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment: string;
 }
 
@@ -39,42 +40,42 @@ export class CreateNetworkFirmwareUpgradesRollbackRequestBodyReasons extends Spe
  * Version to downgrade to (if the network has firmware flexibility)
 **/
 export class CreateNetworkFirmwareUpgradesRollbackRequestBodyToVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }
 
 
 export class CreateNetworkFirmwareUpgradesRollbackRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=product" })
+  @SpeakeasyMetadata({ data: "json, name=product" })
   product?: CreateNetworkFirmwareUpgradesRollbackRequestBodyProductEnum;
 
-  @Metadata({ data: "json, name=reasons", elemType: operations.CreateNetworkFirmwareUpgradesRollbackRequestBodyReasons })
+  @SpeakeasyMetadata({ data: "json, name=reasons", elemType: CreateNetworkFirmwareUpgradesRollbackRequestBodyReasons })
   reasons: CreateNetworkFirmwareUpgradesRollbackRequestBodyReasons[];
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: Date;
 
-  @Metadata({ data: "json, name=toVersion" })
+  @SpeakeasyMetadata({ data: "json, name=toVersion" })
   toVersion?: CreateNetworkFirmwareUpgradesRollbackRequestBodyToVersion;
 }
 
 
 export class CreateNetworkFirmwareUpgradesRollbackRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateNetworkFirmwareUpgradesRollbackPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateNetworkFirmwareUpgradesRollbackRequestBody;
 }
 
 
 export class CreateNetworkFirmwareUpgradesRollbackResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createNetworkFirmwareUpgradesRollback200ApplicationJsonObject?: Map<string, any>;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LifecycleConfig
@@ -6,15 +7,31 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the cluster auto-delete schedule configuration.
 **/
 export class LifecycleConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoDeleteTime" })
+  @SpeakeasyMetadata({ data: "json, name=autoDeleteTime" })
   autoDeleteTime?: string;
 
-  @Metadata({ data: "json, name=autoDeleteTtl" })
+  @SpeakeasyMetadata({ data: "json, name=autoDeleteTtl" })
   autoDeleteTtl?: string;
 
-  @Metadata({ data: "json, name=idleDeleteTtl" })
+  @SpeakeasyMetadata({ data: "json, name=idleDeleteTtl" })
   idleDeleteTtl?: string;
 
-  @Metadata({ data: "json, name=idleStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=idleStartTime" })
   idleStartTime?: string;
+}
+
+
+// LifecycleConfigInput
+/** 
+ * Specifies the cluster auto-delete schedule configuration.
+**/
+export class LifecycleConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=autoDeleteTime" })
+  autoDeleteTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=autoDeleteTtl" })
+  autoDeleteTtl?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=idleDeleteTtl" })
+  idleDeleteTtl?: string;
 }

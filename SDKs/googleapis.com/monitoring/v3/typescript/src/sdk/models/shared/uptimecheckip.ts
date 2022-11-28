@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum UptimeCheckIpRegionEnum {
-    RegionUnspecified = "REGION_UNSPECIFIED"
-,    Usa = "USA"
-,    Europe = "EUROPE"
-,    SouthAmerica = "SOUTH_AMERICA"
-,    AsiaPacific = "ASIA_PACIFIC"
+    RegionUnspecified = "REGION_UNSPECIFIED",
+    Usa = "USA",
+    Europe = "EUROPE",
+    SouthAmerica = "SOUTH_AMERICA",
+    AsiaPacific = "ASIA_PACIFIC"
 }
 
 
@@ -14,12 +15,12 @@ export enum UptimeCheckIpRegionEnum {
  * Contains the region, location, and list of IP addresses where checkers in the location run from.
 **/
 export class UptimeCheckIp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ipAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: UptimeCheckIpRegionEnum;
 }

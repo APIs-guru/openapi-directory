@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StartLifecyclePolicyPreviewRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lifecyclePolicyText" })
+  @SpeakeasyMetadata({ data: "json, name=lifecyclePolicyText" })
   lifecyclePolicyText?: string;
 
-  @Metadata({ data: "json, name=registryId" })
+  @SpeakeasyMetadata({ data: "json, name=registryId" })
   registryId?: string;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName: string;
 }

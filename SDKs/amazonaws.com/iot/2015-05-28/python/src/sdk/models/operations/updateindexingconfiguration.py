@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,40 +23,48 @@ class UpdateIndexingConfigurationHeaders:
 @dataclass_json
 @dataclass
 class UpdateIndexingConfigurationRequestBodyThingGroupIndexingConfiguration:
-    custom_fields: Optional[List[shared.Field]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customFields' }})
-    managed_fields: Optional[List[shared.Field]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'managedFields' }})
-    thing_group_indexing_mode: Optional[shared.ThingGroupIndexingModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thingGroupIndexingMode' }})
+    r"""UpdateIndexingConfigurationRequestBodyThingGroupIndexingConfiguration
+    Thing group indexing configuration.
+    """
+    
+    custom_fields: Optional[List[shared.Field]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customFields') }})
+    managed_fields: Optional[List[shared.Field]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('managedFields') }})
+    thing_group_indexing_mode: Optional[shared.ThingGroupIndexingModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thingGroupIndexingMode') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateIndexingConfigurationRequestBodyThingIndexingConfiguration:
-    custom_fields: Optional[List[shared.Field]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customFields' }})
-    managed_fields: Optional[List[shared.Field]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'managedFields' }})
-    thing_connectivity_indexing_mode: Optional[shared.ThingConnectivityIndexingModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thingConnectivityIndexingMode' }})
-    thing_indexing_mode: Optional[shared.ThingIndexingModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thingIndexingMode' }})
+    r"""UpdateIndexingConfigurationRequestBodyThingIndexingConfiguration
+    The thing indexing configuration. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/managing-index.html\">Managing Thing Indexing</a>.
+    """
+    
+    custom_fields: Optional[List[shared.Field]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customFields') }})
+    managed_fields: Optional[List[shared.Field]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('managedFields') }})
+    thing_connectivity_indexing_mode: Optional[shared.ThingConnectivityIndexingModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thingConnectivityIndexingMode') }})
+    thing_indexing_mode: Optional[shared.ThingIndexingModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thingIndexingMode') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateIndexingConfigurationRequestBody:
-    thing_group_indexing_configuration: Optional[UpdateIndexingConfigurationRequestBodyThingGroupIndexingConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thingGroupIndexingConfiguration' }})
-    thing_indexing_configuration: Optional[UpdateIndexingConfigurationRequestBodyThingIndexingConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thingIndexingConfiguration' }})
+    thing_group_indexing_configuration: Optional[UpdateIndexingConfigurationRequestBodyThingGroupIndexingConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thingGroupIndexingConfiguration') }})
+    thing_indexing_configuration: Optional[UpdateIndexingConfigurationRequestBodyThingIndexingConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thingIndexingConfiguration') }})
     
 
 @dataclass
 class UpdateIndexingConfigurationRequest:
-    headers: UpdateIndexingConfigurationHeaders = field(default=None)
-    request: UpdateIndexingConfigurationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateIndexingConfigurationHeaders = field()
+    request: UpdateIndexingConfigurationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateIndexingConfigurationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     update_indexing_configuration_response: Optional[dict[str, Any]] = field(default=None)

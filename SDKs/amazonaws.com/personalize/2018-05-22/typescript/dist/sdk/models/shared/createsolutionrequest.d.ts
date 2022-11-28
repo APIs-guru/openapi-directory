@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SolutionConfig } from "./solutionconfig";
 export declare class CreateSolutionRequest extends SpeakeasyBase {
     datasetGroupArn: string;

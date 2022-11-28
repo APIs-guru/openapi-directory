@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StreamingSideInputLocation
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Identifies the location of a streaming side input.
 **/
 export class StreamingSideInputLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=stateFamily" })
+  @SpeakeasyMetadata({ data: "json, name=stateFamily" })
   stateFamily?: string;
 
-  @Metadata({ data: "json, name=tag" })
+  @SpeakeasyMetadata({ data: "json, name=tag" })
   tag?: string;
 }

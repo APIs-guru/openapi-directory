@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SentimentTypeEnum } from "./sentimenttypeenum";
 import { SentimentScore } from "./sentimentscore";
 export declare class DetectSentimentResponse extends SpeakeasyBase {

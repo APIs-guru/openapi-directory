@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ThirdPartyTrackingURLThirdPartyURLTypeEnum(str, Enum):
     IMPRESSION = "IMPRESSION"
@@ -27,6 +29,10 @@ class ThirdPartyTrackingURLThirdPartyURLTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ThirdPartyTrackingURL:
-    third_party_url_type: Optional[ThirdPartyTrackingURLThirdPartyURLTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thirdPartyUrlType' }})
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
+    r"""ThirdPartyTrackingURL
+    Third-party Tracking URL.
+    """
+    
+    third_party_url_type: Optional[ThirdPartyTrackingURLThirdPartyURLTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('thirdPartyUrlType') }})
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Command } from "./command";
+
 
 
 // Contact
@@ -8,39 +8,39 @@ import { Command } from "./command";
  * A person or group that can be used as a creator or a contact.
 **/
 export class Contact extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acceptCommands", elemType: shared.Command })
+  @SpeakeasyMetadata({ data: "json, name=acceptCommands", elemType: Command })
   acceptCommands?: Command[];
 
-  @Metadata({ data: "json, name=acceptTypes" })
+  @SpeakeasyMetadata({ data: "json, name=acceptTypes" })
   acceptTypes?: string[];
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=imageUrls" })
+  @SpeakeasyMetadata({ data: "json, name=imageUrls" })
   imageUrls?: string[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority?: number;
 
-  @Metadata({ data: "json, name=sharingFeatures" })
+  @SpeakeasyMetadata({ data: "json, name=sharingFeatures" })
   sharingFeatures?: string[];
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 
-  @Metadata({ data: "json, name=speakableName" })
+  @SpeakeasyMetadata({ data: "json, name=speakableName" })
   speakableName?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

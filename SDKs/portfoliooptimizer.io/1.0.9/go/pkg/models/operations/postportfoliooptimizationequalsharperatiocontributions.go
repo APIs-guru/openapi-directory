@@ -7,12 +7,12 @@ type PostPortfolioOptimizationEqualSharpeRatioContributionsRequestBody struct {
 	RiskFreeRate           float64     `json:"riskFreeRate"`
 }
 
-type PostPortfolioOptimizationEqualSharpeRatioContributionsRequest struct {
-	Request PostPortfolioOptimizationEqualSharpeRatioContributionsRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioOptimizationEqualSharpeRatioContributions200ApplicationJSON struct {
 	AssetsWeights []float64 `json:"assetsWeights"`
+}
+
+type PostPortfolioOptimizationEqualSharpeRatioContributionsRequest struct {
+	Request PostPortfolioOptimizationEqualSharpeRatioContributionsRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioOptimizationEqualSharpeRatioContributionsResponse struct {

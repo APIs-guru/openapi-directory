@@ -1,6 +1,7 @@
 
 
+
 export enum PortStateEnum {
-    Open = "open"
-,    Closed = "closed"
+    Open = "open",
+    Closed = "closed"
 }

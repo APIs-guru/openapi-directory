@@ -32,6 +32,14 @@ const (
 	GoogleCloudRetailV2alphaCatalogAttributeRecommendationsFilteringOptionEnumRecommendationsFilteringEnabled           GoogleCloudRetailV2alphaCatalogAttributeRecommendationsFilteringOptionEnum = "RECOMMENDATIONS_FILTERING_ENABLED"
 )
 
+type GoogleCloudRetailV2alphaCatalogAttributeRetrievableOptionEnum string
+
+const (
+	GoogleCloudRetailV2alphaCatalogAttributeRetrievableOptionEnumRetrievableOptionUnspecified GoogleCloudRetailV2alphaCatalogAttributeRetrievableOptionEnum = "RETRIEVABLE_OPTION_UNSPECIFIED"
+	GoogleCloudRetailV2alphaCatalogAttributeRetrievableOptionEnumRetrievableEnabled           GoogleCloudRetailV2alphaCatalogAttributeRetrievableOptionEnum = "RETRIEVABLE_ENABLED"
+	GoogleCloudRetailV2alphaCatalogAttributeRetrievableOptionEnumRetrievableDisabled          GoogleCloudRetailV2alphaCatalogAttributeRetrievableOptionEnum = "RETRIEVABLE_DISABLED"
+)
+
 type GoogleCloudRetailV2alphaCatalogAttributeSearchableOptionEnum string
 
 const (
@@ -48,6 +56,20 @@ const (
 	GoogleCloudRetailV2alphaCatalogAttributeTypeEnumNumerical GoogleCloudRetailV2alphaCatalogAttributeTypeEnum = "NUMERICAL"
 )
 
+// GoogleCloudRetailV2alphaCatalogAttributeInput
+// Catalog level attribute config for an attribute. For example, if customers want to enable/disable facet for a specific attribute.
+type GoogleCloudRetailV2alphaCatalogAttributeInput struct {
+	DynamicFacetableOption         *GoogleCloudRetailV2alphaCatalogAttributeDynamicFacetableOptionEnum         `json:"dynamicFacetableOption,omitempty"`
+	ExactSearchableOption          *GoogleCloudRetailV2alphaCatalogAttributeExactSearchableOptionEnum          `json:"exactSearchableOption,omitempty"`
+	IndexableOption                *GoogleCloudRetailV2alphaCatalogAttributeIndexableOptionEnum                `json:"indexableOption,omitempty"`
+	Key                            *string                                                                     `json:"key,omitempty"`
+	RecommendationsFilteringOption *GoogleCloudRetailV2alphaCatalogAttributeRecommendationsFilteringOptionEnum `json:"recommendationsFilteringOption,omitempty"`
+	RetrievableOption              *GoogleCloudRetailV2alphaCatalogAttributeRetrievableOptionEnum              `json:"retrievableOption,omitempty"`
+	SearchableOption               *GoogleCloudRetailV2alphaCatalogAttributeSearchableOptionEnum               `json:"searchableOption,omitempty"`
+}
+
+// GoogleCloudRetailV2alphaCatalogAttribute
+// Catalog level attribute config for an attribute. For example, if customers want to enable/disable facet for a specific attribute.
 type GoogleCloudRetailV2alphaCatalogAttribute struct {
 	DynamicFacetableOption         *GoogleCloudRetailV2alphaCatalogAttributeDynamicFacetableOptionEnum         `json:"dynamicFacetableOption,omitempty"`
 	ExactSearchableOption          *GoogleCloudRetailV2alphaCatalogAttributeExactSearchableOptionEnum          `json:"exactSearchableOption,omitempty"`
@@ -55,6 +77,7 @@ type GoogleCloudRetailV2alphaCatalogAttribute struct {
 	IndexableOption                *GoogleCloudRetailV2alphaCatalogAttributeIndexableOptionEnum                `json:"indexableOption,omitempty"`
 	Key                            *string                                                                     `json:"key,omitempty"`
 	RecommendationsFilteringOption *GoogleCloudRetailV2alphaCatalogAttributeRecommendationsFilteringOptionEnum `json:"recommendationsFilteringOption,omitempty"`
+	RetrievableOption              *GoogleCloudRetailV2alphaCatalogAttributeRetrievableOptionEnum              `json:"retrievableOption,omitempty"`
 	SearchableOption               *GoogleCloudRetailV2alphaCatalogAttributeSearchableOptionEnum               `json:"searchableOption,omitempty"`
 	Type                           *GoogleCloudRetailV2alphaCatalogAttributeTypeEnum                           `json:"type,omitempty"`
 }

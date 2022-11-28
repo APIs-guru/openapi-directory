@@ -21,6 +21,8 @@ const (
 	GoogleCloudDataplexV1SchemaPartitionFieldTypeEnumNull            GoogleCloudDataplexV1SchemaPartitionFieldTypeEnum = "NULL"
 )
 
+// GoogleCloudDataplexV1SchemaPartitionField
+// Represents a key field within the entity's partition structure. You could have up to 20 partition fields, but only the first 10 partitions have the filtering ability due to performance consideration. Note: Partition fields are immutable.
 type GoogleCloudDataplexV1SchemaPartitionField struct {
 	Name *string                                            `json:"name,omitempty"`
 	Type *GoogleCloudDataplexV1SchemaPartitionFieldTypeEnum `json:"type,omitempty"`

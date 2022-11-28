@@ -1,6 +1,7 @@
 
 
+
 export enum BucketMetricNameEnum {
-    BucketSizeBytes = "BucketSizeBytes"
-,    NumberOfObjects = "NumberOfObjects"
+    BucketSizeBytes = "BucketSizeBytes",
+    NumberOfObjects = "NumberOfObjects"
 }

@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SchemaId } from "./schemaid";
 import { SchemaVersionNumber } from "./schemaversionnumber";
 
 
+
 export class GetSchemaVersionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SchemaId" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaId" })
   schemaId?: SchemaId;
 
-  @Metadata({ data: "json, name=SchemaVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaVersionId" })
   schemaVersionId?: string;
 
-  @Metadata({ data: "json, name=SchemaVersionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaVersionNumber" })
   schemaVersionNumber?: SchemaVersionNumber;
 }

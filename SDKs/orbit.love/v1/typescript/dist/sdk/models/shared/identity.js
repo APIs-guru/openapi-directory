@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Identity
 /**
  * Represents an email address, a profile on networks like github and twitter, or a record in another system.
@@ -33,31 +33,31 @@ var Identity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=email" }),
+        SpeakeasyMetadata({ data: "json, name=email" }),
         __metadata("design:type", String)
     ], Identity.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Identity.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", String)
     ], Identity.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "json, name=source_host" }),
+        SpeakeasyMetadata({ data: "json, name=source_host" }),
         __metadata("design:type", String)
     ], Identity.prototype, "sourceHost", void 0);
     __decorate([
-        Metadata({ data: "json, name=uid" }),
+        SpeakeasyMetadata({ data: "json, name=uid" }),
         __metadata("design:type", String)
     ], Identity.prototype, "uid", void 0);
     __decorate([
-        Metadata({ data: "json, name=url" }),
+        SpeakeasyMetadata({ data: "json, name=url" }),
         __metadata("design:type", String)
     ], Identity.prototype, "url", void 0);
     __decorate([
-        Metadata({ data: "json, name=username" }),
+        SpeakeasyMetadata({ data: "json, name=username" }),
         __metadata("design:type", String)
     ], Identity.prototype, "username", void 0);
     return Identity;

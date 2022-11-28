@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceTypeEnum } from "./resourcetypeenum";
+
 
 
 // ResourceCountFilters
@@ -7,12 +8,12 @@ import { ResourceTypeEnum } from "./resourcetypeenum";
  * Filters the resource count based on account ID, region, and resource type.
 **/
 export class ResourceCountFilters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AccountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=Region" })
+  @SpeakeasyMetadata({ data: "json, name=Region" })
   region?: string;
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType?: ResourceTypeEnum;
 }

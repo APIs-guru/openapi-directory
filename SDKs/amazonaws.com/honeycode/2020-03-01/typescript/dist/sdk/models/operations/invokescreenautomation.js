@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var InvokeScreenAutomationPathParams = /** @class */ (function (_super) {
     __extends(InvokeScreenAutomationPathParams, _super);
@@ -30,19 +30,19 @@ var InvokeScreenAutomationPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
         __metadata("design:type", String)
     ], InvokeScreenAutomationPathParams.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=automationId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=automationId" }),
         __metadata("design:type", String)
     ], InvokeScreenAutomationPathParams.prototype, "automationId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=screenId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=screenId" }),
         __metadata("design:type", String)
     ], InvokeScreenAutomationPathParams.prototype, "screenId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=workbookId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workbookId" }),
         __metadata("design:type", String)
     ], InvokeScreenAutomationPathParams.prototype, "workbookId", void 0);
     return InvokeScreenAutomationPathParams;
@@ -54,31 +54,31 @@ var InvokeScreenAutomationHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], InvokeScreenAutomationHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], InvokeScreenAutomationHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], InvokeScreenAutomationHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], InvokeScreenAutomationHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], InvokeScreenAutomationHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], InvokeScreenAutomationHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], InvokeScreenAutomationHeaders.prototype, "xAmzSignedHeaders", void 0);
     return InvokeScreenAutomationHeaders;
@@ -90,15 +90,15 @@ var InvokeScreenAutomationRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clientRequestToken" }),
+        SpeakeasyMetadata({ data: "json, name=clientRequestToken" }),
         __metadata("design:type", String)
     ], InvokeScreenAutomationRequestBody.prototype, "clientRequestToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=rowId" }),
+        SpeakeasyMetadata({ data: "json, name=rowId" }),
         __metadata("design:type", String)
     ], InvokeScreenAutomationRequestBody.prototype, "rowId", void 0);
     __decorate([
-        Metadata({ data: "json, name=variables", elemType: shared.VariableValue }),
+        SpeakeasyMetadata({ data: "json, name=variables", elemType: shared.VariableValue }),
         __metadata("design:type", Map)
     ], InvokeScreenAutomationRequestBody.prototype, "variables", void 0);
     return InvokeScreenAutomationRequestBody;
@@ -110,15 +110,15 @@ var InvokeScreenAutomationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", InvokeScreenAutomationPathParams)
     ], InvokeScreenAutomationRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", InvokeScreenAutomationHeaders)
     ], InvokeScreenAutomationRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", InvokeScreenAutomationRequestBody)
     ], InvokeScreenAutomationRequest.prototype, "request", void 0);
     return InvokeScreenAutomationRequest;
@@ -130,51 +130,51 @@ var InvokeScreenAutomationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], InvokeScreenAutomationResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], InvokeScreenAutomationResponse.prototype, "automationExecutionException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], InvokeScreenAutomationResponse.prototype, "automationExecutionTimeoutException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], InvokeScreenAutomationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], InvokeScreenAutomationResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.InvokeScreenAutomationResult)
     ], InvokeScreenAutomationResponse.prototype, "invokeScreenAutomationResult", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], InvokeScreenAutomationResponse.prototype, "requestTimeoutException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], InvokeScreenAutomationResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], InvokeScreenAutomationResponse.prototype, "serviceUnavailableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], InvokeScreenAutomationResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], InvokeScreenAutomationResponse.prototype, "throttlingException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], InvokeScreenAutomationResponse.prototype, "validationException", void 0);
     return InvokeScreenAutomationResponse;

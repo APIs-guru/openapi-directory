@@ -1,5 +1,7 @@
 package shared
 
+// AccountStatus
+// The status of an account, that is, information about its products, which is computed offline and not returned immediately at insertion time.
 type AccountStatus struct {
 	AccountID          *string                          `json:"accountId,omitempty"`
 	AccountLevelIssues []AccountStatusAccountLevelIssue `json:"accountLevelIssues,omitempty"`

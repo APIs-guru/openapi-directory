@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Ami } from "./ami";
 import { Container } from "./container";
+
 
 
 // OutputResources
@@ -9,9 +9,9 @@ import { Container } from "./container";
  * The resources produced by this image.
 **/
 export class OutputResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amis", elemType: shared.Ami })
+  @SpeakeasyMetadata({ data: "json, name=amis", elemType: Ami })
   amis?: Ami[];
 
-  @Metadata({ data: "json, name=containers", elemType: shared.Container })
+  @SpeakeasyMetadata({ data: "json, name=containers", elemType: Container })
   containers?: Container[];
 }

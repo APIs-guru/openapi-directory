@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Watched extends SpeakeasyBase {
-  @Metadata({ data: "json, name=firstWatchedDate" })
+  @SpeakeasyMetadata({ data: "json, name=firstWatchedDate" })
   firstWatchedDate: Date;
 
-  @Metadata({ data: "json, name=isFullyWatched" })
+  @SpeakeasyMetadata({ data: "json, name=isFullyWatched" })
   isFullyWatched?: boolean;
 
-  @Metadata({ data: "json, name=itemId" })
+  @SpeakeasyMetadata({ data: "json, name=itemId" })
   itemId?: string;
 
-  @Metadata({ data: "json, name=lastWatchedDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastWatchedDate" })
   lastWatchedDate: Date;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position: number;
 }

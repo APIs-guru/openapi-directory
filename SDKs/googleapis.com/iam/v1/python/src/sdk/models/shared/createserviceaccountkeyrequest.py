@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class CreateServiceAccountKeyRequestKeyAlgorithmEnum(str, Enum):
     KEY_ALG_UNSPECIFIED = "KEY_ALG_UNSPECIFIED"
@@ -16,6 +18,10 @@ class CreateServiceAccountKeyRequestPrivateKeyTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateServiceAccountKeyRequest:
-    key_algorithm: Optional[CreateServiceAccountKeyRequestKeyAlgorithmEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keyAlgorithm' }})
-    private_key_type: Optional[CreateServiceAccountKeyRequestPrivateKeyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'privateKeyType' }})
+    r"""CreateServiceAccountKeyRequest
+    The service account key create request.
+    """
+    
+    key_algorithm: Optional[CreateServiceAccountKeyRequestKeyAlgorithmEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('keyAlgorithm') }})
+    private_key_type: Optional[CreateServiceAccountKeyRequestPrivateKeyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('privateKeyType') }})
     

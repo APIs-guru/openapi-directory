@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatasetContentVersionValue } from "./datasetcontentversionvalue";
 import { OutputFileUriValue } from "./outputfileurivalue";
 // Variable
@@ -35,23 +35,23 @@ var Variable = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=datasetContentVersionValue" }),
+        SpeakeasyMetadata({ data: "json, name=datasetContentVersionValue" }),
         __metadata("design:type", DatasetContentVersionValue)
     ], Variable.prototype, "datasetContentVersionValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=doubleValue" }),
+        SpeakeasyMetadata({ data: "json, name=doubleValue" }),
         __metadata("design:type", Number)
     ], Variable.prototype, "doubleValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Variable.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=outputFileUriValue" }),
+        SpeakeasyMetadata({ data: "json, name=outputFileUriValue" }),
         __metadata("design:type", OutputFileUriValue)
     ], Variable.prototype, "outputFileUriValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=stringValue" }),
+        SpeakeasyMetadata({ data: "json, name=stringValue" }),
         __metadata("design:type", String)
     ], Variable.prototype, "stringValue", void 0);
     return Variable;

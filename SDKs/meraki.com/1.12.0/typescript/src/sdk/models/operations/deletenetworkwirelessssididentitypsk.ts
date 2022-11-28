@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteNetworkWirelessSsidIdentityPskPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=identityPskId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=identityPskId" })
   identityPskId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=number" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=number" })
   number: string;
 }
 
 
 export class DeleteNetworkWirelessSsidIdentityPskRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteNetworkWirelessSsidIdentityPskPathParams;
 }
 
 
 export class DeleteNetworkWirelessSsidIdentityPskResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

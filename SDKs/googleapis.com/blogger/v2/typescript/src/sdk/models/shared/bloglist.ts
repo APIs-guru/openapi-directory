@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BlogUserInfo } from "./bloguserinfo";
 import { Blog } from "./blog";
 
 
+
 export class BlogList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blogUserInfos", elemType: shared.BlogUserInfo })
+  @SpeakeasyMetadata({ data: "json, name=blogUserInfos", elemType: BlogUserInfo })
   blogUserInfos?: BlogUserInfo[];
 
-  @Metadata({ data: "json, name=items", elemType: shared.Blog })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Blog })
   items?: Blog[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

@@ -26,6 +26,17 @@ const (
 	GoogleCloudDataplexV1StorageFormatFormatEnumUnknown           GoogleCloudDataplexV1StorageFormatFormatEnum = "UNKNOWN"
 )
 
+// GoogleCloudDataplexV1StorageFormatInput
+// Describes the format of the data within its storage location.
+type GoogleCloudDataplexV1StorageFormatInput struct {
+	CompressionFormat *GoogleCloudDataplexV1StorageFormatCompressionFormatEnum `json:"compressionFormat,omitempty"`
+	Csv               *GoogleCloudDataplexV1StorageFormatCsvOptions            `json:"csv,omitempty"`
+	JSON              *GoogleCloudDataplexV1StorageFormatJSONOptions           `json:"json,omitempty"`
+	MimeType          *string                                                  `json:"mimeType,omitempty"`
+}
+
+// GoogleCloudDataplexV1StorageFormat
+// Describes the format of the data within its storage location.
 type GoogleCloudDataplexV1StorageFormat struct {
 	CompressionFormat *GoogleCloudDataplexV1StorageFormatCompressionFormatEnum `json:"compressionFormat,omitempty"`
 	Csv               *GoogleCloudDataplexV1StorageFormatCsvOptions            `json:"csv,omitempty"`

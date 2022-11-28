@@ -1,5 +1,7 @@
 package shared
 
+// PorterLargeFile
+// Porter Large File
 type PorterLargeFile struct {
 	Oid     string `json:"oid"`
 	Path    string `json:"path"`

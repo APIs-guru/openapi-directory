@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ComprehendMedicalAsyncJobProperties
+// Provides information about a detection job.
 type ComprehendMedicalAsyncJobProperties struct {
 	DataAccessRoleArn *string           `json:"DataAccessRoleArn,omitempty"`
 	EndTime           *time.Time        `json:"EndTime,omitempty"`

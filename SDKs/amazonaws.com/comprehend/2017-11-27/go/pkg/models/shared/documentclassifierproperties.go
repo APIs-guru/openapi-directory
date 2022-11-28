@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DocumentClassifierProperties
+// Provides information about a document classifier.
 type DocumentClassifierProperties struct {
 	ClassifierMetadata    *ClassifierMetadata                 `json:"ClassifierMetadata,omitempty"`
 	DataAccessRoleArn     *string                             `json:"DataAccessRoleArn,omitempty"`

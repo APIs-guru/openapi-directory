@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableCellProperties } from "./tablecellproperties";
 import { TableRange } from "./tablerange";
+
 
 
 // UpdateTableCellPropertiesRequest
@@ -8,15 +9,15 @@ import { TableRange } from "./tablerange";
  * Update the properties of a TableCell.
 **/
 export class UpdateTableCellPropertiesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 
-  @Metadata({ data: "json, name=objectId" })
+  @SpeakeasyMetadata({ data: "json, name=objectId" })
   objectId?: string;
 
-  @Metadata({ data: "json, name=tableCellProperties" })
+  @SpeakeasyMetadata({ data: "json, name=tableCellProperties" })
   tableCellProperties?: TableCellProperties;
 
-  @Metadata({ data: "json, name=tableRange" })
+  @SpeakeasyMetadata({ data: "json, name=tableRange" })
   tableRange?: TableRange;
 }

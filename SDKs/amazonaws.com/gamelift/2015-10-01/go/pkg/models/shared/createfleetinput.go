@@ -1,5 +1,7 @@
 package shared
 
+// CreateFleetInput
+// Represents the input for a request operation.
 type CreateFleetInput struct {
 	BuildID                        *string                      `json:"BuildId,omitempty"`
 	CertificateConfiguration       *CertificateConfiguration    `json:"CertificateConfiguration,omitempty"`

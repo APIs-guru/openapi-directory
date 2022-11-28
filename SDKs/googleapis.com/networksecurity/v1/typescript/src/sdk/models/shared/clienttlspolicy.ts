@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudNetworksecurityV1CertificateProvider } from "./googlecloudnetworksecurityv1certificateprovider";
 import { ValidationCa } from "./validationca";
+
 
 
 // ClientTlsPolicy
@@ -9,27 +9,52 @@ import { ValidationCa } from "./validationca";
  * ClientTlsPolicy is a resource that specifies how a client should authenticate connections to backends of a service. This resource itself does not affect configuration unless it is attached to a backend service resource.
 **/
 export class ClientTlsPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=clientCertificate" })
   clientCertificate?: GoogleCloudNetworksecurityV1CertificateProvider;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=serverValidationCa", elemType: shared.ValidationCa })
+  @SpeakeasyMetadata({ data: "json, name=serverValidationCa", elemType: ValidationCa })
   serverValidationCa?: ValidationCa[];
 
-  @Metadata({ data: "json, name=sni" })
+  @SpeakeasyMetadata({ data: "json, name=sni" })
   sni?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// ClientTlsPolicyInput
+/** 
+ * ClientTlsPolicy is a resource that specifies how a client should authenticate connections to backends of a service. This resource itself does not affect configuration unless it is attached to a backend service resource.
+**/
+export class ClientTlsPolicyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=clientCertificate" })
+  clientCertificate?: GoogleCloudNetworksecurityV1CertificateProvider;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=serverValidationCa", elemType: ValidationCa })
+  serverValidationCa?: ValidationCa[];
+
+  @SpeakeasyMetadata({ data: "json, name=sni" })
+  sni?: string;
 }

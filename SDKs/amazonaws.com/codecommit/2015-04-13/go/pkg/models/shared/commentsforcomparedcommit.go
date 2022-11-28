@@ -1,5 +1,7 @@
 package shared
 
+// CommentsForComparedCommit
+// Returns information about comments on the comparison between two commits.
 type CommentsForComparedCommit struct {
 	AfterBlobID    *string   `json:"afterBlobId,omitempty"`
 	AfterCommitID  *string   `json:"afterCommitId,omitempty"`

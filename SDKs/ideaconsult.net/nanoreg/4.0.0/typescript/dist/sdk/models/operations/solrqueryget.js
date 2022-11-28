@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var SolrqueryGetWtEnum;
 (function (SolrqueryGetWtEnum) {
@@ -35,19 +35,19 @@ var SolrqueryGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=q" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" }),
         __metadata("design:type", String)
     ], SolrqueryGetQueryParams.prototype, "q", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rows" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rows" }),
         __metadata("design:type", Number)
     ], SolrqueryGetQueryParams.prototype, "rows", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=start" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" }),
         __metadata("design:type", Number)
     ], SolrqueryGetQueryParams.prototype, "start", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=wt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=wt" }),
         __metadata("design:type", String)
     ], SolrqueryGetQueryParams.prototype, "wt", void 0);
     return SolrqueryGetQueryParams;
@@ -59,7 +59,7 @@ var SolrqueryGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SolrqueryGetQueryParams)
     ], SolrqueryGetRequest.prototype, "queryParams", void 0);
     return SolrqueryGetRequest;
@@ -71,19 +71,19 @@ var SolrqueryGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], SolrqueryGetResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SolrqueryGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SolrResponse)
     ], SolrqueryGetResponse.prototype, "solrResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SolrqueryGetResponse.prototype, "statusCode", void 0);
     return SolrqueryGetResponse;

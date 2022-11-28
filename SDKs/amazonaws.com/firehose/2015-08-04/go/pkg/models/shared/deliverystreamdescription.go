@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DeliveryStreamDescription
+// Contains information about a delivery stream.
 type DeliveryStreamDescription struct {
 	CreateTimestamp                       *time.Time                             `json:"CreateTimestamp,omitempty"`
 	DeliveryStreamArn                     string                                 `json:"DeliveryStreamARN"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RemoteAccessSession } from "./remoteaccesssession";
+
 
 
 // CreateRemoteAccessSessionResult
@@ -7,6 +8,6 @@ import { RemoteAccessSession } from "./remoteaccesssession";
  * Represents the server response from a request to create a remote access session.
 **/
 export class CreateRemoteAccessSessionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=remoteAccessSession" })
+  @SpeakeasyMetadata({ data: "json, name=remoteAccessSession" })
   remoteAccessSession?: RemoteAccessSession;
 }

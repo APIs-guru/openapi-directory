@@ -10,12 +10,12 @@ class ListHypernymsQueryParams:
 
 @dataclass
 class ListHypernymsRequest:
-    query_params: ListHypernymsQueryParams = field(default=None)
+    query_params: ListHypernymsQueryParams = field()
     
 
 @dataclass
 class ListHypernymsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_hypernyms_200_application_json_arrays: Optional[List[List[float]]] = field(default=None)
     

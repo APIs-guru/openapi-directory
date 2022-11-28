@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccountAttribute } from "./accountattribute";
 
 
+
 export class DescribeAccountAttributesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Attributes", elemType: shared.AccountAttribute })
+  @SpeakeasyMetadata({ data: "json, name=Attributes", elemType: AccountAttribute })
   attributes?: AccountAttribute[];
 }

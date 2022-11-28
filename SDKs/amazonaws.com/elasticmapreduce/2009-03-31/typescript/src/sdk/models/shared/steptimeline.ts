@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // StepTimeline
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The timeline of the cluster step lifecycle.
 **/
 export class StepTimeline extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDateTime" })
   creationDateTime?: Date;
 
-  @Metadata({ data: "json, name=EndDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndDateTime" })
   endDateTime?: Date;
 
-  @Metadata({ data: "json, name=StartDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartDateTime" })
   startDateTime?: Date;
 }

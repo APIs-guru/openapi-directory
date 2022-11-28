@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3IntentTrainingPhrasePart } from "./googleclouddialogflowcxv3intenttrainingphrasepart";
+
 
 
 // GoogleCloudDialogflowCxV3IntentTrainingPhrase
@@ -8,12 +8,12 @@ import { GoogleCloudDialogflowCxV3IntentTrainingPhrasePart } from "./googlecloud
  * Represents an example that the agent is trained on to identify the intent.
 **/
 export class GoogleCloudDialogflowCxV3IntentTrainingPhrase extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=parts", elemType: shared.GoogleCloudDialogflowCxV3IntentTrainingPhrasePart })
+  @SpeakeasyMetadata({ data: "json, name=parts", elemType: GoogleCloudDialogflowCxV3IntentTrainingPhrasePart })
   parts?: GoogleCloudDialogflowCxV3IntentTrainingPhrasePart[];
 
-  @Metadata({ data: "json, name=repeatCount" })
+  @SpeakeasyMetadata({ data: "json, name=repeatCount" })
   repeatCount?: number;
 }

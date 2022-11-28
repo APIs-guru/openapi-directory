@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAttachmentPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=index" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=index" })
   index: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=mediaSourceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=mediaSourceId" })
   mediaSourceId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=videoId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=videoId" })
   videoId: string;
 }
 
 
 export class GetAttachmentRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAttachmentPathParams;
 }
 
 
 export class GetAttachmentResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAttachment200ApplicationOctetStreamBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ScreenshotType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activity_id" })
+  @SpeakeasyMetadata({ data: "json, name=activity_id" })
   activityId?: string;
 
-  @Metadata({ data: "json, name=browser" })
+  @SpeakeasyMetadata({ data: "json, name=browser" })
   browser?: string;
 
-  @Metadata({ data: "json, name=browser_version" })
+  @SpeakeasyMetadata({ data: "json, name=browser_version" })
   browserVersion?: string;
 
-  @Metadata({ data: "json, name=os" })
+  @SpeakeasyMetadata({ data: "json, name=os" })
   os?: string;
 
-  @Metadata({ data: "json, name=resolution" })
+  @SpeakeasyMetadata({ data: "json, name=resolution" })
   resolution?: string;
 
-  @Metadata({ data: "json, name=screenshot_url" })
+  @SpeakeasyMetadata({ data: "json, name=screenshot_url" })
   screenshotUrl?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=thumbnail_url" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnail_url" })
   thumbnailUrl?: string;
 }

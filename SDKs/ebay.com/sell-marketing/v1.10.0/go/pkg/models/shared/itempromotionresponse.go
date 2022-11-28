@@ -1,5 +1,7 @@
 package shared
 
+// ItemPromotionResponse
+// This complex type defines the fields returned for an item (threshold) promotion.
 type ItemPromotionResponse struct {
 	ApplyDiscountToSingleItemOnly *bool                `json:"applyDiscountToSingleItemOnly,omitempty"`
 	Budget                        *Amount              `json:"budget,omitempty"`

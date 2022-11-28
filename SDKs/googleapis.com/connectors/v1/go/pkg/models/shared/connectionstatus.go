@@ -12,6 +12,8 @@ const (
 	ConnectionStatusStateEnumError            ConnectionStatusStateEnum = "ERROR"
 )
 
+// ConnectionStatus
+// ConnectionStatus indicates the state of the connection.
 type ConnectionStatus struct {
 	Description *string                    `json:"description,omitempty"`
 	State       *ConnectionStatusStateEnum `json:"state,omitempty"`

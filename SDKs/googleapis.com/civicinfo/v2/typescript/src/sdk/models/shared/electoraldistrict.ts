@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ElectoralDistrictScopeEnum {
-    Statewide = "statewide"
-,    Congressional = "congressional"
-,    StateUpper = "stateUpper"
-,    StateLower = "stateLower"
-,    Countywide = "countywide"
-,    Judicial = "judicial"
-,    SchoolBoard = "schoolBoard"
-,    Citywide = "citywide"
-,    Special = "special"
-,    CountyCouncil = "countyCouncil"
-,    Township = "township"
-,    Ward = "ward"
-,    CityCouncil = "cityCouncil"
-,    National = "national"
+    Statewide = "statewide",
+    Congressional = "congressional",
+    StateUpper = "stateUpper",
+    StateLower = "stateLower",
+    Countywide = "countywide",
+    Judicial = "judicial",
+    SchoolBoard = "schoolBoard",
+    Citywide = "citywide",
+    Special = "special",
+    CountyCouncil = "countyCouncil",
+    Township = "township",
+    Ward = "ward",
+    CityCouncil = "cityCouncil",
+    National = "national"
 }
 
 
@@ -23,12 +24,12 @@ export enum ElectoralDistrictScopeEnum {
  * Describes the geographic scope of a contest.
 **/
 export class ElectoralDistrict extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=scope" })
+  @SpeakeasyMetadata({ data: "json, name=scope" })
   scope?: ElectoralDistrictScopeEnum;
 }

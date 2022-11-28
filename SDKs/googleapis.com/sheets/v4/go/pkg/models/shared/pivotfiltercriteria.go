@@ -1,5 +1,7 @@
 package shared
 
+// PivotFilterCriteria
+// Criteria for showing/hiding rows in a pivot table.
 type PivotFilterCriteria struct {
 	Condition        *BooleanCondition `json:"condition,omitempty"`
 	VisibleByDefault *bool             `json:"visibleByDefault,omitempty"`

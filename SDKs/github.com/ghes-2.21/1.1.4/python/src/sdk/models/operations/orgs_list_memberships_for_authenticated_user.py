@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class OrgsListMembershipsForAuthenticatedUserStateEnum(str, Enum):
@@ -16,14 +17,14 @@ class OrgsListMembershipsForAuthenticatedUserQueryParams:
 
 @dataclass
 class OrgsListMembershipsForAuthenticatedUserRequest:
-    query_params: OrgsListMembershipsForAuthenticatedUserQueryParams = field(default=None)
+    query_params: OrgsListMembershipsForAuthenticatedUserQueryParams = field()
     
 
 @dataclass
 class OrgsListMembershipsForAuthenticatedUserResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     org_memberships: Optional[List[shared.OrgMembership]] = field(default=None)
     validation_error: Optional[shared.ValidationError] = field(default=None)

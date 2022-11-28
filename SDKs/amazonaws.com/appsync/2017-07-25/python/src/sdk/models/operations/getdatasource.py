@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetDataSourcePathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,18 +25,18 @@ class GetDataSourceHeaders:
 
 @dataclass
 class GetDataSourceRequest:
-    path_params: GetDataSourcePathParams = field(default=None)
-    headers: GetDataSourceHeaders = field(default=None)
+    headers: GetDataSourceHeaders = field()
+    path_params: GetDataSourcePathParams = field()
     
 
 @dataclass
 class GetDataSourceResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     concurrent_modification_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_data_source_response: Optional[shared.GetDataSourceResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

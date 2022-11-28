@@ -17,6 +17,8 @@ const (
 	GatewayConfigGatewayTypeEnumNonGateway             GatewayConfigGatewayTypeEnum = "NON_GATEWAY"
 )
 
+// GatewayConfig
+// Gateway-related configuration and state.
 type GatewayConfig struct {
 	GatewayAuthMethod       *GatewayConfigGatewayAuthMethodEnum `json:"gatewayAuthMethod,omitempty"`
 	GatewayType             *GatewayConfigGatewayTypeEnum       `json:"gatewayType,omitempty"`

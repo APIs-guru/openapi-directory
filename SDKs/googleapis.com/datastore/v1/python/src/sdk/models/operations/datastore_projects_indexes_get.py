@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DatastoreProjectsIndexesGetPathParams:
-    index_id: str = field(default=None, metadata={'path_param': { 'field_name': 'indexId', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    index_id: str = field(metadata={'path_param': { 'field_name': 'indexId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class DatastoreProjectsIndexesGetQueryParams:
 
 @dataclass
 class DatastoreProjectsIndexesGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DatastoreProjectsIndexesGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class DatastoreProjectsIndexesGetSecurity:
 
 @dataclass
 class DatastoreProjectsIndexesGetRequest:
-    path_params: DatastoreProjectsIndexesGetPathParams = field(default=None)
-    query_params: DatastoreProjectsIndexesGetQueryParams = field(default=None)
-    security: DatastoreProjectsIndexesGetSecurity = field(default=None)
+    path_params: DatastoreProjectsIndexesGetPathParams = field()
+    query_params: DatastoreProjectsIndexesGetQueryParams = field()
+    security: DatastoreProjectsIndexesGetSecurity = field()
     
 
 @dataclass
 class DatastoreProjectsIndexesGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_datastore_admin_v1_index: Optional[shared.GoogleDatastoreAdminV1Index] = field(default=None)
-    status_code: int = field(default=None)
     

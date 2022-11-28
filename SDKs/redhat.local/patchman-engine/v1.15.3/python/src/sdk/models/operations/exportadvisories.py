@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from sdk.models import shared
 
@@ -17,19 +20,19 @@ class ExportAdvisoriesQueryParams:
 
 @dataclass
 class ExportAdvisoriesSecurity:
-    rh_identity: shared.SchemeRhIdentity = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    rh_identity: shared.SchemeRhIdentity = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class ExportAdvisoriesRequest:
-    query_params: ExportAdvisoriesQueryParams = field(default=None)
-    security: ExportAdvisoriesSecurity = field(default=None)
+    query_params: ExportAdvisoriesQueryParams = field()
+    security: ExportAdvisoriesSecurity = field()
     
 
 @dataclass
 class ExportAdvisoriesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     controllers_advisory_inline_items: Optional[List[shared.ControllersAdvisoryInlineItem]] = field(default=None)
     

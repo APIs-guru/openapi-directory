@@ -5,6 +5,8 @@ type EndpointBidProtocolEnum string
 const (
 	EndpointBidProtocolEnumBidProtocolUnspecified EndpointBidProtocolEnum = "BID_PROTOCOL_UNSPECIFIED"
 	EndpointBidProtocolEnumGoogleRtb              EndpointBidProtocolEnum = "GOOGLE_RTB"
+	EndpointBidProtocolEnumOpenrtbJSON            EndpointBidProtocolEnum = "OPENRTB_JSON"
+	EndpointBidProtocolEnumOpenrtbProtobuf        EndpointBidProtocolEnum = "OPENRTB_PROTOBUF"
 	EndpointBidProtocolEnumOpenrtb22              EndpointBidProtocolEnum = "OPENRTB_2_2"
 	EndpointBidProtocolEnumOpenrtb23              EndpointBidProtocolEnum = "OPENRTB_2_3"
 	EndpointBidProtocolEnumOpenrtbProtobuf23      EndpointBidProtocolEnum = "OPENRTB_PROTOBUF_2_3"
@@ -24,6 +26,8 @@ const (
 	EndpointTradingLocationEnumAsia                       EndpointTradingLocationEnum = "ASIA"
 )
 
+// Endpoint
+// Bidder endpoint that receives bid requests.
 type Endpoint struct {
 	BidProtocol     *EndpointBidProtocolEnum     `json:"bidProtocol,omitempty"`
 	MaximumQPS      *string                      `json:"maximumQps,omitempty"`

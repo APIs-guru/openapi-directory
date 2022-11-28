@@ -7,6 +7,8 @@ const (
 	CustomConfigurationFormatEnumHl7 CustomConfigurationFormatEnum = "HL7"
 )
 
+// CustomConfiguration
+// A custom configuration for a custom schema
 type CustomConfiguration struct {
 	Format                CustomConfigurationFormatEnum `json:"format"`
 	NameFormat            *string                       `json:"nameFormat,omitempty"`

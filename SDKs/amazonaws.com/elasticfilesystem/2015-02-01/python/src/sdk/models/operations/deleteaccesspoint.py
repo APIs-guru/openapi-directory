@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteAccessPointPathParams:
-    access_point_id: str = field(default=None, metadata={'path_param': { 'field_name': 'AccessPointId', 'style': 'simple', 'explode': False }})
+    access_point_id: str = field(metadata={'path_param': { 'field_name': 'AccessPointId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,15 +23,15 @@ class DeleteAccessPointHeaders:
 
 @dataclass
 class DeleteAccessPointRequest:
-    path_params: DeleteAccessPointPathParams = field(default=None)
-    headers: DeleteAccessPointHeaders = field(default=None)
+    headers: DeleteAccessPointHeaders = field()
+    path_params: DeleteAccessPointPathParams = field()
     
 
 @dataclass
 class DeleteAccessPointResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_point_not_found: Optional[Any] = field(default=None)
     bad_request: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

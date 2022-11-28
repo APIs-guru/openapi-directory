@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetClusterSolutionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=jobId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=jobId" })
   jobId: string;
 }
 
 
-export class GetClusterSolutionRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetClusterSolutionPathParams;
-}
-
-
 export class GetClusterSolution404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
+export class GetClusterSolutionRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetClusterSolutionPathParams;
+}
+
+
 export class GetClusterSolutionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequest?: shared.BadRequest;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   clusterResponse?: shared.ClusterResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getClusterSolution404ApplicationJsonObject?: GetClusterSolution404ApplicationJson;
 }

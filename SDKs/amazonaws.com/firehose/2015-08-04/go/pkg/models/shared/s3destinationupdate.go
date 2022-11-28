@@ -1,5 +1,7 @@
 package shared
 
+// S3DestinationUpdate
+// Describes an update for a destination in Amazon S3.
 type S3DestinationUpdate struct {
 	BucketArn                *string                   `json:"BucketARN,omitempty"`
 	BufferingHints           *BufferingHints           `json:"BufferingHints,omitempty"`

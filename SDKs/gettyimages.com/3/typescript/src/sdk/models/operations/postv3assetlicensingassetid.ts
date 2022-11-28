@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostV3AssetLicensingAssetIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=assetId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=assetId" })
   assetId: string;
 }
 
 
 export class PostV3AssetLicensingAssetIdHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" })
   acceptLanguage?: string;
 }
 
 
 export class PostV3AssetLicensingAssetIdRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   acquireAssetLicensesRequest?: shared.AcquireAssetLicensesRequest;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   acquireAssetLicensesRequest1?: shared.AcquireAssetLicensesRequest;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   acquireAssetLicensesRequest2?: shared.AcquireAssetLicensesRequest;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   acquireAssetLicensesRequest3?: shared.AcquireAssetLicensesRequest;
 }
 
 
 export class PostV3AssetLicensingAssetIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostV3AssetLicensingAssetIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PostV3AssetLicensingAssetIdHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PostV3AssetLicensingAssetIdRequests;
 }
 
 
 export class PostV3AssetLicensingAssetIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   assetLicensingResponse?: shared.AssetLicensingResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

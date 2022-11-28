@@ -8,6 +8,8 @@ const (
 	SiteVideoSettingsOrientationEnumPortrait  SiteVideoSettingsOrientationEnum = "PORTRAIT"
 )
 
+// SiteVideoSettings
+// Video Settings
 type SiteVideoSettings struct {
 	CompanionSettings        *SiteCompanionSetting             `json:"companionSettings,omitempty"`
 	Kind                     *string                           `json:"kind,omitempty"`

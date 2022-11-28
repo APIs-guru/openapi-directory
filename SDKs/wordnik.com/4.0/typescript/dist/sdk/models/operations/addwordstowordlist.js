@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AddWordsToWordListPathParams = /** @class */ (function (_super) {
     __extends(AddWordsToWordListPathParams, _super);
     function AddWordsToWordListPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=permalink" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=permalink" }),
         __metadata("design:type", String)
     ], AddWordsToWordListPathParams.prototype, "permalink", void 0);
     return AddWordsToWordListPathParams;
@@ -41,7 +41,7 @@ var AddWordsToWordListHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=auth_token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=auth_token" }),
         __metadata("design:type", String)
     ], AddWordsToWordListHeaders.prototype, "authToken", void 0);
     return AddWordsToWordListHeaders;
@@ -53,15 +53,15 @@ var AddWordsToWordListRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddWordsToWordListPathParams)
     ], AddWordsToWordListRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddWordsToWordListHeaders)
     ], AddWordsToWordListRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Array)
     ], AddWordsToWordListRequest.prototype, "request", void 0);
     return AddWordsToWordListRequest;
@@ -73,15 +73,15 @@ var AddWordsToWordListResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], AddWordsToWordListResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AddWordsToWordListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AddWordsToWordListResponse.prototype, "statusCode", void 0);
     return AddWordsToWordListResponse;

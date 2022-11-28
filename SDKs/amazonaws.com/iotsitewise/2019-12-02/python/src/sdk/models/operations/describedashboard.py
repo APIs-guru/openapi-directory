@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeDashboardPathParams:
-    dashboard_id: str = field(default=None, metadata={'path_param': { 'field_name': 'dashboardId', 'style': 'simple', 'explode': False }})
+    dashboard_id: str = field(metadata={'path_param': { 'field_name': 'dashboardId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class DescribeDashboardHeaders:
 
 @dataclass
 class DescribeDashboardRequest:
-    path_params: DescribeDashboardPathParams = field(default=None)
-    headers: DescribeDashboardHeaders = field(default=None)
+    headers: DescribeDashboardHeaders = field()
+    path_params: DescribeDashboardPathParams = field()
     
 
 @dataclass
 class DescribeDashboardResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_dashboard_response: Optional[shared.DescribeDashboardResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

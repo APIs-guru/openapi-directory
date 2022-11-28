@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolNetflowChangeDfsPathParams = /** @class */ (function (_super) {
     __extends(ProtocolNetflowChangeDfsPathParams, _super);
     function ProtocolNetflowChangeDfsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolNetflowChangeDfsPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=interval" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=interval" }),
         __metadata("design:type", Number)
     ], ProtocolNetflowChangeDfsPathParams.prototype, "interval", void 0);
     return ProtocolNetflowChangeDfsPathParams;
@@ -45,7 +45,7 @@ var ProtocolNetflowChangeDfsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolNetflowChangeDfsPathParams)
     ], ProtocolNetflowChangeDfsRequest.prototype, "pathParams", void 0);
     return ProtocolNetflowChangeDfsRequest;
@@ -57,15 +57,15 @@ var ProtocolNetflowChangeDfsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolNetflowChangeDfsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolNetflowChangeDfsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolNetflowChangeDfsResponse.prototype, "protocolNetflowChangeDfs200ApplicationJsonString", void 0);
     return ProtocolNetflowChangeDfsResponse;

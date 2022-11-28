@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PredictorExecution } from "./predictorexecution";
 // PredictorExecutionDetails
 /**
  * Contains details on the backtests performed to evaluate the accuracy of the predictor. The tests are returned in descending order of accuracy, with the most accurate backtest appearing first. You specify the number of backtests to perform when you call the operation.
@@ -34,7 +34,7 @@ var PredictorExecutionDetails = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=PredictorExecutions", elemType: shared.PredictorExecution }),
+        SpeakeasyMetadata({ data: "json, name=PredictorExecutions", elemType: PredictorExecution }),
         __metadata("design:type", Array)
     ], PredictorExecutionDetails.prototype, "predictorExecutions", void 0);
     return PredictorExecutionDetails;

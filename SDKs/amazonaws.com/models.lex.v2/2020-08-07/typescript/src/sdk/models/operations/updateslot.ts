@@ -1,45 +1,46 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateSlotPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=botId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=botId" })
   botId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=botVersion" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=botVersion" })
   botVersion: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=intentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=intentId" })
   intentId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=localeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=localeId" })
   localeId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=slotId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=slotId" })
   slotId: string;
 }
 
 
 export class UpdateSlotHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -49,7 +50,7 @@ export class UpdateSlotHeaders extends SpeakeasyBase {
  * Indicates whether a slot can return multiple values.
 **/
 export class UpdateSlotRequestBodyMultipleValuesSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowMultipleValues" })
+  @SpeakeasyMetadata({ data: "json, name=allowMultipleValues" })
   allowMultipleValues?: boolean;
 }
 
@@ -59,7 +60,7 @@ export class UpdateSlotRequestBodyMultipleValuesSetting extends SpeakeasyBase {
  * Determines whether Amazon Lex obscures slot values in conversation logs. 
 **/
 export class UpdateSlotRequestBodyObfuscationSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=obfuscationSettingType" })
+  @SpeakeasyMetadata({ data: "json, name=obfuscationSettingType" })
   obfuscationSettingType?: shared.ObfuscationSettingTypeEnum;
 }
 
@@ -69,81 +70,81 @@ export class UpdateSlotRequestBodyObfuscationSetting extends SpeakeasyBase {
  * Settings that you can use for eliciting a slot value.
 **/
 export class UpdateSlotRequestBodyValueElicitationSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultValueSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=defaultValueSpecification" })
   defaultValueSpecification?: shared.SlotDefaultValueSpecification;
 
-  @Metadata({ data: "json, name=promptSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=promptSpecification" })
   promptSpecification?: shared.PromptSpecification;
 
-  @Metadata({ data: "json, name=sampleUtterances", elemType: shared.SampleUtterance })
+  @SpeakeasyMetadata({ data: "json, name=sampleUtterances", elemType: shared.SampleUtterance })
   sampleUtterances?: shared.SampleUtterance[];
 
-  @Metadata({ data: "json, name=slotConstraint" })
+  @SpeakeasyMetadata({ data: "json, name=slotConstraint" })
   slotConstraint?: shared.SlotConstraintEnum;
 
-  @Metadata({ data: "json, name=waitAndContinueSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=waitAndContinueSpecification" })
   waitAndContinueSpecification?: shared.WaitAndContinueSpecification;
 }
 
 
 export class UpdateSlotRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=multipleValuesSetting" })
+  @SpeakeasyMetadata({ data: "json, name=multipleValuesSetting" })
   multipleValuesSetting?: UpdateSlotRequestBodyMultipleValuesSetting;
 
-  @Metadata({ data: "json, name=obfuscationSetting" })
+  @SpeakeasyMetadata({ data: "json, name=obfuscationSetting" })
   obfuscationSetting?: UpdateSlotRequestBodyObfuscationSetting;
 
-  @Metadata({ data: "json, name=slotName" })
+  @SpeakeasyMetadata({ data: "json, name=slotName" })
   slotName: string;
 
-  @Metadata({ data: "json, name=slotTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=slotTypeId" })
   slotTypeId: string;
 
-  @Metadata({ data: "json, name=valueElicitationSetting" })
+  @SpeakeasyMetadata({ data: "json, name=valueElicitationSetting" })
   valueElicitationSetting: UpdateSlotRequestBodyValueElicitationSetting;
 }
 
 
 export class UpdateSlotRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateSlotPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateSlotHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateSlotRequestBody;
 }
 
 
 export class UpdateSlotResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   preconditionFailedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceQuotaExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateSlotResponse?: shared.UpdateSlotResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

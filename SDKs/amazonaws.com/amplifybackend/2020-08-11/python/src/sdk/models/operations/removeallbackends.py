@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class RemoveAllBackendsPathParams:
-    app_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
+    app_id: str = field(metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,23 +27,23 @@ class RemoveAllBackendsHeaders:
 @dataclass_json
 @dataclass
 class RemoveAllBackendsRequestBody:
-    clean_amplify_app: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cleanAmplifyApp' }})
+    clean_amplify_app: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cleanAmplifyApp') }})
     
 
 @dataclass
 class RemoveAllBackendsRequest:
-    path_params: RemoveAllBackendsPathParams = field(default=None)
-    headers: RemoveAllBackendsHeaders = field(default=None)
-    request: RemoveAllBackendsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: RemoveAllBackendsHeaders = field()
+    path_params: RemoveAllBackendsPathParams = field()
+    request: RemoveAllBackendsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RemoveAllBackendsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     gateway_timeout_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     remove_all_backends_response: Optional[shared.RemoveAllBackendsResponse] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

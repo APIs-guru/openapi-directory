@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FailureDetails } from "./failuredetails";
+
 
 
 // PutJobFailureResultInput
@@ -7,9 +8,9 @@ import { FailureDetails } from "./failuredetails";
  * Represents the input of a <code>PutJobFailureResult</code> action.
 **/
 export class PutJobFailureResultInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failureDetails" })
+  @SpeakeasyMetadata({ data: "json, name=failureDetails" })
   failureDetails: FailureDetails;
 
-  @Metadata({ data: "json, name=jobId" })
+  @SpeakeasyMetadata({ data: "json, name=jobId" })
   jobId: string;
 }

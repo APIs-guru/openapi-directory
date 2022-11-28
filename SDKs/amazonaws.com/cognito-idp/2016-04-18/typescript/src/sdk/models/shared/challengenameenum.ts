@@ -1,6 +1,7 @@
 
 
+
 export enum ChallengeNameEnum {
-    Password = "Password"
-,    Mfa = "Mfa"
+    Password = "Password",
+    Mfa = "Mfa"
 }

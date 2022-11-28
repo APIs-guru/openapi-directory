@@ -1,17 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import ratekey_enum
-from . import tag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateRateBasedRuleRequest:
-    change_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ChangeToken' }})
-    metric_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetricName' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    rate_key: ratekey_enum.RateKeyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RateKey' }})
-    rate_limit: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RateLimit' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
+    change_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ChangeToken') }})
+    metric_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MetricName') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    rate_key: RateKeyEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RateKey') }})
+    rate_limit: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('RateLimit') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     

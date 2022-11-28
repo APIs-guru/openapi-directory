@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetDeviceCameraVideoSettingsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serial" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serial" })
   serial: string;
 }
 
 
 export class GetDeviceCameraVideoSettingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDeviceCameraVideoSettingsPathParams;
 }
 
 
 export class GetDeviceCameraVideoSettingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDeviceCameraVideoSettings200ApplicationJsonObject?: Map<string, any>;
 }

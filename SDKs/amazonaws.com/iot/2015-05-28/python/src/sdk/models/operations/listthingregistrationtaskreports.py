@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ListThingRegistrationTaskReportsPathParams:
-    task_id: str = field(default=None, metadata={'path_param': { 'field_name': 'taskId', 'style': 'simple', 'explode': False }})
+    task_id: str = field(metadata={'path_param': { 'field_name': 'taskId', 'style': 'simple', 'explode': False }})
     
 class ListThingRegistrationTaskReportsReportTypeEnum(str, Enum):
     ERRORS = "ERRORS"
@@ -14,9 +18,9 @@ class ListThingRegistrationTaskReportsReportTypeEnum(str, Enum):
 
 @dataclass
 class ListThingRegistrationTaskReportsQueryParams:
+    report_type: ListThingRegistrationTaskReportsReportTypeEnum = field(metadata={'query_param': { 'field_name': 'reportType', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'nextToken', 'style': 'form', 'explode': True }})
-    report_type: ListThingRegistrationTaskReportsReportTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'reportType', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,18 +36,18 @@ class ListThingRegistrationTaskReportsHeaders:
 
 @dataclass
 class ListThingRegistrationTaskReportsRequest:
-    path_params: ListThingRegistrationTaskReportsPathParams = field(default=None)
-    query_params: ListThingRegistrationTaskReportsQueryParams = field(default=None)
-    headers: ListThingRegistrationTaskReportsHeaders = field(default=None)
+    headers: ListThingRegistrationTaskReportsHeaders = field()
+    path_params: ListThingRegistrationTaskReportsPathParams = field()
+    query_params: ListThingRegistrationTaskReportsQueryParams = field()
     
 
 @dataclass
 class ListThingRegistrationTaskReportsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_thing_registration_task_reports_response: Optional[shared.ListThingRegistrationTaskReportsResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

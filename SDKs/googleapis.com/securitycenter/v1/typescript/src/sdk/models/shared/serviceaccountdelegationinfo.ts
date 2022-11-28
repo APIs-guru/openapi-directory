@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ServiceAccountDelegationInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Identity delegation history of an authenticated service account.
 **/
 export class ServiceAccountDelegationInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=principalEmail" })
+  @SpeakeasyMetadata({ data: "json, name=principalEmail" })
   principalEmail?: string;
 
-  @Metadata({ data: "json, name=principalSubject" })
+  @SpeakeasyMetadata({ data: "json, name=principalSubject" })
   principalSubject?: string;
 }

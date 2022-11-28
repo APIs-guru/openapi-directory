@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceDefinitionVersion } from "./devicedefinitionversion";
 var GetDeviceDefinitionVersionResponse = /** @class */ (function (_super) {
     __extends(GetDeviceDefinitionVersionResponse, _super);
@@ -30,27 +30,27 @@ var GetDeviceDefinitionVersionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Arn" }),
+        SpeakeasyMetadata({ data: "json, name=Arn" }),
         __metadata("design:type", String)
     ], GetDeviceDefinitionVersionResponse.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreationTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTimestamp" }),
         __metadata("design:type", String)
     ], GetDeviceDefinitionVersionResponse.prototype, "creationTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=Definition" }),
+        SpeakeasyMetadata({ data: "json, name=Definition" }),
         __metadata("design:type", DeviceDefinitionVersion)
     ], GetDeviceDefinitionVersionResponse.prototype, "definition", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], GetDeviceDefinitionVersionResponse.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], GetDeviceDefinitionVersionResponse.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=Version" }),
+        SpeakeasyMetadata({ data: "json, name=Version" }),
         __metadata("design:type", String)
     ], GetDeviceDefinitionVersionResponse.prototype, "version", void 0);
     return GetDeviceDefinitionVersionResponse;

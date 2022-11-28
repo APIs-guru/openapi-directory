@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeductionTypeCalculationTypeEnum } from "./deductiontypecalculationtypeenum";
 
 
+
 export class DeductionLine extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Amount" })
+  @SpeakeasyMetadata({ data: "json, name=Amount" })
   amount?: number;
 
-  @Metadata({ data: "json, name=CalculationType" })
+  @SpeakeasyMetadata({ data: "json, name=CalculationType" })
   calculationType: DeductionTypeCalculationTypeEnum;
 
-  @Metadata({ data: "json, name=DeductionTypeID" })
+  @SpeakeasyMetadata({ data: "json, name=DeductionTypeID" })
   deductionTypeId: string;
 
-  @Metadata({ data: "json, name=NumberOfUnits" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfUnits" })
   numberOfUnits?: number;
 
-  @Metadata({ data: "json, name=Percentage" })
+  @SpeakeasyMetadata({ data: "json, name=Percentage" })
   percentage?: number;
 }

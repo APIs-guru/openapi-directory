@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * IncomeVerificationSummaryGetRequest defines the request schema for `/income/verification/summary/get`.
 **/

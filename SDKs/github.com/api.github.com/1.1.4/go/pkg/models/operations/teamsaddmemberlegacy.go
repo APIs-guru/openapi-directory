@@ -9,10 +9,6 @@ type TeamsAddMemberLegacyPathParams struct {
 	Username string `pathParam:"style=simple,explode=false,name=username"`
 }
 
-type TeamsAddMemberLegacyRequest struct {
-	PathParams TeamsAddMemberLegacyPathParams
-}
-
 type TeamsAddMemberLegacy422ApplicationJSONErrors struct {
 	Code     *string `json:"code,omitempty"`
 	Field    *string `json:"field,omitempty"`
@@ -23,6 +19,10 @@ type TeamsAddMemberLegacy422ApplicationJSON struct {
 	DocumentationURL *string                                        `json:"documentation_url,omitempty"`
 	Errors           []TeamsAddMemberLegacy422ApplicationJSONErrors `json:"errors,omitempty"`
 	Message          *string                                        `json:"message,omitempty"`
+}
+
+type TeamsAddMemberLegacyRequest struct {
+	PathParams TeamsAddMemberLegacyPathParams
 }
 
 type TeamsAddMemberLegacyResponse struct {

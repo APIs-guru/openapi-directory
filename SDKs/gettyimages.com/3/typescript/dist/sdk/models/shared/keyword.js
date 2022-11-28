@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Keyword = /** @class */ (function (_super) {
     __extends(Keyword, _super);
     function Keyword() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=entity_types" }),
+        SpeakeasyMetadata({ data: "json, name=entity_types" }),
         __metadata("design:type", Array)
     ], Keyword.prototype, "entityTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=entity_uris" }),
+        SpeakeasyMetadata({ data: "json, name=entity_uris" }),
         __metadata("design:type", Array)
     ], Keyword.prototype, "entityUris", void 0);
     __decorate([
-        Metadata({ data: "json, name=keyword_id" }),
+        SpeakeasyMetadata({ data: "json, name=keyword_id" }),
         __metadata("design:type", String)
     ], Keyword.prototype, "keywordId", void 0);
     __decorate([
-        Metadata({ data: "json, name=relevance" }),
+        SpeakeasyMetadata({ data: "json, name=relevance" }),
         __metadata("design:type", Number)
     ], Keyword.prototype, "relevance", void 0);
     __decorate([
-        Metadata({ data: "json, name=text" }),
+        SpeakeasyMetadata({ data: "json, name=text" }),
         __metadata("design:type", String)
     ], Keyword.prototype, "text", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Keyword.prototype, "type", void 0);
     return Keyword;

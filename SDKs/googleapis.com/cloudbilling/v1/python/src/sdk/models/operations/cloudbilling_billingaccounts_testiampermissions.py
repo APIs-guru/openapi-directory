@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudbillingBillingAccountsTestIamPermissionsPathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class CloudbillingBillingAccountsTestIamPermissionsQueryParams:
 
 @dataclass
 class CloudbillingBillingAccountsTestIamPermissionsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudbillingBillingAccountsTestIamPermissionsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudbillingBillingAccountsTestIamPermissionsSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -50,15 +51,15 @@ class CloudbillingBillingAccountsTestIamPermissionsSecurity:
 
 @dataclass
 class CloudbillingBillingAccountsTestIamPermissionsRequest:
-    path_params: CloudbillingBillingAccountsTestIamPermissionsPathParams = field(default=None)
-    query_params: CloudbillingBillingAccountsTestIamPermissionsQueryParams = field(default=None)
+    path_params: CloudbillingBillingAccountsTestIamPermissionsPathParams = field()
+    query_params: CloudbillingBillingAccountsTestIamPermissionsQueryParams = field()
+    security: CloudbillingBillingAccountsTestIamPermissionsSecurity = field()
     request: Optional[shared.TestIamPermissionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudbillingBillingAccountsTestIamPermissionsSecurity = field(default=None)
     
 
 @dataclass
 class CloudbillingBillingAccountsTestIamPermissionsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     test_iam_permissions_response: Optional[shared.TestIamPermissionsResponse] = field(default=None)
     

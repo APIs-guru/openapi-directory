@@ -1,5 +1,7 @@
 package shared
 
+// SetNodePoolSizeRequest
+// SetNodePoolSizeRequest sets the size of a node pool.
 type SetNodePoolSizeRequest struct {
 	ClusterID  *string `json:"clusterId,omitempty"`
 	Name       *string `json:"name,omitempty"`

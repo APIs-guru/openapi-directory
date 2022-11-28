@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PortfolioDetail
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a portfolio.
 **/
 export class PortfolioDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ARN" })
+  @SpeakeasyMetadata({ data: "json, name=ARN" })
   arn?: string;
 
-  @Metadata({ data: "json, name=CreatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedTime" })
   createdTime?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=DisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=ProviderName" })
+  @SpeakeasyMetadata({ data: "json, name=ProviderName" })
   providerName?: string;
 }

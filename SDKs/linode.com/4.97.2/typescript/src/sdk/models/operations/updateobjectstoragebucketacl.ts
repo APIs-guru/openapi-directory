@@ -1,89 +1,77 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const UPDATEOBJECTSTORAGEBUCKETACL_SERVERS = [
-	"https://api.linode.com/v4",
-];
 
+export const UpdateObjectStorageBucketAclServerList = [
+	"https://api.linode.com/v4",
+] as const;
 
 
 export class UpdateObjectStorageBucketAclPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=bucket" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=bucket" })
   bucket: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=clusterId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=clusterId" })
   clusterId: string;
 }
 
 
-export class UpdateObjectStorageBucketAclSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class UpdateObjectStorageBucketAclSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class UpdateObjectStorageBucketAclSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: UpdateObjectStorageBucketAclSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: UpdateObjectStorageBucketAclSecurityOption2;
-}
-
-
-export class UpdateObjectStorageBucketAclRequest extends SpeakeasyBase {
-  @Metadata()
-  serverUrl?: string;
-
-  @Metadata()
-  pathParams: UpdateObjectStorageBucketAclPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: any;
-
-  @Metadata()
-  security: UpdateObjectStorageBucketAclSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 export enum UpdateObjectStorageBucketAcl200ApplicationJsonAclEnum {
-    Private = "private"
-,    PublicRead = "public-read"
-,    AuthenticatedRead = "authenticated-read"
-,    PublicReadWrite = "public-read-write"
-,    Custom = "custom"
+    Private = "private",
+    PublicRead = "public-read",
+    AuthenticatedRead = "authenticated-read",
+    PublicReadWrite = "public-read-write",
+    Custom = "custom"
 }
 
 
 export class UpdateObjectStorageBucketAcl200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acl" })
+  @SpeakeasyMetadata({ data: "json, name=acl" })
   acl?: UpdateObjectStorageBucketAcl200ApplicationJsonAclEnum;
 
-  @Metadata({ data: "json, name=acl_xml" })
+  @SpeakeasyMetadata({ data: "json, name=acl_xml" })
   aclXml?: string;
 }
 
 
 export class UpdateObjectStorageBucketAclDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class UpdateObjectStorageBucketAclRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  serverUrl?: string;
+
+  @SpeakeasyMetadata()
+  pathParams: UpdateObjectStorageBucketAclPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: any;
+
+  @SpeakeasyMetadata()
+  security: UpdateObjectStorageBucketAclSecurity;
+}
+
+
 export class UpdateObjectStorageBucketAclResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateObjectStorageBucketAcl200ApplicationJsonObject?: UpdateObjectStorageBucketAcl200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateObjectStorageBucketAclDefaultApplicationJsonObject?: UpdateObjectStorageBucketAclDefaultApplicationJson;
 }

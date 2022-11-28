@@ -1,5 +1,7 @@
 package shared
 
+// CheckInRequest
+// The parameters to the CheckIn method.
 type CheckInRequest struct {
 	DeadlineExpired map[string]interface{} `json:"deadlineExpired,omitempty"`
 	Event           map[string]interface{} `json:"event,omitempty"`

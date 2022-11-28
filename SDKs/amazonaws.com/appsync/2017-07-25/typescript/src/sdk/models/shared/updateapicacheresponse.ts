@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiCache } from "./apicache";
+
 
 
 // UpdateApiCacheResponse
@@ -7,6 +8,6 @@ import { ApiCache } from "./apicache";
  * Represents the output of a <code>UpdateApiCache</code> operation.
 **/
 export class UpdateApiCacheResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiCache" })
+  @SpeakeasyMetadata({ data: "json, name=apiCache" })
   apiCache?: ApiCache;
 }

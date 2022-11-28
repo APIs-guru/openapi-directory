@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { OrderableReplicationInstance } from "./orderablereplicationinstance";
 // DescribeOrderableReplicationInstancesResponse
 /**
  * <p/>
@@ -34,11 +34,11 @@ var DescribeOrderableReplicationInstancesResponse = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Marker" }),
+        SpeakeasyMetadata({ data: "json, name=Marker" }),
         __metadata("design:type", String)
     ], DescribeOrderableReplicationInstancesResponse.prototype, "marker", void 0);
     __decorate([
-        Metadata({ data: "json, name=OrderableReplicationInstances", elemType: shared.OrderableReplicationInstance }),
+        SpeakeasyMetadata({ data: "json, name=OrderableReplicationInstances", elemType: OrderableReplicationInstance }),
         __metadata("design:type", Array)
     ], DescribeOrderableReplicationInstancesResponse.prototype, "orderableReplicationInstances", void 0);
     return DescribeOrderableReplicationInstancesResponse;

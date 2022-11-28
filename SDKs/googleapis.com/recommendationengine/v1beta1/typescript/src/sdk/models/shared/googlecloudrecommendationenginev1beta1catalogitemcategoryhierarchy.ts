@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRecommendationengineV1beta1CatalogItemCategoryHierarchy
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Category represents catalog item category hierarchy.
 **/
 export class GoogleCloudRecommendationengineV1beta1CatalogItemCategoryHierarchy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categories" })
+  @SpeakeasyMetadata({ data: "json, name=categories" })
   categories?: string[];
 }

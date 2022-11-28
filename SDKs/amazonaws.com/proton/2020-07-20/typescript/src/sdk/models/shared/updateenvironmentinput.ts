@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentUpdateTypeEnum } from "./deploymentupdatetypeenum";
 
 
+
 export class UpdateEnvironmentInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deploymentType" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentType" })
   deploymentType: DeploymentUpdateTypeEnum;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=environmentAccountConnectionId" })
+  @SpeakeasyMetadata({ data: "json, name=environmentAccountConnectionId" })
   environmentAccountConnectionId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=protonServiceRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=protonServiceRoleArn" })
   protonServiceRoleArn?: string;
 
-  @Metadata({ data: "json, name=spec" })
+  @SpeakeasyMetadata({ data: "json, name=spec" })
   spec?: string;
 
-  @Metadata({ data: "json, name=templateMajorVersion" })
+  @SpeakeasyMetadata({ data: "json, name=templateMajorVersion" })
   templateMajorVersion?: string;
 
-  @Metadata({ data: "json, name=templateMinorVersion" })
+  @SpeakeasyMetadata({ data: "json, name=templateMinorVersion" })
   templateMinorVersion?: string;
 }

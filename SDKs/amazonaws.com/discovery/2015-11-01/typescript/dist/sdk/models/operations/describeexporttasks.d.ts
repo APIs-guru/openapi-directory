@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DescribeExportTasksXAmzTargetEnum {
     AwsPoseidonServiceV20151101DescribeExportTasks = "AWSPoseidonService_V2015_11_01.DescribeExportTasks"

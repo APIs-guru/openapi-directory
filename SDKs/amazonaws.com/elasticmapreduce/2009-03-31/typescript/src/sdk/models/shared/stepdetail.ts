@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StepExecutionStatusDetail } from "./stepexecutionstatusdetail";
 import { StepConfig } from "./stepconfig";
+
 
 
 // StepDetail
@@ -8,9 +9,9 @@ import { StepConfig } from "./stepconfig";
  * Combines the execution state and configuration of a step.
 **/
 export class StepDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExecutionStatusDetail" })
+  @SpeakeasyMetadata({ data: "json, name=ExecutionStatusDetail" })
   executionStatusDetail: StepExecutionStatusDetail;
 
-  @Metadata({ data: "json, name=StepConfig" })
+  @SpeakeasyMetadata({ data: "json, name=StepConfig" })
   stepConfig: StepConfig;
 }

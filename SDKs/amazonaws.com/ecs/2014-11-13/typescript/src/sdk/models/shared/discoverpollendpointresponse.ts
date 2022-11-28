@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DiscoverPollEndpointResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=endpoint" })
   endpoint?: string;
 
-  @Metadata({ data: "json, name=telemetryEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=telemetryEndpoint" })
   telemetryEndpoint?: string;
 }

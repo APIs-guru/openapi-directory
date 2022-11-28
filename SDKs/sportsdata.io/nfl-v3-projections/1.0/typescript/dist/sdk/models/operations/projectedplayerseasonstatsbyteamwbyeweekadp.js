@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ProjectedPlayerSeasonStatsByTeamWByeWeekAdpFormatEnum;
 (function (ProjectedPlayerSeasonStatsByTeamWByeWeekAdpFormatEnum) {
     ProjectedPlayerSeasonStatsByTeamWByeWeekAdpFormatEnum["Xml"] = "XML";
@@ -34,15 +34,15 @@ var ProjectedPlayerSeasonStatsByTeamWByeWeekAdpPathParams = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], ProjectedPlayerSeasonStatsByTeamWByeWeekAdpPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=season" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=season" }),
         __metadata("design:type", String)
     ], ProjectedPlayerSeasonStatsByTeamWByeWeekAdpPathParams.prototype, "season", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=team" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team" }),
         __metadata("design:type", String)
     ], ProjectedPlayerSeasonStatsByTeamWByeWeekAdpPathParams.prototype, "team", void 0);
     return ProjectedPlayerSeasonStatsByTeamWByeWeekAdpPathParams;
@@ -54,7 +54,7 @@ var ProjectedPlayerSeasonStatsByTeamWByeWeekAdpRequest = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProjectedPlayerSeasonStatsByTeamWByeWeekAdpPathParams)
     ], ProjectedPlayerSeasonStatsByTeamWByeWeekAdpRequest.prototype, "pathParams", void 0);
     return ProjectedPlayerSeasonStatsByTeamWByeWeekAdpRequest;
@@ -66,15 +66,15 @@ var ProjectedPlayerSeasonStatsByTeamWByeWeekAdpResponse = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProjectedPlayerSeasonStatsByTeamWByeWeekAdpResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], ProjectedPlayerSeasonStatsByTeamWByeWeekAdpResponse.prototype, "playerSeasonProjections", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProjectedPlayerSeasonStatsByTeamWByeWeekAdpResponse.prototype, "statusCode", void 0);
     return ProjectedPlayerSeasonStatsByTeamWByeWeekAdpResponse;

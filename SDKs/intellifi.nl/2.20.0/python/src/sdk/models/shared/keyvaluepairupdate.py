@@ -1,10 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class KeyValuePairUpdate:
-    kv_value: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kv_value' }})
+    kv_value: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kv_value') }})
     

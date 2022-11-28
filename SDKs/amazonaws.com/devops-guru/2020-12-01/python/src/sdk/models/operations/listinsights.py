@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,33 +28,37 @@ class ListInsightsHeaders:
 @dataclass_json
 @dataclass
 class ListInsightsRequestBodyStatusFilter:
-    any: Optional[shared.ListInsightsAnyStatusFilter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Any' }})
-    closed: Optional[shared.ListInsightsClosedStatusFilter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Closed' }})
-    ongoing: Optional[shared.ListInsightsOngoingStatusFilter] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Ongoing' }})
+    r"""ListInsightsRequestBodyStatusFilter
+     A filter used by <code>ListInsights</code> to specify which insights to return. 
+    """
+    
+    any: Optional[shared.ListInsightsAnyStatusFilter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Any') }})
+    closed: Optional[shared.ListInsightsClosedStatusFilter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Closed') }})
+    ongoing: Optional[shared.ListInsightsOngoingStatusFilter] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Ongoing') }})
     
 
 @dataclass_json
 @dataclass
 class ListInsightsRequestBody:
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
-    status_filter: ListInsightsRequestBodyStatusFilter = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StatusFilter' }})
+    status_filter: ListInsightsRequestBodyStatusFilter = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('StatusFilter') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     
 
 @dataclass
 class ListInsightsRequest:
-    query_params: ListInsightsQueryParams = field(default=None)
-    headers: ListInsightsHeaders = field(default=None)
-    request: ListInsightsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListInsightsHeaders = field()
+    query_params: ListInsightsQueryParams = field()
+    request: ListInsightsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListInsightsResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     list_insights_response: Optional[shared.ListInsightsResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

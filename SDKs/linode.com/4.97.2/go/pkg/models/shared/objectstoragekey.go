@@ -13,6 +13,15 @@ type ObjectStorageKeyBucketAccess struct {
 	Permissions *ObjectStorageKeyBucketAccessPermissionsEnum `json:"permissions,omitempty"`
 }
 
+// ObjectStorageKeyInput
+// A keypair used to communicate with the Object Storage S3 API.
+type ObjectStorageKeyInput struct {
+	BucketAccess []ObjectStorageKeyBucketAccess `json:"bucket_access,omitempty"`
+	Label        *string                        `json:"label,omitempty"`
+}
+
+// ObjectStorageKey
+// A keypair used to communicate with the Object Storage S3 API.
 type ObjectStorageKey struct {
 	AccessKey    *string                        `json:"access_key,omitempty"`
 	BucketAccess []ObjectStorageKeyBucketAccess `json:"bucket_access,omitempty"`

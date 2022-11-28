@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Button } from "./button";
 // GenericAttachment
 /**
  * Represents an option rendered to the user when a prompt is shown. It could be an image, a button, a link, or text.
@@ -34,23 +34,23 @@ var GenericAttachment = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attachmentLinkUrl" }),
+        SpeakeasyMetadata({ data: "json, name=attachmentLinkUrl" }),
         __metadata("design:type", String)
     ], GenericAttachment.prototype, "attachmentLinkUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=buttons", elemType: shared.Button }),
+        SpeakeasyMetadata({ data: "json, name=buttons", elemType: Button }),
         __metadata("design:type", Array)
     ], GenericAttachment.prototype, "buttons", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageUrl" }),
+        SpeakeasyMetadata({ data: "json, name=imageUrl" }),
         __metadata("design:type", String)
     ], GenericAttachment.prototype, "imageUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=subTitle" }),
+        SpeakeasyMetadata({ data: "json, name=subTitle" }),
         __metadata("design:type", String)
     ], GenericAttachment.prototype, "subTitle", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], GenericAttachment.prototype, "title", void 0);
     return GenericAttachment;

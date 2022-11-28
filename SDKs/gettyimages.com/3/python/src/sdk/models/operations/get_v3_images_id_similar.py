@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetV3ImagesIDSimilarPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,14 +23,14 @@ class GetV3ImagesIDSimilarHeaders:
 
 @dataclass
 class GetV3ImagesIDSimilarRequest:
-    path_params: GetV3ImagesIDSimilarPathParams = field(default=None)
-    query_params: GetV3ImagesIDSimilarQueryParams = field(default=None)
-    headers: GetV3ImagesIDSimilarHeaders = field(default=None)
+    headers: GetV3ImagesIDSimilarHeaders = field()
+    path_params: GetV3ImagesIDSimilarPathParams = field()
+    query_params: GetV3ImagesIDSimilarQueryParams = field()
     
 
 @dataclass
 class GetV3ImagesIDSimilarResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     image_search_item_search_results: Optional[shared.ImageSearchItemSearchResults] = field(default=None)
-    status_code: int = field(default=None)
     

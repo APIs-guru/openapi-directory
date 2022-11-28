@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { NfsExportOptions } from "./nfsexportoptions";
 /**
  * File share configuration for the instance.

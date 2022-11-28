@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class StopPointGetServiceTypesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lineIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lineIds" })
   lineIds?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=modes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modes" })
   modes?: string[];
 }
 
 
 export class StopPointGetServiceTypesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: StopPointGetServiceTypesQueryParams;
 }
 
 
 export class StopPointGetServiceTypesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TflApiPresentationEntitiesLineServiceType })
+  @SpeakeasyMetadata({ elemType: shared.TflApiPresentationEntitiesLineServiceType })
   tflApiPresentationEntitiesLineServiceTypes?: shared.TflApiPresentationEntitiesLineServiceType[];
 }

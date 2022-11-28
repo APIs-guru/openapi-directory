@@ -1,7 +1,8 @@
 
 
+
 export enum AdvancedSecurityModeTypeEnum {
-    Off = "OFF"
-,    Audit = "AUDIT"
-,    Enforced = "ENFORCED"
+    Off = "OFF",
+    Audit = "AUDIT",
+    Enforced = "ENFORCED"
 }

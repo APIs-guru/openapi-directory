@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class MybusinessplaceactionsPlaceActionTypeMetadataListQueryParams extends SpeakeasyBase {
     dollarXgafv?: shared.XgafvEnum;

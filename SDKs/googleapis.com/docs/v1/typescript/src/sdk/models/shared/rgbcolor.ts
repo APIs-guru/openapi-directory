@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RgbColor
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An RGB color.
 **/
 export class RgbColor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blue" })
+  @SpeakeasyMetadata({ data: "json, name=blue" })
   blue?: number;
 
-  @Metadata({ data: "json, name=green" })
+  @SpeakeasyMetadata({ data: "json, name=green" })
   green?: number;
 
-  @Metadata({ data: "json, name=red" })
+  @SpeakeasyMetadata({ data: "json, name=red" })
   red?: number;
 }

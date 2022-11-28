@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListServiceQuotaIncreaseRequestsInTemplateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=MaxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxResults" })
   maxResults?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=NextToken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NextToken" })
   nextToken?: string;
 }
 
@@ -16,75 +17,75 @@ export enum ListServiceQuotaIncreaseRequestsInTemplateXAmzTargetEnum {
 
 
 export class ListServiceQuotaIncreaseRequestsInTemplateHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: ListServiceQuotaIncreaseRequestsInTemplateXAmzTargetEnum;
 }
 
 
 export class ListServiceQuotaIncreaseRequestsInTemplateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListServiceQuotaIncreaseRequestsInTemplateQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: ListServiceQuotaIncreaseRequestsInTemplateHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.ListServiceQuotaIncreaseRequestsInTemplateRequest;
 }
 
 
 export class ListServiceQuotaIncreaseRequestsInTemplateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   awsServiceAccessNotEnabledException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dependencyAccessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   illegalArgumentException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listServiceQuotaIncreaseRequestsInTemplateResponse?: shared.ListServiceQuotaIncreaseRequestsInTemplateResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   noAvailableOrganizationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   templatesNotAvailableInRegionException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

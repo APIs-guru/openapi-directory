@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ObAccount6
+// Unambiguous identification of the account to which credit and debit entries are made.
 type ObAccount6 struct {
 	Account        []ObCashAccount5                                `json:"Account,omitempty"`
 	AccountID      string                                          `json:"AccountId"`

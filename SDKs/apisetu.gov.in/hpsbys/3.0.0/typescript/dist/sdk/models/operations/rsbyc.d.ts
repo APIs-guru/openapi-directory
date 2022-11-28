@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class RsbycRequestBodyCertificateParameters extends SpeakeasyBase {
     uid: string;
@@ -15,10 +15,6 @@ export declare class RsbycRequestBody extends SpeakeasyBase {
 export declare class RsbycSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class RsbycRequest extends SpeakeasyBase {
-    request?: RsbycRequestBody;
-    security: RsbycSecurity;
 }
 export declare enum Rsbyc400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -101,6 +97,10 @@ export declare enum Rsbyc504ApplicationJsonErrorDescriptionEnum {
 export declare class Rsbyc504ApplicationJson extends SpeakeasyBase {
     error?: Rsbyc504ApplicationJsonErrorEnum;
     errorDescription?: Rsbyc504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class RsbycRequest extends SpeakeasyBase {
+    request?: RsbycRequestBody;
+    security: RsbycSecurity;
 }
 export declare class RsbycResponse extends SpeakeasyBase {
     contentType: string;

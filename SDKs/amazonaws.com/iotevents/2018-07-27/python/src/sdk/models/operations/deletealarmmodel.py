@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteAlarmModelPathParams:
-    alarm_model_name: str = field(default=None, metadata={'path_param': { 'field_name': 'alarmModelName', 'style': 'simple', 'explode': False }})
+    alarm_model_name: str = field(metadata={'path_param': { 'field_name': 'alarmModelName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,19 +23,19 @@ class DeleteAlarmModelHeaders:
 
 @dataclass
 class DeleteAlarmModelRequest:
-    path_params: DeleteAlarmModelPathParams = field(default=None)
-    headers: DeleteAlarmModelHeaders = field(default=None)
+    headers: DeleteAlarmModelHeaders = field()
+    path_params: DeleteAlarmModelPathParams = field()
     
 
 @dataclass
 class DeleteAlarmModelResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_alarm_model_response: Optional[dict[str, Any]] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_in_use_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

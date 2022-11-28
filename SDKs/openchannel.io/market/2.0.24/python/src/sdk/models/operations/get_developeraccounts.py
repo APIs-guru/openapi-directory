@@ -12,12 +12,12 @@ class GetDeveloperAccountsQueryParams:
 
 @dataclass
 class GetDeveloperAccountsRequest:
-    query_params: GetDeveloperAccountsQueryParams = field(default=None)
+    query_params: GetDeveloperAccountsQueryParams = field()
     
 
 @dataclass
 class GetDeveloperAccountsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

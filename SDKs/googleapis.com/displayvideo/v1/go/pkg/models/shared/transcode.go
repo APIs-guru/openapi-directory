@@ -1,5 +1,7 @@
 package shared
 
+// Transcode
+// Represents information about the transcoded audio or video file.
 type Transcode struct {
 	AudioBitRateKbps  *string     `json:"audioBitRateKbps,omitempty"`
 	AudioSampleRateHz *string     `json:"audioSampleRateHz,omitempty"`

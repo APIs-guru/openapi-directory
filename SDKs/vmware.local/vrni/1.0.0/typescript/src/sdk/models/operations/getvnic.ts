@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetVnicPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetVnicQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=time" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=time" })
   time?: number;
 }
 
 
 export class GetVnicSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKeyAuth: shared.SchemeApiKeyAuth;
 }
 
 
 export class GetVnicRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetVnicPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetVnicQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetVnicSecurity;
 }
 
 
 export class GetVnicResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiError?: shared.ApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   baseVnic?: shared.BaseVnic;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

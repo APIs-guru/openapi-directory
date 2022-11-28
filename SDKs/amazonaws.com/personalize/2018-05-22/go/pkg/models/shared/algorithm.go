@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Algorithm
+// Describes a custom algorithm.
 type Algorithm struct {
 	AlgorithmArn                *string                      `json:"algorithmArn,omitempty"`
 	AlgorithmImage              *AlgorithmImage              `json:"algorithmImage,omitempty"`

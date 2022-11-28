@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PinRedeemResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Success" })
+  @SpeakeasyMetadata({ data: "json, name=Success" })
   success?: boolean;
 
-  @Metadata({ data: "json, name=UsersReset" })
+  @SpeakeasyMetadata({ data: "json, name=UsersReset" })
   usersReset?: string[];
 }

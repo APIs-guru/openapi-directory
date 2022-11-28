@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReturnPolicyPolicy } from "./returnpolicypolicy";
 import { Price } from "./price";
 import { ReturnPolicySeasonalOverride } from "./returnpolicyseasonaloverride";
+
 
 
 // ReturnPolicy
@@ -10,30 +10,30 @@ import { ReturnPolicySeasonalOverride } from "./returnpolicyseasonaloverride";
  * Return policy resource.
 **/
 export class ReturnPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nonFreeReturnReasons" })
+  @SpeakeasyMetadata({ data: "json, name=nonFreeReturnReasons" })
   nonFreeReturnReasons?: string[];
 
-  @Metadata({ data: "json, name=policy" })
+  @SpeakeasyMetadata({ data: "json, name=policy" })
   policy?: ReturnPolicyPolicy;
 
-  @Metadata({ data: "json, name=returnPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=returnPolicyId" })
   returnPolicyId?: string;
 
-  @Metadata({ data: "json, name=returnShippingFee" })
+  @SpeakeasyMetadata({ data: "json, name=returnShippingFee" })
   returnShippingFee?: Price;
 
-  @Metadata({ data: "json, name=seasonalOverrides", elemType: shared.ReturnPolicySeasonalOverride })
+  @SpeakeasyMetadata({ data: "json, name=seasonalOverrides", elemType: ReturnPolicySeasonalOverride })
   seasonalOverrides?: ReturnPolicySeasonalOverride[];
 }

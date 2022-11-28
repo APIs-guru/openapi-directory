@@ -8,11 +8,6 @@ type UpdateDirectivePathParams struct {
 	DirectiveID string `pathParam:"style=simple,explode=false,name=directiveId"`
 }
 
-type UpdateDirectiveRequest struct {
-	PathParams UpdateDirectivePathParams
-	Request    shared.Directive `request:"mediaType=application/json"`
-}
-
 type UpdateDirective200ApplicationJSONActionEnum string
 
 const (
@@ -34,6 +29,11 @@ type UpdateDirective200ApplicationJSON struct {
 	Action UpdateDirective200ApplicationJSONActionEnum `json:"action"`
 	Data   UpdateDirective200ApplicationJSONData       `json:"data"`
 	Result UpdateDirective200ApplicationJSONResultEnum `json:"result"`
+}
+
+type UpdateDirectiveRequest struct {
+	PathParams UpdateDirectivePathParams
+	Request    shared.Directive `request:"mediaType=application/json"`
 }
 
 type UpdateDirectiveResponse struct {

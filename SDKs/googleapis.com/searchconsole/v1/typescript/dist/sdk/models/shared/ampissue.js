@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var AmpIssueSeverityEnum;
 (function (AmpIssueSeverityEnum) {
     AmpIssueSeverityEnum["SeverityUnspecified"] = "SEVERITY_UNSPECIFIED";
@@ -39,11 +39,11 @@ var AmpIssue = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=issueMessage" }),
+        SpeakeasyMetadata({ data: "json, name=issueMessage" }),
         __metadata("design:type", String)
     ], AmpIssue.prototype, "issueMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=severity" }),
+        SpeakeasyMetadata({ data: "json, name=severity" }),
         __metadata("design:type", String)
     ], AmpIssue.prototype, "severity", void 0);
     return AmpIssue;

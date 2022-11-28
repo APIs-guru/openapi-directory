@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2beta1AgentAssistantFeedbackSummarizationFeedback
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Feedback for conversation summarization.
 **/
 export class GoogleCloudDialogflowV2beta1AgentAssistantFeedbackSummarizationFeedback extends SpeakeasyBase {
-  @Metadata({ data: "json, name=startTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=startTimestamp" })
   startTimestamp?: string;
 
-  @Metadata({ data: "json, name=submitTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=submitTimestamp" })
   submitTimestamp?: string;
 
-  @Metadata({ data: "json, name=summaryText" })
+  @SpeakeasyMetadata({ data: "json, name=summaryText" })
   summaryText?: string;
 }

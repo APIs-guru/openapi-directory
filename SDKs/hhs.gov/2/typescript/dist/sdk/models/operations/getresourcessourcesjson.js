@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetResourcesSourcesJsonQueryParams = /** @class */ (function (_super) {
     __extends(GetResourcesSourcesJsonQueryParams, _super);
@@ -30,15 +30,15 @@ var GetResourcesSourcesJsonQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=max" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=max" }),
         __metadata("design:type", Number)
     ], GetResourcesSourcesJsonQueryParams.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=offset" }),
         __metadata("design:type", Number)
     ], GetResourcesSourcesJsonQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=sort" }),
         __metadata("design:type", String)
     ], GetResourcesSourcesJsonQueryParams.prototype, "sort", void 0);
     return GetResourcesSourcesJsonQueryParams;
@@ -50,7 +50,7 @@ var GetResourcesSourcesJsonRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourcesSourcesJsonQueryParams)
     ], GetResourcesSourcesJsonRequest.prototype, "queryParams", void 0);
     return GetResourcesSourcesJsonRequest;
@@ -62,15 +62,15 @@ var GetResourcesSourcesJsonResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetResourcesSourcesJsonResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.SourceWrapped }),
+        SpeakeasyMetadata({ elemType: shared.SourceWrapped }),
         __metadata("design:type", Array)
     ], GetResourcesSourcesJsonResponse.prototype, "sourceWrappeds", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetResourcesSourcesJsonResponse.prototype, "statusCode", void 0);
     return GetResourcesSourcesJsonResponse;

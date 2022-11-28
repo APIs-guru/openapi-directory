@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import publicendpoint
-from . import event
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EventsBatch:
-    endpoint: publicendpoint.PublicEndpoint = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Endpoint' }})
-    events: dict[str, event.Event] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Events' }})
+    r"""EventsBatch
+    Specifies a batch of endpoints and events to process.
+    """
+    
+    endpoint: PublicEndpoint = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Endpoint') }})
+    events: dict[str, Event] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Events') }})
     

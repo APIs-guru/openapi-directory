@@ -1,5 +1,7 @@
 package shared
 
+// ItemPromotion
+// This type defines the fields that describe a threshold promotion and includes the promotional discount, the items included in the promotion, and the rules that specify when the promotion is applied.
 type ItemPromotion struct {
 	ApplyDiscountToSingleItemOnly *bool                `json:"applyDiscountToSingleItemOnly,omitempty"`
 	Budget                        *Amount              `json:"budget,omitempty"`

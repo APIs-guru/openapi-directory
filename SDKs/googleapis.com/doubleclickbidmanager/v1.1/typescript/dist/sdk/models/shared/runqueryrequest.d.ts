@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum RunQueryRequestDataRangeEnum {
     CustomDates = "CUSTOM_DATES",
     CurrentDay = "CURRENT_DAY",

@@ -1,12 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import release
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class UpdateReleaseRequest:
-    release: Optional[release.Release] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'release' }})
-    update_mask: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateMask' }})
+class UpdateReleaseRequestInput:
+    r"""UpdateReleaseRequestInput
+    The request for FirebaseRulesService.UpdateRelease.
+    """
+    
+    release: Optional[ReleaseInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('release') }})
+    update_mask: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateMask') }})
     

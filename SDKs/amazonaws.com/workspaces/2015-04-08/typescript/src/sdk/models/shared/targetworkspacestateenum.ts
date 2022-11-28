@@ -1,6 +1,7 @@
 
 
+
 export enum TargetWorkspaceStateEnum {
-    Available = "AVAILABLE"
-,    AdminMaintenance = "ADMIN_MAINTENANCE"
+    Available = "AVAILABLE",
+    AdminMaintenance = "ADMIN_MAINTENANCE"
 }

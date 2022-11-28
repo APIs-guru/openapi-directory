@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RemoveParticipantCommunityPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=convId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=convId" })
   convId: string;
 }
 
 
 export class RemoveParticipantCommunityQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=participants" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=participants" })
   participants: string[];
 }
 
 
 export class RemoveParticipantCommunitySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class RemoveParticipantCommunityRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: RemoveParticipantCommunityPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RemoveParticipantCommunityQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: RemoveParticipantCommunitySecurity;
 }
 
 
 export class RemoveParticipantCommunityResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conversation?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

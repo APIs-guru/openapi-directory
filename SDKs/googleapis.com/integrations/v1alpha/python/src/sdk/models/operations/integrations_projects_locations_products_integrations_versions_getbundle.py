@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsVersionsGetBundlePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class IntegrationsProjectsLocationsProductsIntegrationsVersionsGetBundleQueryPar
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsVersionsGetBundleSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsVersionsGetBundleRequest:
-    path_params: IntegrationsProjectsLocationsProductsIntegrationsVersionsGetBundlePathParams = field(default=None)
-    query_params: IntegrationsProjectsLocationsProductsIntegrationsVersionsGetBundleQueryParams = field(default=None)
-    security: IntegrationsProjectsLocationsProductsIntegrationsVersionsGetBundleSecurity = field(default=None)
+    path_params: IntegrationsProjectsLocationsProductsIntegrationsVersionsGetBundlePathParams = field()
+    query_params: IntegrationsProjectsLocationsProductsIntegrationsVersionsGetBundleQueryParams = field()
+    security: IntegrationsProjectsLocationsProductsIntegrationsVersionsGetBundleSecurity = field()
     
 
 @dataclass
 class IntegrationsProjectsLocationsProductsIntegrationsVersionsGetBundleResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_integrations_v1alpha_get_bundle_response: Optional[shared.GoogleCloudIntegrationsV1alphaGetBundleResponse] = field(default=None)
-    status_code: int = field(default=None)
     

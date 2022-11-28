@@ -1,5 +1,7 @@
 package shared
 
+// HealthCheckPolicy
+// An object representing the health check policy for a virtual node's listener.
 type HealthCheckPolicy struct {
 	HealthyThreshold   int64            `json:"healthyThreshold"`
 	IntervalMillis     int64            `json:"intervalMillis"`

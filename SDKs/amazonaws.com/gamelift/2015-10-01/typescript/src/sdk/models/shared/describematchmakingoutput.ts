@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MatchmakingTicket } from "./matchmakingticket";
+
 
 
 // DescribeMatchmakingOutput
@@ -8,6 +8,6 @@ import { MatchmakingTicket } from "./matchmakingticket";
  * Represents the returned data in response to a request operation.
 **/
 export class DescribeMatchmakingOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TicketList", elemType: shared.MatchmakingTicket })
+  @SpeakeasyMetadata({ data: "json, name=TicketList", elemType: MatchmakingTicket })
   ticketList?: MatchmakingTicket[];
 }

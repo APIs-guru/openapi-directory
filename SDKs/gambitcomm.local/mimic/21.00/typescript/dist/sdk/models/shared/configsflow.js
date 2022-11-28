@@ -22,42 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ConfigSflow = /** @class */ (function (_super) {
     __extends(ConfigSflow, _super);
     function ConfigSflow() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=collector" }),
+        SpeakeasyMetadata({ data: "json, name=collector" }),
         __metadata("design:type", String)
     ], ConfigSflow.prototype, "collector", void 0);
     __decorate([
-        Metadata({ data: "json, name=collectorport" }),
+        SpeakeasyMetadata({ data: "json, name=collectorport" }),
         __metadata("design:type", Number)
     ], ConfigSflow.prototype, "collectorport", void 0);
     __decorate([
-        Metadata({ data: "json, name=encoding_type" }),
+        SpeakeasyMetadata({ data: "json, name=encoding_type" }),
         __metadata("design:type", String)
     ], ConfigSflow.prototype, "encodingType", void 0);
     __decorate([
-        Metadata({ data: "json, name=filename" }),
+        SpeakeasyMetadata({ data: "json, name=filename" }),
         __metadata("design:type", String)
     ], ConfigSflow.prototype, "filename", void 0);
     __decorate([
-        Metadata({ data: "json, name=flows_per_min" }),
+        SpeakeasyMetadata({ data: "json, name=flows_per_min" }),
         __metadata("design:type", Number)
     ], ConfigSflow.prototype, "flowsPerMin", void 0);
     __decorate([
-        Metadata({ data: "json, name=include_samples" }),
+        SpeakeasyMetadata({ data: "json, name=include_samples" }),
         __metadata("design:type", String)
     ], ConfigSflow.prototype, "includeSamples", void 0);
     __decorate([
-        Metadata({ data: "json, name=records_per_sample" }),
+        SpeakeasyMetadata({ data: "json, name=records_per_sample" }),
         __metadata("design:type", String)
     ], ConfigSflow.prototype, "recordsPerSample", void 0);
     __decorate([
-        Metadata({ data: "json, name=samples_per_datagram" }),
+        SpeakeasyMetadata({ data: "json, name=samples_per_datagram" }),
         __metadata("design:type", String)
     ], ConfigSflow.prototype, "samplesPerDatagram", void 0);
     return ConfigSflow;

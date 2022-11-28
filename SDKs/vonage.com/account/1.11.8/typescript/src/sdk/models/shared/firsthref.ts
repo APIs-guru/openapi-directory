@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FirstHref
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * URL to the first page of records
 **/
 export class FirstHref extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 }

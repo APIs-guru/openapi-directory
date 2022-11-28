@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContainerServiceLogEvent } from "./containerservicelogevent";
 
 
+
 export class GetContainerLogResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=logEvents", elemType: shared.ContainerServiceLogEvent })
+  @SpeakeasyMetadata({ data: "json, name=logEvents", elemType: ContainerServiceLogEvent })
   logEvents?: ContainerServiceLogEvent[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

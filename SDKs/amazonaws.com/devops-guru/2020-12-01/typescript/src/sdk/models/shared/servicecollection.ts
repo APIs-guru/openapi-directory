@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceNameEnum } from "./servicenameenum";
+
 
 
 // ServiceCollection
@@ -7,6 +8,6 @@ import { ServiceNameEnum } from "./servicenameenum";
  * A collection of the names of AWS services.
 **/
 export class ServiceCollection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ServiceNames" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceNames" })
   serviceNames?: ServiceNameEnum[];
 }

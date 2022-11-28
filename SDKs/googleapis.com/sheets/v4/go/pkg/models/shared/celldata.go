@@ -1,5 +1,7 @@
 package shared
 
+// CellData
+// Data about a specific cell.
 type CellData struct {
 	DataSourceFormula *DataSourceFormula  `json:"dataSourceFormula,omitempty"`
 	DataSourceTable   *DataSourceTable    `json:"dataSourceTable,omitempty"`

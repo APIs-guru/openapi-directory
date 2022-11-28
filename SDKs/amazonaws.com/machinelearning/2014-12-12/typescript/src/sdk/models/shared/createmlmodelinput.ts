@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MlModelTypeEnum } from "./mlmodeltypeenum";
 
 
+
 export class CreateMlModelInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MLModelId" })
+  @SpeakeasyMetadata({ data: "json, name=MLModelId" })
   mlModelId: string;
 
-  @Metadata({ data: "json, name=MLModelName" })
+  @SpeakeasyMetadata({ data: "json, name=MLModelName" })
   mlModelName?: string;
 
-  @Metadata({ data: "json, name=MLModelType" })
+  @SpeakeasyMetadata({ data: "json, name=MLModelType" })
   mlModelType: MlModelTypeEnum;
 
-  @Metadata({ data: "json, name=Parameters" })
+  @SpeakeasyMetadata({ data: "json, name=Parameters" })
   parameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Recipe" })
+  @SpeakeasyMetadata({ data: "json, name=Recipe" })
   recipe?: string;
 
-  @Metadata({ data: "json, name=RecipeUri" })
+  @SpeakeasyMetadata({ data: "json, name=RecipeUri" })
   recipeUri?: string;
 
-  @Metadata({ data: "json, name=TrainingDataSourceId" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingDataSourceId" })
   trainingDataSourceId: string;
 }

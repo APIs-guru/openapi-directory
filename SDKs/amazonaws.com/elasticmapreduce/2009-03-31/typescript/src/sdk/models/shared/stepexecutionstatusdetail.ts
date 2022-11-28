@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StepExecutionStateEnum } from "./stepexecutionstateenum";
+
 
 
 // StepExecutionStatusDetail
@@ -7,18 +8,18 @@ import { StepExecutionStateEnum } from "./stepexecutionstateenum";
  * The execution state of a step.
 **/
 export class StepExecutionStatusDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDateTime" })
   creationDateTime: Date;
 
-  @Metadata({ data: "json, name=EndDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=EndDateTime" })
   endDateTime?: Date;
 
-  @Metadata({ data: "json, name=LastStateChangeReason" })
+  @SpeakeasyMetadata({ data: "json, name=LastStateChangeReason" })
   lastStateChangeReason?: string;
 
-  @Metadata({ data: "json, name=StartDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartDateTime" })
   startDateTime?: Date;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state: StepExecutionStateEnum;
 }

@@ -4,18 +4,18 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var GetServerHealthServers = []string{
+var GetServerHealthServerList = []string{
 	"http://localhost:8080",
-}
-
-type GetServerHealthRequest struct {
-	ServerURL *string
 }
 
 type GetServerHealth200ApplicationJSON struct {
 	Dependencies []shared.ServiceDependency `json:"dependencies,omitempty"`
 	Name         string                     `json:"name"`
 	Version      string                     `json:"version"`
+}
+
+type GetServerHealthRequest struct {
+	ServerURL *string
 }
 
 type GetServerHealthResponse struct {

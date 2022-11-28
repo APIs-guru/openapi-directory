@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PathQueryOptions } from "./pathqueryoptions";
+
 
 
 // Options
@@ -7,9 +8,9 @@ import { PathQueryOptions } from "./pathqueryoptions";
  * Additional query options.
 **/
 export class Options extends SpeakeasyBase {
-  @Metadata({ data: "json, name=includeOnlyTargetedUserLists" })
+  @SpeakeasyMetadata({ data: "json, name=includeOnlyTargetedUserLists" })
   includeOnlyTargetedUserLists?: boolean;
 
-  @Metadata({ data: "json, name=pathQueryOptions" })
+  @SpeakeasyMetadata({ data: "json, name=pathQueryOptions" })
   pathQueryOptions?: PathQueryOptions;
 }

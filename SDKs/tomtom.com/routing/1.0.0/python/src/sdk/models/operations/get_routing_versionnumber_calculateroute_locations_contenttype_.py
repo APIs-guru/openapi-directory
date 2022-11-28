@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetRoutingVersionNumberCalculateRouteLocationsContentTypePathParams:
-    content_type: shared.ContentTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'contentType', 'style': 'simple', 'explode': False }})
-    locations: str = field(default=None, metadata={'path_param': { 'field_name': 'locations', 'style': 'simple', 'explode': False }})
-    version_number: int = field(default=None, metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
+    content_type: shared.ContentTypeEnum = field(metadata={'path_param': { 'field_name': 'contentType', 'style': 'simple', 'explode': False }})
+    locations: str = field(metadata={'path_param': { 'field_name': 'locations', 'style': 'simple', 'explode': False }})
+    version_number: int = field(metadata={'path_param': { 'field_name': 'versionNumber', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -55,12 +56,12 @@ class GetRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams:
 
 @dataclass
 class GetRoutingVersionNumberCalculateRouteLocationsContentTypeRequest:
-    path_params: GetRoutingVersionNumberCalculateRouteLocationsContentTypePathParams = field(default=None)
-    query_params: GetRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams = field(default=None)
+    path_params: GetRoutingVersionNumberCalculateRouteLocationsContentTypePathParams = field()
+    query_params: GetRoutingVersionNumberCalculateRouteLocationsContentTypeQueryParams = field()
     
 
 @dataclass
 class GetRoutingVersionNumberCalculateRouteLocationsContentTypeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

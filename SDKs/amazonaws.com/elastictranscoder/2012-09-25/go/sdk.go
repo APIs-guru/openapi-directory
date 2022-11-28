@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://elastictranscoder.{region}.amazonaws.com",
 	"https://elastictranscoder.{region}.amazonaws.com",
 	"http://elastictranscoder.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/elastictranscoder/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CancelJob - <p>The CancelJob operation cancels an unfinished job.</p> <note> <p>You can only cancel a job that has a status of <code>Submitted</code>. To prevent a pipeline from starting to process a job while you're getting the job identifier, use <a>UpdatePipelineStatus</a> to temporarily pause the pipeline.</p> </note>
 func (s *SDK) CancelJob(ctx context.Context, request operations.CancelJobRequest) (*operations.CancelJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/2012-09-25/jobs/{Id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -71,7 +98,7 @@ func (s *SDK) CancelJob(ctx context.Context, request operations.CancelJobRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -161,8 +188,9 @@ func (s *SDK) CancelJob(ctx context.Context, request operations.CancelJobRequest
 	return res, nil
 }
 
+// CreateJob - <p>When you create a job, Elastic Transcoder returns JSON data that includes the values that you specified plus information about the job that is created.</p> <p>If you have specified more than one output for your jobs (for example, one output for the Kindle Fire and another output for the Apple iPhone 4s), you currently must use the Elastic Transcoder API to list the jobs (as opposed to the AWS Console).</p>
 func (s *SDK) CreateJob(ctx context.Context, request operations.CreateJobRequest) (*operations.CreateJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/2012-09-25/jobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -182,7 +210,7 @@ func (s *SDK) CreateJob(ctx context.Context, request operations.CreateJobRequest
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -272,8 +300,9 @@ func (s *SDK) CreateJob(ctx context.Context, request operations.CreateJobRequest
 	return res, nil
 }
 
+// CreatePipeline - The CreatePipeline operation creates a pipeline with settings that you specify.
 func (s *SDK) CreatePipeline(ctx context.Context, request operations.CreatePipelineRequest) (*operations.CreatePipelineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/2012-09-25/pipelines"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -293,7 +322,7 @@ func (s *SDK) CreatePipeline(ctx context.Context, request operations.CreatePipel
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -383,8 +412,9 @@ func (s *SDK) CreatePipeline(ctx context.Context, request operations.CreatePipel
 	return res, nil
 }
 
+// CreatePreset - <p>The CreatePreset operation creates a preset with settings that you specify.</p> <important> <p>Elastic Transcoder checks the CreatePreset settings to ensure that they meet Elastic Transcoder requirements and to determine whether they comply with H.264 standards. If your settings are not valid for Elastic Transcoder, Elastic Transcoder returns an HTTP 400 response (<code>ValidationException</code>) and does not create the preset. If the settings are valid for Elastic Transcoder but aren't strictly compliant with the H.264 standard, Elastic Transcoder creates the preset and returns a warning message in the response. This helps you determine whether your settings comply with the H.264 standard while giving you greater flexibility with respect to the video that Elastic Transcoder produces.</p> </important> <p>Elastic Transcoder uses the H.264 video-compression format. For more information, see the International Telecommunication Union publication <i>Recommendation ITU-T H.264: Advanced video coding for generic audiovisual services</i>.</p>
 func (s *SDK) CreatePreset(ctx context.Context, request operations.CreatePresetRequest) (*operations.CreatePresetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/2012-09-25/presets"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -404,7 +434,7 @@ func (s *SDK) CreatePreset(ctx context.Context, request operations.CreatePresetR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -484,8 +514,9 @@ func (s *SDK) CreatePreset(ctx context.Context, request operations.CreatePresetR
 	return res, nil
 }
 
+// DeletePipeline - <p>The DeletePipeline operation removes a pipeline.</p> <p> You can only delete a pipeline that has never been used or that is not currently in use (doesn't contain any active jobs). If the pipeline is currently in use, <code>DeletePipeline</code> returns an error. </p>
 func (s *SDK) DeletePipeline(ctx context.Context, request operations.DeletePipelineRequest) (*operations.DeletePipelineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/2012-09-25/pipelines/{Id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -495,7 +526,7 @@ func (s *SDK) DeletePipeline(ctx context.Context, request operations.DeletePipel
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -585,8 +616,9 @@ func (s *SDK) DeletePipeline(ctx context.Context, request operations.DeletePipel
 	return res, nil
 }
 
+// DeletePreset - <p>The DeletePreset operation removes a preset that you've added in an AWS region.</p> <note> <p>You can't delete the default presets that are included with Elastic Transcoder.</p> </note>
 func (s *SDK) DeletePreset(ctx context.Context, request operations.DeletePresetRequest) (*operations.DeletePresetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/2012-09-25/presets/{Id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -596,7 +628,7 @@ func (s *SDK) DeletePreset(ctx context.Context, request operations.DeletePresetR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -676,8 +708,9 @@ func (s *SDK) DeletePreset(ctx context.Context, request operations.DeletePresetR
 	return res, nil
 }
 
+// ListJobsByPipeline - <p>The ListJobsByPipeline operation gets a list of the jobs currently in a pipeline.</p> <p>Elastic Transcoder returns all of the jobs currently in the specified pipeline. The response body contains one element for each job that satisfies the search criteria.</p>
 func (s *SDK) ListJobsByPipeline(ctx context.Context, request operations.ListJobsByPipelineRequest) (*operations.ListJobsByPipelineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/2012-09-25/jobsByPipeline/{PipelineId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -689,7 +722,7 @@ func (s *SDK) ListJobsByPipeline(ctx context.Context, request operations.ListJob
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -769,8 +802,9 @@ func (s *SDK) ListJobsByPipeline(ctx context.Context, request operations.ListJob
 	return res, nil
 }
 
+// ListJobsByStatus - The ListJobsByStatus operation gets a list of jobs that have a specified status. The response body contains one element for each job that satisfies the search criteria.
 func (s *SDK) ListJobsByStatus(ctx context.Context, request operations.ListJobsByStatusRequest) (*operations.ListJobsByStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/2012-09-25/jobsByStatus/{Status}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -782,7 +816,7 @@ func (s *SDK) ListJobsByStatus(ctx context.Context, request operations.ListJobsB
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -862,8 +896,9 @@ func (s *SDK) ListJobsByStatus(ctx context.Context, request operations.ListJobsB
 	return res, nil
 }
 
+// ListPipelines - The ListPipelines operation gets a list of the pipelines associated with the current AWS account.
 func (s *SDK) ListPipelines(ctx context.Context, request operations.ListPipelinesRequest) (*operations.ListPipelinesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/2012-09-25/pipelines"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -875,7 +910,7 @@ func (s *SDK) ListPipelines(ctx context.Context, request operations.ListPipeline
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -945,8 +980,9 @@ func (s *SDK) ListPipelines(ctx context.Context, request operations.ListPipeline
 	return res, nil
 }
 
+// ListPresets - The ListPresets operation gets a list of the default presets included with Elastic Transcoder and the presets that you've added in an AWS region.
 func (s *SDK) ListPresets(ctx context.Context, request operations.ListPresetsRequest) (*operations.ListPresetsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/2012-09-25/presets"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -958,7 +994,7 @@ func (s *SDK) ListPresets(ctx context.Context, request operations.ListPresetsReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1028,8 +1064,9 @@ func (s *SDK) ListPresets(ctx context.Context, request operations.ListPresetsReq
 	return res, nil
 }
 
+// ReadJob - The ReadJob operation returns detailed information about a job.
 func (s *SDK) ReadJob(ctx context.Context, request operations.ReadJobRequest) (*operations.ReadJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/2012-09-25/jobs/{Id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1039,7 +1076,7 @@ func (s *SDK) ReadJob(ctx context.Context, request operations.ReadJobRequest) (*
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1119,8 +1156,9 @@ func (s *SDK) ReadJob(ctx context.Context, request operations.ReadJobRequest) (*
 	return res, nil
 }
 
+// ReadPipeline - The ReadPipeline operation gets detailed information about a pipeline.
 func (s *SDK) ReadPipeline(ctx context.Context, request operations.ReadPipelineRequest) (*operations.ReadPipelineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/2012-09-25/pipelines/{Id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1130,7 +1168,7 @@ func (s *SDK) ReadPipeline(ctx context.Context, request operations.ReadPipelineR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1210,8 +1248,9 @@ func (s *SDK) ReadPipeline(ctx context.Context, request operations.ReadPipelineR
 	return res, nil
 }
 
+// ReadPreset - The ReadPreset operation gets detailed information about a preset.
 func (s *SDK) ReadPreset(ctx context.Context, request operations.ReadPresetRequest) (*operations.ReadPresetResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/2012-09-25/presets/{Id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1221,7 +1260,7 @@ func (s *SDK) ReadPreset(ctx context.Context, request operations.ReadPresetReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1301,8 +1340,9 @@ func (s *SDK) ReadPreset(ctx context.Context, request operations.ReadPresetReque
 	return res, nil
 }
 
+// TestRole - <p>The TestRole operation tests the IAM role used to create the pipeline.</p> <p>The <code>TestRole</code> action lets you determine whether the IAM role you are using has sufficient permissions to let Elastic Transcoder perform tasks associated with the transcoding process. The action attempts to assume the specified IAM role, checks read access to the input and output buckets, and tries to send a test notification to Amazon SNS topics that you specify.</p>
 func (s *SDK) TestRole(ctx context.Context, request operations.TestRoleRequest) (*operations.TestRoleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/2012-09-25/roleTests"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1322,7 +1362,7 @@ func (s *SDK) TestRole(ctx context.Context, request operations.TestRoleRequest) 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1402,8 +1442,9 @@ func (s *SDK) TestRole(ctx context.Context, request operations.TestRoleRequest) 
 	return res, nil
 }
 
+// UpdatePipeline - <p> Use the <code>UpdatePipeline</code> operation to update settings for a pipeline.</p> <important> <p>When you change pipeline settings, your changes take effect immediately. Jobs that you have already submitted and that Elastic Transcoder has not started to process are affected in addition to jobs that you submit after you change settings. </p> </important>
 func (s *SDK) UpdatePipeline(ctx context.Context, request operations.UpdatePipelineRequest) (*operations.UpdatePipelineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/2012-09-25/pipelines/{Id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1423,7 +1464,7 @@ func (s *SDK) UpdatePipeline(ctx context.Context, request operations.UpdatePipel
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1513,8 +1554,9 @@ func (s *SDK) UpdatePipeline(ctx context.Context, request operations.UpdatePipel
 	return res, nil
 }
 
+// UpdatePipelineNotifications - <p>With the UpdatePipelineNotifications operation, you can update Amazon Simple Notification Service (Amazon SNS) notifications for a pipeline.</p> <p>When you update notifications for a pipeline, Elastic Transcoder returns the values that you specified in the request.</p>
 func (s *SDK) UpdatePipelineNotifications(ctx context.Context, request operations.UpdatePipelineNotificationsRequest) (*operations.UpdatePipelineNotificationsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/2012-09-25/pipelines/{Id}/notifications", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1534,7 +1576,7 @@ func (s *SDK) UpdatePipelineNotifications(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1624,8 +1666,9 @@ func (s *SDK) UpdatePipelineNotifications(ctx context.Context, request operation
 	return res, nil
 }
 
+// UpdatePipelineStatus - <p>The UpdatePipelineStatus operation pauses or reactivates a pipeline, so that the pipeline stops or restarts the processing of jobs.</p> <p>Changing the pipeline status is useful if you want to cancel one or more jobs. You can't cancel jobs after Elastic Transcoder has started processing them; if you pause the pipeline to which you submitted the jobs, you have more time to get the job IDs for the jobs that you want to cancel, and to send a <a>CancelJob</a> request. </p>
 func (s *SDK) UpdatePipelineStatus(ctx context.Context, request operations.UpdatePipelineStatusRequest) (*operations.UpdatePipelineStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/2012-09-25/pipelines/{Id}/status", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1645,7 +1688,7 @@ func (s *SDK) UpdatePipelineStatus(ctx context.Context, request operations.Updat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

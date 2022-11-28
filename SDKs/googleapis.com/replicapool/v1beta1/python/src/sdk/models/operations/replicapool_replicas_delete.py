@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ReplicapoolReplicasDeletePathParams:
-    pool_name: str = field(default=None, metadata={'path_param': { 'field_name': 'poolName', 'style': 'simple', 'explode': False }})
-    project_name: str = field(default=None, metadata={'path_param': { 'field_name': 'projectName', 'style': 'simple', 'explode': False }})
-    replica_name: str = field(default=None, metadata={'path_param': { 'field_name': 'replicaName', 'style': 'simple', 'explode': False }})
-    zone: str = field(default=None, metadata={'path_param': { 'field_name': 'zone', 'style': 'simple', 'explode': False }})
+    pool_name: str = field(metadata={'path_param': { 'field_name': 'poolName', 'style': 'simple', 'explode': False }})
+    project_name: str = field(metadata={'path_param': { 'field_name': 'projectName', 'style': 'simple', 'explode': False }})
+    replica_name: str = field(metadata={'path_param': { 'field_name': 'replicaName', 'style': 'simple', 'explode': False }})
+    zone: str = field(metadata={'path_param': { 'field_name': 'zone', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,20 +25,20 @@ class ReplicapoolReplicasDeleteQueryParams:
 
 @dataclass
 class ReplicapoolReplicasDeleteSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ReplicapoolReplicasDeleteSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ReplicapoolReplicasDeleteSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -49,15 +50,15 @@ class ReplicapoolReplicasDeleteSecurity:
 
 @dataclass
 class ReplicapoolReplicasDeleteRequest:
-    path_params: ReplicapoolReplicasDeletePathParams = field(default=None)
-    query_params: ReplicapoolReplicasDeleteQueryParams = field(default=None)
+    path_params: ReplicapoolReplicasDeletePathParams = field()
+    query_params: ReplicapoolReplicasDeleteQueryParams = field()
+    security: ReplicapoolReplicasDeleteSecurity = field()
     request: Optional[shared.ReplicasDeleteRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ReplicapoolReplicasDeleteSecurity = field(default=None)
     
 
 @dataclass
 class ReplicapoolReplicasDeleteResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

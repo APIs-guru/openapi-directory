@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RdsMetadata } from "./rdsmetadata";
 import { RedshiftMetadata } from "./redshiftmetadata";
 import { EntityStatusEnum } from "./entitystatusenum";

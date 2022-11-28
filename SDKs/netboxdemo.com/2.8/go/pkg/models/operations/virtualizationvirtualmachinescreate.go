@@ -5,7 +5,7 @@ import (
 )
 
 type VirtualizationVirtualMachinesCreateRequest struct {
-	Request shared.WritableVirtualMachineWithConfigContext `request:"mediaType=application/json"`
+	Request shared.WritableVirtualMachineWithConfigContextInput `request:"mediaType=application/json"`
 }
 
 type VirtualizationVirtualMachinesCreateResponse struct {

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetAccountOrganizationPathParams = /** @class */ (function (_super) {
     __extends(GetAccountOrganizationPathParams, _super);
@@ -30,7 +30,7 @@ var GetAccountOrganizationPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=org_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=org_id" }),
         __metadata("design:type", String)
     ], GetAccountOrganizationPathParams.prototype, "orgId", void 0);
     return GetAccountOrganizationPathParams;
@@ -42,7 +42,7 @@ var GetAccountOrganizationSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], GetAccountOrganizationSecurity.prototype, "bearerAuth", void 0);
     return GetAccountOrganizationSecurity;
@@ -54,11 +54,11 @@ var GetAccountOrganizationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAccountOrganizationPathParams)
     ], GetAccountOrganizationRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAccountOrganizationSecurity)
     ], GetAccountOrganizationRequest.prototype, "security", void 0);
     return GetAccountOrganizationRequest;
@@ -70,15 +70,15 @@ var GetAccountOrganizationResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetAccountOrganizationResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAccountOrganizationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAccountOrganizationResponse.prototype, "statusCode", void 0);
     return GetAccountOrganizationResponse;

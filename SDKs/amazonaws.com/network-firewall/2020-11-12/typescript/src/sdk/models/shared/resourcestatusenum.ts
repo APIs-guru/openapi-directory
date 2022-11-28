@@ -1,6 +1,7 @@
 
 
+
 export enum ResourceStatusEnum {
-    Active = "ACTIVE"
-,    Deleting = "DELETING"
+    Active = "ACTIVE",
+    Deleting = "DELETING"
 }

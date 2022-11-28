@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { S3Object } from "./s3object";
 import { InferenceInputConfiguration } from "./inferenceinputconfiguration";
 import { InferenceOutputConfiguration } from "./inferenceoutputconfiguration";
 import { InferenceExecutionStatusEnum } from "./inferenceexecutionstatusenum";
+
 
 
 // InferenceExecutionSummary
@@ -10,39 +11,39 @@ import { InferenceExecutionStatusEnum } from "./inferenceexecutionstatusenum";
  * Contains information about the specific inference execution, including input and output data configuration, inference scheduling information, status, and so on. 
 **/
 export class InferenceExecutionSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CustomerResultObject" })
+  @SpeakeasyMetadata({ data: "json, name=CustomerResultObject" })
   customerResultObject?: S3Object;
 
-  @Metadata({ data: "json, name=DataEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=DataEndTime" })
   dataEndTime?: Date;
 
-  @Metadata({ data: "json, name=DataInputConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=DataInputConfiguration" })
   dataInputConfiguration?: InferenceInputConfiguration;
 
-  @Metadata({ data: "json, name=DataOutputConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=DataOutputConfiguration" })
   dataOutputConfiguration?: InferenceOutputConfiguration;
 
-  @Metadata({ data: "json, name=DataStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=DataStartTime" })
   dataStartTime?: Date;
 
-  @Metadata({ data: "json, name=FailedReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailedReason" })
   failedReason?: string;
 
-  @Metadata({ data: "json, name=InferenceSchedulerArn" })
+  @SpeakeasyMetadata({ data: "json, name=InferenceSchedulerArn" })
   inferenceSchedulerArn?: string;
 
-  @Metadata({ data: "json, name=InferenceSchedulerName" })
+  @SpeakeasyMetadata({ data: "json, name=InferenceSchedulerName" })
   inferenceSchedulerName?: string;
 
-  @Metadata({ data: "json, name=ModelArn" })
+  @SpeakeasyMetadata({ data: "json, name=ModelArn" })
   modelArn?: string;
 
-  @Metadata({ data: "json, name=ModelName" })
+  @SpeakeasyMetadata({ data: "json, name=ModelName" })
   modelName?: string;
 
-  @Metadata({ data: "json, name=ScheduledStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=ScheduledStartTime" })
   scheduledStartTime?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: InferenceExecutionStatusEnum;
 }

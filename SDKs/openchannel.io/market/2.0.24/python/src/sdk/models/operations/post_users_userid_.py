@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class PostUsersUserIDPathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class PostUsersUserIDQueryParams:
 
 @dataclass
 class PostUsersUserIDRequest:
-    path_params: PostUsersUserIDPathParams = field(default=None)
-    query_params: PostUsersUserIDQueryParams = field(default=None)
+    path_params: PostUsersUserIDPathParams = field()
+    query_params: PostUsersUserIDQueryParams = field()
     
 
 @dataclass
 class PostUsersUserIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

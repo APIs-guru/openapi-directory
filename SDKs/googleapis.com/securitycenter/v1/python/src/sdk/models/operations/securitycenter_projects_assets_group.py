@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SecuritycenterProjectsAssetsGroupPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class SecuritycenterProjectsAssetsGroupQueryParams:
 
 @dataclass
 class SecuritycenterProjectsAssetsGroupSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SecuritycenterProjectsAssetsGroupRequest:
-    path_params: SecuritycenterProjectsAssetsGroupPathParams = field(default=None)
-    query_params: SecuritycenterProjectsAssetsGroupQueryParams = field(default=None)
+    path_params: SecuritycenterProjectsAssetsGroupPathParams = field()
+    query_params: SecuritycenterProjectsAssetsGroupQueryParams = field()
+    security: SecuritycenterProjectsAssetsGroupSecurity = field()
     request: Optional[shared.GroupAssetsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: SecuritycenterProjectsAssetsGroupSecurity = field(default=None)
     
 
 @dataclass
 class SecuritycenterProjectsAssetsGroupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     group_assets_response: Optional[shared.GroupAssetsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

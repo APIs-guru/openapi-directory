@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Trigger } from "./trigger";
 
 
+
 export class BatchGetTriggersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Triggers", elemType: shared.Trigger })
+  @SpeakeasyMetadata({ data: "json, name=Triggers", elemType: Trigger })
   triggers?: Trigger[];
 
-  @Metadata({ data: "json, name=TriggersNotFound" })
+  @SpeakeasyMetadata({ data: "json, name=TriggersNotFound" })
   triggersNotFound?: string[];
 }

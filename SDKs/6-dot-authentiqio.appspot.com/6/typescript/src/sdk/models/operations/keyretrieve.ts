@@ -1,43 +1,44 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class KeyRetrievePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=PK" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=PK" })
   pk: string;
 }
 
 
-export class KeyRetrieveRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: KeyRetrievePathParams;
-}
-
-
 export class KeyRetrieveJwt extends SpeakeasyBase {
-  @Metadata({ data: "json, name=since" })
+  @SpeakeasyMetadata({ data: "json, name=since" })
   since?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=sub" })
+  @SpeakeasyMetadata({ data: "json, name=sub" })
   sub?: string;
 }
 
 
+export class KeyRetrieveRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: KeyRetrievePathParams;
+}
+
+
 export class KeyRetrieveResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   jwt?: KeyRetrieveJwt;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

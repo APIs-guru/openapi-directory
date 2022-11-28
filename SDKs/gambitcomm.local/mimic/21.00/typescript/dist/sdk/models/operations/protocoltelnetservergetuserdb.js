@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolTelnetServerGetUserdbPathParams = /** @class */ (function (_super) {
     __extends(ProtocolTelnetServerGetUserdbPathParams, _super);
     function ProtocolTelnetServerGetUserdbPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolTelnetServerGetUserdbPathParams.prototype, "agentNum", void 0);
     return ProtocolTelnetServerGetUserdbPathParams;
@@ -41,7 +41,7 @@ var ProtocolTelnetServerGetUserdbRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolTelnetServerGetUserdbPathParams)
     ], ProtocolTelnetServerGetUserdbRequest.prototype, "pathParams", void 0);
     return ProtocolTelnetServerGetUserdbRequest;
@@ -53,15 +53,15 @@ var ProtocolTelnetServerGetUserdbResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolTelnetServerGetUserdbResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolTelnetServerGetUserdbResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], ProtocolTelnetServerGetUserdbResponse.prototype, "protocolTelnetServerGetUserdb200ApplicationJsonStrings", void 0);
     return ProtocolTelnetServerGetUserdbResponse;

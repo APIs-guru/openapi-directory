@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class TeamsListChildInOrgPathParams:
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
-    team_slug: str = field(default=None, metadata={'path_param': { 'field_name': 'team_slug', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    team_slug: str = field(metadata={'path_param': { 'field_name': 'team_slug', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,14 +17,14 @@ class TeamsListChildInOrgQueryParams:
 
 @dataclass
 class TeamsListChildInOrgRequest:
-    path_params: TeamsListChildInOrgPathParams = field(default=None)
-    query_params: TeamsListChildInOrgQueryParams = field(default=None)
+    path_params: TeamsListChildInOrgPathParams = field()
+    query_params: TeamsListChildInOrgQueryParams = field()
     
 
 @dataclass
 class TeamsListChildInOrgResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     teams: Optional[List[shared.Team]] = field(default=None)
     

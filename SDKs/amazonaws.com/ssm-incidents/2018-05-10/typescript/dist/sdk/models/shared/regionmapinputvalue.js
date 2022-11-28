@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RegionMapInputValue
 /**
  * The mapping between a Region and the key that's used to encrypt the data.
@@ -33,7 +33,7 @@ var RegionMapInputValue = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=sseKmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=sseKmsKeyId" }),
         __metadata("design:type", String)
     ], RegionMapInputValue.prototype, "sseKmsKeyId", void 0);
     return RegionMapInputValue;

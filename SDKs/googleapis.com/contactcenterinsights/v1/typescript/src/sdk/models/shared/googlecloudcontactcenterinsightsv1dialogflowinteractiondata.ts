@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudContactcenterinsightsV1DialogflowInteractionData
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Dialogflow interaction data.
 **/
 export class GoogleCloudContactcenterinsightsV1DialogflowInteractionData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=confidence" })
+  @SpeakeasyMetadata({ data: "json, name=confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=dialogflowIntentId" })
+  @SpeakeasyMetadata({ data: "json, name=dialogflowIntentId" })
   dialogflowIntentId?: string;
 }

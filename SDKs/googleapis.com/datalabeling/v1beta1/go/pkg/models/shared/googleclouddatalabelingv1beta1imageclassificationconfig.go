@@ -9,6 +9,8 @@ const (
 	GoogleCloudDatalabelingV1beta1ImageClassificationConfigAnswerAggregationTypeEnumNoAggregation                    GoogleCloudDatalabelingV1beta1ImageClassificationConfigAnswerAggregationTypeEnum = "NO_AGGREGATION"
 )
 
+// GoogleCloudDatalabelingV1beta1ImageClassificationConfig
+// Config for image classification human labeling task.
 type GoogleCloudDatalabelingV1beta1ImageClassificationConfig struct {
 	AllowMultiLabel       *bool                                                                             `json:"allowMultiLabel,omitempty"`
 	AnnotationSpecSet     *string                                                                           `json:"annotationSpecSet,omitempty"`

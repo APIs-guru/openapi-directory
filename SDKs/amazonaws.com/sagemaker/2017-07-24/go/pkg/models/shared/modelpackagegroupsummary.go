@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ModelPackageGroupSummary
+// Summary information about a model group.
 type ModelPackageGroupSummary struct {
 	CreationTime                 time.Time                   `json:"CreationTime"`
 	ModelPackageGroupArn         string                      `json:"ModelPackageGroupArn"`

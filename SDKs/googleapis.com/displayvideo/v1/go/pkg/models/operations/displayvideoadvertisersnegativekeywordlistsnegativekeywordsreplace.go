@@ -31,7 +31,7 @@ type DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsReplaceSecurity 
 type DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsReplaceRequest struct {
 	PathParams  DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsReplacePathParams
 	QueryParams DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsReplaceQueryParams
-	Request     *shared.ReplaceNegativeKeywordsRequest `request:"mediaType=application/json"`
+	Request     *shared.ReplaceNegativeKeywordsRequestInput `request:"mediaType=application/json"`
 	Security    DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsReplaceSecurity
 }
 

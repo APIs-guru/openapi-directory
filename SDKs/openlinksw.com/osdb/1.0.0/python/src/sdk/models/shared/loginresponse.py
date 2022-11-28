@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class LoginResponseResponse:
-    user: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    user: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('user') }})
     
 class LoginResponseStatusEnum(str, Enum):
     SUCCESS = "success"
@@ -15,8 +16,8 @@ class LoginResponseStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class LoginResponse:
-    api: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'api' }})
-    method: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'method' }})
-    response: LoginResponseResponse = field(default=None, metadata={'dataclasses_json': { 'field_name': 'response' }})
-    status: LoginResponseStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    api: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('api') }})
+    method: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('method') }})
+    response: LoginResponseResponse = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('response') }})
+    status: LoginResponseStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

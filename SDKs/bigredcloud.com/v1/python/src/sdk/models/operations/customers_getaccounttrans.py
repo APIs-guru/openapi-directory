@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class CustomersGetAccountTransPathParams:
-    item_id: int = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: int = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CustomersGetAccountTransRequest:
-    path_params: CustomersGetAccountTransPathParams = field(default=None)
+    path_params: CustomersGetAccountTransPathParams = field()
     
 
 @dataclass
 class CustomersGetAccountTransResponse:
+    content_type: str = field()
+    status_code: int = field()
     account_tran_dtos: Optional[List[shared.AccountTranDto]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobExecutionState } from "./jobexecutionstate";
 
 
+
 export class UpdateJobExecutionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=executionState" })
+  @SpeakeasyMetadata({ data: "json, name=executionState" })
   executionState?: JobExecutionState;
 
-  @Metadata({ data: "json, name=jobDocument" })
+  @SpeakeasyMetadata({ data: "json, name=jobDocument" })
   jobDocument?: string;
 }

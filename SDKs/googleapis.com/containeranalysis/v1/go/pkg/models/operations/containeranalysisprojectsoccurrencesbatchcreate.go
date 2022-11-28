@@ -30,7 +30,7 @@ type ContaineranalysisProjectsOccurrencesBatchCreateSecurity struct {
 type ContaineranalysisProjectsOccurrencesBatchCreateRequest struct {
 	PathParams  ContaineranalysisProjectsOccurrencesBatchCreatePathParams
 	QueryParams ContaineranalysisProjectsOccurrencesBatchCreateQueryParams
-	Request     *shared.BatchCreateOccurrencesRequest `request:"mediaType=application/json"`
+	Request     *shared.BatchCreateOccurrencesRequestInput `request:"mediaType=application/json"`
 	Security    ContaineranalysisProjectsOccurrencesBatchCreateSecurity
 }
 

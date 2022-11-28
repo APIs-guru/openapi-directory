@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeProvisioningParametersInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcceptLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=AcceptLanguage" })
   acceptLanguage?: string;
 
-  @Metadata({ data: "json, name=PathId" })
+  @SpeakeasyMetadata({ data: "json, name=PathId" })
   pathId?: string;
 
-  @Metadata({ data: "json, name=PathName" })
+  @SpeakeasyMetadata({ data: "json, name=PathName" })
   pathName?: string;
 
-  @Metadata({ data: "json, name=ProductId" })
+  @SpeakeasyMetadata({ data: "json, name=ProductId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=ProductName" })
+  @SpeakeasyMetadata({ data: "json, name=ProductName" })
   productName?: string;
 
-  @Metadata({ data: "json, name=ProvisioningArtifactId" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactId" })
   provisioningArtifactId?: string;
 
-  @Metadata({ data: "json, name=ProvisioningArtifactName" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactName" })
   provisioningArtifactName?: string;
 }

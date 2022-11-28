@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class GetSettingsOrganizationsOrganizationNameSendersPathParams:
-    organization_name: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationName', 'style': 'simple', 'explode': False }})
+    organization_name: str = field(metadata={'path_param': { 'field_name': 'organizationName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetSettingsOrganizationsOrganizationNameSendersSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetSettingsOrganizationsOrganizationNameSendersRequest:
-    path_params: GetSettingsOrganizationsOrganizationNameSendersPathParams = field(default=None)
-    security: GetSettingsOrganizationsOrganizationNameSendersSecurity = field(default=None)
+    path_params: GetSettingsOrganizationsOrganizationNameSendersPathParams = field()
+    security: GetSettingsOrganizationsOrganizationNameSendersSecurity = field()
     
 
 @dataclass
 class GetSettingsOrganizationsOrganizationNameSendersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     senders: Optional[List[shared.Sender]] = field(default=None)
-    status_code: int = field(default=None)
     

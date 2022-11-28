@@ -1,7 +1,8 @@
 
 
+
 export enum UserTypeEnum {
-    Backoffice = "BACKOFFICE"
-,    Payor = "PAYOR"
-,    Payee = "PAYEE"
+    Backoffice = "BACKOFFICE",
+    Payor = "PAYOR",
+    Payee = "PAYEE"
 }

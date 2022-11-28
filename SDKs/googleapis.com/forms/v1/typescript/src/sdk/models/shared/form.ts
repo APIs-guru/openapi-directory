@@ -1,8 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Info } from "./info";
 import { Item } from "./item";
 import { FormSettings } from "./formsettings";
+import { InfoInput } from "./info";
+import { ItemInput } from "./item";
+
 
 
 // Form
@@ -10,24 +12,40 @@ import { FormSettings } from "./formsettings";
  * A Google Forms document. A form is created in Drive, and deleting a form or changing its access protections is done via the [Drive API](https://developers.google.com/drive/api/v3/about-sdk).
 **/
 export class Form extends SpeakeasyBase {
-  @Metadata({ data: "json, name=formId" })
+  @SpeakeasyMetadata({ data: "json, name=formId" })
   formId?: string;
 
-  @Metadata({ data: "json, name=info" })
+  @SpeakeasyMetadata({ data: "json, name=info" })
   info?: Info;
 
-  @Metadata({ data: "json, name=items", elemType: shared.Item })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Item })
   items?: Item[];
 
-  @Metadata({ data: "json, name=linkedSheetId" })
+  @SpeakeasyMetadata({ data: "json, name=linkedSheetId" })
   linkedSheetId?: string;
 
-  @Metadata({ data: "json, name=responderUri" })
+  @SpeakeasyMetadata({ data: "json, name=responderUri" })
   responderUri?: string;
 
-  @Metadata({ data: "json, name=revisionId" })
+  @SpeakeasyMetadata({ data: "json, name=revisionId" })
   revisionId?: string;
 
-  @Metadata({ data: "json, name=settings" })
+  @SpeakeasyMetadata({ data: "json, name=settings" })
+  settings?: FormSettings;
+}
+
+
+// FormInput
+/** 
+ * A Google Forms document. A form is created in Drive, and deleting a form or changing its access protections is done via the [Drive API](https://developers.google.com/drive/api/v3/about-sdk).
+**/
+export class FormInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=info" })
+  info?: InfoInput;
+
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: ItemInput })
+  items?: ItemInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=settings" })
   settings?: FormSettings;
 }

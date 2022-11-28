@@ -1,14 +1,16 @@
 from dataclasses import dataclass, field
-
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 
 
 @dataclass
 class ChaptersUpdatePayloadFile:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    file: str = field(default=None, metadata={'multipart_form': { 'field_name': 'file' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    file: str = field(metadata={'multipart_form': { 'field_name': 'file' }})
     
 
 @dataclass
 class ChaptersUpdatePayload:
-    file: ChaptersUpdatePayloadFile = field(default=None, metadata={'multipart_form': { 'file': True }})
+    file: ChaptersUpdatePayloadFile = field(metadata={'multipart_form': { 'file': True }})
     

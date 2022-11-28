@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Inventory } from "./inventory";
+
 
 
 // ListInventoriesResponse
@@ -8,9 +8,9 @@ import { Inventory } from "./inventory";
  * A response message for listing inventory data for all VMs in a specified location.
 **/
 export class ListInventoriesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inventories", elemType: shared.Inventory })
+  @SpeakeasyMetadata({ data: "json, name=inventories", elemType: Inventory })
   inventories?: Inventory[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

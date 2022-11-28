@@ -1,5 +1,7 @@
 package shared
 
+// LabelCounters
+// Provides a breakdown of the number of objects labeled.
 type LabelCounters struct {
 	FailedNonRetryableError *int64 `json:"FailedNonRetryableError,omitempty"`
 	HumanLabeled            *int64 `json:"HumanLabeled,omitempty"`

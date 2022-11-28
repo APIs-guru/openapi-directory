@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IamPolicyAnalysis } from "./iampolicyanalysis";
 import { GoogleCloudAssetV1p4beta1AnalysisState } from "./googlecloudassetv1p4beta1analysisstate";
-import { IamPolicyAnalysis } from "./iampolicyanalysis";
+
 
 
 // AnalyzeIamPolicyResponse
@@ -10,15 +9,15 @@ import { IamPolicyAnalysis } from "./iampolicyanalysis";
  * A response message for AssetService.AnalyzeIamPolicy.
 **/
 export class AnalyzeIamPolicyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fullyExplored" })
+  @SpeakeasyMetadata({ data: "json, name=fullyExplored" })
   fullyExplored?: boolean;
 
-  @Metadata({ data: "json, name=mainAnalysis" })
+  @SpeakeasyMetadata({ data: "json, name=mainAnalysis" })
   mainAnalysis?: IamPolicyAnalysis;
 
-  @Metadata({ data: "json, name=nonCriticalErrors", elemType: shared.GoogleCloudAssetV1p4beta1AnalysisState })
+  @SpeakeasyMetadata({ data: "json, name=nonCriticalErrors", elemType: GoogleCloudAssetV1p4beta1AnalysisState })
   nonCriticalErrors?: GoogleCloudAssetV1p4beta1AnalysisState[];
 
-  @Metadata({ data: "json, name=serviceAccountImpersonationAnalysis", elemType: shared.IamPolicyAnalysis })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccountImpersonationAnalysis", elemType: IamPolicyAnalysis })
   serviceAccountImpersonationAnalysis?: IamPolicyAnalysis[];
 }

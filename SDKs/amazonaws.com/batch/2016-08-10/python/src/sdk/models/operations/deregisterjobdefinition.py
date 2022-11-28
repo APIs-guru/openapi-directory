@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -17,20 +21,20 @@ class DeregisterJobDefinitionHeaders:
 @dataclass_json
 @dataclass
 class DeregisterJobDefinitionRequestBody:
-    job_definition: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobDefinition' }})
+    job_definition: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobDefinition') }})
     
 
 @dataclass
 class DeregisterJobDefinitionRequest:
-    headers: DeregisterJobDefinitionHeaders = field(default=None)
-    request: DeregisterJobDefinitionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DeregisterJobDefinitionHeaders = field()
+    request: DeregisterJobDefinitionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DeregisterJobDefinitionResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     deregister_job_definition_response: Optional[dict[str, Any]] = field(default=None)
     server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

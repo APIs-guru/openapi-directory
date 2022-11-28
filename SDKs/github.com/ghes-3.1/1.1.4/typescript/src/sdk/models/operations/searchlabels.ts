@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum SearchLabelsSortEnum {
-    Created = "created"
-,    Updated = "updated"
+    Created = "created",
+    Updated = "updated"
 }
 
 
 export class SearchLabelsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=order" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" })
   order?: shared.OrderEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" })
   q: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=repository_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=repository_id" })
   repositoryId: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: SearchLabelsSortEnum;
 }
 
 
-export class SearchLabelsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: SearchLabelsQueryParams;
-}
-
-
 export class SearchLabels200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=incomplete_results" })
+  @SpeakeasyMetadata({ data: "json, name=incomplete_results" })
   incompleteResults: boolean;
 
-  @Metadata({ data: "json, name=items", elemType: shared.LabelSearchResultItem })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: shared.LabelSearchResultItem })
   items: shared.LabelSearchResultItem[];
 
-  @Metadata({ data: "json, name=total_count" })
+  @SpeakeasyMetadata({ data: "json, name=total_count" })
   totalCount: number;
 }
 
 
+export class SearchLabelsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: SearchLabelsQueryParams;
+}
+
+
 export class SearchLabelsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   searchLabels200ApplicationJsonObject?: SearchLabels200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

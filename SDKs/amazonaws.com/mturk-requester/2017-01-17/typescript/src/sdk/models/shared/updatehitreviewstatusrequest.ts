@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateHitReviewStatusRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HITId" })
+  @SpeakeasyMetadata({ data: "json, name=HITId" })
   hitId: string;
 
-  @Metadata({ data: "json, name=Revert" })
+  @SpeakeasyMetadata({ data: "json, name=Revert" })
   revert?: boolean;
 }

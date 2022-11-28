@@ -1,15 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AcceleratorConfig } from "./acceleratorconfig";
 import { DiskConfig } from "./diskconfig";
 import { InstanceReference } from "./instancereference";
 import { ManagedGroupConfig } from "./managedgroupconfig";
 
+
 export enum InstanceGroupConfigPreemptibilityEnum {
-    PreemptibilityUnspecified = "PREEMPTIBILITY_UNSPECIFIED"
-,    NonPreemptible = "NON_PREEMPTIBLE"
-,    Preemptible = "PREEMPTIBLE"
-,    Spot = "SPOT"
+    PreemptibilityUnspecified = "PREEMPTIBILITY_UNSPECIFIED",
+    NonPreemptible = "NON_PREEMPTIBLE",
+    Preemptible = "PREEMPTIBLE",
+    Spot = "SPOT"
+}
+
+
+// InstanceGroupConfigInput
+/** 
+ * The config settings for Compute Engine resources in an instance group, such as a master or worker group.
+**/
+export class InstanceGroupConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=accelerators", elemType: AcceleratorConfig })
+  accelerators?: AcceleratorConfig[];
+
+  @SpeakeasyMetadata({ data: "json, name=diskConfig" })
+  diskConfig?: DiskConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=imageUri" })
+  imageUri?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=machineTypeUri" })
+  machineTypeUri?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=minCpuPlatform" })
+  minCpuPlatform?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=numInstances" })
+  numInstances?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=preemptibility" })
+  preemptibility?: InstanceGroupConfigPreemptibilityEnum;
 }
 
 
@@ -18,36 +46,36 @@ export enum InstanceGroupConfigPreemptibilityEnum {
  * The config settings for Compute Engine resources in an instance group, such as a master or worker group.
 **/
 export class InstanceGroupConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accelerators", elemType: shared.AcceleratorConfig })
+  @SpeakeasyMetadata({ data: "json, name=accelerators", elemType: AcceleratorConfig })
   accelerators?: AcceleratorConfig[];
 
-  @Metadata({ data: "json, name=diskConfig" })
+  @SpeakeasyMetadata({ data: "json, name=diskConfig" })
   diskConfig?: DiskConfig;
 
-  @Metadata({ data: "json, name=imageUri" })
+  @SpeakeasyMetadata({ data: "json, name=imageUri" })
   imageUri?: string;
 
-  @Metadata({ data: "json, name=instanceNames" })
+  @SpeakeasyMetadata({ data: "json, name=instanceNames" })
   instanceNames?: string[];
 
-  @Metadata({ data: "json, name=instanceReferences", elemType: shared.InstanceReference })
+  @SpeakeasyMetadata({ data: "json, name=instanceReferences", elemType: InstanceReference })
   instanceReferences?: InstanceReference[];
 
-  @Metadata({ data: "json, name=isPreemptible" })
+  @SpeakeasyMetadata({ data: "json, name=isPreemptible" })
   isPreemptible?: boolean;
 
-  @Metadata({ data: "json, name=machineTypeUri" })
+  @SpeakeasyMetadata({ data: "json, name=machineTypeUri" })
   machineTypeUri?: string;
 
-  @Metadata({ data: "json, name=managedGroupConfig" })
+  @SpeakeasyMetadata({ data: "json, name=managedGroupConfig" })
   managedGroupConfig?: ManagedGroupConfig;
 
-  @Metadata({ data: "json, name=minCpuPlatform" })
+  @SpeakeasyMetadata({ data: "json, name=minCpuPlatform" })
   minCpuPlatform?: string;
 
-  @Metadata({ data: "json, name=numInstances" })
+  @SpeakeasyMetadata({ data: "json, name=numInstances" })
   numInstances?: number;
 
-  @Metadata({ data: "json, name=preemptibility" })
+  @SpeakeasyMetadata({ data: "json, name=preemptibility" })
   preemptibility?: InstanceGroupConfigPreemptibilityEnum;
 }

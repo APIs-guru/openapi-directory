@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum IndexStatusInspectionResultCrawledAsEnum {
     CrawlingUserAgentUnspecified = "CRAWLING_USER_AGENT_UNSPECIFIED",
     Desktop = "DESKTOP",

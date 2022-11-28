@@ -31,7 +31,7 @@ type ManagedidentitiesProjectsLocationsGlobalDomainsCreateSecurity struct {
 type ManagedidentitiesProjectsLocationsGlobalDomainsCreateRequest struct {
 	PathParams  ManagedidentitiesProjectsLocationsGlobalDomainsCreatePathParams
 	QueryParams ManagedidentitiesProjectsLocationsGlobalDomainsCreateQueryParams
-	Request     *shared.Domain `request:"mediaType=application/json"`
+	Request     *shared.DomainInput `request:"mediaType=application/json"`
 	Security    ManagedidentitiesProjectsLocationsGlobalDomainsCreateSecurity
 }
 

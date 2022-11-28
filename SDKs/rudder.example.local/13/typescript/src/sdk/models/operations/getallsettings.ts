@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetAllSettings200ApplicationJsonActionEnum {
     GetAllSettings = "getAllSettings"
@@ -10,35 +11,35 @@ export enum GetAllSettings200ApplicationJsonActionEnum {
  * Information about the setting
 **/
 export class GetAllSettings200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=settings" })
+  @SpeakeasyMetadata({ data: "json, name=settings" })
   settings: any;
 }
 
 export enum GetAllSettings200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class GetAllSettings200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: GetAllSettings200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: GetAllSettings200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: GetAllSettings200ApplicationJsonResultEnum;
 }
 
 
 export class GetAllSettingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAllSettings200ApplicationJsonObject?: GetAllSettings200ApplicationJson;
 }

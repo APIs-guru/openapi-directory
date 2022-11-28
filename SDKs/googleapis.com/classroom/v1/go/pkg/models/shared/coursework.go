@@ -34,6 +34,8 @@ const (
 	CourseWorkWorkTypeEnumMultipleChoiceQuestion    CourseWorkWorkTypeEnum = "MULTIPLE_CHOICE_QUESTION"
 )
 
+// CourseWork
+// Course work created by a teacher for students of the course.
 type CourseWork struct {
 	AlternateLink              *string                                   `json:"alternateLink,omitempty"`
 	AssigneeMode               *CourseWorkAssigneeModeEnum               `json:"assigneeMode,omitempty"`

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SubmitContainerStateChangeResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acknowledgment" })
+  @SpeakeasyMetadata({ data: "json, name=acknowledgment" })
   acknowledgment?: string;
 }

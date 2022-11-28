@@ -1,9 +1,14 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class SampleUtterance:
-    utterance: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'utterance' }})
+    r"""SampleUtterance
+    A sample utterance that invokes an intent or respond to a slot elicitation prompt.
+    """
+    
+    utterance: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('utterance') }})
     

@@ -1,13 +1,22 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import devicerememberedstatustype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateDeviceStatusRequest:
-    access_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccessToken' }})
-    device_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceKey' }})
-    device_remembered_status: Optional[devicerememberedstatustype_enum.DeviceRememberedStatusTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceRememberedStatus' }})
+    r"""UpdateDeviceStatusRequest
+    Represents the request to update the device status.
+    """
+    
+    access_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AccessToken') }})
+    device_key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceKey') }})
+    device_remembered_status: Optional[DeviceRememberedStatusTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceRememberedStatus') }})
     

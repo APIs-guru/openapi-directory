@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetDevicePositionPathParams:
-    device_id: str = field(default=None, metadata={'path_param': { 'field_name': 'DeviceId', 'style': 'simple', 'explode': False }})
-    tracker_name: str = field(default=None, metadata={'path_param': { 'field_name': 'TrackerName', 'style': 'simple', 'explode': False }})
+    device_id: str = field(metadata={'path_param': { 'field_name': 'DeviceId', 'style': 'simple', 'explode': False }})
+    tracker_name: str = field(metadata={'path_param': { 'field_name': 'TrackerName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,18 +25,18 @@ class GetDevicePositionHeaders:
 
 @dataclass
 class GetDevicePositionRequest:
-    path_params: GetDevicePositionPathParams = field(default=None)
-    headers: GetDevicePositionHeaders = field(default=None)
+    headers: GetDevicePositionHeaders = field()
+    path_params: GetDevicePositionPathParams = field()
     
 
 @dataclass
 class GetDevicePositionResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_device_position_response: Optional[shared.GetDevicePositionResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

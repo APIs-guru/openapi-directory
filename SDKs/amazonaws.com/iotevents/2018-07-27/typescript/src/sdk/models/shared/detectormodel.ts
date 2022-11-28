@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DetectorModelConfiguration } from "./detectormodelconfiguration";
 import { DetectorModelDefinition } from "./detectormodeldefinition";
+
 
 
 // DetectorModel
@@ -8,9 +9,9 @@ import { DetectorModelDefinition } from "./detectormodeldefinition";
  * Information about the detector model.
 **/
 export class DetectorModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detectorModelConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=detectorModelConfiguration" })
   detectorModelConfiguration?: DetectorModelConfiguration;
 
-  @Metadata({ data: "json, name=detectorModelDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=detectorModelDefinition" })
   detectorModelDefinition?: DetectorModelDefinition;
 }

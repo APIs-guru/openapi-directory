@@ -1,5 +1,7 @@
 package shared
 
+// AwsIamAccessKeyDetails
+// IAM access key details related to a finding.
 type AwsIamAccessKeyDetails struct {
 	AccessKeyID    *string                        `json:"AccessKeyId,omitempty"`
 	AccountID      *string                        `json:"AccountId,omitempty"`

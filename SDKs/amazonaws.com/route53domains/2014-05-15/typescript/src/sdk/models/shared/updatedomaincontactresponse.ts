@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateDomainContactResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The UpdateDomainContact response includes the following element.
 **/
 export class UpdateDomainContactResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OperationId" })
+  @SpeakeasyMetadata({ data: "json, name=OperationId" })
   operationId: string;
 }

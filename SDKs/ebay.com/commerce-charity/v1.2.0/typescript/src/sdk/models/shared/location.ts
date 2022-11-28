@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Address } from "./address";
 import { GeoCoordinates } from "./geocoordinates";
 
 
+
 export class Location extends SpeakeasyBase {
-  @Metadata({ data: "json, name=address" })
+  @SpeakeasyMetadata({ data: "json, name=address" })
   address?: Address;
 
-  @Metadata({ data: "json, name=geoCoordinates" })
+  @SpeakeasyMetadata({ data: "json, name=geoCoordinates" })
   geoCoordinates?: GeoCoordinates;
 }

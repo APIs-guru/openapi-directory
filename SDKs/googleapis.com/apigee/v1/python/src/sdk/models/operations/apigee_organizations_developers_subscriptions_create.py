@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ApigeeOrganizationsDevelopersSubscriptionsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ApigeeOrganizationsDevelopersSubscriptionsCreateQueryParams:
 
 @dataclass
 class ApigeeOrganizationsDevelopersSubscriptionsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ApigeeOrganizationsDevelopersSubscriptionsCreateRequest:
-    path_params: ApigeeOrganizationsDevelopersSubscriptionsCreatePathParams = field(default=None)
-    query_params: ApigeeOrganizationsDevelopersSubscriptionsCreateQueryParams = field(default=None)
-    request: Optional[shared.GoogleCloudApigeeV1DeveloperSubscription] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ApigeeOrganizationsDevelopersSubscriptionsCreateSecurity = field(default=None)
+    path_params: ApigeeOrganizationsDevelopersSubscriptionsCreatePathParams = field()
+    query_params: ApigeeOrganizationsDevelopersSubscriptionsCreateQueryParams = field()
+    security: ApigeeOrganizationsDevelopersSubscriptionsCreateSecurity = field()
+    request: Optional[shared.GoogleCloudApigeeV1DeveloperSubscriptionInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ApigeeOrganizationsDevelopersSubscriptionsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_apigee_v1_developer_subscription: Optional[shared.GoogleCloudApigeeV1DeveloperSubscription] = field(default=None)
-    status_code: int = field(default=None)
     

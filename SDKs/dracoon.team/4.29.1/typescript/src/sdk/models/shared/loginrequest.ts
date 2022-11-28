@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum LoginRequestAuthTypeEnum {
-    Basic = "basic"
-,    ActiveDirectory = "active_directory"
-,    Radius = "radius"
+    Basic = "basic",
+    ActiveDirectory = "active_directory",
+    Radius = "radius"
 }
 
 
@@ -12,24 +13,24 @@ export enum LoginRequestAuthTypeEnum {
  * Request model for performing an authentication
 **/
 export class LoginRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authType" })
+  @SpeakeasyMetadata({ data: "json, name=authType" })
   authType?: LoginRequestAuthTypeEnum;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=login" })
+  @SpeakeasyMetadata({ data: "json, name=login" })
   login?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token?: string;
 
-  @Metadata({ data: "json, name=userName" })
+  @SpeakeasyMetadata({ data: "json, name=userName" })
   userName?: string;
 }

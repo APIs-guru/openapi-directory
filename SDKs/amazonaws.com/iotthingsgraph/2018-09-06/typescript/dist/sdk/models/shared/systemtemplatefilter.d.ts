@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SystemTemplateFilterNameEnum } from "./systemtemplatefilternameenum";
 /**
  * An object that filters a system search.

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CopyCommand
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes a <code>COPY</code> command for Amazon Redshift.
 **/
 export class CopyCommand extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CopyOptions" })
+  @SpeakeasyMetadata({ data: "json, name=CopyOptions" })
   copyOptions?: string;
 
-  @Metadata({ data: "json, name=DataTableColumns" })
+  @SpeakeasyMetadata({ data: "json, name=DataTableColumns" })
   dataTableColumns?: string;
 
-  @Metadata({ data: "json, name=DataTableName" })
+  @SpeakeasyMetadata({ data: "json, name=DataTableName" })
   dataTableName: string;
 }

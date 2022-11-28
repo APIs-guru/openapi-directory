@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CreateFolderRequest
+// Request model for creating a folder
 type CreateFolderRequest struct {
 	Name                  string     `json:"name"`
 	Notes                 *string    `json:"notes,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// UserProfile
+// Global information for a user.
 type UserProfile struct {
 	EmailAddress    *string            `json:"emailAddress,omitempty"`
 	ID              *string            `json:"id,omitempty"`

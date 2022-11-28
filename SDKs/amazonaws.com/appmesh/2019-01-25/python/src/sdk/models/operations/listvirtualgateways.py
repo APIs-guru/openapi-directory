@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListVirtualGatewaysPathParams:
-    mesh_name: str = field(default=None, metadata={'path_param': { 'field_name': 'meshName', 'style': 'simple', 'explode': False }})
+    mesh_name: str = field(metadata={'path_param': { 'field_name': 'meshName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +31,20 @@ class ListVirtualGatewaysHeaders:
 
 @dataclass
 class ListVirtualGatewaysRequest:
-    path_params: ListVirtualGatewaysPathParams = field(default=None)
-    query_params: ListVirtualGatewaysQueryParams = field(default=None)
-    headers: ListVirtualGatewaysHeaders = field(default=None)
+    headers: ListVirtualGatewaysHeaders = field()
+    path_params: ListVirtualGatewaysPathParams = field()
+    query_params: ListVirtualGatewaysQueryParams = field()
     
 
 @dataclass
 class ListVirtualGatewaysResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
     list_virtual_gateways_output: Optional[shared.ListVirtualGatewaysOutput] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

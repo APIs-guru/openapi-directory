@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetDistrictAdminPathParams = /** @class */ (function (_super) {
     __extends(GetDistrictAdminPathParams, _super);
@@ -30,7 +30,7 @@ var GetDistrictAdminPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], GetDistrictAdminPathParams.prototype, "id", void 0);
     return GetDistrictAdminPathParams;
@@ -42,7 +42,7 @@ var GetDistrictAdminRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDistrictAdminPathParams)
     ], GetDistrictAdminRequest.prototype, "pathParams", void 0);
     return GetDistrictAdminRequest;
@@ -54,19 +54,19 @@ var GetDistrictAdminResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDistrictAdminResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.DistrictAdminResponse)
     ], GetDistrictAdminResponse.prototype, "districtAdminResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.NotFound)
     ], GetDistrictAdminResponse.prototype, "notFound", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDistrictAdminResponse.prototype, "statusCode", void 0);
     return GetDistrictAdminResponse;

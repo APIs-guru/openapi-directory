@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class ActionsCreateRemoveTokenForOrgPathParams:
-    org: str = field(default=None, metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
+    org: str = field(metadata={'path_param': { 'field_name': 'org', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ActionsCreateRemoveTokenForOrgRequest:
-    path_params: ActionsCreateRemoveTokenForOrgPathParams = field(default=None)
+    path_params: ActionsCreateRemoveTokenForOrgPathParams = field()
     
 
 @dataclass
 class ActionsCreateRemoveTokenForOrgResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     authentication_token: Optional[shared.AuthenticationToken] = field(default=None)
     

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum NodePoolRepairActionEnum {
-    RepairActionUnspecified = "REPAIR_ACTION_UNSPECIFIED"
-,    Delete = "DELETE"
+    RepairActionUnspecified = "REPAIR_ACTION_UNSPECIFIED",
+    Delete = "DELETE"
 }
 
 
@@ -11,12 +12,12 @@ export enum NodePoolRepairActionEnum {
  * indicating a list of workers of same type
 **/
 export class NodePool extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=instanceNames" })
+  @SpeakeasyMetadata({ data: "json, name=instanceNames" })
   instanceNames?: string[];
 
-  @Metadata({ data: "json, name=repairAction" })
+  @SpeakeasyMetadata({ data: "json, name=repairAction" })
   repairAction?: NodePoolRepairActionEnum;
 }

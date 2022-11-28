@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import projectiontype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Projection:
-    non_key_attributes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NonKeyAttributes' }})
-    projection_type: Optional[projectiontype_enum.ProjectionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProjectionType' }})
+    r"""Projection
+    Represents attributes that are copied (projected) from the table into an index. These are in addition to the primary key attributes and index key attributes, which are automatically projected.
+    """
+    
+    non_key_attributes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NonKeyAttributes') }})
+    projection_type: Optional[ProjectionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProjectionType') }})
     

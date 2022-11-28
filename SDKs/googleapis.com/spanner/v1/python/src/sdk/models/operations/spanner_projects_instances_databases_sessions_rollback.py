@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SpannerProjectsInstancesDatabasesSessionsRollbackPathParams:
-    session: str = field(default=None, metadata={'path_param': { 'field_name': 'session', 'style': 'simple', 'explode': False }})
+    session: str = field(metadata={'path_param': { 'field_name': 'session', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class SpannerProjectsInstancesDatabasesSessionsRollbackQueryParams:
 
 @dataclass
 class SpannerProjectsInstancesDatabasesSessionsRollbackSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SpannerProjectsInstancesDatabasesSessionsRollbackSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class SpannerProjectsInstancesDatabasesSessionsRollbackSecurity:
 
 @dataclass
 class SpannerProjectsInstancesDatabasesSessionsRollbackRequest:
-    path_params: SpannerProjectsInstancesDatabasesSessionsRollbackPathParams = field(default=None)
-    query_params: SpannerProjectsInstancesDatabasesSessionsRollbackQueryParams = field(default=None)
+    path_params: SpannerProjectsInstancesDatabasesSessionsRollbackPathParams = field()
+    query_params: SpannerProjectsInstancesDatabasesSessionsRollbackQueryParams = field()
+    security: SpannerProjectsInstancesDatabasesSessionsRollbackSecurity = field()
     request: Optional[shared.RollbackRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: SpannerProjectsInstancesDatabasesSessionsRollbackSecurity = field(default=None)
     
 
 @dataclass
 class SpannerProjectsInstancesDatabasesSessionsRollbackResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

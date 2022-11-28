@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SyslogEvent
@@ -6,69 +7,69 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Syslog event information
 **/
 export class SyslogEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attribute1" })
+  @SpeakeasyMetadata({ data: "json, name=attribute1" })
   attribute1?: string;
 
-  @Metadata({ data: "json, name=attribute2" })
+  @SpeakeasyMetadata({ data: "json, name=attribute2" })
   attribute2?: string;
 
-  @Metadata({ data: "json, name=attribute3" })
+  @SpeakeasyMetadata({ data: "json, name=attribute3" })
   attribute3?: string;
 
-  @Metadata({ data: "json, name=authParentSource" })
+  @SpeakeasyMetadata({ data: "json, name=authParentSource" })
   authParentSource?: string;
 
-  @Metadata({ data: "json, name=authParentTarget" })
+  @SpeakeasyMetadata({ data: "json, name=authParentTarget" })
   authParentTarget?: string;
 
-  @Metadata({ data: "json, name=customerId" })
+  @SpeakeasyMetadata({ data: "json, name=customerId" })
   customerId?: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=objectId1" })
+  @SpeakeasyMetadata({ data: "json, name=objectId1" })
   objectId1?: number;
 
-  @Metadata({ data: "json, name=objectId2" })
+  @SpeakeasyMetadata({ data: "json, name=objectId2" })
   objectId2?: number;
 
-  @Metadata({ data: "json, name=objectName1" })
+  @SpeakeasyMetadata({ data: "json, name=objectName1" })
   objectName1?: string;
 
-  @Metadata({ data: "json, name=objectName2" })
+  @SpeakeasyMetadata({ data: "json, name=objectName2" })
   objectName2?: string;
 
-  @Metadata({ data: "json, name=objectType1" })
+  @SpeakeasyMetadata({ data: "json, name=objectType1" })
   objectType1?: number;
 
-  @Metadata({ data: "json, name=objectType2" })
+  @SpeakeasyMetadata({ data: "json, name=objectType2" })
   objectType2?: number;
 
-  @Metadata({ data: "json, name=operationId" })
+  @SpeakeasyMetadata({ data: "json, name=operationId" })
   operationId?: number;
 
-  @Metadata({ data: "json, name=operationName" })
+  @SpeakeasyMetadata({ data: "json, name=operationName" })
   operationName?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: number;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time: Date;
 
-  @Metadata({ data: "json, name=userClient" })
+  @SpeakeasyMetadata({ data: "json, name=userClient" })
   userClient?: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId: number;
 
-  @Metadata({ data: "json, name=userIp" })
+  @SpeakeasyMetadata({ data: "json, name=userIp" })
   userIp?: string;
 
-  @Metadata({ data: "json, name=userName" })
+  @SpeakeasyMetadata({ data: "json, name=userName" })
   userName?: string;
 }

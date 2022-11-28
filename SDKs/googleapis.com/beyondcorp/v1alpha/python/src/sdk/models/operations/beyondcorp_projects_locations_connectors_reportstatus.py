@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BeyondcorpProjectsLocationsConnectorsReportStatusPathParams:
-    connector: str = field(default=None, metadata={'path_param': { 'field_name': 'connector', 'style': 'simple', 'explode': False }})
+    connector: str = field(metadata={'path_param': { 'field_name': 'connector', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class BeyondcorpProjectsLocationsConnectorsReportStatusQueryParams:
 
 @dataclass
 class BeyondcorpProjectsLocationsConnectorsReportStatusSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BeyondcorpProjectsLocationsConnectorsReportStatusRequest:
-    path_params: BeyondcorpProjectsLocationsConnectorsReportStatusPathParams = field(default=None)
-    query_params: BeyondcorpProjectsLocationsConnectorsReportStatusQueryParams = field(default=None)
+    path_params: BeyondcorpProjectsLocationsConnectorsReportStatusPathParams = field()
+    query_params: BeyondcorpProjectsLocationsConnectorsReportStatusQueryParams = field()
+    security: BeyondcorpProjectsLocationsConnectorsReportStatusSecurity = field()
     request: Optional[shared.ReportStatusRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: BeyondcorpProjectsLocationsConnectorsReportStatusSecurity = field(default=None)
     
 
 @dataclass
 class BeyondcorpProjectsLocationsConnectorsReportStatusResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_operation: Optional[shared.GoogleLongrunningOperation] = field(default=None)
-    status_code: int = field(default=None)
     

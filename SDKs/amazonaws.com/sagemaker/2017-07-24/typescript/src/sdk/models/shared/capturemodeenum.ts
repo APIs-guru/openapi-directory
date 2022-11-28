@@ -1,6 +1,7 @@
 
 
+
 export enum CaptureModeEnum {
-    Input = "Input"
-,    Output = "Output"
+    Input = "Input",
+    Output = "Output"
 }

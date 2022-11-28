@@ -8,16 +8,16 @@ type PostAssetsReturnsRequestBody struct {
 	Assets []PostAssetsReturnsRequestBodyAssets `json:"assets"`
 }
 
-type PostAssetsReturnsRequest struct {
-	Request PostAssetsReturnsRequestBody `request:"mediaType=application/json"`
-}
-
 type PostAssetsReturns200ApplicationJSONAssets struct {
 	AssetReturns []float64 `json:"assetReturns"`
 }
 
 type PostAssetsReturns200ApplicationJSON struct {
 	Assets []PostAssetsReturns200ApplicationJSONAssets `json:"assets"`
+}
+
+type PostAssetsReturnsRequest struct {
+	Request PostAssetsReturnsRequestBody `request:"mediaType=application/json"`
 }
 
 type PostAssetsReturnsResponse struct {

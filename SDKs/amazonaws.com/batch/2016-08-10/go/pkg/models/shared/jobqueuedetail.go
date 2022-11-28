@@ -1,5 +1,7 @@
 package shared
 
+// JobQueueDetail
+// An object representing the details of an Batch job queue.
 type JobQueueDetail struct {
 	ComputeEnvironmentOrder []ComputeEnvironmentOrder `json:"computeEnvironmentOrder"`
 	JobQueueArn             string                    `json:"jobQueueArn"`

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Clustering } from "./clustering";
 import { ConnectionProperty } from "./connectionproperty";
 import { EncryptionConfiguration } from "./encryptionconfiguration";
@@ -12,106 +11,107 @@ import { TableSchema } from "./tableschema";
 import { TimePartitioning } from "./timepartitioning";
 
 
+
 export class JobConfigurationLoad extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowJaggedRows" })
+  @SpeakeasyMetadata({ data: "json, name=allowJaggedRows" })
   allowJaggedRows?: boolean;
 
-  @Metadata({ data: "json, name=allowQuotedNewlines" })
+  @SpeakeasyMetadata({ data: "json, name=allowQuotedNewlines" })
   allowQuotedNewlines?: boolean;
 
-  @Metadata({ data: "json, name=autodetect" })
+  @SpeakeasyMetadata({ data: "json, name=autodetect" })
   autodetect?: boolean;
 
-  @Metadata({ data: "json, name=clustering" })
+  @SpeakeasyMetadata({ data: "json, name=clustering" })
   clustering?: Clustering;
 
-  @Metadata({ data: "json, name=connectionProperties", elemType: shared.ConnectionProperty })
+  @SpeakeasyMetadata({ data: "json, name=connectionProperties", elemType: ConnectionProperty })
   connectionProperties?: ConnectionProperty[];
 
-  @Metadata({ data: "json, name=createDisposition" })
+  @SpeakeasyMetadata({ data: "json, name=createDisposition" })
   createDisposition?: string;
 
-  @Metadata({ data: "json, name=createSession" })
+  @SpeakeasyMetadata({ data: "json, name=createSession" })
   createSession?: boolean;
 
-  @Metadata({ data: "json, name=decimalTargetTypes" })
+  @SpeakeasyMetadata({ data: "json, name=decimalTargetTypes" })
   decimalTargetTypes?: string[];
 
-  @Metadata({ data: "json, name=destinationEncryptionConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=destinationEncryptionConfiguration" })
   destinationEncryptionConfiguration?: EncryptionConfiguration;
 
-  @Metadata({ data: "json, name=destinationTable" })
+  @SpeakeasyMetadata({ data: "json, name=destinationTable" })
   destinationTable?: TableReference;
 
-  @Metadata({ data: "json, name=destinationTableProperties" })
+  @SpeakeasyMetadata({ data: "json, name=destinationTableProperties" })
   destinationTableProperties?: DestinationTableProperties;
 
-  @Metadata({ data: "json, name=encoding" })
+  @SpeakeasyMetadata({ data: "json, name=encoding" })
   encoding?: string;
 
-  @Metadata({ data: "json, name=fieldDelimiter" })
+  @SpeakeasyMetadata({ data: "json, name=fieldDelimiter" })
   fieldDelimiter?: string;
 
-  @Metadata({ data: "json, name=hivePartitioningOptions" })
+  @SpeakeasyMetadata({ data: "json, name=hivePartitioningOptions" })
   hivePartitioningOptions?: HivePartitioningOptions;
 
-  @Metadata({ data: "json, name=ignoreUnknownValues" })
+  @SpeakeasyMetadata({ data: "json, name=ignoreUnknownValues" })
   ignoreUnknownValues?: boolean;
 
-  @Metadata({ data: "json, name=jsonExtension" })
+  @SpeakeasyMetadata({ data: "json, name=jsonExtension" })
   jsonExtension?: string;
 
-  @Metadata({ data: "json, name=maxBadRecords" })
+  @SpeakeasyMetadata({ data: "json, name=maxBadRecords" })
   maxBadRecords?: number;
 
-  @Metadata({ data: "json, name=nullMarker" })
+  @SpeakeasyMetadata({ data: "json, name=nullMarker" })
   nullMarker?: string;
 
-  @Metadata({ data: "json, name=parquetOptions" })
+  @SpeakeasyMetadata({ data: "json, name=parquetOptions" })
   parquetOptions?: ParquetOptions;
 
-  @Metadata({ data: "json, name=preserveAsciiControlCharacters" })
+  @SpeakeasyMetadata({ data: "json, name=preserveAsciiControlCharacters" })
   preserveAsciiControlCharacters?: boolean;
 
-  @Metadata({ data: "json, name=projectionFields" })
+  @SpeakeasyMetadata({ data: "json, name=projectionFields" })
   projectionFields?: string[];
 
-  @Metadata({ data: "json, name=quote" })
+  @SpeakeasyMetadata({ data: "json, name=quote" })
   quote?: string;
 
-  @Metadata({ data: "json, name=rangePartitioning" })
+  @SpeakeasyMetadata({ data: "json, name=rangePartitioning" })
   rangePartitioning?: RangePartitioning;
 
-  @Metadata({ data: "json, name=referenceFileSchemaUri" })
+  @SpeakeasyMetadata({ data: "json, name=referenceFileSchemaUri" })
   referenceFileSchemaUri?: string;
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: TableSchema;
 
-  @Metadata({ data: "json, name=schemaInline" })
+  @SpeakeasyMetadata({ data: "json, name=schemaInline" })
   schemaInline?: string;
 
-  @Metadata({ data: "json, name=schemaInlineFormat" })
+  @SpeakeasyMetadata({ data: "json, name=schemaInlineFormat" })
   schemaInlineFormat?: string;
 
-  @Metadata({ data: "json, name=schemaUpdateOptions" })
+  @SpeakeasyMetadata({ data: "json, name=schemaUpdateOptions" })
   schemaUpdateOptions?: string[];
 
-  @Metadata({ data: "json, name=skipLeadingRows" })
+  @SpeakeasyMetadata({ data: "json, name=skipLeadingRows" })
   skipLeadingRows?: number;
 
-  @Metadata({ data: "json, name=sourceFormat" })
+  @SpeakeasyMetadata({ data: "json, name=sourceFormat" })
   sourceFormat?: string;
 
-  @Metadata({ data: "json, name=sourceUris" })
+  @SpeakeasyMetadata({ data: "json, name=sourceUris" })
   sourceUris?: string[];
 
-  @Metadata({ data: "json, name=timePartitioning" })
+  @SpeakeasyMetadata({ data: "json, name=timePartitioning" })
   timePartitioning?: TimePartitioning;
 
-  @Metadata({ data: "json, name=useAvroLogicalTypes" })
+  @SpeakeasyMetadata({ data: "json, name=useAvroLogicalTypes" })
   useAvroLogicalTypes?: boolean;
 
-  @Metadata({ data: "json, name=writeDisposition" })
+  @SpeakeasyMetadata({ data: "json, name=writeDisposition" })
   writeDisposition?: string;
 }

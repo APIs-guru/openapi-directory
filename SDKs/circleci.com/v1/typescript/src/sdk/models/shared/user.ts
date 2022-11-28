@@ -1,85 +1,86 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class User extends SpeakeasyBase {
-  @Metadata({ data: "json, name=admin" })
+  @SpeakeasyMetadata({ data: "json, name=admin" })
   admin?: boolean;
 
-  @Metadata({ data: "json, name=all_emails" })
+  @SpeakeasyMetadata({ data: "json, name=all_emails" })
   allEmails?: string[];
 
-  @Metadata({ data: "json, name=analytics_id" })
+  @SpeakeasyMetadata({ data: "json, name=analytics_id" })
   analyticsId?: string;
 
-  @Metadata({ data: "json, name=avatar_url" })
+  @SpeakeasyMetadata({ data: "json, name=avatar_url" })
   avatarUrl?: string;
 
-  @Metadata({ data: "json, name=basic_email_prefs" })
+  @SpeakeasyMetadata({ data: "json, name=basic_email_prefs" })
   basicEmailPrefs?: string;
 
-  @Metadata({ data: "json, name=bitbucket" })
+  @SpeakeasyMetadata({ data: "json, name=bitbucket" })
   bitbucket?: number;
 
-  @Metadata({ data: "json, name=bitbucket_authorized" })
+  @SpeakeasyMetadata({ data: "json, name=bitbucket_authorized" })
   bitbucketAuthorized?: boolean;
 
-  @Metadata({ data: "json, name=containers" })
+  @SpeakeasyMetadata({ data: "json, name=containers" })
   containers?: number;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=days_left_in_trial" })
+  @SpeakeasyMetadata({ data: "json, name=days_left_in_trial" })
   daysLeftInTrial?: number;
 
-  @Metadata({ data: "json, name=dev_admin" })
+  @SpeakeasyMetadata({ data: "json, name=dev_admin" })
   devAdmin?: boolean;
 
-  @Metadata({ data: "json, name=enrolled_betas" })
+  @SpeakeasyMetadata({ data: "json, name=enrolled_betas" })
   enrolledBetas?: string[];
 
-  @Metadata({ data: "json, name=github_id" })
+  @SpeakeasyMetadata({ data: "json, name=github_id" })
   githubId?: number;
 
-  @Metadata({ data: "json, name=github_oauth_scopes" })
+  @SpeakeasyMetadata({ data: "json, name=github_oauth_scopes" })
   githubOauthScopes?: string[];
 
-  @Metadata({ data: "json, name=gravatar_id" })
+  @SpeakeasyMetadata({ data: "json, name=gravatar_id" })
   gravatarId?: number;
 
-  @Metadata({ data: "json, name=heroku_api_key" })
+  @SpeakeasyMetadata({ data: "json, name=heroku_api_key" })
   herokuApiKey?: string;
 
-  @Metadata({ data: "json, name=in_beta_program" })
+  @SpeakeasyMetadata({ data: "json, name=in_beta_program" })
   inBetaProgram?: boolean;
 
-  @Metadata({ data: "json, name=login" })
+  @SpeakeasyMetadata({ data: "json, name=login" })
   login?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=organization_prefs" })
+  @SpeakeasyMetadata({ data: "json, name=organization_prefs" })
   organizationPrefs?: Map<string, any>;
 
-  @Metadata({ data: "json, name=parallelism" })
+  @SpeakeasyMetadata({ data: "json, name=parallelism" })
   parallelism?: number;
 
-  @Metadata({ data: "json, name=plan" })
+  @SpeakeasyMetadata({ data: "json, name=plan" })
   plan?: string;
 
-  @Metadata({ data: "json, name=projects" })
+  @SpeakeasyMetadata({ data: "json, name=projects" })
   projects?: Map<string, any>;
 
-  @Metadata({ data: "json, name=pusher_id" })
+  @SpeakeasyMetadata({ data: "json, name=pusher_id" })
   pusherId?: string;
 
-  @Metadata({ data: "json, name=selected_email" })
+  @SpeakeasyMetadata({ data: "json, name=selected_email" })
   selectedEmail?: string;
 
-  @Metadata({ data: "json, name=sign_in_count" })
+  @SpeakeasyMetadata({ data: "json, name=sign_in_count" })
   signInCount?: number;
 
-  @Metadata({ data: "json, name=trial_end" })
+  @SpeakeasyMetadata({ data: "json, name=trial_end" })
   trialEnd?: Date;
 }

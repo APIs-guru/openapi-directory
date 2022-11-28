@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCommandsTypesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=deviceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deviceId" })
   deviceId?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=protocol" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=protocol" })
   protocol?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=textChannel" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=textChannel" })
   textChannel?: boolean;
 }
 
 
 export class GetCommandsTypesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetCommandsTypesQueryParams;
 }
 
 
 export class GetCommandsTypesResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.CommandType })
+  @SpeakeasyMetadata({ elemType: shared.CommandType })
   commandTypes?: shared.CommandType[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

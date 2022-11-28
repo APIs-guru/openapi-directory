@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import session
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListSessionsResponse:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
-    sessions: Optional[List[session.Session]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sessions' }})
+    r"""ListSessionsResponse
+    The response for ListSessions.
+    """
+    
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
+    sessions: Optional[List[Session]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sessions') }})
     

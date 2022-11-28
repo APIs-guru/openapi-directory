@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BuildSystemSharedDtoAgentStatus
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A DTO for an IAgentStatus
 **/
 export class BuildSystemSharedDtoAgentStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LastStatusUpdate, form, name=LastStatusUpdate;" })
+  @SpeakeasyMetadata({ data: "json, name=LastStatusUpdate, form, name=LastStatusUpdate;" })
   lastStatusUpdate?: Date;
 
-  @Metadata({ data: "json, name=Online, form, name=Online;" })
+  @SpeakeasyMetadata({ data: "json, name=Online, form, name=Online;" })
   online: boolean;
 }

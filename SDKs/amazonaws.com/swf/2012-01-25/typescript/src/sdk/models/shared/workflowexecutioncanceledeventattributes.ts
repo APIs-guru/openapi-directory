@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WorkflowExecutionCanceledEventAttributes
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides the details of the <code>WorkflowExecutionCanceled</code> event.
 **/
 export class WorkflowExecutionCanceledEventAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=decisionTaskCompletedEventId" })
+  @SpeakeasyMetadata({ data: "json, name=decisionTaskCompletedEventId" })
   decisionTaskCompletedEventId: number;
 
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: string;
 }

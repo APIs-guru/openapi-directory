@@ -22,45 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var FetchBoundariesSecurityOption1 = /** @class */ (function (_super) {
-    __extends(FetchBoundariesSecurityOption1, _super);
-    function FetchBoundariesSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKey)
-    ], FetchBoundariesSecurityOption1.prototype, "apiKey", void 0);
-    return FetchBoundariesSecurityOption1;
-}(SpeakeasyBase));
-export { FetchBoundariesSecurityOption1 };
-var FetchBoundariesSecurityOption2 = /** @class */ (function (_super) {
-    __extends(FetchBoundariesSecurityOption2, _super);
-    function FetchBoundariesSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", shared.SchemeOauth2AuthorizationCode)
-    ], FetchBoundariesSecurityOption2.prototype, "oauth2AuthorizationCode", void 0);
-    return FetchBoundariesSecurityOption2;
-}(SpeakeasyBase));
-export { FetchBoundariesSecurityOption2 };
 var FetchBoundariesSecurity = /** @class */ (function (_super) {
     __extends(FetchBoundariesSecurity, _super);
     function FetchBoundariesSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", FetchBoundariesSecurityOption1)
-    ], FetchBoundariesSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKey)
+    ], FetchBoundariesSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", FetchBoundariesSecurityOption2)
-    ], FetchBoundariesSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2AuthorizationCode)
+    ], FetchBoundariesSecurity.prototype, "oauth2AuthorizationCode", void 0);
     return FetchBoundariesSecurity;
 }(SpeakeasyBase));
 export { FetchBoundariesSecurity };
@@ -70,11 +46,11 @@ var FetchBoundariesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.BoundariesQuery)
     ], FetchBoundariesRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", FetchBoundariesSecurity)
     ], FetchBoundariesRequest.prototype, "security", void 0);
     return FetchBoundariesRequest;
@@ -86,23 +62,23 @@ var FetchBoundariesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], FetchBoundariesResponse.prototype, "boundaries", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], FetchBoundariesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], FetchBoundariesResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], FetchBoundariesResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], FetchBoundariesResponse.prototype, "statusCode", void 0);
     return FetchBoundariesResponse;

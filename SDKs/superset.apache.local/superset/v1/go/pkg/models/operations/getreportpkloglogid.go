@@ -17,12 +17,6 @@ type GetReportPkLogLogIDSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetReportPkLogLogIDRequest struct {
-	PathParams  GetReportPkLogLogIDPathParams
-	QueryParams GetReportPkLogLogIDQueryParams
-	Security    GetReportPkLogLogIDSecurity
-}
-
 type GetReportPkLogLogID200ApplicationJSON struct {
 	ID     *string                              `json:"id,omitempty"`
 	Result *shared.ReportExecutionLogRestAPIGet `json:"result,omitempty"`
@@ -46,6 +40,12 @@ type GetReportPkLogLogID422ApplicationJSON struct {
 
 type GetReportPkLogLogID500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetReportPkLogLogIDRequest struct {
+	PathParams  GetReportPkLogLogIDPathParams
+	QueryParams GetReportPkLogLogIDQueryParams
+	Security    GetReportPkLogLogIDSecurity
 }
 
 type GetReportPkLogLogIDResponse struct {

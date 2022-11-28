@@ -19,6 +19,8 @@ type DescribeBucketsHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// DescribeBucketsRequestBodySortCriteria
+// Specifies criteria for sorting the results of a query for information about S3 buckets.
 type DescribeBucketsRequestBodySortCriteria struct {
 	AttributeName *string             `json:"attributeName,omitempty"`
 	OrderBy       *shared.OrderByEnum `json:"orderBy,omitempty"`

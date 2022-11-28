@@ -1,42 +1,43 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PlayerSeasonSplitStatsFormatEnum {
-    Xml = "XML"
-,    Json = "JSON"
+    Xml = "XML",
+    Json = "JSON"
 }
 
 export enum PlayerSeasonSplitStatsSplitEnum {
-    L = "L"
-,    R = "R"
-,    S = "S"
+    L = "L",
+    R = "R",
+    S = "S"
 }
 
 
 export class PlayerSeasonSplitStatsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: PlayerSeasonSplitStatsFormatEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=season" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=season" })
   season: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=split" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=split" })
   split: PlayerSeasonSplitStatsSplitEnum;
 }
 
 
 export class PlayerSeasonSplitStatsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PlayerSeasonSplitStatsPathParams;
 }
 
 
 export class PlayerSeasonSplitStatsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   playerSeasons?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

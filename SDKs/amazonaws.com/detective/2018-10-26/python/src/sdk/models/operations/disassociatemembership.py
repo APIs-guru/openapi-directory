@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
@@ -17,21 +21,21 @@ class DisassociateMembershipHeaders:
 @dataclass_json
 @dataclass
 class DisassociateMembershipRequestBody:
-    graph_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GraphArn' }})
+    graph_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('GraphArn') }})
     
 
 @dataclass
 class DisassociateMembershipRequest:
-    headers: DisassociateMembershipHeaders = field(default=None)
-    request: DisassociateMembershipRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DisassociateMembershipHeaders = field()
+    request: DisassociateMembershipRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisassociateMembershipResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Segment
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A segment in a structured format.
 **/
 export class Segment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: Map<string, string>;
 
-  @Metadata({ data: "json, name=segmentId" })
+  @SpeakeasyMetadata({ data: "json, name=segmentId" })
   segmentId?: string;
 
-  @Metadata({ data: "json, name=setId" })
+  @SpeakeasyMetadata({ data: "json, name=setId" })
   setId?: string;
 }

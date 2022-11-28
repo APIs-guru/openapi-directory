@@ -1,0 +1,31 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { AcudfValueDto } from "./acudfvaluedto";
+import { ProductTranQueryDto } from "./producttranquerydto";
+export declare class SalesCreditNoteQueryDto extends SpeakeasyBase {
+    acCode?: string;
+    bookTranTypeId?: number;
+    customFields?: AcudfValueDto[];
+    customerId?: number;
+    deliveryTo?: string[];
+    details?: string;
+    entryDate?: Date;
+    id?: number;
+    loType?: string;
+    netGoods?: number;
+    netServices?: number;
+    note?: string;
+    ourReference?: string;
+    procDate?: Date;
+    productTrans?: ProductTranQueryDto[];
+    quoteId?: number;
+    reference?: string;
+    saleRepCode?: string;
+    saleRepId?: number;
+    timestamp?: string;
+    total?: number;
+    totalNet?: number;
+    totalVat?: number;
+    unpaid?: number;
+    vatTypeId?: number;
+    yourReference?: string;
+}

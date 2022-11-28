@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class MigrationsUnlockRepoForAuthenticatedUserPathParams:
-    migration_id: int = field(default=None, metadata={'path_param': { 'field_name': 'migration_id', 'style': 'simple', 'explode': False }})
-    repo_name: str = field(default=None, metadata={'path_param': { 'field_name': 'repo_name', 'style': 'simple', 'explode': False }})
+    migration_id: int = field(metadata={'path_param': { 'field_name': 'migration_id', 'style': 'simple', 'explode': False }})
+    repo_name: str = field(metadata={'path_param': { 'field_name': 'repo_name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class MigrationsUnlockRepoForAuthenticatedUserRequest:
-    path_params: MigrationsUnlockRepoForAuthenticatedUserPathParams = field(default=None)
+    path_params: MigrationsUnlockRepoForAuthenticatedUserPathParams = field()
     
 
 @dataclass
 class MigrationsUnlockRepoForAuthenticatedUserResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     

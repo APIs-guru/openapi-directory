@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// App
+//
+//	Represents the different branches of a repository for building, deploying, and hosting an Amplify app.
 type App struct {
 	AppArn                     string                    `json:"appArn"`
 	AppID                      string                    `json:"appId"`

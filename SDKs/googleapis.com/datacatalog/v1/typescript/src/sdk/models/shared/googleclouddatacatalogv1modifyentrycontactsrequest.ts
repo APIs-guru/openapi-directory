@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDatacatalogV1Contacts } from "./googleclouddatacatalogv1contacts";
+
 
 
 // GoogleCloudDatacatalogV1ModifyEntryContactsRequest
@@ -7,6 +8,6 @@ import { GoogleCloudDatacatalogV1Contacts } from "./googleclouddatacatalogv1cont
  * Request message for ModifyEntryContacts.
 **/
 export class GoogleCloudDatacatalogV1ModifyEntryContactsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contacts" })
+  @SpeakeasyMetadata({ data: "json, name=contacts" })
   contacts?: GoogleCloudDatacatalogV1Contacts;
 }

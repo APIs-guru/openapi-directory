@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetAuditlogsPathParams = /** @class */ (function (_super) {
     __extends(GetAuditlogsPathParams, _super);
@@ -30,7 +30,7 @@ var GetAuditlogsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=productId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=productId" }),
         __metadata("design:type", String)
     ], GetAuditlogsPathParams.prototype, "productId", void 0);
     return GetAuditlogsPathParams;
@@ -42,23 +42,23 @@ var GetAuditlogsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=auditLogType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=auditLogType" }),
         __metadata("design:type", Map)
     ], GetAuditlogsQueryParams.prototype, "auditLogType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=configId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=configId" }),
         __metadata("design:type", String)
     ], GetAuditlogsQueryParams.prototype, "configId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=environmentId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=environmentId" }),
         __metadata("design:type", String)
     ], GetAuditlogsQueryParams.prototype, "environmentId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fromUtcDateTime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromUtcDateTime" }),
         __metadata("design:type", Date)
     ], GetAuditlogsQueryParams.prototype, "fromUtcDateTime", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=toUtcDateTime" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=toUtcDateTime" }),
         __metadata("design:type", Date)
     ], GetAuditlogsQueryParams.prototype, "toUtcDateTime", void 0);
     return GetAuditlogsQueryParams;
@@ -70,11 +70,11 @@ var GetAuditlogsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAuditlogsPathParams)
     ], GetAuditlogsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAuditlogsQueryParams)
     ], GetAuditlogsRequest.prototype, "queryParams", void 0);
     return GetAuditlogsRequest;
@@ -86,15 +86,15 @@ var GetAuditlogsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ elemType: shared.AuditLogItemModel }),
+        SpeakeasyMetadata({ elemType: shared.AuditLogItemModel }),
         __metadata("design:type", Array)
     ], GetAuditlogsResponse.prototype, "auditLogItemModels", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAuditlogsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAuditlogsResponse.prototype, "statusCode", void 0);
     return GetAuditlogsResponse;

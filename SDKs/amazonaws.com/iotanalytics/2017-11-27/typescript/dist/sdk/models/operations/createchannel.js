@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateChannelHeaders = /** @class */ (function (_super) {
     __extends(CreateChannelHeaders, _super);
@@ -30,31 +30,31 @@ var CreateChannelHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateChannelHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateChannelHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateChannelHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateChannelHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateChannelHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateChannelHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateChannelHeaders.prototype, "xAmzSignedHeaders", void 0);
     return CreateChannelHeaders;
@@ -70,11 +70,11 @@ var CreateChannelRequestBodyChannelStorage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customerManagedS3" }),
+        SpeakeasyMetadata({ data: "json, name=customerManagedS3" }),
         __metadata("design:type", shared.CustomerManagedChannelS3Storage)
     ], CreateChannelRequestBodyChannelStorage.prototype, "customerManagedS3", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceManagedS3" }),
+        SpeakeasyMetadata({ data: "json, name=serviceManagedS3" }),
         __metadata("design:type", Map)
     ], CreateChannelRequestBodyChannelStorage.prototype, "serviceManagedS3", void 0);
     return CreateChannelRequestBodyChannelStorage;
@@ -90,11 +90,11 @@ var CreateChannelRequestBodyRetentionPeriod = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=numberOfDays" }),
+        SpeakeasyMetadata({ data: "json, name=numberOfDays" }),
         __metadata("design:type", Number)
     ], CreateChannelRequestBodyRetentionPeriod.prototype, "numberOfDays", void 0);
     __decorate([
-        Metadata({ data: "json, name=unlimited" }),
+        SpeakeasyMetadata({ data: "json, name=unlimited" }),
         __metadata("design:type", Boolean)
     ], CreateChannelRequestBodyRetentionPeriod.prototype, "unlimited", void 0);
     return CreateChannelRequestBodyRetentionPeriod;
@@ -106,19 +106,19 @@ var CreateChannelRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=channelName" }),
+        SpeakeasyMetadata({ data: "json, name=channelName" }),
         __metadata("design:type", String)
     ], CreateChannelRequestBody.prototype, "channelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=channelStorage" }),
+        SpeakeasyMetadata({ data: "json, name=channelStorage" }),
         __metadata("design:type", CreateChannelRequestBodyChannelStorage)
     ], CreateChannelRequestBody.prototype, "channelStorage", void 0);
     __decorate([
-        Metadata({ data: "json, name=retentionPeriod" }),
+        SpeakeasyMetadata({ data: "json, name=retentionPeriod" }),
         __metadata("design:type", CreateChannelRequestBodyRetentionPeriod)
     ], CreateChannelRequestBody.prototype, "retentionPeriod", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=tags", elemType: shared.Tag }),
         __metadata("design:type", Array)
     ], CreateChannelRequestBody.prototype, "tags", void 0);
     return CreateChannelRequestBody;
@@ -130,11 +130,11 @@ var CreateChannelRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateChannelHeaders)
     ], CreateChannelRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateChannelRequestBody)
     ], CreateChannelRequest.prototype, "request", void 0);
     return CreateChannelRequest;
@@ -146,39 +146,39 @@ var CreateChannelResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateChannelResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreateChannelResponse)
     ], CreateChannelResponse.prototype, "createChannelResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateChannelResponse.prototype, "internalFailureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateChannelResponse.prototype, "invalidRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateChannelResponse.prototype, "limitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateChannelResponse.prototype, "resourceAlreadyExistsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateChannelResponse.prototype, "serviceUnavailableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateChannelResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateChannelResponse.prototype, "throttlingException", void 0);
     return CreateChannelResponse;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AdsensehostAccountsAdunitsInsertPathParams = /** @class */ (function (_super) {
     __extends(AdsensehostAccountsAdunitsInsertPathParams, _super);
@@ -30,11 +30,11 @@ var AdsensehostAccountsAdunitsInsertPathParams = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=accountId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accountId" }),
         __metadata("design:type", String)
     ], AdsensehostAccountsAdunitsInsertPathParams.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=adClientId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=adClientId" }),
         __metadata("design:type", String)
     ], AdsensehostAccountsAdunitsInsertPathParams.prototype, "adClientId", void 0);
     return AdsensehostAccountsAdunitsInsertPathParams;
@@ -46,31 +46,31 @@ var AdsensehostAccountsAdunitsInsertQueryParams = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], AdsensehostAccountsAdunitsInsertQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], AdsensehostAccountsAdunitsInsertQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], AdsensehostAccountsAdunitsInsertQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], AdsensehostAccountsAdunitsInsertQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], AdsensehostAccountsAdunitsInsertQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], AdsensehostAccountsAdunitsInsertQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
         __metadata("design:type", String)
     ], AdsensehostAccountsAdunitsInsertQueryParams.prototype, "userIp", void 0);
     return AdsensehostAccountsAdunitsInsertQueryParams;
@@ -82,11 +82,11 @@ var AdsensehostAccountsAdunitsInsertSecurity = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], AdsensehostAccountsAdunitsInsertSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], AdsensehostAccountsAdunitsInsertSecurity.prototype, "oauth2c", void 0);
     return AdsensehostAccountsAdunitsInsertSecurity;
@@ -98,19 +98,19 @@ var AdsensehostAccountsAdunitsInsertRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AdsensehostAccountsAdunitsInsertPathParams)
     ], AdsensehostAccountsAdunitsInsertRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AdsensehostAccountsAdunitsInsertQueryParams)
     ], AdsensehostAccountsAdunitsInsertRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.AdUnit)
     ], AdsensehostAccountsAdunitsInsertRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AdsensehostAccountsAdunitsInsertSecurity)
     ], AdsensehostAccountsAdunitsInsertRequest.prototype, "security", void 0);
     return AdsensehostAccountsAdunitsInsertRequest;
@@ -122,15 +122,15 @@ var AdsensehostAccountsAdunitsInsertResponse = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AdUnit)
     ], AdsensehostAccountsAdunitsInsertResponse.prototype, "adUnit", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AdsensehostAccountsAdunitsInsertResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AdsensehostAccountsAdunitsInsertResponse.prototype, "statusCode", void 0);
     return AdsensehostAccountsAdunitsInsertResponse;

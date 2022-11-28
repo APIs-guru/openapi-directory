@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AdditionalClientEmailApiModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Email" })
+  @SpeakeasyMetadata({ data: "json, name=Email" })
   email?: string;
 }

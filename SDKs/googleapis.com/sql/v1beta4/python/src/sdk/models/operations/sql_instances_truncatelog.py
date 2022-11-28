@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class SQLInstancesTruncateLogPathParams:
-    instance: str = field(default=None, metadata={'path_param': { 'field_name': 'instance', 'style': 'simple', 'explode': False }})
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    instance: str = field(metadata={'path_param': { 'field_name': 'instance', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class SQLInstancesTruncateLogQueryParams:
 
 @dataclass
 class SQLInstancesTruncateLogSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SQLInstancesTruncateLogSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,15 +45,15 @@ class SQLInstancesTruncateLogSecurity:
 
 @dataclass
 class SQLInstancesTruncateLogRequest:
-    path_params: SQLInstancesTruncateLogPathParams = field(default=None)
-    query_params: SQLInstancesTruncateLogQueryParams = field(default=None)
+    path_params: SQLInstancesTruncateLogPathParams = field()
+    query_params: SQLInstancesTruncateLogQueryParams = field()
+    security: SQLInstancesTruncateLogSecurity = field()
     request: Optional[shared.InstancesTruncateLogRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: SQLInstancesTruncateLogSecurity = field(default=None)
     
 
 @dataclass
 class SQLInstancesTruncateLogResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

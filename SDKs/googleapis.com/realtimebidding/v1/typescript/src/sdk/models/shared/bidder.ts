@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Bidder
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Bidder settings.
 **/
 export class Bidder extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bypassNonguaranteedDealsPretargeting" })
+  @SpeakeasyMetadata({ data: "json, name=bypassNonguaranteedDealsPretargeting" })
   bypassNonguaranteedDealsPretargeting?: boolean;
 
-  @Metadata({ data: "json, name=cookieMatchingNetworkId" })
+  @SpeakeasyMetadata({ data: "json, name=cookieMatchingNetworkId" })
   cookieMatchingNetworkId?: string;
 
-  @Metadata({ data: "json, name=cookieMatchingUrl" })
+  @SpeakeasyMetadata({ data: "json, name=cookieMatchingUrl" })
   cookieMatchingUrl?: string;
 
-  @Metadata({ data: "json, name=dealsBillingId" })
+  @SpeakeasyMetadata({ data: "json, name=dealsBillingId" })
   dealsBillingId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

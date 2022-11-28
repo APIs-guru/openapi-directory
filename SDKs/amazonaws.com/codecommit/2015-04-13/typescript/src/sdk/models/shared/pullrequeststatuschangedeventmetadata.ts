@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PullRequestStatusEnumEnum } from "./pullrequeststatusenumenum";
+
 
 
 // PullRequestStatusChangedEventMetadata
@@ -7,6 +8,6 @@ import { PullRequestStatusEnumEnum } from "./pullrequeststatusenumenum";
  * Information about a change to the status of a pull request.
 **/
 export class PullRequestStatusChangedEventMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pullRequestStatus" })
+  @SpeakeasyMetadata({ data: "json, name=pullRequestStatus" })
   pullRequestStatus?: PullRequestStatusEnumEnum;
 }

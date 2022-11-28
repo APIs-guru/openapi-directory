@@ -1,5 +1,7 @@
 package shared
 
+// EndpointDemographic
+// Specifies demographic information about an endpoint, such as the applicable time zone and platform.
 type EndpointDemographic struct {
 	AppVersion      *string `json:"AppVersion,omitempty"`
 	Locale          *string `json:"Locale,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudRetailV2betaInterval } from "./googlecloudretailv2betainterval";
-import { GoogleCloudRetailV2betaInterval } from "./googlecloudretailv2betainterval";
+
 
 
 // GoogleCloudRetailV2betaPriceInfoPriceRange
@@ -8,9 +8,9 @@ import { GoogleCloudRetailV2betaInterval } from "./googlecloudretailv2betainterv
  * The price range of all variant Product having the same Product.primary_product_id.
 **/
 export class GoogleCloudRetailV2betaPriceInfoPriceRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=originalPrice" })
+  @SpeakeasyMetadata({ data: "json, name=originalPrice" })
   originalPrice?: GoogleCloudRetailV2betaInterval;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: GoogleCloudRetailV2betaInterval;
 }

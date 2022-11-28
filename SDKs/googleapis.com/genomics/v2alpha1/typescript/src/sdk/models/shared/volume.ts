@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExistingDisk } from "./existingdisk";
 import { NfsMount } from "./nfsmount";
 import { PersistentDisk } from "./persistentdisk";
+
 
 
 // Volume
@@ -9,15 +10,15 @@ import { PersistentDisk } from "./persistentdisk";
  * Carries information about storage that can be attached to a VM. Specify either `Volume` or `Disk`, but not both.
 **/
 export class Volume extends SpeakeasyBase {
-  @Metadata({ data: "json, name=existingDisk" })
+  @SpeakeasyMetadata({ data: "json, name=existingDisk" })
   existingDisk?: ExistingDisk;
 
-  @Metadata({ data: "json, name=nfsMount" })
+  @SpeakeasyMetadata({ data: "json, name=nfsMount" })
   nfsMount?: NfsMount;
 
-  @Metadata({ data: "json, name=persistentDisk" })
+  @SpeakeasyMetadata({ data: "json, name=persistentDisk" })
   persistentDisk?: PersistentDisk;
 
-  @Metadata({ data: "json, name=volume" })
+  @SpeakeasyMetadata({ data: "json, name=volume" })
   volume?: string;
 }

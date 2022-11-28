@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostTerminateInstancesActionEnum(str, Enum):
     TERMINATE_INSTANCES = "TerminateInstances"
@@ -10,8 +14,8 @@ class PostTerminateInstancesVersionEnum(str, Enum):
 
 @dataclass
 class PostTerminateInstancesQueryParams:
-    action: PostTerminateInstancesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostTerminateInstancesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostTerminateInstancesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostTerminateInstancesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostTerminateInstancesHeaders:
 
 @dataclass
 class PostTerminateInstancesRequest:
-    query_params: PostTerminateInstancesQueryParams = field(default=None)
-    headers: PostTerminateInstancesHeaders = field(default=None)
+    headers: PostTerminateInstancesHeaders = field()
+    query_params: PostTerminateInstancesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostTerminateInstancesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

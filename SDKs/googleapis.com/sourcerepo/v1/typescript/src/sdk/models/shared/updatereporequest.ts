@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Repo } from "./repo";
+
 
 
 // UpdateRepoRequest
@@ -7,9 +8,9 @@ import { Repo } from "./repo";
  * Request for UpdateRepo.
 **/
 export class UpdateRepoRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=repo" })
+  @SpeakeasyMetadata({ data: "json, name=repo" })
   repo?: Repo;
 
-  @Metadata({ data: "json, name=updateMask" })
+  @SpeakeasyMetadata({ data: "json, name=updateMask" })
   updateMask?: string;
 }

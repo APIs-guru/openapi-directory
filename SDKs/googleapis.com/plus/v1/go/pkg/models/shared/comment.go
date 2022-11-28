@@ -4,22 +4,32 @@ import (
 	"time"
 )
 
+// CommentActorClientSpecificActorInfoYoutubeActorInfo
+// Actor info specific to YouTube clients.
 type CommentActorClientSpecificActorInfoYoutubeActorInfo struct {
 	ChannelID *string `json:"channelId,omitempty"`
 }
 
+// CommentActorClientSpecificActorInfo
+// Actor info specific to particular clients.
 type CommentActorClientSpecificActorInfo struct {
 	YoutubeActorInfo *CommentActorClientSpecificActorInfoYoutubeActorInfo `json:"youtubeActorInfo,omitempty"`
 }
 
+// CommentActorImage
+// The image representation of this actor.
 type CommentActorImage struct {
 	URL *string `json:"url,omitempty"`
 }
 
+// CommentActorVerification
+// Verification status of actor.
 type CommentActorVerification struct {
 	AdHocVerified *string `json:"adHocVerified,omitempty"`
 }
 
+// CommentActor
+// The person who posted this comment.
 type CommentActor struct {
 	ClientSpecificActorInfo *CommentActorClientSpecificActorInfo `json:"clientSpecificActorInfo,omitempty"`
 	DisplayName             *string                              `json:"displayName,omitempty"`
@@ -34,12 +44,16 @@ type CommentInReplyTo struct {
 	URL *string `json:"url,omitempty"`
 }
 
+// CommentObject
+// The object of this comment.
 type CommentObject struct {
 	Content         *string `json:"content,omitempty"`
 	ObjectType      *string `json:"objectType,omitempty"`
 	OriginalContent *string `json:"originalContent,omitempty"`
 }
 
+// CommentPlusoners
+// People who +1'd this comment.
 type CommentPlusoners struct {
 	TotalItems *int64 `json:"totalItems,omitempty"`
 }

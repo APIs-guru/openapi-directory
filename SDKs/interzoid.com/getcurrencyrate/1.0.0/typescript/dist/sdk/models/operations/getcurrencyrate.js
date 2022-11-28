@@ -22,82 +22,82 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetcurrencyrateQueryParams = /** @class */ (function (_super) {
     __extends(GetcurrencyrateQueryParams, _super);
     function GetcurrencyrateQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=license" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" }),
         __metadata("design:type", String)
     ], GetcurrencyrateQueryParams.prototype, "license", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=symbol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=symbol" }),
         __metadata("design:type", String)
     ], GetcurrencyrateQueryParams.prototype, "symbol", void 0);
     return GetcurrencyrateQueryParams;
 }(SpeakeasyBase));
 export { GetcurrencyrateQueryParams };
-var GetcurrencyrateRequest = /** @class */ (function (_super) {
-    __extends(GetcurrencyrateRequest, _super);
-    function GetcurrencyrateRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GetcurrencyrateQueryParams)
-    ], GetcurrencyrateRequest.prototype, "queryParams", void 0);
-    return GetcurrencyrateRequest;
-}(SpeakeasyBase));
-export { GetcurrencyrateRequest };
 var Getcurrencyrate200ApplicationJson = /** @class */ (function (_super) {
     __extends(Getcurrencyrate200ApplicationJson, _super);
     function Getcurrencyrate200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Code" }),
+        SpeakeasyMetadata({ data: "json, name=Code" }),
         __metadata("design:type", String)
     ], Getcurrencyrate200ApplicationJson.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=Country" }),
+        SpeakeasyMetadata({ data: "json, name=Country" }),
         __metadata("design:type", String)
     ], Getcurrencyrate200ApplicationJson.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "json, name=Credits" }),
+        SpeakeasyMetadata({ data: "json, name=Credits" }),
         __metadata("design:type", String)
     ], Getcurrencyrate200ApplicationJson.prototype, "credits", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], Getcurrencyrate200ApplicationJson.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Rate" }),
+        SpeakeasyMetadata({ data: "json, name=Rate" }),
         __metadata("design:type", String)
     ], Getcurrencyrate200ApplicationJson.prototype, "rate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Symbol" }),
+        SpeakeasyMetadata({ data: "json, name=Symbol" }),
         __metadata("design:type", String)
     ], Getcurrencyrate200ApplicationJson.prototype, "symbol", void 0);
     return Getcurrencyrate200ApplicationJson;
 }(SpeakeasyBase));
 export { Getcurrencyrate200ApplicationJson };
+var GetcurrencyrateRequest = /** @class */ (function (_super) {
+    __extends(GetcurrencyrateRequest, _super);
+    function GetcurrencyrateRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetcurrencyrateQueryParams)
+    ], GetcurrencyrateRequest.prototype, "queryParams", void 0);
+    return GetcurrencyrateRequest;
+}(SpeakeasyBase));
+export { GetcurrencyrateRequest };
 var GetcurrencyrateResponse = /** @class */ (function (_super) {
     __extends(GetcurrencyrateResponse, _super);
     function GetcurrencyrateResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetcurrencyrateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetcurrencyrateResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Getcurrencyrate200ApplicationJson)
     ], GetcurrencyrateResponse.prototype, "getcurrencyrate200ApplicationJsonObject", void 0);
     return GetcurrencyrateResponse;

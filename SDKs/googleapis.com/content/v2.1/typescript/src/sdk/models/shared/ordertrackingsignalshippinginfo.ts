@@ -1,13 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { DateTime } from "./datetime";
-import { DateTime } from "./datetime";
-import { DateTime } from "./datetime";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DateTime } from "./datetime";
 
+
 export enum OrderTrackingSignalShippingInfoShippingStatusEnum {
-    ShippingStateUnspecified = "SHIPPING_STATE_UNSPECIFIED"
-,    Shipped = "SHIPPED"
-,    Delivered = "DELIVERED"
+    ShippingStateUnspecified = "SHIPPING_STATE_UNSPECIFIED",
+    Shipped = "SHIPPED",
+    Delivered = "DELIVERED"
 }
 
 
@@ -16,36 +14,36 @@ export enum OrderTrackingSignalShippingInfoShippingStatusEnum {
  * The shipping information for the order.
 **/
 export class OrderTrackingSignalShippingInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actualDeliveryTime" })
+  @SpeakeasyMetadata({ data: "json, name=actualDeliveryTime" })
   actualDeliveryTime?: DateTime;
 
-  @Metadata({ data: "json, name=carrierName" })
+  @SpeakeasyMetadata({ data: "json, name=carrierName" })
   carrierName?: string;
 
-  @Metadata({ data: "json, name=carrierServiceName" })
+  @SpeakeasyMetadata({ data: "json, name=carrierServiceName" })
   carrierServiceName?: string;
 
-  @Metadata({ data: "json, name=earliestDeliveryPromiseTime" })
+  @SpeakeasyMetadata({ data: "json, name=earliestDeliveryPromiseTime" })
   earliestDeliveryPromiseTime?: DateTime;
 
-  @Metadata({ data: "json, name=latestDeliveryPromiseTime" })
+  @SpeakeasyMetadata({ data: "json, name=latestDeliveryPromiseTime" })
   latestDeliveryPromiseTime?: DateTime;
 
-  @Metadata({ data: "json, name=originPostalCode" })
+  @SpeakeasyMetadata({ data: "json, name=originPostalCode" })
   originPostalCode?: string;
 
-  @Metadata({ data: "json, name=originRegionCode" })
+  @SpeakeasyMetadata({ data: "json, name=originRegionCode" })
   originRegionCode?: string;
 
-  @Metadata({ data: "json, name=shipmentId" })
+  @SpeakeasyMetadata({ data: "json, name=shipmentId" })
   shipmentId?: string;
 
-  @Metadata({ data: "json, name=shippedTime" })
+  @SpeakeasyMetadata({ data: "json, name=shippedTime" })
   shippedTime?: DateTime;
 
-  @Metadata({ data: "json, name=shippingStatus" })
+  @SpeakeasyMetadata({ data: "json, name=shippingStatus" })
   shippingStatus?: OrderTrackingSignalShippingInfoShippingStatusEnum;
 
-  @Metadata({ data: "json, name=trackingId" })
+  @SpeakeasyMetadata({ data: "json, name=trackingId" })
   trackingId?: string;
 }

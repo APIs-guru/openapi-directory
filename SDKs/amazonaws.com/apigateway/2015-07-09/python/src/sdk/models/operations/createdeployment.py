@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateDeploymentPathParams:
-    restapi_id: str = field(default=None, metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
+    restapi_id: str = field(metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -33,41 +38,45 @@ class CreateDeploymentRequestBodyCacheClusterSizeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateDeploymentRequestBodyCanarySettings:
-    percent_traffic: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'percentTraffic' }})
-    stage_variable_overrides: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stageVariableOverrides' }})
-    use_stage_cache: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'useStageCache' }})
+    r"""CreateDeploymentRequestBodyCanarySettings
+    The input configuration for a canary deployment.
+    """
+    
+    percent_traffic: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('percentTraffic') }})
+    stage_variable_overrides: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stageVariableOverrides') }})
+    use_stage_cache: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('useStageCache') }})
     
 
 @dataclass_json
 @dataclass
 class CreateDeploymentRequestBody:
-    cache_cluster_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cacheClusterEnabled' }})
-    cache_cluster_size: Optional[CreateDeploymentRequestBodyCacheClusterSizeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cacheClusterSize' }})
-    canary_settings: Optional[CreateDeploymentRequestBodyCanarySettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'canarySettings' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    stage_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stageDescription' }})
-    stage_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stageName' }})
-    tracing_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tracingEnabled' }})
-    variables: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'variables' }})
+    cache_cluster_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cacheClusterEnabled') }})
+    cache_cluster_size: Optional[CreateDeploymentRequestBodyCacheClusterSizeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cacheClusterSize') }})
+    canary_settings: Optional[CreateDeploymentRequestBodyCanarySettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('canarySettings') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    stage_description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stageDescription') }})
+    stage_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stageName') }})
+    tracing_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tracingEnabled') }})
+    variables: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('variables') }})
     
 
 @dataclass
 class CreateDeploymentRequest:
-    path_params: CreateDeploymentPathParams = field(default=None)
-    headers: CreateDeploymentHeaders = field(default=None)
-    request: CreateDeploymentRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateDeploymentHeaders = field()
+    path_params: CreateDeploymentPathParams = field()
+    request: CreateDeploymentRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateDeploymentResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     deployment: Optional[shared.Deployment] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

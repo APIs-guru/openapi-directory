@@ -14,6 +14,8 @@ const (
 	CheckErrorResponseStatusEnumSeventeen CheckErrorResponseStatusEnum = "17"
 )
 
+// CheckErrorResponse
+// Error
 type CheckErrorResponse struct {
 	ErrorText *string                       `json:"error_text,omitempty"`
 	RequestID *string                       `json:"request_id,omitempty"`

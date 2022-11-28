@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetDeviceAppliancePerformancePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serial" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serial" })
   serial: string;
 }
 
 
 export class GetDeviceAppliancePerformanceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDeviceAppliancePerformancePathParams;
 }
 
 
 export class GetDeviceAppliancePerformanceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getDeviceAppliancePerformance200ApplicationJsonObject?: Map<string, any>;
 }

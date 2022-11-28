@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,20 +21,20 @@ class VerifiedaccessChallengeVerifyQueryParams:
 
 @dataclass
 class VerifiedaccessChallengeVerifySecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VerifiedaccessChallengeVerifyRequest:
-    query_params: VerifiedaccessChallengeVerifyQueryParams = field(default=None)
+    query_params: VerifiedaccessChallengeVerifyQueryParams = field()
+    security: VerifiedaccessChallengeVerifySecurity = field()
     request: Optional[shared.VerifyChallengeResponseRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: VerifiedaccessChallengeVerifySecurity = field(default=None)
     
 
 @dataclass
 class VerifiedaccessChallengeVerifyResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     verify_challenge_response_result: Optional[shared.VerifyChallengeResponseResult] = field(default=None)
     

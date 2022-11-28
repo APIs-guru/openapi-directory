@@ -36,6 +36,8 @@ const (
 	SearchResponseStatusEnumCancelled  SearchResponseStatusEnum = "CANCELLED"
 )
 
+// SearchResponse
+// Success
 type SearchResponse struct {
 	AccountID                  *string                   `json:"account_id,omitempty"`
 	Checks                     []SearchResponseChecks    `json:"checks,omitempty"`

@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AgentStoreSetPathParams = /** @class */ (function (_super) {
     __extends(AgentStoreSetPathParams, _super);
     function AgentStoreSetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], AgentStoreSetPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=persist" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=persist" }),
         __metadata("design:type", Number)
     ], AgentStoreSetPathParams.prototype, "persist", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=var" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=var" }),
         __metadata("design:type", String)
     ], AgentStoreSetPathParams.prototype, "var", void 0);
     return AgentStoreSetPathParams;
@@ -49,11 +49,11 @@ var AgentStoreSetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AgentStoreSetPathParams)
     ], AgentStoreSetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", String)
     ], AgentStoreSetRequest.prototype, "request", void 0);
     return AgentStoreSetRequest;
@@ -65,15 +65,15 @@ var AgentStoreSetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AgentStoreSetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AgentStoreSetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AgentStoreSetResponse.prototype, "agentStoreSet200ApplicationJsonString", void 0);
     return AgentStoreSetResponse;

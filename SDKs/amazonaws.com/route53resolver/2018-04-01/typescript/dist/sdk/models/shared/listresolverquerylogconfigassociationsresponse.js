@@ -22,27 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ResolverQueryLogConfigAssociation } from "./resolverquerylogconfigassociation";
 var ListResolverQueryLogConfigAssociationsResponse = /** @class */ (function (_super) {
     __extends(ListResolverQueryLogConfigAssociationsResponse, _super);
     function ListResolverQueryLogConfigAssociationsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListResolverQueryLogConfigAssociationsResponse.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResolverQueryLogConfigAssociations", elemType: shared.ResolverQueryLogConfigAssociation }),
+        SpeakeasyMetadata({ data: "json, name=ResolverQueryLogConfigAssociations", elemType: ResolverQueryLogConfigAssociation }),
         __metadata("design:type", Array)
     ], ListResolverQueryLogConfigAssociationsResponse.prototype, "resolverQueryLogConfigAssociations", void 0);
     __decorate([
-        Metadata({ data: "json, name=TotalCount" }),
+        SpeakeasyMetadata({ data: "json, name=TotalCount" }),
         __metadata("design:type", Number)
     ], ListResolverQueryLogConfigAssociationsResponse.prototype, "totalCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=TotalFilteredCount" }),
+        SpeakeasyMetadata({ data: "json, name=TotalFilteredCount" }),
         __metadata("design:type", Number)
     ], ListResolverQueryLogConfigAssociationsResponse.prototype, "totalFilteredCount", void 0);
     return ListResolverQueryLogConfigAssociationsResponse;

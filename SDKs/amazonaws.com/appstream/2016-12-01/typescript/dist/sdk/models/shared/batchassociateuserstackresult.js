@@ -22,15 +22,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { UserStackAssociationError } from "./userstackassociationerror";
 var BatchAssociateUserStackResult = /** @class */ (function (_super) {
     __extends(BatchAssociateUserStackResult, _super);
     function BatchAssociateUserStackResult() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=errors", elemType: shared.UserStackAssociationError }),
+        SpeakeasyMetadata({ data: "json, name=errors", elemType: UserStackAssociationError }),
         __metadata("design:type", Array)
     ], BatchAssociateUserStackResult.prototype, "errors", void 0);
     return BatchAssociateUserStackResult;

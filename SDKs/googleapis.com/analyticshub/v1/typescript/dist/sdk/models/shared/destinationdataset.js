@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DestinationDatasetReference } from "./destinationdatasetreference";
 // DestinationDataset
 /**
@@ -34,23 +34,23 @@ var DestinationDataset = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=datasetReference" }),
+        SpeakeasyMetadata({ data: "json, name=datasetReference" }),
         __metadata("design:type", DestinationDatasetReference)
     ], DestinationDataset.prototype, "datasetReference", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], DestinationDataset.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=friendlyName" }),
+        SpeakeasyMetadata({ data: "json, name=friendlyName" }),
         __metadata("design:type", String)
     ], DestinationDataset.prototype, "friendlyName", void 0);
     __decorate([
-        Metadata({ data: "json, name=labels" }),
+        SpeakeasyMetadata({ data: "json, name=labels" }),
         __metadata("design:type", Map)
     ], DestinationDataset.prototype, "labels", void 0);
     __decorate([
-        Metadata({ data: "json, name=location" }),
+        SpeakeasyMetadata({ data: "json, name=location" }),
         __metadata("design:type", String)
     ], DestinationDataset.prototype, "location", void 0);
     return DestinationDataset;

@@ -1,7 +1,8 @@
 
 
+
 export enum StatusEnum {
-    Ignore = "IGNORE"
-,    Resolved = "RESOLVED"
-,    Pending = "PENDING"
+    Ignore = "IGNORE",
+    Resolved = "RESOLVED",
+    Pending = "PENDING"
 }

@@ -14,6 +14,8 @@ const (
 	GoogleCloudDialogflowV2ConversationModelStateEnumPending          GoogleCloudDialogflowV2ConversationModelStateEnum = "PENDING"
 )
 
+// GoogleCloudDialogflowV2ConversationModel
+// Represents a conversation model.
 type GoogleCloudDialogflowV2ConversationModel struct {
 	ArticleSuggestionModelMetadata *GoogleCloudDialogflowV2ArticleSuggestionModelMetadata `json:"articleSuggestionModelMetadata,omitempty"`
 	CreateTime                     *string                                                `json:"createTime,omitempty"`
@@ -23,4 +25,15 @@ type GoogleCloudDialogflowV2ConversationModel struct {
 	Name                           *string                                                `json:"name,omitempty"`
 	SmartReplyModelMetadata        *GoogleCloudDialogflowV2SmartReplyModelMetadata        `json:"smartReplyModelMetadata,omitempty"`
 	State                          *GoogleCloudDialogflowV2ConversationModelStateEnum     `json:"state,omitempty"`
+}
+
+// GoogleCloudDialogflowV2ConversationModelInput
+// Represents a conversation model.
+type GoogleCloudDialogflowV2ConversationModelInput struct {
+	ArticleSuggestionModelMetadata *GoogleCloudDialogflowV2ArticleSuggestionModelMetadata `json:"articleSuggestionModelMetadata,omitempty"`
+	Datasets                       []GoogleCloudDialogflowV2InputDataset                  `json:"datasets,omitempty"`
+	DisplayName                    *string                                                `json:"displayName,omitempty"`
+	LanguageCode                   *string                                                `json:"languageCode,omitempty"`
+	Name                           *string                                                `json:"name,omitempty"`
+	SmartReplyModelMetadata        *GoogleCloudDialogflowV2SmartReplyModelMetadata        `json:"smartReplyModelMetadata,omitempty"`
 }

@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostTruststoreQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=:operation" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=:operation" })
   operation?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=keyStoreType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=keyStoreType" })
   keyStoreType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=newPassword" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=newPassword" })
   newPassword?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rePassword" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rePassword" })
   rePassword?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=removeAlias" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=removeAlias" })
   removeAlias?: string;
 }
 
 
 export class PostTruststoreRequestBodyCertificate extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=certificate" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=certificate" })
   certificate: string;
 
-  @Metadata({ data: "multipart_form, content=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
 }
 
 
 export class PostTruststoreRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, file=true" })
+  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   certificate?: PostTruststoreRequestBodyCertificate;
 }
 
 
 export class PostTruststoreRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostTruststoreQueryParams;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request?: PostTruststoreRequestBody;
 }
 
 
 export class PostTruststoreResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postTruststoreDefaultTextPlainString?: string;
 }

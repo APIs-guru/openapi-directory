@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetDellSwitchSnmpConfigPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetDellSwitchSnmpConfigSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKeyAuth: shared.SchemeApiKeyAuth;
 }
 
 
 export class GetDellSwitchSnmpConfigRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetDellSwitchSnmpConfigPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetDellSwitchSnmpConfigSecurity;
 }
 
 
 export class GetDellSwitchSnmpConfigResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   snmpConfig?: shared.SnmpConfig;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

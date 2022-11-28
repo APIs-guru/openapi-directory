@@ -1,23 +1,22 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
+import { AxiosInstance } from "axios";
 import { Security } from "./models/shared";
-declare type OptsFunc = (sdk: SDK) => void;
+import { SmsConversion } from "./smsconversion";
+import { VoiceConversion } from "./voiceconversion";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://api.nexmo.com/conversions"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare function WithSecurity(security: Security): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    smsConversion: SmsConversion;
+    voiceConversion: VoiceConversion;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _security?: Security;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    /**
-     * Send a Conversion API request with information about the SMS message identified by `message-id`. Nexmo uses your conversion data and internal information about `message-id` to help improve our routing of messages in the future.
-    **/
-    SmsConversion(req: operations.SmsConversionRequest, config?: AxiosRequestConfig): Promise<operations.SmsConversionResponse>;
-    /**
-     * Send a Conversion API request with information about the Call or Text-To-Speech identified by `message-id`. Nexmo uses your conversion data and internal information about `message-id` to help improve our routing of messages in the future.
-    **/
-    VoiceConversion(req: operations.VoiceConversionRequest, config?: AxiosRequestConfig): Promise<operations.VoiceConversionResponse>;
 }
 export {};

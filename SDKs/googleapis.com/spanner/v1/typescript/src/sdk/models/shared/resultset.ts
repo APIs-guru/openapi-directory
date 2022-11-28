@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResultSetMetadata } from "./resultsetmetadata";
 import { ResultSetStats } from "./resultsetstats";
+
 
 
 // ResultSet
@@ -8,12 +9,12 @@ import { ResultSetStats } from "./resultsetstats";
  * Results from Read or ExecuteSql.
 **/
 export class ResultSet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: ResultSetMetadata;
 
-  @Metadata({ data: "json, name=rows" })
+  @SpeakeasyMetadata({ data: "json, name=rows" })
   rows?: any[][];
 
-  @Metadata({ data: "json, name=stats" })
+  @SpeakeasyMetadata({ data: "json, name=stats" })
   stats?: ResultSetStats;
 }

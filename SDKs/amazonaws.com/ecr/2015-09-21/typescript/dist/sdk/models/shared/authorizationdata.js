@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AuthorizationData
 /**
  * An object representing authorization data for an Amazon ECR registry.
@@ -33,15 +33,15 @@ var AuthorizationData = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authorizationToken" }),
+        SpeakeasyMetadata({ data: "json, name=authorizationToken" }),
         __metadata("design:type", String)
     ], AuthorizationData.prototype, "authorizationToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=expiresAt" }),
+        SpeakeasyMetadata({ data: "json, name=expiresAt" }),
         __metadata("design:type", Date)
     ], AuthorizationData.prototype, "expiresAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=proxyEndpoint" }),
+        SpeakeasyMetadata({ data: "json, name=proxyEndpoint" }),
         __metadata("design:type", String)
     ], AuthorizationData.prototype, "proxyEndpoint", void 0);
     return AuthorizationData;

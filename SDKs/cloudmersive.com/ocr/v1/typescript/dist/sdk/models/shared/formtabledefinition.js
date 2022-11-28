@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { FormTableColumnDefinition } from "./formtablecolumndefinition";
 // FormTableDefinition
 /**
  * Definition of a form table for OCR data extraction from images
@@ -34,19 +34,19 @@ var FormTableDefinition = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ColumnDefinitions", elemType: shared.FormTableColumnDefinition }),
+        SpeakeasyMetadata({ data: "json, name=ColumnDefinitions", elemType: FormTableColumnDefinition }),
         __metadata("design:type", Array)
     ], FormTableDefinition.prototype, "columnDefinitions", void 0);
     __decorate([
-        Metadata({ data: "json, name=TableID" }),
+        SpeakeasyMetadata({ data: "json, name=TableID" }),
         __metadata("design:type", String)
     ], FormTableDefinition.prototype, "tableId", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetRowHeight_Relative" }),
+        SpeakeasyMetadata({ data: "json, name=TargetRowHeight_Relative" }),
         __metadata("design:type", Number)
     ], FormTableDefinition.prototype, "targetRowHeightRelative", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetTableHeight_Relative" }),
+        SpeakeasyMetadata({ data: "json, name=TargetTableHeight_Relative" }),
         __metadata("design:type", Number)
     ], FormTableDefinition.prototype, "targetTableHeightRelative", void 0);
     return FormTableDefinition;

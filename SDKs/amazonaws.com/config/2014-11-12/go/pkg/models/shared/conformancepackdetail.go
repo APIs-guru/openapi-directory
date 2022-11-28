@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ConformancePackDetail
+// Returns details of a conformance pack. A conformance pack is a collection of Config rules and remediation actions that can be easily deployed in an account and a region.
 type ConformancePackDetail struct {
 	ConformancePackArn             string                          `json:"ConformancePackArn"`
 	ConformancePackID              string                          `json:"ConformancePackId"`

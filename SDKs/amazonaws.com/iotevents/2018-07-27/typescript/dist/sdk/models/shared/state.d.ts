@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { OnEnterLifecycle } from "./onenterlifecycle";
 import { OnExitLifecycle } from "./onexitlifecycle";
 import { OnInputLifecycle } from "./oninputlifecycle";

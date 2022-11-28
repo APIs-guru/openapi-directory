@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class TenancyTenantsReadPathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class TenancyTenantsReadRequest:
-    path_params: TenancyTenantsReadPathParams = field(default=None)
+    path_params: TenancyTenantsReadPathParams = field()
     
 
 @dataclass
 class TenancyTenantsReadResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     tenant: Optional[shared.Tenant] = field(default=None)
     

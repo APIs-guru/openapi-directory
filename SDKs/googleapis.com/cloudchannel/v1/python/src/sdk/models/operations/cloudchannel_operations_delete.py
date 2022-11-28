@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudchannelOperationsDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class CloudchannelOperationsDeleteQueryParams:
 
 @dataclass
 class CloudchannelOperationsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudchannelOperationsDeleteRequest:
-    path_params: CloudchannelOperationsDeletePathParams = field(default=None)
-    query_params: CloudchannelOperationsDeleteQueryParams = field(default=None)
-    security: CloudchannelOperationsDeleteSecurity = field(default=None)
+    path_params: CloudchannelOperationsDeletePathParams = field()
+    query_params: CloudchannelOperationsDeleteQueryParams = field()
+    security: CloudchannelOperationsDeleteSecurity = field()
     
 
 @dataclass
 class CloudchannelOperationsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_protobuf_empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -4,10 +4,14 @@ import (
 	"time"
 )
 
+// WebhookDeliveryLogResourceAttributesRequest
+// Information about the request that was sent to the webhook URL.
 type WebhookDeliveryLogResourceAttributesRequest struct {
 	Body string `json:"body"`
 }
 
+// WebhookDeliveryLogResourceAttributesResponse
+// Information about the response that was received from the webhook URL.
 type WebhookDeliveryLogResourceAttributesResponse struct {
 	Body       string `json:"body"`
 	StatusCode int64  `json:"statusCode"`
@@ -33,6 +37,9 @@ type WebhookDeliveryLogResourceRelationships struct {
 	WebhookEvent WebhookDeliveryLogResourceRelationshipsWebhookEvent `json:"webhookEvent"`
 }
 
+// WebhookDeliveryLogResource
+// Provides historical webhook event delivery information for analysis and
+// debugging purposes.
 type WebhookDeliveryLogResource struct {
 	Attributes    WebhookDeliveryLogResourceAttributes    `json:"attributes"`
 	ID            string                                  `json:"id"`

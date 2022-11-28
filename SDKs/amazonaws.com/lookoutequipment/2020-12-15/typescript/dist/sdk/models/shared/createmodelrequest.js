@@ -22,70 +22,70 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataPreProcessingConfiguration } from "./datapreprocessingconfiguration";
 import { DatasetSchema } from "./datasetschema";
 import { LabelsInputConfiguration } from "./labelsinputconfiguration";
+import { Tag } from "./tag";
 var CreateModelRequest = /** @class */ (function (_super) {
     __extends(CreateModelRequest, _super);
     function CreateModelRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ClientToken" }),
+        SpeakeasyMetadata({ data: "json, name=ClientToken" }),
         __metadata("design:type", String)
     ], CreateModelRequest.prototype, "clientToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=DataPreProcessingConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=DataPreProcessingConfiguration" }),
         __metadata("design:type", DataPreProcessingConfiguration)
     ], CreateModelRequest.prototype, "dataPreProcessingConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatasetName" }),
+        SpeakeasyMetadata({ data: "json, name=DatasetName" }),
         __metadata("design:type", String)
     ], CreateModelRequest.prototype, "datasetName", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatasetSchema" }),
+        SpeakeasyMetadata({ data: "json, name=DatasetSchema" }),
         __metadata("design:type", DatasetSchema)
     ], CreateModelRequest.prototype, "datasetSchema", void 0);
     __decorate([
-        Metadata({ data: "json, name=EvaluationDataEndTime" }),
+        SpeakeasyMetadata({ data: "json, name=EvaluationDataEndTime" }),
         __metadata("design:type", Date)
     ], CreateModelRequest.prototype, "evaluationDataEndTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=EvaluationDataStartTime" }),
+        SpeakeasyMetadata({ data: "json, name=EvaluationDataStartTime" }),
         __metadata("design:type", Date)
     ], CreateModelRequest.prototype, "evaluationDataStartTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=LabelsInputConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=LabelsInputConfiguration" }),
         __metadata("design:type", LabelsInputConfiguration)
     ], CreateModelRequest.prototype, "labelsInputConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModelName" }),
+        SpeakeasyMetadata({ data: "json, name=ModelName" }),
         __metadata("design:type", String)
     ], CreateModelRequest.prototype, "modelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=OffCondition" }),
+        SpeakeasyMetadata({ data: "json, name=OffCondition" }),
         __metadata("design:type", String)
     ], CreateModelRequest.prototype, "offCondition", void 0);
     __decorate([
-        Metadata({ data: "json, name=RoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=RoleArn" }),
         __metadata("design:type", String)
     ], CreateModelRequest.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerSideKmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=ServerSideKmsKeyId" }),
         __metadata("design:type", String)
     ], CreateModelRequest.prototype, "serverSideKmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateModelRequest.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrainingDataEndTime" }),
+        SpeakeasyMetadata({ data: "json, name=TrainingDataEndTime" }),
         __metadata("design:type", Date)
     ], CreateModelRequest.prototype, "trainingDataEndTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrainingDataStartTime" }),
+        SpeakeasyMetadata({ data: "json, name=TrainingDataStartTime" }),
         __metadata("design:type", Date)
     ], CreateModelRequest.prototype, "trainingDataStartTime", void 0);
     return CreateModelRequest;

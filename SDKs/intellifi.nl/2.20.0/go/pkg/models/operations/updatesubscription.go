@@ -10,7 +10,7 @@ type UpdateSubscriptionPathParams struct {
 
 type UpdateSubscriptionRequest struct {
 	PathParams UpdateSubscriptionPathParams
-	Request    shared.Subscription `request:"mediaType=application/json"`
+	Request    shared.SubscriptionInput `request:"mediaType=application/json"`
 }
 
 type UpdateSubscriptionResponse struct {

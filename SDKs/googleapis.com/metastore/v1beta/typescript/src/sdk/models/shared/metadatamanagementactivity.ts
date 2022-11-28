@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetadataExport } from "./metadataexport";
 import { Restore } from "./restore";
+
 
 
 // MetadataManagementActivity
@@ -9,9 +9,9 @@ import { Restore } from "./restore";
  * The metadata management activities of the metastore service.
 **/
 export class MetadataManagementActivity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metadataExports", elemType: shared.MetadataExport })
+  @SpeakeasyMetadata({ data: "json, name=metadataExports", elemType: MetadataExport })
   metadataExports?: MetadataExport[];
 
-  @Metadata({ data: "json, name=restores", elemType: shared.Restore })
+  @SpeakeasyMetadata({ data: "json, name=restores", elemType: Restore })
   restores?: Restore[];
 }

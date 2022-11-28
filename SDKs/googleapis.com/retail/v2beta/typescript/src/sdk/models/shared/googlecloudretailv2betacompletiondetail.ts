@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2betaCompletionDetail
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Detailed completion information including completion attribution token and clicked completion info.
 **/
 export class GoogleCloudRetailV2betaCompletionDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=completionAttributionToken" })
+  @SpeakeasyMetadata({ data: "json, name=completionAttributionToken" })
   completionAttributionToken?: string;
 
-  @Metadata({ data: "json, name=selectedPosition" })
+  @SpeakeasyMetadata({ data: "json, name=selectedPosition" })
   selectedPosition?: number;
 
-  @Metadata({ data: "json, name=selectedSuggestion" })
+  @SpeakeasyMetadata({ data: "json, name=selectedSuggestion" })
   selectedSuggestion?: string;
 }

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResolverQueryLogConfig } from "./resolverquerylogconfig";
 
 
+
 export class GetResolverQueryLogConfigResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResolverQueryLogConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ResolverQueryLogConfig" })
   resolverQueryLogConfig?: ResolverQueryLogConfig;
 }

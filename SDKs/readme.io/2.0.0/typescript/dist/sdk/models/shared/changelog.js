@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ChangelogTypeEnum;
 (function (ChangelogTypeEnum) {
     ChangelogTypeEnum["Unknown"] = "";
@@ -38,19 +38,19 @@ var Changelog = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=body" }),
+        SpeakeasyMetadata({ data: "json, name=body" }),
         __metadata("design:type", String)
     ], Changelog.prototype, "body", void 0);
     __decorate([
-        Metadata({ data: "json, name=hidden" }),
+        SpeakeasyMetadata({ data: "json, name=hidden" }),
         __metadata("design:type", Boolean)
     ], Changelog.prototype, "hidden", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], Changelog.prototype, "title", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Changelog.prototype, "type", void 0);
     return Changelog;

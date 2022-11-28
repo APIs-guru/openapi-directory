@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Group
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A group object, which contains a specified group’s metadata and attributes.
 **/
 export class Group extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayName" })
   displayName: string;
 
-  @Metadata({ data: "json, name=GroupId" })
+  @SpeakeasyMetadata({ data: "json, name=GroupId" })
   groupId: string;
 }

@@ -8,17 +8,10 @@ type DeleteFilesV3FoldersFolderPathArchiveByPathPathParams struct {
 	FolderPath string `pathParam:"style=simple,explode=false,name=folderPath"`
 }
 
-type DeleteFilesV3FoldersFolderPathArchiveByPathSecurityOption1 struct {
-	Hapikey shared.SchemeHapikey `security:"scheme,type=apiKey,subtype=query"`
-}
-
-type DeleteFilesV3FoldersFolderPathArchiveByPathSecurityOption2 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
-}
-
 type DeleteFilesV3FoldersFolderPathArchiveByPathSecurity struct {
-	Option1 *DeleteFilesV3FoldersFolderPathArchiveByPathSecurityOption1 `security:"option"`
-	Option2 *DeleteFilesV3FoldersFolderPathArchiveByPathSecurityOption2 `security:"option"`
+	Hapikey           *shared.SchemeHapikey           `security:"scheme,type=apiKey,subtype=query"`
+	PrivateAppsLegacy *shared.SchemePrivateAppsLegacy `security:"scheme,type=apiKey,subtype=header"`
+	Oauth2Legacy      *shared.SchemeOauth2Legacy      `security:"scheme,type=oauth2"`
 }
 
 type DeleteFilesV3FoldersFolderPathArchiveByPathRequest struct {

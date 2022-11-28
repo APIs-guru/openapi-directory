@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateAdsByInventoryReferencePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=campaign_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=campaign_id" })
   campaignId: string;
 }
 
 
 export class CreateAdsByInventoryReferenceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class CreateAdsByInventoryReferenceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateAdsByInventoryReferencePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.CreateAdsByInventoryReferenceRequest;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateAdsByInventoryReferenceSecurity;
 }
 
 
 export class CreateAdsByInventoryReferenceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   adReferences?: shared.AdReferences;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

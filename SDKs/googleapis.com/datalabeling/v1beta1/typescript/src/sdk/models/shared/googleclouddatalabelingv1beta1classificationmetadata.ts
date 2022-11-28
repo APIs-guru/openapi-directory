@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatalabelingV1beta1ClassificationMetadata
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Metadata for classification annotations.
 **/
 export class GoogleCloudDatalabelingV1beta1ClassificationMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isMultiLabel" })
+  @SpeakeasyMetadata({ data: "json, name=isMultiLabel" })
   isMultiLabel?: boolean;
 }

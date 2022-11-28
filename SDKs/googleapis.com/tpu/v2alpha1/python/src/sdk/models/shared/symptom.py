@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SymptomSymptomTypeEnum(str, Enum):
     SYMPTOM_TYPE_UNSPECIFIED = "SYMPTOM_TYPE_UNSPECIFIED"
@@ -15,8 +17,12 @@ class SymptomSymptomTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Symptom:
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    details: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'details' }})
-    symptom_type: Optional[SymptomSymptomTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'symptomType' }})
-    worker_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workerId' }})
+    r"""Symptom
+    A Symptom instance.
+    """
+    
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    details: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('details') }})
+    symptom_type: Optional[SymptomSymptomTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('symptomType') }})
+    worker_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workerId') }})
     

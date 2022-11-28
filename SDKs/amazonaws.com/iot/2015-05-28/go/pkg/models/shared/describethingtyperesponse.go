@@ -1,5 +1,7 @@
 package shared
 
+// DescribeThingTypeResponse
+// The output for the DescribeThingType operation.
 type DescribeThingTypeResponse struct {
 	ThingTypeArn        *string              `json:"thingTypeArn,omitempty"`
 	ThingTypeID         *string              `json:"thingTypeId,omitempty"`

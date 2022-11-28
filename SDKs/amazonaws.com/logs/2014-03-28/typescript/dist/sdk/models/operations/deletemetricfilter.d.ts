@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DeleteMetricFilterXAmzTargetEnum {
     Logs20140328DeleteMetricFilter = "Logs_20140328.DeleteMetricFilter"

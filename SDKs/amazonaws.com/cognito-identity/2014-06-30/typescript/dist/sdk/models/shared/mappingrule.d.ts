@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MappingRuleMatchTypeEnum } from "./mappingrulematchtypeenum";
 /**
  * A rule that maps a claim name, a claim value, and a match type to a role ARN.

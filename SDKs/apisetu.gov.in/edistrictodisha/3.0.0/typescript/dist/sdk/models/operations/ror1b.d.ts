@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class Ror1bRequestBodyCertificateParameters extends SpeakeasyBase {
     uid: string;
@@ -16,10 +16,6 @@ export declare class Ror1bRequestBody extends SpeakeasyBase {
 export declare class Ror1bSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class Ror1bRequest extends SpeakeasyBase {
-    request?: Ror1bRequestBody;
-    security: Ror1bSecurity;
 }
 export declare enum Ror1b400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Ror1b504ApplicationJsonErrorDescriptionEnum {
 export declare class Ror1b504ApplicationJson extends SpeakeasyBase {
     error?: Ror1b504ApplicationJsonErrorEnum;
     errorDescription?: Ror1b504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class Ror1bRequest extends SpeakeasyBase {
+    request?: Ror1bRequestBody;
+    security: Ror1bSecurity;
 }
 export declare class Ror1bResponse extends SpeakeasyBase {
     contentType: string;

@@ -1,4 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// LocationStateInput
+/** 
+ * Contains a set of booleans that reflect the [state of a Location.](https://support.google.com/business/answer/3480862)
+**/
+export class LocationStateInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=canDelete" })
+  canDelete?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=canUpdate" })
+  canUpdate?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=hasPendingEdits" })
+  hasPendingEdits?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=hasPendingVerification" })
+  hasPendingVerification?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=isDisabled" })
+  isDisabled?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=isDisconnected" })
+  isDisconnected?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=isDuplicate" })
+  isDuplicate?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=isGoogleUpdated" })
+  isGoogleUpdated?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=isLocalPostApiDisabled" })
+  isLocalPostApiDisabled?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=isPendingReview" })
+  isPendingReview?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=isPublished" })
+  isPublished?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=isSuspended" })
+  isSuspended?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=isVerified" })
+  isVerified?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=needsReverification" })
+  needsReverification?: boolean;
+}
 
 
 // LocationState
@@ -6,57 +56,57 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains a set of booleans that reflect the [state of a Location.](https://support.google.com/business/answer/3480862)
 **/
 export class LocationState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=canDelete" })
+  @SpeakeasyMetadata({ data: "json, name=canDelete" })
   canDelete?: boolean;
 
-  @Metadata({ data: "json, name=canHaveFoodMenus" })
+  @SpeakeasyMetadata({ data: "json, name=canHaveFoodMenus" })
   canHaveFoodMenus?: boolean;
 
-  @Metadata({ data: "json, name=canModifyServiceList" })
+  @SpeakeasyMetadata({ data: "json, name=canModifyServiceList" })
   canModifyServiceList?: boolean;
 
-  @Metadata({ data: "json, name=canOperateHealthData" })
+  @SpeakeasyMetadata({ data: "json, name=canOperateHealthData" })
   canOperateHealthData?: boolean;
 
-  @Metadata({ data: "json, name=canOperateLodgingData" })
+  @SpeakeasyMetadata({ data: "json, name=canOperateLodgingData" })
   canOperateLodgingData?: boolean;
 
-  @Metadata({ data: "json, name=canUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=canUpdate" })
   canUpdate?: boolean;
 
-  @Metadata({ data: "json, name=hasPendingEdits" })
+  @SpeakeasyMetadata({ data: "json, name=hasPendingEdits" })
   hasPendingEdits?: boolean;
 
-  @Metadata({ data: "json, name=hasPendingVerification" })
+  @SpeakeasyMetadata({ data: "json, name=hasPendingVerification" })
   hasPendingVerification?: boolean;
 
-  @Metadata({ data: "json, name=isDisabled" })
+  @SpeakeasyMetadata({ data: "json, name=isDisabled" })
   isDisabled?: boolean;
 
-  @Metadata({ data: "json, name=isDisconnected" })
+  @SpeakeasyMetadata({ data: "json, name=isDisconnected" })
   isDisconnected?: boolean;
 
-  @Metadata({ data: "json, name=isDuplicate" })
+  @SpeakeasyMetadata({ data: "json, name=isDuplicate" })
   isDuplicate?: boolean;
 
-  @Metadata({ data: "json, name=isGoogleUpdated" })
+  @SpeakeasyMetadata({ data: "json, name=isGoogleUpdated" })
   isGoogleUpdated?: boolean;
 
-  @Metadata({ data: "json, name=isLocalPostApiDisabled" })
+  @SpeakeasyMetadata({ data: "json, name=isLocalPostApiDisabled" })
   isLocalPostApiDisabled?: boolean;
 
-  @Metadata({ data: "json, name=isPendingReview" })
+  @SpeakeasyMetadata({ data: "json, name=isPendingReview" })
   isPendingReview?: boolean;
 
-  @Metadata({ data: "json, name=isPublished" })
+  @SpeakeasyMetadata({ data: "json, name=isPublished" })
   isPublished?: boolean;
 
-  @Metadata({ data: "json, name=isSuspended" })
+  @SpeakeasyMetadata({ data: "json, name=isSuspended" })
   isSuspended?: boolean;
 
-  @Metadata({ data: "json, name=isVerified" })
+  @SpeakeasyMetadata({ data: "json, name=isVerified" })
   isVerified?: boolean;
 
-  @Metadata({ data: "json, name=needsReverification" })
+  @SpeakeasyMetadata({ data: "json, name=needsReverification" })
   needsReverification?: boolean;
 }

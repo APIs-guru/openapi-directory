@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OperatorConfiguration } from "./operatorconfiguration";
 
 
+
 export class OperationUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=operationId" })
+  @SpeakeasyMetadata({ data: "json, name=operationId" })
   operationId: string;
 
-  @Metadata({ data: "json, name=operatorConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=operatorConfiguration" })
   operatorConfiguration: OperatorConfiguration;
 }

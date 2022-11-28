@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetResourcesMediaIdSyndicateFormatPathParams = /** @class */ (function (_super) {
     __extends(GetResourcesMediaIdSyndicateFormatPathParams, _super);
@@ -30,11 +30,11 @@ var GetResourcesMediaIdSyndicateFormatPathParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], GetResourcesMediaIdSyndicateFormatPathParams.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", Number)
     ], GetResourcesMediaIdSyndicateFormatPathParams.prototype, "id", void 0);
     return GetResourcesMediaIdSyndicateFormatPathParams;
@@ -46,47 +46,47 @@ var GetResourcesMediaIdSyndicateFormatQueryParams = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=autoplay" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=autoplay" }),
         __metadata("design:type", Boolean)
     ], GetResourcesMediaIdSyndicateFormatQueryParams.prototype, "autoplay", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=cssClass" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=cssClass" }),
         __metadata("design:type", String)
     ], GetResourcesMediaIdSyndicateFormatQueryParams.prototype, "cssClass", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=font-size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=font-size" }),
         __metadata("design:type", Number)
     ], GetResourcesMediaIdSyndicateFormatQueryParams.prototype, "fontSize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=imageFloat" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=imageFloat" }),
         __metadata("design:type", String)
     ], GetResourcesMediaIdSyndicateFormatQueryParams.prototype, "imageFloat", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=imageMargin" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=imageMargin" }),
         __metadata("design:type", String)
     ], GetResourcesMediaIdSyndicateFormatQueryParams.prototype, "imageMargin", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=rel" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=rel" }),
         __metadata("design:type", Boolean)
     ], GetResourcesMediaIdSyndicateFormatQueryParams.prototype, "rel", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=stripBreaks" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=stripBreaks" }),
         __metadata("design:type", Boolean)
     ], GetResourcesMediaIdSyndicateFormatQueryParams.prototype, "stripBreaks", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=stripClasses" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=stripClasses" }),
         __metadata("design:type", Boolean)
     ], GetResourcesMediaIdSyndicateFormatQueryParams.prototype, "stripClasses", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=stripImages" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=stripImages" }),
         __metadata("design:type", Boolean)
     ], GetResourcesMediaIdSyndicateFormatQueryParams.prototype, "stripImages", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=stripScripts" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=stripScripts" }),
         __metadata("design:type", Boolean)
     ], GetResourcesMediaIdSyndicateFormatQueryParams.prototype, "stripScripts", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=stripStyles" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=stripStyles" }),
         __metadata("design:type", Boolean)
     ], GetResourcesMediaIdSyndicateFormatQueryParams.prototype, "stripStyles", void 0);
     return GetResourcesMediaIdSyndicateFormatQueryParams;
@@ -98,11 +98,11 @@ var GetResourcesMediaIdSyndicateFormatRequest = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourcesMediaIdSyndicateFormatPathParams)
     ], GetResourcesMediaIdSyndicateFormatRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourcesMediaIdSyndicateFormatQueryParams)
     ], GetResourcesMediaIdSyndicateFormatRequest.prototype, "queryParams", void 0);
     return GetResourcesMediaIdSyndicateFormatRequest;
@@ -114,15 +114,15 @@ var GetResourcesMediaIdSyndicateFormatResponse = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetResourcesMediaIdSyndicateFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetResourcesMediaIdSyndicateFormatResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.SyndicateMarshallerWrapped)
     ], GetResourcesMediaIdSyndicateFormatResponse.prototype, "syndicateMarshallerWrapped", void 0);
     return GetResourcesMediaIdSyndicateFormatResponse;

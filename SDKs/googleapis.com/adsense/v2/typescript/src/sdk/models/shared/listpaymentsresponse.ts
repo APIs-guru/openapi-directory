@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Payment } from "./payment";
+
 
 
 // ListPaymentsResponse
@@ -8,6 +8,6 @@ import { Payment } from "./payment";
  * Response definition for the payments list rpc.
 **/
 export class ListPaymentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=payments", elemType: shared.Payment })
+  @SpeakeasyMetadata({ data: "json, name=payments", elemType: Payment })
   payments?: Payment[];
 }

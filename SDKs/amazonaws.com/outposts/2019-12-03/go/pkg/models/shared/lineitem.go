@@ -1,5 +1,7 @@
 package shared
 
+// LineItem
+// Information about a line item.
 type LineItem struct {
 	CatalogItemID *string `json:"CatalogItemId,omitempty"`
 	LineItemID    *string `json:"LineItemId,omitempty"`

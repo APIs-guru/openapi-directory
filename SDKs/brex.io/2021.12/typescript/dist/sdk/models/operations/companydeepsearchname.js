@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CompanyDeepsearchNamePathParams = /** @class */ (function (_super) {
     __extends(CompanyDeepsearchNamePathParams, _super);
@@ -30,11 +30,11 @@ var CompanyDeepsearchNamePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=country" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=country" }),
         __metadata("design:type", String)
     ], CompanyDeepsearchNamePathParams.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], CompanyDeepsearchNamePathParams.prototype, "name", void 0);
     return CompanyDeepsearchNamePathParams;
@@ -46,7 +46,7 @@ var CompanyDeepsearchNameSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], CompanyDeepsearchNameSecurity.prototype, "userKey", void 0);
     return CompanyDeepsearchNameSecurity;
@@ -58,11 +58,11 @@ var CompanyDeepsearchNameRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CompanyDeepsearchNamePathParams)
     ], CompanyDeepsearchNameRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CompanyDeepsearchNameSecurity)
     ], CompanyDeepsearchNameRequest.prototype, "security", void 0);
     return CompanyDeepsearchNameRequest;
@@ -74,19 +74,19 @@ var CompanyDeepsearchNameResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], CompanyDeepsearchNameResponse.prototype, "companyDeepsearchName200ApplicationJsonAnies", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CompanyDeepsearchNameResponse.prototype, "companyDeepsearchNameDefaultApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CompanyDeepsearchNameResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CompanyDeepsearchNameResponse.prototype, "statusCode", void 0);
     return CompanyDeepsearchNameResponse;

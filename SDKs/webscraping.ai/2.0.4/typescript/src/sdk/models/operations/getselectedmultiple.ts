@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSelectedMultipleQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=headers" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=headers" })
   headers?: Map<string, string>;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=js" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=js" })
   js?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=proxy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proxy" })
   proxy?: shared.ProxyEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=selectors" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=selectors" })
   selectors?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timeout" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeout" })
   timeout?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=url" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=url" })
   url: string;
 }
 
 
 export class GetSelectedMultipleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSelectedMultipleQueryParams;
 }
 
 
 export class GetSelectedMultipleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pageError?: shared.PageError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   selectedAreas?: string[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

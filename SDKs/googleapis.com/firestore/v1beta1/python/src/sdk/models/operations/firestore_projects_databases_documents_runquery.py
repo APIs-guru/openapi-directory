@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsRunQueryPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class FirestoreProjectsDatabasesDocumentsRunQueryQueryParams:
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsRunQuerySecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsRunQuerySecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class FirestoreProjectsDatabasesDocumentsRunQuerySecurity:
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsRunQueryRequest:
-    path_params: FirestoreProjectsDatabasesDocumentsRunQueryPathParams = field(default=None)
-    query_params: FirestoreProjectsDatabasesDocumentsRunQueryQueryParams = field(default=None)
+    path_params: FirestoreProjectsDatabasesDocumentsRunQueryPathParams = field()
+    query_params: FirestoreProjectsDatabasesDocumentsRunQueryQueryParams = field()
+    security: FirestoreProjectsDatabasesDocumentsRunQuerySecurity = field()
     request: Optional[shared.RunQueryRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: FirestoreProjectsDatabasesDocumentsRunQuerySecurity = field(default=None)
     
 
 @dataclass
 class FirestoreProjectsDatabasesDocumentsRunQueryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     run_query_response: Optional[shared.RunQueryResponse] = field(default=None)
-    status_code: int = field(default=None)
     

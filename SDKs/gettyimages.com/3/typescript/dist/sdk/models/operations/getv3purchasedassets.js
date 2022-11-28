@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetV3PurchasedAssetsQueryParams = /** @class */ (function (_super) {
     __extends(GetV3PurchasedAssetsQueryParams, _super);
@@ -30,23 +30,23 @@ var GetV3PurchasedAssetsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=company_purchases" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=company_purchases" }),
         __metadata("design:type", Boolean)
     ], GetV3PurchasedAssetsQueryParams.prototype, "companyPurchases", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=date_from" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_from" }),
         __metadata("design:type", Date)
     ], GetV3PurchasedAssetsQueryParams.prototype, "dateFrom", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=date_to" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_to" }),
         __metadata("design:type", Date)
     ], GetV3PurchasedAssetsQueryParams.prototype, "dateTo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetV3PurchasedAssetsQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], GetV3PurchasedAssetsQueryParams.prototype, "pageSize", void 0);
     return GetV3PurchasedAssetsQueryParams;
@@ -58,7 +58,7 @@ var GetV3PurchasedAssetsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept-Language" }),
         __metadata("design:type", String)
     ], GetV3PurchasedAssetsHeaders.prototype, "acceptLanguage", void 0);
     return GetV3PurchasedAssetsHeaders;
@@ -70,11 +70,11 @@ var GetV3PurchasedAssetsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3PurchasedAssetsQueryParams)
     ], GetV3PurchasedAssetsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3PurchasedAssetsHeaders)
     ], GetV3PurchasedAssetsRequest.prototype, "headers", void 0);
     return GetV3PurchasedAssetsRequest;
@@ -86,15 +86,15 @@ var GetV3PurchasedAssetsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetV3PurchasedAssetsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.PreviousAssetPurchases)
     ], GetV3PurchasedAssetsResponse.prototype, "previousAssetPurchases", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetV3PurchasedAssetsResponse.prototype, "statusCode", void 0);
     return GetV3PurchasedAssetsResponse;

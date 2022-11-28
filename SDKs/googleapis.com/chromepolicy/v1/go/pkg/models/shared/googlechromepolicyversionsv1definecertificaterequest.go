@@ -1,5 +1,7 @@
 package shared
 
+// GoogleChromePolicyVersionsV1DefineCertificateRequest
+// Request object for creating a certificate.
 type GoogleChromePolicyVersionsV1DefineCertificateRequest struct {
 	CeritificateName *string                                      `json:"ceritificateName,omitempty"`
 	Certificate      *string                                      `json:"certificate,omitempty"`

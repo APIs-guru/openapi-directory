@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AccountGetSessionPathParams = /** @class */ (function (_super) {
     __extends(AccountGetSessionPathParams, _super);
@@ -30,7 +30,7 @@ var AccountGetSessionPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=sessionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sessionId" }),
         __metadata("design:type", String)
     ], AccountGetSessionPathParams.prototype, "sessionId", void 0);
     return AccountGetSessionPathParams;
@@ -42,11 +42,11 @@ var AccountGetSessionSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeJwt)
     ], AccountGetSessionSecurity.prototype, "jwt", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeProject)
     ], AccountGetSessionSecurity.prototype, "project", void 0);
     return AccountGetSessionSecurity;
@@ -58,11 +58,11 @@ var AccountGetSessionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AccountGetSessionPathParams)
     ], AccountGetSessionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AccountGetSessionSecurity)
     ], AccountGetSessionRequest.prototype, "security", void 0);
     return AccountGetSessionRequest;
@@ -74,15 +74,15 @@ var AccountGetSessionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AccountGetSessionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AccountGetSessionResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Session)
     ], AccountGetSessionResponse.prototype, "session", void 0);
     return AccountGetSessionResponse;

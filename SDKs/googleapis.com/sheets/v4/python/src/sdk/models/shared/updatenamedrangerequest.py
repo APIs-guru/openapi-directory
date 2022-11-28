@@ -1,12 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import namedrange
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateNamedRangeRequest:
-    fields: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fields' }})
-    named_range: Optional[namedrange.NamedRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'namedRange' }})
+    r"""UpdateNamedRangeRequest
+    Updates properties of the named range with the specified namedRangeId.
+    """
+    
+    fields: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fields') }})
+    named_range: Optional[NamedRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('namedRange') }})
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Alert
+// A configuration for Amazon SNS-integrated notifications.
 type Alert struct {
 	Action                    *Action          `json:"Action,omitempty"`
 	AlertArn                  *string          `json:"AlertArn,omitempty"`

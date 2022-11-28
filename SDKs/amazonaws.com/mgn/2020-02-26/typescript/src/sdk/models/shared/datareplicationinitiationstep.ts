@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataReplicationInitiationStepNameEnum } from "./datareplicationinitiationstepnameenum";
 import { DataReplicationInitiationStepStatusEnum } from "./datareplicationinitiationstepstatusenum";
+
 
 
 // DataReplicationInitiationStep
@@ -8,9 +9,9 @@ import { DataReplicationInitiationStepStatusEnum } from "./datareplicationinitia
  * Data replication intiation step.
 **/
 export class DataReplicationInitiationStep extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: DataReplicationInitiationStepNameEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: DataReplicationInitiationStepStatusEnum;
 }

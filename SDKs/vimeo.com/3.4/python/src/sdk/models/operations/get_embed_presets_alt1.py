@@ -11,12 +11,12 @@ class GetEmbedPresetsAlt1QueryParams:
 
 @dataclass
 class GetEmbedPresetsAlt1Request:
-    query_params: GetEmbedPresetsAlt1QueryParams = field(default=None)
+    query_params: GetEmbedPresetsAlt1QueryParams = field()
     
 
 @dataclass
 class GetEmbedPresetsAlt1Response:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     presets: Optional[List[shared.Presets]] = field(default=None)
     

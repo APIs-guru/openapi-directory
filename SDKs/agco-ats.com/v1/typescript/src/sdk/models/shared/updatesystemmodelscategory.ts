@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpdateSystemModelsAttributeValue } from "./updatesystemmodelsattributevalue";
 
 
+
 export class UpdateSystemModelsCategory extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Values", elemType: shared.UpdateSystemModelsAttributeValue })
+  @SpeakeasyMetadata({ data: "json, name=Values", elemType: UpdateSystemModelsAttributeValue })
   values?: UpdateSystemModelsAttributeValue[];
 
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category: string;
 }

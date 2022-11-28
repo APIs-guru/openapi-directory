@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReadyRequestDto
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Class ReadyRequest.
 **/
 export class ReadyRequestDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IsPlaying" })
+  @SpeakeasyMetadata({ data: "json, name=IsPlaying" })
   isPlaying?: boolean;
 
-  @Metadata({ data: "json, name=PlaylistItemId" })
+  @SpeakeasyMetadata({ data: "json, name=PlaylistItemId" })
   playlistItemId?: string;
 
-  @Metadata({ data: "json, name=PositionTicks" })
+  @SpeakeasyMetadata({ data: "json, name=PositionTicks" })
   positionTicks?: number;
 
-  @Metadata({ data: "json, name=When" })
+  @SpeakeasyMetadata({ data: "json, name=When" })
   when?: Date;
 }

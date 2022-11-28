@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListCollectionIdsResponse
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The response from Firestore.ListCollectionIds.
 **/
 export class ListCollectionIdsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collectionIds" })
+  @SpeakeasyMetadata({ data: "json, name=collectionIds" })
   collectionIds?: string[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

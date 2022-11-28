@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Row } from "./row";
 
+
 export enum UpdateRowRequestViewEnum {
-    ViewUnspecified = "VIEW_UNSPECIFIED"
-,    ColumnIdView = "COLUMN_ID_VIEW"
+    ViewUnspecified = "VIEW_UNSPECIFIED",
+    ColumnIdView = "COLUMN_ID_VIEW"
 }
 
 
@@ -12,12 +13,12 @@ export enum UpdateRowRequestViewEnum {
  * Request message for TablesService.UpdateRow.
 **/
 export class UpdateRowRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=row" })
+  @SpeakeasyMetadata({ data: "json, name=row" })
   row?: Row;
 
-  @Metadata({ data: "json, name=updateMask" })
+  @SpeakeasyMetadata({ data: "json, name=updateMask" })
   updateMask?: string;
 
-  @Metadata({ data: "json, name=view" })
+  @SpeakeasyMetadata({ data: "json, name=view" })
   view?: UpdateRowRequestViewEnum;
 }

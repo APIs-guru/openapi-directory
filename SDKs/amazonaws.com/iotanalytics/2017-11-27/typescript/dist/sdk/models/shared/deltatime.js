@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DeltaTime
 /**
  * Used to limit data to that which has arrived since the last execution of the action.
@@ -33,11 +33,11 @@ var DeltaTime = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=offsetSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=offsetSeconds" }),
         __metadata("design:type", Number)
     ], DeltaTime.prototype, "offsetSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeExpression" }),
+        SpeakeasyMetadata({ data: "json, name=timeExpression" }),
         __metadata("design:type", String)
     ], DeltaTime.prototype, "timeExpression", void 0);
     return DeltaTime;

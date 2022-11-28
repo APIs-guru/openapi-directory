@@ -1,6 +1,7 @@
 
 
+
 export enum ResourceTypeEnum {
-    Database = "DATABASE"
-,    Table = "TABLE"
+    Database = "DATABASE",
+    Table = "TABLE"
 }

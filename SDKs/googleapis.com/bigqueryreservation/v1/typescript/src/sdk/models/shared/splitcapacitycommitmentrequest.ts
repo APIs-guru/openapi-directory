@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SplitCapacityCommitmentRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The request for ReservationService.SplitCapacityCommitment.
 **/
 export class SplitCapacityCommitmentRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=slotCount" })
+  @SpeakeasyMetadata({ data: "json, name=slotCount" })
   slotCount?: string;
 }

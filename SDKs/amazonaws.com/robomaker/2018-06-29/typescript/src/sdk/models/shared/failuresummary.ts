@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorldFailure } from "./worldfailure";
+
 
 
 // FailureSummary
@@ -8,9 +8,9 @@ import { WorldFailure } from "./worldfailure";
  * Information about worlds that failed.
 **/
 export class FailureSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failures", elemType: shared.WorldFailure })
+  @SpeakeasyMetadata({ data: "json, name=failures", elemType: WorldFailure })
   failures?: WorldFailure[];
 
-  @Metadata({ data: "json, name=totalFailureCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalFailureCount" })
   totalFailureCount?: number;
 }

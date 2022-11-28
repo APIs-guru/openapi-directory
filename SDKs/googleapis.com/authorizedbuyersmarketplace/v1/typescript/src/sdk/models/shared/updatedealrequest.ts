@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Deal } from "./deal";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DealInput } from "./deal";
 
 
-// UpdateDealRequest
+
+// UpdateDealRequestInput
 /** 
  * Request message for updating the deal at the given revision number.
 **/
-export class UpdateDealRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deal" })
-  deal?: Deal;
+export class UpdateDealRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=deal" })
+  deal?: DealInput;
 
-  @Metadata({ data: "json, name=updateMask" })
+  @SpeakeasyMetadata({ data: "json, name=updateMask" })
   updateMask?: string;
 }

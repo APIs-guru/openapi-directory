@@ -1,5 +1,7 @@
 package shared
 
+// DomainName
+// Represents a domain name.
 type DomainName struct {
 	APIMappingSelectionExpression *string                   `json:"ApiMappingSelectionExpression,omitempty"`
 	DomainName                    string                    `json:"DomainName"`

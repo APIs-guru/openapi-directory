@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReservationConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The settings for this topic's Reservation usage.
 **/
 export class ReservationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=throughputReservation" })
+  @SpeakeasyMetadata({ data: "json, name=throughputReservation" })
   throughputReservation?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DescribeEventTopicsRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes event topics.
 **/
 export class DescribeEventTopicsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DirectoryId" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryId" })
   directoryId?: string;
 
-  @Metadata({ data: "json, name=TopicNames" })
+  @SpeakeasyMetadata({ data: "json, name=TopicNames" })
   topicNames?: string[];
 }

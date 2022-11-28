@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SearchApplicationQueryStats } from "./searchapplicationquerystats";
+
 
 
 // GetSearchApplicationQueryStatsResponse
@@ -8,9 +8,9 @@ import { SearchApplicationQueryStats } from "./searchapplicationquerystats";
  * Response format for getting query stats for a search application between given dates.
 **/
 export class GetSearchApplicationQueryStatsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=stats", elemType: shared.SearchApplicationQueryStats })
+  @SpeakeasyMetadata({ data: "json, name=stats", elemType: SearchApplicationQueryStats })
   stats?: SearchApplicationQueryStats[];
 
-  @Metadata({ data: "json, name=totalQueryCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalQueryCount" })
   totalQueryCount?: string;
 }

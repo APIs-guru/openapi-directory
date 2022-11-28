@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostUploadQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=token" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=token" })
   token: string;
 }
 
 
 export class PostUploadHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Content-Range" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Content-Range" })
   contentRange?: string;
 }
 
 
 export class PostUploadRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostUploadQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PostUploadHeaders;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request?: shared.TokenUploadPayload;
 }
 
 
 export class PostUploadResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequest?: shared.BadRequest;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   video?: shared.Video;
 }

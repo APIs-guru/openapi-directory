@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class SecerRequestBodyCertificateParameters extends SpeakeasyBase {
     udf1: string;
@@ -15,10 +15,6 @@ export declare class SecerRequestBody extends SpeakeasyBase {
 export declare class SecerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class SecerRequest extends SpeakeasyBase {
-    request?: SecerRequestBody;
-    security: SecerSecurity;
 }
 export declare enum Secer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -101,6 +97,10 @@ export declare enum Secer504ApplicationJsonErrorDescriptionEnum {
 export declare class Secer504ApplicationJson extends SpeakeasyBase {
     error?: Secer504ApplicationJsonErrorEnum;
     errorDescription?: Secer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class SecerRequest extends SpeakeasyBase {
+    request?: SecerRequestBody;
+    security: SecerSecurity;
 }
 export declare class SecerResponse extends SpeakeasyBase {
     contentType: string;

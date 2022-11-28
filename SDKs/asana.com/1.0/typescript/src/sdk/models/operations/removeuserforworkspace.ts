@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RemoveUserForWorkspacePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=workspace_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspace_gid" })
   workspaceGid: string;
 }
 
 
 export class RemoveUserForWorkspaceQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
 export class RemoveUserForWorkspaceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.WorkspaceRemoveUserRequest;
 }
 
 
-export class RemoveUserForWorkspaceRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: RemoveUserForWorkspacePathParams;
-
-  @Metadata()
-  queryParams: RemoveUserForWorkspaceQueryParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: RemoveUserForWorkspaceRequestBody;
-}
-
-
 export class RemoveUserForWorkspace204ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 }
 
 
+export class RemoveUserForWorkspaceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: RemoveUserForWorkspacePathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: RemoveUserForWorkspaceQueryParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: RemoveUserForWorkspaceRequestBody;
+}
+
+
 export class RemoveUserForWorkspaceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   removeUserForWorkspace204ApplicationJsonObject?: RemoveUserForWorkspace204ApplicationJson;
 }

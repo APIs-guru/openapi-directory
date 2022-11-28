@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BigqueryDatasetsPatchPathParams:
-    dataset_id: str = field(default=None, metadata={'path_param': { 'field_name': 'datasetId', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    dataset_id: str = field(metadata={'path_param': { 'field_name': 'datasetId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,14 +23,14 @@ class BigqueryDatasetsPatchQueryParams:
 
 @dataclass
 class BigqueryDatasetsPatchSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BigqueryDatasetsPatchSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -40,15 +41,15 @@ class BigqueryDatasetsPatchSecurity:
 
 @dataclass
 class BigqueryDatasetsPatchRequest:
-    path_params: BigqueryDatasetsPatchPathParams = field(default=None)
-    query_params: BigqueryDatasetsPatchQueryParams = field(default=None)
+    path_params: BigqueryDatasetsPatchPathParams = field()
+    query_params: BigqueryDatasetsPatchQueryParams = field()
+    security: BigqueryDatasetsPatchSecurity = field()
     request: Optional[shared.Dataset] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: BigqueryDatasetsPatchSecurity = field(default=None)
     
 
 @dataclass
 class BigqueryDatasetsPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dataset: Optional[shared.Dataset] = field(default=None)
-    status_code: int = field(default=None)
     

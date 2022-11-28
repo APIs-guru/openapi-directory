@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CertificateValidity
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * When the certificate is valid.
 **/
 export class CertificateValidity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=notAfter" })
+  @SpeakeasyMetadata({ data: "json, name=notAfter" })
   notAfter?: Date;
 
-  @Metadata({ data: "json, name=notBefore" })
+  @SpeakeasyMetadata({ data: "json, name=notBefore" })
   notBefore?: Date;
 }

@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var BurnTokenResponse = /** @class */ (function (_super) {
     __extends(BurnTokenResponse, _super);
     function BurnTokenResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=multisigOutputs" }),
+        SpeakeasyMetadata({ data: "json, name=multisigOutputs" }),
         __metadata("design:type", Array)
     ], BurnTokenResponse.prototype, "multisigOutputs", void 0);
     __decorate([
-        Metadata({ data: "json, name=ntp1OutputIndexes" }),
+        SpeakeasyMetadata({ data: "json, name=ntp1OutputIndexes" }),
         __metadata("design:type", Array)
     ], BurnTokenResponse.prototype, "ntp1OutputIndexes", void 0);
     __decorate([
-        Metadata({ data: "json, name=txHex" }),
+        SpeakeasyMetadata({ data: "json, name=txHex" }),
         __metadata("design:type", String)
     ], BurnTokenResponse.prototype, "txHex", void 0);
     return BurnTokenResponse;

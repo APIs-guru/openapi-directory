@@ -1,77 +1,78 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutFileSystemPolicyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=FileSystemId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FileSystemId" })
   fileSystemId: string;
 }
 
 
 export class PutFileSystemPolicyHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class PutFileSystemPolicyRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BypassPolicyLockoutSafetyCheck" })
+  @SpeakeasyMetadata({ data: "json, name=BypassPolicyLockoutSafetyCheck" })
   bypassPolicyLockoutSafetyCheck?: boolean;
 
-  @Metadata({ data: "json, name=Policy" })
+  @SpeakeasyMetadata({ data: "json, name=Policy" })
   policy: string;
 }
 
 
 export class PutFileSystemPolicyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutFileSystemPolicyPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PutFileSystemPolicyHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: PutFileSystemPolicyRequestBody;
 }
 
 
 export class PutFileSystemPolicyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fileSystemNotFound?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fileSystemPolicyDescription?: shared.FileSystemPolicyDescription;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   incorrectFileSystemLifeCycleState?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerError?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidPolicyException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

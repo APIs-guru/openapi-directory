@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import validatepolicyfinding
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ValidatePolicyResponse:
-    findings: List[validatepolicyfinding.ValidatePolicyFinding] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'findings' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
+    findings: List[ValidatePolicyFinding] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('findings') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     

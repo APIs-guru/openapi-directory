@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SeekRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for the `Seek` method.
 **/
 export class SeekRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=snapshot" })
+  @SpeakeasyMetadata({ data: "json, name=snapshot" })
   snapshot?: string;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: string;
 }

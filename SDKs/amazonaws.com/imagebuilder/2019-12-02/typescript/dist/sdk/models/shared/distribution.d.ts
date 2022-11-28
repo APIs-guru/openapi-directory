@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AmiDistributionConfiguration } from "./amidistributionconfiguration";
 import { ContainerDistributionConfiguration } from "./containerdistributionconfiguration";
 import { LaunchTemplateConfiguration } from "./launchtemplateconfiguration";

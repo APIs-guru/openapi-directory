@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AggregationInfo } from "./aggregationinfo";
 import { PricingExpression } from "./pricingexpression";
 /**

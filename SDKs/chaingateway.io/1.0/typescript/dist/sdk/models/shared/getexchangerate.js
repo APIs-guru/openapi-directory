@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetExchangeRate = /** @class */ (function (_super) {
     __extends(GetExchangeRate, _super);
     function GetExchangeRate() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=currency" }),
+        SpeakeasyMetadata({ data: "json, name=currency" }),
         __metadata("design:type", String)
     ], GetExchangeRate.prototype, "currency", void 0);
     __decorate([
-        Metadata({ data: "json, name=ok" }),
+        SpeakeasyMetadata({ data: "json, name=ok" }),
         __metadata("design:type", Boolean)
     ], GetExchangeRate.prototype, "ok", void 0);
     __decorate([
-        Metadata({ data: "json, name=rate" }),
+        SpeakeasyMetadata({ data: "json, name=rate" }),
         __metadata("design:type", Number)
     ], GetExchangeRate.prototype, "rate", void 0);
     return GetExchangeRate;

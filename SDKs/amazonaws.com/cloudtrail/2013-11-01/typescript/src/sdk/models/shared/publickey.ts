@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PublicKey
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about a returned public key.
 **/
 export class PublicKey extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=Fingerprint" })
   fingerprint?: string;
 
-  @Metadata({ data: "json, name=ValidityEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=ValidityEndTime" })
   validityEndTime?: Date;
 
-  @Metadata({ data: "json, name=ValidityStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=ValidityStartTime" })
   validityStartTime?: Date;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

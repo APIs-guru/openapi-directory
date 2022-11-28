@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DirectoryLimits } from "./directorylimits";
+
 
 
 // GetDirectoryLimitsResult
@@ -7,6 +8,6 @@ import { DirectoryLimits } from "./directorylimits";
  * Contains the results of the <a>GetDirectoryLimits</a> operation.
 **/
 export class GetDirectoryLimitsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DirectoryLimits" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryLimits" })
   directoryLimits?: DirectoryLimits;
 }

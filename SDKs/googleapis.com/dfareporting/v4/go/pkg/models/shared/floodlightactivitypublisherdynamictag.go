@@ -1,5 +1,7 @@
 package shared
 
+// FloodlightActivityPublisherDynamicTag
+// Publisher Dynamic Tag
 type FloodlightActivityPublisherDynamicTag struct {
 	ClickThrough         *bool                         `json:"clickThrough,omitempty"`
 	DirectorySiteID      *string                       `json:"directorySiteId,omitempty"`

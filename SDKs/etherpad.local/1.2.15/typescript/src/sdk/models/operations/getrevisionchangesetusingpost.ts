@@ -1,85 +1,86 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetRevisionChangesetUsingPostQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=padID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=padID" })
   padId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rev" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rev" })
   rev?: string;
 }
 
 
-export class GetRevisionChangesetUsingPostRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetRevisionChangesetUsingPostQueryParams;
-}
-
-
 export class GetRevisionChangesetUsingPost200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetRevisionChangesetUsingPost400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetRevisionChangesetUsingPost401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetRevisionChangesetUsingPost500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetRevisionChangesetUsingPostRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetRevisionChangesetUsingPostQueryParams;
+}
+
+
 export class GetRevisionChangesetUsingPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getRevisionChangesetUsingPost200ApplicationJsonObject?: GetRevisionChangesetUsingPost200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getRevisionChangesetUsingPost400ApplicationJsonObject?: GetRevisionChangesetUsingPost400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getRevisionChangesetUsingPost401ApplicationJsonObject?: GetRevisionChangesetUsingPost401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getRevisionChangesetUsingPost500ApplicationJsonObject?: GetRevisionChangesetUsingPost500ApplicationJson;
 }

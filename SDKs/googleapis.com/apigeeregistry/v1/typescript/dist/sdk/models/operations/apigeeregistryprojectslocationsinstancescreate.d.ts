@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class ApigeeregistryProjectsLocationsInstancesCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -24,7 +24,7 @@ export declare class ApigeeregistryProjectsLocationsInstancesCreateSecurity exte
 export declare class ApigeeregistryProjectsLocationsInstancesCreateRequest extends SpeakeasyBase {
     pathParams: ApigeeregistryProjectsLocationsInstancesCreatePathParams;
     queryParams: ApigeeregistryProjectsLocationsInstancesCreateQueryParams;
-    request?: shared.Instance;
+    request?: shared.InstanceInput;
     security: ApigeeregistryProjectsLocationsInstancesCreateSecurity;
 }
 export declare class ApigeeregistryProjectsLocationsInstancesCreateResponse extends SpeakeasyBase {

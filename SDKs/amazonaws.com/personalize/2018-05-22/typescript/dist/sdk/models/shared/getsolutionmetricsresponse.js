@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetSolutionMetricsResponse = /** @class */ (function (_super) {
     __extends(GetSolutionMetricsResponse, _super);
     function GetSolutionMetricsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=metrics" }),
+        SpeakeasyMetadata({ data: "json, name=metrics" }),
         __metadata("design:type", Map)
     ], GetSolutionMetricsResponse.prototype, "metrics", void 0);
     __decorate([
-        Metadata({ data: "json, name=solutionVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=solutionVersionArn" }),
         __metadata("design:type", String)
     ], GetSolutionMetricsResponse.prototype, "solutionVersionArn", void 0);
     return GetSolutionMetricsResponse;

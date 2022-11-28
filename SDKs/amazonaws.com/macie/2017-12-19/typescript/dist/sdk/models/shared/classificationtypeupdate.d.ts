@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { S3ContinuousClassificationTypeEnum } from "./s3continuousclassificationtypeenum";
 import { S3OneTimeClassificationTypeEnum } from "./s3onetimeclassificationtypeenum";
 /**

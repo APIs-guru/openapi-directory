@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MediaSourceInfo } from "./mediasourceinfo";
 
 
+
 export class LiveStreamResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MediaSource" })
+  @SpeakeasyMetadata({ data: "json, name=MediaSource" })
   mediaSource?: MediaSourceInfo;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum ResourceOwnerEnum {
-    Self = "SELF"
-,    OtherAccounts = "OTHER_ACCOUNTS"
+    Self = "SELF",
+    OtherAccounts = "OTHER_ACCOUNTS"
 }

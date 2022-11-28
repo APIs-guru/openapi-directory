@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClassificationExportConfiguration } from "./classificationexportconfiguration";
 
 
+
 export class GetClassificationExportConfigurationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configuration" })
+  @SpeakeasyMetadata({ data: "json, name=configuration" })
   configuration?: ClassificationExportConfiguration;
 }

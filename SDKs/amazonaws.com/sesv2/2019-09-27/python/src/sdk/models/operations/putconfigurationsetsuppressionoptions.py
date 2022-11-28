@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class PutConfigurationSetSuppressionOptionsPathParams:
-    configuration_set_name: str = field(default=None, metadata={'path_param': { 'field_name': 'ConfigurationSetName', 'style': 'simple', 'explode': False }})
+    configuration_set_name: str = field(metadata={'path_param': { 'field_name': 'ConfigurationSetName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,22 +28,22 @@ class PutConfigurationSetSuppressionOptionsHeaders:
 @dataclass_json
 @dataclass
 class PutConfigurationSetSuppressionOptionsRequestBody:
-    suppressed_reasons: Optional[List[shared.SuppressionListReasonEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SuppressedReasons' }})
+    suppressed_reasons: Optional[List[shared.SuppressionListReasonEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SuppressedReasons') }})
     
 
 @dataclass
 class PutConfigurationSetSuppressionOptionsRequest:
-    path_params: PutConfigurationSetSuppressionOptionsPathParams = field(default=None)
-    headers: PutConfigurationSetSuppressionOptionsHeaders = field(default=None)
-    request: PutConfigurationSetSuppressionOptionsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutConfigurationSetSuppressionOptionsHeaders = field()
+    path_params: PutConfigurationSetSuppressionOptionsPathParams = field()
+    request: PutConfigurationSetSuppressionOptionsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutConfigurationSetSuppressionOptionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     put_configuration_set_suppression_options_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

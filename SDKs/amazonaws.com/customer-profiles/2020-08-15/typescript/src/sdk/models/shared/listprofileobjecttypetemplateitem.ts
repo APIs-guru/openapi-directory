@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ListProfileObjectTypeTemplateItem
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A ProfileObjectTypeTemplate in a list of ProfileObjectTypeTemplates.
 **/
 export class ListProfileObjectTypeTemplateItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SourceName" })
+  @SpeakeasyMetadata({ data: "json, name=SourceName" })
   sourceName?: string;
 
-  @Metadata({ data: "json, name=SourceObject" })
+  @SpeakeasyMetadata({ data: "json, name=SourceObject" })
   sourceObject?: string;
 
-  @Metadata({ data: "json, name=TemplateId" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateId" })
   templateId?: string;
 }

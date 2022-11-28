@@ -1,6 +1,6 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export declare const LISTFAX_SERVERS: string[];
+export declare const ListFaxServerList: readonly ["https://fax.twilio.com"];
 export declare class ListFaxQueryParams extends SpeakeasyBase {
     dateCreatedAfter?: Date;
     dateCreatedOnOrBefore?: Date;
@@ -10,11 +10,6 @@ export declare class ListFaxQueryParams extends SpeakeasyBase {
 }
 export declare class ListFaxSecurity extends SpeakeasyBase {
     accountSidAuthToken: shared.SchemeAccountSidAuthToken;
-}
-export declare class ListFaxRequest extends SpeakeasyBase {
-    serverUrl?: string;
-    queryParams: ListFaxQueryParams;
-    security: ListFaxSecurity;
 }
 export declare class ListFaxListFaxResponseMeta extends SpeakeasyBase {
     firstPageUrl?: string;
@@ -28,6 +23,11 @@ export declare class ListFaxListFaxResponseMeta extends SpeakeasyBase {
 export declare class ListFaxListFaxResponse extends SpeakeasyBase {
     faxes?: shared.FaxV1Fax[];
     meta?: ListFaxListFaxResponseMeta;
+}
+export declare class ListFaxRequest extends SpeakeasyBase {
+    serverUrl?: string;
+    queryParams: ListFaxQueryParams;
+    security: ListFaxSecurity;
 }
 export declare class ListFaxResponse extends SpeakeasyBase {
     contentType: string;

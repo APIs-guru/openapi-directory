@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AxisScaleEnum {
-    ScaleUnspecified = "SCALE_UNSPECIFIED"
-,    Linear = "LINEAR"
-,    Log10 = "LOG10"
+    ScaleUnspecified = "SCALE_UNSPECIFIED",
+    Linear = "LINEAR",
+    Log10 = "LOG10"
 }
 
 
@@ -12,9 +13,9 @@ export enum AxisScaleEnum {
  * A chart axis.
 **/
 export class Axis extends SpeakeasyBase {
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=scale" })
+  @SpeakeasyMetadata({ data: "json, name=scale" })
   scale?: AxisScaleEnum;
 }

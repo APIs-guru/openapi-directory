@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum UpdatePolicies200ApplicationJsonActionEnum {
     UpdatePolicies = "updatePolicies"
@@ -10,35 +11,35 @@ export enum UpdatePolicies200ApplicationJsonDataPoliciesEnum {
 
 
 export class UpdatePolicies200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=policies" })
+  @SpeakeasyMetadata({ data: "json, name=policies" })
   policies: UpdatePolicies200ApplicationJsonDataPoliciesEnum;
 }
 
 export enum UpdatePolicies200ApplicationJsonResultEnum {
-    Success = "success"
-,    Error = "error"
+    Success = "success",
+    Error = "error"
 }
 
 
 export class UpdatePolicies200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: UpdatePolicies200ApplicationJsonActionEnum;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: UpdatePolicies200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: UpdatePolicies200ApplicationJsonResultEnum;
 }
 
 
 export class UpdatePoliciesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updatePolicies200ApplicationJsonObject?: UpdatePolicies200ApplicationJson;
 }

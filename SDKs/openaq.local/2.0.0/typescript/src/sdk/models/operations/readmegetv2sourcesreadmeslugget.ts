@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReadmeGetV2SourcesReadmeSlugGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=slug" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=slug" })
   slug: string;
 }
 
 
 export class ReadmeGetV2SourcesReadmeSlugGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReadmeGetV2SourcesReadmeSlugGetPathParams;
 }
 
 
 export class ReadmeGetV2SourcesReadmeSlugGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   readmeGetV2SourcesReadmeSlugGet200ApplicationJsonAny?: any;
 }

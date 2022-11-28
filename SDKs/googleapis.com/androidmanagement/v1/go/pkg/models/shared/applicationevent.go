@@ -14,6 +14,8 @@ const (
 	ApplicationEventEventTypeEnumUnpinned                        ApplicationEventEventTypeEnum = "UNPINNED"
 )
 
+// ApplicationEvent
+// An app-related event.
 type ApplicationEvent struct {
 	CreateTime *string                        `json:"createTime,omitempty"`
 	EventType  *ApplicationEventEventTypeEnum `json:"eventType,omitempty"`

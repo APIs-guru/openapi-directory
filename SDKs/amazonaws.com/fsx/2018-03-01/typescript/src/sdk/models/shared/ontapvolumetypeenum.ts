@@ -1,7 +1,8 @@
 
 
+
 export enum OntapVolumeTypeEnum {
-    Rw = "RW"
-,    Dp = "DP"
-,    Ls = "LS"
+    Rw = "RW",
+    Dp = "DP",
+    Ls = "LS"
 }

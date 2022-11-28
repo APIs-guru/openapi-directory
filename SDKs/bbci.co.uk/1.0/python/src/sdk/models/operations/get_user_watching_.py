@@ -4,17 +4,17 @@ from typing import Any,Optional
 
 @dataclass
 class GetUserWatchingQueryParams:
-    identity_cookie: float = field(default=None, metadata={'query_param': { 'field_name': 'identity_cookie', 'style': 'form', 'explode': True }})
+    identity_cookie: float = field(metadata={'query_param': { 'field_name': 'identity_cookie', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetUserWatchingRequest:
-    query_params: GetUserWatchingQueryParams = field(default=None)
+    query_params: GetUserWatchingQueryParams = field()
     
 
 @dataclass
 class GetUserWatchingResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     ibl: Optional[Any] = field(default=None)
     

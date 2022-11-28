@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DatacatalogProjectsLocationsEntryGroupsEntriesModifyEntryOverviewPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DatacatalogProjectsLocationsEntryGroupsEntriesModifyEntryOverviewQueryPara
 
 @dataclass
 class DatacatalogProjectsLocationsEntryGroupsEntriesModifyEntryOverviewSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DatacatalogProjectsLocationsEntryGroupsEntriesModifyEntryOverviewRequest:
-    path_params: DatacatalogProjectsLocationsEntryGroupsEntriesModifyEntryOverviewPathParams = field(default=None)
-    query_params: DatacatalogProjectsLocationsEntryGroupsEntriesModifyEntryOverviewQueryParams = field(default=None)
+    path_params: DatacatalogProjectsLocationsEntryGroupsEntriesModifyEntryOverviewPathParams = field()
+    query_params: DatacatalogProjectsLocationsEntryGroupsEntriesModifyEntryOverviewQueryParams = field()
+    security: DatacatalogProjectsLocationsEntryGroupsEntriesModifyEntryOverviewSecurity = field()
     request: Optional[shared.GoogleCloudDatacatalogV1ModifyEntryOverviewRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DatacatalogProjectsLocationsEntryGroupsEntriesModifyEntryOverviewSecurity = field(default=None)
     
 
 @dataclass
 class DatacatalogProjectsLocationsEntryGroupsEntriesModifyEntryOverviewResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_datacatalog_v1_entry_overview: Optional[shared.GoogleCloudDatacatalogV1EntryOverview] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -11,6 +11,17 @@ const (
 	RestoreStateEnumDeleting         RestoreStateEnum = "DELETING"
 )
 
+// RestoreInput
+// Represents both a request to Restore some portion of a Backup into a target GKE cluster and a record of the restore operation itself. Next id: 18
+type RestoreInput struct {
+	Backup        *string           `json:"backup,omitempty"`
+	Description   *string           `json:"description,omitempty"`
+	Labels        map[string]string `json:"labels,omitempty"`
+	RestoreConfig *RestoreConfig    `json:"restoreConfig,omitempty"`
+}
+
+// Restore
+// Represents both a request to Restore some portion of a Backup into a target GKE cluster and a record of the restore operation itself. Next id: 18
 type Restore struct {
 	Backup                 *string           `json:"backup,omitempty"`
 	Cluster                *string           `json:"cluster,omitempty"`

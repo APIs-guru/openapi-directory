@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -27,12 +28,12 @@ class KgsearchEntitiesSearchQueryParams:
 
 @dataclass
 class KgsearchEntitiesSearchRequest:
-    query_params: KgsearchEntitiesSearchQueryParams = field(default=None)
+    query_params: KgsearchEntitiesSearchQueryParams = field()
     
 
 @dataclass
 class KgsearchEntitiesSearchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     search_response: Optional[shared.SearchResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Net extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ethernet_connected" })
+  @SpeakeasyMetadata({ data: "json, name=ethernet_connected" })
   ethernetConnected: boolean;
 
-  @Metadata({ data: "json, name=ip_address" })
+  @SpeakeasyMetadata({ data: "json, name=ip_address" })
   ipAddress: string;
 
-  @Metadata({ data: "json, name=online" })
+  @SpeakeasyMetadata({ data: "json, name=online" })
   online: boolean;
 }

@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteApplicationInputProcessingConfigurationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationName" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationName" })
   applicationName: string;
 
-  @Metadata({ data: "json, name=CurrentApplicationVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentApplicationVersionId" })
   currentApplicationVersionId: number;
 
-  @Metadata({ data: "json, name=InputId" })
+  @SpeakeasyMetadata({ data: "json, name=InputId" })
   inputId: string;
 }

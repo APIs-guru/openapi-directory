@@ -36,3 +36,10 @@ from .appengine_apps_services_versions_instances_get import *
 from .appengine_apps_services_versions_instances_list import *
 from .appengine_apps_services_versions_list import *
 from .appengine_apps_services_versions_patch import *
+from .appengine_projects_locations_applications_create import *
+from .appengine_projects_locations_applications_get import *
+from .appengine_projects_locations_applications_repair import *
+from .appengine_projects_locations_get import *
+from .appengine_projects_locations_list import *
+from .appengine_projects_locations_operations_get import *
+from .appengine_projects_locations_operations_list import *

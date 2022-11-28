@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,14 +21,14 @@ class PubsubSubscriptionsPullBatchQueryParams:
 
 @dataclass
 class PubsubSubscriptionsPullBatchSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PubsubSubscriptionsPullBatchSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -38,14 +39,14 @@ class PubsubSubscriptionsPullBatchSecurity:
 
 @dataclass
 class PubsubSubscriptionsPullBatchRequest:
-    query_params: PubsubSubscriptionsPullBatchQueryParams = field(default=None)
+    query_params: PubsubSubscriptionsPullBatchQueryParams = field()
+    security: PubsubSubscriptionsPullBatchSecurity = field()
     request: Optional[shared.PullBatchRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PubsubSubscriptionsPullBatchSecurity = field(default=None)
     
 
 @dataclass
 class PubsubSubscriptionsPullBatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     pull_batch_response: Optional[shared.PullBatchResponse] = field(default=None)
-    status_code: int = field(default=None)
     

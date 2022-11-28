@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnrolledService } from "./enrolledservice";
+
 
 
 // AccessApprovalSettings
@@ -8,24 +8,43 @@ import { EnrolledService } from "./enrolledservice";
  * Settings on a Project/Folder/Organization related to Access Approval.
 **/
 export class AccessApprovalSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeKeyVersion" })
+  @SpeakeasyMetadata({ data: "json, name=activeKeyVersion" })
   activeKeyVersion?: string;
 
-  @Metadata({ data: "json, name=ancestorHasActiveKeyVersion" })
+  @SpeakeasyMetadata({ data: "json, name=ancestorHasActiveKeyVersion" })
   ancestorHasActiveKeyVersion?: boolean;
 
-  @Metadata({ data: "json, name=enrolledAncestor" })
+  @SpeakeasyMetadata({ data: "json, name=enrolledAncestor" })
   enrolledAncestor?: boolean;
 
-  @Metadata({ data: "json, name=enrolledServices", elemType: shared.EnrolledService })
+  @SpeakeasyMetadata({ data: "json, name=enrolledServices", elemType: EnrolledService })
   enrolledServices?: EnrolledService[];
 
-  @Metadata({ data: "json, name=invalidKeyVersion" })
+  @SpeakeasyMetadata({ data: "json, name=invalidKeyVersion" })
   invalidKeyVersion?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notificationEmails" })
+  @SpeakeasyMetadata({ data: "json, name=notificationEmails" })
+  notificationEmails?: string[];
+}
+
+
+// AccessApprovalSettingsInput
+/** 
+ * Settings on a Project/Folder/Organization related to Access Approval.
+**/
+export class AccessApprovalSettingsInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=activeKeyVersion" })
+  activeKeyVersion?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=enrolledServices", elemType: EnrolledService })
+  enrolledServices?: EnrolledService[];
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=notificationEmails" })
   notificationEmails?: string[];
 }

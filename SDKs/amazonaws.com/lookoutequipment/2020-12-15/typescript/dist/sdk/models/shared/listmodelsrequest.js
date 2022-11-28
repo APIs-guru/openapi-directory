@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ModelStatusEnum } from "./modelstatusenum";
 var ListModelsRequest = /** @class */ (function (_super) {
     __extends(ListModelsRequest, _super);
@@ -30,23 +30,23 @@ var ListModelsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DatasetNameBeginsWith" }),
+        SpeakeasyMetadata({ data: "json, name=DatasetNameBeginsWith" }),
         __metadata("design:type", String)
     ], ListModelsRequest.prototype, "datasetNameBeginsWith", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], ListModelsRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModelNameBeginsWith" }),
+        SpeakeasyMetadata({ data: "json, name=ModelNameBeginsWith" }),
         __metadata("design:type", String)
     ], ListModelsRequest.prototype, "modelNameBeginsWith", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListModelsRequest.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], ListModelsRequest.prototype, "status", void 0);
     return ListModelsRequest;

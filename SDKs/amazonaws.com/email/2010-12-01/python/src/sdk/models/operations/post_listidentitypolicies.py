@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostListIdentityPoliciesActionEnum(str, Enum):
     LIST_IDENTITY_POLICIES = "ListIdentityPolicies"
@@ -10,8 +14,8 @@ class PostListIdentityPoliciesVersionEnum(str, Enum):
 
 @dataclass
 class PostListIdentityPoliciesQueryParams:
-    action: PostListIdentityPoliciesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostListIdentityPoliciesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostListIdentityPoliciesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostListIdentityPoliciesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostListIdentityPoliciesHeaders:
 
 @dataclass
 class PostListIdentityPoliciesRequest:
-    query_params: PostListIdentityPoliciesQueryParams = field(default=None)
-    headers: PostListIdentityPoliciesHeaders = field(default=None)
+    headers: PostListIdentityPoliciesHeaders = field()
+    query_params: PostListIdentityPoliciesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostListIdentityPoliciesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

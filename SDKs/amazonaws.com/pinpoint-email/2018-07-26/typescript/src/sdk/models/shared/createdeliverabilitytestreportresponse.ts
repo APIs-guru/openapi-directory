@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeliverabilityTestStatusEnum } from "./deliverabilityteststatusenum";
+
 
 
 // CreateDeliverabilityTestReportResponse
@@ -7,9 +8,9 @@ import { DeliverabilityTestStatusEnum } from "./deliverabilityteststatusenum";
  * Information about the predictive inbox placement test that you created.
 **/
 export class CreateDeliverabilityTestReportResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeliverabilityTestStatus" })
+  @SpeakeasyMetadata({ data: "json, name=DeliverabilityTestStatus" })
   deliverabilityTestStatus: DeliverabilityTestStatusEnum;
 
-  @Metadata({ data: "json, name=ReportId" })
+  @SpeakeasyMetadata({ data: "json, name=ReportId" })
   reportId: string;
 }

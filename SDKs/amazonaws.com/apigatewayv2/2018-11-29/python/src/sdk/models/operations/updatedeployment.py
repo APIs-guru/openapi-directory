@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateDeploymentPathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
-    deployment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'deploymentId', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    deployment_id: str = field(metadata={'path_param': { 'field_name': 'deploymentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,23 +28,23 @@ class UpdateDeploymentHeaders:
 @dataclass_json
 @dataclass
 class UpdateDeploymentRequestBody:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
     
 
 @dataclass
 class UpdateDeploymentRequest:
-    path_params: UpdateDeploymentPathParams = field(default=None)
-    headers: UpdateDeploymentHeaders = field(default=None)
-    request: UpdateDeploymentRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateDeploymentHeaders = field()
+    path_params: UpdateDeploymentPathParams = field()
+    request: UpdateDeploymentRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateDeploymentResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     update_deployment_response: Optional[shared.UpdateDeploymentResponse] = field(default=None)
     

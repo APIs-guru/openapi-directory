@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NegativeKeywordList } from "./negativekeywordlist";
+
 
 
 // ListNegativeKeywordListsResponse
@@ -8,9 +8,9 @@ import { NegativeKeywordList } from "./negativekeywordlist";
  * Response message for NegativeKeywordListService.ListNegativeKeywordLists.
 **/
 export class ListNegativeKeywordListsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=negativeKeywordLists", elemType: shared.NegativeKeywordList })
+  @SpeakeasyMetadata({ data: "json, name=negativeKeywordLists", elemType: NegativeKeywordList })
   negativeKeywordLists?: NegativeKeywordList[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

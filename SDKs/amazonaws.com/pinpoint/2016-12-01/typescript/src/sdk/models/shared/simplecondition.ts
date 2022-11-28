@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventCondition } from "./eventcondition";
 import { SegmentCondition } from "./segmentcondition";
 import { SegmentDimensions } from "./segmentdimensions";
+
 
 
 // SimpleCondition
@@ -9,12 +10,12 @@ import { SegmentDimensions } from "./segmentdimensions";
  * Specifies a condition to evaluate for an activity in a journey.
 **/
 export class SimpleCondition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EventCondition" })
+  @SpeakeasyMetadata({ data: "json, name=EventCondition" })
   eventCondition?: EventCondition;
 
-  @Metadata({ data: "json, name=SegmentCondition" })
+  @SpeakeasyMetadata({ data: "json, name=SegmentCondition" })
   segmentCondition?: SegmentCondition;
 
-  @Metadata({ data: "json, name=SegmentDimensions" })
+  @SpeakeasyMetadata({ data: "json, name=SegmentDimensions" })
   segmentDimensions?: SegmentDimensions;
 }

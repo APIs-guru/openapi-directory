@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MenuValue } from "./menuvalue";
+
 
 
 // MenuItem
@@ -8,21 +8,21 @@ import { MenuValue } from "./menuvalue";
  * A custom menu item that can be presented to the user by a timeline item.
 **/
 export class MenuItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: string;
 
-  @Metadata({ data: "json, name=contextual_command" })
+  @SpeakeasyMetadata({ data: "json, name=contextual_command" })
   contextualCommand?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=payload" })
+  @SpeakeasyMetadata({ data: "json, name=payload" })
   payload?: string;
 
-  @Metadata({ data: "json, name=removeWhenSelected" })
+  @SpeakeasyMetadata({ data: "json, name=removeWhenSelected" })
   removeWhenSelected?: boolean;
 
-  @Metadata({ data: "json, name=values", elemType: shared.MenuValue })
+  @SpeakeasyMetadata({ data: "json, name=values", elemType: MenuValue })
   values?: MenuValue[];
 }

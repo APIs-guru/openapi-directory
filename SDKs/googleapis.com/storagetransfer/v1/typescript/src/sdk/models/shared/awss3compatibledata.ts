@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { S3CompatibleMetadata } from "./s3compatiblemetadata";
+
 
 
 // AwsS3CompatibleData
@@ -7,18 +8,18 @@ import { S3CompatibleMetadata } from "./s3compatiblemetadata";
  * An AwsS3CompatibleData resource.
 **/
 export class AwsS3CompatibleData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucketName" })
+  @SpeakeasyMetadata({ data: "json, name=bucketName" })
   bucketName?: string;
 
-  @Metadata({ data: "json, name=endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=endpoint" })
   endpoint?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=s3Metadata" })
+  @SpeakeasyMetadata({ data: "json, name=s3Metadata" })
   s3Metadata?: S3CompatibleMetadata;
 }

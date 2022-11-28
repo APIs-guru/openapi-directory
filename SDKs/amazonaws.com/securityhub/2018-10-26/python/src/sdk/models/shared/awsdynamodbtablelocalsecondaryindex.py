@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import awsdynamodbtablekeyschema
-from . import awsdynamodbtableprojection
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AwsDynamoDbTableLocalSecondaryIndex:
-    index_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IndexArn' }})
-    index_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IndexName' }})
-    key_schema: Optional[List[awsdynamodbtablekeyschema.AwsDynamoDbTableKeySchema]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KeySchema' }})
-    projection: Optional[awsdynamodbtableprojection.AwsDynamoDbTableProjection] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Projection' }})
+    r"""AwsDynamoDbTableLocalSecondaryIndex
+    Information about a local secondary index for a DynamoDB table.
+    """
+    
+    index_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IndexArn') }})
+    index_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('IndexName') }})
+    key_schema: Optional[List[AwsDynamoDbTableKeySchema]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('KeySchema') }})
+    projection: Optional[AwsDynamoDbTableProjection] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Projection') }})
     

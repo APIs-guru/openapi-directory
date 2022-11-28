@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AutoScalingGroup
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about an Auto Scaling group.
 **/
 export class AutoScalingGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hook" })
+  @SpeakeasyMetadata({ data: "json, name=hook" })
   hook?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

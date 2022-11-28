@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedTeams
+// A paginated list of teams.
 type PaginatedTeams struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

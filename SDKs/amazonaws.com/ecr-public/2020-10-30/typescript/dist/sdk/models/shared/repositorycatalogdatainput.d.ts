@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * An object containing the catalog data for a repository. This data is publicly visible in the Amazon ECR Public Gallery.
 **/

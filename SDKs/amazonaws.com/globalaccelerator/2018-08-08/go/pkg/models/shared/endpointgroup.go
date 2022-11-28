@@ -1,5 +1,7 @@
 package shared
 
+// EndpointGroup
+// A complex type for the endpoint group. An AWS Region can have only one endpoint group for a specific listener.
 type EndpointGroup struct {
 	EndpointDescriptions       []EndpointDescription    `json:"EndpointDescriptions,omitempty"`
 	EndpointGroupArn           *string                  `json:"EndpointGroupArn,omitempty"`

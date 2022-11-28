@@ -13,6 +13,8 @@ const (
 	WeeklyMaintenanceWindowDayEnumSunday               WeeklyMaintenanceWindowDayEnum = "SUNDAY"
 )
 
+// WeeklyMaintenanceWindow
+// Time window specified for weekly operations.
 type WeeklyMaintenanceWindow struct {
 	Day       *WeeklyMaintenanceWindowDayEnum `json:"day,omitempty"`
 	Duration  *string                         `json:"duration,omitempty"`

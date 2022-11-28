@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class ExecuteTransactionPathParams:
-    transactionid: str = field(default=None, metadata={'path_param': { 'field_name': 'transactionid', 'style': 'simple', 'explode': False }})
+    transactionid: str = field(metadata={'path_param': { 'field_name': 'transactionid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class ExecuteTransactionQueryParams:
 
 @dataclass
 class ExecuteTransactionRequest:
-    path_params: ExecuteTransactionPathParams = field(default=None)
-    query_params: ExecuteTransactionQueryParams = field(default=None)
-    request: shared.ItvRokuTransactionRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: ExecuteTransactionPathParams = field()
+    query_params: ExecuteTransactionQueryParams = field()
+    request: shared.ItvRokuTransactionRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ExecuteTransactionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

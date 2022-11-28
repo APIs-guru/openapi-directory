@@ -22,6 +22,7 @@ export * from "./eventsalesdates";
 export * from "./eventstatus";
 export * from "./extensiondata";
 export * from "./image";
+export * from "./ingestionresult";
 export * from "./level";
 export * from "./licensinginformation";
 export * from "./localtime";

@@ -17,6 +17,8 @@ const (
 	OAuthClientGrantTypesEnumRefreshToken      OAuthClientGrantTypesEnum = "refresh_token"
 )
 
+// OAuthClient
+// OAuth client information
 type OAuthClient struct {
 	AccessTokenValidity  *int32                      `json:"accessTokenValidity,omitempty"`
 	ApprovalValidity     *int32                      `json:"approvalValidity,omitempty"`

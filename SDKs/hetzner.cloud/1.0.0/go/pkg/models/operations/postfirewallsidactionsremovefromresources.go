@@ -4,10 +4,14 @@ type PostFirewallsIDActionsRemoveFromResourcesPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
+// PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesLabelSelector
+// Configuration for type label_selector, required if type is `label_selector`
 type PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesLabelSelector struct {
 	Selector string `json:"selector"`
 }
 
+// PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesServer
+// Configuration for type server, required if type is `server`
 type PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesServer struct {
 	ID int64 `json:"id"`
 }
@@ -29,11 +33,8 @@ type PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequest struct 
 	RemoveFrom []PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResources `json:"remove_from"`
 }
 
-type PostFirewallsIDActionsRemoveFromResourcesRequest struct {
-	PathParams PostFirewallsIDActionsRemoveFromResourcesPathParams
-	Request    *PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequest `request:"mediaType=application/json"`
-}
-
+// PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -79,6 +80,11 @@ type PostFirewallsIDActionsRemoveFromResourcesActionsResponseMeta struct {
 type PostFirewallsIDActionsRemoveFromResourcesActionsResponse struct {
 	Actions []PostFirewallsIDActionsRemoveFromResourcesActionsResponseAction `json:"actions"`
 	Meta    *PostFirewallsIDActionsRemoveFromResourcesActionsResponseMeta    `json:"meta,omitempty"`
+}
+
+type PostFirewallsIDActionsRemoveFromResourcesRequest struct {
+	PathParams PostFirewallsIDActionsRemoveFromResourcesPathParams
+	Request    *PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequest `request:"mediaType=application/json"`
 }
 
 type PostFirewallsIDActionsRemoveFromResourcesResponse struct {

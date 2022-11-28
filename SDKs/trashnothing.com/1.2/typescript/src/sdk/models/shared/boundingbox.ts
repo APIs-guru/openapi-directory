@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BoundingBoxNortheast
@@ -6,10 +7,10 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The point defining the northeast corner of the bounding box.
 **/
 export class BoundingBoxNortheast extends SpeakeasyBase {
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: number;
 }
 
@@ -19,10 +20,10 @@ export class BoundingBoxNortheast extends SpeakeasyBase {
  * The point defining the southwest corner of the bounding box.
 **/
 export class BoundingBoxSouthwest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: number;
 }
 
@@ -32,9 +33,9 @@ export class BoundingBoxSouthwest extends SpeakeasyBase {
  * A geographic bounding box defined by its southwest and northeast points.
 **/
 export class BoundingBox extends SpeakeasyBase {
-  @Metadata({ data: "json, name=northeast" })
+  @SpeakeasyMetadata({ data: "json, name=northeast" })
   northeast?: BoundingBoxNortheast;
 
-  @Metadata({ data: "json, name=southwest" })
+  @SpeakeasyMetadata({ data: "json, name=southwest" })
   southwest?: BoundingBoxSouthwest;
 }

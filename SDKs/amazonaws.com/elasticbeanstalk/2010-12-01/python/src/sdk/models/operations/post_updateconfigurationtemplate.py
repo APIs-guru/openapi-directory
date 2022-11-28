@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostUpdateConfigurationTemplateActionEnum(str, Enum):
     UPDATE_CONFIGURATION_TEMPLATE = "UpdateConfigurationTemplate"
@@ -10,8 +14,8 @@ class PostUpdateConfigurationTemplateVersionEnum(str, Enum):
 
 @dataclass
 class PostUpdateConfigurationTemplateQueryParams:
-    action: PostUpdateConfigurationTemplateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostUpdateConfigurationTemplateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostUpdateConfigurationTemplateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostUpdateConfigurationTemplateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostUpdateConfigurationTemplateHeaders:
 
 @dataclass
 class PostUpdateConfigurationTemplateRequest:
-    query_params: PostUpdateConfigurationTemplateQueryParams = field(default=None)
-    headers: PostUpdateConfigurationTemplateHeaders = field(default=None)
+    headers: PostUpdateConfigurationTemplateHeaders = field()
+    query_params: PostUpdateConfigurationTemplateQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostUpdateConfigurationTemplateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SubjectivityAnalysisRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=api_key;" })
+  @SpeakeasyMetadata({ data: "form, name=api_key;" })
   apiKey: string;
 
-  @Metadata({ data: "form, name=text;" })
+  @SpeakeasyMetadata({ data: "form, name=text;" })
   text?: string;
 }
 
 
 export class SubjectivityAnalysisRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request?: SubjectivityAnalysisRequestBody;
 }
 
 
 export class SubjectivityAnalysisResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

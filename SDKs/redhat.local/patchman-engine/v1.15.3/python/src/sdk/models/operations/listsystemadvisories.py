@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ListSystemAdvisoriesPathParams:
-    inventory_id: str = field(default=None, metadata={'path_param': { 'field_name': 'inventory_id', 'style': 'simple', 'explode': False }})
+    inventory_id: str = field(metadata={'path_param': { 'field_name': 'inventory_id', 'style': 'simple', 'explode': False }})
     
 class ListSystemAdvisoriesSortEnum(str, Enum):
     ID = "id"
@@ -31,19 +35,19 @@ class ListSystemAdvisoriesQueryParams:
 
 @dataclass
 class ListSystemAdvisoriesSecurity:
-    rh_identity: shared.SchemeRhIdentity = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    rh_identity: shared.SchemeRhIdentity = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class ListSystemAdvisoriesRequest:
-    path_params: ListSystemAdvisoriesPathParams = field(default=None)
-    query_params: ListSystemAdvisoriesQueryParams = field(default=None)
-    security: ListSystemAdvisoriesSecurity = field(default=None)
+    path_params: ListSystemAdvisoriesPathParams = field()
+    query_params: ListSystemAdvisoriesQueryParams = field()
+    security: ListSystemAdvisoriesSecurity = field()
     
 
 @dataclass
 class ListSystemAdvisoriesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     controllers_system_advisories_response: Optional[shared.ControllersSystemAdvisoriesResponse] = field(default=None)
     

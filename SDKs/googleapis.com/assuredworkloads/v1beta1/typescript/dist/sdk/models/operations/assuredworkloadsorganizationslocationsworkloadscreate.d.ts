@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class AssuredworkloadsOrganizationsLocationsWorkloadsCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -24,7 +24,7 @@ export declare class AssuredworkloadsOrganizationsLocationsWorkloadsCreateSecuri
 export declare class AssuredworkloadsOrganizationsLocationsWorkloadsCreateRequest extends SpeakeasyBase {
     pathParams: AssuredworkloadsOrganizationsLocationsWorkloadsCreatePathParams;
     queryParams: AssuredworkloadsOrganizationsLocationsWorkloadsCreateQueryParams;
-    request?: shared.GoogleCloudAssuredworkloadsV1beta1Workload;
+    request?: shared.GoogleCloudAssuredworkloadsV1beta1WorkloadInput;
     security: AssuredworkloadsOrganizationsLocationsWorkloadsCreateSecurity;
 }
 export declare class AssuredworkloadsOrganizationsLocationsWorkloadsCreateResponse extends SpeakeasyBase {

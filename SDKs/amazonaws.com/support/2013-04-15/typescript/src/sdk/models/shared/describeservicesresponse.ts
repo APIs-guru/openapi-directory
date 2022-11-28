@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Service } from "./service";
+
 
 
 // DescribeServicesResponse
@@ -8,6 +8,6 @@ import { Service } from "./service";
  * The list of AWS services returned by the <a>DescribeServices</a> operation.
 **/
 export class DescribeServicesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=services", elemType: shared.Service })
+  @SpeakeasyMetadata({ data: "json, name=services", elemType: Service })
   services?: Service[];
 }

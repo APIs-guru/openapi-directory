@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DcimConsoleServerPortTemplatesCreateRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.WritableConsoleServerPortTemplate;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.WritableConsoleServerPortTemplateInput;
 }
 
 
 export class DcimConsoleServerPortTemplatesCreateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   consoleServerPortTemplate?: shared.ConsoleServerPortTemplate;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

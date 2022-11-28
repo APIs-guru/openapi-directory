@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GuestAttributesValue } from "./guestattributesvalue";
+
 
 
 // GuestAttributes
@@ -7,9 +8,9 @@ import { GuestAttributesValue } from "./guestattributesvalue";
  * A guest attributes.
 **/
 export class GuestAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=queryPath" })
+  @SpeakeasyMetadata({ data: "json, name=queryPath" })
   queryPath?: string;
 
-  @Metadata({ data: "json, name=queryValue" })
+  @SpeakeasyMetadata({ data: "json, name=queryValue" })
   queryValue?: GuestAttributesValue;
 }

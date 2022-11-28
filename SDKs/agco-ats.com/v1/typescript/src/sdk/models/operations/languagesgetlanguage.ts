@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class LanguagesGetLanguagePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=LocaleID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=LocaleID" })
   localeId: number;
 }
 
 
 export class LanguagesGetLanguageRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: LanguagesGetLanguagePathParams;
 }
 
 
 export class LanguagesGetLanguageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   globalResourcesSharedModelsLanguage?: shared.GlobalResourcesSharedModelsLanguage;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

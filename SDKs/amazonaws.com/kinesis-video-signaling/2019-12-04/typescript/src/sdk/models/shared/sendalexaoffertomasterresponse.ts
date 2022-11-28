@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SendAlexaOfferToMasterResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Answer" })
+  @SpeakeasyMetadata({ data: "json, name=Answer" })
   answer?: string;
 }

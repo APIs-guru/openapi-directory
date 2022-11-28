@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTagsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=workspace" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=workspace" })
   workspace?: string;
 }
 
 
-export class GetTagsRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetTagsQueryParams;
-}
-
-
 export class GetTags200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.TagCompact })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: shared.TagCompact })
   data?: shared.TagCompact[];
 }
 
 
+export class GetTagsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetTagsQueryParams;
+}
+
+
 export class GetTagsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTags200ApplicationJsonObject?: GetTags200ApplicationJson;
 }

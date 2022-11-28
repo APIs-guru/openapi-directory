@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DataPointsGetStatisticsSinglePathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class DataPointsGetStatisticsSingleTimeFrameEnum(str, Enum):
     TODAY = "today"
@@ -27,21 +28,21 @@ class DataPointsGetStatisticsSingleTimeFrameEnum(str, Enum):
 
 @dataclass
 class DataPointsGetStatisticsSingleQueryParams:
+    time_frame: DataPointsGetStatisticsSingleTimeFrameEnum = field(metadata={'query_param': { 'field_name': 'timeFrame', 'style': 'form', 'explode': True }})
     from_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fromDay', 'style': 'form', 'explode': True }})
     hourly: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'hourly', 'style': 'form', 'explode': True }})
-    time_frame: DataPointsGetStatisticsSingleTimeFrameEnum = field(default=None, metadata={'query_param': { 'field_name': 'timeFrame', 'style': 'form', 'explode': True }})
     to_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'toDay', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class DataPointsGetStatisticsSingleRequest:
-    path_params: DataPointsGetStatisticsSinglePathParams = field(default=None)
-    query_params: DataPointsGetStatisticsSingleQueryParams = field(default=None)
+    path_params: DataPointsGetStatisticsSinglePathParams = field()
+    query_params: DataPointsGetStatisticsSingleQueryParams = field()
     
 
 @dataclass
 class DataPointsGetStatisticsSingleResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_dto_aggregated_aggregated_result: Optional[shared.APICoreDtoAggregatedAggregatedResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

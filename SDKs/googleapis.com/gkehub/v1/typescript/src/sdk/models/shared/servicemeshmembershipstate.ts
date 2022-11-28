@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceMeshControlPlaneManagement } from "./servicemeshcontrolplanemanagement";
 import { ServiceMeshDataPlaneManagement } from "./servicemeshdataplanemanagement";
+
 
 
 // ServiceMeshMembershipState
@@ -8,9 +9,9 @@ import { ServiceMeshDataPlaneManagement } from "./servicemeshdataplanemanagement
  * **Service Mesh**: State for a single Membership, as analyzed by the Service Mesh Hub Controller.
 **/
 export class ServiceMeshMembershipState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=controlPlaneManagement" })
+  @SpeakeasyMetadata({ data: "json, name=controlPlaneManagement" })
   controlPlaneManagement?: ServiceMeshControlPlaneManagement;
 
-  @Metadata({ data: "json, name=dataPlaneManagement" })
+  @SpeakeasyMetadata({ data: "json, name=dataPlaneManagement" })
   dataPlaneManagement?: ServiceMeshDataPlaneManagement;
 }

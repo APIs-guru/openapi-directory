@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class TagmanagerAccountsContainersWorkspacesCreateQueryParams:
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesCreateRequest:
-    path_params: TagmanagerAccountsContainersWorkspacesCreatePathParams = field(default=None)
-    query_params: TagmanagerAccountsContainersWorkspacesCreateQueryParams = field(default=None)
+    path_params: TagmanagerAccountsContainersWorkspacesCreatePathParams = field()
+    query_params: TagmanagerAccountsContainersWorkspacesCreateQueryParams = field()
+    security: TagmanagerAccountsContainersWorkspacesCreateSecurity = field()
     request: Optional[shared.Workspace] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: TagmanagerAccountsContainersWorkspacesCreateSecurity = field(default=None)
     
 
 @dataclass
 class TagmanagerAccountsContainersWorkspacesCreateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     workspace: Optional[shared.Workspace] = field(default=None)
     

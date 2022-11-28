@@ -11,6 +11,8 @@ const (
 	CourseCourseStateEnumSuspended              CourseCourseStateEnum = "SUSPENDED"
 )
 
+// Course
+// A Course in Classroom.
 type Course struct {
 	AlternateLink      *string                `json:"alternateLink,omitempty"`
 	CalendarID         *string                `json:"calendarId,omitempty"`

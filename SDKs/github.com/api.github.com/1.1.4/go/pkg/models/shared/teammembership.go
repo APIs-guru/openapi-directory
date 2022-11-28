@@ -7,6 +7,8 @@ const (
 	TeamMembershipRoleEnumMaintainer TeamMembershipRoleEnum = "maintainer"
 )
 
+// TeamMembership
+// Team Membership
 type TeamMembership struct {
 	Role  TeamMembershipRoleEnum `json:"role"`
 	State string                 `json:"state"`

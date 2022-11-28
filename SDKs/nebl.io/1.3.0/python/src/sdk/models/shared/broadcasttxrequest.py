@@ -1,9 +1,10 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class BroadcastTxRequest:
-    tx_hex: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'txHex' }})
+    tx_hex: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('txHex') }})
     

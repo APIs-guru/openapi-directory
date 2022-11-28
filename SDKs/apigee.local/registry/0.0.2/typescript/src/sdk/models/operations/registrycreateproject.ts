@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegistryCreateProjectQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=project_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=project_id" })
   projectId?: string;
 }
 
 
 export class RegistryCreateProjectRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: RegistryCreateProjectQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: any;
 }
 
 
 export class RegistryCreateProjectResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   project?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

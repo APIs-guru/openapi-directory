@@ -9,10 +9,6 @@ type GetTrackQueryParams struct {
 	TrackingNumber *string `queryParam:"style=form,explode=true,name=trackingNumber"`
 }
 
-type GetTrackRequest struct {
-	QueryParams GetTrackQueryParams
-}
-
 type GetTrackTrackingResponseFeatureGeometryTypeEnum string
 
 const (
@@ -24,6 +20,9 @@ const (
 	GetTrackTrackingResponseFeatureGeometryTypeEnumMultiPolygon    GetTrackTrackingResponseFeatureGeometryTypeEnum = "MultiPolygon"
 )
 
+// GetTrackTrackingResponseFeatureGeometry
+// GeoJSon geometry
+// http://geojson.org/geojson-spec.html#geometry-objects
 type GetTrackTrackingResponseFeatureGeometry struct {
 	Coordinates interface{}                                     `json:"coordinates"`
 	Type        GetTrackTrackingResponseFeatureGeometryTypeEnum `json:"type"`
@@ -39,6 +38,9 @@ const (
 	GetTrackTrackingResponseFeatureTypeEnumFeature GetTrackTrackingResponseFeatureTypeEnum = "Feature"
 )
 
+// GetTrackTrackingResponseFeature
+// GeoJSon Feature
+// https://tools.ietf.org/html/rfc7946#section-3.2
 type GetTrackTrackingResponseFeature struct {
 	Bbox       []interface{}                                                                                  `json:"bbox,omitempty"`
 	Centerline *shared.OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginPropertiesGeometry `json:"centerline,omitempty"`
@@ -89,6 +91,10 @@ type GetTrackTrackingResponse struct {
 	StatusMessage        *string                                                                      `json:"statusMessage,omitempty"`
 	TrackedEvents        []GetTrackTrackingResponseTrackingEventV2                                    `json:"trackedEvents,omitempty"`
 	TrackingNumber       *GetTrackTrackingResponseTrackingNumberV2                                    `json:"trackingNumber,omitempty"`
+}
+
+type GetTrackRequest struct {
+	QueryParams GetTrackQueryParams
 }
 
 type GetTrackResponse struct {

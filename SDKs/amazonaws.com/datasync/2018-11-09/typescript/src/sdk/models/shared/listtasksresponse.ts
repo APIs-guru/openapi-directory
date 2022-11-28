@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskListEntry } from "./tasklistentry";
+
 
 
 // ListTasksResponse
@@ -8,9 +8,9 @@ import { TaskListEntry } from "./tasklistentry";
  * ListTasksResponse
 **/
 export class ListTasksResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Tasks", elemType: shared.TaskListEntry })
+  @SpeakeasyMetadata({ data: "json, name=Tasks", elemType: TaskListEntry })
   tasks?: TaskListEntry[];
 }

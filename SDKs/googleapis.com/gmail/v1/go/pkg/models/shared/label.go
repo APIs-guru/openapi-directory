@@ -22,6 +22,8 @@ const (
 	LabelTypeEnumUser   LabelTypeEnum = "user"
 )
 
+// Label
+// Labels are used to categorize messages and threads within the user's mailbox. The maximum number of labels supported for a user's mailbox is 10,000.
 type Label struct {
 	Color                 *LabelColor                     `json:"color,omitempty"`
 	ID                    *string                         `json:"id,omitempty"`

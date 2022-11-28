@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RequestTransferActionParamEnum } from "./requesttransferactionparamenum";
 
 
+
 export class UpdateCallRequestTransferNccoDestination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ncco" })
+  @SpeakeasyMetadata({ data: "json, name=ncco" })
   ncco: Map<string, any>[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 
 export class UpdateCallRequestTransferNcco extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: RequestTransferActionParamEnum;
 
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination: UpdateCallRequestTransferNccoDestination;
 }

@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,37 +14,55 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def predict_image(self, request: operations.PredictImageRequest) -> operations.PredictImageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Predict an image and saves the result
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{projectId}/image", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -63,24 +84,23 @@ class SDK:
 
     
     def predict_image_url(self, request: operations.PredictImageURLRequest) -> operations.PredictImageURLResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Predict an image url and saves the result
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{projectId}/url", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -102,24 +122,23 @@ class SDK:
 
     
     def predict_image_url_with_no_store(self, request: operations.PredictImageURLWithNoStoreRequest) -> operations.PredictImageURLWithNoStoreResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Predict an image url without saving the result
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{projectId}/url/nostore", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -141,24 +160,23 @@ class SDK:
 
     
     def predict_image_with_no_store(self, request: operations.PredictImageWithNoStoreRequest) -> operations.PredictImageWithNoStoreResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Predict an image without saving the result
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/{projectId}/image/nostore", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

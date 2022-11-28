@@ -8,17 +8,17 @@ type PostCachekeyInvalidateSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type PostCachekeyInvalidateRequest struct {
-	Request  shared.CacheInvalidationRequestSchema `request:"mediaType=application/json"`
-	Security PostCachekeyInvalidateSecurity
-}
-
 type PostCachekeyInvalidate400ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
 
 type PostCachekeyInvalidate500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PostCachekeyInvalidateRequest struct {
+	Request  shared.CacheInvalidationRequestSchema `request:"mediaType=application/json"`
+	Security PostCachekeyInvalidateSecurity
 }
 
 type PostCachekeyInvalidateResponse struct {

@@ -1,5 +1,7 @@
 package shared
 
-type GoogleCloudDialogflowV2IntentBatch struct {
-	Intents []GoogleCloudDialogflowV2Intent `json:"intents,omitempty"`
+// GoogleCloudDialogflowV2IntentBatchInput
+// This message is a wrapper around a collection of intents.
+type GoogleCloudDialogflowV2IntentBatchInput struct {
+	Intents []GoogleCloudDialogflowV2IntentInput `json:"intents,omitempty"`
 }

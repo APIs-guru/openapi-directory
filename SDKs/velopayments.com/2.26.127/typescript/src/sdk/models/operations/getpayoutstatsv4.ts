@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPayoutStatsV4QueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=payorId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=payorId" })
   payorId?: string;
 }
 
 
 export class GetPayoutStatsV4Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPayoutStatsV4QueryParams;
 }
 
 
 export class GetPayoutStatsV4Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getPayoutStatistics?: shared.GetPayoutStatistics;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse400?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse401?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse403?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   inlineResponse404?: any;
 }

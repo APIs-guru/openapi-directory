@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import clusterstate_enum
-from . import clusterstatechangereason
-from . import clustertimeline
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ClusterStatus:
-    state: Optional[clusterstate_enum.ClusterStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'State' }})
-    state_change_reason: Optional[clusterstatechangereason.ClusterStateChangeReason] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StateChangeReason' }})
-    timeline: Optional[clustertimeline.ClusterTimeline] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Timeline' }})
+    r"""ClusterStatus
+    The detailed status of the cluster.
+    """
+    
+    state: Optional[ClusterStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('State') }})
+    state_change_reason: Optional[ClusterStateChangeReason] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StateChangeReason') }})
+    timeline: Optional[ClusterTimeline] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Timeline') }})
     

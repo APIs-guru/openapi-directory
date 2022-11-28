@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetDatastorePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,20 +15,20 @@ class GetDatastoreQueryParams:
 
 @dataclass
 class GetDatastoreSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetDatastoreRequest:
-    path_params: GetDatastorePathParams = field(default=None)
-    query_params: GetDatastoreQueryParams = field(default=None)
-    security: GetDatastoreSecurity = field(default=None)
+    path_params: GetDatastorePathParams = field()
+    query_params: GetDatastoreQueryParams = field()
+    security: GetDatastoreSecurity = field()
     
 
 @dataclass
 class GetDatastoreResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_error: Optional[shared.APIError] = field(default=None)
-    content_type: str = field(default=None)
     datastore: Optional[shared.Datastore] = field(default=None)
-    status_code: int = field(default=None)
     

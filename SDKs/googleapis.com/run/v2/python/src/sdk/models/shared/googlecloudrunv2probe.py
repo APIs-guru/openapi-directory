@@ -1,19 +1,22 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudrunv2grpcaction
-from . import googlecloudrunv2httpgetaction
-from . import googlecloudrunv2tcpsocketaction
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudRunV2Probe:
-    failure_threshold: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failureThreshold' }})
-    grpc: Optional[googlecloudrunv2grpcaction.GoogleCloudRunV2GrpcAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'grpc' }})
-    http_get: Optional[googlecloudrunv2httpgetaction.GoogleCloudRunV2HTTPGetAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'httpGet' }})
-    initial_delay_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'initialDelaySeconds' }})
-    period_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'periodSeconds' }})
-    tcp_socket: Optional[googlecloudrunv2tcpsocketaction.GoogleCloudRunV2TCPSocketAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tcpSocket' }})
-    timeout_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeoutSeconds' }})
+    r"""GoogleCloudRunV2Probe
+    Probe describes a health check to be performed against a container to determine whether it is alive or ready to receive traffic.
+    """
+    
+    failure_threshold: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('failureThreshold') }})
+    grpc: Optional[GoogleCloudRunV2GrpcAction] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('grpc') }})
+    http_get: Optional[GoogleCloudRunV2HTTPGetAction] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('httpGet') }})
+    initial_delay_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('initialDelaySeconds') }})
+    period_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('periodSeconds') }})
+    tcp_socket: Optional[GoogleCloudRunV2TCPSocketAction] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tcpSocket') }})
+    timeout_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeoutSeconds') }})
     

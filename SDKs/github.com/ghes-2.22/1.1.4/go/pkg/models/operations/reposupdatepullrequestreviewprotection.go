@@ -10,6 +10,8 @@ type ReposUpdatePullRequestReviewProtectionPathParams struct {
 	Repo   string `pathParam:"style=simple,explode=false,name=repo"`
 }
 
+// ReposUpdatePullRequestReviewProtectionRequestBodyDismissalRestrictions
+// Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
 type ReposUpdatePullRequestReviewProtectionRequestBodyDismissalRestrictions struct {
 	Teams []string `json:"teams,omitempty"`
 	Users []string `json:"users,omitempty"`

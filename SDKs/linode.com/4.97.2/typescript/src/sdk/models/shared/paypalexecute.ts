@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PayPalExecute
@@ -7,9 +8,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class PayPalExecute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=payer_id" })
+  @SpeakeasyMetadata({ data: "json, name=payer_id" })
   payerId: string;
 
-  @Metadata({ data: "json, name=payment_id" })
+  @SpeakeasyMetadata({ data: "json, name=payment_id" })
   paymentId: string;
 }

@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetHolidaysHolidayIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=holidayId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=holidayId" })
   holidayId: number;
 }
 
 
 export class GetHolidaysHolidayIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=year" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" })
   year?: string;
 }
 
 
-export class GetHolidaysHolidayIdRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetHolidaysHolidayIdPathParams;
-
-  @Metadata()
-  queryParams: GetHolidaysHolidayIdQueryParams;
-}
-
-
 export class GetHolidaysHolidayId200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=holiday" })
+  @SpeakeasyMetadata({ data: "json, name=holiday" })
   holiday?: shared.Holiday;
 }
 
 
 export class GetHolidaysHolidayId404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: shared.Error;
 }
 
 
+export class GetHolidaysHolidayIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetHolidaysHolidayIdPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: GetHolidaysHolidayIdQueryParams;
+}
+
+
 export class GetHolidaysHolidayIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getHolidaysHolidayId200ApplicationJsonObject?: GetHolidaysHolidayId200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getHolidaysHolidayId404ApplicationJsonObject?: GetHolidaysHolidayId404ApplicationJson;
 }

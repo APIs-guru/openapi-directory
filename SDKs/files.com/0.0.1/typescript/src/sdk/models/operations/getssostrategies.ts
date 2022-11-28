@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSsoStrategiesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cursor" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cursor" })
   cursor?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
 export class GetSsoStrategiesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSsoStrategiesQueryParams;
 }
 
 
 export class GetSsoStrategiesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.SsoStrategyEntity })
+  @SpeakeasyMetadata({ elemType: shared.SsoStrategyEntity })
   ssoStrategyEntities?: shared.SsoStrategyEntity[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

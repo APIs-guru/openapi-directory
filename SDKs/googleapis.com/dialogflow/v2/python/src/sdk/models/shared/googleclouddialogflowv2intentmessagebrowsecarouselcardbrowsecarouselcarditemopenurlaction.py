@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudDialogflowV2IntentMessageBrowseCarouselCardBrowseCarouselCardItemOpenURLActionURLTypeHintEnum(str, Enum):
     URL_TYPE_HINT_UNSPECIFIED = "URL_TYPE_HINT_UNSPECIFIED"
@@ -11,6 +13,10 @@ class GoogleCloudDialogflowV2IntentMessageBrowseCarouselCardBrowseCarouselCardIt
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowV2IntentMessageBrowseCarouselCardBrowseCarouselCardItemOpenURLAction:
-    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    url_type_hint: Optional[GoogleCloudDialogflowV2IntentMessageBrowseCarouselCardBrowseCarouselCardItemOpenURLActionURLTypeHintEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'urlTypeHint' }})
+    r"""GoogleCloudDialogflowV2IntentMessageBrowseCarouselCardBrowseCarouselCardItemOpenURLAction
+    Actions on Google action to open a given url.
+    """
+    
+    url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('url') }})
+    url_type_hint: Optional[GoogleCloudDialogflowV2IntentMessageBrowseCarouselCardBrowseCarouselCardItemOpenURLActionURLTypeHintEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('urlTypeHint') }})
     

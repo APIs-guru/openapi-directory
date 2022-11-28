@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class GetTaskPathParams:
-    task_id: str = field(default=None, metadata={'path_param': { 'field_name': 'task_id', 'style': 'simple', 'explode': False }})
+    task_id: str = field(metadata={'path_param': { 'field_name': 'task_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTaskSecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class GetTaskRequest:
-    path_params: GetTaskPathParams = field(default=None)
-    security: GetTaskSecurity = field(default=None)
+    path_params: GetTaskPathParams = field()
+    security: GetTaskSecurity = field()
     
 
 @dataclass
 class GetTaskResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     task: Optional[shared.Task] = field(default=None)
     

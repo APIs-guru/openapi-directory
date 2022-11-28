@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Schema } from "./schema";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SchemaInput } from "./schema";
 
 
-// ValidateSchemaRequest
+
+// ValidateSchemaRequestInput
 /** 
  * Request for the `ValidateSchema` method.
 **/
-export class ValidateSchemaRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=schema" })
-  schema?: Schema;
+export class ValidateSchemaRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=schema" })
+  schema?: SchemaInput;
 }

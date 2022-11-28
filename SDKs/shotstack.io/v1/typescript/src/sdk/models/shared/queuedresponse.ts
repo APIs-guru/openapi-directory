@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QueuedResponseData } from "./queuedresponsedata";
+
 
 
 // QueuedResponse
@@ -7,12 +8,12 @@ import { QueuedResponseData } from "./queuedresponsedata";
  * The response received after a [render request](#render-asset) is submitted. The render task is queued for rendering and a unique render id is returned.
 **/
 export class QueuedResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message: string;
 
-  @Metadata({ data: "json, name=response" })
+  @SpeakeasyMetadata({ data: "json, name=response" })
   response: QueuedResponseData;
 
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success: boolean;
 }

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EstimationDeleteApiModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Id, form, name=Id;" })
+  @SpeakeasyMetadata({ data: "json, name=Id, form, name=Id;" })
   id?: number;
 }

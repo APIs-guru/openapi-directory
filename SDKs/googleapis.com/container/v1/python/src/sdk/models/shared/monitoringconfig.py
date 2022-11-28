@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import monitoringcomponentconfig
-from . import managedprometheusconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MonitoringConfig:
-    component_config: Optional[monitoringcomponentconfig.MonitoringComponentConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'componentConfig' }})
-    managed_prometheus_config: Optional[managedprometheusconfig.ManagedPrometheusConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'managedPrometheusConfig' }})
+    r"""MonitoringConfig
+    MonitoringConfig is cluster monitoring configuration.
+    """
+    
+    component_config: Optional[MonitoringComponentConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('componentConfig') }})
+    managed_prometheus_config: Optional[ManagedPrometheusConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('managedPrometheusConfig') }})
     

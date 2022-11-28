@@ -1,13 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteSlotTypePathParams:
-    bot_id: str = field(default=None, metadata={'path_param': { 'field_name': 'botId', 'style': 'simple', 'explode': False }})
-    bot_version: str = field(default=None, metadata={'path_param': { 'field_name': 'botVersion', 'style': 'simple', 'explode': False }})
-    locale_id: str = field(default=None, metadata={'path_param': { 'field_name': 'localeId', 'style': 'simple', 'explode': False }})
-    slot_type_id: str = field(default=None, metadata={'path_param': { 'field_name': 'slotTypeId', 'style': 'simple', 'explode': False }})
+    bot_id: str = field(metadata={'path_param': { 'field_name': 'botId', 'style': 'simple', 'explode': False }})
+    bot_version: str = field(metadata={'path_param': { 'field_name': 'botVersion', 'style': 'simple', 'explode': False }})
+    locale_id: str = field(metadata={'path_param': { 'field_name': 'localeId', 'style': 'simple', 'explode': False }})
+    slot_type_id: str = field(metadata={'path_param': { 'field_name': 'slotTypeId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,19 +31,19 @@ class DeleteSlotTypeHeaders:
 
 @dataclass
 class DeleteSlotTypeRequest:
-    path_params: DeleteSlotTypePathParams = field(default=None)
-    query_params: DeleteSlotTypeQueryParams = field(default=None)
-    headers: DeleteSlotTypeHeaders = field(default=None)
+    headers: DeleteSlotTypeHeaders = field()
+    path_params: DeleteSlotTypePathParams = field()
+    query_params: DeleteSlotTypeQueryParams = field()
     
 
 @dataclass
 class DeleteSlotTypeResponse:
+    content_type: str = field()
+    status_code: int = field()
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     precondition_failed_exception: Optional[Any] = field(default=None)
     service_quota_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

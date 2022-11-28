@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirestoreAdminV1beta2Index } from "./googlefirestoreadminv1beta2index";
 /**
  * The index configuration for this field.

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DiscordPostDiscordPostHeaders = /** @class */ (function (_super) {
     __extends(DiscordPostDiscordPostHeaders, _super);
@@ -30,7 +30,7 @@ var DiscordPostDiscordPostHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" }),
         __metadata("design:type", String)
     ], DiscordPostDiscordPostHeaders.prototype, "authorization", void 0);
     return DiscordPostDiscordPostHeaders;
@@ -42,11 +42,11 @@ var DiscordPostDiscordPostRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DiscordPostDiscordPostHeaders)
     ], DiscordPostDiscordPostRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.DiscordMessageRequest)
     ], DiscordPostDiscordPostRequest.prototype, "request", void 0);
     return DiscordPostDiscordPostRequest;
@@ -58,19 +58,19 @@ var DiscordPostDiscordPostResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DiscordPostDiscordPostResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], DiscordPostDiscordPostResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DiscordPostDiscordPostResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], DiscordPostDiscordPostResponse.prototype, "discordPostDiscordPost200ApplicationJsonAny", void 0);
     return DiscordPostDiscordPostResponse;

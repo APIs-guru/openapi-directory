@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { WindowSummary } from "./windowsummary";
 // EvaluationResult
 /**
  * The results of evaluating an algorithm. Returned as part of the <a>GetAccuracyMetrics</a> response.
@@ -34,11 +34,11 @@ var EvaluationResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AlgorithmArn" }),
+        SpeakeasyMetadata({ data: "json, name=AlgorithmArn" }),
         __metadata("design:type", String)
     ], EvaluationResult.prototype, "algorithmArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=TestWindows", elemType: shared.WindowSummary }),
+        SpeakeasyMetadata({ data: "json, name=TestWindows", elemType: WindowSummary }),
         __metadata("design:type", Array)
     ], EvaluationResult.prototype, "testWindows", void 0);
     return EvaluationResult;

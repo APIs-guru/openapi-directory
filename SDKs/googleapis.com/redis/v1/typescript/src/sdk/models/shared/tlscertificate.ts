@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TlsCertificate
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * TlsCertificate Resource
 **/
 export class TlsCertificate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cert" })
+  @SpeakeasyMetadata({ data: "json, name=cert" })
   cert?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=expireTime" })
+  @SpeakeasyMetadata({ data: "json, name=expireTime" })
   expireTime?: string;
 
-  @Metadata({ data: "json, name=serialNumber" })
+  @SpeakeasyMetadata({ data: "json, name=serialNumber" })
   serialNumber?: string;
 
-  @Metadata({ data: "json, name=sha1Fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=sha1Fingerprint" })
   sha1Fingerprint?: string;
 }

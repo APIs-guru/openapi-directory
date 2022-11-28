@@ -9,6 +9,8 @@ const (
 	DirectoryChromeosdevicesCommandResultResultEnumSuccess                      DirectoryChromeosdevicesCommandResultResultEnum = "SUCCESS"
 )
 
+// DirectoryChromeosdevicesCommandResult
+// The result of executing a command.
 type DirectoryChromeosdevicesCommandResult struct {
 	ErrorMessage *string                                          `json:"errorMessage,omitempty"`
 	ExecuteTime  *string                                          `json:"executeTime,omitempty"`

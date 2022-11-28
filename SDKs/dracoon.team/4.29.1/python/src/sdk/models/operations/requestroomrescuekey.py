@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class RequestRoomRescueKeyPathParams:
-    file_id: int = field(default=None, metadata={'path_param': { 'field_name': 'file_id', 'style': 'simple', 'explode': False }})
+    file_id: int = field(metadata={'path_param': { 'field_name': 'file_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,15 +20,15 @@ class RequestRoomRescueKeyHeaders:
 
 @dataclass
 class RequestRoomRescueKeyRequest:
-    path_params: RequestRoomRescueKeyPathParams = field(default=None)
-    query_params: RequestRoomRescueKeyQueryParams = field(default=None)
-    headers: RequestRoomRescueKeyHeaders = field(default=None)
+    headers: RequestRoomRescueKeyHeaders = field()
+    path_params: RequestRoomRescueKeyPathParams = field()
+    query_params: RequestRoomRescueKeyQueryParams = field()
     
 
 @dataclass
 class RequestRoomRescueKeyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     file_key: Optional[shared.FileKey] = field(default=None)
-    status_code: int = field(default=None)
     

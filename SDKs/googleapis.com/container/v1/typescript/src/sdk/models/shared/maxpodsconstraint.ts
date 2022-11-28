@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MaxPodsConstraint
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Constraints applied to pods.
 **/
 export class MaxPodsConstraint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxPodsPerNode" })
+  @SpeakeasyMetadata({ data: "json, name=maxPodsPerNode" })
   maxPodsPerNode?: string;
 }

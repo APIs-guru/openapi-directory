@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Error } from "./error";
 import { RequestReference } from "./requestreference";
+
 
 export enum PatientCareContextLinkResponseAcknowledgementStatusEnum {
     Success = "SUCCESS"
@@ -8,24 +9,24 @@ export enum PatientCareContextLinkResponseAcknowledgementStatusEnum {
 
 
 export class PatientCareContextLinkResponseAcknowledgement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PatientCareContextLinkResponseAcknowledgementStatusEnum;
 }
 
 
 export class PatientCareContextLinkResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acknowledgement" })
+  @SpeakeasyMetadata({ data: "json, name=acknowledgement" })
   acknowledgement?: PatientCareContextLinkResponseAcknowledgement;
 
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Error;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=resp" })
+  @SpeakeasyMetadata({ data: "json, name=resp" })
   resp: RequestReference;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: Date;
 }

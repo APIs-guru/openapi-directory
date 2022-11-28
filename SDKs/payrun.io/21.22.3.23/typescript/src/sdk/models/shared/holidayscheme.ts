@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HolidaySchemeHolidaySchemeAccrualPayCodes
@@ -6,54 +7,54 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The holiday schemes' accrual pay codes
 **/
 export class HolidaySchemeHolidaySchemeAccrualPayCodes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PayCode" })
+  @SpeakeasyMetadata({ data: "json, name=PayCode" })
   payCode?: string[];
 }
 
 
 export class HolidaySchemeHolidayScheme extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccrualPayCodes" })
+  @SpeakeasyMetadata({ data: "json, name=AccrualPayCodes" })
   accrualPayCodes?: HolidaySchemeHolidaySchemeAccrualPayCodes;
 
-  @Metadata({ data: "json, name=AllowNegativeBalance" })
+  @SpeakeasyMetadata({ data: "json, name=AllowNegativeBalance" })
   allowNegativeBalance?: boolean;
 
-  @Metadata({ data: "json, name=AnnualEntitlementWeeks" })
+  @SpeakeasyMetadata({ data: "json, name=AnnualEntitlementWeeks" })
   annualEntitlementWeeks?: number;
 
-  @Metadata({ data: "json, name=BankHolidayInclusive" })
+  @SpeakeasyMetadata({ data: "json, name=BankHolidayInclusive" })
   bankHolidayInclusive?: boolean;
 
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: string;
 
-  @Metadata({ data: "json, name=EffectiveDate" })
+  @SpeakeasyMetadata({ data: "json, name=EffectiveDate" })
   effectiveDate?: Date;
 
-  @Metadata({ data: "json, name=MaxCarryOverDays" })
+  @SpeakeasyMetadata({ data: "json, name=MaxCarryOverDays" })
   maxCarryOverDays?: number;
 
-  @Metadata({ data: "json, name=Revision" })
+  @SpeakeasyMetadata({ data: "json, name=Revision" })
   revision?: number;
 
-  @Metadata({ data: "json, name=SchemeCeasedDate" })
+  @SpeakeasyMetadata({ data: "json, name=SchemeCeasedDate" })
   schemeCeasedDate?: Date;
 
-  @Metadata({ data: "json, name=SchemeKey" })
+  @SpeakeasyMetadata({ data: "json, name=SchemeKey" })
   schemeKey?: string;
 
-  @Metadata({ data: "json, name=SchemeName" })
+  @SpeakeasyMetadata({ data: "json, name=SchemeName" })
   schemeName?: string;
 
-  @Metadata({ data: "json, name=YearStartDay" })
+  @SpeakeasyMetadata({ data: "json, name=YearStartDay" })
   yearStartDay?: number;
 
-  @Metadata({ data: "json, name=YearStartMonth" })
+  @SpeakeasyMetadata({ data: "json, name=YearStartMonth" })
   yearStartMonth?: number;
 }
 
 
 export class HolidayScheme extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HolidayScheme" })
+  @SpeakeasyMetadata({ data: "json, name=HolidayScheme" })
   holidayScheme?: HolidaySchemeHolidayScheme;
 }

@@ -1,107 +1,96 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateLinodeInstanceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorized_keys" })
+  @SpeakeasyMetadata({ data: "json, name=authorized_keys" })
   authorizedKeys?: string[];
 
-  @Metadata({ data: "json, name=authorized_users" })
+  @SpeakeasyMetadata({ data: "json, name=authorized_users" })
   authorizedUsers?: string[];
 
-  @Metadata({ data: "json, name=backup_id" })
+  @SpeakeasyMetadata({ data: "json, name=backup_id" })
   backupId?: number;
 
-  @Metadata({ data: "json, name=backups_enabled" })
+  @SpeakeasyMetadata({ data: "json, name=backups_enabled" })
   backupsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=booted" })
+  @SpeakeasyMetadata({ data: "json, name=booted" })
   booted?: boolean;
 
-  @Metadata({ data: "json, name=group" })
+  @SpeakeasyMetadata({ data: "json, name=group" })
   group?: string;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: string;
 
-  @Metadata({ data: "json, name=interfaces", elemType: shared.LinodeConfigInterface })
+  @SpeakeasyMetadata({ data: "json, name=interfaces", elemType: shared.LinodeConfigInterface })
   interfaces?: shared.LinodeConfigInterface[];
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=private_ip" })
+  @SpeakeasyMetadata({ data: "json, name=private_ip" })
   privateIp?: boolean;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region: string;
 
-  @Metadata({ data: "json, name=root_pass" })
+  @SpeakeasyMetadata({ data: "json, name=root_pass" })
   rootPass?: string;
 
-  @Metadata({ data: "json, name=stackscript_data" })
+  @SpeakeasyMetadata({ data: "json, name=stackscript_data" })
   stackscriptData?: Map<string, any>;
 
-  @Metadata({ data: "json, name=stackscript_id" })
+  @SpeakeasyMetadata({ data: "json, name=stackscript_id" })
   stackscriptId?: number;
 
-  @Metadata({ data: "json, name=swap_size" })
+  @SpeakeasyMetadata({ data: "json, name=swap_size" })
   swapSize?: number;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 
-export class CreateLinodeInstanceSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class CreateLinodeInstanceSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class CreateLinodeInstanceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: CreateLinodeInstanceSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: CreateLinodeInstanceSecurityOption2;
-}
-
-
-export class CreateLinodeInstanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: CreateLinodeInstanceRequestBody;
-
-  @Metadata()
-  security: CreateLinodeInstanceSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class CreateLinodeInstanceDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class CreateLinodeInstanceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: CreateLinodeInstanceRequestBody;
+
+  @SpeakeasyMetadata()
+  security: CreateLinodeInstanceSecurity;
+}
+
+
 export class CreateLinodeInstanceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   linode?: shared.Linode;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createLinodeInstanceDefaultApplicationJsonObject?: CreateLinodeInstanceDefaultApplicationJson;
 }

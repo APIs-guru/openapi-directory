@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdatePermissionGroupPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=permissionGroupId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=permissionGroupId" })
   permissionGroupId: number;
 }
 
 
 export class UpdatePermissionGroupRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   updatePermissionGroupRequest?: shared.UpdatePermissionGroupRequest;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   updatePermissionGroupRequest1?: shared.UpdatePermissionGroupRequest;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   updatePermissionGroupRequest2?: shared.UpdatePermissionGroupRequest;
 }
 
 
 export class UpdatePermissionGroupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdatePermissionGroupPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: UpdatePermissionGroupRequests;
 }
 
 
 export class UpdatePermissionGroupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   permissionGroupModel?: shared.PermissionGroupModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

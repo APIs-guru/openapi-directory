@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SchemaAttributeType } from "./schemaattributetype";
+
 
 
 // AddCustomAttributesRequest
@@ -8,9 +8,9 @@ import { SchemaAttributeType } from "./schemaattributetype";
  * Represents the request to add custom attributes.
 **/
 export class AddCustomAttributesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CustomAttributes", elemType: shared.SchemaAttributeType })
+  @SpeakeasyMetadata({ data: "json, name=CustomAttributes", elemType: SchemaAttributeType })
   customAttributes: SchemaAttributeType[];
 
-  @Metadata({ data: "json, name=UserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolId" })
   userPoolId: string;
 }

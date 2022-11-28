@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import documentdescription
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateDocumentResult:
-    document_description: Optional[documentdescription.DocumentDescription] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DocumentDescription' }})
+    document_description: Optional[DocumentDescription] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DocumentDescription') }})
     

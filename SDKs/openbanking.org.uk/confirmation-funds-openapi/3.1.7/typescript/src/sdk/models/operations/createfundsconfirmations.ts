@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateFundsConfirmationsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-customer-user-agent" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-customer-user-agent" })
   xCustomerUserAgent?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-fapi-auth-date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-fapi-auth-date" })
   xFapiAuthDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-fapi-customer-ip-address" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-fapi-customer-ip-address" })
   xFapiCustomerIpAddress?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=x-fapi-interaction-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-fapi-interaction-id" })
   xFapiInteractionId?: string;
 }
 
 
 export class CreateFundsConfirmationsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   psuoAuth2Security: shared.SchemePsuoAuth2Security;
 }
 
 
 export class CreateFundsConfirmationsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateFundsConfirmationsHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.ObFundsConfirmation1;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateFundsConfirmationsSecurity;
 }
 
 
 export class CreateFundsConfirmationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   obErrorResponse1?: shared.ObErrorResponse1;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   obFundsConfirmationResponse1?: shared.ObFundsConfirmationResponse1;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

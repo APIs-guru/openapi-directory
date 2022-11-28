@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RuleMetadata
 /**
  * Metadata about a rule. Rule metadata includes an ID, a name, a list of tags, and a short and long description. CodeGuru Reviewer uses rules to analyze code. A rule's recommendation is included in analysis results if code is detected that violates the rule.
@@ -33,23 +33,23 @@ var RuleMetadata = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=LongDescription" }),
+        SpeakeasyMetadata({ data: "json, name=LongDescription" }),
         __metadata("design:type", String)
     ], RuleMetadata.prototype, "longDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=RuleId" }),
+        SpeakeasyMetadata({ data: "json, name=RuleId" }),
         __metadata("design:type", String)
     ], RuleMetadata.prototype, "ruleId", void 0);
     __decorate([
-        Metadata({ data: "json, name=RuleName" }),
+        SpeakeasyMetadata({ data: "json, name=RuleName" }),
         __metadata("design:type", String)
     ], RuleMetadata.prototype, "ruleName", void 0);
     __decorate([
-        Metadata({ data: "json, name=RuleTags" }),
+        SpeakeasyMetadata({ data: "json, name=RuleTags" }),
         __metadata("design:type", Array)
     ], RuleMetadata.prototype, "ruleTags", void 0);
     __decorate([
-        Metadata({ data: "json, name=ShortDescription" }),
+        SpeakeasyMetadata({ data: "json, name=ShortDescription" }),
         __metadata("design:type", String)
     ], RuleMetadata.prototype, "shortDescription", void 0);
     return RuleMetadata;

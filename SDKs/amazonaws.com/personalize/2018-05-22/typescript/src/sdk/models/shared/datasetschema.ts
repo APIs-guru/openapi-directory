@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DatasetSchema
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the schema for a dataset. For more information on schemas, see <a>CreateSchema</a>.
 **/
 export class DatasetSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationDateTime" })
   creationDateTime?: Date;
 
-  @Metadata({ data: "json, name=lastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" })
   lastUpdatedDateTime?: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: string;
 
-  @Metadata({ data: "json, name=schemaArn" })
+  @SpeakeasyMetadata({ data: "json, name=schemaArn" })
   schemaArn?: string;
 }

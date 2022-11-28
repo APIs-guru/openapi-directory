@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ArtistAPIGetListFieldsEnum(str, Enum):
@@ -67,13 +68,13 @@ class ArtistAPIGetListQueryParams:
 
 @dataclass
 class ArtistAPIGetListRequest:
-    query_params: ArtistAPIGetListQueryParams = field(default=None)
+    query_params: ArtistAPIGetListQueryParams = field()
     
 
 @dataclass
 class ArtistAPIGetListResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     partial_find_result_artist_for_api_contract_: Optional[shared.PartialFindResultArtistForAPIContract] = field(default=None)
-    status_code: int = field(default=None)
     

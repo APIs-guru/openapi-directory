@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatementStatusStringEnum } from "./statementstatusstringenum";
+
 
 
 // SubStatementData
@@ -7,36 +8,36 @@ import { StatementStatusStringEnum } from "./statementstatusstringenum";
  * Information about an SQL statement.
 **/
 export class SubStatementData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=Duration" })
+  @SpeakeasyMetadata({ data: "json, name=Duration" })
   duration?: number;
 
-  @Metadata({ data: "json, name=Error" })
+  @SpeakeasyMetadata({ data: "json, name=Error" })
   error?: string;
 
-  @Metadata({ data: "json, name=HasResultSet" })
+  @SpeakeasyMetadata({ data: "json, name=HasResultSet" })
   hasResultSet?: boolean;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: string;
 
-  @Metadata({ data: "json, name=QueryString" })
+  @SpeakeasyMetadata({ data: "json, name=QueryString" })
   queryString?: string;
 
-  @Metadata({ data: "json, name=RedshiftQueryId" })
+  @SpeakeasyMetadata({ data: "json, name=RedshiftQueryId" })
   redshiftQueryId?: number;
 
-  @Metadata({ data: "json, name=ResultRows" })
+  @SpeakeasyMetadata({ data: "json, name=ResultRows" })
   resultRows?: number;
 
-  @Metadata({ data: "json, name=ResultSize" })
+  @SpeakeasyMetadata({ data: "json, name=ResultSize" })
   resultSize?: number;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: StatementStatusStringEnum;
 
-  @Metadata({ data: "json, name=UpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedAt" })
   updatedAt?: Date;
 }

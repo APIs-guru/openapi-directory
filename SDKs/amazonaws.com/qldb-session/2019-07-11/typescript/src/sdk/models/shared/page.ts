@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ValueHolder } from "./valueholder";
+
 
 
 // Page
@@ -8,9 +8,9 @@ import { ValueHolder } from "./valueholder";
  * Contains details of the fetched page.
 **/
 export class Page extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=Values", elemType: shared.ValueHolder })
+  @SpeakeasyMetadata({ data: "json, name=Values", elemType: ValueHolder })
   values?: ValueHolder[];
 }

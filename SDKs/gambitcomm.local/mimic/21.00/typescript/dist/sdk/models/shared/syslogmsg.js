@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SyslogMsg = /** @class */ (function (_super) {
     __extends(SyslogMsg, _super);
     function SyslogMsg() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=hostname" }),
+        SpeakeasyMetadata({ data: "json, name=hostname" }),
         __metadata("design:type", String)
     ], SyslogMsg.prototype, "hostname", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], SyslogMsg.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=separator" }),
+        SpeakeasyMetadata({ data: "json, name=separator" }),
         __metadata("design:type", String)
     ], SyslogMsg.prototype, "separator", void 0);
     __decorate([
-        Metadata({ data: "json, name=sequence" }),
+        SpeakeasyMetadata({ data: "json, name=sequence" }),
         __metadata("design:type", String)
     ], SyslogMsg.prototype, "sequence", void 0);
     __decorate([
-        Metadata({ data: "json, name=timestamp" }),
+        SpeakeasyMetadata({ data: "json, name=timestamp" }),
         __metadata("design:type", String)
     ], SyslogMsg.prototype, "timestamp", void 0);
     return SyslogMsg;

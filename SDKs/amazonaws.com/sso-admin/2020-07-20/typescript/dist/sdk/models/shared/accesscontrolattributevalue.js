@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // AccessControlAttributeValue
 /**
  * The value used for mapping a specified attribute to an identity source.
@@ -33,7 +33,7 @@ var AccessControlAttributeValue = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Source" }),
+        SpeakeasyMetadata({ data: "json, name=Source" }),
         __metadata("design:type", Array)
     ], AccessControlAttributeValue.prototype, "source", void 0);
     return AccessControlAttributeValue;

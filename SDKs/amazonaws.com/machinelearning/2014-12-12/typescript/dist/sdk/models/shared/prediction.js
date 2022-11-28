@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Prediction
 /**
  * <p>The output from a <code>Predict</code> operation: </p> <ul> <li> <p> <code>Details</code> - Contains the following attributes: <code>DetailsAttributes.PREDICTIVE_MODEL_TYPE - REGRESSION | BINARY | MULTICLASS</code> <code>DetailsAttributes.ALGORITHM - SGD</code> </p> </li> <li> <p> <code>PredictedLabel</code> - Present for either a <code>BINARY</code> or <code>MULTICLASS</code> <code>MLModel</code> request. </p> </li> <li> <p> <code>PredictedScores</code> - Contains the raw classification score corresponding to each label. </p> </li> <li> <p> <code>PredictedValue</code> - Present for a <code>REGRESSION</code> <code>MLModel</code> request. </p> </li> </ul>
@@ -33,19 +33,19 @@ var Prediction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=details" }),
+        SpeakeasyMetadata({ data: "json, name=details" }),
         __metadata("design:type", Map)
     ], Prediction.prototype, "details", void 0);
     __decorate([
-        Metadata({ data: "json, name=predictedLabel" }),
+        SpeakeasyMetadata({ data: "json, name=predictedLabel" }),
         __metadata("design:type", String)
     ], Prediction.prototype, "predictedLabel", void 0);
     __decorate([
-        Metadata({ data: "json, name=predictedScores" }),
+        SpeakeasyMetadata({ data: "json, name=predictedScores" }),
         __metadata("design:type", Map)
     ], Prediction.prototype, "predictedScores", void 0);
     __decorate([
-        Metadata({ data: "json, name=predictedValue" }),
+        SpeakeasyMetadata({ data: "json, name=predictedValue" }),
         __metadata("design:type", Number)
     ], Prediction.prototype, "predictedValue", void 0);
     return Prediction;

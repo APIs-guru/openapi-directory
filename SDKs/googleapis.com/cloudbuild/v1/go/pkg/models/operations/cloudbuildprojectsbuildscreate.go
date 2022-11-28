@@ -31,7 +31,7 @@ type CloudbuildProjectsBuildsCreateSecurity struct {
 type CloudbuildProjectsBuildsCreateRequest struct {
 	PathParams  CloudbuildProjectsBuildsCreatePathParams
 	QueryParams CloudbuildProjectsBuildsCreateQueryParams
-	Request     *shared.Build `request:"mediaType=application/json"`
+	Request     *shared.BuildInput `request:"mediaType=application/json"`
 	Security    CloudbuildProjectsBuildsCreateSecurity
 }
 

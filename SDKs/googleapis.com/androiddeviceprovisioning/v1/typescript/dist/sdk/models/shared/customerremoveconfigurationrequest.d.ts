@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DeviceReference } from "./devicereference";
 /**
  * Request message for customer to remove the configuration from device.

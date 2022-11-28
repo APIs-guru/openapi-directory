@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RegistryCredential } from "./registrycredential";
 import { EventNotificationConfig } from "./eventnotificationconfig";
 import { HttpConfig } from "./httpconfig";

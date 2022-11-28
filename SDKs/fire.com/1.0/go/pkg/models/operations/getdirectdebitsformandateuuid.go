@@ -9,10 +9,6 @@ type GetDirectDebitsForMandateUUIDQueryParams struct {
 	MandateUUID string `queryParam:"style=form,explode=true,name=mandateUuid"`
 }
 
-type GetDirectDebitsForMandateUUIDRequest struct {
-	QueryParams GetDirectDebitsForMandateUUIDQueryParams
-}
-
 type GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnum string
 
 const (
@@ -80,6 +76,10 @@ type GetDirectDebitsForMandateUUIDDirectDebitsDirectDebit struct {
 type GetDirectDebitsForMandateUUIDDirectDebits struct {
 	Directdebits []GetDirectDebitsForMandateUUIDDirectDebitsDirectDebit `json:"directdebits,omitempty"`
 	Total        *int64                                                 `json:"total,omitempty"`
+}
+
+type GetDirectDebitsForMandateUUIDRequest struct {
+	QueryParams GetDirectDebitsForMandateUUIDQueryParams
 }
 
 type GetDirectDebitsForMandateUUIDResponse struct {

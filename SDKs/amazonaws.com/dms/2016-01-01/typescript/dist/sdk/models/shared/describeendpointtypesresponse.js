@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SupportedEndpointType } from "./supportedendpointtype";
 // DescribeEndpointTypesResponse
 /**
  * <p/>
@@ -34,11 +34,11 @@ var DescribeEndpointTypesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Marker" }),
+        SpeakeasyMetadata({ data: "json, name=Marker" }),
         __metadata("design:type", String)
     ], DescribeEndpointTypesResponse.prototype, "marker", void 0);
     __decorate([
-        Metadata({ data: "json, name=SupportedEndpointTypes", elemType: shared.SupportedEndpointType }),
+        SpeakeasyMetadata({ data: "json, name=SupportedEndpointTypes", elemType: SupportedEndpointType }),
         __metadata("design:type", Array)
     ], DescribeEndpointTypesResponse.prototype, "supportedEndpointTypes", void 0);
     return DescribeEndpointTypesResponse;

@@ -24,10 +24,6 @@ type GetArticlesearchJSONQueryParams struct {
 	Sort        *GetArticlesearchJSONSortEnum `queryParam:"style=form,explode=true,name=sort"`
 }
 
-type GetArticlesearchJSONRequest struct {
-	QueryParams GetArticlesearchJSONQueryParams
-}
-
 type GetArticlesearchJSON200ApplicationJSONResponseMeta struct {
 	Hits   *int64 `json:"hits,omitempty"`
 	Offset *int64 `json:"offset,omitempty"`
@@ -41,6 +37,10 @@ type GetArticlesearchJSON200ApplicationJSONResponse struct {
 
 type GetArticlesearchJSON200ApplicationJSON struct {
 	Response *GetArticlesearchJSON200ApplicationJSONResponse `json:"response,omitempty"`
+}
+
+type GetArticlesearchJSONRequest struct {
+	QueryParams GetArticlesearchJSONQueryParams
 }
 
 type GetArticlesearchJSONResponse struct {

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleFirebaseAppcheckV1ExchangeAppAttestAttestationRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for the ExchangeAppAttestAttestation method.
 **/
 export class GoogleFirebaseAppcheckV1ExchangeAppAttestAttestationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attestationStatement" })
+  @SpeakeasyMetadata({ data: "json, name=attestationStatement" })
   attestationStatement?: string;
 
-  @Metadata({ data: "json, name=challenge" })
+  @SpeakeasyMetadata({ data: "json, name=challenge" })
   challenge?: string;
 
-  @Metadata({ data: "json, name=keyId" })
+  @SpeakeasyMetadata({ data: "json, name=keyId" })
   keyId?: string;
 }

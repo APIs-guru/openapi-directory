@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SearchResult
 /**
  * A search result matching the specified query. You can use sources.debian.org to view the file contents. See https://github.com/Debian/dcs/blob/master/cmd/dcs-web/show/show.go for how to construct a sources.debian.org URL from a search result.
@@ -33,27 +33,27 @@ var SearchResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=context" }),
+        SpeakeasyMetadata({ data: "json, name=context" }),
         __metadata("design:type", String)
     ], SearchResult.prototype, "context", void 0);
     __decorate([
-        Metadata({ data: "json, name=context_after" }),
+        SpeakeasyMetadata({ data: "json, name=context_after" }),
         __metadata("design:type", Array)
     ], SearchResult.prototype, "contextAfter", void 0);
     __decorate([
-        Metadata({ data: "json, name=context_before" }),
+        SpeakeasyMetadata({ data: "json, name=context_before" }),
         __metadata("design:type", Array)
     ], SearchResult.prototype, "contextBefore", void 0);
     __decorate([
-        Metadata({ data: "json, name=line" }),
+        SpeakeasyMetadata({ data: "json, name=line" }),
         __metadata("design:type", Number)
     ], SearchResult.prototype, "line", void 0);
     __decorate([
-        Metadata({ data: "json, name=package" }),
+        SpeakeasyMetadata({ data: "json, name=package" }),
         __metadata("design:type", String)
     ], SearchResult.prototype, "package", void 0);
     __decorate([
-        Metadata({ data: "json, name=path" }),
+        SpeakeasyMetadata({ data: "json, name=path" }),
         __metadata("design:type", String)
     ], SearchResult.prototype, "path", void 0);
     return SearchResult;

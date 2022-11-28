@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Money } from "./money";
+
 
 
 // ConvertRegionPricesRequest
@@ -7,6 +8,6 @@ import { Money } from "./money";
  * Request message for ConvertRegionPrices.
 **/
 export class ConvertRegionPricesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: Money;
 }

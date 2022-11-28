@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DescribeEntityResponse = /** @class */ (function (_super) {
     __extends(DescribeEntityResponse, _super);
     function DescribeEntityResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Details" }),
+        SpeakeasyMetadata({ data: "json, name=Details" }),
         __metadata("design:type", String)
     ], DescribeEntityResponse.prototype, "details", void 0);
     __decorate([
-        Metadata({ data: "json, name=EntityArn" }),
+        SpeakeasyMetadata({ data: "json, name=EntityArn" }),
         __metadata("design:type", String)
     ], DescribeEntityResponse.prototype, "entityArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=EntityIdentifier" }),
+        SpeakeasyMetadata({ data: "json, name=EntityIdentifier" }),
         __metadata("design:type", String)
     ], DescribeEntityResponse.prototype, "entityIdentifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=EntityType" }),
+        SpeakeasyMetadata({ data: "json, name=EntityType" }),
         __metadata("design:type", String)
     ], DescribeEntityResponse.prototype, "entityType", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModifiedDate" }),
+        SpeakeasyMetadata({ data: "json, name=LastModifiedDate" }),
         __metadata("design:type", String)
     ], DescribeEntityResponse.prototype, "lastModifiedDate", void 0);
     return DescribeEntityResponse;

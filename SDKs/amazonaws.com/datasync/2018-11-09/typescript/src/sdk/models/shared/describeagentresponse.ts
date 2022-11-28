@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndpointTypeEnum } from "./endpointtypeenum";
 import { PrivateLinkConfig } from "./privatelinkconfig";
 import { AgentStatusEnum } from "./agentstatusenum";
+
 
 
 // DescribeAgentResponse
@@ -9,24 +10,24 @@ import { AgentStatusEnum } from "./agentstatusenum";
  * DescribeAgentResponse
 **/
 export class DescribeAgentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AgentArn" })
+  @SpeakeasyMetadata({ data: "json, name=AgentArn" })
   agentArn?: string;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=EndpointType" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointType" })
   endpointType?: EndpointTypeEnum;
 
-  @Metadata({ data: "json, name=LastConnectionTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastConnectionTime" })
   lastConnectionTime?: Date;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=PrivateLinkConfig" })
+  @SpeakeasyMetadata({ data: "json, name=PrivateLinkConfig" })
   privateLinkConfig?: PrivateLinkConfig;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: AgentStatusEnum;
 }

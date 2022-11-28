@@ -16,6 +16,8 @@ const (
 	EmbeddedObjectBorderPropertyStateEnumNotRendered EmbeddedObjectBorderPropertyStateEnum = "NOT_RENDERED"
 )
 
+// EmbeddedObjectBorder
+// A border around an EmbeddedObject.
 type EmbeddedObjectBorder struct {
 	Color         *OptionalColor                         `json:"color,omitempty"`
 	DashStyle     *EmbeddedObjectBorderDashStyleEnum     `json:"dashStyle,omitempty"`

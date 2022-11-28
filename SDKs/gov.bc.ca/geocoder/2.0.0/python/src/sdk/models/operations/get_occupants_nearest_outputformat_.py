@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 
 class GetOccupantsNearestOutputFormatOutputFormatEnum(str, Enum):
     JSON = "json"
@@ -13,7 +14,7 @@ class GetOccupantsNearestOutputFormatOutputFormatEnum(str, Enum):
 
 @dataclass
 class GetOccupantsNearestOutputFormatPathParams:
-    output_format: GetOccupantsNearestOutputFormatOutputFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
+    output_format: GetOccupantsNearestOutputFormatOutputFormatEnum = field(metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
     
 class GetOccupantsNearestOutputFormatLocationDescriptorEnum(str, Enum):
     ANY = "any"
@@ -26,23 +27,23 @@ class GetOccupantsNearestOutputFormatLocationDescriptorEnum(str, Enum):
 
 @dataclass
 class GetOccupantsNearestOutputFormatQueryParams:
+    point: str = field(metadata={'query_param': { 'field_name': 'point', 'style': 'form', 'explode': True }})
     brief: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'brief', 'style': 'form', 'explode': True }})
     location_descriptor: Optional[GetOccupantsNearestOutputFormatLocationDescriptorEnum] = field(default=None, metadata={'query_param': { 'field_name': 'locationDescriptor', 'style': 'form', 'explode': True }})
     max_distance: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxDistance', 'style': 'form', 'explode': True }})
     output_srs: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'outputSRS', 'style': 'form', 'explode': True }})
-    point: str = field(default=None, metadata={'query_param': { 'field_name': 'point', 'style': 'form', 'explode': True }})
     set_back: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'setBack', 'style': 'form', 'explode': True }})
     tags: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'tags', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GetOccupantsNearestOutputFormatRequest:
-    path_params: GetOccupantsNearestOutputFormatPathParams = field(default=None)
-    query_params: GetOccupantsNearestOutputFormatQueryParams = field(default=None)
+    path_params: GetOccupantsNearestOutputFormatPathParams = field()
+    query_params: GetOccupantsNearestOutputFormatQueryParams = field()
     
 
 @dataclass
 class GetOccupantsNearestOutputFormatResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

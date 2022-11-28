@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobFilter } from "./jobfilter";
 
 
+
 export class DescribeRecommendationExportJobsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filters", elemType: shared.JobFilter })
+  @SpeakeasyMetadata({ data: "json, name=filters", elemType: JobFilter })
   filters?: JobFilter[];
 
-  @Metadata({ data: "json, name=jobIds" })
+  @SpeakeasyMetadata({ data: "json, name=jobIds" })
   jobIds?: string[];
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

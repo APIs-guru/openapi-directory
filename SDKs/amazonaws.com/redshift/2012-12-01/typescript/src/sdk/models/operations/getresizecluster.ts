@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetResizeClusterActionEnum {
     ResizeCluster = "ResizeCluster"
@@ -10,69 +11,69 @@ export enum GetResizeClusterVersionEnum {
 
 
 export class GetResizeClusterQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetResizeClusterActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Classic" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Classic" })
   classic?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ClusterIdentifier" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClusterIdentifier" })
   clusterIdentifier: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ClusterType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClusterType" })
   clusterType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=NodeType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NodeType" })
   nodeType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=NumberOfNodes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NumberOfNodes" })
   numberOfNodes?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetResizeClusterVersionEnum;
 }
 
 
 export class GetResizeClusterHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetResizeClusterRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetResizeClusterQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetResizeClusterHeaders;
 }
 
 
 export class GetResizeClusterResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

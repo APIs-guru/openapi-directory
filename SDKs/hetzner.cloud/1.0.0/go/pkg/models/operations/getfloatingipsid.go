@@ -4,15 +4,13 @@ type GetFloatingIpsIDPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type GetFloatingIpsIDRequest struct {
-	PathParams GetFloatingIpsIDPathParams
-}
-
 type GetFloatingIpsID200ApplicationJSONFloatingIPDNSPtr struct {
 	DNSPtr string `json:"dns_ptr"`
 	IP     string `json:"ip"`
 }
 
+// GetFloatingIpsID200ApplicationJSONFloatingIPHomeLocation
+// Location the Floating IP was created in. Routing is optimized for this Location.
 type GetFloatingIpsID200ApplicationJSONFloatingIPHomeLocation struct {
 	City        string  `json:"city"`
 	Country     string  `json:"country"`
@@ -24,6 +22,8 @@ type GetFloatingIpsID200ApplicationJSONFloatingIPHomeLocation struct {
 	NetworkZone string  `json:"network_zone"`
 }
 
+// GetFloatingIpsID200ApplicationJSONFloatingIPProtection
+// Protection configuration for the Resource
 type GetFloatingIpsID200ApplicationJSONFloatingIPProtection struct {
 	Delete bool `json:"delete"`
 }
@@ -52,6 +52,10 @@ type GetFloatingIpsID200ApplicationJSONFloatingIP struct {
 
 type GetFloatingIpsID200ApplicationJSON struct {
 	FloatingIP GetFloatingIpsID200ApplicationJSONFloatingIP `json:"floating_ip"`
+}
+
+type GetFloatingIpsIDRequest struct {
+	PathParams GetFloatingIpsIDPathParams
 }
 
 type GetFloatingIpsIDResponse struct {

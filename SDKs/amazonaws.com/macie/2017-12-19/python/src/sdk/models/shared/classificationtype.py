@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import s3continuousclassificationtype_enum
-from . import s3onetimeclassificationtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ClassificationType:
-    continuous: s3continuousclassificationtype_enum.S3ContinuousClassificationTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'continuous' }})
-    one_time: s3onetimeclassificationtype_enum.S3OneTimeClassificationTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'oneTime' }})
+    r"""ClassificationType
+    The classification type that Amazon Macie Classic applies to the associated S3 resources. 
+    """
+    
+    continuous: S3ContinuousClassificationTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('continuous') }})
+    one_time: S3OneTimeClassificationTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('oneTime') }})
     

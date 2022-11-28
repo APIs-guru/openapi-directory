@@ -1,46 +1,32 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
+from sdk.models import shared
 
 
 @dataclass
 class PostWorkspacesWorkspaceProjectsPathParams:
-    workspace: str = field(default=None, metadata={'path_param': { 'field_name': 'workspace', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class PostWorkspacesWorkspaceProjectsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class PostWorkspacesWorkspaceProjectsSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class PostWorkspacesWorkspaceProjectsSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    workspace: str = field(metadata={'path_param': { 'field_name': 'workspace', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PostWorkspacesWorkspaceProjectsSecurity:
-    option1: Optional[PostWorkspacesWorkspaceProjectsSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[PostWorkspacesWorkspaceProjectsSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[PostWorkspacesWorkspaceProjectsSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class PostWorkspacesWorkspaceProjectsRequest:
-    path_params: PostWorkspacesWorkspaceProjectsPathParams = field(default=None)
-    request: dict[str, Any] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: PostWorkspacesWorkspaceProjectsSecurity = field(default=None)
+    path_params: PostWorkspacesWorkspaceProjectsPathParams = field()
+    request: dict[str, Any] = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: PostWorkspacesWorkspaceProjectsSecurity = field()
     
 
 @dataclass
 class PostWorkspacesWorkspaceProjectsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     error: Optional[dict[str, Any]] = field(default=None)
     project: Optional[dict[str, Any]] = field(default=None)
     

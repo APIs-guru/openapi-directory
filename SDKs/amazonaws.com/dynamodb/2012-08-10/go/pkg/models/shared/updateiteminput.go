@@ -1,5 +1,7 @@
 package shared
 
+// UpdateItemInput
+// Represents the input of an <code>UpdateItem</code> operation.
 type UpdateItemInput struct {
 	AttributeUpdates            map[string]AttributeValueUpdate   `json:"AttributeUpdates,omitempty"`
 	ConditionExpression         *string                           `json:"ConditionExpression,omitempty"`

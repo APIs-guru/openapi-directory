@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AdvancedEventSelector } from "./advancedeventselector";
 import { EventSelector } from "./eventselector";
 export declare class PutEventSelectorsResponse extends SpeakeasyBase {

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListTagsPathParams:
-    arn: str = field(default=None, metadata={'path_param': { 'field_name': 'ARN', 'style': 'simple', 'explode': False }})
+    arn: str = field(metadata={'path_param': { 'field_name': 'ARN', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class ListTagsHeaders:
 
 @dataclass
 class ListTagsRequest:
-    path_params: ListTagsPathParams = field(default=None)
-    headers: ListTagsHeaders = field(default=None)
+    headers: ListTagsHeaders = field()
+    path_params: ListTagsPathParams = field()
     
 
 @dataclass
 class ListTagsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     list_tags_response: Optional[shared.ListTagsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

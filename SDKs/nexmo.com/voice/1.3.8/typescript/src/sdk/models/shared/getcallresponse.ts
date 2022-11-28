@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DirectionEnum } from "./directionenum";
 import { From } from "./from";
 import { To } from "./to";
 
 
+
 export class GetCallResponseLinksSelf extends SpeakeasyBase {
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 }
 
 
 export class GetCallResponseLinks extends SpeakeasyBase {
-  @Metadata({ data: "json, name=self" })
+  @SpeakeasyMetadata({ data: "json, name=self" })
   self?: GetCallResponseLinksSelf;
 }
 
 
 export class GetCallResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=_links" })
+  @SpeakeasyMetadata({ data: "json, name=_links" })
   links?: GetCallResponseLinks;
 
-  @Metadata({ data: "json, name=conversation_uuid" })
+  @SpeakeasyMetadata({ data: "json, name=conversation_uuid" })
   conversationUuid?: string;
 
-  @Metadata({ data: "json, name=direction" })
+  @SpeakeasyMetadata({ data: "json, name=direction" })
   direction?: DirectionEnum;
 
-  @Metadata({ data: "json, name=duration" })
+  @SpeakeasyMetadata({ data: "json, name=duration" })
   duration?: string;
 
-  @Metadata({ data: "json, name=end_time" })
+  @SpeakeasyMetadata({ data: "json, name=end_time" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: From;
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: string;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: string;
 
-  @Metadata({ data: "json, name=rate" })
+  @SpeakeasyMetadata({ data: "json, name=rate" })
   rate?: string;
 
-  @Metadata({ data: "json, name=start_time" })
+  @SpeakeasyMetadata({ data: "json, name=start_time" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: To;
 
-  @Metadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata({ data: "json, name=uuid" })
   uuid?: string;
 }

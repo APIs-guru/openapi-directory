@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EirpUnitsEnum } from "./eirpunitsenum";
+
 
 
 // Eirp
@@ -7,9 +8,9 @@ import { EirpUnitsEnum } from "./eirpunitsenum";
  * Object that represents EIRP.
 **/
 export class Eirp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=units" })
+  @SpeakeasyMetadata({ data: "json, name=units" })
   units: EirpUnitsEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: number;
 }

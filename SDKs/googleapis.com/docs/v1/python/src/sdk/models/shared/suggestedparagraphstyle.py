@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import paragraphstyle
-from . import paragraphstylesuggestionstate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SuggestedParagraphStyle:
-    paragraph_style: Optional[paragraphstyle.ParagraphStyle] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paragraphStyle' }})
-    paragraph_style_suggestion_state: Optional[paragraphstylesuggestionstate.ParagraphStyleSuggestionState] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paragraphStyleSuggestionState' }})
+    r"""SuggestedParagraphStyle
+    A suggested change to a ParagraphStyle.
+    """
+    
+    paragraph_style: Optional[ParagraphStyle] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paragraphStyle') }})
+    paragraph_style_suggestion_state: Optional[ParagraphStyleSuggestionState] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paragraphStyleSuggestionState') }})
     

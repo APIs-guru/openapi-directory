@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -11,17 +12,17 @@ class GetServerBlocklistAccountsQueryParams:
 
 @dataclass
 class GetServerBlocklistAccountsSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetServerBlocklistAccountsRequest:
-    query_params: GetServerBlocklistAccountsQueryParams = field(default=None)
-    security: GetServerBlocklistAccountsSecurity = field(default=None)
+    query_params: GetServerBlocklistAccountsQueryParams = field()
+    security: GetServerBlocklistAccountsSecurity = field()
     
 
 @dataclass
 class GetServerBlocklistAccountsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

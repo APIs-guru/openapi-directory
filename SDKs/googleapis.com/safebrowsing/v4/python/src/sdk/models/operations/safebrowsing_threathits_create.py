@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,13 +21,13 @@ class SafebrowsingThreatHitsCreateQueryParams:
 
 @dataclass
 class SafebrowsingThreatHitsCreateRequest:
-    query_params: SafebrowsingThreatHitsCreateQueryParams = field(default=None)
+    query_params: SafebrowsingThreatHitsCreateQueryParams = field()
     request: Optional[shared.GoogleSecuritySafebrowsingV4ThreatHit] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SafebrowsingThreatHitsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_protobuf_empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

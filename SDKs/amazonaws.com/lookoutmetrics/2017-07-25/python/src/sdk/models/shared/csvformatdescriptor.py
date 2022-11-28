@@ -1,16 +1,22 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import csvfilecompression_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CsvFormatDescriptor:
-    charset: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Charset' }})
-    contains_header: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContainsHeader' }})
-    delimiter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Delimiter' }})
-    file_compression: Optional[csvfilecompression_enum.CsvFileCompressionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FileCompression' }})
-    header_list: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HeaderList' }})
-    quote_symbol: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'QuoteSymbol' }})
+    r"""CsvFormatDescriptor
+    Contains information about how a source CSV data file should be analyzed.
+    """
+    
+    charset: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Charset') }})
+    contains_header: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ContainsHeader') }})
+    delimiter: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Delimiter') }})
+    file_compression: Optional[CsvFileCompressionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FileCompression') }})
+    header_list: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('HeaderList') }})
+    quote_symbol: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('QuoteSymbol') }})
     

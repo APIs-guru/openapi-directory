@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CustomerPostalAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addressLine1" })
+  @SpeakeasyMetadata({ data: "json, name=addressLine1" })
   addressLine1?: string;
 
-  @Metadata({ data: "json, name=addressLine2" })
+  @SpeakeasyMetadata({ data: "json, name=addressLine2" })
   addressLine2?: string;
 
-  @Metadata({ data: "json, name=addressLine3" })
+  @SpeakeasyMetadata({ data: "json, name=addressLine3" })
   addressLine3?: string;
 
-  @Metadata({ data: "json, name=contactName" })
+  @SpeakeasyMetadata({ data: "json, name=contactName" })
   contactName?: string;
 
-  @Metadata({ data: "json, name=countryCode" })
+  @SpeakeasyMetadata({ data: "json, name=countryCode" })
   countryCode?: string;
 
-  @Metadata({ data: "json, name=locality" })
+  @SpeakeasyMetadata({ data: "json, name=locality" })
   locality?: string;
 
-  @Metadata({ data: "json, name=organizationName" })
+  @SpeakeasyMetadata({ data: "json, name=organizationName" })
   organizationName?: string;
 
-  @Metadata({ data: "json, name=postalCode" })
+  @SpeakeasyMetadata({ data: "json, name=postalCode" })
   postalCode?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 }

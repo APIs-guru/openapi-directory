@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateCodeSigningConfigPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=CodeSigningConfigArn" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=CodeSigningConfigArn" })
   codeSigningConfigArn: string;
 }
 
 
 export class UpdateCodeSigningConfigHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,7 +38,7 @@ export class UpdateCodeSigningConfigHeaders extends SpeakeasyBase {
  * List of signing profiles that can sign a code package. 
 **/
 export class UpdateCodeSigningConfigRequestBodyAllowedPublishers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SigningProfileVersionArns" })
+  @SpeakeasyMetadata({ data: "json, name=SigningProfileVersionArns" })
   signingProfileVersionArns?: string[];
 }
 
@@ -47,51 +48,51 @@ export class UpdateCodeSigningConfigRequestBodyAllowedPublishers extends Speakea
  * Code signing configuration <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-policies">policies</a> specify the validation failure action for signature mismatch or expiry.
 **/
 export class UpdateCodeSigningConfigRequestBodyCodeSigningPolicies extends SpeakeasyBase {
-  @Metadata({ data: "json, name=UntrustedArtifactOnDeployment" })
+  @SpeakeasyMetadata({ data: "json, name=UntrustedArtifactOnDeployment" })
   untrustedArtifactOnDeployment?: shared.CodeSigningPolicyEnum;
 }
 
 
 export class UpdateCodeSigningConfigRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowedPublishers" })
+  @SpeakeasyMetadata({ data: "json, name=AllowedPublishers" })
   allowedPublishers?: UpdateCodeSigningConfigRequestBodyAllowedPublishers;
 
-  @Metadata({ data: "json, name=CodeSigningPolicies" })
+  @SpeakeasyMetadata({ data: "json, name=CodeSigningPolicies" })
   codeSigningPolicies?: UpdateCodeSigningConfigRequestBodyCodeSigningPolicies;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 }
 
 
 export class UpdateCodeSigningConfigRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateCodeSigningConfigPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateCodeSigningConfigHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateCodeSigningConfigRequestBody;
 }
 
 
 export class UpdateCodeSigningConfigResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidParameterValueException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateCodeSigningConfigResponse?: shared.UpdateCodeSigningConfigResponse;
 }

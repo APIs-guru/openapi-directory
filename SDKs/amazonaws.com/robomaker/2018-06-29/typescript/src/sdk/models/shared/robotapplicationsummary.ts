@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RobotSoftwareSuite } from "./robotsoftwaresuite";
+
 
 
 // RobotApplicationSummary
@@ -7,18 +8,18 @@ import { RobotSoftwareSuite } from "./robotsoftwaresuite";
  * Summary information for a robot application.
 **/
 export class RobotApplicationSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=robotSoftwareSuite" })
+  @SpeakeasyMetadata({ data: "json, name=robotSoftwareSuite" })
   robotSoftwareSuite?: RobotSoftwareSuite;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

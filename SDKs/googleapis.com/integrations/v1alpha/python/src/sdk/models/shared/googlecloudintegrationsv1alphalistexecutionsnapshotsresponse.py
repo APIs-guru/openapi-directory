@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import enterprisecrmeventbusprotoeventexecutionsnapshot
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudIntegrationsV1alphaListExecutionSnapshotsResponse:
-    execution_snapshots: Optional[List[enterprisecrmeventbusprotoeventexecutionsnapshot.EnterpriseCrmEventbusProtoEventExecutionSnapshot]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'executionSnapshots' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""GoogleCloudIntegrationsV1alphaListExecutionSnapshotsResponse
+    Response for listing the integration execution snapshot.
+    """
+    
+    execution_snapshots: Optional[List[EnterpriseCrmEventbusProtoEventExecutionSnapshot]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('executionSnapshots') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

@@ -1,7 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleanalyticsadminv1alphaaudiencedimensionormetricfilternumericvalue
+from sdk import utils
+from . import *
 
 class GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericFilterOperationEnum(str, Enum):
     OPERATION_UNSPECIFIED = "OPERATION_UNSPECIFIED"
@@ -13,6 +18,10 @@ class GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericFilterOpe
 @dataclass_json
 @dataclass
 class GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericFilter:
-    operation: Optional[GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericFilterOperationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operation' }})
-    value: Optional[googleanalyticsadminv1alphaaudiencedimensionormetricfilternumericvalue.GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericFilter
+    A filter for numeric or date values on a dimension or metric.
+    """
+    
+    operation: Optional[GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericFilterOperationEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('operation') }})
+    value: Optional[GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

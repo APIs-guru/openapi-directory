@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ClientAuthenticationTypeEnum(str, Enum):
     SMART_CARD = "SmartCard"

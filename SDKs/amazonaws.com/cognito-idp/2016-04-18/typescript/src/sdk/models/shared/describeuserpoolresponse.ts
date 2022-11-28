@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserPoolType } from "./userpooltype";
+
 
 
 // DescribeUserPoolResponse
@@ -7,6 +8,6 @@ import { UserPoolType } from "./userpooltype";
  * Represents the response to describe the user pool.
 **/
 export class DescribeUserPoolResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=UserPool" })
+  @SpeakeasyMetadata({ data: "json, name=UserPool" })
   userPool?: UserPoolType;
 }

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class BiddingFunctionStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -16,8 +18,24 @@ class BiddingFunctionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class BiddingFunction:
-    bidding_function: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'biddingFunction' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    state: Optional[BiddingFunctionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    type: Optional[BiddingFunctionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""BiddingFunction
+    The bidding function to be executed as part of the TURTLEDOVE simulation experiment bidding flow.
+    """
+    
+    bidding_function: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('biddingFunction') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    state: Optional[BiddingFunctionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    type: Optional[BiddingFunctionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    
+
+@dataclass_json
+@dataclass
+class BiddingFunctionInput:
+    r"""BiddingFunctionInput
+    The bidding function to be executed as part of the TURTLEDOVE simulation experiment bidding flow.
+    """
+    
+    bidding_function: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('biddingFunction') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    type: Optional[BiddingFunctionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

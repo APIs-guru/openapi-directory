@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudIdentitytoolkitV2AutoRetrievalInfo
 /**
  * The information required to auto-retrieve an SMS.
@@ -33,7 +33,7 @@ var GoogleCloudIdentitytoolkitV2AutoRetrievalInfo = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=appSignatureHash" }),
+        SpeakeasyMetadata({ data: "json, name=appSignatureHash" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitV2AutoRetrievalInfo.prototype, "appSignatureHash", void 0);
     return GoogleCloudIdentitytoolkitV2AutoRetrievalInfo;

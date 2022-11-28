@@ -1,5 +1,7 @@
 package shared
 
+// InToto
+// This contains the fields corresponding to the definition of a software supply chain step in an in-toto layout. This information goes into a Grafeas note.
 type InToto struct {
 	ExpectedCommand   []string       `json:"expectedCommand,omitempty"`
 	ExpectedMaterials []ArtifactRule `json:"expectedMaterials,omitempty"`

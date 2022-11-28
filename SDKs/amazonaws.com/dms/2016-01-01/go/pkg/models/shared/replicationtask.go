@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ReplicationTask
+// Provides information that describes a replication task created by the <code>CreateReplicationTask</code> operation.
 type ReplicationTask struct {
 	CdcStartPosition             *string                 `json:"CdcStartPosition,omitempty"`
 	CdcStopPosition              *string                 `json:"CdcStopPosition,omitempty"`

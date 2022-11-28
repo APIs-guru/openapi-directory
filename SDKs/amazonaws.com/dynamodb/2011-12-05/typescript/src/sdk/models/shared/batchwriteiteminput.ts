@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WriteRequest } from "./writerequest";
 
 
+
 export class BatchWriteItemInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RequestItems", elemType: shared.WriteRequest, elemDepth: 2 })
+  @SpeakeasyMetadata({ data: "json, name=RequestItems", elemType: WriteRequest, elemDepth: 2 })
   requestItems: Map<string, WriteRequest[]>;
 }

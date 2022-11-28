@@ -1,18 +1,23 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://api.interzoid.com"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
     /**
+     * globalpageload - Gets page load (or an API call) performance from a specified global geography such as Paris, Tokyo, Virginia, Mumbai, Frankfurt, London, Seoul, California, Sao Paolo, and many more.
+     *
      * Gets page load performance from a specified geography
      *
     **/
-    Globalpageload(req: operations.GlobalpageloadRequest, config?: AxiosRequestConfig): Promise<operations.GlobalpageloadResponse>;
+    globalpageload(req: operations.GlobalpageloadRequest, config?: AxiosRequestConfig): Promise<operations.GlobalpageloadResponse>;
 }
 export {};

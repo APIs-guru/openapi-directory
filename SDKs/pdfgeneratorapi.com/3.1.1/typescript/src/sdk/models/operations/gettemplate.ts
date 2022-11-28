@@ -1,43 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTemplateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=templateId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=templateId" })
   templateId: number;
 }
 
 
-export class GetTemplateRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetTemplateQueryParams;
-}
-
-
 export class GetTemplate200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=response" })
+  @SpeakeasyMetadata({ data: "json, name=response" })
   response?: shared.TemplateDefinition;
 }
 
 export enum GetTemplate401ApplicationJsonErrorEnum {
-    AuthenticationFailedRequestExpired = "Authentication failed: request expired"
-,    AuthenticationFailedSignatureOrSecretMissing = "Authentication failed: signature or secret missing"
-,    AuthenticationFailedWorkspaceMissing = "Authentication failed: workspace missing"
-,    AuthenticationFailedKeyMissing = "Authentication failed: key missing"
-,    AuthenticationFailedPropertyIssIssuerMissingInJwt = "Authentication failed: property 'iss' (issuer) missing in JWT"
-,    AuthenticationFailedPropertySubSubjectMissingInJwt = "Authentication failed: property 'sub' (subject) missing in JWT"
-,    AuthenticationFailedPropertyExpExpirationTimeMissingInJwt = "Authentication failed: property 'exp' (expiration time) missing in JWT"
-,    AuthenticationFailedInvalidIssIssuer = "Authentication failed: invalid 'iss' (issuer)"
-,    AuthenticationFailedIncorrectSignature = "Authentication failed: incorrect signature"
-,    AuthenticationFailed = "Authentication failed"
+    AuthenticationFailedRequestExpired = "Authentication failed: request expired",
+    AuthenticationFailedSignatureOrSecretMissing = "Authentication failed: signature or secret missing",
+    AuthenticationFailedWorkspaceMissing = "Authentication failed: workspace missing",
+    AuthenticationFailedKeyMissing = "Authentication failed: key missing",
+    AuthenticationFailedPropertyIssIssuerMissingInJwt = "Authentication failed: property 'iss' (issuer) missing in JWT",
+    AuthenticationFailedPropertySubSubjectMissingInJwt = "Authentication failed: property 'sub' (subject) missing in JWT",
+    AuthenticationFailedPropertyExpExpirationTimeMissingInJwt = "Authentication failed: property 'exp' (expiration time) missing in JWT",
+    AuthenticationFailedInvalidIssIssuer = "Authentication failed: invalid 'iss' (issuer)",
+    AuthenticationFailedIncorrectSignature = "Authentication failed: incorrect signature",
+    AuthenticationFailed = "Authentication failed"
 }
 
 
 export class GetTemplate401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: GetTemplate401ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: number;
 }
 
@@ -47,76 +42,82 @@ export enum GetTemplate403ApplicationJsonErrorEnum {
 
 
 export class GetTemplate403ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: GetTemplate403ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: number;
 }
 
 export enum GetTemplate404ApplicationJsonErrorEnum {
-    EntityNotFound = "Entity not found"
-,    ResourceNotFound = "Resource not found"
-,    NoneOfTheTemplatesIsAvailableForTheWorkspace = "None of the templates is available for the workspace."
+    EntityNotFound = "Entity not found",
+    ResourceNotFound = "Resource not found",
+    NoneOfTheTemplatesIsAvailableForTheWorkspace = "None of the templates is available for the workspace."
 }
 
 
 export class GetTemplate404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: GetTemplate404ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: number;
 }
 
 export enum GetTemplate422ApplicationJsonErrorEnum {
-    UnableToParseJsonPleaseCheckFormatting = "Unable to parse JSON, please check formatting"
-,    RequiredParameterMissing = "Required parameter missing"
-,    RequiredParameterMissingTemplateDefinitionNotDefined = "Required parameter missing: template definition not defined"
-,    RequiredParameterMissingTemplateNotDefined = "Required parameter missing: template not defined"
+    UnableToParseJsonPleaseCheckFormatting = "Unable to parse JSON, please check formatting",
+    RequiredParameterMissing = "Required parameter missing",
+    RequiredParameterMissingTemplateDefinitionNotDefined = "Required parameter missing: template definition not defined",
+    RequiredParameterMissingTemplateNotDefined = "Required parameter missing: template not defined"
 }
 
 
 export class GetTemplate422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: GetTemplate422ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: number;
 }
 
 
 export class GetTemplate500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: number;
 }
 
 
+export class GetTemplateRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetTemplateQueryParams;
+}
+
+
 export class GetTemplateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTemplate200ApplicationJsonObject?: GetTemplate200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTemplate401ApplicationJsonObject?: GetTemplate401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTemplate403ApplicationJsonObject?: GetTemplate403ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTemplate404ApplicationJsonObject?: GetTemplate404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTemplate422ApplicationJsonObject?: GetTemplate422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getTemplate500ApplicationJsonObject?: GetTemplate500ApplicationJson;
 }

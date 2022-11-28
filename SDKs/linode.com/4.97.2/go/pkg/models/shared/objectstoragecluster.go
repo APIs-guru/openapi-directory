@@ -7,6 +7,8 @@ const (
 	ObjectStorageClusterStatusEnumUnavailable ObjectStorageClusterStatusEnum = "unavailable"
 )
 
+// ObjectStorageCluster
+// An Object Storage Cluster
 type ObjectStorageCluster struct {
 	Domain           *string                         `json:"domain,omitempty"`
 	ID               *string                         `json:"id,omitempty"`

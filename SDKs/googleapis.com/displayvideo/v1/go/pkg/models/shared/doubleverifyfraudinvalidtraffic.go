@@ -14,6 +14,8 @@ const (
 	DoubleVerifyFraudInvalidTrafficAvoidedFraudOptionEnumAdImpressionFraud2   DoubleVerifyFraudInvalidTrafficAvoidedFraudOptionEnum = "AD_IMPRESSION_FRAUD_2"
 )
 
+// DoubleVerifyFraudInvalidTraffic
+// DoubleVerify Fraud & Invalid Traffic settings.
 type DoubleVerifyFraudInvalidTraffic struct {
 	AvoidInsufficientOption *bool                                                  `json:"avoidInsufficientOption,omitempty"`
 	AvoidedFraudOption      *DoubleVerifyFraudInvalidTrafficAvoidedFraudOptionEnum `json:"avoidedFraudOption,omitempty"`

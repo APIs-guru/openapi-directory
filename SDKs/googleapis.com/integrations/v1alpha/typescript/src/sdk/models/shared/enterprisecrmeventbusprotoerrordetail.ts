@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CrmlogErrorCode } from "./crmlogerrorcode";
 
+
 export enum EnterpriseCrmEventbusProtoErrorDetailSeverityEnum {
-    SeverityUnspecified = "SEVERITY_UNSPECIFIED"
-,    Error = "ERROR"
-,    Warn = "WARN"
-,    Info = "INFO"
+    SeverityUnspecified = "SEVERITY_UNSPECIFIED",
+    Error = "ERROR",
+    Warn = "WARN",
+    Info = "INFO"
 }
 
 
@@ -14,15 +15,15 @@ export enum EnterpriseCrmEventbusProtoErrorDetailSeverityEnum {
  * An error, warning, or information message associated with a workflow.
 **/
 export class EnterpriseCrmEventbusProtoErrorDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorCode" })
+  @SpeakeasyMetadata({ data: "json, name=errorCode" })
   errorCode?: CrmlogErrorCode;
 
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: EnterpriseCrmEventbusProtoErrorDetailSeverityEnum;
 
-  @Metadata({ data: "json, name=taskNumber" })
+  @SpeakeasyMetadata({ data: "json, name=taskNumber" })
   taskNumber?: number;
 }

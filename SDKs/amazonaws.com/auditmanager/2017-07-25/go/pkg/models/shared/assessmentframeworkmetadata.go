@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// AssessmentFrameworkMetadata
+//
+//	The metadata associated with a standard or custom framework.
 type AssessmentFrameworkMetadata struct {
 	Arn              *string            `json:"arn,omitempty"`
 	ComplianceType   *string            `json:"complianceType,omitempty"`

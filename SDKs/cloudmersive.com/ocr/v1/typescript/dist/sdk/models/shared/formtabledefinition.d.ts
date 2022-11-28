@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FormTableColumnDefinition } from "./formtablecolumndefinition";
 /**
  * Definition of a form table for OCR data extraction from images

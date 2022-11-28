@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VmmigrationProjectsLocationsSourcesFetchInventoryPathParams:
-    source: str = field(default=None, metadata={'path_param': { 'field_name': 'source', 'style': 'simple', 'explode': False }})
+    source: str = field(metadata={'path_param': { 'field_name': 'source', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class VmmigrationProjectsLocationsSourcesFetchInventoryQueryParams:
 
 @dataclass
 class VmmigrationProjectsLocationsSourcesFetchInventorySecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VmmigrationProjectsLocationsSourcesFetchInventoryRequest:
-    path_params: VmmigrationProjectsLocationsSourcesFetchInventoryPathParams = field(default=None)
-    query_params: VmmigrationProjectsLocationsSourcesFetchInventoryQueryParams = field(default=None)
-    security: VmmigrationProjectsLocationsSourcesFetchInventorySecurity = field(default=None)
+    path_params: VmmigrationProjectsLocationsSourcesFetchInventoryPathParams = field()
+    query_params: VmmigrationProjectsLocationsSourcesFetchInventoryQueryParams = field()
+    security: VmmigrationProjectsLocationsSourcesFetchInventorySecurity = field()
     
 
 @dataclass
 class VmmigrationProjectsLocationsSourcesFetchInventoryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     fetch_inventory_response: Optional[shared.FetchInventoryResponse] = field(default=None)
-    status_code: int = field(default=None)
     

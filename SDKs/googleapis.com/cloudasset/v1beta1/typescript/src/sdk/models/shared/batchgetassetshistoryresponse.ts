@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TemporalAsset } from "./temporalasset";
+
 
 
 // BatchGetAssetsHistoryResponse
@@ -8,6 +8,6 @@ import { TemporalAsset } from "./temporalasset";
  * Batch get assets history response.
 **/
 export class BatchGetAssetsHistoryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assets", elemType: shared.TemporalAsset })
+  @SpeakeasyMetadata({ data: "json, name=assets", elemType: TemporalAsset })
   assets?: TemporalAsset[];
 }

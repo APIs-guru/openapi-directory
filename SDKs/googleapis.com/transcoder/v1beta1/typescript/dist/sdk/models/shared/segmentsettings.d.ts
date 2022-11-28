@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Segment settings for `"ts"`, `"fmp4"` and `"vtt"`.
 **/

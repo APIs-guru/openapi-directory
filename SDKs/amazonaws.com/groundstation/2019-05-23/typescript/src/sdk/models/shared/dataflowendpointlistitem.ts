@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DataflowEndpointListItem
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Item in a list of <code>DataflowEndpoint</code> groups.
 **/
 export class DataflowEndpointListItem extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataflowEndpointGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=dataflowEndpointGroupArn" })
   dataflowEndpointGroupArn?: string;
 
-  @Metadata({ data: "json, name=dataflowEndpointGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=dataflowEndpointGroupId" })
   dataflowEndpointGroupId?: string;
 }

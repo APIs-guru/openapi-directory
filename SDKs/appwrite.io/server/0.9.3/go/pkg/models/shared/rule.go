@@ -1,5 +1,7 @@
 package shared
 
+// Rule
+// Rule
 type Rule struct {
 	DollarCollection string   `json:"$collection"`
 	DollarID         string   `json:"$id"`

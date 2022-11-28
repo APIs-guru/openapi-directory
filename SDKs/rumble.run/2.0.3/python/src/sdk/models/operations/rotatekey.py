@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class RotateKeySecurity:
-    bearer_auth: shared.SchemeBearerAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_auth: shared.SchemeBearerAuth = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class RotateKeyRequest:
-    security: RotateKeySecurity = field(default=None)
+    security: RotateKeySecurity = field()
     
 
 @dataclass
 class RotateKeyResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_key: Optional[shared.APIKey] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

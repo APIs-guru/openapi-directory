@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CapacityProviderStrategyItem
 /**
  * The details of a capacity provider strategy. To learn more, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CapacityProviderStrategyItem.html">CapacityProviderStrategyItem</a> in the Amazon ECS API Reference.
@@ -33,15 +33,15 @@ var CapacityProviderStrategyItem = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=base" }),
+        SpeakeasyMetadata({ data: "json, name=base" }),
         __metadata("design:type", Number)
     ], CapacityProviderStrategyItem.prototype, "base", void 0);
     __decorate([
-        Metadata({ data: "json, name=capacityProvider" }),
+        SpeakeasyMetadata({ data: "json, name=capacityProvider" }),
         __metadata("design:type", String)
     ], CapacityProviderStrategyItem.prototype, "capacityProvider", void 0);
     __decorate([
-        Metadata({ data: "json, name=weight" }),
+        SpeakeasyMetadata({ data: "json, name=weight" }),
         __metadata("design:type", Number)
     ], CapacityProviderStrategyItem.prototype, "weight", void 0);
     return CapacityProviderStrategyItem;

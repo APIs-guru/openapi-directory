@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EffectiveIamPolicy } from "./effectiveiampolicy";
+
 
 
 // BatchGetEffectiveIamPoliciesResponse
@@ -8,6 +8,6 @@ import { EffectiveIamPolicy } from "./effectiveiampolicy";
  * A response message for AssetService.BatchGetEffectiveIamPolicies.
 **/
 export class BatchGetEffectiveIamPoliciesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=policyResults", elemType: shared.EffectiveIamPolicy })
+  @SpeakeasyMetadata({ data: "json, name=policyResults", elemType: EffectiveIamPolicy })
   policyResults?: EffectiveIamPolicy[];
 }

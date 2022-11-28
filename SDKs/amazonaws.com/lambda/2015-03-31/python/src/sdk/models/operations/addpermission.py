@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class AddPermissionPathParams:
-    function_name: str = field(default=None, metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
+    function_name: str = field(metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,33 +32,33 @@ class AddPermissionHeaders:
 @dataclass_json
 @dataclass
 class AddPermissionRequestBody:
-    action: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Action' }})
-    event_source_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EventSourceToken' }})
-    principal: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Principal' }})
-    revision_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RevisionId' }})
-    source_account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SourceAccount' }})
-    source_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SourceArn' }})
-    statement_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StatementId' }})
+    action: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Action') }})
+    principal: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Principal') }})
+    statement_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('StatementId') }})
+    event_source_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EventSourceToken') }})
+    revision_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RevisionId') }})
+    source_account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SourceAccount') }})
+    source_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SourceArn') }})
     
 
 @dataclass
 class AddPermissionRequest:
-    path_params: AddPermissionPathParams = field(default=None)
-    query_params: AddPermissionQueryParams = field(default=None)
-    headers: AddPermissionHeaders = field(default=None)
-    request: AddPermissionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: AddPermissionHeaders = field()
+    path_params: AddPermissionPathParams = field()
+    query_params: AddPermissionQueryParams = field()
+    request: AddPermissionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AddPermissionResponse:
+    content_type: str = field()
+    status_code: int = field()
     add_permission_response: Optional[shared.AddPermissionResponse] = field(default=None)
-    content_type: str = field(default=None)
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     policy_length_exceeded_exception: Optional[Any] = field(default=None)
     precondition_failed_exception: Optional[Any] = field(default=None)
     resource_conflict_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

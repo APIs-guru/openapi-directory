@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Seats } from "./seats";
+
 
 
 // ChangePlanRequest
@@ -7,18 +8,18 @@ import { Seats } from "./seats";
  * JSON template for the ChangePlan rpc request.
 **/
 export class ChangePlanRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dealCode" })
+  @SpeakeasyMetadata({ data: "json, name=dealCode" })
   dealCode?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=planName" })
+  @SpeakeasyMetadata({ data: "json, name=planName" })
   planName?: string;
 
-  @Metadata({ data: "json, name=purchaseOrderId" })
+  @SpeakeasyMetadata({ data: "json, name=purchaseOrderId" })
   purchaseOrderId?: string;
 
-  @Metadata({ data: "json, name=seats" })
+  @SpeakeasyMetadata({ data: "json, name=seats" })
   seats?: Seats;
 }

@@ -1,10 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsRdsDbInstanceAssociatedRole } from "./awsrdsdbinstanceassociatedrole";
 import { AwsRdsDbParameterGroup } from "./awsrdsdbparametergroup";
 import { AwsRdsDbSubnetGroup } from "./awsrdsdbsubnetgroup";
 import { AwsRdsDbDomainMembership } from "./awsrdsdbdomainmembership";
-import { AwsRdsDbInstanceEndpoint } from "./awsrdsdbinstanceendpoint";
 import { AwsRdsDbInstanceEndpoint } from "./awsrdsdbinstanceendpoint";
 import { AwsRdsDbOptionGroupMembership } from "./awsrdsdboptiongroupmembership";
 import { AwsRdsDbPendingModifiedValues } from "./awsrdsdbpendingmodifiedvalues";
@@ -13,179 +11,180 @@ import { AwsRdsDbStatusInfo } from "./awsrdsdbstatusinfo";
 import { AwsRdsDbInstanceVpcSecurityGroup } from "./awsrdsdbinstancevpcsecuritygroup";
 
 
+
 // AwsRdsDbInstanceDetails
 /** 
  * Contains the details of an Amazon RDS DB instance.
 **/
 export class AwsRdsDbInstanceDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllocatedStorage" })
+  @SpeakeasyMetadata({ data: "json, name=AllocatedStorage" })
   allocatedStorage?: number;
 
-  @Metadata({ data: "json, name=AssociatedRoles", elemType: shared.AwsRdsDbInstanceAssociatedRole })
+  @SpeakeasyMetadata({ data: "json, name=AssociatedRoles", elemType: AwsRdsDbInstanceAssociatedRole })
   associatedRoles?: AwsRdsDbInstanceAssociatedRole[];
 
-  @Metadata({ data: "json, name=AutoMinorVersionUpgrade" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMinorVersionUpgrade" })
   autoMinorVersionUpgrade?: boolean;
 
-  @Metadata({ data: "json, name=AvailabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZone" })
   availabilityZone?: string;
 
-  @Metadata({ data: "json, name=BackupRetentionPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=BackupRetentionPeriod" })
   backupRetentionPeriod?: number;
 
-  @Metadata({ data: "json, name=CACertificateIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=CACertificateIdentifier" })
   caCertificateIdentifier?: string;
 
-  @Metadata({ data: "json, name=CharacterSetName" })
+  @SpeakeasyMetadata({ data: "json, name=CharacterSetName" })
   characterSetName?: string;
 
-  @Metadata({ data: "json, name=CopyTagsToSnapshot" })
+  @SpeakeasyMetadata({ data: "json, name=CopyTagsToSnapshot" })
   copyTagsToSnapshot?: boolean;
 
-  @Metadata({ data: "json, name=DBClusterIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=DBClusterIdentifier" })
   dbClusterIdentifier?: string;
 
-  @Metadata({ data: "json, name=DBInstanceClass" })
+  @SpeakeasyMetadata({ data: "json, name=DBInstanceClass" })
   dbInstanceClass?: string;
 
-  @Metadata({ data: "json, name=DBInstanceIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=DBInstanceIdentifier" })
   dbInstanceIdentifier?: string;
 
-  @Metadata({ data: "json, name=DBName" })
+  @SpeakeasyMetadata({ data: "json, name=DBName" })
   dbName?: string;
 
-  @Metadata({ data: "json, name=DbInstancePort" })
+  @SpeakeasyMetadata({ data: "json, name=DbInstancePort" })
   dbInstancePort?: number;
 
-  @Metadata({ data: "json, name=DbInstanceStatus" })
+  @SpeakeasyMetadata({ data: "json, name=DbInstanceStatus" })
   dbInstanceStatus?: string;
 
-  @Metadata({ data: "json, name=DbParameterGroups", elemType: shared.AwsRdsDbParameterGroup })
+  @SpeakeasyMetadata({ data: "json, name=DbParameterGroups", elemType: AwsRdsDbParameterGroup })
   dbParameterGroups?: AwsRdsDbParameterGroup[];
 
-  @Metadata({ data: "json, name=DbSecurityGroups" })
+  @SpeakeasyMetadata({ data: "json, name=DbSecurityGroups" })
   dbSecurityGroups?: string[];
 
-  @Metadata({ data: "json, name=DbSubnetGroup" })
+  @SpeakeasyMetadata({ data: "json, name=DbSubnetGroup" })
   dbSubnetGroup?: AwsRdsDbSubnetGroup;
 
-  @Metadata({ data: "json, name=DbiResourceId" })
+  @SpeakeasyMetadata({ data: "json, name=DbiResourceId" })
   dbiResourceId?: string;
 
-  @Metadata({ data: "json, name=DeletionProtection" })
+  @SpeakeasyMetadata({ data: "json, name=DeletionProtection" })
   deletionProtection?: boolean;
 
-  @Metadata({ data: "json, name=DomainMemberships", elemType: shared.AwsRdsDbDomainMembership })
+  @SpeakeasyMetadata({ data: "json, name=DomainMemberships", elemType: AwsRdsDbDomainMembership })
   domainMemberships?: AwsRdsDbDomainMembership[];
 
-  @Metadata({ data: "json, name=EnabledCloudWatchLogsExports" })
+  @SpeakeasyMetadata({ data: "json, name=EnabledCloudWatchLogsExports" })
   enabledCloudWatchLogsExports?: string[];
 
-  @Metadata({ data: "json, name=Endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=Endpoint" })
   endpoint?: AwsRdsDbInstanceEndpoint;
 
-  @Metadata({ data: "json, name=Engine" })
+  @SpeakeasyMetadata({ data: "json, name=Engine" })
   engine?: string;
 
-  @Metadata({ data: "json, name=EngineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=EngineVersion" })
   engineVersion?: string;
 
-  @Metadata({ data: "json, name=EnhancedMonitoringResourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=EnhancedMonitoringResourceArn" })
   enhancedMonitoringResourceArn?: string;
 
-  @Metadata({ data: "json, name=IAMDatabaseAuthenticationEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=IAMDatabaseAuthenticationEnabled" })
   iamDatabaseAuthenticationEnabled?: boolean;
 
-  @Metadata({ data: "json, name=InstanceCreateTime" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceCreateTime" })
   instanceCreateTime?: string;
 
-  @Metadata({ data: "json, name=Iops" })
+  @SpeakeasyMetadata({ data: "json, name=Iops" })
   iops?: number;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=LatestRestorableTime" })
+  @SpeakeasyMetadata({ data: "json, name=LatestRestorableTime" })
   latestRestorableTime?: string;
 
-  @Metadata({ data: "json, name=LicenseModel" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseModel" })
   licenseModel?: string;
 
-  @Metadata({ data: "json, name=ListenerEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=ListenerEndpoint" })
   listenerEndpoint?: AwsRdsDbInstanceEndpoint;
 
-  @Metadata({ data: "json, name=MasterUsername" })
+  @SpeakeasyMetadata({ data: "json, name=MasterUsername" })
   masterUsername?: string;
 
-  @Metadata({ data: "json, name=MaxAllocatedStorage" })
+  @SpeakeasyMetadata({ data: "json, name=MaxAllocatedStorage" })
   maxAllocatedStorage?: number;
 
-  @Metadata({ data: "json, name=MonitoringInterval" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringInterval" })
   monitoringInterval?: number;
 
-  @Metadata({ data: "json, name=MonitoringRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringRoleArn" })
   monitoringRoleArn?: string;
 
-  @Metadata({ data: "json, name=MultiAz" })
+  @SpeakeasyMetadata({ data: "json, name=MultiAz" })
   multiAz?: boolean;
 
-  @Metadata({ data: "json, name=OptionGroupMemberships", elemType: shared.AwsRdsDbOptionGroupMembership })
+  @SpeakeasyMetadata({ data: "json, name=OptionGroupMemberships", elemType: AwsRdsDbOptionGroupMembership })
   optionGroupMemberships?: AwsRdsDbOptionGroupMembership[];
 
-  @Metadata({ data: "json, name=PendingModifiedValues" })
+  @SpeakeasyMetadata({ data: "json, name=PendingModifiedValues" })
   pendingModifiedValues?: AwsRdsDbPendingModifiedValues;
 
-  @Metadata({ data: "json, name=PerformanceInsightsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=PerformanceInsightsEnabled" })
   performanceInsightsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=PerformanceInsightsKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=PerformanceInsightsKmsKeyId" })
   performanceInsightsKmsKeyId?: string;
 
-  @Metadata({ data: "json, name=PerformanceInsightsRetentionPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=PerformanceInsightsRetentionPeriod" })
   performanceInsightsRetentionPeriod?: number;
 
-  @Metadata({ data: "json, name=PreferredBackupWindow" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredBackupWindow" })
   preferredBackupWindow?: string;
 
-  @Metadata({ data: "json, name=PreferredMaintenanceWindow" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredMaintenanceWindow" })
   preferredMaintenanceWindow?: string;
 
-  @Metadata({ data: "json, name=ProcessorFeatures", elemType: shared.AwsRdsDbProcessorFeature })
+  @SpeakeasyMetadata({ data: "json, name=ProcessorFeatures", elemType: AwsRdsDbProcessorFeature })
   processorFeatures?: AwsRdsDbProcessorFeature[];
 
-  @Metadata({ data: "json, name=PromotionTier" })
+  @SpeakeasyMetadata({ data: "json, name=PromotionTier" })
   promotionTier?: number;
 
-  @Metadata({ data: "json, name=PubliclyAccessible" })
+  @SpeakeasyMetadata({ data: "json, name=PubliclyAccessible" })
   publiclyAccessible?: boolean;
 
-  @Metadata({ data: "json, name=ReadReplicaDBClusterIdentifiers" })
+  @SpeakeasyMetadata({ data: "json, name=ReadReplicaDBClusterIdentifiers" })
   readReplicaDbClusterIdentifiers?: string[];
 
-  @Metadata({ data: "json, name=ReadReplicaDBInstanceIdentifiers" })
+  @SpeakeasyMetadata({ data: "json, name=ReadReplicaDBInstanceIdentifiers" })
   readReplicaDbInstanceIdentifiers?: string[];
 
-  @Metadata({ data: "json, name=ReadReplicaSourceDBInstanceIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ReadReplicaSourceDBInstanceIdentifier" })
   readReplicaSourceDbInstanceIdentifier?: string;
 
-  @Metadata({ data: "json, name=SecondaryAvailabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=SecondaryAvailabilityZone" })
   secondaryAvailabilityZone?: string;
 
-  @Metadata({ data: "json, name=StatusInfos", elemType: shared.AwsRdsDbStatusInfo })
+  @SpeakeasyMetadata({ data: "json, name=StatusInfos", elemType: AwsRdsDbStatusInfo })
   statusInfos?: AwsRdsDbStatusInfo[];
 
-  @Metadata({ data: "json, name=StorageEncrypted" })
+  @SpeakeasyMetadata({ data: "json, name=StorageEncrypted" })
   storageEncrypted?: boolean;
 
-  @Metadata({ data: "json, name=StorageType" })
+  @SpeakeasyMetadata({ data: "json, name=StorageType" })
   storageType?: string;
 
-  @Metadata({ data: "json, name=TdeCredentialArn" })
+  @SpeakeasyMetadata({ data: "json, name=TdeCredentialArn" })
   tdeCredentialArn?: string;
 
-  @Metadata({ data: "json, name=Timezone" })
+  @SpeakeasyMetadata({ data: "json, name=Timezone" })
   timezone?: string;
 
-  @Metadata({ data: "json, name=VpcSecurityGroups", elemType: shared.AwsRdsDbInstanceVpcSecurityGroup })
+  @SpeakeasyMetadata({ data: "json, name=VpcSecurityGroups", elemType: AwsRdsDbInstanceVpcSecurityGroup })
   vpcSecurityGroups?: AwsRdsDbInstanceVpcSecurityGroup[];
 }

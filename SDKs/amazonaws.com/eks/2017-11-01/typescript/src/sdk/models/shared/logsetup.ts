@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LogTypeEnum } from "./logtypeenum";
+
 
 
 // LogSetup
@@ -7,9 +8,9 @@ import { LogTypeEnum } from "./logtypeenum";
  * An object representing the enabled or disabled Kubernetes control plane logs for your cluster.
 **/
 export class LogSetup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=types" })
+  @SpeakeasyMetadata({ data: "json, name=types" })
   types?: LogTypeEnum[];
 }

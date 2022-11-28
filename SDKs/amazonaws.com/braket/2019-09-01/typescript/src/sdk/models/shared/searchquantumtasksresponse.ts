@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QuantumTaskSummary } from "./quantumtasksummary";
 
 
+
 export class SearchQuantumTasksResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=quantumTasks", elemType: shared.QuantumTaskSummary })
+  @SpeakeasyMetadata({ data: "json, name=quantumTasks", elemType: QuantumTaskSummary })
   quantumTasks: QuantumTaskSummary[];
 }

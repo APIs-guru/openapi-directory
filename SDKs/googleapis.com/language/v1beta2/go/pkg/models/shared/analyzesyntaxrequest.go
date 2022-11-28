@@ -9,6 +9,8 @@ const (
 	AnalyzeSyntaxRequestEncodingTypeEnumUtf32 AnalyzeSyntaxRequestEncodingTypeEnum = "UTF32"
 )
 
+// AnalyzeSyntaxRequest
+// The syntax analysis request message.
 type AnalyzeSyntaxRequest struct {
 	Document     *Document                             `json:"document,omitempty"`
 	EncodingType *AnalyzeSyntaxRequestEncodingTypeEnum `json:"encodingType,omitempty"`

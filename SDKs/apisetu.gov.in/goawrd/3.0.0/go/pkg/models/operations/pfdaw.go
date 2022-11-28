@@ -27,11 +27,6 @@ type PfdawSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type PfdawRequest struct {
-	Request  *PfdawRequestBody `request:"mediaType=application/json"`
-	Security PfdawSecurity
-}
-
 type Pfdaw400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Pfdaw504ApplicationJSON struct {
 	Error            *Pfdaw504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Pfdaw504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type PfdawRequest struct {
+	Request  *PfdawRequestBody `request:"mediaType=application/json"`
+	Security PfdawSecurity
 }
 
 type PfdawResponse struct {

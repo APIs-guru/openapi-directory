@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var LintResultLevelEnum;
 (function (LintResultLevelEnum) {
     LintResultLevelEnum["LevelUnspecified"] = "LEVEL_UNSPECIFIED";
@@ -47,27 +47,27 @@ var LintResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=debugMessage" }),
+        SpeakeasyMetadata({ data: "json, name=debugMessage" }),
         __metadata("design:type", String)
     ], LintResult.prototype, "debugMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=fieldName" }),
+        SpeakeasyMetadata({ data: "json, name=fieldName" }),
         __metadata("design:type", String)
     ], LintResult.prototype, "fieldName", void 0);
     __decorate([
-        Metadata({ data: "json, name=level" }),
+        SpeakeasyMetadata({ data: "json, name=level" }),
         __metadata("design:type", String)
     ], LintResult.prototype, "level", void 0);
     __decorate([
-        Metadata({ data: "json, name=locationOffset" }),
+        SpeakeasyMetadata({ data: "json, name=locationOffset" }),
         __metadata("design:type", Number)
     ], LintResult.prototype, "locationOffset", void 0);
     __decorate([
-        Metadata({ data: "json, name=severity" }),
+        SpeakeasyMetadata({ data: "json, name=severity" }),
         __metadata("design:type", String)
     ], LintResult.prototype, "severity", void 0);
     __decorate([
-        Metadata({ data: "json, name=validationUnitName" }),
+        SpeakeasyMetadata({ data: "json, name=validationUnitName" }),
         __metadata("design:type", String)
     ], LintResult.prototype, "validationUnitName", void 0);
     return LintResult;

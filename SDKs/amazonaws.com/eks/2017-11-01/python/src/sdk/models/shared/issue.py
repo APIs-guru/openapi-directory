@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import nodegroupissuecode_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Issue:
-    code: Optional[nodegroupissuecode_enum.NodegroupIssueCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
-    resource_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceIds' }})
+    r"""Issue
+    An object representing an issue with an Amazon EKS resource.
+    """
+    
+    code: Optional[NodegroupIssueCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
+    resource_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceIds') }})
     

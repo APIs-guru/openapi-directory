@@ -1,18 +1,21 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Generation } from "./generation";
+import { Translation } from "./translation";
+import { Works } from "./works";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["http://api.fungenerators.com", "https://api.fungenerators.com"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    generation: Generation;
+    translation: Translation;
+    works: Works;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    GetShakespeareGenerateInsult(req: operations.GetShakespeareGenerateInsultRequest, config?: AxiosRequestConfig): Promise<operations.GetShakespeareGenerateInsultResponse>;
-    GetShakespeareGenerateLoremIpsum(req: operations.GetShakespeareGenerateLoremIpsumRequest, config?: AxiosRequestConfig): Promise<operations.GetShakespeareGenerateLoremIpsumResponse>;
-    GetShakespeareGenerateName(req: operations.GetShakespeareGenerateNameRequest, config?: AxiosRequestConfig): Promise<operations.GetShakespeareGenerateNameResponse>;
-    GetShakespeareQuote(req: operations.GetShakespeareQuoteRequest, config?: AxiosRequestConfig): Promise<operations.GetShakespeareQuoteResponse>;
-    GetShakespeareTranslate(req: operations.GetShakespeareTranslateRequest, config?: AxiosRequestConfig): Promise<operations.GetShakespeareTranslateResponse>;
 }
 export {};

@@ -51,6 +51,8 @@ const (
 	OperationStatusEnumDone                          OperationStatusEnum = "DONE"
 )
 
+// Operation
+// An Operation resource. For successful operations that return an Operation resource, only the fields relevant to the operation are populated in the resource.
 type Operation struct {
 	BackupContext *BackupContext              `json:"backupContext,omitempty"`
 	EndTime       *string                     `json:"endTime,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// ProfileRef
+// JSON template for a linked view (profile).
 type ProfileRef struct {
 	AccountID             *string `json:"accountId,omitempty"`
 	Href                  *string `json:"href,omitempty"`

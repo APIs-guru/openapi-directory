@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AuthorizeQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=code" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=code" })
   code: string;
 }
 
 
 export class AuthorizeSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class AuthorizeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AuthorizeQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: AuthorizeSecurity;
 }
 
 
 export class AuthorizeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   authorize200ApplicationJsonBoolean?: boolean;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

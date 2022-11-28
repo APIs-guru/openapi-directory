@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import rdsdbinstance
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeRdsDbInstancesResult:
-    rds_db_instances: Optional[List[rdsdbinstance.RdsDbInstance]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RdsDbInstances' }})
+    r"""DescribeRdsDbInstancesResult
+    Contains the response to a <code>DescribeRdsDbInstances</code> request.
+    """
+    
+    rds_db_instances: Optional[List[RdsDbInstance]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RdsDbInstances') }})
     

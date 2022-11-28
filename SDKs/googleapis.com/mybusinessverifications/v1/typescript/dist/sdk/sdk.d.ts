@@ -1,19 +1,19 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Locations } from "./locations";
+import { VerificationTokens } from "./verificationtokens";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://mybusinessverifications.googleapis.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    locations: Locations;
+    verificationTokens: VerificationTokens;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    MybusinessverificationsLocationsFetchVerificationOptions(req: operations.MybusinessverificationsLocationsFetchVerificationOptionsRequest, config?: AxiosRequestConfig): Promise<operations.MybusinessverificationsLocationsFetchVerificationOptionsResponse>;
-    MybusinessverificationsLocationsGetVoiceOfMerchantState(req: operations.MybusinessverificationsLocationsGetVoiceOfMerchantStateRequest, config?: AxiosRequestConfig): Promise<operations.MybusinessverificationsLocationsGetVoiceOfMerchantStateResponse>;
-    MybusinessverificationsLocationsVerificationsComplete(req: operations.MybusinessverificationsLocationsVerificationsCompleteRequest, config?: AxiosRequestConfig): Promise<operations.MybusinessverificationsLocationsVerificationsCompleteResponse>;
-    MybusinessverificationsLocationsVerificationsList(req: operations.MybusinessverificationsLocationsVerificationsListRequest, config?: AxiosRequestConfig): Promise<operations.MybusinessverificationsLocationsVerificationsListResponse>;
-    MybusinessverificationsLocationsVerify(req: operations.MybusinessverificationsLocationsVerifyRequest, config?: AxiosRequestConfig): Promise<operations.MybusinessverificationsLocationsVerifyResponse>;
-    MybusinessverificationsVerificationTokensGenerate(req: operations.MybusinessverificationsVerificationTokensGenerateRequest, config?: AxiosRequestConfig): Promise<operations.MybusinessverificationsVerificationTokensGenerateResponse>;
 }
 export {};

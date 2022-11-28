@@ -1,16 +1,14 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import {GetHeadersFromRequest} from "../internal/utils/headers";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "http://api.climatekuul.com:8000/footprint",
+export const ServerList = [
+	"http://api.climatekuul.com:8000/footprint",
 ] as const;
 
 export function WithServerURL(
@@ -21,47 +19,47 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // AirtravelCoordinates - airtravelCoordinates
-  AirtravelCoordinates(
+  /**
+   * airtravelCoordinates - airtravelCoordinates
+  **/
+  airtravelCoordinates(
     req: operations.AirtravelCoordinatesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AirtravelCoordinatesResponse> {
@@ -69,38 +67,40 @@ export class SDK {
       req = new operations.AirtravelCoordinatesRequest(req);
     }
     
-    let baseURL: string = operations.AIRTRAVELCOORDINATES_SERVERS[0];
+    let baseURL: string = operations.AirtravelCoordinatesServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/airtravelCoordinates";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AirtravelCoordinatesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.AirtravelCoordinatesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -110,8 +110,10 @@ export class SDK {
   }
 
   
-  // AirtravelMultileg - airtravelMultileg
-  AirtravelMultileg(
+  /**
+   * airtravelMultileg - airtravelMultileg
+  **/
+  airtravelMultileg(
     req: operations.AirtravelMultilegRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.AirtravelMultilegResponse> {
@@ -119,40 +121,41 @@ export class SDK {
       req = new operations.AirtravelMultilegRequest(req);
     }
     
-    let baseURL: string = operations.AIRTRAVELMULTILEG_SERVERS[0];
+    let baseURL: string = operations.AirtravelMultilegServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/airtravelMultileg";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AirtravelMultilegResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.AirtravelMultilegResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -162,8 +165,10 @@ export class SDK {
   }
 
   
-  // ConfirmCarbonOffset - confirmCarbonOffset
-  ConfirmCarbonOffset(
+  /**
+   * confirmCarbonOffset - confirmCarbonOffset
+  **/
+  confirmCarbonOffset(
     req: operations.ConfirmCarbonOffsetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmCarbonOffsetResponse> {
@@ -171,38 +176,40 @@ export class SDK {
       req = new operations.ConfirmCarbonOffsetRequest(req);
     }
     
-    let baseURL: string = operations.CONFIRMCARBONOFFSET_SERVERS[0];
+    let baseURL: string = operations.ConfirmCarbonOffsetServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/urbanDelivery/confirmCarbonOffset";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmCarbonOffsetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfirmCarbonOffsetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -212,8 +219,10 @@ export class SDK {
   }
 
   
-  // ConfirmCarbonOffset1 - confirmCarbonOffset
-  ConfirmCarbonOffset1(
+  /**
+   * confirmCarbonOffset1 - confirmCarbonOffset
+  **/
+  confirmCarbonOffset1(
     req: operations.ConfirmCarbonOffset1Request,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmCarbonOffset1Response> {
@@ -221,38 +230,40 @@ export class SDK {
       req = new operations.ConfirmCarbonOffset1Request(req);
     }
     
-    let baseURL: string = operations.CONFIRMCARBONOFFSET1_SERVERS[0];
+    let baseURL: string = operations.ConfirmCarbonOffset1ServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/ecommerceDelivery/confirmCarbonOffset";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmCarbonOffset1Response = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfirmCarbonOffset1Response = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -262,8 +273,10 @@ export class SDK {
   }
 
   
-  // ConfirmCarbonOffset3 - confirmCarbonOffset
-  ConfirmCarbonOffset3(
+  /**
+   * confirmCarbonOffset3 - confirmCarbonOffset
+  **/
+  confirmCarbonOffset3(
     req: operations.ConfirmCarbonOffset3Request,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmCarbonOffset3Response> {
@@ -271,38 +284,40 @@ export class SDK {
       req = new operations.ConfirmCarbonOffset3Request(req);
     }
     
-    let baseURL: string = operations.CONFIRMCARBONOFFSET3_SERVERS[0];
+    let baseURL: string = operations.ConfirmCarbonOffset3ServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/airtravelMultileg/confirmCarbonOffset";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmCarbonOffset3Response = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfirmCarbonOffset3Response = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -312,8 +327,10 @@ export class SDK {
   }
 
   
-  // ConfirmCarbonOffset4 - confirmCarbonOffset
-  ConfirmCarbonOffset4(
+  /**
+   * confirmCarbonOffset4 - confirmCarbonOffset
+  **/
+  confirmCarbonOffset4(
     req: operations.ConfirmCarbonOffset4Request,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmCarbonOffset4Response> {
@@ -321,38 +338,40 @@ export class SDK {
       req = new operations.ConfirmCarbonOffset4Request(req);
     }
     
-    let baseURL: string = operations.CONFIRMCARBONOFFSET4_SERVERS[0];
+    let baseURL: string = operations.ConfirmCarbonOffset4ServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/airtravelCoordinates/confirmCarbonOffset";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmCarbonOffset4Response = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfirmCarbonOffset4Response = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -362,8 +381,10 @@ export class SDK {
   }
 
   
-  // ConfirmCarbonOffset5 - confirmCarbonOffset
-  ConfirmCarbonOffset5(
+  /**
+   * confirmCarbonOffset5 - confirmCarbonOffset
+  **/
+  confirmCarbonOffset5(
     req: operations.ConfirmCarbonOffset5Request,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmCarbonOffset5Response> {
@@ -371,38 +392,40 @@ export class SDK {
       req = new operations.ConfirmCarbonOffset5Request(req);
     }
     
-    let baseURL: string = operations.CONFIRMCARBONOFFSET5_SERVERS[0];
+    let baseURL: string = operations.ConfirmCarbonOffset5ServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/roadDistance/confirmCarbonOffset";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmCarbonOffset5Response = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfirmCarbonOffset5Response = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -412,8 +435,10 @@ export class SDK {
   }
 
   
-  // ConfirmPayment - confirmPayment
-  ConfirmPayment(
+  /**
+   * confirmPayment - confirmPayment
+  **/
+  confirmPayment(
     req: operations.ConfirmPaymentRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmPaymentResponse> {
@@ -421,38 +446,40 @@ export class SDK {
       req = new operations.ConfirmPaymentRequest(req);
     }
     
-    let baseURL: string = operations.CONFIRMPAYMENT_SERVERS[0];
+    let baseURL: string = operations.ConfirmPaymentServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/urbanDelivery/confirmPayment";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmPaymentResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfirmPaymentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -462,8 +489,10 @@ export class SDK {
   }
 
   
-  // ConfirmPayment1 - confirmPayment
-  ConfirmPayment1(
+  /**
+   * confirmPayment1 - confirmPayment
+  **/
+  confirmPayment1(
     req: operations.ConfirmPayment1Request,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmPayment1Response> {
@@ -471,38 +500,40 @@ export class SDK {
       req = new operations.ConfirmPayment1Request(req);
     }
     
-    let baseURL: string = operations.CONFIRMPAYMENT1_SERVERS[0];
+    let baseURL: string = operations.ConfirmPayment1ServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/ecommerceDelivery/confirmPayment";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmPayment1Response = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfirmPayment1Response = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -512,8 +543,10 @@ export class SDK {
   }
 
   
-  // ConfirmPayment3 - confirmPayment
-  ConfirmPayment3(
+  /**
+   * confirmPayment3 - confirmPayment
+  **/
+  confirmPayment3(
     req: operations.ConfirmPayment3Request,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmPayment3Response> {
@@ -521,38 +554,40 @@ export class SDK {
       req = new operations.ConfirmPayment3Request(req);
     }
     
-    let baseURL: string = operations.CONFIRMPAYMENT3_SERVERS[0];
+    let baseURL: string = operations.ConfirmPayment3ServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/airtravelMultileg/confirmPayment";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmPayment3Response = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfirmPayment3Response = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -562,8 +597,10 @@ export class SDK {
   }
 
   
-  // ConfirmPayment4 - confirmPayment
-  ConfirmPayment4(
+  /**
+   * confirmPayment4 - confirmPayment
+  **/
+  confirmPayment4(
     req: operations.ConfirmPayment4Request,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmPayment4Response> {
@@ -571,38 +608,40 @@ export class SDK {
       req = new operations.ConfirmPayment4Request(req);
     }
     
-    let baseURL: string = operations.CONFIRMPAYMENT4_SERVERS[0];
+    let baseURL: string = operations.ConfirmPayment4ServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/airtravelCoordinates/confirmPayment";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmPayment4Response = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfirmPayment4Response = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -612,8 +651,10 @@ export class SDK {
   }
 
   
-  // ConfirmPayment5 - confirmPayment
-  ConfirmPayment5(
+  /**
+   * confirmPayment5 - confirmPayment
+  **/
+  confirmPayment5(
     req: operations.ConfirmPayment5Request,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmPayment5Response> {
@@ -621,38 +662,40 @@ export class SDK {
       req = new operations.ConfirmPayment5Request(req);
     }
     
-    let baseURL: string = operations.CONFIRMPAYMENT5_SERVERS[0];
+    let baseURL: string = operations.ConfirmPayment5ServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/roadDistance/confirmPayment";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmPayment5Response = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfirmPayment5Response = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -662,8 +705,10 @@ export class SDK {
   }
 
   
-  // ConfirmPaymentOfTransaction - confirmTransaction
-  ConfirmPaymentOfTransaction(
+  /**
+   * confirmPaymentOfTransaction - confirmTransaction
+  **/
+  confirmPaymentOfTransaction(
     req: operations.ConfirmPaymentOfTransactionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmPaymentOfTransactionResponse> {
@@ -671,38 +716,40 @@ export class SDK {
       req = new operations.ConfirmPaymentOfTransactionRequest(req);
     }
     
-    let baseURL: string = operations.CONFIRMPAYMENTOFTRANSACTION_SERVERS[0];
+    let baseURL: string = operations.ConfirmPaymentOfTransactionServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/urbanDelivery/confirmTransaction";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmPaymentOfTransactionResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfirmPaymentOfTransactionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -712,8 +759,10 @@ export class SDK {
   }
 
   
-  // ConfirmPaymentOfTransaction1 - confirmTransaction
-  ConfirmPaymentOfTransaction1(
+  /**
+   * confirmPaymentOfTransaction1 - confirmTransaction
+  **/
+  confirmPaymentOfTransaction1(
     req: operations.ConfirmPaymentOfTransaction1Request,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmPaymentOfTransaction1Response> {
@@ -721,38 +770,40 @@ export class SDK {
       req = new operations.ConfirmPaymentOfTransaction1Request(req);
     }
     
-    let baseURL: string = operations.CONFIRMPAYMENTOFTRANSACTION1_SERVERS[0];
+    let baseURL: string = operations.ConfirmPaymentOfTransaction1ServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/ecommerceDelivery/confirmTransaction";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmPaymentOfTransaction1Response = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfirmPaymentOfTransaction1Response = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -762,8 +813,10 @@ export class SDK {
   }
 
   
-  // ConfirmPaymentOfTransaction3 - confirmTransaction
-  ConfirmPaymentOfTransaction3(
+  /**
+   * confirmPaymentOfTransaction3 - confirmTransaction
+  **/
+  confirmPaymentOfTransaction3(
     req: operations.ConfirmPaymentOfTransaction3Request,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmPaymentOfTransaction3Response> {
@@ -771,38 +824,40 @@ export class SDK {
       req = new operations.ConfirmPaymentOfTransaction3Request(req);
     }
     
-    let baseURL: string = operations.CONFIRMPAYMENTOFTRANSACTION3_SERVERS[0];
+    let baseURL: string = operations.ConfirmPaymentOfTransaction3ServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/airtravelMultileg/confirmTransaction";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmPaymentOfTransaction3Response = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfirmPaymentOfTransaction3Response = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -812,8 +867,10 @@ export class SDK {
   }
 
   
-  // ConfirmPaymentOfTransaction4 - confirmTransaction
-  ConfirmPaymentOfTransaction4(
+  /**
+   * confirmPaymentOfTransaction4 - confirmTransaction
+  **/
+  confirmPaymentOfTransaction4(
     req: operations.ConfirmPaymentOfTransaction4Request,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmPaymentOfTransaction4Response> {
@@ -821,38 +878,40 @@ export class SDK {
       req = new operations.ConfirmPaymentOfTransaction4Request(req);
     }
     
-    let baseURL: string = operations.CONFIRMPAYMENTOFTRANSACTION4_SERVERS[0];
+    let baseURL: string = operations.ConfirmPaymentOfTransaction4ServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/airtravelCoordinates/confirmTransaction";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmPaymentOfTransaction4Response = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfirmPaymentOfTransaction4Response = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -862,8 +921,10 @@ export class SDK {
   }
 
   
-  // ConfirmPaymentOfTransaction5 - confirmTransaction
-  ConfirmPaymentOfTransaction5(
+  /**
+   * confirmPaymentOfTransaction5 - confirmTransaction
+  **/
+  confirmPaymentOfTransaction5(
     req: operations.ConfirmPaymentOfTransaction5Request,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmPaymentOfTransaction5Response> {
@@ -871,38 +932,40 @@ export class SDK {
       req = new operations.ConfirmPaymentOfTransaction5Request(req);
     }
     
-    let baseURL: string = operations.CONFIRMPAYMENTOFTRANSACTION5_SERVERS[0];
+    let baseURL: string = operations.ConfirmPaymentOfTransaction5ServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/roadDistance/confirmTransaction";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmPaymentOfTransaction5Response = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfirmPaymentOfTransaction5Response = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -912,8 +975,10 @@ export class SDK {
   }
 
   
-  // ConfirmsPlanting - confirmPlanting
-  ConfirmsPlanting(
+  /**
+   * confirmsPlanting - confirmPlanting
+  **/
+  confirmsPlanting(
     req: operations.ConfirmsPlantingRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmsPlantingResponse> {
@@ -921,38 +986,40 @@ export class SDK {
       req = new operations.ConfirmsPlantingRequest(req);
     }
     
-    let baseURL: string = operations.CONFIRMSPLANTING_SERVERS[0];
+    let baseURL: string = operations.ConfirmsPlantingServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/urbanDelivery/confirmPlanting";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmsPlantingResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfirmsPlantingResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -962,8 +1029,10 @@ export class SDK {
   }
 
   
-  // ConfirmsPlanting2 - confirmPlanting
-  ConfirmsPlanting2(
+  /**
+   * confirmsPlanting2 - confirmPlanting
+  **/
+  confirmsPlanting2(
     req: operations.ConfirmsPlanting2Request,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmsPlanting2Response> {
@@ -971,38 +1040,40 @@ export class SDK {
       req = new operations.ConfirmsPlanting2Request(req);
     }
     
-    let baseURL: string = operations.CONFIRMSPLANTING2_SERVERS[0];
+    let baseURL: string = operations.ConfirmsPlanting2ServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/ecommerceDelivery/confirmPlanting";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmsPlanting2Response = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfirmsPlanting2Response = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1012,8 +1083,10 @@ export class SDK {
   }
 
   
-  // ConfirmsPlanting3 - confirmPlanting
-  ConfirmsPlanting3(
+  /**
+   * confirmsPlanting3 - confirmPlanting
+  **/
+  confirmsPlanting3(
     req: operations.ConfirmsPlanting3Request,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmsPlanting3Response> {
@@ -1021,38 +1094,40 @@ export class SDK {
       req = new operations.ConfirmsPlanting3Request(req);
     }
     
-    let baseURL: string = operations.CONFIRMSPLANTING3_SERVERS[0];
+    let baseURL: string = operations.ConfirmsPlanting3ServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/airtravelMultileg/confirmPlanting";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmsPlanting3Response = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfirmsPlanting3Response = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1062,8 +1137,10 @@ export class SDK {
   }
 
   
-  // ConfirmsPlanting4 - confirmPlanting
-  ConfirmsPlanting4(
+  /**
+   * confirmsPlanting4 - confirmPlanting
+  **/
+  confirmsPlanting4(
     req: operations.ConfirmsPlanting4Request,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmsPlanting4Response> {
@@ -1071,38 +1148,40 @@ export class SDK {
       req = new operations.ConfirmsPlanting4Request(req);
     }
     
-    let baseURL: string = operations.CONFIRMSPLANTING4_SERVERS[0];
+    let baseURL: string = operations.ConfirmsPlanting4ServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/airtravelCoordinates/confirmPlanting";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmsPlanting4Response = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfirmsPlanting4Response = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1112,8 +1191,10 @@ export class SDK {
   }
 
   
-  // ConfirmsPlanting5 - confirmPlanting
-  ConfirmsPlanting5(
+  /**
+   * confirmsPlanting5 - confirmPlanting
+  **/
+  confirmsPlanting5(
     req: operations.ConfirmsPlanting5Request,
     config?: AxiosRequestConfig
   ): Promise<operations.ConfirmsPlanting5Response> {
@@ -1121,38 +1202,40 @@ export class SDK {
       req = new operations.ConfirmsPlanting5Request(req);
     }
     
-    let baseURL: string = operations.CONFIRMSPLANTING5_SERVERS[0];
+    let baseURL: string = operations.ConfirmsPlanting5ServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/roadDistance/confirmPlanting";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ConfirmsPlanting5Response = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.ConfirmsPlanting5Response = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1162,8 +1245,10 @@ export class SDK {
   }
 
   
-  // EcommerceDelivery - ecommerceDelivery
-  EcommerceDelivery(
+  /**
+   * ecommerceDelivery - ecommerceDelivery
+  **/
+  ecommerceDelivery(
     req: operations.EcommerceDeliveryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.EcommerceDeliveryResponse> {
@@ -1171,38 +1256,40 @@ export class SDK {
       req = new operations.EcommerceDeliveryRequest(req);
     }
     
-    let baseURL: string = operations.ECOMMERCEDELIVERY_SERVERS[0];
+    let baseURL: string = operations.EcommerceDeliveryServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/ecommerceDelivery";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.EcommerceDeliveryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.EcommerceDeliveryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1212,8 +1299,10 @@ export class SDK {
   }
 
   
-  // RequestApiKey - requestApiKey
-  RequestApiKey(
+  /**
+   * requestApiKey - requestApiKey
+  **/
+  requestApiKey(
     req: operations.RequestApiKeyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RequestApiKeyResponse> {
@@ -1221,38 +1310,40 @@ export class SDK {
       req = new operations.RequestApiKeyRequest(req);
     }
     
-    let baseURL: string = operations.REQUESTAPIKEY_SERVERS[0];
+    let baseURL: string = operations.RequestApiKeyServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/requestApiKey";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RequestApiKeyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.RequestApiKeyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1262,8 +1353,10 @@ export class SDK {
   }
 
   
-  // RoadDistance - RoadDistance
-  RoadDistance(
+  /**
+   * roadDistance - RoadDistance
+  **/
+  roadDistance(
     req: operations.RoadDistanceRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RoadDistanceResponse> {
@@ -1271,38 +1364,40 @@ export class SDK {
       req = new operations.RoadDistanceRequest(req);
     }
     
-    let baseURL: string = operations.ROADDISTANCE_SERVERS[0];
+    let baseURL: string = operations.RoadDistanceServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/roadDistance";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RoadDistanceResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.RoadDistanceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1312,8 +1407,10 @@ export class SDK {
   }
 
   
-  // UrbanDelivery - urbanDelivery
-  UrbanDelivery(
+  /**
+   * urbanDelivery - urbanDelivery
+  **/
+  urbanDelivery(
     req: operations.UrbanDeliveryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UrbanDeliveryResponse> {
@@ -1321,38 +1418,40 @@ export class SDK {
       req = new operations.UrbanDeliveryRequest(req);
     }
     
-    let baseURL: string = operations.URBANDELIVERY_SERVERS[0];
+    let baseURL: string = operations.UrbanDeliveryServerList[0];
+    if (req.serverUrl) {
+      baseURL = req.serverUrl;
+    }
     const url: string = baseURL.replace(/\/$/, "") + "/urbanDelivery";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UrbanDeliveryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.UrbanDeliveryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 

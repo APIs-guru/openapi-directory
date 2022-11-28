@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeScalingProcessTypesActionEnum(str, Enum):
     DESCRIBE_SCALING_PROCESS_TYPES = "DescribeScalingProcessTypes"
@@ -10,8 +14,8 @@ class PostDescribeScalingProcessTypesVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeScalingProcessTypesQueryParams:
-    action: PostDescribeScalingProcessTypesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeScalingProcessTypesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeScalingProcessTypesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeScalingProcessTypesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostDescribeScalingProcessTypesHeaders:
 
 @dataclass
 class PostDescribeScalingProcessTypesRequest:
-    query_params: PostDescribeScalingProcessTypesQueryParams = field(default=None)
-    headers: PostDescribeScalingProcessTypesHeaders = field(default=None)
+    headers: PostDescribeScalingProcessTypesHeaders = field()
+    query_params: PostDescribeScalingProcessTypesQueryParams = field()
     
 
 @dataclass
 class PostDescribeScalingProcessTypesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

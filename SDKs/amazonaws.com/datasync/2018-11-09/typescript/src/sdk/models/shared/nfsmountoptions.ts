@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NfsVersionEnum } from "./nfsversionenum";
+
 
 
 // NfsMountOptions
@@ -7,6 +8,6 @@ import { NfsVersionEnum } from "./nfsversionenum";
  * Represents the mount options that are available for DataSync to access an NFS location.
 **/
 export class NfsMountOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: NfsVersionEnum;
 }

@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum HashTypeEnum {
-    HashTypeUnspecified = "HASH_TYPE_UNSPECIFIED"
-,    Sha256 = "SHA256"
-,    Md5 = "MD5"
+    HashTypeUnspecified = "HASH_TYPE_UNSPECIFIED",
+    Sha256 = "SHA256",
+    Md5 = "MD5"
 }
 
 
@@ -12,9 +13,9 @@ export enum HashTypeEnum {
  * A hash of file content.
 **/
 export class Hash extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: HashTypeEnum;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

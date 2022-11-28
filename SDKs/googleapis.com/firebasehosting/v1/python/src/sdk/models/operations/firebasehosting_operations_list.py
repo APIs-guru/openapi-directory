@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class FirebasehostingOperationsListPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,13 +29,13 @@ class FirebasehostingOperationsListQueryParams:
 
 @dataclass
 class FirebasehostingOperationsListRequest:
-    path_params: FirebasehostingOperationsListPathParams = field(default=None)
-    query_params: FirebasehostingOperationsListQueryParams = field(default=None)
+    path_params: FirebasehostingOperationsListPathParams = field()
+    query_params: FirebasehostingOperationsListQueryParams = field()
     
 
 @dataclass
 class FirebasehostingOperationsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_operations_response: Optional[shared.ListOperationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

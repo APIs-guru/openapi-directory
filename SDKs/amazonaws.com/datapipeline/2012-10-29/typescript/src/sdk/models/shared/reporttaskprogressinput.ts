@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Field } from "./field";
+
 
 
 // ReportTaskProgressInput
@@ -8,9 +8,9 @@ import { Field } from "./field";
  * Contains the parameters for ReportTaskProgress.
 **/
 export class ReportTaskProgressInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields", elemType: shared.Field })
+  @SpeakeasyMetadata({ data: "json, name=fields", elemType: Field })
   fields?: Field[];
 
-  @Metadata({ data: "json, name=taskId" })
+  @SpeakeasyMetadata({ data: "json, name=taskId" })
   taskId: string;
 }

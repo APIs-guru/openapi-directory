@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CreateCustomPageSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;

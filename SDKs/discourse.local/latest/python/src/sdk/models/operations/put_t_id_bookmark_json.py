@@ -4,23 +4,23 @@ from dataclasses import dataclass, field
 
 @dataclass
 class PutTIDBookmarkJSONPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PutTIDBookmarkJSONHeaders:
-    api_key: str = field(default=None, metadata={'header': { 'field_name': 'Api-Key', 'style': 'simple', 'explode': False }})
-    api_username: str = field(default=None, metadata={'header': { 'field_name': 'Api-Username', 'style': 'simple', 'explode': False }})
+    api_key: str = field(metadata={'header': { 'field_name': 'Api-Key', 'style': 'simple', 'explode': False }})
+    api_username: str = field(metadata={'header': { 'field_name': 'Api-Username', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PutTIDBookmarkJSONRequest:
-    path_params: PutTIDBookmarkJSONPathParams = field(default=None)
-    headers: PutTIDBookmarkJSONHeaders = field(default=None)
+    headers: PutTIDBookmarkJSONHeaders = field()
+    path_params: PutTIDBookmarkJSONPathParams = field()
     
 
 @dataclass
 class PutTIDBookmarkJSONResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

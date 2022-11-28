@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetLiveStreamsSortOrderEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 
 export class GetLiveStreamsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=currentPage" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currentPage" })
   currentPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortBy" })
   sortBy?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sortOrder" })
   sortOrder?: GetLiveStreamsSortOrderEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=streamKey" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=streamKey" })
   streamKey?: string;
 }
 
 
 export class GetLiveStreamsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuth: shared.SchemeBearerAuth;
 }
 
 
 export class GetLiveStreamsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetLiveStreamsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetLiveStreamsSecurity;
 }
 
 
 export class GetLiveStreamsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   liveStreamListResponse?: shared.LiveStreamListResponse;
 }

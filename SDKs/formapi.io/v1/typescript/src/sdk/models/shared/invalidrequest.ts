@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum InvalidRequestStatusEnum {
     Error = "error"
@@ -6,9 +7,9 @@ export enum InvalidRequestStatusEnum {
 
 
 export class InvalidRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors" })
+  @SpeakeasyMetadata({ data: "json, name=errors" })
   errors: string[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: InvalidRequestStatusEnum;
 }

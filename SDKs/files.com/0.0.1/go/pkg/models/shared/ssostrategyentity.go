@@ -52,6 +52,8 @@ const (
 	SsoStrategyEntityScimAuthenticationMethodEnumToken SsoStrategyEntityScimAuthenticationMethodEnum = "token"
 )
 
+// SsoStrategyEntity
+// List Sso Strategies
 type SsoStrategyEntity struct {
 	DeprovisionBehavior            *SsoStrategyEntityDeprovisionBehaviorEnum      `json:"deprovision_behavior,omitempty"`
 	DeprovisionGroups              *bool                                          `json:"deprovision_groups,omitempty"`

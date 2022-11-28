@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChartData } from "./chartdata";
+
 
 
 // WaterfallChartDomain
@@ -7,9 +8,9 @@ import { ChartData } from "./chartdata";
  * The domain of a waterfall chart.
 **/
 export class WaterfallChartDomain extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: ChartData;
 
-  @Metadata({ data: "json, name=reversed" })
+  @SpeakeasyMetadata({ data: "json, name=reversed" })
   reversed?: boolean;
 }

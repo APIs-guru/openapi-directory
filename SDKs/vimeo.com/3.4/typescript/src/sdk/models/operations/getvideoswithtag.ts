@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetVideosWithTagPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=word" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=word" })
   word: string;
 }
 
 export enum GetVideosWithTagDirectionEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 export enum GetVideosWithTagSortEnum {
-    CreatedTime = "created_time"
-,    Duration = "duration"
-,    Name = "name"
+    CreatedTime = "created_time",
+    Duration = "duration",
+    Name = "name"
 }
 
 
 export class GetVideosWithTagQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: GetVideosWithTagDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: GetVideosWithTagSortEnum;
 }
 
 
 export class GetVideosWithTagRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetVideosWithTagPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetVideosWithTagQueryParams;
 }
 
 
 export class GetVideosWithTagResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   legacyError?: shared.LegacyError;
 
-  @Metadata({ elemType: shared.Video })
+  @SpeakeasyMetadata({ elemType: shared.Video })
   videos?: shared.Video[];
 }

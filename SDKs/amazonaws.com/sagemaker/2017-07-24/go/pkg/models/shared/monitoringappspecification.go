@@ -1,5 +1,7 @@
 package shared
 
+// MonitoringAppSpecification
+// Container image configuration object for the monitoring job.
 type MonitoringAppSpecification struct {
 	ContainerArguments              []string `json:"ContainerArguments,omitempty"`
 	ContainerEntrypoint             []string `json:"ContainerEntrypoint,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PutRecordsRequestEntry } from "./putrecordsrequestentry";
+
 
 
 // PutRecordsInput
@@ -8,9 +8,9 @@ import { PutRecordsRequestEntry } from "./putrecordsrequestentry";
  * A <code>PutRecords</code> request.
 **/
 export class PutRecordsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Records", elemType: shared.PutRecordsRequestEntry })
+  @SpeakeasyMetadata({ data: "json, name=Records", elemType: PutRecordsRequestEntry })
   records: PutRecordsRequestEntry[];
 
-  @Metadata({ data: "json, name=StreamName" })
+  @SpeakeasyMetadata({ data: "json, name=StreamName" })
   streamName: string;
 }

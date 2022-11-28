@@ -1,21 +1,24 @@
 from dataclasses import dataclass, field
-
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 
 
 @dataclass
 class UpdateGroupsRemoveUpdateGroupUserPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
-    user_id: int = field(default=None, metadata={'path_param': { 'field_name': 'userID', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    user_id: int = field(metadata={'path_param': { 'field_name': 'userID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class UpdateGroupsRemoveUpdateGroupUserRequest:
-    path_params: UpdateGroupsRemoveUpdateGroupUserPathParams = field(default=None)
+    path_params: UpdateGroupsRemoveUpdateGroupUserPathParams = field()
     
 
 @dataclass
 class UpdateGroupsRemoveUpdateGroupUserResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

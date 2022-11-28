@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsElasticBeanstalkEnvironmentOptionSetting
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A configuration option setting for the environment.
 **/
 export class AwsElasticBeanstalkEnvironmentOptionSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Namespace" })
+  @SpeakeasyMetadata({ data: "json, name=Namespace" })
   namespace?: string;
 
-  @Metadata({ data: "json, name=OptionName" })
+  @SpeakeasyMetadata({ data: "json, name=OptionName" })
   optionName?: string;
 
-  @Metadata({ data: "json, name=ResourceName" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceName" })
   resourceName?: string;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: string;
 }

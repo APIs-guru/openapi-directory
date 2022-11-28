@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class DcimRackReservationsCreateRequest:
-    request: shared.WritableRackReservation = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WritableRackReservationInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DcimRackReservationsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     rack_reservation: Optional[shared.RackReservation] = field(default=None)
-    status_code: int = field(default=None)
     

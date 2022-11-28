@@ -30,11 +30,6 @@ type SearchProductsRequestBody struct {
 	TopX         *string                                 `json:"topX,omitempty"`
 }
 
-type SearchProductsRequest struct {
-	Headers SearchProductsHeaders
-	Request *SearchProductsRequestBody `request:"mediaType=application/json"`
-}
-
 type SearchProducts200ApplicationJSONData struct {
 	Admission                     *string                     `json:"admission,omitempty"`
 	Available                     *bool                       `json:"available,omitempty"`
@@ -98,6 +93,11 @@ type SearchProducts200ApplicationJSON struct {
 	Success          *bool                                  `json:"success,omitempty"`
 	TotalCount       *int64                                 `json:"totalCount,omitempty"`
 	Vmid             *string                                `json:"vmid,omitempty"`
+}
+
+type SearchProductsRequest struct {
+	Headers SearchProductsHeaders
+	Request *SearchProductsRequestBody `request:"mediaType=application/json"`
 }
 
 type SearchProductsResponse struct {

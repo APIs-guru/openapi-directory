@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PremiumAccessDownloadData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=download_notes" })
+  @SpeakeasyMetadata({ data: "json, name=download_notes" })
   downloadNotes?: string;
 
-  @Metadata({ data: "json, name=project_code" })
+  @SpeakeasyMetadata({ data: "json, name=project_code" })
   projectCode?: string;
 }

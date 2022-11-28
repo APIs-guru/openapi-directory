@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// API
+// Represents an API.
 type API struct {
 	APIEndpoint               *string           `json:"ApiEndpoint,omitempty"`
 	APIGatewayManaged         *bool             `json:"ApiGatewayManaged,omitempty"`

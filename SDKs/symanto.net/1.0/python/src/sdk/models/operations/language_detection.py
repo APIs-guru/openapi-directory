@@ -10,8 +10,8 @@ class LanguageDetectionRequest:
 
 @dataclass
 class LanguageDetectionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     language_detection_response: Optional[List[shared.LanguagePredicted]] = field(default=None)
-    status_code: int = field(default=None)
     validation_errors: Optional[shared.ValidationErrors] = field(default=None)
     

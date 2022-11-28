@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpsolverS3OutputFormatConfig } from "./upsolvers3outputformatconfig";
+
 
 
 // UpsolverDestinationProperties
@@ -7,12 +8,12 @@ import { UpsolverS3OutputFormatConfig } from "./upsolvers3outputformatconfig";
  *  The properties that are applied when Upsolver is used as a destination. 
 **/
 export class UpsolverDestinationProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucketName" })
+  @SpeakeasyMetadata({ data: "json, name=bucketName" })
   bucketName: string;
 
-  @Metadata({ data: "json, name=bucketPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=bucketPrefix" })
   bucketPrefix?: string;
 
-  @Metadata({ data: "json, name=s3OutputFormatConfig" })
+  @SpeakeasyMetadata({ data: "json, name=s3OutputFormatConfig" })
   s3OutputFormatConfig: UpsolverS3OutputFormatConfig;
 }

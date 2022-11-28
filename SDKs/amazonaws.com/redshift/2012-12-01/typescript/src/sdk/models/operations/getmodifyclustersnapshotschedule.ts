@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetModifyClusterSnapshotScheduleActionEnum {
     ModifyClusterSnapshotSchedule = "ModifyClusterSnapshotSchedule"
@@ -10,63 +11,63 @@ export enum GetModifyClusterSnapshotScheduleVersionEnum {
 
 
 export class GetModifyClusterSnapshotScheduleQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetModifyClusterSnapshotScheduleActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ClusterIdentifier" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClusterIdentifier" })
   clusterIdentifier: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=DisassociateSchedule" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DisassociateSchedule" })
   disassociateSchedule?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ScheduleIdentifier" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ScheduleIdentifier" })
   scheduleIdentifier?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetModifyClusterSnapshotScheduleVersionEnum;
 }
 
 
 export class GetModifyClusterSnapshotScheduleHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetModifyClusterSnapshotScheduleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetModifyClusterSnapshotScheduleQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetModifyClusterSnapshotScheduleHeaders;
 }
 
 
 export class GetModifyClusterSnapshotScheduleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

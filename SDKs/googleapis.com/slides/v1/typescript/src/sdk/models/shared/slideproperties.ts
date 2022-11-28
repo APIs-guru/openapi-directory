@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Page } from "./page";
+
 
 
 // SlideProperties
@@ -7,15 +8,15 @@ import { Page } from "./page";
  * The properties of Page that are only relevant for pages with page_type SLIDE.
 **/
 export class SlideProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isSkipped" })
+  @SpeakeasyMetadata({ data: "json, name=isSkipped" })
   isSkipped?: boolean;
 
-  @Metadata({ data: "json, name=layoutObjectId" })
+  @SpeakeasyMetadata({ data: "json, name=layoutObjectId" })
   layoutObjectId?: string;
 
-  @Metadata({ data: "json, name=masterObjectId" })
+  @SpeakeasyMetadata({ data: "json, name=masterObjectId" })
   masterObjectId?: string;
 
-  @Metadata({ data: "json, name=notesPage" })
+  @SpeakeasyMetadata({ data: "json, name=notesPage" })
   notesPage?: Page;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var MybusinessaccountmanagementLocationsAdminsCreatePathParams = /** @class */ (function (_super) {
     __extends(MybusinessaccountmanagementLocationsAdminsCreatePathParams, _super);
@@ -30,7 +30,7 @@ var MybusinessaccountmanagementLocationsAdminsCreatePathParams = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
         __metadata("design:type", String)
     ], MybusinessaccountmanagementLocationsAdminsCreatePathParams.prototype, "parent", void 0);
     return MybusinessaccountmanagementLocationsAdminsCreatePathParams;
@@ -42,47 +42,47 @@ var MybusinessaccountmanagementLocationsAdminsCreateQueryParams = /** @class */ 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], MybusinessaccountmanagementLocationsAdminsCreateQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], MybusinessaccountmanagementLocationsAdminsCreateQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], MybusinessaccountmanagementLocationsAdminsCreateQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], MybusinessaccountmanagementLocationsAdminsCreateQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], MybusinessaccountmanagementLocationsAdminsCreateQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], MybusinessaccountmanagementLocationsAdminsCreateQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], MybusinessaccountmanagementLocationsAdminsCreateQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], MybusinessaccountmanagementLocationsAdminsCreateQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], MybusinessaccountmanagementLocationsAdminsCreateQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], MybusinessaccountmanagementLocationsAdminsCreateQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], MybusinessaccountmanagementLocationsAdminsCreateQueryParams.prototype, "uploadProtocol", void 0);
     return MybusinessaccountmanagementLocationsAdminsCreateQueryParams;
@@ -94,16 +94,16 @@ var MybusinessaccountmanagementLocationsAdminsCreateRequest = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", MybusinessaccountmanagementLocationsAdminsCreatePathParams)
     ], MybusinessaccountmanagementLocationsAdminsCreateRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", MybusinessaccountmanagementLocationsAdminsCreateQueryParams)
     ], MybusinessaccountmanagementLocationsAdminsCreateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", shared.Admin)
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.AdminInput)
     ], MybusinessaccountmanagementLocationsAdminsCreateRequest.prototype, "request", void 0);
     return MybusinessaccountmanagementLocationsAdminsCreateRequest;
 }(SpeakeasyBase));
@@ -114,15 +114,15 @@ var MybusinessaccountmanagementLocationsAdminsCreateResponse = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Admin)
     ], MybusinessaccountmanagementLocationsAdminsCreateResponse.prototype, "admin", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], MybusinessaccountmanagementLocationsAdminsCreateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], MybusinessaccountmanagementLocationsAdminsCreateResponse.prototype, "statusCode", void 0);
     return MybusinessaccountmanagementLocationsAdminsCreateResponse;

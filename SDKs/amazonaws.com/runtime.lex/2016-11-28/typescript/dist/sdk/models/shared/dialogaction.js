@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FulfillmentStateEnum } from "./fulfillmentstateenum";
 import { MessageFormatTypeEnum } from "./messageformattypeenum";
 import { DialogActionTypeEnum } from "./dialogactiontypeenum";
@@ -36,31 +36,31 @@ var DialogAction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fulfillmentState" }),
+        SpeakeasyMetadata({ data: "json, name=fulfillmentState" }),
         __metadata("design:type", String)
     ], DialogAction.prototype, "fulfillmentState", void 0);
     __decorate([
-        Metadata({ data: "json, name=intentName" }),
+        SpeakeasyMetadata({ data: "json, name=intentName" }),
         __metadata("design:type", String)
     ], DialogAction.prototype, "intentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], DialogAction.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=messageFormat" }),
+        SpeakeasyMetadata({ data: "json, name=messageFormat" }),
         __metadata("design:type", String)
     ], DialogAction.prototype, "messageFormat", void 0);
     __decorate([
-        Metadata({ data: "json, name=slotToElicit" }),
+        SpeakeasyMetadata({ data: "json, name=slotToElicit" }),
         __metadata("design:type", String)
     ], DialogAction.prototype, "slotToElicit", void 0);
     __decorate([
-        Metadata({ data: "json, name=slots" }),
+        SpeakeasyMetadata({ data: "json, name=slots" }),
         __metadata("design:type", Map)
     ], DialogAction.prototype, "slots", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], DialogAction.prototype, "type", void 0);
     return DialogAction;

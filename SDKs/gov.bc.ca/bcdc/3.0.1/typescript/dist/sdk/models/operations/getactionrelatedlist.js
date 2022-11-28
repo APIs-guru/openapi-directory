@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetActionRelatedListQueryParams = /** @class */ (function (_super) {
     __extends(GetActionRelatedListQueryParams, _super);
     function GetActionRelatedListQueryParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dataset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dataset" }),
         __metadata("design:type", String)
     ], GetActionRelatedListQueryParams.prototype, "dataset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=featured" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=featured" }),
         __metadata("design:type", String)
     ], GetActionRelatedListQueryParams.prototype, "featured", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" }),
         __metadata("design:type", String)
     ], GetActionRelatedListQueryParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], GetActionRelatedListQueryParams.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=type_filter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type_filter" }),
         __metadata("design:type", String)
     ], GetActionRelatedListQueryParams.prototype, "typeFilter", void 0);
     return GetActionRelatedListQueryParams;
@@ -57,7 +57,7 @@ var GetActionRelatedListRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetActionRelatedListQueryParams)
     ], GetActionRelatedListRequest.prototype, "queryParams", void 0);
     return GetActionRelatedListRequest;
@@ -69,11 +69,11 @@ var GetActionRelatedListResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetActionRelatedListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetActionRelatedListResponse.prototype, "statusCode", void 0);
     return GetActionRelatedListResponse;

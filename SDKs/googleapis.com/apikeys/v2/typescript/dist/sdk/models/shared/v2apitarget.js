@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // V2ApiTarget
 /**
  * A restriction for a specific service and optionally one or multiple specific methods. Both fields are case insensitive.
@@ -33,11 +33,11 @@ var V2ApiTarget = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=methods" }),
+        SpeakeasyMetadata({ data: "json, name=methods" }),
         __metadata("design:type", Array)
     ], V2ApiTarget.prototype, "methods", void 0);
     __decorate([
-        Metadata({ data: "json, name=service" }),
+        SpeakeasyMetadata({ data: "json, name=service" }),
         __metadata("design:type", String)
     ], V2ApiTarget.prototype, "service", void 0);
     return V2ApiTarget;

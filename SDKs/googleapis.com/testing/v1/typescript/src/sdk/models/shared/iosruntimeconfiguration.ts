@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Locale } from "./locale";
 import { Orientation } from "./orientation";
+
 
 
 // IosRuntimeConfiguration
@@ -9,9 +9,9 @@ import { Orientation } from "./orientation";
  * iOS configuration that can be selected at the time a test is run.
 **/
 export class IosRuntimeConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=locales", elemType: shared.Locale })
+  @SpeakeasyMetadata({ data: "json, name=locales", elemType: Locale })
   locales?: Locale[];
 
-  @Metadata({ data: "json, name=orientations", elemType: shared.Orientation })
+  @SpeakeasyMetadata({ data: "json, name=orientations", elemType: Orientation })
   orientations?: Orientation[];
 }

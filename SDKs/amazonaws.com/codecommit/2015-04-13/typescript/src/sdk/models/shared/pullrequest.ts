@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApprovalRule } from "./approvalrule";
 import { PullRequestStatusEnumEnum } from "./pullrequeststatusenumenum";
 import { PullRequestTarget } from "./pullrequesttarget";
+
 
 
 // PullRequest
@@ -10,36 +10,36 @@ import { PullRequestTarget } from "./pullrequesttarget";
  * Returns information about a pull request.
 **/
 export class PullRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approvalRules", elemType: shared.ApprovalRule })
+  @SpeakeasyMetadata({ data: "json, name=approvalRules", elemType: ApprovalRule })
   approvalRules?: ApprovalRule[];
 
-  @Metadata({ data: "json, name=authorArn" })
+  @SpeakeasyMetadata({ data: "json, name=authorArn" })
   authorArn?: string;
 
-  @Metadata({ data: "json, name=clientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientRequestToken" })
   clientRequestToken?: string;
 
-  @Metadata({ data: "json, name=creationDate" })
+  @SpeakeasyMetadata({ data: "json, name=creationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=lastActivityDate" })
+  @SpeakeasyMetadata({ data: "json, name=lastActivityDate" })
   lastActivityDate?: Date;
 
-  @Metadata({ data: "json, name=pullRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=pullRequestId" })
   pullRequestId?: string;
 
-  @Metadata({ data: "json, name=pullRequestStatus" })
+  @SpeakeasyMetadata({ data: "json, name=pullRequestStatus" })
   pullRequestStatus?: PullRequestStatusEnumEnum;
 
-  @Metadata({ data: "json, name=pullRequestTargets", elemType: shared.PullRequestTarget })
+  @SpeakeasyMetadata({ data: "json, name=pullRequestTargets", elemType: PullRequestTarget })
   pullRequestTargets?: PullRequestTarget[];
 
-  @Metadata({ data: "json, name=revisionId" })
+  @SpeakeasyMetadata({ data: "json, name=revisionId" })
   revisionId?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

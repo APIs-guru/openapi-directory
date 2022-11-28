@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ActionConfiguration
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents information about an action configuration.
 **/
 export class ActionConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configuration" })
+  @SpeakeasyMetadata({ data: "json, name=configuration" })
   configuration?: Map<string, string>;
 }

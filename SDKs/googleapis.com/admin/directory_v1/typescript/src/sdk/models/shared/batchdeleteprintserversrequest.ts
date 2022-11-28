@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchDeletePrintServersRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request to delete multiple existing print servers in a batch.
 **/
 export class BatchDeletePrintServersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=printServerIds" })
+  @SpeakeasyMetadata({ data: "json, name=printServerIds" })
   printServerIds?: string[];
 }

@@ -13,6 +13,8 @@ const (
 	NiCurrentCarrierPropertiesNetworkTypeEnumNull             NiCurrentCarrierPropertiesNetworkTypeEnum = "null"
 )
 
+// NiCurrentCarrierProperties
+// Information about the network `number` is currently connected to.
 type NiCurrentCarrierProperties struct {
 	Country     *string                                    `json:"country,omitempty"`
 	Name        *string                                    `json:"name,omitempty"`

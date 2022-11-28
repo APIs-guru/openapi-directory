@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class VisionProjectsLocationsProductsReferenceImagesListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +28,14 @@ class VisionProjectsLocationsProductsReferenceImagesListQueryParams:
 
 @dataclass
 class VisionProjectsLocationsProductsReferenceImagesListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class VisionProjectsLocationsProductsReferenceImagesListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -45,14 +46,14 @@ class VisionProjectsLocationsProductsReferenceImagesListSecurity:
 
 @dataclass
 class VisionProjectsLocationsProductsReferenceImagesListRequest:
-    path_params: VisionProjectsLocationsProductsReferenceImagesListPathParams = field(default=None)
-    query_params: VisionProjectsLocationsProductsReferenceImagesListQueryParams = field(default=None)
-    security: VisionProjectsLocationsProductsReferenceImagesListSecurity = field(default=None)
+    path_params: VisionProjectsLocationsProductsReferenceImagesListPathParams = field()
+    query_params: VisionProjectsLocationsProductsReferenceImagesListQueryParams = field()
+    security: VisionProjectsLocationsProductsReferenceImagesListSecurity = field()
     
 
 @dataclass
 class VisionProjectsLocationsProductsReferenceImagesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_reference_images_response: Optional[shared.ListReferenceImagesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

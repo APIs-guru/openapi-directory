@@ -1,11 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OrFiltersForSegment } from "./orfiltersforsegment";
 
+
 export enum SegmentSequenceStepMatchTypeEnum {
-    UnspecifiedMatchType = "UNSPECIFIED_MATCH_TYPE"
-,    Precedes = "PRECEDES"
-,    ImmediatelyPrecedes = "IMMEDIATELY_PRECEDES"
+    UnspecifiedMatchType = "UNSPECIFIED_MATCH_TYPE",
+    Precedes = "PRECEDES",
+    ImmediatelyPrecedes = "IMMEDIATELY_PRECEDES"
 }
 
 
@@ -14,9 +14,9 @@ export enum SegmentSequenceStepMatchTypeEnum {
  * A segment sequence definition.
 **/
 export class SegmentSequenceStep extends SpeakeasyBase {
-  @Metadata({ data: "json, name=matchType" })
+  @SpeakeasyMetadata({ data: "json, name=matchType" })
   matchType?: SegmentSequenceStepMatchTypeEnum;
 
-  @Metadata({ data: "json, name=orFiltersForSegment", elemType: shared.OrFiltersForSegment })
+  @SpeakeasyMetadata({ data: "json, name=orFiltersForSegment", elemType: OrFiltersForSegment })
   orFiltersForSegment?: OrFiltersForSegment[];
 }

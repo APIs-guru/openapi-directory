@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAutomationV4ActionsAppIdDefinitionIdGetByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=appId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" })
   appId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=definitionId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=definitionId" })
   definitionId: string;
 }
 
 
 export class GetAutomationV4ActionsAppIdDefinitionIdGetByIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=archived" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=archived" })
   archived?: boolean;
 }
 
 
 export class GetAutomationV4ActionsAppIdDefinitionIdGetByIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
   developerHapikey: shared.SchemeDeveloperHapikey;
 }
 
 
 export class GetAutomationV4ActionsAppIdDefinitionIdGetByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAutomationV4ActionsAppIdDefinitionIdGetByIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAutomationV4ActionsAppIdDefinitionIdGetByIdQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetAutomationV4ActionsAppIdDefinitionIdGetByIdSecurity;
 }
 
 
 export class GetAutomationV4ActionsAppIdDefinitionIdGetByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   extensionActionDefinition?: shared.ExtensionActionDefinition;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

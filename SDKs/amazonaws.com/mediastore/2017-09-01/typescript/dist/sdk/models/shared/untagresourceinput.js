@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UntagResourceInput = /** @class */ (function (_super) {
     __extends(UntagResourceInput, _super);
     function UntagResourceInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Resource" }),
+        SpeakeasyMetadata({ data: "json, name=Resource" }),
         __metadata("design:type", String)
     ], UntagResourceInput.prototype, "resource", void 0);
     __decorate([
-        Metadata({ data: "json, name=TagKeys" }),
+        SpeakeasyMetadata({ data: "json, name=TagKeys" }),
         __metadata("design:type", Array)
     ], UntagResourceInput.prototype, "tagKeys", void 0);
     return UntagResourceInput;

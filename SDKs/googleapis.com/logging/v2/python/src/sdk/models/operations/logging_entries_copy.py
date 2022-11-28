@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,14 +21,14 @@ class LoggingEntriesCopyQueryParams:
 
 @dataclass
 class LoggingEntriesCopySecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class LoggingEntriesCopySecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -38,14 +39,14 @@ class LoggingEntriesCopySecurity:
 
 @dataclass
 class LoggingEntriesCopyRequest:
-    query_params: LoggingEntriesCopyQueryParams = field(default=None)
+    query_params: LoggingEntriesCopyQueryParams = field()
+    security: LoggingEntriesCopySecurity = field()
     request: Optional[shared.CopyLogEntriesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: LoggingEntriesCopySecurity = field(default=None)
     
 
 @dataclass
 class LoggingEntriesCopyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

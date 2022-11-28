@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AddTimerScriptPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
   agentNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=arg" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=arg" })
   arg: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=interval" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=interval" })
   interval: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=script" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=script" })
   script: string;
 }
 
 
 export class AddTimerScriptRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AddTimerScriptPathParams;
 }
 
 
 export class AddTimerScriptResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   addTimerScript200ApplicationJsonString?: string;
 }

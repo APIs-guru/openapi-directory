@@ -1,74 +1,75 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ReposMergePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 
 export class ReposMergeRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=base" })
+  @SpeakeasyMetadata({ data: "json, name=base" })
   base: string;
 
-  @Metadata({ data: "json, name=commit_message" })
+  @SpeakeasyMetadata({ data: "json, name=commit_message" })
   commitMessage?: string;
 
-  @Metadata({ data: "json, name=head" })
+  @SpeakeasyMetadata({ data: "json, name=head" })
   head: string;
 }
 
 
-export class ReposMergeRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: ReposMergePathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: ReposMergeRequestBody;
-}
-
-
 export class ReposMerge404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class ReposMerge409ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentation_url" })
+  @SpeakeasyMetadata({ data: "json, name=documentation_url" })
   documentationUrl?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class ReposMergeRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: ReposMergePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: ReposMergeRequestBody;
+}
+
+
 export class ReposMergeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   commit?: shared.Commit;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reposMerge404ApplicationJsonObject?: ReposMerge404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   reposMerge409ApplicationJsonObject?: ReposMerge409ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

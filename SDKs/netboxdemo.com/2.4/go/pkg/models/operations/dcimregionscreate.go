@@ -5,7 +5,7 @@ import (
 )
 
 type DcimRegionsCreateRequest struct {
-	Request shared.WritableRegion `request:"mediaType=application/json"`
+	Request shared.WritableRegionInput `request:"mediaType=application/json"`
 }
 
 type DcimRegionsCreateResponse struct {

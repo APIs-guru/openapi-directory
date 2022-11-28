@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApprovalRuleEventMetadata
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Returns information about an event for an approval rule.
 **/
 export class ApprovalRuleEventMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approvalRuleContent" })
+  @SpeakeasyMetadata({ data: "json, name=approvalRuleContent" })
   approvalRuleContent?: string;
 
-  @Metadata({ data: "json, name=approvalRuleId" })
+  @SpeakeasyMetadata({ data: "json, name=approvalRuleId" })
   approvalRuleId?: string;
 
-  @Metadata({ data: "json, name=approvalRuleName" })
+  @SpeakeasyMetadata({ data: "json, name=approvalRuleName" })
   approvalRuleName?: string;
 }

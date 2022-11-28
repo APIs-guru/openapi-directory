@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { TierRate } from "./tierrate";
 // PricingExpression
 /**
  * Expresses a mathematical pricing formula. For Example:- `usage_unit: GBy` `tiered_rates:` `[start_usage_amount: 20, unit_price: $10]` `[start_usage_amount: 100, unit_price: $5]` The above expresses a pricing formula where the first 20GB is free, the next 80GB is priced at $10 per GB followed by $5 per GB for additional usage.
@@ -34,31 +34,31 @@ var PricingExpression = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=baseUnit" }),
+        SpeakeasyMetadata({ data: "json, name=baseUnit" }),
         __metadata("design:type", String)
     ], PricingExpression.prototype, "baseUnit", void 0);
     __decorate([
-        Metadata({ data: "json, name=baseUnitConversionFactor" }),
+        SpeakeasyMetadata({ data: "json, name=baseUnitConversionFactor" }),
         __metadata("design:type", Number)
     ], PricingExpression.prototype, "baseUnitConversionFactor", void 0);
     __decorate([
-        Metadata({ data: "json, name=baseUnitDescription" }),
+        SpeakeasyMetadata({ data: "json, name=baseUnitDescription" }),
         __metadata("design:type", String)
     ], PricingExpression.prototype, "baseUnitDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayQuantity" }),
+        SpeakeasyMetadata({ data: "json, name=displayQuantity" }),
         __metadata("design:type", Number)
     ], PricingExpression.prototype, "displayQuantity", void 0);
     __decorate([
-        Metadata({ data: "json, name=tieredRates", elemType: shared.TierRate }),
+        SpeakeasyMetadata({ data: "json, name=tieredRates", elemType: TierRate }),
         __metadata("design:type", Array)
     ], PricingExpression.prototype, "tieredRates", void 0);
     __decorate([
-        Metadata({ data: "json, name=usageUnit" }),
+        SpeakeasyMetadata({ data: "json, name=usageUnit" }),
         __metadata("design:type", String)
     ], PricingExpression.prototype, "usageUnit", void 0);
     __decorate([
-        Metadata({ data: "json, name=usageUnitDescription" }),
+        SpeakeasyMetadata({ data: "json, name=usageUnitDescription" }),
         __metadata("design:type", String)
     ], PricingExpression.prototype, "usageUnitDescription", void 0);
     return PricingExpression;

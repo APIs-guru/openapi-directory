@@ -1,5 +1,7 @@
 package shared
 
+// DestinationPortMapping
+// The port mappings for a specified endpoint IP address (destination).
 type DestinationPortMapping struct {
 	AcceleratorArn             *string                                   `json:"AcceleratorArn,omitempty"`
 	AcceleratorSocketAddresses []SocketAddress                           `json:"AcceleratorSocketAddresses,omitempty"`

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AccountSettingsRequest extends SpeakeasyBase {
-  @Metadata({ data: "form, name=drCallBackUrl;" })
+  @SpeakeasyMetadata({ data: "form, name=drCallBackUrl;" })
   drCallBackUrl?: string;
 
-  @Metadata({ data: "form, name=moCallBackUrl;" })
+  @SpeakeasyMetadata({ data: "form, name=moCallBackUrl;" })
   moCallBackUrl?: string;
 }

@@ -1,5 +1,7 @@
 package shared
 
+// InventoryItem
+// Information collected from managed instances based on your inventory policy document
 type InventoryItem struct {
 	CaptureTime   string              `json:"CaptureTime"`
 	Content       []map[string]string `json:"Content,omitempty"`

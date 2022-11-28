@@ -1,5 +1,8 @@
 package shared
 
+// DefaultResponseDtoOfArticleDto
+// The DefaultResponseDTO Class.
+// Contains fields of DefaultResponse DTO in application.
 type DefaultResponseDtoOfArticleDto struct {
 	IsError           *bool        `json:"isError,omitempty"`
 	Message           *string      `json:"message,omitempty"`

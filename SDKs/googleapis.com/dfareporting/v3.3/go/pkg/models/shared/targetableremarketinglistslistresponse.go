@@ -1,5 +1,7 @@
 package shared
 
+// TargetableRemarketingListsListResponse
+// Targetable remarketing list response
 type TargetableRemarketingListsListResponse struct {
 	Kind                       *string                     `json:"kind,omitempty"`
 	NextPageToken              *string                     `json:"nextPageToken,omitempty"`

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Volumes mounted within the app container. Only applicable in the App Engine flexible environment.
 **/

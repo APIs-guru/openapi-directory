@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Pipeline } from "./pipeline";
+
 
 
 // ListPipelinesResponse
@@ -8,9 +8,9 @@ import { Pipeline } from "./pipeline";
  * A list of the pipelines associated with the current AWS account.
 **/
 export class ListPipelinesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=Pipelines", elemType: shared.Pipeline })
+  @SpeakeasyMetadata({ data: "json, name=Pipelines", elemType: Pipeline })
   pipelines?: Pipeline[];
 }

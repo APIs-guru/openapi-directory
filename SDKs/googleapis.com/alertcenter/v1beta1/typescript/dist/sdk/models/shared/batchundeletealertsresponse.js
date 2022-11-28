@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Status } from "./status";
 // BatchUndeleteAlertsResponse
 /**
  * Response to batch undelete operation on alerts.
@@ -34,11 +34,11 @@ var BatchUndeleteAlertsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=failedAlertStatus", elemType: shared.Status }),
+        SpeakeasyMetadata({ data: "json, name=failedAlertStatus", elemType: Status }),
         __metadata("design:type", Map)
     ], BatchUndeleteAlertsResponse.prototype, "failedAlertStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=successAlertIds" }),
+        SpeakeasyMetadata({ data: "json, name=successAlertIds" }),
         __metadata("design:type", Array)
     ], BatchUndeleteAlertsResponse.prototype, "successAlertIds", void 0);
     return BatchUndeleteAlertsResponse;

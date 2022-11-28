@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetNflTeamsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     draft_teams: Optional[List[shared.DraftTeam]] = field(default=None)
-    status_code: int = field(default=None)
     

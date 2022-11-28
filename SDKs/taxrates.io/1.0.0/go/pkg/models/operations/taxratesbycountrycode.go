@@ -10,10 +10,6 @@ type TaxRatesByCountryCodeQueryParams struct {
 	Zip          *string `queryParam:"style=form,explode=true,name=zip"`
 }
 
-type TaxRatesByCountryCodeRequest struct {
-	QueryParams TaxRatesByCountryCodeQueryParams
-}
-
 type TaxRatesByCountryCode200ApplicationJSONTaxes struct {
 	Country   *string `json:"Country,omitempty"`
 	Type      *string `json:"Type,omitempty"`
@@ -30,6 +26,10 @@ type TaxRatesByCountryCode500ApplicationJSON struct {
 	Code    *string `json:"code,omitempty"`
 	Fields  *string `json:"fields,omitempty"`
 	Message *string `json:"message,omitempty"`
+}
+
+type TaxRatesByCountryCodeRequest struct {
+	QueryParams TaxRatesByCountryCodeQueryParams
 }
 
 type TaxRatesByCountryCodeResponse struct {

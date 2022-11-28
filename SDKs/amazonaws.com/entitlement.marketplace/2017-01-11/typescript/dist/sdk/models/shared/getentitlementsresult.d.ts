@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Entitlement } from "./entitlement";
 /**
  * The GetEntitlementsRequest contains results from the GetEntitlements operation.

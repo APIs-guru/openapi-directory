@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import customrankinginfo
-from . import histogramquery
-from . import jobquery
-from . import requestmetadata
+from sdk import utils
+from . import *
 
 class SearchJobsRequestDiversificationLevelEnum(str, Enum):
     DIVERSIFICATION_LEVEL_UNSPECIFIED = "DIVERSIFICATION_LEVEL_UNSPECIFIED"
@@ -36,18 +35,22 @@ class SearchJobsRequestSearchModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SearchJobsRequest:
-    custom_ranking_info: Optional[customrankinginfo.CustomRankingInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customRankingInfo' }})
-    disable_keyword_match: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disableKeywordMatch' }})
-    diversification_level: Optional[SearchJobsRequestDiversificationLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'diversificationLevel' }})
-    enable_broadening: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enableBroadening' }})
-    histogram_queries: Optional[List[histogramquery.HistogramQuery]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'histogramQueries' }})
-    job_query: Optional[jobquery.JobQuery] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobQuery' }})
-    job_view: Optional[SearchJobsRequestJobViewEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobView' }})
-    keyword_match_mode: Optional[SearchJobsRequestKeywordMatchModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keywordMatchMode' }})
-    max_page_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxPageSize' }})
-    offset: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'offset' }})
-    order_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orderBy' }})
-    page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pageToken' }})
-    request_metadata: Optional[requestmetadata.RequestMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestMetadata' }})
-    search_mode: Optional[SearchJobsRequestSearchModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'searchMode' }})
+    r"""SearchJobsRequest
+    The Request body of the `SearchJobs` call.
+    """
+    
+    custom_ranking_info: Optional[CustomRankingInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customRankingInfo') }})
+    disable_keyword_match: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('disableKeywordMatch') }})
+    diversification_level: Optional[SearchJobsRequestDiversificationLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('diversificationLevel') }})
+    enable_broadening: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enableBroadening') }})
+    histogram_queries: Optional[List[HistogramQuery]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('histogramQueries') }})
+    job_query: Optional[JobQuery] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobQuery') }})
+    job_view: Optional[SearchJobsRequestJobViewEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobView') }})
+    keyword_match_mode: Optional[SearchJobsRequestKeywordMatchModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('keywordMatchMode') }})
+    max_page_size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxPageSize') }})
+    offset: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('offset') }})
+    order_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('orderBy') }})
+    page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pageToken') }})
+    request_metadata: Optional[RequestMetadata] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestMetadata') }})
+    search_mode: Optional[SearchJobsRequestSearchModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('searchMode') }})
     

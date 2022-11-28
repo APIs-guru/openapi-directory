@@ -14,6 +14,8 @@ type UpdateSamplingRuleHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateSamplingRuleRequestBodySamplingRuleUpdate
+// A document specifying changes to a sampling rule's configuration.
 type UpdateSamplingRuleRequestBodySamplingRuleUpdate struct {
 	Attributes    map[string]string `json:"Attributes,omitempty"`
 	FixedRate     *float64          `json:"FixedRate,omitempty"`

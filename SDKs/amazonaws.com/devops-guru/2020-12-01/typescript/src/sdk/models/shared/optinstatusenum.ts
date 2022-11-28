@@ -1,6 +1,7 @@
 
 
+
 export enum OptInStatusEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

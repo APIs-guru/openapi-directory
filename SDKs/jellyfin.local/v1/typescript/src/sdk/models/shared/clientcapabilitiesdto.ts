@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceProfile } from "./deviceprofile";
 import { GeneralCommandTypeEnum } from "./generalcommandtypeenum";
+
 
 
 // ClientCapabilitiesDto
@@ -8,33 +9,33 @@ import { GeneralCommandTypeEnum } from "./generalcommandtypeenum";
  * Client capabilities dto.
 **/
 export class ClientCapabilitiesDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppStoreUrl" })
+  @SpeakeasyMetadata({ data: "json, name=AppStoreUrl" })
   appStoreUrl?: string;
 
-  @Metadata({ data: "json, name=DeviceProfile" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceProfile" })
   deviceProfile?: DeviceProfile;
 
-  @Metadata({ data: "json, name=IconUrl" })
+  @SpeakeasyMetadata({ data: "json, name=IconUrl" })
   iconUrl?: string;
 
-  @Metadata({ data: "json, name=MessageCallbackUrl" })
+  @SpeakeasyMetadata({ data: "json, name=MessageCallbackUrl" })
   messageCallbackUrl?: string;
 
-  @Metadata({ data: "json, name=PlayableMediaTypes" })
+  @SpeakeasyMetadata({ data: "json, name=PlayableMediaTypes" })
   playableMediaTypes?: string[];
 
-  @Metadata({ data: "json, name=SupportedCommands" })
+  @SpeakeasyMetadata({ data: "json, name=SupportedCommands" })
   supportedCommands?: GeneralCommandTypeEnum[];
 
-  @Metadata({ data: "json, name=SupportsContentUploading" })
+  @SpeakeasyMetadata({ data: "json, name=SupportsContentUploading" })
   supportsContentUploading?: boolean;
 
-  @Metadata({ data: "json, name=SupportsMediaControl" })
+  @SpeakeasyMetadata({ data: "json, name=SupportsMediaControl" })
   supportsMediaControl?: boolean;
 
-  @Metadata({ data: "json, name=SupportsPersistentIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=SupportsPersistentIdentifier" })
   supportsPersistentIdentifier?: boolean;
 
-  @Metadata({ data: "json, name=SupportsSync" })
+  @SpeakeasyMetadata({ data: "json, name=SupportsSync" })
   supportsSync?: boolean;
 }

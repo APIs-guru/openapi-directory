@@ -1,5 +1,7 @@
 package shared
 
+// HyperParameterTuningJobConfig
+// Configures a hyperparameter tuning job.
 type HyperParameterTuningJobConfig struct {
 	HyperParameterTuningJobObjective *HyperParameterTuningJobObjective       `json:"HyperParameterTuningJobObjective,omitempty"`
 	ParameterRanges                  *ParameterRanges                        `json:"ParameterRanges,omitempty"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TrialComponent
+// The properties of a trial component as returned by the <a>Search</a> API.
 type TrialComponent struct {
 	CreatedBy          *UserContext                            `json:"CreatedBy,omitempty"`
 	CreationTime       *time.Time                              `json:"CreationTime,omitempty"`

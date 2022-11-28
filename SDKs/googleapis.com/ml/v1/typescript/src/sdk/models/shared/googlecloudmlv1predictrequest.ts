@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleApiHttpBody } from "./googleapihttpbody";
+
 
 
 // GoogleCloudMlV1PredictRequest
@@ -7,6 +8,6 @@ import { GoogleApiHttpBody } from "./googleapihttpbody";
  * Request for predictions to be issued against a trained model.
 **/
 export class GoogleCloudMlV1PredictRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=httpBody" })
+  @SpeakeasyMetadata({ data: "json, name=httpBody" })
   httpBody?: GoogleApiHttpBody;
 }

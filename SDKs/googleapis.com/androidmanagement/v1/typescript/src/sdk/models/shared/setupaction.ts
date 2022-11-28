@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserFacingMessage } from "./userfacingmessage";
 import { LaunchAppAction } from "./launchappaction";
-import { UserFacingMessage } from "./userfacingmessage";
+
 
 
 // SetupAction
@@ -9,12 +9,12 @@ import { UserFacingMessage } from "./userfacingmessage";
  * An action executed during setup.
 **/
 export class SetupAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: UserFacingMessage;
 
-  @Metadata({ data: "json, name=launchApp" })
+  @SpeakeasyMetadata({ data: "json, name=launchApp" })
   launchApp?: LaunchAppAction;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: UserFacingMessage;
 }

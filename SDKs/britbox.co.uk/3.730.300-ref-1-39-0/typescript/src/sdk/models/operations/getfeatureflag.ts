@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetFeatureFlagPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=feature" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=feature" })
   feature: string;
 }
 
 
 export class GetFeatureFlagQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: string;
 }
 
 
 export class GetFeatureFlagRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetFeatureFlagPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetFeatureFlagQueryParams;
 }
 
 
 export class GetFeatureFlagResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   itvFeatureFlag?: shared.ItvFeatureFlag;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceError?: shared.ServiceError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

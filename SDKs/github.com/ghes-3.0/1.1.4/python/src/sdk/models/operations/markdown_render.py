@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MarkdownRenderRequestBodyModeEnum(str, Enum):
     MARKDOWN = "markdown"
@@ -10,9 +12,9 @@ class MarkdownRenderRequestBodyModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MarkdownRenderRequestBody:
-    context: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'context' }})
-    mode: Optional[MarkdownRenderRequestBodyModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mode' }})
-    text: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'text' }})
+    text: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('text') }})
+    context: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('context') }})
+    mode: Optional[MarkdownRenderRequestBodyModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mode') }})
     
 
 @dataclass
@@ -22,8 +24,8 @@ class MarkdownRenderRequest:
 
 @dataclass
 class MarkdownRenderResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     markdown_render_200_text_html_string: Optional[str] = field(default=None)
     

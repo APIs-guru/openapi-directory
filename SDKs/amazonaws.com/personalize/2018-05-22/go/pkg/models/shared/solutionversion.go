@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SolutionVersion
+// An object that provides information about a specific version of a <a>Solution</a>.
 type SolutionVersion struct {
 	CreationDateTime    *time.Time        `json:"creationDateTime,omitempty"`
 	DatasetGroupArn     *string           `json:"datasetGroupArn,omitempty"`

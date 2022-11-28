@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BigQueryIoDetails
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Metadata for a BigQuery connector used by the job.
 **/
 export class BigQueryIoDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataset" })
+  @SpeakeasyMetadata({ data: "json, name=dataset" })
   dataset?: string;
 
-  @Metadata({ data: "json, name=projectId" })
+  @SpeakeasyMetadata({ data: "json, name=projectId" })
   projectId?: string;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: string;
 
-  @Metadata({ data: "json, name=table" })
+  @SpeakeasyMetadata({ data: "json, name=table" })
   table?: string;
 }

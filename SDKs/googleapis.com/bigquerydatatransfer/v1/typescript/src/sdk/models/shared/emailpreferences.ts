@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EmailPreferences
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents preferences for sending email notifications for transfer run events.
 **/
 export class EmailPreferences extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableFailureEmail" })
+  @SpeakeasyMetadata({ data: "json, name=enableFailureEmail" })
   enableFailureEmail?: boolean;
 }

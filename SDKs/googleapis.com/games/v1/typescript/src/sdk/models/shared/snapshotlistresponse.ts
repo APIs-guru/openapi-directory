@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Snapshot } from "./snapshot";
+
 
 
 // SnapshotListResponse
@@ -8,12 +8,12 @@ import { Snapshot } from "./snapshot";
  * A third party list snapshots response.
 **/
 export class SnapshotListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.Snapshot })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Snapshot })
   items?: Snapshot[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

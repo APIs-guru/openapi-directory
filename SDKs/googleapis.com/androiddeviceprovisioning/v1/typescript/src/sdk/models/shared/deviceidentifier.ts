@@ -1,4 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+export enum DeviceIdentifierDeviceTypeEnum {
+    DeviceTypeUnspecified = "DEVICE_TYPE_UNSPECIFIED",
+    DeviceTypeAndroid = "DEVICE_TYPE_ANDROID",
+    DeviceTypeChromeOs = "DEVICE_TYPE_CHROME_OS"
+}
 
 
 // DeviceIdentifier
@@ -6,18 +13,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Encapsulates hardware and product IDs to identify a manufactured device. To understand requirements on identifier sets, read [Identifiers](https://developers.google.com/zero-touch/guides/identifiers).
 **/
 export class DeviceIdentifier extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imei" })
+  @SpeakeasyMetadata({ data: "json, name=chromeOsAttestedDeviceId" })
+  chromeOsAttestedDeviceId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=deviceType" })
+  deviceType?: DeviceIdentifierDeviceTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=imei" })
   imei?: string;
 
-  @Metadata({ data: "json, name=manufacturer" })
+  @SpeakeasyMetadata({ data: "json, name=manufacturer" })
   manufacturer?: string;
 
-  @Metadata({ data: "json, name=meid" })
+  @SpeakeasyMetadata({ data: "json, name=meid" })
   meid?: string;
 
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model?: string;
 
-  @Metadata({ data: "json, name=serialNumber" })
+  @SpeakeasyMetadata({ data: "json, name=serialNumber" })
   serialNumber?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RecipeProviderEnum } from "./recipeproviderenum";
 var ListRecipesRequest = /** @class */ (function (_super) {
     __extends(ListRecipesRequest, _super);
@@ -30,15 +30,15 @@ var ListRecipesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=maxResults" }),
+        SpeakeasyMetadata({ data: "json, name=maxResults" }),
         __metadata("design:type", Number)
     ], ListRecipesRequest.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], ListRecipesRequest.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=recipeProvider" }),
+        SpeakeasyMetadata({ data: "json, name=recipeProvider" }),
         __metadata("design:type", String)
     ], ListRecipesRequest.prototype, "recipeProvider", void 0);
     return ListRecipesRequest;

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StepStateChangeReasonCodeEnum } from "./stepstatechangereasoncodeenum";
+
 
 
 // StepStateChangeReason
@@ -7,9 +8,9 @@ import { StepStateChangeReasonCodeEnum } from "./stepstatechangereasoncodeenum";
  * The details of the step state change reason.
 **/
 export class StepStateChangeReason extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: StepStateChangeReasonCodeEnum;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 }

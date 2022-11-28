@@ -4,10 +4,6 @@ type DeleteSessionUsingPostQueryParams struct {
 	SessionID *string `queryParam:"style=form,explode=true,name=sessionID"`
 }
 
-type DeleteSessionUsingPostRequest struct {
-	QueryParams DeleteSessionUsingPostQueryParams
-}
-
 type DeleteSessionUsingPost200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -30,6 +26,10 @@ type DeleteSessionUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type DeleteSessionUsingPostRequest struct {
+	QueryParams DeleteSessionUsingPostQueryParams
 }
 
 type DeleteSessionUsingPostResponse struct {

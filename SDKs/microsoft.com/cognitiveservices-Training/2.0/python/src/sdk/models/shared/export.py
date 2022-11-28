@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ExportFlavorEnum(str, Enum):
     LINUX = "Linux"
@@ -21,8 +23,8 @@ class ExportStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Export:
-    download_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'downloadUri' }})
-    flavor: Optional[ExportFlavorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'flavor' }})
-    platform: Optional[ExportPlatformEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'platform' }})
-    status: Optional[ExportStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    download_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('downloadUri') }})
+    flavor: Optional[ExportFlavorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('flavor') }})
+    platform: Optional[ExportPlatformEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('platform') }})
+    status: Optional[ExportStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetOwnedNumbersQueryParams = /** @class */ (function (_super) {
     __extends(GetOwnedNumbersQueryParams, _super);
@@ -30,31 +30,31 @@ var GetOwnedNumbersQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=application_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=application_id" }),
         __metadata("design:type", String)
     ], GetOwnedNumbersQueryParams.prototype, "applicationId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" }),
         __metadata("design:type", String)
     ], GetOwnedNumbersQueryParams.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=has_application" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=has_application" }),
         __metadata("design:type", Boolean)
     ], GetOwnedNumbersQueryParams.prototype, "hasApplication", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=index" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=index" }),
         __metadata("design:type", Number)
     ], GetOwnedNumbersQueryParams.prototype, "index", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pattern" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pattern" }),
         __metadata("design:type", String)
     ], GetOwnedNumbersQueryParams.prototype, "pattern", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search_pattern" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search_pattern" }),
         __metadata("design:type", Number)
     ], GetOwnedNumbersQueryParams.prototype, "searchPattern", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=size" }),
         __metadata("design:type", Number)
     ], GetOwnedNumbersQueryParams.prototype, "size", void 0);
     return GetOwnedNumbersQueryParams;
@@ -66,7 +66,7 @@ var GetOwnedNumbersRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetOwnedNumbersQueryParams)
     ], GetOwnedNumbersRequest.prototype, "queryParams", void 0);
     return GetOwnedNumbersRequest;
@@ -78,23 +78,23 @@ var GetOwnedNumbersResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetOwnedNumbersResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetOwnedNumbersResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetOwnedNumbersResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.AccountUnauthorized)
     ], GetOwnedNumbersResponse.prototype, "accountUnauthorized", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.InboundNumbers)
     ], GetOwnedNumbersResponse.prototype, "inboundNumbers", void 0);
     return GetOwnedNumbersResponse;

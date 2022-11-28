@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetInvestigationResultsPathParams = /** @class */ (function (_super) {
     __extends(GetInvestigationResultsPathParams, _super);
@@ -30,7 +30,7 @@ var GetInvestigationResultsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=db" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=db" }),
         __metadata("design:type", String)
     ], GetInvestigationResultsPathParams.prototype, "db", void 0);
     return GetInvestigationResultsPathParams;
@@ -56,27 +56,27 @@ var GetInvestigationResultsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" }),
         __metadata("design:type", String)
     ], GetInvestigationResultsQueryParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=inchikey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=inchikey" }),
         __metadata("design:type", String)
     ], GetInvestigationResultsQueryParams.prototype, "inchikey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GetInvestigationResultsQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=pagesize" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagesize" }),
         __metadata("design:type", Number)
     ], GetInvestigationResultsQueryParams.prototype, "pagesize", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=search" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" }),
         __metadata("design:type", String)
     ], GetInvestigationResultsQueryParams.prototype, "search", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" }),
         __metadata("design:type", String)
     ], GetInvestigationResultsQueryParams.prototype, "type", void 0);
     return GetInvestigationResultsQueryParams;
@@ -88,11 +88,11 @@ var GetInvestigationResultsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetInvestigationResultsPathParams)
     ], GetInvestigationResultsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetInvestigationResultsQueryParams)
     ], GetInvestigationResultsRequest.prototype, "queryParams", void 0);
     return GetInvestigationResultsRequest;
@@ -104,19 +104,19 @@ var GetInvestigationResultsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetInvestigationResultsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetInvestigationResultsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Investigation)
     ], GetInvestigationResultsResponse.prototype, "investigation", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetInvestigationResultsResponse.prototype, "statusCode", void 0);
     return GetInvestigationResultsResponse;

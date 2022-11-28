@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorHandlingConfig } from "./errorhandlingconfig";
 import { WriteOperationTypeEnum } from "./writeoperationtypeenum";
+
 
 
 // ZendeskDestinationProperties
@@ -8,15 +9,15 @@ import { WriteOperationTypeEnum } from "./writeoperationtypeenum";
  * The properties that are applied when Zendesk is used as a destination.
 **/
 export class ZendeskDestinationProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorHandlingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=errorHandlingConfig" })
   errorHandlingConfig?: ErrorHandlingConfig;
 
-  @Metadata({ data: "json, name=idFieldNames" })
+  @SpeakeasyMetadata({ data: "json, name=idFieldNames" })
   idFieldNames?: string[];
 
-  @Metadata({ data: "json, name=object" })
+  @SpeakeasyMetadata({ data: "json, name=object" })
   object: string;
 
-  @Metadata({ data: "json, name=writeOperationType" })
+  @SpeakeasyMetadata({ data: "json, name=writeOperationType" })
   writeOperationType?: WriteOperationTypeEnum;
 }

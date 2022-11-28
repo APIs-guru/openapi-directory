@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FleetUtilization } from "./fleetutilization";
+
 
 
 // DescribeFleetUtilizationOutput
@@ -8,9 +8,9 @@ import { FleetUtilization } from "./fleetutilization";
  * Represents the returned data in response to a request operation.
 **/
 export class DescribeFleetUtilizationOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FleetUtilization", elemType: shared.FleetUtilization })
+  @SpeakeasyMetadata({ data: "json, name=FleetUtilization", elemType: FleetUtilization })
   fleetUtilization?: FleetUtilization[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NodeRangeProperty } from "./noderangeproperty";
+
 
 
 // NodeProperties
@@ -8,12 +8,12 @@ import { NodeRangeProperty } from "./noderangeproperty";
  * An object representing the node properties of a multi-node parallel job.
 **/
 export class NodeProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mainNode" })
+  @SpeakeasyMetadata({ data: "json, name=mainNode" })
   mainNode: number;
 
-  @Metadata({ data: "json, name=nodeRangeProperties", elemType: shared.NodeRangeProperty })
+  @SpeakeasyMetadata({ data: "json, name=nodeRangeProperties", elemType: NodeRangeProperty })
   nodeRangeProperties: NodeRangeProperty[];
 
-  @Metadata({ data: "json, name=numNodes" })
+  @SpeakeasyMetadata({ data: "json, name=numNodes" })
   numNodes: number;
 }

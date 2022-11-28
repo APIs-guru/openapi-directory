@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetItemPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class GetItemExpandEnum(str, Enum):
     ALL = "all"
@@ -33,14 +34,14 @@ class GetItemQueryParams:
 
 @dataclass
 class GetItemRequest:
-    path_params: GetItemPathParams = field(default=None)
-    query_params: GetItemQueryParams = field(default=None)
+    path_params: GetItemPathParams = field()
+    query_params: GetItemQueryParams = field()
     
 
 @dataclass
 class GetItemResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     item_detail: Optional[shared.ItemDetail] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

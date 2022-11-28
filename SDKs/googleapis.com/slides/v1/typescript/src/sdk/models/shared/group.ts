@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PageElement } from "./pageelement";
+
 
 
 // Group
@@ -8,6 +8,6 @@ import { PageElement } from "./pageelement";
  * A PageElement kind representing a joined collection of PageElements.
 **/
 export class Group extends SpeakeasyBase {
-  @Metadata({ data: "json, name=children", elemType: shared.PageElement })
+  @SpeakeasyMetadata({ data: "json, name=children", elemType: PageElement })
   children?: PageElement[];
 }

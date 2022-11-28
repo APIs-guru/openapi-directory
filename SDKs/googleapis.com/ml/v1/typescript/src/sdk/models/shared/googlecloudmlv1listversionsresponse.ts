@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudMlV1Version } from "./googlecloudmlv1version";
+
 
 
 // GoogleCloudMlV1ListVersionsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudMlV1Version } from "./googlecloudmlv1version";
  * Response message for the ListVersions method.
 **/
 export class GoogleCloudMlV1ListVersionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=versions", elemType: shared.GoogleCloudMlV1Version })
+  @SpeakeasyMetadata({ data: "json, name=versions", elemType: GoogleCloudMlV1Version })
   versions?: GoogleCloudMlV1Version[];
 }

@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ItemUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=config_request" })
+  @SpeakeasyMetadata({ data: "json, name=config_request" })
   configRequest?: Map<string, any>;
 
-  @Metadata({ data: "json, name=custom" })
+  @SpeakeasyMetadata({ data: "json, name=custom" })
   custom?: any;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=location_request" })
+  @SpeakeasyMetadata({ data: "json, name=location_request" })
   locationRequest?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: Map<string, any>;
 }

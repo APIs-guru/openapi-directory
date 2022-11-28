@@ -1,7 +1,8 @@
 
 
+
 export enum AppTypeEnum {
-    JupyterServer = "JupyterServer"
-,    KernelGateway = "KernelGateway"
-,    TensorBoard = "TensorBoard"
+    JupyterServer = "JupyterServer",
+    KernelGateway = "KernelGateway",
+    TensorBoard = "TensorBoard"
 }

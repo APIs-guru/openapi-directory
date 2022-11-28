@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DiscussionTopicContract } from "./discussiontopiccontract";
 
 
+
 export class PartialFindResultDiscussionTopicContract extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.DiscussionTopicContract })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: DiscussionTopicContract })
   items?: DiscussionTopicContract[];
 
-  @Metadata({ data: "json, name=term" })
+  @SpeakeasyMetadata({ data: "json, name=term" })
   term?: string;
 
-  @Metadata({ data: "json, name=totalCount" })
+  @SpeakeasyMetadata({ data: "json, name=totalCount" })
   totalCount?: number;
 }

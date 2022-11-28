@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Method } from "./method";
 // Resource
 /**
  * <p>Represents an API resource.</p> <div class="seeAlso"> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html">Create an API</a> </div>
@@ -34,23 +34,23 @@ var Resource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Resource.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=parentId" }),
+        SpeakeasyMetadata({ data: "json, name=parentId" }),
         __metadata("design:type", String)
     ], Resource.prototype, "parentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=path" }),
+        SpeakeasyMetadata({ data: "json, name=path" }),
         __metadata("design:type", String)
     ], Resource.prototype, "path", void 0);
     __decorate([
-        Metadata({ data: "json, name=pathPart" }),
+        SpeakeasyMetadata({ data: "json, name=pathPart" }),
         __metadata("design:type", String)
     ], Resource.prototype, "pathPart", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceMethods", elemType: shared.Method }),
+        SpeakeasyMetadata({ data: "json, name=resourceMethods", elemType: Method }),
         __metadata("design:type", Map)
     ], Resource.prototype, "resourceMethods", void 0);
     return Resource;

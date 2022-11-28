@@ -1,6 +1,7 @@
 
 
+
 export enum StopStatusEnum {
-    Pending = "Pending"
-,    Succeeded = "Succeeded"
+    Pending = "Pending",
+    Succeeded = "Succeeded"
 }

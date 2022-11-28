@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NeptuneSettings
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information that defines an Amazon Neptune endpoint.
 **/
 export class NeptuneSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ErrorRetryDuration" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorRetryDuration" })
   errorRetryDuration?: number;
 
-  @Metadata({ data: "json, name=IamAuthEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=IamAuthEnabled" })
   iamAuthEnabled?: boolean;
 
-  @Metadata({ data: "json, name=MaxFileSize" })
+  @SpeakeasyMetadata({ data: "json, name=MaxFileSize" })
   maxFileSize?: number;
 
-  @Metadata({ data: "json, name=MaxRetryCount" })
+  @SpeakeasyMetadata({ data: "json, name=MaxRetryCount" })
   maxRetryCount?: number;
 
-  @Metadata({ data: "json, name=S3BucketFolder" })
+  @SpeakeasyMetadata({ data: "json, name=S3BucketFolder" })
   s3BucketFolder: string;
 
-  @Metadata({ data: "json, name=S3BucketName" })
+  @SpeakeasyMetadata({ data: "json, name=S3BucketName" })
   s3BucketName: string;
 
-  @Metadata({ data: "json, name=ServiceAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceAccessRoleArn" })
   serviceAccessRoleArn?: string;
 }

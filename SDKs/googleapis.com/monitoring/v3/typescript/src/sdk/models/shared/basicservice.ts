@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BasicService
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A well-known service type, defined by its service type and service labels. Documentation and examples here (https://cloud.google.com/stackdriver/docs/solutions/slo-monitoring/api/api-structures#basic-svc-w-basic-sli).
 **/
 export class BasicService extends SpeakeasyBase {
-  @Metadata({ data: "json, name=serviceLabels" })
+  @SpeakeasyMetadata({ data: "json, name=serviceLabels" })
   serviceLabels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=serviceType" })
+  @SpeakeasyMetadata({ data: "json, name=serviceType" })
   serviceType?: string;
 }

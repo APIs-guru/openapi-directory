@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DescribeTrustsRequest
 /**
  * Describes the trust relationships for a particular Managed Microsoft AD directory. If no input parameters are provided, such as directory ID or trust ID, this request describes all the trust relationships.
@@ -33,19 +33,19 @@ var DescribeTrustsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DirectoryId" }),
+        SpeakeasyMetadata({ data: "json, name=DirectoryId" }),
         __metadata("design:type", String)
     ], DescribeTrustsRequest.prototype, "directoryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Limit" }),
+        SpeakeasyMetadata({ data: "json, name=Limit" }),
         __metadata("design:type", Number)
     ], DescribeTrustsRequest.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], DescribeTrustsRequest.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=TrustIds" }),
+        SpeakeasyMetadata({ data: "json, name=TrustIds" }),
         __metadata("design:type", Array)
     ], DescribeTrustsRequest.prototype, "trustIds", void 0);
     return DescribeTrustsRequest;

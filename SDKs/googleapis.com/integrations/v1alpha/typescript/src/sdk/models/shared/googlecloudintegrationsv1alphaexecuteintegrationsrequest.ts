@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIntegrationsV1alphaValueType } from "./googlecloudintegrationsv1alphavaluetype";
 import { EnterpriseCrmFrontendsEventbusProtoParameterEntry } from "./enterprisecrmfrontendseventbusprotoparameterentry";
 import { EnterpriseCrmFrontendsEventbusProtoEventParameters } from "./enterprisecrmfrontendseventbusprotoeventparameters";
+
 
 
 // GoogleCloudIntegrationsV1alphaExecuteIntegrationsRequest
@@ -10,24 +10,24 @@ import { EnterpriseCrmFrontendsEventbusProtoEventParameters } from "./enterprise
  * The request for executing an integration.
 **/
 export class GoogleCloudIntegrationsV1alphaExecuteIntegrationsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=doNotPropagateError" })
+  @SpeakeasyMetadata({ data: "json, name=doNotPropagateError" })
   doNotPropagateError?: boolean;
 
-  @Metadata({ data: "json, name=executionId" })
+  @SpeakeasyMetadata({ data: "json, name=executionId" })
   executionId?: string;
 
-  @Metadata({ data: "json, name=inputParameters", elemType: shared.GoogleCloudIntegrationsV1alphaValueType })
+  @SpeakeasyMetadata({ data: "json, name=inputParameters", elemType: GoogleCloudIntegrationsV1alphaValueType })
   inputParameters?: Map<string, GoogleCloudIntegrationsV1alphaValueType>;
 
-  @Metadata({ data: "json, name=parameterEntries", elemType: shared.EnterpriseCrmFrontendsEventbusProtoParameterEntry })
+  @SpeakeasyMetadata({ data: "json, name=parameterEntries", elemType: EnterpriseCrmFrontendsEventbusProtoParameterEntry })
   parameterEntries?: EnterpriseCrmFrontendsEventbusProtoParameterEntry[];
 
-  @Metadata({ data: "json, name=parameters" })
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
   parameters?: EnterpriseCrmFrontendsEventbusProtoEventParameters;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 
-  @Metadata({ data: "json, name=triggerId" })
+  @SpeakeasyMetadata({ data: "json, name=triggerId" })
   triggerId?: string;
 }

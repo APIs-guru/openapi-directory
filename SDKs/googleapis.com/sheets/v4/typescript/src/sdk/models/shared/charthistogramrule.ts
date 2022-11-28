@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ChartHistogramRule
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Allows you to organize numeric values in a source data column into buckets of constant size.
 **/
 export class ChartHistogramRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=intervalSize" })
+  @SpeakeasyMetadata({ data: "json, name=intervalSize" })
   intervalSize?: number;
 
-  @Metadata({ data: "json, name=maxValue" })
+  @SpeakeasyMetadata({ data: "json, name=maxValue" })
   maxValue?: number;
 
-  @Metadata({ data: "json, name=minValue" })
+  @SpeakeasyMetadata({ data: "json, name=minValue" })
   minValue?: number;
 }

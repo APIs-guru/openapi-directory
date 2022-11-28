@@ -1,20 +1,22 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import cdnsettings
-from . import livestreamcontentdetails
-from . import livestreamsnippet
-from . import livestreamstatus
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LiveStream:
-    cdn: Optional[cdnsettings.CdnSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cdn' }})
-    content_details: Optional[livestreamcontentdetails.LiveStreamContentDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contentDetails' }})
-    etag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'etag' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    snippet: Optional[livestreamsnippet.LiveStreamSnippet] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'snippet' }})
-    status: Optional[livestreamstatus.LiveStreamStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""LiveStream
+    A live stream describes a live ingestion point.
+    """
+    
+    cdn: Optional[CdnSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cdn') }})
+    content_details: Optional[LiveStreamContentDetails] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contentDetails') }})
+    etag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('etag') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    snippet: Optional[LiveStreamSnippet] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('snippet') }})
+    status: Optional[LiveStreamStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

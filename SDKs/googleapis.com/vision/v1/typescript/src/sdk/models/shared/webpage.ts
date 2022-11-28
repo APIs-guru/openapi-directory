@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WebImage } from "./webimage";
-import { WebImage } from "./webimage";
+
 
 
 // WebPage
@@ -9,18 +8,18 @@ import { WebImage } from "./webimage";
  * Metadata for web pages.
 **/
 export class WebPage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fullMatchingImages", elemType: shared.WebImage })
+  @SpeakeasyMetadata({ data: "json, name=fullMatchingImages", elemType: WebImage })
   fullMatchingImages?: WebImage[];
 
-  @Metadata({ data: "json, name=pageTitle" })
+  @SpeakeasyMetadata({ data: "json, name=pageTitle" })
   pageTitle?: string;
 
-  @Metadata({ data: "json, name=partialMatchingImages", elemType: shared.WebImage })
+  @SpeakeasyMetadata({ data: "json, name=partialMatchingImages", elemType: WebImage })
   partialMatchingImages?: WebImage[];
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: number;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

@@ -1,82 +1,83 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GitCreateTreePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=owner" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=owner" })
   owner: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=repo" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=repo" })
   repo: string;
 }
 
 export enum GitCreateTreeRequestBodyTreeModeEnum {
-    OneHundredThousandSixHundredAndFortyFour = "100644"
-,    OneHundredThousandSevenHundredAndFiftyFive = "100755"
-,    FortyThousand = "040000"
-,    OneHundredAndSixtyThousand = "160000"
-,    OneHundredAndTwentyThousand = "120000"
+    OneHundredThousandSixHundredAndFortyFour = "100644",
+    OneHundredThousandSevenHundredAndFiftyFive = "100755",
+    FortyThousand = "040000",
+    OneHundredAndSixtyThousand = "160000",
+    OneHundredAndTwentyThousand = "120000"
 }
 
 export enum GitCreateTreeRequestBodyTreeTypeEnum {
-    Blob = "blob"
-,    Tree = "tree"
-,    Commit = "commit"
+    Blob = "blob",
+    Tree = "tree",
+    Commit = "commit"
 }
 
 
 export class GitCreateTreeRequestBodyTree extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=mode" })
+  @SpeakeasyMetadata({ data: "json, name=mode" })
   mode?: GitCreateTreeRequestBodyTreeModeEnum;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=sha" })
+  @SpeakeasyMetadata({ data: "json, name=sha" })
   sha?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: GitCreateTreeRequestBodyTreeTypeEnum;
 }
 
 
 export class GitCreateTreeRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=base_tree" })
+  @SpeakeasyMetadata({ data: "json, name=base_tree" })
   baseTree?: string;
 
-  @Metadata({ data: "json, name=tree", elemType: operations.GitCreateTreeRequestBodyTree })
+  @SpeakeasyMetadata({ data: "json, name=tree", elemType: GitCreateTreeRequestBodyTree })
   tree: GitCreateTreeRequestBodyTree[];
 }
 
 
 export class GitCreateTreeRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GitCreateTreePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: GitCreateTreeRequestBody;
 }
 
 
 export class GitCreateTreeResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   gitTree?: shared.GitTree;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

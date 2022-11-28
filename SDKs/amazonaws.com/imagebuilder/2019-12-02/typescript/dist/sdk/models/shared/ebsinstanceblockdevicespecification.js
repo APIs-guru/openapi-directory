@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EbsVolumeTypeEnum } from "./ebsvolumetypeenum";
 // EbsInstanceBlockDeviceSpecification
 /**
@@ -34,31 +34,31 @@ var EbsInstanceBlockDeviceSpecification = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deleteOnTermination" }),
+        SpeakeasyMetadata({ data: "json, name=deleteOnTermination" }),
         __metadata("design:type", Boolean)
     ], EbsInstanceBlockDeviceSpecification.prototype, "deleteOnTermination", void 0);
     __decorate([
-        Metadata({ data: "json, name=encrypted" }),
+        SpeakeasyMetadata({ data: "json, name=encrypted" }),
         __metadata("design:type", Boolean)
     ], EbsInstanceBlockDeviceSpecification.prototype, "encrypted", void 0);
     __decorate([
-        Metadata({ data: "json, name=iops" }),
+        SpeakeasyMetadata({ data: "json, name=iops" }),
         __metadata("design:type", Number)
     ], EbsInstanceBlockDeviceSpecification.prototype, "iops", void 0);
     __decorate([
-        Metadata({ data: "json, name=kmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=kmsKeyId" }),
         __metadata("design:type", String)
     ], EbsInstanceBlockDeviceSpecification.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=snapshotId" }),
+        SpeakeasyMetadata({ data: "json, name=snapshotId" }),
         __metadata("design:type", String)
     ], EbsInstanceBlockDeviceSpecification.prototype, "snapshotId", void 0);
     __decorate([
-        Metadata({ data: "json, name=volumeSize" }),
+        SpeakeasyMetadata({ data: "json, name=volumeSize" }),
         __metadata("design:type", Number)
     ], EbsInstanceBlockDeviceSpecification.prototype, "volumeSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=volumeType" }),
+        SpeakeasyMetadata({ data: "json, name=volumeType" }),
         __metadata("design:type", String)
     ], EbsInstanceBlockDeviceSpecification.prototype, "volumeType", void 0);
     return EbsInstanceBlockDeviceSpecification;

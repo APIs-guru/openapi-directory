@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Attributes } from "./attributes";
 import { TruncatableString } from "./truncatablestring";
 import { Status } from "./status";

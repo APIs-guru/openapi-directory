@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatalabelingV1beta1CsvInstruction
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Deprecated: this instruction format is not supported any more. Instruction from a CSV file.
 **/
 export class GoogleCloudDatalabelingV1beta1CsvInstruction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gcsFileUri" })
+  @SpeakeasyMetadata({ data: "json, name=gcsFileUri" })
   gcsFileUri?: string;
 }

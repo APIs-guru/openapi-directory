@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NameValuePair } from "./namevaluepair";
 import { NameIdPair } from "./nameidpair";
 import { TunerChannelMapping } from "./tunerchannelmapping";
+
 
 
 // ChannelMappingOptionsDto
@@ -10,15 +10,15 @@ import { TunerChannelMapping } from "./tunerchannelmapping";
  * Channel mapping options dto.
 **/
 export class ChannelMappingOptionsDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Mappings", elemType: shared.NameValuePair })
+  @SpeakeasyMetadata({ data: "json, name=Mappings", elemType: NameValuePair })
   mappings?: NameValuePair[];
 
-  @Metadata({ data: "json, name=ProviderChannels", elemType: shared.NameIdPair })
+  @SpeakeasyMetadata({ data: "json, name=ProviderChannels", elemType: NameIdPair })
   providerChannels?: NameIdPair[];
 
-  @Metadata({ data: "json, name=ProviderName" })
+  @SpeakeasyMetadata({ data: "json, name=ProviderName" })
   providerName?: string;
 
-  @Metadata({ data: "json, name=TunerChannels", elemType: shared.TunerChannelMapping })
+  @SpeakeasyMetadata({ data: "json, name=TunerChannels", elemType: TunerChannelMapping })
   tunerChannels?: TunerChannelMapping[];
 }

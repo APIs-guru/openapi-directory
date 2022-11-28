@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GetPlacementGroupsSortEnum(str, Enum):
     ID = "id"
@@ -25,26 +27,21 @@ class GetPlacementGroupsQueryParams:
     type: Optional[GetPlacementGroupsTypeParameterTypeEnum] = field(default=None, metadata={'query_param': { 'field_name': 'type', 'style': 'form', 'explode': True }})
     
 
-@dataclass
-class GetPlacementGroupsRequest:
-    query_params: GetPlacementGroupsQueryParams = field(default=None)
-    
-
 @dataclass_json
 @dataclass
 class GetPlacementGroupsPlacementGroupsResponseMetaPagination:
-    last_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_page' }})
-    next_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page' }})
-    page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
-    per_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'per_page' }})
-    previous_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'previous_page' }})
-    total_entries: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total_entries' }})
+    last_page: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('last_page') }})
+    next_page: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('next_page') }})
+    page: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('page') }})
+    per_page: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('per_page') }})
+    previous_page: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('previous_page') }})
+    total_entries: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total_entries') }})
     
 
 @dataclass_json
 @dataclass
 class GetPlacementGroupsPlacementGroupsResponseMeta:
-    pagination: GetPlacementGroupsPlacementGroupsResponseMetaPagination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagination' }})
+    pagination: GetPlacementGroupsPlacementGroupsResponseMetaPagination = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pagination') }})
     
 class GetPlacementGroupsPlacementGroupsResponsePlacementGroupTypeEnum(str, Enum):
     SPREAD = "spread"
@@ -53,24 +50,29 @@ class GetPlacementGroupsPlacementGroupsResponsePlacementGroupTypeEnum(str, Enum)
 @dataclass_json
 @dataclass
 class GetPlacementGroupsPlacementGroupsResponsePlacementGroup:
-    created: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    labels: dict[str, str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    servers: List[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'servers' }})
-    type: GetPlacementGroupsPlacementGroupsResponsePlacementGroupTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    created: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created') }})
+    id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    labels: dict[str, str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    servers: List[int] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('servers') }})
+    type: GetPlacementGroupsPlacementGroupsResponsePlacementGroupTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     
 
 @dataclass_json
 @dataclass
 class GetPlacementGroupsPlacementGroupsResponse:
-    meta: Optional[GetPlacementGroupsPlacementGroupsResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
-    placement_groups: List[GetPlacementGroupsPlacementGroupsResponsePlacementGroup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'placement_groups' }})
+    placement_groups: List[GetPlacementGroupsPlacementGroupsResponsePlacementGroup] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('placement_groups') }})
+    meta: Optional[GetPlacementGroupsPlacementGroupsResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('meta') }})
+    
+
+@dataclass
+class GetPlacementGroupsRequest:
+    query_params: GetPlacementGroupsQueryParams = field()
     
 
 @dataclass
 class GetPlacementGroupsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     placement_groups_response: Optional[GetPlacementGroupsPlacementGroupsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// Order
+// This type contains the details of an order, including information about the buyer, order history, shipping fulfillments, line items, costs, payments, and order fulfillment status.
 type Order struct {
 	Buyer                        *Buyer                        `json:"buyer,omitempty"`
 	BuyerCheckoutNotes           *string                       `json:"buyerCheckoutNotes,omitempty"`

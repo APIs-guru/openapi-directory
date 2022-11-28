@@ -1,8 +1,9 @@
 
 
+
 export enum DirectoryTypeEnum {
-    SimpleAd = "SimpleAD"
-,    AdConnector = "ADConnector"
-,    MicrosoftAd = "MicrosoftAD"
-,    SharedMicrosoftAd = "SharedMicrosoftAD"
+    SimpleAd = "SimpleAD",
+    AdConnector = "ADConnector",
+    MicrosoftAd = "MicrosoftAD",
+    SharedMicrosoftAd = "SharedMicrosoftAD"
 }

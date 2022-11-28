@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ImageTestsConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Image tests configuration.
 **/
 export class ImageTestsConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageTestsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=imageTestsEnabled" })
   imageTestsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=timeoutMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=timeoutMinutes" })
   timeoutMinutes?: number;
 }

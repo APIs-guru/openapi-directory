@@ -14,13 +14,13 @@ class DealersGetDealersQueryParams:
 
 @dataclass
 class DealersGetDealersRequest:
-    query_params: DealersGetDealersQueryParams = field(default=None)
+    query_params: DealersGetDealersQueryParams = field()
     
 
 @dataclass
 class DealersGetDealersResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     api_paged_response_dealer_db_models_dealer_: Optional[shared.APIPagedResponseDealerDbModelsDealer] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

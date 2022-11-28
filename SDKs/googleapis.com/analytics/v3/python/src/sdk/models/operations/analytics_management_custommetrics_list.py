@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AnalyticsManagementCustomMetricsListPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    web_property_id: str = field(default=None, metadata={'path_param': { 'field_name': 'webPropertyId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    web_property_id: str = field(metadata={'path_param': { 'field_name': 'webPropertyId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -24,14 +25,14 @@ class AnalyticsManagementCustomMetricsListQueryParams:
 
 @dataclass
 class AnalyticsManagementCustomMetricsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AnalyticsManagementCustomMetricsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -42,14 +43,14 @@ class AnalyticsManagementCustomMetricsListSecurity:
 
 @dataclass
 class AnalyticsManagementCustomMetricsListRequest:
-    path_params: AnalyticsManagementCustomMetricsListPathParams = field(default=None)
-    query_params: AnalyticsManagementCustomMetricsListQueryParams = field(default=None)
-    security: AnalyticsManagementCustomMetricsListSecurity = field(default=None)
+    path_params: AnalyticsManagementCustomMetricsListPathParams = field()
+    query_params: AnalyticsManagementCustomMetricsListQueryParams = field()
+    security: AnalyticsManagementCustomMetricsListSecurity = field()
     
 
 @dataclass
 class AnalyticsManagementCustomMetricsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     custom_metrics: Optional[shared.CustomMetrics] = field(default=None)
-    status_code: int = field(default=None)
     

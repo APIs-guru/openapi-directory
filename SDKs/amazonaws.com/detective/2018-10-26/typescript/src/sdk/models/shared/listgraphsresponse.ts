@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Graph } from "./graph";
 
 
+
 export class ListGraphsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GraphList", elemType: shared.Graph })
+  @SpeakeasyMetadata({ data: "json, name=GraphList", elemType: Graph })
   graphList?: Graph[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

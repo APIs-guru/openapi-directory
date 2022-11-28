@@ -1,5 +1,7 @@
 package shared
 
+// ApplicationSettingsResource
+// Provides information about an application, including the default settings for an application.
 type ApplicationSettingsResource struct {
 	ApplicationID    string          `json:"ApplicationId"`
 	CampaignHook     *CampaignHook   `json:"CampaignHook,omitempty"`

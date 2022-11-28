@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Definition } from "./definition";
-import { Definition } from "./definition";
+
 
 
 // Header
@@ -9,9 +8,9 @@ import { Definition } from "./definition";
  * Type that defines the headers for the dimension keys and metrics returned in the report.
 **/
 export class Header extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dimensionKeys", elemType: shared.Definition })
+  @SpeakeasyMetadata({ data: "json, name=dimensionKeys", elemType: Definition })
   dimensionKeys?: Definition[];
 
-  @Metadata({ data: "json, name=metrics", elemType: shared.Definition })
+  @SpeakeasyMetadata({ data: "json, name=metrics", elemType: Definition })
   metrics?: Definition[];
 }

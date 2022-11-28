@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * The deserialized form of the <b>Energy Footprint Update</b> service's request payload.
 **/

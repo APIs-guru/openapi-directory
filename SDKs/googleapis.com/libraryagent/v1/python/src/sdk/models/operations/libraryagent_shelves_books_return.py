@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class LibraryagentShelvesBooksReturnPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class LibraryagentShelvesBooksReturnQueryParams:
 
 @dataclass
 class LibraryagentShelvesBooksReturnSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class LibraryagentShelvesBooksReturnRequest:
-    path_params: LibraryagentShelvesBooksReturnPathParams = field(default=None)
-    query_params: LibraryagentShelvesBooksReturnQueryParams = field(default=None)
-    security: LibraryagentShelvesBooksReturnSecurity = field(default=None)
+    path_params: LibraryagentShelvesBooksReturnPathParams = field()
+    query_params: LibraryagentShelvesBooksReturnQueryParams = field()
+    security: LibraryagentShelvesBooksReturnSecurity = field()
     
 
 @dataclass
 class LibraryagentShelvesBooksReturnResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_example_libraryagent_v1_book: Optional[shared.GoogleExampleLibraryagentV1Book] = field(default=None)
-    status_code: int = field(default=None)
     

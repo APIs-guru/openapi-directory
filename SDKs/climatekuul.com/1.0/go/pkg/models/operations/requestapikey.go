@@ -1,6 +1,6 @@
 package operations
 
-var RequestAPIKeyServers = []string{
+var RequestAPIKeyServerList = []string{
 	"http://api.climatekuul.com:8000/footprint",
 }
 

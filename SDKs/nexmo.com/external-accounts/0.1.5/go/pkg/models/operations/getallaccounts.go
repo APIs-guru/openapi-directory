@@ -18,22 +18,9 @@ type GetAllAccountsQueryParams struct {
 	Provider   *GetAllAccountsProviderEnum `queryParam:"style=form,explode=true,name=provider"`
 }
 
-type GetAllAccountsSecurityOption1 struct {
-	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
-}
-
-type GetAllAccountsSecurityOption2 struct {
-	BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
-}
-
 type GetAllAccountsSecurity struct {
-	Option1 *GetAllAccountsSecurityOption1 `security:"option"`
-	Option2 *GetAllAccountsSecurityOption2 `security:"option"`
-}
-
-type GetAllAccountsRequest struct {
-	QueryParams GetAllAccountsQueryParams
-	Security    GetAllAccountsSecurity
+	BearerAuth *shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
+	BasicAuth  *shared.SchemeBasicAuth  `security:"scheme,type=http,subtype=basic"`
 }
 
 type GetAllAccounts200ApplicationJSONLinksFirst struct {
@@ -69,6 +56,11 @@ type GetAllAccounts200ApplicationJSON struct {
 	Links      *GetAllAccounts200ApplicationJSONLinks `json:"_links,omitempty"`
 	PageNumber *int64                                 `json:"page_number,omitempty"`
 	PageSize   *int64                                 `json:"page_size,omitempty"`
+}
+
+type GetAllAccountsRequest struct {
+	QueryParams GetAllAccountsQueryParams
+	Security    GetAllAccountsSecurity
 }
 
 type GetAllAccountsResponse struct {

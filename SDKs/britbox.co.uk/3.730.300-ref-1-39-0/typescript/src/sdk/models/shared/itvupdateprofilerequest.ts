@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ItvUpdateProfileRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dateOfBirth" })
+  @SpeakeasyMetadata({ data: "json, name=dateOfBirth" })
   dateOfBirth?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=postcode" })
+  @SpeakeasyMetadata({ data: "json, name=postcode" })
   postcode?: string;
 
-  @Metadata({ data: "json, name=profileToken" })
+  @SpeakeasyMetadata({ data: "json, name=profileToken" })
   profileToken: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

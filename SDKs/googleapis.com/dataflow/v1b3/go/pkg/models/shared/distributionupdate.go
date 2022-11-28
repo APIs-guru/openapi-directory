@@ -1,5 +1,7 @@
 package shared
 
+// DistributionUpdate
+// A metric value representing a distribution.
 type DistributionUpdate struct {
 	Count        *SplitInt64 `json:"count,omitempty"`
 	Histogram    *Histogram  `json:"histogram,omitempty"`

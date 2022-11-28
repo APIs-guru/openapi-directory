@@ -9,6 +9,8 @@ const (
 	RescheduleMaintenanceRequestRescheduleTypeEnumSpecificTime              RescheduleMaintenanceRequestRescheduleTypeEnum = "SPECIFIC_TIME"
 )
 
+// RescheduleMaintenanceRequest
+// Request for RescheduleMaintenance.
 type RescheduleMaintenanceRequest struct {
 	RescheduleType *RescheduleMaintenanceRequestRescheduleTypeEnum `json:"rescheduleType,omitempty"`
 	ScheduleTime   *string                                         `json:"scheduleTime,omitempty"`

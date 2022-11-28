@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import targetworkspacestate_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ModifyWorkspaceStateRequest:
-    workspace_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WorkspaceId' }})
-    workspace_state: targetworkspacestate_enum.TargetWorkspaceStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WorkspaceState' }})
+    workspace_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('WorkspaceId') }})
+    workspace_state: TargetWorkspaceStateEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('WorkspaceState') }})
     

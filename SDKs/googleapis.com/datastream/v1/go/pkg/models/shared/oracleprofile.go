@@ -1,5 +1,7 @@
 package shared
 
+// OracleProfile
+// Oracle database profile.
 type OracleProfile struct {
 	ConnectionAttributes map[string]string `json:"connectionAttributes,omitempty"`
 	DatabaseService      *string           `json:"databaseService,omitempty"`

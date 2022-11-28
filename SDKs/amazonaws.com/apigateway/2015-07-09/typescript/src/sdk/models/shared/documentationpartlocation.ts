@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DocumentationPartTypeEnum } from "./documentationparttypeenum";
+
 
 
 // DocumentationPartLocation
@@ -7,18 +8,18 @@ import { DocumentationPartTypeEnum } from "./documentationparttypeenum";
  * Specifies the target API entity to which the documentation applies.
 **/
 export class DocumentationPartLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=statusCode" })
+  @SpeakeasyMetadata({ data: "json, name=statusCode" })
   statusCode?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: DocumentationPartTypeEnum;
 }

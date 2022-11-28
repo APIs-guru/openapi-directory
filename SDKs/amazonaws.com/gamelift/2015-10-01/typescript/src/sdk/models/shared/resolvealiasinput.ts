@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ResolveAliasInput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input for a request operation.
 **/
 export class ResolveAliasInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AliasId" })
+  @SpeakeasyMetadata({ data: "json, name=AliasId" })
   aliasId: string;
 }

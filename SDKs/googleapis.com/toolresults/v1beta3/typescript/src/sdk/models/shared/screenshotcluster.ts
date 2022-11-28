@@ -1,19 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Screen } from "./screen";
-import { Screen } from "./screen";
+
 
 
 export class ScreenshotCluster extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activity" })
+  @SpeakeasyMetadata({ data: "json, name=activity" })
   activity?: string;
 
-  @Metadata({ data: "json, name=clusterId" })
+  @SpeakeasyMetadata({ data: "json, name=clusterId" })
   clusterId?: string;
 
-  @Metadata({ data: "json, name=keyScreen" })
+  @SpeakeasyMetadata({ data: "json, name=keyScreen" })
   keyScreen?: Screen;
 
-  @Metadata({ data: "json, name=screens", elemType: shared.Screen })
+  @SpeakeasyMetadata({ data: "json, name=screens", elemType: Screen })
   screens?: Screen[];
 }

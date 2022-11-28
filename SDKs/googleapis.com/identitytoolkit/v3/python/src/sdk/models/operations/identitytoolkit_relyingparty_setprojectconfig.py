@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -16,20 +17,20 @@ class IdentitytoolkitRelyingpartySetProjectConfigQueryParams:
 
 @dataclass
 class IdentitytoolkitRelyingpartySetProjectConfigSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IdentitytoolkitRelyingpartySetProjectConfigRequest:
-    query_params: IdentitytoolkitRelyingpartySetProjectConfigQueryParams = field(default=None)
+    query_params: IdentitytoolkitRelyingpartySetProjectConfigQueryParams = field()
+    security: IdentitytoolkitRelyingpartySetProjectConfigSecurity = field()
     request: Optional[shared.IdentitytoolkitRelyingpartySetProjectConfigRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IdentitytoolkitRelyingpartySetProjectConfigSecurity = field(default=None)
     
 
 @dataclass
 class IdentitytoolkitRelyingpartySetProjectConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     identitytoolkit_relyingparty_set_project_config_response: Optional[shared.IdentitytoolkitRelyingpartySetProjectConfigResponse] = field(default=None)
-    status_code: int = field(default=None)
     

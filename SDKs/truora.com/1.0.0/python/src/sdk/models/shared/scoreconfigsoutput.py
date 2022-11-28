@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
-from . import scoreconfigoutput
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ScoreConfigsOutput:
-    score_configs: List[scoreconfigoutput.ScoreConfigOutput] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'score_configs' }})
+    r"""ScoreConfigsOutput
+    The result of an operation that returns multiple score configs
+    """
+    
+    score_configs: List[ScoreConfigOutput] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('score_configs') }})
     

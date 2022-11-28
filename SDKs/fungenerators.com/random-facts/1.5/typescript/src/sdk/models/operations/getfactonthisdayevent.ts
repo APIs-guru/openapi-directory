@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetFactOnthisdayEventQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=day" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=day" })
   day?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=month" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=month" })
   month?: string;
 }
 
 
 export class GetFactOnthisdayEventSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   xFungeneratorsApiSecret: shared.SchemeXFungeneratorsApiSecret;
 }
 
 
 export class GetFactOnthisdayEventRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetFactOnthisdayEventQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetFactOnthisdayEventSecurity;
 }
 
 
 export class GetFactOnthisdayEventResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

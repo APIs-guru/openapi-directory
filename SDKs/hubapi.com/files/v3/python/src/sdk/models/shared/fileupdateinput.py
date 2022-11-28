@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class FileUpdateInputAccessEnum(str, Enum):
     PUBLIC_INDEXABLE = "PUBLIC_INDEXABLE"
@@ -14,9 +19,13 @@ class FileUpdateInputAccessEnum(str, Enum):
 @dataclass_json
 @dataclass
 class FileUpdateInput:
-    access: Optional[FileUpdateInputAccessEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'access' }})
-    is_usable_in_content: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isUsableInContent' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    parent_folder_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parentFolderId' }})
-    parent_folder_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parentFolderPath' }})
+    r"""FileUpdateInput
+    Object for updating files.
+    """
+    
+    access: Optional[FileUpdateInputAccessEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('access') }})
+    is_usable_in_content: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isUsableInContent') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    parent_folder_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parentFolderId') }})
+    parent_folder_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parentFolderPath') }})
     

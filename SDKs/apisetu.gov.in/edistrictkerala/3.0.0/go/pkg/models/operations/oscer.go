@@ -28,11 +28,6 @@ type OscerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type OscerRequest struct {
-	Request  *OscerRequestBody `request:"mediaType=application/json"`
-	Security OscerSecurity
-}
-
 type Oscer400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Oscer504ApplicationJSON struct {
 	Error            *Oscer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Oscer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type OscerRequest struct {
+	Request  *OscerRequestBody `request:"mediaType=application/json"`
+	Security OscerSecurity
 }
 
 type OscerResponse struct {

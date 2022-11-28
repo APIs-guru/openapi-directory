@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetastoreConfig } from "./metastoreconfig";
 import { SparkHistoryServerConfig } from "./sparkhistoryserverconfig";
+
 
 
 // AuxiliaryServicesConfig
@@ -8,9 +9,9 @@ import { SparkHistoryServerConfig } from "./sparkhistoryserverconfig";
  * Auxiliary services configuration for a Cluster.
 **/
 export class AuxiliaryServicesConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=metastoreConfig" })
+  @SpeakeasyMetadata({ data: "json, name=metastoreConfig" })
   metastoreConfig?: MetastoreConfig;
 
-  @Metadata({ data: "json, name=sparkHistoryServerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=sparkHistoryServerConfig" })
   sparkHistoryServerConfig?: SparkHistoryServerConfig;
 }

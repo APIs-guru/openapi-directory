@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ListWebsiteCertificateAuthoritiesQueryParams = /** @class */ (function (_super) {
     __extends(ListWebsiteCertificateAuthoritiesQueryParams, _super);
@@ -30,11 +30,11 @@ var ListWebsiteCertificateAuthoritiesQueryParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MaxResults" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxResults" }),
         __metadata("design:type", String)
     ], ListWebsiteCertificateAuthoritiesQueryParams.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
         __metadata("design:type", String)
     ], ListWebsiteCertificateAuthoritiesQueryParams.prototype, "nextToken", void 0);
     return ListWebsiteCertificateAuthoritiesQueryParams;
@@ -46,31 +46,31 @@ var ListWebsiteCertificateAuthoritiesHeaders = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], ListWebsiteCertificateAuthoritiesHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], ListWebsiteCertificateAuthoritiesHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], ListWebsiteCertificateAuthoritiesHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], ListWebsiteCertificateAuthoritiesHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], ListWebsiteCertificateAuthoritiesHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], ListWebsiteCertificateAuthoritiesHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], ListWebsiteCertificateAuthoritiesHeaders.prototype, "xAmzSignedHeaders", void 0);
     return ListWebsiteCertificateAuthoritiesHeaders;
@@ -82,15 +82,15 @@ var ListWebsiteCertificateAuthoritiesRequestBody = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FleetArn" }),
+        SpeakeasyMetadata({ data: "json, name=FleetArn" }),
         __metadata("design:type", String)
     ], ListWebsiteCertificateAuthoritiesRequestBody.prototype, "fleetArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxResults" }),
+        SpeakeasyMetadata({ data: "json, name=MaxResults" }),
         __metadata("design:type", Number)
     ], ListWebsiteCertificateAuthoritiesRequestBody.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListWebsiteCertificateAuthoritiesRequestBody.prototype, "nextToken", void 0);
     return ListWebsiteCertificateAuthoritiesRequestBody;
@@ -102,15 +102,15 @@ var ListWebsiteCertificateAuthoritiesRequest = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListWebsiteCertificateAuthoritiesQueryParams)
     ], ListWebsiteCertificateAuthoritiesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListWebsiteCertificateAuthoritiesHeaders)
     ], ListWebsiteCertificateAuthoritiesRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", ListWebsiteCertificateAuthoritiesRequestBody)
     ], ListWebsiteCertificateAuthoritiesRequest.prototype, "request", void 0);
     return ListWebsiteCertificateAuthoritiesRequest;
@@ -122,31 +122,31 @@ var ListWebsiteCertificateAuthoritiesResponse = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListWebsiteCertificateAuthoritiesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListWebsiteCertificateAuthoritiesResponse.prototype, "internalServerErrorException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListWebsiteCertificateAuthoritiesResponse.prototype, "invalidRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListWebsiteCertificateAuthoritiesResponse)
     ], ListWebsiteCertificateAuthoritiesResponse.prototype, "listWebsiteCertificateAuthoritiesResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListWebsiteCertificateAuthoritiesResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListWebsiteCertificateAuthoritiesResponse.prototype, "tooManyRequestsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListWebsiteCertificateAuthoritiesResponse.prototype, "unauthorizedException", void 0);
     return ListWebsiteCertificateAuthoritiesResponse;

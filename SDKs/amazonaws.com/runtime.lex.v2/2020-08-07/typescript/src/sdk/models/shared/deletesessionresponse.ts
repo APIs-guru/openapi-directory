@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteSessionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=botAliasId" })
+  @SpeakeasyMetadata({ data: "json, name=botAliasId" })
   botAliasId?: string;
 
-  @Metadata({ data: "json, name=botId" })
+  @SpeakeasyMetadata({ data: "json, name=botId" })
   botId?: string;
 
-  @Metadata({ data: "json, name=localeId" })
+  @SpeakeasyMetadata({ data: "json, name=localeId" })
   localeId?: string;
 
-  @Metadata({ data: "json, name=sessionId" })
+  @SpeakeasyMetadata({ data: "json, name=sessionId" })
   sessionId?: string;
 }

@@ -4,6 +4,8 @@ type PutNetworksIDPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
+// PutNetworksIDUpdateNetworkRequestLabels
+// User-defined labels (key-value pairs)
 type PutNetworksIDUpdateNetworkRequestLabels struct {
 	Labelkey *string `json:"labelkey,omitempty"`
 }
@@ -13,11 +15,8 @@ type PutNetworksIDUpdateNetworkRequest struct {
 	Name   *string                                  `json:"name,omitempty"`
 }
 
-type PutNetworksIDRequest struct {
-	PathParams PutNetworksIDPathParams
-	Request    *PutNetworksIDUpdateNetworkRequest `request:"mediaType=application/json"`
-}
-
+// PutNetworksID200ApplicationJSONNetworkProtection
+// Protection configuration for the Network
 type PutNetworksID200ApplicationJSONNetworkProtection struct {
 	Delete bool `json:"delete"`
 }
@@ -57,6 +56,11 @@ type PutNetworksID200ApplicationJSONNetwork struct {
 
 type PutNetworksID200ApplicationJSON struct {
 	Network *PutNetworksID200ApplicationJSONNetwork `json:"network,omitempty"`
+}
+
+type PutNetworksIDRequest struct {
+	PathParams PutNetworksIDPathParams
+	Request    *PutNetworksIDUpdateNetworkRequest `request:"mediaType=application/json"`
 }
 
 type PutNetworksIDResponse struct {

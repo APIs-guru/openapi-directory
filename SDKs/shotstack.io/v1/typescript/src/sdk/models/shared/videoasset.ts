@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Crop } from "./crop";
+
 
 
 // VideoAsset
@@ -7,18 +8,18 @@ import { Crop } from "./crop";
  * The VideoAsset is used to create video sequences from video files. The src must be a publicly accessible URL to a video resource such as an mp4 file.
 **/
 export class VideoAsset extends SpeakeasyBase {
-  @Metadata({ data: "json, name=crop" })
+  @SpeakeasyMetadata({ data: "json, name=crop" })
   crop?: Crop;
 
-  @Metadata({ data: "json, name=src" })
+  @SpeakeasyMetadata({ data: "json, name=src" })
   src: string;
 
-  @Metadata({ data: "json, name=trim" })
+  @SpeakeasyMetadata({ data: "json, name=trim" })
   trim?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 
-  @Metadata({ data: "json, name=volume" })
+  @SpeakeasyMetadata({ data: "json, name=volume" })
   volume?: number;
 }

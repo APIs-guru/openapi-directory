@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VideoMetrics
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Metrics corresponding to a Video.
 **/
 export class VideoMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=media_key" })
+  @SpeakeasyMetadata({ data: "json, name=media_key" })
   mediaKey: string;
 
-  @Metadata({ data: "json, name=playback_0_count" })
+  @SpeakeasyMetadata({ data: "json, name=playback_0_count" })
   playback0Count?: number;
 
-  @Metadata({ data: "json, name=playback_100_count" })
+  @SpeakeasyMetadata({ data: "json, name=playback_100_count" })
   playback100Count?: number;
 
-  @Metadata({ data: "json, name=playback_25_count" })
+  @SpeakeasyMetadata({ data: "json, name=playback_25_count" })
   playback25Count?: number;
 
-  @Metadata({ data: "json, name=playback_50_count" })
+  @SpeakeasyMetadata({ data: "json, name=playback_50_count" })
   playback50Count?: number;
 
-  @Metadata({ data: "json, name=playback_75_count" })
+  @SpeakeasyMetadata({ data: "json, name=playback_75_count" })
   playback75Count?: number;
 
-  @Metadata({ data: "json, name=view_count" })
+  @SpeakeasyMetadata({ data: "json, name=view_count" })
   viewCount: number;
 }

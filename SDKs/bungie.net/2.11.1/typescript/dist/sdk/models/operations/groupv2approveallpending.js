@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GroupV2ApproveAllPendingPathParams = /** @class */ (function (_super) {
     __extends(GroupV2ApproveAllPendingPathParams, _super);
@@ -30,7 +30,7 @@ var GroupV2ApproveAllPendingPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=groupId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=groupId" }),
         __metadata("design:type", Number)
     ], GroupV2ApproveAllPendingPathParams.prototype, "groupId", void 0);
     return GroupV2ApproveAllPendingPathParams;
@@ -42,7 +42,7 @@ var GroupV2ApproveAllPendingSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], GroupV2ApproveAllPendingSecurity.prototype, "oauth2", void 0);
     return GroupV2ApproveAllPendingSecurity;
@@ -54,11 +54,11 @@ var GroupV2ApproveAllPendingRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GroupV2ApproveAllPendingPathParams)
     ], GroupV2ApproveAllPendingRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GroupV2ApproveAllPendingSecurity)
     ], GroupV2ApproveAllPendingRequest.prototype, "security", void 0);
     return GroupV2ApproveAllPendingRequest;
@@ -70,15 +70,15 @@ var GroupV2ApproveAllPendingResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GroupV2ApproveAllPendingResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GroupV2ApproveAllPendingResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GroupV2ApproveAllPendingResponse.prototype, "statusCode", void 0);
     return GroupV2ApproveAllPendingResponse;

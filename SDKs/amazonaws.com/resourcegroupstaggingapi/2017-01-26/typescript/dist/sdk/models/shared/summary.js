@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TargetIdTypeEnum } from "./targetidtypeenum";
 // Summary
 /**
@@ -34,27 +34,27 @@ var Summary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=LastUpdated" }),
+        SpeakeasyMetadata({ data: "json, name=LastUpdated" }),
         __metadata("design:type", String)
     ], Summary.prototype, "lastUpdated", void 0);
     __decorate([
-        Metadata({ data: "json, name=NonCompliantResources" }),
+        SpeakeasyMetadata({ data: "json, name=NonCompliantResources" }),
         __metadata("design:type", Number)
     ], Summary.prototype, "nonCompliantResources", void 0);
     __decorate([
-        Metadata({ data: "json, name=Region" }),
+        SpeakeasyMetadata({ data: "json, name=Region" }),
         __metadata("design:type", String)
     ], Summary.prototype, "region", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResourceType" }),
+        SpeakeasyMetadata({ data: "json, name=ResourceType" }),
         __metadata("design:type", String)
     ], Summary.prototype, "resourceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetId" }),
+        SpeakeasyMetadata({ data: "json, name=TargetId" }),
         __metadata("design:type", String)
     ], Summary.prototype, "targetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=TargetIdType" }),
+        SpeakeasyMetadata({ data: "json, name=TargetIdType" }),
         __metadata("design:type", String)
     ], Summary.prototype, "targetIdType", void 0);
     return Summary;

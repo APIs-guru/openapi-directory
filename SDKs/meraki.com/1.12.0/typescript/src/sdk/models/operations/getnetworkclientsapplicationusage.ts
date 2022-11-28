@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetNetworkClientsApplicationUsagePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class GetNetworkClientsApplicationUsageQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=clients" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=clients" })
   clients: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endingBefore" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endingBefore" })
   endingBefore?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=perPage" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=perPage" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ssidNumber" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ssidNumber" })
   ssidNumber?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startingAfter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startingAfter" })
   startingAfter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=t0" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=t0" })
   t0?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=t1" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=t1" })
   t1?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timespan" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timespan" })
   timespan?: number;
 }
 
 
 export class GetNetworkClientsApplicationUsageRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetNetworkClientsApplicationUsagePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetNetworkClientsApplicationUsageQueryParams;
 }
 
 
 export class GetNetworkClientsApplicationUsageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getNetworkClientsApplicationUsage200ApplicationJsonObject?: Map<string, any>;
 }

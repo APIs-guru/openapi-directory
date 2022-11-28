@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDocumentaiV1beta2DocumentPageMatrix
+// Representation for transformation matrix, intended to be compatible and used with OpenCV format for image manipulation.
 type GoogleCloudDocumentaiV1beta2DocumentPageMatrix struct {
 	Cols *int32  `json:"cols,omitempty"`
 	Data *string `json:"data,omitempty"`

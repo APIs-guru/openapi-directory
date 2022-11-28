@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateDomainContactPrivacyRequest
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The UpdateDomainContactPrivacy request includes the following elements.
 **/
 export class UpdateDomainContactPrivacyRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AdminPrivacy" })
+  @SpeakeasyMetadata({ data: "json, name=AdminPrivacy" })
   adminPrivacy?: boolean;
 
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=RegistrantPrivacy" })
+  @SpeakeasyMetadata({ data: "json, name=RegistrantPrivacy" })
   registrantPrivacy?: boolean;
 
-  @Metadata({ data: "json, name=TechPrivacy" })
+  @SpeakeasyMetadata({ data: "json, name=TechPrivacy" })
   techPrivacy?: boolean;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetListingViolationsSummaryQueryParams = /** @class */ (function (_super) {
     __extends(GetListingViolationsSummaryQueryParams, _super);
@@ -30,7 +30,7 @@ var GetListingViolationsSummaryQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=compliance_type" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=compliance_type" }),
         __metadata("design:type", String)
     ], GetListingViolationsSummaryQueryParams.prototype, "complianceType", void 0);
     return GetListingViolationsSummaryQueryParams;
@@ -42,7 +42,7 @@ var GetListingViolationsSummaryHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-EBAY-C-MARKETPLACE-ID" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-EBAY-C-MARKETPLACE-ID" }),
         __metadata("design:type", String)
     ], GetListingViolationsSummaryHeaders.prototype, "xEbayCMarketplaceId", void 0);
     return GetListingViolationsSummaryHeaders;
@@ -54,7 +54,7 @@ var GetListingViolationsSummarySecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeApiAuth)
     ], GetListingViolationsSummarySecurity.prototype, "apiAuth", void 0);
     return GetListingViolationsSummarySecurity;
@@ -66,15 +66,15 @@ var GetListingViolationsSummaryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetListingViolationsSummaryQueryParams)
     ], GetListingViolationsSummaryRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetListingViolationsSummaryHeaders)
     ], GetListingViolationsSummaryRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetListingViolationsSummarySecurity)
     ], GetListingViolationsSummaryRequest.prototype, "security", void 0);
     return GetListingViolationsSummaryRequest;
@@ -86,15 +86,15 @@ var GetListingViolationsSummaryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ComplianceSummary)
     ], GetListingViolationsSummaryResponse.prototype, "complianceSummary", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetListingViolationsSummaryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetListingViolationsSummaryResponse.prototype, "statusCode", void 0);
     return GetListingViolationsSummaryResponse;

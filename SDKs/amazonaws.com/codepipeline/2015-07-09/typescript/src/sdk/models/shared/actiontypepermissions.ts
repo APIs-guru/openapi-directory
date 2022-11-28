@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ActionTypePermissions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details identifying the users with permissions to use the action type.
 **/
 export class ActionTypePermissions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedAccounts" })
+  @SpeakeasyMetadata({ data: "json, name=allowedAccounts" })
   allowedAccounts: string[];
 }

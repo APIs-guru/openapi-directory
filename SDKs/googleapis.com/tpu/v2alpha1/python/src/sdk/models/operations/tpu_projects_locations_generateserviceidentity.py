@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class TpuProjectsLocationsGenerateServiceIdentityPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class TpuProjectsLocationsGenerateServiceIdentityQueryParams:
 
 @dataclass
 class TpuProjectsLocationsGenerateServiceIdentitySecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class TpuProjectsLocationsGenerateServiceIdentityRequest:
-    path_params: TpuProjectsLocationsGenerateServiceIdentityPathParams = field(default=None)
-    query_params: TpuProjectsLocationsGenerateServiceIdentityQueryParams = field(default=None)
+    path_params: TpuProjectsLocationsGenerateServiceIdentityPathParams = field()
+    query_params: TpuProjectsLocationsGenerateServiceIdentityQueryParams = field()
+    security: TpuProjectsLocationsGenerateServiceIdentitySecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: TpuProjectsLocationsGenerateServiceIdentitySecurity = field(default=None)
     
 
 @dataclass
 class TpuProjectsLocationsGenerateServiceIdentityResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     generate_service_identity_response: Optional[shared.GenerateServiceIdentityResponse] = field(default=None)
-    status_code: int = field(default=None)
     

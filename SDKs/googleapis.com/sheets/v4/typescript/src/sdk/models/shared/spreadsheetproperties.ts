@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CellFormat } from "./cellformat";
 import { IterativeCalculationSettings } from "./iterativecalculationsettings";
 import { SpreadsheetTheme } from "./spreadsheettheme";
 
+
 export enum SpreadsheetPropertiesAutoRecalcEnum {
-    RecalculationIntervalUnspecified = "RECALCULATION_INTERVAL_UNSPECIFIED"
-,    OnChange = "ON_CHANGE"
-,    Minute = "MINUTE"
-,    Hour = "HOUR"
+    RecalculationIntervalUnspecified = "RECALCULATION_INTERVAL_UNSPECIFIED",
+    OnChange = "ON_CHANGE",
+    Minute = "MINUTE",
+    Hour = "HOUR"
 }
 
 
@@ -16,24 +17,24 @@ export enum SpreadsheetPropertiesAutoRecalcEnum {
  * Properties of a spreadsheet.
 **/
 export class SpreadsheetProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoRecalc" })
+  @SpeakeasyMetadata({ data: "json, name=autoRecalc" })
   autoRecalc?: SpreadsheetPropertiesAutoRecalcEnum;
 
-  @Metadata({ data: "json, name=defaultFormat" })
+  @SpeakeasyMetadata({ data: "json, name=defaultFormat" })
   defaultFormat?: CellFormat;
 
-  @Metadata({ data: "json, name=iterativeCalculationSettings" })
+  @SpeakeasyMetadata({ data: "json, name=iterativeCalculationSettings" })
   iterativeCalculationSettings?: IterativeCalculationSettings;
 
-  @Metadata({ data: "json, name=locale" })
+  @SpeakeasyMetadata({ data: "json, name=locale" })
   locale?: string;
 
-  @Metadata({ data: "json, name=spreadsheetTheme" })
+  @SpeakeasyMetadata({ data: "json, name=spreadsheetTheme" })
   spreadsheetTheme?: SpreadsheetTheme;
 
-  @Metadata({ data: "json, name=timeZone" })
+  @SpeakeasyMetadata({ data: "json, name=timeZone" })
   timeZone?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

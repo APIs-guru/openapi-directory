@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum MobileAppDirectoryEnum {
-    Unknown = "UNKNOWN"
-,    AppleAppStore = "APPLE_APP_STORE"
-,    GooglePlayStore = "GOOGLE_PLAY_STORE"
+    Unknown = "UNKNOWN",
+    AppleAppStore = "APPLE_APP_STORE",
+    GooglePlayStore = "GOOGLE_PLAY_STORE"
 }
 
 
@@ -12,18 +13,18 @@ export enum MobileAppDirectoryEnum {
  * Contains information about a mobile app. Used as a landing page deep link.
 **/
 export class MobileApp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=directory" })
+  @SpeakeasyMetadata({ data: "json, name=directory" })
   directory?: MobileAppDirectoryEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=publisherName" })
+  @SpeakeasyMetadata({ data: "json, name=publisherName" })
   publisherName?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DeploymentmanagerDeploymentsDeletePathParams:
-    deployment: str = field(default=None, metadata={'path_param': { 'field_name': 'deployment', 'style': 'simple', 'explode': False }})
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    deployment: str = field(metadata={'path_param': { 'field_name': 'deployment', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
     
 class DeploymentmanagerDeploymentsDeleteDeletePolicyEnum(str, Enum):
     DELETE = "DELETE"
@@ -31,14 +32,14 @@ class DeploymentmanagerDeploymentsDeleteQueryParams:
 
 @dataclass
 class DeploymentmanagerDeploymentsDeleteSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeploymentmanagerDeploymentsDeleteSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -49,14 +50,14 @@ class DeploymentmanagerDeploymentsDeleteSecurity:
 
 @dataclass
 class DeploymentmanagerDeploymentsDeleteRequest:
-    path_params: DeploymentmanagerDeploymentsDeletePathParams = field(default=None)
-    query_params: DeploymentmanagerDeploymentsDeleteQueryParams = field(default=None)
-    security: DeploymentmanagerDeploymentsDeleteSecurity = field(default=None)
+    path_params: DeploymentmanagerDeploymentsDeletePathParams = field()
+    query_params: DeploymentmanagerDeploymentsDeleteQueryParams = field()
+    security: DeploymentmanagerDeploymentsDeleteSecurity = field()
     
 
 @dataclass
 class DeploymentmanagerDeploymentsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

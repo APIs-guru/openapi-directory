@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DataPrivacy
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * By default, data stored by Amazon Lex is encrypted. The <code>DataPrivacy</code> structure provides settings that determine how Amazon Lex handles special cases of securing the data for your bot. 
 **/
 export class DataPrivacy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=childDirected" })
+  @SpeakeasyMetadata({ data: "json, name=childDirected" })
   childDirected: boolean;
 }

@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { MetricValue } from "./metricvalue";
 // MetricValueSet
 /**
  * Represents a set of metric values in the same metric. Each metric value in the set should have a unique combination of start time, end time, and label values.
@@ -34,11 +34,11 @@ var MetricValueSet = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=metricName" }),
+        SpeakeasyMetadata({ data: "json, name=metricName" }),
         __metadata("design:type", String)
     ], MetricValueSet.prototype, "metricName", void 0);
     __decorate([
-        Metadata({ data: "json, name=metricValues", elemType: shared.MetricValue }),
+        SpeakeasyMetadata({ data: "json, name=metricValues", elemType: MetricValue }),
         __metadata("design:type", Array)
     ], MetricValueSet.prototype, "metricValues", void 0);
     return MetricValueSet;

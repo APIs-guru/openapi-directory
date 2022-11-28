@@ -1,6 +1,7 @@
 
 
+
 export enum ThroughputModeEnum {
-    Bursting = "bursting"
-,    Provisioned = "provisioned"
+    Bursting = "bursting",
+    Provisioned = "provisioned"
 }

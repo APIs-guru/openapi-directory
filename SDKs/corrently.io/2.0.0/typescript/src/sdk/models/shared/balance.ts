@@ -1,29 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Transactions } from "./transactions";
 
+
 export enum BalanceVariationEnum {
-    Gsb = "gsb"
-,    Erzeugung = "erzeugung"
-,    Eigenstrom = "eigenstrom"
-,    Co2 = "co2"
-,    Baeume = "baeume"
+    Gsb = "gsb",
+    Erzeugung = "erzeugung",
+    Eigenstrom = "eigenstrom",
+    Co2 = "co2",
+    Baeume = "baeume"
 }
 
 
 export class Balance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=balance" })
+  @SpeakeasyMetadata({ data: "json, name=balance" })
   balance?: number;
 
-  @Metadata({ data: "json, name=haben" })
+  @SpeakeasyMetadata({ data: "json, name=haben" })
   haben?: number;
 
-  @Metadata({ data: "json, name=soll" })
+  @SpeakeasyMetadata({ data: "json, name=soll" })
   soll?: number;
 
-  @Metadata({ data: "json, name=txs", elemType: shared.Transactions })
+  @SpeakeasyMetadata({ data: "json, name=txs", elemType: Transactions })
   txs?: Transactions[];
 
-  @Metadata({ data: "json, name=variation" })
+  @SpeakeasyMetadata({ data: "json, name=variation" })
   variation?: BalanceVariationEnum;
 }

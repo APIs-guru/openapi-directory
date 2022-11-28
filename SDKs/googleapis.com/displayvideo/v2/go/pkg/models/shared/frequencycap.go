@@ -12,6 +12,8 @@ const (
 	FrequencyCapTimeUnitEnumTimeUnitMinutes     FrequencyCapTimeUnitEnum = "TIME_UNIT_MINUTES"
 )
 
+// FrequencyCap
+// Settings that control the number of times a user may be shown with the same ad during a given time period.
 type FrequencyCap struct {
 	MaxImpressions *int32                    `json:"maxImpressions,omitempty"`
 	MaxViews       *int32                    `json:"maxViews,omitempty"`

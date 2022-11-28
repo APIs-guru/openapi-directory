@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetExportQrBelegeBelegUuidPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=belegUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=belegUuid" })
   belegUuid: string;
 }
 
 
 export class GetExportQrBelegeBelegUuidRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetExportQrBelegeBelegUuidPathParams;
 }
 
 
 export class GetExportQrBelegeBelegUuidResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

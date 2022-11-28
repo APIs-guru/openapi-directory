@@ -1,5 +1,7 @@
 package shared
 
+// GoogleIdentityStsV1IntrospectTokenResponse
+// Response message for IntrospectToken.
 type GoogleIdentityStsV1IntrospectTokenResponse struct {
 	Active   *bool   `json:"active,omitempty"`
 	ClientID *string `json:"client_id,omitempty"`

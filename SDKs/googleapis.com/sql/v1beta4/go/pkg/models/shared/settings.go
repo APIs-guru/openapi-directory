@@ -50,6 +50,8 @@ const (
 	SettingsReplicationTypeEnumAsynchronous                  SettingsReplicationTypeEnum = "ASYNCHRONOUS"
 )
 
+// Settings
+// Database instance settings.
 type Settings struct {
 	ActivationPolicy            *SettingsActivationPolicyEnum     `json:"activationPolicy,omitempty"`
 	ActiveDirectoryConfig       *SQLActiveDirectoryConfig         `json:"activeDirectoryConfig,omitempty"`

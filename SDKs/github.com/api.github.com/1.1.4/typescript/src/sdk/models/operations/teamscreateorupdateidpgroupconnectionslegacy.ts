@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TeamsCreateOrUpdateIdpGroupConnectionsLegacyPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=team_id" })
   teamId: number;
 }
 
 
 export class TeamsCreateOrUpdateIdpGroupConnectionsLegacyRequestBodyGroups extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=group_description" })
+  @SpeakeasyMetadata({ data: "json, name=group_description" })
   groupDescription: string;
 
-  @Metadata({ data: "json, name=group_id" })
+  @SpeakeasyMetadata({ data: "json, name=group_id" })
   groupId: string;
 
-  @Metadata({ data: "json, name=group_name" })
+  @SpeakeasyMetadata({ data: "json, name=group_name" })
   groupName: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class TeamsCreateOrUpdateIdpGroupConnectionsLegacyRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groups", elemType: operations.TeamsCreateOrUpdateIdpGroupConnectionsLegacyRequestBodyGroups })
+  @SpeakeasyMetadata({ data: "json, name=groups", elemType: TeamsCreateOrUpdateIdpGroupConnectionsLegacyRequestBodyGroups })
   groups: TeamsCreateOrUpdateIdpGroupConnectionsLegacyRequestBodyGroups[];
 
-  @Metadata({ data: "json, name=synced_at" })
+  @SpeakeasyMetadata({ data: "json, name=synced_at" })
   syncedAt?: string;
 }
 
 
 export class TeamsCreateOrUpdateIdpGroupConnectionsLegacyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: TeamsCreateOrUpdateIdpGroupConnectionsLegacyPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: TeamsCreateOrUpdateIdpGroupConnectionsLegacyRequestBody;
 }
 
 
 export class TeamsCreateOrUpdateIdpGroupConnectionsLegacyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   basicError?: shared.BasicError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   groupMapping?: shared.GroupMapping;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationError?: shared.ValidationError;
 }

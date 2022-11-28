@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TrendmicroConnectorProfileCredentials
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The connector-specific profile credentials required when using Trend Micro. 
 **/
 export class TrendmicroConnectorProfileCredentials extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiSecretKey" })
+  @SpeakeasyMetadata({ data: "json, name=apiSecretKey" })
   apiSecretKey: string;
 }

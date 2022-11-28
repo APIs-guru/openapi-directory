@@ -1,0 +1,31 @@
+import { AxiosInstance } from "axios";
+import { Authentication } from "./authentication";
+import { Campaigns } from "./campaigns";
+import { Contacts } from "./contacts";
+import { Conversations } from "./conversations";
+import { Messages } from "./messages";
+import { Templates } from "./templates";
+import { Tools } from "./tools";
+import { Webhooks } from "./webhooks";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://api.sakari.io/v1"];
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    authentication: Authentication;
+    campaigns: Campaigns;
+    contacts: Contacts;
+    conversations: Conversations;
+    messages: Messages;
+    templates: Templates;
+    tools: Tools;
+    webhooks: Webhooks;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
+    constructor(...opts: OptsFunc[]);
+}
+export {};

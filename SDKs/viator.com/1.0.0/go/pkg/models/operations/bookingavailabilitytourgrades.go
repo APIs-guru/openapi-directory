@@ -16,11 +16,6 @@ type BookingAvailabilityTourgradesRequestBody struct {
 	ProductCode  *string                                            `json:"productCode,omitempty"`
 }
 
-type BookingAvailabilityTourgradesRequest struct {
-	Headers BookingAvailabilityTourgradesHeaders
-	Request *BookingAvailabilityTourgradesRequestBody `request:"mediaType=application/json"`
-}
-
 type BookingAvailabilityTourgrades200ApplicationJSONDataAgeBandsRequired struct {
 	BandID               *int64 `json:"bandId,omitempty"`
 	MaximumCountRequired *int64 `json:"maximumCountRequired,omitempty"`
@@ -61,6 +56,11 @@ type BookingAvailabilityTourgrades200ApplicationJSON struct {
 	Success          *bool                                                 `json:"success,omitempty"`
 	TotalCount       *int64                                                `json:"totalCount,omitempty"`
 	Vmid             *string                                               `json:"vmid,omitempty"`
+}
+
+type BookingAvailabilityTourgradesRequest struct {
+	Headers BookingAvailabilityTourgradesHeaders
+	Request *BookingAvailabilityTourgradesRequestBody `request:"mediaType=application/json"`
 }
 
 type BookingAvailabilityTourgradesResponse struct {

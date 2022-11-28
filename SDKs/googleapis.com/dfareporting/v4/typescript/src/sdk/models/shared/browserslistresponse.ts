@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Browser } from "./browser";
+
 
 
 // BrowsersListResponse
@@ -8,9 +8,9 @@ import { Browser } from "./browser";
  * Browser List Response
 **/
 export class BrowsersListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=browsers", elemType: shared.Browser })
+  @SpeakeasyMetadata({ data: "json, name=browsers", elemType: Browser })
   browsers?: Browser[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

@@ -22,42 +22,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Interval = /** @class */ (function (_super) {
     __extends(Interval, _super);
     function Interval() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=change" }),
+        SpeakeasyMetadata({ data: "json, name=change" }),
         __metadata("design:type", Number)
     ], Interval.prototype, "change", void 0);
     __decorate([
-        Metadata({ data: "json, name=changePercent" }),
+        SpeakeasyMetadata({ data: "json, name=changePercent" }),
         __metadata("design:type", Number)
     ], Interval.prototype, "changePercent", void 0);
     __decorate([
-        Metadata({ data: "json, name=end" }),
+        SpeakeasyMetadata({ data: "json, name=end" }),
         __metadata("design:type", Date)
     ], Interval.prototype, "end", void 0);
     __decorate([
-        Metadata({ data: "json, name=high" }),
+        SpeakeasyMetadata({ data: "json, name=high" }),
         __metadata("design:type", Number)
     ], Interval.prototype, "high", void 0);
     __decorate([
-        Metadata({ data: "json, name=last" }),
+        SpeakeasyMetadata({ data: "json, name=last" }),
         __metadata("design:type", Number)
     ], Interval.prototype, "last", void 0);
     __decorate([
-        Metadata({ data: "json, name=low" }),
+        SpeakeasyMetadata({ data: "json, name=low" }),
         __metadata("design:type", Number)
     ], Interval.prototype, "low", void 0);
     __decorate([
-        Metadata({ data: "json, name=open" }),
+        SpeakeasyMetadata({ data: "json, name=open" }),
         __metadata("design:type", Number)
     ], Interval.prototype, "open", void 0);
     __decorate([
-        Metadata({ data: "json, name=start" }),
+        SpeakeasyMetadata({ data: "json, name=start" }),
         __metadata("design:type", Date)
     ], Interval.prototype, "start", void 0);
     return Interval;

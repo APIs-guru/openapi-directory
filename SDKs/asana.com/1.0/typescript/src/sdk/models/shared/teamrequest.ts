@@ -1,22 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
-export class TeamRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+
+export class TeamRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=gid" })
-  gid?: string;
-
-  @Metadata({ data: "json, name=html_description" })
+  @SpeakeasyMetadata({ data: "json, name=html_description" })
   htmlDescription?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=organization" })
+  @SpeakeasyMetadata({ data: "json, name=organization" })
   organization?: string;
-
-  @Metadata({ data: "json, name=resource_type" })
-  resourceType?: string;
 }

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,13 +21,13 @@ class MybusinessGoogleLocationsSearchQueryParams:
 
 @dataclass
 class MybusinessGoogleLocationsSearchRequest:
-    query_params: MybusinessGoogleLocationsSearchQueryParams = field(default=None)
-    request: Optional[shared.SearchGoogleLocationsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    query_params: MybusinessGoogleLocationsSearchQueryParams = field()
+    request: Optional[shared.SearchGoogleLocationsRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MybusinessGoogleLocationsSearchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     search_google_locations_response: Optional[shared.SearchGoogleLocationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

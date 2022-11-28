@@ -11,6 +11,8 @@ const (
 	ReviewStarRatingEnumFive                  ReviewStarRatingEnum = "FIVE"
 )
 
+// Review
+// Output only. Represents a review for a location.
 type Review struct {
 	Comment     *string               `json:"comment,omitempty"`
 	CreateTime  *string               `json:"createTime,omitempty"`

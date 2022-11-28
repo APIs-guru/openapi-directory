@@ -14,12 +14,12 @@ class TariffcomponentsQueryParams:
 
 @dataclass
 class TariffcomponentsRequest:
-    query_params: TariffcomponentsQueryParams = field(default=None)
+    query_params: TariffcomponentsQueryParams = field()
     
 
 @dataclass
 class TariffcomponentsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     componentsh0: Optional[shared.Componentsh0] = field(default=None)
     

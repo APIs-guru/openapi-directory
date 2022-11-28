@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AddVideosToProjectAlt1PathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=project_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=project_id" })
   projectId: number;
 }
 
 
 export class AddVideosToProjectAlt1QueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=uris" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uris" })
   uris: string;
 }
 
 
 export class AddVideosToProjectAlt1Security extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth2: shared.SchemeOauth2;
 }
 
 
 export class AddVideosToProjectAlt1Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AddVideosToProjectAlt1PathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AddVideosToProjectAlt1QueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: AddVideosToProjectAlt1Security;
 }
 
 
 export class AddVideosToProjectAlt1Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 }

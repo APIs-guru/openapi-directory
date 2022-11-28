@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleAppsScriptTypeWebAppConfigAccessEnum {
-    UnknownAccess = "UNKNOWN_ACCESS"
-,    Myself = "MYSELF"
-,    Domain = "DOMAIN"
-,    Anyone = "ANYONE"
-,    AnyoneAnonymous = "ANYONE_ANONYMOUS"
+    UnknownAccess = "UNKNOWN_ACCESS",
+    Myself = "MYSELF",
+    Domain = "DOMAIN",
+    Anyone = "ANYONE",
+    AnyoneAnonymous = "ANYONE_ANONYMOUS"
 }
 
 export enum GoogleAppsScriptTypeWebAppConfigExecuteAsEnum {
-    UnknownExecuteAs = "UNKNOWN_EXECUTE_AS"
-,    UserAccessing = "USER_ACCESSING"
-,    UserDeploying = "USER_DEPLOYING"
+    UnknownExecuteAs = "UNKNOWN_EXECUTE_AS",
+    UserAccessing = "USER_ACCESSING",
+    UserDeploying = "USER_DEPLOYING"
 }
 
 
@@ -20,9 +21,9 @@ export enum GoogleAppsScriptTypeWebAppConfigExecuteAsEnum {
  * Web app entry point configuration.
 **/
 export class GoogleAppsScriptTypeWebAppConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=access" })
+  @SpeakeasyMetadata({ data: "json, name=access" })
   access?: GoogleAppsScriptTypeWebAppConfigAccessEnum;
 
-  @Metadata({ data: "json, name=executeAs" })
+  @SpeakeasyMetadata({ data: "json, name=executeAs" })
   executeAs?: GoogleAppsScriptTypeWebAppConfigExecuteAsEnum;
 }

@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomerMasterKeySpecEnum } from "./customermasterkeyspecenum";
 import { EncryptionAlgorithmSpecEnum } from "./encryptionalgorithmspecenum";
 import { KeySpecEnum } from "./keyspecenum";
@@ -6,25 +6,26 @@ import { KeyUsageTypeEnum } from "./keyusagetypeenum";
 import { SigningAlgorithmSpecEnum } from "./signingalgorithmspecenum";
 
 
+
 export class GetPublicKeyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CustomerMasterKeySpec" })
+  @SpeakeasyMetadata({ data: "json, name=CustomerMasterKeySpec" })
   customerMasterKeySpec?: CustomerMasterKeySpecEnum;
 
-  @Metadata({ data: "json, name=EncryptionAlgorithms" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptionAlgorithms" })
   encryptionAlgorithms?: EncryptionAlgorithmSpecEnum[];
 
-  @Metadata({ data: "json, name=KeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KeyId" })
   keyId?: string;
 
-  @Metadata({ data: "json, name=KeySpec" })
+  @SpeakeasyMetadata({ data: "json, name=KeySpec" })
   keySpec?: KeySpecEnum;
 
-  @Metadata({ data: "json, name=KeyUsage" })
+  @SpeakeasyMetadata({ data: "json, name=KeyUsage" })
   keyUsage?: KeyUsageTypeEnum;
 
-  @Metadata({ data: "json, name=PublicKey" })
+  @SpeakeasyMetadata({ data: "json, name=PublicKey" })
   publicKey?: string;
 
-  @Metadata({ data: "json, name=SigningAlgorithms" })
+  @SpeakeasyMetadata({ data: "json, name=SigningAlgorithms" })
   signingAlgorithms?: SigningAlgorithmSpecEnum[];
 }

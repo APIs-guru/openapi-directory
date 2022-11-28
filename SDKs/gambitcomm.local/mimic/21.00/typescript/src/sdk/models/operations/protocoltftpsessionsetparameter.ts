@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProtocolTftpSessionSetParameterPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" })
   agentNum: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=parameter" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=parameter" })
   parameter: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=sessionID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sessionID" })
   sessionId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=value" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=value" })
   value: string;
 }
 
 
 export class ProtocolTftpSessionSetParameterRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ProtocolTftpSessionSetParameterPathParams;
 }
 
 
 export class ProtocolTftpSessionSetParameterResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   protocolTftpSessionSetParameter200ApplicationJsonString?: string;
 }

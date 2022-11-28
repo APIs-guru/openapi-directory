@@ -1,18 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { GoogleCloudIntegrationsV1alphaExecution } from "./googlecloudintegrationsv1alphaexecution";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EnterpriseCrmEventbusProtoEventExecutionDetails } from "./enterprisecrmeventbusprotoeventexecutiondetails";
 import { GoogleCloudIntegrationsV1alphaExecutionDetails } from "./googlecloudintegrationsv1alphaexecutiondetails";
 import { GoogleCloudIntegrationsV1alphaValueType } from "./googlecloudintegrationsv1alphavaluetype";
 import { EnterpriseCrmFrontendsEventbusProtoParameterEntry } from "./enterprisecrmfrontendseventbusprotoparameterentry";
-import { GoogleCloudIntegrationsV1alphaValueType } from "./googlecloudintegrationsv1alphavaluetype";
-import { EnterpriseCrmFrontendsEventbusProtoParameterEntry } from "./enterprisecrmfrontendseventbusprotoparameterentry";
+
 
 export enum GoogleCloudIntegrationsV1alphaExecutionExecutionMethodEnum {
-    ExecutionMethodUnspecified = "EXECUTION_METHOD_UNSPECIFIED"
-,    Post = "POST"
-,    PostToQueue = "POST_TO_QUEUE"
-,    Schedule = "SCHEDULE"
+    ExecutionMethodUnspecified = "EXECUTION_METHOD_UNSPECIFIED",
+    Post = "POST",
+    PostToQueue = "POST_TO_QUEUE",
+    Schedule = "SCHEDULE"
 }
 
 
@@ -21,39 +18,39 @@ export enum GoogleCloudIntegrationsV1alphaExecutionExecutionMethodEnum {
  * The Execution resource contains detailed information of an individual integration execution.
 **/
 export class GoogleCloudIntegrationsV1alphaExecution extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=directSubExecutions", elemType: shared.GoogleCloudIntegrationsV1alphaExecution })
+  @SpeakeasyMetadata({ data: "json, name=directSubExecutions", elemType: GoogleCloudIntegrationsV1alphaExecution })
   directSubExecutions?: GoogleCloudIntegrationsV1alphaExecution[];
 
-  @Metadata({ data: "json, name=eventExecutionDetails" })
+  @SpeakeasyMetadata({ data: "json, name=eventExecutionDetails" })
   eventExecutionDetails?: EnterpriseCrmEventbusProtoEventExecutionDetails;
 
-  @Metadata({ data: "json, name=executionDetails" })
+  @SpeakeasyMetadata({ data: "json, name=executionDetails" })
   executionDetails?: GoogleCloudIntegrationsV1alphaExecutionDetails;
 
-  @Metadata({ data: "json, name=executionMethod" })
+  @SpeakeasyMetadata({ data: "json, name=executionMethod" })
   executionMethod?: GoogleCloudIntegrationsV1alphaExecutionExecutionMethodEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=requestParameters", elemType: shared.GoogleCloudIntegrationsV1alphaValueType })
+  @SpeakeasyMetadata({ data: "json, name=requestParameters", elemType: GoogleCloudIntegrationsV1alphaValueType })
   requestParameters?: Map<string, GoogleCloudIntegrationsV1alphaValueType>;
 
-  @Metadata({ data: "json, name=requestParams", elemType: shared.EnterpriseCrmFrontendsEventbusProtoParameterEntry })
+  @SpeakeasyMetadata({ data: "json, name=requestParams", elemType: EnterpriseCrmFrontendsEventbusProtoParameterEntry })
   requestParams?: EnterpriseCrmFrontendsEventbusProtoParameterEntry[];
 
-  @Metadata({ data: "json, name=responseParameters", elemType: shared.GoogleCloudIntegrationsV1alphaValueType })
+  @SpeakeasyMetadata({ data: "json, name=responseParameters", elemType: GoogleCloudIntegrationsV1alphaValueType })
   responseParameters?: Map<string, GoogleCloudIntegrationsV1alphaValueType>;
 
-  @Metadata({ data: "json, name=responseParams", elemType: shared.EnterpriseCrmFrontendsEventbusProtoParameterEntry })
+  @SpeakeasyMetadata({ data: "json, name=responseParams", elemType: EnterpriseCrmFrontendsEventbusProtoParameterEntry })
   responseParams?: EnterpriseCrmFrontendsEventbusProtoParameterEntry[];
 
-  @Metadata({ data: "json, name=triggerId" })
+  @SpeakeasyMetadata({ data: "json, name=triggerId" })
   triggerId?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

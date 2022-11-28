@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var AllowedUse = /** @class */ (function (_super) {
     __extends(AllowedUse, _super);
     function AllowedUse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=how_can_i_use_it" }),
+        SpeakeasyMetadata({ data: "json, name=how_can_i_use_it" }),
         __metadata("design:type", String)
     ], AllowedUse.prototype, "howCanIUseIt", void 0);
     __decorate([
-        Metadata({ data: "json, name=release_info" }),
+        SpeakeasyMetadata({ data: "json, name=release_info" }),
         __metadata("design:type", String)
     ], AllowedUse.prototype, "releaseInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=usage_restrictions" }),
+        SpeakeasyMetadata({ data: "json, name=usage_restrictions" }),
         __metadata("design:type", Array)
     ], AllowedUse.prototype, "usageRestrictions", void 0);
     return AllowedUse;

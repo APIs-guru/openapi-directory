@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CategoriesAllPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ecosystem_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ecosystem_id" })
   ecosystemId: string;
 }
 
 
 export class CategoriesAllQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cursor" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cursor" })
   cursor?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 }
 
 
 export class CategoriesAllRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CategoriesAllPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: CategoriesAllQueryParams;
 }
 
 
 export class CategoriesAllResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getCategoriesResponse?: shared.GetCategoriesResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

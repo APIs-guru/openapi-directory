@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Domain
+// Describes a domain where you are storing recordsets.
 type Domain struct {
 	Arn           *string           `json:"arn,omitempty"`
 	CreatedAt     *time.Time        `json:"createdAt,omitempty"`

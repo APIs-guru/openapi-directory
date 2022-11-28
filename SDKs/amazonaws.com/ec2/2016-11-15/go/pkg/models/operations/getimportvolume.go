@@ -10,6 +10,8 @@ const (
 	GetImportVolumeActionEnumImportVolume GetImportVolumeActionEnum = "ImportVolume"
 )
 
+// GetImportVolumeImage
+// Describes a disk image.
 type GetImportVolumeImage struct {
 	Bytes             int64                      `queryParam:"name=Bytes"`
 	Format            shared.DiskImageFormatEnum `queryParam:"name=Format"`
@@ -22,6 +24,8 @@ const (
 	GetImportVolumeVersionEnumTwoThousandAndSixteen1115 GetImportVolumeVersionEnum = "2016-11-15"
 )
 
+// GetImportVolumeVolume
+// Describes an EBS volume.
 type GetImportVolumeVolume struct {
 	Size int64 `queryParam:"name=Size"`
 }

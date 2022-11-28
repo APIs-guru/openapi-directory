@@ -1,6 +1,7 @@
 
 
+
 export enum ParentTypeEnum {
-    Root = "ROOT"
-,    OrganizationalUnit = "ORGANIZATIONAL_UNIT"
+    Root = "ROOT",
+    OrganizationalUnit = "ORGANIZATIONAL_UNIT"
 }

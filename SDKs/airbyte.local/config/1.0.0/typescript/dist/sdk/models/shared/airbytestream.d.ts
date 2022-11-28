@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SyncModeEnum } from "./syncmodeenum";
 /**
  * the immutable schema defined by the source

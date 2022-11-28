@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AssociateOpsItemRelatedItemRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssociationType" })
+  @SpeakeasyMetadata({ data: "json, name=AssociationType" })
   associationType: string;
 
-  @Metadata({ data: "json, name=OpsItemId" })
+  @SpeakeasyMetadata({ data: "json, name=OpsItemId" })
   opsItemId: string;
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType: string;
 
-  @Metadata({ data: "json, name=ResourceUri" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceUri" })
   resourceUri: string;
 }

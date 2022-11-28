@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class NifComprehensivePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=country" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=country" })
   country: string;
 }
 
 
 export class NifComprehensiveRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=companyAddress;" })
+  @SpeakeasyMetadata({ data: "form, name=companyAddress;" })
   companyAddress?: string;
 
-  @Metadata({ data: "form, name=companyName;" })
+  @SpeakeasyMetadata({ data: "form, name=companyName;" })
   companyName?: string;
 
-  @Metadata({ data: "form, name=nifNumber;" })
+  @SpeakeasyMetadata({ data: "form, name=nifNumber;" })
   nifNumber: string;
 }
 
 
 export class NifComprehensiveSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   userKey: shared.SchemeUserKey;
 }
 
 
 export class NifComprehensiveRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: NifComprehensivePathParams;
 
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request: NifComprehensiveRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: NifComprehensiveSecurity;
 }
 
 
 export class NifComprehensiveResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nifComprehensive200ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nifComprehensiveDefaultApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

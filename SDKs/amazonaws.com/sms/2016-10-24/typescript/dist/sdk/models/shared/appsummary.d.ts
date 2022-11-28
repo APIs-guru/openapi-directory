@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AppLaunchConfigurationStatusEnum } from "./applaunchconfigurationstatusenum";
 import { LaunchDetails } from "./launchdetails";
 import { AppLaunchStatusEnum } from "./applaunchstatusenum";

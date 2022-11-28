@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // KubernetesNetworkConfigResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Kubernetes network configuration for the cluster.
 **/
 export class KubernetesNetworkConfigResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=serviceIpv4Cidr" })
+  @SpeakeasyMetadata({ data: "json, name=serviceIpv4Cidr" })
   serviceIpv4Cidr?: string;
 }

@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateApiSecretPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=api_key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=api_key" })
   apiKey: string;
 }
 
 
 export class CreateApiSecretSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
 export class CreateApiSecretRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateApiSecretPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.CreateSecretRequest;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: CreateApiSecretSecurity;
 }
 
 
 export class CreateApiSecretResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorApiKeyNotFound?: shared.ErrorApiKeyNotFound;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createApiSecret400ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createApiSecret401ApplicationJsonAny?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   secretInfo?: shared.SecretInfo;
 }

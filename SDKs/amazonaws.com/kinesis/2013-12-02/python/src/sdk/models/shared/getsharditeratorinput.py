@@ -1,18 +1,24 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import sharditeratortype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetShardIteratorInput:
-    shard_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ShardId' }})
-    shard_iterator_type: sharditeratortype_enum.ShardIteratorTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ShardIteratorType' }})
-    starting_sequence_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartingSequenceNumber' }})
-    stream_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StreamName' }})
-    timestamp: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Timestamp', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    r"""GetShardIteratorInput
+    Represents the input for <code>GetShardIterator</code>.
+    """
+    
+    shard_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ShardId') }})
+    shard_iterator_type: ShardIteratorTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ShardIteratorType') }})
+    stream_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('StreamName') }})
+    starting_sequence_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StartingSequenceNumber') }})
+    timestamp: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Timestamp'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobQueueDetail } from "./jobqueuedetail";
 
 
+
 export class DescribeJobQueuesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jobQueues", elemType: shared.JobQueueDetail })
+  @SpeakeasyMetadata({ data: "json, name=jobQueues", elemType: JobQueueDetail })
   jobQueues?: JobQueueDetail[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

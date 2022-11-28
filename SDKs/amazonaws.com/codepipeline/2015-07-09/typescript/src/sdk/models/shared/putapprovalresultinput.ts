@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApprovalResult } from "./approvalresult";
+
 
 
 // PutApprovalResultInput
@@ -7,18 +8,18 @@ import { ApprovalResult } from "./approvalresult";
  * Represents the input of a <code>PutApprovalResult</code> action.
 **/
 export class PutApprovalResultInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionName" })
+  @SpeakeasyMetadata({ data: "json, name=actionName" })
   actionName: string;
 
-  @Metadata({ data: "json, name=pipelineName" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineName" })
   pipelineName: string;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result: ApprovalResult;
 
-  @Metadata({ data: "json, name=stageName" })
+  @SpeakeasyMetadata({ data: "json, name=stageName" })
   stageName: string;
 
-  @Metadata({ data: "json, name=token" })
+  @SpeakeasyMetadata({ data: "json, name=token" })
   token: string;
 }

@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetQtlInheritanceTypeDiffUsingGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=dateFromYYYYMMDD" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=dateFromYYYYMMDD" })
   dateFromYyyymmdd: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=dateToYYYYMMDD" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=dateToYYYYMMDD" })
   dateToYyyymmdd: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=speciesTypeKey" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=speciesTypeKey" })
   speciesTypeKey: number;
 }
 
 
 export class GetQtlInheritanceTypeDiffUsingGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetQtlInheritanceTypeDiffUsingGetPathParams;
 }
 
 
 export class GetQtlInheritanceTypeDiffUsingGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

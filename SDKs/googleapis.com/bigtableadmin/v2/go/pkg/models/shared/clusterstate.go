@@ -11,6 +11,8 @@ const (
 	ClusterStateReplicationStateEnumReadyOptimizing      ClusterStateReplicationStateEnum = "READY_OPTIMIZING"
 )
 
+// ClusterState
+// The state of a table's data in a particular cluster.
 type ClusterState struct {
 	EncryptionInfo   []EncryptionInfo                  `json:"encryptionInfo,omitempty"`
 	ReplicationState *ClusterStateReplicationStateEnum `json:"replicationState,omitempty"`

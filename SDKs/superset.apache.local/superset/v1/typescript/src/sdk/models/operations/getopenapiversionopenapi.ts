@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetOpenapiVersionOpenapiPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=version" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" })
   version: string;
 }
 
 
 export class GetOpenapiVersionOpenapiSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class GetOpenapiVersionOpenapiRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetOpenapiVersionOpenapiPathParams;
-
-  @Metadata()
-  security: GetOpenapiVersionOpenapiSecurity;
-}
-
-
 export class GetOpenapiVersionOpenapi404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class GetOpenapiVersionOpenapi500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class GetOpenapiVersionOpenapiRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetOpenapiVersionOpenapiPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetOpenapiVersionOpenapiSecurity;
+}
+
+
 export class GetOpenapiVersionOpenapiResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getOpenapiVersionOpenapi200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getOpenapiVersionOpenapi404ApplicationJsonObject?: GetOpenapiVersionOpenapi404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getOpenapiVersionOpenapi500ApplicationJsonObject?: GetOpenapiVersionOpenapi500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

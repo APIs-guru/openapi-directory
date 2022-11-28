@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostTagPolicyActionEnum(str, Enum):
     TAG_POLICY = "TagPolicy"
@@ -10,8 +14,8 @@ class PostTagPolicyVersionEnum(str, Enum):
 
 @dataclass
 class PostTagPolicyQueryParams:
-    action: PostTagPolicyActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostTagPolicyVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostTagPolicyActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostTagPolicyVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostTagPolicyHeaders:
 
 @dataclass
 class PostTagPolicyRequest:
-    query_params: PostTagPolicyQueryParams = field(default=None)
-    headers: PostTagPolicyHeaders = field(default=None)
+    headers: PostTagPolicyHeaders = field()
+    query_params: PostTagPolicyQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostTagPolicyResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

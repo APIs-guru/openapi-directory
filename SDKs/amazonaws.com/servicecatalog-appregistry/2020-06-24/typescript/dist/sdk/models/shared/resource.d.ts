@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ResourceIntegrations } from "./resourceintegrations";
 /**
  *  The information about the resource.

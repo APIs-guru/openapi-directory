@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CreateAdsByInventoryReferenceRequest } from "./createadsbyinventoryreferencerequest";
+
 
 
 // BulkCreateAdsByInventoryReferenceRequest
@@ -8,6 +8,6 @@ import { CreateAdsByInventoryReferenceRequest } from "./createadsbyinventoryrefe
  * This type defines the fields used to create ads in bulk by inventory reference IDs.
 **/
 export class BulkCreateAdsByInventoryReferenceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requests", elemType: shared.CreateAdsByInventoryReferenceRequest })
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: CreateAdsByInventoryReferenceRequest })
   requests?: CreateAdsByInventoryReferenceRequest[];
 }

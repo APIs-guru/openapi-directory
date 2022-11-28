@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DistributionBundle
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the specifications of a distribution bundle.
 **/
 export class DistributionBundle extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bundleId" })
+  @SpeakeasyMetadata({ data: "json, name=bundleId" })
   bundleId?: string;
 
-  @Metadata({ data: "json, name=isActive" })
+  @SpeakeasyMetadata({ data: "json, name=isActive" })
   isActive?: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=price" })
+  @SpeakeasyMetadata({ data: "json, name=price" })
   price?: number;
 
-  @Metadata({ data: "json, name=transferPerMonthInGb" })
+  @SpeakeasyMetadata({ data: "json, name=transferPerMonthInGb" })
   transferPerMonthInGb?: number;
 }

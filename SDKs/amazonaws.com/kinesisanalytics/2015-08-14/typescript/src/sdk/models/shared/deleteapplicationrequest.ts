@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteApplicationRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class DeleteApplicationRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationName" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationName" })
   applicationName: string;
 
-  @Metadata({ data: "json, name=CreateTimestamp" })
+  @SpeakeasyMetadata({ data: "json, name=CreateTimestamp" })
   createTimestamp: Date;
 }

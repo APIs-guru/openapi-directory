@@ -1,5 +1,7 @@
 package shared
 
+// AccessReview
+// Conveys information about a Kubernetes access review (e.g. kubectl auth can-i ...) that was involved in a finding.
 type AccessReview struct {
 	Group       *string `json:"group,omitempty"`
 	Name        *string `json:"name,omitempty"`

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PostgresqlRdbms } from "./postgresqlrdbms";
-import { PostgresqlRdbms } from "./postgresqlrdbms";
+
 
 
 // PostgresqlSourceConfig
@@ -8,15 +8,15 @@ import { PostgresqlRdbms } from "./postgresqlrdbms";
  * PostgreSQL data source configuration
 **/
 export class PostgresqlSourceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=excludeObjects" })
+  @SpeakeasyMetadata({ data: "json, name=excludeObjects" })
   excludeObjects?: PostgresqlRdbms;
 
-  @Metadata({ data: "json, name=includeObjects" })
+  @SpeakeasyMetadata({ data: "json, name=includeObjects" })
   includeObjects?: PostgresqlRdbms;
 
-  @Metadata({ data: "json, name=publication" })
+  @SpeakeasyMetadata({ data: "json, name=publication" })
   publication?: string;
 
-  @Metadata({ data: "json, name=replicationSlot" })
+  @SpeakeasyMetadata({ data: "json, name=replicationSlot" })
   replicationSlot?: string;
 }

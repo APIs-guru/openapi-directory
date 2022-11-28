@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteApplicationVpcConfigurationResponse = /** @class */ (function (_super) {
     __extends(DeleteApplicationVpcConfigurationResponse, _super);
     function DeleteApplicationVpcConfigurationResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApplicationARN" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationARN" }),
         __metadata("design:type", String)
     ], DeleteApplicationVpcConfigurationResponse.prototype, "applicationArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ApplicationVersionId" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationVersionId" }),
         __metadata("design:type", Number)
     ], DeleteApplicationVpcConfigurationResponse.prototype, "applicationVersionId", void 0);
     return DeleteApplicationVpcConfigurationResponse;

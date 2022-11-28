@@ -31,7 +31,7 @@ type IamProjectsLocationsWorkloadIdentityPoolsCreateSecurity struct {
 type IamProjectsLocationsWorkloadIdentityPoolsCreateRequest struct {
 	PathParams  IamProjectsLocationsWorkloadIdentityPoolsCreatePathParams
 	QueryParams IamProjectsLocationsWorkloadIdentityPoolsCreateQueryParams
-	Request     *shared.WorkloadIdentityPool `request:"mediaType=application/json"`
+	Request     *shared.WorkloadIdentityPoolInput `request:"mediaType=application/json"`
 	Security    IamProjectsLocationsWorkloadIdentityPoolsCreateSecurity
 }
 

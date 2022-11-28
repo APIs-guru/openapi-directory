@@ -11,6 +11,8 @@ const (
 	BundleDownloadEntityDownloadMethodEnumFullZip BundleDownloadEntityDownloadMethodEnum = "full_zip"
 )
 
+// BundleDownloadEntity
+// List Bundle Downloads
 type BundleDownloadEntity struct {
 	BundleRegistration *BundleRegistrationEntity               `json:"bundle_registration,omitempty"`
 	CreatedAt          *time.Time                              `json:"created_at,omitempty"`

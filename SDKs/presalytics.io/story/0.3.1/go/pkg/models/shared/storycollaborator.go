@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StoryCollaborator
+// Description of a user that can collaborate on a story
 type StoryCollaborator struct {
 	Active           *bool           `json:"active,omitempty"`
 	CreatedAt        *time.Time      `json:"created_at,omitempty"`

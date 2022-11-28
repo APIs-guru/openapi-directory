@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PortRange } from "./portrange";
 
 
+
 export class UpdateCustomRoutingListenerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ListenerArn" })
+  @SpeakeasyMetadata({ data: "json, name=ListenerArn" })
   listenerArn: string;
 
-  @Metadata({ data: "json, name=PortRanges", elemType: shared.PortRange })
+  @SpeakeasyMetadata({ data: "json, name=PortRanges", elemType: PortRange })
   portRanges: PortRange[];
 }

@@ -8,6 +8,8 @@ const (
 	SubscriptionStateEnumResourceError    SubscriptionStateEnum = "RESOURCE_ERROR"
 )
 
+// Subscription
+// A subscription resource. If none of `push_config` or `bigquery_config` is set, then the subscriber will pull and ack messages using API methods. At most one of these fields may be set.
 type Subscription struct {
 	AckDeadlineSeconds            *int32                 `json:"ackDeadlineSeconds,omitempty"`
 	BigqueryConfig                *BigQueryConfig        `json:"bigqueryConfig,omitempty"`

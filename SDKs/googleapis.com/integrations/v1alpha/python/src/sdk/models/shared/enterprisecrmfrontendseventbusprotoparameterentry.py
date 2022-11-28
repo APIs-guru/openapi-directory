@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import enterprisecrmfrontendseventbusprotoparametervaluetype
+from sdk import utils
+from . import *
 
 class EnterpriseCrmFrontendsEventbusProtoParameterEntryDataTypeEnum(str, Enum):
     DATA_TYPE_UNSPECIFIED = "DATA_TYPE_UNSPECIFIED"
@@ -27,7 +29,11 @@ class EnterpriseCrmFrontendsEventbusProtoParameterEntryDataTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class EnterpriseCrmFrontendsEventbusProtoParameterEntry:
-    data_type: Optional[EnterpriseCrmFrontendsEventbusProtoParameterEntryDataTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataType' }})
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    value: Optional[enterprisecrmfrontendseventbusprotoparametervaluetype.EnterpriseCrmFrontendsEventbusProtoParameterValueType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
+    r"""EnterpriseCrmFrontendsEventbusProtoParameterEntry
+    Key-value pair of EventBus parameters.
+    """
+    
+    data_type: Optional[EnterpriseCrmFrontendsEventbusProtoParameterEntryDataTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataType') }})
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    value: Optional[EnterpriseCrmFrontendsEventbusProtoParameterValueType] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('value') }})
     

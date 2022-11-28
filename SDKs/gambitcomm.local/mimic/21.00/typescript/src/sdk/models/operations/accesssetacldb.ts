@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AccessSetAcldbPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=databaseName" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=databaseName" })
   databaseName: string;
 }
 
 
 export class AccessSetAcldbRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: AccessSetAcldbPathParams;
 }
 
 
 export class AccessSetAcldbResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   accessSetAcldb200ApplicationJsonString?: string;
 }

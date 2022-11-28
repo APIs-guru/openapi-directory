@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Destiny2GetUniqueWeaponHistoryPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=characterId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=characterId" })
   characterId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=destinyMembershipId" })
   destinyMembershipId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=membershipType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=membershipType" })
   membershipType: number;
 }
 
 
 export class Destiny2GetUniqueWeaponHistoryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: Destiny2GetUniqueWeaponHistoryPathParams;
 }
 
 
 export class Destiny2GetUniqueWeaponHistoryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeReservedDbInstancesOfferingsActionEnum(str, Enum):
     DESCRIBE_RESERVED_DB_INSTANCES_OFFERINGS = "DescribeReservedDBInstancesOfferings"
@@ -10,8 +14,8 @@ class PostDescribeReservedDbInstancesOfferingsVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeReservedDbInstancesOfferingsQueryParams:
-    action: PostDescribeReservedDbInstancesOfferingsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDescribeReservedDbInstancesOfferingsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDescribeReservedDbInstancesOfferingsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeReservedDbInstancesOfferingsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDescribeReservedDbInstancesOfferingsHeaders:
 
 @dataclass
 class PostDescribeReservedDbInstancesOfferingsRequest:
-    query_params: PostDescribeReservedDbInstancesOfferingsQueryParams = field(default=None)
-    headers: PostDescribeReservedDbInstancesOfferingsHeaders = field(default=None)
+    headers: PostDescribeReservedDbInstancesOfferingsHeaders = field()
+    query_params: PostDescribeReservedDbInstancesOfferingsQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeReservedDbInstancesOfferingsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

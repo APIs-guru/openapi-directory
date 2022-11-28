@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class TwilioMessagePostTwilioPostHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" })
   authorization?: string;
 }
 
 
 export class TwilioMessagePostTwilioPostRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: TwilioMessagePostTwilioPostHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.TwilioMessageRequest;
 }
 
 
 export class TwilioMessagePostTwilioPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   twilioMessagePostTwilioPost200ApplicationJsonAny?: any;
 }

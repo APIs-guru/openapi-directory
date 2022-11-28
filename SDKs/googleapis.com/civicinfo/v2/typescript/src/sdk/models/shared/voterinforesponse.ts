@@ -1,14 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Contest } from "./contest";
-import { PollingLocation } from "./pollinglocation";
 import { PollingLocation } from "./pollinglocation";
 import { Election } from "./election";
 import { SimpleAddressType } from "./simpleaddresstype";
-import { Election } from "./election";
-import { PollingLocation } from "./pollinglocation";
 import { Precinct } from "./precinct";
 import { AdministrationRegion } from "./administrationregion";
+
 
 
 // VoterInfoResponse
@@ -16,39 +13,39 @@ import { AdministrationRegion } from "./administrationregion";
  * The result of a voter info lookup query.
 **/
 export class VoterInfoResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contests", elemType: shared.Contest })
+  @SpeakeasyMetadata({ data: "json, name=contests", elemType: Contest })
   contests?: Contest[];
 
-  @Metadata({ data: "json, name=dropOffLocations", elemType: shared.PollingLocation })
+  @SpeakeasyMetadata({ data: "json, name=dropOffLocations", elemType: PollingLocation })
   dropOffLocations?: PollingLocation[];
 
-  @Metadata({ data: "json, name=earlyVoteSites", elemType: shared.PollingLocation })
+  @SpeakeasyMetadata({ data: "json, name=earlyVoteSites", elemType: PollingLocation })
   earlyVoteSites?: PollingLocation[];
 
-  @Metadata({ data: "json, name=election" })
+  @SpeakeasyMetadata({ data: "json, name=election" })
   election?: Election;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=mailOnly" })
+  @SpeakeasyMetadata({ data: "json, name=mailOnly" })
   mailOnly?: boolean;
 
-  @Metadata({ data: "json, name=normalizedInput" })
+  @SpeakeasyMetadata({ data: "json, name=normalizedInput" })
   normalizedInput?: SimpleAddressType;
 
-  @Metadata({ data: "json, name=otherElections", elemType: shared.Election })
+  @SpeakeasyMetadata({ data: "json, name=otherElections", elemType: Election })
   otherElections?: Election[];
 
-  @Metadata({ data: "json, name=pollingLocations", elemType: shared.PollingLocation })
+  @SpeakeasyMetadata({ data: "json, name=pollingLocations", elemType: PollingLocation })
   pollingLocations?: PollingLocation[];
 
-  @Metadata({ data: "json, name=precinctId" })
+  @SpeakeasyMetadata({ data: "json, name=precinctId" })
   precinctId?: string;
 
-  @Metadata({ data: "json, name=precincts", elemType: shared.Precinct })
+  @SpeakeasyMetadata({ data: "json, name=precincts", elemType: Precinct })
   precincts?: Precinct[];
 
-  @Metadata({ data: "json, name=state", elemType: shared.AdministrationRegion })
+  @SpeakeasyMetadata({ data: "json, name=state", elemType: AdministrationRegion })
   state?: AdministrationRegion[];
 }

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class DisplayvideoPartnersTargetingTypesAssignedTargetingOptionsGetTargetingTypeEnum(str, Enum):
@@ -53,9 +54,9 @@ class DisplayvideoPartnersTargetingTypesAssignedTargetingOptionsGetTargetingType
 
 @dataclass
 class DisplayvideoPartnersTargetingTypesAssignedTargetingOptionsGetPathParams:
-    assigned_targeting_option_id: str = field(default=None, metadata={'path_param': { 'field_name': 'assignedTargetingOptionId', 'style': 'simple', 'explode': False }})
-    partner_id: str = field(default=None, metadata={'path_param': { 'field_name': 'partnerId', 'style': 'simple', 'explode': False }})
-    targeting_type: DisplayvideoPartnersTargetingTypesAssignedTargetingOptionsGetTargetingTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'targetingType', 'style': 'simple', 'explode': False }})
+    assigned_targeting_option_id: str = field(metadata={'path_param': { 'field_name': 'assignedTargetingOptionId', 'style': 'simple', 'explode': False }})
+    partner_id: str = field(metadata={'path_param': { 'field_name': 'partnerId', 'style': 'simple', 'explode': False }})
+    targeting_type: DisplayvideoPartnersTargetingTypesAssignedTargetingOptionsGetTargetingTypeEnum = field(metadata={'path_param': { 'field_name': 'targetingType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -75,20 +76,20 @@ class DisplayvideoPartnersTargetingTypesAssignedTargetingOptionsGetQueryParams:
 
 @dataclass
 class DisplayvideoPartnersTargetingTypesAssignedTargetingOptionsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoPartnersTargetingTypesAssignedTargetingOptionsGetRequest:
-    path_params: DisplayvideoPartnersTargetingTypesAssignedTargetingOptionsGetPathParams = field(default=None)
-    query_params: DisplayvideoPartnersTargetingTypesAssignedTargetingOptionsGetQueryParams = field(default=None)
-    security: DisplayvideoPartnersTargetingTypesAssignedTargetingOptionsGetSecurity = field(default=None)
+    path_params: DisplayvideoPartnersTargetingTypesAssignedTargetingOptionsGetPathParams = field()
+    query_params: DisplayvideoPartnersTargetingTypesAssignedTargetingOptionsGetQueryParams = field()
+    security: DisplayvideoPartnersTargetingTypesAssignedTargetingOptionsGetSecurity = field()
     
 
 @dataclass
 class DisplayvideoPartnersTargetingTypesAssignedTargetingOptionsGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     assigned_targeting_option: Optional[shared.AssignedTargetingOption] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

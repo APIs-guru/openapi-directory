@@ -1,5 +1,18 @@
 package shared
 
+type CryptoKeyVersionStateEnum string
+
+const (
+	CryptoKeyVersionStateEnumCryptoKeyVersionStateUnspecified CryptoKeyVersionStateEnum = "CRYPTO_KEY_VERSION_STATE_UNSPECIFIED"
+	CryptoKeyVersionStateEnumPendingGeneration                CryptoKeyVersionStateEnum = "PENDING_GENERATION"
+	CryptoKeyVersionStateEnumEnabled                          CryptoKeyVersionStateEnum = "ENABLED"
+	CryptoKeyVersionStateEnumDisabled                         CryptoKeyVersionStateEnum = "DISABLED"
+	CryptoKeyVersionStateEnumDestroyed                        CryptoKeyVersionStateEnum = "DESTROYED"
+	CryptoKeyVersionStateEnumDestroyScheduled                 CryptoKeyVersionStateEnum = "DESTROY_SCHEDULED"
+	CryptoKeyVersionStateEnumPendingImport                    CryptoKeyVersionStateEnum = "PENDING_IMPORT"
+	CryptoKeyVersionStateEnumImportFailed                     CryptoKeyVersionStateEnum = "IMPORT_FAILED"
+)
+
 type CryptoKeyVersionAlgorithmEnum string
 
 const (
@@ -27,6 +40,10 @@ const (
 	CryptoKeyVersionAlgorithmEnumEcSignP384Sha384                     CryptoKeyVersionAlgorithmEnum = "EC_SIGN_P384_SHA384"
 	CryptoKeyVersionAlgorithmEnumEcSignSecp256K1Sha256                CryptoKeyVersionAlgorithmEnum = "EC_SIGN_SECP256K1_SHA256"
 	CryptoKeyVersionAlgorithmEnumHmacSha256                           CryptoKeyVersionAlgorithmEnum = "HMAC_SHA256"
+	CryptoKeyVersionAlgorithmEnumHmacSha1                             CryptoKeyVersionAlgorithmEnum = "HMAC_SHA1"
+	CryptoKeyVersionAlgorithmEnumHmacSha384                           CryptoKeyVersionAlgorithmEnum = "HMAC_SHA384"
+	CryptoKeyVersionAlgorithmEnumHmacSha512                           CryptoKeyVersionAlgorithmEnum = "HMAC_SHA512"
+	CryptoKeyVersionAlgorithmEnumHmacSha224                           CryptoKeyVersionAlgorithmEnum = "HMAC_SHA224"
 	CryptoKeyVersionAlgorithmEnumExternalSymmetricEncryption          CryptoKeyVersionAlgorithmEnum = "EXTERNAL_SYMMETRIC_ENCRYPTION"
 )
 
@@ -40,19 +57,16 @@ const (
 	CryptoKeyVersionProtectionLevelEnumExternalVpc                CryptoKeyVersionProtectionLevelEnum = "EXTERNAL_VPC"
 )
 
-type CryptoKeyVersionStateEnum string
+// CryptoKeyVersionInput
+// A CryptoKeyVersion represents an individual cryptographic key, and the associated key material. An ENABLED version can be used for cryptographic operations. For security reasons, the raw cryptographic key material represented by a CryptoKeyVersion can never be viewed or exported. It can only be used to encrypt, decrypt, or sign data when an authorized user or application invokes Cloud KMS.
+type CryptoKeyVersionInput struct {
+	Attestation                    *KeyOperationAttestationInput   `json:"attestation,omitempty"`
+	ExternalProtectionLevelOptions *ExternalProtectionLevelOptions `json:"externalProtectionLevelOptions,omitempty"`
+	State                          *CryptoKeyVersionStateEnum      `json:"state,omitempty"`
+}
 
-const (
-	CryptoKeyVersionStateEnumCryptoKeyVersionStateUnspecified CryptoKeyVersionStateEnum = "CRYPTO_KEY_VERSION_STATE_UNSPECIFIED"
-	CryptoKeyVersionStateEnumPendingGeneration                CryptoKeyVersionStateEnum = "PENDING_GENERATION"
-	CryptoKeyVersionStateEnumEnabled                          CryptoKeyVersionStateEnum = "ENABLED"
-	CryptoKeyVersionStateEnumDisabled                         CryptoKeyVersionStateEnum = "DISABLED"
-	CryptoKeyVersionStateEnumDestroyed                        CryptoKeyVersionStateEnum = "DESTROYED"
-	CryptoKeyVersionStateEnumDestroyScheduled                 CryptoKeyVersionStateEnum = "DESTROY_SCHEDULED"
-	CryptoKeyVersionStateEnumPendingImport                    CryptoKeyVersionStateEnum = "PENDING_IMPORT"
-	CryptoKeyVersionStateEnumImportFailed                     CryptoKeyVersionStateEnum = "IMPORT_FAILED"
-)
-
+// CryptoKeyVersion
+// A CryptoKeyVersion represents an individual cryptographic key, and the associated key material. An ENABLED version can be used for cryptographic operations. For security reasons, the raw cryptographic key material represented by a CryptoKeyVersion can never be viewed or exported. It can only be used to encrypt, decrypt, or sign data when an authorized user or application invokes Cloud KMS.
 type CryptoKeyVersion struct {
 	Algorithm                      *CryptoKeyVersionAlgorithmEnum       `json:"algorithm,omitempty"`
 	Attestation                    *KeyOperationAttestation             `json:"attestation,omitempty"`

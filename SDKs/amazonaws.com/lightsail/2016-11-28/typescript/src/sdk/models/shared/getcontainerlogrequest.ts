@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetContainerLogRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerName" })
+  @SpeakeasyMetadata({ data: "json, name=containerName" })
   containerName: string;
 
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: Date;
 
-  @Metadata({ data: "json, name=filterPattern" })
+  @SpeakeasyMetadata({ data: "json, name=filterPattern" })
   filterPattern?: string;
 
-  @Metadata({ data: "json, name=pageToken" })
+  @SpeakeasyMetadata({ data: "json, name=pageToken" })
   pageToken?: string;
 
-  @Metadata({ data: "json, name=serviceName" })
+  @SpeakeasyMetadata({ data: "json, name=serviceName" })
   serviceName: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: Date;
 }

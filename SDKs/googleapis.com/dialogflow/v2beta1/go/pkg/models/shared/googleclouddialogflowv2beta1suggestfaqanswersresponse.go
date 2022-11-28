@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2beta1SuggestFaqAnswersResponse
+// The request message for Participants.SuggestFaqAnswers.
 type GoogleCloudDialogflowV2beta1SuggestFaqAnswersResponse struct {
 	ContextSize   *int32                                  `json:"contextSize,omitempty"`
 	FaqAnswers    []GoogleCloudDialogflowV2beta1FaqAnswer `json:"faqAnswers,omitempty"`

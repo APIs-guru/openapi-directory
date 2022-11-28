@@ -16,11 +16,11 @@ class PostConfigApacheSlingReferrerFilterQueryParams:
 
 @dataclass
 class PostConfigApacheSlingReferrerFilterRequest:
-    query_params: PostConfigApacheSlingReferrerFilterQueryParams = field(default=None)
+    query_params: PostConfigApacheSlingReferrerFilterQueryParams = field()
     
 
 @dataclass
 class PostConfigApacheSlingReferrerFilterResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

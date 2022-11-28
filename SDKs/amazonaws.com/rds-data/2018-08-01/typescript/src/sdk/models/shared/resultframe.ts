@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Record } from "./record";
 import { ResultSetMetadata } from "./resultsetmetadata";
+
 
 
 // ResultFrame
@@ -9,9 +9,9 @@ import { ResultSetMetadata } from "./resultsetmetadata";
  * The result set returned by a SQL statement.
 **/
 export class ResultFrame extends SpeakeasyBase {
-  @Metadata({ data: "json, name=records", elemType: shared.Record })
+  @SpeakeasyMetadata({ data: "json, name=records", elemType: Record })
   records?: Record[];
 
-  @Metadata({ data: "json, name=resultSetMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=resultSetMetadata" })
   resultSetMetadata?: ResultSetMetadata;
 }

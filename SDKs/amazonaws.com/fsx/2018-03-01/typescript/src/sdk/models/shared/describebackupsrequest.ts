@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Filter } from "./filter";
+
 
 
 // DescribeBackupsRequest
@@ -8,15 +8,15 @@ import { Filter } from "./filter";
  * The request object for <code>DescribeBackups</code> operation.
 **/
 export class DescribeBackupsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BackupIds" })
+  @SpeakeasyMetadata({ data: "json, name=BackupIds" })
   backupIds?: string[];
 
-  @Metadata({ data: "json, name=Filters", elemType: shared.Filter })
+  @SpeakeasyMetadata({ data: "json, name=Filters", elemType: Filter })
   filters?: Filter[];
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

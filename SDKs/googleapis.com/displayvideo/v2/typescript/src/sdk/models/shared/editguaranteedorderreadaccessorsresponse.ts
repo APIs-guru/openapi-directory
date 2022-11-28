@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EditGuaranteedOrderReadAccessorsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=readAccessInherited" })
+  @SpeakeasyMetadata({ data: "json, name=readAccessInherited" })
   readAccessInherited?: boolean;
 
-  @Metadata({ data: "json, name=readAdvertiserIds" })
+  @SpeakeasyMetadata({ data: "json, name=readAdvertiserIds" })
   readAdvertiserIds?: string[];
 }

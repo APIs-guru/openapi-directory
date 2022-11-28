@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// CodeReview
+//
+//	Information about a code review. A code review belongs to the associated repository that contains the reviewed code.
 type CodeReview struct {
 	AnalysisTypes        []AnalysisTypeEnum `json:"AnalysisTypes,omitempty"`
 	AssociationArn       *string            `json:"AssociationArn,omitempty"`

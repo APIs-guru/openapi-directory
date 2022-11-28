@@ -1,5 +1,7 @@
 package shared
 
+// FilterExpression
+// JSON template for an Analytics filter expression.
 type FilterExpression struct {
 	CaseSensitive   *bool   `json:"caseSensitive,omitempty"`
 	ExpressionValue *string `json:"expressionValue,omitempty"`

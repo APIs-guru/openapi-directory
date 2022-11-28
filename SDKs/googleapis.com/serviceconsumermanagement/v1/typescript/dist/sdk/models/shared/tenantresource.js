@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var TenantResourceStatusEnum;
 (function (TenantResourceStatusEnum) {
     TenantResourceStatusEnum["StatusUnspecified"] = "STATUS_UNSPECIFIED";
@@ -42,15 +42,15 @@ var TenantResource = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=resource" }),
+        SpeakeasyMetadata({ data: "json, name=resource" }),
         __metadata("design:type", String)
     ], TenantResource.prototype, "resource", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], TenantResource.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=tag" }),
+        SpeakeasyMetadata({ data: "json, name=tag" }),
         __metadata("design:type", String)
     ], TenantResource.prototype, "tag", void 0);
     return TenantResource;

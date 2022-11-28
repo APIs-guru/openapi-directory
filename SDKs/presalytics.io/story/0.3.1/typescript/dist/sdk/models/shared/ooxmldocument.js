@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // OoxmlDocument
 /**
  * A reference to an Ooxml Automation Document from the Presalytics Ooxml Automation API
@@ -33,35 +33,35 @@ var OoxmlDocument = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=created_at" }),
+        SpeakeasyMetadata({ data: "json, name=created_at" }),
         __metadata("design:type", Date)
     ], OoxmlDocument.prototype, "createdAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=created_by" }),
+        SpeakeasyMetadata({ data: "json, name=created_by" }),
         __metadata("design:type", String)
     ], OoxmlDocument.prototype, "createdBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=delete_target_on_story_delete" }),
+        SpeakeasyMetadata({ data: "json, name=delete_target_on_story_delete" }),
         __metadata("design:type", Boolean)
     ], OoxmlDocument.prototype, "deleteTargetOnStoryDelete", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], OoxmlDocument.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=ooxml_automation_id" }),
+        SpeakeasyMetadata({ data: "json, name=ooxml_automation_id" }),
         __metadata("design:type", String)
     ], OoxmlDocument.prototype, "ooxmlAutomationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=story_id" }),
+        SpeakeasyMetadata({ data: "json, name=story_id" }),
         __metadata("design:type", String)
     ], OoxmlDocument.prototype, "storyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated_at" }),
+        SpeakeasyMetadata({ data: "json, name=updated_at" }),
         __metadata("design:type", Date)
     ], OoxmlDocument.prototype, "updatedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated_by" }),
+        SpeakeasyMetadata({ data: "json, name=updated_by" }),
         __metadata("design:type", String)
     ], OoxmlDocument.prototype, "updatedBy", void 0);
     return OoxmlDocument;

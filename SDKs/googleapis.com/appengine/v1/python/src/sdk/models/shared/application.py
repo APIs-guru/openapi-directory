@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import urldispatchrule
-from . import featuresettings
-from . import identityawareproxy
+from sdk import utils
+from . import *
 
 class ApplicationDatabaseTypeEnum(str, Enum):
     DATABASE_TYPE_UNSPECIFIED = "DATABASE_TYPE_UNSPECIFIED"
@@ -21,19 +21,23 @@ class ApplicationServingStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Application:
-    auth_domain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authDomain' }})
-    code_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'codeBucket' }})
-    database_type: Optional[ApplicationDatabaseTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'databaseType' }})
-    default_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultBucket' }})
-    default_cookie_expiration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultCookieExpiration' }})
-    default_hostname: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultHostname' }})
-    dispatch_rules: Optional[List[urldispatchrule.URLDispatchRule]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dispatchRules' }})
-    feature_settings: Optional[featuresettings.FeatureSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'featureSettings' }})
-    gcr_domain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gcrDomain' }})
-    iap: Optional[identityawareproxy.IdentityAwareProxy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iap' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    location_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locationId' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    service_account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serviceAccount' }})
-    serving_status: Optional[ApplicationServingStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'servingStatus' }})
+    r"""Application
+    An Application resource contains the top-level configuration of an App Engine application.
+    """
+    
+    auth_domain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authDomain') }})
+    code_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('codeBucket') }})
+    database_type: Optional[ApplicationDatabaseTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('databaseType') }})
+    default_bucket: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultBucket') }})
+    default_cookie_expiration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultCookieExpiration') }})
+    default_hostname: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('defaultHostname') }})
+    dispatch_rules: Optional[List[URLDispatchRule]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dispatchRules') }})
+    feature_settings: Optional[FeatureSettings] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('featureSettings') }})
+    gcr_domain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gcrDomain') }})
+    iap: Optional[IdentityAwareProxy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('iap') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    location_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('locationId') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    service_account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serviceAccount') }})
+    serving_status: Optional[ApplicationServingStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('servingStatus') }})
     

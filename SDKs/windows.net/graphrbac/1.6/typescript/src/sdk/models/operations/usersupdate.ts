@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UsersUpdatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tenantID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tenantID" })
   tenantId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=upnOrObjectId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=upnOrObjectId" })
   upnOrObjectId: string;
 }
 
 
 export class UsersUpdateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api-version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" })
   apiVersion: string;
 }
 
 
 export class UsersUpdateRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   userUpdateParameters?: Map<string, Map<string, any>>;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   userUpdateParameters1?: Map<string, Map<string, any>>;
 }
 
 
 export class UsersUpdateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UsersUpdatePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UsersUpdateQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request: UsersUpdateRequests;
 }
 
 
 export class UsersUpdateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   graphError?: shared.GraphError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

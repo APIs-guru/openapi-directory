@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 class GetUserInfo200ApplicationJSONActionEnum(str, Enum):
@@ -17,8 +19,8 @@ class GetUserInfo200ApplicationJSONDataDigestEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetUserInfo200ApplicationJSONData:
-    digest: GetUserInfo200ApplicationJSONDataDigestEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'digest' }})
-    users: List[shared.Users] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'users' }})
+    digest: GetUserInfo200ApplicationJSONDataDigestEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('digest') }})
+    users: List[shared.Users] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('users') }})
     
 class GetUserInfo200ApplicationJSONResultEnum(str, Enum):
     SUCCESS = "success"
@@ -28,14 +30,14 @@ class GetUserInfo200ApplicationJSONResultEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetUserInfo200ApplicationJSON:
-    action: GetUserInfo200ApplicationJSONActionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    data: GetUserInfo200ApplicationJSONData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    result: GetUserInfo200ApplicationJSONResultEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'result' }})
+    action: GetUserInfo200ApplicationJSONActionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    data: GetUserInfo200ApplicationJSONData = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    result: GetUserInfo200ApplicationJSONResultEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('result') }})
     
 
 @dataclass
 class GetUserInfoResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_user_info_200_application_json_object: Optional[GetUserInfo200ApplicationJSON] = field(default=None)
     

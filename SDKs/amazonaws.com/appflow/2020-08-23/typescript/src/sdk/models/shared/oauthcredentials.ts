@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectorOAuthRequest } from "./connectoroauthrequest";
+
 
 
 // OAuthCredentials
@@ -7,18 +8,18 @@ import { ConnectorOAuthRequest } from "./connectoroauthrequest";
  *  The OAuth credentials required for OAuth type authentication. 
 **/
 export class OAuthCredentials extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessToken" })
+  @SpeakeasyMetadata({ data: "json, name=accessToken" })
   accessToken?: string;
 
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId: string;
 
-  @Metadata({ data: "json, name=clientSecret" })
+  @SpeakeasyMetadata({ data: "json, name=clientSecret" })
   clientSecret: string;
 
-  @Metadata({ data: "json, name=oAuthRequest" })
+  @SpeakeasyMetadata({ data: "json, name=oAuthRequest" })
   oAuthRequest?: ConnectorOAuthRequest;
 
-  @Metadata({ data: "json, name=refreshToken" })
+  @SpeakeasyMetadata({ data: "json, name=refreshToken" })
   refreshToken?: string;
 }

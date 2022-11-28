@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import serviceconfig
+from sdk import utils
+from . import *
 
 class ServiceStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -12,8 +14,12 @@ class ServiceStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Service:
-    config: Optional[serviceconfig.ServiceConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'config' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    parent: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent' }})
-    state: Optional[ServiceStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    r"""Service
+    A service that is available for use by the consumer.
+    """
+    
+    config: Optional[ServiceConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('config') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    parent: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('parent') }})
+    state: Optional[ServiceStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
     

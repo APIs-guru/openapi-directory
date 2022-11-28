@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetMediaReceiverRegistrar3PathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serverId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serverId" })
   serverId: string;
 }
 
 
 export class GetMediaReceiverRegistrar3Request extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetMediaReceiverRegistrar3PathParams;
 }
 
 
 export class GetMediaReceiverRegistrar3Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getMediaReceiverRegistrar3200TextXmlBinaryString?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

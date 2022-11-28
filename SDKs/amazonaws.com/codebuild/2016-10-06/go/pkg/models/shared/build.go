@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Build
+// Information about a build.
 type Build struct {
 	Arn                          *string                       `json:"arn,omitempty"`
 	Artifacts                    *BuildArtifacts               `json:"artifacts,omitempty"`

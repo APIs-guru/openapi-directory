@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Layer
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">Lambda layer</a>.
 **/
 export class Layer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=CodeSize" })
+  @SpeakeasyMetadata({ data: "json, name=CodeSize" })
   codeSize?: number;
 
-  @Metadata({ data: "json, name=SigningJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=SigningJobArn" })
   signingJobArn?: string;
 
-  @Metadata({ data: "json, name=SigningProfileVersionArn" })
+  @SpeakeasyMetadata({ data: "json, name=SigningProfileVersionArn" })
   signingProfileVersionArn?: string;
 }

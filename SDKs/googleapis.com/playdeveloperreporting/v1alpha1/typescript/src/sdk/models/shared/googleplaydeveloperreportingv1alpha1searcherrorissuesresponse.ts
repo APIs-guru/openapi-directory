@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePlayDeveloperReportingV1alpha1ErrorIssue } from "./googleplaydeveloperreportingv1alpha1errorissue";
+
 
 
 // GooglePlayDeveloperReportingV1alpha1SearchErrorIssuesResponse
@@ -8,9 +8,9 @@ import { GooglePlayDeveloperReportingV1alpha1ErrorIssue } from "./googleplaydeve
  * Response with a paginated list of issues that matched the request.
 **/
 export class GooglePlayDeveloperReportingV1alpha1SearchErrorIssuesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorIssues", elemType: shared.GooglePlayDeveloperReportingV1alpha1ErrorIssue })
+  @SpeakeasyMetadata({ data: "json, name=errorIssues", elemType: GooglePlayDeveloperReportingV1alpha1ErrorIssue })
   errorIssues?: GooglePlayDeveloperReportingV1alpha1ErrorIssue[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

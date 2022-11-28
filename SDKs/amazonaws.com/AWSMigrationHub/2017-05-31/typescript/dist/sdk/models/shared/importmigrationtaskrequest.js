@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ImportMigrationTaskRequest = /** @class */ (function (_super) {
     __extends(ImportMigrationTaskRequest, _super);
     function ImportMigrationTaskRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DryRun" }),
+        SpeakeasyMetadata({ data: "json, name=DryRun" }),
         __metadata("design:type", Boolean)
     ], ImportMigrationTaskRequest.prototype, "dryRun", void 0);
     __decorate([
-        Metadata({ data: "json, name=MigrationTaskName" }),
+        SpeakeasyMetadata({ data: "json, name=MigrationTaskName" }),
         __metadata("design:type", String)
     ], ImportMigrationTaskRequest.prototype, "migrationTaskName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProgressUpdateStream" }),
+        SpeakeasyMetadata({ data: "json, name=ProgressUpdateStream" }),
         __metadata("design:type", String)
     ], ImportMigrationTaskRequest.prototype, "progressUpdateStream", void 0);
     return ImportMigrationTaskRequest;

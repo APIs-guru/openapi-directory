@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -11,46 +12,36 @@ class GetDomainsQueryParams:
     
 
 @dataclass
-class GetDomainsSecurityOption1:
-    personal_access_token: shared.SchemePersonalAccessToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
-    
-
-@dataclass
-class GetDomainsSecurityOption2:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
 class GetDomainsSecurity:
-    option1: Optional[GetDomainsSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetDomainsSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    
-
-@dataclass
-class GetDomainsRequest:
-    query_params: GetDomainsQueryParams = field(default=None)
-    security: GetDomainsSecurity = field(default=None)
+    oauth: Optional[shared.SchemeOauth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    personal_access_token: Optional[shared.SchemePersonalAccessToken] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass_json
 @dataclass
 class GetDomains200ApplicationJSON:
-    data: Optional[List[shared.Domain]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
-    pages: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pages' }})
-    results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
+    data: Optional[List[shared.Domain]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    page: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('page') }})
+    pages: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pages') }})
+    results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
     
 
 @dataclass_json
 @dataclass
 class GetDomainsDefaultApplicationJSON:
-    errors: Optional[List[shared.ErrorObject]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
+    errors: Optional[List[shared.ErrorObject]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('errors') }})
+    
+
+@dataclass
+class GetDomainsRequest:
+    query_params: GetDomainsQueryParams = field()
+    security: GetDomainsSecurity = field()
     
 
 @dataclass
 class GetDomainsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_domains_200_application_json_object: Optional[GetDomains200ApplicationJSON] = field(default=None)
     get_domains_default_application_json_object: Optional[GetDomainsDefaultApplicationJSON] = field(default=None)
     

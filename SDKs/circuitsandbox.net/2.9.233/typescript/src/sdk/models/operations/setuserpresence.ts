@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SetUserPresenceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "form, name=clearDND;" })
+  @SpeakeasyMetadata({ data: "form, name=clearDND;" })
   clearDnd?: boolean;
 
-  @Metadata({ data: "form, name=dndUntil;" })
+  @SpeakeasyMetadata({ data: "form, name=dndUntil;" })
   dndUntil?: Date;
 
-  @Metadata({ data: "form, name=state;" })
+  @SpeakeasyMetadata({ data: "form, name=state;" })
   state: string;
 
-  @Metadata({ data: "form, name=statusMessage;" })
+  @SpeakeasyMetadata({ data: "form, name=statusMessage;" })
   statusMessage?: string;
 }
 
 
 export class SetUserPresenceSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class SetUserPresenceRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
   request: SetUserPresenceRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: SetUserPresenceSecurity;
 }
 
 
 export class SetUserPresenceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   presence?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

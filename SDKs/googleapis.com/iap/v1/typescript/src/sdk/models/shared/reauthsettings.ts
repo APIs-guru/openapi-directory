@@ -1,15 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ReauthSettingsMethodEnum {
-    MethodUnspecified = "METHOD_UNSPECIFIED"
-,    Login = "LOGIN"
-,    SecureKey = "SECURE_KEY"
+    MethodUnspecified = "METHOD_UNSPECIFIED",
+    Login = "LOGIN",
+    SecureKey = "SECURE_KEY",
+    EnrolledSecondFactors = "ENROLLED_SECOND_FACTORS"
 }
 
 export enum ReauthSettingsPolicyTypeEnum {
-    PolicyTypeUnspecified = "POLICY_TYPE_UNSPECIFIED"
-,    Minimum = "MINIMUM"
-,    Default = "DEFAULT"
+    PolicyTypeUnspecified = "POLICY_TYPE_UNSPECIFIED",
+    Minimum = "MINIMUM",
+    Default = "DEFAULT"
 }
 
 
@@ -18,12 +20,12 @@ export enum ReauthSettingsPolicyTypeEnum {
  * Configuration for IAP reauthentication policies.
 **/
 export class ReauthSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxAge" })
+  @SpeakeasyMetadata({ data: "json, name=maxAge" })
   maxAge?: string;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method?: ReauthSettingsMethodEnum;
 
-  @Metadata({ data: "json, name=policyType" })
+  @SpeakeasyMetadata({ data: "json, name=policyType" })
   policyType?: ReauthSettingsPolicyTypeEnum;
 }

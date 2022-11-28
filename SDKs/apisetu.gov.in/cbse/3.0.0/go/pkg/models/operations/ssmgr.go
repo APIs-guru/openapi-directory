@@ -28,11 +28,6 @@ type SsmgrSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type SsmgrRequest struct {
-	Request  *SsmgrRequestBody `request:"mediaType=application/json"`
-	Security SsmgrSecurity
-}
-
 type Ssmgr400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Ssmgr504ApplicationJSON struct {
 	Error            *Ssmgr504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Ssmgr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type SsmgrRequest struct {
+	Request  *SsmgrRequestBody `request:"mediaType=application/json"`
+	Security SsmgrSecurity
 }
 
 type SsmgrResponse struct {

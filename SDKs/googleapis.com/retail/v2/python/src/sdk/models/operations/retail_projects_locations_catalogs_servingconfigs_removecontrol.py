@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RetailProjectsLocationsCatalogsServingConfigsRemoveControlPathParams:
-    serving_config: str = field(default=None, metadata={'path_param': { 'field_name': 'servingConfig', 'style': 'simple', 'explode': False }})
+    serving_config: str = field(metadata={'path_param': { 'field_name': 'servingConfig', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class RetailProjectsLocationsCatalogsServingConfigsRemoveControlQueryParams:
 
 @dataclass
 class RetailProjectsLocationsCatalogsServingConfigsRemoveControlSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RetailProjectsLocationsCatalogsServingConfigsRemoveControlRequest:
-    path_params: RetailProjectsLocationsCatalogsServingConfigsRemoveControlPathParams = field(default=None)
-    query_params: RetailProjectsLocationsCatalogsServingConfigsRemoveControlQueryParams = field(default=None)
+    path_params: RetailProjectsLocationsCatalogsServingConfigsRemoveControlPathParams = field()
+    query_params: RetailProjectsLocationsCatalogsServingConfigsRemoveControlQueryParams = field()
+    security: RetailProjectsLocationsCatalogsServingConfigsRemoveControlSecurity = field()
     request: Optional[shared.GoogleCloudRetailV2RemoveControlRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: RetailProjectsLocationsCatalogsServingConfigsRemoveControlSecurity = field(default=None)
     
 
 @dataclass
 class RetailProjectsLocationsCatalogsServingConfigsRemoveControlResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_retail_v2_serving_config: Optional[shared.GoogleCloudRetailV2ServingConfig] = field(default=None)
-    status_code: int = field(default=None)
     

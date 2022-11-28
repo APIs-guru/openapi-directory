@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class RealtimebiddingBiddersBiddingFunctionsCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -23,7 +23,7 @@ export declare class RealtimebiddingBiddersBiddingFunctionsCreateSecurity extend
 export declare class RealtimebiddingBiddersBiddingFunctionsCreateRequest extends SpeakeasyBase {
     pathParams: RealtimebiddingBiddersBiddingFunctionsCreatePathParams;
     queryParams: RealtimebiddingBiddersBiddingFunctionsCreateQueryParams;
-    request?: shared.BiddingFunction;
+    request?: shared.BiddingFunctionInput;
     security: RealtimebiddingBiddersBiddingFunctionsCreateSecurity;
 }
 export declare class RealtimebiddingBiddersBiddingFunctionsCreateResponse extends SpeakeasyBase {

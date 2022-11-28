@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoScalingPolicyDescription } from "./autoscalingpolicydescription";
 
 
+
 export class PutAutoScalingPolicyOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AutoScalingPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=AutoScalingPolicy" })
   autoScalingPolicy?: AutoScalingPolicyDescription;
 
-  @Metadata({ data: "json, name=ClusterArn" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterArn" })
   clusterArn?: string;
 
-  @Metadata({ data: "json, name=ClusterId" })
+  @SpeakeasyMetadata({ data: "json, name=ClusterId" })
   clusterId?: string;
 
-  @Metadata({ data: "json, name=InstanceGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceGroupId" })
   instanceGroupId?: string;
 }

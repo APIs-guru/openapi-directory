@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum DynamicLinkEventStatEventEnum {
     DynamicLinkEventUnspecified = "DYNAMIC_LINK_EVENT_UNSPECIFIED",
     Click = "CLICK",

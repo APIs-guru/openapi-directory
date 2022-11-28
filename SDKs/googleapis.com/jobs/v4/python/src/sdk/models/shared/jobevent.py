@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class JobEventTypeEnum(str, Enum):
     JOB_EVENT_TYPE_UNSPECIFIED = "JOB_EVENT_TYPE_UNSPECIFIED"
@@ -24,6 +26,10 @@ class JobEventTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class JobEvent:
-    jobs: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobs' }})
-    type: Optional[JobEventTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""JobEvent
+    An event issued when a job seeker interacts with the application that implements Cloud Talent Solution.
+    """
+    
+    jobs: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobs') }})
+    type: Optional[JobEventTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

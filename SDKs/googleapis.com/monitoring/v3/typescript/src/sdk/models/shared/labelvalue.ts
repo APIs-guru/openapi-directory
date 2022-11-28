@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LabelValue
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A label value.
 **/
 export class LabelValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boolValue" })
+  @SpeakeasyMetadata({ data: "json, name=boolValue" })
   boolValue?: boolean;
 
-  @Metadata({ data: "json, name=int64Value" })
+  @SpeakeasyMetadata({ data: "json, name=int64Value" })
   int64Value?: string;
 
-  @Metadata({ data: "json, name=stringValue" })
+  @SpeakeasyMetadata({ data: "json, name=stringValue" })
   stringValue?: string;
 }

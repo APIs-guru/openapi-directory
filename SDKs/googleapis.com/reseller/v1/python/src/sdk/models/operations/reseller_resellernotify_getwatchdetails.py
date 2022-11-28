@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,14 +21,14 @@ class ResellerResellernotifyGetwatchdetailsQueryParams:
 
 @dataclass
 class ResellerResellernotifyGetwatchdetailsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ResellerResellernotifyGetwatchdetailsSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -38,13 +39,13 @@ class ResellerResellernotifyGetwatchdetailsSecurity:
 
 @dataclass
 class ResellerResellernotifyGetwatchdetailsRequest:
-    query_params: ResellerResellernotifyGetwatchdetailsQueryParams = field(default=None)
-    security: ResellerResellernotifyGetwatchdetailsSecurity = field(default=None)
+    query_params: ResellerResellernotifyGetwatchdetailsQueryParams = field()
+    security: ResellerResellernotifyGetwatchdetailsSecurity = field()
     
 
 @dataclass
 class ResellerResellernotifyGetwatchdetailsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     resellernotify_getwatchdetails_response: Optional[shared.ResellernotifyGetwatchdetailsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

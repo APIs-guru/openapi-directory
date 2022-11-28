@@ -1,31 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
-export class ViewManagedSshKeySecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class ViewManagedSshKeySecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
 
 export class ViewManagedSshKeySecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: ViewManagedSshKeySecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: ViewManagedSshKeySecurityOption2;
-}
-
-
-export class ViewManagedSshKeyRequest extends SpeakeasyBase {
-  @Metadata()
-  security: ViewManagedSshKeySecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
@@ -35,27 +18,33 @@ export class ViewManagedSshKeyRequest extends SpeakeasyBase {
  * 
 **/
 export class ViewManagedSshKey200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ssh_key" })
+  @SpeakeasyMetadata({ data: "json, name=ssh_key" })
   sshKey?: string;
 }
 
 
 export class ViewManagedSshKeyDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class ViewManagedSshKeyRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  security: ViewManagedSshKeySecurity;
+}
+
+
 export class ViewManagedSshKeyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   viewManagedSshKey200ApplicationJsonObject?: ViewManagedSshKey200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   viewManagedSshKeyDefaultApplicationJsonObject?: ViewManagedSshKeyDefaultApplicationJson;
 }

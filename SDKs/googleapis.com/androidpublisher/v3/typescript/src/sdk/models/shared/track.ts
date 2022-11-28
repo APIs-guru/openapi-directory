@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TrackRelease } from "./trackrelease";
+
 
 
 // Track
@@ -8,9 +8,9 @@ import { TrackRelease } from "./trackrelease";
  * A track configuration. The resource for TracksService.
 **/
 export class Track extends SpeakeasyBase {
-  @Metadata({ data: "json, name=releases", elemType: shared.TrackRelease })
+  @SpeakeasyMetadata({ data: "json, name=releases", elemType: TrackRelease })
   releases?: TrackRelease[];
 
-  @Metadata({ data: "json, name=track" })
+  @SpeakeasyMetadata({ data: "json, name=track" })
   track?: string;
 }

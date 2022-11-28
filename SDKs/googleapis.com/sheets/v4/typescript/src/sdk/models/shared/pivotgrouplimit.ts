@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PivotGroupLimit
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The count limit on rows or columns in the pivot group.
 **/
 export class PivotGroupLimit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applyOrder" })
+  @SpeakeasyMetadata({ data: "json, name=applyOrder" })
   applyOrder?: number;
 
-  @Metadata({ data: "json, name=countLimit" })
+  @SpeakeasyMetadata({ data: "json, name=countLimit" })
   countLimit?: number;
 }

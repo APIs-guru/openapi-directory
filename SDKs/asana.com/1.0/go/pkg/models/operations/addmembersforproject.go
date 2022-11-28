@@ -17,14 +17,14 @@ type AddMembersForProjectRequestBody struct {
 	Data *shared.AddMembersRequest `json:"data,omitempty"`
 }
 
+type AddMembersForProject200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type AddMembersForProjectRequest struct {
 	PathParams  AddMembersForProjectPathParams
 	QueryParams AddMembersForProjectQueryParams
 	Request     AddMembersForProjectRequestBody `request:"mediaType=application/json"`
-}
-
-type AddMembersForProject200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type AddMembersForProjectResponse struct {

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudsearchSettingsSearchapplicationsDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class CloudsearchSettingsSearchapplicationsDeleteQueryParams:
 
 @dataclass
 class CloudsearchSettingsSearchapplicationsDeleteSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudsearchSettingsSearchapplicationsDeleteSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudsearchSettingsSearchapplicationsDeleteSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -51,14 +52,14 @@ class CloudsearchSettingsSearchapplicationsDeleteSecurity:
 
 @dataclass
 class CloudsearchSettingsSearchapplicationsDeleteRequest:
-    path_params: CloudsearchSettingsSearchapplicationsDeletePathParams = field(default=None)
-    query_params: CloudsearchSettingsSearchapplicationsDeleteQueryParams = field(default=None)
-    security: CloudsearchSettingsSearchapplicationsDeleteSecurity = field(default=None)
+    path_params: CloudsearchSettingsSearchapplicationsDeletePathParams = field()
+    query_params: CloudsearchSettingsSearchapplicationsDeleteQueryParams = field()
+    security: CloudsearchSettingsSearchapplicationsDeleteSecurity = field()
     
 
 @dataclass
 class CloudsearchSettingsSearchapplicationsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

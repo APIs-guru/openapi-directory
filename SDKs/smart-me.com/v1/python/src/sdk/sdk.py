@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,35 +14,55 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def access_token_put(self, request: operations.AccessTokenPutRequest) -> operations.AccessTokenPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a Access Token to write on a Card (e.g. NFC)
+        Creates a Access Token to write on a Card (e.g. NFC)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/AccessToken"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -59,13 +82,13 @@ class SDK:
 
     
     def account_login(self) -> operations.AccountLoginResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Account/login"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -87,13 +110,17 @@ class SDK:
 
     
     def actions_get(self, request: operations.ActionsGetRequest) -> operations.ActionsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets all available Actions of a Device
+        Gets all available Actions of a Device
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/Actions/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -115,13 +142,17 @@ class SDK:
 
     
     def additional_device_information_get(self, request: operations.AdditionalDeviceInformationGetRequest) -> operations.AdditionalDeviceInformationGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the additional information (e.g. Firmware Version) about a device.
+        Gets the additional information (e.g. Firmware Version) about a device.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/AdditionalDeviceInformation/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -139,13 +170,17 @@ class SDK:
 
     
     def custom_device_get(self) -> operations.CustomDeviceGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets all Custom Devices
+        Gets all Devices
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/CustomDevice"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -167,15 +202,18 @@ class SDK:
 
     
     def device_by_serial_get(self, request: operations.DeviceBySerialGetRequest) -> operations.DeviceBySerialGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a Device by it's Serial Number. The Serial is the part before the \"-\".
+        Gets a Device by it's Serial Number. The Serial is the part before the \"-\".
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/DeviceBySerial"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -197,15 +235,18 @@ class SDK:
 
     
     def devices_by_energy_get(self, request: operations.DevicesByEnergyGetRequest) -> operations.DevicesByEnergyGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets all Devices for an Energy Type
+        Gets all Devices for an Energy Type
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/DevicesByEnergy"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -227,15 +268,18 @@ class SDK:
 
     
     def devices_by_sub_type_get(self, request: operations.DevicesBySubTypeGetRequest) -> operations.DevicesBySubTypeGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets all Devices by it's Sub Type (e.g. E-Charging Station)
+        Gets all Devices by it's Sub Type (e.g. E-Charging Station)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/DevicesBySubType"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -257,13 +301,17 @@ class SDK:
 
     
     def devices_get(self) -> operations.DevicesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets all Devices
+        Gets all Devices
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Devices"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -285,22 +333,25 @@ class SDK:
 
     
     def devices_post(self, request: operations.DevicesPostRequest) -> operations.DevicesPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates or updates a Device or updates it's values.
+        Creates or updates a Device or updates it's values. 
+                    For a new device leave the ID empty. To create a device you have to set the DeviceEnergyType.
+                    To update values, add the ID of the device and the values you like to set.  (See the Data Type Model for more Information)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Devices"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -324,15 +375,20 @@ class SDK:
 
     
     def devices_put(self, request: operations.DevicesPutRequest) -> operations.DevicesPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the On/Off Switch on a device. 
+                    For new implementations please use the \"actions\" command
+        Updates the On/Off Switch on a device
+                    For new implementations please use the \"actions\" command
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/Devices/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -358,13 +414,17 @@ class SDK:
 
     
     def fast_send_device_values_get(self, request: operations.FastSendDeviceValuesGetRequest) -> operations.FastSendDeviceValuesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Force a device to send the data every second (if supported). This for about 30s.
+                    Don't use this call to force a device to send the data every second for a longer time.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/FastSendDeviceValues/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -377,15 +437,17 @@ class SDK:
 
     
     def folder_assign_post(self, request: operations.FolderAssignPostRequest) -> operations.FolderAssignPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Assign a folder (source) or meter to another folder (target). Can be used to create a folder structure.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/folder/assign"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -398,15 +460,17 @@ class SDK:
 
     
     def folder_menu_get(self, request: operations.FolderMenuGetRequest) -> operations.FolderMenuGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the folder menu items (each item might contain child items)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/FolderMenu"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -428,13 +492,16 @@ class SDK:
 
     
     def folder_settings_delete(self, request: operations.FolderSettingsDeleteRequest) -> operations.FolderSettingsDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a folder
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/folder/settings/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -447,13 +514,16 @@ class SDK:
 
     
     def folder_settings_get(self, request: operations.FolderSettingsGetRequest) -> operations.FolderSettingsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the settings of a folder or meter
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/folder/settings/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -475,22 +545,22 @@ class SDK:
 
     
     def folder_settings_post(self, request: operations.FolderSettingsPostRequest) -> operations.FolderSettingsPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add or edit a folder or a meter. To add a new folder use and empty ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/folder/settings/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -512,13 +582,17 @@ class SDK:
 
     
     def folder_get(self, request: operations.FolderGetRequest) -> operations.FolderGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the Values for a folder or a meter
+        Gets the Values for a folder or a meter
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/Folder/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -536,13 +610,17 @@ class SDK:
 
     
     def get_api_custom_device_id_(self, request: operations.GetAPICustomDeviceIDRequest) -> operations.GetAPICustomDeviceIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a Custom Device by it's ID
+        Gets a Device by it's ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/CustomDevice/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -564,13 +642,17 @@ class SDK:
 
     
     def get_api_devices_id_(self, request: operations.GetAPIDevicesIDRequest) -> operations.GetAPIDevicesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a Device by it's ID
+        Gets a Device by it's ID
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/Devices/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -592,13 +674,17 @@ class SDK:
 
     
     def get_api_virtual_tariff_id_(self, request: operations.GetAPIVirtualTariffIDRequest) -> operations.GetAPIVirtualTariffIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets all virtual tariffs of a folder
+        Gets all virtual tariffs of a folder
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/VirtualTariff/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -620,13 +706,18 @@ class SDK:
 
     
     def get_api_pico_loadmanagementgroup(self) -> operations.GetAPIPicoLoadmanagementgroupResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""GET: api/pico/loadmanagementgroup
+                    
+                    Returns all available load management groups
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/pico/loadmanagementgroup"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -648,13 +739,17 @@ class SDK:
 
     
     def health_get(self) -> operations.HealthGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""A method returning HTTP 200 OK when queried.
+                    It is used by Kubernetes probes to determine whether the app is healthy.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Health"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -676,22 +771,25 @@ class SDK:
 
     
     def m_bus_post(self, request: operations.MBusPostRequest) -> operations.MBusPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""M-BUS API: Adds data of a M-BUS Meter to the smart-me Cloud.
+                    Just send us the M-BUS Telegram (RSP_UD) and we will do the Rest.
+        M-BUS API: Adds data of a M-BUS Meter to the smart-me Cloud.
+                    Just send us the M-BUS Telegram (RSP_UD) and we will do the Rest.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/MBus"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -717,13 +815,17 @@ class SDK:
 
     
     def meter_folder_information_get(self, request: operations.MeterFolderInformationGetRequest) -> operations.MeterFolderInformationGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Beta: Gets the General Information for a Meter or a Folder
+        Beta: Gets the General Information for a Meter or a Folder
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/MeterFolderInformation/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -745,22 +847,23 @@ class SDK:
 
     
     def meter_folder_information_post(self, request: operations.MeterFolderInformationPostRequest) -> operations.MeterFolderInformationPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Sets the Name of a Meter or a Folder
+        Sets the Name of a Meter or a Folder
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/MeterFolderInformation"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -773,15 +876,19 @@ class SDK:
 
     
     def meter_values_get(self, request: operations.MeterValuesGetRequest) -> operations.MeterValuesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the Values for a Meter at a given Date. 
+                    The first Value found before the given Date is returned.
+        Gets the Values for a Meter at a given Date. The first Value found before the given Date is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/MeterValues/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -803,15 +910,14 @@ class SDK:
 
     
     def o_auth_authorize(self, request: operations.OAuthAuthorizeRequest) -> operations.OAuthAuthorizeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/oauth/authorize"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -833,13 +939,13 @@ class SDK:
 
     
     def post_api_account_login(self) -> operations.PostAPIAccountLoginResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/Account/login"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -861,15 +967,14 @@ class SDK:
 
     
     def post_api_oauth_authorize(self, request: operations.PostAPIOauthAuthorizeRequest) -> operations.PostAPIOauthAuthorizeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/oauth/authorize"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -891,13 +996,16 @@ class SDK:
 
     
     def pico_charging_history_get(self, request: operations.PicoChargingHistoryGetRequest) -> operations.PicoChargingHistoryGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the last charging history for a pico station
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/pico/history/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -919,13 +1027,16 @@ class SDK:
 
     
     def pico_charging_get(self, request: operations.PicoChargingGetRequest) -> operations.PicoChargingGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the active charging data of a pico station
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/pico/charging/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -943,13 +1054,18 @@ class SDK:
 
     
     def pico_loadmanagement_group_get(self, request: operations.PicoLoadmanagementGroupGetRequest) -> operations.PicoLoadmanagementGroupGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""GET: api/pico/loadmanagementgroup
+                    
+                    Returns a pico load management group by it's id
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/pico/loadmanagementgroup/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -971,15 +1087,17 @@ class SDK:
 
     
     def pico_loadmanagement_set_dynamic_current_post(self, request: operations.PicoLoadmanagementSetDynamicCurrentPostRequest) -> operations.PicoLoadmanagementSetDynamicCurrentPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Sets the dynamic current of a load management group or a single station.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/pico/loadmanagementgroup/current/{serial}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1001,13 +1119,18 @@ class SDK:
 
     
     def pico_settings_get(self, request: operations.PicoSettingsGetRequest) -> operations.PicoSettingsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""GET: api/pico/settings
+                    
+                    Returns the settings of a pico charging station.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/pico/settings/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1029,13 +1152,17 @@ class SDK:
 
     
     def register_for_realtime_api_delete(self, request: operations.RegisterForRealtimeAPIDeleteRequest) -> operations.RegisterForRealtimeAPIDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a realtime API registration.
+        Deletes a realtime API registration.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/RegisterForRealtimeApi/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1048,13 +1175,17 @@ class SDK:
 
     
     def register_for_realtime_api_get(self) -> operations.RegisterForRealtimeAPIGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets all registrations for the Realtime API.
+        Gets all registrations for the Realtime API.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/RegisterForRealtimeApi"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1076,22 +1207,24 @@ class SDK:
 
     
     def register_for_realtime_api_post(self, request: operations.RegisterForRealtimeAPIPostRequest) -> operations.RegisterForRealtimeAPIPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a new registration for the realtime API. The Realtime API sends you the data of the registred devices as soon as we have them on the cloud.
+                     More Information about the realtime API: https://www.smart-me.com/Description/api/realtimeapi.aspx
+        Creates a new registration for the realtime API. The Realtime API sends you the data of the registred devices as soon as we have them on the cloud. More Information about the realtime API: https://www.smart-me.com/Description/api/realtimeapi.aspx
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/RegisterForRealtimeApi"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1104,13 +1237,16 @@ class SDK:
 
     
     def smart_me_device_configuration_get(self, request: operations.SmartMeDeviceConfigurationGetRequest) -> operations.SmartMeDeviceConfigurationGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the configuration of a smart-me device.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/SmartMeDeviceConfiguration/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1132,13 +1268,16 @@ class SDK:
 
     
     def sub_user_delete(self, request: operations.SubUserDeleteRequest) -> operations.SubUserDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a subuser
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/SubUser/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1151,13 +1290,16 @@ class SDK:
 
     
     def sub_user_get(self, request: operations.SubUserGetRequest) -> operations.SubUserGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a sub user. The user must be assigend to the user that makes this call.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/SubUser/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1179,22 +1321,23 @@ class SDK:
 
     
     def sub_user_post(self, request: operations.SubUserPostRequest) -> operations.SubUserPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates or updates a subuser.
+                    To create a new user set no ID (empty)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/SubUser"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1207,15 +1350,17 @@ class SDK:
 
     
     def user_to_folder_assign_delete(self, request: operations.UserToFolderAssignDeleteRequest) -> operations.UserToFolderAssignDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a user to folder assignement
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/folder/user/assign"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1228,15 +1373,17 @@ class SDK:
 
     
     def user_to_folder_assign_post(self, request: operations.UserToFolderAssignPostRequest) -> operations.UserToFolderAssignPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Assign a user to a folder
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/folder/user/assign"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1249,13 +1396,17 @@ class SDK:
 
     
     def user_get(self) -> operations.UserGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the informations for the user.
+        Gets the informations for the user.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/User"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1277,15 +1428,17 @@ class SDK:
 
     
     def values_in_past_multiple_get(self, request: operations.ValuesInPastMultipleGetRequest) -> operations.ValuesInPastMultipleGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets multiple values of a device. This call needs a smart-me professional licence.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/ValuesInPastMultiple/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1307,15 +1460,19 @@ class SDK:
 
     
     def values_in_past_get(self, request: operations.ValuesInPastGetRequest) -> operations.ValuesInPastGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets all (last) values of a device
+                    The first Value found before the given Date is returned.
+        Gets the Values for a device at a given Date. The first Value found before the given Date is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/ValuesInPast/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1333,13 +1490,16 @@ class SDK:
 
     
     def values_get(self, request: operations.ValuesGetRequest) -> operations.ValuesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets all (last) values of a device
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/Values/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1357,13 +1517,17 @@ class SDK:
 
     
     def virtual_billing_meter_active_get(self) -> operations.VirtualBillingMeterActiveGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Beta: Gets all active virtual meters
+        Beta: Gets all active virtual meters.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/VirtualBillingMeterActive"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1385,22 +1549,23 @@ class SDK:
 
     
     def virtual_billing_meter_active_post(self, request: operations.VirtualBillingMeterActivePostRequest) -> operations.VirtualBillingMeterActivePostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Beta: Virtual Meter API: Activates a Meter and add the Consumption to a Virtual Meter assosiated with the User.
+        Beta: Virtual Meter API: Activates a Meter and add the Consumption to a Virtual Meter assosiated with the User.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/VirtualBillingMeterActive"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1428,22 +1593,23 @@ class SDK:
 
     
     def virtual_billing_meter_deactivate_post(self, request: operations.VirtualBillingMeterDeactivatePostRequest) -> operations.VirtualBillingMeterDeactivatePostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Beta: Virtual Meter API: Deactivates a Virtual Meter.
+        Beta: Virtual Meter API: Deactivates a Virtual Meter.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/VirtualBillingMeterDeactivate"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1471,13 +1637,17 @@ class SDK:
 
     
     def virtual_billing_meters_get(self) -> operations.VirtualBillingMetersGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Beta: Gets all Meters available to activate as a Virtual Meter.
+        Beta: Gets all Meters available to activate as a Virtual Meter.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/VirtualBillingMeters"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1499,15 +1669,28 @@ class SDK:
 
     
     def virtual_meter_calculate_formula_get(self, request: operations.VirtualMeterCalculateFormulaGetRequest) -> operations.VirtualMeterCalculateFormulaGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Calculates a virtual meter from a formula. 
+                    A meter is coded as ID(\"METERID\")
+        Calculates a virtual meter from a formula.
+                    
+                    A meter is coded as ID(\"METERID\")
+                    Ariphmetical operators:
+                     ()  parentheses;  
+                     +   plus (a + b); 
+                     -  minus (a - b); 
+                     *  multiplycation symbol (a * b); 
+                     /  divide symbol (a / b); 
+                    Example: (ID(\"63ac09cb-4e5f-4f3e-bd27-ad8c30bdfc0c\") + ID(\"0209555e-9dc4-4e84-a166-a864488b4b12\")) * 2
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/VirtualMeterCalculateFormula"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1529,15 +1712,18 @@ class SDK:
 
     
     def virtual_tariff_consumption_get(self, request: operations.VirtualTariffConsumptionGetRequest) -> operations.VirtualTariffConsumptionGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the consumption of a folder with a virtuall tariffs.
+        Gets the consumption of a folder with a virtuall tariffs.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/VirtualTariffConsumption"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1559,13 +1745,17 @@ class SDK:
 
     
     def virtual_tariff_get(self) -> operations.VirtualTariffGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets all Virtual Tariffs of a user
+        Gets all Virtual Tariffs of a user
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/VirtualTariff"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1587,13 +1777,17 @@ class SDK:
 
     
     def virtual_tariffs_for_property_get(self, request: operations.VirtualTariffsForPropertyGetRequest) -> operations.VirtualTariffsForPropertyGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets all Virtual Tariffs for a property (folder)
+        Gets all Virtual Tariffs for a property (folder)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/VirtualTariffsForProperty/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 

@@ -41,7 +41,7 @@ type CloudkmsProjectsLocationsKeyRingsImportJobsCreateSecurity struct {
 type CloudkmsProjectsLocationsKeyRingsImportJobsCreateRequest struct {
 	PathParams  CloudkmsProjectsLocationsKeyRingsImportJobsCreatePathParams
 	QueryParams CloudkmsProjectsLocationsKeyRingsImportJobsCreateQueryParams
-	Request     *shared.ImportJob `request:"mediaType=application/json"`
+	Request     *shared.ImportJobInput `request:"mediaType=application/json"`
 	Security    CloudkmsProjectsLocationsKeyRingsImportJobsCreateSecurity
 }
 

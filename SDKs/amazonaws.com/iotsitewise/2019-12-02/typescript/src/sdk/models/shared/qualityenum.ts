@@ -1,7 +1,8 @@
 
 
+
 export enum QualityEnum {
-    Good = "GOOD"
-,    Bad = "BAD"
-,    Uncertain = "UNCERTAIN"
+    Good = "GOOD",
+    Bad = "BAD",
+    Uncertain = "UNCERTAIN"
 }

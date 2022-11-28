@@ -1,6 +1,6 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SpeechAdaptation } from "./speechadaptation";
-import { SpeakerDiarizationConfig } from "./speakerdiarizationconfig";
+import { SpeakerDiarizationConfigInput } from "./speakerdiarizationconfig";
 import { RecognitionMetadata } from "./recognitionmetadata";
 import { SpeechContext } from "./speechcontext";
 export declare enum RecognitionConfigEncodingEnum {
@@ -17,11 +17,11 @@ export declare enum RecognitionConfigEncodingEnum {
 /**
  * Provides information to the recognizer that specifies how to process the request.
 **/
-export declare class RecognitionConfig extends SpeakeasyBase {
+export declare class RecognitionConfigInput extends SpeakeasyBase {
     adaptation?: SpeechAdaptation;
     alternativeLanguageCodes?: string[];
     audioChannelCount?: number;
-    diarizationConfig?: SpeakerDiarizationConfig;
+    diarizationConfig?: SpeakerDiarizationConfigInput;
     enableAutomaticPunctuation?: boolean;
     enableSeparateRecognitionPerChannel?: boolean;
     enableSpokenEmojis?: boolean;

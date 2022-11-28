@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IdentitytoolkitRelyingpartySendVerificationCodeRequest
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for Identitytoolkit-SendVerificationCode
 **/
 export class IdentitytoolkitRelyingpartySendVerificationCodeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=iosReceipt" })
+  @SpeakeasyMetadata({ data: "json, name=iosReceipt" })
   iosReceipt?: string;
 
-  @Metadata({ data: "json, name=iosSecret" })
+  @SpeakeasyMetadata({ data: "json, name=iosSecret" })
   iosSecret?: string;
 
-  @Metadata({ data: "json, name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
   phoneNumber?: string;
 
-  @Metadata({ data: "json, name=recaptchaToken" })
+  @SpeakeasyMetadata({ data: "json, name=recaptchaToken" })
   recaptchaToken?: string;
 }

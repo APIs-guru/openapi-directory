@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import enduserroute
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EndUserRouteEmbeddedObject:
-    data: Optional[enduserroute.EndUserRoute] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    data: Optional[EndUserRoute] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
     

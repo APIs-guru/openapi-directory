@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // S3ContentLocation
 /**
  * For a Kinesis Data Analytics application provides a description of an Amazon S3 object, including the Amazon Resource Name (ARN) of the S3 bucket, the name of the Amazon S3 object that contains the data, and the version number of the Amazon S3 object that contains the data.
@@ -33,15 +33,15 @@ var S3ContentLocation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BucketARN" }),
+        SpeakeasyMetadata({ data: "json, name=BucketARN" }),
         __metadata("design:type", String)
     ], S3ContentLocation.prototype, "bucketArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=FileKey" }),
+        SpeakeasyMetadata({ data: "json, name=FileKey" }),
         __metadata("design:type", String)
     ], S3ContentLocation.prototype, "fileKey", void 0);
     __decorate([
-        Metadata({ data: "json, name=ObjectVersion" }),
+        SpeakeasyMetadata({ data: "json, name=ObjectVersion" }),
         __metadata("design:type", String)
     ], S3ContentLocation.prototype, "objectVersion", void 0);
     return S3ContentLocation;

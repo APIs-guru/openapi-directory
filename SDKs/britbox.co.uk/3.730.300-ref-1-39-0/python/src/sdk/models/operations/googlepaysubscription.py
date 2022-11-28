@@ -10,18 +10,18 @@ class GooglePaySubscriptionQueryParams:
 
 @dataclass
 class GooglePaySubscriptionSecurity:
-    profile_auth: shared.SchemeProfileAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    profile_auth: shared.SchemeProfileAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GooglePaySubscriptionRequest:
-    query_params: GooglePaySubscriptionQueryParams = field(default=None)
-    request: shared.ItvGooglePaySubscriptionRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: GooglePaySubscriptionSecurity = field(default=None)
+    query_params: GooglePaySubscriptionQueryParams = field()
+    request: shared.ItvGooglePaySubscriptionRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: GooglePaySubscriptionSecurity = field()
     
 
 @dataclass
 class GooglePaySubscriptionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

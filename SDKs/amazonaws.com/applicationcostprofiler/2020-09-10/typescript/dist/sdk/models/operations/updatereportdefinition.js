@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateReportDefinitionPathParams = /** @class */ (function (_super) {
     __extends(UpdateReportDefinitionPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateReportDefinitionPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=reportId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=reportId" }),
         __metadata("design:type", String)
     ], UpdateReportDefinitionPathParams.prototype, "reportId", void 0);
     return UpdateReportDefinitionPathParams;
@@ -42,31 +42,31 @@ var UpdateReportDefinitionHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateReportDefinitionHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateReportDefinitionHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateReportDefinitionHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateReportDefinitionHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateReportDefinitionHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateReportDefinitionHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateReportDefinitionHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateReportDefinitionHeaders;
@@ -82,11 +82,11 @@ var UpdateReportDefinitionRequestBodyDestinationS3Location = /** @class */ (func
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=bucket" }),
+        SpeakeasyMetadata({ data: "json, name=bucket" }),
         __metadata("design:type", String)
     ], UpdateReportDefinitionRequestBodyDestinationS3Location.prototype, "bucket", void 0);
     __decorate([
-        Metadata({ data: "json, name=prefix" }),
+        SpeakeasyMetadata({ data: "json, name=prefix" }),
         __metadata("design:type", String)
     ], UpdateReportDefinitionRequestBodyDestinationS3Location.prototype, "prefix", void 0);
     return UpdateReportDefinitionRequestBodyDestinationS3Location;
@@ -109,19 +109,19 @@ var UpdateReportDefinitionRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=destinationS3Location" }),
+        SpeakeasyMetadata({ data: "json, name=destinationS3Location" }),
         __metadata("design:type", UpdateReportDefinitionRequestBodyDestinationS3Location)
     ], UpdateReportDefinitionRequestBody.prototype, "destinationS3Location", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], UpdateReportDefinitionRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=reportDescription" }),
+        SpeakeasyMetadata({ data: "json, name=reportDescription" }),
         __metadata("design:type", String)
     ], UpdateReportDefinitionRequestBody.prototype, "reportDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=reportFrequency" }),
+        SpeakeasyMetadata({ data: "json, name=reportFrequency" }),
         __metadata("design:type", String)
     ], UpdateReportDefinitionRequestBody.prototype, "reportFrequency", void 0);
     return UpdateReportDefinitionRequestBody;
@@ -133,15 +133,15 @@ var UpdateReportDefinitionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateReportDefinitionPathParams)
     ], UpdateReportDefinitionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateReportDefinitionHeaders)
     ], UpdateReportDefinitionRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateReportDefinitionRequestBody)
     ], UpdateReportDefinitionRequest.prototype, "request", void 0);
     return UpdateReportDefinitionRequest;
@@ -153,31 +153,31 @@ var UpdateReportDefinitionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateReportDefinitionResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateReportDefinitionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateReportDefinitionResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateReportDefinitionResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateReportDefinitionResponse.prototype, "throttlingException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdateReportDefinitionResult)
     ], UpdateReportDefinitionResponse.prototype, "updateReportDefinitionResult", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateReportDefinitionResponse.prototype, "validationException", void 0);
     return UpdateReportDefinitionResponse;

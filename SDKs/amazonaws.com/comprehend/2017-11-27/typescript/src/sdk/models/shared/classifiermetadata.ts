@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ClassifierEvaluationMetrics } from "./classifierevaluationmetrics";
+
 
 
 // ClassifierMetadata
@@ -7,15 +8,15 @@ import { ClassifierEvaluationMetrics } from "./classifierevaluationmetrics";
  * Provides information about a document classifier.
 **/
 export class ClassifierMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EvaluationMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=EvaluationMetrics" })
   evaluationMetrics?: ClassifierEvaluationMetrics;
 
-  @Metadata({ data: "json, name=NumberOfLabels" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfLabels" })
   numberOfLabels?: number;
 
-  @Metadata({ data: "json, name=NumberOfTestDocuments" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfTestDocuments" })
   numberOfTestDocuments?: number;
 
-  @Metadata({ data: "json, name=NumberOfTrainedDocuments" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfTrainedDocuments" })
   numberOfTrainedDocuments?: number;
 }

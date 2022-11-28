@@ -1,6 +1,7 @@
 
 
+
 export enum ModelSortKeyEnum {
-    Name = "Name"
-,    CreationTime = "CreationTime"
+    Name = "Name",
+    CreationTime = "CreationTime"
 }

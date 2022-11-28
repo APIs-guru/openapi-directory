@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AmbiguousRoleResolutionTypeEnum } from "./ambiguousroleresolutiontypeenum";
 import { RulesConfigurationType } from "./rulesconfigurationtype";
 import { RoleMappingTypeEnum } from "./rolemappingtypeenum";
+
 
 
 // RoleMapping
@@ -9,12 +10,12 @@ import { RoleMappingTypeEnum } from "./rolemappingtypeenum";
  * A role mapping.
 **/
 export class RoleMapping extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AmbiguousRoleResolution" })
+  @SpeakeasyMetadata({ data: "json, name=AmbiguousRoleResolution" })
   ambiguousRoleResolution?: AmbiguousRoleResolutionTypeEnum;
 
-  @Metadata({ data: "json, name=RulesConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=RulesConfiguration" })
   rulesConfiguration?: RulesConfigurationType;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: RoleMappingTypeEnum;
 }

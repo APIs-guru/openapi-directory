@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import gcrule
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Union:
-    rules: Optional[List[gcrule.GcRule]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rules' }})
+    r"""Union
+    A GcRule which deletes cells matching any of the given rules.
+    """
+    
+    rules: Optional[List[GcRule]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rules') }})
     

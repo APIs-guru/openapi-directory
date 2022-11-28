@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PackageVersionsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=package_name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=package_name" })
   packageName: string;
 }
 
 
 export class PackageVersionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 }
 
 
 export class PackageVersionsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   rhIdentity: shared.SchemeRhIdentity;
 }
 
 
 export class PackageVersionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PackageVersionsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PackageVersionsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: PackageVersionsSecurity;
 }
 
 
 export class PackageVersionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   controllersPackageVersionsResponse?: shared.ControllersPackageVersionsResponse;
 }

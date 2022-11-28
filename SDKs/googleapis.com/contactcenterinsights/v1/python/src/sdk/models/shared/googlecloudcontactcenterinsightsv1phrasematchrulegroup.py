@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudcontactcenterinsightsv1phrasematchrule
+from sdk import utils
+from . import *
 
 class GoogleCloudContactcenterinsightsV1PhraseMatchRuleGroupTypeEnum(str, Enum):
     PHRASE_MATCH_RULE_GROUP_TYPE_UNSPECIFIED = "PHRASE_MATCH_RULE_GROUP_TYPE_UNSPECIFIED"
@@ -12,6 +14,10 @@ class GoogleCloudContactcenterinsightsV1PhraseMatchRuleGroupTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudContactcenterinsightsV1PhraseMatchRuleGroup:
-    phrase_match_rules: Optional[List[googlecloudcontactcenterinsightsv1phrasematchrule.GoogleCloudContactcenterinsightsV1PhraseMatchRule]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phraseMatchRules' }})
-    type: Optional[GoogleCloudContactcenterinsightsV1PhraseMatchRuleGroupTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""GoogleCloudContactcenterinsightsV1PhraseMatchRuleGroup
+    A message representing a rule in the phrase matcher.
+    """
+    
+    phrase_match_rules: Optional[List[GoogleCloudContactcenterinsightsV1PhraseMatchRule]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('phraseMatchRules') }})
+    type: Optional[GoogleCloudContactcenterinsightsV1PhraseMatchRuleGroupTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

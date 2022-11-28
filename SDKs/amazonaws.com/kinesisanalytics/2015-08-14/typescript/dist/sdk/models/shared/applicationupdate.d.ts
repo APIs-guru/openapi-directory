@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchLoggingOptionUpdate } from "./cloudwatchloggingoptionupdate";
 import { InputUpdate } from "./inputupdate";
 import { OutputUpdate } from "./outputupdate";

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostUpdateReceiptRuleActionEnum(str, Enum):
     UPDATE_RECEIPT_RULE = "UpdateReceiptRule"
@@ -10,8 +14,8 @@ class PostUpdateReceiptRuleVersionEnum(str, Enum):
 
 @dataclass
 class PostUpdateReceiptRuleQueryParams:
-    action: PostUpdateReceiptRuleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostUpdateReceiptRuleVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostUpdateReceiptRuleActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostUpdateReceiptRuleVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostUpdateReceiptRuleHeaders:
 
 @dataclass
 class PostUpdateReceiptRuleRequest:
-    query_params: PostUpdateReceiptRuleQueryParams = field(default=None)
-    headers: PostUpdateReceiptRuleHeaders = field(default=None)
+    headers: PostUpdateReceiptRuleHeaders = field()
+    query_params: PostUpdateReceiptRuleQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostUpdateReceiptRuleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

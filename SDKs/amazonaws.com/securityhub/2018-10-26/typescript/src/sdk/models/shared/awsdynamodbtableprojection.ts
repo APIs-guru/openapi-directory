@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsDynamoDbTableProjection
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * For global and local secondary indexes, identifies the attributes that are copied from the table into the index.
 **/
 export class AwsDynamoDbTableProjection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NonKeyAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=NonKeyAttributes" })
   nonKeyAttributes?: string[];
 
-  @Metadata({ data: "json, name=ProjectionType" })
+  @SpeakeasyMetadata({ data: "json, name=ProjectionType" })
   projectionType?: string;
 }

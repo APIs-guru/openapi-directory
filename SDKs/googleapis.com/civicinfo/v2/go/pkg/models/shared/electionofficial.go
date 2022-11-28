@@ -1,5 +1,7 @@
 package shared
 
+// ElectionOfficial
+// Information about individual election officials.
 type ElectionOfficial struct {
 	EmailAddress      *string `json:"emailAddress,omitempty"`
 	FaxNumber         *string `json:"faxNumber,omitempty"`

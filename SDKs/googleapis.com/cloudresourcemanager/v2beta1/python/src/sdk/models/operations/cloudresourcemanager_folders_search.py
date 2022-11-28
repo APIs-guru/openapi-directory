@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,14 +21,14 @@ class CloudresourcemanagerFoldersSearchQueryParams:
 
 @dataclass
 class CloudresourcemanagerFoldersSearchSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudresourcemanagerFoldersSearchSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -38,14 +39,14 @@ class CloudresourcemanagerFoldersSearchSecurity:
 
 @dataclass
 class CloudresourcemanagerFoldersSearchRequest:
-    query_params: CloudresourcemanagerFoldersSearchQueryParams = field(default=None)
+    query_params: CloudresourcemanagerFoldersSearchQueryParams = field()
+    security: CloudresourcemanagerFoldersSearchSecurity = field()
     request: Optional[shared.SearchFoldersRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudresourcemanagerFoldersSearchSecurity = field(default=None)
     
 
 @dataclass
 class CloudresourcemanagerFoldersSearchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     search_folders_response: Optional[shared.SearchFoldersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

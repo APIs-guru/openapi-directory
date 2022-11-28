@@ -22,102 +22,102 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CallLog = /** @class */ (function (_super) {
     __extends(CallLog, _super);
     function CallLog() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=charge" }),
+        SpeakeasyMetadata({ data: "json, name=charge" }),
         __metadata("design:type", Number)
     ], CallLog.prototype, "charge", void 0);
     __decorate([
-        Metadata({ data: "json, name=destination_device_name" }),
+        SpeakeasyMetadata({ data: "json, name=destination_device_name" }),
         __metadata("design:type", String)
     ], CallLog.prototype, "destinationDeviceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=destination_extension" }),
+        SpeakeasyMetadata({ data: "json, name=destination_extension" }),
         __metadata("design:type", Number)
     ], CallLog.prototype, "destinationExtension", void 0);
     __decorate([
-        Metadata({ data: "json, name=destination_sip_id" }),
+        SpeakeasyMetadata({ data: "json, name=destination_sip_id" }),
         __metadata("design:type", String)
     ], CallLog.prototype, "destinationSipId", void 0);
     __decorate([
-        Metadata({ data: "json, name=destination_user" }),
+        SpeakeasyMetadata({ data: "json, name=destination_user" }),
         __metadata("design:type", String)
     ], CallLog.prototype, "destinationUser", void 0);
     __decorate([
-        Metadata({ data: "json, name=destination_user_full_name" }),
+        SpeakeasyMetadata({ data: "json, name=destination_user_full_name" }),
         __metadata("design:type", String)
     ], CallLog.prototype, "destinationUserFullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=direction" }),
+        SpeakeasyMetadata({ data: "json, name=direction" }),
         __metadata("design:type", String)
     ], CallLog.prototype, "direction", void 0);
     __decorate([
-        Metadata({ data: "json, name=end" }),
+        SpeakeasyMetadata({ data: "json, name=end" }),
         __metadata("design:type", String)
     ], CallLog.prototype, "end", void 0);
     __decorate([
-        Metadata({ data: "json, name=from" }),
+        SpeakeasyMetadata({ data: "json, name=from" }),
         __metadata("design:type", String)
     ], CallLog.prototype, "from", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], CallLog.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=in_network" }),
+        SpeakeasyMetadata({ data: "json, name=in_network" }),
         __metadata("design:type", Boolean)
     ], CallLog.prototype, "inNetwork", void 0);
     __decorate([
-        Metadata({ data: "json, name=international" }),
+        SpeakeasyMetadata({ data: "json, name=international" }),
         __metadata("design:type", Boolean)
     ], CallLog.prototype, "international", void 0);
     __decorate([
-        Metadata({ data: "json, name=length" }),
+        SpeakeasyMetadata({ data: "json, name=length" }),
         __metadata("design:type", Number)
     ], CallLog.prototype, "length", void 0);
     __decorate([
-        Metadata({ data: "json, name=rate" }),
+        SpeakeasyMetadata({ data: "json, name=rate" }),
         __metadata("design:type", Number)
     ], CallLog.prototype, "rate", void 0);
     __decorate([
-        Metadata({ data: "json, name=recorded" }),
+        SpeakeasyMetadata({ data: "json, name=recorded" }),
         __metadata("design:type", Boolean)
     ], CallLog.prototype, "recorded", void 0);
     __decorate([
-        Metadata({ data: "json, name=result" }),
+        SpeakeasyMetadata({ data: "json, name=result" }),
         __metadata("design:type", String)
     ], CallLog.prototype, "result", void 0);
     __decorate([
-        Metadata({ data: "json, name=source_device_name" }),
+        SpeakeasyMetadata({ data: "json, name=source_device_name" }),
         __metadata("design:type", String)
     ], CallLog.prototype, "sourceDeviceName", void 0);
     __decorate([
-        Metadata({ data: "json, name=source_extension" }),
+        SpeakeasyMetadata({ data: "json, name=source_extension" }),
         __metadata("design:type", Number)
     ], CallLog.prototype, "sourceExtension", void 0);
     __decorate([
-        Metadata({ data: "json, name=source_sip_id" }),
+        SpeakeasyMetadata({ data: "json, name=source_sip_id" }),
         __metadata("design:type", String)
     ], CallLog.prototype, "sourceSipId", void 0);
     __decorate([
-        Metadata({ data: "json, name=source_user" }),
+        SpeakeasyMetadata({ data: "json, name=source_user" }),
         __metadata("design:type", String)
     ], CallLog.prototype, "sourceUser", void 0);
     __decorate([
-        Metadata({ data: "json, name=source_user_full_name" }),
+        SpeakeasyMetadata({ data: "json, name=source_user_full_name" }),
         __metadata("design:type", String)
     ], CallLog.prototype, "sourceUserFullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=start" }),
+        SpeakeasyMetadata({ data: "json, name=start" }),
         __metadata("design:type", String)
     ], CallLog.prototype, "start", void 0);
     __decorate([
-        Metadata({ data: "json, name=to" }),
+        SpeakeasyMetadata({ data: "json, name=to" }),
         __metadata("design:type", String)
     ], CallLog.prototype, "to", void 0);
     return CallLog;

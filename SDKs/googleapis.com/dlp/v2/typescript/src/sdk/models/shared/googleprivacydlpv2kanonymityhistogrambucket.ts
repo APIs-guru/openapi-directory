@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GooglePrivacyDlpV2KAnonymityEquivalenceClass } from "./googleprivacydlpv2kanonymityequivalenceclass";
+
 
 
 // GooglePrivacyDlpV2KAnonymityHistogramBucket
@@ -8,18 +8,18 @@ import { GooglePrivacyDlpV2KAnonymityEquivalenceClass } from "./googleprivacydlp
  * Histogram of k-anonymity equivalence classes.
 **/
 export class GooglePrivacyDlpV2KAnonymityHistogramBucket extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucketSize" })
+  @SpeakeasyMetadata({ data: "json, name=bucketSize" })
   bucketSize?: string;
 
-  @Metadata({ data: "json, name=bucketValueCount" })
+  @SpeakeasyMetadata({ data: "json, name=bucketValueCount" })
   bucketValueCount?: string;
 
-  @Metadata({ data: "json, name=bucketValues", elemType: shared.GooglePrivacyDlpV2KAnonymityEquivalenceClass })
+  @SpeakeasyMetadata({ data: "json, name=bucketValues", elemType: GooglePrivacyDlpV2KAnonymityEquivalenceClass })
   bucketValues?: GooglePrivacyDlpV2KAnonymityEquivalenceClass[];
 
-  @Metadata({ data: "json, name=equivalenceClassSizeLowerBound" })
+  @SpeakeasyMetadata({ data: "json, name=equivalenceClassSizeLowerBound" })
   equivalenceClassSizeLowerBound?: string;
 
-  @Metadata({ data: "json, name=equivalenceClassSizeUpperBound" })
+  @SpeakeasyMetadata({ data: "json, name=equivalenceClassSizeUpperBound" })
   equivalenceClassSizeUpperBound?: string;
 }

@@ -1,6 +1,7 @@
 
 
+
 export enum MtimeEnum {
-    None = "NONE"
-,    Preserve = "PRESERVE"
+    None = "NONE",
+    Preserve = "PRESERVE"
 }

@@ -9,6 +9,8 @@ const (
 	PublisherReviewStatusStatusEnumReviewStatusPending     PublisherReviewStatusStatusEnum = "REVIEW_STATUS_PENDING"
 )
 
+// PublisherReviewStatus
+// Publisher review status for the creative.
 type PublisherReviewStatus struct {
 	PublisherName *string                          `json:"publisherName,omitempty"`
 	Status        *PublisherReviewStatusStatusEnum `json:"status,omitempty"`

@@ -1,13 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import computeenginetargetdefaults
-from . import replicationcycle
-from . import status
-from . import replicationsync
-from . import schedulepolicy
-from . import clonejob
-from . import cutoverjob
+from sdk import utils
+from . import *
 
 class MigratingVMStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -26,22 +25,44 @@ class MigratingVMStateEnum(str, Enum):
 
 @dataclass_json
 @dataclass
+class MigratingVMInput:
+    r"""MigratingVMInput
+    MigratingVm describes the VM that will be migrated from a Source environment and its replication state.
+    """
+    
+    compute_engine_target_defaults: Optional[ComputeEngineTargetDefaultsInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('computeEngineTargetDefaults') }})
+    current_sync_info: Optional[ReplicationCycle] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currentSyncInfo') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    error: Optional[Status] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
+    last_sync: Optional[ReplicationSync] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastSync') }})
+    policy: Optional[SchedulePolicy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policy') }})
+    source_vm_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceVmId') }})
+    
+
+@dataclass_json
+@dataclass
 class MigratingVM:
-    compute_engine_target_defaults: Optional[computeenginetargetdefaults.ComputeEngineTargetDefaults] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'computeEngineTargetDefaults' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    current_sync_info: Optional[replicationcycle.ReplicationCycle] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currentSyncInfo' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    error: Optional[status.Status] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    group: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'group' }})
-    labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
-    last_sync: Optional[replicationsync.ReplicationSync] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastSync' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    policy: Optional[schedulepolicy.SchedulePolicy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policy' }})
-    recent_clone_jobs: Optional[List[clonejob.CloneJob]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recentCloneJobs' }})
-    recent_cutover_jobs: Optional[List[cutoverjob.CutoverJob]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recentCutoverJobs' }})
-    source_vm_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sourceVmId' }})
-    state: Optional[MigratingVMStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    state_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stateTime' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
+    r"""MigratingVM
+    MigratingVm describes the VM that will be migrated from a Source environment and its replication state.
+    """
+    
+    compute_engine_target_defaults: Optional[ComputeEngineTargetDefaults] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('computeEngineTargetDefaults') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    current_sync_info: Optional[ReplicationCycle] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currentSyncInfo') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    error: Optional[Status] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    group: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('group') }})
+    labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
+    last_sync: Optional[ReplicationSync] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastSync') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    policy: Optional[SchedulePolicy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policy') }})
+    recent_clone_jobs: Optional[List[CloneJob]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('recentCloneJobs') }})
+    recent_cutover_jobs: Optional[List[CutoverJob]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('recentCutoverJobs') }})
+    source_vm_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sourceVmId') }})
+    state: Optional[MigratingVMStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    state_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stateTime') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
     

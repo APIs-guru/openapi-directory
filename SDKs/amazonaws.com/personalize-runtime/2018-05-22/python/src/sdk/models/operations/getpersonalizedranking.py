@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,25 +22,25 @@ class GetPersonalizedRankingHeaders:
 @dataclass_json
 @dataclass
 class GetPersonalizedRankingRequestBody:
-    campaign_arn: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'campaignArn' }})
-    context: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'context' }})
-    filter_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filterArn' }})
-    filter_values: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filterValues' }})
-    input_list: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inputList' }})
-    user_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userId' }})
+    campaign_arn: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('campaignArn') }})
+    input_list: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('inputList') }})
+    user_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('userId') }})
+    context: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('context') }})
+    filter_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filterArn') }})
+    filter_values: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('filterValues') }})
     
 
 @dataclass
 class GetPersonalizedRankingRequest:
-    headers: GetPersonalizedRankingHeaders = field(default=None)
-    request: GetPersonalizedRankingRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetPersonalizedRankingHeaders = field()
+    request: GetPersonalizedRankingRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetPersonalizedRankingResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_personalized_ranking_response: Optional[shared.GetPersonalizedRankingResponse] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

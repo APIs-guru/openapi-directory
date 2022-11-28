@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FileKey } from "./filekey";
-import { PrivateKeyContainer } from "./privatekeycontainer";
+import { PrivateKeyContainerOutput } from "./privatekeycontainer";
 
 
-// PublicDownloadShare
+
+// PublicDownloadShareOutput
 /** 
  * Download Share information
 **/
-export class PublicDownloadShare extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+export class PublicDownloadShareOutput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=creatorName" })
+  @SpeakeasyMetadata({ data: "json, name=creatorName" })
   creatorName: string;
 
-  @Metadata({ data: "json, name=creatorUsername" })
+  @SpeakeasyMetadata({ data: "json, name=creatorUsername" })
   creatorUsername?: string;
 
-  @Metadata({ data: "json, name=expireAt" })
+  @SpeakeasyMetadata({ data: "json, name=expireAt" })
   expireAt?: Date;
 
-  @Metadata({ data: "json, name=fileKey" })
+  @SpeakeasyMetadata({ data: "json, name=fileKey" })
   fileKey?: FileKey;
 
-  @Metadata({ data: "json, name=fileName" })
+  @SpeakeasyMetadata({ data: "json, name=fileName" })
   fileName: string;
 
-  @Metadata({ data: "json, name=hasDownloadLimit" })
+  @SpeakeasyMetadata({ data: "json, name=hasDownloadLimit" })
   hasDownloadLimit: boolean;
 
-  @Metadata({ data: "json, name=isEncrypted" })
+  @SpeakeasyMetadata({ data: "json, name=isEncrypted" })
   isEncrypted?: boolean;
 
-  @Metadata({ data: "json, name=isProtected" })
+  @SpeakeasyMetadata({ data: "json, name=isProtected" })
   isProtected: boolean;
 
-  @Metadata({ data: "json, name=limitReached" })
+  @SpeakeasyMetadata({ data: "json, name=limitReached" })
   limitReached: boolean;
 
-  @Metadata({ data: "json, name=mediaType" })
+  @SpeakeasyMetadata({ data: "json, name=mediaType" })
   mediaType: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=privateKeyContainer" })
-  privateKeyContainer?: PrivateKeyContainer;
+  @SpeakeasyMetadata({ data: "json, name=privateKeyContainer" })
+  privateKeyContainer?: PrivateKeyContainerOutput;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size: number;
 }

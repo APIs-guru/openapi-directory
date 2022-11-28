@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -23,27 +28,27 @@ class CreateRouteCalculatorRequestBodyPricingPlanEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateRouteCalculatorRequestBody:
-    calculator_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CalculatorName' }})
-    data_source: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DataSource' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    pricing_plan: CreateRouteCalculatorRequestBodyPricingPlanEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PricingPlan' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
+    calculator_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CalculatorName') }})
+    data_source: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DataSource') }})
+    pricing_plan: CreateRouteCalculatorRequestBodyPricingPlanEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('PricingPlan') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     
 
 @dataclass
 class CreateRouteCalculatorRequest:
-    headers: CreateRouteCalculatorHeaders = field(default=None)
-    request: CreateRouteCalculatorRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateRouteCalculatorHeaders = field()
+    request: CreateRouteCalculatorRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateRouteCalculatorResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_route_calculator_response: Optional[shared.CreateRouteCalculatorResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

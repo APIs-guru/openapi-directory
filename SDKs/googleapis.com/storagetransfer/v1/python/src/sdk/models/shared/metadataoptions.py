@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MetadataOptionsACLEnum(str, Enum):
     ACL_UNSPECIFIED = "ACL_UNSPECIFIED"
@@ -55,13 +57,17 @@ class MetadataOptionsUIDEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MetadataOptions:
-    acl: Optional[MetadataOptionsACLEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'acl' }})
-    gid: Optional[MetadataOptionsGidEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gid' }})
-    kms_key: Optional[MetadataOptionsKmsKeyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kmsKey' }})
-    mode: Optional[MetadataOptionsModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mode' }})
-    storage_class: Optional[MetadataOptionsStorageClassEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'storageClass' }})
-    symlink: Optional[MetadataOptionsSymlinkEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'symlink' }})
-    temporary_hold: Optional[MetadataOptionsTemporaryHoldEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'temporaryHold' }})
-    time_created: Optional[MetadataOptionsTimeCreatedEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeCreated' }})
-    uid: Optional[MetadataOptionsUIDEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uid' }})
+    r"""MetadataOptions
+    Specifies the metadata options for running a transfer.
+    """
+    
+    acl: Optional[MetadataOptionsACLEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('acl') }})
+    gid: Optional[MetadataOptionsGidEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('gid') }})
+    kms_key: Optional[MetadataOptionsKmsKeyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kmsKey') }})
+    mode: Optional[MetadataOptionsModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mode') }})
+    storage_class: Optional[MetadataOptionsStorageClassEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('storageClass') }})
+    symlink: Optional[MetadataOptionsSymlinkEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('symlink') }})
+    temporary_hold: Optional[MetadataOptionsTemporaryHoldEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('temporaryHold') }})
+    time_created: Optional[MetadataOptionsTimeCreatedEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeCreated') }})
+    uid: Optional[MetadataOptionsUIDEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('uid') }})
     

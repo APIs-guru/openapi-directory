@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContainerProjectsLocationsClustersNodePoolsDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,20 +30,20 @@ class ContainerProjectsLocationsClustersNodePoolsDeleteQueryParams:
 
 @dataclass
 class ContainerProjectsLocationsClustersNodePoolsDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContainerProjectsLocationsClustersNodePoolsDeleteRequest:
-    path_params: ContainerProjectsLocationsClustersNodePoolsDeletePathParams = field(default=None)
-    query_params: ContainerProjectsLocationsClustersNodePoolsDeleteQueryParams = field(default=None)
-    security: ContainerProjectsLocationsClustersNodePoolsDeleteSecurity = field(default=None)
+    path_params: ContainerProjectsLocationsClustersNodePoolsDeletePathParams = field()
+    query_params: ContainerProjectsLocationsClustersNodePoolsDeleteQueryParams = field()
+    security: ContainerProjectsLocationsClustersNodePoolsDeleteSecurity = field()
     
 
 @dataclass
 class ContainerProjectsLocationsClustersNodePoolsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -9,13 +9,13 @@ type GetPersonByIDQueryParams struct {
 	UserID *string `queryParam:"style=form,explode=true,name=user_id"`
 }
 
-type GetPersonByIDRequest struct {
-	QueryParams GetPersonByIDQueryParams
-}
-
 type GetPersonByID200ApplicationJSON struct {
 	Person *shared.Person `json:"person,omitempty"`
 	Stat   *string        `json:"stat,omitempty"`
+}
+
+type GetPersonByIDRequest struct {
+	QueryParams GetPersonByIDQueryParams
 }
 
 type GetPersonByIDResponse struct {

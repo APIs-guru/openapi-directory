@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateTemplateQueryParams = /** @class */ (function (_super) {
     __extends(UpdateTemplateQueryParams, _super);
@@ -30,35 +30,19 @@ var UpdateTemplateQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=templateId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=templateId" }),
         __metadata("design:type", Number)
     ], UpdateTemplateQueryParams.prototype, "templateId", void 0);
     return UpdateTemplateQueryParams;
 }(SpeakeasyBase));
 export { UpdateTemplateQueryParams };
-var UpdateTemplateRequest = /** @class */ (function (_super) {
-    __extends(UpdateTemplateRequest, _super);
-    function UpdateTemplateRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", UpdateTemplateQueryParams)
-    ], UpdateTemplateRequest.prototype, "queryParams", void 0);
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", shared.TemplateDefinitionNew)
-    ], UpdateTemplateRequest.prototype, "request", void 0);
-    return UpdateTemplateRequest;
-}(SpeakeasyBase));
-export { UpdateTemplateRequest };
 var UpdateTemplate200ApplicationJson = /** @class */ (function (_super) {
     __extends(UpdateTemplate200ApplicationJson, _super);
     function UpdateTemplate200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=response" }),
+        SpeakeasyMetadata({ data: "json, name=response" }),
         __metadata("design:type", shared.TemplateDefinition)
     ], UpdateTemplate200ApplicationJson.prototype, "response", void 0);
     return UpdateTemplate200ApplicationJson;
@@ -83,11 +67,11 @@ var UpdateTemplate401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], UpdateTemplate401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], UpdateTemplate401ApplicationJson.prototype, "status", void 0);
     return UpdateTemplate401ApplicationJson;
@@ -103,11 +87,11 @@ var UpdateTemplate403ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], UpdateTemplate403ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], UpdateTemplate403ApplicationJson.prototype, "status", void 0);
     return UpdateTemplate403ApplicationJson;
@@ -125,11 +109,11 @@ var UpdateTemplate404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], UpdateTemplate404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], UpdateTemplate404ApplicationJson.prototype, "status", void 0);
     return UpdateTemplate404ApplicationJson;
@@ -148,11 +132,11 @@ var UpdateTemplate422ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], UpdateTemplate422ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], UpdateTemplate422ApplicationJson.prototype, "status", void 0);
     return UpdateTemplate422ApplicationJson;
@@ -164,51 +148,67 @@ var UpdateTemplate500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], UpdateTemplate500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], UpdateTemplate500ApplicationJson.prototype, "status", void 0);
     return UpdateTemplate500ApplicationJson;
 }(SpeakeasyBase));
 export { UpdateTemplate500ApplicationJson };
+var UpdateTemplateRequest = /** @class */ (function (_super) {
+    __extends(UpdateTemplateRequest, _super);
+    function UpdateTemplateRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", UpdateTemplateQueryParams)
+    ], UpdateTemplateRequest.prototype, "queryParams", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.TemplateDefinitionNew)
+    ], UpdateTemplateRequest.prototype, "request", void 0);
+    return UpdateTemplateRequest;
+}(SpeakeasyBase));
+export { UpdateTemplateRequest };
 var UpdateTemplateResponse = /** @class */ (function (_super) {
     __extends(UpdateTemplateResponse, _super);
     function UpdateTemplateResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateTemplateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateTemplateResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateTemplate200ApplicationJson)
     ], UpdateTemplateResponse.prototype, "updateTemplate200ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateTemplate401ApplicationJson)
     ], UpdateTemplateResponse.prototype, "updateTemplate401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateTemplate403ApplicationJson)
     ], UpdateTemplateResponse.prototype, "updateTemplate403ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateTemplate404ApplicationJson)
     ], UpdateTemplateResponse.prototype, "updateTemplate404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateTemplate422ApplicationJson)
     ], UpdateTemplateResponse.prototype, "updateTemplate422ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateTemplate500ApplicationJson)
     ], UpdateTemplateResponse.prototype, "updateTemplate500ApplicationJsonObject", void 0);
     return UpdateTemplateResponse;

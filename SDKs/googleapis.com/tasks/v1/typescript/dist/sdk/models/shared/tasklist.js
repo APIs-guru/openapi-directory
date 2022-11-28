@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var TaskList = /** @class */ (function (_super) {
     __extends(TaskList, _super);
     function TaskList() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], TaskList.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], TaskList.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], TaskList.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=selfLink" }),
+        SpeakeasyMetadata({ data: "json, name=selfLink" }),
         __metadata("design:type", String)
     ], TaskList.prototype, "selfLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=title" }),
+        SpeakeasyMetadata({ data: "json, name=title" }),
         __metadata("design:type", String)
     ], TaskList.prototype, "title", void 0);
     __decorate([
-        Metadata({ data: "json, name=updated" }),
+        SpeakeasyMetadata({ data: "json, name=updated" }),
         __metadata("design:type", String)
     ], TaskList.prototype, "updated", void 0);
     return TaskList;

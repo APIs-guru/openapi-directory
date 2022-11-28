@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // TargetAddress
 /**
  * In a <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverRule.html">CreateResolverRule</a> request, an array of the IPs that you want to forward DNS queries to.
@@ -33,11 +33,11 @@ var TargetAddress = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Ip" }),
+        SpeakeasyMetadata({ data: "json, name=Ip" }),
         __metadata("design:type", String)
     ], TargetAddress.prototype, "ip", void 0);
     __decorate([
-        Metadata({ data: "json, name=Port" }),
+        SpeakeasyMetadata({ data: "json, name=Port" }),
         __metadata("design:type", Number)
     ], TargetAddress.prototype, "port", void 0);
     return TargetAddress;

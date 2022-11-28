@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BigQuerySource
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The BigQuery location for the input content.
 **/
 export class BigQuerySource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inputUri" })
+  @SpeakeasyMetadata({ data: "json, name=inputUri" })
   inputUri?: string;
 }

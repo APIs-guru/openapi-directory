@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateCampaignPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=application-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=application-id" })
   applicationId: string;
 }
 
 
 export class CreateCampaignHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,105 +38,105 @@ export class CreateCampaignHeaders extends SpeakeasyBase {
  * Specifies the configuration and other settings for a campaign.
 **/
 export class CreateCampaignRequestBodyWriteCampaignRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AdditionalTreatments", elemType: shared.WriteTreatmentResource })
+  @SpeakeasyMetadata({ data: "json, name=AdditionalTreatments", elemType: shared.WriteTreatmentResource })
   additionalTreatments?: shared.WriteTreatmentResource[];
 
-  @Metadata({ data: "json, name=CustomDeliveryConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=CustomDeliveryConfiguration" })
   customDeliveryConfiguration?: shared.CustomDeliveryConfiguration;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=HoldoutPercent" })
+  @SpeakeasyMetadata({ data: "json, name=HoldoutPercent" })
   holdoutPercent?: number;
 
-  @Metadata({ data: "json, name=Hook" })
+  @SpeakeasyMetadata({ data: "json, name=Hook" })
   hook?: shared.CampaignHook;
 
-  @Metadata({ data: "json, name=IsPaused" })
+  @SpeakeasyMetadata({ data: "json, name=IsPaused" })
   isPaused?: boolean;
 
-  @Metadata({ data: "json, name=Limits" })
+  @SpeakeasyMetadata({ data: "json, name=Limits" })
   limits?: shared.CampaignLimits;
 
-  @Metadata({ data: "json, name=MessageConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=MessageConfiguration" })
   messageConfiguration?: shared.MessageConfiguration;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Priority" })
+  @SpeakeasyMetadata({ data: "json, name=Priority" })
   priority?: number;
 
-  @Metadata({ data: "json, name=Schedule" })
+  @SpeakeasyMetadata({ data: "json, name=Schedule" })
   schedule?: shared.Schedule;
 
-  @Metadata({ data: "json, name=SegmentId" })
+  @SpeakeasyMetadata({ data: "json, name=SegmentId" })
   segmentId?: string;
 
-  @Metadata({ data: "json, name=SegmentVersion" })
+  @SpeakeasyMetadata({ data: "json, name=SegmentVersion" })
   segmentVersion?: number;
 
-  @Metadata({ data: "json, name=TemplateConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=TemplateConfiguration" })
   templateConfiguration?: shared.TemplateConfiguration;
 
-  @Metadata({ data: "json, name=TreatmentDescription" })
+  @SpeakeasyMetadata({ data: "json, name=TreatmentDescription" })
   treatmentDescription?: string;
 
-  @Metadata({ data: "json, name=TreatmentName" })
+  @SpeakeasyMetadata({ data: "json, name=TreatmentName" })
   treatmentName?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }
 
 
 export class CreateCampaignRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=WriteCampaignRequest" })
+  @SpeakeasyMetadata({ data: "json, name=WriteCampaignRequest" })
   writeCampaignRequest: CreateCampaignRequestBodyWriteCampaignRequest;
 }
 
 
 export class CreateCampaignRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateCampaignPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateCampaignHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateCampaignRequestBody;
 }
 
 
 export class CreateCampaignResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createCampaignResponse?: shared.CreateCampaignResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   forbiddenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   methodNotAllowedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   payloadTooLargeException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

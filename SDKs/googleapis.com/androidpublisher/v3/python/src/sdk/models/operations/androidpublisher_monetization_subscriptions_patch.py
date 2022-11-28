@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsPatchPathParams:
-    package_name: str = field(default=None, metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
-    product_id: str = field(default=None, metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
+    package_name: str = field(metadata={'path_param': { 'field_name': 'packageName', 'style': 'simple', 'explode': False }})
+    product_id: str = field(metadata={'path_param': { 'field_name': 'productId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,21 +32,21 @@ class AndroidpublisherMonetizationSubscriptionsPatchQueryParams:
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsPatchRequest:
-    path_params: AndroidpublisherMonetizationSubscriptionsPatchPathParams = field(default=None)
-    query_params: AndroidpublisherMonetizationSubscriptionsPatchQueryParams = field(default=None)
-    request: Optional[shared.Subscription] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: AndroidpublisherMonetizationSubscriptionsPatchSecurity = field(default=None)
+    path_params: AndroidpublisherMonetizationSubscriptionsPatchPathParams = field()
+    query_params: AndroidpublisherMonetizationSubscriptionsPatchQueryParams = field()
+    security: AndroidpublisherMonetizationSubscriptionsPatchSecurity = field()
+    request: Optional[shared.SubscriptionInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AndroidpublisherMonetizationSubscriptionsPatchResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     subscription: Optional[shared.Subscription] = field(default=None)
     

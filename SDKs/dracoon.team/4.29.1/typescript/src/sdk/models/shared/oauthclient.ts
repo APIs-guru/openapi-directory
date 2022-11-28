@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum OAuthClientClientTypeEnum {
-    Confidential = "confidential"
-,    Public = "public"
+    Confidential = "confidential",
+    Public = "public"
 }
 
 export enum OAuthClientGrantTypesEnum {
-    AuthorizationCode = "authorization_code"
-,    ClientCredentials = "client_credentials"
-,    Implicit = "implicit"
-,    Password = "password"
-,    RefreshToken = "refresh_token"
+    AuthorizationCode = "authorization_code",
+    ClientCredentials = "client_credentials",
+    Implicit = "implicit",
+    Password = "password",
+    RefreshToken = "refresh_token"
 }
 
 
@@ -19,39 +20,39 @@ export enum OAuthClientGrantTypesEnum {
  * OAuth client information
 **/
 export class OAuthClient extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessTokenValidity" })
+  @SpeakeasyMetadata({ data: "json, name=accessTokenValidity" })
   accessTokenValidity?: number;
 
-  @Metadata({ data: "json, name=approvalValidity" })
+  @SpeakeasyMetadata({ data: "json, name=approvalValidity" })
   approvalValidity?: number;
 
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId: string;
 
-  @Metadata({ data: "json, name=clientName" })
+  @SpeakeasyMetadata({ data: "json, name=clientName" })
   clientName?: string;
 
-  @Metadata({ data: "json, name=clientSecret" })
+  @SpeakeasyMetadata({ data: "json, name=clientSecret" })
   clientSecret?: string;
 
-  @Metadata({ data: "json, name=clientType" })
+  @SpeakeasyMetadata({ data: "json, name=clientType" })
   clientType?: OAuthClientClientTypeEnum;
 
-  @Metadata({ data: "json, name=grantTypes" })
+  @SpeakeasyMetadata({ data: "json, name=grantTypes" })
   grantTypes: OAuthClientGrantTypesEnum[];
 
-  @Metadata({ data: "json, name=isEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=isEnabled" })
   isEnabled?: boolean;
 
-  @Metadata({ data: "json, name=isExternal" })
+  @SpeakeasyMetadata({ data: "json, name=isExternal" })
   isExternal?: boolean;
 
-  @Metadata({ data: "json, name=isStandard" })
+  @SpeakeasyMetadata({ data: "json, name=isStandard" })
   isStandard?: boolean;
 
-  @Metadata({ data: "json, name=redirectUris" })
+  @SpeakeasyMetadata({ data: "json, name=redirectUris" })
   redirectUris?: string[];
 
-  @Metadata({ data: "json, name=refreshTokenValidity" })
+  @SpeakeasyMetadata({ data: "json, name=refreshTokenValidity" })
   refreshTokenValidity?: number;
 }

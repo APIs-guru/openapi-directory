@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ExtendedKeyUsageTypeEnum(str, Enum):
     SERVER_AUTH = "SERVER_AUTH"

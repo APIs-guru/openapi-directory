@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ProductDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: string[];
 
-  @Metadata({ data: "json, name=grossUnitPrice" })
+  @SpeakeasyMetadata({ data: "json, name=grossUnitPrice" })
   grossUnitPrice?: boolean;
 
-  @Metadata({ data: "json, name=hasDefaultVatRate" })
+  @SpeakeasyMetadata({ data: "json, name=hasDefaultVatRate" })
   hasDefaultVatRate?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=stockCode" })
+  @SpeakeasyMetadata({ data: "json, name=stockCode" })
   stockCode?: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: string;
 
-  @Metadata({ data: "json, name=unitPrice" })
+  @SpeakeasyMetadata({ data: "json, name=unitPrice" })
   unitPrice?: number;
 
-  @Metadata({ data: "json, name=vatAnalysisTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=vatAnalysisTypeId" })
   vatAnalysisTypeId?: number;
 
-  @Metadata({ data: "json, name=vatRateId" })
+  @SpeakeasyMetadata({ data: "json, name=vatRateId" })
   vatRateId?: number;
 }

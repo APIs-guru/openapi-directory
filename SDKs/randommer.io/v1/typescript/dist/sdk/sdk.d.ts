@@ -1,28 +1,70 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://randommer.io"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    GetApiCard(req: operations.GetApiCardRequest, config?: AxiosRequestConfig): Promise<operations.GetApiCardResponse>;
-    GetApiCardTypes(req: operations.GetApiCardTypesRequest, config?: AxiosRequestConfig): Promise<operations.GetApiCardTypesResponse>;
-    GetApiMiscCultures(req: operations.GetApiMiscCulturesRequest, config?: AxiosRequestConfig): Promise<operations.GetApiMiscCulturesResponse>;
-    GetApiMiscRandomAddress(req: operations.GetApiMiscRandomAddressRequest, config?: AxiosRequestConfig): Promise<operations.GetApiMiscRandomAddressResponse>;
-    GetApiName(req: operations.GetApiNameRequest, config?: AxiosRequestConfig): Promise<operations.GetApiNameResponse>;
-    GetApiNameSuggestions(req: operations.GetApiNameSuggestionsRequest, config?: AxiosRequestConfig): Promise<operations.GetApiNameSuggestionsResponse>;
-    GetApiPhoneCountries(req: operations.GetApiPhoneCountriesRequest, config?: AxiosRequestConfig): Promise<operations.GetApiPhoneCountriesResponse>;
-    GetApiPhoneGenerate(req: operations.GetApiPhoneGenerateRequest, config?: AxiosRequestConfig): Promise<operations.GetApiPhoneGenerateResponse>;
-    GetApiPhoneValidate(req: operations.GetApiPhoneValidateRequest, config?: AxiosRequestConfig): Promise<operations.GetApiPhoneValidateResponse>;
-    GetApiSocialNumber(req: operations.GetApiSocialNumberRequest, config?: AxiosRequestConfig): Promise<operations.GetApiSocialNumberResponse>;
-    GetApiTextLoremIpsum(req: operations.GetApiTextLoremIpsumRequest, config?: AxiosRequestConfig): Promise<operations.GetApiTextLoremIpsumResponse>;
-    GetApiTextPassword(req: operations.GetApiTextPasswordRequest, config?: AxiosRequestConfig): Promise<operations.GetApiTextPasswordResponse>;
-    PostApiSocialNumber(req: operations.PostApiSocialNumberRequest, config?: AxiosRequestConfig): Promise<operations.PostApiSocialNumberResponse>;
-    PostApiTextHumanize(req: operations.PostApiTextHumanizeRequest, config?: AxiosRequestConfig): Promise<operations.PostApiTextHumanizeResponse>;
-    PostApiTextTransform(req: operations.PostApiTextTransformRequest, config?: AxiosRequestConfig): Promise<operations.PostApiTextTransformResponse>;
+    /**
+     * getApiCard - Get Card
+    **/
+    getApiCard(req: operations.GetApiCardRequest, config?: AxiosRequestConfig): Promise<operations.GetApiCardResponse>;
+    /**
+     * getApiCardTypes - Get available card types
+    **/
+    getApiCardTypes(req: operations.GetApiCardTypesRequest, config?: AxiosRequestConfig): Promise<operations.GetApiCardTypesResponse>;
+    getApiMiscCultures(req: operations.GetApiMiscCulturesRequest, config?: AxiosRequestConfig): Promise<operations.GetApiMiscCulturesResponse>;
+    getApiMiscRandomAddress(req: operations.GetApiMiscRandomAddressRequest, config?: AxiosRequestConfig): Promise<operations.GetApiMiscRandomAddressResponse>;
+    /**
+     * getApiName - Get name
+    **/
+    getApiName(req: operations.GetApiNameRequest, config?: AxiosRequestConfig): Promise<operations.GetApiNameResponse>;
+    /**
+     * getApiNameSuggestions - Get business name suggestions
+    **/
+    getApiNameSuggestions(req: operations.GetApiNameSuggestionsRequest, config?: AxiosRequestConfig): Promise<operations.GetApiNameSuggestionsResponse>;
+    /**
+     * getApiPhoneCountries - Get available countries
+    **/
+    getApiPhoneCountries(req: operations.GetApiPhoneCountriesRequest, config?: AxiosRequestConfig): Promise<operations.GetApiPhoneCountriesResponse>;
+    /**
+     * getApiPhoneGenerate - Get bulk telephone numbers for a country
+    **/
+    getApiPhoneGenerate(req: operations.GetApiPhoneGenerateRequest, config?: AxiosRequestConfig): Promise<operations.GetApiPhoneGenerateResponse>;
+    /**
+     * getApiPhoneValidate - Validate a phone number
+    **/
+    getApiPhoneValidate(req: operations.GetApiPhoneValidateRequest, config?: AxiosRequestConfig): Promise<operations.GetApiPhoneValidateResponse>;
+    /**
+     * getApiSocialNumber - Generate a social security number
+    **/
+    getApiSocialNumber(req: operations.GetApiSocialNumberRequest, config?: AxiosRequestConfig): Promise<operations.GetApiSocialNumberResponse>;
+    /**
+     * getApiTextLoremIpsum - Generate lorem ipsum
+    **/
+    getApiTextLoremIpsum(req: operations.GetApiTextLoremIpsumRequest, config?: AxiosRequestConfig): Promise<operations.GetApiTextLoremIpsumResponse>;
+    /**
+     * getApiTextPassword - Generate password
+    **/
+    getApiTextPassword(req: operations.GetApiTextPasswordRequest, config?: AxiosRequestConfig): Promise<operations.GetApiTextPasswordResponse>;
+    /**
+     * postApiSocialNumber - Validate VAT/identity numbers
+    **/
+    postApiSocialNumber(req: operations.PostApiSocialNumberRequest, config?: AxiosRequestConfig): Promise<operations.PostApiSocialNumberResponse>;
+    /**
+     * postApiTextHumanize - Humanize text
+    **/
+    postApiTextHumanize(req: operations.PostApiTextHumanizeRequest, config?: AxiosRequestConfig): Promise<operations.PostApiTextHumanizeResponse>;
+    /**
+     * postApiTextTransform - Transform text
+    **/
+    postApiTextTransform(req: operations.PostApiTextTransformRequest, config?: AxiosRequestConfig): Promise<operations.PostApiTextTransformResponse>;
 }
 export {};

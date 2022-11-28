@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleChromeManagementV1StorageInfoDiskVolume
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information for disk volumes
 **/
 export class GoogleChromeManagementV1StorageInfoDiskVolume extends SpeakeasyBase {
-  @Metadata({ data: "json, name=storageFreeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=storageFreeBytes" })
   storageFreeBytes?: string;
 
-  @Metadata({ data: "json, name=storageTotalBytes" })
+  @SpeakeasyMetadata({ data: "json, name=storageTotalBytes" })
   storageTotalBytes?: string;
 
-  @Metadata({ data: "json, name=volumeId" })
+  @SpeakeasyMetadata({ data: "json, name=volumeId" })
   volumeId?: string;
 }

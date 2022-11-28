@@ -1,41 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Price } from "./price";
 import { InAppProductListing } from "./inappproductlisting";
-import { Price } from "./price";
+
 
 
 export class InAppProduct extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=defaultLanguage" })
   defaultLanguage?: string;
 
-  @Metadata({ data: "json, name=defaultPrice" })
+  @SpeakeasyMetadata({ data: "json, name=defaultPrice" })
   defaultPrice?: Price;
 
-  @Metadata({ data: "json, name=gracePeriod" })
+  @SpeakeasyMetadata({ data: "json, name=gracePeriod" })
   gracePeriod?: string;
 
-  @Metadata({ data: "json, name=listings", elemType: shared.InAppProductListing })
+  @SpeakeasyMetadata({ data: "json, name=listings", elemType: InAppProductListing })
   listings?: Map<string, InAppProductListing>;
 
-  @Metadata({ data: "json, name=packageName" })
+  @SpeakeasyMetadata({ data: "json, name=packageName" })
   packageName?: string;
 
-  @Metadata({ data: "json, name=prices", elemType: shared.Price })
+  @SpeakeasyMetadata({ data: "json, name=prices", elemType: Price })
   prices?: Map<string, Price>;
 
-  @Metadata({ data: "json, name=purchaseType" })
+  @SpeakeasyMetadata({ data: "json, name=purchaseType" })
   purchaseType?: string;
 
-  @Metadata({ data: "json, name=sku" })
+  @SpeakeasyMetadata({ data: "json, name=sku" })
   sku?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=subscriptionPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=subscriptionPeriod" })
   subscriptionPeriod?: string;
 
-  @Metadata({ data: "json, name=trialPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=trialPeriod" })
   trialPeriod?: string;
 }

@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AddListingProviderQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pw" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pw" })
   pw?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=validateListings" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=validateListings" })
   validateListings?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=validateLogin" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=validateLogin" })
   validateLogin?: boolean;
 }
 
 
 export class AddListingProviderRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   listingsProviderInfo?: shared.ListingsProviderInfo;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   listingsProviderInfo1?: shared.ListingsProviderInfo;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   listingsProviderInfo2?: shared.ListingsProviderInfo;
 }
 
 
 export class AddListingProviderSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class AddListingProviderRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: AddListingProviderQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: AddListingProviderRequests;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: AddListingProviderSecurity;
 }
 
 
 export class AddListingProviderResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listingsProviderInfo?: shared.ListingsProviderInfo;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

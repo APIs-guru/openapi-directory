@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -31,8 +36,12 @@ class GetHlsStreamingSessionURLRequestBodyDisplayFragmentTimestampEnum(str, Enum
 @dataclass_json
 @dataclass
 class GetHlsStreamingSessionURLRequestBodyHlsFragmentSelector:
-    fragment_selector_type: Optional[shared.HlsFragmentSelectorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FragmentSelectorType' }})
-    timestamp_range: Optional[shared.HlsTimestampRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TimestampRange' }})
+    r"""GetHlsStreamingSessionURLRequestBodyHlsFragmentSelector
+    Contains the range of timestamps for the requested media, and the source of the timestamps.
+    """
+    
+    fragment_selector_type: Optional[shared.HlsFragmentSelectorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FragmentSelectorType') }})
+    timestamp_range: Optional[shared.HlsTimestampRange] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TimestampRange') }})
     
 class GetHlsStreamingSessionURLRequestBodyPlaybackModeEnum(str, Enum):
     LIVE = "LIVE"
@@ -43,27 +52,28 @@ class GetHlsStreamingSessionURLRequestBodyPlaybackModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GetHlsStreamingSessionURLRequestBody:
-    container_format: Optional[GetHlsStreamingSessionURLRequestBodyContainerFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContainerFormat' }})
-    discontinuity_mode: Optional[GetHlsStreamingSessionURLRequestBodyDiscontinuityModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DiscontinuityMode' }})
-    display_fragment_timestamp: Optional[GetHlsStreamingSessionURLRequestBodyDisplayFragmentTimestampEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DisplayFragmentTimestamp' }})
-    expires: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Expires' }})
-    hls_fragment_selector: Optional[GetHlsStreamingSessionURLRequestBodyHlsFragmentSelector] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HLSFragmentSelector' }})
-    max_media_playlist_fragment_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxMediaPlaylistFragmentResults' }})
-    playback_mode: Optional[GetHlsStreamingSessionURLRequestBodyPlaybackModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PlaybackMode' }})
-    stream_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StreamARN' }})
-    stream_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StreamName' }})
+    container_format: Optional[GetHlsStreamingSessionURLRequestBodyContainerFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ContainerFormat') }})
+    discontinuity_mode: Optional[GetHlsStreamingSessionURLRequestBodyDiscontinuityModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DiscontinuityMode') }})
+    display_fragment_timestamp: Optional[GetHlsStreamingSessionURLRequestBodyDisplayFragmentTimestampEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DisplayFragmentTimestamp') }})
+    expires: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Expires') }})
+    hls_fragment_selector: Optional[GetHlsStreamingSessionURLRequestBodyHlsFragmentSelector] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('HLSFragmentSelector') }})
+    max_media_playlist_fragment_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxMediaPlaylistFragmentResults') }})
+    playback_mode: Optional[GetHlsStreamingSessionURLRequestBodyPlaybackModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PlaybackMode') }})
+    stream_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StreamARN') }})
+    stream_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StreamName') }})
     
 
 @dataclass
 class GetHlsStreamingSessionURLRequest:
-    headers: GetHlsStreamingSessionURLHeaders = field(default=None)
-    request: GetHlsStreamingSessionURLRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetHlsStreamingSessionURLHeaders = field()
+    request: GetHlsStreamingSessionURLRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetHlsStreamingSessionURLResponse:
+    content_type: str = field()
+    status_code: int = field()
     client_limit_exceeded_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_hls_streaming_session_url_output: Optional[shared.GetHlsStreamingSessionURLOutput] = field(default=None)
     invalid_argument_exception: Optional[Any] = field(default=None)
     invalid_codec_private_data_exception: Optional[Any] = field(default=None)
@@ -71,6 +81,5 @@ class GetHlsStreamingSessionURLResponse:
     no_data_retention_exception: Optional[Any] = field(default=None)
     not_authorized_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     unsupported_stream_media_type_exception: Optional[Any] = field(default=None)
     

@@ -50,6 +50,8 @@ const (
 	GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestThreatTypeEnumSocialEngineeringLowerPrecision GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestThreatTypeEnum = "SOCIAL_ENGINEERING_LOWER_PRECISION"
 )
 
+// GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest
+// A single list update request.
 type GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequest struct {
 	Constraints     *GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints         `json:"constraints,omitempty"`
 	PlatformType    *GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestPlatformTypeEnum    `json:"platformType,omitempty"`

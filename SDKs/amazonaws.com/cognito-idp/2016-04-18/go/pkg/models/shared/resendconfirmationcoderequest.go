@@ -1,5 +1,7 @@
 package shared
 
+// ResendConfirmationCodeRequest
+// Represents the request to resend the confirmation code.
 type ResendConfirmationCodeRequest struct {
 	AnalyticsMetadata *AnalyticsMetadataType `json:"AnalyticsMetadata,omitempty"`
 	ClientID          string                 `json:"ClientId"`

@@ -33,7 +33,7 @@ type ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsCreateSecurity
 type ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsCreateRequest struct {
 	PathParams  ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsCreatePathParams
 	QueryParams ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsCreateQueryParams
-	Request     *shared.Rollout `request:"mediaType=application/json"`
+	Request     *shared.RolloutInput `request:"mediaType=application/json"`
 	Security    ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsCreateSecurity
 }
 

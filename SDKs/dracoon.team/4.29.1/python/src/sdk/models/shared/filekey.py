@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class FileKey:
-    iv: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iv' }})
-    key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    tag: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tag' }})
-    version: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    r"""FileKey
+    File key information
+    """
+    
+    iv: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('iv') }})
+    key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('key') }})
+    tag: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('tag') }})
+    version: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
     

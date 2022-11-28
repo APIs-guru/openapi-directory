@@ -1,11 +1,11 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetListingMotorcycleIDExtraPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,14 +15,14 @@ class GetListingMotorcycleIDExtraQueryParams:
 
 @dataclass
 class GetListingMotorcycleIDExtraRequest:
-    path_params: GetListingMotorcycleIDExtraPathParams = field(default=None)
-    query_params: GetListingMotorcycleIDExtraQueryParams = field(default=None)
+    path_params: GetListingMotorcycleIDExtraPathParams = field()
+    query_params: GetListingMotorcycleIDExtraQueryParams = field()
     
 
 @dataclass
 class GetListingMotorcycleIDExtraResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     listing_extra_attributes: Optional[shared.ListingExtraAttributes] = field(default=None)
-    status_code: int = field(default=None)
     

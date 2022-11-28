@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var SetPrincipalTagAttributeMapResponse = /** @class */ (function (_super) {
     __extends(SetPrincipalTagAttributeMapResponse, _super);
     function SetPrincipalTagAttributeMapResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=IdentityPoolId" }),
+        SpeakeasyMetadata({ data: "json, name=IdentityPoolId" }),
         __metadata("design:type", String)
     ], SetPrincipalTagAttributeMapResponse.prototype, "identityPoolId", void 0);
     __decorate([
-        Metadata({ data: "json, name=IdentityProviderName" }),
+        SpeakeasyMetadata({ data: "json, name=IdentityProviderName" }),
         __metadata("design:type", String)
     ], SetPrincipalTagAttributeMapResponse.prototype, "identityProviderName", void 0);
     __decorate([
-        Metadata({ data: "json, name=PrincipalTags" }),
+        SpeakeasyMetadata({ data: "json, name=PrincipalTags" }),
         __metadata("design:type", Map)
     ], SetPrincipalTagAttributeMapResponse.prototype, "principalTags", void 0);
     __decorate([
-        Metadata({ data: "json, name=UseDefaults" }),
+        SpeakeasyMetadata({ data: "json, name=UseDefaults" }),
         __metadata("design:type", Boolean)
     ], SetPrincipalTagAttributeMapResponse.prototype, "useDefaults", void 0);
     return SetPrincipalTagAttributeMapResponse;

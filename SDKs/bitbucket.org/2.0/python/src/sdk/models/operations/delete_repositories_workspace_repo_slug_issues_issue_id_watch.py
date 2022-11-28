@@ -1,45 +1,31 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
 class DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchPathParams:
-    issue_id: str = field(default=None, metadata={'path_param': { 'field_name': 'issue_id', 'style': 'simple', 'explode': False }})
-    repo_slug: str = field(default=None, metadata={'path_param': { 'field_name': 'repo_slug', 'style': 'simple', 'explode': False }})
-    workspace: str = field(default=None, metadata={'path_param': { 'field_name': 'workspace', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    issue_id: str = field(metadata={'path_param': { 'field_name': 'issue_id', 'style': 'simple', 'explode': False }})
+    repo_slug: str = field(metadata={'path_param': { 'field_name': 'repo_slug', 'style': 'simple', 'explode': False }})
+    workspace: str = field(metadata={'path_param': { 'field_name': 'workspace', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchSecurity:
-    option1: Optional[DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchRequest:
-    path_params: DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchPathParams = field(default=None)
-    security: DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchSecurity = field(default=None)
+    path_params: DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchPathParams = field()
+    security: DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchSecurity = field()
     
 
 @dataclass
 class DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[dict[str, Any]] = field(default=None)
     

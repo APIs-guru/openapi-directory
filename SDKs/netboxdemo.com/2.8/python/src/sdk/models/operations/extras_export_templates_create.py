@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class ExtrasExportTemplatesCreateRequest:
-    request: shared.WritableExportTemplate = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.WritableExportTemplateInput = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ExtrasExportTemplatesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     export_template: Optional[shared.ExportTemplate] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CopySheetToAnotherSpreadsheetRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The request to copy a sheet across spreadsheets.
 **/
 export class CopySheetToAnotherSpreadsheetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationSpreadsheetId" })
+  @SpeakeasyMetadata({ data: "json, name=destinationSpreadsheetId" })
   destinationSpreadsheetId?: string;
 }

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,19 +21,19 @@ class GamesPlayersGetScopedPlayerIdsQueryParams:
 
 @dataclass
 class GamesPlayersGetScopedPlayerIdsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GamesPlayersGetScopedPlayerIdsRequest:
-    query_params: GamesPlayersGetScopedPlayerIdsQueryParams = field(default=None)
-    security: GamesPlayersGetScopedPlayerIdsSecurity = field(default=None)
+    query_params: GamesPlayersGetScopedPlayerIdsQueryParams = field()
+    security: GamesPlayersGetScopedPlayerIdsSecurity = field()
     
 
 @dataclass
 class GamesPlayersGetScopedPlayerIdsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     scoped_player_ids: Optional[shared.ScopedPlayerIds] = field(default=None)
-    status_code: int = field(default=None)
     

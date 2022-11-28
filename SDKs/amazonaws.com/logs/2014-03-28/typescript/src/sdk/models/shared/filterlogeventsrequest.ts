@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class FilterLogEventsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: number;
 
-  @Metadata({ data: "json, name=filterPattern" })
+  @SpeakeasyMetadata({ data: "json, name=filterPattern" })
   filterPattern?: string;
 
-  @Metadata({ data: "json, name=interleaved" })
+  @SpeakeasyMetadata({ data: "json, name=interleaved" })
   interleaved?: boolean;
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=logGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=logGroupName" })
   logGroupName: string;
 
-  @Metadata({ data: "json, name=logStreamNamePrefix" })
+  @SpeakeasyMetadata({ data: "json, name=logStreamNamePrefix" })
   logStreamNamePrefix?: string;
 
-  @Metadata({ data: "json, name=logStreamNames" })
+  @SpeakeasyMetadata({ data: "json, name=logStreamNames" })
   logStreamNames?: string[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: number;
 }

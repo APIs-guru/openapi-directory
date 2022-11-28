@@ -1,5 +1,7 @@
 package shared
 
+// Channel
+// A *channel* resource contains information about a YouTube channel.
 type Channel struct {
 	AuditDetails        *ChannelAuditDetails           `json:"auditDetails,omitempty"`
 	BrandingSettings    *ChannelBrandingSettings       `json:"brandingSettings,omitempty"`

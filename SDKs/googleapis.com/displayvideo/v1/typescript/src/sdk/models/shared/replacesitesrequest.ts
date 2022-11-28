@@ -1,19 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Site } from "./site";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SiteInput } from "./site";
 
 
-// ReplaceSitesRequest
+
+// ReplaceSitesRequestInput
 /** 
  * Request message for SiteService.ReplaceSites.
 **/
-export class ReplaceSitesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=advertiserId" })
+export class ReplaceSitesRequestInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string;
 
-  @Metadata({ data: "json, name=newSites", elemType: shared.Site })
-  newSites?: Site[];
+  @SpeakeasyMetadata({ data: "json, name=newSites", elemType: SiteInput })
+  newSites?: SiteInput[];
 
-  @Metadata({ data: "json, name=partnerId" })
+  @SpeakeasyMetadata({ data: "json, name=partnerId" })
   partnerId?: string;
 }

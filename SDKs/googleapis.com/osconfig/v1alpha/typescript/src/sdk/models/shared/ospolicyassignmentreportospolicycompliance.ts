@@ -1,11 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OsPolicyAssignmentReportOsPolicyComplianceOsPolicyResourceCompliance } from "./ospolicyassignmentreportospolicycomplianceospolicyresourcecompliance";
 
+
 export enum OsPolicyAssignmentReportOsPolicyComplianceComplianceStateEnum {
-    Unknown = "UNKNOWN"
-,    Compliant = "COMPLIANT"
-,    NonCompliant = "NON_COMPLIANT"
+    Unknown = "UNKNOWN",
+    Compliant = "COMPLIANT",
+    NonCompliant = "NON_COMPLIANT"
 }
 
 
@@ -14,15 +14,15 @@ export enum OsPolicyAssignmentReportOsPolicyComplianceComplianceStateEnum {
  * Compliance data for an OS policy
 **/
 export class OsPolicyAssignmentReportOsPolicyCompliance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=complianceState" })
+  @SpeakeasyMetadata({ data: "json, name=complianceState" })
   complianceState?: OsPolicyAssignmentReportOsPolicyComplianceComplianceStateEnum;
 
-  @Metadata({ data: "json, name=complianceStateReason" })
+  @SpeakeasyMetadata({ data: "json, name=complianceStateReason" })
   complianceStateReason?: string;
 
-  @Metadata({ data: "json, name=osPolicyId" })
+  @SpeakeasyMetadata({ data: "json, name=osPolicyId" })
   osPolicyId?: string;
 
-  @Metadata({ data: "json, name=osPolicyResourceCompliances", elemType: shared.OsPolicyAssignmentReportOsPolicyComplianceOsPolicyResourceCompliance })
+  @SpeakeasyMetadata({ data: "json, name=osPolicyResourceCompliances", elemType: OsPolicyAssignmentReportOsPolicyComplianceOsPolicyResourceCompliance })
   osPolicyResourceCompliances?: OsPolicyAssignmentReportOsPolicyComplianceOsPolicyResourceCompliance[];
 }

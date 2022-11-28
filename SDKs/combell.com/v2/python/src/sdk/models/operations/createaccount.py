@@ -10,7 +10,7 @@ class CreateAccountRequest:
 
 @dataclass
 class CreateAccountResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_response: Optional[shared.BadRequestResponse] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

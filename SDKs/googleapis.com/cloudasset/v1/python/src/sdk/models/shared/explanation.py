@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import permissions
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Explanation:
-    matched_permissions: Optional[dict[str, permissions.Permissions]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'matchedPermissions' }})
+    r"""Explanation
+    Explanation about the IAM policy search result.
+    """
+    
+    matched_permissions: Optional[dict[str, Permissions]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('matchedPermissions') }})
     

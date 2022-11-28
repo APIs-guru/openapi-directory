@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UpdateSystemModelsPriorityPackage } from "./updatesystemmodelsprioritypackage";
 import { ApiPagedResponseMetadata } from "./apipagedresponsemetadata";
+
 
 
 // ApiPagedResponseUpdateSystemModelsPriorityPackage
@@ -9,9 +9,9 @@ import { ApiPagedResponseMetadata } from "./apipagedresponsemetadata";
  * A response containing a page of results and metadata concerning the results
 **/
 export class ApiPagedResponseUpdateSystemModelsPriorityPackage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Entities", elemType: shared.UpdateSystemModelsPriorityPackage })
+  @SpeakeasyMetadata({ data: "json, name=Entities", elemType: UpdateSystemModelsPriorityPackage })
   entities: UpdateSystemModelsPriorityPackage[];
 
-  @Metadata({ data: "json, name=Metadata" })
+  @SpeakeasyMetadata({ data: "json, name=Metadata" })
   metadata: ApiPagedResponseMetadata;
 }

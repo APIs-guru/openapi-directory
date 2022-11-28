@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CivicinfoElectionsVoterInfoQueryQueryParams:
+    address: str = field(metadata={'query_param': { 'field_name': 'address', 'style': 'form', 'explode': True }})
     dollar_xgafv: Optional[shared.XgafvEnum] = field(default=None, metadata={'query_param': { 'field_name': '$.xgafv', 'style': 'form', 'explode': True }})
     access_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'access_token', 'style': 'form', 'explode': True }})
-    address: str = field(default=None, metadata={'query_param': { 'field_name': 'address', 'style': 'form', 'explode': True }})
     alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
     callback: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'callback', 'style': 'form', 'explode': True }})
     election_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'electionId', 'style': 'form', 'explode': True }})
@@ -24,12 +25,12 @@ class CivicinfoElectionsVoterInfoQueryQueryParams:
 
 @dataclass
 class CivicinfoElectionsVoterInfoQueryRequest:
-    query_params: CivicinfoElectionsVoterInfoQueryQueryParams = field(default=None)
+    query_params: CivicinfoElectionsVoterInfoQueryQueryParams = field()
     
 
 @dataclass
 class CivicinfoElectionsVoterInfoQueryResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     voter_info_response: Optional[shared.VoterInfoResponse] = field(default=None)
     

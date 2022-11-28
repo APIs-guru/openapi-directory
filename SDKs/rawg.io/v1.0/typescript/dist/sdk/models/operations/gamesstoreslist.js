@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GamesStoresListPathParams = /** @class */ (function (_super) {
     __extends(GamesStoresListPathParams, _super);
@@ -30,7 +30,7 @@ var GamesStoresListPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=game_pk" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=game_pk" }),
         __metadata("design:type", String)
     ], GamesStoresListPathParams.prototype, "gamePk", void 0);
     return GamesStoresListPathParams;
@@ -42,75 +42,75 @@ var GamesStoresListQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ordering" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ordering" }),
         __metadata("design:type", String)
     ], GamesStoresListQueryParams.prototype, "ordering", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], GamesStoresListQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page_size" }),
         __metadata("design:type", Number)
     ], GamesStoresListQueryParams.prototype, "pageSize", void 0);
     return GamesStoresListQueryParams;
 }(SpeakeasyBase));
 export { GamesStoresListQueryParams };
-var GamesStoresListRequest = /** @class */ (function (_super) {
-    __extends(GamesStoresListRequest, _super);
-    function GamesStoresListRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GamesStoresListPathParams)
-    ], GamesStoresListRequest.prototype, "pathParams", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", GamesStoresListQueryParams)
-    ], GamesStoresListRequest.prototype, "queryParams", void 0);
-    return GamesStoresListRequest;
-}(SpeakeasyBase));
-export { GamesStoresListRequest };
 var GamesStoresList200ApplicationJson = /** @class */ (function (_super) {
     __extends(GamesStoresList200ApplicationJson, _super);
     function GamesStoresList200ApplicationJson() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", Number)
     ], GamesStoresList200ApplicationJson.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=next" }),
+        SpeakeasyMetadata({ data: "json, name=next" }),
         __metadata("design:type", String)
     ], GamesStoresList200ApplicationJson.prototype, "next", void 0);
     __decorate([
-        Metadata({ data: "json, name=previous" }),
+        SpeakeasyMetadata({ data: "json, name=previous" }),
         __metadata("design:type", String)
     ], GamesStoresList200ApplicationJson.prototype, "previous", void 0);
     __decorate([
-        Metadata({ data: "json, name=results", elemType: shared.GameStoreFull }),
+        SpeakeasyMetadata({ data: "json, name=results", elemType: shared.GameStoreFull }),
         __metadata("design:type", Array)
     ], GamesStoresList200ApplicationJson.prototype, "results", void 0);
     return GamesStoresList200ApplicationJson;
 }(SpeakeasyBase));
 export { GamesStoresList200ApplicationJson };
+var GamesStoresListRequest = /** @class */ (function (_super) {
+    __extends(GamesStoresListRequest, _super);
+    function GamesStoresListRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GamesStoresListPathParams)
+    ], GamesStoresListRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GamesStoresListQueryParams)
+    ], GamesStoresListRequest.prototype, "queryParams", void 0);
+    return GamesStoresListRequest;
+}(SpeakeasyBase));
+export { GamesStoresListRequest };
 var GamesStoresListResponse = /** @class */ (function (_super) {
     __extends(GamesStoresListResponse, _super);
     function GamesStoresListResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GamesStoresListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GamesStoresListResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GamesStoresList200ApplicationJson)
     ], GamesStoresListResponse.prototype, "gamesStoresList200ApplicationJsonObject", void 0);
     return GamesStoresListResponse;

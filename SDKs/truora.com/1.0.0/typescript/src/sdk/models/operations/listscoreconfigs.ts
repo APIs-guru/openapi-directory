@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListScoreConfigsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start_key" })
   startKey?: string;
 }
 
 
 export class ListScoreConfigsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListScoreConfigsQueryParams;
 }
 
 
 export class ListScoreConfigsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   scoreConfigsOutput?: shared.ScoreConfigsOutput;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BulkPublishStatusEnum } from "./bulkpublishstatusenum";
 /**
  * The output for the GetBulkPublishDetails operation.

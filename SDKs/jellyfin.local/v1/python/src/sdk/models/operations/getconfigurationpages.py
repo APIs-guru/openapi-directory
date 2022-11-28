@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -11,13 +12,13 @@ class GetConfigurationPagesQueryParams:
 
 @dataclass
 class GetConfigurationPagesRequest:
-    query_params: GetConfigurationPagesQueryParams = field(default=None)
+    query_params: GetConfigurationPagesQueryParams = field()
     
 
 @dataclass
 class GetConfigurationPagesResponse:
+    content_type: str = field()
+    status_code: int = field()
     configuration_page_infos: Optional[List[shared.ConfigurationPageInfo]] = field(default=None)
-    content_type: str = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

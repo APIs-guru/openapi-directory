@@ -1,0 +1,110 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+var GetFundingAccountsV2QueryParams = /** @class */ (function (_super) {
+    __extends(GetFundingAccountsV2QueryParams, _super);
+    function GetFundingAccountsV2QueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" }),
+        __metadata("design:type", String)
+    ], GetFundingAccountsV2QueryParams.prototype, "country", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currency" }),
+        __metadata("design:type", String)
+    ], GetFundingAccountsV2QueryParams.prototype, "currency", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" }),
+        __metadata("design:type", String)
+    ], GetFundingAccountsV2QueryParams.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        __metadata("design:type", Number)
+    ], GetFundingAccountsV2QueryParams.prototype, "page", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
+        __metadata("design:type", Number)
+    ], GetFundingAccountsV2QueryParams.prototype, "pageSize", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=payorId" }),
+        __metadata("design:type", String)
+    ], GetFundingAccountsV2QueryParams.prototype, "payorId", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sensitive" }),
+        __metadata("design:type", Boolean)
+    ], GetFundingAccountsV2QueryParams.prototype, "sensitive", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        __metadata("design:type", String)
+    ], GetFundingAccountsV2QueryParams.prototype, "sort", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" }),
+        __metadata("design:type", String)
+    ], GetFundingAccountsV2QueryParams.prototype, "type", void 0);
+    return GetFundingAccountsV2QueryParams;
+}(SpeakeasyBase));
+export { GetFundingAccountsV2QueryParams };
+var GetFundingAccountsV2Request = /** @class */ (function (_super) {
+    __extends(GetFundingAccountsV2Request, _super);
+    function GetFundingAccountsV2Request() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", GetFundingAccountsV2QueryParams)
+    ], GetFundingAccountsV2Request.prototype, "queryParams", void 0);
+    return GetFundingAccountsV2Request;
+}(SpeakeasyBase));
+export { GetFundingAccountsV2Request };
+var GetFundingAccountsV2Response = /** @class */ (function (_super) {
+    __extends(GetFundingAccountsV2Response, _super);
+    function GetFundingAccountsV2Response() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", String)
+    ], GetFundingAccountsV2Response.prototype, "contentType", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", shared.ListFundingAccountsResponse2)
+    ], GetFundingAccountsV2Response.prototype, "listFundingAccountsResponse2", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Number)
+    ], GetFundingAccountsV2Response.prototype, "statusCode", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], GetFundingAccountsV2Response.prototype, "inlineResponse400", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", Object)
+    ], GetFundingAccountsV2Response.prototype, "inlineResponse403", void 0);
+    return GetFundingAccountsV2Response;
+}(SpeakeasyBase));
+export { GetFundingAccountsV2Response };

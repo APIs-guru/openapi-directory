@@ -1,5 +1,7 @@
 package shared
 
+// ReportResult
+// Result of a generated report.
 type ReportResult struct {
 	Averages         *Row     `json:"averages,omitempty"`
 	EndDate          *Date    `json:"endDate,omitempty"`

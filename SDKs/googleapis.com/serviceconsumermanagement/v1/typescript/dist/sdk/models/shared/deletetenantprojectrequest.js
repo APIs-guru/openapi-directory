@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DeleteTenantProjectRequest
 /**
  * Request message to delete tenant project resource from the tenancy unit.
@@ -33,7 +33,7 @@ var DeleteTenantProjectRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=tag" }),
+        SpeakeasyMetadata({ data: "json, name=tag" }),
         __metadata("design:type", String)
     ], DeleteTenantProjectRequest.prototype, "tag", void 0);
     return DeleteTenantProjectRequest;

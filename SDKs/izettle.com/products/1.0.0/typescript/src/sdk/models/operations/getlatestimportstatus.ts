@@ -1,50 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetLatestImportStatusPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationUuid" })
   organizationUuid: string;
 }
 
 
-export class GetLatestImportStatusSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  zettleApiKey: shared.SchemeZettleApiKey;
-}
-
-
-export class GetLatestImportStatusSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  zettleOauth: shared.SchemeZettleOauth;
-}
-
-
 export class GetLatestImportStatusSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetLatestImportStatusSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  zettleApiKey?: shared.SchemeZettleApiKey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetLatestImportStatusSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  zettleOauth?: shared.SchemeZettleOauth;
 }
 
 
 export class GetLatestImportStatusRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetLatestImportStatusPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetLatestImportStatusSecurity;
 }
 
 
 export class GetLatestImportStatusResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   importResponse?: shared.ImportResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

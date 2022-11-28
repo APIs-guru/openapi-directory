@@ -1,7 +1,8 @@
 
 
+
 export enum ProviderTypeEnum {
-    Bitbucket = "Bitbucket"
-,    GitHub = "GitHub"
-,    GitHubEnterpriseServer = "GitHubEnterpriseServer"
+    Bitbucket = "Bitbucket",
+    GitHub = "GitHub",
+    GitHubEnterpriseServer = "GitHubEnterpriseServer"
 }

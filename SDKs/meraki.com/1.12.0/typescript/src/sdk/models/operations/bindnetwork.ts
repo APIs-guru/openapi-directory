@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BindNetworkPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class BindNetworkRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoBind" })
+  @SpeakeasyMetadata({ data: "json, name=autoBind" })
   autoBind?: boolean;
 
-  @Metadata({ data: "json, name=configTemplateId" })
+  @SpeakeasyMetadata({ data: "json, name=configTemplateId" })
   configTemplateId: string;
 }
 
 
 export class BindNetworkRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: BindNetworkPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: BindNetworkRequestBody;
 }
 
 
 export class BindNetworkResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   bindNetwork200ApplicationJsonObject?: Map<string, any>;
 }

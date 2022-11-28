@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GkeCluster
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information specifying a GKE Cluster.
 **/
 export class GkeCluster extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cluster" })
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
   cluster?: string;
 
-  @Metadata({ data: "json, name=internalIp" })
+  @SpeakeasyMetadata({ data: "json, name=internalIp" })
   internalIp?: boolean;
 }

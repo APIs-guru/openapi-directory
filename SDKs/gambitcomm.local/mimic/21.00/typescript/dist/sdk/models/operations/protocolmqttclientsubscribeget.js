@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolMqttClientSubscribeGetPathParams = /** @class */ (function (_super) {
     __extends(ProtocolMqttClientSubscribeGetPathParams, _super);
     function ProtocolMqttClientSubscribeGetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolMqttClientSubscribeGetPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=attr" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=attr" }),
         __metadata("design:type", String)
     ], ProtocolMqttClientSubscribeGetPathParams.prototype, "attr", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=subNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subNum" }),
         __metadata("design:type", Number)
     ], ProtocolMqttClientSubscribeGetPathParams.prototype, "subNum", void 0);
     return ProtocolMqttClientSubscribeGetPathParams;
@@ -49,7 +49,7 @@ var ProtocolMqttClientSubscribeGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolMqttClientSubscribeGetPathParams)
     ], ProtocolMqttClientSubscribeGetRequest.prototype, "pathParams", void 0);
     return ProtocolMqttClientSubscribeGetRequest;
@@ -61,15 +61,15 @@ var ProtocolMqttClientSubscribeGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolMqttClientSubscribeGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolMqttClientSubscribeGetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Array)
     ], ProtocolMqttClientSubscribeGetResponse.prototype, "protocolMqttClientSubscribeGet200ApplicationJsonStrings", void 0);
     return ProtocolMqttClientSubscribeGetResponse;

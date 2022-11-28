@@ -12,6 +12,8 @@ const (
 	GoogleCloudConnectorsV1ConnectionStatusStateEnumError            GoogleCloudConnectorsV1ConnectionStatusStateEnum = "ERROR"
 )
 
+// GoogleCloudConnectorsV1ConnectionStatus
+// ConnectionStatus indicates the state of the connection.
 type GoogleCloudConnectorsV1ConnectionStatus struct {
 	Description *string                                           `json:"description,omitempty"`
 	State       *GoogleCloudConnectorsV1ConnectionStatusStateEnum `json:"state,omitempty"`

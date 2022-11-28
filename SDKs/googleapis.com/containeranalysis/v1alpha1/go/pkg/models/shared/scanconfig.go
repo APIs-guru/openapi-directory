@@ -1,5 +1,7 @@
 package shared
 
+// ScanConfig
+// Indicates various scans and whether they are turned on or off.
 type ScanConfig struct {
 	CreateTime  *string `json:"createTime,omitempty"`
 	Description *string `json:"description,omitempty"`

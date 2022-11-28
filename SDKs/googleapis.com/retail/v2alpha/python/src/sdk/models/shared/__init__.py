@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .alt_enum import *
 from .googleapihttpbody import *
 from .googlecloudretailv2alphaaddcatalogattributerequest import *
@@ -14,6 +14,7 @@ from .googlecloudretailv2alphacatalog import *
 from .googlecloudretailv2alphacatalogattribute import *
 from .googlecloudretailv2alphacolorinfo import *
 from .googlecloudretailv2alphacompletequeryresponse import *
+from .googlecloudretailv2alphacompletequeryresponseattributeresult import *
 from .googlecloudretailv2alphacompletequeryresponsecompletionresult import *
 from .googlecloudretailv2alphacompletequeryresponserecentsearchresult import *
 from .googlecloudretailv2alphacompletiondatainputconfig import *

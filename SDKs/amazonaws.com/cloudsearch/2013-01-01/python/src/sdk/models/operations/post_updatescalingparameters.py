@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostUpdateScalingParametersActionEnum(str, Enum):
     UPDATE_SCALING_PARAMETERS = "UpdateScalingParameters"
@@ -10,8 +14,8 @@ class PostUpdateScalingParametersVersionEnum(str, Enum):
 
 @dataclass
 class PostUpdateScalingParametersQueryParams:
-    action: PostUpdateScalingParametersActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostUpdateScalingParametersVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostUpdateScalingParametersActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostUpdateScalingParametersVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostUpdateScalingParametersHeaders:
 
 @dataclass
 class PostUpdateScalingParametersRequest:
-    query_params: PostUpdateScalingParametersQueryParams = field(default=None)
-    headers: PostUpdateScalingParametersHeaders = field(default=None)
+    headers: PostUpdateScalingParametersHeaders = field()
+    query_params: PostUpdateScalingParametersQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostUpdateScalingParametersResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

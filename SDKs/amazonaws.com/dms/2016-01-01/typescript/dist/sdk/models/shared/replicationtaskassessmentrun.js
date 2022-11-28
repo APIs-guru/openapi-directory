@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicationTaskAssessmentRunProgress } from "./replicationtaskassessmentrunprogress";
 // ReplicationTaskAssessmentRun
 /**
@@ -34,51 +34,51 @@ var ReplicationTaskAssessmentRun = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AssessmentProgress" }),
+        SpeakeasyMetadata({ data: "json, name=AssessmentProgress" }),
         __metadata("design:type", ReplicationTaskAssessmentRunProgress)
     ], ReplicationTaskAssessmentRun.prototype, "assessmentProgress", void 0);
     __decorate([
-        Metadata({ data: "json, name=AssessmentRunName" }),
+        SpeakeasyMetadata({ data: "json, name=AssessmentRunName" }),
         __metadata("design:type", String)
     ], ReplicationTaskAssessmentRun.prototype, "assessmentRunName", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastFailureMessage" }),
+        SpeakeasyMetadata({ data: "json, name=LastFailureMessage" }),
         __metadata("design:type", String)
     ], ReplicationTaskAssessmentRun.prototype, "lastFailureMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplicationTaskArn" }),
+        SpeakeasyMetadata({ data: "json, name=ReplicationTaskArn" }),
         __metadata("design:type", String)
     ], ReplicationTaskAssessmentRun.prototype, "replicationTaskArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplicationTaskAssessmentRunArn" }),
+        SpeakeasyMetadata({ data: "json, name=ReplicationTaskAssessmentRunArn" }),
         __metadata("design:type", String)
     ], ReplicationTaskAssessmentRun.prototype, "replicationTaskAssessmentRunArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplicationTaskAssessmentRunCreationDate" }),
+        SpeakeasyMetadata({ data: "json, name=ReplicationTaskAssessmentRunCreationDate" }),
         __metadata("design:type", Date)
     ], ReplicationTaskAssessmentRun.prototype, "replicationTaskAssessmentRunCreationDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResultEncryptionMode" }),
+        SpeakeasyMetadata({ data: "json, name=ResultEncryptionMode" }),
         __metadata("design:type", String)
     ], ReplicationTaskAssessmentRun.prototype, "resultEncryptionMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResultKmsKeyArn" }),
+        SpeakeasyMetadata({ data: "json, name=ResultKmsKeyArn" }),
         __metadata("design:type", String)
     ], ReplicationTaskAssessmentRun.prototype, "resultKmsKeyArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResultLocationBucket" }),
+        SpeakeasyMetadata({ data: "json, name=ResultLocationBucket" }),
         __metadata("design:type", String)
     ], ReplicationTaskAssessmentRun.prototype, "resultLocationBucket", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResultLocationFolder" }),
+        SpeakeasyMetadata({ data: "json, name=ResultLocationFolder" }),
         __metadata("design:type", String)
     ], ReplicationTaskAssessmentRun.prototype, "resultLocationFolder", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServiceAccessRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=ServiceAccessRoleArn" }),
         __metadata("design:type", String)
     ], ReplicationTaskAssessmentRun.prototype, "serviceAccessRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], ReplicationTaskAssessmentRun.prototype, "status", void 0);
     return ReplicationTaskAssessmentRun;

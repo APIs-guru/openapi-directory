@@ -1,16 +1,14 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://sandbox-api.va.gov/services/va_forms/{version}",
-  "https://api.va.gov/services/va_forms/{version}",
+export const ServerList = [
+	"https://sandbox-api.va.gov/services/va_forms/{version}",
+	"https://api.va.gov/services/va_forms/{version}",
 ] as const;
 
 export function WithServerURL(
@@ -21,50 +19,49 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // FindFormByFormName - Find form by form name
-  /** 
+  /**
+   * findFormByFormName - Find form by form name
+   *
    * Returns a single form and the full revision history
   **/
-  FindFormByFormName(
+  findFormByFormName(
     req: operations.FindFormByFormNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.FindFormByFormNameResponse> {
@@ -72,37 +69,39 @@ export class SDK {
       req = new operations.FindFormByFormNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/forms/{form_name}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.FindFormByFormNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.FindFormByFormNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.findFormByFormName200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.findFormByFormName401ApplicationJsonAny = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.findFormByFormName404ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 429:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 429:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.findFormByFormName429ApplicationJsonAny = httpRes?.data;
             }
             break;
@@ -114,11 +113,12 @@ export class SDK {
   }
 
   
-  // FindForms - Returns all VA Forms and their last revision date
-  /** 
+  /**
+   * findForms - Returns all VA Forms and their last revision date
+   *
    * Returns an index of all available VA forms. Optionally, pass a query parameter to filter forms by form number or title.
   **/
-  FindForms(
+  findForms(
     req: operations.FindFormsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.FindFormsResponse> {
@@ -126,11 +126,12 @@ export class SDK {
       req = new operations.FindFormsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/forms";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -139,27 +140,28 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.FindFormsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.FindFormsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.findForms200ApplicationJsonObject = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.findForms401ApplicationJsonAny = httpRes?.data;
             }
             break;
-          case 429:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 429:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.findForms429ApplicationJsonAny = httpRes?.data;
             }
             break;

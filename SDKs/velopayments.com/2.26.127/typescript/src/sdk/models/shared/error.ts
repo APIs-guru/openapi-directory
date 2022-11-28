@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorData } from "./errordata";
 import { LocalisationDetails } from "./localisationdetails";
 
+
 export enum ErrorLocationTypeEnum {
-    RequestBody = "requestBody"
-,    QueryParam = "queryParam"
-,    RequestParam = "requestParam"
-,    Header = "header"
-,    PathParam = "pathParam"
+    RequestBody = "requestBody",
+    QueryParam = "queryParam",
+    RequestParam = "requestParam",
+    Header = "header",
+    PathParam = "pathParam"
 }
 
 
 export class Error extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errorCode" })
+  @SpeakeasyMetadata({ data: "json, name=errorCode" })
   errorCode?: string;
 
-  @Metadata({ data: "json, name=errorData" })
+  @SpeakeasyMetadata({ data: "json, name=errorData" })
   errorData?: ErrorData;
 
-  @Metadata({ data: "json, name=errorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=errorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=localisationDetails" })
+  @SpeakeasyMetadata({ data: "json, name=localisationDetails" })
   localisationDetails?: LocalisationDetails;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: string;
 
-  @Metadata({ data: "json, name=locationType" })
+  @SpeakeasyMetadata({ data: "json, name=locationType" })
   locationType?: ErrorLocationTypeEnum;
 
-  @Metadata({ data: "json, name=reasonCode" })
+  @SpeakeasyMetadata({ data: "json, name=reasonCode" })
   reasonCode?: string;
 }

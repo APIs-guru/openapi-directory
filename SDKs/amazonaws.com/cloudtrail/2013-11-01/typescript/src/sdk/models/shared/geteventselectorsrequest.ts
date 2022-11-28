@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetEventSelectorsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TrailName" })
+  @SpeakeasyMetadata({ data: "json, name=TrailName" })
   trailName: string;
 }

@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class StoryIDCollaboratorsGetPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class StoryIDCollaboratorsGetRequest:
-    path_params: StoryIDCollaboratorsGetPathParams = field(default=None)
+    path_params: StoryIDCollaboratorsGetPathParams = field()
     
 
 @dataclass
 class StoryIDCollaboratorsGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     problem_detail: Optional[Any] = field(default=None)
     story_collaborators: Optional[List[shared.StoryCollaborator]] = field(default=None)
     

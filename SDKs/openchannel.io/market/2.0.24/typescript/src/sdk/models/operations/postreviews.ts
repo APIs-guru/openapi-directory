@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostReviewsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=appId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=appId" })
   appId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=autoApprove" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=autoApprove" })
   autoApprove?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=customData" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=customData" })
   customData?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=description" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=description" })
   description: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=headline" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=headline" })
   headline: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=mustOwnApp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=mustOwnApp" })
   mustOwnApp?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rating" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rating" })
   rating: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userAccountId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userAccountId" })
   userAccountId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=userId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userId" })
   userId: string;
 }
 
 
 export class PostReviewsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostReviewsQueryParams;
 }
 
 
 export class PostReviewsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

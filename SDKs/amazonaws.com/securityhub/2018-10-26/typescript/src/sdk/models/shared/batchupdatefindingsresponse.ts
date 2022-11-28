@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsSecurityFindingIdentifier } from "./awssecurityfindingidentifier";
 import { BatchUpdateFindingsUnprocessedFinding } from "./batchupdatefindingsunprocessedfinding";
 
 
+
 export class BatchUpdateFindingsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProcessedFindings", elemType: shared.AwsSecurityFindingIdentifier })
+  @SpeakeasyMetadata({ data: "json, name=ProcessedFindings", elemType: AwsSecurityFindingIdentifier })
   processedFindings: AwsSecurityFindingIdentifier[];
 
-  @Metadata({ data: "json, name=UnprocessedFindings", elemType: shared.BatchUpdateFindingsUnprocessedFinding })
+  @SpeakeasyMetadata({ data: "json, name=UnprocessedFindings", elemType: BatchUpdateFindingsUnprocessedFinding })
   unprocessedFindings: BatchUpdateFindingsUnprocessedFinding[];
 }

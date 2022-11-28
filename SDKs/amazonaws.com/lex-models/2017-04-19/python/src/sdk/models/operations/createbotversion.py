@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateBotVersionPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,25 +27,25 @@ class CreateBotVersionHeaders:
 @dataclass_json
 @dataclass
 class CreateBotVersionRequestBody:
-    checksum: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'checksum' }})
+    checksum: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('checksum') }})
     
 
 @dataclass
 class CreateBotVersionRequest:
-    path_params: CreateBotVersionPathParams = field(default=None)
-    headers: CreateBotVersionHeaders = field(default=None)
-    request: CreateBotVersionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateBotVersionHeaders = field()
+    path_params: CreateBotVersionPathParams = field()
+    request: CreateBotVersionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateBotVersionResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_bot_version_response: Optional[shared.CreateBotVersionResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     precondition_failed_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

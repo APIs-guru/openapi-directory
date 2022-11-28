@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NameValuePair } from "./namevaluepair";
 import { ImageSavingConventionEnum } from "./imagesavingconventionenum";
 import { MetadataOptions } from "./metadataoptions";
@@ -8,263 +7,520 @@ import { RepositoryInfo } from "./repositoryinfo";
 import { Version } from "./version";
 
 
+
 // ServerConfiguration
 /** 
  * Represents the server configuration.
 **/
 export class ServerConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActivityLogRetentionDays" })
+  @SpeakeasyMetadata({ data: "json, name=ActivityLogRetentionDays" })
   activityLogRetentionDays?: number;
 
-  @Metadata({ data: "json, name=AutoDiscovery" })
+  @SpeakeasyMetadata({ data: "json, name=AutoDiscovery" })
   autoDiscovery?: boolean;
 
-  @Metadata({ data: "json, name=AutoDiscoveryTracing" })
+  @SpeakeasyMetadata({ data: "json, name=AutoDiscoveryTracing" })
   autoDiscoveryTracing?: boolean;
 
-  @Metadata({ data: "json, name=BaseUrl" })
+  @SpeakeasyMetadata({ data: "json, name=BaseUrl" })
   baseUrl?: string;
 
-  @Metadata({ data: "json, name=CachePath" })
+  @SpeakeasyMetadata({ data: "json, name=CachePath" })
   cachePath?: string;
 
-  @Metadata({ data: "json, name=CertificatePassword" })
+  @SpeakeasyMetadata({ data: "json, name=CertificatePassword" })
   certificatePassword?: string;
 
-  @Metadata({ data: "json, name=CertificatePath" })
+  @SpeakeasyMetadata({ data: "json, name=CertificatePath" })
   certificatePath?: string;
 
-  @Metadata({ data: "json, name=CodecsUsed" })
+  @SpeakeasyMetadata({ data: "json, name=CodecsUsed" })
   codecsUsed?: string[];
 
-  @Metadata({ data: "json, name=ContentTypes", elemType: shared.NameValuePair })
+  @SpeakeasyMetadata({ data: "json, name=ContentTypes", elemType: NameValuePair })
   contentTypes?: NameValuePair[];
 
-  @Metadata({ data: "json, name=CorsHosts" })
+  @SpeakeasyMetadata({ data: "json, name=CorsHosts" })
   corsHosts?: string[];
 
-  @Metadata({ data: "json, name=DisableLiveTvChannelUserDataName" })
+  @SpeakeasyMetadata({ data: "json, name=DisableLiveTvChannelUserDataName" })
   disableLiveTvChannelUserDataName?: boolean;
 
-  @Metadata({ data: "json, name=DisablePluginImages" })
+  @SpeakeasyMetadata({ data: "json, name=DisablePluginImages" })
   disablePluginImages?: boolean;
 
-  @Metadata({ data: "json, name=DisplaySpecialsWithinSeasons" })
+  @SpeakeasyMetadata({ data: "json, name=DisplaySpecialsWithinSeasons" })
   displaySpecialsWithinSeasons?: boolean;
 
-  @Metadata({ data: "json, name=EnableCaseSensitiveItemIds" })
+  @SpeakeasyMetadata({ data: "json, name=EnableCaseSensitiveItemIds" })
   enableCaseSensitiveItemIds?: boolean;
 
-  @Metadata({ data: "json, name=EnableDashboardResponseCaching" })
+  @SpeakeasyMetadata({ data: "json, name=EnableDashboardResponseCaching" })
   enableDashboardResponseCaching?: boolean;
 
-  @Metadata({ data: "json, name=EnableExternalContentInSuggestions" })
+  @SpeakeasyMetadata({ data: "json, name=EnableExternalContentInSuggestions" })
   enableExternalContentInSuggestions?: boolean;
 
-  @Metadata({ data: "json, name=EnableFolderView" })
+  @SpeakeasyMetadata({ data: "json, name=EnableFolderView" })
   enableFolderView?: boolean;
 
-  @Metadata({ data: "json, name=EnableGroupingIntoCollections" })
+  @SpeakeasyMetadata({ data: "json, name=EnableGroupingIntoCollections" })
   enableGroupingIntoCollections?: boolean;
 
-  @Metadata({ data: "json, name=EnableHttps" })
+  @SpeakeasyMetadata({ data: "json, name=EnableHttps" })
   enableHttps?: boolean;
 
-  @Metadata({ data: "json, name=EnableIPV4" })
+  @SpeakeasyMetadata({ data: "json, name=EnableIPV4" })
   enableIpv4?: boolean;
 
-  @Metadata({ data: "json, name=EnableIPV6" })
+  @SpeakeasyMetadata({ data: "json, name=EnableIPV6" })
   enableIpv6?: boolean;
 
-  @Metadata({ data: "json, name=EnableMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=EnableMetrics" })
   enableMetrics?: boolean;
 
-  @Metadata({ data: "json, name=EnableMultiSocketBinding" })
+  @SpeakeasyMetadata({ data: "json, name=EnableMultiSocketBinding" })
   enableMultiSocketBinding?: boolean;
 
-  @Metadata({ data: "json, name=EnableNewOmdbSupport" })
+  @SpeakeasyMetadata({ data: "json, name=EnableNewOmdbSupport" })
   enableNewOmdbSupport?: boolean;
 
-  @Metadata({ data: "json, name=EnableNormalizedItemByNameIds" })
+  @SpeakeasyMetadata({ data: "json, name=EnableNormalizedItemByNameIds" })
   enableNormalizedItemByNameIds?: boolean;
 
-  @Metadata({ data: "json, name=EnableRemoteAccess" })
+  @SpeakeasyMetadata({ data: "json, name=EnableRemoteAccess" })
   enableRemoteAccess?: boolean;
 
-  @Metadata({ data: "json, name=EnableSSDPTracing" })
+  @SpeakeasyMetadata({ data: "json, name=EnableSSDPTracing" })
   enableSsdpTracing?: boolean;
 
-  @Metadata({ data: "json, name=EnableSimpleArtistDetection" })
+  @SpeakeasyMetadata({ data: "json, name=EnableSimpleArtistDetection" })
   enableSimpleArtistDetection?: boolean;
 
-  @Metadata({ data: "json, name=EnableSlowResponseWarning" })
+  @SpeakeasyMetadata({ data: "json, name=EnableSlowResponseWarning" })
   enableSlowResponseWarning?: boolean;
 
-  @Metadata({ data: "json, name=EnableUPnP" })
+  @SpeakeasyMetadata({ data: "json, name=EnableUPnP" })
   enableUPnP?: boolean;
 
-  @Metadata({ data: "json, name=GatewayMonitorPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=GatewayMonitorPeriod" })
   gatewayMonitorPeriod?: number;
 
-  @Metadata({ data: "json, name=HDHomerunPortRange" })
+  @SpeakeasyMetadata({ data: "json, name=HDHomerunPortRange" })
   hdHomerunPortRange?: string;
 
-  @Metadata({ data: "json, name=HttpServerPortNumber" })
+  @SpeakeasyMetadata({ data: "json, name=HttpServerPortNumber" })
   httpServerPortNumber?: number;
 
-  @Metadata({ data: "json, name=HttpsPortNumber" })
+  @SpeakeasyMetadata({ data: "json, name=HttpsPortNumber" })
   httpsPortNumber?: number;
 
-  @Metadata({ data: "json, name=IgnoreVirtualInterfaces" })
+  @SpeakeasyMetadata({ data: "json, name=IgnoreVirtualInterfaces" })
   ignoreVirtualInterfaces?: boolean;
 
-  @Metadata({ data: "json, name=ImageExtractionTimeoutMs" })
+  @SpeakeasyMetadata({ data: "json, name=ImageExtractionTimeoutMs" })
   imageExtractionTimeoutMs?: number;
 
-  @Metadata({ data: "json, name=ImageSavingConvention" })
+  @SpeakeasyMetadata({ data: "json, name=ImageSavingConvention" })
   imageSavingConvention?: ImageSavingConventionEnum;
 
-  @Metadata({ data: "json, name=IsPortAuthorized" })
+  @SpeakeasyMetadata({ data: "json, name=IsPortAuthorized" })
   isPortAuthorized?: boolean;
 
-  @Metadata({ data: "json, name=IsRemoteIPFilterBlacklist" })
+  @SpeakeasyMetadata({ data: "json, name=IsRemoteIPFilterBlacklist" })
   isRemoteIpFilterBlacklist?: boolean;
 
-  @Metadata({ data: "json, name=IsStartupWizardCompleted" })
+  @SpeakeasyMetadata({ data: "json, name=IsStartupWizardCompleted" })
   isStartupWizardCompleted?: boolean;
 
-  @Metadata({ data: "json, name=KnownProxies" })
+  @SpeakeasyMetadata({ data: "json, name=KnownProxies" })
   knownProxies?: string[];
 
-  @Metadata({ data: "json, name=LibraryMetadataRefreshConcurrency" })
+  @SpeakeasyMetadata({ data: "json, name=LibraryMetadataRefreshConcurrency" })
   libraryMetadataRefreshConcurrency?: number;
 
-  @Metadata({ data: "json, name=LibraryMonitorDelay" })
+  @SpeakeasyMetadata({ data: "json, name=LibraryMonitorDelay" })
   libraryMonitorDelay?: number;
 
-  @Metadata({ data: "json, name=LibraryScanFanoutConcurrency" })
+  @SpeakeasyMetadata({ data: "json, name=LibraryScanFanoutConcurrency" })
   libraryScanFanoutConcurrency?: number;
 
-  @Metadata({ data: "json, name=LocalNetworkAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=LocalNetworkAddresses" })
   localNetworkAddresses?: string[];
 
-  @Metadata({ data: "json, name=LocalNetworkSubnets" })
+  @SpeakeasyMetadata({ data: "json, name=LocalNetworkSubnets" })
   localNetworkSubnets?: string[];
 
-  @Metadata({ data: "json, name=LogFileRetentionDays" })
+  @SpeakeasyMetadata({ data: "json, name=LogFileRetentionDays" })
   logFileRetentionDays?: number;
 
-  @Metadata({ data: "json, name=MaxAudiobookResume" })
+  @SpeakeasyMetadata({ data: "json, name=MaxAudiobookResume" })
   maxAudiobookResume?: number;
 
-  @Metadata({ data: "json, name=MaxResumePct" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResumePct" })
   maxResumePct?: number;
 
-  @Metadata({ data: "json, name=MetadataCountryCode" })
+  @SpeakeasyMetadata({ data: "json, name=MetadataCountryCode" })
   metadataCountryCode?: string;
 
-  @Metadata({ data: "json, name=MetadataNetworkPath" })
+  @SpeakeasyMetadata({ data: "json, name=MetadataNetworkPath" })
   metadataNetworkPath?: string;
 
-  @Metadata({ data: "json, name=MetadataOptions", elemType: shared.MetadataOptions })
+  @SpeakeasyMetadata({ data: "json, name=MetadataOptions", elemType: MetadataOptions })
   metadataOptions?: MetadataOptions[];
 
-  @Metadata({ data: "json, name=MetadataPath" })
+  @SpeakeasyMetadata({ data: "json, name=MetadataPath" })
   metadataPath?: string;
 
-  @Metadata({ data: "json, name=MinAudiobookResume" })
+  @SpeakeasyMetadata({ data: "json, name=MinAudiobookResume" })
   minAudiobookResume?: number;
 
-  @Metadata({ data: "json, name=MinResumeDurationSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=MinResumeDurationSeconds" })
   minResumeDurationSeconds?: number;
 
-  @Metadata({ data: "json, name=MinResumePct" })
+  @SpeakeasyMetadata({ data: "json, name=MinResumePct" })
   minResumePct?: number;
 
-  @Metadata({ data: "json, name=PathSubstitutions", elemType: shared.PathSubstitution })
+  @SpeakeasyMetadata({ data: "json, name=PathSubstitutions", elemType: PathSubstitution })
   pathSubstitutions?: PathSubstitution[];
 
-  @Metadata({ data: "json, name=PluginRepositories", elemType: shared.RepositoryInfo })
+  @SpeakeasyMetadata({ data: "json, name=PluginRepositories", elemType: RepositoryInfo })
   pluginRepositories?: RepositoryInfo[];
 
-  @Metadata({ data: "json, name=PreferredMetadataLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredMetadataLanguage" })
   preferredMetadataLanguage?: string;
 
-  @Metadata({ data: "json, name=PreviousVersion" })
+  @SpeakeasyMetadata({ data: "json, name=PreviousVersion" })
   previousVersion?: Version;
 
-  @Metadata({ data: "json, name=PreviousVersionStr" })
+  @SpeakeasyMetadata({ data: "json, name=PreviousVersionStr" })
   previousVersionStr?: string;
 
-  @Metadata({ data: "json, name=PublicHttpsPort" })
+  @SpeakeasyMetadata({ data: "json, name=PublicHttpsPort" })
   publicHttpsPort?: number;
 
-  @Metadata({ data: "json, name=PublicPort" })
+  @SpeakeasyMetadata({ data: "json, name=PublicPort" })
   publicPort?: number;
 
-  @Metadata({ data: "json, name=PublishedServerUriBySubnet" })
+  @SpeakeasyMetadata({ data: "json, name=PublishedServerUriBySubnet" })
   publishedServerUriBySubnet?: string[];
 
-  @Metadata({ data: "json, name=QuickConnectAvailable" })
+  @SpeakeasyMetadata({ data: "json, name=QuickConnectAvailable" })
   quickConnectAvailable?: boolean;
 
-  @Metadata({ data: "json, name=RemoteClientBitrateLimit" })
+  @SpeakeasyMetadata({ data: "json, name=RemoteClientBitrateLimit" })
   remoteClientBitrateLimit?: number;
 
-  @Metadata({ data: "json, name=RemoteIPFilter" })
+  @SpeakeasyMetadata({ data: "json, name=RemoteIPFilter" })
   remoteIpFilter?: string[];
 
-  @Metadata({ data: "json, name=RemoveOldPlugins" })
+  @SpeakeasyMetadata({ data: "json, name=RemoveOldPlugins" })
   removeOldPlugins?: boolean;
 
-  @Metadata({ data: "json, name=RequireHttps" })
+  @SpeakeasyMetadata({ data: "json, name=RequireHttps" })
   requireHttps?: boolean;
 
-  @Metadata({ data: "json, name=SSDPTracingFilter" })
+  @SpeakeasyMetadata({ data: "json, name=SSDPTracingFilter" })
   ssdpTracingFilter?: string;
 
-  @Metadata({ data: "json, name=SaveMetadataHidden" })
+  @SpeakeasyMetadata({ data: "json, name=SaveMetadataHidden" })
   saveMetadataHidden?: boolean;
 
-  @Metadata({ data: "json, name=ServerName" })
+  @SpeakeasyMetadata({ data: "json, name=ServerName" })
   serverName?: string;
 
-  @Metadata({ data: "json, name=SkipDeserializationForBasicTypes" })
+  @SpeakeasyMetadata({ data: "json, name=SkipDeserializationForBasicTypes" })
   skipDeserializationForBasicTypes?: boolean;
 
-  @Metadata({ data: "json, name=SlowResponseThresholdMs" })
+  @SpeakeasyMetadata({ data: "json, name=SlowResponseThresholdMs" })
   slowResponseThresholdMs?: number;
 
-  @Metadata({ data: "json, name=SortRemoveCharacters" })
+  @SpeakeasyMetadata({ data: "json, name=SortRemoveCharacters" })
   sortRemoveCharacters?: string[];
 
-  @Metadata({ data: "json, name=SortRemoveWords" })
+  @SpeakeasyMetadata({ data: "json, name=SortRemoveWords" })
   sortRemoveWords?: string[];
 
-  @Metadata({ data: "json, name=SortReplaceCharacters" })
+  @SpeakeasyMetadata({ data: "json, name=SortReplaceCharacters" })
   sortReplaceCharacters?: string[];
 
-  @Metadata({ data: "json, name=TrustAllIP6Interfaces" })
+  @SpeakeasyMetadata({ data: "json, name=TrustAllIP6Interfaces" })
   trustAllIp6Interfaces?: boolean;
 
-  @Metadata({ data: "json, name=UDPPortRange" })
+  @SpeakeasyMetadata({ data: "json, name=UDPPortRange" })
   udpPortRange?: string;
 
-  @Metadata({ data: "json, name=UDPSendCount" })
+  @SpeakeasyMetadata({ data: "json, name=UDPSendCount" })
   udpSendCount?: number;
 
-  @Metadata({ data: "json, name=UDPSendDelay" })
+  @SpeakeasyMetadata({ data: "json, name=UDPSendDelay" })
   udpSendDelay?: number;
 
-  @Metadata({ data: "json, name=UICulture" })
+  @SpeakeasyMetadata({ data: "json, name=UICulture" })
   uiCulture?: string;
 
-  @Metadata({ data: "json, name=UPnPCreateHttpPortMap" })
+  @SpeakeasyMetadata({ data: "json, name=UPnPCreateHttpPortMap" })
   uPnPCreateHttpPortMap?: boolean;
 
-  @Metadata({ data: "json, name=UninstalledPlugins" })
+  @SpeakeasyMetadata({ data: "json, name=UninstalledPlugins" })
   uninstalledPlugins?: string[];
 
-  @Metadata({ data: "json, name=VirtualInterfaceNames" })
+  @SpeakeasyMetadata({ data: "json, name=VirtualInterfaceNames" })
+  virtualInterfaceNames?: string;
+}
+
+
+// ServerConfigurationInput
+/** 
+ * Represents the server configuration.
+**/
+export class ServerConfigurationInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=ActivityLogRetentionDays" })
+  activityLogRetentionDays?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=AutoDiscovery" })
+  autoDiscovery?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=AutoDiscoveryTracing" })
+  autoDiscoveryTracing?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=BaseUrl" })
+  baseUrl?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=CachePath" })
+  cachePath?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=CertificatePassword" })
+  certificatePassword?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=CertificatePath" })
+  certificatePath?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=CodecsUsed" })
+  codecsUsed?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=ContentTypes", elemType: NameValuePair })
+  contentTypes?: NameValuePair[];
+
+  @SpeakeasyMetadata({ data: "json, name=CorsHosts" })
+  corsHosts?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=DisableLiveTvChannelUserDataName" })
+  disableLiveTvChannelUserDataName?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=DisablePluginImages" })
+  disablePluginImages?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=DisplaySpecialsWithinSeasons" })
+  displaySpecialsWithinSeasons?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=EnableCaseSensitiveItemIds" })
+  enableCaseSensitiveItemIds?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=EnableDashboardResponseCaching" })
+  enableDashboardResponseCaching?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=EnableExternalContentInSuggestions" })
+  enableExternalContentInSuggestions?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=EnableFolderView" })
+  enableFolderView?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=EnableGroupingIntoCollections" })
+  enableGroupingIntoCollections?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=EnableHttps" })
+  enableHttps?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=EnableIPV4" })
+  enableIpv4?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=EnableIPV6" })
+  enableIpv6?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=EnableMetrics" })
+  enableMetrics?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=EnableNewOmdbSupport" })
+  enableNewOmdbSupport?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=EnableNormalizedItemByNameIds" })
+  enableNormalizedItemByNameIds?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=EnableRemoteAccess" })
+  enableRemoteAccess?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=EnableSSDPTracing" })
+  enableSsdpTracing?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=EnableSimpleArtistDetection" })
+  enableSimpleArtistDetection?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=EnableSlowResponseWarning" })
+  enableSlowResponseWarning?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=EnableUPnP" })
+  enableUPnP?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=GatewayMonitorPeriod" })
+  gatewayMonitorPeriod?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=HDHomerunPortRange" })
+  hdHomerunPortRange?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=HttpServerPortNumber" })
+  httpServerPortNumber?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=HttpsPortNumber" })
+  httpsPortNumber?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=IgnoreVirtualInterfaces" })
+  ignoreVirtualInterfaces?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=ImageExtractionTimeoutMs" })
+  imageExtractionTimeoutMs?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=ImageSavingConvention" })
+  imageSavingConvention?: ImageSavingConventionEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=IsPortAuthorized" })
+  isPortAuthorized?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsRemoteIPFilterBlacklist" })
+  isRemoteIpFilterBlacklist?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=IsStartupWizardCompleted" })
+  isStartupWizardCompleted?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=KnownProxies" })
+  knownProxies?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=LibraryMetadataRefreshConcurrency" })
+  libraryMetadataRefreshConcurrency?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=LibraryMonitorDelay" })
+  libraryMonitorDelay?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=LibraryScanFanoutConcurrency" })
+  libraryScanFanoutConcurrency?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=LocalNetworkAddresses" })
+  localNetworkAddresses?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=LocalNetworkSubnets" })
+  localNetworkSubnets?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=LogFileRetentionDays" })
+  logFileRetentionDays?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=MaxAudiobookResume" })
+  maxAudiobookResume?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=MaxResumePct" })
+  maxResumePct?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=MetadataCountryCode" })
+  metadataCountryCode?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=MetadataNetworkPath" })
+  metadataNetworkPath?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=MetadataOptions", elemType: MetadataOptions })
+  metadataOptions?: MetadataOptions[];
+
+  @SpeakeasyMetadata({ data: "json, name=MetadataPath" })
+  metadataPath?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=MinAudiobookResume" })
+  minAudiobookResume?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=MinResumeDurationSeconds" })
+  minResumeDurationSeconds?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=MinResumePct" })
+  minResumePct?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=PathSubstitutions", elemType: PathSubstitution })
+  pathSubstitutions?: PathSubstitution[];
+
+  @SpeakeasyMetadata({ data: "json, name=PluginRepositories", elemType: RepositoryInfo })
+  pluginRepositories?: RepositoryInfo[];
+
+  @SpeakeasyMetadata({ data: "json, name=PreferredMetadataLanguage" })
+  preferredMetadataLanguage?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=PreviousVersionStr" })
+  previousVersionStr?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=PublicHttpsPort" })
+  publicHttpsPort?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=PublicPort" })
+  publicPort?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=PublishedServerUriBySubnet" })
+  publishedServerUriBySubnet?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=QuickConnectAvailable" })
+  quickConnectAvailable?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=RemoteClientBitrateLimit" })
+  remoteClientBitrateLimit?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=RemoteIPFilter" })
+  remoteIpFilter?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=RemoveOldPlugins" })
+  removeOldPlugins?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=RequireHttps" })
+  requireHttps?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=SSDPTracingFilter" })
+  ssdpTracingFilter?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=SaveMetadataHidden" })
+  saveMetadataHidden?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=ServerName" })
+  serverName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=SkipDeserializationForBasicTypes" })
+  skipDeserializationForBasicTypes?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=SlowResponseThresholdMs" })
+  slowResponseThresholdMs?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=SortRemoveCharacters" })
+  sortRemoveCharacters?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=SortRemoveWords" })
+  sortRemoveWords?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=SortReplaceCharacters" })
+  sortReplaceCharacters?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=TrustAllIP6Interfaces" })
+  trustAllIp6Interfaces?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=UDPPortRange" })
+  udpPortRange?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=UDPSendCount" })
+  udpSendCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=UDPSendDelay" })
+  udpSendDelay?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=UICulture" })
+  uiCulture?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=UPnPCreateHttpPortMap" })
+  uPnPCreateHttpPortMap?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=UninstalledPlugins" })
+  uninstalledPlugins?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=VirtualInterfaceNames" })
   virtualInterfaceNames?: string;
 }

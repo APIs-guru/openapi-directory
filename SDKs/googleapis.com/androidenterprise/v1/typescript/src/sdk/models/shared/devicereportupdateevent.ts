@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeviceReport } from "./devicereport";
+
 
 
 // DeviceReportUpdateEvent
@@ -7,12 +8,12 @@ import { DeviceReport } from "./devicereport";
  * An event generated when an updated device report is available.
 **/
 export class DeviceReportUpdateEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceId" })
+  @SpeakeasyMetadata({ data: "json, name=deviceId" })
   deviceId?: string;
 
-  @Metadata({ data: "json, name=report" })
+  @SpeakeasyMetadata({ data: "json, name=report" })
   report?: DeviceReport;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 }

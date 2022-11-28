@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Nearby } from "./nearby";
 import { Meta } from "./meta";
 
 
+
 export class NearbyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.Nearby })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: Nearby })
   data: Nearby[];
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: Meta;
 }

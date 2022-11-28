@@ -6,6 +6,8 @@ const (
 	GetRegisterInstanceEventNotificationAttributesActionEnumRegisterInstanceEventNotificationAttributes GetRegisterInstanceEventNotificationAttributesActionEnum = "RegisterInstanceEventNotificationAttributes"
 )
 
+// GetRegisterInstanceEventNotificationAttributesInstanceTagAttribute
+// Information about the tag keys to register for the current Region. You can either specify individual tag keys or register all tag keys in the current Region. You must specify either <code>IncludeAllTagsOfInstance</code> or <code>InstanceTagKeys</code> in the request
 type GetRegisterInstanceEventNotificationAttributesInstanceTagAttribute struct {
 	IncludeAllTagsOfInstance *bool    `queryParam:"name=IncludeAllTagsOfInstance"`
 	InstanceTagKeys          []string `queryParam:"name=InstanceTagKeys"`

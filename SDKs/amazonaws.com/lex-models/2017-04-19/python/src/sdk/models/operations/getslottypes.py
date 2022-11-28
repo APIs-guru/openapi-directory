@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -23,17 +26,17 @@ class GetSlotTypesHeaders:
 
 @dataclass
 class GetSlotTypesRequest:
-    query_params: GetSlotTypesQueryParams = field(default=None)
-    headers: GetSlotTypesHeaders = field(default=None)
+    headers: GetSlotTypesHeaders = field()
+    query_params: GetSlotTypesQueryParams = field()
     
 
 @dataclass
 class GetSlotTypesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_slot_types_response: Optional[shared.GetSlotTypesResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

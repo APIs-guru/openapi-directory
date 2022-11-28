@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var SearchperpackageMatchModeEnum;
 (function (SearchperpackageMatchModeEnum) {
@@ -35,11 +35,11 @@ var SearchperpackageQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=match_mode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=match_mode" }),
         __metadata("design:type", String)
     ], SearchperpackageQueryParams.prototype, "matchMode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=query" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" }),
         __metadata("design:type", String)
     ], SearchperpackageQueryParams.prototype, "query", void 0);
     return SearchperpackageQueryParams;
@@ -51,7 +51,7 @@ var SearchperpackageSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], SearchperpackageSecurity.prototype, "apiKey", void 0);
     return SearchperpackageSecurity;
@@ -63,11 +63,11 @@ var SearchperpackageRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SearchperpackageQueryParams)
     ], SearchperpackageRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", SearchperpackageSecurity)
     ], SearchperpackageRequest.prototype, "security", void 0);
     return SearchperpackageRequest;
@@ -79,15 +79,15 @@ var SearchperpackageResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], SearchperpackageResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ elemType: shared.PackageSearchResult }),
+        SpeakeasyMetadata({ elemType: shared.PackageSearchResult }),
         __metadata("design:type", Array)
     ], SearchperpackageResponse.prototype, "packageSearchResults", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], SearchperpackageResponse.prototype, "statusCode", void 0);
     return SearchperpackageResponse;

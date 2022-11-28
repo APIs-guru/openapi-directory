@@ -1,5 +1,7 @@
 package shared
 
+// AwsEc2NetworkACLEntry
+// A rule for the network ACL. Each rule allows or denies access based on the IP address, traffic direction, port, and protocol.
 type AwsEc2NetworkACLEntry struct {
 	CidrBlock     *string          `json:"CidrBlock,omitempty"`
 	Egress        *bool            `json:"Egress,omitempty"`

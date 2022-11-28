@@ -22,45 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-var UploadBoundarySecurityOption1 = /** @class */ (function (_super) {
-    __extends(UploadBoundarySecurityOption1, _super);
-    function UploadBoundarySecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKey)
-    ], UploadBoundarySecurityOption1.prototype, "apiKey", void 0);
-    return UploadBoundarySecurityOption1;
-}(SpeakeasyBase));
-export { UploadBoundarySecurityOption1 };
-var UploadBoundarySecurityOption2 = /** @class */ (function (_super) {
-    __extends(UploadBoundarySecurityOption2, _super);
-    function UploadBoundarySecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", shared.SchemeOauth2AuthorizationCode)
-    ], UploadBoundarySecurityOption2.prototype, "oauth2AuthorizationCode", void 0);
-    return UploadBoundarySecurityOption2;
-}(SpeakeasyBase));
-export { UploadBoundarySecurityOption2 };
 var UploadBoundarySecurity = /** @class */ (function (_super) {
     __extends(UploadBoundarySecurity, _super);
     function UploadBoundarySecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", UploadBoundarySecurityOption1)
-    ], UploadBoundarySecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKey)
+    ], UploadBoundarySecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", UploadBoundarySecurityOption2)
-    ], UploadBoundarySecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2AuthorizationCode)
+    ], UploadBoundarySecurity.prototype, "oauth2AuthorizationCode", void 0);
     return UploadBoundarySecurity;
 }(SpeakeasyBase));
 export { UploadBoundarySecurity };
@@ -70,11 +46,11 @@ var UploadBoundaryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", Object)
     ], UploadBoundaryRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UploadBoundarySecurity)
     ], UploadBoundaryRequest.prototype, "security", void 0);
     return UploadBoundaryRequest;
@@ -86,23 +62,23 @@ var UploadBoundaryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UploadBoundaryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], UploadBoundaryResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], UploadBoundaryResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UploadBoundaryResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UploadBoundaryResponse.prototype, "uploadedBoundaryId", void 0);
     return UploadBoundaryResponse;

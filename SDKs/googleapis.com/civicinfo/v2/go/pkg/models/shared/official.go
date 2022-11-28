@@ -1,5 +1,7 @@
 package shared
 
+// Official
+// Information about a person holding an elected office.
 type Official struct {
 	Address            []SimpleAddressType `json:"address,omitempty"`
 	Channels           []Channel           `json:"channels,omitempty"`

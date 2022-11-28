@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GroupsDeletePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=objectId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=objectId" })
   objectId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tenantID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tenantID" })
   tenantId: string;
 }
 
 
 export class GroupsDeleteQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api-version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api-version" })
   apiVersion: string;
 }
 
 
 export class GroupsDeleteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GroupsDeletePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GroupsDeleteQueryParams;
 }
 
 
 export class GroupsDeleteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   graphError?: shared.GraphError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

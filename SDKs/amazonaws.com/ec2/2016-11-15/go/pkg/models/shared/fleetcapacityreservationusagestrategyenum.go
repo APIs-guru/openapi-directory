@@ -1,0 +1,7 @@
+package shared
+
+type FleetCapacityReservationUsageStrategyEnum string
+
+const (
+	FleetCapacityReservationUsageStrategyEnumUseCapacityReservationsFirst FleetCapacityReservationUsageStrategyEnum = "use-capacity-reservations-first"
+)

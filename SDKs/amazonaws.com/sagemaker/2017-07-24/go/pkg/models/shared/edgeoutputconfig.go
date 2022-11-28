@@ -1,5 +1,7 @@
 package shared
 
+// EdgeOutputConfig
+// The output configuration.
 type EdgeOutputConfig struct {
 	KmsKeyID               *string                       `json:"KmsKeyId,omitempty"`
 	PresetDeploymentConfig *string                       `json:"PresetDeploymentConfig,omitempty"`

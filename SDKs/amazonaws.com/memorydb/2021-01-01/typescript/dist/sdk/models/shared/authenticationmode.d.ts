@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InputAuthenticationTypeEnum } from "./inputauthenticationtypeenum";
 /**
  * Denotes the user's authentication properties, such as whether it requires a password to authenticate. Used in output responses.

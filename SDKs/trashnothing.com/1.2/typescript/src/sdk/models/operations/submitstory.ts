@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SubmitStoryRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=content" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=content" })
   content: string;
 
-  @Metadata({ data: "multipart_form, name=device_pixel_ratio" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=device_pixel_ratio" })
   devicePixelRatio?: number;
 
-  @Metadata({ data: "multipart_form, name=photo_ids" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=photo_ids" })
   photoIds?: string;
 
-  @Metadata({ data: "multipart_form, name=sharing" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=sharing" })
   sharing: string;
 
-  @Metadata({ data: "multipart_form, name=title" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=title" })
   title: string;
 }
 
 
 export class SubmitStoryRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request: SubmitStoryRequestBody;
 }
 
 
 export class SubmitStoryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   story?: shared.Story;
 }

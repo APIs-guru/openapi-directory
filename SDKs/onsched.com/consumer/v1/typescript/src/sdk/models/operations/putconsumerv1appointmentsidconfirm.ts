@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutConsumerV1AppointmentsIdConfirmPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class PutConsumerV1AppointmentsIdConfirmQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=undo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=undo" })
   undo?: boolean;
 }
 
 
 export class PutConsumerV1AppointmentsIdConfirmRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutConsumerV1AppointmentsIdConfirmPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PutConsumerV1AppointmentsIdConfirmQueryParams;
 }
 
 
 export class PutConsumerV1AppointmentsIdConfirmResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

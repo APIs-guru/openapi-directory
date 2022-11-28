@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowcxv3beta1resourcename
+from sdk import utils
+from . import *
 
 class GoogleCloudDialogflowCxV3beta1ValidationMessageResourceTypeEnum(str, Enum):
     RESOURCE_TYPE_UNSPECIFIED = "RESOURCE_TYPE_UNSPECIFIED"
@@ -29,9 +31,13 @@ class GoogleCloudDialogflowCxV3beta1ValidationMessageSeverityEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowCxV3beta1ValidationMessage:
-    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detail' }})
-    resource_names: Optional[List[googleclouddialogflowcxv3beta1resourcename.GoogleCloudDialogflowCxV3beta1ResourceName]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceNames' }})
-    resource_type: Optional[GoogleCloudDialogflowCxV3beta1ValidationMessageResourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceType' }})
-    resources: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
-    severity: Optional[GoogleCloudDialogflowCxV3beta1ValidationMessageSeverityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'severity' }})
+    r"""GoogleCloudDialogflowCxV3beta1ValidationMessage
+    Agent/flow validation message.
+    """
+    
+    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detail') }})
+    resource_names: Optional[List[GoogleCloudDialogflowCxV3beta1ResourceName]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceNames') }})
+    resource_type: Optional[GoogleCloudDialogflowCxV3beta1ValidationMessageResourceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceType') }})
+    resources: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resources') }})
+    severity: Optional[GoogleCloudDialogflowCxV3beta1ValidationMessageSeverityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('severity') }})
     

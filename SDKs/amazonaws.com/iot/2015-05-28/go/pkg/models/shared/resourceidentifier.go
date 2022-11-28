@@ -1,5 +1,7 @@
 package shared
 
+// ResourceIdentifier
+// Information that identifies the noncompliant resource.
 type ResourceIdentifier struct {
 	Account                 *string                  `json:"account,omitempty"`
 	CaCertificateID         *string                  `json:"caCertificateId,omitempty"`

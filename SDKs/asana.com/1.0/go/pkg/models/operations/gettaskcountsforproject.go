@@ -15,13 +15,13 @@ type GetTaskCountsForProjectQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetTaskCountsForProject200ApplicationJSON struct {
+	Data *shared.TaskCountResponse `json:"data,omitempty"`
+}
+
 type GetTaskCountsForProjectRequest struct {
 	PathParams  GetTaskCountsForProjectPathParams
 	QueryParams GetTaskCountsForProjectQueryParams
-}
-
-type GetTaskCountsForProject200ApplicationJSON struct {
-	Data *shared.TaskCountResponse `json:"data,omitempty"`
 }
 
 type GetTaskCountsForProjectResponse struct {

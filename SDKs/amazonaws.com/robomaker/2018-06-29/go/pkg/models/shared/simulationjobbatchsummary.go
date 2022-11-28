@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SimulationJobBatchSummary
+// Information about a simulation job batch.
 type SimulationJobBatchSummary struct {
 	Arn                 *string                       `json:"arn,omitempty"`
 	CreatedAt           *time.Time                    `json:"createdAt,omitempty"`

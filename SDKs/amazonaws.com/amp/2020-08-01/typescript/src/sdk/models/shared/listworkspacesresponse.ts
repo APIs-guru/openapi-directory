@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WorkspaceSummary } from "./workspacesummary";
+
 
 
 // ListWorkspacesResponse
@@ -8,9 +8,9 @@ import { WorkspaceSummary } from "./workspacesummary";
  * Represents the output of a ListWorkspaces operation.
 **/
 export class ListWorkspacesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=workspaces", elemType: shared.WorkspaceSummary })
+  @SpeakeasyMetadata({ data: "json, name=workspaces", elemType: WorkspaceSummary })
   workspaces: WorkspaceSummary[];
 }

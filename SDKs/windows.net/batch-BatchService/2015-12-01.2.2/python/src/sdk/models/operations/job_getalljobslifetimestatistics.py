@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 
 
 @dataclass
 class JobGetAllJobsLifetimeStatisticsQueryParams:
-    api_version: str = field(default=None, metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
+    api_version: str = field(metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
     timeout: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'timeout', 'style': 'form', 'explode': True }})
     
 
@@ -17,15 +20,15 @@ class JobGetAllJobsLifetimeStatisticsHeaders:
 
 @dataclass
 class JobGetAllJobsLifetimeStatisticsRequest:
-    query_params: JobGetAllJobsLifetimeStatisticsQueryParams = field(default=None)
-    headers: JobGetAllJobsLifetimeStatisticsHeaders = field(default=None)
+    headers: JobGetAllJobsLifetimeStatisticsHeaders = field()
+    query_params: JobGetAllJobsLifetimeStatisticsQueryParams = field()
     
 
 @dataclass
 class JobGetAllJobsLifetimeStatisticsResponse:
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     batch_error: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
     job_statistics: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

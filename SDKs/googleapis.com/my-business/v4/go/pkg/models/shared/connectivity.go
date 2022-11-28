@@ -36,6 +36,8 @@ const (
 	ConnectivityWifiAvailableExceptionEnumDependentOnDayOfWeek ConnectivityWifiAvailableExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// Connectivity
+// The ways in which the property provides guests with the ability to access the internet.
 type Connectivity struct {
 	FreeWifi                         *bool                                             `json:"freeWifi,omitempty"`
 	FreeWifiException                *ConnectivityFreeWifiExceptionEnum                `json:"freeWifiException,omitempty"`

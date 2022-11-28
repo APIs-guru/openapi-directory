@@ -21,11 +21,6 @@ type TeamsAddOrUpdateMembershipForUserInOrgRequestBody struct {
 	Role *TeamsAddOrUpdateMembershipForUserInOrgRequestBodyRoleEnum `json:"role,omitempty"`
 }
 
-type TeamsAddOrUpdateMembershipForUserInOrgRequest struct {
-	PathParams TeamsAddOrUpdateMembershipForUserInOrgPathParams
-	Request    *TeamsAddOrUpdateMembershipForUserInOrgRequestBody `request:"mediaType=application/json"`
-}
-
 type TeamsAddOrUpdateMembershipForUserInOrg422ApplicationJSONErrors struct {
 	Code     *string `json:"code,omitempty"`
 	Field    *string `json:"field,omitempty"`
@@ -35,6 +30,11 @@ type TeamsAddOrUpdateMembershipForUserInOrg422ApplicationJSONErrors struct {
 type TeamsAddOrUpdateMembershipForUserInOrg422ApplicationJSON struct {
 	Errors  []TeamsAddOrUpdateMembershipForUserInOrg422ApplicationJSONErrors `json:"errors,omitempty"`
 	Message *string                                                          `json:"message,omitempty"`
+}
+
+type TeamsAddOrUpdateMembershipForUserInOrgRequest struct {
+	PathParams TeamsAddOrUpdateMembershipForUserInOrgPathParams
+	Request    *TeamsAddOrUpdateMembershipForUserInOrgRequestBody `request:"mediaType=application/json"`
 }
 
 type TeamsAddOrUpdateMembershipForUserInOrgResponse struct {

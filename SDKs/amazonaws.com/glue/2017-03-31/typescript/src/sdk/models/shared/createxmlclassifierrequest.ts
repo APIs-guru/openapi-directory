@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateXmlClassifierRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies an XML classifier for <code>CreateClassifier</code> to create.
 **/
 export class CreateXmlClassifierRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Classification" })
+  @SpeakeasyMetadata({ data: "json, name=Classification" })
   classification: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 
-  @Metadata({ data: "json, name=RowTag" })
+  @SpeakeasyMetadata({ data: "json, name=RowTag" })
   rowTag?: string;
 }

@@ -1,8 +1,12 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://firebase.google.com/docs/dynamic-links/"""
 import requests
-from typing import Optional
-from sdk.models import operations, shared
+
 from . import utils
+
+from .managedshortlinks import ManagedShortLinks
+from .shortlinks import ShortLinks
+from .v1 import V1
 
 
 SERVERS = [
@@ -11,154 +15,66 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://firebase.google.com/docs/dynamic-links/"""
+    managed_short_links: ManagedShortLinks
+    short_links: ShortLinks
+    v1: V1
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        self._init_sdks()
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        self._init_sdks()
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        self._init_sdks()
     
-    def firebasedynamiclinks_get_link_stats(self, request: operations.FirebasedynamiclinksGetLinkStatsRequest) -> operations.FirebasedynamiclinksGetLinkStatsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1/{dynamicLink}/linkStats", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.FirebasedynamiclinksGetLinkStatsResponse(status_code=r.status_code, content_type=content_type)
+    
+    def _init_sdks(self):
         
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.DynamicLinkStats])
-                res.dynamic_link_stats = out
-
-        return res
-
-    
-    def firebasedynamiclinks_install_attribution(self, request: operations.FirebasedynamiclinksInstallAttributionRequest) -> operations.FirebasedynamiclinksInstallAttributionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/v1/installAttribution"
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.FirebasedynamiclinksInstallAttributionResponse(status_code=r.status_code, content_type=content_type)
+        self.managed_short_links = ManagedShortLinks(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
         
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.GetIosPostInstallAttributionResponse])
-                res.get_ios_post_install_attribution_response = out
-
-        return res
-
-    
-    def firebasedynamiclinks_managed_short_links_create(self, request: operations.FirebasedynamiclinksManagedShortLinksCreateRequest) -> operations.FirebasedynamiclinksManagedShortLinksCreateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/v1/managedShortLinks:create"
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.FirebasedynamiclinksManagedShortLinksCreateResponse(status_code=r.status_code, content_type=content_type)
+        self.short_links = ShortLinks(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
         
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.CreateManagedShortLinkResponse])
-                res.create_managed_short_link_response = out
-
-        return res
-
+        self.v1 = V1(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
     
-    def firebasedynamiclinks_reopen_attribution(self, request: operations.FirebasedynamiclinksReopenAttributionRequest) -> operations.FirebasedynamiclinksReopenAttributionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/v1/reopenAttribution"
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.FirebasedynamiclinksReopenAttributionResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.GetIosReopenAttributionResponse])
-                res.get_ios_reopen_attribution_response = out
-
-        return res
-
-    
-    def firebasedynamiclinks_short_links_create(self, request: operations.FirebasedynamiclinksShortLinksCreateRequest) -> operations.FirebasedynamiclinksShortLinksCreateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/v1/shortLinks"
-
-        headers = {}
-
-        req_content_type, data, form = utils.serialize_request_body(request)
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers["content-type"] = req_content_type
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.FirebasedynamiclinksShortLinksCreateResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.CreateShortDynamicLinkResponse])
-                res.create_short_dynamic_link_response = out
-
-        return res
-
     

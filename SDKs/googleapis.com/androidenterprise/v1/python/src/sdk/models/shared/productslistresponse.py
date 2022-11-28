@@ -1,15 +1,14 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import pageinfo
-from . import product
-from . import tokenpagination
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ProductsListResponse:
-    page_info: Optional[pageinfo.PageInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pageInfo' }})
-    product: Optional[List[product.Product]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'product' }})
-    token_pagination: Optional[tokenpagination.TokenPagination] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tokenPagination' }})
+    page_info: Optional[PageInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pageInfo') }})
+    product: Optional[List[Product]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('product') }})
+    token_pagination: Optional[TokenPagination] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tokenPagination') }})
     

@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class VeloAuthQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=grant_type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=grant_type" })
   grantType?: string;
 }
 
 
 export class VeloAuthSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
 export class VeloAuthRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: VeloAuthQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: VeloAuthSecurity;
 }
 
 
 export class VeloAuthResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   authResponse?: shared.AuthResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,50 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteDiscountPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=discountUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=discountUuid" })
   discountUuid: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationUuid" })
   organizationUuid: string;
 }
 
 
-export class DeleteDiscountSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  zettleApiKey: shared.SchemeZettleApiKey;
-}
-
-
-export class DeleteDiscountSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  zettleOauth: shared.SchemeZettleOauth;
-}
-
-
 export class DeleteDiscountSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: DeleteDiscountSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  zettleApiKey?: shared.SchemeZettleApiKey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: DeleteDiscountSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  zettleOauth?: shared.SchemeZettleOauth;
 }
 
 
 export class DeleteDiscountRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteDiscountPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: DeleteDiscountSecurity;
 }
 
 
 export class DeleteDiscountResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

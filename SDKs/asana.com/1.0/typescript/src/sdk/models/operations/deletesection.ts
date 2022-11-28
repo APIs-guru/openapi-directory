@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DeleteSectionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=section_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=section_gid" })
   sectionGid: string;
 }
 
 
 export class DeleteSectionQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
-export class DeleteSectionRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: DeleteSectionPathParams;
-
-  @Metadata()
-  queryParams: DeleteSectionQueryParams;
-}
-
-
 export class DeleteSection200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 }
 
 
+export class DeleteSectionRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: DeleteSectionPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: DeleteSectionQueryParams;
+}
+
+
 export class DeleteSectionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteSection200ApplicationJsonObject?: DeleteSection200ApplicationJson;
 }

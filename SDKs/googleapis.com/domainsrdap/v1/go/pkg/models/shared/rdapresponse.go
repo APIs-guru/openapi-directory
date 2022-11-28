@@ -1,5 +1,7 @@
 package shared
 
+// RdapResponse
+// Response to a general RDAP query.
 type RdapResponse struct {
 	Description     []string  `json:"description,omitempty"`
 	ErrorCode       *int32    `json:"errorCode,omitempty"`

@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class CreativeCommonsCodeEnum(str, Enum):
     BY = "by"
@@ -15,7 +16,7 @@ class CreativeCommonsCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreativeCommons:
-    code: CreativeCommonsCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    code: CreativeCommonsCodeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     

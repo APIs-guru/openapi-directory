@@ -1,17 +1,20 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import objectmeta
-from . import jobspec
-from . import jobstatus
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Job:
-    api_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apiVersion' }})
-    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
-    metadata: Optional[objectmeta.ObjectMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    spec: Optional[jobspec.JobSpec] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spec' }})
-    status: Optional[jobstatus.JobStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""Job
+    Job represents the configuration of a single job, which references a container image which is run to completion.
+    """
+    
+    api_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('apiVersion') }})
+    kind: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('kind') }})
+    metadata: Optional[ObjectMeta] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    spec: Optional[JobSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('spec') }})
+    status: Optional[JobStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

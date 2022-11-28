@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DominantLanguage } from "./dominantlanguage";
 
 
+
 export class DetectDominantLanguageResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Languages", elemType: shared.DominantLanguage })
+  @SpeakeasyMetadata({ data: "json, name=Languages", elemType: DominantLanguage })
   languages?: DominantLanguage[];
 }

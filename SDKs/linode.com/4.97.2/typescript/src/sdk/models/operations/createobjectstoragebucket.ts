@@ -1,82 +1,70 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const CREATEOBJECTSTORAGEBUCKET_SERVERS = [
-	"https://api.linode.com/v4",
-];
 
+export const CreateObjectStorageBucketServerList = [
+	"https://api.linode.com/v4",
+] as const;
 
 export enum CreateObjectStorageBucketRequestBodyAclEnum {
-    Private = "private"
-,    PublicRead = "public-read"
-,    AuthenticatedRead = "authenticated-read"
-,    PublicReadWrite = "public-read-write"
+    Private = "private",
+    PublicRead = "public-read",
+    AuthenticatedRead = "authenticated-read",
+    PublicReadWrite = "public-read-write"
 }
 
 
 export class CreateObjectStorageBucketRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=acl" })
+  @SpeakeasyMetadata({ data: "json, name=acl" })
   acl?: CreateObjectStorageBucketRequestBodyAclEnum;
 
-  @Metadata({ data: "json, name=cluster" })
+  @SpeakeasyMetadata({ data: "json, name=cluster" })
   cluster: string;
 
-  @Metadata({ data: "json, name=cors_enabled" })
+  @SpeakeasyMetadata({ data: "json, name=cors_enabled" })
   corsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label: string;
 }
 
 
-export class CreateObjectStorageBucketSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class CreateObjectStorageBucketSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class CreateObjectStorageBucketSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: CreateObjectStorageBucketSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: CreateObjectStorageBucketSecurityOption2;
-}
-
-
-export class CreateObjectStorageBucketRequest extends SpeakeasyBase {
-  @Metadata()
-  serverUrl?: string;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: CreateObjectStorageBucketRequestBody;
-
-  @Metadata()
-  security: CreateObjectStorageBucketSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class CreateObjectStorageBucketDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class CreateObjectStorageBucketRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  serverUrl?: string;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: CreateObjectStorageBucketRequestBody;
+
+  @SpeakeasyMetadata()
+  security: CreateObjectStorageBucketSecurity;
+}
+
+
 export class CreateObjectStorageBucketResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   objectStorageBucket?: shared.ObjectStorageBucket;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createObjectStorageBucketDefaultApplicationJsonObject?: CreateObjectStorageBucketDefaultApplicationJson;
 }

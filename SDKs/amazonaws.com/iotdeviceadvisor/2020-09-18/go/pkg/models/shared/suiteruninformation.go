@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SuiteRunInformation
+// Information about the suite run.
 type SuiteRunInformation struct {
 	CreatedAt              *time.Time          `json:"createdAt,omitempty"`
 	EndAt                  *time.Time          `json:"endAt,omitempty"`

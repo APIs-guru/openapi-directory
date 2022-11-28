@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteTagPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=projectId" })
   projectId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=tagId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tagId" })
   tagId: string;
 }
 
 
 export class DeleteTagHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Training-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Training-Key" })
   trainingKey: string;
 }
 
 
 export class DeleteTagRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteTagPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: DeleteTagHeaders;
 }
 
 
 export class DeleteTagResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

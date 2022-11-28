@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Lake } from "./lake";
+
 
 
 // DataplexConfig
@@ -8,6 +8,6 @@ import { Lake } from "./lake";
  * Specifies how metastore metadata should be integrated with the Dataplex service.
 **/
 export class DataplexConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lakeResources", elemType: shared.Lake })
+  @SpeakeasyMetadata({ data: "json, name=lakeResources", elemType: Lake })
   lakeResources?: Map<string, Lake>;
 }

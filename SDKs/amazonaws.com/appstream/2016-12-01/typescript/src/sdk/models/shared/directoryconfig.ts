@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceAccountCredentials } from "./serviceaccountcredentials";
+
 
 
 // DirectoryConfig
@@ -7,15 +8,15 @@ import { ServiceAccountCredentials } from "./serviceaccountcredentials";
  * Describes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
 **/
 export class DirectoryConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedTime" })
   createdTime?: Date;
 
-  @Metadata({ data: "json, name=DirectoryName" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryName" })
   directoryName: string;
 
-  @Metadata({ data: "json, name=OrganizationalUnitDistinguishedNames" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationalUnitDistinguishedNames" })
   organizationalUnitDistinguishedNames?: string[];
 
-  @Metadata({ data: "json, name=ServiceAccountCredentials" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceAccountCredentials" })
   serviceAccountCredentials?: ServiceAccountCredentials;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Action } from "./action";
 import { ChatChannel } from "./chatchannel";
 import { IncidentTemplate } from "./incidenttemplate";

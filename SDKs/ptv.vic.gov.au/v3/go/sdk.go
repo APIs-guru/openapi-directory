@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://timetableapi.ptv.vic.gov.au",
 	"https://timetableapi.ptv.vic.gov.au",
 }
@@ -21,9 +21,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -34,27 +38,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DeparturesGetForStop - View departures for all routes from a stop
 func (s *SDK) DeparturesGetForStop(ctx context.Context, request operations.DeparturesGetForStopRequest) (*operations.DeparturesGetForStopResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/departures/route_type/{route_type}/stop/{stop_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -64,7 +86,7 @@ func (s *SDK) DeparturesGetForStop(ctx context.Context, request operations.Depar
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -156,8 +178,9 @@ func (s *SDK) DeparturesGetForStop(ctx context.Context, request operations.Depar
 	return res, nil
 }
 
+// DeparturesGetForStopAndRoute - View departures for a specific route from a stop
 func (s *SDK) DeparturesGetForStopAndRoute(ctx context.Context, request operations.DeparturesGetForStopAndRouteRequest) (*operations.DeparturesGetForStopAndRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/departures/route_type/{route_type}/stop/{stop_id}/route/{route_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -167,7 +190,7 @@ func (s *SDK) DeparturesGetForStopAndRoute(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -259,8 +282,9 @@ func (s *SDK) DeparturesGetForStopAndRoute(ctx context.Context, request operatio
 	return res, nil
 }
 
+// DirectionsForDirection - View all routes for a direction of travel
 func (s *SDK) DirectionsForDirection(ctx context.Context, request operations.DirectionsForDirectionRequest) (*operations.DirectionsForDirectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/directions/{direction_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -270,7 +294,7 @@ func (s *SDK) DirectionsForDirection(ctx context.Context, request operations.Dir
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -362,8 +386,9 @@ func (s *SDK) DirectionsForDirection(ctx context.Context, request operations.Dir
 	return res, nil
 }
 
+// DirectionsForDirectionAndType - View all routes of a particular type for a direction of travel
 func (s *SDK) DirectionsForDirectionAndType(ctx context.Context, request operations.DirectionsForDirectionAndTypeRequest) (*operations.DirectionsForDirectionAndTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/directions/{direction_id}/route_type/{route_type}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -373,7 +398,7 @@ func (s *SDK) DirectionsForDirectionAndType(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -465,8 +490,9 @@ func (s *SDK) DirectionsForDirectionAndType(ctx context.Context, request operati
 	return res, nil
 }
 
+// DirectionsForRoute - View directions that a route travels in
 func (s *SDK) DirectionsForRoute(ctx context.Context, request operations.DirectionsForRouteRequest) (*operations.DirectionsForRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/directions/route/{route_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -476,7 +502,7 @@ func (s *SDK) DirectionsForRoute(ctx context.Context, request operations.Directi
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -568,8 +594,9 @@ func (s *SDK) DirectionsForRoute(ctx context.Context, request operations.Directi
 	return res, nil
 }
 
+// DisruptionsGetAllDisruptions - View all disruptions for all route types
 func (s *SDK) DisruptionsGetAllDisruptions(ctx context.Context, request operations.DisruptionsGetAllDisruptionsRequest) (*operations.DisruptionsGetAllDisruptionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v3/disruptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -579,7 +606,7 @@ func (s *SDK) DisruptionsGetAllDisruptions(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -671,8 +698,9 @@ func (s *SDK) DisruptionsGetAllDisruptions(ctx context.Context, request operatio
 	return res, nil
 }
 
+// DisruptionsGetDisruptionByID - View a specific disruption
 func (s *SDK) DisruptionsGetDisruptionByID(ctx context.Context, request operations.DisruptionsGetDisruptionByIDRequest) (*operations.DisruptionsGetDisruptionByIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/disruptions/{disruption_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -682,7 +710,7 @@ func (s *SDK) DisruptionsGetDisruptionByID(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -774,8 +802,9 @@ func (s *SDK) DisruptionsGetDisruptionByID(ctx context.Context, request operatio
 	return res, nil
 }
 
+// DisruptionsGetDisruptionModes - Get all disruption modes
 func (s *SDK) DisruptionsGetDisruptionModes(ctx context.Context, request operations.DisruptionsGetDisruptionModesRequest) (*operations.DisruptionsGetDisruptionModesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v3/disruptions/modes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -785,7 +814,7 @@ func (s *SDK) DisruptionsGetDisruptionModes(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -877,8 +906,9 @@ func (s *SDK) DisruptionsGetDisruptionModes(ctx context.Context, request operati
 	return res, nil
 }
 
+// DisruptionsGetDisruptionsByRoute - View all disruptions for a particular route
 func (s *SDK) DisruptionsGetDisruptionsByRoute(ctx context.Context, request operations.DisruptionsGetDisruptionsByRouteRequest) (*operations.DisruptionsGetDisruptionsByRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/disruptions/route/{route_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -888,7 +918,7 @@ func (s *SDK) DisruptionsGetDisruptionsByRoute(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -980,8 +1010,9 @@ func (s *SDK) DisruptionsGetDisruptionsByRoute(ctx context.Context, request oper
 	return res, nil
 }
 
+// DisruptionsGetDisruptionsByRouteAndStop - View all disruptions for a particular route and stop
 func (s *SDK) DisruptionsGetDisruptionsByRouteAndStop(ctx context.Context, request operations.DisruptionsGetDisruptionsByRouteAndStopRequest) (*operations.DisruptionsGetDisruptionsByRouteAndStopResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/disruptions/route/{route_id}/stop/{stop_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -991,7 +1022,7 @@ func (s *SDK) DisruptionsGetDisruptionsByRouteAndStop(ctx context.Context, reque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1083,8 +1114,9 @@ func (s *SDK) DisruptionsGetDisruptionsByRouteAndStop(ctx context.Context, reque
 	return res, nil
 }
 
+// DisruptionsGetDisruptionsByStop - View all disruptions for a particular stop
 func (s *SDK) DisruptionsGetDisruptionsByStop(ctx context.Context, request operations.DisruptionsGetDisruptionsByStopRequest) (*operations.DisruptionsGetDisruptionsByStopResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/disruptions/stop/{stop_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1094,7 +1126,7 @@ func (s *SDK) DisruptionsGetDisruptionsByStop(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1186,8 +1218,9 @@ func (s *SDK) DisruptionsGetDisruptionsByStop(ctx context.Context, request opera
 	return res, nil
 }
 
+// FareEstimateGetFareEstimateByZone - Estimate a fare by zone
 func (s *SDK) FareEstimateGetFareEstimateByZone(ctx context.Context, request operations.FareEstimateGetFareEstimateByZoneRequest) (*operations.FareEstimateGetFareEstimateByZoneResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/fare_estimate/min_zone/{minZone}/max_zone/{maxZone}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1197,7 +1230,7 @@ func (s *SDK) FareEstimateGetFareEstimateByZone(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1289,8 +1322,9 @@ func (s *SDK) FareEstimateGetFareEstimateByZone(ctx context.Context, request ope
 	return res, nil
 }
 
+// OutletsGetAllOutlets - List all ticket outlets
 func (s *SDK) OutletsGetAllOutlets(ctx context.Context, request operations.OutletsGetAllOutletsRequest) (*operations.OutletsGetAllOutletsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v3/outlets"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1300,7 +1334,7 @@ func (s *SDK) OutletsGetAllOutlets(ctx context.Context, request operations.Outle
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1392,8 +1426,9 @@ func (s *SDK) OutletsGetAllOutlets(ctx context.Context, request operations.Outle
 	return res, nil
 }
 
+// OutletsGetOutletsByGeolocation - List ticket outlets near a specific location
 func (s *SDK) OutletsGetOutletsByGeolocation(ctx context.Context, request operations.OutletsGetOutletsByGeolocationRequest) (*operations.OutletsGetOutletsByGeolocationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/outlets/location/{latitude},{longitude}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1403,7 +1438,7 @@ func (s *SDK) OutletsGetOutletsByGeolocation(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1495,8 +1530,9 @@ func (s *SDK) OutletsGetOutletsByGeolocation(ctx context.Context, request operat
 	return res, nil
 }
 
+// PatternsGetPatternByRun - View the stopping pattern for a specific trip/service run
 func (s *SDK) PatternsGetPatternByRun(ctx context.Context, request operations.PatternsGetPatternByRunRequest) (*operations.PatternsGetPatternByRunResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/pattern/run/{run_ref}/route_type/{route_type}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1506,7 +1542,7 @@ func (s *SDK) PatternsGetPatternByRun(ctx context.Context, request operations.Pa
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1598,8 +1634,9 @@ func (s *SDK) PatternsGetPatternByRun(ctx context.Context, request operations.Pa
 	return res, nil
 }
 
+// RouteTypesGetRouteTypes - View all route types and their names
 func (s *SDK) RouteTypesGetRouteTypes(ctx context.Context, request operations.RouteTypesGetRouteTypesRequest) (*operations.RouteTypesGetRouteTypesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v3/route_types"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1609,7 +1646,7 @@ func (s *SDK) RouteTypesGetRouteTypes(ctx context.Context, request operations.Ro
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1701,8 +1738,9 @@ func (s *SDK) RouteTypesGetRouteTypes(ctx context.Context, request operations.Ro
 	return res, nil
 }
 
+// RoutesOneOrMoreRoutes - View route names and numbers for all routes
 func (s *SDK) RoutesOneOrMoreRoutes(ctx context.Context, request operations.RoutesOneOrMoreRoutesRequest) (*operations.RoutesOneOrMoreRoutesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/v3/routes"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1712,7 +1750,7 @@ func (s *SDK) RoutesOneOrMoreRoutes(ctx context.Context, request operations.Rout
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1804,8 +1842,9 @@ func (s *SDK) RoutesOneOrMoreRoutes(ctx context.Context, request operations.Rout
 	return res, nil
 }
 
+// RoutesRouteFromID - View route name and number for specific route ID
 func (s *SDK) RoutesRouteFromID(ctx context.Context, request operations.RoutesRouteFromIDRequest) (*operations.RoutesRouteFromIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/routes/{route_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1815,7 +1854,7 @@ func (s *SDK) RoutesRouteFromID(ctx context.Context, request operations.RoutesRo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1907,8 +1946,9 @@ func (s *SDK) RoutesRouteFromID(ctx context.Context, request operations.RoutesRo
 	return res, nil
 }
 
+// RunsForRoute - View all trip/service runs for a specific route ID
 func (s *SDK) RunsForRoute(ctx context.Context, request operations.RunsForRouteRequest) (*operations.RunsForRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/runs/route/{route_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1918,7 +1958,7 @@ func (s *SDK) RunsForRoute(ctx context.Context, request operations.RunsForRouteR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2010,8 +2050,9 @@ func (s *SDK) RunsForRoute(ctx context.Context, request operations.RunsForRouteR
 	return res, nil
 }
 
+// RunsForRouteAndRouteType - View all trip/service runs for a specific route ID and route type
 func (s *SDK) RunsForRouteAndRouteType(ctx context.Context, request operations.RunsForRouteAndRouteTypeRequest) (*operations.RunsForRouteAndRouteTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/runs/route/{route_id}/route_type/{route_type}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2021,7 +2062,7 @@ func (s *SDK) RunsForRouteAndRouteType(ctx context.Context, request operations.R
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2113,8 +2154,9 @@ func (s *SDK) RunsForRouteAndRouteType(ctx context.Context, request operations.R
 	return res, nil
 }
 
+// RunsForRun - View all trip/service runs for a specific run_ref
 func (s *SDK) RunsForRun(ctx context.Context, request operations.RunsForRunRequest) (*operations.RunsForRunResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/runs/{run_ref}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2124,7 +2166,7 @@ func (s *SDK) RunsForRun(ctx context.Context, request operations.RunsForRunReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2216,8 +2258,9 @@ func (s *SDK) RunsForRun(ctx context.Context, request operations.RunsForRunReque
 	return res, nil
 }
 
+// RunsForRunAndRouteType - View the trip/service run for a specific run_ref and route type
 func (s *SDK) RunsForRunAndRouteType(ctx context.Context, request operations.RunsForRunAndRouteTypeRequest) (*operations.RunsForRunAndRouteTypeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/runs/{run_ref}/route_type/{route_type}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2227,7 +2270,7 @@ func (s *SDK) RunsForRunAndRouteType(ctx context.Context, request operations.Run
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2319,8 +2362,9 @@ func (s *SDK) RunsForRunAndRouteType(ctx context.Context, request operations.Run
 	return res, nil
 }
 
+// SearchSearch - View stops, routes and myki ticket outlets that match the search term
 func (s *SDK) SearchSearch(ctx context.Context, request operations.SearchSearchRequest) (*operations.SearchSearchResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/search/{search_term}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2330,7 +2374,7 @@ func (s *SDK) SearchSearch(ctx context.Context, request operations.SearchSearchR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2422,8 +2466,9 @@ func (s *SDK) SearchSearch(ctx context.Context, request operations.SearchSearchR
 	return res, nil
 }
 
+// StopsStopDetails - View facilities at a specific stop (Metro and V/Line stations only)
 func (s *SDK) StopsStopDetails(ctx context.Context, request operations.StopsStopDetailsRequest) (*operations.StopsStopDetailsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/stops/{stop_id}/route_type/{route_type}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2433,7 +2478,7 @@ func (s *SDK) StopsStopDetails(ctx context.Context, request operations.StopsStop
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2525,8 +2570,9 @@ func (s *SDK) StopsStopDetails(ctx context.Context, request operations.StopsStop
 	return res, nil
 }
 
+// StopsStopsByGeolocation - View all stops near a specific location
 func (s *SDK) StopsStopsByGeolocation(ctx context.Context, request operations.StopsStopsByGeolocationRequest) (*operations.StopsStopsByGeolocationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/stops/location/{latitude},{longitude}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2536,7 +2582,7 @@ func (s *SDK) StopsStopsByGeolocation(ctx context.Context, request operations.St
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2628,8 +2674,9 @@ func (s *SDK) StopsStopsByGeolocation(ctx context.Context, request operations.St
 	return res, nil
 }
 
+// StopsStopsForRoute - View all stops on a specific route
 func (s *SDK) StopsStopsForRoute(ctx context.Context, request operations.StopsStopsForRouteRequest) (*operations.StopsStopsForRouteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v3/stops/route/{route_id}/route_type/{route_type}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2639,7 +2686,7 @@ func (s *SDK) StopsStopsForRoute(ctx context.Context, request operations.StopsSt
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

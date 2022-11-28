@@ -1,5 +1,7 @@
 package shared
 
+// InboxRegistrationEntity
+// List Inbox Registrations
 type InboxRegistrationEntity struct {
 	ClickwrapBody  *string `json:"clickwrap_body,omitempty"`
 	Code           *string `json:"code,omitempty"`

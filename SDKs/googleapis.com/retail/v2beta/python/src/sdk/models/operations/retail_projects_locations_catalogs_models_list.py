@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RetailProjectsLocationsCatalogsModelsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class RetailProjectsLocationsCatalogsModelsListQueryParams:
 
 @dataclass
 class RetailProjectsLocationsCatalogsModelsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RetailProjectsLocationsCatalogsModelsListRequest:
-    path_params: RetailProjectsLocationsCatalogsModelsListPathParams = field(default=None)
-    query_params: RetailProjectsLocationsCatalogsModelsListQueryParams = field(default=None)
-    security: RetailProjectsLocationsCatalogsModelsListSecurity = field(default=None)
+    path_params: RetailProjectsLocationsCatalogsModelsListPathParams = field()
+    query_params: RetailProjectsLocationsCatalogsModelsListQueryParams = field()
+    security: RetailProjectsLocationsCatalogsModelsListSecurity = field()
     
 
 @dataclass
 class RetailProjectsLocationsCatalogsModelsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_retail_v2beta_list_models_response: Optional[shared.GoogleCloudRetailV2betaListModelsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// TableListTablesView
+// Additional details for a view.
 type TableListTablesView struct {
 	UseLegacySQL *bool `json:"useLegacySql,omitempty"`
 }

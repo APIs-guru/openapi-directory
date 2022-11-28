@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum NetworkingConfigConnectionTypeEnum {
     ConnectionTypeUnspecified = "CONNECTION_TYPE_UNSPECIFIED",
     VpcPeering = "VPC_PEERING",

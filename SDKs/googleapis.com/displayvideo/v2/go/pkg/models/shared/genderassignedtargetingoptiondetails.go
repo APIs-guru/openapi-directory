@@ -9,6 +9,8 @@ const (
 	GenderAssignedTargetingOptionDetailsGenderEnumGenderUnknown     GenderAssignedTargetingOptionDetailsGenderEnum = "GENDER_UNKNOWN"
 )
 
+// GenderAssignedTargetingOptionDetails
+// Details for assigned gender targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_GENDER`.
 type GenderAssignedTargetingOptionDetails struct {
 	Gender *GenderAssignedTargetingOptionDetailsGenderEnum `json:"gender,omitempty"`
 }

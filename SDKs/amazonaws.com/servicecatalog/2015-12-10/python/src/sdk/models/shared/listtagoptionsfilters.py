@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ListTagOptionsFilters:
-    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Active' }})
-    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Key' }})
-    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
+    r"""ListTagOptionsFilters
+    Filters to use when listing TagOptions.
+    """
+    
+    active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Active') }})
+    key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Key') }})
+    value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Value') }})
     

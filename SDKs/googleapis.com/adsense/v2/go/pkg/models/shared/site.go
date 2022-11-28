@@ -10,6 +10,8 @@ const (
 	SiteStateEnumNeedsAttention   SiteStateEnum = "NEEDS_ATTENTION"
 )
 
+// Site
+// Representation of a Site.
 type Site struct {
 	AutoAdsEnabled       *bool          `json:"autoAdsEnabled,omitempty"`
 	Domain               *string        `json:"domain,omitempty"`

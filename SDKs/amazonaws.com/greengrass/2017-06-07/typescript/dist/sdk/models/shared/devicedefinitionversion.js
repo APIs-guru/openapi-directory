@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Device } from "./device";
 // DeviceDefinitionVersion
 /**
  * Information about a device definition version.
@@ -34,7 +34,7 @@ var DeviceDefinitionVersion = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Devices", elemType: shared.Device }),
+        SpeakeasyMetadata({ data: "json, name=Devices", elemType: Device }),
         __metadata("design:type", Array)
     ], DeviceDefinitionVersion.prototype, "devices", void 0);
     return DeviceDefinitionVersion;

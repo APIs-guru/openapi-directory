@@ -1,5 +1,7 @@
 package shared
 
+// SearchGameSessionsInput
+// Represents the input for a request operation.
 type SearchGameSessionsInput struct {
 	AliasID          *string `json:"AliasId,omitempty"`
 	FilterExpression *string `json:"FilterExpression,omitempty"`

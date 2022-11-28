@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExpressionTypeEnum } from "./expressiontypeenum";
 import { InputSerialization } from "./inputserialization";
 import { OutputSerialization } from "./outputserialization";
@@ -36,19 +36,19 @@ var SelectParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Expression" }),
+        SpeakeasyMetadata({ data: "json, name=Expression" }),
         __metadata("design:type", String)
     ], SelectParameters.prototype, "expression", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExpressionType" }),
+        SpeakeasyMetadata({ data: "json, name=ExpressionType" }),
         __metadata("design:type", String)
     ], SelectParameters.prototype, "expressionType", void 0);
     __decorate([
-        Metadata({ data: "json, name=InputSerialization" }),
+        SpeakeasyMetadata({ data: "json, name=InputSerialization" }),
         __metadata("design:type", InputSerialization)
     ], SelectParameters.prototype, "inputSerialization", void 0);
     __decorate([
-        Metadata({ data: "json, name=OutputSerialization" }),
+        SpeakeasyMetadata({ data: "json, name=OutputSerialization" }),
         __metadata("design:type", OutputSerialization)
     ], SelectParameters.prototype, "outputSerialization", void 0);
     return SelectParameters;

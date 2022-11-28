@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Observation } from "./observation";
+
 
 
 // GetInfoForObservedBeaconsRequest
@@ -8,9 +8,9 @@ import { Observation } from "./observation";
  * Request for beacon and attachment information about beacons that a mobile client has encountered "in the wild".
 **/
 export class GetInfoForObservedBeaconsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=namespacedTypes" })
+  @SpeakeasyMetadata({ data: "json, name=namespacedTypes" })
   namespacedTypes?: string[];
 
-  @Metadata({ data: "json, name=observations", elemType: shared.Observation })
+  @SpeakeasyMetadata({ data: "json, name=observations", elemType: Observation })
   observations?: Observation[];
 }

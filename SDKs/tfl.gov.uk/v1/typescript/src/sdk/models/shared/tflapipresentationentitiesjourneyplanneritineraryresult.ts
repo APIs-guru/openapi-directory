@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesJourneyPlannerJourneyPlannerCycleHireDockingStationData } from "./tflapipresentationentitiesjourneyplannerjourneyplannercyclehiredockingstationdata";
 import { TflApiPresentationEntitiesJourneyPlannerJourneyVector } from "./tflapipresentationentitiesjourneyplannerjourneyvector";
 import { TflApiPresentationEntitiesJourneyPlannerJourney } from "./tflapipresentationentitiesjourneyplannerjourney";
@@ -7,29 +6,30 @@ import { TflApiPresentationEntitiesLine } from "./tflapipresentationentitiesline
 import { TflApiPresentationEntitiesJourneyPlannerSearchCriteria } from "./tflapipresentationentitiesjourneyplannersearchcriteria";
 
 
+
 // TflApiPresentationEntitiesJourneyPlannerItineraryResult
 /** 
  * A DTO representing a list of possible journeys.
 **/
 export class TflApiPresentationEntitiesJourneyPlannerItineraryResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cycleHireDockingStationData" })
+  @SpeakeasyMetadata({ data: "json, name=cycleHireDockingStationData" })
   cycleHireDockingStationData?: TflApiPresentationEntitiesJourneyPlannerJourneyPlannerCycleHireDockingStationData;
 
-  @Metadata({ data: "json, name=journeyVector" })
+  @SpeakeasyMetadata({ data: "json, name=journeyVector" })
   journeyVector?: TflApiPresentationEntitiesJourneyPlannerJourneyVector;
 
-  @Metadata({ data: "json, name=journeys", elemType: shared.TflApiPresentationEntitiesJourneyPlannerJourney })
+  @SpeakeasyMetadata({ data: "json, name=journeys", elemType: TflApiPresentationEntitiesJourneyPlannerJourney })
   journeys?: TflApiPresentationEntitiesJourneyPlannerJourney[];
 
-  @Metadata({ data: "json, name=lines", elemType: shared.TflApiPresentationEntitiesLine })
+  @SpeakeasyMetadata({ data: "json, name=lines", elemType: TflApiPresentationEntitiesLine })
   lines?: TflApiPresentationEntitiesLine[];
 
-  @Metadata({ data: "json, name=recommendedMaxAgeMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=recommendedMaxAgeMinutes" })
   recommendedMaxAgeMinutes?: number;
 
-  @Metadata({ data: "json, name=searchCriteria" })
+  @SpeakeasyMetadata({ data: "json, name=searchCriteria" })
   searchCriteria?: TflApiPresentationEntitiesJourneyPlannerSearchCriteria;
 
-  @Metadata({ data: "json, name=stopMessages" })
+  @SpeakeasyMetadata({ data: "json, name=stopMessages" })
   stopMessages?: string[];
 }

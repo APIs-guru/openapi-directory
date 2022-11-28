@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FindingEnum } from "./findingenum";
 import { ReasonCodeSummary } from "./reasoncodesummary";
+
 
 
 // Summary
@@ -9,12 +9,12 @@ import { ReasonCodeSummary } from "./reasoncodesummary";
  * The summary of a recommendation.
 **/
 export class Summary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: FindingEnum;
 
-  @Metadata({ data: "json, name=reasonCodeSummaries", elemType: shared.ReasonCodeSummary })
+  @SpeakeasyMetadata({ data: "json, name=reasonCodeSummaries", elemType: ReasonCodeSummary })
   reasonCodeSummaries?: ReasonCodeSummary[];
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: number;
 }

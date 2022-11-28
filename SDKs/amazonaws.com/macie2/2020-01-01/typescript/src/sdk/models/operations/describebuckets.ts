@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class DescribeBucketsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" })
   maxResults?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
   nextToken?: string;
 }
 
 
 export class DescribeBucketsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -40,69 +41,69 @@ export class DescribeBucketsHeaders extends SpeakeasyBase {
  * Specifies criteria for sorting the results of a query for information about S3 buckets.
 **/
 export class DescribeBucketsRequestBodySortCriteria extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributeName" })
+  @SpeakeasyMetadata({ data: "json, name=attributeName" })
   attributeName?: string;
 
-  @Metadata({ data: "json, name=orderBy" })
+  @SpeakeasyMetadata({ data: "json, name=orderBy" })
   orderBy?: shared.OrderByEnum;
 }
 
 
 export class DescribeBucketsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=criteria", elemType: shared.BucketCriteriaAdditionalProperties })
+  @SpeakeasyMetadata({ data: "json, name=criteria", elemType: shared.BucketCriteriaAdditionalProperties })
   criteria?: Map<string, shared.BucketCriteriaAdditionalProperties>;
 
-  @Metadata({ data: "json, name=maxResults" })
+  @SpeakeasyMetadata({ data: "json, name=maxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=sortCriteria" })
+  @SpeakeasyMetadata({ data: "json, name=sortCriteria" })
   sortCriteria?: DescribeBucketsRequestBodySortCriteria;
 }
 
 
 export class DescribeBucketsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: DescribeBucketsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: DescribeBucketsHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: DescribeBucketsRequestBody;
 }
 
 
 export class DescribeBucketsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   describeBucketsResponse?: shared.DescribeBucketsResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceQuotaExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

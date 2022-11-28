@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import planningleveldatadto
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LifecycleOneToOneRequest:
-    data: Optional[planningleveldatadto.PlanningLevelDataDto] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    planning_level_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'planningLevelId' }})
-    ratio: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ratio' }})
+    planning_level_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('planningLevelId') }})
+    data: Optional[PlanningLevelDataDto] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    ratio: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ratio') }})
     

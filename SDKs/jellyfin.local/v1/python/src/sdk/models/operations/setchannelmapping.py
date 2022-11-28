@@ -12,18 +12,18 @@ class SetChannelMappingRequests:
 
 @dataclass
 class SetChannelMappingSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class SetChannelMappingRequest:
-    request: SetChannelMappingRequests = field(default=None)
-    security: SetChannelMappingSecurity = field(default=None)
+    request: SetChannelMappingRequests = field()
+    security: SetChannelMappingSecurity = field()
     
 
 @dataclass
 class SetChannelMappingResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     tuner_channel_mapping: Optional[shared.TunerChannelMapping] = field(default=None)
     

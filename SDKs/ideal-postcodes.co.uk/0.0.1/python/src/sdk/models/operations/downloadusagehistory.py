@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class DownloadUsageHistoryPathParams:
-    key: str = field(default=None, metadata={'path_param': { 'field_name': 'key', 'style': 'simple', 'explode': False }})
+    key: str = field(metadata={'path_param': { 'field_name': 'key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,21 +17,21 @@ class DownloadUsageHistoryQueryParams:
 
 @dataclass
 class DownloadUsageHistorySecurity:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
-    user_token: shared.SchemeUserToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    api_key: shared.SchemeAPIKey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
+    user_token: shared.SchemeUserToken = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'query' }})
     
 
 @dataclass
 class DownloadUsageHistoryRequest:
-    path_params: DownloadUsageHistoryPathParams = field(default=None)
-    query_params: DownloadUsageHistoryQueryParams = field(default=None)
-    security: DownloadUsageHistorySecurity = field(default=None)
+    path_params: DownloadUsageHistoryPathParams = field()
+    query_params: DownloadUsageHistoryQueryParams = field()
+    security: DownloadUsageHistorySecurity = field()
     
 
 @dataclass
 class DownloadUsageHistoryResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     download_usage_history_200_text_csv_string: Optional[str] = field(default=None)
     error_response_schema: Optional[shared.ErrorResponseSchema] = field(default=None)
-    status_code: int = field(default=None)
     

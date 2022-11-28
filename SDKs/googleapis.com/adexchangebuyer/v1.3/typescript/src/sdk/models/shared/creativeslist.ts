@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Creative } from "./creative";
+
 
 
 // CreativesList
@@ -8,12 +8,12 @@ import { Creative } from "./creative";
  * The creatives feed lists the active creatives for the Ad Exchange buyer accounts that the user has access to. Each entry in the feed corresponds to a single creative.
 **/
 export class CreativesList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.Creative })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Creative })
   items?: Creative[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Algorithm } from "./algorithm";
 import { Configuration } from "./configuration";
 import { CostMatrix } from "./costmatrix";
@@ -12,31 +11,32 @@ import { VehicleType } from "./vehicletype";
 import { Vehicle } from "./vehicle";
 
 
+
 export class Request extends SpeakeasyBase {
-  @Metadata({ data: "json, name=algorithm" })
+  @SpeakeasyMetadata({ data: "json, name=algorithm" })
   algorithm?: Algorithm;
 
-  @Metadata({ data: "json, name=configuration" })
+  @SpeakeasyMetadata({ data: "json, name=configuration" })
   configuration?: Configuration;
 
-  @Metadata({ data: "json, name=cost_matrices", elemType: shared.CostMatrix })
+  @SpeakeasyMetadata({ data: "json, name=cost_matrices", elemType: CostMatrix })
   costMatrices?: CostMatrix[];
 
-  @Metadata({ data: "json, name=objectives", elemType: shared.Objective })
+  @SpeakeasyMetadata({ data: "json, name=objectives", elemType: Objective })
   objectives?: Objective[];
 
-  @Metadata({ data: "json, name=relations" })
+  @SpeakeasyMetadata({ data: "json, name=relations" })
   relations?: any[];
 
-  @Metadata({ data: "json, name=services", elemType: shared.Service })
+  @SpeakeasyMetadata({ data: "json, name=services", elemType: Service })
   services?: Service[];
 
-  @Metadata({ data: "json, name=shipments", elemType: shared.Shipment })
+  @SpeakeasyMetadata({ data: "json, name=shipments", elemType: Shipment })
   shipments?: Shipment[];
 
-  @Metadata({ data: "json, name=vehicle_types", elemType: shared.VehicleType })
+  @SpeakeasyMetadata({ data: "json, name=vehicle_types", elemType: VehicleType })
   vehicleTypes?: VehicleType[];
 
-  @Metadata({ data: "json, name=vehicles", elemType: shared.Vehicle })
+  @SpeakeasyMetadata({ data: "json, name=vehicles", elemType: Vehicle })
   vehicles?: Vehicle[];
 }

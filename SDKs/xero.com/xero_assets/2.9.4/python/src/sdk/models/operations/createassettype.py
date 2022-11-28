@@ -5,24 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class CreateAssetTypeHeaders:
-    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'xero-tenant-id', 'style': 'simple', 'explode': False }})
+    xero_tenant_id: str = field(metadata={'header': { 'field_name': 'xero-tenant-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class CreateAssetTypeSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CreateAssetTypeRequest:
-    headers: CreateAssetTypeHeaders = field(default=None)
+    headers: CreateAssetTypeHeaders = field()
+    security: CreateAssetTypeSecurity = field()
     request: Optional[shared.AssetType] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CreateAssetTypeSecurity = field(default=None)
     
 
 @dataclass
 class CreateAssetTypeResponse:
+    content_type: str = field()
+    status_code: int = field()
     asset_type: Optional[shared.AssetType] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

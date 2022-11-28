@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DialogflowProjectsLocationsSetAgentPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +30,14 @@ class DialogflowProjectsLocationsSetAgentQueryParams:
 
 @dataclass
 class DialogflowProjectsLocationsSetAgentSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DialogflowProjectsLocationsSetAgentSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,15 +48,15 @@ class DialogflowProjectsLocationsSetAgentSecurity:
 
 @dataclass
 class DialogflowProjectsLocationsSetAgentRequest:
-    path_params: DialogflowProjectsLocationsSetAgentPathParams = field(default=None)
-    query_params: DialogflowProjectsLocationsSetAgentQueryParams = field(default=None)
+    path_params: DialogflowProjectsLocationsSetAgentPathParams = field()
+    query_params: DialogflowProjectsLocationsSetAgentQueryParams = field()
+    security: DialogflowProjectsLocationsSetAgentSecurity = field()
     request: Optional[shared.GoogleCloudDialogflowV2beta1Agent] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DialogflowProjectsLocationsSetAgentSecurity = field(default=None)
     
 
 @dataclass
 class DialogflowProjectsLocationsSetAgentResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_dialogflow_v2beta1_agent: Optional[shared.GoogleCloudDialogflowV2beta1Agent] = field(default=None)
-    status_code: int = field(default=None)
     

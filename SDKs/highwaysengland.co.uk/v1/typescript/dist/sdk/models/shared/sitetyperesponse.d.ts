@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { SiteType } from "./sitetype";
 export declare class SiteTypeResponse extends SpeakeasyBase {
     rowCount?: number;

@@ -1,35 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPromotionSummaryReportQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=marketplace_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=marketplace_id" })
   marketplaceId: string;
 }
 
 
 export class GetPromotionSummaryReportSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetPromotionSummaryReportRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPromotionSummaryReportQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPromotionSummaryReportSecurity;
 }
 
 
 export class GetPromotionSummaryReportResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   summaryReportResponse?: shared.SummaryReportResponse;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ChromemanagementCustomersReportsFindInstalledAppDevicesPathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
     
 class ChromemanagementCustomersReportsFindInstalledAppDevicesAppTypeEnum(str, Enum):
     APP_TYPE_UNSPECIFIED = "APP_TYPE_UNSPECIFIED"
@@ -40,20 +41,20 @@ class ChromemanagementCustomersReportsFindInstalledAppDevicesQueryParams:
 
 @dataclass
 class ChromemanagementCustomersReportsFindInstalledAppDevicesSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ChromemanagementCustomersReportsFindInstalledAppDevicesRequest:
-    path_params: ChromemanagementCustomersReportsFindInstalledAppDevicesPathParams = field(default=None)
-    query_params: ChromemanagementCustomersReportsFindInstalledAppDevicesQueryParams = field(default=None)
-    security: ChromemanagementCustomersReportsFindInstalledAppDevicesSecurity = field(default=None)
+    path_params: ChromemanagementCustomersReportsFindInstalledAppDevicesPathParams = field()
+    query_params: ChromemanagementCustomersReportsFindInstalledAppDevicesQueryParams = field()
+    security: ChromemanagementCustomersReportsFindInstalledAppDevicesSecurity = field()
     
 
 @dataclass
 class ChromemanagementCustomersReportsFindInstalledAppDevicesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_chrome_management_v1_find_installed_app_devices_response: Optional[shared.GoogleChromeManagementV1FindInstalledAppDevicesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

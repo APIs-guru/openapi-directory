@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GmailUsersSettingsGetAutoForwardingPathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,26 +26,26 @@ class GmailUsersSettingsGetAutoForwardingQueryParams:
 
 @dataclass
 class GmailUsersSettingsGetAutoForwardingSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GmailUsersSettingsGetAutoForwardingSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GmailUsersSettingsGetAutoForwardingSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GmailUsersSettingsGetAutoForwardingSecurityOption4:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -57,14 +58,14 @@ class GmailUsersSettingsGetAutoForwardingSecurity:
 
 @dataclass
 class GmailUsersSettingsGetAutoForwardingRequest:
-    path_params: GmailUsersSettingsGetAutoForwardingPathParams = field(default=None)
-    query_params: GmailUsersSettingsGetAutoForwardingQueryParams = field(default=None)
-    security: GmailUsersSettingsGetAutoForwardingSecurity = field(default=None)
+    path_params: GmailUsersSettingsGetAutoForwardingPathParams = field()
+    query_params: GmailUsersSettingsGetAutoForwardingQueryParams = field()
+    security: GmailUsersSettingsGetAutoForwardingSecurity = field()
     
 
 @dataclass
 class GmailUsersSettingsGetAutoForwardingResponse:
+    content_type: str = field()
+    status_code: int = field()
     auto_forwarding: Optional[shared.AutoForwarding] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

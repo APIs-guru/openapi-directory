@@ -5,20 +5,20 @@ from sdk.models import shared
 
 @dataclass
 class ReposGetAppsWithAccessToProtectedBranchPathParams:
-    branch: str = field(default=None, metadata={'path_param': { 'field_name': 'branch', 'style': 'simple', 'explode': False }})
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    branch: str = field(metadata={'path_param': { 'field_name': 'branch', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ReposGetAppsWithAccessToProtectedBranchRequest:
-    path_params: ReposGetAppsWithAccessToProtectedBranchPathParams = field(default=None)
+    path_params: ReposGetAppsWithAccessToProtectedBranchPathParams = field()
     
 
 @dataclass
 class ReposGetAppsWithAccessToProtectedBranchResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     integrations: Optional[List[dict[str, Any]]] = field(default=None)
     

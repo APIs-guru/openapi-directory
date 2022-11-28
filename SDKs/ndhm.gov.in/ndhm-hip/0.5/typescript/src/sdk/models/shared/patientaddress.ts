@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PatientAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=district" })
+  @SpeakeasyMetadata({ data: "json, name=district" })
   district?: string;
 
-  @Metadata({ data: "json, name=line" })
+  @SpeakeasyMetadata({ data: "json, name=line" })
   line?: string;
 
-  @Metadata({ data: "json, name=pincode" })
+  @SpeakeasyMetadata({ data: "json, name=pincode" })
   pincode?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: string;
 }

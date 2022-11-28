@@ -8,6 +8,8 @@ const (
 	ObjectFilterStatusEnumAll      ObjectFilterStatusEnum = "ALL"
 )
 
+// ObjectFilter
+// Object Filter.
 type ObjectFilter struct {
 	Kind      *string                 `json:"kind,omitempty"`
 	ObjectIds []string                `json:"objectIds,omitempty"`

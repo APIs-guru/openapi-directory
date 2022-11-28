@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ReleaseEventAPIGetOnePathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 class ReleaseEventAPIGetOneFieldsEnum(str, Enum):
     NONE = "None"
@@ -35,14 +36,14 @@ class ReleaseEventAPIGetOneQueryParams:
 
 @dataclass
 class ReleaseEventAPIGetOneRequest:
-    path_params: ReleaseEventAPIGetOnePathParams = field(default=None)
-    query_params: ReleaseEventAPIGetOneQueryParams = field(default=None)
+    path_params: ReleaseEventAPIGetOnePathParams = field()
+    query_params: ReleaseEventAPIGetOneQueryParams = field()
     
 
 @dataclass
 class ReleaseEventAPIGetOneResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     release_event_for_api_contract: Optional[shared.ReleaseEventForAPIContract] = field(default=None)
-    status_code: int = field(default=None)
     

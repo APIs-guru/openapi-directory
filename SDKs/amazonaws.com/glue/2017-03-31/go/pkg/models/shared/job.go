@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Job
+// Specifies a job definition.
 type Job struct {
 	AllocatedCapacity       *int64                `json:"AllocatedCapacity,omitempty"`
 	Command                 *JobCommand           `json:"Command,omitempty"`

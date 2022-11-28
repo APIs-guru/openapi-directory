@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WebsiteCaSummary } from "./websitecasummary";
 
 
+
 export class ListWebsiteCertificateAuthoritiesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=WebsiteCertificateAuthorities", elemType: shared.WebsiteCaSummary })
+  @SpeakeasyMetadata({ data: "json, name=WebsiteCertificateAuthorities", elemType: WebsiteCaSummary })
   websiteCertificateAuthorities?: WebsiteCaSummary[];
 }

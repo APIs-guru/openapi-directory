@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
+
 
 export enum PutOrganizationConformancePackXAmzTargetEnum {
     StarlingDoveServicePutOrganizationConformancePack = "StarlingDoveService.PutOrganizationConformancePack"
@@ -7,72 +8,72 @@ export enum PutOrganizationConformancePackXAmzTargetEnum {
 
 
 export class PutOrganizationConformancePackHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
   xAmzTarget: PutOrganizationConformancePackXAmzTargetEnum;
 }
 
 
 export class PutOrganizationConformancePackRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PutOrganizationConformancePackHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.PutOrganizationConformancePackRequest;
 }
 
 
 export class PutOrganizationConformancePackResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   insufficientPermissionsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   maxNumberOfOrganizationConformancePacksExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   noAvailableOrganizationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   organizationAccessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   organizationAllFeaturesNotEnabledException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   organizationConformancePackTemplateValidationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putOrganizationConformancePackResponse?: shared.PutOrganizationConformancePackResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceInUseException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

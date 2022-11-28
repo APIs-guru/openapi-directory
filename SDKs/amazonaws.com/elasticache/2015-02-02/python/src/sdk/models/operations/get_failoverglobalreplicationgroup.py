@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetFailoverGlobalReplicationGroupActionEnum(str, Enum):
     FAILOVER_GLOBAL_REPLICATION_GROUP = "FailoverGlobalReplicationGroup"
@@ -10,11 +14,11 @@ class GetFailoverGlobalReplicationGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetFailoverGlobalReplicationGroupQueryParams:
-    action: GetFailoverGlobalReplicationGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    global_replication_group_id: str = field(default=None, metadata={'query_param': { 'field_name': 'GlobalReplicationGroupId', 'style': 'form', 'explode': True }})
-    primary_region: str = field(default=None, metadata={'query_param': { 'field_name': 'PrimaryRegion', 'style': 'form', 'explode': True }})
-    primary_replication_group_id: str = field(default=None, metadata={'query_param': { 'field_name': 'PrimaryReplicationGroupId', 'style': 'form', 'explode': True }})
-    version: GetFailoverGlobalReplicationGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetFailoverGlobalReplicationGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    global_replication_group_id: str = field(metadata={'query_param': { 'field_name': 'GlobalReplicationGroupId', 'style': 'form', 'explode': True }})
+    primary_region: str = field(metadata={'query_param': { 'field_name': 'PrimaryRegion', 'style': 'form', 'explode': True }})
+    primary_replication_group_id: str = field(metadata={'query_param': { 'field_name': 'PrimaryReplicationGroupId', 'style': 'form', 'explode': True }})
+    version: GetFailoverGlobalReplicationGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetFailoverGlobalReplicationGroupHeaders:
 
 @dataclass
 class GetFailoverGlobalReplicationGroupRequest:
-    query_params: GetFailoverGlobalReplicationGroupQueryParams = field(default=None)
-    headers: GetFailoverGlobalReplicationGroupHeaders = field(default=None)
+    headers: GetFailoverGlobalReplicationGroupHeaders = field()
+    query_params: GetFailoverGlobalReplicationGroupQueryParams = field()
     
 
 @dataclass
 class GetFailoverGlobalReplicationGroupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var FetchFaxServers = []string{
+var FetchFaxServerList = []string{
 	"https://fax.twilio.com",
 }
 

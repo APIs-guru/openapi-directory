@@ -1,15 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import permissiontype_enum
-from . import sharestatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class WorkloadShareSummary:
-    permission_type: Optional[permissiontype_enum.PermissionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PermissionType' }})
-    share_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ShareId' }})
-    shared_with: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SharedWith' }})
-    status: Optional[sharestatus_enum.ShareStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
+    r"""WorkloadShareSummary
+    A workload share summary return object.
+    """
+    
+    permission_type: Optional[PermissionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PermissionType') }})
+    share_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ShareId') }})
+    shared_with: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SharedWith') }})
+    status: Optional[ShareStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
     

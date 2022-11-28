@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum MessageEventTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Sent = "SENT"
-,    Received = "RECEIVED"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Sent = "SENT",
+    Received = "RECEIVED"
 }
 
 
@@ -12,15 +13,15 @@ export enum MessageEventTypeEnum {
  * An event describing a message sent/received between Spans.
 **/
 export class MessageEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compressedSizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=compressedSizeBytes" })
   compressedSizeBytes?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: MessageEventTypeEnum;
 
-  @Metadata({ data: "json, name=uncompressedSizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=uncompressedSizeBytes" })
   uncompressedSizeBytes?: string;
 }

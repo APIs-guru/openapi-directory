@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,23 +22,23 @@ class CreateMembersHeaders:
 @dataclass_json
 @dataclass
 class CreateMembersRequestBody:
-    account_details: List[shared.AccountDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccountDetails' }})
+    account_details: List[shared.AccountDetails] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AccountDetails') }})
     
 
 @dataclass
 class CreateMembersRequest:
-    headers: CreateMembersHeaders = field(default=None)
-    request: CreateMembersRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateMembersHeaders = field()
+    request: CreateMembersRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateMembersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_members_response: Optional[shared.CreateMembersResponse] = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_conflict_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPackageInfoPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=name" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" })
   name: string;
 }
 
 
 export class GetPackageInfoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=assemblyGuid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=assemblyGuid" })
   assemblyGuid?: string;
 }
 
 
 export class GetPackageInfoSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class GetPackageInfoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPackageInfoPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPackageInfoQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetPackageInfoSecurity;
 }
 
 
 export class GetPackageInfoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   packageInfo?: shared.PackageInfo;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

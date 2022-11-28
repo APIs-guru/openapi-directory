@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobStatusEnum } from "./jobstatusenum";
+
 
 
 // AcknowledgeJobOutput
@@ -7,6 +8,6 @@ import { JobStatusEnum } from "./jobstatusenum";
  * Represents the output of an AcknowledgeJob action.
 **/
 export class AcknowledgeJobOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: JobStatusEnum;
 }

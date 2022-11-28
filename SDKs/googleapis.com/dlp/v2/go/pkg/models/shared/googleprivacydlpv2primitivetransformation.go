@@ -1,5 +1,7 @@
 package shared
 
+// GooglePrivacyDlpV2PrimitiveTransformation
+// A rule for transforming a value.
 type GooglePrivacyDlpV2PrimitiveTransformation struct {
 	BucketingConfig           *GooglePrivacyDlpV2BucketingConfig           `json:"bucketingConfig,omitempty"`
 	CharacterMaskConfig       *GooglePrivacyDlpV2CharacterMaskConfig       `json:"characterMaskConfig,omitempty"`

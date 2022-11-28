@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobConfigurationTableCopy } from "./jobconfigurationtablecopy";
 import { JobConfigurationExtract } from "./jobconfigurationextract";
 import { JobConfigurationLoad } from "./jobconfigurationload";
 import { JobConfigurationQuery } from "./jobconfigurationquery";
 
 
+
 export class JobConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=copy" })
+  @SpeakeasyMetadata({ data: "json, name=copy" })
   copy?: JobConfigurationTableCopy;
 
-  @Metadata({ data: "json, name=dryRun" })
+  @SpeakeasyMetadata({ data: "json, name=dryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "json, name=extract" })
+  @SpeakeasyMetadata({ data: "json, name=extract" })
   extract?: JobConfigurationExtract;
 
-  @Metadata({ data: "json, name=jobTimeoutMs" })
+  @SpeakeasyMetadata({ data: "json, name=jobTimeoutMs" })
   jobTimeoutMs?: string;
 
-  @Metadata({ data: "json, name=jobType" })
+  @SpeakeasyMetadata({ data: "json, name=jobType" })
   jobType?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=load" })
+  @SpeakeasyMetadata({ data: "json, name=load" })
   load?: JobConfigurationLoad;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: JobConfigurationQuery;
 }

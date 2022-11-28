@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Record } from "./record";
 /**
  * Returned for a successful UpdateRecordsRequest.

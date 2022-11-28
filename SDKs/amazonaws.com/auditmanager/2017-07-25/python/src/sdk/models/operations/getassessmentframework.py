@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetAssessmentFrameworkPathParams:
-    framework_id: str = field(default=None, metadata={'path_param': { 'field_name': 'frameworkId', 'style': 'simple', 'explode': False }})
+    framework_id: str = field(metadata={'path_param': { 'field_name': 'frameworkId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,17 +24,17 @@ class GetAssessmentFrameworkHeaders:
 
 @dataclass
 class GetAssessmentFrameworkRequest:
-    path_params: GetAssessmentFrameworkPathParams = field(default=None)
-    headers: GetAssessmentFrameworkHeaders = field(default=None)
+    headers: GetAssessmentFrameworkHeaders = field()
+    path_params: GetAssessmentFrameworkPathParams = field()
     
 
 @dataclass
 class GetAssessmentFrameworkResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_assessment_framework_response: Optional[shared.GetAssessmentFrameworkResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

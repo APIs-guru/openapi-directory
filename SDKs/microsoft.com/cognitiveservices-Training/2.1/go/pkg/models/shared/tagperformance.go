@@ -1,5 +1,7 @@
 package shared
 
+// TagPerformance
+// Represents performance data for a particular tag in a trained iteration
 type TagPerformance struct {
 	AveragePrecision      *float32 `json:"averagePrecision,omitempty"`
 	ID                    *string  `json:"id,omitempty"`

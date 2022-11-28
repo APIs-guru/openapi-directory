@@ -1,5 +1,7 @@
 package shared
 
+// NetworkUnblockResponseNotFound
+// Not Found
 type NetworkUnblockResponseNotFound struct {
 	Detail   *string `json:"detail,omitempty"`
 	Instance *string `json:"instance,omitempty"`

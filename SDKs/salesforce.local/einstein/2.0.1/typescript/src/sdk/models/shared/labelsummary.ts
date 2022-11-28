@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Label } from "./label";
+
 
 
 // LabelSummary
@@ -8,6 +8,6 @@ import { Label } from "./label";
  * Contains the labels array that contains all the labels for the dataset.
 **/
 export class LabelSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=labels", elemType: shared.Label })
+  @SpeakeasyMetadata({ data: "json, name=labels", elemType: Label })
   labels?: Label[];
 }

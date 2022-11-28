@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArtifactSourceType } from "./artifactsourcetype";
+
 
 
 // ArtifactSource
@@ -8,9 +8,9 @@ import { ArtifactSourceType } from "./artifactsourcetype";
  * A structure describing the source of an artifact.
 **/
 export class ArtifactSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SourceTypes", elemType: shared.ArtifactSourceType })
+  @SpeakeasyMetadata({ data: "json, name=SourceTypes", elemType: ArtifactSourceType })
   sourceTypes?: ArtifactSourceType[];
 
-  @Metadata({ data: "json, name=SourceUri" })
+  @SpeakeasyMetadata({ data: "json, name=SourceUri" })
   sourceUri: string;
 }

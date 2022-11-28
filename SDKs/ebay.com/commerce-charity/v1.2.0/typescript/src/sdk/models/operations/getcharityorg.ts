@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetCharityOrgPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=charity_org_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=charity_org_id" })
   charityOrgId: string;
 }
 
 
 export class GetCharityOrgHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-EBAY-C-MARKETPLACE-ID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-EBAY-C-MARKETPLACE-ID" })
   xEbayCMarketplaceId: string;
 }
 
 
 export class GetCharityOrgSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   apiAuth: shared.SchemeApiAuth;
 }
 
 
 export class GetCharityOrgRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetCharityOrgPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetCharityOrgHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetCharityOrgSecurity;
 }
 
 
 export class GetCharityOrgResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   charityOrg?: shared.CharityOrg;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

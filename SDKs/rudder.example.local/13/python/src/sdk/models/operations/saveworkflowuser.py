@@ -1,18 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass_json
 @dataclass
 class SaveWorkflowUserRequestBody:
-    validated_users: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'validatedUsers' }})
-    
-
-@dataclass
-class SaveWorkflowUserRequest:
-    request: SaveWorkflowUserRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    validated_users: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('validatedUsers') }})
     
 class SaveWorkflowUser200ApplicationJSONActionEnum(str, Enum):
     ADD_USER = "addUser"
@@ -25,14 +25,19 @@ class SaveWorkflowUser200ApplicationJSONResultEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SaveWorkflowUser200ApplicationJSON:
-    action: SaveWorkflowUser200ApplicationJSONActionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    data: shared.ValidatedUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    result: SaveWorkflowUser200ApplicationJSONResultEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'result' }})
+    action: SaveWorkflowUser200ApplicationJSONActionEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    data: shared.ValidatedUser = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('data') }})
+    result: SaveWorkflowUser200ApplicationJSONResultEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('result') }})
+    
+
+@dataclass
+class SaveWorkflowUserRequest:
+    request: SaveWorkflowUserRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SaveWorkflowUserResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     save_workflow_user_200_application_json_object: Optional[SaveWorkflowUser200ApplicationJSON] = field(default=None)
     

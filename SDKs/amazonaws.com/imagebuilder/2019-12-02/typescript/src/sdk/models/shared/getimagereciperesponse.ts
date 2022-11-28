@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageRecipe } from "./imagerecipe";
 
 
+
 export class GetImageRecipeResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageRecipe" })
+  @SpeakeasyMetadata({ data: "json, name=imageRecipe" })
   imageRecipe?: ImageRecipe;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId?: string;
 }

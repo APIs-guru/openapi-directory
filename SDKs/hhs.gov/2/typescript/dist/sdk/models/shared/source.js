@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Source = /** @class */ (function (_super) {
     __extends(Source, _super);
     function Source() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=acronym" }),
+        SpeakeasyMetadata({ data: "json, name=acronym" }),
         __metadata("design:type", String)
     ], Source.prototype, "acronym", void 0);
     __decorate([
-        Metadata({ data: "json, name=contactEmail" }),
+        SpeakeasyMetadata({ data: "json, name=contactEmail" }),
         __metadata("design:type", String)
     ], Source.prototype, "contactEmail", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], Source.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=largeLogoUrl" }),
+        SpeakeasyMetadata({ data: "json, name=largeLogoUrl" }),
         __metadata("design:type", String)
     ], Source.prototype, "largeLogoUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Source.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=smallLogoUrl" }),
+        SpeakeasyMetadata({ data: "json, name=smallLogoUrl" }),
         __metadata("design:type", String)
     ], Source.prototype, "smallLogoUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=websiteUrl" }),
+        SpeakeasyMetadata({ data: "json, name=websiteUrl" }),
         __metadata("design:type", String)
     ], Source.prototype, "websiteUrl", void 0);
     return Source;

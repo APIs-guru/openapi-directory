@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DatabaseRelatedCharts } from "./databaserelatedcharts";
 import { DatabaseRelatedDashboards } from "./databaserelateddashboards";
 
 
+
 export class DatabaseRelatedObjectsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=charts" })
+  @SpeakeasyMetadata({ data: "json, name=charts" })
   charts?: DatabaseRelatedCharts;
 
-  @Metadata({ data: "json, name=dashboards" })
+  @SpeakeasyMetadata({ data: "json, name=dashboards" })
   dashboards?: DatabaseRelatedDashboards;
 }

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class GoogleFirebaseAppcheckV1betaGeneratePlayIntegrityChallengeResponse:
-    challenge: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'challenge' }})
-    ttl: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ttl' }})
+    r"""GoogleFirebaseAppcheckV1betaGeneratePlayIntegrityChallengeResponse
+    Response message for the GeneratePlayIntegrityChallenge method.
+    """
+    
+    challenge: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('challenge') }})
+    ttl: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ttl') }})
     

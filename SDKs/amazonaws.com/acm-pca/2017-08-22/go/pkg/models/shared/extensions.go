@@ -1,5 +1,7 @@
 package shared
 
+// Extensions
+// Contains X.509 extension information for a certificate.
 type Extensions struct {
 	CertificatePolicies     []PolicyInformation `json:"CertificatePolicies,omitempty"`
 	ExtendedKeyUsage        []ExtendedKeyUsage  `json:"ExtendedKeyUsage,omitempty"`

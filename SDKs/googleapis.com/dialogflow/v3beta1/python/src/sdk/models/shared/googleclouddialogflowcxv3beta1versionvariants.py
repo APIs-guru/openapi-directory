@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleclouddialogflowcxv3beta1versionvariantsvariant
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudDialogflowCxV3beta1VersionVariants:
-    variants: Optional[List[googleclouddialogflowcxv3beta1versionvariantsvariant.GoogleCloudDialogflowCxV3beta1VersionVariantsVariant]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'variants' }})
+    r"""GoogleCloudDialogflowCxV3beta1VersionVariants
+    A list of flow version variants.
+    """
+    
+    variants: Optional[List[GoogleCloudDialogflowCxV3beta1VersionVariantsVariant]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('variants') }})
     

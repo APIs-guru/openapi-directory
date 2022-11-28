@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import condition
-from . import logconfig
+from sdk import utils
+from . import *
 
 class RuleActionEnum(str, Enum):
     NO_ACTION = "NO_ACTION"
@@ -16,11 +17,15 @@ class RuleActionEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Rule:
-    action: Optional[RuleActionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    conditions: Optional[List[condition.Condition]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conditions' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    in_: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'in' }})
-    log_config: Optional[List[logconfig.LogConfig]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logConfig' }})
-    not_in: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notIn' }})
-    permissions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
+    r"""Rule
+    A rule to be applied in a Policy.
+    """
+    
+    action: Optional[RuleActionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    conditions: Optional[List[Condition]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('conditions') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    in_: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('in') }})
+    log_config: Optional[List[LogConfig]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('logConfig') }})
+    not_in: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('notIn') }})
+    permissions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('permissions') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// InstanceSpec
+// InstanceSpec is a description of an instance.
 type InstanceSpec struct {
 	ActiveDeadlineSeconds         *string     `json:"activeDeadlineSeconds,omitempty"`
 	Containers                    []Container `json:"containers,omitempty"`

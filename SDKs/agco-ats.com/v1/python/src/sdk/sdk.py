@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,26 +14,50 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def activities_delete_activity(self, request: operations.ActivitiesDeleteActivityRequest) -> operations.ActivitiesDeleteActivityResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Mark the delete flag for the Activity
+        Deletes an Activity. When successful, the response is empty.  If unsuccessful, an appropriate
+                    ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/activities/{activityID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -46,15 +73,19 @@ class SDK:
 
     
     def activities_get_activities(self, request: operations.ActivitiesGetActivitiesRequest) -> operations.ActivitiesGetActivitiesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Activities
+        Gets a collection of Activities. When successful, the response is a PagedResponse of Activities.  
+                    If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/activities"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -79,15 +110,19 @@ class SDK:
 
     
     def activities_get_activity(self, request: operations.ActivitiesGetActivityRequest) -> operations.ActivitiesGetActivityResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get an Activity by ID
+        Gets an Activity by ID. When successful, the response is the requested Activity.  If unsuccessful,
+                    an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/activities/{activityID}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -119,14 +154,103 @@ class SDK:
         return res
 
     
+    def activities_post_activity(self, request: operations.ActivitiesPostActivityRequest) -> operations.ActivitiesPostActivityResponse:
+        r"""Create an Activity
+        Creates an Activity.  The body of the POST is the Activity to create.  The ActivityID will be assigned
+                    on creation of the Activity.  When successful, the response is the ActivityID.  If unsuccessful, an 
+                    appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
+        url = base_url.removesuffix("/") + "/api/v2/activities"
+        
+        headers = {}
+        req_content_type, data, form = utils.serialize_request_body(request)
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers["content-type"] = req_content_type
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self._client
+        
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ActivitiesPostActivityResponse(status_code=r.status_code, content_type=content_type)
+        
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.activities_post_activity_200_application_json_int32_integer = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.activities_post_activity_200_text_json_int32_integer = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    def activities_put_activity(self, request: operations.ActivitiesPutActivityRequest) -> operations.ActivitiesPutActivityResponse:
+        r"""Update an Activity
+        Updates an Activity.  The body of the PUT is the updated Activity.  When successful, the response is empty.
+                    If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
+        url = utils.generate_url(base_url, "/api/v2/activities/{activityID}", request.path_params)
+        
+        headers = {}
+        req_content_type, data, form = utils.serialize_request_body(request)
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers["content-type"] = req_content_type
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self._client
+        
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.ActivitiesPutActivityResponse(status_code=r.status_code, content_type=content_type)
+        
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
     def activity_runs_get_activity_run(self, request: operations.ActivityRunsGetActivityRunRequest) -> operations.ActivityRunsGetActivityRunResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get an ActivityRun by ID
+        Gets an ActivityRun by ID. When successful, the response is the requested ActivityRun.  If unsuccessful,
+                    an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/activityRuns/{activityRunID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -159,13 +283,18 @@ class SDK:
 
     
     def activity_runs_get_activity_run_status(self, request: operations.ActivityRunsGetActivityRunStatusRequest) -> operations.ActivityRunsGetActivityRunStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the ActivityRunStatus of an ActivityRun
+        Gets the ActivityRunStatus of an ActivityRun.  When successful, the response is the requested ActivityRunStatus.
+                    If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/activityRuns/{activityRunID}/status", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -198,15 +327,19 @@ class SDK:
 
     
     def activity_runs_get_activity_runs(self, request: operations.ActivityRunsGetActivityRunsRequest) -> operations.ActivityRunsGetActivityRunsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get ActivityRuns
+        Gets a collection of ActivityRuns. When successful, the response is a PagedResponse of ActivityRuns.  
+                    If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/activityRuns"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -230,23 +363,58 @@ class SDK:
         return res
 
     
-    def activity_runs_put_activity_run_status(self, request: operations.ActivityRunsPutActivityRunStatusRequest) -> operations.ActivityRunsPutActivityRunStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/api/v2/activityRuns/{activityRunID}/status", request.path_params)
-
+    def activity_runs_put_activity_run(self, request: operations.ActivityRunsPutActivityRunRequest) -> operations.ActivityRunsPutActivityRunResponse:
+        r"""Update an ActivityRun
+        Updates the ActivityRunStatus of an ActivityRun.  The body of the PUT is the updated ActivityRunStatus.
+                    When successful, the response is empty.  If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
+        url = utils.generate_url(base_url, "/api/v2/activityRuns/{activityRunID}", request.path_params)
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
+        
+        client = self._client
+        
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
 
-        client = self.client
+        res = operations.ActivityRunsPutActivityRunResponse(status_code=r.status_code, content_type=content_type)
+        
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
 
+        return res
+
+    
+    def activity_runs_put_activity_run_status(self, request: operations.ActivityRunsPutActivityRunStatusRequest) -> operations.ActivityRunsPutActivityRunStatusResponse:
+        r"""Update the ActivityRunStatus of an ActivityRun
+        Updates the ActivityRunStatus of an ActivityRun.  The body of the PUT is the updated ActivityRunStatus.
+                    When successful, the response is empty.  If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
+        url = utils.generate_url(base_url, "/api/v2/activityRuns/{activityRunID}/status", request.path_params)
+        
+        headers = {}
+        req_content_type, data, form = utils.serialize_request_body(request)
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers["content-type"] = req_content_type
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -262,13 +430,17 @@ class SDK:
 
     
     def aftermarket_services_get_certs(self) -> operations.AftermarketServicesGetCertsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""No Documentation Found.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/AftermarketServices/Certificates"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -301,13 +473,17 @@ class SDK:
 
     
     def aftermarket_services_get_connection_status(self) -> operations.AftermarketServicesGetConnectionStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Check whether there is connectivity to AGCO Power Web Services
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/AftermarketServices/Hello"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -340,15 +516,18 @@ class SDK:
 
     
     def aftermarket_services_get_engine_iqa_codes(self, request: operations.AftermarketServicesGetEngineIqaCodesRequest) -> operations.AftermarketServicesGetEngineIqaCodesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get injector codes given engine.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/AftermarketServices/Engines/{serialNumber}/IQACodes", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -381,15 +560,18 @@ class SDK:
 
     
     def aftermarket_services_get_production_data(self, request: operations.AftermarketServicesGetProductionDataRequest) -> operations.AftermarketServicesGetProductionDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get production calibration data for given engine.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/AftermarketServices/Engines/{serialNumber}/ProductionData", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -422,15 +604,18 @@ class SDK:
 
     
     def aftermarket_services_get_user_status(self, request: operations.AftermarketServicesGetUserStatusRequest) -> operations.AftermarketServicesGetUserStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve the status of an EDT Kit Registration with AGCO Power Web Services
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/AftermarketServices/UserStatuses"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -463,24 +648,24 @@ class SDK:
 
     
     def aftermarket_services_put_ecu(self, request: operations.AftermarketServicesPutEcuRequest) -> operations.AftermarketServicesPutEcuResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Activate or Deactivate an ECU, or Report an ECU as Damaged.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/AftermarketServices/ECUs/{serialNumber}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -513,22 +698,23 @@ class SDK:
 
     
     def aftermarket_services_update_user_status(self, request: operations.AftermarketServicesUpdateUserStatusRequest) -> operations.AftermarketServicesUpdateUserStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update the status of an EDT Kit Registration with AGCO Power Web Services
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/AftermarketServices/UserStatuses"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -561,13 +747,18 @@ class SDK:
 
     
     def agents_delete_agent(self, request: operations.AgentsDeleteAgentRequest) -> operations.AgentsDeleteAgentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an Agent
+        Deletes an Agent. When successful, the response is empty.  If unsuccessful, an appropriate
+                    ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/agents/{agentID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -583,13 +774,18 @@ class SDK:
 
     
     def agents_get_agent_activity_run(self, request: operations.AgentsGetAgentActivityRunRequest) -> operations.AgentsGetAgentActivityRunResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get an Agent's ActivityRun
+        Gets the activity run assigned to an agent.  When successful, the response is the ActivityRun
+                    assigned to the Agent.  If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/agents/{agentID}/ActivityRun", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -622,13 +818,18 @@ class SDK:
 
     
     def agents_get_agent_async(self, request: operations.AgentsGetAgentAsyncRequest) -> operations.AgentsGetAgentAsyncResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Agent
+        Gets an Agent by ID. When successful, the response is the requested Agent.  If unsuccessful,
+                    an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/agents/{agentID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -661,15 +862,19 @@ class SDK:
 
     
     def agents_get_agents(self, request: operations.AgentsGetAgentsRequest) -> operations.AgentsGetAgentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Agents
+        Gets a collection of Agents. When successful, the response is a PagedResponse of Agents.  
+                    If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/agents"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -694,13 +899,18 @@ class SDK:
 
     
     def agents_get_current_agent_activity_run(self) -> operations.AgentsGetCurrentAgentActivityRunResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the ActivityRun of Agent associated with the current user
+        Gets the activity run assigned to an agent.  When successful, the response is the ActivityRun
+                    assigned to the Agent.  If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/agents/Current/ActivityRun"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -733,13 +943,18 @@ class SDK:
 
     
     def agents_get_current_agent_async(self) -> operations.AgentsGetCurrentAgentAsyncResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Agent associated with the current user
+        Gets the Agent associated with the current user. When successful, the response is the requested Agent.  If unsuccessful,
+                    an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/agents/Current"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -771,23 +986,141 @@ class SDK:
         return res
 
     
-    def agents_put_agent_status(self, request: operations.AgentsPutAgentStatusRequest) -> operations.AgentsPutAgentStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/api/v2/agents/{agentID}/Status", request.path_params)
-
+    def agents_post_agent(self, request: operations.AgentsPostAgentRequest) -> operations.AgentsPostAgentResponse:
+        r"""Create an Agent
+        Creates an Agent.  The body of the POST is the Agent to create.  The AgentID will be assigned
+                    on creation of the Agent.  When successful, the response is the AgentID.  If unsuccessful, an
+                    appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
+        url = base_url.removesuffix("/") + "/api/v2/agents"
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
+        
+        client = self._client
+        
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
 
-        client = self.client
+        res = operations.AgentsPostAgentResponse(status_code=r.status_code, content_type=content_type)
+        
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.agents_post_agent_200_application_json_int32_integer = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.agents_post_agent_200_text_json_int32_integer = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
 
+        return res
+
+    
+    def agents_put_agent(self, request: operations.AgentsPutAgentRequest) -> operations.AgentsPutAgentResponse:
+        r"""Update an Agent
+        Updates an Agent.  The body of the PUT is the updated Agent.  When successful, the response is empty.
+                    If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
+        url = utils.generate_url(base_url, "/api/v2/agents/{agentID}", request.path_params)
+        
+        headers = {}
+        req_content_type, data, form = utils.serialize_request_body(request)
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers["content-type"] = req_content_type
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self._client
+        
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AgentsPutAgentResponse(status_code=r.status_code, content_type=content_type)
+        
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    def agents_put_agent_activity_run(self, request: operations.AgentsPutAgentActivityRunRequest) -> operations.AgentsPutAgentActivityRunResponse:
+        r"""Update the ActivityRun assigned to the Agent.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
+        url = utils.generate_url(base_url, "/api/v2/agents/{agentID}/ActivityRun", request.path_params)
+        
+        headers = {}
+        req_content_type, data, form = utils.serialize_request_body(request)
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers["content-type"] = req_content_type
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self._client
+        
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.AgentsPutAgentActivityRunResponse(status_code=r.status_code, content_type=content_type)
+        
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    def agents_put_agent_status(self, request: operations.AgentsPutAgentStatusRequest) -> operations.AgentsPutAgentStatusResponse:
+        r"""Update an Agent
+        Updates the status of an Agent.The body of the PUT is the updated Agent status.  When successful,
+                    the response is empty.If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
+        url = utils.generate_url(base_url, "/api/v2/agents/{agentID}/Status", request.path_params)
+        
+        headers = {}
+        req_content_type, data, form = utils.serialize_request_body(request)
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers["content-type"] = req_content_type
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -803,22 +1136,23 @@ class SDK:
 
     
     def authentication_default(self, request: operations.AuthenticationDefaultRequest) -> operations.AuthenticationDefaultResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Authenticate a user.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Authentication"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -840,13 +1174,17 @@ class SDK:
 
     
     def authentication_is_alive(self) -> operations.AuthenticationIsAliveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Acknowledges the connection to the API
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Authentication/IsAlive"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -859,22 +1197,23 @@ class SDK:
 
     
     def authentication_put_manage_tokens(self, request: operations.AuthenticationPutManageTokensRequest) -> operations.AuthenticationPutManageTokensResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Manage API tokens.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/AuthenticatedUsers/{UserID}/Tokens", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -887,22 +1226,23 @@ class SDK:
 
     
     def authentication_request_password_reset(self, request: operations.AuthenticationRequestPasswordResetRequest) -> operations.AuthenticationRequestPasswordResetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Request a password reset.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Authentication/RequestPasswordReset"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -915,22 +1255,23 @@ class SDK:
 
     
     def authentication_reset_pasword(self, request: operations.AuthenticationResetPaswordRequest) -> operations.AuthenticationResetPaswordResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Reset a password
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Authentication/ResetPasword"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -943,13 +1284,17 @@ class SDK:
 
     
     def authorization_categories_add_user(self, request: operations.AuthorizationCategoriesAddUserRequest) -> operations.AuthorizationCategoriesAddUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a category that a user can see.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/AuthorizationCategories/{id}/Users/{userID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -965,13 +1310,17 @@ class SDK:
 
     
     def authorization_categories_delete(self, request: operations.AuthorizationCategoriesDeleteRequest) -> operations.AuthorizationCategoriesDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove an authorization category.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/AuthorizationCategories/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -987,15 +1336,18 @@ class SDK:
 
     
     def authorization_categories_get(self, request: operations.AuthorizationCategoriesGetRequest) -> operations.AuthorizationCategoriesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get authorization categories.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/AuthorizationCategories"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1028,15 +1380,18 @@ class SDK:
 
     
     def authorization_categories_get_users(self, request: operations.AuthorizationCategoriesGetUsersRequest) -> operations.AuthorizationCategoriesGetUsersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a report of access that users have to Authorization Categories.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/AuthorizationCategories/Users"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1069,22 +1424,23 @@ class SDK:
 
     
     def authorization_categories_post(self, request: operations.AuthorizationCategoriesPostRequest) -> operations.AuthorizationCategoriesPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add an authorization category.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/AuthorizationCategories"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1115,22 +1471,23 @@ class SDK:
 
     
     def authorization_categories_put(self, request: operations.AuthorizationCategoriesPutRequest) -> operations.AuthorizationCategoriesPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update an authorization category.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/AuthorizationCategories/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1146,13 +1503,17 @@ class SDK:
 
     
     def authorization_categories_remove_user(self, request: operations.AuthorizationCategoriesRemoveUserRequest) -> operations.AuthorizationCategoriesRemoveUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a category a user could see.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/AuthorizationCategories/{id}/Users/{userID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1168,13 +1529,17 @@ class SDK:
 
     
     def authorization_code_definitions_add_category_to_definition(self, request: operations.AuthorizationCodeDefinitionsAddCategoryToDefinitionRequest) -> operations.AuthorizationCodeDefinitionsAddCategoryToDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a category to an authorizationCodeDefintion.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/AuthorizationCodeDefinitions/{ID}/Categories/{categoryID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1190,13 +1555,17 @@ class SDK:
 
     
     def authorization_code_definitions_delete_authorization_code_definition(self, request: operations.AuthorizationCodeDefinitionsDeleteAuthorizationCodeDefinitionRequest) -> operations.AuthorizationCodeDefinitionsDeleteAuthorizationCodeDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disable an authorization code definition
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/AuthorizationCodeDefinitions/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1212,15 +1581,18 @@ class SDK:
 
     
     def authorization_code_definitions_get_authorization_code_definition(self, request: operations.AuthorizationCodeDefinitionsGetAuthorizationCodeDefinitionRequest) -> operations.AuthorizationCodeDefinitionsGetAuthorizationCodeDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get authorization code definitions.
+        Additional searches: validationFields[Name]=true and dataFields[Name]=true. These can be used to search for authorization code definitions that have the specified data or validation fields.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/AuthorizationCodeDefinitions"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1253,13 +1625,17 @@ class SDK:
 
     
     def authorization_code_definitions_remove_category_from_definition(self, request: operations.AuthorizationCodeDefinitionsRemoveCategoryFromDefinitionRequest) -> operations.AuthorizationCodeDefinitionsRemoveCategoryFromDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes the category from the authorization code definition.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/AuthorizationCodeDefinitions/{ID}/Categories/{categoryID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1275,13 +1651,17 @@ class SDK:
 
     
     def authorization_codes_delete_authorization_code(self, request: operations.AuthorizationCodesDeleteAuthorizationCodeRequest) -> operations.AuthorizationCodesDeleteAuthorizationCodeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Hide an authorization code.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/AuthorizationCodes/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1297,13 +1677,17 @@ class SDK:
 
     
     def authorization_codes_get_authorization_code(self, request: operations.AuthorizationCodesGetAuthorizationCodeRequest) -> operations.AuthorizationCodesGetAuthorizationCodeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get an authorization code by its ID.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/AuthorizationCodes/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1336,15 +1720,18 @@ class SDK:
 
     
     def authorization_codes_get_authorization_codes(self, request: operations.AuthorizationCodesGetAuthorizationCodesRequest) -> operations.AuthorizationCodesGetAuthorizationCodesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get authorization codes.
+        Additional searches: validationParameters[Name]=Value and dataParameters[Name]=Value. These can be used to search for authorization codes that have been generated using specified values for data or validation parameters.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/AuthorizationCodes"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1377,13 +1764,17 @@ class SDK:
 
     
     def authorization_codes_get_contact_information(self, request: operations.AuthorizationCodesGetContactInformationRequest) -> operations.AuthorizationCodesGetContactInformationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get contact information for an authorization code.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/AuthorizationCodes/{id}/ContactInformation", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1416,13 +1807,17 @@ class SDK:
 
     
     def authorization_codes_validate_authorization_code(self, request: operations.AuthorizationCodesValidateAuthorizationCodeRequest) -> operations.AuthorizationCodesValidateAuthorizationCodeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""No Documentation Found.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/AuthorizationCodes/{id}/Validate", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1455,15 +1850,18 @@ class SDK:
 
     
     def authorization_contact_information_get(self, request: operations.AuthorizationContactInformationGetRequest) -> operations.AuthorizationContactInformationGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get contact information for authorization codes.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/AuthorizationContactInformation"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1496,22 +1894,23 @@ class SDK:
 
     
     def authorization_contact_information_post(self, request: operations.AuthorizationContactInformationPostRequest) -> operations.AuthorizationContactInformationPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add contact information for authorization code.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/AuthorizationContactInformation"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1544,13 +1943,17 @@ class SDK:
 
     
     def brands_brands(self) -> operations.BrandsBrandsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of Brands.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Brands"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1583,13 +1986,17 @@ class SDK:
 
     
     def bundles_delete_bundle(self, request: operations.BundlesDeleteBundleRequest) -> operations.BundlesDeleteBundleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a Bundle.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Bundles/{ID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1605,13 +2012,17 @@ class SDK:
 
     
     def bundles_get_bundle(self, request: operations.BundlesGetBundleRequest) -> operations.BundlesGetBundleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a specific Bundle by ID.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Bundles/{ID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1644,15 +2055,18 @@ class SDK:
 
     
     def bundles_get_bundles(self, request: operations.BundlesGetBundlesRequest) -> operations.BundlesGetBundlesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the list of bundles.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Bundles"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1677,22 +2091,23 @@ class SDK:
 
     
     def bundles_post_bundle(self, request: operations.BundlesPostBundleRequest) -> operations.BundlesPostBundleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a Bundle to the Update System.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Bundles"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1723,22 +2138,23 @@ class SDK:
 
     
     def bundles_put_bundle(self, request: operations.BundlesPutBundleRequest) -> operations.BundlesPutBundleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Modify a Bundle in the Update System.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Bundles/{ID}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1754,15 +2170,18 @@ class SDK:
 
     
     def clients_get(self, request: operations.ClientsGetRequest) -> operations.ClientsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a List of Clients in the Update System.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Clients"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1787,15 +2206,18 @@ class SDK:
 
     
     def clients_get_available_subscriptions(self, request: operations.ClientsGetAvailableSubscriptionsRequest) -> operations.ClientsGetAvailableSubscriptionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a Client's Available Update Group Subscriptions
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Clients/{ID}/AvailableUpdateGroupSubscriptions", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1820,15 +2242,18 @@ class SDK:
 
     
     def clients_get_subscriptions(self, request: operations.ClientsGetSubscriptionsRequest) -> operations.ClientsGetSubscriptionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a Client's Current Update Group Subscriptions
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Clients/{ID}/UpdateGroupSubscriptions", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1853,22 +2278,23 @@ class SDK:
 
     
     def clients_put(self, request: operations.ClientsPutRequest) -> operations.ClientsPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a Client.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Clients/{ID}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1884,13 +2310,18 @@ class SDK:
 
     
     def content_definitions_delete_content_definition(self, request: operations.ContentDefinitionsDeleteContentDefinitionRequest) -> operations.ContentDefinitionsDeleteContentDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a ContentDefinition
+        Deletes an ContentDefinition. When successful, the response is empty.  If unsuccessful, an appropriate
+                    ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/ContentDefinitions/{contentDefinitionID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1906,13 +2337,17 @@ class SDK:
 
     
     def content_definitions_delete_content_definition_attribute(self, request: operations.ContentDefinitionsDeleteContentDefinitionAttributeRequest) -> operations.ContentDefinitionsDeleteContentDefinitionAttributeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove an Attribute from a ContentDefinition
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/ContentDefinitionAttributes/{contentDefinitionAttributeID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1928,15 +2363,19 @@ class SDK:
 
     
     def content_definitions_get_content_definition(self, request: operations.ContentDefinitionsGetContentDefinitionRequest) -> operations.ContentDefinitionsGetContentDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a ContentDefinition by ID
+        Gets a ContentDefinition by ID. When successful, the response is the requested ContentDefinition.
+                    If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/ContentDefinitions/{contentDefinitionID}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1969,15 +2408,18 @@ class SDK:
 
     
     def content_definitions_get_content_definition_attributes(self, request: operations.ContentDefinitionsGetContentDefinitionAttributesRequest) -> operations.ContentDefinitionsGetContentDefinitionAttributesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Attributes for a ContentDefinition
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/ContentDefinitions/{contentDefinitionID}/Attributes", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2002,15 +2444,19 @@ class SDK:
 
     
     def content_definitions_get_content_definitions(self, request: operations.ContentDefinitionsGetContentDefinitionsRequest) -> operations.ContentDefinitionsGetContentDefinitionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get ContentDefinitions
+        Gets a collection of ContentDefinitions. When successful, the response is a PagedResponse of ContentDefinitions.
+                    If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/ContentDefinitions"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2035,22 +2481,23 @@ class SDK:
 
     
     def content_definitions_post_content_definition_attribute(self, request: operations.ContentDefinitionsPostContentDefinitionAttributeRequest) -> operations.ContentDefinitionsPostContentDefinitionAttributeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add an Attribute to a ContentDefinition
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/ContentDefinitions/{contentDefinitionID}/Attributes", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2083,22 +2530,23 @@ class SDK:
 
     
     def content_definitions_put_content_definition_attribute_async(self, request: operations.ContentDefinitionsPutContentDefinitionAttributeAsyncRequest) -> operations.ContentDefinitionsPutContentDefinitionAttributeAsyncResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update an Attribute for a ContentDefinition
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/ContentDefinitionAttributes/{contentDefinitionAttributeID}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2114,13 +2562,18 @@ class SDK:
 
     
     def content_release_delete_content_release_versionn(self, request: operations.ContentReleaseDeleteContentReleaseVersionnRequest) -> operations.ContentReleaseDeleteContentReleaseVersionnResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a ContentReleaseVersion
+        Deletes an ContentReleaseVersion. When successful, the response is empty.  If unsuccessful, an appropriate
+                    ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/ContentReleases/{ContentReleaseId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2136,15 +2589,19 @@ class SDK:
 
     
     def content_release_get_content_release_version(self, request: operations.ContentReleaseGetContentReleaseVersionRequest) -> operations.ContentReleaseGetContentReleaseVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get ContentReleaseVersion
+        Gets a collection of ContentReleaseVersion. When successful, the response is a PagedResponse of ContentReleaseVersion.
+                    If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/ContentReleases"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2169,22 +2626,25 @@ class SDK:
 
     
     def content_release_post_content_release(self, request: operations.ContentReleasePostContentReleaseRequest) -> operations.ContentReleasePostContentReleaseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a ContentReleaseVersion
+        Creates a ContentReleaseVersion.  The body of the POST is the ContentReleaseVersion to create.
+                    The ContentReleaseId will be assigned on creation of the Job.  When successful, the response
+                    is the contentReleaseId.  If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/ContentReleases"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2217,22 +2677,24 @@ class SDK:
 
     
     def content_release_put_content_definition(self, request: operations.ContentReleasePutContentDefinitionRequest) -> operations.ContentReleasePutContentDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a ContentReleaseVersion
+        Updates a ContentReleaseVersion.  The body of the PUT is the updated ContentReleaseVersion.  
+                    When successful, the response is empty.  If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/ContentReleases/{ContentReleaseId}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2248,13 +2710,17 @@ class SDK:
 
     
     def content_submission_types_delete_content_submission_type(self, request: operations.ContentSubmissionTypesDeleteContentSubmissionTypeRequest) -> operations.ContentSubmissionTypesDeleteContentSubmissionTypeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove a Content Submission Type
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/ContentSubmissionTypes/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2270,13 +2736,17 @@ class SDK:
 
     
     def content_submission_types_get_content_submission_type(self, request: operations.ContentSubmissionTypesGetContentSubmissionTypeRequest) -> operations.ContentSubmissionTypesGetContentSubmissionTypeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves a Content Submission Type by its ID.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/ContentSubmissionTypes/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2309,15 +2779,18 @@ class SDK:
 
     
     def content_submission_types_get_content_submission_types(self, request: operations.ContentSubmissionTypesGetContentSubmissionTypesRequest) -> operations.ContentSubmissionTypesGetContentSubmissionTypesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns available Content Submission Types.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/ContentSubmissionTypes"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2350,22 +2823,23 @@ class SDK:
 
     
     def content_submission_types_post_content_submission_type(self, request: operations.ContentSubmissionTypesPostContentSubmissionTypeRequest) -> operations.ContentSubmissionTypesPostContentSubmissionTypeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a Content Submission Type
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/ContentSubmissionTypes"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2398,22 +2872,23 @@ class SDK:
 
     
     def content_submission_types_put_content_submission_type(self, request: operations.ContentSubmissionTypesPutContentSubmissionTypeRequest) -> operations.ContentSubmissionTypesPutContentSubmissionTypeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a Content Submission Type
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/ContentSubmissionTypes/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2429,13 +2904,18 @@ class SDK:
 
     
     def content_submissions_delete_content_submission(self, request: operations.ContentSubmissionsDeleteContentSubmissionRequest) -> operations.ContentSubmissionsDeleteContentSubmissionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a ContentSubmission
+        Deletes an ContentSubmission. When successful, the response is empty.  If unsuccessful, an appropriate
+                    ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/ContentSubmissions/{contentSubmissionID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2451,13 +2931,17 @@ class SDK:
 
     
     def content_submissions_delete_content_submission_attribute(self, request: operations.ContentSubmissionsDeleteContentSubmissionAttributeRequest) -> operations.ContentSubmissionsDeleteContentSubmissionAttributeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove an Attribute from a ContentSubmission
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/ContentSubmissionAttributes/{contentSubmissionAttributeID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2473,15 +2957,19 @@ class SDK:
 
     
     def content_submissions_get_content_submission(self, request: operations.ContentSubmissionsGetContentSubmissionRequest) -> operations.ContentSubmissionsGetContentSubmissionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a ContentSubmission by ID
+        Gets a ContentSubmission by ID. When successful, the response is the requested ContentSubmission.
+                    If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/ContentSubmissions/{contentSubmissionID}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2514,15 +3002,18 @@ class SDK:
 
     
     def content_submissions_get_content_submission_attributes(self, request: operations.ContentSubmissionsGetContentSubmissionAttributesRequest) -> operations.ContentSubmissionsGetContentSubmissionAttributesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Attributes for a ContentSubmission
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/ContentSubmissions/{contentSubmissionID}/Attributes", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2547,15 +3038,19 @@ class SDK:
 
     
     def content_submissions_get_content_submissions(self, request: operations.ContentSubmissionsGetContentSubmissionsRequest) -> operations.ContentSubmissionsGetContentSubmissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get ContentSubmissions
+        Gets a collection of ContentSubmissions. When successful, the response is a PagedResponse of ContentSubmissions. Additional searches: attributes[Name]=Value. This can be used to search for submissions that have the specified values for attributes. Beginning and ending wildcard (*) supported for value.
+                    If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/ContentSubmissions"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2580,22 +3075,23 @@ class SDK:
 
     
     def content_submissions_post_content_submission_attribute(self, request: operations.ContentSubmissionsPostContentSubmissionAttributeRequest) -> operations.ContentSubmissionsPostContentSubmissionAttributeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add an Attribute to a ContentSubmission
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/ContentSubmissions/{contentSubmissionID}/Attributes", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2628,22 +3124,23 @@ class SDK:
 
     
     def content_submissions_put_content_submission_attribute_async(self, request: operations.ContentSubmissionsPutContentSubmissionAttributeAsyncRequest) -> operations.ContentSubmissionsPutContentSubmissionAttributeAsyncResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update an Attribute for a ContentSubmission
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/ContentSubmissionAttributes/{contentSubmissionAttributeID}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2659,15 +3156,18 @@ class SDK:
 
     
     def dealer_by_country_get_countries(self, request: operations.DealerByCountryGetCountriesRequest) -> operations.DealerByCountryGetCountriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a total count of dealers per country
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/DealerByCountry"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2692,13 +3192,17 @@ class SDK:
 
     
     def dealers_get_dealerby_dealer_code(self, request: operations.DealersGetDealerbyDealerCodeRequest) -> operations.DealersGetDealerbyDealerCodeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lookup a dealer using a dealer code.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Dealers/{DealerCode}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2731,15 +3235,18 @@ class SDK:
 
     
     def dealers_get_dealers(self, request: operations.DealersGetDealersRequest) -> operations.DealersGetDealersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of dealers.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Dealers"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2764,13 +3271,17 @@ class SDK:
 
     
     def files_delete_file(self, request: operations.FilesDeleteFileRequest) -> operations.FilesDeleteFileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Mark a file as 'Removed'. Disables download of the file and hides metadata from GET all method
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Files/{ID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2786,13 +3297,17 @@ class SDK:
 
     
     def files_get_file(self, request: operations.FilesGetFileRequest) -> operations.FilesGetFileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a file's metadata.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Files/{ID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2825,13 +3340,17 @@ class SDK:
 
     
     def files_get_file_contents(self, request: operations.FilesGetFileContentsRequest) -> operations.FilesGetFileContentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Download the contents of a file. The current State of the File should be 'Available'.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Files/{ID}/FileContents", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2864,15 +3383,18 @@ class SDK:
 
     
     def files_get_files(self, request: operations.FilesGetFilesRequest) -> operations.FilesGetFilesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a paged response of file metadata.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Files"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2905,22 +3427,23 @@ class SDK:
 
     
     def files_post_file(self, request: operations.FilesPostFileRequest) -> operations.FilesPostFileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create the metadata for a file before uploading. The State of the File should be 'Created'.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Files"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2951,22 +3474,26 @@ class SDK:
 
     
     def files_put_file(self, request: operations.FilesPutFileRequest) -> operations.FilesPutFileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update the metadata for a file. Size may not be modified by the client.
+        Update the metadata for a file. Size may not be modified by the client. 
+                        Set status to 'Available' to publish a file. The file must be uploaded.
+                        Set status to 'Created' to reset a file's contents and re-upload. 
+                        A file may only be 'Removed' by the DELETE method.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Files/{ID}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2982,13 +3509,17 @@ class SDK:
 
     
     def files_put_file_contents(self, request: operations.FilesPutFileContentsRequest) -> operations.FilesPutFileContentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Upload the contents of a file. The current State of the File should be 'Created'.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Files/{ID}/FileContents", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3021,13 +3552,17 @@ class SDK:
 
     
     def get_api_v2_authorization_code_definitions_id_(self, request: operations.GetAPIV2AuthorizationCodeDefinitionsIDRequest) -> operations.GetAPIV2AuthorizationCodeDefinitionsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get an authorization code definition by its ID
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/AuthorizationCodeDefinitions/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3060,13 +3595,17 @@ class SDK:
 
     
     def get_api_v2_clients_id_(self, request: operations.GetAPIV2ClientsIDRequest) -> operations.GetAPIV2ClientsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a Client in the Update System.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Clients/{ID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3099,13 +3638,18 @@ class SDK:
 
     
     def get_api_v2_content_releases_content_release_id_(self, request: operations.GetAPIV2ContentReleasesContentReleaseIDRequest) -> operations.GetAPIV2ContentReleasesContentReleaseIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a Content Release Version by ID
+        Gets a ContentReleaseVersion by ID. When successful, the response is the requested ContentReleaseVersion.
+                    If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/ContentReleases/{ContentReleaseId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3138,13 +3682,17 @@ class SDK:
 
     
     def get_api_v2_licenses_id_(self, request: operations.GetAPIV2LicensesIDRequest) -> operations.GetAPIV2LicensesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a license.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Licenses/{ID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3177,13 +3725,17 @@ class SDK:
 
     
     def get_api_v2_package_types_id_(self, request: operations.GetAPIV2PackageTypesIDRequest) -> operations.GetAPIV2PackageTypesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a specific Package Type.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/PackageTypes/{ID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3216,13 +3768,17 @@ class SDK:
 
     
     def get_api_v2_update_groups_id_(self, request: operations.GetAPIV2UpdateGroupsIDRequest) -> operations.GetAPIV2UpdateGroupsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a specific Update Group by ID.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/UpdateGroups/{ID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3255,15 +3811,18 @@ class SDK:
 
     
     def get_api_v2_users_current_permissions(self, request: operations.GetAPIV2UsersCurrentPermissionsRequest) -> operations.GetAPIV2UsersCurrentPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a user's permissions
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Users/Current/Permissions"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3288,13 +3847,17 @@ class SDK:
 
     
     def get_api_v2_users_id_(self, request: operations.GetAPIV2UsersIDRequest) -> operations.GetAPIV2UsersIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a specific user
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Users/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3316,15 +3879,18 @@ class SDK:
 
     
     def get_api_v2_vouchers_voucher_code_(self, request: operations.GetAPIV2VouchersVoucherCodeRequest) -> operations.GetAPIV2VouchersVoucherCodeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a voucher
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Vouchers/{VoucherCode}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3346,13 +3912,17 @@ class SDK:
 
     
     def global_image_categories_get_file(self, request: operations.GlobalImageCategoriesGetFileRequest) -> operations.GlobalImageCategoriesGetFileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a file's metadata.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/GlobalImageCategories/{ID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3385,15 +3955,18 @@ class SDK:
 
     
     def global_image_categories_get_files(self, request: operations.GlobalImageCategoriesGetFilesRequest) -> operations.GlobalImageCategoriesGetFilesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a paged response of file metadata.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/GlobalImageCategories"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3426,22 +3999,23 @@ class SDK:
 
     
     def global_image_categories_post_file(self, request: operations.GlobalImageCategoriesPostFileRequest) -> operations.GlobalImageCategoriesPostFileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create the metadata for a file before uploading. The State should be 'Created'.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/GlobalImageCategories"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3472,13 +4046,17 @@ class SDK:
 
     
     def global_images_delete_file(self, request: operations.GlobalImagesDeleteFileRequest) -> operations.GlobalImagesDeleteFileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Mark a file as 'Removed'. Disables download of the image and hides metadata from GET all method
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/GlobalImages/{ID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3494,13 +4072,17 @@ class SDK:
 
     
     def global_images_get_global_image(self, request: operations.GlobalImagesGetGlobalImageRequest) -> operations.GlobalImagesGetGlobalImageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a GlobalImage's metadata.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/GlobalImages/{ID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3533,15 +4115,18 @@ class SDK:
 
     
     def global_images_get_global_image_contents(self, request: operations.GlobalImagesGetGlobalImageContentsRequest) -> operations.GlobalImagesGetGlobalImageContentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Download the contents of a GlobalImage. The current State of the GlobalImage should be 'Available'.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/GlobalImages/{ID}/ImageContents", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3574,15 +4159,18 @@ class SDK:
 
     
     def global_images_get_global_images(self, request: operations.GlobalImagesGetGlobalImagesRequest) -> operations.GlobalImagesGetGlobalImagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a paged response of GlobalImage.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/GlobalImages"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3615,15 +4203,19 @@ class SDK:
 
     
     def global_images_put_global_image_contents(self, request: operations.GlobalImagesPutGlobalImageContentsRequest) -> operations.GlobalImagesPutGlobalImageContentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Upload the contents of a GlobalImage. The current State of the File for the GlobalImage should be 'Created'.
+        Both the image and thumbnail must be uploaded.
+                        Set isFullImage = 'True' for Full Image, isFullImage = 'False' for Thumbnail
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/GlobalImages/{ID}/ImageContents", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3656,13 +4248,18 @@ class SDK:
 
     
     def job_runs_delete_job_run(self, request: operations.JobRunsDeleteJobRunRequest) -> operations.JobRunsDeleteJobRunResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a JobRun
+        Deletes a JobRun. When successful, the response is empty.  If unsuccessful, an appropriate
+                    ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/jobRuns/{jobRunID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3678,15 +4275,19 @@ class SDK:
 
     
     def job_runs_get_job_run(self, request: operations.JobRunsGetJobRunRequest) -> operations.JobRunsGetJobRunResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a JobRun by ID
+        Gets a JobRun by ID. When successful, the response is the requested JobRun.
+                    If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/jobRuns/{jobRunID}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3719,15 +4320,19 @@ class SDK:
 
     
     def job_runs_get_job_runs(self, request: operations.JobRunsGetJobRunsRequest) -> operations.JobRunsGetJobRunsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get JobRuns
+        Gets a collection of JobRuns. When successful, the response is a PagedResponse of JobRuns.
+                    If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/jobRuns"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3751,14 +4356,104 @@ class SDK:
         return res
 
     
+    def job_runs_post_job_run(self, request: operations.JobRunsPostJobRunRequest) -> operations.JobRunsPostJobRunResponse:
+        r"""Create a JobRun
+        Creates a JobRun.  The body of the POST is the JobRun to create.  The JobRunID will be assigned on
+                    creation of the JobRun.  When successful, the response is the JobRunID.  If unsuccessful, an 
+                    appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
+        url = base_url.removesuffix("/") + "/api/v2/jobRuns"
+        
+        headers = {}
+        req_content_type, data, form = utils.serialize_request_body(request)
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers["content-type"] = req_content_type
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self._client
+        
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.JobRunsPostJobRunResponse(status_code=r.status_code, content_type=content_type)
+        
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.job_runs_post_job_run_200_application_json_int32_integer = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.job_runs_post_job_run_200_text_json_int32_integer = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    def job_runs_put_job_run(self, request: operations.JobRunsPutJobRunRequest) -> operations.JobRunsPutJobRunResponse:
+        r"""Update a JobRun
+        /// 
+                    Updates a JobRun.  The body of the PUT is the updated JobRun.
+                    When successful, the response is empty.  If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
+        url = utils.generate_url(base_url, "/api/v2/jobRuns/{jobRunID}", request.path_params)
+        
+        headers = {}
+        req_content_type, data, form = utils.serialize_request_body(request)
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers["content-type"] = req_content_type
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self._client
+        
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.JobRunsPutJobRunResponse(status_code=r.status_code, content_type=content_type)
+        
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
     def jobs_delete_job(self, request: operations.JobsDeleteJobRequest) -> operations.JobsDeleteJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Mark the delete flag for the Job
+        Deletes a Job. When successful, the response is empty.  If unsuccessful, an appropriate
+                    ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/jobs/{jobID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3774,15 +4469,19 @@ class SDK:
 
     
     def jobs_get_job(self, request: operations.JobsGetJobRequest) -> operations.JobsGetJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a Job by ID
+        Gets a Job by ID. When successful, the response is the requested Job.
+                    If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/jobs/{jobID}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3815,15 +4514,20 @@ class SDK:
 
     
     def jobs_get_jobs(self, request: operations.JobsGetJobsRequest) -> operations.JobsGetJobsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Jobs
+        Gets a collection of Jobs. When successful, the response is a PagedResponse of Jobs.
+                    If unsuccessful, an appropriate ApiError is returned. 
+                    ///
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/jobs"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3847,23 +4551,108 @@ class SDK:
         return res
 
     
-    def languages_create_language(self, request: operations.LanguagesCreateLanguageRequest) -> operations.LanguagesCreateLanguageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/api/v2/Languages"
-
+    def jobs_post_job(self, request: operations.JobsPostJobRequest) -> operations.JobsPostJobResponse:
+        r"""Create a Job
+        Creates a Job.  The body of the POST is the Job to create.  The JobID will be assigned on
+                    creation of the Job.  When successful, the response is the JobID.  If unsuccessful, an 
+                    appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
+        url = base_url.removesuffix("/") + "/api/v2/jobs"
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
+        
+        client = self._client
+        
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
 
-        client = self.client
+        res = operations.JobsPostJobResponse(status_code=r.status_code, content_type=content_type)
+        
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.jobs_post_job_200_application_json_int32_integer = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.jobs_post_job_200_text_json_int32_integer = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
 
+        return res
+
+    
+    def jobs_put_job(self, request: operations.JobsPutJobRequest) -> operations.JobsPutJobResponse:
+        r"""Update a Job
+        Updates a Job.  The body of the PUT is the updated Job.  When successful, the response is empty.
+                    If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
+        url = utils.generate_url(base_url, "/api/v2/jobs/{jobID}", request.path_params)
+        
+        headers = {}
+        req_content_type, data, form = utils.serialize_request_body(request)
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers["content-type"] = req_content_type
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self._client
+        
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.JobsPutJobResponse(status_code=r.status_code, content_type=content_type)
+        
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
+    def languages_create_language(self, request: operations.LanguagesCreateLanguageRequest) -> operations.LanguagesCreateLanguageResponse:
+        r"""Add a Language to support for translations. Accepts a Language object. Returns the Id of the created object.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
+        url = base_url.removesuffix("/") + "/api/v2/Languages"
+        
+        headers = {}
+        req_content_type, data, form = utils.serialize_request_body(request)
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers["content-type"] = req_content_type
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3896,13 +4685,17 @@ class SDK:
 
     
     def languages_delete_language(self, request: operations.LanguagesDeleteLanguageRequest) -> operations.LanguagesDeleteLanguageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove a Language from those supported for translations. Marks language as deleted.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Languages/{LocaleID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3918,13 +4711,17 @@ class SDK:
 
     
     def languages_get_language(self, request: operations.LanguagesGetLanguageRequest) -> operations.LanguagesGetLanguageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a language by its id. Returns a Language object
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Languages/{LocaleID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3957,15 +4754,18 @@ class SDK:
 
     
     def languages_get_languages(self, request: operations.LanguagesGetLanguagesRequest) -> operations.LanguagesGetLanguagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of the languages for which translations are supported. Returns a PagedResponse of Language objects.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Languages"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3998,22 +4798,23 @@ class SDK:
 
     
     def languages_update_language(self, request: operations.LanguagesUpdateLanguageRequest) -> operations.LanguagesUpdateLanguageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a language’s description. Accepts a Language object.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Languages/{LocaleID}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4029,22 +4830,23 @@ class SDK:
 
     
     def license_activations_post(self, request: operations.LicenseActivationsPostRequest) -> operations.LicenseActivationsPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a license activation.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/LicenseActivations"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4077,22 +4879,23 @@ class SDK:
 
     
     def license_activations_post_register_edt_lite(self, request: operations.LicenseActivationsPostRegisterEdtLiteRequest) -> operations.LicenseActivationsPostRegisterEdtLiteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Register an EDT Lite with the Server
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/LicenseActivations/RegisterEDTLite"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4125,22 +4928,23 @@ class SDK:
 
     
     def license_activations_put(self, request: operations.LicenseActivationsPutRequest) -> operations.LicenseActivationsPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a license activiation.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/LicenseActivations/{ID}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4173,22 +4977,23 @@ class SDK:
 
     
     def license_activations_put_confirm(self, request: operations.LicenseActivationsPutConfirmRequest) -> operations.LicenseActivationsPutConfirmResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Confirm that the client has applied the updated license.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/LicenseActivations/{ID}/Confirm", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4204,15 +5009,18 @@ class SDK:
 
     
     def licenses_get(self, request: operations.LicensesGetRequest) -> operations.LicensesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of licenses with the specified criteria.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Licenses"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -4237,13 +5045,17 @@ class SDK:
 
     
     def logs_get_log(self, request: operations.LogsGetLogRequest) -> operations.LogsGetLogResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a log by ID
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Logs/{ID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4276,15 +5088,18 @@ class SDK:
 
     
     def logs_get_logs(self, request: operations.LogsGetLogsRequest) -> operations.LogsGetLogsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the API System logs, most recent first.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Logs"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -4309,15 +5124,18 @@ class SDK:
 
     
     def logs_post_log(self, request: operations.LogsPostLogRequest) -> operations.LogsPostLogResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a Log entry
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Logs"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -4348,22 +5166,23 @@ class SDK:
 
     
     def notifications_post_mail(self, request: operations.NotificationsPostMailRequest) -> operations.NotificationsPostMailResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Sends an email message.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Notifications"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4379,13 +5198,17 @@ class SDK:
 
     
     def package_reports_default(self, request: operations.PackageReportsDefaultRequest) -> operations.PackageReportsDefaultResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the package reports for a client.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Clients/{ClientID}/PackageReports", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4418,13 +5241,17 @@ class SDK:
 
     
     def package_types_add_package_type_user(self, request: operations.PackageTypesAddPackageTypeUserRequest) -> operations.PackageTypesAddPackageTypeUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a package type that a user can see.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/PackageTypes/{id}/Users/{userID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4440,13 +5267,17 @@ class SDK:
 
     
     def package_types_delete(self, request: operations.PackageTypesDeleteRequest) -> operations.PackageTypesDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a Package Type.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/PackageTypes/{ID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4462,15 +5293,18 @@ class SDK:
 
     
     def package_types_get(self, request: operations.PackageTypesGetRequest) -> operations.PackageTypesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all of the Package Types.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/PackageTypes"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -4495,22 +5329,23 @@ class SDK:
 
     
     def package_types_post(self, request: operations.PackageTypesPostRequest) -> operations.PackageTypesPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a Package Type.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/PackageTypes"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4541,22 +5376,23 @@ class SDK:
 
     
     def package_types_put(self, request: operations.PackageTypesPutRequest) -> operations.PackageTypesPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Modify a Package Type.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/PackageTypes/{ID}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4572,13 +5408,17 @@ class SDK:
 
     
     def package_types_remove_package_type_user(self, request: operations.PackageTypesRemovePackageTypeUserRequest) -> operations.PackageTypesRemovePackageTypeUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a package type a user could see.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/PackageTypes/{id}/Users/{userID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4594,15 +5434,18 @@ class SDK:
 
     
     def package_typeto_bundles_delete(self, request: operations.PackageTypetoBundlesDeleteRequest) -> operations.PackageTypetoBundlesDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a Package Type to Bundle Relationship.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/PackageTypetoBundles"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -4618,15 +5461,18 @@ class SDK:
 
     
     def package_typeto_bundles_get(self, request: operations.PackageTypetoBundlesGetRequest) -> operations.PackageTypetoBundlesGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all of the Package Type to Bundle Relationships.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/PackageTypetoBundles"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -4651,22 +5497,23 @@ class SDK:
 
     
     def package_typeto_bundles_post(self, request: operations.PackageTypetoBundlesPostRequest) -> operations.PackageTypetoBundlesPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a new Package Type ID to Bundle Relationship.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/PackageTypetoBundles"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4682,22 +5529,23 @@ class SDK:
 
     
     def package_typeto_bundles_put(self, request: operations.PackageTypetoBundlesPutRequest) -> operations.PackageTypetoBundlesPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a Package Type ID to Bundle Relationship.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/PackageTypetoBundles"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4713,13 +5561,17 @@ class SDK:
 
     
     def packages_delete_package(self, request: operations.PackagesDeletePackageRequest) -> operations.PackagesDeletePackageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a Package.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Packages/{ID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4735,13 +5587,17 @@ class SDK:
 
     
     def packages_get_package(self, request: operations.PackagesGetPackageRequest) -> operations.PackagesGetPackageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Find a Package.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Packages/{ID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4774,15 +5630,18 @@ class SDK:
 
     
     def packages_get_packages(self, request: operations.PackagesGetPackagesRequest) -> operations.PackagesGetPackagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List Packages.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Packages"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -4807,22 +5666,23 @@ class SDK:
 
     
     def packages_post_package(self, request: operations.PackagesPostPackageRequest) -> operations.PackagesPostPackageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a Package to the Update System.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Packages"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4853,22 +5713,23 @@ class SDK:
 
     
     def packages_put_package(self, request: operations.PackagesPutPackageRequest) -> operations.PackagesPutPackageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Modify a Packge to the Update System.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Packages/{ID}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4884,13 +5745,17 @@ class SDK:
 
     
     def permissions_delete_permission(self, request: operations.PermissionsDeletePermissionRequest) -> operations.PermissionsDeletePermissionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a Permission
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Permissions/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4903,13 +5768,17 @@ class SDK:
 
     
     def permissions_get_permission(self, request: operations.PermissionsGetPermissionRequest) -> operations.PermissionsGetPermissionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a Permission
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Permissions/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4931,15 +5800,18 @@ class SDK:
 
     
     def permissions_get_permissions(self, request: operations.PermissionsGetPermissionsRequest) -> operations.PermissionsGetPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List Permissions
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Permissions"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -4957,22 +5829,23 @@ class SDK:
 
     
     def permissions_post_permission(self, request: operations.PermissionsPostPermissionRequest) -> operations.PermissionsPostPermissionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds a Permission
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Permissions"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4994,22 +5867,23 @@ class SDK:
 
     
     def permissions_put_permission(self, request: operations.PermissionsPutPermissionRequest) -> operations.PermissionsPutPermissionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a Permission
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Permissions/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5022,13 +5896,17 @@ class SDK:
 
     
     def priority_packages_delete_priority_packages(self, request: operations.PriorityPackagesDeletePriorityPackagesRequest) -> operations.PriorityPackagesDeletePriorityPackagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a Priority Package for a Client.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/PriorityPackages/{ID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5044,13 +5922,17 @@ class SDK:
 
     
     def priority_packages_get_priority_package(self, request: operations.PriorityPackagesGetPriorityPackageRequest) -> operations.PriorityPackagesGetPriorityPackageResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a Priority Packages for a Client.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/PriorityPackages/{ID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5083,15 +5965,18 @@ class SDK:
 
     
     def priority_packages_get_priority_packages(self, request: operations.PriorityPackagesGetPriorityPackagesRequest) -> operations.PriorityPackagesGetPriorityPackagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of Priority Packages by Client.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/PriorityPackages"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -5116,22 +6001,23 @@ class SDK:
 
     
     def priority_packages_post_priority_packages(self, request: operations.PriorityPackagesPostPriorityPackagesRequest) -> operations.PriorityPackagesPostPriorityPackagesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a Priority Package for a Client.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/PriorityPackages"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5162,13 +6048,17 @@ class SDK:
 
     
     def release_delete_release_bundle(self, request: operations.ReleaseDeleteReleaseBundleRequest) -> operations.ReleaseDeleteReleaseBundleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes the association between a release and a bundle.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Releases/{ReleaseId}/Bundle/{BundleId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5184,13 +6074,18 @@ class SDK:
 
     
     def release_get_release(self, request: operations.ReleaseGetReleaseRequest) -> operations.ReleaseGetReleaseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a  Release by ID
+        Gets a Release by ID. When successful, the response is the requested Release.
+                    If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Releases/{ReleaseId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5223,15 +6118,19 @@ class SDK:
 
     
     def release_get_releases(self, request: operations.ReleaseGetReleasesRequest) -> operations.ReleaseGetReleasesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Release
+        Gets a collection of Release. When successful, the response is a PagedResponse of Release.
+                    If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Releases"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -5256,22 +6155,25 @@ class SDK:
 
     
     def release_post_release(self, request: operations.ReleasePostReleaseRequest) -> operations.ReleasePostReleaseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a Release
+        Creates a Release.  The body of the POST is the Release to create.
+                    The ReleaseId will be assigned on creation of the Job.  When successful, the response
+                    is the Release Id.  If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Releases"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5304,13 +6206,17 @@ class SDK:
 
     
     def release_post_release_bundle(self, request: operations.ReleasePostReleaseBundleRequest) -> operations.ReleasePostReleaseBundleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Associates the release with a bundle.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Releases/{ReleaseId}/Bundle/{BundleId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5326,22 +6232,24 @@ class SDK:
 
     
     def release_put_content_definition(self, request: operations.ReleasePutContentDefinitionRequest) -> operations.ReleasePutContentDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a Release
+        Updates a Release.  The body of the PUT is the updated Release.  
+                    When successful, the response is empty.  If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Releases/{releaseId}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5357,15 +6265,18 @@ class SDK:
 
     
     def reporting_bundle_status_summary(self, request: operations.ReportingBundleStatusSummaryRequest) -> operations.ReportingBundleStatusSummaryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a summary of all Packages in a Bundle
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Reporting/BundleStatusSummary"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -5390,15 +6301,18 @@ class SDK:
 
     
     def reporting_bundles_in_update_group(self, request: operations.ReportingBundlesInUpdateGroupRequest) -> operations.ReportingBundlesInUpdateGroupResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of bundles for UpdateGroup.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Reporting/BundlesInUpdateGroup"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -5423,15 +6337,18 @@ class SDK:
 
     
     def reporting_client_info(self, request: operations.ReportingClientInfoRequest) -> operations.ReportingClientInfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Client Information
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Reporting/ClientInfo"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -5464,15 +6381,18 @@ class SDK:
 
     
     def reporting_current_packages_in_update_group(self, request: operations.ReportingCurrentPackagesInUpdateGroupRequest) -> operations.ReportingCurrentPackagesInUpdateGroupResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the current packages for an update group.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Reporting/CurrentPackagesInUpdateGroup"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -5505,15 +6425,18 @@ class SDK:
 
     
     def reporting_get_client(self, request: operations.ReportingGetClientRequest) -> operations.ReportingGetClientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a Client in the Update System.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Reporting/GetClient"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -5546,15 +6469,18 @@ class SDK:
 
     
     def reporting_get_subscriptions(self, request: operations.ReportingGetSubscriptionsRequest) -> operations.ReportingGetSubscriptionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of current Client Subscriptions.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Reporting/GetSubscriptions"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -5579,15 +6505,18 @@ class SDK:
 
     
     def reporting_package_status_summary(self, request: operations.ReportingPackageStatusSummaryRequest) -> operations.ReportingPackageStatusSummaryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a summary report for a Specific Package
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Reporting/PackageStatusSummary"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -5620,15 +6549,18 @@ class SDK:
 
     
     def reporting_registered_clients(self, request: operations.ReportingRegisteredClientsRequest) -> operations.ReportingRegisteredClientsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of subscribed clients
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Reporting/RegisteredClients"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -5653,15 +6585,18 @@ class SDK:
 
     
     def reporting_update_groups(self, request: operations.ReportingUpdateGroupsRequest) -> operations.ReportingUpdateGroupsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of Update Groups.  Update Groups are used by the client to register for a specific type of update.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Reporting/UpdateGroups"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -5686,15 +6621,18 @@ class SDK:
 
     
     def reporting_update_metrics(self, request: operations.ReportingUpdateMetricsRequest) -> operations.ReportingUpdateMetricsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get data for pie charts in UpdateMetrics.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Reporting/UpdateMetrics"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -5727,13 +6665,17 @@ class SDK:
 
     
     def roles_delete_role(self, request: operations.RolesDeleteRoleRequest) -> operations.RolesDeleteRoleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a User Role
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Roles/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5746,13 +6688,17 @@ class SDK:
 
     
     def roles_get_role(self, request: operations.RolesGetRoleRequest) -> operations.RolesGetRoleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a User Role
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Roles/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5774,15 +6720,18 @@ class SDK:
 
     
     def roles_get_role_permissions(self, request: operations.RolesGetRolePermissionsRequest) -> operations.RolesGetRolePermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the Permissions for a Role
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Roles/{id}/Permissions", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -5800,15 +6749,18 @@ class SDK:
 
     
     def roles_get_roles(self, request: operations.RolesGetRolesRequest) -> operations.RolesGetRolesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List Roles
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Roles"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -5826,22 +6778,23 @@ class SDK:
 
     
     def roles_post_role(self, request: operations.RolesPostRoleRequest) -> operations.RolesPostRoleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds a User Role
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Roles"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5863,22 +6816,23 @@ class SDK:
 
     
     def roles_put_role(self, request: operations.RolesPutRoleRequest) -> operations.RolesPutRoleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a User Role
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Roles/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5891,15 +6845,19 @@ class SDK:
 
     
     def steps_get_step(self, request: operations.StepsGetStepRequest) -> operations.StepsGetStepResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a Step by ID
+        Gets a Step by ID. When successful, the response is the requested Step.
+                    If unsuccessful, an appropriate ApiError is returned.  Steps.Read permission is required.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/steps/{stepID}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -5932,15 +6890,19 @@ class SDK:
 
     
     def steps_get_steps(self, request: operations.StepsGetStepsRequest) -> operations.StepsGetStepsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Steps
+        Gets a collection of Steps. When successful, the response is a PagedResponse of Steps.
+                    If unsuccessful, an appropriate ApiError is returned.  Steps.Read permission is required.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/steps"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -5964,16 +6926,100 @@ class SDK:
         return res
 
     
+    def steps_post_step(self, request: operations.StepsPostStepRequest) -> operations.StepsPostStepResponse:
+        r"""Create a Step
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
+        url = base_url.removesuffix("/") + "/api/v2/steps"
+        
+        headers = {}
+        req_content_type, data, form = utils.serialize_request_body(request)
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers["content-type"] = req_content_type
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self._client
+        
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.StepsPostStepResponse(status_code=r.status_code, content_type=content_type)
+        
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.steps_post_step_200_application_json_int32_integer = out
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[int])
+                res.steps_post_step_200_text_json_int32_integer = out
+        else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
+                res.api_models_api_error = out
+
+        return res
+
+    
+    def steps_put_step(self, request: operations.StepsPutStepRequest) -> operations.StepsPutStepResponse:
+        r"""Update a Step
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
+        url = utils.generate_url(base_url, "/api/v2/steps/{stepID}", request.path_params)
+        
+        headers = {}
+        req_content_type, data, form = utils.serialize_request_body(request)
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers["content-type"] = req_content_type
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self._client
+        
+        r = client.request("PUT", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.StepsPutStepResponse(status_code=r.status_code, content_type=content_type)
+        
+        if r.status_code == 204:
+            pass
+        else:
+            if utils.match_content_type(content_type, "*/*"):
+                res.body = r.content
+
+        return res
+
+    
     def string_definitions_get_definition(self, request: operations.StringDefinitionsGetDefinitionRequest) -> operations.StringDefinitionsGetDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a paged response of Global String Definitions.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/StringDefinitions/{ID}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -6006,15 +7052,18 @@ class SDK:
 
     
     def string_definitions_get_definitions(self, request: operations.StringDefinitionsGetDefinitionsRequest) -> operations.StringDefinitionsGetDefinitionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a paged response of Global String Definitions.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/StringDefinitions"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -6047,13 +7096,17 @@ class SDK:
 
     
     def string_translations_get_translation(self, request: operations.StringTranslationsGetTranslationRequest) -> operations.StringTranslationsGetTranslationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a single translation based upon stringId and languageId
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/StringTranslations/{stringId}/{languageId}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -6086,15 +7139,18 @@ class SDK:
 
     
     def string_translations_get_translations(self, request: operations.StringTranslationsGetTranslationsRequest) -> operations.StringTranslationsGetTranslationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a paged response of Global String Translations.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/StringTranslations"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -6127,22 +7183,23 @@ class SDK:
 
     
     def string_translations_update_translation(self, request: operations.StringTranslationsUpdateTranslationRequest) -> operations.StringTranslationsUpdateTranslationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a string value or a state for a string translation.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/StringTranslations/{stringId}/{languageId}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6158,22 +7215,23 @@ class SDK:
 
     
     def translation_keys_create_translation_key(self, request: operations.TranslationKeysCreateTranslationKeyRequest) -> operations.TranslationKeysCreateTranslationKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a translationKey object.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/TranslationKeys"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6206,15 +7264,17 @@ class SDK:
 
     
     def translation_keys_get(self, request: operations.TranslationKeysGetRequest) -> operations.TranslationKeysGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a paged response of TranslationKeys.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/TranslationKeys"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -6247,13 +7307,17 @@ class SDK:
 
     
     def translation_keys_get_translation_key(self, request: operations.TranslationKeysGetTranslationKeyRequest) -> operations.TranslationKeysGetTranslationKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get TranslationKey by ID
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/TranslationKeys/{ID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -6286,22 +7350,23 @@ class SDK:
 
     
     def translation_keys_update_translation_key(self, request: operations.TranslationKeysUpdateTranslationKeyRequest) -> operations.TranslationKeysUpdateTranslationKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update the StringID of the translationKey object.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/TranslationKeys/{ID}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6317,22 +7382,23 @@ class SDK:
 
     
     def translation_requests_create_translation_request(self, request: operations.TranslationRequestsCreateTranslationRequestRequest) -> operations.TranslationRequestsCreateTranslationRequestResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a translation request. Accepts a TranslationRequest object. Returns the Id of the created object. The state of the TranslationRequest must be ‘NotSubmitted’.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/TranslationRequests"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6365,13 +7431,17 @@ class SDK:
 
     
     def translation_requests_get_translation_request(self, request: operations.TranslationRequestsGetTranslationRequestRequest) -> operations.TranslationRequestsGetTranslationRequestResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a TranslationRequest object by id. Returns TranslationRequest object with its language ids and string ids.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/TranslationRequests/{Id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -6404,15 +7474,18 @@ class SDK:
 
     
     def translation_requests_get_translation_requests(self, request: operations.TranslationRequestsGetTranslationRequestsRequest) -> operations.TranslationRequestsGetTranslationRequestsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all TranslationRequest objects. Returns a PagedResponse of TranslationRequest objects with their language ids and string ids.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/TranslationRequests"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -6445,24 +7518,24 @@ class SDK:
 
     
     def translation_requests_update_translation_request(self, request: operations.TranslationRequestsUpdateTranslationRequestRequest) -> operations.TranslationRequestsUpdateTranslationRequestResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a TranslationRequest object by id. Accepts a TranslationRequest object.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/TranslationRequests/{Id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6478,13 +7551,17 @@ class SDK:
 
     
     def translation_sets_delete_translation_set_attribute(self, request: operations.TranslationSetsDeleteTranslationSetAttributeRequest) -> operations.TranslationSetsDeleteTranslationSetAttributeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a set of TranslationSetAttribute object
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/TranslationSetAttributes/{ID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -6500,15 +7577,18 @@ class SDK:
 
     
     def translation_sets_get_source_strings(self, request: operations.TranslationSetsGetSourceStringsRequest) -> operations.TranslationSetsGetSourceStringsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the information needed to translate a string in a translation set
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/TranslationSets/{ID}/SourceStrings", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -6541,13 +7621,17 @@ class SDK:
 
     
     def translation_sets_get_statistics(self, request: operations.TranslationSetsGetStatisticsRequest) -> operations.TranslationSetsGetStatisticsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the statistics for translation sets such as the language ids and count of string definitions.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/TranslationSets/{ID}/Statistics", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -6580,15 +7664,18 @@ class SDK:
 
     
     def translation_sets_get_translation_set(self, request: operations.TranslationSetsGetTranslationSetRequest) -> operations.TranslationSetsGetTranslationSetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a TranslationSet object by its id. Related TranslationSetStrings are NOT returned.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/TranslationSets/{ID}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -6621,15 +7708,18 @@ class SDK:
 
     
     def translation_sets_get_translation_set_attributes(self, request: operations.TranslationSetsGetTranslationSetAttributesRequest) -> operations.TranslationSetsGetTranslationSetAttributesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a PagedResponse of TranslationSetAttribute objects
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/TranslationSets/{ID}/Attributes", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -6662,15 +7752,18 @@ class SDK:
 
     
     def translation_sets_get_translation_set_strings(self, request: operations.TranslationSetsGetTranslationSetStringsRequest) -> operations.TranslationSetsGetTranslationSetStringsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a PagedResponse of TranslationSetString objects
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/TranslationSets/{ID}/Strings", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -6703,15 +7796,18 @@ class SDK:
 
     
     def translation_sets_get_translation_sets(self, request: operations.TranslationSetsGetTranslationSetsRequest) -> operations.TranslationSetsGetTranslationSetsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a PagedResponse of TranslationSet objects. Related TranslationSetStrings are NOT returned
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/TranslationSets"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -6744,22 +7840,23 @@ class SDK:
 
     
     def translation_sets_post_translation_set_attribute(self, request: operations.TranslationSetsPostTranslationSetAttributeRequest) -> operations.TranslationSetsPostTranslationSetAttributeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a TranslationSetAttribute object
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/TranslationSets/{ID}/Attributes", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6792,22 +7889,23 @@ class SDK:
 
     
     def translation_sets_update_translation_set_attribute(self, request: operations.TranslationSetsUpdateTranslationSetAttributeRequest) -> operations.TranslationSetsUpdateTranslationSetAttributeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a TranslationSetAttribute object
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/TranslationSetAttributes/{ID}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6823,13 +7921,17 @@ class SDK:
 
     
     def update_group_client_relationships_get_subscription(self, request: operations.UpdateGroupClientRelationshipsGetSubscriptionRequest) -> operations.UpdateGroupClientRelationshipsGetSubscriptionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a subscription by RelationshipID
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/UpdateGroupClientRelationships/{RelationshipID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -6862,15 +7964,18 @@ class SDK:
 
     
     def update_group_client_relationships_get_subscriptions(self, request: operations.UpdateGroupClientRelationshipsGetSubscriptionsRequest) -> operations.UpdateGroupClientRelationshipsGetSubscriptionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of current Client Subscriptions.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/UpdateGroupClientRelationships"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -6895,22 +8000,23 @@ class SDK:
 
     
     def update_group_client_relationships_post_subscription(self, request: operations.UpdateGroupClientRelationshipsPostSubscriptionRequest) -> operations.UpdateGroupClientRelationshipsPostSubscriptionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a subscription
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/UpdateGroupClientRelationships"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6941,22 +8047,23 @@ class SDK:
 
     
     def update_group_client_relationships_put_subscription(self, request: operations.UpdateGroupClientRelationshipsPutSubscriptionRequest) -> operations.UpdateGroupClientRelationshipsPutSubscriptionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a Subscription
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/UpdateGroupClientRelationships/{RelationshipID}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6972,15 +8079,18 @@ class SDK:
 
     
     def update_group_client_relationships_put_subscription_by_client_id_update_group_id(self, request: operations.UpdateGroupClientRelationshipsPutSubscriptionByClientIDUpdateGroupIDRequest) -> operations.UpdateGroupClientRelationshipsPutSubscriptionByClientIDUpdateGroupIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""DEPRECATED. Set client subscription status for an update group.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/UpdateGroupClientRelationships"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -6996,13 +8106,17 @@ class SDK:
 
     
     def update_group_subscriptions_delete_update_group_subscription(self, request: operations.UpdateGroupSubscriptionsDeleteUpdateGroupSubscriptionRequest) -> operations.UpdateGroupSubscriptionsDeleteUpdateGroupSubscriptionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an Update Group Subscription
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/UpdateGroupSubscriptions/{UpdateGroupSubscriptionID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -7018,13 +8132,17 @@ class SDK:
 
     
     def update_group_subscriptions_get_update_group_subscription(self, request: operations.UpdateGroupSubscriptionsGetUpdateGroupSubscriptionRequest) -> operations.UpdateGroupSubscriptionsGetUpdateGroupSubscriptionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get an Update Group Subscription
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/UpdateGroupSubscriptions/{UpdateGroupSubscriptionID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -7057,15 +8175,18 @@ class SDK:
 
     
     def update_group_subscriptions_get_update_group_subscriptions(self, request: operations.UpdateGroupSubscriptionsGetUpdateGroupSubscriptionsRequest) -> operations.UpdateGroupSubscriptionsGetUpdateGroupSubscriptionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Update Group Subscriptions
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/UpdateGroupSubscriptions"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -7090,22 +8211,23 @@ class SDK:
 
     
     def update_group_subscriptions_post_update_group_subscription(self, request: operations.UpdateGroupSubscriptionsPostUpdateGroupSubscriptionRequest) -> operations.UpdateGroupSubscriptionsPostUpdateGroupSubscriptionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add an Update Group Subscription
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/UpdateGroupSubscriptions"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -7138,22 +8260,23 @@ class SDK:
 
     
     def update_group_subscriptions_put_update_group_subscription(self, request: operations.UpdateGroupSubscriptionsPutUpdateGroupSubscriptionRequest) -> operations.UpdateGroupSubscriptionsPutUpdateGroupSubscriptionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update an Update Group Subscription
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/UpdateGroupSubscriptions/{UpdateGroupSubscriptionID}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -7169,13 +8292,17 @@ class SDK:
 
     
     def update_groups_add_update_group_user(self, request: operations.UpdateGroupsAddUpdateGroupUserRequest) -> operations.UpdateGroupsAddUpdateGroupUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add an updateGroup that a user can see.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/UpdateGroups/{id}/Users/{userID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -7191,13 +8318,17 @@ class SDK:
 
     
     def update_groups_delete(self, request: operations.UpdateGroupsDeleteRequest) -> operations.UpdateGroupsDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete an Update Group.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/UpdateGroups/{ID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -7213,15 +8344,18 @@ class SDK:
 
     
     def update_groups_get(self, request: operations.UpdateGroupsGetRequest) -> operations.UpdateGroupsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of Update Groups.  Update Groups are used by the client to register for a specific type of update.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/UpdateGroups"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -7246,15 +8380,18 @@ class SDK:
 
     
     def update_groups_get_update_group_bundles(self, request: operations.UpdateGroupsGetUpdateGroupBundlesRequest) -> operations.UpdateGroupsGetUpdateGroupBundlesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of bundles for UpdateGroup.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/UpdateGroups/{ID}/Bundles", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -7279,22 +8416,23 @@ class SDK:
 
     
     def update_groups_post(self, request: operations.UpdateGroupsPostRequest) -> operations.UpdateGroupsPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Add a new Update Group.  The report field is a string that has a dot based request for a specific piece of submitted data.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/UpdateGroups"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -7325,22 +8463,23 @@ class SDK:
 
     
     def update_groups_put(self, request: operations.UpdateGroupsPutRequest) -> operations.UpdateGroupsPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Modify an Update Group.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/UpdateGroups/{ID}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -7356,13 +8495,17 @@ class SDK:
 
     
     def update_groups_remove_update_group_user(self, request: operations.UpdateGroupsRemoveUpdateGroupUserRequest) -> operations.UpdateGroupsRemoveUpdateGroupUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes an update group a user could see.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/UpdateGroups/{id}/Users/{userID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -7378,15 +8521,18 @@ class SDK:
 
     
     def update_system_get_cached_files(self, request: operations.UpdateSystemGetCachedFilesRequest) -> operations.UpdateSystemGetCachedFilesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of Cached Files installed on the client Machine.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Clients/{ClientID}/CachedFiles", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -7419,15 +8565,18 @@ class SDK:
 
     
     def update_system_get_checkin(self, request: operations.UpdateSystemGetCheckinRequest) -> operations.UpdateSystemGetCheckinResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Checks the Client ID into the Update System.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/UpdateSystem"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -7460,13 +8609,18 @@ class SDK:
 
     
     def user_content_definitions_delete_user_content_definition(self, request: operations.UserContentDefinitionsDeleteUserContentDefinitionRequest) -> operations.UserContentDefinitionsDeleteUserContentDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a UserContentDefinition
+        Deletes an UserContentDefinition. When successful, the response is empty.  If unsuccessful, an appropriate
+                    ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/UserContentDefinitions/{userContentDefinitionID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -7482,13 +8636,18 @@ class SDK:
 
     
     def user_content_definitions_get_user_content_definition(self, request: operations.UserContentDefinitionsGetUserContentDefinitionRequest) -> operations.UserContentDefinitionsGetUserContentDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a UserContentDefinition by ID
+        Gets a UserContentDefinition by ID. When successful, the response is the requested UserContentDefinition.
+                    If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/UserContentDefinitions/{userContentDefinitionID}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -7521,15 +8680,19 @@ class SDK:
 
     
     def user_content_definitions_get_user_content_definitions(self, request: operations.UserContentDefinitionsGetUserContentDefinitionsRequest) -> operations.UserContentDefinitionsGetUserContentDefinitionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get UserContentDefinitions
+        Gets a collection of UserContentDefinitions. When successful, the response is a PagedResponse of UserContentDefinitions.
+                    If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/UserContentDefinitions"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -7554,22 +8717,25 @@ class SDK:
 
     
     def user_content_definitions_post_user_content_definition(self, request: operations.UserContentDefinitionsPostUserContentDefinitionRequest) -> operations.UserContentDefinitionsPostUserContentDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a UserContentDefinition
+        Creates a UserContentDefinition.  The body of the POST is the UserContentDefinition to create.
+                    The UserContentDefinitionID will be assigned on creation of the Job.  When successful, the response
+                    is the UserContentDefinitionID.  If unsuccessful, an appropriate ApiError is returned.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/UserContentDefinitions"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -7602,15 +8768,18 @@ class SDK:
 
     
     def user_permissions_get_current_user_roles(self, request: operations.UserPermissionsGetCurrentUserRolesRequest) -> operations.UserPermissionsGetCurrentUserRolesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the current user's roles
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Users/Current/Roles"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -7635,15 +8804,18 @@ class SDK:
 
     
     def user_permissions_get_permissions(self, request: operations.UserPermissionsGetPermissionsRequest) -> operations.UserPermissionsGetPermissionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a user's permissions
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Users/{id}/Permissions", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -7668,15 +8840,18 @@ class SDK:
 
     
     def user_permissions_get_roles(self, request: operations.UserPermissionsGetRolesRequest) -> operations.UserPermissionsGetRolesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a user's roles
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Users/{id}/Roles", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -7701,15 +8876,18 @@ class SDK:
 
     
     def user_permissions_get_users(self, request: operations.UserPermissionsGetUsersRequest) -> operations.UserPermissionsGetUsersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get all user's in a role
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Roles/{id}/Users", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -7734,13 +8912,17 @@ class SDK:
 
     
     def users_delete(self, request: operations.UsersDeleteRequest) -> operations.UsersDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a user
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Users/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -7753,15 +8935,18 @@ class SDK:
 
     
     def users_get(self, request: operations.UsersGetRequest) -> operations.UsersGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get users
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Users"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -7779,13 +8964,17 @@ class SDK:
 
     
     def users_get_current_user(self) -> operations.UsersGetCurrentUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets the current user
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Users/Current"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -7807,22 +8996,23 @@ class SDK:
 
     
     def users_post(self, request: operations.UsersPostRequest) -> operations.UsersPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a user
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Users"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -7844,22 +9034,23 @@ class SDK:
 
     
     def users_put(self, request: operations.UsersPutRequest) -> operations.UsersPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a user
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Users/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -7872,22 +9063,23 @@ class SDK:
 
     
     def users_put_current_user(self, request: operations.UsersPutCurrentUserRequest) -> operations.UsersPutCurrentUserResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a user
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Users/Current"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -7900,15 +9092,18 @@ class SDK:
 
     
     def voucher_history_get_voucher_history(self, request: operations.VoucherHistoryGetVoucherHistoryRequest) -> operations.VoucherHistoryGetVoucherHistoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets voucher history data
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/VoucherHistory"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -7926,13 +9121,17 @@ class SDK:
 
     
     def vouchers_delete(self, request: operations.VouchersDeleteRequest) -> operations.VouchersDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a voucher
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Vouchers/{VoucherCode}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -7945,15 +9144,18 @@ class SDK:
 
     
     def vouchers_get(self, request: operations.VouchersGetRequest) -> operations.VouchersGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a list of vouchers
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Vouchers"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -7971,15 +9173,18 @@ class SDK:
 
     
     def vouchers_get_voucher_history(self, request: operations.VouchersGetVoucherHistoryRequest) -> operations.VouchersGetVoucherHistoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a voucher's history.
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Vouchers/{VoucherCode}/VoucherHistory", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -7997,22 +9202,23 @@ class SDK:
 
     
     def vouchers_post(self, request: operations.VouchersPostRequest) -> operations.VouchersPostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create a voucher
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/api/v2/Vouchers"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -8032,22 +9238,23 @@ class SDK:
 
     
     def vouchers_put(self, request: operations.VouchersPutRequest) -> operations.VouchersPutResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update a voucher
+        No Documentation Found.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/api/v2/Vouchers/{VoucherCode}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

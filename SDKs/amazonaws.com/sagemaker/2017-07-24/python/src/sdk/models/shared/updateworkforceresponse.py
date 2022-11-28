@@ -1,10 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
-from . import workforce
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateWorkforceResponse:
-    workforce: workforce.Workforce = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Workforce' }})
+    workforce: Workforce = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Workforce') }})
     

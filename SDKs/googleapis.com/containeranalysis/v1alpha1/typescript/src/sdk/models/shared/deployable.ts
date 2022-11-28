@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Deployable
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An artifact that can be deployed in some runtime.
 **/
 export class Deployable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resourceUri" })
+  @SpeakeasyMetadata({ data: "json, name=resourceUri" })
   resourceUri?: string[];
 }

@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TableCell } from "./tablecell";
 
 
+
 export class TableRow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=f", elemType: shared.TableCell })
+  @SpeakeasyMetadata({ data: "json, name=f", elemType: TableCell })
   f?: TableCell[];
 }

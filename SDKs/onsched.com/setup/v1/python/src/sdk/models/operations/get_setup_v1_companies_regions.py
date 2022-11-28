@@ -10,12 +10,12 @@ class GetSetupV1CompaniesRegionsQueryParams:
 
 @dataclass
 class GetSetupV1CompaniesRegionsRequest:
-    query_params: GetSetupV1CompaniesRegionsQueryParams = field(default=None)
+    query_params: GetSetupV1CompaniesRegionsQueryParams = field()
     
 
 @dataclass
 class GetSetupV1CompaniesRegionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     region_list_view_model: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

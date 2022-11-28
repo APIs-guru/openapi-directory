@@ -7,6 +7,8 @@ const (
 	RoomGroupsAddBatchRequestItemNewGroupMemberAcceptanceEnumPending   RoomGroupsAddBatchRequestItemNewGroupMemberAcceptanceEnum = "pending"
 )
 
+// RoomGroupsAddBatchRequestItem
+// Request item model for granting group to the room
 type RoomGroupsAddBatchRequestItem struct {
 	ID                       int64                                                      `json:"id"`
 	NewGroupMemberAcceptance *RoomGroupsAddBatchRequestItemNewGroupMemberAcceptanceEnum `json:"newGroupMemberAcceptance,omitempty"`

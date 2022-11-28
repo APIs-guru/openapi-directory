@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SecretVersion } from "./secretversion";
 // SecretVolume
 /**
  * Configuration for a secret volume. It has the information necessary to fetch the secret value from secret manager and make it available as files mounted at the requested paths within the application container.
@@ -34,19 +34,19 @@ var SecretVolume = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=mountPath" }),
+        SpeakeasyMetadata({ data: "json, name=mountPath" }),
         __metadata("design:type", String)
     ], SecretVolume.prototype, "mountPath", void 0);
     __decorate([
-        Metadata({ data: "json, name=projectId" }),
+        SpeakeasyMetadata({ data: "json, name=projectId" }),
         __metadata("design:type", String)
     ], SecretVolume.prototype, "projectId", void 0);
     __decorate([
-        Metadata({ data: "json, name=secret" }),
+        SpeakeasyMetadata({ data: "json, name=secret" }),
         __metadata("design:type", String)
     ], SecretVolume.prototype, "secret", void 0);
     __decorate([
-        Metadata({ data: "json, name=versions", elemType: shared.SecretVersion }),
+        SpeakeasyMetadata({ data: "json, name=versions", elemType: SecretVersion }),
         __metadata("design:type", Array)
     ], SecretVolume.prototype, "versions", void 0);
     return SecretVolume;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CloudSqlCredential } from "./cloudsqlcredential";
 export declare enum CloudSqlPropertiesTypeEnum {
     DatabaseTypeUnspecified = "DATABASE_TYPE_UNSPECIFIED",
@@ -13,5 +13,14 @@ export declare class CloudSqlProperties extends SpeakeasyBase {
     database?: string;
     instanceId?: string;
     serviceAccountId?: string;
+    type?: CloudSqlPropertiesTypeEnum;
+}
+/**
+ * Connection properties specific to the Cloud SQL.
+**/
+export declare class CloudSqlPropertiesInput extends SpeakeasyBase {
+    credential?: CloudSqlCredential;
+    database?: string;
+    instanceId?: string;
     type?: CloudSqlPropertiesTypeEnum;
 }

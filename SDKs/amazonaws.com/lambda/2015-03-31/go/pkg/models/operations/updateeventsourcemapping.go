@@ -18,6 +18,8 @@ type UpdateEventSourceMappingHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateEventSourceMappingRequestBodyDestinationConfig
+// A configuration object that specifies the destination of an event after Lambda processes it.
 type UpdateEventSourceMappingRequestBodyDestinationConfig struct {
 	OnFailure *shared.OnFailure `json:"OnFailure,omitempty"`
 	OnSuccess *shared.OnSuccess `json:"OnSuccess,omitempty"`

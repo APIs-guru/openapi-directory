@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,20 +21,20 @@ class CloudresourcemanagerProjectsCreateQueryParams:
 
 @dataclass
 class CloudresourcemanagerProjectsCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudresourcemanagerProjectsCreateRequest:
-    query_params: CloudresourcemanagerProjectsCreateQueryParams = field(default=None)
-    request: Optional[shared.Project] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudresourcemanagerProjectsCreateSecurity = field(default=None)
+    query_params: CloudresourcemanagerProjectsCreateQueryParams = field()
+    security: CloudresourcemanagerProjectsCreateSecurity = field()
+    request: Optional[shared.ProjectInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CloudresourcemanagerProjectsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

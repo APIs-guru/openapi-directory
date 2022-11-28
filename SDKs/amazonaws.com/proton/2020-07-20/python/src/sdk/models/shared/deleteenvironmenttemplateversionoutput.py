@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import environmenttemplateversion
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteEnvironmentTemplateVersionOutput:
-    environment_template_version: Optional[environmenttemplateversion.EnvironmentTemplateVersion] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environmentTemplateVersion' }})
+    environment_template_version: Optional[EnvironmentTemplateVersion] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environmentTemplateVersion') }})
     

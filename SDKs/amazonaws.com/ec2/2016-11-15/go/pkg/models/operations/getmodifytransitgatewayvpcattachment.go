@@ -10,6 +10,8 @@ const (
 	GetModifyTransitGatewayVpcAttachmentActionEnumModifyTransitGatewayVpcAttachment GetModifyTransitGatewayVpcAttachmentActionEnum = "ModifyTransitGatewayVpcAttachment"
 )
 
+// GetModifyTransitGatewayVpcAttachmentOptions
+// Describes the options for a VPC attachment.
 type GetModifyTransitGatewayVpcAttachmentOptions struct {
 	ApplianceModeSupport *shared.ApplianceModeSupportValueEnum `queryParam:"name=ApplianceModeSupport"`
 	DNSSupport           *shared.DNSSupportValueEnum           `queryParam:"name=DnsSupport"`

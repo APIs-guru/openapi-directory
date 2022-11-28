@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CustomerManagedChannelS3StorageSummary
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Used to store channel data in an S3 bucket that you manage.
 **/
 export class CustomerManagedChannelS3StorageSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucket" })
+  @SpeakeasyMetadata({ data: "json, name=bucket" })
   bucket?: string;
 
-  @Metadata({ data: "json, name=keyPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=keyPrefix" })
   keyPrefix?: string;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 }

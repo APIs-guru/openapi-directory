@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import dimensionalmetricvalue
-from . import dimensionalmetricvalue
+from sdk import utils
+from . import *
 
 class MetricValueMetricEnum(str, Enum):
     METRIC_UNSPECIFIED = "METRIC_UNSPECIFIED"
@@ -26,7 +27,11 @@ class MetricValueMetricEnum(str, Enum):
 @dataclass_json
 @dataclass
 class MetricValue:
-    dimensional_values: Optional[List[dimensionalmetricvalue.DimensionalMetricValue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dimensionalValues' }})
-    metric: Optional[MetricValueMetricEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metric' }})
-    total_value: Optional[dimensionalmetricvalue.DimensionalMetricValue] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'totalValue' }})
+    r"""MetricValue
+    A value for a single Metric from a starting time.
+    """
+    
+    dimensional_values: Optional[List[DimensionalMetricValue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dimensionalValues') }})
+    metric: Optional[MetricValueMetricEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metric') }})
+    total_value: Optional[DimensionalMetricValue] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('totalValue') }})
     

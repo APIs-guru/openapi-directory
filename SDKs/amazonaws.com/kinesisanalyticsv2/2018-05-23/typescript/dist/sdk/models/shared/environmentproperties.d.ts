@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PropertyGroup } from "./propertygroup";
 /**
  * Describes execution properties for a Flink-based Kinesis Data Analytics application.

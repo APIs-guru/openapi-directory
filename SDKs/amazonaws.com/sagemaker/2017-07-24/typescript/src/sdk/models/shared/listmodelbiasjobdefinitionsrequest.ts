@@ -1,30 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MonitoringJobDefinitionSortKeyEnum } from "./monitoringjobdefinitionsortkeyenum";
 import { SortOrderEnum } from "./sortorderenum";
 
 
+
 export class ListModelBiasJobDefinitionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTimeAfter" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTimeAfter" })
   creationTimeAfter?: Date;
 
-  @Metadata({ data: "json, name=CreationTimeBefore" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTimeBefore" })
   creationTimeBefore?: Date;
 
-  @Metadata({ data: "json, name=EndpointName" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointName" })
   endpointName?: string;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NameContains" })
+  @SpeakeasyMetadata({ data: "json, name=NameContains" })
   nameContains?: string;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=SortBy" })
+  @SpeakeasyMetadata({ data: "json, name=SortBy" })
   sortBy?: MonitoringJobDefinitionSortKeyEnum;
 
-  @Metadata({ data: "json, name=SortOrder" })
+  @SpeakeasyMetadata({ data: "json, name=SortOrder" })
   sortOrder?: SortOrderEnum;
 }

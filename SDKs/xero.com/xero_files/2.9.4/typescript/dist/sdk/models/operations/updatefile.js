@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateFilePathParams = /** @class */ (function (_super) {
     __extends(UpdateFilePathParams, _super);
@@ -30,7 +30,7 @@ var UpdateFilePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=FileId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=FileId" }),
         __metadata("design:type", String)
     ], UpdateFilePathParams.prototype, "fileId", void 0);
     return UpdateFilePathParams;
@@ -42,7 +42,7 @@ var UpdateFileHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" }),
         __metadata("design:type", String)
     ], UpdateFileHeaders.prototype, "xeroTenantId", void 0);
     return UpdateFileHeaders;
@@ -54,7 +54,7 @@ var UpdateFileSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOAuth2)
     ], UpdateFileSecurity.prototype, "oAuth2", void 0);
     return UpdateFileSecurity;
@@ -66,19 +66,19 @@ var UpdateFileRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateFilePathParams)
     ], UpdateFileRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateFileHeaders)
     ], UpdateFileRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.FileObject)
     ], UpdateFileRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateFileSecurity)
     ], UpdateFileRequest.prototype, "security", void 0);
     return UpdateFileRequest;
@@ -90,15 +90,15 @@ var UpdateFileResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateFileResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.FileObject)
     ], UpdateFileResponse.prototype, "fileObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateFileResponse.prototype, "statusCode", void 0);
     return UpdateFileResponse;

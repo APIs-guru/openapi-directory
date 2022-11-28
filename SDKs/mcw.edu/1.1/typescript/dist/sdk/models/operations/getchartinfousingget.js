@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetChartInfoUsingGetPathParams = /** @class */ (function (_super) {
     __extends(GetChartInfoUsingGetPathParams, _super);
     function GetChartInfoUsingGetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=refRgdId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=refRgdId" }),
         __metadata("design:type", Number)
     ], GetChartInfoUsingGetPathParams.prototype, "refRgdId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=speciesTypeKey" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=speciesTypeKey" }),
         __metadata("design:type", Number)
     ], GetChartInfoUsingGetPathParams.prototype, "speciesTypeKey", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=termString" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=termString" }),
         __metadata("design:type", String)
     ], GetChartInfoUsingGetPathParams.prototype, "termString", void 0);
     return GetChartInfoUsingGetPathParams;
@@ -49,7 +49,7 @@ var GetChartInfoUsingGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetChartInfoUsingGetPathParams)
     ], GetChartInfoUsingGetRequest.prototype, "pathParams", void 0);
     return GetChartInfoUsingGetRequest;
@@ -61,15 +61,15 @@ var GetChartInfoUsingGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetChartInfoUsingGetResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetChartInfoUsingGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetChartInfoUsingGetResponse.prototype, "statusCode", void 0);
     return GetChartInfoUsingGetResponse;

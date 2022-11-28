@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ReplicationDestination
 /**
  * An array of objects representing the details of a replication destination.
@@ -33,11 +33,11 @@ var ReplicationDestination = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=region" }),
+        SpeakeasyMetadata({ data: "json, name=region" }),
         __metadata("design:type", String)
     ], ReplicationDestination.prototype, "region", void 0);
     __decorate([
-        Metadata({ data: "json, name=registryId" }),
+        SpeakeasyMetadata({ data: "json, name=registryId" }),
         __metadata("design:type", String)
     ], ReplicationDestination.prototype, "registryId", void 0);
     return ReplicationDestination;

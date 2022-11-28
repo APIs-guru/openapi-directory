@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var CisTransactionCisTransactionCisMessageTypeEnum;
 (function (CisTransactionCisTransactionCisMessageTypeEnum) {
     CisTransactionCisTransactionCisMessageTypeEnum["Verification"] = "Verification";
@@ -38,15 +38,15 @@ var CisTransactionCisTransactionEmployerCore = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=@href" }),
+        SpeakeasyMetadata({ data: "json, name=@href" }),
         __metadata("design:type", String)
     ], CisTransactionCisTransactionEmployerCore.prototype, "atHref", void 0);
     __decorate([
-        Metadata({ data: "json, name=@rel" }),
+        SpeakeasyMetadata({ data: "json, name=@rel" }),
         __metadata("design:type", String)
     ], CisTransactionCisTransactionEmployerCore.prototype, "atRel", void 0);
     __decorate([
-        Metadata({ data: "json, name=@title" }),
+        SpeakeasyMetadata({ data: "json, name=@title" }),
         __metadata("design:type", String)
     ], CisTransactionCisTransactionEmployerCore.prototype, "atTitle", void 0);
     return CisTransactionCisTransactionEmployerCore;
@@ -66,35 +66,35 @@ var CisTransactionCisTransaction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CisMessageType" }),
+        SpeakeasyMetadata({ data: "json, name=CisMessageType" }),
         __metadata("design:type", String)
     ], CisTransactionCisTransaction.prototype, "cisMessageType", void 0);
     __decorate([
-        Metadata({ data: "json, name=EmployerCore" }),
+        SpeakeasyMetadata({ data: "json, name=EmployerCore" }),
         __metadata("design:type", CisTransactionCisTransactionEmployerCore)
     ], CisTransactionCisTransaction.prototype, "employerCore", void 0);
     __decorate([
-        Metadata({ data: "json, name=RequestData" }),
+        SpeakeasyMetadata({ data: "json, name=RequestData" }),
         __metadata("design:type", String)
     ], CisTransactionCisTransaction.prototype, "requestData", void 0);
     __decorate([
-        Metadata({ data: "json, name=ResponseData" }),
+        SpeakeasyMetadata({ data: "json, name=ResponseData" }),
         __metadata("design:type", String)
     ], CisTransactionCisTransaction.prototype, "responseData", void 0);
     __decorate([
-        Metadata({ data: "json, name=TaxYear" }),
+        SpeakeasyMetadata({ data: "json, name=TaxYear" }),
         __metadata("design:type", Number)
     ], CisTransactionCisTransaction.prototype, "taxYear", void 0);
     __decorate([
-        Metadata({ data: "json, name=Timestamp" }),
+        SpeakeasyMetadata({ data: "json, name=Timestamp" }),
         __metadata("design:type", Date)
     ], CisTransactionCisTransaction.prototype, "timestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=TransactionStatus" }),
+        SpeakeasyMetadata({ data: "json, name=TransactionStatus" }),
         __metadata("design:type", String)
     ], CisTransactionCisTransaction.prototype, "transactionStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=TransmissionDate" }),
+        SpeakeasyMetadata({ data: "json, name=TransmissionDate" }),
         __metadata("design:type", Date)
     ], CisTransactionCisTransaction.prototype, "transmissionDate", void 0);
     return CisTransactionCisTransaction;
@@ -106,7 +106,7 @@ var CisTransaction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CisTransaction" }),
+        SpeakeasyMetadata({ data: "json, name=CisTransaction" }),
         __metadata("design:type", CisTransactionCisTransaction)
     ], CisTransaction.prototype, "cisTransaction", void 0);
     return CisTransaction;

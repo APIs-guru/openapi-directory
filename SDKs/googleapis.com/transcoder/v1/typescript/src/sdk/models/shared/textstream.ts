@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TextMapping } from "./textmapping";
+
 
 
 // TextStream
@@ -8,9 +8,9 @@ import { TextMapping } from "./textmapping";
  * Encoding of a text stream. For example, closed captions or subtitles.
 **/
 export class TextStream extends SpeakeasyBase {
-  @Metadata({ data: "json, name=codec" })
+  @SpeakeasyMetadata({ data: "json, name=codec" })
   codec?: string;
 
-  @Metadata({ data: "json, name=mapping", elemType: shared.TextMapping })
+  @SpeakeasyMetadata({ data: "json, name=mapping", elemType: TextMapping })
   mapping?: TextMapping[];
 }

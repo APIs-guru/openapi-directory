@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class IpamVrfsListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=enforce_unique" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=enforce_unique" })
   enforceUnique?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id__in" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id__in" })
   idIn?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=q" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=q" })
   q?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=rd" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rd" })
   rd?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tag" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tag" })
   tag?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tenant" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tenant" })
   tenant?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tenant_id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tenant_id" })
   tenantId?: string;
 }
 
 
-export class IpamVrfsListRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: IpamVrfsListQueryParams;
-}
-
-
 export class IpamVrfsList200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count: number;
 
-  @Metadata({ data: "json, name=next" })
+  @SpeakeasyMetadata({ data: "json, name=next" })
   next?: string;
 
-  @Metadata({ data: "json, name=previous" })
+  @SpeakeasyMetadata({ data: "json, name=previous" })
   previous?: string;
 
-  @Metadata({ data: "json, name=results", elemType: shared.Vrf })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: shared.Vrf })
   results: shared.Vrf[];
 }
 
 
+export class IpamVrfsListRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: IpamVrfsListQueryParams;
+}
+
+
 export class IpamVrfsListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   ipamVrfsList200ApplicationJsonObject?: IpamVrfsList200ApplicationJson;
 }

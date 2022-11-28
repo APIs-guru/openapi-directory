@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ProdTtSasportalNodesDevicesSignDevicePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ProdTtSasportalNodesDevicesSignDeviceQueryParams:
 
 @dataclass
 class ProdTtSasportalNodesDevicesSignDeviceSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ProdTtSasportalNodesDevicesSignDeviceRequest:
-    path_params: ProdTtSasportalNodesDevicesSignDevicePathParams = field(default=None)
-    query_params: ProdTtSasportalNodesDevicesSignDeviceQueryParams = field(default=None)
-    request: Optional[shared.SasPortalSignDeviceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ProdTtSasportalNodesDevicesSignDeviceSecurity = field(default=None)
+    path_params: ProdTtSasportalNodesDevicesSignDevicePathParams = field()
+    query_params: ProdTtSasportalNodesDevicesSignDeviceQueryParams = field()
+    security: ProdTtSasportalNodesDevicesSignDeviceSecurity = field()
+    request: Optional[shared.SasPortalSignDeviceRequestInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ProdTtSasportalNodesDevicesSignDeviceResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     sas_portal_empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

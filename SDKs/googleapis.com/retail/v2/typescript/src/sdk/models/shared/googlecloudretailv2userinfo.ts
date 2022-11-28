@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2UserInfo
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information of an end user.
 **/
 export class GoogleCloudRetailV2UserInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=directUserRequest" })
+  @SpeakeasyMetadata({ data: "json, name=directUserRequest" })
   directUserRequest?: boolean;
 
-  @Metadata({ data: "json, name=ipAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=userAgent" })
+  @SpeakeasyMetadata({ data: "json, name=userAgent" })
   userAgent?: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 }

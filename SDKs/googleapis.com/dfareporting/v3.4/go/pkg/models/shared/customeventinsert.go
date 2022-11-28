@@ -8,6 +8,8 @@ const (
 	CustomEventInsertInsertEventTypeEnumClick      CustomEventInsertInsertEventTypeEnum = "CLICK"
 )
 
+// CustomEventInsert
+// Custom event to be inserted.
 type CustomEventInsert struct {
 	CmDimensions    *CampaignManagerIds                   `json:"cmDimensions,omitempty"`
 	Dv3Dimensions   *Dv3Ids                               `json:"dv3Dimensions,omitempty"`

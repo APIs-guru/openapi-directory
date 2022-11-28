@@ -1,0 +1,30 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { PodcastExtraField } from "./podcastextrafield";
+import { PodcastLookingForField } from "./podcastlookingforfield";
+import { PodcastTypeFieldEnum } from "./podcasttypefieldenum";
+export declare class PodcastSimple extends SpeakeasyBase {
+    country?: string;
+    description?: string;
+    earliestPubDateMs?: number;
+    email?: string;
+    explicitContent?: boolean;
+    extra?: PodcastExtraField;
+    genreIds?: number[];
+    id?: string;
+    image?: string;
+    isClaimed?: boolean;
+    itunesId?: number;
+    language?: string;
+    latestPubDateMs?: number;
+    listenScore?: number;
+    listenScoreGlobalRank?: string;
+    listennotesUrl?: string;
+    lookingFor?: PodcastLookingForField;
+    publisher?: string;
+    rss?: string;
+    thumbnail?: string;
+    title?: string;
+    totalEpisodes?: number;
+    type?: PodcastTypeFieldEnum;
+    website?: string;
+}

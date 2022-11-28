@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ArtifactTypeEnum } from "./artifacttypeenum";
 import { MavenReference } from "./mavenreference";
 import { S3ContentLocation } from "./s3contentlocation";
@@ -36,15 +36,15 @@ var CustomArtifactConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ArtifactType" }),
+        SpeakeasyMetadata({ data: "json, name=ArtifactType" }),
         __metadata("design:type", String)
     ], CustomArtifactConfiguration.prototype, "artifactType", void 0);
     __decorate([
-        Metadata({ data: "json, name=MavenReference" }),
+        SpeakeasyMetadata({ data: "json, name=MavenReference" }),
         __metadata("design:type", MavenReference)
     ], CustomArtifactConfiguration.prototype, "mavenReference", void 0);
     __decorate([
-        Metadata({ data: "json, name=S3ContentLocation" }),
+        SpeakeasyMetadata({ data: "json, name=S3ContentLocation" }),
         __metadata("design:type", S3ContentLocation)
     ], CustomArtifactConfiguration.prototype, "s3ContentLocation", void 0);
     return CustomArtifactConfiguration;

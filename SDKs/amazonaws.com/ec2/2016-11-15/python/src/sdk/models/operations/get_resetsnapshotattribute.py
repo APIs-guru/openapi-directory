@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetResetSnapshotAttributeActionEnum(str, Enum):
     RESET_SNAPSHOT_ATTRIBUTE = "ResetSnapshotAttribute"
@@ -14,11 +18,11 @@ class GetResetSnapshotAttributeVersionEnum(str, Enum):
 
 @dataclass
 class GetResetSnapshotAttributeQueryParams:
-    action: GetResetSnapshotAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    attribute: GetResetSnapshotAttributeAttributeEnum = field(default=None, metadata={'query_param': { 'field_name': 'Attribute', 'style': 'form', 'explode': True }})
+    action: GetResetSnapshotAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    attribute: GetResetSnapshotAttributeAttributeEnum = field(metadata={'query_param': { 'field_name': 'Attribute', 'style': 'form', 'explode': True }})
+    snapshot_id: str = field(metadata={'query_param': { 'field_name': 'SnapshotId', 'style': 'form', 'explode': True }})
+    version: GetResetSnapshotAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    snapshot_id: str = field(default=None, metadata={'query_param': { 'field_name': 'SnapshotId', 'style': 'form', 'explode': True }})
-    version: GetResetSnapshotAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,12 +38,12 @@ class GetResetSnapshotAttributeHeaders:
 
 @dataclass
 class GetResetSnapshotAttributeRequest:
-    query_params: GetResetSnapshotAttributeQueryParams = field(default=None)
-    headers: GetResetSnapshotAttributeHeaders = field(default=None)
+    headers: GetResetSnapshotAttributeHeaders = field()
+    query_params: GetResetSnapshotAttributeQueryParams = field()
     
 
 @dataclass
 class GetResetSnapshotAttributeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

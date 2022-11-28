@@ -29,11 +29,6 @@ type CvipcSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type CvipcRequest struct {
-	Request  *CvipcRequestBody `request:"mediaType=application/json"`
-	Security CvipcSecurity
-}
-
 type Cvipc400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Cvipc504ApplicationJSON struct {
 	Error            *Cvipc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Cvipc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type CvipcRequest struct {
+	Request  *CvipcRequestBody `request:"mediaType=application/json"`
+	Security CvipcSecurity
 }
 
 type CvipcResponse struct {

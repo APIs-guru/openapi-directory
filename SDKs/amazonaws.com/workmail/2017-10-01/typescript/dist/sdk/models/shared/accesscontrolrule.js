@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessControlRuleEffectEnum } from "./accesscontrolruleeffectenum";
 // AccessControlRule
 /**
@@ -34,47 +34,47 @@ var AccessControlRule = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Actions" }),
+        SpeakeasyMetadata({ data: "json, name=Actions" }),
         __metadata("design:type", Array)
     ], AccessControlRule.prototype, "actions", void 0);
     __decorate([
-        Metadata({ data: "json, name=DateCreated" }),
+        SpeakeasyMetadata({ data: "json, name=DateCreated" }),
         __metadata("design:type", Date)
     ], AccessControlRule.prototype, "dateCreated", void 0);
     __decorate([
-        Metadata({ data: "json, name=DateModified" }),
+        SpeakeasyMetadata({ data: "json, name=DateModified" }),
         __metadata("design:type", Date)
     ], AccessControlRule.prototype, "dateModified", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], AccessControlRule.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Effect" }),
+        SpeakeasyMetadata({ data: "json, name=Effect" }),
         __metadata("design:type", String)
     ], AccessControlRule.prototype, "effect", void 0);
     __decorate([
-        Metadata({ data: "json, name=IpRanges" }),
+        SpeakeasyMetadata({ data: "json, name=IpRanges" }),
         __metadata("design:type", Array)
     ], AccessControlRule.prototype, "ipRanges", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], AccessControlRule.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=NotActions" }),
+        SpeakeasyMetadata({ data: "json, name=NotActions" }),
         __metadata("design:type", Array)
     ], AccessControlRule.prototype, "notActions", void 0);
     __decorate([
-        Metadata({ data: "json, name=NotIpRanges" }),
+        SpeakeasyMetadata({ data: "json, name=NotIpRanges" }),
         __metadata("design:type", Array)
     ], AccessControlRule.prototype, "notIpRanges", void 0);
     __decorate([
-        Metadata({ data: "json, name=NotUserIds" }),
+        SpeakeasyMetadata({ data: "json, name=NotUserIds" }),
         __metadata("design:type", Array)
     ], AccessControlRule.prototype, "notUserIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=UserIds" }),
+        SpeakeasyMetadata({ data: "json, name=UserIds" }),
         __metadata("design:type", Array)
     ], AccessControlRule.prototype, "userIds", void 0);
     return AccessControlRule;

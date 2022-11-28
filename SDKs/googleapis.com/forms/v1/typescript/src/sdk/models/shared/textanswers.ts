@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TextAnswer } from "./textanswer";
+
 
 
 // TextAnswers
@@ -8,6 +8,6 @@ import { TextAnswer } from "./textanswer";
  * A question's answers as text.
 **/
 export class TextAnswers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=answers", elemType: shared.TextAnswer })
+  @SpeakeasyMetadata({ data: "json, name=answers", elemType: TextAnswer })
   answers?: TextAnswer[];
 }

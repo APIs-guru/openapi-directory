@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class GetV4LayersAsHarvestedQueryParams extends SpeakeasyBase {
     occurredAfter?: Date;
@@ -11,15 +11,9 @@ export declare class GetV4LayersAsHarvestedHeaders extends SpeakeasyBase {
     xLimit?: number;
     xNextToken?: string;
 }
-export declare class GetV4LayersAsHarvestedSecurityOption1 extends SpeakeasyBase {
-    apiKey: shared.SchemeApiKey;
-}
-export declare class GetV4LayersAsHarvestedSecurityOption2 extends SpeakeasyBase {
-    oauth2AuthorizationCode: shared.SchemeOauth2AuthorizationCode;
-}
 export declare class GetV4LayersAsHarvestedSecurity extends SpeakeasyBase {
-    option1?: GetV4LayersAsHarvestedSecurityOption1;
-    option2?: GetV4LayersAsHarvestedSecurityOption2;
+    apiKey?: shared.SchemeApiKey;
+    oauth2AuthorizationCode?: shared.SchemeOauth2AuthorizationCode;
 }
 export declare class GetV4LayersAsHarvestedRequest extends SpeakeasyBase {
     queryParams: GetV4LayersAsHarvestedQueryParams;

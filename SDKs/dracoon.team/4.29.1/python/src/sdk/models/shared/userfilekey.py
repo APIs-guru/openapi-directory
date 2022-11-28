@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import filekey
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UserFileKey:
-    file_key: filekey.FileKey = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fileKey' }})
-    user_id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userId' }})
+    r"""UserFileKey
+    User file key
+    """
+    
+    file_key: FileKey = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('fileKey') }})
+    user_id: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('userId') }})
     

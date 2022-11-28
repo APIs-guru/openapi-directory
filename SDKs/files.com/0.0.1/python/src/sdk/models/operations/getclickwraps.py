@@ -11,12 +11,12 @@ class GetClickwrapsQueryParams:
 
 @dataclass
 class GetClickwrapsRequest:
-    query_params: GetClickwrapsQueryParams = field(default=None)
+    query_params: GetClickwrapsQueryParams = field()
     
 
 @dataclass
 class GetClickwrapsResponse:
+    content_type: str = field()
+    status_code: int = field()
     clickwrap_entities: Optional[List[shared.ClickwrapEntity]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

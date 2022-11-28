@@ -23,6 +23,8 @@ type UpdateInAppTemplateHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateInAppTemplateRequestBodyInAppTemplateRequest
+// InApp Template Request.
 type UpdateInAppTemplateRequestBodyInAppTemplateRequest struct {
 	Content             []shared.InAppMessageContent `json:"Content,omitempty"`
 	CustomConfig        map[string]string            `json:"CustomConfig,omitempty"`

@@ -32,7 +32,7 @@ type NetworkconnectivityProjectsLocationsGlobalHubsCreateSecurity struct {
 type NetworkconnectivityProjectsLocationsGlobalHubsCreateRequest struct {
 	PathParams  NetworkconnectivityProjectsLocationsGlobalHubsCreatePathParams
 	QueryParams NetworkconnectivityProjectsLocationsGlobalHubsCreateQueryParams
-	Request     *shared.Hub `request:"mediaType=application/json"`
+	Request     *shared.HubInput `request:"mediaType=application/json"`
 	Security    NetworkconnectivityProjectsLocationsGlobalHubsCreateSecurity
 }
 

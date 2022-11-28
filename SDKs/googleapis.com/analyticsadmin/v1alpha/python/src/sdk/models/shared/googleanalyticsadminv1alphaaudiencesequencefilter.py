@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleanalyticsadminv1alphaaudiencesequencefilteraudiencesequencestep
+from sdk import utils
+from . import *
 
 class GoogleAnalyticsAdminV1alphaAudienceSequenceFilterScopeEnum(str, Enum):
     AUDIENCE_FILTER_SCOPE_UNSPECIFIED = "AUDIENCE_FILTER_SCOPE_UNSPECIFIED"
@@ -13,7 +15,11 @@ class GoogleAnalyticsAdminV1alphaAudienceSequenceFilterScopeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleAnalyticsAdminV1alphaAudienceSequenceFilter:
-    scope: Optional[GoogleAnalyticsAdminV1alphaAudienceSequenceFilterScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scope' }})
-    sequence_maximum_duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sequenceMaximumDuration' }})
-    sequence_steps: Optional[List[googleanalyticsadminv1alphaaudiencesequencefilteraudiencesequencestep.GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStep]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sequenceSteps' }})
+    r"""GoogleAnalyticsAdminV1alphaAudienceSequenceFilter
+    Defines filters that must occur in a specific order for the user to be a member of the Audience.
+    """
+    
+    scope: Optional[GoogleAnalyticsAdminV1alphaAudienceSequenceFilterScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scope') }})
+    sequence_maximum_duration: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sequenceMaximumDuration') }})
+    sequence_steps: Optional[List[GoogleAnalyticsAdminV1alphaAudienceSequenceFilterAudienceSequenceStep]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sequenceSteps') }})
     

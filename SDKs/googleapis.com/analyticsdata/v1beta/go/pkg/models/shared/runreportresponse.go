@@ -1,5 +1,7 @@
 package shared
 
+// RunReportResponse
+// The response report table corresponding to a request.
 type RunReportResponse struct {
 	DimensionHeaders []DimensionHeader `json:"dimensionHeaders,omitempty"`
 	Kind             *string           `json:"kind,omitempty"`

@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetPostLocations200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
 export class GetPostLocationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: operations.GetPostLocations200ApplicationJson })
+  @SpeakeasyMetadata({ elemType: GetPostLocations200ApplicationJson })
   getPostLocations200ApplicationJsonObjects?: GetPostLocations200ApplicationJson[];
 }

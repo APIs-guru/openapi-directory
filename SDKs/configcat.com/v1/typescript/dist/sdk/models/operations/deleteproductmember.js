@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteProductMemberPathParams = /** @class */ (function (_super) {
     __extends(DeleteProductMemberPathParams, _super);
     function DeleteProductMemberPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=productId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=productId" }),
         __metadata("design:type", String)
     ], DeleteProductMemberPathParams.prototype, "productId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=userId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userId" }),
         __metadata("design:type", String)
     ], DeleteProductMemberPathParams.prototype, "userId", void 0);
     return DeleteProductMemberPathParams;
@@ -45,7 +45,7 @@ var DeleteProductMemberRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteProductMemberPathParams)
     ], DeleteProductMemberRequest.prototype, "pathParams", void 0);
     return DeleteProductMemberRequest;
@@ -57,11 +57,11 @@ var DeleteProductMemberResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteProductMemberResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteProductMemberResponse.prototype, "statusCode", void 0);
     return DeleteProductMemberResponse;

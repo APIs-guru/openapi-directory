@@ -22,43 +22,43 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Notification } from "./notification";
 var WorkspaceUpdate = /** @class */ (function (_super) {
     __extends(WorkspaceUpdate, _super);
     function WorkspaceUpdate() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=anonymousDataCollection" }),
+        SpeakeasyMetadata({ data: "json, name=anonymousDataCollection" }),
         __metadata("design:type", Boolean)
     ], WorkspaceUpdate.prototype, "anonymousDataCollection", void 0);
     __decorate([
-        Metadata({ data: "json, name=displaySetupWizard" }),
+        SpeakeasyMetadata({ data: "json, name=displaySetupWizard" }),
         __metadata("design:type", Boolean)
     ], WorkspaceUpdate.prototype, "displaySetupWizard", void 0);
     __decorate([
-        Metadata({ data: "json, name=email" }),
+        SpeakeasyMetadata({ data: "json, name=email" }),
         __metadata("design:type", String)
     ], WorkspaceUpdate.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=initialSetupComplete" }),
+        SpeakeasyMetadata({ data: "json, name=initialSetupComplete" }),
         __metadata("design:type", Boolean)
     ], WorkspaceUpdate.prototype, "initialSetupComplete", void 0);
     __decorate([
-        Metadata({ data: "json, name=news" }),
+        SpeakeasyMetadata({ data: "json, name=news" }),
         __metadata("design:type", Boolean)
     ], WorkspaceUpdate.prototype, "news", void 0);
     __decorate([
-        Metadata({ data: "json, name=notifications", elemType: shared.Notification }),
+        SpeakeasyMetadata({ data: "json, name=notifications", elemType: Notification }),
         __metadata("design:type", Array)
     ], WorkspaceUpdate.prototype, "notifications", void 0);
     __decorate([
-        Metadata({ data: "json, name=securityUpdates" }),
+        SpeakeasyMetadata({ data: "json, name=securityUpdates" }),
         __metadata("design:type", Boolean)
     ], WorkspaceUpdate.prototype, "securityUpdates", void 0);
     __decorate([
-        Metadata({ data: "json, name=workspaceId" }),
+        SpeakeasyMetadata({ data: "json, name=workspaceId" }),
         __metadata("design:type", String)
     ], WorkspaceUpdate.prototype, "workspaceId", void 0);
     return WorkspaceUpdate;

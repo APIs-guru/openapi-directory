@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DataRetrievalRule
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Data retrieval policy rule.
 **/
 export class DataRetrievalRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BytesPerHour" })
+  @SpeakeasyMetadata({ data: "json, name=BytesPerHour" })
   bytesPerHour?: number;
 
-  @Metadata({ data: "json, name=Strategy" })
+  @SpeakeasyMetadata({ data: "json, name=Strategy" })
   strategy?: string;
 }

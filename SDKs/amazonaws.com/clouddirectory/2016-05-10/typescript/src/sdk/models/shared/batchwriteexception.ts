@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BatchWriteExceptionTypeEnum } from "./batchwriteexceptiontypeenum";
+
 
 
 // BatchWriteException
@@ -7,12 +8,12 @@ import { BatchWriteExceptionTypeEnum } from "./batchwriteexceptiontypeenum";
  * A <code>BatchWrite</code> exception has occurred.
 **/
 export class BatchWriteException extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Index" })
+  @SpeakeasyMetadata({ data: "json, name=Index" })
   index?: number;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: BatchWriteExceptionTypeEnum;
 }

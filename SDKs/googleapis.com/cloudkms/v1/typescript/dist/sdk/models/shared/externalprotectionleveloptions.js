@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ExternalProtectionLevelOptions
 /**
  * ExternalProtectionLevelOptions stores a group of additional fields for configuring a CryptoKeyVersion that are specific to the EXTERNAL protection level and EXTERNAL_VPC protection levels.
@@ -33,11 +33,11 @@ var ExternalProtectionLevelOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ekmConnectionKeyPath" }),
+        SpeakeasyMetadata({ data: "json, name=ekmConnectionKeyPath" }),
         __metadata("design:type", String)
     ], ExternalProtectionLevelOptions.prototype, "ekmConnectionKeyPath", void 0);
     __decorate([
-        Metadata({ data: "json, name=externalKeyUri" }),
+        SpeakeasyMetadata({ data: "json, name=externalKeyUri" }),
         __metadata("design:type", String)
     ], ExternalProtectionLevelOptions.prototype, "externalKeyUri", void 0);
     return ExternalProtectionLevelOptions;

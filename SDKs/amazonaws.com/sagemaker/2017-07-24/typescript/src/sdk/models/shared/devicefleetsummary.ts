@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeviceFleetSummary
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Summary of the device fleet.
 **/
 export class DeviceFleetSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=DeviceFleetArn" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceFleetArn" })
   deviceFleetArn: string;
 
-  @Metadata({ data: "json, name=DeviceFleetName" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceFleetName" })
   deviceFleetName: string;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 }

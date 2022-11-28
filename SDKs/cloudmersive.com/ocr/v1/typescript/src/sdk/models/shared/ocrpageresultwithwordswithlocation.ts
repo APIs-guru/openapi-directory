@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OcrWordElement } from "./ocrwordelement";
+
 
 
 // OcrPageResultWithWordsWithLocation
@@ -8,12 +8,12 @@ import { OcrWordElement } from "./ocrwordelement";
  * OCR results of a page, including words of text and their location
 **/
 export class OcrPageResultWithWordsWithLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PageNumber" })
+  @SpeakeasyMetadata({ data: "json, name=PageNumber" })
   pageNumber?: number;
 
-  @Metadata({ data: "json, name=Successful" })
+  @SpeakeasyMetadata({ data: "json, name=Successful" })
   successful?: boolean;
 
-  @Metadata({ data: "json, name=Words", elemType: shared.OcrWordElement })
+  @SpeakeasyMetadata({ data: "json, name=Words", elemType: OcrWordElement })
   words?: OcrWordElement[];
 }

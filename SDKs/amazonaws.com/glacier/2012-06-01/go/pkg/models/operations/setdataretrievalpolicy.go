@@ -18,6 +18,8 @@ type SetDataRetrievalPolicyHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// SetDataRetrievalPolicyRequestBodyPolicy
+// Data retrieval policy.
 type SetDataRetrievalPolicyRequestBodyPolicy struct {
 	Rules []shared.DataRetrievalRule `json:"Rules,omitempty"`
 }

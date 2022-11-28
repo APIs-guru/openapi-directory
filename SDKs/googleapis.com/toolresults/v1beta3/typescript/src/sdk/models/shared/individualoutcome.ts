@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Duration } from "./duration";
 
+
 export enum IndividualOutcomeOutcomeSummaryEnum {
-    Unset = "unset"
-,    Success = "success"
-,    Failure = "failure"
-,    Inconclusive = "inconclusive"
-,    Skipped = "skipped"
-,    Flaky = "flaky"
+    Unset = "unset",
+    Success = "success",
+    Failure = "failure",
+    Inconclusive = "inconclusive",
+    Skipped = "skipped",
+    Flaky = "flaky"
 }
 
 
@@ -16,15 +17,15 @@ export enum IndividualOutcomeOutcomeSummaryEnum {
  * Step Id and outcome of each individual step that was run as a group with other steps with the same configuration.
 **/
 export class IndividualOutcome extends SpeakeasyBase {
-  @Metadata({ data: "json, name=multistepNumber" })
+  @SpeakeasyMetadata({ data: "json, name=multistepNumber" })
   multistepNumber?: number;
 
-  @Metadata({ data: "json, name=outcomeSummary" })
+  @SpeakeasyMetadata({ data: "json, name=outcomeSummary" })
   outcomeSummary?: IndividualOutcomeOutcomeSummaryEnum;
 
-  @Metadata({ data: "json, name=runDuration" })
+  @SpeakeasyMetadata({ data: "json, name=runDuration" })
   runDuration?: Duration;
 
-  @Metadata({ data: "json, name=stepId" })
+  @SpeakeasyMetadata({ data: "json, name=stepId" })
   stepId?: string;
 }

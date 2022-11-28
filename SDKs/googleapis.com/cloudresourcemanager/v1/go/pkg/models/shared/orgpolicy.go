@@ -1,5 +1,7 @@
 package shared
 
+// OrgPolicy
+// Defines a Cloud Organization `Policy` which is used to specify `Constraints` for configurations of Cloud Platform resources.
 type OrgPolicy struct {
 	BooleanPolicy  *BooleanPolicy         `json:"booleanPolicy,omitempty"`
 	Constraint     *string                `json:"constraint,omitempty"`

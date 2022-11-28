@@ -1,0 +1,7 @@
+package shared
+
+type PermissionsBoundaryAttachmentTypeEnum string
+
+const (
+	PermissionsBoundaryAttachmentTypeEnumPermissionsBoundaryPolicy PermissionsBoundaryAttachmentTypeEnum = "PermissionsBoundaryPolicy"
+)

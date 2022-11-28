@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CollectionOverride } from "./collectionoverride";
 import { Credential } from "./credential";
 import { TypeProviderLabelEntry } from "./typeproviderlabelentry";
@@ -7,44 +6,45 @@ import { Operation } from "./operation";
 import { Options } from "./options";
 
 
+
 // TypeProvider
 /** 
  * A type provider that describes a service-backed Type.
 **/
 export class TypeProvider extends SpeakeasyBase {
-  @Metadata({ data: "json, name=collectionOverrides", elemType: shared.CollectionOverride })
+  @SpeakeasyMetadata({ data: "json, name=collectionOverrides", elemType: CollectionOverride })
   collectionOverrides?: CollectionOverride[];
 
-  @Metadata({ data: "json, name=credential" })
+  @SpeakeasyMetadata({ data: "json, name=credential" })
   credential?: Credential;
 
-  @Metadata({ data: "json, name=customCertificateAuthorityRoots" })
+  @SpeakeasyMetadata({ data: "json, name=customCertificateAuthorityRoots" })
   customCertificateAuthorityRoots?: string[];
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=descriptorUrl" })
+  @SpeakeasyMetadata({ data: "json, name=descriptorUrl" })
   descriptorUrl?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=insertTime" })
+  @SpeakeasyMetadata({ data: "json, name=insertTime" })
   insertTime?: string;
 
-  @Metadata({ data: "json, name=labels", elemType: shared.TypeProviderLabelEntry })
+  @SpeakeasyMetadata({ data: "json, name=labels", elemType: TypeProviderLabelEntry })
   labels?: TypeProviderLabelEntry[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=operation" })
+  @SpeakeasyMetadata({ data: "json, name=operation" })
   operation?: Operation;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: Options;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 }

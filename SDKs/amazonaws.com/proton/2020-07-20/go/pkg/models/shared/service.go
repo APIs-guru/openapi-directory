@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Service
+// The service detail data.
 type Service struct {
 	Arn                     string            `json:"arn"`
 	BranchName              *string           `json:"branchName,omitempty"`

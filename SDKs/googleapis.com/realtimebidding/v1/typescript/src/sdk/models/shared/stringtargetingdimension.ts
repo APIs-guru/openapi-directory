@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum StringTargetingDimensionTargetingModeEnum {
-    TargetingModeUnspecified = "TARGETING_MODE_UNSPECIFIED"
-,    Inclusive = "INCLUSIVE"
-,    Exclusive = "EXCLUSIVE"
+    TargetingModeUnspecified = "TARGETING_MODE_UNSPECIFIED",
+    Inclusive = "INCLUSIVE",
+    Exclusive = "EXCLUSIVE"
 }
 
 
@@ -12,9 +13,9 @@ export enum StringTargetingDimensionTargetingModeEnum {
  * Generic targeting with string values used in app, website and publisher targeting.
 **/
 export class StringTargetingDimension extends SpeakeasyBase {
-  @Metadata({ data: "json, name=targetingMode" })
+  @SpeakeasyMetadata({ data: "json, name=targetingMode" })
   targetingMode?: StringTargetingDimensionTargetingModeEnum;
 
-  @Metadata({ data: "json, name=values" })
+  @SpeakeasyMetadata({ data: "json, name=values" })
   values?: string[];
 }

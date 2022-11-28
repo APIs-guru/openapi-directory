@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComplianceTypeEnum } from "./compliancetypeenum";
+
 
 
 // ConfigRuleComplianceFilters
@@ -7,15 +8,15 @@ import { ComplianceTypeEnum } from "./compliancetypeenum";
  * Filters the compliance results based on account ID, region, compliance type, and rule name.
 **/
 export class ConfigRuleComplianceFilters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AccountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=AwsRegion" })
+  @SpeakeasyMetadata({ data: "json, name=AwsRegion" })
   awsRegion?: string;
 
-  @Metadata({ data: "json, name=ComplianceType" })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceType" })
   complianceType?: ComplianceTypeEnum;
 
-  @Metadata({ data: "json, name=ConfigRuleName" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigRuleName" })
   configRuleName?: string;
 }

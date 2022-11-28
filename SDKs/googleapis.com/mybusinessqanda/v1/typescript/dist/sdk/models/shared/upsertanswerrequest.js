@@ -22,21 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Answer } from "./answer";
-// UpsertAnswerRequest
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AnswerInput } from "./answer";
+// UpsertAnswerRequestInput
 /**
  * Request message for QuestionsAndAnswers.UpsertAnswer
 **/
-var UpsertAnswerRequest = /** @class */ (function (_super) {
-    __extends(UpsertAnswerRequest, _super);
-    function UpsertAnswerRequest() {
+var UpsertAnswerRequestInput = /** @class */ (function (_super) {
+    __extends(UpsertAnswerRequestInput, _super);
+    function UpsertAnswerRequestInput() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=answer" }),
-        __metadata("design:type", Answer)
-    ], UpsertAnswerRequest.prototype, "answer", void 0);
-    return UpsertAnswerRequest;
+        SpeakeasyMetadata({ data: "json, name=answer" }),
+        __metadata("design:type", AnswerInput)
+    ], UpsertAnswerRequestInput.prototype, "answer", void 0);
+    return UpsertAnswerRequestInput;
 }(SpeakeasyBase));
-export { UpsertAnswerRequest };
+export { UpsertAnswerRequestInput };

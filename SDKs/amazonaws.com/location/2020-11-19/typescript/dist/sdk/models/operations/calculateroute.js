@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CalculateRoutePathParams = /** @class */ (function (_super) {
     __extends(CalculateRoutePathParams, _super);
@@ -30,7 +30,7 @@ var CalculateRoutePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=CalculatorName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=CalculatorName" }),
         __metadata("design:type", String)
     ], CalculateRoutePathParams.prototype, "calculatorName", void 0);
     return CalculateRoutePathParams;
@@ -42,31 +42,31 @@ var CalculateRouteHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CalculateRouteHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CalculateRouteHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CalculateRouteHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CalculateRouteHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CalculateRouteHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CalculateRouteHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CalculateRouteHeaders.prototype, "xAmzSignedHeaders", void 0);
     return CalculateRouteHeaders;
@@ -82,11 +82,11 @@ var CalculateRouteRequestBodyCarModeOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AvoidFerries" }),
+        SpeakeasyMetadata({ data: "json, name=AvoidFerries" }),
         __metadata("design:type", Boolean)
     ], CalculateRouteRequestBodyCarModeOptions.prototype, "avoidFerries", void 0);
     __decorate([
-        Metadata({ data: "json, name=AvoidTolls" }),
+        SpeakeasyMetadata({ data: "json, name=AvoidTolls" }),
         __metadata("design:type", Boolean)
     ], CalculateRouteRequestBodyCarModeOptions.prototype, "avoidTolls", void 0);
     return CalculateRouteRequestBodyCarModeOptions;
@@ -113,19 +113,19 @@ var CalculateRouteRequestBodyTruckModeOptions = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AvoidFerries" }),
+        SpeakeasyMetadata({ data: "json, name=AvoidFerries" }),
         __metadata("design:type", Boolean)
     ], CalculateRouteRequestBodyTruckModeOptions.prototype, "avoidFerries", void 0);
     __decorate([
-        Metadata({ data: "json, name=AvoidTolls" }),
+        SpeakeasyMetadata({ data: "json, name=AvoidTolls" }),
         __metadata("design:type", Boolean)
     ], CalculateRouteRequestBodyTruckModeOptions.prototype, "avoidTolls", void 0);
     __decorate([
-        Metadata({ data: "json, name=Dimensions" }),
+        SpeakeasyMetadata({ data: "json, name=Dimensions" }),
         __metadata("design:type", shared.TruckDimensions)
     ], CalculateRouteRequestBodyTruckModeOptions.prototype, "dimensions", void 0);
     __decorate([
-        Metadata({ data: "json, name=Weight" }),
+        SpeakeasyMetadata({ data: "json, name=Weight" }),
         __metadata("design:type", shared.TruckWeight)
     ], CalculateRouteRequestBodyTruckModeOptions.prototype, "weight", void 0);
     return CalculateRouteRequestBodyTruckModeOptions;
@@ -137,43 +137,43 @@ var CalculateRouteRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CarModeOptions" }),
+        SpeakeasyMetadata({ data: "json, name=CarModeOptions" }),
         __metadata("design:type", CalculateRouteRequestBodyCarModeOptions)
     ], CalculateRouteRequestBody.prototype, "carModeOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=DepartNow" }),
+        SpeakeasyMetadata({ data: "json, name=DepartNow" }),
         __metadata("design:type", Boolean)
     ], CalculateRouteRequestBody.prototype, "departNow", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeparturePosition" }),
+        SpeakeasyMetadata({ data: "json, name=DeparturePosition" }),
         __metadata("design:type", Array)
     ], CalculateRouteRequestBody.prototype, "departurePosition", void 0);
     __decorate([
-        Metadata({ data: "json, name=DepartureTime" }),
+        SpeakeasyMetadata({ data: "json, name=DepartureTime" }),
         __metadata("design:type", Date)
     ], CalculateRouteRequestBody.prototype, "departureTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=DestinationPosition" }),
+        SpeakeasyMetadata({ data: "json, name=DestinationPosition" }),
         __metadata("design:type", Array)
     ], CalculateRouteRequestBody.prototype, "destinationPosition", void 0);
     __decorate([
-        Metadata({ data: "json, name=DistanceUnit" }),
+        SpeakeasyMetadata({ data: "json, name=DistanceUnit" }),
         __metadata("design:type", String)
     ], CalculateRouteRequestBody.prototype, "distanceUnit", void 0);
     __decorate([
-        Metadata({ data: "json, name=IncludeLegGeometry" }),
+        SpeakeasyMetadata({ data: "json, name=IncludeLegGeometry" }),
         __metadata("design:type", Boolean)
     ], CalculateRouteRequestBody.prototype, "includeLegGeometry", void 0);
     __decorate([
-        Metadata({ data: "json, name=TravelMode" }),
+        SpeakeasyMetadata({ data: "json, name=TravelMode" }),
         __metadata("design:type", String)
     ], CalculateRouteRequestBody.prototype, "travelMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=TruckModeOptions" }),
+        SpeakeasyMetadata({ data: "json, name=TruckModeOptions" }),
         __metadata("design:type", CalculateRouteRequestBodyTruckModeOptions)
     ], CalculateRouteRequestBody.prototype, "truckModeOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=WaypointPositions" }),
+        SpeakeasyMetadata({ data: "json, name=WaypointPositions" }),
         __metadata("design:type", Array)
     ], CalculateRouteRequestBody.prototype, "waypointPositions", void 0);
     return CalculateRouteRequestBody;
@@ -185,15 +185,15 @@ var CalculateRouteRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CalculateRoutePathParams)
     ], CalculateRouteRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CalculateRouteHeaders)
     ], CalculateRouteRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CalculateRouteRequestBody)
     ], CalculateRouteRequest.prototype, "request", void 0);
     return CalculateRouteRequest;
@@ -205,35 +205,35 @@ var CalculateRouteResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CalculateRouteResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CalculateRouteResponse)
     ], CalculateRouteResponse.prototype, "calculateRouteResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CalculateRouteResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CalculateRouteResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CalculateRouteResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CalculateRouteResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CalculateRouteResponse.prototype, "throttlingException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CalculateRouteResponse.prototype, "validationException", void 0);
     return CalculateRouteResponse;

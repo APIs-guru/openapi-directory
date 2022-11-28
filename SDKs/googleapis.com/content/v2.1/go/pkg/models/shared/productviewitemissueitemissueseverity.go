@@ -9,6 +9,8 @@ const (
 	ProductViewItemIssueItemIssueSeverityAggregatedSeverityEnumPending                            ProductViewItemIssueItemIssueSeverityAggregatedSeverityEnum = "PENDING"
 )
 
+// ProductViewItemIssueItemIssueSeverity
+// Severity of an issue per destination in a region, and aggregated severity.
 type ProductViewItemIssueItemIssueSeverity struct {
 	AggregatedSeverity     *ProductViewItemIssueItemIssueSeverityAggregatedSeverityEnum `json:"aggregatedSeverity,omitempty"`
 	SeverityPerDestination []ProductViewItemIssueIssueSeverityPerDestination            `json:"severityPerDestination,omitempty"`

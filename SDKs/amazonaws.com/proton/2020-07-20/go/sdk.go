@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://proton.{region}.amazonaws.com",
 	"https://proton.{region}.amazonaws.com",
 	"http://proton.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/proton/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AcceptEnvironmentAccountConnection - <p>In a management account, an environment account connection request is accepted. When the environment account connection request is accepted, AWS Proton can use the associated IAM role to provision environment infrastructure resources in the associated environment account.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>
 func (s *SDK) AcceptEnvironmentAccountConnection(ctx context.Context, request operations.AcceptEnvironmentAccountConnectionRequest) (*operations.AcceptEnvironmentAccountConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.AcceptEnvironmentAccountConnection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) AcceptEnvironmentAccountConnection(ctx context.Context, request op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -171,8 +198,9 @@ func (s *SDK) AcceptEnvironmentAccountConnection(ctx context.Context, request op
 	return res, nil
 }
 
+// CancelEnvironmentDeployment - <p>Attempts to cancel an environment deployment on an <a>UpdateEnvironment</a> action, if the deployment is <code>IN_PROGRESS</code>. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-update.html">Update an environment</a> in the <i>AWS Proton Administrator guide</i>.</p> <p>The following list includes potential cancellation scenarios.</p> <ul> <li> <p>If the cancellation attempt succeeds, the resulting deployment state is <code>CANCELLED</code>.</p> </li> <li> <p>If the cancellation attempt fails, the resulting deployment state is <code>FAILED</code>.</p> </li> <li> <p>If the current <a>UpdateEnvironment</a> action succeeds before the cancellation attempt starts, the resulting deployment state is <code>SUCCEEDED</code> and the cancellation attempt has no effect.</p> </li> </ul>
 func (s *SDK) CancelEnvironmentDeployment(ctx context.Context, request operations.CancelEnvironmentDeploymentRequest) (*operations.CancelEnvironmentDeploymentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.CancelEnvironmentDeployment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -192,7 +220,7 @@ func (s *SDK) CancelEnvironmentDeployment(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -282,8 +310,9 @@ func (s *SDK) CancelEnvironmentDeployment(ctx context.Context, request operation
 	return res, nil
 }
 
+// CancelServiceInstanceDeployment - <p>Attempts to cancel a service instance deployment on an <a>UpdateServiceInstance</a> action, if the deployment is <code>IN_PROGRESS</code>. For more information, see <i>Update a service instance</i> in the <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-instance-update.html">AWS Proton Administrator guide</a> or the <a href="https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-instance-update.html">AWS Proton User guide</a>.</p> <p>The following list includes potential cancellation scenarios.</p> <ul> <li> <p>If the cancellation attempt succeeds, the resulting deployment state is <code>CANCELLED</code>.</p> </li> <li> <p>If the cancellation attempt fails, the resulting deployment state is <code>FAILED</code>.</p> </li> <li> <p>If the current <a>UpdateServiceInstance</a> action succeeds before the cancellation attempt starts, the resulting deployment state is <code>SUCCEEDED</code> and the cancellation attempt has no effect.</p> </li> </ul>
 func (s *SDK) CancelServiceInstanceDeployment(ctx context.Context, request operations.CancelServiceInstanceDeploymentRequest) (*operations.CancelServiceInstanceDeploymentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.CancelServiceInstanceDeployment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -303,7 +332,7 @@ func (s *SDK) CancelServiceInstanceDeployment(ctx context.Context, request opera
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -393,8 +422,9 @@ func (s *SDK) CancelServiceInstanceDeployment(ctx context.Context, request opera
 	return res, nil
 }
 
+// CancelServicePipelineDeployment - <p>Attempts to cancel a service pipeline deployment on an <a>UpdateServicePipeline</a> action, if the deployment is <code>IN_PROGRESS</code>. For more information, see <i>Update a service pipeline</i> in the <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-pipeline-update.html">AWS Proton Administrator guide</a> or the <a href="https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-pipeline-update.html">AWS Proton User guide</a>.</p> <p>The following list includes potential cancellation scenarios.</p> <ul> <li> <p>If the cancellation attempt succeeds, the resulting deployment state is <code>CANCELLED</code>.</p> </li> <li> <p>If the cancellation attempt fails, the resulting deployment state is <code>FAILED</code>.</p> </li> <li> <p>If the current <a>UpdateServicePipeline</a> action succeeds before the cancellation attempt starts, the resulting deployment state is <code>SUCCEEDED</code> and the cancellation attempt has no effect.</p> </li> </ul>
 func (s *SDK) CancelServicePipelineDeployment(ctx context.Context, request operations.CancelServicePipelineDeploymentRequest) (*operations.CancelServicePipelineDeploymentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.CancelServicePipelineDeployment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -414,7 +444,7 @@ func (s *SDK) CancelServicePipelineDeployment(ctx context.Context, request opera
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -504,8 +534,9 @@ func (s *SDK) CancelServicePipelineDeployment(ctx context.Context, request opera
 	return res, nil
 }
 
+// CreateEnvironment - Deploy a new environment. An AWS Proton environment is created from an environment template that defines infrastructure and resources that can be shared across services. For more information, see the <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-environments.html">Environments</a> in the <i>AWS Proton Administrator Guide.</i>
 func (s *SDK) CreateEnvironment(ctx context.Context, request operations.CreateEnvironmentRequest) (*operations.CreateEnvironmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.CreateEnvironment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -525,7 +556,7 @@ func (s *SDK) CreateEnvironment(ctx context.Context, request operations.CreateEn
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -625,8 +656,9 @@ func (s *SDK) CreateEnvironment(ctx context.Context, request operations.CreateEn
 	return res, nil
 }
 
+// CreateEnvironmentAccountConnection - <p>Create an environment account connection in an environment account so that environment infrastructure resources can be provisioned in the environment account from a management account.</p> <p>An environment account connection is a secure bi-directional connection between a <i>management account</i> and an <i>environment account</i> that maintains authorization and permissions. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>
 func (s *SDK) CreateEnvironmentAccountConnection(ctx context.Context, request operations.CreateEnvironmentAccountConnectionRequest) (*operations.CreateEnvironmentAccountConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.CreateEnvironmentAccountConnection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -646,7 +678,7 @@ func (s *SDK) CreateEnvironmentAccountConnection(ctx context.Context, request op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -736,8 +768,9 @@ func (s *SDK) CreateEnvironmentAccountConnection(ctx context.Context, request op
 	return res, nil
 }
 
+// CreateEnvironmentTemplate - <p>Create an environment template for AWS Proton. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-templates.html">Environment Templates</a> in the <i>AWS Proton Administrator Guide</i>.</p> <p>You can create an environment template in one of the two following ways:</p> <ul> <li> <p>Register and publish a <i>standard</i> environment template that instructs AWS Proton to deploy and manage environment infrastructure.</p> </li> <li> <p>Register and publish a <i>customer managed</i> environment template that connects AWS Proton to your existing provisioned infrastructure that you manage. AWS Proton <i>doesn't</i> manage your existing provisioned infrastructure. To create an environment template for customer provisioned and managed infrastructure, include the <code>provisioning</code> parameter and set the value to <code>CUSTOMER_MANAGED</code>. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/template-create.html">Register and publish an environment template</a> in the <i>AWS Proton Administrator Guide</i>.</p> </li> </ul>
 func (s *SDK) CreateEnvironmentTemplate(ctx context.Context, request operations.CreateEnvironmentTemplateRequest) (*operations.CreateEnvironmentTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.CreateEnvironmentTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -757,7 +790,7 @@ func (s *SDK) CreateEnvironmentTemplate(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -847,8 +880,9 @@ func (s *SDK) CreateEnvironmentTemplate(ctx context.Context, request operations.
 	return res, nil
 }
 
+// CreateEnvironmentTemplateVersion - Create a new major or minor version of an environment template. A major version of an environment template is a version that <i>isn't</i> backwards compatible. A minor version of an environment template is a version that's backwards compatible within its major version.
 func (s *SDK) CreateEnvironmentTemplateVersion(ctx context.Context, request operations.CreateEnvironmentTemplateVersionRequest) (*operations.CreateEnvironmentTemplateVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.CreateEnvironmentTemplateVersion"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -868,7 +902,7 @@ func (s *SDK) CreateEnvironmentTemplateVersion(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -968,8 +1002,9 @@ func (s *SDK) CreateEnvironmentTemplateVersion(ctx context.Context, request oper
 	return res, nil
 }
 
+// CreateService - Create an AWS Proton service. An AWS Proton service is an instantiation of a service template and often includes several service instances and pipeline. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-services.html">Services</a> in the <i>AWS Proton Administrator Guide</i> and <a href="https://docs.aws.amazon.com/proton/latest/userguide/ug-service.html">Services</a> in the <i>AWS Proton User Guide</i>.
 func (s *SDK) CreateService(ctx context.Context, request operations.CreateServiceRequest) (*operations.CreateServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.CreateService"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -989,7 +1024,7 @@ func (s *SDK) CreateService(ctx context.Context, request operations.CreateServic
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1089,8 +1124,9 @@ func (s *SDK) CreateService(ctx context.Context, request operations.CreateServic
 	return res, nil
 }
 
+// CreateServiceTemplate - Create a service template. The administrator creates a service template to define standardized infrastructure and an optional CICD service pipeline. Developers, in turn, select the service template from AWS Proton. If the selected service template includes a service pipeline definition, they provide a link to their source code repository. AWS Proton then deploys and manages the infrastructure defined by the selected service template. For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/managing-svc-templates.html">Service Templates</a> in the <i>AWS Proton Administrator Guide</i>.
 func (s *SDK) CreateServiceTemplate(ctx context.Context, request operations.CreateServiceTemplateRequest) (*operations.CreateServiceTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.CreateServiceTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1110,7 +1146,7 @@ func (s *SDK) CreateServiceTemplate(ctx context.Context, request operations.Crea
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1200,8 +1236,9 @@ func (s *SDK) CreateServiceTemplate(ctx context.Context, request operations.Crea
 	return res, nil
 }
 
+// CreateServiceTemplateVersion - Create a new major or minor version of a service template. A major version of a service template is a version that <i>isn't</i> backwards compatible. A minor version of a service template is a version that's backwards compatible within its major version.
 func (s *SDK) CreateServiceTemplateVersion(ctx context.Context, request operations.CreateServiceTemplateVersionRequest) (*operations.CreateServiceTemplateVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.CreateServiceTemplateVersion"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1221,7 +1258,7 @@ func (s *SDK) CreateServiceTemplateVersion(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1321,8 +1358,9 @@ func (s *SDK) CreateServiceTemplateVersion(ctx context.Context, request operatio
 	return res, nil
 }
 
+// DeleteEnvironment - Delete an environment.
 func (s *SDK) DeleteEnvironment(ctx context.Context, request operations.DeleteEnvironmentRequest) (*operations.DeleteEnvironmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.DeleteEnvironment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1342,7 +1380,7 @@ func (s *SDK) DeleteEnvironment(ctx context.Context, request operations.DeleteEn
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1432,8 +1470,9 @@ func (s *SDK) DeleteEnvironment(ctx context.Context, request operations.DeleteEn
 	return res, nil
 }
 
+// DeleteEnvironmentAccountConnection - <p>In an environment account, delete an environment account connection.</p> <p>After you delete an environment account connection that’s in use by an AWS Proton environment, AWS Proton <i>can’t</i> manage the environment infrastructure resources until a new environment account connection is accepted for the environment account and associated environment. You're responsible for cleaning up provisioned resources that remain without an environment connection.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>
 func (s *SDK) DeleteEnvironmentAccountConnection(ctx context.Context, request operations.DeleteEnvironmentAccountConnectionRequest) (*operations.DeleteEnvironmentAccountConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.DeleteEnvironmentAccountConnection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1453,7 +1492,7 @@ func (s *SDK) DeleteEnvironmentAccountConnection(ctx context.Context, request op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1543,8 +1582,9 @@ func (s *SDK) DeleteEnvironmentAccountConnection(ctx context.Context, request op
 	return res, nil
 }
 
+// DeleteEnvironmentTemplate - If no other major or minor versions of an environment template exist, delete the environment template.
 func (s *SDK) DeleteEnvironmentTemplate(ctx context.Context, request operations.DeleteEnvironmentTemplateRequest) (*operations.DeleteEnvironmentTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.DeleteEnvironmentTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1564,7 +1604,7 @@ func (s *SDK) DeleteEnvironmentTemplate(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1654,8 +1694,9 @@ func (s *SDK) DeleteEnvironmentTemplate(ctx context.Context, request operations.
 	return res, nil
 }
 
+// DeleteEnvironmentTemplateVersion - <p>If no other minor versions of an environment template exist, delete a major version of the environment template if it's not the <code>Recommended</code> version. Delete the <code>Recommended</code> version of the environment template if no other major versions or minor versions of the environment template exist. A major version of an environment template is a version that's not backwards compatible.</p> <p>Delete a minor version of an environment template if it <i>isn't</i> the <code>Recommended</code> version. Delete a <code>Recommended</code> minor version of the environment template if no other minor versions of the environment template exist. A minor version of an environment template is a version that's backwards compatible.</p>
 func (s *SDK) DeleteEnvironmentTemplateVersion(ctx context.Context, request operations.DeleteEnvironmentTemplateVersionRequest) (*operations.DeleteEnvironmentTemplateVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.DeleteEnvironmentTemplateVersion"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1675,7 +1716,7 @@ func (s *SDK) DeleteEnvironmentTemplateVersion(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1765,8 +1806,9 @@ func (s *SDK) DeleteEnvironmentTemplateVersion(ctx context.Context, request oper
 	return res, nil
 }
 
+// DeleteService - Delete a service.
 func (s *SDK) DeleteService(ctx context.Context, request operations.DeleteServiceRequest) (*operations.DeleteServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.DeleteService"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1786,7 +1828,7 @@ func (s *SDK) DeleteService(ctx context.Context, request operations.DeleteServic
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1876,8 +1918,9 @@ func (s *SDK) DeleteService(ctx context.Context, request operations.DeleteServic
 	return res, nil
 }
 
+// DeleteServiceTemplate - If no other major or minor versions of the service template exist, delete the service template.
 func (s *SDK) DeleteServiceTemplate(ctx context.Context, request operations.DeleteServiceTemplateRequest) (*operations.DeleteServiceTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.DeleteServiceTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1897,7 +1940,7 @@ func (s *SDK) DeleteServiceTemplate(ctx context.Context, request operations.Dele
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1987,8 +2030,9 @@ func (s *SDK) DeleteServiceTemplate(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// DeleteServiceTemplateVersion - <p>If no other minor versions of a service template exist, delete a major version of the service template if it's not the <code>Recommended</code> version. Delete the <code>Recommended</code> version of the service template if no other major versions or minor versions of the service template exist. A major version of a service template is a version that <i>isn't</i> backwards compatible.</p> <p>Delete a minor version of a service template if it's not the <code>Recommended</code> version. Delete a <code>Recommended</code> minor version of the service template if no other minor versions of the service template exist. A minor version of a service template is a version that's backwards compatible.</p>
 func (s *SDK) DeleteServiceTemplateVersion(ctx context.Context, request operations.DeleteServiceTemplateVersionRequest) (*operations.DeleteServiceTemplateVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.DeleteServiceTemplateVersion"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2008,7 +2052,7 @@ func (s *SDK) DeleteServiceTemplateVersion(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2098,8 +2142,9 @@ func (s *SDK) DeleteServiceTemplateVersion(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetAccountSettings - Get detail data for the AWS Proton pipeline service role.
 func (s *SDK) GetAccountSettings(ctx context.Context, request operations.GetAccountSettingsRequest) (*operations.GetAccountSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.GetAccountSettings"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2119,7 +2164,7 @@ func (s *SDK) GetAccountSettings(ctx context.Context, request operations.GetAcco
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2199,8 +2244,9 @@ func (s *SDK) GetAccountSettings(ctx context.Context, request operations.GetAcco
 	return res, nil
 }
 
+// GetEnvironment - Get detail data for an environment.
 func (s *SDK) GetEnvironment(ctx context.Context, request operations.GetEnvironmentRequest) (*operations.GetEnvironmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.GetEnvironment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2220,7 +2266,7 @@ func (s *SDK) GetEnvironment(ctx context.Context, request operations.GetEnvironm
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2300,8 +2346,9 @@ func (s *SDK) GetEnvironment(ctx context.Context, request operations.GetEnvironm
 	return res, nil
 }
 
+// GetEnvironmentAccountConnection - <p>In an environment account, view the detail data for an environment account connection.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>
 func (s *SDK) GetEnvironmentAccountConnection(ctx context.Context, request operations.GetEnvironmentAccountConnectionRequest) (*operations.GetEnvironmentAccountConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.GetEnvironmentAccountConnection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2321,7 +2368,7 @@ func (s *SDK) GetEnvironmentAccountConnection(ctx context.Context, request opera
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2401,8 +2448,9 @@ func (s *SDK) GetEnvironmentAccountConnection(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetEnvironmentTemplate - Get detail data for an environment template.
 func (s *SDK) GetEnvironmentTemplate(ctx context.Context, request operations.GetEnvironmentTemplateRequest) (*operations.GetEnvironmentTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.GetEnvironmentTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2422,7 +2470,7 @@ func (s *SDK) GetEnvironmentTemplate(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2502,8 +2550,9 @@ func (s *SDK) GetEnvironmentTemplate(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetEnvironmentTemplateVersion - View detail data for a major or minor version of an environment template.
 func (s *SDK) GetEnvironmentTemplateVersion(ctx context.Context, request operations.GetEnvironmentTemplateVersionRequest) (*operations.GetEnvironmentTemplateVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.GetEnvironmentTemplateVersion"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2523,7 +2572,7 @@ func (s *SDK) GetEnvironmentTemplateVersion(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2603,8 +2652,9 @@ func (s *SDK) GetEnvironmentTemplateVersion(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetService - Get detail data for a service.
 func (s *SDK) GetService(ctx context.Context, request operations.GetServiceRequest) (*operations.GetServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.GetService"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2624,7 +2674,7 @@ func (s *SDK) GetService(ctx context.Context, request operations.GetServiceReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2704,8 +2754,9 @@ func (s *SDK) GetService(ctx context.Context, request operations.GetServiceReque
 	return res, nil
 }
 
+// GetServiceInstance - Get detail data for a service instance. A service instance is an instantiation of service template, which is running in a specific environment.
 func (s *SDK) GetServiceInstance(ctx context.Context, request operations.GetServiceInstanceRequest) (*operations.GetServiceInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.GetServiceInstance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2725,7 +2776,7 @@ func (s *SDK) GetServiceInstance(ctx context.Context, request operations.GetServ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2805,8 +2856,9 @@ func (s *SDK) GetServiceInstance(ctx context.Context, request operations.GetServ
 	return res, nil
 }
 
+// GetServiceTemplate - Get detail data for a service template.
 func (s *SDK) GetServiceTemplate(ctx context.Context, request operations.GetServiceTemplateRequest) (*operations.GetServiceTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.GetServiceTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2826,7 +2878,7 @@ func (s *SDK) GetServiceTemplate(ctx context.Context, request operations.GetServ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2906,8 +2958,9 @@ func (s *SDK) GetServiceTemplate(ctx context.Context, request operations.GetServ
 	return res, nil
 }
 
+// GetServiceTemplateVersion - View detail data for a major or minor version of a service template.
 func (s *SDK) GetServiceTemplateVersion(ctx context.Context, request operations.GetServiceTemplateVersionRequest) (*operations.GetServiceTemplateVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.GetServiceTemplateVersion"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2927,7 +2980,7 @@ func (s *SDK) GetServiceTemplateVersion(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3007,8 +3060,9 @@ func (s *SDK) GetServiceTemplateVersion(ctx context.Context, request operations.
 	return res, nil
 }
 
+// ListEnvironmentAccountConnections - <p>View a list of environment account connections.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>
 func (s *SDK) ListEnvironmentAccountConnections(ctx context.Context, request operations.ListEnvironmentAccountConnectionsRequest) (*operations.ListEnvironmentAccountConnectionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.ListEnvironmentAccountConnections"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3030,7 +3084,7 @@ func (s *SDK) ListEnvironmentAccountConnections(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3100,8 +3154,9 @@ func (s *SDK) ListEnvironmentAccountConnections(ctx context.Context, request ope
 	return res, nil
 }
 
+// ListEnvironmentTemplateVersions - List major or minor versions of an environment template with detail data.
 func (s *SDK) ListEnvironmentTemplateVersions(ctx context.Context, request operations.ListEnvironmentTemplateVersionsRequest) (*operations.ListEnvironmentTemplateVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.ListEnvironmentTemplateVersions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3123,7 +3178,7 @@ func (s *SDK) ListEnvironmentTemplateVersions(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3203,8 +3258,9 @@ func (s *SDK) ListEnvironmentTemplateVersions(ctx context.Context, request opera
 	return res, nil
 }
 
+// ListEnvironmentTemplates - List environment templates.
 func (s *SDK) ListEnvironmentTemplates(ctx context.Context, request operations.ListEnvironmentTemplatesRequest) (*operations.ListEnvironmentTemplatesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.ListEnvironmentTemplates"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3226,7 +3282,7 @@ func (s *SDK) ListEnvironmentTemplates(ctx context.Context, request operations.L
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3296,8 +3352,9 @@ func (s *SDK) ListEnvironmentTemplates(ctx context.Context, request operations.L
 	return res, nil
 }
 
+// ListEnvironments - List environments with detail data summaries.
 func (s *SDK) ListEnvironments(ctx context.Context, request operations.ListEnvironmentsRequest) (*operations.ListEnvironmentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.ListEnvironments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3319,7 +3376,7 @@ func (s *SDK) ListEnvironments(ctx context.Context, request operations.ListEnvir
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3399,8 +3456,9 @@ func (s *SDK) ListEnvironments(ctx context.Context, request operations.ListEnvir
 	return res, nil
 }
 
+// ListServiceInstances - List service instances with summaries of detail data.
 func (s *SDK) ListServiceInstances(ctx context.Context, request operations.ListServiceInstancesRequest) (*operations.ListServiceInstancesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.ListServiceInstances"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3422,7 +3480,7 @@ func (s *SDK) ListServiceInstances(ctx context.Context, request operations.ListS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3502,8 +3560,9 @@ func (s *SDK) ListServiceInstances(ctx context.Context, request operations.ListS
 	return res, nil
 }
 
+// ListServiceTemplateVersions - List major or minor versions of a service template with detail data.
 func (s *SDK) ListServiceTemplateVersions(ctx context.Context, request operations.ListServiceTemplateVersionsRequest) (*operations.ListServiceTemplateVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.ListServiceTemplateVersions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3525,7 +3584,7 @@ func (s *SDK) ListServiceTemplateVersions(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3605,8 +3664,9 @@ func (s *SDK) ListServiceTemplateVersions(ctx context.Context, request operation
 	return res, nil
 }
 
+// ListServiceTemplates - List service templates with detail data.
 func (s *SDK) ListServiceTemplates(ctx context.Context, request operations.ListServiceTemplatesRequest) (*operations.ListServiceTemplatesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.ListServiceTemplates"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3628,7 +3688,7 @@ func (s *SDK) ListServiceTemplates(ctx context.Context, request operations.ListS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3698,8 +3758,9 @@ func (s *SDK) ListServiceTemplates(ctx context.Context, request operations.ListS
 	return res, nil
 }
 
+// ListServices - List services with summaries of detail data.
 func (s *SDK) ListServices(ctx context.Context, request operations.ListServicesRequest) (*operations.ListServicesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.ListServices"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3721,7 +3782,7 @@ func (s *SDK) ListServices(ctx context.Context, request operations.ListServicesR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3791,8 +3852,9 @@ func (s *SDK) ListServices(ctx context.Context, request operations.ListServicesR
 	return res, nil
 }
 
+// ListTagsForResource - List tags for a resource. For more information, see <i>AWS Proton resources and tagging</i> in the <a href="https://docs.aws.amazon.com/proton/latest/adminguide/resources.html">AWS Proton Administrator Guide</a> or <a href="https://docs.aws.amazon.com/proton/latest/userguide/resources.html">AWS Proton User Guide</a>.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.ListTagsForResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3814,7 +3876,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3894,8 +3956,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// RejectEnvironmentAccountConnection - <p>In a management account, reject an environment account connection from another environment account.</p> <p>After you reject an environment account connection request, you <i>won’t</i> be able to accept or use the rejected environment account connection.</p> <p>You <i>can’t</i> reject an environment account connection that is connected to an environment.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>
 func (s *SDK) RejectEnvironmentAccountConnection(ctx context.Context, request operations.RejectEnvironmentAccountConnectionRequest) (*operations.RejectEnvironmentAccountConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.RejectEnvironmentAccountConnection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3915,7 +3978,7 @@ func (s *SDK) RejectEnvironmentAccountConnection(ctx context.Context, request op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4005,8 +4068,9 @@ func (s *SDK) RejectEnvironmentAccountConnection(ctx context.Context, request op
 	return res, nil
 }
 
+// TagResource - Tag a resource. For more information, see <i>AWS Proton resources and tagging</i> in the <a href="https://docs.aws.amazon.com/proton/latest/adminguide/resources.html">AWS Proton Administrator Guide</a> or <a href="https://docs.aws.amazon.com/proton/latest/userguide/resources.html">AWS Proton User Guide</a>.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.TagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4026,7 +4090,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4116,8 +4180,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Remove a tag from a resource. For more information, see <i>AWS Proton resources and tagging</i> in the <a href="https://docs.aws.amazon.com/proton/latest/adminguide/resources.html">AWS Proton Administrator Guide</a> or <a href="https://docs.aws.amazon.com/proton/latest/userguide/resources.html">AWS Proton User Guide</a>.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.UntagResource"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4137,7 +4202,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4227,8 +4292,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateAccountSettings - Update the AWS Proton pipeline service account settings.
 func (s *SDK) UpdateAccountSettings(ctx context.Context, request operations.UpdateAccountSettingsRequest) (*operations.UpdateAccountSettingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.UpdateAccountSettings"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4248,7 +4314,7 @@ func (s *SDK) UpdateAccountSettings(ctx context.Context, request operations.Upda
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4328,8 +4394,9 @@ func (s *SDK) UpdateAccountSettings(ctx context.Context, request operations.Upda
 	return res, nil
 }
 
+// UpdateEnvironment - <p>Update an environment.</p> <p>If the environment is associated with an environment account connection, <i>don't</i> update or include the <code>protonServiceRoleArn</code> parameter to update or connect to an environment account connection. </p> <p>You can only update to a new environment account connection if it was created in the same environment account that the current environment account connection was created in and is associated with the current environment.</p> <p>If the environment <i>isn't</i> associated with an environment account connection, <i>don't</i> update or include the <code>environmentAccountConnectionId</code> parameter to update or connect to an environment account connection.</p> <p>You can update either the <code>environmentAccountConnectionId</code> or <code>protonServiceRoleArn</code> parameter and value. You can’t update both.</p> <p>There are four modes for updating an environment as described in the following. The <code>deploymentType</code> field defines the mode.</p> <dl> <dt/> <dd> <p> <code>NONE</code> </p> <p>In this mode, a deployment <i>doesn't</i> occur. Only the requested metadata parameters are updated.</p> </dd> <dt/> <dd> <p> <code>CURRENT_VERSION</code> </p> <p>In this mode, the environment is deployed and updated with the new spec that you provide. Only requested parameters are updated. <i>Don’t</i> include minor or major version parameters when you use this <code>deployment-type</code>.</p> </dd> <dt/> <dd> <p> <code>MINOR_VERSION</code> </p> <p>In this mode, the environment is deployed and updated with the published, recommended (latest) minor version of the current major version in use, by default. You can also specify a different minor version of the current major version in use.</p> </dd> <dt/> <dd> <p> <code>MAJOR_VERSION</code> </p> <p>In this mode, the environment is deployed and updated with the published, recommended (latest) major and minor version of the current template, by default. You can also specify a different major version that's higher than the major version in use and a minor version (optional).</p> </dd> </dl>
 func (s *SDK) UpdateEnvironment(ctx context.Context, request operations.UpdateEnvironmentRequest) (*operations.UpdateEnvironmentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.UpdateEnvironment"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4349,7 +4416,7 @@ func (s *SDK) UpdateEnvironment(ctx context.Context, request operations.UpdateEn
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4439,8 +4506,9 @@ func (s *SDK) UpdateEnvironment(ctx context.Context, request operations.UpdateEn
 	return res, nil
 }
 
+// UpdateEnvironmentAccountConnection - <p>In an environment account, update an environment account connection to use a new IAM role.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>
 func (s *SDK) UpdateEnvironmentAccountConnection(ctx context.Context, request operations.UpdateEnvironmentAccountConnectionRequest) (*operations.UpdateEnvironmentAccountConnectionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.UpdateEnvironmentAccountConnection"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4460,7 +4528,7 @@ func (s *SDK) UpdateEnvironmentAccountConnection(ctx context.Context, request op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4550,8 +4618,9 @@ func (s *SDK) UpdateEnvironmentAccountConnection(ctx context.Context, request op
 	return res, nil
 }
 
+// UpdateEnvironmentTemplate - Update an environment template.
 func (s *SDK) UpdateEnvironmentTemplate(ctx context.Context, request operations.UpdateEnvironmentTemplateRequest) (*operations.UpdateEnvironmentTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.UpdateEnvironmentTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4571,7 +4640,7 @@ func (s *SDK) UpdateEnvironmentTemplate(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4661,8 +4730,9 @@ func (s *SDK) UpdateEnvironmentTemplate(ctx context.Context, request operations.
 	return res, nil
 }
 
+// UpdateEnvironmentTemplateVersion - Update a major or minor version of an environment template.
 func (s *SDK) UpdateEnvironmentTemplateVersion(ctx context.Context, request operations.UpdateEnvironmentTemplateVersionRequest) (*operations.UpdateEnvironmentTemplateVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.UpdateEnvironmentTemplateVersion"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4682,7 +4752,7 @@ func (s *SDK) UpdateEnvironmentTemplateVersion(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4772,8 +4842,9 @@ func (s *SDK) UpdateEnvironmentTemplateVersion(ctx context.Context, request oper
 	return res, nil
 }
 
+// UpdateService - <p>Edit a service description or use a spec to add and delete service instances.</p> <note> <p>Existing service instances and the service pipeline <i>can't</i> be edited using this API. They can only be deleted.</p> </note> <p>Use the <code>description</code> parameter to modify the description.</p> <p>Edit the <code>spec</code> parameter to add or delete instances.</p>
 func (s *SDK) UpdateService(ctx context.Context, request operations.UpdateServiceRequest) (*operations.UpdateServiceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.UpdateService"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4793,7 +4864,7 @@ func (s *SDK) UpdateService(ctx context.Context, request operations.UpdateServic
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4893,8 +4964,9 @@ func (s *SDK) UpdateService(ctx context.Context, request operations.UpdateServic
 	return res, nil
 }
 
+// UpdateServiceInstance - <p>Update a service instance.</p> <p>There are four modes for updating a service instance as described in the following. The <code>deploymentType</code> field defines the mode.</p> <dl> <dt/> <dd> <p> <code>NONE</code> </p> <p>In this mode, a deployment <i>doesn't</i> occur. Only the requested metadata parameters are updated.</p> </dd> <dt/> <dd> <p> <code>CURRENT_VERSION</code> </p> <p>In this mode, the service instance is deployed and updated with the new spec that you provide. Only requested parameters are updated. <i>Don’t</i> include minor or major version parameters when you use this <code>deployment-type</code>.</p> </dd> <dt/> <dd> <p> <code>MINOR_VERSION</code> </p> <p>In this mode, the service instance is deployed and updated with the published, recommended (latest) minor version of the current major version in use, by default. You can also specify a different minor version of the current major version in use.</p> </dd> <dt/> <dd> <p> <code>MAJOR_VERSION</code> </p> <p>In this mode, the service instance is deployed and updated with the published, recommended (latest) major and minor version of the current template, by default. You can also specify a different major version that is higher than the major version in use and a minor version (optional).</p> </dd> </dl>
 func (s *SDK) UpdateServiceInstance(ctx context.Context, request operations.UpdateServiceInstanceRequest) (*operations.UpdateServiceInstanceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.UpdateServiceInstance"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4914,7 +4986,7 @@ func (s *SDK) UpdateServiceInstance(ctx context.Context, request operations.Upda
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5004,8 +5076,9 @@ func (s *SDK) UpdateServiceInstance(ctx context.Context, request operations.Upda
 	return res, nil
 }
 
+// UpdateServicePipeline - <p>Update the service pipeline.</p> <p>There are four modes for updating a service pipeline as described in the following. The <code>deploymentType</code> field defines the mode.</p> <dl> <dt/> <dd> <p> <code>NONE</code> </p> <p>In this mode, a deployment <i>doesn't</i> occur. Only the requested metadata parameters are updated.</p> </dd> <dt/> <dd> <p> <code>CURRENT_VERSION</code> </p> <p>In this mode, the service pipeline is deployed and updated with the new spec that you provide. Only requested parameters are updated. <i>Don’t</i> include minor or major version parameters when you use this <code>deployment-type</code>.</p> </dd> <dt/> <dd> <p> <code>MINOR_VERSION</code> </p> <p>In this mode, the service pipeline is deployed and updated with the published, recommended (latest) minor version of the current major version in use, by default. You can also specify a different minor version of the current major version in use.</p> </dd> <dt/> <dd> <p> <code>MAJOR_VERSION</code> </p> <p>In this mode, the service pipeline is deployed and updated with the published, recommended (latest) major and minor version of the current template by default. You can also specify a different major version that is higher than the major version in use and a minor version (optional).</p> </dd> </dl>
 func (s *SDK) UpdateServicePipeline(ctx context.Context, request operations.UpdateServicePipelineRequest) (*operations.UpdateServicePipelineResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.UpdateServicePipeline"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5025,7 +5098,7 @@ func (s *SDK) UpdateServicePipeline(ctx context.Context, request operations.Upda
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5115,8 +5188,9 @@ func (s *SDK) UpdateServicePipeline(ctx context.Context, request operations.Upda
 	return res, nil
 }
 
+// UpdateServiceTemplate - Update a service template.
 func (s *SDK) UpdateServiceTemplate(ctx context.Context, request operations.UpdateServiceTemplateRequest) (*operations.UpdateServiceTemplateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.UpdateServiceTemplate"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5136,7 +5210,7 @@ func (s *SDK) UpdateServiceTemplate(ctx context.Context, request operations.Upda
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5226,8 +5300,9 @@ func (s *SDK) UpdateServiceTemplate(ctx context.Context, request operations.Upda
 	return res, nil
 }
 
+// UpdateServiceTemplateVersion - Update a major or minor version of a service template.
 func (s *SDK) UpdateServiceTemplateVersion(ctx context.Context, request operations.UpdateServiceTemplateVersionRequest) (*operations.UpdateServiceTemplateVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AwsProton20200720.UpdateServiceTemplateVersion"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5247,7 +5322,7 @@ func (s *SDK) UpdateServiceTemplateVersion(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

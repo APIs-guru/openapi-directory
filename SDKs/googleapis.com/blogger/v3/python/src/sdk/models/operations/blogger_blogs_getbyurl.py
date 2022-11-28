@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class BloggerBlogsGetByURLViewEnum(str, Enum):
@@ -11,6 +12,7 @@ class BloggerBlogsGetByURLViewEnum(str, Enum):
 
 @dataclass
 class BloggerBlogsGetByURLQueryParams:
+    url: str = field(metadata={'query_param': { 'field_name': 'url', 'style': 'form', 'explode': True }})
     dollar_xgafv: Optional[shared.XgafvEnum] = field(default=None, metadata={'query_param': { 'field_name': '$.xgafv', 'style': 'form', 'explode': True }})
     access_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'access_token', 'style': 'form', 'explode': True }})
     alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
@@ -22,20 +24,19 @@ class BloggerBlogsGetByURLQueryParams:
     quota_user: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'quotaUser', 'style': 'form', 'explode': True }})
     upload_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'uploadType', 'style': 'form', 'explode': True }})
     upload_protocol: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'upload_protocol', 'style': 'form', 'explode': True }})
-    url: str = field(default=None, metadata={'query_param': { 'field_name': 'url', 'style': 'form', 'explode': True }})
     view: Optional[BloggerBlogsGetByURLViewEnum] = field(default=None, metadata={'query_param': { 'field_name': 'view', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class BloggerBlogsGetByURLSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BloggerBlogsGetByURLSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -46,13 +47,13 @@ class BloggerBlogsGetByURLSecurity:
 
 @dataclass
 class BloggerBlogsGetByURLRequest:
-    query_params: BloggerBlogsGetByURLQueryParams = field(default=None)
-    security: BloggerBlogsGetByURLSecurity = field(default=None)
+    query_params: BloggerBlogsGetByURLQueryParams = field()
+    security: BloggerBlogsGetByURLSecurity = field()
     
 
 @dataclass
 class BloggerBlogsGetByURLResponse:
+    content_type: str = field()
+    status_code: int = field()
     blog: Optional[shared.Blog] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

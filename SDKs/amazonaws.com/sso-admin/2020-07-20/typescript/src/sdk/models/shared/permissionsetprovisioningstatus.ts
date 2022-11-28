@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatusValuesEnum } from "./statusvaluesenum";
+
 
 
 // PermissionSetProvisioningStatus
@@ -7,21 +8,21 @@ import { StatusValuesEnum } from "./statusvaluesenum";
  * A structure that is used to provide the status of the provisioning operation for a specified permission set.
 **/
 export class PermissionSetProvisioningStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountId" })
+  @SpeakeasyMetadata({ data: "json, name=AccountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=CreatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedDate" })
   createdDate?: Date;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=PermissionSetArn" })
+  @SpeakeasyMetadata({ data: "json, name=PermissionSetArn" })
   permissionSetArn?: string;
 
-  @Metadata({ data: "json, name=RequestId" })
+  @SpeakeasyMetadata({ data: "json, name=RequestId" })
   requestId?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: StatusValuesEnum;
 }

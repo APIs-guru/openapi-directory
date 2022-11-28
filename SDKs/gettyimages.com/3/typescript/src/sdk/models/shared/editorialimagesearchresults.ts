@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImageSearchItemEditorial } from "./imagesearchitemeditorial";
 import { RelatedSearch } from "./relatedsearch";
 
 
+
 export class EditorialImageSearchResults extends SpeakeasyBase {
-  @Metadata({ data: "json, name=images", elemType: shared.ImageSearchItemEditorial })
+  @SpeakeasyMetadata({ data: "json, name=images", elemType: ImageSearchItemEditorial })
   images?: ImageSearchItemEditorial[];
 
-  @Metadata({ data: "json, name=related_searches", elemType: shared.RelatedSearch })
+  @SpeakeasyMetadata({ data: "json, name=related_searches", elemType: RelatedSearch })
   relatedSearches?: RelatedSearch[];
 
-  @Metadata({ data: "json, name=result_count" })
+  @SpeakeasyMetadata({ data: "json, name=result_count" })
   resultCount?: number;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudPaymentsResellerSubscriptionV1Amount
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the amount unit including the currency code.
 **/
 export class GoogleCloudPaymentsResellerSubscriptionV1Amount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=amountMicros" })
+  @SpeakeasyMetadata({ data: "json, name=amountMicros" })
   amountMicros?: string;
 
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode?: string;
 }

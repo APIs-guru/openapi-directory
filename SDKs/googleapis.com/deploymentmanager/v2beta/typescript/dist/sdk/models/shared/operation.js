@@ -22,23 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var OperationErrorErrors = /** @class */ (function (_super) {
     __extends(OperationErrorErrors, _super);
     function OperationErrorErrors() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=code" }),
+        SpeakeasyMetadata({ data: "json, name=code" }),
         __metadata("design:type", String)
     ], OperationErrorErrors.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=location" }),
+        SpeakeasyMetadata({ data: "json, name=location" }),
         __metadata("design:type", String)
     ], OperationErrorErrors.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], OperationErrorErrors.prototype, "message", void 0);
     return OperationErrorErrors;
@@ -54,7 +53,7 @@ var OperationError = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=errors", elemType: shared.OperationErrorErrors }),
+        SpeakeasyMetadata({ data: "json, name=errors", elemType: OperationErrorErrors }),
         __metadata("design:type", Array)
     ], OperationError.prototype, "errors", void 0);
     return OperationError;
@@ -102,11 +101,11 @@ var OperationWarningsData = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=key" }),
+        SpeakeasyMetadata({ data: "json, name=key" }),
         __metadata("design:type", String)
     ], OperationWarningsData.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", String)
     ], OperationWarningsData.prototype, "value", void 0);
     return OperationWarningsData;
@@ -118,15 +117,15 @@ var OperationWarnings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=code" }),
+        SpeakeasyMetadata({ data: "json, name=code" }),
         __metadata("design:type", String)
     ], OperationWarnings.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=data", elemType: shared.OperationWarningsData }),
+        SpeakeasyMetadata({ data: "json, name=data", elemType: OperationWarningsData }),
         __metadata("design:type", Array)
     ], OperationWarnings.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], OperationWarnings.prototype, "message", void 0);
     return OperationWarnings;
@@ -142,99 +141,99 @@ var Operation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clientOperationId" }),
+        SpeakeasyMetadata({ data: "json, name=clientOperationId" }),
         __metadata("design:type", String)
     ], Operation.prototype, "clientOperationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=creationTimestamp" }),
         __metadata("design:type", String)
     ], Operation.prototype, "creationTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Operation.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", String)
     ], Operation.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", OperationError)
     ], Operation.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=httpErrorMessage" }),
+        SpeakeasyMetadata({ data: "json, name=httpErrorMessage" }),
         __metadata("design:type", String)
     ], Operation.prototype, "httpErrorMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=httpErrorStatusCode" }),
+        SpeakeasyMetadata({ data: "json, name=httpErrorStatusCode" }),
         __metadata("design:type", Number)
     ], Operation.prototype, "httpErrorStatusCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Operation.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=insertTime" }),
+        SpeakeasyMetadata({ data: "json, name=insertTime" }),
         __metadata("design:type", String)
     ], Operation.prototype, "insertTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=kind" }),
+        SpeakeasyMetadata({ data: "json, name=kind" }),
         __metadata("design:type", String)
     ], Operation.prototype, "kind", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Operation.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=operationGroupId" }),
+        SpeakeasyMetadata({ data: "json, name=operationGroupId" }),
         __metadata("design:type", String)
     ], Operation.prototype, "operationGroupId", void 0);
     __decorate([
-        Metadata({ data: "json, name=operationType" }),
+        SpeakeasyMetadata({ data: "json, name=operationType" }),
         __metadata("design:type", String)
     ], Operation.prototype, "operationType", void 0);
     __decorate([
-        Metadata({ data: "json, name=progress" }),
+        SpeakeasyMetadata({ data: "json, name=progress" }),
         __metadata("design:type", Number)
     ], Operation.prototype, "progress", void 0);
     __decorate([
-        Metadata({ data: "json, name=region" }),
+        SpeakeasyMetadata({ data: "json, name=region" }),
         __metadata("design:type", String)
     ], Operation.prototype, "region", void 0);
     __decorate([
-        Metadata({ data: "json, name=selfLink" }),
+        SpeakeasyMetadata({ data: "json, name=selfLink" }),
         __metadata("design:type", String)
     ], Operation.prototype, "selfLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", String)
     ], Operation.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], Operation.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=statusMessage" }),
+        SpeakeasyMetadata({ data: "json, name=statusMessage" }),
         __metadata("design:type", String)
     ], Operation.prototype, "statusMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetId" }),
+        SpeakeasyMetadata({ data: "json, name=targetId" }),
         __metadata("design:type", String)
     ], Operation.prototype, "targetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=targetLink" }),
+        SpeakeasyMetadata({ data: "json, name=targetLink" }),
         __metadata("design:type", String)
     ], Operation.prototype, "targetLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=user" }),
+        SpeakeasyMetadata({ data: "json, name=user" }),
         __metadata("design:type", String)
     ], Operation.prototype, "user", void 0);
     __decorate([
-        Metadata({ data: "json, name=warnings", elemType: shared.OperationWarnings }),
+        SpeakeasyMetadata({ data: "json, name=warnings", elemType: OperationWarnings }),
         __metadata("design:type", Array)
     ], Operation.prototype, "warnings", void 0);
     __decorate([
-        Metadata({ data: "json, name=zone" }),
+        SpeakeasyMetadata({ data: "json, name=zone" }),
         __metadata("design:type", String)
     ], Operation.prototype, "zone", void 0);
     return Operation;

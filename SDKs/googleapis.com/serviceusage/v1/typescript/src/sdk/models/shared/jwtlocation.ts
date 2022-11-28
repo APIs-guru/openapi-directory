@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // JwtLocation
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies a location to extract JWT from an API request.
 **/
 export class JwtLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cookie" })
+  @SpeakeasyMetadata({ data: "json, name=cookie" })
   cookie?: string;
 
-  @Metadata({ data: "json, name=header" })
+  @SpeakeasyMetadata({ data: "json, name=header" })
   header?: string;
 
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query?: string;
 
-  @Metadata({ data: "json, name=valuePrefix" })
+  @SpeakeasyMetadata({ data: "json, name=valuePrefix" })
   valuePrefix?: string;
 }

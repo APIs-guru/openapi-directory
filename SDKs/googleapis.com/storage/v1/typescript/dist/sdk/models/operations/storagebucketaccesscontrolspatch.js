@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var StorageBucketAccessControlsPatchPathParams = /** @class */ (function (_super) {
     __extends(StorageBucketAccessControlsPatchPathParams, _super);
@@ -30,11 +30,11 @@ var StorageBucketAccessControlsPatchPathParams = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=bucket" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=bucket" }),
         __metadata("design:type", String)
     ], StorageBucketAccessControlsPatchPathParams.prototype, "bucket", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=entity" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=entity" }),
         __metadata("design:type", String)
     ], StorageBucketAccessControlsPatchPathParams.prototype, "entity", void 0);
     return StorageBucketAccessControlsPatchPathParams;
@@ -46,39 +46,39 @@ var StorageBucketAccessControlsPatchQueryParams = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], StorageBucketAccessControlsPatchQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], StorageBucketAccessControlsPatchQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], StorageBucketAccessControlsPatchQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], StorageBucketAccessControlsPatchQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], StorageBucketAccessControlsPatchQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], StorageBucketAccessControlsPatchQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], StorageBucketAccessControlsPatchQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
         __metadata("design:type", String)
     ], StorageBucketAccessControlsPatchQueryParams.prototype, "userIp", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userProject" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userProject" }),
         __metadata("design:type", String)
     ], StorageBucketAccessControlsPatchQueryParams.prototype, "userProject", void 0);
     return StorageBucketAccessControlsPatchQueryParams;
@@ -90,11 +90,11 @@ var StorageBucketAccessControlsPatchSecurityOption1 = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], StorageBucketAccessControlsPatchSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], StorageBucketAccessControlsPatchSecurityOption1.prototype, "oauth2c", void 0);
     return StorageBucketAccessControlsPatchSecurityOption1;
@@ -106,11 +106,11 @@ var StorageBucketAccessControlsPatchSecurityOption2 = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], StorageBucketAccessControlsPatchSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], StorageBucketAccessControlsPatchSecurityOption2.prototype, "oauth2c", void 0);
     return StorageBucketAccessControlsPatchSecurityOption2;
@@ -122,11 +122,11 @@ var StorageBucketAccessControlsPatchSecurity = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", StorageBucketAccessControlsPatchSecurityOption1)
     ], StorageBucketAccessControlsPatchSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", StorageBucketAccessControlsPatchSecurityOption2)
     ], StorageBucketAccessControlsPatchSecurity.prototype, "option2", void 0);
     return StorageBucketAccessControlsPatchSecurity;
@@ -138,19 +138,19 @@ var StorageBucketAccessControlsPatchRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageBucketAccessControlsPatchPathParams)
     ], StorageBucketAccessControlsPatchRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageBucketAccessControlsPatchQueryParams)
     ], StorageBucketAccessControlsPatchRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.BucketAccessControl)
     ], StorageBucketAccessControlsPatchRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageBucketAccessControlsPatchSecurity)
     ], StorageBucketAccessControlsPatchRequest.prototype, "security", void 0);
     return StorageBucketAccessControlsPatchRequest;
@@ -162,15 +162,15 @@ var StorageBucketAccessControlsPatchResponse = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.BucketAccessControl)
     ], StorageBucketAccessControlsPatchResponse.prototype, "bucketAccessControl", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StorageBucketAccessControlsPatchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StorageBucketAccessControlsPatchResponse.prototype, "statusCode", void 0);
     return StorageBucketAccessControlsPatchResponse;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetFactSearchQueryParams = /** @class */ (function (_super) {
     __extends(GetFactSearchQueryParams, _super);
@@ -30,15 +30,15 @@ var GetFactSearchQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=category" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=category" }),
         __metadata("design:type", String)
     ], GetFactSearchQueryParams.prototype, "category", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=query" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" }),
         __metadata("design:type", String)
     ], GetFactSearchQueryParams.prototype, "query", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=subcategory" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=subcategory" }),
         __metadata("design:type", String)
     ], GetFactSearchQueryParams.prototype, "subcategory", void 0);
     return GetFactSearchQueryParams;
@@ -50,7 +50,7 @@ var GetFactSearchSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeXFungeneratorsApiSecret)
     ], GetFactSearchSecurity.prototype, "xFungeneratorsApiSecret", void 0);
     return GetFactSearchSecurity;
@@ -62,11 +62,11 @@ var GetFactSearchRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFactSearchQueryParams)
     ], GetFactSearchRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFactSearchSecurity)
     ], GetFactSearchRequest.prototype, "security", void 0);
     return GetFactSearchRequest;
@@ -78,11 +78,11 @@ var GetFactSearchResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetFactSearchResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetFactSearchResponse.prototype, "statusCode", void 0);
     return GetFactSearchResponse;

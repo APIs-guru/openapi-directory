@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class RemoveNotificationChannelPathParams:
-    channel_id: str = field(default=None, metadata={'path_param': { 'field_name': 'channelId', 'style': 'simple', 'explode': False }})
-    profiling_group_name: str = field(default=None, metadata={'path_param': { 'field_name': 'profilingGroupName', 'style': 'simple', 'explode': False }})
+    channel_id: str = field(metadata={'path_param': { 'field_name': 'channelId', 'style': 'simple', 'explode': False }})
+    profiling_group_name: str = field(metadata={'path_param': { 'field_name': 'profilingGroupName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,17 +25,17 @@ class RemoveNotificationChannelHeaders:
 
 @dataclass
 class RemoveNotificationChannelRequest:
-    path_params: RemoveNotificationChannelPathParams = field(default=None)
-    headers: RemoveNotificationChannelHeaders = field(default=None)
+    headers: RemoveNotificationChannelHeaders = field()
+    path_params: RemoveNotificationChannelPathParams = field()
     
 
 @dataclass
 class RemoveNotificationChannelResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_exception: Optional[Any] = field(default=None)
     remove_notification_channel_response: Optional[shared.RemoveNotificationChannelResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

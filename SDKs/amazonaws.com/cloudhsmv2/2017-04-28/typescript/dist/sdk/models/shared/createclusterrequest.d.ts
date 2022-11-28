@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BackupRetentionPolicy } from "./backupretentionpolicy";
 import { Tag } from "./tag";
 export declare class CreateClusterRequest extends SpeakeasyBase {

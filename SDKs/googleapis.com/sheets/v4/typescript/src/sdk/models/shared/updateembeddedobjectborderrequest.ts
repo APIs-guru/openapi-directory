@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EmbeddedObjectBorder } from "./embeddedobjectborder";
+
 
 
 // UpdateEmbeddedObjectBorderRequest
@@ -7,12 +8,12 @@ import { EmbeddedObjectBorder } from "./embeddedobjectborder";
  * Updates an embedded object's border property.
 **/
 export class UpdateEmbeddedObjectBorderRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=border" })
+  @SpeakeasyMetadata({ data: "json, name=border" })
   border?: EmbeddedObjectBorder;
 
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 
-  @Metadata({ data: "json, name=objectId" })
+  @SpeakeasyMetadata({ data: "json, name=objectId" })
   objectId?: number;
 }

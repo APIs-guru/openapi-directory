@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LogDriverEnum } from "./logdriverenum";
 import { Secret } from "./secret";
 /**

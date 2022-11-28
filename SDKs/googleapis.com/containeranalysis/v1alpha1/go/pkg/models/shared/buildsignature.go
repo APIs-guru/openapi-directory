@@ -8,6 +8,8 @@ const (
 	BuildSignatureKeyTypeEnumPkixPem            BuildSignatureKeyTypeEnum = "PKIX_PEM"
 )
 
+// BuildSignature
+// Message encapsulating the signature of the verified build.
 type BuildSignature struct {
 	KeyID     *string                    `json:"keyId,omitempty"`
 	KeyType   *BuildSignatureKeyTypeEnum `json:"keyType,omitempty"`

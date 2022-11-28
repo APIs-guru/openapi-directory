@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DownloadModelResponseModelFormatEnum {
-    ModelFormatUnspecified = "MODEL_FORMAT_UNSPECIFIED"
-,    Tflite = "TFLITE"
+    ModelFormatUnspecified = "MODEL_FORMAT_UNSPECIFIED",
+    Tflite = "TFLITE"
 }
 
 
@@ -11,15 +12,15 @@ export enum DownloadModelResponseModelFormatEnum {
  * The response for downloading a model to device.
 **/
 export class DownloadModelResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=downloadUri" })
+  @SpeakeasyMetadata({ data: "json, name=downloadUri" })
   downloadUri?: string;
 
-  @Metadata({ data: "json, name=expireTime" })
+  @SpeakeasyMetadata({ data: "json, name=expireTime" })
   expireTime?: string;
 
-  @Metadata({ data: "json, name=modelFormat" })
+  @SpeakeasyMetadata({ data: "json, name=modelFormat" })
   modelFormat?: DownloadModelResponseModelFormatEnum;
 
-  @Metadata({ data: "json, name=sizeBytes" })
+  @SpeakeasyMetadata({ data: "json, name=sizeBytes" })
   sizeBytes?: string;
 }

@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContainerVersion } from "./containerversion";
 import { SyncStatus } from "./syncstatus";
+
 
 
 // CreateContainerVersionResponse
@@ -8,15 +9,15 @@ import { SyncStatus } from "./syncstatus";
  * Create container versions response.
 **/
 export class CreateContainerVersionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=compilerError" })
+  @SpeakeasyMetadata({ data: "json, name=compilerError" })
   compilerError?: boolean;
 
-  @Metadata({ data: "json, name=containerVersion" })
+  @SpeakeasyMetadata({ data: "json, name=containerVersion" })
   containerVersion?: ContainerVersion;
 
-  @Metadata({ data: "json, name=newWorkspacePath" })
+  @SpeakeasyMetadata({ data: "json, name=newWorkspacePath" })
   newWorkspacePath?: string;
 
-  @Metadata({ data: "json, name=syncStatus" })
+  @SpeakeasyMetadata({ data: "json, name=syncStatus" })
   syncStatus?: SyncStatus;
 }

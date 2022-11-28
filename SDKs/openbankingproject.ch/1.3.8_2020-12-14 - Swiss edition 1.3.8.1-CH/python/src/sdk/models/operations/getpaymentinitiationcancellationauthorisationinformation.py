@@ -1,17 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetPaymentInitiationCancellationAuthorisationInformationPathParams:
-    payment_product: shared.PaymentProductEnum = field(default=None, metadata={'path_param': { 'field_name': 'payment-product', 'style': 'simple', 'explode': False }})
-    payment_service: shared.PaymentServiceEnum = field(default=None, metadata={'path_param': { 'field_name': 'payment-service', 'style': 'simple', 'explode': False }})
-    payment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'paymentId', 'style': 'simple', 'explode': False }})
+    payment_product: shared.PaymentProductEnum = field(metadata={'path_param': { 'field_name': 'payment-product', 'style': 'simple', 'explode': False }})
+    payment_service: shared.PaymentServiceEnum = field(metadata={'path_param': { 'field_name': 'payment-service', 'style': 'simple', 'explode': False }})
+    payment_id: str = field(metadata={'path_param': { 'field_name': 'paymentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetPaymentInitiationCancellationAuthorisationInformationHeaders:
+    x_request_id: str = field(metadata={'header': { 'field_name': 'X-Request-ID', 'style': 'simple', 'explode': False }})
     digest: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Digest', 'style': 'simple', 'explode': False }})
     psu_accept: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-Accept', 'style': 'simple', 'explode': False }})
     psu_accept_charset: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-Accept-Charset', 'style': 'simple', 'explode': False }})
@@ -25,7 +27,6 @@ class GetPaymentInitiationCancellationAuthorisationInformationHeaders:
     psu_user_agent: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-User-Agent', 'style': 'simple', 'explode': False }})
     signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Signature', 'style': 'simple', 'explode': False }})
     tpp_signature_certificate: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'TPP-Signature-Certificate', 'style': 'simple', 'explode': False }})
-    x_request_id: str = field(default=None, metadata={'header': { 'field_name': 'X-Request-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -35,14 +36,16 @@ class GetPaymentInitiationCancellationAuthorisationInformationSecurity:
 
 @dataclass
 class GetPaymentInitiationCancellationAuthorisationInformationRequest:
-    path_params: GetPaymentInitiationCancellationAuthorisationInformationPathParams = field(default=None)
-    headers: GetPaymentInitiationCancellationAuthorisationInformationHeaders = field(default=None)
-    security: GetPaymentInitiationCancellationAuthorisationInformationSecurity = field(default=None)
+    headers: GetPaymentInitiationCancellationAuthorisationInformationHeaders = field()
+    path_params: GetPaymentInitiationCancellationAuthorisationInformationPathParams = field()
+    security: GetPaymentInitiationCancellationAuthorisationInformationSecurity = field()
     
 
 @dataclass
 class GetPaymentInitiationCancellationAuthorisationInformationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     error400_ng_pis: Optional[shared.Error400NgPis] = field(default=None)
     error400_pis: Optional[shared.Error400Pis] = field(default=None)
     error401_ng_pis: Optional[shared.Error401NgPis] = field(default=None)
@@ -55,7 +58,5 @@ class GetPaymentInitiationCancellationAuthorisationInformationResponse:
     error405_pis: Optional[shared.Error405Pis] = field(default=None)
     error409_ng_pis: Optional[shared.Error409NgPis] = field(default=None)
     error409_pis: Optional[shared.Error409Pis] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     authorisations: Optional[shared.Authorisations] = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthorizationConfig } from "./authorizationconfig";
+
 
 
 // HttpDataSourceConfig
@@ -7,9 +8,9 @@ import { AuthorizationConfig } from "./authorizationconfig";
  * Describes an HTTP data source configuration.
 **/
 export class HttpDataSourceConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=authorizationConfig" })
   authorizationConfig?: AuthorizationConfig;
 
-  @Metadata({ data: "json, name=endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=endpoint" })
   endpoint?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEc2NetworkInterfaceAttachment
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the network interface attachment.
 **/
 export class AwsEc2NetworkInterfaceAttachment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttachTime" })
+  @SpeakeasyMetadata({ data: "json, name=AttachTime" })
   attachTime?: string;
 
-  @Metadata({ data: "json, name=AttachmentId" })
+  @SpeakeasyMetadata({ data: "json, name=AttachmentId" })
   attachmentId?: string;
 
-  @Metadata({ data: "json, name=DeleteOnTermination" })
+  @SpeakeasyMetadata({ data: "json, name=DeleteOnTermination" })
   deleteOnTermination?: boolean;
 
-  @Metadata({ data: "json, name=DeviceIndex" })
+  @SpeakeasyMetadata({ data: "json, name=DeviceIndex" })
   deviceIndex?: number;
 
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=InstanceOwnerId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceOwnerId" })
   instanceOwnerId?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

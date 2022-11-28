@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import provisioningartifactdetail
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListProvisioningArtifactsOutput:
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextPageToken' }})
-    provisioning_artifact_details: Optional[List[provisioningartifactdetail.ProvisioningArtifactDetail]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProvisioningArtifactDetails' }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextPageToken') }})
+    provisioning_artifact_details: Optional[List[ProvisioningArtifactDetail]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProvisioningArtifactDetails') }})
     

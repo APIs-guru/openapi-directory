@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleRpcStatus } from "./googlerpcstatus";
 /**
  * This resource represents a long-running operation that is the result of a network API call.

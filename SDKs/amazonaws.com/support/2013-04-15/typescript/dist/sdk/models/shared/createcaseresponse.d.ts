@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * The support case ID returned by a successful completion of the <a>CreateCase</a> operation.
 **/

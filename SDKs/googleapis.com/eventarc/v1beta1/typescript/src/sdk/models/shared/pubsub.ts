@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Pubsub
@@ -6,9 +7,19 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a Pub/Sub transport.
 **/
 export class Pubsub extends SpeakeasyBase {
-  @Metadata({ data: "json, name=subscription" })
+  @SpeakeasyMetadata({ data: "json, name=subscription" })
   subscription?: string;
 
-  @Metadata({ data: "json, name=topic" })
+  @SpeakeasyMetadata({ data: "json, name=topic" })
+  topic?: string;
+}
+
+
+// PubsubInput
+/** 
+ * Represents a Pub/Sub transport.
+**/
+export class PubsubInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=topic" })
   topic?: string;
 }

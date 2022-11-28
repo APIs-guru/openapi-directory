@@ -1,5 +1,9 @@
 package shared
 
+// TensorflowResourceHandleProto
+// Protocol buffer representing a handle to a tensorflow resource. Handles are
+// not valid across executions, but can be serialized back and forth from within
+// a single run.
 type TensorflowResourceHandleProto struct {
 	Container     *string `json:"container,omitempty"`
 	Device        *string `json:"device,omitempty"`

@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class SetDataRetrievalPolicyPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,27 +27,31 @@ class SetDataRetrievalPolicyHeaders:
 @dataclass_json
 @dataclass
 class SetDataRetrievalPolicyRequestBodyPolicy:
-    rules: Optional[List[shared.DataRetrievalRule]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Rules' }})
+    r"""SetDataRetrievalPolicyRequestBodyPolicy
+    Data retrieval policy.
+    """
+    
+    rules: Optional[List[shared.DataRetrievalRule]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Rules') }})
     
 
 @dataclass_json
 @dataclass
 class SetDataRetrievalPolicyRequestBody:
-    policy: Optional[SetDataRetrievalPolicyRequestBodyPolicy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Policy' }})
+    policy: Optional[SetDataRetrievalPolicyRequestBodyPolicy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Policy') }})
     
 
 @dataclass
 class SetDataRetrievalPolicyRequest:
-    path_params: SetDataRetrievalPolicyPathParams = field(default=None)
-    headers: SetDataRetrievalPolicyHeaders = field(default=None)
-    request: SetDataRetrievalPolicyRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SetDataRetrievalPolicyHeaders = field()
+    path_params: SetDataRetrievalPolicyPathParams = field()
+    request: SetDataRetrievalPolicyRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SetDataRetrievalPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     missing_parameter_value_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CreateTimelineEventOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventId" })
+  @SpeakeasyMetadata({ data: "json, name=eventId" })
   eventId: string;
 
-  @Metadata({ data: "json, name=incidentRecordArn" })
+  @SpeakeasyMetadata({ data: "json, name=incidentRecordArn" })
   incidentRecordArn: string;
 }

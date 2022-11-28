@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BooksMylibraryBookshelvesVolumesListPathParams:
-    shelf: str = field(default=None, metadata={'path_param': { 'field_name': 'shelf', 'style': 'simple', 'explode': False }})
+    shelf: str = field(metadata={'path_param': { 'field_name': 'shelf', 'style': 'simple', 'explode': False }})
     
 class BooksMylibraryBookshelvesVolumesListProjectionEnum(str, Enum):
     PROJECTION_UNDEFINED = "PROJECTION_UNDEFINED"
@@ -37,20 +38,20 @@ class BooksMylibraryBookshelvesVolumesListQueryParams:
 
 @dataclass
 class BooksMylibraryBookshelvesVolumesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BooksMylibraryBookshelvesVolumesListRequest:
-    path_params: BooksMylibraryBookshelvesVolumesListPathParams = field(default=None)
-    query_params: BooksMylibraryBookshelvesVolumesListQueryParams = field(default=None)
-    security: BooksMylibraryBookshelvesVolumesListSecurity = field(default=None)
+    path_params: BooksMylibraryBookshelvesVolumesListPathParams = field()
+    query_params: BooksMylibraryBookshelvesVolumesListQueryParams = field()
+    security: BooksMylibraryBookshelvesVolumesListSecurity = field()
     
 
 @dataclass
 class BooksMylibraryBookshelvesVolumesListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     volumes: Optional[shared.Volumes] = field(default=None)
     

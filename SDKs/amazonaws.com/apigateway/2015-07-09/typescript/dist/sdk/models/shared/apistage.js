@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ThrottleSettings } from "./throttlesettings";
 // ApiStage
 /**
  * API stage name of the associated API stage in a usage plan.
@@ -34,15 +34,15 @@ var ApiStage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=apiId" }),
+        SpeakeasyMetadata({ data: "json, name=apiId" }),
         __metadata("design:type", String)
     ], ApiStage.prototype, "apiId", void 0);
     __decorate([
-        Metadata({ data: "json, name=stage" }),
+        SpeakeasyMetadata({ data: "json, name=stage" }),
         __metadata("design:type", String)
     ], ApiStage.prototype, "stage", void 0);
     __decorate([
-        Metadata({ data: "json, name=throttle", elemType: shared.ThrottleSettings }),
+        SpeakeasyMetadata({ data: "json, name=throttle", elemType: ThrottleSettings }),
         __metadata("design:type", Map)
     ], ApiStage.prototype, "throttle", void 0);
     return ApiStage;

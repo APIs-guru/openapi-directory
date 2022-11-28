@@ -1,15 +1,22 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import deploymentconfig
-from . import entrypoint
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Deployment:
-    deployment_config: Optional[deploymentconfig.DeploymentConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploymentConfig' }})
-    deployment_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploymentId' }})
-    entry_points: Optional[List[entrypoint.EntryPoint]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entryPoints' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
+    r"""Deployment
+    Representation of a single script deployment.
+    """
+    
+    deployment_config: Optional[DeploymentConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deploymentConfig') }})
+    deployment_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('deploymentId') }})
+    entry_points: Optional[List[EntryPoint]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('entryPoints') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
     

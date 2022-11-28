@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TimeDuration } from "./timeduration";
 import { OfferedItem } from "./offereditem";
+
 
 
 // CreateOffersRequest
@@ -9,15 +9,15 @@ import { OfferedItem } from "./offereditem";
  * This complex type contains the fields needed to create an offer to a buyer that is initiated by the seller.
 **/
 export class CreateOffersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowCounterOffer" })
+  @SpeakeasyMetadata({ data: "json, name=allowCounterOffer" })
   allowCounterOffer?: boolean;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=offerDuration" })
+  @SpeakeasyMetadata({ data: "json, name=offerDuration" })
   offerDuration?: TimeDuration;
 
-  @Metadata({ data: "json, name=offeredItems", elemType: shared.OfferedItem })
+  @SpeakeasyMetadata({ data: "json, name=offeredItems", elemType: OfferedItem })
   offeredItems?: OfferedItem[];
 }

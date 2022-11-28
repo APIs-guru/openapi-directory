@@ -1,14 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsDriveLabelsV2FieldSelectionOptionsChoiceAppliedCapabilities } from "./googleappsdrivelabelsv2fieldselectionoptionschoiceappliedcapabilities";
-import { GoogleAppsDriveLabelsV2UserInfo } from "./googleappsdrivelabelsv2userinfo";
 import { GoogleAppsDriveLabelsV2UserInfo } from "./googleappsdrivelabelsv2userinfo";
 import { GoogleAppsDriveLabelsV2FieldSelectionOptionsChoiceDisplayHints } from "./googleappsdrivelabelsv2fieldselectionoptionschoicedisplayhints";
 import { GoogleAppsDriveLabelsV2Lifecycle } from "./googleappsdrivelabelsv2lifecycle";
 import { GoogleAppsDriveLabelsV2LockStatus } from "./googleappsdrivelabelsv2lockstatus";
 import { GoogleAppsDriveLabelsV2FieldSelectionOptionsChoiceProperties } from "./googleappsdrivelabelsv2fieldselectionoptionschoiceproperties";
-import { GoogleAppsDriveLabelsV2UserInfo } from "./googleappsdrivelabelsv2userinfo";
 import { GoogleAppsDriveLabelsV2FieldSelectionOptionsChoiceSchemaCapabilities } from "./googleappsdrivelabelsv2fieldselectionoptionschoiceschemacapabilities";
-import { GoogleAppsDriveLabelsV2UserInfo } from "./googleappsdrivelabelsv2userinfo";
+
 
 
 // GoogleAppsDriveLabelsV2FieldSelectionOptionsChoice
@@ -16,48 +14,48 @@ import { GoogleAppsDriveLabelsV2UserInfo } from "./googleappsdrivelabelsv2userin
  * Selection field choice.
 **/
 export class GoogleAppsDriveLabelsV2FieldSelectionOptionsChoice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appliedCapabilities" })
+  @SpeakeasyMetadata({ data: "json, name=appliedCapabilities" })
   appliedCapabilities?: GoogleAppsDriveLabelsV2FieldSelectionOptionsChoiceAppliedCapabilities;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=creator" })
+  @SpeakeasyMetadata({ data: "json, name=creator" })
   creator?: GoogleAppsDriveLabelsV2UserInfo;
 
-  @Metadata({ data: "json, name=disableTime" })
+  @SpeakeasyMetadata({ data: "json, name=disableTime" })
   disableTime?: string;
 
-  @Metadata({ data: "json, name=disabler" })
+  @SpeakeasyMetadata({ data: "json, name=disabler" })
   disabler?: GoogleAppsDriveLabelsV2UserInfo;
 
-  @Metadata({ data: "json, name=displayHints" })
+  @SpeakeasyMetadata({ data: "json, name=displayHints" })
   displayHints?: GoogleAppsDriveLabelsV2FieldSelectionOptionsChoiceDisplayHints;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lifecycle" })
+  @SpeakeasyMetadata({ data: "json, name=lifecycle" })
   lifecycle?: GoogleAppsDriveLabelsV2Lifecycle;
 
-  @Metadata({ data: "json, name=lockStatus" })
+  @SpeakeasyMetadata({ data: "json, name=lockStatus" })
   lockStatus?: GoogleAppsDriveLabelsV2LockStatus;
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: GoogleAppsDriveLabelsV2FieldSelectionOptionsChoiceProperties;
 
-  @Metadata({ data: "json, name=publishTime" })
+  @SpeakeasyMetadata({ data: "json, name=publishTime" })
   publishTime?: string;
 
-  @Metadata({ data: "json, name=publisher" })
+  @SpeakeasyMetadata({ data: "json, name=publisher" })
   publisher?: GoogleAppsDriveLabelsV2UserInfo;
 
-  @Metadata({ data: "json, name=schemaCapabilities" })
+  @SpeakeasyMetadata({ data: "json, name=schemaCapabilities" })
   schemaCapabilities?: GoogleAppsDriveLabelsV2FieldSelectionOptionsChoiceSchemaCapabilities;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=updater" })
+  @SpeakeasyMetadata({ data: "json, name=updater" })
   updater?: GoogleAppsDriveLabelsV2UserInfo;
 }

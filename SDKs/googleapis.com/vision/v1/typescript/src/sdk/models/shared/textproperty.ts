@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DetectedBreak } from "./detectedbreak";
 import { DetectedLanguage } from "./detectedlanguage";
+
 
 
 // TextProperty
@@ -9,9 +9,9 @@ import { DetectedLanguage } from "./detectedlanguage";
  * Additional information detected on the structural component.
 **/
 export class TextProperty extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detectedBreak" })
+  @SpeakeasyMetadata({ data: "json, name=detectedBreak" })
   detectedBreak?: DetectedBreak;
 
-  @Metadata({ data: "json, name=detectedLanguages", elemType: shared.DetectedLanguage })
+  @SpeakeasyMetadata({ data: "json, name=detectedLanguages", elemType: DetectedLanguage })
   detectedLanguages?: DetectedLanguage[];
 }

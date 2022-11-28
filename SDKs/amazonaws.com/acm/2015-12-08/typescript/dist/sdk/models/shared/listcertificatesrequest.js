@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Filters } from "./filters";
 var ListCertificatesRequest = /** @class */ (function (_super) {
     __extends(ListCertificatesRequest, _super);
@@ -30,19 +30,19 @@ var ListCertificatesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CertificateStatuses" }),
+        SpeakeasyMetadata({ data: "json, name=CertificateStatuses" }),
         __metadata("design:type", Array)
     ], ListCertificatesRequest.prototype, "certificateStatuses", void 0);
     __decorate([
-        Metadata({ data: "json, name=Includes" }),
+        SpeakeasyMetadata({ data: "json, name=Includes" }),
         __metadata("design:type", Filters)
     ], ListCertificatesRequest.prototype, "includes", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxItems" }),
+        SpeakeasyMetadata({ data: "json, name=MaxItems" }),
         __metadata("design:type", Number)
     ], ListCertificatesRequest.prototype, "maxItems", void 0);
     __decorate([
-        Metadata({ data: "json, name=NextToken" }),
+        SpeakeasyMetadata({ data: "json, name=NextToken" }),
         __metadata("design:type", String)
     ], ListCertificatesRequest.prototype, "nextToken", void 0);
     return ListCertificatesRequest;

@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoFirstAndThirdPartyAudiencesPatchPathParams:
-    first_and_third_party_audience_id: str = field(default=None, metadata={'path_param': { 'field_name': 'firstAndThirdPartyAudienceId', 'style': 'simple', 'explode': False }})
+    first_and_third_party_audience_id: str = field(metadata={'path_param': { 'field_name': 'firstAndThirdPartyAudienceId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,21 +31,21 @@ class DisplayvideoFirstAndThirdPartyAudiencesPatchQueryParams:
 
 @dataclass
 class DisplayvideoFirstAndThirdPartyAudiencesPatchSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoFirstAndThirdPartyAudiencesPatchRequest:
-    path_params: DisplayvideoFirstAndThirdPartyAudiencesPatchPathParams = field(default=None)
-    query_params: DisplayvideoFirstAndThirdPartyAudiencesPatchQueryParams = field(default=None)
-    request: Optional[shared.FirstAndThirdPartyAudience] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DisplayvideoFirstAndThirdPartyAudiencesPatchSecurity = field(default=None)
+    path_params: DisplayvideoFirstAndThirdPartyAudiencesPatchPathParams = field()
+    query_params: DisplayvideoFirstAndThirdPartyAudiencesPatchQueryParams = field()
+    security: DisplayvideoFirstAndThirdPartyAudiencesPatchSecurity = field()
+    request: Optional[shared.FirstAndThirdPartyAudienceInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DisplayvideoFirstAndThirdPartyAudiencesPatchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     first_and_third_party_audience: Optional[shared.FirstAndThirdPartyAudience] = field(default=None)
-    status_code: int = field(default=None)
     

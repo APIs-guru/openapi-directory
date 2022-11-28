@@ -58,6 +58,7 @@ const (
 	MitreAttackAdditionalTechniquesEnumNetworkServiceDiscovery          MitreAttackAdditionalTechniquesEnum = "NETWORK_SERVICE_DISCOVERY"
 	MitreAttackAdditionalTechniquesEnumAccessTokenManipulation          MitreAttackAdditionalTechniquesEnum = "ACCESS_TOKEN_MANIPULATION"
 	MitreAttackAdditionalTechniquesEnumAbuseElevationControlMechanism   MitreAttackAdditionalTechniquesEnum = "ABUSE_ELEVATION_CONTROL_MECHANISM"
+	MitreAttackAdditionalTechniquesEnumDefaultAccounts                  MitreAttackAdditionalTechniquesEnum = "DEFAULT_ACCOUNTS"
 )
 
 type MitreAttackPrimaryTacticEnum string
@@ -118,8 +119,11 @@ const (
 	MitreAttackPrimaryTechniquesEnumNetworkServiceDiscovery          MitreAttackPrimaryTechniquesEnum = "NETWORK_SERVICE_DISCOVERY"
 	MitreAttackPrimaryTechniquesEnumAccessTokenManipulation          MitreAttackPrimaryTechniquesEnum = "ACCESS_TOKEN_MANIPULATION"
 	MitreAttackPrimaryTechniquesEnumAbuseElevationControlMechanism   MitreAttackPrimaryTechniquesEnum = "ABUSE_ELEVATION_CONTROL_MECHANISM"
+	MitreAttackPrimaryTechniquesEnumDefaultAccounts                  MitreAttackPrimaryTechniquesEnum = "DEFAULT_ACCOUNTS"
 )
 
+// MitreAttack
+// MITRE ATT&CK tactics and techniques related to this finding. See: https://attack.mitre.org
 type MitreAttack struct {
 	AdditionalTactics    []MitreAttackAdditionalTacticsEnum    `json:"additionalTactics,omitempty"`
 	AdditionalTechniques []MitreAttackAdditionalTechniquesEnum `json:"additionalTechniques,omitempty"`

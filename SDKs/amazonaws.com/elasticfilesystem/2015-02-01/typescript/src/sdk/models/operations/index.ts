@@ -8,7 +8,6 @@ export * from "./deletefilesystempolicy";
 export * from "./deletemounttarget";
 export * from "./deletetags";
 export * from "./describeaccesspoints";
-export * from "./describeaccountpreferences";
 export * from "./describebackuppolicy";
 export * from "./describefilesystempolicy";
 export * from "./describefilesystems";

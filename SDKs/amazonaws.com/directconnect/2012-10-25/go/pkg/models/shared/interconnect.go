@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Interconnect
+// Information about an interconnect.
 type Interconnect struct {
 	AwsDevice            *string                   `json:"awsDevice,omitempty"`
 	AwsDeviceV2          *string                   `json:"awsDeviceV2,omitempty"`

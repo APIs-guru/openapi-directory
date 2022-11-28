@@ -10,6 +10,8 @@ const (
 	GoogleCloudDialogflowV2beta1ValidationErrorSeverityEnumCritical            GoogleCloudDialogflowV2beta1ValidationErrorSeverityEnum = "CRITICAL"
 )
 
+// GoogleCloudDialogflowV2beta1ValidationError
+// Represents a single validation error.
 type GoogleCloudDialogflowV2beta1ValidationError struct {
 	Entries      []string                                                 `json:"entries,omitempty"`
 	ErrorMessage *string                                                  `json:"errorMessage,omitempty"`

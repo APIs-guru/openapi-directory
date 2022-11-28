@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AddUserForWorkspacePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=workspace_gid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspace_gid" })
   workspaceGid: string;
 }
 
 
 export class AddUserForWorkspaceQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=opt_fields" })
   optFields?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=opt_pretty" })
   optPretty?: boolean;
 }
 
 
 export class AddUserForWorkspaceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.WorkspaceAddUserRequest;
 }
 
 
-export class AddUserForWorkspaceRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: AddUserForWorkspacePathParams;
-
-  @Metadata()
-  queryParams: AddUserForWorkspaceQueryParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: AddUserForWorkspaceRequestBody;
-}
-
-
 export class AddUserForWorkspace200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: shared.UserResponse;
 }
 
 
+export class AddUserForWorkspaceRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: AddUserForWorkspacePathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: AddUserForWorkspaceQueryParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: AddUserForWorkspaceRequestBody;
+}
+
+
 export class AddUserForWorkspaceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   addUserForWorkspace200ApplicationJsonObject?: AddUserForWorkspace200ApplicationJson;
 }

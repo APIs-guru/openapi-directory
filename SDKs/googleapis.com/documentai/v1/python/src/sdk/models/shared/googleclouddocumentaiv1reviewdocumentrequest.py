@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googleclouddocumentaiv1documentschema
-from . import googleclouddocumentaiv1document
+from sdk import utils
+from . import *
 
 class GoogleCloudDocumentaiV1ReviewDocumentRequestPriorityEnum(str, Enum):
     DEFAULT = "DEFAULT"
@@ -12,8 +13,12 @@ class GoogleCloudDocumentaiV1ReviewDocumentRequestPriorityEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudDocumentaiV1ReviewDocumentRequest:
-    document_schema: Optional[googleclouddocumentaiv1documentschema.GoogleCloudDocumentaiV1DocumentSchema] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'documentSchema' }})
-    enable_schema_validation: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enableSchemaValidation' }})
-    inline_document: Optional[googleclouddocumentaiv1document.GoogleCloudDocumentaiV1Document] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inlineDocument' }})
-    priority: Optional[GoogleCloudDocumentaiV1ReviewDocumentRequestPriorityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'priority' }})
+    r"""GoogleCloudDocumentaiV1ReviewDocumentRequest
+    Request message for review document method.
+    """
+    
+    document_schema: Optional[GoogleCloudDocumentaiV1DocumentSchema] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('documentSchema') }})
+    enable_schema_validation: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enableSchemaValidation') }})
+    inline_document: Optional[GoogleCloudDocumentaiV1Document] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inlineDocument') }})
+    priority: Optional[GoogleCloudDocumentaiV1ReviewDocumentRequestPriorityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('priority') }})
     

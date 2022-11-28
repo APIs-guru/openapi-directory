@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListClustersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterArns" })
+  @SpeakeasyMetadata({ data: "json, name=clusterArns" })
   clusterArns?: string[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

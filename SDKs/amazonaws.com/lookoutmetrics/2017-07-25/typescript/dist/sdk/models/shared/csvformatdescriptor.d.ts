@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CsvFileCompressionEnum } from "./csvfilecompressionenum";
 /**
  * Contains information about how a source CSV data file should be analyzed.

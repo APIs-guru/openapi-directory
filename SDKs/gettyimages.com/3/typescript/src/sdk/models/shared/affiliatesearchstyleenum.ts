@@ -1,6 +1,7 @@
 
 
+
 export enum AffiliateSearchStyleEnum {
-    Photography = "photography"
-,    Vector = "vector"
+    Photography = "photography",
+    Vector = "vector"
 }

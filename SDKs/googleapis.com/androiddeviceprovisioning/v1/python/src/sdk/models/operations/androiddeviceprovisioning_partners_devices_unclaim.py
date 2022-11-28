@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AndroiddeviceprovisioningPartnersDevicesUnclaimPathParams:
-    partner_id: str = field(default=None, metadata={'path_param': { 'field_name': 'partnerId', 'style': 'simple', 'explode': False }})
+    partner_id: str = field(metadata={'path_param': { 'field_name': 'partnerId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class AndroiddeviceprovisioningPartnersDevicesUnclaimQueryParams:
 
 @dataclass
 class AndroiddeviceprovisioningPartnersDevicesUnclaimRequest:
-    path_params: AndroiddeviceprovisioningPartnersDevicesUnclaimPathParams = field(default=None)
-    query_params: AndroiddeviceprovisioningPartnersDevicesUnclaimQueryParams = field(default=None)
+    path_params: AndroiddeviceprovisioningPartnersDevicesUnclaimPathParams = field()
+    query_params: AndroiddeviceprovisioningPartnersDevicesUnclaimQueryParams = field()
     request: Optional[shared.UnclaimDeviceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AndroiddeviceprovisioningPartnersDevicesUnclaimResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

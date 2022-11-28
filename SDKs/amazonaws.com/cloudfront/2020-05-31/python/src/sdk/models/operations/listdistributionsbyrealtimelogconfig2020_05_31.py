@@ -1,5 +1,8 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
 
 
 @dataclass
@@ -15,13 +18,13 @@ class ListDistributionsByRealtimeLogConfig20200531Headers:
 
 @dataclass
 class ListDistributionsByRealtimeLogConfig20200531Request:
-    headers: ListDistributionsByRealtimeLogConfig20200531Headers = field(default=None)
-    request: bytes = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
+    headers: ListDistributionsByRealtimeLogConfig20200531Headers = field()
+    request: bytes = field(metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class ListDistributionsByRealtimeLogConfig20200531Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

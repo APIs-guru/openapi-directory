@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostSetupV1LocationsIDGoogleServiceAccountPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class PostSetupV1LocationsIDGoogleServiceAccountRequests:
 
 @dataclass
 class PostSetupV1LocationsIDGoogleServiceAccountRequest:
-    path_params: PostSetupV1LocationsIDGoogleServiceAccountPathParams = field(default=None)
+    path_params: PostSetupV1LocationsIDGoogleServiceAccountPathParams = field()
     request: Optional[PostSetupV1LocationsIDGoogleServiceAccountRequests] = field(default=None)
     
 
 @dataclass
 class PostSetupV1LocationsIDGoogleServiceAccountResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_service_account_creds: Optional[shared.GoogleServiceAccountCreds] = field(default=None)
-    status_code: int = field(default=None)
     

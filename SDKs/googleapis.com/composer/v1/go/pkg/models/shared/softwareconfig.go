@@ -1,5 +1,7 @@
 package shared
 
+// SoftwareConfig
+// Specifies the selection and configuration of software inside the environment.
 type SoftwareConfig struct {
 	AirflowConfigOverrides map[string]string `json:"airflowConfigOverrides,omitempty"`
 	EnvVariables           map[string]string `json:"envVariables,omitempty"`

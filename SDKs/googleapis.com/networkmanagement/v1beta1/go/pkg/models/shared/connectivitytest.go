@@ -1,5 +1,7 @@
 package shared
 
+// ConnectivityTest
+// A Connectivity Test for a network reachability analysis.
 type ConnectivityTest struct {
 	CreateTime          *string              `json:"createTime,omitempty"`
 	Description         *string              `json:"description,omitempty"`
@@ -13,4 +15,18 @@ type ConnectivityTest struct {
 	RelatedProjects     []string             `json:"relatedProjects,omitempty"`
 	Source              *Endpoint            `json:"source,omitempty"`
 	UpdateTime          *string              `json:"updateTime,omitempty"`
+}
+
+// ConnectivityTestInput
+// A Connectivity Test for a network reachability analysis.
+type ConnectivityTestInput struct {
+	Description         *string              `json:"description,omitempty"`
+	Destination         *Endpoint            `json:"destination,omitempty"`
+	Labels              map[string]string    `json:"labels,omitempty"`
+	Name                *string              `json:"name,omitempty"`
+	ProbingDetails      *ProbingDetails      `json:"probingDetails,omitempty"`
+	Protocol            *string              `json:"protocol,omitempty"`
+	ReachabilityDetails *ReachabilityDetails `json:"reachabilityDetails,omitempty"`
+	RelatedProjects     []string             `json:"relatedProjects,omitempty"`
+	Source              *Endpoint            `json:"source,omitempty"`
 }

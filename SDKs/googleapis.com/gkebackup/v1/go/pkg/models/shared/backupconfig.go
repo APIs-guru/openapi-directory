@@ -1,5 +1,7 @@
 package shared
 
+// BackupConfig
+// BackupConfig defines the configuration of Backups created via this BackupPlan.
 type BackupConfig struct {
 	AllNamespaces        *bool            `json:"allNamespaces,omitempty"`
 	EncryptionKey        *EncryptionKey   `json:"encryptionKey,omitempty"`

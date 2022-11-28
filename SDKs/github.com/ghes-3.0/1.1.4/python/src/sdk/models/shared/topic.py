@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from typing import List
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class Topic:
-    names: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'names' }})
+    r"""Topic
+    A topic aggregates entities that are related to a subject.
+    """
+    
+    names: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('names') }})
     

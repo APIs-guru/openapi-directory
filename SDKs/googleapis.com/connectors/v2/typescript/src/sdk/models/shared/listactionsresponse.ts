@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Action } from "./action";
+
 
 
 // ListActionsResponse
@@ -8,12 +8,12 @@ import { Action } from "./action";
  * Response message for ActionService.ListActions
 **/
 export class ListActionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions", elemType: shared.Action })
+  @SpeakeasyMetadata({ data: "json, name=actions", elemType: Action })
   actions?: Action[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=unsupportedActionNames" })
+  @SpeakeasyMetadata({ data: "json, name=unsupportedActionNames" })
   unsupportedActionNames?: string[];
 }

@@ -5,10 +5,6 @@ type UserStatisticsAccumulatedValueV1StatisticsIndividualQueryParams struct {
 	StartDate *string `queryParam:"style=form,explode=true,name=startDate"`
 }
 
-type UserStatisticsAccumulatedValueV1StatisticsIndividualRequest struct {
-	QueryParams UserStatisticsAccumulatedValueV1StatisticsIndividualQueryParams
-}
-
 type UserStatisticsAccumulatedValueV1StatisticsIndividual200ApplicationJSONResult struct {
 	AccelerationCount               *float64 `json:"AccelerationCount,omitempty"`
 	AppID                           *string  `json:"AppId,omitempty"`
@@ -45,6 +41,10 @@ type UserStatisticsAccumulatedValueV1StatisticsIndividual200ApplicationJSON stru
 	Result *UserStatisticsAccumulatedValueV1StatisticsIndividual200ApplicationJSONResult `json:"Result,omitempty"`
 	Status *float64                                                                      `json:"Status,omitempty"`
 	Title  *string                                                                       `json:"Title,omitempty"`
+}
+
+type UserStatisticsAccumulatedValueV1StatisticsIndividualRequest struct {
+	QueryParams UserStatisticsAccumulatedValueV1StatisticsIndividualQueryParams
 }
 
 type UserStatisticsAccumulatedValueV1StatisticsIndividualResponse struct {

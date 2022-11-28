@@ -1,20 +1,24 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import robotsoftwaresuite
-from . import simulationsoftwaresuite
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SimulationApplicationSummary:
-    arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'arn' }})
-    last_updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastUpdatedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    robot_software_suite: Optional[robotsoftwaresuite.RobotSoftwareSuite] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'robotSoftwareSuite' }})
-    simulation_software_suite: Optional[simulationsoftwaresuite.SimulationSoftwareSuite] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'simulationSoftwareSuite' }})
-    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
+    r"""SimulationApplicationSummary
+    Summary information for a simulation application.
+    """
+    
+    arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('arn') }})
+    last_updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastUpdatedAt'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    robot_software_suite: Optional[RobotSoftwareSuite] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('robotSoftwareSuite') }})
+    simulation_software_suite: Optional[SimulationSoftwareSuite] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('simulationSoftwareSuite') }})
+    version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('version') }})
     

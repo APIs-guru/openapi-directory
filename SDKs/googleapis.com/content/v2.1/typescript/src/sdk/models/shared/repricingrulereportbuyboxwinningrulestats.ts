@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // RepricingRuleReportBuyboxWinningRuleStats
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Stats specific to buybox winning rules for rule report.
 **/
 export class RepricingRuleReportBuyboxWinningRuleStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buyboxWonProductCount" })
+  @SpeakeasyMetadata({ data: "json, name=buyboxWonProductCount" })
   buyboxWonProductCount?: number;
 }

@@ -9,6 +9,8 @@ const (
 	GamesNumberFormatConfigurationNumberFormatTypeEnumCurrency                    GamesNumberFormatConfigurationNumberFormatTypeEnum = "CURRENCY"
 )
 
+// GamesNumberFormatConfiguration
+// A number format resource.
 type GamesNumberFormatConfiguration struct {
 	CurrencyCode     *string                                             `json:"currencyCode,omitempty"`
 	NumDecimalPlaces *int32                                              `json:"numDecimalPlaces,omitempty"`

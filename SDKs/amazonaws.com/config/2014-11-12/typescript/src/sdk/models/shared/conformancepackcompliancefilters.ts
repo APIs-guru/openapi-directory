@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConformancePackComplianceTypeEnum } from "./conformancepackcompliancetypeenum";
+
 
 
 // ConformancePackComplianceFilters
@@ -7,9 +8,9 @@ import { ConformancePackComplianceTypeEnum } from "./conformancepackcompliancety
  * Filters the conformance pack by compliance types and Config rule names.
 **/
 export class ConformancePackComplianceFilters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComplianceType" })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceType" })
   complianceType?: ConformancePackComplianceTypeEnum;
 
-  @Metadata({ data: "json, name=ConfigRuleNames" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigRuleNames" })
   configRuleNames?: string[];
 }

@@ -29,11 +29,6 @@ type TrcerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type TrcerRequest struct {
-	Request  *TrcerRequestBody `request:"mediaType=application/json"`
-	Security TrcerSecurity
-}
-
 type Trcer400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Trcer504ApplicationJSON struct {
 	Error            *Trcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Trcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type TrcerRequest struct {
+	Request  *TrcerRequestBody `request:"mediaType=application/json"`
+	Security TrcerSecurity
 }
 
 type TrcerResponse struct {

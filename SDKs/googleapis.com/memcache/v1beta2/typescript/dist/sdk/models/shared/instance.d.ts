@@ -1,9 +1,11 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InstanceMessage } from "./instancemessage";
+import { GoogleCloudMemcacheV1beta2MaintenancePolicyInput } from "./googlecloudmemcachev1beta2maintenancepolicy";
+import { NodeConfig } from "./nodeconfig";
+import { MemcacheParametersInput } from "./memcacheparameters";
 import { GoogleCloudMemcacheV1beta2MaintenancePolicy } from "./googlecloudmemcachev1beta2maintenancepolicy";
 import { MaintenanceSchedule } from "./maintenanceschedule";
 import { Node } from "./node";
-import { NodeConfig } from "./nodeconfig";
 import { MemcacheParameters } from "./memcacheparameters";
 export declare enum InstanceMemcacheVersionEnum {
     MemcacheVersionUnspecified = "MEMCACHE_VERSION_UNSPECIFIED",
@@ -16,6 +18,22 @@ export declare enum InstanceStateEnum {
     Updating = "UPDATING",
     Deleting = "DELETING",
     PerformingMaintenance = "PERFORMING_MAINTENANCE"
+}
+/**
+ * A Memorystore for Memcached instance
+**/
+export declare class InstanceInput extends SpeakeasyBase {
+    authorizedNetwork?: string;
+    displayName?: string;
+    instanceMessages?: InstanceMessage[];
+    labels?: Map<string, string>;
+    maintenancePolicy?: GoogleCloudMemcacheV1beta2MaintenancePolicyInput;
+    memcacheVersion?: InstanceMemcacheVersionEnum;
+    name?: string;
+    nodeConfig?: NodeConfig;
+    nodeCount?: number;
+    parameters?: MemcacheParametersInput;
+    zones?: string[];
 }
 /**
  * A Memorystore for Memcached instance

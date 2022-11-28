@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Report
+// Represents reports
 type Report struct {
 	CreatedBy          *string   `json:"created_by,omitempty"`
 	CreatedChecksCount *int64    `json:"created_checks_count,omitempty"`

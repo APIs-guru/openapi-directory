@@ -1,5 +1,7 @@
 package shared
 
+// PodcastSearchResult
+// When **type** is *podcast*.
 type PodcastSearchResult struct {
 	DescriptionHighlighted *string `json:"description_highlighted,omitempty"`
 	DescriptionOriginal    *string `json:"description_original,omitempty"`

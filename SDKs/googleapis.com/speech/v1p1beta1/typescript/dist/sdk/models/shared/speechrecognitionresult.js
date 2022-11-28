@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeechRecognitionAlternative } from "./speechrecognitionalternative";
 // SpeechRecognitionResult
 /**
  * A speech recognition result corresponding to a portion of the audio.
@@ -34,19 +34,19 @@ var SpeechRecognitionResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alternatives", elemType: shared.SpeechRecognitionAlternative }),
+        SpeakeasyMetadata({ data: "json, name=alternatives", elemType: SpeechRecognitionAlternative }),
         __metadata("design:type", Array)
     ], SpeechRecognitionResult.prototype, "alternatives", void 0);
     __decorate([
-        Metadata({ data: "json, name=channelTag" }),
+        SpeakeasyMetadata({ data: "json, name=channelTag" }),
         __metadata("design:type", Number)
     ], SpeechRecognitionResult.prototype, "channelTag", void 0);
     __decorate([
-        Metadata({ data: "json, name=languageCode" }),
+        SpeakeasyMetadata({ data: "json, name=languageCode" }),
         __metadata("design:type", String)
     ], SpeechRecognitionResult.prototype, "languageCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=resultEndTime" }),
+        SpeakeasyMetadata({ data: "json, name=resultEndTime" }),
         __metadata("design:type", String)
     ], SpeechRecognitionResult.prototype, "resultEndTime", void 0);
     return SpeechRecognitionResult;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ContactChannelAddress
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The details that Incident Manager uses when trying to engage the contact channel. 
 **/
 export class ContactChannelAddress extends SpeakeasyBase {
-  @Metadata({ data: "json, name=SimpleAddress" })
+  @SpeakeasyMetadata({ data: "json, name=SimpleAddress" })
   simpleAddress?: string;
 }

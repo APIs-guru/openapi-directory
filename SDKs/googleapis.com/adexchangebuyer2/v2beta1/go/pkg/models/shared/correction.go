@@ -17,6 +17,8 @@ const (
 	CorrectionTypeEnumVideoInSnippetAttributeAdded CorrectionTypeEnum = "VIDEO_IN_SNIPPET_ATTRIBUTE_ADDED"
 )
 
+// Correction
+// Output only. Shows any corrections that were applied to this creative.
 type Correction struct {
 	Contexts []ServingContext    `json:"contexts,omitempty"`
 	Details  []string            `json:"details,omitempty"`

@@ -1,4 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+// RoutingVpcInput
+/** 
+ * RoutingVPC contains information about the VPC networks associated with the spokes of a Network Connectivity Center hub.
+**/
+export class RoutingVpcInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=uri" })
+  uri?: string;
+}
 
 
 // RoutingVpc
@@ -6,9 +17,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * RoutingVPC contains information about the VPC networks associated with the spokes of a Network Connectivity Center hub.
 **/
 export class RoutingVpc extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requiredForNewSiteToSiteDataTransferSpokes" })
+  @SpeakeasyMetadata({ data: "json, name=requiredForNewSiteToSiteDataTransferSpokes" })
   requiredForNewSiteToSiteDataTransferSpokes?: boolean;
 
-  @Metadata({ data: "json, name=uri" })
+  @SpeakeasyMetadata({ data: "json, name=uri" })
   uri?: string;
 }

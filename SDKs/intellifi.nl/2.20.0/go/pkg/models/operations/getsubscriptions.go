@@ -31,10 +31,6 @@ type GetSubscriptionsQueryParams struct {
 	VerifyTargetCertificate *bool      `queryParam:"style=form,explode=true,name=verify_target_certificate"`
 }
 
-type GetSubscriptionsRequest struct {
-	QueryParams GetSubscriptionsQueryParams
-}
-
 type GetSubscriptions200ApplicationJSON struct {
 	Count           *int64                `json:"count,omitempty"`
 	CountCurrent    *int64                `json:"count_current,omitempty"`
@@ -43,6 +39,10 @@ type GetSubscriptions200ApplicationJSON struct {
 	QueryDurationMs *int64                `json:"query_duration_ms,omitempty"`
 	Results         []shared.Subscription `json:"results,omitempty"`
 	URL             *string               `json:"url,omitempty"`
+}
+
+type GetSubscriptionsRequest struct {
+	QueryParams GetSubscriptionsQueryParams
 }
 
 type GetSubscriptionsResponse struct {

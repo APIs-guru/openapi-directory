@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudiotProjectsLocationsRegistriesCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class CloudiotProjectsLocationsRegistriesCreateQueryParams:
 
 @dataclass
 class CloudiotProjectsLocationsRegistriesCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudiotProjectsLocationsRegistriesCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class CloudiotProjectsLocationsRegistriesCreateSecurity:
 
 @dataclass
 class CloudiotProjectsLocationsRegistriesCreateRequest:
-    path_params: CloudiotProjectsLocationsRegistriesCreatePathParams = field(default=None)
-    query_params: CloudiotProjectsLocationsRegistriesCreateQueryParams = field(default=None)
+    path_params: CloudiotProjectsLocationsRegistriesCreatePathParams = field()
+    query_params: CloudiotProjectsLocationsRegistriesCreateQueryParams = field()
+    security: CloudiotProjectsLocationsRegistriesCreateSecurity = field()
     request: Optional[shared.DeviceRegistry] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudiotProjectsLocationsRegistriesCreateSecurity = field(default=None)
     
 
 @dataclass
 class CloudiotProjectsLocationsRegistriesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     device_registry: Optional[shared.DeviceRegistry] = field(default=None)
-    status_code: int = field(default=None)
     

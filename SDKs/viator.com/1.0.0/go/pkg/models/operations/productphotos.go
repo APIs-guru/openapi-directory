@@ -14,11 +14,6 @@ type ProductPhotosHeaders struct {
 	AcceptLanguage string `header:"style=simple,explode=false,name=Accept-Language"`
 }
 
-type ProductPhotosRequest struct {
-	QueryParams ProductPhotosQueryParams
-	Headers     ProductPhotosHeaders
-}
-
 type ProductPhotos200ApplicationJSON struct {
 	Data             []shared.PhotoObject   `json:"data,omitempty"`
 	DateStamp        *string                `json:"dateStamp,omitempty"`
@@ -33,6 +28,11 @@ type ProductPhotos200ApplicationJSON struct {
 	Success          *bool                  `json:"success,omitempty"`
 	TotalCount       *int64                 `json:"totalCount,omitempty"`
 	Vmid             *string                `json:"vmid,omitempty"`
+}
+
+type ProductPhotosRequest struct {
+	QueryParams ProductPhotosQueryParams
+	Headers     ProductPhotosHeaders
 }
 
 type ProductPhotosResponse struct {

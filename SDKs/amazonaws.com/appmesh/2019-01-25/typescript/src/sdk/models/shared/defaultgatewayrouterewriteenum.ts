@@ -1,6 +1,7 @@
 
 
+
 export enum DefaultGatewayRouteRewriteEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
 
 
+
 export class AddTagsToResourceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResourceArn" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceArn" })
   resourceArn: string;
 
-  @Metadata({ data: "json, name=TagList", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=TagList", elemType: Tag })
   tagList: Tag[];
 }

@@ -1,5 +1,7 @@
 package shared
 
+// FirewallRule
+// A single firewall rule in a rule group.
 type FirewallRule struct {
 	Action               *ActionEnum               `json:"Action,omitempty"`
 	BlockOverrideDNSType *BlockOverrideDNSTypeEnum `json:"BlockOverrideDnsType,omitempty"`

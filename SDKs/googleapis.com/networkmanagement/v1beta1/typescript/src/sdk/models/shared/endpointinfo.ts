@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EndpointInfo
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * For display only. The specification of the endpoints for the test. EndpointInfo is derived from source and destination Endpoint and validated by the backend data plane model.
 **/
 export class EndpointInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destinationIp" })
+  @SpeakeasyMetadata({ data: "json, name=destinationIp" })
   destinationIp?: string;
 
-  @Metadata({ data: "json, name=destinationNetworkUri" })
+  @SpeakeasyMetadata({ data: "json, name=destinationNetworkUri" })
   destinationNetworkUri?: string;
 
-  @Metadata({ data: "json, name=destinationPort" })
+  @SpeakeasyMetadata({ data: "json, name=destinationPort" })
   destinationPort?: number;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol?: string;
 
-  @Metadata({ data: "json, name=sourceAgentUri" })
+  @SpeakeasyMetadata({ data: "json, name=sourceAgentUri" })
   sourceAgentUri?: string;
 
-  @Metadata({ data: "json, name=sourceIp" })
+  @SpeakeasyMetadata({ data: "json, name=sourceIp" })
   sourceIp?: string;
 
-  @Metadata({ data: "json, name=sourceNetworkUri" })
+  @SpeakeasyMetadata({ data: "json, name=sourceNetworkUri" })
   sourceNetworkUri?: string;
 
-  @Metadata({ data: "json, name=sourcePort" })
+  @SpeakeasyMetadata({ data: "json, name=sourcePort" })
   sourcePort?: number;
 }

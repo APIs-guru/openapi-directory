@@ -5,18 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class IpamPrefixesAvailableIpsCreatePathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class IpamPrefixesAvailableIpsCreateRequest:
-    path_params: IpamPrefixesAvailableIpsCreatePathParams = field(default=None)
-    request: shared.WritableAvailableIP = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: IpamPrefixesAvailableIpsCreatePathParams = field()
     
 
 @dataclass
 class IpamPrefixesAvailableIpsCreateResponse:
+    content_type: str = field()
+    status_code: int = field()
     available_ips: Optional[List[shared.AvailableIP]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

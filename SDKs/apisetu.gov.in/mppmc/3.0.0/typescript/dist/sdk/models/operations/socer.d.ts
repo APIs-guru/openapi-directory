@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class SocerRequestBodyCertificateParameters extends SpeakeasyBase {
     appno: string;
@@ -18,10 +18,6 @@ export declare class SocerRequestBody extends SpeakeasyBase {
 export declare class SocerSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class SocerRequest extends SpeakeasyBase {
-    request?: SocerRequestBody;
-    security: SocerSecurity;
 }
 export declare enum Socer400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -104,6 +100,10 @@ export declare enum Socer504ApplicationJsonErrorDescriptionEnum {
 export declare class Socer504ApplicationJson extends SpeakeasyBase {
     error?: Socer504ApplicationJsonErrorEnum;
     errorDescription?: Socer504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class SocerRequest extends SpeakeasyBase {
+    request?: SocerRequestBody;
+    security: SocerSecurity;
 }
 export declare class SocerResponse extends SpeakeasyBase {
     contentType: string;

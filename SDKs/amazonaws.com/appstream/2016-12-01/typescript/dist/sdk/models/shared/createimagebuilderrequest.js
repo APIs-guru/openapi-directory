@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AccessEndpoint } from "./accessendpoint";
 import { DomainJoinInfo } from "./domainjoininfo";
 import { VpcConfig } from "./vpcconfig";
 var CreateImageBuilderRequest = /** @class */ (function (_super) {
@@ -32,55 +32,55 @@ var CreateImageBuilderRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AccessEndpoints", elemType: shared.AccessEndpoint }),
+        SpeakeasyMetadata({ data: "json, name=AccessEndpoints", elemType: AccessEndpoint }),
         __metadata("design:type", Array)
     ], CreateImageBuilderRequest.prototype, "accessEndpoints", void 0);
     __decorate([
-        Metadata({ data: "json, name=AppstreamAgentVersion" }),
+        SpeakeasyMetadata({ data: "json, name=AppstreamAgentVersion" }),
         __metadata("design:type", String)
     ], CreateImageBuilderRequest.prototype, "appstreamAgentVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], CreateImageBuilderRequest.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=DisplayName" }),
+        SpeakeasyMetadata({ data: "json, name=DisplayName" }),
         __metadata("design:type", String)
     ], CreateImageBuilderRequest.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=DomainJoinInfo" }),
+        SpeakeasyMetadata({ data: "json, name=DomainJoinInfo" }),
         __metadata("design:type", DomainJoinInfo)
     ], CreateImageBuilderRequest.prototype, "domainJoinInfo", void 0);
     __decorate([
-        Metadata({ data: "json, name=EnableDefaultInternetAccess" }),
+        SpeakeasyMetadata({ data: "json, name=EnableDefaultInternetAccess" }),
         __metadata("design:type", Boolean)
     ], CreateImageBuilderRequest.prototype, "enableDefaultInternetAccess", void 0);
     __decorate([
-        Metadata({ data: "json, name=IamRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=IamRoleArn" }),
         __metadata("design:type", String)
     ], CreateImageBuilderRequest.prototype, "iamRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ImageArn" }),
+        SpeakeasyMetadata({ data: "json, name=ImageArn" }),
         __metadata("design:type", String)
     ], CreateImageBuilderRequest.prototype, "imageArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ImageName" }),
+        SpeakeasyMetadata({ data: "json, name=ImageName" }),
         __metadata("design:type", String)
     ], CreateImageBuilderRequest.prototype, "imageName", void 0);
     __decorate([
-        Metadata({ data: "json, name=InstanceType" }),
+        SpeakeasyMetadata({ data: "json, name=InstanceType" }),
         __metadata("design:type", String)
     ], CreateImageBuilderRequest.prototype, "instanceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], CreateImageBuilderRequest.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags" }),
+        SpeakeasyMetadata({ data: "json, name=Tags" }),
         __metadata("design:type", Map)
     ], CreateImageBuilderRequest.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcConfig" }),
+        SpeakeasyMetadata({ data: "json, name=VpcConfig" }),
         __metadata("design:type", VpcConfig)
     ], CreateImageBuilderRequest.prototype, "vpcConfig", void 0);
     return CreateImageBuilderRequest;

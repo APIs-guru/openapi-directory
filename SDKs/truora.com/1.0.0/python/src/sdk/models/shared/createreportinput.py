@@ -4,5 +4,9 @@ from dataclasses import dataclass, field
 
 @dataclass
 class CreateReportInput:
-    name: str = field(default=None, metadata={'form': { 'field_name': 'name' }})
+    r"""CreateReportInput
+    Represents paramaters required to create a report
+    """
+    
+    name: str = field(metadata={'form': { 'field_name': 'name' }})
     

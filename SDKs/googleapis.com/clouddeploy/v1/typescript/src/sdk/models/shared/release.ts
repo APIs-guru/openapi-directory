@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BuildArtifact } from "./buildartifact";
 import { DeliveryPipeline } from "./deliverypipeline";
 import { TargetArtifact } from "./targetartifact";
 import { TargetRender } from "./targetrender";
 import { Target } from "./target";
+import { DeliveryPipelineInput } from "./deliverypipeline";
+
 
 export enum ReleaseRenderStateEnum {
-    RenderStateUnspecified = "RENDER_STATE_UNSPECIFIED"
-,    Succeeded = "SUCCEEDED"
-,    Failed = "FAILED"
-,    InProgress = "IN_PROGRESS"
+    RenderStateUnspecified = "RENDER_STATE_UNSPECIFIED",
+    Succeeded = "SUCCEEDED",
+    Failed = "FAILED",
+    InProgress = "IN_PROGRESS"
 }
 
 
@@ -19,60 +20,97 @@ export enum ReleaseRenderStateEnum {
  * A `Release` resource in the Google Cloud Deploy API. A `Release` defines a specific Skaffold configuration instance that can be deployed.
 **/
 export class Release extends SpeakeasyBase {
-  @Metadata({ data: "json, name=abandoned" })
+  @SpeakeasyMetadata({ data: "json, name=abandoned" })
   abandoned?: boolean;
 
-  @Metadata({ data: "json, name=annotations" })
+  @SpeakeasyMetadata({ data: "json, name=annotations" })
   annotations?: Map<string, string>;
 
-  @Metadata({ data: "json, name=buildArtifacts", elemType: shared.BuildArtifact })
+  @SpeakeasyMetadata({ data: "json, name=buildArtifacts", elemType: BuildArtifact })
   buildArtifacts?: BuildArtifact[];
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=deliveryPipelineSnapshot" })
+  @SpeakeasyMetadata({ data: "json, name=deliveryPipelineSnapshot" })
   deliveryPipelineSnapshot?: DeliveryPipeline;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=renderEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=renderEndTime" })
   renderEndTime?: string;
 
-  @Metadata({ data: "json, name=renderStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=renderStartTime" })
   renderStartTime?: string;
 
-  @Metadata({ data: "json, name=renderState" })
+  @SpeakeasyMetadata({ data: "json, name=renderState" })
   renderState?: ReleaseRenderStateEnum;
 
-  @Metadata({ data: "json, name=skaffoldConfigPath" })
+  @SpeakeasyMetadata({ data: "json, name=skaffoldConfigPath" })
   skaffoldConfigPath?: string;
 
-  @Metadata({ data: "json, name=skaffoldConfigUri" })
+  @SpeakeasyMetadata({ data: "json, name=skaffoldConfigUri" })
   skaffoldConfigUri?: string;
 
-  @Metadata({ data: "json, name=skaffoldVersion" })
+  @SpeakeasyMetadata({ data: "json, name=skaffoldVersion" })
   skaffoldVersion?: string;
 
-  @Metadata({ data: "json, name=targetArtifacts", elemType: shared.TargetArtifact })
+  @SpeakeasyMetadata({ data: "json, name=targetArtifacts", elemType: TargetArtifact })
   targetArtifacts?: Map<string, TargetArtifact>;
 
-  @Metadata({ data: "json, name=targetRenders", elemType: shared.TargetRender })
+  @SpeakeasyMetadata({ data: "json, name=targetRenders", elemType: TargetRender })
   targetRenders?: Map<string, TargetRender>;
 
-  @Metadata({ data: "json, name=targetSnapshots", elemType: shared.Target })
+  @SpeakeasyMetadata({ data: "json, name=targetSnapshots", elemType: Target })
   targetSnapshots?: Target[];
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
+}
+
+
+// ReleaseInput
+/** 
+ * A `Release` resource in the Google Cloud Deploy API. A `Release` defines a specific Skaffold configuration instance that can be deployed.
+**/
+export class ReleaseInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=annotations" })
+  annotations?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=buildArtifacts", elemType: BuildArtifact })
+  buildArtifacts?: BuildArtifact[];
+
+  @SpeakeasyMetadata({ data: "json, name=deliveryPipelineSnapshot" })
+  deliveryPipelineSnapshot?: DeliveryPipelineInput;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=etag" })
+  etag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=skaffoldConfigPath" })
+  skaffoldConfigPath?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=skaffoldConfigUri" })
+  skaffoldConfigUri?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=skaffoldVersion" })
+  skaffoldVersion?: string;
 }

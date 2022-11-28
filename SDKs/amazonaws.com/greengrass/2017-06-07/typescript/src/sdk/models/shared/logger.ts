@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LoggerComponentEnum } from "./loggercomponentenum";
 import { LoggerLevelEnum } from "./loggerlevelenum";
 import { LoggerTypeEnum } from "./loggertypeenum";
+
 
 
 // Logger
@@ -9,18 +10,18 @@ import { LoggerTypeEnum } from "./loggertypeenum";
  * Information about a logger
 **/
 export class Logger extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Component" })
+  @SpeakeasyMetadata({ data: "json, name=Component" })
   component: LoggerComponentEnum;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: string;
 
-  @Metadata({ data: "json, name=Level" })
+  @SpeakeasyMetadata({ data: "json, name=Level" })
   level: LoggerLevelEnum;
 
-  @Metadata({ data: "json, name=Space" })
+  @SpeakeasyMetadata({ data: "json, name=Space" })
   space?: number;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: LoggerTypeEnum;
 }

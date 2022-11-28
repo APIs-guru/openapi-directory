@@ -14,6 +14,8 @@ type CreateJobHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateJobRequestBodyInput
+// Information about the file that you're transcoding.
 type CreateJobRequestBodyInput struct {
 	AspectRatio        *string                    `json:"AspectRatio,omitempty"`
 	Container          *string                    `json:"Container,omitempty"`
@@ -27,6 +29,8 @@ type CreateJobRequestBodyInput struct {
 	TimeSpan           *shared.TimeSpan           `json:"TimeSpan,omitempty"`
 }
 
+// CreateJobRequestBodyOutput
+// The <code>CreateJobOutput</code> structure.
 type CreateJobRequestBodyOutput struct {
 	AlbumArt            *shared.JobAlbumArt   `json:"AlbumArt,omitempty"`
 	Captions            *shared.Captions      `json:"Captions,omitempty"`

@@ -22,47 +22,47 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PlanData } from "./plandata";
 var ApiUsage = /** @class */ (function (_super) {
     __extends(ApiUsage, _super);
     function ApiUsage() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=endsAt" }),
+        SpeakeasyMetadata({ data: "json, name=endsAt" }),
         __metadata("design:type", Date)
     ], ApiUsage.prototype, "endsAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], ApiUsage.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=licenseId" }),
+        SpeakeasyMetadata({ data: "json, name=licenseId" }),
         __metadata("design:type", String)
     ], ApiUsage.prototype, "licenseId", void 0);
     __decorate([
-        Metadata({ data: "json, name=object" }),
+        SpeakeasyMetadata({ data: "json, name=object" }),
         __metadata("design:type", String)
     ], ApiUsage.prototype, "object", void 0);
     __decorate([
-        Metadata({ data: "json, name=organizationId" }),
+        SpeakeasyMetadata({ data: "json, name=organizationId" }),
         __metadata("design:type", String)
     ], ApiUsage.prototype, "organizationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=planData", elemType: shared.PlanData }),
+        SpeakeasyMetadata({ data: "json, name=planData", elemType: PlanData }),
         __metadata("design:type", Array)
     ], ApiUsage.prototype, "planData", void 0);
     __decorate([
-        Metadata({ data: "json, name=predictionsMax" }),
+        SpeakeasyMetadata({ data: "json, name=predictionsMax" }),
         __metadata("design:type", Number)
     ], ApiUsage.prototype, "predictionsMax", void 0);
     __decorate([
-        Metadata({ data: "json, name=predictionsUsed" }),
+        SpeakeasyMetadata({ data: "json, name=predictionsUsed" }),
         __metadata("design:type", Number)
     ], ApiUsage.prototype, "predictionsUsed", void 0);
     __decorate([
-        Metadata({ data: "json, name=startsAt" }),
+        SpeakeasyMetadata({ data: "json, name=startsAt" }),
         __metadata("design:type", Date)
     ], ApiUsage.prototype, "startsAt", void 0);
     return ApiUsage;

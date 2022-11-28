@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2RuleDoNotAssociateAction
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Prevents `query_term` from being associated with specified terms during search. Example: Don't associate "gShoe" and "cheap".
 **/
 export class GoogleCloudRetailV2RuleDoNotAssociateAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=doNotAssociateTerms" })
+  @SpeakeasyMetadata({ data: "json, name=doNotAssociateTerms" })
   doNotAssociateTerms?: string[];
 
-  @Metadata({ data: "json, name=queryTerms" })
+  @SpeakeasyMetadata({ data: "json, name=queryTerms" })
   queryTerms?: string[];
 
-  @Metadata({ data: "json, name=terms" })
+  @SpeakeasyMetadata({ data: "json, name=terms" })
   terms?: string[];
 }

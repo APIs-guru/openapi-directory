@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteAppRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appId" })
+  @SpeakeasyMetadata({ data: "json, name=appId" })
   appId?: string;
 
-  @Metadata({ data: "json, name=forceStopAppReplication" })
+  @SpeakeasyMetadata({ data: "json, name=forceStopAppReplication" })
   forceStopAppReplication?: boolean;
 
-  @Metadata({ data: "json, name=forceTerminateApp" })
+  @SpeakeasyMetadata({ data: "json, name=forceTerminateApp" })
   forceTerminateApp?: boolean;
 }

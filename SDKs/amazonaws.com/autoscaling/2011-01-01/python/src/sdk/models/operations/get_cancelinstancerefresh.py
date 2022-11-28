@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetCancelInstanceRefreshActionEnum(str, Enum):
     CANCEL_INSTANCE_REFRESH = "CancelInstanceRefresh"
@@ -10,9 +14,9 @@ class GetCancelInstanceRefreshVersionEnum(str, Enum):
 
 @dataclass
 class GetCancelInstanceRefreshQueryParams:
-    action: GetCancelInstanceRefreshActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    auto_scaling_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
-    version: GetCancelInstanceRefreshVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetCancelInstanceRefreshActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    auto_scaling_group_name: str = field(metadata={'query_param': { 'field_name': 'AutoScalingGroupName', 'style': 'form', 'explode': True }})
+    version: GetCancelInstanceRefreshVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetCancelInstanceRefreshHeaders:
 
 @dataclass
 class GetCancelInstanceRefreshRequest:
-    query_params: GetCancelInstanceRefreshQueryParams = field(default=None)
-    headers: GetCancelInstanceRefreshHeaders = field(default=None)
+    headers: GetCancelInstanceRefreshHeaders = field()
+    query_params: GetCancelInstanceRefreshQueryParams = field()
     
 
 @dataclass
 class GetCancelInstanceRefreshResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

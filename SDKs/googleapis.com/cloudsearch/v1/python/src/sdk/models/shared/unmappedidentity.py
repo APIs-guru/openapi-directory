@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import principal
+from sdk import utils
+from . import *
 
 class UnmappedIdentityResolutionStatusCodeEnum(str, Enum):
     CODE_UNSPECIFIED = "CODE_UNSPECIFIED"
@@ -15,6 +17,6 @@ class UnmappedIdentityResolutionStatusCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UnmappedIdentity:
-    external_identity: Optional[principal.Principal] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'externalIdentity' }})
-    resolution_status_code: Optional[UnmappedIdentityResolutionStatusCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resolutionStatusCode' }})
+    external_identity: Optional[Principal] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('externalIdentity') }})
+    resolution_status_code: Optional[UnmappedIdentityResolutionStatusCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resolutionStatusCode') }})
     

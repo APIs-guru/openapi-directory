@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputConfig } from "./inputconfig";
+
 
 
 // ImportInstanceRequest
@@ -7,6 +8,6 @@ import { InputConfig } from "./inputconfig";
  * Request for Import.
 **/
 export class ImportInstanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=inputConfig" })
   inputConfig?: InputConfig;
 }

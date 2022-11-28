@@ -1,40 +1,77 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
+
+
+export class PayslipSummaryInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=Deductions" })
+  deductions?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=EmployeeGroup" })
+  employeeGroup?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=EmployeeID" })
+  employeeId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=FirstName" })
+  firstName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=LastName" })
+  lastName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=NetPay" })
+  netPay?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=PayslipID" })
+  payslipId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=Reimbursements" })
+  reimbursements?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Super" })
+  super?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Tax" })
+  tax?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=Wages" })
+  wages?: number;
+}
 
 
 export class PayslipSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Deductions" })
+  @SpeakeasyMetadata({ data: "json, name=Deductions" })
   deductions?: number;
 
-  @Metadata({ data: "json, name=EmployeeGroup" })
+  @SpeakeasyMetadata({ data: "json, name=EmployeeGroup" })
   employeeGroup?: string;
 
-  @Metadata({ data: "json, name=EmployeeID" })
+  @SpeakeasyMetadata({ data: "json, name=EmployeeID" })
   employeeId?: string;
 
-  @Metadata({ data: "json, name=FirstName" })
+  @SpeakeasyMetadata({ data: "json, name=FirstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=LastName" })
+  @SpeakeasyMetadata({ data: "json, name=LastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=NetPay" })
+  @SpeakeasyMetadata({ data: "json, name=NetPay" })
   netPay?: number;
 
-  @Metadata({ data: "json, name=PayslipID" })
+  @SpeakeasyMetadata({ data: "json, name=PayslipID" })
   payslipId?: string;
 
-  @Metadata({ data: "json, name=Reimbursements" })
+  @SpeakeasyMetadata({ data: "json, name=Reimbursements" })
   reimbursements?: number;
 
-  @Metadata({ data: "json, name=Super" })
+  @SpeakeasyMetadata({ data: "json, name=Super" })
   super?: number;
 
-  @Metadata({ data: "json, name=Tax" })
+  @SpeakeasyMetadata({ data: "json, name=Tax" })
   tax?: number;
 
-  @Metadata({ data: "json, name=UpdatedDateUTC" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedDateUTC" })
   updatedDateUtc?: string;
 
-  @Metadata({ data: "json, name=Wages" })
+  @SpeakeasyMetadata({ data: "json, name=Wages" })
   wages?: number;
 }

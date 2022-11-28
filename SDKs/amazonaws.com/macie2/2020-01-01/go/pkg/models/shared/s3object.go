@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// S3Object
+// Provides information about the S3 object that a finding applies to.
 type S3Object struct {
 	BucketArn            *string               `json:"bucketArn,omitempty"`
 	ETag                 *string               `json:"eTag,omitempty"`

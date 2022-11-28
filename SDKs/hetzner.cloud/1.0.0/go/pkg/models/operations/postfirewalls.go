@@ -1,9 +1,13 @@
 package operations
 
+// PostFirewallsCreateFirewallRequestApplyToLabelSelector
+// Configuration for type LabelSelector, required if type is `label_selector`
 type PostFirewallsCreateFirewallRequestApplyToLabelSelector struct {
 	Selector string `json:"selector"`
 }
 
+// PostFirewallsCreateFirewallRequestApplyToServer
+// Configuration for type Server, required if type is `server`
 type PostFirewallsCreateFirewallRequestApplyToServer struct {
 	ID int64 `json:"id"`
 }
@@ -54,10 +58,8 @@ type PostFirewallsCreateFirewallRequest struct {
 	Rules   []PostFirewallsCreateFirewallRequestRule    `json:"rules,omitempty"`
 }
 
-type PostFirewallsRequest struct {
-	Request *PostFirewallsCreateFirewallRequest `request:"mediaType=application/json"`
-}
-
+// PostFirewallsCreateFirewallResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostFirewallsCreateFirewallResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -162,6 +164,10 @@ type PostFirewallsCreateFirewallResponseFirewall struct {
 type PostFirewallsCreateFirewallResponse struct {
 	Actions  []PostFirewallsCreateFirewallResponseAction  `json:"actions,omitempty"`
 	Firewall *PostFirewallsCreateFirewallResponseFirewall `json:"firewall,omitempty"`
+}
+
+type PostFirewallsRequest struct {
+	Request *PostFirewallsCreateFirewallRequest `request:"mediaType=application/json"`
 }
 
 type PostFirewallsResponse struct {

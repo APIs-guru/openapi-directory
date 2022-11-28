@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ClusterEndpoint
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A cluster endpoint. Specify an endpoint when you want to set or retrieve a routing control state in the cluster.
 **/
 export class ClusterEndpoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=Endpoint" })
   endpoint?: string;
 
-  @Metadata({ data: "json, name=Region" })
+  @SpeakeasyMetadata({ data: "json, name=Region" })
   region?: string;
 }

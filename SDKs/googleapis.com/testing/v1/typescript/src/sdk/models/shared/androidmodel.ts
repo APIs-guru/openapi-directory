@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AndroidModelFormEnum {
-    DeviceFormUnspecified = "DEVICE_FORM_UNSPECIFIED"
-,    Virtual = "VIRTUAL"
-,    Physical = "PHYSICAL"
-,    Emulator = "EMULATOR"
+    DeviceFormUnspecified = "DEVICE_FORM_UNSPECIFIED",
+    Virtual = "VIRTUAL",
+    Physical = "PHYSICAL",
+    Emulator = "EMULATOR"
 }
 
 export enum AndroidModelFormFactorEnum {
-    DeviceFormFactorUnspecified = "DEVICE_FORM_FACTOR_UNSPECIFIED"
-,    Phone = "PHONE"
-,    Tablet = "TABLET"
-,    Wearable = "WEARABLE"
+    DeviceFormFactorUnspecified = "DEVICE_FORM_FACTOR_UNSPECIFIED",
+    Phone = "PHONE",
+    Tablet = "TABLET",
+    Wearable = "WEARABLE"
 }
 
 
@@ -20,48 +21,48 @@ export enum AndroidModelFormFactorEnum {
  * A description of an Android device tests may be run on.
 **/
 export class AndroidModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=brand" })
+  @SpeakeasyMetadata({ data: "json, name=brand" })
   brand?: string;
 
-  @Metadata({ data: "json, name=codename" })
+  @SpeakeasyMetadata({ data: "json, name=codename" })
   codename?: string;
 
-  @Metadata({ data: "json, name=form" })
+  @SpeakeasyMetadata({ data: "json, name=form" })
   form?: AndroidModelFormEnum;
 
-  @Metadata({ data: "json, name=formFactor" })
+  @SpeakeasyMetadata({ data: "json, name=formFactor" })
   formFactor?: AndroidModelFormFactorEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lowFpsVideoRecording" })
+  @SpeakeasyMetadata({ data: "json, name=lowFpsVideoRecording" })
   lowFpsVideoRecording?: boolean;
 
-  @Metadata({ data: "json, name=manufacturer" })
+  @SpeakeasyMetadata({ data: "json, name=manufacturer" })
   manufacturer?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=screenDensity" })
+  @SpeakeasyMetadata({ data: "json, name=screenDensity" })
   screenDensity?: number;
 
-  @Metadata({ data: "json, name=screenX" })
+  @SpeakeasyMetadata({ data: "json, name=screenX" })
   screenX?: number;
 
-  @Metadata({ data: "json, name=screenY" })
+  @SpeakeasyMetadata({ data: "json, name=screenY" })
   screenY?: number;
 
-  @Metadata({ data: "json, name=supportedAbis" })
+  @SpeakeasyMetadata({ data: "json, name=supportedAbis" })
   supportedAbis?: string[];
 
-  @Metadata({ data: "json, name=supportedVersionIds" })
+  @SpeakeasyMetadata({ data: "json, name=supportedVersionIds" })
   supportedVersionIds?: string[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=thumbnailUrl" })
+  @SpeakeasyMetadata({ data: "json, name=thumbnailUrl" })
   thumbnailUrl?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CanaryCodeOutput } from "./canarycodeoutput";
 import { CanaryRunConfigOutput } from "./canaryrunconfigoutput";
 import { CanaryScheduleOutput } from "./canaryscheduleoutput";
@@ -40,67 +40,67 @@ var Canary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ArtifactS3Location" }),
+        SpeakeasyMetadata({ data: "json, name=ArtifactS3Location" }),
         __metadata("design:type", String)
     ], Canary.prototype, "artifactS3Location", void 0);
     __decorate([
-        Metadata({ data: "json, name=Code" }),
+        SpeakeasyMetadata({ data: "json, name=Code" }),
         __metadata("design:type", CanaryCodeOutput)
     ], Canary.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=EngineArn" }),
+        SpeakeasyMetadata({ data: "json, name=EngineArn" }),
         __metadata("design:type", String)
     ], Canary.prototype, "engineArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=ExecutionRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=ExecutionRoleArn" }),
         __metadata("design:type", String)
     ], Canary.prototype, "executionRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=FailureRetentionPeriodInDays" }),
+        SpeakeasyMetadata({ data: "json, name=FailureRetentionPeriodInDays" }),
         __metadata("design:type", Number)
     ], Canary.prototype, "failureRetentionPeriodInDays", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], Canary.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], Canary.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=RunConfig" }),
+        SpeakeasyMetadata({ data: "json, name=RunConfig" }),
         __metadata("design:type", CanaryRunConfigOutput)
     ], Canary.prototype, "runConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=RuntimeVersion" }),
+        SpeakeasyMetadata({ data: "json, name=RuntimeVersion" }),
         __metadata("design:type", String)
     ], Canary.prototype, "runtimeVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=Schedule" }),
+        SpeakeasyMetadata({ data: "json, name=Schedule" }),
         __metadata("design:type", CanaryScheduleOutput)
     ], Canary.prototype, "schedule", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", CanaryStatus)
     ], Canary.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=SuccessRetentionPeriodInDays" }),
+        SpeakeasyMetadata({ data: "json, name=SuccessRetentionPeriodInDays" }),
         __metadata("design:type", Number)
     ], Canary.prototype, "successRetentionPeriodInDays", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags" }),
+        SpeakeasyMetadata({ data: "json, name=Tags" }),
         __metadata("design:type", Map)
     ], Canary.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=Timeline" }),
+        SpeakeasyMetadata({ data: "json, name=Timeline" }),
         __metadata("design:type", CanaryTimeline)
     ], Canary.prototype, "timeline", void 0);
     __decorate([
-        Metadata({ data: "json, name=VisualReference" }),
+        SpeakeasyMetadata({ data: "json, name=VisualReference" }),
         __metadata("design:type", VisualReferenceOutput)
     ], Canary.prototype, "visualReference", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcConfig" }),
+        SpeakeasyMetadata({ data: "json, name=VpcConfig" }),
         __metadata("design:type", VpcConfigOutput)
     ], Canary.prototype, "vpcConfig", void 0);
     return Canary;

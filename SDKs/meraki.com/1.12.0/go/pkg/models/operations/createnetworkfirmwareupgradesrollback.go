@@ -35,6 +35,8 @@ type CreateNetworkFirmwareUpgradesRollbackRequestBodyReasons struct {
 	Comment  string                                                              `json:"comment"`
 }
 
+// CreateNetworkFirmwareUpgradesRollbackRequestBodyToVersion
+// Version to downgrade to (if the network has firmware flexibility)
 type CreateNetworkFirmwareUpgradesRollbackRequestBodyToVersion struct {
 	ID *string `json:"id,omitempty"`
 }

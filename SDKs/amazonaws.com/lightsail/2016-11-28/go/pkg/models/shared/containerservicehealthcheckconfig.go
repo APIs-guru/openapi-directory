@@ -1,5 +1,7 @@
 package shared
 
+// ContainerServiceHealthCheckConfig
+// Describes the health check configuration of an Amazon Lightsail container service.
 type ContainerServiceHealthCheckConfig struct {
 	HealthyThreshold   *int64  `json:"healthyThreshold,omitempty"`
 	IntervalSeconds    *int64  `json:"intervalSeconds,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// ExtendedS3DestinationConfiguration
+// Describes the configuration of a destination in Amazon S3.
 type ExtendedS3DestinationConfiguration struct {
 	BucketArn                         string                             `json:"BucketARN"`
 	BufferingHints                    *BufferingHints                    `json:"BufferingHints,omitempty"`

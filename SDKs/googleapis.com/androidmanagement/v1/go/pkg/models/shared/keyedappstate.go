@@ -8,6 +8,8 @@ const (
 	KeyedAppStateSeverityEnumError               KeyedAppStateSeverityEnum = "ERROR"
 )
 
+// KeyedAppState
+// Keyed app state reported by the app.
 type KeyedAppState struct {
 	CreateTime     *string                    `json:"createTime,omitempty"`
 	Data           *string                    `json:"data,omitempty"`

@@ -7,14 +7,20 @@ const (
 	PostLoadBalancersCreateLoadBalancerRequestLoadBalancerAlgorithmTypeEnumLeastConnections PostLoadBalancersCreateLoadBalancerRequestLoadBalancerAlgorithmTypeEnum = "least_connections"
 )
 
+// PostLoadBalancersCreateLoadBalancerRequestLoadBalancerAlgorithm
+// Algorithm of the Load Balancer
 type PostLoadBalancersCreateLoadBalancerRequestLoadBalancerAlgorithm struct {
 	Type PostLoadBalancersCreateLoadBalancerRequestLoadBalancerAlgorithmTypeEnum `json:"type"`
 }
 
+// PostLoadBalancersCreateLoadBalancerRequestLabels
+// User-defined labels (key-value pairs)
 type PostLoadBalancersCreateLoadBalancerRequestLabels struct {
 	Labelkey *string `json:"labelkey,omitempty"`
 }
 
+// PostLoadBalancersCreateLoadBalancerRequestLoadBalancerServiceLoadBalancerServiceHealthCheckHTTP
+// Additional configuration for protocol http
 type PostLoadBalancersCreateLoadBalancerRequestLoadBalancerServiceLoadBalancerServiceHealthCheckHTTP struct {
 	Domain      string   `json:"domain"`
 	Path        string   `json:"path"`
@@ -30,6 +36,8 @@ const (
 	PostLoadBalancersCreateLoadBalancerRequestLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnumHTTP PostLoadBalancersCreateLoadBalancerRequestLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnum = "http"
 )
 
+// PostLoadBalancersCreateLoadBalancerRequestLoadBalancerServiceLoadBalancerServiceHealthCheck
+// Service health check
 type PostLoadBalancersCreateLoadBalancerRequestLoadBalancerServiceLoadBalancerServiceHealthCheck struct {
 	HTTP     *PostLoadBalancersCreateLoadBalancerRequestLoadBalancerServiceLoadBalancerServiceHealthCheckHTTP        `json:"http,omitempty"`
 	Interval int64                                                                                                   `json:"interval"`
@@ -39,6 +47,8 @@ type PostLoadBalancersCreateLoadBalancerRequestLoadBalancerServiceLoadBalancerSe
 	Timeout  int64                                                                                                   `json:"timeout"`
 }
 
+// PostLoadBalancersCreateLoadBalancerRequestLoadBalancerServiceHTTP
+// Configuration option for protocols http and https
 type PostLoadBalancersCreateLoadBalancerRequestLoadBalancerServiceHTTP struct {
 	Certificates   []int64 `json:"certificates,omitempty"`
 	CookieLifetime int64   `json:"cookie_lifetime"`
@@ -69,14 +79,20 @@ type PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetHealthStatus st
 	Status     *string `json:"status,omitempty"`
 }
 
+// PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetIP
+// IP targets where the traffic should be routed through. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
 type PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetIP struct {
 	IP string `json:"ip"`
 }
 
+// PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetLabelSelector
+// Label selector and a list of selected targets
 type PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetLabelSelector struct {
 	Selector string `json:"selector"`
 }
 
+// PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetLoadBalancerTargetServer
+// Server where the traffic should be routed through
 type PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetLoadBalancerTargetServer struct {
 	ID int64 `json:"id"`
 }
@@ -128,10 +144,8 @@ type PostLoadBalancersCreateLoadBalancerRequest struct {
 	Targets          []PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTarget  `json:"targets,omitempty"`
 }
 
-type PostLoadBalancersRequest struct {
-	Request *PostLoadBalancersCreateLoadBalancerRequest `request:"mediaType=application/json"`
-}
-
+// PostLoadBalancers201ApplicationJSONActionError
+// Error message for the Action if error occurred, otherwise null
 type PostLoadBalancers201ApplicationJSONActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -168,15 +182,21 @@ const (
 	PostLoadBalancers201ApplicationJSONLoadBalancerAlgorithmTypeEnumLeastConnections PostLoadBalancers201ApplicationJSONLoadBalancerAlgorithmTypeEnum = "least_connections"
 )
 
+// PostLoadBalancers201ApplicationJSONLoadBalancerAlgorithm
+// Algorithm of the Load Balancer
 type PostLoadBalancers201ApplicationJSONLoadBalancerAlgorithm struct {
 	Type PostLoadBalancers201ApplicationJSONLoadBalancerAlgorithmTypeEnum `json:"type"`
 }
 
+// PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTypePricesPriceHourly
+// Hourly costs for a Resource in this Location
 type PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTypePricesPriceHourly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
 }
 
+// PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTypePricesPriceMonthly
+// Monthly costs for a Resource in this Location
 type PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTypePricesPriceMonthly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
@@ -216,26 +236,36 @@ type PostLoadBalancers201ApplicationJSONLoadBalancerPrivateNet struct {
 	Network *int64  `json:"network,omitempty"`
 }
 
+// PostLoadBalancers201ApplicationJSONLoadBalancerProtection
+// Protection configuration for the Resource
 type PostLoadBalancers201ApplicationJSONLoadBalancerProtection struct {
 	Delete bool `json:"delete"`
 }
 
+// PostLoadBalancers201ApplicationJSONLoadBalancerPublicNetIpv4
+// IP address (v4)
 type PostLoadBalancers201ApplicationJSONLoadBalancerPublicNetIpv4 struct {
 	DNSPtr *string `json:"dns_ptr,omitempty"`
 	IP     *string `json:"ip,omitempty"`
 }
 
+// PostLoadBalancers201ApplicationJSONLoadBalancerPublicNetIpv6
+// IP address (v6)
 type PostLoadBalancers201ApplicationJSONLoadBalancerPublicNetIpv6 struct {
 	DNSPtr *string `json:"dns_ptr,omitempty"`
 	IP     *string `json:"ip,omitempty"`
 }
 
+// PostLoadBalancers201ApplicationJSONLoadBalancerPublicNet
+// Public network information
 type PostLoadBalancers201ApplicationJSONLoadBalancerPublicNet struct {
 	Enabled bool                                                         `json:"enabled"`
 	Ipv4    PostLoadBalancers201ApplicationJSONLoadBalancerPublicNetIpv4 `json:"ipv4"`
 	Ipv6    PostLoadBalancers201ApplicationJSONLoadBalancerPublicNetIpv6 `json:"ipv6"`
 }
 
+// PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerServiceLoadBalancerServiceHealthCheckHTTP
+// Additional configuration for protocol http
 type PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerServiceLoadBalancerServiceHealthCheckHTTP struct {
 	Domain      string   `json:"domain"`
 	Path        string   `json:"path"`
@@ -251,6 +281,8 @@ const (
 	PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnumHTTP PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnum = "http"
 )
 
+// PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerServiceLoadBalancerServiceHealthCheck
+// Service health check
 type PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerServiceLoadBalancerServiceHealthCheck struct {
 	HTTP     *PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerServiceLoadBalancerServiceHealthCheckHTTP        `json:"http,omitempty"`
 	Interval int64                                                                                                        `json:"interval"`
@@ -260,6 +292,8 @@ type PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerServiceLoadBalan
 	Timeout  int64                                                                                                        `json:"timeout"`
 }
 
+// PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerServiceHTTP
+// Configuration option for protocols http and https
 type PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerServiceHTTP struct {
 	Certificates   []int64 `json:"certificates,omitempty"`
 	CookieLifetime int64   `json:"cookie_lifetime"`
@@ -290,14 +324,20 @@ type PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetHealthStat
 	Status     *string `json:"status,omitempty"`
 }
 
+// PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetIP
+// IP targets where the traffic should be routed through. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
 type PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetIP struct {
 	IP string `json:"ip"`
 }
 
+// PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetLabelSelector
+// Label selector and a list of selected targets
 type PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetLabelSelector struct {
 	Selector string `json:"selector"`
 }
 
+// PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetLoadBalancerTargetServer
+// Server where the traffic should be routed through
 type PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetLoadBalancerTargetServer struct {
 	ID int64 `json:"id"`
 }
@@ -357,6 +397,10 @@ type PostLoadBalancers201ApplicationJSONLoadBalancer struct {
 type PostLoadBalancers201ApplicationJSON struct {
 	Action       PostLoadBalancers201ApplicationJSONAction       `json:"action"`
 	LoadBalancer PostLoadBalancers201ApplicationJSONLoadBalancer `json:"load_balancer"`
+}
+
+type PostLoadBalancersRequest struct {
+	Request *PostLoadBalancersCreateLoadBalancerRequest `request:"mediaType=application/json"`
 }
 
 type PostLoadBalancersResponse struct {

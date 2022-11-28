@@ -1,5 +1,7 @@
 package shared
 
+// ResourceSearchResult
+// A result of Resource Search, containing information of a cloud resource. Next ID: 31
 type ResourceSearchResult struct {
 	AdditionalAttributes   map[string]interface{}      `json:"additionalAttributes,omitempty"`
 	AssetType              *string                     `json:"assetType,omitempty"`

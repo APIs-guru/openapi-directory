@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetResourceOwnerPathParams = /** @class */ (function (_super) {
     __extends(GetResourceOwnerPathParams, _super);
@@ -30,49 +30,25 @@ var GetResourceOwnerPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=resourceOwnerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=resourceOwnerId" }),
         __metadata("design:type", String)
     ], GetResourceOwnerPathParams.prototype, "resourceOwnerId", void 0);
     return GetResourceOwnerPathParams;
 }(SpeakeasyBase));
 export { GetResourceOwnerPathParams };
-var GetResourceOwnerSecurityOption1 = /** @class */ (function (_super) {
-    __extends(GetResourceOwnerSecurityOption1, _super);
-    function GetResourceOwnerSecurityOption1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
-        __metadata("design:type", shared.SchemeApiKey)
-    ], GetResourceOwnerSecurityOption1.prototype, "apiKey", void 0);
-    return GetResourceOwnerSecurityOption1;
-}(SpeakeasyBase));
-export { GetResourceOwnerSecurityOption1 };
-var GetResourceOwnerSecurityOption2 = /** @class */ (function (_super) {
-    __extends(GetResourceOwnerSecurityOption2, _super);
-    function GetResourceOwnerSecurityOption2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
-        __metadata("design:type", shared.SchemeOauth2AuthorizationCode)
-    ], GetResourceOwnerSecurityOption2.prototype, "oauth2AuthorizationCode", void 0);
-    return GetResourceOwnerSecurityOption2;
-}(SpeakeasyBase));
-export { GetResourceOwnerSecurityOption2 };
 var GetResourceOwnerSecurity = /** @class */ (function (_super) {
     __extends(GetResourceOwnerSecurity, _super);
     function GetResourceOwnerSecurity() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", GetResourceOwnerSecurityOption1)
-    ], GetResourceOwnerSecurity.prototype, "option1", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        __metadata("design:type", shared.SchemeApiKey)
+    ], GetResourceOwnerSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
-        __metadata("design:type", GetResourceOwnerSecurityOption2)
-    ], GetResourceOwnerSecurity.prototype, "option2", void 0);
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2AuthorizationCode)
+    ], GetResourceOwnerSecurity.prototype, "oauth2AuthorizationCode", void 0);
     return GetResourceOwnerSecurity;
 }(SpeakeasyBase));
 export { GetResourceOwnerSecurity };
@@ -82,11 +58,11 @@ var GetResourceOwnerRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourceOwnerPathParams)
     ], GetResourceOwnerRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourceOwnerSecurity)
     ], GetResourceOwnerRequest.prototype, "security", void 0);
     return GetResourceOwnerRequest;
@@ -98,23 +74,23 @@ var GetResourceOwnerResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetResourceOwnerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Error)
     ], GetResourceOwnerResponse.prototype, "error", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], GetResourceOwnerResponse.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ResourceOwner)
     ], GetResourceOwnerResponse.prototype, "resourceOwner", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetResourceOwnerResponse.prototype, "statusCode", void 0);
     return GetResourceOwnerResponse;

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // HttpParameters
 /**
  * These are custom parameter to be used when the target is an API Gateway REST APIs or EventBridge ApiDestinations. In the latter case, these are merged with any InvocationParameters specified on the Connection, with any values from the Connection taking precedence.
@@ -33,15 +33,15 @@ var HttpParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=HeaderParameters" }),
+        SpeakeasyMetadata({ data: "json, name=HeaderParameters" }),
         __metadata("design:type", Map)
     ], HttpParameters.prototype, "headerParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=PathParameterValues" }),
+        SpeakeasyMetadata({ data: "json, name=PathParameterValues" }),
         __metadata("design:type", Array)
     ], HttpParameters.prototype, "pathParameterValues", void 0);
     __decorate([
-        Metadata({ data: "json, name=QueryStringParameters" }),
+        SpeakeasyMetadata({ data: "json, name=QueryStringParameters" }),
         __metadata("design:type", Map)
     ], HttpParameters.prototype, "queryStringParameters", void 0);
     return HttpParameters;

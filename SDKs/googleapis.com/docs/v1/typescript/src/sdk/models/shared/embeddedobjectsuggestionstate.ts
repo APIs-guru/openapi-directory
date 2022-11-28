@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EmbeddedObjectBorderSuggestionState } from "./embeddedobjectbordersuggestionstate";
 import { ImagePropertiesSuggestionState } from "./imagepropertiessuggestionstate";
 import { LinkedContentReferenceSuggestionState } from "./linkedcontentreferencesuggestionstate";
 import { SizeSuggestionState } from "./sizesuggestionstate";
+
 
 
 // EmbeddedObjectSuggestionState
@@ -10,36 +11,36 @@ import { SizeSuggestionState } from "./sizesuggestionstate";
  * A mask that indicates which of the fields on the base EmbeddedObject have been changed in this suggestion. For any field set to true, there's a new suggested value.
 **/
 export class EmbeddedObjectSuggestionState extends SpeakeasyBase {
-  @Metadata({ data: "json, name=descriptionSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=descriptionSuggested" })
   descriptionSuggested?: boolean;
 
-  @Metadata({ data: "json, name=embeddedDrawingPropertiesSuggestionState" })
+  @SpeakeasyMetadata({ data: "json, name=embeddedDrawingPropertiesSuggestionState" })
   embeddedDrawingPropertiesSuggestionState?: Map<string, any>;
 
-  @Metadata({ data: "json, name=embeddedObjectBorderSuggestionState" })
+  @SpeakeasyMetadata({ data: "json, name=embeddedObjectBorderSuggestionState" })
   embeddedObjectBorderSuggestionState?: EmbeddedObjectBorderSuggestionState;
 
-  @Metadata({ data: "json, name=imagePropertiesSuggestionState" })
+  @SpeakeasyMetadata({ data: "json, name=imagePropertiesSuggestionState" })
   imagePropertiesSuggestionState?: ImagePropertiesSuggestionState;
 
-  @Metadata({ data: "json, name=linkedContentReferenceSuggestionState" })
+  @SpeakeasyMetadata({ data: "json, name=linkedContentReferenceSuggestionState" })
   linkedContentReferenceSuggestionState?: LinkedContentReferenceSuggestionState;
 
-  @Metadata({ data: "json, name=marginBottomSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=marginBottomSuggested" })
   marginBottomSuggested?: boolean;
 
-  @Metadata({ data: "json, name=marginLeftSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=marginLeftSuggested" })
   marginLeftSuggested?: boolean;
 
-  @Metadata({ data: "json, name=marginRightSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=marginRightSuggested" })
   marginRightSuggested?: boolean;
 
-  @Metadata({ data: "json, name=marginTopSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=marginTopSuggested" })
   marginTopSuggested?: boolean;
 
-  @Metadata({ data: "json, name=sizeSuggestionState" })
+  @SpeakeasyMetadata({ data: "json, name=sizeSuggestionState" })
   sizeSuggestionState?: SizeSuggestionState;
 
-  @Metadata({ data: "json, name=titleSuggested" })
+  @SpeakeasyMetadata({ data: "json, name=titleSuggested" })
   titleSuggested?: boolean;
 }

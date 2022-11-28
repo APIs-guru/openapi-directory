@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class RestoreServiceRequestRestoreTypeEnum(str, Enum):
     RESTORE_TYPE_UNSPECIFIED = "RESTORE_TYPE_UNSPECIFIED"
@@ -11,7 +13,11 @@ class RestoreServiceRequestRestoreTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RestoreServiceRequest:
-    backup: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backup' }})
-    request_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestId' }})
-    restore_type: Optional[RestoreServiceRequestRestoreTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'restoreType' }})
+    r"""RestoreServiceRequest
+    Request message for DataprocMetastore.Restore.
+    """
+    
+    backup: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('backup') }})
+    request_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestId') }})
+    restore_type: Optional[RestoreServiceRequestRestoreTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('restoreType') }})
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WmxSite } from "./wmxsite";
+
 
 
 // SitesListResponse
@@ -8,6 +8,6 @@ import { WmxSite } from "./wmxsite";
  * List of sites with access level information.
 **/
 export class SitesListResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=siteEntry", elemType: shared.WmxSite })
+  @SpeakeasyMetadata({ data: "json, name=siteEntry", elemType: WmxSite })
   siteEntry?: WmxSite[];
 }

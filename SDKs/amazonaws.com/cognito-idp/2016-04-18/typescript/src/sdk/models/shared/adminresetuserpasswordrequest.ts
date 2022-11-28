@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AdminResetUserPasswordRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the request to reset a user's password as an administrator.
 **/
 export class AdminResetUserPasswordRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=ClientMetadata" })
   clientMetadata?: Map<string, string>;
 
-  @Metadata({ data: "json, name=UserPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=UserPoolId" })
   userPoolId: string;
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username: string;
 }

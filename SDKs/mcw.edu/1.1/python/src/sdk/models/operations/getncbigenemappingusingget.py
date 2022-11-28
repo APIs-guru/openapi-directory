@@ -1,20 +1,20 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
 class GetNcbiGeneMappingUsingGetPathParams:
-    rgd_id: int = field(default=None, metadata={'path_param': { 'field_name': 'rgdId', 'style': 'simple', 'explode': False }})
+    rgd_id: int = field(metadata={'path_param': { 'field_name': 'rgdId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetNcbiGeneMappingUsingGetRequest:
-    path_params: GetNcbiGeneMappingUsingGetPathParams = field(default=None)
+    path_params: GetNcbiGeneMappingUsingGetPathParams = field()
     
 
 @dataclass
 class GetNcbiGeneMappingUsingGetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

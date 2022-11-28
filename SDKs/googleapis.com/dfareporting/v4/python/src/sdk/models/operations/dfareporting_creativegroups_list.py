@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingCreativeGroupsListPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 class DfareportingCreativeGroupsListSortFieldEnum(str, Enum):
     ID = "ID"
@@ -41,20 +42,20 @@ class DfareportingCreativeGroupsListQueryParams:
 
 @dataclass
 class DfareportingCreativeGroupsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingCreativeGroupsListRequest:
-    path_params: DfareportingCreativeGroupsListPathParams = field(default=None)
-    query_params: DfareportingCreativeGroupsListQueryParams = field(default=None)
-    security: DfareportingCreativeGroupsListSecurity = field(default=None)
+    path_params: DfareportingCreativeGroupsListPathParams = field()
+    query_params: DfareportingCreativeGroupsListQueryParams = field()
+    security: DfareportingCreativeGroupsListSecurity = field()
     
 
 @dataclass
 class DfareportingCreativeGroupsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     creative_groups_list_response: Optional[shared.CreativeGroupsListResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MonitoringServicesCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class MonitoringServicesCreateQueryParams:
 
 @dataclass
 class MonitoringServicesCreateSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MonitoringServicesCreateSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,15 +45,15 @@ class MonitoringServicesCreateSecurity:
 
 @dataclass
 class MonitoringServicesCreateRequest:
-    path_params: MonitoringServicesCreatePathParams = field(default=None)
-    query_params: MonitoringServicesCreateQueryParams = field(default=None)
-    request: Optional[shared.Service] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: MonitoringServicesCreateSecurity = field(default=None)
+    path_params: MonitoringServicesCreatePathParams = field()
+    query_params: MonitoringServicesCreateQueryParams = field()
+    security: MonitoringServicesCreateSecurity = field()
+    request: Optional[shared.ServiceInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MonitoringServicesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service: Optional[shared.Service] = field(default=None)
-    status_code: int = field(default=None)
     

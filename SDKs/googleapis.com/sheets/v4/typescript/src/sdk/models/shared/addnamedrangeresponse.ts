@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NamedRange } from "./namedrange";
+
 
 
 // AddNamedRangeResponse
@@ -7,6 +8,6 @@ import { NamedRange } from "./namedrange";
  * The result of adding a named range.
 **/
 export class AddNamedRangeResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=namedRange" })
+  @SpeakeasyMetadata({ data: "json, name=namedRange" })
   namedRange?: NamedRange;
 }

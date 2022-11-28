@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-export var GETVISUALCROSSINGWEBSERVICESRESTSERVICESWEATHERDATAFORECAST_SERVERS = [
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+export var GetVisualCrossingWebServicesRestServicesWeatherdataForecastServerList = [
     "https://weather.visualcrossing.com",
 ];
 var GetVisualCrossingWebServicesRestServicesWeatherdataForecastQueryParams = /** @class */ (function (_super) {
@@ -32,35 +32,35 @@ var GetVisualCrossingWebServicesRestServicesWeatherdataForecastQueryParams = /**
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=aggregateHours" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=aggregateHours" }),
         __metadata("design:type", String)
     ], GetVisualCrossingWebServicesRestServicesWeatherdataForecastQueryParams.prototype, "aggregateHours", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=allowAsynch" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=allowAsynch" }),
         __metadata("design:type", Boolean)
     ], GetVisualCrossingWebServicesRestServicesWeatherdataForecastQueryParams.prototype, "allowAsynch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=contentType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=contentType" }),
         __metadata("design:type", String)
     ], GetVisualCrossingWebServicesRestServicesWeatherdataForecastQueryParams.prototype, "contentType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], GetVisualCrossingWebServicesRestServicesWeatherdataForecastQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=locations" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locations" }),
         __metadata("design:type", String)
     ], GetVisualCrossingWebServicesRestServicesWeatherdataForecastQueryParams.prototype, "locations", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sendAsDatasource" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sendAsDatasource" }),
         __metadata("design:type", Boolean)
     ], GetVisualCrossingWebServicesRestServicesWeatherdataForecastQueryParams.prototype, "sendAsDatasource", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=shortColumnNames" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=shortColumnNames" }),
         __metadata("design:type", Boolean)
     ], GetVisualCrossingWebServicesRestServicesWeatherdataForecastQueryParams.prototype, "shortColumnNames", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=unitGroup" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=unitGroup" }),
         __metadata("design:type", String)
     ], GetVisualCrossingWebServicesRestServicesWeatherdataForecastQueryParams.prototype, "unitGroup", void 0);
     return GetVisualCrossingWebServicesRestServicesWeatherdataForecastQueryParams;
@@ -72,11 +72,11 @@ var GetVisualCrossingWebServicesRestServicesWeatherdataForecastRequest = /** @cl
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetVisualCrossingWebServicesRestServicesWeatherdataForecastRequest.prototype, "serverUrl", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetVisualCrossingWebServicesRestServicesWeatherdataForecastQueryParams)
     ], GetVisualCrossingWebServicesRestServicesWeatherdataForecastRequest.prototype, "queryParams", void 0);
     return GetVisualCrossingWebServicesRestServicesWeatherdataForecastRequest;
@@ -88,11 +88,11 @@ var GetVisualCrossingWebServicesRestServicesWeatherdataForecastResponse = /** @c
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetVisualCrossingWebServicesRestServicesWeatherdataForecastResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetVisualCrossingWebServicesRestServicesWeatherdataForecastResponse.prototype, "statusCode", void 0);
     return GetVisualCrossingWebServicesRestServicesWeatherdataForecastResponse;

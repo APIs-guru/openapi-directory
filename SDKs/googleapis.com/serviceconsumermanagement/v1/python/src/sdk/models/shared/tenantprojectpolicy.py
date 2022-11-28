@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import policybinding
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TenantProjectPolicy:
-    policy_bindings: Optional[List[policybinding.PolicyBinding]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policyBindings' }})
+    r"""TenantProjectPolicy
+    Describes policy settings that can be applied to a newly created tenant project.
+    """
+    
+    policy_bindings: Optional[List[PolicyBinding]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policyBindings') }})
     

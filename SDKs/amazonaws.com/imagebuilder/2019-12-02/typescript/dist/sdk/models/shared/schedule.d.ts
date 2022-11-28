@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PipelineExecutionStartConditionEnum } from "./pipelineexecutionstartconditionenum";
 /**
  * A schedule configures how often and when a pipeline will automatically create a new image.

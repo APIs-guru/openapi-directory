@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import capabilitysyncstatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GatewayCapabilitySummary:
-    capability_namespace: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'capabilityNamespace' }})
-    capability_sync_status: capabilitysyncstatus_enum.CapabilitySyncStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'capabilitySyncStatus' }})
+    r"""GatewayCapabilitySummary
+    Contains a summary of a gateway capability configuration.
+    """
+    
+    capability_namespace: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('capabilityNamespace') }})
+    capability_sync_status: CapabilitySyncStatusEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('capabilitySyncStatus') }})
     

@@ -1,0 +1,11 @@
+package shared
+
+type Option struct {
+	DbSecurityGroupMemberships  []DbSecurityGroupMembership
+	OptionDescription           *string
+	OptionName                  *string
+	OptionSettings              []OptionSetting
+	Persistent                  *bool
+	Port                        *int64
+	VpcSecurityGroupMemberships []VpcSecurityGroupMembership
+}

@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import connection
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListConnectionsResponse:
-    connections: Optional[List[connection.Connection]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connections' }})
+    r"""ListConnectionsResponse
+    ListConnectionsResponse is the response to list peering states for the given service and consumer project.
+    """
+    
+    connections: Optional[List[Connection]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connections') }})
     

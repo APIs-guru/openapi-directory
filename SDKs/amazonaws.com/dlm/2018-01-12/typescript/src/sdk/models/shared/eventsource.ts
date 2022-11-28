@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EventParameters } from "./eventparameters";
 import { EventSourceValuesEnum } from "./eventsourcevaluesenum";
+
 
 
 // EventSource
@@ -8,9 +9,9 @@ import { EventSourceValuesEnum } from "./eventsourcevaluesenum";
  * Specifies an event that triggers an event-based policy.
 **/
 export class EventSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Parameters" })
+  @SpeakeasyMetadata({ data: "json, name=Parameters" })
   parameters?: EventParameters;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type: EventSourceValuesEnum;
 }

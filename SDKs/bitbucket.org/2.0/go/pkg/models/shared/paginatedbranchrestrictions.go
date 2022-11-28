@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedBranchrestrictions
+// A paginated list of branch restriction rules.
 type PaginatedBranchrestrictions struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

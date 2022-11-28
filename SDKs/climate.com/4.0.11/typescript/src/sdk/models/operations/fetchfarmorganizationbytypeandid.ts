@@ -1,59 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class FetchFarmOrganizationByTypeAndIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=farmOrganizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=farmOrganizationId" })
   farmOrganizationId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=farmOrganizationType" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=farmOrganizationType" })
   farmOrganizationType: shared.FarmOrganizationTypeEnum;
 }
 
 
-export class FetchFarmOrganizationByTypeAndIdSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
-export class FetchFarmOrganizationByTypeAndIdSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2AuthorizationCode: shared.SchemeOauth2AuthorizationCode;
-}
-
-
 export class FetchFarmOrganizationByTypeAndIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: FetchFarmOrganizationByTypeAndIdSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey?: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: FetchFarmOrganizationByTypeAndIdSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2AuthorizationCode?: shared.SchemeOauth2AuthorizationCode;
 }
 
 
 export class FetchFarmOrganizationByTypeAndIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: FetchFarmOrganizationByTypeAndIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: FetchFarmOrganizationByTypeAndIdSecurity;
 }
 
 
 export class FetchFarmOrganizationByTypeAndIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   farmOrganization?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

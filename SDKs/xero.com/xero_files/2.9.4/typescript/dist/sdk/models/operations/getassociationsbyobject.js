@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetAssociationsByObjectPathParams = /** @class */ (function (_super) {
     __extends(GetAssociationsByObjectPathParams, _super);
@@ -30,7 +30,7 @@ var GetAssociationsByObjectPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=ObjectId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ObjectId" }),
         __metadata("design:type", String)
     ], GetAssociationsByObjectPathParams.prototype, "objectId", void 0);
     return GetAssociationsByObjectPathParams;
@@ -42,7 +42,7 @@ var GetAssociationsByObjectHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" }),
         __metadata("design:type", String)
     ], GetAssociationsByObjectHeaders.prototype, "xeroTenantId", void 0);
     return GetAssociationsByObjectHeaders;
@@ -54,7 +54,7 @@ var GetAssociationsByObjectSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOAuth2)
     ], GetAssociationsByObjectSecurity.prototype, "oAuth2", void 0);
     return GetAssociationsByObjectSecurity;
@@ -66,15 +66,15 @@ var GetAssociationsByObjectRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAssociationsByObjectPathParams)
     ], GetAssociationsByObjectRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAssociationsByObjectHeaders)
     ], GetAssociationsByObjectRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAssociationsByObjectSecurity)
     ], GetAssociationsByObjectRequest.prototype, "security", void 0);
     return GetAssociationsByObjectRequest;
@@ -86,15 +86,15 @@ var GetAssociationsByObjectResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ elemType: shared.Association }),
+        SpeakeasyMetadata({ elemType: shared.Association }),
         __metadata("design:type", Array)
     ], GetAssociationsByObjectResponse.prototype, "associations", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAssociationsByObjectResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAssociationsByObjectResponse.prototype, "statusCode", void 0);
     return GetAssociationsByObjectResponse;

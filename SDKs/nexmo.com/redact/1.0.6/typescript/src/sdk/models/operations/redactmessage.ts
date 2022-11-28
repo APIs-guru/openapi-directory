@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RedactMessageSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
 export class RedactMessageRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.RedactTransaction;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: RedactMessageSecurity;
 }
 
 
 export class RedactMessageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorInvalidId?: shared.ErrorInvalidId;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorThrottled?: shared.ErrorThrottled;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorUnauthorized?: shared.ErrorUnauthorized;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   redactMessage403ApplicationJsonOneOf?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   redactMessage422ApplicationJsonOneOf?: any;
 }

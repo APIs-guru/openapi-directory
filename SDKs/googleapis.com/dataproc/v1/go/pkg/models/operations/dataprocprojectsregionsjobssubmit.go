@@ -31,7 +31,7 @@ type DataprocProjectsRegionsJobsSubmitSecurity struct {
 type DataprocProjectsRegionsJobsSubmitRequest struct {
 	PathParams  DataprocProjectsRegionsJobsSubmitPathParams
 	QueryParams DataprocProjectsRegionsJobsSubmitQueryParams
-	Request     *shared.SubmitJobRequest `request:"mediaType=application/json"`
+	Request     *shared.SubmitJobRequestInput `request:"mediaType=application/json"`
 	Security    DataprocProjectsRegionsJobsSubmitSecurity
 }
 

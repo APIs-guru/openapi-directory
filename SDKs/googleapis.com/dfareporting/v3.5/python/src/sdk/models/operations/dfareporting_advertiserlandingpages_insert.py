@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingAdvertiserLandingPagesInsertPathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DfareportingAdvertiserLandingPagesInsertQueryParams:
 
 @dataclass
 class DfareportingAdvertiserLandingPagesInsertSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingAdvertiserLandingPagesInsertRequest:
-    path_params: DfareportingAdvertiserLandingPagesInsertPathParams = field(default=None)
-    query_params: DfareportingAdvertiserLandingPagesInsertQueryParams = field(default=None)
+    path_params: DfareportingAdvertiserLandingPagesInsertPathParams = field()
+    query_params: DfareportingAdvertiserLandingPagesInsertQueryParams = field()
+    security: DfareportingAdvertiserLandingPagesInsertSecurity = field()
     request: Optional[shared.LandingPage] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DfareportingAdvertiserLandingPagesInsertSecurity = field(default=None)
     
 
 @dataclass
 class DfareportingAdvertiserLandingPagesInsertResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     landing_page: Optional[shared.LandingPage] = field(default=None)
-    status_code: int = field(default=None)
     

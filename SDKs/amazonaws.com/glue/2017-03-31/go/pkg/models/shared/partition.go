@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Partition
+// Represents a slice of table data.
 type Partition struct {
 	CatalogID         *string            `json:"CatalogId,omitempty"`
 	CreationTime      *time.Time         `json:"CreationTime,omitempty"`

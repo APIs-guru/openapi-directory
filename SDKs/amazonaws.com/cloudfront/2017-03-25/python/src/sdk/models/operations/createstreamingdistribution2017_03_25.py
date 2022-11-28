@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 
 
@@ -15,13 +18,13 @@ class CreateStreamingDistribution20170325Headers:
 
 @dataclass
 class CreateStreamingDistribution20170325Request:
-    headers: CreateStreamingDistribution20170325Headers = field(default=None)
-    request: bytes = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
+    headers: CreateStreamingDistribution20170325Headers = field()
+    request: bytes = field(metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class CreateStreamingDistribution20170325Response:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

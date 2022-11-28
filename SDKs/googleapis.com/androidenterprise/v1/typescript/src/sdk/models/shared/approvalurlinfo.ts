@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApprovalUrlInfo
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information on an approval URL.
 **/
 export class ApprovalUrlInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approvalUrl" })
+  @SpeakeasyMetadata({ data: "json, name=approvalUrl" })
   approvalUrl?: string;
 }

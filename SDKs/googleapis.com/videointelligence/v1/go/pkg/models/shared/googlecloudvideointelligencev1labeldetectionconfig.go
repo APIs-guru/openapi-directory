@@ -9,6 +9,8 @@ const (
 	GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnumShotAndFrameMode              GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnum = "SHOT_AND_FRAME_MODE"
 )
 
+// GoogleCloudVideointelligenceV1LabelDetectionConfig
+// Config for LABEL_DETECTION.
 type GoogleCloudVideointelligenceV1LabelDetectionConfig struct {
 	FrameConfidenceThreshold *float32                                                                  `json:"frameConfidenceThreshold,omitempty"`
 	LabelDetectionMode       *GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnum `json:"labelDetectionMode,omitempty"`

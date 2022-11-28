@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: http://smethur.st/posts/176135860 - BBC iPlayer documentation"""
 import requests
 from typing import Any,Optional
-from sdk.models import operations, shared
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -12,30 +15,59 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: http://smethur.st/posts/176135860 - BBC iPlayer documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def get_broadcasts_by_channel_(self, request: operations.GetBroadcastsByChannelRequest) -> operations.GetBroadcastsByChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get broadcasts by channel
+        Get broadcasts by channel
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/channels/{channel}/broadcasts", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -50,15 +82,18 @@ class SDK:
 
     
     def get_categories_(self, request: operations.GetCategoriesRequest) -> operations.GetCategoriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get categories
+        Get the list of all the categories in TV & iPlayer.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/categories"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -73,15 +108,18 @@ class SDK:
 
     
     def get_channels_(self, request: operations.GetChannelsRequest) -> operations.GetChannelsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List all the channels.
+        Get the list of all the channels TV & iPlayer.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/channels"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -96,15 +134,18 @@ class SDK:
 
     
     def get_clips_(self, request: operations.GetClipsRequest) -> operations.GetClipsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Clips
+        Get Clips
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/clips/{pid}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -119,15 +160,18 @@ class SDK:
 
     
     def get_episodes_by_category_(self, request: operations.GetEpisodesByCategoryRequest) -> operations.GetEpisodesByCategoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List all the episodes for a category.
+        Get the list of all the episodes for a given category in TV & iPlayer.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/categories/{category}/episodes", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -142,15 +186,18 @@ class SDK:
 
     
     def get_episodes_by_group_(self, request: operations.GetEpisodesByGroupRequest) -> operations.GetEpisodesByGroupResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get episodes by group, brand or series
+        Get episodes by group, brand or series
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/groups/{pid}/episodes", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -165,15 +212,18 @@ class SDK:
 
     
     def get_episodes_by_parent_pid_(self, request: operations.GetEpisodesByParentPidRequest) -> operations.GetEpisodesByParentPidResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Child episodes for a given programme pid.
+        Get the child episodes belonging to a given programme identifier.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/programmes/{pid}/episodes", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -188,15 +238,18 @@ class SDK:
 
     
     def get_highlights_by_category_(self, request: operations.GetHighlightsByCategoryRequest) -> operations.GetHighlightsByCategoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List the highlights for a category.
+        Get the editorial highlights of a given category in TV & iPlayer.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/categories/{category}/highlights", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -211,15 +264,18 @@ class SDK:
 
     
     def get_highlights_by_channel_(self, request: operations.GetHighlightsByChannelRequest) -> operations.GetHighlightsByChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List the highlights for a channel.
+        Get the editorial highlights of a given channel in TV & iPlayer.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/channels/{channel}/highlights", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -234,15 +290,18 @@ class SDK:
 
     
     def get_onward_journey(self, request: operations.GetOnwardJourneyRequest) -> operations.GetOnwardJourneyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Onward Journey
+        Get Onward Journey (next programme)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/episodes/{pid}/next", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -257,15 +316,18 @@ class SDK:
 
     
     def get_programme_by_pid_(self, request: operations.GetProgrammeByPidRequest) -> operations.GetProgrammeByPidResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Episode for a given pid.
+        Get the episode for a given episode identifier.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/episodes/{pid}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -280,15 +342,18 @@ class SDK:
 
     
     def get_programme_highlights_(self, request: operations.GetProgrammeHighlightsRequest) -> operations.GetProgrammeHighlightsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get programme highlights
+        Get programme highlights
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/home/highlights"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -303,15 +368,18 @@ class SDK:
 
     
     def get_programme_recommendations_(self, request: operations.GetProgrammeRecommendationsRequest) -> operations.GetProgrammeRecommendationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get programme recommendations
+        Get programme recommendations
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/episodes/{pid}/recommendations", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -326,15 +394,18 @@ class SDK:
 
     
     def get_programmes_ato_z_search_(self, request: operations.GetProgrammesAtoZSearchRequest) -> operations.GetProgrammesAtoZSearchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Programmes by initial title character
+        Get the Programmes whose title begins with the given initial character.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/atoz/{letter}/programmes", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -349,15 +420,18 @@ class SDK:
 
     
     def get_programmes_by_category_(self, request: operations.GetProgrammesByCategoryRequest) -> operations.GetProgrammesByCategoryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List all the programmes for a category.
+        Get the list of all the Programmes (TLEOs) for a given category in TV & iPlayer.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/categories/{category}/programmes", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -372,15 +446,18 @@ class SDK:
 
     
     def get_programmes_by_channel_(self, request: operations.GetProgrammesByChannelRequest) -> operations.GetProgrammesByChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get programmes by channel
+        Get programmes by channel
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/channels/{channel}/programmes", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -395,15 +472,18 @@ class SDK:
 
     
     def get_programmes_by_parent_pid_(self, request: operations.GetProgrammesByParentPidRequest) -> operations.GetProgrammesByParentPidResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Programme for a given pid.
+        Get the programme for a given programme identifier.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/programmes/{pid}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -418,15 +498,18 @@ class SDK:
 
     
     def get_programmes_popular_(self, request: operations.GetProgrammesPopularRequest) -> operations.GetProgrammesPopularResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get programmes popular
+        Get programmes popular
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/groups/popular/episodes"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -441,15 +524,18 @@ class SDK:
 
     
     def get_regions_(self, request: operations.GetRegionsRequest) -> operations.GetRegionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List all regions
+        Get the list of all the regions TV & iPlayer.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/regions"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -464,15 +550,18 @@ class SDK:
 
     
     def get_schedule_by_channel_(self, request: operations.GetScheduleByChannelRequest) -> operations.GetScheduleByChannelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get schedule by channel
+        Get schedule by channel
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/channels/{channel}/schedule/{date}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -487,13 +576,17 @@ class SDK:
 
     
     def get_schema_(self) -> operations.GetSchemaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get schema
+        Get schema
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/schema/ibl.json"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -508,13 +601,17 @@ class SDK:
 
     
     def get_status_(self) -> operations.GetStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get status
+        Get the current iPlayer business layer status. This tells the caller the status of the iPlayer data, but not necessarily the overall status of the website. In the future it might include the status of the dependent data services within the BBC.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/status"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -529,15 +626,18 @@ class SDK:
 
     
     def get_sub_categories_(self, request: operations.GetSubCategoriesRequest) -> operations.GetSubCategoriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get sub-categories
+        Get sub-categories
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/categories/{category}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -552,15 +652,18 @@ class SDK:
 
     
     def get_trailers_pre_rolls_(self, request: operations.GetTrailersPreRollsRequest) -> operations.GetTrailersPreRollsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Trailers (pre-rolls)
+        Get Trailers (pre-rolls)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/episodes/{pid}/prerolls", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -575,15 +678,18 @@ class SDK:
 
     
     def get_user_store_purchases_(self, request: operations.GetUserStorePurchasesRequest) -> operations.GetUserStorePurchasesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get user store purchases
+        Get user store purchases
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/user/purchases"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -598,15 +704,18 @@ class SDK:
 
     
     def get_user_store_recommendations_(self, request: operations.GetUserStoreRecommendationsRequest) -> operations.GetUserStoreRecommendationsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get user store recommendations
+        Get user store recommendations
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/user/recommendations"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -621,15 +730,18 @@ class SDK:
 
     
     def get_user_watching_(self, request: operations.GetUserWatchingRequest) -> operations.GetUserWatchingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get user watching
+        Get user watching
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/user/watching"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -644,15 +756,18 @@ class SDK:
 
     
     def search_suggest_(self, request: operations.SearchSuggestRequest) -> operations.SearchSuggestResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Search-suggest
+        Search-suggest
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search-suggest"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -667,15 +782,18 @@ class SDK:
 
     
     def search_(self, request: operations.SearchRequest) -> operations.SearchResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Search
+        Search
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/search"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -690,15 +808,18 @@ class SDK:
 
     
     def get_post_rolls(self, request: operations.GetPostRollsRequest) -> operations.GetPostRollsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get Follow-ups (post-rolls)
+        Get Follow-ups (post-rolls)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/episodes/{pid}/postrolls", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

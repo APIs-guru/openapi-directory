@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReplicaGlobalSecondaryIndexDescription } from "./replicaglobalsecondaryindexdescription";
 import { ProvisionedThroughputOverride } from "./provisionedthroughputoverride";
 import { ReplicaStatusEnum } from "./replicastatusenum";
+
 
 
 // ReplicaDescription
@@ -10,27 +10,27 @@ import { ReplicaStatusEnum } from "./replicastatusenum";
  * Contains the details of the replica.
 **/
 export class ReplicaDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=GlobalSecondaryIndexes", elemType: shared.ReplicaGlobalSecondaryIndexDescription })
+  @SpeakeasyMetadata({ data: "json, name=GlobalSecondaryIndexes", elemType: ReplicaGlobalSecondaryIndexDescription })
   globalSecondaryIndexes?: ReplicaGlobalSecondaryIndexDescription[];
 
-  @Metadata({ data: "json, name=KMSMasterKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KMSMasterKeyId" })
   kmsMasterKeyId?: string;
 
-  @Metadata({ data: "json, name=ProvisionedThroughputOverride" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisionedThroughputOverride" })
   provisionedThroughputOverride?: ProvisionedThroughputOverride;
 
-  @Metadata({ data: "json, name=RegionName" })
+  @SpeakeasyMetadata({ data: "json, name=RegionName" })
   regionName?: string;
 
-  @Metadata({ data: "json, name=ReplicaInaccessibleDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaInaccessibleDateTime" })
   replicaInaccessibleDateTime?: Date;
 
-  @Metadata({ data: "json, name=ReplicaStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaStatus" })
   replicaStatus?: ReplicaStatusEnum;
 
-  @Metadata({ data: "json, name=ReplicaStatusDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaStatusDescription" })
   replicaStatusDescription?: string;
 
-  @Metadata({ data: "json, name=ReplicaStatusPercentProgress" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicaStatusPercentProgress" })
   replicaStatusPercentProgress?: string;
 }

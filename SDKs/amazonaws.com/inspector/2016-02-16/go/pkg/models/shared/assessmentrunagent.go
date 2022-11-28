@@ -1,5 +1,7 @@
 package shared
 
+// AssessmentRunAgent
+// Contains information about an Amazon Inspector agent. This data type is used as a response element in the <a>ListAssessmentRunAgents</a> action.
 type AssessmentRunAgent struct {
 	AgentHealth        AgentHealthEnum     `json:"agentHealth"`
 	AgentHealthCode    AgentHealthCodeEnum `json:"agentHealthCode"`

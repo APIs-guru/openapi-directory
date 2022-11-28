@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TypedValue } from "./typedvalue";
 import { CollectdValue } from "./collectdvalue";
+
 
 
 // CollectdPayload
@@ -9,27 +9,27 @@ import { CollectdValue } from "./collectdvalue";
  * A collection of data points sent from a collectd-based plugin. See the collectd documentation for more information.
 **/
 export class CollectdPayload extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=metadata", elemType: shared.TypedValue })
+  @SpeakeasyMetadata({ data: "json, name=metadata", elemType: TypedValue })
   metadata?: Map<string, TypedValue>;
 
-  @Metadata({ data: "json, name=plugin" })
+  @SpeakeasyMetadata({ data: "json, name=plugin" })
   plugin?: string;
 
-  @Metadata({ data: "json, name=pluginInstance" })
+  @SpeakeasyMetadata({ data: "json, name=pluginInstance" })
   pluginInstance?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 
-  @Metadata({ data: "json, name=typeInstance" })
+  @SpeakeasyMetadata({ data: "json, name=typeInstance" })
   typeInstance?: string;
 
-  @Metadata({ data: "json, name=values", elemType: shared.CollectdValue })
+  @SpeakeasyMetadata({ data: "json, name=values", elemType: CollectdValue })
   values?: CollectdValue[];
 }

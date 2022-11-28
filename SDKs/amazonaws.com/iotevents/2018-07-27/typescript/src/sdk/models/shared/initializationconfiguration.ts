@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InitializationConfiguration
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the default alarm state. The configuration applies to all alarms that were created based on this alarm model.
 **/
 export class InitializationConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=disabledOnInitialization" })
+  @SpeakeasyMetadata({ data: "json, name=disabledOnInitialization" })
   disabledOnInitialization: boolean;
 }

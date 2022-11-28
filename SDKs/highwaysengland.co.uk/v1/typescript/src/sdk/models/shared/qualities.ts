@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Qualities extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Date" })
+  @SpeakeasyMetadata({ data: "json, name=Date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=Quality" })
+  @SpeakeasyMetadata({ data: "json, name=Quality" })
   quality?: number;
 }

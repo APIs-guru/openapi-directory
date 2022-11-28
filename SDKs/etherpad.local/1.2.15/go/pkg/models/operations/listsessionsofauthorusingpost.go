@@ -4,10 +4,6 @@ type ListSessionsOfAuthorUsingPostQueryParams struct {
 	AuthorID *string `queryParam:"style=form,explode=true,name=authorID"`
 }
 
-type ListSessionsOfAuthorUsingPostRequest struct {
-	QueryParams ListSessionsOfAuthorUsingPostQueryParams
-}
-
 type ListSessionsOfAuthorUsingPost200ApplicationJSONDataSessions struct {
 	AuthorID   *string `json:"authorID,omitempty"`
 	GroupID    *string `json:"groupID,omitempty"`
@@ -41,6 +37,10 @@ type ListSessionsOfAuthorUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type ListSessionsOfAuthorUsingPostRequest struct {
+	QueryParams ListSessionsOfAuthorUsingPostQueryParams
 }
 
 type ListSessionsOfAuthorUsingPostResponse struct {

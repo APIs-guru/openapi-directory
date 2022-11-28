@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import sourcedatacolumnproperties
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DestinationOptions:
-    column_map: Optional[dict[str, sourcedatacolumnproperties.SourceDataColumnProperties]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'columnMap' }})
+    r"""DestinationOptions
+    An object that contains the options relating to the destination of the import request.
+    """
+    
+    column_map: Optional[dict[str, SourceDataColumnProperties]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('columnMap') }})
     

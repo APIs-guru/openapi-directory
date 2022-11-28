@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class TeamsListChildLegacyPathParams:
-    team_id: int = field(default=None, metadata={'path_param': { 'field_name': 'team_id', 'style': 'simple', 'explode': False }})
+    team_id: int = field(metadata={'path_param': { 'field_name': 'team_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,15 +16,15 @@ class TeamsListChildLegacyQueryParams:
 
 @dataclass
 class TeamsListChildLegacyRequest:
-    path_params: TeamsListChildLegacyPathParams = field(default=None)
-    query_params: TeamsListChildLegacyQueryParams = field(default=None)
+    path_params: TeamsListChildLegacyPathParams = field()
+    query_params: TeamsListChildLegacyQueryParams = field()
     
 
 @dataclass
 class TeamsListChildLegacyResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     teams: Optional[List[shared.Team]] = field(default=None)
     validation_error: Optional[shared.ValidationError] = field(default=None)

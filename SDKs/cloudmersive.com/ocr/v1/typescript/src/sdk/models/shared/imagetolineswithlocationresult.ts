@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OcrLineElement } from "./ocrlineelement";
+
 
 
 // ImageToLinesWithLocationResult
@@ -8,9 +8,9 @@ import { OcrLineElement } from "./ocrlineelement";
  * Result of an image to lines-with-location OCR operation
 **/
 export class ImageToLinesWithLocationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Lines", elemType: shared.OcrLineElement })
+  @SpeakeasyMetadata({ data: "json, name=Lines", elemType: OcrLineElement })
   lines?: OcrLineElement[];
 
-  @Metadata({ data: "json, name=Successful" })
+  @SpeakeasyMetadata({ data: "json, name=Successful" })
   successful?: boolean;
 }

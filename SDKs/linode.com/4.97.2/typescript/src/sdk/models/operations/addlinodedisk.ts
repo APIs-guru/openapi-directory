@@ -1,62 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AddLinodeDiskPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
   linodeId: number;
 }
 
 
-export class AddLinodeDiskSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class AddLinodeDiskSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class AddLinodeDiskSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: AddLinodeDiskSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: AddLinodeDiskSecurityOption2;
-}
-
-
-export class AddLinodeDiskRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: AddLinodeDiskPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.DiskRequest;
-
-  @Metadata()
-  security: AddLinodeDiskSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class AddLinodeDiskDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class AddLinodeDiskRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: AddLinodeDiskPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.DiskRequest;
+
+  @SpeakeasyMetadata()
+  security: AddLinodeDiskSecurity;
+}
+
+
 export class AddLinodeDiskResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   disk?: shared.Disk;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   addLinodeDiskDefaultApplicationJsonObject?: AddLinodeDiskDefaultApplicationJson;
 }

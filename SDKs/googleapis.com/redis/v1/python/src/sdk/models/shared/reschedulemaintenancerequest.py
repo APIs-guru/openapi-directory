@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class RescheduleMaintenanceRequestRescheduleTypeEnum(str, Enum):
     RESCHEDULE_TYPE_UNSPECIFIED = "RESCHEDULE_TYPE_UNSPECIFIED"
@@ -12,6 +14,10 @@ class RescheduleMaintenanceRequestRescheduleTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class RescheduleMaintenanceRequest:
-    reschedule_type: Optional[RescheduleMaintenanceRequestRescheduleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rescheduleType' }})
-    schedule_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scheduleTime' }})
+    r"""RescheduleMaintenanceRequest
+    Request for RescheduleMaintenance.
+    """
+    
+    reschedule_type: Optional[RescheduleMaintenanceRequestRescheduleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rescheduleType') }})
+    schedule_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('scheduleTime') }})
     

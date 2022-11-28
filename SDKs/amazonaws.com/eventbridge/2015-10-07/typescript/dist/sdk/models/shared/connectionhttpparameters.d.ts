@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionBodyParameter } from "./connectionbodyparameter";
 import { ConnectionHeaderParameter } from "./connectionheaderparameter";
 import { ConnectionQueryStringParameter } from "./connectionquerystringparameter";

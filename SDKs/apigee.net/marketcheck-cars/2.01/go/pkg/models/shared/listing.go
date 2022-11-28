@@ -1,5 +1,7 @@
 package shared
 
+// Listing
+// Represents a full list of attributes available with Marketcheck for a car
 type Listing struct {
 	Build                 *Build                      `json:"build,omitempty"`
 	Carfax1Owner          *bool                       `json:"carfax_1_owner,omitempty"`

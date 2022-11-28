@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiCoreDtoTopsTopItem } from "./apicoredtotopstopitem";
 
 
+
 export class ApiCoreDtoTopsTop extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=data", elemType: shared.ApiCoreDtoTopsTopItem })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: ApiCoreDtoTopsTopItem })
   data?: ApiCoreDtoTopsTopItem[];
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 }

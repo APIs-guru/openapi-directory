@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Channel
+// A collection of data from an MQTT topic. Channels archive the raw, unprocessed messages before publishing the data to a pipeline.
 type Channel struct {
 	Arn                    *string            `json:"arn,omitempty"`
 	CreationTime           *time.Time         `json:"creationTime,omitempty"`

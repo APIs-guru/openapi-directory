@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var GetOrdersOrderStatusEnum;
 (function (GetOrdersOrderStatusEnum) {
@@ -36,15 +36,15 @@ var GetOrdersQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", String)
     ], GetOrdersQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", String)
     ], GetOrdersQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=orderStatus" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=orderStatus" }),
         __metadata("design:type", String)
     ], GetOrdersQueryParams.prototype, "orderStatus", void 0);
     return GetOrdersQueryParams;
@@ -56,7 +56,7 @@ var GetOrdersRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetOrdersQueryParams)
     ], GetOrdersRequest.prototype, "queryParams", void 0);
     return GetOrdersRequest;
@@ -68,15 +68,15 @@ var GetOrdersResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetOrdersResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListOfOrders)
     ], GetOrdersResponse.prototype, "listOfOrders", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetOrdersResponse.prototype, "statusCode", void 0);
     return GetOrdersResponse;

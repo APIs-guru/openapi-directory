@@ -10,12 +10,12 @@ class StromkontoChoicesQueryParams:
 
 @dataclass
 class StromkontoChoicesRequest:
-    query_params: StromkontoChoicesQueryParams = field(default=None)
+    query_params: StromkontoChoicesQueryParams = field()
     
 
 @dataclass
 class StromkontoChoicesResponse:
+    content_type: str = field()
+    status_code: int = field()
     balances: Optional[List[shared.Balance]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

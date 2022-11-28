@@ -1,6 +1,7 @@
 
 
+
 export enum ComponentTypeEnum {
-    Build = "BUILD"
-,    Test = "TEST"
+    Build = "BUILD",
+    Test = "TEST"
 }

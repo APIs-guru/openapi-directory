@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class OrgpolicyOrganizationsCustomConstraintsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class OrgpolicyOrganizationsCustomConstraintsListQueryParams:
 
 @dataclass
 class OrgpolicyOrganizationsCustomConstraintsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class OrgpolicyOrganizationsCustomConstraintsListRequest:
-    path_params: OrgpolicyOrganizationsCustomConstraintsListPathParams = field(default=None)
-    query_params: OrgpolicyOrganizationsCustomConstraintsListQueryParams = field(default=None)
-    security: OrgpolicyOrganizationsCustomConstraintsListSecurity = field(default=None)
+    path_params: OrgpolicyOrganizationsCustomConstraintsListPathParams = field()
+    query_params: OrgpolicyOrganizationsCustomConstraintsListQueryParams = field()
+    security: OrgpolicyOrganizationsCustomConstraintsListSecurity = field()
     
 
 @dataclass
 class OrgpolicyOrganizationsCustomConstraintsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_orgpolicy_v2_list_custom_constraints_response: Optional[shared.GoogleCloudOrgpolicyV2ListCustomConstraintsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

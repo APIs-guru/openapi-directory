@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AffiliateImageUrls } from "./affiliateimageurls";
 
 
+
 export class AffiliateImage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caption" })
+  @SpeakeasyMetadata({ data: "json, name=caption" })
   caption?: string;
 
-  @Metadata({ data: "json, name=destination_url" })
+  @SpeakeasyMetadata({ data: "json, name=destination_url" })
   destinationUrl?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=preview_urls" })
+  @SpeakeasyMetadata({ data: "json, name=preview_urls" })
   previewUrls?: AffiliateImageUrls;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

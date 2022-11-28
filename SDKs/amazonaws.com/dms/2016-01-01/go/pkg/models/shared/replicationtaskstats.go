@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ReplicationTaskStats
+// In response to a request by the <code>DescribeReplicationTasks</code> operation, this object provides a collection of statistics about a replication task.
 type ReplicationTaskStats struct {
 	ElapsedTimeMillis       *int64     `json:"ElapsedTimeMillis,omitempty"`
 	FreshStartDate          *time.Time `json:"FreshStartDate,omitempty"`

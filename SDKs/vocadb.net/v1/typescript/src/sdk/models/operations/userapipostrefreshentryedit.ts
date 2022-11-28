@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum UserApiPostRefreshEntryEditEntryTypeEnum {
-    Undefined = "Undefined"
-,    Album = "Album"
-,    Artist = "Artist"
-,    DiscussionTopic = "DiscussionTopic"
-,    Pv = "PV"
-,    ReleaseEvent = "ReleaseEvent"
-,    ReleaseEventSeries = "ReleaseEventSeries"
-,    Song = "Song"
-,    SongList = "SongList"
-,    Tag = "Tag"
-,    User = "User"
-,    Venue = "Venue"
+    Undefined = "Undefined",
+    Album = "Album",
+    Artist = "Artist",
+    DiscussionTopic = "DiscussionTopic",
+    Pv = "PV",
+    ReleaseEvent = "ReleaseEvent",
+    ReleaseEventSeries = "ReleaseEventSeries",
+    Song = "Song",
+    SongList = "SongList",
+    Tag = "Tag",
+    User = "User",
+    Venue = "Venue"
 }
 
 
 export class UserApiPostRefreshEntryEditQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=entryId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entryId" })
   entryId: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=entryType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entryType" })
   entryType: UserApiPostRefreshEntryEditEntryTypeEnum;
 }
 
 
 export class UserApiPostRefreshEntryEditRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UserApiPostRefreshEntryEditQueryParams;
 }
 
 
 export class UserApiPostRefreshEntryEditResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

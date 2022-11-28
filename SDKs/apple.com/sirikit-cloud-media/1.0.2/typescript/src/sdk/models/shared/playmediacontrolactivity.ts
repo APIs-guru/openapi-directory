@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PlayMediaControlActivity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=playElapsed" })
+  @SpeakeasyMetadata({ data: "json, name=playElapsed" })
   playElapsed?: number;
 
-  @Metadata({ data: "json, name=playElapsedInterval" })
+  @SpeakeasyMetadata({ data: "json, name=playElapsedInterval" })
   playElapsedInterval?: number;
 
-  @Metadata({ data: "json, name=playPaused" })
+  @SpeakeasyMetadata({ data: "json, name=playPaused" })
   playPaused?: number;
 }

@@ -10,10 +10,6 @@ type AppsCheckAuthorizationPathParams struct {
 	ClientID    string `pathParam:"style=simple,explode=false,name=client_id"`
 }
 
-type AppsCheckAuthorizationRequest struct {
-	PathParams AppsCheckAuthorizationPathParams
-}
-
 type AppsCheckAuthorizationAuthorizationApp struct {
 	ClientID string `json:"client_id"`
 	Name     string `json:"name"`
@@ -74,6 +70,10 @@ type AppsCheckAuthorizationAuthorization struct {
 	UpdatedAt      time.Time                                              `json:"updated_at"`
 	URL            string                                                 `json:"url"`
 	User           *AppsCheckAuthorizationAuthorizationSimpleUser         `json:"user,omitempty"`
+}
+
+type AppsCheckAuthorizationRequest struct {
+	PathParams AppsCheckAuthorizationPathParams
 }
 
 type AppsCheckAuthorizationResponse struct {

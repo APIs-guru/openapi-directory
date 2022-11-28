@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ConfigurationStatus } from "./configurationstatus";
 import { MultiLayerStorage } from "./multilayerstorage";
 import { StorageTypeEnum } from "./storagetypeenum";

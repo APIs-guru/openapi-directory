@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TimeoutConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Tunnel timeout configuration.
 **/
 export class TimeoutConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxLifetimeTimeoutMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=maxLifetimeTimeoutMinutes" })
   maxLifetimeTimeoutMinutes?: number;
 }

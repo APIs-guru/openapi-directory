@@ -1,5 +1,7 @@
 package shared
 
+// OwnerReference
+// This is not supported or used by Cloud Run.
 type OwnerReference struct {
 	APIVersion         *string `json:"apiVersion,omitempty"`
 	BlockOwnerDeletion *bool   `json:"blockOwnerDeletion,omitempty"`

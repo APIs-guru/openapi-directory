@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DatastoreStatusEnum } from "./datastorestatusenum";
 export declare class DeleteFhirDatastoreResponse extends SpeakeasyBase {
     datastoreArn: string;

@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetSeriesIdModulePathParams = /** @class */ (function (_super) {
     __extends(GetSeriesIdModulePathParams, _super);
     function GetSeriesIdModulePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], GetSeriesIdModulePathParams.prototype, "id", void 0);
     return GetSeriesIdModulePathParams;
@@ -41,15 +41,15 @@ var GetSeriesIdModuleQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ignore-length" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ignore-length" }),
         __metadata("design:type", Array)
     ], GetSeriesIdModuleQueryParams.prototype, "ignoreLength", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=short" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=short" }),
         __metadata("design:type", Boolean)
     ], GetSeriesIdModuleQueryParams.prototype, "short", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=simplify" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=simplify" }),
         __metadata("design:type", Boolean)
     ], GetSeriesIdModuleQueryParams.prototype, "simplify", void 0);
     return GetSeriesIdModuleQueryParams;
@@ -61,11 +61,11 @@ var GetSeriesIdModuleRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSeriesIdModulePathParams)
     ], GetSeriesIdModuleRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSeriesIdModuleQueryParams)
     ], GetSeriesIdModuleRequest.prototype, "queryParams", void 0);
     return GetSeriesIdModuleRequest;
@@ -77,15 +77,15 @@ var GetSeriesIdModuleResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSeriesIdModuleResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetSeriesIdModuleResponse.prototype, "getSeriesIdModule200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSeriesIdModuleResponse.prototype, "statusCode", void 0);
     return GetSeriesIdModuleResponse;

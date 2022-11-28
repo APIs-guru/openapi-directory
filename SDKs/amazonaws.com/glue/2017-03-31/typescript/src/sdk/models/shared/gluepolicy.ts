@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GluePolicy
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A structure for returning a resource policy.
 **/
 export class GluePolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreateTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreateTime" })
   createTime?: Date;
 
-  @Metadata({ data: "json, name=PolicyHash" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyHash" })
   policyHash?: string;
 
-  @Metadata({ data: "json, name=PolicyInJson" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyInJson" })
   policyInJson?: string;
 
-  @Metadata({ data: "json, name=UpdateTime" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateTime" })
   updateTime?: Date;
 }

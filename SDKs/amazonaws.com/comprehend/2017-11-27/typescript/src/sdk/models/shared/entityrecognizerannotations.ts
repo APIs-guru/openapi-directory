@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EntityRecognizerAnnotations
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the annotations associated with a entity recognizer.
 **/
 export class EntityRecognizerAnnotations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=S3Uri" })
+  @SpeakeasyMetadata({ data: "json, name=S3Uri" })
   s3Uri: string;
 }

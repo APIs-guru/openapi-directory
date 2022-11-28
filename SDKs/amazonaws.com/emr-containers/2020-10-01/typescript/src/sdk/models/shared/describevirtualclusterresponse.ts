@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualCluster } from "./virtualcluster";
 
 
+
 export class DescribeVirtualClusterResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=virtualCluster" })
+  @SpeakeasyMetadata({ data: "json, name=virtualCluster" })
   virtualCluster?: VirtualCluster;
 }

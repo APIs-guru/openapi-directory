@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Event
+// Represents user interaction event information sent using the <code>PutEvents</code> API.
 type Event struct {
 	EventID          *string      `json:"eventId,omitempty"`
 	EventType        string       `json:"eventType"`

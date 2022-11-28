@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ActivityRunsGetActivityRunPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=activityRunID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=activityRunID" })
   activityRunId: number;
 }
 
 
 export class ActivityRunsGetActivityRunRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ActivityRunsGetActivityRunPathParams;
 }
 
 
 export class ActivityRunsGetActivityRunResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   buildSystemSharedDtoActivityRun?: shared.BuildSystemSharedDtoActivityRun;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

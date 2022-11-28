@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ModelEvaluation } from "./modelevaluation";
+
 
 
 // ListModelEvaluationsResponse
@@ -8,9 +8,9 @@ import { ModelEvaluation } from "./modelevaluation";
  * Response message for AutoMl.ListModelEvaluations.
 **/
 export class ListModelEvaluationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=modelEvaluation", elemType: shared.ModelEvaluation })
+  @SpeakeasyMetadata({ data: "json, name=modelEvaluation", elemType: ModelEvaluation })
   modelEvaluation?: ModelEvaluation[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

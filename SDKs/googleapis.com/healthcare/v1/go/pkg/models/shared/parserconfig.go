@@ -6,8 +6,11 @@ const (
 	ParserConfigVersionEnumParserVersionUnspecified ParserConfigVersionEnum = "PARSER_VERSION_UNSPECIFIED"
 	ParserConfigVersionEnumV1                       ParserConfigVersionEnum = "V1"
 	ParserConfigVersionEnumV2                       ParserConfigVersionEnum = "V2"
+	ParserConfigVersionEnumV3                       ParserConfigVersionEnum = "V3"
 )
 
+// ParserConfig
+// The configuration for the parser. It determines how the server parses the messages.
 type ParserConfig struct {
 	AllowNullHeader   *bool                    `json:"allowNullHeader,omitempty"`
 	Schema            *SchemaPackage           `json:"schema,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Email
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Email
 **/
 export class Email extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email: string;
 
-  @Metadata({ data: "json, name=primary" })
+  @SpeakeasyMetadata({ data: "json, name=primary" })
   primary: boolean;
 
-  @Metadata({ data: "json, name=verified" })
+  @SpeakeasyMetadata({ data: "json, name=verified" })
   verified: boolean;
 
-  @Metadata({ data: "json, name=visibility" })
+  @SpeakeasyMetadata({ data: "json, name=visibility" })
   visibility: string;
 }

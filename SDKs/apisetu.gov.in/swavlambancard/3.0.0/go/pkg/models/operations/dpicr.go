@@ -27,11 +27,6 @@ type DpicrSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type DpicrRequest struct {
-	Request  *DpicrRequestBody `request:"mediaType=application/json"`
-	Security DpicrSecurity
-}
-
 type Dpicr400ApplicationJSONErrorEnum string
 
 const (
@@ -161,6 +156,11 @@ const (
 type Dpicr504ApplicationJSON struct {
 	Error            *Dpicr504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Dpicr504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type DpicrRequest struct {
+	Request  *DpicrRequestBody `request:"mediaType=application/json"`
+	Security DpicrSecurity
 }
 
 type DpicrResponse struct {

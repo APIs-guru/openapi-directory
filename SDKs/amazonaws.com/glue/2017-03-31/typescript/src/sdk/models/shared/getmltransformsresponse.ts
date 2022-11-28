@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MlTransform } from "./mltransform";
 
 
+
 export class GetMlTransformsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=Transforms", elemType: shared.MlTransform })
+  @SpeakeasyMetadata({ data: "json, name=Transforms", elemType: MlTransform })
   transforms: MlTransform[];
 }

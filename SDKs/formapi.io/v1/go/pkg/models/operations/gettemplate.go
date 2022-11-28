@@ -12,11 +12,6 @@ type GetTemplateSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type GetTemplateRequest struct {
-	PathParams GetTemplatePathParams
-	Security   GetTemplateSecurity
-}
-
 type GetTemplateTemplateExpirationIntervalEnum string
 
 const (
@@ -46,6 +41,11 @@ type GetTemplateTemplate struct {
 	SlackWebhookURL           string                                     `json:"slack_webhook_url"`
 	TemplateType              string                                     `json:"template_type"`
 	WebhookURL                string                                     `json:"webhook_url"`
+}
+
+type GetTemplateRequest struct {
+	PathParams GetTemplatePathParams
+	Security   GetTemplateSecurity
 }
 
 type GetTemplateResponse struct {

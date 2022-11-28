@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostCreateDbClusterEndpointActionEnum(str, Enum):
     CREATE_DB_CLUSTER_ENDPOINT = "CreateDBClusterEndpoint"
@@ -10,8 +14,8 @@ class PostCreateDbClusterEndpointVersionEnum(str, Enum):
 
 @dataclass
 class PostCreateDbClusterEndpointQueryParams:
-    action: PostCreateDbClusterEndpointActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostCreateDbClusterEndpointVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostCreateDbClusterEndpointActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostCreateDbClusterEndpointVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostCreateDbClusterEndpointHeaders:
 
 @dataclass
 class PostCreateDbClusterEndpointRequest:
-    query_params: PostCreateDbClusterEndpointQueryParams = field(default=None)
-    headers: PostCreateDbClusterEndpointHeaders = field(default=None)
+    headers: PostCreateDbClusterEndpointHeaders = field()
+    query_params: PostCreateDbClusterEndpointQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostCreateDbClusterEndpointResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class BillingbudgetsBillingAccountsBudgetsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class BillingbudgetsBillingAccountsBudgetsGetQueryParams:
 
 @dataclass
 class BillingbudgetsBillingAccountsBudgetsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BillingbudgetsBillingAccountsBudgetsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class BillingbudgetsBillingAccountsBudgetsGetSecurity:
 
 @dataclass
 class BillingbudgetsBillingAccountsBudgetsGetRequest:
-    path_params: BillingbudgetsBillingAccountsBudgetsGetPathParams = field(default=None)
-    query_params: BillingbudgetsBillingAccountsBudgetsGetQueryParams = field(default=None)
-    security: BillingbudgetsBillingAccountsBudgetsGetSecurity = field(default=None)
+    path_params: BillingbudgetsBillingAccountsBudgetsGetPathParams = field()
+    query_params: BillingbudgetsBillingAccountsBudgetsGetQueryParams = field()
+    security: BillingbudgetsBillingAccountsBudgetsGetSecurity = field()
     
 
 @dataclass
 class BillingbudgetsBillingAccountsBudgetsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_billing_budgets_v1beta1_budget: Optional[shared.GoogleCloudBillingBudgetsV1beta1Budget] = field(default=None)
-    status_code: int = field(default=None)
     

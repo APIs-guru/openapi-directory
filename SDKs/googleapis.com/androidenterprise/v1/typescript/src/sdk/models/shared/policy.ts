@@ -1,26 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MaintenanceWindow } from "./maintenancewindow";
 import { ProductPolicy } from "./productpolicy";
 
+
 export enum PolicyAutoUpdatePolicyEnum {
-    AutoUpdatePolicyUnspecified = "autoUpdatePolicyUnspecified"
-,    ChoiceToTheUser = "choiceToTheUser"
-,    Never = "never"
-,    WifiOnly = "wifiOnly"
-,    Always = "always"
+    AutoUpdatePolicyUnspecified = "autoUpdatePolicyUnspecified",
+    ChoiceToTheUser = "choiceToTheUser",
+    Never = "never",
+    WifiOnly = "wifiOnly",
+    Always = "always"
 }
 
 export enum PolicyDeviceReportPolicyEnum {
-    DeviceReportPolicyUnspecified = "deviceReportPolicyUnspecified"
-,    DeviceReportDisabled = "deviceReportDisabled"
-,    DeviceReportEnabled = "deviceReportEnabled"
+    DeviceReportPolicyUnspecified = "deviceReportPolicyUnspecified",
+    DeviceReportDisabled = "deviceReportDisabled",
+    DeviceReportEnabled = "deviceReportEnabled"
 }
 
 export enum PolicyProductAvailabilityPolicyEnum {
-    ProductAvailabilityPolicyUnspecified = "productAvailabilityPolicyUnspecified"
-,    Whitelist = "whitelist"
-,    All = "all"
+    ProductAvailabilityPolicyUnspecified = "productAvailabilityPolicyUnspecified",
+    Whitelist = "whitelist",
+    All = "all"
 }
 
 
@@ -29,18 +29,18 @@ export enum PolicyProductAvailabilityPolicyEnum {
  * The device policy for a given managed device.
 **/
 export class Policy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoUpdatePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=autoUpdatePolicy" })
   autoUpdatePolicy?: PolicyAutoUpdatePolicyEnum;
 
-  @Metadata({ data: "json, name=deviceReportPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=deviceReportPolicy" })
   deviceReportPolicy?: PolicyDeviceReportPolicyEnum;
 
-  @Metadata({ data: "json, name=maintenanceWindow" })
+  @SpeakeasyMetadata({ data: "json, name=maintenanceWindow" })
   maintenanceWindow?: MaintenanceWindow;
 
-  @Metadata({ data: "json, name=productAvailabilityPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=productAvailabilityPolicy" })
   productAvailabilityPolicy?: PolicyProductAvailabilityPolicyEnum;
 
-  @Metadata({ data: "json, name=productPolicy", elemType: shared.ProductPolicy })
+  @SpeakeasyMetadata({ data: "json, name=productPolicy", elemType: ProductPolicy })
   productPolicy?: ProductPolicy[];
 }

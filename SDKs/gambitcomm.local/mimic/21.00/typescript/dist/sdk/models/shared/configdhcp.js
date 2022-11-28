@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ConfigDhcp = /** @class */ (function (_super) {
     __extends(ConfigDhcp, _super);
     function ConfigDhcp() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=add_options" }),
+        SpeakeasyMetadata({ data: "json, name=add_options" }),
         __metadata("design:type", String)
     ], ConfigDhcp.prototype, "addOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=classid" }),
+        SpeakeasyMetadata({ data: "json, name=classid" }),
         __metadata("design:type", String)
     ], ConfigDhcp.prototype, "classid", void 0);
     __decorate([
-        Metadata({ data: "json, name=hwaddr" }),
+        SpeakeasyMetadata({ data: "json, name=hwaddr" }),
         __metadata("design:type", String)
     ], ConfigDhcp.prototype, "hwaddr", void 0);
     __decorate([
-        Metadata({ data: "json, name=script" }),
+        SpeakeasyMetadata({ data: "json, name=script" }),
         __metadata("design:type", String)
     ], ConfigDhcp.prototype, "script", void 0);
     return ConfigDhcp;

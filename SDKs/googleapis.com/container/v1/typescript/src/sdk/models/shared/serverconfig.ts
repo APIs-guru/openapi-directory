@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReleaseChannelConfig } from "./releasechannelconfig";
+
 
 
 // ServerConfig
@@ -8,21 +8,21 @@ import { ReleaseChannelConfig } from "./releasechannelconfig";
  * Kubernetes Engine service configuration.
 **/
 export class ServerConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channels", elemType: shared.ReleaseChannelConfig })
+  @SpeakeasyMetadata({ data: "json, name=channels", elemType: ReleaseChannelConfig })
   channels?: ReleaseChannelConfig[];
 
-  @Metadata({ data: "json, name=defaultClusterVersion" })
+  @SpeakeasyMetadata({ data: "json, name=defaultClusterVersion" })
   defaultClusterVersion?: string;
 
-  @Metadata({ data: "json, name=defaultImageType" })
+  @SpeakeasyMetadata({ data: "json, name=defaultImageType" })
   defaultImageType?: string;
 
-  @Metadata({ data: "json, name=validImageTypes" })
+  @SpeakeasyMetadata({ data: "json, name=validImageTypes" })
   validImageTypes?: string[];
 
-  @Metadata({ data: "json, name=validMasterVersions" })
+  @SpeakeasyMetadata({ data: "json, name=validMasterVersions" })
   validMasterVersions?: string[];
 
-  @Metadata({ data: "json, name=validNodeVersions" })
+  @SpeakeasyMetadata({ data: "json, name=validNodeVersions" })
   validNodeVersions?: string[];
 }

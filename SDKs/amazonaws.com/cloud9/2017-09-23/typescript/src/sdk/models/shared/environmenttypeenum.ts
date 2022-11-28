@@ -1,6 +1,7 @@
 
 
+
 export enum EnvironmentTypeEnum {
-    Ssh = "ssh"
-,    Ec2 = "ec2"
+    Ssh = "ssh",
+    Ec2 = "ec2"
 }

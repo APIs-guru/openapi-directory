@@ -1,17 +1,22 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import userscheduleresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UserScheduleCollection:
-    href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'href' }})
-    limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'limit' }})
-    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next' }})
-    offset: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'offset' }})
-    prev: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'prev' }})
-    schedules: Optional[List[userscheduleresponse.UserScheduleResponse]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schedules' }})
-    total: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
+    r"""UserScheduleCollection
+    The type that defines the fields for a paginated result set of user schedules. The response consists of 0 or more sequenced pages where each page has 0 or more items.
+    """
+    
+    href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('href') }})
+    limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('limit') }})
+    next: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('next') }})
+    offset: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('offset') }})
+    prev: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('prev') }})
+    schedules: Optional[List[UserScheduleResponse]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('schedules') }})
+    total: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
     

@@ -1,69 +1,70 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkApplianceFirewallPortForwardingRulesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 export enum UpdateNetworkApplianceFirewallPortForwardingRulesRequestBodyRulesProtocolEnum {
-    Tcp = "tcp"
-,    Udp = "udp"
+    Tcp = "tcp",
+    Udp = "udp"
 }
 
 export enum UpdateNetworkApplianceFirewallPortForwardingRulesRequestBodyRulesUplinkEnum {
-    Internet1 = "internet1"
-,    Internet2 = "internet2"
-,    Both = "both"
+    Internet1 = "internet1",
+    Internet2 = "internet2",
+    Both = "both"
 }
 
 
 export class UpdateNetworkApplianceFirewallPortForwardingRulesRequestBodyRules extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedIps" })
+  @SpeakeasyMetadata({ data: "json, name=allowedIps" })
   allowedIps: string[];
 
-  @Metadata({ data: "json, name=lanIp" })
+  @SpeakeasyMetadata({ data: "json, name=lanIp" })
   lanIp: string;
 
-  @Metadata({ data: "json, name=localPort" })
+  @SpeakeasyMetadata({ data: "json, name=localPort" })
   localPort: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol: UpdateNetworkApplianceFirewallPortForwardingRulesRequestBodyRulesProtocolEnum;
 
-  @Metadata({ data: "json, name=publicPort" })
+  @SpeakeasyMetadata({ data: "json, name=publicPort" })
   publicPort: string;
 
-  @Metadata({ data: "json, name=uplink" })
+  @SpeakeasyMetadata({ data: "json, name=uplink" })
   uplink?: UpdateNetworkApplianceFirewallPortForwardingRulesRequestBodyRulesUplinkEnum;
 }
 
 
 export class UpdateNetworkApplianceFirewallPortForwardingRulesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=rules", elemType: operations.UpdateNetworkApplianceFirewallPortForwardingRulesRequestBodyRules })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: UpdateNetworkApplianceFirewallPortForwardingRulesRequestBodyRules })
   rules: UpdateNetworkApplianceFirewallPortForwardingRulesRequestBodyRules[];
 }
 
 
 export class UpdateNetworkApplianceFirewallPortForwardingRulesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkApplianceFirewallPortForwardingRulesPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateNetworkApplianceFirewallPortForwardingRulesRequestBody;
 }
 
 
 export class UpdateNetworkApplianceFirewallPortForwardingRulesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkApplianceFirewallPortForwardingRules200ApplicationJsonObject?: Map<string, any>;
 }

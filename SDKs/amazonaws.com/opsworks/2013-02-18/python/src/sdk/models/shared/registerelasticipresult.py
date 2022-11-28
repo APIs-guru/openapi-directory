@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class RegisterElasticIPResult:
-    elastic_ip: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ElasticIp' }})
+    r"""RegisterElasticIPResult
+    Contains the response to a <code>RegisterElasticIp</code> request.
+    """
+    
+    elastic_ip: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ElasticIp') }})
     

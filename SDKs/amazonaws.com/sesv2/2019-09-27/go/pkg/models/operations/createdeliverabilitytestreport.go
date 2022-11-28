@@ -14,6 +14,8 @@ type CreateDeliverabilityTestReportHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateDeliverabilityTestReportRequestBodyContent
+// An object that defines the entire content of the email, including the message headers and the body content. You can create a simple email message, in which you specify the subject and the text and HTML versions of the message body. You can also create raw messages, in which you specify a complete MIME-formatted message. Raw messages can include attachments and custom headers.
 type CreateDeliverabilityTestReportRequestBodyContent struct {
 	Raw      *shared.RawMessage `json:"Raw,omitempty"`
 	Simple   *shared.Message    `json:"Simple,omitempty"`

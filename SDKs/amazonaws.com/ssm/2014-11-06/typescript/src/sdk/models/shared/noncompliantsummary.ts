@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SeveritySummary } from "./severitysummary";
+
 
 
 // NonCompliantSummary
@@ -7,9 +8,9 @@ import { SeveritySummary } from "./severitysummary";
  * A summary of resources that aren't compliant. The summary is organized according to resource type.
 **/
 export class NonCompliantSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NonCompliantCount" })
+  @SpeakeasyMetadata({ data: "json, name=NonCompliantCount" })
   nonCompliantCount?: number;
 
-  @Metadata({ data: "json, name=SeveritySummary" })
+  @SpeakeasyMetadata({ data: "json, name=SeveritySummary" })
   severitySummary?: SeveritySummary;
 }

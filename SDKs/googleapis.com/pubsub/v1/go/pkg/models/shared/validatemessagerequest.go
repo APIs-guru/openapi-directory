@@ -8,9 +8,11 @@ const (
 	ValidateMessageRequestEncodingEnumBinary              ValidateMessageRequestEncodingEnum = "BINARY"
 )
 
-type ValidateMessageRequest struct {
+// ValidateMessageRequestInput
+// Request for the `ValidateMessage` method.
+type ValidateMessageRequestInput struct {
 	Encoding *ValidateMessageRequestEncodingEnum `json:"encoding,omitempty"`
 	Message  *string                             `json:"message,omitempty"`
 	Name     *string                             `json:"name,omitempty"`
-	Schema   *Schema                             `json:"schema,omitempty"`
+	Schema   *SchemaInput                        `json:"schema,omitempty"`
 }

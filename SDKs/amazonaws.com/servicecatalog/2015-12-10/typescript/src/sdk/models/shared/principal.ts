@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PrincipalTypeEnum } from "./principaltypeenum";
+
 
 
 // Principal
@@ -7,9 +8,9 @@ import { PrincipalTypeEnum } from "./principaltypeenum";
  * Information about a principal.
 **/
 export class Principal extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PrincipalARN" })
+  @SpeakeasyMetadata({ data: "json, name=PrincipalARN" })
   principalArn?: string;
 
-  @Metadata({ data: "json, name=PrincipalType" })
+  @SpeakeasyMetadata({ data: "json, name=PrincipalType" })
   principalType?: PrincipalTypeEnum;
 }

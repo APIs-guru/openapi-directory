@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetHealthCheckResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_model: Optional[shared.ErrorModel] = field(default=None)
     health_check: Optional[shared.HealthCheck] = field(default=None)
-    status_code: int = field(default=None)
     

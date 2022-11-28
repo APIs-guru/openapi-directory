@@ -1,26 +1,36 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import hreftype
-from . import messagecode409_ais_enum
-from . import messagecode409_ais_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Error409AisAdditionalErrors:
-    code: messagecode409_ais_enum.MessageCode409AisEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detail' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+    r"""Error409AisAdditionalErrors
+    This is a data element to support the declaration of additional errors in the context of [RFC7807].
+    """
+    
+    code: MessageCode409AisEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detail') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     
 
 @dataclass_json
 @dataclass
 class Error409Ais:
-    links: Optional[dict[str, hreftype.HrefType]] = field(default=None, metadata={'dataclasses_json': { 'field_name': '_links' }})
-    additional_errors: Optional[List[Error409AisAdditionalErrors]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additionalErrors' }})
-    code: messagecode409_ais_enum.MessageCode409AisEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detail' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""Error409Ais
+    Standardised definition of reporting error information according to [RFC7807]
+    in case of a HTTP error code 409 for AIS.
+    
+    """
+    
+    code: MessageCode409AisEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('code') }})
+    type: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    links: Optional[dict[str, HrefType]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('_links') }})
+    additional_errors: Optional[List[Error409AisAdditionalErrors]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('additionalErrors') }})
+    detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('detail') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
     

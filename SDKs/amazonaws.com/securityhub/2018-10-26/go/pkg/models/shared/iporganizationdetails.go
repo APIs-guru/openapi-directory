@@ -1,5 +1,7 @@
 package shared
 
+// IPOrganizationDetails
+// Provides information about an internet provider.
 type IPOrganizationDetails struct {
 	Asn    *int64  `json:"Asn,omitempty"`
 	AsnOrg *string `json:"AsnOrg,omitempty"`

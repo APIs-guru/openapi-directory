@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class InvoiceAttachmentAPIModelTypeEnum(str, Enum):
     EXTERNAL = "External"
@@ -10,10 +12,10 @@ class InvoiceAttachmentAPIModelTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class InvoiceAttachmentAPIModel:
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Id' }})
-    link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Link' }})
-    obfuscated_file_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ObfuscatedFileName' }})
-    original_file_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OriginalFileName' }})
-    size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Size' }})
-    type: Optional[InvoiceAttachmentAPIModelTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Id') }})
+    link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Link') }})
+    obfuscated_file_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ObfuscatedFileName') }})
+    original_file_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OriginalFileName') }})
+    size: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Size') }})
+    type: Optional[InvoiceAttachmentAPIModelTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

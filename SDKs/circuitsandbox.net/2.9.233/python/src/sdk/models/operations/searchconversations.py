@@ -1,5 +1,7 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
+from sdk.models import shared
 
 class SearchConversationsScopeEnum(str, Enum):
     FILES = "FILES"
@@ -15,26 +17,26 @@ class SearchConversationsScopeEnum(str, Enum):
 
 @dataclass
 class SearchConversationsQueryParams:
+    term: str = field(metadata={'query_param': { 'field_name': 'term', 'style': 'form', 'explode': True }})
     include_item_ids: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'includeItemIds', 'style': 'form', 'explode': True }})
     scope: Optional[SearchConversationsScopeEnum] = field(default=None, metadata={'query_param': { 'field_name': 'scope', 'style': 'form', 'explode': True }})
-    term: str = field(default=None, metadata={'query_param': { 'field_name': 'term', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class SearchConversationsSecurity:
-    oauth: shared.SchemeOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth: shared.SchemeOauth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class SearchConversationsRequest:
-    query_params: SearchConversationsQueryParams = field(default=None)
-    security: SearchConversationsSecurity = field(default=None)
+    query_params: SearchConversationsQueryParams = field()
+    security: SearchConversationsSecurity = field()
     
 
 @dataclass
 class SearchConversationsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     conversation_search_result: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

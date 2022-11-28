@@ -8,6 +8,8 @@ const (
 	ModelDeploymentStateEnumUndeployed                 ModelDeploymentStateEnum = "UNDEPLOYED"
 )
 
+// Model
+// API proto representing a trained machine learning model.
 type Model struct {
 	CreateTime                        *string                            `json:"createTime,omitempty"`
 	DatasetID                         *string                            `json:"datasetId,omitempty"`

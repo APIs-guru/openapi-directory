@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PendingAssignment } from "./pendingassignment";
+
 
 
 // PendingAssignmentsRequest
@@ -8,6 +8,6 @@ import { PendingAssignment } from "./pendingassignment";
  * Request model for handling pending assignments
 **/
 export class PendingAssignmentsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.PendingAssignment })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: PendingAssignment })
   items: PendingAssignment[];
 }

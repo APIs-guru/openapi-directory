@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Represents a time zone from the [IANA Time Zone Database](https://www.iana.org/time-zones).
 **/

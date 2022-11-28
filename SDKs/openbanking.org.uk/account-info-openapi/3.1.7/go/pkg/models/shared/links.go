@@ -1,5 +1,7 @@
 package shared
 
+// Links
+// Links relevant to the payload
 type Links struct {
 	First *string `json:"First,omitempty"`
 	Last  *string `json:"Last,omitempty"`

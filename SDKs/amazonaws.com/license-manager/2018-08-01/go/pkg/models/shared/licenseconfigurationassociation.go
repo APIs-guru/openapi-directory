@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// LicenseConfigurationAssociation
+// Describes an association with a license configuration.
 type LicenseConfigurationAssociation struct {
 	AmiAssociationScope *string           `json:"AmiAssociationScope,omitempty"`
 	AssociationTime     *time.Time        `json:"AssociationTime,omitempty"`

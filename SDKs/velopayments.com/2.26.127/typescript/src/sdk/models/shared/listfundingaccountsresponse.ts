@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FundingAccountResponse } from "./fundingaccountresponse";
+
 
 
 // ListFundingAccountsResponse
@@ -8,12 +8,12 @@ import { FundingAccountResponse } from "./fundingaccountresponse";
  * List Source Accounts Response Object
 **/
 export class ListFundingAccountsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content", elemType: shared.FundingAccountResponse })
+  @SpeakeasyMetadata({ data: "json, name=content", elemType: FundingAccountResponse })
   content?: FundingAccountResponse[];
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: any[];
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page?: any;
 }

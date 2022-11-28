@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class AttachSecurityProfilePathParams:
-    security_profile_name: str = field(default=None, metadata={'path_param': { 'field_name': 'securityProfileName', 'style': 'simple', 'explode': False }})
+    security_profile_name: str = field(metadata={'path_param': { 'field_name': 'securityProfileName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AttachSecurityProfileQueryParams:
-    security_profile_target_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'securityProfileTargetArn', 'style': 'form', 'explode': True }})
+    security_profile_target_arn: str = field(metadata={'query_param': { 'field_name': 'securityProfileTargetArn', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -25,20 +28,20 @@ class AttachSecurityProfileHeaders:
 
 @dataclass
 class AttachSecurityProfileRequest:
-    path_params: AttachSecurityProfilePathParams = field(default=None)
-    query_params: AttachSecurityProfileQueryParams = field(default=None)
-    headers: AttachSecurityProfileHeaders = field(default=None)
+    headers: AttachSecurityProfileHeaders = field()
+    path_params: AttachSecurityProfilePathParams = field()
+    query_params: AttachSecurityProfileQueryParams = field()
     
 
 @dataclass
 class AttachSecurityProfileResponse:
+    content_type: str = field()
+    status_code: int = field()
     attach_security_profile_response: Optional[dict[str, Any]] = field(default=None)
-    content_type: str = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     version_conflict_exception: Optional[Any] = field(default=None)
     

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OperatingSystem } from "./operatingsystem";
+
 
 
 // OperatingSystemVersion
@@ -7,21 +8,21 @@ import { OperatingSystem } from "./operatingsystem";
  * Contains information about a particular version of an operating system that can be targeted by ads.
 **/
 export class OperatingSystemVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=majorVersion" })
+  @SpeakeasyMetadata({ data: "json, name=majorVersion" })
   majorVersion?: string;
 
-  @Metadata({ data: "json, name=minorVersion" })
+  @SpeakeasyMetadata({ data: "json, name=minorVersion" })
   minorVersion?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=operatingSystem" })
+  @SpeakeasyMetadata({ data: "json, name=operatingSystem" })
   operatingSystem?: OperatingSystem;
 }

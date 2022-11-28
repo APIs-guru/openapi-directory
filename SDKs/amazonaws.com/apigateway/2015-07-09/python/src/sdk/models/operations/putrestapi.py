@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class PutRestAPIPathParams:
-    restapi_id: str = field(default=None, metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
+    restapi_id: str = field(metadata={'path_param': { 'field_name': 'restapi_id', 'style': 'simple', 'explode': False }})
     
 class PutRestAPIModeEnum(str, Enum):
     MERGE = "merge"
@@ -34,26 +39,26 @@ class PutRestAPIHeaders:
 @dataclass_json
 @dataclass
 class PutRestAPIRequestBody:
-    body: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'body' }})
+    body: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('body') }})
     
 
 @dataclass
 class PutRestAPIRequest:
-    path_params: PutRestAPIPathParams = field(default=None)
-    query_params: PutRestAPIQueryParams = field(default=None)
-    headers: PutRestAPIHeaders = field(default=None)
-    request: PutRestAPIRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PutRestAPIHeaders = field()
+    path_params: PutRestAPIPathParams = field()
+    query_params: PutRestAPIQueryParams = field()
+    request: PutRestAPIRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PutRestAPIResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     rest_api: Optional[shared.RestAPI] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ImportJobProperties
+// Displays the properties of the import job, including the ID, Arn, Name, and the status of the Data Store.
 type ImportJobProperties struct {
 	DataAccessRoleArn   *string           `json:"DataAccessRoleArn,omitempty"`
 	DatastoreID         string            `json:"DatastoreId"`

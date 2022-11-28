@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CompromisedCredentialsEventActionTypeEnum } from "./compromisedcredentialseventactiontypeenum";
+
 
 
 // CompromisedCredentialsActionsType
@@ -7,6 +8,6 @@ import { CompromisedCredentialsEventActionTypeEnum } from "./compromisedcredenti
  * The compromised credentials actions type
 **/
 export class CompromisedCredentialsActionsType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EventAction" })
+  @SpeakeasyMetadata({ data: "json, name=EventAction" })
   eventAction: CompromisedCredentialsEventActionTypeEnum;
 }

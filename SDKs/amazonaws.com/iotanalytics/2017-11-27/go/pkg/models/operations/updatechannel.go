@@ -18,11 +18,15 @@ type UpdateChannelHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateChannelRequestBodyChannelStorage
+// Where channel data is stored. You may choose one of <code>serviceManagedS3</code>, <code>customerManagedS3</code> storage. If not specified, the default is <code>serviceManagedS3</code>. This can't be changed after creation of the channel.
 type UpdateChannelRequestBodyChannelStorage struct {
 	CustomerManagedS3 *shared.CustomerManagedChannelS3Storage `json:"customerManagedS3,omitempty"`
 	ServiceManagedS3  map[string]interface{}                  `json:"serviceManagedS3,omitempty"`
 }
 
+// UpdateChannelRequestBodyRetentionPeriod
+// How long, in days, message data is kept.
 type UpdateChannelRequestBodyRetentionPeriod struct {
 	NumberOfDays *int64 `json:"numberOfDays,omitempty"`
 	Unlimited    *bool  `json:"unlimited,omitempty"`

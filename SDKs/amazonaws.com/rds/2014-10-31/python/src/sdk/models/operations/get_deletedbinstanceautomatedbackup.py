@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteDbInstanceAutomatedBackupActionEnum(str, Enum):
     DELETE_DB_INSTANCE_AUTOMATED_BACKUP = "DeleteDBInstanceAutomatedBackup"
@@ -10,10 +14,10 @@ class GetDeleteDbInstanceAutomatedBackupVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteDbInstanceAutomatedBackupQueryParams:
-    action: GetDeleteDbInstanceAutomatedBackupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeleteDbInstanceAutomatedBackupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDeleteDbInstanceAutomatedBackupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     db_instance_automated_backups_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DBInstanceAutomatedBackupsArn', 'style': 'form', 'explode': True }})
     dbi_resource_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DbiResourceId', 'style': 'form', 'explode': True }})
-    version: GetDeleteDbInstanceAutomatedBackupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteDbInstanceAutomatedBackupHeaders:
 
 @dataclass
 class GetDeleteDbInstanceAutomatedBackupRequest:
-    query_params: GetDeleteDbInstanceAutomatedBackupQueryParams = field(default=None)
-    headers: GetDeleteDbInstanceAutomatedBackupHeaders = field(default=None)
+    headers: GetDeleteDbInstanceAutomatedBackupHeaders = field()
+    query_params: GetDeleteDbInstanceAutomatedBackupQueryParams = field()
     
 
 @dataclass
 class GetDeleteDbInstanceAutomatedBackupResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

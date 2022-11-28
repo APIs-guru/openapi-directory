@@ -10,6 +10,8 @@ const (
 	GoogleCloudBeyondcorpAppconnectorsV1alphaResourceInfoStatusEnumDegraded                GoogleCloudBeyondcorpAppconnectorsV1alphaResourceInfoStatusEnum = "DEGRADED"
 )
 
+// GoogleCloudBeyondcorpAppconnectorsV1alphaResourceInfo
+// ResourceInfo represents the information/status of an app connector resource. Such as: - remote_agent - container - runtime - appgateway - appconnector - appconnection - tunnel - logagent
 type GoogleCloudBeyondcorpAppconnectorsV1alphaResourceInfo struct {
 	ID       *string                                                          `json:"id,omitempty"`
 	Resource map[string]interface{}                                           `json:"resource,omitempty"`

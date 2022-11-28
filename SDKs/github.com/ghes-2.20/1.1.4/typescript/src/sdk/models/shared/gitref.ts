@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GitRefObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sha" })
+  @SpeakeasyMetadata({ data: "json, name=sha" })
   sha: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }
 
@@ -18,15 +19,15 @@ export class GitRefObject extends SpeakeasyBase {
  * Git references within a repository
 **/
 export class GitRef extends SpeakeasyBase {
-  @Metadata({ data: "json, name=node_id" })
+  @SpeakeasyMetadata({ data: "json, name=node_id" })
   nodeId: string;
 
-  @Metadata({ data: "json, name=object" })
+  @SpeakeasyMetadata({ data: "json, name=object" })
   object: GitRefObject;
 
-  @Metadata({ data: "json, name=ref" })
+  @SpeakeasyMetadata({ data: "json, name=ref" })
   ref: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }

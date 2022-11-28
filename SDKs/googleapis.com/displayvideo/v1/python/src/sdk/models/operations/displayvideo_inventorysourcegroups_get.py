@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DisplayvideoInventorySourceGroupsGetPathParams:
-    inventory_source_group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'inventorySourceGroupId', 'style': 'simple', 'explode': False }})
+    inventory_source_group_id: str = field(metadata={'path_param': { 'field_name': 'inventorySourceGroupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class DisplayvideoInventorySourceGroupsGetQueryParams:
 
 @dataclass
 class DisplayvideoInventorySourceGroupsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DisplayvideoInventorySourceGroupsGetRequest:
-    path_params: DisplayvideoInventorySourceGroupsGetPathParams = field(default=None)
-    query_params: DisplayvideoInventorySourceGroupsGetQueryParams = field(default=None)
-    security: DisplayvideoInventorySourceGroupsGetSecurity = field(default=None)
+    path_params: DisplayvideoInventorySourceGroupsGetPathParams = field()
+    query_params: DisplayvideoInventorySourceGroupsGetQueryParams = field()
+    security: DisplayvideoInventorySourceGroupsGetSecurity = field()
     
 
 @dataclass
 class DisplayvideoInventorySourceGroupsGetResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     inventory_source_group: Optional[shared.InventorySourceGroup] = field(default=None)
-    status_code: int = field(default=None)
     

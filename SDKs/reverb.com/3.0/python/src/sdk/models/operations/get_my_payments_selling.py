@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -16,17 +20,17 @@ class GetMyPaymentsSellingQueryParams:
 
 @dataclass
 class GetMyPaymentsSellingSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetMyPaymentsSellingRequest:
-    query_params: GetMyPaymentsSellingQueryParams = field(default=None)
-    security: GetMyPaymentsSellingSecurity = field(default=None)
+    query_params: GetMyPaymentsSellingQueryParams = field()
+    security: GetMyPaymentsSellingSecurity = field()
     
 
 @dataclass
 class GetMyPaymentsSellingResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

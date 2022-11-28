@@ -1,42 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RetrieveSubaccountPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=api_key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=api_key" })
   apiKey: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=subaccount_key" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=subaccount_key" })
   subaccountKey: string;
 }
 
 
 export class RetrieveSubaccountSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   basicAuth: shared.SchemeBasicAuth;
 }
 
 
-export class RetrieveSubaccountRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: RetrieveSubaccountPathParams;
-
-  @Metadata()
-  security: RetrieveSubaccountSecurity;
-}
-
-
 export class RetrieveSubaccount401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail: string;
 
-  @Metadata({ data: "json, name=instance" })
+  @SpeakeasyMetadata({ data: "json, name=instance" })
   instance: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
@@ -46,36 +38,45 @@ export class RetrieveSubaccount401ApplicationJson extends SpeakeasyBase {
  * Invalid API Key
 **/
 export class RetrieveSubaccount404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=detail" })
+  @SpeakeasyMetadata({ data: "json, name=detail" })
   detail: string;
 
-  @Metadata({ data: "json, name=instance" })
+  @SpeakeasyMetadata({ data: "json, name=instance" })
   instance: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: string;
 }
 
 
+export class RetrieveSubaccountRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: RetrieveSubaccountPathParams;
+
+  @SpeakeasyMetadata()
+  security: RetrieveSubaccountSecurity;
+}
+
+
 export class RetrieveSubaccountResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   subaccountResponse?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unprovisionedErrorResponse?: shared.UnprovisionedErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   retrieveSubaccount401ApplicationJsonObject?: RetrieveSubaccount401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   retrieveSubaccount404ApplicationJsonObject?: RetrieveSubaccount404ApplicationJson;
 }

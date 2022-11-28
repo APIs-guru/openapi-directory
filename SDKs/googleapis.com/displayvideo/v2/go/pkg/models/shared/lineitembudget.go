@@ -17,8 +17,17 @@ const (
 	LineItemBudgetBudgetUnitEnumBudgetUnitImpressions LineItemBudgetBudgetUnitEnum = "BUDGET_UNIT_IMPRESSIONS"
 )
 
+// LineItemBudget
+// Settings that control how budget is allocated.
 type LineItemBudget struct {
 	BudgetAllocationType *LineItemBudgetBudgetAllocationTypeEnum `json:"budgetAllocationType,omitempty"`
 	BudgetUnit           *LineItemBudgetBudgetUnitEnum           `json:"budgetUnit,omitempty"`
+	MaxAmount            *string                                 `json:"maxAmount,omitempty"`
+}
+
+// LineItemBudgetInput
+// Settings that control how budget is allocated.
+type LineItemBudgetInput struct {
+	BudgetAllocationType *LineItemBudgetBudgetAllocationTypeEnum `json:"budgetAllocationType,omitempty"`
 	MaxAmount            *string                                 `json:"maxAmount,omitempty"`
 }

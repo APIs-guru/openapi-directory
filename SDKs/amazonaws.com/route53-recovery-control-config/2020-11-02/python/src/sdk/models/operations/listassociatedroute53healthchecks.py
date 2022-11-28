@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListAssociatedRoute53HealthChecksPathParams:
-    routing_control_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'RoutingControlArn', 'style': 'simple', 'explode': False }})
+    routing_control_arn: str = field(metadata={'path_param': { 'field_name': 'RoutingControlArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,17 +30,17 @@ class ListAssociatedRoute53HealthChecksHeaders:
 
 @dataclass
 class ListAssociatedRoute53HealthChecksRequest:
-    path_params: ListAssociatedRoute53HealthChecksPathParams = field(default=None)
-    query_params: ListAssociatedRoute53HealthChecksQueryParams = field(default=None)
-    headers: ListAssociatedRoute53HealthChecksHeaders = field(default=None)
+    headers: ListAssociatedRoute53HealthChecksHeaders = field()
+    path_params: ListAssociatedRoute53HealthChecksPathParams = field()
+    query_params: ListAssociatedRoute53HealthChecksQueryParams = field()
     
 
 @dataclass
 class ListAssociatedRoute53HealthChecksResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_exception: Optional[Any] = field(default=None)
     list_associated_route53_health_checks_response: Optional[shared.ListAssociatedRoute53HealthChecksResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

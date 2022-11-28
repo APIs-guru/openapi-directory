@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudbillingbudgetsv1beta1budget
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class GoogleCloudBillingBudgetsV1beta1CreateBudgetRequest:
-    budget: Optional[googlecloudbillingbudgetsv1beta1budget.GoogleCloudBillingBudgetsV1beta1Budget] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'budget' }})
+class GoogleCloudBillingBudgetsV1beta1CreateBudgetRequestInput:
+    r"""GoogleCloudBillingBudgetsV1beta1CreateBudgetRequestInput
+    Request for CreateBudget
+    """
+    
+    budget: Optional[GoogleCloudBillingBudgetsV1beta1BudgetInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('budget') }})
     

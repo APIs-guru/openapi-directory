@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // HangoutsChatOptions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Additional options for Google Chat search
 **/
 export class HangoutsChatOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=includeRooms" })
+  @SpeakeasyMetadata({ data: "json, name=includeRooms" })
   includeRooms?: boolean;
 }

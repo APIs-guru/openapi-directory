@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ProdTtSasportalNodesNodesDevicesCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class ProdTtSasportalNodesNodesDevicesCreateQueryParams:
 
 @dataclass
 class ProdTtSasportalNodesNodesDevicesCreateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ProdTtSasportalNodesNodesDevicesCreateRequest:
-    path_params: ProdTtSasportalNodesNodesDevicesCreatePathParams = field(default=None)
-    query_params: ProdTtSasportalNodesNodesDevicesCreateQueryParams = field(default=None)
-    request: Optional[shared.SasPortalDevice] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ProdTtSasportalNodesNodesDevicesCreateSecurity = field(default=None)
+    path_params: ProdTtSasportalNodesNodesDevicesCreatePathParams = field()
+    query_params: ProdTtSasportalNodesNodesDevicesCreateQueryParams = field()
+    security: ProdTtSasportalNodesNodesDevicesCreateSecurity = field()
+    request: Optional[shared.SasPortalDeviceInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ProdTtSasportalNodesNodesDevicesCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     sas_portal_device: Optional[shared.SasPortalDevice] = field(default=None)
-    status_code: int = field(default=None)
     

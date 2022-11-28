@@ -29,11 +29,6 @@ type CocerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type CocerRequest struct {
-	Request  *CocerRequestBody `request:"mediaType=application/json"`
-	Security CocerSecurity
-}
-
 type Cocer400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Cocer504ApplicationJSON struct {
 	Error            *Cocer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Cocer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type CocerRequest struct {
+	Request  *CocerRequestBody `request:"mediaType=application/json"`
+	Security CocerSecurity
 }
 
 type CocerResponse struct {

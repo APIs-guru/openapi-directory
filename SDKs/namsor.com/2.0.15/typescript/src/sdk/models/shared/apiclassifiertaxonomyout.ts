@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiClassifierTaxonomyOut extends SpeakeasyBase {
-  @Metadata({ data: "json, name=classifierName" })
+  @SpeakeasyMetadata({ data: "json, name=classifierName" })
   classifierName?: string;
 
-  @Metadata({ data: "json, name=taxonomyClasses" })
+  @SpeakeasyMetadata({ data: "json, name=taxonomyClasses" })
   taxonomyClasses?: string[];
 }

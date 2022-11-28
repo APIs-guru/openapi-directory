@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ForgetWiFiNetworkRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=wpa_id" })
+  @SpeakeasyMetadata({ data: "json, name=wpa_id" })
   wpaId: number;
 }

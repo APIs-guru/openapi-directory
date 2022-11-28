@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Mount
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Carries information about a particular disk mount inside a container.
 **/
 export class Mount extends SpeakeasyBase {
-  @Metadata({ data: "json, name=disk" })
+  @SpeakeasyMetadata({ data: "json, name=disk" })
   disk?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=readOnly" })
+  @SpeakeasyMetadata({ data: "json, name=readOnly" })
   readOnly?: boolean;
 }

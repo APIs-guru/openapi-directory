@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudAssuredworkloadsV1beta1WorkloadKmsSettings
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Settings specific to the Key Management Service.
 **/
 export class GoogleCloudAssuredworkloadsV1beta1WorkloadKmsSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextRotationTime" })
+  @SpeakeasyMetadata({ data: "json, name=nextRotationTime" })
   nextRotationTime?: string;
 
-  @Metadata({ data: "json, name=rotationPeriod" })
+  @SpeakeasyMetadata({ data: "json, name=rotationPeriod" })
   rotationPeriod?: string;
 }

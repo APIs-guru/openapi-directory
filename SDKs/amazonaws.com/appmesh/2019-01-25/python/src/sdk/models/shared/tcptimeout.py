@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import duration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TCPTimeout:
-    idle: Optional[duration.Duration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'idle' }})
+    r"""TCPTimeout
+    An object that represents types of timeouts. 
+    """
+    
+    idle: Optional[Duration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('idle') }})
     

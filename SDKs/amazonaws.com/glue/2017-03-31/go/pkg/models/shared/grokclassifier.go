@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// GrokClassifier
+// A classifier that uses <code>grok</code> patterns.
 type GrokClassifier struct {
 	Classification string     `json:"Classification"`
 	CreationTime   *time.Time `json:"CreationTime,omitempty"`

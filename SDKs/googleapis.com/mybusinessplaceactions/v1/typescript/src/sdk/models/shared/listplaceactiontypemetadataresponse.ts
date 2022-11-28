@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlaceActionTypeMetadata } from "./placeactiontypemetadata";
+
 
 
 // ListPlaceActionTypeMetadataResponse
@@ -8,9 +8,9 @@ import { PlaceActionTypeMetadata } from "./placeactiontypemetadata";
  * Response message for PlaceActions.ListPlaceActionTypeMetadata.
 **/
 export class ListPlaceActionTypeMetadataResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=placeActionTypeMetadata", elemType: shared.PlaceActionTypeMetadata })
+  @SpeakeasyMetadata({ data: "json, name=placeActionTypeMetadata", elemType: PlaceActionTypeMetadata })
   placeActionTypeMetadata?: PlaceActionTypeMetadata[];
 }

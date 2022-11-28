@@ -1,5 +1,7 @@
 package shared
 
+// ActivityScheduledEventDetails
+// Contains details about an activity scheduled during an execution.
 type ActivityScheduledEventDetails struct {
 	HeartbeatInSeconds *int64                            `json:"heartbeatInSeconds,omitempty"`
 	Input              *string                           `json:"input,omitempty"`

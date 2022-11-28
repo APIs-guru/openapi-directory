@@ -1,13 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import attachmentssourcekey_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AttachmentsSource:
-    key: Optional[attachmentssourcekey_enum.AttachmentsSourceKeyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Key' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Values' }})
+    r"""AttachmentsSource
+    Identifying information about a document attachment, including the file name and a key-value pair that identifies the location of an attachment to a document.
+    """
+    
+    key: Optional[AttachmentsSourceKeyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Key') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    values: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Values') }})
     

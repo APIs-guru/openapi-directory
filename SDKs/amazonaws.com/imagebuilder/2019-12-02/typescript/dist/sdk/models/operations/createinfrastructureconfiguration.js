@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateInfrastructureConfigurationHeaders = /** @class */ (function (_super) {
     __extends(CreateInfrastructureConfigurationHeaders, _super);
@@ -30,31 +30,31 @@ var CreateInfrastructureConfigurationHeaders = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateInfrastructureConfigurationHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateInfrastructureConfigurationHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateInfrastructureConfigurationHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateInfrastructureConfigurationHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateInfrastructureConfigurationHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateInfrastructureConfigurationHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateInfrastructureConfigurationHeaders.prototype, "xAmzSignedHeaders", void 0);
     return CreateInfrastructureConfigurationHeaders;
@@ -70,7 +70,7 @@ var CreateInfrastructureConfigurationRequestBodyLogging = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=s3Logs" }),
+        SpeakeasyMetadata({ data: "json, name=s3Logs" }),
         __metadata("design:type", shared.S3Logs)
     ], CreateInfrastructureConfigurationRequestBodyLogging.prototype, "s3Logs", void 0);
     return CreateInfrastructureConfigurationRequestBodyLogging;
@@ -82,55 +82,55 @@ var CreateInfrastructureConfigurationRequestBody = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clientToken" }),
+        SpeakeasyMetadata({ data: "json, name=clientToken" }),
         __metadata("design:type", String)
     ], CreateInfrastructureConfigurationRequestBody.prototype, "clientToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], CreateInfrastructureConfigurationRequestBody.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceProfileName" }),
+        SpeakeasyMetadata({ data: "json, name=instanceProfileName" }),
         __metadata("design:type", String)
     ], CreateInfrastructureConfigurationRequestBody.prototype, "instanceProfileName", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceTypes" }),
+        SpeakeasyMetadata({ data: "json, name=instanceTypes" }),
         __metadata("design:type", Array)
     ], CreateInfrastructureConfigurationRequestBody.prototype, "instanceTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=keyPair" }),
+        SpeakeasyMetadata({ data: "json, name=keyPair" }),
         __metadata("design:type", String)
     ], CreateInfrastructureConfigurationRequestBody.prototype, "keyPair", void 0);
     __decorate([
-        Metadata({ data: "json, name=logging" }),
+        SpeakeasyMetadata({ data: "json, name=logging" }),
         __metadata("design:type", CreateInfrastructureConfigurationRequestBodyLogging)
     ], CreateInfrastructureConfigurationRequestBody.prototype, "logging", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], CreateInfrastructureConfigurationRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceTags" }),
+        SpeakeasyMetadata({ data: "json, name=resourceTags" }),
         __metadata("design:type", Map)
     ], CreateInfrastructureConfigurationRequestBody.prototype, "resourceTags", void 0);
     __decorate([
-        Metadata({ data: "json, name=securityGroupIds" }),
+        SpeakeasyMetadata({ data: "json, name=securityGroupIds" }),
         __metadata("design:type", Array)
     ], CreateInfrastructureConfigurationRequestBody.prototype, "securityGroupIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=snsTopicArn" }),
+        SpeakeasyMetadata({ data: "json, name=snsTopicArn" }),
         __metadata("design:type", String)
     ], CreateInfrastructureConfigurationRequestBody.prototype, "snsTopicArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=subnetId" }),
+        SpeakeasyMetadata({ data: "json, name=subnetId" }),
         __metadata("design:type", String)
     ], CreateInfrastructureConfigurationRequestBody.prototype, "subnetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], CreateInfrastructureConfigurationRequestBody.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=terminateInstanceOnFailure" }),
+        SpeakeasyMetadata({ data: "json, name=terminateInstanceOnFailure" }),
         __metadata("design:type", Boolean)
     ], CreateInfrastructureConfigurationRequestBody.prototype, "terminateInstanceOnFailure", void 0);
     return CreateInfrastructureConfigurationRequestBody;
@@ -142,11 +142,11 @@ var CreateInfrastructureConfigurationRequest = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateInfrastructureConfigurationHeaders)
     ], CreateInfrastructureConfigurationRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateInfrastructureConfigurationRequestBody)
     ], CreateInfrastructureConfigurationRequest.prototype, "request", void 0);
     return CreateInfrastructureConfigurationRequest;
@@ -158,55 +158,55 @@ var CreateInfrastructureConfigurationResponse = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateInfrastructureConfigurationResponse.prototype, "callRateLimitExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateInfrastructureConfigurationResponse.prototype, "clientException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateInfrastructureConfigurationResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CreateInfrastructureConfigurationResponse)
     ], CreateInfrastructureConfigurationResponse.prototype, "createInfrastructureConfigurationResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateInfrastructureConfigurationResponse.prototype, "forbiddenException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateInfrastructureConfigurationResponse.prototype, "idempotentParameterMismatchException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateInfrastructureConfigurationResponse.prototype, "invalidRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateInfrastructureConfigurationResponse.prototype, "resourceAlreadyExistsException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateInfrastructureConfigurationResponse.prototype, "resourceInUseException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateInfrastructureConfigurationResponse.prototype, "serviceException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateInfrastructureConfigurationResponse.prototype, "serviceQuotaExceededException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateInfrastructureConfigurationResponse.prototype, "serviceUnavailableException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateInfrastructureConfigurationResponse.prototype, "statusCode", void 0);
     return CreateInfrastructureConfigurationResponse;

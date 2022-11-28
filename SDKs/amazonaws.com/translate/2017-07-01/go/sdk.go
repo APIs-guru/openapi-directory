@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://translate.{region}.amazonaws.com",
 	"https://translate.{region}.amazonaws.com",
 	"http://translate.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/translate/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// CreateParallelData - Creates a parallel data resource in Amazon Translate by importing an input file from Amazon S3. Parallel data files contain examples of source phrases and their translations from your translation memory. By adding parallel data, you can influence the style, tone, and word choice in your translation output.
 func (s *SDK) CreateParallelData(ctx context.Context, request operations.CreateParallelDataRequest) (*operations.CreateParallelDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSShineFrontendService_20170701.CreateParallelData"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) CreateParallelData(ctx context.Context, request operations.CreateP
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -171,8 +198,9 @@ func (s *SDK) CreateParallelData(ctx context.Context, request operations.CreateP
 	return res, nil
 }
 
+// DeleteParallelData - Deletes a parallel data resource in Amazon Translate.
 func (s *SDK) DeleteParallelData(ctx context.Context, request operations.DeleteParallelDataRequest) (*operations.DeleteParallelDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSShineFrontendService_20170701.DeleteParallelData"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -192,7 +220,7 @@ func (s *SDK) DeleteParallelData(ctx context.Context, request operations.DeleteP
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -262,8 +290,9 @@ func (s *SDK) DeleteParallelData(ctx context.Context, request operations.DeleteP
 	return res, nil
 }
 
+// DeleteTerminology - A synchronous action that deletes a custom terminology.
 func (s *SDK) DeleteTerminology(ctx context.Context, request operations.DeleteTerminologyRequest) (*operations.DeleteTerminologyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSShineFrontendService_20170701.DeleteTerminology"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -283,7 +312,7 @@ func (s *SDK) DeleteTerminology(ctx context.Context, request operations.DeleteTe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -344,8 +373,9 @@ func (s *SDK) DeleteTerminology(ctx context.Context, request operations.DeleteTe
 	return res, nil
 }
 
+// DescribeTextTranslationJob - Gets the properties associated with an asycnhronous batch translation job including name, ID, status, source and target languages, input/output S3 buckets, and so on.
 func (s *SDK) DescribeTextTranslationJob(ctx context.Context, request operations.DescribeTextTranslationJobRequest) (*operations.DescribeTextTranslationJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSShineFrontendService_20170701.DescribeTextTranslationJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -365,7 +395,7 @@ func (s *SDK) DescribeTextTranslationJob(ctx context.Context, request operations
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -425,8 +455,9 @@ func (s *SDK) DescribeTextTranslationJob(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetParallelData - Provides information about a parallel data resource.
 func (s *SDK) GetParallelData(ctx context.Context, request operations.GetParallelDataRequest) (*operations.GetParallelDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSShineFrontendService_20170701.GetParallelData"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -446,7 +477,7 @@ func (s *SDK) GetParallelData(ctx context.Context, request operations.GetParalle
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -516,8 +547,9 @@ func (s *SDK) GetParallelData(ctx context.Context, request operations.GetParalle
 	return res, nil
 }
 
+// GetTerminology - Retrieves a custom terminology.
 func (s *SDK) GetTerminology(ctx context.Context, request operations.GetTerminologyRequest) (*operations.GetTerminologyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSShineFrontendService_20170701.GetTerminology"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -537,7 +569,7 @@ func (s *SDK) GetTerminology(ctx context.Context, request operations.GetTerminol
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -607,8 +639,9 @@ func (s *SDK) GetTerminology(ctx context.Context, request operations.GetTerminol
 	return res, nil
 }
 
+// ImportTerminology - <p>Creates or updates a custom terminology, depending on whether or not one already exists for the given terminology name. Importing a terminology with the same name as an existing one will merge the terminologies based on the chosen merge strategy. Currently, the only supported merge strategy is OVERWRITE, and so the imported terminology will overwrite an existing terminology of the same name.</p> <p>If you import a terminology that overwrites an existing one, the new terminology take up to 10 minutes to fully propagate and be available for use in a translation due to cache policies with the DataPlane service that performs the translations.</p>
 func (s *SDK) ImportTerminology(ctx context.Context, request operations.ImportTerminologyRequest) (*operations.ImportTerminologyResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSShineFrontendService_20170701.ImportTerminology"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -628,7 +661,7 @@ func (s *SDK) ImportTerminology(ctx context.Context, request operations.ImportTe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -698,8 +731,9 @@ func (s *SDK) ImportTerminology(ctx context.Context, request operations.ImportTe
 	return res, nil
 }
 
+// ListParallelData - Provides a list of your parallel data resources in Amazon Translate.
 func (s *SDK) ListParallelData(ctx context.Context, request operations.ListParallelDataRequest) (*operations.ListParallelDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSShineFrontendService_20170701.ListParallelData"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -721,7 +755,7 @@ func (s *SDK) ListParallelData(ctx context.Context, request operations.ListParal
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -781,8 +815,9 @@ func (s *SDK) ListParallelData(ctx context.Context, request operations.ListParal
 	return res, nil
 }
 
+// ListTerminologies - Provides a list of custom terminologies associated with your account.
 func (s *SDK) ListTerminologies(ctx context.Context, request operations.ListTerminologiesRequest) (*operations.ListTerminologiesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSShineFrontendService_20170701.ListTerminologies"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -804,7 +839,7 @@ func (s *SDK) ListTerminologies(ctx context.Context, request operations.ListTerm
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -864,8 +899,9 @@ func (s *SDK) ListTerminologies(ctx context.Context, request operations.ListTerm
 	return res, nil
 }
 
+// ListTextTranslationJobs - Gets a list of the batch translation jobs that you have submitted.
 func (s *SDK) ListTextTranslationJobs(ctx context.Context, request operations.ListTextTranslationJobsRequest) (*operations.ListTextTranslationJobsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSShineFrontendService_20170701.ListTextTranslationJobs"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -887,7 +923,7 @@ func (s *SDK) ListTextTranslationJobs(ctx context.Context, request operations.Li
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -957,8 +993,9 @@ func (s *SDK) ListTextTranslationJobs(ctx context.Context, request operations.Li
 	return res, nil
 }
 
+// StartTextTranslationJob - <p>Starts an asynchronous batch translation job. Batch translation jobs can be used to translate large volumes of text across multiple documents at once. For more information, see <a>async</a>.</p> <p>Batch translation jobs can be described with the <a>DescribeTextTranslationJob</a> operation, listed with the <a>ListTextTranslationJobs</a> operation, and stopped with the <a>StopTextTranslationJob</a> operation.</p> <note> <p>Amazon Translate does not support batch translation of multiple source languages at once.</p> </note>
 func (s *SDK) StartTextTranslationJob(ctx context.Context, request operations.StartTextTranslationJobRequest) (*operations.StartTextTranslationJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSShineFrontendService_20170701.StartTextTranslationJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -978,7 +1015,7 @@ func (s *SDK) StartTextTranslationJob(ctx context.Context, request operations.St
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1058,8 +1095,9 @@ func (s *SDK) StartTextTranslationJob(ctx context.Context, request operations.St
 	return res, nil
 }
 
+// StopTextTranslationJob - <p>Stops an asynchronous batch translation job that is in progress.</p> <p>If the job's state is <code>IN_PROGRESS</code>, the job will be marked for termination and put into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it is put into the <code>COMPLETED</code> state. Otherwise, the job is put into the <code>STOPPED</code> state.</p> <p>Asynchronous batch translation jobs are started with the <a>StartTextTranslationJob</a> operation. You can use the <a>DescribeTextTranslationJob</a> or <a>ListTextTranslationJobs</a> operations to get a batch translation job's <code>JobId</code>.</p>
 func (s *SDK) StopTextTranslationJob(ctx context.Context, request operations.StopTextTranslationJobRequest) (*operations.StopTextTranslationJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSShineFrontendService_20170701.StopTextTranslationJob"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1079,7 +1117,7 @@ func (s *SDK) StopTextTranslationJob(ctx context.Context, request operations.Sto
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1139,8 +1177,9 @@ func (s *SDK) StopTextTranslationJob(ctx context.Context, request operations.Sto
 	return res, nil
 }
 
+// TranslateText - Translates input text from the source language to the target language. For a list of available languages and language codes, see <a>what-is-languages</a>.
 func (s *SDK) TranslateText(ctx context.Context, request operations.TranslateTextRequest) (*operations.TranslateTextResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSShineFrontendService_20170701.TranslateText"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1160,7 +1199,7 @@ func (s *SDK) TranslateText(ctx context.Context, request operations.TranslateTex
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1270,8 +1309,9 @@ func (s *SDK) TranslateText(ctx context.Context, request operations.TranslateTex
 	return res, nil
 }
 
+// UpdateParallelData - Updates a previously created parallel data resource by importing a new input file from Amazon S3.
 func (s *SDK) UpdateParallelData(ctx context.Context, request operations.UpdateParallelDataRequest) (*operations.UpdateParallelDataResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=AWSShineFrontendService_20170701.UpdateParallelData"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1291,7 +1331,7 @@ func (s *SDK) UpdateParallelData(ctx context.Context, request operations.UpdateP
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

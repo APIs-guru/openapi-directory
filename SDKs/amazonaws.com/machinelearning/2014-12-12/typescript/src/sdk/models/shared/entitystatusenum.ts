@@ -1,9 +1,10 @@
 
 
+
 export enum EntityStatusEnum {
-    Pending = "PENDING"
-,    Inprogress = "INPROGRESS"
-,    Failed = "FAILED"
-,    Completed = "COMPLETED"
-,    Deleted = "DELETED"
+    Pending = "PENDING",
+    Inprogress = "INPROGRESS",
+    Failed = "FAILED",
+    Completed = "COMPLETED",
+    Deleted = "DELETED"
 }

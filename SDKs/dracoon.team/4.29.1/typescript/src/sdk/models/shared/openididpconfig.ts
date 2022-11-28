@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum OpenIdIdpConfigFlowEnum {
-    AuthorizationCode = "authorization_code"
-,    Hybrid = "hybrid"
+    AuthorizationCode = "authorization_code",
+    Hybrid = "hybrid"
 }
 
 export enum OpenIdIdpConfigUserInfoSourceEnum {
-    UserInfoEndpoint = "user_info_endpoint"
-,    IdToken = "id_token"
+    UserInfoEndpoint = "user_info_endpoint",
+    IdToken = "id_token"
 }
 
 
@@ -16,66 +17,66 @@ export enum OpenIdIdpConfigUserInfoSourceEnum {
  * OpenID Connect IDP configuration
 **/
 export class OpenIdIdpConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizationEndPointUrl" })
+  @SpeakeasyMetadata({ data: "json, name=authorizationEndPointUrl" })
   authorizationEndPointUrl?: string;
 
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=clientSecret" })
+  @SpeakeasyMetadata({ data: "json, name=clientSecret" })
   clientSecret?: string;
 
-  @Metadata({ data: "json, name=fallbackMappingClaim" })
+  @SpeakeasyMetadata({ data: "json, name=fallbackMappingClaim" })
   fallbackMappingClaim?: string;
 
-  @Metadata({ data: "json, name=flow" })
+  @SpeakeasyMetadata({ data: "json, name=flow" })
   flow?: OpenIdIdpConfigFlowEnum;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=issuer" })
+  @SpeakeasyMetadata({ data: "json, name=issuer" })
   issuer?: string;
 
-  @Metadata({ data: "json, name=jwksEndPointUrl" })
+  @SpeakeasyMetadata({ data: "json, name=jwksEndPointUrl" })
   jwksEndPointUrl?: string;
 
-  @Metadata({ data: "json, name=mappingClaim" })
+  @SpeakeasyMetadata({ data: "json, name=mappingClaim" })
   mappingClaim?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pkceChallengeMethod" })
+  @SpeakeasyMetadata({ data: "json, name=pkceChallengeMethod" })
   pkceChallengeMethod?: string;
 
-  @Metadata({ data: "json, name=pkceEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=pkceEnabled" })
   pkceEnabled?: boolean;
 
-  @Metadata({ data: "json, name=redirectUris" })
+  @SpeakeasyMetadata({ data: "json, name=redirectUris" })
   redirectUris?: string[];
 
-  @Metadata({ data: "json, name=scopes" })
+  @SpeakeasyMetadata({ data: "json, name=scopes" })
   scopes?: string[];
 
-  @Metadata({ data: "json, name=tokenEndPointUrl" })
+  @SpeakeasyMetadata({ data: "json, name=tokenEndPointUrl" })
   tokenEndPointUrl?: string;
 
-  @Metadata({ data: "json, name=userImportEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=userImportEnabled" })
   userImportEnabled?: boolean;
 
-  @Metadata({ data: "json, name=userImportGroup" })
+  @SpeakeasyMetadata({ data: "json, name=userImportGroup" })
   userImportGroup?: number;
 
-  @Metadata({ data: "json, name=userInfoEndPointUrl" })
+  @SpeakeasyMetadata({ data: "json, name=userInfoEndPointUrl" })
   userInfoEndPointUrl?: string;
 
-  @Metadata({ data: "json, name=userInfoSource" })
+  @SpeakeasyMetadata({ data: "json, name=userInfoSource" })
   userInfoSource?: OpenIdIdpConfigUserInfoSourceEnum;
 
-  @Metadata({ data: "json, name=userManagementUrl" })
+  @SpeakeasyMetadata({ data: "json, name=userManagementUrl" })
   userManagementUrl?: string;
 
-  @Metadata({ data: "json, name=userUpdateEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=userUpdateEnabled" })
   userUpdateEnabled?: boolean;
 }

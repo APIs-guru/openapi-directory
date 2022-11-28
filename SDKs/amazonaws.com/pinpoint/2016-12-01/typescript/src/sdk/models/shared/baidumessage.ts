@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionEnum } from "./actionenum";
+
 
 
 // BaiduMessage
@@ -7,45 +8,45 @@ import { ActionEnum } from "./actionenum";
  * Specifies the settings for a one-time message that's sent directly to an endpoint through the Baidu (Baidu Cloud Push) channel.
 **/
 export class BaiduMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action?: ActionEnum;
 
-  @Metadata({ data: "json, name=Body" })
+  @SpeakeasyMetadata({ data: "json, name=Body" })
   body?: string;
 
-  @Metadata({ data: "json, name=Data" })
+  @SpeakeasyMetadata({ data: "json, name=Data" })
   data?: Map<string, string>;
 
-  @Metadata({ data: "json, name=IconReference" })
+  @SpeakeasyMetadata({ data: "json, name=IconReference" })
   iconReference?: string;
 
-  @Metadata({ data: "json, name=ImageIconUrl" })
+  @SpeakeasyMetadata({ data: "json, name=ImageIconUrl" })
   imageIconUrl?: string;
 
-  @Metadata({ data: "json, name=ImageUrl" })
+  @SpeakeasyMetadata({ data: "json, name=ImageUrl" })
   imageUrl?: string;
 
-  @Metadata({ data: "json, name=RawContent" })
+  @SpeakeasyMetadata({ data: "json, name=RawContent" })
   rawContent?: string;
 
-  @Metadata({ data: "json, name=SilentPush" })
+  @SpeakeasyMetadata({ data: "json, name=SilentPush" })
   silentPush?: boolean;
 
-  @Metadata({ data: "json, name=SmallImageIconUrl" })
+  @SpeakeasyMetadata({ data: "json, name=SmallImageIconUrl" })
   smallImageIconUrl?: string;
 
-  @Metadata({ data: "json, name=Sound" })
+  @SpeakeasyMetadata({ data: "json, name=Sound" })
   sound?: string;
 
-  @Metadata({ data: "json, name=Substitutions" })
+  @SpeakeasyMetadata({ data: "json, name=Substitutions" })
   substitutions?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=TimeToLive" })
+  @SpeakeasyMetadata({ data: "json, name=TimeToLive" })
   timeToLive?: number;
 
-  @Metadata({ data: "json, name=Title" })
+  @SpeakeasyMetadata({ data: "json, name=Title" })
   title?: string;
 
-  @Metadata({ data: "json, name=Url" })
+  @SpeakeasyMetadata({ data: "json, name=Url" })
   url?: string;
 }

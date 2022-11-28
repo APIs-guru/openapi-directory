@@ -19,13 +19,13 @@ class PostSetupV1ResourcesRequests:
 
 @dataclass
 class PostSetupV1ResourcesRequest:
-    query_params: PostSetupV1ResourcesQueryParams = field(default=None)
+    query_params: PostSetupV1ResourcesQueryParams = field()
     request: Optional[PostSetupV1ResourcesRequests] = field(default=None)
     
 
 @dataclass
 class PostSetupV1ResourcesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     resource_view_model: Optional[shared.ResourceViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

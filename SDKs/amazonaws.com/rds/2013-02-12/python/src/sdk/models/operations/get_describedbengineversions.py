@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeDbEngineVersionsActionEnum(str, Enum):
     DESCRIBE_DB_ENGINE_VERSIONS = "DescribeDBEngineVersions"
@@ -10,7 +14,8 @@ class GetDescribeDbEngineVersionsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeDbEngineVersionsQueryParams:
-    action: GetDescribeDbEngineVersionsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeDbEngineVersionsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeDbEngineVersionsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     db_parameter_group_family: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DBParameterGroupFamily', 'style': 'form', 'explode': True }})
     default_only: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DefaultOnly', 'style': 'form', 'explode': True }})
     engine: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Engine', 'style': 'form', 'explode': True }})
@@ -18,7 +23,6 @@ class GetDescribeDbEngineVersionsQueryParams:
     list_supported_character_sets: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'ListSupportedCharacterSets', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
-    version: GetDescribeDbEngineVersionsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -34,13 +38,13 @@ class GetDescribeDbEngineVersionsHeaders:
 
 @dataclass
 class GetDescribeDbEngineVersionsRequest:
-    query_params: GetDescribeDbEngineVersionsQueryParams = field(default=None)
-    headers: GetDescribeDbEngineVersionsHeaders = field(default=None)
+    headers: GetDescribeDbEngineVersionsHeaders = field()
+    query_params: GetDescribeDbEngineVersionsQueryParams = field()
     
 
 @dataclass
 class GetDescribeDbEngineVersionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

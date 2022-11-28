@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import enterprisecrmeventbusprototaskexecutiondetailstaskattemptstats
+from sdk import utils
+from . import *
 
 class EnterpriseCrmEventbusProtoTaskExecutionDetailsTaskExecutionStateEnum(str, Enum):
     UNSPECIFIED = "UNSPECIFIED"
@@ -22,7 +24,11 @@ class EnterpriseCrmEventbusProtoTaskExecutionDetailsTaskExecutionStateEnum(str, 
 @dataclass_json
 @dataclass
 class EnterpriseCrmEventbusProtoTaskExecutionDetails:
-    task_attempt_stats: Optional[List[enterprisecrmeventbusprototaskexecutiondetailstaskattemptstats.EnterpriseCrmEventbusProtoTaskExecutionDetailsTaskAttemptStats]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskAttemptStats' }})
-    task_execution_state: Optional[EnterpriseCrmEventbusProtoTaskExecutionDetailsTaskExecutionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskExecutionState' }})
-    task_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskNumber' }})
+    r"""EnterpriseCrmEventbusProtoTaskExecutionDetails
+    Contains the details of the execution of this task. Next available id: 11
+    """
+    
+    task_attempt_stats: Optional[List[EnterpriseCrmEventbusProtoTaskExecutionDetailsTaskAttemptStats]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskAttemptStats') }})
+    task_execution_state: Optional[EnterpriseCrmEventbusProtoTaskExecutionDetailsTaskExecutionStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskExecutionState') }})
+    task_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskNumber') }})
     

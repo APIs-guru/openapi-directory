@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DashTimestampRange
 /**
  * <p>The start and end of the timestamp range for the requested media.</p> <p>This value should not be present if <code>PlaybackType</code> is <code>LIVE</code>.</p> <p>The values in <code>DASHimestampRange</code> are inclusive. Fragments that start exactly at or after the start time are included in the session. Fragments that start before the start time and continue past it are not included in the session.</p>
@@ -33,11 +33,11 @@ var DashTimestampRange = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=EndTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=EndTimestamp" }),
         __metadata("design:type", Date)
     ], DashTimestampRange.prototype, "endTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=StartTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=StartTimestamp" }),
         __metadata("design:type", Date)
     ], DashTimestampRange.prototype, "startTimestamp", void 0);
     return DashTimestampRange;

@@ -4,7 +4,7 @@ from typing import Any,List,Optional
 
 @dataclass
 class GetInstancesIDSimplifiedTagsPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,13 +14,13 @@ class GetInstancesIDSimplifiedTagsQueryParams:
 
 @dataclass
 class GetInstancesIDSimplifiedTagsRequest:
-    path_params: GetInstancesIDSimplifiedTagsPathParams = field(default=None)
-    query_params: GetInstancesIDSimplifiedTagsQueryParams = field(default=None)
+    path_params: GetInstancesIDSimplifiedTagsPathParams = field()
+    query_params: GetInstancesIDSimplifiedTagsQueryParams = field()
     
 
 @dataclass
 class GetInstancesIDSimplifiedTagsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_instances_id_simplified_tags_200_application_json_any: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

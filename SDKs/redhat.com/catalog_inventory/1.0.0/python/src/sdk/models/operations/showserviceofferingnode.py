@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class ShowServiceOfferingNodePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ShowServiceOfferingNodeRequest:
-    path_params: ShowServiceOfferingNodePathParams = field(default=None)
+    path_params: ShowServiceOfferingNodePathParams = field()
     
 
 @dataclass
 class ShowServiceOfferingNodeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_not_found: Optional[shared.ErrorNotFound] = field(default=None)
     service_offering_node: Optional[shared.ServiceOfferingNode] = field(default=None)
-    status_code: int = field(default=None)
     

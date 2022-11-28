@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ThrottleSettings
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The API request rate limits.
 **/
 export class ThrottleSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=burstLimit" })
+  @SpeakeasyMetadata({ data: "json, name=burstLimit" })
   burstLimit?: number;
 
-  @Metadata({ data: "json, name=rateLimit" })
+  @SpeakeasyMetadata({ data: "json, name=rateLimit" })
   rateLimit?: number;
 }

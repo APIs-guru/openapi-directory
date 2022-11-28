@@ -6,12 +6,12 @@ type KeyRevokeNosecretQueryParams struct {
 	Phone string  `queryParam:"style=form,explode=true,name=phone"`
 }
 
-type KeyRevokeNosecretRequest struct {
-	QueryParams KeyRevokeNosecretQueryParams
-}
-
 type KeyRevokeNosecret200ApplicationJSON struct {
 	Status *string `json:"status,omitempty"`
+}
+
+type KeyRevokeNosecretRequest struct {
+	QueryParams KeyRevokeNosecretQueryParams
 }
 
 type KeyRevokeNosecretResponse struct {

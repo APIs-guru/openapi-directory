@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GraphicsStatsBucket extends SpeakeasyBase {
-  @Metadata({ data: "json, name=frameCount" })
+  @SpeakeasyMetadata({ data: "json, name=frameCount" })
   frameCount?: string;
 
-  @Metadata({ data: "json, name=renderMillis" })
+  @SpeakeasyMetadata({ data: "json, name=renderMillis" })
   renderMillis?: string;
 }

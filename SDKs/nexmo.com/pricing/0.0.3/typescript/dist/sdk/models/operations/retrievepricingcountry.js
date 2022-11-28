@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var RetrievePricingCountryPathParams = /** @class */ (function (_super) {
     __extends(RetrievePricingCountryPathParams, _super);
     function RetrievePricingCountryPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=type" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=type" }),
         __metadata("design:type", String)
     ], RetrievePricingCountryPathParams.prototype, "type", void 0);
     return RetrievePricingCountryPathParams;
@@ -41,47 +41,31 @@ var RetrievePricingCountryQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" }),
         __metadata("design:type", String)
     ], RetrievePricingCountryQueryParams.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=api_secret" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_secret" }),
         __metadata("design:type", String)
     ], RetrievePricingCountryQueryParams.prototype, "apiSecret", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" }),
         __metadata("design:type", String)
     ], RetrievePricingCountryQueryParams.prototype, "country", void 0);
     return RetrievePricingCountryQueryParams;
 }(SpeakeasyBase));
 export { RetrievePricingCountryQueryParams };
-var RetrievePricingCountryRequest = /** @class */ (function (_super) {
-    __extends(RetrievePricingCountryRequest, _super);
-    function RetrievePricingCountryRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata(),
-        __metadata("design:type", RetrievePricingCountryPathParams)
-    ], RetrievePricingCountryRequest.prototype, "pathParams", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", RetrievePricingCountryQueryParams)
-    ], RetrievePricingCountryRequest.prototype, "queryParams", void 0);
-    return RetrievePricingCountryRequest;
-}(SpeakeasyBase));
-export { RetrievePricingCountryRequest };
 var RetrievePricingCountry400ApplicationJsonInvalidParameters = /** @class */ (function (_super) {
     __extends(RetrievePricingCountry400ApplicationJsonInvalidParameters, _super);
     function RetrievePricingCountry400ApplicationJsonInvalidParameters() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=message" }),
+        SpeakeasyMetadata({ data: "json, name=message" }),
         __metadata("design:type", String)
     ], RetrievePricingCountry400ApplicationJsonInvalidParameters.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=parameter" }),
+        SpeakeasyMetadata({ data: "json, name=parameter" }),
         __metadata("design:type", String)
     ], RetrievePricingCountry400ApplicationJsonInvalidParameters.prototype, "parameter", void 0);
     return RetrievePricingCountry400ApplicationJsonInvalidParameters;
@@ -93,15 +77,15 @@ var RetrievePricingCountry400ApplicationJson = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error_title" }),
+        SpeakeasyMetadata({ data: "json, name=error_title" }),
         __metadata("design:type", String)
     ], RetrievePricingCountry400ApplicationJson.prototype, "errorTitle", void 0);
     __decorate([
-        Metadata({ data: "json, name=invalid_parameters" }),
+        SpeakeasyMetadata({ data: "json, name=invalid_parameters" }),
         __metadata("design:type", RetrievePricingCountry400ApplicationJsonInvalidParameters)
     ], RetrievePricingCountry400ApplicationJson.prototype, "invalidParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], RetrievePricingCountry400ApplicationJson.prototype, "type", void 0);
     return RetrievePricingCountry400ApplicationJson;
@@ -113,43 +97,59 @@ var RetrievePricingCountry401ApplicationJson = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=code" }),
+        SpeakeasyMetadata({ data: "json, name=code" }),
         __metadata("design:type", String)
     ], RetrievePricingCountry401ApplicationJson.prototype, "code", void 0);
     __decorate([
-        Metadata({ data: "json, name=currency" }),
+        SpeakeasyMetadata({ data: "json, name=currency" }),
         __metadata("design:type", String)
     ], RetrievePricingCountry401ApplicationJson.prototype, "currency", void 0);
     __decorate([
-        Metadata({ data: "json, name=error-code-label" }),
+        SpeakeasyMetadata({ data: "json, name=error-code-label" }),
         __metadata("design:type", String)
     ], RetrievePricingCountry401ApplicationJson.prototype, "errorCodeLabel", void 0);
     return RetrievePricingCountry401ApplicationJson;
 }(SpeakeasyBase));
 export { RetrievePricingCountry401ApplicationJson };
+var RetrievePricingCountryRequest = /** @class */ (function (_super) {
+    __extends(RetrievePricingCountryRequest, _super);
+    function RetrievePricingCountryRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", RetrievePricingCountryPathParams)
+    ], RetrievePricingCountryRequest.prototype, "pathParams", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", RetrievePricingCountryQueryParams)
+    ], RetrievePricingCountryRequest.prototype, "queryParams", void 0);
+    return RetrievePricingCountryRequest;
+}(SpeakeasyBase));
+export { RetrievePricingCountryRequest };
 var RetrievePricingCountryResponse = /** @class */ (function (_super) {
     __extends(RetrievePricingCountryResponse, _super);
     function RetrievePricingCountryResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RetrievePricingCountryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], RetrievePricingCountryResponse.prototype, "pricingCountryResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RetrievePricingCountryResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RetrievePricingCountry400ApplicationJson)
     ], RetrievePricingCountryResponse.prototype, "retrievePricingCountry400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RetrievePricingCountry401ApplicationJson)
     ], RetrievePricingCountryResponse.prototype, "retrievePricingCountry401ApplicationJsonObject", void 0);
     return RetrievePricingCountryResponse;

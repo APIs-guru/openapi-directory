@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class AssociateRepositoryHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,10 +32,10 @@ export class AssociateRepositoryHeaders extends SpeakeasyBase {
  * <p>An object that contains:</p> <ul> <li> <p>The encryption option for a repository association. It is either owned by Amazon Web Services Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p> </li> <li> <p>The ID of the Amazon Web Services KMS key that is associated with a respository association.</p> </li> </ul>
 **/
 export class AssociateRepositoryRequestBodyKmsKeyDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EncryptionOption" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptionOption" })
   encryptionOption?: shared.EncryptionOptionEnum;
 
-  @Metadata({ data: "json, name=KMSKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KMSKeyId" })
   kmsKeyId?: string;
 }
 
@@ -44,66 +45,66 @@ export class AssociateRepositoryRequestBodyKmsKeyDetails extends SpeakeasyBase {
  *  Information about an associated Amazon Web Services CodeCommit repository or an associated repository that is managed by Amazon Web Services CodeStar Connections (for example, Bitbucket). This <code>Repository</code> object is not used if your source code is in an associated GitHub repository. 
 **/
 export class AssociateRepositoryRequestBodyRepository extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Bitbucket" })
+  @SpeakeasyMetadata({ data: "json, name=Bitbucket" })
   bitbucket?: shared.ThirdPartySourceRepository;
 
-  @Metadata({ data: "json, name=CodeCommit" })
+  @SpeakeasyMetadata({ data: "json, name=CodeCommit" })
   codeCommit?: shared.CodeCommitRepository;
 
-  @Metadata({ data: "json, name=GitHubEnterpriseServer" })
+  @SpeakeasyMetadata({ data: "json, name=GitHubEnterpriseServer" })
   gitHubEnterpriseServer?: shared.ThirdPartySourceRepository;
 
-  @Metadata({ data: "json, name=S3Bucket" })
+  @SpeakeasyMetadata({ data: "json, name=S3Bucket" })
   s3Bucket?: shared.S3Repository;
 }
 
 
 export class AssociateRepositoryRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientRequestToken" })
   clientRequestToken?: string;
 
-  @Metadata({ data: "json, name=KMSKeyDetails" })
+  @SpeakeasyMetadata({ data: "json, name=KMSKeyDetails" })
   kmsKeyDetails?: AssociateRepositoryRequestBodyKmsKeyDetails;
 
-  @Metadata({ data: "json, name=Repository" })
+  @SpeakeasyMetadata({ data: "json, name=Repository" })
   repository: AssociateRepositoryRequestBodyRepository;
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: Map<string, string>;
 }
 
 
 export class AssociateRepositoryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: AssociateRepositoryHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: AssociateRepositoryRequestBody;
 }
 
 
 export class AssociateRepositoryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   accessDeniedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   associateRepositoryResponse?: shared.AssociateRepositoryResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   validationException?: any;
 }

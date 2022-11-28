@@ -1,5 +1,7 @@
 package shared
 
+// TreemapChartSpec
+// A Treemap chart.
 type TreemapChartSpec struct {
 	ColorData        *ChartData              `json:"colorData,omitempty"`
 	ColorScale       *TreemapChartColorScale `json:"colorScale,omitempty"`

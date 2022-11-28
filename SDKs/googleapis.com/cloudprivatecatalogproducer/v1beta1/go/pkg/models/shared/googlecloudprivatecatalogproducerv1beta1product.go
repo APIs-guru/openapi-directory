@@ -1,5 +1,8 @@
 package shared
 
+// GoogleCloudPrivatecatalogproducerV1beta1Product
+// The producer representation of a product which is a child resource of
+// `Catalog` with display metadata and a list of `Version` resources.
 type GoogleCloudPrivatecatalogproducerV1beta1Product struct {
 	AssetType       *string                `json:"assetType,omitempty"`
 	CreateTime      *string                `json:"createTime,omitempty"`

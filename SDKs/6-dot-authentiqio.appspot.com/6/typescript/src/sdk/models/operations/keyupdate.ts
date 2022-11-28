@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class KeyUpdatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=PK" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=PK" })
   pk: string;
 }
 
 
-export class KeyUpdateRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: KeyUpdatePathParams;
-
-  @Metadata({ data: "request, media_type=application/jwt" })
-  request: Uint8Array;
-}
-
-
 export class KeyUpdate200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }
 
 
+export class KeyUpdateRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: KeyUpdatePathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/jwt" })
+  request: Uint8Array;
+}
+
+
 export class KeyUpdateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   keyUpdate200ApplicationJsonObject?: KeyUpdate200ApplicationJson;
 }

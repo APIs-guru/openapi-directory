@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleanalyticsadminv1alphacustomdimension
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleAnalyticsAdminV1alphaListCustomDimensionsResponse:
-    custom_dimensions: Optional[List[googleanalyticsadminv1alphacustomdimension.GoogleAnalyticsAdminV1alphaCustomDimension]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customDimensions' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""GoogleAnalyticsAdminV1alphaListCustomDimensionsResponse
+    Response message for ListCustomDimensions RPC.
+    """
+    
+    custom_dimensions: Optional[List[GoogleAnalyticsAdminV1alphaCustomDimension]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customDimensions') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

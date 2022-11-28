@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import prismacpecode
+from sdk import utils
+from . import *
 
 class PrismaConfigPrismaTypeEnum(str, Enum):
     PRISMA_TYPE_UNSPECIFIED = "PRISMA_TYPE_UNSPECIFIED"
@@ -16,7 +18,11 @@ class PrismaConfigPrismaTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PrismaConfig:
-    prisma_cpe_code: Optional[prismacpecode.PrismaCpeCode] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'prismaCpeCode' }})
-    prisma_type: Optional[PrismaConfigPrismaTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'prismaType' }})
-    supplier: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'supplier' }})
+    r"""PrismaConfig
+    Settings specific to the Mediaocean Prisma tool.
+    """
+    
+    prisma_cpe_code: Optional[PrismaCpeCode] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('prismaCpeCode') }})
+    prisma_type: Optional[PrismaConfigPrismaTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('prismaType') }})
+    supplier: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('supplier') }})
     

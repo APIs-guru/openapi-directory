@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppEngineHttpTarget } from "./appenginehttptarget";
 import { HttpTarget } from "./httptarget";
 import { PubsubTarget } from "./pubsubtarget";
@@ -46,59 +46,59 @@ var Job = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=appEngineHttpTarget" }),
+        SpeakeasyMetadata({ data: "json, name=appEngineHttpTarget" }),
         __metadata("design:type", AppEngineHttpTarget)
     ], Job.prototype, "appEngineHttpTarget", void 0);
     __decorate([
-        Metadata({ data: "json, name=attemptDeadline" }),
+        SpeakeasyMetadata({ data: "json, name=attemptDeadline" }),
         __metadata("design:type", String)
     ], Job.prototype, "attemptDeadline", void 0);
     __decorate([
-        Metadata({ data: "json, name=description" }),
+        SpeakeasyMetadata({ data: "json, name=description" }),
         __metadata("design:type", String)
     ], Job.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=httpTarget" }),
+        SpeakeasyMetadata({ data: "json, name=httpTarget" }),
         __metadata("design:type", HttpTarget)
     ], Job.prototype, "httpTarget", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastAttemptTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastAttemptTime" }),
         __metadata("design:type", String)
     ], Job.prototype, "lastAttemptTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Job.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=pubsubTarget" }),
+        SpeakeasyMetadata({ data: "json, name=pubsubTarget" }),
         __metadata("design:type", PubsubTarget)
     ], Job.prototype, "pubsubTarget", void 0);
     __decorate([
-        Metadata({ data: "json, name=retryConfig" }),
+        SpeakeasyMetadata({ data: "json, name=retryConfig" }),
         __metadata("design:type", RetryConfig)
     ], Job.prototype, "retryConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=schedule" }),
+        SpeakeasyMetadata({ data: "json, name=schedule" }),
         __metadata("design:type", String)
     ], Job.prototype, "schedule", void 0);
     __decorate([
-        Metadata({ data: "json, name=scheduleTime" }),
+        SpeakeasyMetadata({ data: "json, name=scheduleTime" }),
         __metadata("design:type", String)
     ], Job.prototype, "scheduleTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=state" }),
+        SpeakeasyMetadata({ data: "json, name=state" }),
         __metadata("design:type", String)
     ], Job.prototype, "state", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Status)
     ], Job.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeZone" }),
+        SpeakeasyMetadata({ data: "json, name=timeZone" }),
         __metadata("design:type", String)
     ], Job.prototype, "timeZone", void 0);
     __decorate([
-        Metadata({ data: "json, name=userUpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=userUpdateTime" }),
         __metadata("design:type", String)
     ], Job.prototype, "userUpdateTime", void 0);
     return Job;

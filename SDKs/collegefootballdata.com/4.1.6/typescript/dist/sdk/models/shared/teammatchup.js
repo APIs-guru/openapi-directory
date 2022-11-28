@@ -22,55 +22,54 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var TeamMatchupGames = /** @class */ (function (_super) {
     __extends(TeamMatchupGames, _super);
     function TeamMatchupGames() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=awayScore" }),
+        SpeakeasyMetadata({ data: "json, name=awayScore" }),
         __metadata("design:type", Number)
     ], TeamMatchupGames.prototype, "awayScore", void 0);
     __decorate([
-        Metadata({ data: "json, name=awayTeam" }),
+        SpeakeasyMetadata({ data: "json, name=awayTeam" }),
         __metadata("design:type", String)
     ], TeamMatchupGames.prototype, "awayTeam", void 0);
     __decorate([
-        Metadata({ data: "json, name=date" }),
+        SpeakeasyMetadata({ data: "json, name=date" }),
         __metadata("design:type", String)
     ], TeamMatchupGames.prototype, "date", void 0);
     __decorate([
-        Metadata({ data: "json, name=homeScore" }),
+        SpeakeasyMetadata({ data: "json, name=homeScore" }),
         __metadata("design:type", Number)
     ], TeamMatchupGames.prototype, "homeScore", void 0);
     __decorate([
-        Metadata({ data: "json, name=homeTeam" }),
+        SpeakeasyMetadata({ data: "json, name=homeTeam" }),
         __metadata("design:type", String)
     ], TeamMatchupGames.prototype, "homeTeam", void 0);
     __decorate([
-        Metadata({ data: "json, name=neutralSite" }),
+        SpeakeasyMetadata({ data: "json, name=neutralSite" }),
         __metadata("design:type", Boolean)
     ], TeamMatchupGames.prototype, "neutralSite", void 0);
     __decorate([
-        Metadata({ data: "json, name=season" }),
+        SpeakeasyMetadata({ data: "json, name=season" }),
         __metadata("design:type", Number)
     ], TeamMatchupGames.prototype, "season", void 0);
     __decorate([
-        Metadata({ data: "json, name=season_type" }),
+        SpeakeasyMetadata({ data: "json, name=season_type" }),
         __metadata("design:type", String)
     ], TeamMatchupGames.prototype, "seasonType", void 0);
     __decorate([
-        Metadata({ data: "json, name=venue" }),
+        SpeakeasyMetadata({ data: "json, name=venue" }),
         __metadata("design:type", String)
     ], TeamMatchupGames.prototype, "venue", void 0);
     __decorate([
-        Metadata({ data: "json, name=week" }),
+        SpeakeasyMetadata({ data: "json, name=week" }),
         __metadata("design:type", Number)
     ], TeamMatchupGames.prototype, "week", void 0);
     __decorate([
-        Metadata({ data: "json, name=winner" }),
+        SpeakeasyMetadata({ data: "json, name=winner" }),
         __metadata("design:type", String)
     ], TeamMatchupGames.prototype, "winner", void 0);
     return TeamMatchupGames;
@@ -82,35 +81,35 @@ var TeamMatchup = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=endYear" }),
+        SpeakeasyMetadata({ data: "json, name=endYear" }),
         __metadata("design:type", Number)
     ], TeamMatchup.prototype, "endYear", void 0);
     __decorate([
-        Metadata({ data: "json, name=games", elemType: shared.TeamMatchupGames }),
+        SpeakeasyMetadata({ data: "json, name=games", elemType: TeamMatchupGames }),
         __metadata("design:type", Array)
     ], TeamMatchup.prototype, "games", void 0);
     __decorate([
-        Metadata({ data: "json, name=startYear" }),
+        SpeakeasyMetadata({ data: "json, name=startYear" }),
         __metadata("design:type", Number)
     ], TeamMatchup.prototype, "startYear", void 0);
     __decorate([
-        Metadata({ data: "json, name=team1" }),
+        SpeakeasyMetadata({ data: "json, name=team1" }),
         __metadata("design:type", String)
     ], TeamMatchup.prototype, "team1", void 0);
     __decorate([
-        Metadata({ data: "json, name=team1Wins" }),
+        SpeakeasyMetadata({ data: "json, name=team1Wins" }),
         __metadata("design:type", Number)
     ], TeamMatchup.prototype, "team1Wins", void 0);
     __decorate([
-        Metadata({ data: "json, name=team2" }),
+        SpeakeasyMetadata({ data: "json, name=team2" }),
         __metadata("design:type", String)
     ], TeamMatchup.prototype, "team2", void 0);
     __decorate([
-        Metadata({ data: "json, name=team2Wins" }),
+        SpeakeasyMetadata({ data: "json, name=team2Wins" }),
         __metadata("design:type", Number)
     ], TeamMatchup.prototype, "team2Wins", void 0);
     __decorate([
-        Metadata({ data: "json, name=ties" }),
+        SpeakeasyMetadata({ data: "json, name=ties" }),
         __metadata("design:type", Number)
     ], TeamMatchup.prototype, "ties", void 0);
     return TeamMatchup;

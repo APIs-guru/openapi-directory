@@ -1,12 +1,12 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RecognitionAudio } from "./recognitionaudio";
-import { RecognitionConfig } from "./recognitionconfig";
+import { RecognitionConfigInput } from "./recognitionconfig";
 import { TranscriptOutputConfig } from "./transcriptoutputconfig";
 /**
  * The top-level message sent by the client for the `LongRunningRecognize` method.
 **/
-export declare class LongRunningRecognizeRequest extends SpeakeasyBase {
+export declare class LongRunningRecognizeRequestInput extends SpeakeasyBase {
     audio?: RecognitionAudio;
-    config?: RecognitionConfig;
+    config?: RecognitionConfigInput;
     outputConfig?: TranscriptOutputConfig;
 }

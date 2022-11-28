@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DeviceInfo
 /**
  * Signals associated with the device making the request.
@@ -33,31 +33,31 @@ var DeviceInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=deviceModelName" }),
+        SpeakeasyMetadata({ data: "json, name=deviceModelName" }),
         __metadata("design:type", String)
     ], DeviceInfo.prototype, "deviceModelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=languageCode" }),
+        SpeakeasyMetadata({ data: "json, name=languageCode" }),
         __metadata("design:type", String)
     ], DeviceInfo.prototype, "languageCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=languageCodeFromWebview" }),
+        SpeakeasyMetadata({ data: "json, name=languageCodeFromWebview" }),
         __metadata("design:type", String)
     ], DeviceInfo.prototype, "languageCodeFromWebview", void 0);
     __decorate([
-        Metadata({ data: "json, name=languageCodeRaw" }),
+        SpeakeasyMetadata({ data: "json, name=languageCodeRaw" }),
         __metadata("design:type", String)
     ], DeviceInfo.prototype, "languageCodeRaw", void 0);
     __decorate([
-        Metadata({ data: "json, name=screenResolutionHeight" }),
+        SpeakeasyMetadata({ data: "json, name=screenResolutionHeight" }),
         __metadata("design:type", String)
     ], DeviceInfo.prototype, "screenResolutionHeight", void 0);
     __decorate([
-        Metadata({ data: "json, name=screenResolutionWidth" }),
+        SpeakeasyMetadata({ data: "json, name=screenResolutionWidth" }),
         __metadata("design:type", String)
     ], DeviceInfo.prototype, "screenResolutionWidth", void 0);
     __decorate([
-        Metadata({ data: "json, name=timezone" }),
+        SpeakeasyMetadata({ data: "json, name=timezone" }),
         __metadata("design:type", String)
     ], DeviceInfo.prototype, "timezone", void 0);
     return DeviceInfo;

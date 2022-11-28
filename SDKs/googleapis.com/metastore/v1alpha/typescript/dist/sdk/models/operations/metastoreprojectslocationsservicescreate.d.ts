@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class MetastoreProjectsLocationsServicesCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -25,7 +25,7 @@ export declare class MetastoreProjectsLocationsServicesCreateSecurity extends Sp
 export declare class MetastoreProjectsLocationsServicesCreateRequest extends SpeakeasyBase {
     pathParams: MetastoreProjectsLocationsServicesCreatePathParams;
     queryParams: MetastoreProjectsLocationsServicesCreateQueryParams;
-    request?: shared.Service;
+    request?: shared.ServiceInput;
     security: MetastoreProjectsLocationsServicesCreateSecurity;
 }
 export declare class MetastoreProjectsLocationsServicesCreateResponse extends SpeakeasyBase {

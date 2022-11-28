@@ -22,32 +22,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentTypeEnum } from "./deploymenttypeenum";
+import { ErrorDetail } from "./errordetail";
 var GetDeploymentStatusResponse = /** @class */ (function (_super) {
     __extends(GetDeploymentStatusResponse, _super);
     function GetDeploymentStatusResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DeploymentStatus" }),
+        SpeakeasyMetadata({ data: "json, name=DeploymentStatus" }),
         __metadata("design:type", String)
     ], GetDeploymentStatusResponse.prototype, "deploymentStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeploymentType" }),
+        SpeakeasyMetadata({ data: "json, name=DeploymentType" }),
         __metadata("design:type", String)
     ], GetDeploymentStatusResponse.prototype, "deploymentType", void 0);
     __decorate([
-        Metadata({ data: "json, name=ErrorDetails", elemType: shared.ErrorDetail }),
+        SpeakeasyMetadata({ data: "json, name=ErrorDetails", elemType: ErrorDetail }),
         __metadata("design:type", Array)
     ], GetDeploymentStatusResponse.prototype, "errorDetails", void 0);
     __decorate([
-        Metadata({ data: "json, name=ErrorMessage" }),
+        SpeakeasyMetadata({ data: "json, name=ErrorMessage" }),
         __metadata("design:type", String)
     ], GetDeploymentStatusResponse.prototype, "errorMessage", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdatedAt" }),
+        SpeakeasyMetadata({ data: "json, name=UpdatedAt" }),
         __metadata("design:type", String)
     ], GetDeploymentStatusResponse.prototype, "updatedAt", void 0);
     return GetDeploymentStatusResponse;

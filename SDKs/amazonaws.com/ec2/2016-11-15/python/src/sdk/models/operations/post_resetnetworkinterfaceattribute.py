@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostResetNetworkInterfaceAttributeActionEnum(str, Enum):
     RESET_NETWORK_INTERFACE_ATTRIBUTE = "ResetNetworkInterfaceAttribute"
@@ -10,8 +14,8 @@ class PostResetNetworkInterfaceAttributeVersionEnum(str, Enum):
 
 @dataclass
 class PostResetNetworkInterfaceAttributeQueryParams:
-    action: PostResetNetworkInterfaceAttributeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostResetNetworkInterfaceAttributeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostResetNetworkInterfaceAttributeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostResetNetworkInterfaceAttributeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,13 +31,13 @@ class PostResetNetworkInterfaceAttributeHeaders:
 
 @dataclass
 class PostResetNetworkInterfaceAttributeRequest:
-    query_params: PostResetNetworkInterfaceAttributeQueryParams = field(default=None)
-    headers: PostResetNetworkInterfaceAttributeHeaders = field(default=None)
+    headers: PostResetNetworkInterfaceAttributeHeaders = field()
+    query_params: PostResetNetworkInterfaceAttributeQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostResetNetworkInterfaceAttributeResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

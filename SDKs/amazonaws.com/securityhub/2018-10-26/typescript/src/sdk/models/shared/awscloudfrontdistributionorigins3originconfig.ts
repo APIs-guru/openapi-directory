@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsCloudFrontDistributionOriginS3OriginConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about an origin that is an S3 bucket that is not configured with static website hosting.
 **/
 export class AwsCloudFrontDistributionOriginS3OriginConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OriginAccessIdentity" })
+  @SpeakeasyMetadata({ data: "json, name=OriginAccessIdentity" })
   originAccessIdentity?: string;
 }

@@ -9,12 +9,12 @@ type GetAlbumByIDQueryParams struct {
 	PhotosetID string `queryParam:"style=form,explode=true,name=photoset_id"`
 }
 
-type GetAlbumByIDRequest struct {
-	QueryParams GetAlbumByIDQueryParams
-}
-
 type GetAlbumByID200ApplicationJSON struct {
 	Photoset []shared.Photo `json:"photoset,omitempty"`
+}
+
+type GetAlbumByIDRequest struct {
+	QueryParams GetAlbumByIDQueryParams
 }
 
 type GetAlbumByIDResponse struct {

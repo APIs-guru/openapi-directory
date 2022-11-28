@@ -17,6 +17,8 @@ const (
 	PublisherConnectionPublisherPlatformEnumAdmob                        PublisherConnectionPublisherPlatformEnum = "ADMOB"
 )
 
+// PublisherConnection
+// An Open Bidding exchange's connection to a publisher. This is initiated by the publisher for the bidder to review. If approved by the bidder, this means that the bidder agrees to receive bid requests from the publisher.
 type PublisherConnection struct {
 	BiddingState      *PublisherConnectionBiddingStateEnum      `json:"biddingState,omitempty"`
 	CreateTime        *string                                   `json:"createTime,omitempty"`

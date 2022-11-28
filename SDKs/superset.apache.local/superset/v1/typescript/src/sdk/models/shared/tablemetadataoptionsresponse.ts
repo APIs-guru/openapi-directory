@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TableMetadataOptionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deferrable" })
+  @SpeakeasyMetadata({ data: "json, name=deferrable" })
   deferrable?: boolean;
 
-  @Metadata({ data: "json, name=initially" })
+  @SpeakeasyMetadata({ data: "json, name=initially" })
   initially?: boolean;
 
-  @Metadata({ data: "json, name=match" })
+  @SpeakeasyMetadata({ data: "json, name=match" })
   match?: boolean;
 
-  @Metadata({ data: "json, name=ondelete" })
+  @SpeakeasyMetadata({ data: "json, name=ondelete" })
   ondelete?: boolean;
 
-  @Metadata({ data: "json, name=onupdate" })
+  @SpeakeasyMetadata({ data: "json, name=onupdate" })
   onupdate?: boolean;
 }

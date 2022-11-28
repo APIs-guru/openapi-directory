@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ImportStatusEnum } from "./importstatusenum";
 // ImportTask
 /**
@@ -34,55 +34,55 @@ var ImportTask = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=applicationImportFailure" }),
+        SpeakeasyMetadata({ data: "json, name=applicationImportFailure" }),
         __metadata("design:type", Number)
     ], ImportTask.prototype, "applicationImportFailure", void 0);
     __decorate([
-        Metadata({ data: "json, name=applicationImportSuccess" }),
+        SpeakeasyMetadata({ data: "json, name=applicationImportSuccess" }),
         __metadata("design:type", Number)
     ], ImportTask.prototype, "applicationImportSuccess", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientRequestToken" }),
+        SpeakeasyMetadata({ data: "json, name=clientRequestToken" }),
         __metadata("design:type", String)
     ], ImportTask.prototype, "clientRequestToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorsAndFailedEntriesZip" }),
+        SpeakeasyMetadata({ data: "json, name=errorsAndFailedEntriesZip" }),
         __metadata("design:type", String)
     ], ImportTask.prototype, "errorsAndFailedEntriesZip", void 0);
     __decorate([
-        Metadata({ data: "json, name=importCompletionTime" }),
+        SpeakeasyMetadata({ data: "json, name=importCompletionTime" }),
         __metadata("design:type", Date)
     ], ImportTask.prototype, "importCompletionTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=importDeletedTime" }),
+        SpeakeasyMetadata({ data: "json, name=importDeletedTime" }),
         __metadata("design:type", Date)
     ], ImportTask.prototype, "importDeletedTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=importRequestTime" }),
+        SpeakeasyMetadata({ data: "json, name=importRequestTime" }),
         __metadata("design:type", Date)
     ], ImportTask.prototype, "importRequestTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=importTaskId" }),
+        SpeakeasyMetadata({ data: "json, name=importTaskId" }),
         __metadata("design:type", String)
     ], ImportTask.prototype, "importTaskId", void 0);
     __decorate([
-        Metadata({ data: "json, name=importUrl" }),
+        SpeakeasyMetadata({ data: "json, name=importUrl" }),
         __metadata("design:type", String)
     ], ImportTask.prototype, "importUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ImportTask.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=serverImportFailure" }),
+        SpeakeasyMetadata({ data: "json, name=serverImportFailure" }),
         __metadata("design:type", Number)
     ], ImportTask.prototype, "serverImportFailure", void 0);
     __decorate([
-        Metadata({ data: "json, name=serverImportSuccess" }),
+        SpeakeasyMetadata({ data: "json, name=serverImportSuccess" }),
         __metadata("design:type", Number)
     ], ImportTask.prototype, "serverImportSuccess", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], ImportTask.prototype, "status", void 0);
     return ImportTask;

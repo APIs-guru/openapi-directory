@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MatchmakingTicket } from "./matchmakingticket";
+
 
 
 // StartMatchBackfillOutput
@@ -7,6 +8,6 @@ import { MatchmakingTicket } from "./matchmakingticket";
  * Represents the returned data in response to a request operation.
 **/
 export class StartMatchBackfillOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MatchmakingTicket" })
+  @SpeakeasyMetadata({ data: "json, name=MatchmakingTicket" })
   matchmakingTicket?: MatchmakingTicket;
 }

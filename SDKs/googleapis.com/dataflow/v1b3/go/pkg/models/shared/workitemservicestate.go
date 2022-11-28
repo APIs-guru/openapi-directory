@@ -1,5 +1,7 @@
 package shared
 
+// WorkItemServiceState
+// The Dataflow service's idea of the current state of a WorkItem being processed by a worker.
 type WorkItemServiceState struct {
 	CompleteWorkStatus    *Status                  `json:"completeWorkStatus,omitempty"`
 	HarnessData           map[string]interface{}   `json:"harnessData,omitempty"`

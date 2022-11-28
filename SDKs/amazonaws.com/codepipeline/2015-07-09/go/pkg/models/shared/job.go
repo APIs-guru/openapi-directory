@@ -1,5 +1,7 @@
 package shared
 
+// Job
+// Represents information about a job.
 type Job struct {
 	AccountID *string  `json:"accountId,omitempty"`
 	Data      *JobData `json:"data,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // TimeOfDay
 /**
  * Represents a time of day. The date and time zone are either not significant or are specified elsewhere. An API may choose to allow leap seconds. Related types are google.type.Date and `google.protobuf.Timestamp`.
@@ -33,19 +33,19 @@ var TimeOfDay = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=hours" }),
+        SpeakeasyMetadata({ data: "json, name=hours" }),
         __metadata("design:type", Number)
     ], TimeOfDay.prototype, "hours", void 0);
     __decorate([
-        Metadata({ data: "json, name=minutes" }),
+        SpeakeasyMetadata({ data: "json, name=minutes" }),
         __metadata("design:type", Number)
     ], TimeOfDay.prototype, "minutes", void 0);
     __decorate([
-        Metadata({ data: "json, name=nanos" }),
+        SpeakeasyMetadata({ data: "json, name=nanos" }),
         __metadata("design:type", Number)
     ], TimeOfDay.prototype, "nanos", void 0);
     __decorate([
-        Metadata({ data: "json, name=seconds" }),
+        SpeakeasyMetadata({ data: "json, name=seconds" }),
         __metadata("design:type", Number)
     ], TimeOfDay.prototype, "seconds", void 0);
     return TimeOfDay;

@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var ReposUploadReleaseAssetServers = []string{
+var ReposUploadReleaseAssetServerList = []string{
 	"https://{origin}",
 }
 

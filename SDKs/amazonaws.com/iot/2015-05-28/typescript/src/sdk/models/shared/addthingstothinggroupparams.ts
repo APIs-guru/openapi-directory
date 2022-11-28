@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AddThingsToThingGroupParams
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Parameters used when defining a mitigation action that move a set of things to a thing group.
 **/
 export class AddThingsToThingGroupParams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=overrideDynamicGroups" })
+  @SpeakeasyMetadata({ data: "json, name=overrideDynamicGroups" })
   overrideDynamicGroups?: boolean;
 
-  @Metadata({ data: "json, name=thingGroupNames" })
+  @SpeakeasyMetadata({ data: "json, name=thingGroupNames" })
   thingGroupNames: string[];
 }

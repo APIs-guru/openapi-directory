@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudprivatecatalogproducerCatalogsTestIamPermissionsPathParams:
-    resource: str = field(default=None, metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
+    resource: str = field(metadata={'path_param': { 'field_name': 'resource', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class CloudprivatecatalogproducerCatalogsTestIamPermissionsQueryParams:
 
 @dataclass
 class CloudprivatecatalogproducerCatalogsTestIamPermissionsSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudprivatecatalogproducerCatalogsTestIamPermissionsRequest:
-    path_params: CloudprivatecatalogproducerCatalogsTestIamPermissionsPathParams = field(default=None)
-    query_params: CloudprivatecatalogproducerCatalogsTestIamPermissionsQueryParams = field(default=None)
+    path_params: CloudprivatecatalogproducerCatalogsTestIamPermissionsPathParams = field()
+    query_params: CloudprivatecatalogproducerCatalogsTestIamPermissionsQueryParams = field()
+    security: CloudprivatecatalogproducerCatalogsTestIamPermissionsSecurity = field()
     request: Optional[shared.GoogleIamV1TestIamPermissionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudprivatecatalogproducerCatalogsTestIamPermissionsSecurity = field(default=None)
     
 
 @dataclass
 class CloudprivatecatalogproducerCatalogsTestIamPermissionsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

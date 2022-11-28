@@ -18,6 +18,8 @@ type UpdateBaiduChannelHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateBaiduChannelRequestBodyBaiduChannelRequest
+// Specifies the status and settings of the Baidu (Baidu Cloud Push) channel for an application.
 type UpdateBaiduChannelRequestBodyBaiduChannelRequest struct {
 	APIKey    *string `json:"ApiKey,omitempty"`
 	Enabled   *bool   `json:"Enabled,omitempty"`

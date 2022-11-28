@@ -1,9 +1,6 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class DeleteTemplateQueryParams extends SpeakeasyBase {
     templateId: number;
-}
-export declare class DeleteTemplateRequest extends SpeakeasyBase {
-    queryParams: DeleteTemplateQueryParams;
 }
 export declare class DeleteTemplate200ApplicationJsonResponse extends SpeakeasyBase {
     success?: boolean;
@@ -56,6 +53,9 @@ export declare class DeleteTemplate422ApplicationJson extends SpeakeasyBase {
 export declare class DeleteTemplate500ApplicationJson extends SpeakeasyBase {
     error?: string;
     status?: number;
+}
+export declare class DeleteTemplateRequest extends SpeakeasyBase {
+    queryParams: DeleteTemplateQueryParams;
 }
 export declare class DeleteTemplateResponse extends SpeakeasyBase {
     contentType: string;

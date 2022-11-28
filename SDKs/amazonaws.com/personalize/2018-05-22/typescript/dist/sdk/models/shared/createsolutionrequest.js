@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SolutionConfig } from "./solutionconfig";
 var CreateSolutionRequest = /** @class */ (function (_super) {
     __extends(CreateSolutionRequest, _super);
@@ -30,31 +30,31 @@ var CreateSolutionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=datasetGroupArn" }),
+        SpeakeasyMetadata({ data: "json, name=datasetGroupArn" }),
         __metadata("design:type", String)
     ], CreateSolutionRequest.prototype, "datasetGroupArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=eventType" }),
+        SpeakeasyMetadata({ data: "json, name=eventType" }),
         __metadata("design:type", String)
     ], CreateSolutionRequest.prototype, "eventType", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], CreateSolutionRequest.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=performAutoML" }),
+        SpeakeasyMetadata({ data: "json, name=performAutoML" }),
         __metadata("design:type", Boolean)
     ], CreateSolutionRequest.prototype, "performAutoMl", void 0);
     __decorate([
-        Metadata({ data: "json, name=performHPO" }),
+        SpeakeasyMetadata({ data: "json, name=performHPO" }),
         __metadata("design:type", Boolean)
     ], CreateSolutionRequest.prototype, "performHpo", void 0);
     __decorate([
-        Metadata({ data: "json, name=recipeArn" }),
+        SpeakeasyMetadata({ data: "json, name=recipeArn" }),
         __metadata("design:type", String)
     ], CreateSolutionRequest.prototype, "recipeArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=solutionConfig" }),
+        SpeakeasyMetadata({ data: "json, name=solutionConfig" }),
         __metadata("design:type", SolutionConfig)
     ], CreateSolutionRequest.prototype, "solutionConfig", void 0);
     return CreateSolutionRequest;

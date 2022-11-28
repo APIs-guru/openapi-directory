@@ -4,11 +4,15 @@ import (
 	"time"
 )
 
+// CommentQuotedFileContent
+// The file content to which the comment refers, typically within the anchor region. For a text file, for example, this would be the text at the location of the comment.
 type CommentQuotedFileContent struct {
 	MimeType *string `json:"mimeType,omitempty"`
 	Value    *string `json:"value,omitempty"`
 }
 
+// Comment
+// A comment on a file.
 type Comment struct {
 	Anchor            *string                   `json:"anchor,omitempty"`
 	Author            *User                     `json:"author,omitempty"`

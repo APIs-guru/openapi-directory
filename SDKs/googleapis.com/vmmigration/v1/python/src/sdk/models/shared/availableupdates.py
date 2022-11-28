@@ -1,13 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import applianceversion
-from . import applianceversion
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AvailableUpdates:
-    in_place_update: Optional[applianceversion.ApplianceVersion] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inPlaceUpdate' }})
-    new_deployable_appliance: Optional[applianceversion.ApplianceVersion] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'newDeployableAppliance' }})
+    r"""AvailableUpdates
+    Holds informatiom about the available versions for upgrade.
+    """
+    
+    in_place_update: Optional[ApplianceVersion] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inPlaceUpdate') }})
+    new_deployable_appliance: Optional[ApplianceVersion] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('newDeployableAppliance') }})
     

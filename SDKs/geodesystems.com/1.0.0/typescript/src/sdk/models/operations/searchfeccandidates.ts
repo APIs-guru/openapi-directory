@@ -1,139 +1,140 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SearchFeccandidatesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=changedate.from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=changedate.from" })
   changedateFrom?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=changedate.to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=changedate.to" })
   changedateTo?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createdate.from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdate.from" })
   createdateFrom?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=createdate.to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=createdate.to" })
   createdateTo?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=description" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=description" })
   description?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filesuffix" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filesuffix" })
   filesuffix?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fromdate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fromdate" })
   fromdate?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=group" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=group" })
   group?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=max" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max" })
   max?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxlatitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxlatitude" })
   maxlatitude?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=maxlongitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxlongitude" })
   maxlongitude?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=minlatitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minlatitude" })
   minlatitude?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=minlongitude" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minlongitude" })
   minlongitude?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.beginning_cash" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.beginning_cash" })
   searchDbFeccandidatesBeginningCash?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.candidate_loan_repayments" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.candidate_loan_repayments" })
   searchDbFeccandidatesCandidateLoanRepayments?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.committee_refunds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.committee_refunds" })
   searchDbFeccandidatesCommitteeRefunds?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.contributions_from_candidate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.contributions_from_candidate" })
   searchDbFeccandidatesContributionsFromCandidate?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.contributions_from_other_committees" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.contributions_from_other_committees" })
   searchDbFeccandidatesContributionsFromOtherCommittees?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.contributions_from_party_committees" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.contributions_from_party_committees" })
   searchDbFeccandidatesContributionsFromPartyCommittees?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.coverage_end_date" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.coverage_end_date" })
   searchDbFeccandidatesCoverageEndDate?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.debts_owed_by" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.debts_owed_by" })
   searchDbFeccandidatesDebtsOwedBy?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.district" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.district" })
   searchDbFeccandidatesDistrict?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.ending_cash" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.ending_cash" })
   searchDbFeccandidatesEndingCash?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.gender" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.gender" })
   searchDbFeccandidatesGender?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.individual_refunds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.individual_refunds" })
   searchDbFeccandidatesIndividualRefunds?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.loans_from_candidates" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.loans_from_candidates" })
   searchDbFeccandidatesLoansFromCandidates?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.name" })
   searchDbFeccandidatesName?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.other_loan_repayments" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.other_loan_repayments" })
   searchDbFeccandidatesOtherLoanRepayments?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.other_loans" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.other_loans" })
   searchDbFeccandidatesOtherLoans?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.party" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.party" })
   searchDbFeccandidatesParty?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.state" })
   searchDbFeccandidatesState?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.total_disbursements" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.total_disbursements" })
   searchDbFeccandidatesTotalDisbursements?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.total_indivual_contributions" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.total_indivual_contributions" })
   searchDbFeccandidatesTotalIndivualContributions?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.total_receipts" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.total_receipts" })
   searchDbFeccandidatesTotalReceipts?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.transfers_from_committees" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.transfers_from_committees" })
   searchDbFeccandidatesTransfersFromCommittees?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.transfers_to_committees" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search.db_feccandidates.transfers_to_committees" })
   searchDbFeccandidatesTransfersToCommittees?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=skip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=skip" })
   skip?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=text" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=text" })
   text?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=todate" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=todate" })
   todate?: Date;
 }
 
 
 export class SearchFeccandidatesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SearchFeccandidatesQueryParams;
 }
 
 
 export class SearchFeccandidatesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

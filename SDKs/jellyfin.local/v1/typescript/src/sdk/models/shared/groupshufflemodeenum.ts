@@ -1,6 +1,7 @@
 
 
+
 export enum GroupShuffleModeEnum {
-    Sorted = "Sorted"
-,    Shuffle = "Shuffle"
+    Sorted = "Sorted",
+    Shuffle = "Shuffle"
 }

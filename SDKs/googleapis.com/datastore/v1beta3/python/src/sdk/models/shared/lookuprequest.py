@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import key
-from . import readoptions
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LookupRequest:
-    keys: Optional[List[key.Key]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keys' }})
-    read_options: Optional[readoptions.ReadOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'readOptions' }})
+    r"""LookupRequest
+    The request for Datastore.Lookup.
+    """
+    
+    keys: Optional[List[Key]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('keys') }})
+    read_options: Optional[ReadOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('readOptions') }})
     

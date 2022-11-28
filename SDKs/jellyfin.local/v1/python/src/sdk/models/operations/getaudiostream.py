@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetAudioStreamPathParams:
-    item_id: str = field(default=None, metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
+    item_id: str = field(metadata={'path_param': { 'field_name': 'itemId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -62,13 +63,13 @@ class GetAudioStreamQueryParams:
 
 @dataclass
 class GetAudioStreamRequest:
-    path_params: GetAudioStreamPathParams = field(default=None)
-    query_params: GetAudioStreamQueryParams = field(default=None)
+    path_params: GetAudioStreamPathParams = field()
+    query_params: GetAudioStreamQueryParams = field()
     
 
 @dataclass
 class GetAudioStreamResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_audio_stream_200_audio_wildcard_binary_string: Optional[bytes] = field(default=None)
-    status_code: int = field(default=None)
     

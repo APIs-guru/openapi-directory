@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetSpRatingsQueryParams = /** @class */ (function (_super) {
     __extends(GetSpRatingsQueryParams, _super);
@@ -30,11 +30,11 @@ var GetSpRatingsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=team" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" }),
         __metadata("design:type", String)
     ], GetSpRatingsQueryParams.prototype, "team", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=year" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" }),
         __metadata("design:type", Number)
     ], GetSpRatingsQueryParams.prototype, "year", void 0);
     return GetSpRatingsQueryParams;
@@ -46,7 +46,7 @@ var GetSpRatingsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSpRatingsQueryParams)
     ], GetSpRatingsRequest.prototype, "queryParams", void 0);
     return GetSpRatingsRequest;
@@ -58,15 +58,15 @@ var GetSpRatingsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSpRatingsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSpRatingsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.TeamSpRating }),
+        SpeakeasyMetadata({ elemType: shared.TeamSpRating }),
         __metadata("design:type", Array)
     ], GetSpRatingsResponse.prototype, "teamSpRatings", void 0);
     return GetSpRatingsResponse;

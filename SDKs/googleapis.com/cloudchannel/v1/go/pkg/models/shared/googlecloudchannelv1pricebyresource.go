@@ -13,6 +13,8 @@ const (
 	GoogleCloudChannelV1PriceByResourceResourceTypeEnumSubscription            GoogleCloudChannelV1PriceByResourceResourceTypeEnum = "SUBSCRIPTION"
 )
 
+// GoogleCloudChannelV1PriceByResource
+// Represents price by resource type.
 type GoogleCloudChannelV1PriceByResource struct {
 	Price        *GoogleCloudChannelV1Price                           `json:"price,omitempty"`
 	PricePhases  []GoogleCloudChannelV1PricePhase                     `json:"pricePhases,omitempty"`

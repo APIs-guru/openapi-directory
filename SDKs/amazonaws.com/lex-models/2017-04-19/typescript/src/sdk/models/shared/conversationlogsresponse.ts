@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LogSettingsResponse } from "./logsettingsresponse";
+
 
 
 // ConversationLogsResponse
@@ -8,9 +8,9 @@ import { LogSettingsResponse } from "./logsettingsresponse";
  * Contains information about conversation log settings.
 **/
 export class ConversationLogsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=iamRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=iamRoleArn" })
   iamRoleArn?: string;
 
-  @Metadata({ data: "json, name=logSettings", elemType: shared.LogSettingsResponse })
+  @SpeakeasyMetadata({ data: "json, name=logSettings", elemType: LogSettingsResponse })
   logSettings?: LogSettingsResponse[];
 }

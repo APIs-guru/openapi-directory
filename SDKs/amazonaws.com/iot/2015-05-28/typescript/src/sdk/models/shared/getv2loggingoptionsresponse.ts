@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LogLevelEnum } from "./loglevelenum";
 
 
+
 export class GetV2LoggingOptionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultLogLevel" })
+  @SpeakeasyMetadata({ data: "json, name=defaultLogLevel" })
   defaultLogLevel?: LogLevelEnum;
 
-  @Metadata({ data: "json, name=disableAllLogs" })
+  @SpeakeasyMetadata({ data: "json, name=disableAllLogs" })
   disableAllLogs?: boolean;
 
-  @Metadata({ data: "json, name=roleArn" })
+  @SpeakeasyMetadata({ data: "json, name=roleArn" })
   roleArn?: string;
 }

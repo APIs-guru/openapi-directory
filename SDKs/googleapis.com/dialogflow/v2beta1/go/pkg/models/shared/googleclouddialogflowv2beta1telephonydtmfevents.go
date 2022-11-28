@@ -22,6 +22,8 @@ const (
 	GoogleCloudDialogflowV2beta1TelephonyDtmfEventsDtmfEventsEnumDtmfPound                GoogleCloudDialogflowV2beta1TelephonyDtmfEventsDtmfEventsEnum = "DTMF_POUND"
 )
 
+// GoogleCloudDialogflowV2beta1TelephonyDtmfEvents
+// A wrapper of repeated TelephonyDtmf digits.
 type GoogleCloudDialogflowV2beta1TelephonyDtmfEvents struct {
 	DtmfEvents []GoogleCloudDialogflowV2beta1TelephonyDtmfEventsDtmfEventsEnum `json:"dtmfEvents,omitempty"`
 }

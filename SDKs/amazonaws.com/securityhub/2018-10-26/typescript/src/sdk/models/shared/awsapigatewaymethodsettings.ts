@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsApiGatewayMethodSettings
@@ -6,39 +7,39 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines settings for a method for the stage.
 **/
 export class AwsApiGatewayMethodSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CacheDataEncrypted" })
+  @SpeakeasyMetadata({ data: "json, name=CacheDataEncrypted" })
   cacheDataEncrypted?: boolean;
 
-  @Metadata({ data: "json, name=CacheTtlInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=CacheTtlInSeconds" })
   cacheTtlInSeconds?: number;
 
-  @Metadata({ data: "json, name=CachingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=CachingEnabled" })
   cachingEnabled?: boolean;
 
-  @Metadata({ data: "json, name=DataTraceEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=DataTraceEnabled" })
   dataTraceEnabled?: boolean;
 
-  @Metadata({ data: "json, name=HttpMethod" })
+  @SpeakeasyMetadata({ data: "json, name=HttpMethod" })
   httpMethod?: string;
 
-  @Metadata({ data: "json, name=LoggingLevel" })
+  @SpeakeasyMetadata({ data: "json, name=LoggingLevel" })
   loggingLevel?: string;
 
-  @Metadata({ data: "json, name=MetricsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=MetricsEnabled" })
   metricsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=RequireAuthorizationForCacheControl" })
+  @SpeakeasyMetadata({ data: "json, name=RequireAuthorizationForCacheControl" })
   requireAuthorizationForCacheControl?: boolean;
 
-  @Metadata({ data: "json, name=ResourcePath" })
+  @SpeakeasyMetadata({ data: "json, name=ResourcePath" })
   resourcePath?: string;
 
-  @Metadata({ data: "json, name=ThrottlingBurstLimit" })
+  @SpeakeasyMetadata({ data: "json, name=ThrottlingBurstLimit" })
   throttlingBurstLimit?: number;
 
-  @Metadata({ data: "json, name=ThrottlingRateLimit" })
+  @SpeakeasyMetadata({ data: "json, name=ThrottlingRateLimit" })
   throttlingRateLimit?: number;
 
-  @Metadata({ data: "json, name=UnauthorizedCacheControlHeaderStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=UnauthorizedCacheControlHeaderStrategy" })
   unauthorizedCacheControlHeaderStrategy?: string;
 }

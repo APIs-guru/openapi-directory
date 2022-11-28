@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PlaceGetByGeoQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=activeOnly" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=activeOnly" })
   activeOnly?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=categories" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=categories" })
   categories?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeChildren" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeChildren" })
   includeChildren?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=numberOfPlacesToReturn" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=numberOfPlacesToReturn" })
   numberOfPlacesToReturn?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=placeGeo.lat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=placeGeo.lat" })
   placeGeoLat?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=placeGeo.lon" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=placeGeo.lon" })
   placeGeoLon?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=placeGeo.neLat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=placeGeo.neLat" })
   placeGeoNeLat?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=placeGeo.neLon" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=placeGeo.neLon" })
   placeGeoNeLon?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=placeGeo.swLat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=placeGeo.swLat" })
   placeGeoSwLat?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=placeGeo.swLon" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=placeGeo.swLon" })
   placeGeoSwLon?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=radius" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=radius" })
   radius?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: string[];
 }
 
 
 export class PlaceGetByGeoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PlaceGetByGeoQueryParams;
 }
 
 
 export class PlaceGetByGeoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TflApiPresentationEntitiesStopPoint })
+  @SpeakeasyMetadata({ elemType: shared.TflApiPresentationEntitiesStopPoint })
   tflApiPresentationEntitiesStopPoints?: shared.TflApiPresentationEntitiesStopPoint[];
 }

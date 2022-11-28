@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // LoginResponse
 /**
  * Payload of successful login
@@ -33,23 +33,23 @@ var LoginResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=admin" }),
+        SpeakeasyMetadata({ data: "json, name=admin" }),
         __metadata("design:type", Boolean)
     ], LoginResponse.prototype, "admin", void 0);
     __decorate([
-        Metadata({ data: "json, name=login_id" }),
+        SpeakeasyMetadata({ data: "json, name=login_id" }),
         __metadata("design:type", Number)
     ], LoginResponse.prototype, "loginId", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], LoginResponse.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=read_only" }),
+        SpeakeasyMetadata({ data: "json, name=read_only" }),
         __metadata("design:type", Boolean)
     ], LoginResponse.prototype, "readOnly", void 0);
     __decorate([
-        Metadata({ data: "json, name=token" }),
+        SpeakeasyMetadata({ data: "json, name=token" }),
         __metadata("design:type", String)
     ], LoginResponse.prototype, "token", void 0);
     return LoginResponse;

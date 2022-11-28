@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MybusinessAccountsLocationsCreatePathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class MybusinessAccountsLocationsCreateQueryParams:
 
 @dataclass
 class MybusinessAccountsLocationsCreateRequest:
-    path_params: MybusinessAccountsLocationsCreatePathParams = field(default=None)
-    query_params: MybusinessAccountsLocationsCreateQueryParams = field(default=None)
-    request: Optional[shared.Location] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: MybusinessAccountsLocationsCreatePathParams = field()
+    query_params: MybusinessAccountsLocationsCreateQueryParams = field()
+    request: Optional[shared.LocationInput] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MybusinessAccountsLocationsCreateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     location: Optional[shared.Location] = field(default=None)
-    status_code: int = field(default=None)
     

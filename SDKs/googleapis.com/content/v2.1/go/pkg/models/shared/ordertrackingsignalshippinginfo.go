@@ -8,6 +8,8 @@ const (
 	OrderTrackingSignalShippingInfoShippingStatusEnumDelivered                OrderTrackingSignalShippingInfoShippingStatusEnum = "DELIVERED"
 )
 
+// OrderTrackingSignalShippingInfo
+// The shipping information for the order.
 type OrderTrackingSignalShippingInfo struct {
 	ActualDeliveryTime          *DateTime                                          `json:"actualDeliveryTime,omitempty"`
 	CarrierName                 *string                                            `json:"carrierName,omitempty"`

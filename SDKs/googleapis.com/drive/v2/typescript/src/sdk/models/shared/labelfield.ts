@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { User } from "./user";
+
 
 
 // LabelField
@@ -8,27 +8,27 @@ import { User } from "./user";
  * Representation of a label field.
 **/
 export class LabelField extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dateString" })
+  @SpeakeasyMetadata({ data: "json, name=dateString" })
   dateString?: Date[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=integer" })
+  @SpeakeasyMetadata({ data: "json, name=integer" })
   integer?: string[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=selection" })
+  @SpeakeasyMetadata({ data: "json, name=selection" })
   selection?: string[];
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string[];
 
-  @Metadata({ data: "json, name=user", elemType: shared.User })
+  @SpeakeasyMetadata({ data: "json, name=user", elemType: User })
   user?: User[];
 
-  @Metadata({ data: "json, name=valueType" })
+  @SpeakeasyMetadata({ data: "json, name=valueType" })
   valueType?: string;
 }

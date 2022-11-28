@@ -12,11 +12,6 @@ type GetDatabaseExportSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetDatabaseExportRequest struct {
-	QueryParams GetDatabaseExportQueryParams
-	Security    GetDatabaseExportSecurity
-}
-
 type GetDatabaseExport401ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -27,6 +22,11 @@ type GetDatabaseExport404ApplicationJSON struct {
 
 type GetDatabaseExport500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetDatabaseExportRequest struct {
+	QueryParams GetDatabaseExportQueryParams
+	Security    GetDatabaseExportSecurity
 }
 
 type GetDatabaseExportResponse struct {

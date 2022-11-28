@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // H264CodecSettings
@@ -6,63 +7,63 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * H264 codec settings.
 **/
 export class H264CodecSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowOpenGop" })
+  @SpeakeasyMetadata({ data: "json, name=allowOpenGop" })
   allowOpenGop?: boolean;
 
-  @Metadata({ data: "json, name=aqStrength" })
+  @SpeakeasyMetadata({ data: "json, name=aqStrength" })
   aqStrength?: number;
 
-  @Metadata({ data: "json, name=bFrameCount" })
+  @SpeakeasyMetadata({ data: "json, name=bFrameCount" })
   bFrameCount?: number;
 
-  @Metadata({ data: "json, name=bPyramid" })
+  @SpeakeasyMetadata({ data: "json, name=bPyramid" })
   bPyramid?: boolean;
 
-  @Metadata({ data: "json, name=bitrateBps" })
+  @SpeakeasyMetadata({ data: "json, name=bitrateBps" })
   bitrateBps?: number;
 
-  @Metadata({ data: "json, name=crfLevel" })
+  @SpeakeasyMetadata({ data: "json, name=crfLevel" })
   crfLevel?: number;
 
-  @Metadata({ data: "json, name=enableTwoPass" })
+  @SpeakeasyMetadata({ data: "json, name=enableTwoPass" })
   enableTwoPass?: boolean;
 
-  @Metadata({ data: "json, name=entropyCoder" })
+  @SpeakeasyMetadata({ data: "json, name=entropyCoder" })
   entropyCoder?: string;
 
-  @Metadata({ data: "json, name=frameRate" })
+  @SpeakeasyMetadata({ data: "json, name=frameRate" })
   frameRate?: number;
 
-  @Metadata({ data: "json, name=gopDuration" })
+  @SpeakeasyMetadata({ data: "json, name=gopDuration" })
   gopDuration?: string;
 
-  @Metadata({ data: "json, name=gopFrameCount" })
+  @SpeakeasyMetadata({ data: "json, name=gopFrameCount" })
   gopFrameCount?: number;
 
-  @Metadata({ data: "json, name=heightPixels" })
+  @SpeakeasyMetadata({ data: "json, name=heightPixels" })
   heightPixels?: number;
 
-  @Metadata({ data: "json, name=pixelFormat" })
+  @SpeakeasyMetadata({ data: "json, name=pixelFormat" })
   pixelFormat?: string;
 
-  @Metadata({ data: "json, name=preset" })
+  @SpeakeasyMetadata({ data: "json, name=preset" })
   preset?: string;
 
-  @Metadata({ data: "json, name=profile" })
+  @SpeakeasyMetadata({ data: "json, name=profile" })
   profile?: string;
 
-  @Metadata({ data: "json, name=rateControlMode" })
+  @SpeakeasyMetadata({ data: "json, name=rateControlMode" })
   rateControlMode?: string;
 
-  @Metadata({ data: "json, name=tune" })
+  @SpeakeasyMetadata({ data: "json, name=tune" })
   tune?: string;
 
-  @Metadata({ data: "json, name=vbvFullnessBits" })
+  @SpeakeasyMetadata({ data: "json, name=vbvFullnessBits" })
   vbvFullnessBits?: number;
 
-  @Metadata({ data: "json, name=vbvSizeBits" })
+  @SpeakeasyMetadata({ data: "json, name=vbvSizeBits" })
   vbvSizeBits?: number;
 
-  @Metadata({ data: "json, name=widthPixels" })
+  @SpeakeasyMetadata({ data: "json, name=widthPixels" })
   widthPixels?: number;
 }

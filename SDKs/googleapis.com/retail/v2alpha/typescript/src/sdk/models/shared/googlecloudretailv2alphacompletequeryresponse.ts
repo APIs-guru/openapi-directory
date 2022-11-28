@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudRetailV2alphaCompleteQueryResponseAttributeResult } from "./googlecloudretailv2alphacompletequeryresponseattributeresult";
 import { GoogleCloudRetailV2alphaCompleteQueryResponseCompletionResult } from "./googlecloudretailv2alphacompletequeryresponsecompletionresult";
 import { GoogleCloudRetailV2alphaCompleteQueryResponseRecentSearchResult } from "./googlecloudretailv2alphacompletequeryresponserecentsearchresult";
+
 
 
 // GoogleCloudRetailV2alphaCompleteQueryResponse
@@ -9,12 +10,15 @@ import { GoogleCloudRetailV2alphaCompleteQueryResponseRecentSearchResult } from 
  * Response of the auto-complete query.
 **/
 export class GoogleCloudRetailV2alphaCompleteQueryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributionToken" })
+  @SpeakeasyMetadata({ data: "json, name=attributeResults", elemType: GoogleCloudRetailV2alphaCompleteQueryResponseAttributeResult })
+  attributeResults?: Map<string, GoogleCloudRetailV2alphaCompleteQueryResponseAttributeResult>;
+
+  @SpeakeasyMetadata({ data: "json, name=attributionToken" })
   attributionToken?: string;
 
-  @Metadata({ data: "json, name=completionResults", elemType: shared.GoogleCloudRetailV2alphaCompleteQueryResponseCompletionResult })
+  @SpeakeasyMetadata({ data: "json, name=completionResults", elemType: GoogleCloudRetailV2alphaCompleteQueryResponseCompletionResult })
   completionResults?: GoogleCloudRetailV2alphaCompleteQueryResponseCompletionResult[];
 
-  @Metadata({ data: "json, name=recentSearchResults", elemType: shared.GoogleCloudRetailV2alphaCompleteQueryResponseRecentSearchResult })
+  @SpeakeasyMetadata({ data: "json, name=recentSearchResults", elemType: GoogleCloudRetailV2alphaCompleteQueryResponseRecentSearchResult })
   recentSearchResults?: GoogleCloudRetailV2alphaCompleteQueryResponseRecentSearchResult[];
 }

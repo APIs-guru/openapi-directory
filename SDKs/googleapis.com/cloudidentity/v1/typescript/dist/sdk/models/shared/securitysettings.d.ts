@@ -1,9 +1,8 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MemberRestriction } from "./memberrestriction";
 /**
  * The definition of security settings.
 **/
-export declare class SecuritySettings extends SpeakeasyBase {
+export declare class SecuritySettingsInput extends SpeakeasyBase {
     memberRestriction?: MemberRestriction;
-    name?: string;
 }

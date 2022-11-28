@@ -31,7 +31,7 @@ type RedisProjectsLocationsInstancesCreateSecurity struct {
 type RedisProjectsLocationsInstancesCreateRequest struct {
 	PathParams  RedisProjectsLocationsInstancesCreatePathParams
 	QueryParams RedisProjectsLocationsInstancesCreateQueryParams
-	Request     *shared.Instance `request:"mediaType=application/json"`
+	Request     *shared.InstanceInput `request:"mediaType=application/json"`
 	Security    RedisProjectsLocationsInstancesCreateSecurity
 }
 

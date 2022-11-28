@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AppSpecification
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration to run a processing job in a specified container image.
 **/
 export class AppSpecification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContainerArguments" })
+  @SpeakeasyMetadata({ data: "json, name=ContainerArguments" })
   containerArguments?: string[];
 
-  @Metadata({ data: "json, name=ContainerEntrypoint" })
+  @SpeakeasyMetadata({ data: "json, name=ContainerEntrypoint" })
   containerEntrypoint?: string[];
 
-  @Metadata({ data: "json, name=ImageUri" })
+  @SpeakeasyMetadata({ data: "json, name=ImageUri" })
   imageUri: string;
 }

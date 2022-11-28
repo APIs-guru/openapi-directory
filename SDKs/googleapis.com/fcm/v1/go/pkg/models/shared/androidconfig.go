@@ -7,6 +7,8 @@ const (
 	AndroidConfigPriorityEnumHigh   AndroidConfigPriorityEnum = "HIGH"
 )
 
+// AndroidConfig
+// Android specific options for messages sent through [FCM connection server](https://goo.gl/4GLdUl).
 type AndroidConfig struct {
 	CollapseKey           *string                    `json:"collapseKey,omitempty"`
 	Data                  map[string]string          `json:"data,omitempty"`

@@ -22,28 +22,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthenticationMode } from "./authenticationmode";
+import { Tag } from "./tag";
 var CreateUserRequest = /** @class */ (function (_super) {
     __extends(CreateUserRequest, _super);
     function CreateUserRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AccessString" }),
+        SpeakeasyMetadata({ data: "json, name=AccessString" }),
         __metadata("design:type", String)
     ], CreateUserRequest.prototype, "accessString", void 0);
     __decorate([
-        Metadata({ data: "json, name=AuthenticationMode" }),
+        SpeakeasyMetadata({ data: "json, name=AuthenticationMode" }),
         __metadata("design:type", AuthenticationMode)
     ], CreateUserRequest.prototype, "authenticationMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateUserRequest.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=UserName" }),
+        SpeakeasyMetadata({ data: "json, name=UserName" }),
         __metadata("design:type", String)
     ], CreateUserRequest.prototype, "userName", void 0);
     return CreateUserRequest;

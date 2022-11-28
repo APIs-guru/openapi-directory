@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetFindingPagePathParams:
-    scan_id: int = field(default=None, metadata={'path_param': { 'field_name': 'scanId', 'style': 'simple', 'explode': False }})
+    scan_id: int = field(metadata={'path_param': { 'field_name': 'scanId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetFindingPageRequest:
-    path_params: GetFindingPagePathParams = field(default=None)
+    path_params: GetFindingPagePathParams = field()
     
 
 @dataclass
 class GetFindingPageResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     findings: Optional[List[shared.Findings]] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,15 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Any
 from dataclasses_json import dataclass_json
-from . import inqueryparam
-from . import inheader
-from . import incookie
-from . import mappingsettings
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TransformSettings:
-    location: Any = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    mapping_settings: mappingsettings.MappingSettings = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mappingSettings' }})
+    r"""TransformSettings
+    Settings to transform a JWT token and its location
+    """
+    
+    location: Any = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    mapping_settings: MappingSettings = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('mappingSettings') }})
     

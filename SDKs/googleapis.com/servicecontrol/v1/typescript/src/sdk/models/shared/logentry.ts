@@ -1,18 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HttpRequest } from "./httprequest";
 import { LogEntryOperation } from "./logentryoperation";
 import { LogEntrySourceLocation } from "./logentrysourcelocation";
 
+
 export enum LogEntrySeverityEnum {
-    Default = "DEFAULT"
-,    Debug = "DEBUG"
-,    Info = "INFO"
-,    Notice = "NOTICE"
-,    Warning = "WARNING"
-,    Error = "ERROR"
-,    Critical = "CRITICAL"
-,    Alert = "ALERT"
-,    Emergency = "EMERGENCY"
+    Default = "DEFAULT",
+    Debug = "DEBUG",
+    Info = "INFO",
+    Notice = "NOTICE",
+    Warning = "WARNING",
+    Error = "ERROR",
+    Critical = "CRITICAL",
+    Alert = "ALERT",
+    Emergency = "EMERGENCY"
 }
 
 
@@ -21,39 +22,39 @@ export enum LogEntrySeverityEnum {
  * An individual log entry.
 **/
 export class LogEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=httpRequest" })
+  @SpeakeasyMetadata({ data: "json, name=httpRequest" })
   httpRequest?: HttpRequest;
 
-  @Metadata({ data: "json, name=insertId" })
+  @SpeakeasyMetadata({ data: "json, name=insertId" })
   insertId?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=operation" })
+  @SpeakeasyMetadata({ data: "json, name=operation" })
   operation?: LogEntryOperation;
 
-  @Metadata({ data: "json, name=protoPayload" })
+  @SpeakeasyMetadata({ data: "json, name=protoPayload" })
   protoPayload?: Map<string, any>;
 
-  @Metadata({ data: "json, name=severity" })
+  @SpeakeasyMetadata({ data: "json, name=severity" })
   severity?: LogEntrySeverityEnum;
 
-  @Metadata({ data: "json, name=sourceLocation" })
+  @SpeakeasyMetadata({ data: "json, name=sourceLocation" })
   sourceLocation?: LogEntrySourceLocation;
 
-  @Metadata({ data: "json, name=structPayload" })
+  @SpeakeasyMetadata({ data: "json, name=structPayload" })
   structPayload?: Map<string, any>;
 
-  @Metadata({ data: "json, name=textPayload" })
+  @SpeakeasyMetadata({ data: "json, name=textPayload" })
   textPayload?: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: string;
 
-  @Metadata({ data: "json, name=trace" })
+  @SpeakeasyMetadata({ data: "json, name=trace" })
   trace?: string;
 }

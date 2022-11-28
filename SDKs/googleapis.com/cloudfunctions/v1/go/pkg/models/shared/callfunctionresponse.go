@@ -1,5 +1,7 @@
 package shared
 
+// CallFunctionResponse
+// Response of `CallFunction` method.
 type CallFunctionResponse struct {
 	Error       *string `json:"error,omitempty"`
 	ExecutionID *string `json:"executionId,omitempty"`

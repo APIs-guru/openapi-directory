@@ -8,6 +8,8 @@ const (
 	EndpointNetworkTypeEnumNonGcpNetwork          EndpointNetworkTypeEnum = "NON_GCP_NETWORK"
 )
 
+// Endpoint
+// Source or destination of the Connectivity Test.
 type Endpoint struct {
 	CloudFunction    *CloudFunctionEndpoint   `json:"cloudFunction,omitempty"`
 	CloudSQLInstance *string                  `json:"cloudSqlInstance,omitempty"`

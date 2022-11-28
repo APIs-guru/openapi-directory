@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Alias } from "./alias";
 import { WindowsAuditLogConfiguration } from "./windowsauditlogconfiguration";
 import { WindowsDeploymentTypeEnum } from "./windowsdeploymenttypeenum";
@@ -7,50 +6,51 @@ import { FileSystemMaintenanceOperationEnum } from "./filesystemmaintenanceopera
 import { SelfManagedActiveDirectoryAttributes } from "./selfmanagedactivedirectoryattributes";
 
 
+
 // WindowsFileSystemConfiguration
 /** 
  * The configuration for this Microsoft Windows file system.
 **/
 export class WindowsFileSystemConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActiveDirectoryId" })
+  @SpeakeasyMetadata({ data: "json, name=ActiveDirectoryId" })
   activeDirectoryId?: string;
 
-  @Metadata({ data: "json, name=Aliases", elemType: shared.Alias })
+  @SpeakeasyMetadata({ data: "json, name=Aliases", elemType: Alias })
   aliases?: Alias[];
 
-  @Metadata({ data: "json, name=AuditLogConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=AuditLogConfiguration" })
   auditLogConfiguration?: WindowsAuditLogConfiguration;
 
-  @Metadata({ data: "json, name=AutomaticBackupRetentionDays" })
+  @SpeakeasyMetadata({ data: "json, name=AutomaticBackupRetentionDays" })
   automaticBackupRetentionDays?: number;
 
-  @Metadata({ data: "json, name=CopyTagsToBackups" })
+  @SpeakeasyMetadata({ data: "json, name=CopyTagsToBackups" })
   copyTagsToBackups?: boolean;
 
-  @Metadata({ data: "json, name=DailyAutomaticBackupStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=DailyAutomaticBackupStartTime" })
   dailyAutomaticBackupStartTime?: string;
 
-  @Metadata({ data: "json, name=DeploymentType" })
+  @SpeakeasyMetadata({ data: "json, name=DeploymentType" })
   deploymentType?: WindowsDeploymentTypeEnum;
 
-  @Metadata({ data: "json, name=MaintenanceOperationsInProgress" })
+  @SpeakeasyMetadata({ data: "json, name=MaintenanceOperationsInProgress" })
   maintenanceOperationsInProgress?: FileSystemMaintenanceOperationEnum[];
 
-  @Metadata({ data: "json, name=PreferredFileServerIp" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredFileServerIp" })
   preferredFileServerIp?: string;
 
-  @Metadata({ data: "json, name=PreferredSubnetId" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredSubnetId" })
   preferredSubnetId?: string;
 
-  @Metadata({ data: "json, name=RemoteAdministrationEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=RemoteAdministrationEndpoint" })
   remoteAdministrationEndpoint?: string;
 
-  @Metadata({ data: "json, name=SelfManagedActiveDirectoryConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=SelfManagedActiveDirectoryConfiguration" })
   selfManagedActiveDirectoryConfiguration?: SelfManagedActiveDirectoryAttributes;
 
-  @Metadata({ data: "json, name=ThroughputCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=ThroughputCapacity" })
   throughputCapacity?: number;
 
-  @Metadata({ data: "json, name=WeeklyMaintenanceStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=WeeklyMaintenanceStartTime" })
   weeklyMaintenanceStartTime?: string;
 }

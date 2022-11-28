@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SafeguardPolicyEnum } from "./safeguardpolicyenum";
 // MicrosoftSqlServerSettings
 /**
@@ -34,59 +34,59 @@ var MicrosoftSqlServerSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BcpPacketSize" }),
+        SpeakeasyMetadata({ data: "json, name=BcpPacketSize" }),
         __metadata("design:type", Number)
     ], MicrosoftSqlServerSettings.prototype, "bcpPacketSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=ControlTablesFileGroup" }),
+        SpeakeasyMetadata({ data: "json, name=ControlTablesFileGroup" }),
         __metadata("design:type", String)
     ], MicrosoftSqlServerSettings.prototype, "controlTablesFileGroup", void 0);
     __decorate([
-        Metadata({ data: "json, name=DatabaseName" }),
+        SpeakeasyMetadata({ data: "json, name=DatabaseName" }),
         __metadata("design:type", String)
     ], MicrosoftSqlServerSettings.prototype, "databaseName", void 0);
     __decorate([
-        Metadata({ data: "json, name=Password" }),
+        SpeakeasyMetadata({ data: "json, name=Password" }),
         __metadata("design:type", String)
     ], MicrosoftSqlServerSettings.prototype, "password", void 0);
     __decorate([
-        Metadata({ data: "json, name=Port" }),
+        SpeakeasyMetadata({ data: "json, name=Port" }),
         __metadata("design:type", Number)
     ], MicrosoftSqlServerSettings.prototype, "port", void 0);
     __decorate([
-        Metadata({ data: "json, name=QuerySingleAlwaysOnNode" }),
+        SpeakeasyMetadata({ data: "json, name=QuerySingleAlwaysOnNode" }),
         __metadata("design:type", Boolean)
     ], MicrosoftSqlServerSettings.prototype, "querySingleAlwaysOnNode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReadBackupOnly" }),
+        SpeakeasyMetadata({ data: "json, name=ReadBackupOnly" }),
         __metadata("design:type", Boolean)
     ], MicrosoftSqlServerSettings.prototype, "readBackupOnly", void 0);
     __decorate([
-        Metadata({ data: "json, name=SafeguardPolicy" }),
+        SpeakeasyMetadata({ data: "json, name=SafeguardPolicy" }),
         __metadata("design:type", String)
     ], MicrosoftSqlServerSettings.prototype, "safeguardPolicy", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretsManagerAccessRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=SecretsManagerAccessRoleArn" }),
         __metadata("design:type", String)
     ], MicrosoftSqlServerSettings.prototype, "secretsManagerAccessRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=SecretsManagerSecretId" }),
+        SpeakeasyMetadata({ data: "json, name=SecretsManagerSecretId" }),
         __metadata("design:type", String)
     ], MicrosoftSqlServerSettings.prototype, "secretsManagerSecretId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ServerName" }),
+        SpeakeasyMetadata({ data: "json, name=ServerName" }),
         __metadata("design:type", String)
     ], MicrosoftSqlServerSettings.prototype, "serverName", void 0);
     __decorate([
-        Metadata({ data: "json, name=UseBcpFullLoad" }),
+        SpeakeasyMetadata({ data: "json, name=UseBcpFullLoad" }),
         __metadata("design:type", Boolean)
     ], MicrosoftSqlServerSettings.prototype, "useBcpFullLoad", void 0);
     __decorate([
-        Metadata({ data: "json, name=UseThirdPartyBackupDevice" }),
+        SpeakeasyMetadata({ data: "json, name=UseThirdPartyBackupDevice" }),
         __metadata("design:type", Boolean)
     ], MicrosoftSqlServerSettings.prototype, "useThirdPartyBackupDevice", void 0);
     __decorate([
-        Metadata({ data: "json, name=Username" }),
+        SpeakeasyMetadata({ data: "json, name=Username" }),
         __metadata("design:type", String)
     ], MicrosoftSqlServerSettings.prototype, "username", void 0);
     return MicrosoftSqlServerSettings;

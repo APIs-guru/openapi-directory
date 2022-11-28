@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import storedquery
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetStoredQueryResponse:
-    stored_query: Optional[storedquery.StoredQuery] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StoredQuery' }})
+    stored_query: Optional[StoredQuery] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StoredQuery') }})
     

@@ -1,5 +1,7 @@
 package shared
 
+// Endpoint
+// <p>Describes an endpoint of a database instance in response to operations such as the following:</p> <ul> <li> <p> <code>CreateEndpoint</code> </p> </li> <li> <p> <code>DescribeEndpoint</code> </p> </li> <li> <p> <code>ModifyEndpoint</code> </p> </li> </ul>
 type Endpoint struct {
 	CertificateArn             *string                           `json:"CertificateArn,omitempty"`
 	DatabaseName               *string                           `json:"DatabaseName,omitempty"`

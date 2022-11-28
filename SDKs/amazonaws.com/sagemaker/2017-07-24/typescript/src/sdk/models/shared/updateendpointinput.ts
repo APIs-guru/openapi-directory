@@ -1,22 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeploymentConfig } from "./deploymentconfig";
 import { VariantProperty } from "./variantproperty";
 
 
+
 export class UpdateEndpointInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeploymentConfig" })
+  @SpeakeasyMetadata({ data: "json, name=DeploymentConfig" })
   deploymentConfig?: DeploymentConfig;
 
-  @Metadata({ data: "json, name=EndpointConfigName" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointConfigName" })
   endpointConfigName: string;
 
-  @Metadata({ data: "json, name=EndpointName" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointName" })
   endpointName: string;
 
-  @Metadata({ data: "json, name=ExcludeRetainedVariantProperties", elemType: shared.VariantProperty })
+  @SpeakeasyMetadata({ data: "json, name=ExcludeRetainedVariantProperties", elemType: VariantProperty })
   excludeRetainedVariantProperties?: VariantProperty[];
 
-  @Metadata({ data: "json, name=RetainAllVariantProperties" })
+  @SpeakeasyMetadata({ data: "json, name=RetainAllVariantProperties" })
   retainAllVariantProperties?: boolean;
 }

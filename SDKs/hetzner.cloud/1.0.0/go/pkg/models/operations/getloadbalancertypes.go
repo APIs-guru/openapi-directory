@@ -4,15 +4,15 @@ type GetLoadBalancerTypesQueryParams struct {
 	Name *string `queryParam:"style=form,explode=true,name=name"`
 }
 
-type GetLoadBalancerTypesRequest struct {
-	QueryParams GetLoadBalancerTypesQueryParams
-}
-
+// GetLoadBalancerTypes200ApplicationJSONLoadBalancerTypesPricesPriceHourly
+// Hourly costs for a Resource in this Location
 type GetLoadBalancerTypes200ApplicationJSONLoadBalancerTypesPricesPriceHourly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
 }
 
+// GetLoadBalancerTypes200ApplicationJSONLoadBalancerTypesPricesPriceMonthly
+// Monthly costs for a Resource in this Location
 type GetLoadBalancerTypes200ApplicationJSONLoadBalancerTypesPricesPriceMonthly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
@@ -38,6 +38,10 @@ type GetLoadBalancerTypes200ApplicationJSONLoadBalancerTypes struct {
 
 type GetLoadBalancerTypes200ApplicationJSON struct {
 	LoadBalancerTypes []GetLoadBalancerTypes200ApplicationJSONLoadBalancerTypes `json:"load_balancer_types"`
+}
+
+type GetLoadBalancerTypesRequest struct {
+	QueryParams GetLoadBalancerTypesQueryParams
 }
 
 type GetLoadBalancerTypesResponse struct {

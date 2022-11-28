@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import placeholder
-from . import shapeproperties
-from . import textcontent
+from sdk import utils
+from . import *
 
 class ShapeShapeTypeEnum(str, Enum):
     TYPE_UNSPECIFIED = "TYPE_UNSPECIFIED"
@@ -154,8 +154,12 @@ class ShapeShapeTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Shape:
-    placeholder: Optional[placeholder.Placeholder] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'placeholder' }})
-    shape_properties: Optional[shapeproperties.ShapeProperties] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shapeProperties' }})
-    shape_type: Optional[ShapeShapeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shapeType' }})
-    text: Optional[textcontent.TextContent] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'text' }})
+    r"""Shape
+    A PageElement kind representing a generic shape that does not have a more specific classification.
+    """
+    
+    placeholder: Optional[Placeholder] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('placeholder') }})
+    shape_properties: Optional[ShapeProperties] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('shapeProperties') }})
+    shape_type: Optional[ShapeShapeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('shapeType') }})
+    text: Optional[TextContent] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('text') }})
     

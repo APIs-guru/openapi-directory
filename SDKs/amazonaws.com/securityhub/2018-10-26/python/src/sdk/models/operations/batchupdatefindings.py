@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,16 +23,24 @@ class BatchUpdateFindingsHeaders:
 @dataclass_json
 @dataclass
 class BatchUpdateFindingsRequestBodyNote:
-    text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Text' }})
-    updated_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UpdatedBy' }})
+    r"""BatchUpdateFindingsRequestBodyNote
+    The updated note.
+    """
+    
+    text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Text') }})
+    updated_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('UpdatedBy') }})
     
 
 @dataclass_json
 @dataclass
 class BatchUpdateFindingsRequestBodySeverity:
-    label: Optional[shared.SeverityLabelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Label' }})
-    normalized: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Normalized' }})
-    product: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Product' }})
+    r"""BatchUpdateFindingsRequestBodySeverity
+    Updates to the severity information for a finding.
+    """
+    
+    label: Optional[shared.SeverityLabelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Label') }})
+    normalized: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Normalized') }})
+    product: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Product') }})
     
 class BatchUpdateFindingsRequestBodyVerificationStateEnum(str, Enum):
     UNKNOWN = "UNKNOWN"
@@ -39,37 +52,41 @@ class BatchUpdateFindingsRequestBodyVerificationStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class BatchUpdateFindingsRequestBodyWorkflow:
-    status: Optional[shared.WorkflowStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
+    r"""BatchUpdateFindingsRequestBodyWorkflow
+    Used to update information about the investigation into the finding.
+    """
+    
+    status: Optional[shared.WorkflowStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
     
 
 @dataclass_json
 @dataclass
 class BatchUpdateFindingsRequestBody:
-    confidence: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Confidence' }})
-    criticality: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Criticality' }})
-    finding_identifiers: List[shared.AwsSecurityFindingIdentifier] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FindingIdentifiers' }})
-    note: Optional[BatchUpdateFindingsRequestBodyNote] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Note' }})
-    related_findings: Optional[List[shared.RelatedFinding]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RelatedFindings' }})
-    severity: Optional[BatchUpdateFindingsRequestBodySeverity] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Severity' }})
-    types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Types' }})
-    user_defined_fields: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UserDefinedFields' }})
-    verification_state: Optional[BatchUpdateFindingsRequestBodyVerificationStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VerificationState' }})
-    workflow: Optional[BatchUpdateFindingsRequestBodyWorkflow] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Workflow' }})
+    finding_identifiers: List[shared.AwsSecurityFindingIdentifier] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('FindingIdentifiers') }})
+    confidence: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Confidence') }})
+    criticality: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Criticality') }})
+    note: Optional[BatchUpdateFindingsRequestBodyNote] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Note') }})
+    related_findings: Optional[List[shared.RelatedFinding]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RelatedFindings') }})
+    severity: Optional[BatchUpdateFindingsRequestBodySeverity] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Severity') }})
+    types: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Types') }})
+    user_defined_fields: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('UserDefinedFields') }})
+    verification_state: Optional[BatchUpdateFindingsRequestBodyVerificationStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('VerificationState') }})
+    workflow: Optional[BatchUpdateFindingsRequestBodyWorkflow] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Workflow') }})
     
 
 @dataclass
 class BatchUpdateFindingsRequest:
-    headers: BatchUpdateFindingsHeaders = field(default=None)
-    request: BatchUpdateFindingsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: BatchUpdateFindingsHeaders = field()
+    request: BatchUpdateFindingsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class BatchUpdateFindingsResponse:
+    content_type: str = field()
+    status_code: int = field()
     batch_update_findings_response: Optional[shared.BatchUpdateFindingsResponse] = field(default=None)
-    content_type: str = field(default=None)
     internal_exception: Optional[Any] = field(default=None)
     invalid_access_exception: Optional[Any] = field(default=None)
     invalid_input_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

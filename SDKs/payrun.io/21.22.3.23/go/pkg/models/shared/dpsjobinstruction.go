@@ -4,16 +4,22 @@ import (
 	"time"
 )
 
+// DpsJobInstructionDpsJobInstructionEmployer
+// The dps job instructions' employer
 type DpsJobInstructionDpsJobInstructionEmployer struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`
 	AtTitle *string `json:"@title,omitempty"`
 }
 
+// DpsJobInstructionDpsJobInstructionType
+// The dps job instructions' message types
 type DpsJobInstructionDpsJobInstructionType struct {
 	Type []interface{} `json:"Type,omitempty"`
 }
 
+// DpsJobInstructionDpsJobInstructionMessage
+// The dps job instructions' messages to process
 type DpsJobInstructionDpsJobInstructionMessage struct {
 	Message []interface{} `json:"Message,omitempty"`
 }

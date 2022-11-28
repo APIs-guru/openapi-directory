@@ -9,6 +9,15 @@ const (
 	SnapshotStateEnumDeleting         SnapshotStateEnum = "DELETING"
 )
 
+// SnapshotInput
+// A Filestore snapshot.
+type SnapshotInput struct {
+	Description *string           `json:"description,omitempty"`
+	Labels      map[string]string `json:"labels,omitempty"`
+}
+
+// Snapshot
+// A Filestore snapshot.
 type Snapshot struct {
 	CreateTime          *string            `json:"createTime,omitempty"`
 	Description         *string            `json:"description,omitempty"`

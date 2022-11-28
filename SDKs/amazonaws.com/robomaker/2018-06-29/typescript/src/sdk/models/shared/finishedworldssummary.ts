@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FailureSummary } from "./failuresummary";
+
 
 
 // FinishedWorldsSummary
@@ -7,12 +8,12 @@ import { FailureSummary } from "./failuresummary";
  * Information about worlds that finished.
 **/
 export class FinishedWorldsSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=failureSummary" })
+  @SpeakeasyMetadata({ data: "json, name=failureSummary" })
   failureSummary?: FailureSummary;
 
-  @Metadata({ data: "json, name=finishedCount" })
+  @SpeakeasyMetadata({ data: "json, name=finishedCount" })
   finishedCount?: number;
 
-  @Metadata({ data: "json, name=succeededWorlds" })
+  @SpeakeasyMetadata({ data: "json, name=succeededWorlds" })
   succeededWorlds?: string[];
 }

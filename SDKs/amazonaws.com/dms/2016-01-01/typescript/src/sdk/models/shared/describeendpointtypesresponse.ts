@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SupportedEndpointType } from "./supportedendpointtype";
+
 
 
 // DescribeEndpointTypesResponse
@@ -8,9 +8,9 @@ import { SupportedEndpointType } from "./supportedendpointtype";
  * <p/>
 **/
 export class DescribeEndpointTypesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 
-  @Metadata({ data: "json, name=SupportedEndpointTypes", elemType: shared.SupportedEndpointType })
+  @SpeakeasyMetadata({ data: "json, name=SupportedEndpointTypes", elemType: SupportedEndpointType })
   supportedEndpointTypes?: SupportedEndpointType[];
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AssessmentReportStatusEnum } from "./assessmentreportstatusenum";
 /**
  *  The metadata objects associated with the specified assessment report.

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DefaultResources
 /**
  * The default resources associated with the Project.
@@ -33,19 +33,19 @@ var DefaultResources = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=hostingSite" }),
+        SpeakeasyMetadata({ data: "json, name=hostingSite" }),
         __metadata("design:type", String)
     ], DefaultResources.prototype, "hostingSite", void 0);
     __decorate([
-        Metadata({ data: "json, name=locationId" }),
+        SpeakeasyMetadata({ data: "json, name=locationId" }),
         __metadata("design:type", String)
     ], DefaultResources.prototype, "locationId", void 0);
     __decorate([
-        Metadata({ data: "json, name=realtimeDatabaseInstance" }),
+        SpeakeasyMetadata({ data: "json, name=realtimeDatabaseInstance" }),
         __metadata("design:type", String)
     ], DefaultResources.prototype, "realtimeDatabaseInstance", void 0);
     __decorate([
-        Metadata({ data: "json, name=storageBucket" }),
+        SpeakeasyMetadata({ data: "json, name=storageBucket" }),
         __metadata("design:type", String)
     ], DefaultResources.prototype, "storageBucket", void 0);
     return DefaultResources;

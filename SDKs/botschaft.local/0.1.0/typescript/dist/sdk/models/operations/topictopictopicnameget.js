@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var TopicTopicTopicNameGetPathParams = /** @class */ (function (_super) {
     __extends(TopicTopicTopicNameGetPathParams, _super);
@@ -30,7 +30,7 @@ var TopicTopicTopicNameGetPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=topic_name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=topic_name" }),
         __metadata("design:type", String)
     ], TopicTopicTopicNameGetPathParams.prototype, "topicName", void 0);
     return TopicTopicTopicNameGetPathParams;
@@ -42,11 +42,11 @@ var TopicTopicTopicNameGetQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=base64_message" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=base64_message" }),
         __metadata("design:type", String)
     ], TopicTopicTopicNameGetQueryParams.prototype, "base64Message", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=message" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=message" }),
         __metadata("design:type", String)
     ], TopicTopicTopicNameGetQueryParams.prototype, "message", void 0);
     return TopicTopicTopicNameGetQueryParams;
@@ -58,7 +58,7 @@ var TopicTopicTopicNameGetHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=authorization" }),
         __metadata("design:type", String)
     ], TopicTopicTopicNameGetHeaders.prototype, "authorization", void 0);
     return TopicTopicTopicNameGetHeaders;
@@ -70,15 +70,15 @@ var TopicTopicTopicNameGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TopicTopicTopicNameGetPathParams)
     ], TopicTopicTopicNameGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TopicTopicTopicNameGetQueryParams)
     ], TopicTopicTopicNameGetRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", TopicTopicTopicNameGetHeaders)
     ], TopicTopicTopicNameGetRequest.prototype, "headers", void 0);
     return TopicTopicTopicNameGetRequest;
@@ -90,19 +90,19 @@ var TopicTopicTopicNameGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], TopicTopicTopicNameGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], TopicTopicTopicNameGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], TopicTopicTopicNameGetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], TopicTopicTopicNameGetResponse.prototype, "topicTopicTopicNameGet200ApplicationJsonAny", void 0);
     return TopicTopicTopicNameGetResponse;

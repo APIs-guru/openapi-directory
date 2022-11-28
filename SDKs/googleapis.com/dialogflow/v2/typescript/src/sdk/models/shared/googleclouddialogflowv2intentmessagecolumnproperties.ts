@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GoogleCloudDialogflowV2IntentMessageColumnPropertiesHorizontalAlignmentEnum {
-    HorizontalAlignmentUnspecified = "HORIZONTAL_ALIGNMENT_UNSPECIFIED"
-,    Leading = "LEADING"
-,    Center = "CENTER"
-,    Trailing = "TRAILING"
+    HorizontalAlignmentUnspecified = "HORIZONTAL_ALIGNMENT_UNSPECIFIED",
+    Leading = "LEADING",
+    Center = "CENTER",
+    Trailing = "TRAILING"
 }
 
 
@@ -13,9 +14,9 @@ export enum GoogleCloudDialogflowV2IntentMessageColumnPropertiesHorizontalAlignm
  * Column properties for TableCard.
 **/
 export class GoogleCloudDialogflowV2IntentMessageColumnProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=header" })
+  @SpeakeasyMetadata({ data: "json, name=header" })
   header?: string;
 
-  @Metadata({ data: "json, name=horizontalAlignment" })
+  @SpeakeasyMetadata({ data: "json, name=horizontalAlignment" })
   horizontalAlignment?: GoogleCloudDialogflowV2IntentMessageColumnPropertiesHorizontalAlignmentEnum;
 }

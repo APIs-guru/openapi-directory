@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SparkLoggingInfo } from "./sparklogginginfo";
 
 
+
 export class SparkStatistics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endpoints" })
+  @SpeakeasyMetadata({ data: "json, name=endpoints" })
   endpoints?: Map<string, string>;
 
-  @Metadata({ data: "json, name=logging_info" })
+  @SpeakeasyMetadata({ data: "json, name=logging_info" })
   loggingInfo?: SparkLoggingInfo;
 
-  @Metadata({ data: "json, name=spark_job_id" })
+  @SpeakeasyMetadata({ data: "json, name=spark_job_id" })
   sparkJobId?: string;
 
-  @Metadata({ data: "json, name=spark_job_location" })
+  @SpeakeasyMetadata({ data: "json, name=spark_job_location" })
   sparkJobLocation?: string;
 }

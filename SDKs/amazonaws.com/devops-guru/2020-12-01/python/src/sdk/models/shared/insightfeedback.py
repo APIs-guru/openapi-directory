@@ -1,12 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import insightfeedbackoption_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class InsightFeedback:
-    feedback: Optional[insightfeedbackoption_enum.InsightFeedbackOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Feedback' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Id' }})
+    r"""InsightFeedback
+     Information about insight feedback received from a customer. 
+    """
+    
+    feedback: Optional[InsightFeedbackOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Feedback') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Id') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VerifyPhoneNumberResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response message for the VerifyPhoneNumber method.
 **/
 export class VerifyPhoneNumberResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=verifiedPhoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=verifiedPhoneNumber" })
   verifiedPhoneNumber?: string;
 }

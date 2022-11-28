@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NiCallerIdentity } from "./nicalleridentity";
 import { NiInitialCarrierProperties } from "./niinitialcarrierproperties";
 export var NiResponseJsonStandardCallerTypeEnum;
@@ -48,19 +48,19 @@ var NiResponseJsonStandardCurrentCarrier = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=country" }),
+        SpeakeasyMetadata({ data: "json, name=country" }),
         __metadata("design:type", String)
     ], NiResponseJsonStandardCurrentCarrier.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], NiResponseJsonStandardCurrentCarrier.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=network_code" }),
+        SpeakeasyMetadata({ data: "json, name=network_code" }),
         __metadata("design:type", String)
     ], NiResponseJsonStandardCurrentCarrier.prototype, "networkCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=network_type" }),
+        SpeakeasyMetadata({ data: "json, name=network_type" }),
         __metadata("design:type", String)
     ], NiResponseJsonStandardCurrentCarrier.prototype, "networkType", void 0);
     return NiResponseJsonStandardCurrentCarrier;
@@ -85,83 +85,83 @@ var NiResponseJsonStandard = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=caller_identity" }),
+        SpeakeasyMetadata({ data: "json, name=caller_identity" }),
         __metadata("design:type", NiCallerIdentity)
     ], NiResponseJsonStandard.prototype, "callerIdentity", void 0);
     __decorate([
-        Metadata({ data: "json, name=caller_name" }),
+        SpeakeasyMetadata({ data: "json, name=caller_name" }),
         __metadata("design:type", String)
     ], NiResponseJsonStandard.prototype, "callerName", void 0);
     __decorate([
-        Metadata({ data: "json, name=caller_type" }),
+        SpeakeasyMetadata({ data: "json, name=caller_type" }),
         __metadata("design:type", String)
     ], NiResponseJsonStandard.prototype, "callerType", void 0);
     __decorate([
-        Metadata({ data: "json, name=country_code" }),
+        SpeakeasyMetadata({ data: "json, name=country_code" }),
         __metadata("design:type", String)
     ], NiResponseJsonStandard.prototype, "countryCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=country_code_iso3" }),
+        SpeakeasyMetadata({ data: "json, name=country_code_iso3" }),
         __metadata("design:type", String)
     ], NiResponseJsonStandard.prototype, "countryCodeIso3", void 0);
     __decorate([
-        Metadata({ data: "json, name=country_name" }),
+        SpeakeasyMetadata({ data: "json, name=country_name" }),
         __metadata("design:type", String)
     ], NiResponseJsonStandard.prototype, "countryName", void 0);
     __decorate([
-        Metadata({ data: "json, name=country_prefix" }),
+        SpeakeasyMetadata({ data: "json, name=country_prefix" }),
         __metadata("design:type", String)
     ], NiResponseJsonStandard.prototype, "countryPrefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=current_carrier" }),
+        SpeakeasyMetadata({ data: "json, name=current_carrier" }),
         __metadata("design:type", NiResponseJsonStandardCurrentCarrier)
     ], NiResponseJsonStandard.prototype, "currentCarrier", void 0);
     __decorate([
-        Metadata({ data: "json, name=first_name" }),
+        SpeakeasyMetadata({ data: "json, name=first_name" }),
         __metadata("design:type", String)
     ], NiResponseJsonStandard.prototype, "firstName", void 0);
     __decorate([
-        Metadata({ data: "json, name=international_format_number" }),
+        SpeakeasyMetadata({ data: "json, name=international_format_number" }),
         __metadata("design:type", String)
     ], NiResponseJsonStandard.prototype, "internationalFormatNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=last_name" }),
+        SpeakeasyMetadata({ data: "json, name=last_name" }),
         __metadata("design:type", String)
     ], NiResponseJsonStandard.prototype, "lastName", void 0);
     __decorate([
-        Metadata({ data: "json, name=national_format_number" }),
+        SpeakeasyMetadata({ data: "json, name=national_format_number" }),
         __metadata("design:type", String)
     ], NiResponseJsonStandard.prototype, "nationalFormatNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=original_carrier" }),
+        SpeakeasyMetadata({ data: "json, name=original_carrier" }),
         __metadata("design:type", NiInitialCarrierProperties)
     ], NiResponseJsonStandard.prototype, "originalCarrier", void 0);
     __decorate([
-        Metadata({ data: "json, name=ported" }),
+        SpeakeasyMetadata({ data: "json, name=ported" }),
         __metadata("design:type", String)
     ], NiResponseJsonStandard.prototype, "ported", void 0);
     __decorate([
-        Metadata({ data: "json, name=refund_price" }),
+        SpeakeasyMetadata({ data: "json, name=refund_price" }),
         __metadata("design:type", String)
     ], NiResponseJsonStandard.prototype, "refundPrice", void 0);
     __decorate([
-        Metadata({ data: "json, name=remaining_balance" }),
+        SpeakeasyMetadata({ data: "json, name=remaining_balance" }),
         __metadata("design:type", String)
     ], NiResponseJsonStandard.prototype, "remainingBalance", void 0);
     __decorate([
-        Metadata({ data: "json, name=request_id" }),
+        SpeakeasyMetadata({ data: "json, name=request_id" }),
         __metadata("design:type", String)
     ], NiResponseJsonStandard.prototype, "requestId", void 0);
     __decorate([
-        Metadata({ data: "json, name=request_price" }),
+        SpeakeasyMetadata({ data: "json, name=request_price" }),
         __metadata("design:type", String)
     ], NiResponseJsonStandard.prototype, "requestPrice", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", Number)
     ], NiResponseJsonStandard.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=status_message" }),
+        SpeakeasyMetadata({ data: "json, name=status_message" }),
         __metadata("design:type", String)
     ], NiResponseJsonStandard.prototype, "statusMessage", void 0);
     return NiResponseJsonStandard;

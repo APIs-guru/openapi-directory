@@ -1,0 +1,31 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { ConferenceEnumConferenceEndReasonEnum } from "./conferenceenumconferenceendreasonenum";
+import { ConferenceEnumRegionEnum } from "./conferenceenumregionenum";
+import { ConferenceEnumProcessingStateEnum } from "./conferenceenumprocessingstateenum";
+import { ConferenceEnumConferenceStatusEnum } from "./conferenceenumconferencestatusenum";
+import { ConferenceEnumTagEnum } from "./conferenceenumtagenum";
+export declare class InsightsV1Conference extends SpeakeasyBase {
+    accountSid?: string;
+    conferenceSid?: string;
+    connectDurationSeconds?: number;
+    createTime?: Date;
+    detectedIssues?: any;
+    durationSeconds?: number;
+    endReason?: ConferenceEnumConferenceEndReasonEnum;
+    endTime?: Date;
+    endedBy?: string;
+    friendlyName?: string;
+    links?: Map<string, any>;
+    maxConcurrentParticipants?: number;
+    maxParticipants?: number;
+    mixerRegion?: ConferenceEnumRegionEnum;
+    mixerRegionRequested?: ConferenceEnumRegionEnum;
+    processingState?: ConferenceEnumProcessingStateEnum;
+    recordingEnabled?: boolean;
+    startTime?: Date;
+    status?: ConferenceEnumConferenceStatusEnum;
+    tagInfo?: any;
+    tags?: ConferenceEnumTagEnum[];
+    uniqueParticipants?: number;
+    url?: string;
+}

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // S3ReferenceDataSourceUpdate
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the S3 bucket name, object key name, and IAM role that Amazon Kinesis Analytics can assume to read the Amazon S3 object on your behalf and populate the in-application reference table.
 **/
 export class S3ReferenceDataSourceUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BucketARNUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=BucketARNUpdate" })
   bucketArnUpdate?: string;
 
-  @Metadata({ data: "json, name=FileKeyUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=FileKeyUpdate" })
   fileKeyUpdate?: string;
 
-  @Metadata({ data: "json, name=ReferenceRoleARNUpdate" })
+  @SpeakeasyMetadata({ data: "json, name=ReferenceRoleARNUpdate" })
   referenceRoleArnUpdate?: string;
 }

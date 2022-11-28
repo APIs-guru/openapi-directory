@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ComponentDeploymentSpecification } from "./componentdeploymentspecification";
 import { DeploymentPolicies } from "./deploymentpolicies";
 import { DeploymentStatusEnum } from "./deploymentstatusenum";

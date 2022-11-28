@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ConfigIssue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=config_file" })
+  @SpeakeasyMetadata({ data: "json, name=config_file" })
   configFile?: string;
 
-  @Metadata({ data: "json, name=issues" })
+  @SpeakeasyMetadata({ data: "json, name=issues" })
   issues?: string[];
 
-  @Metadata({ data: "json, name=service_name" })
+  @SpeakeasyMetadata({ data: "json, name=service_name" })
   serviceName?: string;
 
-  @Metadata({ data: "json, name=suggestions" })
+  @SpeakeasyMetadata({ data: "json, name=suggestions" })
   suggestions?: string[];
 }

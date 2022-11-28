@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BotAliasStatusEnum } from "./botaliasstatusenum";
+
 
 
 // BotAliasSummary
@@ -7,24 +8,24 @@ import { BotAliasStatusEnum } from "./botaliasstatusenum";
  * Summary information about bot aliases returned from the <a>ListBotAliases</a> operation.
 **/
 export class BotAliasSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=botAliasId" })
+  @SpeakeasyMetadata({ data: "json, name=botAliasId" })
   botAliasId?: string;
 
-  @Metadata({ data: "json, name=botAliasName" })
+  @SpeakeasyMetadata({ data: "json, name=botAliasName" })
   botAliasName?: string;
 
-  @Metadata({ data: "json, name=botAliasStatus" })
+  @SpeakeasyMetadata({ data: "json, name=botAliasStatus" })
   botAliasStatus?: BotAliasStatusEnum;
 
-  @Metadata({ data: "json, name=botVersion" })
+  @SpeakeasyMetadata({ data: "json, name=botVersion" })
   botVersion?: string;
 
-  @Metadata({ data: "json, name=creationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationDateTime" })
   creationDateTime?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" })
   lastUpdatedDateTime?: Date;
 }

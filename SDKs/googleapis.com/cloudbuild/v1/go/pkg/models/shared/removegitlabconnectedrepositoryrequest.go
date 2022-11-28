@@ -1,5 +1,7 @@
 package shared
 
-type RemoveGitLabConnectedRepositoryRequest struct {
-	ConnectedRepository *GitLabRepositoryID `json:"connectedRepository,omitempty"`
+// RemoveGitLabConnectedRepositoryRequestInput
+// RPC request object accepted by RemoveGitLabConnectedRepository RPC method.
+type RemoveGitLabConnectedRepositoryRequestInput struct {
+	ConnectedRepository *GitLabRepositoryIDInput `json:"connectedRepository,omitempty"`
 }

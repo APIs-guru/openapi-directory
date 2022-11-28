@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // SpriteSheet
 /**
  * Sprite sheet configuration.
@@ -33,47 +33,47 @@ var SpriteSheet = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=columnCount" }),
+        SpeakeasyMetadata({ data: "json, name=columnCount" }),
         __metadata("design:type", Number)
     ], SpriteSheet.prototype, "columnCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=endTimeOffset" }),
+        SpeakeasyMetadata({ data: "json, name=endTimeOffset" }),
         __metadata("design:type", String)
     ], SpriteSheet.prototype, "endTimeOffset", void 0);
     __decorate([
-        Metadata({ data: "json, name=filePrefix" }),
+        SpeakeasyMetadata({ data: "json, name=filePrefix" }),
         __metadata("design:type", String)
     ], SpriteSheet.prototype, "filePrefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], SpriteSheet.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=interval" }),
+        SpeakeasyMetadata({ data: "json, name=interval" }),
         __metadata("design:type", String)
     ], SpriteSheet.prototype, "interval", void 0);
     __decorate([
-        Metadata({ data: "json, name=quality" }),
+        SpeakeasyMetadata({ data: "json, name=quality" }),
         __metadata("design:type", Number)
     ], SpriteSheet.prototype, "quality", void 0);
     __decorate([
-        Metadata({ data: "json, name=rowCount" }),
+        SpeakeasyMetadata({ data: "json, name=rowCount" }),
         __metadata("design:type", Number)
     ], SpriteSheet.prototype, "rowCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=spriteHeightPixels" }),
+        SpeakeasyMetadata({ data: "json, name=spriteHeightPixels" }),
         __metadata("design:type", Number)
     ], SpriteSheet.prototype, "spriteHeightPixels", void 0);
     __decorate([
-        Metadata({ data: "json, name=spriteWidthPixels" }),
+        SpeakeasyMetadata({ data: "json, name=spriteWidthPixels" }),
         __metadata("design:type", Number)
     ], SpriteSheet.prototype, "spriteWidthPixels", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTimeOffset" }),
+        SpeakeasyMetadata({ data: "json, name=startTimeOffset" }),
         __metadata("design:type", String)
     ], SpriteSheet.prototype, "startTimeOffset", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalCount" }),
+        SpeakeasyMetadata({ data: "json, name=totalCount" }),
         __metadata("design:type", Number)
     ], SpriteSheet.prototype, "totalCount", void 0);
     return SpriteSheet;

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AppVersionTrackEnum {
-    AppTrackUnspecified = "appTrackUnspecified"
-,    Production = "production"
-,    Beta = "beta"
-,    Alpha = "alpha"
+    AppTrackUnspecified = "appTrackUnspecified",
+    Production = "production",
+    Beta = "beta",
+    Alpha = "alpha"
 }
 
 
@@ -13,18 +14,18 @@ export enum AppVersionTrackEnum {
  * This represents a single version of the app.
 **/
 export class AppVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isProduction" })
+  @SpeakeasyMetadata({ data: "json, name=isProduction" })
   isProduction?: boolean;
 
-  @Metadata({ data: "json, name=track" })
+  @SpeakeasyMetadata({ data: "json, name=track" })
   track?: AppVersionTrackEnum;
 
-  @Metadata({ data: "json, name=trackId" })
+  @SpeakeasyMetadata({ data: "json, name=trackId" })
   trackId?: string[];
 
-  @Metadata({ data: "json, name=versionCode" })
+  @SpeakeasyMetadata({ data: "json, name=versionCode" })
   versionCode?: number;
 
-  @Metadata({ data: "json, name=versionString" })
+  @SpeakeasyMetadata({ data: "json, name=versionString" })
   versionString?: string;
 }

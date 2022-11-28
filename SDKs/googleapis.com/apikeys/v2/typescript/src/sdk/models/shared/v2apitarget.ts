@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // V2ApiTarget
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A restriction for a specific service and optionally one or multiple specific methods. Both fields are case insensitive.
 **/
 export class V2ApiTarget extends SpeakeasyBase {
-  @Metadata({ data: "json, name=methods" })
+  @SpeakeasyMetadata({ data: "json, name=methods" })
   methods?: string[];
 
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service?: string;
 }

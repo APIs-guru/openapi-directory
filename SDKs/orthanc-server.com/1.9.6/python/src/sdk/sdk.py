@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
 from typing import Any,Optional
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,26 +14,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def delete_changes(self) -> operations.DeleteChangesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Clear changes
+        Clear the full history stored in the changes log
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/changes"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -43,13 +69,17 @@ class SDK:
 
     
     def delete_exports(self) -> operations.DeleteExportsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Clear exports
+        Clear the full history stored in the exports log
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/exports"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -62,13 +92,17 @@ class SDK:
 
     
     def delete_instances_id_(self, request: operations.DeleteInstancesIDRequest) -> operations.DeleteInstancesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete some instance
+        Delete the DICOM instance whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -81,15 +115,18 @@ class SDK:
 
     
     def delete_instances_id_attachments_name_(self, request: operations.DeleteInstancesIDAttachmentsNameRequest) -> operations.DeleteInstancesIDAttachmentsNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete attachment
+        Delete an attachment associated with the given DICOM instance. This call will fail if trying to delete a system attachment (i.e. whose index is < 1024).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/attachments/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -102,15 +139,18 @@ class SDK:
 
     
     def delete_instances_id_metadata_name_(self, request: operations.DeleteInstancesIDMetadataNameRequest) -> operations.DeleteInstancesIDMetadataNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete metadata
+        Delete some metadata associated with the given DICOM instance. This call will fail if trying to delete a system metadata (i.e. whose index is < 1024).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/metadata/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -123,13 +163,17 @@ class SDK:
 
     
     def delete_modalities_id_(self, request: operations.DeleteModalitiesIDRequest) -> operations.DeleteModalitiesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete DICOM modality
+        Delete one DICOM modality. This change is permanent iff. `DicomModalitiesInDatabase` is `true`, otherwise it is lost at the next restart of Orthanc.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/modalities/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -142,13 +186,17 @@ class SDK:
 
     
     def delete_patients_id_(self, request: operations.DeletePatientsIDRequest) -> operations.DeletePatientsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete some patient
+        Delete the DICOM patient whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -161,15 +209,18 @@ class SDK:
 
     
     def delete_patients_id_attachments_name_(self, request: operations.DeletePatientsIDAttachmentsNameRequest) -> operations.DeletePatientsIDAttachmentsNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete attachment
+        Delete an attachment associated with the given DICOM patient. This call will fail if trying to delete a system attachment (i.e. whose index is < 1024).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/attachments/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -182,15 +233,18 @@ class SDK:
 
     
     def delete_patients_id_metadata_name_(self, request: operations.DeletePatientsIDMetadataNameRequest) -> operations.DeletePatientsIDMetadataNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete metadata
+        Delete some metadata associated with the given DICOM patient. This call will fail if trying to delete a system metadata (i.e. whose index is < 1024).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/metadata/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -203,13 +257,17 @@ class SDK:
 
     
     def delete_peers_id_(self, request: operations.DeletePeersIDRequest) -> operations.DeletePeersIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete Orthanc peer
+        Delete one Orthanc peer. This change is permanent iff. `OrthancPeersInDatabase` is `true`, otherwise it is lost at the next restart of Orthanc.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/peers/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -222,13 +280,17 @@ class SDK:
 
     
     def delete_queries_id_(self, request: operations.DeleteQueriesIDRequest) -> operations.DeleteQueriesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a query
+        Delete the query/retrieve operation whose identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/queries/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -241,13 +303,17 @@ class SDK:
 
     
     def delete_series_id_(self, request: operations.DeleteSeriesIDRequest) -> operations.DeleteSeriesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete some series
+        Delete the DICOM series whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -260,15 +326,18 @@ class SDK:
 
     
     def delete_series_id_attachments_name_(self, request: operations.DeleteSeriesIDAttachmentsNameRequest) -> operations.DeleteSeriesIDAttachmentsNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete attachment
+        Delete an attachment associated with the given DICOM series. This call will fail if trying to delete a system attachment (i.e. whose index is < 1024).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/attachments/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -281,15 +350,18 @@ class SDK:
 
     
     def delete_series_id_metadata_name_(self, request: operations.DeleteSeriesIDMetadataNameRequest) -> operations.DeleteSeriesIDMetadataNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete metadata
+        Delete some metadata associated with the given DICOM series. This call will fail if trying to delete a system metadata (i.e. whose index is < 1024).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/metadata/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -302,13 +374,17 @@ class SDK:
 
     
     def delete_studies_id_(self, request: operations.DeleteStudiesIDRequest) -> operations.DeleteStudiesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete some study
+        Delete the DICOM study whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
@@ -321,15 +397,18 @@ class SDK:
 
     
     def delete_studies_id_attachments_name_(self, request: operations.DeleteStudiesIDAttachmentsNameRequest) -> operations.DeleteStudiesIDAttachmentsNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete attachment
+        Delete an attachment associated with the given DICOM study. This call will fail if trying to delete a system attachment (i.e. whose index is < 1024).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/attachments/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -342,15 +421,18 @@ class SDK:
 
     
     def delete_studies_id_metadata_name_(self, request: operations.DeleteStudiesIDMetadataNameRequest) -> operations.DeleteStudiesIDMetadataNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete metadata
+        Delete some metadata associated with the given DICOM study. This call will fail if trying to delete a system metadata (i.e. whose index is < 1024).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/metadata/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -363,15 +445,18 @@ class SDK:
 
     
     def get_changes(self, request: operations.GetChangesRequest) -> operations.GetChangesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List changes
+        Whenever Orthanc receives a new DICOM instance, this event is recorded in the so-called _Changes Log_. This enables remote scripts to react to the arrival of new DICOM resources. A typical application is auto-routing, where an external script waits for a new DICOM instance to arrive into Orthanc, then forward this instance to another modality.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/changes"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -386,15 +471,18 @@ class SDK:
 
     
     def get_exports(self, request: operations.GetExportsRequest) -> operations.GetExportsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List exports
+        For medical traceability, Orthanc can be configured to store a log of all the resources that have been exported to remote modalities. In auto-routing scenarios, it is important to prevent this log to grow indefinitely as incoming instances are routed. You can either disable this logging by setting the option `LogExportedResources` to `false` in the configuration file, or periodically clear this log by `DELETE`-ing this URI. This route might be removed in future versions of Orthanc.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/exports"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -409,15 +497,18 @@ class SDK:
 
     
     def get_instances(self, request: operations.GetInstancesRequest) -> operations.GetInstancesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List the available instances
+        List the Orthanc identifiers of all the available DICOM instances
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/instances"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -432,15 +523,18 @@ class SDK:
 
     
     def get_instances_id_(self, request: operations.GetInstancesIDRequest) -> operations.GetInstancesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get information about some instance
+        Get detailed information about the DICOM instance whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -455,13 +549,17 @@ class SDK:
 
     
     def get_instances_id_attachments(self, request: operations.GetInstancesIDAttachmentsRequest) -> operations.GetInstancesIDAttachmentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List attachments
+        Get the list of attachments that are associated with the given instance
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/attachments", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -476,15 +574,18 @@ class SDK:
 
     
     def get_instances_id_attachments_name_(self, request: operations.GetInstancesIDAttachmentsNameRequest) -> operations.GetInstancesIDAttachmentsNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List operations on attachments
+        Get the list of the operations that are available for attachments associated with the given instance
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/attachments/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -501,15 +602,18 @@ class SDK:
 
     
     def get_instances_id_attachments_name_compressed_data(self, request: operations.GetInstancesIDAttachmentsNameCompressedDataRequest) -> operations.GetInstancesIDAttachmentsNameCompressedDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get attachment (no decompression)
+        Get the (binary) content of one attachment associated with the given instance. The attachment will not be decompressed if `StorageCompression` is `true`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/attachments/{name}/compressed-data", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -525,15 +629,18 @@ class SDK:
 
     
     def get_instances_id_attachments_name_compressed_md5(self, request: operations.GetInstancesIDAttachmentsNameCompressedMd5Request) -> operations.GetInstancesIDAttachmentsNameCompressedMd5Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get MD5 of attachment on disk
+        Get the MD5 hash of one attachment associated with the given instance, as stored on the disk. This is different from `.../md5` iff `EnableStorage` is `true`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/attachments/{name}/compressed-md5", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -549,15 +656,18 @@ class SDK:
 
     
     def get_instances_id_attachments_name_compressed_size(self, request: operations.GetInstancesIDAttachmentsNameCompressedSizeRequest) -> operations.GetInstancesIDAttachmentsNameCompressedSizeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get size of attachment on disk
+        Get the size of one attachment associated with the given instance, as stored on the disk. This is different from `.../size` iff `EnableStorage` is `true`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/attachments/{name}/compressed-size", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -573,15 +683,18 @@ class SDK:
 
     
     def get_instances_id_attachments_name_data(self, request: operations.GetInstancesIDAttachmentsNameDataRequest) -> operations.GetInstancesIDAttachmentsNameDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get attachment
+        Get the (binary) content of one attachment associated with the given instance
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/attachments/{name}/data", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -597,15 +710,18 @@ class SDK:
 
     
     def get_instances_id_attachments_name_is_compressed(self, request: operations.GetInstancesIDAttachmentsNameIsCompressedRequest) -> operations.GetInstancesIDAttachmentsNameIsCompressedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Is attachment compressed?
+        Test whether the attachment has been stored as a compressed file on the disk.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/attachments/{name}/is-compressed", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -621,15 +737,18 @@ class SDK:
 
     
     def get_instances_id_attachments_name_md5(self, request: operations.GetInstancesIDAttachmentsNameMd5Request) -> operations.GetInstancesIDAttachmentsNameMd5Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get MD5 of attachment
+        Get the MD5 hash of one attachment associated with the given instance
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/attachments/{name}/md5", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -645,15 +764,18 @@ class SDK:
 
     
     def get_instances_id_attachments_name_size(self, request: operations.GetInstancesIDAttachmentsNameSizeRequest) -> operations.GetInstancesIDAttachmentsNameSizeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get size of attachment
+        Get the size of one attachment associated with the given instance
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/attachments/{name}/size", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -669,15 +791,18 @@ class SDK:
 
     
     def get_instances_id_content(self, request: operations.GetInstancesIDContentRequest) -> operations.GetInstancesIDContentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get raw tag
+        Get the raw content of one DICOM tag in the hierarchy of DICOM dataset
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/content", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -691,15 +816,18 @@ class SDK:
 
     
     def get_instances_id_file(self, request: operations.GetInstancesIDFileRequest) -> operations.GetInstancesIDFileResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Download DICOM
+        Download one DICOM instance
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/file", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -718,13 +846,17 @@ class SDK:
 
     
     def get_instances_id_frames(self, request: operations.GetInstancesIDFramesRequest) -> operations.GetInstancesIDFramesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List available frames
+        List the frames that are available in the DICOM instance of interest
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/frames", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -739,13 +871,17 @@ class SDK:
 
     
     def get_instances_id_frames_frame_(self, request: operations.GetInstancesIDFramesFrameRequest) -> operations.GetInstancesIDFramesFrameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List operations
+        List the available operations under URI `/instances/{id}/frames/{frame}/`
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/frames/{frame}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -760,17 +896,19 @@ class SDK:
 
     
     def get_instances_id_frames_frame_image_int16(self, request: operations.GetInstancesIDFramesFrameImageInt16Request) -> operations.GetInstancesIDFramesFrameImageInt16Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Decode a frame (int16)
+        Decode one frame of interest from the given DICOM instance. Pixels of grayscale images are truncated to the [-32768,32767] range. Negative values must be interpreted according to two's complement.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/frames/{frame}/image-int16", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -788,17 +926,19 @@ class SDK:
 
     
     def get_instances_id_frames_frame_image_uint16(self, request: operations.GetInstancesIDFramesFrameImageUint16Request) -> operations.GetInstancesIDFramesFrameImageUint16Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Decode a frame (uint16)
+        Decode one frame of interest from the given DICOM instance. Pixels of grayscale images are truncated to the [0,65535] range.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/frames/{frame}/image-uint16", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -816,17 +956,19 @@ class SDK:
 
     
     def get_instances_id_frames_frame_image_uint8(self, request: operations.GetInstancesIDFramesFrameImageUint8Request) -> operations.GetInstancesIDFramesFrameImageUint8Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Decode a frame (uint8)
+        Decode one frame of interest from the given DICOM instance. Pixels of grayscale images are truncated to the [0,255] range.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/frames/{frame}/image-uint8", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -844,13 +986,17 @@ class SDK:
 
     
     def get_instances_id_frames_frame_matlab(self, request: operations.GetInstancesIDFramesFrameMatlabRequest) -> operations.GetInstancesIDFramesFrameMatlabResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Decode frame for Matlab
+        Decode one frame of interest from the given DICOM instance, and export this frame as a Octave/Matlab matrix to be imported with `eval()`: https://book.orthanc-server.com/faq/matlab.html
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/frames/{frame}/matlab", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -864,17 +1010,19 @@ class SDK:
 
     
     def get_instances_id_frames_frame_preview(self, request: operations.GetInstancesIDFramesFramePreviewRequest) -> operations.GetInstancesIDFramesFramePreviewResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Decode a frame (preview)
+        Decode one frame of interest from the given DICOM instance. The full dynamic range of grayscale images is rescaled to the [0,255] range.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/frames/{frame}/preview", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -892,13 +1040,17 @@ class SDK:
 
     
     def get_instances_id_frames_frame_raw(self, request: operations.GetInstancesIDFramesFrameRawRequest) -> operations.GetInstancesIDFramesFrameRawResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Access raw frame
+        Access the raw content of one individual frame of the DICOM instance of interest, bypassing image decoding. This is notably useful to access the source files in compressed transfer syntaxes.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/frames/{frame}/raw", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -912,13 +1064,17 @@ class SDK:
 
     
     def get_instances_id_frames_frame_raw_gz(self, request: operations.GetInstancesIDFramesFrameRawGzRequest) -> operations.GetInstancesIDFramesFrameRawGzResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Access raw frame (compressed)
+        Access the raw content of one individual frame of the DICOM instance of interest, bypassing image decoding. This is notably useful to access the source files in compressed transfer syntaxes. The image is compressed using gzip
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/frames/{frame}/raw.gz", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -932,17 +1088,19 @@ class SDK:
 
     
     def get_instances_id_frames_frame_rendered(self, request: operations.GetInstancesIDFramesFrameRenderedRequest) -> operations.GetInstancesIDFramesFrameRenderedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Render a frame
+        Render one frame of interest from the given DICOM instance. This function takes scaling into account (`RescaleSlope` and `RescaleIntercept` tags), as well as the default windowing stored in the DICOM file (`WindowCenter` and `WindowWidth`tags), and can be used to resize the resulting image. Color images are not affected by windowing.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/frames/{frame}/rendered", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -960,15 +1118,18 @@ class SDK:
 
     
     def get_instances_id_header(self, request: operations.GetInstancesIDHeaderRequest) -> operations.GetInstancesIDHeaderResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get DICOM meta-header
+        Get the DICOM tags in the meta-header of the DICOM instance. By default, the `full` format is used, which combines hexadecimal tags with human-readable description.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/header", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -983,17 +1144,19 @@ class SDK:
 
     
     def get_instances_id_image_int16(self, request: operations.GetInstancesIDImageInt16Request) -> operations.GetInstancesIDImageInt16Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Decode an image (int16)
+        Decode the first frame of the given DICOM instance. Pixels of grayscale images are truncated to the [-32768,32767] range. Negative values must be interpreted according to two's complement.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/image-int16", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1011,17 +1174,19 @@ class SDK:
 
     
     def get_instances_id_image_uint16(self, request: operations.GetInstancesIDImageUint16Request) -> operations.GetInstancesIDImageUint16Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Decode an image (uint16)
+        Decode the first frame of the given DICOM instance. Pixels of grayscale images are truncated to the [0,65535] range.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/image-uint16", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1039,17 +1204,19 @@ class SDK:
 
     
     def get_instances_id_image_uint8(self, request: operations.GetInstancesIDImageUint8Request) -> operations.GetInstancesIDImageUint8Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Decode an image (uint8)
+        Decode the first frame of the given DICOM instance. Pixels of grayscale images are truncated to the [0,255] range.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/image-uint8", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1067,13 +1234,17 @@ class SDK:
 
     
     def get_instances_id_matlab(self, request: operations.GetInstancesIDMatlabRequest) -> operations.GetInstancesIDMatlabResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Decode frame for Matlab
+        Decode the first frame of the given DICOM instance., and export this frame as a Octave/Matlab matrix to be imported with `eval()`: https://book.orthanc-server.com/faq/matlab.html
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/matlab", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1087,15 +1258,18 @@ class SDK:
 
     
     def get_instances_id_metadata(self, request: operations.GetInstancesIDMetadataRequest) -> operations.GetInstancesIDMetadataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List metadata
+        Get the list of metadata that are associated with the given instance
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/metadata", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1110,15 +1284,18 @@ class SDK:
 
     
     def get_instances_id_metadata_name_(self, request: operations.GetInstancesIDMetadataNameRequest) -> operations.GetInstancesIDMetadataNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get metadata
+        Get the value of a metadata that is associated with the given instance
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/metadata/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1134,15 +1311,18 @@ class SDK:
 
     
     def get_instances_id_module(self, request: operations.GetInstancesIDModuleRequest) -> operations.GetInstancesIDModuleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get instance module
+        Get the instance module of the DICOM instance whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/module", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1157,15 +1337,18 @@ class SDK:
 
     
     def get_instances_id_patient(self, request: operations.GetInstancesIDPatientRequest) -> operations.GetInstancesIDPatientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get parent patient
+        Get detailed information about the parent patient of the DICOM instance whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/patient", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1180,13 +1363,17 @@ class SDK:
 
     
     def get_instances_id_pdf(self, request: operations.GetInstancesIDPdfRequest) -> operations.GetInstancesIDPdfResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get embedded PDF
+        Get the PDF file that is embedded in one DICOM instance. If the DICOM instance doesn't contain the `EncapsulatedDocument` tag or if the `MIMETypeOfEncapsulatedDocument` tag doesn't correspond to the PDF type, a `404` HTTP error is raised.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/pdf", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1200,17 +1387,19 @@ class SDK:
 
     
     def get_instances_id_preview(self, request: operations.GetInstancesIDPreviewRequest) -> operations.GetInstancesIDPreviewResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Decode an image (preview)
+        Decode the first frame of the given DICOM instance. The full dynamic range of grayscale images is rescaled to the [0,255] range.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/preview", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1228,17 +1417,19 @@ class SDK:
 
     
     def get_instances_id_rendered(self, request: operations.GetInstancesIDRenderedRequest) -> operations.GetInstancesIDRenderedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Render an image
+        Render the first frame of the given DICOM instance. This function takes scaling into account (`RescaleSlope` and `RescaleIntercept` tags), as well as the default windowing stored in the DICOM file (`WindowCenter` and `WindowWidth`tags), and can be used to resize the resulting image. Color images are not affected by windowing.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/rendered", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1256,15 +1447,18 @@ class SDK:
 
     
     def get_instances_id_series(self, request: operations.GetInstancesIDSeriesRequest) -> operations.GetInstancesIDSeriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get parent series
+        Get detailed information about the parent series of the DICOM instance whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/series", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1279,15 +1473,18 @@ class SDK:
 
     
     def get_instances_id_simplified_tags(self, request: operations.GetInstancesIDSimplifiedTagsRequest) -> operations.GetInstancesIDSimplifiedTagsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get human-readable tags
+        Get the DICOM tags in human-readable format (same as the `/instances/{id}/tags?simplify` route)
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/simplified-tags", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1302,13 +1499,17 @@ class SDK:
 
     
     def get_instances_id_statistics(self, request: operations.GetInstancesIDStatisticsRequest) -> operations.GetInstancesIDStatisticsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get instance statistics
+        Get statistics about the given instance
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/statistics", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1323,15 +1524,18 @@ class SDK:
 
     
     def get_instances_id_study(self, request: operations.GetInstancesIDStudyRequest) -> operations.GetInstancesIDStudyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get parent study
+        Get detailed information about the parent study of the DICOM instance whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/study", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1346,15 +1550,18 @@ class SDK:
 
     
     def get_instances_id_tags(self, request: operations.GetInstancesIDTagsRequest) -> operations.GetInstancesIDTagsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get DICOM tags
+        Get the DICOM tags in the specified format. By default, the `full` format is used, which combines hexadecimal tags with human-readable description.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/tags", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1369,15 +1576,18 @@ class SDK:
 
     
     def get_jobs(self, request: operations.GetJobsRequest) -> operations.GetJobsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List jobs
+        List all the available jobs
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/jobs"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1392,13 +1602,17 @@ class SDK:
 
     
     def get_jobs_id_(self, request: operations.GetJobsIDRequest) -> operations.GetJobsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get job
+        Retrieve detailed information about the job whose identifier is provided in the URL: https://book.orthanc-server.com/users/advanced-rest.html#jobs
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1413,13 +1627,17 @@ class SDK:
 
     
     def get_jobs_id_key_(self, request: operations.GetJobsIDKeyRequest) -> operations.GetJobsIDKeyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get job output
+        Retrieve some output produced by a job. As of Orthanc 1.8.2, only the jobs that generate a DICOMDIR media or a ZIP archive provide such an output (with `key` equals to `archive`).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{id}/{key}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1433,15 +1651,18 @@ class SDK:
 
     
     def get_modalities(self, request: operations.GetModalitiesRequest) -> operations.GetModalitiesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List DICOM modalities
+        List all the DICOM modalities that are known to Orthanc. This corresponds either to the content of the `DicomModalities` configuration option, or to the information stored in the database if `DicomModalitiesInDatabase` is `true`.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/modalities"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1456,13 +1677,17 @@ class SDK:
 
     
     def get_modalities_id_(self, request: operations.GetModalitiesIDRequest) -> operations.GetModalitiesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List operations on modality
+        List the operations that are available for a DICOM modality.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/modalities/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1477,13 +1702,17 @@ class SDK:
 
     
     def get_modalities_id_configuration(self, request: operations.GetModalitiesIDConfigurationRequest) -> operations.GetModalitiesIDConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get modality configuration
+        Get detailed information about the configuration of some DICOM modality
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/modalities/{id}/configuration", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1498,15 +1727,18 @@ class SDK:
 
     
     def get_patients(self, request: operations.GetPatientsRequest) -> operations.GetPatientsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List the available patients
+        List the Orthanc identifiers of all the available DICOM patients
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/patients"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1521,15 +1753,18 @@ class SDK:
 
     
     def get_patients_id_(self, request: operations.GetPatientsIDRequest) -> operations.GetPatientsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get information about some patient
+        Get detailed information about the DICOM patient whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1544,15 +1779,18 @@ class SDK:
 
     
     def get_patients_id_archive(self, request: operations.GetPatientsIDArchiveRequest) -> operations.GetPatientsIDArchiveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create ZIP archive
+        Synchronously create a ZIP archive containing the DICOM patient whose Orthanc identifier is provided in the URL. This flavor is synchronous, which might *not* be desirable to archive large amount of data, as it might lead to network timeouts. Prefer the asynchronous version using `POST` method.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/archive", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1566,13 +1804,17 @@ class SDK:
 
     
     def get_patients_id_attachments(self, request: operations.GetPatientsIDAttachmentsRequest) -> operations.GetPatientsIDAttachmentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List attachments
+        Get the list of attachments that are associated with the given patient
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/attachments", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1587,15 +1829,18 @@ class SDK:
 
     
     def get_patients_id_attachments_name_(self, request: operations.GetPatientsIDAttachmentsNameRequest) -> operations.GetPatientsIDAttachmentsNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List operations on attachments
+        Get the list of the operations that are available for attachments associated with the given patient
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/attachments/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1612,15 +1857,18 @@ class SDK:
 
     
     def get_patients_id_attachments_name_compressed_data(self, request: operations.GetPatientsIDAttachmentsNameCompressedDataRequest) -> operations.GetPatientsIDAttachmentsNameCompressedDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get attachment (no decompression)
+        Get the (binary) content of one attachment associated with the given patient. The attachment will not be decompressed if `StorageCompression` is `true`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/attachments/{name}/compressed-data", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1636,15 +1884,18 @@ class SDK:
 
     
     def get_patients_id_attachments_name_compressed_md5(self, request: operations.GetPatientsIDAttachmentsNameCompressedMd5Request) -> operations.GetPatientsIDAttachmentsNameCompressedMd5Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get MD5 of attachment on disk
+        Get the MD5 hash of one attachment associated with the given patient, as stored on the disk. This is different from `.../md5` iff `EnableStorage` is `true`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/attachments/{name}/compressed-md5", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1660,15 +1911,18 @@ class SDK:
 
     
     def get_patients_id_attachments_name_compressed_size(self, request: operations.GetPatientsIDAttachmentsNameCompressedSizeRequest) -> operations.GetPatientsIDAttachmentsNameCompressedSizeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get size of attachment on disk
+        Get the size of one attachment associated with the given patient, as stored on the disk. This is different from `.../size` iff `EnableStorage` is `true`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/attachments/{name}/compressed-size", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1684,15 +1938,18 @@ class SDK:
 
     
     def get_patients_id_attachments_name_data(self, request: operations.GetPatientsIDAttachmentsNameDataRequest) -> operations.GetPatientsIDAttachmentsNameDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get attachment
+        Get the (binary) content of one attachment associated with the given patient
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/attachments/{name}/data", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1708,15 +1965,18 @@ class SDK:
 
     
     def get_patients_id_attachments_name_is_compressed(self, request: operations.GetPatientsIDAttachmentsNameIsCompressedRequest) -> operations.GetPatientsIDAttachmentsNameIsCompressedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Is attachment compressed?
+        Test whether the attachment has been stored as a compressed file on the disk.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/attachments/{name}/is-compressed", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1732,15 +1992,18 @@ class SDK:
 
     
     def get_patients_id_attachments_name_md5(self, request: operations.GetPatientsIDAttachmentsNameMd5Request) -> operations.GetPatientsIDAttachmentsNameMd5Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get MD5 of attachment
+        Get the MD5 hash of one attachment associated with the given patient
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/attachments/{name}/md5", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1756,15 +2019,18 @@ class SDK:
 
     
     def get_patients_id_attachments_name_size(self, request: operations.GetPatientsIDAttachmentsNameSizeRequest) -> operations.GetPatientsIDAttachmentsNameSizeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get size of attachment
+        Get the size of one attachment associated with the given patient
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/attachments/{name}/size", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1780,15 +2046,18 @@ class SDK:
 
     
     def get_patients_id_instances(self, request: operations.GetPatientsIDInstancesRequest) -> operations.GetPatientsIDInstancesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get child instances
+        Get detailed information about the child instances of the DICOM patient whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/instances", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1803,15 +2072,18 @@ class SDK:
 
     
     def get_patients_id_instances_tags(self, request: operations.GetPatientsIDInstancesTagsRequest) -> operations.GetPatientsIDInstancesTagsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get tags of instances
+        Get the tags of all the child instances of the DICOM patient whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/instances-tags", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1826,15 +2098,18 @@ class SDK:
 
     
     def get_patients_id_media(self, request: operations.GetPatientsIDMediaRequest) -> operations.GetPatientsIDMediaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create DICOMDIR media
+        Synchronously create a DICOMDIR media containing the DICOM patient whose Orthanc identifier is provided in the URL. This flavor is synchronous, which might *not* be desirable to archive large amount of data, as it might lead to network timeouts. Prefer the asynchronous version using `POST` method.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/media", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1848,15 +2123,18 @@ class SDK:
 
     
     def get_patients_id_metadata(self, request: operations.GetPatientsIDMetadataRequest) -> operations.GetPatientsIDMetadataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List metadata
+        Get the list of metadata that are associated with the given patient
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/metadata", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1871,15 +2149,18 @@ class SDK:
 
     
     def get_patients_id_metadata_name_(self, request: operations.GetPatientsIDMetadataNameRequest) -> operations.GetPatientsIDMetadataNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get metadata
+        Get the value of a metadata that is associated with the given patient
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/metadata/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1895,15 +2176,18 @@ class SDK:
 
     
     def get_patients_id_module(self, request: operations.GetPatientsIDModuleRequest) -> operations.GetPatientsIDModuleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get patient module
+        Get the patient module of the DICOM patient whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/module", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1918,13 +2202,17 @@ class SDK:
 
     
     def get_patients_id_protected(self, request: operations.GetPatientsIDProtectedRequest) -> operations.GetPatientsIDProtectedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Is the patient protected against recycling?
+        Is the patient protected against recycling?
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/protected", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -1938,15 +2226,18 @@ class SDK:
 
     
     def get_patients_id_series(self, request: operations.GetPatientsIDSeriesRequest) -> operations.GetPatientsIDSeriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get child series
+        Get detailed information about the child series of the DICOM patient whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/series", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1961,15 +2252,18 @@ class SDK:
 
     
     def get_patients_id_shared_tags(self, request: operations.GetPatientsIDSharedTagsRequest) -> operations.GetPatientsIDSharedTagsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get shared tags
+        Extract the DICOM tags whose value is constant across all the child instances of the DICOM patient whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/shared-tags", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -1984,13 +2278,17 @@ class SDK:
 
     
     def get_patients_id_statistics(self, request: operations.GetPatientsIDStatisticsRequest) -> operations.GetPatientsIDStatisticsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get patient statistics
+        Get statistics about the given patient
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/statistics", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2005,15 +2303,18 @@ class SDK:
 
     
     def get_patients_id_studies(self, request: operations.GetPatientsIDStudiesRequest) -> operations.GetPatientsIDStudiesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get child studies
+        Get detailed information about the child studies of the DICOM patient whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/studies", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2028,15 +2329,18 @@ class SDK:
 
     
     def get_peers(self, request: operations.GetPeersRequest) -> operations.GetPeersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List Orthanc peers
+        List all the Orthanc peers that are known to Orthanc. This corresponds either to the content of the `OrthancPeers` configuration option, or to the information stored in the database if `OrthancPeersInDatabase` is `true`.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/peers"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2051,13 +2355,17 @@ class SDK:
 
     
     def get_peers_id_(self, request: operations.GetPeersIDRequest) -> operations.GetPeersIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List operations on peer
+        List the operations that are available for an Orthanc peer.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/peers/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2072,13 +2380,17 @@ class SDK:
 
     
     def get_peers_id_configuration(self, request: operations.GetPeersIDConfigurationRequest) -> operations.GetPeersIDConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get peer configuration
+        Get detailed information about the configuration of some Orthanc peer
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/peers/{id}/configuration", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2093,13 +2405,17 @@ class SDK:
 
     
     def get_peers_id_system(self, request: operations.GetPeersIDSystemRequest) -> operations.GetPeersIDSystemResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get peer system information
+        Get system information about some Orthanc peer. This corresponds to doing a `GET` request against the `/system` URI of the remote peer. This route can be used to test connectivity.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/peers/{id}/system", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2114,13 +2430,17 @@ class SDK:
 
     
     def get_plugins(self) -> operations.GetPluginsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List plugins
+        List all the installed plugins
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/plugins"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2135,13 +2455,17 @@ class SDK:
 
     
     def get_plugins_explorer_js(self) -> operations.GetPluginsExplorerJsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""JavaScript extensions to Orthanc Explorer
+        Get the JavaScript extensions that are installed by all the plugins using the `OrthancPluginExtendOrthancExplorer()` function of the plugin SDK. This route is for internal use of Orthanc Explorer.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/plugins/explorer.js"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2155,13 +2479,17 @@ class SDK:
 
     
     def get_plugins_id_(self, request: operations.GetPluginsIDRequest) -> operations.GetPluginsIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get plugin
+        Get system information about the plugin whose identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/plugins/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2176,13 +2504,17 @@ class SDK:
 
     
     def get_queries(self) -> operations.GetQueriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List query/retrieve operations
+        List the identifiers of all the query/retrieve operations on DICOM modalities, as initiated by calls to `/modalities/{id}/query`. The length of this list is bounded by the `QueryRetrieveSize` configuration option of Orthanc. https://book.orthanc-server.com/users/rest.html#performing-query-retrieve-c-find-and-find-with-rest
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/queries"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2197,13 +2529,17 @@ class SDK:
 
     
     def get_queries_id_(self, request: operations.GetQueriesIDRequest) -> operations.GetQueriesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List operations on a query
+        List the available operations for the query/retrieve operation whose identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/queries/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2218,15 +2554,18 @@ class SDK:
 
     
     def get_queries_id_answers(self, request: operations.GetQueriesIDAnswersRequest) -> operations.GetQueriesIDAnswersResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List answers to a query
+        List the indices of all the available answers resulting from a query/retrieve operation on some DICOM modality, whose identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/queries/{id}/answers", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2241,13 +2580,17 @@ class SDK:
 
     
     def get_queries_id_answers_index_(self, request: operations.GetQueriesIDAnswersIndexRequest) -> operations.GetQueriesIDAnswersIndexResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List operations on an answer
+        List the available operations on an answer associated with the query/retrieve operation whose identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/queries/{id}/answers/{index}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2262,15 +2605,18 @@ class SDK:
 
     
     def get_queries_id_answers_index_content(self, request: operations.GetQueriesIDAnswersIndexContentRequest) -> operations.GetQueriesIDAnswersIndexContentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get one answer
+        Get the content (DICOM tags) of one answer associated with the query/retrieve operation whose identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/queries/{id}/answers/{index}/content", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2285,13 +2631,17 @@ class SDK:
 
     
     def get_queries_id_level(self, request: operations.GetQueriesIDLevelRequest) -> operations.GetQueriesIDLevelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get level of original query
+        Get the query level (value of the `QueryRetrieveLevel` tag) of the query/retrieve operation whose identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/queries/{id}/level", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2305,13 +2655,17 @@ class SDK:
 
     
     def get_queries_id_modality(self, request: operations.GetQueriesIDModalityRequest) -> operations.GetQueriesIDModalityResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get modality of original query
+        Get the identifier of the DICOM modality that was targeted by the query/retrieve operation whose identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/queries/{id}/modality", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2325,15 +2679,18 @@ class SDK:
 
     
     def get_queries_id_query(self, request: operations.GetQueriesIDQueryRequest) -> operations.GetQueriesIDQueryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get original query arguments
+        Get the original DICOM filter associated with the query/retrieve operation whose identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/queries/{id}/query", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2348,15 +2705,18 @@ class SDK:
 
     
     def get_series(self, request: operations.GetSeriesRequest) -> operations.GetSeriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List the available series
+        List the Orthanc identifiers of all the available DICOM series
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/series"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2371,15 +2731,18 @@ class SDK:
 
     
     def get_series_id_(self, request: operations.GetSeriesIDRequest) -> operations.GetSeriesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get information about some series
+        Get detailed information about the DICOM series whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2394,15 +2757,18 @@ class SDK:
 
     
     def get_series_id_archive(self, request: operations.GetSeriesIDArchiveRequest) -> operations.GetSeriesIDArchiveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create ZIP archive
+        Synchronously create a ZIP archive containing the DICOM series whose Orthanc identifier is provided in the URL. This flavor is synchronous, which might *not* be desirable to archive large amount of data, as it might lead to network timeouts. Prefer the asynchronous version using `POST` method.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/archive", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2416,13 +2782,17 @@ class SDK:
 
     
     def get_series_id_attachments(self, request: operations.GetSeriesIDAttachmentsRequest) -> operations.GetSeriesIDAttachmentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List attachments
+        Get the list of attachments that are associated with the given series
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/attachments", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2437,15 +2807,18 @@ class SDK:
 
     
     def get_series_id_attachments_name_(self, request: operations.GetSeriesIDAttachmentsNameRequest) -> operations.GetSeriesIDAttachmentsNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List operations on attachments
+        Get the list of the operations that are available for attachments associated with the given series
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/attachments/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2462,15 +2835,18 @@ class SDK:
 
     
     def get_series_id_attachments_name_compressed_data(self, request: operations.GetSeriesIDAttachmentsNameCompressedDataRequest) -> operations.GetSeriesIDAttachmentsNameCompressedDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get attachment (no decompression)
+        Get the (binary) content of one attachment associated with the given series. The attachment will not be decompressed if `StorageCompression` is `true`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/attachments/{name}/compressed-data", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2486,15 +2862,18 @@ class SDK:
 
     
     def get_series_id_attachments_name_compressed_md5(self, request: operations.GetSeriesIDAttachmentsNameCompressedMd5Request) -> operations.GetSeriesIDAttachmentsNameCompressedMd5Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get MD5 of attachment on disk
+        Get the MD5 hash of one attachment associated with the given series, as stored on the disk. This is different from `.../md5` iff `EnableStorage` is `true`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/attachments/{name}/compressed-md5", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2510,15 +2889,18 @@ class SDK:
 
     
     def get_series_id_attachments_name_compressed_size(self, request: operations.GetSeriesIDAttachmentsNameCompressedSizeRequest) -> operations.GetSeriesIDAttachmentsNameCompressedSizeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get size of attachment on disk
+        Get the size of one attachment associated with the given series, as stored on the disk. This is different from `.../size` iff `EnableStorage` is `true`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/attachments/{name}/compressed-size", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2534,15 +2916,18 @@ class SDK:
 
     
     def get_series_id_attachments_name_data(self, request: operations.GetSeriesIDAttachmentsNameDataRequest) -> operations.GetSeriesIDAttachmentsNameDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get attachment
+        Get the (binary) content of one attachment associated with the given series
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/attachments/{name}/data", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2558,15 +2943,18 @@ class SDK:
 
     
     def get_series_id_attachments_name_is_compressed(self, request: operations.GetSeriesIDAttachmentsNameIsCompressedRequest) -> operations.GetSeriesIDAttachmentsNameIsCompressedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Is attachment compressed?
+        Test whether the attachment has been stored as a compressed file on the disk.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/attachments/{name}/is-compressed", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2582,15 +2970,18 @@ class SDK:
 
     
     def get_series_id_attachments_name_md5(self, request: operations.GetSeriesIDAttachmentsNameMd5Request) -> operations.GetSeriesIDAttachmentsNameMd5Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get MD5 of attachment
+        Get the MD5 hash of one attachment associated with the given series
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/attachments/{name}/md5", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2606,15 +2997,18 @@ class SDK:
 
     
     def get_series_id_attachments_name_size(self, request: operations.GetSeriesIDAttachmentsNameSizeRequest) -> operations.GetSeriesIDAttachmentsNameSizeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get size of attachment
+        Get the size of one attachment associated with the given series
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/attachments/{name}/size", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2630,15 +3024,18 @@ class SDK:
 
     
     def get_series_id_instances(self, request: operations.GetSeriesIDInstancesRequest) -> operations.GetSeriesIDInstancesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get child instances
+        Get detailed information about the child instances of the DICOM series whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/instances", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2653,15 +3050,18 @@ class SDK:
 
     
     def get_series_id_instances_tags(self, request: operations.GetSeriesIDInstancesTagsRequest) -> operations.GetSeriesIDInstancesTagsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get tags of instances
+        Get the tags of all the child instances of the DICOM series whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/instances-tags", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2676,15 +3076,18 @@ class SDK:
 
     
     def get_series_id_media(self, request: operations.GetSeriesIDMediaRequest) -> operations.GetSeriesIDMediaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create DICOMDIR media
+        Synchronously create a DICOMDIR media containing the DICOM series whose Orthanc identifier is provided in the URL. This flavor is synchronous, which might *not* be desirable to archive large amount of data, as it might lead to network timeouts. Prefer the asynchronous version using `POST` method.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/media", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2698,15 +3101,18 @@ class SDK:
 
     
     def get_series_id_metadata(self, request: operations.GetSeriesIDMetadataRequest) -> operations.GetSeriesIDMetadataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List metadata
+        Get the list of metadata that are associated with the given series
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/metadata", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2721,15 +3127,18 @@ class SDK:
 
     
     def get_series_id_metadata_name_(self, request: operations.GetSeriesIDMetadataNameRequest) -> operations.GetSeriesIDMetadataNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get metadata
+        Get the value of a metadata that is associated with the given series
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/metadata/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2745,15 +3154,18 @@ class SDK:
 
     
     def get_series_id_module(self, request: operations.GetSeriesIDModuleRequest) -> operations.GetSeriesIDModuleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get series module
+        Get the series module of the DICOM series whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/module", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2768,13 +3180,17 @@ class SDK:
 
     
     def get_series_id_ordered_slices(self, request: operations.GetSeriesIDOrderedSlicesRequest) -> operations.GetSeriesIDOrderedSlicesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Order the slices
+        Sort the instances and frames (slices) of the DICOM series whose Orthanc identifier is provided in the URL. This URI is essentially used by the Orthanc Web viewer and by the Osimis Web viewer.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/ordered-slices", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2789,15 +3205,18 @@ class SDK:
 
     
     def get_series_id_patient(self, request: operations.GetSeriesIDPatientRequest) -> operations.GetSeriesIDPatientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get parent patient
+        Get detailed information about the parent patient of the DICOM series whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/patient", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2812,15 +3231,18 @@ class SDK:
 
     
     def get_series_id_shared_tags(self, request: operations.GetSeriesIDSharedTagsRequest) -> operations.GetSeriesIDSharedTagsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get shared tags
+        Extract the DICOM tags whose value is constant across all the child instances of the DICOM series whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/shared-tags", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2835,13 +3257,17 @@ class SDK:
 
     
     def get_series_id_statistics(self, request: operations.GetSeriesIDStatisticsRequest) -> operations.GetSeriesIDStatisticsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get series statistics
+        Get statistics about the given series
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/statistics", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2856,15 +3282,18 @@ class SDK:
 
     
     def get_series_id_study(self, request: operations.GetSeriesIDStudyRequest) -> operations.GetSeriesIDStudyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get parent study
+        Get detailed information about the parent study of the DICOM series whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/study", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2879,13 +3308,17 @@ class SDK:
 
     
     def get_statistics(self) -> operations.GetStatisticsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get database statistics
+        Get statistics related to the database of Orthanc
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/statistics"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2900,13 +3333,17 @@ class SDK:
 
     
     def get_storage_commitment_id_(self, request: operations.GetStorageCommitmentIDRequest) -> operations.GetStorageCommitmentIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get storage commitment report
+        Get the storage commitment report whose identifier is provided in the URL: https://book.orthanc-server.com/users/storage-commitment.html#storage-commitment-scu
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/storage-commitment/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -2921,15 +3358,18 @@ class SDK:
 
     
     def get_studies(self, request: operations.GetStudiesRequest) -> operations.GetStudiesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List the available studies
+        List the Orthanc identifiers of all the available DICOM studies
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/studies"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2944,15 +3384,18 @@ class SDK:
 
     
     def get_studies_id_(self, request: operations.GetStudiesIDRequest) -> operations.GetStudiesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get information about some study
+        Get detailed information about the DICOM study whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2967,15 +3410,18 @@ class SDK:
 
     
     def get_studies_id_archive(self, request: operations.GetStudiesIDArchiveRequest) -> operations.GetStudiesIDArchiveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create ZIP archive
+        Synchronously create a ZIP archive containing the DICOM study whose Orthanc identifier is provided in the URL. This flavor is synchronous, which might *not* be desirable to archive large amount of data, as it might lead to network timeouts. Prefer the asynchronous version using `POST` method.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/archive", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -2989,13 +3435,17 @@ class SDK:
 
     
     def get_studies_id_attachments(self, request: operations.GetStudiesIDAttachmentsRequest) -> operations.GetStudiesIDAttachmentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List attachments
+        Get the list of attachments that are associated with the given study
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/attachments", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3010,15 +3460,18 @@ class SDK:
 
     
     def get_studies_id_attachments_name_(self, request: operations.GetStudiesIDAttachmentsNameRequest) -> operations.GetStudiesIDAttachmentsNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List operations on attachments
+        Get the list of the operations that are available for attachments associated with the given study
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/attachments/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3035,15 +3488,18 @@ class SDK:
 
     
     def get_studies_id_attachments_name_compressed_data(self, request: operations.GetStudiesIDAttachmentsNameCompressedDataRequest) -> operations.GetStudiesIDAttachmentsNameCompressedDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get attachment (no decompression)
+        Get the (binary) content of one attachment associated with the given study. The attachment will not be decompressed if `StorageCompression` is `true`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/attachments/{name}/compressed-data", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3059,15 +3515,18 @@ class SDK:
 
     
     def get_studies_id_attachments_name_compressed_md5(self, request: operations.GetStudiesIDAttachmentsNameCompressedMd5Request) -> operations.GetStudiesIDAttachmentsNameCompressedMd5Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get MD5 of attachment on disk
+        Get the MD5 hash of one attachment associated with the given study, as stored on the disk. This is different from `.../md5` iff `EnableStorage` is `true`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/attachments/{name}/compressed-md5", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3083,15 +3542,18 @@ class SDK:
 
     
     def get_studies_id_attachments_name_compressed_size(self, request: operations.GetStudiesIDAttachmentsNameCompressedSizeRequest) -> operations.GetStudiesIDAttachmentsNameCompressedSizeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get size of attachment on disk
+        Get the size of one attachment associated with the given study, as stored on the disk. This is different from `.../size` iff `EnableStorage` is `true`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/attachments/{name}/compressed-size", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3107,15 +3569,18 @@ class SDK:
 
     
     def get_studies_id_attachments_name_data(self, request: operations.GetStudiesIDAttachmentsNameDataRequest) -> operations.GetStudiesIDAttachmentsNameDataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get attachment
+        Get the (binary) content of one attachment associated with the given study
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/attachments/{name}/data", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3131,15 +3596,18 @@ class SDK:
 
     
     def get_studies_id_attachments_name_is_compressed(self, request: operations.GetStudiesIDAttachmentsNameIsCompressedRequest) -> operations.GetStudiesIDAttachmentsNameIsCompressedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Is attachment compressed?
+        Test whether the attachment has been stored as a compressed file on the disk.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/attachments/{name}/is-compressed", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3155,15 +3623,18 @@ class SDK:
 
     
     def get_studies_id_attachments_name_md5(self, request: operations.GetStudiesIDAttachmentsNameMd5Request) -> operations.GetStudiesIDAttachmentsNameMd5Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get MD5 of attachment
+        Get the MD5 hash of one attachment associated with the given study
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/attachments/{name}/md5", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3179,15 +3650,18 @@ class SDK:
 
     
     def get_studies_id_attachments_name_size(self, request: operations.GetStudiesIDAttachmentsNameSizeRequest) -> operations.GetStudiesIDAttachmentsNameSizeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get size of attachment
+        Get the size of one attachment associated with the given study
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/attachments/{name}/size", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3203,15 +3677,18 @@ class SDK:
 
     
     def get_studies_id_instances(self, request: operations.GetStudiesIDInstancesRequest) -> operations.GetStudiesIDInstancesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get child instances
+        Get detailed information about the child instances of the DICOM study whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/instances", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3226,15 +3703,18 @@ class SDK:
 
     
     def get_studies_id_instances_tags(self, request: operations.GetStudiesIDInstancesTagsRequest) -> operations.GetStudiesIDInstancesTagsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get tags of instances
+        Get the tags of all the child instances of the DICOM study whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/instances-tags", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3249,15 +3729,18 @@ class SDK:
 
     
     def get_studies_id_media(self, request: operations.GetStudiesIDMediaRequest) -> operations.GetStudiesIDMediaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create DICOMDIR media
+        Synchronously create a DICOMDIR media containing the DICOM study whose Orthanc identifier is provided in the URL. This flavor is synchronous, which might *not* be desirable to archive large amount of data, as it might lead to network timeouts. Prefer the asynchronous version using `POST` method.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/media", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3271,15 +3754,18 @@ class SDK:
 
     
     def get_studies_id_metadata(self, request: operations.GetStudiesIDMetadataRequest) -> operations.GetStudiesIDMetadataResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List metadata
+        Get the list of metadata that are associated with the given study
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/metadata", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3294,15 +3780,18 @@ class SDK:
 
     
     def get_studies_id_metadata_name_(self, request: operations.GetStudiesIDMetadataNameRequest) -> operations.GetStudiesIDMetadataNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get metadata
+        Get the value of a metadata that is associated with the given study
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/metadata/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3318,15 +3807,18 @@ class SDK:
 
     
     def get_studies_id_module(self, request: operations.GetStudiesIDModuleRequest) -> operations.GetStudiesIDModuleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get study module
+        Get the study module of the DICOM study whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/module", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3341,15 +3833,18 @@ class SDK:
 
     
     def get_studies_id_module_patient(self, request: operations.GetStudiesIDModulePatientRequest) -> operations.GetStudiesIDModulePatientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get patient module of study
+        Get the patient module of the DICOM study whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/module-patient", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3364,15 +3859,18 @@ class SDK:
 
     
     def get_studies_id_patient(self, request: operations.GetStudiesIDPatientRequest) -> operations.GetStudiesIDPatientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get parent patient
+        Get detailed information about the parent patient of the DICOM study whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/patient", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3387,15 +3885,18 @@ class SDK:
 
     
     def get_studies_id_series(self, request: operations.GetStudiesIDSeriesRequest) -> operations.GetStudiesIDSeriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get child series
+        Get detailed information about the child series of the DICOM study whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/series", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3410,15 +3911,18 @@ class SDK:
 
     
     def get_studies_id_shared_tags(self, request: operations.GetStudiesIDSharedTagsRequest) -> operations.GetStudiesIDSharedTagsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get shared tags
+        Extract the DICOM tags whose value is constant across all the child instances of the DICOM study whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/shared-tags", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3433,13 +3937,17 @@ class SDK:
 
     
     def get_studies_id_statistics(self, request: operations.GetStudiesIDStatisticsRequest) -> operations.GetStudiesIDStatisticsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get study statistics
+        Get statistics about the given study
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/statistics", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3454,13 +3962,17 @@ class SDK:
 
     
     def get_system(self) -> operations.GetSystemResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get system information
+        Get system information about Orthanc
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/system"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3475,13 +3987,17 @@ class SDK:
 
     
     def get_tools(self) -> operations.GetToolsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""List operations
+        List the available operations under URI `/tools/`
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3496,13 +4012,17 @@ class SDK:
 
     
     def get_tools_accepted_transfer_syntaxes(self) -> operations.GetToolsAcceptedTransferSyntaxesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get accepted transfer syntaxes
+        Get the list of UIDs of the DICOM transfer syntaxes that are accepted by Orthanc C-STORE SCP. This corresponds to the configuration options `AcceptedTransferSyntaxes` and `XXXTransferSyntaxAccepted`.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/accepted-transfer-syntaxes"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3517,13 +4037,17 @@ class SDK:
 
     
     def get_tools_default_encoding(self) -> operations.GetToolsDefaultEncodingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get default encoding
+        Get the default encoding that is used by Orthanc if parsing a DICOM instance without the `SpecificCharacterEncoding` tag, or during C-FIND. This corresponds to the configuration option `DefaultEncoding`.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/default-encoding"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3537,13 +4061,17 @@ class SDK:
 
     
     def get_tools_dicom_conformance(self) -> operations.GetToolsDicomConformanceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get DICOM conformance
+        Get the DICOM conformance statement of Orthanc
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/dicom-conformance"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3557,15 +4085,18 @@ class SDK:
 
     
     def get_tools_generate_uid(self, request: operations.GetToolsGenerateUIDRequest) -> operations.GetToolsGenerateUIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Generate an identifier
+        Generate a random DICOM identifier
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/generate-uid"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -3579,13 +4110,17 @@ class SDK:
 
     
     def get_tools_log_level(self) -> operations.GetToolsLogLevelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get main log level
+        Get the main log level of Orthanc
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/log-level"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3599,13 +4134,17 @@ class SDK:
 
     
     def get_tools_log_level_dicom(self) -> operations.GetToolsLogLevelDicomResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get log level for `dicom`
+        Get the log level of the log category `dicom`
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/log-level-dicom"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3619,13 +4158,17 @@ class SDK:
 
     
     def get_tools_log_level_generic(self) -> operations.GetToolsLogLevelGenericResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get log level for `generic`
+        Get the log level of the log category `generic`
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/log-level-generic"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3639,13 +4182,17 @@ class SDK:
 
     
     def get_tools_log_level_http(self) -> operations.GetToolsLogLevelHTTPResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get log level for `http`
+        Get the log level of the log category `http`
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/log-level-http"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3659,13 +4206,17 @@ class SDK:
 
     
     def get_tools_log_level_jobs(self) -> operations.GetToolsLogLevelJobsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get log level for `jobs`
+        Get the log level of the log category `jobs`
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/log-level-jobs"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3679,13 +4230,17 @@ class SDK:
 
     
     def get_tools_log_level_lua(self) -> operations.GetToolsLogLevelLuaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get log level for `lua`
+        Get the log level of the log category `lua`
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/log-level-lua"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3699,13 +4254,17 @@ class SDK:
 
     
     def get_tools_log_level_plugins(self) -> operations.GetToolsLogLevelPluginsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get log level for `plugins`
+        Get the log level of the log category `plugins`
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/log-level-plugins"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3719,13 +4278,17 @@ class SDK:
 
     
     def get_tools_log_level_sqlite(self) -> operations.GetToolsLogLevelSqliteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get log level for `sqlite`
+        Get the log level of the log category `sqlite`
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/log-level-sqlite"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3739,13 +4302,17 @@ class SDK:
 
     
     def get_tools_metrics(self) -> operations.GetToolsMetricsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Are metrics collected?
+        Returns a Boolean specifying whether Prometheus metrics are collected and exposed at `/tools/metrics-prometheus`
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/metrics"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3759,13 +4326,17 @@ class SDK:
 
     
     def get_tools_metrics_prometheus(self) -> operations.GetToolsMetricsPrometheusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get usage metrics
+        Get usage metrics of Orthanc in the Prometheus file format (OpenMetrics): https://book.orthanc-server.com/users/advanced-rest.html#instrumentation-with-prometheus
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/metrics-prometheus"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3778,13 +4349,17 @@ class SDK:
 
     
     def get_tools_now(self) -> operations.GetToolsNowResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get UTC time
+        Get UTC time
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/now"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3798,13 +4373,17 @@ class SDK:
 
     
     def get_tools_now_local(self) -> operations.GetToolsNowLocalResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get local time
+        Get local time
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/now-local"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3818,13 +4397,17 @@ class SDK:
 
     
     def get_tools_unknown_sop_class_accepted(self) -> operations.GetToolsUnknownSopClassAcceptedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Is unknown SOP class accepted?
+        Shall Orthanc C-STORE SCP accept DICOM instances with an unknown SOP class UID?
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/unknown-sop-class-accepted"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3838,19 +4421,21 @@ class SDK:
 
     
     def post_instances(self, request: operations.PostInstancesRequest) -> operations.PostInstancesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Upload DICOM instances
+        Upload DICOM instances
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/instances"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3865,19 +4450,21 @@ class SDK:
 
     
     def post_instances_id_anonymize(self, request: operations.PostInstancesIDAnonymizeRequest) -> operations.PostInstancesIDAnonymizeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Anonymize instance
+        Download an anonymized version of the DICOM instance whose Orthanc identifier is provided in the URL: https://book.orthanc-server.com/users/anonymization.html#anonymization-of-a-single-instance
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/anonymize", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3891,13 +4478,17 @@ class SDK:
 
     
     def post_instances_id_attachments_name_compress(self, request: operations.PostInstancesIDAttachmentsNameCompressRequest) -> operations.PostInstancesIDAttachmentsNameCompressResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Compress attachment
+        Change the compression scheme that is used to store an attachment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/attachments/{name}/compress", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3910,13 +4501,17 @@ class SDK:
 
     
     def post_instances_id_attachments_name_uncompress(self, request: operations.PostInstancesIDAttachmentsNameUncompressRequest) -> operations.PostInstancesIDAttachmentsNameUncompressResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Uncompress attachment
+        Change the compression scheme that is used to store an attachment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/attachments/{name}/uncompress", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3929,13 +4524,17 @@ class SDK:
 
     
     def post_instances_id_attachments_name_verify_md5(self, request: operations.PostInstancesIDAttachmentsNameVerifyMd5Request) -> operations.PostInstancesIDAttachmentsNameVerifyMd5Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Verify attachment
+        Verify that the attachment is not corrupted, by validating its MD5 hash
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/attachments/{name}/verify-md5", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -3950,19 +4549,21 @@ class SDK:
 
     
     def post_instances_id_export(self, request: operations.PostInstancesIDExportRequest) -> operations.PostInstancesIDExportResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Write DICOM onto filesystem
+        Write the DICOM file onto the filesystem where Orthanc is running
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/export", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -3975,19 +4576,21 @@ class SDK:
 
     
     def post_instances_id_modify(self, request: operations.PostInstancesIDModifyRequest) -> operations.PostInstancesIDModifyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Modify instance
+        Download a modified version of the DICOM instance whose Orthanc identifier is provided in the URL: https://book.orthanc-server.com/users/anonymization.html#modification-of-a-single-instance
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/modify", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4001,13 +4604,17 @@ class SDK:
 
     
     def post_instances_id_reconstruct(self, request: operations.PostInstancesIDReconstructRequest) -> operations.PostInstancesIDReconstructResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Reconstruct tags of instance
+        Reconstruct the main DICOM tags of the instance whose Orthanc identifier is provided in the URL. This is useful if child studies/series/instances have inconsistent values for higher-level tags, in order to force Orthanc to use the value from the resource of interest. Beware that this is a time-consuming operation, as all the children DICOM instances will be parsed again, and the Orthanc index will be updated accordingly.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/reconstruct", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4020,13 +4627,17 @@ class SDK:
 
     
     def post_jobs_id_cancel(self, request: operations.PostJobsIDCancelRequest) -> operations.PostJobsIDCancelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Cancel job
+        Cancel the job whose identifier is provided in the URL. Check out the Orthanc Book for more information about the state machine applicable to jobs: https://book.orthanc-server.com/users/advanced-rest.html#jobs
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{id}/cancel", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4041,13 +4652,17 @@ class SDK:
 
     
     def post_jobs_id_pause(self, request: operations.PostJobsIDPauseRequest) -> operations.PostJobsIDPauseResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Pause job
+        Pause the job whose identifier is provided in the URL. Check out the Orthanc Book for more information about the state machine applicable to jobs: https://book.orthanc-server.com/users/advanced-rest.html#jobs
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{id}/pause", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4062,13 +4677,17 @@ class SDK:
 
     
     def post_jobs_id_resubmit(self, request: operations.PostJobsIDResubmitRequest) -> operations.PostJobsIDResubmitResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Resubmit job
+        Resubmit the job whose identifier is provided in the URL. Check out the Orthanc Book for more information about the state machine applicable to jobs: https://book.orthanc-server.com/users/advanced-rest.html#jobs
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{id}/resubmit", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4083,13 +4702,17 @@ class SDK:
 
     
     def post_jobs_id_resume(self, request: operations.PostJobsIDResumeRequest) -> operations.PostJobsIDResumeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Resume job
+        Resume the job whose identifier is provided in the URL. Check out the Orthanc Book for more information about the state machine applicable to jobs: https://book.orthanc-server.com/users/advanced-rest.html#jobs
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/jobs/{id}/resume", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4104,19 +4727,21 @@ class SDK:
 
     
     def post_modalities_id_echo(self, request: operations.PostModalitiesIDEchoRequest) -> operations.PostModalitiesIDEchoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Trigger C-ECHO SCU
+        Trigger C-ECHO SCU command against the DICOM modality whose identifier is provided in URL: https://book.orthanc-server.com/users/rest.html#performing-c-echo
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/modalities/{id}/echo", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4129,19 +4754,21 @@ class SDK:
 
     
     def post_modalities_id_find(self, request: operations.PostModalitiesIDFindRequest) -> operations.PostModalitiesIDFindResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Hierarchical C-FIND SCU
+        Trigger a sequence of C-FIND SCU commands against the DICOM modality whose identifier is provided in URL, in order to discover a hierarchy of matching patients/studies/series. Deprecated in favor of `/modalities/{id}/query`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/modalities/{id}/find", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4156,19 +4783,21 @@ class SDK:
 
     
     def post_modalities_id_find_instance(self, request: operations.PostModalitiesIDFindInstanceRequest) -> operations.PostModalitiesIDFindInstanceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""C-FIND SCU for instances
+        Trigger C-FIND SCU command against the DICOM modality whose identifier is provided in URL, in order to find an instance. Deprecated in favor of `/modalities/{id}/query`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/modalities/{id}/find-instance", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4183,19 +4812,21 @@ class SDK:
 
     
     def post_modalities_id_find_patient(self, request: operations.PostModalitiesIDFindPatientRequest) -> operations.PostModalitiesIDFindPatientResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""C-FIND SCU for patients
+        Trigger C-FIND SCU command against the DICOM modality whose identifier is provided in URL, in order to find a patient. Deprecated in favor of `/modalities/{id}/query`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/modalities/{id}/find-patient", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4210,19 +4841,21 @@ class SDK:
 
     
     def post_modalities_id_find_series(self, request: operations.PostModalitiesIDFindSeriesRequest) -> operations.PostModalitiesIDFindSeriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""C-FIND SCU for series
+        Trigger C-FIND SCU command against the DICOM modality whose identifier is provided in URL, in order to find a series. Deprecated in favor of `/modalities/{id}/query`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/modalities/{id}/find-series", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4237,19 +4870,21 @@ class SDK:
 
     
     def post_modalities_id_find_study(self, request: operations.PostModalitiesIDFindStudyRequest) -> operations.PostModalitiesIDFindStudyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""C-FIND SCU for studies
+        Trigger C-FIND SCU command against the DICOM modality whose identifier is provided in URL, in order to find a study. Deprecated in favor of `/modalities/{id}/query`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/modalities/{id}/find-study", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4264,19 +4899,21 @@ class SDK:
 
     
     def post_modalities_id_find_worklist(self, request: operations.PostModalitiesIDFindWorklistRequest) -> operations.PostModalitiesIDFindWorklistResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""C-FIND SCU for worklist
+        Trigger C-FIND SCU command against the remote worklists of the DICOM modality whose identifier is provided in URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/modalities/{id}/find-worklist", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4291,19 +4928,21 @@ class SDK:
 
     
     def post_modalities_id_move(self, request: operations.PostModalitiesIDMoveRequest) -> operations.PostModalitiesIDMoveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Trigger C-MOVE SCU
+        Start a C-MOVE SCU command as a job, in order to drive the execution of a sequence of C-STORE commands by some remote DICOM modality whose identifier is provided in the URL: https://book.orthanc-server.com/users/rest.html#performing-c-move
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/modalities/{id}/move", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4316,19 +4955,21 @@ class SDK:
 
     
     def post_modalities_id_query(self, request: operations.PostModalitiesIDQueryRequest) -> operations.PostModalitiesIDQueryResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Trigger C-FIND SCU
+        Trigger C-FIND SCU command against the DICOM modality whose identifier is provided in URL: https://book.orthanc-server.com/users/rest.html#performing-query-retrieve-c-find-and-find-with-rest
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/modalities/{id}/query", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4343,19 +4984,21 @@ class SDK:
 
     
     def post_modalities_id_storage_commitment(self, request: operations.PostModalitiesIDStorageCommitmentRequest) -> operations.PostModalitiesIDStorageCommitmentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Trigger storage commitment request
+        Trigger a storage commitment request to some remote DICOM modality whose identifier is provided in the URL: https://book.orthanc-server.com/users/storage-commitment.html#storage-commitment-scu
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/modalities/{id}/storage-commitment", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4370,19 +5013,21 @@ class SDK:
 
     
     def post_modalities_id_store(self, request: operations.PostModalitiesIDStoreRequest) -> operations.PostModalitiesIDStoreResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Trigger C-STORE SCU
+        Start a C-STORE SCU command as a job, in order to send DICOM resources stored locally to some remote DICOM modality whose identifier is provided in the URL: https://book.orthanc-server.com/users/rest.html#rest-store-scu
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/modalities/{id}/store", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4397,19 +5042,21 @@ class SDK:
 
     
     def post_modalities_id_store_straight(self, request: operations.PostModalitiesIDStoreStraightRequest) -> operations.PostModalitiesIDStoreStraightResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Straight C-STORE SCU
+        Synchronously send the DICOM instance in the POST body to the remote DICOM modality whose identifier is provided in URL, without having to first store it locally within Orthanc. This is an alternative to command-line tools such as `storescu` from DCMTK or dcm4che.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/modalities/{id}/store-straight", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4424,19 +5071,21 @@ class SDK:
 
     
     def post_patients_id_anonymize(self, request: operations.PostPatientsIDAnonymizeRequest) -> operations.PostPatientsIDAnonymizeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Anonymize patient
+        Start a job that will anonymize all the DICOM instances within the patient whose identifier is provided in the URL. The modified DICOM instances will be stored into a brand new patient, whose Orthanc identifiers will be returned by the job. https://book.orthanc-server.com/users/anonymization.html#anonymization-of-patients-studies-or-series
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/anonymize", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4451,19 +5100,21 @@ class SDK:
 
     
     def post_patients_id_archive(self, request: operations.PostPatientsIDArchiveRequest) -> operations.PostPatientsIDArchiveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create ZIP archive
+        Create a ZIP archive containing the DICOM patient whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/archive", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4480,13 +5131,17 @@ class SDK:
 
     
     def post_patients_id_attachments_name_compress(self, request: operations.PostPatientsIDAttachmentsNameCompressRequest) -> operations.PostPatientsIDAttachmentsNameCompressResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Compress attachment
+        Change the compression scheme that is used to store an attachment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/attachments/{name}/compress", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4499,13 +5154,17 @@ class SDK:
 
     
     def post_patients_id_attachments_name_uncompress(self, request: operations.PostPatientsIDAttachmentsNameUncompressRequest) -> operations.PostPatientsIDAttachmentsNameUncompressResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Uncompress attachment
+        Change the compression scheme that is used to store an attachment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/attachments/{name}/uncompress", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4518,13 +5177,17 @@ class SDK:
 
     
     def post_patients_id_attachments_name_verify_md5(self, request: operations.PostPatientsIDAttachmentsNameVerifyMd5Request) -> operations.PostPatientsIDAttachmentsNameVerifyMd5Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Verify attachment
+        Verify that the attachment is not corrupted, by validating its MD5 hash
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/attachments/{name}/verify-md5", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4539,19 +5202,21 @@ class SDK:
 
     
     def post_patients_id_media(self, request: operations.PostPatientsIDMediaRequest) -> operations.PostPatientsIDMediaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create DICOMDIR media
+        Create a DICOMDIR media containing the DICOM patient whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/media", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4568,19 +5233,21 @@ class SDK:
 
     
     def post_patients_id_modify(self, request: operations.PostPatientsIDModifyRequest) -> operations.PostPatientsIDModifyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Modify patient
+        Start a job that will modify all the DICOM instances within the patient whose identifier is provided in the URL. The modified DICOM instances will be stored into a brand new patient, whose Orthanc identifiers will be returned by the job. https://book.orthanc-server.com/users/anonymization.html#modification-of-studies-or-series
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/modify", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4595,13 +5262,17 @@ class SDK:
 
     
     def post_patients_id_reconstruct(self, request: operations.PostPatientsIDReconstructRequest) -> operations.PostPatientsIDReconstructResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Reconstruct tags of patient
+        Reconstruct the main DICOM tags of the patient whose Orthanc identifier is provided in the URL. This is useful if child studies/series/instances have inconsistent values for higher-level tags, in order to force Orthanc to use the value from the resource of interest. Beware that this is a time-consuming operation, as all the children DICOM instances will be parsed again, and the Orthanc index will be updated accordingly.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/reconstruct", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4614,19 +5285,21 @@ class SDK:
 
     
     def post_peers_id_store(self, request: operations.PostPeersIDStoreRequest) -> operations.PostPeersIDStoreResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Send to Orthanc peer
+        Send DICOM resources stored locally to some remote Orthanc peer whose identifier is provided in the URL: https://book.orthanc-server.com/users/rest.html#sending-one-resource
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/peers/{id}/store", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4641,19 +5314,21 @@ class SDK:
 
     
     def post_peers_id_store_straight(self, request: operations.PostPeersIDStoreStraightRequest) -> operations.PostPeersIDStoreStraightResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Straight store to peer
+        Synchronously send the DICOM instance in the POST body to the Orthanc peer whose identifier is provided in URL, without having to first store it locally within Orthanc. This is an alternative to command-line tools such as `curl`.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/peers/{id}/store-straight", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4668,19 +5343,21 @@ class SDK:
 
     
     def post_queries_id_answers_index_query_instances(self, request: operations.PostQueriesIDAnswersIndexQueryInstancesRequest) -> operations.PostQueriesIDAnswersIndexQueryInstancesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Query the child instances of an answer
+        Issue a second DICOM C-FIND operation, in order to query the child instances associated with one answer to some query/retrieve operation whose identifiers are provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/queries/{id}/answers/{index}/query-instances", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4695,19 +5372,21 @@ class SDK:
 
     
     def post_queries_id_answers_index_query_series(self, request: operations.PostQueriesIDAnswersIndexQuerySeriesRequest) -> operations.PostQueriesIDAnswersIndexQuerySeriesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Query the child series of an answer
+        Issue a second DICOM C-FIND operation, in order to query the child series associated with one answer to some query/retrieve operation whose identifiers are provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/queries/{id}/answers/{index}/query-series", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4722,19 +5401,21 @@ class SDK:
 
     
     def post_queries_id_answers_index_query_studies(self, request: operations.PostQueriesIDAnswersIndexQueryStudiesRequest) -> operations.PostQueriesIDAnswersIndexQueryStudiesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Query the child studies of an answer
+        Issue a second DICOM C-FIND operation, in order to query the child studies associated with one answer to some query/retrieve operation whose identifiers are provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/queries/{id}/answers/{index}/query-studies", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4749,19 +5430,21 @@ class SDK:
 
     
     def post_queries_id_answers_index_retrieve(self, request: operations.PostQueriesIDAnswersIndexRetrieveRequest) -> operations.PostQueriesIDAnswersIndexRetrieveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve one answer
+        Start a C-MOVE SCU command as a job, in order to retrieve one answer associated with the query/retrieve operation whose identifiers are provided in the URL: https://book.orthanc-server.com/users/rest.html#performing-retrieve-c-move
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/queries/{id}/answers/{index}/retrieve", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4776,19 +5459,21 @@ class SDK:
 
     
     def post_queries_id_retrieve(self, request: operations.PostQueriesIDRetrieveRequest) -> operations.PostQueriesIDRetrieveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieve all answers
+        Start a C-MOVE SCU command as a job, in order to retrieve all the answers associated with the query/retrieve operation whose identifier is provided in the URL: https://book.orthanc-server.com/users/rest.html#performing-retrieve-c-move
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/queries/{id}/retrieve", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4803,19 +5488,21 @@ class SDK:
 
     
     def post_series_id_anonymize(self, request: operations.PostSeriesIDAnonymizeRequest) -> operations.PostSeriesIDAnonymizeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Anonymize series
+        Start a job that will anonymize all the DICOM instances within the series whose identifier is provided in the URL. The modified DICOM instances will be stored into a brand new series, whose Orthanc identifiers will be returned by the job. https://book.orthanc-server.com/users/anonymization.html#anonymization-of-patients-studies-or-series
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/anonymize", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4830,19 +5517,21 @@ class SDK:
 
     
     def post_series_id_archive(self, request: operations.PostSeriesIDArchiveRequest) -> operations.PostSeriesIDArchiveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create ZIP archive
+        Create a ZIP archive containing the DICOM series whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/archive", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4859,13 +5548,17 @@ class SDK:
 
     
     def post_series_id_attachments_name_compress(self, request: operations.PostSeriesIDAttachmentsNameCompressRequest) -> operations.PostSeriesIDAttachmentsNameCompressResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Compress attachment
+        Change the compression scheme that is used to store an attachment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/attachments/{name}/compress", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4878,13 +5571,17 @@ class SDK:
 
     
     def post_series_id_attachments_name_uncompress(self, request: operations.PostSeriesIDAttachmentsNameUncompressRequest) -> operations.PostSeriesIDAttachmentsNameUncompressResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Uncompress attachment
+        Change the compression scheme that is used to store an attachment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/attachments/{name}/uncompress", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4897,13 +5594,17 @@ class SDK:
 
     
     def post_series_id_attachments_name_verify_md5(self, request: operations.PostSeriesIDAttachmentsNameVerifyMd5Request) -> operations.PostSeriesIDAttachmentsNameVerifyMd5Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Verify attachment
+        Verify that the attachment is not corrupted, by validating its MD5 hash
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/attachments/{name}/verify-md5", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4918,19 +5619,21 @@ class SDK:
 
     
     def post_series_id_media(self, request: operations.PostSeriesIDMediaRequest) -> operations.PostSeriesIDMediaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create DICOMDIR media
+        Create a DICOMDIR media containing the DICOM series whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/media", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4947,19 +5650,21 @@ class SDK:
 
     
     def post_series_id_modify(self, request: operations.PostSeriesIDModifyRequest) -> operations.PostSeriesIDModifyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Modify series
+        Start a job that will modify all the DICOM instances within the series whose identifier is provided in the URL. The modified DICOM instances will be stored into a brand new series, whose Orthanc identifiers will be returned by the job. https://book.orthanc-server.com/users/anonymization.html#modification-of-studies-or-series
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/modify", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -4974,13 +5679,17 @@ class SDK:
 
     
     def post_series_id_reconstruct(self, request: operations.PostSeriesIDReconstructRequest) -> operations.PostSeriesIDReconstructResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Reconstruct tags of series
+        Reconstruct the main DICOM tags of the series whose Orthanc identifier is provided in the URL. This is useful if child studies/series/instances have inconsistent values for higher-level tags, in order to force Orthanc to use the value from the resource of interest. Beware that this is a time-consuming operation, as all the children DICOM instances will be parsed again, and the Orthanc index will be updated accordingly.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/reconstruct", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -4993,13 +5702,17 @@ class SDK:
 
     
     def post_storage_commitment_id_remove(self, request: operations.PostStorageCommitmentIDRemoveRequest) -> operations.PostStorageCommitmentIDRemoveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove after storage commitment
+        Remove out of Orthanc, the DICOM instances that have been reported to have been properly received the storage commitment report whose identifier is provided in the URL. This is only possible if the `Status` of the storage commitment report is `Success`. https://book.orthanc-server.com/users/storage-commitment.html#removing-the-instances
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/storage-commitment/{id}/remove", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5012,19 +5725,21 @@ class SDK:
 
     
     def post_studies_id_anonymize(self, request: operations.PostStudiesIDAnonymizeRequest) -> operations.PostStudiesIDAnonymizeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Anonymize study
+        Start a job that will anonymize all the DICOM instances within the study whose identifier is provided in the URL. The modified DICOM instances will be stored into a brand new study, whose Orthanc identifiers will be returned by the job. https://book.orthanc-server.com/users/anonymization.html#anonymization-of-patients-studies-or-series
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/anonymize", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5039,19 +5754,21 @@ class SDK:
 
     
     def post_studies_id_archive(self, request: operations.PostStudiesIDArchiveRequest) -> operations.PostStudiesIDArchiveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create ZIP archive
+        Create a ZIP archive containing the DICOM study whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/archive", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5068,13 +5785,17 @@ class SDK:
 
     
     def post_studies_id_attachments_name_compress(self, request: operations.PostStudiesIDAttachmentsNameCompressRequest) -> operations.PostStudiesIDAttachmentsNameCompressResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Compress attachment
+        Change the compression scheme that is used to store an attachment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/attachments/{name}/compress", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5087,13 +5808,17 @@ class SDK:
 
     
     def post_studies_id_attachments_name_uncompress(self, request: operations.PostStudiesIDAttachmentsNameUncompressRequest) -> operations.PostStudiesIDAttachmentsNameUncompressResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Uncompress attachment
+        Change the compression scheme that is used to store an attachment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/attachments/{name}/uncompress", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5106,13 +5831,17 @@ class SDK:
 
     
     def post_studies_id_attachments_name_verify_md5(self, request: operations.PostStudiesIDAttachmentsNameVerifyMd5Request) -> operations.PostStudiesIDAttachmentsNameVerifyMd5Response:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Verify attachment
+        Verify that the attachment is not corrupted, by validating its MD5 hash
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/attachments/{name}/verify-md5", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5127,19 +5856,21 @@ class SDK:
 
     
     def post_studies_id_media(self, request: operations.PostStudiesIDMediaRequest) -> operations.PostStudiesIDMediaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create DICOMDIR media
+        Create a DICOMDIR media containing the DICOM study whose Orthanc identifier is provided in the URL
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/media", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5156,19 +5887,21 @@ class SDK:
 
     
     def post_studies_id_merge(self, request: operations.PostStudiesIDMergeRequest) -> operations.PostStudiesIDMergeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Merge study
+        Start a new job so as to move some DICOM resources into the DICOM study whose Orthanc identifier is provided in the URL: https://book.orthanc-server.com/users/anonymization.html#merging
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/merge", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5183,19 +5916,21 @@ class SDK:
 
     
     def post_studies_id_modify(self, request: operations.PostStudiesIDModifyRequest) -> operations.PostStudiesIDModifyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Modify study
+        Start a job that will modify all the DICOM instances within the study whose identifier is provided in the URL. The modified DICOM instances will be stored into a brand new study, whose Orthanc identifiers will be returned by the job. https://book.orthanc-server.com/users/anonymization.html#modification-of-studies-or-series
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/modify", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5210,13 +5945,17 @@ class SDK:
 
     
     def post_studies_id_reconstruct(self, request: operations.PostStudiesIDReconstructRequest) -> operations.PostStudiesIDReconstructResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Reconstruct tags of study
+        Reconstruct the main DICOM tags of the study whose Orthanc identifier is provided in the URL. This is useful if child studies/series/instances have inconsistent values for higher-level tags, in order to force Orthanc to use the value from the resource of interest. Beware that this is a time-consuming operation, as all the children DICOM instances will be parsed again, and the Orthanc index will be updated accordingly.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/reconstruct", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5229,19 +5968,21 @@ class SDK:
 
     
     def post_studies_id_split(self, request: operations.PostStudiesIDSplitRequest) -> operations.PostStudiesIDSplitResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Split study
+        Start a new job so as to split the DICOM study whose Orthanc identifier is provided in the URL, by taking some of its children series or instances out of it and putting them into a brand new study (this new study is created by setting the `StudyInstanceUID` tag to a random identifier): https://book.orthanc-server.com/users/anonymization.html#splitting
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/split", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5256,19 +5997,21 @@ class SDK:
 
     
     def post_tools_bulk_anonymize(self, request: operations.PostToolsBulkAnonymizeRequest) -> operations.PostToolsBulkAnonymizeResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Anonymize a set of resources
+        Start a job that will anonymize all the DICOM patients, studies, series or instances whose identifiers are provided in the `Resources` field.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/bulk-anonymize"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5283,19 +6026,21 @@ class SDK:
 
     
     def post_tools_bulk_content(self, request: operations.PostToolsBulkContentRequest) -> operations.PostToolsBulkContentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Describe a set of instances
+        Get the content all the DICOM patients, studies, series or instances whose identifiers are provided in the `Resources` field, in one single call.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/bulk-content"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5308,19 +6053,21 @@ class SDK:
 
     
     def post_tools_bulk_delete(self, request: operations.PostToolsBulkDeleteRequest) -> operations.PostToolsBulkDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Delete a set of instances
+        Delete all the DICOM patients, studies, series or instances whose identifiers are provided in the `Resources` field.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/bulk-delete"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5333,19 +6080,21 @@ class SDK:
 
     
     def post_tools_bulk_modify(self, request: operations.PostToolsBulkModifyRequest) -> operations.PostToolsBulkModifyResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Modify a set of resources
+        Start a job that will modify all the DICOM patients, studies, series or instances whose identifiers are provided in the `Resources` field.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/bulk-modify"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5360,19 +6109,21 @@ class SDK:
 
     
     def post_tools_create_archive(self, request: operations.PostToolsCreateArchiveRequest) -> operations.PostToolsCreateArchiveResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create ZIP archive
+        Create a ZIP archive containing the DICOM resources (patients, studies, series, or instances) whose Orthanc identifiers are provided in the body
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/create-archive"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5389,19 +6140,21 @@ class SDK:
 
     
     def post_tools_create_dicom(self, request: operations.PostToolsCreateDicomRequest) -> operations.PostToolsCreateDicomResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create one DICOM instance
+        Create one DICOM instance, and store it into Orthanc
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/create-dicom"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5416,19 +6169,21 @@ class SDK:
 
     
     def post_tools_create_media(self, request: operations.PostToolsCreateMediaRequest) -> operations.PostToolsCreateMediaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create DICOMDIR media
+        Create a DICOMDIR media containing the DICOM resources (patients, studies, series, or instances) whose Orthanc identifiers are provided in the body
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/create-media"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5445,19 +6200,21 @@ class SDK:
 
     
     def post_tools_create_media_extended(self, request: operations.PostToolsCreateMediaExtendedRequest) -> operations.PostToolsCreateMediaExtendedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Create DICOMDIR media
+        Create a DICOMDIR media containing the DICOM resources (patients, studies, series, or instances) whose Orthanc identifiers are provided in the body
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/create-media-extended"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5474,19 +6231,21 @@ class SDK:
 
     
     def post_tools_dicom_echo(self, request: operations.PostToolsDicomEchoRequest) -> operations.PostToolsDicomEchoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Trigger C-ECHO SCU
+        Trigger C-ECHO SCU command against a DICOM modality described in the POST body, without having to register the modality in some `/modalities/{id}` (new in Orthanc 1.8.1)
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/dicom-echo"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5499,19 +6258,21 @@ class SDK:
 
     
     def post_tools_execute_script(self, request: operations.PostToolsExecuteScriptRequest) -> operations.PostToolsExecuteScriptResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Execute Lua script
+        Execute the provided Lua script by the Orthanc server. This is very insecure for Orthanc servers that are remotely accessible, cf. configuration option `ExecuteLuaEnabled`
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/execute-script"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5525,19 +6286,21 @@ class SDK:
 
     
     def post_tools_find(self, request: operations.PostToolsFindRequest) -> operations.PostToolsFindResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Look for local resources
+        This URI can be used to perform a search on the content of the local Orthanc server, in a way that is similar to querying remote DICOM modalities using C-FIND SCU: https://book.orthanc-server.com/users/rest.html#performing-finds-within-orthanc
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/find"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5552,13 +6315,17 @@ class SDK:
 
     
     def post_tools_invalidate_tags(self) -> operations.PostToolsInvalidateTagsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Invalidate DICOM-as-JSON summaries
+        Remove all the attachments of the type \"DICOM-as-JSON\" that are associated will all the DICOM instances stored in Orthanc. These summaries will be automatically re-created on the next access. This is notably useful after changes to the `Dictionary` configuration option. https://book.orthanc-server.com/faq/orthanc-storage.html#storage-area
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/invalidate-tags"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5571,19 +6338,21 @@ class SDK:
 
     
     def post_tools_lookup(self, request: operations.PostToolsLookupRequest) -> operations.PostToolsLookupResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Look for DICOM identifiers
+        This URI can be used to convert one DICOM identifier to a list of matching Orthanc resources
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/lookup"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5598,13 +6367,17 @@ class SDK:
 
     
     def post_tools_reconstruct(self) -> operations.PostToolsReconstructResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Reconstruct all the index
+        Reconstruct the index of all the tags of all the DICOM instances that are stored in Orthanc. This is notably useful after the deletion of resources whose children resources have inconsistent values with their sibling resources. Beware that this is a highly time-consuming operation, as all the DICOM instances will be parsed again, and as all the Orthanc index will be regenerated.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/reconstruct"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5617,13 +6390,17 @@ class SDK:
 
     
     def post_tools_reset(self) -> operations.PostToolsResetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Restart Orthanc
+        Restart Orthanc
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/reset"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5636,13 +6413,17 @@ class SDK:
 
     
     def post_tools_shutdown(self) -> operations.PostToolsShutdownResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Shutdown Orthanc
+        Shutdown Orthanc
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/shutdown"
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5655,19 +6436,21 @@ class SDK:
 
     
     def put_instances_id_attachments_name_(self, request: operations.PutInstancesIDAttachmentsNameRequest) -> operations.PutInstancesIDAttachmentsNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set attachment
+        Attach a file to the given DICOM instance. This call will fail if trying to modify a system attachment (i.e. whose index is < 1024).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/attachments/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5682,19 +6465,21 @@ class SDK:
 
     
     def put_instances_id_metadata_name_(self, request: operations.PutInstancesIDMetadataNameRequest) -> operations.PutInstancesIDMetadataNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set metadata
+        Set the value of some metadata in the given DICOM instance. This call will fail if trying to modify a system metadata (i.e. whose index is < 1024).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/instances/{id}/metadata/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5707,19 +6492,21 @@ class SDK:
 
     
     def put_modalities_id_(self, request: operations.PutModalitiesIDRequest) -> operations.PutModalitiesIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update DICOM modality
+        Define a new DICOM modality, or update an existing one. This change is permanent iff. `DicomModalitiesInDatabase` is `true`, otherwise it is lost at the next restart of Orthanc.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/modalities/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5732,19 +6519,21 @@ class SDK:
 
     
     def put_patients_id_attachments_name_(self, request: operations.PutPatientsIDAttachmentsNameRequest) -> operations.PutPatientsIDAttachmentsNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set attachment
+        Attach a file to the given DICOM patient. This call will fail if trying to modify a system attachment (i.e. whose index is < 1024).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/attachments/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5759,19 +6548,21 @@ class SDK:
 
     
     def put_patients_id_metadata_name_(self, request: operations.PutPatientsIDMetadataNameRequest) -> operations.PutPatientsIDMetadataNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set metadata
+        Set the value of some metadata in the given DICOM patient. This call will fail if trying to modify a system metadata (i.e. whose index is < 1024).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/metadata/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5784,13 +6575,17 @@ class SDK:
 
     
     def put_patients_id_protected(self, request: operations.PutPatientsIDProtectedRequest) -> operations.PutPatientsIDProtectedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Protect one patient against recycling
+        Check out configuration options `MaximumStorageSize` and `MaximumPatientCount`
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/patients/{id}/protected", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 
@@ -5803,19 +6598,21 @@ class SDK:
 
     
     def put_peers_id_(self, request: operations.PutPeersIDRequest) -> operations.PutPeersIDResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Update Orthanc peer
+        Define a new Orthanc peer, or update an existing one. This change is permanent iff. `OrthancPeersInDatabase` is `true`, otherwise it is lost at the next restart of Orthanc.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/peers/{id}", request.path_params)
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5828,19 +6625,21 @@ class SDK:
 
     
     def put_series_id_attachments_name_(self, request: operations.PutSeriesIDAttachmentsNameRequest) -> operations.PutSeriesIDAttachmentsNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set attachment
+        Attach a file to the given DICOM series. This call will fail if trying to modify a system attachment (i.e. whose index is < 1024).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/attachments/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5855,19 +6654,21 @@ class SDK:
 
     
     def put_series_id_metadata_name_(self, request: operations.PutSeriesIDMetadataNameRequest) -> operations.PutSeriesIDMetadataNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set metadata
+        Set the value of some metadata in the given DICOM series. This call will fail if trying to modify a system metadata (i.e. whose index is < 1024).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/series/{id}/metadata/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5880,19 +6681,21 @@ class SDK:
 
     
     def put_studies_id_attachments_name_(self, request: operations.PutStudiesIDAttachmentsNameRequest) -> operations.PutStudiesIDAttachmentsNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set attachment
+        Attach a file to the given DICOM study. This call will fail if trying to modify a system attachment (i.e. whose index is < 1024).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/attachments/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5907,19 +6710,21 @@ class SDK:
 
     
     def put_studies_id_metadata_name_(self, request: operations.PutStudiesIDMetadataNameRequest) -> operations.PutStudiesIDMetadataNameResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set metadata
+        Set the value of some metadata in the given DICOM study. This call will fail if trying to modify a system metadata (i.e. whose index is < 1024).
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/studies/{id}/metadata/{name}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5932,19 +6737,21 @@ class SDK:
 
     
     def put_tools_accepted_transfer_syntaxes(self, request: operations.PutToolsAcceptedTransferSyntaxesRequest) -> operations.PutToolsAcceptedTransferSyntaxesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set accepted transfer syntaxes
+        Set the DICOM transfer syntaxes that accepted by Orthanc C-STORE SCP
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/accepted-transfer-syntaxes"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5959,19 +6766,21 @@ class SDK:
 
     
     def put_tools_default_encoding(self, request: operations.PutToolsDefaultEncodingRequest) -> operations.PutToolsDefaultEncodingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set default encoding
+        Change the default encoding that is used by Orthanc if parsing a DICOM instance without the `SpecificCharacterEncoding` tag, or during C-FIND. This corresponds to the configuration option `DefaultEncoding`.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/default-encoding"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -5984,19 +6793,21 @@ class SDK:
 
     
     def put_tools_log_level(self, request: operations.PutToolsLogLevelRequest) -> operations.PutToolsLogLevelResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set main log level
+        Set the main log level of Orthanc
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/log-level"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6009,19 +6820,21 @@ class SDK:
 
     
     def put_tools_log_level_dicom(self, request: operations.PutToolsLogLevelDicomRequest) -> operations.PutToolsLogLevelDicomResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set log level for `dicom`
+        Set the log level of the log category `dicom`
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/log-level-dicom"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6034,19 +6847,21 @@ class SDK:
 
     
     def put_tools_log_level_generic(self, request: operations.PutToolsLogLevelGenericRequest) -> operations.PutToolsLogLevelGenericResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set log level for `generic`
+        Set the log level of the log category `generic`
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/log-level-generic"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6059,19 +6874,21 @@ class SDK:
 
     
     def put_tools_log_level_http(self, request: operations.PutToolsLogLevelHTTPRequest) -> operations.PutToolsLogLevelHTTPResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set log level for `http`
+        Set the log level of the log category `http`
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/log-level-http"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6084,19 +6901,21 @@ class SDK:
 
     
     def put_tools_log_level_jobs(self, request: operations.PutToolsLogLevelJobsRequest) -> operations.PutToolsLogLevelJobsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set log level for `jobs`
+        Set the log level of the log category `jobs`
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/log-level-jobs"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6109,19 +6928,21 @@ class SDK:
 
     
     def put_tools_log_level_lua(self, request: operations.PutToolsLogLevelLuaRequest) -> operations.PutToolsLogLevelLuaResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set log level for `lua`
+        Set the log level of the log category `lua`
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/log-level-lua"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6134,19 +6955,21 @@ class SDK:
 
     
     def put_tools_log_level_plugins(self, request: operations.PutToolsLogLevelPluginsRequest) -> operations.PutToolsLogLevelPluginsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set log level for `plugins`
+        Set the log level of the log category `plugins`
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/log-level-plugins"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6159,19 +6982,21 @@ class SDK:
 
     
     def put_tools_log_level_sqlite(self, request: operations.PutToolsLogLevelSqliteRequest) -> operations.PutToolsLogLevelSqliteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set log level for `sqlite`
+        Set the log level of the log category `sqlite`
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/log-level-sqlite"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6184,19 +7009,21 @@ class SDK:
 
     
     def put_tools_metrics(self, request: operations.PutToolsMetricsRequest) -> operations.PutToolsMetricsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Enable collection of metrics
+        Enable or disable the collection and publication of metrics at `/tools/metrics-prometheus`
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/metrics"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -6209,19 +7036,21 @@ class SDK:
 
     
     def put_tools_unknown_sop_class_accepted(self, request: operations.PutToolsUnknownSopClassAcceptedRequest) -> operations.PutToolsUnknownSopClassAcceptedResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Set unknown SOP class accepted
+        Set whether Orthanc C-STORE SCP should accept DICOM instances with an unknown SOP class UID
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tools/unknown-sop-class-accepted"
-
+        
         headers = {}
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

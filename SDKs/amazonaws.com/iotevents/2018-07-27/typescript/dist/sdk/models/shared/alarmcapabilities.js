@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AcknowledgeFlow } from "./acknowledgeflow";
 import { InitializationConfiguration } from "./initializationconfiguration";
 // AlarmCapabilities
@@ -35,11 +35,11 @@ var AlarmCapabilities = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=acknowledgeFlow" }),
+        SpeakeasyMetadata({ data: "json, name=acknowledgeFlow" }),
         __metadata("design:type", AcknowledgeFlow)
     ], AlarmCapabilities.prototype, "acknowledgeFlow", void 0);
     __decorate([
-        Metadata({ data: "json, name=initializationConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=initializationConfiguration" }),
         __metadata("design:type", InitializationConfiguration)
     ], AlarmCapabilities.prototype, "initializationConfiguration", void 0);
     return AlarmCapabilities;

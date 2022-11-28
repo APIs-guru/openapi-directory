@@ -13,6 +13,8 @@ const (
 	MetricDescriptorMetadataLaunchStageEnumDeprecated             MetricDescriptorMetadataLaunchStageEnum = "DEPRECATED"
 )
 
+// MetricDescriptorMetadata
+// Additional annotations that can be used to guide the usage of a metric.
 type MetricDescriptorMetadata struct {
 	IngestDelay  *string                                  `json:"ingestDelay,omitempty"`
 	LaunchStage  *MetricDescriptorMetadataLaunchStageEnum `json:"launchStage,omitempty"`

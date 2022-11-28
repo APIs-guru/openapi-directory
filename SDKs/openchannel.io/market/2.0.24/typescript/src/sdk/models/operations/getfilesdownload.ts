@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetFilesDownloadQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fileId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fileId" })
   fileId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=validSeconds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=validSeconds" })
   validSeconds?: number;
 }
 
 
 export class GetFilesDownloadRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetFilesDownloadQueryParams;
 }
 
 
 export class GetFilesDownloadResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import resource
+from sdk import utils
+from . import *
 
 class FixableTotalByDigestSeverityEnum(str, Enum):
     SEVERITY_UNSPECIFIED = "SEVERITY_UNSPECIFIED"
@@ -15,8 +17,12 @@ class FixableTotalByDigestSeverityEnum(str, Enum):
 @dataclass_json
 @dataclass
 class FixableTotalByDigest:
-    fixable_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fixableCount' }})
-    resource: Optional[resource.Resource] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource' }})
-    severity: Optional[FixableTotalByDigestSeverityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'severity' }})
-    total_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'totalCount' }})
+    r"""FixableTotalByDigest
+    Per resource and severity counts of fixable and total vulnerabilities.
+    """
+    
+    fixable_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fixableCount') }})
+    resource: Optional[Resource] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource') }})
+    severity: Optional[FixableTotalByDigestSeverityEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('severity') }})
+    total_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('totalCount') }})
     

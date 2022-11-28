@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PolicyBinding
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Grouping of IAM role and IAM member.
 **/
 export class PolicyBinding extends SpeakeasyBase {
-  @Metadata({ data: "json, name=member" })
+  @SpeakeasyMetadata({ data: "json, name=member" })
   member?: string;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: string;
 }

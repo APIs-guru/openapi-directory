@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class GetNamesNameIDOutputFormatOutputFormatEnum(str, Enum):
     JSON = "json"
@@ -11,17 +11,17 @@ class GetNamesNameIDOutputFormatOutputFormatEnum(str, Enum):
 
 @dataclass
 class GetNamesNameIDOutputFormatPathParams:
-    name_id: int = field(default=None, metadata={'path_param': { 'field_name': 'nameId', 'style': 'simple', 'explode': False }})
-    output_format: GetNamesNameIDOutputFormatOutputFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
+    name_id: int = field(metadata={'path_param': { 'field_name': 'nameId', 'style': 'simple', 'explode': False }})
+    output_format: GetNamesNameIDOutputFormatOutputFormatEnum = field(metadata={'path_param': { 'field_name': 'outputFormat', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetNamesNameIDOutputFormatRequest:
-    path_params: GetNamesNameIDOutputFormatPathParams = field(default=None)
+    path_params: GetNamesNameIDOutputFormatPathParams = field()
     
 
 @dataclass
 class GetNamesNameIDOutputFormatResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

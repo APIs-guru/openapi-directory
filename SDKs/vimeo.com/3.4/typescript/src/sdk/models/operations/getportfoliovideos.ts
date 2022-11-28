@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPortfolioVideosPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=portfolio_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=portfolio_id" })
   portfolioId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=user_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=user_id" })
   userId: number;
 }
 
@@ -15,53 +16,53 @@ export enum GetPortfolioVideosFilterEnum {
 }
 
 export enum GetPortfolioVideosSortEnum {
-    Alphabetical = "alphabetical"
-,    Comments = "comments"
-,    Date = "date"
-,    Default = "default"
-,    Likes = "likes"
-,    Manual = "manual"
-,    Plays = "plays"
+    Alphabetical = "alphabetical",
+    Comments = "comments",
+    Date = "date",
+    Default = "default",
+    Likes = "likes",
+    Manual = "manual",
+    Plays = "plays"
 }
 
 
 export class GetPortfolioVideosQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=containing_uri" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=containing_uri" })
   containingUri?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: GetPortfolioVideosFilterEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter_embeddable" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter_embeddable" })
   filterEmbeddable?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: GetPortfolioVideosSortEnum;
 }
 
 
 export class GetPortfolioVideosRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPortfolioVideosPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPortfolioVideosQueryParams;
 }
 
 
 export class GetPortfolioVideosResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.Video })
+  @SpeakeasyMetadata({ elemType: shared.Video })
   videos?: shared.Video[];
 }

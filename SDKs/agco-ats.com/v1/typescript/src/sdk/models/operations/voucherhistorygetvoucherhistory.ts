@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class VoucherHistoryGetVoucherHistoryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ChangedAfter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ChangedAfter" })
   changedAfter?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ChangedBefore" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ChangedBefore" })
   changedBefore?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=VoucherCode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=VoucherCode" })
   voucherCode?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 }
 
 
 export class VoucherHistoryGetVoucherHistoryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: VoucherHistoryGetVoucherHistoryQueryParams;
 }
 
 
 export class VoucherHistoryGetVoucherHistoryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiPagedResponseDealerDbModelsVoucherHistory?: shared.ApiPagedResponseDealerDbModelsVoucherHistory;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class PaymentMethodBrandEnum(str, Enum):
     VISA = "Visa"
@@ -16,13 +18,13 @@ class PaymentMethodTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PaymentMethod:
-    balance: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'balance' }})
-    brand: Optional[PaymentMethodBrandEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'brand' }})
-    currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    expiry_month: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiryMonth' }})
-    expiry_year: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiryYear' }})
-    id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    last_digits: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastDigits' }})
-    type: PaymentMethodTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    type: PaymentMethodTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    balance: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('balance') }})
+    brand: Optional[PaymentMethodBrandEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('brand') }})
+    currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('currency') }})
+    expiry_month: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expiryMonth') }})
+    expiry_year: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expiryYear') }})
+    last_digits: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastDigits') }})
     

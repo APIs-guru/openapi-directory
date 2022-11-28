@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EfsAuthorizationConfig } from "./efsauthorizationconfig";
 import { EfsTransitEncryptionEnum } from "./efstransitencryptionenum";
 // EfsVolumeConfiguration
@@ -35,23 +35,23 @@ var EfsVolumeConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authorizationConfig" }),
+        SpeakeasyMetadata({ data: "json, name=authorizationConfig" }),
         __metadata("design:type", EfsAuthorizationConfig)
     ], EfsVolumeConfiguration.prototype, "authorizationConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=fileSystemId" }),
+        SpeakeasyMetadata({ data: "json, name=fileSystemId" }),
         __metadata("design:type", String)
     ], EfsVolumeConfiguration.prototype, "fileSystemId", void 0);
     __decorate([
-        Metadata({ data: "json, name=rootDirectory" }),
+        SpeakeasyMetadata({ data: "json, name=rootDirectory" }),
         __metadata("design:type", String)
     ], EfsVolumeConfiguration.prototype, "rootDirectory", void 0);
     __decorate([
-        Metadata({ data: "json, name=transitEncryption" }),
+        SpeakeasyMetadata({ data: "json, name=transitEncryption" }),
         __metadata("design:type", String)
     ], EfsVolumeConfiguration.prototype, "transitEncryption", void 0);
     __decorate([
-        Metadata({ data: "json, name=transitEncryptionPort" }),
+        SpeakeasyMetadata({ data: "json, name=transitEncryptionPort" }),
         __metadata("design:type", Number)
     ], EfsVolumeConfiguration.prototype, "transitEncryptionPort", void 0);
     return EfsVolumeConfiguration;

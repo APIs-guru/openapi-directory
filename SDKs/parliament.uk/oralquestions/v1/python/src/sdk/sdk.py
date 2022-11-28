@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
-from typing import List,Optional
-from sdk.models import operations, shared
+from typing import Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -12,28 +15,50 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_early_day_motions_list(self, request: operations.GetEarlyDayMotionsListRequest) -> operations.GetEarlyDayMotionsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of Early Day Motions
+        Get a list of Early Day Motions which meet the specified criteria. Only supports Published and Withdrawn status.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/EarlyDayMotions/list"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -66,13 +91,17 @@ class SDK:
 
     
     def published_early_day_motion_get(self, request: operations.PublishedEarlyDayMotionGetRequest) -> operations.PublishedEarlyDayMotionGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a single Early Day Motion by ID
+        Get a single Early Day Motion which has the ID specified.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/EarlyDayMotion/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -104,15 +133,18 @@ class SDK:
 
     
     def published_oral_question_time_get(self, request: operations.PublishedOralQuestionTimeGetRequest) -> operations.PublishedOralQuestionTimeGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of oral question times
+        A list of oral question times meeting the specified criteria.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/oralquestiontimes/list"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -145,15 +177,18 @@ class SDK:
 
     
     def published_oral_question_get(self, request: operations.PublishedOralQuestionGetRequest) -> operations.PublishedOralQuestionGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of oral questions
+        A list of oral questions meeting the specified criteria.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/oralquestions/list"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

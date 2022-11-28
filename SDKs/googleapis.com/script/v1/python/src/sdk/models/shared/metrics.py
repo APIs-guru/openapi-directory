@@ -1,15 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import metricsvalue
-from . import metricsvalue
-from . import metricsvalue
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Metrics:
-    active_users: Optional[List[metricsvalue.MetricsValue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'activeUsers' }})
-    failed_executions: Optional[List[metricsvalue.MetricsValue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failedExecutions' }})
-    total_executions: Optional[List[metricsvalue.MetricsValue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'totalExecutions' }})
+    r"""Metrics
+    Resource containing usage stats for a given script, based on the supplied filter and mask present in the request.
+    """
+    
+    active_users: Optional[List[MetricsValue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('activeUsers') }})
+    failed_executions: Optional[List[MetricsValue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('failedExecutions') }})
+    total_executions: Optional[List[MetricsValue]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('totalExecutions') }})
     

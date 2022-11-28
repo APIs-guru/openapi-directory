@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Item } from "./item";
+
 
 
 // DetectedItems
@@ -8,9 +8,9 @@ import { Item } from "./item";
  * Rich Results items grouped by type.
 **/
 export class DetectedItems extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.Item })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Item })
   items?: Item[];
 
-  @Metadata({ data: "json, name=richResultType" })
+  @SpeakeasyMetadata({ data: "json, name=richResultType" })
   richResultType?: string;
 }

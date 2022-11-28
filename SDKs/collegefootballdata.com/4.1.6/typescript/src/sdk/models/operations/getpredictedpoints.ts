@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPredictedPointsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=distance" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=distance" })
   distance: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=down" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=down" })
   down: number;
 }
 
 
 export class GetPredictedPointsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPredictedPointsQueryParams;
 }
 
 
 export class GetPredictedPointsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.PredictedPoints })
+  @SpeakeasyMetadata({ elemType: shared.PredictedPoints })
   predictedPoints?: shared.PredictedPoints[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

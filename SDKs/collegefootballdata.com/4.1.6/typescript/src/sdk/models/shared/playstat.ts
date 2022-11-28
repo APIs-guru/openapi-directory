@@ -1,70 +1,71 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PlayStatClock extends SpeakeasyBase {
-  @Metadata({ data: "json, name=minutes" })
+  @SpeakeasyMetadata({ data: "json, name=minutes" })
   minutes?: number;
 
-  @Metadata({ data: "json, name=seconds" })
+  @SpeakeasyMetadata({ data: "json, name=seconds" })
   seconds?: number;
 }
 
 
 export class PlayStat extends SpeakeasyBase {
-  @Metadata({ data: "json, name=athleteId" })
+  @SpeakeasyMetadata({ data: "json, name=athleteId" })
   athleteId?: number;
 
-  @Metadata({ data: "json, name=athleteName" })
+  @SpeakeasyMetadata({ data: "json, name=athleteName" })
   athleteName?: string;
 
-  @Metadata({ data: "json, name=clock" })
+  @SpeakeasyMetadata({ data: "json, name=clock" })
   clock?: PlayStatClock;
 
-  @Metadata({ data: "json, name=conference" })
+  @SpeakeasyMetadata({ data: "json, name=conference" })
   conference?: string;
 
-  @Metadata({ data: "json, name=distance" })
+  @SpeakeasyMetadata({ data: "json, name=distance" })
   distance?: number;
 
-  @Metadata({ data: "json, name=down" })
+  @SpeakeasyMetadata({ data: "json, name=down" })
   down?: number;
 
-  @Metadata({ data: "json, name=driveId" })
+  @SpeakeasyMetadata({ data: "json, name=driveId" })
   driveId?: number;
 
-  @Metadata({ data: "json, name=gameId" })
+  @SpeakeasyMetadata({ data: "json, name=gameId" })
   gameId?: number;
 
-  @Metadata({ data: "json, name=opponent" })
+  @SpeakeasyMetadata({ data: "json, name=opponent" })
   opponent?: string;
 
-  @Metadata({ data: "json, name=opponentScore" })
+  @SpeakeasyMetadata({ data: "json, name=opponentScore" })
   opponentScore?: number;
 
-  @Metadata({ data: "json, name=period" })
+  @SpeakeasyMetadata({ data: "json, name=period" })
   period?: number;
 
-  @Metadata({ data: "json, name=playId" })
+  @SpeakeasyMetadata({ data: "json, name=playId" })
   playId?: number;
 
-  @Metadata({ data: "json, name=season" })
+  @SpeakeasyMetadata({ data: "json, name=season" })
   season?: number;
 
-  @Metadata({ data: "json, name=stat" })
+  @SpeakeasyMetadata({ data: "json, name=stat" })
   stat?: number;
 
-  @Metadata({ data: "json, name=statType" })
+  @SpeakeasyMetadata({ data: "json, name=statType" })
   statType?: string;
 
-  @Metadata({ data: "json, name=team" })
+  @SpeakeasyMetadata({ data: "json, name=team" })
   team?: string;
 
-  @Metadata({ data: "json, name=teamScore" })
+  @SpeakeasyMetadata({ data: "json, name=teamScore" })
   teamScore?: number;
 
-  @Metadata({ data: "json, name=week" })
+  @SpeakeasyMetadata({ data: "json, name=week" })
   week?: number;
 
-  @Metadata({ data: "json, name=yardsToGoal" })
+  @SpeakeasyMetadata({ data: "json, name=yardsToGoal" })
   yardsToGoal?: number;
 }

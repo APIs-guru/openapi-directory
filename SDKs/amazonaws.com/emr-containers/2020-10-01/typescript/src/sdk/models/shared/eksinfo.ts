@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EksInfo
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The information about the EKS cluster.
 **/
 export class EksInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=namespace" })
+  @SpeakeasyMetadata({ data: "json, name=namespace" })
   namespace?: string;
 }

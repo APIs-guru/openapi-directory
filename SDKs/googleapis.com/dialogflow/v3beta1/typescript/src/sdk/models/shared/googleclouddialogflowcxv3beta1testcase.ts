@@ -1,8 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleCloudDialogflowCxV3beta1TestCaseResultInput } from "./googleclouddialogflowcxv3beta1testcaseresult";
+import { GoogleCloudDialogflowCxV3beta1ConversationTurnInput } from "./googleclouddialogflowcxv3beta1conversationturn";
+import { GoogleCloudDialogflowCxV3beta1TestConfig } from "./googleclouddialogflowcxv3beta1testconfig";
 import { GoogleCloudDialogflowCxV3beta1TestCaseResult } from "./googleclouddialogflowcxv3beta1testcaseresult";
 import { GoogleCloudDialogflowCxV3beta1ConversationTurn } from "./googleclouddialogflowcxv3beta1conversationturn";
-import { GoogleCloudDialogflowCxV3beta1TestConfig } from "./googleclouddialogflowcxv3beta1testconfig";
+
+
+
+// GoogleCloudDialogflowCxV3beta1TestCaseInput
+/** 
+ * Represents a test case.
+**/
+export class GoogleCloudDialogflowCxV3beta1TestCaseInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=lastTestResult" })
+  lastTestResult?: GoogleCloudDialogflowCxV3beta1TestCaseResultInput;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=notes" })
+  notes?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=tags" })
+  tags?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=testCaseConversationTurns", elemType: GoogleCloudDialogflowCxV3beta1ConversationTurnInput })
+  testCaseConversationTurns?: GoogleCloudDialogflowCxV3beta1ConversationTurnInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=testConfig" })
+  testConfig?: GoogleCloudDialogflowCxV3beta1TestConfig;
+}
 
 
 // GoogleCloudDialogflowCxV3beta1TestCase
@@ -10,27 +40,27 @@ import { GoogleCloudDialogflowCxV3beta1TestConfig } from "./googleclouddialogflo
  * Represents a test case.
 **/
 export class GoogleCloudDialogflowCxV3beta1TestCase extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=lastTestResult" })
+  @SpeakeasyMetadata({ data: "json, name=lastTestResult" })
   lastTestResult?: GoogleCloudDialogflowCxV3beta1TestCaseResult;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=testCaseConversationTurns", elemType: shared.GoogleCloudDialogflowCxV3beta1ConversationTurn })
+  @SpeakeasyMetadata({ data: "json, name=testCaseConversationTurns", elemType: GoogleCloudDialogflowCxV3beta1ConversationTurn })
   testCaseConversationTurns?: GoogleCloudDialogflowCxV3beta1ConversationTurn[];
 
-  @Metadata({ data: "json, name=testConfig" })
+  @SpeakeasyMetadata({ data: "json, name=testConfig" })
   testConfig?: GoogleCloudDialogflowCxV3beta1TestConfig;
 }

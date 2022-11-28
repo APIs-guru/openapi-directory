@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { KmsKeyDetails } from "./kmskeydetails";
 import { ProviderTypeEnum } from "./providertypeenum";
 import { S3RepositoryDetails } from "./s3repositorydetails";

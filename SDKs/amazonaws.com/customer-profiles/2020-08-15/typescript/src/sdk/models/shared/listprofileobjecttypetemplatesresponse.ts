@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ListProfileObjectTypeTemplateItem } from "./listprofileobjecttypetemplateitem";
 
 
+
 export class ListProfileObjectTypeTemplatesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Items", elemType: shared.ListProfileObjectTypeTemplateItem })
+  @SpeakeasyMetadata({ data: "json, name=Items", elemType: ListProfileObjectTypeTemplateItem })
   items?: ListProfileObjectTypeTemplateItem[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

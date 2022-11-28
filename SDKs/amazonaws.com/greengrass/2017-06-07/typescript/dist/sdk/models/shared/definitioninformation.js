@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DefinitionInformation
 /**
  * Information about a definition.
@@ -33,35 +33,35 @@ var DefinitionInformation = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Arn" }),
+        SpeakeasyMetadata({ data: "json, name=Arn" }),
         __metadata("design:type", String)
     ], DefinitionInformation.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreationTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=CreationTimestamp" }),
         __metadata("design:type", String)
     ], DefinitionInformation.prototype, "creationTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], DefinitionInformation.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastUpdatedTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=LastUpdatedTimestamp" }),
         __metadata("design:type", String)
     ], DefinitionInformation.prototype, "lastUpdatedTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=LatestVersion" }),
+        SpeakeasyMetadata({ data: "json, name=LatestVersion" }),
         __metadata("design:type", String)
     ], DefinitionInformation.prototype, "latestVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=LatestVersionArn" }),
+        SpeakeasyMetadata({ data: "json, name=LatestVersionArn" }),
         __metadata("design:type", String)
     ], DefinitionInformation.prototype, "latestVersionArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], DefinitionInformation.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags" }),
+        SpeakeasyMetadata({ data: "json, name=Tags" }),
         __metadata("design:type", Map)
     ], DefinitionInformation.prototype, "tags", void 0);
     return DefinitionInformation;

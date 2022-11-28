@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CertChain } from "./certchain";
+
 
 
 // FetchCaCertsResponse
@@ -8,6 +8,6 @@ import { CertChain } from "./certchain";
  * Response message for CertificateAuthorityService.FetchCaCerts.
 **/
 export class FetchCaCertsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caCerts", elemType: shared.CertChain })
+  @SpeakeasyMetadata({ data: "json, name=caCerts", elemType: CertChain })
   caCerts?: CertChain[];
 }

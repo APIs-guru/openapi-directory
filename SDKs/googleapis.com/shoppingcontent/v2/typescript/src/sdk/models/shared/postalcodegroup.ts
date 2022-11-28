@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PostalCodeRange } from "./postalcoderange";
 
 
+
 export class PostalCodeGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=postalCodeRanges", elemType: shared.PostalCodeRange })
+  @SpeakeasyMetadata({ data: "json, name=postalCodeRanges", elemType: PostalCodeRange })
   postalCodeRanges?: PostalCodeRange[];
 }

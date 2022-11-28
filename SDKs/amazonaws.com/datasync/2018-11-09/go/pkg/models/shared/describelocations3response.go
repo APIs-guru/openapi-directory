@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DescribeLocationS3Response
+// DescribeLocationS3Response
 type DescribeLocationS3Response struct {
 	AgentArns      []string            `json:"AgentArns,omitempty"`
 	CreationTime   *time.Time          `json:"CreationTime,omitempty"`

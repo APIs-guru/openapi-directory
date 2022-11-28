@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResultDisplayField } from "./resultdisplayfield";
+
 
 
 // ResultDisplayLine
@@ -8,6 +8,6 @@ import { ResultDisplayField } from "./resultdisplayfield";
  * The collection of fields that make up a displayed line
 **/
 export class ResultDisplayLine extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields", elemType: shared.ResultDisplayField })
+  @SpeakeasyMetadata({ data: "json, name=fields", elemType: ResultDisplayField })
   fields?: ResultDisplayField[];
 }

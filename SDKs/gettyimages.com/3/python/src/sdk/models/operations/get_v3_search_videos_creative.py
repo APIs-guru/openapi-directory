@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -44,13 +45,13 @@ class GetV3SearchVideosCreativeHeaders:
 
 @dataclass
 class GetV3SearchVideosCreativeRequest:
-    query_params: GetV3SearchVideosCreativeQueryParams = field(default=None)
-    headers: GetV3SearchVideosCreativeHeaders = field(default=None)
+    headers: GetV3SearchVideosCreativeHeaders = field()
+    query_params: GetV3SearchVideosCreativeQueryParams = field()
     
 
 @dataclass
 class GetV3SearchVideosCreativeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     creative_video_search_results: Optional[shared.CreativeVideoSearchResults] = field(default=None)
-    status_code: int = field(default=None)
     

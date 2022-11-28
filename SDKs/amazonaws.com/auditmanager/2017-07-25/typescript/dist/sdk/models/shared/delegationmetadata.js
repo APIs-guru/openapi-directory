@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DelegationStatusEnum } from "./delegationstatusenum";
 // DelegationMetadata
 /**
@@ -34,31 +34,31 @@ var DelegationMetadata = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=assessmentId" }),
+        SpeakeasyMetadata({ data: "json, name=assessmentId" }),
         __metadata("design:type", String)
     ], DelegationMetadata.prototype, "assessmentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=assessmentName" }),
+        SpeakeasyMetadata({ data: "json, name=assessmentName" }),
         __metadata("design:type", String)
     ], DelegationMetadata.prototype, "assessmentName", void 0);
     __decorate([
-        Metadata({ data: "json, name=controlSetName" }),
+        SpeakeasyMetadata({ data: "json, name=controlSetName" }),
         __metadata("design:type", String)
     ], DelegationMetadata.prototype, "controlSetName", void 0);
     __decorate([
-        Metadata({ data: "json, name=creationTime" }),
+        SpeakeasyMetadata({ data: "json, name=creationTime" }),
         __metadata("design:type", Date)
     ], DelegationMetadata.prototype, "creationTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], DelegationMetadata.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleArn" }),
+        SpeakeasyMetadata({ data: "json, name=roleArn" }),
         __metadata("design:type", String)
     ], DelegationMetadata.prototype, "roleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], DelegationMetadata.prototype, "status", void 0);
     return DelegationMetadata;

@@ -34,6 +34,8 @@ const (
 	ConditionSysEnumIP      ConditionSysEnum = "IP"
 )
 
+// Condition
+// A condition to be met.
 type Condition struct {
 	Iam    *ConditionIamEnum `json:"iam,omitempty"`
 	Op     *ConditionOpEnum  `json:"op,omitempty"`

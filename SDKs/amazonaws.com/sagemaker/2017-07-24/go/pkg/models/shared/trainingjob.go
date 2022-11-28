@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TrainingJob
+// Contains information about a training job.
 type TrainingJob struct {
 	AlgorithmSpecification                *AlgorithmSpecification     `json:"AlgorithmSpecification,omitempty"`
 	AutoMlJobArn                          *string                     `json:"AutoMLJobArn,omitempty"`

@@ -1,15 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import updateconnectionauthrequestparameters
-from . import connectionauthorizationtype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateConnectionRequest:
-    auth_parameters: Optional[updateconnectionauthrequestparameters.UpdateConnectionAuthRequestParameters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AuthParameters' }})
-    authorization_type: Optional[connectionauthorizationtype_enum.ConnectionAuthorizationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AuthorizationType' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    auth_parameters: Optional[UpdateConnectionAuthRequestParameters] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AuthParameters') }})
+    authorization_type: Optional[ConnectionAuthorizationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AuthorizationType') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
     

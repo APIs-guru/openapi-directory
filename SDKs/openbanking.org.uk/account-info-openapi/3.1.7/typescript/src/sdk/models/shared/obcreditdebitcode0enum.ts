@@ -1,6 +1,7 @@
 
 
+
 export enum ObCreditDebitCode0Enum {
-    Credit = "Credit"
-,    Debit = "Debit"
+    Credit = "Credit",
+    Debit = "Debit"
 }

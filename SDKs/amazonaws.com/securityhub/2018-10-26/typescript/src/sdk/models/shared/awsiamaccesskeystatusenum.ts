@@ -1,6 +1,7 @@
 
 
+
 export enum AwsIamAccessKeyStatusEnum {
-    Active = "Active"
-,    Inactive = "Inactive"
+    Active = "Active",
+    Inactive = "Inactive"
 }

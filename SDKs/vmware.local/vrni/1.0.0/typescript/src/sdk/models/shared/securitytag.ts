@@ -1,33 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Reference } from "./reference";
 import { EntityTypeEnum } from "./entitytypeenum";
-import { Reference } from "./reference";
-import { Reference } from "./reference";
+
 
 
 export class SecurityTag extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=direct_security_groups", elemType: shared.Reference })
+  @SpeakeasyMetadata({ data: "json, name=direct_security_groups", elemType: Reference })
   directSecurityGroups?: Reference[];
 
-  @Metadata({ data: "json, name=entity_id" })
+  @SpeakeasyMetadata({ data: "json, name=entity_id" })
   entityId?: string;
 
-  @Metadata({ data: "json, name=entity_type" })
+  @SpeakeasyMetadata({ data: "json, name=entity_type" })
   entityType?: EntityTypeEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nsx_manager" })
+  @SpeakeasyMetadata({ data: "json, name=nsx_manager" })
   nsxManager?: Reference;
 
-  @Metadata({ data: "json, name=security_groups", elemType: shared.Reference })
+  @SpeakeasyMetadata({ data: "json, name=security_groups", elemType: Reference })
   securityGroups?: Reference[];
 
-  @Metadata({ data: "json, name=vendor_id" })
+  @SpeakeasyMetadata({ data: "json, name=vendor_id" })
   vendorId?: string;
 }

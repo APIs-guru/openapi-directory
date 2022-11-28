@@ -14,6 +14,8 @@ type CreateSafetyRuleHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateSafetyRuleRequestBodyAssertionRule
+// A new assertion rule for a control panel.
 type CreateSafetyRuleRequestBodyAssertionRule struct {
 	AssertedControls []string           `json:"AssertedControls,omitempty"`
 	ControlPanelArn  *string            `json:"ControlPanelArn,omitempty"`
@@ -22,6 +24,8 @@ type CreateSafetyRuleRequestBodyAssertionRule struct {
 	WaitPeriodMs     *int64             `json:"WaitPeriodMs,omitempty"`
 }
 
+// CreateSafetyRuleRequestBodyGatingRule
+// A new gating rule for a control panel.
 type CreateSafetyRuleRequestBodyGatingRule struct {
 	ControlPanelArn *string            `json:"ControlPanelArn,omitempty"`
 	GatingControls  []string           `json:"GatingControls,omitempty"`

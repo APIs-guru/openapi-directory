@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Interval extends SpeakeasyBase {
-  @Metadata({ data: "json, name=change" })
+  @SpeakeasyMetadata({ data: "json, name=change" })
   change?: number;
 
-  @Metadata({ data: "json, name=changePercent" })
+  @SpeakeasyMetadata({ data: "json, name=changePercent" })
   changePercent?: number;
 
-  @Metadata({ data: "json, name=end" })
+  @SpeakeasyMetadata({ data: "json, name=end" })
   end?: Date;
 
-  @Metadata({ data: "json, name=high" })
+  @SpeakeasyMetadata({ data: "json, name=high" })
   high?: number;
 
-  @Metadata({ data: "json, name=last" })
+  @SpeakeasyMetadata({ data: "json, name=last" })
   last?: number;
 
-  @Metadata({ data: "json, name=low" })
+  @SpeakeasyMetadata({ data: "json, name=low" })
   low?: number;
 
-  @Metadata({ data: "json, name=open" })
+  @SpeakeasyMetadata({ data: "json, name=open" })
   open?: number;
 
-  @Metadata({ data: "json, name=start" })
+  @SpeakeasyMetadata({ data: "json, name=start" })
   start?: Date;
 }

@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GsiMarketdataQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=zip" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=zip" })
   zip?: string;
 }
 
 
-export class GsiMarketdataRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GsiMarketdataQueryParams;
-}
-
-
 export class GsiMarketdata200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data", elemType: shared.MarketData })
+  @SpeakeasyMetadata({ data: "json, name=data", elemType: shared.MarketData })
   data?: shared.MarketData[];
 }
 
 
+export class GsiMarketdataRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GsiMarketdataQueryParams;
+}
+
+
 export class GsiMarketdataResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   gsiMarketdata200ApplicationJsonObject?: GsiMarketdata200ApplicationJson;
 }

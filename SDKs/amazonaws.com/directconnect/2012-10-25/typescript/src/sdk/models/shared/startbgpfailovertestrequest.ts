@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class StartBgpFailoverTestRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bgpPeers" })
+  @SpeakeasyMetadata({ data: "json, name=bgpPeers" })
   bgpPeers?: string[];
 
-  @Metadata({ data: "json, name=testDurationInMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=testDurationInMinutes" })
   testDurationInMinutes?: number;
 
-  @Metadata({ data: "json, name=virtualInterfaceId" })
+  @SpeakeasyMetadata({ data: "json, name=virtualInterfaceId" })
   virtualInterfaceId: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ResultTableColumnHeader
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The description of a column of the result table.
 **/
 export class ResultTableColumnHeader extends SpeakeasyBase {
-  @Metadata({ data: "json, name=columnType" })
+  @SpeakeasyMetadata({ data: "json, name=columnType" })
   columnType?: string;
 
-  @Metadata({ data: "json, name=dataType" })
+  @SpeakeasyMetadata({ data: "json, name=dataType" })
   dataType?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

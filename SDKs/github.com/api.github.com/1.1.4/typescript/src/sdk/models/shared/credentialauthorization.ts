@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CredentialAuthorization
@@ -6,36 +7,36 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Credential Authorization
 **/
 export class CredentialAuthorization extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorized_credential_id" })
+  @SpeakeasyMetadata({ data: "json, name=authorized_credential_id" })
   authorizedCredentialId?: number;
 
-  @Metadata({ data: "json, name=authorized_credential_note" })
+  @SpeakeasyMetadata({ data: "json, name=authorized_credential_note" })
   authorizedCredentialNote?: string;
 
-  @Metadata({ data: "json, name=authorized_credential_title" })
+  @SpeakeasyMetadata({ data: "json, name=authorized_credential_title" })
   authorizedCredentialTitle?: string;
 
-  @Metadata({ data: "json, name=credential_accessed_at" })
+  @SpeakeasyMetadata({ data: "json, name=credential_accessed_at" })
   credentialAccessedAt?: Date;
 
-  @Metadata({ data: "json, name=credential_authorized_at" })
+  @SpeakeasyMetadata({ data: "json, name=credential_authorized_at" })
   credentialAuthorizedAt: Date;
 
-  @Metadata({ data: "json, name=credential_id" })
+  @SpeakeasyMetadata({ data: "json, name=credential_id" })
   credentialId: number;
 
-  @Metadata({ data: "json, name=credential_type" })
+  @SpeakeasyMetadata({ data: "json, name=credential_type" })
   credentialType: string;
 
-  @Metadata({ data: "json, name=fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=fingerprint" })
   fingerprint?: string;
 
-  @Metadata({ data: "json, name=login" })
+  @SpeakeasyMetadata({ data: "json, name=login" })
   login: string;
 
-  @Metadata({ data: "json, name=scopes" })
+  @SpeakeasyMetadata({ data: "json, name=scopes" })
   scopes?: string[];
 
-  @Metadata({ data: "json, name=token_last_eight" })
+  @SpeakeasyMetadata({ data: "json, name=token_last_eight" })
   tokenLastEight?: string;
 }

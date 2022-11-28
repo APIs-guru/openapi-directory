@@ -1,5 +1,7 @@
 package shared
 
+// Property
+// Contains asset property information.
 type Property struct {
 	Alias        *string               `json:"alias,omitempty"`
 	DataType     PropertyDataTypeEnum  `json:"dataType"`

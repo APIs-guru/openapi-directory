@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostMyFollowsFollowIdAlertPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=follow_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=follow_id" })
   followId: string;
 }
 
 
 export class PostMyFollowsFollowIdAlertRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PostMyFollowsFollowIdAlertPathParams;
 }
 
 
 export class PostMyFollowsFollowIdAlertResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

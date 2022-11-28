@@ -1,13 +1,21 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import trafficroutingconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BlueGreenUpdatePolicy:
-    maximum_execution_timeout_in_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaximumExecutionTimeoutInSeconds' }})
-    termination_wait_in_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TerminationWaitInSeconds' }})
-    traffic_routing_configuration: trafficroutingconfig.TrafficRoutingConfig = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TrafficRoutingConfiguration' }})
+    r"""BlueGreenUpdatePolicy
+    Currently, the <code>BlueGreenUpdatePolicy</code> API is not supported.
+    """
+    
+    traffic_routing_configuration: TrafficRoutingConfig = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('TrafficRoutingConfiguration') }})
+    maximum_execution_timeout_in_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaximumExecutionTimeoutInSeconds') }})
+    termination_wait_in_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TerminationWaitInSeconds') }})
     

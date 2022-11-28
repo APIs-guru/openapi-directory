@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BillingModeEnum } from "./billingmodeenum";
+
 
 
 // BillingModeSummary
@@ -7,9 +8,9 @@ import { BillingModeEnum } from "./billingmodeenum";
  * Contains the details for the read/write capacity mode.
 **/
 export class BillingModeSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BillingMode" })
+  @SpeakeasyMetadata({ data: "json, name=BillingMode" })
   billingMode?: BillingModeEnum;
 
-  @Metadata({ data: "json, name=LastUpdateToPayPerRequestDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdateToPayPerRequestDateTime" })
   lastUpdateToPayPerRequestDateTime?: Date;
 }

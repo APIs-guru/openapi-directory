@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDataplexV1TaskNotebookTaskConfig
+// Config for running scheduled notebooks.
 type GoogleCloudDataplexV1TaskNotebookTaskConfig struct {
 	ArchiveUris        []string                                     `json:"archiveUris,omitempty"`
 	FileUris           []string                                     `json:"fileUris,omitempty"`

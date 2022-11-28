@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 
 class RaceResultsFormatEnum(str, Enum):
     XML = "xml"
@@ -8,18 +9,18 @@ class RaceResultsFormatEnum(str, Enum):
 
 @dataclass
 class RaceResultsPathParams:
-    format: RaceResultsFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
-    raceid: str = field(default=None, metadata={'path_param': { 'field_name': 'raceid', 'style': 'simple', 'explode': False }})
+    format: RaceResultsFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    raceid: str = field(metadata={'path_param': { 'field_name': 'raceid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class RaceResultsRequest:
-    path_params: RaceResultsPathParams = field(default=None)
+    path_params: RaceResultsPathParams = field()
     
 
 @dataclass
 class RaceResultsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     race_result: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

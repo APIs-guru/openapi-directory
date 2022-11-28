@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum SearchArtifactsOrderEnum {
-    Asc = "asc"
-,    Desc = "desc"
+    Asc = "asc",
+    Desc = "desc"
 }
 
 export enum SearchArtifactsOverEnum {
-    Everything = "everything"
-,    Name = "name"
-,    Description = "description"
-,    Labels = "labels"
+    Everything = "everything",
+    Name = "name",
+    Description = "description",
+    Labels = "labels"
 }
 
 
 export class SearchArtifactsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=order" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order" })
   order?: SearchArtifactsOrderEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=over" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=over" })
   over?: SearchArtifactsOverEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" })
   search?: string;
 }
 
 
 export class SearchArtifactsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SearchArtifactsQueryParams;
 }
 
 
 export class SearchArtifactsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   artifactSearchResults?: shared.ArtifactSearchResults;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

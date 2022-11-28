@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoScalingGroupProvider } from "./autoscalinggroupprovider";
 import { Tag } from "./tag";
 
 
+
 export class CreateCapacityProviderRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoScalingGroupProvider" })
+  @SpeakeasyMetadata({ data: "json, name=autoScalingGroupProvider" })
   autoScalingGroupProvider: AutoScalingGroupProvider;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 }

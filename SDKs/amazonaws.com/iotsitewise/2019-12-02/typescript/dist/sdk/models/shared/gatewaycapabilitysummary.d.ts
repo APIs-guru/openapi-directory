@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CapabilitySyncStatusEnum } from "./capabilitysyncstatusenum";
 /**
  * Contains a summary of a gateway capability configuration.

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIdentitytoolkitV2FinalizeMfaPhoneResponseInfo
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Phone Verification info for a FinalizeMfa response.
 **/
 export class GoogleCloudIdentitytoolkitV2FinalizeMfaPhoneResponseInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=androidVerificationProof" })
+  @SpeakeasyMetadata({ data: "json, name=androidVerificationProof" })
   androidVerificationProof?: string;
 
-  @Metadata({ data: "json, name=androidVerificationProofExpireTime" })
+  @SpeakeasyMetadata({ data: "json, name=androidVerificationProofExpireTime" })
   androidVerificationProofExpireTime?: string;
 
-  @Metadata({ data: "json, name=phoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=phoneNumber" })
   phoneNumber?: string;
 }

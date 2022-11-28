@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetailsBillingCycleSpecEnum;
 (function (GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetailsBillingCycleSpecEnum) {
     GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetailsBillingCycleSpecEnum["BillingCycleSpecUnspecified"] = "BILLING_CYCLE_SPEC_UNSPECIFIED";
@@ -39,11 +39,11 @@ var GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetails
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=billingCycleSpec" }),
+        SpeakeasyMetadata({ data: "json, name=billingCycleSpec" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetails.prototype, "billingCycleSpec", void 0);
     __decorate([
-        Metadata({ data: "json, name=previousSubscriptionId" }),
+        SpeakeasyMetadata({ data: "json, name=previousSubscriptionId" }),
         __metadata("design:type", String)
     ], GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetails.prototype, "previousSubscriptionId", void 0);
     return GoogleCloudPaymentsResellerSubscriptionV1SubscriptionUpgradeDowngradeDetails;

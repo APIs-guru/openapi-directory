@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Webhook } from "./webhook";
+
 
 
 // UpdateWebhookResult
@@ -7,6 +8,6 @@ import { Webhook } from "./webhook";
  *  The result structure for the update webhook request. 
 **/
 export class UpdateWebhookResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=webhook" })
+  @SpeakeasyMetadata({ data: "json, name=webhook" })
   webhook: Webhook;
 }

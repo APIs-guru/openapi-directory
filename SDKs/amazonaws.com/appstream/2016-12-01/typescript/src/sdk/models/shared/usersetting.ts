@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionEnum } from "./actionenum";
 import { PermissionEnum } from "./permissionenum";
+
 
 
 // UserSetting
@@ -8,9 +9,9 @@ import { PermissionEnum } from "./permissionenum";
  * Describes an action and whether the action is enabled or disabled for users during their streaming sessions.
 **/
 export class UserSetting extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Action" })
+  @SpeakeasyMetadata({ data: "json, name=Action" })
   action: ActionEnum;
 
-  @Metadata({ data: "json, name=Permission" })
+  @SpeakeasyMetadata({ data: "json, name=Permission" })
   permission: PermissionEnum;
 }

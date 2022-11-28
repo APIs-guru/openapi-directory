@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SwitchConfigurationContainer
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The configuration for a phase switch
 **/
 export class SwitchConfigurationContainer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CanSwitchOff" })
+  @SpeakeasyMetadata({ data: "json, name=CanSwitchOff" })
   canSwitchOff?: boolean;
 
-  @Metadata({ data: "json, name=Number" })
+  @SpeakeasyMetadata({ data: "json, name=Number" })
   number?: number;
 }

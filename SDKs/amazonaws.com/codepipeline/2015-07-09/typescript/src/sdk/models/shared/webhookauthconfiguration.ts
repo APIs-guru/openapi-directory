@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WebhookAuthConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The authentication applied to incoming webhook trigger requests.
 **/
 export class WebhookAuthConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowedIPRange" })
+  @SpeakeasyMetadata({ data: "json, name=AllowedIPRange" })
   allowedIpRange?: string;
 
-  @Metadata({ data: "json, name=SecretToken" })
+  @SpeakeasyMetadata({ data: "json, name=SecretToken" })
   secretToken?: string;
 }

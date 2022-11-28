@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var BatchGetAmpUrlsRequestLookupStrategyEnum;
 (function (BatchGetAmpUrlsRequestLookupStrategyEnum) {
     BatchGetAmpUrlsRequestLookupStrategyEnum["FetchLiveDoc"] = "FETCH_LIVE_DOC";
@@ -38,11 +38,11 @@ var BatchGetAmpUrlsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=lookupStrategy" }),
+        SpeakeasyMetadata({ data: "json, name=lookupStrategy" }),
         __metadata("design:type", String)
     ], BatchGetAmpUrlsRequest.prototype, "lookupStrategy", void 0);
     __decorate([
-        Metadata({ data: "json, name=urls" }),
+        SpeakeasyMetadata({ data: "json, name=urls" }),
         __metadata("design:type", Array)
     ], BatchGetAmpUrlsRequest.prototype, "urls", void 0);
     return BatchGetAmpUrlsRequest;

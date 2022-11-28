@@ -1,110 +1,111 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutDatasetPkPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=pk" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pk" })
   pk: number;
 }
 
 
 export class PutDatasetPkQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=override_columns" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=override_columns" })
   overrideColumns?: boolean;
 }
 
 
 export class PutDatasetPkSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   jwt: shared.SchemeJwt;
 }
 
 
-export class PutDatasetPkRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PutDatasetPkPathParams;
-
-  @Metadata()
-  queryParams: PutDatasetPkQueryParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.DatasetRestApiPut;
-
-  @Metadata()
-  security: PutDatasetPkSecurity;
-}
-
-
 export class PutDatasetPk200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: shared.DatasetRestApiPut;
 }
 
 
 export class PutDatasetPk400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutDatasetPk401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutDatasetPk403ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutDatasetPk404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutDatasetPk422ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class PutDatasetPk500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class PutDatasetPkRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PutDatasetPkPathParams;
+
+  @SpeakeasyMetadata()
+  queryParams: PutDatasetPkQueryParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.DatasetRestApiPut;
+
+  @SpeakeasyMetadata()
+  security: PutDatasetPkSecurity;
+}
+
+
 export class PutDatasetPkResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putDatasetPk200ApplicationJsonObject?: PutDatasetPk200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putDatasetPk400ApplicationJsonObject?: PutDatasetPk400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putDatasetPk401ApplicationJsonObject?: PutDatasetPk401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putDatasetPk403ApplicationJsonObject?: PutDatasetPk403ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putDatasetPk404ApplicationJsonObject?: PutDatasetPk404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putDatasetPk422ApplicationJsonObject?: PutDatasetPk422ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putDatasetPk500ApplicationJsonObject?: PutDatasetPk500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

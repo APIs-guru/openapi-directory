@@ -10,14 +10,14 @@ class ContentSubmissionTypesGetContentSubmissionTypesQueryParams:
 
 @dataclass
 class ContentSubmissionTypesGetContentSubmissionTypesRequest:
-    query_params: ContentSubmissionTypesGetContentSubmissionTypesQueryParams = field(default=None)
+    query_params: ContentSubmissionTypesGetContentSubmissionTypesQueryParams = field()
     
 
 @dataclass
 class ContentSubmissionTypesGetContentSubmissionTypesResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
-    body: bytes = field(default=None)
+    body: Optional[bytes] = field(default=None)
     content_submission_shared_business_entities_content_submission_types: Optional[List[shared.ContentSubmissionSharedBusinessEntitiesContentSubmissionType]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

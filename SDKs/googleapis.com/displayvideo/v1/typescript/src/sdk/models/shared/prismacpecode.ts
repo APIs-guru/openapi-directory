@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PrismaCpeCode
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Google Payments Center supports searching and filtering on the component fields of this code.
 **/
 export class PrismaCpeCode extends SpeakeasyBase {
-  @Metadata({ data: "json, name=prismaClientCode" })
+  @SpeakeasyMetadata({ data: "json, name=prismaClientCode" })
   prismaClientCode?: string;
 
-  @Metadata({ data: "json, name=prismaEstimateCode" })
+  @SpeakeasyMetadata({ data: "json, name=prismaEstimateCode" })
   prismaEstimateCode?: string;
 
-  @Metadata({ data: "json, name=prismaProductCode" })
+  @SpeakeasyMetadata({ data: "json, name=prismaProductCode" })
   prismaProductCode?: string;
 }

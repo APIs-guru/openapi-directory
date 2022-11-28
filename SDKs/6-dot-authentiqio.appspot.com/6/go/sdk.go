@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://6-dot-authentiqio.appspot.com",
 }
 
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// HeadKeyPk - HEAD info on Authentiq ID
 func (s *SDK) HeadKeyPk(ctx context.Context, request operations.HeadKeyPkRequest) (*operations.HeadKeyPkResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/key/{PK}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -60,7 +82,7 @@ func (s *SDK) HeadKeyPk(ctx context.Context, request operations.HeadKeyPkRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -111,8 +133,16 @@ func (s *SDK) HeadKeyPk(ctx context.Context, request operations.HeadKeyPkRequest
 	return res, nil
 }
 
+// KeyBind - Update Authentiq ID by replacing the object.
+//
+// v4: `JWT(sub,email,phone)` to bind email/phone hash;
+//
+// v5: POST issuer-signed email & phone scopes
+// and PUT to update registration `JWT(sub, pk, devtoken, ...)`
+//
+// See: https://github.com/skion/authentiq/wiki/JWT-Examples
 func (s *SDK) KeyBind(ctx context.Context, request operations.KeyBindRequest) (*operations.KeyBindResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/key/{PK}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -130,7 +160,7 @@ func (s *SDK) KeyBind(ctx context.Context, request operations.KeyBindRequest) (*
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -190,8 +220,13 @@ func (s *SDK) KeyBind(ctx context.Context, request operations.KeyBindRequest) (*
 	return res, nil
 }
 
+// KeyRegister - Register a new ID `JWT(sub, devtoken)`
+//
+// v5: `JWT(sub, pk, devtoken, ...)`
+//
+// See: https://github.com/skion/authentiq/wiki/JWT-Examples
 func (s *SDK) KeyRegister(ctx context.Context, request operations.KeyRegisterRequest) (*operations.KeyRegisterResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/key"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -209,7 +244,7 @@ func (s *SDK) KeyRegister(ctx context.Context, request operations.KeyRegisterReq
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -259,8 +294,9 @@ func (s *SDK) KeyRegister(ctx context.Context, request operations.KeyRegisterReq
 	return res, nil
 }
 
+// KeyRetrieve - Get public details of an Authentiq ID.
 func (s *SDK) KeyRetrieve(ctx context.Context, request operations.KeyRetrieveRequest) (*operations.KeyRetrieveResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/key/{PK}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -268,7 +304,7 @@ func (s *SDK) KeyRetrieve(ctx context.Context, request operations.KeyRetrieveReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -328,8 +364,9 @@ func (s *SDK) KeyRetrieve(ctx context.Context, request operations.KeyRetrieveReq
 	return res, nil
 }
 
+// KeyRevoke - Revoke an Identity (Key) with a revocation secret
 func (s *SDK) KeyRevoke(ctx context.Context, request operations.KeyRevokeRequest) (*operations.KeyRevokeResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/key/{PK}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -339,7 +376,7 @@ func (s *SDK) KeyRevoke(ctx context.Context, request operations.KeyRevokeRequest
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -399,8 +436,13 @@ func (s *SDK) KeyRevoke(ctx context.Context, request operations.KeyRevokeRequest
 	return res, nil
 }
 
+// KeyRevokeNosecret - Revoke an Authentiq ID using email & phone.
+//
+// If called with `email` and `phone` only, a verification code
+// will be sent by email. Do a second call adding `code` to
+// complete the revocation.
 func (s *SDK) KeyRevokeNosecret(ctx context.Context, request operations.KeyRevokeNosecretRequest) (*operations.KeyRevokeNosecretResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/key"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -410,7 +452,7 @@ func (s *SDK) KeyRevokeNosecret(ctx context.Context, request operations.KeyRevok
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -480,8 +522,15 @@ func (s *SDK) KeyRevokeNosecret(ctx context.Context, request operations.KeyRevok
 	return res, nil
 }
 
+// KeyUpdate - update properties of an Authentiq ID.
+// (not operational in v4; use PUT for now)
+//
+// v5: POST issuer-signed email & phone scopes in
+// a self-signed JWT
+//
+// See: https://github.com/skion/authentiq/wiki/JWT-Examples
 func (s *SDK) KeyUpdate(ctx context.Context, request operations.KeyUpdateRequest) (*operations.KeyUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/key/{PK}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -499,7 +548,7 @@ func (s *SDK) KeyUpdate(ctx context.Context, request operations.KeyUpdateRequest
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -549,8 +598,10 @@ func (s *SDK) KeyUpdate(ctx context.Context, request operations.KeyUpdateRequest
 	return res, nil
 }
 
+// PushLoginRequest - push sign-in request
+// See: https://github.com/skion/authentiq/wiki/JWT-Examples
 func (s *SDK) PushLoginRequest(ctx context.Context, request operations.PushLoginRequestRequest) (*operations.PushLoginRequestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/login"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -570,7 +621,7 @@ func (s *SDK) PushLoginRequest(ctx context.Context, request operations.PushLogin
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -620,8 +671,9 @@ func (s *SDK) PushLoginRequest(ctx context.Context, request operations.PushLogin
 	return res, nil
 }
 
+// SignConfirm - this is a scope confirmation
 func (s *SDK) SignConfirm(ctx context.Context, request operations.SignConfirmRequest) (*operations.SignConfirmResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/scope/{job}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -629,7 +681,7 @@ func (s *SDK) SignConfirm(ctx context.Context, request operations.SignConfirmReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -699,8 +751,9 @@ func (s *SDK) SignConfirm(ctx context.Context, request operations.SignConfirmReq
 	return res, nil
 }
 
+// SignDelete - delete a verification job
 func (s *SDK) SignDelete(ctx context.Context, request operations.SignDeleteRequest) (*operations.SignDeleteResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/scope/{job}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -708,7 +761,7 @@ func (s *SDK) SignDelete(ctx context.Context, request operations.SignDeleteReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -758,8 +811,10 @@ func (s *SDK) SignDelete(ctx context.Context, request operations.SignDeleteReque
 	return res, nil
 }
 
+// SignRequest - scope verification request
+// See: https://github.com/skion/authentiq/wiki/JWT-Examples
 func (s *SDK) SignRequest(ctx context.Context, request operations.SignRequestRequest) (*operations.SignRequestResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/scope"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -779,7 +834,7 @@ func (s *SDK) SignRequest(ctx context.Context, request operations.SignRequestReq
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -829,8 +884,9 @@ func (s *SDK) SignRequest(ctx context.Context, request operations.SignRequestReq
 	return res, nil
 }
 
+// SignRetrieve - get the status / current content of a verification job
 func (s *SDK) SignRetrieve(ctx context.Context, request operations.SignRetrieveRequest) (*operations.SignRetrieveResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/scope/{job}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -838,7 +894,7 @@ func (s *SDK) SignRetrieve(ctx context.Context, request operations.SignRetrieveR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -903,8 +959,9 @@ func (s *SDK) SignRetrieve(ctx context.Context, request operations.SignRetrieveR
 	return res, nil
 }
 
+// SignRetrieveHead - HEAD to get the status of a verification job
 func (s *SDK) SignRetrieveHead(ctx context.Context, request operations.SignRetrieveHeadRequest) (*operations.SignRetrieveHeadResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/scope/{job}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "HEAD", url, nil)
@@ -912,7 +969,7 @@ func (s *SDK) SignRetrieveHead(ctx context.Context, request operations.SignRetri
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -954,8 +1011,10 @@ func (s *SDK) SignRetrieveHead(ctx context.Context, request operations.SignRetri
 	return res, nil
 }
 
+// SignUpdate - authority updates a JWT with its signature
+// See: https://github.com/skion/authentiq/wiki/JWT-Examples
 func (s *SDK) SignUpdate(ctx context.Context, request operations.SignUpdateRequest) (*operations.SignUpdateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/scope/{job}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -963,7 +1022,7 @@ func (s *SDK) SignUpdate(ctx context.Context, request operations.SignUpdateReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

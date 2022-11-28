@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetV3BoardsBoardIdPathParams = /** @class */ (function (_super) {
     __extends(GetV3BoardsBoardIdPathParams, _super);
@@ -30,7 +30,7 @@ var GetV3BoardsBoardIdPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=board_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=board_id" }),
         __metadata("design:type", String)
     ], GetV3BoardsBoardIdPathParams.prototype, "boardId", void 0);
     return GetV3BoardsBoardIdPathParams;
@@ -42,7 +42,7 @@ var GetV3BoardsBoardIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetV3BoardsBoardIdPathParams)
     ], GetV3BoardsBoardIdRequest.prototype, "pathParams", void 0);
     return GetV3BoardsBoardIdRequest;
@@ -54,15 +54,15 @@ var GetV3BoardsBoardIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.BoardDetail)
     ], GetV3BoardsBoardIdResponse.prototype, "boardDetail", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetV3BoardsBoardIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetV3BoardsBoardIdResponse.prototype, "statusCode", void 0);
     return GetV3BoardsBoardIdResponse;

@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PublicSubscriptionStatusLegalBasisEnum {
-    LegitimateInterestPql = "LEGITIMATE_INTEREST_PQL"
-,    LegitimateInterestClient = "LEGITIMATE_INTEREST_CLIENT"
-,    PerformanceOfContract = "PERFORMANCE_OF_CONTRACT"
-,    ConsentWithNotice = "CONSENT_WITH_NOTICE"
-,    NonGdpr = "NON_GDPR"
-,    ProcessAndStore = "PROCESS_AND_STORE"
-,    LegitimateInterestOther = "LEGITIMATE_INTEREST_OTHER"
+    LegitimateInterestPql = "LEGITIMATE_INTEREST_PQL",
+    LegitimateInterestClient = "LEGITIMATE_INTEREST_CLIENT",
+    PerformanceOfContract = "PERFORMANCE_OF_CONTRACT",
+    ConsentWithNotice = "CONSENT_WITH_NOTICE",
+    NonGdpr = "NON_GDPR",
+    ProcessAndStore = "PROCESS_AND_STORE",
+    LegitimateInterestOther = "LEGITIMATE_INTEREST_OTHER"
 }
 
 export enum PublicSubscriptionStatusSourceOfStatusEnum {
-    PortalWideStatus = "PORTAL_WIDE_STATUS"
-,    BrandWideStatus = "BRAND_WIDE_STATUS"
-,    SubscriptionStatus = "SUBSCRIPTION_STATUS"
+    PortalWideStatus = "PORTAL_WIDE_STATUS",
+    BrandWideStatus = "BRAND_WIDE_STATUS",
+    SubscriptionStatus = "SUBSCRIPTION_STATUS"
 }
 
 export enum PublicSubscriptionStatusStatusEnum {
-    Subscribed = "SUBSCRIBED"
-,    NotSubscribed = "NOT_SUBSCRIBED"
+    Subscribed = "SUBSCRIBED",
+    NotSubscribed = "NOT_SUBSCRIBED"
 }
 
 
@@ -27,30 +28,30 @@ export enum PublicSubscriptionStatusStatusEnum {
  * The status of a subscription for a contact.
 **/
 export class PublicSubscriptionStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=brandId" })
+  @SpeakeasyMetadata({ data: "json, name=brandId" })
   brandId?: number;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=legalBasis" })
+  @SpeakeasyMetadata({ data: "json, name=legalBasis" })
   legalBasis?: PublicSubscriptionStatusLegalBasisEnum;
 
-  @Metadata({ data: "json, name=legalBasisExplanation" })
+  @SpeakeasyMetadata({ data: "json, name=legalBasisExplanation" })
   legalBasisExplanation?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=preferenceGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=preferenceGroupName" })
   preferenceGroupName?: string;
 
-  @Metadata({ data: "json, name=sourceOfStatus" })
+  @SpeakeasyMetadata({ data: "json, name=sourceOfStatus" })
   sourceOfStatus: PublicSubscriptionStatusSourceOfStatusEnum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PublicSubscriptionStatusStatusEnum;
 }

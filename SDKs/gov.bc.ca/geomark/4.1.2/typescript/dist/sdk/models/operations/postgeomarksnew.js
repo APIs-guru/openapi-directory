@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var PostGeomarksNewRequestBodyBufferCapEnum;
 (function (PostGeomarksNewRequestBodyBufferCapEnum) {
     PostGeomarksNewRequestBodyBufferCapEnum["Round"] = "ROUND";
@@ -65,59 +65,59 @@ var PostGeomarksNewRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=allowOverlap;" }),
+        SpeakeasyMetadata({ data: "form, name=allowOverlap;" }),
         __metadata("design:type", Boolean)
     ], PostGeomarksNewRequestBody.prototype, "allowOverlap", void 0);
     __decorate([
-        Metadata({ data: "form, name=body;" }),
+        SpeakeasyMetadata({ data: "form, name=body;" }),
         __metadata("design:type", String)
     ], PostGeomarksNewRequestBody.prototype, "body", void 0);
     __decorate([
-        Metadata({ data: "form, name=bufferCap;" }),
+        SpeakeasyMetadata({ data: "form, name=bufferCap;" }),
         __metadata("design:type", String)
     ], PostGeomarksNewRequestBody.prototype, "bufferCap", void 0);
     __decorate([
-        Metadata({ data: "form, name=bufferJoin;" }),
+        SpeakeasyMetadata({ data: "form, name=bufferJoin;" }),
         __metadata("design:type", String)
     ], PostGeomarksNewRequestBody.prototype, "bufferJoin", void 0);
     __decorate([
-        Metadata({ data: "form, name=bufferMetres;" }),
+        SpeakeasyMetadata({ data: "form, name=bufferMetres;" }),
         __metadata("design:type", Number)
     ], PostGeomarksNewRequestBody.prototype, "bufferMetres", void 0);
     __decorate([
-        Metadata({ data: "form, name=bufferMitreLimit;" }),
+        SpeakeasyMetadata({ data: "form, name=bufferMitreLimit;" }),
         __metadata("design:type", Number)
     ], PostGeomarksNewRequestBody.prototype, "bufferMitreLimit", void 0);
     __decorate([
-        Metadata({ data: "form, name=bufferSegments;" }),
+        SpeakeasyMetadata({ data: "form, name=bufferSegments;" }),
         __metadata("design:type", Number)
     ], PostGeomarksNewRequestBody.prototype, "bufferSegments", void 0);
     __decorate([
-        Metadata({ data: "form, name=callback;" }),
+        SpeakeasyMetadata({ data: "form, name=callback;" }),
         __metadata("design:type", String)
     ], PostGeomarksNewRequestBody.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "form, name=failureRedirectUrl;" }),
+        SpeakeasyMetadata({ data: "form, name=failureRedirectUrl;" }),
         __metadata("design:type", String)
     ], PostGeomarksNewRequestBody.prototype, "failureRedirectUrl", void 0);
     __decorate([
-        Metadata({ data: "form, name=format;" }),
+        SpeakeasyMetadata({ data: "form, name=format;" }),
         __metadata("design:type", String)
     ], PostGeomarksNewRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "form, name=multiple;" }),
+        SpeakeasyMetadata({ data: "form, name=multiple;" }),
         __metadata("design:type", Boolean)
     ], PostGeomarksNewRequestBody.prototype, "multiple", void 0);
     __decorate([
-        Metadata({ data: "form, name=redirectUrl;" }),
+        SpeakeasyMetadata({ data: "form, name=redirectUrl;" }),
         __metadata("design:type", String)
     ], PostGeomarksNewRequestBody.prototype, "redirectUrl", void 0);
     __decorate([
-        Metadata({ data: "form, name=resultFormat;" }),
+        SpeakeasyMetadata({ data: "form, name=resultFormat;" }),
         __metadata("design:type", String)
     ], PostGeomarksNewRequestBody.prototype, "resultFormat", void 0);
     __decorate([
-        Metadata({ data: "form, name=srid;" }),
+        SpeakeasyMetadata({ data: "form, name=srid;" }),
         __metadata("design:type", Number)
     ], PostGeomarksNewRequestBody.prototype, "srid", void 0);
     return PostGeomarksNewRequestBody;
@@ -129,7 +129,7 @@ var PostGeomarksNewRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", PostGeomarksNewRequestBody)
     ], PostGeomarksNewRequest.prototype, "request", void 0);
     return PostGeomarksNewRequest;
@@ -141,11 +141,11 @@ var PostGeomarksNewResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostGeomarksNewResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostGeomarksNewResponse.prototype, "statusCode", void 0);
     return PostGeomarksNewResponse;

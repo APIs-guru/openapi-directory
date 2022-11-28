@@ -1,5 +1,7 @@
 package shared
 
+// AwsAPIGatewayV2StageDetails
+// Contains information about a version 2 stage for Amazon API Gateway.
 type AwsAPIGatewayV2StageDetails struct {
 	AccessLogSettings           *AwsAPIGatewayAccessLogSettings `json:"AccessLogSettings,omitempty"`
 	APIGatewayManaged           *bool                           `json:"ApiGatewayManaged,omitempty"`

@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UploadLayerPartResponse = /** @class */ (function (_super) {
     __extends(UploadLayerPartResponse, _super);
     function UploadLayerPartResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=lastByteReceived" }),
+        SpeakeasyMetadata({ data: "json, name=lastByteReceived" }),
         __metadata("design:type", Number)
     ], UploadLayerPartResponse.prototype, "lastByteReceived", void 0);
     __decorate([
-        Metadata({ data: "json, name=registryId" }),
+        SpeakeasyMetadata({ data: "json, name=registryId" }),
         __metadata("design:type", String)
     ], UploadLayerPartResponse.prototype, "registryId", void 0);
     __decorate([
-        Metadata({ data: "json, name=repositoryName" }),
+        SpeakeasyMetadata({ data: "json, name=repositoryName" }),
         __metadata("design:type", String)
     ], UploadLayerPartResponse.prototype, "repositoryName", void 0);
     __decorate([
-        Metadata({ data: "json, name=uploadId" }),
+        SpeakeasyMetadata({ data: "json, name=uploadId" }),
         __metadata("design:type", String)
     ], UploadLayerPartResponse.prototype, "uploadId", void 0);
     return UploadLayerPartResponse;

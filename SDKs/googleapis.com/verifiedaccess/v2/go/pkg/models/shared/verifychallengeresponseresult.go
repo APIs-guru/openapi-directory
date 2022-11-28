@@ -10,6 +10,8 @@ const (
 	VerifyChallengeResponseResultKeyTrustLevelEnumChromeBrowserOsKey       VerifyChallengeResponseResultKeyTrustLevelEnum = "CHROME_BROWSER_OS_KEY"
 )
 
+// VerifyChallengeResponseResult
+// Result message for VerifiedAccess.VerifyChallengeResponse.
 type VerifyChallengeResponseResult struct {
 	CustomerID                  *string                                         `json:"customerId,omitempty"`
 	DevicePermanentID           *string                                         `json:"devicePermanentId,omitempty"`

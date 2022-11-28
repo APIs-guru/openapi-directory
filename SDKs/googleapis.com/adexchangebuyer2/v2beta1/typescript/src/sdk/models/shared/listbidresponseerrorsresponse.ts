@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CalloutStatusRow } from "./calloutstatusrow";
+
 
 
 // ListBidResponseErrorsResponse
@@ -8,9 +8,9 @@ import { CalloutStatusRow } from "./calloutstatusrow";
  * Response message for listing all reasons that bid responses resulted in an error.
 **/
 export class ListBidResponseErrorsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=calloutStatusRows", elemType: shared.CalloutStatusRow })
+  @SpeakeasyMetadata({ data: "json, name=calloutStatusRows", elemType: CalloutStatusRow })
   calloutStatusRows?: CalloutStatusRow[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

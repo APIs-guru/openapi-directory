@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetDealerPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,14 +16,14 @@ class GetDealerQueryParams:
 
 @dataclass
 class GetDealerRequest:
-    path_params: GetDealerPathParams = field(default=None)
-    query_params: GetDealerQueryParams = field(default=None)
+    path_params: GetDealerPathParams = field()
+    query_params: GetDealerQueryParams = field()
     
 
 @dataclass
 class GetDealerResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dealer: Optional[shared.Dealer] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     

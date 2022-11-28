@@ -1,5 +1,8 @@
 package shared
 
+// ListApplicationRevisionsInput
+//
+//	Represents the input of a <code>ListApplicationRevisions</code> operation.
 type ListApplicationRevisionsInput struct {
 	ApplicationName string                         `json:"applicationName"`
 	Deployed        *ListStateFilterActionEnum     `json:"deployed,omitempty"`

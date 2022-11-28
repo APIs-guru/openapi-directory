@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ImagePermissions
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the permissions for an image. 
 **/
 export class ImagePermissions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowFleet" })
+  @SpeakeasyMetadata({ data: "json, name=allowFleet" })
   allowFleet?: boolean;
 
-  @Metadata({ data: "json, name=allowImageBuilder" })
+  @SpeakeasyMetadata({ data: "json, name=allowImageBuilder" })
   allowImageBuilder?: boolean;
 }

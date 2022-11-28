@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DataprocProjectsRegionsClustersRepairPathParams:
-    cluster_name: str = field(default=None, metadata={'path_param': { 'field_name': 'clusterName', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    region: str = field(default=None, metadata={'path_param': { 'field_name': 'region', 'style': 'simple', 'explode': False }})
+    cluster_name: str = field(metadata={'path_param': { 'field_name': 'clusterName', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    region: str = field(metadata={'path_param': { 'field_name': 'region', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,21 +28,21 @@ class DataprocProjectsRegionsClustersRepairQueryParams:
 
 @dataclass
 class DataprocProjectsRegionsClustersRepairSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataprocProjectsRegionsClustersRepairRequest:
-    path_params: DataprocProjectsRegionsClustersRepairPathParams = field(default=None)
-    query_params: DataprocProjectsRegionsClustersRepairQueryParams = field(default=None)
+    path_params: DataprocProjectsRegionsClustersRepairPathParams = field()
+    query_params: DataprocProjectsRegionsClustersRepairQueryParams = field()
+    security: DataprocProjectsRegionsClustersRepairSecurity = field()
     request: Optional[shared.RepairClusterRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DataprocProjectsRegionsClustersRepairSecurity = field(default=None)
     
 
 @dataclass
 class DataprocProjectsRegionsClustersRepairResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

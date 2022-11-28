@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .aggregation import *
 from .alertchart import *
 from .alt_enum import *
@@ -7,6 +7,7 @@ from .chartoptions import *
 from .collapsiblegroup import *
 from .column import *
 from .columnlayout import *
+from .columnsettings import *
 from .dashboard import *
 from .dashboardfilter import *
 from .dataset import *
@@ -34,6 +35,7 @@ from .sparkchartview import *
 from .statisticaltimeseriesfilter import *
 from .status import *
 from .tabledataset import *
+from .tabledisplayoptions import *
 from .text import *
 from .threshold import *
 from .tile import *

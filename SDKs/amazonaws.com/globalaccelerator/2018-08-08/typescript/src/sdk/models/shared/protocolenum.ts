@@ -1,6 +1,7 @@
 
 
+
 export enum ProtocolEnum {
-    Tcp = "TCP"
-,    Udp = "UDP"
+    Tcp = "TCP",
+    Udp = "UDP"
 }

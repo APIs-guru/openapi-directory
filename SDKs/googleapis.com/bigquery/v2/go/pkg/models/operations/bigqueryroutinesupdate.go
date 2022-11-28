@@ -38,7 +38,7 @@ type BigqueryRoutinesUpdateSecurity struct {
 type BigqueryRoutinesUpdateRequest struct {
 	PathParams  BigqueryRoutinesUpdatePathParams
 	QueryParams BigqueryRoutinesUpdateQueryParams
-	Request     *shared.Routine `request:"mediaType=application/json"`
+	Request     *shared.RoutineInput `request:"mediaType=application/json"`
 	Security    BigqueryRoutinesUpdateSecurity
 }
 

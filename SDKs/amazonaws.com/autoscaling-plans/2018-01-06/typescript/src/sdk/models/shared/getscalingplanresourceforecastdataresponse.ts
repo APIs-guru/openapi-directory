@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Datapoint } from "./datapoint";
 
 
+
 export class GetScalingPlanResourceForecastDataResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Datapoints", elemType: shared.Datapoint })
+  @SpeakeasyMetadata({ data: "json, name=Datapoints", elemType: Datapoint })
   datapoints: Datapoint[];
 }

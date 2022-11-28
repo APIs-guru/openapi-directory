@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigFile } from "./configfile";
+
 
 
 // ConfigSource
@@ -8,9 +8,9 @@ import { ConfigFile } from "./configfile";
  * Represents a source file which is used to generate the service configuration defined by `google.api.Service`.
 **/
 export class ConfigSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=files", elemType: shared.ConfigFile })
+  @SpeakeasyMetadata({ data: "json, name=files", elemType: ConfigFile })
   files?: ConfigFile[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }

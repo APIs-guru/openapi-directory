@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AgentNetworkInfo } from "./agentnetworkinfo";
 import { AgentStatusEnum } from "./agentstatusenum";
 // AgentInfo
 /**
@@ -35,43 +35,43 @@ var AgentInfo = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=agentId" }),
+        SpeakeasyMetadata({ data: "json, name=agentId" }),
         __metadata("design:type", String)
     ], AgentInfo.prototype, "agentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=agentNetworkInfoList", elemType: shared.AgentNetworkInfo }),
+        SpeakeasyMetadata({ data: "json, name=agentNetworkInfoList", elemType: AgentNetworkInfo }),
         __metadata("design:type", Array)
     ], AgentInfo.prototype, "agentNetworkInfoList", void 0);
     __decorate([
-        Metadata({ data: "json, name=agentType" }),
+        SpeakeasyMetadata({ data: "json, name=agentType" }),
         __metadata("design:type", String)
     ], AgentInfo.prototype, "agentType", void 0);
     __decorate([
-        Metadata({ data: "json, name=collectionStatus" }),
+        SpeakeasyMetadata({ data: "json, name=collectionStatus" }),
         __metadata("design:type", String)
     ], AgentInfo.prototype, "collectionStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=connectorId" }),
+        SpeakeasyMetadata({ data: "json, name=connectorId" }),
         __metadata("design:type", String)
     ], AgentInfo.prototype, "connectorId", void 0);
     __decorate([
-        Metadata({ data: "json, name=health" }),
+        SpeakeasyMetadata({ data: "json, name=health" }),
         __metadata("design:type", String)
     ], AgentInfo.prototype, "health", void 0);
     __decorate([
-        Metadata({ data: "json, name=hostName" }),
+        SpeakeasyMetadata({ data: "json, name=hostName" }),
         __metadata("design:type", String)
     ], AgentInfo.prototype, "hostName", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastHealthPingTime" }),
+        SpeakeasyMetadata({ data: "json, name=lastHealthPingTime" }),
         __metadata("design:type", String)
     ], AgentInfo.prototype, "lastHealthPingTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=registeredTime" }),
+        SpeakeasyMetadata({ data: "json, name=registeredTime" }),
         __metadata("design:type", String)
     ], AgentInfo.prototype, "registeredTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], AgentInfo.prototype, "version", void 0);
     return AgentInfo;

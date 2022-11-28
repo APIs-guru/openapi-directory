@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SupportedCountry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currencies" })
+  @SpeakeasyMetadata({ data: "json, name=currencies" })
   currencies?: string[];
 
-  @Metadata({ data: "json, name=isoCountryCode" })
+  @SpeakeasyMetadata({ data: "json, name=isoCountryCode" })
   isoCountryCode?: string;
 }

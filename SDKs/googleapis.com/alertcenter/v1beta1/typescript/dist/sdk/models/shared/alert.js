@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlertMetadata } from "./alertmetadata";
 // Alert
 /**
@@ -34,55 +34,55 @@ var Alert = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=alertId" }),
+        SpeakeasyMetadata({ data: "json, name=alertId" }),
         __metadata("design:type", String)
     ], Alert.prototype, "alertId", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Alert.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=customerId" }),
+        SpeakeasyMetadata({ data: "json, name=customerId" }),
         __metadata("design:type", String)
     ], Alert.prototype, "customerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=data" }),
+        SpeakeasyMetadata({ data: "json, name=data" }),
         __metadata("design:type", Map)
     ], Alert.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "json, name=deleted" }),
+        SpeakeasyMetadata({ data: "json, name=deleted" }),
         __metadata("design:type", Boolean)
     ], Alert.prototype, "deleted", void 0);
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", String)
     ], Alert.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], Alert.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadata" }),
+        SpeakeasyMetadata({ data: "json, name=metadata" }),
         __metadata("design:type", AlertMetadata)
     ], Alert.prototype, "metadata", void 0);
     __decorate([
-        Metadata({ data: "json, name=securityInvestigationToolLink" }),
+        SpeakeasyMetadata({ data: "json, name=securityInvestigationToolLink" }),
         __metadata("design:type", String)
     ], Alert.prototype, "securityInvestigationToolLink", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", String)
     ], Alert.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", String)
     ], Alert.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Alert.prototype, "type", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Alert.prototype, "updateTime", void 0);
     return Alert;

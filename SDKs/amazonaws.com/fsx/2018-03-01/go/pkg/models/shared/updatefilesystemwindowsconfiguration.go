@@ -1,5 +1,7 @@
 package shared
 
+// UpdateFileSystemWindowsConfiguration
+// Updates the configuration for an existing Amazon FSx for Windows File Server file system. Amazon FSx only overwrites existing properties with non-null values provided in the request.
 type UpdateFileSystemWindowsConfiguration struct {
 	AuditLogConfiguration                   *WindowsAuditLogCreateConfiguration             `json:"AuditLogConfiguration,omitempty"`
 	AutomaticBackupRetentionDays            *int64                                          `json:"AutomaticBackupRetentionDays,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FhirOutput } from "./fhiroutput";
+
 
 
 // DeidentifyOperationMetadata
@@ -7,6 +8,6 @@ import { FhirOutput } from "./fhiroutput";
  * Details about the work the de-identify operation performed.
 **/
 export class DeidentifyOperationMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fhirOutput" })
+  @SpeakeasyMetadata({ data: "json, name=fhirOutput" })
   fhirOutput?: FhirOutput;
 }

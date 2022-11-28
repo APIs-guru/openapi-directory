@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Success extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error-code" })
+  @SpeakeasyMetadata({ data: "json, name=error-code" })
   errorCode?: any;
 
-  @Metadata({ data: "json, name=error-code-label" })
+  @SpeakeasyMetadata({ data: "json, name=error-code-label" })
   errorCodeLabel?: any;
 }

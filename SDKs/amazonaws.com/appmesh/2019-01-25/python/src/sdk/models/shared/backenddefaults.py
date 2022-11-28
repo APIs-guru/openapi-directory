@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import clientpolicy
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BackendDefaults:
-    client_policy: Optional[clientpolicy.ClientPolicy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientPolicy' }})
+    r"""BackendDefaults
+    An object that represents the default properties for a backend.
+    """
+    
+    client_policy: Optional[ClientPolicy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('clientPolicy') }})
     

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ChannelTypeEnum } from "./channeltypeenum";
 import { EndpointDemographic } from "./endpointdemographic";
 import { EndpointLocation } from "./endpointlocation";
 import { EndpointUser } from "./endpointuser";
+
 
 
 // PublicEndpoint
@@ -10,36 +11,36 @@ import { EndpointUser } from "./endpointuser";
  * Specifies the properties and attributes of an endpoint that's associated with an event.
 **/
 export class PublicEndpoint extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Address" })
+  @SpeakeasyMetadata({ data: "json, name=Address" })
   address?: string;
 
-  @Metadata({ data: "json, name=Attributes" })
+  @SpeakeasyMetadata({ data: "json, name=Attributes" })
   attributes?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=ChannelType" })
+  @SpeakeasyMetadata({ data: "json, name=ChannelType" })
   channelType?: ChannelTypeEnum;
 
-  @Metadata({ data: "json, name=Demographic" })
+  @SpeakeasyMetadata({ data: "json, name=Demographic" })
   demographic?: EndpointDemographic;
 
-  @Metadata({ data: "json, name=EffectiveDate" })
+  @SpeakeasyMetadata({ data: "json, name=EffectiveDate" })
   effectiveDate?: string;
 
-  @Metadata({ data: "json, name=EndpointStatus" })
+  @SpeakeasyMetadata({ data: "json, name=EndpointStatus" })
   endpointStatus?: string;
 
-  @Metadata({ data: "json, name=Location" })
+  @SpeakeasyMetadata({ data: "json, name=Location" })
   location?: EndpointLocation;
 
-  @Metadata({ data: "json, name=Metrics" })
+  @SpeakeasyMetadata({ data: "json, name=Metrics" })
   metrics?: Map<string, number>;
 
-  @Metadata({ data: "json, name=OptOut" })
+  @SpeakeasyMetadata({ data: "json, name=OptOut" })
   optOut?: string;
 
-  @Metadata({ data: "json, name=RequestId" })
+  @SpeakeasyMetadata({ data: "json, name=RequestId" })
   requestId?: string;
 
-  @Metadata({ data: "json, name=User" })
+  @SpeakeasyMetadata({ data: "json, name=User" })
   user?: EndpointUser;
 }

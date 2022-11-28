@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ListServiceQuotaIncreaseRequestsInTemplateQueryParams = /** @class */ (function (_super) {
     __extends(ListServiceQuotaIncreaseRequestsInTemplateQueryParams, _super);
@@ -30,11 +30,11 @@ var ListServiceQuotaIncreaseRequestsInTemplateQueryParams = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MaxResults" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxResults" }),
         __metadata("design:type", String)
     ], ListServiceQuotaIncreaseRequestsInTemplateQueryParams.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
         __metadata("design:type", String)
     ], ListServiceQuotaIncreaseRequestsInTemplateQueryParams.prototype, "nextToken", void 0);
     return ListServiceQuotaIncreaseRequestsInTemplateQueryParams;
@@ -50,35 +50,35 @@ var ListServiceQuotaIncreaseRequestsInTemplateHeaders = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], ListServiceQuotaIncreaseRequestsInTemplateHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], ListServiceQuotaIncreaseRequestsInTemplateHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], ListServiceQuotaIncreaseRequestsInTemplateHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], ListServiceQuotaIncreaseRequestsInTemplateHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], ListServiceQuotaIncreaseRequestsInTemplateHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], ListServiceQuotaIncreaseRequestsInTemplateHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], ListServiceQuotaIncreaseRequestsInTemplateHeaders.prototype, "xAmzSignedHeaders", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" }),
         __metadata("design:type", String)
     ], ListServiceQuotaIncreaseRequestsInTemplateHeaders.prototype, "xAmzTarget", void 0);
     return ListServiceQuotaIncreaseRequestsInTemplateHeaders;
@@ -90,15 +90,15 @@ var ListServiceQuotaIncreaseRequestsInTemplateRequest = /** @class */ (function 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListServiceQuotaIncreaseRequestsInTemplateQueryParams)
     ], ListServiceQuotaIncreaseRequestsInTemplateRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListServiceQuotaIncreaseRequestsInTemplateHeaders)
     ], ListServiceQuotaIncreaseRequestsInTemplateRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.ListServiceQuotaIncreaseRequestsInTemplateRequest)
     ], ListServiceQuotaIncreaseRequestsInTemplateRequest.prototype, "request", void 0);
     return ListServiceQuotaIncreaseRequestsInTemplateRequest;
@@ -110,47 +110,47 @@ var ListServiceQuotaIncreaseRequestsInTemplateResponse = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListServiceQuotaIncreaseRequestsInTemplateResponse.prototype, "awsServiceAccessNotEnabledException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListServiceQuotaIncreaseRequestsInTemplateResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListServiceQuotaIncreaseRequestsInTemplateResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListServiceQuotaIncreaseRequestsInTemplateResponse.prototype, "dependencyAccessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListServiceQuotaIncreaseRequestsInTemplateResponse.prototype, "illegalArgumentException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListServiceQuotaIncreaseRequestsInTemplateResponse)
     ], ListServiceQuotaIncreaseRequestsInTemplateResponse.prototype, "listServiceQuotaIncreaseRequestsInTemplateResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListServiceQuotaIncreaseRequestsInTemplateResponse.prototype, "noAvailableOrganizationException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListServiceQuotaIncreaseRequestsInTemplateResponse.prototype, "serviceException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListServiceQuotaIncreaseRequestsInTemplateResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListServiceQuotaIncreaseRequestsInTemplateResponse.prototype, "templatesNotAvailableInRegionException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListServiceQuotaIncreaseRequestsInTemplateResponse.prototype, "tooManyRequestsException", void 0);
     return ListServiceQuotaIncreaseRequestsInTemplateResponse;

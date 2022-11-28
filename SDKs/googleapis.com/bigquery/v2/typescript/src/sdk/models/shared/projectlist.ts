@@ -1,39 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProjectReference } from "./projectreference";
 
 
+
 export class ProjectListProjects extends SpeakeasyBase {
-  @Metadata({ data: "json, name=friendlyName" })
+  @SpeakeasyMetadata({ data: "json, name=friendlyName" })
   friendlyName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=numericId" })
+  @SpeakeasyMetadata({ data: "json, name=numericId" })
   numericId?: string;
 
-  @Metadata({ data: "json, name=projectReference" })
+  @SpeakeasyMetadata({ data: "json, name=projectReference" })
   projectReference?: ProjectReference;
 }
 
 
 export class ProjectList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=projects", elemType: shared.ProjectListProjects })
+  @SpeakeasyMetadata({ data: "json, name=projects", elemType: ProjectListProjects })
   projects?: ProjectListProjects[];
 
-  @Metadata({ data: "json, name=totalItems" })
+  @SpeakeasyMetadata({ data: "json, name=totalItems" })
   totalItems?: number;
 }

@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -28,16 +29,16 @@ class ListSuppressedDestinationsHeaders:
 
 @dataclass
 class ListSuppressedDestinationsRequest:
-    query_params: ListSuppressedDestinationsQueryParams = field(default=None)
-    headers: ListSuppressedDestinationsHeaders = field(default=None)
+    headers: ListSuppressedDestinationsHeaders = field()
+    query_params: ListSuppressedDestinationsQueryParams = field()
     
 
 @dataclass
 class ListSuppressedDestinationsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     invalid_next_token_exception: Optional[Any] = field(default=None)
     list_suppressed_destinations_response: Optional[shared.ListSuppressedDestinationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

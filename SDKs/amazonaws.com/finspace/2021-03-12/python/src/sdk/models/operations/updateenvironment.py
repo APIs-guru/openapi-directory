@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateEnvironmentPathParams:
-    environment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'environmentId', 'style': 'simple', 'explode': False }})
+    environment_id: str = field(metadata={'path_param': { 'field_name': 'environmentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,37 +32,41 @@ class UpdateEnvironmentRequestBodyFederationModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateEnvironmentRequestBodyFederationParameters:
-    application_call_back_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applicationCallBackURL' }})
-    attribute_map: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributeMap' }})
-    federation_provider_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'federationProviderName' }})
-    federation_urn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'federationURN' }})
-    saml_metadata_document: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'samlMetadataDocument' }})
-    saml_metadata_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'samlMetadataURL' }})
+    r"""UpdateEnvironmentRequestBodyFederationParameters
+    Configuration information when authentication mode is FEDERATED.
+    """
+    
+    application_call_back_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('applicationCallBackURL') }})
+    attribute_map: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('attributeMap') }})
+    federation_provider_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('federationProviderName') }})
+    federation_urn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('federationURN') }})
+    saml_metadata_document: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('samlMetadataDocument') }})
+    saml_metadata_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('samlMetadataURL') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateEnvironmentRequestBody:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    federation_mode: Optional[UpdateEnvironmentRequestBodyFederationModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'federationMode' }})
-    federation_parameters: Optional[UpdateEnvironmentRequestBodyFederationParameters] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'federationParameters' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    federation_mode: Optional[UpdateEnvironmentRequestBodyFederationModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('federationMode') }})
+    federation_parameters: Optional[UpdateEnvironmentRequestBodyFederationParameters] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('federationParameters') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     
 
 @dataclass
 class UpdateEnvironmentRequest:
-    path_params: UpdateEnvironmentPathParams = field(default=None)
-    headers: UpdateEnvironmentHeaders = field(default=None)
-    request: UpdateEnvironmentRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateEnvironmentHeaders = field()
+    path_params: UpdateEnvironmentPathParams = field()
+    request: UpdateEnvironmentRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateEnvironmentResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     update_environment_response: Optional[shared.UpdateEnvironmentResponse] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)

@@ -1,5 +1,7 @@
 package shared
 
+// UpdatePsuAuthenticationResponse
+// Body of the JSON response for a successful update PSU authentication request.
 type UpdatePsuAuthenticationResponse struct {
 	Links                              map[string]HrefType    `json:"_links,omitempty"`
 	AuthorisationID                    *string                `json:"authorisationId,omitempty"`

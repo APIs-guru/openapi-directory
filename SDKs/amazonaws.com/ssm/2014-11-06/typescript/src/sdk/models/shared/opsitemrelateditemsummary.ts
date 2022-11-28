@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OpsItemIdentity } from "./opsitemidentity";
-import { OpsItemIdentity } from "./opsitemidentity";
+
 
 
 // OpsItemRelatedItemSummary
@@ -8,30 +8,30 @@ import { OpsItemIdentity } from "./opsitemidentity";
  * Summary information about related-item resources for an OpsItem.
 **/
 export class OpsItemRelatedItemSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssociationId" })
+  @SpeakeasyMetadata({ data: "json, name=AssociationId" })
   associationId?: string;
 
-  @Metadata({ data: "json, name=AssociationType" })
+  @SpeakeasyMetadata({ data: "json, name=AssociationType" })
   associationType?: string;
 
-  @Metadata({ data: "json, name=CreatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedBy" })
   createdBy?: OpsItemIdentity;
 
-  @Metadata({ data: "json, name=CreatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedTime" })
   createdTime?: Date;
 
-  @Metadata({ data: "json, name=LastModifiedBy" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedBy" })
   lastModifiedBy?: OpsItemIdentity;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=OpsItemId" })
+  @SpeakeasyMetadata({ data: "json, name=OpsItemId" })
   opsItemId?: string;
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType?: string;
 
-  @Metadata({ data: "json, name=ResourceUri" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceUri" })
   resourceUri?: string;
 }

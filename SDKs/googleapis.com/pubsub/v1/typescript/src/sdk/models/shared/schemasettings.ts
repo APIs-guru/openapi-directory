@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SchemaSettingsEncodingEnum {
-    EncodingUnspecified = "ENCODING_UNSPECIFIED"
-,    Json = "JSON"
-,    Binary = "BINARY"
+    EncodingUnspecified = "ENCODING_UNSPECIFIED",
+    Json = "JSON",
+    Binary = "BINARY"
 }
 
 
@@ -12,15 +13,15 @@ export enum SchemaSettingsEncodingEnum {
  * Settings for validating messages published against a schema.
 **/
 export class SchemaSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=encoding" })
+  @SpeakeasyMetadata({ data: "json, name=encoding" })
   encoding?: SchemaSettingsEncodingEnum;
 
-  @Metadata({ data: "json, name=firstRevisionId" })
+  @SpeakeasyMetadata({ data: "json, name=firstRevisionId" })
   firstRevisionId?: string;
 
-  @Metadata({ data: "json, name=lastRevisionId" })
+  @SpeakeasyMetadata({ data: "json, name=lastRevisionId" })
   lastRevisionId?: string;
 
-  @Metadata({ data: "json, name=schema" })
+  @SpeakeasyMetadata({ data: "json, name=schema" })
   schema?: string;
 }

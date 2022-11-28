@@ -34,6 +34,8 @@ const (
 	EmployeeEmployeeAeExclusionReasonCodeEnumWorkerTaxProtection            EmployeeEmployeeAeExclusionReasonCodeEnum = "WorkerTaxProtection"
 )
 
+// EmployeeEmployeeAddress
+// The employees' address
 type EmployeeEmployeeAddress struct {
 	Address1 *string `json:"Address1,omitempty"`
 	Address2 *string `json:"Address2,omitempty"`
@@ -43,6 +45,8 @@ type EmployeeEmployeeAddress struct {
 	Postcode *string `json:"Postcode,omitempty"`
 }
 
+// EmployeeEmployeeBankAccount
+// The employees' bank account
 type EmployeeEmployeeBankAccount struct {
 	AccountName   *string `json:"AccountName,omitempty"`
 	AccountNumber *string `json:"AccountNumber,omitempty"`
@@ -50,6 +54,8 @@ type EmployeeEmployeeBankAccount struct {
 	SortCode      *string `json:"SortCode,omitempty"`
 }
 
+// EmployeeEmployeeEmployeePartner
+// The employees' employee partner
 type EmployeeEmployeeEmployeePartner struct {
 	FirstName  *string `json:"FirstName,omitempty"`
 	Initials   *string `json:"Initials,omitempty"`
@@ -101,6 +107,8 @@ const (
 	EmployeeEmployeeNicLiabilityEnumPaymentAfterLeaving           EmployeeEmployeeNicLiabilityEnum = "PaymentAfterLeaving"
 )
 
+// EmployeeEmployeePaySchedule
+// The employees' pay schedule
 type EmployeeEmployeePaySchedule struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`

@@ -1,5 +1,7 @@
 package shared
 
+// Permission
+// Describes stack or user permissions.
 type Permission struct {
 	AllowSSH   *bool   `json:"AllowSsh,omitempty"`
 	AllowSudo  *bool   `json:"AllowSudo,omitempty"`

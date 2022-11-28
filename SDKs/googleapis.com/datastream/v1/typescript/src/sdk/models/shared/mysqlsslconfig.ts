@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MysqlSslConfig
@@ -6,21 +7,37 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * MySQL SSL configuration information.
 **/
 export class MysqlSslConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=caCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=caCertificate" })
   caCertificate?: string;
 
-  @Metadata({ data: "json, name=caCertificateSet" })
+  @SpeakeasyMetadata({ data: "json, name=caCertificateSet" })
   caCertificateSet?: boolean;
 
-  @Metadata({ data: "json, name=clientCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=clientCertificate" })
   clientCertificate?: string;
 
-  @Metadata({ data: "json, name=clientCertificateSet" })
+  @SpeakeasyMetadata({ data: "json, name=clientCertificateSet" })
   clientCertificateSet?: boolean;
 
-  @Metadata({ data: "json, name=clientKey" })
+  @SpeakeasyMetadata({ data: "json, name=clientKey" })
   clientKey?: string;
 
-  @Metadata({ data: "json, name=clientKeySet" })
+  @SpeakeasyMetadata({ data: "json, name=clientKeySet" })
   clientKeySet?: boolean;
+}
+
+
+// MysqlSslConfigInput
+/** 
+ * MySQL SSL configuration information.
+**/
+export class MysqlSslConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=caCertificate" })
+  caCertificate?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=clientCertificate" })
+  clientCertificate?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=clientKey" })
+  clientKey?: string;
 }

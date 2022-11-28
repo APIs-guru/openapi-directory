@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Image } from "./image";
 var CreateUpdatedImageResult = /** @class */ (function (_super) {
     __extends(CreateUpdatedImageResult, _super);
@@ -30,11 +30,11 @@ var CreateUpdatedImageResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=canUpdateImage" }),
+        SpeakeasyMetadata({ data: "json, name=canUpdateImage" }),
         __metadata("design:type", Boolean)
     ], CreateUpdatedImageResult.prototype, "canUpdateImage", void 0);
     __decorate([
-        Metadata({ data: "json, name=image" }),
+        SpeakeasyMetadata({ data: "json, name=image" }),
         __metadata("design:type", Image)
     ], CreateUpdatedImageResult.prototype, "image", void 0);
     return CreateUpdatedImageResult;

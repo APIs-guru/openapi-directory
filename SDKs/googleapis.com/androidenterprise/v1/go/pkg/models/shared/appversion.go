@@ -9,6 +9,8 @@ const (
 	AppVersionTrackEnumAlpha               AppVersionTrackEnum = "alpha"
 )
 
+// AppVersion
+// This represents a single version of the app.
 type AppVersion struct {
 	IsProduction  *bool                `json:"isProduction,omitempty"`
 	Track         *AppVersionTrackEnum `json:"track,omitempty"`

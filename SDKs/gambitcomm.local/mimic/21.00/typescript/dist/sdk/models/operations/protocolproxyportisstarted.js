@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolProxyPortIsstartedPathParams = /** @class */ (function (_super) {
     __extends(ProtocolProxyPortIsstartedPathParams, _super);
     function ProtocolProxyPortIsstartedPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolProxyPortIsstartedPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=port" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=port" }),
         __metadata("design:type", Number)
     ], ProtocolProxyPortIsstartedPathParams.prototype, "port", void 0);
     return ProtocolProxyPortIsstartedPathParams;
@@ -45,7 +45,7 @@ var ProtocolProxyPortIsstartedRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolProxyPortIsstartedPathParams)
     ], ProtocolProxyPortIsstartedRequest.prototype, "pathParams", void 0);
     return ProtocolProxyPortIsstartedRequest;
@@ -57,15 +57,15 @@ var ProtocolProxyPortIsstartedResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolProxyPortIsstartedResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolProxyPortIsstartedResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolProxyPortIsstartedResponse.prototype, "protocolProxyPortIsstarted200ApplicationJsonString", void 0);
     return ProtocolProxyPortIsstartedResponse;

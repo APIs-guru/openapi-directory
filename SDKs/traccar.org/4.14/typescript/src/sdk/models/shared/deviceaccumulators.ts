@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeviceAccumulators extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deviceId" })
+  @SpeakeasyMetadata({ data: "json, name=deviceId" })
   deviceId?: number;
 
-  @Metadata({ data: "json, name=hours" })
+  @SpeakeasyMetadata({ data: "json, name=hours" })
   hours?: number;
 
-  @Metadata({ data: "json, name=totalDistance" })
+  @SpeakeasyMetadata({ data: "json, name=totalDistance" })
   totalDistance?: number;
 }

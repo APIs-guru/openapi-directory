@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetEndpointSummaryPathParams = /** @class */ (function (_super) {
     __extends(GetEndpointSummaryPathParams, _super);
@@ -30,7 +30,7 @@ var GetEndpointSummaryPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=db" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=db" }),
         __metadata("design:type", String)
     ], GetEndpointSummaryPathParams.prototype, "db", void 0);
     return GetEndpointSummaryPathParams;
@@ -50,11 +50,11 @@ var GetEndpointSummaryQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=category" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=category" }),
         __metadata("design:type", String)
     ], GetEndpointSummaryQueryParams.prototype, "category", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=top" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=top" }),
         __metadata("design:type", String)
     ], GetEndpointSummaryQueryParams.prototype, "top", void 0);
     return GetEndpointSummaryQueryParams;
@@ -66,11 +66,11 @@ var GetEndpointSummaryRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetEndpointSummaryPathParams)
     ], GetEndpointSummaryRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetEndpointSummaryQueryParams)
     ], GetEndpointSummaryRequest.prototype, "queryParams", void 0);
     return GetEndpointSummaryRequest;
@@ -82,15 +82,15 @@ var GetEndpointSummaryResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetEndpointSummaryResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Facet)
     ], GetEndpointSummaryResponse.prototype, "facet", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetEndpointSummaryResponse.prototype, "statusCode", void 0);
     return GetEndpointSummaryResponse;

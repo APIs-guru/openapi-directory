@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GamesReadPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GamesReadRequest:
-    path_params: GamesReadPathParams = field(default=None)
+    path_params: GamesReadPathParams = field()
     
 
 @dataclass
 class GamesReadResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     game_single: Optional[shared.GameSingle] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,12 +21,12 @@ class SafebrowsingThreatListsListQueryParams:
 
 @dataclass
 class SafebrowsingThreatListsListRequest:
-    query_params: SafebrowsingThreatListsListQueryParams = field(default=None)
+    query_params: SafebrowsingThreatListsListQueryParams = field()
     
 
 @dataclass
 class SafebrowsingThreatListsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_security_safebrowsing_v4_list_threat_lists_response: Optional[shared.GoogleSecuritySafebrowsingV4ListThreatListsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

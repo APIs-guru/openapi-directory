@@ -14,6 +14,8 @@ type CreateSimulationJobHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateSimulationJobRequestBodyCompute
+// Compute information for the simulation job.
 type CreateSimulationJobRequestBodyCompute struct {
 	SimulationUnitLimit *int64 `json:"simulationUnitLimit,omitempty"`
 }
@@ -25,15 +27,21 @@ const (
 	CreateSimulationJobRequestBodyFailureBehaviorEnumContinue CreateSimulationJobRequestBodyFailureBehaviorEnum = "Continue"
 )
 
+// CreateSimulationJobRequestBodyLoggingConfig
+// The logging configuration.
 type CreateSimulationJobRequestBodyLoggingConfig struct {
 	RecordAllRosTopics *bool `json:"recordAllRosTopics,omitempty"`
 }
 
+// CreateSimulationJobRequestBodyOutputLocation
+// The output location.
 type CreateSimulationJobRequestBodyOutputLocation struct {
 	S3Bucket *string `json:"s3Bucket,omitempty"`
 	S3Prefix *string `json:"s3Prefix,omitempty"`
 }
 
+// CreateSimulationJobRequestBodyVpcConfig
+// If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and two subnet IDs.
 type CreateSimulationJobRequestBodyVpcConfig struct {
 	AssignPublicIP *bool    `json:"assignPublicIp,omitempty"`
 	SecurityGroups []string `json:"securityGroups,omitempty"`

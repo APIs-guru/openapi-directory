@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExpirationModelTypeEnum } from "./expirationmodeltypeenum";
 
 
+
 export class ImportKeyMaterialRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EncryptedKeyMaterial" })
+  @SpeakeasyMetadata({ data: "json, name=EncryptedKeyMaterial" })
   encryptedKeyMaterial: string;
 
-  @Metadata({ data: "json, name=ExpirationModel" })
+  @SpeakeasyMetadata({ data: "json, name=ExpirationModel" })
   expirationModel?: ExpirationModelTypeEnum;
 
-  @Metadata({ data: "json, name=ImportToken" })
+  @SpeakeasyMetadata({ data: "json, name=ImportToken" })
   importToken: string;
 
-  @Metadata({ data: "json, name=KeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KeyId" })
   keyId: string;
 
-  @Metadata({ data: "json, name=ValidTo" })
+  @SpeakeasyMetadata({ data: "json, name=ValidTo" })
   validTo?: Date;
 }

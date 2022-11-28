@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PricePerBuyer } from "./priceperbuyer";
 
 
+
 export class DealTermsNonGuaranteedAuctionTerms extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoOptimizePrivateAuction" })
+  @SpeakeasyMetadata({ data: "json, name=autoOptimizePrivateAuction" })
   autoOptimizePrivateAuction?: boolean;
 
-  @Metadata({ data: "json, name=reservePricePerBuyers", elemType: shared.PricePerBuyer })
+  @SpeakeasyMetadata({ data: "json, name=reservePricePerBuyers", elemType: PricePerBuyer })
   reservePricePerBuyers?: PricePerBuyer[];
 }

@@ -18,6 +18,8 @@ type CreateManagedEndpointHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateManagedEndpointRequestBodyConfigurationOverrides
+// A configuration specification to be used to override existing configurations.
 type CreateManagedEndpointRequestBodyConfigurationOverrides struct {
 	ApplicationConfiguration []shared.Configuration          `json:"applicationConfiguration,omitempty"`
 	MonitoringConfiguration  *shared.MonitoringConfiguration `json:"monitoringConfiguration,omitempty"`

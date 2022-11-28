@@ -1,5 +1,7 @@
 package shared
 
+// GoogleAppsDriveLabelsV2FieldSelectionOptionsChoice
+// Selection field choice.
 type GoogleAppsDriveLabelsV2FieldSelectionOptionsChoice struct {
 	AppliedCapabilities *GoogleAppsDriveLabelsV2FieldSelectionOptionsChoiceAppliedCapabilities `json:"appliedCapabilities,omitempty"`
 	CreateTime          *string                                                                `json:"createTime,omitempty"`

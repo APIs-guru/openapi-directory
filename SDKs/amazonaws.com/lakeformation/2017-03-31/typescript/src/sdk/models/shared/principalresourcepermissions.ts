@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DetailsMap } from "./detailsmap";
-import { PermissionEnum } from "./permissionenum";
 import { PermissionEnum } from "./permissionenum";
 import { DataLakePrincipal } from "./datalakeprincipal";
 import { Resource } from "./resource";
+
 
 
 // PrincipalResourcePermissions
@@ -11,18 +11,18 @@ import { Resource } from "./resource";
  * The permissions granted or revoked on a resource.
 **/
 export class PrincipalResourcePermissions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AdditionalDetails" })
+  @SpeakeasyMetadata({ data: "json, name=AdditionalDetails" })
   additionalDetails?: DetailsMap;
 
-  @Metadata({ data: "json, name=Permissions" })
+  @SpeakeasyMetadata({ data: "json, name=Permissions" })
   permissions?: PermissionEnum[];
 
-  @Metadata({ data: "json, name=PermissionsWithGrantOption" })
+  @SpeakeasyMetadata({ data: "json, name=PermissionsWithGrantOption" })
   permissionsWithGrantOption?: PermissionEnum[];
 
-  @Metadata({ data: "json, name=Principal" })
+  @SpeakeasyMetadata({ data: "json, name=Principal" })
   principal?: DataLakePrincipal;
 
-  @Metadata({ data: "json, name=Resource" })
+  @SpeakeasyMetadata({ data: "json, name=Resource" })
   resource?: Resource;
 }

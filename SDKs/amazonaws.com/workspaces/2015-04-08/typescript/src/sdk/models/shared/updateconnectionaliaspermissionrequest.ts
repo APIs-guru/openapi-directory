@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConnectionAliasPermission } from "./connectionaliaspermission";
 
 
+
 export class UpdateConnectionAliasPermissionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AliasId" })
+  @SpeakeasyMetadata({ data: "json, name=AliasId" })
   aliasId: string;
 
-  @Metadata({ data: "json, name=ConnectionAliasPermission" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionAliasPermission" })
   connectionAliasPermission: ConnectionAliasPermission;
 }

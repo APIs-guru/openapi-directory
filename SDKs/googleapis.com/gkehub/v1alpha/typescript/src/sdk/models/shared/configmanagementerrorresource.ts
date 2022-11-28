@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConfigManagementGroupVersionKind } from "./configmanagementgroupversionkind";
+
 
 
 // ConfigManagementErrorResource
@@ -7,15 +8,15 @@ import { ConfigManagementGroupVersionKind } from "./configmanagementgroupversion
  * Model for a config file in the git repo with an associated Sync error
 **/
 export class ConfigManagementErrorResource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=resourceGvk" })
+  @SpeakeasyMetadata({ data: "json, name=resourceGvk" })
   resourceGvk?: ConfigManagementGroupVersionKind;
 
-  @Metadata({ data: "json, name=resourceName" })
+  @SpeakeasyMetadata({ data: "json, name=resourceName" })
   resourceName?: string;
 
-  @Metadata({ data: "json, name=resourceNamespace" })
+  @SpeakeasyMetadata({ data: "json, name=resourceNamespace" })
   resourceNamespace?: string;
 
-  @Metadata({ data: "json, name=sourcePath" })
+  @SpeakeasyMetadata({ data: "json, name=sourcePath" })
   sourcePath?: string;
 }

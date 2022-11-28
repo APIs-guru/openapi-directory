@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ContainerSummary
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object representing summary details of a container within a job.
 **/
 export class ContainerSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=exitCode" })
+  @SpeakeasyMetadata({ data: "json, name=exitCode" })
   exitCode?: number;
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 }

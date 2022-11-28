@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PeriodUnitEnum } from "./periodunitenum";
 /**
  * Information about the quota period.

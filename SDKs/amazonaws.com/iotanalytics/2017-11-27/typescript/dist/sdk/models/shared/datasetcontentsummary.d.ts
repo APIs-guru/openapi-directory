@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DatasetContentStatus } from "./datasetcontentstatus";
 /**
  * Summary information about dataset contents.

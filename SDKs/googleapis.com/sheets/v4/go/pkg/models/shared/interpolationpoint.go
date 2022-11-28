@@ -11,6 +11,8 @@ const (
 	InterpolationPointTypeEnumPercentile                        InterpolationPointTypeEnum = "PERCENTILE"
 )
 
+// InterpolationPoint
+// A single interpolation point on a gradient conditional format. These pin the gradient color scale according to the color, type and value chosen.
 type InterpolationPoint struct {
 	Color      *Color                      `json:"color,omitempty"`
 	ColorStyle *ColorStyle                 `json:"colorStyle,omitempty"`

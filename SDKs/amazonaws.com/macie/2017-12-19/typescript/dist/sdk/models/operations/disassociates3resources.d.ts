@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DisassociateS3ResourcesXAmzTargetEnum {
     MacieServiceDisassociateS3Resources = "MacieService.DisassociateS3Resources"

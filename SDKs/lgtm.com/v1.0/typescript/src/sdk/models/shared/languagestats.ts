@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum LanguageStatsStatusEnum {
-    Success = "success"
-,    Failure = "failure"
-,    Pending = "pending"
+    Success = "success",
+    Failure = "failure",
+    Pending = "pending"
 }
 
 
 export class LanguageStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alerts" })
+  @SpeakeasyMetadata({ data: "json, name=alerts" })
   alerts?: number;
 
-  @Metadata({ data: "json, name=analysis-date" })
+  @SpeakeasyMetadata({ data: "json, name=analysis-date" })
   analysisDate?: Date;
 
-  @Metadata({ data: "json, name=commit-date" })
+  @SpeakeasyMetadata({ data: "json, name=commit-date" })
   commitDate?: Date;
 
-  @Metadata({ data: "json, name=commit-id" })
+  @SpeakeasyMetadata({ data: "json, name=commit-id" })
   commitId?: string;
 
-  @Metadata({ data: "json, name=language" })
+  @SpeakeasyMetadata({ data: "json, name=language" })
   language?: string;
 
-  @Metadata({ data: "json, name=lines" })
+  @SpeakeasyMetadata({ data: "json, name=lines" })
   lines?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: LanguageStatsStatusEnum;
 }

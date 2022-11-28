@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetModifyVpnTunnelCertificateActionEnum(str, Enum):
     MODIFY_VPN_TUNNEL_CERTIFICATE = "ModifyVpnTunnelCertificate"
@@ -10,11 +14,11 @@ class GetModifyVpnTunnelCertificateVersionEnum(str, Enum):
 
 @dataclass
 class GetModifyVpnTunnelCertificateQueryParams:
-    action: GetModifyVpnTunnelCertificateActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetModifyVpnTunnelCertificateActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetModifyVpnTunnelCertificateVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    vpn_connection_id: str = field(metadata={'query_param': { 'field_name': 'VpnConnectionId', 'style': 'form', 'explode': True }})
+    vpn_tunnel_outside_ip_address: str = field(metadata={'query_param': { 'field_name': 'VpnTunnelOutsideIpAddress', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    version: GetModifyVpnTunnelCertificateVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    vpn_connection_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VpnConnectionId', 'style': 'form', 'explode': True }})
-    vpn_tunnel_outside_ip_address: str = field(default=None, metadata={'query_param': { 'field_name': 'VpnTunnelOutsideIpAddress', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetModifyVpnTunnelCertificateHeaders:
 
 @dataclass
 class GetModifyVpnTunnelCertificateRequest:
-    query_params: GetModifyVpnTunnelCertificateQueryParams = field(default=None)
-    headers: GetModifyVpnTunnelCertificateHeaders = field(default=None)
+    headers: GetModifyVpnTunnelCertificateHeaders = field()
+    query_params: GetModifyVpnTunnelCertificateQueryParams = field()
     
 
 @dataclass
 class GetModifyVpnTunnelCertificateResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

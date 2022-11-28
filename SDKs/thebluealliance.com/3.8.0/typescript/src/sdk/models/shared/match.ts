@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MatchAlliance } from "./matchalliance";
-import { MatchAlliance } from "./matchalliance";
+
 
 
 // MatchAlliances
@@ -9,74 +8,74 @@ import { MatchAlliance } from "./matchalliance";
  * A list of alliances, the teams on the alliances, and their score.
 **/
 export class MatchAlliances extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blue" })
+  @SpeakeasyMetadata({ data: "json, name=blue" })
   blue?: MatchAlliance;
 
-  @Metadata({ data: "json, name=red" })
+  @SpeakeasyMetadata({ data: "json, name=red" })
   red?: MatchAlliance;
 }
 
 export enum MatchCompLevelEnum {
-    Qm = "qm"
-,    Ef = "ef"
-,    Qf = "qf"
-,    Sf = "sf"
-,    F = "f"
+    Qm = "qm",
+    Ef = "ef",
+    Qf = "qf",
+    Sf = "sf",
+    F = "f"
 }
 
 
 export class MatchVideos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 export enum MatchWinningAllianceEnum {
-    Red = "red"
-,    Blue = "blue"
-,    Unknown = ""
+    Red = "red",
+    Blue = "blue",
+    Unknown = ""
 }
 
 
 export class Match extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actual_time" })
+  @SpeakeasyMetadata({ data: "json, name=actual_time" })
   actualTime?: number;
 
-  @Metadata({ data: "json, name=alliances" })
+  @SpeakeasyMetadata({ data: "json, name=alliances" })
   alliances?: MatchAlliances;
 
-  @Metadata({ data: "json, name=comp_level" })
+  @SpeakeasyMetadata({ data: "json, name=comp_level" })
   compLevel: MatchCompLevelEnum;
 
-  @Metadata({ data: "json, name=event_key" })
+  @SpeakeasyMetadata({ data: "json, name=event_key" })
   eventKey: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key: string;
 
-  @Metadata({ data: "json, name=match_number" })
+  @SpeakeasyMetadata({ data: "json, name=match_number" })
   matchNumber: number;
 
-  @Metadata({ data: "json, name=post_result_time" })
+  @SpeakeasyMetadata({ data: "json, name=post_result_time" })
   postResultTime?: number;
 
-  @Metadata({ data: "json, name=predicted_time" })
+  @SpeakeasyMetadata({ data: "json, name=predicted_time" })
   predictedTime?: number;
 
-  @Metadata({ data: "json, name=score_breakdown" })
+  @SpeakeasyMetadata({ data: "json, name=score_breakdown" })
   scoreBreakdown?: Map<string, any>;
 
-  @Metadata({ data: "json, name=set_number" })
+  @SpeakeasyMetadata({ data: "json, name=set_number" })
   setNumber: number;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: number;
 
-  @Metadata({ data: "json, name=videos", elemType: shared.MatchVideos })
+  @SpeakeasyMetadata({ data: "json, name=videos", elemType: MatchVideos })
   videos?: MatchVideos[];
 
-  @Metadata({ data: "json, name=winning_alliance" })
+  @SpeakeasyMetadata({ data: "json, name=winning_alliance" })
   winningAlliance?: MatchWinningAllianceEnum;
 }

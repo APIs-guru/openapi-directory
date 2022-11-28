@@ -1,5 +1,7 @@
 package shared
 
+// DistributionBundle
+// Describes the specifications of a distribution bundle.
 type DistributionBundle struct {
 	BundleID             *string  `json:"bundleId,omitempty"`
 	IsActive             *bool    `json:"isActive,omitempty"`

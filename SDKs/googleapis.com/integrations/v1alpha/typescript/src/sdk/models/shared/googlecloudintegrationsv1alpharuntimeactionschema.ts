@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIntegrationsV1alphaRuntimeActionSchema
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Metadata of an action, including schemas for its inputs and outputs.
 **/
 export class GoogleCloudIntegrationsV1alphaRuntimeActionSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action?: string;
 
-  @Metadata({ data: "json, name=inputSchema" })
+  @SpeakeasyMetadata({ data: "json, name=inputSchema" })
   inputSchema?: string;
 
-  @Metadata({ data: "json, name=outputSchema" })
+  @SpeakeasyMetadata({ data: "json, name=outputSchema" })
   outputSchema?: string;
 }

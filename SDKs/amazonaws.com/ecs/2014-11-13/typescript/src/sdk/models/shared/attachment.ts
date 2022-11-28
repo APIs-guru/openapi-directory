@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyValuePair } from "./keyvaluepair";
+
 
 
 // Attachment
@@ -8,15 +8,15 @@ import { KeyValuePair } from "./keyvaluepair";
  * An object representing a container instance or task attachment.
 **/
 export class Attachment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details", elemType: shared.KeyValuePair })
+  @SpeakeasyMetadata({ data: "json, name=details", elemType: KeyValuePair })
   details?: KeyValuePair[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

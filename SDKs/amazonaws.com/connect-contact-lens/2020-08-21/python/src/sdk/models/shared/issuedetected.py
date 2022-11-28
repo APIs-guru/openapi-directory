@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import characteroffsets
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class IssueDetected:
-    character_offsets: characteroffsets.CharacterOffsets = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CharacterOffsets' }})
+    r"""IssueDetected
+    Potential issues that are detected based on an artificial intelligence analysis of each turn in the conversation.
+    """
+    
+    character_offsets: CharacterOffsets = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CharacterOffsets') }})
     

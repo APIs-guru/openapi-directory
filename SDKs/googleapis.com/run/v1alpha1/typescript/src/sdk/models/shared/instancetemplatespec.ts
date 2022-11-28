@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceSpec } from "./instancespec";
+
 
 
 // InstanceTemplateSpec
@@ -7,6 +8,6 @@ import { InstanceSpec } from "./instancespec";
  * InstanceTemplateSpec describes the data an instance should have when created from a template.
 **/
 export class InstanceTemplateSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=spec" })
+  @SpeakeasyMetadata({ data: "json, name=spec" })
   spec?: InstanceSpec;
 }

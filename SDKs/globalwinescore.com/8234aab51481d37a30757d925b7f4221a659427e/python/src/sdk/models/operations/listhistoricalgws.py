@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class ListHistoricalGwsColorEnum(str, Enum):
     RED = "red"
@@ -33,12 +37,12 @@ class ListHistoricalGwsHeaders:
 
 @dataclass
 class ListHistoricalGwsRequest:
-    query_params: ListHistoricalGwsQueryParams = field(default=None)
-    headers: ListHistoricalGwsHeaders = field(default=None)
+    headers: ListHistoricalGwsHeaders = field()
+    query_params: ListHistoricalGwsQueryParams = field()
     
 
 @dataclass
 class ListHistoricalGwsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

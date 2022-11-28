@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudIntegrationsV1alphaClientCertificate
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains client certificate information
 **/
 export class GoogleCloudIntegrationsV1alphaClientCertificate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=encryptedPrivateKey" })
+  @SpeakeasyMetadata({ data: "json, name=encryptedPrivateKey" })
   encryptedPrivateKey?: string;
 
-  @Metadata({ data: "json, name=passphrase" })
+  @SpeakeasyMetadata({ data: "json, name=passphrase" })
   passphrase?: string;
 
-  @Metadata({ data: "json, name=sslCertificate" })
+  @SpeakeasyMetadata({ data: "json, name=sslCertificate" })
   sslCertificate?: string;
 }

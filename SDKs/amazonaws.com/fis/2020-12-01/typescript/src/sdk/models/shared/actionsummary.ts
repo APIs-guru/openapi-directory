@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionTarget } from "./actiontarget";
+
 
 
 // ActionSummary
@@ -8,15 +8,15 @@ import { ActionTarget } from "./actiontarget";
  * Provides a summary of an action.
 **/
 export class ActionSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=targets", elemType: shared.ActionTarget })
+  @SpeakeasyMetadata({ data: "json, name=targets", elemType: ActionTarget })
   targets?: Map<string, ActionTarget>;
 }

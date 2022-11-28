@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AuthorizationAttemptInfoFailureReasonEnum {
-    FailureReasonUnspecified = "FAILURE_REASON_UNSPECIFIED"
-,    Config = "CONFIG"
-,    Caa = "CAA"
-,    RateLimited = "RATE_LIMITED"
+    FailureReasonUnspecified = "FAILURE_REASON_UNSPECIFIED",
+    Config = "CONFIG",
+    Caa = "CAA",
+    RateLimited = "RATE_LIMITED"
 }
 
 export enum AuthorizationAttemptInfoStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Authorizing = "AUTHORIZING"
-,    Authorized = "AUTHORIZED"
-,    Failed = "FAILED"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Authorizing = "AUTHORIZING",
+    Authorized = "AUTHORIZED",
+    Failed = "FAILED"
 }
 
 
@@ -20,15 +21,15 @@ export enum AuthorizationAttemptInfoStateEnum {
  * State of the latest attempt to authorize a domain for certificate issuance.
 **/
 export class AuthorizationAttemptInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=details" })
+  @SpeakeasyMetadata({ data: "json, name=details" })
   details?: string;
 
-  @Metadata({ data: "json, name=domain" })
+  @SpeakeasyMetadata({ data: "json, name=domain" })
   domain?: string;
 
-  @Metadata({ data: "json, name=failureReason" })
+  @SpeakeasyMetadata({ data: "json, name=failureReason" })
   failureReason?: AuthorizationAttemptInfoFailureReasonEnum;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: AuthorizationAttemptInfoStateEnum;
 }

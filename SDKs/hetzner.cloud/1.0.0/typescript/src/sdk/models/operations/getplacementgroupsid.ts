@@ -1,15 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetPlacementGroupsIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
-}
-
-
-export class GetPlacementGroupsIdRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetPlacementGroupsIdPathParams;
 }
 
 export enum GetPlacementGroupsIdPlacementGroupResponsePlacementGroupTypeEnum {
@@ -18,39 +13,45 @@ export enum GetPlacementGroupsIdPlacementGroupResponsePlacementGroupTypeEnum {
 
 
 export class GetPlacementGroupsIdPlacementGroupResponsePlacementGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=servers" })
+  @SpeakeasyMetadata({ data: "json, name=servers" })
   servers: number[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: GetPlacementGroupsIdPlacementGroupResponsePlacementGroupTypeEnum;
 }
 
 
 export class GetPlacementGroupsIdPlacementGroupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=placement_group" })
+  @SpeakeasyMetadata({ data: "json, name=placement_group" })
   placementGroup: GetPlacementGroupsIdPlacementGroupResponsePlacementGroup;
 }
 
 
+export class GetPlacementGroupsIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetPlacementGroupsIdPathParams;
+}
+
+
 export class GetPlacementGroupsIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   placementGroupResponse?: GetPlacementGroupsIdPlacementGroupResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

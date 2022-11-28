@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Label } from "./label";
 
 
+
 export class ListLabelsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=labels", elemType: shared.Label })
+  @SpeakeasyMetadata({ data: "json, name=labels", elemType: Label })
   labels?: Label[];
 }

@@ -1,66 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
-export const DELETEFIREWALL_SERVERS = [
-	"https://api.linode.com/v4",
-];
 
+export const DeleteFirewallServerList = [
+	"https://api.linode.com/v4",
+] as const;
 
 
 export class DeleteFirewallPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=firewallId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=firewallId" })
   firewallId: number;
 }
 
 
-export class DeleteFirewallSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class DeleteFirewallSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class DeleteFirewallSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: DeleteFirewallSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: DeleteFirewallSecurityOption2;
-}
-
-
-export class DeleteFirewallRequest extends SpeakeasyBase {
-  @Metadata()
-  serverUrl?: string;
-
-  @Metadata()
-  pathParams: DeleteFirewallPathParams;
-
-  @Metadata()
-  security: DeleteFirewallSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class DeleteFirewallDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class DeleteFirewallRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  serverUrl?: string;
+
+  @SpeakeasyMetadata()
+  pathParams: DeleteFirewallPathParams;
+
+  @SpeakeasyMetadata()
+  security: DeleteFirewallSecurity;
+}
+
+
 export class DeleteFirewallResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteFirewall200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   deleteFirewallDefaultApplicationJsonObject?: DeleteFirewallDefaultApplicationJson;
 }

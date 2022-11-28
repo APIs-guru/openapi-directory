@@ -1,5 +1,7 @@
 package shared
 
+// TypeProvider
+// A type provider that describes a service-backed Type.
 type TypeProvider struct {
 	CollectionOverrides             []CollectionOverride     `json:"collectionOverrides,omitempty"`
 	Credential                      *Credential              `json:"credential,omitempty"`

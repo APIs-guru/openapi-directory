@@ -4,10 +4,6 @@ type GetChatHeadUsingGetQueryParams struct {
 	PadID *string `queryParam:"style=form,explode=true,name=padID"`
 }
 
-type GetChatHeadUsingGetRequest struct {
-	QueryParams GetChatHeadUsingGetQueryParams
-}
-
 type GetChatHeadUsingGet200ApplicationJSONDataChatHead struct {
 	Text     *string `json:"text,omitempty"`
 	Time     *int64  `json:"time,omitempty"`
@@ -41,6 +37,10 @@ type GetChatHeadUsingGet500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type GetChatHeadUsingGetRequest struct {
+	QueryParams GetChatHeadUsingGetQueryParams
 }
 
 type GetChatHeadUsingGetResponse struct {

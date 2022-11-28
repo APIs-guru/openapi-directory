@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ParameterConstraints
 /**
  * The constraints that the administrator has put on the parameter.
@@ -33,31 +33,31 @@ var ParameterConstraints = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AllowedPattern" }),
+        SpeakeasyMetadata({ data: "json, name=AllowedPattern" }),
         __metadata("design:type", String)
     ], ParameterConstraints.prototype, "allowedPattern", void 0);
     __decorate([
-        Metadata({ data: "json, name=AllowedValues" }),
+        SpeakeasyMetadata({ data: "json, name=AllowedValues" }),
         __metadata("design:type", Array)
     ], ParameterConstraints.prototype, "allowedValues", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConstraintDescription" }),
+        SpeakeasyMetadata({ data: "json, name=ConstraintDescription" }),
         __metadata("design:type", String)
     ], ParameterConstraints.prototype, "constraintDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxLength" }),
+        SpeakeasyMetadata({ data: "json, name=MaxLength" }),
         __metadata("design:type", String)
     ], ParameterConstraints.prototype, "maxLength", void 0);
     __decorate([
-        Metadata({ data: "json, name=MaxValue" }),
+        SpeakeasyMetadata({ data: "json, name=MaxValue" }),
         __metadata("design:type", String)
     ], ParameterConstraints.prototype, "maxValue", void 0);
     __decorate([
-        Metadata({ data: "json, name=MinLength" }),
+        SpeakeasyMetadata({ data: "json, name=MinLength" }),
         __metadata("design:type", String)
     ], ParameterConstraints.prototype, "minLength", void 0);
     __decorate([
-        Metadata({ data: "json, name=MinValue" }),
+        SpeakeasyMetadata({ data: "json, name=MinValue" }),
         __metadata("design:type", String)
     ], ParameterConstraints.prototype, "minValue", void 0);
     return ParameterConstraints;

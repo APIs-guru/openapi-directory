@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AliasListEntry
+// Contains information about an alias.
 type AliasListEntry struct {
 	AliasArn        *string    `json:"AliasArn,omitempty"`
 	AliasName       *string    `json:"AliasName,omitempty"`

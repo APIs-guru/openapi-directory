@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SessionContextAttributes } from "./sessioncontextattributes";
 import { SessionIssuer } from "./sessionissuer";
+
 
 
 // SessionContext
@@ -8,9 +9,9 @@ import { SessionIssuer } from "./sessionissuer";
  * Provides information about a session that was created for an entity that performed an action by using temporary security credentials.
 **/
 export class SessionContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributes" })
+  @SpeakeasyMetadata({ data: "json, name=attributes" })
   attributes?: SessionContextAttributes;
 
-  @Metadata({ data: "json, name=sessionIssuer" })
+  @SpeakeasyMetadata({ data: "json, name=sessionIssuer" })
   sessionIssuer?: SessionIssuer;
 }

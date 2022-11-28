@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetRestoreDbInstanceFromDbSnapshotActionEnum(str, Enum):
     RESTORE_DB_INSTANCE_FROM_DB_SNAPSHOT = "RestoreDBInstanceFromDBSnapshot"
@@ -10,13 +14,14 @@ class GetRestoreDbInstanceFromDbSnapshotVersionEnum(str, Enum):
 
 @dataclass
 class GetRestoreDbInstanceFromDbSnapshotQueryParams:
-    action: GetRestoreDbInstanceFromDbSnapshotActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetRestoreDbInstanceFromDbSnapshotActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_instance_identifier: str = field(metadata={'query_param': { 'field_name': 'DBInstanceIdentifier', 'style': 'form', 'explode': True }})
+    db_snapshot_identifier: str = field(metadata={'query_param': { 'field_name': 'DBSnapshotIdentifier', 'style': 'form', 'explode': True }})
+    version: GetRestoreDbInstanceFromDbSnapshotVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     auto_minor_version_upgrade: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'AutoMinorVersionUpgrade', 'style': 'form', 'explode': True }})
     availability_zone: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'AvailabilityZone', 'style': 'form', 'explode': True }})
     db_instance_class: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DBInstanceClass', 'style': 'form', 'explode': True }})
-    db_instance_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'DBInstanceIdentifier', 'style': 'form', 'explode': True }})
     db_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DBName', 'style': 'form', 'explode': True }})
-    db_snapshot_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'DBSnapshotIdentifier', 'style': 'form', 'explode': True }})
     db_subnet_group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'DBSubnetGroupName', 'style': 'form', 'explode': True }})
     engine: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Engine', 'style': 'form', 'explode': True }})
     iops: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'Iops', 'style': 'form', 'explode': True }})
@@ -25,7 +30,6 @@ class GetRestoreDbInstanceFromDbSnapshotQueryParams:
     option_group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'OptionGroupName', 'style': 'form', 'explode': True }})
     port: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'Port', 'style': 'form', 'explode': True }})
     publicly_accessible: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'PubliclyAccessible', 'style': 'form', 'explode': True }})
-    version: GetRestoreDbInstanceFromDbSnapshotVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -41,13 +45,13 @@ class GetRestoreDbInstanceFromDbSnapshotHeaders:
 
 @dataclass
 class GetRestoreDbInstanceFromDbSnapshotRequest:
-    query_params: GetRestoreDbInstanceFromDbSnapshotQueryParams = field(default=None)
-    headers: GetRestoreDbInstanceFromDbSnapshotHeaders = field(default=None)
+    headers: GetRestoreDbInstanceFromDbSnapshotHeaders = field()
+    query_params: GetRestoreDbInstanceFromDbSnapshotQueryParams = field()
     
 
 @dataclass
 class GetRestoreDbInstanceFromDbSnapshotResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

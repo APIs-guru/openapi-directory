@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsCloudFrontDistributionCacheBehavior } from "./awscloudfrontdistributioncachebehavior";
+
 
 
 // AwsCloudFrontDistributionCacheBehaviors
@@ -8,6 +8,6 @@ import { AwsCloudFrontDistributionCacheBehavior } from "./awscloudfrontdistribut
  * Provides information about caching for the distribution.
 **/
 export class AwsCloudFrontDistributionCacheBehaviors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Items", elemType: shared.AwsCloudFrontDistributionCacheBehavior })
+  @SpeakeasyMetadata({ data: "json, name=Items", elemType: AwsCloudFrontDistributionCacheBehavior })
   items?: AwsCloudFrontDistributionCacheBehavior[];
 }

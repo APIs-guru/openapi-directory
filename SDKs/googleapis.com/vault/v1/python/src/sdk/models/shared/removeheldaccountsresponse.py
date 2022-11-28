@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import status
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class RemoveHeldAccountsResponse:
-    statuses: Optional[List[status.Status]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statuses' }})
+    r"""RemoveHeldAccountsResponse
+    Response for batch delete held accounts.
+    """
+    
+    statuses: Optional[List[Status]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('statuses') }})
     

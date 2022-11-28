@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OptIn1 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=opencast" })
+  @SpeakeasyMetadata({ data: "json, name=opencast" })
   opencast: boolean;
 
-  @Metadata({ data: "json, name=preview_channel" })
+  @SpeakeasyMetadata({ data: "json, name=preview_channel" })
   previewChannel: boolean;
 
-  @Metadata({ data: "json, name=remote_ducking" })
+  @SpeakeasyMetadata({ data: "json, name=remote_ducking" })
   remoteDucking: boolean;
 
-  @Metadata({ data: "json, name=stats" })
+  @SpeakeasyMetadata({ data: "json, name=stats" })
   stats: boolean;
 }

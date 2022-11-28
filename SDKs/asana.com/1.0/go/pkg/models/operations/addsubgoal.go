@@ -17,14 +17,14 @@ type AddSubgoalRequestBody struct {
 	Data *shared.GoalAddSubgoalRequest `json:"data,omitempty"`
 }
 
+type AddSubgoal200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type AddSubgoalRequest struct {
 	PathParams  AddSubgoalPathParams
 	QueryParams AddSubgoalQueryParams
 	Request     AddSubgoalRequestBody `request:"mediaType=application/json"`
-}
-
-type AddSubgoal200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type AddSubgoalResponse struct {

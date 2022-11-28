@@ -12,6 +12,8 @@ const (
 	StateHistoryStateEnumFailed           StateHistoryStateEnum = "FAILED"
 )
 
+// StateHistory
+// Historical state information.
 type StateHistory struct {
 	State          *StateHistoryStateEnum `json:"state,omitempty"`
 	StateMessage   *string                `json:"stateMessage,omitempty"`

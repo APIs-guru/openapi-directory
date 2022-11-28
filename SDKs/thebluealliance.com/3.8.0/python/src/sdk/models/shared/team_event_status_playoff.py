@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import wlt_record
-from . import wlt_record
+from sdk import utils
+from . import *
 
 class TeamEventStatusPlayoffLevelEnum(str, Enum):
     QM = "qm"
@@ -20,9 +21,13 @@ class TeamEventStatusPlayoffStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class TeamEventStatusPlayoff:
-    current_level_record: Optional[wlt_record.WltRecord] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'current_level_record' }})
-    level: Optional[TeamEventStatusPlayoffLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'level' }})
-    playoff_average: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'playoff_average' }})
-    record: Optional[wlt_record.WltRecord] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'record' }})
-    status: Optional[TeamEventStatusPlayoffStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    r"""TeamEventStatusPlayoff
+    Playoff status for this team, may be null if the team did not make playoffs, or playoffs have not begun.
+    """
+    
+    current_level_record: Optional[WltRecord] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('current_level_record') }})
+    level: Optional[TeamEventStatusPlayoffLevelEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('level') }})
+    playoff_average: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('playoff_average') }})
+    record: Optional[WltRecord] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('record') }})
+    status: Optional[TeamEventStatusPlayoffStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

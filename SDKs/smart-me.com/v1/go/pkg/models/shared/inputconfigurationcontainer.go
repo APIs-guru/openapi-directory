@@ -7,6 +7,8 @@ const (
 	InputConfigurationContainerTypeEnumDigitalInput InputConfigurationContainerTypeEnum = "DigitalInput"
 )
 
+// InputConfigurationContainer
+// Configuration for the input of a meter (digital inputs)
 type InputConfigurationContainer struct {
 	Name    *string                              `json:"Name,omitempty"`
 	Number  *int32                               `json:"Number,omitempty"`

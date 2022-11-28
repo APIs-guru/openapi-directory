@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum ErrorCategoryHttpStatusEnum {
     Continue = "CONTINUE",
     SwitchingProtocols = "SWITCHING_PROTOCOLS",

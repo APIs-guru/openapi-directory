@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AudioConfig } from "./audioconfig";
 import { SynthesisInput } from "./synthesisinput";
 import { VoiceSelectionParams } from "./voiceselectionparams";

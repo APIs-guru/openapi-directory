@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RecencyDimension } from "./recencydimension";
+
 
 
 // SegmentBehaviors
@@ -7,6 +8,6 @@ import { RecencyDimension } from "./recencydimension";
  * Specifies dimension settings for including or excluding endpoints from a segment based on how recently an endpoint was active.
 **/
 export class SegmentBehaviors extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Recency" })
+  @SpeakeasyMetadata({ data: "json, name=Recency" })
   recency?: RecencyDimension;
 }

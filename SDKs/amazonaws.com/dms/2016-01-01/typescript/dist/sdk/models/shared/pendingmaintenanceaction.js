@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // PendingMaintenanceAction
 /**
  * Describes a maintenance action pending for an DMS resource, including when and how it will be applied. This data type is a response element to the <code>DescribePendingMaintenanceActions</code> operation.
@@ -33,27 +33,27 @@ var PendingMaintenanceAction = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Action" }),
+        SpeakeasyMetadata({ data: "json, name=Action" }),
         __metadata("design:type", String)
     ], PendingMaintenanceAction.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "json, name=AutoAppliedAfterDate" }),
+        SpeakeasyMetadata({ data: "json, name=AutoAppliedAfterDate" }),
         __metadata("design:type", Date)
     ], PendingMaintenanceAction.prototype, "autoAppliedAfterDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=CurrentApplyDate" }),
+        SpeakeasyMetadata({ data: "json, name=CurrentApplyDate" }),
         __metadata("design:type", Date)
     ], PendingMaintenanceAction.prototype, "currentApplyDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], PendingMaintenanceAction.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=ForcedApplyDate" }),
+        SpeakeasyMetadata({ data: "json, name=ForcedApplyDate" }),
         __metadata("design:type", Date)
     ], PendingMaintenanceAction.prototype, "forcedApplyDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=OptInStatus" }),
+        SpeakeasyMetadata({ data: "json, name=OptInStatus" }),
         __metadata("design:type", String)
     ], PendingMaintenanceAction.prototype, "optInStatus", void 0);
     return PendingMaintenanceAction;

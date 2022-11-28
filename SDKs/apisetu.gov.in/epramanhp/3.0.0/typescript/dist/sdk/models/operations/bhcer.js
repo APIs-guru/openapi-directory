@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var BhcerRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(BhcerRequestBodyCertificateParameters, _super);
@@ -30,11 +30,11 @@ var BhcerRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], BhcerRequestBodyCertificateParameters.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=RefNo" }),
+        SpeakeasyMetadata({ data: "json, name=RefNo" }),
         __metadata("design:type", String)
     ], BhcerRequestBodyCertificateParameters.prototype, "refNo", void 0);
     return BhcerRequestBodyCertificateParameters;
@@ -50,19 +50,19 @@ var BhcerRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", BhcerRequestBodyCertificateParameters)
     ], BhcerRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], BhcerRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], BhcerRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], BhcerRequestBody.prototype, "txnId", void 0);
     return BhcerRequestBody;
@@ -74,32 +74,16 @@ var BhcerSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], BhcerSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], BhcerSecurity.prototype, "clientId", void 0);
     return BhcerSecurity;
 }(SpeakeasyBase));
 export { BhcerSecurity };
-var BhcerRequest = /** @class */ (function (_super) {
-    __extends(BhcerRequest, _super);
-    function BhcerRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", BhcerRequestBody)
-    ], BhcerRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", BhcerSecurity)
-    ], BhcerRequest.prototype, "security", void 0);
-    return BhcerRequest;
-}(SpeakeasyBase));
-export { BhcerRequest };
 export var Bhcer400ApplicationJsonErrorEnum;
 (function (Bhcer400ApplicationJsonErrorEnum) {
     Bhcer400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -122,11 +106,11 @@ var Bhcer400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bhcer400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bhcer400ApplicationJson.prototype, "errorDescription", void 0);
     return Bhcer400ApplicationJson;
@@ -148,11 +132,11 @@ var Bhcer401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bhcer401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bhcer401ApplicationJson.prototype, "errorDescription", void 0);
     return Bhcer401ApplicationJson;
@@ -174,11 +158,11 @@ var Bhcer404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bhcer404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bhcer404ApplicationJson.prototype, "errorDescription", void 0);
     return Bhcer404ApplicationJson;
@@ -198,11 +182,11 @@ var Bhcer500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bhcer500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bhcer500ApplicationJson.prototype, "errorDescription", void 0);
     return Bhcer500ApplicationJson;
@@ -222,11 +206,11 @@ var Bhcer502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bhcer502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bhcer502ApplicationJson.prototype, "errorDescription", void 0);
     return Bhcer502ApplicationJson;
@@ -246,11 +230,11 @@ var Bhcer503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bhcer503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bhcer503ApplicationJson.prototype, "errorDescription", void 0);
     return Bhcer503ApplicationJson;
@@ -270,55 +254,71 @@ var Bhcer504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Bhcer504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Bhcer504ApplicationJson.prototype, "errorDescription", void 0);
     return Bhcer504ApplicationJson;
 }(SpeakeasyBase));
 export { Bhcer504ApplicationJson };
+var BhcerRequest = /** @class */ (function (_super) {
+    __extends(BhcerRequest, _super);
+    function BhcerRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", BhcerRequestBody)
+    ], BhcerRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", BhcerSecurity)
+    ], BhcerRequest.prototype, "security", void 0);
+    return BhcerRequest;
+}(SpeakeasyBase));
+export { BhcerRequest };
 var BhcerResponse = /** @class */ (function (_super) {
     __extends(BhcerResponse, _super);
     function BhcerResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], BhcerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], BhcerResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bhcer400ApplicationJson)
     ], BhcerResponse.prototype, "bhcer400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bhcer401ApplicationJson)
     ], BhcerResponse.prototype, "bhcer401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bhcer404ApplicationJson)
     ], BhcerResponse.prototype, "bhcer404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bhcer500ApplicationJson)
     ], BhcerResponse.prototype, "bhcer500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bhcer502ApplicationJson)
     ], BhcerResponse.prototype, "bhcer502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bhcer503ApplicationJson)
     ], BhcerResponse.prototype, "bhcer503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Bhcer504ApplicationJson)
     ], BhcerResponse.prototype, "bhcer504ApplicationJsonObject", void 0);
     return BhcerResponse;

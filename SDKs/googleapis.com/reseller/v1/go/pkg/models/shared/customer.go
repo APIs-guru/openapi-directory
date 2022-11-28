@@ -8,6 +8,8 @@ const (
 	CustomerCustomerTypeEnumTeam                    CustomerCustomerTypeEnum = "team"
 )
 
+// Customer
+// When a Google customer's account is registered with a reseller, the customer's subscriptions for Google services are managed by this reseller. A customer is described by a primary domain name and a physical address.
 type Customer struct {
 	AlternateEmail         *string                   `json:"alternateEmail,omitempty"`
 	CustomerDomain         *string                   `json:"customerDomain,omitempty"`

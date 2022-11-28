@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -26,12 +27,12 @@ class MybusinessAttributesListQueryParams:
 
 @dataclass
 class MybusinessAttributesListRequest:
-    query_params: MybusinessAttributesListQueryParams = field(default=None)
+    query_params: MybusinessAttributesListQueryParams = field()
     
 
 @dataclass
 class MybusinessAttributesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_attribute_metadata_response: Optional[shared.ListAttributeMetadataResponse] = field(default=None)
-    status_code: int = field(default=None)
     

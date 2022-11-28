@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleTypeMoney } from "./googletypemoney";
+
 
 
 // GoogleCloudApigeeV1CreditDeveloperBalanceRequest
@@ -7,9 +8,9 @@ import { GoogleTypeMoney } from "./googletypemoney";
  * Request for CreditDeveloperBalance.
 **/
 export class GoogleCloudApigeeV1CreditDeveloperBalanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=transactionAmount" })
+  @SpeakeasyMetadata({ data: "json, name=transactionAmount" })
   transactionAmount?: GoogleTypeMoney;
 
-  @Metadata({ data: "json, name=transactionId" })
+  @SpeakeasyMetadata({ data: "json, name=transactionId" })
   transactionId?: string;
 }

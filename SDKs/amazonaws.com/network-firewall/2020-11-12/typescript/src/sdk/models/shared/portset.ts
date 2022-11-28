@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PortSet
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A set of port ranges for use in the rules in a rule group. 
 **/
 export class PortSet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Definition" })
+  @SpeakeasyMetadata({ data: "json, name=Definition" })
   definition?: string[];
 }

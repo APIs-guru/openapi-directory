@@ -1,24 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InstanceMessage } from "./instancemessage";
+import { GoogleCloudMemcacheV1MaintenancePolicyInput } from "./googlecloudmemcachev1maintenancepolicy";
+import { NodeConfig } from "./nodeconfig";
+import { MemcacheParametersInput } from "./memcacheparameters";
 import { GoogleCloudMemcacheV1MaintenancePolicy } from "./googlecloudmemcachev1maintenancepolicy";
 import { MaintenanceSchedule } from "./maintenanceschedule";
 import { Node } from "./node";
-import { NodeConfig } from "./nodeconfig";
 import { MemcacheParameters } from "./memcacheparameters";
 
+
 export enum InstanceMemcacheVersionEnum {
-    MemcacheVersionUnspecified = "MEMCACHE_VERSION_UNSPECIFIED"
-,    Memcache15 = "MEMCACHE_1_5"
+    MemcacheVersionUnspecified = "MEMCACHE_VERSION_UNSPECIFIED",
+    Memcache15 = "MEMCACHE_1_5"
 }
 
 export enum InstanceStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Ready = "READY"
-,    Updating = "UPDATING"
-,    Deleting = "DELETING"
-,    PerformingMaintenance = "PERFORMING_MAINTENANCE"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Ready = "READY",
+    Updating = "UPDATING",
+    Deleting = "DELETING",
+    PerformingMaintenance = "PERFORMING_MAINTENANCE"
+}
+
+
+// InstanceInput
+/** 
+ * A Memorystore for Memcached instance
+**/
+export class InstanceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=authorizedNetwork" })
+  authorizedNetwork?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=instanceMessages", elemType: InstanceMessage })
+  instanceMessages?: InstanceMessage[];
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=maintenancePolicy" })
+  maintenancePolicy?: GoogleCloudMemcacheV1MaintenancePolicyInput;
+
+  @SpeakeasyMetadata({ data: "json, name=memcacheVersion" })
+  memcacheVersion?: InstanceMemcacheVersionEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=nodeConfig" })
+  nodeConfig?: NodeConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=nodeCount" })
+  nodeCount?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
+  parameters?: MemcacheParametersInput;
+
+  @SpeakeasyMetadata({ data: "json, name=zones" })
+  zones?: string[];
 }
 
 
@@ -27,57 +69,57 @@ export enum InstanceStateEnum {
  * A Memorystore for Memcached instance
 **/
 export class Instance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizedNetwork" })
+  @SpeakeasyMetadata({ data: "json, name=authorizedNetwork" })
   authorizedNetwork?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=discoveryEndpoint" })
+  @SpeakeasyMetadata({ data: "json, name=discoveryEndpoint" })
   discoveryEndpoint?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=instanceMessages", elemType: shared.InstanceMessage })
+  @SpeakeasyMetadata({ data: "json, name=instanceMessages", elemType: InstanceMessage })
   instanceMessages?: InstanceMessage[];
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=maintenancePolicy" })
+  @SpeakeasyMetadata({ data: "json, name=maintenancePolicy" })
   maintenancePolicy?: GoogleCloudMemcacheV1MaintenancePolicy;
 
-  @Metadata({ data: "json, name=maintenanceSchedule" })
+  @SpeakeasyMetadata({ data: "json, name=maintenanceSchedule" })
   maintenanceSchedule?: MaintenanceSchedule;
 
-  @Metadata({ data: "json, name=memcacheFullVersion" })
+  @SpeakeasyMetadata({ data: "json, name=memcacheFullVersion" })
   memcacheFullVersion?: string;
 
-  @Metadata({ data: "json, name=memcacheNodes", elemType: shared.Node })
+  @SpeakeasyMetadata({ data: "json, name=memcacheNodes", elemType: Node })
   memcacheNodes?: Node[];
 
-  @Metadata({ data: "json, name=memcacheVersion" })
+  @SpeakeasyMetadata({ data: "json, name=memcacheVersion" })
   memcacheVersion?: InstanceMemcacheVersionEnum;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=nodeConfig" })
+  @SpeakeasyMetadata({ data: "json, name=nodeConfig" })
   nodeConfig?: NodeConfig;
 
-  @Metadata({ data: "json, name=nodeCount" })
+  @SpeakeasyMetadata({ data: "json, name=nodeCount" })
   nodeCount?: number;
 
-  @Metadata({ data: "json, name=parameters" })
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
   parameters?: MemcacheParameters;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: InstanceStateEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=zones" })
+  @SpeakeasyMetadata({ data: "json, name=zones" })
   zones?: string[];
 }

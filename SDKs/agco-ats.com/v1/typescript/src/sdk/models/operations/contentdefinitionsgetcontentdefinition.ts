@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ContentDefinitionsGetContentDefinitionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=contentDefinitionID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=contentDefinitionID" })
   contentDefinitionId: number;
 }
 
 
 export class ContentDefinitionsGetContentDefinitionQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includeAttributes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includeAttributes" })
   includeAttributes?: string;
 }
 
 
 export class ContentDefinitionsGetContentDefinitionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ContentDefinitionsGetContentDefinitionPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ContentDefinitionsGetContentDefinitionQueryParams;
 }
 
 
 export class ContentDefinitionsGetContentDefinitionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiModelsApiError?: shared.ApiModelsApiError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentSubmissionSharedBusinessEntitiesContentDefinition?: shared.ContentSubmissionSharedBusinessEntitiesContentDefinition;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

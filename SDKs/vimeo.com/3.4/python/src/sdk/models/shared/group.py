@@ -1,31 +1,47 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import picture
-from . import picture
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GroupMetadataConnectionsUsers:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupMetadataConnectionsUsers
+    Information about the members or moderators of this group.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupMetadataConnectionsVideos:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupMetadataConnectionsVideos
+    Information about the videos contained within this group.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupMetadataConnections:
-    users: GroupMetadataConnectionsUsers = field(default=None, metadata={'dataclasses_json': { 'field_name': 'users' }})
-    videos: GroupMetadataConnectionsVideos = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videos' }})
+    r"""GroupMetadataConnections
+    A collection of information that is connected to this resource.
+    """
+    
+    users: GroupMetadataConnectionsUsers = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('users') }})
+    videos: GroupMetadataConnectionsVideos = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('videos') }})
     
 class GroupMetadataInteractionsJoinTypeEnum(str, Enum):
     MEMBER = "member"
@@ -35,24 +51,36 @@ class GroupMetadataInteractionsJoinTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GroupMetadataInteractionsJoin:
-    added: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added' }})
-    added_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added_time' }})
-    title: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
-    type: GroupMetadataInteractionsJoinTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupMetadataInteractionsJoin
+    An action indicating that someone has joined the group. This data requires a bearer token with the `private` scope.
+    """
+    
+    added: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('added') }})
+    added_time: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('added_time') }})
+    title: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('title') }})
+    type: GroupMetadataInteractionsJoinTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupMetadataInteractions:
-    join: GroupMetadataInteractionsJoin = field(default=None, metadata={'dataclasses_json': { 'field_name': 'join' }})
+    r"""GroupMetadataInteractions
+    User actions that have involved the group. This data requires a bearer token with the `private` scope.
+    """
+    
+    join: GroupMetadataInteractionsJoin = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('join') }})
     
 
 @dataclass_json
 @dataclass
 class GroupMetadata:
-    connections: GroupMetadataConnections = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connections' }})
-    interactions: GroupMetadataInteractions = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interactions' }})
+    r"""GroupMetadata
+    Metadata about the group.
+    """
+    
+    connections: GroupMetadataConnections = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('connections') }})
+    interactions: GroupMetadataInteractions = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('interactions') }})
     
 class GroupPrivacyCommentEnum(str, Enum):
     ALL = "all"
@@ -78,11 +106,15 @@ class GroupPrivacyViewEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GroupPrivacy:
-    comment: GroupPrivacyCommentEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comment' }})
-    invite: GroupPrivacyInviteEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invite' }})
-    join: GroupPrivacyJoinEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'join' }})
-    videos: GroupPrivacyVideosEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videos' }})
-    view: GroupPrivacyViewEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'view' }})
+    r"""GroupPrivacy
+    The group's privacy settings.
+    """
+    
+    comment: GroupPrivacyCommentEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('comment') }})
+    invite: GroupPrivacyInviteEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('invite') }})
+    join: GroupPrivacyJoinEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('join') }})
+    videos: GroupPrivacyVideosEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('videos') }})
+    view: GroupPrivacyViewEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('view') }})
     
 class GroupUserAccountEnum(str, Enum):
     BASIC = "basic"
@@ -99,233 +131,333 @@ class GroupUserAccountEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnectionsAlbums:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataConnectionsAlbums
+    Information about the albums created by this user.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnectionsAppearances:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataConnectionsAppearances
+    Information about the appearances of this user in other videos.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnectionsBlock:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataConnectionsBlock
+    Information on the users that the current user has blocked. This data requires a bearer token with the `private` scope.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnectionsCategories:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataConnectionsCategories
+    Information about this user's followed categories.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnectionsChannels:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataConnectionsChannels
+    Information about this user's subscribed channels.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnectionsFeed:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataConnectionsFeed
+    Information about this user's feed.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnectionsFolders:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataConnectionsFolders
+    Information about this user's folders.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnectionsFollowers:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataConnectionsFollowers
+    Information about the user's followers.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnectionsFollowing:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataConnectionsFollowing
+    Information about the users that the current user is following.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnectionsGroups:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataConnectionsGroups
+    Information about the groups created by this user.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnectionsLikes:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataConnectionsLikes
+    Information about the videos that this user has liked.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnectionsModeratedChannels:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataConnectionsModeratedChannels
+    Information about the channels that this user moderates.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnectionsPictures:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataConnectionsPictures
+    Information about this user's portraits.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnectionsPortfolios:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataConnectionsPortfolios
+    Information about this user's portfolios.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnectionsRecommendedChannels:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataConnectionsRecommendedChannels
+    A collection of recommended channels for the current user to follow. This data requires a bearer token with the `private` scope.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnectionsRecommendedUsers:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataConnectionsRecommendedUsers
+    A Collection of recommended users for the current user to follow. This data requires a bearer token with the `private` scope.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnectionsShared:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataConnectionsShared
+    Information about the videos that have been shared with this user.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnectionsVideos:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataConnectionsVideos
+    Information about the videos uploaded by this user.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnectionsWatchedVideos:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataConnectionsWatchedVideos
+    Information about the videos that this user has watched.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnectionsWatchlater:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataConnectionsWatchlater
+    Information about the videos that this user wants to watch later.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    total: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('total') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataConnections:
-    albums: GroupUserMetadataConnectionsAlbums = field(default=None, metadata={'dataclasses_json': { 'field_name': 'albums' }})
-    appearances: GroupUserMetadataConnectionsAppearances = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appearances' }})
-    block: GroupUserMetadataConnectionsBlock = field(default=None, metadata={'dataclasses_json': { 'field_name': 'block' }})
-    categories: GroupUserMetadataConnectionsCategories = field(default=None, metadata={'dataclasses_json': { 'field_name': 'categories' }})
-    channels: GroupUserMetadataConnectionsChannels = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channels' }})
-    feed: GroupUserMetadataConnectionsFeed = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feed' }})
-    folders: GroupUserMetadataConnectionsFolders = field(default=None, metadata={'dataclasses_json': { 'field_name': 'folders' }})
-    followers: GroupUserMetadataConnectionsFollowers = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers' }})
-    following: GroupUserMetadataConnectionsFollowing = field(default=None, metadata={'dataclasses_json': { 'field_name': 'following' }})
-    groups: GroupUserMetadataConnectionsGroups = field(default=None, metadata={'dataclasses_json': { 'field_name': 'groups' }})
-    likes: GroupUserMetadataConnectionsLikes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'likes' }})
-    moderated_channels: GroupUserMetadataConnectionsModeratedChannels = field(default=None, metadata={'dataclasses_json': { 'field_name': 'moderated_channels' }})
-    pictures: GroupUserMetadataConnectionsPictures = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pictures' }})
-    portfolios: GroupUserMetadataConnectionsPortfolios = field(default=None, metadata={'dataclasses_json': { 'field_name': 'portfolios' }})
-    recommended_channels: GroupUserMetadataConnectionsRecommendedChannels = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recommended_channels' }})
-    recommended_users: GroupUserMetadataConnectionsRecommendedUsers = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recommended_users' }})
-    shared: GroupUserMetadataConnectionsShared = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shared' }})
-    videos: GroupUserMetadataConnectionsVideos = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videos' }})
-    watched_videos: GroupUserMetadataConnectionsWatchedVideos = field(default=None, metadata={'dataclasses_json': { 'field_name': 'watched_videos' }})
-    watchlater: GroupUserMetadataConnectionsWatchlater = field(default=None, metadata={'dataclasses_json': { 'field_name': 'watchlater' }})
+    r"""GroupUserMetadataConnections
+    The list of resource URIs related to the user.
+    """
+    
+    albums: GroupUserMetadataConnectionsAlbums = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('albums') }})
+    appearances: GroupUserMetadataConnectionsAppearances = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('appearances') }})
+    block: GroupUserMetadataConnectionsBlock = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('block') }})
+    categories: GroupUserMetadataConnectionsCategories = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('categories') }})
+    channels: GroupUserMetadataConnectionsChannels = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('channels') }})
+    feed: GroupUserMetadataConnectionsFeed = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('feed') }})
+    folders: GroupUserMetadataConnectionsFolders = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('folders') }})
+    followers: GroupUserMetadataConnectionsFollowers = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('followers') }})
+    following: GroupUserMetadataConnectionsFollowing = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('following') }})
+    groups: GroupUserMetadataConnectionsGroups = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('groups') }})
+    likes: GroupUserMetadataConnectionsLikes = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('likes') }})
+    moderated_channels: GroupUserMetadataConnectionsModeratedChannels = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('moderated_channels') }})
+    pictures: GroupUserMetadataConnectionsPictures = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pictures') }})
+    portfolios: GroupUserMetadataConnectionsPortfolios = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('portfolios') }})
+    recommended_channels: GroupUserMetadataConnectionsRecommendedChannels = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('recommended_channels') }})
+    recommended_users: GroupUserMetadataConnectionsRecommendedUsers = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('recommended_users') }})
+    shared: GroupUserMetadataConnectionsShared = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('shared') }})
+    videos: GroupUserMetadataConnectionsVideos = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('videos') }})
+    watched_videos: GroupUserMetadataConnectionsWatchedVideos = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('watched_videos') }})
+    watchlater: GroupUserMetadataConnectionsWatchlater = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('watchlater') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataInteractionsAddPrivacyUser:
-    options: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    options: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataInteractionsBlock:
-    added: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added' }})
-    added_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added_time' }})
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataInteractionsBlock
+    Information related to the block status of this user.
+    """
+    
+    added: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('added') }})
+    added_time: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('added_time') }})
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataInteractionsFollow:
-    added: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added' }})
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataInteractionsFollow
+    Information related to the followed status of this user.
+    """
+    
+    added: bool = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('added') }})
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataInteractionsReport:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    reason: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
+    r"""GroupUserMetadataInteractionsReport
+    Information regarding where and how to report a user.
+    """
+    
+    options: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('options') }})
+    reason: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('reason') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadataInteractions:
-    add_privacy_user: Optional[GroupUserMetadataInteractionsAddPrivacyUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'add_privacy_user' }})
-    block: GroupUserMetadataInteractionsBlock = field(default=None, metadata={'dataclasses_json': { 'field_name': 'block' }})
-    follow: GroupUserMetadataInteractionsFollow = field(default=None, metadata={'dataclasses_json': { 'field_name': 'follow' }})
-    report: GroupUserMetadataInteractionsReport = field(default=None, metadata={'dataclasses_json': { 'field_name': 'report' }})
+    block: GroupUserMetadataInteractionsBlock = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('block') }})
+    follow: GroupUserMetadataInteractionsFollow = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('follow') }})
+    report: GroupUserMetadataInteractionsReport = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('report') }})
+    add_privacy_user: Optional[GroupUserMetadataInteractionsAddPrivacyUser] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('add_privacy_user') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserMetadata:
-    connections: GroupUserMetadataConnections = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connections' }})
-    interactions: GroupUserMetadataInteractions = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interactions' }})
+    r"""GroupUserMetadata
+    The user's metadata.
+    """
+    
+    connections: GroupUserMetadataConnections = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('connections') }})
+    interactions: GroupUserMetadataInteractions = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('interactions') }})
     
 class GroupUserPreferencesVideosPrivacyCommentsEnum(str, Enum):
     ANYBODY = "anybody"
@@ -350,40 +482,48 @@ class GroupUserPreferencesVideosPrivacyViewEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GroupUserPreferencesVideosPrivacy:
-    add: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'add' }})
-    comments: Optional[GroupUserPreferencesVideosPrivacyCommentsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comments' }})
-    download: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'download' }})
-    embed: Optional[GroupUserPreferencesVideosPrivacyEmbedEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'embed' }})
-    view: Optional[GroupUserPreferencesVideosPrivacyViewEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'view' }})
+    add: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('add') }})
+    comments: Optional[GroupUserPreferencesVideosPrivacyCommentsEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('comments') }})
+    download: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('download') }})
+    embed: Optional[GroupUserPreferencesVideosPrivacyEmbedEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('embed') }})
+    view: Optional[GroupUserPreferencesVideosPrivacyViewEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('view') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserPreferencesVideos:
-    privacy: Optional[GroupUserPreferencesVideosPrivacy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'privacy' }})
+    privacy: Optional[GroupUserPreferencesVideosPrivacy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('privacy') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserPreferences:
-    videos: Optional[GroupUserPreferencesVideos] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videos' }})
+    videos: Optional[GroupUserPreferencesVideos] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('videos') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserUploadQuotaLifetime:
-    free: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'free' }})
-    max: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'max' }})
-    used: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'used' }})
+    r"""GroupUserUploadQuotaLifetime
+    Information about the user's lifetime upload usage.
+    """
+    
+    free: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('free') }})
+    max: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('max') }})
+    used: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('used') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserUploadQuotaPeriodic:
-    free: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'free' }})
-    max: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'max' }})
-    reset_date: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reset_date' }})
-    used: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'used' }})
+    r"""GroupUserUploadQuotaPeriodic
+    Information about the user's usage for the current period.
+    """
+    
+    free: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('free') }})
+    max: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('max') }})
+    reset_date: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('reset_date') }})
+    used: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('used') }})
     
 class GroupUserUploadQuotaSpaceShowingEnum(str, Enum):
     LIFETIME = "lifetime"
@@ -393,60 +533,72 @@ class GroupUserUploadQuotaSpaceShowingEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GroupUserUploadQuotaSpace:
-    free: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'free' }})
-    max: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'max' }})
-    showing: GroupUserUploadQuotaSpaceShowingEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'showing' }})
-    used: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'used' }})
+    r"""GroupUserUploadQuotaSpace
+    Information about the user's upload space remaining for the current period.
+    """
+    
+    free: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('free') }})
+    max: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('max') }})
+    showing: GroupUserUploadQuotaSpaceShowingEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('showing') }})
+    used: float = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('used') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserUploadQuota:
-    lifetime: GroupUserUploadQuotaLifetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lifetime' }})
-    periodic: GroupUserUploadQuotaPeriodic = field(default=None, metadata={'dataclasses_json': { 'field_name': 'periodic' }})
-    space: GroupUserUploadQuotaSpace = field(default=None, metadata={'dataclasses_json': { 'field_name': 'space' }})
+    r"""GroupUserUploadQuota
+    Appears only when the user has upload access and is looking at their own user record.
+    """
+    
+    lifetime: GroupUserUploadQuotaLifetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('lifetime') }})
+    periodic: GroupUserUploadQuotaPeriodic = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('periodic') }})
+    space: GroupUserUploadQuotaSpace = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('space') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUserWebsites:
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    link: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    link: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('link') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
     
 
 @dataclass_json
 @dataclass
 class GroupUser:
-    account: GroupUserAccountEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
-    bio: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bio' }})
-    content_filter: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content_filter' }})
-    created_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_time' }})
-    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
-    link: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
-    location: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    metadata: GroupUserMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    pictures: picture.Picture = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pictures' }})
-    preferences: Optional[GroupUserPreferences] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'preferences' }})
-    resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
-    upload_quota: GroupUserUploadQuota = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upload_quota' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
-    websites: List[GroupUserWebsites] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'websites' }})
+    r"""GroupUser
+    The owner of the group.
+    """
+    
+    account: GroupUserAccountEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('account') }})
+    bio: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('bio') }})
+    created_time: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created_time') }})
+    link: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('link') }})
+    location: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('location') }})
+    metadata: GroupUserMetadata = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    pictures: Picture = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pictures') }})
+    resource_key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource_key') }})
+    upload_quota: GroupUserUploadQuota = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('upload_quota') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
+    websites: List[GroupUserWebsites] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('websites') }})
+    content_filter: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('content_filter') }})
+    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('email') }})
+    preferences: Optional[GroupUserPreferences] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('preferences') }})
     
 
 @dataclass_json
 @dataclass
 class Group:
-    created_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_time' }})
-    description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    link: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
-    metadata: GroupMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    modified_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modified_time' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    pictures: picture.Picture = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pictures' }})
-    privacy: GroupPrivacy = field(default=None, metadata={'dataclasses_json': { 'field_name': 'privacy' }})
-    resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
-    user: Optional[GroupUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    created_time: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('created_time') }})
+    description: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    link: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('link') }})
+    metadata: GroupMetadata = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    modified_time: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('modified_time') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    pictures: Picture = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pictures') }})
+    privacy: GroupPrivacy = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('privacy') }})
+    resource_key: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resource_key') }})
+    uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('uri') }})
+    user: Optional[GroupUser] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('user') }})
     

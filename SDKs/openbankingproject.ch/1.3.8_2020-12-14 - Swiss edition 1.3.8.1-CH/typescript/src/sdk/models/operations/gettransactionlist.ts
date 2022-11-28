@@ -1,164 +1,165 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTransactionListPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=account-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=account-id" })
   accountId: string;
 }
 
 
 export class GetTransactionListQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=bookingStatus" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bookingStatus" })
   bookingStatus: shared.BookingStatusEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dateFrom" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dateFrom" })
   dateFrom?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=dateTo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dateTo" })
   dateTo?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=deltaList" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deltaList" })
   deltaList?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=entryReferenceFrom" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entryReferenceFrom" })
   entryReferenceFrom?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=withBalance" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=withBalance" })
   withBalance?: boolean;
 }
 
 
 export class GetTransactionListHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Consent-ID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Consent-ID" })
   consentId: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Digest" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Digest" })
   digest?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=PSU-Accept" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=PSU-Accept" })
   psuAccept?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=PSU-Accept-Charset" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=PSU-Accept-Charset" })
   psuAcceptCharset?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=PSU-Accept-Encoding" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=PSU-Accept-Encoding" })
   psuAcceptEncoding?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=PSU-Accept-Language" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=PSU-Accept-Language" })
   psuAcceptLanguage?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=PSU-Device-ID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=PSU-Device-ID" })
   psuDeviceId?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=PSU-Geo-Location" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=PSU-Geo-Location" })
   psuGeoLocation?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=PSU-Http-Method" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=PSU-Http-Method" })
   psuHttpMethod?: shared.PsuHttpMethodEnum;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=PSU-IP-Address" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=PSU-IP-Address" })
   psuIpAddress?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=PSU-IP-Port" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=PSU-IP-Port" })
   psuIpPort?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=PSU-User-Agent" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=PSU-User-Agent" })
   psuUserAgent?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Signature" })
   signature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=TPP-Signature-Certificate" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=TPP-Signature-Certificate" })
   tppSignatureCertificate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Request-ID" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Request-ID" })
   xRequestId: string;
 }
 
 
 export class GetTransactionListSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerAuthOAuth?: shared.SchemeBearerAuthOAuth;
 }
 
 
 export class GetTransactionListRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTransactionListPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetTransactionListQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetTransactionListHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetTransactionListSecurity;
 }
 
 
 export class GetTransactionListResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error400Ais?: shared.Error400Ais;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error400NgAis?: shared.Error400NgAis;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error401Ais?: shared.Error401Ais;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error401NgAis?: shared.Error401NgAis;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error403Ais?: shared.Error403Ais;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error403NgAis?: shared.Error403NgAis;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error404Ais?: shared.Error404Ais;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error404NgAis?: shared.Error404NgAis;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error405Ais?: shared.Error405Ais;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error405NgAis?: shared.Error405NgAis;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error406Ais?: shared.Error406Ais;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error406NgAis?: shared.Error406NgAis;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error409Ais?: shared.Error409Ais;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error409NgAis?: shared.Error409NgAis;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error429Ais?: shared.Error429Ais;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error429NgAis?: shared.Error429NgAis;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: Map<string, string[]>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   transactionsResponse200Json?: shared.TransactionsResponse200Json;
 }

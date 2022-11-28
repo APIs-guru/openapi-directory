@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleAppsDriveLabelsV2betaUpdateLabelPermissionRequest } from "./googleappsdrivelabelsv2betaupdatelabelpermissionrequest";
+
 
 
 // GoogleAppsDriveLabelsV2betaBatchUpdateLabelPermissionsRequest
@@ -8,9 +8,9 @@ import { GoogleAppsDriveLabelsV2betaUpdateLabelPermissionRequest } from "./googl
  * Updates one or more Label Permissions.
 **/
 export class GoogleAppsDriveLabelsV2betaBatchUpdateLabelPermissionsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=requests", elemType: shared.GoogleAppsDriveLabelsV2betaUpdateLabelPermissionRequest })
+  @SpeakeasyMetadata({ data: "json, name=requests", elemType: GoogleAppsDriveLabelsV2betaUpdateLabelPermissionRequest })
   requests?: GoogleAppsDriveLabelsV2betaUpdateLabelPermissionRequest[];
 
-  @Metadata({ data: "json, name=useAdminAccess" })
+  @SpeakeasyMetadata({ data: "json, name=useAdminAccess" })
   useAdminAccess?: boolean;
 }

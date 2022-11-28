@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SiteTypesGetSitesForPublicFacingApiPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=siteType_Id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=siteType_Id" })
   siteTypeId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=version" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=version" })
   version: string;
 }
 
 
 export class SiteTypesGetSitesForPublicFacingApiRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SiteTypesGetSitesForPublicFacingApiPathParams;
 }
 
 
 export class SiteTypesGetSitesForPublicFacingApiResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   siteTypeLayer?: shared.SiteTypeLayer;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

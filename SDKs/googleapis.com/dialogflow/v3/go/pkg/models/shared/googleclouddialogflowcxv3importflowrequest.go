@@ -8,6 +8,8 @@ const (
 	GoogleCloudDialogflowCxV3ImportFlowRequestImportOptionEnumFallback                GoogleCloudDialogflowCxV3ImportFlowRequestImportOptionEnum = "FALLBACK"
 )
 
+// GoogleCloudDialogflowCxV3ImportFlowRequest
+// The request message for Flows.ImportFlow.
 type GoogleCloudDialogflowCxV3ImportFlowRequest struct {
 	FlowContent  *string                                                     `json:"flowContent,omitempty"`
 	FlowURI      *string                                                     `json:"flowUri,omitempty"`

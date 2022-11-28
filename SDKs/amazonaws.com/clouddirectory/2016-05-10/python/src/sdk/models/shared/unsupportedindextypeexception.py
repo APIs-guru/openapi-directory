@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class UnsupportedIndexTypeException:
-    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Message' }})
+    r"""UnsupportedIndexTypeException
+    Indicates that the requested index type is not supported.
+    """
+    
+    message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Message') }})
     

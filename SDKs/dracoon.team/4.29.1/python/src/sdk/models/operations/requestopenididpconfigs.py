@@ -10,13 +10,13 @@ class RequestOpenIDIdpConfigsHeaders:
 
 @dataclass
 class RequestOpenIDIdpConfigsRequest:
-    headers: RequestOpenIDIdpConfigsHeaders = field(default=None)
+    headers: RequestOpenIDIdpConfigsHeaders = field()
     
 
 @dataclass
 class RequestOpenIDIdpConfigsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     open_id_idp_configs: Optional[List[shared.OpenIDIdpConfig]] = field(default=None)
-    status_code: int = field(default=None)
     

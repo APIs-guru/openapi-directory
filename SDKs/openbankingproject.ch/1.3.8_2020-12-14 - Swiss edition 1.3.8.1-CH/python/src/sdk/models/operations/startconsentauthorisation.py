@@ -1,15 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class StartConsentAuthorisationPathParams:
-    consent_id: str = field(default=None, metadata={'path_param': { 'field_name': 'consentId', 'style': 'simple', 'explode': False }})
+    consent_id: str = field(metadata={'path_param': { 'field_name': 'consentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class StartConsentAuthorisationHeaders:
+    x_request_id: str = field(metadata={'header': { 'field_name': 'X-Request-ID', 'style': 'simple', 'explode': False }})
     digest: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Digest', 'style': 'simple', 'explode': False }})
     psu_accept: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-Accept', 'style': 'simple', 'explode': False }})
     psu_accept_charset: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'PSU-Accept-Charset', 'style': 'simple', 'explode': False }})
@@ -32,7 +34,6 @@ class StartConsentAuthorisationHeaders:
     tpp_redirect_preferred: Optional[bool] = field(default=None, metadata={'header': { 'field_name': 'TPP-Redirect-Preferred', 'style': 'simple', 'explode': False }})
     tpp_redirect_uri: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'TPP-Redirect-URI', 'style': 'simple', 'explode': False }})
     tpp_signature_certificate: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'TPP-Signature-Certificate', 'style': 'simple', 'explode': False }})
-    x_request_id: str = field(default=None, metadata={'header': { 'field_name': 'X-Request-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -42,15 +43,17 @@ class StartConsentAuthorisationSecurity:
 
 @dataclass
 class StartConsentAuthorisationRequest:
-    path_params: StartConsentAuthorisationPathParams = field(default=None)
-    headers: StartConsentAuthorisationHeaders = field(default=None)
+    headers: StartConsentAuthorisationHeaders = field()
+    path_params: StartConsentAuthorisationPathParams = field()
+    security: StartConsentAuthorisationSecurity = field()
     request: Optional[Any] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: StartConsentAuthorisationSecurity = field(default=None)
     
 
 @dataclass
 class StartConsentAuthorisationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     error400_ais: Optional[shared.Error400Ais] = field(default=None)
     error400_ng_ais: Optional[shared.Error400NgAis] = field(default=None)
     error401_ais: Optional[shared.Error401Ais] = field(default=None)
@@ -67,7 +70,5 @@ class StartConsentAuthorisationResponse:
     error409_ng_ais: Optional[shared.Error409NgAis] = field(default=None)
     error429_ais: Optional[shared.Error429Ais] = field(default=None)
     error429_ng_ais: Optional[shared.Error429NgAis] = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     start_scaprocess_response: Optional[shared.StartScaprocessResponse] = field(default=None)
     

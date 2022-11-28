@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetConfirmProductInstanceActionEnum(str, Enum):
     CONFIRM_PRODUCT_INSTANCE = "ConfirmProductInstance"
@@ -10,11 +14,11 @@ class GetConfirmProductInstanceVersionEnum(str, Enum):
 
 @dataclass
 class GetConfirmProductInstanceQueryParams:
-    action: GetConfirmProductInstanceActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetConfirmProductInstanceActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    instance_id: str = field(metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
+    product_code: str = field(metadata={'query_param': { 'field_name': 'ProductCode', 'style': 'form', 'explode': True }})
+    version: GetConfirmProductInstanceVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    instance_id: str = field(default=None, metadata={'query_param': { 'field_name': 'InstanceId', 'style': 'form', 'explode': True }})
-    product_code: str = field(default=None, metadata={'query_param': { 'field_name': 'ProductCode', 'style': 'form', 'explode': True }})
-    version: GetConfirmProductInstanceVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetConfirmProductInstanceHeaders:
 
 @dataclass
 class GetConfirmProductInstanceRequest:
-    query_params: GetConfirmProductInstanceQueryParams = field(default=None)
-    headers: GetConfirmProductInstanceHeaders = field(default=None)
+    headers: GetConfirmProductInstanceHeaders = field()
+    query_params: GetConfirmProductInstanceQueryParams = field()
     
 
 @dataclass
 class GetConfirmProductInstanceResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

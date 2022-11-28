@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { S3Object } from "./s3object";
+
 
 
 // DeploymentConfig
@@ -7,15 +8,15 @@ import { S3Object } from "./s3object";
  * Information about a deployment configuration.
 **/
 export class DeploymentConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=concurrentDeploymentPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=concurrentDeploymentPercentage" })
   concurrentDeploymentPercentage?: number;
 
-  @Metadata({ data: "json, name=downloadConditionFile" })
+  @SpeakeasyMetadata({ data: "json, name=downloadConditionFile" })
   downloadConditionFile?: S3Object;
 
-  @Metadata({ data: "json, name=failureThresholdPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=failureThresholdPercentage" })
   failureThresholdPercentage?: number;
 
-  @Metadata({ data: "json, name=robotDeploymentTimeoutInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=robotDeploymentTimeoutInSeconds" })
   robotDeploymentTimeoutInSeconds?: number;
 }

@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateCurrentUserRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=about_me" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=about_me" })
   aboutMe?: string;
 
-  @Metadata({ data: "multipart_form, name=digest" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=digest" })
   digest?: string;
 
-  @Metadata({ data: "multipart_form, name=digest_photos" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=digest_photos" })
   digestPhotos?: number;
 
-  @Metadata({ data: "multipart_form, name=firstname" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=firstname" })
   firstname?: string;
 
-  @Metadata({ data: "multipart_form, name=last_listings_view" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=last_listings_view" })
   lastListingsView?: Date;
 
-  @Metadata({ data: "multipart_form, name=lastname" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=lastname" })
   lastname?: string;
 
-  @Metadata({ data: "multipart_form, name=old_password" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=old_password" })
   oldPassword?: string;
 
-  @Metadata({ data: "multipart_form, name=password" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=password" })
   password?: string;
 
-  @Metadata({ data: "multipart_form, name=post_reminders" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=post_reminders" })
   postReminders?: number;
 
-  @Metadata({ data: "multipart_form, name=profile_image_source" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=profile_image_source" })
   profileImageSource?: string;
 
-  @Metadata({ data: "multipart_form, name=public_name" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=public_name" })
   publicName?: number;
 
-  @Metadata({ data: "multipart_form, name=public_post_sources" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=public_post_sources" })
   publicPostSources?: string;
 
-  @Metadata({ data: "multipart_form, name=show_all_group_posts" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=show_all_group_posts" })
   showAllGroupPosts?: number;
 
-  @Metadata({ data: "multipart_form, name=special_notices" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=special_notices" })
   specialNotices?: number;
 }
 
 
 export class UpdateCurrentUserRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request?: UpdateCurrentUserRequestBody;
 }
 
 
 export class UpdateCurrentUserResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   currentUser?: shared.CurrentUser;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

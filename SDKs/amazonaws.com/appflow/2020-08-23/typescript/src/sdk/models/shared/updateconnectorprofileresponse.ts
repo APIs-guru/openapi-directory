@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateConnectorProfileResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectorProfileArn" })
+  @SpeakeasyMetadata({ data: "json, name=connectorProfileArn" })
   connectorProfileArn?: string;
 }

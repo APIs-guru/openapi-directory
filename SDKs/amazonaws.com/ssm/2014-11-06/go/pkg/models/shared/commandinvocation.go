@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// CommandInvocation
+// An invocation is copy of a command sent to a specific instance. A command can apply to one or more instances. A command invocation applies to one instance. For example, if a user runs SendCommand against three instances, then a command invocation is created for each requested instance ID. A command invocation returns status and detail information about a command you ran.
 type CommandInvocation struct {
 	CloudWatchOutputConfig *CloudWatchOutputConfig      `json:"CloudWatchOutputConfig,omitempty"`
 	CommandID              *string                      `json:"CommandId,omitempty"`

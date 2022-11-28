@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AddressInput
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Input for ADDRESS verification.
 **/
 export class AddressInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=mailerContactName" })
+  @SpeakeasyMetadata({ data: "json, name=mailerContactName" })
   mailerContactName?: string;
 }

@@ -1,55 +1,56 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum SolrqueryPostWtEnum {
-    Json = "json"
-,    Xml = "xml"
+    Json = "json",
+    Xml = "xml"
 }
 
 
 export class SolrqueryPostQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=wt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=wt" })
   wt?: SolrqueryPostWtEnum;
 }
 
 
 export class SolrqueryPostRequestBodyParams extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fl" })
+  @SpeakeasyMetadata({ data: "json, name=fl" })
   fl?: string[];
 
-  @Metadata({ data: "json, name=rows" })
+  @SpeakeasyMetadata({ data: "json, name=rows" })
   rows?: number;
 }
 
 
 export class SolrqueryPostRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=facet" })
+  @SpeakeasyMetadata({ data: "json, name=facet" })
   facet?: Map<string, any>;
 
-  @Metadata({ data: "json, name=params" })
+  @SpeakeasyMetadata({ data: "json, name=params" })
   params?: SolrqueryPostRequestBodyParams;
 }
 
 
 export class SolrqueryPostRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SolrqueryPostQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: SolrqueryPostRequestBody;
 }
 
 
 export class SolrqueryPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   solrResponse?: shared.SolrResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

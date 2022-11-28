@@ -29,11 +29,6 @@ type CfmstSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type CfmstRequest struct {
-	Request  *CfmstRequestBody `request:"mediaType=application/json"`
-	Security CfmstSecurity
-}
-
 type Cfmst400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Cfmst504ApplicationJSON struct {
 	Error            *Cfmst504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Cfmst504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type CfmstRequest struct {
+	Request  *CfmstRequestBody `request:"mediaType=application/json"`
+	Security CfmstSecurity
 }
 
 type CfmstResponse struct {

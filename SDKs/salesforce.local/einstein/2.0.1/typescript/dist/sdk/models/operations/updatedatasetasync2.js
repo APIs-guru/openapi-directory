@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateDatasetAsync2PathParams = /** @class */ (function (_super) {
     __extends(UpdateDatasetAsync2PathParams, _super);
@@ -30,7 +30,7 @@ var UpdateDatasetAsync2PathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=datasetId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=datasetId" }),
         __metadata("design:type", String)
     ], UpdateDatasetAsync2PathParams.prototype, "datasetId", void 0);
     return UpdateDatasetAsync2PathParams;
@@ -42,11 +42,11 @@ var UpdateDatasetAsync2RequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "multipart_form, name=data" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=data" }),
         __metadata("design:type", String)
     ], UpdateDatasetAsync2RequestBody.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "multipart_form, name=path" }),
+        SpeakeasyMetadata({ data: "multipart_form, name=path" }),
         __metadata("design:type", String)
     ], UpdateDatasetAsync2RequestBody.prototype, "path", void 0);
     return UpdateDatasetAsync2RequestBody;
@@ -58,7 +58,7 @@ var UpdateDatasetAsync2Security = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerToken)
     ], UpdateDatasetAsync2Security.prototype, "bearerToken", void 0);
     return UpdateDatasetAsync2Security;
@@ -70,15 +70,15 @@ var UpdateDatasetAsync2Request = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateDatasetAsync2PathParams)
     ], UpdateDatasetAsync2Request.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=multipart/form-data" }),
+        SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" }),
         __metadata("design:type", UpdateDatasetAsync2RequestBody)
     ], UpdateDatasetAsync2Request.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateDatasetAsync2Security)
     ], UpdateDatasetAsync2Request.prototype, "security", void 0);
     return UpdateDatasetAsync2Request;
@@ -90,15 +90,15 @@ var UpdateDatasetAsync2Response = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateDatasetAsync2Response.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Dataset)
     ], UpdateDatasetAsync2Response.prototype, "dataset", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateDatasetAsync2Response.prototype, "statusCode", void 0);
     return UpdateDatasetAsync2Response;

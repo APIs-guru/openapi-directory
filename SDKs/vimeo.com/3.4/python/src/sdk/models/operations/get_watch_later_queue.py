@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetWatchLaterQueuePathParams:
-    user_id: float = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    user_id: float = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 class GetWatchLaterQueueDirectionEnum(str, Enum):
     ASC = "asc"
@@ -36,19 +40,19 @@ class GetWatchLaterQueueQueryParams:
 
 @dataclass
 class GetWatchLaterQueueSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetWatchLaterQueueRequest:
-    path_params: GetWatchLaterQueuePathParams = field(default=None)
-    query_params: GetWatchLaterQueueQueryParams = field(default=None)
-    security: GetWatchLaterQueueSecurity = field(default=None)
+    path_params: GetWatchLaterQueuePathParams = field()
+    query_params: GetWatchLaterQueueQueryParams = field()
+    security: GetWatchLaterQueueSecurity = field()
     
 
 @dataclass
 class GetWatchLaterQueueResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     videos: Optional[List[shared.Video]] = field(default=None)
     

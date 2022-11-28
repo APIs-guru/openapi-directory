@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MeasurementConfig } from "./measurementconfig";
+
 
 
 // PartnerAdServerConfig
@@ -7,6 +8,6 @@ import { MeasurementConfig } from "./measurementconfig";
  * Ad server related settings of a partner.
 **/
 export class PartnerAdServerConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=measurementConfig" })
+  @SpeakeasyMetadata({ data: "json, name=measurementConfig" })
   measurementConfig?: MeasurementConfig;
 }

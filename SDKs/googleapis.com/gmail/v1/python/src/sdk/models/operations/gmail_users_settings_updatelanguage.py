@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GmailUsersSettingsUpdateLanguagePathParams:
-    user_id: str = field(default=None, metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
+    user_id: str = field(metadata={'path_param': { 'field_name': 'userId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +29,21 @@ class GmailUsersSettingsUpdateLanguageQueryParams:
 
 @dataclass
 class GmailUsersSettingsUpdateLanguageSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GmailUsersSettingsUpdateLanguageRequest:
-    path_params: GmailUsersSettingsUpdateLanguagePathParams = field(default=None)
-    query_params: GmailUsersSettingsUpdateLanguageQueryParams = field(default=None)
+    path_params: GmailUsersSettingsUpdateLanguagePathParams = field()
+    query_params: GmailUsersSettingsUpdateLanguageQueryParams = field()
+    security: GmailUsersSettingsUpdateLanguageSecurity = field()
     request: Optional[shared.LanguageSettings] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: GmailUsersSettingsUpdateLanguageSecurity = field(default=None)
     
 
 @dataclass
 class GmailUsersSettingsUpdateLanguageResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     language_settings: Optional[shared.LanguageSettings] = field(default=None)
-    status_code: int = field(default=None)
     

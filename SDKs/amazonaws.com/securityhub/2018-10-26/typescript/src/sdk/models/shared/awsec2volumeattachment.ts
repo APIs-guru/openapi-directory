@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEc2VolumeAttachment
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An attachment to an Amazon EC2 volume.
 **/
 export class AwsEc2VolumeAttachment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AttachTime" })
+  @SpeakeasyMetadata({ data: "json, name=AttachTime" })
   attachTime?: string;
 
-  @Metadata({ data: "json, name=DeleteOnTermination" })
+  @SpeakeasyMetadata({ data: "json, name=DeleteOnTermination" })
   deleteOnTermination?: boolean;
 
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

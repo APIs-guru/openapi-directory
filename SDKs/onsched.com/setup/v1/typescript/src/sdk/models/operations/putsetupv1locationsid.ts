@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutSetupV1LocationsIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class PutSetupV1LocationsIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=removeRegion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=removeRegion" })
   removeRegion?: boolean;
 }
 
 
 export class PutSetupV1LocationsIdRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   locationUpdateModel?: shared.LocationUpdateModel;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   locationUpdateModel1?: shared.LocationUpdateModel;
 
-  @Metadata({ data: "request, media_type=application/json-patch+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" })
   locationUpdateModel2?: shared.LocationUpdateModel;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   locationUpdateModel3?: shared.LocationUpdateModel;
 }
 
 
 export class PutSetupV1LocationsIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutSetupV1LocationsIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PutSetupV1LocationsIdQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   request?: PutSetupV1LocationsIdRequests;
 }
 
 
 export class PutSetupV1LocationsIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   locationViewModel?: shared.LocationViewModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

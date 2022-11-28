@@ -25,7 +25,7 @@ type MybusinessqandaLocationsQuestionsAnswersUpsertQueryParams struct {
 type MybusinessqandaLocationsQuestionsAnswersUpsertRequest struct {
 	PathParams  MybusinessqandaLocationsQuestionsAnswersUpsertPathParams
 	QueryParams MybusinessqandaLocationsQuestionsAnswersUpsertQueryParams
-	Request     *shared.UpsertAnswerRequest `request:"mediaType=application/json"`
+	Request     *shared.UpsertAnswerRequestInput `request:"mediaType=application/json"`
 }
 
 type MybusinessqandaLocationsQuestionsAnswersUpsertResponse struct {

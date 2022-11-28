@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetJurisdictiongeographyFormatEnum;
 (function (GetJurisdictiongeographyFormatEnum) {
     GetJurisdictiongeographyFormatEnum["Json"] = "json";
@@ -34,7 +34,7 @@ var GetJurisdictiongeographyQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=format" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" }),
         __metadata("design:type", String)
     ], GetJurisdictiongeographyQueryParams.prototype, "format", void 0);
     return GetJurisdictiongeographyQueryParams;
@@ -46,7 +46,7 @@ var GetJurisdictiongeographyRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetJurisdictiongeographyQueryParams)
     ], GetJurisdictiongeographyRequest.prototype, "queryParams", void 0);
     return GetJurisdictiongeographyRequest;
@@ -58,11 +58,11 @@ var GetJurisdictiongeographyResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetJurisdictiongeographyResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetJurisdictiongeographyResponse.prototype, "statusCode", void 0);
     return GetJurisdictiongeographyResponse;

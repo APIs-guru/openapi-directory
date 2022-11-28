@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 
 
 @dataclass
@@ -10,11 +10,11 @@ class GetActionTagListQueryParams:
 
 @dataclass
 class GetActionTagListRequest:
-    query_params: GetActionTagListQueryParams = field(default=None)
+    query_params: GetActionTagListQueryParams = field()
     
 
 @dataclass
 class GetActionTagListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

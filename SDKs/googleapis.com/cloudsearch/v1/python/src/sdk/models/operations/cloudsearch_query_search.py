@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -20,14 +21,14 @@ class CloudsearchQuerySearchQueryParams:
 
 @dataclass
 class CloudsearchQuerySearchSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudsearchQuerySearchSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -38,14 +39,14 @@ class CloudsearchQuerySearchSecurity:
 
 @dataclass
 class CloudsearchQuerySearchRequest:
-    query_params: CloudsearchQuerySearchQueryParams = field(default=None)
+    query_params: CloudsearchQuerySearchQueryParams = field()
+    security: CloudsearchQuerySearchSecurity = field()
     request: Optional[shared.SearchRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: CloudsearchQuerySearchSecurity = field(default=None)
     
 
 @dataclass
 class CloudsearchQuerySearchResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     search_response: Optional[shared.SearchResponse] = field(default=None)
-    status_code: int = field(default=None)
     

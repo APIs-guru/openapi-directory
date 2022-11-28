@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudResourcesettingsV1Setting
+// The schema for settings.
 type GoogleCloudResourcesettingsV1Setting struct {
 	EffectiveValue *GoogleCloudResourcesettingsV1Value           `json:"effectiveValue,omitempty"`
 	Etag           *string                                       `json:"etag,omitempty"`

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VideoContentDetailsRegionRestriction
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * DEPRECATED Region restriction of the video.
 **/
 export class VideoContentDetailsRegionRestriction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowed" })
+  @SpeakeasyMetadata({ data: "json, name=allowed" })
   allowed?: string[];
 
-  @Metadata({ data: "json, name=blocked" })
+  @SpeakeasyMetadata({ data: "json, name=blocked" })
   blocked?: string[];
 }

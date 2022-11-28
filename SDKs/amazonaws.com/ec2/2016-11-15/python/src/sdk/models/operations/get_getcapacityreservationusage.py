@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetCapacityReservationUsageActionEnum(str, Enum):
     GET_CAPACITY_RESERVATION_USAGE = "GetCapacityReservationUsage"
@@ -10,12 +14,12 @@ class GetGetCapacityReservationUsageVersionEnum(str, Enum):
 
 @dataclass
 class GetGetCapacityReservationUsageQueryParams:
-    action: GetGetCapacityReservationUsageActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    capacity_reservation_id: str = field(default=None, metadata={'query_param': { 'field_name': 'CapacityReservationId', 'style': 'form', 'explode': True }})
+    action: GetGetCapacityReservationUsageActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    capacity_reservation_id: str = field(metadata={'query_param': { 'field_name': 'CapacityReservationId', 'style': 'form', 'explode': True }})
+    version: GetGetCapacityReservationUsageVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: GetGetCapacityReservationUsageVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetGetCapacityReservationUsageHeaders:
 
 @dataclass
 class GetGetCapacityReservationUsageRequest:
-    query_params: GetGetCapacityReservationUsageQueryParams = field(default=None)
-    headers: GetGetCapacityReservationUsageHeaders = field(default=None)
+    headers: GetGetCapacityReservationUsageHeaders = field()
+    query_params: GetGetCapacityReservationUsageQueryParams = field()
     
 
 @dataclass
 class GetGetCapacityReservationUsageResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

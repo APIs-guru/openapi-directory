@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HybridTransaction } from "./hybridtransaction";
 
 
+
 export class HybridTransactionsResponseData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=transactions", elemType: shared.HybridTransaction })
+  @SpeakeasyMetadata({ data: "json, name=transactions", elemType: HybridTransaction })
   transactions: HybridTransaction[];
 }
 
 
 export class HybridTransactionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data: HybridTransactionsResponseData;
 }

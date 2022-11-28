@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Trigger } from "./trigger";
+
 
 
 // TriggerNodeDetails
@@ -7,6 +8,6 @@ import { Trigger } from "./trigger";
  * The details of a Trigger node present in the workflow.
 **/
 export class TriggerNodeDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Trigger" })
+  @SpeakeasyMetadata({ data: "json, name=Trigger" })
   trigger?: Trigger;
 }

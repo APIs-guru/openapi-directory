@@ -4,6 +4,8 @@ type PostLoadBalancersIDActionsUpdateServicePathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
+// PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceLoadBalancerServiceHealthCheckHTTP
+// Additional configuration for protocol http
 type PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceLoadBalancerServiceHealthCheckHTTP struct {
 	Domain      string   `json:"domain"`
 	Path        string   `json:"path"`
@@ -19,6 +21,8 @@ const (
 	PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnumHTTP PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnum = "http"
 )
 
+// PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceLoadBalancerServiceHealthCheck
+// Service health check
 type PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceLoadBalancerServiceHealthCheck struct {
 	HTTP     *PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceLoadBalancerServiceHealthCheckHTTP        `json:"http,omitempty"`
 	Interval int64                                                                                                `json:"interval"`
@@ -28,6 +32,8 @@ type PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceLoadBalancerServi
 	Timeout  int64                                                                                                `json:"timeout"`
 }
 
+// PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceHTTP
+// Configuration option for protocols http and https
 type PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceHTTP struct {
 	Certificates   []int64 `json:"certificates,omitempty"`
 	CookieLifetime int64   `json:"cookie_lifetime"`
@@ -53,11 +59,8 @@ type PostLoadBalancersIDActionsUpdateServiceLoadBalancerService struct {
 	Proxyprotocol   bool                                                                                     `json:"proxyprotocol"`
 }
 
-type PostLoadBalancersIDActionsUpdateServiceRequest struct {
-	PathParams PostLoadBalancersIDActionsUpdateServicePathParams
-	Request    *PostLoadBalancersIDActionsUpdateServiceLoadBalancerService `request:"mediaType=application/json"`
-}
-
+// PostLoadBalancersIDActionsUpdateServiceActionResponseActionError
+// Error message for the Action if error occurred, otherwise null
 type PostLoadBalancersIDActionsUpdateServiceActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -89,6 +92,11 @@ type PostLoadBalancersIDActionsUpdateServiceActionResponseAction struct {
 
 type PostLoadBalancersIDActionsUpdateServiceActionResponse struct {
 	Action PostLoadBalancersIDActionsUpdateServiceActionResponseAction `json:"action"`
+}
+
+type PostLoadBalancersIDActionsUpdateServiceRequest struct {
+	PathParams PostLoadBalancersIDActionsUpdateServicePathParams
+	Request    *PostLoadBalancersIDActionsUpdateServiceLoadBalancerService `request:"mediaType=application/json"`
 }
 
 type PostLoadBalancersIDActionsUpdateServiceResponse struct {

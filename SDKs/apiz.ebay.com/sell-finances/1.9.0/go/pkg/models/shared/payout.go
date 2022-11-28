@@ -1,5 +1,7 @@
 package shared
 
+// Payout
+// This type is used to express the details of one seller payout that is returned with the getPayout or getPayouts methods.
 type Payout struct {
 	Amount                  *Amount           `json:"amount,omitempty"`
 	BankReference           *string           `json:"bankReference,omitempty"`

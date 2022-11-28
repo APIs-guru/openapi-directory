@@ -1,6 +1,7 @@
 
 
+
 export enum ImageSavingConventionEnum {
-    Legacy = "Legacy"
-,    Compatible = "Compatible"
+    Legacy = "Legacy",
+    Compatible = "Compatible"
 }

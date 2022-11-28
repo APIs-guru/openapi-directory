@@ -1,5 +1,7 @@
 package shared
 
+// DuplicateSheetRequest
+// Duplicates the contents of a sheet.
 type DuplicateSheetRequest struct {
 	InsertSheetIndex *int32  `json:"insertSheetIndex,omitempty"`
 	NewSheetID       *int32  `json:"newSheetId,omitempty"`

@@ -1,18 +1,23 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import attributetype
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeviceType:
-    device_attributes: Optional[List[attributetype.AttributeType]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceAttributes' }})
-    device_create_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceCreateDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    device_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceKey' }})
-    device_last_authenticated_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceLastAuthenticatedDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    device_last_modified_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceLastModifiedDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    r"""DeviceType
+    The device type.
+    """
+    
+    device_attributes: Optional[List[AttributeType]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceAttributes') }})
+    device_create_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceCreateDate'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    device_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceKey') }})
+    device_last_authenticated_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceLastAuthenticatedDate'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    device_last_modified_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceLastModifiedDate'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

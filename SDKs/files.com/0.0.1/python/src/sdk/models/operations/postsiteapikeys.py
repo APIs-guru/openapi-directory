@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class PostSiteAPIKeysRequestBodyPermissionSetEnum(str, Enum):
@@ -30,7 +31,7 @@ class PostSiteAPIKeysRequest:
 
 @dataclass
 class PostSiteAPIKeysResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_key_entity: Optional[shared.APIKeyEntity] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

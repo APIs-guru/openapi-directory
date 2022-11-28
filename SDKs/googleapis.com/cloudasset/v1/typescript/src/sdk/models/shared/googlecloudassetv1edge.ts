@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudAssetV1Edge
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A directional edge.
 **/
 export class GoogleCloudAssetV1Edge extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sourceNode" })
+  @SpeakeasyMetadata({ data: "json, name=sourceNode" })
   sourceNode?: string;
 
-  @Metadata({ data: "json, name=targetNode" })
+  @SpeakeasyMetadata({ data: "json, name=targetNode" })
   targetNode?: string;
 }

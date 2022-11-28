@@ -1,15 +1,14 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://control.ably.net/v1",
+export const ServerList = [
+	"https://control.ably.net/v1",
 ] as const;
 
 export function WithServerURL(
@@ -20,50 +19,49 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // DeleteAppsAppIdNamespacesNamespaceId - Deletes a namespace
-  /** 
+  /**
+   * deleteAppsAppIdNamespacesNamespaceId - Deletes a namespace
+   *
    * Deletes the namespace with the specified ID, for the specified application ID.
   **/
-  DeleteAppsAppIdNamespacesNamespaceId(
+  deleteAppsAppIdNamespacesNamespaceId(
     req: operations.DeleteAppsAppIdNamespacesNamespaceIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteAppsAppIdNamespacesNamespaceIdResponse> {
@@ -71,39 +69,41 @@ export class SDK {
       req = new operations.DeleteAppsAppIdNamespacesNamespaceIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/apps/{app_id}/namespaces/{namespace_id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteAppsAppIdNamespacesNamespaceIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeleteAppsAppIdNamespacesNamespaceIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -115,11 +115,12 @@ export class SDK {
   }
 
   
-  // DeleteAppsAppIdQueuesQueueId - Deletes a queue
-  /** 
+  /**
+   * deleteAppsAppIdQueuesQueueId - Deletes a queue
+   *
    * Delete the queue with the specified queue name, from the application with the specified application ID.
   **/
-  DeleteAppsAppIdQueuesQueueId(
+  deleteAppsAppIdQueuesQueueId(
     req: operations.DeleteAppsAppIdQueuesQueueIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteAppsAppIdQueuesQueueIdResponse> {
@@ -127,44 +128,46 @@ export class SDK {
       req = new operations.DeleteAppsAppIdQueuesQueueIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/apps/{app_id}/queues/{queue_id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteAppsAppIdQueuesQueueIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeleteAppsAppIdQueuesQueueIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -176,8 +179,10 @@ export class SDK {
   }
 
   
-  // DeleteAppsAppIdRulesRuleId - Deletes a Reactor rule
-  DeleteAppsAppIdRulesRuleId(
+  /**
+   * deleteAppsAppIdRulesRuleId - Deletes a Reactor rule
+  **/
+  deleteAppsAppIdRulesRuleId(
     req: operations.DeleteAppsAppIdRulesRuleIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteAppsAppIdRulesRuleIdResponse> {
@@ -185,39 +190,41 @@ export class SDK {
       req = new operations.DeleteAppsAppIdRulesRuleIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/apps/{app_id}/rules/{rule_id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteAppsAppIdRulesRuleIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeleteAppsAppIdRulesRuleIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -229,11 +236,12 @@ export class SDK {
   }
 
   
-  // DeleteAppsId - Deletes an app
-  /** 
+  /**
+   * deleteAppsId - Deletes an app
+   *
    * Deletes the application with the specified application ID.
   **/
-  DeleteAppsId(
+  deleteAppsId(
     req: operations.DeleteAppsIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteAppsIdResponse> {
@@ -241,39 +249,41 @@ export class SDK {
       req = new operations.DeleteAppsIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/apps/{id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteAppsIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeleteAppsIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 422:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 422:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -285,11 +295,12 @@ export class SDK {
   }
 
   
-  // GetAccountsAccountIdApps - Lists apps
-  /** 
+  /**
+   * getAccountsAccountIdApps - Lists apps
+   *
    * List all applications for the specified account ID.
   **/
-  GetAccountsAccountIdApps(
+  getAccountsAccountIdApps(
     req: operations.GetAccountsAccountIdAppsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAccountsAccountIdAppsResponse> {
@@ -297,37 +308,39 @@ export class SDK {
       req = new operations.GetAccountsAccountIdAppsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/accounts/{account_id}/apps", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAccountsAccountIdAppsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAccountsAccountIdAppsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appResponses = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -339,11 +352,12 @@ export class SDK {
   }
 
   
-  // GetAppsAppIdKeys - Lists app keys
-  /** 
+  /**
+   * getAppsAppIdKeys - Lists app keys
+   *
    * Lists the API keys associated with the application ID.
   **/
-  GetAppsAppIdKeys(
+  getAppsAppIdKeys(
     req: operations.GetAppsAppIdKeysRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAppsAppIdKeysResponse> {
@@ -351,42 +365,44 @@ export class SDK {
       req = new operations.GetAppsAppIdKeysRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/apps/{app_id}/keys", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAppsAppIdKeysResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAppsAppIdKeysResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.keyResponses = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -398,11 +414,12 @@ export class SDK {
   }
 
   
-  // GetAppsAppIdNamespaces - Lists namespaces
-  /** 
+  /**
+   * getAppsAppIdNamespaces - Lists namespaces
+   *
    * List the namespaces for the specified application ID.
   **/
-  GetAppsAppIdNamespaces(
+  getAppsAppIdNamespaces(
     req: operations.GetAppsAppIdNamespacesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAppsAppIdNamespacesResponse> {
@@ -410,42 +427,44 @@ export class SDK {
       req = new operations.GetAppsAppIdNamespacesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/apps/{app_id}/namespaces", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAppsAppIdNamespacesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAppsAppIdNamespacesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.namespaceResponses = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -457,11 +476,12 @@ export class SDK {
   }
 
   
-  // GetAppsAppIdQueues - Lists queues
-  /** 
+  /**
+   * getAppsAppIdQueues - Lists queues
+   *
    * Lists the queues associated with the specified application ID.
   **/
-  GetAppsAppIdQueues(
+  getAppsAppIdQueues(
     req: operations.GetAppsAppIdQueuesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAppsAppIdQueuesResponse> {
@@ -469,47 +489,49 @@ export class SDK {
       req = new operations.GetAppsAppIdQueuesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/apps/{app_id}/queues", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAppsAppIdQueuesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAppsAppIdQueuesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.queueResponses = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -521,11 +543,12 @@ export class SDK {
   }
 
   
-  // GetAppsAppIdRules - Lists Reactor rules
-  /** 
+  /**
+   * getAppsAppIdRules - Lists Reactor rules
+   *
    * Lists the rules for the application specified by the application ID.
   **/
-  GetAppsAppIdRules(
+  getAppsAppIdRules(
     req: operations.GetAppsAppIdRulesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAppsAppIdRulesResponse> {
@@ -533,42 +556,44 @@ export class SDK {
       req = new operations.GetAppsAppIdRulesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/apps/{app_id}/rules", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAppsAppIdRulesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAppsAppIdRulesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ruleResponses = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -580,11 +605,12 @@ export class SDK {
   }
 
   
-  // GetAppsAppIdRulesRuleId - Gets a reactor rule by rule ID
-  /** 
+  /**
+   * getAppsAppIdRulesRuleId - Gets a reactor rule by rule ID
+   *
    * Returns the rule specified by the rule ID, for the application specified by application ID.
   **/
-  GetAppsAppIdRulesRuleId(
+  getAppsAppIdRulesRuleId(
     req: operations.GetAppsAppIdRulesRuleIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAppsAppIdRulesRuleIdResponse> {
@@ -592,42 +618,44 @@ export class SDK {
       req = new operations.GetAppsAppIdRulesRuleIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/apps/{app_id}/rules/{rule_id}", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAppsAppIdRulesRuleIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetAppsAppIdRulesRuleIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ruleResponse = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -639,8 +667,10 @@ export class SDK {
   }
 
   
-  // GetMe - Get token details
-  GetMe(
+  /**
+   * getMe - Get token details
+  **/
+  getMe(
     req: operations.GetMeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetMeResponse> {
@@ -648,32 +678,34 @@ export class SDK {
       req = new operations.GetMeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/me";
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetMeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetMeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.me = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -685,11 +717,12 @@ export class SDK {
   }
 
   
-  // PatchAppsAppIdKeysKeyId - Updates a key
-  /** 
+  /**
+   * patchAppsAppIdKeysKeyId - Updates a key
+   *
    * Update the API key with the specified key ID, for the application with the specified application ID.
   **/
-  PatchAppsAppIdKeysKeyId(
+  patchAppsAppIdKeysKeyId(
     req: operations.PatchAppsAppIdKeysKeyIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PatchAppsAppIdKeysKeyIdResponse> {
@@ -697,68 +730,69 @@ export class SDK {
       req = new operations.PatchAppsAppIdKeysKeyIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/apps/{app_id}/keys/{key_id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PatchAppsAppIdKeysKeyIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PatchAppsAppIdKeysKeyIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.keyResponse = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 422:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 422:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -770,11 +804,12 @@ export class SDK {
   }
 
   
-  // PatchAppsAppIdNamespacesNamespaceId - Updates a namespace
-  /** 
+  /**
+   * patchAppsAppIdNamespacesNamespaceId - Updates a namespace
+   *
    * Updates the namespace with the specified ID, for the application with the specified application ID.
   **/
-  PatchAppsAppIdNamespacesNamespaceId(
+  patchAppsAppIdNamespacesNamespaceId(
     req: operations.PatchAppsAppIdNamespacesNamespaceIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PatchAppsAppIdNamespacesNamespaceIdResponse> {
@@ -782,63 +817,64 @@ export class SDK {
       req = new operations.PatchAppsAppIdNamespacesNamespaceIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/apps/{app_id}/namespaces/{namespace_id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PatchAppsAppIdNamespacesNamespaceIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PatchAppsAppIdNamespacesNamespaceIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.namespaceResponse = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -850,8 +886,10 @@ export class SDK {
   }
 
   
-  // PatchAppsAppIdRulesRuleId - Updates a Reactor rule
-  PatchAppsAppIdRulesRuleId(
+  /**
+   * patchAppsAppIdRulesRuleId - Updates a Reactor rule
+  **/
+  patchAppsAppIdRulesRuleId(
     req: operations.PatchAppsAppIdRulesRuleIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PatchAppsAppIdRulesRuleIdResponse> {
@@ -859,68 +897,69 @@ export class SDK {
       req = new operations.PatchAppsAppIdRulesRuleIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/apps/{app_id}/rules/{rule_id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PatchAppsAppIdRulesRuleIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PatchAppsAppIdRulesRuleIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ruleResponse = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 422:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 422:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -932,11 +971,12 @@ export class SDK {
   }
 
   
-  // PatchAppsId - Updates an app
-  /** 
+  /**
+   * patchAppsId - Updates an app
+   *
    * Updates the application with the specified application ID.
   **/
-  PatchAppsId(
+  patchAppsId(
     req: operations.PatchAppsIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PatchAppsIdResponse> {
@@ -944,58 +984,59 @@ export class SDK {
       req = new operations.PatchAppsIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/apps/{id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PatchAppsIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PatchAppsIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appResponse = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1007,11 +1048,12 @@ export class SDK {
   }
 
   
-  // PostAccountsAccountIdApps - Creates an app
-  /** 
+  /**
+   * postAccountsAccountIdApps - Creates an app
+   *
    * Creates an application with the specified properties.
   **/
-  PostAccountsAccountIdApps(
+  postAccountsAccountIdApps(
     req: operations.PostAccountsAccountIdAppsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAccountsAccountIdAppsResponse> {
@@ -1019,63 +1061,64 @@ export class SDK {
       req = new operations.PostAccountsAccountIdAppsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/accounts/{account_id}/apps", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAccountsAccountIdAppsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAccountsAccountIdAppsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appResponse = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 422:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 422:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1087,11 +1130,12 @@ export class SDK {
   }
 
   
-  // PostAppsAppIdKeys - Creates a key
-  /** 
+  /**
+   * postAppsAppIdKeys - Creates a key
+   *
    * Creates an API key for the application specified.
   **/
-  PostAppsAppIdKeys(
+  postAppsAppIdKeys(
     req: operations.PostAppsAppIdKeysRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAppsAppIdKeysResponse> {
@@ -1099,63 +1143,64 @@ export class SDK {
       req = new operations.PostAppsAppIdKeysRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/apps/{app_id}/keys", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAppsAppIdKeysResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAppsAppIdKeysResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.keyResponse = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 422:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 422:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1167,11 +1212,12 @@ export class SDK {
   }
 
   
-  // PostAppsAppIdKeysKeyIdRevoke - Revokes a key
-  /** 
+  /**
+   * postAppsAppIdKeysKeyIdRevoke - Revokes a key
+   *
    * Revokes the API key with the specified ID, with the Application ID. This deletes the key.
   **/
-  PostAppsAppIdKeysKeyIdRevoke(
+  postAppsAppIdKeysKeyIdRevoke(
     req: operations.PostAppsAppIdKeysKeyIdRevokeRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAppsAppIdKeysKeyIdRevokeResponse> {
@@ -1179,39 +1225,41 @@ export class SDK {
       req = new operations.PostAppsAppIdKeysKeyIdRevokeRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/apps/{app_id}/keys/{key_id}/revoke", req.pathParams);
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAppsAppIdKeysKeyIdRevokeResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostAppsAppIdKeysKeyIdRevokeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1223,11 +1271,12 @@ export class SDK {
   }
 
   
-  // PostAppsAppIdNamespaces - Creates a namespace
-  /** 
+  /**
+   * postAppsAppIdNamespaces - Creates a namespace
+   *
    * Creates a namespace for the specified application ID.
   **/
-  PostAppsAppIdNamespaces(
+  postAppsAppIdNamespaces(
     req: operations.PostAppsAppIdNamespacesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAppsAppIdNamespacesResponse> {
@@ -1235,63 +1284,64 @@ export class SDK {
       req = new operations.PostAppsAppIdNamespacesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/apps/{app_id}/namespaces", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAppsAppIdNamespacesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAppsAppIdNamespacesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.namespaceResponse = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 422:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 422:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1303,11 +1353,12 @@ export class SDK {
   }
 
   
-  // PostAppsAppIdQueues - Creates a queue
-  /** 
+  /**
+   * postAppsAppIdQueues - Creates a queue
+   *
    * Creates a queue for the application specified by application ID. The properties for the queue to be created are specified in the request body.
   **/
-  PostAppsAppIdQueues(
+  postAppsAppIdQueues(
     req: operations.PostAppsAppIdQueuesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAppsAppIdQueuesResponse> {
@@ -1315,63 +1366,64 @@ export class SDK {
       req = new operations.PostAppsAppIdQueuesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/apps/{app_id}/queues", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAppsAppIdQueuesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAppsAppIdQueuesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.queueResponse = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 422:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 422:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1383,11 +1435,12 @@ export class SDK {
   }
 
   
-  // PostAppsAppIdRules - Creates a Reactor rule
-  /** 
+  /**
+   * postAppsAppIdRules - Creates a Reactor rule
+   *
    * Creates a rule for the application with the specified application ID.
   **/
-  PostAppsAppIdRules(
+  postAppsAppIdRules(
     req: operations.PostAppsAppIdRulesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAppsAppIdRulesResponse> {
@@ -1395,68 +1448,69 @@ export class SDK {
       req = new operations.PostAppsAppIdRulesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/apps/{app_id}/rules", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAppsAppIdRulesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAppsAppIdRulesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.ruleResponse = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 422:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 422:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 504:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 504:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -1468,11 +1522,12 @@ export class SDK {
   }
 
   
-  // PostAppsIdPkcs12 - Updates app's APNs info from a `.p12` file
-  /** 
+  /**
+   * postAppsIdPkcs12 - Updates app's APNs info from a `.p12` file
+   *
    * Updates the application's Apple Push Notification service (APNs) information.
   **/
-  PostAppsIdPkcs12(
+  postAppsIdPkcs12(
     req: operations.PostAppsIdPkcs12Request,
     config?: AxiosRequestConfig
   ): Promise<operations.PostAppsIdPkcs12Response> {
@@ -1480,58 +1535,59 @@ export class SDK {
       req = new operations.PostAppsIdPkcs12Request(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/apps/{id}/pkcs12", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = CreateSecurityClient(this.defaultClient!, req.security)!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = utils.CreateSecurityClient(this._defaultClient!, req.security)!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostAppsIdPkcs12Response = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostAppsIdPkcs12Response = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.appResponse = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
-          case 500:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 500:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;

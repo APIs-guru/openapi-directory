@@ -1,16 +1,14 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "http://oralquestionsandmotions-api.parliament.uk",
-  "https://oralquestionsandmotions-api.parliament.uk",
+export const ServerList = [
+	"http://oralquestionsandmotions-api.parliament.uk",
+	"https://oralquestionsandmotions-api.parliament.uk",
 ] as const;
 
 export function WithServerURL(
@@ -21,50 +19,49 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // GetEarlyDayMotionsList - Returns a list of Early Day Motions
-  /** 
+  /**
+   * getEarlyDayMotionsList - Returns a list of Early Day Motions
+   *
    * Get a list of Early Day Motions which meet the specified criteria. Only supports Published and Withdrawn status.
   **/
-  GetEarlyDayMotionsList(
+  getEarlyDayMotionsList(
     req: operations.GetEarlyDayMotionsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEarlyDayMotionsListResponse> {
@@ -72,12 +69,11 @@ export class SDK {
       req = new operations.GetEarlyDayMotionsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/EarlyDayMotions/list";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -86,52 +82,53 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEarlyDayMotionsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetEarlyDayMotionsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.apiResponseListPublishedWrittenQuestion = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.apiResponseListPublishedWrittenQuestion = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/xml`)) {
+            if (utils.MatchContentType(contentType, `application/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `text/xml`)) {
+            if (utils.MatchContentType(contentType, `text/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/xml`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `text/xml`)) {
+            if (utils.MatchContentType(contentType, `text/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.apiResponseObject = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.apiResponseObject = httpRes?.data;
             }
             break;
@@ -143,11 +140,12 @@ export class SDK {
   }
 
   
-  // PublishedEarlyDayMotionGet - Returns a single Early Day Motion by ID
-  /** 
+  /**
+   * publishedEarlyDayMotionGet - Returns a single Early Day Motion by ID
+   *
    * Get a single Early Day Motion which has the ID specified.
   **/
-  PublishedEarlyDayMotionGet(
+  publishedEarlyDayMotionGet(
     req: operations.PublishedEarlyDayMotionGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PublishedEarlyDayMotionGetResponse> {
@@ -155,42 +153,42 @@ export class SDK {
       req = new operations.PublishedEarlyDayMotionGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/EarlyDayMotion/{id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PublishedEarlyDayMotionGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PublishedEarlyDayMotionGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.apiResponseListPublishedWrittenQuestion = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.apiResponseListPublishedWrittenQuestion = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.apiResponseObject = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.apiResponseObject = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.apiResponseObject = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.apiResponseObject = httpRes?.data;
             }
             break;
@@ -202,11 +200,12 @@ export class SDK {
   }
 
   
-  // PublishedOralQuestionTimeGet - Returns a list of oral question times
-  /** 
+  /**
+   * publishedOralQuestionTimeGet - Returns a list of oral question times
+   *
    * A list of oral question times meeting the specified criteria.
   **/
-  PublishedOralQuestionTimeGet(
+  publishedOralQuestionTimeGet(
     req: operations.PublishedOralQuestionTimeGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PublishedOralQuestionTimeGetResponse> {
@@ -214,12 +213,11 @@ export class SDK {
       req = new operations.PublishedOralQuestionTimeGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/oralquestiontimes/list";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -228,52 +226,53 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PublishedOralQuestionTimeGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PublishedOralQuestionTimeGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.apiResponseListPublishedWrittenQuestion = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.apiResponseListPublishedWrittenQuestion = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/xml`)) {
+            if (utils.MatchContentType(contentType, `application/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `text/xml`)) {
+            if (utils.MatchContentType(contentType, `text/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/xml`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `text/xml`)) {
+            if (utils.MatchContentType(contentType, `text/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.apiResponseObject = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.apiResponseObject = httpRes?.data;
             }
             break;
@@ -285,11 +284,12 @@ export class SDK {
   }
 
   
-  // PublishedOralQuestionGet - Returns a list of oral questions
-  /** 
+  /**
+   * publishedOralQuestionGet - Returns a list of oral questions
+   *
    * A list of oral questions meeting the specified criteria.
   **/
-  PublishedOralQuestionGet(
+  publishedOralQuestionGet(
     req: operations.PublishedOralQuestionGetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PublishedOralQuestionGetResponse> {
@@ -297,12 +297,11 @@ export class SDK {
       req = new operations.PublishedOralQuestionGetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/oralquestions/list";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._defaultClient!;
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -311,52 +310,53 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PublishedOralQuestionGetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PublishedOralQuestionGetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.apiResponseListPublishedWrittenQuestion = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.apiResponseListPublishedWrittenQuestion = httpRes?.data;
             }
-            if (MatchContentType(contentType, `application/xml`)) {
+            if (utils.MatchContentType(contentType, `application/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `text/xml`)) {
+            if (utils.MatchContentType(contentType, `text/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/xml`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `text/xml`)) {
+            if (utils.MatchContentType(contentType, `text/xml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.apiResponseObject = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.apiResponseObject = httpRes?.data;
             }
             break;

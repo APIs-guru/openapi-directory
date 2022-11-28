@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DelIpaliasPathParams = /** @class */ (function (_super) {
     __extends(DelIpaliasPathParams, _super);
     function DelIpaliasPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=IP" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=IP" }),
         __metadata("design:type", String)
     ], DelIpaliasPathParams.prototype, "ip", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], DelIpaliasPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=port" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=port" }),
         __metadata("design:type", Number)
     ], DelIpaliasPathParams.prototype, "port", void 0);
     return DelIpaliasPathParams;
@@ -49,7 +49,7 @@ var DelIpaliasRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DelIpaliasPathParams)
     ], DelIpaliasRequest.prototype, "pathParams", void 0);
     return DelIpaliasRequest;
@@ -61,15 +61,15 @@ var DelIpaliasResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DelIpaliasResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DelIpaliasResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DelIpaliasResponse.prototype, "delIpalias200ApplicationJsonString", void 0);
     return DelIpaliasResponse;

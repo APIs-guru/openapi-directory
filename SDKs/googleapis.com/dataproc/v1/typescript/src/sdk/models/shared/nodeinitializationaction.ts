@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NodeInitializationAction
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies an executable to run on a fully configured node and a timeout period for executable completion.
 **/
 export class NodeInitializationAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=executableFile" })
+  @SpeakeasyMetadata({ data: "json, name=executableFile" })
   executableFile?: string;
 
-  @Metadata({ data: "json, name=executionTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=executionTimeout" })
   executionTimeout?: string;
 }

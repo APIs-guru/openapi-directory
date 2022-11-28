@@ -4,10 +4,6 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type CreateDirectiveRequest struct {
-	Request *shared.DirectiveNew `request:"mediaType=application/json"`
-}
-
 type CreateDirective200ApplicationJSONActionEnum string
 
 const (
@@ -29,6 +25,10 @@ type CreateDirective200ApplicationJSON struct {
 	Action CreateDirective200ApplicationJSONActionEnum `json:"action"`
 	Data   CreateDirective200ApplicationJSONData       `json:"data"`
 	Result CreateDirective200ApplicationJSONResultEnum `json:"result"`
+}
+
+type CreateDirectiveRequest struct {
+	Request *shared.DirectiveNew `request:"mediaType=application/json"`
 }
 
 type CreateDirectiveResponse struct {

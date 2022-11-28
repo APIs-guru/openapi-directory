@@ -5,13 +5,13 @@ from sdk.models import shared
 
 @dataclass
 class CreateCallRequest:
-    request: shared.CallCreate = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.CallCreate = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateCallResponse:
+    content_type: str = field()
+    status_code: int = field()
     calls: Optional[List[shared.Call]] = field(default=None)
-    content_type: str = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

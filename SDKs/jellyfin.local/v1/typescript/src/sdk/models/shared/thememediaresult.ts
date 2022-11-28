@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BaseItemDto } from "./baseitemdto";
+
 
 
 // ThemeMediaResult
@@ -8,15 +8,15 @@ import { BaseItemDto } from "./baseitemdto";
  * Class ThemeMediaResult.
 **/
 export class ThemeMediaResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Items", elemType: shared.BaseItemDto })
+  @SpeakeasyMetadata({ data: "json, name=Items", elemType: BaseItemDto })
   items?: BaseItemDto[];
 
-  @Metadata({ data: "json, name=OwnerId" })
+  @SpeakeasyMetadata({ data: "json, name=OwnerId" })
   ownerId?: string;
 
-  @Metadata({ data: "json, name=StartIndex" })
+  @SpeakeasyMetadata({ data: "json, name=StartIndex" })
   startIndex?: number;
 
-  @Metadata({ data: "json, name=TotalRecordCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalRecordCount" })
   totalRecordCount?: number;
 }

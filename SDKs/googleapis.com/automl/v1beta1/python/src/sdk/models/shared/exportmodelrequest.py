@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import modelexportoutputconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ExportModelRequest:
-    output_config: Optional[modelexportoutputconfig.ModelExportOutputConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outputConfig' }})
+    r"""ExportModelRequest
+    Request message for AutoMl.ExportModel. Models need to be enabled for exporting, otherwise an error code will be returned.
+    """
+    
+    output_config: Optional[ModelExportOutputConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outputConfig') }})
     

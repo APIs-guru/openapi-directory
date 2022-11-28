@@ -22,23 +22,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Fileshare } from "./fileshare";
+import { FileshareUsage } from "./fileshareusage";
 var GetFileshareDetails = /** @class */ (function (_super) {
     __extends(GetFileshareDetails, _super);
     function GetFileshareDetails() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=fs", elemType: shared.Fileshare }),
+        SpeakeasyMetadata({ data: "json, name=fs", elemType: Fileshare }),
         __metadata("design:type", Array)
     ], GetFileshareDetails.prototype, "fs", void 0);
     __decorate([
-        Metadata({ data: "json, name=fsUsage", elemType: shared.FileshareUsage }),
+        SpeakeasyMetadata({ data: "json, name=fsUsage", elemType: FileshareUsage }),
         __metadata("design:type", Array)
     ], GetFileshareDetails.prototype, "fsUsage", void 0);
     __decorate([
-        Metadata({ data: "json, name=volnames" }),
+        SpeakeasyMetadata({ data: "json, name=volnames" }),
         __metadata("design:type", Array)
     ], GetFileshareDetails.prototype, "volnames", void 0);
     return GetFileshareDetails;

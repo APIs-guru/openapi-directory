@@ -1,91 +1,92 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetAbusesFilterEnum {
-    Video = "video"
-,    Comment = "comment"
-,    Account = "account"
+    Video = "video",
+    Comment = "comment",
+    Account = "account"
 }
 
 export enum GetAbusesVideoIsEnum {
-    Deleted = "deleted"
-,    Blacklisted = "blacklisted"
+    Deleted = "deleted",
+    Blacklisted = "blacklisted"
 }
 
 
 export class GetAbusesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=count" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=count" })
   count?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=filter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filter" })
   filter?: GetAbusesFilterEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=id" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=id" })
   id?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=predefinedReason" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=predefinedReason" })
   predefinedReason?: shared.PredefinedAbuseReasonsEnum[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=search" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=search" })
   search?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchReportee" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchReportee" })
   searchReportee?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchReporter" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchReporter" })
   searchReporter?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchVideo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchVideo" })
   searchVideo?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchVideoChannel" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchVideoChannel" })
   searchVideoChannel?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: shared.AbusesSortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start" })
   start?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=state" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=state" })
   state?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=videoIs" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=videoIs" })
   videoIs?: GetAbusesVideoIsEnum;
 }
 
 
 export class GetAbusesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
-export class GetAbusesRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetAbusesQueryParams;
-
-  @Metadata()
-  security: GetAbusesSecurity;
-}
-
-
 export class GetAbuses200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: any[];
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }
 
 
+export class GetAbusesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetAbusesQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetAbusesSecurity;
+}
+
+
 export class GetAbusesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAbuses200ApplicationJsonObject?: GetAbuses200ApplicationJson;
 }

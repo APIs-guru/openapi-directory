@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CategoryDto } from "./categorydto";
 import { MetadataDto } from "./metadatadto";
 import { PresentationDto } from "./presentationdto";
 
 
+
 export class ProductUpdateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=categories" })
+  @SpeakeasyMetadata({ data: "json, name=categories" })
   categories?: string[];
 
-  @Metadata({ data: "json, name=category" })
+  @SpeakeasyMetadata({ data: "json, name=category" })
   category?: CategoryDto;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=externalReference" })
+  @SpeakeasyMetadata({ data: "json, name=externalReference" })
   externalReference?: string;
 
-  @Metadata({ data: "json, name=imageLookupKeys" })
+  @SpeakeasyMetadata({ data: "json, name=imageLookupKeys" })
   imageLookupKeys?: string[];
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: MetadataDto;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=presentation" })
+  @SpeakeasyMetadata({ data: "json, name=presentation" })
   presentation?: PresentationDto;
 
-  @Metadata({ data: "json, name=taxCode" })
+  @SpeakeasyMetadata({ data: "json, name=taxCode" })
   taxCode?: string;
 
-  @Metadata({ data: "json, name=taxExempt" })
+  @SpeakeasyMetadata({ data: "json, name=taxExempt" })
   taxExempt?: boolean;
 
-  @Metadata({ data: "json, name=taxRates" })
+  @SpeakeasyMetadata({ data: "json, name=taxRates" })
   taxRates?: string[];
 
-  @Metadata({ data: "json, name=unitName" })
+  @SpeakeasyMetadata({ data: "json, name=unitName" })
   unitName?: string;
 
-  @Metadata({ data: "json, name=uuid" })
+  @SpeakeasyMetadata({ data: "json, name=uuid" })
   uuid: string;
 
-  @Metadata({ data: "json, name=variantUuids" })
+  @SpeakeasyMetadata({ data: "json, name=variantUuids" })
   variantUuids: string[];
 
-  @Metadata({ data: "json, name=vatPercentage" })
+  @SpeakeasyMetadata({ data: "json, name=vatPercentage" })
   vatPercentage?: number;
 }

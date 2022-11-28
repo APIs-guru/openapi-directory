@@ -1,5 +1,7 @@
 package shared
 
+// PaginatedPullrequestComments
+// A paginated list of pullrequest comments.
 type PaginatedPullrequestComments struct {
 	Next     *string                  `json:"next,omitempty"`
 	Page     *int64                   `json:"page,omitempty"`

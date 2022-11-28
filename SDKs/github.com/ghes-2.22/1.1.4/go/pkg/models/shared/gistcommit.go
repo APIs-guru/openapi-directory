@@ -32,6 +32,8 @@ type GistCommitSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// GistCommit
+// Gist Commit
 type GistCommit struct {
 	ChangeStatus GistCommitChangeStatus `json:"change_status"`
 	CommittedAt  time.Time              `json:"committed_at"`

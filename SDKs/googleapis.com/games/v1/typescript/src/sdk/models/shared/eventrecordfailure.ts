@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum EventRecordFailureFailureCauseEnum {
-    EventUpdateFailureCauseUnspecified = "EVENT_UPDATE_FAILURE_CAUSE_UNSPECIFIED"
-,    NotFound = "NOT_FOUND"
-,    InvalidUpdateValue = "INVALID_UPDATE_VALUE"
+    EventUpdateFailureCauseUnspecified = "EVENT_UPDATE_FAILURE_CAUSE_UNSPECIFIED",
+    NotFound = "NOT_FOUND",
+    InvalidUpdateValue = "INVALID_UPDATE_VALUE"
 }
 
 
@@ -12,12 +13,12 @@ export enum EventRecordFailureFailureCauseEnum {
  * An event update failure resource.
 **/
 export class EventRecordFailure extends SpeakeasyBase {
-  @Metadata({ data: "json, name=eventId" })
+  @SpeakeasyMetadata({ data: "json, name=eventId" })
   eventId?: string;
 
-  @Metadata({ data: "json, name=failureCause" })
+  @SpeakeasyMetadata({ data: "json, name=failureCause" })
   failureCause?: EventRecordFailureFailureCauseEnum;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

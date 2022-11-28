@@ -1,45 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuditCaseCategoryRelation } from "./auditcasecategoryrelation";
 
 
+
 export class AuditCase extends SpeakeasyBase {
-  @Metadata({ data: "json, name=audit_case_id" })
+  @SpeakeasyMetadata({ data: "json, name=audit_case_id" })
   auditCaseId?: string;
 
-  @Metadata({ data: "json, name=audit_id" })
+  @SpeakeasyMetadata({ data: "json, name=audit_id" })
   auditId?: number;
 
-  @Metadata({ data: "json, name=candidate_id" })
+  @SpeakeasyMetadata({ data: "json, name=candidate_id" })
   candidateId?: string;
 
-  @Metadata({ data: "json, name=candidate_name" })
+  @SpeakeasyMetadata({ data: "json, name=candidate_name" })
   candidateName?: string;
 
-  @Metadata({ data: "json, name=committee_description" })
+  @SpeakeasyMetadata({ data: "json, name=committee_description" })
   committeeDescription?: string;
 
-  @Metadata({ data: "json, name=committee_designation" })
+  @SpeakeasyMetadata({ data: "json, name=committee_designation" })
   committeeDesignation?: string;
 
-  @Metadata({ data: "json, name=committee_id" })
+  @SpeakeasyMetadata({ data: "json, name=committee_id" })
   committeeId?: string;
 
-  @Metadata({ data: "json, name=committee_name" })
+  @SpeakeasyMetadata({ data: "json, name=committee_name" })
   committeeName?: string;
 
-  @Metadata({ data: "json, name=committee_type" })
+  @SpeakeasyMetadata({ data: "json, name=committee_type" })
   committeeType?: string;
 
-  @Metadata({ data: "json, name=cycle" })
+  @SpeakeasyMetadata({ data: "json, name=cycle" })
   cycle?: number;
 
-  @Metadata({ data: "json, name=far_release_date" })
+  @SpeakeasyMetadata({ data: "json, name=far_release_date" })
   farReleaseDate?: Date;
 
-  @Metadata({ data: "json, name=link_to_report" })
+  @SpeakeasyMetadata({ data: "json, name=link_to_report" })
   linkToReport?: string;
 
-  @Metadata({ data: "json, name=primary_category_list", elemType: shared.AuditCaseCategoryRelation })
+  @SpeakeasyMetadata({ data: "json, name=primary_category_list", elemType: AuditCaseCategoryRelation })
   primaryCategoryList?: AuditCaseCategoryRelation[];
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // WafExcludedRule
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about a rule to exclude from a rule group.
 **/
 export class WafExcludedRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=RuleId" })
+  @SpeakeasyMetadata({ data: "json, name=RuleId" })
   ruleId?: string;
 }

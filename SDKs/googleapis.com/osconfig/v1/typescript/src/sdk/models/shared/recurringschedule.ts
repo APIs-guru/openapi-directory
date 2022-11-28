@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MonthlySchedule } from "./monthlyschedule";
 import { TimeOfDay } from "./timeofday";
 import { TimeZone } from "./timezone";
 import { WeeklySchedule } from "./weeklyschedule";
 
+
 export enum RecurringScheduleFrequencyEnum {
-    FrequencyUnspecified = "FREQUENCY_UNSPECIFIED"
-,    Weekly = "WEEKLY"
-,    Monthly = "MONTHLY"
-,    Daily = "DAILY"
+    FrequencyUnspecified = "FREQUENCY_UNSPECIFIED",
+    Weekly = "WEEKLY",
+    Monthly = "MONTHLY",
+    Daily = "DAILY"
 }
 
 
@@ -17,30 +18,58 @@ export enum RecurringScheduleFrequencyEnum {
  * Sets the time for recurring patch deployments.
 **/
 export class RecurringSchedule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endTime" })
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
   endTime?: string;
 
-  @Metadata({ data: "json, name=frequency" })
+  @SpeakeasyMetadata({ data: "json, name=frequency" })
   frequency?: RecurringScheduleFrequencyEnum;
 
-  @Metadata({ data: "json, name=lastExecuteTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastExecuteTime" })
   lastExecuteTime?: string;
 
-  @Metadata({ data: "json, name=monthly" })
+  @SpeakeasyMetadata({ data: "json, name=monthly" })
   monthly?: MonthlySchedule;
 
-  @Metadata({ data: "json, name=nextExecuteTime" })
+  @SpeakeasyMetadata({ data: "json, name=nextExecuteTime" })
   nextExecuteTime?: string;
 
-  @Metadata({ data: "json, name=startTime" })
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
   startTime?: string;
 
-  @Metadata({ data: "json, name=timeOfDay" })
+  @SpeakeasyMetadata({ data: "json, name=timeOfDay" })
   timeOfDay?: TimeOfDay;
 
-  @Metadata({ data: "json, name=timeZone" })
+  @SpeakeasyMetadata({ data: "json, name=timeZone" })
   timeZone?: TimeZone;
 
-  @Metadata({ data: "json, name=weekly" })
+  @SpeakeasyMetadata({ data: "json, name=weekly" })
+  weekly?: WeeklySchedule;
+}
+
+
+// RecurringScheduleInput
+/** 
+ * Sets the time for recurring patch deployments.
+**/
+export class RecurringScheduleInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=endTime" })
+  endTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=frequency" })
+  frequency?: RecurringScheduleFrequencyEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=monthly" })
+  monthly?: MonthlySchedule;
+
+  @SpeakeasyMetadata({ data: "json, name=startTime" })
+  startTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=timeOfDay" })
+  timeOfDay?: TimeOfDay;
+
+  @SpeakeasyMetadata({ data: "json, name=timeZone" })
+  timeZone?: TimeZone;
+
+  @SpeakeasyMetadata({ data: "json, name=weekly" })
   weekly?: WeeklySchedule;
 }

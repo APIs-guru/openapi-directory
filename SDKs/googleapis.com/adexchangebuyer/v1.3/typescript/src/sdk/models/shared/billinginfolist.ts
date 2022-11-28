@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BillingInfo } from "./billinginfo";
+
 
 
 // BillingInfoList
@@ -8,9 +8,9 @@ import { BillingInfo } from "./billinginfo";
  * A billing info feed lists Billing Info the Ad Exchange buyer account has access to. Each entry in the feed corresponds to a single billing info.
 **/
 export class BillingInfoList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.BillingInfo })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: BillingInfo })
   items?: BillingInfo[];
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 }

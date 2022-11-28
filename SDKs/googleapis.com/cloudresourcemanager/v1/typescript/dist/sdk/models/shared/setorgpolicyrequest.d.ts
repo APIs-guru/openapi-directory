@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { OrgPolicy } from "./orgpolicy";
 /**
  * The request sent to the SetOrgPolicyRequest method.

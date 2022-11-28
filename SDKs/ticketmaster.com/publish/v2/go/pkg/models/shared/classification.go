@@ -1,5 +1,7 @@
 package shared
 
+// Classification
+// Classification
 type Classification struct {
 	Genre    *Level   `json:"genre,omitempty"`
 	Primary  *bool    `json:"primary,omitempty"`

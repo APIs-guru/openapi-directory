@@ -14,6 +14,9 @@ type PutFeedbackHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// PutFeedbackRequestBodyInsightFeedback
+//
+//	Information about insight feedback received from a customer.
 type PutFeedbackRequestBodyInsightFeedback struct {
 	Feedback *shared.InsightFeedbackOptionEnum `json:"Feedback,omitempty"`
 	ID       *string                           `json:"Id,omitempty"`

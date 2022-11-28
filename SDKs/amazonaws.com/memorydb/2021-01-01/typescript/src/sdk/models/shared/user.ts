@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Authentication } from "./authentication";
+
 
 
 // User
@@ -7,24 +8,24 @@ import { Authentication } from "./authentication";
  * You create users and assign them specific permissions by using an access string. You assign the users to Access Control Lists aligned with a specific role (administrators, human resources) that are then deployed to one or more MemoryDB clusters.
 **/
 export class User extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ACLNames" })
+  @SpeakeasyMetadata({ data: "json, name=ACLNames" })
   aclNames?: string[];
 
-  @Metadata({ data: "json, name=ARN" })
+  @SpeakeasyMetadata({ data: "json, name=ARN" })
   arn?: string;
 
-  @Metadata({ data: "json, name=AccessString" })
+  @SpeakeasyMetadata({ data: "json, name=AccessString" })
   accessString?: string;
 
-  @Metadata({ data: "json, name=Authentication" })
+  @SpeakeasyMetadata({ data: "json, name=Authentication" })
   authentication?: Authentication;
 
-  @Metadata({ data: "json, name=MinimumEngineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=MinimumEngineVersion" })
   minimumEngineVersion?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SchemaFacet
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A facet.
 **/
 export class SchemaFacet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FacetName" })
+  @SpeakeasyMetadata({ data: "json, name=FacetName" })
   facetName?: string;
 
-  @Metadata({ data: "json, name=SchemaArn" })
+  @SpeakeasyMetadata({ data: "json, name=SchemaArn" })
   schemaArn?: string;
 }

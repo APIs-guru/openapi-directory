@@ -14,27 +14,39 @@ type CreateConnectorHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateConnectorRequestBodyCapacity
+// Information about the capacity of the connector, whether it is auto scaled or provisioned.
 type CreateConnectorRequestBodyCapacity struct {
 	AutoScaling         *shared.AutoScaling         `json:"autoScaling,omitempty"`
 	ProvisionedCapacity *shared.ProvisionedCapacity `json:"provisionedCapacity,omitempty"`
 }
 
+// CreateConnectorRequestBodyKafkaCluster
+// The details of the Apache Kafka cluster to which the connector is connected.
 type CreateConnectorRequestBodyKafkaCluster struct {
 	ApacheKafkaCluster *shared.ApacheKafkaCluster `json:"apacheKafkaCluster,omitempty"`
 }
 
+// CreateConnectorRequestBodyKafkaClusterClientAuthentication
+// The client authentication information used in order to authenticate with the Apache Kafka cluster.
 type CreateConnectorRequestBodyKafkaClusterClientAuthentication struct {
 	AuthenticationType *shared.KafkaClusterClientAuthenticationTypeEnum `json:"authenticationType,omitempty"`
 }
 
+// CreateConnectorRequestBodyKafkaClusterEncryptionInTransit
+// Details of encryption in transit to the Apache Kafka cluster.
 type CreateConnectorRequestBodyKafkaClusterEncryptionInTransit struct {
 	EncryptionType *shared.KafkaClusterEncryptionInTransitTypeEnum `json:"encryptionType,omitempty"`
 }
 
+// CreateConnectorRequestBodyLogDelivery
+// Details about log delivery.
 type CreateConnectorRequestBodyLogDelivery struct {
 	WorkerLogDelivery *shared.WorkerLogDelivery `json:"workerLogDelivery,omitempty"`
 }
 
+// CreateConnectorRequestBodyWorkerConfiguration
+// The configuration of the workers, which are the processes that run the connector logic.
 type CreateConnectorRequestBodyWorkerConfiguration struct {
 	Revision               *int64  `json:"revision,omitempty"`
 	WorkerConfigurationArn *string `json:"workerConfigurationArn,omitempty"`

@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Solution } from "./solution";
 
+
 export enum ResponseStatusEnum {
-    WaitingInQueue = "waiting_in_queue"
-,    Processing = "processing"
-,    Finished = "finished"
+    WaitingInQueue = "waiting_in_queue",
+    Processing = "processing",
+    Finished = "finished"
 }
 
 
 export class Response extends SpeakeasyBase {
-  @Metadata({ data: "json, name=copyrights" })
+  @SpeakeasyMetadata({ data: "json, name=copyrights" })
   copyrights?: string[];
 
-  @Metadata({ data: "json, name=processing_time" })
+  @SpeakeasyMetadata({ data: "json, name=processing_time" })
   processingTime?: number;
 
-  @Metadata({ data: "json, name=solution" })
+  @SpeakeasyMetadata({ data: "json, name=solution" })
   solution?: Solution;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ResponseStatusEnum;
 
-  @Metadata({ data: "json, name=waiting_time_in_queue" })
+  @SpeakeasyMetadata({ data: "json, name=waiting_time_in_queue" })
   waitingTimeInQueue?: number;
 }

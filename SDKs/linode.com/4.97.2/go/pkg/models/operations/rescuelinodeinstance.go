@@ -12,27 +12,19 @@ type RescueLinodeInstanceRequestBody struct {
 	Devices *shared.RescueDevices `json:"devices,omitempty"`
 }
 
-type RescueLinodeInstanceSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-}
-
-type RescueLinodeInstanceSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-}
-
 type RescueLinodeInstanceSecurity struct {
-	Option1 *RescueLinodeInstanceSecurityOption1 `security:"option"`
-	Option2 *RescueLinodeInstanceSecurityOption2 `security:"option"`
+	PersonalAccessToken *shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+	Oauth               *shared.SchemeOauth               `security:"scheme,type=oauth2"`
+}
+
+type RescueLinodeInstanceDefaultApplicationJSON struct {
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type RescueLinodeInstanceRequest struct {
 	PathParams RescueLinodeInstancePathParams
 	Request    *RescueLinodeInstanceRequestBody `request:"mediaType=application/json"`
 	Security   RescueLinodeInstanceSecurity
-}
-
-type RescueLinodeInstanceDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type RescueLinodeInstanceResponse struct {

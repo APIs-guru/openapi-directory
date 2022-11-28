@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ServerGroupReplicationConfiguration } from "./servergroupreplicationconfiguration";
 var PutAppReplicationConfigurationRequest = /** @class */ (function (_super) {
     __extends(PutAppReplicationConfigurationRequest, _super);
     function PutAppReplicationConfigurationRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=appId" }),
+        SpeakeasyMetadata({ data: "json, name=appId" }),
         __metadata("design:type", String)
     ], PutAppReplicationConfigurationRequest.prototype, "appId", void 0);
     __decorate([
-        Metadata({ data: "json, name=serverGroupReplicationConfigurations", elemType: shared.ServerGroupReplicationConfiguration }),
+        SpeakeasyMetadata({ data: "json, name=serverGroupReplicationConfigurations", elemType: ServerGroupReplicationConfiguration }),
         __metadata("design:type", Array)
     ], PutAppReplicationConfigurationRequest.prototype, "serverGroupReplicationConfigurations", void 0);
     return PutAppReplicationConfigurationRequest;

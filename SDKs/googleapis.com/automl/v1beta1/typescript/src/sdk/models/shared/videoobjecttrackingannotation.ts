@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BoundingPoly } from "./boundingpoly";
+
 
 
 // VideoObjectTrackingAnnotation
@@ -7,15 +8,15 @@ import { BoundingPoly } from "./boundingpoly";
  * Annotation details for video object tracking.
 **/
 export class VideoObjectTrackingAnnotation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boundingBox" })
+  @SpeakeasyMetadata({ data: "json, name=boundingBox" })
   boundingBox?: BoundingPoly;
 
-  @Metadata({ data: "json, name=instanceId" })
+  @SpeakeasyMetadata({ data: "json, name=instanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=score" })
+  @SpeakeasyMetadata({ data: "json, name=score" })
   score?: number;
 
-  @Metadata({ data: "json, name=timeOffset" })
+  @SpeakeasyMetadata({ data: "json, name=timeOffset" })
   timeOffset?: string;
 }

@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -16,14 +19,14 @@ class DescribeEventConfigurationsHeaders:
 
 @dataclass
 class DescribeEventConfigurationsRequest:
-    headers: DescribeEventConfigurationsHeaders = field(default=None)
+    headers: DescribeEventConfigurationsHeaders = field()
     
 
 @dataclass
 class DescribeEventConfigurationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_event_configurations_response: Optional[shared.DescribeEventConfigurationsResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

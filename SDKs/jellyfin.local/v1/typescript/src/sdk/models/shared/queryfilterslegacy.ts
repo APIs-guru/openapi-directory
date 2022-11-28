@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class QueryFiltersLegacy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Genres" })
+  @SpeakeasyMetadata({ data: "json, name=Genres" })
   genres?: string[];
 
-  @Metadata({ data: "json, name=OfficialRatings" })
+  @SpeakeasyMetadata({ data: "json, name=OfficialRatings" })
   officialRatings?: string[];
 
-  @Metadata({ data: "json, name=Tags" })
+  @SpeakeasyMetadata({ data: "json, name=Tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=Years" })
+  @SpeakeasyMetadata({ data: "json, name=Years" })
   years?: number[];
 }

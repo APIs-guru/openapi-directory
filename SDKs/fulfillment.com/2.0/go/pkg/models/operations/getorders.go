@@ -19,15 +19,12 @@ type GetOrdersSecurity struct {
 	FdcAuth shared.SchemeFdcAuth `security:"scheme,type=oauth2"`
 }
 
-type GetOrdersRequest struct {
-	QueryParams GetOrdersQueryParams
-	Security    GetOrdersSecurity
-}
-
 type GetOrdersErrorStandardV2 struct {
 	Message *string `json:"message,omitempty"`
 }
 
+// GetOrders200ApplicationJSONOrderResponseV2StatusEventV2StatusTypeV2ActionRequiredBy
+// Responsibility for resolving this issue
 type GetOrders200ApplicationJSONOrderResponseV2StatusEventV2StatusTypeV2ActionRequiredBy struct {
 	ID   *int64  `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
@@ -145,6 +142,8 @@ type GetOrders200ApplicationJSONOrderResponseV2WarehouseV2 struct {
 	ID int64 `json:"id"`
 }
 
+// GetOrders200ApplicationJSONOrderResponseV2
+// Requires hydrate to be set in the request and the corresponding node will be filled.
 type GetOrders200ApplicationJSONOrderResponseV2 struct {
 	CurrentStatus          GetOrders200ApplicationJSONOrderResponseV2StatusEventV2                                  `json:"currentStatus"`
 	DepartDate             *time.Time                                                                               `json:"departDate,omitempty"`
@@ -162,6 +161,11 @@ type GetOrders200ApplicationJSONOrderResponseV2 struct {
 	TrackingNumbers        []GetOrders200ApplicationJSONOrderResponseV2TrackingNumbers                              `json:"trackingNumbers,omitempty"`
 	ValidatedConsignee     shared.OneordersPostResponses201ContentApplication1jsonSchemaPropertiesOriginalConsignee `json:"validatedConsignee"`
 	Warehouse              *GetOrders200ApplicationJSONOrderResponseV2WarehouseV2                                   `json:"warehouse,omitempty"`
+}
+
+type GetOrdersRequest struct {
+	QueryParams GetOrdersQueryParams
+	Security    GetOrdersSecurity
 }
 
 type GetOrdersResponse struct {

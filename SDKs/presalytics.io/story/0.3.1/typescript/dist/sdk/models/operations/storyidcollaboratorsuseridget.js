@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var StoryIdCollaboratorsUseridGetPathParams = /** @class */ (function (_super) {
     __extends(StoryIdCollaboratorsUseridGetPathParams, _super);
@@ -30,11 +30,11 @@ var StoryIdCollaboratorsUseridGetPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], StoryIdCollaboratorsUseridGetPathParams.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=story_collaborator_userid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=story_collaborator_userid" }),
         __metadata("design:type", String)
     ], StoryIdCollaboratorsUseridGetPathParams.prototype, "storyCollaboratorUserid", void 0);
     return StoryIdCollaboratorsUseridGetPathParams;
@@ -46,7 +46,7 @@ var StoryIdCollaboratorsUseridGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StoryIdCollaboratorsUseridGetPathParams)
     ], StoryIdCollaboratorsUseridGetRequest.prototype, "pathParams", void 0);
     return StoryIdCollaboratorsUseridGetRequest;
@@ -58,19 +58,19 @@ var StoryIdCollaboratorsUseridGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StoryIdCollaboratorsUseridGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StoryIdCollaboratorsUseridGetResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], StoryIdCollaboratorsUseridGetResponse.prototype, "problemDetail", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.StoryCollaborator)
     ], StoryIdCollaboratorsUseridGetResponse.prototype, "storyCollaborator", void 0);
     return StoryIdCollaboratorsUseridGetResponse;

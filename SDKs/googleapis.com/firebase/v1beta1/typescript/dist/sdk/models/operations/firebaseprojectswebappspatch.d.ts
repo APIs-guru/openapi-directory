@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class FirebaseProjectsWebAppsPatchPathParams extends SpeakeasyBase {
     name: string;
@@ -32,7 +32,7 @@ export declare class FirebaseProjectsWebAppsPatchSecurity extends SpeakeasyBase 
 export declare class FirebaseProjectsWebAppsPatchRequest extends SpeakeasyBase {
     pathParams: FirebaseProjectsWebAppsPatchPathParams;
     queryParams: FirebaseProjectsWebAppsPatchQueryParams;
-    request?: shared.WebApp;
+    request?: shared.WebAppInput;
     security: FirebaseProjectsWebAppsPatchSecurity;
 }
 export declare class FirebaseProjectsWebAppsPatchResponse extends SpeakeasyBase {

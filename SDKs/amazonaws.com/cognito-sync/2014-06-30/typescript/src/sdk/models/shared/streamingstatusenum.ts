@@ -1,6 +1,7 @@
 
 
+
 export enum StreamingStatusEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

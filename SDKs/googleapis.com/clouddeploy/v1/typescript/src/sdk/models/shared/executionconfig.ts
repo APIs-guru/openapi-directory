@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DefaultPool } from "./defaultpool";
 import { PrivatePool } from "./privatepool";
 
+
 export enum ExecutionConfigUsagesEnum {
-    ExecutionEnvironmentUsageUnspecified = "EXECUTION_ENVIRONMENT_USAGE_UNSPECIFIED"
-,    Render = "RENDER"
-,    Deploy = "DEPLOY"
-,    Verify = "VERIFY"
+    ExecutionEnvironmentUsageUnspecified = "EXECUTION_ENVIRONMENT_USAGE_UNSPECIFIED",
+    Render = "RENDER",
+    Deploy = "DEPLOY",
+    Verify = "VERIFY"
 }
 
 
@@ -15,24 +16,24 @@ export enum ExecutionConfigUsagesEnum {
  * Configuration of the environment to use when calling Skaffold.
 **/
 export class ExecutionConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=artifactStorage" })
+  @SpeakeasyMetadata({ data: "json, name=artifactStorage" })
   artifactStorage?: string;
 
-  @Metadata({ data: "json, name=defaultPool" })
+  @SpeakeasyMetadata({ data: "json, name=defaultPool" })
   defaultPool?: DefaultPool;
 
-  @Metadata({ data: "json, name=executionTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=executionTimeout" })
   executionTimeout?: string;
 
-  @Metadata({ data: "json, name=privatePool" })
+  @SpeakeasyMetadata({ data: "json, name=privatePool" })
   privatePool?: PrivatePool;
 
-  @Metadata({ data: "json, name=serviceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
   serviceAccount?: string;
 
-  @Metadata({ data: "json, name=usages" })
+  @SpeakeasyMetadata({ data: "json, name=usages" })
   usages?: ExecutionConfigUsagesEnum[];
 
-  @Metadata({ data: "json, name=workerPool" })
+  @SpeakeasyMetadata({ data: "json, name=workerPool" })
   workerPool?: string;
 }

@@ -5,10 +5,6 @@ type CreateAuthorIfNotExistsForUsingPostQueryParams struct {
 	Name         *string `queryParam:"style=form,explode=true,name=name"`
 }
 
-type CreateAuthorIfNotExistsForUsingPostRequest struct {
-	QueryParams CreateAuthorIfNotExistsForUsingPostQueryParams
-}
-
 type CreateAuthorIfNotExistsForUsingPost200ApplicationJSONData struct {
 	AuthorID *string `json:"authorID,omitempty"`
 }
@@ -35,6 +31,10 @@ type CreateAuthorIfNotExistsForUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type CreateAuthorIfNotExistsForUsingPostRequest struct {
+	QueryParams CreateAuthorIfNotExistsForUsingPostQueryParams
 }
 
 type CreateAuthorIfNotExistsForUsingPostResponse struct {

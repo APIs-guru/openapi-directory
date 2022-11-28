@@ -1,5 +1,7 @@
 package shared
 
+// InventorySoftwarePackage
+// Software package information of the operating system.
 type InventorySoftwarePackage struct {
 	AptPackage         *InventoryVersionedPackage                  `json:"aptPackage,omitempty"`
 	CosPackage         *InventoryVersionedPackage                  `json:"cosPackage,omitempty"`

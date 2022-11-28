@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3BatchRunTestCasesRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The request message for TestCases.BatchRunTestCases.
 **/
 export class GoogleCloudDialogflowCxV3BatchRunTestCasesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environment" })
+  @SpeakeasyMetadata({ data: "json, name=environment" })
   environment?: string;
 
-  @Metadata({ data: "json, name=testCases" })
+  @SpeakeasyMetadata({ data: "json, name=testCases" })
   testCases?: string[];
 }

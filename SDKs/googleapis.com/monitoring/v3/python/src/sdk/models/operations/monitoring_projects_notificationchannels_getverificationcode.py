@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MonitoringProjectsNotificationChannelsGetVerificationCodePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class MonitoringProjectsNotificationChannelsGetVerificationCodeQueryParams:
 
 @dataclass
 class MonitoringProjectsNotificationChannelsGetVerificationCodeSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class MonitoringProjectsNotificationChannelsGetVerificationCodeSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,15 +44,15 @@ class MonitoringProjectsNotificationChannelsGetVerificationCodeSecurity:
 
 @dataclass
 class MonitoringProjectsNotificationChannelsGetVerificationCodeRequest:
-    path_params: MonitoringProjectsNotificationChannelsGetVerificationCodePathParams = field(default=None)
-    query_params: MonitoringProjectsNotificationChannelsGetVerificationCodeQueryParams = field(default=None)
+    path_params: MonitoringProjectsNotificationChannelsGetVerificationCodePathParams = field()
+    query_params: MonitoringProjectsNotificationChannelsGetVerificationCodeQueryParams = field()
+    security: MonitoringProjectsNotificationChannelsGetVerificationCodeSecurity = field()
     request: Optional[shared.GetNotificationChannelVerificationCodeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: MonitoringProjectsNotificationChannelsGetVerificationCodeSecurity = field(default=None)
     
 
 @dataclass
 class MonitoringProjectsNotificationChannelsGetVerificationCodeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_notification_channel_verification_code_response: Optional[shared.GetNotificationChannelVerificationCodeResponse] = field(default=None)
-    status_code: int = field(default=None)
     

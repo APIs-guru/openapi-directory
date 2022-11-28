@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var UpdateWorkloadPathParams = /** @class */ (function (_super) {
     __extends(UpdateWorkloadPathParams, _super);
@@ -30,7 +30,7 @@ var UpdateWorkloadPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=WorkloadId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=WorkloadId" }),
         __metadata("design:type", String)
     ], UpdateWorkloadPathParams.prototype, "workloadId", void 0);
     return UpdateWorkloadPathParams;
@@ -42,31 +42,31 @@ var UpdateWorkloadHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], UpdateWorkloadHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], UpdateWorkloadHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], UpdateWorkloadHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], UpdateWorkloadHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], UpdateWorkloadHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], UpdateWorkloadHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], UpdateWorkloadHeaders.prototype, "xAmzSignedHeaders", void 0);
     return UpdateWorkloadHeaders;
@@ -91,59 +91,59 @@ var UpdateWorkloadRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AccountIds" }),
+        SpeakeasyMetadata({ data: "json, name=AccountIds" }),
         __metadata("design:type", Array)
     ], UpdateWorkloadRequestBody.prototype, "accountIds", void 0);
     __decorate([
-        Metadata({ data: "json, name=ArchitecturalDesign" }),
+        SpeakeasyMetadata({ data: "json, name=ArchitecturalDesign" }),
         __metadata("design:type", String)
     ], UpdateWorkloadRequestBody.prototype, "architecturalDesign", void 0);
     __decorate([
-        Metadata({ data: "json, name=AwsRegions" }),
+        SpeakeasyMetadata({ data: "json, name=AwsRegions" }),
         __metadata("design:type", Array)
     ], UpdateWorkloadRequestBody.prototype, "awsRegions", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], UpdateWorkloadRequestBody.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=Environment" }),
+        SpeakeasyMetadata({ data: "json, name=Environment" }),
         __metadata("design:type", String)
     ], UpdateWorkloadRequestBody.prototype, "environment", void 0);
     __decorate([
-        Metadata({ data: "json, name=ImprovementStatus" }),
+        SpeakeasyMetadata({ data: "json, name=ImprovementStatus" }),
         __metadata("design:type", String)
     ], UpdateWorkloadRequestBody.prototype, "improvementStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=Industry" }),
+        SpeakeasyMetadata({ data: "json, name=Industry" }),
         __metadata("design:type", String)
     ], UpdateWorkloadRequestBody.prototype, "industry", void 0);
     __decorate([
-        Metadata({ data: "json, name=IndustryType" }),
+        SpeakeasyMetadata({ data: "json, name=IndustryType" }),
         __metadata("design:type", String)
     ], UpdateWorkloadRequestBody.prototype, "industryType", void 0);
     __decorate([
-        Metadata({ data: "json, name=IsReviewOwnerUpdateAcknowledged" }),
+        SpeakeasyMetadata({ data: "json, name=IsReviewOwnerUpdateAcknowledged" }),
         __metadata("design:type", Boolean)
     ], UpdateWorkloadRequestBody.prototype, "isReviewOwnerUpdateAcknowledged", void 0);
     __decorate([
-        Metadata({ data: "json, name=NonAwsRegions" }),
+        SpeakeasyMetadata({ data: "json, name=NonAwsRegions" }),
         __metadata("design:type", Array)
     ], UpdateWorkloadRequestBody.prototype, "nonAwsRegions", void 0);
     __decorate([
-        Metadata({ data: "json, name=Notes" }),
+        SpeakeasyMetadata({ data: "json, name=Notes" }),
         __metadata("design:type", String)
     ], UpdateWorkloadRequestBody.prototype, "notes", void 0);
     __decorate([
-        Metadata({ data: "json, name=PillarPriorities" }),
+        SpeakeasyMetadata({ data: "json, name=PillarPriorities" }),
         __metadata("design:type", Array)
     ], UpdateWorkloadRequestBody.prototype, "pillarPriorities", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReviewOwner" }),
+        SpeakeasyMetadata({ data: "json, name=ReviewOwner" }),
         __metadata("design:type", String)
     ], UpdateWorkloadRequestBody.prototype, "reviewOwner", void 0);
     __decorate([
-        Metadata({ data: "json, name=WorkloadName" }),
+        SpeakeasyMetadata({ data: "json, name=WorkloadName" }),
         __metadata("design:type", String)
     ], UpdateWorkloadRequestBody.prototype, "workloadName", void 0);
     return UpdateWorkloadRequestBody;
@@ -155,15 +155,15 @@ var UpdateWorkloadRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateWorkloadPathParams)
     ], UpdateWorkloadRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", UpdateWorkloadHeaders)
     ], UpdateWorkloadRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", UpdateWorkloadRequestBody)
     ], UpdateWorkloadRequest.prototype, "request", void 0);
     return UpdateWorkloadRequest;
@@ -175,39 +175,39 @@ var UpdateWorkloadResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateWorkloadResponse.prototype, "accessDeniedException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateWorkloadResponse.prototype, "conflictException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], UpdateWorkloadResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateWorkloadResponse.prototype, "internalServerException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateWorkloadResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], UpdateWorkloadResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateWorkloadResponse.prototype, "throttlingException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.UpdateWorkloadOutput)
     ], UpdateWorkloadResponse.prototype, "updateWorkloadOutput", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], UpdateWorkloadResponse.prototype, "validationException", void 0);
     return UpdateWorkloadResponse;

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SystemTemplateSummary } from "./systemtemplatesummary";
 
 
+
 export class UpdateSystemTemplateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: SystemTemplateSummary;
 }

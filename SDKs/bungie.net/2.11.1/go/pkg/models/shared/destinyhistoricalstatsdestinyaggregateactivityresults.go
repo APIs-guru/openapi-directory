@@ -1,0 +1,5 @@
+package shared
+
+type DestinyHistoricalStatsDestinyAggregateActivityResults struct {
+	Activities []DestinyHistoricalStatsDestinyAggregateActivityStats
+}

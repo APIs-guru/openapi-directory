@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SourceScoringConfigSourceImportanceEnum {
-    Default = "DEFAULT"
-,    Low = "LOW"
-,    High = "HIGH"
+    Default = "DEFAULT",
+    Low = "LOW",
+    High = "HIGH"
 }
 
 
@@ -12,6 +13,6 @@ export enum SourceScoringConfigSourceImportanceEnum {
  * Set the scoring configuration. This allows modifying the ranking of results for a source.
 **/
 export class SourceScoringConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sourceImportance" })
+  @SpeakeasyMetadata({ data: "json, name=sourceImportance" })
   sourceImportance?: SourceScoringConfigSourceImportanceEnum;
 }

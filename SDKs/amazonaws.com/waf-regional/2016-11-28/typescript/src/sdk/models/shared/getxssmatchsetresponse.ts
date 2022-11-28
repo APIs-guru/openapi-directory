@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { XssMatchSet } from "./xssmatchset";
+
 
 
 // GetXssMatchSetResponse
@@ -7,6 +8,6 @@ import { XssMatchSet } from "./xssmatchset";
  * The response to a <a>GetXssMatchSet</a> request.
 **/
 export class GetXssMatchSetResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=XssMatchSet" })
+  @SpeakeasyMetadata({ data: "json, name=XssMatchSet" })
   xssMatchSet?: XssMatchSet;
 }

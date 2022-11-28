@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CreateArtifactVersionPathParams:
-    artifact_id: str = field(default=None, metadata={'path_param': { 'field_name': 'artifactId', 'style': 'simple', 'explode': False }})
+    artifact_id: str = field(metadata={'path_param': { 'field_name': 'artifactId', 'style': 'simple', 'explode': False }})
     
 class CreateArtifactVersionXRegistryArtifactTypeEnum(str, Enum):
     AVRO = "AVRO"
@@ -28,15 +29,15 @@ class CreateArtifactVersionHeaders:
 
 @dataclass
 class CreateArtifactVersionRequest:
-    path_params: CreateArtifactVersionPathParams = field(default=None)
-    headers: CreateArtifactVersionHeaders = field(default=None)
-    request: bytes = field(default=None, metadata={'request': { 'media_type': '*/*' }})
+    headers: CreateArtifactVersionHeaders = field()
+    path_params: CreateArtifactVersionPathParams = field()
+    request: bytes = field(metadata={'request': { 'media_type': '*/*' }})
     
 
 @dataclass
 class CreateArtifactVersionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     version_meta_data: Optional[shared.VersionMetaData] = field(default=None)
     

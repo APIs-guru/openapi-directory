@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CrmResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=for_sale" })
+  @SpeakeasyMetadata({ data: "json, name=for_sale" })
   forSale?: string;
 }

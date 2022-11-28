@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class VideoSessionReferrer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=medium" })
+  @SpeakeasyMetadata({ data: "json, name=medium" })
   medium?: string;
 
-  @Metadata({ data: "json, name=searchTerm" })
+  @SpeakeasyMetadata({ data: "json, name=searchTerm" })
   searchTerm?: string;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

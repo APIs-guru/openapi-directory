@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SerDeInfo
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a serialization/deserialization program (SerDe) that serves as an extractor and loader.
 **/
 export class SerDeInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Parameters" })
+  @SpeakeasyMetadata({ data: "json, name=Parameters" })
   parameters?: Map<string, string>;
 
-  @Metadata({ data: "json, name=SerializationLibrary" })
+  @SpeakeasyMetadata({ data: "json, name=SerializationLibrary" })
   serializationLibrary?: string;
 }

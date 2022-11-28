@@ -1,52 +1,53 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetLicenseByIdQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=api_key" })
   apiKey: string;
 }
 
 
-export class GetLicenseByIdRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetLicenseByIdQueryParams;
-}
-
-
 export class GetLicenseById200ApplicationJsonLicensesLicense extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
 
 export class GetLicenseById200ApplicationJsonLicenses extends SpeakeasyBase {
-  @Metadata({ data: "json, name=license", elemType: operations.GetLicenseById200ApplicationJsonLicensesLicense })
+  @SpeakeasyMetadata({ data: "json, name=license", elemType: GetLicenseById200ApplicationJsonLicensesLicense })
   license?: GetLicenseById200ApplicationJsonLicensesLicense[];
 }
 
 
 export class GetLicenseById200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=licenses" })
+  @SpeakeasyMetadata({ data: "json, name=licenses" })
   licenses?: GetLicenseById200ApplicationJsonLicenses;
 
-  @Metadata({ data: "json, name=stat" })
+  @SpeakeasyMetadata({ data: "json, name=stat" })
   stat?: string;
 }
 
 
+export class GetLicenseByIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetLicenseByIdQueryParams;
+}
+
+
 export class GetLicenseByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getLicenseById200ApplicationJsonObject?: GetLicenseById200ApplicationJson;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ReferencedImageDetail
 /**
  * An object that describes the image tag details returned by a <a>DescribeImageTags</a> action.
@@ -33,23 +33,23 @@ var ReferencedImageDetail = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=artifactMediaType" }),
+        SpeakeasyMetadata({ data: "json, name=artifactMediaType" }),
         __metadata("design:type", String)
     ], ReferencedImageDetail.prototype, "artifactMediaType", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageDigest" }),
+        SpeakeasyMetadata({ data: "json, name=imageDigest" }),
         __metadata("design:type", String)
     ], ReferencedImageDetail.prototype, "imageDigest", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageManifestMediaType" }),
+        SpeakeasyMetadata({ data: "json, name=imageManifestMediaType" }),
         __metadata("design:type", String)
     ], ReferencedImageDetail.prototype, "imageManifestMediaType", void 0);
     __decorate([
-        Metadata({ data: "json, name=imagePushedAt" }),
+        SpeakeasyMetadata({ data: "json, name=imagePushedAt" }),
         __metadata("design:type", Date)
     ], ReferencedImageDetail.prototype, "imagePushedAt", void 0);
     __decorate([
-        Metadata({ data: "json, name=imageSizeInBytes" }),
+        SpeakeasyMetadata({ data: "json, name=imageSizeInBytes" }),
         __metadata("design:type", Number)
     ], ReferencedImageDetail.prototype, "imageSizeInBytes", void 0);
     return ReferencedImageDetail;

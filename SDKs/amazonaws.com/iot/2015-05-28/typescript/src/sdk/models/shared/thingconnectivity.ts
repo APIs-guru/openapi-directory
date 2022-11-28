@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ThingConnectivity
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The connectivity status of the thing.
 **/
 export class ThingConnectivity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connected" })
+  @SpeakeasyMetadata({ data: "json, name=connected" })
   connected?: boolean;
 
-  @Metadata({ data: "json, name=disconnectReason" })
+  @SpeakeasyMetadata({ data: "json, name=disconnectReason" })
   disconnectReason?: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: number;
 }

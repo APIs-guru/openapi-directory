@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class ConfirmPurchaseWithOfferPathParams:
-    platform: str = field(default=None, metadata={'path_param': { 'field_name': 'platform', 'style': 'simple', 'explode': False }})
+    platform: str = field(metadata={'path_param': { 'field_name': 'platform', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,21 +15,21 @@ class ConfirmPurchaseWithOfferQueryParams:
 
 @dataclass
 class ConfirmPurchaseWithOfferSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ConfirmPurchaseWithOfferRequest:
-    path_params: ConfirmPurchaseWithOfferPathParams = field(default=None)
-    query_params: ConfirmPurchaseWithOfferQueryParams = field(default=None)
-    request: shared.ItvPurchaseWithOfferRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: ConfirmPurchaseWithOfferSecurity = field(default=None)
+    path_params: ConfirmPurchaseWithOfferPathParams = field()
+    query_params: ConfirmPurchaseWithOfferQueryParams = field()
+    request: shared.ItvPurchaseWithOfferRequest = field(metadata={'request': { 'media_type': 'application/json' }})
+    security: ConfirmPurchaseWithOfferSecurity = field()
     
 
 @dataclass
 class ConfirmPurchaseWithOfferResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     itv_purchase_with_offer_response: Optional[shared.ItvPurchaseWithOfferResponse] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

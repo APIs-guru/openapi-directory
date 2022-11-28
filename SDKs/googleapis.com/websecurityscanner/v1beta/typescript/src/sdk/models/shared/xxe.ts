@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum XxePayloadLocationEnum {
-    LocationUnspecified = "LOCATION_UNSPECIFIED"
-,    CompleteRequestBody = "COMPLETE_REQUEST_BODY"
+    LocationUnspecified = "LOCATION_UNSPECIFIED",
+    CompleteRequestBody = "COMPLETE_REQUEST_BODY"
 }
 
 
@@ -11,9 +12,9 @@ export enum XxePayloadLocationEnum {
  * Information reported for an XXE.
 **/
 export class Xxe extends SpeakeasyBase {
-  @Metadata({ data: "json, name=payloadLocation" })
+  @SpeakeasyMetadata({ data: "json, name=payloadLocation" })
   payloadLocation?: XxePayloadLocationEnum;
 
-  @Metadata({ data: "json, name=payloadValue" })
+  @SpeakeasyMetadata({ data: "json, name=payloadValue" })
   payloadValue?: string;
 }

@@ -1,5 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApiResponseSongResponseResults
@@ -7,10 +7,10 @@ import * as shared from "../shared";
  * Song item.
 **/
 export class ApiResponseSongResponseResults extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
@@ -20,18 +20,18 @@ export class ApiResponseSongResponseResults extends SpeakeasyBase {
  * Contains the response data if the request was successful.
 **/
 export class ApiResponseSongResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=results", elemType: shared.ApiResponseSongResponseResults })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: ApiResponseSongResponseResults })
   results?: ApiResponseSongResponseResults[];
 }
 
 
 export class ApiResponseSong extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: boolean;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=response" })
+  @SpeakeasyMetadata({ data: "json, name=response" })
   response?: ApiResponseSongResponse;
 }

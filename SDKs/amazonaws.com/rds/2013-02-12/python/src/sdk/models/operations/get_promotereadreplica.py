@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetPromoteReadReplicaActionEnum(str, Enum):
     PROMOTE_READ_REPLICA = "PromoteReadReplica"
@@ -10,11 +14,11 @@ class GetPromoteReadReplicaVersionEnum(str, Enum):
 
 @dataclass
 class GetPromoteReadReplicaQueryParams:
-    action: GetPromoteReadReplicaActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetPromoteReadReplicaActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_instance_identifier: str = field(metadata={'query_param': { 'field_name': 'DBInstanceIdentifier', 'style': 'form', 'explode': True }})
+    version: GetPromoteReadReplicaVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     backup_retention_period: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'BackupRetentionPeriod', 'style': 'form', 'explode': True }})
-    db_instance_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'DBInstanceIdentifier', 'style': 'form', 'explode': True }})
     preferred_backup_window: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'PreferredBackupWindow', 'style': 'form', 'explode': True }})
-    version: GetPromoteReadReplicaVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetPromoteReadReplicaHeaders:
 
 @dataclass
 class GetPromoteReadReplicaRequest:
-    query_params: GetPromoteReadReplicaQueryParams = field(default=None)
-    headers: GetPromoteReadReplicaHeaders = field(default=None)
+    headers: GetPromoteReadReplicaHeaders = field()
+    query_params: GetPromoteReadReplicaQueryParams = field()
     
 
 @dataclass
 class GetPromoteReadReplicaResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

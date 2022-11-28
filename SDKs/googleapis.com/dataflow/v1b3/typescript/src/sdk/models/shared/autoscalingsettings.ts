@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AutoscalingSettingsAlgorithmEnum {
-    AutoscalingAlgorithmUnknown = "AUTOSCALING_ALGORITHM_UNKNOWN"
-,    AutoscalingAlgorithmNone = "AUTOSCALING_ALGORITHM_NONE"
-,    AutoscalingAlgorithmBasic = "AUTOSCALING_ALGORITHM_BASIC"
+    AutoscalingAlgorithmUnknown = "AUTOSCALING_ALGORITHM_UNKNOWN",
+    AutoscalingAlgorithmNone = "AUTOSCALING_ALGORITHM_NONE",
+    AutoscalingAlgorithmBasic = "AUTOSCALING_ALGORITHM_BASIC"
 }
 
 
@@ -12,9 +13,9 @@ export enum AutoscalingSettingsAlgorithmEnum {
  * Settings for WorkerPool autoscaling.
 **/
 export class AutoscalingSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=algorithm" })
+  @SpeakeasyMetadata({ data: "json, name=algorithm" })
   algorithm?: AutoscalingSettingsAlgorithmEnum;
 
-  @Metadata({ data: "json, name=maxNumWorkers" })
+  @SpeakeasyMetadata({ data: "json, name=maxNumWorkers" })
   maxNumWorkers?: number;
 }

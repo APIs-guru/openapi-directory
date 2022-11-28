@@ -1,5 +1,24 @@
 package shared
 
+// ParagraphElementInput
+// A ParagraphElement describes content within a Paragraph.
+type ParagraphElementInput struct {
+	AutoText            *AutoText            `json:"autoText,omitempty"`
+	ColumnBreak         *ColumnBreak         `json:"columnBreak,omitempty"`
+	EndIndex            *int32               `json:"endIndex,omitempty"`
+	Equation            *Equation            `json:"equation,omitempty"`
+	FootnoteReference   *FootnoteReference   `json:"footnoteReference,omitempty"`
+	HorizontalRule      *HorizontalRule      `json:"horizontalRule,omitempty"`
+	InlineObjectElement *InlineObjectElement `json:"inlineObjectElement,omitempty"`
+	PageBreak           *PageBreak           `json:"pageBreak,omitempty"`
+	Person              *PersonInput         `json:"person,omitempty"`
+	RichLink            *RichLinkInput       `json:"richLink,omitempty"`
+	StartIndex          *int32               `json:"startIndex,omitempty"`
+	TextRun             *TextRun             `json:"textRun,omitempty"`
+}
+
+// ParagraphElement
+// A ParagraphElement describes content within a Paragraph.
 type ParagraphElement struct {
 	AutoText            *AutoText            `json:"autoText,omitempty"`
 	ColumnBreak         *ColumnBreak         `json:"columnBreak,omitempty"`

@@ -25,7 +25,7 @@ type DisplayvideoAdvertisersCreateSecurity struct {
 
 type DisplayvideoAdvertisersCreateRequest struct {
 	QueryParams DisplayvideoAdvertisersCreateQueryParams
-	Request     *shared.Advertiser `request:"mediaType=application/json"`
+	Request     *shared.AdvertiserInput `request:"mediaType=application/json"`
 	Security    DisplayvideoAdvertisersCreateSecurity
 }
 

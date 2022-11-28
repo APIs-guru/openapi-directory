@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudApigeeV1SecurityReport
+// SecurityReport saves all the information about the created security report.
 type GoogleCloudApigeeV1SecurityReport struct {
 	Created            *string                                          `json:"created,omitempty"`
 	DisplayName        *string                                          `json:"displayName,omitempty"`

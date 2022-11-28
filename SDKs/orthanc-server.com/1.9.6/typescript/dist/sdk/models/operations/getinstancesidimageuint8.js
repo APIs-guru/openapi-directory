@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetInstancesIdImageUint8PathParams = /** @class */ (function (_super) {
     __extends(GetInstancesIdImageUint8PathParams, _super);
     function GetInstancesIdImageUint8PathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], GetInstancesIdImageUint8PathParams.prototype, "id", void 0);
     return GetInstancesIdImageUint8PathParams;
@@ -41,7 +41,7 @@ var GetInstancesIdImageUint8QueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quality" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quality" }),
         __metadata("design:type", Number)
     ], GetInstancesIdImageUint8QueryParams.prototype, "quality", void 0);
     return GetInstancesIdImageUint8QueryParams;
@@ -53,7 +53,7 @@ var GetInstancesIdImageUint8Headers = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Accept" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Accept" }),
         __metadata("design:type", String)
     ], GetInstancesIdImageUint8Headers.prototype, "accept", void 0);
     return GetInstancesIdImageUint8Headers;
@@ -65,15 +65,15 @@ var GetInstancesIdImageUint8Request = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetInstancesIdImageUint8PathParams)
     ], GetInstancesIdImageUint8Request.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetInstancesIdImageUint8QueryParams)
     ], GetInstancesIdImageUint8Request.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetInstancesIdImageUint8Headers)
     ], GetInstancesIdImageUint8Request.prototype, "headers", void 0);
     return GetInstancesIdImageUint8Request;
@@ -85,15 +85,15 @@ var GetInstancesIdImageUint8Response = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetInstancesIdImageUint8Response.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetInstancesIdImageUint8Response.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetInstancesIdImageUint8Response.prototype, "statusCode", void 0);
     return GetInstancesIdImageUint8Response;

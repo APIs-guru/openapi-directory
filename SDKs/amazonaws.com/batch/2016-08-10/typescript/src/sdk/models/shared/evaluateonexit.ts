@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RetryActionEnum } from "./retryactionenum";
+
 
 
 // EvaluateOnExit
@@ -7,15 +8,15 @@ import { RetryActionEnum } from "./retryactionenum";
  * Specifies a set of conditions to be met, and an action to take (<code>RETRY</code> or <code>EXIT</code>) if all conditions are met.
 **/
 export class EvaluateOnExit extends SpeakeasyBase {
-  @Metadata({ data: "json, name=action" })
+  @SpeakeasyMetadata({ data: "json, name=action" })
   action: RetryActionEnum;
 
-  @Metadata({ data: "json, name=onExitCode" })
+  @SpeakeasyMetadata({ data: "json, name=onExitCode" })
   onExitCode?: string;
 
-  @Metadata({ data: "json, name=onReason" })
+  @SpeakeasyMetadata({ data: "json, name=onReason" })
   onReason?: string;
 
-  @Metadata({ data: "json, name=onStatusReason" })
+  @SpeakeasyMetadata({ data: "json, name=onStatusReason" })
   onStatusReason?: string;
 }

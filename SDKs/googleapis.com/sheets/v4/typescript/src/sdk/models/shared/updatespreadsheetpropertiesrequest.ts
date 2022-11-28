@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SpreadsheetProperties } from "./spreadsheetproperties";
+
 
 
 // UpdateSpreadsheetPropertiesRequest
@@ -7,9 +8,9 @@ import { SpreadsheetProperties } from "./spreadsheetproperties";
  * Updates properties of a spreadsheet.
 **/
 export class UpdateSpreadsheetPropertiesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fields" })
+  @SpeakeasyMetadata({ data: "json, name=fields" })
   fields?: string;
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: SpreadsheetProperties;
 }

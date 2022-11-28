@@ -1,36 +1,37 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateGraphqlApiHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum CreateGraphqlApiRequestBodyAuthenticationTypeEnum {
-    ApiKey = "API_KEY"
-,    AwsIam = "AWS_IAM"
-,    AmazonCognitoUserPools = "AMAZON_COGNITO_USER_POOLS"
-,    OpenidConnect = "OPENID_CONNECT"
-,    AwsLambda = "AWS_LAMBDA"
+    ApiKey = "API_KEY",
+    AwsIam = "AWS_IAM",
+    AmazonCognitoUserPools = "AMAZON_COGNITO_USER_POOLS",
+    OpenidConnect = "OPENID_CONNECT",
+    AwsLambda = "AWS_LAMBDA"
 }
 
 
@@ -39,13 +40,13 @@ export enum CreateGraphqlApiRequestBodyAuthenticationTypeEnum {
  * A <code>LambdaAuthorizerConfig</code> holds configuration on how to authorize AppSync API access when using the <code>AWS_LAMBDA</code> authorizer mode. Be aware that an AppSync API may have only one Lambda authorizer configured at a time.
 **/
 export class CreateGraphqlApiRequestBodyLambdaAuthorizerConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorizerResultTtlInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerResultTtlInSeconds" })
   authorizerResultTtlInSeconds?: number;
 
-  @Metadata({ data: "json, name=authorizerUri" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerUri" })
   authorizerUri?: string;
 
-  @Metadata({ data: "json, name=identityValidationExpression" })
+  @SpeakeasyMetadata({ data: "json, name=identityValidationExpression" })
   identityValidationExpression?: string;
 }
 
@@ -55,13 +56,13 @@ export class CreateGraphqlApiRequestBodyLambdaAuthorizerConfig extends Speakeasy
  * The CloudWatch Logs configuration.
 **/
 export class CreateGraphqlApiRequestBodyLogConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudWatchLogsRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=cloudWatchLogsRoleArn" })
   cloudWatchLogsRoleArn?: string;
 
-  @Metadata({ data: "json, name=excludeVerboseContent" })
+  @SpeakeasyMetadata({ data: "json, name=excludeVerboseContent" })
   excludeVerboseContent?: boolean;
 
-  @Metadata({ data: "json, name=fieldLogLevel" })
+  @SpeakeasyMetadata({ data: "json, name=fieldLogLevel" })
   fieldLogLevel?: shared.FieldLogLevelEnum;
 }
 
@@ -71,16 +72,16 @@ export class CreateGraphqlApiRequestBodyLogConfig extends SpeakeasyBase {
  * Describes an OpenID Connect configuration.
 **/
 export class CreateGraphqlApiRequestBodyOpenIdConnectConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authTTL" })
+  @SpeakeasyMetadata({ data: "json, name=authTTL" })
   authTtl?: number;
 
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=iatTTL" })
+  @SpeakeasyMetadata({ data: "json, name=iatTTL" })
   iatTtl?: number;
 
-  @Metadata({ data: "json, name=issuer" })
+  @SpeakeasyMetadata({ data: "json, name=issuer" })
   issuer?: string;
 }
 
@@ -90,84 +91,84 @@ export class CreateGraphqlApiRequestBodyOpenIdConnectConfig extends SpeakeasyBas
  * Describes an Amazon Cognito user pool configuration.
 **/
 export class CreateGraphqlApiRequestBodyUserPoolConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appIdClientRegex" })
+  @SpeakeasyMetadata({ data: "json, name=appIdClientRegex" })
   appIdClientRegex?: string;
 
-  @Metadata({ data: "json, name=awsRegion" })
+  @SpeakeasyMetadata({ data: "json, name=awsRegion" })
   awsRegion?: string;
 
-  @Metadata({ data: "json, name=defaultAction" })
+  @SpeakeasyMetadata({ data: "json, name=defaultAction" })
   defaultAction?: shared.DefaultActionEnum;
 
-  @Metadata({ data: "json, name=userPoolId" })
+  @SpeakeasyMetadata({ data: "json, name=userPoolId" })
   userPoolId?: string;
 }
 
 
 export class CreateGraphqlApiRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalAuthenticationProviders", elemType: shared.AdditionalAuthenticationProvider })
+  @SpeakeasyMetadata({ data: "json, name=additionalAuthenticationProviders", elemType: shared.AdditionalAuthenticationProvider })
   additionalAuthenticationProviders?: shared.AdditionalAuthenticationProvider[];
 
-  @Metadata({ data: "json, name=authenticationType" })
+  @SpeakeasyMetadata({ data: "json, name=authenticationType" })
   authenticationType: CreateGraphqlApiRequestBodyAuthenticationTypeEnum;
 
-  @Metadata({ data: "json, name=lambdaAuthorizerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=lambdaAuthorizerConfig" })
   lambdaAuthorizerConfig?: CreateGraphqlApiRequestBodyLambdaAuthorizerConfig;
 
-  @Metadata({ data: "json, name=logConfig" })
+  @SpeakeasyMetadata({ data: "json, name=logConfig" })
   logConfig?: CreateGraphqlApiRequestBodyLogConfig;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=openIDConnectConfig" })
+  @SpeakeasyMetadata({ data: "json, name=openIDConnectConfig" })
   openIdConnectConfig?: CreateGraphqlApiRequestBodyOpenIdConnectConfig;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 
-  @Metadata({ data: "json, name=userPoolConfig" })
+  @SpeakeasyMetadata({ data: "json, name=userPoolConfig" })
   userPoolConfig?: CreateGraphqlApiRequestBodyUserPoolConfig;
 
-  @Metadata({ data: "json, name=xrayEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=xrayEnabled" })
   xrayEnabled?: boolean;
 }
 
 
 export class CreateGraphqlApiRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateGraphqlApiHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateGraphqlApiRequestBody;
 }
 
 
 export class CreateGraphqlApiResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   concurrentModificationException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createGraphqlApiResponse?: shared.CreateGraphqlApiResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   limitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 }

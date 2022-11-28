@@ -1,8 +1,9 @@
 
 
+
 export enum ChargeBearerEnum {
-    Debt = "DEBT"
-,    Cred = "CRED"
-,    Shar = "SHAR"
-,    Slev = "SLEV"
+    Debt = "DEBT",
+    Cred = "CRED",
+    Shar = "SHAR",
+    Slev = "SLEV"
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IapProjectsIapTunnelLocationsDestGroupsGetPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,20 +26,20 @@ class IapProjectsIapTunnelLocationsDestGroupsGetQueryParams:
 
 @dataclass
 class IapProjectsIapTunnelLocationsDestGroupsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IapProjectsIapTunnelLocationsDestGroupsGetRequest:
-    path_params: IapProjectsIapTunnelLocationsDestGroupsGetPathParams = field(default=None)
-    query_params: IapProjectsIapTunnelLocationsDestGroupsGetQueryParams = field(default=None)
-    security: IapProjectsIapTunnelLocationsDestGroupsGetSecurity = field(default=None)
+    path_params: IapProjectsIapTunnelLocationsDestGroupsGetPathParams = field()
+    query_params: IapProjectsIapTunnelLocationsDestGroupsGetQueryParams = field()
+    security: IapProjectsIapTunnelLocationsDestGroupsGetSecurity = field()
     
 
 @dataclass
 class IapProjectsIapTunnelLocationsDestGroupsGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     tunnel_dest_group: Optional[shared.TunnelDestGroup] = field(default=None)
     

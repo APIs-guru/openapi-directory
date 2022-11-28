@@ -8,10 +8,6 @@ type PostPortfolioAnalysisDrawdownsRequestBody struct {
 	Portfolios []PostPortfolioAnalysisDrawdownsRequestBodyPortfolios `json:"portfolios"`
 }
 
-type PostPortfolioAnalysisDrawdownsRequest struct {
-	Request PostPortfolioAnalysisDrawdownsRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioAnalysisDrawdowns200ApplicationJSONPortfoliosPortfolioWorstDrawdowns struct {
 	DrawdownBottom int64   `json:"drawdownBottom"`
 	DrawdownDepth  float64 `json:"drawdownDepth"`
@@ -26,6 +22,10 @@ type PostPortfolioAnalysisDrawdowns200ApplicationJSONPortfolios struct {
 
 type PostPortfolioAnalysisDrawdowns200ApplicationJSON struct {
 	Portfolios []PostPortfolioAnalysisDrawdowns200ApplicationJSONPortfolios `json:"portfolios"`
+}
+
+type PostPortfolioAnalysisDrawdownsRequest struct {
+	Request PostPortfolioAnalysisDrawdownsRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioAnalysisDrawdownsResponse struct {

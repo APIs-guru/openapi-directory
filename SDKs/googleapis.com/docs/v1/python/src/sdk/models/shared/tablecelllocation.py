@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import location
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TableCellLocation:
-    column_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'columnIndex' }})
-    row_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rowIndex' }})
-    table_start_location: Optional[location.Location] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tableStartLocation' }})
+    r"""TableCellLocation
+    Location of a single cell within a table.
+    """
+    
+    column_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('columnIndex') }})
+    row_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rowIndex') }})
+    table_start_location: Optional[Location] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tableStartLocation') }})
     

@@ -1,5 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { PubsubInput } from "./pubsub";
 import { Pubsub } from "./pubsub";
+
+
+
+// TransportInput
+/** 
+ * Represents the transport intermediaries created for the trigger to deliver events.
+**/
+export class TransportInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=pubsub" })
+  pubsub?: PubsubInput;
+}
 
 
 // Transport
@@ -7,6 +19,6 @@ import { Pubsub } from "./pubsub";
  * Represents the transport intermediaries created for the trigger to deliver events.
 **/
 export class Transport extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pubsub" })
+  @SpeakeasyMetadata({ data: "json, name=pubsub" })
   pubsub?: Pubsub;
 }

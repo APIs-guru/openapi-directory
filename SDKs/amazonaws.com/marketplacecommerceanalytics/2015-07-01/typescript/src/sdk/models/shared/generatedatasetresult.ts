@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GenerateDataSetResult
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Container for the result of the GenerateDataSet operation.
 **/
 export class GenerateDataSetResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataSetRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=dataSetRequestId" })
   dataSetRequestId?: string;
 }

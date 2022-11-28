@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import mavenartifact
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListMavenArtifactsResponse:
-    maven_artifacts: Optional[List[mavenartifact.MavenArtifact]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mavenArtifacts' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""ListMavenArtifactsResponse
+    The response from listing maven artifacts.
+    """
+    
+    maven_artifacts: Optional[List[MavenArtifact]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mavenArtifacts') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

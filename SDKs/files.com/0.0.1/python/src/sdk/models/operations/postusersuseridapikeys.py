@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class PostUsersUserIDAPIKeysPathParams:
-    user_id: int = field(default=None, metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
+    user_id: int = field(metadata={'path_param': { 'field_name': 'user_id', 'style': 'simple', 'explode': False }})
     
 class PostUsersUserIDAPIKeysRequestBodyPermissionSetEnum(str, Enum):
     NONE = "none"
@@ -29,13 +30,13 @@ class PostUsersUserIDAPIKeysRequestBody:
 
 @dataclass
 class PostUsersUserIDAPIKeysRequest:
-    path_params: PostUsersUserIDAPIKeysPathParams = field(default=None)
+    path_params: PostUsersUserIDAPIKeysPathParams = field()
     request: Optional[PostUsersUserIDAPIKeysRequestBody] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PostUsersUserIDAPIKeysResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_key_entity: Optional[shared.APIKeyEntity] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

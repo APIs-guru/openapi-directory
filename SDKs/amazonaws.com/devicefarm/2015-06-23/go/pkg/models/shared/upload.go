@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Upload
+// An app or a set of one or more tests to upload or that have been uploaded.
 type Upload struct {
 	Arn         *string             `json:"arn,omitempty"`
 	Category    *UploadCategoryEnum `json:"category,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetSuggestionsTypeEnum;
 (function (GetSuggestionsTypeEnum) {
     GetSuggestionsTypeEnum["Entity"] = "entity";
@@ -37,7 +37,7 @@ var GetSuggestionsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=type" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=type" }),
         __metadata("design:type", String)
     ], GetSuggestionsPathParams.prototype, "type", void 0);
     return GetSuggestionsPathParams;
@@ -49,19 +49,19 @@ var GetSuggestionsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=app_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=app_token" }),
         __metadata("design:type", String)
     ], GetSuggestionsQueryParams.prototype, "appToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], GetSuggestionsQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=query" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" }),
         __metadata("design:type", String)
     ], GetSuggestionsQueryParams.prototype, "query", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=variable_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=variable_id" }),
         __metadata("design:type", String)
     ], GetSuggestionsQueryParams.prototype, "variableId", void 0);
     return GetSuggestionsQueryParams;
@@ -73,7 +73,7 @@ var GetSuggestionsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-App-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-App-Token" }),
         __metadata("design:type", String)
     ], GetSuggestionsHeaders.prototype, "xAppToken", void 0);
     return GetSuggestionsHeaders;
@@ -85,15 +85,15 @@ var GetSuggestionsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSuggestionsPathParams)
     ], GetSuggestionsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSuggestionsQueryParams)
     ], GetSuggestionsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetSuggestionsHeaders)
     ], GetSuggestionsRequest.prototype, "headers", void 0);
     return GetSuggestionsRequest;
@@ -105,11 +105,11 @@ var GetSuggestionsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetSuggestionsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetSuggestionsResponse.prototype, "statusCode", void 0);
     return GetSuggestionsResponse;

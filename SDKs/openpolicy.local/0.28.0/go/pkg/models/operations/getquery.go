@@ -11,10 +11,6 @@ type GetQueryQueryParams struct {
 	Q       string  `queryParam:"style=form,explode=true,name=q"`
 }
 
-type GetQueryRequest struct {
-	QueryParams GetQueryQueryParams
-}
-
 type GetQuery200ApplicationJSONExplanationLocalsKey struct {
 	Type  *string `json:"type,omitempty"`
 	Value *string `json:"value,omitempty"`
@@ -35,6 +31,9 @@ type GetQuery200ApplicationJSONExplanationNodeTerms struct {
 	Value *string `json:"value,omitempty"`
 }
 
+// GetQuery200ApplicationJSONExplanationNode
+// The AST element associated with the evaluation step.
+// https://godoc.org/github.com/open-policy-agent/opa/ast - AST
 type GetQuery200ApplicationJSONExplanationNode struct {
 	Index *float64                                         `json:"index,omitempty"`
 	Terms []GetQuery200ApplicationJSONExplanationNodeTerms `json:"terms,omitempty"`
@@ -95,6 +94,10 @@ type GetQuery200ApplicationJSON struct {
 	Explanation []GetQuery200ApplicationJSONExplanation `json:"explanation,omitempty"`
 	Metrics     *GetQuery200ApplicationJSONMetrics      `json:"metrics,omitempty"`
 	Result      []interface{}                           `json:"result,omitempty"`
+}
+
+type GetQueryRequest struct {
+	QueryParams GetQueryQueryParams
 }
 
 type GetQueryResponse struct {

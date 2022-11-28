@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssetModelStatus } from "./assetmodelstatus";
 
 
+
 export class CreateAssetModelResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assetModelArn" })
+  @SpeakeasyMetadata({ data: "json, name=assetModelArn" })
   assetModelArn: string;
 
-  @Metadata({ data: "json, name=assetModelId" })
+  @SpeakeasyMetadata({ data: "json, name=assetModelId" })
   assetModelId: string;
 
-  @Metadata({ data: "json, name=assetModelStatus" })
+  @SpeakeasyMetadata({ data: "json, name=assetModelStatus" })
   assetModelStatus: AssetModelStatus;
 }

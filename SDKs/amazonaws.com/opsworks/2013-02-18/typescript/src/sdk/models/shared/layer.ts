@@ -1,11 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchLogsConfiguration } from "./cloudwatchlogsconfiguration";
-import { Recipes } from "./recipes";
 import { Recipes } from "./recipes";
 import { LifecycleEventConfiguration } from "./lifecycleeventconfiguration";
 import { LayerTypeEnum } from "./layertypeenum";
 import { VolumeConfiguration } from "./volumeconfiguration";
+
 
 
 // Layer
@@ -13,72 +12,72 @@ import { VolumeConfiguration } from "./volumeconfiguration";
  * Describes a layer.
 **/
 export class Layer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Arn" })
+  @SpeakeasyMetadata({ data: "json, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "json, name=Attributes" })
+  @SpeakeasyMetadata({ data: "json, name=Attributes" })
   attributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=AutoAssignElasticIps" })
+  @SpeakeasyMetadata({ data: "json, name=AutoAssignElasticIps" })
   autoAssignElasticIps?: boolean;
 
-  @Metadata({ data: "json, name=AutoAssignPublicIps" })
+  @SpeakeasyMetadata({ data: "json, name=AutoAssignPublicIps" })
   autoAssignPublicIps?: boolean;
 
-  @Metadata({ data: "json, name=CloudWatchLogsConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchLogsConfiguration" })
   cloudWatchLogsConfiguration?: CloudWatchLogsConfiguration;
 
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: string;
 
-  @Metadata({ data: "json, name=CustomInstanceProfileArn" })
+  @SpeakeasyMetadata({ data: "json, name=CustomInstanceProfileArn" })
   customInstanceProfileArn?: string;
 
-  @Metadata({ data: "json, name=CustomJson" })
+  @SpeakeasyMetadata({ data: "json, name=CustomJson" })
   customJson?: string;
 
-  @Metadata({ data: "json, name=CustomRecipes" })
+  @SpeakeasyMetadata({ data: "json, name=CustomRecipes" })
   customRecipes?: Recipes;
 
-  @Metadata({ data: "json, name=CustomSecurityGroupIds" })
+  @SpeakeasyMetadata({ data: "json, name=CustomSecurityGroupIds" })
   customSecurityGroupIds?: string[];
 
-  @Metadata({ data: "json, name=DefaultRecipes" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultRecipes" })
   defaultRecipes?: Recipes;
 
-  @Metadata({ data: "json, name=DefaultSecurityGroupNames" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultSecurityGroupNames" })
   defaultSecurityGroupNames?: string[];
 
-  @Metadata({ data: "json, name=EnableAutoHealing" })
+  @SpeakeasyMetadata({ data: "json, name=EnableAutoHealing" })
   enableAutoHealing?: boolean;
 
-  @Metadata({ data: "json, name=InstallUpdatesOnBoot" })
+  @SpeakeasyMetadata({ data: "json, name=InstallUpdatesOnBoot" })
   installUpdatesOnBoot?: boolean;
 
-  @Metadata({ data: "json, name=LayerId" })
+  @SpeakeasyMetadata({ data: "json, name=LayerId" })
   layerId?: string;
 
-  @Metadata({ data: "json, name=LifecycleEventConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=LifecycleEventConfiguration" })
   lifecycleEventConfiguration?: LifecycleEventConfiguration;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Packages" })
+  @SpeakeasyMetadata({ data: "json, name=Packages" })
   packages?: string[];
 
-  @Metadata({ data: "json, name=Shortname" })
+  @SpeakeasyMetadata({ data: "json, name=Shortname" })
   shortname?: string;
 
-  @Metadata({ data: "json, name=StackId" })
+  @SpeakeasyMetadata({ data: "json, name=StackId" })
   stackId?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: LayerTypeEnum;
 
-  @Metadata({ data: "json, name=UseEbsOptimizedInstances" })
+  @SpeakeasyMetadata({ data: "json, name=UseEbsOptimizedInstances" })
   useEbsOptimizedInstances?: boolean;
 
-  @Metadata({ data: "json, name=VolumeConfigurations", elemType: shared.VolumeConfiguration })
+  @SpeakeasyMetadata({ data: "json, name=VolumeConfigurations", elemType: VolumeConfiguration })
   volumeConfigurations?: VolumeConfiguration[];
 }

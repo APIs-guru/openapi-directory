@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MetricsNameEnum } from "./metricsnameenum";
-import { MetricsNameEnum } from "./metricsnameenum";
+
 
 
 // EnhancedMonitoringOutput
@@ -8,12 +8,12 @@ import { MetricsNameEnum } from "./metricsnameenum";
  * Represents the output for <a>EnableEnhancedMonitoring</a> and <a>DisableEnhancedMonitoring</a>.
 **/
 export class EnhancedMonitoringOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CurrentShardLevelMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=CurrentShardLevelMetrics" })
   currentShardLevelMetrics?: MetricsNameEnum[];
 
-  @Metadata({ data: "json, name=DesiredShardLevelMetrics" })
+  @SpeakeasyMetadata({ data: "json, name=DesiredShardLevelMetrics" })
   desiredShardLevelMetrics?: MetricsNameEnum[];
 
-  @Metadata({ data: "json, name=StreamName" })
+  @SpeakeasyMetadata({ data: "json, name=StreamName" })
   streamName?: string;
 }

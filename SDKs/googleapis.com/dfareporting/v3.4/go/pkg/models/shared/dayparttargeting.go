@@ -12,6 +12,8 @@ const (
 	DayPartTargetingDaysOfWeekEnumSunday    DayPartTargetingDaysOfWeekEnum = "SUNDAY"
 )
 
+// DayPartTargeting
+// Day Part Targeting.
 type DayPartTargeting struct {
 	DaysOfWeek    []DayPartTargetingDaysOfWeekEnum `json:"daysOfWeek,omitempty"`
 	HoursOfDay    []int32                          `json:"hoursOfDay,omitempty"`

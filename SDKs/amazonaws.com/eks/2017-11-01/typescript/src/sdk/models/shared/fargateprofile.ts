@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FargateProfileSelector } from "./fargateprofileselector";
 import { FargateProfileStatusEnum } from "./fargateprofilestatusenum";
+
 
 
 // FargateProfile
@@ -9,30 +9,30 @@ import { FargateProfileStatusEnum } from "./fargateprofilestatusenum";
  * An object representing an Fargate profile.
 **/
 export class FargateProfile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterName" })
+  @SpeakeasyMetadata({ data: "json, name=clusterName" })
   clusterName?: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=fargateProfileArn" })
+  @SpeakeasyMetadata({ data: "json, name=fargateProfileArn" })
   fargateProfileArn?: string;
 
-  @Metadata({ data: "json, name=fargateProfileName" })
+  @SpeakeasyMetadata({ data: "json, name=fargateProfileName" })
   fargateProfileName?: string;
 
-  @Metadata({ data: "json, name=podExecutionRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=podExecutionRoleArn" })
   podExecutionRoleArn?: string;
 
-  @Metadata({ data: "json, name=selectors", elemType: shared.FargateProfileSelector })
+  @SpeakeasyMetadata({ data: "json, name=selectors", elemType: FargateProfileSelector })
   selectors?: FargateProfileSelector[];
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: FargateProfileStatusEnum;
 
-  @Metadata({ data: "json, name=subnets" })
+  @SpeakeasyMetadata({ data: "json, name=subnets" })
   subnets?: string[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }

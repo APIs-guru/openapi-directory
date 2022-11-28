@@ -1,21 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum DomainRecordTagEnum {
-    Issue = "issue"
-,    Issuewild = "issuewild"
-,    Iodef = "iodef"
+    Issue = "issue",
+    Issuewild = "issuewild",
+    Iodef = "iodef"
 }
 
 export enum DomainRecordTypeEnum {
-    A = "A"
-,    Aaaa = "AAAA"
-,    Ns = "NS"
-,    Mx = "MX"
-,    Cname = "CNAME"
-,    Txt = "TXT"
-,    Srv = "SRV"
-,    Ptr = "PTR"
-,    Caa = "CAA"
+    A = "A",
+    Aaaa = "AAAA",
+    Ns = "NS",
+    Mx = "MX",
+    Cname = "CNAME",
+    Txt = "TXT",
+    Srv = "SRV",
+    Ptr = "PTR",
+    Caa = "CAA"
 }
 
 
@@ -25,42 +26,80 @@ export enum DomainRecordTypeEnum {
  * 
 **/
 export class DomainRecord extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority?: number;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol?: string;
 
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service?: string;
 
-  @Metadata({ data: "json, name=tag" })
+  @SpeakeasyMetadata({ data: "json, name=tag" })
   tag?: DomainRecordTagEnum;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target?: string;
 
-  @Metadata({ data: "json, name=ttl_sec" })
+  @SpeakeasyMetadata({ data: "json, name=ttl_sec" })
   ttlSec?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: DomainRecordTypeEnum;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: Date;
 
-  @Metadata({ data: "json, name=weight" })
+  @SpeakeasyMetadata({ data: "json, name=weight" })
+  weight?: number;
+}
+
+
+// DomainRecordInput
+/** 
+ * A single record on a Domain.
+ * 
+**/
+export class DomainRecordInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=port" })
+  port?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=priority" })
+  priority?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
+  protocol?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=service" })
+  service?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=tag" })
+  tag?: DomainRecordTagEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=target" })
+  target?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=ttl_sec" })
+  ttlSec?: number;
+
+  @SpeakeasyMetadata({ data: "json, name=type" })
+  type?: DomainRecordTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=weight" })
   weight?: number;
 }

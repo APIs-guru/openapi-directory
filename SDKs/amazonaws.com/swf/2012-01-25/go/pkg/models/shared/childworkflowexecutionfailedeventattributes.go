@@ -1,5 +1,7 @@
 package shared
 
+// ChildWorkflowExecutionFailedEventAttributes
+// Provides the details of the <code>ChildWorkflowExecutionFailed</code> event.
 type ChildWorkflowExecutionFailedEventAttributes struct {
 	Details           *string           `json:"details,omitempty"`
 	InitiatedEventID  int64             `json:"initiatedEventId"`

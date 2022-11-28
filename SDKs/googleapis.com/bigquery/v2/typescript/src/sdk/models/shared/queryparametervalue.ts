@@ -1,16 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { QueryParameterValue } from "./queryparametervalue";
-import { QueryParameterValue } from "./queryparametervalue";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class QueryParameterValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arrayValues", elemType: shared.QueryParameterValue })
+  @SpeakeasyMetadata({ data: "json, name=arrayValues", elemType: QueryParameterValue })
   arrayValues?: QueryParameterValue[];
 
-  @Metadata({ data: "json, name=structValues", elemType: shared.QueryParameterValue })
+  @SpeakeasyMetadata({ data: "json, name=structValues", elemType: QueryParameterValue })
   structValues?: Map<string, QueryParameterValue>;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

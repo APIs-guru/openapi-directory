@@ -1,8 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import softwarepackage
-from . import softwarepackage
+from sdk import utils
+from . import *
 
 class ItemOriginTypeEnum(str, Enum):
     ORIGIN_TYPE_UNSPECIFIED = "ORIGIN_TYPE_UNSPECIFIED"
@@ -17,11 +21,15 @@ class ItemTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Item:
-    available_package: Optional[softwarepackage.SoftwarePackage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'availablePackage' }})
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    installed_package: Optional[softwarepackage.SoftwarePackage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'installedPackage' }})
-    origin_type: Optional[ItemOriginTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'originType' }})
-    type: Optional[ItemTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
+    r"""Item
+    A single piece of inventory on a VM.
+    """
+    
+    available_package: Optional[SoftwarePackage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('availablePackage') }})
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('id') }})
+    installed_package: Optional[SoftwarePackage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('installedPackage') }})
+    origin_type: Optional[ItemOriginTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('originType') }})
+    type: Optional[ItemTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitAdminV2OAuthResponseType } from "./googlecloudidentitytoolkitadminv2oauthresponsetype";
 // GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig
 /**
@@ -34,31 +34,31 @@ var GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=clientId" }),
+        SpeakeasyMetadata({ data: "json, name=clientId" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig.prototype, "clientId", void 0);
     __decorate([
-        Metadata({ data: "json, name=clientSecret" }),
+        SpeakeasyMetadata({ data: "json, name=clientSecret" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig.prototype, "clientSecret", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=enabled" }),
+        SpeakeasyMetadata({ data: "json, name=enabled" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig.prototype, "enabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=issuer" }),
+        SpeakeasyMetadata({ data: "json, name=issuer" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig.prototype, "issuer", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=responseType" }),
+        SpeakeasyMetadata({ data: "json, name=responseType" }),
         __metadata("design:type", GoogleCloudIdentitytoolkitAdminV2OAuthResponseType)
     ], GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig.prototype, "responseType", void 0);
     return GoogleCloudIdentitytoolkitAdminV2OAuthIdpConfig;

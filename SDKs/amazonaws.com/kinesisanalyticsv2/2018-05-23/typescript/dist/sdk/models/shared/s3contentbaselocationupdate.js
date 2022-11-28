@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // S3ContentBaseLocationUpdate
 /**
  * The information required to update the S3 base location that holds the application.
@@ -33,11 +33,11 @@ var S3ContentBaseLocationUpdate = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=BasePathUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=BasePathUpdate" }),
         __metadata("design:type", String)
     ], S3ContentBaseLocationUpdate.prototype, "basePathUpdate", void 0);
     __decorate([
-        Metadata({ data: "json, name=BucketARNUpdate" }),
+        SpeakeasyMetadata({ data: "json, name=BucketARNUpdate" }),
         __metadata("design:type", String)
     ], S3ContentBaseLocationUpdate.prototype, "bucketArnUpdate", void 0);
     return S3ContentBaseLocationUpdate;

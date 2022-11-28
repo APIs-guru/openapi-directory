@@ -1,45 +1,46 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Credentials } from "./credentials";
 import { Name } from "./name";
 
 
+
 export class Teacher extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: string;
 
-  @Metadata({ data: "json, name=credentials" })
+  @SpeakeasyMetadata({ data: "json, name=credentials" })
   credentials?: Credentials;
 
-  @Metadata({ data: "json, name=district" })
+  @SpeakeasyMetadata({ data: "json, name=district" })
   district?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=last_modified" })
+  @SpeakeasyMetadata({ data: "json, name=last_modified" })
   lastModified?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: Name;
 
-  @Metadata({ data: "json, name=school" })
+  @SpeakeasyMetadata({ data: "json, name=school" })
   school?: string;
 
-  @Metadata({ data: "json, name=schools" })
+  @SpeakeasyMetadata({ data: "json, name=schools" })
   schools?: string[];
 
-  @Metadata({ data: "json, name=sis_id" })
+  @SpeakeasyMetadata({ data: "json, name=sis_id" })
   sisId?: string;
 
-  @Metadata({ data: "json, name=state_id" })
+  @SpeakeasyMetadata({ data: "json, name=state_id" })
   stateId?: string;
 
-  @Metadata({ data: "json, name=teacher_number" })
+  @SpeakeasyMetadata({ data: "json, name=teacher_number" })
   teacherNumber?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

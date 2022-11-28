@@ -1,5 +1,7 @@
 package shared
 
+// CreatePipelineInput
+// Contains the parameters for CreatePipeline.
 type CreatePipelineInput struct {
 	Description *string `json:"description,omitempty"`
 	Name        string  `json:"name"`

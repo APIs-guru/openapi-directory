@@ -1,5 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { CloudSqlPropertiesInput } from "./cloudsqlproperties";
 import { CloudSqlProperties } from "./cloudsqlproperties";
+
+
+
+// ConnectionInput
+/** 
+ * Configuration parameters to establish connection with an external data source, except the credential attributes.
+**/
+export class ConnectionInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=cloudSql" })
+  cloudSql?: CloudSqlPropertiesInput;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=friendlyName" })
+  friendlyName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+}
 
 
 // Connection
@@ -7,24 +28,24 @@ import { CloudSqlProperties } from "./cloudsqlproperties";
  * Configuration parameters to establish connection with an external data source, except the credential attributes.
 **/
 export class Connection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cloudSql" })
+  @SpeakeasyMetadata({ data: "json, name=cloudSql" })
   cloudSql?: CloudSqlProperties;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=friendlyName" })
+  @SpeakeasyMetadata({ data: "json, name=friendlyName" })
   friendlyName?: string;
 
-  @Metadata({ data: "json, name=hasCredential" })
+  @SpeakeasyMetadata({ data: "json, name=hasCredential" })
   hasCredential?: boolean;
 
-  @Metadata({ data: "json, name=lastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedTime" })
   lastModifiedTime?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

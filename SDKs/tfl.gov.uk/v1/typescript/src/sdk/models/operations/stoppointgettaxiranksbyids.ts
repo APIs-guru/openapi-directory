@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class StopPointGetTaxiRanksByIdsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=stopPointId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=stopPointId" })
   stopPointId: string;
 }
 
 
 export class StopPointGetTaxiRanksByIdsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: StopPointGetTaxiRanksByIdsPathParams;
 }
 
 
 export class StopPointGetTaxiRanksByIdsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TflApiPresentationEntitiesPlace })
+  @SpeakeasyMetadata({ elemType: shared.TflApiPresentationEntitiesPlace })
   tflApiPresentationEntitiesPlaces?: shared.TflApiPresentationEntitiesPlace[];
 }

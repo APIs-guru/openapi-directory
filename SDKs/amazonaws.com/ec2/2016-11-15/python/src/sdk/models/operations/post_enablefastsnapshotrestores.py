@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostEnableFastSnapshotRestoresActionEnum(str, Enum):
     ENABLE_FAST_SNAPSHOT_RESTORES = "EnableFastSnapshotRestores"
@@ -10,8 +14,8 @@ class PostEnableFastSnapshotRestoresVersionEnum(str, Enum):
 
 @dataclass
 class PostEnableFastSnapshotRestoresQueryParams:
-    action: PostEnableFastSnapshotRestoresActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostEnableFastSnapshotRestoresVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostEnableFastSnapshotRestoresActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostEnableFastSnapshotRestoresVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostEnableFastSnapshotRestoresHeaders:
 
 @dataclass
 class PostEnableFastSnapshotRestoresRequest:
-    query_params: PostEnableFastSnapshotRestoresQueryParams = field(default=None)
-    headers: PostEnableFastSnapshotRestoresHeaders = field(default=None)
+    headers: PostEnableFastSnapshotRestoresHeaders = field()
+    query_params: PostEnableFastSnapshotRestoresQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostEnableFastSnapshotRestoresResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

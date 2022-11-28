@@ -142,6 +142,8 @@ const (
 	PartOfSpeechVoiceEnumPassive      PartOfSpeechVoiceEnum = "PASSIVE"
 )
 
+// PartOfSpeech
+// Represents part of speech information for a token.
 type PartOfSpeech struct {
 	Aspect      *PartOfSpeechAspectEnum      `json:"aspect,omitempty"`
 	Case        *PartOfSpeechCaseEnum        `json:"case,omitempty"`

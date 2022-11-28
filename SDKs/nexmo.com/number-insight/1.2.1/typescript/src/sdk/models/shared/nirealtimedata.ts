@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NiRealtimeData
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Real time data about the `number`
 **/
 export class NiRealtimeData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=active_status" })
+  @SpeakeasyMetadata({ data: "json, name=active_status" })
   activeStatus?: string;
 
-  @Metadata({ data: "json, name=handset_status" })
+  @SpeakeasyMetadata({ data: "json, name=handset_status" })
   handsetStatus?: string;
 }

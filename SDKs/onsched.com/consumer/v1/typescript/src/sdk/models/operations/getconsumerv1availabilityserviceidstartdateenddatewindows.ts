@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetConsumerV1AvailabilityServiceIdStartDateEndDateWindowsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=endDate" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=endDate" })
   endDate: Date;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=serviceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=serviceId" })
   serviceId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=startDate" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=startDate" })
   startDate: Date;
 }
 
 
 export class GetConsumerV1AvailabilityServiceIdStartDateEndDateWindowsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=destination" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=destination" })
   destination?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=duration" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=duration" })
   duration?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=interval" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=interval" })
   interval?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=locationId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locationId" })
   locationId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=resourceGroupId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=resourceGroupId" })
   resourceGroupId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=resourceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=resourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=resourceIds" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=resourceIds" })
   resourceIds?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=roundRobin" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=roundRobin" })
   roundRobin?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=tzOffset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tzOffset" })
   tzOffset?: number;
 }
 
 
 export class GetConsumerV1AvailabilityServiceIdStartDateEndDateWindowsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetConsumerV1AvailabilityServiceIdStartDateEndDateWindowsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetConsumerV1AvailabilityServiceIdStartDateEndDateWindowsQueryParams;
 }
 
 
 export class GetConsumerV1AvailabilityServiceIdStartDateEndDateWindowsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   windowAvailabilityViewModel?: shared.WindowAvailabilityViewModel;
 }

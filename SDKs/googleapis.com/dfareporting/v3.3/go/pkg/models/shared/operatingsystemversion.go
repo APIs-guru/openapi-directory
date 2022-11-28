@@ -1,5 +1,7 @@
 package shared
 
+// OperatingSystemVersion
+// Contains information about a particular version of an operating system that can be targeted by ads.
 type OperatingSystemVersion struct {
 	ID              *string          `json:"id,omitempty"`
 	Kind            *string          `json:"kind,omitempty"`

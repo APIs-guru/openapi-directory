@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlanResourceKeyVaultProperties } from "./planresourcekeyvaultproperties";
 
 
+
 export class PlanResourceEncryptionProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=keySource" })
+  @SpeakeasyMetadata({ data: "json, name=keySource" })
   keySource?: string;
 
-  @Metadata({ data: "json, name=keyVaultProperties" })
+  @SpeakeasyMetadata({ data: "json, name=keyVaultProperties" })
   keyVaultProperties?: PlanResourceKeyVaultProperties;
 }

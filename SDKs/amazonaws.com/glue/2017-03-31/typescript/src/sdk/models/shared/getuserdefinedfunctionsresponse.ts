@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserDefinedFunction } from "./userdefinedfunction";
 
 
+
 export class GetUserDefinedFunctionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=UserDefinedFunctions", elemType: shared.UserDefinedFunction })
+  @SpeakeasyMetadata({ data: "json, name=UserDefinedFunctions", elemType: UserDefinedFunction })
   userDefinedFunctions?: UserDefinedFunction[];
 }

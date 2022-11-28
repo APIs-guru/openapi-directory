@@ -8,10 +8,6 @@ type GetInlineScriptTagsSecurity struct {
 	OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
 }
 
-type GetInlineScriptTagsRequest struct {
-	Security GetInlineScriptTagsSecurity
-}
-
 type GetInlineScriptTags200ApplicationJSONInlineScriptTagsDisplayScopeEnum string
 
 const (
@@ -39,6 +35,10 @@ type GetInlineScriptTags200ApplicationJSONInlineScriptTags struct {
 
 type GetInlineScriptTags200ApplicationJSON struct {
 	InlineScriptTags []GetInlineScriptTags200ApplicationJSONInlineScriptTags `json:"inline_script_tags,omitempty"`
+}
+
+type GetInlineScriptTagsRequest struct {
+	Security GetInlineScriptTagsSecurity
 }
 
 type GetInlineScriptTagsResponse struct {

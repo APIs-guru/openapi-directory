@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DocumentVersionInfo
+// Version information about the document.
 type DocumentVersionInfo struct {
 	CreatedDate       *time.Time          `json:"CreatedDate,omitempty"`
 	DisplayName       *string             `json:"DisplayName,omitempty"`

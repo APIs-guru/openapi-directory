@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetIpTxtResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   dateTimeTextResponse?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorTextResponse?: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -18,6 +18,8 @@ const (
 	VideoTargetingTargetedPositionTypesEnumPostroll                VideoTargetingTargetedPositionTypesEnum = "POSTROLL"
 )
 
+// VideoTargeting
+// Represents targeting information about video.
 type VideoTargeting struct {
 	ExcludedPositionTypes []VideoTargetingExcludedPositionTypesEnum `json:"excludedPositionTypes,omitempty"`
 	TargetedPositionTypes []VideoTargetingTargetedPositionTypesEnum `json:"targetedPositionTypes,omitempty"`

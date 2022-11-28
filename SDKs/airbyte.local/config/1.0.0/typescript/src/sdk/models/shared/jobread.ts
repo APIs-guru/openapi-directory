@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { JobConfigTypeEnum } from "./jobconfigtypeenum";
 import { JobStatusEnum } from "./jobstatusenum";
 
 
+
 export class JobRead extends SpeakeasyBase {
-  @Metadata({ data: "json, name=configId" })
+  @SpeakeasyMetadata({ data: "json, name=configId" })
   configId: string;
 
-  @Metadata({ data: "json, name=configType" })
+  @SpeakeasyMetadata({ data: "json, name=configType" })
   configType: JobConfigTypeEnum;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: JobStatusEnum;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt: number;
 }

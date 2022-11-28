@@ -1,9 +1,11 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class InvoiceRecurringAPIModelDayOfWeekEnum(str, Enum):
     SUNDAY = "Sunday"
@@ -30,14 +32,18 @@ class InvoiceRecurringAPIModelStatusEnum(str, Enum):
 @dataclass_json
 @dataclass
 class InvoiceRecurringAPIModel:
-    day_of_month: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DayOfMonth' }})
-    day_of_week: Optional[InvoiceRecurringAPIModelDayOfWeekEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DayOfWeek' }})
-    due_date_in_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DueDateInDays' }})
-    end_of_recurrance: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EndOfRecurrance', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    month: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Month' }})
-    recurrance_pattern: Optional[InvoiceRecurringAPIModelRecurrancePatternEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RecurrancePattern' }})
-    recurrance_value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RecurranceValue' }})
-    start_of_recurrance: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartOfRecurrance', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    status: Optional[InvoiceRecurringAPIModelStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Status' }})
-    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Title' }})
+    r"""InvoiceRecurringAPIModel
+    Definition of invoice recurring profile
+    """
+    
+    day_of_month: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DayOfMonth') }})
+    day_of_week: Optional[InvoiceRecurringAPIModelDayOfWeekEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DayOfWeek') }})
+    due_date_in_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DueDateInDays') }})
+    end_of_recurrance: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EndOfRecurrance'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    month: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Month') }})
+    recurrance_pattern: Optional[InvoiceRecurringAPIModelRecurrancePatternEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RecurrancePattern') }})
+    recurrance_value: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RecurranceValue') }})
+    start_of_recurrance: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StartOfRecurrance'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    status: Optional[InvoiceRecurringAPIModelStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Status') }})
+    title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Title') }})
     

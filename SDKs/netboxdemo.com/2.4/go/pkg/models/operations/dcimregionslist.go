@@ -14,15 +14,15 @@ type DcimRegionsListQueryParams struct {
 	Slug     *string `queryParam:"style=form,explode=true,name=slug"`
 }
 
-type DcimRegionsListRequest struct {
-	QueryParams DcimRegionsListQueryParams
-}
-
 type DcimRegionsList200ApplicationJSON struct {
 	Count    int64           `json:"count"`
 	Next     *string         `json:"next,omitempty"`
 	Previous *string         `json:"previous,omitempty"`
 	Results  []shared.Region `json:"results"`
+}
+
+type DcimRegionsListRequest struct {
+	QueryParams DcimRegionsListQueryParams
 }
 
 type DcimRegionsListResponse struct {

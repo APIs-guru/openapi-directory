@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class AppliedInventoriesTagsForServiceOfferingPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class AppliedInventoriesTagsForServiceOfferingRequest:
-    path_params: AppliedInventoriesTagsForServiceOfferingPathParams = field(default=None)
-    request: shared.AppliedInventoriesParametersServicePlan = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: AppliedInventoriesTagsForServiceOfferingPathParams = field()
+    request: shared.AppliedInventoriesParametersServicePlan = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AppliedInventoriesTagsForServiceOfferingResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     tags: Optional[List[shared.Tag]] = field(default=None)
     

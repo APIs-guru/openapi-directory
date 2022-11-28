@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IncludeConditions
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * JSON template for an Analytics Remarketing Include Conditions.
 **/
 export class IncludeConditions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=daysToLookBack" })
+  @SpeakeasyMetadata({ data: "json, name=daysToLookBack" })
   daysToLookBack?: number;
 
-  @Metadata({ data: "json, name=isSmartList" })
+  @SpeakeasyMetadata({ data: "json, name=isSmartList" })
   isSmartList?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=membershipDurationDays" })
+  @SpeakeasyMetadata({ data: "json, name=membershipDurationDays" })
   membershipDurationDays?: number;
 
-  @Metadata({ data: "json, name=segment" })
+  @SpeakeasyMetadata({ data: "json, name=segment" })
   segment?: string;
 }

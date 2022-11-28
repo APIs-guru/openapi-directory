@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetCommitteeCommitteeIDHistoryCyclePathParams:
-    committee_id: str = field(default=None, metadata={'path_param': { 'field_name': 'committee_id', 'style': 'simple', 'explode': False }})
-    cycle: int = field(default=None, metadata={'path_param': { 'field_name': 'cycle', 'style': 'simple', 'explode': False }})
+    committee_id: str = field(metadata={'path_param': { 'field_name': 'committee_id', 'style': 'simple', 'explode': False }})
+    cycle: int = field(metadata={'path_param': { 'field_name': 'cycle', 'style': 'simple', 'explode': False }})
     
 class GetCommitteeCommitteeIDHistoryCycleDesignationEnum(str, Enum):
     UNKNOWN = ""
@@ -20,7 +21,7 @@ class GetCommitteeCommitteeIDHistoryCycleDesignationEnum(str, Enum):
 
 @dataclass
 class GetCommitteeCommitteeIDHistoryCycleQueryParams:
-    api_key: str = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
+    api_key: str = field(metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     designation: Optional[List[GetCommitteeCommitteeIDHistoryCycleDesignationEnum]] = field(default=None, metadata={'query_param': { 'field_name': 'designation', 'style': 'form', 'explode': True }})
     election_full: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'election_full', 'style': 'form', 'explode': True }})
     page: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'page', 'style': 'form', 'explode': True }})
@@ -33,13 +34,13 @@ class GetCommitteeCommitteeIDHistoryCycleQueryParams:
 
 @dataclass
 class GetCommitteeCommitteeIDHistoryCycleRequest:
-    path_params: GetCommitteeCommitteeIDHistoryCyclePathParams = field(default=None)
-    query_params: GetCommitteeCommitteeIDHistoryCycleQueryParams = field(default=None)
+    path_params: GetCommitteeCommitteeIDHistoryCyclePathParams = field()
+    query_params: GetCommitteeCommitteeIDHistoryCycleQueryParams = field()
     
 
 @dataclass
 class GetCommitteeCommitteeIDHistoryCycleResponse:
+    content_type: str = field()
+    status_code: int = field()
     committee_history_page: Optional[shared.CommitteeHistoryPage] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

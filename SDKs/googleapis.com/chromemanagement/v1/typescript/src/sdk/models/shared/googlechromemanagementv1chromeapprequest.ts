@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleChromeManagementV1ChromeAppRequest
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details of an app installation request.
 **/
 export class GoogleChromeManagementV1ChromeAppRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appDetails" })
+  @SpeakeasyMetadata({ data: "json, name=appDetails" })
   appDetails?: string;
 
-  @Metadata({ data: "json, name=appId" })
+  @SpeakeasyMetadata({ data: "json, name=appId" })
   appId?: string;
 
-  @Metadata({ data: "json, name=detailUri" })
+  @SpeakeasyMetadata({ data: "json, name=detailUri" })
   detailUri?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=iconUri" })
+  @SpeakeasyMetadata({ data: "json, name=iconUri" })
   iconUri?: string;
 
-  @Metadata({ data: "json, name=latestRequestTime" })
+  @SpeakeasyMetadata({ data: "json, name=latestRequestTime" })
   latestRequestTime?: string;
 
-  @Metadata({ data: "json, name=requestCount" })
+  @SpeakeasyMetadata({ data: "json, name=requestCount" })
   requestCount?: string;
 }

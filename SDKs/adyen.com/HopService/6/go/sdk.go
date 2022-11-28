@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://cal-test.adyen.com/cal/services/Hop/v6",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// PostGetOnboardingURL - Get a link to a Adyen-hosted onboarding page.
+// Returns a link to an Adyen-hosted onboarding page (HOP) that you can send to your account holder. For more information on how to use HOP, refer to [Hosted onboarding](https://docs.adyen.com/platforms/hosted-onboarding-page).
 func (s *SDK) PostGetOnboardingURL(ctx context.Context, request operations.PostGetOnboardingURLRequest) (*operations.PostGetOnboardingURLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getOnboardingUrl"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -66,7 +89,7 @@ func (s *SDK) PostGetOnboardingURL(ctx context.Context, request operations.PostG
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -146,8 +169,12 @@ func (s *SDK) PostGetOnboardingURL(ctx context.Context, request operations.PostG
 	return res, nil
 }
 
+// PostGetPciQuestionnaireURL - Get a link to a PCI compliance questionnaire.
+// Returns a link to a PCI compliance questionnaire that you can send to your account holder.
+//
+//	> You should only use this endpoint if you have a [partner platform setup](https://docs.adyen.com/platforms/platforms-for-partners).
 func (s *SDK) PostGetPciQuestionnaireURL(ctx context.Context, request operations.PostGetPciQuestionnaireURLRequest) (*operations.PostGetPciQuestionnaireURLResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getPciQuestionnaireUrl"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -162,7 +189,7 @@ func (s *SDK) PostGetPciQuestionnaireURL(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

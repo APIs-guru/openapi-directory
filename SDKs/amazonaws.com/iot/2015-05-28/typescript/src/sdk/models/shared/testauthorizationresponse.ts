@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthResult } from "./authresult";
 
 
+
 export class TestAuthorizationResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authResults", elemType: shared.AuthResult })
+  @SpeakeasyMetadata({ data: "json, name=authResults", elemType: AuthResult })
   authResults?: AuthResult[];
 }

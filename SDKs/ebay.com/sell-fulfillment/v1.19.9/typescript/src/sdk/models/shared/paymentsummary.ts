@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Payment } from "./payment";
 import { OrderRefund } from "./orderrefund";
 import { Amount } from "./amount";
+
 
 
 // PaymentSummary
@@ -10,12 +10,12 @@ import { Amount } from "./amount";
  * This type contains information about the various monetary exchanges that apply to the net balance due for the order.
 **/
 export class PaymentSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=payments", elemType: shared.Payment })
+  @SpeakeasyMetadata({ data: "json, name=payments", elemType: Payment })
   payments?: Payment[];
 
-  @Metadata({ data: "json, name=refunds", elemType: shared.OrderRefund })
+  @SpeakeasyMetadata({ data: "json, name=refunds", elemType: OrderRefund })
   refunds?: OrderRefund[];
 
-  @Metadata({ data: "json, name=totalDueSeller" })
+  @SpeakeasyMetadata({ data: "json, name=totalDueSeller" })
   totalDueSeller?: Amount;
 }

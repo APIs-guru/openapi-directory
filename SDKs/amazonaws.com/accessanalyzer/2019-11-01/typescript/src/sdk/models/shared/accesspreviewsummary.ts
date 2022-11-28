@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessPreviewStatusEnum } from "./accesspreviewstatusenum";
 import { AccessPreviewStatusReason } from "./accesspreviewstatusreason";
+
 
 
 // AccessPreviewSummary
@@ -8,18 +9,18 @@ import { AccessPreviewStatusReason } from "./accesspreviewstatusreason";
  * Contains a summary of information about an access preview.
 **/
 export class AccessPreviewSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analyzerArn" })
+  @SpeakeasyMetadata({ data: "json, name=analyzerArn" })
   analyzerArn: string;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: AccessPreviewStatusEnum;
 
-  @Metadata({ data: "json, name=statusReason" })
+  @SpeakeasyMetadata({ data: "json, name=statusReason" })
   statusReason?: AccessPreviewStatusReason;
 }

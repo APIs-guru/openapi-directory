@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class AlbumAPIDeletePathParams:
-    id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: int = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,12 +14,12 @@ class AlbumAPIDeleteQueryParams:
 
 @dataclass
 class AlbumAPIDeleteRequest:
-    path_params: AlbumAPIDeletePathParams = field(default=None)
-    query_params: AlbumAPIDeleteQueryParams = field(default=None)
+    path_params: AlbumAPIDeletePathParams = field()
+    query_params: AlbumAPIDeleteQueryParams = field()
     
 
 @dataclass
 class AlbumAPIDeleteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDisableVpcClassicLinkDNSSupportActionEnum(str, Enum):
     DISABLE_VPC_CLASSIC_LINK_DNS_SUPPORT = "DisableVpcClassicLinkDnsSupport"
@@ -10,8 +14,8 @@ class GetDisableVpcClassicLinkDNSSupportVersionEnum(str, Enum):
 
 @dataclass
 class GetDisableVpcClassicLinkDNSSupportQueryParams:
-    action: GetDisableVpcClassicLinkDNSSupportActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: GetDisableVpcClassicLinkDNSSupportVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDisableVpcClassicLinkDNSSupportActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDisableVpcClassicLinkDNSSupportVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     vpc_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'VpcId', 'style': 'form', 'explode': True }})
     
 
@@ -28,13 +32,13 @@ class GetDisableVpcClassicLinkDNSSupportHeaders:
 
 @dataclass
 class GetDisableVpcClassicLinkDNSSupportRequest:
-    query_params: GetDisableVpcClassicLinkDNSSupportQueryParams = field(default=None)
-    headers: GetDisableVpcClassicLinkDNSSupportHeaders = field(default=None)
+    headers: GetDisableVpcClassicLinkDNSSupportHeaders = field()
+    query_params: GetDisableVpcClassicLinkDNSSupportQueryParams = field()
     
 
 @dataclass
 class GetDisableVpcClassicLinkDNSSupportResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

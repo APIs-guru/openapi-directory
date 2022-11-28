@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UploadFileQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=FolderId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=FolderId" })
   folderId?: string;
 }
 
 
 export class UploadFileHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=xero-tenant-id" })
   xeroTenantId: string;
 }
 
 
 export class UploadFileRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=body" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=body" })
   body?: string;
 
-  @Metadata({ data: "multipart_form, name=filename" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=filename" })
   filename?: string;
 
-  @Metadata({ data: "multipart_form, name=mimeType" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=mimeType" })
   mimeType?: string;
 
-  @Metadata({ data: "multipart_form, name=name" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=name" })
   name?: string;
 }
 
 
 export class UploadFileSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oAuth2: shared.SchemeOAuth2;
 }
 
 
 export class UploadFileRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UploadFileQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UploadFileHeaders;
 
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request?: UploadFileRequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UploadFileSecurity;
 }
 
 
 export class UploadFileResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fileObject?: shared.FileObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

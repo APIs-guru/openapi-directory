@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetStartVpcEndpointServicePrivateDNSVerificationActionEnum(str, Enum):
     START_VPC_ENDPOINT_SERVICE_PRIVATE_DNS_VERIFICATION = "StartVpcEndpointServicePrivateDnsVerification"
@@ -10,10 +14,10 @@ class GetStartVpcEndpointServicePrivateDNSVerificationVersionEnum(str, Enum):
 
 @dataclass
 class GetStartVpcEndpointServicePrivateDNSVerificationQueryParams:
-    action: GetStartVpcEndpointServicePrivateDNSVerificationActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetStartVpcEndpointServicePrivateDNSVerificationActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    service_id: str = field(metadata={'query_param': { 'field_name': 'ServiceId', 'style': 'form', 'explode': True }})
+    version: GetStartVpcEndpointServicePrivateDNSVerificationVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    service_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ServiceId', 'style': 'form', 'explode': True }})
-    version: GetStartVpcEndpointServicePrivateDNSVerificationVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetStartVpcEndpointServicePrivateDNSVerificationHeaders:
 
 @dataclass
 class GetStartVpcEndpointServicePrivateDNSVerificationRequest:
-    query_params: GetStartVpcEndpointServicePrivateDNSVerificationQueryParams = field(default=None)
-    headers: GetStartVpcEndpointServicePrivateDNSVerificationHeaders = field(default=None)
+    headers: GetStartVpcEndpointServicePrivateDNSVerificationHeaders = field()
+    query_params: GetStartVpcEndpointServicePrivateDNSVerificationQueryParams = field()
     
 
 @dataclass
 class GetStartVpcEndpointServicePrivateDNSVerificationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListThingPrincipalsPathParams:
-    thing_name: str = field(default=None, metadata={'path_param': { 'field_name': 'thingName', 'style': 'simple', 'explode': False }})
+    thing_name: str = field(metadata={'path_param': { 'field_name': 'thingName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +30,20 @@ class ListThingPrincipalsHeaders:
 
 @dataclass
 class ListThingPrincipalsRequest:
-    path_params: ListThingPrincipalsPathParams = field(default=None)
-    query_params: ListThingPrincipalsQueryParams = field(default=None)
-    headers: ListThingPrincipalsHeaders = field(default=None)
+    headers: ListThingPrincipalsHeaders = field()
+    path_params: ListThingPrincipalsPathParams = field()
+    query_params: ListThingPrincipalsQueryParams = field()
     
 
 @dataclass
 class ListThingPrincipalsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     list_thing_principals_response: Optional[shared.ListThingPrincipalsResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

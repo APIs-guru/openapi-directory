@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComplianceSummaryByResourceType } from "./compliancesummarybyresourcetype";
+
 
 
 // GetComplianceSummaryByResourceTypeResponse
@@ -8,6 +8,6 @@ import { ComplianceSummaryByResourceType } from "./compliancesummarybyresourcety
  * <p/>
 **/
 export class GetComplianceSummaryByResourceTypeResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComplianceSummariesByResourceType", elemType: shared.ComplianceSummaryByResourceType })
+  @SpeakeasyMetadata({ data: "json, name=ComplianceSummariesByResourceType", elemType: ComplianceSummaryByResourceType })
   complianceSummariesByResourceType?: ComplianceSummaryByResourceType[];
 }

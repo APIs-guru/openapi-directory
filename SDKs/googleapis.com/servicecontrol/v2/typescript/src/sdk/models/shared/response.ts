@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Response
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * This message defines attributes for a typical network response. It generally models semantics of an HTTP response.
 **/
 export class Response extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backendLatency" })
+  @SpeakeasyMetadata({ data: "json, name=backendLatency" })
   backendLatency?: string;
 
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=headers" })
+  @SpeakeasyMetadata({ data: "json, name=headers" })
   headers?: Map<string, string>;
 
-  @Metadata({ data: "json, name=size" })
+  @SpeakeasyMetadata({ data: "json, name=size" })
   size?: string;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: string;
 }

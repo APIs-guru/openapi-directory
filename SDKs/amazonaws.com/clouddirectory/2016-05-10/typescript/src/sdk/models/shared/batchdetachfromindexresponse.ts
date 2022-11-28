@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchDetachFromIndexResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the output of a <a>DetachFromIndex</a> response operation.
 **/
 export class BatchDetachFromIndexResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DetachedObjectIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=DetachedObjectIdentifier" })
   detachedObjectIdentifier?: string;
 }

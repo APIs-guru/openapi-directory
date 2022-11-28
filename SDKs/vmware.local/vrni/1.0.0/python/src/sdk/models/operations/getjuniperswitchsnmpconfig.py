@@ -5,23 +5,23 @@ from sdk.models import shared
 
 @dataclass
 class GetJuniperSwitchSnmpConfigPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetJuniperSwitchSnmpConfigSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetJuniperSwitchSnmpConfigRequest:
-    path_params: GetJuniperSwitchSnmpConfigPathParams = field(default=None)
-    security: GetJuniperSwitchSnmpConfigSecurity = field(default=None)
+    path_params: GetJuniperSwitchSnmpConfigPathParams = field()
+    security: GetJuniperSwitchSnmpConfigSecurity = field()
     
 
 @dataclass
 class GetJuniperSwitchSnmpConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     snmp_config: Optional[shared.SnmpConfig] = field(default=None)
-    status_code: int = field(default=None)
     

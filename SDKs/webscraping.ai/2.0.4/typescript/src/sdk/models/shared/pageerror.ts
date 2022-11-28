@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PageError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status_code" })
+  @SpeakeasyMetadata({ data: "json, name=status_code" })
   statusCode?: number;
 
-  @Metadata({ data: "json, name=status_message" })
+  @SpeakeasyMetadata({ data: "json, name=status_message" })
   statusMessage?: string;
 }

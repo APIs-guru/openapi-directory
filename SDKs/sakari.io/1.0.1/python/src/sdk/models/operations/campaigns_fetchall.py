@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class CampaignsFetchAllPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,20 +17,20 @@ class CampaignsFetchAllQueryParams:
 
 @dataclass
 class CampaignsFetchAllSecurity:
-    sakari_auth: shared.SchemeSakariAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    sakari_auth: shared.SchemeSakariAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CampaignsFetchAllRequest:
-    path_params: CampaignsFetchAllPathParams = field(default=None)
-    query_params: CampaignsFetchAllQueryParams = field(default=None)
-    security: CampaignsFetchAllSecurity = field(default=None)
+    path_params: CampaignsFetchAllPathParams = field()
+    query_params: CampaignsFetchAllQueryParams = field()
+    security: CampaignsFetchAllSecurity = field()
     
 
 @dataclass
 class CampaignsFetchAllResponse:
+    content_type: str = field()
+    status_code: int = field()
     campaigns_response: Optional[shared.CampaignsResponse] = field(default=None)
-    content_type: str = field(default=None)
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -18,6 +18,8 @@ const (
 	EntityTypeEnumPrice        EntityTypeEnum = "PRICE"
 )
 
+// Entity
+// Represents a phrase in the text that is a known entity, such as a person, an organization, or location. The API associates information, such as salience and mentions, with entities.
 type Entity struct {
 	Mentions  []EntityMention   `json:"mentions,omitempty"`
 	Metadata  map[string]string `json:"metadata,omitempty"`

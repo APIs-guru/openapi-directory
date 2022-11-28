@@ -22,19 +22,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AssetPropertyValue } from "./assetpropertyvalue";
 var GetAssetPropertyValueHistoryResponse = /** @class */ (function (_super) {
     __extends(GetAssetPropertyValueHistoryResponse, _super);
     function GetAssetPropertyValueHistoryResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=assetPropertyValueHistory", elemType: shared.AssetPropertyValue }),
+        SpeakeasyMetadata({ data: "json, name=assetPropertyValueHistory", elemType: AssetPropertyValue }),
         __metadata("design:type", Array)
     ], GetAssetPropertyValueHistoryResponse.prototype, "assetPropertyValueHistory", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], GetAssetPropertyValueHistoryResponse.prototype, "nextToken", void 0);
     return GetAssetPropertyValueHistoryResponse;

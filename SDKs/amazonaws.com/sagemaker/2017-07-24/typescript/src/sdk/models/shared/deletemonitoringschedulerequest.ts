@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteMonitoringScheduleRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MonitoringScheduleName" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringScheduleName" })
   monitoringScheduleName: string;
 }

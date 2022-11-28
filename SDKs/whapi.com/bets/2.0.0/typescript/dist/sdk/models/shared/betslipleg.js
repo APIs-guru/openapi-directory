@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Betslippart } from "./betslippart";
 var Betslipleg = /** @class */ (function (_super) {
     __extends(Betslipleg, _super);
     function Betslipleg() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=parts", elemType: shared.Betslippart }),
+        SpeakeasyMetadata({ data: "json, name=parts", elemType: Betslippart }),
         __metadata("design:type", Array)
     ], Betslipleg.prototype, "parts", void 0);
     __decorate([
-        Metadata({ data: "json, name=sort" }),
+        SpeakeasyMetadata({ data: "json, name=sort" }),
         __metadata("design:type", String)
     ], Betslipleg.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], Betslipleg.prototype, "type", void 0);
     return Betslipleg;

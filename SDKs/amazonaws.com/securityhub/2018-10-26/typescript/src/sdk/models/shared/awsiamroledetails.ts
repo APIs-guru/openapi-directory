@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsIamAttachedManagedPolicy } from "./awsiamattachedmanagedpolicy";
 import { AwsIamInstanceProfile } from "./awsiaminstanceprofile";
 import { AwsIamPermissionsBoundary } from "./awsiampermissionsboundary";
 import { AwsIamRolePolicy } from "./awsiamrolepolicy";
+
 
 
 // AwsIamRoleDetails
@@ -11,33 +11,33 @@ import { AwsIamRolePolicy } from "./awsiamrolepolicy";
  * Contains information about an IAM role, including all of the role's policies.
 **/
 export class AwsIamRoleDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssumeRolePolicyDocument" })
+  @SpeakeasyMetadata({ data: "json, name=AssumeRolePolicyDocument" })
   assumeRolePolicyDocument?: string;
 
-  @Metadata({ data: "json, name=AttachedManagedPolicies", elemType: shared.AwsIamAttachedManagedPolicy })
+  @SpeakeasyMetadata({ data: "json, name=AttachedManagedPolicies", elemType: AwsIamAttachedManagedPolicy })
   attachedManagedPolicies?: AwsIamAttachedManagedPolicy[];
 
-  @Metadata({ data: "json, name=CreateDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreateDate" })
   createDate?: string;
 
-  @Metadata({ data: "json, name=InstanceProfileList", elemType: shared.AwsIamInstanceProfile })
+  @SpeakeasyMetadata({ data: "json, name=InstanceProfileList", elemType: AwsIamInstanceProfile })
   instanceProfileList?: AwsIamInstanceProfile[];
 
-  @Metadata({ data: "json, name=MaxSessionDuration" })
+  @SpeakeasyMetadata({ data: "json, name=MaxSessionDuration" })
   maxSessionDuration?: number;
 
-  @Metadata({ data: "json, name=Path" })
+  @SpeakeasyMetadata({ data: "json, name=Path" })
   path?: string;
 
-  @Metadata({ data: "json, name=PermissionsBoundary" })
+  @SpeakeasyMetadata({ data: "json, name=PermissionsBoundary" })
   permissionsBoundary?: AwsIamPermissionsBoundary;
 
-  @Metadata({ data: "json, name=RoleId" })
+  @SpeakeasyMetadata({ data: "json, name=RoleId" })
   roleId?: string;
 
-  @Metadata({ data: "json, name=RoleName" })
+  @SpeakeasyMetadata({ data: "json, name=RoleName" })
   roleName?: string;
 
-  @Metadata({ data: "json, name=RolePolicyList", elemType: shared.AwsIamRolePolicy })
+  @SpeakeasyMetadata({ data: "json, name=RolePolicyList", elemType: AwsIamRolePolicy })
   rolePolicyList?: AwsIamRolePolicy[];
 }

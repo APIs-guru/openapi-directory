@@ -1,15 +1,20 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
-from . import apigatewaystatus
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ApigatewayOperation:
-    done: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'done' }})
-    error: Optional[apigatewaystatus.ApigatewayStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    metadata: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    response: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'response' }})
+    r"""ApigatewayOperation
+    This resource represents a long-running operation that is the result of a network API call.
+    """
+    
+    done: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('done') }})
+    error: Optional[ApigatewayStatus] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('error') }})
+    metadata: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metadata') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    response: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('response') }})
     

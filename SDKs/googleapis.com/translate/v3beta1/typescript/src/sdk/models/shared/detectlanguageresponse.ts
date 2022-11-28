@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DetectedLanguage } from "./detectedlanguage";
+
 
 
 // DetectLanguageResponse
@@ -8,6 +8,6 @@ import { DetectedLanguage } from "./detectedlanguage";
  * The response message for language detection.
 **/
 export class DetectLanguageResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=languages", elemType: shared.DetectedLanguage })
+  @SpeakeasyMetadata({ data: "json, name=languages", elemType: DetectedLanguage })
   languages?: DetectedLanguage[];
 }

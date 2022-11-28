@@ -1,53 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PutServersIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class PutServersIdUpdateServerRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, any>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }
 
 
-export class PutServersIdRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PutServersIdPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PutServersIdUpdateServerRequest;
-}
-
-
 export class PutServersId200ApplicationJsonServerDatacenterLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=network_zone" })
+  @SpeakeasyMetadata({ data: "json, name=network_zone" })
   networkZone: string;
 }
 
@@ -57,13 +49,13 @@ export class PutServersId200ApplicationJsonServerDatacenterLocation extends Spea
  * The Server types the Datacenter can handle
 **/
 export class PutServersId200ApplicationJsonServerDatacenterServerTypes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=available" })
+  @SpeakeasyMetadata({ data: "json, name=available" })
   available: number[];
 
-  @Metadata({ data: "json, name=available_for_migration" })
+  @SpeakeasyMetadata({ data: "json, name=available_for_migration" })
   availableForMigration: number[];
 
-  @Metadata({ data: "json, name=supported" })
+  @SpeakeasyMetadata({ data: "json, name=supported" })
   supported: number[];
 }
 
@@ -73,19 +65,19 @@ export class PutServersId200ApplicationJsonServerDatacenterServerTypes extends S
  * Datacenter this Resource is located at
 **/
 export class PutServersId200ApplicationJsonServerDatacenter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location: PutServersId200ApplicationJsonServerDatacenterLocation;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=server_types" })
+  @SpeakeasyMetadata({ data: "json, name=server_types" })
   serverTypes: PutServersId200ApplicationJsonServerDatacenterServerTypes;
 }
 
@@ -95,19 +87,19 @@ export class PutServersId200ApplicationJsonServerDatacenter extends SpeakeasyBas
  * Information about the Server the Image was created from
 **/
 export class PutServersId200ApplicationJsonServerImageCreatedFrom extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 }
 
 export enum PutServersId200ApplicationJsonServerImageOsFlavorEnum {
-    Ubuntu = "ubuntu"
-,    Centos = "centos"
-,    Debian = "debian"
-,    Fedora = "fedora"
-,    Unknown = "unknown"
+    Ubuntu = "ubuntu",
+    Centos = "centos",
+    Debian = "debian",
+    Fedora = "fedora",
+    Unknown = "unknown"
 }
 
 
@@ -116,84 +108,84 @@ export enum PutServersId200ApplicationJsonServerImageOsFlavorEnum {
  * Protection configuration for the Resource
 **/
 export class PutServersId200ApplicationJsonServerImageProtection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delete" })
+  @SpeakeasyMetadata({ data: "json, name=delete" })
   delete: boolean;
 }
 
 export enum PutServersId200ApplicationJsonServerImageStatusEnum {
-    Available = "available"
-,    Creating = "creating"
-,    Unavailable = "unavailable"
+    Available = "available",
+    Creating = "creating",
+    Unavailable = "unavailable"
 }
 
 export enum PutServersId200ApplicationJsonServerImageTypeEnum {
-    System = "system"
-,    App = "app"
-,    Snapshot = "snapshot"
-,    Backup = "backup"
-,    Temporary = "temporary"
+    System = "system",
+    App = "app",
+    Snapshot = "snapshot",
+    Backup = "backup",
+    Temporary = "temporary"
 }
 
 
 export class PutServersId200ApplicationJsonServerImage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bound_to" })
+  @SpeakeasyMetadata({ data: "json, name=bound_to" })
   boundTo: number;
 
-  @Metadata({ data: "json, name=build_id" })
+  @SpeakeasyMetadata({ data: "json, name=build_id" })
   buildId?: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created: string;
 
-  @Metadata({ data: "json, name=created_from" })
+  @SpeakeasyMetadata({ data: "json, name=created_from" })
   createdFrom: PutServersId200ApplicationJsonServerImageCreatedFrom;
 
-  @Metadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
   deleted: string;
 
-  @Metadata({ data: "json, name=deprecated" })
+  @SpeakeasyMetadata({ data: "json, name=deprecated" })
   deprecated: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=disk_size" })
+  @SpeakeasyMetadata({ data: "json, name=disk_size" })
   diskSize: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=image_size" })
+  @SpeakeasyMetadata({ data: "json, name=image_size" })
   imageSize: number;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=os_flavor" })
+  @SpeakeasyMetadata({ data: "json, name=os_flavor" })
   osFlavor: PutServersId200ApplicationJsonServerImageOsFlavorEnum;
 
-  @Metadata({ data: "json, name=os_version" })
+  @SpeakeasyMetadata({ data: "json, name=os_version" })
   osVersion: string;
 
-  @Metadata({ data: "json, name=protection" })
+  @SpeakeasyMetadata({ data: "json, name=protection" })
   protection: PutServersId200ApplicationJsonServerImageProtection;
 
-  @Metadata({ data: "json, name=rapid_deploy" })
+  @SpeakeasyMetadata({ data: "json, name=rapid_deploy" })
   rapidDeploy?: boolean;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PutServersId200ApplicationJsonServerImageStatusEnum;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: PutServersId200ApplicationJsonServerImageTypeEnum;
 }
 
 export enum PutServersId200ApplicationJsonServerIsoTypeEnum {
-    Public = "public"
-,    Private = "private"
+    Public = "public",
+    Private = "private"
 }
 
 
@@ -202,19 +194,19 @@ export enum PutServersId200ApplicationJsonServerIsoTypeEnum {
  * ISO Image that is attached to this Server. Null if no ISO is attached.
 **/
 export class PutServersId200ApplicationJsonServerIso extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deprecated" })
+  @SpeakeasyMetadata({ data: "json, name=deprecated" })
   deprecated: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: PutServersId200ApplicationJsonServerIsoTypeEnum;
 }
 
@@ -224,37 +216,37 @@ export enum PutServersId200ApplicationJsonServerPlacementGroupNullableTypeEnum {
 
 
 export class PutServersId200ApplicationJsonServerPlacementGroupNullable extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=servers" })
+  @SpeakeasyMetadata({ data: "json, name=servers" })
   servers: number[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: PutServersId200ApplicationJsonServerPlacementGroupNullableTypeEnum;
 }
 
 
 export class PutServersId200ApplicationJsonServerPrivateNet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alias_ips" })
+  @SpeakeasyMetadata({ data: "json, name=alias_ips" })
   aliasIps?: string[];
 
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip?: string;
 
-  @Metadata({ data: "json, name=mac_address" })
+  @SpeakeasyMetadata({ data: "json, name=mac_address" })
   macAddress?: string;
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: number;
 }
 
@@ -264,24 +256,24 @@ export class PutServersId200ApplicationJsonServerPrivateNet extends SpeakeasyBas
  * Protection configuration for the Server
 **/
 export class PutServersId200ApplicationJsonServerProtection extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delete" })
+  @SpeakeasyMetadata({ data: "json, name=delete" })
   delete: boolean;
 
-  @Metadata({ data: "json, name=rebuild" })
+  @SpeakeasyMetadata({ data: "json, name=rebuild" })
   rebuild: boolean;
 }
 
 export enum PutServersId200ApplicationJsonServerPublicNetServerPublicNetFirewallStatusEnum {
-    Applied = "applied"
-,    Pending = "pending"
+    Applied = "applied",
+    Pending = "pending"
 }
 
 
 export class PutServersId200ApplicationJsonServerPublicNetServerPublicNetFirewall extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: PutServersId200ApplicationJsonServerPublicNetServerPublicNetFirewallStatusEnum;
 }
 
@@ -291,22 +283,22 @@ export class PutServersId200ApplicationJsonServerPublicNetServerPublicNetFirewal
  * IP address (v4) and its reverse DNS entry of this Server
 **/
 export class PutServersId200ApplicationJsonServerPublicNetIpv4 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blocked" })
+  @SpeakeasyMetadata({ data: "json, name=blocked" })
   blocked: boolean;
 
-  @Metadata({ data: "json, name=dns_ptr" })
+  @SpeakeasyMetadata({ data: "json, name=dns_ptr" })
   dnsPtr: string;
 
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip: string;
 }
 
 
 export class PutServersId200ApplicationJsonServerPublicNetIpv6DnsPtr extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dns_ptr" })
+  @SpeakeasyMetadata({ data: "json, name=dns_ptr" })
   dnsPtr: string;
 
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip: string;
 }
 
@@ -316,13 +308,13 @@ export class PutServersId200ApplicationJsonServerPublicNetIpv6DnsPtr extends Spe
  * IPv6 network assigned to this Server and its reverse DNS entry
 **/
 export class PutServersId200ApplicationJsonServerPublicNetIpv6 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=blocked" })
+  @SpeakeasyMetadata({ data: "json, name=blocked" })
   blocked: boolean;
 
-  @Metadata({ data: "json, name=dns_ptr", elemType: operations.PutServersId200ApplicationJsonServerPublicNetIpv6DnsPtr })
+  @SpeakeasyMetadata({ data: "json, name=dns_ptr", elemType: PutServersId200ApplicationJsonServerPublicNetIpv6DnsPtr })
   dnsPtr: PutServersId200ApplicationJsonServerPublicNetIpv6DnsPtr[];
 
-  @Metadata({ data: "json, name=ip" })
+  @SpeakeasyMetadata({ data: "json, name=ip" })
   ip: string;
 }
 
@@ -332,22 +324,22 @@ export class PutServersId200ApplicationJsonServerPublicNetIpv6 extends Speakeasy
  * Public network information. The Server's IPv4 address can be found in `public_net->ipv4->ip`
 **/
 export class PutServersId200ApplicationJsonServerPublicNet extends SpeakeasyBase {
-  @Metadata({ data: "json, name=firewalls", elemType: operations.PutServersId200ApplicationJsonServerPublicNetServerPublicNetFirewall })
+  @SpeakeasyMetadata({ data: "json, name=firewalls", elemType: PutServersId200ApplicationJsonServerPublicNetServerPublicNetFirewall })
   firewalls?: PutServersId200ApplicationJsonServerPublicNetServerPublicNetFirewall[];
 
-  @Metadata({ data: "json, name=floating_ips" })
+  @SpeakeasyMetadata({ data: "json, name=floating_ips" })
   floatingIps: number[];
 
-  @Metadata({ data: "json, name=ipv4" })
+  @SpeakeasyMetadata({ data: "json, name=ipv4" })
   ipv4: PutServersId200ApplicationJsonServerPublicNetIpv4;
 
-  @Metadata({ data: "json, name=ipv6" })
+  @SpeakeasyMetadata({ data: "json, name=ipv6" })
   ipv6: PutServersId200ApplicationJsonServerPublicNetIpv6;
 }
 
 export enum PutServersId200ApplicationJsonServerServerTypeCpuTypeEnum {
-    Shared = "shared"
-,    Dedicated = "dedicated"
+    Shared = "shared",
+    Dedicated = "dedicated"
 }
 
 
@@ -356,10 +348,10 @@ export enum PutServersId200ApplicationJsonServerServerTypeCpuTypeEnum {
  * Hourly costs for a Server type in this Location
 **/
 export class PutServersId200ApplicationJsonServerServerTypePricesPriceHourly extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gross" })
+  @SpeakeasyMetadata({ data: "json, name=gross" })
   gross: string;
 
-  @Metadata({ data: "json, name=net" })
+  @SpeakeasyMetadata({ data: "json, name=net" })
   net: string;
 }
 
@@ -369,28 +361,28 @@ export class PutServersId200ApplicationJsonServerServerTypePricesPriceHourly ext
  * Monthly costs for a Server type in this Location
 **/
 export class PutServersId200ApplicationJsonServerServerTypePricesPriceMonthly extends SpeakeasyBase {
-  @Metadata({ data: "json, name=gross" })
+  @SpeakeasyMetadata({ data: "json, name=gross" })
   gross: string;
 
-  @Metadata({ data: "json, name=net" })
+  @SpeakeasyMetadata({ data: "json, name=net" })
   net: string;
 }
 
 
 export class PutServersId200ApplicationJsonServerServerTypePrices extends SpeakeasyBase {
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location: string;
 
-  @Metadata({ data: "json, name=price_hourly" })
+  @SpeakeasyMetadata({ data: "json, name=price_hourly" })
   priceHourly: PutServersId200ApplicationJsonServerServerTypePricesPriceHourly;
 
-  @Metadata({ data: "json, name=price_monthly" })
+  @SpeakeasyMetadata({ data: "json, name=price_monthly" })
   priceMonthly: PutServersId200ApplicationJsonServerServerTypePricesPriceMonthly;
 }
 
 export enum PutServersId200ApplicationJsonServerServerTypeStorageTypeEnum {
-    Local = "local"
-,    Network = "network"
+    Local = "local",
+    Network = "network"
 }
 
 
@@ -399,132 +391,141 @@ export enum PutServersId200ApplicationJsonServerServerTypeStorageTypeEnum {
  * Type of Server - determines how much ram, disk and cpu a Server has
 **/
 export class PutServersId200ApplicationJsonServerServerType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cores" })
+  @SpeakeasyMetadata({ data: "json, name=cores" })
   cores: number;
 
-  @Metadata({ data: "json, name=cpu_type" })
+  @SpeakeasyMetadata({ data: "json, name=cpu_type" })
   cpuType: PutServersId200ApplicationJsonServerServerTypeCpuTypeEnum;
 
-  @Metadata({ data: "json, name=deprecated" })
+  @SpeakeasyMetadata({ data: "json, name=deprecated" })
   deprecated: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=disk" })
+  @SpeakeasyMetadata({ data: "json, name=disk" })
   disk: number;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=memory" })
+  @SpeakeasyMetadata({ data: "json, name=memory" })
   memory: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=prices", elemType: operations.PutServersId200ApplicationJsonServerServerTypePrices })
+  @SpeakeasyMetadata({ data: "json, name=prices", elemType: PutServersId200ApplicationJsonServerServerTypePrices })
   prices: PutServersId200ApplicationJsonServerServerTypePrices[];
 
-  @Metadata({ data: "json, name=storage_type" })
+  @SpeakeasyMetadata({ data: "json, name=storage_type" })
   storageType: PutServersId200ApplicationJsonServerServerTypeStorageTypeEnum;
 }
 
 export enum PutServersId200ApplicationJsonServerStatusEnum {
-    Running = "running"
-,    Initializing = "initializing"
-,    Starting = "starting"
-,    Stopping = "stopping"
-,    Off = "off"
-,    Deleting = "deleting"
-,    Migrating = "migrating"
-,    Rebuilding = "rebuilding"
-,    Unknown = "unknown"
+    Running = "running",
+    Initializing = "initializing",
+    Starting = "starting",
+    Stopping = "stopping",
+    Off = "off",
+    Deleting = "deleting",
+    Migrating = "migrating",
+    Rebuilding = "rebuilding",
+    Unknown = "unknown"
 }
 
 
 export class PutServersId200ApplicationJsonServer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backup_window" })
+  @SpeakeasyMetadata({ data: "json, name=backup_window" })
   backupWindow: string;
 
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created: string;
 
-  @Metadata({ data: "json, name=datacenter" })
+  @SpeakeasyMetadata({ data: "json, name=datacenter" })
   datacenter: PutServersId200ApplicationJsonServerDatacenter;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image: PutServersId200ApplicationJsonServerImage;
 
-  @Metadata({ data: "json, name=included_traffic" })
+  @SpeakeasyMetadata({ data: "json, name=included_traffic" })
   includedTraffic: number;
 
-  @Metadata({ data: "json, name=ingoing_traffic" })
+  @SpeakeasyMetadata({ data: "json, name=ingoing_traffic" })
   ingoingTraffic: number;
 
-  @Metadata({ data: "json, name=iso" })
+  @SpeakeasyMetadata({ data: "json, name=iso" })
   iso: PutServersId200ApplicationJsonServerIso;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels: Map<string, string>;
 
-  @Metadata({ data: "json, name=load_balancers" })
+  @SpeakeasyMetadata({ data: "json, name=load_balancers" })
   loadBalancers?: number[];
 
-  @Metadata({ data: "json, name=locked" })
+  @SpeakeasyMetadata({ data: "json, name=locked" })
   locked: boolean;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=outgoing_traffic" })
+  @SpeakeasyMetadata({ data: "json, name=outgoing_traffic" })
   outgoingTraffic: number;
 
-  @Metadata({ data: "json, name=placement_group" })
+  @SpeakeasyMetadata({ data: "json, name=placement_group" })
   placementGroup?: PutServersId200ApplicationJsonServerPlacementGroupNullable;
 
-  @Metadata({ data: "json, name=primary_disk_size" })
+  @SpeakeasyMetadata({ data: "json, name=primary_disk_size" })
   primaryDiskSize: number;
 
-  @Metadata({ data: "json, name=private_net", elemType: operations.PutServersId200ApplicationJsonServerPrivateNet })
+  @SpeakeasyMetadata({ data: "json, name=private_net", elemType: PutServersId200ApplicationJsonServerPrivateNet })
   privateNet: PutServersId200ApplicationJsonServerPrivateNet[];
 
-  @Metadata({ data: "json, name=protection" })
+  @SpeakeasyMetadata({ data: "json, name=protection" })
   protection: PutServersId200ApplicationJsonServerProtection;
 
-  @Metadata({ data: "json, name=public_net" })
+  @SpeakeasyMetadata({ data: "json, name=public_net" })
   publicNet: PutServersId200ApplicationJsonServerPublicNet;
 
-  @Metadata({ data: "json, name=rescue_enabled" })
+  @SpeakeasyMetadata({ data: "json, name=rescue_enabled" })
   rescueEnabled: boolean;
 
-  @Metadata({ data: "json, name=server_type" })
+  @SpeakeasyMetadata({ data: "json, name=server_type" })
   serverType: PutServersId200ApplicationJsonServerServerType;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: PutServersId200ApplicationJsonServerStatusEnum;
 
-  @Metadata({ data: "json, name=volumes" })
+  @SpeakeasyMetadata({ data: "json, name=volumes" })
   volumes?: number[];
 }
 
 
 export class PutServersId200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=server" })
+  @SpeakeasyMetadata({ data: "json, name=server" })
   server?: PutServersId200ApplicationJsonServer;
 }
 
 
+export class PutServersIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PutServersIdPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PutServersIdUpdateServerRequest;
+}
+
+
 export class PutServersIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   putServersId200ApplicationJsonObject?: PutServersId200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

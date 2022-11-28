@@ -1,6 +1,7 @@
 
 
+
 export enum CreditDebitIndicatorEnum {
-    Credit = "CREDIT"
-,    Debit = "DEBIT"
+    Credit = "CREDIT",
+    Debit = "DEBIT"
 }

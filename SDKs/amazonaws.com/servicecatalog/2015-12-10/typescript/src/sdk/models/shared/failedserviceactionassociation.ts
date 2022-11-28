@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceActionAssociationErrorCodeEnum } from "./serviceactionassociationerrorcodeenum";
+
 
 
 // FailedServiceActionAssociation
@@ -7,18 +8,18 @@ import { ServiceActionAssociationErrorCodeEnum } from "./serviceactionassociatio
  * An object containing information about the error, along with identifying information about the self-service action and its associations.
 **/
 export class FailedServiceActionAssociation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ErrorCode" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorCode" })
   errorCode?: ServiceActionAssociationErrorCodeEnum;
 
-  @Metadata({ data: "json, name=ErrorMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ErrorMessage" })
   errorMessage?: string;
 
-  @Metadata({ data: "json, name=ProductId" })
+  @SpeakeasyMetadata({ data: "json, name=ProductId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=ProvisioningArtifactId" })
+  @SpeakeasyMetadata({ data: "json, name=ProvisioningArtifactId" })
   provisioningArtifactId?: string;
 
-  @Metadata({ data: "json, name=ServiceActionId" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceActionId" })
   serviceActionId?: string;
 }

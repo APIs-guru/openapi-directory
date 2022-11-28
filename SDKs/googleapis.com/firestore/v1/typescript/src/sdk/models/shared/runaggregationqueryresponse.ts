@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AggregationResult } from "./aggregationresult";
+
 
 
 // RunAggregationQueryResponse
@@ -7,12 +8,12 @@ import { AggregationResult } from "./aggregationresult";
  * The response for Firestore.RunAggregationQuery.
 **/
 export class RunAggregationQueryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=readTime" })
+  @SpeakeasyMetadata({ data: "json, name=readTime" })
   readTime?: string;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: AggregationResult;
 
-  @Metadata({ data: "json, name=transaction" })
+  @SpeakeasyMetadata({ data: "json, name=transaction" })
   transaction?: string;
 }

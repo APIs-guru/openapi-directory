@@ -1,9 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContactDetail } from "./contactdetail";
 import { Nameserver } from "./nameserver";
-import { ContactDetail } from "./contactdetail";
-import { ContactDetail } from "./contactdetail";
+
 
 
 // GetDomainDetailResponse
@@ -11,66 +9,66 @@ import { ContactDetail } from "./contactdetail";
  * The GetDomainDetail response includes the following elements.
 **/
 export class GetDomainDetailResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AbuseContactEmail" })
+  @SpeakeasyMetadata({ data: "json, name=AbuseContactEmail" })
   abuseContactEmail?: string;
 
-  @Metadata({ data: "json, name=AbuseContactPhone" })
+  @SpeakeasyMetadata({ data: "json, name=AbuseContactPhone" })
   abuseContactPhone?: string;
 
-  @Metadata({ data: "json, name=AdminContact" })
+  @SpeakeasyMetadata({ data: "json, name=AdminContact" })
   adminContact: ContactDetail;
 
-  @Metadata({ data: "json, name=AdminPrivacy" })
+  @SpeakeasyMetadata({ data: "json, name=AdminPrivacy" })
   adminPrivacy?: boolean;
 
-  @Metadata({ data: "json, name=AutoRenew" })
+  @SpeakeasyMetadata({ data: "json, name=AutoRenew" })
   autoRenew?: boolean;
 
-  @Metadata({ data: "json, name=CreationDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreationDate" })
   creationDate?: Date;
 
-  @Metadata({ data: "json, name=DnsSec" })
+  @SpeakeasyMetadata({ data: "json, name=DnsSec" })
   dnsSec?: string;
 
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=ExpirationDate" })
+  @SpeakeasyMetadata({ data: "json, name=ExpirationDate" })
   expirationDate?: Date;
 
-  @Metadata({ data: "json, name=Nameservers", elemType: shared.Nameserver })
+  @SpeakeasyMetadata({ data: "json, name=Nameservers", elemType: Nameserver })
   nameservers: Nameserver[];
 
-  @Metadata({ data: "json, name=RegistrantContact" })
+  @SpeakeasyMetadata({ data: "json, name=RegistrantContact" })
   registrantContact: ContactDetail;
 
-  @Metadata({ data: "json, name=RegistrantPrivacy" })
+  @SpeakeasyMetadata({ data: "json, name=RegistrantPrivacy" })
   registrantPrivacy?: boolean;
 
-  @Metadata({ data: "json, name=RegistrarName" })
+  @SpeakeasyMetadata({ data: "json, name=RegistrarName" })
   registrarName?: string;
 
-  @Metadata({ data: "json, name=RegistrarUrl" })
+  @SpeakeasyMetadata({ data: "json, name=RegistrarUrl" })
   registrarUrl?: string;
 
-  @Metadata({ data: "json, name=RegistryDomainId" })
+  @SpeakeasyMetadata({ data: "json, name=RegistryDomainId" })
   registryDomainId?: string;
 
-  @Metadata({ data: "json, name=Reseller" })
+  @SpeakeasyMetadata({ data: "json, name=Reseller" })
   reseller?: string;
 
-  @Metadata({ data: "json, name=StatusList" })
+  @SpeakeasyMetadata({ data: "json, name=StatusList" })
   statusList?: string[];
 
-  @Metadata({ data: "json, name=TechContact" })
+  @SpeakeasyMetadata({ data: "json, name=TechContact" })
   techContact: ContactDetail;
 
-  @Metadata({ data: "json, name=TechPrivacy" })
+  @SpeakeasyMetadata({ data: "json, name=TechPrivacy" })
   techPrivacy?: boolean;
 
-  @Metadata({ data: "json, name=UpdatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=UpdatedDate" })
   updatedDate?: Date;
 
-  @Metadata({ data: "json, name=WhoIsServer" })
+  @SpeakeasyMetadata({ data: "json, name=WhoIsServer" })
   whoIsServer?: string;
 }

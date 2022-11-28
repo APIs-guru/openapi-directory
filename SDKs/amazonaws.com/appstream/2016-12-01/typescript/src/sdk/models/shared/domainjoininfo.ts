@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DomainJoinInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
 **/
 export class DomainJoinInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DirectoryName" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryName" })
   directoryName?: string;
 
-  @Metadata({ data: "json, name=OrganizationalUnitDistinguishedName" })
+  @SpeakeasyMetadata({ data: "json, name=OrganizationalUnitDistinguishedName" })
   organizationalUnitDistinguishedName?: string;
 }

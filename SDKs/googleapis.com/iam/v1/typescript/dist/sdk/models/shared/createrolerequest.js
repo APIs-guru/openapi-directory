@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Role } from "./role";
 // CreateRoleRequest
 /**
@@ -34,11 +34,11 @@ var CreateRoleRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=role" }),
+        SpeakeasyMetadata({ data: "json, name=role" }),
         __metadata("design:type", Role)
     ], CreateRoleRequest.prototype, "role", void 0);
     __decorate([
-        Metadata({ data: "json, name=roleId" }),
+        SpeakeasyMetadata({ data: "json, name=roleId" }),
         __metadata("design:type", String)
     ], CreateRoleRequest.prototype, "roleId", void 0);
     return CreateRoleRequest;

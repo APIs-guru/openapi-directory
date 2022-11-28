@@ -36,6 +36,8 @@ const (
 	GetHlsStreamingSessionURLRequestBodyDisplayFragmentTimestampEnumNever  GetHlsStreamingSessionURLRequestBodyDisplayFragmentTimestampEnum = "NEVER"
 )
 
+// GetHlsStreamingSessionURLRequestBodyHlsFragmentSelector
+// Contains the range of timestamps for the requested media, and the source of the timestamps.
 type GetHlsStreamingSessionURLRequestBodyHlsFragmentSelector struct {
 	FragmentSelectorType *shared.HlsFragmentSelectorTypeEnum `json:"FragmentSelectorType,omitempty"`
 	TimestampRange       *shared.HlsTimestampRange           `json:"TimestampRange,omitempty"`

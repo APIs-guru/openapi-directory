@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var ServiceAccountKeyKeyAlgorithmEnum;
 (function (ServiceAccountKeyKeyAlgorithmEnum) {
     ServiceAccountKeyKeyAlgorithmEnum["KeyAlgUnspecified"] = "KEY_ALG_UNSPECIFIED";
@@ -57,43 +57,43 @@ var ServiceAccountKey = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=disabled" }),
+        SpeakeasyMetadata({ data: "json, name=disabled" }),
         __metadata("design:type", Boolean)
     ], ServiceAccountKey.prototype, "disabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=keyAlgorithm" }),
+        SpeakeasyMetadata({ data: "json, name=keyAlgorithm" }),
         __metadata("design:type", String)
     ], ServiceAccountKey.prototype, "keyAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "json, name=keyOrigin" }),
+        SpeakeasyMetadata({ data: "json, name=keyOrigin" }),
         __metadata("design:type", String)
     ], ServiceAccountKey.prototype, "keyOrigin", void 0);
     __decorate([
-        Metadata({ data: "json, name=keyType" }),
+        SpeakeasyMetadata({ data: "json, name=keyType" }),
         __metadata("design:type", String)
     ], ServiceAccountKey.prototype, "keyType", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], ServiceAccountKey.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=privateKeyData" }),
+        SpeakeasyMetadata({ data: "json, name=privateKeyData" }),
         __metadata("design:type", String)
     ], ServiceAccountKey.prototype, "privateKeyData", void 0);
     __decorate([
-        Metadata({ data: "json, name=privateKeyType" }),
+        SpeakeasyMetadata({ data: "json, name=privateKeyType" }),
         __metadata("design:type", String)
     ], ServiceAccountKey.prototype, "privateKeyType", void 0);
     __decorate([
-        Metadata({ data: "json, name=publicKeyData" }),
+        SpeakeasyMetadata({ data: "json, name=publicKeyData" }),
         __metadata("design:type", String)
     ], ServiceAccountKey.prototype, "publicKeyData", void 0);
     __decorate([
-        Metadata({ data: "json, name=validAfterTime" }),
+        SpeakeasyMetadata({ data: "json, name=validAfterTime" }),
         __metadata("design:type", String)
     ], ServiceAccountKey.prototype, "validAfterTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=validBeforeTime" }),
+        SpeakeasyMetadata({ data: "json, name=validBeforeTime" }),
         __metadata("design:type", String)
     ], ServiceAccountKey.prototype, "validBeforeTime", void 0);
     return ServiceAccountKey;

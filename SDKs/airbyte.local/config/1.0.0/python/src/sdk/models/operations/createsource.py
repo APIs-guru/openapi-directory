@@ -5,13 +5,13 @@ from sdk.models import shared
 
 @dataclass
 class CreateSourceRequest:
-    request: shared.SourceCreate = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.SourceCreate = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateSourceResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_input_exception_info: Optional[shared.InvalidInputExceptionInfo] = field(default=None)
     source_read: Optional[shared.SourceRead] = field(default=None)
-    status_code: int = field(default=None)
     

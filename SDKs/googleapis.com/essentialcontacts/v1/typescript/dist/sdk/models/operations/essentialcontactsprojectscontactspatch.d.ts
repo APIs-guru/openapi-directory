@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class EssentialcontactsProjectsContactsPatchPathParams extends SpeakeasyBase {
     name: string;
@@ -24,7 +24,7 @@ export declare class EssentialcontactsProjectsContactsPatchSecurity extends Spea
 export declare class EssentialcontactsProjectsContactsPatchRequest extends SpeakeasyBase {
     pathParams: EssentialcontactsProjectsContactsPatchPathParams;
     queryParams: EssentialcontactsProjectsContactsPatchQueryParams;
-    request?: shared.GoogleCloudEssentialcontactsV1Contact;
+    request?: shared.GoogleCloudEssentialcontactsV1ContactInput;
     security: EssentialcontactsProjectsContactsPatchSecurity;
 }
 export declare class EssentialcontactsProjectsContactsPatchResponse extends SpeakeasyBase {

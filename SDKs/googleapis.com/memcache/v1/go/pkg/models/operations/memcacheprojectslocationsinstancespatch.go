@@ -31,7 +31,7 @@ type MemcacheProjectsLocationsInstancesPatchSecurity struct {
 type MemcacheProjectsLocationsInstancesPatchRequest struct {
 	PathParams  MemcacheProjectsLocationsInstancesPatchPathParams
 	QueryParams MemcacheProjectsLocationsInstancesPatchQueryParams
-	Request     *shared.Instance `request:"mediaType=application/json"`
+	Request     *shared.InstanceInput `request:"mediaType=application/json"`
 	Security    MemcacheProjectsLocationsInstancesPatchSecurity
 }
 

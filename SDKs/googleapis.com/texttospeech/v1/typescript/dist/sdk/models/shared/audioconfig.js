@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var AudioConfigAudioEncodingEnum;
 (function (AudioConfigAudioEncodingEnum) {
     AudioConfigAudioEncodingEnum["AudioEncodingUnspecified"] = "AUDIO_ENCODING_UNSPECIFIED";
@@ -42,27 +42,27 @@ var AudioConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=audioEncoding" }),
+        SpeakeasyMetadata({ data: "json, name=audioEncoding" }),
         __metadata("design:type", String)
     ], AudioConfig.prototype, "audioEncoding", void 0);
     __decorate([
-        Metadata({ data: "json, name=effectsProfileId" }),
+        SpeakeasyMetadata({ data: "json, name=effectsProfileId" }),
         __metadata("design:type", Array)
     ], AudioConfig.prototype, "effectsProfileId", void 0);
     __decorate([
-        Metadata({ data: "json, name=pitch" }),
+        SpeakeasyMetadata({ data: "json, name=pitch" }),
         __metadata("design:type", Number)
     ], AudioConfig.prototype, "pitch", void 0);
     __decorate([
-        Metadata({ data: "json, name=sampleRateHertz" }),
+        SpeakeasyMetadata({ data: "json, name=sampleRateHertz" }),
         __metadata("design:type", Number)
     ], AudioConfig.prototype, "sampleRateHertz", void 0);
     __decorate([
-        Metadata({ data: "json, name=speakingRate" }),
+        SpeakeasyMetadata({ data: "json, name=speakingRate" }),
         __metadata("design:type", Number)
     ], AudioConfig.prototype, "speakingRate", void 0);
     __decorate([
-        Metadata({ data: "json, name=volumeGainDb" }),
+        SpeakeasyMetadata({ data: "json, name=volumeGainDb" }),
         __metadata("design:type", Number)
     ], AudioConfig.prototype, "volumeGainDb", void 0);
     return AudioConfig;

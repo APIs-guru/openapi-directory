@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Value } from "./value";
+
 
 
 // AggregationResult
@@ -8,6 +8,6 @@ import { Value } from "./value";
  * The result of a single bucket from a Firestore aggregation query. The keys of `aggregate_fields` are the same for all results in an aggregation query, unlike document queries which can have different fields present for each result.
 **/
 export class AggregationResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aggregateFields", elemType: shared.Value })
+  @SpeakeasyMetadata({ data: "json, name=aggregateFields", elemType: Value })
   aggregateFields?: Map<string, Value>;
 }

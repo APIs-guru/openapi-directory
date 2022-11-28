@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DocumentClassifierInputDataConfig } from "./documentclassifierinputdataconfig";
 import { LanguageCodeEnum } from "./languagecodeenum";
 import { DocumentClassifierModeEnum } from "./documentclassifiermodeenum";
@@ -8,37 +7,38 @@ import { Tag } from "./tag";
 import { VpcConfig } from "./vpcconfig";
 
 
+
 export class CreateDocumentClassifierRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientRequestToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientRequestToken" })
   clientRequestToken?: string;
 
-  @Metadata({ data: "json, name=DataAccessRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=DataAccessRoleArn" })
   dataAccessRoleArn: string;
 
-  @Metadata({ data: "json, name=DocumentClassifierName" })
+  @SpeakeasyMetadata({ data: "json, name=DocumentClassifierName" })
   documentClassifierName: string;
 
-  @Metadata({ data: "json, name=InputDataConfig" })
+  @SpeakeasyMetadata({ data: "json, name=InputDataConfig" })
   inputDataConfig: DocumentClassifierInputDataConfig;
 
-  @Metadata({ data: "json, name=LanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageCode" })
   languageCode: LanguageCodeEnum;
 
-  @Metadata({ data: "json, name=Mode" })
+  @SpeakeasyMetadata({ data: "json, name=Mode" })
   mode?: DocumentClassifierModeEnum;
 
-  @Metadata({ data: "json, name=ModelKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=ModelKmsKeyId" })
   modelKmsKeyId?: string;
 
-  @Metadata({ data: "json, name=OutputDataConfig" })
+  @SpeakeasyMetadata({ data: "json, name=OutputDataConfig" })
   outputDataConfig?: DocumentClassifierOutputDataConfig;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=VolumeKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeKmsKeyId" })
   volumeKmsKeyId?: string;
 
-  @Metadata({ data: "json, name=VpcConfig" })
+  @SpeakeasyMetadata({ data: "json, name=VpcConfig" })
   vpcConfig?: VpcConfig;
 }

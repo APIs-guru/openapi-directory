@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ThrottlingSettings } from "./throttlingsettings";
 /**
  * New or updated webhook settings for an app.

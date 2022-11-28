@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocalDeviceResourceData } from "./localdeviceresourcedata";
 import { LocalVolumeResourceData } from "./localvolumeresourcedata";
 import { S3MachineLearningModelResourceData } from "./s3machinelearningmodelresourcedata";
@@ -6,23 +6,24 @@ import { SageMakerMachineLearningModelResourceData } from "./sagemakermachinelea
 import { SecretsManagerSecretResourceData } from "./secretsmanagersecretresourcedata";
 
 
+
 // ResourceDataContainer
 /** 
  * A container for resource data. The container takes only one of the following supported resource data types: ''LocalDeviceResourceData'', ''LocalVolumeResourceData'', ''SageMakerMachineLearningModelResourceData'', ''S3MachineLearningModelResourceData'', ''SecretsManagerSecretResourceData''.
 **/
 export class ResourceDataContainer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LocalDeviceResourceData" })
+  @SpeakeasyMetadata({ data: "json, name=LocalDeviceResourceData" })
   localDeviceResourceData?: LocalDeviceResourceData;
 
-  @Metadata({ data: "json, name=LocalVolumeResourceData" })
+  @SpeakeasyMetadata({ data: "json, name=LocalVolumeResourceData" })
   localVolumeResourceData?: LocalVolumeResourceData;
 
-  @Metadata({ data: "json, name=S3MachineLearningModelResourceData" })
+  @SpeakeasyMetadata({ data: "json, name=S3MachineLearningModelResourceData" })
   s3MachineLearningModelResourceData?: S3MachineLearningModelResourceData;
 
-  @Metadata({ data: "json, name=SageMakerMachineLearningModelResourceData" })
+  @SpeakeasyMetadata({ data: "json, name=SageMakerMachineLearningModelResourceData" })
   sageMakerMachineLearningModelResourceData?: SageMakerMachineLearningModelResourceData;
 
-  @Metadata({ data: "json, name=SecretsManagerSecretResourceData" })
+  @SpeakeasyMetadata({ data: "json, name=SecretsManagerSecretResourceData" })
   secretsManagerSecretResourceData?: SecretsManagerSecretResourceData;
 }

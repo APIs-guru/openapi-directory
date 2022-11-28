@@ -1,8 +1,9 @@
 
 
+
 export enum RecordTypeEnum {
-    Srv = "SRV"
-,    A = "A"
-,    Aaaa = "AAAA"
-,    Cname = "CNAME"
+    Srv = "SRV",
+    A = "A",
+    Aaaa = "AAAA",
+    Cname = "CNAME"
 }

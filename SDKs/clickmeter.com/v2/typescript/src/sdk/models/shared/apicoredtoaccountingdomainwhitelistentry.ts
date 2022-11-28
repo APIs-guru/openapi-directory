@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiCoreDtoAccountingDomainWhitelistEntry extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id, form, name=id;" })
+  @SpeakeasyMetadata({ data: "json, name=id, form, name=id;" })
   id?: string;
 
-  @Metadata({ data: "json, name=name, form, name=name;" })
+  @SpeakeasyMetadata({ data: "json, name=name, form, name=name;" })
   name?: string;
 }

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CancelEnvironmentDeploymentInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=environmentName" })
+  @SpeakeasyMetadata({ data: "json, name=environmentName" })
   environmentName: string;
 }

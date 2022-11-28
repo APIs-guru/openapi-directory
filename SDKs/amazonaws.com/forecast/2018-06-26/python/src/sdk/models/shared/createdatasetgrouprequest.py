@@ -1,15 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import domain_enum
-from . import tag
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateDatasetGroupRequest:
-    dataset_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DatasetArns' }})
-    dataset_group_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DatasetGroupName' }})
-    domain: domain_enum.DomainEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Domain' }})
-    tags: Optional[List[tag.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
+    dataset_group_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DatasetGroupName') }})
+    domain: DomainEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Domain') }})
+    dataset_arns: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DatasetArns') }})
+    tags: Optional[List[Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
     

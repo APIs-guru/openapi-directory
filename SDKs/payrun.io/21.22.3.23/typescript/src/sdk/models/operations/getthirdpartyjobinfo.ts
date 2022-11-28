@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetThirdPartyJobInfoPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=JobId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=JobId" })
   jobId: string;
 }
 
 
 export class GetThirdPartyJobInfoHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Version" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" })
   apiVersion: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class GetThirdPartyJobInfoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetThirdPartyJobInfoPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetThirdPartyJobInfoHeaders;
 }
 
 
 export class GetThirdPartyJobInfoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   jobInfo?: shared.JobInfo;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

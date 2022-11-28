@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RecaptchaenterpriseProjectsKeysMigratePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class RecaptchaenterpriseProjectsKeysMigrateQueryParams:
 
 @dataclass
 class RecaptchaenterpriseProjectsKeysMigrateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RecaptchaenterpriseProjectsKeysMigrateRequest:
-    path_params: RecaptchaenterpriseProjectsKeysMigratePathParams = field(default=None)
-    query_params: RecaptchaenterpriseProjectsKeysMigrateQueryParams = field(default=None)
+    path_params: RecaptchaenterpriseProjectsKeysMigratePathParams = field()
+    query_params: RecaptchaenterpriseProjectsKeysMigrateQueryParams = field()
+    security: RecaptchaenterpriseProjectsKeysMigrateSecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: RecaptchaenterpriseProjectsKeysMigrateSecurity = field(default=None)
     
 
 @dataclass
 class RecaptchaenterpriseProjectsKeysMigrateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_cloud_recaptchaenterprise_v1_key: Optional[shared.GoogleCloudRecaptchaenterpriseV1Key] = field(default=None)
-    status_code: int = field(default=None)
     

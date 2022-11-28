@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum,List
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import listeventtypesfiltername_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListEventTypesFilter:
-    name: listeventtypesfiltername_enum.ListEventTypesFilterNameEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    value: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
+    r"""ListEventTypesFilter
+    Information about a filter to apply to the list of returned event types. You can filter by resource type or service name.
+    """
+    
+    name: ListEventTypesFilterNameEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Name') }})
+    value: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Value') }})
     

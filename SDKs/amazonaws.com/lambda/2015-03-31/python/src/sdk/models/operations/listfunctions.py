@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListFunctionsFunctionVersionEnum(str, Enum):
@@ -27,16 +31,16 @@ class ListFunctionsHeaders:
 
 @dataclass
 class ListFunctionsRequest:
-    query_params: ListFunctionsQueryParams = field(default=None)
-    headers: ListFunctionsHeaders = field(default=None)
+    headers: ListFunctionsHeaders = field()
+    query_params: ListFunctionsQueryParams = field()
     
 
 @dataclass
 class ListFunctionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     list_functions_response: Optional[shared.ListFunctionsResponse] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

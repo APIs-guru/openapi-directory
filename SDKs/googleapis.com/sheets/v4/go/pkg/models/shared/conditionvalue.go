@@ -12,6 +12,8 @@ const (
 	ConditionValueRelativeDateEnumTomorrow                ConditionValueRelativeDateEnum = "TOMORROW"
 )
 
+// ConditionValue
+// The value of the condition.
 type ConditionValue struct {
 	RelativeDate     *ConditionValueRelativeDateEnum `json:"relativeDate,omitempty"`
 	UserEnteredValue *string                         `json:"userEnteredValue,omitempty"`

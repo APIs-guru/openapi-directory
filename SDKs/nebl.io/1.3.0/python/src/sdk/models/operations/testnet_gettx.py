@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class TestnetGetTxPathParams:
-    txid: str = field(default=None, metadata={'path_param': { 'field_name': 'txid', 'style': 'simple', 'explode': False }})
+    txid: str = field(metadata={'path_param': { 'field_name': 'txid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class TestnetGetTxRequest:
-    path_params: TestnetGetTxPathParams = field(default=None)
+    path_params: TestnetGetTxPathParams = field()
     
 
 @dataclass
 class TestnetGetTxResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_tx_response: Optional[shared.GetTxResponse] = field(default=None)
     

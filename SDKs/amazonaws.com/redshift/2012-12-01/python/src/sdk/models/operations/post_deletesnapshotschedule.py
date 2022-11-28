@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDeleteSnapshotScheduleActionEnum(str, Enum):
     DELETE_SNAPSHOT_SCHEDULE = "DeleteSnapshotSchedule"
@@ -10,8 +14,8 @@ class PostDeleteSnapshotScheduleVersionEnum(str, Enum):
 
 @dataclass
 class PostDeleteSnapshotScheduleQueryParams:
-    action: PostDeleteSnapshotScheduleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostDeleteSnapshotScheduleVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostDeleteSnapshotScheduleActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDeleteSnapshotScheduleVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostDeleteSnapshotScheduleHeaders:
 
 @dataclass
 class PostDeleteSnapshotScheduleRequest:
-    query_params: PostDeleteSnapshotScheduleQueryParams = field(default=None)
-    headers: PostDeleteSnapshotScheduleHeaders = field(default=None)
+    headers: PostDeleteSnapshotScheduleHeaders = field()
+    query_params: PostDeleteSnapshotScheduleQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDeleteSnapshotScheduleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

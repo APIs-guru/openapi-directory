@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ProximitybeaconBeaconsAttachmentsListPathParams = /** @class */ (function (_super) {
     __extends(ProximitybeaconBeaconsAttachmentsListPathParams, _super);
@@ -30,7 +30,7 @@ var ProximitybeaconBeaconsAttachmentsListPathParams = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=beaconName" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=beaconName" }),
         __metadata("design:type", String)
     ], ProximitybeaconBeaconsAttachmentsListPathParams.prototype, "beaconName", void 0);
     return ProximitybeaconBeaconsAttachmentsListPathParams;
@@ -42,55 +42,55 @@ var ProximitybeaconBeaconsAttachmentsListQueryParams = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], ProximitybeaconBeaconsAttachmentsListQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], ProximitybeaconBeaconsAttachmentsListQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], ProximitybeaconBeaconsAttachmentsListQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], ProximitybeaconBeaconsAttachmentsListQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], ProximitybeaconBeaconsAttachmentsListQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], ProximitybeaconBeaconsAttachmentsListQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=namespacedType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=namespacedType" }),
         __metadata("design:type", String)
     ], ProximitybeaconBeaconsAttachmentsListQueryParams.prototype, "namespacedType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], ProximitybeaconBeaconsAttachmentsListQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], ProximitybeaconBeaconsAttachmentsListQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=projectId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=projectId" }),
         __metadata("design:type", String)
     ], ProximitybeaconBeaconsAttachmentsListQueryParams.prototype, "projectId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], ProximitybeaconBeaconsAttachmentsListQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], ProximitybeaconBeaconsAttachmentsListQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], ProximitybeaconBeaconsAttachmentsListQueryParams.prototype, "uploadProtocol", void 0);
     return ProximitybeaconBeaconsAttachmentsListQueryParams;
@@ -102,11 +102,11 @@ var ProximitybeaconBeaconsAttachmentsListSecurity = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], ProximitybeaconBeaconsAttachmentsListSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], ProximitybeaconBeaconsAttachmentsListSecurity.prototype, "oauth2c", void 0);
     return ProximitybeaconBeaconsAttachmentsListSecurity;
@@ -118,15 +118,15 @@ var ProximitybeaconBeaconsAttachmentsListRequest = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProximitybeaconBeaconsAttachmentsListPathParams)
     ], ProximitybeaconBeaconsAttachmentsListRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProximitybeaconBeaconsAttachmentsListQueryParams)
     ], ProximitybeaconBeaconsAttachmentsListRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProximitybeaconBeaconsAttachmentsListSecurity)
     ], ProximitybeaconBeaconsAttachmentsListRequest.prototype, "security", void 0);
     return ProximitybeaconBeaconsAttachmentsListRequest;
@@ -138,15 +138,15 @@ var ProximitybeaconBeaconsAttachmentsListResponse = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProximitybeaconBeaconsAttachmentsListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListBeaconAttachmentsResponse)
     ], ProximitybeaconBeaconsAttachmentsListResponse.prototype, "listBeaconAttachmentsResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProximitybeaconBeaconsAttachmentsListResponse.prototype, "statusCode", void 0);
     return ProximitybeaconBeaconsAttachmentsListResponse;

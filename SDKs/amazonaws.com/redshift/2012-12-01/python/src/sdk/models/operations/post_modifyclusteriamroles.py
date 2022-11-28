@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostModifyClusterIamRolesActionEnum(str, Enum):
     MODIFY_CLUSTER_IAM_ROLES = "ModifyClusterIamRoles"
@@ -10,8 +14,8 @@ class PostModifyClusterIamRolesVersionEnum(str, Enum):
 
 @dataclass
 class PostModifyClusterIamRolesQueryParams:
-    action: PostModifyClusterIamRolesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostModifyClusterIamRolesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostModifyClusterIamRolesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostModifyClusterIamRolesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostModifyClusterIamRolesHeaders:
 
 @dataclass
 class PostModifyClusterIamRolesRequest:
-    query_params: PostModifyClusterIamRolesQueryParams = field(default=None)
-    headers: PostModifyClusterIamRolesHeaders = field(default=None)
+    headers: PostModifyClusterIamRolesHeaders = field()
+    query_params: PostModifyClusterIamRolesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostModifyClusterIamRolesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

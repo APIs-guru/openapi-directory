@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum MailerConsoleExporterConfigTypeEnum {
     Generic = "generic"
@@ -6,6 +7,6 @@ export enum MailerConsoleExporterConfigTypeEnum {
 
 
 export class MailerConsoleExporterConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: MailerConsoleExporterConfigTypeEnum;
 }

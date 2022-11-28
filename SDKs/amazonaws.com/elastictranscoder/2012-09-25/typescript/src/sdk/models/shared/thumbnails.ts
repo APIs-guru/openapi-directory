@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Thumbnails
@@ -6,27 +7,27 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Thumbnails for videos.
 **/
 export class Thumbnails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AspectRatio" })
+  @SpeakeasyMetadata({ data: "json, name=AspectRatio" })
   aspectRatio?: string;
 
-  @Metadata({ data: "json, name=Format" })
+  @SpeakeasyMetadata({ data: "json, name=Format" })
   format?: string;
 
-  @Metadata({ data: "json, name=Interval" })
+  @SpeakeasyMetadata({ data: "json, name=Interval" })
   interval?: string;
 
-  @Metadata({ data: "json, name=MaxHeight" })
+  @SpeakeasyMetadata({ data: "json, name=MaxHeight" })
   maxHeight?: string;
 
-  @Metadata({ data: "json, name=MaxWidth" })
+  @SpeakeasyMetadata({ data: "json, name=MaxWidth" })
   maxWidth?: string;
 
-  @Metadata({ data: "json, name=PaddingPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=PaddingPolicy" })
   paddingPolicy?: string;
 
-  @Metadata({ data: "json, name=Resolution" })
+  @SpeakeasyMetadata({ data: "json, name=Resolution" })
   resolution?: string;
 
-  @Metadata({ data: "json, name=SizingPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=SizingPolicy" })
   sizingPolicy?: string;
 }

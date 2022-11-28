@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: http://developer.nytimes.com/"""
 import requests
 from typing import Optional
 from sdk.models import operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: http://developer.nytimes.com/"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def get_user_content_by_date_json(self, request: operations.GetUserContentByDateJSONRequest) -> operations.GetUserContentByDateJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Comments by Date
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/user-content/by-date.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -47,13 +71,16 @@ class SDK:
 
     
     def get_user_content_recent_json(self, request: operations.GetUserContentRecentJSONRequest) -> operations.GetUserContentRecentJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Recent User Comments
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/user-content/recent.json"
-
-        client = utils.configure_security_client(request.security)
-
+        
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -68,15 +95,17 @@ class SDK:
 
     
     def get_user_content_url_json(self, request: operations.GetUserContentURLJSONRequest) -> operations.GetUserContentURLJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Comments by URL
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/user-content/url.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -91,15 +120,17 @@ class SDK:
 
     
     def get_user_content_user_json(self, request: operations.GetUserContentUserJSONRequest) -> operations.GetUserContentUserJSONResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Comments by User
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/user-content/user.json"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = utils.configure_security_client(request.security)
-
+        
+        client = utils.configure_security_client(self._client, request.security)
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpdateDefaultBranchInput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the input of an update default branch operation.
 **/
 export class UpdateDefaultBranchInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultBranchName" })
+  @SpeakeasyMetadata({ data: "json, name=defaultBranchName" })
   defaultBranchName: string;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName: string;
 }

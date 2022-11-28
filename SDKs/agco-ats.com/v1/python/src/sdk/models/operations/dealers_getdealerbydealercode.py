@@ -5,19 +5,19 @@ from sdk.models import shared
 
 @dataclass
 class DealersGetDealerbyDealerCodePathParams:
-    dealer_code: str = field(default=None, metadata={'path_param': { 'field_name': 'DealerCode', 'style': 'simple', 'explode': False }})
+    dealer_code: str = field(metadata={'path_param': { 'field_name': 'DealerCode', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DealersGetDealerbyDealerCodeRequest:
-    path_params: DealersGetDealerbyDealerCodePathParams = field(default=None)
+    path_params: DealersGetDealerbyDealerCodePathParams = field()
     
 
 @dataclass
 class DealersGetDealerbyDealerCodeResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    body: Optional[bytes] = field(default=None)
     dealer_db_models_dealer: Optional[shared.DealerDbModelsDealer] = field(default=None)
-    status_code: int = field(default=None)
     

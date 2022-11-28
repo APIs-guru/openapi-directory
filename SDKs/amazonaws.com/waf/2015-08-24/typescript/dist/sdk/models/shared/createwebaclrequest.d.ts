@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { WafAction } from "./wafaction";
 import { Tag } from "./tag";
 export declare class CreateWebAclRequest extends SpeakeasyBase {

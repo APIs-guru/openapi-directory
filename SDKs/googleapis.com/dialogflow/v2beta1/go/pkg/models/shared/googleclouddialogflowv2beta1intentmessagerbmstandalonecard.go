@@ -16,6 +16,8 @@ const (
 	GoogleCloudDialogflowV2beta1IntentMessageRbmStandaloneCardThumbnailImageAlignmentEnumRight                              GoogleCloudDialogflowV2beta1IntentMessageRbmStandaloneCardThumbnailImageAlignmentEnum = "RIGHT"
 )
 
+// GoogleCloudDialogflowV2beta1IntentMessageRbmStandaloneCard
+// Standalone Rich Business Messaging (RBM) rich card. Rich cards allow you to respond to users with more vivid content, e.g. with media and suggestions. You can group multiple rich cards into one using RbmCarouselCard but carousel cards will give you less control over the card layout.
 type GoogleCloudDialogflowV2beta1IntentMessageRbmStandaloneCard struct {
 	CardContent             *GoogleCloudDialogflowV2beta1IntentMessageRbmCardContent                               `json:"cardContent,omitempty"`
 	CardOrientation         *GoogleCloudDialogflowV2beta1IntentMessageRbmStandaloneCardCardOrientationEnum         `json:"cardOrientation,omitempty"`

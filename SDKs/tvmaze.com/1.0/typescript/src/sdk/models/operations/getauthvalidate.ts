@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetAuthValidate200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=premium" })
+  @SpeakeasyMetadata({ data: "json, name=premium" })
   premium?: number;
 }
 
 
 export class GetAuthValidateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAuthValidate200ApplicationJsonObject?: GetAuthValidate200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

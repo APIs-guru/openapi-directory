@@ -1,17 +1,17 @@
 package operations
 
+// UpsertUserRequestBodyIdentification
+// User identification requires a userId, email or both
 type UpsertUserRequestBodyIdentification struct {
 	Email  *string `json:"email,omitempty"`
 	UserID *string `json:"userId,omitempty"`
 }
 
+// UpsertUserRequestBody
+// Update properties of a user
 type UpsertUserRequestBody struct {
 	Identification UpsertUserRequestBodyIdentification `json:"identification"`
 	Properties     map[string]interface{}              `json:"properties,omitempty"`
-}
-
-type UpsertUserRequest struct {
-	Request UpsertUserRequestBody `request:"mediaType=application/json"`
 }
 
 type UpsertUser201ApplicationJSONMeta struct {
@@ -24,12 +24,16 @@ type UpsertUser201ApplicationJSON struct {
 	Meta    UpsertUser201ApplicationJSONMeta `json:"meta"`
 }
 
+// UpsertUser400ApplicationJSONErrorsParameters
+// All query-, header- and path- parameters that seemed incorrect
 type UpsertUser400ApplicationJSONErrorsParameters struct {
 	Header map[string]string `json:"header,omitempty"`
 	Path   map[string]string `json:"path,omitempty"`
 	Query  map[string]string `json:"query,omitempty"`
 }
 
+// UpsertUser400ApplicationJSONErrors
+// Map that sums up all received values that seemed incorrect
 type UpsertUser400ApplicationJSONErrors struct {
 	Fields     map[string]string                             `json:"fields,omitempty"`
 	Parameters *UpsertUser400ApplicationJSONErrorsParameters `json:"parameters,omitempty"`
@@ -84,6 +88,10 @@ type UpsertUser500ApplicationJSONMeta struct {
 type UpsertUser500ApplicationJSON struct {
 	Message string                           `json:"message"`
 	Meta    UpsertUser500ApplicationJSONMeta `json:"meta"`
+}
+
+type UpsertUserRequest struct {
+	Request UpsertUserRequestBody `request:"mediaType=application/json"`
 }
 
 type UpsertUserResponse struct {

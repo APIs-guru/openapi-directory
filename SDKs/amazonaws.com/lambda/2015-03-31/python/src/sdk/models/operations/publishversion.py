@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class PublishVersionPathParams:
-    function_name: str = field(default=None, metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
+    function_name: str = field(metadata={'path_param': { 'field_name': 'FunctionName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -23,28 +27,28 @@ class PublishVersionHeaders:
 @dataclass_json
 @dataclass
 class PublishVersionRequestBody:
-    code_sha256: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CodeSha256' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    revision_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RevisionId' }})
+    code_sha256: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CodeSha256') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Description') }})
+    revision_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('RevisionId') }})
     
 
 @dataclass
 class PublishVersionRequest:
-    path_params: PublishVersionPathParams = field(default=None)
-    headers: PublishVersionHeaders = field(default=None)
-    request: PublishVersionRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: PublishVersionHeaders = field()
+    path_params: PublishVersionPathParams = field()
+    request: PublishVersionRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class PublishVersionResponse:
+    content_type: str = field()
+    status_code: int = field()
     code_storage_exceeded_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     function_configuration: Optional[shared.FunctionConfiguration] = field(default=None)
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     precondition_failed_exception: Optional[Any] = field(default=None)
     resource_conflict_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

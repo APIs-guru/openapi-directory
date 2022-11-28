@@ -26,11 +26,6 @@ type UgdcnSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type UgdcnRequest struct {
-	Request  *UgdcnRequestBody `request:"mediaType=application/json"`
-	Security UgdcnSecurity
-}
-
 type Ugdcn400ApplicationJSONErrorEnum string
 
 const (
@@ -160,6 +155,11 @@ const (
 type Ugdcn504ApplicationJSON struct {
 	Error            *Ugdcn504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Ugdcn504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type UgdcnRequest struct {
+	Request  *UgdcnRequestBody `request:"mediaType=application/json"`
+	Security UgdcnSecurity
 }
 
 type UgdcnResponse struct {

@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CloneOrganizationSwitchDevicesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
   organizationId: string;
 }
 
 
 export class CloneOrganizationSwitchDevicesRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sourceSerial" })
+  @SpeakeasyMetadata({ data: "json, name=sourceSerial" })
   sourceSerial: string;
 
-  @Metadata({ data: "json, name=targetSerials" })
+  @SpeakeasyMetadata({ data: "json, name=targetSerials" })
   targetSerials: string[];
 }
 
 
 export class CloneOrganizationSwitchDevicesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CloneOrganizationSwitchDevicesPathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CloneOrganizationSwitchDevicesRequestBody;
 }
 
 
 export class CloneOrganizationSwitchDevicesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   cloneOrganizationSwitchDevices200ApplicationJsonObject?: Map<string, any>;
 }

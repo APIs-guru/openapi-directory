@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SystemInstanceSummary
+// An object that contains summary information about a system instance.
 type SystemInstanceSummary struct {
 	Arn                      *string                             `json:"arn,omitempty"`
 	CreatedAt                *time.Time                          `json:"createdAt,omitempty"`

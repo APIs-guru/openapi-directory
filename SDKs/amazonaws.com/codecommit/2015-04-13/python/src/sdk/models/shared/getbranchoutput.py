@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import branchinfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetBranchOutput:
-    branch: Optional[branchinfo.BranchInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branch' }})
+    r"""GetBranchOutput
+    Represents the output of a get branch operation.
+    """
+    
+    branch: Optional[BranchInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('branch') }})
     

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum SourceSourceTypeEnum {
-    SourceTypeUnspecified = "SOURCE_TYPE_UNSPECIFIED"
-,    ConfigVariable = "CONFIG_VARIABLE"
+    SourceTypeUnspecified = "SOURCE_TYPE_UNSPECIFIED",
+    ConfigVariable = "CONFIG_VARIABLE"
 }
 
 
@@ -11,9 +12,9 @@ export enum SourceSourceTypeEnum {
  * Source to extract the backend from.
 **/
 export class Source extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fieldId" })
+  @SpeakeasyMetadata({ data: "json, name=fieldId" })
   fieldId?: string;
 
-  @Metadata({ data: "json, name=sourceType" })
+  @SpeakeasyMetadata({ data: "json, name=sourceType" })
   sourceType?: SourceSourceTypeEnum;
 }

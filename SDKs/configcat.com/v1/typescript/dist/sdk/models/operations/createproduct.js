@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateProductPathParams = /** @class */ (function (_super) {
     __extends(CreateProductPathParams, _super);
@@ -30,7 +30,7 @@ var CreateProductPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" }),
         __metadata("design:type", String)
     ], CreateProductPathParams.prototype, "organizationId", void 0);
     return CreateProductPathParams;
@@ -42,15 +42,15 @@ var CreateProductRequests = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/*+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/*+json" }),
         __metadata("design:type", shared.CreateProductRequest)
     ], CreateProductRequests.prototype, "createProductRequest", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.CreateProductRequest)
     ], CreateProductRequests.prototype, "createProductRequest1", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/json" }),
         __metadata("design:type", shared.CreateProductRequest)
     ], CreateProductRequests.prototype, "createProductRequest2", void 0);
     return CreateProductRequests;
@@ -62,11 +62,11 @@ var CreateProductRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateProductPathParams)
     ], CreateProductRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateProductRequests)
     ], CreateProductRequest.prototype, "request", void 0);
     return CreateProductRequest;
@@ -78,19 +78,19 @@ var CreateProductResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateProductResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ProductModel)
     ], CreateProductResponse.prototype, "productModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ProductModelHaljson)
     ], CreateProductResponse.prototype, "productModelHaljson", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateProductResponse.prototype, "statusCode", void 0);
     return CreateProductResponse;

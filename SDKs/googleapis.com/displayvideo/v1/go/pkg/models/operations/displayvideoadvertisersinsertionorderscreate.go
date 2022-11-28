@@ -30,7 +30,7 @@ type DisplayvideoAdvertisersInsertionOrdersCreateSecurity struct {
 type DisplayvideoAdvertisersInsertionOrdersCreateRequest struct {
 	PathParams  DisplayvideoAdvertisersInsertionOrdersCreatePathParams
 	QueryParams DisplayvideoAdvertisersInsertionOrdersCreateQueryParams
-	Request     *shared.InsertionOrder `request:"mediaType=application/json"`
+	Request     *shared.InsertionOrderInput `request:"mediaType=application/json"`
 	Security    DisplayvideoAdvertisersInsertionOrdersCreateSecurity
 }
 

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EncryptionTypeEnum } from "./encryptiontypeenum";
 // EncryptionConfiguration
 /**
@@ -34,11 +34,11 @@ var EncryptionConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=encryptionType" }),
+        SpeakeasyMetadata({ data: "json, name=encryptionType" }),
         __metadata("design:type", String)
     ], EncryptionConfiguration.prototype, "encryptionType", void 0);
     __decorate([
-        Metadata({ data: "json, name=kmsKey" }),
+        SpeakeasyMetadata({ data: "json, name=kmsKey" }),
         __metadata("design:type", String)
     ], EncryptionConfiguration.prototype, "kmsKey", void 0);
     return EncryptionConfiguration;

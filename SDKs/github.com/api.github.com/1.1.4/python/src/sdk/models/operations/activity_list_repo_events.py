@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class ActivityListRepoEventsPathParams:
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -17,13 +17,13 @@ class ActivityListRepoEventsQueryParams:
 
 @dataclass
 class ActivityListRepoEventsRequest:
-    path_params: ActivityListRepoEventsPathParams = field(default=None)
-    query_params: ActivityListRepoEventsQueryParams = field(default=None)
+    path_params: ActivityListRepoEventsPathParams = field()
+    query_params: ActivityListRepoEventsQueryParams = field()
     
 
 @dataclass
 class ActivityListRepoEventsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     events: Optional[List[shared.Event]] = field(default=None)
     

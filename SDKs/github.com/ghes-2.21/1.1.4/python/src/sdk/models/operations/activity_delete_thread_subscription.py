@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class ActivityDeleteThreadSubscriptionPathParams:
-    thread_id: int = field(default=None, metadata={'path_param': { 'field_name': 'thread_id', 'style': 'simple', 'explode': False }})
+    thread_id: int = field(metadata={'path_param': { 'field_name': 'thread_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ActivityDeleteThreadSubscriptionRequest:
-    path_params: ActivityDeleteThreadSubscriptionPathParams = field(default=None)
+    path_params: ActivityDeleteThreadSubscriptionPathParams = field()
     
 
 @dataclass
 class ActivityDeleteThreadSubscriptionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     

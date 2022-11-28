@@ -1,5 +1,7 @@
 package shared
 
+// MarketplaceDeal
+// A proposal can contain multiple deals. A deal contains the terms and targeting information that is used for serving.
 type MarketplaceDeal struct {
 	BuyerPrivateData               *PrivateData         `json:"buyerPrivateData,omitempty"`
 	CreationTimeMs                 *string              `json:"creationTimeMs,omitempty"`

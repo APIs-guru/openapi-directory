@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ReleaseEventSeriesApiDeletePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class ReleaseEventSeriesApiDeleteQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=hardDelete" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=hardDelete" })
   hardDelete?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=notes" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=notes" })
   notes?: string;
 }
 
 
 export class ReleaseEventSeriesApiDeleteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: ReleaseEventSeriesApiDeletePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ReleaseEventSeriesApiDeleteQueryParams;
 }
 
 
 export class ReleaseEventSeriesApiDeleteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

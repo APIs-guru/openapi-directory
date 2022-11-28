@@ -1,14 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SettingMetadata } from "./settingmetadata";
 import { CustomConfiguration } from "./customconfiguration";
 import { StandardHl7Configuration } from "./standardhl7configuration";
 
+
 export enum ReceiverJurisdictionalFiltersMatchFieldsEnum {
-    FacilityOrPatientAddress = "FACILITY_OR_PATIENT_ADDRESS"
-,    FacilityAddress = "FACILITY_ADDRESS"
-,    FacilityName = "FACILITY_NAME"
-,    AbnormalValue = "ABNORMAL_VALUE"
+    FacilityOrPatientAddress = "FACILITY_OR_PATIENT_ADDRESS",
+    FacilityAddress = "FACILITY_ADDRESS",
+    FacilityName = "FACILITY_NAME",
+    AbnormalValue = "ABNORMAL_VALUE"
 }
 
 
@@ -17,20 +17,20 @@ export enum ReceiverJurisdictionalFiltersMatchFieldsEnum {
  * A single filter
 **/
 export class ReceiverJurisdictionalFilters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=doesNotMatch" })
+  @SpeakeasyMetadata({ data: "json, name=doesNotMatch" })
   doesNotMatch?: boolean;
 
-  @Metadata({ data: "json, name=matchFields" })
+  @SpeakeasyMetadata({ data: "json, name=matchFields" })
   matchFields?: ReceiverJurisdictionalFiltersMatchFieldsEnum;
 
-  @Metadata({ data: "json, name=matchValues" })
+  @SpeakeasyMetadata({ data: "json, name=matchValues" })
   matchValues?: string[];
 }
 
 export enum ReceiverTimingFrequencyEnum {
-    RealTime = "REAL_TIME"
-,    Hourly = "HOURLY"
-,    Daily = "DAILY"
+    RealTime = "REAL_TIME",
+    Hourly = "HOURLY",
+    Daily = "DAILY"
 }
 
 
@@ -39,10 +39,10 @@ export enum ReceiverTimingFrequencyEnum {
  * When the report is sent if not immediately
 **/
 export class ReceiverTiming extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dailyAt" })
+  @SpeakeasyMetadata({ data: "json, name=dailyAt" })
   dailyAt?: number;
 
-  @Metadata({ data: "json, name=frequency" })
+  @SpeakeasyMetadata({ data: "json, name=frequency" })
   frequency: ReceiverTimingFrequencyEnum;
 }
 
@@ -52,27 +52,52 @@ export class ReceiverTiming extends SpeakeasyBase {
  * A receiver of reports from the data hub
 **/
 export class Receiver extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=jurisdictionalFilters", elemType: shared.ReceiverJurisdictionalFilters })
+  @SpeakeasyMetadata({ data: "json, name=jurisdictionalFilters", elemType: ReceiverJurisdictionalFilters })
   jurisdictionalFilters?: ReceiverJurisdictionalFilters[];
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: SettingMetadata;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=organizationName" })
+  @SpeakeasyMetadata({ data: "json, name=organizationName" })
   organizationName?: string;
 
-  @Metadata({ data: "json, name=timing" })
+  @SpeakeasyMetadata({ data: "json, name=timing" })
   timing: ReceiverTiming;
 
-  @Metadata({ data: "json, name=topic" })
+  @SpeakeasyMetadata({ data: "json, name=topic" })
   topic: string;
 
-  @Metadata({ data: "json, name=translations" })
+  @SpeakeasyMetadata({ data: "json, name=translations" })
+  translations?: any[];
+}
+
+
+// ReceiverInput
+/** 
+ * A receiver of reports from the data hub
+**/
+export class ReceiverInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description: string;
+
+  @SpeakeasyMetadata({ data: "json, name=jurisdictionalFilters", elemType: ReceiverJurisdictionalFilters })
+  jurisdictionalFilters?: ReceiverJurisdictionalFilters[];
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name: string;
+
+  @SpeakeasyMetadata({ data: "json, name=timing" })
+  timing: ReceiverTiming;
+
+  @SpeakeasyMetadata({ data: "json, name=topic" })
+  topic: string;
+
+  @SpeakeasyMetadata({ data: "json, name=translations" })
   translations?: any[];
 }

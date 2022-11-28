@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class UpdateContactPhotoRequestSourcesEnum(str, Enum):
     READ_SOURCE_TYPE_UNSPECIFIED = "READ_SOURCE_TYPE_UNSPECIFIED"
@@ -12,7 +17,11 @@ class UpdateContactPhotoRequestSourcesEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateContactPhotoRequest:
-    person_fields: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'personFields' }})
-    photo_bytes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'photoBytes' }})
-    sources: Optional[List[UpdateContactPhotoRequestSourcesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sources' }})
+    r"""UpdateContactPhotoRequest
+    A request to update an existing contact's photo. All requests must have a valid photo format: JPEG or PNG.
+    """
+    
+    person_fields: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('personFields') }})
+    photo_bytes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('photoBytes') }})
+    sources: Optional[List[UpdateContactPhotoRequestSourcesEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sources') }})
     

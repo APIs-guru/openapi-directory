@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PostRequestIdPathParams = /** @class */ (function (_super) {
     __extends(PostRequestIdPathParams, _super);
@@ -30,7 +30,7 @@ var PostRequestIdPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", Number)
     ], PostRequestIdPathParams.prototype, "id", void 0);
     return PostRequestIdPathParams;
@@ -42,43 +42,43 @@ var PostRequestIdQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=by_group" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=by_group" }),
         __metadata("design:type", String)
     ], PostRequestIdQueryParams.prototype, "byGroup", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=by_package" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=by_package" }),
         __metadata("design:type", String)
     ], PostRequestIdQueryParams.prototype, "byPackage", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=by_project" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=by_project" }),
         __metadata("design:type", String)
     ], PostRequestIdQueryParams.prototype, "byProject", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=by_user" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=by_user" }),
         __metadata("design:type", String)
     ], PostRequestIdQueryParams.prototype, "byUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=cmd" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=cmd" }),
         __metadata("design:type", String)
     ], PostRequestIdQueryParams.prototype, "cmd", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=comment" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=comment" }),
         __metadata("design:type", String)
     ], PostRequestIdQueryParams.prototype, "comment", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=incident" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=incident" }),
         __metadata("design:type", String)
     ], PostRequestIdQueryParams.prototype, "incident", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=newstate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=newstate" }),
         __metadata("design:type", String)
     ], PostRequestIdQueryParams.prototype, "newstate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=priority" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=priority" }),
         __metadata("design:type", String)
     ], PostRequestIdQueryParams.prototype, "priority", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=time" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=time" }),
         __metadata("design:type", String)
     ], PostRequestIdQueryParams.prototype, "time", void 0);
     return PostRequestIdQueryParams;
@@ -90,7 +90,7 @@ var PostRequestIdSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuthentication)
     ], PostRequestIdSecurity.prototype, "basicAuthentication", void 0);
     return PostRequestIdSecurity;
@@ -102,15 +102,15 @@ var PostRequestIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostRequestIdPathParams)
     ], PostRequestIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostRequestIdQueryParams)
     ], PostRequestIdRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PostRequestIdSecurity)
     ], PostRequestIdRequest.prototype, "security", void 0);
     return PostRequestIdRequest;
@@ -122,15 +122,15 @@ var PostRequestIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], PostRequestIdResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PostRequestIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PostRequestIdResponse.prototype, "statusCode", void 0);
     return PostRequestIdResponse;

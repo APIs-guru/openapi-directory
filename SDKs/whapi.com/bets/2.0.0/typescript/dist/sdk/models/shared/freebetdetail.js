@@ -22,46 +22,46 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var FreeBetDetail = /** @class */ (function (_super) {
     __extends(FreeBetDetail, _super);
     function FreeBetDetail() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=awardDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=awardDateTime" }),
         __metadata("design:type", String)
     ], FreeBetDetail.prototype, "awardDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=displayText" }),
+        SpeakeasyMetadata({ data: "json, name=displayText" }),
         __metadata("design:type", String)
     ], FreeBetDetail.prototype, "displayText", void 0);
     __decorate([
-        Metadata({ data: "json, name=expiryDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=expiryDateTime" }),
         __metadata("design:type", String)
     ], FreeBetDetail.prototype, "expiryDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], FreeBetDetail.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=offerDesc" }),
+        SpeakeasyMetadata({ data: "json, name=offerDesc" }),
         __metadata("design:type", String)
     ], FreeBetDetail.prototype, "offerDesc", void 0);
     __decorate([
-        Metadata({ data: "json, name=offerId" }),
+        SpeakeasyMetadata({ data: "json, name=offerId" }),
         __metadata("design:type", Number)
     ], FreeBetDetail.prototype, "offerId", void 0);
     __decorate([
-        Metadata({ data: "json, name=offerName" }),
+        SpeakeasyMetadata({ data: "json, name=offerName" }),
         __metadata("design:type", String)
     ], FreeBetDetail.prototype, "offerName", void 0);
     __decorate([
-        Metadata({ data: "json, name=startDateTime" }),
+        SpeakeasyMetadata({ data: "json, name=startDateTime" }),
         __metadata("design:type", String)
     ], FreeBetDetail.prototype, "startDateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=value" }),
+        SpeakeasyMetadata({ data: "json, name=value" }),
         __metadata("design:type", Number)
     ], FreeBetDetail.prototype, "value", void 0);
     return FreeBetDetail;

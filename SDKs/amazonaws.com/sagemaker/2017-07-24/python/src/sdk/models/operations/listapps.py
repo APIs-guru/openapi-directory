@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -14,6 +18,7 @@ class ListAppsXAmzTargetEnum(str, Enum):
 
 @dataclass
 class ListAppsHeaders:
+    x_amz_target: ListAppsXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -21,19 +26,18 @@ class ListAppsHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: ListAppsXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ListAppsRequest:
-    query_params: ListAppsQueryParams = field(default=None)
-    headers: ListAppsHeaders = field(default=None)
-    request: shared.ListAppsRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListAppsHeaders = field()
+    query_params: ListAppsQueryParams = field()
+    request: shared.ListAppsRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListAppsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_apps_response: Optional[shared.ListAppsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

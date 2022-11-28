@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetGetHostReservationPurchasePreviewActionEnum(str, Enum):
     GET_HOST_RESERVATION_PURCHASE_PREVIEW = "GetHostReservationPurchasePreview"
@@ -10,10 +14,10 @@ class GetGetHostReservationPurchasePreviewVersionEnum(str, Enum):
 
 @dataclass
 class GetGetHostReservationPurchasePreviewQueryParams:
-    action: GetGetHostReservationPurchasePreviewActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    host_id_set: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'HostIdSet', 'style': 'form', 'explode': True }})
-    offering_id: str = field(default=None, metadata={'query_param': { 'field_name': 'OfferingId', 'style': 'form', 'explode': True }})
-    version: GetGetHostReservationPurchasePreviewVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetGetHostReservationPurchasePreviewActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    host_id_set: List[str] = field(metadata={'query_param': { 'field_name': 'HostIdSet', 'style': 'form', 'explode': True }})
+    offering_id: str = field(metadata={'query_param': { 'field_name': 'OfferingId', 'style': 'form', 'explode': True }})
+    version: GetGetHostReservationPurchasePreviewVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetGetHostReservationPurchasePreviewHeaders:
 
 @dataclass
 class GetGetHostReservationPurchasePreviewRequest:
-    query_params: GetGetHostReservationPurchasePreviewQueryParams = field(default=None)
-    headers: GetGetHostReservationPurchasePreviewHeaders = field(default=None)
+    headers: GetGetHostReservationPurchasePreviewHeaders = field()
+    query_params: GetGetHostReservationPurchasePreviewQueryParams = field()
     
 
 @dataclass
 class GetGetHostReservationPurchasePreviewResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CircuitsCircuitTerminationsUpdatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: number;
 }
 
 
 export class CircuitsCircuitTerminationsUpdateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CircuitsCircuitTerminationsUpdatePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.WritableCircuitTermination;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.WritableCircuitTerminationInput;
 }
 
 
 export class CircuitsCircuitTerminationsUpdateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   circuitTermination?: shared.CircuitTermination;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

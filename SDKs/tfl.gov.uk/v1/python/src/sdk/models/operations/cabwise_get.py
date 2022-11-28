@@ -4,10 +4,10 @@ from typing import Any,Optional
 
 @dataclass
 class CabwiseGetQueryParams:
+    lat: float = field(metadata={'query_param': { 'field_name': 'lat', 'style': 'form', 'explode': True }})
+    lon: float = field(metadata={'query_param': { 'field_name': 'lon', 'style': 'form', 'explode': True }})
     force_xml: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'forceXml', 'style': 'form', 'explode': True }})
-    lat: float = field(default=None, metadata={'query_param': { 'field_name': 'lat', 'style': 'form', 'explode': True }})
     legacy_format: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'legacyFormat', 'style': 'form', 'explode': True }})
-    lon: float = field(default=None, metadata={'query_param': { 'field_name': 'lon', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxResults', 'style': 'form', 'explode': True }})
     name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'name', 'style': 'form', 'explode': True }})
     optype: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'optype', 'style': 'form', 'explode': True }})
@@ -18,13 +18,13 @@ class CabwiseGetQueryParams:
 
 @dataclass
 class CabwiseGetRequest:
-    query_params: CabwiseGetQueryParams = field(default=None)
+    query_params: CabwiseGetQueryParams = field()
     
 
 @dataclass
 class CabwiseGetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     system_object: Optional[dict[str, Any]] = field(default=None)
     

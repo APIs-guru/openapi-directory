@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class RegistryUpdateProjectPathParams:
-    project: str = field(default=None, metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
+    project: str = field(metadata={'path_param': { 'field_name': 'project', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,14 +17,14 @@ class RegistryUpdateProjectQueryParams:
 
 @dataclass
 class RegistryUpdateProjectRequest:
-    path_params: RegistryUpdateProjectPathParams = field(default=None)
-    query_params: RegistryUpdateProjectQueryParams = field(default=None)
-    request: Any = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    path_params: RegistryUpdateProjectPathParams = field()
+    query_params: RegistryUpdateProjectQueryParams = field()
+    request: Any = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class RegistryUpdateProjectResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     project: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

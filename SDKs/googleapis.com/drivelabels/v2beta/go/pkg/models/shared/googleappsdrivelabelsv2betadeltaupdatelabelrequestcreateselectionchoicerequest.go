@@ -1,6 +1,8 @@
 package shared
 
-type GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestCreateSelectionChoiceRequest struct {
-	Choice  *GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoice `json:"choice,omitempty"`
-	FieldID *string                                                 `json:"fieldId,omitempty"`
+// GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestCreateSelectionChoiceRequestInput
+// Request to create a Selection Choice.
+type GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestCreateSelectionChoiceRequestInput struct {
+	Choice  *GoogleAppsDriveLabelsV2betaFieldSelectionOptionsChoiceInput `json:"choice,omitempty"`
+	FieldID *string                                                      `json:"fieldId,omitempty"`
 }

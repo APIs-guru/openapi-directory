@@ -31,7 +31,7 @@ type AndroidpublisherUsersPatchSecurity struct {
 type AndroidpublisherUsersPatchRequest struct {
 	PathParams  AndroidpublisherUsersPatchPathParams
 	QueryParams AndroidpublisherUsersPatchQueryParams
-	Request     *shared.User `request:"mediaType=application/json"`
+	Request     *shared.UserInput `request:"mediaType=application/json"`
 	Security    AndroidpublisherUsersPatchSecurity
 }
 

@@ -10,6 +10,8 @@ const (
 	EnvironmentStateEnumDeleting         EnvironmentStateEnum = "DELETING"
 )
 
+// Environment
+// A Cloud Shell environment, which is defined as the combination of a Docker image specifying what is installed on the environment and a home directory containing the user's data that will remain across sessions. Each user has at least an environment with the ID "default".
 type Environment struct {
 	DockerImage *string               `json:"dockerImage,omitempty"`
 	ID          *string               `json:"id,omitempty"`

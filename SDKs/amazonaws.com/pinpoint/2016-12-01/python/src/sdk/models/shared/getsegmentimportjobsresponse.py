@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import importjobsresponse
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetSegmentImportJobsResponse:
-    import_jobs_response: importjobsresponse.ImportJobsResponse = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ImportJobsResponse' }})
+    import_jobs_response: ImportJobsResponse = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ImportJobsResponse') }})
     

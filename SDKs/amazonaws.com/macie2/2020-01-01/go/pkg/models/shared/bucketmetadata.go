@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// BucketMetadata
+// Provides information about an S3 bucket that Amazon Macie monitors and analyzes.
 type BucketMetadata struct {
 	AccountID                       *string                             `json:"accountId,omitempty"`
 	AllowsUnencryptedObjectUploads  *AllowsUnencryptedObjectUploadsEnum `json:"allowsUnencryptedObjectUploads,omitempty"`

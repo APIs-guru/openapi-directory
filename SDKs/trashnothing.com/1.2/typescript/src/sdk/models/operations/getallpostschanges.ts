@@ -1,86 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAllPostsChangesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date_max" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_max" })
   dateMax: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=date_min" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=date_min" })
   dateMin: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=per_page" })
   perPage?: number;
 }
 
 
-export class GetAllPostsChangesSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Implicit: shared.SchemeOauth2Implicit;
-}
-
-
-export class GetAllPostsChangesSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2Code: shared.SchemeOauth2Code;
-}
-
-
-export class GetAllPostsChangesSecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
 export class GetAllPostsChangesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetAllPostsChangesSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Implicit?: shared.SchemeOauth2Implicit;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetAllPostsChangesSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2Code?: shared.SchemeOauth2Code;
 
-  @Metadata({ data: "security, option=true" })
-  option3?: GetAllPostsChangesSecurityOption3;
-}
-
-
-export class GetAllPostsChangesRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetAllPostsChangesQueryParams;
-
-  @Metadata()
-  security: GetAllPostsChangesSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=query" })
+  apiKey?: shared.SchemeApiKey;
 }
 
 
 export class GetAllPostsChanges200ApplicationJsonChanges extends SpeakeasyBase {
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: Date;
 
-  @Metadata({ data: "json, name=post_id" })
+  @SpeakeasyMetadata({ data: "json, name=post_id" })
   postId?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class GetAllPostsChanges200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=changes", elemType: operations.GetAllPostsChanges200ApplicationJsonChanges })
+  @SpeakeasyMetadata({ data: "json, name=changes", elemType: GetAllPostsChanges200ApplicationJsonChanges })
   changes?: GetAllPostsChanges200ApplicationJsonChanges[];
 }
 
 
+export class GetAllPostsChangesRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetAllPostsChangesQueryParams;
+
+  @SpeakeasyMetadata()
+  security: GetAllPostsChangesSecurity;
+}
+
+
 export class GetAllPostsChangesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getAllPostsChanges200ApplicationJsonObject?: GetAllPostsChanges200ApplicationJson;
 }

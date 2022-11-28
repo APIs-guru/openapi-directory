@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import freelistingsprogramstatusregionstatus
+from sdk import utils
+from . import *
 
 class FreeListingsProgramStatusGlobalStateEnum(str, Enum):
     PROGRAM_STATE_UNSPECIFIED = "PROGRAM_STATE_UNSPECIFIED"
@@ -13,6 +15,10 @@ class FreeListingsProgramStatusGlobalStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class FreeListingsProgramStatus:
-    global_state: Optional[FreeListingsProgramStatusGlobalStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'globalState' }})
-    region_statuses: Optional[List[freelistingsprogramstatusregionstatus.FreeListingsProgramStatusRegionStatus]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'regionStatuses' }})
+    r"""FreeListingsProgramStatus
+    Response message for GetFreeListingsProgramStatus.
+    """
+    
+    global_state: Optional[FreeListingsProgramStatusGlobalStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('globalState') }})
+    region_statuses: Optional[List[FreeListingsProgramStatusRegionStatus]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('regionStatuses') }})
     

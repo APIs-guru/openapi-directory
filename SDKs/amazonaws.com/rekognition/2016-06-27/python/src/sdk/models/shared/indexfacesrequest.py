@@ -1,18 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import attribute_enum
-from . import image
-from . import qualityfilter_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class IndexFacesRequest:
-    collection_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CollectionId' }})
-    detection_attributes: Optional[List[attribute_enum.AttributeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DetectionAttributes' }})
-    external_image_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExternalImageId' }})
-    image: image.Image = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Image' }})
-    max_faces: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxFaces' }})
-    quality_filter: Optional[qualityfilter_enum.QualityFilterEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'QualityFilter' }})
+    collection_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CollectionId') }})
+    image: Image = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Image') }})
+    detection_attributes: Optional[List[AttributeEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DetectionAttributes') }})
+    external_image_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ExternalImageId') }})
+    max_faces: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxFaces') }})
+    quality_filter: Optional[QualityFilterEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('QualityFilter') }})
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetOccupantsNearestOutputFormatOutputFormatEnum;
 (function (GetOccupantsNearestOutputFormatOutputFormatEnum) {
     GetOccupantsNearestOutputFormatOutputFormatEnum["Json"] = "json";
@@ -39,7 +39,7 @@ var GetOccupantsNearestOutputFormatPathParams = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" }),
         __metadata("design:type", String)
     ], GetOccupantsNearestOutputFormatPathParams.prototype, "outputFormat", void 0);
     return GetOccupantsNearestOutputFormatPathParams;
@@ -60,31 +60,31 @@ var GetOccupantsNearestOutputFormatQueryParams = /** @class */ (function (_super
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=brief" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=brief" }),
         __metadata("design:type", Boolean)
     ], GetOccupantsNearestOutputFormatQueryParams.prototype, "brief", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=locationDescriptor" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locationDescriptor" }),
         __metadata("design:type", String)
     ], GetOccupantsNearestOutputFormatQueryParams.prototype, "locationDescriptor", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxDistance" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxDistance" }),
         __metadata("design:type", Number)
     ], GetOccupantsNearestOutputFormatQueryParams.prototype, "maxDistance", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
         __metadata("design:type", Number)
     ], GetOccupantsNearestOutputFormatQueryParams.prototype, "outputSrs", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=point" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=point" }),
         __metadata("design:type", String)
     ], GetOccupantsNearestOutputFormatQueryParams.prototype, "point", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=setBack" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=setBack" }),
         __metadata("design:type", Number)
     ], GetOccupantsNearestOutputFormatQueryParams.prototype, "setBack", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=tags" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tags" }),
         __metadata("design:type", String)
     ], GetOccupantsNearestOutputFormatQueryParams.prototype, "tags", void 0);
     return GetOccupantsNearestOutputFormatQueryParams;
@@ -96,11 +96,11 @@ var GetOccupantsNearestOutputFormatRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetOccupantsNearestOutputFormatPathParams)
     ], GetOccupantsNearestOutputFormatRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetOccupantsNearestOutputFormatQueryParams)
     ], GetOccupantsNearestOutputFormatRequest.prototype, "queryParams", void 0);
     return GetOccupantsNearestOutputFormatRequest;
@@ -112,11 +112,11 @@ var GetOccupantsNearestOutputFormatResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetOccupantsNearestOutputFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetOccupantsNearestOutputFormatResponse.prototype, "statusCode", void 0);
     return GetOccupantsNearestOutputFormatResponse;

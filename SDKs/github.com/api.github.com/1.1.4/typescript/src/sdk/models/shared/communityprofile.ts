@@ -1,68 +1,69 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class CommunityProfileFilesCodeOfConductSimple extends SpeakeasyBase {
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }
 
 
 export class CommunityProfileFilesCommunityHealthFile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }
 
 
 export class CommunityProfileFilesLicenseSimple extends SpeakeasyBase {
-  @Metadata({ data: "json, name=html_url" })
+  @SpeakeasyMetadata({ data: "json, name=html_url" })
   htmlUrl?: string;
 
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=node_id" })
+  @SpeakeasyMetadata({ data: "json, name=node_id" })
   nodeId: string;
 
-  @Metadata({ data: "json, name=spdx_id" })
+  @SpeakeasyMetadata({ data: "json, name=spdx_id" })
   spdxId: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url: string;
 }
 
 
 export class CommunityProfileFiles extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code_of_conduct" })
+  @SpeakeasyMetadata({ data: "json, name=code_of_conduct" })
   codeOfConduct: CommunityProfileFilesCodeOfConductSimple;
 
-  @Metadata({ data: "json, name=contributing" })
+  @SpeakeasyMetadata({ data: "json, name=contributing" })
   contributing: CommunityProfileFilesCommunityHealthFile;
 
-  @Metadata({ data: "json, name=issue_template" })
+  @SpeakeasyMetadata({ data: "json, name=issue_template" })
   issueTemplate: CommunityProfileFilesCommunityHealthFile;
 
-  @Metadata({ data: "json, name=license" })
+  @SpeakeasyMetadata({ data: "json, name=license" })
   license: CommunityProfileFilesLicenseSimple;
 
-  @Metadata({ data: "json, name=pull_request_template" })
+  @SpeakeasyMetadata({ data: "json, name=pull_request_template" })
   pullRequestTemplate: CommunityProfileFilesCommunityHealthFile;
 
-  @Metadata({ data: "json, name=readme" })
+  @SpeakeasyMetadata({ data: "json, name=readme" })
   readme: CommunityProfileFilesCommunityHealthFile;
 }
 
@@ -72,21 +73,21 @@ export class CommunityProfileFiles extends SpeakeasyBase {
  * Community Profile
 **/
 export class CommunityProfile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content_reports_enabled" })
+  @SpeakeasyMetadata({ data: "json, name=content_reports_enabled" })
   contentReportsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=documentation" })
+  @SpeakeasyMetadata({ data: "json, name=documentation" })
   documentation: string;
 
-  @Metadata({ data: "json, name=files" })
+  @SpeakeasyMetadata({ data: "json, name=files" })
   files: CommunityProfileFiles;
 
-  @Metadata({ data: "json, name=health_percentage" })
+  @SpeakeasyMetadata({ data: "json, name=health_percentage" })
   healthPercentage: number;
 
-  @Metadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata({ data: "json, name=updated_at" })
   updatedAt: Date;
 }

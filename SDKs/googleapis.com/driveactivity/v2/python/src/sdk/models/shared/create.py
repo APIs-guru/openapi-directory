@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
-from . import copy
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Create:
-    copy: Optional[copy.Copy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'copy' }})
-    new: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'new' }})
-    upload: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upload' }})
+    r"""Create
+    An object was created.
+    """
+    
+    copy: Optional[Copy] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('copy') }})
+    new: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('new') }})
+    upload: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('upload') }})
     

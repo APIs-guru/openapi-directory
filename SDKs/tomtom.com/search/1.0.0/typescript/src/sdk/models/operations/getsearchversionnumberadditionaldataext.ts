@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetSearchVersionNumberAdditionalDataExtExtEnum {
     Json = "json"
@@ -6,36 +7,36 @@ export enum GetSearchVersionNumberAdditionalDataExtExtEnum {
 
 
 export class GetSearchVersionNumberAdditionalDataExtPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ext" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ext" })
   ext: GetSearchVersionNumberAdditionalDataExtExtEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionNumber" })
   versionNumber: number;
 }
 
 
 export class GetSearchVersionNumberAdditionalDataExtQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=geometries" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=geometries" })
   geometries: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=geometriesZoom" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=geometriesZoom" })
   geometriesZoom?: number;
 }
 
 
 export class GetSearchVersionNumberAdditionalDataExtRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSearchVersionNumberAdditionalDataExtPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSearchVersionNumberAdditionalDataExtQueryParams;
 }
 
 
 export class GetSearchVersionNumberAdditionalDataExtResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

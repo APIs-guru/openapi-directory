@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var RegisterJobDefinitionHeaders = /** @class */ (function (_super) {
     __extends(RegisterJobDefinitionHeaders, _super);
@@ -30,31 +30,31 @@ var RegisterJobDefinitionHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], RegisterJobDefinitionHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], RegisterJobDefinitionHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], RegisterJobDefinitionHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], RegisterJobDefinitionHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], RegisterJobDefinitionHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], RegisterJobDefinitionHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], RegisterJobDefinitionHeaders.prototype, "xAmzSignedHeaders", void 0);
     return RegisterJobDefinitionHeaders;
@@ -70,83 +70,83 @@ var RegisterJobDefinitionRequestBodyContainerProperties = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=command" }),
+        SpeakeasyMetadata({ data: "json, name=command" }),
         __metadata("design:type", Array)
     ], RegisterJobDefinitionRequestBodyContainerProperties.prototype, "command", void 0);
     __decorate([
-        Metadata({ data: "json, name=environment", elemType: shared.KeyValuePair }),
+        SpeakeasyMetadata({ data: "json, name=environment", elemType: shared.KeyValuePair }),
         __metadata("design:type", Array)
     ], RegisterJobDefinitionRequestBodyContainerProperties.prototype, "environment", void 0);
     __decorate([
-        Metadata({ data: "json, name=executionRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=executionRoleArn" }),
         __metadata("design:type", String)
     ], RegisterJobDefinitionRequestBodyContainerProperties.prototype, "executionRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=fargatePlatformConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=fargatePlatformConfiguration" }),
         __metadata("design:type", shared.FargatePlatformConfiguration)
     ], RegisterJobDefinitionRequestBodyContainerProperties.prototype, "fargatePlatformConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=image" }),
+        SpeakeasyMetadata({ data: "json, name=image" }),
         __metadata("design:type", String)
     ], RegisterJobDefinitionRequestBodyContainerProperties.prototype, "image", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceType" }),
+        SpeakeasyMetadata({ data: "json, name=instanceType" }),
         __metadata("design:type", String)
     ], RegisterJobDefinitionRequestBodyContainerProperties.prototype, "instanceType", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=jobRoleArn" }),
         __metadata("design:type", String)
     ], RegisterJobDefinitionRequestBodyContainerProperties.prototype, "jobRoleArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=linuxParameters" }),
+        SpeakeasyMetadata({ data: "json, name=linuxParameters" }),
         __metadata("design:type", shared.LinuxParameters)
     ], RegisterJobDefinitionRequestBodyContainerProperties.prototype, "linuxParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=logConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=logConfiguration" }),
         __metadata("design:type", shared.LogConfiguration)
     ], RegisterJobDefinitionRequestBodyContainerProperties.prototype, "logConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=memory" }),
+        SpeakeasyMetadata({ data: "json, name=memory" }),
         __metadata("design:type", Number)
     ], RegisterJobDefinitionRequestBodyContainerProperties.prototype, "memory", void 0);
     __decorate([
-        Metadata({ data: "json, name=mountPoints", elemType: shared.MountPoint }),
+        SpeakeasyMetadata({ data: "json, name=mountPoints", elemType: shared.MountPoint }),
         __metadata("design:type", Array)
     ], RegisterJobDefinitionRequestBodyContainerProperties.prototype, "mountPoints", void 0);
     __decorate([
-        Metadata({ data: "json, name=networkConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=networkConfiguration" }),
         __metadata("design:type", shared.NetworkConfiguration)
     ], RegisterJobDefinitionRequestBodyContainerProperties.prototype, "networkConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=privileged" }),
+        SpeakeasyMetadata({ data: "json, name=privileged" }),
         __metadata("design:type", Boolean)
     ], RegisterJobDefinitionRequestBodyContainerProperties.prototype, "privileged", void 0);
     __decorate([
-        Metadata({ data: "json, name=readonlyRootFilesystem" }),
+        SpeakeasyMetadata({ data: "json, name=readonlyRootFilesystem" }),
         __metadata("design:type", Boolean)
     ], RegisterJobDefinitionRequestBodyContainerProperties.prototype, "readonlyRootFilesystem", void 0);
     __decorate([
-        Metadata({ data: "json, name=resourceRequirements", elemType: shared.ResourceRequirement }),
+        SpeakeasyMetadata({ data: "json, name=resourceRequirements", elemType: shared.ResourceRequirement }),
         __metadata("design:type", Array)
     ], RegisterJobDefinitionRequestBodyContainerProperties.prototype, "resourceRequirements", void 0);
     __decorate([
-        Metadata({ data: "json, name=secrets", elemType: shared.Secret }),
+        SpeakeasyMetadata({ data: "json, name=secrets", elemType: shared.Secret }),
         __metadata("design:type", Array)
     ], RegisterJobDefinitionRequestBodyContainerProperties.prototype, "secrets", void 0);
     __decorate([
-        Metadata({ data: "json, name=ulimits", elemType: shared.Ulimit }),
+        SpeakeasyMetadata({ data: "json, name=ulimits", elemType: shared.Ulimit }),
         __metadata("design:type", Array)
     ], RegisterJobDefinitionRequestBodyContainerProperties.prototype, "ulimits", void 0);
     __decorate([
-        Metadata({ data: "json, name=user" }),
+        SpeakeasyMetadata({ data: "json, name=user" }),
         __metadata("design:type", String)
     ], RegisterJobDefinitionRequestBodyContainerProperties.prototype, "user", void 0);
     __decorate([
-        Metadata({ data: "json, name=vcpus" }),
+        SpeakeasyMetadata({ data: "json, name=vcpus" }),
         __metadata("design:type", Number)
     ], RegisterJobDefinitionRequestBodyContainerProperties.prototype, "vcpus", void 0);
     __decorate([
-        Metadata({ data: "json, name=volumes", elemType: shared.Volume }),
+        SpeakeasyMetadata({ data: "json, name=volumes", elemType: shared.Volume }),
         __metadata("design:type", Array)
     ], RegisterJobDefinitionRequestBodyContainerProperties.prototype, "volumes", void 0);
     return RegisterJobDefinitionRequestBodyContainerProperties;
@@ -162,15 +162,15 @@ var RegisterJobDefinitionRequestBodyNodeProperties = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=mainNode" }),
+        SpeakeasyMetadata({ data: "json, name=mainNode" }),
         __metadata("design:type", Number)
     ], RegisterJobDefinitionRequestBodyNodeProperties.prototype, "mainNode", void 0);
     __decorate([
-        Metadata({ data: "json, name=nodeRangeProperties", elemType: shared.NodeRangeProperty }),
+        SpeakeasyMetadata({ data: "json, name=nodeRangeProperties", elemType: shared.NodeRangeProperty }),
         __metadata("design:type", Array)
     ], RegisterJobDefinitionRequestBodyNodeProperties.prototype, "nodeRangeProperties", void 0);
     __decorate([
-        Metadata({ data: "json, name=numNodes" }),
+        SpeakeasyMetadata({ data: "json, name=numNodes" }),
         __metadata("design:type", Number)
     ], RegisterJobDefinitionRequestBodyNodeProperties.prototype, "numNodes", void 0);
     return RegisterJobDefinitionRequestBodyNodeProperties;
@@ -186,11 +186,11 @@ var RegisterJobDefinitionRequestBodyRetryStrategy = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attempts" }),
+        SpeakeasyMetadata({ data: "json, name=attempts" }),
         __metadata("design:type", Number)
     ], RegisterJobDefinitionRequestBodyRetryStrategy.prototype, "attempts", void 0);
     __decorate([
-        Metadata({ data: "json, name=evaluateOnExit", elemType: shared.EvaluateOnExit }),
+        SpeakeasyMetadata({ data: "json, name=evaluateOnExit", elemType: shared.EvaluateOnExit }),
         __metadata("design:type", Array)
     ], RegisterJobDefinitionRequestBodyRetryStrategy.prototype, "evaluateOnExit", void 0);
     return RegisterJobDefinitionRequestBodyRetryStrategy;
@@ -206,7 +206,7 @@ var RegisterJobDefinitionRequestBodyTimeout = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attemptDurationSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=attemptDurationSeconds" }),
         __metadata("design:type", Number)
     ], RegisterJobDefinitionRequestBodyTimeout.prototype, "attemptDurationSeconds", void 0);
     return RegisterJobDefinitionRequestBodyTimeout;
@@ -223,43 +223,43 @@ var RegisterJobDefinitionRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=containerProperties" }),
+        SpeakeasyMetadata({ data: "json, name=containerProperties" }),
         __metadata("design:type", RegisterJobDefinitionRequestBodyContainerProperties)
     ], RegisterJobDefinitionRequestBody.prototype, "containerProperties", void 0);
     __decorate([
-        Metadata({ data: "json, name=jobDefinitionName" }),
+        SpeakeasyMetadata({ data: "json, name=jobDefinitionName" }),
         __metadata("design:type", String)
     ], RegisterJobDefinitionRequestBody.prototype, "jobDefinitionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=nodeProperties" }),
+        SpeakeasyMetadata({ data: "json, name=nodeProperties" }),
         __metadata("design:type", RegisterJobDefinitionRequestBodyNodeProperties)
     ], RegisterJobDefinitionRequestBody.prototype, "nodeProperties", void 0);
     __decorate([
-        Metadata({ data: "json, name=parameters" }),
+        SpeakeasyMetadata({ data: "json, name=parameters" }),
         __metadata("design:type", Map)
     ], RegisterJobDefinitionRequestBody.prototype, "parameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=platformCapabilities" }),
+        SpeakeasyMetadata({ data: "json, name=platformCapabilities" }),
         __metadata("design:type", Array)
     ], RegisterJobDefinitionRequestBody.prototype, "platformCapabilities", void 0);
     __decorate([
-        Metadata({ data: "json, name=propagateTags" }),
+        SpeakeasyMetadata({ data: "json, name=propagateTags" }),
         __metadata("design:type", Boolean)
     ], RegisterJobDefinitionRequestBody.prototype, "propagateTags", void 0);
     __decorate([
-        Metadata({ data: "json, name=retryStrategy" }),
+        SpeakeasyMetadata({ data: "json, name=retryStrategy" }),
         __metadata("design:type", RegisterJobDefinitionRequestBodyRetryStrategy)
     ], RegisterJobDefinitionRequestBody.prototype, "retryStrategy", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], RegisterJobDefinitionRequestBody.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=timeout" }),
+        SpeakeasyMetadata({ data: "json, name=timeout" }),
         __metadata("design:type", RegisterJobDefinitionRequestBodyTimeout)
     ], RegisterJobDefinitionRequestBody.prototype, "timeout", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], RegisterJobDefinitionRequestBody.prototype, "type", void 0);
     return RegisterJobDefinitionRequestBody;
@@ -271,11 +271,11 @@ var RegisterJobDefinitionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RegisterJobDefinitionHeaders)
     ], RegisterJobDefinitionRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", RegisterJobDefinitionRequestBody)
     ], RegisterJobDefinitionRequest.prototype, "request", void 0);
     return RegisterJobDefinitionRequest;
@@ -287,23 +287,23 @@ var RegisterJobDefinitionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], RegisterJobDefinitionResponse.prototype, "clientException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RegisterJobDefinitionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.RegisterJobDefinitionResponse)
     ], RegisterJobDefinitionResponse.prototype, "registerJobDefinitionResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], RegisterJobDefinitionResponse.prototype, "serverException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RegisterJobDefinitionResponse.prototype, "statusCode", void 0);
     return RegisterJobDefinitionResponse;

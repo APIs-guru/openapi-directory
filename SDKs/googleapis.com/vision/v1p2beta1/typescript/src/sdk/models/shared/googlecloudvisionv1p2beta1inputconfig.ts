@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudVisionV1p2beta1GcsSource } from "./googlecloudvisionv1p2beta1gcssource";
+
 
 
 // GoogleCloudVisionV1p2beta1InputConfig
@@ -7,12 +8,12 @@ import { GoogleCloudVisionV1p2beta1GcsSource } from "./googlecloudvisionv1p2beta
  * The desired input location and metadata.
 **/
 export class GoogleCloudVisionV1p2beta1InputConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=gcsSource" })
+  @SpeakeasyMetadata({ data: "json, name=gcsSource" })
   gcsSource?: GoogleCloudVisionV1p2beta1GcsSource;
 
-  @Metadata({ data: "json, name=mimeType" })
+  @SpeakeasyMetadata({ data: "json, name=mimeType" })
   mimeType?: string;
 }

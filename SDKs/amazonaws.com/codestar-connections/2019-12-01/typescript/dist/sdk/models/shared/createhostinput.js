@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProviderTypeEnum } from "./providertypeenum";
+import { Tag } from "./tag";
 import { VpcConfiguration } from "./vpcconfiguration";
 var CreateHostInput = /** @class */ (function (_super) {
     __extends(CreateHostInput, _super);
@@ -32,23 +32,23 @@ var CreateHostInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], CreateHostInput.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProviderEndpoint" }),
+        SpeakeasyMetadata({ data: "json, name=ProviderEndpoint" }),
         __metadata("design:type", String)
     ], CreateHostInput.prototype, "providerEndpoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=ProviderType" }),
+        SpeakeasyMetadata({ data: "json, name=ProviderType" }),
         __metadata("design:type", String)
     ], CreateHostInput.prototype, "providerType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], CreateHostInput.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=VpcConfiguration" }),
         __metadata("design:type", VpcConfiguration)
     ], CreateHostInput.prototype, "vpcConfiguration", void 0);
     return CreateHostInput;

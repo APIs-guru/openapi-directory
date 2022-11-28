@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GamesConfigurationAchievementConfigurationsUpdatePathParams:
-    achievement_id: str = field(default=None, metadata={'path_param': { 'field_name': 'achievementId', 'style': 'simple', 'explode': False }})
+    achievement_id: str = field(metadata={'path_param': { 'field_name': 'achievementId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +29,21 @@ class GamesConfigurationAchievementConfigurationsUpdateQueryParams:
 
 @dataclass
 class GamesConfigurationAchievementConfigurationsUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GamesConfigurationAchievementConfigurationsUpdateRequest:
-    path_params: GamesConfigurationAchievementConfigurationsUpdatePathParams = field(default=None)
-    query_params: GamesConfigurationAchievementConfigurationsUpdateQueryParams = field(default=None)
+    path_params: GamesConfigurationAchievementConfigurationsUpdatePathParams = field()
+    query_params: GamesConfigurationAchievementConfigurationsUpdateQueryParams = field()
+    security: GamesConfigurationAchievementConfigurationsUpdateSecurity = field()
     request: Optional[shared.AchievementConfiguration] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: GamesConfigurationAchievementConfigurationsUpdateSecurity = field(default=None)
     
 
 @dataclass
 class GamesConfigurationAchievementConfigurationsUpdateResponse:
+    content_type: str = field()
+    status_code: int = field()
     achievement_configuration: Optional[shared.AchievementConfiguration] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

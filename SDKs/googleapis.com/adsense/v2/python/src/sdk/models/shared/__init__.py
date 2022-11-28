@@ -1,4 +1,4 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
 from .account import *
 from .adblockingrecoverytag import *
 from .adclient import *
@@ -9,7 +9,7 @@ from .alt_enum import *
 from .cell import *
 from .contentadssettings import *
 from .customchannel import *
-from .date import *
+from .date_ import *
 from .header import *
 from .httpbody import *
 from .listaccountsresponse import *

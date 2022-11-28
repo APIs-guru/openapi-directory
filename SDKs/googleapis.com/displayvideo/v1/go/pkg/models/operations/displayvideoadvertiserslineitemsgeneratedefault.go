@@ -30,7 +30,7 @@ type DisplayvideoAdvertisersLineItemsGenerateDefaultSecurity struct {
 type DisplayvideoAdvertisersLineItemsGenerateDefaultRequest struct {
 	PathParams  DisplayvideoAdvertisersLineItemsGenerateDefaultPathParams
 	QueryParams DisplayvideoAdvertisersLineItemsGenerateDefaultQueryParams
-	Request     *shared.GenerateDefaultLineItemRequest `request:"mediaType=application/json"`
+	Request     *shared.GenerateDefaultLineItemRequestInput `request:"mediaType=application/json"`
 	Security    DisplayvideoAdvertisersLineItemsGenerateDefaultSecurity
 }
 

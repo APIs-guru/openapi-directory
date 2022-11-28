@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TflAPIPresentationEntitiesPrediction
+// DTO to capture the prediction details
 type TflAPIPresentationEntitiesPrediction struct {
 	Bearing             *string                                     `json:"bearing,omitempty"`
 	CurrentLocation     *string                                     `json:"currentLocation,omitempty"`

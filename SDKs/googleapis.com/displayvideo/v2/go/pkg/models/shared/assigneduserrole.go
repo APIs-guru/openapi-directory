@@ -17,6 +17,16 @@ const (
 	AssignedUserRoleUserRoleEnumCreativeAdmin          AssignedUserRoleUserRoleEnum = "CREATIVE_ADMIN"
 )
 
+// AssignedUserRoleInput
+// A single assigned user role, which defines a user's authorized interaction with a specified partner or advertiser.
+type AssignedUserRoleInput struct {
+	AdvertiserID *string                       `json:"advertiserId,omitempty"`
+	PartnerID    *string                       `json:"partnerId,omitempty"`
+	UserRole     *AssignedUserRoleUserRoleEnum `json:"userRole,omitempty"`
+}
+
+// AssignedUserRole
+// A single assigned user role, which defines a user's authorized interaction with a specified partner or advertiser.
 type AssignedUserRole struct {
 	AdvertiserID       *string                       `json:"advertiserId,omitempty"`
 	AssignedUserRoleID *string                       `json:"assignedUserRoleId,omitempty"`

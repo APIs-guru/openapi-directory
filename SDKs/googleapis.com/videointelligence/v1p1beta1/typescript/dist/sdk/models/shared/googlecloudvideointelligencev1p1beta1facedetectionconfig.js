@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleCloudVideointelligenceV1p1beta1FaceDetectionConfig
 /**
  * Config for FACE_DETECTION.
@@ -33,15 +33,15 @@ var GoogleCloudVideointelligenceV1p1beta1FaceDetectionConfig = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=includeAttributes" }),
+        SpeakeasyMetadata({ data: "json, name=includeAttributes" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudVideointelligenceV1p1beta1FaceDetectionConfig.prototype, "includeAttributes", void 0);
     __decorate([
-        Metadata({ data: "json, name=includeBoundingBoxes" }),
+        SpeakeasyMetadata({ data: "json, name=includeBoundingBoxes" }),
         __metadata("design:type", Boolean)
     ], GoogleCloudVideointelligenceV1p1beta1FaceDetectionConfig.prototype, "includeBoundingBoxes", void 0);
     __decorate([
-        Metadata({ data: "json, name=model" }),
+        SpeakeasyMetadata({ data: "json, name=model" }),
         __metadata("design:type", String)
     ], GoogleCloudVideointelligenceV1p1beta1FaceDetectionConfig.prototype, "model", void 0);
     return GoogleCloudVideointelligenceV1p1beta1FaceDetectionConfig;

@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Authorizer } from "./authorizer";
 
 
+
 export class GetAuthorizersResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Items", elemType: shared.Authorizer })
+  @SpeakeasyMetadata({ data: "json, name=Items", elemType: Authorizer })
   items?: Authorizer[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

@@ -9,6 +9,8 @@ const (
 	TransferMessageSeverityEnumError                      TransferMessageSeverityEnum = "ERROR"
 )
 
+// TransferMessage
+// Represents a user facing message for a particular data transfer run.
 type TransferMessage struct {
 	MessageText *string                      `json:"messageText,omitempty"`
 	MessageTime *string                      `json:"messageTime,omitempty"`

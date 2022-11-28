@@ -1,5 +1,7 @@
 package shared
 
+// ExportTask
+// Represents an export task.
 type ExportTask struct {
 	Destination       *string                  `json:"destination,omitempty"`
 	DestinationPrefix *string                  `json:"destinationPrefix,omitempty"`

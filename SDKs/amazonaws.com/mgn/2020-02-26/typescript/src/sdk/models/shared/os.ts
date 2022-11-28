@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Os
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Operating System.
 **/
 export class Os extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fullString" })
+  @SpeakeasyMetadata({ data: "json, name=fullString" })
   fullString?: string;
 }

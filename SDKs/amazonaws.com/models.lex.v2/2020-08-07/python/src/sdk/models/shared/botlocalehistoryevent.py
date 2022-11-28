@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class BotLocaleHistoryEvent:
-    event: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'event' }})
-    event_date: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'eventDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    r"""BotLocaleHistoryEvent
+    Provides information about an event that occurred affecting the bot locale.
+    """
+    
+    event: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('event') }})
+    event_date: datetime = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('eventDate'), 'encoder': utils.datetimeisoformat(False), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     

@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolTelnetSetTracePathParams = /** @class */ (function (_super) {
     __extends(ProtocolTelnetSetTracePathParams, _super);
     function ProtocolTelnetSetTracePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolTelnetSetTracePathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=enableOrNot" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=enableOrNot" }),
         __metadata("design:type", String)
     ], ProtocolTelnetSetTracePathParams.prototype, "enableOrNot", void 0);
     return ProtocolTelnetSetTracePathParams;
@@ -45,7 +45,7 @@ var ProtocolTelnetSetTraceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolTelnetSetTracePathParams)
     ], ProtocolTelnetSetTraceRequest.prototype, "pathParams", void 0);
     return ProtocolTelnetSetTraceRequest;
@@ -57,15 +57,15 @@ var ProtocolTelnetSetTraceResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolTelnetSetTraceResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolTelnetSetTraceResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolTelnetSetTraceResponse.prototype, "protocolTelnetSetTrace200ApplicationJsonString", void 0);
     return ProtocolTelnetSetTraceResponse;

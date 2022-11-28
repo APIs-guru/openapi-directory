@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FindingsReportSummary } from "./findingsreportsummary";
+
 
 
 // GetFindingsReportAccountSummaryResponse
@@ -8,9 +8,9 @@ import { FindingsReportSummary } from "./findingsreportsummary";
  * The structure representing the GetFindingsReportAccountSummaryResponse.
 **/
 export class GetFindingsReportAccountSummaryResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=reportSummaries", elemType: shared.FindingsReportSummary })
+  @SpeakeasyMetadata({ data: "json, name=reportSummaries", elemType: FindingsReportSummary })
   reportSummaries: FindingsReportSummary[];
 }

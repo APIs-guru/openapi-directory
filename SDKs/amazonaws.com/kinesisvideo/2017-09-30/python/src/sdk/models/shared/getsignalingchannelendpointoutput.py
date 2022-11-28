@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import resourceendpointlistitem
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetSignalingChannelEndpointOutput:
-    resource_endpoint_list: Optional[List[resourceendpointlistitem.ResourceEndpointListItem]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResourceEndpointList' }})
+    resource_endpoint_list: Optional[List[ResourceEndpointListItem]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ResourceEndpointList') }})
     

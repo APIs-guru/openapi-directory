@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VideoSourceLiveStreamLink } from "./videosourcelivestreamlink";
+
 
 
 // VideoSourceLiveStream
@@ -8,9 +8,9 @@ import { VideoSourceLiveStreamLink } from "./videosourcelivestreamlink";
  * This appears if the video is from a Live Record.
 **/
 export class VideoSourceLiveStream extends SpeakeasyBase {
-  @Metadata({ data: "json, name=links", elemType: shared.VideoSourceLiveStreamLink })
+  @SpeakeasyMetadata({ data: "json, name=links", elemType: VideoSourceLiveStreamLink })
   links?: VideoSourceLiveStreamLink[];
 
-  @Metadata({ data: "json, name=liveStreamId" })
+  @SpeakeasyMetadata({ data: "json, name=liveStreamId" })
   liveStreamId?: string;
 }

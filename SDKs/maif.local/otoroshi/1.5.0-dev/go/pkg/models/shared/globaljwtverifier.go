@@ -1,5 +1,7 @@
 package shared
 
+// GlobalJwtVerifier
+// A JWT verifier used by multiple service descriptor
 type GlobalJwtVerifier struct {
 	AlgoSettings interface{} `json:"algoSettings"`
 	Desc         string      `json:"desc"`

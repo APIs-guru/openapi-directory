@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OpsItemEventFilterKeyEnum } from "./opsitemeventfilterkeyenum";
 import { OpsItemEventFilterOperatorEnum } from "./opsitemeventfilteroperatorenum";
+
 
 
 // OpsItemEventFilter
@@ -8,12 +9,12 @@ import { OpsItemEventFilterOperatorEnum } from "./opsitemeventfilteroperatorenum
  * Describes a filter for a specific list of OpsItem events. You can filter event information by using tags. You specify tags by using a key-value pair mapping. 
 **/
 export class OpsItemEventFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Key" })
+  @SpeakeasyMetadata({ data: "json, name=Key" })
   key: OpsItemEventFilterKeyEnum;
 
-  @Metadata({ data: "json, name=Operator" })
+  @SpeakeasyMetadata({ data: "json, name=Operator" })
   operator: OpsItemEventFilterOperatorEnum;
 
-  @Metadata({ data: "json, name=Values" })
+  @SpeakeasyMetadata({ data: "json, name=Values" })
   values: string[];
 }

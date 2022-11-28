@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Role } from "./role";
+
 
 
 // RoleList
@@ -8,6 +8,6 @@ import { Role } from "./role";
  * List of roles
 **/
 export class RoleList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=items", elemType: shared.Role })
+  @SpeakeasyMetadata({ data: "json, name=items", elemType: Role })
   items: Role[];
 }

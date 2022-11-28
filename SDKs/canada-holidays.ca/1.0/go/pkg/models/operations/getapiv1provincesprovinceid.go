@@ -30,17 +30,17 @@ type GetAPIV1ProvincesProvinceIDQueryParams struct {
 	Year *string `queryParam:"style=form,explode=true,name=year"`
 }
 
-type GetAPIV1ProvincesProvinceIDRequest struct {
-	PathParams  GetAPIV1ProvincesProvinceIDPathParams
-	QueryParams GetAPIV1ProvincesProvinceIDQueryParams
-}
-
 type GetAPIV1ProvincesProvinceID200ApplicationJSON struct {
 	Province *shared.Province `json:"province,omitempty"`
 }
 
 type GetAPIV1ProvincesProvinceID404ApplicationJSON struct {
 	Error *shared.Error `json:"error,omitempty"`
+}
+
+type GetAPIV1ProvincesProvinceIDRequest struct {
+	PathParams  GetAPIV1ProvincesProvinceIDPathParams
+	QueryParams GetAPIV1ProvincesProvinceIDQueryParams
 }
 
 type GetAPIV1ProvincesProvinceIDResponse struct {

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CloudtraceProjectsTraceSinksCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -31,7 +31,7 @@ export declare class CloudtraceProjectsTraceSinksCreateSecurity extends Speakeas
 export declare class CloudtraceProjectsTraceSinksCreateRequest extends SpeakeasyBase {
     pathParams: CloudtraceProjectsTraceSinksCreatePathParams;
     queryParams: CloudtraceProjectsTraceSinksCreateQueryParams;
-    request?: shared.TraceSink;
+    request?: shared.TraceSinkInput;
     security: CloudtraceProjectsTraceSinksCreateSecurity;
 }
 export declare class CloudtraceProjectsTraceSinksCreateResponse extends SpeakeasyBase {

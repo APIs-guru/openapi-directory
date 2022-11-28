@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PipelineActivity } from "./pipelineactivity";
 import { ReprocessingSummary } from "./reprocessingsummary";
 /**

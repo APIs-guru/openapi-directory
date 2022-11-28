@@ -7,6 +7,8 @@ const (
 	PivotTableValueLayoutEnumVertical   PivotTableValueLayoutEnum = "VERTICAL"
 )
 
+// PivotTable
+// A pivot table.
 type PivotTable struct {
 	Columns             []PivotGroup                   `json:"columns,omitempty"`
 	Criteria            map[string]PivotFilterCriteria `json:"criteria,omitempty"`

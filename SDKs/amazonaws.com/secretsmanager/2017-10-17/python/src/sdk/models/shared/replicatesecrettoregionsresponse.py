@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import replicationstatustype
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ReplicateSecretToRegionsResponse:
-    arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ARN' }})
-    replication_status: Optional[List[replicationstatustype.ReplicationStatusType]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReplicationStatus' }})
+    arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ARN') }})
+    replication_status: Optional[List[ReplicationStatusType]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReplicationStatus') }})
     

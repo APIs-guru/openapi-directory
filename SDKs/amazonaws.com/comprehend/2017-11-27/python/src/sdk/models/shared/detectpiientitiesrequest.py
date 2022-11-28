@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import languagecode_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DetectPiiEntitiesRequest:
-    language_code: languagecode_enum.LanguageCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LanguageCode' }})
-    text: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Text' }})
+    language_code: LanguageCodeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('LanguageCode') }})
+    text: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Text') }})
     

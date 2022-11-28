@@ -67,6 +67,8 @@ const (
 	TestMatrixStateEnumInvalid                  TestMatrixStateEnum = "INVALID"
 )
 
+// TestMatrix
+// TestMatrix captures all details about a test. It contains the environment configuration, test specification, test executions and overall state and outcome.
 type TestMatrix struct {
 	ClientInfo           *ClientInfo                         `json:"clientInfo,omitempty"`
 	EnvironmentMatrix    *EnvironmentMatrix                  `json:"environmentMatrix,omitempty"`

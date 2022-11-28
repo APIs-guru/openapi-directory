@@ -5,6 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetTaxonomyTermsQueryParams:
+    field: str = field(metadata={'query_param': { 'field_name': 'field', 'style': 'form', 'explode': True }})
     api_key: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'api_key', 'style': 'form', 'explode': True }})
     body_subtype: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'body_subtype', 'style': 'form', 'explode': True }})
     body_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'body_type', 'style': 'form', 'explode': True }})
@@ -12,7 +13,6 @@ class GetTaxonomyTermsQueryParams:
     engine: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'engine', 'style': 'form', 'explode': True }})
     engine_block: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'engine_block', 'style': 'form', 'explode': True }})
     engine_size: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'engine_size', 'style': 'form', 'explode': True }})
-    field: str = field(default=None, metadata={'query_param': { 'field_name': 'field', 'style': 'form', 'explode': True }})
     fuel_type: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fuel_type', 'style': 'form', 'explode': True }})
     make: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'make', 'style': 'form', 'explode': True }})
     model: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'model', 'style': 'form', 'explode': True }})
@@ -24,13 +24,13 @@ class GetTaxonomyTermsQueryParams:
 
 @dataclass
 class GetTaxonomyTermsRequest:
-    query_params: GetTaxonomyTermsQueryParams = field(default=None)
+    query_params: GetTaxonomyTermsQueryParams = field()
     
 
 @dataclass
 class GetTaxonomyTermsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
     specs_auto_complete_response: Optional[shared.SpecsAutoCompleteResponse] = field(default=None)
-    status_code: int = field(default=None)
     

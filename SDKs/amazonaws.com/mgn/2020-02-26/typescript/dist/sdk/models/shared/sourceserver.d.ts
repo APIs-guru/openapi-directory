@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DataReplicationInfo } from "./datareplicationinfo";
 import { LaunchedInstance } from "./launchedinstance";
 import { LifeCycle } from "./lifecycle";

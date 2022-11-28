@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetRtiJobInfoPathParams = /** @class */ (function (_super) {
     __extends(GetRtiJobInfoPathParams, _super);
@@ -30,7 +30,7 @@ var GetRtiJobInfoPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=JobId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=JobId" }),
         __metadata("design:type", String)
     ], GetRtiJobInfoPathParams.prototype, "jobId", void 0);
     return GetRtiJobInfoPathParams;
@@ -42,11 +42,11 @@ var GetRtiJobInfoHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetRtiJobInfoHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetRtiJobInfoHeaders.prototype, "authorization", void 0);
     return GetRtiJobInfoHeaders;
@@ -58,11 +58,11 @@ var GetRtiJobInfoRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRtiJobInfoPathParams)
     ], GetRtiJobInfoRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetRtiJobInfoHeaders)
     ], GetRtiJobInfoRequest.prototype, "headers", void 0);
     return GetRtiJobInfoRequest;
@@ -74,19 +74,19 @@ var GetRtiJobInfoResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetRtiJobInfoResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetRtiJobInfoResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.JobInfo)
     ], GetRtiJobInfoResponse.prototype, "jobInfo", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetRtiJobInfoResponse.prototype, "statusCode", void 0);
     return GetRtiJobInfoResponse;

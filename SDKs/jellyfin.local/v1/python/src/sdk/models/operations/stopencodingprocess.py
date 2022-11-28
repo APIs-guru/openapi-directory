@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -10,17 +11,17 @@ class StopEncodingProcessQueryParams:
 
 @dataclass
 class StopEncodingProcessSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class StopEncodingProcessRequest:
-    query_params: StopEncodingProcessQueryParams = field(default=None)
-    security: StopEncodingProcessSecurity = field(default=None)
+    query_params: StopEncodingProcessQueryParams = field()
+    security: StopEncodingProcessSecurity = field()
     
 
 @dataclass
 class StopEncodingProcessResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OfferingProgressRow extends SpeakeasyBase {
-  @Metadata({ data: "json, name=completion" })
+  @SpeakeasyMetadata({ data: "json, name=completion" })
   completion?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }

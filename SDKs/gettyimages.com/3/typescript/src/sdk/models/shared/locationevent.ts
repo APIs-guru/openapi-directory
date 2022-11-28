@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class LocationEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=state_province" })
+  @SpeakeasyMetadata({ data: "json, name=state_province" })
   stateProvince?: string;
 
-  @Metadata({ data: "json, name=venue" })
+  @SpeakeasyMetadata({ data: "json, name=venue" })
   venue?: string;
 }

@@ -1,24 +1,25 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PlanResourceEncryptionProperties } from "./planresourceencryptionproperties";
 import { VnetProperties } from "./vnetproperties";
 
 
+
 export class PlanResourceProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=defaultAutoSuspendDelayMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=defaultAutoSuspendDelayMinutes" })
   defaultAutoSuspendDelayMinutes?: number;
 
-  @Metadata({ data: "json, name=defaultCodespaceSku" })
+  @SpeakeasyMetadata({ data: "json, name=defaultCodespaceSku" })
   defaultCodespaceSku?: string;
 
-  @Metadata({ data: "json, name=defaultEnvironmentSku" })
+  @SpeakeasyMetadata({ data: "json, name=defaultEnvironmentSku" })
   defaultEnvironmentSku?: string;
 
-  @Metadata({ data: "json, name=encryption" })
+  @SpeakeasyMetadata({ data: "json, name=encryption" })
   encryption?: PlanResourceEncryptionProperties;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 
-  @Metadata({ data: "json, name=vnetProperties" })
+  @SpeakeasyMetadata({ data: "json, name=vnetProperties" })
   vnetProperties?: VnetProperties;
 }

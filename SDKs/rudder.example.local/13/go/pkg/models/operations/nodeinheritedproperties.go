@@ -8,10 +8,6 @@ type NodeInheritedPropertiesPathParams struct {
 	NodeID string `pathParam:"style=simple,explode=false,name=nodeId"`
 }
 
-type NodeInheritedPropertiesRequest struct {
-	PathParams NodeInheritedPropertiesPathParams
-}
-
 type NodeInheritedProperties200ApplicationJSONActionEnum string
 
 const (
@@ -29,6 +25,10 @@ type NodeInheritedProperties200ApplicationJSON struct {
 	Action NodeInheritedProperties200ApplicationJSONActionEnum `json:"action"`
 	Data   []shared.NodeInheritedProperties                    `json:"data"`
 	Result NodeInheritedProperties200ApplicationJSONResultEnum `json:"result"`
+}
+
+type NodeInheritedPropertiesRequest struct {
+	PathParams NodeInheritedPropertiesPathParams
 }
 
 type NodeInheritedPropertiesResponse struct {

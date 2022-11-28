@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import bucket
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetBucketsResult:
-    buckets: Optional[List[bucket.Bucket]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'buckets' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    buckets: Optional[List[Bucket]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('buckets') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

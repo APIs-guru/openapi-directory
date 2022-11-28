@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Allowed } from "./allowed";
 import { AuthDecisionEnum } from "./authdecisionenum";
 import { AuthInfo } from "./authinfo";
 import { Denied } from "./denied";
+
 
 
 // AuthResult
@@ -10,18 +11,18 @@ import { Denied } from "./denied";
  * The authorizer result.
 **/
 export class AuthResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowed" })
+  @SpeakeasyMetadata({ data: "json, name=allowed" })
   allowed?: Allowed;
 
-  @Metadata({ data: "json, name=authDecision" })
+  @SpeakeasyMetadata({ data: "json, name=authDecision" })
   authDecision?: AuthDecisionEnum;
 
-  @Metadata({ data: "json, name=authInfo" })
+  @SpeakeasyMetadata({ data: "json, name=authInfo" })
   authInfo?: AuthInfo;
 
-  @Metadata({ data: "json, name=denied" })
+  @SpeakeasyMetadata({ data: "json, name=denied" })
   denied?: Denied;
 
-  @Metadata({ data: "json, name=missingContextValues" })
+  @SpeakeasyMetadata({ data: "json, name=missingContextValues" })
   missingContextValues?: string[];
 }

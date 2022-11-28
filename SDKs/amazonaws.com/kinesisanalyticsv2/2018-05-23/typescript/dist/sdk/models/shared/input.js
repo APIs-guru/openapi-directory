@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InputParallelism } from "./inputparallelism";
 import { InputProcessingConfiguration } from "./inputprocessingconfiguration";
 import { SourceSchema } from "./sourceschema";
@@ -38,27 +38,27 @@ var Input = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=InputParallelism" }),
+        SpeakeasyMetadata({ data: "json, name=InputParallelism" }),
         __metadata("design:type", InputParallelism)
     ], Input.prototype, "inputParallelism", void 0);
     __decorate([
-        Metadata({ data: "json, name=InputProcessingConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=InputProcessingConfiguration" }),
         __metadata("design:type", InputProcessingConfiguration)
     ], Input.prototype, "inputProcessingConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=InputSchema" }),
+        SpeakeasyMetadata({ data: "json, name=InputSchema" }),
         __metadata("design:type", SourceSchema)
     ], Input.prototype, "inputSchema", void 0);
     __decorate([
-        Metadata({ data: "json, name=KinesisFirehoseInput" }),
+        SpeakeasyMetadata({ data: "json, name=KinesisFirehoseInput" }),
         __metadata("design:type", KinesisFirehoseInput)
     ], Input.prototype, "kinesisFirehoseInput", void 0);
     __decorate([
-        Metadata({ data: "json, name=KinesisStreamsInput" }),
+        SpeakeasyMetadata({ data: "json, name=KinesisStreamsInput" }),
         __metadata("design:type", KinesisStreamsInput)
     ], Input.prototype, "kinesisStreamsInput", void 0);
     __decorate([
-        Metadata({ data: "json, name=NamePrefix" }),
+        SpeakeasyMetadata({ data: "json, name=NamePrefix" }),
         __metadata("design:type", String)
     ], Input.prototype, "namePrefix", void 0);
     return Input;

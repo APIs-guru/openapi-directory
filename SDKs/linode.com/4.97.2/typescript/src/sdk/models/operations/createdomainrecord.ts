@@ -1,122 +1,102 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateDomainRecordPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=domainId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=domainId" })
   domainId: number;
 }
 
 export enum CreateDomainRecordRequestBodyTagEnum {
-    Issue = "issue"
-,    Issuewild = "issuewild"
-,    Iodef = "iodef"
+    Issue = "issue",
+    Issuewild = "issuewild",
+    Iodef = "iodef"
 }
 
 export enum CreateDomainRecordRequestBodyTypeEnum {
-    A = "A"
-,    Aaaa = "AAAA"
-,    Ns = "NS"
-,    Mx = "MX"
-,    Cname = "CNAME"
-,    Txt = "TXT"
-,    Srv = "SRV"
-,    Ptr = "PTR"
-,    Caa = "CAA"
+    A = "A",
+    Aaaa = "AAAA",
+    Ns = "NS",
+    Mx = "MX",
+    Cname = "CNAME",
+    Txt = "TXT",
+    Srv = "SRV",
+    Ptr = "PTR",
+    Caa = "CAA"
 }
 
 
-export class CreateDomainRecordRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
-  created?: Date;
-
-  @Metadata({ data: "json, name=id" })
-  id?: number;
-
-  @Metadata({ data: "json, name=name" })
+export class CreateDomainRecordRequestBodyInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority?: number;
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol?: string;
 
-  @Metadata({ data: "json, name=service" })
+  @SpeakeasyMetadata({ data: "json, name=service" })
   service?: string;
 
-  @Metadata({ data: "json, name=tag" })
+  @SpeakeasyMetadata({ data: "json, name=tag" })
   tag?: CreateDomainRecordRequestBodyTagEnum;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target?: string;
 
-  @Metadata({ data: "json, name=ttl_sec" })
+  @SpeakeasyMetadata({ data: "json, name=ttl_sec" })
   ttlSec?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: CreateDomainRecordRequestBodyTypeEnum;
 
-  @Metadata({ data: "json, name=updated" })
-  updated?: Date;
-
-  @Metadata({ data: "json, name=weight" })
+  @SpeakeasyMetadata({ data: "json, name=weight" })
   weight?: number;
 }
 
 
-export class CreateDomainRecordSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class CreateDomainRecordSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class CreateDomainRecordSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: CreateDomainRecordSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: CreateDomainRecordSecurityOption2;
-}
-
-
-export class CreateDomainRecordRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: CreateDomainRecordPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: CreateDomainRecordRequestBody;
-
-  @Metadata()
-  security: CreateDomainRecordSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class CreateDomainRecordDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class CreateDomainRecordRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: CreateDomainRecordPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: CreateDomainRecordRequestBodyInput;
+
+  @SpeakeasyMetadata()
+  security: CreateDomainRecordSecurity;
+}
+
+
 export class CreateDomainRecordResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   domainRecord?: shared.DomainRecord;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createDomainRecordDefaultApplicationJsonObject?: CreateDomainRecordDefaultApplicationJson;
 }

@@ -1,74 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class RestoreBackupPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=backupId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=backupId" })
   backupId: number;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=linodeId" })
   linodeId: number;
 }
 
 
 export class RestoreBackupRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=linode_id" })
+  @SpeakeasyMetadata({ data: "json, name=linode_id" })
   linodeId: number;
 
-  @Metadata({ data: "json, name=overwrite" })
+  @SpeakeasyMetadata({ data: "json, name=overwrite" })
   overwrite?: boolean;
 }
 
 
-export class RestoreBackupSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class RestoreBackupSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class RestoreBackupSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: RestoreBackupSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: RestoreBackupSecurityOption2;
-}
-
-
-export class RestoreBackupRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: RestoreBackupPathParams;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request: RestoreBackupRequestBody;
-
-  @Metadata()
-  security: RestoreBackupSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class RestoreBackupDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class RestoreBackupRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: RestoreBackupPathParams;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: RestoreBackupRequestBody;
+
+  @SpeakeasyMetadata()
+  security: RestoreBackupSecurity;
+}
+
+
 export class RestoreBackupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   restoreBackup200ApplicationJsonObject?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   restoreBackupDefaultApplicationJsonObject?: RestoreBackupDefaultApplicationJson;
 }

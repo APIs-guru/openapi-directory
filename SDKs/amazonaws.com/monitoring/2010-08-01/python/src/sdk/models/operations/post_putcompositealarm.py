@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostPutCompositeAlarmActionEnum(str, Enum):
     PUT_COMPOSITE_ALARM = "PutCompositeAlarm"
@@ -10,8 +14,8 @@ class PostPutCompositeAlarmVersionEnum(str, Enum):
 
 @dataclass
 class PostPutCompositeAlarmQueryParams:
-    action: PostPutCompositeAlarmActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostPutCompositeAlarmVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostPutCompositeAlarmActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostPutCompositeAlarmVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostPutCompositeAlarmHeaders:
 
 @dataclass
 class PostPutCompositeAlarmRequest:
-    query_params: PostPutCompositeAlarmQueryParams = field(default=None)
-    headers: PostPutCompositeAlarmHeaders = field(default=None)
+    headers: PostPutCompositeAlarmHeaders = field()
+    query_params: PostPutCompositeAlarmQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostPutCompositeAlarmResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

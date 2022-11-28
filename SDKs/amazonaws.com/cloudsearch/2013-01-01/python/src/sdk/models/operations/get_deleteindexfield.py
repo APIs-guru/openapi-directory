@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteIndexFieldActionEnum(str, Enum):
     DELETE_INDEX_FIELD = "DeleteIndexField"
@@ -10,10 +14,10 @@ class GetDeleteIndexFieldVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteIndexFieldQueryParams:
-    action: GetDeleteIndexFieldActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    domain_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
-    index_field_name: str = field(default=None, metadata={'query_param': { 'field_name': 'IndexFieldName', 'style': 'form', 'explode': True }})
-    version: GetDeleteIndexFieldVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteIndexFieldActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    domain_name: str = field(metadata={'query_param': { 'field_name': 'DomainName', 'style': 'form', 'explode': True }})
+    index_field_name: str = field(metadata={'query_param': { 'field_name': 'IndexFieldName', 'style': 'form', 'explode': True }})
+    version: GetDeleteIndexFieldVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetDeleteIndexFieldHeaders:
 
 @dataclass
 class GetDeleteIndexFieldRequest:
-    query_params: GetDeleteIndexFieldQueryParams = field(default=None)
-    headers: GetDeleteIndexFieldHeaders = field(default=None)
+    headers: GetDeleteIndexFieldHeaders = field()
+    query_params: GetDeleteIndexFieldQueryParams = field()
     
 
 @dataclass
 class GetDeleteIndexFieldResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

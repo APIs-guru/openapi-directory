@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetAssociateIamInstanceProfileActionEnum {
     AssociateIamInstanceProfile = "AssociateIamInstanceProfile"
@@ -10,10 +11,10 @@ export enum GetAssociateIamInstanceProfileActionEnum {
  * Describes an IAM instance profile.
 **/
 export class GetAssociateIamInstanceProfileIamInstanceProfile extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=Arn" })
+  @SpeakeasyMetadata({ data: "queryParam, name=Arn" })
   arn?: string;
 
-  @Metadata({ data: "queryParam, name=Name" })
+  @SpeakeasyMetadata({ data: "queryParam, name=Name" })
   name?: string;
 }
 
@@ -23,60 +24,60 @@ export enum GetAssociateIamInstanceProfileVersionEnum {
 
 
 export class GetAssociateIamInstanceProfileQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetAssociateIamInstanceProfileActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=IamInstanceProfile" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=IamInstanceProfile" })
   iamInstanceProfile: GetAssociateIamInstanceProfileIamInstanceProfile;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=InstanceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=InstanceId" })
   instanceId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetAssociateIamInstanceProfileVersionEnum;
 }
 
 
 export class GetAssociateIamInstanceProfileHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetAssociateIamInstanceProfileRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAssociateIamInstanceProfileQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetAssociateIamInstanceProfileHeaders;
 }
 
 
 export class GetAssociateIamInstanceProfileResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

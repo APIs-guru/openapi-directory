@@ -1,8 +1,9 @@
 
 
+
 export enum TaskCompletionStatusEnum {
-    Completed = "Completed"
-,    Failed = "Failed"
-,    Cancelled = "Cancelled"
-,    Aborted = "Aborted"
+    Completed = "Completed",
+    Failed = "Failed",
+    Cancelled = "Cancelled",
+    Aborted = "Aborted"
 }

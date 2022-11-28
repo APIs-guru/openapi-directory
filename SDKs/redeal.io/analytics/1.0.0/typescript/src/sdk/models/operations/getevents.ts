@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetEventsTypeEnum {
-    All = "all"
-,    Clicks = "clicks"
-,    Contacts = "contacts"
+    All = "all",
+    Clicks = "clicks",
+    Contacts = "contacts"
 }
 
 
 export class GetEventsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=company" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=company" })
   company?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=deal" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=deal" })
   deal?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nexttoken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nexttoken" })
   nexttoken?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=queryexecutionid" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=queryexecutionid" })
   queryexecutionid?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=site" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=site" })
   site?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: GetEventsTypeEnum;
 }
 
 
 export class GetEventsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetEventsQueryParams;
 }
 
 
 export class GetEventsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.EventRecord })
+  @SpeakeasyMetadata({ elemType: shared.EventRecord })
   eventRecords?: shared.EventRecord[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

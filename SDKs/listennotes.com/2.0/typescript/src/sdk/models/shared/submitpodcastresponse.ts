@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PodcastMinimum } from "./podcastminimum";
 
+
 export enum SubmitPodcastResponseStatusEnum {
-    Found = "found"
-,    InReview = "in review"
+    Found = "found",
+    InReview = "in review"
 }
 
 
 export class SubmitPodcastResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=podcast" })
+  @SpeakeasyMetadata({ data: "json, name=podcast" })
   podcast: PodcastMinimum;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: SubmitPodcastResponseStatusEnum;
 }

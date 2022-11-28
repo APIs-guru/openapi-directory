@@ -21,6 +21,8 @@ const (
 	ExclusionRuleExcludeMinResolutionEnumUnknown  ExclusionRuleExcludeMinResolutionEnum = "Unknown"
 )
 
+// ExclusionRule
+// Defines playback exclusion rules for an Offer or Entitlement.
 type ExclusionRule struct {
 	Description          *string                                `json:"description,omitempty"`
 	Device               *string                                `json:"device,omitempty"`

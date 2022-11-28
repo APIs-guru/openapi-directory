@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LocationRuleTypeEnum } from "./locationruletypeenum";
+
 
 
 // LocationRuleUpdateConditions
@@ -7,27 +8,27 @@ import { LocationRuleTypeEnum } from "./locationruletypeenum";
  * Scope of this rule, e.g. moves at or away from a specific location or towards a specific location. The `from_location` is mandatory. The `to_location` is either mandatory, optional or not allowed depending on rule type.
 **/
 export class LocationRuleUpdateConditions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=from_location" })
+  @SpeakeasyMetadata({ data: "json, name=from_location" })
   fromLocation?: string;
 
-  @Metadata({ data: "json, name=to_location" })
+  @SpeakeasyMetadata({ data: "json, name=to_location" })
   toLocation?: string;
 }
 
 
 export class LocationRuleUpdate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=conditions" })
+  @SpeakeasyMetadata({ data: "json, name=conditions" })
   conditions?: LocationRuleUpdateConditions;
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=parameters" })
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
   parameters?: Map<string, any>;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: LocationRuleTypeEnum;
 }

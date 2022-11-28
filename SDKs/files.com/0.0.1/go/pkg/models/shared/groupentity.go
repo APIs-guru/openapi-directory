@@ -1,5 +1,7 @@
 package shared
 
+// GroupEntity
+// List Groups
 type GroupEntity struct {
 	AdminIds  *string  `json:"admin_ids,omitempty"`
 	ID        *int32   `json:"id,omitempty"`

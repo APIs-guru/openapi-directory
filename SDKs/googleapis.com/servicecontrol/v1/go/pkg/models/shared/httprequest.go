@@ -1,5 +1,7 @@
 package shared
 
+// HTTPRequest
+// A common proto for logging HTTP requests. Only contains semantics defined by the HTTP specification. Product-specific logging information MUST be defined in a separate message.
 type HTTPRequest struct {
 	CacheFillBytes                 *string `json:"cacheFillBytes,omitempty"`
 	CacheHit                       *bool   `json:"cacheHit,omitempty"`

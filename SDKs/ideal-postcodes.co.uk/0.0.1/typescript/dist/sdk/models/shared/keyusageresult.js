@@ -22,27 +22,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { KeyUsageDailyCountEpoch } from "./keyusagedailycountepoch";
 var KeyUsageResult = /** @class */ (function (_super) {
     __extends(KeyUsageResult, _super);
     function KeyUsageResult() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=dailyCount", elemType: shared.KeyUsageDailyCountEpoch }),
+        SpeakeasyMetadata({ data: "json, name=dailyCount", elemType: KeyUsageDailyCountEpoch }),
         __metadata("design:type", Array)
     ], KeyUsageResult.prototype, "dailyCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=end" }),
+        SpeakeasyMetadata({ data: "json, name=end" }),
         __metadata("design:type", String)
     ], KeyUsageResult.prototype, "end", void 0);
     __decorate([
-        Metadata({ data: "json, name=start" }),
+        SpeakeasyMetadata({ data: "json, name=start" }),
         __metadata("design:type", String)
     ], KeyUsageResult.prototype, "start", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], KeyUsageResult.prototype, "total", void 0);
     return KeyUsageResult;

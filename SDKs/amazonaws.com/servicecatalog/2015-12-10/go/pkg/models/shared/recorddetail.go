@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// RecordDetail
+// Information about a request operation.
 type RecordDetail struct {
 	CreatedTime            *time.Time        `json:"CreatedTime,omitempty"`
 	LaunchRoleArn          *string           `json:"LaunchRoleArn,omitempty"`

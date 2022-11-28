@@ -7,6 +7,8 @@ type ThreadSubject struct {
 	URL              string `json:"url"`
 }
 
+// Thread
+// Thread
 type Thread struct {
 	ID              string            `json:"id"`
 	LastReadAt      string            `json:"last_read_at"`

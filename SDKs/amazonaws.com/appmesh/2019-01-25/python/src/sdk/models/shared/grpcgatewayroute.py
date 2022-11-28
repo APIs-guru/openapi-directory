@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import grpcgatewayrouteaction
-from . import grpcgatewayroutematch
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GrpcGatewayRoute:
-    action: grpcgatewayrouteaction.GrpcGatewayRouteAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    match: grpcgatewayroutematch.GrpcGatewayRouteMatch = field(default=None, metadata={'dataclasses_json': { 'field_name': 'match' }})
+    r"""GrpcGatewayRoute
+    An object that represents a gRPC gateway route.
+    """
+    
+    action: GrpcGatewayRouteAction = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('action') }})
+    match: GrpcGatewayRouteMatch = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('match') }})
     

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ObjectStorageServerProtocolEnum } from "./objectstorageserverprotocolenum";
 import { TagListEntry } from "./taglistentry";
+
 
 
 // CreateLocationObjectStorageRequest
@@ -9,30 +9,30 @@ import { TagListEntry } from "./taglistentry";
  * CreateLocationObjectStorageRequest
 **/
 export class CreateLocationObjectStorageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessKey" })
+  @SpeakeasyMetadata({ data: "json, name=AccessKey" })
   accessKey?: string;
 
-  @Metadata({ data: "json, name=AgentArns" })
+  @SpeakeasyMetadata({ data: "json, name=AgentArns" })
   agentArns: string[];
 
-  @Metadata({ data: "json, name=BucketName" })
+  @SpeakeasyMetadata({ data: "json, name=BucketName" })
   bucketName: string;
 
-  @Metadata({ data: "json, name=SecretKey" })
+  @SpeakeasyMetadata({ data: "json, name=SecretKey" })
   secretKey?: string;
 
-  @Metadata({ data: "json, name=ServerHostname" })
+  @SpeakeasyMetadata({ data: "json, name=ServerHostname" })
   serverHostname: string;
 
-  @Metadata({ data: "json, name=ServerPort" })
+  @SpeakeasyMetadata({ data: "json, name=ServerPort" })
   serverPort?: number;
 
-  @Metadata({ data: "json, name=ServerProtocol" })
+  @SpeakeasyMetadata({ data: "json, name=ServerProtocol" })
   serverProtocol?: ObjectStorageServerProtocolEnum;
 
-  @Metadata({ data: "json, name=Subdirectory" })
+  @SpeakeasyMetadata({ data: "json, name=Subdirectory" })
   subdirectory?: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.TagListEntry })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: TagListEntry })
   tags?: TagListEntry[];
 }

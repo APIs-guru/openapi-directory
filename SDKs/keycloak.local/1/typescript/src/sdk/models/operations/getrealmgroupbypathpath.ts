@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetRealmGroupByPathPathPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=path" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=path" })
   path: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=realm" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=realm" })
   realm: string;
 }
 
 
 export class GetRealmGroupByPathPathRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetRealmGroupByPathPathPathParams;
 }
 
 
 export class GetRealmGroupByPathPathResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   groupRepresentation?: shared.GroupRepresentation;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

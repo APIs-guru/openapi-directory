@@ -5,11 +5,15 @@ type UpdateNetworkWirelessSsidEapOverridePathParams struct {
 	Number    string `pathParam:"style=simple,explode=false,name=number"`
 }
 
+// UpdateNetworkWirelessSsidEapOverrideRequestBodyEapolKey
+// EAPOL Key settings.
 type UpdateNetworkWirelessSsidEapOverrideRequestBodyEapolKey struct {
 	Retries     *int64 `json:"retries,omitempty"`
 	TimeoutInMs *int64 `json:"timeoutInMs,omitempty"`
 }
 
+// UpdateNetworkWirelessSsidEapOverrideRequestBodyIdentity
+// EAP settings for identity requests.
 type UpdateNetworkWirelessSsidEapOverrideRequestBodyIdentity struct {
 	Retries *int64 `json:"retries,omitempty"`
 	Timeout *int64 `json:"timeout,omitempty"`

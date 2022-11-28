@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AlwaysOnVpnPackage
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for an always-on VPN connection.
 **/
 export class AlwaysOnVpnPackage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=lockdownEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=lockdownEnabled" })
   lockdownEnabled?: boolean;
 
-  @Metadata({ data: "json, name=packageName" })
+  @SpeakeasyMetadata({ data: "json, name=packageName" })
   packageName?: string;
 }

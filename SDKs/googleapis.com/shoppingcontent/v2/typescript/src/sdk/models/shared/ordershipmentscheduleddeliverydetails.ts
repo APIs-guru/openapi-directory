@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class OrderShipmentScheduledDeliveryDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=carrierPhoneNumber" })
+  @SpeakeasyMetadata({ data: "json, name=carrierPhoneNumber" })
   carrierPhoneNumber?: string;
 
-  @Metadata({ data: "json, name=scheduledDate" })
+  @SpeakeasyMetadata({ data: "json, name=scheduledDate" })
   scheduledDate?: string;
 }

@@ -1,28 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProductOptionValueFields } from "./productoptionvaluefields";
 
+
 export enum ProductOptionFieldsOptionTypeEnum {
-    Option = "option"
-,    Input = "input"
-,    Text = "text"
-,    File = "file"
+    Option = "option",
+    Input = "input",
+    Text = "text",
+    File = "file"
 }
 
 
 export class ProductOptionFields extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=option_type" })
+  @SpeakeasyMetadata({ data: "json, name=option_type" })
   optionType?: ProductOptionFieldsOptionTypeEnum;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: number;
 
-  @Metadata({ data: "json, name=values", elemType: shared.ProductOptionValueFields })
+  @SpeakeasyMetadata({ data: "json, name=values", elemType: ProductOptionValueFields })
   values?: ProductOptionValueFields[];
 }

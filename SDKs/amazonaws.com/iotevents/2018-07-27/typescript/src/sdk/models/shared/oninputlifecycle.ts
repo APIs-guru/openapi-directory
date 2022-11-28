@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Event } from "./event";
 import { TransitionEvent } from "./transitionevent";
+
 
 
 // OnInputLifecycle
@@ -9,9 +9,9 @@ import { TransitionEvent } from "./transitionevent";
  * Specifies the actions performed when the <code>condition</code> evaluates to TRUE.
 **/
 export class OnInputLifecycle extends SpeakeasyBase {
-  @Metadata({ data: "json, name=events", elemType: shared.Event })
+  @SpeakeasyMetadata({ data: "json, name=events", elemType: Event })
   events?: Event[];
 
-  @Metadata({ data: "json, name=transitionEvents", elemType: shared.TransitionEvent })
+  @SpeakeasyMetadata({ data: "json, name=transitionEvents", elemType: TransitionEvent })
   transitionEvents?: TransitionEvent[];
 }

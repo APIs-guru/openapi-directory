@@ -1,14 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import environmentconfig
-from . import pysparkbatch
-from . import runtimeconfig
-from . import runtimeinfo
-from . import sparkbatch
-from . import sparkrbatch
-from . import sparksqlbatch
-from . import statehistory
+from sdk import utils
+from . import *
 
 class BatchStateEnum(str, Enum):
     STATE_UNSPECIFIED = "STATE_UNSPECIFIED"
@@ -23,21 +18,42 @@ class BatchStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Batch:
-    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
-    creator: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creator' }})
-    environment_config: Optional[environmentconfig.EnvironmentConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environmentConfig' }})
-    labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    operation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operation' }})
-    pyspark_batch: Optional[pysparkbatch.PySparkBatch] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pysparkBatch' }})
-    runtime_config: Optional[runtimeconfig.RuntimeConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'runtimeConfig' }})
-    runtime_info: Optional[runtimeinfo.RuntimeInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'runtimeInfo' }})
-    spark_batch: Optional[sparkbatch.SparkBatch] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sparkBatch' }})
-    spark_r_batch: Optional[sparkrbatch.SparkRBatch] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sparkRBatch' }})
-    spark_sql_batch: Optional[sparksqlbatch.SparkSQLBatch] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sparkSqlBatch' }})
-    state: Optional[BatchStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    state_history: Optional[List[statehistory.StateHistory]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stateHistory' }})
-    state_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stateMessage' }})
-    state_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stateTime' }})
-    uuid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uuid' }})
+    r"""Batch
+    A representation of a batch workload in the service.
+    """
+    
+    create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('createTime') }})
+    creator: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('creator') }})
+    environment_config: Optional[EnvironmentConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environmentConfig') }})
+    labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
+    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    operation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('operation') }})
+    pyspark_batch: Optional[PySparkBatch] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pysparkBatch') }})
+    runtime_config: Optional[RuntimeConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('runtimeConfig') }})
+    runtime_info: Optional[RuntimeInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('runtimeInfo') }})
+    spark_batch: Optional[SparkBatch] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sparkBatch') }})
+    spark_r_batch: Optional[SparkRBatch] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sparkRBatch') }})
+    spark_sql_batch: Optional[SparkSQLBatch] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sparkSqlBatch') }})
+    state: Optional[BatchStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    state_history: Optional[List[StateHistory]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stateHistory') }})
+    state_message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stateMessage') }})
+    state_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stateTime') }})
+    uuid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('uuid') }})
+    
+
+@dataclass_json
+@dataclass
+class BatchInput:
+    r"""BatchInput
+    A representation of a batch workload in the service.
+    """
+    
+    environment_config: Optional[EnvironmentConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('environmentConfig') }})
+    labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('labels') }})
+    pyspark_batch: Optional[PySparkBatch] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pysparkBatch') }})
+    runtime_config: Optional[RuntimeConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('runtimeConfig') }})
+    runtime_info: Optional[RuntimeInfoInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('runtimeInfo') }})
+    spark_batch: Optional[SparkBatch] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sparkBatch') }})
+    spark_r_batch: Optional[SparkRBatch] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sparkRBatch') }})
+    spark_sql_batch: Optional[SparkSQLBatch] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('sparkSqlBatch') }})
     

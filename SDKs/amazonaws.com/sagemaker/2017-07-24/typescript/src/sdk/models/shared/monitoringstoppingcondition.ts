@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MonitoringStoppingCondition
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A time limit for how long the monitoring job is allowed to run before stopping.
 **/
 export class MonitoringStoppingCondition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxRuntimeInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=MaxRuntimeInSeconds" })
   maxRuntimeInSeconds: number;
 }

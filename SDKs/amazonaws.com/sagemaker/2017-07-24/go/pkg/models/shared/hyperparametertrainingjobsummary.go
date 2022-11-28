@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// HyperParameterTrainingJobSummary
+// Specifies summary information about a training job.
 type HyperParameterTrainingJobSummary struct {
 	CreationTime                                time.Time                                    `json:"CreationTime"`
 	FailureReason                               *string                                      `json:"FailureReason,omitempty"`

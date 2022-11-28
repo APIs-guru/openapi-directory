@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PlayerSearchResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=height" })
+  @SpeakeasyMetadata({ data: "json, name=height" })
   height?: number;
 
-  @Metadata({ data: "json, name=hometown" })
+  @SpeakeasyMetadata({ data: "json, name=hometown" })
   hometown?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=jersey" })
+  @SpeakeasyMetadata({ data: "json, name=jersey" })
   jersey?: number;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=position" })
+  @SpeakeasyMetadata({ data: "json, name=position" })
   position?: string;
 
-  @Metadata({ data: "json, name=team" })
+  @SpeakeasyMetadata({ data: "json, name=team" })
   team?: string;
 
-  @Metadata({ data: "json, name=teamColor" })
+  @SpeakeasyMetadata({ data: "json, name=teamColor" })
   teamColor?: string;
 
-  @Metadata({ data: "json, name=teamColorSecondary" })
+  @SpeakeasyMetadata({ data: "json, name=teamColorSecondary" })
   teamColorSecondary?: string;
 
-  @Metadata({ data: "json, name=weight" })
+  @SpeakeasyMetadata({ data: "json, name=weight" })
   weight?: number;
 }

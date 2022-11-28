@@ -5,7 +5,7 @@ import (
 )
 
 type DcimPowerFeedsCreateRequest struct {
-	Request shared.WritablePowerFeed `request:"mediaType=application/json"`
+	Request shared.WritablePowerFeedInput `request:"mediaType=application/json"`
 }
 
 type DcimPowerFeedsCreateResponse struct {

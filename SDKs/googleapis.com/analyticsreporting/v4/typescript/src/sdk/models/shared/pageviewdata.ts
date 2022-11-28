@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PageviewData
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents details collected when the visitor views a page.
 **/
 export class PageviewData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pagePath" })
+  @SpeakeasyMetadata({ data: "json, name=pagePath" })
   pagePath?: string;
 
-  @Metadata({ data: "json, name=pageTitle" })
+  @SpeakeasyMetadata({ data: "json, name=pageTitle" })
   pageTitle?: string;
 }

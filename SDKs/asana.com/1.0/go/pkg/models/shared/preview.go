@@ -1,5 +1,9 @@
 package shared
 
+// Preview
+// A collection of rich text that will be displayed as a preview to another app.
+//
+// This is read-only except for a small group of whitelisted apps.
 type Preview struct {
 	Fallback   *string `json:"fallback,omitempty"`
 	Footer     *string `json:"footer,omitempty"`

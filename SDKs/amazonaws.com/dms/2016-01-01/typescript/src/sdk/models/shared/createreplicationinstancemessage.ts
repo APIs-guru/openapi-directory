@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
+
 
 
 // CreateReplicationInstanceMessage
@@ -8,48 +8,48 @@ import { Tag } from "./tag";
  * <p/>
 **/
 export class CreateReplicationInstanceMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllocatedStorage" })
+  @SpeakeasyMetadata({ data: "json, name=AllocatedStorage" })
   allocatedStorage?: number;
 
-  @Metadata({ data: "json, name=AutoMinorVersionUpgrade" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMinorVersionUpgrade" })
   autoMinorVersionUpgrade?: boolean;
 
-  @Metadata({ data: "json, name=AvailabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZone" })
   availabilityZone?: string;
 
-  @Metadata({ data: "json, name=DnsNameServers" })
+  @SpeakeasyMetadata({ data: "json, name=DnsNameServers" })
   dnsNameServers?: string;
 
-  @Metadata({ data: "json, name=EngineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=EngineVersion" })
   engineVersion?: string;
 
-  @Metadata({ data: "json, name=KmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=KmsKeyId" })
   kmsKeyId?: string;
 
-  @Metadata({ data: "json, name=MultiAZ" })
+  @SpeakeasyMetadata({ data: "json, name=MultiAZ" })
   multiAz?: boolean;
 
-  @Metadata({ data: "json, name=PreferredMaintenanceWindow" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredMaintenanceWindow" })
   preferredMaintenanceWindow?: string;
 
-  @Metadata({ data: "json, name=PubliclyAccessible" })
+  @SpeakeasyMetadata({ data: "json, name=PubliclyAccessible" })
   publiclyAccessible?: boolean;
 
-  @Metadata({ data: "json, name=ReplicationInstanceClass" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationInstanceClass" })
   replicationInstanceClass: string;
 
-  @Metadata({ data: "json, name=ReplicationInstanceIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationInstanceIdentifier" })
   replicationInstanceIdentifier: string;
 
-  @Metadata({ data: "json, name=ReplicationSubnetGroupIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationSubnetGroupIdentifier" })
   replicationSubnetGroupIdentifier?: string;
 
-  @Metadata({ data: "json, name=ResourceIdentifier" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceIdentifier" })
   resourceIdentifier?: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=VpcSecurityGroupIds" })
+  @SpeakeasyMetadata({ data: "json, name=VpcSecurityGroupIds" })
   vpcSecurityGroupIds?: string[];
 }

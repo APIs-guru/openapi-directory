@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class JobsGetJobPathParams:
-    job_id: int = field(default=None, metadata={'path_param': { 'field_name': 'jobID', 'style': 'simple', 'explode': False }})
+    job_id: int = field(metadata={'path_param': { 'field_name': 'jobID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,15 +15,15 @@ class JobsGetJobQueryParams:
 
 @dataclass
 class JobsGetJobRequest:
-    path_params: JobsGetJobPathParams = field(default=None)
-    query_params: JobsGetJobQueryParams = field(default=None)
+    path_params: JobsGetJobPathParams = field()
+    query_params: JobsGetJobQueryParams = field()
     
 
 @dataclass
 class JobsGetJobResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
-    body: bytes = field(default=None)
+    body: Optional[bytes] = field(default=None)
     build_system_shared_dto_job: Optional[shared.BuildSystemSharedDtoJob] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Entity
 /**
  * An entity contains data that describes your product, its supported features, and how it can be used or launched by your customer.
@@ -33,11 +33,11 @@ var Entity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Identifier" }),
+        SpeakeasyMetadata({ data: "json, name=Identifier" }),
         __metadata("design:type", String)
     ], Entity.prototype, "identifier", void 0);
     __decorate([
-        Metadata({ data: "json, name=Type" }),
+        SpeakeasyMetadata({ data: "json, name=Type" }),
         __metadata("design:type", String)
     ], Entity.prototype, "type", void 0);
     return Entity;

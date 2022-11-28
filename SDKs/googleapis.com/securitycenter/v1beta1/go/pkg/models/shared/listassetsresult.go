@@ -10,6 +10,8 @@ const (
 	ListAssetsResultStateEnumActive           ListAssetsResultStateEnum = "ACTIVE"
 )
 
+// ListAssetsResult
+// Result containing the Asset and its State.
 type ListAssetsResult struct {
 	Asset *Asset                     `json:"asset,omitempty"`
 	State *ListAssetsResultStateEnum `json:"state,omitempty"`

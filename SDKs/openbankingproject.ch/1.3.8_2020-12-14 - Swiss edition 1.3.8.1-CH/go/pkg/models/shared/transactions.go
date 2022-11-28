@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Transactions
+// Transaction details.
 type Transactions struct {
 	Links                                  map[string]HrefType               `json:"_links,omitempty"`
 	AdditionalInformation                  *string                           `json:"additionalInformation,omitempty"`

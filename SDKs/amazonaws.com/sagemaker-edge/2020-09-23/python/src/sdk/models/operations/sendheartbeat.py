@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,22 +22,22 @@ class SendHeartbeatHeaders:
 @dataclass_json
 @dataclass
 class SendHeartbeatRequestBody:
-    agent_metrics: Optional[List[shared.EdgeMetric]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AgentMetrics' }})
-    agent_version: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AgentVersion' }})
-    device_fleet_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceFleetName' }})
-    device_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DeviceName' }})
-    models: Optional[List[shared.Model]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Models' }})
+    agent_version: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('AgentVersion') }})
+    device_fleet_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceFleetName') }})
+    device_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DeviceName') }})
+    agent_metrics: Optional[List[shared.EdgeMetric]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AgentMetrics') }})
+    models: Optional[List[shared.Model]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Models') }})
     
 
 @dataclass
 class SendHeartbeatRequest:
-    headers: SendHeartbeatHeaders = field(default=None)
-    request: SendHeartbeatRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SendHeartbeatHeaders = field()
+    request: SendHeartbeatRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SendHeartbeatResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

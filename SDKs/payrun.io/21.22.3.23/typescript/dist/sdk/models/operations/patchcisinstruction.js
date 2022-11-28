@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PatchCisInstructionPathParams = /** @class */ (function (_super) {
     __extends(PatchCisInstructionPathParams, _super);
@@ -30,15 +30,15 @@ var PatchCisInstructionPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=CisInstructionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=CisInstructionId" }),
         __metadata("design:type", String)
     ], PatchCisInstructionPathParams.prototype, "cisInstructionId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
         __metadata("design:type", String)
     ], PatchCisInstructionPathParams.prototype, "employerId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=SubContractorId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=SubContractorId" }),
         __metadata("design:type", String)
     ], PatchCisInstructionPathParams.prototype, "subContractorId", void 0);
     return PatchCisInstructionPathParams;
@@ -50,11 +50,11 @@ var PatchCisInstructionHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], PatchCisInstructionHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], PatchCisInstructionHeaders.prototype, "authorization", void 0);
     return PatchCisInstructionHeaders;
@@ -66,11 +66,11 @@ var PatchCisInstructionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PatchCisInstructionPathParams)
     ], PatchCisInstructionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PatchCisInstructionHeaders)
     ], PatchCisInstructionRequest.prototype, "headers", void 0);
     return PatchCisInstructionRequest;
@@ -82,19 +82,19 @@ var PatchCisInstructionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CisInstruction)
     ], PatchCisInstructionResponse.prototype, "cisInstruction", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PatchCisInstructionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], PatchCisInstructionResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PatchCisInstructionResponse.prototype, "statusCode", void 0);
     return PatchCisInstructionResponse;

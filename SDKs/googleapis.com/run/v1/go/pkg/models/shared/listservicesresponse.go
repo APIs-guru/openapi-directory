@@ -1,5 +1,7 @@
 package shared
 
+// ListServicesResponse
+// A list of Service resources.
 type ListServicesResponse struct {
 	APIVersion  *string   `json:"apiVersion,omitempty"`
 	Items       []Service `json:"items,omitempty"`

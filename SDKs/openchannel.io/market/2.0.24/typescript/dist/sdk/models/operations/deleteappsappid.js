@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteAppsAppIdPathParams = /** @class */ (function (_super) {
     __extends(DeleteAppsAppIdPathParams, _super);
     function DeleteAppsAppIdPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=appId" }),
         __metadata("design:type", String)
     ], DeleteAppsAppIdPathParams.prototype, "appId", void 0);
     return DeleteAppsAppIdPathParams;
@@ -41,7 +41,7 @@ var DeleteAppsAppIdQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=developerId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=developerId" }),
         __metadata("design:type", String)
     ], DeleteAppsAppIdQueryParams.prototype, "developerId", void 0);
     return DeleteAppsAppIdQueryParams;
@@ -53,11 +53,11 @@ var DeleteAppsAppIdRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteAppsAppIdPathParams)
     ], DeleteAppsAppIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeleteAppsAppIdQueryParams)
     ], DeleteAppsAppIdRequest.prototype, "queryParams", void 0);
     return DeleteAppsAppIdRequest;
@@ -69,11 +69,11 @@ var DeleteAppsAppIdResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeleteAppsAppIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeleteAppsAppIdResponse.prototype, "statusCode", void 0);
     return DeleteAppsAppIdResponse;

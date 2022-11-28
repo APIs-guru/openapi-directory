@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StandardsStatusEnum } from "./standardsstatusenum";
+
 
 
 // StandardsSubscription
@@ -7,15 +8,15 @@ import { StandardsStatusEnum } from "./standardsstatusenum";
  * A resource that represents your subscription to a supported standard.
 **/
 export class StandardsSubscription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StandardsArn" })
+  @SpeakeasyMetadata({ data: "json, name=StandardsArn" })
   standardsArn: string;
 
-  @Metadata({ data: "json, name=StandardsInput" })
+  @SpeakeasyMetadata({ data: "json, name=StandardsInput" })
   standardsInput: Map<string, string>;
 
-  @Metadata({ data: "json, name=StandardsStatus" })
+  @SpeakeasyMetadata({ data: "json, name=StandardsStatus" })
   standardsStatus: StandardsStatusEnum;
 
-  @Metadata({ data: "json, name=StandardsSubscriptionArn" })
+  @SpeakeasyMetadata({ data: "json, name=StandardsSubscriptionArn" })
   standardsSubscriptionArn: string;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import searchapplicationuserstats
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetSearchApplicationUserStatsResponse:
-    stats: Optional[List[searchapplicationuserstats.SearchApplicationUserStats]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stats' }})
+    stats: Optional[List[SearchApplicationUserStats]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('stats') }})
     

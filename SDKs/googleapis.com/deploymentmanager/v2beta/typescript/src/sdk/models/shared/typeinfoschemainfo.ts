@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TypeInfoSchemaInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=input" })
+  @SpeakeasyMetadata({ data: "json, name=input" })
   input?: string;
 
-  @Metadata({ data: "json, name=output" })
+  @SpeakeasyMetadata({ data: "json, name=output" })
   output?: string;
 }

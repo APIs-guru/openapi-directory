@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BatchPolicy
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the batch policy.
 **/
 export class BatchPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=maxConcurrency" })
+  @SpeakeasyMetadata({ data: "json, name=maxConcurrency" })
   maxConcurrency?: number;
 
-  @Metadata({ data: "json, name=timeoutInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=timeoutInSeconds" })
   timeoutInSeconds?: number;
 }

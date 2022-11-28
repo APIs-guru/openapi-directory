@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import expiryeventsconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PutAccountConfigurationRequest:
-    expiry_events: Optional[expiryeventsconfiguration.ExpiryEventsConfiguration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExpiryEvents' }})
-    idempotency_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IdempotencyToken' }})
+    idempotency_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('IdempotencyToken') }})
+    expiry_events: Optional[ExpiryEventsConfiguration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ExpiryEvents') }})
     

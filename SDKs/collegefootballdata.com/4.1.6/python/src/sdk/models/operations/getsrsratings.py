@@ -12,12 +12,12 @@ class GetSrsRatingsQueryParams:
 
 @dataclass
 class GetSrsRatingsRequest:
-    query_params: GetSrsRatingsQueryParams = field(default=None)
+    query_params: GetSrsRatingsQueryParams = field()
     
 
 @dataclass
 class GetSrsRatingsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     team_srs_ratings: Optional[List[shared.TeamSrsRating]] = field(default=None)
     

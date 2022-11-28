@@ -1,5 +1,7 @@
 package shared
 
+// Location
+// The location of resources.
 type Location struct {
 	DynamoDb []CodeGenNodeArg `json:"DynamoDB,omitempty"`
 	Jdbc     []CodeGenNodeArg `json:"Jdbc,omitempty"`

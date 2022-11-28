@@ -1,9 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AssignedTargetingOption } from "./assignedtargetingoption";
 
 
+
 export class BulkEditLineItemAssignedTargetingOptionsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createdAssignedTargetingOptions", elemType: shared.AssignedTargetingOption })
+  @SpeakeasyMetadata({ data: "json, name=createdAssignedTargetingOptions", elemType: AssignedTargetingOption })
   createdAssignedTargetingOptions?: AssignedTargetingOption[];
 }

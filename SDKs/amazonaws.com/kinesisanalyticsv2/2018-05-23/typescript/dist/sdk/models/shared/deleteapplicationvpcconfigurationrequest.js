@@ -22,26 +22,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DeleteApplicationVpcConfigurationRequest = /** @class */ (function (_super) {
     __extends(DeleteApplicationVpcConfigurationRequest, _super);
     function DeleteApplicationVpcConfigurationRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ApplicationName" }),
+        SpeakeasyMetadata({ data: "json, name=ApplicationName" }),
         __metadata("design:type", String)
     ], DeleteApplicationVpcConfigurationRequest.prototype, "applicationName", void 0);
     __decorate([
-        Metadata({ data: "json, name=ConditionalToken" }),
+        SpeakeasyMetadata({ data: "json, name=ConditionalToken" }),
         __metadata("design:type", String)
     ], DeleteApplicationVpcConfigurationRequest.prototype, "conditionalToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=CurrentApplicationVersionId" }),
+        SpeakeasyMetadata({ data: "json, name=CurrentApplicationVersionId" }),
         __metadata("design:type", Number)
     ], DeleteApplicationVpcConfigurationRequest.prototype, "currentApplicationVersionId", void 0);
     __decorate([
-        Metadata({ data: "json, name=VpcConfigurationId" }),
+        SpeakeasyMetadata({ data: "json, name=VpcConfigurationId" }),
         __metadata("design:type", String)
     ], DeleteApplicationVpcConfigurationRequest.prototype, "vpcConfigurationId", void 0);
     return DeleteApplicationVpcConfigurationRequest;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ModelPackageContainerDefinition
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the Docker container for the model package.
 **/
 export class ModelPackageContainerDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContainerHostname" })
+  @SpeakeasyMetadata({ data: "json, name=ContainerHostname" })
   containerHostname?: string;
 
-  @Metadata({ data: "json, name=Environment" })
+  @SpeakeasyMetadata({ data: "json, name=Environment" })
   environment?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Image" })
+  @SpeakeasyMetadata({ data: "json, name=Image" })
   image: string;
 
-  @Metadata({ data: "json, name=ImageDigest" })
+  @SpeakeasyMetadata({ data: "json, name=ImageDigest" })
   imageDigest?: string;
 
-  @Metadata({ data: "json, name=ModelDataUrl" })
+  @SpeakeasyMetadata({ data: "json, name=ModelDataUrl" })
   modelDataUrl?: string;
 
-  @Metadata({ data: "json, name=ProductId" })
+  @SpeakeasyMetadata({ data: "json, name=ProductId" })
   productId?: string;
 }

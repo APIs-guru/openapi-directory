@@ -10,7 +10,7 @@ class PostAPI10CalculateRequest:
 
 @dataclass
 class PostAPI10CalculateResponse:
+    content_type: str = field()
+    status_code: int = field()
     calculate_results: Optional[List[shared.CalculateResult]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

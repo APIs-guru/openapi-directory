@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReplicationInstanceTaskLog
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains metadata for a replication instance task log.
 **/
 export class ReplicationInstanceTaskLog extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ReplicationInstanceTaskLogSize" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationInstanceTaskLogSize" })
   replicationInstanceTaskLogSize?: number;
 
-  @Metadata({ data: "json, name=ReplicationTaskArn" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationTaskArn" })
   replicationTaskArn?: string;
 
-  @Metadata({ data: "json, name=ReplicationTaskName" })
+  @SpeakeasyMetadata({ data: "json, name=ReplicationTaskName" })
   replicationTaskName?: string;
 }

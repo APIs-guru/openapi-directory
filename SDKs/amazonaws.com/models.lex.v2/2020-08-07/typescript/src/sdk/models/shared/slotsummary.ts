@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SlotConstraintEnum } from "./slotconstraintenum";
 import { PromptSpecification } from "./promptspecification";
+
 
 
 // SlotSummary
@@ -8,24 +9,24 @@ import { PromptSpecification } from "./promptspecification";
  * Summary information about a slot, a value that the bot elicits from the user.
 **/
 export class SlotSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" })
   lastUpdatedDateTime?: Date;
 
-  @Metadata({ data: "json, name=slotConstraint" })
+  @SpeakeasyMetadata({ data: "json, name=slotConstraint" })
   slotConstraint?: SlotConstraintEnum;
 
-  @Metadata({ data: "json, name=slotId" })
+  @SpeakeasyMetadata({ data: "json, name=slotId" })
   slotId?: string;
 
-  @Metadata({ data: "json, name=slotName" })
+  @SpeakeasyMetadata({ data: "json, name=slotName" })
   slotName?: string;
 
-  @Metadata({ data: "json, name=slotTypeId" })
+  @SpeakeasyMetadata({ data: "json, name=slotTypeId" })
   slotTypeId?: string;
 
-  @Metadata({ data: "json, name=valueElicitationPromptSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=valueElicitationPromptSpecification" })
   valueElicitationPromptSpecification?: PromptSpecification;
 }

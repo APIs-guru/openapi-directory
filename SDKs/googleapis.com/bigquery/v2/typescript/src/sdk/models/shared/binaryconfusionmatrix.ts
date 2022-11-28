@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BinaryConfusionMatrix
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Confusion matrix for binary classification models.
 **/
 export class BinaryConfusionMatrix extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accuracy" })
+  @SpeakeasyMetadata({ data: "json, name=accuracy" })
   accuracy?: number;
 
-  @Metadata({ data: "json, name=f1Score" })
+  @SpeakeasyMetadata({ data: "json, name=f1Score" })
   f1Score?: number;
 
-  @Metadata({ data: "json, name=falseNegatives" })
+  @SpeakeasyMetadata({ data: "json, name=falseNegatives" })
   falseNegatives?: string;
 
-  @Metadata({ data: "json, name=falsePositives" })
+  @SpeakeasyMetadata({ data: "json, name=falsePositives" })
   falsePositives?: string;
 
-  @Metadata({ data: "json, name=positiveClassThreshold" })
+  @SpeakeasyMetadata({ data: "json, name=positiveClassThreshold" })
   positiveClassThreshold?: number;
 
-  @Metadata({ data: "json, name=precision" })
+  @SpeakeasyMetadata({ data: "json, name=precision" })
   precision?: number;
 
-  @Metadata({ data: "json, name=recall" })
+  @SpeakeasyMetadata({ data: "json, name=recall" })
   recall?: number;
 
-  @Metadata({ data: "json, name=trueNegatives" })
+  @SpeakeasyMetadata({ data: "json, name=trueNegatives" })
   trueNegatives?: string;
 
-  @Metadata({ data: "json, name=truePositives" })
+  @SpeakeasyMetadata({ data: "json, name=truePositives" })
   truePositives?: string;
 }

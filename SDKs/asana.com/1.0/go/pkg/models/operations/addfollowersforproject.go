@@ -17,14 +17,14 @@ type AddFollowersForProjectRequestBody struct {
 	Data *shared.AddFollowersRequest `json:"data,omitempty"`
 }
 
+type AddFollowersForProject200ApplicationJSON struct {
+	Data map[string]interface{} `json:"data,omitempty"`
+}
+
 type AddFollowersForProjectRequest struct {
 	PathParams  AddFollowersForProjectPathParams
 	QueryParams AddFollowersForProjectQueryParams
 	Request     AddFollowersForProjectRequestBody `request:"mediaType=application/json"`
-}
-
-type AddFollowersForProject200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type AddFollowersForProjectResponse struct {

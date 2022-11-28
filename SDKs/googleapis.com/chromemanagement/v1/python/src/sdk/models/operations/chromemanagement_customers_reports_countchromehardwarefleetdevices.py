@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ChromemanagementCustomersReportsCountChromeHardwareFleetDevicesPathParams:
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,20 +28,20 @@ class ChromemanagementCustomersReportsCountChromeHardwareFleetDevicesQueryParams
 
 @dataclass
 class ChromemanagementCustomersReportsCountChromeHardwareFleetDevicesSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ChromemanagementCustomersReportsCountChromeHardwareFleetDevicesRequest:
-    path_params: ChromemanagementCustomersReportsCountChromeHardwareFleetDevicesPathParams = field(default=None)
-    query_params: ChromemanagementCustomersReportsCountChromeHardwareFleetDevicesQueryParams = field(default=None)
-    security: ChromemanagementCustomersReportsCountChromeHardwareFleetDevicesSecurity = field(default=None)
+    path_params: ChromemanagementCustomersReportsCountChromeHardwareFleetDevicesPathParams = field()
+    query_params: ChromemanagementCustomersReportsCountChromeHardwareFleetDevicesQueryParams = field()
+    security: ChromemanagementCustomersReportsCountChromeHardwareFleetDevicesSecurity = field()
     
 
 @dataclass
 class ChromemanagementCustomersReportsCountChromeHardwareFleetDevicesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_chrome_management_v1_count_chrome_hardware_fleet_devices_response: Optional[shared.GoogleChromeManagementV1CountChromeHardwareFleetDevicesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

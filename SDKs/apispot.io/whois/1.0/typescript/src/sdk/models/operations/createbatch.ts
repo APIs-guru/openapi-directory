@@ -1,48 +1,49 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CreateBatchRequestBodyOperationEnum {
-    Whois = "whois"
-,    Check = "check"
+    Whois = "whois",
+    Check = "check"
 }
 
 export enum CreateBatchRequestBodyOptionsFormatEnum {
-    Raw = "raw"
-,    Formatted = "formatted"
-,    Json = "json"
+    Raw = "raw",
+    Formatted = "formatted",
+    Json = "json"
 }
 
 
 export class CreateBatchRequestBodyOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format?: CreateBatchRequestBodyOptionsFormatEnum;
 }
 
 
 export class CreateBatchRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domains" })
+  @SpeakeasyMetadata({ data: "json, name=domains" })
   domains: string[];
 
-  @Metadata({ data: "json, name=operation" })
+  @SpeakeasyMetadata({ data: "json, name=operation" })
   operation: CreateBatchRequestBodyOperationEnum;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: CreateBatchRequestBodyOptions;
 }
 
 
 export class CreateBatchRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateBatchRequestBody;
 }
 
 
 export class CreateBatchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   batch?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

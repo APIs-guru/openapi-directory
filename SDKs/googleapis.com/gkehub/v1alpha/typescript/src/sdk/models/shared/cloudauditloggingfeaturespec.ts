@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CloudAuditLoggingFeatureSpec
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * **Cloud Audit Logging**: Spec for Audit Logging Allowlisting.
 **/
 export class CloudAuditLoggingFeatureSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowlistedServiceAccounts" })
+  @SpeakeasyMetadata({ data: "json, name=allowlistedServiceAccounts" })
   allowlistedServiceAccounts?: string[];
 }

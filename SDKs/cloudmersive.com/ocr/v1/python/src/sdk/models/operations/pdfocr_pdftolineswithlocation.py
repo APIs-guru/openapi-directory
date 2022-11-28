@@ -11,31 +11,31 @@ class PdfOcrPdfToLinesWithLocationHeaders:
 
 @dataclass
 class PdfOcrPdfToLinesWithLocationRequestBodyImageFile:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    image_file: str = field(default=None, metadata={'multipart_form': { 'field_name': 'imageFile' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    image_file: str = field(metadata={'multipart_form': { 'field_name': 'imageFile' }})
     
 
 @dataclass
 class PdfOcrPdfToLinesWithLocationRequestBody:
-    image_file: PdfOcrPdfToLinesWithLocationRequestBodyImageFile = field(default=None, metadata={'multipart_form': { 'file': True }})
+    image_file: PdfOcrPdfToLinesWithLocationRequestBodyImageFile = field(metadata={'multipart_form': { 'file': True }})
     
 
 @dataclass
 class PdfOcrPdfToLinesWithLocationSecurity:
-    apikey: shared.SchemeApikey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    apikey: shared.SchemeApikey = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class PdfOcrPdfToLinesWithLocationRequest:
-    headers: PdfOcrPdfToLinesWithLocationHeaders = field(default=None)
-    request: PdfOcrPdfToLinesWithLocationRequestBody = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
-    security: PdfOcrPdfToLinesWithLocationSecurity = field(default=None)
+    headers: PdfOcrPdfToLinesWithLocationHeaders = field()
+    request: PdfOcrPdfToLinesWithLocationRequestBody = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
+    security: PdfOcrPdfToLinesWithLocationSecurity = field()
     
 
 @dataclass
 class PdfOcrPdfToLinesWithLocationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     pdf_to_lines_with_location_result: Optional[shared.PdfToLinesWithLocationResult] = field(default=None)
-    status_code: int = field(default=None)
     

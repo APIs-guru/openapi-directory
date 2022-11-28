@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QueryInfo } from "./queryinfo";
 
 
+
 export class SelectResourceConfigResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=QueryInfo" })
+  @SpeakeasyMetadata({ data: "json, name=QueryInfo" })
   queryInfo?: QueryInfo;
 
-  @Metadata({ data: "json, name=Results" })
+  @SpeakeasyMetadata({ data: "json, name=Results" })
   results?: string[];
 }

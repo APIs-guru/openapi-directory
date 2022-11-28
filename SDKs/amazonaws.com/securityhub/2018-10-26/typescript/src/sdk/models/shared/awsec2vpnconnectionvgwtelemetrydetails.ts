@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsEc2VpnConnectionVgwTelemetryDetails
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about the VPN tunnel.
 **/
 export class AwsEc2VpnConnectionVgwTelemetryDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcceptedRouteCount" })
+  @SpeakeasyMetadata({ data: "json, name=AcceptedRouteCount" })
   acceptedRouteCount?: number;
 
-  @Metadata({ data: "json, name=CertificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=CertificateArn" })
   certificateArn?: string;
 
-  @Metadata({ data: "json, name=LastStatusChange" })
+  @SpeakeasyMetadata({ data: "json, name=LastStatusChange" })
   lastStatusChange?: string;
 
-  @Metadata({ data: "json, name=OutsideIpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=OutsideIpAddress" })
   outsideIpAddress?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 
-  @Metadata({ data: "json, name=StatusMessage" })
+  @SpeakeasyMetadata({ data: "json, name=StatusMessage" })
   statusMessage?: string;
 }

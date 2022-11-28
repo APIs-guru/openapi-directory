@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericValue
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * To represent a number.
 **/
 export class GoogleAnalyticsAdminV1alphaAudienceDimensionOrMetricFilterNumericValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=doubleValue" })
+  @SpeakeasyMetadata({ data: "json, name=doubleValue" })
   doubleValue?: number;
 
-  @Metadata({ data: "json, name=int64Value" })
+  @SpeakeasyMetadata({ data: "json, name=int64Value" })
   int64Value?: string;
 }

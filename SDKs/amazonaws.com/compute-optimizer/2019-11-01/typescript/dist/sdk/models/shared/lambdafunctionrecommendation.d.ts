@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LambdaFunctionRecommendationFindingEnum } from "./lambdafunctionrecommendationfindingenum";
 import { LambdaFunctionRecommendationFindingReasonCodeEnum } from "./lambdafunctionrecommendationfindingreasoncodeenum";
 import { LambdaFunctionMemoryRecommendationOption } from "./lambdafunctionmemoryrecommendationoption";

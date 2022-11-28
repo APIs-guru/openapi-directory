@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CancelDomainTransferToAnotherAwsAccountResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The <code>CancelDomainTransferToAnotherAwsAccount</code> response includes the following element.
 **/
 export class CancelDomainTransferToAnotherAwsAccountResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=OperationId" })
+  @SpeakeasyMetadata({ data: "json, name=OperationId" })
   operationId?: string;
 }

@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApprovalConfig } from "./approvalconfig";
 import { BitbucketServerTriggerConfig } from "./bitbucketservertriggerconfig";
 import { Build } from "./build";
@@ -6,21 +6,28 @@ import { GitFileSource } from "./gitfilesource";
 import { GitHubEventsConfig } from "./githubeventsconfig";
 import { GitLabEventsConfig } from "./gitlabeventsconfig";
 import { PubsubConfig } from "./pubsubconfig";
+import { RepositoryEventConfig } from "./repositoryeventconfig";
 import { GitRepoSource } from "./gitreposource";
 import { RepoSource } from "./reposource";
 import { WebhookConfig } from "./webhookconfig";
+import { BitbucketServerTriggerConfigInput } from "./bitbucketservertriggerconfig";
+import { BuildInput } from "./build";
+import { GitLabEventsConfigInput } from "./gitlabeventsconfig";
+import { PubsubConfigInput } from "./pubsubconfig";
+import { RepositoryEventConfigInput } from "./repositoryeventconfig";
+
 
 export enum BuildTriggerEventTypeEnum {
-    EventTypeUnspecified = "EVENT_TYPE_UNSPECIFIED"
-,    Repo = "REPO"
-,    Webhook = "WEBHOOK"
-,    Pubsub = "PUBSUB"
-,    Manual = "MANUAL"
+    EventTypeUnspecified = "EVENT_TYPE_UNSPECIFIED",
+    Repo = "REPO",
+    Webhook = "WEBHOOK",
+    Pubsub = "PUBSUB",
+    Manual = "MANUAL"
 }
 
 export enum BuildTriggerIncludeBuildLogsEnum {
-    IncludeBuildLogsUnspecified = "INCLUDE_BUILD_LOGS_UNSPECIFIED"
-,    IncludeBuildLogsWithStatus = "INCLUDE_BUILD_LOGS_WITH_STATUS"
+    IncludeBuildLogsUnspecified = "INCLUDE_BUILD_LOGS_UNSPECIFIED",
+    IncludeBuildLogsWithStatus = "INCLUDE_BUILD_LOGS_WITH_STATUS"
 }
 
 
@@ -29,81 +36,166 @@ export enum BuildTriggerIncludeBuildLogsEnum {
  * Configuration for an automated build in response to source repository changes.
 **/
 export class BuildTrigger extends SpeakeasyBase {
-  @Metadata({ data: "json, name=approvalConfig" })
+  @SpeakeasyMetadata({ data: "json, name=approvalConfig" })
   approvalConfig?: ApprovalConfig;
 
-  @Metadata({ data: "json, name=autodetect" })
+  @SpeakeasyMetadata({ data: "json, name=autodetect" })
   autodetect?: boolean;
 
-  @Metadata({ data: "json, name=bitbucketServerTriggerConfig" })
+  @SpeakeasyMetadata({ data: "json, name=bitbucketServerTriggerConfig" })
   bitbucketServerTriggerConfig?: BitbucketServerTriggerConfig;
 
-  @Metadata({ data: "json, name=build" })
+  @SpeakeasyMetadata({ data: "json, name=build" })
   build?: Build;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=disabled" })
+  @SpeakeasyMetadata({ data: "json, name=disabled" })
   disabled?: boolean;
 
-  @Metadata({ data: "json, name=eventType" })
+  @SpeakeasyMetadata({ data: "json, name=eventType" })
   eventType?: BuildTriggerEventTypeEnum;
 
-  @Metadata({ data: "json, name=filename" })
+  @SpeakeasyMetadata({ data: "json, name=filename" })
   filename?: string;
 
-  @Metadata({ data: "json, name=filter" })
+  @SpeakeasyMetadata({ data: "json, name=filter" })
   filter?: string;
 
-  @Metadata({ data: "json, name=gitFileSource" })
+  @SpeakeasyMetadata({ data: "json, name=gitFileSource" })
   gitFileSource?: GitFileSource;
 
-  @Metadata({ data: "json, name=github" })
+  @SpeakeasyMetadata({ data: "json, name=github" })
   github?: GitHubEventsConfig;
 
-  @Metadata({ data: "json, name=gitlabEnterpriseEventsConfig" })
+  @SpeakeasyMetadata({ data: "json, name=gitlabEnterpriseEventsConfig" })
   gitlabEnterpriseEventsConfig?: GitLabEventsConfig;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=ignoredFiles" })
+  @SpeakeasyMetadata({ data: "json, name=ignoredFiles" })
   ignoredFiles?: string[];
 
-  @Metadata({ data: "json, name=includeBuildLogs" })
+  @SpeakeasyMetadata({ data: "json, name=includeBuildLogs" })
   includeBuildLogs?: BuildTriggerIncludeBuildLogsEnum;
 
-  @Metadata({ data: "json, name=includedFiles" })
+  @SpeakeasyMetadata({ data: "json, name=includedFiles" })
   includedFiles?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=pubsubConfig" })
+  @SpeakeasyMetadata({ data: "json, name=pubsubConfig" })
   pubsubConfig?: PubsubConfig;
 
-  @Metadata({ data: "json, name=resourceName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryEventConfig" })
+  repositoryEventConfig?: RepositoryEventConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=resourceName" })
   resourceName?: string;
 
-  @Metadata({ data: "json, name=serviceAccount" })
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
   serviceAccount?: string;
 
-  @Metadata({ data: "json, name=sourceToBuild" })
+  @SpeakeasyMetadata({ data: "json, name=sourceToBuild" })
   sourceToBuild?: GitRepoSource;
 
-  @Metadata({ data: "json, name=substitutions" })
+  @SpeakeasyMetadata({ data: "json, name=substitutions" })
   substitutions?: Map<string, string>;
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: string[];
 
-  @Metadata({ data: "json, name=triggerTemplate" })
+  @SpeakeasyMetadata({ data: "json, name=triggerTemplate" })
   triggerTemplate?: RepoSource;
 
-  @Metadata({ data: "json, name=webhookConfig" })
+  @SpeakeasyMetadata({ data: "json, name=webhookConfig" })
+  webhookConfig?: WebhookConfig;
+}
+
+
+// BuildTriggerInput
+/** 
+ * Configuration for an automated build in response to source repository changes.
+**/
+export class BuildTriggerInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=approvalConfig" })
+  approvalConfig?: ApprovalConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=autodetect" })
+  autodetect?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=bitbucketServerTriggerConfig" })
+  bitbucketServerTriggerConfig?: BitbucketServerTriggerConfigInput;
+
+  @SpeakeasyMetadata({ data: "json, name=build" })
+  build?: BuildInput;
+
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=disabled" })
+  disabled?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=eventType" })
+  eventType?: BuildTriggerEventTypeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=filename" })
+  filename?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=filter" })
+  filter?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=gitFileSource" })
+  gitFileSource?: GitFileSource;
+
+  @SpeakeasyMetadata({ data: "json, name=github" })
+  github?: GitHubEventsConfig;
+
+  @SpeakeasyMetadata({ data: "json, name=gitlabEnterpriseEventsConfig" })
+  gitlabEnterpriseEventsConfig?: GitLabEventsConfigInput;
+
+  @SpeakeasyMetadata({ data: "json, name=ignoredFiles" })
+  ignoredFiles?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=includeBuildLogs" })
+  includeBuildLogs?: BuildTriggerIncludeBuildLogsEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=includedFiles" })
+  includedFiles?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=pubsubConfig" })
+  pubsubConfig?: PubsubConfigInput;
+
+  @SpeakeasyMetadata({ data: "json, name=repositoryEventConfig" })
+  repositoryEventConfig?: RepositoryEventConfigInput;
+
+  @SpeakeasyMetadata({ data: "json, name=resourceName" })
+  resourceName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=serviceAccount" })
+  serviceAccount?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=sourceToBuild" })
+  sourceToBuild?: GitRepoSource;
+
+  @SpeakeasyMetadata({ data: "json, name=substitutions" })
+  substitutions?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=tags" })
+  tags?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=triggerTemplate" })
+  triggerTemplate?: RepoSource;
+
+  @SpeakeasyMetadata({ data: "json, name=webhookConfig" })
   webhookConfig?: WebhookConfig;
 }

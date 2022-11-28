@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetOrganizationApiRequestsOverviewPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organizationId" })
   organizationId: string;
 }
 
 
 export class GetOrganizationApiRequestsOverviewQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=t0" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=t0" })
   t0?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=t1" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=t1" })
   t1?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timespan" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timespan" })
   timespan?: number;
 }
 
 
 export class GetOrganizationApiRequestsOverviewRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetOrganizationApiRequestsOverviewPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetOrganizationApiRequestsOverviewQueryParams;
 }
 
 
 export class GetOrganizationApiRequestsOverviewResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getOrganizationApiRequestsOverview200ApplicationJsonObject?: Map<string, any>;
 }

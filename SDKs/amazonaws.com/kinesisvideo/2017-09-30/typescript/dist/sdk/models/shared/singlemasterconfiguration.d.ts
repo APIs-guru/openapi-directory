@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * A structure that contains the configuration for the <code>SINGLE_MASTER</code> channel type.
 **/

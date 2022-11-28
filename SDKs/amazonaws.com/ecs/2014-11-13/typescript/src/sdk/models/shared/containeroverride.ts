@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { KeyValuePair } from "./keyvaluepair";
 import { EnvironmentFile } from "./environmentfile";
 import { ResourceRequirement } from "./resourcerequirement";
+
 
 
 // ContainerOverride
@@ -10,27 +10,27 @@ import { ResourceRequirement } from "./resourcerequirement";
  * The overrides that should be sent to a container. An empty container override can be passed in. An example of an empty container override would be <code>{"containerOverrides": [ ] }</code>. If a non-empty container override is specified, the <code>name</code> parameter must be included.
 **/
 export class ContainerOverride extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command?: string[];
 
-  @Metadata({ data: "json, name=cpu" })
+  @SpeakeasyMetadata({ data: "json, name=cpu" })
   cpu?: number;
 
-  @Metadata({ data: "json, name=environment", elemType: shared.KeyValuePair })
+  @SpeakeasyMetadata({ data: "json, name=environment", elemType: KeyValuePair })
   environment?: KeyValuePair[];
 
-  @Metadata({ data: "json, name=environmentFiles", elemType: shared.EnvironmentFile })
+  @SpeakeasyMetadata({ data: "json, name=environmentFiles", elemType: EnvironmentFile })
   environmentFiles?: EnvironmentFile[];
 
-  @Metadata({ data: "json, name=memory" })
+  @SpeakeasyMetadata({ data: "json, name=memory" })
   memory?: number;
 
-  @Metadata({ data: "json, name=memoryReservation" })
+  @SpeakeasyMetadata({ data: "json, name=memoryReservation" })
   memoryReservation?: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=resourceRequirements", elemType: shared.ResourceRequirement })
+  @SpeakeasyMetadata({ data: "json, name=resourceRequirements", elemType: ResourceRequirement })
   resourceRequirements?: ResourceRequirement[];
 }

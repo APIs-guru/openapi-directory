@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ContainerDependency } from "./containerdependency";
 import { KeyValuePair } from "./keyvaluepair";
 import { EnvironmentFile } from "./environmentfile";
@@ -18,125 +17,126 @@ import { Ulimit } from "./ulimit";
 import { VolumeFrom } from "./volumefrom";
 
 
+
 // ContainerDefinition
 /** 
  * Container definitions are used in task definitions to describe the different containers that are launched as part of a task.
 **/
 export class ContainerDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=command" })
+  @SpeakeasyMetadata({ data: "json, name=command" })
   command?: string[];
 
-  @Metadata({ data: "json, name=cpu" })
+  @SpeakeasyMetadata({ data: "json, name=cpu" })
   cpu?: number;
 
-  @Metadata({ data: "json, name=dependsOn", elemType: shared.ContainerDependency })
+  @SpeakeasyMetadata({ data: "json, name=dependsOn", elemType: ContainerDependency })
   dependsOn?: ContainerDependency[];
 
-  @Metadata({ data: "json, name=disableNetworking" })
+  @SpeakeasyMetadata({ data: "json, name=disableNetworking" })
   disableNetworking?: boolean;
 
-  @Metadata({ data: "json, name=dnsSearchDomains" })
+  @SpeakeasyMetadata({ data: "json, name=dnsSearchDomains" })
   dnsSearchDomains?: string[];
 
-  @Metadata({ data: "json, name=dnsServers" })
+  @SpeakeasyMetadata({ data: "json, name=dnsServers" })
   dnsServers?: string[];
 
-  @Metadata({ data: "json, name=dockerLabels" })
+  @SpeakeasyMetadata({ data: "json, name=dockerLabels" })
   dockerLabels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=dockerSecurityOptions" })
+  @SpeakeasyMetadata({ data: "json, name=dockerSecurityOptions" })
   dockerSecurityOptions?: string[];
 
-  @Metadata({ data: "json, name=entryPoint" })
+  @SpeakeasyMetadata({ data: "json, name=entryPoint" })
   entryPoint?: string[];
 
-  @Metadata({ data: "json, name=environment", elemType: shared.KeyValuePair })
+  @SpeakeasyMetadata({ data: "json, name=environment", elemType: KeyValuePair })
   environment?: KeyValuePair[];
 
-  @Metadata({ data: "json, name=environmentFiles", elemType: shared.EnvironmentFile })
+  @SpeakeasyMetadata({ data: "json, name=environmentFiles", elemType: EnvironmentFile })
   environmentFiles?: EnvironmentFile[];
 
-  @Metadata({ data: "json, name=essential" })
+  @SpeakeasyMetadata({ data: "json, name=essential" })
   essential?: boolean;
 
-  @Metadata({ data: "json, name=extraHosts", elemType: shared.HostEntry })
+  @SpeakeasyMetadata({ data: "json, name=extraHosts", elemType: HostEntry })
   extraHosts?: HostEntry[];
 
-  @Metadata({ data: "json, name=firelensConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=firelensConfiguration" })
   firelensConfiguration?: FirelensConfiguration;
 
-  @Metadata({ data: "json, name=healthCheck" })
+  @SpeakeasyMetadata({ data: "json, name=healthCheck" })
   healthCheck?: HealthCheck;
 
-  @Metadata({ data: "json, name=hostname" })
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
   hostname?: string;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: string;
 
-  @Metadata({ data: "json, name=interactive" })
+  @SpeakeasyMetadata({ data: "json, name=interactive" })
   interactive?: boolean;
 
-  @Metadata({ data: "json, name=links" })
+  @SpeakeasyMetadata({ data: "json, name=links" })
   links?: string[];
 
-  @Metadata({ data: "json, name=linuxParameters" })
+  @SpeakeasyMetadata({ data: "json, name=linuxParameters" })
   linuxParameters?: LinuxParameters;
 
-  @Metadata({ data: "json, name=logConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=logConfiguration" })
   logConfiguration?: LogConfiguration;
 
-  @Metadata({ data: "json, name=memory" })
+  @SpeakeasyMetadata({ data: "json, name=memory" })
   memory?: number;
 
-  @Metadata({ data: "json, name=memoryReservation" })
+  @SpeakeasyMetadata({ data: "json, name=memoryReservation" })
   memoryReservation?: number;
 
-  @Metadata({ data: "json, name=mountPoints", elemType: shared.MountPoint })
+  @SpeakeasyMetadata({ data: "json, name=mountPoints", elemType: MountPoint })
   mountPoints?: MountPoint[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=portMappings", elemType: shared.PortMapping })
+  @SpeakeasyMetadata({ data: "json, name=portMappings", elemType: PortMapping })
   portMappings?: PortMapping[];
 
-  @Metadata({ data: "json, name=privileged" })
+  @SpeakeasyMetadata({ data: "json, name=privileged" })
   privileged?: boolean;
 
-  @Metadata({ data: "json, name=pseudoTerminal" })
+  @SpeakeasyMetadata({ data: "json, name=pseudoTerminal" })
   pseudoTerminal?: boolean;
 
-  @Metadata({ data: "json, name=readonlyRootFilesystem" })
+  @SpeakeasyMetadata({ data: "json, name=readonlyRootFilesystem" })
   readonlyRootFilesystem?: boolean;
 
-  @Metadata({ data: "json, name=repositoryCredentials" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryCredentials" })
   repositoryCredentials?: RepositoryCredentials;
 
-  @Metadata({ data: "json, name=resourceRequirements", elemType: shared.ResourceRequirement })
+  @SpeakeasyMetadata({ data: "json, name=resourceRequirements", elemType: ResourceRequirement })
   resourceRequirements?: ResourceRequirement[];
 
-  @Metadata({ data: "json, name=secrets", elemType: shared.Secret })
+  @SpeakeasyMetadata({ data: "json, name=secrets", elemType: Secret })
   secrets?: Secret[];
 
-  @Metadata({ data: "json, name=startTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=startTimeout" })
   startTimeout?: number;
 
-  @Metadata({ data: "json, name=stopTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=stopTimeout" })
   stopTimeout?: number;
 
-  @Metadata({ data: "json, name=systemControls", elemType: shared.SystemControl })
+  @SpeakeasyMetadata({ data: "json, name=systemControls", elemType: SystemControl })
   systemControls?: SystemControl[];
 
-  @Metadata({ data: "json, name=ulimits", elemType: shared.Ulimit })
+  @SpeakeasyMetadata({ data: "json, name=ulimits", elemType: Ulimit })
   ulimits?: Ulimit[];
 
-  @Metadata({ data: "json, name=user" })
+  @SpeakeasyMetadata({ data: "json, name=user" })
   user?: string;
 
-  @Metadata({ data: "json, name=volumesFrom", elemType: shared.VolumeFrom })
+  @SpeakeasyMetadata({ data: "json, name=volumesFrom", elemType: VolumeFrom })
   volumesFrom?: VolumeFrom[];
 
-  @Metadata({ data: "json, name=workingDirectory" })
+  @SpeakeasyMetadata({ data: "json, name=workingDirectory" })
   workingDirectory?: string;
 }

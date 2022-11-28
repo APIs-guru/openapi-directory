@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Ipv6CidrBlockAssociation
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An IPV6 CIDR block association.
 **/
 export class Ipv6CidrBlockAssociation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssociationId" })
+  @SpeakeasyMetadata({ data: "json, name=AssociationId" })
   associationId?: string;
 
-  @Metadata({ data: "json, name=CidrBlockState" })
+  @SpeakeasyMetadata({ data: "json, name=CidrBlockState" })
   cidrBlockState?: string;
 
-  @Metadata({ data: "json, name=Ipv6CidrBlock" })
+  @SpeakeasyMetadata({ data: "json, name=Ipv6CidrBlock" })
   ipv6CidrBlock?: string;
 }

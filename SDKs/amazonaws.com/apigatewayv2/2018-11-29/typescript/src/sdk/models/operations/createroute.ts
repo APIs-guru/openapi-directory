@@ -1,111 +1,112 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CreateRoutePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiId" })
   apiId: string;
 }
 
 
 export class CreateRouteHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 export enum CreateRouteRequestBodyAuthorizationTypeEnum {
-    None = "NONE"
-,    AwsIam = "AWS_IAM"
-,    Custom = "CUSTOM"
-,    Jwt = "JWT"
+    None = "NONE",
+    AwsIam = "AWS_IAM",
+    Custom = "CUSTOM",
+    Jwt = "JWT"
 }
 
 
 export class CreateRouteRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiKeyRequired" })
+  @SpeakeasyMetadata({ data: "json, name=apiKeyRequired" })
   apiKeyRequired?: boolean;
 
-  @Metadata({ data: "json, name=authorizationScopes" })
+  @SpeakeasyMetadata({ data: "json, name=authorizationScopes" })
   authorizationScopes?: string[];
 
-  @Metadata({ data: "json, name=authorizationType" })
+  @SpeakeasyMetadata({ data: "json, name=authorizationType" })
   authorizationType?: CreateRouteRequestBodyAuthorizationTypeEnum;
 
-  @Metadata({ data: "json, name=authorizerId" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerId" })
   authorizerId?: string;
 
-  @Metadata({ data: "json, name=modelSelectionExpression" })
+  @SpeakeasyMetadata({ data: "json, name=modelSelectionExpression" })
   modelSelectionExpression?: string;
 
-  @Metadata({ data: "json, name=operationName" })
+  @SpeakeasyMetadata({ data: "json, name=operationName" })
   operationName?: string;
 
-  @Metadata({ data: "json, name=requestModels" })
+  @SpeakeasyMetadata({ data: "json, name=requestModels" })
   requestModels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=requestParameters", elemType: shared.ParameterConstraints })
+  @SpeakeasyMetadata({ data: "json, name=requestParameters", elemType: shared.ParameterConstraints })
   requestParameters?: Map<string, shared.ParameterConstraints>;
 
-  @Metadata({ data: "json, name=routeKey" })
+  @SpeakeasyMetadata({ data: "json, name=routeKey" })
   routeKey: string;
 
-  @Metadata({ data: "json, name=routeResponseSelectionExpression" })
+  @SpeakeasyMetadata({ data: "json, name=routeResponseSelectionExpression" })
   routeResponseSelectionExpression?: string;
 
-  @Metadata({ data: "json, name=target" })
+  @SpeakeasyMetadata({ data: "json, name=target" })
   target?: string;
 }
 
 
 export class CreateRouteRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: CreateRoutePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: CreateRouteHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: CreateRouteRequestBody;
 }
 
 
 export class CreateRouteResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conflictException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   createRouteResult?: shared.CreateRouteResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 }

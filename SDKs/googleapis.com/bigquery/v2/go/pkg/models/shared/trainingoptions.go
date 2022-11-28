@@ -207,6 +207,8 @@ const (
 	TrainingOptionsTreeMethodEnumHist                  TrainingOptionsTreeMethodEnum = "HIST"
 )
 
+// TrainingOptions
+// Options used in model training.
 type TrainingOptions struct {
 	AdjustStepChanges           *bool                                          `json:"adjustStepChanges,omitempty"`
 	AutoArima                   *bool                                          `json:"autoArima,omitempty"`

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostSetupV1ServicesIDUploadimagePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -18,13 +18,13 @@ class PostSetupV1ServicesIDUploadimageRequests:
 
 @dataclass
 class PostSetupV1ServicesIDUploadimageRequest:
-    path_params: PostSetupV1ServicesIDUploadimagePathParams = field(default=None)
+    path_params: PostSetupV1ServicesIDUploadimagePathParams = field()
     request: Optional[PostSetupV1ServicesIDUploadimageRequests] = field(default=None)
     
 
 @dataclass
 class PostSetupV1ServicesIDUploadimageResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     service_view_model: Optional[shared.ServiceViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

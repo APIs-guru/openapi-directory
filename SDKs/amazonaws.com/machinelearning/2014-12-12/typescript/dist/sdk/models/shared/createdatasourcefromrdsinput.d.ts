@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RdsDataSpec } from "./rdsdataspec";
 export declare class CreateDataSourceFromRdsInput extends SpeakeasyBase {
     computeStatistics?: boolean;

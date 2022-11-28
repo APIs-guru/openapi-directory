@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetAoeLiabilityReportOuputQueryParams = /** @class */ (function (_super) {
     __extends(GetAoeLiabilityReportOuputQueryParams, _super);
@@ -30,23 +30,23 @@ var GetAoeLiabilityReportOuputQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=EmployerKey" }),
         __metadata("design:type", String)
     ], GetAoeLiabilityReportOuputQueryParams.prototype, "employerKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=PayScheduleKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PayScheduleKey" }),
         __metadata("design:type", String)
     ], GetAoeLiabilityReportOuputQueryParams.prototype, "payScheduleKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TaxPeriod" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TaxPeriod" }),
         __metadata("design:type", String)
     ], GetAoeLiabilityReportOuputQueryParams.prototype, "taxPeriod", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TaxYear" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TaxYear" }),
         __metadata("design:type", String)
     ], GetAoeLiabilityReportOuputQueryParams.prototype, "taxYear", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TransformDefinitionKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TransformDefinitionKey" }),
         __metadata("design:type", String)
     ], GetAoeLiabilityReportOuputQueryParams.prototype, "transformDefinitionKey", void 0);
     return GetAoeLiabilityReportOuputQueryParams;
@@ -58,11 +58,11 @@ var GetAoeLiabilityReportOuputHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetAoeLiabilityReportOuputHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetAoeLiabilityReportOuputHeaders.prototype, "authorization", void 0);
     return GetAoeLiabilityReportOuputHeaders;
@@ -74,11 +74,11 @@ var GetAoeLiabilityReportOuputRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAoeLiabilityReportOuputQueryParams)
     ], GetAoeLiabilityReportOuputRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAoeLiabilityReportOuputHeaders)
     ], GetAoeLiabilityReportOuputRequest.prototype, "headers", void 0);
     return GetAoeLiabilityReportOuputRequest;
@@ -90,19 +90,19 @@ var GetAoeLiabilityReportOuputResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAoeLiabilityReportOuputResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetAoeLiabilityReportOuputResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetAoeLiabilityReportOuputResponse.prototype, "getAoeLiabilityReportOuput200ApplicationJsonBinaryString", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAoeLiabilityReportOuputResponse.prototype, "statusCode", void 0);
     return GetAoeLiabilityReportOuputResponse;

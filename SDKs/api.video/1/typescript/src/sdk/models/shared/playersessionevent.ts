@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PlayerSessionEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=at" })
+  @SpeakeasyMetadata({ data: "json, name=at" })
   at?: number;
 
-  @Metadata({ data: "json, name=emittedAt" })
+  @SpeakeasyMetadata({ data: "json, name=emittedAt" })
   emittedAt?: Date;
 
-  @Metadata({ data: "json, name=from" })
+  @SpeakeasyMetadata({ data: "json, name=from" })
   from?: number;
 
-  @Metadata({ data: "json, name=to" })
+  @SpeakeasyMetadata({ data: "json, name=to" })
   to?: number;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

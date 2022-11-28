@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EngineAttribute } from "./engineattribute";
 import { MaintenanceStatusEnum } from "./maintenancestatusenum";
 import { ServerStatusEnum } from "./serverstatusenum";
+
 
 
 // Server
@@ -10,75 +10,75 @@ import { ServerStatusEnum } from "./serverstatusenum";
  * Describes a configuration management server. 
 **/
 export class Server extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssociatePublicIpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=AssociatePublicIpAddress" })
   associatePublicIpAddress?: boolean;
 
-  @Metadata({ data: "json, name=BackupRetentionCount" })
+  @SpeakeasyMetadata({ data: "json, name=BackupRetentionCount" })
   backupRetentionCount?: number;
 
-  @Metadata({ data: "json, name=CloudFormationStackArn" })
+  @SpeakeasyMetadata({ data: "json, name=CloudFormationStackArn" })
   cloudFormationStackArn?: string;
 
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=CustomDomain" })
+  @SpeakeasyMetadata({ data: "json, name=CustomDomain" })
   customDomain?: string;
 
-  @Metadata({ data: "json, name=DisableAutomatedBackup" })
+  @SpeakeasyMetadata({ data: "json, name=DisableAutomatedBackup" })
   disableAutomatedBackup?: boolean;
 
-  @Metadata({ data: "json, name=Endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=Endpoint" })
   endpoint?: string;
 
-  @Metadata({ data: "json, name=Engine" })
+  @SpeakeasyMetadata({ data: "json, name=Engine" })
   engine?: string;
 
-  @Metadata({ data: "json, name=EngineAttributes", elemType: shared.EngineAttribute })
+  @SpeakeasyMetadata({ data: "json, name=EngineAttributes", elemType: EngineAttribute })
   engineAttributes?: EngineAttribute[];
 
-  @Metadata({ data: "json, name=EngineModel" })
+  @SpeakeasyMetadata({ data: "json, name=EngineModel" })
   engineModel?: string;
 
-  @Metadata({ data: "json, name=EngineVersion" })
+  @SpeakeasyMetadata({ data: "json, name=EngineVersion" })
   engineVersion?: string;
 
-  @Metadata({ data: "json, name=InstanceProfileArn" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceProfileArn" })
   instanceProfileArn?: string;
 
-  @Metadata({ data: "json, name=InstanceType" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceType" })
   instanceType?: string;
 
-  @Metadata({ data: "json, name=KeyPair" })
+  @SpeakeasyMetadata({ data: "json, name=KeyPair" })
   keyPair?: string;
 
-  @Metadata({ data: "json, name=MaintenanceStatus" })
+  @SpeakeasyMetadata({ data: "json, name=MaintenanceStatus" })
   maintenanceStatus?: MaintenanceStatusEnum;
 
-  @Metadata({ data: "json, name=PreferredBackupWindow" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredBackupWindow" })
   preferredBackupWindow?: string;
 
-  @Metadata({ data: "json, name=PreferredMaintenanceWindow" })
+  @SpeakeasyMetadata({ data: "json, name=PreferredMaintenanceWindow" })
   preferredMaintenanceWindow?: string;
 
-  @Metadata({ data: "json, name=SecurityGroupIds" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroupIds" })
   securityGroupIds?: string[];
 
-  @Metadata({ data: "json, name=ServerArn" })
+  @SpeakeasyMetadata({ data: "json, name=ServerArn" })
   serverArn?: string;
 
-  @Metadata({ data: "json, name=ServerName" })
+  @SpeakeasyMetadata({ data: "json, name=ServerName" })
   serverName?: string;
 
-  @Metadata({ data: "json, name=ServiceRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceRoleArn" })
   serviceRoleArn?: string;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: ServerStatusEnum;
 
-  @Metadata({ data: "json, name=StatusReason" })
+  @SpeakeasyMetadata({ data: "json, name=StatusReason" })
   statusReason?: string;
 
-  @Metadata({ data: "json, name=SubnetIds" })
+  @SpeakeasyMetadata({ data: "json, name=SubnetIds" })
   subnetIds?: string[];
 }

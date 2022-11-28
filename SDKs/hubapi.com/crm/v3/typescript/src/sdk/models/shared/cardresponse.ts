@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CardActions } from "./cardactions";
 import { CardDisplayBody } from "./carddisplaybody";
 import { CardFetchBody } from "./cardfetchbody";
+
 
 
 // CardResponse
@@ -9,24 +10,24 @@ import { CardFetchBody } from "./cardfetchbody";
  * Current state of Card Definition
 **/
 export class CardResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actions" })
+  @SpeakeasyMetadata({ data: "json, name=actions" })
   actions: CardActions;
 
-  @Metadata({ data: "json, name=createdAt" })
+  @SpeakeasyMetadata({ data: "json, name=createdAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=display" })
+  @SpeakeasyMetadata({ data: "json, name=display" })
   display: CardDisplayBody;
 
-  @Metadata({ data: "json, name=fetch" })
+  @SpeakeasyMetadata({ data: "json, name=fetch" })
   fetch: CardFetchBody;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 
-  @Metadata({ data: "json, name=updatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=updatedAt" })
   updatedAt?: Date;
 }

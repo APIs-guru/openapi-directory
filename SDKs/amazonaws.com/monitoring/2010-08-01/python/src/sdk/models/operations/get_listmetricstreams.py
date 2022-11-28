@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetListMetricStreamsActionEnum(str, Enum):
     LIST_METRIC_STREAMS = "ListMetricStreams"
@@ -10,10 +14,10 @@ class GetListMetricStreamsVersionEnum(str, Enum):
 
 @dataclass
 class GetListMetricStreamsQueryParams:
-    action: GetListMetricStreamsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetListMetricStreamsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetListMetricStreamsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
-    version: GetListMetricStreamsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetListMetricStreamsHeaders:
 
 @dataclass
 class GetListMetricStreamsRequest:
-    query_params: GetListMetricStreamsQueryParams = field(default=None)
-    headers: GetListMetricStreamsHeaders = field(default=None)
+    headers: GetListMetricStreamsHeaders = field()
+    query_params: GetListMetricStreamsQueryParams = field()
     
 
 @dataclass
 class GetListMetricStreamsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class TagAPIGetTopTagsEntryTypeEnum(str, Enum):
@@ -33,13 +34,13 @@ class TagAPIGetTopTagsQueryParams:
 
 @dataclass
 class TagAPIGetTopTagsRequest:
-    query_params: TagAPIGetTopTagsQueryParams = field(default=None)
+    query_params: TagAPIGetTopTagsQueryParams = field()
     
 
 @dataclass
 class TagAPIGetTopTagsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     tag_base_contracts: Optional[List[shared.TagBaseContract]] = field(default=None)
     

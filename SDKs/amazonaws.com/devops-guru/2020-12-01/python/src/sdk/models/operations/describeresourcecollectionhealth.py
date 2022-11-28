@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class DescribeResourceCollectionHealthResourceCollectionTypeEnum(str, Enum):
@@ -9,7 +13,7 @@ class DescribeResourceCollectionHealthResourceCollectionTypeEnum(str, Enum):
 
 @dataclass
 class DescribeResourceCollectionHealthPathParams:
-    resource_collection_type: DescribeResourceCollectionHealthResourceCollectionTypeEnum = field(default=None, metadata={'path_param': { 'field_name': 'ResourceCollectionType', 'style': 'simple', 'explode': False }})
+    resource_collection_type: DescribeResourceCollectionHealthResourceCollectionTypeEnum = field(metadata={'path_param': { 'field_name': 'ResourceCollectionType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,18 +34,18 @@ class DescribeResourceCollectionHealthHeaders:
 
 @dataclass
 class DescribeResourceCollectionHealthRequest:
-    path_params: DescribeResourceCollectionHealthPathParams = field(default=None)
-    query_params: DescribeResourceCollectionHealthQueryParams = field(default=None)
-    headers: DescribeResourceCollectionHealthHeaders = field(default=None)
+    headers: DescribeResourceCollectionHealthHeaders = field()
+    path_params: DescribeResourceCollectionHealthPathParams = field()
+    query_params: DescribeResourceCollectionHealthQueryParams = field()
     
 
 @dataclass
 class DescribeResourceCollectionHealthResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_resource_collection_health_response: Optional[shared.DescribeResourceCollectionHealthResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

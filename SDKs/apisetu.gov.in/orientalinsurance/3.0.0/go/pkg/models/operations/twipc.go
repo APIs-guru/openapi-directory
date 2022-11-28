@@ -28,11 +28,6 @@ type TwipcSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type TwipcRequest struct {
-	Request  *TwipcRequestBody `request:"mediaType=application/json"`
-	Security TwipcSecurity
-}
-
 type Twipc400ApplicationJSONErrorEnum string
 
 const (
@@ -162,6 +157,11 @@ const (
 type Twipc504ApplicationJSON struct {
 	Error            *Twipc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Twipc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type TwipcRequest struct {
+	Request  *TwipcRequestBody `request:"mediaType=application/json"`
+	Security TwipcSecurity
 }
 
 type TwipcResponse struct {

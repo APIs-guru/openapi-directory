@@ -17,22 +17,10 @@ type GetHookEventsSubjectTypePathParams struct {
 	SubjectType GetHookEventsSubjectTypeSubjectTypeEnum `pathParam:"style=simple,explode=false,name=subject_type"`
 }
 
-type GetHookEventsSubjectTypeSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type GetHookEventsSubjectTypeSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type GetHookEventsSubjectTypeSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type GetHookEventsSubjectTypeSecurity struct {
-	Option1 *GetHookEventsSubjectTypeSecurityOption1 `security:"option"`
-	Option2 *GetHookEventsSubjectTypeSecurityOption2 `security:"option"`
-	Option3 *GetHookEventsSubjectTypeSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetHookEventsSubjectTypeRequest struct {

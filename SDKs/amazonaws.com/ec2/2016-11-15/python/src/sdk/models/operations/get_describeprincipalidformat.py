@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetDescribePrincipalIDFormatActionEnum(str, Enum):
     DESCRIBE_PRINCIPAL_ID_FORMAT = "DescribePrincipalIdFormat"
@@ -10,12 +14,12 @@ class GetDescribePrincipalIDFormatVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribePrincipalIDFormatQueryParams:
-    action: GetDescribePrincipalIDFormatActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribePrincipalIDFormatActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribePrincipalIDFormatVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     max_results: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxResults', 'style': 'form', 'explode': True }})
     next_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'NextToken', 'style': 'form', 'explode': True }})
     resource: Optional[List[str]] = field(default=None, metadata={'query_param': { 'field_name': 'Resource', 'style': 'form', 'explode': True }})
-    version: GetDescribePrincipalIDFormatVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -31,13 +35,13 @@ class GetDescribePrincipalIDFormatHeaders:
 
 @dataclass
 class GetDescribePrincipalIDFormatRequest:
-    query_params: GetDescribePrincipalIDFormatQueryParams = field(default=None)
-    headers: GetDescribePrincipalIDFormatHeaders = field(default=None)
+    headers: GetDescribePrincipalIDFormatHeaders = field()
+    query_params: GetDescribePrincipalIDFormatQueryParams = field()
     
 
 @dataclass
 class GetDescribePrincipalIDFormatResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

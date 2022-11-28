@@ -4,15 +4,21 @@ import (
 	"time"
 )
 
+// UnsampledReportCloudStorageDownloadDetails
+// Download details for a file stored in Google Cloud Storage.
 type UnsampledReportCloudStorageDownloadDetails struct {
 	BucketID *string `json:"bucketId,omitempty"`
 	ObjectID *string `json:"objectId,omitempty"`
 }
 
+// UnsampledReportDriveDownloadDetails
+// Download details for a file stored in Google Drive.
 type UnsampledReportDriveDownloadDetails struct {
 	DocumentID *string `json:"documentId,omitempty"`
 }
 
+// UnsampledReport
+// JSON template for Analytics unsampled report resource.
 type UnsampledReport struct {
 	AccountID                   *string                                     `json:"accountId,omitempty"`
 	CloudStorageDownloadDetails *UnsampledReportCloudStorageDownloadDetails `json:"cloudStorageDownloadDetails,omitempty"`
@@ -33,4 +39,20 @@ type UnsampledReport struct {
 	Title                       *string                                     `json:"title,omitempty"`
 	Updated                     *time.Time                                  `json:"updated,omitempty"`
 	WebPropertyID               *string                                     `json:"webPropertyId,omitempty"`
+}
+
+// UnsampledReportInput
+// JSON template for Analytics unsampled report resource.
+type UnsampledReportInput struct {
+	AccountID     *string `json:"accountId,omitempty"`
+	Dimensions    *string `json:"dimensions,omitempty"`
+	EndDate       *string `json:"end-date,omitempty"`
+	Filters       *string `json:"filters,omitempty"`
+	ID            *string `json:"id,omitempty"`
+	Metrics       *string `json:"metrics,omitempty"`
+	ProfileID     *string `json:"profileId,omitempty"`
+	Segment       *string `json:"segment,omitempty"`
+	StartDate     *string `json:"start-date,omitempty"`
+	Title         *string `json:"title,omitempty"`
+	WebPropertyID *string `json:"webPropertyId,omitempty"`
 }

@@ -1,15 +1,14 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://test-api.osf.io/v2",
+export const ServerList = [
+	"https://test-api.osf.io/v2",
 ] as const;
 
 export function WithServerURL(
@@ -20,47 +19,46 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
-        );
-      } else {
-        this.securityClient = this.defaultClient;
-      }
+    if (!this._securityClient) {
+      this._securityClient = this._defaultClient;
     }
+    
   }
   
-  // UsersAddonAccountsList - List all addon accounts
-  /** 
+  /**
+   * usersAddonAccountsList - List all addon accounts
+   *
    * 
    * A paginated list of addon accounts authorized by this user.
    * 
@@ -75,7 +73,7 @@ export class SDK {
    * 
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  UsersAddonAccountsList(
+  usersAddonAccountsList(
     req: operations.UsersAddonAccountsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UsersAddonAccountsListResponse> {
@@ -83,23 +81,23 @@ export class SDK {
       req = new operations.UsersAddonAccountsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{user_id}/addons/{provider}/accounts/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UsersAddonAccountsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.UsersAddonAccountsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -114,8 +112,9 @@ export class SDK {
   }
 
   
-  // UsersAddonAccountsRead - Retrieve an addon account
-  /** 
+  /**
+   * usersAddonAccountsRead - Retrieve an addon account
+   *
    * Retrieves the details of an addon account
    * 
    * #### Permissions
@@ -127,7 +126,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  UsersAddonAccountsRead(
+  usersAddonAccountsRead(
     req: operations.UsersAddonAccountsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UsersAddonAccountsReadResponse> {
@@ -135,23 +134,23 @@ export class SDK {
       req = new operations.UsersAddonAccountsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{user_id}/addons/{provider}/accounts/{account_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UsersAddonAccountsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.UsersAddonAccountsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -166,8 +165,9 @@ export class SDK {
   }
 
   
-  // AddonsList - List all addons
-  /** 
+  /**
+   * addonsList - List all addons
+   *
    * 
    * A paginated list of addons configurable with the OSF
    * #### Returns
@@ -179,27 +179,26 @@ export class SDK {
    * 
    * This request should never return an error.
   **/
-  AddonsList(
-    
+  addonsList(
     config?: AxiosRequestConfig
   ): Promise<operations.AddonsListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/addons/";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.AddonsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.AddonsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -214,8 +213,9 @@ export class SDK {
   }
 
   
-  // BaseRead - Root
-  /** 
+  /**
+   * baseRead - Root
+   *
    * Welcome to the Open Science Framework API. With this API you can access users, projects, components, logs, and files from the [Open Science Framework](https://osf.io/). The Open Science Framework (OSF) is a free, open-source service maintained by the [Center for Open Science](http://cos.io/).
    * 
    * #### Returns
@@ -225,26 +225,25 @@ export class SDK {
    * 
    * The `links` key contains links to the following entity collections: [addons](#tag/Addons), [collections](), [institutions](#tag/Institutions), [licenses](#tag/Licenses), [metaschemas](#tag/Metaschemas), [nodes](#tag/Nodes), [registrations](#tag/Registrations), [users](#tag/Users)
   **/
-  BaseRead(
-    
+  baseRead(
     config?: AxiosRequestConfig
   ): Promise<operations.BaseReadResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.BaseReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.BaseReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -254,8 +253,9 @@ export class SDK {
   }
 
   
-  // CitationsStylesList - List all citation styles
-  /** 
+  /**
+   * citationsStylesList - List all citation styles
+   *
    * 
    * A paginated list of all standard citation styles available for rendering citations.
    * #### Returns
@@ -271,27 +271,26 @@ export class SDK {
    * 
    * Citation styles may be filtered by their `id`, `title`, `short-title`, and `summary`.
   **/
-  CitationsStylesList(
-    
+  citationsStylesList(
     config?: AxiosRequestConfig
   ): Promise<operations.CitationsStylesListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/citations/styles/";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CitationsStylesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.CitationsStylesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -306,15 +305,16 @@ export class SDK {
   }
 
   
-  // CitationsStylesRead - Retrieve a citation style
-  /** 
+  /**
+   * citationsStylesRead - Retrieve a citation style
+   *
    * Retrieves the details of a citation style.
    * #### Returns
    * Returns a JSON object with a `data` key containing the representation of the requested citation style, if the request is successful.
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  CitationsStylesRead(
+  citationsStylesRead(
     req: operations.CitationsStylesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CitationsStylesReadResponse> {
@@ -322,23 +322,23 @@ export class SDK {
       req = new operations.CitationsStylesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/citations/styles/{style_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CitationsStylesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.CitationsStylesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -353,8 +353,9 @@ export class SDK {
   }
 
   
-  // CollectionsAddMetadata - Add Metadata or Subjects to a Entitiy in a Collection
-  /** 
+  /**
+   * collectionsAddMetadata - Add Metadata or Subjects to a Entitiy in a Collection
+   *
    * List of user created metadata for entities within a collection.
    * #### Permissions
    * To edit this collection a user must have collections write permissions
@@ -364,7 +365,7 @@ export class SDK {
    * The `data` key contains an array of nodes ids.
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  CollectionsAddMetadata(
+  collectionsAddMetadata(
     req: operations.CollectionsAddMetadataRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsAddMetadataResponse> {
@@ -372,40 +373,38 @@ export class SDK {
       req = new operations.CollectionsAddMetadataRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/collections/{collection_id}/collected_metadata/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsAddMetadataResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.CollectionsAddMetadataResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
         }
 
@@ -415,8 +414,9 @@ export class SDK {
   }
 
   
-  // CollectionsCollectedMetadata - Retrieve subject data for a specific piece of metadata info for a collection
-  /** 
+  /**
+   * collectionsCollectedMetadata - Retrieve subject data for a specific piece of metadata info for a collection
+   *
    * 
    * #### Permissions
    * In order to view these subject it must be a public collection or a user must have read permissions for collection.
@@ -427,7 +427,7 @@ export class SDK {
    * The `data` key contains an array of nodes ids.
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  CollectionsCollectedMetadata(
+  collectionsCollectedMetadata(
     req: operations.CollectionsCollectedMetadataRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsCollectedMetadataResponse> {
@@ -435,22 +435,22 @@ export class SDK {
       req = new operations.CollectionsCollectedMetadataRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/collections/{collection_id}/collected_metadata/{cgm_id}/subjects/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsCollectedMetadataResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CollectionsCollectedMetadataResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -460,8 +460,9 @@ export class SDK {
   }
 
   
-  // CollectionsCreate - Create a Collection
-  /** 
+  /**
+   * collectionsCreate - Create a Collection
+   *
    * Retrieves a list collections, either public or related to the user
    * #### Permissions
    * Anonymous users are able to see all public collections at this endpoint. Logged in users will only be able to see their own content.
@@ -474,7 +475,7 @@ export class SDK {
    * 
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  CollectionsCreate(
+  collectionsCreate(
     req: operations.CollectionsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsCreateResponse> {
@@ -482,40 +483,38 @@ export class SDK {
       req = new operations.CollectionsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/collections/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.CollectionsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
         }
 
@@ -525,15 +524,16 @@ export class SDK {
   }
 
   
-  // CollectionsDelete - Delete a Collection
-  /** 
+  /**
+   * collectionsDelete - Delete a Collection
+   *
    * Deletes a collection, if the user has appropriate permissions.
    * #### Permissions
    * Users must have write permissions on a collection in order to delete it
    * #### Returns
    * Nothing is returned in the body
   **/
-  CollectionsDelete(
+  collectionsDelete(
     req: operations.CollectionsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsDeleteResponse> {
@@ -541,22 +541,22 @@ export class SDK {
       req = new operations.CollectionsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/collections/{collection_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.CollectionsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -566,8 +566,9 @@ export class SDK {
   }
 
   
-  // CollectionsDetail - Retrieve a Collection
-  /** 
+  /**
+   * collectionsDetail - Retrieve a Collection
+   *
    * Retrieves a collection, if the user has appropriate permissions.
    * 
    * #### Permissions
@@ -577,7 +578,7 @@ export class SDK {
    * 
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  CollectionsDetail(
+  collectionsDetail(
     req: operations.CollectionsDetailRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsDetailResponse> {
@@ -585,23 +586,23 @@ export class SDK {
       req = new operations.CollectionsDetailRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/collections/{collection_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsDetailResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.CollectionsDetailResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -616,8 +617,9 @@ export class SDK {
   }
 
   
-  // CollectionsLinkedNodesList - List All Linked Nodes for a Collection
-  /** 
+  /**
+   * collectionsLinkedNodesList - List All Linked Nodes for a Collection
+   *
    * List of all nodes linked to the given collection.
    * #### Permissions
    * This returns all public nodes associated with this collection.
@@ -628,7 +630,7 @@ export class SDK {
    * 
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  CollectionsLinkedNodesList(
+  collectionsLinkedNodesList(
     req: operations.CollectionsLinkedNodesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsLinkedNodesListResponse> {
@@ -636,22 +638,22 @@ export class SDK {
       req = new operations.CollectionsLinkedNodesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/collections/{collection_id}/linked_nodes", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsLinkedNodesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CollectionsLinkedNodesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -661,8 +663,9 @@ export class SDK {
   }
 
   
-  // CollectionsLinkedNodesRelationships - Link Nodes to Collection
-  /** 
+  /**
+   * collectionsLinkedNodesRelationships - Link Nodes to Collection
+   *
    * This endpoint allow users to a add a node to a collection by issuing a POST request.
    * #### Permissions
    * This returns all public nodes associated with this collection.
@@ -673,7 +676,7 @@ export class SDK {
    * 
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  CollectionsLinkedNodesRelationships(
+  collectionsLinkedNodesRelationships(
     req: operations.CollectionsLinkedNodesRelationshipsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsLinkedNodesRelationshipsResponse> {
@@ -681,40 +684,38 @@ export class SDK {
       req = new operations.CollectionsLinkedNodesRelationshipsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/collections/{collection_id}/linked_nodes/relationships/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsLinkedNodesRelationshipsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.CollectionsLinkedNodesRelationshipsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
         }
 
@@ -724,8 +725,9 @@ export class SDK {
   }
 
   
-  // CollectionsLinkedNodesRelationshipsCreate - Give a Sparse List of Node Ids
-  /** 
+  /**
+   * collectionsLinkedNodesRelationshipsCreate - Give a Sparse List of Node Ids
+   *
    * List of all the node ids linked to the given collection.
    * #### Permissions
    * This returns all public nodes associated with this collection.
@@ -735,7 +737,7 @@ export class SDK {
    * The `data` key contains an array of nodes ids.
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  CollectionsLinkedNodesRelationshipsCreate(
+  collectionsLinkedNodesRelationshipsCreate(
     req: operations.CollectionsLinkedNodesRelationshipsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsLinkedNodesRelationshipsCreateResponse> {
@@ -743,22 +745,22 @@ export class SDK {
       req = new operations.CollectionsLinkedNodesRelationshipsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/collections/{collection_id}/linked_nodes/relationships/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsLinkedNodesRelationshipsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CollectionsLinkedNodesRelationshipsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -768,8 +770,9 @@ export class SDK {
   }
 
   
-  // CollectionsLinkedNodesRelationshipsDelete - Remove Nodes From Collection
-  /** 
+  /**
+   * collectionsLinkedNodesRelationshipsDelete - Remove Nodes From Collection
+   *
    * 
    * This removes associated nodes from a collection
    * #### Permissions
@@ -777,7 +780,7 @@ export class SDK {
    * #### Returns
    * Nothing in the response body.
   **/
-  CollectionsLinkedNodesRelationshipsDelete(
+  collectionsLinkedNodesRelationshipsDelete(
     req: operations.CollectionsLinkedNodesRelationshipsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsLinkedNodesRelationshipsDeleteResponse> {
@@ -785,36 +788,38 @@ export class SDK {
       req = new operations.CollectionsLinkedNodesRelationshipsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/collections/{collection_id}/linked_nodes/relationships/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsLinkedNodesRelationshipsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CollectionsLinkedNodesRelationshipsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -824,8 +829,9 @@ export class SDK {
   }
 
   
-  // CollectionsLinkedPreprintsList - List All Linked Preprints for a Collection
-  /** 
+  /**
+   * collectionsLinkedPreprintsList - List All Linked Preprints for a Collection
+   *
    * List of all preprints linked to the given collection.
    * #### Permissions
    * This returns all public preprints associated with this collection.
@@ -836,7 +842,7 @@ export class SDK {
    * 
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  CollectionsLinkedPreprintsList(
+  collectionsLinkedPreprintsList(
     req: operations.CollectionsLinkedPreprintsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsLinkedPreprintsListResponse> {
@@ -844,22 +850,22 @@ export class SDK {
       req = new operations.CollectionsLinkedPreprintsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/collections/{collection_id}/linked_preprints/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsLinkedPreprintsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CollectionsLinkedPreprintsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -869,8 +875,9 @@ export class SDK {
   }
 
   
-  // CollectionsLinkedRegistrationsList - List All Linked Registrations for a Collection
-  /** 
+  /**
+   * collectionsLinkedRegistrationsList - List All Linked Registrations for a Collection
+   *
    * List of all registrations linked to the given collection.
    * #### Permissions
    * This returns all public registrations associated with this collection.
@@ -881,7 +888,7 @@ export class SDK {
    * 
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  CollectionsLinkedRegistrationsList(
+  collectionsLinkedRegistrationsList(
     req: operations.CollectionsLinkedRegistrationsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsLinkedRegistrationsListResponse> {
@@ -889,22 +896,22 @@ export class SDK {
       req = new operations.CollectionsLinkedRegistrationsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/collections/{collection_id}/linked_registrations/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsLinkedRegistrationsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CollectionsLinkedRegistrationsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -914,8 +921,9 @@ export class SDK {
   }
 
   
-  // CollectionsLinkedRegistrationsRelationships - Link Registrations to Collection
-  /** 
+  /**
+   * collectionsLinkedRegistrationsRelationships - Link Registrations to Collection
+   *
    * This endpoint allow users to a add a registration to a collection by issuing a POST request.
    * #### Permissions
    * This returns all public registrations associated with this collection.
@@ -926,7 +934,7 @@ export class SDK {
    * 
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  CollectionsLinkedRegistrationsRelationships(
+  collectionsLinkedRegistrationsRelationships(
     req: operations.CollectionsLinkedRegistrationsRelationshipsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsLinkedRegistrationsRelationshipsResponse> {
@@ -934,40 +942,38 @@ export class SDK {
       req = new operations.CollectionsLinkedRegistrationsRelationshipsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/collections/{collection_id}/linked_registrations/relationships/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsLinkedRegistrationsRelationshipsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.CollectionsLinkedRegistrationsRelationshipsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
         }
 
@@ -977,8 +983,9 @@ export class SDK {
   }
 
   
-  // CollectionsLinkedRegistrationsRelationshipsCreate - Give a Sparse List of Registrations Ids
-  /** 
+  /**
+   * collectionsLinkedRegistrationsRelationshipsCreate - Give a Sparse List of Registrations Ids
+   *
    * List of all the registration ids linked to the given collection.
    * #### Permissions
    * This returns all public registrations associated with this collection.
@@ -988,7 +995,7 @@ export class SDK {
    * The `data` key contains an array of nodes ids.
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  CollectionsLinkedRegistrationsRelationshipsCreate(
+  collectionsLinkedRegistrationsRelationshipsCreate(
     req: operations.CollectionsLinkedRegistrationsRelationshipsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsLinkedRegistrationsRelationshipsCreateResponse> {
@@ -996,22 +1003,22 @@ export class SDK {
       req = new operations.CollectionsLinkedRegistrationsRelationshipsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/collections/{collection_id}/linked_registrations/relationships/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsLinkedRegistrationsRelationshipsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CollectionsLinkedRegistrationsRelationshipsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1021,8 +1028,9 @@ export class SDK {
   }
 
   
-  // CollectionsLinkedRegistrationsRelationshipsDelete - Remove Registrations From Collection
-  /** 
+  /**
+   * collectionsLinkedRegistrationsRelationshipsDelete - Remove Registrations From Collection
+   *
    * 
    * This removes associated registrations from a collection
    * #### Permissions
@@ -1030,7 +1038,7 @@ export class SDK {
    * #### Returns
    * Nothing in the response body.
   **/
-  CollectionsLinkedRegistrationsRelationshipsDelete(
+  collectionsLinkedRegistrationsRelationshipsDelete(
     req: operations.CollectionsLinkedRegistrationsRelationshipsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsLinkedRegistrationsRelationshipsDeleteResponse> {
@@ -1038,36 +1046,38 @@ export class SDK {
       req = new operations.CollectionsLinkedRegistrationsRelationshipsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/collections/{collection_id}/linked_registrations/relationships/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsLinkedRegistrationsRelationshipsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CollectionsLinkedRegistrationsRelationshipsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1077,8 +1087,9 @@ export class SDK {
   }
 
   
-  // CollectionsList - List all Collections
-  /** 
+  /**
+   * collectionsList - List all Collections
+   *
    * Retrieves a list collections, either public or related to the user
    * #### Permissions
    * Anonymous users are able to see all public collections at this endpoint. Logged in users will only be able to see their own content.
@@ -1088,27 +1099,26 @@ export class SDK {
    * Returns a JSON object containing `data` and `links` keys.
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  CollectionsList(
-    
+  collectionsList(
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/collections/";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.CollectionsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -1123,8 +1133,9 @@ export class SDK {
   }
 
   
-  // CollectionsMetadataDelete - Delete Collection Metadata from entitiy
-  /** 
+  /**
+   * collectionsMetadataDelete - Delete Collection Metadata from entitiy
+   *
    * 
    * #### Permissions
    * Only a user with collection admin permissions can delete collected metadata
@@ -1134,7 +1145,7 @@ export class SDK {
    * The `data` key contains an array of nodes ids.
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  CollectionsMetadataDelete(
+  collectionsMetadataDelete(
     req: operations.CollectionsMetadataDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsMetadataDeleteResponse> {
@@ -1142,22 +1153,22 @@ export class SDK {
       req = new operations.CollectionsMetadataDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/collections/{collection_id}/collected_metadata/{cgm_id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsMetadataDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.CollectionsMetadataDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -1167,8 +1178,9 @@ export class SDK {
   }
 
   
-  // CollectionsMetadataDetail - Add Metadata or Subjects to an Entity in a Collection
-  /** 
+  /**
+   * collectionsMetadataDetail - Add Metadata or Subjects to an Entity in a Collection
+   *
    * List of user created metadata for entities within a collection.
    * #### Permissions
    * To edit this collection a user must have collections write permissions
@@ -1178,7 +1190,7 @@ export class SDK {
    * The `data` key contains an array of nodes ids.
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  CollectionsMetadataDetail(
+  collectionsMetadataDetail(
     req: operations.CollectionsMetadataDetailRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsMetadataDetailResponse> {
@@ -1186,40 +1198,38 @@ export class SDK {
       req = new operations.CollectionsMetadataDetailRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/collections/{collection_id}/collected_metadata/{cgm_id}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsMetadataDetailResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.CollectionsMetadataDetailResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
         }
 
@@ -1229,8 +1239,9 @@ export class SDK {
   }
 
   
-  // CollectionsMetadataRegistrationsDetail - Retrieve Specific Metadata for a Collection
-  /** 
+  /**
+   * collectionsMetadataRegistrationsDetail - Retrieve Specific Metadata for a Collection
+   *
    * 
    * #### Permissions
    * In order to view this metadata it must be public or a user must have read permissions for collection.
@@ -1240,7 +1251,7 @@ export class SDK {
    * The `data` key contains an array of nodes ids.
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  CollectionsMetadataRegistrationsDetail(
+  collectionsMetadataRegistrationsDetail(
     req: operations.CollectionsMetadataRegistrationsDetailRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsMetadataRegistrationsDetailResponse> {
@@ -1248,22 +1259,22 @@ export class SDK {
       req = new operations.CollectionsMetadataRegistrationsDetailRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/collections/{collection_id}/collected_metadata/{cgm_id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsMetadataRegistrationsDetailResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CollectionsMetadataRegistrationsDetailResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1273,8 +1284,9 @@ export class SDK {
   }
 
   
-  // CollectionsMetadataRegistrationsList - Retrieve a list of collected metadata for a collection
-  /** 
+  /**
+   * collectionsMetadataRegistrationsList - Retrieve a list of collected metadata for a collection
+   *
    * List of user created metadata for entities within a collection.
    * #### Permissions
    * In order to view this metadata it must be public or a user must have read permissions for collection.
@@ -1284,7 +1296,7 @@ export class SDK {
    * The `data` key contains an array of nodes ids.
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  CollectionsMetadataRegistrationsList(
+  collectionsMetadataRegistrationsList(
     req: operations.CollectionsMetadataRegistrationsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsMetadataRegistrationsListResponse> {
@@ -1292,22 +1304,22 @@ export class SDK {
       req = new operations.CollectionsMetadataRegistrationsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/collections/{collection_id}/collected_metadata/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsMetadataRegistrationsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CollectionsMetadataRegistrationsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1317,8 +1329,9 @@ export class SDK {
   }
 
   
-  // CollectionsMetadataSubjectsRelationships - Retrieve subject metadata for a specific piece of metadata in a collection
-  /** 
+  /**
+   * collectionsMetadataSubjectsRelationships - Retrieve subject metadata for a specific piece of metadata in a collection
+   *
    * 
    * #### Permissions
    * This is public for a logged out user when an entity is public.
@@ -1328,7 +1341,7 @@ export class SDK {
    * The `data` key contains an array of nodes ids.
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  CollectionsMetadataSubjectsRelationships(
+  collectionsMetadataSubjectsRelationships(
     req: operations.CollectionsMetadataSubjectsRelationshipsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsMetadataSubjectsRelationshipsResponse> {
@@ -1336,22 +1349,22 @@ export class SDK {
       req = new operations.CollectionsMetadataSubjectsRelationshipsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/collections/{collection_id}/collected_metadata/{cgm_id}/relationships/subjects/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsMetadataSubjectsRelationshipsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CollectionsMetadataSubjectsRelationshipsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1361,8 +1374,9 @@ export class SDK {
   }
 
   
-  // CollectionsMetadataSubjectsRelationshipsUpdate - Update subjects for a specific piece of metadata in a collection
-  /** 
+  /**
+   * collectionsMetadataSubjectsRelationshipsUpdate - Update subjects for a specific piece of metadata in a collection
+   *
    * 
    * #### Permissions
    * This is editable for a user with a write permission for this collection.
@@ -1373,7 +1387,7 @@ export class SDK {
    * The `data` key contains an array of nodes ids.
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  CollectionsMetadataSubjectsRelationshipsUpdate(
+  collectionsMetadataSubjectsRelationshipsUpdate(
     req: operations.CollectionsMetadataSubjectsRelationshipsUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CollectionsMetadataSubjectsRelationshipsUpdateResponse> {
@@ -1381,40 +1395,38 @@ export class SDK {
       req = new operations.CollectionsMetadataSubjectsRelationshipsUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/collections/{collection_id}/collected_metadata/{cgm_id}/relationships/subjects/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CollectionsMetadataSubjectsRelationshipsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.CollectionsMetadataSubjectsRelationshipsUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
         }
 
@@ -1424,15 +1436,16 @@ export class SDK {
   }
 
   
-  // CommentsDelete - Delete a comment
-  /** 
+  /**
+   * commentsDelete - Delete a comment
+   *
    * Deletes a comment. This action can be undone by setting deleted to False in a comment update request.
    * #### Returns
    * If the request is successful, no content is returned.
    * 
    * If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  CommentsDelete(
+  commentsDelete(
     req: operations.CommentsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CommentsDeleteResponse> {
@@ -1440,22 +1453,22 @@ export class SDK {
       req = new operations.CommentsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/comments/{comment_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CommentsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.CommentsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -1465,15 +1478,16 @@ export class SDK {
   }
 
   
-  // CommentsPut - Update a comment
-  /** 
+  /**
+   * commentsPut - Update a comment
+   *
    * Updates the specified comment by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
    * #### Returns
    * Returns JSON with a `data` key containing the new representation of the updated comment, if the request is successful.
    * 
    * If the request is unsuccessful, JSON with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  CommentsPut(
+  commentsPut(
     req: operations.CommentsPutRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CommentsPutResponse> {
@@ -1481,40 +1495,38 @@ export class SDK {
       req = new operations.CommentsPutRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/comments/{comment_id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CommentsPutResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.CommentsPutResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1524,15 +1536,16 @@ export class SDK {
   }
 
   
-  // CommentsRead - Retrieve a comment
-  /** 
+  /**
+   * commentsRead - Retrieve a comment
+   *
    * Retrieves the details of a comment
    * #### Returns
    * Returns a JSON object with a `data` key containing the representation of the requested comment, if the request was successful.
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  CommentsRead(
+  commentsRead(
     req: operations.CommentsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.CommentsReadResponse> {
@@ -1540,23 +1553,23 @@ export class SDK {
       req = new operations.CommentsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/comments/{comment_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.CommentsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.CommentsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -1571,8 +1584,9 @@ export class SDK {
   }
 
   
-  // FilesDetail - Retrieve a file
-  /** 
+  /**
+   * filesDetail - Retrieve a file
+   *
    * Retrieves the details of a file (or folder)
    * #### Returns
    * Returns a JSON object with a `data` key containing the representation of the requested file, if the request was successful.
@@ -1614,7 +1628,7 @@ export class SDK {
    * 
    * To delete a file or folder send a DELETE request to the delete link. Nothing will be returned in the response body.
   **/
-  FilesDetail(
+  filesDetail(
     req: operations.FilesDetailRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.FilesDetailResponse> {
@@ -1622,23 +1636,23 @@ export class SDK {
       req = new operations.FilesDetailRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/files/{file_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.FilesDetailResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.FilesDetailResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -1653,15 +1667,16 @@ export class SDK {
   }
 
   
-  // FilesPatch - Update a file
-  /** 
+  /**
+   * filesPatch - Update a file
+   *
    * Updates the specified file by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
    * #### Returns
    * Returns JSON with a `data` key containing the new representation of the updated file, if the request is successful.
    * 
    * If the request is unsuccessful, JSON with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  FilesPatch(
+  filesPatch(
     req: operations.FilesPatchRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.FilesPatchResponse> {
@@ -1669,40 +1684,38 @@ export class SDK {
       req = new operations.FilesPatchRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/files/{file_id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.FilesPatchResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.FilesPatchResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -1712,8 +1725,9 @@ export class SDK {
   }
 
   
-  // FilesVersionDetail - Retrieve a file version
-  /** 
+  /**
+   * filesVersionDetail - Retrieve a file version
+   *
    * Retrieves the details of a file version
    * #### Returns
    * 
@@ -1721,7 +1735,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  FilesVersionDetail(
+  filesVersionDetail(
     req: operations.FilesVersionDetailRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.FilesVersionDetailResponse> {
@@ -1729,23 +1743,23 @@ export class SDK {
       req = new operations.FilesVersionDetailRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/files/{file_id}/versions/{version_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.FilesVersionDetailResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.FilesVersionDetailResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -1760,8 +1774,9 @@ export class SDK {
   }
 
   
-  // FilesVersions - List all file versions
-  /** 
+  /**
+   * filesVersions - List all file versions
+   *
    * 
    * A paginated list of all file versions.
    * #### Returns
@@ -1773,7 +1788,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  FilesVersions(
+  filesVersions(
     req: operations.FilesVersionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.FilesVersionsResponse> {
@@ -1781,23 +1796,23 @@ export class SDK {
       req = new operations.FilesVersionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/files/{file_id}/versions/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.FilesVersionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.FilesVersionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -1812,15 +1827,16 @@ export class SDK {
   }
 
   
-  // InstitutionsDetail - Retrieve an institution
-  /** 
+  /**
+   * institutionsDetail - Retrieve an institution
+   *
    * Retrieves the details of an institution
    * #### Returns
    * Returns a JSON object with a `data` key containing the representation of the requested institution, if the request was successful.
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  InstitutionsDetail(
+  institutionsDetail(
     req: operations.InstitutionsDetailRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.InstitutionsDetailResponse> {
@@ -1828,23 +1844,23 @@ export class SDK {
       req = new operations.InstitutionsDetailRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/institutions/{institution_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.InstitutionsDetailResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.InstitutionsDetailResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -1859,8 +1875,9 @@ export class SDK {
   }
 
   
-  // InstitutionsList - List all institutions
-  /** 
+  /**
+   * institutionsList - List all institutions
+   *
    * 
    * A paginated list of all verified institutions.
    * #### Returns
@@ -1876,27 +1893,26 @@ export class SDK {
    * 
    * Institutions may be filtered by their `id`, `name`, and `auth_url`
   **/
-  InstitutionsList(
-    
+  institutionsList(
     config?: AxiosRequestConfig
   ): Promise<operations.InstitutionsListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/institutions/";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.InstitutionsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.InstitutionsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -1911,8 +1927,9 @@ export class SDK {
   }
 
   
-  // InstitutionsNodeList - List all affiliated nodes
-  /** 
+  /**
+   * institutionsNodeList - List all affiliated nodes
+   *
    * A paginated list of all nodes affiliated with an institution.
    * #### Versioning
    * As of version `2.2`, affiliated components (in addition to affiliated top-level projects) are returned from this endpoint.
@@ -1929,7 +1946,7 @@ export class SDK {
    * 
    * Nodes may be filtered by their `id`, `title`, `description`, `public`, `tags`, `category`, `date_created`, `date_modified`, `root`, `parent`, `contributors`, and `preprint`
   **/
-  InstitutionsNodeList(
+  institutionsNodeList(
     req: operations.InstitutionsNodeListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.InstitutionsNodeListResponse> {
@@ -1937,23 +1954,23 @@ export class SDK {
       req = new operations.InstitutionsNodeListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/institutions/{institution_id}/nodes/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.InstitutionsNodeListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.InstitutionsNodeListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -1968,8 +1985,9 @@ export class SDK {
   }
 
   
-  // InstitutionsRegistrationList - List all affiliated registrations
-  /** 
+  /**
+   * institutionsRegistrationList - List all affiliated registrations
+   *
    * A paginated list of all registrations affiliated with an institution.
    * #### Returns
    * Returns a JSON object containing `data` and `links` keys.
@@ -1984,7 +2002,7 @@ export class SDK {
    * 
    * Registrations may be filtered by their  `id`, `title`, `description`, `public`, `tags`, `category`, `date_created`, `date_modified`, `root`, `parent`, `contributors`, and `preprint`
   **/
-  InstitutionsRegistrationList(
+  institutionsRegistrationList(
     req: operations.InstitutionsRegistrationListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.InstitutionsRegistrationListResponse> {
@@ -1992,22 +2010,22 @@ export class SDK {
       req = new operations.InstitutionsRegistrationListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/institutions/{institution_id}/registrations/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.InstitutionsRegistrationListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.InstitutionsRegistrationListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -2017,8 +2035,9 @@ export class SDK {
   }
 
   
-  // InstitutionsUsersList - List all affiliated users
-  /** 
+  /**
+   * institutionsUsersList - List all affiliated users
+   *
    * A paginated list of all users affiliated with an institution.
    * #### Returns
    * Returns a JSON object containing `data` and `links` keys.
@@ -2033,7 +2052,7 @@ export class SDK {
    * 
    * Users may be filtered by their `id`, `full_name`, `given_name`, `middle_names`, and `family_name`
   **/
-  InstitutionsUsersList(
+  institutionsUsersList(
     req: operations.InstitutionsUsersListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.InstitutionsUsersListResponse> {
@@ -2041,23 +2060,23 @@ export class SDK {
       req = new operations.InstitutionsUsersListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/institutions/{institution_id}/users/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.InstitutionsUsersListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.InstitutionsUsersListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2072,8 +2091,9 @@ export class SDK {
   }
 
   
-  // LicenseList - List all licenses
-  /** 
+  /**
+   * licenseList - List all licenses
+   *
    * A paginated list of licenses. The returned licenses are sorted by their name.
    * #### Returns
    * Returns a JSON object containing `data` and `links` keys.
@@ -2087,27 +2107,26 @@ export class SDK {
    * 
    * Licenses may be filtered by their `id`, and `name`.
   **/
-  LicenseList(
-    
+  licenseList(
     config?: AxiosRequestConfig
   ): Promise<operations.LicenseListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/licenses/";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.LicenseListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.LicenseListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2122,15 +2141,16 @@ export class SDK {
   }
 
   
-  // LicensesRead - Retrieve a license
-  /** 
+  /**
+   * licensesRead - Retrieve a license
+   *
    * Retrieves the details of a license.
    * #### Returns
    * Returns a JSON object with a `data` key containing the representation of the requested license, if the request is successful.
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  LicensesRead(
+  licensesRead(
     req: operations.LicensesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.LicensesReadResponse> {
@@ -2138,23 +2158,23 @@ export class SDK {
       req = new operations.LicensesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/license/{license_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.LicensesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.LicensesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2169,8 +2189,9 @@ export class SDK {
   }
 
   
-  // LogsActions - Actions
-  /** 
+  /**
+   * logsActions - Actions
+   *
    * 
    * A log can have one of many actions. The complete list of loggable actions (in the format {identifier}: {description}) is as follows:
    * * `project_created`: A Node is created
@@ -2235,26 +2256,25 @@ export class SDK {
    * * `registration_approved`: A proposed Registration is approved
    * * `registration_cancelled`: A proposed Registration is cancelled
   **/
-  LogsActions(
-    
+  logsActions(
     config?: AxiosRequestConfig
   ): Promise<operations.LogsActionsResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/actions/";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.LogsActionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.LogsActionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -2264,8 +2284,9 @@ export class SDK {
   }
 
   
-  // LogsRead - Retrieve a log
-  /** 
+  /**
+   * logsRead - Retrieve a log
+   *
    * Retrieves the details of a log.
    * A log is permanent immutable record of a node's history. A log is created when a user performs one of many actions. See the [actions](#Logs_logs_actions) section for more details.
    * #### Returns
@@ -2273,7 +2294,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  LogsRead(
+  logsRead(
     req: operations.LogsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.LogsReadResponse> {
@@ -2281,23 +2302,23 @@ export class SDK {
       req = new operations.LogsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/logs/{log_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.LogsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.LogsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2312,8 +2333,9 @@ export class SDK {
   }
 
   
-  // MetaschemasList - List all metaschemas
-  /** 
+  /**
+   * metaschemasList - List all metaschemas
+   *
    * 
    * A paginated list of all active metaschemas.
    * Metaschemas describe the supplemental questions that accompany a registration.
@@ -2326,27 +2348,26 @@ export class SDK {
    * 
    * This request should never return an error.
   **/
-  MetaschemasList(
-    
+  metaschemasList(
     config?: AxiosRequestConfig
   ): Promise<operations.MetaschemasListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/metaschemas/";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.MetaschemasListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.MetaschemasListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2361,8 +2382,9 @@ export class SDK {
   }
 
   
-  // MetaschemasRead - Retrieve a metaschema
-  /** 
+  /**
+   * metaschemasRead - Retrieve a metaschema
+   *
    * Retrieves the details of a given metaschema.
    * 
    * Metaschemas describe the supplemental questions that accompany a registration.
@@ -2372,7 +2394,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  MetaschemasRead(
+  metaschemasRead(
     req: operations.MetaschemasReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.MetaschemasReadResponse> {
@@ -2380,23 +2402,23 @@ export class SDK {
       req = new operations.MetaschemasReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/metaschemas/{metaschema_id}", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.MetaschemasReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.MetaschemasReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2411,8 +2433,9 @@ export class SDK {
   }
 
   
-  // NodesAddonRead - Retrieve an addon
-  /** 
+  /**
+   * nodesAddonRead - Retrieve an addon
+   *
    * Retrieve details of an individual addon connected to this node.
    * #### Permissions
    * NodeSettings that are attached to public nodes will give read-only access to everyone. Private nodes require explicit read permission. Write and admin access are the same for public and private nodes. Administrators on a parent node have implicit read permissions for all child nodes.
@@ -2422,7 +2445,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  NodesAddonRead(
+  nodesAddonRead(
     req: operations.NodesAddonReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesAddonReadResponse> {
@@ -2430,23 +2453,23 @@ export class SDK {
       req = new operations.NodesAddonReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/addons/{provider}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesAddonReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesAddonReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2461,8 +2484,9 @@ export class SDK {
   }
 
   
-  // NodesAddonsFoldersList - List all addon folders
-  /** 
+  /**
+   * nodesAddonsFoldersList - List all addon folders
+   *
    * 
    * A paginated list of folders retrieved from the associated third-party (provider) service.
    * #### Permissions
@@ -2474,7 +2498,7 @@ export class SDK {
    * 
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  NodesAddonsFoldersList(
+  nodesAddonsFoldersList(
     req: operations.NodesAddonsFoldersListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesAddonsFoldersListResponse> {
@@ -2482,23 +2506,23 @@ export class SDK {
       req = new operations.NodesAddonsFoldersListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/addons/{provider}/folders/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesAddonsFoldersListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesAddonsFoldersListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2513,8 +2537,9 @@ export class SDK {
   }
 
   
-  // NodesAddonsList - List all addons
-  /** 
+  /**
+   * nodesAddonsList - List all addons
+   *
    * 
    * A paginated list of addons connected to the given node or project.
    * #### Returns
@@ -2524,7 +2549,7 @@ export class SDK {
    * 
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  NodesAddonsList(
+  nodesAddonsList(
     req: operations.NodesAddonsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesAddonsListResponse> {
@@ -2532,23 +2557,23 @@ export class SDK {
       req = new operations.NodesAddonsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/addons/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesAddonsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesAddonsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2563,8 +2588,9 @@ export class SDK {
   }
 
   
-  // NodesChildrenCreate - Create a child node
-  /** 
+  /**
+   * nodesChildrenCreate - Create a child node
+   *
    * Creates a new child node.
    * 
    * Note: Creating a child node via this endpoint will function the same as creating a node via the node list endpoint, but the child node will have the given node set as its parent.
@@ -2583,7 +2609,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  NodesChildrenCreate(
+  nodesChildrenCreate(
     req: operations.NodesChildrenCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesChildrenCreateResponse> {
@@ -2591,40 +2617,38 @@ export class SDK {
       req = new operations.NodesChildrenCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/children/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesChildrenCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.NodesChildrenCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
         }
 
@@ -2634,8 +2658,9 @@ export class SDK {
   }
 
   
-  // NodesChildrenList - List all child nodes
-  /** 
+  /**
+   * nodesChildrenList - List all child nodes
+   *
    * 
    * A paginated list of the next level child nodes for the given node. The returned nodes are sorted by their `date_modified`, with the most recently updated child nodes appearing first.
    * 
@@ -2655,7 +2680,7 @@ export class SDK {
    * 
    * Most fields are string fields and will be filtered using simple substring matching. Public and preprint are boolean fields, and can be filtered using truthy values, such as **true**, **false**, **0** or **1**. Note that quoting true or false in the query will cause the match to fail.
   **/
-  NodesChildrenList(
+  nodesChildrenList(
     req: operations.NodesChildrenListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesChildrenListResponse> {
@@ -2663,23 +2688,23 @@ export class SDK {
       req = new operations.NodesChildrenListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/children/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesChildrenListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesChildrenListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2694,13 +2719,14 @@ export class SDK {
   }
 
   
-  // NodesCitationList - Retrieve citation details
-  /** 
+  /**
+   * nodesCitationList - Retrieve citation details
+   *
    * The citation details for a node, in CSL format.
    * #### Returns
    * Returns a JSON object with a `data` key that contains the representation of the details necessary for the node citation.
   **/
-  NodesCitationList(
+  nodesCitationList(
     req: operations.NodesCitationListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesCitationListResponse> {
@@ -2708,23 +2734,23 @@ export class SDK {
       req = new operations.NodesCitationListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/citation/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesCitationListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesCitationListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2739,13 +2765,14 @@ export class SDK {
   }
 
   
-  // NodesCitationRead - Retrieve a styled citation
-  /** 
+  /**
+   * nodesCitationRead - Retrieve a styled citation
+   *
    * The citation for a node in a specific style.
    * #### Returns
    * Returns a JSON object with a `data` key that contains the representation of the node citation, in the requested style.
   **/
-  NodesCitationRead(
+  nodesCitationRead(
     req: operations.NodesCitationReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesCitationReadResponse> {
@@ -2753,23 +2780,23 @@ export class SDK {
       req = new operations.NodesCitationReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/citation/{style_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesCitationReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesCitationReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2784,8 +2811,9 @@ export class SDK {
   }
 
   
-  // NodesCommentCreate - Create a comment
-  /** 
+  /**
+   * nodesCommentCreate - Create a comment
+   *
    * Create a comment on a given node overview page or a reply to a comment on that node.
    * 
    * To create a comment on the node overview page, the target `type` would be "nodes" and the target `id` would be the node `id`.
@@ -2799,7 +2827,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  NodesCommentCreate(
+  nodesCommentCreate(
     req: operations.NodesCommentCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesCommentCreateResponse> {
@@ -2807,40 +2835,38 @@ export class SDK {
       req = new operations.NodesCommentCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/comments/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesCommentCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.NodesCommentCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
         }
 
@@ -2850,8 +2876,9 @@ export class SDK {
   }
 
   
-  // NodesCommentsList - List all comments
-  /** 
+  /**
+   * nodesCommentsList - List all comments
+   *
    * 
    * A paginated list of comments related to a given node.
    * 
@@ -2877,7 +2904,7 @@ export class SDK {
    * 
    * Most fields are string fields and will be filtered using simple substring matching. Public and preprint are boolean fields, and can be filtered using truthy values, such as **true**, **false**, **0** or **1**. Note that quoting `true` or `false` in the query will cause the match to fail.
   **/
-  NodesCommentsList(
+  nodesCommentsList(
     req: operations.NodesCommentsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesCommentsListResponse> {
@@ -2885,23 +2912,23 @@ export class SDK {
       req = new operations.NodesCommentsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/comments/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesCommentsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesCommentsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2916,8 +2943,9 @@ export class SDK {
   }
 
   
-  // NodesContributorsCreate - Create a contributor
-  /** 
+  /**
+   * nodesContributorsCreate - Create a contributor
+   *
    * Adds a contributor to a node, effectively creating a relationship between the node and a user.
    * 
    * Contributors are users who can make changes to the node or, in the case of private nodes, have read access to the node.
@@ -2934,7 +2962,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  NodesContributorsCreate(
+  nodesContributorsCreate(
     req: operations.NodesContributorsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesContributorsCreateResponse> {
@@ -2942,40 +2970,38 @@ export class SDK {
       req = new operations.NodesContributorsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/contributors/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesContributorsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.NodesContributorsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
         }
 
@@ -2985,8 +3011,9 @@ export class SDK {
   }
 
   
-  // NodesContributorsDelete - Delete a contributor
-  /** 
+  /**
+   * nodesContributorsDelete - Delete a contributor
+   *
    * Removes a contributor from a node. This request only removes the relationship between the node and the user, it does not delete the user itself.
    * 
    * A node must always have at least one admin, and attempting to remove the only admin from a node will result in a **400 Bad Request** response.
@@ -2997,7 +3024,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  NodesContributorsDelete(
+  nodesContributorsDelete(
     req: operations.NodesContributorsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesContributorsDeleteResponse> {
@@ -3005,22 +3032,22 @@ export class SDK {
       req = new operations.NodesContributorsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/contributors/{user_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesContributorsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.NodesContributorsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -3030,8 +3057,9 @@ export class SDK {
   }
 
   
-  // NodesContributorsList - List all contributors
-  /** 
+  /**
+   * nodesContributorsList - List all contributors
+   *
    * A paginated list of the node's contributors, sorted by their index.
    * 
    * Contributors are users who can make changes to the node or, in the case of private nodes, have read access to the node.
@@ -3051,7 +3079,7 @@ export class SDK {
    * 
    * Contributors may be filtered by their `bibliographic` and `permission` attributes.
   **/
-  NodesContributorsList(
+  nodesContributorsList(
     req: operations.NodesContributorsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesContributorsListResponse> {
@@ -3059,23 +3087,23 @@ export class SDK {
       req = new operations.NodesContributorsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/contributors/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesContributorsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesContributorsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -3090,8 +3118,9 @@ export class SDK {
   }
 
   
-  // NodesContributorsPartialUpdate - Update a contributor
-  /** 
+  /**
+   * nodesContributorsPartialUpdate - Update a contributor
+   *
    * Updates a contributor by setting the values of the attributes specified in the request body. Any unspecified attributes will be left unchanged.
    * 
    * Contributors can be updated with either a **PUT** or **PATCH** request. Since this endpoint has no mandatory attributes, PUT and PATCH are functionally the same.
@@ -3104,7 +3133,7 @@ export class SDK {
    * 
    * If the given user is not already in the contributor list, a 404 Not Found error will be returned. A node must always have at least one admin, and any attempt to downgrade the permissions of a sole admin will result in a 400 Bad Request error.
   **/
-  NodesContributorsPartialUpdate(
+  nodesContributorsPartialUpdate(
     req: operations.NodesContributorsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesContributorsPartialUpdateResponse> {
@@ -3112,40 +3141,38 @@ export class SDK {
       req = new operations.NodesContributorsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/contributors/{user_id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesContributorsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.NodesContributorsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -3155,8 +3182,9 @@ export class SDK {
   }
 
   
-  // NodesContributorsRead - Retrieve a contributor
-  /** 
+  /**
+   * nodesContributorsRead - Retrieve a contributor
+   *
    * Retrieves the details of a given contributor.
    * 
    * Contributors are users who can make changes to the node or, in the case of private nodes, have read access to the node.
@@ -3167,7 +3195,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  NodesContributorsRead(
+  nodesContributorsRead(
     req: operations.NodesContributorsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesContributorsReadResponse> {
@@ -3175,23 +3203,23 @@ export class SDK {
       req = new operations.NodesContributorsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/contributors/{user_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesContributorsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesContributorsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -3206,8 +3234,9 @@ export class SDK {
   }
 
   
-  // NodesCreate - Create a node
-  /** 
+  /**
+   * nodesCreate - Create a node
+   *
    * Creates a new node.
    * 
    * On the OSF, nodes are considered **projects** or **components**. The difference between a project and a component is that a project is a top-level node, and a component is a child of a project.
@@ -3226,7 +3255,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  NodesCreate(
+  nodesCreate(
     req: operations.NodesCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesCreateResponse> {
@@ -3234,40 +3263,38 @@ export class SDK {
       req = new operations.NodesCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/nodes/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.NodesCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
         }
 
@@ -3277,8 +3304,9 @@ export class SDK {
   }
 
   
-  // NodesDelete - Delete a node
-  /** 
+  /**
+   * nodesDelete - Delete a node
+   *
    * 
    * Permanently deletes a node. This action cannot be undone.
    * #### Permissions
@@ -3288,7 +3316,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  NodesDelete(
+  nodesDelete(
     req: operations.NodesDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesDeleteResponse> {
@@ -3296,22 +3324,22 @@ export class SDK {
       req = new operations.NodesDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.NodesDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -3321,8 +3349,9 @@ export class SDK {
   }
 
   
-  // NodesDraftRegistrationsCreate - Create a draft registration
-  /** 
+  /**
+   * nodesDraftRegistrationsCreate - Create a draft registration
+   *
    * Initiate a draft registration of the current node.
    * Draft registrations contain the supplemental registration questions that accompany a registration. A registration is a frozen version of the project that can never be edited or deleted, but can be withdrawn.
    * 
@@ -3338,7 +3367,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  NodesDraftRegistrationsCreate(
+  nodesDraftRegistrationsCreate(
     req: operations.NodesDraftRegistrationsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesDraftRegistrationsCreateResponse> {
@@ -3346,40 +3375,38 @@ export class SDK {
       req = new operations.NodesDraftRegistrationsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/draft_registrations/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesDraftRegistrationsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.NodesDraftRegistrationsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
         }
 
@@ -3389,8 +3416,9 @@ export class SDK {
   }
 
   
-  // NodesDraftRegistrationsDelete - Delete a draft registration
-  /** 
+  /**
+   * nodesDraftRegistrationsDelete - Delete a draft registration
+   *
    * Permanently deletes a draft registration. A draft that has already been registered cannot be deleted.
    * #### Permissions
    * Only project administrators may delete draft registrations.
@@ -3399,7 +3427,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, a JSON object with an `errors` key containing information about the failure will be returned. Refer to the [list of error codes]() to understand why this request may have failed.
   **/
-  NodesDraftRegistrationsDelete(
+  nodesDraftRegistrationsDelete(
     req: operations.NodesDraftRegistrationsDeleteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesDraftRegistrationsDeleteResponse> {
@@ -3407,22 +3435,22 @@ export class SDK {
       req = new operations.NodesDraftRegistrationsDeleteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/draft_registrations/{draft_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesDraftRegistrationsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.NodesDraftRegistrationsDeleteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
         }
 
@@ -3432,8 +3460,9 @@ export class SDK {
   }
 
   
-  // NodesDraftRegistrationsList - List all draft registrations
-  /** 
+  /**
+   * nodesDraftRegistrationsList - List all draft registrations
+   *
    * A paginated list of all of the draft registrations of a given node.
    * 
    * Draft registrations contain the supplemental registration questions that accompany a registration. A registration is a frozen version of the project that can never be edited or deleted, but can be withdrawn.
@@ -3448,7 +3477,7 @@ export class SDK {
    * 
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  NodesDraftRegistrationsList(
+  nodesDraftRegistrationsList(
     req: operations.NodesDraftRegistrationsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesDraftRegistrationsListResponse> {
@@ -3456,23 +3485,23 @@ export class SDK {
       req = new operations.NodesDraftRegistrationsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/draft_registrations/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesDraftRegistrationsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesDraftRegistrationsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -3487,8 +3516,9 @@ export class SDK {
   }
 
   
-  // NodesDraftRegistrationsPartialUpdate - Update a draft registration
-  /** 
+  /**
+   * nodesDraftRegistrationsPartialUpdate - Update a draft registration
+   *
    * Updates a draft registration by setting the values of the attributes specified in the request body. Any unspecified attributes will be left unchanged.
    * 
    * Draft registrations contain the supplemental registration questions that accompany a registration. Answer the questions in the draft registration supplement by sending update requests until you are ready to submit the draft.
@@ -3505,7 +3535,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  NodesDraftRegistrationsPartialUpdate(
+  nodesDraftRegistrationsPartialUpdate(
     req: operations.NodesDraftRegistrationsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesDraftRegistrationsPartialUpdateResponse> {
@@ -3513,40 +3543,38 @@ export class SDK {
       req = new operations.NodesDraftRegistrationsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/draft_registrations/{draft_id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesDraftRegistrationsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.NodesDraftRegistrationsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -3556,8 +3584,9 @@ export class SDK {
   }
 
   
-  // NodesDraftRegistrationsRead - Retrieve a draft registration
-  /** 
+  /**
+   * nodesDraftRegistrationsRead - Retrieve a draft registration
+   *
    * Retrieve the details of a given draft registration.
    * Draft registrations contain the supplemental registration questions that accompany a registration. A registration is a frozen version of the project that can never be edited or deleted, but can be withdrawn.
    * 
@@ -3569,7 +3598,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  NodesDraftRegistrationsRead(
+  nodesDraftRegistrationsRead(
     req: operations.NodesDraftRegistrationsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesDraftRegistrationsReadResponse> {
@@ -3577,23 +3606,23 @@ export class SDK {
       req = new operations.NodesDraftRegistrationsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/draft_registrations/{draft_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesDraftRegistrationsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesDraftRegistrationsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -3608,8 +3637,9 @@ export class SDK {
   }
 
   
-  // NodesFilesList - List all node files
-  /** 
+  /**
+   * nodesFilesList - List all node files
+   *
    * List of all the files/folders that are attached to your project for a given storage provider.
    * #### Returns
    * Returns a JSON object containing `data` and `links` keys.
@@ -3658,7 +3688,7 @@ export class SDK {
    * 
    * To delete a file or folder send a DELETE request to the delete link. Nothing will be returned in the response body.
   **/
-  NodesFilesList(
+  nodesFilesList(
     req: operations.NodesFilesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesFilesListResponse> {
@@ -3666,23 +3696,23 @@ export class SDK {
       req = new operations.NodesFilesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/files/{provider}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesFilesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesFilesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -3697,15 +3727,16 @@ export class SDK {
   }
 
   
-  // NodesFilesRead - Retrieve a file
-  /** 
+  /**
+   * nodesFilesRead - Retrieve a file
+   *
    * Retrieves the details of a file attached to given node (project or component) for the given storage provider.
    * #### Returns
    * Returns a JSON object with a `data` key containing the representation of the requested file object, if the request is successful.
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  NodesFilesRead(
+  nodesFilesRead(
     req: operations.NodesFilesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesFilesReadResponse> {
@@ -3713,23 +3744,23 @@ export class SDK {
       req = new operations.NodesFilesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/files/{provider}/{path}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesFilesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesFilesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -3744,8 +3775,9 @@ export class SDK {
   }
 
   
-  // NodesForksCreate - Create a fork of this node
-  /** 
+  /**
+   * nodesForksCreate - Create a fork of this node
+   *
    * Creates a fork of the given node.
    * 
    * Forking a project creates a copy of an existing node and all of its contents. The fork always points back to the original node, forming a network of nodes.
@@ -3761,7 +3793,7 @@ export class SDK {
    * Returns a JSON object with a `data` key containing the complete srepresentation of the forked node, if the request is successful.
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  NodesForksCreate(
+  nodesForksCreate(
     req: operations.NodesForksCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesForksCreateResponse> {
@@ -3769,40 +3801,38 @@ export class SDK {
       req = new operations.NodesForksCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/forks/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesForksCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.NodesForksCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
         }
 
@@ -3812,8 +3842,9 @@ export class SDK {
   }
 
   
-  // NodesForksList - List all forks of this node
-  /** 
+  /**
+   * nodesForksList - List all forks of this node
+   *
    * 
    * A paginated list of the current node's forks. The returned fork nodes are sorted by their `forked_date`, with the most recently forked nodes appearing first.
    * 
@@ -3827,7 +3858,7 @@ export class SDK {
    * 
    * This request should never return an error.
   **/
-  NodesForksList(
+  nodesForksList(
     req: operations.NodesForksListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesForksListResponse> {
@@ -3835,23 +3866,23 @@ export class SDK {
       req = new operations.NodesForksListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/forks/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesForksListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesForksListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -3866,8 +3897,9 @@ export class SDK {
   }
 
   
-  // NodesIdentifiersList - List all identifiers
-  /** 
+  /**
+   * nodesIdentifiersList - List all identifiers
+   *
    * List all identifiers associated with a given node.
    * #### Returns
    * Returns a JSON object containing `data` and `links` keys.
@@ -3881,7 +3913,7 @@ export class SDK {
    * 
    * Identifiers may be filtered by their `category` e.g `ark` or `doi`.
   **/
-  NodesIdentifiersList(
+  nodesIdentifiersList(
     req: operations.NodesIdentifiersListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesIdentifiersListResponse> {
@@ -3889,23 +3921,23 @@ export class SDK {
       req = new operations.NodesIdentifiersListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/identifiers/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesIdentifiersListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesIdentifiersListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -3920,8 +3952,9 @@ export class SDK {
   }
 
   
-  // NodesInstitutionsList - List all institutions
-  /** 
+  /**
+   * nodesInstitutionsList - List all institutions
+   *
    * List of all institutions affiliated with this node.
    * #### Returns
    * Returns a JSON object containing `data` and `links` keys.
@@ -3930,7 +3963,7 @@ export class SDK {
    * 
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  NodesInstitutionsList(
+  nodesInstitutionsList(
     req: operations.NodesInstitutionsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesInstitutionsListResponse> {
@@ -3938,23 +3971,23 @@ export class SDK {
       req = new operations.NodesInstitutionsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/institutions/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesInstitutionsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesInstitutionsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -3969,8 +4002,9 @@ export class SDK {
   }
 
   
-  // NodesLinkedNodesList - List all linked nodes
-  /** 
+  /**
+   * nodesLinkedNodesList - List all linked nodes
+   *
    * List of all nodes linked to the given node.
    * #### Returns
    * Returns a JSON object containing `data` and `links` keys.
@@ -3983,7 +4017,7 @@ export class SDK {
    * 
    * Nodes may be filtered by their `title`, `category`, `description`, `public`, `registration`, or `tags`. `title`, `description`, and `category` are string fields and will be filteres using simple substring matching. `public`, `registration` are boolean and can be filtered using truthy values, such as `true`, `false`, `0`, `1`. `tags` is an array of simple strings.
   **/
-  NodesLinkedNodesList(
+  nodesLinkedNodesList(
     req: operations.NodesLinkedNodesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesLinkedNodesListResponse> {
@@ -3991,23 +4025,23 @@ export class SDK {
       req = new operations.NodesLinkedNodesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/linked_nodes/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesLinkedNodesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesLinkedNodesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -4022,8 +4056,9 @@ export class SDK {
   }
 
   
-  // NodesList - List all nodes
-  /** 
+  /**
+   * nodesList - List all nodes
+   *
    * 
    * A paginated list of nodes, representing projects and components, on the OSF.
    * 
@@ -4047,27 +4082,26 @@ export class SDK {
    * 
    * Most fields are string fields and will be filtered using simple substring matching. Public and preprint are boolean fields, and can be filtered using truthy values, such as **true**, **false**, **0** or **1**. Note that quoting true or false in the query will cause the match to fail.
   **/
-  NodesList(
-    
+  nodesList(
     config?: AxiosRequestConfig
   ): Promise<operations.NodesListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/nodes/";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -4082,8 +4116,9 @@ export class SDK {
   }
 
   
-  // NodesLogsList - List all logs
-  /** 
+  /**
+   * nodesLogsList - List all logs
+   *
    * A paginated list of all logs associated with a given node.
    * 
    * The returned logs are sorted by their `date`, with the most recents logs appearing first.
@@ -4101,7 +4136,7 @@ export class SDK {
    * 
    * Nodes may be filtered by their `action`, and `date`.
   **/
-  NodesLogsList(
+  nodesLogsList(
     req: operations.NodesLogsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesLogsListResponse> {
@@ -4109,23 +4144,23 @@ export class SDK {
       req = new operations.NodesLogsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/logs/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesLogsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesLogsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -4140,8 +4175,9 @@ export class SDK {
   }
 
   
-  // NodesNodeAddonUpdate - Update an addon
-  /** 
+  /**
+   * nodesNodeAddonUpdate - Update an addon
+   *
    * Updates a node addon by setting the values of the attributes specified in the request body. Any unspecified attributes will be left unchanged.
    * 
    * Node addon can be updated with either a **PUT** or **PATCH** request. The `external_account_id`, `enabled`, and `folder_id` fields are mandatory in a **PUT**, and optional in **PATCH**. Non-string values will be accepted and stringified, however we make no promises about the stringification output.
@@ -4156,7 +4192,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  NodesNodeAddonUpdate(
+  nodesNodeAddonUpdate(
     req: operations.NodesNodeAddonUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesNodeAddonUpdateResponse> {
@@ -4164,40 +4200,38 @@ export class SDK {
       req = new operations.NodesNodeAddonUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/addons/{provider}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesNodeAddonUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.NodesNodeAddonUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -4207,8 +4241,9 @@ export class SDK {
   }
 
   
-  // NodesPartialUpdate - Update a node
-  /** 
+  /**
+   * nodesPartialUpdate - Update a node
+   *
    * Updates a node by setting the values of the attributes specified in the request body. Any unspecified attributes will be left unchanged.
    * 
    * Nodes can be updated with either a **PUT** or **PATCH** request. The `title` and `category` fields are mandatory in a **PUT** request, and optional in a **PATCH**.
@@ -4219,7 +4254,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  NodesPartialUpdate(
+  nodesPartialUpdate(
     req: operations.NodesPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesPartialUpdateResponse> {
@@ -4227,40 +4262,38 @@ export class SDK {
       req = new operations.NodesPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.NodesPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -4270,8 +4303,9 @@ export class SDK {
   }
 
   
-  // NodesPreprintsList - List all preprints
-  /** 
+  /**
+   * nodesPreprintsList - List all preprints
+   *
    * A paginated list of preprints related to a given node. The returned preprints are sorted by their creation date, with the most recent preprints appearing first.
    * 
    * **Note: This API endpoint is under active development, and is subject to change in the future.**
@@ -4282,7 +4316,7 @@ export class SDK {
    * 
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  NodesPreprintsList(
+  nodesPreprintsList(
     req: operations.NodesPreprintsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesPreprintsListResponse> {
@@ -4290,23 +4324,23 @@ export class SDK {
       req = new operations.NodesPreprintsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/preprints/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesPreprintsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesPreprintsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -4321,8 +4355,9 @@ export class SDK {
   }
 
   
-  // NodesProvidersList - List all storage providers
-  /** 
+  /**
+   * nodesProvidersList - List all storage providers
+   *
    * List of all storage providers that are configured for this node
    * 
    * Users of the OSF may access their data on a [number of cloud-storage services](https://api.osf.io/v2/#storage-providers) that have integrations with the OSF. We call these **providers**. By default, every node has access to the OSF-provided storage but may use as many of the supported providers as desired.
@@ -4337,7 +4372,7 @@ export class SDK {
    * 
    * Note: In the OSF filesystem model, providers are treated as folders, but with special properties that distinguish them from regular folders. Every provider folder is considered a root folder, and may not be deleted through the regular file API.
   **/
-  NodesProvidersList(
+  nodesProvidersList(
     req: operations.NodesProvidersListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesProvidersListResponse> {
@@ -4345,23 +4380,23 @@ export class SDK {
       req = new operations.NodesProvidersListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/files/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesProvidersListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesProvidersListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -4376,15 +4411,16 @@ export class SDK {
   }
 
   
-  // NodesProvidersRead - Retrieve a storage provider
-  /** 
+  /**
+   * nodesProvidersRead - Retrieve a storage provider
+   *
    * Retrieves the details of a storage provider enabled on this node.
    * #### Returns
    * Returns a JSON object with a `data` key containing the representation of the requested file object, if the request is successful.
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  NodesProvidersRead(
+  nodesProvidersRead(
     req: operations.NodesProvidersReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesProvidersReadResponse> {
@@ -4392,23 +4428,23 @@ export class SDK {
       req = new operations.NodesProvidersReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/files/providers/{provider}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesProvidersReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesProvidersReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -4423,8 +4459,9 @@ export class SDK {
   }
 
   
-  // NodesRead - Retrieve a node
-  /** 
+  /**
+   * nodesRead - Retrieve a node
+   *
    * Retrieves the details of a given node (project or component).
    * #### Permissions
    * Only project contributors may retrieve the details of a private node. Attempting to retreive a private node for which you are not a contributor will result in a **403 Forbidden** response.
@@ -4435,7 +4472,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  NodesRead(
+  nodesRead(
     req: operations.NodesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesReadResponse> {
@@ -4443,23 +4480,23 @@ export class SDK {
       req = new operations.NodesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -4474,8 +4511,9 @@ export class SDK {
   }
 
   
-  // NodesRegistrationsList - List all registrations
-  /** 
+  /**
+   * nodesRegistrationsList - List all registrations
+   *
    * List of all registrations of the given node.
    * #### Returns
    * 
@@ -4490,7 +4528,7 @@ export class SDK {
    * 
    * Registrations may be filtered by their `id`, `title`, `category`, `description`, `public`, `tags`, `date_created`, `date_modified`, `root`, `parent`, and `contributors`.
   **/
-  NodesRegistrationsList(
+  nodesRegistrationsList(
     req: operations.NodesRegistrationsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesRegistrationsListResponse> {
@@ -4498,23 +4536,23 @@ export class SDK {
       req = new operations.NodesRegistrationsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/registrations/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesRegistrationsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesRegistrationsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -4529,8 +4567,9 @@ export class SDK {
   }
 
   
-  // NodesViewOnlyLinksList - List all view only links
-  /** 
+  /**
+   * nodesViewOnlyLinksList - List all view only links
+   *
    * List of view only links on a node.
    * #### Returns
    * Returns a JSON object containing `data` and `links` keys.
@@ -4549,7 +4588,7 @@ export class SDK {
    * 
    * View Only Links may be filtered based on their `name`, `anonymous` and `date_created` fields. Possible comparison operators include 'gt' (greater than), 'gte'(greater than or equal to), 'lt' (less than) and 'lte' (less than or equal to). The date must be in the format YYYY-MM-DD and the time is optional.
   **/
-  NodesViewOnlyLinksList(
+  nodesViewOnlyLinksList(
     req: operations.NodesViewOnlyLinksListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesViewOnlyLinksListResponse> {
@@ -4557,23 +4596,23 @@ export class SDK {
       req = new operations.NodesViewOnlyLinksListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/view_only_links/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesViewOnlyLinksListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesViewOnlyLinksListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -4588,8 +4627,9 @@ export class SDK {
   }
 
   
-  // NodesViewOnlyLinksRead - Retrieve a view only link
-  /** 
+  /**
+   * nodesViewOnlyLinksRead - Retrieve a view only link
+   *
    * Retrieves the details of a view only link on a node.
    * #### Returns
    * Returns a JSON object with a `data` key containing the representation of the requested view only link, if the request is successful.
@@ -4599,7 +4639,7 @@ export class SDK {
    * 
    * View only links on a node, public or private, are readable and writeable only by users that are administrators on the node.
   **/
-  NodesViewOnlyLinksRead(
+  nodesViewOnlyLinksRead(
     req: operations.NodesViewOnlyLinksReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesViewOnlyLinksReadResponse> {
@@ -4607,23 +4647,23 @@ export class SDK {
       req = new operations.NodesViewOnlyLinksReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/view_only_links/{link_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesViewOnlyLinksReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesViewOnlyLinksReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -4638,8 +4678,9 @@ export class SDK {
   }
 
   
-  // NodesWikisList - List all wikis
-  /** 
+  /**
+   * nodesWikisList - List all wikis
+   *
    * List of wiki pages on a node.
    * #### Returns
    * Paginated list of the node's current wiki page versions ordered by their date_modified. Each resource contains the full representation of the wiki, meaning additional requests to an individual wiki's detail view are not necessary.
@@ -4654,7 +4695,7 @@ export class SDK {
    * 
    * Possible comparison operators include 'gt' (greater than), 'gte'(greater than or equal to), 'lt' (less than) and 'lte' (less than or equal to). The date must be in the format YYYY-MM-DD and the time is optional.
   **/
-  NodesWikisList(
+  nodesWikisList(
     req: operations.NodesWikisListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.NodesWikisListResponse> {
@@ -4662,23 +4703,23 @@ export class SDK {
       req = new operations.NodesWikisListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/nodes/{node_id}/wikis/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.NodesWikisListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.NodesWikisListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -4693,8 +4734,9 @@ export class SDK {
   }
 
   
-  // PreprintProviderDetail - Retrieve a preprint provider
-  /** 
+  /**
+   * preprintProviderDetail - Retrieve a preprint provider
+   *
    * Retrieves the details of a preprint provider.
    * #### Returns
    * Returns a JSON object with a `data` key containing the representation of the requested preprint provider, if the request is successful.
@@ -4742,7 +4784,7 @@ export class SDK {
    * 
    * The above structure would allow Architecture, Architectural Engineering, all of Architectural Engineering's children, Engineering, Aerospace Engineering, and Aerodynamics and Fluid Mechanics.
   **/
-  PreprintProviderDetail(
+  preprintProviderDetail(
     req: operations.PreprintProviderDetailRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PreprintProviderDetailResponse> {
@@ -4750,23 +4792,23 @@ export class SDK {
       req = new operations.PreprintProviderDetailRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/preprint_providers/{preprint_provider_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PreprintProviderDetailResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.PreprintProviderDetailResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -4781,8 +4823,9 @@ export class SDK {
   }
 
   
-  // PreprintProviderLicensesList - List all licenses
-  /** 
+  /**
+   * preprintProviderLicensesList - List all licenses
+   *
    * 
    * A paginated list of the licenses allowed bya preprint provider.
    * #### Returns
@@ -4794,7 +4837,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  PreprintProviderLicensesList(
+  preprintProviderLicensesList(
     req: operations.PreprintProviderLicensesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PreprintProviderLicensesListResponse> {
@@ -4802,23 +4845,23 @@ export class SDK {
       req = new operations.PreprintProviderLicensesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/preprint_providers/{preprint_provider_id}/licenses/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PreprintProviderLicensesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.PreprintProviderLicensesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -4833,8 +4876,9 @@ export class SDK {
   }
 
   
-  // PreprintProviderList - List all preprint providers
-  /** 
+  /**
+   * preprintProviderList - List all preprint providers
+   *
    * 
    * A paginated list of all preprint providers. The returned preprint providers are sorted by their creation date, with the most recent preprints appearing first.
    * #### Returns
@@ -4850,27 +4894,26 @@ export class SDK {
    * 
    * Preprint Providers may be filtered by their `id`, `name`,  and `description`
   **/
-  PreprintProviderList(
-    
+  preprintProviderList(
     config?: AxiosRequestConfig
   ): Promise<operations.PreprintProviderListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/preprint_providers/";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PreprintProviderListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.PreprintProviderListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -4885,8 +4928,9 @@ export class SDK {
   }
 
   
-  // PreprintProviderTaxonomiesList - List all taxonomies
-  /** 
+  /**
+   * preprintProviderTaxonomiesList - List all taxonomies
+   *
    * 
    * A paginated list of the taxonomies for a preprint provider. The returned preprint providers taxonomies are sorted by their creation date, with the most recent preprints appearing first.
    * #### Returns
@@ -4898,7 +4942,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  PreprintProviderTaxonomiesList(
+  preprintProviderTaxonomiesList(
     req: operations.PreprintProviderTaxonomiesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PreprintProviderTaxonomiesListResponse> {
@@ -4906,23 +4950,23 @@ export class SDK {
       req = new operations.PreprintProviderTaxonomiesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/preprint_providers/{preprint_provider_id}/taxonomies/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PreprintProviderTaxonomiesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.PreprintProviderTaxonomiesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -4937,8 +4981,9 @@ export class SDK {
   }
 
   
-  // PreprintProvidersPreprintsList - List all preprints
-  /** 
+  /**
+   * preprintProvidersPreprintsList - List all preprints
+   *
    * 
    * A paginated list of preprints from the specified preprint provider. The returned preprints are sorted by their creation date, with the most recent preprints appearing first.
    * #### Returns
@@ -4955,7 +5000,7 @@ export class SDK {
    * 
    * Preprints may be filtered by their `id`, `is_published`, `date_created`, `date_modified`, and `provider`.
   **/
-  PreprintProvidersPreprintsList(
+  preprintProvidersPreprintsList(
     req: operations.PreprintProvidersPreprintsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PreprintProvidersPreprintsListResponse> {
@@ -4963,23 +5008,23 @@ export class SDK {
       req = new operations.PreprintProvidersPreprintsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/preprint_providers/{preprint_provider_id}/preprints/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PreprintProvidersPreprintsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.PreprintProvidersPreprintsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -4994,13 +5039,14 @@ export class SDK {
   }
 
   
-  // PreprintsCitationList - Retrieve citation details
-  /** 
+  /**
+   * preprintsCitationList - Retrieve citation details
+   *
    * The citation details for a preprint, in CSL format.
    * #### Returns
    * Returns a JSON object with a `data` key that contains the representation of the details necessary for the preprint citation.
   **/
-  PreprintsCitationList(
+  preprintsCitationList(
     req: operations.PreprintsCitationListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PreprintsCitationListResponse> {
@@ -5008,23 +5054,23 @@ export class SDK {
       req = new operations.PreprintsCitationListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/preprints/{preprint_id}/citation/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PreprintsCitationListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.PreprintsCitationListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -5039,13 +5085,14 @@ export class SDK {
   }
 
   
-  // PreprintsCitationRead - Retrieve a styled citation
-  /** 
+  /**
+   * preprintsCitationRead - Retrieve a styled citation
+   *
    * The citation for a preprint in a specific style.
    * #### Returns
    * Returns a JSON object with a `data` key that contains the representation of the preprint citation, in the requested style.
   **/
-  PreprintsCitationRead(
+  preprintsCitationRead(
     req: operations.PreprintsCitationReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PreprintsCitationReadResponse> {
@@ -5053,23 +5100,23 @@ export class SDK {
       req = new operations.PreprintsCitationReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/preprints/{preprint_id}/citation/{style_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PreprintsCitationReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.PreprintsCitationReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -5084,15 +5131,16 @@ export class SDK {
   }
 
   
-  // PreprintsCreate - Create a preprint
-  /** 
+  /**
+   * preprintsCreate - Create a preprint
+   *
    * Creates a new preprint.
    * #### Returns
    * Returns a JSON object with a `data` key containing the representation of the created preprint, if the request is successful.
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes]() to understand why this request may have failed.
   **/
-  PreprintsCreate(
+  preprintsCreate(
     req: operations.PreprintsCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PreprintsCreateResponse> {
@@ -5100,40 +5148,38 @@ export class SDK {
       req = new operations.PreprintsCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/preprints/";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PreprintsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.PreprintsCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
         }
 
@@ -5143,8 +5189,9 @@ export class SDK {
   }
 
   
-  // PreprintsList - List all preprints
-  /** 
+  /**
+   * preprintsList - List all preprints
+   *
    * 
    * A paginated list of preprints from all preprint providers. The returned preprints are sorted by their creation date, with the most recent preprints appearing first.
    * #### Returns
@@ -5160,27 +5207,26 @@ export class SDK {
    * 
    * Preprints may be filtered by their `id`, `is_published`, `date_created`, `date_modified`, and `provider`.
   **/
-  PreprintsList(
-    
+  preprintsList(
     config?: AxiosRequestConfig
   ): Promise<operations.PreprintsListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/preprints/";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PreprintsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.PreprintsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -5195,15 +5241,16 @@ export class SDK {
   }
 
   
-  // PreprintsPartialUpdate - Update a preprint
-  /** 
+  /**
+   * preprintsPartialUpdate - Update a preprint
+   *
    * Updates the specified preprint by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
    * #### Returns
    * Returns a JSON object with a `data` key containing the new representation of the updated preprint, if the request is successful.
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes]() to understand why this request may have failed.
   **/
-  PreprintsPartialUpdate(
+  preprintsPartialUpdate(
     req: operations.PreprintsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PreprintsPartialUpdateResponse> {
@@ -5211,40 +5258,38 @@ export class SDK {
       req = new operations.PreprintsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/preprints/{preprint_id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PreprintsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PreprintsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -5254,15 +5299,16 @@ export class SDK {
   }
 
   
-  // PreprintsRead - Retrieve a preprint
-  /** 
+  /**
+   * preprintsRead - Retrieve a preprint
+   *
    * Retrieves the details of a preprint.
    * #### Returns
    * Returns a JSON object with a `data` key containing the representation of the requested preprint, if the request is successful.
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  PreprintsRead(
+  preprintsRead(
     req: operations.PreprintsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PreprintsReadResponse> {
@@ -5270,23 +5316,23 @@ export class SDK {
       req = new operations.PreprintsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/preprints/{preprint_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PreprintsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.PreprintsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -5301,8 +5347,9 @@ export class SDK {
   }
 
   
-  // RegistrationsChildrenList - List all child registrations
-  /** 
+  /**
+   * registrationsChildrenList - List all child registrations
+   *
    * 
    * A paginated list of children of a registration.
    * 
@@ -5323,7 +5370,7 @@ export class SDK {
    * 
    * Most fields are string fields and will be filtered using simple substring matching. Public is a boolean field, and can be filtered using truthy values, such as **true**, **false**, **0** or **1**. Note that quoting true or false in the query will cause the match to fail.
   **/
-  RegistrationsChildrenList(
+  registrationsChildrenList(
     req: operations.RegistrationsChildrenListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsChildrenListResponse> {
@@ -5331,23 +5378,23 @@ export class SDK {
       req = new operations.RegistrationsChildrenListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrations/{registration_id}/children/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsChildrenListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.RegistrationsChildrenListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -5362,13 +5409,14 @@ export class SDK {
   }
 
   
-  // RegistrationsCitationRead - Retrieve a citation
-  /** 
+  /**
+   * registrationsCitationRead - Retrieve a citation
+   *
    * Retrieves the citation style details for a registration, in CSL format.
    * #### Returns
    * Returns a JSON object with a `data` key that contains the representation of the details necessary for the citation style.
   **/
-  RegistrationsCitationRead(
+  registrationsCitationRead(
     req: operations.RegistrationsCitationReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsCitationReadResponse> {
@@ -5376,23 +5424,23 @@ export class SDK {
       req = new operations.RegistrationsCitationReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrations/{registration_id}/citations/{citation_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsCitationReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.RegistrationsCitationReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -5407,8 +5455,9 @@ export class SDK {
   }
 
   
-  // RegistrationsCitationsList - List all citation styles
-  /** 
+  /**
+   * registrationsCitationsList - List all citation styles
+   *
    * 
    * A paginated list of the registration's alternative citation styles
    * 
@@ -5423,7 +5472,7 @@ export class SDK {
    * 
    * Citation styles may be filtered by their `id`, `title`, `short-title`, and `summary`.
   **/
-  RegistrationsCitationsList(
+  registrationsCitationsList(
     req: operations.RegistrationsCitationsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsCitationsListResponse> {
@@ -5431,23 +5480,23 @@ export class SDK {
       req = new operations.RegistrationsCitationsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrations/{registration_id}/citations/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsCitationsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.RegistrationsCitationsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -5462,8 +5511,9 @@ export class SDK {
   }
 
   
-  // RegistrationsCommentsList - List all comments
-  /** 
+  /**
+   * registrationsCommentsList - List all comments
+   *
    * 
    * A paginated list of the registration's comments.
    * 
@@ -5489,7 +5539,7 @@ export class SDK {
    * 
    * Most fields are string fields and will be filtered using simple substring matching. Deleted is a boolean field, and can be filtered using truthy values, such as **true**, **false**, **0** or **1**. Note that quoting `true` or `false` in the query will cause the match to fail.
   **/
-  RegistrationsCommentsList(
+  registrationsCommentsList(
     req: operations.RegistrationsCommentsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsCommentsListResponse> {
@@ -5497,23 +5547,23 @@ export class SDK {
       req = new operations.RegistrationsCommentsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrations/{registration_id}/comments/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsCommentsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.RegistrationsCommentsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -5528,8 +5578,9 @@ export class SDK {
   }
 
   
-  // RegistrationsContributorsList - List all contributors
-  /** 
+  /**
+   * registrationsContributorsList - List all contributors
+   *
    * A paginated list of all contributors on this registration.
    * The returned contributors are sorted by their index.
    * 
@@ -5550,7 +5601,7 @@ export class SDK {
    * 
    * Contributors may be filtered by their `bibliographic` and `permission` attributes.
   **/
-  RegistrationsContributorsList(
+  registrationsContributorsList(
     req: operations.RegistrationsContributorsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsContributorsListResponse> {
@@ -5558,23 +5609,23 @@ export class SDK {
       req = new operations.RegistrationsContributorsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrations/{registration_id}/contributors/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsContributorsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.RegistrationsContributorsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -5589,8 +5640,9 @@ export class SDK {
   }
 
   
-  // RegistrationsContributorsRead - Retrieve a contributor
-  /** 
+  /**
+   * registrationsContributorsRead - Retrieve a contributor
+   *
    * Retrieves the details of a contributor on this registration.
    * 
    * #### Returns
@@ -5598,7 +5650,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  RegistrationsContributorsRead(
+  registrationsContributorsRead(
     req: operations.RegistrationsContributorsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsContributorsReadResponse> {
@@ -5606,23 +5658,23 @@ export class SDK {
       req = new operations.RegistrationsContributorsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrations/{registration_id}/contributors/{user_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsContributorsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.RegistrationsContributorsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -5637,8 +5689,9 @@ export class SDK {
   }
 
   
-  // RegistrationsFilesList - List all files
-  /** 
+  /**
+   * registrationsFilesList - List all files
+   *
    * List of all the registration's files/folders for a given storage provider.
    * 
    * #### Returns
@@ -5655,7 +5708,7 @@ export class SDK {
    * 
    * Files may be filtered by `id`, `name`, `node`, `kind`, `path`, `provider`, `size`, and `last_touched`.
   **/
-  RegistrationsFilesList(
+  registrationsFilesList(
     req: operations.RegistrationsFilesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsFilesListResponse> {
@@ -5663,23 +5716,23 @@ export class SDK {
       req = new operations.RegistrationsFilesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrations/{registration_id}/files/{provider}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsFilesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.RegistrationsFilesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -5694,15 +5747,16 @@ export class SDK {
   }
 
   
-  // RegistrationsFilesRead - Retrieve a file
-  /** 
+  /**
+   * registrationsFilesRead - Retrieve a file
+   *
    * Retrieves the details of a registration file for the given storage provider.
    * #### Returns
    * Returns a JSON object with a `data` key containing the representation of the requested registration file object, if the request is successful.
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  RegistrationsFilesRead(
+  registrationsFilesRead(
     req: operations.RegistrationsFilesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsFilesReadResponse> {
@@ -5710,23 +5764,23 @@ export class SDK {
       req = new operations.RegistrationsFilesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrations/{registration_id}/files/{provider}/{path}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsFilesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.RegistrationsFilesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -5741,8 +5795,9 @@ export class SDK {
   }
 
   
-  // RegistrationsForksCreate - Create a fork
-  /** 
+  /**
+   * registrationsForksCreate - Create a fork
+   *
    * Creates a fork of the given registration.
    * 
    * Forking a project creates a copy of an existing registration and all of its contents. The fork always points back to the original registration, forming a network of registrations.
@@ -5758,7 +5813,7 @@ export class SDK {
    * Returns a JSON object with a `data` key containing the complete representation of the forked registration, if the request is successful.
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  RegistrationsForksCreate(
+  registrationsForksCreate(
     req: operations.RegistrationsForksCreateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsForksCreateResponse> {
@@ -5766,40 +5821,22 @@ export class SDK {
       req = new operations.RegistrationsForksCreateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrations/{registration_id}/forks/", req.pathParams);
     
-    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
-
-    try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        throw new Error(`Error serializing request body, cause: ${e.message}`);
-      }
-    }
-    
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let body: any;
-    if (reqBody instanceof FormData) body = reqBody;
-    else body = {...reqBody};
-    
-    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .post(url, body, {
-        headers: headers,
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsForksCreateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.RegistrationsForksCreateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
         }
 
@@ -5809,8 +5846,9 @@ export class SDK {
   }
 
   
-  // RegistrationsForksList - List all forks
-  /** 
+  /**
+   * registrationsForksList - List all forks
+   *
    * 
    * A paginated list of the registration’s forks
    * 
@@ -5824,7 +5862,7 @@ export class SDK {
    * 
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  RegistrationsForksList(
+  registrationsForksList(
     req: operations.RegistrationsForksListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsForksListResponse> {
@@ -5832,23 +5870,23 @@ export class SDK {
       req = new operations.RegistrationsForksListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrations/{registration_id}/forks/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsForksListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.RegistrationsForksListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -5863,8 +5901,9 @@ export class SDK {
   }
 
   
-  // RegistrationsIdentifiersList - List all identifiers
-  /** 
+  /**
+   * registrationsIdentifiersList - List all identifiers
+   *
    * A paginated list of the registration's identifiers.
    * #### Returns
    * Returns a JSON object containing `data` and `links` keys.
@@ -5878,7 +5917,7 @@ export class SDK {
    * 
    * Identifiers may be filtered by their `category` e.g `ark` or `doi`.
   **/
-  RegistrationsIdentifiersList(
+  registrationsIdentifiersList(
     req: operations.RegistrationsIdentifiersListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsIdentifiersListResponse> {
@@ -5886,23 +5925,23 @@ export class SDK {
       req = new operations.RegistrationsIdentifiersListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrations/{registration_id}/identifiers/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsIdentifiersListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.RegistrationsIdentifiersListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -5917,8 +5956,9 @@ export class SDK {
   }
 
   
-  // RegistrationsInstitutionsList - List all institutions
-  /** 
+  /**
+   * registrationsInstitutionsList - List all institutions
+   *
    * A paginated list of institutions affiliated with the registration.
    * #### Returns
    * Returns a JSON object containing `data` and `links` keys.
@@ -5927,7 +5967,7 @@ export class SDK {
    * 
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  RegistrationsInstitutionsList(
+  registrationsInstitutionsList(
     req: operations.RegistrationsInstitutionsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsInstitutionsListResponse> {
@@ -5935,23 +5975,23 @@ export class SDK {
       req = new operations.RegistrationsInstitutionsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrations/{registration_id}/institutions/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsInstitutionsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.RegistrationsInstitutionsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -5966,8 +6006,9 @@ export class SDK {
   }
 
   
-  // RegistrationsLinkedNodesList - List all linked nodes
-  /** 
+  /**
+   * registrationsLinkedNodesList - List all linked nodes
+   *
    * List of all nodes linked to the registration.
    * #### Returns
    * Returns a JSON object containing `data` and `links` keys.
@@ -5980,7 +6021,7 @@ export class SDK {
    * 
    * Nodes may be filtered by their `title`, `category`, `description`, `public`, `registration`, or `tags`. `title`, `description`, and `category` are string fields and will be filteres using simple substring matching. `public`, `registration` are boolean and can be filtered using truthy values, such as `true`, `false`, `0`, `1`. `tags` is an array of simple strings.
   **/
-  RegistrationsLinkedNodesList(
+  registrationsLinkedNodesList(
     req: operations.RegistrationsLinkedNodesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsLinkedNodesListResponse> {
@@ -5988,23 +6029,23 @@ export class SDK {
       req = new operations.RegistrationsLinkedNodesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrations/{registration_id}/linked_nodes/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsLinkedNodesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.RegistrationsLinkedNodesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -6019,8 +6060,9 @@ export class SDK {
   }
 
   
-  // RegistrationsList - List all registrations
-  /** 
+  /**
+   * registrationsList - List all registrations
+   *
    * A paginated list of registrations on the OSF to which the user has access.
    * 
    * The returned registrations are those which are public or which the user has access to view.
@@ -6047,27 +6089,26 @@ export class SDK {
    * 
    * Registrations may be filtered by their `id`, `title`, `category`, `description`, `public`, `tags`, `date_created`, `date_modified`, `root`, `parent`, and `contributors`.
   **/
-  RegistrationsList(
-    
+  registrationsList(
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/registrations/";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.RegistrationsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -6082,8 +6123,9 @@ export class SDK {
   }
 
   
-  // RegistrationsLogsList - List all logs
-  /** 
+  /**
+   * registrationsLogsList - List all logs
+   *
    * A paginated list of the registration's logs.
    * 
    * The returned logs are sorted by their `date`, with the most recents logs appearing first.
@@ -6099,7 +6141,7 @@ export class SDK {
    * 
    * Logs may be filtered by their `action`, and `date`.
   **/
-  RegistrationsLogsList(
+  registrationsLogsList(
     req: operations.RegistrationsLogsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsLogsListResponse> {
@@ -6107,23 +6149,23 @@ export class SDK {
       req = new operations.RegistrationsLogsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrations/{registration_id}/logs/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsLogsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.RegistrationsLogsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -6138,8 +6180,9 @@ export class SDK {
   }
 
   
-  // RegistrationsPartialUpdate - Update a registration
-  /** 
+  /**
+   * registrationsPartialUpdate - Update a registration
+   *
    * Updates a registration's privacy from **private** to **public**.
    * 
    * Registrations can be updated with either a **PUT** or **PATCH** request. The `public` field is the only field that can be modified on a registration
@@ -6152,7 +6195,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  RegistrationsPartialUpdate(
+  registrationsPartialUpdate(
     req: operations.RegistrationsPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsPartialUpdateResponse> {
@@ -6160,40 +6203,22 @@ export class SDK {
       req = new operations.RegistrationsPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrations/{registration_id}/", req.pathParams);
     
-    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
-
-    try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        throw new Error(`Error serializing request body, cause: ${e.message}`);
-      }
-    }
-    
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let body: any;
-    if (reqBody instanceof FormData) body = reqBody;
-    else body = {...reqBody};
-    
-    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .patch(url, body, {
-        headers: headers,
+      .request({
+        url: url,
+        method: "patch",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.RegistrationsPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -6203,8 +6228,9 @@ export class SDK {
   }
 
   
-  // RegistrationsProvidersList - List all storage providers
-  /** 
+  /**
+   * registrationsProvidersList - List all storage providers
+   *
    * A paginated list of storage providers enabled on the registration
    * 
    * Users of the OSF may access their data on a [number of cloud-storage services](https://api.osf.io/v2/#storage-providers) that have integrations with the OSF. We call these **providers**. By default, every node has access to the OSF-provided storage but may use as many of the supported providers as desired.
@@ -6219,7 +6245,7 @@ export class SDK {
    * 
    * Note: In the OSF filesystem model, providers are treated as folders, but with special properties that distinguish them from regular folders. Every provider folder is considered a root folder, and may not be deleted through the regular file API.
   **/
-  RegistrationsProvidersList(
+  registrationsProvidersList(
     req: operations.RegistrationsProvidersListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsProvidersListResponse> {
@@ -6227,23 +6253,23 @@ export class SDK {
       req = new operations.RegistrationsProvidersListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrations/{registration_id}/files/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsProvidersListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.RegistrationsProvidersListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -6258,8 +6284,9 @@ export class SDK {
   }
 
   
-  // RegistrationsRead - Retrieve a registration
-  /** 
+  /**
+   * registrationsRead - Retrieve a registration
+   *
    * Retrieve the details of a given registration.
    * #### Permissions
    * Only project contributors may retrieve the details of a registration that is embargoed, or has not yet been made public. Attempting to retrieve a private registration for which you are not a contributor will result in a **403 Forbidden** response.
@@ -6277,7 +6304,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  RegistrationsRead(
+  registrationsRead(
     req: operations.RegistrationsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsReadResponse> {
@@ -6285,23 +6312,23 @@ export class SDK {
       req = new operations.RegistrationsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrations/{registration_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.RegistrationsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -6316,8 +6343,9 @@ export class SDK {
   }
 
   
-  // RegistrationsViewOnlyLinksList - List all view only links
-  /** 
+  /**
+   * registrationsViewOnlyLinksList - List all view only links
+   *
    * A paginated list of view only links created for this registration.
    * #### Returns
    * Returns a JSON object containing `data` and `links` keys.
@@ -6336,7 +6364,7 @@ export class SDK {
    * 
    * View Only Links may be filtered based on their `name`, `anonymous` and `date_created` fields. Possible comparison operators include 'gt' (greater than), 'gte'(greater than or equal to), 'lt' (less than) and 'lte' (less than or equal to). The date must be in the format YYYY-MM-DD and the time is optional.
   **/
-  RegistrationsViewOnlyLinksList(
+  registrationsViewOnlyLinksList(
     req: operations.RegistrationsViewOnlyLinksListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsViewOnlyLinksListResponse> {
@@ -6344,23 +6372,23 @@ export class SDK {
       req = new operations.RegistrationsViewOnlyLinksListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrations/{registration_id}/view_only_links/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsViewOnlyLinksListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.RegistrationsViewOnlyLinksListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -6375,8 +6403,9 @@ export class SDK {
   }
 
   
-  // RegistrationsViewOnlyLinksRead - Retrieve a view only link
-  /** 
+  /**
+   * registrationsViewOnlyLinksRead - Retrieve a view only link
+   *
    * Retrieves the details of a view only link created from this registration.
    * #### Returns
    * Returns a JSON object with a `data` key containing the representation of the requested view only link, if the request is successful.
@@ -6386,7 +6415,7 @@ export class SDK {
    * 
    * View only links on a registration, public or private, are readable and writeable only by users that are administrators on the registration.
   **/
-  RegistrationsViewOnlyLinksRead(
+  registrationsViewOnlyLinksRead(
     req: operations.RegistrationsViewOnlyLinksReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsViewOnlyLinksReadResponse> {
@@ -6394,23 +6423,23 @@ export class SDK {
       req = new operations.RegistrationsViewOnlyLinksReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrations/{registration_id}/view_only_links/{link_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsViewOnlyLinksReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.RegistrationsViewOnlyLinksReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -6425,8 +6454,9 @@ export class SDK {
   }
 
   
-  // RegistrationsWikisList - List all wikis
-  /** 
+  /**
+   * registrationsWikisList - List all wikis
+   *
    * A paginated list of the registration's wiki pages
    * #### Returns
    * A list of all registration's current wiki page versions ordered by their date_modified. Each resource contains the full representation of the wiki, meaning additional requests to an individual wiki's detail view are not necessary.
@@ -6439,7 +6469,7 @@ export class SDK {
    * 
    * Possible comparison operators include 'gt' (greater than), 'gte'(greater than or equal to), 'lt' (less than) and 'lte' (less than or equal to). The date must be in the format YYYY-MM-DD and the time is optional.
   **/
-  RegistrationsWikisList(
+  registrationsWikisList(
     req: operations.RegistrationsWikisListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegistrationsWikisListResponse> {
@@ -6447,23 +6477,23 @@ export class SDK {
       req = new operations.RegistrationsWikisListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/registrations/{registration_id}/wikis/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegistrationsWikisListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.RegistrationsWikisListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -6478,8 +6508,9 @@ export class SDK {
   }
 
   
-  // TaxonomiesList - List all taxonomies
-  /** 
+  /**
+   * taxonomiesList - List all taxonomies
+   *
    * 
    * A paginated list of all [bepress disciplines taxonomies](https://www.bepress.com/wp-content/uploads/2016/12/Digital-Commons-Disciplines-taxonomy-2017-01.pdf).
    * Note: this API endpoint is under active development, and is subject to change in the future.
@@ -6496,27 +6527,26 @@ export class SDK {
    * 
    * Taxonomies may be filtered by their `id`, `parents`, and `text`.
   **/
-  TaxonomiesList(
-    
+  taxonomiesList(
     config?: AxiosRequestConfig
   ): Promise<operations.TaxonomiesListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/taxonomies/";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TaxonomiesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.TaxonomiesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -6531,8 +6561,9 @@ export class SDK {
   }
 
   
-  // TaxonomiesRead - Retrieve a taxonomy
-  /** 
+  /**
+   * taxonomiesRead - Retrieve a taxonomy
+   *
    * Retrieves the details of a taxonomy.
    * #### Returns
    * 
@@ -6540,7 +6571,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  TaxonomiesRead(
+  taxonomiesRead(
     req: operations.TaxonomiesReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.TaxonomiesReadResponse> {
@@ -6548,23 +6579,23 @@ export class SDK {
       req = new operations.TaxonomiesReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/taxonomies/{taxonomy_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.TaxonomiesReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.TaxonomiesReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -6579,8 +6610,9 @@ export class SDK {
   }
 
   
-  // UsersAddonsList - List all user addons
-  /** 
+  /**
+   * usersAddonsList - List all user addons
+   *
    * 
    * A paginated list of authorized user addons
    * 
@@ -6599,7 +6631,7 @@ export class SDK {
    * 
    * Attempting to request the accounts for an addon that is not enabled will result in a **404 Not Found** response.
   **/
-  UsersAddonsList(
+  usersAddonsList(
     req: operations.UsersAddonsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UsersAddonsListResponse> {
@@ -6607,23 +6639,23 @@ export class SDK {
       req = new operations.UsersAddonsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{user_id}/addons/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UsersAddonsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.UsersAddonsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -6638,8 +6670,9 @@ export class SDK {
   }
 
   
-  // UsersAddonsRead - Retrieve a user addon
-  /** 
+  /**
+   * usersAddonsRead - Retrieve a user addon
+   *
    * Retrieves the details of an authorized user addon
    * 
    * #### Permissions
@@ -6653,7 +6686,7 @@ export class SDK {
    * 
    * Attempting to request the accounts for an addon that is not enabled will result in a **404 Not Found** response.
   **/
-  UsersAddonsRead(
+  usersAddonsRead(
     req: operations.UsersAddonsReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UsersAddonsReadResponse> {
@@ -6661,23 +6694,23 @@ export class SDK {
       req = new operations.UsersAddonsReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{user_id}/addons/{provider}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UsersAddonsReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.UsersAddonsReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -6692,8 +6725,9 @@ export class SDK {
   }
 
   
-  // UsersInstitutionsList - List all institutions
-  /** 
+  /**
+   * usersInstitutionsList - List all institutions
+   *
    * A paginated list of institutions that the user is affiliated with.
    * #### Returns
    * Returns a JSON object containing `data` and `links` keys.
@@ -6702,7 +6736,7 @@ export class SDK {
    * 
    * The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
   **/
-  UsersInstitutionsList(
+  usersInstitutionsList(
     req: operations.UsersInstitutionsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UsersInstitutionsListResponse> {
@@ -6710,23 +6744,23 @@ export class SDK {
       req = new operations.UsersInstitutionsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{user_id}/institutions/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UsersInstitutionsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.UsersInstitutionsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -6741,8 +6775,9 @@ export class SDK {
   }
 
   
-  // UsersList - List all users
-  /** 
+  /**
+   * usersList - List all users
+   *
    * 
    * A paginated list of all users registered on the OSF. The returned users are sorted by their `date_registered`, with the most recently registered users appearing first.
    * 
@@ -6762,27 +6797,26 @@ export class SDK {
    * 
    * Users may be filtered by their `id`, `full_name`, `given_name`, `middle_name`, or `family_name`.
   **/
-  UsersList(
-    
+  usersList(
     config?: AxiosRequestConfig
   ): Promise<operations.UsersListResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/users/";
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UsersListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.UsersListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -6797,8 +6831,9 @@ export class SDK {
   }
 
   
-  // UsersNodesList - List all nodes
-  /** 
+  /**
+   * usersNodesList - List all nodes
+   *
    * A paginated list of nodes that the user is a contributor to. The returned nodes are sorted by their `date_modified`, with the most recently updated nodes appearing first.
    * 
    * If the user ID in the path is the same as the logged-in user, all nodes will be returned. Otherwise, only the user's public nodes will be returned.
@@ -6815,7 +6850,7 @@ export class SDK {
    * 
    * Nodes may be filtered by their `id`, `title`, `category`, `description`, `public`, `tags`, `date_created`, `date_modified`, `root`, `parent`, `preprint`, and `contributors`.
   **/
-  UsersNodesList(
+  usersNodesList(
     req: operations.UsersNodesListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UsersNodesListResponse> {
@@ -6823,23 +6858,23 @@ export class SDK {
       req = new operations.UsersNodesListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{user_id}/nodes/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UsersNodesListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.UsersNodesListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -6854,8 +6889,9 @@ export class SDK {
   }
 
   
-  // UsersPartialUpdate - Update a user
-  /** 
+  /**
+   * usersPartialUpdate - Update a user
+   *
    * Updates a user by setting the values of the attributes specified in the request body. Any unspecified attributes will be left unchanged.
    * 
    * Users can be updated with either a **PUT** or **PATCH** request. The `full_name` field is mandatory in a **PUT** request, and optional in a **PATCH**.
@@ -6866,7 +6902,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  UsersPartialUpdate(
+  usersPartialUpdate(
     req: operations.UsersPartialUpdateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UsersPartialUpdateResponse> {
@@ -6874,40 +6910,38 @@ export class SDK {
       req = new operations.UsersPartialUpdateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{user_id}/", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.defaultClient!;
-    const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._defaultClient!;const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UsersPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.UsersPartialUpdateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -6917,8 +6951,9 @@ export class SDK {
   }
 
   
-  // UsersPreprintsList - List all preprints
-  /** 
+  /**
+   * usersPreprintsList - List all preprints
+   *
    * A paginated list of preprints that the user contributes to. The returned preprints are sorted by their creation date, with the most recent preprints appearing first.
    * #### Returns
    * Returns a JSON object containing `data` and `links` keys.
@@ -6931,7 +6966,7 @@ export class SDK {
    * 
    * Preprints may be filtered by their `id`, `is_published`, `date_created`, `date_modified`, and `provider`.
   **/
-  UsersPreprintsList(
+  usersPreprintsList(
     req: operations.UsersPreprintsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UsersPreprintsListResponse> {
@@ -6939,23 +6974,23 @@ export class SDK {
       req = new operations.UsersPreprintsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{user_id}/preprints/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UsersPreprintsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.UsersPreprintsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -6970,8 +7005,9 @@ export class SDK {
   }
 
   
-  // UsersRead - Retrieve a user
-  /** 
+  /**
+   * usersRead - Retrieve a user
+   *
    * Retrieves the details of a given users.
    * 
    * The returned information includes the user's bibliographic information and the date the user was registered.
@@ -6984,7 +7020,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  UsersRead(
+  usersRead(
     req: operations.UsersReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UsersReadResponse> {
@@ -6992,23 +7028,23 @@ export class SDK {
       req = new operations.UsersReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{user_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UsersReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.UsersReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -7023,8 +7059,9 @@ export class SDK {
   }
 
   
-  // UsersRegistrationsList - List all registrations
-  /** 
+  /**
+   * usersRegistrationsList - List all registrations
+   *
    * A paginated list of registrations that the user is a contributor to. The returned registrations are sorted by their `date_modified`, with the most recently updated registrations appearing first.
    * 
    * If the user ID in the path is the same as the logged-in user, all registrations will be returned. Otherwise, only the user's public registrations will be returned.
@@ -7041,7 +7078,7 @@ export class SDK {
    * 
    * Registrations may be filtered by their `id`, `title`, `category`, `description`, `public`, `tags`, `date_created`, `date_modified`, `root`, `parent`, and `contributors`.
   **/
-  UsersRegistrationsList(
+  usersRegistrationsList(
     req: operations.UsersRegistrationsListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UsersRegistrationsListResponse> {
@@ -7049,22 +7086,22 @@ export class SDK {
       req = new operations.UsersRegistrationsListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/users/{user_id}/registrations/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UsersRegistrationsListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.UsersRegistrationsListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -7074,8 +7111,9 @@ export class SDK {
   }
 
   
-  // ViewOnlyLinksNodeList - List all nodes
-  /** 
+  /**
+   * viewOnlyLinksNodeList - List all nodes
+   *
    * 
    * The list of nodes which this view only link gives read-only access to.
    * #### Permissions
@@ -7088,7 +7126,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  ViewOnlyLinksNodeList(
+  viewOnlyLinksNodeList(
     req: operations.ViewOnlyLinksNodeListRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ViewOnlyLinksNodeListResponse> {
@@ -7096,23 +7134,23 @@ export class SDK {
       req = new operations.ViewOnlyLinksNodeListRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/view_only_links/{link_id}/nodes/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ViewOnlyLinksNodeListResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.ViewOnlyLinksNodeListResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -7127,8 +7165,9 @@ export class SDK {
   }
 
   
-  // ViewOnlyLinksRead - Retrieve a view only link
-  /** 
+  /**
+   * viewOnlyLinksRead - Retrieve a view only link
+   *
    * Retrieves details about a specific view only link.
    * #### Permissions
    * Only project administrators may retrieve the details of a view only link. Attempting to retrieve a view only link without appropriate permissions will result in a 403 Forbidden response.
@@ -7136,7 +7175,7 @@ export class SDK {
    * Returns a JSON object with a `data` key containing the representation of the requested view only link, if the request is successful.
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  ViewOnlyLinksRead(
+  viewOnlyLinksRead(
     req: operations.ViewOnlyLinksReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.ViewOnlyLinksReadResponse> {
@@ -7144,23 +7183,23 @@ export class SDK {
       req = new operations.ViewOnlyLinksReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/view_only_links/{link_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.ViewOnlyLinksReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.ViewOnlyLinksReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -7175,14 +7214,15 @@ export class SDK {
   }
 
   
-  // WikiContent - Retrieve the Content of a Wiki
-  /** 
+  /**
+   * wikiContent - Retrieve the Content of a Wiki
+   *
    * Retrieves the plaintext content of a wiki in markdown format.
    * #### Returns
    * Returns `text/markdown` of the wiki content itself.
    * If the request is unsuccessful, plaintext with the error message will be displayed.
   **/
-  WikiContent(
+  wikiContent(
     req: operations.WikiContentRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.WikiContentResponse> {
@@ -7190,22 +7230,22 @@ export class SDK {
       req = new operations.WikiContentRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/wikis/{wiki_id}/content/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.WikiContentResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.WikiContentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -7215,8 +7255,9 @@ export class SDK {
   }
 
   
-  // WikiRead - Retrieve a Wiki
-  /** 
+  /**
+   * wikiRead - Retrieve a Wiki
+   *
    * Retrieves the details about a specific wiki.
    * A wiki is a collection of markdown text pages that can be used to describe the project or dataset of contained in the attached node.
    * #### Returns
@@ -7224,7 +7265,7 @@ export class SDK {
    * 
    * If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
   **/
-  WikiRead(
+  wikiRead(
     req: operations.WikiReadRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.WikiReadResponse> {
@@ -7232,23 +7273,23 @@ export class SDK {
       req = new operations.WikiReadRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/wikis/{wiki_id}/", req.pathParams);
     
-    const client: AxiosInstance = this.defaultClient!;
-    
+    const client: AxiosInstance = this._defaultClient!;
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.WikiReadResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `*/*`)) {
+        const res: operations.WikiReadResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `*/*`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);

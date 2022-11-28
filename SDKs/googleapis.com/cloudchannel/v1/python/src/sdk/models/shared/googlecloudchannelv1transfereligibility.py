@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class GoogleCloudChannelV1TransferEligibilityIneligibilityReasonEnum(str, Enum):
     REASON_UNSPECIFIED = "REASON_UNSPECIFIED"
@@ -12,7 +14,11 @@ class GoogleCloudChannelV1TransferEligibilityIneligibilityReasonEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudChannelV1TransferEligibility:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    ineligibility_reason: Optional[GoogleCloudChannelV1TransferEligibilityIneligibilityReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ineligibilityReason' }})
-    is_eligible: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isEligible' }})
+    r"""GoogleCloudChannelV1TransferEligibility
+    Specifies transfer eligibility of a SKU.
+    """
+    
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    ineligibility_reason: Optional[GoogleCloudChannelV1TransferEligibilityIneligibilityReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ineligibilityReason') }})
+    is_eligible: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('isEligible') }})
     

@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class AttachPolicyPathParams:
-    policy_name: str = field(default=None, metadata={'path_param': { 'field_name': 'policyName', 'style': 'simple', 'explode': False }})
+    policy_name: str = field(metadata={'path_param': { 'field_name': 'policyName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -22,25 +26,25 @@ class AttachPolicyHeaders:
 @dataclass_json
 @dataclass
 class AttachPolicyRequestBody:
-    target: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target' }})
+    target: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('target') }})
     
 
 @dataclass
 class AttachPolicyRequest:
-    path_params: AttachPolicyPathParams = field(default=None)
-    headers: AttachPolicyHeaders = field(default=None)
-    request: AttachPolicyRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: AttachPolicyHeaders = field()
+    path_params: AttachPolicyPathParams = field()
+    request: AttachPolicyRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class AttachPolicyResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

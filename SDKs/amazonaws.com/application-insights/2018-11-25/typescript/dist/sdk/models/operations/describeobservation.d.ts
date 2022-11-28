@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum DescribeObservationXAmzTargetEnum {
     Ec2WindowsBarleyServiceDescribeObservation = "EC2WindowsBarleyService.DescribeObservation"

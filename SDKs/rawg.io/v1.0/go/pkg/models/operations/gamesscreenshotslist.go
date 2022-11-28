@@ -14,16 +14,16 @@ type GamesScreenshotsListQueryParams struct {
 	PageSize *int64  `queryParam:"style=form,explode=true,name=page_size"`
 }
 
-type GamesScreenshotsListRequest struct {
-	PathParams  GamesScreenshotsListPathParams
-	QueryParams GamesScreenshotsListQueryParams
-}
-
 type GamesScreenshotsList200ApplicationJSON struct {
 	Count    int64               `json:"count"`
 	Next     *string             `json:"next,omitempty"`
 	Previous *string             `json:"previous,omitempty"`
 	Results  []shared.ScreenShot `json:"results"`
+}
+
+type GamesScreenshotsListRequest struct {
+	PathParams  GamesScreenshotsListPathParams
+	QueryParams GamesScreenshotsListQueryParams
 }
 
 type GamesScreenshotsListResponse struct {

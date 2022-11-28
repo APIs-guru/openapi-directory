@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthorizerTypeEnum } from "./authorizertypeenum";
+
 
 
 // Authorizer
@@ -7,33 +8,33 @@ import { AuthorizerTypeEnum } from "./authorizertypeenum";
  * <p>Represents an authorization layer for methods. If enabled on a method, API Gateway will activate the authorizer when a client calls the method.</p> <div class="seeAlso"> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html">Use Lambda Function as Authorizer</a> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html">Use Cognito User Pool as Authorizer</a> </div>
 **/
 export class Authorizer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authType" })
+  @SpeakeasyMetadata({ data: "json, name=authType" })
   authType?: string;
 
-  @Metadata({ data: "json, name=authorizerCredentials" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerCredentials" })
   authorizerCredentials?: string;
 
-  @Metadata({ data: "json, name=authorizerResultTtlInSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerResultTtlInSeconds" })
   authorizerResultTtlInSeconds?: number;
 
-  @Metadata({ data: "json, name=authorizerUri" })
+  @SpeakeasyMetadata({ data: "json, name=authorizerUri" })
   authorizerUri?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=identitySource" })
+  @SpeakeasyMetadata({ data: "json, name=identitySource" })
   identitySource?: string;
 
-  @Metadata({ data: "json, name=identityValidationExpression" })
+  @SpeakeasyMetadata({ data: "json, name=identityValidationExpression" })
   identityValidationExpression?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=providerARNs" })
+  @SpeakeasyMetadata({ data: "json, name=providerARNs" })
   providerArNs?: string[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: AuthorizerTypeEnum;
 }

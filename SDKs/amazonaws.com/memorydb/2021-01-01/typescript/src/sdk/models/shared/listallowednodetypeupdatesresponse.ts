@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListAllowedNodeTypeUpdatesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ScaleDownNodeTypes" })
+  @SpeakeasyMetadata({ data: "json, name=ScaleDownNodeTypes" })
   scaleDownNodeTypes?: string[];
 
-  @Metadata({ data: "json, name=ScaleUpNodeTypes" })
+  @SpeakeasyMetadata({ data: "json, name=ScaleUpNodeTypes" })
   scaleUpNodeTypes?: string[];
 }

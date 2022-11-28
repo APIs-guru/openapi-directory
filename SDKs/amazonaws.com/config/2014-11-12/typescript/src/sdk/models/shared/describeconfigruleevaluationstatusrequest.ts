@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DescribeConfigRuleEvaluationStatusRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class DescribeConfigRuleEvaluationStatusRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConfigRuleNames" })
+  @SpeakeasyMetadata({ data: "json, name=ConfigRuleNames" })
   configRuleNames?: string[];
 
-  @Metadata({ data: "json, name=Limit" })
+  @SpeakeasyMetadata({ data: "json, name=Limit" })
   limit?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

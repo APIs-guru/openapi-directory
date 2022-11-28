@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetReleaseAddressActionEnum;
 (function (GetReleaseAddressActionEnum) {
     GetReleaseAddressActionEnum["ReleaseAddress"] = "ReleaseAddress";
@@ -37,27 +37,27 @@ var GetReleaseAddressQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetReleaseAddressQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=AllocationId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=AllocationId" }),
         __metadata("design:type", String)
     ], GetReleaseAddressQueryParams.prototype, "allocationId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=DryRun" }),
         __metadata("design:type", Boolean)
     ], GetReleaseAddressQueryParams.prototype, "dryRun", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NetworkBorderGroup" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NetworkBorderGroup" }),
         __metadata("design:type", String)
     ], GetReleaseAddressQueryParams.prototype, "networkBorderGroup", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=PublicIp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=PublicIp" }),
         __metadata("design:type", String)
     ], GetReleaseAddressQueryParams.prototype, "publicIp", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetReleaseAddressQueryParams.prototype, "version", void 0);
     return GetReleaseAddressQueryParams;
@@ -69,31 +69,31 @@ var GetReleaseAddressHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetReleaseAddressHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetReleaseAddressHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetReleaseAddressHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetReleaseAddressHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetReleaseAddressHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetReleaseAddressHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetReleaseAddressHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetReleaseAddressHeaders;
@@ -105,11 +105,11 @@ var GetReleaseAddressRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetReleaseAddressQueryParams)
     ], GetReleaseAddressRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetReleaseAddressHeaders)
     ], GetReleaseAddressRequest.prototype, "headers", void 0);
     return GetReleaseAddressRequest;
@@ -121,11 +121,11 @@ var GetReleaseAddressResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetReleaseAddressResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetReleaseAddressResponse.prototype, "statusCode", void 0);
     return GetReleaseAddressResponse;

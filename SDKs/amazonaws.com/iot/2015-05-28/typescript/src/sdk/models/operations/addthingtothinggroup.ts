@@ -1,76 +1,77 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AddThingToThingGroupHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class AddThingToThingGroupRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=overrideDynamicGroups" })
+  @SpeakeasyMetadata({ data: "json, name=overrideDynamicGroups" })
   overrideDynamicGroups?: boolean;
 
-  @Metadata({ data: "json, name=thingArn" })
+  @SpeakeasyMetadata({ data: "json, name=thingArn" })
   thingArn?: string;
 
-  @Metadata({ data: "json, name=thingGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=thingGroupArn" })
   thingGroupArn?: string;
 
-  @Metadata({ data: "json, name=thingGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=thingGroupName" })
   thingGroupName?: string;
 
-  @Metadata({ data: "json, name=thingName" })
+  @SpeakeasyMetadata({ data: "json, name=thingName" })
   thingName?: string;
 }
 
 
 export class AddThingToThingGroupRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: AddThingToThingGroupHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: AddThingToThingGroupRequestBody;
 }
 
 
 export class AddThingToThingGroupResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   addThingToThingGroupResponse?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalFailureException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceNotFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   throttlingException?: any;
 }

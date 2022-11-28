@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import paralleldataformat_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ParallelDataConfig:
-    format: paralleldataformat_enum.ParallelDataFormatEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Format' }})
-    s3_uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3Uri' }})
+    r"""ParallelDataConfig
+    Specifies the format and S3 location of the parallel data input file.
+    """
+    
+    format: ParallelDataFormatEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Format') }})
+    s3_uri: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3Uri') }})
     

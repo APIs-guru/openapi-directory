@@ -9,7 +9,7 @@ import (
 	"openapi/pkg/models/operations"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://www.healthcare.gov",
 }
 
@@ -17,10 +17,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://www.healthcare.gov/developers/
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +36,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// GetAPIArticlesMediaTypeExtension - Returns pages content.
 func (s *SDK) GetAPIArticlesMediaTypeExtension(ctx context.Context, request operations.GetAPIArticlesMediaTypeExtensionRequest) (*operations.GetAPIArticlesMediaTypeExtensionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/articles{mediaTypeExtension}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -59,7 +82,7 @@ func (s *SDK) GetAPIArticlesMediaTypeExtension(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -90,8 +113,9 @@ func (s *SDK) GetAPIArticlesMediaTypeExtension(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetAPIBlogMediaTypeExtension - Returns pages content.
 func (s *SDK) GetAPIBlogMediaTypeExtension(ctx context.Context, request operations.GetAPIBlogMediaTypeExtensionRequest) (*operations.GetAPIBlogMediaTypeExtensionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/blog{mediaTypeExtension}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -99,7 +123,7 @@ func (s *SDK) GetAPIBlogMediaTypeExtension(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -130,8 +154,9 @@ func (s *SDK) GetAPIBlogMediaTypeExtension(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetAPIGlossaryMediaTypeExtension - Returns pages content.
 func (s *SDK) GetAPIGlossaryMediaTypeExtension(ctx context.Context, request operations.GetAPIGlossaryMediaTypeExtensionRequest) (*operations.GetAPIGlossaryMediaTypeExtensionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/glossary{mediaTypeExtension}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -139,7 +164,7 @@ func (s *SDK) GetAPIGlossaryMediaTypeExtension(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -170,8 +195,9 @@ func (s *SDK) GetAPIGlossaryMediaTypeExtension(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetAPIQuestionsMediaTypeExtension - Returns pages content.
 func (s *SDK) GetAPIQuestionsMediaTypeExtension(ctx context.Context, request operations.GetAPIQuestionsMediaTypeExtensionRequest) (*operations.GetAPIQuestionsMediaTypeExtensionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/questions{mediaTypeExtension}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -179,7 +205,7 @@ func (s *SDK) GetAPIQuestionsMediaTypeExtension(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -210,8 +236,9 @@ func (s *SDK) GetAPIQuestionsMediaTypeExtension(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetAPIStatesMediaTypeExtension - Returns pages content.
 func (s *SDK) GetAPIStatesMediaTypeExtension(ctx context.Context, request operations.GetAPIStatesMediaTypeExtensionRequest) (*operations.GetAPIStatesMediaTypeExtensionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/states{mediaTypeExtension}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -219,7 +246,7 @@ func (s *SDK) GetAPIStatesMediaTypeExtension(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -250,8 +277,9 @@ func (s *SDK) GetAPIStatesMediaTypeExtension(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetAPITopicsMediaTypeExtension - Returns pages content.
 func (s *SDK) GetAPITopicsMediaTypeExtension(ctx context.Context, request operations.GetAPITopicsMediaTypeExtensionRequest) (*operations.GetAPITopicsMediaTypeExtensionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/api/topics{mediaTypeExtension}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -259,7 +287,7 @@ func (s *SDK) GetAPITopicsMediaTypeExtension(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -290,8 +318,9 @@ func (s *SDK) GetAPITopicsMediaTypeExtension(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetBlogPageNameMediaTypeExtension - Returns pages content.
 func (s *SDK) GetBlogPageNameMediaTypeExtension(ctx context.Context, request operations.GetBlogPageNameMediaTypeExtensionRequest) (*operations.GetBlogPageNameMediaTypeExtensionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/blog/{pageName}{mediaTypeExtension}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -299,7 +328,7 @@ func (s *SDK) GetBlogPageNameMediaTypeExtension(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -330,8 +359,9 @@ func (s *SDK) GetBlogPageNameMediaTypeExtension(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetEsBlogPageNameMediaTypeExtension - Returns pages content.
 func (s *SDK) GetEsBlogPageNameMediaTypeExtension(ctx context.Context, request operations.GetEsBlogPageNameMediaTypeExtensionRequest) (*operations.GetEsBlogPageNameMediaTypeExtensionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/es/blog/{pageName}{mediaTypeExtension}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -339,7 +369,7 @@ func (s *SDK) GetEsBlogPageNameMediaTypeExtension(ctx context.Context, request o
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -370,8 +400,9 @@ func (s *SDK) GetEsBlogPageNameMediaTypeExtension(ctx context.Context, request o
 	return res, nil
 }
 
+// GetEsGlossaryPageNameMediaTypeExtension - Returns pages content.
 func (s *SDK) GetEsGlossaryPageNameMediaTypeExtension(ctx context.Context, request operations.GetEsGlossaryPageNameMediaTypeExtensionRequest) (*operations.GetEsGlossaryPageNameMediaTypeExtensionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/es/glossary/{pageName}{mediaTypeExtension}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -379,7 +410,7 @@ func (s *SDK) GetEsGlossaryPageNameMediaTypeExtension(ctx context.Context, reque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -410,8 +441,9 @@ func (s *SDK) GetEsGlossaryPageNameMediaTypeExtension(ctx context.Context, reque
 	return res, nil
 }
 
+// GetEsPageNameMediaTypeExtension - Returns pages content.
 func (s *SDK) GetEsPageNameMediaTypeExtension(ctx context.Context, request operations.GetEsPageNameMediaTypeExtensionRequest) (*operations.GetEsPageNameMediaTypeExtensionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/es/{pageName}{mediaTypeExtension}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -419,7 +451,7 @@ func (s *SDK) GetEsPageNameMediaTypeExtension(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -450,8 +482,9 @@ func (s *SDK) GetEsPageNameMediaTypeExtension(ctx context.Context, request opera
 	return res, nil
 }
 
+// GetEsQuestionPageNameMediaTypeExtension - Returns pages content.
 func (s *SDK) GetEsQuestionPageNameMediaTypeExtension(ctx context.Context, request operations.GetEsQuestionPageNameMediaTypeExtensionRequest) (*operations.GetEsQuestionPageNameMediaTypeExtensionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/es/question/{pageName}{mediaTypeExtension}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -459,7 +492,7 @@ func (s *SDK) GetEsQuestionPageNameMediaTypeExtension(ctx context.Context, reque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -490,8 +523,9 @@ func (s *SDK) GetEsQuestionPageNameMediaTypeExtension(ctx context.Context, reque
 	return res, nil
 }
 
+// GetEsStateNameMediaTypeExtension - Returns pages content.
 func (s *SDK) GetEsStateNameMediaTypeExtension(ctx context.Context, request operations.GetEsStateNameMediaTypeExtensionRequest) (*operations.GetEsStateNameMediaTypeExtensionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/es/{stateName}{mediaTypeExtension}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -499,7 +533,7 @@ func (s *SDK) GetEsStateNameMediaTypeExtension(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -530,8 +564,9 @@ func (s *SDK) GetEsStateNameMediaTypeExtension(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetGlossaryPageNameMediaTypeExtension - Returns pages content.
 func (s *SDK) GetGlossaryPageNameMediaTypeExtension(ctx context.Context, request operations.GetGlossaryPageNameMediaTypeExtensionRequest) (*operations.GetGlossaryPageNameMediaTypeExtensionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/glossary/{pageName}{mediaTypeExtension}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -539,7 +574,7 @@ func (s *SDK) GetGlossaryPageNameMediaTypeExtension(ctx context.Context, request
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -570,8 +605,9 @@ func (s *SDK) GetGlossaryPageNameMediaTypeExtension(ctx context.Context, request
 	return res, nil
 }
 
+// GetPageNameMediaTypeExtension - Returns pages content.
 func (s *SDK) GetPageNameMediaTypeExtension(ctx context.Context, request operations.GetPageNameMediaTypeExtensionRequest) (*operations.GetPageNameMediaTypeExtensionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{pageName}{mediaTypeExtension}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -579,7 +615,7 @@ func (s *SDK) GetPageNameMediaTypeExtension(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -610,8 +646,9 @@ func (s *SDK) GetPageNameMediaTypeExtension(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetQuestionPageNameMediaTypeExtension - Returns pages content.
 func (s *SDK) GetQuestionPageNameMediaTypeExtension(ctx context.Context, request operations.GetQuestionPageNameMediaTypeExtensionRequest) (*operations.GetQuestionPageNameMediaTypeExtensionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/question/{pageName}{mediaTypeExtension}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -619,7 +656,7 @@ func (s *SDK) GetQuestionPageNameMediaTypeExtension(ctx context.Context, request
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -650,8 +687,9 @@ func (s *SDK) GetQuestionPageNameMediaTypeExtension(ctx context.Context, request
 	return res, nil
 }
 
+// GetStateNameMediaTypeExtension - Returns pages content.
 func (s *SDK) GetStateNameMediaTypeExtension(ctx context.Context, request operations.GetStateNameMediaTypeExtensionRequest) (*operations.GetStateNameMediaTypeExtensionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/{stateName}{mediaTypeExtension}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -659,7 +697,7 @@ func (s *SDK) GetStateNameMediaTypeExtension(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

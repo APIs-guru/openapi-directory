@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VolumeFilter } from "./volumefilter";
 
 
+
 export class DescribeVolumesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Filters", elemType: shared.VolumeFilter })
+  @SpeakeasyMetadata({ data: "json, name=Filters", elemType: VolumeFilter })
   filters?: VolumeFilter[];
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=VolumeIds" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeIds" })
   volumeIds?: string[];
 }

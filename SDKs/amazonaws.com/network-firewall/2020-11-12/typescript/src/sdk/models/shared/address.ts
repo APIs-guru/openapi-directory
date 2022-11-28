@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Address
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A single IP address specification. This is used in the <a>MatchAttributes</a> source and destination specifications.
 **/
 export class Address extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AddressDefinition" })
+  @SpeakeasyMetadata({ data: "json, name=AddressDefinition" })
   addressDefinition: string;
 }

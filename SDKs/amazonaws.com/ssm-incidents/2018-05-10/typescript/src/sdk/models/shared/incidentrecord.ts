@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutomationExecution } from "./automationexecution";
 import { ChatChannel } from "./chatchannel";
 import { IncidentRecordSource } from "./incidentrecordsource";
@@ -7,50 +6,51 @@ import { NotificationTargetItem } from "./notificationtargetitem";
 import { IncidentRecordStatusEnum } from "./incidentrecordstatusenum";
 
 
+
 // IncidentRecord
 /** 
  * The record of the incident that's created when an incident occurs.
 **/
 export class IncidentRecord extends SpeakeasyBase {
-  @Metadata({ data: "json, name=arn" })
+  @SpeakeasyMetadata({ data: "json, name=arn" })
   arn: string;
 
-  @Metadata({ data: "json, name=automationExecutions", elemType: shared.AutomationExecution })
+  @SpeakeasyMetadata({ data: "json, name=automationExecutions", elemType: AutomationExecution })
   automationExecutions?: AutomationExecution[];
 
-  @Metadata({ data: "json, name=chatChannel" })
+  @SpeakeasyMetadata({ data: "json, name=chatChannel" })
   chatChannel?: ChatChannel;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime: Date;
 
-  @Metadata({ data: "json, name=dedupeString" })
+  @SpeakeasyMetadata({ data: "json, name=dedupeString" })
   dedupeString: string;
 
-  @Metadata({ data: "json, name=impact" })
+  @SpeakeasyMetadata({ data: "json, name=impact" })
   impact: number;
 
-  @Metadata({ data: "json, name=incidentRecordSource" })
+  @SpeakeasyMetadata({ data: "json, name=incidentRecordSource" })
   incidentRecordSource: IncidentRecordSource;
 
-  @Metadata({ data: "json, name=lastModifiedBy" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedBy" })
   lastModifiedBy: string;
 
-  @Metadata({ data: "json, name=lastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastModifiedTime" })
   lastModifiedTime: Date;
 
-  @Metadata({ data: "json, name=notificationTargets", elemType: shared.NotificationTargetItem })
+  @SpeakeasyMetadata({ data: "json, name=notificationTargets", elemType: NotificationTargetItem })
   notificationTargets?: NotificationTargetItem[];
 
-  @Metadata({ data: "json, name=resolvedTime" })
+  @SpeakeasyMetadata({ data: "json, name=resolvedTime" })
   resolvedTime?: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: IncidentRecordStatusEnum;
 
-  @Metadata({ data: "json, name=summary" })
+  @SpeakeasyMetadata({ data: "json, name=summary" })
   summary?: string;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title: string;
 }

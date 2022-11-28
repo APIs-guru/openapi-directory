@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
@@ -28,11 +28,11 @@ class SearchTypeEsriRestserverQueryParams:
 
 @dataclass
 class SearchTypeEsriRestserverRequest:
-    query_params: SearchTypeEsriRestserverQueryParams = field(default=None)
+    query_params: SearchTypeEsriRestserverQueryParams = field()
     
 
 @dataclass
 class SearchTypeEsriRestserverResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

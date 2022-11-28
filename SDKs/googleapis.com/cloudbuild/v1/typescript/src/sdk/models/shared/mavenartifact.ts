@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MavenArtifact
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A Maven artifact to upload to Artifact Registry upon successful completion of all build steps.
 **/
 export class MavenArtifact extends SpeakeasyBase {
-  @Metadata({ data: "json, name=artifactId" })
+  @SpeakeasyMetadata({ data: "json, name=artifactId" })
   artifactId?: string;
 
-  @Metadata({ data: "json, name=groupId" })
+  @SpeakeasyMetadata({ data: "json, name=groupId" })
   groupId?: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 
-  @Metadata({ data: "json, name=repository" })
+  @SpeakeasyMetadata({ data: "json, name=repository" })
   repository?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

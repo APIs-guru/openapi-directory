@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AlsblRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(AlsblRequestBodyCertificateParameters, _super);
@@ -30,11 +30,11 @@ var AlsblRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=RefNo" }),
+        SpeakeasyMetadata({ data: "json, name=RefNo" }),
         __metadata("design:type", String)
     ], AlsblRequestBodyCertificateParameters.prototype, "refNo", void 0);
     __decorate([
-        Metadata({ data: "json, name=TokenNo" }),
+        SpeakeasyMetadata({ data: "json, name=TokenNo" }),
         __metadata("design:type", String)
     ], AlsblRequestBodyCertificateParameters.prototype, "tokenNo", void 0);
     return AlsblRequestBodyCertificateParameters;
@@ -50,19 +50,19 @@ var AlsblRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", AlsblRequestBodyCertificateParameters)
     ], AlsblRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], AlsblRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], AlsblRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], AlsblRequestBody.prototype, "txnId", void 0);
     return AlsblRequestBody;
@@ -74,32 +74,16 @@ var AlsblSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], AlsblSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], AlsblSecurity.prototype, "clientId", void 0);
     return AlsblSecurity;
 }(SpeakeasyBase));
 export { AlsblSecurity };
-var AlsblRequest = /** @class */ (function (_super) {
-    __extends(AlsblRequest, _super);
-    function AlsblRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", AlsblRequestBody)
-    ], AlsblRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", AlsblSecurity)
-    ], AlsblRequest.prototype, "security", void 0);
-    return AlsblRequest;
-}(SpeakeasyBase));
-export { AlsblRequest };
 export var Alsbl400ApplicationJsonErrorEnum;
 (function (Alsbl400ApplicationJsonErrorEnum) {
     Alsbl400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -122,11 +106,11 @@ var Alsbl400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Alsbl400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Alsbl400ApplicationJson.prototype, "errorDescription", void 0);
     return Alsbl400ApplicationJson;
@@ -148,11 +132,11 @@ var Alsbl401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Alsbl401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Alsbl401ApplicationJson.prototype, "errorDescription", void 0);
     return Alsbl401ApplicationJson;
@@ -174,11 +158,11 @@ var Alsbl404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Alsbl404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Alsbl404ApplicationJson.prototype, "errorDescription", void 0);
     return Alsbl404ApplicationJson;
@@ -198,11 +182,11 @@ var Alsbl500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Alsbl500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Alsbl500ApplicationJson.prototype, "errorDescription", void 0);
     return Alsbl500ApplicationJson;
@@ -222,11 +206,11 @@ var Alsbl502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Alsbl502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Alsbl502ApplicationJson.prototype, "errorDescription", void 0);
     return Alsbl502ApplicationJson;
@@ -246,11 +230,11 @@ var Alsbl503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Alsbl503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Alsbl503ApplicationJson.prototype, "errorDescription", void 0);
     return Alsbl503ApplicationJson;
@@ -270,55 +254,71 @@ var Alsbl504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Alsbl504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Alsbl504ApplicationJson.prototype, "errorDescription", void 0);
     return Alsbl504ApplicationJson;
 }(SpeakeasyBase));
 export { Alsbl504ApplicationJson };
+var AlsblRequest = /** @class */ (function (_super) {
+    __extends(AlsblRequest, _super);
+    function AlsblRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", AlsblRequestBody)
+    ], AlsblRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", AlsblSecurity)
+    ], AlsblRequest.prototype, "security", void 0);
+    return AlsblRequest;
+}(SpeakeasyBase));
+export { AlsblRequest };
 var AlsblResponse = /** @class */ (function (_super) {
     __extends(AlsblResponse, _super);
     function AlsblResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AlsblResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AlsblResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Alsbl400ApplicationJson)
     ], AlsblResponse.prototype, "alsbl400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Alsbl401ApplicationJson)
     ], AlsblResponse.prototype, "alsbl401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Alsbl404ApplicationJson)
     ], AlsblResponse.prototype, "alsbl404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Alsbl500ApplicationJson)
     ], AlsblResponse.prototype, "alsbl500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Alsbl502ApplicationJson)
     ], AlsblResponse.prototype, "alsbl502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Alsbl503ApplicationJson)
     ], AlsblResponse.prototype, "alsbl503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Alsbl504ApplicationJson)
     ], AlsblResponse.prototype, "alsbl504ApplicationJsonObject", void 0);
     return AlsblResponse;

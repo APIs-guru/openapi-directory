@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeletePlacementGroupActionEnum(str, Enum):
     DELETE_PLACEMENT_GROUP = "DeletePlacementGroup"
@@ -10,10 +14,10 @@ class GetDeletePlacementGroupVersionEnum(str, Enum):
 
 @dataclass
 class GetDeletePlacementGroupQueryParams:
-    action: GetDeletePlacementGroupActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDeletePlacementGroupActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    group_name: str = field(metadata={'query_param': { 'field_name': 'GroupName', 'style': 'form', 'explode': True }})
+    version: GetDeletePlacementGroupVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
-    group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'GroupName', 'style': 'form', 'explode': True }})
-    version: GetDeletePlacementGroupVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,12 +33,12 @@ class GetDeletePlacementGroupHeaders:
 
 @dataclass
 class GetDeletePlacementGroupRequest:
-    query_params: GetDeletePlacementGroupQueryParams = field(default=None)
-    headers: GetDeletePlacementGroupHeaders = field(default=None)
+    headers: GetDeletePlacementGroupHeaders = field()
+    query_params: GetDeletePlacementGroupQueryParams = field()
     
 
 @dataclass
 class GetDeletePlacementGroupResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

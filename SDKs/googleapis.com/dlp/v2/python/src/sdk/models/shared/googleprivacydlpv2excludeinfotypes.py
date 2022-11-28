@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleprivacydlpv2infotype
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GooglePrivacyDlpV2ExcludeInfoTypes:
-    info_types: Optional[List[googleprivacydlpv2infotype.GooglePrivacyDlpV2InfoType]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'infoTypes' }})
+    r"""GooglePrivacyDlpV2ExcludeInfoTypes
+    List of excluded infoTypes.
+    """
+    
+    info_types: Optional[List[GooglePrivacyDlpV2InfoType]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('infoTypes') }})
     

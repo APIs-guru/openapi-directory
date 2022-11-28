@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LandlordDetailsModel
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Landlord Details
 **/
 export class LandlordDetailsModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Address" })
+  @SpeakeasyMetadata({ data: "json, name=Address" })
   address?: string;
 
-  @Metadata({ data: "json, name=Email" })
+  @SpeakeasyMetadata({ data: "json, name=Email" })
   email?: string;
 
-  @Metadata({ data: "json, name=GlobalReference" })
+  @SpeakeasyMetadata({ data: "json, name=GlobalReference" })
   globalReference?: string;
 
-  @Metadata({ data: "json, name=ID" })
+  @SpeakeasyMetadata({ data: "json, name=ID" })
   id?: string;
 
-  @Metadata({ data: "json, name=Mobile" })
+  @SpeakeasyMetadata({ data: "json, name=Mobile" })
   mobile?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Phone" })
+  @SpeakeasyMetadata({ data: "json, name=Phone" })
   phone?: string;
 }

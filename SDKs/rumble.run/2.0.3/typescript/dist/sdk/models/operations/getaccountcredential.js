@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetAccountCredentialPathParams = /** @class */ (function (_super) {
     __extends(GetAccountCredentialPathParams, _super);
@@ -30,7 +30,7 @@ var GetAccountCredentialPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=credential_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=credential_id" }),
         __metadata("design:type", String)
     ], GetAccountCredentialPathParams.prototype, "credentialId", void 0);
     return GetAccountCredentialPathParams;
@@ -42,7 +42,7 @@ var GetAccountCredentialSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], GetAccountCredentialSecurity.prototype, "bearerAuth", void 0);
     return GetAccountCredentialSecurity;
@@ -54,11 +54,11 @@ var GetAccountCredentialRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAccountCredentialPathParams)
     ], GetAccountCredentialRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAccountCredentialSecurity)
     ], GetAccountCredentialRequest.prototype, "security", void 0);
     return GetAccountCredentialRequest;
@@ -70,15 +70,15 @@ var GetAccountCredentialResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAccountCredentialResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.Credential)
     ], GetAccountCredentialResponse.prototype, "credential", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAccountCredentialResponse.prototype, "statusCode", void 0);
     return GetAccountCredentialResponse;

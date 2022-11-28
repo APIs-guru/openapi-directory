@@ -22,9 +22,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CatalogConfiguration } from "./catalogconfiguration";
+import { CustomArtifactConfiguration } from "./customartifactconfiguration";
 import { DeployAsApplicationConfiguration } from "./deployasapplicationconfiguration";
 import { ZeppelinMonitoringConfiguration } from "./zeppelinmonitoringconfiguration";
 // ZeppelinApplicationConfiguration
@@ -37,19 +37,19 @@ var ZeppelinApplicationConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CatalogConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=CatalogConfiguration" }),
         __metadata("design:type", CatalogConfiguration)
     ], ZeppelinApplicationConfiguration.prototype, "catalogConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=CustomArtifactsConfiguration", elemType: shared.CustomArtifactConfiguration }),
+        SpeakeasyMetadata({ data: "json, name=CustomArtifactsConfiguration", elemType: CustomArtifactConfiguration }),
         __metadata("design:type", Array)
     ], ZeppelinApplicationConfiguration.prototype, "customArtifactsConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeployAsApplicationConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=DeployAsApplicationConfiguration" }),
         __metadata("design:type", DeployAsApplicationConfiguration)
     ], ZeppelinApplicationConfiguration.prototype, "deployAsApplicationConfiguration", void 0);
     __decorate([
-        Metadata({ data: "json, name=MonitoringConfiguration" }),
+        SpeakeasyMetadata({ data: "json, name=MonitoringConfiguration" }),
         __metadata("design:type", ZeppelinMonitoringConfiguration)
     ], ZeppelinApplicationConfiguration.prototype, "monitoringConfiguration", void 0);
     return ZeppelinApplicationConfiguration;

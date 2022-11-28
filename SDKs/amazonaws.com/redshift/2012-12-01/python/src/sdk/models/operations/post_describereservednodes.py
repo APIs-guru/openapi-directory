@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostDescribeReservedNodesActionEnum(str, Enum):
     DESCRIBE_RESERVED_NODES = "DescribeReservedNodes"
@@ -10,10 +14,10 @@ class PostDescribeReservedNodesVersionEnum(str, Enum):
 
 @dataclass
 class PostDescribeReservedNodesQueryParams:
-    action: PostDescribeReservedNodesActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: PostDescribeReservedNodesActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostDescribeReservedNodesVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
-    version: PostDescribeReservedNodesVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,14 +33,14 @@ class PostDescribeReservedNodesHeaders:
 
 @dataclass
 class PostDescribeReservedNodesRequest:
-    query_params: PostDescribeReservedNodesQueryParams = field(default=None)
-    headers: PostDescribeReservedNodesHeaders = field(default=None)
+    headers: PostDescribeReservedNodesHeaders = field()
+    query_params: PostDescribeReservedNodesQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostDescribeReservedNodesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

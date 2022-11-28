@@ -13,11 +13,6 @@ type SearchProductsCodesRequestBody struct {
 	ProductCodes []string `json:"productCodes,omitempty"`
 }
 
-type SearchProductsCodesRequest struct {
-	Headers SearchProductsCodesHeaders
-	Request *SearchProductsCodesRequestBody `request:"mediaType=application/json"`
-}
-
 type SearchProductsCodes200ApplicationJSONData struct {
 	Admission                     *string                     `json:"admission,omitempty"`
 	BookingEngineID               *shared.BookingEngineIDEnum `json:"bookingEngineId,omitempty"`
@@ -77,6 +72,11 @@ type SearchProductsCodes200ApplicationJSON struct {
 	Success          *bool                                       `json:"success,omitempty"`
 	TotalCount       *int64                                      `json:"totalCount,omitempty"`
 	Vmid             *string                                     `json:"vmid,omitempty"`
+}
+
+type SearchProductsCodesRequest struct {
+	Headers SearchProductsCodesHeaders
+	Request *SearchProductsCodesRequestBody `request:"mediaType=application/json"`
 }
 
 type SearchProductsCodesResponse struct {

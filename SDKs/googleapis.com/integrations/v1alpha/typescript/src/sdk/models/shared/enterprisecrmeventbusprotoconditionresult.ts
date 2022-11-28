@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // EnterpriseCrmEventbusProtoConditionResult
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the combined condition calculation results.
 **/
 export class EnterpriseCrmEventbusProtoConditionResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currentTaskNumber" })
+  @SpeakeasyMetadata({ data: "json, name=currentTaskNumber" })
   currentTaskNumber?: string;
 
-  @Metadata({ data: "json, name=nextTaskNumber" })
+  @SpeakeasyMetadata({ data: "json, name=nextTaskNumber" })
   nextTaskNumber?: string;
 
-  @Metadata({ data: "json, name=result" })
+  @SpeakeasyMetadata({ data: "json, name=result" })
   result?: boolean;
 }

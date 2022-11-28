@@ -33,6 +33,8 @@ const (
 	CaseStateEnumClosed                  CaseStateEnum = "CLOSED"
 )
 
+// Case
+// A support case.
 type Case struct {
 	Classification           *CaseClassification `json:"classification,omitempty"`
 	CreateTime               *string             `json:"createTime,omitempty"`
@@ -48,4 +50,20 @@ type Case struct {
 	TestCase                 *bool               `json:"testCase,omitempty"`
 	TimeZone                 *string             `json:"timeZone,omitempty"`
 	UpdateTime               *string             `json:"updateTime,omitempty"`
+}
+
+// CaseInput
+// A support case.
+type CaseInput struct {
+	Classification           *CaseClassification `json:"classification,omitempty"`
+	Creator                  *ActorInput         `json:"creator,omitempty"`
+	Description              *string             `json:"description,omitempty"`
+	DisplayName              *string             `json:"displayName,omitempty"`
+	Escalated                *bool               `json:"escalated,omitempty"`
+	Name                     *string             `json:"name,omitempty"`
+	Priority                 *CasePriorityEnum   `json:"priority,omitempty"`
+	Severity                 *CaseSeverityEnum   `json:"severity,omitempty"`
+	SubscriberEmailAddresses []string            `json:"subscriberEmailAddresses,omitempty"`
+	TestCase                 *bool               `json:"testCase,omitempty"`
+	TimeZone                 *string             `json:"timeZone,omitempty"`
 }

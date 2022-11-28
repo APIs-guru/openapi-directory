@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudContactcenterinsightsV1CallAnnotation } from "./googlecloudcontactcenterinsightsv1callannotation";
 import { GoogleCloudContactcenterinsightsV1Entity } from "./googlecloudcontactcenterinsightsv1entity";
 import { GoogleCloudContactcenterinsightsV1Intent } from "./googlecloudcontactcenterinsightsv1intent";
@@ -8,26 +7,27 @@ import { GoogleCloudContactcenterinsightsV1PhraseMatchData } from "./googlecloud
 import { GoogleCloudContactcenterinsightsV1ConversationLevelSentiment } from "./googlecloudcontactcenterinsightsv1conversationlevelsentiment";
 
 
+
 // GoogleCloudContactcenterinsightsV1AnalysisResultCallAnalysisMetadata
 /** 
  * Call-specific metadata created during analysis.
 **/
 export class GoogleCloudContactcenterinsightsV1AnalysisResultCallAnalysisMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=annotations", elemType: shared.GoogleCloudContactcenterinsightsV1CallAnnotation })
+  @SpeakeasyMetadata({ data: "json, name=annotations", elemType: GoogleCloudContactcenterinsightsV1CallAnnotation })
   annotations?: GoogleCloudContactcenterinsightsV1CallAnnotation[];
 
-  @Metadata({ data: "json, name=entities", elemType: shared.GoogleCloudContactcenterinsightsV1Entity })
+  @SpeakeasyMetadata({ data: "json, name=entities", elemType: GoogleCloudContactcenterinsightsV1Entity })
   entities?: Map<string, GoogleCloudContactcenterinsightsV1Entity>;
 
-  @Metadata({ data: "json, name=intents", elemType: shared.GoogleCloudContactcenterinsightsV1Intent })
+  @SpeakeasyMetadata({ data: "json, name=intents", elemType: GoogleCloudContactcenterinsightsV1Intent })
   intents?: Map<string, GoogleCloudContactcenterinsightsV1Intent>;
 
-  @Metadata({ data: "json, name=issueModelResult" })
+  @SpeakeasyMetadata({ data: "json, name=issueModelResult" })
   issueModelResult?: GoogleCloudContactcenterinsightsV1IssueModelResult;
 
-  @Metadata({ data: "json, name=phraseMatchers", elemType: shared.GoogleCloudContactcenterinsightsV1PhraseMatchData })
+  @SpeakeasyMetadata({ data: "json, name=phraseMatchers", elemType: GoogleCloudContactcenterinsightsV1PhraseMatchData })
   phraseMatchers?: Map<string, GoogleCloudContactcenterinsightsV1PhraseMatchData>;
 
-  @Metadata({ data: "json, name=sentiments", elemType: shared.GoogleCloudContactcenterinsightsV1ConversationLevelSentiment })
+  @SpeakeasyMetadata({ data: "json, name=sentiments", elemType: GoogleCloudContactcenterinsightsV1ConversationLevelSentiment })
   sentiments?: GoogleCloudContactcenterinsightsV1ConversationLevelSentiment[];
 }

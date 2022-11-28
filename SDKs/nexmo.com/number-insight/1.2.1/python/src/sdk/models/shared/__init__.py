@@ -8,5 +8,8 @@ from .niresponsejsonadvancedroamingunknown import *
 from .niresponsejsonadvancedsync import *
 from .niresponsejsonbasic import *
 from .niresponsejsonstandard import *
+from .niresponsexmladvanced import *
+from .niresponsexmlbasic import *
+from .niresponsexmlstandard import *
 from .niroaming import *
 from .security import *

@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PutSetupV1AppointmentsIdReassignResourceResourceIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=resourceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=resourceId" })
   resourceId: string;
 }
 
 
 export class PutSetupV1AppointmentsIdReassignResourceResourceIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PutSetupV1AppointmentsIdReassignResourceResourceIdPathParams;
 }
 
 
 export class PutSetupV1AppointmentsIdReassignResourceResourceIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   appointmentViewModel?: shared.AppointmentViewModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

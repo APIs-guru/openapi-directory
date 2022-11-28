@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Branch } from "./branch";
+
 
 
 // ListBranchesResult
@@ -8,9 +8,9 @@ import { Branch } from "./branch";
  *  The result structure for the list branches request. 
 **/
 export class ListBranchesResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=branches", elemType: shared.Branch })
+  @SpeakeasyMetadata({ data: "json, name=branches", elemType: Branch })
   branches: Branch[];
 
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 }

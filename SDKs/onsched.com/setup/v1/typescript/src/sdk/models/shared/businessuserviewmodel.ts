@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class BusinessUserViewModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=businessName" })
+  @SpeakeasyMetadata({ data: "json, name=businessName" })
   businessName?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=identityAccount" })
+  @SpeakeasyMetadata({ data: "json, name=identityAccount" })
   identityAccount?: boolean;
 
-  @Metadata({ data: "json, name=locationId" })
+  @SpeakeasyMetadata({ data: "json, name=locationId" })
   locationId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=objectName" })
+  @SpeakeasyMetadata({ data: "json, name=objectName" })
   objectName?: string;
 
-  @Metadata({ data: "json, name=resourceId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=resourceName" })
+  @SpeakeasyMetadata({ data: "json, name=resourceName" })
   resourceName?: string;
 
-  @Metadata({ data: "json, name=role" })
+  @SpeakeasyMetadata({ data: "json, name=role" })
   role?: string;
 }

@@ -5,10 +5,6 @@ type SetHTMLUsingPostQueryParams struct {
 	PadID *string `queryParam:"style=form,explode=true,name=padID"`
 }
 
-type SetHTMLUsingPostRequest struct {
-	QueryParams SetHTMLUsingPostQueryParams
-}
-
 type SetHTMLUsingPost200ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
@@ -31,6 +27,10 @@ type SetHTMLUsingPost500ApplicationJSON struct {
 	Code    *int64                 `json:"code,omitempty"`
 	Data    map[string]interface{} `json:"data,omitempty"`
 	Message *string                `json:"message,omitempty"`
+}
+
+type SetHTMLUsingPostRequest struct {
+	QueryParams SetHTMLUsingPostQueryParams
 }
 
 type SetHTMLUsingPostResponse struct {

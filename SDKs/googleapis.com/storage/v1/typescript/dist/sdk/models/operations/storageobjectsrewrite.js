@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var StorageObjectsRewritePathParams = /** @class */ (function (_super) {
     __extends(StorageObjectsRewritePathParams, _super);
@@ -30,19 +30,19 @@ var StorageObjectsRewritePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=destinationBucket" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=destinationBucket" }),
         __metadata("design:type", String)
     ], StorageObjectsRewritePathParams.prototype, "destinationBucket", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=destinationObject" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=destinationObject" }),
         __metadata("design:type", String)
     ], StorageObjectsRewritePathParams.prototype, "destinationObject", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=sourceBucket" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sourceBucket" }),
         __metadata("design:type", String)
     ], StorageObjectsRewritePathParams.prototype, "sourceBucket", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=sourceObject" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sourceObject" }),
         __metadata("design:type", String)
     ], StorageObjectsRewritePathParams.prototype, "sourceObject", void 0);
     return StorageObjectsRewritePathParams;
@@ -68,95 +68,95 @@ var StorageObjectsRewriteQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=destinationKmsKeyName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=destinationKmsKeyName" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "destinationKmsKeyName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=destinationPredefinedAcl" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=destinationPredefinedAcl" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "destinationPredefinedAcl", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ifGenerationMatch" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ifGenerationMatch" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "ifGenerationMatch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ifGenerationNotMatch" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ifGenerationNotMatch" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "ifGenerationNotMatch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ifMetagenerationMatch" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ifMetagenerationMatch" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "ifMetagenerationMatch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ifMetagenerationNotMatch" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ifMetagenerationNotMatch" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "ifMetagenerationNotMatch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ifSourceGenerationMatch" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ifSourceGenerationMatch" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "ifSourceGenerationMatch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ifSourceGenerationNotMatch" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ifSourceGenerationNotMatch" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "ifSourceGenerationNotMatch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ifSourceMetagenerationMatch" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ifSourceMetagenerationMatch" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "ifSourceMetagenerationMatch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ifSourceMetagenerationNotMatch" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ifSourceMetagenerationNotMatch" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "ifSourceMetagenerationNotMatch", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxBytesRewrittenPerCall" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxBytesRewrittenPerCall" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "maxBytesRewrittenPerCall", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], StorageObjectsRewriteQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=projection" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=projection" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "projection", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=rewriteToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=rewriteToken" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "rewriteToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sourceGeneration" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sourceGeneration" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "sourceGeneration", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "userIp", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userProject" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userProject" }),
         __metadata("design:type", String)
     ], StorageObjectsRewriteQueryParams.prototype, "userProject", void 0);
     return StorageObjectsRewriteQueryParams;
@@ -168,11 +168,11 @@ var StorageObjectsRewriteSecurityOption1 = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], StorageObjectsRewriteSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], StorageObjectsRewriteSecurityOption1.prototype, "oauth2c", void 0);
     return StorageObjectsRewriteSecurityOption1;
@@ -184,11 +184,11 @@ var StorageObjectsRewriteSecurityOption2 = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], StorageObjectsRewriteSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], StorageObjectsRewriteSecurityOption2.prototype, "oauth2c", void 0);
     return StorageObjectsRewriteSecurityOption2;
@@ -200,11 +200,11 @@ var StorageObjectsRewriteSecurityOption3 = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], StorageObjectsRewriteSecurityOption3.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], StorageObjectsRewriteSecurityOption3.prototype, "oauth2c", void 0);
     return StorageObjectsRewriteSecurityOption3;
@@ -216,15 +216,15 @@ var StorageObjectsRewriteSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", StorageObjectsRewriteSecurityOption1)
     ], StorageObjectsRewriteSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", StorageObjectsRewriteSecurityOption2)
     ], StorageObjectsRewriteSecurity.prototype, "option2", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", StorageObjectsRewriteSecurityOption3)
     ], StorageObjectsRewriteSecurity.prototype, "option3", void 0);
     return StorageObjectsRewriteSecurity;
@@ -236,19 +236,19 @@ var StorageObjectsRewriteRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageObjectsRewritePathParams)
     ], StorageObjectsRewriteRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageObjectsRewriteQueryParams)
     ], StorageObjectsRewriteRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.Object)
     ], StorageObjectsRewriteRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StorageObjectsRewriteSecurity)
     ], StorageObjectsRewriteRequest.prototype, "security", void 0);
     return StorageObjectsRewriteRequest;
@@ -260,15 +260,15 @@ var StorageObjectsRewriteResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StorageObjectsRewriteResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.RewriteResponse)
     ], StorageObjectsRewriteResponse.prototype, "rewriteResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StorageObjectsRewriteResponse.prototype, "statusCode", void 0);
     return StorageObjectsRewriteResponse;

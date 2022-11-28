@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GkeMasterInfo
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * For display only. Metadata associated with a Google Kubernetes Engine (GKE) cluster master.
 **/
 export class GkeMasterInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterNetworkUri" })
+  @SpeakeasyMetadata({ data: "json, name=clusterNetworkUri" })
   clusterNetworkUri?: string;
 
-  @Metadata({ data: "json, name=clusterUri" })
+  @SpeakeasyMetadata({ data: "json, name=clusterUri" })
   clusterUri?: string;
 
-  @Metadata({ data: "json, name=externalIp" })
+  @SpeakeasyMetadata({ data: "json, name=externalIp" })
   externalIp?: string;
 
-  @Metadata({ data: "json, name=internalIp" })
+  @SpeakeasyMetadata({ data: "json, name=internalIp" })
   internalIp?: string;
 }

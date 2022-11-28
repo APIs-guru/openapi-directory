@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3beta1BatchDeleteTestCasesRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The request message for TestCases.BatchDeleteTestCases.
 **/
 export class GoogleCloudDialogflowCxV3beta1BatchDeleteTestCasesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=names" })
+  @SpeakeasyMetadata({ data: "json, name=names" })
   names?: string[];
 }

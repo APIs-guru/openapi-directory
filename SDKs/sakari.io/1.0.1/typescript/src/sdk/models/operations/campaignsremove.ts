@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class CampaignsRemovePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=accountId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accountId" })
   accountId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=campaignId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=campaignId" })
   campaignId: string;
 }
 
 
 export class CampaignsRemoveSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   sakariAuth: shared.SchemeSakariAuth;
 }
 
 
-export class CampaignsRemoveRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: CampaignsRemovePathParams;
-
-  @Metadata()
-  security: CampaignsRemoveSecurity;
-}
-
-
 export class CampaignsRemove200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: boolean;
 }
 
 
+export class CampaignsRemoveRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: CampaignsRemovePathParams;
+
+  @SpeakeasyMetadata()
+  security: CampaignsRemoveSecurity;
+}
+
+
 export class CampaignsRemoveResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   campaignsRemove200ApplicationJsonObject?: CampaignsRemove200ApplicationJson;
 }

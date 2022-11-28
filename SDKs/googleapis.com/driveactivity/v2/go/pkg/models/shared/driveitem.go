@@ -1,5 +1,7 @@
 package shared
 
+// DriveItem
+// A Drive item, such as a file or folder.
 type DriveItem struct {
 	DriveFile   map[string]interface{} `json:"driveFile,omitempty"`
 	DriveFolder *DriveFolder           `json:"driveFolder,omitempty"`

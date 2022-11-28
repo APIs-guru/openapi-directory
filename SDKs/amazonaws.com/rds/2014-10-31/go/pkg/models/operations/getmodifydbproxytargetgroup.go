@@ -6,6 +6,8 @@ const (
 	GetModifyDbProxyTargetGroupActionEnumModifyDbProxyTargetGroup GetModifyDbProxyTargetGroupActionEnum = "ModifyDBProxyTargetGroup"
 )
 
+// GetModifyDbProxyTargetGroupConnectionPoolConfig
+// Specifies the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTargetGroup</code>.
 type GetModifyDbProxyTargetGroupConnectionPoolConfig struct {
 	ConnectionBorrowTimeout   *int64   `queryParam:"name=ConnectionBorrowTimeout"`
 	InitQuery                 *string  `queryParam:"name=InitQuery"`

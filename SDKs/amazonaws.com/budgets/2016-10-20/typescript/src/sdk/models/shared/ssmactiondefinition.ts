@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionSubTypeEnum } from "./actionsubtypeenum";
+
 
 
 // SsmActionDefinition
@@ -7,12 +8,12 @@ import { ActionSubTypeEnum } from "./actionsubtypeenum";
  *  The AWS Systems Manager (SSM) action definition details. 
 **/
 export class SsmActionDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ActionSubType" })
+  @SpeakeasyMetadata({ data: "json, name=ActionSubType" })
   actionSubType: ActionSubTypeEnum;
 
-  @Metadata({ data: "json, name=InstanceIds" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceIds" })
   instanceIds: string[];
 
-  @Metadata({ data: "json, name=Region" })
+  @SpeakeasyMetadata({ data: "json, name=Region" })
   region: string;
 }

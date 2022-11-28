@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EcTotalsByCandidate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=candidate_id" })
+  @SpeakeasyMetadata({ data: "json, name=candidate_id" })
   candidateId?: string;
 
-  @Metadata({ data: "json, name=cycle" })
+  @SpeakeasyMetadata({ data: "json, name=cycle" })
   cycle?: number;
 
-  @Metadata({ data: "json, name=total" })
+  @SpeakeasyMetadata({ data: "json, name=total" })
   total?: number;
 }

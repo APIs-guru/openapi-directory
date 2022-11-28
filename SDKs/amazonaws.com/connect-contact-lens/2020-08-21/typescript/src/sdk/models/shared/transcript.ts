@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IssueDetected } from "./issuedetected";
 import { SentimentValueEnum } from "./sentimentvalueenum";
+
 
 
 // Transcript
@@ -9,27 +9,27 @@ import { SentimentValueEnum } from "./sentimentvalueenum";
  * A list of messages in the session.
 **/
 export class Transcript extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BeginOffsetMillis" })
+  @SpeakeasyMetadata({ data: "json, name=BeginOffsetMillis" })
   beginOffsetMillis: number;
 
-  @Metadata({ data: "json, name=Content" })
+  @SpeakeasyMetadata({ data: "json, name=Content" })
   content: string;
 
-  @Metadata({ data: "json, name=EndOffsetMillis" })
+  @SpeakeasyMetadata({ data: "json, name=EndOffsetMillis" })
   endOffsetMillis: number;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: string;
 
-  @Metadata({ data: "json, name=IssuesDetected", elemType: shared.IssueDetected })
+  @SpeakeasyMetadata({ data: "json, name=IssuesDetected", elemType: IssueDetected })
   issuesDetected?: IssueDetected[];
 
-  @Metadata({ data: "json, name=ParticipantId" })
+  @SpeakeasyMetadata({ data: "json, name=ParticipantId" })
   participantId: string;
 
-  @Metadata({ data: "json, name=ParticipantRole" })
+  @SpeakeasyMetadata({ data: "json, name=ParticipantRole" })
   participantRole: string;
 
-  @Metadata({ data: "json, name=Sentiment" })
+  @SpeakeasyMetadata({ data: "json, name=Sentiment" })
   sentiment: SentimentValueEnum;
 }

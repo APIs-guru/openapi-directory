@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AssignedInventorySource
@@ -6,12 +7,22 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An assignment between a targetable inventory source and an inventory source group.
 **/
 export class AssignedInventorySource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=assignedInventorySourceId" })
+  @SpeakeasyMetadata({ data: "json, name=assignedInventorySourceId" })
   assignedInventorySourceId?: string;
 
-  @Metadata({ data: "json, name=inventorySourceId" })
+  @SpeakeasyMetadata({ data: "json, name=inventorySourceId" })
   inventorySourceId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
+}
+
+
+// AssignedInventorySourceInput
+/** 
+ * An assignment between a targetable inventory source and an inventory source group.
+**/
+export class AssignedInventorySourceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=inventorySourceId" })
+  inventorySourceId?: string;
 }

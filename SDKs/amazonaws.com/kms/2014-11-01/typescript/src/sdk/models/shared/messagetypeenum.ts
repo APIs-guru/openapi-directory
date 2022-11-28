@@ -1,6 +1,7 @@
 
 
+
 export enum MessageTypeEnum {
-    Raw = "RAW"
-,    Digest = "DIGEST"
+    Raw = "RAW",
+    Digest = "DIGEST"
 }

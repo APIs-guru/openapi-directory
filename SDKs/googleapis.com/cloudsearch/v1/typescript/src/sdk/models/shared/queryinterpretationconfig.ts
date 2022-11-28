@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // QueryInterpretationConfig
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Default options to interpret user query.
 **/
 export class QueryInterpretationConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=forceDisableSupplementalResults" })
+  @SpeakeasyMetadata({ data: "json, name=forceDisableSupplementalResults" })
   forceDisableSupplementalResults?: boolean;
 
-  @Metadata({ data: "json, name=forceVerbatimMode" })
+  @SpeakeasyMetadata({ data: "json, name=forceVerbatimMode" })
   forceVerbatimMode?: boolean;
 }

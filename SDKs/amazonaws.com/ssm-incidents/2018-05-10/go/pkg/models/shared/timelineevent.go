@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TimelineEvent
+// A significant event that happened during the incident.
 type TimelineEvent struct {
 	EventData         string    `json:"eventData"`
 	EventID           string    `json:"eventId"`

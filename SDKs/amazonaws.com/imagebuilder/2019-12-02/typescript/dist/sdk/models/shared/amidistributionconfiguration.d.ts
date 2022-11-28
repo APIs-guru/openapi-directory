@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LaunchPermissionConfiguration } from "./launchpermissionconfiguration";
 /**
  *  Define and configure the output AMIs of the pipeline.

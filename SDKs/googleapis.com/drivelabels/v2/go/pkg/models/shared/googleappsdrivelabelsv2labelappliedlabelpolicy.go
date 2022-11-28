@@ -9,6 +9,8 @@ const (
 	GoogleAppsDriveLabelsV2LabelAppliedLabelPolicyCopyModeEnumCopyAppliable       GoogleAppsDriveLabelsV2LabelAppliedLabelPolicyCopyModeEnum = "COPY_APPLIABLE"
 )
 
+// GoogleAppsDriveLabelsV2LabelAppliedLabelPolicy
+// Behavior of this label when it's applied to Drive items.
 type GoogleAppsDriveLabelsV2LabelAppliedLabelPolicy struct {
 	CopyMode *GoogleAppsDriveLabelsV2LabelAppliedLabelPolicyCopyModeEnum `json:"copyMode,omitempty"`
 }

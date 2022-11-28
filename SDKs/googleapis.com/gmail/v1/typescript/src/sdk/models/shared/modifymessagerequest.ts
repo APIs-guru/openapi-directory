@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ModifyMessageRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=addLabelIds" })
+  @SpeakeasyMetadata({ data: "json, name=addLabelIds" })
   addLabelIds?: string[];
 
-  @Metadata({ data: "json, name=removeLabelIds" })
+  @SpeakeasyMetadata({ data: "json, name=removeLabelIds" })
   removeLabelIds?: string[];
 }

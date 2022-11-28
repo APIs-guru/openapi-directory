@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostAuthorizeSecurityGroupEgressActionEnum(str, Enum):
     AUTHORIZE_SECURITY_GROUP_EGRESS = "AuthorizeSecurityGroupEgress"
@@ -10,8 +14,8 @@ class PostAuthorizeSecurityGroupEgressVersionEnum(str, Enum):
 
 @dataclass
 class PostAuthorizeSecurityGroupEgressQueryParams:
-    action: PostAuthorizeSecurityGroupEgressActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostAuthorizeSecurityGroupEgressVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostAuthorizeSecurityGroupEgressActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostAuthorizeSecurityGroupEgressVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostAuthorizeSecurityGroupEgressHeaders:
 
 @dataclass
 class PostAuthorizeSecurityGroupEgressRequest:
-    query_params: PostAuthorizeSecurityGroupEgressQueryParams = field(default=None)
-    headers: PostAuthorizeSecurityGroupEgressHeaders = field(default=None)
+    headers: PostAuthorizeSecurityGroupEgressHeaders = field()
+    query_params: PostAuthorizeSecurityGroupEgressQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostAuthorizeSecurityGroupEgressResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

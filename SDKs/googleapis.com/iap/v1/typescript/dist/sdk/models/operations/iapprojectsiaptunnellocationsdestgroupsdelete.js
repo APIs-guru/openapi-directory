@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var IapProjectsIapTunnelLocationsDestGroupsDeletePathParams = /** @class */ (function (_super) {
     __extends(IapProjectsIapTunnelLocationsDestGroupsDeletePathParams, _super);
@@ -30,7 +30,7 @@ var IapProjectsIapTunnelLocationsDestGroupsDeletePathParams = /** @class */ (fun
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=name" }),
         __metadata("design:type", String)
     ], IapProjectsIapTunnelLocationsDestGroupsDeletePathParams.prototype, "name", void 0);
     return IapProjectsIapTunnelLocationsDestGroupsDeletePathParams;
@@ -42,47 +42,47 @@ var IapProjectsIapTunnelLocationsDestGroupsDeleteQueryParams = /** @class */ (fu
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
         __metadata("design:type", String)
     ], IapProjectsIapTunnelLocationsDestGroupsDeleteQueryParams.prototype, "dollarXgafv", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
         __metadata("design:type", String)
     ], IapProjectsIapTunnelLocationsDestGroupsDeleteQueryParams.prototype, "accessToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], IapProjectsIapTunnelLocationsDestGroupsDeleteQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=callback" }),
         __metadata("design:type", String)
     ], IapProjectsIapTunnelLocationsDestGroupsDeleteQueryParams.prototype, "callback", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], IapProjectsIapTunnelLocationsDestGroupsDeleteQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], IapProjectsIapTunnelLocationsDestGroupsDeleteQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], IapProjectsIapTunnelLocationsDestGroupsDeleteQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], IapProjectsIapTunnelLocationsDestGroupsDeleteQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], IapProjectsIapTunnelLocationsDestGroupsDeleteQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
         __metadata("design:type", String)
     ], IapProjectsIapTunnelLocationsDestGroupsDeleteQueryParams.prototype, "uploadType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
         __metadata("design:type", String)
     ], IapProjectsIapTunnelLocationsDestGroupsDeleteQueryParams.prototype, "uploadProtocol", void 0);
     return IapProjectsIapTunnelLocationsDestGroupsDeleteQueryParams;
@@ -94,11 +94,11 @@ var IapProjectsIapTunnelLocationsDestGroupsDeleteSecurity = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], IapProjectsIapTunnelLocationsDestGroupsDeleteSecurity.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], IapProjectsIapTunnelLocationsDestGroupsDeleteSecurity.prototype, "oauth2c", void 0);
     return IapProjectsIapTunnelLocationsDestGroupsDeleteSecurity;
@@ -110,15 +110,15 @@ var IapProjectsIapTunnelLocationsDestGroupsDeleteRequest = /** @class */ (functi
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", IapProjectsIapTunnelLocationsDestGroupsDeletePathParams)
     ], IapProjectsIapTunnelLocationsDestGroupsDeleteRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", IapProjectsIapTunnelLocationsDestGroupsDeleteQueryParams)
     ], IapProjectsIapTunnelLocationsDestGroupsDeleteRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", IapProjectsIapTunnelLocationsDestGroupsDeleteSecurity)
     ], IapProjectsIapTunnelLocationsDestGroupsDeleteRequest.prototype, "security", void 0);
     return IapProjectsIapTunnelLocationsDestGroupsDeleteRequest;
@@ -130,15 +130,15 @@ var IapProjectsIapTunnelLocationsDestGroupsDeleteResponse = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], IapProjectsIapTunnelLocationsDestGroupsDeleteResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], IapProjectsIapTunnelLocationsDestGroupsDeleteResponse.prototype, "empty", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], IapProjectsIapTunnelLocationsDestGroupsDeleteResponse.prototype, "statusCode", void 0);
     return IapProjectsIapTunnelLocationsDestGroupsDeleteResponse;

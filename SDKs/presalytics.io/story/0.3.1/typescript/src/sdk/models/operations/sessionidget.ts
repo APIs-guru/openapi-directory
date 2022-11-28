@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SessionIdGetPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=session_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=session_id" })
   sessionId: string;
 }
 
 
 export class SessionIdGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=include_relationships" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=include_relationships" })
   includeRelationships?: boolean;
 }
 
 
 export class SessionIdGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: SessionIdGetPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SessionIdGetQueryParams;
 }
 
 
 export class SessionIdGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetail?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   session?: shared.Session;
 }

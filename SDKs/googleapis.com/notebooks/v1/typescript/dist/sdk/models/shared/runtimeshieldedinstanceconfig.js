@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // RuntimeShieldedInstanceConfig
 /**
  * A set of Shielded Instance options. Check [Images using supported Shielded VM features](https://cloud.google.com/compute/docs/instances/modifying-shielded-vm). Not all combinations are valid.
@@ -33,15 +33,15 @@ var RuntimeShieldedInstanceConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=enableIntegrityMonitoring" }),
+        SpeakeasyMetadata({ data: "json, name=enableIntegrityMonitoring" }),
         __metadata("design:type", Boolean)
     ], RuntimeShieldedInstanceConfig.prototype, "enableIntegrityMonitoring", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableSecureBoot" }),
+        SpeakeasyMetadata({ data: "json, name=enableSecureBoot" }),
         __metadata("design:type", Boolean)
     ], RuntimeShieldedInstanceConfig.prototype, "enableSecureBoot", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableVtpm" }),
+        SpeakeasyMetadata({ data: "json, name=enableVtpm" }),
         __metadata("design:type", Boolean)
     ], RuntimeShieldedInstanceConfig.prototype, "enableVtpm", void 0);
     return RuntimeShieldedInstanceConfig;

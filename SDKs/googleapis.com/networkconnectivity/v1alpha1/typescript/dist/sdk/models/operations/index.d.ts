@@ -1,5 +1,7 @@
 export * from "./networkconnectivityprojectslocationsglobalhubscreate";
 export * from "./networkconnectivityprojectslocationsglobalhubslist";
+export * from "./networkconnectivityprojectslocationsinternalrangescreate";
+export * from "./networkconnectivityprojectslocationsinternalrangeslist";
 export * from "./networkconnectivityprojectslocationslist";
 export * from "./networkconnectivityprojectslocationsoperationscancel";
 export * from "./networkconnectivityprojectslocationsoperationslist";

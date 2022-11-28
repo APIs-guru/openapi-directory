@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // VpcConfig
 /**
  * If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and two subnet IDs.
@@ -33,15 +33,15 @@ var VpcConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=assignPublicIp" }),
+        SpeakeasyMetadata({ data: "json, name=assignPublicIp" }),
         __metadata("design:type", Boolean)
     ], VpcConfig.prototype, "assignPublicIp", void 0);
     __decorate([
-        Metadata({ data: "json, name=securityGroups" }),
+        SpeakeasyMetadata({ data: "json, name=securityGroups" }),
         __metadata("design:type", Array)
     ], VpcConfig.prototype, "securityGroups", void 0);
     __decorate([
-        Metadata({ data: "json, name=subnets" }),
+        SpeakeasyMetadata({ data: "json, name=subnets" }),
         __metadata("design:type", Array)
     ], VpcConfig.prototype, "subnets", void 0);
     return VpcConfig;

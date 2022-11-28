@@ -1,59 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetProfileLoginPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=loginId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=loginId" })
   loginId: number;
 }
 
 
-export class GetProfileLoginSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
-  personalAccessToken: shared.SchemePersonalAccessToken;
-}
-
-
-export class GetProfileLoginSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth: shared.SchemeOauth;
-}
-
-
 export class GetProfileLoginSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetProfileLoginSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  personalAccessToken?: shared.SchemePersonalAccessToken;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetProfileLoginSecurityOption2;
-}
-
-
-export class GetProfileLoginRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetProfileLoginPathParams;
-
-  @Metadata()
-  security: GetProfileLoginSecurity;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth?: shared.SchemeOauth;
 }
 
 
 export class GetProfileLoginDefaultApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=errors", elemType: shared.ErrorObject })
+  @SpeakeasyMetadata({ data: "json, name=errors", elemType: shared.ErrorObject })
   errors?: shared.ErrorObject[];
 }
 
 
+export class GetProfileLoginRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetProfileLoginPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetProfileLoginSecurity;
+}
+
+
 export class GetProfileLoginResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   login?: shared.Login;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getProfileLoginDefaultApplicationJsonObject?: GetProfileLoginDefaultApplicationJson;
 }

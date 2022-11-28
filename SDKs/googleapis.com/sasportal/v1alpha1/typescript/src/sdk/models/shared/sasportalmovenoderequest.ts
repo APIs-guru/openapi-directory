@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SasPortalMoveNodeRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for MoveNode.
 **/
 export class SasPortalMoveNodeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=destination" })
+  @SpeakeasyMetadata({ data: "json, name=destination" })
   destination?: string;
 }

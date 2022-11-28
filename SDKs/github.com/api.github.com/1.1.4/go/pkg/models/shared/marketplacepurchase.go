@@ -19,6 +19,8 @@ type MarketplacePurchaseMarketplacePurchase struct {
 	UpdatedAt       *string                 `json:"updated_at,omitempty"`
 }
 
+// MarketplacePurchase
+// Marketplace Purchase
 type MarketplacePurchase struct {
 	ID                       int64                                        `json:"id"`
 	Login                    string                                       `json:"login"`

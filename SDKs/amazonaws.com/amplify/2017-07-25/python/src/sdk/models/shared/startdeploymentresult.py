@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import jobsummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class StartDeploymentResult:
-    job_summary: jobsummary.JobSummary = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobSummary' }})
+    r"""StartDeploymentResult
+     The result structure for the start a deployment request. 
+    """
+    
+    job_summary: JobSummary = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobSummary') }})
     

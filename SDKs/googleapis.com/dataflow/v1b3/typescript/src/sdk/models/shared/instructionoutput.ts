@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InstructionOutput
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An output of an instruction.
 **/
 export class InstructionOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=codec" })
+  @SpeakeasyMetadata({ data: "json, name=codec" })
   codec?: Map<string, any>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=onlyCountKeyBytes" })
+  @SpeakeasyMetadata({ data: "json, name=onlyCountKeyBytes" })
   onlyCountKeyBytes?: boolean;
 
-  @Metadata({ data: "json, name=onlyCountValueBytes" })
+  @SpeakeasyMetadata({ data: "json, name=onlyCountValueBytes" })
   onlyCountValueBytes?: boolean;
 
-  @Metadata({ data: "json, name=originalName" })
+  @SpeakeasyMetadata({ data: "json, name=originalName" })
   originalName?: string;
 
-  @Metadata({ data: "json, name=systemName" })
+  @SpeakeasyMetadata({ data: "json, name=systemName" })
   systemName?: string;
 }

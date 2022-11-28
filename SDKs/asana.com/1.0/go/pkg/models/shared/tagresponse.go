@@ -32,3 +32,9 @@ type TagResponse struct {
 	ResourceType *string               `json:"resource_type,omitempty"`
 	Workspace    *WorkspaceCompact     `json:"workspace,omitempty"`
 }
+
+type TagResponseInput struct {
+	Color     *TagResponseColorEnum  `json:"color,omitempty"`
+	Name      *string                `json:"name,omitempty"`
+	Workspace *WorkspaceCompactInput `json:"workspace,omitempty"`
+}

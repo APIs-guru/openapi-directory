@@ -1,22 +1,22 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FreeBusyCalendar } from "./freebusycalendar";
 import { FreeBusyGroup } from "./freebusygroup";
 
 
+
 export class FreeBusyResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=calendars", elemType: shared.FreeBusyCalendar })
+  @SpeakeasyMetadata({ data: "json, name=calendars", elemType: FreeBusyCalendar })
   calendars?: Map<string, FreeBusyCalendar>;
 
-  @Metadata({ data: "json, name=groups", elemType: shared.FreeBusyGroup })
+  @SpeakeasyMetadata({ data: "json, name=groups", elemType: FreeBusyGroup })
   groups?: Map<string, FreeBusyGroup>;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=timeMax" })
+  @SpeakeasyMetadata({ data: "json, name=timeMax" })
   timeMax?: Date;
 
-  @Metadata({ data: "json, name=timeMin" })
+  @SpeakeasyMetadata({ data: "json, name=timeMin" })
   timeMin?: Date;
 }

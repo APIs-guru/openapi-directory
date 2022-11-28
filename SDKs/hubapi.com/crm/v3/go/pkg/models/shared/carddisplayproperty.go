@@ -14,6 +14,8 @@ const (
 	CardDisplayPropertyDataTypeEnumStatus   CardDisplayPropertyDataTypeEnum = "STATUS"
 )
 
+// CardDisplayProperty
+// Definition for a card display property.
 type CardDisplayProperty struct {
 	DataType CardDisplayPropertyDataTypeEnum `json:"dataType"`
 	Label    string                          `json:"label"`

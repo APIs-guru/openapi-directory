@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class ResumePromotionPathParams:
-    promotion_id: str = field(default=None, metadata={'path_param': { 'field_name': 'promotion_id', 'style': 'simple', 'explode': False }})
+    promotion_id: str = field(metadata={'path_param': { 'field_name': 'promotion_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ResumePromotionSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ResumePromotionRequest:
-    path_params: ResumePromotionPathParams = field(default=None)
-    security: ResumePromotionSecurity = field(default=None)
+    path_params: ResumePromotionPathParams = field()
+    security: ResumePromotionSecurity = field()
     
 
 @dataclass
 class ResumePromotionResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

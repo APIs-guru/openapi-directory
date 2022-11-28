@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import workerpool
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListWorkerPoolsResponse:
-    worker_pools: Optional[List[workerpool.WorkerPool]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workerPools' }})
+    r"""ListWorkerPoolsResponse
+    Response containing existing `WorkerPools`.
+    """
+    
+    worker_pools: Optional[List[WorkerPool]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workerPools') }})
     

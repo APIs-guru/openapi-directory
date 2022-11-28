@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -23,29 +27,29 @@ class TestAuthorizationHeaders:
 @dataclass_json
 @dataclass
 class TestAuthorizationRequestBody:
-    auth_infos: List[shared.AuthInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authInfos' }})
-    cognito_identity_pool_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cognitoIdentityPoolId' }})
-    policy_names_to_add: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policyNamesToAdd' }})
-    policy_names_to_skip: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policyNamesToSkip' }})
-    principal: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'principal' }})
+    auth_infos: List[shared.AuthInfo] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('authInfos') }})
+    cognito_identity_pool_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cognitoIdentityPoolId') }})
+    policy_names_to_add: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policyNamesToAdd') }})
+    policy_names_to_skip: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policyNamesToSkip') }})
+    principal: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('principal') }})
     
 
 @dataclass
 class TestAuthorizationRequest:
-    query_params: TestAuthorizationQueryParams = field(default=None)
-    headers: TestAuthorizationHeaders = field(default=None)
-    request: TestAuthorizationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: TestAuthorizationHeaders = field()
+    query_params: TestAuthorizationQueryParams = field()
+    request: TestAuthorizationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class TestAuthorizationResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     test_authorization_response: Optional[shared.TestAuthorizationResponse] = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)

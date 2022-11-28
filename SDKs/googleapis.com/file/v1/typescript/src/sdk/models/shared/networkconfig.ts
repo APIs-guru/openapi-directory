@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum NetworkConfigConnectModeEnum {
-    ConnectModeUnspecified = "CONNECT_MODE_UNSPECIFIED"
-,    DirectPeering = "DIRECT_PEERING"
-,    PrivateServiceAccess = "PRIVATE_SERVICE_ACCESS"
+    ConnectModeUnspecified = "CONNECT_MODE_UNSPECIFIED",
+    DirectPeering = "DIRECT_PEERING",
+    PrivateServiceAccess = "PRIVATE_SERVICE_ACCESS"
 }
 
 export enum NetworkConfigModesEnum {
-    AddressModeUnspecified = "ADDRESS_MODE_UNSPECIFIED"
-,    ModeIpv4 = "MODE_IPV4"
+    AddressModeUnspecified = "ADDRESS_MODE_UNSPECIFIED",
+    ModeIpv4 = "MODE_IPV4"
 }
 
 
@@ -17,18 +18,37 @@ export enum NetworkConfigModesEnum {
  * Network configuration for the instance.
 **/
 export class NetworkConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=connectMode" })
+  @SpeakeasyMetadata({ data: "json, name=connectMode" })
   connectMode?: NetworkConfigConnectModeEnum;
 
-  @Metadata({ data: "json, name=ipAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddresses" })
   ipAddresses?: string[];
 
-  @Metadata({ data: "json, name=modes" })
+  @SpeakeasyMetadata({ data: "json, name=modes" })
   modes?: NetworkConfigModesEnum[];
 
-  @Metadata({ data: "json, name=network" })
+  @SpeakeasyMetadata({ data: "json, name=network" })
   network?: string;
 
-  @Metadata({ data: "json, name=reservedIpRange" })
+  @SpeakeasyMetadata({ data: "json, name=reservedIpRange" })
+  reservedIpRange?: string;
+}
+
+
+// NetworkConfigInput
+/** 
+ * Network configuration for the instance.
+**/
+export class NetworkConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=connectMode" })
+  connectMode?: NetworkConfigConnectModeEnum;
+
+  @SpeakeasyMetadata({ data: "json, name=modes" })
+  modes?: NetworkConfigModesEnum[];
+
+  @SpeakeasyMetadata({ data: "json, name=network" })
+  network?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=reservedIpRange" })
   reservedIpRange?: string;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ImageVersion } from "./imageversion";
 /**
  * The ImageVersions in a project and location.

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ContainerStatusEnum } from "./containerstatusenum";
 /**
  * This section describes operations that you can perform on an AWS Elemental MediaStore container.

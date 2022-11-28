@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class VirtualMeterCalculateFormulaGetQueryParams:
-    formula: str = field(default=None, metadata={'query_param': { 'field_name': 'formula', 'style': 'form', 'explode': True }})
+    formula: str = field(metadata={'query_param': { 'field_name': 'formula', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class VirtualMeterCalculateFormulaGetRequest:
-    query_params: VirtualMeterCalculateFormulaGetQueryParams = field(default=None)
+    query_params: VirtualMeterCalculateFormulaGetQueryParams = field()
     
 
 @dataclass
 class VirtualMeterCalculateFormulaGetResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     device: Optional[shared.Device] = field(default=None)
-    status_code: int = field(default=None)
     

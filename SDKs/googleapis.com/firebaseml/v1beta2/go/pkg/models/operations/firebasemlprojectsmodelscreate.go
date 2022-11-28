@@ -30,7 +30,7 @@ type FirebasemlProjectsModelsCreateSecurity struct {
 type FirebasemlProjectsModelsCreateRequest struct {
 	PathParams  FirebasemlProjectsModelsCreatePathParams
 	QueryParams FirebasemlProjectsModelsCreateQueryParams
-	Request     *shared.Model `request:"mediaType=application/json"`
+	Request     *shared.ModelInput `request:"mediaType=application/json"`
 	Security    FirebasemlProjectsModelsCreateSecurity
 }
 

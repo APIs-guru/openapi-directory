@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googleprivacydlpv2jobtrigger
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
-class GooglePrivacyDlpV2CreateJobTriggerRequest:
-    job_trigger: Optional[googleprivacydlpv2jobtrigger.GooglePrivacyDlpV2JobTrigger] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobTrigger' }})
-    location_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locationId' }})
-    trigger_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'triggerId' }})
+class GooglePrivacyDlpV2CreateJobTriggerRequestInput:
+    r"""GooglePrivacyDlpV2CreateJobTriggerRequestInput
+    Request message for CreateJobTrigger.
+    """
+    
+    job_trigger: Optional[GooglePrivacyDlpV2JobTriggerInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobTrigger') }})
+    location_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('locationId') }})
+    trigger_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('triggerId') }})
     

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RelatedResource } from "./relatedresource";
+
 
 
 // RelatedResources
@@ -8,6 +8,6 @@ import { RelatedResource } from "./relatedresource";
  * The related resources of the primary resource.
 **/
 export class RelatedResources extends SpeakeasyBase {
-  @Metadata({ data: "json, name=relatedResources", elemType: shared.RelatedResource })
+  @SpeakeasyMetadata({ data: "json, name=relatedResources", elemType: RelatedResource })
   relatedResources?: RelatedResource[];
 }

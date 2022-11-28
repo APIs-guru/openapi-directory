@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IpOwner
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about the registered owner of an IP address.
 **/
 export class IpOwner extends SpeakeasyBase {
-  @Metadata({ data: "json, name=asn" })
+  @SpeakeasyMetadata({ data: "json, name=asn" })
   asn?: string;
 
-  @Metadata({ data: "json, name=asnOrg" })
+  @SpeakeasyMetadata({ data: "json, name=asnOrg" })
   asnOrg?: string;
 
-  @Metadata({ data: "json, name=isp" })
+  @SpeakeasyMetadata({ data: "json, name=isp" })
   isp?: string;
 
-  @Metadata({ data: "json, name=org" })
+  @SpeakeasyMetadata({ data: "json, name=org" })
   org?: string;
 }

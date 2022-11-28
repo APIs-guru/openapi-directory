@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDatalabelingV1beta1FeedbackMessage
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A feedback message inside a feedback thread.
 **/
 export class GoogleCloudDatalabelingV1beta1FeedbackMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=operatorFeedbackMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=operatorFeedbackMetadata" })
   operatorFeedbackMetadata?: Map<string, any>;
 
-  @Metadata({ data: "json, name=requesterFeedbackMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=requesterFeedbackMetadata" })
   requesterFeedbackMetadata?: Map<string, any>;
 }

@@ -3,9 +3,10 @@ package shared
 type ReauthSettingsMethodEnum string
 
 const (
-	ReauthSettingsMethodEnumMethodUnspecified ReauthSettingsMethodEnum = "METHOD_UNSPECIFIED"
-	ReauthSettingsMethodEnumLogin             ReauthSettingsMethodEnum = "LOGIN"
-	ReauthSettingsMethodEnumSecureKey         ReauthSettingsMethodEnum = "SECURE_KEY"
+	ReauthSettingsMethodEnumMethodUnspecified     ReauthSettingsMethodEnum = "METHOD_UNSPECIFIED"
+	ReauthSettingsMethodEnumLogin                 ReauthSettingsMethodEnum = "LOGIN"
+	ReauthSettingsMethodEnumSecureKey             ReauthSettingsMethodEnum = "SECURE_KEY"
+	ReauthSettingsMethodEnumEnrolledSecondFactors ReauthSettingsMethodEnum = "ENROLLED_SECOND_FACTORS"
 )
 
 type ReauthSettingsPolicyTypeEnum string
@@ -16,6 +17,8 @@ const (
 	ReauthSettingsPolicyTypeEnumDefault               ReauthSettingsPolicyTypeEnum = "DEFAULT"
 )
 
+// ReauthSettings
+// Configuration for IAP reauthentication policies.
 type ReauthSettings struct {
 	MaxAge     *string                       `json:"maxAge,omitempty"`
 	Method     *ReauthSettingsMethodEnum     `json:"method,omitempty"`

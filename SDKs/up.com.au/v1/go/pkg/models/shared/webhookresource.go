@@ -27,6 +27,8 @@ type WebhookResourceRelationships struct {
 	Logs WebhookResourceRelationshipsLogs `json:"logs"`
 }
 
+// WebhookResource
+// Provides information about a webhook.
 type WebhookResource struct {
 	Attributes    WebhookResourceAttributes    `json:"attributes"`
 	ID            string                       `json:"id"`

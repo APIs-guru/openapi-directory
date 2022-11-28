@@ -1,19 +1,19 @@
-import { AxiosInstance, AxiosRequestConfig } from "axios";
-import * as operations from "./models/operations";
-declare type OptsFunc = (sdk: SDK) => void;
+import { AxiosInstance } from "axios";
+import { Locations } from "./locations";
+import { PlaceActionTypeMetadata } from "./placeactiontypemetadata";
+type OptsFunc = (sdk: SDK) => void;
+export declare const ServerList: readonly ["https://mybusinessplaceactions.googleapis.com/"];
 export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
 export declare function WithClient(client: AxiosInstance): OptsFunc;
 export declare class SDK {
-    defaultClient?: AxiosInstance;
-    securityClient?: AxiosInstance;
-    security?: any;
-    serverURL: string;
+    locations: Locations;
+    placeActionTypeMetadata: PlaceActionTypeMetadata;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    private _language;
+    private _sdkVersion;
+    private _genVersion;
     constructor(...opts: OptsFunc[]);
-    MybusinessplaceactionsLocationsPlaceActionLinksCreate(req: operations.MybusinessplaceactionsLocationsPlaceActionLinksCreateRequest, config?: AxiosRequestConfig): Promise<operations.MybusinessplaceactionsLocationsPlaceActionLinksCreateResponse>;
-    MybusinessplaceactionsLocationsPlaceActionLinksDelete(req: operations.MybusinessplaceactionsLocationsPlaceActionLinksDeleteRequest, config?: AxiosRequestConfig): Promise<operations.MybusinessplaceactionsLocationsPlaceActionLinksDeleteResponse>;
-    MybusinessplaceactionsLocationsPlaceActionLinksGet(req: operations.MybusinessplaceactionsLocationsPlaceActionLinksGetRequest, config?: AxiosRequestConfig): Promise<operations.MybusinessplaceactionsLocationsPlaceActionLinksGetResponse>;
-    MybusinessplaceactionsLocationsPlaceActionLinksList(req: operations.MybusinessplaceactionsLocationsPlaceActionLinksListRequest, config?: AxiosRequestConfig): Promise<operations.MybusinessplaceactionsLocationsPlaceActionLinksListResponse>;
-    MybusinessplaceactionsLocationsPlaceActionLinksPatch(req: operations.MybusinessplaceactionsLocationsPlaceActionLinksPatchRequest, config?: AxiosRequestConfig): Promise<operations.MybusinessplaceactionsLocationsPlaceActionLinksPatchResponse>;
-    MybusinessplaceactionsPlaceActionTypeMetadataList(req: operations.MybusinessplaceactionsPlaceActionTypeMetadataListRequest, config?: AxiosRequestConfig): Promise<operations.MybusinessplaceactionsPlaceActionTypeMetadataListResponse>;
 }
 export {};

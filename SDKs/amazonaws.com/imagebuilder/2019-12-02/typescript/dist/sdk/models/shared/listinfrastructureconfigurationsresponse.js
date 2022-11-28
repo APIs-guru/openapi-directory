@@ -22,23 +22,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { InfrastructureConfigurationSummary } from "./infrastructureconfigurationsummary";
 var ListInfrastructureConfigurationsResponse = /** @class */ (function (_super) {
     __extends(ListInfrastructureConfigurationsResponse, _super);
     function ListInfrastructureConfigurationsResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=infrastructureConfigurationSummaryList", elemType: shared.InfrastructureConfigurationSummary }),
+        SpeakeasyMetadata({ data: "json, name=infrastructureConfigurationSummaryList", elemType: InfrastructureConfigurationSummary }),
         __metadata("design:type", Array)
     ], ListInfrastructureConfigurationsResponse.prototype, "infrastructureConfigurationSummaryList", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], ListInfrastructureConfigurationsResponse.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=requestId" }),
+        SpeakeasyMetadata({ data: "json, name=requestId" }),
         __metadata("design:type", String)
     ], ListInfrastructureConfigurationsResponse.prototype, "requestId", void 0);
     return ListInfrastructureConfigurationsResponse;

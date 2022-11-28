@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Observation } from "./observation";
+
 
 
 // RelatedObservations
@@ -8,6 +8,6 @@ import { Observation } from "./observation";
  * Describes observations related to the problem.
 **/
 export class RelatedObservations extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ObservationList", elemType: shared.Observation })
+  @SpeakeasyMetadata({ data: "json, name=ObservationList", elemType: Observation })
   observationList?: Observation[];
 }

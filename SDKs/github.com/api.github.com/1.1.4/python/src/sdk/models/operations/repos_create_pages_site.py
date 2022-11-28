@@ -1,13 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class ReposCreatePagesSitePathParams:
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 class ReposCreatePagesSiteRequestBodySourcePathEnum(str, Enum):
     ROOT_ = "/"
@@ -17,33 +19,41 @@ class ReposCreatePagesSiteRequestBodySourcePathEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ReposCreatePagesSiteRequestBodySource:
-    branch: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branch' }})
-    path: Optional[ReposCreatePagesSiteRequestBodySourcePathEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'path' }})
+    r"""ReposCreatePagesSiteRequestBodySource
+    The source branch and directory used to publish your Pages site.
+    """
+    
+    branch: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('branch') }})
+    path: Optional[ReposCreatePagesSiteRequestBodySourcePathEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('path') }})
     
 
 @dataclass_json
 @dataclass
 class ReposCreatePagesSiteRequestBody:
-    source: ReposCreatePagesSiteRequestBodySource = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
+    r"""ReposCreatePagesSiteRequestBody
+    The source branch and directory used to publish your Pages site.
+    """
     
-
-@dataclass
-class ReposCreatePagesSiteRequest:
-    path_params: ReposCreatePagesSitePathParams = field(default=None)
-    request: Optional[ReposCreatePagesSiteRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    source: ReposCreatePagesSiteRequestBodySource = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
     
 
 @dataclass_json
 @dataclass
 class ReposCreatePagesSite415ApplicationJSON:
-    documentation_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'documentation_url' }})
-    message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
+    documentation_url: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('documentation_url') }})
+    message: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('message') }})
+    
+
+@dataclass
+class ReposCreatePagesSiteRequest:
+    path_params: ReposCreatePagesSitePathParams = field()
+    request: Optional[ReposCreatePagesSiteRequestBody] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ReposCreatePagesSiteResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     page: Optional[shared.Page] = field(default=None)
     repos_create_pages_site_415_application_json_object: Optional[ReposCreatePagesSite415ApplicationJSON] = field(default=None)

@@ -18,17 +18,17 @@ type UpdatePostRequestBody struct {
 	Type        string   `multipartForm:"name=type"`
 }
 
-type UpdatePostRequest struct {
-	PathParams UpdatePostPathParams
-	Request    UpdatePostRequestBody `request:"mediaType=multipart/form-data"`
-}
-
 type UpdatePost200ApplicationJSON struct {
 	Identifier    *string           `json:"identifier,omitempty"`
 	Message       *string           `json:"message,omitempty"`
 	PreferenceKey *string           `json:"preference_key,omitempty"`
 	Result        *string           `json:"result,omitempty"`
 	Session       map[string]string `json:"session,omitempty"`
+}
+
+type UpdatePostRequest struct {
+	PathParams UpdatePostPathParams
+	Request    UpdatePostRequestBody `request:"mediaType=multipart/form-data"`
 }
 
 type UpdatePostResponse struct {

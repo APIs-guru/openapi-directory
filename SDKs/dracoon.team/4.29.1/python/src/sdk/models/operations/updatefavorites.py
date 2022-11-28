@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from sdk.models import shared
 
@@ -10,13 +13,13 @@ class UpdateFavoritesHeaders:
 
 @dataclass
 class UpdateFavoritesRequest:
-    headers: UpdateFavoritesHeaders = field(default=None)
-    request: shared.UpdateFavoritesBulkRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateFavoritesHeaders = field()
+    request: shared.UpdateFavoritesBulkRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateFavoritesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -22,80 +22,81 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ReplicationStatusType } from "./replicationstatustype";
 import { RotationRulesType } from "./rotationrulestype";
+import { Tag } from "./tag";
 var DescribeSecretResponse = /** @class */ (function (_super) {
     __extends(DescribeSecretResponse, _super);
     function DescribeSecretResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ARN" }),
+        SpeakeasyMetadata({ data: "json, name=ARN" }),
         __metadata("design:type", String)
     ], DescribeSecretResponse.prototype, "arn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CreatedDate" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedDate" }),
         __metadata("design:type", Date)
     ], DescribeSecretResponse.prototype, "createdDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=DeletedDate" }),
+        SpeakeasyMetadata({ data: "json, name=DeletedDate" }),
         __metadata("design:type", Date)
     ], DescribeSecretResponse.prototype, "deletedDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], DescribeSecretResponse.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=KmsKeyId" }),
+        SpeakeasyMetadata({ data: "json, name=KmsKeyId" }),
         __metadata("design:type", String)
     ], DescribeSecretResponse.prototype, "kmsKeyId", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastAccessedDate" }),
+        SpeakeasyMetadata({ data: "json, name=LastAccessedDate" }),
         __metadata("design:type", Date)
     ], DescribeSecretResponse.prototype, "lastAccessedDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastChangedDate" }),
+        SpeakeasyMetadata({ data: "json, name=LastChangedDate" }),
         __metadata("design:type", Date)
     ], DescribeSecretResponse.prototype, "lastChangedDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastRotatedDate" }),
+        SpeakeasyMetadata({ data: "json, name=LastRotatedDate" }),
         __metadata("design:type", Date)
     ], DescribeSecretResponse.prototype, "lastRotatedDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], DescribeSecretResponse.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=OwningService" }),
+        SpeakeasyMetadata({ data: "json, name=OwningService" }),
         __metadata("design:type", String)
     ], DescribeSecretResponse.prototype, "owningService", void 0);
     __decorate([
-        Metadata({ data: "json, name=PrimaryRegion" }),
+        SpeakeasyMetadata({ data: "json, name=PrimaryRegion" }),
         __metadata("design:type", String)
     ], DescribeSecretResponse.prototype, "primaryRegion", void 0);
     __decorate([
-        Metadata({ data: "json, name=ReplicationStatus", elemType: shared.ReplicationStatusType }),
+        SpeakeasyMetadata({ data: "json, name=ReplicationStatus", elemType: ReplicationStatusType }),
         __metadata("design:type", Array)
     ], DescribeSecretResponse.prototype, "replicationStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=RotationEnabled" }),
+        SpeakeasyMetadata({ data: "json, name=RotationEnabled" }),
         __metadata("design:type", Boolean)
     ], DescribeSecretResponse.prototype, "rotationEnabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=RotationLambdaARN" }),
+        SpeakeasyMetadata({ data: "json, name=RotationLambdaARN" }),
         __metadata("design:type", String)
     ], DescribeSecretResponse.prototype, "rotationLambdaArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=RotationRules" }),
+        SpeakeasyMetadata({ data: "json, name=RotationRules" }),
         __metadata("design:type", RotationRulesType)
     ], DescribeSecretResponse.prototype, "rotationRules", void 0);
     __decorate([
-        Metadata({ data: "json, name=Tags", elemType: shared.Tag }),
+        SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag }),
         __metadata("design:type", Array)
     ], DescribeSecretResponse.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=VersionIdsToStages" }),
+        SpeakeasyMetadata({ data: "json, name=VersionIdsToStages" }),
         __metadata("design:type", Map)
     ], DescribeSecretResponse.prototype, "versionIdsToStages", void 0);
     return DescribeSecretResponse;

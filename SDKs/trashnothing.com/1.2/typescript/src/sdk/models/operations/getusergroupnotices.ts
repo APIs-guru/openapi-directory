@@ -1,26 +1,27 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetUserGroupNoticesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=group_ids" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=group_ids" })
   groupIds?: string;
 }
 
 
 export class GetUserGroupNoticesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetUserGroupNoticesQueryParams;
 }
 
 
 export class GetUserGroupNoticesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.GroupNotice })
+  @SpeakeasyMetadata({ elemType: shared.GroupNotice })
   groupNotices?: shared.GroupNotice[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

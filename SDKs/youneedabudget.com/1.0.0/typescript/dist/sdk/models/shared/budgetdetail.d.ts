@@ -1,0 +1,32 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { Account } from "./account";
+import { Category } from "./category";
+import { CategoryGroup } from "./categorygroup";
+import { CurrencyFormat } from "./currencyformat";
+import { DateFormat } from "./dateformat";
+import { MonthDetail } from "./monthdetail";
+import { PayeeLocation } from "./payeelocation";
+import { Payee } from "./payee";
+import { ScheduledSubTransaction } from "./scheduledsubtransaction";
+import { ScheduledTransactionSummary } from "./scheduledtransactionsummary";
+import { SubTransaction } from "./subtransaction";
+import { TransactionSummary } from "./transactionsummary";
+export declare class BudgetDetail extends SpeakeasyBase {
+    accounts?: Account[];
+    categories?: Category[];
+    categoryGroups?: CategoryGroup[];
+    currencyFormat?: CurrencyFormat;
+    dateFormat?: DateFormat;
+    firstMonth?: Date;
+    id: string;
+    lastModifiedOn?: Date;
+    lastMonth?: Date;
+    months?: MonthDetail[];
+    name: string;
+    payeeLocations?: PayeeLocation[];
+    payees?: Payee[];
+    scheduledSubtransactions?: ScheduledSubTransaction[];
+    scheduledTransactions?: ScheduledTransactionSummary[];
+    subtransactions?: SubTransaction[];
+    transactions?: TransactionSummary[];
+}

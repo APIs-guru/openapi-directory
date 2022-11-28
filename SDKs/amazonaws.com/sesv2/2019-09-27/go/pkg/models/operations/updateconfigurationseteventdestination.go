@@ -19,6 +19,8 @@ type UpdateConfigurationSetEventDestinationHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateConfigurationSetEventDestinationRequestBodyEventDestination
+// An object that defines the event destination. Specifically, it defines which services receive events from emails sent using the configuration set that the event destination is associated with. Also defines the types of events that are sent to the event destination.
 type UpdateConfigurationSetEventDestinationRequestBodyEventDestination struct {
 	CloudWatchDestination      *shared.CloudWatchDestination      `json:"CloudWatchDestination,omitempty"`
 	Enabled                    *bool                              `json:"Enabled,omitempty"`

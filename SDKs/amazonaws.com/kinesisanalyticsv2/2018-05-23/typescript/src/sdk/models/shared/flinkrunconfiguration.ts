@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // FlinkRunConfiguration
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes the starting parameters for a Flink-based Kinesis Data Analytics application.
 **/
 export class FlinkRunConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AllowNonRestoredState" })
+  @SpeakeasyMetadata({ data: "json, name=AllowNonRestoredState" })
   allowNonRestoredState?: boolean;
 }

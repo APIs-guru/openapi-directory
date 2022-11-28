@@ -13,6 +13,8 @@ const (
 	GoogleCloudDocumentaiV1beta3DocumentPageAnchorPageRefLayoutTypeEnumFormField             GoogleCloudDocumentaiV1beta3DocumentPageAnchorPageRefLayoutTypeEnum = "FORM_FIELD"
 )
 
+// GoogleCloudDocumentaiV1beta3DocumentPageAnchorPageRef
+// Represents a weak reference to a page element within a document.
 type GoogleCloudDocumentaiV1beta3DocumentPageAnchorPageRef struct {
 	BoundingPoly *GoogleCloudDocumentaiV1beta3BoundingPoly                            `json:"boundingPoly,omitempty"`
 	Confidence   *float32                                                             `json:"confidence,omitempty"`

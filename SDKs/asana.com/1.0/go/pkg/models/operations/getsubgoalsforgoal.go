@@ -13,13 +13,13 @@ type GetSubgoalsForGoalQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetSubgoalsForGoal200ApplicationJSON struct {
+	Data []shared.GoalCompact `json:"data,omitempty"`
+}
+
 type GetSubgoalsForGoalRequest struct {
 	PathParams  GetSubgoalsForGoalPathParams
 	QueryParams GetSubgoalsForGoalQueryParams
-}
-
-type GetSubgoalsForGoal200ApplicationJSON struct {
-	Data []shared.GoalCompact `json:"data,omitempty"`
 }
 
 type GetSubgoalsForGoalResponse struct {

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CloudRun } from "./cloudrun";
 import { Gke } from "./gke";
 /**

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GroupConfiguration
 /**
  * The deserialized form of the <b>Energy Footprint Update</b> service's request payload.
@@ -33,15 +33,15 @@ var GroupConfiguration = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=co2Emission" }),
+        SpeakeasyMetadata({ data: "json, name=co2Emission" }),
         __metadata("design:type", Number)
     ], GroupConfiguration.prototype, "co2Emission", void 0);
     __decorate([
-        Metadata({ data: "json, name=energyCost" }),
+        SpeakeasyMetadata({ data: "json, name=energyCost" }),
         __metadata("design:type", Number)
     ], GroupConfiguration.prototype, "energyCost", void 0);
     __decorate([
-        Metadata({ data: "json, name=groupNameFilter" }),
+        SpeakeasyMetadata({ data: "json, name=groupNameFilter" }),
         __metadata("design:type", String)
     ], GroupConfiguration.prototype, "groupNameFilter", void 0);
     return GroupConfiguration;

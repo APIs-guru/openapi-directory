@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataExchange } from "./dataexchange";
+
 
 
 // ListDataExchangesResponse
@@ -8,9 +8,9 @@ import { DataExchange } from "./dataexchange";
  * Message for response to the list of data exchanges.
 **/
 export class ListDataExchangesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataExchanges", elemType: shared.DataExchange })
+  @SpeakeasyMetadata({ data: "json, name=dataExchanges", elemType: DataExchange })
   dataExchanges?: DataExchange[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

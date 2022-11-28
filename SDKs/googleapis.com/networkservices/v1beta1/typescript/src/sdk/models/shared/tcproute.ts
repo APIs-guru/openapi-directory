@@ -1,6 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TcpRouteRouteRule } from "./tcprouterouterule";
+
+
+
+// TcpRouteInput
+/** 
+ * TcpRoute is the resource defining how TCP traffic should be routed by a Mesh/Gateway resource.
+**/
+export class TcpRouteInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=description" })
+  description?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=gateways" })
+  gateways?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=meshes" })
+  meshes?: string[];
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: TcpRouteRouteRule })
+  rules?: TcpRouteRouteRule[];
+}
 
 
 // TcpRoute
@@ -8,30 +33,30 @@ import { TcpRouteRouteRule } from "./tcprouterouterule";
  * TcpRoute is the resource defining how TCP traffic should be routed by a Mesh/Gateway resource.
 **/
 export class TcpRoute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=gateways" })
+  @SpeakeasyMetadata({ data: "json, name=gateways" })
   gateways?: string[];
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=meshes" })
+  @SpeakeasyMetadata({ data: "json, name=meshes" })
   meshes?: string[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=rules", elemType: shared.TcpRouteRouteRule })
+  @SpeakeasyMetadata({ data: "json, name=rules", elemType: TcpRouteRouteRule })
   rules?: TcpRouteRouteRule[];
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

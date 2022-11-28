@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // TestWindowSummary
 /**
  * The status, start time, and end time of a backtest, as well as a failure reason if applicable.
@@ -33,19 +33,19 @@ var TestWindowSummary = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Message" }),
+        SpeakeasyMetadata({ data: "json, name=Message" }),
         __metadata("design:type", String)
     ], TestWindowSummary.prototype, "message", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], TestWindowSummary.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=TestWindowEnd" }),
+        SpeakeasyMetadata({ data: "json, name=TestWindowEnd" }),
         __metadata("design:type", Date)
     ], TestWindowSummary.prototype, "testWindowEnd", void 0);
     __decorate([
-        Metadata({ data: "json, name=TestWindowStart" }),
+        SpeakeasyMetadata({ data: "json, name=TestWindowStart" }),
         __metadata("design:type", Date)
     ], TestWindowSummary.prototype, "testWindowStart", void 0);
     return TestWindowSummary;

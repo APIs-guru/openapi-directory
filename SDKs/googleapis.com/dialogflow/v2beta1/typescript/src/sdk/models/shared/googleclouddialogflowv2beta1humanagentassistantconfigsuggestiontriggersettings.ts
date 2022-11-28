@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionTriggerSettings
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Settings of suggestion trigger.
 **/
 export class GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionTriggerSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=noSmallTalk" })
+  @SpeakeasyMetadata({ data: "json, name=noSmallTalk" })
   noSmallTalk?: boolean;
 
-  @Metadata({ data: "json, name=onlyEndUser" })
+  @SpeakeasyMetadata({ data: "json, name=onlyEndUser" })
   onlyEndUser?: boolean;
 }

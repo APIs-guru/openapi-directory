@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// DetectMitigationActionExecution
+//
+//	Describes which mitigation actions should be executed.
 type DetectMitigationActionExecution struct {
 	ActionName         *string                                    `json:"actionName,omitempty"`
 	ErrorCode          *string                                    `json:"errorCode,omitempty"`

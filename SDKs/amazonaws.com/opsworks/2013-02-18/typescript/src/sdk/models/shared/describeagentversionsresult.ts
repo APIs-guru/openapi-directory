@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AgentVersion } from "./agentversion";
+
 
 
 // DescribeAgentVersionsResult
@@ -8,6 +8,6 @@ import { AgentVersion } from "./agentversion";
  * Contains the response to a <code>DescribeAgentVersions</code> request.
 **/
 export class DescribeAgentVersionsResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AgentVersions", elemType: shared.AgentVersion })
+  @SpeakeasyMetadata({ data: "json, name=AgentVersions", elemType: AgentVersion })
   agentVersions?: AgentVersion[];
 }

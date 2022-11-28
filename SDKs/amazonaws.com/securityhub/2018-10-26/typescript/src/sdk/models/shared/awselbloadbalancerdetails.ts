@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsElbLoadBalancerBackendServerDescription } from "./awselbloadbalancerbackendserverdescription";
 import { AwsElbLoadBalancerHealthCheck } from "./awselbloadbalancerhealthcheck";
 import { AwsElbLoadBalancerInstance } from "./awselbloadbalancerinstance";
@@ -9,59 +8,60 @@ import { AwsElbLoadBalancerPolicies } from "./awselbloadbalancerpolicies";
 import { AwsElbLoadBalancerSourceSecurityGroup } from "./awselbloadbalancersourcesecuritygroup";
 
 
+
 // AwsElbLoadBalancerDetails
 /** 
  * Contains details about a Classic Load Balancer.
 **/
 export class AwsElbLoadBalancerDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AvailabilityZones" })
+  @SpeakeasyMetadata({ data: "json, name=AvailabilityZones" })
   availabilityZones?: string[];
 
-  @Metadata({ data: "json, name=BackendServerDescriptions", elemType: shared.AwsElbLoadBalancerBackendServerDescription })
+  @SpeakeasyMetadata({ data: "json, name=BackendServerDescriptions", elemType: AwsElbLoadBalancerBackendServerDescription })
   backendServerDescriptions?: AwsElbLoadBalancerBackendServerDescription[];
 
-  @Metadata({ data: "json, name=CanonicalHostedZoneName" })
+  @SpeakeasyMetadata({ data: "json, name=CanonicalHostedZoneName" })
   canonicalHostedZoneName?: string;
 
-  @Metadata({ data: "json, name=CanonicalHostedZoneNameID" })
+  @SpeakeasyMetadata({ data: "json, name=CanonicalHostedZoneNameID" })
   canonicalHostedZoneNameId?: string;
 
-  @Metadata({ data: "json, name=CreatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedTime" })
   createdTime?: string;
 
-  @Metadata({ data: "json, name=DnsName" })
+  @SpeakeasyMetadata({ data: "json, name=DnsName" })
   dnsName?: string;
 
-  @Metadata({ data: "json, name=HealthCheck" })
+  @SpeakeasyMetadata({ data: "json, name=HealthCheck" })
   healthCheck?: AwsElbLoadBalancerHealthCheck;
 
-  @Metadata({ data: "json, name=Instances", elemType: shared.AwsElbLoadBalancerInstance })
+  @SpeakeasyMetadata({ data: "json, name=Instances", elemType: AwsElbLoadBalancerInstance })
   instances?: AwsElbLoadBalancerInstance[];
 
-  @Metadata({ data: "json, name=ListenerDescriptions", elemType: shared.AwsElbLoadBalancerListenerDescription })
+  @SpeakeasyMetadata({ data: "json, name=ListenerDescriptions", elemType: AwsElbLoadBalancerListenerDescription })
   listenerDescriptions?: AwsElbLoadBalancerListenerDescription[];
 
-  @Metadata({ data: "json, name=LoadBalancerAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=LoadBalancerAttributes" })
   loadBalancerAttributes?: AwsElbLoadBalancerAttributes;
 
-  @Metadata({ data: "json, name=LoadBalancerName" })
+  @SpeakeasyMetadata({ data: "json, name=LoadBalancerName" })
   loadBalancerName?: string;
 
-  @Metadata({ data: "json, name=Policies" })
+  @SpeakeasyMetadata({ data: "json, name=Policies" })
   policies?: AwsElbLoadBalancerPolicies;
 
-  @Metadata({ data: "json, name=Scheme" })
+  @SpeakeasyMetadata({ data: "json, name=Scheme" })
   scheme?: string;
 
-  @Metadata({ data: "json, name=SecurityGroups" })
+  @SpeakeasyMetadata({ data: "json, name=SecurityGroups" })
   securityGroups?: string[];
 
-  @Metadata({ data: "json, name=SourceSecurityGroup" })
+  @SpeakeasyMetadata({ data: "json, name=SourceSecurityGroup" })
   sourceSecurityGroup?: AwsElbLoadBalancerSourceSecurityGroup;
 
-  @Metadata({ data: "json, name=Subnets" })
+  @SpeakeasyMetadata({ data: "json, name=Subnets" })
   subnets?: string[];
 
-  @Metadata({ data: "json, name=VpcId" })
+  @SpeakeasyMetadata({ data: "json, name=VpcId" })
   vpcId?: string;
 }

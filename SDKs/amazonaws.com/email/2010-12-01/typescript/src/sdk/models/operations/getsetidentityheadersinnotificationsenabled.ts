@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetSetIdentityHeadersInNotificationsEnabledActionEnum {
     SetIdentityHeadersInNotificationsEnabled = "SetIdentityHeadersInNotificationsEnabled"
 }
 
 export enum GetSetIdentityHeadersInNotificationsEnabledNotificationTypeEnum {
-    Bounce = "Bounce"
-,    Complaint = "Complaint"
-,    Delivery = "Delivery"
+    Bounce = "Bounce",
+    Complaint = "Complaint",
+    Delivery = "Delivery"
 }
 
 export enum GetSetIdentityHeadersInNotificationsEnabledVersionEnum {
@@ -16,63 +17,63 @@ export enum GetSetIdentityHeadersInNotificationsEnabledVersionEnum {
 
 
 export class GetSetIdentityHeadersInNotificationsEnabledQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" })
   action: GetSetIdentityHeadersInNotificationsEnabledActionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Enabled" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Enabled" })
   enabled: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Identity" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Identity" })
   identity: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=NotificationType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NotificationType" })
   notificationType: GetSetIdentityHeadersInNotificationsEnabledNotificationTypeEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" })
   version: GetSetIdentityHeadersInNotificationsEnabledVersionEnum;
 }
 
 
 export class GetSetIdentityHeadersInNotificationsEnabledHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
 
 export class GetSetIdentityHeadersInNotificationsEnabledRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSetIdentityHeadersInNotificationsEnabledQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetSetIdentityHeadersInNotificationsEnabledHeaders;
 }
 
 
 export class GetSetIdentityHeadersInNotificationsEnabledResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

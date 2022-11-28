@@ -13,13 +13,13 @@ type GetOrganizationExportQueryParams struct {
 	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
+type GetOrganizationExport200ApplicationJSON struct {
+	Data *shared.OrganizationExportResponse `json:"data,omitempty"`
+}
+
 type GetOrganizationExportRequest struct {
 	PathParams  GetOrganizationExportPathParams
 	QueryParams GetOrganizationExportQueryParams
-}
-
-type GetOrganizationExport200ApplicationJSON struct {
-	Data *shared.OrganizationExportResponse `json:"data,omitempty"`
 }
 
 type GetOrganizationExportResponse struct {

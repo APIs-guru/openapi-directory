@@ -10,6 +10,8 @@ const (
 	PolicyComplianceStatusEnumCertificateRequired PolicyComplianceStatusEnum = "CERTIFICATE_REQUIRED"
 )
 
+// PolicyCompliance
+// Policy compliance of the creative for a transaction type or a region.
 type PolicyCompliance struct {
 	Status *PolicyComplianceStatusEnum `json:"status,omitempty"`
 	Topics []PolicyTopicEntry          `json:"topics,omitempty"`

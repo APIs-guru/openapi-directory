@@ -22,30 +22,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var DescribeLunaClientResponse = /** @class */ (function (_super) {
     __extends(DescribeLunaClientResponse, _super);
     function DescribeLunaClientResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Certificate" }),
+        SpeakeasyMetadata({ data: "json, name=Certificate" }),
         __metadata("design:type", String)
     ], DescribeLunaClientResponse.prototype, "certificate", void 0);
     __decorate([
-        Metadata({ data: "json, name=CertificateFingerprint" }),
+        SpeakeasyMetadata({ data: "json, name=CertificateFingerprint" }),
         __metadata("design:type", String)
     ], DescribeLunaClientResponse.prototype, "certificateFingerprint", void 0);
     __decorate([
-        Metadata({ data: "json, name=ClientArn" }),
+        SpeakeasyMetadata({ data: "json, name=ClientArn" }),
         __metadata("design:type", String)
     ], DescribeLunaClientResponse.prototype, "clientArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=Label" }),
+        SpeakeasyMetadata({ data: "json, name=Label" }),
         __metadata("design:type", String)
     ], DescribeLunaClientResponse.prototype, "label", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModifiedTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=LastModifiedTimestamp" }),
         __metadata("design:type", String)
     ], DescribeLunaClientResponse.prototype, "lastModifiedTimestamp", void 0);
     return DescribeLunaClientResponse;

@@ -1,5 +1,7 @@
 package shared
 
+// ApnsChannelResponse
+// Provides information about the status and settings of the APNs (Apple Push Notification service) channel for an application.
 type ApnsChannelResponse struct {
 	ApplicationID               *string `json:"ApplicationId,omitempty"`
 	CreationDate                *string `json:"CreationDate,omitempty"`

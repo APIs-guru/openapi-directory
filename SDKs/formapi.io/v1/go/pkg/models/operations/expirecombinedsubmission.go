@@ -12,11 +12,6 @@ type ExpireCombinedSubmissionSecurity struct {
 	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
-type ExpireCombinedSubmissionRequest struct {
-	PathParams ExpireCombinedSubmissionPathParams
-	Security   ExpireCombinedSubmissionSecurity
-}
-
 type ExpireCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum string
 
 const (
@@ -61,6 +56,11 @@ type ExpireCombinedSubmissionCombinedSubmission struct {
 	SourcePdfs    []interface{}                                       `json:"source_pdfs"`
 	State         ExpireCombinedSubmissionCombinedSubmissionStateEnum `json:"state"`
 	SubmissionIds []string                                            `json:"submission_ids"`
+}
+
+type ExpireCombinedSubmissionRequest struct {
+	PathParams ExpireCombinedSubmissionPathParams
+	Security   ExpireCombinedSubmissionSecurity
 }
 
 type ExpireCombinedSubmissionResponse struct {

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { RepositoryCatalogData } from "./repositorycatalogdata";
 import { Repository } from "./repository";
 export declare class CreateRepositoryResponse extends SpeakeasyBase {

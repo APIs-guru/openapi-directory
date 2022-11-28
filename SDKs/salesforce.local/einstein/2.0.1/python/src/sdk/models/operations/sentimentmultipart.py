@@ -11,18 +11,18 @@ class SentimentMultipartRequests:
 
 @dataclass
 class SentimentMultipartSecurity:
-    bearer_token: shared.SchemeBearerToken = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
+    bearer_token: shared.SchemeBearerToken = field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer' }})
     
 
 @dataclass
 class SentimentMultipartRequest:
+    security: SentimentMultipartSecurity = field()
     request: Optional[SentimentMultipartRequests] = field(default=None)
-    security: SentimentMultipartSecurity = field(default=None)
     
 
 @dataclass
 class SentimentMultipartResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     sentiment_predict_response: Optional[shared.SentimentPredictResponse] = field(default=None)
-    status_code: int = field(default=None)
     

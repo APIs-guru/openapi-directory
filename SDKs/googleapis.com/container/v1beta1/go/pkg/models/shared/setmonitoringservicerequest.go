@@ -1,5 +1,7 @@
 package shared
 
+// SetMonitoringServiceRequest
+// SetMonitoringServiceRequest sets the monitoring service of a cluster.
 type SetMonitoringServiceRequest struct {
 	ClusterID         *string `json:"clusterId,omitempty"`
 	MonitoringService *string `json:"monitoringService,omitempty"`

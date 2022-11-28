@@ -18,14 +18,14 @@ type ActionsListWorkflowRunsForRepoQueryParams struct {
 	Status  *shared.WorkflowRunStatusEnum `queryParam:"style=form,explode=true,name=status"`
 }
 
-type ActionsListWorkflowRunsForRepoRequest struct {
-	PathParams  ActionsListWorkflowRunsForRepoPathParams
-	QueryParams ActionsListWorkflowRunsForRepoQueryParams
-}
-
 type ActionsListWorkflowRunsForRepo200ApplicationJSON struct {
 	TotalCount   int64                `json:"total_count"`
 	WorkflowRuns []shared.WorkflowRun `json:"workflow_runs"`
+}
+
+type ActionsListWorkflowRunsForRepoRequest struct {
+	PathParams  ActionsListWorkflowRunsForRepoPathParams
+	QueryParams ActionsListWorkflowRunsForRepoQueryParams
 }
 
 type ActionsListWorkflowRunsForRepoResponse struct {

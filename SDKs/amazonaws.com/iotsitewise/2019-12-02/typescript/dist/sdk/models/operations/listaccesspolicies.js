@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var ListAccessPoliciesIdentityTypeEnum;
 (function (ListAccessPoliciesIdentityTypeEnum) {
@@ -41,31 +41,31 @@ var ListAccessPoliciesQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=iamArn" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=iamArn" }),
         __metadata("design:type", String)
     ], ListAccessPoliciesQueryParams.prototype, "iamArn", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=identityId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=identityId" }),
         __metadata("design:type", String)
     ], ListAccessPoliciesQueryParams.prototype, "identityId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=identityType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=identityType" }),
         __metadata("design:type", String)
     ], ListAccessPoliciesQueryParams.prototype, "identityType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" }),
         __metadata("design:type", Number)
     ], ListAccessPoliciesQueryParams.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=nextToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nextToken" }),
         __metadata("design:type", String)
     ], ListAccessPoliciesQueryParams.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=resourceId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=resourceId" }),
         __metadata("design:type", String)
     ], ListAccessPoliciesQueryParams.prototype, "resourceId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=resourceType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=resourceType" }),
         __metadata("design:type", String)
     ], ListAccessPoliciesQueryParams.prototype, "resourceType", void 0);
     return ListAccessPoliciesQueryParams;
@@ -77,31 +77,31 @@ var ListAccessPoliciesHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], ListAccessPoliciesHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], ListAccessPoliciesHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], ListAccessPoliciesHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], ListAccessPoliciesHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], ListAccessPoliciesHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], ListAccessPoliciesHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], ListAccessPoliciesHeaders.prototype, "xAmzSignedHeaders", void 0);
     return ListAccessPoliciesHeaders;
@@ -113,11 +113,11 @@ var ListAccessPoliciesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListAccessPoliciesQueryParams)
     ], ListAccessPoliciesRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ListAccessPoliciesHeaders)
     ], ListAccessPoliciesRequest.prototype, "headers", void 0);
     return ListAccessPoliciesRequest;
@@ -129,27 +129,27 @@ var ListAccessPoliciesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ListAccessPoliciesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListAccessPoliciesResponse.prototype, "internalFailureException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListAccessPoliciesResponse.prototype, "invalidRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ListAccessPoliciesResponse)
     ], ListAccessPoliciesResponse.prototype, "listAccessPoliciesResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ListAccessPoliciesResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ListAccessPoliciesResponse.prototype, "throttlingException", void 0);
     return ListAccessPoliciesResponse;

@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetListOfIssuersIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauthsecurity: shared.SchemeOauthsecurity;
 }
 
 
-export class GetListOfIssuersIdRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
-  request?: any;
-
-  @Metadata()
-  security: GetListOfIssuersIdSecurity;
-}
-
-
 export class GetListOfIssuersId400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
 export class GetListOfIssuersId401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
 export class GetListOfIssuersId500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: any;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: any;
 }
 
 
+export class GetListOfIssuersIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  request?: any;
+
+  @SpeakeasyMetadata()
+  security: GetListOfIssuersIdSecurity;
+}
+
+
 export class GetListOfIssuersIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getListOfIssuersId400ApplicationJsonObject?: GetListOfIssuersId400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getListOfIssuersId401ApplicationJsonObject?: GetListOfIssuersId401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getListOfIssuersId500ApplicationJsonObject?: GetListOfIssuersId500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   issuerResponse?: shared.IssuerResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

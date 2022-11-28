@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SuppressedDestinationSummary } from "./suppresseddestinationsummary";
+
 
 
 // ListSuppressedDestinationsResponse
@@ -8,9 +8,9 @@ import { SuppressedDestinationSummary } from "./suppresseddestinationsummary";
  * A list of suppressed email addresses.
 **/
 export class ListSuppressedDestinationsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=SuppressedDestinationSummaries", elemType: shared.SuppressedDestinationSummary })
+  @SpeakeasyMetadata({ data: "json, name=SuppressedDestinationSummaries", elemType: SuppressedDestinationSummary })
   suppressedDestinationSummaries?: SuppressedDestinationSummary[];
 }

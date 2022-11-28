@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CheckDomainAvailabilityRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The CheckDomainAvailability request contains the following elements.
 **/
 export class CheckDomainAvailabilityRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName: string;
 
-  @Metadata({ data: "json, name=IdnLangCode" })
+  @SpeakeasyMetadata({ data: "json, name=IdnLangCode" })
   idnLangCode?: string;
 }

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdexchangebuyerPubprofilesListPathParams:
-    account_id: int = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    account_id: int = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,20 +22,20 @@ class AdexchangebuyerPubprofilesListQueryParams:
 
 @dataclass
 class AdexchangebuyerPubprofilesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdexchangebuyerPubprofilesListRequest:
-    path_params: AdexchangebuyerPubprofilesListPathParams = field(default=None)
-    query_params: AdexchangebuyerPubprofilesListQueryParams = field(default=None)
-    security: AdexchangebuyerPubprofilesListSecurity = field(default=None)
+    path_params: AdexchangebuyerPubprofilesListPathParams = field()
+    query_params: AdexchangebuyerPubprofilesListQueryParams = field()
+    security: AdexchangebuyerPubprofilesListSecurity = field()
     
 
 @dataclass
 class AdexchangebuyerPubprofilesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_publisher_profiles_by_account_id_response: Optional[shared.GetPublisherProfilesByAccountIDResponse] = field(default=None)
-    status_code: int = field(default=None)
     

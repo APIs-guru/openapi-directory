@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DataprocProjectsRegionsWorkflowTemplatesDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,20 +27,20 @@ class DataprocProjectsRegionsWorkflowTemplatesDeleteQueryParams:
 
 @dataclass
 class DataprocProjectsRegionsWorkflowTemplatesDeleteSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataprocProjectsRegionsWorkflowTemplatesDeleteRequest:
-    path_params: DataprocProjectsRegionsWorkflowTemplatesDeletePathParams = field(default=None)
-    query_params: DataprocProjectsRegionsWorkflowTemplatesDeleteQueryParams = field(default=None)
-    security: DataprocProjectsRegionsWorkflowTemplatesDeleteSecurity = field(default=None)
+    path_params: DataprocProjectsRegionsWorkflowTemplatesDeletePathParams = field()
+    query_params: DataprocProjectsRegionsWorkflowTemplatesDeleteQueryParams = field()
+    security: DataprocProjectsRegionsWorkflowTemplatesDeleteSecurity = field()
     
 
 @dataclass
 class DataprocProjectsRegionsWorkflowTemplatesDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     empty: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

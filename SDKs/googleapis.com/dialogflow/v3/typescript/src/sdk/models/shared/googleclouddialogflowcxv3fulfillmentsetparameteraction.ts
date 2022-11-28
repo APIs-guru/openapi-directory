@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3FulfillmentSetParameterAction
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Setting a parameter value.
 **/
 export class GoogleCloudDialogflowCxV3FulfillmentSetParameterAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=parameter" })
+  @SpeakeasyMetadata({ data: "json, name=parameter" })
   parameter?: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: any;
 }

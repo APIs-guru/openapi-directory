@@ -18,6 +18,8 @@ const (
 	UptimeCheckConfigSelectedRegionsEnumAsiaPacific       UptimeCheckConfigSelectedRegionsEnum = "ASIA_PACIFIC"
 )
 
+// UptimeCheckConfig
+// This message configures which resources and services to monitor for availability.
 type UptimeCheckConfig struct {
 	CheckerType       *UptimeCheckConfigCheckerTypeEnum      `json:"checkerType,omitempty"`
 	ContentMatchers   []ContentMatcher                       `json:"contentMatchers,omitempty"`

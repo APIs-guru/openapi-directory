@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class PaymentProductEnum(str, Enum):
     DOMESTIC_SWISS_CREDIT_TRANSFERS_ISR = "domestic-swiss-credit-transfers-isr"

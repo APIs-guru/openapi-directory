@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/outposts/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/outposts/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def create_order(self, request: operations.CreateOrderRequest) -> operations.CreateOrderResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates an order for an Outpost.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/orders"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -83,22 +112,22 @@ class SDK:
 
     
     def create_outpost(self, request: operations.CreateOutpostRequest) -> operations.CreateOutpostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Creates an Outpost.</p> <p>You can specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/outposts"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -137,15 +166,17 @@ class SDK:
 
     
     def delete_outpost(self, request: operations.DeleteOutpostRequest) -> operations.DeleteOutpostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes the Outpost.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/outposts/{OutpostId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -180,15 +211,17 @@ class SDK:
 
     
     def delete_site(self, request: operations.DeleteSiteRequest) -> operations.DeleteSiteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes the site.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/sites/{SiteId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -223,15 +256,17 @@ class SDK:
 
     
     def get_outpost(self, request: operations.GetOutpostRequest) -> operations.GetOutpostResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets information about the specified Outpost.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/outposts/{OutpostId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -262,17 +297,18 @@ class SDK:
 
     
     def get_outpost_instance_types(self, request: operations.GetOutpostInstanceTypesRequest) -> operations.GetOutpostInstanceTypesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the instance types for the specified Outpost.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/outposts/{OutpostId}/instanceTypes", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -303,17 +339,18 @@ class SDK:
 
     
     def list_outposts(self, request: operations.ListOutpostsRequest) -> operations.ListOutpostsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""<p>Create a list of the Outposts for your AWS account. Add filters to your request to return a more specific list of results. Use filters to match an Outpost lifecycle status, Availibility Zone (<code>us-east-1a</code>), and AZ ID (<code>use1-az1</code>). </p> <p>If you specify multiple filters, the filters are joined with an <code>AND</code>, and the request returns only results that match all of the specified filters.</p>
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/outposts"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -340,17 +377,18 @@ class SDK:
 
     
     def list_sites(self, request: operations.ListSitesRequest) -> operations.ListSitesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the sites for the specified AWS account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/sites"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -377,15 +415,17 @@ class SDK:
 
     
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the tags for the specified resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{ResourceArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -412,22 +452,22 @@ class SDK:
 
     
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds tags to the specified resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{ResourceArn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -454,17 +494,18 @@ class SDK:
 
     
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Removes tags from the specified resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{ResourceArn}#tagKeys", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 

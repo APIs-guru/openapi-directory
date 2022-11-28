@@ -1,14 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum NiCurrentCarrierPropertiesNetworkTypeEnum {
-    Mobile = "mobile"
-,    Landline = "landline"
-,    LandlinePremium = "landline_premium"
-,    LandlineTollfree = "landline_tollfree"
-,    Virtual = "virtual"
-,    Unknown = "unknown"
-,    Pager = "pager"
-,    Null = "null"
+    Mobile = "mobile",
+    Landline = "landline",
+    LandlinePremium = "landline_premium",
+    LandlineTollfree = "landline_tollfree",
+    Virtual = "virtual",
+    Unknown = "unknown",
+    Pager = "pager",
+    Null = "null"
 }
 
 
@@ -17,15 +18,15 @@ export enum NiCurrentCarrierPropertiesNetworkTypeEnum {
  * Information about the network `number` is currently connected to.
 **/
 export class NiCurrentCarrierProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=network_code" })
+  @SpeakeasyMetadata({ data: "json, name=network_code" })
   networkCode?: string;
 
-  @Metadata({ data: "json, name=network_type" })
+  @SpeakeasyMetadata({ data: "json, name=network_type" })
   networkType?: NiCurrentCarrierPropertiesNetworkTypeEnum;
 }

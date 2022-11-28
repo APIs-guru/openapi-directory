@@ -1,17 +1,14 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
-from . import actionhookactionbody
-from . import iframeactionbody
-from . import actionhookactionbody
-from . import iframeactionbody
-from . import iframeactionbody
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TopLevelActions:
-    primary: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primary' }})
-    secondary: List[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'secondary' }})
-    settings: Optional[iframeactionbody.IFrameActionBody] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settings' }})
+    secondary: List[Any] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('secondary') }})
+    primary: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('primary') }})
+    settings: Optional[IFrameActionBody] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('settings') }})
     

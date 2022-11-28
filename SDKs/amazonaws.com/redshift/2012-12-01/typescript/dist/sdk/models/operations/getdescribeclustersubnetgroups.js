@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetDescribeClusterSubnetGroupsActionEnum;
 (function (GetDescribeClusterSubnetGroupsActionEnum) {
     GetDescribeClusterSubnetGroupsActionEnum["DescribeClusterSubnetGroups"] = "DescribeClusterSubnetGroups";
@@ -37,31 +37,31 @@ var GetDescribeClusterSubnetGroupsQueryParams = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetDescribeClusterSubnetGroupsQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=ClusterSubnetGroupName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ClusterSubnetGroupName" }),
         __metadata("design:type", String)
     ], GetDescribeClusterSubnetGroupsQueryParams.prototype, "clusterSubnetGroupName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Marker" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Marker" }),
         __metadata("design:type", String)
     ], GetDescribeClusterSubnetGroupsQueryParams.prototype, "marker", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" }),
         __metadata("design:type", Number)
     ], GetDescribeClusterSubnetGroupsQueryParams.prototype, "maxRecords", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TagKeys" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TagKeys" }),
         __metadata("design:type", Array)
     ], GetDescribeClusterSubnetGroupsQueryParams.prototype, "tagKeys", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TagValues" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TagValues" }),
         __metadata("design:type", Array)
     ], GetDescribeClusterSubnetGroupsQueryParams.prototype, "tagValues", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetDescribeClusterSubnetGroupsQueryParams.prototype, "version", void 0);
     return GetDescribeClusterSubnetGroupsQueryParams;
@@ -73,31 +73,31 @@ var GetDescribeClusterSubnetGroupsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetDescribeClusterSubnetGroupsHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetDescribeClusterSubnetGroupsHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetDescribeClusterSubnetGroupsHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetDescribeClusterSubnetGroupsHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetDescribeClusterSubnetGroupsHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetDescribeClusterSubnetGroupsHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetDescribeClusterSubnetGroupsHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetDescribeClusterSubnetGroupsHeaders;
@@ -109,11 +109,11 @@ var GetDescribeClusterSubnetGroupsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDescribeClusterSubnetGroupsQueryParams)
     ], GetDescribeClusterSubnetGroupsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDescribeClusterSubnetGroupsHeaders)
     ], GetDescribeClusterSubnetGroupsRequest.prototype, "headers", void 0);
     return GetDescribeClusterSubnetGroupsRequest;
@@ -125,15 +125,15 @@ var GetDescribeClusterSubnetGroupsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetDescribeClusterSubnetGroupsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDescribeClusterSubnetGroupsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDescribeClusterSubnetGroupsResponse.prototype, "statusCode", void 0);
     return GetDescribeClusterSubnetGroupsResponse;

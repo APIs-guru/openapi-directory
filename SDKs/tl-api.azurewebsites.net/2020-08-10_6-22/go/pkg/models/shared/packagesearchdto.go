@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// PackageSearchDto
+// The PackageSearchDTO Class.
+// Contains relevant fields of PackageSearch DTO by masking actual Package entity's fields in application.
 type PackageSearchDto struct {
 	ActiveStatus          *bool      `json:"activeStatus,omitempty"`
 	AddonFee              *float64   `json:"addonFee,omitempty"`

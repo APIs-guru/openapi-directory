@@ -1,5 +1,7 @@
 package shared
 
+// InstanceGroup
+// This entity represents an instance group, which is a group of instances that have common purpose. For example, CORE instance group is used for HDFS.
 type InstanceGroup struct {
 	AutoScalingPolicy                            *AutoScalingPolicyDescription `json:"AutoScalingPolicy,omitempty"`
 	BidPrice                                     *string                       `json:"BidPrice,omitempty"`

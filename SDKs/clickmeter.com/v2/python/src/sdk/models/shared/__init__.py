@@ -28,6 +28,7 @@ from .api_core_dto_datapoints_urlbylanguageitem import *
 from .api_core_dto_datapoints_urlbynationitem import *
 from .api_core_dto_datapoints_weighteddestinationitem import *
 from .api_core_dto_domains_domain import *
+from .api_core_dto_entityurilong import *
 from .api_core_dto_grants_grant import *
 from .api_core_dto_groups_group import *
 from .api_core_dto_retargeting_retargetingscript import *
@@ -35,8 +36,11 @@ from .api_core_dto_tags_tag import *
 from .api_core_dto_tops_top import *
 from .api_core_dto_tops_topitem import *
 from .api_core_requests_conversionpatchbody import *
+from .api_core_requests_datapointsbatch import *
+from .api_core_requests_deletebatch import *
 from .api_core_requests_generictextpatch import *
 from .api_core_requests_patchbody import *
+from .api_core_requests_patchbodybatch import *
 from .api_core_requests_permissionpatchrequest import *
 from .api_core_responses_countresponce import *
 from .api_core_responses_entitiesresponse_api_core_dto_accounting_domainwhitelistentry_ import *

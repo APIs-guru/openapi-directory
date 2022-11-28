@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GeofenceGeometry } from "./geofencegeometry";
 var GetGeofenceResponse = /** @class */ (function (_super) {
     __extends(GetGeofenceResponse, _super);
@@ -30,23 +30,23 @@ var GetGeofenceResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreateTime" }),
+        SpeakeasyMetadata({ data: "json, name=CreateTime" }),
         __metadata("design:type", Date)
     ], GetGeofenceResponse.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=GeofenceId" }),
+        SpeakeasyMetadata({ data: "json, name=GeofenceId" }),
         __metadata("design:type", String)
     ], GetGeofenceResponse.prototype, "geofenceId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Geometry" }),
+        SpeakeasyMetadata({ data: "json, name=Geometry" }),
         __metadata("design:type", GeofenceGeometry)
     ], GetGeofenceResponse.prototype, "geometry", void 0);
     __decorate([
-        Metadata({ data: "json, name=Status" }),
+        SpeakeasyMetadata({ data: "json, name=Status" }),
         __metadata("design:type", String)
     ], GetGeofenceResponse.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=UpdateTime" }),
         __metadata("design:type", Date)
     ], GetGeofenceResponse.prototype, "updateTime", void 0);
     return GetGeofenceResponse;

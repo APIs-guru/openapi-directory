@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DataflowProjectsLocationsSnapshotsDeletePathParams:
-    location: str = field(default=None, metadata={'path_param': { 'field_name': 'location', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    snapshot_id: str = field(default=None, metadata={'path_param': { 'field_name': 'snapshotId', 'style': 'simple', 'explode': False }})
+    location: str = field(metadata={'path_param': { 'field_name': 'location', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    snapshot_id: str = field(metadata={'path_param': { 'field_name': 'snapshotId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,26 +28,26 @@ class DataflowProjectsLocationsSnapshotsDeleteQueryParams:
 
 @dataclass
 class DataflowProjectsLocationsSnapshotsDeleteSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataflowProjectsLocationsSnapshotsDeleteSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataflowProjectsLocationsSnapshotsDeleteSecurityOption3:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DataflowProjectsLocationsSnapshotsDeleteSecurityOption4:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -59,14 +60,14 @@ class DataflowProjectsLocationsSnapshotsDeleteSecurity:
 
 @dataclass
 class DataflowProjectsLocationsSnapshotsDeleteRequest:
-    path_params: DataflowProjectsLocationsSnapshotsDeletePathParams = field(default=None)
-    query_params: DataflowProjectsLocationsSnapshotsDeleteQueryParams = field(default=None)
-    security: DataflowProjectsLocationsSnapshotsDeleteSecurity = field(default=None)
+    path_params: DataflowProjectsLocationsSnapshotsDeletePathParams = field()
+    query_params: DataflowProjectsLocationsSnapshotsDeleteQueryParams = field()
+    security: DataflowProjectsLocationsSnapshotsDeleteSecurity = field()
     
 
 @dataclass
 class DataflowProjectsLocationsSnapshotsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_snapshot_response: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

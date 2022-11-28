@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class ListFunctionDefinitionVersionsPathParams:
-    function_definition_id: str = field(default=None, metadata={'path_param': { 'field_name': 'FunctionDefinitionId', 'style': 'simple', 'explode': False }})
+    function_definition_id: str = field(metadata={'path_param': { 'field_name': 'FunctionDefinitionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,15 +30,15 @@ class ListFunctionDefinitionVersionsHeaders:
 
 @dataclass
 class ListFunctionDefinitionVersionsRequest:
-    path_params: ListFunctionDefinitionVersionsPathParams = field(default=None)
-    query_params: ListFunctionDefinitionVersionsQueryParams = field(default=None)
-    headers: ListFunctionDefinitionVersionsHeaders = field(default=None)
+    headers: ListFunctionDefinitionVersionsHeaders = field()
+    path_params: ListFunctionDefinitionVersionsPathParams = field()
+    query_params: ListFunctionDefinitionVersionsQueryParams = field()
     
 
 @dataclass
 class ListFunctionDefinitionVersionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     list_function_definition_versions_response: Optional[shared.ListFunctionDefinitionVersionsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

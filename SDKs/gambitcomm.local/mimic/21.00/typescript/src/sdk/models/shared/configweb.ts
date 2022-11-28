@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ConfigWeb extends SpeakeasyBase {
-  @Metadata({ data: "json, name=is_persistent_connections" })
+  @SpeakeasyMetadata({ data: "json, name=is_persistent_connections" })
   isPersistentConnections?: number;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 
-  @Metadata({ data: "json, name=port" })
+  @SpeakeasyMetadata({ data: "json, name=port" })
   port?: number;
 
-  @Metadata({ data: "json, name=rule" })
+  @SpeakeasyMetadata({ data: "json, name=rule" })
   rule?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 
-  @Metadata({ data: "json, name=wsdl" })
+  @SpeakeasyMetadata({ data: "json, name=wsdl" })
   wsdl?: string;
 }

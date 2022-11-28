@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TimestampPartition
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  A partition dimension defined by a timestamp attribute. 
 **/
 export class TimestampPartition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attributeName" })
+  @SpeakeasyMetadata({ data: "json, name=attributeName" })
   attributeName: string;
 
-  @Metadata({ data: "json, name=timestampFormat" })
+  @SpeakeasyMetadata({ data: "json, name=timestampFormat" })
   timestampFormat?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DrvlcRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(DrvlcRequestBodyCertificateParameters, _super);
@@ -30,15 +30,15 @@ var DrvlcRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DOB" }),
+        SpeakeasyMetadata({ data: "json, name=DOB" }),
         __metadata("design:type", String)
     ], DrvlcRequestBodyCertificateParameters.prototype, "dob", void 0);
     __decorate([
-        Metadata({ data: "json, name=FullName" }),
+        SpeakeasyMetadata({ data: "json, name=FullName" }),
         __metadata("design:type", String)
     ], DrvlcRequestBodyCertificateParameters.prototype, "fullName", void 0);
     __decorate([
-        Metadata({ data: "json, name=dlno" }),
+        SpeakeasyMetadata({ data: "json, name=dlno" }),
         __metadata("design:type", String)
     ], DrvlcRequestBodyCertificateParameters.prototype, "dlno", void 0);
     return DrvlcRequestBodyCertificateParameters;
@@ -55,19 +55,19 @@ var DrvlcRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", DrvlcRequestBodyCertificateParameters)
     ], DrvlcRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], DrvlcRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], DrvlcRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], DrvlcRequestBody.prototype, "txnId", void 0);
     return DrvlcRequestBody;
@@ -79,32 +79,16 @@ var DrvlcSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], DrvlcSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], DrvlcSecurity.prototype, "clientId", void 0);
     return DrvlcSecurity;
 }(SpeakeasyBase));
 export { DrvlcSecurity };
-var DrvlcRequest = /** @class */ (function (_super) {
-    __extends(DrvlcRequest, _super);
-    function DrvlcRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", DrvlcRequestBody)
-    ], DrvlcRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", DrvlcSecurity)
-    ], DrvlcRequest.prototype, "security", void 0);
-    return DrvlcRequest;
-}(SpeakeasyBase));
-export { DrvlcRequest };
 export var Drvlc400ApplicationJsonErrorEnum;
 (function (Drvlc400ApplicationJsonErrorEnum) {
     Drvlc400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -127,11 +111,11 @@ var Drvlc400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Drvlc400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Drvlc400ApplicationJson.prototype, "errorDescription", void 0);
     return Drvlc400ApplicationJson;
@@ -153,11 +137,11 @@ var Drvlc401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Drvlc401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Drvlc401ApplicationJson.prototype, "errorDescription", void 0);
     return Drvlc401ApplicationJson;
@@ -179,11 +163,11 @@ var Drvlc404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Drvlc404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Drvlc404ApplicationJson.prototype, "errorDescription", void 0);
     return Drvlc404ApplicationJson;
@@ -203,11 +187,11 @@ var Drvlc500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Drvlc500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Drvlc500ApplicationJson.prototype, "errorDescription", void 0);
     return Drvlc500ApplicationJson;
@@ -227,11 +211,11 @@ var Drvlc502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Drvlc502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Drvlc502ApplicationJson.prototype, "errorDescription", void 0);
     return Drvlc502ApplicationJson;
@@ -251,11 +235,11 @@ var Drvlc503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Drvlc503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Drvlc503ApplicationJson.prototype, "errorDescription", void 0);
     return Drvlc503ApplicationJson;
@@ -275,59 +259,75 @@ var Drvlc504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Drvlc504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Drvlc504ApplicationJson.prototype, "errorDescription", void 0);
     return Drvlc504ApplicationJson;
 }(SpeakeasyBase));
 export { Drvlc504ApplicationJson };
+var DrvlcRequest = /** @class */ (function (_super) {
+    __extends(DrvlcRequest, _super);
+    function DrvlcRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", DrvlcRequestBody)
+    ], DrvlcRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", DrvlcSecurity)
+    ], DrvlcRequest.prototype, "security", void 0);
+    return DrvlcRequest;
+}(SpeakeasyBase));
+export { DrvlcRequest };
 var DrvlcResponse = /** @class */ (function (_super) {
     __extends(DrvlcResponse, _super);
     function DrvlcResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], DrvlcResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DrvlcResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DrvlcResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Drvlc400ApplicationJson)
     ], DrvlcResponse.prototype, "drvlc400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Drvlc401ApplicationJson)
     ], DrvlcResponse.prototype, "drvlc401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Drvlc404ApplicationJson)
     ], DrvlcResponse.prototype, "drvlc404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Drvlc500ApplicationJson)
     ], DrvlcResponse.prototype, "drvlc500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Drvlc502ApplicationJson)
     ], DrvlcResponse.prototype, "drvlc502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Drvlc503ApplicationJson)
     ], DrvlcResponse.prototype, "drvlc503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Drvlc504ApplicationJson)
     ], DrvlcResponse.prototype, "drvlc504ApplicationJsonObject", void 0);
     return DrvlcResponse;

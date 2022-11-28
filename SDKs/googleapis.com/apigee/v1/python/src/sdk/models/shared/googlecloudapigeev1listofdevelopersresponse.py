@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudapigeev1developer
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudApigeeV1ListOfDevelopersResponse:
-    developer: Optional[List[googlecloudapigeev1developer.GoogleCloudApigeeV1Developer]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'developer' }})
+    developer: Optional[List[GoogleCloudApigeeV1Developer]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('developer') }})
     

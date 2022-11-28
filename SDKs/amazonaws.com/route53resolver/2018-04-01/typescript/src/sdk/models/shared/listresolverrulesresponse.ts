@@ -1,15 +1,15 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResolverRule } from "./resolverrule";
 
 
+
 export class ListResolverRulesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=ResolverRules", elemType: shared.ResolverRule })
+  @SpeakeasyMetadata({ data: "json, name=ResolverRules", elemType: ResolverRule })
   resolverRules?: ResolverRule[];
 }

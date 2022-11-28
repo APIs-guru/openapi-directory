@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Activity } from "./activity";
+
 
 
 // UserActivitySession
@@ -8,21 +8,21 @@ import { Activity } from "./activity";
  * This represents a user session performed on a specific device at a certain time over a period of time.
 **/
 export class UserActivitySession extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activities", elemType: shared.Activity })
+  @SpeakeasyMetadata({ data: "json, name=activities", elemType: Activity })
   activities?: Activity[];
 
-  @Metadata({ data: "json, name=dataSource" })
+  @SpeakeasyMetadata({ data: "json, name=dataSource" })
   dataSource?: string;
 
-  @Metadata({ data: "json, name=deviceCategory" })
+  @SpeakeasyMetadata({ data: "json, name=deviceCategory" })
   deviceCategory?: string;
 
-  @Metadata({ data: "json, name=platform" })
+  @SpeakeasyMetadata({ data: "json, name=platform" })
   platform?: string;
 
-  @Metadata({ data: "json, name=sessionDate" })
+  @SpeakeasyMetadata({ data: "json, name=sessionDate" })
   sessionDate?: string;
 
-  @Metadata({ data: "json, name=sessionId" })
+  @SpeakeasyMetadata({ data: "json, name=sessionId" })
   sessionId?: string;
 }

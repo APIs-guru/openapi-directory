@@ -4,12 +4,11 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-
 	"openapi/internal/utils"
 	"openapi/pkg/models/operations"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://exude-api.herokuapp.com",
 	"http://localhost:8080",
 }
@@ -19,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +35,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// FilterFileDataStoppings - Filter the stopping words from the provided input file
 func (s *SDK) FilterFileDataStoppings(ctx context.Context, request operations.FilterFileDataStoppingsRequest) (*operations.FilterFileDataStoppingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/exude/{type}/file", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -70,7 +91,7 @@ func (s *SDK) FilterFileDataStoppings(ctx context.Context, request operations.Fi
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -100,8 +121,9 @@ func (s *SDK) FilterFileDataStoppings(ctx context.Context, request operations.Fi
 	return res, nil
 }
 
+// FilterStoppings - Filter the stopping words from the provided input data or links
 func (s *SDK) FilterStoppings(ctx context.Context, request operations.FilterStoppingsRequest) (*operations.FilterStoppingsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/exude/{type}/data", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -119,7 +141,7 @@ func (s *SDK) FilterStoppings(ctx context.Context, request operations.FilterStop
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

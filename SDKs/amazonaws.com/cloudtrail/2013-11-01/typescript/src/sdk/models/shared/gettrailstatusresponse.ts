@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GetTrailStatusResponse
@@ -6,54 +7,54 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Returns the objects or data listed below if successful. Otherwise, returns an error.
 **/
 export class GetTrailStatusResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IsLogging" })
+  @SpeakeasyMetadata({ data: "json, name=IsLogging" })
   isLogging?: boolean;
 
-  @Metadata({ data: "json, name=LatestCloudWatchLogsDeliveryError" })
+  @SpeakeasyMetadata({ data: "json, name=LatestCloudWatchLogsDeliveryError" })
   latestCloudWatchLogsDeliveryError?: string;
 
-  @Metadata({ data: "json, name=LatestCloudWatchLogsDeliveryTime" })
+  @SpeakeasyMetadata({ data: "json, name=LatestCloudWatchLogsDeliveryTime" })
   latestCloudWatchLogsDeliveryTime?: Date;
 
-  @Metadata({ data: "json, name=LatestDeliveryAttemptSucceeded" })
+  @SpeakeasyMetadata({ data: "json, name=LatestDeliveryAttemptSucceeded" })
   latestDeliveryAttemptSucceeded?: string;
 
-  @Metadata({ data: "json, name=LatestDeliveryAttemptTime" })
+  @SpeakeasyMetadata({ data: "json, name=LatestDeliveryAttemptTime" })
   latestDeliveryAttemptTime?: string;
 
-  @Metadata({ data: "json, name=LatestDeliveryError" })
+  @SpeakeasyMetadata({ data: "json, name=LatestDeliveryError" })
   latestDeliveryError?: string;
 
-  @Metadata({ data: "json, name=LatestDeliveryTime" })
+  @SpeakeasyMetadata({ data: "json, name=LatestDeliveryTime" })
   latestDeliveryTime?: Date;
 
-  @Metadata({ data: "json, name=LatestDigestDeliveryError" })
+  @SpeakeasyMetadata({ data: "json, name=LatestDigestDeliveryError" })
   latestDigestDeliveryError?: string;
 
-  @Metadata({ data: "json, name=LatestDigestDeliveryTime" })
+  @SpeakeasyMetadata({ data: "json, name=LatestDigestDeliveryTime" })
   latestDigestDeliveryTime?: Date;
 
-  @Metadata({ data: "json, name=LatestNotificationAttemptSucceeded" })
+  @SpeakeasyMetadata({ data: "json, name=LatestNotificationAttemptSucceeded" })
   latestNotificationAttemptSucceeded?: string;
 
-  @Metadata({ data: "json, name=LatestNotificationAttemptTime" })
+  @SpeakeasyMetadata({ data: "json, name=LatestNotificationAttemptTime" })
   latestNotificationAttemptTime?: string;
 
-  @Metadata({ data: "json, name=LatestNotificationError" })
+  @SpeakeasyMetadata({ data: "json, name=LatestNotificationError" })
   latestNotificationError?: string;
 
-  @Metadata({ data: "json, name=LatestNotificationTime" })
+  @SpeakeasyMetadata({ data: "json, name=LatestNotificationTime" })
   latestNotificationTime?: Date;
 
-  @Metadata({ data: "json, name=StartLoggingTime" })
+  @SpeakeasyMetadata({ data: "json, name=StartLoggingTime" })
   startLoggingTime?: Date;
 
-  @Metadata({ data: "json, name=StopLoggingTime" })
+  @SpeakeasyMetadata({ data: "json, name=StopLoggingTime" })
   stopLoggingTime?: Date;
 
-  @Metadata({ data: "json, name=TimeLoggingStarted" })
+  @SpeakeasyMetadata({ data: "json, name=TimeLoggingStarted" })
   timeLoggingStarted?: string;
 
-  @Metadata({ data: "json, name=TimeLoggingStopped" })
+  @SpeakeasyMetadata({ data: "json, name=TimeLoggingStopped" })
   timeLoggingStopped?: string;
 }

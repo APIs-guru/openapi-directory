@@ -36,6 +36,8 @@ type ScimUserOperations struct {
 	Value *interface{}             `json:"value,omitempty"`
 }
 
+// ScimUser
+// SCIM /Users provisioning endpoints
 type ScimUser struct {
 	Active         bool                 `json:"active"`
 	DisplayName    *string              `json:"displayName,omitempty"`

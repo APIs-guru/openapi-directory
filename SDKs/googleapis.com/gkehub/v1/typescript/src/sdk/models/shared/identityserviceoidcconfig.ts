@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IdentityServiceOidcConfig
@@ -6,45 +7,91 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Configuration for OIDC Auth flow.
 **/
 export class IdentityServiceOidcConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateAuthorityData" })
+  @SpeakeasyMetadata({ data: "json, name=certificateAuthorityData" })
   certificateAuthorityData?: string;
 
-  @Metadata({ data: "json, name=clientId" })
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=clientSecret" })
+  @SpeakeasyMetadata({ data: "json, name=clientSecret" })
   clientSecret?: string;
 
-  @Metadata({ data: "json, name=deployCloudConsoleProxy" })
+  @SpeakeasyMetadata({ data: "json, name=deployCloudConsoleProxy" })
   deployCloudConsoleProxy?: boolean;
 
-  @Metadata({ data: "json, name=enableAccessToken" })
+  @SpeakeasyMetadata({ data: "json, name=enableAccessToken" })
   enableAccessToken?: boolean;
 
-  @Metadata({ data: "json, name=encryptedClientSecret" })
+  @SpeakeasyMetadata({ data: "json, name=encryptedClientSecret" })
   encryptedClientSecret?: string;
 
-  @Metadata({ data: "json, name=extraParams" })
+  @SpeakeasyMetadata({ data: "json, name=extraParams" })
   extraParams?: string;
 
-  @Metadata({ data: "json, name=groupPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=groupPrefix" })
   groupPrefix?: string;
 
-  @Metadata({ data: "json, name=groupsClaim" })
+  @SpeakeasyMetadata({ data: "json, name=groupsClaim" })
   groupsClaim?: string;
 
-  @Metadata({ data: "json, name=issuerUri" })
+  @SpeakeasyMetadata({ data: "json, name=issuerUri" })
   issuerUri?: string;
 
-  @Metadata({ data: "json, name=kubectlRedirectUri" })
+  @SpeakeasyMetadata({ data: "json, name=kubectlRedirectUri" })
   kubectlRedirectUri?: string;
 
-  @Metadata({ data: "json, name=scopes" })
+  @SpeakeasyMetadata({ data: "json, name=scopes" })
   scopes?: string;
 
-  @Metadata({ data: "json, name=userClaim" })
+  @SpeakeasyMetadata({ data: "json, name=userClaim" })
   userClaim?: string;
 
-  @Metadata({ data: "json, name=userPrefix" })
+  @SpeakeasyMetadata({ data: "json, name=userPrefix" })
+  userPrefix?: string;
+}
+
+
+// IdentityServiceOidcConfigInput
+/** 
+ * Configuration for OIDC Auth flow.
+**/
+export class IdentityServiceOidcConfigInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=certificateAuthorityData" })
+  certificateAuthorityData?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=clientId" })
+  clientId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=clientSecret" })
+  clientSecret?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=deployCloudConsoleProxy" })
+  deployCloudConsoleProxy?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=enableAccessToken" })
+  enableAccessToken?: boolean;
+
+  @SpeakeasyMetadata({ data: "json, name=extraParams" })
+  extraParams?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=groupPrefix" })
+  groupPrefix?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=groupsClaim" })
+  groupsClaim?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=issuerUri" })
+  issuerUri?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=kubectlRedirectUri" })
+  kubectlRedirectUri?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=scopes" })
+  scopes?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=userClaim" })
+  userClaim?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=userPrefix" })
   userPrefix?: string;
 }

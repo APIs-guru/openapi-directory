@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import infotypetransformation
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class TextConfig:
-    transformations: Optional[List[infotypetransformation.InfoTypeTransformation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transformations' }})
+    transformations: Optional[List[InfoTypeTransformation]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('transformations') }})
     

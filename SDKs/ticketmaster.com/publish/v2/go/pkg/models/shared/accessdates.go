@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AccessDates
+// Event's Access Date
 type AccessDates struct {
 	EndApproximate   *bool      `json:"endApproximate,omitempty"`
 	EndDateTime      *time.Time `json:"endDateTime,omitempty"`

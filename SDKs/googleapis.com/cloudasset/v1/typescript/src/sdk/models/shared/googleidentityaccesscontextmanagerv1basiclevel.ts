@@ -1,10 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleIdentityAccesscontextmanagerV1Condition } from "./googleidentityaccesscontextmanagerv1condition";
 
+
 export enum GoogleIdentityAccesscontextmanagerV1BasicLevelCombiningFunctionEnum {
-    And = "AND"
-,    Or = "OR"
+    And = "AND",
+    Or = "OR"
 }
 
 
@@ -13,9 +13,9 @@ export enum GoogleIdentityAccesscontextmanagerV1BasicLevelCombiningFunctionEnum 
  * `BasicLevel` is an `AccessLevel` using a set of recommended features.
 **/
 export class GoogleIdentityAccesscontextmanagerV1BasicLevel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=combiningFunction" })
+  @SpeakeasyMetadata({ data: "json, name=combiningFunction" })
   combiningFunction?: GoogleIdentityAccesscontextmanagerV1BasicLevelCombiningFunctionEnum;
 
-  @Metadata({ data: "json, name=conditions", elemType: shared.GoogleIdentityAccesscontextmanagerV1Condition })
+  @SpeakeasyMetadata({ data: "json, name=conditions", elemType: GoogleIdentityAccesscontextmanagerV1Condition })
   conditions?: GoogleIdentityAccesscontextmanagerV1Condition[];
 }

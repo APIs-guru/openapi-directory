@@ -1,6 +1,7 @@
 
 
+
 export enum ObMinMaxType1CodeEnum {
-    Fmmn = "FMMN"
-,    Fmmx = "FMMX"
+    Fmmn = "FMMN",
+    Fmmx = "FMMX"
 }

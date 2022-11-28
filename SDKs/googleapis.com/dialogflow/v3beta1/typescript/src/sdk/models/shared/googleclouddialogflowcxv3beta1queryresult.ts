@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3beta1Page } from "./googleclouddialogflowcxv3beta1page";
 import { GoogleCloudDialogflowCxV3beta1DtmfInput } from "./googleclouddialogflowcxv3beta1dtmfinput";
 import { GoogleCloudDialogflowCxV3beta1Intent } from "./googleclouddialogflowcxv3beta1intent";
@@ -9,56 +8,57 @@ import { GoogleCloudDialogflowCxV3beta1SentimentAnalysisResult } from "./googlec
 import { GoogleRpcStatus } from "./googlerpcstatus";
 
 
+
 // GoogleCloudDialogflowCxV3beta1QueryResult
 /** 
  * Represents the result of a conversational query.
 **/
 export class GoogleCloudDialogflowCxV3beta1QueryResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currentPage" })
+  @SpeakeasyMetadata({ data: "json, name=currentPage" })
   currentPage?: GoogleCloudDialogflowCxV3beta1Page;
 
-  @Metadata({ data: "json, name=diagnosticInfo" })
+  @SpeakeasyMetadata({ data: "json, name=diagnosticInfo" })
   diagnosticInfo?: Map<string, any>;
 
-  @Metadata({ data: "json, name=dtmf" })
+  @SpeakeasyMetadata({ data: "json, name=dtmf" })
   dtmf?: GoogleCloudDialogflowCxV3beta1DtmfInput;
 
-  @Metadata({ data: "json, name=intent" })
+  @SpeakeasyMetadata({ data: "json, name=intent" })
   intent?: GoogleCloudDialogflowCxV3beta1Intent;
 
-  @Metadata({ data: "json, name=intentDetectionConfidence" })
+  @SpeakeasyMetadata({ data: "json, name=intentDetectionConfidence" })
   intentDetectionConfidence?: number;
 
-  @Metadata({ data: "json, name=languageCode" })
+  @SpeakeasyMetadata({ data: "json, name=languageCode" })
   languageCode?: string;
 
-  @Metadata({ data: "json, name=match" })
+  @SpeakeasyMetadata({ data: "json, name=match" })
   match?: GoogleCloudDialogflowCxV3beta1Match;
 
-  @Metadata({ data: "json, name=parameters" })
+  @SpeakeasyMetadata({ data: "json, name=parameters" })
   parameters?: Map<string, any>;
 
-  @Metadata({ data: "json, name=responseMessages", elemType: shared.GoogleCloudDialogflowCxV3beta1ResponseMessage })
+  @SpeakeasyMetadata({ data: "json, name=responseMessages", elemType: GoogleCloudDialogflowCxV3beta1ResponseMessage })
   responseMessages?: GoogleCloudDialogflowCxV3beta1ResponseMessage[];
 
-  @Metadata({ data: "json, name=sentimentAnalysisResult" })
+  @SpeakeasyMetadata({ data: "json, name=sentimentAnalysisResult" })
   sentimentAnalysisResult?: GoogleCloudDialogflowCxV3beta1SentimentAnalysisResult;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 
-  @Metadata({ data: "json, name=transcript" })
+  @SpeakeasyMetadata({ data: "json, name=transcript" })
   transcript?: string;
 
-  @Metadata({ data: "json, name=triggerEvent" })
+  @SpeakeasyMetadata({ data: "json, name=triggerEvent" })
   triggerEvent?: string;
 
-  @Metadata({ data: "json, name=triggerIntent" })
+  @SpeakeasyMetadata({ data: "json, name=triggerIntent" })
   triggerIntent?: string;
 
-  @Metadata({ data: "json, name=webhookPayloads" })
+  @SpeakeasyMetadata({ data: "json, name=webhookPayloads" })
   webhookPayloads?: Map<string, any>[];
 
-  @Metadata({ data: "json, name=webhookStatuses", elemType: shared.GoogleRpcStatus })
+  @SpeakeasyMetadata({ data: "json, name=webhookStatuses", elemType: GoogleRpcStatus })
   webhookStatuses?: GoogleRpcStatus[];
 }

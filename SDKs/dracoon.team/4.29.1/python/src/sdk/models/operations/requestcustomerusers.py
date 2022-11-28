@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class RequestCustomerUsersPathParams:
-    customer_id: int = field(default=None, metadata={'path_param': { 'field_name': 'customer_id', 'style': 'simple', 'explode': False }})
+    customer_id: int = field(metadata={'path_param': { 'field_name': 'customer_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,15 +30,15 @@ class RequestCustomerUsersHeaders:
 
 @dataclass
 class RequestCustomerUsersRequest:
-    path_params: RequestCustomerUsersPathParams = field(default=None)
-    query_params: RequestCustomerUsersQueryParams = field(default=None)
-    headers: RequestCustomerUsersHeaders = field(default=None)
+    headers: RequestCustomerUsersHeaders = field()
+    path_params: RequestCustomerUsersPathParams = field()
+    query_params: RequestCustomerUsersQueryParams = field()
     
 
 @dataclass
 class RequestCustomerUsersResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
     user_list: Optional[shared.UserList] = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var CreateServiceAccountKeyRequestKeyAlgorithmEnum;
 (function (CreateServiceAccountKeyRequestKeyAlgorithmEnum) {
     CreateServiceAccountKeyRequestKeyAlgorithmEnum["KeyAlgUnspecified"] = "KEY_ALG_UNSPECIFIED";
@@ -45,11 +45,11 @@ var CreateServiceAccountKeyRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=keyAlgorithm" }),
+        SpeakeasyMetadata({ data: "json, name=keyAlgorithm" }),
         __metadata("design:type", String)
     ], CreateServiceAccountKeyRequest.prototype, "keyAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "json, name=privateKeyType" }),
+        SpeakeasyMetadata({ data: "json, name=privateKeyType" }),
         __metadata("design:type", String)
     ], CreateServiceAccountKeyRequest.prototype, "privateKeyType", void 0);
     return CreateServiceAccountKeyRequest;

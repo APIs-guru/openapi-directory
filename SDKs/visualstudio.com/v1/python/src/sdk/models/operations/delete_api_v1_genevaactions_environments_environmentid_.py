@@ -4,7 +4,7 @@ from typing import Any,Optional
 
 @dataclass
 class DeleteAPIV1GenevaActionsEnvironmentsEnvironmentIDPathParams:
-    environment_id: str = field(default=None, metadata={'path_param': { 'field_name': 'environmentId', 'style': 'simple', 'explode': False }})
+    environment_id: str = field(metadata={'path_param': { 'field_name': 'environmentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,14 +14,14 @@ class DeleteAPIV1GenevaActionsEnvironmentsEnvironmentIDQueryParams:
 
 @dataclass
 class DeleteAPIV1GenevaActionsEnvironmentsEnvironmentIDRequest:
-    path_params: DeleteAPIV1GenevaActionsEnvironmentsEnvironmentIDPathParams = field(default=None)
-    query_params: DeleteAPIV1GenevaActionsEnvironmentsEnvironmentIDQueryParams = field(default=None)
+    path_params: DeleteAPIV1GenevaActionsEnvironmentsEnvironmentIDPathParams = field()
+    query_params: DeleteAPIV1GenevaActionsEnvironmentsEnvironmentIDQueryParams = field()
     
 
 @dataclass
 class DeleteAPIV1GenevaActionsEnvironmentsEnvironmentIDResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

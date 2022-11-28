@@ -1,5 +1,7 @@
 package shared
 
+// DescribeComplianceByResourceRequest
+// <p/>
 type DescribeComplianceByResourceRequest struct {
 	ComplianceTypes []ComplianceTypeEnum `json:"ComplianceTypes,omitempty"`
 	Limit           *int64               `json:"Limit,omitempty"`

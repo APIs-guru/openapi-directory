@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ReplicationRun
+// Represents a replication run.
 type ReplicationRun struct {
 	AmiID              *string                     `json:"amiId,omitempty"`
 	CompletedTime      *time.Time                  `json:"completedTime,omitempty"`

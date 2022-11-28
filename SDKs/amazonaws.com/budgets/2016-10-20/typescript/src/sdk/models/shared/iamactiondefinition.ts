@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IamActionDefinition
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  *  The AWS Identity and Access Management (IAM) action definition details. 
 **/
 export class IamActionDefinition extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Groups" })
+  @SpeakeasyMetadata({ data: "json, name=Groups" })
   groups?: string[];
 
-  @Metadata({ data: "json, name=PolicyArn" })
+  @SpeakeasyMetadata({ data: "json, name=PolicyArn" })
   policyArn: string;
 
-  @Metadata({ data: "json, name=Roles" })
+  @SpeakeasyMetadata({ data: "json, name=Roles" })
   roles?: string[];
 
-  @Metadata({ data: "json, name=Users" })
+  @SpeakeasyMetadata({ data: "json, name=Users" })
   users?: string[];
 }

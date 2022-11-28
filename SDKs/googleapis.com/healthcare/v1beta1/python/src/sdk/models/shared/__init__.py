@@ -1,4 +1,5 @@
-from .__xgafv_enum import *
+from ._xgafv_enum import *
+from .action import *
 from .activateconsentrequest import *
 from .alt_enum import *
 from .analyzeentitiesrequest import *
@@ -36,6 +37,7 @@ from .deidentifyoperationmetadata import *
 from .detail import *
 from .dicomconfig import *
 from .dicomstore import *
+from .dicomtagconfig import *
 from .entity import *
 from .entitymention import *
 from .entitymentionrelationship import *
@@ -46,6 +48,7 @@ from .exportmessagesrequest import *
 from .expr import *
 from .feature import *
 from .fhirconfig import *
+from .fhirfieldconfig import *
 from .fhirfilter import *
 from .fhirnotificationconfig import *
 from .fhiroutput import *
@@ -59,6 +62,8 @@ from .gcssource import *
 from .googlecloudhealthcarev1beta1annotationbigquerydestination import *
 from .googlecloudhealthcarev1beta1consentgcsdestination import *
 from .googlecloudhealthcarev1beta1consentpolicy import *
+from .googlecloudhealthcarev1beta1deidentifyfieldmetadata import *
+from .googlecloudhealthcarev1beta1deidentifyoptions import *
 from .googlecloudhealthcarev1beta1dicombigquerydestination import *
 from .googlecloudhealthcarev1beta1dicomstreamconfig import *
 from .googlecloudhealthcarev1beta1fhirbigquerydestination import *
@@ -97,6 +102,7 @@ from .location import *
 from .message import *
 from .notificationconfig import *
 from .operation import *
+from .options import *
 from .parseddata import *
 from .parserconfig import *
 from .patientid import *
@@ -127,6 +133,7 @@ from .testiampermissionsrequest import *
 from .testiampermissionsresponse import *
 from .textconfig import *
 from .textspan import *
+from .timepartitioning import *
 from .type import *
 from .userdatamapping import *
 from .validationconfig import *

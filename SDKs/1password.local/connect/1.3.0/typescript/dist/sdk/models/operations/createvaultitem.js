@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateVaultItemPathParams = /** @class */ (function (_super) {
     __extends(CreateVaultItemPathParams, _super);
@@ -30,7 +30,7 @@ var CreateVaultItemPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=vaultUuid" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=vaultUuid" }),
         __metadata("design:type", String)
     ], CreateVaultItemPathParams.prototype, "vaultUuid", void 0);
     return CreateVaultItemPathParams;
@@ -42,7 +42,7 @@ var CreateVaultItemSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeConnectToken)
     ], CreateVaultItemSecurity.prototype, "connectToken", void 0);
     return CreateVaultItemSecurity;
@@ -54,15 +54,15 @@ var CreateVaultItemRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateVaultItemPathParams)
     ], CreateVaultItemRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", shared.FullItem)
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.FullItemInput)
     ], CreateVaultItemRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateVaultItemSecurity)
     ], CreateVaultItemRequest.prototype, "security", void 0);
     return CreateVaultItemRequest;
@@ -74,19 +74,19 @@ var CreateVaultItemResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateVaultItemResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorResponse)
     ], CreateVaultItemResponse.prototype, "errorResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.FullItem)
     ], CreateVaultItemResponse.prototype, "fullItem", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateVaultItemResponse.prototype, "statusCode", void 0);
     return CreateVaultItemResponse;

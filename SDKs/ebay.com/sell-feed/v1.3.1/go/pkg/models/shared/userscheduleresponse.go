@@ -1,5 +1,7 @@
 package shared
 
+// UserScheduleResponse
+// The type that defines the fields for a paginated result set of available schedules. The response consists of 0 or more sequenced pages where each page has 0 or more items.
 type UserScheduleResponse struct {
 	CreationDate               *string `json:"creationDate,omitempty"`
 	FeedType                   *string `json:"feedType,omitempty"`

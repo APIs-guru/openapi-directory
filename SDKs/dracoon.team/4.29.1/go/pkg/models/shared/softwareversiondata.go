@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// SoftwareVersionData
+// Software version information
 type SoftwareVersionData struct {
 	BuildDate         time.Time `json:"buildDate"`
 	IsDracoonCloud    *bool     `json:"isDracoonCloud,omitempty"`

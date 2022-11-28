@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TaskList } from "./tasklist";
+
 
 
 // DecisionTaskScheduledEventAttributes
@@ -7,12 +8,12 @@ import { TaskList } from "./tasklist";
  * Provides details about the <code>DecisionTaskScheduled</code> event.
 **/
 export class DecisionTaskScheduledEventAttributes extends SpeakeasyBase {
-  @Metadata({ data: "json, name=startToCloseTimeout" })
+  @SpeakeasyMetadata({ data: "json, name=startToCloseTimeout" })
   startToCloseTimeout?: string;
 
-  @Metadata({ data: "json, name=taskList" })
+  @SpeakeasyMetadata({ data: "json, name=taskList" })
   taskList: TaskList;
 
-  @Metadata({ data: "json, name=taskPriority" })
+  @SpeakeasyMetadata({ data: "json, name=taskPriority" })
   taskPriority?: string;
 }

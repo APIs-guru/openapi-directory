@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AutoMlResult
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * When the solution performs AutoML (<code>performAutoML</code> is true in <a>CreateSolution</a>), specifies the recipe that best optimized the specified metric.
 **/
 export class AutoMlResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bestRecipeArn" })
+  @SpeakeasyMetadata({ data: "json, name=bestRecipeArn" })
   bestRecipeArn?: string;
 }

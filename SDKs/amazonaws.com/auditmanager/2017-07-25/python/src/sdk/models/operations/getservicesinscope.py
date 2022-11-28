@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -16,15 +19,15 @@ class GetServicesInScopeHeaders:
 
 @dataclass
 class GetServicesInScopeRequest:
-    headers: GetServicesInScopeHeaders = field(default=None)
+    headers: GetServicesInScopeHeaders = field()
     
 
 @dataclass
 class GetServicesInScopeResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_services_in_scope_response: Optional[shared.GetServicesInScopeResponse] = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

@@ -25,6 +25,8 @@ const (
 	DataSourceTransferTypeEnumStreaming               DataSourceTransferTypeEnum = "STREAMING"
 )
 
+// DataSource
+// Defines the properties and custom parameters for a data source.
 type DataSource struct {
 	AuthorizationType            *DataSourceAuthorizationTypeEnum `json:"authorizationType,omitempty"`
 	ClientID                     *string                          `json:"clientId,omitempty"`

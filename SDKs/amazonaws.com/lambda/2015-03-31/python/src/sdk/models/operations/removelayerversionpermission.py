@@ -1,12 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class RemoveLayerVersionPermissionPathParams:
-    layer_name: str = field(default=None, metadata={'path_param': { 'field_name': 'LayerName', 'style': 'simple', 'explode': False }})
-    statement_id: str = field(default=None, metadata={'path_param': { 'field_name': 'StatementId', 'style': 'simple', 'explode': False }})
-    version_number: int = field(default=None, metadata={'path_param': { 'field_name': 'VersionNumber', 'style': 'simple', 'explode': False }})
+    layer_name: str = field(metadata={'path_param': { 'field_name': 'LayerName', 'style': 'simple', 'explode': False }})
+    statement_id: str = field(metadata={'path_param': { 'field_name': 'StatementId', 'style': 'simple', 'explode': False }})
+    version_number: int = field(metadata={'path_param': { 'field_name': 'VersionNumber', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -27,18 +30,18 @@ class RemoveLayerVersionPermissionHeaders:
 
 @dataclass
 class RemoveLayerVersionPermissionRequest:
-    path_params: RemoveLayerVersionPermissionPathParams = field(default=None)
-    query_params: RemoveLayerVersionPermissionQueryParams = field(default=None)
-    headers: RemoveLayerVersionPermissionHeaders = field(default=None)
+    headers: RemoveLayerVersionPermissionHeaders = field()
+    path_params: RemoveLayerVersionPermissionPathParams = field()
+    query_params: RemoveLayerVersionPermissionQueryParams = field()
     
 
 @dataclass
 class RemoveLayerVersionPermissionResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     precondition_failed_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

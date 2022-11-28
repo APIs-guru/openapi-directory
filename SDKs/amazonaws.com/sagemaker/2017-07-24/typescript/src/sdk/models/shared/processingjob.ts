@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppSpecification } from "./appspecification";
 import { ExperimentConfig } from "./experimentconfig";
 import { NetworkConfig } from "./networkconfig";
@@ -11,74 +10,75 @@ import { ProcessingStoppingCondition } from "./processingstoppingcondition";
 import { Tag } from "./tag";
 
 
+
 // ProcessingJob
 /** 
  * An Amazon SageMaker processing job that is used to analyze data and evaluate models. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/processing-job.html">Process Data and Evaluate Models</a>.
 **/
 export class ProcessingJob extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AppSpecification" })
+  @SpeakeasyMetadata({ data: "json, name=AppSpecification" })
   appSpecification?: AppSpecification;
 
-  @Metadata({ data: "json, name=AutoMLJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=AutoMLJobArn" })
   autoMlJobArn?: string;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=Environment" })
+  @SpeakeasyMetadata({ data: "json, name=Environment" })
   environment?: Map<string, string>;
 
-  @Metadata({ data: "json, name=ExitMessage" })
+  @SpeakeasyMetadata({ data: "json, name=ExitMessage" })
   exitMessage?: string;
 
-  @Metadata({ data: "json, name=ExperimentConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ExperimentConfig" })
   experimentConfig?: ExperimentConfig;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=MonitoringScheduleArn" })
+  @SpeakeasyMetadata({ data: "json, name=MonitoringScheduleArn" })
   monitoringScheduleArn?: string;
 
-  @Metadata({ data: "json, name=NetworkConfig" })
+  @SpeakeasyMetadata({ data: "json, name=NetworkConfig" })
   networkConfig?: NetworkConfig;
 
-  @Metadata({ data: "json, name=ProcessingEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=ProcessingEndTime" })
   processingEndTime?: Date;
 
-  @Metadata({ data: "json, name=ProcessingInputs", elemType: shared.ProcessingInput })
+  @SpeakeasyMetadata({ data: "json, name=ProcessingInputs", elemType: ProcessingInput })
   processingInputs?: ProcessingInput[];
 
-  @Metadata({ data: "json, name=ProcessingJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=ProcessingJobArn" })
   processingJobArn?: string;
 
-  @Metadata({ data: "json, name=ProcessingJobName" })
+  @SpeakeasyMetadata({ data: "json, name=ProcessingJobName" })
   processingJobName?: string;
 
-  @Metadata({ data: "json, name=ProcessingJobStatus" })
+  @SpeakeasyMetadata({ data: "json, name=ProcessingJobStatus" })
   processingJobStatus?: ProcessingJobStatusEnum;
 
-  @Metadata({ data: "json, name=ProcessingOutputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=ProcessingOutputConfig" })
   processingOutputConfig?: ProcessingOutputConfig;
 
-  @Metadata({ data: "json, name=ProcessingResources" })
+  @SpeakeasyMetadata({ data: "json, name=ProcessingResources" })
   processingResources?: ProcessingResources;
 
-  @Metadata({ data: "json, name=ProcessingStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=ProcessingStartTime" })
   processingStartTime?: Date;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=StoppingCondition" })
+  @SpeakeasyMetadata({ data: "json, name=StoppingCondition" })
   stoppingCondition?: ProcessingStoppingCondition;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=TrainingJobArn" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingJobArn" })
   trainingJobArn?: string;
 }

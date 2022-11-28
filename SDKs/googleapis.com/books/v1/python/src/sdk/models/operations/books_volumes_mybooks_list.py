@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class BooksVolumesMybooksListAcquireMethodEnum(str, Enum):
@@ -44,19 +45,19 @@ class BooksVolumesMybooksListQueryParams:
 
 @dataclass
 class BooksVolumesMybooksListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class BooksVolumesMybooksListRequest:
-    query_params: BooksVolumesMybooksListQueryParams = field(default=None)
-    security: BooksVolumesMybooksListSecurity = field(default=None)
+    query_params: BooksVolumesMybooksListQueryParams = field()
+    security: BooksVolumesMybooksListSecurity = field()
     
 
 @dataclass
 class BooksVolumesMybooksListResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     volumes: Optional[shared.Volumes] = field(default=None)
     

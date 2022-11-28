@@ -1,8 +1,9 @@
 
 
+
 export enum TaggableResourceTypeEnum {
-    BatchPrediction = "BatchPrediction"
-,    DataSource = "DataSource"
-,    Evaluation = "Evaluation"
-,    MlModel = "MLModel"
+    BatchPrediction = "BatchPrediction",
+    DataSource = "DataSource",
+    Evaluation = "Evaluation",
+    MlModel = "MLModel"
 }

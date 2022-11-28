@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Container } from "./container";
 import { Folder } from "./folder";
 import { Macro } from "./macro";
@@ -9,50 +8,51 @@ import { Trigger } from "./trigger";
 import { Variable } from "./variable";
 
 
+
 // ContainerVersion
 /** 
  * Represents a Google Tag Manager Container Version.
 **/
 export class ContainerVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountId" })
+  @SpeakeasyMetadata({ data: "json, name=accountId" })
   accountId?: string;
 
-  @Metadata({ data: "json, name=container" })
+  @SpeakeasyMetadata({ data: "json, name=container" })
   container?: Container;
 
-  @Metadata({ data: "json, name=containerId" })
+  @SpeakeasyMetadata({ data: "json, name=containerId" })
   containerId?: string;
 
-  @Metadata({ data: "json, name=containerVersionId" })
+  @SpeakeasyMetadata({ data: "json, name=containerVersionId" })
   containerVersionId?: string;
 
-  @Metadata({ data: "json, name=deleted" })
+  @SpeakeasyMetadata({ data: "json, name=deleted" })
   deleted?: boolean;
 
-  @Metadata({ data: "json, name=fingerprint" })
+  @SpeakeasyMetadata({ data: "json, name=fingerprint" })
   fingerprint?: string;
 
-  @Metadata({ data: "json, name=folder", elemType: shared.Folder })
+  @SpeakeasyMetadata({ data: "json, name=folder", elemType: Folder })
   folder?: Folder[];
 
-  @Metadata({ data: "json, name=macro", elemType: shared.Macro })
+  @SpeakeasyMetadata({ data: "json, name=macro", elemType: Macro })
   macro?: Macro[];
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=rule", elemType: shared.Rule })
+  @SpeakeasyMetadata({ data: "json, name=rule", elemType: Rule })
   rule?: Rule[];
 
-  @Metadata({ data: "json, name=tag", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tag", elemType: Tag })
   tag?: Tag[];
 
-  @Metadata({ data: "json, name=trigger", elemType: shared.Trigger })
+  @SpeakeasyMetadata({ data: "json, name=trigger", elemType: Trigger })
   trigger?: Trigger[];
 
-  @Metadata({ data: "json, name=variable", elemType: shared.Variable })
+  @SpeakeasyMetadata({ data: "json, name=variable", elemType: Variable })
   variable?: Variable[];
 }

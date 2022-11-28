@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SqlStatementResult } from "./sqlstatementresult";
+
 
 
 // ExecuteSqlResponse
@@ -8,6 +8,6 @@ import { SqlStatementResult } from "./sqlstatementresult";
  * The response elements represent the output of a request to run one or more SQL statements.
 **/
 export class ExecuteSqlResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sqlStatementResults", elemType: shared.SqlStatementResult })
+  @SpeakeasyMetadata({ data: "json, name=sqlStatementResults", elemType: SqlStatementResult })
   sqlStatementResults?: SqlStatementResult[];
 }

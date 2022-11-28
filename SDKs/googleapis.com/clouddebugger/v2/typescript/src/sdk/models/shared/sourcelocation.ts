@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SourceLocation
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents a location in the source code.
 **/
 export class SourceLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=column" })
+  @SpeakeasyMetadata({ data: "json, name=column" })
   column?: number;
 
-  @Metadata({ data: "json, name=line" })
+  @SpeakeasyMetadata({ data: "json, name=line" })
   line?: number;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path?: string;
 }

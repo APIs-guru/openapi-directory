@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // IdentificationTokenGenerationRequest
 /**
  * Information used to generate a token
@@ -33,15 +33,15 @@ var IdentificationTokenGenerationRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=email" }),
+        SpeakeasyMetadata({ data: "json, name=email" }),
         __metadata("design:type", String)
     ], IdentificationTokenGenerationRequest.prototype, "email", void 0);
     __decorate([
-        Metadata({ data: "json, name=firstName" }),
+        SpeakeasyMetadata({ data: "json, name=firstName" }),
         __metadata("design:type", String)
     ], IdentificationTokenGenerationRequest.prototype, "firstName", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastName" }),
+        SpeakeasyMetadata({ data: "json, name=lastName" }),
         __metadata("design:type", String)
     ], IdentificationTokenGenerationRequest.prototype, "lastName", void 0);
     return IdentificationTokenGenerationRequest;

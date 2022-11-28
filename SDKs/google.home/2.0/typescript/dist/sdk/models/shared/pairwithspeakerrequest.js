@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var PairwithSpeakerRequest = /** @class */ (function (_super) {
     __extends(PairwithSpeakerRequest, _super);
     function PairwithSpeakerRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=connect" }),
+        SpeakeasyMetadata({ data: "json, name=connect" }),
         __metadata("design:type", Boolean)
     ], PairwithSpeakerRequest.prototype, "connect", void 0);
     __decorate([
-        Metadata({ data: "json, name=mac_address" }),
+        SpeakeasyMetadata({ data: "json, name=mac_address" }),
         __metadata("design:type", String)
     ], PairwithSpeakerRequest.prototype, "macAddress", void 0);
     __decorate([
-        Metadata({ data: "json, name=profile" }),
+        SpeakeasyMetadata({ data: "json, name=profile" }),
         __metadata("design:type", Number)
     ], PairwithSpeakerRequest.prototype, "profile", void 0);
     return PairwithSpeakerRequest;

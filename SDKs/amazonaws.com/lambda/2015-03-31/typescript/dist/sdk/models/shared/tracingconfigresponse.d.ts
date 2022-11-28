@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TracingModeEnum } from "./tracingmodeenum";
 /**
  * The function's X-Ray tracing configuration.

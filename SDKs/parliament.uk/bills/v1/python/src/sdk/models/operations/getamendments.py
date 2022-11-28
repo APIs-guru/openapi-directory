@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetAmendmentsPathParams:
-    bill_id: int = field(default=None, metadata={'path_param': { 'field_name': 'billId', 'style': 'simple', 'explode': False }})
-    bill_stage_id: int = field(default=None, metadata={'path_param': { 'field_name': 'billStageId', 'style': 'simple', 'explode': False }})
+    bill_id: int = field(metadata={'path_param': { 'field_name': 'billId', 'style': 'simple', 'explode': False }})
+    bill_stage_id: int = field(metadata={'path_param': { 'field_name': 'billStageId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,15 +21,15 @@ class GetAmendmentsQueryParams:
 
 @dataclass
 class GetAmendmentsRequest:
-    path_params: GetAmendmentsPathParams = field(default=None)
-    query_params: GetAmendmentsQueryParams = field(default=None)
+    path_params: GetAmendmentsPathParams = field()
+    query_params: GetAmendmentsQueryParams = field()
     
 
 @dataclass
 class GetAmendmentsResponse:
+    content_type: str = field()
+    status_code: int = field()
     amendment_search_item_search_result: Optional[shared.AmendmentSearchItemSearchResult] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
+    body: Optional[bytes] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
-    status_code: int = field(default=None)
     

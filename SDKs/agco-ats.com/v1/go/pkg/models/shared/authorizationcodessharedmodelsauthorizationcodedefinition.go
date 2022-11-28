@@ -13,6 +13,8 @@ const (
 	AuthorizationCodesSharedModelsAuthorizationCodeDefinitionDurationUnitsEnumMinutes AuthorizationCodesSharedModelsAuthorizationCodeDefinitionDurationUnitsEnum = "Minutes"
 )
 
+// AuthorizationCodesSharedModelsAuthorizationCodeDefinition
+// Represents the model used to define how a type of authorization code is generated.
 type AuthorizationCodesSharedModelsAuthorizationCodeDefinition struct {
 	AuthorizationID  *string                                                                     `json:"AuthorizationID,omitempty"`
 	CreatedByUserID  *int32                                                                      `json:"CreatedByUserID,omitempty"`

@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum CisInstructionCisInstructionPayFrequencyEnum {
-    Monthly = "Monthly"
-,    Weekly = "Weekly"
+    Monthly = "Monthly",
+    Weekly = "Weekly"
 }
 
 export enum CisInstructionCisInstructionUomEnum {
-    NotSet = "NotSet"
-,    Minute = "Minute"
-,    Hour = "Hour"
-,    Day = "Day"
-,    Week = "Week"
-,    Month = "Month"
-,    Year = "Year"
-,    Unit = "Unit"
+    NotSet = "NotSet",
+    Minute = "Minute",
+    Hour = "Hour",
+    Day = "Day",
+    Week = "Week",
+    Month = "Month",
+    Year = "Year",
+    Unit = "Unit"
 }
 
 
 export class CisInstructionCisInstruction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CisLineTag" })
+  @SpeakeasyMetadata({ data: "json, name=CisLineTag" })
   cisLineTag?: string;
 
-  @Metadata({ data: "json, name=CisLineType" })
+  @SpeakeasyMetadata({ data: "json, name=CisLineType" })
   cisLineType?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=PayFrequency" })
+  @SpeakeasyMetadata({ data: "json, name=PayFrequency" })
   payFrequency?: CisInstructionCisInstructionPayFrequencyEnum;
 
-  @Metadata({ data: "json, name=PeriodEnd" })
+  @SpeakeasyMetadata({ data: "json, name=PeriodEnd" })
   periodEnd?: number;
 
-  @Metadata({ data: "json, name=PeriodStart" })
+  @SpeakeasyMetadata({ data: "json, name=PeriodStart" })
   periodStart?: number;
 
-  @Metadata({ data: "json, name=TaxYearEnd" })
+  @SpeakeasyMetadata({ data: "json, name=TaxYearEnd" })
   taxYearEnd?: number;
 
-  @Metadata({ data: "json, name=TaxYearStart" })
+  @SpeakeasyMetadata({ data: "json, name=TaxYearStart" })
   taxYearStart?: number;
 
-  @Metadata({ data: "json, name=UOM" })
+  @SpeakeasyMetadata({ data: "json, name=UOM" })
   uom?: CisInstructionCisInstructionUomEnum;
 
-  @Metadata({ data: "json, name=Units" })
+  @SpeakeasyMetadata({ data: "json, name=Units" })
   units?: number;
 
-  @Metadata({ data: "json, name=VAT" })
+  @SpeakeasyMetadata({ data: "json, name=VAT" })
   vat?: number;
 
-  @Metadata({ data: "json, name=Value" })
+  @SpeakeasyMetadata({ data: "json, name=Value" })
   value?: number;
 }
 
 
 export class CisInstruction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CisInstruction" })
+  @SpeakeasyMetadata({ data: "json, name=CisInstruction" })
   cisInstruction?: CisInstructionCisInstruction;
 }

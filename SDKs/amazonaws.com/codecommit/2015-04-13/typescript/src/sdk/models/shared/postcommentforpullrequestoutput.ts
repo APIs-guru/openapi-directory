@@ -1,30 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Comment } from "./comment";
 import { Location } from "./location";
 
 
+
 export class PostCommentForPullRequestOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=afterBlobId" })
+  @SpeakeasyMetadata({ data: "json, name=afterBlobId" })
   afterBlobId?: string;
 
-  @Metadata({ data: "json, name=afterCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=afterCommitId" })
   afterCommitId?: string;
 
-  @Metadata({ data: "json, name=beforeBlobId" })
+  @SpeakeasyMetadata({ data: "json, name=beforeBlobId" })
   beforeBlobId?: string;
 
-  @Metadata({ data: "json, name=beforeCommitId" })
+  @SpeakeasyMetadata({ data: "json, name=beforeCommitId" })
   beforeCommitId?: string;
 
-  @Metadata({ data: "json, name=comment" })
+  @SpeakeasyMetadata({ data: "json, name=comment" })
   comment?: Comment;
 
-  @Metadata({ data: "json, name=location" })
+  @SpeakeasyMetadata({ data: "json, name=location" })
   location?: Location;
 
-  @Metadata({ data: "json, name=pullRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=pullRequestId" })
   pullRequestId?: string;
 
-  @Metadata({ data: "json, name=repositoryName" })
+  @SpeakeasyMetadata({ data: "json, name=repositoryName" })
   repositoryName?: string;
 }

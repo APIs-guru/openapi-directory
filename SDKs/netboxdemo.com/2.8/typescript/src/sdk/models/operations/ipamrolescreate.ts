@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class IpamRolesCreateRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request: shared.Role;
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request: shared.RoleInput;
 }
 
 
 export class IpamRolesCreateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   role?: shared.Role;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

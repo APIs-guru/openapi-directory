@@ -1,97 +1,98 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DealerDbModelsDealer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BillingAddress" })
+  @SpeakeasyMetadata({ data: "json, name=BillingAddress" })
   billingAddress?: string;
 
-  @Metadata({ data: "json, name=BillingAddress2" })
+  @SpeakeasyMetadata({ data: "json, name=BillingAddress2" })
   billingAddress2?: string;
 
-  @Metadata({ data: "json, name=BillingAddress3" })
+  @SpeakeasyMetadata({ data: "json, name=BillingAddress3" })
   billingAddress3?: string;
 
-  @Metadata({ data: "json, name=BillingAddress4" })
+  @SpeakeasyMetadata({ data: "json, name=BillingAddress4" })
   billingAddress4?: string;
 
-  @Metadata({ data: "json, name=BillingCity" })
+  @SpeakeasyMetadata({ data: "json, name=BillingCity" })
   billingCity?: string;
 
-  @Metadata({ data: "json, name=BillingCountry" })
+  @SpeakeasyMetadata({ data: "json, name=BillingCountry" })
   billingCountry?: string;
 
-  @Metadata({ data: "json, name=BillingCountryCode" })
+  @SpeakeasyMetadata({ data: "json, name=BillingCountryCode" })
   billingCountryCode?: string;
 
-  @Metadata({ data: "json, name=BillingState" })
+  @SpeakeasyMetadata({ data: "json, name=BillingState" })
   billingState?: string;
 
-  @Metadata({ data: "json, name=BillingZip" })
+  @SpeakeasyMetadata({ data: "json, name=BillingZip" })
   billingZip?: string;
 
-  @Metadata({ data: "json, name=Brands" })
+  @SpeakeasyMetadata({ data: "json, name=Brands" })
   brands?: string[];
 
-  @Metadata({ data: "json, name=DealerCode" })
+  @SpeakeasyMetadata({ data: "json, name=DealerCode" })
   dealerCode?: string;
 
-  @Metadata({ data: "json, name=DealerName" })
+  @SpeakeasyMetadata({ data: "json, name=DealerName" })
   dealerName?: string;
 
-  @Metadata({ data: "json, name=DealerStatus" })
+  @SpeakeasyMetadata({ data: "json, name=DealerStatus" })
   dealerStatus?: string;
 
-  @Metadata({ data: "json, name=DealerStatusUpdateDate" })
+  @SpeakeasyMetadata({ data: "json, name=DealerStatusUpdateDate" })
   dealerStatusUpdateDate?: string;
 
-  @Metadata({ data: "json, name=Filler" })
+  @SpeakeasyMetadata({ data: "json, name=Filler" })
   filler?: string;
 
-  @Metadata({ data: "json, name=IsValid" })
+  @SpeakeasyMetadata({ data: "json, name=IsValid" })
   isValid?: boolean;
 
-  @Metadata({ data: "json, name=LanguagePreference" })
+  @SpeakeasyMetadata({ data: "json, name=LanguagePreference" })
   languagePreference?: string;
 
-  @Metadata({ data: "json, name=Region1" })
+  @SpeakeasyMetadata({ data: "json, name=Region1" })
   region1?: string;
 
-  @Metadata({ data: "json, name=Region2" })
+  @SpeakeasyMetadata({ data: "json, name=Region2" })
   region2?: string;
 
-  @Metadata({ data: "json, name=RegionMapping" })
+  @SpeakeasyMetadata({ data: "json, name=RegionMapping" })
   regionMapping?: string;
 
-  @Metadata({ data: "json, name=RoleBrand" })
+  @SpeakeasyMetadata({ data: "json, name=RoleBrand" })
   roleBrand?: string;
 
-  @Metadata({ data: "json, name=ShippingAddress2" })
+  @SpeakeasyMetadata({ data: "json, name=ShippingAddress2" })
   shippingAddress2?: string;
 
-  @Metadata({ data: "json, name=ShippingAddress3" })
+  @SpeakeasyMetadata({ data: "json, name=ShippingAddress3" })
   shippingAddress3?: string;
 
-  @Metadata({ data: "json, name=ShippingAddress4" })
+  @SpeakeasyMetadata({ data: "json, name=ShippingAddress4" })
   shippingAddress4?: string;
 
-  @Metadata({ data: "json, name=ShippingCity" })
+  @SpeakeasyMetadata({ data: "json, name=ShippingCity" })
   shippingCity?: string;
 
-  @Metadata({ data: "json, name=ShippingCountry" })
+  @SpeakeasyMetadata({ data: "json, name=ShippingCountry" })
   shippingCountry?: string;
 
-  @Metadata({ data: "json, name=ShippingState" })
+  @SpeakeasyMetadata({ data: "json, name=ShippingState" })
   shippingState?: string;
 
-  @Metadata({ data: "json, name=ShippingStreet" })
+  @SpeakeasyMetadata({ data: "json, name=ShippingStreet" })
   shippingStreet?: string;
 
-  @Metadata({ data: "json, name=ShippingZip" })
+  @SpeakeasyMetadata({ data: "json, name=ShippingZip" })
   shippingZip?: string;
 
-  @Metadata({ data: "json, name=Telephone" })
+  @SpeakeasyMetadata({ data: "json, name=Telephone" })
   telephone?: string;
 
-  @Metadata({ data: "json, name=VATCode" })
+  @SpeakeasyMetadata({ data: "json, name=VATCode" })
   vatCode?: string;
 }

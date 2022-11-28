@@ -1,5 +1,7 @@
 package shared
 
+// RunPivotReportRequest
+// The request to generate a pivot report.
 type RunPivotReportRequest struct {
 	CohortSpec          *CohortSpec       `json:"cohortSpec,omitempty"`
 	CurrencyCode        *string           `json:"currencyCode,omitempty"`

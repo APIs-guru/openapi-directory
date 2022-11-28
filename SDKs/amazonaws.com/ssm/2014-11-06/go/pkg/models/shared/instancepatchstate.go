@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// InstancePatchState
+// Defines the high-level patch compliance state for a managed instance, providing information about the number of installed, missing, not applicable, and failed patches along with metadata about the operation when this information was gathered for the instance.
 type InstancePatchState struct {
 	BaselineID                       string                 `json:"BaselineId"`
 	CriticalNonCompliantCount        *int64                 `json:"CriticalNonCompliantCount,omitempty"`

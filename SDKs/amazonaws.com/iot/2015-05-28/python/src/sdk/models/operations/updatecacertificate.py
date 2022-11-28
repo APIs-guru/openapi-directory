@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass
 class UpdateCaCertificatePathParams:
-    ca_certificate_id: str = field(default=None, metadata={'path_param': { 'field_name': 'caCertificateId', 'style': 'simple', 'explode': False }})
+    ca_certificate_id: str = field(metadata={'path_param': { 'field_name': 'caCertificateId', 'style': 'simple', 'explode': False }})
     
 class UpdateCaCertificateNewAutoRegistrationStatusEnum(str, Enum):
     ENABLE = "ENABLE"
@@ -36,33 +41,37 @@ class UpdateCaCertificateHeaders:
 @dataclass_json
 @dataclass
 class UpdateCaCertificateRequestBodyRegistrationConfig:
-    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roleArn' }})
-    template_body: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'templateBody' }})
+    r"""UpdateCaCertificateRequestBodyRegistrationConfig
+    The registration configuration.
+    """
+    
+    role_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('roleArn') }})
+    template_body: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('templateBody') }})
     
 
 @dataclass_json
 @dataclass
 class UpdateCaCertificateRequestBody:
-    registration_config: Optional[UpdateCaCertificateRequestBodyRegistrationConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registrationConfig' }})
-    remove_auto_registration: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'removeAutoRegistration' }})
+    registration_config: Optional[UpdateCaCertificateRequestBodyRegistrationConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('registrationConfig') }})
+    remove_auto_registration: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('removeAutoRegistration') }})
     
 
 @dataclass
 class UpdateCaCertificateRequest:
-    path_params: UpdateCaCertificatePathParams = field(default=None)
-    query_params: UpdateCaCertificateQueryParams = field(default=None)
-    headers: UpdateCaCertificateHeaders = field(default=None)
-    request: UpdateCaCertificateRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateCaCertificateHeaders = field()
+    path_params: UpdateCaCertificatePathParams = field()
+    query_params: UpdateCaCertificateQueryParams = field()
+    request: UpdateCaCertificateRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateCaCertificateResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     unauthorized_exception: Optional[Any] = field(default=None)
     

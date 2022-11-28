@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class IamcredentialsProjectsServiceAccountsSignBlobPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class IamcredentialsProjectsServiceAccountsSignBlobQueryParams:
 
 @dataclass
 class IamcredentialsProjectsServiceAccountsSignBlobSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class IamcredentialsProjectsServiceAccountsSignBlobRequest:
-    path_params: IamcredentialsProjectsServiceAccountsSignBlobPathParams = field(default=None)
-    query_params: IamcredentialsProjectsServiceAccountsSignBlobQueryParams = field(default=None)
+    path_params: IamcredentialsProjectsServiceAccountsSignBlobPathParams = field()
+    query_params: IamcredentialsProjectsServiceAccountsSignBlobQueryParams = field()
+    security: IamcredentialsProjectsServiceAccountsSignBlobSecurity = field()
     request: Optional[shared.SignBlobRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: IamcredentialsProjectsServiceAccountsSignBlobSecurity = field(default=None)
     
 
 @dataclass
 class IamcredentialsProjectsServiceAccountsSignBlobResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     sign_blob_response: Optional[shared.SignBlobResponse] = field(default=None)
-    status_code: int = field(default=None)
     

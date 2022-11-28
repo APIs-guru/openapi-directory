@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// FunctionConfiguration
+// A complex type that describes function metadata.
 type FunctionConfiguration struct {
 	CodeSize        *int64       `json:"CodeSize,omitempty"`
 	ConfigurationID *string      `json:"ConfigurationId,omitempty"`

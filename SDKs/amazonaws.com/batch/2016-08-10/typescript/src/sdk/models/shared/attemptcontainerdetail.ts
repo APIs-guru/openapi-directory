@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NetworkInterface } from "./networkinterface";
+
 
 
 // AttemptContainerDetail
@@ -8,21 +8,21 @@ import { NetworkInterface } from "./networkinterface";
  * An object representing the details of a container that's part of a job attempt.
 **/
 export class AttemptContainerDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=containerInstanceArn" })
+  @SpeakeasyMetadata({ data: "json, name=containerInstanceArn" })
   containerInstanceArn?: string;
 
-  @Metadata({ data: "json, name=exitCode" })
+  @SpeakeasyMetadata({ data: "json, name=exitCode" })
   exitCode?: number;
 
-  @Metadata({ data: "json, name=logStreamName" })
+  @SpeakeasyMetadata({ data: "json, name=logStreamName" })
   logStreamName?: string;
 
-  @Metadata({ data: "json, name=networkInterfaces", elemType: shared.NetworkInterface })
+  @SpeakeasyMetadata({ data: "json, name=networkInterfaces", elemType: NetworkInterface })
   networkInterfaces?: NetworkInterface[];
 
-  @Metadata({ data: "json, name=reason" })
+  @SpeakeasyMetadata({ data: "json, name=reason" })
   reason?: string;
 
-  @Metadata({ data: "json, name=taskArn" })
+  @SpeakeasyMetadata({ data: "json, name=taskArn" })
   taskArn?: string;
 }

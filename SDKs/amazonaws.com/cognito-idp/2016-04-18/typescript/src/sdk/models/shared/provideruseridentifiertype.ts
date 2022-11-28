@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ProviderUserIdentifierType
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A container for information about an identity provider for a user pool.
 **/
 export class ProviderUserIdentifierType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ProviderAttributeName" })
+  @SpeakeasyMetadata({ data: "json, name=ProviderAttributeName" })
   providerAttributeName?: string;
 
-  @Metadata({ data: "json, name=ProviderAttributeValue" })
+  @SpeakeasyMetadata({ data: "json, name=ProviderAttributeValue" })
   providerAttributeValue?: string;
 
-  @Metadata({ data: "json, name=ProviderName" })
+  @SpeakeasyMetadata({ data: "json, name=ProviderName" })
   providerName?: string;
 }

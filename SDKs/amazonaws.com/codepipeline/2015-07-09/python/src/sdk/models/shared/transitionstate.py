@@ -1,16 +1,21 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class TransitionState:
-    disabled_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'disabledReason' }})
-    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
-    last_changed_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastChangedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    last_changed_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastChangedBy' }})
+    r"""TransitionState
+    Represents information about the state of transitions between one stage and another stage.
+    """
+    
+    disabled_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('disabledReason') }})
+    enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('enabled') }})
+    last_changed_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastChangedAt'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    last_changed_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('lastChangedBy') }})
     

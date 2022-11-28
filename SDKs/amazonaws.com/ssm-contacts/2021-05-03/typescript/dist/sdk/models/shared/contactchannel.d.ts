@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ActivationStatusEnum } from "./activationstatusenum";
 import { ContactChannelAddress } from "./contactchanneladdress";
 import { ChannelTypeEnum } from "./channeltypeenum";

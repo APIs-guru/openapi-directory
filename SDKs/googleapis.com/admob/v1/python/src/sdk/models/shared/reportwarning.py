@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class ReportWarningTypeEnum(str, Enum):
     TYPE_UNSPECIFIED = "TYPE_UNSPECIFIED"
@@ -13,6 +15,10 @@ class ReportWarningTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class ReportWarning:
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    type: Optional[ReportWarningTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""ReportWarning
+    Warnings associated with generation of the report.
+    """
+    
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    type: Optional[ReportWarningTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

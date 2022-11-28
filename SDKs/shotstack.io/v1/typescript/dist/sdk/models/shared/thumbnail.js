@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // Thumbnail
 /**
  * Generate a thumbnail image for the video or image at a specific point from the timeline.
@@ -33,11 +33,11 @@ var Thumbnail = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=capture" }),
+        SpeakeasyMetadata({ data: "json, name=capture" }),
         __metadata("design:type", Number)
     ], Thumbnail.prototype, "capture", void 0);
     __decorate([
-        Metadata({ data: "json, name=scale" }),
+        SpeakeasyMetadata({ data: "json, name=scale" }),
         __metadata("design:type", Number)
     ], Thumbnail.prototype, "scale", void 0);
     return Thumbnail;

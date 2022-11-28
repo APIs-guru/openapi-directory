@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ConfigSettings
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Message containing the configuration settings for the Lighthouse run.
 **/
 export class ConfigSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channel" })
+  @SpeakeasyMetadata({ data: "json, name=channel" })
   channel?: string;
 
-  @Metadata({ data: "json, name=emulatedFormFactor" })
+  @SpeakeasyMetadata({ data: "json, name=emulatedFormFactor" })
   emulatedFormFactor?: string;
 
-  @Metadata({ data: "json, name=formFactor" })
+  @SpeakeasyMetadata({ data: "json, name=formFactor" })
   formFactor?: string;
 
-  @Metadata({ data: "json, name=locale" })
+  @SpeakeasyMetadata({ data: "json, name=locale" })
   locale?: string;
 
-  @Metadata({ data: "json, name=onlyCategories" })
+  @SpeakeasyMetadata({ data: "json, name=onlyCategories" })
   onlyCategories?: any;
 }

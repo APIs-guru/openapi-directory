@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteHsmRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the inputs for the <a>DeleteHsm</a> operation.
 **/
 export class DeleteHsmRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HsmArn" })
+  @SpeakeasyMetadata({ data: "json, name=HsmArn" })
   hsmArn: string;
 }

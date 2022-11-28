@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// FontFile
+// Class FontFile.
 type FontFile struct {
 	DateCreated  *time.Time `json:"DateCreated,omitempty"`
 	DateModified *time.Time `json:"DateModified,omitempty"`

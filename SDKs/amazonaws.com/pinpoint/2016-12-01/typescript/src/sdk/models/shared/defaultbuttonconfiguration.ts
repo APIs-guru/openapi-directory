@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ButtonActionEnum } from "./buttonactionenum";
+
 
 
 // DefaultButtonConfiguration
@@ -7,21 +8,21 @@ import { ButtonActionEnum } from "./buttonactionenum";
  * Default button configuration.
 **/
 export class DefaultButtonConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BackgroundColor" })
+  @SpeakeasyMetadata({ data: "json, name=BackgroundColor" })
   backgroundColor?: string;
 
-  @Metadata({ data: "json, name=BorderRadius" })
+  @SpeakeasyMetadata({ data: "json, name=BorderRadius" })
   borderRadius?: number;
 
-  @Metadata({ data: "json, name=ButtonAction" })
+  @SpeakeasyMetadata({ data: "json, name=ButtonAction" })
   buttonAction: ButtonActionEnum;
 
-  @Metadata({ data: "json, name=Link" })
+  @SpeakeasyMetadata({ data: "json, name=Link" })
   link?: string;
 
-  @Metadata({ data: "json, name=Text" })
+  @SpeakeasyMetadata({ data: "json, name=Text" })
   text: string;
 
-  @Metadata({ data: "json, name=TextColor" })
+  @SpeakeasyMetadata({ data: "json, name=TextColor" })
   textColor?: string;
 }

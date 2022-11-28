@@ -1,9 +1,10 @@
 
 
+
 export enum ResourceShareAssociationStatusEnum {
-    Associating = "ASSOCIATING"
-,    Associated = "ASSOCIATED"
-,    Failed = "FAILED"
-,    Disassociating = "DISASSOCIATING"
-,    Disassociated = "DISASSOCIATED"
+    Associating = "ASSOCIATING",
+    Associated = "ASSOCIATED",
+    Failed = "FAILED",
+    Disassociating = "DISASSOCIATING",
+    Disassociated = "DISASSOCIATED"
 }

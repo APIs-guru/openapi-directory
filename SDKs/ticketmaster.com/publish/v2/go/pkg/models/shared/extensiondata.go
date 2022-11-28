@@ -8,6 +8,8 @@ const (
 	ExtensionDataRelatedEntityTypeEnumAttraction ExtensionDataRelatedEntityTypeEnum = "attraction"
 )
 
+// ExtensionData
+// This class defines an extenstion data on the Publish API
 type ExtensionData struct {
 	Data                map[string]interface{}             `json:"data"`
 	RelatedEntityID     *string                            `json:"relatedEntityId,omitempty"`

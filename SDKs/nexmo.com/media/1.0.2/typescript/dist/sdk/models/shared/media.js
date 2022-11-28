@@ -22,66 +22,66 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var Media = /** @class */ (function (_super) {
     __extends(Media, _super);
     function Media() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=account_id" }),
+        SpeakeasyMetadata({ data: "json, name=account_id" }),
         __metadata("design:type", String)
     ], Media.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=etag" }),
+        SpeakeasyMetadata({ data: "json, name=etag" }),
         __metadata("design:type", String)
     ], Media.prototype, "etag", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Media.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=max_downloads_allowed" }),
+        SpeakeasyMetadata({ data: "json, name=max_downloads_allowed" }),
         __metadata("design:type", Number)
     ], Media.prototype, "maxDownloadsAllowed", void 0);
     __decorate([
-        Metadata({ data: "json, name=media_size" }),
+        SpeakeasyMetadata({ data: "json, name=media_size" }),
         __metadata("design:type", Number)
     ], Media.prototype, "mediaSize", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadata_primary" }),
+        SpeakeasyMetadata({ data: "json, name=metadata_primary" }),
         __metadata("design:type", String)
     ], Media.prototype, "metadataPrimary", void 0);
     __decorate([
-        Metadata({ data: "json, name=metadata_secondary" }),
+        SpeakeasyMetadata({ data: "json, name=metadata_secondary" }),
         __metadata("design:type", String)
     ], Media.prototype, "metadataSecondary", void 0);
     __decorate([
-        Metadata({ data: "json, name=mime_type" }),
+        SpeakeasyMetadata({ data: "json, name=mime_type" }),
         __metadata("design:type", String)
     ], Media.prototype, "mimeType", void 0);
     __decorate([
-        Metadata({ data: "json, name=original_file_name" }),
+        SpeakeasyMetadata({ data: "json, name=original_file_name" }),
         __metadata("design:type", String)
     ], Media.prototype, "originalFileName", void 0);
     __decorate([
-        Metadata({ data: "json, name=public" }),
+        SpeakeasyMetadata({ data: "json, name=public" }),
         __metadata("design:type", Boolean)
     ], Media.prototype, "public", void 0);
     __decorate([
-        Metadata({ data: "json, name=store_id" }),
+        SpeakeasyMetadata({ data: "json, name=store_id" }),
         __metadata("design:type", String)
     ], Media.prototype, "storeId", void 0);
     __decorate([
-        Metadata({ data: "json, name=time_created" }),
+        SpeakeasyMetadata({ data: "json, name=time_created" }),
         __metadata("design:type", String)
     ], Media.prototype, "timeCreated", void 0);
     __decorate([
-        Metadata({ data: "json, name=time_last_updated" }),
+        SpeakeasyMetadata({ data: "json, name=time_last_updated" }),
         __metadata("design:type", String)
     ], Media.prototype, "timeLastUpdated", void 0);
     __decorate([
-        Metadata({ data: "json, name=times_downloaded" }),
+        SpeakeasyMetadata({ data: "json, name=times_downloaded" }),
         __metadata("design:type", Number)
     ], Media.prototype, "timesDownloaded", void 0);
     return Media;

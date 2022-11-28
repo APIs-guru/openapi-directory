@@ -12,11 +12,6 @@ type GetDashboardFavoriteStatusSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetDashboardFavoriteStatusRequest struct {
-	QueryParams GetDashboardFavoriteStatusQueryParams
-	Security    GetDashboardFavoriteStatusSecurity
-}
-
 type GetDashboardFavoriteStatus400ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -31,6 +26,11 @@ type GetDashboardFavoriteStatus404ApplicationJSON struct {
 
 type GetDashboardFavoriteStatus500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetDashboardFavoriteStatusRequest struct {
+	QueryParams GetDashboardFavoriteStatusQueryParams
+	Security    GetDashboardFavoriteStatusSecurity
 }
 
 type GetDashboardFavoriteStatusResponse struct {

@@ -19,11 +19,6 @@ type GetSchedulesScheduleDSubIDQueryParams struct {
 	SortNullsLast *bool   `queryParam:"style=form,explode=true,name=sort_nulls_last"`
 }
 
-type GetSchedulesScheduleDSubIDRequest struct {
-	PathParams  GetSchedulesScheduleDSubIDPathParams
-	QueryParams GetSchedulesScheduleDSubIDQueryParams
-}
-
 type GetSchedulesScheduleDSubIDDefaultApplicationJSONResults struct {
 	ActionCode                          *string                  `json:"action_code,omitempty"`
 	ActionCodeFull                      *string                  `json:"action_code_full,omitempty"`
@@ -82,6 +77,11 @@ type GetSchedulesScheduleDSubIDDefaultApplicationJSONResults struct {
 type GetSchedulesScheduleDSubIDDefaultApplicationJSON struct {
 	Pagination *shared.OffsetInfo                                        `json:"pagination,omitempty"`
 	Results    []GetSchedulesScheduleDSubIDDefaultApplicationJSONResults `json:"results,omitempty"`
+}
+
+type GetSchedulesScheduleDSubIDRequest struct {
+	PathParams  GetSchedulesScheduleDSubIDPathParams
+	QueryParams GetSchedulesScheduleDSubIDQueryParams
 }
 
 type GetSchedulesScheduleDSubIDResponse struct {

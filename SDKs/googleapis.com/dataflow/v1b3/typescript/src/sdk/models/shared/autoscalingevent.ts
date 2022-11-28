@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StructuredMessage } from "./structuredmessage";
 
+
 export enum AutoscalingEventEventTypeEnum {
-    TypeUnknown = "TYPE_UNKNOWN"
-,    TargetNumWorkersChanged = "TARGET_NUM_WORKERS_CHANGED"
-,    CurrentNumWorkersChanged = "CURRENT_NUM_WORKERS_CHANGED"
-,    ActuationFailure = "ACTUATION_FAILURE"
-,    NoChange = "NO_CHANGE"
+    TypeUnknown = "TYPE_UNKNOWN",
+    TargetNumWorkersChanged = "TARGET_NUM_WORKERS_CHANGED",
+    CurrentNumWorkersChanged = "CURRENT_NUM_WORKERS_CHANGED",
+    ActuationFailure = "ACTUATION_FAILURE",
+    NoChange = "NO_CHANGE"
 }
 
 
@@ -15,21 +16,21 @@ export enum AutoscalingEventEventTypeEnum {
  * A structured message reporting an autoscaling decision made by the Dataflow service.
 **/
 export class AutoscalingEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currentNumWorkers" })
+  @SpeakeasyMetadata({ data: "json, name=currentNumWorkers" })
   currentNumWorkers?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: StructuredMessage;
 
-  @Metadata({ data: "json, name=eventType" })
+  @SpeakeasyMetadata({ data: "json, name=eventType" })
   eventType?: AutoscalingEventEventTypeEnum;
 
-  @Metadata({ data: "json, name=targetNumWorkers" })
+  @SpeakeasyMetadata({ data: "json, name=targetNumWorkers" })
   targetNumWorkers?: string;
 
-  @Metadata({ data: "json, name=time" })
+  @SpeakeasyMetadata({ data: "json, name=time" })
   time?: string;
 
-  @Metadata({ data: "json, name=workerPool" })
+  @SpeakeasyMetadata({ data: "json, name=workerPool" })
   workerPool?: string;
 }

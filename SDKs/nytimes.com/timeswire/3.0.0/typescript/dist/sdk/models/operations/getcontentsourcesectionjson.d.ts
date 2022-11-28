@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare enum GetContentSourceSectionJsonSourceEnum {
     All = "all",
@@ -13,15 +13,15 @@ export declare class GetContentSourceSectionJsonQueryParams extends SpeakeasyBas
     limit?: number;
     offset?: number;
 }
-export declare class GetContentSourceSectionJsonRequest extends SpeakeasyBase {
-    pathParams: GetContentSourceSectionJsonPathParams;
-    queryParams: GetContentSourceSectionJsonQueryParams;
-}
 export declare class GetContentSourceSectionJson200ApplicationJson extends SpeakeasyBase {
     copyright?: string;
     numResults?: number;
     results?: shared.Article[];
     status?: string;
+}
+export declare class GetContentSourceSectionJsonRequest extends SpeakeasyBase {
+    pathParams: GetContentSourceSectionJsonPathParams;
+    queryParams: GetContentSourceSectionJsonQueryParams;
 }
 export declare class GetContentSourceSectionJsonResponse extends SpeakeasyBase {
     contentType: string;

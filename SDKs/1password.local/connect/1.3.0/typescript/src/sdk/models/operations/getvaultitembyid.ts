@@ -1,41 +1,42 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetVaultItemByIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=itemUuid" })
   itemUuid: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=vaultUuid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=vaultUuid" })
   vaultUuid: string;
 }
 
 
 export class GetVaultItemByIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   connectToken: shared.SchemeConnectToken;
 }
 
 
 export class GetVaultItemByIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetVaultItemByIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetVaultItemByIdSecurity;
 }
 
 
 export class GetVaultItemByIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponse?: shared.ErrorResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   fullItem?: shared.FullItem;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

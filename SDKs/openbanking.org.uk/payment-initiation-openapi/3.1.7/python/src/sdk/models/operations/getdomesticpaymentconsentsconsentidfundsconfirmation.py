@@ -1,16 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import List,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetDomesticPaymentConsentsConsentIDFundsConfirmationPathParams:
-    consent_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ConsentId', 'style': 'simple', 'explode': False }})
+    consent_id: str = field(metadata={'path_param': { 'field_name': 'ConsentId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetDomesticPaymentConsentsConsentIDFundsConfirmationHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     x_customer_user_agent: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'x-customer-user-agent', 'style': 'simple', 'explode': False }})
     x_fapi_auth_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'x-fapi-auth-date', 'style': 'simple', 'explode': False }})
     x_fapi_customer_ip_address: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'x-fapi-customer-ip-address', 'style': 'simple', 'explode': False }})
@@ -19,22 +22,22 @@ class GetDomesticPaymentConsentsConsentIDFundsConfirmationHeaders:
 
 @dataclass
 class GetDomesticPaymentConsentsConsentIDFundsConfirmationSecurity:
-    psuo_auth2_security: shared.SchemePsuoAuth2Security = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    psuo_auth2_security: shared.SchemePsuoAuth2Security = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetDomesticPaymentConsentsConsentIDFundsConfirmationRequest:
-    path_params: GetDomesticPaymentConsentsConsentIDFundsConfirmationPathParams = field(default=None)
-    headers: GetDomesticPaymentConsentsConsentIDFundsConfirmationHeaders = field(default=None)
-    security: GetDomesticPaymentConsentsConsentIDFundsConfirmationSecurity = field(default=None)
+    headers: GetDomesticPaymentConsentsConsentIDFundsConfirmationHeaders = field()
+    path_params: GetDomesticPaymentConsentsConsentIDFundsConfirmationPathParams = field()
+    security: GetDomesticPaymentConsentsConsentIDFundsConfirmationSecurity = field()
     
 
 @dataclass
 class GetDomesticPaymentConsentsConsentIDFundsConfirmationResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     ob_error_response1: Optional[shared.ObErrorResponse1] = field(default=None)
     ob_write_funds_confirmation_response1: Optional[shared.ObWriteFundsConfirmationResponse1] = field(default=None)
-    status_code: int = field(default=None)
     

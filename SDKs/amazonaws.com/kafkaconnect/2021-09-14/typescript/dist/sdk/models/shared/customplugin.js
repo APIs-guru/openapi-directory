@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CustomPlugin
 /**
  * A plugin is an AWS resource that contains the code that defines a connector's logic.
@@ -33,11 +33,11 @@ var CustomPlugin = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customPluginArn" }),
+        SpeakeasyMetadata({ data: "json, name=customPluginArn" }),
         __metadata("design:type", String)
     ], CustomPlugin.prototype, "customPluginArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=revision" }),
+        SpeakeasyMetadata({ data: "json, name=revision" }),
         __metadata("design:type", Number)
     ], CustomPlugin.prototype, "revision", void 0);
     return CustomPlugin;

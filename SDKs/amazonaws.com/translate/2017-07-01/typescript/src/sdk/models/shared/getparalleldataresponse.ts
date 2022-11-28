@@ -1,20 +1,19 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { ParallelDataDataLocation } from "./paralleldatadatalocation";
-import { ParallelDataDataLocation } from "./paralleldatadatalocation";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParallelDataDataLocation } from "./paralleldatadatalocation";
 import { ParallelDataProperties } from "./paralleldataproperties";
 
 
+
 export class GetParallelDataResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AuxiliaryDataLocation" })
+  @SpeakeasyMetadata({ data: "json, name=AuxiliaryDataLocation" })
   auxiliaryDataLocation?: ParallelDataDataLocation;
 
-  @Metadata({ data: "json, name=DataLocation" })
+  @SpeakeasyMetadata({ data: "json, name=DataLocation" })
   dataLocation?: ParallelDataDataLocation;
 
-  @Metadata({ data: "json, name=LatestUpdateAttemptAuxiliaryDataLocation" })
+  @SpeakeasyMetadata({ data: "json, name=LatestUpdateAttemptAuxiliaryDataLocation" })
   latestUpdateAttemptAuxiliaryDataLocation?: ParallelDataDataLocation;
 
-  @Metadata({ data: "json, name=ParallelDataProperties" })
+  @SpeakeasyMetadata({ data: "json, name=ParallelDataProperties" })
   parallelDataProperties?: ParallelDataProperties;
 }

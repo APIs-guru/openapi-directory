@@ -26,7 +26,7 @@ type AndroiddeviceprovisioningCustomersConfigurationsPatchQueryParams struct {
 type AndroiddeviceprovisioningCustomersConfigurationsPatchRequest struct {
 	PathParams  AndroiddeviceprovisioningCustomersConfigurationsPatchPathParams
 	QueryParams AndroiddeviceprovisioningCustomersConfigurationsPatchQueryParams
-	Request     *shared.Configuration `request:"mediaType=application/json"`
+	Request     *shared.ConfigurationInput `request:"mediaType=application/json"`
 }
 
 type AndroiddeviceprovisioningCustomersConfigurationsPatchResponse struct {

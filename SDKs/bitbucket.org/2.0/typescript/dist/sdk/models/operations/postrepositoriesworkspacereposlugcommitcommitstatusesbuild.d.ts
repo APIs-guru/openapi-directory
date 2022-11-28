@@ -1,0 +1,23 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import * as shared from "../shared";
+export declare class PostRepositoriesWorkspaceRepoSlugCommitCommitStatusesBuildPathParams extends SpeakeasyBase {
+    commit: string;
+    repoSlug: string;
+    workspace: string;
+}
+export declare class PostRepositoriesWorkspaceRepoSlugCommitCommitStatusesBuildSecurity extends SpeakeasyBase {
+    oauth2?: shared.SchemeOauth2;
+    basic?: shared.SchemeBasic;
+    apiKey?: shared.SchemeApiKey;
+}
+export declare class PostRepositoriesWorkspaceRepoSlugCommitCommitStatusesBuildRequest extends SpeakeasyBase {
+    pathParams: PostRepositoriesWorkspaceRepoSlugCommitCommitStatusesBuildPathParams;
+    request?: Map<string, any>;
+    security: PostRepositoriesWorkspaceRepoSlugCommitCommitStatusesBuildSecurity;
+}
+export declare class PostRepositoriesWorkspaceRepoSlugCommitCommitStatusesBuildResponse extends SpeakeasyBase {
+    contentType: string;
+    statusCode: number;
+    commitstatus?: Map<string, any>;
+    error?: Map<string, any>;
+}

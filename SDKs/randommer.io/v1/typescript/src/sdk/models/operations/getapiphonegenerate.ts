@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetApiPhoneGenerateQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=CountryCode" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=CountryCode" })
   countryCode: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=Quantity" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Quantity" })
   quantity: number;
 }
 
 
 export class GetApiPhoneGenerateHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Api-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Api-Key" })
   xApiKey?: string;
 }
 
 
 export class GetApiPhoneGenerateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApiPhoneGenerateQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetApiPhoneGenerateHeaders;
 }
 
 
 export class GetApiPhoneGenerateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

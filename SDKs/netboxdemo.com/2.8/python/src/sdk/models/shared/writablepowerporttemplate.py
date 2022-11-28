@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class WritablePowerPortTemplateTypeEnum(str, Enum):
     IEC_60320_C6 = "iec-60320-c6"
@@ -73,11 +75,10 @@ class WritablePowerPortTemplateTypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class WritablePowerPortTemplate:
-    allocated_draw: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allocated_draw' }})
-    device_type: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device_type' }})
-    id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    maximum_draw: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maximum_draw' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: Optional[WritablePowerPortTemplateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class WritablePowerPortTemplateInput:
+    device_type: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('device_type') }})
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    allocated_draw: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('allocated_draw') }})
+    maximum_draw: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maximum_draw') }})
+    type: Optional[WritablePowerPortTemplateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

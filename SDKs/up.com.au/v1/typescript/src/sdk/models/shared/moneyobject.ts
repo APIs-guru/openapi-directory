@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MoneyObject
@@ -7,12 +8,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * 
 **/
 export class MoneyObject extends SpeakeasyBase {
-  @Metadata({ data: "json, name=currencyCode" })
+  @SpeakeasyMetadata({ data: "json, name=currencyCode" })
   currencyCode: string;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value: string;
 
-  @Metadata({ data: "json, name=valueInBaseUnits" })
+  @SpeakeasyMetadata({ data: "json, name=valueInBaseUnits" })
   valueInBaseUnits: number;
 }

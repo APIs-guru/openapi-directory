@@ -1,5 +1,7 @@
 package shared
 
+// V2Restrictions
+// Describes the restrictions on the key.
 type V2Restrictions struct {
 	AndroidKeyRestrictions *V2AndroidKeyRestrictions `json:"androidKeyRestrictions,omitempty"`
 	APITargets             []V2APITarget             `json:"apiTargets,omitempty"`

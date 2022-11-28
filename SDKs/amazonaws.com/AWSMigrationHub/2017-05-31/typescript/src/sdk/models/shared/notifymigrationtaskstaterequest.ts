@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Task } from "./task";
 
 
+
 export class NotifyMigrationTaskStateRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DryRun" })
+  @SpeakeasyMetadata({ data: "json, name=DryRun" })
   dryRun?: boolean;
 
-  @Metadata({ data: "json, name=MigrationTaskName" })
+  @SpeakeasyMetadata({ data: "json, name=MigrationTaskName" })
   migrationTaskName: string;
 
-  @Metadata({ data: "json, name=NextUpdateSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=NextUpdateSeconds" })
   nextUpdateSeconds: number;
 
-  @Metadata({ data: "json, name=ProgressUpdateStream" })
+  @SpeakeasyMetadata({ data: "json, name=ProgressUpdateStream" })
   progressUpdateStream: string;
 
-  @Metadata({ data: "json, name=Task" })
+  @SpeakeasyMetadata({ data: "json, name=Task" })
   task: Task;
 
-  @Metadata({ data: "json, name=UpdateDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateDateTime" })
   updateDateTime: Date;
 }

@@ -1,5 +1,14 @@
 package shared
 
+// SSHPublicKeyInput
+// The SSH public key information associated with a Google account.
+type SSHPublicKeyInput struct {
+	ExpirationTimeUsec *string `json:"expirationTimeUsec,omitempty"`
+	Key                *string `json:"key,omitempty"`
+}
+
+// SSHPublicKey
+// The SSH public key information associated with a Google account.
 type SSHPublicKey struct {
 	ExpirationTimeUsec *string `json:"expirationTimeUsec,omitempty"`
 	Fingerprint        *string `json:"fingerprint,omitempty"`

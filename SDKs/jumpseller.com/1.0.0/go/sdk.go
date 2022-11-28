@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://api.jumpseller.com/v1",
 }
 
@@ -20,9 +20,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -33,27 +37,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DeleteCategoriesIDJSON - Delete an existing Category.
 func (s *SDK) DeleteCategoriesIDJSON(ctx context.Context, request operations.DeleteCategoriesIDJSONRequest) (*operations.DeleteCategoriesIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/categories/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -63,7 +85,7 @@ func (s *SDK) DeleteCategoriesIDJSON(ctx context.Context, request operations.Del
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -104,8 +126,9 @@ func (s *SDK) DeleteCategoriesIDJSON(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteCheckoutCustomFieldsIDJSON - Delete an existing CheckoutCustomField.
 func (s *SDK) DeleteCheckoutCustomFieldsIDJSON(ctx context.Context, request operations.DeleteCheckoutCustomFieldsIDJSONRequest) (*operations.DeleteCheckoutCustomFieldsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/checkout_custom_fields/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -115,7 +138,7 @@ func (s *SDK) DeleteCheckoutCustomFieldsIDJSON(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -156,8 +179,9 @@ func (s *SDK) DeleteCheckoutCustomFieldsIDJSON(ctx context.Context, request oper
 	return res, nil
 }
 
+// DeleteCustomFieldsIDJSON - Delete an existing CustomField.
 func (s *SDK) DeleteCustomFieldsIDJSON(ctx context.Context, request operations.DeleteCustomFieldsIDJSONRequest) (*operations.DeleteCustomFieldsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/custom_fields/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -167,7 +191,7 @@ func (s *SDK) DeleteCustomFieldsIDJSON(ctx context.Context, request operations.D
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -208,8 +232,9 @@ func (s *SDK) DeleteCustomFieldsIDJSON(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DeleteCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSON - Delete an existing CustomFieldSelectOption.
 func (s *SDK) DeleteCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSON(ctx context.Context, request operations.DeleteCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSONRequest) (*operations.DeleteCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/custom_fields/{id}/select_options/{custom_field_select_option_id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -219,7 +244,7 @@ func (s *SDK) DeleteCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSON(ctx
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -260,8 +285,9 @@ func (s *SDK) DeleteCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSON(ctx
 	return res, nil
 }
 
+// DeleteCustomerCategoriesIDCustomersJSON - Delete Customers from an existing CustomerCategory.
 func (s *SDK) DeleteCustomerCategoriesIDCustomersJSON(ctx context.Context, request operations.DeleteCustomerCategoriesIDCustomersJSONRequest) (*operations.DeleteCustomerCategoriesIDCustomersJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/customer_categories/{id}/customers.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -281,7 +307,7 @@ func (s *SDK) DeleteCustomerCategoriesIDCustomersJSON(ctx context.Context, reque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -322,8 +348,9 @@ func (s *SDK) DeleteCustomerCategoriesIDCustomersJSON(ctx context.Context, reque
 	return res, nil
 }
 
+// DeleteCustomerCategoriesIDJSON - Delete an existing CustomerCategory.
 func (s *SDK) DeleteCustomerCategoriesIDJSON(ctx context.Context, request operations.DeleteCustomerCategoriesIDJSONRequest) (*operations.DeleteCustomerCategoriesIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/customer_categories/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -333,7 +360,7 @@ func (s *SDK) DeleteCustomerCategoriesIDJSON(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -374,8 +401,9 @@ func (s *SDK) DeleteCustomerCategoriesIDJSON(ctx context.Context, request operat
 	return res, nil
 }
 
+// DeleteCustomersIDFieldsFieldID - Delete a Customer Additional Field.
 func (s *SDK) DeleteCustomersIDFieldsFieldID(ctx context.Context, request operations.DeleteCustomersIDFieldsFieldIDRequest) (*operations.DeleteCustomersIDFieldsFieldIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/customers/{id}/fields/{field_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -385,7 +413,7 @@ func (s *SDK) DeleteCustomersIDFieldsFieldID(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -426,8 +454,9 @@ func (s *SDK) DeleteCustomersIDFieldsFieldID(ctx context.Context, request operat
 	return res, nil
 }
 
+// DeleteCustomersIDJSON - Delete an existing Customer.
 func (s *SDK) DeleteCustomersIDJSON(ctx context.Context, request operations.DeleteCustomersIDJSONRequest) (*operations.DeleteCustomersIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/customers/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -437,7 +466,7 @@ func (s *SDK) DeleteCustomersIDJSON(ctx context.Context, request operations.Dele
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -478,8 +507,9 @@ func (s *SDK) DeleteCustomersIDJSON(ctx context.Context, request operations.Dele
 	return res, nil
 }
 
+// DeleteHooksIDJSON - Delete an existing Hook.
 func (s *SDK) DeleteHooksIDJSON(ctx context.Context, request operations.DeleteHooksIDJSONRequest) (*operations.DeleteHooksIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/hooks/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -489,7 +519,7 @@ func (s *SDK) DeleteHooksIDJSON(ctx context.Context, request operations.DeleteHo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -530,8 +560,9 @@ func (s *SDK) DeleteHooksIDJSON(ctx context.Context, request operations.DeleteHo
 	return res, nil
 }
 
+// DeleteJsappsCodeJSON - Delete an existing JSApp.
 func (s *SDK) DeleteJsappsCodeJSON(ctx context.Context, request operations.DeleteJsappsCodeJSONRequest) (*operations.DeleteJsappsCodeJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jsapps/{code}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -541,7 +572,7 @@ func (s *SDK) DeleteJsappsCodeJSON(ctx context.Context, request operations.Delet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -582,8 +613,9 @@ func (s *SDK) DeleteJsappsCodeJSON(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeletePagesIDJSON - Delete an existing Page.
 func (s *SDK) DeletePagesIDJSON(ctx context.Context, request operations.DeletePagesIDJSONRequest) (*operations.DeletePagesIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pages/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -593,7 +625,7 @@ func (s *SDK) DeletePagesIDJSON(ctx context.Context, request operations.DeletePa
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -634,8 +666,9 @@ func (s *SDK) DeletePagesIDJSON(ctx context.Context, request operations.DeletePa
 	return res, nil
 }
 
+// DeleteProductsIDAttachmentsAttachmentIDJSON - Delete a Product Attachment.
 func (s *SDK) DeleteProductsIDAttachmentsAttachmentIDJSON(ctx context.Context, request operations.DeleteProductsIDAttachmentsAttachmentIDJSONRequest) (*operations.DeleteProductsIDAttachmentsAttachmentIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/attachments/{attachment_id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -645,7 +678,7 @@ func (s *SDK) DeleteProductsIDAttachmentsAttachmentIDJSON(ctx context.Context, r
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -686,8 +719,9 @@ func (s *SDK) DeleteProductsIDAttachmentsAttachmentIDJSON(ctx context.Context, r
 	return res, nil
 }
 
+// DeleteProductsIDDigitalProductsDigitalProductIDJSON - Delete a Product DigitalProduct.
 func (s *SDK) DeleteProductsIDDigitalProductsDigitalProductIDJSON(ctx context.Context, request operations.DeleteProductsIDDigitalProductsDigitalProductIDJSONRequest) (*operations.DeleteProductsIDDigitalProductsDigitalProductIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/digital_products/{digital_product_id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -697,7 +731,7 @@ func (s *SDK) DeleteProductsIDDigitalProductsDigitalProductIDJSON(ctx context.Co
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -738,8 +772,9 @@ func (s *SDK) DeleteProductsIDDigitalProductsDigitalProductIDJSON(ctx context.Co
 	return res, nil
 }
 
+// DeleteProductsIDImagesImageIDJSON - Delete a Product Image.
 func (s *SDK) DeleteProductsIDImagesImageIDJSON(ctx context.Context, request operations.DeleteProductsIDImagesImageIDJSONRequest) (*operations.DeleteProductsIDImagesImageIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/images/{image_id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -749,7 +784,7 @@ func (s *SDK) DeleteProductsIDImagesImageIDJSON(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -790,8 +825,9 @@ func (s *SDK) DeleteProductsIDImagesImageIDJSON(ctx context.Context, request ope
 	return res, nil
 }
 
+// DeleteProductsIDJSON - Delete an existing Product.
 func (s *SDK) DeleteProductsIDJSON(ctx context.Context, request operations.DeleteProductsIDJSONRequest) (*operations.DeleteProductsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -801,7 +837,7 @@ func (s *SDK) DeleteProductsIDJSON(ctx context.Context, request operations.Delet
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -842,8 +878,9 @@ func (s *SDK) DeleteProductsIDJSON(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteProductsIDOptionsOptionIDJSON - Delete a Product Option.
 func (s *SDK) DeleteProductsIDOptionsOptionIDJSON(ctx context.Context, request operations.DeleteProductsIDOptionsOptionIDJSONRequest) (*operations.DeleteProductsIDOptionsOptionIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/options/{option_id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -853,7 +890,7 @@ func (s *SDK) DeleteProductsIDOptionsOptionIDJSON(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -894,8 +931,9 @@ func (s *SDK) DeleteProductsIDOptionsOptionIDJSON(ctx context.Context, request o
 	return res, nil
 }
 
+// DeleteProductsIDOptionsOptionIDValuesValueIDJSON - Delete a Product Option Value.
 func (s *SDK) DeleteProductsIDOptionsOptionIDValuesValueIDJSON(ctx context.Context, request operations.DeleteProductsIDOptionsOptionIDValuesValueIDJSONRequest) (*operations.DeleteProductsIDOptionsOptionIDValuesValueIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/options/{option_id}/values/{value_id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -905,7 +943,7 @@ func (s *SDK) DeleteProductsIDOptionsOptionIDValuesValueIDJSON(ctx context.Conte
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -946,8 +984,9 @@ func (s *SDK) DeleteProductsIDOptionsOptionIDValuesValueIDJSON(ctx context.Conte
 	return res, nil
 }
 
+// DeleteProductsProductIDFieldsFieldIDJSON - Delete value of Product Custom Field
 func (s *SDK) DeleteProductsProductIDFieldsFieldIDJSON(ctx context.Context, request operations.DeleteProductsProductIDFieldsFieldIDJSONRequest) (*operations.DeleteProductsProductIDFieldsFieldIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{product_id}/fields/{field_id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -957,7 +996,7 @@ func (s *SDK) DeleteProductsProductIDFieldsFieldIDJSON(ctx context.Context, requ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -997,8 +1036,9 @@ func (s *SDK) DeleteProductsProductIDFieldsFieldIDJSON(ctx context.Context, requ
 	return res, nil
 }
 
+// DeletePromotionsIDJSON - Delete an existing Promotion.
 func (s *SDK) DeletePromotionsIDJSON(ctx context.Context, request operations.DeletePromotionsIDJSONRequest) (*operations.DeletePromotionsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/promotions/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1008,7 +1048,7 @@ func (s *SDK) DeletePromotionsIDJSON(ctx context.Context, request operations.Del
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1049,8 +1089,9 @@ func (s *SDK) DeletePromotionsIDJSON(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteShippingMethodsIDJSON - Delete an existing Shipping Method.
 func (s *SDK) DeleteShippingMethodsIDJSON(ctx context.Context, request operations.DeleteShippingMethodsIDJSONRequest) (*operations.DeleteShippingMethodsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/shipping_methods/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1060,7 +1101,7 @@ func (s *SDK) DeleteShippingMethodsIDJSON(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1101,8 +1142,9 @@ func (s *SDK) DeleteShippingMethodsIDJSON(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetCategoriesCountJSON - Count all Categories.
 func (s *SDK) GetCategoriesCountJSON(ctx context.Context, request operations.GetCategoriesCountJSONRequest) (*operations.GetCategoriesCountJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/categories/count.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1112,7 +1154,7 @@ func (s *SDK) GetCategoriesCountJSON(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1142,8 +1184,9 @@ func (s *SDK) GetCategoriesCountJSON(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetCategoriesIDJSON - Retrieve a single Category.
 func (s *SDK) GetCategoriesIDJSON(ctx context.Context, request operations.GetCategoriesIDJSONRequest) (*operations.GetCategoriesIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/categories/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1153,7 +1196,7 @@ func (s *SDK) GetCategoriesIDJSON(ctx context.Context, request operations.GetCat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1193,8 +1236,9 @@ func (s *SDK) GetCategoriesIDJSON(ctx context.Context, request operations.GetCat
 	return res, nil
 }
 
+// GetCategoriesJSON - Retrieve all Categories.
 func (s *SDK) GetCategoriesJSON(ctx context.Context, request operations.GetCategoriesJSONRequest) (*operations.GetCategoriesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/categories.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1204,7 +1248,7 @@ func (s *SDK) GetCategoriesJSON(ctx context.Context, request operations.GetCateg
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1234,8 +1278,9 @@ func (s *SDK) GetCategoriesJSON(ctx context.Context, request operations.GetCateg
 	return res, nil
 }
 
+// GetCheckoutCustomFieldsIDJSON - Retrieve a single CheckoutCustomField.
 func (s *SDK) GetCheckoutCustomFieldsIDJSON(ctx context.Context, request operations.GetCheckoutCustomFieldsIDJSONRequest) (*operations.GetCheckoutCustomFieldsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/checkout_custom_fields/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1245,7 +1290,7 @@ func (s *SDK) GetCheckoutCustomFieldsIDJSON(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1285,8 +1330,9 @@ func (s *SDK) GetCheckoutCustomFieldsIDJSON(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetCheckoutCustomFieldsJSON - Retrieve all Checkout Custom Fields.
 func (s *SDK) GetCheckoutCustomFieldsJSON(ctx context.Context, request operations.GetCheckoutCustomFieldsJSONRequest) (*operations.GetCheckoutCustomFieldsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/checkout_custom_fields.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1296,7 +1342,7 @@ func (s *SDK) GetCheckoutCustomFieldsJSON(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1326,8 +1372,9 @@ func (s *SDK) GetCheckoutCustomFieldsJSON(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetCountriesCountryCodeJSON - Retrieve a single Country information.
 func (s *SDK) GetCountriesCountryCodeJSON(ctx context.Context, request operations.GetCountriesCountryCodeJSONRequest) (*operations.GetCountriesCountryCodeJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/countries/{country_code}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1337,7 +1384,7 @@ func (s *SDK) GetCountriesCountryCodeJSON(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1377,8 +1424,9 @@ func (s *SDK) GetCountriesCountryCodeJSON(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetCountriesCountryCodeRegionsJSON - Retrieve all Regions from a single Country.
 func (s *SDK) GetCountriesCountryCodeRegionsJSON(ctx context.Context, request operations.GetCountriesCountryCodeRegionsJSONRequest) (*operations.GetCountriesCountryCodeRegionsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/countries/{country_code}/regions.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1388,7 +1436,7 @@ func (s *SDK) GetCountriesCountryCodeRegionsJSON(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1428,8 +1476,9 @@ func (s *SDK) GetCountriesCountryCodeRegionsJSON(ctx context.Context, request op
 	return res, nil
 }
 
+// GetCountriesCountryCodeRegionsRegionCodeJSON - Retrieve a single Region information object.
 func (s *SDK) GetCountriesCountryCodeRegionsRegionCodeJSON(ctx context.Context, request operations.GetCountriesCountryCodeRegionsRegionCodeJSONRequest) (*operations.GetCountriesCountryCodeRegionsRegionCodeJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/countries/{country_code}/regions/{region_code}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1439,7 +1488,7 @@ func (s *SDK) GetCountriesCountryCodeRegionsRegionCodeJSON(ctx context.Context, 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1479,8 +1528,9 @@ func (s *SDK) GetCountriesCountryCodeRegionsRegionCodeJSON(ctx context.Context, 
 	return res, nil
 }
 
+// GetCountriesJSON - Retrieve all Countries.
 func (s *SDK) GetCountriesJSON(ctx context.Context, request operations.GetCountriesJSONRequest) (*operations.GetCountriesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/countries.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1490,7 +1540,7 @@ func (s *SDK) GetCountriesJSON(ctx context.Context, request operations.GetCountr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1520,8 +1570,9 @@ func (s *SDK) GetCountriesJSON(ctx context.Context, request operations.GetCountr
 	return res, nil
 }
 
+// GetCustomFieldsIDJSON - Retrieve a single CustomField.
 func (s *SDK) GetCustomFieldsIDJSON(ctx context.Context, request operations.GetCustomFieldsIDJSONRequest) (*operations.GetCustomFieldsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/custom_fields/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1531,7 +1582,7 @@ func (s *SDK) GetCustomFieldsIDJSON(ctx context.Context, request operations.GetC
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1571,8 +1622,9 @@ func (s *SDK) GetCustomFieldsIDJSON(ctx context.Context, request operations.GetC
 	return res, nil
 }
 
+// GetCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSON - Retrieve a single SelectOption from a CustomField.
 func (s *SDK) GetCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSON(ctx context.Context, request operations.GetCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSONRequest) (*operations.GetCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/custom_fields/{id}/select_options/{custom_field_select_option_id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1582,7 +1634,7 @@ func (s *SDK) GetCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSON(ctx co
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1622,8 +1674,9 @@ func (s *SDK) GetCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSON(ctx co
 	return res, nil
 }
 
+// GetCustomFieldsIDSelectOptionsJSON - Retrieve all Store's Custom Fields.
 func (s *SDK) GetCustomFieldsIDSelectOptionsJSON(ctx context.Context, request operations.GetCustomFieldsIDSelectOptionsJSONRequest) (*operations.GetCustomFieldsIDSelectOptionsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/custom_fields/{id}/select_options.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1633,7 +1686,7 @@ func (s *SDK) GetCustomFieldsIDSelectOptionsJSON(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1663,8 +1716,9 @@ func (s *SDK) GetCustomFieldsIDSelectOptionsJSON(ctx context.Context, request op
 	return res, nil
 }
 
+// GetCustomFieldsJSON - Retrieve all Store's Custom Fields.
 func (s *SDK) GetCustomFieldsJSON(ctx context.Context, request operations.GetCustomFieldsJSONRequest) (*operations.GetCustomFieldsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/custom_fields.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1674,7 +1728,7 @@ func (s *SDK) GetCustomFieldsJSON(ctx context.Context, request operations.GetCus
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1704,8 +1758,9 @@ func (s *SDK) GetCustomFieldsJSON(ctx context.Context, request operations.GetCus
 	return res, nil
 }
 
+// GetCustomerCategoriesIDCustomersJSON - Retrieves the customers in a CustomerCategory.
 func (s *SDK) GetCustomerCategoriesIDCustomersJSON(ctx context.Context, request operations.GetCustomerCategoriesIDCustomersJSONRequest) (*operations.GetCustomerCategoriesIDCustomersJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/customer_categories/{id}/customers.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1715,7 +1770,7 @@ func (s *SDK) GetCustomerCategoriesIDCustomersJSON(ctx context.Context, request 
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1755,8 +1810,9 @@ func (s *SDK) GetCustomerCategoriesIDCustomersJSON(ctx context.Context, request 
 	return res, nil
 }
 
+// GetCustomerCategoriesIDJSON - Retrieve a single CustomerCategory.
 func (s *SDK) GetCustomerCategoriesIDJSON(ctx context.Context, request operations.GetCustomerCategoriesIDJSONRequest) (*operations.GetCustomerCategoriesIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/customer_categories/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1766,7 +1822,7 @@ func (s *SDK) GetCustomerCategoriesIDJSON(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1806,8 +1862,9 @@ func (s *SDK) GetCustomerCategoriesIDJSON(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetCustomerCategoriesJSON - Retrieve all Customer Categories.
 func (s *SDK) GetCustomerCategoriesJSON(ctx context.Context, request operations.GetCustomerCategoriesJSONRequest) (*operations.GetCustomerCategoriesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/customer_categories.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1817,7 +1874,7 @@ func (s *SDK) GetCustomerCategoriesJSON(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1847,8 +1904,9 @@ func (s *SDK) GetCustomerCategoriesJSON(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetCustomersCountJSON - Count all Customers.
 func (s *SDK) GetCustomersCountJSON(ctx context.Context, request operations.GetCustomersCountJSONRequest) (*operations.GetCustomersCountJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/customers/count.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1858,7 +1916,7 @@ func (s *SDK) GetCustomersCountJSON(ctx context.Context, request operations.GetC
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1888,8 +1946,9 @@ func (s *SDK) GetCustomersCountJSON(ctx context.Context, request operations.GetC
 	return res, nil
 }
 
+// GetCustomersEmailEmailJSON - Retrieve a single Customer by email.
 func (s *SDK) GetCustomersEmailEmailJSON(ctx context.Context, request operations.GetCustomersEmailEmailJSONRequest) (*operations.GetCustomersEmailEmailJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/customers/email/{email}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1899,7 +1958,7 @@ func (s *SDK) GetCustomersEmailEmailJSON(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1939,8 +1998,9 @@ func (s *SDK) GetCustomersEmailEmailJSON(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetCustomersIDFields - Retrieves the Customer Additional Field of a Customer.
 func (s *SDK) GetCustomersIDFields(ctx context.Context, request operations.GetCustomersIDFieldsRequest) (*operations.GetCustomersIDFieldsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/customers/{id}/fields", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1950,7 +2010,7 @@ func (s *SDK) GetCustomersIDFields(ctx context.Context, request operations.GetCu
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1990,8 +2050,9 @@ func (s *SDK) GetCustomersIDFields(ctx context.Context, request operations.GetCu
 	return res, nil
 }
 
+// GetCustomersIDFieldsFieldID - Retrieve a single Customer Additional Field.
 func (s *SDK) GetCustomersIDFieldsFieldID(ctx context.Context, request operations.GetCustomersIDFieldsFieldIDRequest) (*operations.GetCustomersIDFieldsFieldIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/customers/{id}/fields/{field_id}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2001,7 +2062,7 @@ func (s *SDK) GetCustomersIDFieldsFieldID(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2041,8 +2102,9 @@ func (s *SDK) GetCustomersIDFieldsFieldID(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetCustomersIDJSON - Retrieve a single Customer by id.
 func (s *SDK) GetCustomersIDJSON(ctx context.Context, request operations.GetCustomersIDJSONRequest) (*operations.GetCustomersIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/customers/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2052,7 +2114,7 @@ func (s *SDK) GetCustomersIDJSON(ctx context.Context, request operations.GetCust
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2092,8 +2154,9 @@ func (s *SDK) GetCustomersIDJSON(ctx context.Context, request operations.GetCust
 	return res, nil
 }
 
+// GetCustomersJSON - Retrieve all Customers.
 func (s *SDK) GetCustomersJSON(ctx context.Context, request operations.GetCustomersJSONRequest) (*operations.GetCustomersJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/customers.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2103,7 +2166,7 @@ func (s *SDK) GetCustomersJSON(ctx context.Context, request operations.GetCustom
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2133,8 +2196,9 @@ func (s *SDK) GetCustomersJSON(ctx context.Context, request operations.GetCustom
 	return res, nil
 }
 
+// GetFulfillmentsCountJSON - Count all Fulfillments.
 func (s *SDK) GetFulfillmentsCountJSON(ctx context.Context, request operations.GetFulfillmentsCountJSONRequest) (*operations.GetFulfillmentsCountJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/fulfillments/count.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2144,7 +2208,7 @@ func (s *SDK) GetFulfillmentsCountJSON(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2174,8 +2238,9 @@ func (s *SDK) GetFulfillmentsCountJSON(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetFulfillmentsIDJSON - Retrieve a single Fulfillment.
 func (s *SDK) GetFulfillmentsIDJSON(ctx context.Context, request operations.GetFulfillmentsIDJSONRequest) (*operations.GetFulfillmentsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/fulfillments/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2185,7 +2250,7 @@ func (s *SDK) GetFulfillmentsIDJSON(ctx context.Context, request operations.GetF
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2225,8 +2290,9 @@ func (s *SDK) GetFulfillmentsIDJSON(ctx context.Context, request operations.GetF
 	return res, nil
 }
 
+// GetFulfillmentsJSON - Retrieve all Fulfillments.
 func (s *SDK) GetFulfillmentsJSON(ctx context.Context, request operations.GetFulfillmentsJSONRequest) (*operations.GetFulfillmentsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/fulfillments.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2236,7 +2302,7 @@ func (s *SDK) GetFulfillmentsJSON(ctx context.Context, request operations.GetFul
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2266,8 +2332,9 @@ func (s *SDK) GetFulfillmentsJSON(ctx context.Context, request operations.GetFul
 	return res, nil
 }
 
+// GetHooksIDJSON - Retrieve a single Hook.
 func (s *SDK) GetHooksIDJSON(ctx context.Context, request operations.GetHooksIDJSONRequest) (*operations.GetHooksIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/hooks/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2277,7 +2344,7 @@ func (s *SDK) GetHooksIDJSON(ctx context.Context, request operations.GetHooksIDJ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2317,8 +2384,9 @@ func (s *SDK) GetHooksIDJSON(ctx context.Context, request operations.GetHooksIDJ
 	return res, nil
 }
 
+// GetHooksJSON - Retrieve all Hooks.
 func (s *SDK) GetHooksJSON(ctx context.Context, request operations.GetHooksJSONRequest) (*operations.GetHooksJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/hooks.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2328,7 +2396,7 @@ func (s *SDK) GetHooksJSON(ctx context.Context, request operations.GetHooksJSONR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2358,8 +2426,9 @@ func (s *SDK) GetHooksJSON(ctx context.Context, request operations.GetHooksJSONR
 	return res, nil
 }
 
+// GetJsappsCodeJSON - Retrieve a JSApp.
 func (s *SDK) GetJsappsCodeJSON(ctx context.Context, request operations.GetJsappsCodeJSONRequest) (*operations.GetJsappsCodeJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/jsapps/{code}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2369,7 +2438,7 @@ func (s *SDK) GetJsappsCodeJSON(ctx context.Context, request operations.GetJsapp
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2399,8 +2468,9 @@ func (s *SDK) GetJsappsCodeJSON(ctx context.Context, request operations.GetJsapp
 	return res, nil
 }
 
+// GetJsappsJSON - Retrieve all the Store's JSApps.
 func (s *SDK) GetJsappsJSON(ctx context.Context, request operations.GetJsappsJSONRequest) (*operations.GetJsappsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/jsapps.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2410,7 +2480,7 @@ func (s *SDK) GetJsappsJSON(ctx context.Context, request operations.GetJsappsJSO
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2440,8 +2510,9 @@ func (s *SDK) GetJsappsJSON(ctx context.Context, request operations.GetJsappsJSO
 	return res, nil
 }
 
+// GetOrderIDFulfillmentsJSON - Retrieve the Fulfillments associated with the Order.
 func (s *SDK) GetOrderIDFulfillmentsJSON(ctx context.Context, request operations.GetOrderIDFulfillmentsJSONRequest) (*operations.GetOrderIDFulfillmentsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/order/{id}/fulfillments.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2451,7 +2522,7 @@ func (s *SDK) GetOrderIDFulfillmentsJSON(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2491,8 +2562,10 @@ func (s *SDK) GetOrderIDFulfillmentsJSON(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetOrdersAfterIDJSON - Retrieve orders filtered by Order Id.
+// For example the GET /orders/after/5000 will return Order 5001, 5002, 5003, etc.
 func (s *SDK) GetOrdersAfterIDJSON(ctx context.Context, request operations.GetOrdersAfterIDJSONRequest) (*operations.GetOrdersAfterIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/orders/after/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2502,7 +2575,7 @@ func (s *SDK) GetOrdersAfterIDJSON(ctx context.Context, request operations.GetOr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2542,8 +2615,9 @@ func (s *SDK) GetOrdersAfterIDJSON(ctx context.Context, request operations.GetOr
 	return res, nil
 }
 
+// GetOrdersCountJSON - Count all Orders.
 func (s *SDK) GetOrdersCountJSON(ctx context.Context, request operations.GetOrdersCountJSONRequest) (*operations.GetOrdersCountJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/orders/count.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2553,7 +2627,7 @@ func (s *SDK) GetOrdersCountJSON(ctx context.Context, request operations.GetOrde
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2583,8 +2657,9 @@ func (s *SDK) GetOrdersCountJSON(ctx context.Context, request operations.GetOrde
 	return res, nil
 }
 
+// GetOrdersIDHistoryJSON - Retrieve all Order History.
 func (s *SDK) GetOrdersIDHistoryJSON(ctx context.Context, request operations.GetOrdersIDHistoryJSONRequest) (*operations.GetOrdersIDHistoryJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/orders/{id}/history.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2594,7 +2669,7 @@ func (s *SDK) GetOrdersIDHistoryJSON(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2624,8 +2699,9 @@ func (s *SDK) GetOrdersIDHistoryJSON(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetOrdersIDJSON - Retrieve a single Order.
 func (s *SDK) GetOrdersIDJSON(ctx context.Context, request operations.GetOrdersIDJSONRequest) (*operations.GetOrdersIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/orders/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2635,7 +2711,7 @@ func (s *SDK) GetOrdersIDJSON(ctx context.Context, request operations.GetOrdersI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2675,8 +2751,9 @@ func (s *SDK) GetOrdersIDJSON(ctx context.Context, request operations.GetOrdersI
 	return res, nil
 }
 
+// GetOrdersJSON - Retrieve all Orders.
 func (s *SDK) GetOrdersJSON(ctx context.Context, request operations.GetOrdersJSONRequest) (*operations.GetOrdersJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/orders.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2686,7 +2763,7 @@ func (s *SDK) GetOrdersJSON(ctx context.Context, request operations.GetOrdersJSO
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2716,8 +2793,9 @@ func (s *SDK) GetOrdersJSON(ctx context.Context, request operations.GetOrdersJSO
 	return res, nil
 }
 
+// GetOrdersStatusStatusJSON - Retrieve orders filtered by status.
 func (s *SDK) GetOrdersStatusStatusJSON(ctx context.Context, request operations.GetOrdersStatusStatusJSONRequest) (*operations.GetOrdersStatusStatusJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/orders/status/{status}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2727,7 +2805,7 @@ func (s *SDK) GetOrdersStatusStatusJSON(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2767,8 +2845,9 @@ func (s *SDK) GetOrdersStatusStatusJSON(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetPagesCountJSON - Count all Pages.
 func (s *SDK) GetPagesCountJSON(ctx context.Context, request operations.GetPagesCountJSONRequest) (*operations.GetPagesCountJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/pages/count.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2778,7 +2857,7 @@ func (s *SDK) GetPagesCountJSON(ctx context.Context, request operations.GetPages
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2808,8 +2887,9 @@ func (s *SDK) GetPagesCountJSON(ctx context.Context, request operations.GetPages
 	return res, nil
 }
 
+// GetPagesIDJSON - Retrieve a single Page by id.
 func (s *SDK) GetPagesIDJSON(ctx context.Context, request operations.GetPagesIDJSONRequest) (*operations.GetPagesIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pages/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2819,7 +2899,7 @@ func (s *SDK) GetPagesIDJSON(ctx context.Context, request operations.GetPagesIDJ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2859,8 +2939,9 @@ func (s *SDK) GetPagesIDJSON(ctx context.Context, request operations.GetPagesIDJ
 	return res, nil
 }
 
+// GetPagesJSON - Retrieve all Pages.
 func (s *SDK) GetPagesJSON(ctx context.Context, request operations.GetPagesJSONRequest) (*operations.GetPagesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/pages.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2870,7 +2951,7 @@ func (s *SDK) GetPagesJSON(ctx context.Context, request operations.GetPagesJSONR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2900,8 +2981,9 @@ func (s *SDK) GetPagesJSON(ctx context.Context, request operations.GetPagesJSONR
 	return res, nil
 }
 
+// GetPartnersStoresJSON - Retrieve statistics.
 func (s *SDK) GetPartnersStoresJSON(ctx context.Context, request operations.GetPartnersStoresJSONRequest) (*operations.GetPartnersStoresJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/partners/stores.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2911,7 +2993,7 @@ func (s *SDK) GetPartnersStoresJSON(ctx context.Context, request operations.GetP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2951,8 +3033,9 @@ func (s *SDK) GetPartnersStoresJSON(ctx context.Context, request operations.GetP
 	return res, nil
 }
 
+// GetPaymentMethodsIDJSON - Retrieve a single Payment Method.
 func (s *SDK) GetPaymentMethodsIDJSON(ctx context.Context, request operations.GetPaymentMethodsIDJSONRequest) (*operations.GetPaymentMethodsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/payment_methods/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2962,7 +3045,7 @@ func (s *SDK) GetPaymentMethodsIDJSON(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3002,8 +3085,9 @@ func (s *SDK) GetPaymentMethodsIDJSON(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetPaymentMethodsJSON - Retrieve all Store's Payment Methods.
 func (s *SDK) GetPaymentMethodsJSON(ctx context.Context, request operations.GetPaymentMethodsJSONRequest) (*operations.GetPaymentMethodsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/payment_methods.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3013,7 +3097,7 @@ func (s *SDK) GetPaymentMethodsJSON(ctx context.Context, request operations.GetP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3043,8 +3127,9 @@ func (s *SDK) GetPaymentMethodsJSON(ctx context.Context, request operations.GetP
 	return res, nil
 }
 
+// GetProductsAfterIDJSON - Retrieves Products after the given id.
 func (s *SDK) GetProductsAfterIDJSON(ctx context.Context, request operations.GetProductsAfterIDJSONRequest) (*operations.GetProductsAfterIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/after/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3054,7 +3139,7 @@ func (s *SDK) GetProductsAfterIDJSON(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3094,8 +3179,9 @@ func (s *SDK) GetProductsAfterIDJSON(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetProductsCategoryCategoryIDCountJSON - Count Products filtered by category.
 func (s *SDK) GetProductsCategoryCategoryIDCountJSON(ctx context.Context, request operations.GetProductsCategoryCategoryIDCountJSONRequest) (*operations.GetProductsCategoryCategoryIDCountJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/category/{category_id}/count.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3105,7 +3191,7 @@ func (s *SDK) GetProductsCategoryCategoryIDCountJSON(ctx context.Context, reques
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3145,8 +3231,9 @@ func (s *SDK) GetProductsCategoryCategoryIDCountJSON(ctx context.Context, reques
 	return res, nil
 }
 
+// GetProductsCategoryCategoryIDJSON - Retrieve Products filtered by category.
 func (s *SDK) GetProductsCategoryCategoryIDJSON(ctx context.Context, request operations.GetProductsCategoryCategoryIDJSONRequest) (*operations.GetProductsCategoryCategoryIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/category/{category_id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3156,7 +3243,7 @@ func (s *SDK) GetProductsCategoryCategoryIDJSON(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3196,8 +3283,9 @@ func (s *SDK) GetProductsCategoryCategoryIDJSON(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetProductsCountJSON - Count all Products.
 func (s *SDK) GetProductsCountJSON(ctx context.Context, request operations.GetProductsCountJSONRequest) (*operations.GetProductsCountJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/products/count.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3207,7 +3295,7 @@ func (s *SDK) GetProductsCountJSON(ctx context.Context, request operations.GetPr
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3237,8 +3325,9 @@ func (s *SDK) GetProductsCountJSON(ctx context.Context, request operations.GetPr
 	return res, nil
 }
 
+// GetProductsIDAttachmentsAttachmentIDJSON - Retrieve a single Product Attachment.
 func (s *SDK) GetProductsIDAttachmentsAttachmentIDJSON(ctx context.Context, request operations.GetProductsIDAttachmentsAttachmentIDJSONRequest) (*operations.GetProductsIDAttachmentsAttachmentIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/attachments/{attachment_id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3248,7 +3337,7 @@ func (s *SDK) GetProductsIDAttachmentsAttachmentIDJSON(ctx context.Context, requ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3288,8 +3377,9 @@ func (s *SDK) GetProductsIDAttachmentsAttachmentIDJSON(ctx context.Context, requ
 	return res, nil
 }
 
+// GetProductsIDAttachmentsCountJSON - Count all Product Attachments.
 func (s *SDK) GetProductsIDAttachmentsCountJSON(ctx context.Context, request operations.GetProductsIDAttachmentsCountJSONRequest) (*operations.GetProductsIDAttachmentsCountJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/attachments/count.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3299,7 +3389,7 @@ func (s *SDK) GetProductsIDAttachmentsCountJSON(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3339,8 +3429,9 @@ func (s *SDK) GetProductsIDAttachmentsCountJSON(ctx context.Context, request ope
 	return res, nil
 }
 
+// GetProductsIDAttachmentsJSON - Retrieve all Product Attachments.
 func (s *SDK) GetProductsIDAttachmentsJSON(ctx context.Context, request operations.GetProductsIDAttachmentsJSONRequest) (*operations.GetProductsIDAttachmentsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/attachments.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3350,7 +3441,7 @@ func (s *SDK) GetProductsIDAttachmentsJSON(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3390,8 +3481,9 @@ func (s *SDK) GetProductsIDAttachmentsJSON(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetProductsIDDigitalProductsCountJSON - Count all Product DigitalProducts.
 func (s *SDK) GetProductsIDDigitalProductsCountJSON(ctx context.Context, request operations.GetProductsIDDigitalProductsCountJSONRequest) (*operations.GetProductsIDDigitalProductsCountJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/digital_products/count.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3401,7 +3493,7 @@ func (s *SDK) GetProductsIDDigitalProductsCountJSON(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3441,8 +3533,9 @@ func (s *SDK) GetProductsIDDigitalProductsCountJSON(ctx context.Context, request
 	return res, nil
 }
 
+// GetProductsIDDigitalProductsDigitalProductIDJSON - Retrieve a single Product DigitalProduct.
 func (s *SDK) GetProductsIDDigitalProductsDigitalProductIDJSON(ctx context.Context, request operations.GetProductsIDDigitalProductsDigitalProductIDJSONRequest) (*operations.GetProductsIDDigitalProductsDigitalProductIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/digital_products/{digital_product_id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3452,7 +3545,7 @@ func (s *SDK) GetProductsIDDigitalProductsDigitalProductIDJSON(ctx context.Conte
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3492,8 +3585,9 @@ func (s *SDK) GetProductsIDDigitalProductsDigitalProductIDJSON(ctx context.Conte
 	return res, nil
 }
 
+// GetProductsIDDigitalProductsJSON - Retrieve all Product DigitalProducts.
 func (s *SDK) GetProductsIDDigitalProductsJSON(ctx context.Context, request operations.GetProductsIDDigitalProductsJSONRequest) (*operations.GetProductsIDDigitalProductsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/digital_products.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3503,7 +3597,7 @@ func (s *SDK) GetProductsIDDigitalProductsJSON(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3543,8 +3637,9 @@ func (s *SDK) GetProductsIDDigitalProductsJSON(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetProductsIDFieldsCountJSON - Count all Product Custom Fields.
 func (s *SDK) GetProductsIDFieldsCountJSON(ctx context.Context, request operations.GetProductsIDFieldsCountJSONRequest) (*operations.GetProductsIDFieldsCountJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/fields/count.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3554,7 +3649,7 @@ func (s *SDK) GetProductsIDFieldsCountJSON(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3594,8 +3689,9 @@ func (s *SDK) GetProductsIDFieldsCountJSON(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetProductsIDFieldsJSON - Retrieve all Product Custom Fields
 func (s *SDK) GetProductsIDFieldsJSON(ctx context.Context, request operations.GetProductsIDFieldsJSONRequest) (*operations.GetProductsIDFieldsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/fields.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3605,7 +3701,7 @@ func (s *SDK) GetProductsIDFieldsJSON(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3645,8 +3741,9 @@ func (s *SDK) GetProductsIDFieldsJSON(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetProductsIDImagesCountJSON - Count all Product Images.
 func (s *SDK) GetProductsIDImagesCountJSON(ctx context.Context, request operations.GetProductsIDImagesCountJSONRequest) (*operations.GetProductsIDImagesCountJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/images/count.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3656,7 +3753,7 @@ func (s *SDK) GetProductsIDImagesCountJSON(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3696,8 +3793,9 @@ func (s *SDK) GetProductsIDImagesCountJSON(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetProductsIDImagesImageIDJSON - Retrieve a single Product Image.
 func (s *SDK) GetProductsIDImagesImageIDJSON(ctx context.Context, request operations.GetProductsIDImagesImageIDJSONRequest) (*operations.GetProductsIDImagesImageIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/images/{image_id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3707,7 +3805,7 @@ func (s *SDK) GetProductsIDImagesImageIDJSON(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3747,8 +3845,9 @@ func (s *SDK) GetProductsIDImagesImageIDJSON(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetProductsIDImagesJSON - Retrieve all Product Images.
 func (s *SDK) GetProductsIDImagesJSON(ctx context.Context, request operations.GetProductsIDImagesJSONRequest) (*operations.GetProductsIDImagesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/images.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3758,7 +3857,7 @@ func (s *SDK) GetProductsIDImagesJSON(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3798,8 +3897,9 @@ func (s *SDK) GetProductsIDImagesJSON(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetProductsIDJSON - Retrieve a single Product.
 func (s *SDK) GetProductsIDJSON(ctx context.Context, request operations.GetProductsIDJSONRequest) (*operations.GetProductsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3809,7 +3909,7 @@ func (s *SDK) GetProductsIDJSON(ctx context.Context, request operations.GetProdu
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3849,8 +3949,9 @@ func (s *SDK) GetProductsIDJSON(ctx context.Context, request operations.GetProdu
 	return res, nil
 }
 
+// GetProductsIDOptionsCountJSON - Count all Product Options.
 func (s *SDK) GetProductsIDOptionsCountJSON(ctx context.Context, request operations.GetProductsIDOptionsCountJSONRequest) (*operations.GetProductsIDOptionsCountJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/options/count.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3860,7 +3961,7 @@ func (s *SDK) GetProductsIDOptionsCountJSON(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3900,8 +4001,9 @@ func (s *SDK) GetProductsIDOptionsCountJSON(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetProductsIDOptionsJSON - Retrieve all Product Options.
 func (s *SDK) GetProductsIDOptionsJSON(ctx context.Context, request operations.GetProductsIDOptionsJSONRequest) (*operations.GetProductsIDOptionsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/options.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3911,7 +4013,7 @@ func (s *SDK) GetProductsIDOptionsJSON(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3951,8 +4053,9 @@ func (s *SDK) GetProductsIDOptionsJSON(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetProductsIDOptionsOptionIDJSON - Retrieve a single Product Option.
 func (s *SDK) GetProductsIDOptionsOptionIDJSON(ctx context.Context, request operations.GetProductsIDOptionsOptionIDJSONRequest) (*operations.GetProductsIDOptionsOptionIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/options/{option_id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3962,7 +4065,7 @@ func (s *SDK) GetProductsIDOptionsOptionIDJSON(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4002,8 +4105,9 @@ func (s *SDK) GetProductsIDOptionsOptionIDJSON(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetProductsIDOptionsOptionIDValuesCountJSON - Count all Product Option Values.
 func (s *SDK) GetProductsIDOptionsOptionIDValuesCountJSON(ctx context.Context, request operations.GetProductsIDOptionsOptionIDValuesCountJSONRequest) (*operations.GetProductsIDOptionsOptionIDValuesCountJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/options/{option_id}/values/count.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4013,7 +4117,7 @@ func (s *SDK) GetProductsIDOptionsOptionIDValuesCountJSON(ctx context.Context, r
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4053,8 +4157,9 @@ func (s *SDK) GetProductsIDOptionsOptionIDValuesCountJSON(ctx context.Context, r
 	return res, nil
 }
 
+// GetProductsIDOptionsOptionIDValuesJSON - Retrieve all Product Option Values.
 func (s *SDK) GetProductsIDOptionsOptionIDValuesJSON(ctx context.Context, request operations.GetProductsIDOptionsOptionIDValuesJSONRequest) (*operations.GetProductsIDOptionsOptionIDValuesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/options/{option_id}/values.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4064,7 +4169,7 @@ func (s *SDK) GetProductsIDOptionsOptionIDValuesJSON(ctx context.Context, reques
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4104,8 +4209,9 @@ func (s *SDK) GetProductsIDOptionsOptionIDValuesJSON(ctx context.Context, reques
 	return res, nil
 }
 
+// GetProductsIDOptionsOptionIDValuesValueIDJSON - Retrieve a single Product Option Value.
 func (s *SDK) GetProductsIDOptionsOptionIDValuesValueIDJSON(ctx context.Context, request operations.GetProductsIDOptionsOptionIDValuesValueIDJSONRequest) (*operations.GetProductsIDOptionsOptionIDValuesValueIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/options/{option_id}/values/{value_id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4115,7 +4221,7 @@ func (s *SDK) GetProductsIDOptionsOptionIDValuesValueIDJSON(ctx context.Context,
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4155,8 +4261,9 @@ func (s *SDK) GetProductsIDOptionsOptionIDValuesValueIDJSON(ctx context.Context,
 	return res, nil
 }
 
+// GetProductsIDVariantsCountJSON - Count all Product Variants.
 func (s *SDK) GetProductsIDVariantsCountJSON(ctx context.Context, request operations.GetProductsIDVariantsCountJSONRequest) (*operations.GetProductsIDVariantsCountJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/variants/count.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4166,7 +4273,7 @@ func (s *SDK) GetProductsIDVariantsCountJSON(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4206,8 +4313,9 @@ func (s *SDK) GetProductsIDVariantsCountJSON(ctx context.Context, request operat
 	return res, nil
 }
 
+// GetProductsIDVariantsJSON - Retrieve all Product Variants.
 func (s *SDK) GetProductsIDVariantsJSON(ctx context.Context, request operations.GetProductsIDVariantsJSONRequest) (*operations.GetProductsIDVariantsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/variants.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4217,7 +4325,7 @@ func (s *SDK) GetProductsIDVariantsJSON(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4257,8 +4365,9 @@ func (s *SDK) GetProductsIDVariantsJSON(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetProductsIDVariantsVariantIDJSON - Retrieve a single Product Variant.
 func (s *SDK) GetProductsIDVariantsVariantIDJSON(ctx context.Context, request operations.GetProductsIDVariantsVariantIDJSONRequest) (*operations.GetProductsIDVariantsVariantIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/variants/{variant_id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4268,7 +4377,7 @@ func (s *SDK) GetProductsIDVariantsVariantIDJSON(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4308,8 +4417,9 @@ func (s *SDK) GetProductsIDVariantsVariantIDJSON(ctx context.Context, request op
 	return res, nil
 }
 
+// GetProductsJSON - Retrieve all Products.
 func (s *SDK) GetProductsJSON(ctx context.Context, request operations.GetProductsJSONRequest) (*operations.GetProductsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/products.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4319,7 +4429,7 @@ func (s *SDK) GetProductsJSON(ctx context.Context, request operations.GetProduct
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4349,8 +4459,14 @@ func (s *SDK) GetProductsJSON(ctx context.Context, request operations.GetProduct
 	return res, nil
 }
 
+// GetProductsSearchJSON - Retrieve a Product List from a query.
+// Endpoint example:
+//
+// ```text
+// https://api.jumpseller.com/v1/products/search.json?login=XXXXXX&authtoken=XXXXX&query=test&fields=name,description
+// ```
 func (s *SDK) GetProductsSearchJSON(ctx context.Context, request operations.GetProductsSearchJSONRequest) (*operations.GetProductsSearchJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/products/search.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4360,7 +4476,7 @@ func (s *SDK) GetProductsSearchJSON(ctx context.Context, request operations.GetP
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4400,8 +4516,9 @@ func (s *SDK) GetProductsSearchJSON(ctx context.Context, request operations.GetP
 	return res, nil
 }
 
+// GetProductsStatusStatusCountJSON - Count Products filtered by status.
 func (s *SDK) GetProductsStatusStatusCountJSON(ctx context.Context, request operations.GetProductsStatusStatusCountJSONRequest) (*operations.GetProductsStatusStatusCountJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/status/{status}/count.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4411,7 +4528,7 @@ func (s *SDK) GetProductsStatusStatusCountJSON(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4451,8 +4568,9 @@ func (s *SDK) GetProductsStatusStatusCountJSON(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetProductsStatusStatusJSON - Retrieve Products filtered by status.
 func (s *SDK) GetProductsStatusStatusJSON(ctx context.Context, request operations.GetProductsStatusStatusJSONRequest) (*operations.GetProductsStatusStatusJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/status/{status}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4462,7 +4580,7 @@ func (s *SDK) GetProductsStatusStatusJSON(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4502,8 +4620,9 @@ func (s *SDK) GetProductsStatusStatusJSON(ctx context.Context, request operation
 	return res, nil
 }
 
+// GetPromotionsIDJSON - Retrieve a single Promotion.
 func (s *SDK) GetPromotionsIDJSON(ctx context.Context, request operations.GetPromotionsIDJSONRequest) (*operations.GetPromotionsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/promotions/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4513,7 +4632,7 @@ func (s *SDK) GetPromotionsIDJSON(ctx context.Context, request operations.GetPro
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4553,8 +4672,9 @@ func (s *SDK) GetPromotionsIDJSON(ctx context.Context, request operations.GetPro
 	return res, nil
 }
 
+// GetPromotionsJSON - Retrieve all Promotions.
 func (s *SDK) GetPromotionsJSON(ctx context.Context, request operations.GetPromotionsJSONRequest) (*operations.GetPromotionsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/promotions.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4564,7 +4684,7 @@ func (s *SDK) GetPromotionsJSON(ctx context.Context, request operations.GetPromo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4594,8 +4714,9 @@ func (s *SDK) GetPromotionsJSON(ctx context.Context, request operations.GetPromo
 	return res, nil
 }
 
+// GetShippingMethodsIDJSON - Retrieve a single Shipping Method.
 func (s *SDK) GetShippingMethodsIDJSON(ctx context.Context, request operations.GetShippingMethodsIDJSONRequest) (*operations.GetShippingMethodsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/shipping_methods/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4605,7 +4726,7 @@ func (s *SDK) GetShippingMethodsIDJSON(ctx context.Context, request operations.G
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4645,8 +4766,9 @@ func (s *SDK) GetShippingMethodsIDJSON(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetShippingMethodsJSON - Retrieve all Store's Shipping Methods.
 func (s *SDK) GetShippingMethodsJSON(ctx context.Context, request operations.GetShippingMethodsJSONRequest) (*operations.GetShippingMethodsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/shipping_methods.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4656,7 +4778,7 @@ func (s *SDK) GetShippingMethodsJSON(ctx context.Context, request operations.Get
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4686,8 +4808,9 @@ func (s *SDK) GetShippingMethodsJSON(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetStoreCheckStatusJSON - Retrive store creation status.
 func (s *SDK) GetStoreCheckStatusJSON(ctx context.Context, request operations.GetStoreCheckStatusJSONRequest) (*operations.GetStoreCheckStatusJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/store/check_status.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4697,7 +4820,7 @@ func (s *SDK) GetStoreCheckStatusJSON(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4737,8 +4860,9 @@ func (s *SDK) GetStoreCheckStatusJSON(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetStoreInfoJSON - Retrieve Store Information.
 func (s *SDK) GetStoreInfoJSON(ctx context.Context, request operations.GetStoreInfoJSONRequest) (*operations.GetStoreInfoJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/store/info.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4748,7 +4872,7 @@ func (s *SDK) GetStoreInfoJSON(ctx context.Context, request operations.GetStoreI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4778,8 +4902,9 @@ func (s *SDK) GetStoreInfoJSON(ctx context.Context, request operations.GetStoreI
 	return res, nil
 }
 
+// GetStoreLanguagesJSON - Retrieve Store Languages.
 func (s *SDK) GetStoreLanguagesJSON(ctx context.Context, request operations.GetStoreLanguagesJSONRequest) (*operations.GetStoreLanguagesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/store/languages.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4789,7 +4914,7 @@ func (s *SDK) GetStoreLanguagesJSON(ctx context.Context, request operations.GetS
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4819,8 +4944,9 @@ func (s *SDK) GetStoreLanguagesJSON(ctx context.Context, request operations.GetS
 	return res, nil
 }
 
+// GetTaxesIDJSON - Retrieve a single Tax information.
 func (s *SDK) GetTaxesIDJSON(ctx context.Context, request operations.GetTaxesIDJSONRequest) (*operations.GetTaxesIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/taxes/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4830,7 +4956,7 @@ func (s *SDK) GetTaxesIDJSON(ctx context.Context, request operations.GetTaxesIDJ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4870,8 +4996,9 @@ func (s *SDK) GetTaxesIDJSON(ctx context.Context, request operations.GetTaxesIDJ
 	return res, nil
 }
 
+// GetTaxesJSON - Retrieve all Taxes.
 func (s *SDK) GetTaxesJSON(ctx context.Context, request operations.GetTaxesJSONRequest) (*operations.GetTaxesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/taxes.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4881,7 +5008,7 @@ func (s *SDK) GetTaxesJSON(ctx context.Context, request operations.GetTaxesJSONR
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4911,8 +5038,10 @@ func (s *SDK) GetTaxesJSON(ctx context.Context, request operations.GetTaxesJSONR
 	return res, nil
 }
 
+// PostCategoriesJSON - Create a new Category.
+// Category's permalink is automatically generated from the given category's name.
 func (s *SDK) PostCategoriesJSON(ctx context.Context, request operations.PostCategoriesJSONRequest) (*operations.PostCategoriesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/categories.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4932,7 +5061,7 @@ func (s *SDK) PostCategoriesJSON(ctx context.Context, request operations.PostCat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4962,8 +5091,10 @@ func (s *SDK) PostCategoriesJSON(ctx context.Context, request operations.PostCat
 	return res, nil
 }
 
+// PostCheckoutCustomFieldsJSON - Create a new CheckoutCustomField.
+// Type values can be: input, selection, checkbox, date or text. Area values can be: contact, billing_shipping or other.
 func (s *SDK) PostCheckoutCustomFieldsJSON(ctx context.Context, request operations.PostCheckoutCustomFieldsJSONRequest) (*operations.PostCheckoutCustomFieldsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/checkout_custom_fields.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4983,7 +5114,7 @@ func (s *SDK) PostCheckoutCustomFieldsJSON(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5023,8 +5154,9 @@ func (s *SDK) PostCheckoutCustomFieldsJSON(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostCustomFieldsIDSelectOptionsJSON - Create a new Custom Field Select Option.
 func (s *SDK) PostCustomFieldsIDSelectOptionsJSON(ctx context.Context, request operations.PostCustomFieldsIDSelectOptionsJSONRequest) (*operations.PostCustomFieldsIDSelectOptionsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/custom_fields/{id}/select_options.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5044,7 +5176,7 @@ func (s *SDK) PostCustomFieldsIDSelectOptionsJSON(ctx context.Context, request o
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5074,8 +5206,9 @@ func (s *SDK) PostCustomFieldsIDSelectOptionsJSON(ctx context.Context, request o
 	return res, nil
 }
 
+// PostCustomFieldsJSON - Create a new Custom Field.
 func (s *SDK) PostCustomFieldsJSON(ctx context.Context, request operations.PostCustomFieldsJSONRequest) (*operations.PostCustomFieldsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/custom_fields.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5095,7 +5228,7 @@ func (s *SDK) PostCustomFieldsJSON(ctx context.Context, request operations.PostC
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5125,8 +5258,9 @@ func (s *SDK) PostCustomFieldsJSON(ctx context.Context, request operations.PostC
 	return res, nil
 }
 
+// PostCustomerCategoriesIDCustomersJSON - Adds Customers to a CustomerCategory.
 func (s *SDK) PostCustomerCategoriesIDCustomersJSON(ctx context.Context, request operations.PostCustomerCategoriesIDCustomersJSONRequest) (*operations.PostCustomerCategoriesIDCustomersJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/customer_categories/{id}/customers.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5146,7 +5280,7 @@ func (s *SDK) PostCustomerCategoriesIDCustomersJSON(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5186,8 +5320,9 @@ func (s *SDK) PostCustomerCategoriesIDCustomersJSON(ctx context.Context, request
 	return res, nil
 }
 
+// PostCustomerCategoriesJSON - Create a new CustomerCategory.
 func (s *SDK) PostCustomerCategoriesJSON(ctx context.Context, request operations.PostCustomerCategoriesJSONRequest) (*operations.PostCustomerCategoriesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/customer_categories.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5207,7 +5342,7 @@ func (s *SDK) PostCustomerCategoriesJSON(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5247,8 +5382,9 @@ func (s *SDK) PostCustomerCategoriesJSON(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostCustomersIDFields - Adds Customer Additional Fields to a Customer.
 func (s *SDK) PostCustomersIDFields(ctx context.Context, request operations.PostCustomersIDFieldsRequest) (*operations.PostCustomersIDFieldsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/customers/{id}/fields", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5268,7 +5404,7 @@ func (s *SDK) PostCustomersIDFields(ctx context.Context, request operations.Post
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5308,8 +5444,9 @@ func (s *SDK) PostCustomersIDFields(ctx context.Context, request operations.Post
 	return res, nil
 }
 
+// PostCustomersJSON - Create a new Customer.
 func (s *SDK) PostCustomersJSON(ctx context.Context, request operations.PostCustomersJSONRequest) (*operations.PostCustomersJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/customers.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5329,7 +5466,7 @@ func (s *SDK) PostCustomersJSON(ctx context.Context, request operations.PostCust
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5369,8 +5506,9 @@ func (s *SDK) PostCustomersJSON(ctx context.Context, request operations.PostCust
 	return res, nil
 }
 
+// PostHooksJSON - Create a new Hook.
 func (s *SDK) PostHooksJSON(ctx context.Context, request operations.PostHooksJSONRequest) (*operations.PostHooksJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/hooks.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5390,7 +5528,7 @@ func (s *SDK) PostHooksJSON(ctx context.Context, request operations.PostHooksJSO
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5430,8 +5568,9 @@ func (s *SDK) PostHooksJSON(ctx context.Context, request operations.PostHooksJSO
 	return res, nil
 }
 
+// PostJsappsJSON - Create a Store JSApp.
 func (s *SDK) PostJsappsJSON(ctx context.Context, request operations.PostJsappsJSONRequest) (*operations.PostJsappsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/jsapps.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5451,7 +5590,7 @@ func (s *SDK) PostJsappsJSON(ctx context.Context, request operations.PostJsappsJ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5481,8 +5620,9 @@ func (s *SDK) PostJsappsJSON(ctx context.Context, request operations.PostJsappsJ
 	return res, nil
 }
 
+// PostOrdersIDHistoryJSON - Create a new Order History Entry.
 func (s *SDK) PostOrdersIDHistoryJSON(ctx context.Context, request operations.PostOrdersIDHistoryJSONRequest) (*operations.PostOrdersIDHistoryJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/orders/{id}/history.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5502,7 +5642,7 @@ func (s *SDK) PostOrdersIDHistoryJSON(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5532,8 +5672,10 @@ func (s *SDK) PostOrdersIDHistoryJSON(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostOrdersJSON - Create a new Order.
+// Orders created externally keep the given order product's values (bypassing internal promotion or product amounts).
 func (s *SDK) PostOrdersJSON(ctx context.Context, request operations.PostOrdersJSONRequest) (*operations.PostOrdersJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/orders.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5553,7 +5695,7 @@ func (s *SDK) PostOrdersJSON(ctx context.Context, request operations.PostOrdersJ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5583,8 +5725,9 @@ func (s *SDK) PostOrdersJSON(ctx context.Context, request operations.PostOrdersJ
 	return res, nil
 }
 
+// PostPagesJSON - Create a new Page.
 func (s *SDK) PostPagesJSON(ctx context.Context, request operations.PostPagesJSONRequest) (*operations.PostPagesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/pages.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5604,7 +5747,7 @@ func (s *SDK) PostPagesJSON(ctx context.Context, request operations.PostPagesJSO
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5634,8 +5777,9 @@ func (s *SDK) PostPagesJSON(ctx context.Context, request operations.PostPagesJSO
 	return res, nil
 }
 
+// PostProductsIDAttachmentsJSON - Create a new Product Attachment.
 func (s *SDK) PostProductsIDAttachmentsJSON(ctx context.Context, request operations.PostProductsIDAttachmentsJSONRequest) (*operations.PostProductsIDAttachmentsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/attachments.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5655,7 +5799,7 @@ func (s *SDK) PostProductsIDAttachmentsJSON(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5685,8 +5829,9 @@ func (s *SDK) PostProductsIDAttachmentsJSON(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostProductsIDDigitalProductsJSON - Create a new Product DigitalProduct.
 func (s *SDK) PostProductsIDDigitalProductsJSON(ctx context.Context, request operations.PostProductsIDDigitalProductsJSONRequest) (*operations.PostProductsIDDigitalProductsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/digital_products.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5706,7 +5851,7 @@ func (s *SDK) PostProductsIDDigitalProductsJSON(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5736,8 +5881,9 @@ func (s *SDK) PostProductsIDDigitalProductsJSON(ctx context.Context, request ope
 	return res, nil
 }
 
+// PostProductsIDFieldsJSON - Add an existing Custom Field to a Product.
 func (s *SDK) PostProductsIDFieldsJSON(ctx context.Context, request operations.PostProductsIDFieldsJSONRequest) (*operations.PostProductsIDFieldsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/fields.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5757,7 +5903,7 @@ func (s *SDK) PostProductsIDFieldsJSON(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5797,8 +5943,9 @@ func (s *SDK) PostProductsIDFieldsJSON(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostProductsIDImagesJSON - Create a new Product Image.
 func (s *SDK) PostProductsIDImagesJSON(ctx context.Context, request operations.PostProductsIDImagesJSONRequest) (*operations.PostProductsIDImagesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/images.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5818,7 +5965,7 @@ func (s *SDK) PostProductsIDImagesJSON(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5848,8 +5995,9 @@ func (s *SDK) PostProductsIDImagesJSON(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostProductsIDOptionsJSON - Create a new Product Option.
 func (s *SDK) PostProductsIDOptionsJSON(ctx context.Context, request operations.PostProductsIDOptionsJSONRequest) (*operations.PostProductsIDOptionsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/options.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5869,7 +6017,7 @@ func (s *SDK) PostProductsIDOptionsJSON(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5899,8 +6047,9 @@ func (s *SDK) PostProductsIDOptionsJSON(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostProductsIDOptionsOptionIDValuesJSON - Create a new Product Option Value.
 func (s *SDK) PostProductsIDOptionsOptionIDValuesJSON(ctx context.Context, request operations.PostProductsIDOptionsOptionIDValuesJSONRequest) (*operations.PostProductsIDOptionsOptionIDValuesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/options/{option_id}/values.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5920,7 +6069,7 @@ func (s *SDK) PostProductsIDOptionsOptionIDValuesJSON(ctx context.Context, reque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5950,8 +6099,9 @@ func (s *SDK) PostProductsIDOptionsOptionIDValuesJSON(ctx context.Context, reque
 	return res, nil
 }
 
+// PostProductsIDVariantsJSON - Create a new Product Variant.
 func (s *SDK) PostProductsIDVariantsJSON(ctx context.Context, request operations.PostProductsIDVariantsJSONRequest) (*operations.PostProductsIDVariantsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/variants.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5971,7 +6121,7 @@ func (s *SDK) PostProductsIDVariantsJSON(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6011,8 +6161,9 @@ func (s *SDK) PostProductsIDVariantsJSON(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostProductsJSON - Create a new Product.
 func (s *SDK) PostProductsJSON(ctx context.Context, request operations.PostProductsJSONRequest) (*operations.PostProductsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/products.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6032,7 +6183,7 @@ func (s *SDK) PostProductsJSON(ctx context.Context, request operations.PostProdu
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6062,8 +6213,9 @@ func (s *SDK) PostProductsJSON(ctx context.Context, request operations.PostProdu
 	return res, nil
 }
 
+// PostPromotionsJSON - Create a new Promotion.
 func (s *SDK) PostPromotionsJSON(ctx context.Context, request operations.PostPromotionsJSONRequest) (*operations.PostPromotionsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/promotions.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6083,7 +6235,7 @@ func (s *SDK) PostPromotionsJSON(ctx context.Context, request operations.PostPro
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6123,8 +6275,9 @@ func (s *SDK) PostPromotionsJSON(ctx context.Context, request operations.PostPro
 	return res, nil
 }
 
+// PostShippingMethodsJSON - Creates a Shipping Method.
 func (s *SDK) PostShippingMethodsJSON(ctx context.Context, request operations.PostShippingMethodsJSONRequest) (*operations.PostShippingMethodsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/shipping_methods.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6144,7 +6297,7 @@ func (s *SDK) PostShippingMethodsJSON(ctx context.Context, request operations.Po
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6184,8 +6337,9 @@ func (s *SDK) PostShippingMethodsJSON(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostStoreCreateJSON - Create a Partnered Store
 func (s *SDK) PostStoreCreateJSON(ctx context.Context, request operations.PostStoreCreateJSONRequest) (*operations.PostStoreCreateJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/store/create.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6205,7 +6359,7 @@ func (s *SDK) PostStoreCreateJSON(ctx context.Context, request operations.PostSt
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6245,8 +6399,9 @@ func (s *SDK) PostStoreCreateJSON(ctx context.Context, request operations.PostSt
 	return res, nil
 }
 
+// PostTaxesJSON - Create a new Tax.
 func (s *SDK) PostTaxesJSON(ctx context.Context, request operations.PostTaxesJSONRequest) (*operations.PostTaxesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/taxes.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6266,7 +6421,7 @@ func (s *SDK) PostTaxesJSON(ctx context.Context, request operations.PostTaxesJSO
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6306,8 +6461,9 @@ func (s *SDK) PostTaxesJSON(ctx context.Context, request operations.PostTaxesJSO
 	return res, nil
 }
 
+// PutCategoriesIDJSON - Modify an existing Category.
 func (s *SDK) PutCategoriesIDJSON(ctx context.Context, request operations.PutCategoriesIDJSONRequest) (*operations.PutCategoriesIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/categories/{id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6327,7 +6483,7 @@ func (s *SDK) PutCategoriesIDJSON(ctx context.Context, request operations.PutCat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6367,8 +6523,9 @@ func (s *SDK) PutCategoriesIDJSON(ctx context.Context, request operations.PutCat
 	return res, nil
 }
 
+// PutCheckoutCustomFieldsIDJSON - Update a CheckoutCustomField.
 func (s *SDK) PutCheckoutCustomFieldsIDJSON(ctx context.Context, request operations.PutCheckoutCustomFieldsIDJSONRequest) (*operations.PutCheckoutCustomFieldsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/checkout_custom_fields/{id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6388,7 +6545,7 @@ func (s *SDK) PutCheckoutCustomFieldsIDJSON(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6428,8 +6585,9 @@ func (s *SDK) PutCheckoutCustomFieldsIDJSON(ctx context.Context, request operati
 	return res, nil
 }
 
+// PutCustomFieldsIDJSON - Update a CustomField.
 func (s *SDK) PutCustomFieldsIDJSON(ctx context.Context, request operations.PutCustomFieldsIDJSONRequest) (*operations.PutCustomFieldsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/custom_fields/{id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6449,7 +6607,7 @@ func (s *SDK) PutCustomFieldsIDJSON(ctx context.Context, request operations.PutC
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6489,8 +6647,9 @@ func (s *SDK) PutCustomFieldsIDJSON(ctx context.Context, request operations.PutC
 	return res, nil
 }
 
+// PutCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSON - Update a SelectOption from a CustomField.
 func (s *SDK) PutCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSON(ctx context.Context, request operations.PutCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSONRequest) (*operations.PutCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/custom_fields/{id}/select_options/{custom_field_select_option_id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6510,7 +6669,7 @@ func (s *SDK) PutCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSON(ctx co
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6550,8 +6709,9 @@ func (s *SDK) PutCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSON(ctx co
 	return res, nil
 }
 
+// PutCustomerCategoriesIDJSON - Update a CustomerCategory.
 func (s *SDK) PutCustomerCategoriesIDJSON(ctx context.Context, request operations.PutCustomerCategoriesIDJSONRequest) (*operations.PutCustomerCategoriesIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/customer_categories/{id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6571,7 +6731,7 @@ func (s *SDK) PutCustomerCategoriesIDJSON(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6611,8 +6771,9 @@ func (s *SDK) PutCustomerCategoriesIDJSON(ctx context.Context, request operation
 	return res, nil
 }
 
+// PutCustomersIDFieldsFieldID - Update a Customer Additional Field.
 func (s *SDK) PutCustomersIDFieldsFieldID(ctx context.Context, request operations.PutCustomersIDFieldsFieldIDRequest) (*operations.PutCustomersIDFieldsFieldIDResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/customers/{id}/fields/{field_id}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6632,7 +6793,7 @@ func (s *SDK) PutCustomersIDFieldsFieldID(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6682,8 +6843,9 @@ func (s *SDK) PutCustomersIDFieldsFieldID(ctx context.Context, request operation
 	return res, nil
 }
 
+// PutCustomersIDJSON - Update a new Customer.
 func (s *SDK) PutCustomersIDJSON(ctx context.Context, request operations.PutCustomersIDJSONRequest) (*operations.PutCustomersIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/customers/{id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6703,7 +6865,7 @@ func (s *SDK) PutCustomersIDJSON(ctx context.Context, request operations.PutCust
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6743,8 +6905,9 @@ func (s *SDK) PutCustomersIDJSON(ctx context.Context, request operations.PutCust
 	return res, nil
 }
 
+// PutHooksIDJSON - Update a Hook.
 func (s *SDK) PutHooksIDJSON(ctx context.Context, request operations.PutHooksIDJSONRequest) (*operations.PutHooksIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/hooks/{id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6764,7 +6927,7 @@ func (s *SDK) PutHooksIDJSON(ctx context.Context, request operations.PutHooksIDJ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6804,8 +6967,10 @@ func (s *SDK) PutHooksIDJSON(ctx context.Context, request operations.PutHooksIDJ
 	return res, nil
 }
 
+// PutOrdersIDJSON - Modify an existing Order.
+// Only `status`, `shipment_status`, `tracking_number`, `tracking_company`, `tracking_url`, `additional_information` and `additional_fields` are available for update. An email is send if `shipment_status` changes.
 func (s *SDK) PutOrdersIDJSON(ctx context.Context, request operations.PutOrdersIDJSONRequest) (*operations.PutOrdersIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/orders/{id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6825,7 +6990,7 @@ func (s *SDK) PutOrdersIDJSON(ctx context.Context, request operations.PutOrdersI
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6865,8 +7030,9 @@ func (s *SDK) PutOrdersIDJSON(ctx context.Context, request operations.PutOrdersI
 	return res, nil
 }
 
+// PutPagesIDJSON - Update a Page.
 func (s *SDK) PutPagesIDJSON(ctx context.Context, request operations.PutPagesIDJSONRequest) (*operations.PutPagesIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/pages/{id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6886,7 +7052,7 @@ func (s *SDK) PutPagesIDJSON(ctx context.Context, request operations.PutPagesIDJ
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6926,8 +7092,9 @@ func (s *SDK) PutPagesIDJSON(ctx context.Context, request operations.PutPagesIDJ
 	return res, nil
 }
 
+// PutProductsIDJSON - Modify an existing Product.
 func (s *SDK) PutProductsIDJSON(ctx context.Context, request operations.PutProductsIDJSONRequest) (*operations.PutProductsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -6947,7 +7114,7 @@ func (s *SDK) PutProductsIDJSON(ctx context.Context, request operations.PutProdu
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -6987,8 +7154,9 @@ func (s *SDK) PutProductsIDJSON(ctx context.Context, request operations.PutProdu
 	return res, nil
 }
 
+// PutProductsIDOptionsOptionIDJSON - Modify an existing Product Option.
 func (s *SDK) PutProductsIDOptionsOptionIDJSON(ctx context.Context, request operations.PutProductsIDOptionsOptionIDJSONRequest) (*operations.PutProductsIDOptionsOptionIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/options/{option_id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7008,7 +7176,7 @@ func (s *SDK) PutProductsIDOptionsOptionIDJSON(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7048,8 +7216,9 @@ func (s *SDK) PutProductsIDOptionsOptionIDJSON(ctx context.Context, request oper
 	return res, nil
 }
 
+// PutProductsIDOptionsOptionIDValuesValueIDJSON - Modify an existing Product Option Value.
 func (s *SDK) PutProductsIDOptionsOptionIDValuesValueIDJSON(ctx context.Context, request operations.PutProductsIDOptionsOptionIDValuesValueIDJSONRequest) (*operations.PutProductsIDOptionsOptionIDValuesValueIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/options/{option_id}/values/{value_id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7069,7 +7238,7 @@ func (s *SDK) PutProductsIDOptionsOptionIDValuesValueIDJSON(ctx context.Context,
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7109,8 +7278,9 @@ func (s *SDK) PutProductsIDOptionsOptionIDValuesValueIDJSON(ctx context.Context,
 	return res, nil
 }
 
+// PutProductsIDVariantsVariantIDJSON - Modify an existing Product Variant.
 func (s *SDK) PutProductsIDVariantsVariantIDJSON(ctx context.Context, request operations.PutProductsIDVariantsVariantIDJSONRequest) (*operations.PutProductsIDVariantsVariantIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{id}/variants/{variant_id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7130,7 +7300,7 @@ func (s *SDK) PutProductsIDVariantsVariantIDJSON(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7170,8 +7340,9 @@ func (s *SDK) PutProductsIDVariantsVariantIDJSON(ctx context.Context, request op
 	return res, nil
 }
 
+// PutProductsProductIDFieldsFieldIDJSON - Update value of Product Custom Field
 func (s *SDK) PutProductsProductIDFieldsFieldIDJSON(ctx context.Context, request operations.PutProductsProductIDFieldsFieldIDJSONRequest) (*operations.PutProductsProductIDFieldsFieldIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/products/{product_id}/fields/{field_id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -7181,7 +7352,7 @@ func (s *SDK) PutProductsProductIDFieldsFieldIDJSON(ctx context.Context, request
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7221,8 +7392,9 @@ func (s *SDK) PutProductsProductIDFieldsFieldIDJSON(ctx context.Context, request
 	return res, nil
 }
 
+// PutPromotionsIDJSON - Update a Promotion.
 func (s *SDK) PutPromotionsIDJSON(ctx context.Context, request operations.PutPromotionsIDJSONRequest) (*operations.PutPromotionsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/promotions/{id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7242,7 +7414,7 @@ func (s *SDK) PutPromotionsIDJSON(ctx context.Context, request operations.PutPro
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -7282,8 +7454,9 @@ func (s *SDK) PutPromotionsIDJSON(ctx context.Context, request operations.PutPro
 	return res, nil
 }
 
+// PutShippingMethodsIDJSON - Update a Shipping Method.
 func (s *SDK) PutShippingMethodsIDJSON(ctx context.Context, request operations.PutShippingMethodsIDJSONRequest) (*operations.PutShippingMethodsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/shipping_methods/{id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -7303,7 +7476,7 @@ func (s *SDK) PutShippingMethodsIDJSON(ctx context.Context, request operations.P
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

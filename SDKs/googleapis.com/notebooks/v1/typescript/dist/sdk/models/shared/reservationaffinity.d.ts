@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum ReservationAffinityConsumeReservationTypeEnum {
     TypeUnspecified = "TYPE_UNSPECIFIED",
     NoReservation = "NO_RESERVATION",

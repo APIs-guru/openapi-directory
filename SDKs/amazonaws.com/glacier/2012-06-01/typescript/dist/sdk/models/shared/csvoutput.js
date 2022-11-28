@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { QuoteFieldsEnum } from "./quotefieldsenum";
 // CsvOutput
 /**
@@ -34,23 +34,23 @@ var CsvOutput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=FieldDelimiter" }),
+        SpeakeasyMetadata({ data: "json, name=FieldDelimiter" }),
         __metadata("design:type", String)
     ], CsvOutput.prototype, "fieldDelimiter", void 0);
     __decorate([
-        Metadata({ data: "json, name=QuoteCharacter" }),
+        SpeakeasyMetadata({ data: "json, name=QuoteCharacter" }),
         __metadata("design:type", String)
     ], CsvOutput.prototype, "quoteCharacter", void 0);
     __decorate([
-        Metadata({ data: "json, name=QuoteEscapeCharacter" }),
+        SpeakeasyMetadata({ data: "json, name=QuoteEscapeCharacter" }),
         __metadata("design:type", String)
     ], CsvOutput.prototype, "quoteEscapeCharacter", void 0);
     __decorate([
-        Metadata({ data: "json, name=QuoteFields" }),
+        SpeakeasyMetadata({ data: "json, name=QuoteFields" }),
         __metadata("design:type", String)
     ], CsvOutput.prototype, "quoteFields", void 0);
     __decorate([
-        Metadata({ data: "json, name=RecordDelimiter" }),
+        SpeakeasyMetadata({ data: "json, name=RecordDelimiter" }),
         __metadata("design:type", String)
     ], CsvOutput.prototype, "recordDelimiter", void 0);
     return CsvOutput;

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RegionNameEnum } from "./regionnameenum";
+
 
 
 // ResourceLocation
@@ -7,9 +8,9 @@ import { RegionNameEnum } from "./regionnameenum";
  * Describes the resource location.
 **/
 export class ResourceLocation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=availabilityZone" })
+  @SpeakeasyMetadata({ data: "json, name=availabilityZone" })
   availabilityZone?: string;
 
-  @Metadata({ data: "json, name=regionName" })
+  @SpeakeasyMetadata({ data: "json, name=regionName" })
   regionName?: RegionNameEnum;
 }

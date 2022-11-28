@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowCxV3SpeechToTextSettings
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Settings related to speech recognition.
 **/
 export class GoogleCloudDialogflowCxV3SpeechToTextSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=enableSpeechAdaptation" })
+  @SpeakeasyMetadata({ data: "json, name=enableSpeechAdaptation" })
   enableSpeechAdaptation?: boolean;
 }

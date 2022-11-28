@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import configvariabletemplate
+from sdk import utils
+from . import *
 
 class AuthConfigTemplateAuthTypeEnum(str, Enum):
     AUTH_TYPE_UNSPECIFIED = "AUTH_TYPE_UNSPECIFIED"
@@ -15,6 +17,10 @@ class AuthConfigTemplateAuthTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AuthConfigTemplate:
-    auth_type: Optional[AuthConfigTemplateAuthTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authType' }})
-    config_variable_templates: Optional[List[configvariabletemplate.ConfigVariableTemplate]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configVariableTemplates' }})
+    r"""AuthConfigTemplate
+    AuthConfigTemplate defines required field over an authentication type.
+    """
+    
+    auth_type: Optional[AuthConfigTemplateAuthTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('authType') }})
+    config_variable_templates: Optional[List[ConfigVariableTemplate]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('configVariableTemplates') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateHapgResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains the output of the <a>CreateHAPartitionGroup</a> action.
 **/
 export class CreateHapgResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HapgArn" })
+  @SpeakeasyMetadata({ data: "json, name=HapgArn" })
   hapgArn?: string;
 }

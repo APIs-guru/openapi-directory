@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ApiConfigHandler } from "./apiconfighandler";
 import { AutomaticScaling } from "./automaticscaling";
 import { BasicScaling } from "./basicscaling";

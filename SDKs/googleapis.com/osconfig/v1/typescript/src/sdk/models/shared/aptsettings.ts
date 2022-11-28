@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AptSettingsTypeEnum {
-    TypeUnspecified = "TYPE_UNSPECIFIED"
-,    Dist = "DIST"
-,    Upgrade = "UPGRADE"
+    TypeUnspecified = "TYPE_UNSPECIFIED",
+    Dist = "DIST",
+    Upgrade = "UPGRADE"
 }
 
 
@@ -12,12 +13,12 @@ export enum AptSettingsTypeEnum {
  * Apt patching is completed by executing `apt-get update && apt-get upgrade`. Additional options can be set to control how this is executed.
 **/
 export class AptSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=excludes" })
+  @SpeakeasyMetadata({ data: "json, name=excludes" })
   excludes?: string[];
 
-  @Metadata({ data: "json, name=exclusivePackages" })
+  @SpeakeasyMetadata({ data: "json, name=exclusivePackages" })
   exclusivePackages?: string[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: AptSettingsTypeEnum;
 }

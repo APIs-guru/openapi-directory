@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IapTestServiceAccountInfo } from "./iaptestserviceaccountinfo";
+
 
 
 // IapCredential
@@ -7,6 +8,6 @@ import { IapTestServiceAccountInfo } from "./iaptestserviceaccountinfo";
  * Describes authentication configuration for Identity-Aware-Proxy (IAP).
 **/
 export class IapCredential extends SpeakeasyBase {
-  @Metadata({ data: "json, name=iapTestServiceAccountInfo" })
+  @SpeakeasyMetadata({ data: "json, name=iapTestServiceAccountInfo" })
   iapTestServiceAccountInfo?: IapTestServiceAccountInfo;
 }

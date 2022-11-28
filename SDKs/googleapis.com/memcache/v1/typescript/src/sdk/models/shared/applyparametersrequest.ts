@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApplyParametersRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for ApplyParameters.
 **/
 export class ApplyParametersRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=applyAll" })
+  @SpeakeasyMetadata({ data: "json, name=applyAll" })
   applyAll?: boolean;
 
-  @Metadata({ data: "json, name=nodeIds" })
+  @SpeakeasyMetadata({ data: "json, name=nodeIds" })
   nodeIds?: string[];
 }

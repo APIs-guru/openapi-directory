@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ReportsCustomerUsageReportsGetPathParams:
-    date: str = field(default=None, metadata={'path_param': { 'field_name': 'date', 'style': 'simple', 'explode': False }})
+    date_: str = field(metadata={'path_param': { 'field_name': 'date', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +32,20 @@ class ReportsCustomerUsageReportsGetQueryParams:
 
 @dataclass
 class ReportsCustomerUsageReportsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ReportsCustomerUsageReportsGetRequest:
-    path_params: ReportsCustomerUsageReportsGetPathParams = field(default=None)
-    query_params: ReportsCustomerUsageReportsGetQueryParams = field(default=None)
-    security: ReportsCustomerUsageReportsGetSecurity = field(default=None)
+    path_params: ReportsCustomerUsageReportsGetPathParams = field()
+    query_params: ReportsCustomerUsageReportsGetQueryParams = field()
+    security: ReportsCustomerUsageReportsGetSecurity = field()
     
 
 @dataclass
 class ReportsCustomerUsageReportsGetResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     usage_reports: Optional[shared.UsageReports] = field(default=None)
     

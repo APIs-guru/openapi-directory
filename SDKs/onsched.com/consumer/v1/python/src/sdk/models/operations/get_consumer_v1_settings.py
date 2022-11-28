@@ -10,12 +10,12 @@ class GetConsumerV1SettingsQueryParams:
 
 @dataclass
 class GetConsumerV1SettingsRequest:
-    query_params: GetConsumerV1SettingsQueryParams = field(default=None)
+    query_params: GetConsumerV1SettingsQueryParams = field()
     
 
 @dataclass
 class GetConsumerV1SettingsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     online_settings_view_model: Optional[shared.OnlineSettingsViewModel] = field(default=None)
-    status_code: int = field(default=None)
     

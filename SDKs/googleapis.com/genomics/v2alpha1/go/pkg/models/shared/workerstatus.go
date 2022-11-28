@@ -1,5 +1,7 @@
 package shared
 
+// WorkerStatus
+// The status of the worker VM.
 type WorkerStatus struct {
 	AttachedDisks map[string]DiskStatus `json:"attachedDisks,omitempty"`
 	BootDisk      *DiskStatus           `json:"bootDisk,omitempty"`

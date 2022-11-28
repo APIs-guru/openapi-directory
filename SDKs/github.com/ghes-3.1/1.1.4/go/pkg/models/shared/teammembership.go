@@ -14,6 +14,8 @@ const (
 	TeamMembershipStateEnumPending TeamMembershipStateEnum = "pending"
 )
 
+// TeamMembership
+// Team Membership
 type TeamMembership struct {
 	Role  TeamMembershipRoleEnum  `json:"role"`
 	State TeamMembershipStateEnum `json:"state"`

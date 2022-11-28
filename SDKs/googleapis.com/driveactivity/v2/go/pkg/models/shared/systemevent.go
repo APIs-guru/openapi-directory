@@ -8,6 +8,8 @@ const (
 	SystemEventTypeEnumTrashAutoPurge  SystemEventTypeEnum = "TRASH_AUTO_PURGE"
 )
 
+// SystemEvent
+// Event triggered by system operations instead of end users.
 type SystemEvent struct {
 	Type *SystemEventTypeEnum `json:"type,omitempty"`
 }

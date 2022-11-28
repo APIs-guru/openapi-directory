@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetForecastResultJobIdPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=jobId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=jobId" })
   jobId: number;
 }
 
 
 export class GetForecastResultJobIdHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Token" })
   token?: string;
 }
 
 
 export class GetForecastResultJobIdRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetForecastResultJobIdPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetForecastResultJobIdHeaders;
 }
 
 
 export class GetForecastResultJobIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

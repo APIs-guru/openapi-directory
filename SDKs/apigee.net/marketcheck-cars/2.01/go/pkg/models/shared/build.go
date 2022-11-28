@@ -1,5 +1,7 @@
 package shared
 
+// Build
+// Describes the Car specification
 type Build struct {
 	AntibrakeSys     *string  `json:"antibrake_sys,omitempty"`
 	BodySubtype      *string  `json:"body_subtype,omitempty"`

@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import event
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeEventsResponse:
-    events: Optional[List[event.Event]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Events' }})
-    marker: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Marker' }})
+    r"""DescribeEventsResponse
+    <p/>
+    """
+    
+    events: Optional[List[Event]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Events') }})
+    marker: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Marker') }})
     

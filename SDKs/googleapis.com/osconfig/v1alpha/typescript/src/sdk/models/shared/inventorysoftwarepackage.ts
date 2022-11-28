@@ -1,13 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { InventoryVersionedPackage } from "./inventoryversionedpackage";
-import { InventoryVersionedPackage } from "./inventoryversionedpackage";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InventoryVersionedPackage } from "./inventoryversionedpackage";
 import { InventoryWindowsQuickFixEngineeringPackage } from "./inventorywindowsquickfixengineeringpackage";
 import { InventoryWindowsApplication } from "./inventorywindowsapplication";
 import { InventoryWindowsUpdatePackage } from "./inventorywindowsupdatepackage";
-import { InventoryVersionedPackage } from "./inventoryversionedpackage";
-import { InventoryVersionedPackage } from "./inventoryversionedpackage";
 import { InventoryZypperPatch } from "./inventoryzypperpatch";
+
 
 
 // InventorySoftwarePackage
@@ -15,30 +12,30 @@ import { InventoryZypperPatch } from "./inventoryzypperpatch";
  * Software package information of the operating system.
 **/
 export class InventorySoftwarePackage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=aptPackage" })
+  @SpeakeasyMetadata({ data: "json, name=aptPackage" })
   aptPackage?: InventoryVersionedPackage;
 
-  @Metadata({ data: "json, name=cosPackage" })
+  @SpeakeasyMetadata({ data: "json, name=cosPackage" })
   cosPackage?: InventoryVersionedPackage;
 
-  @Metadata({ data: "json, name=googetPackage" })
+  @SpeakeasyMetadata({ data: "json, name=googetPackage" })
   googetPackage?: InventoryVersionedPackage;
 
-  @Metadata({ data: "json, name=qfePackage" })
+  @SpeakeasyMetadata({ data: "json, name=qfePackage" })
   qfePackage?: InventoryWindowsQuickFixEngineeringPackage;
 
-  @Metadata({ data: "json, name=windowsApplication" })
+  @SpeakeasyMetadata({ data: "json, name=windowsApplication" })
   windowsApplication?: InventoryWindowsApplication;
 
-  @Metadata({ data: "json, name=wuaPackage" })
+  @SpeakeasyMetadata({ data: "json, name=wuaPackage" })
   wuaPackage?: InventoryWindowsUpdatePackage;
 
-  @Metadata({ data: "json, name=yumPackage" })
+  @SpeakeasyMetadata({ data: "json, name=yumPackage" })
   yumPackage?: InventoryVersionedPackage;
 
-  @Metadata({ data: "json, name=zypperPackage" })
+  @SpeakeasyMetadata({ data: "json, name=zypperPackage" })
   zypperPackage?: InventoryVersionedPackage;
 
-  @Metadata({ data: "json, name=zypperPatch" })
+  @SpeakeasyMetadata({ data: "json, name=zypperPatch" })
   zypperPatch?: InventoryZypperPatch;
 }

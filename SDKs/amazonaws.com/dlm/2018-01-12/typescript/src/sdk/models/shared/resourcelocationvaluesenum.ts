@@ -1,6 +1,7 @@
 
 
+
 export enum ResourceLocationValuesEnum {
-    Cloud = "CLOUD"
-,    Outpost = "OUTPOST"
+    Cloud = "CLOUD",
+    Outpost = "OUTPOST"
 }

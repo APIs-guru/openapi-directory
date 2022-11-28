@@ -17,6 +17,8 @@ const (
 	UserCipherUseEntityInterfaceEnumJsapi   UserCipherUseEntityInterfaceEnum = "jsapi"
 )
 
+// UserCipherUseEntity
+// List User Cipher Uses
 type UserCipherUseEntity struct {
 	CreatedAt      *time.Time                        `json:"created_at,omitempty"`
 	ID             *int32                            `json:"id,omitempty"`

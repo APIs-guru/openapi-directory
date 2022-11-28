@@ -1,8 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotificationConfig } from "./notificationconfig";
 import { Hl7V2NotificationConfig } from "./hl7v2notificationconfig";
 import { ParserConfig } from "./parserconfig";
+
 
 
 // Hl7V2Store
@@ -10,21 +10,21 @@ import { ParserConfig } from "./parserconfig";
  * Represents an HL7v2 store.
 **/
 export class Hl7V2Store extends SpeakeasyBase {
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=notificationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=notificationConfig" })
   notificationConfig?: NotificationConfig;
 
-  @Metadata({ data: "json, name=notificationConfigs", elemType: shared.Hl7V2NotificationConfig })
+  @SpeakeasyMetadata({ data: "json, name=notificationConfigs", elemType: Hl7V2NotificationConfig })
   notificationConfigs?: Hl7V2NotificationConfig[];
 
-  @Metadata({ data: "json, name=parserConfig" })
+  @SpeakeasyMetadata({ data: "json, name=parserConfig" })
   parserConfig?: ParserConfig;
 
-  @Metadata({ data: "json, name=rejectDuplicateMessage" })
+  @SpeakeasyMetadata({ data: "json, name=rejectDuplicateMessage" })
   rejectDuplicateMessage?: boolean;
 }

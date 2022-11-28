@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ReprocessingStatusEnum } from "./reprocessingstatusenum";
+
 
 
 // ReprocessingSummary
@@ -7,12 +8,12 @@ import { ReprocessingStatusEnum } from "./reprocessingstatusenum";
  * Information about pipeline reprocessing.
 **/
 export class ReprocessingSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: ReprocessingStatusEnum;
 }

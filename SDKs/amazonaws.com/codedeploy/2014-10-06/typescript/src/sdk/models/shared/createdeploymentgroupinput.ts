@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AlarmConfiguration } from "./alarmconfiguration";
 import { AutoRollbackConfiguration } from "./autorollbackconfiguration";
 import { BlueGreenDeploymentConfiguration } from "./bluegreendeploymentconfiguration";
@@ -15,62 +14,63 @@ import { Tag } from "./tag";
 import { TriggerConfig } from "./triggerconfig";
 
 
+
 // CreateDeploymentGroupInput
 /** 
  * Represents the input of a <code>CreateDeploymentGroup</code> operation.
 **/
 export class CreateDeploymentGroupInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alarmConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=alarmConfiguration" })
   alarmConfiguration?: AlarmConfiguration;
 
-  @Metadata({ data: "json, name=applicationName" })
+  @SpeakeasyMetadata({ data: "json, name=applicationName" })
   applicationName: string;
 
-  @Metadata({ data: "json, name=autoRollbackConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=autoRollbackConfiguration" })
   autoRollbackConfiguration?: AutoRollbackConfiguration;
 
-  @Metadata({ data: "json, name=autoScalingGroups" })
+  @SpeakeasyMetadata({ data: "json, name=autoScalingGroups" })
   autoScalingGroups?: string[];
 
-  @Metadata({ data: "json, name=blueGreenDeploymentConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=blueGreenDeploymentConfiguration" })
   blueGreenDeploymentConfiguration?: BlueGreenDeploymentConfiguration;
 
-  @Metadata({ data: "json, name=deploymentConfigName" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentConfigName" })
   deploymentConfigName?: string;
 
-  @Metadata({ data: "json, name=deploymentGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentGroupName" })
   deploymentGroupName: string;
 
-  @Metadata({ data: "json, name=deploymentStyle" })
+  @SpeakeasyMetadata({ data: "json, name=deploymentStyle" })
   deploymentStyle?: DeploymentStyle;
 
-  @Metadata({ data: "json, name=ec2TagFilters", elemType: shared.Ec2TagFilter })
+  @SpeakeasyMetadata({ data: "json, name=ec2TagFilters", elemType: Ec2TagFilter })
   ec2TagFilters?: Ec2TagFilter[];
 
-  @Metadata({ data: "json, name=ec2TagSet" })
+  @SpeakeasyMetadata({ data: "json, name=ec2TagSet" })
   ec2TagSet?: Ec2TagSet;
 
-  @Metadata({ data: "json, name=ecsServices", elemType: shared.EcsService })
+  @SpeakeasyMetadata({ data: "json, name=ecsServices", elemType: EcsService })
   ecsServices?: EcsService[];
 
-  @Metadata({ data: "json, name=loadBalancerInfo" })
+  @SpeakeasyMetadata({ data: "json, name=loadBalancerInfo" })
   loadBalancerInfo?: LoadBalancerInfo;
 
-  @Metadata({ data: "json, name=onPremisesInstanceTagFilters", elemType: shared.TagFilter })
+  @SpeakeasyMetadata({ data: "json, name=onPremisesInstanceTagFilters", elemType: TagFilter })
   onPremisesInstanceTagFilters?: TagFilter[];
 
-  @Metadata({ data: "json, name=onPremisesTagSet" })
+  @SpeakeasyMetadata({ data: "json, name=onPremisesTagSet" })
   onPremisesTagSet?: OnPremisesTagSet;
 
-  @Metadata({ data: "json, name=outdatedInstancesStrategy" })
+  @SpeakeasyMetadata({ data: "json, name=outdatedInstancesStrategy" })
   outdatedInstancesStrategy?: OutdatedInstancesStrategyEnum;
 
-  @Metadata({ data: "json, name=serviceRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=serviceRoleArn" })
   serviceRoleArn: string;
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=triggerConfigurations", elemType: shared.TriggerConfig })
+  @SpeakeasyMetadata({ data: "json, name=triggerConfigurations", elemType: TriggerConfig })
   triggerConfigurations?: TriggerConfig[];
 }

@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class EndpointGetACategoriesPlaylistsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=category_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=category_id" })
   categoryId: string;
 }
 
 
 export class EndpointGetACategoriesPlaylistsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=country" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" })
   country?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 }
 
 
 export class EndpointGetACategoriesPlaylistsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class EndpointGetACategoriesPlaylistsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   spotifyAuth: shared.SchemeSpotifyAuth;
 }
 
 
 export class EndpointGetACategoriesPlaylistsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: EndpointGetACategoriesPlaylistsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: EndpointGetACategoriesPlaylistsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: EndpointGetACategoriesPlaylistsHeaders;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: EndpointGetACategoriesPlaylistsSecurity;
 }
 
 
 export class EndpointGetACategoriesPlaylistsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorResponseObject?: shared.ErrorResponseObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   playlistPagingObject?: shared.PlaylistPagingObject;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

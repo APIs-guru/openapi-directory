@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class PostRemoveSourceIdentifierFromSubscriptionActionEnum(str, Enum):
     REMOVE_SOURCE_IDENTIFIER_FROM_SUBSCRIPTION = "RemoveSourceIdentifierFromSubscription"
@@ -10,8 +14,8 @@ class PostRemoveSourceIdentifierFromSubscriptionVersionEnum(str, Enum):
 
 @dataclass
 class PostRemoveSourceIdentifierFromSubscriptionQueryParams:
-    action: PostRemoveSourceIdentifierFromSubscriptionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    version: PostRemoveSourceIdentifierFromSubscriptionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: PostRemoveSourceIdentifierFromSubscriptionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: PostRemoveSourceIdentifierFromSubscriptionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -27,14 +31,14 @@ class PostRemoveSourceIdentifierFromSubscriptionHeaders:
 
 @dataclass
 class PostRemoveSourceIdentifierFromSubscriptionRequest:
-    query_params: PostRemoveSourceIdentifierFromSubscriptionQueryParams = field(default=None)
-    headers: PostRemoveSourceIdentifierFromSubscriptionHeaders = field(default=None)
+    headers: PostRemoveSourceIdentifierFromSubscriptionHeaders = field()
+    query_params: PostRemoveSourceIdentifierFromSubscriptionQueryParams = field()
     request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass
 class PostRemoveSourceIdentifierFromSubscriptionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

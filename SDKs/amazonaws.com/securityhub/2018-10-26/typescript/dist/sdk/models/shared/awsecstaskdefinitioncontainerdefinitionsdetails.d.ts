@@ -1,0 +1,61 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails } from "./awsecstaskdefinitioncontainerdefinitionsdependsondetails";
+import { AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails } from "./awsecstaskdefinitioncontainerdefinitionsenvironmentdetails";
+import { AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails } from "./awsecstaskdefinitioncontainerdefinitionsenvironmentfilesdetails";
+import { AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails } from "./awsecstaskdefinitioncontainerdefinitionsextrahostsdetails";
+import { AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails } from "./awsecstaskdefinitioncontainerdefinitionsfirelensconfigurationdetails";
+import { AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails } from "./awsecstaskdefinitioncontainerdefinitionshealthcheckdetails";
+import { AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails } from "./awsecstaskdefinitioncontainerdefinitionslinuxparametersdetails";
+import { AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails } from "./awsecstaskdefinitioncontainerdefinitionslogconfigurationdetails";
+import { AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails } from "./awsecstaskdefinitioncontainerdefinitionsmountpointsdetails";
+import { AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails } from "./awsecstaskdefinitioncontainerdefinitionsportmappingsdetails";
+import { AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails } from "./awsecstaskdefinitioncontainerdefinitionsrepositorycredentialsdetails";
+import { AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails } from "./awsecstaskdefinitioncontainerdefinitionsresourcerequirementsdetails";
+import { AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails } from "./awsecstaskdefinitioncontainerdefinitionssecretsdetails";
+import { AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails } from "./awsecstaskdefinitioncontainerdefinitionssystemcontrolsdetails";
+import { AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails } from "./awsecstaskdefinitioncontainerdefinitionsulimitsdetails";
+import { AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails } from "./awsecstaskdefinitioncontainerdefinitionsvolumesfromdetails";
+/**
+ * A container definition that describes a container in the task.
+**/
+export declare class AwsEcsTaskDefinitionContainerDefinitionsDetails extends SpeakeasyBase {
+    command?: string[];
+    cpu?: number;
+    dependsOn?: AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails[];
+    disableNetworking?: boolean;
+    dnsSearchDomains?: string[];
+    dnsServers?: string[];
+    dockerLabels?: Map<string, string>;
+    dockerSecurityOptions?: string[];
+    entryPoint?: string[];
+    environment?: AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails[];
+    environmentFiles?: AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails[];
+    essential?: boolean;
+    extraHosts?: AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails[];
+    firelensConfiguration?: AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails;
+    healthCheck?: AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails;
+    hostname?: string;
+    image?: string;
+    interactive?: boolean;
+    links?: string[];
+    linuxParameters?: AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails;
+    logConfiguration?: AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails;
+    memory?: number;
+    memoryReservation?: number;
+    mountPoints?: AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails[];
+    name?: string;
+    portMappings?: AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails[];
+    privileged?: boolean;
+    pseudoTerminal?: boolean;
+    readonlyRootFilesystem?: boolean;
+    repositoryCredentials?: AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails;
+    resourceRequirements?: AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails[];
+    secrets?: AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails[];
+    startTimeout?: number;
+    stopTimeout?: number;
+    systemControls?: AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails[];
+    ulimits?: AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails[];
+    user?: string;
+    volumesFrom?: AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails[];
+    workingDirectory?: string;
+}

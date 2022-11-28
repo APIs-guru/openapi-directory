@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class CloudkmsProjectsLocationsKeyRingsCreatePathParams extends SpeakeasyBase {
     parent: string;
@@ -32,7 +32,6 @@ export declare class CloudkmsProjectsLocationsKeyRingsCreateSecurity extends Spe
 export declare class CloudkmsProjectsLocationsKeyRingsCreateRequest extends SpeakeasyBase {
     pathParams: CloudkmsProjectsLocationsKeyRingsCreatePathParams;
     queryParams: CloudkmsProjectsLocationsKeyRingsCreateQueryParams;
-    request?: shared.KeyRing;
     security: CloudkmsProjectsLocationsKeyRingsCreateSecurity;
 }
 export declare class CloudkmsProjectsLocationsKeyRingsCreateResponse extends SpeakeasyBase {

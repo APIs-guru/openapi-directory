@@ -1,8 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
-import { Field } from "./field";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Field } from "./field";
 import { ThingGroupIndexingModeEnum } from "./thinggroupindexingmodeenum";
+
 
 
 // ThingGroupIndexingConfiguration
@@ -10,12 +9,12 @@ import { ThingGroupIndexingModeEnum } from "./thinggroupindexingmodeenum";
  * Thing group indexing configuration.
 **/
 export class ThingGroupIndexingConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customFields", elemType: shared.Field })
+  @SpeakeasyMetadata({ data: "json, name=customFields", elemType: Field })
   customFields?: Field[];
 
-  @Metadata({ data: "json, name=managedFields", elemType: shared.Field })
+  @SpeakeasyMetadata({ data: "json, name=managedFields", elemType: Field })
   managedFields?: Field[];
 
-  @Metadata({ data: "json, name=thingGroupIndexingMode" })
+  @SpeakeasyMetadata({ data: "json, name=thingGroupIndexingMode" })
   thingGroupIndexingMode: ThingGroupIndexingModeEnum;
 }

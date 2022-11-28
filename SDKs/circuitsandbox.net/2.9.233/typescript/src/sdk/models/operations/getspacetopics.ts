@@ -1,58 +1,59 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSpaceTopicsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=spaceId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=spaceId" })
   spaceId: string;
 }
 
 export enum GetSpaceTopicsSearchDirectionEnum {
-    Before = "BEFORE"
-,    After = "AFTER"
+    Before = "BEFORE",
+    After = "AFTER"
 }
 
 
 export class GetSpaceTopicsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=numberOfResults" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=numberOfResults" })
   numberOfResults?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=searchDirection" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=searchDirection" })
   searchDirection: GetSpaceTopicsSearchDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=timestamp" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timestamp" })
   timestamp?: Date;
 }
 
 
 export class GetSpaceTopicsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class GetSpaceTopicsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSpaceTopicsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSpaceTopicsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetSpaceTopicsSecurity;
 }
 
 
 export class GetSpaceTopicsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   spaceTopics?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,14 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BackendMetastore } from "./backendmetastore";
 
+
 export enum FederationStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Active = "ACTIVE"
-,    Updating = "UPDATING"
-,    Deleting = "DELETING"
-,    Error = "ERROR"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Active = "ACTIVE",
+    Updating = "UPDATING",
+    Deleting = "DELETING",
+    Error = "ERROR"
+}
+
+
+// FederationInput
+/** 
+ * Represents a federation of multiple backend metastores.
+**/
+export class FederationInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=backendMetastores", elemType: BackendMetastore })
+  backendMetastores?: Map<string, BackendMetastore>;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
+
+  @SpeakeasyMetadata({ data: "json, name=name" })
+  name?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=version" })
+  version?: string;
 }
 
 
@@ -17,33 +36,33 @@ export enum FederationStateEnum {
  * Represents a federation of multiple backend metastores.
 **/
 export class Federation extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backendMetastores", elemType: shared.BackendMetastore })
+  @SpeakeasyMetadata({ data: "json, name=backendMetastores", elemType: BackendMetastore })
   backendMetastores?: Map<string, BackendMetastore>;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=endpointUri" })
+  @SpeakeasyMetadata({ data: "json, name=endpointUri" })
   endpointUri?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: FederationStateEnum;
 
-  @Metadata({ data: "json, name=stateMessage" })
+  @SpeakeasyMetadata({ data: "json, name=stateMessage" })
   stateMessage?: string;
 
-  @Metadata({ data: "json, name=uid" })
+  @SpeakeasyMetadata({ data: "json, name=uid" })
   uid?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 
-  @Metadata({ data: "json, name=version" })
+  @SpeakeasyMetadata({ data: "json, name=version" })
   version?: string;
 }

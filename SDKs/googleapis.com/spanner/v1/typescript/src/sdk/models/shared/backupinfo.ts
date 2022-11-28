@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BackupInfo
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Information about a backup.
 **/
 export class BackupInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=backup" })
+  @SpeakeasyMetadata({ data: "json, name=backup" })
   backup?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=sourceDatabase" })
+  @SpeakeasyMetadata({ data: "json, name=sourceDatabase" })
   sourceDatabase?: string;
 
-  @Metadata({ data: "json, name=versionTime" })
+  @SpeakeasyMetadata({ data: "json, name=versionTime" })
   versionTime?: string;
 }

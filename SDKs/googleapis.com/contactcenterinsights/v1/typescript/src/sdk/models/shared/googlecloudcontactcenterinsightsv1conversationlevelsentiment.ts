@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudContactcenterinsightsV1SentimentData } from "./googlecloudcontactcenterinsightsv1sentimentdata";
+
 
 
 // GoogleCloudContactcenterinsightsV1ConversationLevelSentiment
@@ -7,9 +8,9 @@ import { GoogleCloudContactcenterinsightsV1SentimentData } from "./googlecloudco
  * One channel of conversation-level sentiment data.
 **/
 export class GoogleCloudContactcenterinsightsV1ConversationLevelSentiment extends SpeakeasyBase {
-  @Metadata({ data: "json, name=channelTag" })
+  @SpeakeasyMetadata({ data: "json, name=channelTag" })
   channelTag?: number;
 
-  @Metadata({ data: "json, name=sentimentData" })
+  @SpeakeasyMetadata({ data: "json, name=sentimentData" })
   sentimentData?: GoogleCloudContactcenterinsightsV1SentimentData;
 }

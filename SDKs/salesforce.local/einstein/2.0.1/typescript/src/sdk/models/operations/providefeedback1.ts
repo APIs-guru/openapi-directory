@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ProvideFeedback1RequestBody extends SpeakeasyBase {
-  @Metadata({ data: "multipart_form, name=data" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=data" })
   data?: string;
 
-  @Metadata({ data: "multipart_form, name=expectedLabel" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=expectedLabel" })
   expectedLabel?: string;
 
-  @Metadata({ data: "multipart_form, name=modelId" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=modelId" })
   modelId?: string;
 
-  @Metadata({ data: "multipart_form, name=name" })
+  @SpeakeasyMetadata({ data: "multipart_form, name=name" })
   name?: string;
 }
 
 
 export class ProvideFeedback1Security extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerToken: shared.SchemeBearerToken;
 }
 
 
 export class ProvideFeedback1Request extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=multipart/form-data" })
+  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request?: ProvideFeedback1RequestBody;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ProvideFeedback1Security;
 }
 
 
 export class ProvideFeedback1Response extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   example?: shared.Example;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

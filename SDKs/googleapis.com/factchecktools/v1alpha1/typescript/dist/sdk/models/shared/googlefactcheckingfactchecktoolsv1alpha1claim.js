@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview } from "./googlefactcheckingfactchecktoolsv1alpha1claimreview";
 // GoogleFactcheckingFactchecktoolsV1alpha1Claim
 /**
  * Information about the claim.
@@ -34,19 +34,19 @@ var GoogleFactcheckingFactchecktoolsV1alpha1Claim = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=claimDate" }),
+        SpeakeasyMetadata({ data: "json, name=claimDate" }),
         __metadata("design:type", String)
     ], GoogleFactcheckingFactchecktoolsV1alpha1Claim.prototype, "claimDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=claimReview", elemType: shared.GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview }),
+        SpeakeasyMetadata({ data: "json, name=claimReview", elemType: GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview }),
         __metadata("design:type", Array)
     ], GoogleFactcheckingFactchecktoolsV1alpha1Claim.prototype, "claimReview", void 0);
     __decorate([
-        Metadata({ data: "json, name=claimant" }),
+        SpeakeasyMetadata({ data: "json, name=claimant" }),
         __metadata("design:type", String)
     ], GoogleFactcheckingFactchecktoolsV1alpha1Claim.prototype, "claimant", void 0);
     __decorate([
-        Metadata({ data: "json, name=text" }),
+        SpeakeasyMetadata({ data: "json, name=text" }),
         __metadata("design:type", String)
     ], GoogleFactcheckingFactchecktoolsV1alpha1Claim.prototype, "text", void 0);
     return GoogleFactcheckingFactchecktoolsV1alpha1Claim;

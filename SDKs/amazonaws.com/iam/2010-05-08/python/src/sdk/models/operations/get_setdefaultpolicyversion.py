@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetSetDefaultPolicyVersionActionEnum(str, Enum):
     SET_DEFAULT_POLICY_VERSION = "SetDefaultPolicyVersion"
@@ -10,10 +14,10 @@ class GetSetDefaultPolicyVersionVersionEnum(str, Enum):
 
 @dataclass
 class GetSetDefaultPolicyVersionQueryParams:
-    action: GetSetDefaultPolicyVersionActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    policy_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'PolicyArn', 'style': 'form', 'explode': True }})
-    version: GetSetDefaultPolicyVersionVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
-    version_id: str = field(default=None, metadata={'query_param': { 'field_name': 'VersionId', 'style': 'form', 'explode': True }})
+    action: GetSetDefaultPolicyVersionActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    policy_arn: str = field(metadata={'query_param': { 'field_name': 'PolicyArn', 'style': 'form', 'explode': True }})
+    version: GetSetDefaultPolicyVersionVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    version_id: str = field(metadata={'query_param': { 'field_name': 'VersionId', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetSetDefaultPolicyVersionHeaders:
 
 @dataclass
 class GetSetDefaultPolicyVersionRequest:
-    query_params: GetSetDefaultPolicyVersionQueryParams = field(default=None)
-    headers: GetSetDefaultPolicyVersionHeaders = field(default=None)
+    headers: GetSetDefaultPolicyVersionHeaders = field()
+    query_params: GetSetDefaultPolicyVersionQueryParams = field()
     
 
 @dataclass
 class GetSetDefaultPolicyVersionResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

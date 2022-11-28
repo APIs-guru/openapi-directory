@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Category extends SpeakeasyBase {
-  @Metadata({ data: "json, name=friendlyDescription" })
+  @SpeakeasyMetadata({ data: "json, name=friendlyDescription" })
   friendlyDescription?: string;
 
-  @Metadata({ data: "json, name=hidden" })
+  @SpeakeasyMetadata({ data: "json, name=hidden" })
   hidden?: boolean;
 
-  @Metadata({ data: "json, name=icd10Description" })
+  @SpeakeasyMetadata({ data: "json, name=icd10Description" })
   icd10Description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=number" })
+  @SpeakeasyMetadata({ data: "json, name=number" })
   number?: number;
 }

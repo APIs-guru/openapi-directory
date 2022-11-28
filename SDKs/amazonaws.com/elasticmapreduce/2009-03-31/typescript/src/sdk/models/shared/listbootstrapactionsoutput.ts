@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Command } from "./command";
+
 
 
 // ListBootstrapActionsOutput
@@ -8,9 +8,9 @@ import { Command } from "./command";
  * This output contains the bootstrap actions detail.
 **/
 export class ListBootstrapActionsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BootstrapActions", elemType: shared.Command })
+  @SpeakeasyMetadata({ data: "json, name=BootstrapActions", elemType: Command })
   bootstrapActions?: Command[];
 
-  @Metadata({ data: "json, name=Marker" })
+  @SpeakeasyMetadata({ data: "json, name=Marker" })
   marker?: string;
 }

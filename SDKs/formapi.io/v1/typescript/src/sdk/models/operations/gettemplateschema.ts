@@ -1,71 +1,72 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTemplateSchemaPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=template_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=template_id" })
   templateId: string;
 }
 
 
 export class GetTemplateSchemaSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
   apiTokenBasic: shared.SchemeApiTokenBasic;
 }
 
 
-export class GetTemplateSchemaRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetTemplateSchemaPathParams;
-
-  @Metadata()
-  security: GetTemplateSchemaSecurity;
-}
-
-
 export class GetTemplateSchemaTemplateSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=$schema" })
+  @SpeakeasyMetadata({ data: "json, name=$schema" })
   dollarSchema?: string;
 
-  @Metadata({ data: "json, name=additionalProperties" })
+  @SpeakeasyMetadata({ data: "json, name=additionalProperties" })
   additionalProperties?: boolean;
 
-  @Metadata({ data: "json, name=definitions" })
+  @SpeakeasyMetadata({ data: "json, name=definitions" })
   definitions?: Map<string, any>;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=properties" })
+  @SpeakeasyMetadata({ data: "json, name=properties" })
   properties?: Map<string, any>;
 
-  @Metadata({ data: "json, name=required" })
+  @SpeakeasyMetadata({ data: "json, name=required" })
   required?: any[];
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
+export class GetTemplateSchemaRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetTemplateSchemaPathParams;
+
+  @SpeakeasyMetadata()
+  security: GetTemplateSchemaSecurity;
+}
+
+
 export class GetTemplateSchemaResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   authenticationError?: shared.AuthenticationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   templateSchema?: GetTemplateSchemaTemplateSchema;
 }

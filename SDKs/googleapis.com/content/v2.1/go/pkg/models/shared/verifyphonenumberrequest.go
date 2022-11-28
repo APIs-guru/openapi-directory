@@ -8,6 +8,8 @@ const (
 	VerifyPhoneNumberRequestPhoneVerificationMethodEnumPhoneCall                          VerifyPhoneNumberRequestPhoneVerificationMethodEnum = "PHONE_CALL"
 )
 
+// VerifyPhoneNumberRequest
+// Request message for the VerifyPhoneNumber method.
 type VerifyPhoneNumberRequest struct {
 	PhoneVerificationMethod *VerifyPhoneNumberRequestPhoneVerificationMethodEnum `json:"phoneVerificationMethod,omitempty"`
 	VerificationCode        *string                                              `json:"verificationCode,omitempty"`

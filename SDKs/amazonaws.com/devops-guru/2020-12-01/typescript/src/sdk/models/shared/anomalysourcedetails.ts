@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CloudWatchMetricsDetail } from "./cloudwatchmetricsdetail";
+
 
 
 // AnomalySourceDetails
@@ -8,6 +8,6 @@ import { CloudWatchMetricsDetail } from "./cloudwatchmetricsdetail";
  *  Details about the source of the anomalous operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. 
 **/
 export class AnomalySourceDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CloudWatchMetrics", elemType: shared.CloudWatchMetricsDetail })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchMetrics", elemType: CloudWatchMetricsDetail })
   cloudWatchMetrics?: CloudWatchMetricsDetail[];
 }

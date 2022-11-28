@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ContainerProjectsZonesClustersGetPathParams:
-    cluster_id: str = field(default=None, metadata={'path_param': { 'field_name': 'clusterId', 'style': 'simple', 'explode': False }})
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
-    zone: str = field(default=None, metadata={'path_param': { 'field_name': 'zone', 'style': 'simple', 'explode': False }})
+    cluster_id: str = field(metadata={'path_param': { 'field_name': 'clusterId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    zone: str = field(metadata={'path_param': { 'field_name': 'zone', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class ContainerProjectsZonesClustersGetQueryParams:
 
 @dataclass
 class ContainerProjectsZonesClustersGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ContainerProjectsZonesClustersGetRequest:
-    path_params: ContainerProjectsZonesClustersGetPathParams = field(default=None)
-    query_params: ContainerProjectsZonesClustersGetQueryParams = field(default=None)
-    security: ContainerProjectsZonesClustersGetSecurity = field(default=None)
+    path_params: ContainerProjectsZonesClustersGetPathParams = field()
+    query_params: ContainerProjectsZonesClustersGetQueryParams = field()
+    security: ContainerProjectsZonesClustersGetSecurity = field()
     
 
 @dataclass
 class ContainerProjectsZonesClustersGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     cluster: Optional[shared.Cluster] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

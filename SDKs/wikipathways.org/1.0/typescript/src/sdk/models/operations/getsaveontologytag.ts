@@ -1,46 +1,47 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetSaveOntologyTagFormatEnum {
-    Json = "json"
-,    Xml = "xml"
-,    Html = "html"
-,    Dump = "dump"
-,    Jpg = "jpg"
-,    Pdf = "pdf"
+    Json = "json",
+    Xml = "xml",
+    Html = "html",
+    Dump = "dump",
+    Jpg = "jpg",
+    Pdf = "pdf"
 }
 
 
 export class GetSaveOntologyTagQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=auth" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=auth" })
   auth: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format?: GetSaveOntologyTagFormatEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pwId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pwId" })
   pwId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=term" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=term" })
   term: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=termId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=termId" })
   termId: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=user" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=user" })
   user: string;
 }
 
 
 export class GetSaveOntologyTagRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetSaveOntologyTagQueryParams;
 }
 
 
 export class GetSaveOntologyTagResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

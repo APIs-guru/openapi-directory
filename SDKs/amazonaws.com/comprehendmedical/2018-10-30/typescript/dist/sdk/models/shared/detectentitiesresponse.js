@@ -22,27 +22,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Entity } from "./entity";
+import { UnmappedAttribute } from "./unmappedattribute";
 var DetectEntitiesResponse = /** @class */ (function (_super) {
     __extends(DetectEntitiesResponse, _super);
     function DetectEntitiesResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Entities", elemType: shared.Entity }),
+        SpeakeasyMetadata({ data: "json, name=Entities", elemType: Entity }),
         __metadata("design:type", Array)
     ], DetectEntitiesResponse.prototype, "entities", void 0);
     __decorate([
-        Metadata({ data: "json, name=ModelVersion" }),
+        SpeakeasyMetadata({ data: "json, name=ModelVersion" }),
         __metadata("design:type", String)
     ], DetectEntitiesResponse.prototype, "modelVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=PaginationToken" }),
+        SpeakeasyMetadata({ data: "json, name=PaginationToken" }),
         __metadata("design:type", String)
     ], DetectEntitiesResponse.prototype, "paginationToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=UnmappedAttributes", elemType: shared.UnmappedAttribute }),
+        SpeakeasyMetadata({ data: "json, name=UnmappedAttributes", elemType: UnmappedAttribute }),
         __metadata("design:type", Array)
     ], DetectEntitiesResponse.prototype, "unmappedAttributes", void 0);
     return DetectEntitiesResponse;

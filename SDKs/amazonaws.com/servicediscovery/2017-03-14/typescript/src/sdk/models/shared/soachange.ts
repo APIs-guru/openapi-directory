@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SoaChange
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Updated Start of Authority (SOA) properties for a public or private DNS namespace.
 **/
 export class SoaChange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=TTL" })
+  @SpeakeasyMetadata({ data: "json, name=TTL" })
   ttl: number;
 }

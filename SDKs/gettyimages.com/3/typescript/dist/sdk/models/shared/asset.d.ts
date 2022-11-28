@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DisplaySize } from "./displaysize";
 export declare class Asset extends SpeakeasyBase {
     assetType?: string;

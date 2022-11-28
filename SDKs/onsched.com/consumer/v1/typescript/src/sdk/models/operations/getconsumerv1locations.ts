@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetConsumerV1LocationsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ignorePrimary" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ignorePrimary" })
   ignorePrimary?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=nearestTo" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=nearestTo" })
   nearestTo?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=proximity" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=proximity" })
   proximity?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=regionId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=regionId" })
   regionId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=serviceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=serviceId" })
   serviceId?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=units" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=units" })
   units?: string;
 }
 
 
 export class GetConsumerV1LocationsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetConsumerV1LocationsQueryParams;
 }
 
 
 export class GetConsumerV1LocationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   locationListViewModel?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

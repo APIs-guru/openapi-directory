@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleIdentityAccesscontextmanagerV1VpcAccessibleServices
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies how APIs are allowed to communicate within the Service Perimeter.
 **/
 export class GoogleIdentityAccesscontextmanagerV1VpcAccessibleServices extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowedServices" })
+  @SpeakeasyMetadata({ data: "json, name=allowedServices" })
   allowedServices?: string[];
 
-  @Metadata({ data: "json, name=enableRestriction" })
+  @SpeakeasyMetadata({ data: "json, name=enableRestriction" })
   enableRestriction?: boolean;
 }

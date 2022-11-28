@@ -1,5 +1,7 @@
 package shared
 
+// GlobalSecondaryIndexDescription
+// Represents the properties of a global secondary index.
 type GlobalSecondaryIndexDescription struct {
 	Backfilling           *bool                             `json:"Backfilling,omitempty"`
 	IndexArn              *string                           `json:"IndexArn,omitempty"`

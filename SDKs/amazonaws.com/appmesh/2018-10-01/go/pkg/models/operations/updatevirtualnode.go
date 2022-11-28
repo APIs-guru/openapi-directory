@@ -19,6 +19,8 @@ type UpdateVirtualNodeHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateVirtualNodeRequestBodySpec
+// An object representing the specification of a virtual node.
 type UpdateVirtualNodeRequestBodySpec struct {
 	Backends         []string                 `json:"backends,omitempty"`
 	Listeners        []shared.Listener        `json:"listeners,omitempty"`

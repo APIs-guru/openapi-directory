@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ResetPasswordResponse
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Response of resetting the password.
 **/
 export class ResetPasswordResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=newEmail" })
+  @SpeakeasyMetadata({ data: "json, name=newEmail" })
   newEmail?: string;
 
-  @Metadata({ data: "json, name=requestType" })
+  @SpeakeasyMetadata({ data: "json, name=requestType" })
   requestType?: string;
 }

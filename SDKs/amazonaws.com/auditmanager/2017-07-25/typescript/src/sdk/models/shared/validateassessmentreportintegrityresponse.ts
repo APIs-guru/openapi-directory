@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ValidateAssessmentReportIntegrityResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=signatureAlgorithm" })
+  @SpeakeasyMetadata({ data: "json, name=signatureAlgorithm" })
   signatureAlgorithm?: string;
 
-  @Metadata({ data: "json, name=signatureDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=signatureDateTime" })
   signatureDateTime?: string;
 
-  @Metadata({ data: "json, name=signatureKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=signatureKeyId" })
   signatureKeyId?: string;
 
-  @Metadata({ data: "json, name=signatureValid" })
+  @SpeakeasyMetadata({ data: "json, name=signatureValid" })
   signatureValid?: boolean;
 
-  @Metadata({ data: "json, name=validationErrors" })
+  @SpeakeasyMetadata({ data: "json, name=validationErrors" })
   validationErrors?: string[];
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Property } from "./property";
 import { CompositeModelProperty } from "./compositemodelproperty";
 var DescribeAssetPropertyResponse = /** @class */ (function (_super) {
@@ -31,23 +31,23 @@ var DescribeAssetPropertyResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=assetId" }),
+        SpeakeasyMetadata({ data: "json, name=assetId" }),
         __metadata("design:type", String)
     ], DescribeAssetPropertyResponse.prototype, "assetId", void 0);
     __decorate([
-        Metadata({ data: "json, name=assetModelId" }),
+        SpeakeasyMetadata({ data: "json, name=assetModelId" }),
         __metadata("design:type", String)
     ], DescribeAssetPropertyResponse.prototype, "assetModelId", void 0);
     __decorate([
-        Metadata({ data: "json, name=assetName" }),
+        SpeakeasyMetadata({ data: "json, name=assetName" }),
         __metadata("design:type", String)
     ], DescribeAssetPropertyResponse.prototype, "assetName", void 0);
     __decorate([
-        Metadata({ data: "json, name=assetProperty" }),
+        SpeakeasyMetadata({ data: "json, name=assetProperty" }),
         __metadata("design:type", Property)
     ], DescribeAssetPropertyResponse.prototype, "assetProperty", void 0);
     __decorate([
-        Metadata({ data: "json, name=compositeModel" }),
+        SpeakeasyMetadata({ data: "json, name=compositeModel" }),
         __metadata("design:type", CompositeModelProperty)
     ], DescribeAssetPropertyResponse.prototype, "compositeModel", void 0);
     return DescribeAssetPropertyResponse;

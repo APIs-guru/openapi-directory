@@ -1,12 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ApigatewayGatewayStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Creating = "CREATING"
-,    Active = "ACTIVE"
-,    Failed = "FAILED"
-,    Deleting = "DELETING"
-,    Updating = "UPDATING"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Creating = "CREATING",
+    Active = "ACTIVE",
+    Failed = "FAILED",
+    Deleting = "DELETING",
+    Updating = "UPDATING"
 }
 
 
@@ -15,27 +16,43 @@ export enum ApigatewayGatewayStateEnum {
  * A Gateway is an API-aware HTTP proxy. It performs API-Method and/or API-Consumer specific actions based on an API Config such as authentication, policy enforcement, and backend selection.
 **/
 export class ApigatewayGateway extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiConfig" })
+  @SpeakeasyMetadata({ data: "json, name=apiConfig" })
   apiConfig?: string;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=defaultHostname" })
+  @SpeakeasyMetadata({ data: "json, name=defaultHostname" })
   defaultHostname?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ApigatewayGatewayStateEnum;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
+}
+
+
+// ApigatewayGatewayInput
+/** 
+ * A Gateway is an API-aware HTTP proxy. It performs API-Method and/or API-Consumer specific actions based on an API Config such as authentication, policy enforcement, and backend selection.
+**/
+export class ApigatewayGatewayInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=apiConfig" })
+  apiConfig?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=labels" })
+  labels?: Map<string, string>;
 }

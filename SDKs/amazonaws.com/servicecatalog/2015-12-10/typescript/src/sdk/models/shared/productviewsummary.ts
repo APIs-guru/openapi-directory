@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProductTypeEnum } from "./producttypeenum";
+
 
 
 // ProductViewSummary
@@ -7,36 +8,36 @@ import { ProductTypeEnum } from "./producttypeenum";
  * Summary information about a product view.
 **/
 export class ProductViewSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Distributor" })
+  @SpeakeasyMetadata({ data: "json, name=Distributor" })
   distributor?: string;
 
-  @Metadata({ data: "json, name=HasDefaultPath" })
+  @SpeakeasyMetadata({ data: "json, name=HasDefaultPath" })
   hasDefaultPath?: boolean;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Owner" })
+  @SpeakeasyMetadata({ data: "json, name=Owner" })
   owner?: string;
 
-  @Metadata({ data: "json, name=ProductId" })
+  @SpeakeasyMetadata({ data: "json, name=ProductId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=ShortDescription" })
+  @SpeakeasyMetadata({ data: "json, name=ShortDescription" })
   shortDescription?: string;
 
-  @Metadata({ data: "json, name=SupportDescription" })
+  @SpeakeasyMetadata({ data: "json, name=SupportDescription" })
   supportDescription?: string;
 
-  @Metadata({ data: "json, name=SupportEmail" })
+  @SpeakeasyMetadata({ data: "json, name=SupportEmail" })
   supportEmail?: string;
 
-  @Metadata({ data: "json, name=SupportUrl" })
+  @SpeakeasyMetadata({ data: "json, name=SupportUrl" })
   supportUrl?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: ProductTypeEnum;
 }

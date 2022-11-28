@@ -8,20 +8,12 @@ const (
 	GoogleAppsCardV1GridItemLayoutEnumTextAbove                 GoogleAppsCardV1GridItemLayoutEnum = "TEXT_ABOVE"
 )
 
-type GoogleAppsCardV1GridItemTextAlignmentEnum string
-
-const (
-	GoogleAppsCardV1GridItemTextAlignmentEnumHorizontalAlignmentUnspecified GoogleAppsCardV1GridItemTextAlignmentEnum = "HORIZONTAL_ALIGNMENT_UNSPECIFIED"
-	GoogleAppsCardV1GridItemTextAlignmentEnumStart                          GoogleAppsCardV1GridItemTextAlignmentEnum = "START"
-	GoogleAppsCardV1GridItemTextAlignmentEnumCenter                         GoogleAppsCardV1GridItemTextAlignmentEnum = "CENTER"
-	GoogleAppsCardV1GridItemTextAlignmentEnumEnd                            GoogleAppsCardV1GridItemTextAlignmentEnum = "END"
-)
-
+// GoogleAppsCardV1GridItem
+// Represents a single item in the grid layout.
 type GoogleAppsCardV1GridItem struct {
-	ID            *string                                    `json:"id,omitempty"`
-	Image         *GoogleAppsCardV1ImageComponent            `json:"image,omitempty"`
-	Layout        *GoogleAppsCardV1GridItemLayoutEnum        `json:"layout,omitempty"`
-	Subtitle      *string                                    `json:"subtitle,omitempty"`
-	TextAlignment *GoogleAppsCardV1GridItemTextAlignmentEnum `json:"textAlignment,omitempty"`
-	Title         *string                                    `json:"title,omitempty"`
+	ID       *string                             `json:"id,omitempty"`
+	Image    *GoogleAppsCardV1ImageComponent     `json:"image,omitempty"`
+	Layout   *GoogleAppsCardV1GridItemLayoutEnum `json:"layout,omitempty"`
+	Subtitle *string                             `json:"subtitle,omitempty"`
+	Title    *string                             `json:"title,omitempty"`
 }

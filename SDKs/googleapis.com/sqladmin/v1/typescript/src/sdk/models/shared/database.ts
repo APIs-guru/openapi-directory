@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SqlServerDatabaseDetails } from "./sqlserverdatabasedetails";
+
 
 
 // Database
@@ -7,30 +8,30 @@ import { SqlServerDatabaseDetails } from "./sqlserverdatabasedetails";
  * Represents a SQL database on the Cloud SQL instance.
 **/
 export class Database extends SpeakeasyBase {
-  @Metadata({ data: "json, name=charset" })
+  @SpeakeasyMetadata({ data: "json, name=charset" })
   charset?: string;
 
-  @Metadata({ data: "json, name=collation" })
+  @SpeakeasyMetadata({ data: "json, name=collation" })
   collation?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=instance" })
+  @SpeakeasyMetadata({ data: "json, name=instance" })
   instance?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=project" })
+  @SpeakeasyMetadata({ data: "json, name=project" })
   project?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=sqlserverDatabaseDetails" })
+  @SpeakeasyMetadata({ data: "json, name=sqlserverDatabaseDetails" })
   sqlserverDatabaseDetails?: SqlServerDatabaseDetails;
 }

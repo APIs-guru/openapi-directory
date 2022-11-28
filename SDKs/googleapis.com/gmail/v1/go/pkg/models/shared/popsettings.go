@@ -19,6 +19,8 @@ const (
 	PopSettingsDispositionEnumMarkRead               PopSettingsDispositionEnum = "markRead"
 )
 
+// PopSettings
+// POP settings for an account.
 type PopSettings struct {
 	AccessWindow *PopSettingsAccessWindowEnum `json:"accessWindow,omitempty"`
 	Disposition  *PopSettingsDispositionEnum  `json:"disposition,omitempty"`

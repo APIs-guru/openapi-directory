@@ -1,53 +1,54 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetAllEmployeesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=companyId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=companyId" })
   companyId: string;
 }
 
 
 export class GetAllEmployeesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=includetotalcount" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=includetotalcount" })
   includetotalcount?: boolean;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pagenumber" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagenumber" })
   pagenumber?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=pagesize" })
   pagesize?: number;
 }
 
 
 export class GetAllEmployeesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   paylocityAuth: shared.SchemePaylocityAuth;
 }
 
 
 export class GetAllEmployeesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAllEmployeesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAllEmployeesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetAllEmployeesSecurity;
 }
 
 
 export class GetAllEmployeesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.EmployeeInfo })
+  @SpeakeasyMetadata({ elemType: shared.EmployeeInfo })
   employeeInfos?: shared.EmployeeInfo[];
 
-  @Metadata({ elemType: shared.Error })
+  @SpeakeasyMetadata({ elemType: shared.Error })
   errors?: shared.Error[];
 }

@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum MembershipsByTeamHistoricalFormatEnum {
-    Xml = "xml"
-,    Json = "json"
+    Xml = "xml",
+    Json = "json"
 }
 
 
 export class MembershipsByTeamHistoricalPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=format" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" })
   format: MembershipsByTeamHistoricalFormatEnum;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=teamid" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=teamid" })
   teamid: string;
 }
 
 
 export class MembershipsByTeamHistoricalRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: MembershipsByTeamHistoricalPathParams;
 }
 
 
 export class MembershipsByTeamHistoricalResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   memberships?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

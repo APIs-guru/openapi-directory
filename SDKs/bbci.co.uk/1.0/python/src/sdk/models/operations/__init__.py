@@ -21,7 +21,7 @@ from .get_schedule_by_channel_ import *
 from .get_schema_ import *
 from .get_status_ import *
 from .get_sub_categories_ import *
-from .get_trailers__pre_rolls__ import *
+from .get_trailers_pre_rolls_ import *
 from .get_user_store_purchases_ import *
 from .get_user_store_recommendations_ import *
 from .get_user_watching_ import *

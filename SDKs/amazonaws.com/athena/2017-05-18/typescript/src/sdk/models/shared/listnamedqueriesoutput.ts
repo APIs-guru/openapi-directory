@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListNamedQueriesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NamedQueryIds" })
+  @SpeakeasyMetadata({ data: "json, name=NamedQueryIds" })
   namedQueryIds?: string[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

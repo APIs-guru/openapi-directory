@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ExportEvaluatedExamplesOutputConfig } from "./exportevaluatedexamplesoutputconfig";
+
 
 
 // ExportEvaluatedExamplesRequest
@@ -7,6 +8,6 @@ import { ExportEvaluatedExamplesOutputConfig } from "./exportevaluatedexamplesou
  * Request message for AutoMl.ExportEvaluatedExamples.
 **/
 export class ExportEvaluatedExamplesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=outputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=outputConfig" })
   outputConfig?: ExportEvaluatedExamplesOutputConfig;
 }

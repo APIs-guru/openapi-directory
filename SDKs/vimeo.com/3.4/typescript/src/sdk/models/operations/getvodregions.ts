@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetVodRegionsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=ondemand_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=ondemand_id" })
   ondemandId: number;
 }
 
 
 export class GetVodRegionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetVodRegionsPathParams;
 }
 
 
 export class GetVodRegionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   legacyError?: shared.LegacyError;
 
-  @Metadata({ elemType: shared.OnDemandRegion })
+  @SpeakeasyMetadata({ elemType: shared.OnDemandRegion })
   onDemandRegions?: shared.OnDemandRegion[];
 }

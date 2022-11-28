@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Status } from "./status";
+
 
 
 // Error
@@ -7,9 +8,9 @@ import { Status } from "./status";
  * Detailed information about an error category.
 **/
 export class Error extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pointCount" })
+  @SpeakeasyMetadata({ data: "json, name=pointCount" })
   pointCount?: number;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: Status;
 }

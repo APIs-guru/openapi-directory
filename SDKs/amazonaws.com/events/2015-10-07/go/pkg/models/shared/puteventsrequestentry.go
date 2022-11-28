@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// PutEventsRequestEntry
+// Represents an event to be submitted.
 type PutEventsRequestEntry struct {
 	Detail       *string    `json:"Detail,omitempty"`
 	DetailType   *string    `json:"DetailType,omitempty"`

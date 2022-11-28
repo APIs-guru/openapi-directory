@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetAttributeNamespaceAttributeNameMetaPathParams = /** @class */ (function (_super) {
     __extends(GetAttributeNamespaceAttributeNameMetaPathParams, _super);
@@ -30,11 +30,11 @@ var GetAttributeNamespaceAttributeNameMetaPathParams = /** @class */ (function (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=attribute_name" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=attribute_name" }),
         __metadata("design:type", String)
     ], GetAttributeNamespaceAttributeNameMetaPathParams.prototype, "attributeName", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=namespace" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=namespace" }),
         __metadata("design:type", String)
     ], GetAttributeNamespaceAttributeNameMetaPathParams.prototype, "namespace", void 0);
     return GetAttributeNamespaceAttributeNameMetaPathParams;
@@ -46,7 +46,7 @@ var GetAttributeNamespaceAttributeNameMetaSecurity = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuthentication)
     ], GetAttributeNamespaceAttributeNameMetaSecurity.prototype, "basicAuthentication", void 0);
     return GetAttributeNamespaceAttributeNameMetaSecurity;
@@ -58,11 +58,11 @@ var GetAttributeNamespaceAttributeNameMetaRequest = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAttributeNamespaceAttributeNameMetaPathParams)
     ], GetAttributeNamespaceAttributeNameMetaRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetAttributeNamespaceAttributeNameMetaSecurity)
     ], GetAttributeNamespaceAttributeNameMetaRequest.prototype, "security", void 0);
     return GetAttributeNamespaceAttributeNameMetaRequest;
@@ -74,15 +74,15 @@ var GetAttributeNamespaceAttributeNameMetaResponse = /** @class */ (function (_s
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetAttributeNamespaceAttributeNameMetaResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetAttributeNamespaceAttributeNameMetaResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetAttributeNamespaceAttributeNameMetaResponse.prototype, "statusCode", void 0);
     return GetAttributeNamespaceAttributeNameMetaResponse;

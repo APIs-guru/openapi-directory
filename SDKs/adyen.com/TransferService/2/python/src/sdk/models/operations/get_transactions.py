@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Any,Optional
+from sdk.models import shared
 
 
 @dataclass
@@ -18,19 +19,19 @@ class GetTransactionsQueryParams:
 
 @dataclass
 class GetTransactionsSecurity:
-    api_key_auth: shared.SchemeAPIKeyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    api_key_auth: shared.SchemeAPIKeyAuth = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetTransactionsRequest:
-    query_params: GetTransactionsQueryParams = field(default=None)
-    security: GetTransactionsSecurity = field(default=None)
+    query_params: GetTransactionsQueryParams = field()
+    security: GetTransactionsSecurity = field()
     
 
 @dataclass
 class GetTransactionsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     rest_service_error: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     transaction_search_response: Optional[Any] = field(default=None)
     

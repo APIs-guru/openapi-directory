@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class ComposerProjectsLocationsEnvironmentsPatchPathParams extends SpeakeasyBase {
     name: string;
@@ -24,7 +24,7 @@ export declare class ComposerProjectsLocationsEnvironmentsPatchSecurity extends 
 export declare class ComposerProjectsLocationsEnvironmentsPatchRequest extends SpeakeasyBase {
     pathParams: ComposerProjectsLocationsEnvironmentsPatchPathParams;
     queryParams: ComposerProjectsLocationsEnvironmentsPatchQueryParams;
-    request?: shared.Environment;
+    request?: shared.EnvironmentInput;
     security: ComposerProjectsLocationsEnvironmentsPatchSecurity;
 }
 export declare class ComposerProjectsLocationsEnvironmentsPatchResponse extends SpeakeasyBase {

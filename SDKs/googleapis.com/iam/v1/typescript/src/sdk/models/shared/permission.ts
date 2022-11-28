@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum PermissionCustomRolesSupportLevelEnum {
-    Supported = "SUPPORTED"
-,    Testing = "TESTING"
-,    NotSupported = "NOT_SUPPORTED"
+    Supported = "SUPPORTED",
+    Testing = "TESTING",
+    NotSupported = "NOT_SUPPORTED"
 }
 
 export enum PermissionStageEnum {
-    Alpha = "ALPHA"
-,    Beta = "BETA"
-,    Ga = "GA"
-,    Deprecated = "DEPRECATED"
+    Alpha = "ALPHA",
+    Beta = "BETA",
+    Ga = "GA",
+    Deprecated = "DEPRECATED"
 }
 
 
@@ -19,27 +20,27 @@ export enum PermissionStageEnum {
  * A permission which can be included by a role.
 **/
 export class Permission extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiDisabled" })
+  @SpeakeasyMetadata({ data: "json, name=apiDisabled" })
   apiDisabled?: boolean;
 
-  @Metadata({ data: "json, name=customRolesSupportLevel" })
+  @SpeakeasyMetadata({ data: "json, name=customRolesSupportLevel" })
   customRolesSupportLevel?: PermissionCustomRolesSupportLevelEnum;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=onlyInPredefinedRoles" })
+  @SpeakeasyMetadata({ data: "json, name=onlyInPredefinedRoles" })
   onlyInPredefinedRoles?: boolean;
 
-  @Metadata({ data: "json, name=primaryPermission" })
+  @SpeakeasyMetadata({ data: "json, name=primaryPermission" })
   primaryPermission?: string;
 
-  @Metadata({ data: "json, name=stage" })
+  @SpeakeasyMetadata({ data: "json, name=stage" })
   stage?: PermissionStageEnum;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 }

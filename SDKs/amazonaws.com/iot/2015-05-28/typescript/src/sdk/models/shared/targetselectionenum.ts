@@ -1,6 +1,7 @@
 
 
+
 export enum TargetSelectionEnum {
-    Continuous = "CONTINUOUS"
-,    Snapshot = "SNAPSHOT"
+    Continuous = "CONTINUOUS",
+    Snapshot = "SNAPSHOT"
 }

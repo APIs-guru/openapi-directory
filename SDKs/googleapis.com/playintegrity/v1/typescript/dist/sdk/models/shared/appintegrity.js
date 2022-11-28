@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var AppIntegrityAppRecognitionVerdictEnum;
 (function (AppIntegrityAppRecognitionVerdictEnum) {
     AppIntegrityAppRecognitionVerdictEnum["Unknown"] = "UNKNOWN";
@@ -40,19 +40,19 @@ var AppIntegrity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=appRecognitionVerdict" }),
+        SpeakeasyMetadata({ data: "json, name=appRecognitionVerdict" }),
         __metadata("design:type", String)
     ], AppIntegrity.prototype, "appRecognitionVerdict", void 0);
     __decorate([
-        Metadata({ data: "json, name=certificateSha256Digest" }),
+        SpeakeasyMetadata({ data: "json, name=certificateSha256Digest" }),
         __metadata("design:type", Array)
     ], AppIntegrity.prototype, "certificateSha256Digest", void 0);
     __decorate([
-        Metadata({ data: "json, name=packageName" }),
+        SpeakeasyMetadata({ data: "json, name=packageName" }),
         __metadata("design:type", String)
     ], AppIntegrity.prototype, "packageName", void 0);
     __decorate([
-        Metadata({ data: "json, name=versionCode" }),
+        SpeakeasyMetadata({ data: "json, name=versionCode" }),
         __metadata("design:type", String)
     ], AppIntegrity.prototype, "versionCode", void 0);
     return AppIntegrity;

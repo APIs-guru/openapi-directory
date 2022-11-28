@@ -5,29 +5,29 @@ from sdk.models import shared
 
 @dataclass
 class GetFileAssociationsPathParams:
-    file_id: str = field(default=None, metadata={'path_param': { 'field_name': 'FileId', 'style': 'simple', 'explode': False }})
+    file_id: str = field(metadata={'path_param': { 'field_name': 'FileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetFileAssociationsHeaders:
-    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'xero-tenant-id', 'style': 'simple', 'explode': False }})
+    xero_tenant_id: str = field(metadata={'header': { 'field_name': 'xero-tenant-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetFileAssociationsSecurity:
-    o_auth2: shared.SchemeOAuth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    o_auth2: shared.SchemeOAuth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetFileAssociationsRequest:
-    path_params: GetFileAssociationsPathParams = field(default=None)
-    headers: GetFileAssociationsHeaders = field(default=None)
-    security: GetFileAssociationsSecurity = field(default=None)
+    headers: GetFileAssociationsHeaders = field()
+    path_params: GetFileAssociationsPathParams = field()
+    security: GetFileAssociationsSecurity = field()
     
 
 @dataclass
 class GetFileAssociationsResponse:
+    content_type: str = field()
+    status_code: int = field()
     associations: Optional[List[shared.Association]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -14,11 +14,15 @@ type CreateResponsePlanHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// CreateResponsePlanRequestBodyChatChannel
+// The AWS Chatbot chat channel used for collaboration during an incident.
 type CreateResponsePlanRequestBodyChatChannel struct {
 	ChatbotSns []string               `json:"chatbotSns,omitempty"`
 	Empty      map[string]interface{} `json:"empty,omitempty"`
 }
 
+// CreateResponsePlanRequestBodyIncidentTemplate
+// Basic details used in creating a response plan. The response plan is then used to create an incident record.
 type CreateResponsePlanRequestBodyIncidentTemplate struct {
 	DedupeString        *string                         `json:"dedupeString,omitempty"`
 	Impact              *int64                          `json:"impact,omitempty"`

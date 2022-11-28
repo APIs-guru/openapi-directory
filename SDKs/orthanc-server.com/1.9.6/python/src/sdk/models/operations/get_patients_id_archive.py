@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetPatientsIDArchivePathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -14,13 +14,13 @@ class GetPatientsIDArchiveQueryParams:
 
 @dataclass
 class GetPatientsIDArchiveRequest:
-    path_params: GetPatientsIDArchivePathParams = field(default=None)
-    query_params: GetPatientsIDArchiveQueryParams = field(default=None)
+    path_params: GetPatientsIDArchivePathParams = field()
+    query_params: GetPatientsIDArchiveQueryParams = field()
     
 
 @dataclass
 class GetPatientsIDArchiveResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

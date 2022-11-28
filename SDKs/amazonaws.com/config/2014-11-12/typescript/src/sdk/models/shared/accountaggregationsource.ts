@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AccountAggregationSource
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A collection of accounts and regions.
 **/
 export class AccountAggregationSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccountIds" })
+  @SpeakeasyMetadata({ data: "json, name=AccountIds" })
   accountIds: string[];
 
-  @Metadata({ data: "json, name=AllAwsRegions" })
+  @SpeakeasyMetadata({ data: "json, name=AllAwsRegions" })
   allAwsRegions?: boolean;
 
-  @Metadata({ data: "json, name=AwsRegions" })
+  @SpeakeasyMetadata({ data: "json, name=AwsRegions" })
   awsRegions?: string[];
 }

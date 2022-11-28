@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
-from . import applicationmaintenanceconfigurationupdate
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdateApplicationMaintenanceConfigurationRequest:
-    application_maintenance_configuration_update: applicationmaintenanceconfigurationupdate.ApplicationMaintenanceConfigurationUpdate = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApplicationMaintenanceConfigurationUpdate' }})
-    application_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApplicationName' }})
+    application_maintenance_configuration_update: ApplicationMaintenanceConfigurationUpdate = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ApplicationMaintenanceConfigurationUpdate') }})
+    application_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ApplicationName') }})
     

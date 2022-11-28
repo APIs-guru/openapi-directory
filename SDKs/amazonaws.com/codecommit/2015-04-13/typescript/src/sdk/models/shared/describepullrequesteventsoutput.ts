@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PullRequestEvent } from "./pullrequestevent";
 
 
+
 export class DescribePullRequestEventsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=pullRequestEvents", elemType: shared.PullRequestEvent })
+  @SpeakeasyMetadata({ data: "json, name=pullRequestEvents", elemType: PullRequestEvent })
   pullRequestEvents: PullRequestEvent[];
 }

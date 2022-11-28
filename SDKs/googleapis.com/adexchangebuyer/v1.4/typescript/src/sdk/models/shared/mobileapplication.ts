@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MobileApplication extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appStore" })
+  @SpeakeasyMetadata({ data: "json, name=appStore" })
   appStore?: string;
 
-  @Metadata({ data: "json, name=externalAppId" })
+  @SpeakeasyMetadata({ data: "json, name=externalAppId" })
   externalAppId?: string;
 }

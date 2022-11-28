@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CodeReviewSummary } from "./codereviewsummary";
 export declare class ListCodeReviewsResponse extends SpeakeasyBase {
     codeReviewSummaries?: CodeReviewSummary[];

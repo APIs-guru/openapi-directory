@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ColumnWildcard
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A wildcard object, consisting of an optional list of excluded column names or indexes.
 **/
 export class ColumnWildcard extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExcludedColumnNames" })
+  @SpeakeasyMetadata({ data: "json, name=ExcludedColumnNames" })
   excludedColumnNames?: string[];
 }

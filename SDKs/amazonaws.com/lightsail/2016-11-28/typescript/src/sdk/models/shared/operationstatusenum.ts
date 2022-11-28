@@ -1,9 +1,10 @@
 
 
+
 export enum OperationStatusEnum {
-    NotStarted = "NotStarted"
-,    Started = "Started"
-,    Failed = "Failed"
-,    Completed = "Completed"
-,    Succeeded = "Succeeded"
+    NotStarted = "NotStarted",
+    Started = "Started",
+    Failed = "Failed",
+    Completed = "Completed",
+    Succeeded = "Succeeded"
 }

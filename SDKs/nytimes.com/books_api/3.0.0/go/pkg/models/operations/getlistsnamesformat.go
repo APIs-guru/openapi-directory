@@ -23,12 +23,6 @@ type GetListsNamesFormatSecurity struct {
 	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
 }
 
-type GetListsNamesFormatRequest struct {
-	PathParams  GetListsNamesFormatPathParams
-	QueryParams GetListsNamesFormatQueryParams
-	Security    GetListsNamesFormatSecurity
-}
-
 type GetListsNamesFormat200ApplicationJSONResults struct {
 	DisplayName         *string `json:"display_name,omitempty"`
 	ListName            *string `json:"list_name,omitempty"`
@@ -43,6 +37,12 @@ type GetListsNamesFormat200ApplicationJSON struct {
 	NumResults *int64                                         `json:"num_results,omitempty"`
 	Results    []GetListsNamesFormat200ApplicationJSONResults `json:"results,omitempty"`
 	Status     *string                                        `json:"status,omitempty"`
+}
+
+type GetListsNamesFormatRequest struct {
+	PathParams  GetListsNamesFormatPathParams
+	QueryParams GetListsNamesFormatQueryParams
+	Security    GetListsNamesFormatSecurity
 }
 
 type GetListsNamesFormatResponse struct {

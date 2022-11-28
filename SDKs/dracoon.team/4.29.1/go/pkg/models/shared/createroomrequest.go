@@ -11,6 +11,8 @@ const (
 	CreateRoomRequestNewGroupMemberAcceptanceEnumPending   CreateRoomRequestNewGroupMemberAcceptanceEnum = "pending"
 )
 
+// CreateRoomRequest
+// Request model for creating a room
 type CreateRoomRequest struct {
 	AdminGroupIds             []int64                                        `json:"adminGroupIds,omitempty"`
 	AdminIds                  []int64                                        `json:"adminIds,omitempty"`

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import systemtemplatesummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateSystemTemplateResponse:
-    summary: Optional[systemtemplatesummary.SystemTemplateSummary] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'summary' }})
+    summary: Optional[SystemTemplateSummary] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('summary') }})
     

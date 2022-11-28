@@ -5,30 +5,30 @@ from sdk.models import shared
 
 @dataclass
 class EndpointGetAnArtistsRelatedArtistsPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointGetAnArtistsRelatedArtistsHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class EndpointGetAnArtistsRelatedArtistsSecurity:
-    spotify_auth: shared.SchemeSpotifyAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    spotify_auth: shared.SchemeSpotifyAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class EndpointGetAnArtistsRelatedArtistsRequest:
-    path_params: EndpointGetAnArtistsRelatedArtistsPathParams = field(default=None)
-    headers: EndpointGetAnArtistsRelatedArtistsHeaders = field(default=None)
-    security: EndpointGetAnArtistsRelatedArtistsSecurity = field(default=None)
+    headers: EndpointGetAnArtistsRelatedArtistsHeaders = field()
+    path_params: EndpointGetAnArtistsRelatedArtistsPathParams = field()
+    security: EndpointGetAnArtistsRelatedArtistsSecurity = field()
     
 
 @dataclass
 class EndpointGetAnArtistsRelatedArtistsResponse:
+    content_type: str = field()
+    status_code: int = field()
     artists_object: Optional[shared.ArtistsObject] = field(default=None)
-    content_type: str = field(default=None)
     error_response_object: Optional[shared.ErrorResponseObject] = field(default=None)
-    status_code: int = field(default=None)
     

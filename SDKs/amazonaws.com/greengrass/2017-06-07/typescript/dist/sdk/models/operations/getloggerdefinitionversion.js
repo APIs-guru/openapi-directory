@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetLoggerDefinitionVersionPathParams = /** @class */ (function (_super) {
     __extends(GetLoggerDefinitionVersionPathParams, _super);
@@ -30,11 +30,11 @@ var GetLoggerDefinitionVersionPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=LoggerDefinitionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=LoggerDefinitionId" }),
         __metadata("design:type", String)
     ], GetLoggerDefinitionVersionPathParams.prototype, "loggerDefinitionId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=LoggerDefinitionVersionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=LoggerDefinitionVersionId" }),
         __metadata("design:type", String)
     ], GetLoggerDefinitionVersionPathParams.prototype, "loggerDefinitionVersionId", void 0);
     return GetLoggerDefinitionVersionPathParams;
@@ -46,7 +46,7 @@ var GetLoggerDefinitionVersionQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
         __metadata("design:type", String)
     ], GetLoggerDefinitionVersionQueryParams.prototype, "nextToken", void 0);
     return GetLoggerDefinitionVersionQueryParams;
@@ -58,31 +58,31 @@ var GetLoggerDefinitionVersionHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetLoggerDefinitionVersionHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetLoggerDefinitionVersionHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetLoggerDefinitionVersionHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetLoggerDefinitionVersionHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetLoggerDefinitionVersionHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetLoggerDefinitionVersionHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetLoggerDefinitionVersionHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetLoggerDefinitionVersionHeaders;
@@ -94,15 +94,15 @@ var GetLoggerDefinitionVersionRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetLoggerDefinitionVersionPathParams)
     ], GetLoggerDefinitionVersionRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetLoggerDefinitionVersionQueryParams)
     ], GetLoggerDefinitionVersionRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetLoggerDefinitionVersionHeaders)
     ], GetLoggerDefinitionVersionRequest.prototype, "headers", void 0);
     return GetLoggerDefinitionVersionRequest;
@@ -114,19 +114,19 @@ var GetLoggerDefinitionVersionResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetLoggerDefinitionVersionResponse.prototype, "badRequestException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetLoggerDefinitionVersionResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.GetLoggerDefinitionVersionResponse)
     ], GetLoggerDefinitionVersionResponse.prototype, "getLoggerDefinitionVersionResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetLoggerDefinitionVersionResponse.prototype, "statusCode", void 0);
     return GetLoggerDefinitionVersionResponse;

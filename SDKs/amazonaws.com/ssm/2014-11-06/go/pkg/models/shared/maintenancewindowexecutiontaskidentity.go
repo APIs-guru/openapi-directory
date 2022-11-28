@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// MaintenanceWindowExecutionTaskIdentity
+// Information about a task execution performed as part of a maintenance window execution.
 type MaintenanceWindowExecutionTaskIdentity struct {
 	EndTime           *time.Time                            `json:"EndTime,omitempty"`
 	StartTime         *time.Time                            `json:"StartTime,omitempty"`

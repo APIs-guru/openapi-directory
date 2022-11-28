@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AllowedPublishers } from "./allowedpublishers";
 import { CodeSigningPolicies } from "./codesigningpolicies";
 // CodeSigningConfig
@@ -35,27 +35,27 @@ var CodeSigningConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=AllowedPublishers" }),
+        SpeakeasyMetadata({ data: "json, name=AllowedPublishers" }),
         __metadata("design:type", AllowedPublishers)
     ], CodeSigningConfig.prototype, "allowedPublishers", void 0);
     __decorate([
-        Metadata({ data: "json, name=CodeSigningConfigArn" }),
+        SpeakeasyMetadata({ data: "json, name=CodeSigningConfigArn" }),
         __metadata("design:type", String)
     ], CodeSigningConfig.prototype, "codeSigningConfigArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=CodeSigningConfigId" }),
+        SpeakeasyMetadata({ data: "json, name=CodeSigningConfigId" }),
         __metadata("design:type", String)
     ], CodeSigningConfig.prototype, "codeSigningConfigId", void 0);
     __decorate([
-        Metadata({ data: "json, name=CodeSigningPolicies" }),
+        SpeakeasyMetadata({ data: "json, name=CodeSigningPolicies" }),
         __metadata("design:type", CodeSigningPolicies)
     ], CodeSigningConfig.prototype, "codeSigningPolicies", void 0);
     __decorate([
-        Metadata({ data: "json, name=Description" }),
+        SpeakeasyMetadata({ data: "json, name=Description" }),
         __metadata("design:type", String)
     ], CodeSigningConfig.prototype, "description", void 0);
     __decorate([
-        Metadata({ data: "json, name=LastModified" }),
+        SpeakeasyMetadata({ data: "json, name=LastModified" }),
         __metadata("design:type", String)
     ], CodeSigningConfig.prototype, "lastModified", void 0);
     return CodeSigningConfig;

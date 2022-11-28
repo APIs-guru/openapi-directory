@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { S3Object } from "./s3object";
+
 
 
 // GroundTruthManifest
@@ -7,6 +8,6 @@ import { S3Object } from "./s3object";
  * The S3 bucket that contains an Amazon Sagemaker Ground Truth format manifest file. 
 **/
 export class GroundTruthManifest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=S3Object" })
+  @SpeakeasyMetadata({ data: "json, name=S3Object" })
   s3Object?: S3Object;
 }

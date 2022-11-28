@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AssessmentTemplate
+// Contains information about an Amazon Inspector assessment template. This data type is used as the response element in the <a>DescribeAssessmentTemplates</a> action.
 type AssessmentTemplate struct {
 	Arn                       string      `json:"arn"`
 	AssessmentRunCount        int64       `json:"assessmentRunCount"`

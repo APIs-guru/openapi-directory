@@ -14,6 +14,8 @@ type ImportApplicationUsageHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// ImportApplicationUsageRequestBodySourceS3Location
+// Represents the Amazon Simple Storage Service (Amazon S3) location where usage data is read from.
 type ImportApplicationUsageRequestBodySourceS3Location struct {
 	Bucket *string                    `json:"bucket,omitempty"`
 	Key    *string                    `json:"key,omitempty"`

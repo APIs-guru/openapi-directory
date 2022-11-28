@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class GroupsGetStatisticsAggregatedSingleStatusEnum(str, Enum):
@@ -26,23 +27,23 @@ class GroupsGetStatisticsAggregatedSingleTimeFrameEnum(str, Enum):
 
 @dataclass
 class GroupsGetStatisticsAggregatedSingleQueryParams:
+    time_frame: GroupsGetStatisticsAggregatedSingleTimeFrameEnum = field(metadata={'query_param': { 'field_name': 'timeFrame', 'style': 'form', 'explode': True }})
     favourite: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'favourite', 'style': 'form', 'explode': True }})
     from_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fromDay', 'style': 'form', 'explode': True }})
     hourly: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'hourly', 'style': 'form', 'explode': True }})
     status: Optional[GroupsGetStatisticsAggregatedSingleStatusEnum] = field(default=None, metadata={'query_param': { 'field_name': 'status', 'style': 'form', 'explode': True }})
     tag: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'tag', 'style': 'form', 'explode': True }})
-    time_frame: GroupsGetStatisticsAggregatedSingleTimeFrameEnum = field(default=None, metadata={'query_param': { 'field_name': 'timeFrame', 'style': 'form', 'explode': True }})
     to_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'toDay', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class GroupsGetStatisticsAggregatedSingleRequest:
-    query_params: GroupsGetStatisticsAggregatedSingleQueryParams = field(default=None)
+    query_params: GroupsGetStatisticsAggregatedSingleQueryParams = field()
     
 
 @dataclass
 class GroupsGetStatisticsAggregatedSingleResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_dto_aggregated_aggregated_result: Optional[shared.APICoreDtoAggregatedAggregatedResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

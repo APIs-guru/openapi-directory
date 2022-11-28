@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum ManualTriggerStateEnum {
-    StateUnspecified = "STATE_UNSPECIFIED"
-,    Inactive = "INACTIVE"
-,    Active = "ACTIVE"
+    StateUnspecified = "STATE_UNSPECIFIED",
+    Inactive = "INACTIVE",
+    Active = "ACTIVE"
 }
 
 
@@ -12,24 +13,40 @@ export enum ManualTriggerStateEnum {
  * A single manual trigger in Display & Video 360.
 **/
 export class ManualTrigger extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activationDurationMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=activationDurationMinutes" })
   activationDurationMinutes?: string;
 
-  @Metadata({ data: "json, name=advertiserId" })
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
   advertiserId?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=latestActivationTime" })
+  @SpeakeasyMetadata({ data: "json, name=latestActivationTime" })
   latestActivationTime?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: ManualTriggerStateEnum;
 
-  @Metadata({ data: "json, name=triggerId" })
+  @SpeakeasyMetadata({ data: "json, name=triggerId" })
   triggerId?: string;
+}
+
+
+// ManualTriggerInput
+/** 
+ * A single manual trigger in Display & Video 360.
+**/
+export class ManualTriggerInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=activationDurationMinutes" })
+  activationDurationMinutes?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=advertiserId" })
+  advertiserId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
 }

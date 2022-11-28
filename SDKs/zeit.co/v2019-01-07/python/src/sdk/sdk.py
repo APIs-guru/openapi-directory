@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://zeit.co/docs/api/"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from sdk.models import shared
 from . import utils
+
+from .domains import Domains
+from .webhooks import Webhooks
 
 
 SERVERS = [
@@ -11,111 +14,65 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://zeit.co/docs/api/"""
+    domains: Domains
+    webhooks: Webhooks
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        self._init_sdks()
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        self._init_sdks()
     
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        self._init_sdks()
+    
+
     def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
-
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        self._init_sdks()
     
-    def delete_webhooks(self, request: operations.DeleteWebhooksRequest) -> operations.DeleteWebhooksResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/v1/integrations/webhooks/:id"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("DELETE", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.DeleteWebhooksResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 204:
-            pass
-
-        return res
-
     
-    def get_domain(self, request: operations.GetDomainRequest) -> operations.GetDomainResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v4/domains/{name}", request.path_params)
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetDomainResponse(status_code=r.status_code, content_type=content_type)
+    def _init_sdks(self):
         
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetDomain200ApplicationJSON])
-                res.get_domain_200_application_json_object = out
-        elif r.status_code == 404:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetDomain404ApplicationJSON])
-                res.get_domain_404_application_json_object = out
-
-        return res
-
+        self.domains = Domains(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
+        
+        self.webhooks = Webhooks(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
     
-    def get_domains(self, request: operations.GetDomainsRequest) -> operations.GetDomainsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/v4/domains"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetDomainsResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetDomains200ApplicationJSON])
-                res.get_domains_200_application_json_object = out
-
-        return res
-
-    
-    def get_webhooks(self, request: operations.GetWebhooksRequest) -> operations.GetWebhooksResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/v1/integrations/webhooks"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetWebhooksResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[List[Any]])
-                res.webhooks = out
-
-        return res
-
     

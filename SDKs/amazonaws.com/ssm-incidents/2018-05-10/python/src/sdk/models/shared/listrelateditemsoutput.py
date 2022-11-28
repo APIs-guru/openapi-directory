@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import relateditem
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListRelatedItemsOutput:
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    related_items: List[relateditem.RelatedItem] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relatedItems' }})
+    related_items: List[RelatedItem] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('relatedItems') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     

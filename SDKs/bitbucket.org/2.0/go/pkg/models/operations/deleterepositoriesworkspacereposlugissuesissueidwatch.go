@@ -10,22 +10,10 @@ type DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchPathParams struct {
 	Workspace string `pathParam:"style=simple,explode=false,name=workspace"`
 }
 
-type DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchSecurityOption1 struct {
-	Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-}
-
-type DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchSecurityOption2 struct {
-	Basic shared.SchemeBasic `security:"scheme,type=http,subtype=basic"`
-}
-
-type DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-}
-
 type DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchSecurity struct {
-	Option1 *DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchSecurityOption1 `security:"option"`
-	Option2 *DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchSecurityOption2 `security:"option"`
-	Option3 *DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchSecurityOption3 `security:"option"`
+	Oauth2 *shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+	Basic  *shared.SchemeBasic  `security:"scheme,type=http,subtype=basic"`
+	APIKey *shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDWatchRequest struct {

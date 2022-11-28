@@ -9,6 +9,8 @@ const (
 	ProductSetProductSetBehaviorEnumAllApproved ProductSetProductSetBehaviorEnum = "allApproved"
 )
 
+// ProductSet
+// A set of products.
 type ProductSet struct {
 	ProductID          []string                          `json:"productId,omitempty"`
 	ProductSetBehavior *ProductSetProductSetBehaviorEnum `json:"productSetBehavior,omitempty"`

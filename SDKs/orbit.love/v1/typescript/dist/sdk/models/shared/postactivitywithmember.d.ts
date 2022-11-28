@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Member } from "./member";
 export declare enum PostActivityWithMemberActivityTypeEnum {
     Content = "content"

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReportExchangeRate
@@ -6,21 +7,21 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Exchange Rate.
 **/
 export class ReportExchangeRate extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contractIdentification" })
+  @SpeakeasyMetadata({ data: "json, name=contractIdentification" })
   contractIdentification?: string;
 
-  @Metadata({ data: "json, name=exchangeRate" })
+  @SpeakeasyMetadata({ data: "json, name=exchangeRate" })
   exchangeRate: string;
 
-  @Metadata({ data: "json, name=quotationDate" })
+  @SpeakeasyMetadata({ data: "json, name=quotationDate" })
   quotationDate: Date;
 
-  @Metadata({ data: "json, name=sourceCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=sourceCurrency" })
   sourceCurrency: string;
 
-  @Metadata({ data: "json, name=targetCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=targetCurrency" })
   targetCurrency: string;
 
-  @Metadata({ data: "json, name=unitCurrency" })
+  @SpeakeasyMetadata({ data: "json, name=unitCurrency" })
   unitCurrency: string;
 }

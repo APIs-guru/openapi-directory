@@ -10,6 +10,8 @@ const (
 	BuildSystemSharedDtoActivityRunStatusStatusEnumFailed     BuildSystemSharedDtoActivityRunStatusStatusEnum = "Failed"
 )
 
+// BuildSystemSharedDtoActivityRunStatus
+// A DTO for an IActivityRunStatus
 type BuildSystemSharedDtoActivityRunStatus struct {
 	CurrentStep  *int32                                           `json:"CurrentStep,omitempty" form:"name=CurrentStep"`
 	Status       *BuildSystemSharedDtoActivityRunStatusStatusEnum `json:"Status,omitempty" form:"name=Status"`

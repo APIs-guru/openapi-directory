@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NetworkProtocolEnum } from "./networkprotocolenum";
+
 
 
 // PortInfo
@@ -7,21 +8,21 @@ import { NetworkProtocolEnum } from "./networkprotocolenum";
  * Describes ports to open on an instance, the IP addresses allowed to connect to the instance through the ports, and the protocol.
 **/
 export class PortInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cidrListAliases" })
+  @SpeakeasyMetadata({ data: "json, name=cidrListAliases" })
   cidrListAliases?: string[];
 
-  @Metadata({ data: "json, name=cidrs" })
+  @SpeakeasyMetadata({ data: "json, name=cidrs" })
   cidrs?: string[];
 
-  @Metadata({ data: "json, name=fromPort" })
+  @SpeakeasyMetadata({ data: "json, name=fromPort" })
   fromPort?: number;
 
-  @Metadata({ data: "json, name=ipv6Cidrs" })
+  @SpeakeasyMetadata({ data: "json, name=ipv6Cidrs" })
   ipv6Cidrs?: string[];
 
-  @Metadata({ data: "json, name=protocol" })
+  @SpeakeasyMetadata({ data: "json, name=protocol" })
   protocol?: NetworkProtocolEnum;
 
-  @Metadata({ data: "json, name=toPort" })
+  @SpeakeasyMetadata({ data: "json, name=toPort" })
   toPort?: number;
 }

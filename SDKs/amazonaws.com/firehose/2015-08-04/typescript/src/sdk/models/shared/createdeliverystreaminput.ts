@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DeliveryStreamEncryptionConfigurationInput } from "./deliverystreamencryptionconfigurationinput";
 import { DeliveryStreamTypeEnum } from "./deliverystreamtypeenum";
 import { ElasticsearchDestinationConfiguration } from "./elasticsearchdestinationconfiguration";
@@ -12,37 +11,38 @@ import { SplunkDestinationConfiguration } from "./splunkdestinationconfiguration
 import { Tag } from "./tag";
 
 
+
 export class CreateDeliveryStreamInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DeliveryStreamEncryptionConfigurationInput" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryStreamEncryptionConfigurationInput" })
   deliveryStreamEncryptionConfigurationInput?: DeliveryStreamEncryptionConfigurationInput;
 
-  @Metadata({ data: "json, name=DeliveryStreamName" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryStreamName" })
   deliveryStreamName: string;
 
-  @Metadata({ data: "json, name=DeliveryStreamType" })
+  @SpeakeasyMetadata({ data: "json, name=DeliveryStreamType" })
   deliveryStreamType?: DeliveryStreamTypeEnum;
 
-  @Metadata({ data: "json, name=ElasticsearchDestinationConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=ElasticsearchDestinationConfiguration" })
   elasticsearchDestinationConfiguration?: ElasticsearchDestinationConfiguration;
 
-  @Metadata({ data: "json, name=ExtendedS3DestinationConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=ExtendedS3DestinationConfiguration" })
   extendedS3DestinationConfiguration?: ExtendedS3DestinationConfiguration;
 
-  @Metadata({ data: "json, name=HttpEndpointDestinationConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=HttpEndpointDestinationConfiguration" })
   httpEndpointDestinationConfiguration?: HttpEndpointDestinationConfiguration;
 
-  @Metadata({ data: "json, name=KinesisStreamSourceConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=KinesisStreamSourceConfiguration" })
   kinesisStreamSourceConfiguration?: KinesisStreamSourceConfiguration;
 
-  @Metadata({ data: "json, name=RedshiftDestinationConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=RedshiftDestinationConfiguration" })
   redshiftDestinationConfiguration?: RedshiftDestinationConfiguration;
 
-  @Metadata({ data: "json, name=S3DestinationConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=S3DestinationConfiguration" })
   s3DestinationConfiguration?: S3DestinationConfiguration;
 
-  @Metadata({ data: "json, name=SplunkDestinationConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=SplunkDestinationConfiguration" })
   splunkDestinationConfiguration?: SplunkDestinationConfiguration;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 }

@@ -1,30 +1,31 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuntimeEnum } from "./runtimeenum";
 import { LayerVersionContentOutput } from "./layerversioncontentoutput";
 
 
+
 export class GetLayerVersionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CompatibleRuntimes" })
+  @SpeakeasyMetadata({ data: "json, name=CompatibleRuntimes" })
   compatibleRuntimes?: RuntimeEnum[];
 
-  @Metadata({ data: "json, name=Content" })
+  @SpeakeasyMetadata({ data: "json, name=Content" })
   content?: LayerVersionContentOutput;
 
-  @Metadata({ data: "json, name=CreatedDate" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedDate" })
   createdDate?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=LayerArn" })
+  @SpeakeasyMetadata({ data: "json, name=LayerArn" })
   layerArn?: string;
 
-  @Metadata({ data: "json, name=LayerVersionArn" })
+  @SpeakeasyMetadata({ data: "json, name=LayerVersionArn" })
   layerVersionArn?: string;
 
-  @Metadata({ data: "json, name=LicenseInfo" })
+  @SpeakeasyMetadata({ data: "json, name=LicenseInfo" })
   licenseInfo?: string;
 
-  @Metadata({ data: "json, name=Version" })
+  @SpeakeasyMetadata({ data: "json, name=Version" })
   version?: number;
 }

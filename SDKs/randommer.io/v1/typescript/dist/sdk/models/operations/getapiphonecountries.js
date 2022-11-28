@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetApiPhoneCountriesHeaders = /** @class */ (function (_super) {
     __extends(GetApiPhoneCountriesHeaders, _super);
     function GetApiPhoneCountriesHeaders() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Api-Key" }),
         __metadata("design:type", String)
     ], GetApiPhoneCountriesHeaders.prototype, "xApiKey", void 0);
     return GetApiPhoneCountriesHeaders;
@@ -41,7 +41,7 @@ var GetApiPhoneCountriesRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetApiPhoneCountriesHeaders)
     ], GetApiPhoneCountriesRequest.prototype, "headers", void 0);
     return GetApiPhoneCountriesRequest;
@@ -53,11 +53,11 @@ var GetApiPhoneCountriesResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetApiPhoneCountriesResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetApiPhoneCountriesResponse.prototype, "statusCode", void 0);
     return GetApiPhoneCountriesResponse;

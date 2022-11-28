@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ImportStatusEnum(str, Enum):
     IMPORT_IN_PROGRESS = "IMPORT_IN_PROGRESS"

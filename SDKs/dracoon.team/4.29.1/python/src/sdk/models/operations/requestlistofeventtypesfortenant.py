@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from sdk.models import shared
 
 
@@ -10,13 +10,13 @@ class RequestListOfEventTypesForTenantHeaders:
 
 @dataclass
 class RequestListOfEventTypesForTenantRequest:
-    headers: RequestListOfEventTypesForTenantHeaders = field(default=None)
+    headers: RequestListOfEventTypesForTenantHeaders = field()
     
 
 @dataclass
 class RequestListOfEventTypesForTenantResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
     event_type_list: Optional[shared.EventTypeList] = field(default=None)
-    status_code: int = field(default=None)
     

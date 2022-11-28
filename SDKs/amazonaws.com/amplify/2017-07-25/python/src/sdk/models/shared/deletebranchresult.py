@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import branch
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteBranchResult:
-    branch: branch.Branch = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branch' }})
+    r"""DeleteBranchResult
+     The result structure for the delete branch request. 
+    """
+    
+    branch: Branch = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('branch') }})
     

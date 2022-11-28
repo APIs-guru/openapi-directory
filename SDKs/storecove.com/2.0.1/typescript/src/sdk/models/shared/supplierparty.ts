@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Contact } from "./contact";
+
 
 
 // SupplierParty
@@ -7,6 +8,6 @@ import { Contact } from "./contact";
  * A party that can send invoices
 **/
 export class SupplierParty extends SpeakeasyBase {
-  @Metadata({ data: "json, name=contact" })
+  @SpeakeasyMetadata({ data: "json, name=contact" })
   contact?: Contact;
 }

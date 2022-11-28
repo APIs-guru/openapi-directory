@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class TransitionToIaRulesEnum(str, Enum):
     AFTER_7_DAYS = "AFTER_7_DAYS"

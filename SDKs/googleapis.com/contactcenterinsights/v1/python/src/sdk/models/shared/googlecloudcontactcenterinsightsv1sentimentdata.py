@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudContactcenterinsightsV1SentimentData:
-    magnitude: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'magnitude' }})
-    score: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'score' }})
+    r"""GoogleCloudContactcenterinsightsV1SentimentData
+    The data for a sentiment annotation.
+    """
+    
+    magnitude: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('magnitude') }})
+    score: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('score') }})
     

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudWebriskV1RiceDeltaEncoding
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The Rice-Golomb encoded data. Used for sending compressed 4-byte hashes or compressed removal indices.
 **/
 export class GoogleCloudWebriskV1RiceDeltaEncoding extends SpeakeasyBase {
-  @Metadata({ data: "json, name=encodedData" })
+  @SpeakeasyMetadata({ data: "json, name=encodedData" })
   encodedData?: string;
 
-  @Metadata({ data: "json, name=entryCount" })
+  @SpeakeasyMetadata({ data: "json, name=entryCount" })
   entryCount?: number;
 
-  @Metadata({ data: "json, name=firstValue" })
+  @SpeakeasyMetadata({ data: "json, name=firstValue" })
   firstValue?: string;
 
-  @Metadata({ data: "json, name=riceParameter" })
+  @SpeakeasyMetadata({ data: "json, name=riceParameter" })
   riceParameter?: number;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // FolderInput
 /**
  * Object for creating a folder.
@@ -33,15 +33,15 @@ var FolderInput = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], FolderInput.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=parentFolderId" }),
+        SpeakeasyMetadata({ data: "json, name=parentFolderId" }),
         __metadata("design:type", String)
     ], FolderInput.prototype, "parentFolderId", void 0);
     __decorate([
-        Metadata({ data: "json, name=parentPath" }),
+        SpeakeasyMetadata({ data: "json, name=parentPath" }),
         __metadata("design:type", String)
     ], FolderInput.prototype, "parentPath", void 0);
     return FolderInput;

@@ -1,12 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Space } from "./space";
 
 
+
+// ListSpacesResponse
+/** 
+ * The response corresponding to ListSpacesRequest.
+**/
 export class ListSpacesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=spaces", elemType: shared.Space })
+  @SpeakeasyMetadata({ data: "json, name=spaces", elemType: Space })
   spaces?: Space[];
 }

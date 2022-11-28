@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// StreamDescription
+// Represents all of the data describing a particular stream.
 type StreamDescription struct {
 	CreationRequestDateTime *time.Time          `json:"CreationRequestDateTime,omitempty"`
 	KeySchema               []KeySchemaElement  `json:"KeySchema,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetResourcesTagsFormatPathParams = /** @class */ (function (_super) {
     __extends(GetResourcesTagsFormatPathParams, _super);
@@ -30,7 +30,7 @@ var GetResourcesTagsFormatPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=format" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=format" }),
         __metadata("design:type", String)
     ], GetResourcesTagsFormatPathParams.prototype, "format", void 0);
     return GetResourcesTagsFormatPathParams;
@@ -42,35 +42,35 @@ var GetResourcesTagsFormatQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=max" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=max" }),
         __metadata("design:type", Number)
     ], GetResourcesTagsFormatQueryParams.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=mediaId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=mediaId" }),
         __metadata("design:type", Number)
     ], GetResourcesTagsFormatQueryParams.prototype, "mediaId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=name" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=name" }),
         __metadata("design:type", String)
     ], GetResourcesTagsFormatQueryParams.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=nameContains" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=nameContains" }),
         __metadata("design:type", String)
     ], GetResourcesTagsFormatQueryParams.prototype, "nameContains", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=offset" }),
         __metadata("design:type", Number)
     ], GetResourcesTagsFormatQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=sort" }),
         __metadata("design:type", String)
     ], GetResourcesTagsFormatQueryParams.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=typeId" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=typeId" }),
         __metadata("design:type", Number)
     ], GetResourcesTagsFormatQueryParams.prototype, "typeId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=typeName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=typeName" }),
         __metadata("design:type", String)
     ], GetResourcesTagsFormatQueryParams.prototype, "typeName", void 0);
     return GetResourcesTagsFormatQueryParams;
@@ -82,11 +82,11 @@ var GetResourcesTagsFormatRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourcesTagsFormatPathParams)
     ], GetResourcesTagsFormatRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourcesTagsFormatQueryParams)
     ], GetResourcesTagsFormatRequest.prototype, "queryParams", void 0);
     return GetResourcesTagsFormatRequest;
@@ -98,15 +98,15 @@ var GetResourcesTagsFormatResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetResourcesTagsFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetResourcesTagsFormatResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.TagMarshallerWrapped }),
+        SpeakeasyMetadata({ elemType: shared.TagMarshallerWrapped }),
         __metadata("design:type", Array)
     ], GetResourcesTagsFormatResponse.prototype, "tagMarshallerWrappeds", void 0);
     return GetResourcesTagsFormatResponse;

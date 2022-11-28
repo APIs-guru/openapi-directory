@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudidentityDevicesDeviceUsersListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -29,14 +30,14 @@ class CloudidentityDevicesDeviceUsersListQueryParams:
 
 @dataclass
 class CloudidentityDevicesDeviceUsersListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudidentityDevicesDeviceUsersListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -47,14 +48,14 @@ class CloudidentityDevicesDeviceUsersListSecurity:
 
 @dataclass
 class CloudidentityDevicesDeviceUsersListRequest:
-    path_params: CloudidentityDevicesDeviceUsersListPathParams = field(default=None)
-    query_params: CloudidentityDevicesDeviceUsersListQueryParams = field(default=None)
-    security: CloudidentityDevicesDeviceUsersListSecurity = field(default=None)
+    path_params: CloudidentityDevicesDeviceUsersListPathParams = field()
+    query_params: CloudidentityDevicesDeviceUsersListQueryParams = field()
+    security: CloudidentityDevicesDeviceUsersListSecurity = field()
     
 
 @dataclass
 class CloudidentityDevicesDeviceUsersListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_device_users_response: Optional[shared.ListDeviceUsersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum GetJurisdictiongeographyFormatEnum {
-    Json = "json"
-,    Xml = "xml"
+    Json = "json",
+    Xml = "xml"
 }
 
 
 export class GetJurisdictiongeographyQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=format" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=format" })
   format?: GetJurisdictiongeographyFormatEnum;
 }
 
 
 export class GetJurisdictiongeographyRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetJurisdictiongeographyQueryParams;
 }
 
 
 export class GetJurisdictiongeographyResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

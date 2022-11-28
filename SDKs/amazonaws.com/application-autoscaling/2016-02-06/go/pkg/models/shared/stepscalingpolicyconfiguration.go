@@ -1,5 +1,7 @@
 package shared
 
+// StepScalingPolicyConfiguration
+// Represents a step scaling policy configuration to use with Application Auto Scaling.
 type StepScalingPolicyConfiguration struct {
 	AdjustmentType         *AdjustmentTypeEnum        `json:"AdjustmentType,omitempty"`
 	Cooldown               *int64                     `json:"Cooldown,omitempty"`

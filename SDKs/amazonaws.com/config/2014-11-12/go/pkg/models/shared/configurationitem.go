@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ConfigurationItem
+// A list that contains detailed configurations of a specified resource.
 type ConfigurationItem struct {
 	AccountID                    *string                      `json:"accountId,omitempty"`
 	Arn                          *string                      `json:"arn,omitempty"`

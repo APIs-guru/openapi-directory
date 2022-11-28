@@ -1,6 +1,7 @@
 
 
+
 export enum TypeDefinitionFormatEnum {
-    Sdl = "SDL"
-,    Json = "JSON"
+    Sdl = "SDL",
+    Json = "JSON"
 }

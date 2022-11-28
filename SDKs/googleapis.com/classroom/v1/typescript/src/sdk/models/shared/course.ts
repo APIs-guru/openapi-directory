@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CourseMaterialSet } from "./coursematerialset";
 import { GradebookSettings } from "./gradebooksettings";
 import { DriveFolder } from "./drivefolder";
 
+
 export enum CourseCourseStateEnum {
-    CourseStateUnspecified = "COURSE_STATE_UNSPECIFIED"
-,    Active = "ACTIVE"
-,    Archived = "ARCHIVED"
-,    Provisioned = "PROVISIONED"
-,    Declined = "DECLINED"
-,    Suspended = "SUSPENDED"
+    CourseStateUnspecified = "COURSE_STATE_UNSPECIFIED",
+    Active = "ACTIVE",
+    Archived = "ARCHIVED",
+    Provisioned = "PROVISIONED",
+    Declined = "DECLINED",
+    Suspended = "SUSPENDED"
 }
 
 
@@ -19,60 +19,60 @@ export enum CourseCourseStateEnum {
  * A Course in Classroom.
 **/
 export class Course extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alternateLink" })
+  @SpeakeasyMetadata({ data: "json, name=alternateLink" })
   alternateLink?: string;
 
-  @Metadata({ data: "json, name=calendarId" })
+  @SpeakeasyMetadata({ data: "json, name=calendarId" })
   calendarId?: string;
 
-  @Metadata({ data: "json, name=courseGroupEmail" })
+  @SpeakeasyMetadata({ data: "json, name=courseGroupEmail" })
   courseGroupEmail?: string;
 
-  @Metadata({ data: "json, name=courseMaterialSets", elemType: shared.CourseMaterialSet })
+  @SpeakeasyMetadata({ data: "json, name=courseMaterialSets", elemType: CourseMaterialSet })
   courseMaterialSets?: CourseMaterialSet[];
 
-  @Metadata({ data: "json, name=courseState" })
+  @SpeakeasyMetadata({ data: "json, name=courseState" })
   courseState?: CourseCourseStateEnum;
 
-  @Metadata({ data: "json, name=creationTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationTime" })
   creationTime?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=descriptionHeading" })
+  @SpeakeasyMetadata({ data: "json, name=descriptionHeading" })
   descriptionHeading?: string;
 
-  @Metadata({ data: "json, name=enrollmentCode" })
+  @SpeakeasyMetadata({ data: "json, name=enrollmentCode" })
   enrollmentCode?: string;
 
-  @Metadata({ data: "json, name=gradebookSettings" })
+  @SpeakeasyMetadata({ data: "json, name=gradebookSettings" })
   gradebookSettings?: GradebookSettings;
 
-  @Metadata({ data: "json, name=guardiansEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=guardiansEnabled" })
   guardiansEnabled?: boolean;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ownerId" })
+  @SpeakeasyMetadata({ data: "json, name=ownerId" })
   ownerId?: string;
 
-  @Metadata({ data: "json, name=room" })
+  @SpeakeasyMetadata({ data: "json, name=room" })
   room?: string;
 
-  @Metadata({ data: "json, name=section" })
+  @SpeakeasyMetadata({ data: "json, name=section" })
   section?: string;
 
-  @Metadata({ data: "json, name=teacherFolder" })
+  @SpeakeasyMetadata({ data: "json, name=teacherFolder" })
   teacherFolder?: DriveFolder;
 
-  @Metadata({ data: "json, name=teacherGroupEmail" })
+  @SpeakeasyMetadata({ data: "json, name=teacherGroupEmail" })
   teacherGroupEmail?: string;
 
-  @Metadata({ data: "json, name=updateTime" })
+  @SpeakeasyMetadata({ data: "json, name=updateTime" })
   updateTime?: string;
 }

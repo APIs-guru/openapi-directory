@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// AssetModelSummary
+// Contains a summary of an asset model.
 type AssetModelSummary struct {
 	Arn            string           `json:"arn"`
 	CreationDate   time.Time        `json:"creationDate"`

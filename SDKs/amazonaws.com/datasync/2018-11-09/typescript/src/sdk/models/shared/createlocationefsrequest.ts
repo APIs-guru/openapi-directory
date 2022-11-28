@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Ec2Config } from "./ec2config";
 import { TagListEntry } from "./taglistentry";
+
 
 
 // CreateLocationEfsRequest
@@ -9,15 +9,15 @@ import { TagListEntry } from "./taglistentry";
  * CreateLocationEfsRequest
 **/
 export class CreateLocationEfsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Ec2Config" })
+  @SpeakeasyMetadata({ data: "json, name=Ec2Config" })
   ec2Config: Ec2Config;
 
-  @Metadata({ data: "json, name=EfsFilesystemArn" })
+  @SpeakeasyMetadata({ data: "json, name=EfsFilesystemArn" })
   efsFilesystemArn: string;
 
-  @Metadata({ data: "json, name=Subdirectory" })
+  @SpeakeasyMetadata({ data: "json, name=Subdirectory" })
   subdirectory?: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.TagListEntry })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: TagListEntry })
   tags?: TagListEntry[];
 }

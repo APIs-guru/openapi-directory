@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Application
+// Represents a Amazon Web Services Service Catalog AppRegistry application that is the top-level node in a hierarchy of related cloud resource abstractions.
 type Application struct {
 	Arn            *string           `json:"arn,omitempty"`
 	CreationTime   *time.Time        `json:"creationTime,omitempty"`

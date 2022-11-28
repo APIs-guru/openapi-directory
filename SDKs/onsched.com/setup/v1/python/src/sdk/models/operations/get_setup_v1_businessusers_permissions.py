@@ -11,12 +11,12 @@ class GetSetupV1BusinessusersPermissionsQueryParams:
 
 @dataclass
 class GetSetupV1BusinessusersPermissionsRequest:
-    query_params: GetSetupV1BusinessusersPermissionsQueryParams = field(default=None)
+    query_params: GetSetupV1BusinessusersPermissionsQueryParams = field()
     
 
 @dataclass
 class GetSetupV1BusinessusersPermissionsResponse:
+    content_type: str = field()
+    status_code: int = field()
     business_permission_list_view_model: Optional[dict[str, Any]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResponsePolicyGkeCluster } from "./responsepolicygkecluster";
 import { ResponsePolicyNetwork } from "./responsepolicynetwork";
+
 
 
 // ResponsePolicy
@@ -9,24 +9,24 @@ import { ResponsePolicyNetwork } from "./responsepolicynetwork";
  * A Response Policy is a collection of selectors that apply to queries made against one or more Virtual Private Cloud networks.
 **/
 export class ResponsePolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=gkeClusters", elemType: shared.ResponsePolicyGkeCluster })
+  @SpeakeasyMetadata({ data: "json, name=gkeClusters", elemType: ResponsePolicyGkeCluster })
   gkeClusters?: ResponsePolicyGkeCluster[];
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=labels" })
+  @SpeakeasyMetadata({ data: "json, name=labels" })
   labels?: Map<string, string>;
 
-  @Metadata({ data: "json, name=networks", elemType: shared.ResponsePolicyNetwork })
+  @SpeakeasyMetadata({ data: "json, name=networks", elemType: ResponsePolicyNetwork })
   networks?: ResponsePolicyNetwork[];
 
-  @Metadata({ data: "json, name=responsePolicyName" })
+  @SpeakeasyMetadata({ data: "json, name=responsePolicyName" })
   responsePolicyName?: string;
 }

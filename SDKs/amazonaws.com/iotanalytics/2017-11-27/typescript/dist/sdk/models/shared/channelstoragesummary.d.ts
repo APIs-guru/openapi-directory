@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { CustomerManagedChannelS3StorageSummary } from "./customermanagedchannels3storagesummary";
 /**
  * Where channel data is stored.

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -14,18 +15,18 @@ class GetMovieRecommendationsQueryParams:
 
 @dataclass
 class GetMovieRecommendationsSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetMovieRecommendationsRequest:
-    query_params: GetMovieRecommendationsQueryParams = field(default=None)
-    security: GetMovieRecommendationsSecurity = field(default=None)
+    query_params: GetMovieRecommendationsQueryParams = field()
+    security: GetMovieRecommendationsSecurity = field()
     
 
 @dataclass
 class GetMovieRecommendationsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     recommendation_dtos: Optional[List[shared.RecommendationDto]] = field(default=None)
-    status_code: int = field(default=None)
     

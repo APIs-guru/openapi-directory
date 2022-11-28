@@ -5,34 +5,24 @@ from sdk.models import shared
 
 @dataclass
 class GetAllProductsInPosPathParams:
-    organization_uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationUuid', 'style': 'simple', 'explode': False }})
-    
-
-@dataclass
-class GetAllProductsInPosSecurityOption1:
-    zettle_api_key: shared.SchemeZettleAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
-class GetAllProductsInPosSecurityOption2:
-    zettle_oauth: shared.SchemeZettleOauth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    organization_uuid: str = field(metadata={'path_param': { 'field_name': 'organizationUuid', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetAllProductsInPosSecurity:
-    option1: Optional[GetAllProductsInPosSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetAllProductsInPosSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    zettle_api_key: Optional[shared.SchemeZettleAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    zettle_oauth: Optional[shared.SchemeZettleOauth] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetAllProductsInPosRequest:
-    path_params: GetAllProductsInPosPathParams = field(default=None)
-    security: GetAllProductsInPosSecurity = field(default=None)
+    path_params: GetAllProductsInPosPathParams = field()
+    security: GetAllProductsInPosSecurity = field()
     
 
 @dataclass
 class GetAllProductsInPosResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     product_responses: Optional[List[shared.ProductResponse]] = field(default=None)
-    status_code: int = field(default=None)
     

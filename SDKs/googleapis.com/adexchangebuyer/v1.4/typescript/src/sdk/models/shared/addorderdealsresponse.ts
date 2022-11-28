@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MarketplaceDeal } from "./marketplacedeal";
 
 
+
 export class AddOrderDealsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deals", elemType: shared.MarketplaceDeal })
+  @SpeakeasyMetadata({ data: "json, name=deals", elemType: MarketplaceDeal })
   deals?: MarketplaceDeal[];
 
-  @Metadata({ data: "json, name=proposalRevisionNumber" })
+  @SpeakeasyMetadata({ data: "json, name=proposalRevisionNumber" })
   proposalRevisionNumber?: string;
 }

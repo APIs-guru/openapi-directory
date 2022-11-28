@@ -10,6 +10,8 @@ const (
 	GoogleCloudDialogflowCxV3TestRunDifferenceTypeEnumUtterance           GoogleCloudDialogflowCxV3TestRunDifferenceTypeEnum = "UTTERANCE"
 )
 
+// GoogleCloudDialogflowCxV3TestRunDifference
+// The description of differences between original and replayed agent output.
 type GoogleCloudDialogflowCxV3TestRunDifference struct {
 	Description *string                                             `json:"description,omitempty"`
 	Type        *GoogleCloudDialogflowCxV3TestRunDifferenceTypeEnum `json:"type,omitempty"`

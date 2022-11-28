@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiCoreDtoClickStreamHitLocationInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=areacode" })
+  @SpeakeasyMetadata({ data: "json, name=areacode" })
   areacode?: string;
 
-  @Metadata({ data: "json, name=city" })
+  @SpeakeasyMetadata({ data: "json, name=city" })
   city?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=latitude" })
+  @SpeakeasyMetadata({ data: "json, name=latitude" })
   latitude?: number;
 
-  @Metadata({ data: "json, name=longitude" })
+  @SpeakeasyMetadata({ data: "json, name=longitude" })
   longitude?: number;
 
-  @Metadata({ data: "json, name=metrocode" })
+  @SpeakeasyMetadata({ data: "json, name=metrocode" })
   metrocode?: string;
 
-  @Metadata({ data: "json, name=organization" })
+  @SpeakeasyMetadata({ data: "json, name=organization" })
   organization?: string;
 
-  @Metadata({ data: "json, name=postalcode" })
+  @SpeakeasyMetadata({ data: "json, name=postalcode" })
   postalcode?: string;
 
-  @Metadata({ data: "json, name=region" })
+  @SpeakeasyMetadata({ data: "json, name=region" })
   region?: string;
 
-  @Metadata({ data: "json, name=regionName" })
+  @SpeakeasyMetadata({ data: "json, name=regionName" })
   regionName?: string;
 }

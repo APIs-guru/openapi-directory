@@ -26,6 +26,8 @@ type MigrationSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
+// Migration
+// A migration.
 type Migration struct {
 	ArchiveURL         *string             `json:"archive_url,omitempty"`
 	CreatedAt          time.Time           `json:"created_at"`

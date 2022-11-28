@@ -9,6 +9,8 @@ const (
 	AchievementUpdateResponseCurrentStateEnumUnlocked                           AchievementUpdateResponseCurrentStateEnum = "UNLOCKED"
 )
 
+// AchievementUpdateResponse
+// An updated achievement.
 type AchievementUpdateResponse struct {
 	AchievementID  *string                                    `json:"achievementId,omitempty"`
 	CurrentState   *AchievementUpdateResponseCurrentStateEnum `json:"currentState,omitempty"`

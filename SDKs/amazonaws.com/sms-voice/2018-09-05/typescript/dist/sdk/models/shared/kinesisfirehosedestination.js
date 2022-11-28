@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // KinesisFirehoseDestination
 /**
  * An object that contains information about an event destination that sends data to Amazon Kinesis Data Firehose.
@@ -33,11 +33,11 @@ var KinesisFirehoseDestination = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DeliveryStreamArn" }),
+        SpeakeasyMetadata({ data: "json, name=DeliveryStreamArn" }),
         __metadata("design:type", String)
     ], KinesisFirehoseDestination.prototype, "deliveryStreamArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=IamRoleArn" }),
+        SpeakeasyMetadata({ data: "json, name=IamRoleArn" }),
         __metadata("design:type", String)
     ], KinesisFirehoseDestination.prototype, "iamRoleArn", void 0);
     return KinesisFirehoseDestination;

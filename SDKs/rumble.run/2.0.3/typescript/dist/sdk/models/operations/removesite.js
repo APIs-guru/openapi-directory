@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var RemoveSitePathParams = /** @class */ (function (_super) {
     __extends(RemoveSitePathParams, _super);
@@ -30,7 +30,7 @@ var RemoveSitePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=site_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=site_id" }),
         __metadata("design:type", String)
     ], RemoveSitePathParams.prototype, "siteId", void 0);
     return RemoveSitePathParams;
@@ -42,7 +42,7 @@ var RemoveSiteSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" }),
         __metadata("design:type", shared.SchemeBearerAuth)
     ], RemoveSiteSecurity.prototype, "bearerAuth", void 0);
     return RemoveSiteSecurity;
@@ -54,11 +54,11 @@ var RemoveSiteRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RemoveSitePathParams)
     ], RemoveSiteRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", RemoveSiteSecurity)
     ], RemoveSiteRequest.prototype, "security", void 0);
     return RemoveSiteRequest;
@@ -70,11 +70,11 @@ var RemoveSiteResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], RemoveSiteResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], RemoveSiteResponse.prototype, "statusCode", void 0);
     return RemoveSiteResponse;

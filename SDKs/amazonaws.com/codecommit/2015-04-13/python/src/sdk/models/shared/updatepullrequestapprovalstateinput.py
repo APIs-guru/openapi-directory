@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import approvalstate_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpdatePullRequestApprovalStateInput:
-    approval_state: approvalstate_enum.ApprovalStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'approvalState' }})
-    pull_request_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pullRequestId' }})
-    revision_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'revisionId' }})
+    approval_state: ApprovalStateEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('approvalState') }})
+    pull_request_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('pullRequestId') }})
+    revision_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('revisionId') }})
     

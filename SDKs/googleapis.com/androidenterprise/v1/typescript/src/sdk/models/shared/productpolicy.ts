@@ -1,21 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AutoInstallPolicy } from "./autoinstallpolicy";
 import { EnterpriseAuthenticationAppLinkConfig } from "./enterpriseauthenticationapplinkconfig";
 import { ManagedConfiguration } from "./managedconfiguration";
 
+
 export enum ProductPolicyAutoUpdateModeEnum {
-    AutoUpdateModeUnspecified = "autoUpdateModeUnspecified"
-,    AutoUpdateDefault = "autoUpdateDefault"
-,    AutoUpdatePostponed = "autoUpdatePostponed"
-,    AutoUpdateHighPriority = "autoUpdateHighPriority"
+    AutoUpdateModeUnspecified = "autoUpdateModeUnspecified",
+    AutoUpdateDefault = "autoUpdateDefault",
+    AutoUpdatePostponed = "autoUpdatePostponed",
+    AutoUpdateHighPriority = "autoUpdateHighPriority"
 }
 
 export enum ProductPolicyTracksEnum {
-    AppTrackUnspecified = "appTrackUnspecified"
-,    Production = "production"
-,    Beta = "beta"
-,    Alpha = "alpha"
+    AppTrackUnspecified = "appTrackUnspecified",
+    Production = "production",
+    Beta = "beta",
+    Alpha = "alpha"
 }
 
 
@@ -24,24 +24,24 @@ export enum ProductPolicyTracksEnum {
  * The policy for a product.
 **/
 export class ProductPolicy extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoInstallPolicy" })
+  @SpeakeasyMetadata({ data: "json, name=autoInstallPolicy" })
   autoInstallPolicy?: AutoInstallPolicy;
 
-  @Metadata({ data: "json, name=autoUpdateMode" })
+  @SpeakeasyMetadata({ data: "json, name=autoUpdateMode" })
   autoUpdateMode?: ProductPolicyAutoUpdateModeEnum;
 
-  @Metadata({ data: "json, name=enterpriseAuthenticationAppLinkConfigs", elemType: shared.EnterpriseAuthenticationAppLinkConfig })
+  @SpeakeasyMetadata({ data: "json, name=enterpriseAuthenticationAppLinkConfigs", elemType: EnterpriseAuthenticationAppLinkConfig })
   enterpriseAuthenticationAppLinkConfigs?: EnterpriseAuthenticationAppLinkConfig[];
 
-  @Metadata({ data: "json, name=managedConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=managedConfiguration" })
   managedConfiguration?: ManagedConfiguration;
 
-  @Metadata({ data: "json, name=productId" })
+  @SpeakeasyMetadata({ data: "json, name=productId" })
   productId?: string;
 
-  @Metadata({ data: "json, name=trackIds" })
+  @SpeakeasyMetadata({ data: "json, name=trackIds" })
   trackIds?: string[];
 
-  @Metadata({ data: "json, name=tracks" })
+  @SpeakeasyMetadata({ data: "json, name=tracks" })
   tracks?: ProductPolicyTracksEnum[];
 }

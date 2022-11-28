@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AsymmetricDecryptRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request message for KeyManagementService.AsymmetricDecrypt.
 **/
 export class AsymmetricDecryptRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ciphertext" })
+  @SpeakeasyMetadata({ data: "json, name=ciphertext" })
   ciphertext?: string;
 
-  @Metadata({ data: "json, name=ciphertextCrc32c" })
+  @SpeakeasyMetadata({ data: "json, name=ciphertextCrc32c" })
   ciphertextCrc32c?: string;
 }

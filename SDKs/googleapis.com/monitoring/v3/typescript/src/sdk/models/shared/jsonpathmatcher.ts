@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum JsonPathMatcherJsonMatcherEnum {
-    JsonPathMatcherOptionUnspecified = "JSON_PATH_MATCHER_OPTION_UNSPECIFIED"
-,    ExactMatch = "EXACT_MATCH"
-,    RegexMatch = "REGEX_MATCH"
+    JsonPathMatcherOptionUnspecified = "JSON_PATH_MATCHER_OPTION_UNSPECIFIED",
+    ExactMatch = "EXACT_MATCH",
+    RegexMatch = "REGEX_MATCH"
 }
 
 
@@ -12,9 +13,9 @@ export enum JsonPathMatcherJsonMatcherEnum {
  * Information needed to perform a JSONPath content match. Used for ContentMatcherOption::MATCHES_JSON_PATH and ContentMatcherOption::NOT_MATCHES_JSON_PATH.
 **/
 export class JsonPathMatcher extends SpeakeasyBase {
-  @Metadata({ data: "json, name=jsonMatcher" })
+  @SpeakeasyMetadata({ data: "json, name=jsonMatcher" })
   jsonMatcher?: JsonPathMatcherJsonMatcherEnum;
 
-  @Metadata({ data: "json, name=jsonPath" })
+  @SpeakeasyMetadata({ data: "json, name=jsonPath" })
   jsonPath?: string;
 }

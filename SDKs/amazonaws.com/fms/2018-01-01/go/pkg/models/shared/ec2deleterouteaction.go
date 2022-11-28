@@ -1,5 +1,7 @@
 package shared
 
+// Ec2DeleteRouteAction
+// Information about the DeleteRoute action in Amazon EC2.
 type Ec2DeleteRouteAction struct {
 	Description              *string      `json:"Description,omitempty"`
 	DestinationCidrBlock     *string      `json:"DestinationCidrBlock,omitempty"`

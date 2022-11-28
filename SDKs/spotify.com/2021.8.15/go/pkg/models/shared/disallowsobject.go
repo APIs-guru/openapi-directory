@@ -1,5 +1,8 @@
 package shared
 
+// DisallowsObject
+
+// https://developer.spotify.com/documentation/web-api/reference/#object-disallowsobject - Find more info on the official Spotify Web API Reference
 type DisallowsObject struct {
 	InterruptingPlayback  *bool `json:"interrupting_playback,omitempty"`
 	Pausing               *bool `json:"pausing,omitempty"`

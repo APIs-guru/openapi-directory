@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import fargateprofile
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DeleteFargateProfileResponse:
-    fargate_profile: Optional[fargateprofile.FargateProfile] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fargateProfile' }})
+    fargate_profile: Optional[FargateProfile] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fargateProfile') }})
     

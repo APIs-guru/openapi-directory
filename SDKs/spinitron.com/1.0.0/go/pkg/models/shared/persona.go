@@ -5,6 +5,8 @@ type PersonaLinks struct {
 	Shows []Link `json:"shows,omitempty"`
 }
 
+// Persona
+// The `Persona` object describes a radio DJ/host. One person can have multiple personas
 type Persona struct {
 	Links   *PersonaLinks `json:"_links,omitempty"`
 	Bio     *string       `json:"bio,omitempty"`

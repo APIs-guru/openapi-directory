@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Table } from "./table";
+
 
 
 // TableVersion
@@ -7,9 +8,9 @@ import { Table } from "./table";
  * Specifies a version of a table.
 **/
 export class TableVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Table" })
+  @SpeakeasyMetadata({ data: "json, name=Table" })
   table?: Table;
 
-  @Metadata({ data: "json, name=VersionId" })
+  @SpeakeasyMetadata({ data: "json, name=VersionId" })
   versionId?: string;
 }

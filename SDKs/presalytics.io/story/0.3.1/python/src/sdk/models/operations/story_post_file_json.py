@@ -10,14 +10,14 @@ class StoryPostFileJSONQueryParams:
 
 @dataclass
 class StoryPostFileJSONRequest:
-    query_params: StoryPostFileJSONQueryParams = field(default=None)
+    query_params: StoryPostFileJSONQueryParams = field()
     request: Optional[Any] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class StoryPostFileJSONResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     problem_detail: Optional[Any] = field(default=None)
     story: Optional[shared.Story] = field(default=None)
     

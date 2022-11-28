@@ -14,14 +14,14 @@ type SubmitUserFeedbackRequestBody struct {
 	Positive int64   `multipartForm:"name=positive"`
 }
 
-type SubmitUserFeedbackRequest struct {
-	PathParams SubmitUserFeedbackPathParams
-	Request    SubmitUserFeedbackRequestBody `request:"mediaType=multipart/form-data"`
-}
-
 type SubmitUserFeedback200ApplicationJSON struct {
 	Feedback *shared.Feedback `json:"feedback,omitempty"`
 	User     *shared.User     `json:"user,omitempty"`
+}
+
+type SubmitUserFeedbackRequest struct {
+	PathParams SubmitUserFeedbackPathParams
+	Request    SubmitUserFeedbackRequestBody `request:"mediaType=multipart/form-data"`
 }
 
 type SubmitUserFeedbackResponse struct {

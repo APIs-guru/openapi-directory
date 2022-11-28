@@ -1,21 +1,29 @@
 package shared
 
+// PersonAgeRange
+// The age range of the person. Valid ranges are 17 or younger, 18 to 20, and 21 or older. Age is determined from the user's birthday using Western age reckoning.
 type PersonAgeRange struct {
 	Max *int32 `json:"max,omitempty"`
 	Min *int32 `json:"min,omitempty"`
 }
 
+// PersonCoverCoverInfo
+// Extra information about the cover photo.
 type PersonCoverCoverInfo struct {
 	LeftImageOffset *int32 `json:"leftImageOffset,omitempty"`
 	TopImageOffset  *int32 `json:"topImageOffset,omitempty"`
 }
 
+// PersonCoverCoverPhoto
+// The person's primary cover image.
 type PersonCoverCoverPhoto struct {
 	Height *int32  `json:"height,omitempty"`
 	URL    *string `json:"url,omitempty"`
 	Width  *int32  `json:"width,omitempty"`
 }
 
+// PersonCover
+// The cover photo content.
 type PersonCover struct {
 	CoverInfo  *PersonCoverCoverInfo  `json:"coverInfo,omitempty"`
 	CoverPhoto *PersonCoverCoverPhoto `json:"coverPhoto,omitempty"`
@@ -27,11 +35,15 @@ type PersonEmails struct {
 	Value *string `json:"value,omitempty"`
 }
 
+// PersonImage
+// The representation of the person's profile photo.
 type PersonImage struct {
 	IsDefault *bool   `json:"isDefault,omitempty"`
 	URL       *string `json:"url,omitempty"`
 }
 
+// PersonName
+// An object representation of the individual components of a person's name.
 type PersonName struct {
 	FamilyName      *string `json:"familyName,omitempty"`
 	Formatted       *string `json:"formatted,omitempty"`

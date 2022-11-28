@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Date } from "./date";
+
 
 
 // WindowsVersion
@@ -7,12 +8,12 @@ import { Date } from "./date";
  * Windows server version.
 **/
 export class WindowsVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageType" })
+  @SpeakeasyMetadata({ data: "json, name=imageType" })
   imageType?: string;
 
-  @Metadata({ data: "json, name=osVersion" })
+  @SpeakeasyMetadata({ data: "json, name=osVersion" })
   osVersion?: string;
 
-  @Metadata({ data: "json, name=supportEndDate" })
+  @SpeakeasyMetadata({ data: "json, name=supportEndDate" })
   supportEndDate?: Date;
 }

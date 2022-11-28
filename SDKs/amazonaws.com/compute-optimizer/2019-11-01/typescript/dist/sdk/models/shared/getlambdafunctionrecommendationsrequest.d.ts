@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LambdaFunctionRecommendationFilter } from "./lambdafunctionrecommendationfilter";
 export declare class GetLambdaFunctionRecommendationsRequest extends SpeakeasyBase {
     accountIds?: string[];

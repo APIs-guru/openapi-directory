@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudchannelv1period
-from . import googlecloudchannelv1period
+from sdk import utils
+from . import *
 
 class GoogleCloudChannelV1PlanPaymentPlanEnum(str, Enum):
     PAYMENT_PLAN_UNSPECIFIED = "PAYMENT_PLAN_UNSPECIFIED"
@@ -21,9 +22,13 @@ class GoogleCloudChannelV1PlanPaymentTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class GoogleCloudChannelV1Plan:
-    billing_account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'billingAccount' }})
-    payment_cycle: Optional[googlecloudchannelv1period.GoogleCloudChannelV1Period] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentCycle' }})
-    payment_plan: Optional[GoogleCloudChannelV1PlanPaymentPlanEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentPlan' }})
-    payment_type: Optional[GoogleCloudChannelV1PlanPaymentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentType' }})
-    trial_period: Optional[googlecloudchannelv1period.GoogleCloudChannelV1Period] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trialPeriod' }})
+    r"""GoogleCloudChannelV1Plan
+    The payment plan for the Offer. Describes how to make a payment.
+    """
+    
+    billing_account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('billingAccount') }})
+    payment_cycle: Optional[GoogleCloudChannelV1Period] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentCycle') }})
+    payment_plan: Optional[GoogleCloudChannelV1PlanPaymentPlanEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentPlan') }})
+    payment_type: Optional[GoogleCloudChannelV1PlanPaymentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentType') }})
+    trial_period: Optional[GoogleCloudChannelV1Period] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('trialPeriod') }})
     

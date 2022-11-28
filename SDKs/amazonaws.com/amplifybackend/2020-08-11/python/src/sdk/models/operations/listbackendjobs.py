@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class ListBackendJobsPathParams:
-    app_id: str = field(default=None, metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
-    backend_environment_name: str = field(default=None, metadata={'path_param': { 'field_name': 'backendEnvironmentName', 'style': 'simple', 'explode': False }})
+    app_id: str = field(metadata={'path_param': { 'field_name': 'appId', 'style': 'simple', 'explode': False }})
+    backend_environment_name: str = field(metadata={'path_param': { 'field_name': 'backendEnvironmentName', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -30,28 +34,28 @@ class ListBackendJobsHeaders:
 @dataclass_json
 @dataclass
 class ListBackendJobsRequestBody:
-    job_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobId' }})
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    operation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'operation' }})
-    status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    job_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('jobId') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
+    operation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('operation') }})
+    status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     
 
 @dataclass
 class ListBackendJobsRequest:
-    path_params: ListBackendJobsPathParams = field(default=None)
-    query_params: ListBackendJobsQueryParams = field(default=None)
-    headers: ListBackendJobsHeaders = field(default=None)
-    request: ListBackendJobsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListBackendJobsHeaders = field()
+    path_params: ListBackendJobsPathParams = field()
+    query_params: ListBackendJobsQueryParams = field()
+    request: ListBackendJobsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListBackendJobsResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     gateway_timeout_exception: Optional[Any] = field(default=None)
     list_backend_jobs_response: Optional[shared.ListBackendJobsResponse] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

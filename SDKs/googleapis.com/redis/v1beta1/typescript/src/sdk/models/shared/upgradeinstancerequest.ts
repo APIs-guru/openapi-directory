@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // UpgradeInstanceRequest
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request for UpgradeInstance.
 **/
 export class UpgradeInstanceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=redisVersion" })
+  @SpeakeasyMetadata({ data: "json, name=redisVersion" })
   redisVersion?: string;
 }

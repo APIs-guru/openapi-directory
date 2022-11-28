@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetConversionsConversionIDPathParams:
-    conversion_id: int = field(default=None, metadata={'path_param': { 'field_name': 'conversionId', 'style': 'simple', 'explode': False }})
+    conversion_id: int = field(metadata={'path_param': { 'field_name': 'conversionId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetConversionsConversionIDRequest:
-    path_params: GetConversionsConversionIDPathParams = field(default=None)
+    path_params: GetConversionsConversionIDPathParams = field()
     
 
 @dataclass
 class GetConversionsConversionIDResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_dto_conversions_conversion: Optional[shared.APICoreDtoConversionsConversion] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

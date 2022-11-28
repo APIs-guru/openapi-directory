@@ -1,5 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApiResponseSimilarityResponseSimilarityList
@@ -7,28 +7,28 @@ import * as shared from "../shared";
  * Song similarity item.
 **/
 export class ApiResponseSimilarityResponseSimilarityList extends SpeakeasyBase {
-  @Metadata({ data: "json, name=artist_name" })
+  @SpeakeasyMetadata({ data: "json, name=artist_name" })
   artistName?: string;
 
-  @Metadata({ data: "json, name=artist_url" })
+  @SpeakeasyMetadata({ data: "json, name=artist_url" })
   artistUrl?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: number;
 
-  @Metadata({ data: "json, name=index_id" })
+  @SpeakeasyMetadata({ data: "json, name=index_id" })
   indexId?: number;
 
-  @Metadata({ data: "json, name=lyrics" })
+  @SpeakeasyMetadata({ data: "json, name=lyrics" })
   lyrics?: string;
 
-  @Metadata({ data: "json, name=percentage" })
+  @SpeakeasyMetadata({ data: "json, name=percentage" })
   percentage?: number;
 
-  @Metadata({ data: "json, name=song_name" })
+  @SpeakeasyMetadata({ data: "json, name=song_name" })
   songName?: string;
 
-  @Metadata({ data: "json, name=song_url" })
+  @SpeakeasyMetadata({ data: "json, name=song_url" })
   songUrl?: string;
 }
 
@@ -38,18 +38,18 @@ export class ApiResponseSimilarityResponseSimilarityList extends SpeakeasyBase {
  * Contains the response data if the request was successful.
 **/
 export class ApiResponseSimilarityResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=similarity_list", elemType: shared.ApiResponseSimilarityResponseSimilarityList })
+  @SpeakeasyMetadata({ data: "json, name=similarity_list", elemType: ApiResponseSimilarityResponseSimilarityList })
   similarityList?: ApiResponseSimilarityResponseSimilarityList[];
 }
 
 
 export class ApiResponseSimilarity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: boolean;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 
-  @Metadata({ data: "json, name=response" })
+  @SpeakeasyMetadata({ data: "json, name=response" })
   response?: ApiResponseSimilarityResponse;
 }

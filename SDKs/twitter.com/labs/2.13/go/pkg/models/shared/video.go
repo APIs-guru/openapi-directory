@@ -1,5 +1,7 @@
 package shared
 
+// VideoNonPublicMetrics
+// Nonpublic engagement metrics for the Media at the time of the request.
 type VideoNonPublicMetrics struct {
 	Playback0Count   *int32 `json:"playback_0_count,omitempty"`
 	Playback100Count *int32 `json:"playback_100_count,omitempty"`
@@ -8,6 +10,8 @@ type VideoNonPublicMetrics struct {
 	Playback75Count  *int32 `json:"playback_75_count,omitempty"`
 }
 
+// VideoOrganicMetrics
+// Organic nonpublic engagement metrics for the Media at the time of the request.
 type VideoOrganicMetrics struct {
 	Playback0Count   *int32 `json:"playback_0_count,omitempty"`
 	Playback100Count *int32 `json:"playback_100_count,omitempty"`
@@ -17,6 +21,8 @@ type VideoOrganicMetrics struct {
 	ViewCount        *int32 `json:"view_count,omitempty"`
 }
 
+// VideoPromotedMetrics
+// Promoted nonpublic engagement metrics for the Media at the time of the request.
 type VideoPromotedMetrics struct {
 	Playback0Count   *int32 `json:"playback_0_count,omitempty"`
 	Playback100Count *int32 `json:"playback_100_count,omitempty"`
@@ -26,6 +32,8 @@ type VideoPromotedMetrics struct {
 	ViewCount        *int32 `json:"view_count,omitempty"`
 }
 
+// VideoPublicMetrics
+// Engagement metrics for the Media at the time of the request.
 type VideoPublicMetrics struct {
 	ViewCount *int32 `json:"view_count,omitempty"`
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ListingRecommendation } from "./listingrecommendation";
 /**
  * The high-level object used to return a set of Promoted Listings ad recommendations.

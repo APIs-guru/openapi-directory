@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class AggregateBy:
-    data_source_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataSourceId' }})
-    data_type_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dataTypeName' }})
+    r"""AggregateBy
+    The specification of which data to aggregate.
+    """
+    
+    data_source_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataSourceId') }})
+    data_type_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dataTypeName') }})
     

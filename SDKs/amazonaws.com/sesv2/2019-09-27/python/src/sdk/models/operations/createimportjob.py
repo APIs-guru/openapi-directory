@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,36 +23,44 @@ class CreateImportJobHeaders:
 @dataclass_json
 @dataclass
 class CreateImportJobRequestBodyImportDataSource:
-    data_format: Optional[shared.DataFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DataFormat' }})
-    s3_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3Url' }})
+    r"""CreateImportJobRequestBodyImportDataSource
+    An object that contains details about the data source of the import job.
+    """
+    
+    data_format: Optional[shared.DataFormatEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DataFormat') }})
+    s3_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3Url') }})
     
 
 @dataclass_json
 @dataclass
 class CreateImportJobRequestBodyImportDestination:
-    contact_list_destination: Optional[shared.ContactListDestination] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContactListDestination' }})
-    suppression_list_destination: Optional[shared.SuppressionListDestination] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SuppressionListDestination' }})
+    r"""CreateImportJobRequestBodyImportDestination
+    An object that contains details about the resource destination the import job is going to target.
+    """
+    
+    contact_list_destination: Optional[shared.ContactListDestination] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ContactListDestination') }})
+    suppression_list_destination: Optional[shared.SuppressionListDestination] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SuppressionListDestination') }})
     
 
 @dataclass_json
 @dataclass
 class CreateImportJobRequestBody:
-    import_data_source: CreateImportJobRequestBodyImportDataSource = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ImportDataSource' }})
-    import_destination: CreateImportJobRequestBodyImportDestination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ImportDestination' }})
+    import_data_source: CreateImportJobRequestBodyImportDataSource = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ImportDataSource') }})
+    import_destination: CreateImportJobRequestBodyImportDestination = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('ImportDestination') }})
     
 
 @dataclass
 class CreateImportJobRequest:
-    headers: CreateImportJobHeaders = field(default=None)
-    request: CreateImportJobRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateImportJobHeaders = field()
+    request: CreateImportJobRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateImportJobResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_import_job_response: Optional[shared.CreateImportJobResponse] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

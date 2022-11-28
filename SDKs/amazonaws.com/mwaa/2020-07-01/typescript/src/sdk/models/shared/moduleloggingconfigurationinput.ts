@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LoggingLevelEnum } from "./logginglevelenum";
+
 
 
 // ModuleLoggingConfigurationInput
@@ -7,9 +8,9 @@ import { LoggingLevelEnum } from "./logginglevelenum";
  * Defines the type of logs to send for the Apache Airflow log type (e.g. <code>DagProcessingLogs</code>). Valid values: <code>CloudWatchLogGroupArn</code>, <code>Enabled</code>, <code>LogLevel</code>.
 **/
 export class ModuleLoggingConfigurationInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled: boolean;
 
-  @Metadata({ data: "json, name=LogLevel" })
+  @SpeakeasyMetadata({ data: "json, name=LogLevel" })
   logLevel: LoggingLevelEnum;
 }

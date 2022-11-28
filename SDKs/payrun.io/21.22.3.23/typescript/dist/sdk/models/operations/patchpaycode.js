@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PatchPayCodePathParams = /** @class */ (function (_super) {
     __extends(PatchPayCodePathParams, _super);
@@ -30,11 +30,11 @@ var PatchPayCodePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
         __metadata("design:type", String)
     ], PatchPayCodePathParams.prototype, "employerId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=PayCodeId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=PayCodeId" }),
         __metadata("design:type", String)
     ], PatchPayCodePathParams.prototype, "payCodeId", void 0);
     return PatchPayCodePathParams;
@@ -46,11 +46,11 @@ var PatchPayCodeHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], PatchPayCodeHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], PatchPayCodeHeaders.prototype, "authorization", void 0);
     return PatchPayCodeHeaders;
@@ -62,15 +62,15 @@ var PatchPayCodeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PatchPayCodePathParams)
     ], PatchPayCodeRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PatchPayCodeHeaders)
     ], PatchPayCodeRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.PayCode)
     ], PatchPayCodeRequest.prototype, "request", void 0);
     return PatchPayCodeRequest;
@@ -82,19 +82,19 @@ var PatchPayCodeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PatchPayCodeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], PatchPayCodeResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.PayCode)
     ], PatchPayCodeResponse.prototype, "payCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PatchPayCodeResponse.prototype, "statusCode", void 0);
     return PatchPayCodeResponse;

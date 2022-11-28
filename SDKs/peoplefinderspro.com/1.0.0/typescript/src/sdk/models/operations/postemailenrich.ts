@@ -1,37 +1,38 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostEmailEnrichHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=galaxy-ap-name" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=galaxy-ap-name" })
   galaxyApName?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=galaxy-ap-password" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=galaxy-ap-password" })
   galaxyApPassword?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=galaxy-search-type" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=galaxy-search-type" })
   galaxySearchType?: string;
 }
 
 
 export class PostEmailEnrichRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Email" })
+  @SpeakeasyMetadata({ data: "json, name=Email" })
   email?: string;
 }
 
 
 export class PostEmailEnrichRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: PostEmailEnrichHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: PostEmailEnrichRequestBody;
 }
 
 
 export class PostEmailEnrichResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

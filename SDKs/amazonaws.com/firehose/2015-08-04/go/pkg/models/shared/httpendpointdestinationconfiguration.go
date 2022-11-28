@@ -1,5 +1,7 @@
 package shared
 
+// HTTPEndpointDestinationConfiguration
+// Describes the configuration of the HTTP endpoint destination.
 type HTTPEndpointDestinationConfiguration struct {
 	BufferingHints           *HTTPEndpointBufferingHints       `json:"BufferingHints,omitempty"`
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions         `json:"CloudWatchLoggingOptions,omitempty"`

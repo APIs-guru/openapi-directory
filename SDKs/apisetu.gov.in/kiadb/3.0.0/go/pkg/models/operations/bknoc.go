@@ -29,11 +29,6 @@ type BknocSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type BknocRequest struct {
-	Request  *BknocRequestBody `request:"mediaType=application/json"`
-	Security BknocSecurity
-}
-
 type Bknoc400ApplicationJSONErrorEnum string
 
 const (
@@ -163,6 +158,11 @@ const (
 type Bknoc504ApplicationJSON struct {
 	Error            *Bknoc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Bknoc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type BknocRequest struct {
+	Request  *BknocRequestBody `request:"mediaType=application/json"`
+	Security BknocSecurity
 }
 
 type BknocResponse struct {

@@ -1,5 +1,7 @@
 package shared
 
+// ProvisionedProductPlanSummary
+// Summary information about a plan.
 type ProvisionedProductPlanSummary struct {
 	PlanID                 *string                         `json:"PlanId,omitempty"`
 	PlanName               *string                         `json:"PlanName,omitempty"`

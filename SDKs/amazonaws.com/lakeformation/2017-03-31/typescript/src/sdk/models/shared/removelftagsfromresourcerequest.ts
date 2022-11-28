@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LfTagPair } from "./lftagpair";
 import { Resource } from "./resource";
 
 
+
 export class RemoveLfTagsFromResourceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CatalogId" })
+  @SpeakeasyMetadata({ data: "json, name=CatalogId" })
   catalogId?: string;
 
-  @Metadata({ data: "json, name=LFTags", elemType: shared.LfTagPair })
+  @SpeakeasyMetadata({ data: "json, name=LFTags", elemType: LfTagPair })
   lfTags: LfTagPair[];
 
-  @Metadata({ data: "json, name=Resource" })
+  @SpeakeasyMetadata({ data: "json, name=Resource" })
   resource: Resource;
 }

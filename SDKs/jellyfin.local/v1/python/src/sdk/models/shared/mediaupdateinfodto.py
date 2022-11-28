@@ -1,11 +1,19 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class MediaUpdateInfoDto:
-    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Path' }})
-    update_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UpdateType' }})
+    r"""MediaUpdateInfoDto
+    Media Update Info Dto.
+    """
+    
+    path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Path') }})
+    update_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('UpdateType') }})
     

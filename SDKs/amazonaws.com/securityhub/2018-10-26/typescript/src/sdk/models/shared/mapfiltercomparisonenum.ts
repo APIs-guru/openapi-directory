@@ -1,6 +1,7 @@
 
 
+
 export enum MapFilterComparisonEnum {
-    Equals = "EQUALS"
-,    NotEquals = "NOT_EQUALS"
+    Equals = "EQUALS",
+    NotEquals = "NOT_EQUALS"
 }

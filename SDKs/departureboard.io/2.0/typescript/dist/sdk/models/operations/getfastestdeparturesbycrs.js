@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetFastestDeparturesByCrsPathParams = /** @class */ (function (_super) {
     __extends(GetFastestDeparturesByCrsPathParams, _super);
     function GetFastestDeparturesByCrsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=CRS" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=CRS" }),
         __metadata("design:type", String)
     ], GetFastestDeparturesByCrsPathParams.prototype, "crs", void 0);
     return GetFastestDeparturesByCrsPathParams;
@@ -41,23 +41,23 @@ var GetFastestDeparturesByCrsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=apiKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apiKey" }),
         __metadata("design:type", String)
     ], GetFastestDeparturesByCrsQueryParams.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filterList" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filterList" }),
         __metadata("design:type", String)
     ], GetFastestDeparturesByCrsQueryParams.prototype, "filterList", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=serviceDetails" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=serviceDetails" }),
         __metadata("design:type", Boolean)
     ], GetFastestDeparturesByCrsQueryParams.prototype, "serviceDetails", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeOffset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeOffset" }),
         __metadata("design:type", Number)
     ], GetFastestDeparturesByCrsQueryParams.prototype, "timeOffset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeWindow" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeWindow" }),
         __metadata("design:type", Number)
     ], GetFastestDeparturesByCrsQueryParams.prototype, "timeWindow", void 0);
     return GetFastestDeparturesByCrsQueryParams;
@@ -69,11 +69,11 @@ var GetFastestDeparturesByCrsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFastestDeparturesByCrsPathParams)
     ], GetFastestDeparturesByCrsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetFastestDeparturesByCrsQueryParams)
     ], GetFastestDeparturesByCrsRequest.prototype, "queryParams", void 0);
     return GetFastestDeparturesByCrsRequest;
@@ -85,11 +85,11 @@ var GetFastestDeparturesByCrsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetFastestDeparturesByCrsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetFastestDeparturesByCrsResponse.prototype, "statusCode", void 0);
     return GetFastestDeparturesByCrsResponse;

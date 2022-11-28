@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var DynamicLinkEventStatEventEnum;
 (function (DynamicLinkEventStatEventEnum) {
     DynamicLinkEventStatEventEnum["DynamicLinkEventUnspecified"] = "DYNAMIC_LINK_EVENT_UNSPECIFIED";
@@ -50,15 +50,15 @@ var DynamicLinkEventStat = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", String)
     ], DynamicLinkEventStat.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=event" }),
+        SpeakeasyMetadata({ data: "json, name=event" }),
         __metadata("design:type", String)
     ], DynamicLinkEventStat.prototype, "event", void 0);
     __decorate([
-        Metadata({ data: "json, name=platform" }),
+        SpeakeasyMetadata({ data: "json, name=platform" }),
         __metadata("design:type", String)
     ], DynamicLinkEventStat.prototype, "platform", void 0);
     return DynamicLinkEventStat;

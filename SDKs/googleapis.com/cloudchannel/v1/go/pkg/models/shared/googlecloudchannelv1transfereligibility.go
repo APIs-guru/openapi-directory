@@ -9,6 +9,8 @@ const (
 	GoogleCloudChannelV1TransferEligibilityIneligibilityReasonEnumSkuSuspended         GoogleCloudChannelV1TransferEligibilityIneligibilityReasonEnum = "SKU_SUSPENDED"
 )
 
+// GoogleCloudChannelV1TransferEligibility
+// Specifies transfer eligibility of a SKU.
 type GoogleCloudChannelV1TransferEligibility struct {
 	Description         *string                                                         `json:"description,omitempty"`
 	IneligibilityReason *GoogleCloudChannelV1TransferEligibilityIneligibilityReasonEnum `json:"ineligibilityReason,omitempty"`

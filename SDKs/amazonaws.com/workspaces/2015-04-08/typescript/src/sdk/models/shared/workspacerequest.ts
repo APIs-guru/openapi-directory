@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Tag } from "./tag";
 import { WorkspaceProperties } from "./workspaceproperties";
+
 
 
 // WorkspaceRequest
@@ -9,27 +9,27 @@ import { WorkspaceProperties } from "./workspaceproperties";
  * Describes the information used to create a WorkSpace.
 **/
 export class WorkspaceRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BundleId" })
+  @SpeakeasyMetadata({ data: "json, name=BundleId" })
   bundleId: string;
 
-  @Metadata({ data: "json, name=DirectoryId" })
+  @SpeakeasyMetadata({ data: "json, name=DirectoryId" })
   directoryId: string;
 
-  @Metadata({ data: "json, name=RootVolumeEncryptionEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=RootVolumeEncryptionEnabled" })
   rootVolumeEncryptionEnabled?: boolean;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=UserName" })
+  @SpeakeasyMetadata({ data: "json, name=UserName" })
   userName: string;
 
-  @Metadata({ data: "json, name=UserVolumeEncryptionEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=UserVolumeEncryptionEnabled" })
   userVolumeEncryptionEnabled?: boolean;
 
-  @Metadata({ data: "json, name=VolumeEncryptionKey" })
+  @SpeakeasyMetadata({ data: "json, name=VolumeEncryptionKey" })
   volumeEncryptionKey?: string;
 
-  @Metadata({ data: "json, name=WorkspaceProperties" })
+  @SpeakeasyMetadata({ data: "json, name=WorkspaceProperties" })
   workspaceProperties?: WorkspaceProperties;
 }

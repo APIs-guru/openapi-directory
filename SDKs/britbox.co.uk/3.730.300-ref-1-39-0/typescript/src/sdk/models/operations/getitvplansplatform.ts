@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetItvPlansPlatformPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=platform" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=platform" })
   platform: string;
 }
 
 
 export class GetItvPlansPlatformQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lang" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lang" })
   lang?: string;
 }
 
 
 export class GetItvPlansPlatformSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   accountAuth: shared.SchemeAccountAuth;
 }
 
 
 export class GetItvPlansPlatformRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetItvPlansPlatformPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetItvPlansPlatformQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetItvPlansPlatformSecurity;
 }
 
 
 export class GetItvPlansPlatformResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   itvPlans?: shared.ItvPlans;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceError?: shared.ServiceError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

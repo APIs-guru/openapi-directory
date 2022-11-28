@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Snapshot } from "./snapshot";
 /**
  * Response for the `ListSnapshots` method.

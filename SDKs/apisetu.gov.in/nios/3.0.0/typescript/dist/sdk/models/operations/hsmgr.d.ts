@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class HsmgrRequestBodyCertificateParameters extends SpeakeasyBase {
     fullName: string;
@@ -17,10 +17,6 @@ export declare class HsmgrRequestBody extends SpeakeasyBase {
 export declare class HsmgrSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class HsmgrRequest extends SpeakeasyBase {
-    request?: HsmgrRequestBody;
-    security: HsmgrSecurity;
 }
 export declare enum Hsmgr400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -103,6 +99,10 @@ export declare enum Hsmgr504ApplicationJsonErrorDescriptionEnum {
 export declare class Hsmgr504ApplicationJson extends SpeakeasyBase {
     error?: Hsmgr504ApplicationJsonErrorEnum;
     errorDescription?: Hsmgr504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class HsmgrRequest extends SpeakeasyBase {
+    request?: HsmgrRequestBody;
+    security: HsmgrSecurity;
 }
 export declare class HsmgrResponse extends SpeakeasyBase {
     contentType: string;

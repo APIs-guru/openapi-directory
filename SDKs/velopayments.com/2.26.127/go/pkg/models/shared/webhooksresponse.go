@@ -1,5 +1,7 @@
 package shared
 
+// WebhooksResponse
+// List Webhooks Object
 type WebhooksResponse struct {
 	Content []WebhookResponse `json:"content,omitempty"`
 	Links   []interface{}     `json:"links,omitempty"`

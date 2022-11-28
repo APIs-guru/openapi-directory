@@ -13,6 +13,8 @@ type RunnerLabels struct {
 	Type *RunnerLabelsTypeEnum `json:"type,omitempty"`
 }
 
+// Runner
+// A self hosted runner
 type Runner struct {
 	Busy   bool           `json:"busy"`
 	ID     int64          `json:"id"`

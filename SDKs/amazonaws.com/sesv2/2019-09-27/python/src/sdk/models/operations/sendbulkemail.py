@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,40 +22,44 @@ class SendBulkEmailHeaders:
 @dataclass_json
 @dataclass
 class SendBulkEmailRequestBodyDefaultContent:
-    template: Optional[shared.Template] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Template' }})
+    r"""SendBulkEmailRequestBodyDefaultContent
+    An object that contains the body of the message. You can specify a template message.
+    """
+    
+    template: Optional[shared.Template] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Template') }})
     
 
 @dataclass_json
 @dataclass
 class SendBulkEmailRequestBody:
-    bulk_email_entries: List[shared.BulkEmailEntry] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BulkEmailEntries' }})
-    configuration_set_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConfigurationSetName' }})
-    default_content: SendBulkEmailRequestBodyDefaultContent = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DefaultContent' }})
-    default_email_tags: Optional[List[shared.MessageTag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DefaultEmailTags' }})
-    feedback_forwarding_email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeedbackForwardingEmailAddress' }})
-    feedback_forwarding_email_address_identity_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeedbackForwardingEmailAddressIdentityArn' }})
-    from_email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FromEmailAddress' }})
-    from_email_address_identity_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FromEmailAddressIdentityArn' }})
-    reply_to_addresses: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReplyToAddresses' }})
+    bulk_email_entries: List[shared.BulkEmailEntry] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('BulkEmailEntries') }})
+    default_content: SendBulkEmailRequestBodyDefaultContent = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('DefaultContent') }})
+    configuration_set_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConfigurationSetName') }})
+    default_email_tags: Optional[List[shared.MessageTag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('DefaultEmailTags') }})
+    feedback_forwarding_email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeedbackForwardingEmailAddress') }})
+    feedback_forwarding_email_address_identity_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeedbackForwardingEmailAddressIdentityArn') }})
+    from_email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FromEmailAddress') }})
+    from_email_address_identity_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FromEmailAddressIdentityArn') }})
+    reply_to_addresses: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReplyToAddresses') }})
     
 
 @dataclass
 class SendBulkEmailRequest:
-    headers: SendBulkEmailHeaders = field(default=None)
-    request: SendBulkEmailRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SendBulkEmailHeaders = field()
+    request: SendBulkEmailRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SendBulkEmailResponse:
+    content_type: str = field()
+    status_code: int = field()
     account_suspended_exception: Optional[Any] = field(default=None)
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     mail_from_domain_not_verified_exception: Optional[Any] = field(default=None)
     message_rejected: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     send_bulk_email_response: Optional[shared.SendBulkEmailResponse] = field(default=None)
     sending_paused_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

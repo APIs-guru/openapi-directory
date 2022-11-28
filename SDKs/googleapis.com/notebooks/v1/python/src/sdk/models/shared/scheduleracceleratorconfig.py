@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class SchedulerAcceleratorConfigTypeEnum(str, Enum):
     SCHEDULER_ACCELERATOR_TYPE_UNSPECIFIED = "SCHEDULER_ACCELERATOR_TYPE_UNSPECIFIED"
@@ -17,6 +19,10 @@ class SchedulerAcceleratorConfigTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class SchedulerAcceleratorConfig:
-    core_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'coreCount' }})
-    type: Optional[SchedulerAcceleratorConfigTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    r"""SchedulerAcceleratorConfig
+    Definition of a hardware accelerator. Note that not all combinations of `type` and `core_count` are valid. Check [GPUs on Compute Engine](https://cloud.google.com/compute/docs/gpus) to find a valid combination. TPUs are not supported.
+    """
+    
+    core_count: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('coreCount') }})
+    type: Optional[SchedulerAcceleratorConfigTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     

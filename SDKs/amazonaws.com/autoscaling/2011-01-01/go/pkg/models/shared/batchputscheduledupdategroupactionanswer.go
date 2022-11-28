@@ -1,0 +1,5 @@
+package shared
+
+type BatchPutScheduledUpdateGroupActionAnswer struct {
+	FailedScheduledUpdateGroupActions []FailedScheduledUpdateGroupActionRequest
+}

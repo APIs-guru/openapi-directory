@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetPlansIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -19,14 +20,14 @@ class GetPlansIDQueryParams:
 
 @dataclass
 class GetPlansIDRequest:
-    path_params: GetPlansIDPathParams = field(default=None)
-    query_params: GetPlansIDQueryParams = field(default=None)
+    path_params: GetPlansIDPathParams = field()
+    query_params: GetPlansIDQueryParams = field()
     
 
 @dataclass
 class GetPlansIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     plan: Optional[shared.Plan] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetKeysSecurity:
-    custom_authentication: shared.SchemeCustomAuthentication = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    custom_authentication: shared.SchemeCustomAuthentication = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class GetKeysRequest:
-    security: GetKeysSecurity = field(default=None)
+    security: GetKeysSecurity = field()
     
 
 @dataclass
 class GetKeysResponse:
+    content_type: str = field()
+    status_code: int = field()
     authentication_info_query_result: Optional[shared.AuthenticationInfoQueryResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

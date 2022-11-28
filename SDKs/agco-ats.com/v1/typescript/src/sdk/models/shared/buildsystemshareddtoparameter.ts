@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum BuildSystemSharedDtoParameterDirectionEnum {
-    Input = "Input"
-,    Output = "Output"
+    Input = "Input",
+    Output = "Output"
 }
 
 export enum BuildSystemSharedDtoParameterTypeEnum {
-    String = "String"
-,    Boolean = "Boolean"
-,    Integer = "Integer"
-,    Float = "Float"
-,    StringDictionary = "StringDictionary"
+    String = "String",
+    Boolean = "Boolean",
+    Integer = "Integer",
+    Float = "Float",
+    StringDictionary = "StringDictionary"
 }
 
 
@@ -19,12 +20,12 @@ export enum BuildSystemSharedDtoParameterTypeEnum {
  * A DTO for an IParameter
 **/
 export class BuildSystemSharedDtoParameter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Direction" })
+  @SpeakeasyMetadata({ data: "json, name=Direction" })
   direction?: BuildSystemSharedDtoParameterDirectionEnum;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: BuildSystemSharedDtoParameterTypeEnum;
 }

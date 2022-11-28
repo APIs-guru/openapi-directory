@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudIdentitytoolkitV2StartMfaPhoneResponseInfo } from "./googlecloudidentitytoolkitv2startmfaphoneresponseinfo";
+
 
 
 // GoogleCloudIdentitytoolkitV2StartMfaSignInResponse
@@ -7,6 +8,6 @@ import { GoogleCloudIdentitytoolkitV2StartMfaPhoneResponseInfo } from "./googlec
  * StartMfaSignIn response.
 **/
 export class GoogleCloudIdentitytoolkitV2StartMfaSignInResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=phoneResponseInfo" })
+  @SpeakeasyMetadata({ data: "json, name=phoneResponseInfo" })
   phoneResponseInfo?: GoogleCloudIdentitytoolkitV2StartMfaPhoneResponseInfo;
 }

@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"https://cal-test.adyen.com/cal/services/Account/v6",
 }
 
@@ -18,9 +18,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -31,27 +35,46 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// PostCheckAccountHolder - Trigger verification.
+// Triggers the KYC verification for an account holder even if the checks are not yet required for the volume that they currently process.
 func (s *SDK) PostCheckAccountHolder(ctx context.Context, request operations.PostCheckAccountHolderRequest) (*operations.PostCheckAccountHolderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/checkAccountHolder"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -66,7 +89,7 @@ func (s *SDK) PostCheckAccountHolder(ctx context.Context, request operations.Pos
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -156,8 +179,10 @@ func (s *SDK) PostCheckAccountHolder(ctx context.Context, request operations.Pos
 	return res, nil
 }
 
+// PostCloseAccount - Close an account.
+// Closes an account. If an account is closed, you cannot process transactions, pay out its funds, or reopen it. If payments are made to a closed account, the payments will be directed to your liable account.
 func (s *SDK) PostCloseAccount(ctx context.Context, request operations.PostCloseAccountRequest) (*operations.PostCloseAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/closeAccount"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -172,7 +197,7 @@ func (s *SDK) PostCloseAccount(ctx context.Context, request operations.PostClose
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -262,8 +287,10 @@ func (s *SDK) PostCloseAccount(ctx context.Context, request operations.PostClose
 	return res, nil
 }
 
+// PostCloseAccountHolder - Close an account holder.
+// Changes the [status of an account holder](https://docs.adyen.com/platforms/account-holders-and-accounts#account-holder-statuses) to **Closed**. This state is final. If an account holder is closed, you can't process transactions, pay out funds, or reopen it. If payments are made to an account of an account holder with a **Closed** status,the payments will be directed to your liable account.
 func (s *SDK) PostCloseAccountHolder(ctx context.Context, request operations.PostCloseAccountHolderRequest) (*operations.PostCloseAccountHolderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/closeAccountHolder"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -278,7 +305,7 @@ func (s *SDK) PostCloseAccountHolder(ctx context.Context, request operations.Pos
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -368,8 +395,10 @@ func (s *SDK) PostCloseAccountHolder(ctx context.Context, request operations.Pos
 	return res, nil
 }
 
+// PostCloseStores - Close stores.
+// Close one or more stores of the account holder.
 func (s *SDK) PostCloseStores(ctx context.Context, request operations.PostCloseStoresRequest) (*operations.PostCloseStoresResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/closeStores"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -384,7 +413,7 @@ func (s *SDK) PostCloseStores(ctx context.Context, request operations.PostCloseS
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -464,8 +493,10 @@ func (s *SDK) PostCloseStores(ctx context.Context, request operations.PostCloseS
 	return res, nil
 }
 
+// PostCreateAccount - Create a new account.
+// Creates an account under an account holder. An account holder can have [multiple accounts](https://docs.adyen.com/platforms/account-holders-and-accounts#create-additional-accounts).
 func (s *SDK) PostCreateAccount(ctx context.Context, request operations.PostCreateAccountRequest) (*operations.PostCreateAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createAccount"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -480,7 +511,7 @@ func (s *SDK) PostCreateAccount(ctx context.Context, request operations.PostCrea
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -570,8 +601,10 @@ func (s *SDK) PostCreateAccount(ctx context.Context, request operations.PostCrea
 	return res, nil
 }
 
+// PostCreateAccountHolder - Create a new account holder.
+// Creates an account holder, which [represents the sub-merchant's entity](https://docs.adyen.com/platforms/account-structure#your-platform) in your platform. The details that you need to provide in the request depend on the sub-merchant's legal entity type. For more information, refer to [Account holder and accounts](https://docs.adyen.com/platforms/account-holders-and-accounts#legal-entity-types).
 func (s *SDK) PostCreateAccountHolder(ctx context.Context, request operations.PostCreateAccountHolderRequest) (*operations.PostCreateAccountHolderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/createAccountHolder"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -586,7 +619,7 @@ func (s *SDK) PostCreateAccountHolder(ctx context.Context, request operations.Po
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -666,8 +699,10 @@ func (s *SDK) PostCreateAccountHolder(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostDeleteBankAccounts - Delete bank accounts.
+// Deletes one or more bank accounts of an account holder.
 func (s *SDK) PostDeleteBankAccounts(ctx context.Context, request operations.PostDeleteBankAccountsRequest) (*operations.PostDeleteBankAccountsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteBankAccounts"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -682,7 +717,7 @@ func (s *SDK) PostDeleteBankAccounts(ctx context.Context, request operations.Pos
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -772,8 +807,10 @@ func (s *SDK) PostDeleteBankAccounts(ctx context.Context, request operations.Pos
 	return res, nil
 }
 
+// PostDeletePayoutMethods - Delete payout methods.
+// Deletes one or more payout methods of an account holder.
 func (s *SDK) PostDeletePayoutMethods(ctx context.Context, request operations.PostDeletePayoutMethodsRequest) (*operations.PostDeletePayoutMethodsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deletePayoutMethods"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -788,7 +825,7 @@ func (s *SDK) PostDeletePayoutMethods(ctx context.Context, request operations.Po
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -878,8 +915,10 @@ func (s *SDK) PostDeletePayoutMethods(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostDeleteShareholders - Delete shareholders.
+// Deletes one or more shareholders from an account holder.
 func (s *SDK) PostDeleteShareholders(ctx context.Context, request operations.PostDeleteShareholdersRequest) (*operations.PostDeleteShareholdersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteShareholders"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -894,7 +933,7 @@ func (s *SDK) PostDeleteShareholders(ctx context.Context, request operations.Pos
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -984,8 +1023,10 @@ func (s *SDK) PostDeleteShareholders(ctx context.Context, request operations.Pos
 	return res, nil
 }
 
+// PostDeleteSignatories - Delete signatories.
+// Deletes one or more signatories from an account holder.
 func (s *SDK) PostDeleteSignatories(ctx context.Context, request operations.PostDeleteSignatoriesRequest) (*operations.PostDeleteSignatoriesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/deleteSignatories"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1000,7 +1041,7 @@ func (s *SDK) PostDeleteSignatories(ctx context.Context, request operations.Post
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1090,8 +1131,10 @@ func (s *SDK) PostDeleteSignatories(ctx context.Context, request operations.Post
 	return res, nil
 }
 
+// PostGetAccountHolder - Get an account holder.
+// Retrieves the details of an account holder.
 func (s *SDK) PostGetAccountHolder(ctx context.Context, request operations.PostGetAccountHolderRequest) (*operations.PostGetAccountHolderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getAccountHolder"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1106,7 +1149,7 @@ func (s *SDK) PostGetAccountHolder(ctx context.Context, request operations.PostG
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1196,8 +1239,10 @@ func (s *SDK) PostGetAccountHolder(ctx context.Context, request operations.PostG
 	return res, nil
 }
 
+// PostGetTaxForm - Get a tax form.
+// Generates a tax form for account holders operating in the US. For more information, refer to [Providing tax forms](https://docs.adyen.com/platforms/tax-forms).
 func (s *SDK) PostGetTaxForm(ctx context.Context, request operations.PostGetTaxFormRequest) (*operations.PostGetTaxFormResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getTaxForm"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1212,7 +1257,7 @@ func (s *SDK) PostGetTaxForm(ctx context.Context, request operations.PostGetTaxF
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1292,8 +1337,10 @@ func (s *SDK) PostGetTaxForm(ctx context.Context, request operations.PostGetTaxF
 	return res, nil
 }
 
+// PostGetUploadedDocuments - Get documents.
+// Retrieves documents that were previously uploaded for an account holder. Adyen uses the documents in the [KYC verification checks](https://docs.adyen.com/platforms/verification-checks).
 func (s *SDK) PostGetUploadedDocuments(ctx context.Context, request operations.PostGetUploadedDocumentsRequest) (*operations.PostGetUploadedDocumentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/getUploadedDocuments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1308,7 +1355,7 @@ func (s *SDK) PostGetUploadedDocuments(ctx context.Context, request operations.P
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1388,8 +1435,10 @@ func (s *SDK) PostGetUploadedDocuments(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostSuspendAccountHolder - Suspend an account holder.
+// Changes the [status of an account holder](https://docs.adyen.com/platforms/account-holders-and-accounts#account-holder-statuses) to **Suspended**.
 func (s *SDK) PostSuspendAccountHolder(ctx context.Context, request operations.PostSuspendAccountHolderRequest) (*operations.PostSuspendAccountHolderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/suspendAccountHolder"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1404,7 +1453,7 @@ func (s *SDK) PostSuspendAccountHolder(ctx context.Context, request operations.P
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1494,8 +1543,12 @@ func (s *SDK) PostSuspendAccountHolder(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostUnSuspendAccountHolder - Unsuspend an account holder.
+// Changes the [status of an account holder](https://docs.adyen.com/platforms/account-holders-and-accounts#account-holder-statuses) from **Suspended** to **Inactive**. Account holders can have a **Suspended** status if you suspend them through the [`/suspendAccountHolder`](https://docs.adyen.com/api-explorer/#/Account/v5/post/suspendAccountHolder) endpoint or if a KYC deadline expires.
+//
+// You can only unsuspend account holders if they _do not_ have verification checks with a **FAILED** [`status`](https://docs.adyen.com/api-explorer/#/Account/latest/post/getAccountHolder__resParam_verification-accountHolder-checks-status).
 func (s *SDK) PostUnSuspendAccountHolder(ctx context.Context, request operations.PostUnSuspendAccountHolderRequest) (*operations.PostUnSuspendAccountHolderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/unSuspendAccountHolder"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1510,7 +1563,7 @@ func (s *SDK) PostUnSuspendAccountHolder(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1600,8 +1653,10 @@ func (s *SDK) PostUnSuspendAccountHolder(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostUpdateAccount - Update an account.
+// Updates the description or payout schedule of an account.
 func (s *SDK) PostUpdateAccount(ctx context.Context, request operations.PostUpdateAccountRequest) (*operations.PostUpdateAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/updateAccount"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1616,7 +1671,7 @@ func (s *SDK) PostUpdateAccount(ctx context.Context, request operations.PostUpda
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1706,8 +1761,28 @@ func (s *SDK) PostUpdateAccount(ctx context.Context, request operations.PostUpda
 	return res, nil
 }
 
+// PostUpdateAccountHolder - Update an account holder.
+// Updates the `accountHolderDetails` and `processingTier` of an account holder, and adds bank accounts and shareholders.
+//
+// When updating `accountHolderDetails`, parameters that are not included in the request are left unchanged except for the objects below.
+//
+// * `metadata`: Updating the metadata replaces the entire object. This means that to update an existing key-value pair, you must provide the changes along with other existing key-value pairs.
+//
+// When updating any field in the following objects, you must submit all the fields required for validation.
+//
+//   - `address`
+//
+// * `fullPhoneNumber`
+//
+// * `bankAccountDetails.BankAccountDetail`
+//
+// * `businessDetails.shareholders.ShareholderContact`
+//
+//	For example, to update the `address.postalCode`, you must also submit the `address.country`, `.city`, `.street`, `.postalCode`, and possibly `.stateOrProvince` so that the address can be validated.
+//
+// To add a bank account or shareholder, provide the bank account or shareholder details without a `bankAccountUUID` or a `shareholderCode`.
 func (s *SDK) PostUpdateAccountHolder(ctx context.Context, request operations.PostUpdateAccountHolderRequest) (*operations.PostUpdateAccountHolderResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/updateAccountHolder"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1722,7 +1797,7 @@ func (s *SDK) PostUpdateAccountHolder(ctx context.Context, request operations.Po
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1812,8 +1887,10 @@ func (s *SDK) PostUpdateAccountHolder(ctx context.Context, request operations.Po
 	return res, nil
 }
 
+// PostUpdateAccountHolderState - Update payout or processing state.
+// Disables or enables the processing or payout state of an account holder.
 func (s *SDK) PostUpdateAccountHolderState(ctx context.Context, request operations.PostUpdateAccountHolderStateRequest) (*operations.PostUpdateAccountHolderStateResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/updateAccountHolderState"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1828,7 +1905,7 @@ func (s *SDK) PostUpdateAccountHolderState(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1918,8 +1995,10 @@ func (s *SDK) PostUpdateAccountHolderState(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PostUploadDocument - Upload a document.
+// Uploads a document for an account holder. Adyen uses the documents in the [KYC verification checks](https://docs.adyen.com/platforms/verification-checks).
 func (s *SDK) PostUploadDocument(ctx context.Context, request operations.PostUploadDocumentRequest) (*operations.PostUploadDocumentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/uploadDocument"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1934,7 +2013,7 @@ func (s *SDK) PostUploadDocument(ctx context.Context, request operations.PostUpl
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := utils.CreateSecurityClient(request.Security)
+	client := utils.ConfigureSecurityClient(s._defaultClient, request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

@@ -9,6 +9,7 @@ export * from "./googlecloudassuredworkloadsv1violationremediationinstructions";
 export * from "./googlecloudassuredworkloadsv1violationremediationinstructionsconsole";
 export * from "./googlecloudassuredworkloadsv1violationremediationinstructionsgcloud";
 export * from "./googlecloudassuredworkloadsv1workload";
+export * from "./googlecloudassuredworkloadsv1workloadcompliancestatus";
 export * from "./googlecloudassuredworkloadsv1workloadkmssettings";
 export * from "./googlecloudassuredworkloadsv1workloadresourceinfo";
 export * from "./googlecloudassuredworkloadsv1workloadresourcesettings";

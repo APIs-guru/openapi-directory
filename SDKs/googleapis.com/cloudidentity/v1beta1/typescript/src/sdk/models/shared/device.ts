@@ -1,45 +1,55 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AndroidAttributes } from "./androidattributes";
 import { EndpointVerificationSpecificAttributes } from "./endpointverificationspecificattributes";
 
+
+export enum DeviceClientTypesEnum {
+    ClientTypeUnspecified = "CLIENT_TYPE_UNSPECIFIED",
+    DriveFs = "DRIVE_FS",
+    Fundamental = "FUNDAMENTAL",
+    EndpointVerification = "ENDPOINT_VERIFICATION",
+    WindowsAdvanced = "WINDOWS_ADVANCED",
+    GoogleCredentialsProviderForWindows = "GOOGLE_CREDENTIALS_PROVIDER_FOR_WINDOWS"
+}
+
 export enum DeviceCompromisedStateEnum {
-    CompromisedStateUnspecified = "COMPROMISED_STATE_UNSPECIFIED"
-,    Compromised = "COMPROMISED"
-,    Uncompromised = "UNCOMPROMISED"
+    CompromisedStateUnspecified = "COMPROMISED_STATE_UNSPECIFIED",
+    Compromised = "COMPROMISED",
+    Uncompromised = "UNCOMPROMISED"
 }
 
 export enum DeviceDeviceTypeEnum {
-    DeviceTypeUnspecified = "DEVICE_TYPE_UNSPECIFIED"
-,    Android = "ANDROID"
-,    Ios = "IOS"
-,    GoogleSync = "GOOGLE_SYNC"
-,    Windows = "WINDOWS"
-,    MacOs = "MAC_OS"
-,    Linux = "LINUX"
-,    ChromeOs = "CHROME_OS"
+    DeviceTypeUnspecified = "DEVICE_TYPE_UNSPECIFIED",
+    Android = "ANDROID",
+    Ios = "IOS",
+    GoogleSync = "GOOGLE_SYNC",
+    Windows = "WINDOWS",
+    MacOs = "MAC_OS",
+    Linux = "LINUX",
+    ChromeOs = "CHROME_OS"
 }
 
 export enum DeviceEncryptionStateEnum {
-    EncryptionStateUnspecified = "ENCRYPTION_STATE_UNSPECIFIED"
-,    UnsupportedByDevice = "UNSUPPORTED_BY_DEVICE"
-,    Encrypted = "ENCRYPTED"
-,    NotEncrypted = "NOT_ENCRYPTED"
+    EncryptionStateUnspecified = "ENCRYPTION_STATE_UNSPECIFIED",
+    UnsupportedByDevice = "UNSUPPORTED_BY_DEVICE",
+    Encrypted = "ENCRYPTED",
+    NotEncrypted = "NOT_ENCRYPTED"
 }
 
 export enum DeviceManagementStateEnum {
-    ManagementStateUnspecified = "MANAGEMENT_STATE_UNSPECIFIED"
-,    Approved = "APPROVED"
-,    Blocked = "BLOCKED"
-,    Pending = "PENDING"
-,    Unprovisioned = "UNPROVISIONED"
-,    Wiping = "WIPING"
-,    Wiped = "WIPED"
+    ManagementStateUnspecified = "MANAGEMENT_STATE_UNSPECIFIED",
+    Approved = "APPROVED",
+    Blocked = "BLOCKED",
+    Pending = "PENDING",
+    Unprovisioned = "UNPROVISIONED",
+    Wiping = "WIPING",
+    Wiped = "WIPED"
 }
 
 export enum DeviceOwnerTypeEnum {
-    DeviceOwnershipUnspecified = "DEVICE_OWNERSHIP_UNSPECIFIED"
-,    Company = "COMPANY"
-,    Byod = "BYOD"
+    DeviceOwnershipUnspecified = "DEVICE_OWNERSHIP_UNSPECIFIED",
+    Company = "COMPANY",
+    Byod = "BYOD"
 }
 
 
@@ -48,93 +58,133 @@ export enum DeviceOwnerTypeEnum {
  * A Device within the Cloud Identity Devices API. Represents a Device known to Google Cloud, independent of the device ownership, type, and whether it is assigned or in use by a user.
 **/
 export class Device extends SpeakeasyBase {
-  @Metadata({ data: "json, name=androidSpecificAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=androidSpecificAttributes" })
   androidSpecificAttributes?: AndroidAttributes;
 
-  @Metadata({ data: "json, name=assetTag" })
+  @SpeakeasyMetadata({ data: "json, name=assetTag" })
   assetTag?: string;
 
-  @Metadata({ data: "json, name=basebandVersion" })
+  @SpeakeasyMetadata({ data: "json, name=basebandVersion" })
   basebandVersion?: string;
 
-  @Metadata({ data: "json, name=bootloaderVersion" })
+  @SpeakeasyMetadata({ data: "json, name=bootloaderVersion" })
   bootloaderVersion?: string;
 
-  @Metadata({ data: "json, name=brand" })
+  @SpeakeasyMetadata({ data: "json, name=brand" })
   brand?: string;
 
-  @Metadata({ data: "json, name=buildNumber" })
+  @SpeakeasyMetadata({ data: "json, name=buildNumber" })
   buildNumber?: string;
 
-  @Metadata({ data: "json, name=compromisedState" })
+  @SpeakeasyMetadata({ data: "json, name=clientTypes" })
+  clientTypes?: DeviceClientTypesEnum[];
+
+  @SpeakeasyMetadata({ data: "json, name=compromisedState" })
   compromisedState?: DeviceCompromisedStateEnum;
 
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: string;
 
-  @Metadata({ data: "json, name=deviceId" })
+  @SpeakeasyMetadata({ data: "json, name=deviceId" })
   deviceId?: string;
 
-  @Metadata({ data: "json, name=deviceType" })
+  @SpeakeasyMetadata({ data: "json, name=deviceType" })
   deviceType?: DeviceDeviceTypeEnum;
 
-  @Metadata({ data: "json, name=enabledDeveloperOptions" })
+  @SpeakeasyMetadata({ data: "json, name=enabledDeveloperOptions" })
   enabledDeveloperOptions?: boolean;
 
-  @Metadata({ data: "json, name=enabledUsbDebugging" })
+  @SpeakeasyMetadata({ data: "json, name=enabledUsbDebugging" })
   enabledUsbDebugging?: boolean;
 
-  @Metadata({ data: "json, name=encryptionState" })
+  @SpeakeasyMetadata({ data: "json, name=encryptionState" })
   encryptionState?: DeviceEncryptionStateEnum;
 
-  @Metadata({ data: "json, name=endpointVerificationSpecificAttributes" })
+  @SpeakeasyMetadata({ data: "json, name=endpointVerificationSpecificAttributes" })
   endpointVerificationSpecificAttributes?: EndpointVerificationSpecificAttributes;
 
-  @Metadata({ data: "json, name=imei" })
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
+  hostname?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=imei" })
   imei?: string;
 
-  @Metadata({ data: "json, name=kernelVersion" })
+  @SpeakeasyMetadata({ data: "json, name=kernelVersion" })
   kernelVersion?: string;
 
-  @Metadata({ data: "json, name=lastSyncTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastSyncTime" })
   lastSyncTime?: string;
 
-  @Metadata({ data: "json, name=managementState" })
+  @SpeakeasyMetadata({ data: "json, name=managementState" })
   managementState?: DeviceManagementStateEnum;
 
-  @Metadata({ data: "json, name=manufacturer" })
+  @SpeakeasyMetadata({ data: "json, name=manufacturer" })
   manufacturer?: string;
 
-  @Metadata({ data: "json, name=meid" })
+  @SpeakeasyMetadata({ data: "json, name=meid" })
   meid?: string;
 
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=networkOperator" })
+  @SpeakeasyMetadata({ data: "json, name=networkOperator" })
   networkOperator?: string;
 
-  @Metadata({ data: "json, name=osVersion" })
+  @SpeakeasyMetadata({ data: "json, name=osVersion" })
   osVersion?: string;
 
-  @Metadata({ data: "json, name=otherAccounts" })
+  @SpeakeasyMetadata({ data: "json, name=otherAccounts" })
   otherAccounts?: string[];
 
-  @Metadata({ data: "json, name=ownerType" })
+  @SpeakeasyMetadata({ data: "json, name=ownerType" })
   ownerType?: DeviceOwnerTypeEnum;
 
-  @Metadata({ data: "json, name=releaseVersion" })
+  @SpeakeasyMetadata({ data: "json, name=releaseVersion" })
   releaseVersion?: string;
 
-  @Metadata({ data: "json, name=securityPatchTime" })
+  @SpeakeasyMetadata({ data: "json, name=securityPatchTime" })
   securityPatchTime?: string;
 
-  @Metadata({ data: "json, name=serialNumber" })
+  @SpeakeasyMetadata({ data: "json, name=serialNumber" })
   serialNumber?: string;
 
-  @Metadata({ data: "json, name=wifiMacAddresses" })
+  @SpeakeasyMetadata({ data: "json, name=wifiMacAddresses" })
+  wifiMacAddresses?: string[];
+}
+
+
+// DeviceInput
+/** 
+ * A Device within the Cloud Identity Devices API. Represents a Device known to Google Cloud, independent of the device ownership, type, and whether it is assigned or in use by a user.
+**/
+export class DeviceInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=androidSpecificAttributes" })
+  androidSpecificAttributes?: AndroidAttributes;
+
+  @SpeakeasyMetadata({ data: "json, name=assetTag" })
+  assetTag?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=clientTypes" })
+  clientTypes?: DeviceClientTypesEnum[];
+
+  @SpeakeasyMetadata({ data: "json, name=deviceId" })
+  deviceId?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=endpointVerificationSpecificAttributes" })
+  endpointVerificationSpecificAttributes?: EndpointVerificationSpecificAttributes;
+
+  @SpeakeasyMetadata({ data: "json, name=hostname" })
+  hostname?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=lastSyncTime" })
+  lastSyncTime?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=serialNumber" })
+  serialNumber?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=wifiMacAddresses" })
   wifiMacAddresses?: string[];
 }

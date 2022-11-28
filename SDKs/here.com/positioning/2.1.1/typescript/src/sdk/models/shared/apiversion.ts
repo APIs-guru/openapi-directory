@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ApiVersion extends SpeakeasyBase {
-  @Metadata({ data: "json, name=apiVersion" })
+  @SpeakeasyMetadata({ data: "json, name=apiVersion" })
   apiVersion?: string;
 
-  @Metadata({ data: "json, name=serviceVersion" })
+  @SpeakeasyMetadata({ data: "json, name=serviceVersion" })
   serviceVersion?: string;
 }

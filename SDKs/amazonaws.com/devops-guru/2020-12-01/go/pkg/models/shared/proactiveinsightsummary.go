@@ -1,5 +1,7 @@
 package shared
 
+// ProactiveInsightSummary
+// Details about a proactive insight. This object is returned by <code>DescribeInsight.</code>
 type ProactiveInsightSummary struct {
 	ID                  *string              `json:"Id,omitempty"`
 	InsightTimeRange    *InsightTimeRange    `json:"InsightTimeRange,omitempty"`

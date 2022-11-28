@@ -1,17 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AccessLevelFilter } from "./accesslevelfilter";
 
 
+
 export class ScanProvisionedProductsInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcceptLanguage" })
+  @SpeakeasyMetadata({ data: "json, name=AcceptLanguage" })
   acceptLanguage?: string;
 
-  @Metadata({ data: "json, name=AccessLevelFilter" })
+  @SpeakeasyMetadata({ data: "json, name=AccessLevelFilter" })
   accessLevelFilter?: AccessLevelFilter;
 
-  @Metadata({ data: "json, name=PageSize" })
+  @SpeakeasyMetadata({ data: "json, name=PageSize" })
   pageSize?: number;
 
-  @Metadata({ data: "json, name=PageToken" })
+  @SpeakeasyMetadata({ data: "json, name=PageToken" })
   pageToken?: string;
 }

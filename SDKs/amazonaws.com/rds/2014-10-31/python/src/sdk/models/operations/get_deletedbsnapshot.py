@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDeleteDbSnapshotActionEnum(str, Enum):
     DELETE_DB_SNAPSHOT = "DeleteDBSnapshot"
@@ -10,9 +14,9 @@ class GetDeleteDbSnapshotVersionEnum(str, Enum):
 
 @dataclass
 class GetDeleteDbSnapshotQueryParams:
-    action: GetDeleteDbSnapshotActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    db_snapshot_identifier: str = field(default=None, metadata={'query_param': { 'field_name': 'DBSnapshotIdentifier', 'style': 'form', 'explode': True }})
-    version: GetDeleteDbSnapshotVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDeleteDbSnapshotActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_snapshot_identifier: str = field(metadata={'query_param': { 'field_name': 'DBSnapshotIdentifier', 'style': 'form', 'explode': True }})
+    version: GetDeleteDbSnapshotVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDeleteDbSnapshotHeaders:
 
 @dataclass
 class GetDeleteDbSnapshotRequest:
-    query_params: GetDeleteDbSnapshotQueryParams = field(default=None)
-    headers: GetDeleteDbSnapshotHeaders = field(default=None)
+    headers: GetDeleteDbSnapshotHeaders = field()
+    query_params: GetDeleteDbSnapshotQueryParams = field()
     
 
 @dataclass
 class GetDeleteDbSnapshotResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

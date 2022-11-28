@@ -1,25 +1,40 @@
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import Any,Optional
 from dataclasses_json import dataclass_json
-from . import anthosobservabilitymembershipspec
-from . import anthosvmmembershipspec
-from . import cloudbuildmembershipspec
-from . import configmanagementmembershipspec
-from . import identityservicemembershipspec
-from . import servicemeshmembershipspec
-from . import policycontrollermembershipspec
-from . import membershipspec
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MembershipFeatureSpec:
-    anthosobservability: Optional[anthosobservabilitymembershipspec.AnthosObservabilityMembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'anthosobservability' }})
-    anthosvm: Optional[anthosvmmembershipspec.AnthosVMMembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'anthosvm' }})
-    cloudbuild: Optional[cloudbuildmembershipspec.CloudBuildMembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cloudbuild' }})
-    configmanagement: Optional[configmanagementmembershipspec.ConfigManagementMembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'configmanagement' }})
-    identityservice: Optional[identityservicemembershipspec.IdentityServiceMembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'identityservice' }})
-    mesh: Optional[servicemeshmembershipspec.ServiceMeshMembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mesh' }})
-    policycontroller: Optional[policycontrollermembershipspec.PolicyControllerMembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policycontroller' }})
-    workloadcertificate: Optional[membershipspec.MembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workloadcertificate' }})
+    r"""MembershipFeatureSpec
+    MembershipFeatureSpec contains configuration information for a single Membership.
+    """
+    
+    anthosobservability: Optional[AnthosObservabilityMembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('anthosobservability') }})
+    cloudbuild: Optional[CloudBuildMembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cloudbuild') }})
+    configmanagement: Optional[ConfigManagementMembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('configmanagement') }})
+    fleetobservability: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fleetobservability') }})
+    identityservice: Optional[IdentityServiceMembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('identityservice') }})
+    mesh: Optional[ServiceMeshMembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mesh') }})
+    policycontroller: Optional[PolicyControllerMembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policycontroller') }})
+    workloadcertificate: Optional[MembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workloadcertificate') }})
+    
+
+@dataclass_json
+@dataclass
+class MembershipFeatureSpecInput:
+    r"""MembershipFeatureSpecInput
+    MembershipFeatureSpec contains configuration information for a single Membership.
+    """
+    
+    anthosobservability: Optional[AnthosObservabilityMembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('anthosobservability') }})
+    cloudbuild: Optional[CloudBuildMembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('cloudbuild') }})
+    configmanagement: Optional[ConfigManagementMembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('configmanagement') }})
+    fleetobservability: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('fleetobservability') }})
+    identityservice: Optional[IdentityServiceMembershipSpecInput] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('identityservice') }})
+    mesh: Optional[ServiceMeshMembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('mesh') }})
+    policycontroller: Optional[PolicyControllerMembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('policycontroller') }})
+    workloadcertificate: Optional[MembershipSpec] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('workloadcertificate') }})
     

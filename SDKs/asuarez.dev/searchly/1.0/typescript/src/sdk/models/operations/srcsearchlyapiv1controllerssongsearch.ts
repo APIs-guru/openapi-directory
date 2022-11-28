@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class SrcSearchlyApiV1ControllersSongSearchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=query" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=query" })
   query: string;
 }
 
 
 export class SrcSearchlyApiV1ControllersSongSearchRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: SrcSearchlyApiV1ControllersSongSearchQueryParams;
 }
 
 
 export class SrcSearchlyApiV1ControllersSongSearchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   apiResponseSong?: shared.ApiResponseSong;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   srcSearchlyApiV1ControllersSongSearchDefaultApplicationTextString?: string;
 }

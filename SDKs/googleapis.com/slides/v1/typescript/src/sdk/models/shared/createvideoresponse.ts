@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CreateVideoResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The result of creating a video.
 **/
 export class CreateVideoResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=objectId" })
+  @SpeakeasyMetadata({ data: "json, name=objectId" })
   objectId?: string;
 }

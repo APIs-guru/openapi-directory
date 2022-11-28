@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,30 +22,34 @@ class StartDetectorModelAnalysisHeaders:
 @dataclass_json
 @dataclass
 class StartDetectorModelAnalysisRequestBodyDetectorModelDefinition:
-    initial_state_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'initialStateName' }})
-    states: Optional[List[shared.State]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'states' }})
+    r"""StartDetectorModelAnalysisRequestBodyDetectorModelDefinition
+    Information that defines how a detector operates.
+    """
+    
+    initial_state_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('initialStateName') }})
+    states: Optional[List[shared.State]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('states') }})
     
 
 @dataclass_json
 @dataclass
 class StartDetectorModelAnalysisRequestBody:
-    detector_model_definition: StartDetectorModelAnalysisRequestBodyDetectorModelDefinition = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detectorModelDefinition' }})
+    detector_model_definition: StartDetectorModelAnalysisRequestBodyDetectorModelDefinition = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('detectorModelDefinition') }})
     
 
 @dataclass
 class StartDetectorModelAnalysisRequest:
-    headers: StartDetectorModelAnalysisHeaders = field(default=None)
-    request: StartDetectorModelAnalysisRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: StartDetectorModelAnalysisHeaders = field()
+    request: StartDetectorModelAnalysisRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class StartDetectorModelAnalysisResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
     start_detector_model_analysis_response: Optional[shared.StartDetectorModelAnalysisResponse] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

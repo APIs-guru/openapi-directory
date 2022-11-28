@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * WkHtmlToPdfRequestDto is the data transfer object for generating a pdf using wkhtmltopdf;
 **/

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Resource
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Specifies the type and name of a resource referenced by an event.
 **/
 export class Resource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResourceName" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceName" })
   resourceName?: string;
 
-  @Metadata({ data: "json, name=ResourceType" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceType" })
   resourceType?: string;
 }

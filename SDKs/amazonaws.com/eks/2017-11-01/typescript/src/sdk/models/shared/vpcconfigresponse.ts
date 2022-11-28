@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VpcConfigResponse
@@ -6,24 +7,24 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An object representing an Amazon EKS cluster VPC configuration response.
 **/
 export class VpcConfigResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clusterSecurityGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=clusterSecurityGroupId" })
   clusterSecurityGroupId?: string;
 
-  @Metadata({ data: "json, name=endpointPrivateAccess" })
+  @SpeakeasyMetadata({ data: "json, name=endpointPrivateAccess" })
   endpointPrivateAccess?: boolean;
 
-  @Metadata({ data: "json, name=endpointPublicAccess" })
+  @SpeakeasyMetadata({ data: "json, name=endpointPublicAccess" })
   endpointPublicAccess?: boolean;
 
-  @Metadata({ data: "json, name=publicAccessCidrs" })
+  @SpeakeasyMetadata({ data: "json, name=publicAccessCidrs" })
   publicAccessCidrs?: string[];
 
-  @Metadata({ data: "json, name=securityGroupIds" })
+  @SpeakeasyMetadata({ data: "json, name=securityGroupIds" })
   securityGroupIds?: string[];
 
-  @Metadata({ data: "json, name=subnetIds" })
+  @SpeakeasyMetadata({ data: "json, name=subnetIds" })
   subnetIds?: string[];
 
-  @Metadata({ data: "json, name=vpcId" })
+  @SpeakeasyMetadata({ data: "json, name=vpcId" })
   vpcId?: string;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SerpData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=query" })
+  @SpeakeasyMetadata({ data: "json, name=query" })
   query: string;
 
-  @Metadata({ data: "json, name=website" })
+  @SpeakeasyMetadata({ data: "json, name=website" })
   website: string;
 }

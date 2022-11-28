@@ -1,5 +1,6 @@
 export * from "./collectionresponsefile";
 export * from "./collectionresponsefolder";
+export * from "./error";
 export * from "./errorcategory";
 export * from "./errordetail";
 export * from "./file";

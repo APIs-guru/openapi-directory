@@ -1,16 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateWorkflowRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DefaultRunProperties" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultRunProperties" })
   defaultRunProperties?: Map<string, string>;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=MaxConcurrentRuns" })
+  @SpeakeasyMetadata({ data: "json, name=MaxConcurrentRuns" })
   maxConcurrentRuns?: number;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 }

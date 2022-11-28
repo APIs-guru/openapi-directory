@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BoundingPoly } from "./boundingpoly";
 import { TextProperty } from "./textproperty";
+
 
 
 // Symbol
@@ -8,15 +9,15 @@ import { TextProperty } from "./textproperty";
  * A single symbol representation.
 **/
 export class Symbol extends SpeakeasyBase {
-  @Metadata({ data: "json, name=boundingBox" })
+  @SpeakeasyMetadata({ data: "json, name=boundingBox" })
   boundingBox?: BoundingPoly;
 
-  @Metadata({ data: "json, name=confidence" })
+  @SpeakeasyMetadata({ data: "json, name=confidence" })
   confidence?: number;
 
-  @Metadata({ data: "json, name=property" })
+  @SpeakeasyMetadata({ data: "json, name=property" })
   property?: TextProperty;
 
-  @Metadata({ data: "json, name=text" })
+  @SpeakeasyMetadata({ data: "json, name=text" })
   text?: string;
 }

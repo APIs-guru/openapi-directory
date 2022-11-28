@@ -1,5 +1,7 @@
 package shared
 
+// NeptuneSettings
+// Provides information that defines an Amazon Neptune endpoint.
 type NeptuneSettings struct {
 	ErrorRetryDuration   *int64  `json:"ErrorRetryDuration,omitempty"`
 	IamAuthEnabled       *bool   `json:"IamAuthEnabled,omitempty"`

@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAcceptReservedNodeExchangeActionEnum(str, Enum):
     ACCEPT_RESERVED_NODE_EXCHANGE = "AcceptReservedNodeExchange"
@@ -10,10 +14,10 @@ class GetAcceptReservedNodeExchangeVersionEnum(str, Enum):
 
 @dataclass
 class GetAcceptReservedNodeExchangeQueryParams:
-    action: GetAcceptReservedNodeExchangeActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    reserved_node_id: str = field(default=None, metadata={'query_param': { 'field_name': 'ReservedNodeId', 'style': 'form', 'explode': True }})
-    target_reserved_node_offering_id: str = field(default=None, metadata={'query_param': { 'field_name': 'TargetReservedNodeOfferingId', 'style': 'form', 'explode': True }})
-    version: GetAcceptReservedNodeExchangeVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetAcceptReservedNodeExchangeActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    reserved_node_id: str = field(metadata={'query_param': { 'field_name': 'ReservedNodeId', 'style': 'form', 'explode': True }})
+    target_reserved_node_offering_id: str = field(metadata={'query_param': { 'field_name': 'TargetReservedNodeOfferingId', 'style': 'form', 'explode': True }})
+    version: GetAcceptReservedNodeExchangeVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetAcceptReservedNodeExchangeHeaders:
 
 @dataclass
 class GetAcceptReservedNodeExchangeRequest:
-    query_params: GetAcceptReservedNodeExchangeQueryParams = field(default=None)
-    headers: GetAcceptReservedNodeExchangeHeaders = field(default=None)
+    headers: GetAcceptReservedNodeExchangeHeaders = field()
+    query_params: GetAcceptReservedNodeExchangeQueryParams = field()
     
 
 @dataclass
 class GetAcceptReservedNodeExchangeResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

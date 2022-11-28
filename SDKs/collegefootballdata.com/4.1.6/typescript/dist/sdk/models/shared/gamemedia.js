@@ -22,58 +22,58 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GameMedia = /** @class */ (function (_super) {
     __extends(GameMedia, _super);
     function GameMedia() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=awayConference" }),
+        SpeakeasyMetadata({ data: "json, name=awayConference" }),
         __metadata("design:type", String)
     ], GameMedia.prototype, "awayConference", void 0);
     __decorate([
-        Metadata({ data: "json, name=awayTeam" }),
+        SpeakeasyMetadata({ data: "json, name=awayTeam" }),
         __metadata("design:type", String)
     ], GameMedia.prototype, "awayTeam", void 0);
     __decorate([
-        Metadata({ data: "json, name=homeConference" }),
+        SpeakeasyMetadata({ data: "json, name=homeConference" }),
         __metadata("design:type", String)
     ], GameMedia.prototype, "homeConference", void 0);
     __decorate([
-        Metadata({ data: "json, name=homeTeam" }),
+        SpeakeasyMetadata({ data: "json, name=homeTeam" }),
         __metadata("design:type", String)
     ], GameMedia.prototype, "homeTeam", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", Number)
     ], GameMedia.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=isStartTimeTBD" }),
+        SpeakeasyMetadata({ data: "json, name=isStartTimeTBD" }),
         __metadata("design:type", Boolean)
     ], GameMedia.prototype, "isStartTimeTbd", void 0);
     __decorate([
-        Metadata({ data: "json, name=mediaType" }),
+        SpeakeasyMetadata({ data: "json, name=mediaType" }),
         __metadata("design:type", String)
     ], GameMedia.prototype, "mediaType", void 0);
     __decorate([
-        Metadata({ data: "json, name=outlet" }),
+        SpeakeasyMetadata({ data: "json, name=outlet" }),
         __metadata("design:type", String)
     ], GameMedia.prototype, "outlet", void 0);
     __decorate([
-        Metadata({ data: "json, name=season" }),
+        SpeakeasyMetadata({ data: "json, name=season" }),
         __metadata("design:type", Number)
     ], GameMedia.prototype, "season", void 0);
     __decorate([
-        Metadata({ data: "json, name=seasonType" }),
+        SpeakeasyMetadata({ data: "json, name=seasonType" }),
         __metadata("design:type", String)
     ], GameMedia.prototype, "seasonType", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", String)
     ], GameMedia.prototype, "startTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=week" }),
+        SpeakeasyMetadata({ data: "json, name=week" }),
         __metadata("design:type", Number)
     ], GameMedia.prototype, "week", void 0);
     return GameMedia;

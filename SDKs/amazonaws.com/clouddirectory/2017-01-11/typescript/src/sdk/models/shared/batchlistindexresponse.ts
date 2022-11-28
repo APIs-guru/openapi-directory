@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IndexAttachment } from "./indexattachment";
+
 
 
 // BatchListIndexResponse
@@ -8,9 +8,9 @@ import { IndexAttachment } from "./indexattachment";
  * Represents the output of a <a>ListIndex</a> response operation.
 **/
 export class BatchListIndexResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IndexAttachments", elemType: shared.IndexAttachment })
+  @SpeakeasyMetadata({ data: "json, name=IndexAttachments", elemType: IndexAttachment })
   indexAttachments?: IndexAttachment[];
 
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 }

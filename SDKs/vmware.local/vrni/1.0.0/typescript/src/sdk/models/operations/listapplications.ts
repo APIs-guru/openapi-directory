@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ListApplicationsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=cursor" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=cursor" })
   cursor?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=end_time" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=end_time" })
   endTime?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=size" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=size" })
   size?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=start_time" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start_time" })
   startTime?: number;
 }
 
 
 export class ListApplicationsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKeyAuth: shared.SchemeApiKeyAuth;
 }
 
 
 export class ListApplicationsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListApplicationsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: ListApplicationsSecurity;
 }
 
 
 export class ListApplicationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   pagedListResponse?: shared.PagedListResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

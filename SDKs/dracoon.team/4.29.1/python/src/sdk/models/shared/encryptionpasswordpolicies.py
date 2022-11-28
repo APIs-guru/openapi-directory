@@ -1,20 +1,24 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import characterrules
-from . import userinfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class EncryptionPasswordPolicies:
-    character_rules: Optional[characterrules.CharacterRules] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'characterRules' }})
-    min_length: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'minLength' }})
-    reject_keyboard_patterns: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rejectKeyboardPatterns' }})
-    reject_user_info: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rejectUserInfo' }})
-    updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updatedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    updated_by: Optional[userinfo.UserInfo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updatedBy' }})
+    r"""EncryptionPasswordPolicies
+    Encryption password policies
+    """
+    
+    character_rules: Optional[CharacterRules] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('characterRules') }})
+    min_length: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('minLength') }})
+    reject_keyboard_patterns: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rejectKeyboardPatterns') }})
+    reject_user_info: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rejectUserInfo') }})
+    updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updatedAt'), 'encoder': utils.datetimeisoformat(True), 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
+    updated_by: Optional[UserInfo] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updatedBy') }})
     

@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class Adexchangebuyer2AccountsClientsUsersListPathParams:
-    account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
-    client_account_id: str = field(default=None, metadata={'path_param': { 'field_name': 'clientAccountId', 'style': 'simple', 'explode': False }})
+    account_id: str = field(metadata={'path_param': { 'field_name': 'accountId', 'style': 'simple', 'explode': False }})
+    client_account_id: str = field(metadata={'path_param': { 'field_name': 'clientAccountId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class Adexchangebuyer2AccountsClientsUsersListQueryParams:
 
 @dataclass
 class Adexchangebuyer2AccountsClientsUsersListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class Adexchangebuyer2AccountsClientsUsersListRequest:
-    path_params: Adexchangebuyer2AccountsClientsUsersListPathParams = field(default=None)
-    query_params: Adexchangebuyer2AccountsClientsUsersListQueryParams = field(default=None)
-    security: Adexchangebuyer2AccountsClientsUsersListSecurity = field(default=None)
+    path_params: Adexchangebuyer2AccountsClientsUsersListPathParams = field()
+    query_params: Adexchangebuyer2AccountsClientsUsersListQueryParams = field()
+    security: Adexchangebuyer2AccountsClientsUsersListSecurity = field()
     
 
 @dataclass
 class Adexchangebuyer2AccountsClientsUsersListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_client_users_response: Optional[shared.ListClientUsersResponse] = field(default=None)
-    status_code: int = field(default=None)
     

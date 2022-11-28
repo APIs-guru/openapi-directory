@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceAttribute } from "./resourceattribute";
 import { Task } from "./task";
+
 
 
 // MigrationTask
@@ -9,18 +9,18 @@ import { Task } from "./task";
  * Represents a migration task in a migration tool.
 **/
 export class MigrationTask extends SpeakeasyBase {
-  @Metadata({ data: "json, name=MigrationTaskName" })
+  @SpeakeasyMetadata({ data: "json, name=MigrationTaskName" })
   migrationTaskName?: string;
 
-  @Metadata({ data: "json, name=ProgressUpdateStream" })
+  @SpeakeasyMetadata({ data: "json, name=ProgressUpdateStream" })
   progressUpdateStream?: string;
 
-  @Metadata({ data: "json, name=ResourceAttributeList", elemType: shared.ResourceAttribute })
+  @SpeakeasyMetadata({ data: "json, name=ResourceAttributeList", elemType: ResourceAttribute })
   resourceAttributeList?: ResourceAttribute[];
 
-  @Metadata({ data: "json, name=Task" })
+  @SpeakeasyMetadata({ data: "json, name=Task" })
   task?: Task;
 
-  @Metadata({ data: "json, name=UpdateDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=UpdateDateTime" })
   updateDateTime?: Date;
 }

@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,22 +22,22 @@ class CreateDataflowEndpointGroupHeaders:
 @dataclass_json
 @dataclass
 class CreateDataflowEndpointGroupRequestBody:
-    endpoint_details: List[shared.EndpointDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endpointDetails' }})
-    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    endpoint_details: List[shared.EndpointDetails] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('endpointDetails') }})
+    tags: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateDataflowEndpointGroupRequest:
-    headers: CreateDataflowEndpointGroupHeaders = field(default=None)
-    request: CreateDataflowEndpointGroupRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateDataflowEndpointGroupHeaders = field()
+    request: CreateDataflowEndpointGroupRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateDataflowEndpointGroupResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     dataflow_endpoint_group_id_response: Optional[shared.DataflowEndpointGroupIDResponse] = field(default=None)
     dependency_exception: Optional[Any] = field(default=None)
     invalid_parameter_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

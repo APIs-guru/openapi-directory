@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPayCodeRevisionsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" })
   employerId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=PayCodeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=PayCodeId" })
   payCodeId: string;
 }
 
 
 export class GetPayCodeRevisionsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Version" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" })
   apiVersion: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Authorization" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" })
   authorization: string;
 }
 
 
 export class GetPayCodeRevisionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPayCodeRevisionsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetPayCodeRevisionsHeaders;
 }
 
 
 export class GetPayCodeRevisionsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   errorModel?: shared.ErrorModel;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   linkCollection?: shared.LinkCollection;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

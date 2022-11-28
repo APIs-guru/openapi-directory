@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var ProductRetrievePathParams = /** @class */ (function (_super) {
     __extends(ProductRetrievePathParams, _super);
@@ -30,7 +30,7 @@ var ProductRetrievePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=orderId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=orderId" }),
         __metadata("design:type", String)
     ], ProductRetrievePathParams.prototype, "orderId", void 0);
     return ProductRetrievePathParams;
@@ -42,7 +42,7 @@ var ProductRetrieveSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeUserKey)
     ], ProductRetrieveSecurity.prototype, "userKey", void 0);
     return ProductRetrieveSecurity;
@@ -54,11 +54,11 @@ var ProductRetrieveRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProductRetrievePathParams)
     ], ProductRetrieveRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProductRetrieveSecurity)
     ], ProductRetrieveRequest.prototype, "security", void 0);
     return ProductRetrieveRequest;
@@ -70,19 +70,19 @@ var ProductRetrieveResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProductRetrieveResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ProductRetrieveResponse.prototype, "productRetrieve200ApplicationJsonOneOf", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], ProductRetrieveResponse.prototype, "productRetrieveDefaultApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProductRetrieveResponse.prototype, "statusCode", void 0);
     return ProductRetrieveResponse;

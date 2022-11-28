@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetAssociateEnclaveCertificateIamRoleActionEnum(str, Enum):
     ASSOCIATE_ENCLAVE_CERTIFICATE_IAM_ROLE = "AssociateEnclaveCertificateIamRole"
@@ -10,11 +14,11 @@ class GetAssociateEnclaveCertificateIamRoleVersionEnum(str, Enum):
 
 @dataclass
 class GetAssociateEnclaveCertificateIamRoleQueryParams:
-    action: GetAssociateEnclaveCertificateIamRoleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetAssociateEnclaveCertificateIamRoleActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetAssociateEnclaveCertificateIamRoleVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     certificate_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CertificateArn', 'style': 'form', 'explode': True }})
     dry_run: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'DryRun', 'style': 'form', 'explode': True }})
     role_arn: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'RoleArn', 'style': 'form', 'explode': True }})
-    version: GetAssociateEnclaveCertificateIamRoleVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetAssociateEnclaveCertificateIamRoleHeaders:
 
 @dataclass
 class GetAssociateEnclaveCertificateIamRoleRequest:
-    query_params: GetAssociateEnclaveCertificateIamRoleQueryParams = field(default=None)
-    headers: GetAssociateEnclaveCertificateIamRoleHeaders = field(default=None)
+    headers: GetAssociateEnclaveCertificateIamRoleHeaders = field()
+    query_params: GetAssociateEnclaveCertificateIamRoleQueryParams = field()
     
 
 @dataclass
 class GetAssociateEnclaveCertificateIamRoleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

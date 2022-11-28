@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Term } from "./term";
 export declare enum SectionGradeEnum {
     One = "1",

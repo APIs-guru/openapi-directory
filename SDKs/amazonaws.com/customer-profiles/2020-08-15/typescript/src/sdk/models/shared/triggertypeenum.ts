@@ -1,7 +1,8 @@
 
 
+
 export enum TriggerTypeEnum {
-    Scheduled = "Scheduled"
-,    Event = "Event"
-,    OnDemand = "OnDemand"
+    Scheduled = "Scheduled",
+    Event = "Event",
+    OnDemand = "OnDemand"
 }

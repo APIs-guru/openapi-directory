@@ -21,11 +21,6 @@ type PutReturnsSecurity struct {
 	FdcAuth shared.SchemeFdcAuth `security:"scheme,type=oauth2"`
 }
 
-type PutReturnsRequest struct {
-	Request  PutReturnsRmaRequestV2 `request:"mediaType=application/json"`
-	Security PutReturnsSecurity
-}
-
 type PutReturnsRmaResponseV2Items struct {
 	QuantityExpected int64  `json:"quantityExpected"`
 	Sku              string `json:"sku"`
@@ -60,6 +55,11 @@ type PutReturnsRmaResponseV2 struct {
 	MerchantOrderID *string                            `json:"merchantOrderId,omitempty"`
 	Recipient       PutReturnsRmaResponseV2ConsigneeV2 `json:"recipient"`
 	RmaNumber       string                             `json:"rmaNumber"`
+}
+
+type PutReturnsRequest struct {
+	Request  PutReturnsRmaRequestV2 `request:"mediaType=application/json"`
+	Security PutReturnsSecurity
 }
 
 type PutReturnsResponse struct {

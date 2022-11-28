@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudDialogflowCxV3TransitionRouteGroup } from "./googleclouddialogflowcxv3transitionroutegroup";
+
 
 
 // GoogleCloudDialogflowCxV3ListTransitionRouteGroupsResponse
@@ -8,9 +8,9 @@ import { GoogleCloudDialogflowCxV3TransitionRouteGroup } from "./googleclouddial
  * The response message for TransitionRouteGroups.ListTransitionRouteGroups.
 **/
 export class GoogleCloudDialogflowCxV3ListTransitionRouteGroupsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=transitionRouteGroups", elemType: shared.GoogleCloudDialogflowCxV3TransitionRouteGroup })
+  @SpeakeasyMetadata({ data: "json, name=transitionRouteGroups", elemType: GoogleCloudDialogflowCxV3TransitionRouteGroup })
   transitionRouteGroups?: GoogleCloudDialogflowCxV3TransitionRouteGroup[];
 }

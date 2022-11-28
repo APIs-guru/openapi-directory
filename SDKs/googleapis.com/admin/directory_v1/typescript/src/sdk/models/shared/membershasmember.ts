@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // MembersHasMember
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * JSON template for Has Member response in Directory API.
 **/
 export class MembersHasMember extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isMember" })
+  @SpeakeasyMetadata({ data: "json, name=isMember" })
   isMember?: boolean;
 }

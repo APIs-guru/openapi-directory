@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,58 +22,70 @@ class SendEmailHeaders:
 @dataclass_json
 @dataclass
 class SendEmailRequestBodyContent:
-    raw: Optional[shared.RawMessage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Raw' }})
-    simple: Optional[shared.Message] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Simple' }})
-    template: Optional[shared.Template] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Template' }})
+    r"""SendEmailRequestBodyContent
+    An object that defines the entire content of the email, including the message headers and the body content. You can create a simple email message, in which you specify the subject and the text and HTML versions of the message body. You can also create raw messages, in which you specify a complete MIME-formatted message. Raw messages can include attachments and custom headers.
+    """
+    
+    raw: Optional[shared.RawMessage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Raw') }})
+    simple: Optional[shared.Message] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Simple') }})
+    template: Optional[shared.Template] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Template') }})
     
 
 @dataclass_json
 @dataclass
 class SendEmailRequestBodyDestination:
-    bcc_addresses: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BccAddresses' }})
-    cc_addresses: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CcAddresses' }})
-    to_addresses: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ToAddresses' }})
+    r"""SendEmailRequestBodyDestination
+    An object that describes the recipients for an email.
+    """
+    
+    bcc_addresses: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('BccAddresses') }})
+    cc_addresses: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('CcAddresses') }})
+    to_addresses: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ToAddresses') }})
     
 
 @dataclass_json
 @dataclass
 class SendEmailRequestBodyListManagementOptions:
-    contact_list_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContactListName' }})
-    topic_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TopicName' }})
+    r"""SendEmailRequestBodyListManagementOptions
+    An object used to specify a list or topic to which an email belongs, which will be used when a contact chooses to unsubscribe.
+    """
+    
+    contact_list_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ContactListName') }})
+    topic_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TopicName') }})
     
 
 @dataclass_json
 @dataclass
 class SendEmailRequestBody:
-    configuration_set_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ConfigurationSetName' }})
-    content: SendEmailRequestBodyContent = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Content' }})
-    destination: Optional[SendEmailRequestBodyDestination] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Destination' }})
-    email_tags: Optional[List[shared.MessageTag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EmailTags' }})
-    feedback_forwarding_email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeedbackForwardingEmailAddress' }})
-    feedback_forwarding_email_address_identity_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeedbackForwardingEmailAddressIdentityArn' }})
-    from_email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FromEmailAddress' }})
-    from_email_address_identity_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FromEmailAddressIdentityArn' }})
-    list_management_options: Optional[SendEmailRequestBodyListManagementOptions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ListManagementOptions' }})
-    reply_to_addresses: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReplyToAddresses' }})
+    content: SendEmailRequestBodyContent = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('Content') }})
+    configuration_set_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ConfigurationSetName') }})
+    destination: Optional[SendEmailRequestBodyDestination] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Destination') }})
+    email_tags: Optional[List[shared.MessageTag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('EmailTags') }})
+    feedback_forwarding_email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeedbackForwardingEmailAddress') }})
+    feedback_forwarding_email_address_identity_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FeedbackForwardingEmailAddressIdentityArn') }})
+    from_email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FromEmailAddress') }})
+    from_email_address_identity_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('FromEmailAddressIdentityArn') }})
+    list_management_options: Optional[SendEmailRequestBodyListManagementOptions] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ListManagementOptions') }})
+    reply_to_addresses: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ReplyToAddresses') }})
     
 
 @dataclass
 class SendEmailRequest:
-    headers: SendEmailHeaders = field(default=None)
-    request: SendEmailRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: SendEmailHeaders = field()
+    request: SendEmailRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class SendEmailResponse:
+    content_type: str = field()
+    status_code: int = field()
     account_suspended_exception: Optional[Any] = field(default=None)
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     mail_from_domain_not_verified_exception: Optional[Any] = field(default=None)
     message_rejected: Optional[Any] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
     send_email_response: Optional[shared.SendEmailResponse] = field(default=None)
     sending_paused_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

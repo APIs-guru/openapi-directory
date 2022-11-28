@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetPayLineFromEmployeePathParams = /** @class */ (function (_super) {
     __extends(GetPayLineFromEmployeePathParams, _super);
@@ -30,15 +30,15 @@ var GetPayLineFromEmployeePathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployeeId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployeeId" }),
         __metadata("design:type", String)
     ], GetPayLineFromEmployeePathParams.prototype, "employeeId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
         __metadata("design:type", String)
     ], GetPayLineFromEmployeePathParams.prototype, "employerId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=PayLineId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=PayLineId" }),
         __metadata("design:type", String)
     ], GetPayLineFromEmployeePathParams.prototype, "payLineId", void 0);
     return GetPayLineFromEmployeePathParams;
@@ -50,11 +50,11 @@ var GetPayLineFromEmployeeHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], GetPayLineFromEmployeeHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], GetPayLineFromEmployeeHeaders.prototype, "authorization", void 0);
     return GetPayLineFromEmployeeHeaders;
@@ -66,11 +66,11 @@ var GetPayLineFromEmployeeRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPayLineFromEmployeePathParams)
     ], GetPayLineFromEmployeeRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetPayLineFromEmployeeHeaders)
     ], GetPayLineFromEmployeeRequest.prototype, "headers", void 0);
     return GetPayLineFromEmployeeRequest;
@@ -82,19 +82,19 @@ var GetPayLineFromEmployeeResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetPayLineFromEmployeeResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], GetPayLineFromEmployeeResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.PayLine)
     ], GetPayLineFromEmployeeResponse.prototype, "payLine", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetPayLineFromEmployeeResponse.prototype, "statusCode", void 0);
     return GetPayLineFromEmployeeResponse;

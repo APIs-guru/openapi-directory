@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StructuralElement } from "./structuralelement";
+import { StructuralElementInput } from "./structuralelement";
+
 
 
 // Header
@@ -8,9 +9,22 @@ import { StructuralElement } from "./structuralelement";
  * A document header.
 **/
 export class Header extends SpeakeasyBase {
-  @Metadata({ data: "json, name=content", elemType: shared.StructuralElement })
+  @SpeakeasyMetadata({ data: "json, name=content", elemType: StructuralElement })
   content?: StructuralElement[];
 
-  @Metadata({ data: "json, name=headerId" })
+  @SpeakeasyMetadata({ data: "json, name=headerId" })
+  headerId?: string;
+}
+
+
+// HeaderInput
+/** 
+ * A document header.
+**/
+export class HeaderInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=content", elemType: StructuralElementInput })
+  content?: StructuralElementInput[];
+
+  @SpeakeasyMetadata({ data: "json, name=headerId" })
   headerId?: string;
 }

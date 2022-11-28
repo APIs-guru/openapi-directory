@@ -26,28 +26,10 @@ type SearchUserPostsQueryParams struct {
 	Types            string     `queryParam:"style=form,explode=true,name=types"`
 }
 
-type SearchUserPostsSecurityOption1 struct {
-	Oauth2Implicit shared.SchemeOauth2Implicit `security:"scheme,type=oauth2"`
-}
-
-type SearchUserPostsSecurityOption2 struct {
-	Oauth2Code shared.SchemeOauth2Code `security:"scheme,type=oauth2"`
-}
-
-type SearchUserPostsSecurityOption3 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
-}
-
 type SearchUserPostsSecurity struct {
-	Option1 *SearchUserPostsSecurityOption1 `security:"option"`
-	Option2 *SearchUserPostsSecurityOption2 `security:"option"`
-	Option3 *SearchUserPostsSecurityOption3 `security:"option"`
-}
-
-type SearchUserPostsRequest struct {
-	PathParams  SearchUserPostsPathParams
-	QueryParams SearchUserPostsQueryParams
-	Security    SearchUserPostsSecurity
+	Oauth2Implicit *shared.SchemeOauth2Implicit `security:"scheme,type=oauth2"`
+	Oauth2Code     *shared.SchemeOauth2Code     `security:"scheme,type=oauth2"`
+	APIKey         *shared.SchemeAPIKey         `security:"scheme,type=apiKey,subtype=query"`
 }
 
 type SearchUserPosts200ApplicationJSON struct {
@@ -59,6 +41,12 @@ type SearchUserPosts200ApplicationJSON struct {
 	PerPage    *int64                    `json:"per_page,omitempty"`
 	Posts      []shared.PostSearchResult `json:"posts,omitempty"`
 	StartIndex *int64                    `json:"start_index,omitempty"`
+}
+
+type SearchUserPostsRequest struct {
+	PathParams  SearchUserPostsPathParams
+	QueryParams SearchUserPostsQueryParams
+	Security    SearchUserPostsSecurity
 }
 
 type SearchUserPostsResponse struct {

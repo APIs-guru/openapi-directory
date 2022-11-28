@@ -41,7 +41,7 @@ type AnalyticshubProjectsLocationsDataExchangesCreateSecurity struct {
 type AnalyticshubProjectsLocationsDataExchangesCreateRequest struct {
 	PathParams  AnalyticshubProjectsLocationsDataExchangesCreatePathParams
 	QueryParams AnalyticshubProjectsLocationsDataExchangesCreateQueryParams
-	Request     *shared.DataExchange `request:"mediaType=application/json"`
+	Request     *shared.DataExchangeInput `request:"mediaType=application/json"`
 	Security    AnalyticshubProjectsLocationsDataExchangesCreateSecurity
 }
 

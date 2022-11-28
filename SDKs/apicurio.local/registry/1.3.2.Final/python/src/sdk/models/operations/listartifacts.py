@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class ListArtifactsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[shared.Error] = field(default=None)
-    status_code: int = field(default=None)
     list_artifacts_200_application_json_strings: Optional[List[str]] = field(default=None)
     

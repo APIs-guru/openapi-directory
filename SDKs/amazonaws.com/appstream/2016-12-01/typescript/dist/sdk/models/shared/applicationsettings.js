@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // ApplicationSettings
 /**
  * The persistent application settings for users of a stack.
@@ -33,11 +33,11 @@ var ApplicationSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=Enabled" }),
+        SpeakeasyMetadata({ data: "json, name=Enabled" }),
         __metadata("design:type", Boolean)
     ], ApplicationSettings.prototype, "enabled", void 0);
     __decorate([
-        Metadata({ data: "json, name=SettingsGroup" }),
+        SpeakeasyMetadata({ data: "json, name=SettingsGroup" }),
         __metadata("design:type", String)
     ], ApplicationSettings.prototype, "settingsGroup", void 0);
     return ApplicationSettings;

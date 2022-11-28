@@ -22,39 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var BoxScorePlayersPpaAverage = /** @class */ (function (_super) {
     __extends(BoxScorePlayersPpaAverage, _super);
     function BoxScorePlayersPpaAverage() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=passing" }),
+        SpeakeasyMetadata({ data: "json, name=passing" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersPpaAverage.prototype, "passing", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter1" }),
+        SpeakeasyMetadata({ data: "json, name=quarter1" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersPpaAverage.prototype, "quarter1", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter2" }),
+        SpeakeasyMetadata({ data: "json, name=quarter2" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersPpaAverage.prototype, "quarter2", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter3" }),
+        SpeakeasyMetadata({ data: "json, name=quarter3" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersPpaAverage.prototype, "quarter3", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter4" }),
+        SpeakeasyMetadata({ data: "json, name=quarter4" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersPpaAverage.prototype, "quarter4", void 0);
     __decorate([
-        Metadata({ data: "json, name=rushing" }),
+        SpeakeasyMetadata({ data: "json, name=rushing" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersPpaAverage.prototype, "rushing", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersPpaAverage.prototype, "total", void 0);
     return BoxScorePlayersPpaAverage;
@@ -66,31 +65,31 @@ var BoxScorePlayersPpaCumulative = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=passing" }),
+        SpeakeasyMetadata({ data: "json, name=passing" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersPpaCumulative.prototype, "passing", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter1" }),
+        SpeakeasyMetadata({ data: "json, name=quarter1" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersPpaCumulative.prototype, "quarter1", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter2" }),
+        SpeakeasyMetadata({ data: "json, name=quarter2" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersPpaCumulative.prototype, "quarter2", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter3" }),
+        SpeakeasyMetadata({ data: "json, name=quarter3" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersPpaCumulative.prototype, "quarter3", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter4" }),
+        SpeakeasyMetadata({ data: "json, name=quarter4" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersPpaCumulative.prototype, "quarter4", void 0);
     __decorate([
-        Metadata({ data: "json, name=rushing" }),
+        SpeakeasyMetadata({ data: "json, name=rushing" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersPpaCumulative.prototype, "rushing", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersPpaCumulative.prototype, "total", void 0);
     return BoxScorePlayersPpaCumulative;
@@ -102,23 +101,23 @@ var BoxScorePlayersPpa = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=average" }),
+        SpeakeasyMetadata({ data: "json, name=average" }),
         __metadata("design:type", BoxScorePlayersPpaAverage)
     ], BoxScorePlayersPpa.prototype, "average", void 0);
     __decorate([
-        Metadata({ data: "json, name=cumulative" }),
+        SpeakeasyMetadata({ data: "json, name=cumulative" }),
         __metadata("design:type", BoxScorePlayersPpaCumulative)
     ], BoxScorePlayersPpa.prototype, "cumulative", void 0);
     __decorate([
-        Metadata({ data: "json, name=player" }),
+        SpeakeasyMetadata({ data: "json, name=player" }),
         __metadata("design:type", String)
     ], BoxScorePlayersPpa.prototype, "player", void 0);
     __decorate([
-        Metadata({ data: "json, name=position" }),
+        SpeakeasyMetadata({ data: "json, name=position" }),
         __metadata("design:type", String)
     ], BoxScorePlayersPpa.prototype, "position", void 0);
     __decorate([
-        Metadata({ data: "json, name=team" }),
+        SpeakeasyMetadata({ data: "json, name=team" }),
         __metadata("design:type", String)
     ], BoxScorePlayersPpa.prototype, "team", void 0);
     return BoxScorePlayersPpa;
@@ -130,43 +129,43 @@ var BoxScorePlayersUsage = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=passing" }),
+        SpeakeasyMetadata({ data: "json, name=passing" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersUsage.prototype, "passing", void 0);
     __decorate([
-        Metadata({ data: "json, name=player" }),
+        SpeakeasyMetadata({ data: "json, name=player" }),
         __metadata("design:type", String)
     ], BoxScorePlayersUsage.prototype, "player", void 0);
     __decorate([
-        Metadata({ data: "json, name=position" }),
+        SpeakeasyMetadata({ data: "json, name=position" }),
         __metadata("design:type", String)
     ], BoxScorePlayersUsage.prototype, "position", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter1" }),
+        SpeakeasyMetadata({ data: "json, name=quarter1" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersUsage.prototype, "quarter1", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter2" }),
+        SpeakeasyMetadata({ data: "json, name=quarter2" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersUsage.prototype, "quarter2", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter3" }),
+        SpeakeasyMetadata({ data: "json, name=quarter3" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersUsage.prototype, "quarter3", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter4" }),
+        SpeakeasyMetadata({ data: "json, name=quarter4" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersUsage.prototype, "quarter4", void 0);
     __decorate([
-        Metadata({ data: "json, name=rushing" }),
+        SpeakeasyMetadata({ data: "json, name=rushing" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersUsage.prototype, "rushing", void 0);
     __decorate([
-        Metadata({ data: "json, name=team" }),
+        SpeakeasyMetadata({ data: "json, name=team" }),
         __metadata("design:type", String)
     ], BoxScorePlayersUsage.prototype, "team", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], BoxScorePlayersUsage.prototype, "total", void 0);
     return BoxScorePlayersUsage;
@@ -178,11 +177,11 @@ var BoxScorePlayers = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=ppa", elemType: shared.BoxScorePlayersPpa }),
+        SpeakeasyMetadata({ data: "json, name=ppa", elemType: BoxScorePlayersPpa }),
         __metadata("design:type", Array)
     ], BoxScorePlayers.prototype, "ppa", void 0);
     __decorate([
-        Metadata({ data: "json, name=usage", elemType: shared.BoxScorePlayersUsage }),
+        SpeakeasyMetadata({ data: "json, name=usage", elemType: BoxScorePlayersUsage }),
         __metadata("design:type", Array)
     ], BoxScorePlayers.prototype, "usage", void 0);
     return BoxScorePlayers;
@@ -194,23 +193,23 @@ var BoxScoreTeamsCumulativePpaOverall = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=quarter1" }),
+        SpeakeasyMetadata({ data: "json, name=quarter1" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsCumulativePpaOverall.prototype, "quarter1", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter2" }),
+        SpeakeasyMetadata({ data: "json, name=quarter2" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsCumulativePpaOverall.prototype, "quarter2", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter3" }),
+        SpeakeasyMetadata({ data: "json, name=quarter3" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsCumulativePpaOverall.prototype, "quarter3", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter4" }),
+        SpeakeasyMetadata({ data: "json, name=quarter4" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsCumulativePpaOverall.prototype, "quarter4", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsCumulativePpaOverall.prototype, "total", void 0);
     return BoxScoreTeamsCumulativePpaOverall;
@@ -222,23 +221,23 @@ var BoxScoreTeamsCumulativePpaPassing = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=quarter1" }),
+        SpeakeasyMetadata({ data: "json, name=quarter1" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsCumulativePpaPassing.prototype, "quarter1", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter2" }),
+        SpeakeasyMetadata({ data: "json, name=quarter2" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsCumulativePpaPassing.prototype, "quarter2", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter3" }),
+        SpeakeasyMetadata({ data: "json, name=quarter3" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsCumulativePpaPassing.prototype, "quarter3", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter4" }),
+        SpeakeasyMetadata({ data: "json, name=quarter4" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsCumulativePpaPassing.prototype, "quarter4", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsCumulativePpaPassing.prototype, "total", void 0);
     return BoxScoreTeamsCumulativePpaPassing;
@@ -250,23 +249,23 @@ var BoxScoreTeamsCumulativePpaRushing = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=quarter1" }),
+        SpeakeasyMetadata({ data: "json, name=quarter1" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsCumulativePpaRushing.prototype, "quarter1", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter2" }),
+        SpeakeasyMetadata({ data: "json, name=quarter2" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsCumulativePpaRushing.prototype, "quarter2", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter3" }),
+        SpeakeasyMetadata({ data: "json, name=quarter3" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsCumulativePpaRushing.prototype, "quarter3", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter4" }),
+        SpeakeasyMetadata({ data: "json, name=quarter4" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsCumulativePpaRushing.prototype, "quarter4", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsCumulativePpaRushing.prototype, "total", void 0);
     return BoxScoreTeamsCumulativePpaRushing;
@@ -278,23 +277,23 @@ var BoxScoreTeamsCumulativePpa = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=overall" }),
+        SpeakeasyMetadata({ data: "json, name=overall" }),
         __metadata("design:type", BoxScoreTeamsCumulativePpaOverall)
     ], BoxScoreTeamsCumulativePpa.prototype, "overall", void 0);
     __decorate([
-        Metadata({ data: "json, name=passing" }),
+        SpeakeasyMetadata({ data: "json, name=passing" }),
         __metadata("design:type", BoxScoreTeamsCumulativePpaPassing)
     ], BoxScoreTeamsCumulativePpa.prototype, "passing", void 0);
     __decorate([
-        Metadata({ data: "json, name=plays" }),
+        SpeakeasyMetadata({ data: "json, name=plays" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsCumulativePpa.prototype, "plays", void 0);
     __decorate([
-        Metadata({ data: "json, name=rushing" }),
+        SpeakeasyMetadata({ data: "json, name=rushing" }),
         __metadata("design:type", BoxScoreTeamsCumulativePpaRushing)
     ], BoxScoreTeamsCumulativePpa.prototype, "rushing", void 0);
     __decorate([
-        Metadata({ data: "json, name=team" }),
+        SpeakeasyMetadata({ data: "json, name=team" }),
         __metadata("design:type", String)
     ], BoxScoreTeamsCumulativePpa.prototype, "team", void 0);
     return BoxScoreTeamsCumulativePpa;
@@ -306,23 +305,23 @@ var BoxScoreTeamsExplosivenessOverall = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=quarter1" }),
+        SpeakeasyMetadata({ data: "json, name=quarter1" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsExplosivenessOverall.prototype, "quarter1", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter2" }),
+        SpeakeasyMetadata({ data: "json, name=quarter2" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsExplosivenessOverall.prototype, "quarter2", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter3" }),
+        SpeakeasyMetadata({ data: "json, name=quarter3" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsExplosivenessOverall.prototype, "quarter3", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter4" }),
+        SpeakeasyMetadata({ data: "json, name=quarter4" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsExplosivenessOverall.prototype, "quarter4", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsExplosivenessOverall.prototype, "total", void 0);
     return BoxScoreTeamsExplosivenessOverall;
@@ -334,11 +333,11 @@ var BoxScoreTeamsExplosiveness = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=overall" }),
+        SpeakeasyMetadata({ data: "json, name=overall" }),
         __metadata("design:type", BoxScoreTeamsExplosivenessOverall)
     ], BoxScoreTeamsExplosiveness.prototype, "overall", void 0);
     __decorate([
-        Metadata({ data: "json, name=team" }),
+        SpeakeasyMetadata({ data: "json, name=team" }),
         __metadata("design:type", String)
     ], BoxScoreTeamsExplosiveness.prototype, "team", void 0);
     return BoxScoreTeamsExplosiveness;
@@ -350,15 +349,15 @@ var BoxScoreTeamsFieldPosition = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=averageStart" }),
+        SpeakeasyMetadata({ data: "json, name=averageStart" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsFieldPosition.prototype, "averageStart", void 0);
     __decorate([
-        Metadata({ data: "json, name=averageStartingPredictedPoints" }),
+        SpeakeasyMetadata({ data: "json, name=averageStartingPredictedPoints" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsFieldPosition.prototype, "averageStartingPredictedPoints", void 0);
     __decorate([
-        Metadata({ data: "json, name=team" }),
+        SpeakeasyMetadata({ data: "json, name=team" }),
         __metadata("design:type", String)
     ], BoxScoreTeamsFieldPosition.prototype, "team", void 0);
     return BoxScoreTeamsFieldPosition;
@@ -370,19 +369,19 @@ var BoxScoreTeamsHavoc = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=db" }),
+        SpeakeasyMetadata({ data: "json, name=db" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsHavoc.prototype, "db", void 0);
     __decorate([
-        Metadata({ data: "json, name=frontSeven" }),
+        SpeakeasyMetadata({ data: "json, name=frontSeven" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsHavoc.prototype, "frontSeven", void 0);
     __decorate([
-        Metadata({ data: "json, name=team" }),
+        SpeakeasyMetadata({ data: "json, name=team" }),
         __metadata("design:type", String)
     ], BoxScoreTeamsHavoc.prototype, "team", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsHavoc.prototype, "total", void 0);
     return BoxScoreTeamsHavoc;
@@ -394,23 +393,23 @@ var BoxScoreTeamsPpaOverall = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=quarter1" }),
+        SpeakeasyMetadata({ data: "json, name=quarter1" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsPpaOverall.prototype, "quarter1", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter2" }),
+        SpeakeasyMetadata({ data: "json, name=quarter2" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsPpaOverall.prototype, "quarter2", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter3" }),
+        SpeakeasyMetadata({ data: "json, name=quarter3" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsPpaOverall.prototype, "quarter3", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter4" }),
+        SpeakeasyMetadata({ data: "json, name=quarter4" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsPpaOverall.prototype, "quarter4", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsPpaOverall.prototype, "total", void 0);
     return BoxScoreTeamsPpaOverall;
@@ -422,23 +421,23 @@ var BoxScoreTeamsPpaPassing = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=quarter1" }),
+        SpeakeasyMetadata({ data: "json, name=quarter1" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsPpaPassing.prototype, "quarter1", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter2" }),
+        SpeakeasyMetadata({ data: "json, name=quarter2" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsPpaPassing.prototype, "quarter2", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter3" }),
+        SpeakeasyMetadata({ data: "json, name=quarter3" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsPpaPassing.prototype, "quarter3", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter4" }),
+        SpeakeasyMetadata({ data: "json, name=quarter4" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsPpaPassing.prototype, "quarter4", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsPpaPassing.prototype, "total", void 0);
     return BoxScoreTeamsPpaPassing;
@@ -450,23 +449,23 @@ var BoxScoreTeamsPpaRushing = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=quarter1" }),
+        SpeakeasyMetadata({ data: "json, name=quarter1" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsPpaRushing.prototype, "quarter1", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter2" }),
+        SpeakeasyMetadata({ data: "json, name=quarter2" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsPpaRushing.prototype, "quarter2", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter3" }),
+        SpeakeasyMetadata({ data: "json, name=quarter3" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsPpaRushing.prototype, "quarter3", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter4" }),
+        SpeakeasyMetadata({ data: "json, name=quarter4" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsPpaRushing.prototype, "quarter4", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsPpaRushing.prototype, "total", void 0);
     return BoxScoreTeamsPpaRushing;
@@ -478,23 +477,23 @@ var BoxScoreTeamsPpa = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=overall" }),
+        SpeakeasyMetadata({ data: "json, name=overall" }),
         __metadata("design:type", BoxScoreTeamsPpaOverall)
     ], BoxScoreTeamsPpa.prototype, "overall", void 0);
     __decorate([
-        Metadata({ data: "json, name=passing" }),
+        SpeakeasyMetadata({ data: "json, name=passing" }),
         __metadata("design:type", BoxScoreTeamsPpaPassing)
     ], BoxScoreTeamsPpa.prototype, "passing", void 0);
     __decorate([
-        Metadata({ data: "json, name=plays" }),
+        SpeakeasyMetadata({ data: "json, name=plays" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsPpa.prototype, "plays", void 0);
     __decorate([
-        Metadata({ data: "json, name=rushing" }),
+        SpeakeasyMetadata({ data: "json, name=rushing" }),
         __metadata("design:type", BoxScoreTeamsPpaRushing)
     ], BoxScoreTeamsPpa.prototype, "rushing", void 0);
     __decorate([
-        Metadata({ data: "json, name=team" }),
+        SpeakeasyMetadata({ data: "json, name=team" }),
         __metadata("design:type", String)
     ], BoxScoreTeamsPpa.prototype, "team", void 0);
     return BoxScoreTeamsPpa;
@@ -506,39 +505,39 @@ var BoxScoreTeamsRushing = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=lineYards" }),
+        SpeakeasyMetadata({ data: "json, name=lineYards" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsRushing.prototype, "lineYards", void 0);
     __decorate([
-        Metadata({ data: "json, name=lineYardsAverage" }),
+        SpeakeasyMetadata({ data: "json, name=lineYardsAverage" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsRushing.prototype, "lineYardsAverage", void 0);
     __decorate([
-        Metadata({ data: "json, name=openFieldYards" }),
+        SpeakeasyMetadata({ data: "json, name=openFieldYards" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsRushing.prototype, "openFieldYards", void 0);
     __decorate([
-        Metadata({ data: "json, name=openFieldYardsAverage" }),
+        SpeakeasyMetadata({ data: "json, name=openFieldYardsAverage" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsRushing.prototype, "openFieldYardsAverage", void 0);
     __decorate([
-        Metadata({ data: "json, name=powerSuccess" }),
+        SpeakeasyMetadata({ data: "json, name=powerSuccess" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsRushing.prototype, "powerSuccess", void 0);
     __decorate([
-        Metadata({ data: "json, name=secondLevelYards" }),
+        SpeakeasyMetadata({ data: "json, name=secondLevelYards" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsRushing.prototype, "secondLevelYards", void 0);
     __decorate([
-        Metadata({ data: "json, name=secondLevelYardsAverage" }),
+        SpeakeasyMetadata({ data: "json, name=secondLevelYardsAverage" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsRushing.prototype, "secondLevelYardsAverage", void 0);
     __decorate([
-        Metadata({ data: "json, name=stuffRate" }),
+        SpeakeasyMetadata({ data: "json, name=stuffRate" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsRushing.prototype, "stuffRate", void 0);
     __decorate([
-        Metadata({ data: "json, name=team" }),
+        SpeakeasyMetadata({ data: "json, name=team" }),
         __metadata("design:type", String)
     ], BoxScoreTeamsRushing.prototype, "team", void 0);
     return BoxScoreTeamsRushing;
@@ -550,19 +549,19 @@ var BoxScoreTeamsScoringOpportunities = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=opportunities" }),
+        SpeakeasyMetadata({ data: "json, name=opportunities" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsScoringOpportunities.prototype, "opportunities", void 0);
     __decorate([
-        Metadata({ data: "json, name=points" }),
+        SpeakeasyMetadata({ data: "json, name=points" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsScoringOpportunities.prototype, "points", void 0);
     __decorate([
-        Metadata({ data: "json, name=pointsPerOpportunity" }),
+        SpeakeasyMetadata({ data: "json, name=pointsPerOpportunity" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsScoringOpportunities.prototype, "pointsPerOpportunity", void 0);
     __decorate([
-        Metadata({ data: "json, name=team" }),
+        SpeakeasyMetadata({ data: "json, name=team" }),
         __metadata("design:type", String)
     ], BoxScoreTeamsScoringOpportunities.prototype, "team", void 0);
     return BoxScoreTeamsScoringOpportunities;
@@ -574,23 +573,23 @@ var BoxScoreTeamsSuccessRatesOverall = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=quarter1" }),
+        SpeakeasyMetadata({ data: "json, name=quarter1" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsSuccessRatesOverall.prototype, "quarter1", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter2" }),
+        SpeakeasyMetadata({ data: "json, name=quarter2" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsSuccessRatesOverall.prototype, "quarter2", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter3" }),
+        SpeakeasyMetadata({ data: "json, name=quarter3" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsSuccessRatesOverall.prototype, "quarter3", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter4" }),
+        SpeakeasyMetadata({ data: "json, name=quarter4" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsSuccessRatesOverall.prototype, "quarter4", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsSuccessRatesOverall.prototype, "total", void 0);
     return BoxScoreTeamsSuccessRatesOverall;
@@ -602,23 +601,23 @@ var BoxScoreTeamsSuccessRatesPassingDowns = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=quarter1" }),
+        SpeakeasyMetadata({ data: "json, name=quarter1" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsSuccessRatesPassingDowns.prototype, "quarter1", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter2" }),
+        SpeakeasyMetadata({ data: "json, name=quarter2" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsSuccessRatesPassingDowns.prototype, "quarter2", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter3" }),
+        SpeakeasyMetadata({ data: "json, name=quarter3" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsSuccessRatesPassingDowns.prototype, "quarter3", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter4" }),
+        SpeakeasyMetadata({ data: "json, name=quarter4" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsSuccessRatesPassingDowns.prototype, "quarter4", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsSuccessRatesPassingDowns.prototype, "total", void 0);
     return BoxScoreTeamsSuccessRatesPassingDowns;
@@ -630,23 +629,23 @@ var BoxScoreTeamsSuccessRatesStandardDowns = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=quarter1" }),
+        SpeakeasyMetadata({ data: "json, name=quarter1" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsSuccessRatesStandardDowns.prototype, "quarter1", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter2" }),
+        SpeakeasyMetadata({ data: "json, name=quarter2" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsSuccessRatesStandardDowns.prototype, "quarter2", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter3" }),
+        SpeakeasyMetadata({ data: "json, name=quarter3" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsSuccessRatesStandardDowns.prototype, "quarter3", void 0);
     __decorate([
-        Metadata({ data: "json, name=quarter4" }),
+        SpeakeasyMetadata({ data: "json, name=quarter4" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsSuccessRatesStandardDowns.prototype, "quarter4", void 0);
     __decorate([
-        Metadata({ data: "json, name=total" }),
+        SpeakeasyMetadata({ data: "json, name=total" }),
         __metadata("design:type", Number)
     ], BoxScoreTeamsSuccessRatesStandardDowns.prototype, "total", void 0);
     return BoxScoreTeamsSuccessRatesStandardDowns;
@@ -658,19 +657,19 @@ var BoxScoreTeamsSuccessRates = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=overall" }),
+        SpeakeasyMetadata({ data: "json, name=overall" }),
         __metadata("design:type", BoxScoreTeamsSuccessRatesOverall)
     ], BoxScoreTeamsSuccessRates.prototype, "overall", void 0);
     __decorate([
-        Metadata({ data: "json, name=passingDowns" }),
+        SpeakeasyMetadata({ data: "json, name=passingDowns" }),
         __metadata("design:type", BoxScoreTeamsSuccessRatesPassingDowns)
     ], BoxScoreTeamsSuccessRates.prototype, "passingDowns", void 0);
     __decorate([
-        Metadata({ data: "json, name=standardDowns" }),
+        SpeakeasyMetadata({ data: "json, name=standardDowns" }),
         __metadata("design:type", BoxScoreTeamsSuccessRatesStandardDowns)
     ], BoxScoreTeamsSuccessRates.prototype, "standardDowns", void 0);
     __decorate([
-        Metadata({ data: "json, name=team" }),
+        SpeakeasyMetadata({ data: "json, name=team" }),
         __metadata("design:type", String)
     ], BoxScoreTeamsSuccessRates.prototype, "team", void 0);
     return BoxScoreTeamsSuccessRates;
@@ -682,35 +681,35 @@ var BoxScoreTeams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=cumulativePpa", elemType: shared.BoxScoreTeamsCumulativePpa }),
+        SpeakeasyMetadata({ data: "json, name=cumulativePpa", elemType: BoxScoreTeamsCumulativePpa }),
         __metadata("design:type", Array)
     ], BoxScoreTeams.prototype, "cumulativePpa", void 0);
     __decorate([
-        Metadata({ data: "json, name=explosiveness", elemType: shared.BoxScoreTeamsExplosiveness }),
+        SpeakeasyMetadata({ data: "json, name=explosiveness", elemType: BoxScoreTeamsExplosiveness }),
         __metadata("design:type", Array)
     ], BoxScoreTeams.prototype, "explosiveness", void 0);
     __decorate([
-        Metadata({ data: "json, name=fieldPosition", elemType: shared.BoxScoreTeamsFieldPosition }),
+        SpeakeasyMetadata({ data: "json, name=fieldPosition", elemType: BoxScoreTeamsFieldPosition }),
         __metadata("design:type", Array)
     ], BoxScoreTeams.prototype, "fieldPosition", void 0);
     __decorate([
-        Metadata({ data: "json, name=havoc", elemType: shared.BoxScoreTeamsHavoc }),
+        SpeakeasyMetadata({ data: "json, name=havoc", elemType: BoxScoreTeamsHavoc }),
         __metadata("design:type", Array)
     ], BoxScoreTeams.prototype, "havoc", void 0);
     __decorate([
-        Metadata({ data: "json, name=ppa", elemType: shared.BoxScoreTeamsPpa }),
+        SpeakeasyMetadata({ data: "json, name=ppa", elemType: BoxScoreTeamsPpa }),
         __metadata("design:type", Array)
     ], BoxScoreTeams.prototype, "ppa", void 0);
     __decorate([
-        Metadata({ data: "json, name=rushing", elemType: shared.BoxScoreTeamsRushing }),
+        SpeakeasyMetadata({ data: "json, name=rushing", elemType: BoxScoreTeamsRushing }),
         __metadata("design:type", Array)
     ], BoxScoreTeams.prototype, "rushing", void 0);
     __decorate([
-        Metadata({ data: "json, name=scoringOpportunities", elemType: shared.BoxScoreTeamsScoringOpportunities }),
+        SpeakeasyMetadata({ data: "json, name=scoringOpportunities", elemType: BoxScoreTeamsScoringOpportunities }),
         __metadata("design:type", Array)
     ], BoxScoreTeams.prototype, "scoringOpportunities", void 0);
     __decorate([
-        Metadata({ data: "json, name=successRates", elemType: shared.BoxScoreTeamsSuccessRates }),
+        SpeakeasyMetadata({ data: "json, name=successRates", elemType: BoxScoreTeamsSuccessRates }),
         __metadata("design:type", Array)
     ], BoxScoreTeams.prototype, "successRates", void 0);
     return BoxScoreTeams;
@@ -722,11 +721,11 @@ var BoxScore = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=players" }),
+        SpeakeasyMetadata({ data: "json, name=players" }),
         __metadata("design:type", BoxScorePlayers)
     ], BoxScore.prototype, "players", void 0);
     __decorate([
-        Metadata({ data: "json, name=teams" }),
+        SpeakeasyMetadata({ data: "json, name=teams" }),
         __metadata("design:type", BoxScoreTeams)
     ], BoxScore.prototype, "teams", void 0);
     return BoxScore;

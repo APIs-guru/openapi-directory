@@ -1,18 +1,18 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StatusCount } from "./statuscount";
 
 
+
 export class PagingInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Skip" })
+  @SpeakeasyMetadata({ data: "json, name=Skip" })
   skip?: number;
 
-  @Metadata({ data: "json, name=StatusCounts", elemType: shared.StatusCount })
+  @SpeakeasyMetadata({ data: "json, name=StatusCounts", elemType: StatusCount })
   statusCounts?: StatusCount[];
 
-  @Metadata({ data: "json, name=Take" })
+  @SpeakeasyMetadata({ data: "json, name=Take" })
   take?: number;
 
-  @Metadata({ data: "json, name=Total" })
+  @SpeakeasyMetadata({ data: "json, name=Total" })
   total?: number;
 }

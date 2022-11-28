@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // FederationParameters
 /**
  * Configuration information when authentication mode is FEDERATED.
@@ -33,27 +33,27 @@ var FederationParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=applicationCallBackURL" }),
+        SpeakeasyMetadata({ data: "json, name=applicationCallBackURL" }),
         __metadata("design:type", String)
     ], FederationParameters.prototype, "applicationCallBackUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=attributeMap" }),
+        SpeakeasyMetadata({ data: "json, name=attributeMap" }),
         __metadata("design:type", Map)
     ], FederationParameters.prototype, "attributeMap", void 0);
     __decorate([
-        Metadata({ data: "json, name=federationProviderName" }),
+        SpeakeasyMetadata({ data: "json, name=federationProviderName" }),
         __metadata("design:type", String)
     ], FederationParameters.prototype, "federationProviderName", void 0);
     __decorate([
-        Metadata({ data: "json, name=federationURN" }),
+        SpeakeasyMetadata({ data: "json, name=federationURN" }),
         __metadata("design:type", String)
     ], FederationParameters.prototype, "federationUrn", void 0);
     __decorate([
-        Metadata({ data: "json, name=samlMetadataDocument" }),
+        SpeakeasyMetadata({ data: "json, name=samlMetadataDocument" }),
         __metadata("design:type", String)
     ], FederationParameters.prototype, "samlMetadataDocument", void 0);
     __decorate([
-        Metadata({ data: "json, name=samlMetadataURL" }),
+        SpeakeasyMetadata({ data: "json, name=samlMetadataURL" }),
         __metadata("design:type", String)
     ], FederationParameters.prototype, "samlMetadataUrl", void 0);
     return FederationParameters;

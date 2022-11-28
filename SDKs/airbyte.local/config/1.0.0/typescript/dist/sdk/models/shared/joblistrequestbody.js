@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Pagination } from "./pagination";
 var JobListRequestBody = /** @class */ (function (_super) {
     __extends(JobListRequestBody, _super);
@@ -30,15 +30,15 @@ var JobListRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=configId" }),
+        SpeakeasyMetadata({ data: "json, name=configId" }),
         __metadata("design:type", String)
     ], JobListRequestBody.prototype, "configId", void 0);
     __decorate([
-        Metadata({ data: "json, name=configTypes" }),
+        SpeakeasyMetadata({ data: "json, name=configTypes" }),
         __metadata("design:type", Array)
     ], JobListRequestBody.prototype, "configTypes", void 0);
     __decorate([
-        Metadata({ data: "json, name=pagination" }),
+        SpeakeasyMetadata({ data: "json, name=pagination" }),
         __metadata("design:type", Pagination)
     ], JobListRequestBody.prototype, "pagination", void 0);
     return JobListRequestBody;

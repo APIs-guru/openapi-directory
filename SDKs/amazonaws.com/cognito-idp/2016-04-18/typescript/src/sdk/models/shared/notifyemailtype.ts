@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NotifyEmailType
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The notify email type.
 **/
 export class NotifyEmailType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=HtmlBody" })
+  @SpeakeasyMetadata({ data: "json, name=HtmlBody" })
   htmlBody?: string;
 
-  @Metadata({ data: "json, name=Subject" })
+  @SpeakeasyMetadata({ data: "json, name=Subject" })
   subject: string;
 
-  @Metadata({ data: "json, name=TextBody" })
+  @SpeakeasyMetadata({ data: "json, name=TextBody" })
   textBody?: string;
 }

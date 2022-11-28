@@ -1,62 +1,63 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetuserConversationsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=user_id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=user_id" })
   userId: string;
 }
 
 
-export class GetuserConversationsRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetuserConversationsPathParams;
-}
-
-
 export class GetuserConversations200ApplicationJsonTimestamp extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created" })
+  @SpeakeasyMetadata({ data: "json, name=created" })
   created?: string;
 }
 
 
 export class GetuserConversations200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=display_name" })
+  @SpeakeasyMetadata({ data: "json, name=display_name" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=href" })
+  @SpeakeasyMetadata({ data: "json, name=href" })
   href?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=image_url" })
+  @SpeakeasyMetadata({ data: "json, name=image_url" })
   imageUrl?: string;
 
-  @Metadata({ data: "json, name=member_id" })
+  @SpeakeasyMetadata({ data: "json, name=member_id" })
   memberId?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=sequence_number" })
+  @SpeakeasyMetadata({ data: "json, name=sequence_number" })
   sequenceNumber?: number;
 
-  @Metadata({ data: "json, name=state" })
+  @SpeakeasyMetadata({ data: "json, name=state" })
   state?: shared.MemberStateEnum;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp?: GetuserConversations200ApplicationJsonTimestamp;
 }
 
 
+export class GetuserConversationsRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetuserConversationsPathParams;
+}
+
+
 export class GetuserConversationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: operations.GetuserConversations200ApplicationJson })
+  @SpeakeasyMetadata({ elemType: GetuserConversations200ApplicationJson })
   getuserConversations200ApplicationJsonObjects?: GetuserConversations200ApplicationJson[];
 }

@@ -4,8 +4,8 @@ from typing import Optional
 
 @dataclass
 class Destiny2SearchDestinyEntitiesPathParams:
-    search_term: str = field(default=None, metadata={'path_param': { 'field_name': 'searchTerm', 'style': 'simple', 'explode': False }})
-    type: str = field(default=None, metadata={'path_param': { 'field_name': 'type', 'style': 'simple', 'explode': False }})
+    search_term: str = field(metadata={'path_param': { 'field_name': 'searchTerm', 'style': 'simple', 'explode': False }})
+    type: str = field(metadata={'path_param': { 'field_name': 'type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -15,13 +15,13 @@ class Destiny2SearchDestinyEntitiesQueryParams:
 
 @dataclass
 class Destiny2SearchDestinyEntitiesRequest:
-    path_params: Destiny2SearchDestinyEntitiesPathParams = field(default=None)
-    query_params: Destiny2SearchDestinyEntitiesQueryParams = field(default=None)
+    path_params: Destiny2SearchDestinyEntitiesPathParams = field()
+    query_params: Destiny2SearchDestinyEntitiesQueryParams = field()
     
 
 @dataclass
 class Destiny2SearchDestinyEntitiesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

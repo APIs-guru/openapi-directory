@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BuildBatch } from "./buildbatch";
 
 
+
 export class BatchGetBuildBatchesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buildBatches", elemType: shared.BuildBatch })
+  @SpeakeasyMetadata({ data: "json, name=buildBatches", elemType: BuildBatch })
   buildBatches?: BuildBatch[];
 
-  @Metadata({ data: "json, name=buildBatchesNotFound" })
+  @SpeakeasyMetadata({ data: "json, name=buildBatchesNotFound" })
   buildBatchesNotFound?: string[];
 }

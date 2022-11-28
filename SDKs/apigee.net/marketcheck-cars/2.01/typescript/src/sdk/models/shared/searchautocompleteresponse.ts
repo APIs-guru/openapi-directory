@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SearchAutoCompleteResponseTerms extends SpeakeasyBase {
-  @Metadata({ data: "json, name=count" })
+  @SpeakeasyMetadata({ data: "json, name=count" })
   count?: number;
 
-  @Metadata({ data: "json, name=item" })
+  @SpeakeasyMetadata({ data: "json, name=item" })
   item?: string;
 }
 
@@ -16,6 +16,6 @@ export class SearchAutoCompleteResponseTerms extends SpeakeasyBase {
  * Search auto complete query response
 **/
 export class SearchAutoCompleteResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=terms", elemType: shared.SearchAutoCompleteResponseTerms })
+  @SpeakeasyMetadata({ data: "json, name=terms", elemType: SearchAutoCompleteResponseTerms })
   terms?: SearchAutoCompleteResponseTerms[];
 }

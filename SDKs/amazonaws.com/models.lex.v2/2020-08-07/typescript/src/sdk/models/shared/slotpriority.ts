@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SlotPriority
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Sets the priority that Amazon Lex should use when eliciting slot values from a user.
 **/
 export class SlotPriority extends SpeakeasyBase {
-  @Metadata({ data: "json, name=priority" })
+  @SpeakeasyMetadata({ data: "json, name=priority" })
   priority: number;
 
-  @Metadata({ data: "json, name=slotId" })
+  @SpeakeasyMetadata({ data: "json, name=slotId" })
   slotId: string;
 }

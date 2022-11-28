@@ -1,23 +1,24 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ComptageRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.ComptageRequest;
 }
 
 
 export class ComptageResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   comptageReponse?: shared.ComptageReponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   erreur?: shared.Erreur;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

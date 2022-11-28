@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // IdentitytoolkitRelyingpartyDeleteAccountRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Request to delete account.
 **/
 export class IdentitytoolkitRelyingpartyDeleteAccountRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=delegatedProjectNumber" })
+  @SpeakeasyMetadata({ data: "json, name=delegatedProjectNumber" })
   delegatedProjectNumber?: string;
 
-  @Metadata({ data: "json, name=idToken" })
+  @SpeakeasyMetadata({ data: "json, name=idToken" })
   idToken?: string;
 
-  @Metadata({ data: "json, name=localId" })
+  @SpeakeasyMetadata({ data: "json, name=localId" })
   localId?: string;
 }

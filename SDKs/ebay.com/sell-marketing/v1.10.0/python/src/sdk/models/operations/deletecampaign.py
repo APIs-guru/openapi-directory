@@ -1,25 +1,25 @@
 from dataclasses import dataclass, field
-
+from sdk.models import shared
 
 
 @dataclass
 class DeleteCampaignPathParams:
-    campaign_id: str = field(default=None, metadata={'path_param': { 'field_name': 'campaign_id', 'style': 'simple', 'explode': False }})
+    campaign_id: str = field(metadata={'path_param': { 'field_name': 'campaign_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DeleteCampaignSecurity:
-    api_auth: shared.SchemeAPIAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    api_auth: shared.SchemeAPIAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DeleteCampaignRequest:
-    path_params: DeleteCampaignPathParams = field(default=None)
-    security: DeleteCampaignSecurity = field(default=None)
+    path_params: DeleteCampaignPathParams = field()
+    security: DeleteCampaignSecurity = field()
     
 
 @dataclass
 class DeleteCampaignResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

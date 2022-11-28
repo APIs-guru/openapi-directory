@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class ParametersGetv1V1ParametersGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=limit" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
   limit?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=order_by" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order_by" })
   orderBy?: any;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" })
   page?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" })
   sort?: shared.SortEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sourceId" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sourceId" })
   sourceId?: number[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sourceName" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sourceName" })
   sourceName?: string[];
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=sourceSlug" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sourceSlug" })
   sourceSlug?: string[];
 }
 
 
 export class ParametersGetv1V1ParametersGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ParametersGetv1V1ParametersGetQueryParams;
 }
 
 
 export class ParametersGetv1V1ParametersGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   openAqParametersResult?: shared.OpenAqParametersResult;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

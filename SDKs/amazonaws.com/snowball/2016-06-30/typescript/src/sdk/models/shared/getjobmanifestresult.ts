@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetJobManifestResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ManifestURI" })
+  @SpeakeasyMetadata({ data: "json, name=ManifestURI" })
   manifestUri?: string;
 }

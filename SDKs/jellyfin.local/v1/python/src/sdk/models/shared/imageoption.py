@@ -1,13 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import imagetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ImageOption:
-    limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Limit' }})
-    min_width: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinWidth' }})
-    type: Optional[imagetype_enum.ImageTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Type' }})
+    limit: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Limit') }})
+    min_width: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MinWidth') }})
+    type: Optional[ImageTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Type') }})
     

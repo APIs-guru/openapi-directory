@@ -1,5 +1,7 @@
 package shared
 
+// VideoParameters
+// The <code>VideoParameters</code> structure.
 type VideoParameters struct {
 	AspectRatio        *string           `json:"AspectRatio,omitempty"`
 	BitRate            *string           `json:"BitRate,omitempty"`

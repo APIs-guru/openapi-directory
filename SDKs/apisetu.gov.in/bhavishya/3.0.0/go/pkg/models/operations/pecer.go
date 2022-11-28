@@ -30,11 +30,6 @@ type PecerSecurity struct {
 	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
-type PecerRequest struct {
-	Request  *PecerRequestBody `request:"mediaType=application/json"`
-	Security PecerSecurity
-}
-
 type Pecer400ApplicationJSONErrorEnum string
 
 const (
@@ -164,6 +159,11 @@ const (
 type Pecer504ApplicationJSON struct {
 	Error            *Pecer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
 	ErrorDescription *Pecer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
+}
+
+type PecerRequest struct {
+	Request  *PecerRequestBody `request:"mediaType=application/json"`
+	Security PecerSecurity
 }
 
 type PecerResponse struct {

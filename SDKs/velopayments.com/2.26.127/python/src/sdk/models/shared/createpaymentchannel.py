@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class CreatePaymentChannelCountryCodeEnum(str, Enum):
     AF = "AF"
@@ -262,11 +264,11 @@ class CreatePaymentChannelCurrencyEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreatePaymentChannel:
-    account_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountName' }})
-    account_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountNumber' }})
-    country_code: CreatePaymentChannelCountryCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'countryCode' }})
-    currency: CreatePaymentChannelCurrencyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
-    iban: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iban' }})
-    payment_channel_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentChannelName' }})
-    routing_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'routingNumber' }})
+    account_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountName') }})
+    country_code: CreatePaymentChannelCountryCodeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('countryCode') }})
+    currency: CreatePaymentChannelCurrencyEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('currency') }})
+    account_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('accountNumber') }})
+    iban: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('iban') }})
+    payment_channel_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('paymentChannelName') }})
+    routing_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('routingNumber') }})
     

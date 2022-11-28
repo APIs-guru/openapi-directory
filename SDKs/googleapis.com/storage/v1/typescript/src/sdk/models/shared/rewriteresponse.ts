@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Object } from "./object";
+
 
 
 // RewriteResponse
@@ -7,21 +8,21 @@ import { Object } from "./object";
  * A rewrite response.
 **/
 export class RewriteResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=done" })
+  @SpeakeasyMetadata({ data: "json, name=done" })
   done?: boolean;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=objectSize" })
+  @SpeakeasyMetadata({ data: "json, name=objectSize" })
   objectSize?: string;
 
-  @Metadata({ data: "json, name=resource" })
+  @SpeakeasyMetadata({ data: "json, name=resource" })
   resource?: Object;
 
-  @Metadata({ data: "json, name=rewriteToken" })
+  @SpeakeasyMetadata({ data: "json, name=rewriteToken" })
   rewriteToken?: string;
 
-  @Metadata({ data: "json, name=totalBytesRewritten" })
+  @SpeakeasyMetadata({ data: "json, name=totalBytesRewritten" })
   totalBytesRewritten?: string;
 }

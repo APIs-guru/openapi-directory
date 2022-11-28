@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class MetricMetricSourceEnum(str, Enum):
     METRIC_SOURCE_UNSPECIFIED = "METRIC_SOURCE_UNSPECIFIED"
@@ -15,6 +17,10 @@ class MetricMetricSourceEnum(str, Enum):
 @dataclass_json
 @dataclass
 class Metric:
-    metric_overrides: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metricOverrides' }})
-    metric_source: Optional[MetricMetricSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metricSource' }})
+    r"""Metric
+    A Dataproc OSS metric.
+    """
+    
+    metric_overrides: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metricOverrides') }})
+    metric_source: Optional[MetricMetricSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('metricSource') }})
     

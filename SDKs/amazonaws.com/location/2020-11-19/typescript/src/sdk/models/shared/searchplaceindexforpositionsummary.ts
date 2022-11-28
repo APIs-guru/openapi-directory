@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // SearchPlaceIndexForPositionSummary
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A summary of the reverse geocoding request sent using <code>SearchPlaceIndexForPosition</code>.
 **/
 export class SearchPlaceIndexForPositionSummary extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DataSource" })
+  @SpeakeasyMetadata({ data: "json, name=DataSource" })
   dataSource: string;
 
-  @Metadata({ data: "json, name=MaxResults" })
+  @SpeakeasyMetadata({ data: "json, name=MaxResults" })
   maxResults?: number;
 
-  @Metadata({ data: "json, name=Position" })
+  @SpeakeasyMetadata({ data: "json, name=Position" })
   position: number[];
 }

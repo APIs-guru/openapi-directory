@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { BucketEntry } from "./bucketentry";
 export declare class BucketResp extends SpeakeasyBase {
     brandName?: string;

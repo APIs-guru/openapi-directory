@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Address extends SpeakeasyBase {
-  @Metadata({ data: "json, name=buildingNumber" })
+  @SpeakeasyMetadata({ data: "json, name=buildingNumber" })
   buildingNumber?: string;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country: string;
 
-  @Metadata({ data: "json, name=postCode" })
+  @SpeakeasyMetadata({ data: "json, name=postCode" })
   postCode?: string;
 
-  @Metadata({ data: "json, name=streetName" })
+  @SpeakeasyMetadata({ data: "json, name=streetName" })
   streetName?: string;
 
-  @Metadata({ data: "json, name=townName" })
+  @SpeakeasyMetadata({ data: "json, name=townName" })
   townName?: string;
 }

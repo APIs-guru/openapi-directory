@@ -9,6 +9,8 @@ const (
 	AgeRangeTypeAgeRangeEnumTwentyOneOrOlder    AgeRangeTypeAgeRangeEnum = "TWENTY_ONE_OR_OLDER"
 )
 
+// AgeRangeType
+// A person's age range.
 type AgeRangeType struct {
 	AgeRange *AgeRangeTypeAgeRangeEnum `json:"ageRange,omitempty"`
 	Metadata *FieldMetadata            `json:"metadata,omitempty"`

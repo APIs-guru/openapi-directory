@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRecaptchaenterpriseV1AndroidKeySettings
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Settings specific to keys that can be used by Android apps.
 **/
 export class GoogleCloudRecaptchaenterpriseV1AndroidKeySettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=allowAllPackageNames" })
+  @SpeakeasyMetadata({ data: "json, name=allowAllPackageNames" })
   allowAllPackageNames?: boolean;
 
-  @Metadata({ data: "json, name=allowedPackageNames" })
+  @SpeakeasyMetadata({ data: "json, name=allowedPackageNames" })
   allowedPackageNames?: string[];
 }

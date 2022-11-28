@@ -1,6 +1,7 @@
 
 
+
 export enum EfsTransitEncryptionEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED"
 }

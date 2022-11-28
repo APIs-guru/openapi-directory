@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CultureDto
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Class CultureDto.
 **/
 export class CultureDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=ThreeLetterISOLanguageName" })
+  @SpeakeasyMetadata({ data: "json, name=ThreeLetterISOLanguageName" })
   threeLetterIsoLanguageName?: string;
 
-  @Metadata({ data: "json, name=ThreeLetterISOLanguageNames" })
+  @SpeakeasyMetadata({ data: "json, name=ThreeLetterISOLanguageNames" })
   threeLetterIsoLanguageNames?: string[];
 
-  @Metadata({ data: "json, name=TwoLetterISOLanguageName" })
+  @SpeakeasyMetadata({ data: "json, name=TwoLetterISOLanguageName" })
   twoLetterIsoLanguageName?: string;
 }

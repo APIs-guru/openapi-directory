@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 class UsersSetPrimaryEmailVisibilityForAuthenticatedRequestBodyVisibilityEnum(str, Enum):
@@ -11,8 +13,8 @@ class UsersSetPrimaryEmailVisibilityForAuthenticatedRequestBodyVisibilityEnum(st
 @dataclass_json
 @dataclass
 class UsersSetPrimaryEmailVisibilityForAuthenticatedRequestBody:
-    email: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
-    visibility: UsersSetPrimaryEmailVisibilityForAuthenticatedRequestBodyVisibilityEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'visibility' }})
+    email: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('email') }})
+    visibility: UsersSetPrimaryEmailVisibilityForAuthenticatedRequestBodyVisibilityEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('visibility') }})
     
 
 @dataclass
@@ -22,8 +24,8 @@ class UsersSetPrimaryEmailVisibilityForAuthenticatedRequest:
 
 @dataclass
 class UsersSetPrimaryEmailVisibilityForAuthenticatedResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     emails: Optional[List[shared.Email]] = field(default=None)
     validation_error: Optional[shared.ValidationError] = field(default=None)

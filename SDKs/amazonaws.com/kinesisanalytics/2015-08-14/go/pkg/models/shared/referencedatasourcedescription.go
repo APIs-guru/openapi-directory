@@ -1,5 +1,7 @@
 package shared
 
+// ReferenceDataSourceDescription
+// Describes the reference data source configured for an application.
 type ReferenceDataSourceDescription struct {
 	ReferenceID                      string                           `json:"ReferenceId"`
 	ReferenceSchema                  *SourceSchema                    `json:"ReferenceSchema,omitempty"`

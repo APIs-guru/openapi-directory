@@ -1,5 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FieldMetadata } from "./fieldmetadata";
+import { FieldMetadataInput } from "./fieldmetadata";
+
 
 
 // UserDefined
@@ -7,12 +9,28 @@ import { FieldMetadata } from "./fieldmetadata";
  * Arbitrary user data that is populated by the end users.
 **/
 export class UserDefined extends SpeakeasyBase {
-  @Metadata({ data: "json, name=key" })
+  @SpeakeasyMetadata({ data: "json, name=key" })
   key?: string;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: FieldMetadata;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
+  value?: string;
+}
+
+
+// UserDefinedInput
+/** 
+ * Arbitrary user data that is populated by the end users.
+**/
+export class UserDefinedInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=key" })
+  key?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
+  metadata?: FieldMetadataInput;
+
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

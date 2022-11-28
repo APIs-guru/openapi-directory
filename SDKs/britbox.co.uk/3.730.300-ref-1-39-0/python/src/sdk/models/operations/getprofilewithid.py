@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetProfileWithIDPathParams:
-    id: str = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
+    id: str = field(metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -16,20 +17,20 @@ class GetProfileWithIDQueryParams:
 
 @dataclass
 class GetProfileWithIDSecurity:
-    account_auth: shared.SchemeAccountAuth = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    account_auth: shared.SchemeAccountAuth = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetProfileWithIDRequest:
-    path_params: GetProfileWithIDPathParams = field(default=None)
-    query_params: GetProfileWithIDQueryParams = field(default=None)
-    security: GetProfileWithIDSecurity = field(default=None)
+    path_params: GetProfileWithIDPathParams = field()
+    query_params: GetProfileWithIDQueryParams = field()
+    security: GetProfileWithIDSecurity = field()
     
 
 @dataclass
 class GetProfileWithIDResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     profile_summary: Optional[shared.ProfileSummary] = field(default=None)
     service_error: Optional[shared.ServiceError] = field(default=None)
-    status_code: int = field(default=None)
     

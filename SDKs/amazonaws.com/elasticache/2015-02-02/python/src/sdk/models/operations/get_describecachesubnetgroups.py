@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDescribeCacheSubnetGroupsActionEnum(str, Enum):
     DESCRIBE_CACHE_SUBNET_GROUPS = "DescribeCacheSubnetGroups"
@@ -10,11 +14,11 @@ class GetDescribeCacheSubnetGroupsVersionEnum(str, Enum):
 
 @dataclass
 class GetDescribeCacheSubnetGroupsQueryParams:
-    action: GetDescribeCacheSubnetGroupsActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetDescribeCacheSubnetGroupsActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetDescribeCacheSubnetGroupsVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cache_subnet_group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CacheSubnetGroupName', 'style': 'form', 'explode': True }})
     marker: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'Marker', 'style': 'form', 'explode': True }})
     max_records: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'MaxRecords', 'style': 'form', 'explode': True }})
-    version: GetDescribeCacheSubnetGroupsVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -30,13 +34,13 @@ class GetDescribeCacheSubnetGroupsHeaders:
 
 @dataclass
 class GetDescribeCacheSubnetGroupsRequest:
-    query_params: GetDescribeCacheSubnetGroupsQueryParams = field(default=None)
-    headers: GetDescribeCacheSubnetGroupsHeaders = field(default=None)
+    headers: GetDescribeCacheSubnetGroupsHeaders = field()
+    query_params: GetDescribeCacheSubnetGroupsQueryParams = field()
     
 
 @dataclass
 class GetDescribeCacheSubnetGroupsResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

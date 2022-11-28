@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-var PostV05UsersAuthOnConfirmServers = []string{
+var PostV05UsersAuthOnConfirmServerList = []string{
 	"https://your-hrp-server.com",
 }
 

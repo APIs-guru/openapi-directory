@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CaCertificateDescription } from "./cacertificatedescription";
 import { RegistrationConfig } from "./registrationconfig";
+
 
 
 // DescribeCaCertificateResponse
@@ -8,9 +9,9 @@ import { RegistrationConfig } from "./registrationconfig";
  * The output from the DescribeCACertificate operation.
 **/
 export class DescribeCaCertificateResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateDescription" })
+  @SpeakeasyMetadata({ data: "json, name=certificateDescription" })
   certificateDescription?: CaCertificateDescription;
 
-  @Metadata({ data: "json, name=registrationConfig" })
+  @SpeakeasyMetadata({ data: "json, name=registrationConfig" })
   registrationConfig?: RegistrationConfig;
 }

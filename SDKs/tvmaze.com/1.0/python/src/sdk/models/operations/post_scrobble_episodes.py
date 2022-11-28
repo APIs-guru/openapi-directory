@@ -1,14 +1,15 @@
 from dataclasses import dataclass, field
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class PostScrobbleEpisodesRequestBody:
-    episode_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'episode_id' }})
-    marked_at: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'marked_at' }})
-    type: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    episode_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('episode_id') }})
+    marked_at: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('marked_at') }})
+    type: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('type') }})
     
 
 @dataclass
@@ -18,7 +19,7 @@ class PostScrobbleEpisodesRequest:
 
 @dataclass
 class PostScrobbleEpisodesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bulk_response: Optional[List[Any]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var DeletePensionRevisionByNumberPathParams = /** @class */ (function (_super) {
     __extends(DeletePensionRevisionByNumberPathParams, _super);
@@ -30,15 +30,15 @@ var DeletePensionRevisionByNumberPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
         __metadata("design:type", String)
     ], DeletePensionRevisionByNumberPathParams.prototype, "employerId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=PensionId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=PensionId" }),
         __metadata("design:type", String)
     ], DeletePensionRevisionByNumberPathParams.prototype, "pensionId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=RevisionNumber" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=RevisionNumber" }),
         __metadata("design:type", String)
     ], DeletePensionRevisionByNumberPathParams.prototype, "revisionNumber", void 0);
     return DeletePensionRevisionByNumberPathParams;
@@ -50,11 +50,11 @@ var DeletePensionRevisionByNumberHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
         __metadata("design:type", String)
     ], DeletePensionRevisionByNumberHeaders.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Authorization" }),
         __metadata("design:type", String)
     ], DeletePensionRevisionByNumberHeaders.prototype, "authorization", void 0);
     return DeletePensionRevisionByNumberHeaders;
@@ -66,11 +66,11 @@ var DeletePensionRevisionByNumberRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeletePensionRevisionByNumberPathParams)
     ], DeletePensionRevisionByNumberRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", DeletePensionRevisionByNumberHeaders)
     ], DeletePensionRevisionByNumberRequest.prototype, "headers", void 0);
     return DeletePensionRevisionByNumberRequest;
@@ -82,15 +82,15 @@ var DeletePensionRevisionByNumberResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], DeletePensionRevisionByNumberResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.ErrorModel)
     ], DeletePensionRevisionByNumberResponse.prototype, "errorModel", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], DeletePensionRevisionByNumberResponse.prototype, "statusCode", void 0);
     return DeletePensionRevisionByNumberResponse;

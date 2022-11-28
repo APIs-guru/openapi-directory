@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import snapshotlimits
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetSnapshotLimitsResult:
-    snapshot_limits: Optional[snapshotlimits.SnapshotLimits] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SnapshotLimits' }})
+    r"""GetSnapshotLimitsResult
+    Contains the results of the <a>GetSnapshotLimits</a> operation.
+    """
+    
+    snapshot_limits: Optional[SnapshotLimits] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('SnapshotLimits') }})
     

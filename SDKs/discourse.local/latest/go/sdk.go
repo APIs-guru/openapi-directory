@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://discourse.local",
 	"https://{defaultHost}",
 }
@@ -19,9 +19,13 @@ type HTTPClient interface {
 }
 
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+
+	_serverURL  string
+	_language   string
+	_sdkVersion string
+	_genVersion string
 }
 
 type SDKOption func(*SDK)
@@ -32,27 +36,45 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		sdk._securityClient = sdk._defaultClient
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// DeleteAdminBadgesIDJSON - Delete badge
 func (s *SDK) DeleteAdminBadgesIDJSON(ctx context.Context, request operations.DeleteAdminBadgesIDJSONRequest) (*operations.DeleteAdminBadgesIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/admin/badges/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -60,7 +82,7 @@ func (s *SDK) DeleteAdminBadgesIDJSON(ctx context.Context, request operations.De
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -81,8 +103,9 @@ func (s *SDK) DeleteAdminBadgesIDJSON(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DeleteAdminGroupsIDJSON - Delete a group
 func (s *SDK) DeleteAdminGroupsIDJSON(ctx context.Context, request operations.DeleteAdminGroupsIDJSONRequest) (*operations.DeleteAdminGroupsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/admin/groups/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -90,7 +113,7 @@ func (s *SDK) DeleteAdminGroupsIDJSON(ctx context.Context, request operations.De
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -120,8 +143,9 @@ func (s *SDK) DeleteAdminGroupsIDJSON(ctx context.Context, request operations.De
 	return res, nil
 }
 
+// DeleteAdminUsersIDJSON - Delete a user
 func (s *SDK) DeleteAdminUsersIDJSON(ctx context.Context, request operations.DeleteAdminUsersIDJSONRequest) (*operations.DeleteAdminUsersIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/admin/users/{id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -136,7 +160,7 @@ func (s *SDK) DeleteAdminUsersIDJSON(ctx context.Context, request operations.Del
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -166,8 +190,9 @@ func (s *SDK) DeleteAdminUsersIDJSON(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteGroupsIDMembersJSON - Remove group members
 func (s *SDK) DeleteGroupsIDMembersJSON(ctx context.Context, request operations.DeleteGroupsIDMembersJSONRequest) (*operations.DeleteGroupsIDMembersJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/groups/{id}/members.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -182,7 +207,7 @@ func (s *SDK) DeleteGroupsIDMembersJSON(ctx context.Context, request operations.
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -212,8 +237,9 @@ func (s *SDK) DeleteGroupsIDMembersJSON(ctx context.Context, request operations.
 	return res, nil
 }
 
+// DeleteTIDJSON - Remove a topic
 func (s *SDK) DeleteTIDJSON(ctx context.Context, request operations.DeleteTIDJSONRequest) (*operations.DeleteTIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/t/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -223,7 +249,7 @@ func (s *SDK) DeleteTIDJSON(ctx context.Context, request operations.DeleteTIDJSO
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -244,8 +270,9 @@ func (s *SDK) DeleteTIDJSON(ctx context.Context, request operations.DeleteTIDJSO
 	return res, nil
 }
 
+// GetAdminBackupsFilename - Download backup
 func (s *SDK) GetAdminBackupsFilename(ctx context.Context, request operations.GetAdminBackupsFilenameRequest) (*operations.GetAdminBackupsFilenameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/admin/backups/{filename}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -255,7 +282,7 @@ func (s *SDK) GetAdminBackupsFilename(ctx context.Context, request operations.Ge
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -276,8 +303,9 @@ func (s *SDK) GetAdminBackupsFilename(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetAdminBackupsJSON - List backups
 func (s *SDK) GetAdminBackupsJSON(ctx context.Context) (*operations.GetAdminBackupsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/backups.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -285,7 +313,7 @@ func (s *SDK) GetAdminBackupsJSON(ctx context.Context) (*operations.GetAdminBack
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -315,8 +343,9 @@ func (s *SDK) GetAdminBackupsJSON(ctx context.Context) (*operations.GetAdminBack
 	return res, nil
 }
 
+// GetAdminBadgesJSON - List badges
 func (s *SDK) GetAdminBadgesJSON(ctx context.Context) (*operations.GetAdminBadgesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/badges.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -324,7 +353,7 @@ func (s *SDK) GetAdminBadgesJSON(ctx context.Context) (*operations.GetAdminBadge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -354,8 +383,9 @@ func (s *SDK) GetAdminBadgesJSON(ctx context.Context) (*operations.GetAdminBadge
 	return res, nil
 }
 
+// GetAdminUsersIDJSON - Get a user by id
 func (s *SDK) GetAdminUsersIDJSON(ctx context.Context, request operations.GetAdminUsersIDJSONRequest) (*operations.GetAdminUsersIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/admin/users/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -363,7 +393,7 @@ func (s *SDK) GetAdminUsersIDJSON(ctx context.Context, request operations.GetAdm
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -393,8 +423,9 @@ func (s *SDK) GetAdminUsersIDJSON(ctx context.Context, request operations.GetAdm
 	return res, nil
 }
 
+// GetAdminUsersListFlagJSON - Get a list of users
 func (s *SDK) GetAdminUsersListFlagJSON(ctx context.Context, request operations.GetAdminUsersListFlagJSONRequest) (*operations.GetAdminUsersListFlagJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/admin/users/list/{flag}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -404,7 +435,7 @@ func (s *SDK) GetAdminUsersListFlagJSON(ctx context.Context, request operations.
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -434,8 +465,9 @@ func (s *SDK) GetAdminUsersListFlagJSON(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetCIDShowJSON - Show category
 func (s *SDK) GetCIDShowJSON(ctx context.Context, request operations.GetCIDShowJSONRequest) (*operations.GetCIDShowJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/c/{id}/show.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -443,7 +475,7 @@ func (s *SDK) GetCIDShowJSON(ctx context.Context, request operations.GetCIDShowJ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -473,8 +505,9 @@ func (s *SDK) GetCIDShowJSON(ctx context.Context, request operations.GetCIDShowJ
 	return res, nil
 }
 
+// GetCSlugIDJSON - List topics
 func (s *SDK) GetCSlugIDJSON(ctx context.Context, request operations.GetCSlugIDJSONRequest) (*operations.GetCSlugIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/c/{slug}/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -482,7 +515,7 @@ func (s *SDK) GetCSlugIDJSON(ctx context.Context, request operations.GetCSlugIDJ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -512,8 +545,9 @@ func (s *SDK) GetCSlugIDJSON(ctx context.Context, request operations.GetCSlugIDJ
 	return res, nil
 }
 
+// GetCategoriesJSON - Retrieves a list of categories
 func (s *SDK) GetCategoriesJSON(ctx context.Context) (*operations.GetCategoriesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/categories.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -521,7 +555,7 @@ func (s *SDK) GetCategoriesJSON(ctx context.Context) (*operations.GetCategoriesJ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -551,8 +585,9 @@ func (s *SDK) GetCategoriesJSON(ctx context.Context) (*operations.GetCategoriesJ
 	return res, nil
 }
 
+// GetDirectoryItemsJSON - Get a public list of users
 func (s *SDK) GetDirectoryItemsJSON(ctx context.Context, request operations.GetDirectoryItemsJSONRequest) (*operations.GetDirectoryItemsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/directory_items.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -562,7 +597,7 @@ func (s *SDK) GetDirectoryItemsJSON(ctx context.Context, request operations.GetD
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -592,8 +627,9 @@ func (s *SDK) GetDirectoryItemsJSON(ctx context.Context, request operations.GetD
 	return res, nil
 }
 
+// GetGroupsJSON - List groups
 func (s *SDK) GetGroupsJSON(ctx context.Context) (*operations.GetGroupsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/groups.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -601,7 +637,7 @@ func (s *SDK) GetGroupsJSON(ctx context.Context) (*operations.GetGroupsJSONRespo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -631,8 +667,9 @@ func (s *SDK) GetGroupsJSON(ctx context.Context) (*operations.GetGroupsJSONRespo
 	return res, nil
 }
 
+// GetGroupsNameJSON - Get a group
 func (s *SDK) GetGroupsNameJSON(ctx context.Context, request operations.GetGroupsNameJSONRequest) (*operations.GetGroupsNameJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/groups/{name}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -640,7 +677,7 @@ func (s *SDK) GetGroupsNameJSON(ctx context.Context, request operations.GetGroup
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -670,8 +707,9 @@ func (s *SDK) GetGroupsNameJSON(ctx context.Context, request operations.GetGroup
 	return res, nil
 }
 
+// GetGroupsNameMembersJSON - List group members
 func (s *SDK) GetGroupsNameMembersJSON(ctx context.Context, request operations.GetGroupsNameMembersJSONRequest) (*operations.GetGroupsNameMembersJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/groups/{name}/members.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -679,7 +717,7 @@ func (s *SDK) GetGroupsNameMembersJSON(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -709,8 +747,9 @@ func (s *SDK) GetGroupsNameMembersJSON(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetLatestJSON - Get the latest topics
 func (s *SDK) GetLatestJSON(ctx context.Context, request operations.GetLatestJSONRequest) (*operations.GetLatestJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/latest.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -722,7 +761,7 @@ func (s *SDK) GetLatestJSON(ctx context.Context, request operations.GetLatestJSO
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -752,8 +791,9 @@ func (s *SDK) GetLatestJSON(ctx context.Context, request operations.GetLatestJSO
 	return res, nil
 }
 
+// GetNotificationsJSON - Get the notifications that belong to the current user
 func (s *SDK) GetNotificationsJSON(ctx context.Context) (*operations.GetNotificationsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/notifications.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -761,7 +801,7 @@ func (s *SDK) GetNotificationsJSON(ctx context.Context) (*operations.GetNotifica
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -791,8 +831,9 @@ func (s *SDK) GetNotificationsJSON(ctx context.Context) (*operations.GetNotifica
 	return res, nil
 }
 
+// GetPostsIDJSON - Retrieve a single post
 func (s *SDK) GetPostsIDJSON(ctx context.Context, request operations.GetPostsIDJSONRequest) (*operations.GetPostsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/posts/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -802,7 +843,7 @@ func (s *SDK) GetPostsIDJSON(ctx context.Context, request operations.GetPostsIDJ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -832,8 +873,9 @@ func (s *SDK) GetPostsIDJSON(ctx context.Context, request operations.GetPostsIDJ
 	return res, nil
 }
 
+// GetPostsJSON - List latest posts across topics
 func (s *SDK) GetPostsJSON(ctx context.Context, request operations.GetPostsJSONRequest) (*operations.GetPostsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/posts.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -843,7 +885,7 @@ func (s *SDK) GetPostsJSON(ctx context.Context, request operations.GetPostsJSONR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -873,8 +915,9 @@ func (s *SDK) GetPostsJSON(ctx context.Context, request operations.GetPostsJSONR
 	return res, nil
 }
 
+// GetSearchJSON - Search for a term
 func (s *SDK) GetSearchJSON(ctx context.Context, request operations.GetSearchJSONRequest) (*operations.GetSearchJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/search.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -889,7 +932,7 @@ func (s *SDK) GetSearchJSON(ctx context.Context, request operations.GetSearchJSO
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -919,8 +962,9 @@ func (s *SDK) GetSearchJSON(ctx context.Context, request operations.GetSearchJSO
 	return res, nil
 }
 
+// GetTIDJSON - Get a single topic
 func (s *SDK) GetTIDJSON(ctx context.Context, request operations.GetTIDJSONRequest) (*operations.GetTIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/t/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -930,7 +974,7 @@ func (s *SDK) GetTIDJSON(ctx context.Context, request operations.GetTIDJSONReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -960,8 +1004,9 @@ func (s *SDK) GetTIDJSON(ctx context.Context, request operations.GetTIDJSONReque
 	return res, nil
 }
 
+// GetTIDPostsJSON - Get specific posts from a topic
 func (s *SDK) GetTIDPostsJSON(ctx context.Context, request operations.GetTIDPostsJSONRequest) (*operations.GetTIDPostsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/t/{id}/posts.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -978,7 +1023,7 @@ func (s *SDK) GetTIDPostsJSON(ctx context.Context, request operations.GetTIDPost
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1008,8 +1053,9 @@ func (s *SDK) GetTIDPostsJSON(ctx context.Context, request operations.GetTIDPost
 	return res, nil
 }
 
+// GetTagGroupsIDJSON - Get a single tag group
 func (s *SDK) GetTagGroupsIDJSON(ctx context.Context, request operations.GetTagGroupsIDJSONRequest) (*operations.GetTagGroupsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tag_groups/{id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1017,7 +1063,7 @@ func (s *SDK) GetTagGroupsIDJSON(ctx context.Context, request operations.GetTagG
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1047,8 +1093,9 @@ func (s *SDK) GetTagGroupsIDJSON(ctx context.Context, request operations.GetTagG
 	return res, nil
 }
 
+// GetTagGroupsJSON - Get a list of tag groups
 func (s *SDK) GetTagGroupsJSON(ctx context.Context) (*operations.GetTagGroupsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tag_groups.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1056,7 +1103,7 @@ func (s *SDK) GetTagGroupsJSON(ctx context.Context) (*operations.GetTagGroupsJSO
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1086,8 +1133,9 @@ func (s *SDK) GetTagGroupsJSON(ctx context.Context) (*operations.GetTagGroupsJSO
 	return res, nil
 }
 
+// GetTagNameJSON - Get a specific tag
 func (s *SDK) GetTagNameJSON(ctx context.Context, request operations.GetTagNameJSONRequest) (*operations.GetTagNameJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tag/{name}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1095,7 +1143,7 @@ func (s *SDK) GetTagNameJSON(ctx context.Context, request operations.GetTagNameJ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1125,8 +1173,9 @@ func (s *SDK) GetTagNameJSON(ctx context.Context, request operations.GetTagNameJ
 	return res, nil
 }
 
+// GetTagsJSON - Get a list of tags
 func (s *SDK) GetTagsJSON(ctx context.Context) (*operations.GetTagsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tags.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1134,7 +1183,7 @@ func (s *SDK) GetTagsJSON(ctx context.Context) (*operations.GetTagsJSONResponse,
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1164,8 +1213,9 @@ func (s *SDK) GetTagsJSON(ctx context.Context) (*operations.GetTagsJSONResponse,
 	return res, nil
 }
 
+// GetTopJSON - Get the top topics
 func (s *SDK) GetTopJSON(ctx context.Context, request operations.GetTopJSONRequest) (*operations.GetTopJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/top.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1175,7 +1225,7 @@ func (s *SDK) GetTopJSON(ctx context.Context, request operations.GetTopJSONReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1205,8 +1255,9 @@ func (s *SDK) GetTopJSON(ctx context.Context, request operations.GetTopJSONReque
 	return res, nil
 }
 
+// GetTopJSONPeriodEqualFlag - Get the top topics filtered by a flag
 func (s *SDK) GetTopJSONPeriodEqualFlag(ctx context.Context, request operations.GetTopJSONPeriodEqualFlagRequest) (*operations.GetTopJSONPeriodEqualFlagResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/top.json?period={flag}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1216,7 +1267,7 @@ func (s *SDK) GetTopJSONPeriodEqualFlag(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1246,8 +1297,9 @@ func (s *SDK) GetTopJSONPeriodEqualFlag(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetTopicsPrivateMessagesSentUsernameJSON - Get a list of private messages sent for a user
 func (s *SDK) GetTopicsPrivateMessagesSentUsernameJSON(ctx context.Context, request operations.GetTopicsPrivateMessagesSentUsernameJSONRequest) (*operations.GetTopicsPrivateMessagesSentUsernameJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/topics/private-messages-sent/{username}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1255,7 +1307,7 @@ func (s *SDK) GetTopicsPrivateMessagesSentUsernameJSON(ctx context.Context, requ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1285,8 +1337,9 @@ func (s *SDK) GetTopicsPrivateMessagesSentUsernameJSON(ctx context.Context, requ
 	return res, nil
 }
 
+// GetTopicsPrivateMessagesUsernameJSON - Get a list of private messages for a user
 func (s *SDK) GetTopicsPrivateMessagesUsernameJSON(ctx context.Context, request operations.GetTopicsPrivateMessagesUsernameJSONRequest) (*operations.GetTopicsPrivateMessagesUsernameJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/topics/private-messages/{username}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1294,7 +1347,7 @@ func (s *SDK) GetTopicsPrivateMessagesUsernameJSON(ctx context.Context, request 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1324,8 +1377,9 @@ func (s *SDK) GetTopicsPrivateMessagesUsernameJSON(ctx context.Context, request 
 	return res, nil
 }
 
+// GetUByExternalExternalIDJSON - Get a user by external_id
 func (s *SDK) GetUByExternalExternalIDJSON(ctx context.Context, request operations.GetUByExternalExternalIDJSONRequest) (*operations.GetUByExternalExternalIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/u/by-external/{external_id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1335,7 +1389,7 @@ func (s *SDK) GetUByExternalExternalIDJSON(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1365,8 +1419,9 @@ func (s *SDK) GetUByExternalExternalIDJSON(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetUByExternalProviderExternalIDJSON - Get a user by identity provider external ID
 func (s *SDK) GetUByExternalProviderExternalIDJSON(ctx context.Context, request operations.GetUByExternalProviderExternalIDJSONRequest) (*operations.GetUByExternalProviderExternalIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/u/by-external/{provider}/{external_id}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1376,7 +1431,7 @@ func (s *SDK) GetUByExternalProviderExternalIDJSON(ctx context.Context, request 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1406,8 +1461,9 @@ func (s *SDK) GetUByExternalProviderExternalIDJSON(ctx context.Context, request 
 	return res, nil
 }
 
+// GetUUsernameJSON - Get a single user by username
 func (s *SDK) GetUUsernameJSON(ctx context.Context, request operations.GetUUsernameJSONRequest) (*operations.GetUUsernameJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/u/{username}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1417,7 +1473,7 @@ func (s *SDK) GetUUsernameJSON(ctx context.Context, request operations.GetUUsern
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1447,8 +1503,9 @@ func (s *SDK) GetUUsernameJSON(ctx context.Context, request operations.GetUUsern
 	return res, nil
 }
 
+// GetUserActionsJSON - Get a list of user actions
 func (s *SDK) GetUserActionsJSON(ctx context.Context, request operations.GetUserActionsJSONRequest) (*operations.GetUserActionsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/user_actions.json"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1458,7 +1515,7 @@ func (s *SDK) GetUserActionsJSON(ctx context.Context, request operations.GetUser
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1488,8 +1545,9 @@ func (s *SDK) GetUserActionsJSON(ctx context.Context, request operations.GetUser
 	return res, nil
 }
 
+// GetUserBadgesUsernameJSON - List badges for a user
 func (s *SDK) GetUserBadgesUsernameJSON(ctx context.Context, request operations.GetUserBadgesUsernameJSONRequest) (*operations.GetUserBadgesUsernameJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/user-badges/{username}.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1497,7 +1555,7 @@ func (s *SDK) GetUserBadgesUsernameJSON(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1527,8 +1585,9 @@ func (s *SDK) GetUserBadgesUsernameJSON(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PostAdminBackupsJSON - Create backup
 func (s *SDK) PostAdminBackupsJSON(ctx context.Context, request operations.PostAdminBackupsJSONRequest) (*operations.PostAdminBackupsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/backups.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1543,7 +1602,7 @@ func (s *SDK) PostAdminBackupsJSON(ctx context.Context, request operations.PostA
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1573,8 +1632,9 @@ func (s *SDK) PostAdminBackupsJSON(ctx context.Context, request operations.PostA
 	return res, nil
 }
 
+// PostAdminBadgesJSON - Create badge
 func (s *SDK) PostAdminBadgesJSON(ctx context.Context, request operations.PostAdminBadgesJSONRequest) (*operations.PostAdminBadgesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/badges.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1589,7 +1649,7 @@ func (s *SDK) PostAdminBadgesJSON(ctx context.Context, request operations.PostAd
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1619,8 +1679,9 @@ func (s *SDK) PostAdminBadgesJSON(ctx context.Context, request operations.PostAd
 	return res, nil
 }
 
+// PostAdminGroupsJSON - Creates a group
 func (s *SDK) PostAdminGroupsJSON(ctx context.Context, request operations.PostAdminGroupsJSONRequest) (*operations.PostAdminGroupsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/admin/groups.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1635,7 +1696,7 @@ func (s *SDK) PostAdminGroupsJSON(ctx context.Context, request operations.PostAd
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1665,8 +1726,9 @@ func (s *SDK) PostAdminGroupsJSON(ctx context.Context, request operations.PostAd
 	return res, nil
 }
 
+// PostAdminUsersIDLogOutJSON - Log a user out
 func (s *SDK) PostAdminUsersIDLogOutJSON(ctx context.Context, request operations.PostAdminUsersIDLogOutJSONRequest) (*operations.PostAdminUsersIDLogOutJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/admin/users/{id}/log_out.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -1674,7 +1736,7 @@ func (s *SDK) PostAdminUsersIDLogOutJSON(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1704,8 +1766,9 @@ func (s *SDK) PostAdminUsersIDLogOutJSON(ctx context.Context, request operations
 	return res, nil
 }
 
+// PostCategoriesJSON - Creates a category
 func (s *SDK) PostCategoriesJSON(ctx context.Context, request operations.PostCategoriesJSONRequest) (*operations.PostCategoriesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/categories.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1720,7 +1783,7 @@ func (s *SDK) PostCategoriesJSON(ctx context.Context, request operations.PostCat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1750,8 +1813,9 @@ func (s *SDK) PostCategoriesJSON(ctx context.Context, request operations.PostCat
 	return res, nil
 }
 
+// PostInvitesJSON - Create an invite
 func (s *SDK) PostInvitesJSON(ctx context.Context, request operations.PostInvitesJSONRequest) (*operations.PostInvitesJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/invites.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1768,7 +1832,7 @@ func (s *SDK) PostInvitesJSON(ctx context.Context, request operations.PostInvite
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1798,8 +1862,9 @@ func (s *SDK) PostInvitesJSON(ctx context.Context, request operations.PostInvite
 	return res, nil
 }
 
+// PostPostActionsJSON - Like a post and other actions
 func (s *SDK) PostPostActionsJSON(ctx context.Context, request operations.PostPostActionsJSONRequest) (*operations.PostPostActionsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/post_actions.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1816,7 +1881,7 @@ func (s *SDK) PostPostActionsJSON(ctx context.Context, request operations.PostPo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1846,8 +1911,9 @@ func (s *SDK) PostPostActionsJSON(ctx context.Context, request operations.PostPo
 	return res, nil
 }
 
+// PostPostsJSON - Creates a new topic, a new post, or a private message
 func (s *SDK) PostPostsJSON(ctx context.Context, request operations.PostPostsJSONRequest) (*operations.PostPostsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/posts.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1862,7 +1928,7 @@ func (s *SDK) PostPostsJSON(ctx context.Context, request operations.PostPostsJSO
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1892,8 +1958,9 @@ func (s *SDK) PostPostsJSON(ctx context.Context, request operations.PostPostsJSO
 	return res, nil
 }
 
+// PostSessionForgotPasswordJSON - Send password reset email
 func (s *SDK) PostSessionForgotPasswordJSON(ctx context.Context, request operations.PostSessionForgotPasswordJSONRequest) (*operations.PostSessionForgotPasswordJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/session/forgot_password.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1908,7 +1975,7 @@ func (s *SDK) PostSessionForgotPasswordJSON(ctx context.Context, request operati
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1938,8 +2005,9 @@ func (s *SDK) PostSessionForgotPasswordJSON(ctx context.Context, request operati
 	return res, nil
 }
 
+// PostTIDInviteJSON - Invite to topic
 func (s *SDK) PostTIDInviteJSON(ctx context.Context, request operations.PostTIDInviteJSONRequest) (*operations.PostTIDInviteJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/t/{id}/invite.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1956,7 +2024,7 @@ func (s *SDK) PostTIDInviteJSON(ctx context.Context, request operations.PostTIDI
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1986,8 +2054,9 @@ func (s *SDK) PostTIDInviteJSON(ctx context.Context, request operations.PostTIDI
 	return res, nil
 }
 
+// PostTIDNotificationsJSON - Set notification level
 func (s *SDK) PostTIDNotificationsJSON(ctx context.Context, request operations.PostTIDNotificationsJSONRequest) (*operations.PostTIDNotificationsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/t/{id}/notifications.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2004,7 +2073,7 @@ func (s *SDK) PostTIDNotificationsJSON(ctx context.Context, request operations.P
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2034,8 +2103,9 @@ func (s *SDK) PostTIDNotificationsJSON(ctx context.Context, request operations.P
 	return res, nil
 }
 
+// PostTIDTimerJSON - Create topic timer
 func (s *SDK) PostTIDTimerJSON(ctx context.Context, request operations.PostTIDTimerJSONRequest) (*operations.PostTIDTimerJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/t/{id}/timer.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2052,7 +2122,7 @@ func (s *SDK) PostTIDTimerJSON(ctx context.Context, request operations.PostTIDTi
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2082,8 +2152,9 @@ func (s *SDK) PostTIDTimerJSON(ctx context.Context, request operations.PostTIDTi
 	return res, nil
 }
 
+// PostTagGroupsJSON - Creates a tag group
 func (s *SDK) PostTagGroupsJSON(ctx context.Context, request operations.PostTagGroupsJSONRequest) (*operations.PostTagGroupsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/tag_groups.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2098,7 +2169,7 @@ func (s *SDK) PostTagGroupsJSON(ctx context.Context, request operations.PostTagG
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2128,8 +2199,9 @@ func (s *SDK) PostTagGroupsJSON(ctx context.Context, request operations.PostTagG
 	return res, nil
 }
 
+// PostUploadsJSON - Creates an upload
 func (s *SDK) PostUploadsJSON(ctx context.Context, request operations.PostUploadsJSONRequest) (*operations.PostUploadsJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/uploads.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2144,7 +2216,7 @@ func (s *SDK) PostUploadsJSON(ctx context.Context, request operations.PostUpload
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2174,8 +2246,9 @@ func (s *SDK) PostUploadsJSON(ctx context.Context, request operations.PostUpload
 	return res, nil
 }
 
+// PostUserAvatarUsernameRefreshGravatarJSON - Refresh gravatar
 func (s *SDK) PostUserAvatarUsernameRefreshGravatarJSON(ctx context.Context, request operations.PostUserAvatarUsernameRefreshGravatarJSONRequest) (*operations.PostUserAvatarUsernameRefreshGravatarJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/user_avatar/{username}/refresh_gravatar.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -2183,7 +2256,7 @@ func (s *SDK) PostUserAvatarUsernameRefreshGravatarJSON(ctx context.Context, req
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2213,8 +2286,9 @@ func (s *SDK) PostUserAvatarUsernameRefreshGravatarJSON(ctx context.Context, req
 	return res, nil
 }
 
+// PostUsersJSON - Creates a user
 func (s *SDK) PostUsersJSON(ctx context.Context, request operations.PostUsersJSONRequest) (*operations.PostUsersJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/users.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2231,7 +2305,7 @@ func (s *SDK) PostUsersJSON(ctx context.Context, request operations.PostUsersJSO
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2261,8 +2335,9 @@ func (s *SDK) PostUsersJSON(ctx context.Context, request operations.PostUsersJSO
 	return res, nil
 }
 
+// PutAdminBackupsFilename - Send download backup email
 func (s *SDK) PutAdminBackupsFilename(ctx context.Context, request operations.PutAdminBackupsFilenameRequest) (*operations.PutAdminBackupsFilenameResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/admin/backups/{filename}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -2270,7 +2345,7 @@ func (s *SDK) PutAdminBackupsFilename(ctx context.Context, request operations.Pu
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2291,8 +2366,9 @@ func (s *SDK) PutAdminBackupsFilename(ctx context.Context, request operations.Pu
 	return res, nil
 }
 
+// PutAdminBadgesIDJSON - Update badge
 func (s *SDK) PutAdminBadgesIDJSON(ctx context.Context, request operations.PutAdminBadgesIDJSONRequest) (*operations.PutAdminBadgesIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/admin/badges/{id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2307,7 +2383,7 @@ func (s *SDK) PutAdminBadgesIDJSON(ctx context.Context, request operations.PutAd
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2337,8 +2413,9 @@ func (s *SDK) PutAdminBadgesIDJSON(ctx context.Context, request operations.PutAd
 	return res, nil
 }
 
+// PutAdminUsersIDAnonymizeJSON - Anonymize a user
 func (s *SDK) PutAdminUsersIDAnonymizeJSON(ctx context.Context, request operations.PutAdminUsersIDAnonymizeJSONRequest) (*operations.PutAdminUsersIDAnonymizeJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/admin/users/{id}/anonymize.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -2346,7 +2423,7 @@ func (s *SDK) PutAdminUsersIDAnonymizeJSON(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2376,8 +2453,9 @@ func (s *SDK) PutAdminUsersIDAnonymizeJSON(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PutAdminUsersIDSuspendJSON - Suspend a user
 func (s *SDK) PutAdminUsersIDSuspendJSON(ctx context.Context, request operations.PutAdminUsersIDSuspendJSONRequest) (*operations.PutAdminUsersIDSuspendJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/admin/users/{id}/suspend.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2392,7 +2470,7 @@ func (s *SDK) PutAdminUsersIDSuspendJSON(ctx context.Context, request operations
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2422,8 +2500,9 @@ func (s *SDK) PutAdminUsersIDSuspendJSON(ctx context.Context, request operations
 	return res, nil
 }
 
+// PutCategoriesIDJSON - Updates a category
 func (s *SDK) PutCategoriesIDJSON(ctx context.Context, request operations.PutCategoriesIDJSONRequest) (*operations.PutCategoriesIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/categories/{id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2438,7 +2517,7 @@ func (s *SDK) PutCategoriesIDJSON(ctx context.Context, request operations.PutCat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2468,8 +2547,9 @@ func (s *SDK) PutCategoriesIDJSON(ctx context.Context, request operations.PutCat
 	return res, nil
 }
 
+// PutGroupsIDJSON - Update a group
 func (s *SDK) PutGroupsIDJSON(ctx context.Context, request operations.PutGroupsIDJSONRequest) (*operations.PutGroupsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/groups/{id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2484,7 +2564,7 @@ func (s *SDK) PutGroupsIDJSON(ctx context.Context, request operations.PutGroupsI
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2514,8 +2594,9 @@ func (s *SDK) PutGroupsIDJSON(ctx context.Context, request operations.PutGroupsI
 	return res, nil
 }
 
+// PutGroupsIDMembersJSON - Add group members
 func (s *SDK) PutGroupsIDMembersJSON(ctx context.Context, request operations.PutGroupsIDMembersJSONRequest) (*operations.PutGroupsIDMembersJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/groups/{id}/members.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2530,7 +2611,7 @@ func (s *SDK) PutGroupsIDMembersJSON(ctx context.Context, request operations.Put
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2560,8 +2641,9 @@ func (s *SDK) PutGroupsIDMembersJSON(ctx context.Context, request operations.Put
 	return res, nil
 }
 
+// PutNotificationsMarkReadJSON - Mark notifications as read
 func (s *SDK) PutNotificationsMarkReadJSON(ctx context.Context, request operations.PutNotificationsMarkReadJSONRequest) (*operations.PutNotificationsMarkReadJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/notifications/mark-read.json"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2576,7 +2658,7 @@ func (s *SDK) PutNotificationsMarkReadJSON(ctx context.Context, request operatio
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2606,8 +2688,9 @@ func (s *SDK) PutNotificationsMarkReadJSON(ctx context.Context, request operatio
 	return res, nil
 }
 
+// PutPostsIDJSON - Update a single post
 func (s *SDK) PutPostsIDJSON(ctx context.Context, request operations.PutPostsIDJSONRequest) (*operations.PutPostsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/posts/{id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2624,7 +2707,7 @@ func (s *SDK) PutPostsIDJSON(ctx context.Context, request operations.PutPostsIDJ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2654,8 +2737,9 @@ func (s *SDK) PutPostsIDJSON(ctx context.Context, request operations.PutPostsIDJ
 	return res, nil
 }
 
+// PutPostsIDLockedJSON - Lock a post from being edited
 func (s *SDK) PutPostsIDLockedJSON(ctx context.Context, request operations.PutPostsIDLockedJSONRequest) (*operations.PutPostsIDLockedJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/posts/{id}/locked.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2672,7 +2756,7 @@ func (s *SDK) PutPostsIDLockedJSON(ctx context.Context, request operations.PutPo
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2702,8 +2786,9 @@ func (s *SDK) PutPostsIDLockedJSON(ctx context.Context, request operations.PutPo
 	return res, nil
 }
 
+// PutTIDBookmarkJSON - Bookmark topic
 func (s *SDK) PutTIDBookmarkJSON(ctx context.Context, request operations.PutTIDBookmarkJSONRequest) (*operations.PutTIDBookmarkJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/t/{id}/bookmark.json", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -2713,7 +2798,7 @@ func (s *SDK) PutTIDBookmarkJSON(ctx context.Context, request operations.PutTIDB
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2734,8 +2819,9 @@ func (s *SDK) PutTIDBookmarkJSON(ctx context.Context, request operations.PutTIDB
 	return res, nil
 }
 
+// PutTIDChangeTimestampJSON - Update topic timestamp
 func (s *SDK) PutTIDChangeTimestampJSON(ctx context.Context, request operations.PutTIDChangeTimestampJSONRequest) (*operations.PutTIDChangeTimestampJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/t/{id}/change-timestamp.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2752,7 +2838,7 @@ func (s *SDK) PutTIDChangeTimestampJSON(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2782,8 +2868,9 @@ func (s *SDK) PutTIDChangeTimestampJSON(ctx context.Context, request operations.
 	return res, nil
 }
 
+// PutTIDJSON - Update a topic
 func (s *SDK) PutTIDJSON(ctx context.Context, request operations.PutTIDJSONRequest) (*operations.PutTIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/t/-/{id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2800,7 +2887,7 @@ func (s *SDK) PutTIDJSON(ctx context.Context, request operations.PutTIDJSONReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2830,8 +2917,9 @@ func (s *SDK) PutTIDJSON(ctx context.Context, request operations.PutTIDJSONReque
 	return res, nil
 }
 
+// PutTIDStatusJSON - Update the status of a topic
 func (s *SDK) PutTIDStatusJSON(ctx context.Context, request operations.PutTIDStatusJSONRequest) (*operations.PutTIDStatusJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/t/{id}/status.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2848,7 +2936,7 @@ func (s *SDK) PutTIDStatusJSON(ctx context.Context, request operations.PutTIDSta
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2878,8 +2966,9 @@ func (s *SDK) PutTIDStatusJSON(ctx context.Context, request operations.PutTIDSta
 	return res, nil
 }
 
+// PutTagGroupsIDJSON - Update tag group
 func (s *SDK) PutTagGroupsIDJSON(ctx context.Context, request operations.PutTagGroupsIDJSONRequest) (*operations.PutTagGroupsIDJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tag_groups/{id}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2894,7 +2983,7 @@ func (s *SDK) PutTagGroupsIDJSON(ctx context.Context, request operations.PutTagG
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2924,8 +3013,9 @@ func (s *SDK) PutTagGroupsIDJSON(ctx context.Context, request operations.PutTagG
 	return res, nil
 }
 
+// PutUUsernamePreferencesAvatarPickJSON - Update avatar
 func (s *SDK) PutUUsernamePreferencesAvatarPickJSON(ctx context.Context, request operations.PutUUsernamePreferencesAvatarPickJSONRequest) (*operations.PutUUsernamePreferencesAvatarPickJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/u/{username}/preferences/avatar/pick.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2940,7 +3030,7 @@ func (s *SDK) PutUUsernamePreferencesAvatarPickJSON(ctx context.Context, request
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2970,8 +3060,9 @@ func (s *SDK) PutUUsernamePreferencesAvatarPickJSON(ctx context.Context, request
 	return res, nil
 }
 
+// PutUUsernamePreferencesEmailJSON - Update email
 func (s *SDK) PutUUsernamePreferencesEmailJSON(ctx context.Context, request operations.PutUUsernamePreferencesEmailJSONRequest) (*operations.PutUUsernamePreferencesEmailJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/u/{username}/preferences/email.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -2986,7 +3077,7 @@ func (s *SDK) PutUUsernamePreferencesEmailJSON(ctx context.Context, request oper
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3007,8 +3098,9 @@ func (s *SDK) PutUUsernamePreferencesEmailJSON(ctx context.Context, request oper
 	return res, nil
 }
 
+// PutUsersPasswordResetTokenJSON - Change password
 func (s *SDK) PutUsersPasswordResetTokenJSON(ctx context.Context, request operations.PutUsersPasswordResetTokenJSONRequest) (*operations.PutUsersPasswordResetTokenJSONResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/users/password-reset/{token}.json", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -3023,7 +3115,7 @@ func (s *SDK) PutUsersPasswordResetTokenJSON(ctx context.Context, request operat
 
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.defaultClient
+	client := s._defaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

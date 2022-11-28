@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Compute
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Compute information for the simulation job.
 **/
 export class Compute extends SpeakeasyBase {
-  @Metadata({ data: "json, name=simulationUnitLimit" })
+  @SpeakeasyMetadata({ data: "json, name=simulationUnitLimit" })
   simulationUnitLimit?: number;
 }

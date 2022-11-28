@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ComponentConfiguration } from "./componentconfiguration";
 import { ContainerTypeEnum } from "./containertypeenum";
 import { InstanceConfiguration } from "./instanceconfiguration";

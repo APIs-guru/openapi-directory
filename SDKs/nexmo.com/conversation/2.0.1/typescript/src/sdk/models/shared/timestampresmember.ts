@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class TimestampResMember extends SpeakeasyBase {
-  @Metadata({ data: "json, name=invited" })
+  @SpeakeasyMetadata({ data: "json, name=invited" })
   invited?: string;
 
-  @Metadata({ data: "json, name=joined" })
+  @SpeakeasyMetadata({ data: "json, name=joined" })
   joined?: string;
 
-  @Metadata({ data: "json, name=left" })
+  @SpeakeasyMetadata({ data: "json, name=left" })
   left?: string;
 }

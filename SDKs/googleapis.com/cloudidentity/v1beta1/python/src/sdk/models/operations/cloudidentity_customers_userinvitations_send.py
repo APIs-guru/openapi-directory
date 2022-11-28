@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudidentityCustomersUserinvitationsSendPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class CloudidentityCustomersUserinvitationsSendQueryParams:
 
 @dataclass
 class CloudidentityCustomersUserinvitationsSendRequest:
-    path_params: CloudidentityCustomersUserinvitationsSendPathParams = field(default=None)
-    query_params: CloudidentityCustomersUserinvitationsSendQueryParams = field(default=None)
+    path_params: CloudidentityCustomersUserinvitationsSendPathParams = field()
+    query_params: CloudidentityCustomersUserinvitationsSendQueryParams = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CloudidentityCustomersUserinvitationsSendResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

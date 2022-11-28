@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Recipe
@@ -6,30 +7,30 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about a recipe. Each recipe provides an algorithm that Amazon Personalize uses in model training when you use the <a>CreateSolution</a> operation. 
 **/
 export class Recipe extends SpeakeasyBase {
-  @Metadata({ data: "json, name=algorithmArn" })
+  @SpeakeasyMetadata({ data: "json, name=algorithmArn" })
   algorithmArn?: string;
 
-  @Metadata({ data: "json, name=creationDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=creationDateTime" })
   creationDateTime?: Date;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=featureTransformationArn" })
+  @SpeakeasyMetadata({ data: "json, name=featureTransformationArn" })
   featureTransformationArn?: string;
 
-  @Metadata({ data: "json, name=lastUpdatedDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastUpdatedDateTime" })
   lastUpdatedDateTime?: Date;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=recipeArn" })
+  @SpeakeasyMetadata({ data: "json, name=recipeArn" })
   recipeArn?: string;
 
-  @Metadata({ data: "json, name=recipeType" })
+  @SpeakeasyMetadata({ data: "json, name=recipeType" })
   recipeType?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }

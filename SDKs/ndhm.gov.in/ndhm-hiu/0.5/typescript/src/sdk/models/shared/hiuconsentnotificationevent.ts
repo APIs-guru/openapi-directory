@@ -1,28 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ConsentArtefactReference } from "./consentartefactreference";
 import { ConsentStatusEnum } from "./consentstatusenum";
 
 
+
 export class HiuConsentNotificationEventNotification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=consentArtefacts", elemType: shared.ConsentArtefactReference })
+  @SpeakeasyMetadata({ data: "json, name=consentArtefacts", elemType: ConsentArtefactReference })
   consentArtefacts?: ConsentArtefactReference[];
 
-  @Metadata({ data: "json, name=consentRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=consentRequestId" })
   consentRequestId: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: ConsentStatusEnum;
 }
 
 
 export class HiuConsentNotificationEvent extends SpeakeasyBase {
-  @Metadata({ data: "json, name=notification" })
+  @SpeakeasyMetadata({ data: "json, name=notification" })
   notification: HiuConsentNotificationEventNotification;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: Date;
 }

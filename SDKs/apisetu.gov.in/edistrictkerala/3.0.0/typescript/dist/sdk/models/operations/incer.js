@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var IncerRequestBodyCertificateParameters = /** @class */ (function (_super) {
     __extends(IncerRequestBodyCertificateParameters, _super);
@@ -30,15 +30,15 @@ var IncerRequestBodyCertificateParameters = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=aplno" }),
+        SpeakeasyMetadata({ data: "json, name=aplno" }),
         __metadata("design:type", String)
     ], IncerRequestBodyCertificateParameters.prototype, "aplno", void 0);
     __decorate([
-        Metadata({ data: "json, name=certno" }),
+        SpeakeasyMetadata({ data: "json, name=certno" }),
         __metadata("design:type", String)
     ], IncerRequestBodyCertificateParameters.prototype, "certno", void 0);
     __decorate([
-        Metadata({ data: "json, name=sccd" }),
+        SpeakeasyMetadata({ data: "json, name=sccd" }),
         __metadata("design:type", String)
     ], IncerRequestBodyCertificateParameters.prototype, "sccd", void 0);
     return IncerRequestBodyCertificateParameters;
@@ -54,19 +54,19 @@ var IncerRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=certificateParameters" }),
+        SpeakeasyMetadata({ data: "json, name=certificateParameters" }),
         __metadata("design:type", IncerRequestBodyCertificateParameters)
     ], IncerRequestBody.prototype, "certificateParameters", void 0);
     __decorate([
-        Metadata({ data: "json, name=consentArtifact" }),
+        SpeakeasyMetadata({ data: "json, name=consentArtifact" }),
         __metadata("design:type", Object)
     ], IncerRequestBody.prototype, "consentArtifact", void 0);
     __decorate([
-        Metadata({ data: "json, name=format" }),
+        SpeakeasyMetadata({ data: "json, name=format" }),
         __metadata("design:type", String)
     ], IncerRequestBody.prototype, "format", void 0);
     __decorate([
-        Metadata({ data: "json, name=txnId" }),
+        SpeakeasyMetadata({ data: "json, name=txnId" }),
         __metadata("design:type", String)
     ], IncerRequestBody.prototype, "txnId", void 0);
     return IncerRequestBody;
@@ -78,32 +78,16 @@ var IncerSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeApiKey)
     ], IncerSecurity.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" }),
         __metadata("design:type", shared.SchemeClientId)
     ], IncerSecurity.prototype, "clientId", void 0);
     return IncerSecurity;
 }(SpeakeasyBase));
 export { IncerSecurity };
-var IncerRequest = /** @class */ (function (_super) {
-    __extends(IncerRequest, _super);
-    function IncerRequest() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
-        __metadata("design:type", IncerRequestBody)
-    ], IncerRequest.prototype, "request", void 0);
-    __decorate([
-        Metadata(),
-        __metadata("design:type", IncerSecurity)
-    ], IncerRequest.prototype, "security", void 0);
-    return IncerRequest;
-}(SpeakeasyBase));
-export { IncerRequest };
 export var Incer400ApplicationJsonErrorEnum;
 (function (Incer400ApplicationJsonErrorEnum) {
     Incer400ApplicationJsonErrorEnum["MissingParameter"] = "missing_parameter";
@@ -126,11 +110,11 @@ var Incer400ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Incer400ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Incer400ApplicationJson.prototype, "errorDescription", void 0);
     return Incer400ApplicationJson;
@@ -152,11 +136,11 @@ var Incer401ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Incer401ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Incer401ApplicationJson.prototype, "errorDescription", void 0);
     return Incer401ApplicationJson;
@@ -178,11 +162,11 @@ var Incer404ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Incer404ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Incer404ApplicationJson.prototype, "errorDescription", void 0);
     return Incer404ApplicationJson;
@@ -202,11 +186,11 @@ var Incer500ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Incer500ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Incer500ApplicationJson.prototype, "errorDescription", void 0);
     return Incer500ApplicationJson;
@@ -226,11 +210,11 @@ var Incer502ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Incer502ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Incer502ApplicationJson.prototype, "errorDescription", void 0);
     return Incer502ApplicationJson;
@@ -250,11 +234,11 @@ var Incer503ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Incer503ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Incer503ApplicationJson.prototype, "errorDescription", void 0);
     return Incer503ApplicationJson;
@@ -274,55 +258,71 @@ var Incer504ApplicationJson = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", String)
     ], Incer504ApplicationJson.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorDescription" }),
+        SpeakeasyMetadata({ data: "json, name=errorDescription" }),
         __metadata("design:type", String)
     ], Incer504ApplicationJson.prototype, "errorDescription", void 0);
     return Incer504ApplicationJson;
 }(SpeakeasyBase));
 export { Incer504ApplicationJson };
+var IncerRequest = /** @class */ (function (_super) {
+    __extends(IncerRequest, _super);
+    function IncerRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", IncerRequestBody)
+    ], IncerRequest.prototype, "request", void 0);
+    __decorate([
+        SpeakeasyMetadata(),
+        __metadata("design:type", IncerSecurity)
+    ], IncerRequest.prototype, "security", void 0);
+    return IncerRequest;
+}(SpeakeasyBase));
+export { IncerRequest };
 var IncerResponse = /** @class */ (function (_super) {
     __extends(IncerResponse, _super);
     function IncerResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], IncerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], IncerResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Incer400ApplicationJson)
     ], IncerResponse.prototype, "incer400ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Incer401ApplicationJson)
     ], IncerResponse.prototype, "incer401ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Incer404ApplicationJson)
     ], IncerResponse.prototype, "incer404ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Incer500ApplicationJson)
     ], IncerResponse.prototype, "incer500ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Incer502ApplicationJson)
     ], IncerResponse.prototype, "incer502ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Incer503ApplicationJson)
     ], IncerResponse.prototype, "incer503ApplicationJsonObject", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Incer504ApplicationJson)
     ], IncerResponse.prototype, "incer504ApplicationJsonObject", void 0);
     return IncerResponse;

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LambdaFunctionMetricNameEnum } from "./lambdafunctionmetricnameenum";
 import { LambdaFunctionMetricStatisticEnum } from "./lambdafunctionmetricstatisticenum";
 /**

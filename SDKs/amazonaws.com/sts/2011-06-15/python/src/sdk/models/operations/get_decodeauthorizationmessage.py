@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetDecodeAuthorizationMessageActionEnum(str, Enum):
     DECODE_AUTHORIZATION_MESSAGE = "DecodeAuthorizationMessage"
@@ -10,9 +14,9 @@ class GetDecodeAuthorizationMessageVersionEnum(str, Enum):
 
 @dataclass
 class GetDecodeAuthorizationMessageQueryParams:
-    action: GetDecodeAuthorizationMessageActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    encoded_message: str = field(default=None, metadata={'query_param': { 'field_name': 'EncodedMessage', 'style': 'form', 'explode': True }})
-    version: GetDecodeAuthorizationMessageVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetDecodeAuthorizationMessageActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    encoded_message: str = field(metadata={'query_param': { 'field_name': 'EncodedMessage', 'style': 'form', 'explode': True }})
+    version: GetDecodeAuthorizationMessageVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetDecodeAuthorizationMessageHeaders:
 
 @dataclass
 class GetDecodeAuthorizationMessageRequest:
-    query_params: GetDecodeAuthorizationMessageQueryParams = field(default=None)
-    headers: GetDecodeAuthorizationMessageHeaders = field(default=None)
+    headers: GetDecodeAuthorizationMessageHeaders = field()
+    query_params: GetDecodeAuthorizationMessageQueryParams = field()
     
 
 @dataclass
 class GetDecodeAuthorizationMessageResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

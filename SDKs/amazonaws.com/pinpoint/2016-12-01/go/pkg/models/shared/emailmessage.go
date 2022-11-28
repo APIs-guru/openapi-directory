@@ -1,5 +1,7 @@
 package shared
 
+// EmailMessage
+// Specifies the default settings and content for a one-time email message that's sent directly to an endpoint.
 type EmailMessage struct {
 	Body                      *string             `json:"Body,omitempty"`
 	FeedbackForwardingAddress *string             `json:"FeedbackForwardingAddress,omitempty"`

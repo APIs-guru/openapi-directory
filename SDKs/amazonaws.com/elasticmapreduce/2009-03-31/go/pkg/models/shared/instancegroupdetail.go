@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// InstanceGroupDetail
+// Detailed information about an instance group.
 type InstanceGroupDetail struct {
 	BidPrice              *string                `json:"BidPrice,omitempty"`
 	CreationDateTime      time.Time              `json:"CreationDateTime"`

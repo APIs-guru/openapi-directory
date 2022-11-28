@@ -18,6 +18,20 @@ const (
 	GoogleCloudBeyondcorpAppconnectionsV1AppConnectionTypeEnumTCPProxy        GoogleCloudBeyondcorpAppconnectionsV1AppConnectionTypeEnum = "TCP_PROXY"
 )
 
+// GoogleCloudBeyondcorpAppconnectionsV1AppConnectionInput
+// A BeyondCorp AppConnection resource represents a BeyondCorp protected AppConnection to a remote application. It creates all the necessary GCP components needed for creating a BeyondCorp protected AppConnection. Multiple connectors can be authorised for a single AppConnection.
+type GoogleCloudBeyondcorpAppconnectionsV1AppConnectionInput struct {
+	ApplicationEndpoint *GoogleCloudBeyondcorpAppconnectionsV1AppConnectionApplicationEndpoint `json:"applicationEndpoint,omitempty"`
+	Connectors          []string                                                               `json:"connectors,omitempty"`
+	DisplayName         *string                                                                `json:"displayName,omitempty"`
+	Gateway             *GoogleCloudBeyondcorpAppconnectionsV1AppConnectionGatewayInput        `json:"gateway,omitempty"`
+	Labels              map[string]string                                                      `json:"labels,omitempty"`
+	Name                *string                                                                `json:"name,omitempty"`
+	Type                *GoogleCloudBeyondcorpAppconnectionsV1AppConnectionTypeEnum            `json:"type,omitempty"`
+}
+
+// GoogleCloudBeyondcorpAppconnectionsV1AppConnection
+// A BeyondCorp AppConnection resource represents a BeyondCorp protected AppConnection to a remote application. It creates all the necessary GCP components needed for creating a BeyondCorp protected AppConnection. Multiple connectors can be authorised for a single AppConnection.
 type GoogleCloudBeyondcorpAppconnectionsV1AppConnection struct {
 	ApplicationEndpoint *GoogleCloudBeyondcorpAppconnectionsV1AppConnectionApplicationEndpoint `json:"applicationEndpoint,omitempty"`
 	Connectors          []string                                                               `json:"connectors,omitempty"`

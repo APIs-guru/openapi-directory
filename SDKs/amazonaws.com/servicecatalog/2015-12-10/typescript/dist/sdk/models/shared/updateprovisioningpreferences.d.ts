@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { StackSetOperationTypeEnum } from "./stacksetoperationtypeenum";
 /**
  * The user-defined preferences that will be applied when updating a provisioned product. Not all preferences are applicable to all provisioned product types.

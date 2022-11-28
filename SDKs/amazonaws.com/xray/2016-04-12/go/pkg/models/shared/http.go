@@ -1,5 +1,7 @@
 package shared
 
+// HTTP
+// Information about an HTTP request.
 type HTTP struct {
 	ClientIP   *string `json:"ClientIp,omitempty"`
 	HTTPMethod *string `json:"HttpMethod,omitempty"`

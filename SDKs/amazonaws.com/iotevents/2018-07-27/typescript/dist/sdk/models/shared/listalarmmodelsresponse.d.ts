@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AlarmModelSummary } from "./alarmmodelsummary";
 export declare class ListAlarmModelsResponse extends SpeakeasyBase {
     alarmModelSummaries?: AlarmModelSummary[];

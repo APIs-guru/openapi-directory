@@ -1,5 +1,7 @@
 package shared
 
+// LighthouseResultV5
+// The Lighthouse result object.
 type LighthouseResultV5 struct {
 	Audits            map[string]LighthouseAuditResultV5 `json:"audits,omitempty"`
 	Categories        *Categories                        `json:"categories,omitempty"`

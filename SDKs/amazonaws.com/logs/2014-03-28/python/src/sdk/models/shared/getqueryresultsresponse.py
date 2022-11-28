@@ -1,15 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import resultfield
-from . import querystatistics
-from . import querystatus_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetQueryResultsResponse:
-    results: Optional[List[List[resultfield.ResultField]]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
-    statistics: Optional[querystatistics.QueryStatistics] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'statistics' }})
-    status: Optional[querystatus_enum.QueryStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    results: Optional[List[List[ResultField]]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('results') }})
+    statistics: Optional[QueryStatistics] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('statistics') }})
+    status: Optional[QueryStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('status') }})
     

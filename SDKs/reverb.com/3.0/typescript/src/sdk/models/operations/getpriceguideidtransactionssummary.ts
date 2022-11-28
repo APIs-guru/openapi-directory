@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetPriceguideIdTransactionsSummaryPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class GetPriceguideIdTransactionsSummaryQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=condition" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=condition" })
   condition?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=number_of_months" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=number_of_months" })
   numberOfMonths?: number;
 }
 
 
 export class GetPriceguideIdTransactionsSummaryRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetPriceguideIdTransactionsSummaryPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPriceguideIdTransactionsSummaryQueryParams;
 }
 
 
 export class GetPriceguideIdTransactionsSummaryResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

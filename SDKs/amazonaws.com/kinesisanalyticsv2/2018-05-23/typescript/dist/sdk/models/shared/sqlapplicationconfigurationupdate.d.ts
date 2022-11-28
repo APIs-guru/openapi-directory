@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { InputUpdate } from "./inputupdate";
 import { OutputUpdate } from "./outputupdate";
 import { ReferenceDataSourceUpdate } from "./referencedatasourceupdate";

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IamPolicyAnalysisQuery } from "./iampolicyanalysisquery";
 import { Options } from "./options";
 import { IamPolicyAnalysisOutputConfig } from "./iampolicyanalysisoutputconfig";
+
 
 
 // ExportIamPolicyAnalysisRequest
@@ -9,12 +10,12 @@ import { IamPolicyAnalysisOutputConfig } from "./iampolicyanalysisoutputconfig";
  * A request message for AssetService.ExportIamPolicyAnalysis.
 **/
 export class ExportIamPolicyAnalysisRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=analysisQuery" })
+  @SpeakeasyMetadata({ data: "json, name=analysisQuery" })
   analysisQuery?: IamPolicyAnalysisQuery;
 
-  @Metadata({ data: "json, name=options" })
+  @SpeakeasyMetadata({ data: "json, name=options" })
   options?: Options;
 
-  @Metadata({ data: "json, name=outputConfig" })
+  @SpeakeasyMetadata({ data: "json, name=outputConfig" })
   outputConfig?: IamPolicyAnalysisOutputConfig;
 }

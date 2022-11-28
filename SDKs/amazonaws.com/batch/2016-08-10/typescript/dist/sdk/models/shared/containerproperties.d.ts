@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { KeyValuePair } from "./keyvaluepair";
 import { FargatePlatformConfiguration } from "./fargateplatformconfiguration";
 import { LinuxParameters } from "./linuxparameters";

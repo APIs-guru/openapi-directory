@@ -8,6 +8,8 @@ const (
 	PivotGroupSortOrderEnumDescending           PivotGroupSortOrderEnum = "DESCENDING"
 )
 
+// PivotGroup
+// A single grouping (either row or column) in a pivot table.
 type PivotGroup struct {
 	DataSourceColumnReference *DataSourceColumnReference `json:"dataSourceColumnReference,omitempty"`
 	GroupLimit                *PivotGroupLimit           `json:"groupLimit,omitempty"`

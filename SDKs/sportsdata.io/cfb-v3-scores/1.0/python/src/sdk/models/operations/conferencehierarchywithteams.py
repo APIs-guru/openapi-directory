@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 class ConferenceHierarchyWithTeamsFormatEnum(str, Enum):
     XML = "XML"
@@ -8,17 +9,17 @@ class ConferenceHierarchyWithTeamsFormatEnum(str, Enum):
 
 @dataclass
 class ConferenceHierarchyWithTeamsPathParams:
-    format: ConferenceHierarchyWithTeamsFormatEnum = field(default=None, metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
+    format: ConferenceHierarchyWithTeamsFormatEnum = field(metadata={'path_param': { 'field_name': 'format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class ConferenceHierarchyWithTeamsRequest:
-    path_params: ConferenceHierarchyWithTeamsPathParams = field(default=None)
+    path_params: ConferenceHierarchyWithTeamsPathParams = field()
     
 
 @dataclass
 class ConferenceHierarchyWithTeamsResponse:
+    content_type: str = field()
+    status_code: int = field()
     conferences: Optional[List[Any]] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

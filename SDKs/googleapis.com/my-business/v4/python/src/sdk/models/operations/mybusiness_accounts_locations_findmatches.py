@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class MybusinessAccountsLocationsFindMatchesPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class MybusinessAccountsLocationsFindMatchesQueryParams:
 
 @dataclass
 class MybusinessAccountsLocationsFindMatchesRequest:
-    path_params: MybusinessAccountsLocationsFindMatchesPathParams = field(default=None)
-    query_params: MybusinessAccountsLocationsFindMatchesQueryParams = field(default=None)
+    path_params: MybusinessAccountsLocationsFindMatchesPathParams = field()
+    query_params: MybusinessAccountsLocationsFindMatchesQueryParams = field()
     request: Optional[shared.FindMatchingLocationsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class MybusinessAccountsLocationsFindMatchesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     find_matching_locations_response: Optional[shared.FindMatchingLocationsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

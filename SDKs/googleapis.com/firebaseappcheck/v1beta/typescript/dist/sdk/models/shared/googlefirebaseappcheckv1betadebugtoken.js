@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // GoogleFirebaseAppcheckV1betaDebugToken
 /**
  * A *debug token* is a secret used during the development or integration testing of an app. It essentially allows the development or integration testing to bypass app attestation while still allowing App Check to enforce protection on supported production Firebase services.
@@ -33,15 +33,15 @@ var GoogleFirebaseAppcheckV1betaDebugToken = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1betaDebugToken.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1betaDebugToken.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=token" }),
+        SpeakeasyMetadata({ data: "json, name=token" }),
         __metadata("design:type", String)
     ], GoogleFirebaseAppcheckV1betaDebugToken.prototype, "token", void 0);
     return GoogleFirebaseAppcheckV1betaDebugToken;

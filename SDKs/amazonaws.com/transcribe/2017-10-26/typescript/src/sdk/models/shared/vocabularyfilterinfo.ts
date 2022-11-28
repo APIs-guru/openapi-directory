@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LanguageCodeEnum } from "./languagecodeenum";
+
 
 
 // VocabularyFilterInfo
@@ -7,12 +8,12 @@ import { LanguageCodeEnum } from "./languagecodeenum";
  * Provides information about a vocabulary filter.
 **/
 export class VocabularyFilterInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=LanguageCode" })
+  @SpeakeasyMetadata({ data: "json, name=LanguageCode" })
   languageCode?: LanguageCodeEnum;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=VocabularyFilterName" })
+  @SpeakeasyMetadata({ data: "json, name=VocabularyFilterName" })
   vocabularyFilterName?: string;
 }

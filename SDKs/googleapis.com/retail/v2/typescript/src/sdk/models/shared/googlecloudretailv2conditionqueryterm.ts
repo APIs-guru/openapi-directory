@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudRetailV2ConditionQueryTerm
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Query terms that we want to match on.
 **/
 export class GoogleCloudRetailV2ConditionQueryTerm extends SpeakeasyBase {
-  @Metadata({ data: "json, name=fullMatch" })
+  @SpeakeasyMetadata({ data: "json, name=fullMatch" })
   fullMatch?: boolean;
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

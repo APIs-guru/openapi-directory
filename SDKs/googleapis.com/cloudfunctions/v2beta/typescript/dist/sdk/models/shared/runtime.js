@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var RuntimeEnvironmentEnum;
 (function (RuntimeEnvironmentEnum) {
     RuntimeEnvironmentEnum["EnvironmentUnspecified"] = "ENVIRONMENT_UNSPECIFIED";
@@ -49,23 +49,23 @@ var Runtime = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=displayName" }),
+        SpeakeasyMetadata({ data: "json, name=displayName" }),
         __metadata("design:type", String)
     ], Runtime.prototype, "displayName", void 0);
     __decorate([
-        Metadata({ data: "json, name=environment" }),
+        SpeakeasyMetadata({ data: "json, name=environment" }),
         __metadata("design:type", String)
     ], Runtime.prototype, "environment", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Runtime.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=stage" }),
+        SpeakeasyMetadata({ data: "json, name=stage" }),
         __metadata("design:type", String)
     ], Runtime.prototype, "stage", void 0);
     __decorate([
-        Metadata({ data: "json, name=warnings" }),
+        SpeakeasyMetadata({ data: "json, name=warnings" }),
         __metadata("design:type", Array)
     ], Runtime.prototype, "warnings", void 0);
     return Runtime;

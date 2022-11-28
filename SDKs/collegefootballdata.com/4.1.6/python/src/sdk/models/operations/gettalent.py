@@ -10,12 +10,12 @@ class GetTalentQueryParams:
 
 @dataclass
 class GetTalentRequest:
-    query_params: GetTalentQueryParams = field(default=None)
+    query_params: GetTalentQueryParams = field()
     
 
 @dataclass
 class GetTalentResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     team_talents: Optional[List[shared.TeamTalent]] = field(default=None)
     

@@ -1,7 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { HttpEndpointCommonAttribute } from "./httpendpointcommonattribute";
 import { ContentEncodingEnum } from "./contentencodingenum";
+
 
 
 // HttpEndpointRequestConfiguration
@@ -9,9 +9,9 @@ import { ContentEncodingEnum } from "./contentencodingenum";
  * The configuration of the HTTP endpoint request.
 **/
 export class HttpEndpointRequestConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CommonAttributes", elemType: shared.HttpEndpointCommonAttribute })
+  @SpeakeasyMetadata({ data: "json, name=CommonAttributes", elemType: HttpEndpointCommonAttribute })
   commonAttributes?: HttpEndpointCommonAttribute[];
 
-  @Metadata({ data: "json, name=ContentEncoding" })
+  @SpeakeasyMetadata({ data: "json, name=ContentEncoding" })
   contentEncoding?: ContentEncodingEnum;
 }

@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AccountAdsLink extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adsId" })
+  @SpeakeasyMetadata({ data: "json, name=adsId" })
   adsId?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 }

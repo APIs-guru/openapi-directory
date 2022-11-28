@@ -9,6 +9,8 @@ const (
 	ChartOptionsModeEnumStats           ChartOptionsModeEnum = "STATS"
 )
 
+// ChartOptions
+// Options to control visual rendering of a chart.
 type ChartOptions struct {
 	Mode *ChartOptionsModeEnum `json:"mode,omitempty"`
 }

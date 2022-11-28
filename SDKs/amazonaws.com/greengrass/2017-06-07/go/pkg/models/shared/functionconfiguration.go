@@ -1,5 +1,7 @@
 package shared
 
+// FunctionConfiguration
+// The configuration of the Lambda function.
 type FunctionConfiguration struct {
 	EncodingType *EncodingTypeEnum                 `json:"EncodingType,omitempty"`
 	Environment  *FunctionConfigurationEnvironment `json:"Environment,omitempty"`

@@ -1,15 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class NctscRequestBodyCertificateParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FullName" })
+  @SpeakeasyMetadata({ data: "json, name=FullName" })
   fullName: string;
 
-  @Metadata({ data: "json, name=rollno" })
+  @SpeakeasyMetadata({ data: "json, name=rollno" })
   rollno: string;
 
-  @Metadata({ data: "json, name=year" })
+  @SpeakeasyMetadata({ data: "json, name=year" })
   year: string;
 }
 
@@ -19,97 +20,88 @@ export enum NctscRequestBodyFormatEnum {
 
 
 export class NctscRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=certificateParameters" })
+  @SpeakeasyMetadata({ data: "json, name=certificateParameters" })
   certificateParameters?: NctscRequestBodyCertificateParameters;
 
-  @Metadata({ data: "json, name=consentArtifact" })
+  @SpeakeasyMetadata({ data: "json, name=consentArtifact" })
   consentArtifact?: any;
 
-  @Metadata({ data: "json, name=format" })
+  @SpeakeasyMetadata({ data: "json, name=format" })
   format: NctscRequestBodyFormatEnum;
 
-  @Metadata({ data: "json, name=txnId" })
+  @SpeakeasyMetadata({ data: "json, name=txnId" })
   txnId: string;
 }
 
 
 export class NctscSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   apiKey: shared.SchemeApiKey;
 
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   clientId: shared.SchemeClientId;
 }
 
-
-export class NctscRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: NctscRequestBody;
-
-  @Metadata()
-  security: NctscSecurity;
-}
-
 export enum Nctsc400ApplicationJsonErrorEnum {
-    MissingParameter = "missing_parameter"
-,    InvalidParameter = "invalid_parameter"
-,    InvalidFormat = "invalid_format"
-,    InvalidTxnid = "invalid_txnid"
-,    InvalidConsentid = "invalid_consentid"
+    MissingParameter = "missing_parameter",
+    InvalidParameter = "invalid_parameter",
+    InvalidFormat = "invalid_format",
+    InvalidTxnid = "invalid_txnid",
+    InvalidConsentid = "invalid_consentid"
 }
 
 export enum Nctsc400ApplicationJsonErrorDescriptionEnum {
-    PleaseProvideAllMandatoryParameters = "Please provide all mandatory parameters"
-,    BadRequest = "Bad request"
-,    TheFormatParameterIsInvalid = "The format parameter is invalid"
-,    TheTxnIdParameterMustBeInUuidFormat = "The txnId parameter must be in UUID format"
-,    TheConsentIdParameterMustBeInUuidFormat = "The consentId parameter must be in UUID format"
+    PleaseProvideAllMandatoryParameters = "Please provide all mandatory parameters",
+    BadRequest = "Bad request",
+    TheFormatParameterIsInvalid = "The format parameter is invalid",
+    TheTxnIdParameterMustBeInUuidFormat = "The txnId parameter must be in UUID format",
+    TheConsentIdParameterMustBeInUuidFormat = "The consentId parameter must be in UUID format"
 }
 
 
 export class Nctsc400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Nctsc400ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Nctsc400ApplicationJsonErrorDescriptionEnum;
 }
 
 export enum Nctsc401ApplicationJsonErrorEnum {
-    InvalidAuthentication = "invalid_authentication"
-,    InvalidAuthorization = "invalid_authorization"
+    InvalidAuthentication = "invalid_authentication",
+    InvalidAuthorization = "invalid_authorization"
 }
 
 export enum Nctsc401ApplicationJsonErrorDescriptionEnum {
-    AuthenticationFailed = "Authentication failed"
-,    YouAreNotAuthorizedToUseThisApi = "You are not authorized to use this API"
+    AuthenticationFailed = "Authentication failed",
+    YouAreNotAuthorizedToUseThisApi = "You are not authorized to use this API"
 }
 
 
 export class Nctsc401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Nctsc401ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Nctsc401ApplicationJsonErrorDescriptionEnum;
 }
 
 export enum Nctsc404ApplicationJsonErrorEnum {
-    RecordNotFound = "record_not_found"
-,    UrlNotFound = "url_not_found"
+    RecordNotFound = "record_not_found",
+    UrlNotFound = "url_not_found"
 }
 
 export enum Nctsc404ApplicationJsonErrorDescriptionEnum {
-    NoRecordFound = "No record found"
-,    YourApiUrlOrPathIsIncorrect = "Your API url or path is incorrect"
+    NoRecordFound = "No record found",
+    YourApiUrlOrPathIsIncorrect = "Your API url or path is incorrect"
 }
 
 
 export class Nctsc404ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Nctsc404ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Nctsc404ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -123,10 +115,10 @@ export enum Nctsc500ApplicationJsonErrorDescriptionEnum {
 
 
 export class Nctsc500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Nctsc500ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Nctsc500ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -140,10 +132,10 @@ export enum Nctsc502ApplicationJsonErrorDescriptionEnum {
 
 
 export class Nctsc502ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Nctsc502ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Nctsc502ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -157,10 +149,10 @@ export enum Nctsc503ApplicationJsonErrorDescriptionEnum {
 
 
 export class Nctsc503ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Nctsc503ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Nctsc503ApplicationJsonErrorDescriptionEnum;
 }
 
@@ -174,39 +166,48 @@ export enum Nctsc504ApplicationJsonErrorDescriptionEnum {
 
 
 export class Nctsc504ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: Nctsc504ApplicationJsonErrorEnum;
 
-  @Metadata({ data: "json, name=errorDescription" })
+  @SpeakeasyMetadata({ data: "json, name=errorDescription" })
   errorDescription?: Nctsc504ApplicationJsonErrorDescriptionEnum;
 }
 
 
+export class NctscRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: NctscRequestBody;
+
+  @SpeakeasyMetadata()
+  security: NctscSecurity;
+}
+
+
 export class NctscResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nctsc400ApplicationJsonObject?: Nctsc400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nctsc401ApplicationJsonObject?: Nctsc401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nctsc404ApplicationJsonObject?: Nctsc404ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nctsc500ApplicationJsonObject?: Nctsc500ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nctsc502ApplicationJsonObject?: Nctsc502ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nctsc503ApplicationJsonObject?: Nctsc503ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   nctsc504ApplicationJsonObject?: Nctsc504ApplicationJson;
 }

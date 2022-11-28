@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import confidencelevel_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class MachineLearningDetectionConfig:
-    confidence_level: confidencelevel_enum.ConfidenceLevelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'confidenceLevel' }})
+    r"""MachineLearningDetectionConfig
+     The configuration of an ML Detect Security Profile. 
+    """
+    
+    confidence_level: ConfidenceLevelEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('confidenceLevel') }})
     

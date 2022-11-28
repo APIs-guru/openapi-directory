@@ -1,56 +1,57 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetExamplesPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=datasetId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=datasetId" })
   datasetId: string;
 }
 
 export enum GetExamplesSourceEnum {
-    All = "all"
-,    Feedback = "feedback"
-,    Upload = "upload"
+    All = "all",
+    Feedback = "feedback",
+    Upload = "upload"
 }
 
 
 export class GetExamplesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=count" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=count" })
   count?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=offset" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" })
   offset?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=source" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=source" })
   source?: GetExamplesSourceEnum;
 }
 
 
 export class GetExamplesSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=bearer" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=bearer" })
   bearerToken: shared.SchemeBearerToken;
 }
 
 
 export class GetExamplesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetExamplesPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetExamplesQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetExamplesSecurity;
 }
 
 
 export class GetExamplesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   exampleList?: shared.ExampleList;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

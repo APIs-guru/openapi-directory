@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetUserDefinedFunctionRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CatalogId" })
+  @SpeakeasyMetadata({ data: "json, name=CatalogId" })
   catalogId?: string;
 
-  @Metadata({ data: "json, name=DatabaseName" })
+  @SpeakeasyMetadata({ data: "json, name=DatabaseName" })
   databaseName: string;
 
-  @Metadata({ data: "json, name=FunctionName" })
+  @SpeakeasyMetadata({ data: "json, name=FunctionName" })
   functionName: string;
 }

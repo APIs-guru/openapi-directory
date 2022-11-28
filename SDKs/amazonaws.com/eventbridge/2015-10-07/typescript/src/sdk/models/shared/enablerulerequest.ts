@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class EnableRuleRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=EventBusName" })
+  @SpeakeasyMetadata({ data: "json, name=EventBusName" })
   eventBusName?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name: string;
 }

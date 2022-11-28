@@ -1,5 +1,7 @@
 package shared
 
+// Groups
+// JSON template for Group resource
 type Groups struct {
 	AllowExternalMembers                    *string `json:"allowExternalMembers,omitempty"`
 	AllowGoogleCommunication                *string `json:"allowGoogleCommunication,omitempty"`

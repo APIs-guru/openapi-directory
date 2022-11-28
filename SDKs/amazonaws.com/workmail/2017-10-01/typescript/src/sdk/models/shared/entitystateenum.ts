@@ -1,7 +1,8 @@
 
 
+
 export enum EntityStateEnum {
-    Enabled = "ENABLED"
-,    Disabled = "DISABLED"
-,    Deleted = "DELETED"
+    Enabled = "ENABLED",
+    Disabled = "DISABLED",
+    Deleted = "DELETED"
 }

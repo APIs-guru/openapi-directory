@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from marshmallow import fields
 import dateutil.parser
 from typing import List,Optional
@@ -8,6 +8,7 @@ from sdk.models import shared
 
 @dataclass
 class PostBundlesRequestBody:
+    paths: List[str] = field(metadata={'multipart_form': { 'field_name': 'paths' }})
     clickwrap_id: Optional[int] = field(default=None, metadata={'multipart_form': { 'field_name': 'clickwrap_id' }})
     code: Optional[str] = field(default=None, metadata={'multipart_form': { 'field_name': 'code' }})
     description: Optional[str] = field(default=None, metadata={'multipart_form': { 'field_name': 'description' }})
@@ -17,7 +18,6 @@ class PostBundlesRequestBody:
     max_uses: Optional[int] = field(default=None, metadata={'multipart_form': { 'field_name': 'max_uses' }})
     note: Optional[str] = field(default=None, metadata={'multipart_form': { 'field_name': 'note' }})
     password: Optional[str] = field(default=None, metadata={'multipart_form': { 'field_name': 'password' }})
-    paths: List[str] = field(default=None, metadata={'multipart_form': { 'field_name': 'paths' }})
     preview_only: Optional[bool] = field(default=None, metadata={'multipart_form': { 'field_name': 'preview_only' }})
     require_registration: Optional[bool] = field(default=None, metadata={'multipart_form': { 'field_name': 'require_registration' }})
     require_share_recipient: Optional[bool] = field(default=None, metadata={'multipart_form': { 'field_name': 'require_share_recipient' }})
@@ -31,7 +31,7 @@ class PostBundlesRequest:
 
 @dataclass
 class PostBundlesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bundle_entity: Optional[shared.BundleEntity] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

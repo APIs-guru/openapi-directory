@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // File
 /**
  * File
@@ -33,31 +33,31 @@ var File = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=$id" }),
+        SpeakeasyMetadata({ data: "json, name=$id" }),
         __metadata("design:type", String)
     ], File.prototype, "dollarId", void 0);
     __decorate([
-        Metadata({ data: "json, name=$permissions" }),
+        SpeakeasyMetadata({ data: "json, name=$permissions" }),
         __metadata("design:type", Map)
     ], File.prototype, "dollarPermissions", void 0);
     __decorate([
-        Metadata({ data: "json, name=dateCreated" }),
+        SpeakeasyMetadata({ data: "json, name=dateCreated" }),
         __metadata("design:type", Number)
     ], File.prototype, "dateCreated", void 0);
     __decorate([
-        Metadata({ data: "json, name=mimeType" }),
+        SpeakeasyMetadata({ data: "json, name=mimeType" }),
         __metadata("design:type", String)
     ], File.prototype, "mimeType", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], File.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=signature" }),
+        SpeakeasyMetadata({ data: "json, name=signature" }),
         __metadata("design:type", String)
     ], File.prototype, "signature", void 0);
     __decorate([
-        Metadata({ data: "json, name=sizeOriginal" }),
+        SpeakeasyMetadata({ data: "json, name=sizeOriginal" }),
         __metadata("design:type", Number)
     ], File.prototype, "sizeOriginal", void 0);
     return File;

@@ -18,15 +18,15 @@ type IpamServicesListQueryParams struct {
 	VirtualMachineID *string  `queryParam:"style=form,explode=true,name=virtual_machine_id"`
 }
 
-type IpamServicesListRequest struct {
-	QueryParams IpamServicesListQueryParams
-}
-
 type IpamServicesList200ApplicationJSON struct {
 	Count    int64            `json:"count"`
 	Next     *string          `json:"next,omitempty"`
 	Previous *string          `json:"previous,omitempty"`
 	Results  []shared.Service `json:"results"`
+}
+
+type IpamServicesListRequest struct {
+	QueryParams IpamServicesListQueryParams
 }
 
 type IpamServicesListResponse struct {

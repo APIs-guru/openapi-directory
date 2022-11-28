@@ -1,9 +1,10 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum AccountCredentialsPurposeEnum {
-    AccountCredentialsPurposeUnspecified = "ACCOUNT_CREDENTIALS_PURPOSE_UNSPECIFIED"
-,    ShopifyOrderManagement = "SHOPIFY_ORDER_MANAGEMENT"
-,    ShopifyIntegration = "SHOPIFY_INTEGRATION"
+    AccountCredentialsPurposeUnspecified = "ACCOUNT_CREDENTIALS_PURPOSE_UNSPECIFIED",
+    ShopifyOrderManagement = "SHOPIFY_ORDER_MANAGEMENT",
+    ShopifyIntegration = "SHOPIFY_INTEGRATION"
 }
 
 
@@ -12,12 +13,12 @@ export enum AccountCredentialsPurposeEnum {
  * Credentials allowing Google to call a partner's API on behalf of a merchant.
 **/
 export class AccountCredentials extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessToken" })
+  @SpeakeasyMetadata({ data: "json, name=accessToken" })
   accessToken?: string;
 
-  @Metadata({ data: "json, name=expiresIn" })
+  @SpeakeasyMetadata({ data: "json, name=expiresIn" })
   expiresIn?: string;
 
-  @Metadata({ data: "json, name=purpose" })
+  @SpeakeasyMetadata({ data: "json, name=purpose" })
   purpose?: AccountCredentialsPurposeEnum;
 }

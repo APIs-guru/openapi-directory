@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export declare class VrwmiRequestBodyCertificateParameters extends SpeakeasyBase {
     refNo: string;
@@ -16,10 +16,6 @@ export declare class VrwmiRequestBody extends SpeakeasyBase {
 export declare class VrwmiSecurity extends SpeakeasyBase {
     apiKey: shared.SchemeApiKey;
     clientId: shared.SchemeClientId;
-}
-export declare class VrwmiRequest extends SpeakeasyBase {
-    request?: VrwmiRequestBody;
-    security: VrwmiSecurity;
 }
 export declare enum Vrwmi400ApplicationJsonErrorEnum {
     MissingParameter = "missing_parameter",
@@ -102,6 +98,10 @@ export declare enum Vrwmi504ApplicationJsonErrorDescriptionEnum {
 export declare class Vrwmi504ApplicationJson extends SpeakeasyBase {
     error?: Vrwmi504ApplicationJsonErrorEnum;
     errorDescription?: Vrwmi504ApplicationJsonErrorDescriptionEnum;
+}
+export declare class VrwmiRequest extends SpeakeasyBase {
+    request?: VrwmiRequestBody;
+    security: VrwmiSecurity;
 }
 export declare class VrwmiResponse extends SpeakeasyBase {
     contentType: string;

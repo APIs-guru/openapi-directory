@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class AdsensehostAdclientsGetPathParams:
-    ad_client_id: str = field(default=None, metadata={'path_param': { 'field_name': 'adClientId', 'style': 'simple', 'explode': False }})
+    ad_client_id: str = field(metadata={'path_param': { 'field_name': 'adClientId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,20 +22,20 @@ class AdsensehostAdclientsGetQueryParams:
 
 @dataclass
 class AdsensehostAdclientsGetSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class AdsensehostAdclientsGetRequest:
-    path_params: AdsensehostAdclientsGetPathParams = field(default=None)
-    query_params: AdsensehostAdclientsGetQueryParams = field(default=None)
-    security: AdsensehostAdclientsGetSecurity = field(default=None)
+    path_params: AdsensehostAdclientsGetPathParams = field()
+    query_params: AdsensehostAdclientsGetQueryParams = field()
+    security: AdsensehostAdclientsGetSecurity = field()
     
 
 @dataclass
 class AdsensehostAdclientsGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     ad_client: Optional[shared.AdClient] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

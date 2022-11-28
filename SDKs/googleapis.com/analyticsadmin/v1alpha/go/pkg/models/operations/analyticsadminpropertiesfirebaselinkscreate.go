@@ -30,7 +30,7 @@ type AnalyticsadminPropertiesFirebaseLinksCreateSecurity struct {
 type AnalyticsadminPropertiesFirebaseLinksCreateRequest struct {
 	PathParams  AnalyticsadminPropertiesFirebaseLinksCreatePathParams
 	QueryParams AnalyticsadminPropertiesFirebaseLinksCreateQueryParams
-	Request     *shared.GoogleAnalyticsAdminV1alphaFirebaseLink `request:"mediaType=application/json"`
+	Request     *shared.GoogleAnalyticsAdminV1alphaFirebaseLinkInput `request:"mediaType=application/json"`
 	Security    AnalyticsadminPropertiesFirebaseLinksCreateSecurity
 }
 

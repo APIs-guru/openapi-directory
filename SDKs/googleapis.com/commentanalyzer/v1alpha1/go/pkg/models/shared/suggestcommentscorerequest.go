@@ -1,5 +1,7 @@
 package shared
 
+// SuggestCommentScoreRequest
+// The comment score suggestion request message.
 type SuggestCommentScoreRequest struct {
 	AttributeScores map[string]AttributeScores `json:"attributeScores,omitempty"`
 	ClientToken     *string                    `json:"clientToken,omitempty"`

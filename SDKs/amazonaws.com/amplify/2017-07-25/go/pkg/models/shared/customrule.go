@@ -1,5 +1,8 @@
 package shared
 
+// CustomRule
+//
+//	Describes a custom rewrite or redirect rule.
 type CustomRule struct {
 	Condition *string `json:"condition,omitempty"`
 	Source    string  `json:"source"`

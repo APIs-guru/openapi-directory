@@ -1,5 +1,7 @@
 package shared
 
+// ForgotPasswordRequest
+// Represents the request to reset a user's password.
 type ForgotPasswordRequest struct {
 	AnalyticsMetadata *AnalyticsMetadataType `json:"AnalyticsMetadata,omitempty"`
 	ClientID          string                 `json:"ClientId"`

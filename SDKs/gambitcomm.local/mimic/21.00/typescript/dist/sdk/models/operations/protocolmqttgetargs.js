@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolMqttGetArgsPathParams = /** @class */ (function (_super) {
     __extends(ProtocolMqttGetArgsPathParams, _super);
     function ProtocolMqttGetArgsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolMqttGetArgsPathParams.prototype, "agentNum", void 0);
     return ProtocolMqttGetArgsPathParams;
@@ -41,7 +41,7 @@ var ProtocolMqttGetArgsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolMqttGetArgsPathParams)
     ], ProtocolMqttGetArgsRequest.prototype, "pathParams", void 0);
     return ProtocolMqttGetArgsRequest;
@@ -53,15 +53,15 @@ var ProtocolMqttGetArgsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolMqttGetArgsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolMqttGetArgsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Map)
     ], ProtocolMqttGetArgsResponse.prototype, "protocolMqttGetArgs200ApplicationJsonObject", void 0);
     return ProtocolMqttGetArgsResponse;

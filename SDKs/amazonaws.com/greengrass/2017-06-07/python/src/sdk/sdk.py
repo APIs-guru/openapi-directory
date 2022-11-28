@@ -1,8 +1,11 @@
-import warnings
+
+__doc__ = """ SDK Documentation: https://docs.aws.amazon.com/greengrass/ - Amazon Web Services documentation"""
 import requests
-from typing import Any,List,Optional
-from sdk.models import operations, shared
+from typing import Any,Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -14,37 +17,63 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    r"""SDK Documentation: https://docs.aws.amazon.com/greengrass/ - Amazon Web Services documentation"""
+
+    _client: requests.Session
+    _security_client: requests.Session
+    _security: shared.Security
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
-    
-    def config_security(self, security: shared.Security):
-        self.client = utils.configure_security_client(security)
+            self._server_url = server_url
 
+        
+    
+
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+        if self._security is not None:
+            self._security_client = utils.configure_security_client(self._client, self._security)
+        
+    
+
+    def config_security(self, security: shared.Security):
+        self._security = security
+        self._security_client = utils.configure_security_client(self._client, security)
+        
+    
+    
     
     def associate_role_to_group(self, request: operations.AssociateRoleToGroupRequest) -> operations.AssociateRoleToGroupResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Associates a role with a group. Your Greengrass core will use the role to access AWS cloud services. The role's permissions should allow Greengrass core Lambda functions to perform actions against the cloud.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/groups/{GroupId}/role", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -67,22 +96,22 @@ class SDK:
 
     
     def associate_service_role_to_account(self, request: operations.AssociateServiceRoleToAccountRequest) -> operations.AssociateServiceRoleToAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Associates a role with your account. AWS IoT Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ''AWSGreengrassResourceAccessRolePolicy''.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/servicerole"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -105,22 +134,22 @@ class SDK:
 
     
     def create_connector_definition(self, request: operations.CreateConnectorDefinitionRequest) -> operations.CreateConnectorDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a connector definition. You may provide the initial version of the connector definition now or use ''CreateConnectorDefinitionVersion'' at a later time.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/definition/connectors"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -139,22 +168,22 @@ class SDK:
 
     
     def create_connector_definition_version(self, request: operations.CreateConnectorDefinitionVersionRequest) -> operations.CreateConnectorDefinitionVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a version of a connector definition which has already been defined.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/connectors/{ConnectorDefinitionId}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -173,22 +202,22 @@ class SDK:
 
     
     def create_core_definition(self, request: operations.CreateCoreDefinitionRequest) -> operations.CreateCoreDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a core definition. You may provide the initial version of the core definition now or use ''CreateCoreDefinitionVersion'' at a later time. Greengrass groups must each contain exactly one Greengrass core.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/definition/cores"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -207,22 +236,22 @@ class SDK:
 
     
     def create_core_definition_version(self, request: operations.CreateCoreDefinitionVersionRequest) -> operations.CreateCoreDefinitionVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a version of a core definition that has already been defined. Greengrass groups must each contain exactly one Greengrass core.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/cores/{CoreDefinitionId}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -241,22 +270,22 @@ class SDK:
 
     
     def create_deployment(self, request: operations.CreateDeploymentRequest) -> operations.CreateDeploymentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a deployment. ''CreateDeployment'' requests are idempotent with respect to the ''X-Amzn-Client-Token'' token and the request parameters.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/groups/{GroupId}/deployments", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -275,22 +304,22 @@ class SDK:
 
     
     def create_device_definition(self, request: operations.CreateDeviceDefinitionRequest) -> operations.CreateDeviceDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a device definition. You may provide the initial version of the device definition now or use ''CreateDeviceDefinitionVersion'' at a later time.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/definition/devices"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -309,22 +338,22 @@ class SDK:
 
     
     def create_device_definition_version(self, request: operations.CreateDeviceDefinitionVersionRequest) -> operations.CreateDeviceDefinitionVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a version of a device definition that has already been defined.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/devices/{DeviceDefinitionId}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -343,22 +372,22 @@ class SDK:
 
     
     def create_function_definition(self, request: operations.CreateFunctionDefinitionRequest) -> operations.CreateFunctionDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a Lambda function definition which contains a list of Lambda functions and their configurations to be used in a group. You can create an initial version of the definition by providing a list of Lambda functions and their configurations now, or use ''CreateFunctionDefinitionVersion'' later.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/definition/functions"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -377,22 +406,22 @@ class SDK:
 
     
     def create_function_definition_version(self, request: operations.CreateFunctionDefinitionVersionRequest) -> operations.CreateFunctionDefinitionVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a version of a Lambda function definition that has already been defined.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/functions/{FunctionDefinitionId}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -411,22 +440,22 @@ class SDK:
 
     
     def create_group(self, request: operations.CreateGroupRequest) -> operations.CreateGroupResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a group. You may provide the initial version of the group or use ''CreateGroupVersion'' at a later time. Tip: You can use the ''gg_group_setup'' package (https://github.com/awslabs/aws-greengrass-group-setup) as a library or command-line application to create and deploy Greengrass groups.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/groups"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -445,15 +474,17 @@ class SDK:
 
     
     def create_group_certificate_authority(self, request: operations.CreateGroupCertificateAuthorityRequest) -> operations.CreateGroupCertificateAuthorityResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a CA for the group. If a CA already exists, it will rotate the existing CA.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/groups/{GroupId}/certificateauthorities", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -476,22 +507,22 @@ class SDK:
 
     
     def create_group_version(self, request: operations.CreateGroupVersionRequest) -> operations.CreateGroupVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a version of a group which has already been defined.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/groups/{GroupId}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -510,22 +541,22 @@ class SDK:
 
     
     def create_logger_definition(self, request: operations.CreateLoggerDefinitionRequest) -> operations.CreateLoggerDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a logger definition. You may provide the initial version of the logger definition now or use ''CreateLoggerDefinitionVersion'' at a later time.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/definition/loggers"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -544,22 +575,22 @@ class SDK:
 
     
     def create_logger_definition_version(self, request: operations.CreateLoggerDefinitionVersionRequest) -> operations.CreateLoggerDefinitionVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a version of a logger definition that has already been defined.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/loggers/{LoggerDefinitionId}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -578,22 +609,22 @@ class SDK:
 
     
     def create_resource_definition(self, request: operations.CreateResourceDefinitionRequest) -> operations.CreateResourceDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a resource definition which contains a list of resources to be used in a group. You can create an initial version of the definition by providing a list of resources now, or use ''CreateResourceDefinitionVersion'' later.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/definition/resources"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -612,22 +643,22 @@ class SDK:
 
     
     def create_resource_definition_version(self, request: operations.CreateResourceDefinitionVersionRequest) -> operations.CreateResourceDefinitionVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a version of a resource definition that has already been defined.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/resources/{ResourceDefinitionId}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -646,22 +677,22 @@ class SDK:
 
     
     def create_software_update_job(self, request: operations.CreateSoftwareUpdateJobRequest) -> operations.CreateSoftwareUpdateJobResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a software update for a core or group of cores (specified as an IoT thing group.) Use this to update the OTA Agent as well as the Greengrass core software. It makes use of the IoT Jobs feature which provides additional commands to manage a Greengrass core software update job.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/updates"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -684,22 +715,22 @@ class SDK:
 
     
     def create_subscription_definition(self, request: operations.CreateSubscriptionDefinitionRequest) -> operations.CreateSubscriptionDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a subscription definition. You may provide the initial version of the subscription definition now or use ''CreateSubscriptionDefinitionVersion'' at a later time.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/definition/subscriptions"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -718,22 +749,22 @@ class SDK:
 
     
     def create_subscription_definition_version(self, request: operations.CreateSubscriptionDefinitionVersionRequest) -> operations.CreateSubscriptionDefinitionVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Creates a version of a subscription definition which has already been defined.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -752,15 +783,17 @@ class SDK:
 
     
     def delete_connector_definition(self, request: operations.DeleteConnectorDefinitionRequest) -> operations.DeleteConnectorDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a connector definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/connectors/{ConnectorDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -779,15 +812,17 @@ class SDK:
 
     
     def delete_core_definition(self, request: operations.DeleteCoreDefinitionRequest) -> operations.DeleteCoreDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a core definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/cores/{CoreDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -806,15 +841,17 @@ class SDK:
 
     
     def delete_device_definition(self, request: operations.DeleteDeviceDefinitionRequest) -> operations.DeleteDeviceDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a device definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/devices/{DeviceDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -833,15 +870,17 @@ class SDK:
 
     
     def delete_function_definition(self, request: operations.DeleteFunctionDefinitionRequest) -> operations.DeleteFunctionDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a Lambda function definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/functions/{FunctionDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -860,15 +899,17 @@ class SDK:
 
     
     def delete_group(self, request: operations.DeleteGroupRequest) -> operations.DeleteGroupResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a group.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/groups/{GroupId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -887,15 +928,17 @@ class SDK:
 
     
     def delete_logger_definition(self, request: operations.DeleteLoggerDefinitionRequest) -> operations.DeleteLoggerDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a logger definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/loggers/{LoggerDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -914,15 +957,17 @@ class SDK:
 
     
     def delete_resource_definition(self, request: operations.DeleteResourceDefinitionRequest) -> operations.DeleteResourceDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a resource definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/resources/{ResourceDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -941,15 +986,17 @@ class SDK:
 
     
     def delete_subscription_definition(self, request: operations.DeleteSubscriptionDefinitionRequest) -> operations.DeleteSubscriptionDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deletes a subscription definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -968,15 +1015,17 @@ class SDK:
 
     
     def disassociate_role_from_group(self, request: operations.DisassociateRoleFromGroupRequest) -> operations.DisassociateRoleFromGroupResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disassociates the role from a group.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/groups/{GroupId}/role", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -999,15 +1048,17 @@ class SDK:
 
     
     def disassociate_service_role_from_account(self, request: operations.DisassociateServiceRoleFromAccountRequest) -> operations.DisassociateServiceRoleFromAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Disassociates the service role from your account. Without a service role, deployments will not work.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/servicerole"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1026,15 +1077,17 @@ class SDK:
 
     
     def get_associated_role(self, request: operations.GetAssociatedRoleRequest) -> operations.GetAssociatedRoleResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the role associated with a particular group.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/groups/{GroupId}/role", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1057,15 +1110,17 @@ class SDK:
 
     
     def get_bulk_deployment_status(self, request: operations.GetBulkDeploymentStatusRequest) -> operations.GetBulkDeploymentStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the status of a bulk deployment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/bulk/deployments/{BulkDeploymentId}/status", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1084,15 +1139,17 @@ class SDK:
 
     
     def get_connectivity_info(self, request: operations.GetConnectivityInfoRequest) -> operations.GetConnectivityInfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the connectivity information for a core.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/things/{ThingName}/connectivityInfo", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1115,15 +1172,17 @@ class SDK:
 
     
     def get_connector_definition(self, request: operations.GetConnectorDefinitionRequest) -> operations.GetConnectorDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about a connector definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/connectors/{ConnectorDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1142,17 +1201,18 @@ class SDK:
 
     
     def get_connector_definition_version(self, request: operations.GetConnectorDefinitionVersionRequest) -> operations.GetConnectorDefinitionVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about a connector definition version, including the connectors that the version contains. Connectors are prebuilt modules that interact with local infrastructure, device protocols, AWS, and other cloud services.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/connectors/{ConnectorDefinitionId}/versions/{ConnectorDefinitionVersionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1171,15 +1231,17 @@ class SDK:
 
     
     def get_core_definition(self, request: operations.GetCoreDefinitionRequest) -> operations.GetCoreDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about a core definition version.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/cores/{CoreDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1198,15 +1260,17 @@ class SDK:
 
     
     def get_core_definition_version(self, request: operations.GetCoreDefinitionVersionRequest) -> operations.GetCoreDefinitionVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about a core definition version.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/cores/{CoreDefinitionId}/versions/{CoreDefinitionVersionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1225,15 +1289,17 @@ class SDK:
 
     
     def get_deployment_status(self, request: operations.GetDeploymentStatusRequest) -> operations.GetDeploymentStatusResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns the status of a deployment.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/groups/{GroupId}/deployments/{DeploymentId}/status", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1252,15 +1318,17 @@ class SDK:
 
     
     def get_device_definition(self, request: operations.GetDeviceDefinitionRequest) -> operations.GetDeviceDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about a device definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/devices/{DeviceDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1279,17 +1347,18 @@ class SDK:
 
     
     def get_device_definition_version(self, request: operations.GetDeviceDefinitionVersionRequest) -> operations.GetDeviceDefinitionVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about a device definition version.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/devices/{DeviceDefinitionId}/versions/{DeviceDefinitionVersionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1308,15 +1377,17 @@ class SDK:
 
     
     def get_function_definition(self, request: operations.GetFunctionDefinitionRequest) -> operations.GetFunctionDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about a Lambda function definition, including its creation time and latest version.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/functions/{FunctionDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1335,17 +1406,18 @@ class SDK:
 
     
     def get_function_definition_version(self, request: operations.GetFunctionDefinitionVersionRequest) -> operations.GetFunctionDefinitionVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about a Lambda function definition version, including which Lambda functions are included in the version and their configurations.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/functions/{FunctionDefinitionId}/versions/{FunctionDefinitionVersionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1364,15 +1436,17 @@ class SDK:
 
     
     def get_group(self, request: operations.GetGroupRequest) -> operations.GetGroupResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about a group.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/groups/{GroupId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1391,15 +1465,17 @@ class SDK:
 
     
     def get_group_certificate_authority(self, request: operations.GetGroupCertificateAuthorityRequest) -> operations.GetGroupCertificateAuthorityResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retreives the CA associated with a group. Returns the public key of the CA.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/groups/{GroupId}/certificateauthorities/{CertificateAuthorityId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1422,15 +1498,17 @@ class SDK:
 
     
     def get_group_certificate_configuration(self, request: operations.GetGroupCertificateConfigurationRequest) -> operations.GetGroupCertificateConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the current configuration for the CA used by the group.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/groups/{GroupId}/certificateauthorities/configuration/expiry", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1453,15 +1531,17 @@ class SDK:
 
     
     def get_group_version(self, request: operations.GetGroupVersionRequest) -> operations.GetGroupVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about a group version.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/groups/{GroupId}/versions/{GroupVersionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1480,15 +1560,17 @@ class SDK:
 
     
     def get_logger_definition(self, request: operations.GetLoggerDefinitionRequest) -> operations.GetLoggerDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about a logger definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/loggers/{LoggerDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1507,17 +1589,18 @@ class SDK:
 
     
     def get_logger_definition_version(self, request: operations.GetLoggerDefinitionVersionRequest) -> operations.GetLoggerDefinitionVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about a logger definition version.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/loggers/{LoggerDefinitionId}/versions/{LoggerDefinitionVersionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1536,15 +1619,17 @@ class SDK:
 
     
     def get_resource_definition(self, request: operations.GetResourceDefinitionRequest) -> operations.GetResourceDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about a resource definition, including its creation time and latest version.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/resources/{ResourceDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1563,15 +1648,17 @@ class SDK:
 
     
     def get_resource_definition_version(self, request: operations.GetResourceDefinitionVersionRequest) -> operations.GetResourceDefinitionVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about a resource definition version, including which resources are included in the version.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/resources/{ResourceDefinitionId}/versions/{ResourceDefinitionVersionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1590,15 +1677,17 @@ class SDK:
 
     
     def get_service_role_for_account(self, request: operations.GetServiceRoleForAccountRequest) -> operations.GetServiceRoleForAccountResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the service role that is attached to your account.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/servicerole"
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1617,15 +1706,17 @@ class SDK:
 
     
     def get_subscription_definition(self, request: operations.GetSubscriptionDefinitionRequest) -> operations.GetSubscriptionDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about a subscription definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1644,17 +1735,18 @@ class SDK:
 
     
     def get_subscription_definition_version(self, request: operations.GetSubscriptionDefinitionVersionRequest) -> operations.GetSubscriptionDefinitionVersionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves information about a subscription definition version.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions/{SubscriptionDefinitionVersionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1673,15 +1765,17 @@ class SDK:
 
     
     def get_thing_runtime_configuration(self, request: operations.GetThingRuntimeConfigurationRequest) -> operations.GetThingRuntimeConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get the runtime configuration of a thing.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/things/{ThingName}/runtimeconfig", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1704,17 +1798,18 @@ class SDK:
 
     
     def list_bulk_deployment_detailed_reports(self, request: operations.ListBulkDeploymentDetailedReportsRequest) -> operations.ListBulkDeploymentDetailedReportsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Gets a paginated list of the deployments that have been started in a bulk deployment operation, and their current deployment status.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/bulk/deployments/{BulkDeploymentId}/detailed-reports", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1733,17 +1828,18 @@ class SDK:
 
     
     def list_bulk_deployments(self, request: operations.ListBulkDeploymentsRequest) -> operations.ListBulkDeploymentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a list of bulk deployments.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/bulk/deployments"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1762,17 +1858,18 @@ class SDK:
 
     
     def list_connector_definition_versions(self, request: operations.ListConnectorDefinitionVersionsRequest) -> operations.ListConnectorDefinitionVersionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the versions of a connector definition, which are containers for connectors. Connectors run on the Greengrass core and contain built-in integration with local infrastructure, device protocols, AWS, and other cloud services.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/connectors/{ConnectorDefinitionId}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1791,17 +1888,18 @@ class SDK:
 
     
     def list_connector_definitions(self, request: operations.ListConnectorDefinitionsRequest) -> operations.ListConnectorDefinitionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves a list of connector definitions.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/definition/connectors"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1816,17 +1914,18 @@ class SDK:
 
     
     def list_core_definition_versions(self, request: operations.ListCoreDefinitionVersionsRequest) -> operations.ListCoreDefinitionVersionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the versions of a core definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/cores/{CoreDefinitionId}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1845,17 +1944,18 @@ class SDK:
 
     
     def list_core_definitions(self, request: operations.ListCoreDefinitionsRequest) -> operations.ListCoreDefinitionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves a list of core definitions.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/definition/cores"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1870,17 +1970,18 @@ class SDK:
 
     
     def list_deployments(self, request: operations.ListDeploymentsRequest) -> operations.ListDeploymentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Returns a history of deployments for the group.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/groups/{GroupId}/deployments", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1899,17 +2000,18 @@ class SDK:
 
     
     def list_device_definition_versions(self, request: operations.ListDeviceDefinitionVersionsRequest) -> operations.ListDeviceDefinitionVersionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the versions of a device definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/devices/{DeviceDefinitionId}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1928,17 +2030,18 @@ class SDK:
 
     
     def list_device_definitions(self, request: operations.ListDeviceDefinitionsRequest) -> operations.ListDeviceDefinitionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves a list of device definitions.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/definition/devices"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1953,17 +2056,18 @@ class SDK:
 
     
     def list_function_definition_versions(self, request: operations.ListFunctionDefinitionVersionsRequest) -> operations.ListFunctionDefinitionVersionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the versions of a Lambda function definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/functions/{FunctionDefinitionId}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -1982,17 +2086,18 @@ class SDK:
 
     
     def list_function_definitions(self, request: operations.ListFunctionDefinitionsRequest) -> operations.ListFunctionDefinitionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves a list of Lambda function definitions.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/definition/functions"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2007,15 +2112,17 @@ class SDK:
 
     
     def list_group_certificate_authorities(self, request: operations.ListGroupCertificateAuthoritiesRequest) -> operations.ListGroupCertificateAuthoritiesResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves the current CAs for a group.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/groups/{GroupId}/certificateauthorities", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2038,17 +2145,18 @@ class SDK:
 
     
     def list_group_versions(self, request: operations.ListGroupVersionsRequest) -> operations.ListGroupVersionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the versions of a group.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/groups/{GroupId}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2067,17 +2175,18 @@ class SDK:
 
     
     def list_groups(self, request: operations.ListGroupsRequest) -> operations.ListGroupsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves a list of groups.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/groups"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2092,17 +2201,18 @@ class SDK:
 
     
     def list_logger_definition_versions(self, request: operations.ListLoggerDefinitionVersionsRequest) -> operations.ListLoggerDefinitionVersionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the versions of a logger definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/loggers/{LoggerDefinitionId}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2121,17 +2231,18 @@ class SDK:
 
     
     def list_logger_definitions(self, request: operations.ListLoggerDefinitionsRequest) -> operations.ListLoggerDefinitionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves a list of logger definitions.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/definition/loggers"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2146,17 +2257,18 @@ class SDK:
 
     
     def list_resource_definition_versions(self, request: operations.ListResourceDefinitionVersionsRequest) -> operations.ListResourceDefinitionVersionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the versions of a resource definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/resources/{ResourceDefinitionId}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2175,17 +2287,18 @@ class SDK:
 
     
     def list_resource_definitions(self, request: operations.ListResourceDefinitionsRequest) -> operations.ListResourceDefinitionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves a list of resource definitions.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/definition/resources"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2200,17 +2313,18 @@ class SDK:
 
     
     def list_subscription_definition_versions(self, request: operations.ListSubscriptionDefinitionVersionsRequest) -> operations.ListSubscriptionDefinitionVersionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Lists the versions of a subscription definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2229,17 +2343,18 @@ class SDK:
 
     
     def list_subscription_definitions(self, request: operations.ListSubscriptionDefinitionsRequest) -> operations.ListSubscriptionDefinitionsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves a list of subscription definitions.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/definition/subscriptions"
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2254,15 +2369,17 @@ class SDK:
 
     
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Retrieves a list of resource tags for a resource arn.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resource-arn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2281,22 +2398,22 @@ class SDK:
 
     
     def reset_deployments(self, request: operations.ResetDeploymentsRequest) -> operations.ResetDeploymentsResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Resets a group's deployments.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/groups/{GroupId}/deployments/$reset", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2315,22 +2432,22 @@ class SDK:
 
     
     def start_bulk_deployment(self, request: operations.StartBulkDeploymentRequest) -> operations.StartBulkDeploymentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Deploys multiple groups in one operation. This action starts the bulk deployment of a specified set of group versions. Each group version deployment will be triggered with an adaptive rate that has a fixed upper limit. We recommend that you include an ''X-Amzn-Client-Token'' token in every ''StartBulkDeployment'' request. These requests are idempotent with respect to the token and the request parameters.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/greengrass/bulk/deployments"
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2349,15 +2466,17 @@ class SDK:
 
     
     def stop_bulk_deployment(self, request: operations.StopBulkDeploymentRequest) -> operations.StopBulkDeploymentResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Stops the execution of a bulk deployment. This action returns a status of ''Stopping'' until the deployment is stopped. You cannot start a new bulk deployment while a previous deployment is in the ''Stopping'' state. This action doesn't rollback completed deployments or cancel pending deployments.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/bulk/deployments/{BulkDeploymentId}/$stop", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2376,22 +2495,22 @@ class SDK:
 
     
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Adds tags to a Greengrass resource. Valid resources are 'Group', 'ConnectorDefinition', 'CoreDefinition', 'DeviceDefinition', 'FunctionDefinition', 'LoggerDefinition', 'SubscriptionDefinition', 'ResourceDefinition', and 'BulkDeployment'.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resource-arn}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2408,17 +2527,18 @@ class SDK:
 
     
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Remove resource tags from a Greengrass Resource.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{resource-arn}#tagKeys", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2435,22 +2555,22 @@ class SDK:
 
     
     def update_connectivity_info(self, request: operations.UpdateConnectivityInfoRequest) -> operations.UpdateConnectivityInfoResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the connectivity information for the core. Any devices that belong to the group which has this core will receive this information in order to find the location of the core and connect to it.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/things/{ThingName}/connectivityInfo", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2473,22 +2593,22 @@ class SDK:
 
     
     def update_connector_definition(self, request: operations.UpdateConnectorDefinitionRequest) -> operations.UpdateConnectorDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a connector definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/connectors/{ConnectorDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2507,22 +2627,22 @@ class SDK:
 
     
     def update_core_definition(self, request: operations.UpdateCoreDefinitionRequest) -> operations.UpdateCoreDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a core definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/cores/{CoreDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2541,22 +2661,22 @@ class SDK:
 
     
     def update_device_definition(self, request: operations.UpdateDeviceDefinitionRequest) -> operations.UpdateDeviceDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a device definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/devices/{DeviceDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2575,22 +2695,22 @@ class SDK:
 
     
     def update_function_definition(self, request: operations.UpdateFunctionDefinitionRequest) -> operations.UpdateFunctionDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a Lambda function definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/functions/{FunctionDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2609,22 +2729,22 @@ class SDK:
 
     
     def update_group(self, request: operations.UpdateGroupRequest) -> operations.UpdateGroupResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a group.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/groups/{GroupId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2643,22 +2763,22 @@ class SDK:
 
     
     def update_group_certificate_configuration(self, request: operations.UpdateGroupCertificateConfigurationRequest) -> operations.UpdateGroupCertificateConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the Certificate expiry time for a group.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/groups/{GroupId}/certificateauthorities/configuration/expiry", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2681,22 +2801,22 @@ class SDK:
 
     
     def update_logger_definition(self, request: operations.UpdateLoggerDefinitionRequest) -> operations.UpdateLoggerDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a logger definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/loggers/{LoggerDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2715,22 +2835,22 @@ class SDK:
 
     
     def update_resource_definition(self, request: operations.UpdateResourceDefinitionRequest) -> operations.UpdateResourceDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a resource definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/resources/{ResourceDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2749,22 +2869,22 @@ class SDK:
 
     
     def update_subscription_definition(self, request: operations.UpdateSubscriptionDefinitionRequest) -> operations.UpdateSubscriptionDefinitionResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates a subscription definition.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
@@ -2783,22 +2903,22 @@ class SDK:
 
     
     def update_thing_runtime_configuration(self, request: operations.UpdateThingRuntimeConfigurationRequest) -> operations.UpdateThingRuntimeConfigurationResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Updates the runtime configuration of a thing.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/greengrass/things/{ThingName}/runtimeconfig", request.path_params)
-
+        
         headers = utils.get_headers(request.headers)
-
         req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
             headers["content-type"] = req_content_type
-
         if data is None and form is None:
            raise Exception('request body is required')
-
-        client = self.client
-
+        
+        client = self._security_client
+        
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 

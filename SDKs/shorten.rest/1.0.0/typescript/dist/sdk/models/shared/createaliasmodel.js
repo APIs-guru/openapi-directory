@@ -22,23 +22,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DestinationModel } from "./destinationmodel";
+import { MetaTagModel } from "./metatagmodel";
+import { SnippetModel } from "./snippetmodel";
 var CreateAliasModel = /** @class */ (function (_super) {
     __extends(CreateAliasModel, _super);
     function CreateAliasModel() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=destinations", elemType: shared.DestinationModel }),
+        SpeakeasyMetadata({ data: "json, name=destinations", elemType: DestinationModel }),
         __metadata("design:type", Array)
     ], CreateAliasModel.prototype, "destinations", void 0);
     __decorate([
-        Metadata({ data: "json, name=metatags", elemType: shared.MetaTagModel }),
+        SpeakeasyMetadata({ data: "json, name=metatags", elemType: MetaTagModel }),
         __metadata("design:type", Array)
     ], CreateAliasModel.prototype, "metatags", void 0);
     __decorate([
-        Metadata({ data: "json, name=snippets", elemType: shared.SnippetModel }),
+        SpeakeasyMetadata({ data: "json, name=snippets", elemType: SnippetModel }),
         __metadata("design:type", Array)
     ], CreateAliasModel.prototype, "snippets", void 0);
     return CreateAliasModel;

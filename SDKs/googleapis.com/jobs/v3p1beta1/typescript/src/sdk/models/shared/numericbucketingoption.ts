@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // NumericBucketingOption
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Input only. Use this field to specify bucketing option for the histogram search response.
 **/
 export class NumericBucketingOption extends SpeakeasyBase {
-  @Metadata({ data: "json, name=bucketBounds" })
+  @SpeakeasyMetadata({ data: "json, name=bucketBounds" })
   bucketBounds?: number[];
 
-  @Metadata({ data: "json, name=requiresMinMax" })
+  @SpeakeasyMetadata({ data: "json, name=requiresMinMax" })
   requiresMinMax?: boolean;
 }

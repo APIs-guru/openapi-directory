@@ -5,12 +5,12 @@ from sdk.models import shared
 
 @dataclass
 class CheckReadyStatusRequest:
-    request: shared.CheckReadyStatusRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: shared.CheckReadyStatusRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CheckReadyStatusResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     example13: Optional[shared.Example13] = field(default=None)
-    status_code: int = field(default=None)
     

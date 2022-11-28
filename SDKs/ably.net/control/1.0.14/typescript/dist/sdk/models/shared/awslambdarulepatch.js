@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RuleSource } from "./rulesource";
 export var AwsLambdaRulePatchRequestModeEnum;
 (function (AwsLambdaRulePatchRequestModeEnum) {
@@ -43,19 +43,19 @@ var AwsLambdaRulePatchTarget = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=authentication" }),
+        SpeakeasyMetadata({ data: "json, name=authentication" }),
         __metadata("design:type", Object)
     ], AwsLambdaRulePatchTarget.prototype, "authentication", void 0);
     __decorate([
-        Metadata({ data: "json, name=enveloped" }),
+        SpeakeasyMetadata({ data: "json, name=enveloped" }),
         __metadata("design:type", Boolean)
     ], AwsLambdaRulePatchTarget.prototype, "enveloped", void 0);
     __decorate([
-        Metadata({ data: "json, name=functionName" }),
+        SpeakeasyMetadata({ data: "json, name=functionName" }),
         __metadata("design:type", String)
     ], AwsLambdaRulePatchTarget.prototype, "functionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=region" }),
+        SpeakeasyMetadata({ data: "json, name=region" }),
         __metadata("design:type", String)
     ], AwsLambdaRulePatchTarget.prototype, "region", void 0);
     return AwsLambdaRulePatchTarget;
@@ -67,23 +67,23 @@ var AwsLambdaRulePatch = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=requestMode" }),
+        SpeakeasyMetadata({ data: "json, name=requestMode" }),
         __metadata("design:type", String)
     ], AwsLambdaRulePatch.prototype, "requestMode", void 0);
     __decorate([
-        Metadata({ data: "json, name=ruleType" }),
+        SpeakeasyMetadata({ data: "json, name=ruleType" }),
         __metadata("design:type", String)
     ], AwsLambdaRulePatch.prototype, "ruleType", void 0);
     __decorate([
-        Metadata({ data: "json, name=source" }),
+        SpeakeasyMetadata({ data: "json, name=source" }),
         __metadata("design:type", RuleSource)
     ], AwsLambdaRulePatch.prototype, "source", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], AwsLambdaRulePatch.prototype, "status", void 0);
     __decorate([
-        Metadata({ data: "json, name=target" }),
+        SpeakeasyMetadata({ data: "json, name=target" }),
         __metadata("design:type", AwsLambdaRulePatchTarget)
     ], AwsLambdaRulePatch.prototype, "target", void 0);
     return AwsLambdaRulePatch;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InboundSsoAssignment } from "./inboundssoassignment";
+
 
 
 // ListInboundSsoAssignmentsResponse
@@ -8,9 +8,9 @@ import { InboundSsoAssignment } from "./inboundssoassignment";
  * Response of the InboundSsoAssignmentsService.ListInboundSsoAssignments method.
 **/
 export class ListInboundSsoAssignmentsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=inboundSsoAssignments", elemType: shared.InboundSsoAssignment })
+  @SpeakeasyMetadata({ data: "json, name=inboundSsoAssignments", elemType: InboundSsoAssignment })
   inboundSsoAssignments?: InboundSsoAssignment[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

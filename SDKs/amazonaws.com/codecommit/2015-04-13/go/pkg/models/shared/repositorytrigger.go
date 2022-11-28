@@ -1,5 +1,7 @@
 package shared
 
+// RepositoryTrigger
+// Information about a trigger for a repository.
 type RepositoryTrigger struct {
 	Branches       []string                         `json:"branches,omitempty"`
 	CustomData     *string                          `json:"customData,omitempty"`

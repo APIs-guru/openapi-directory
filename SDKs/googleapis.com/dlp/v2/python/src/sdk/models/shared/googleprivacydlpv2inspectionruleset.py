@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googleprivacydlpv2infotype
-from . import googleprivacydlpv2inspectionrule
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GooglePrivacyDlpV2InspectionRuleSet:
-    info_types: Optional[List[googleprivacydlpv2infotype.GooglePrivacyDlpV2InfoType]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'infoTypes' }})
-    rules: Optional[List[googleprivacydlpv2inspectionrule.GooglePrivacyDlpV2InspectionRule]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rules' }})
+    r"""GooglePrivacyDlpV2InspectionRuleSet
+    Rule set for modifying a set of infoTypes to alter behavior under certain circumstances, depending on the specific details of the rules within the set.
+    """
+    
+    info_types: Optional[List[GooglePrivacyDlpV2InfoType]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('infoTypes') }})
+    rules: Optional[List[GooglePrivacyDlpV2InspectionRule]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rules') }})
     

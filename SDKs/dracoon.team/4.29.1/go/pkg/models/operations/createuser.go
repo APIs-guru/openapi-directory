@@ -14,10 +14,10 @@ type CreateUserRequest struct {
 	Request shared.CreateUserRequest `request:"mediaType=application/json"`
 }
 
-type CreateUserResponse struct {
+type CreateUserResponseOutput struct {
 	ContentType                       string
 	ErrorResponse                     *shared.ErrorResponse
 	StatusCode                        int64
-	UserData                          *shared.UserData
+	UserData                          *shared.UserDataOutput
 	CreateUser400ApplicationJSONOneOf *interface{}
 }

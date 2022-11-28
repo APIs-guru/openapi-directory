@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -18,41 +22,49 @@ class CreateChannelHeaders:
 @dataclass_json
 @dataclass
 class CreateChannelRequestBodyChannelStorage:
-    customer_managed_s3: Optional[shared.CustomerManagedChannelS3Storage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customerManagedS3' }})
-    service_managed_s3: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serviceManagedS3' }})
+    r"""CreateChannelRequestBodyChannelStorage
+    Where channel data is stored. You may choose one of <code>serviceManagedS3</code>, <code>customerManagedS3</code> storage. If not specified, the default is <code>serviceManagedS3</code>. This can't be changed after creation of the channel.
+    """
+    
+    customer_managed_s3: Optional[shared.CustomerManagedChannelS3Storage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customerManagedS3') }})
+    service_managed_s3: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('serviceManagedS3') }})
     
 
 @dataclass_json
 @dataclass
 class CreateChannelRequestBodyRetentionPeriod:
-    number_of_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'numberOfDays' }})
-    unlimited: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unlimited' }})
+    r"""CreateChannelRequestBodyRetentionPeriod
+    How long, in days, message data is kept.
+    """
+    
+    number_of_days: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('numberOfDays') }})
+    unlimited: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('unlimited') }})
     
 
 @dataclass_json
 @dataclass
 class CreateChannelRequestBody:
-    channel_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channelName' }})
-    channel_storage: Optional[CreateChannelRequestBodyChannelStorage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channelStorage' }})
-    retention_period: Optional[CreateChannelRequestBodyRetentionPeriod] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'retentionPeriod' }})
-    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
+    channel_name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('channelName') }})
+    channel_storage: Optional[CreateChannelRequestBodyChannelStorage] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('channelStorage') }})
+    retention_period: Optional[CreateChannelRequestBodyRetentionPeriod] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('retentionPeriod') }})
+    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tags') }})
     
 
 @dataclass
 class CreateChannelRequest:
-    headers: CreateChannelHeaders = field(default=None)
-    request: CreateChannelRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateChannelHeaders = field()
+    request: CreateChannelRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateChannelResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     create_channel_response: Optional[shared.CreateChannelResponse] = field(default=None)
     internal_failure_exception: Optional[Any] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     limit_exceeded_exception: Optional[Any] = field(default=None)
     resource_already_exists_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     

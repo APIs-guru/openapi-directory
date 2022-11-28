@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GeoFacility } from "./geofacility";
+
 
 export enum GeoFacilitiesResponseTypeEnum {
     FeatureCollection = "FeatureCollection"
@@ -8,9 +8,9 @@ export enum GeoFacilitiesResponseTypeEnum {
 
 
 export class GeoFacilitiesResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=features", elemType: shared.GeoFacility })
+  @SpeakeasyMetadata({ data: "json, name=features", elemType: GeoFacility })
   features?: GeoFacility[];
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: GeoFacilitiesResponseTypeEnum;
 }

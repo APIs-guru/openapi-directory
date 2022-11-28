@@ -1,5 +1,7 @@
 package shared
 
+// DataValidationRule
+// A data validation rule.
 type DataValidationRule struct {
 	Condition    *BooleanCondition `json:"condition,omitempty"`
 	InputMessage *string           `json:"inputMessage,omitempty"`

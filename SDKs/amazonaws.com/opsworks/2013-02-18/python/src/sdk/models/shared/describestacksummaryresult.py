@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import stacksummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeStackSummaryResult:
-    stack_summary: Optional[stacksummary.StackSummary] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StackSummary' }})
+    r"""DescribeStackSummaryResult
+    Contains the response to a <code>DescribeStackSummary</code> request.
+    """
+    
+    stack_summary: Optional[StackSummary] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StackSummary') }})
     

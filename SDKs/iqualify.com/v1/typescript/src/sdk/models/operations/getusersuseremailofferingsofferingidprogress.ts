@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetUsersUserEmailOfferingsOfferingIdProgressPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=offeringId" })
   offeringId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=userEmail" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=userEmail" })
   userEmail: string;
 }
 
 
-export class GetUsersUserEmailOfferingsOfferingIdProgressRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: GetUsersUserEmailOfferingsOfferingIdProgressPathParams;
-}
-
-
 export class GetUsersUserEmailOfferingsOfferingIdProgress200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=completion" })
+  @SpeakeasyMetadata({ data: "json, name=completion" })
   completion?: string;
 
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=firstName" })
+  @SpeakeasyMetadata({ data: "json, name=firstName" })
   firstName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=lastName" })
+  @SpeakeasyMetadata({ data: "json, name=lastName" })
   lastName?: string;
 }
 
 
+export class GetUsersUserEmailOfferingsOfferingIdProgressRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: GetUsersUserEmailOfferingsOfferingIdProgressPathParams;
+}
+
+
 export class GetUsersUserEmailOfferingsOfferingIdProgressResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getUsersUserEmailOfferingsOfferingIdProgress200ApplicationJsonObject?: GetUsersUserEmailOfferingsOfferingIdProgress200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

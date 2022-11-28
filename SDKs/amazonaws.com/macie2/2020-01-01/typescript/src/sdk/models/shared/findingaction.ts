@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { FindingActionTypeEnum } from "./findingactiontypeenum";
 import { ApiCallDetails } from "./apicalldetails";
+
 
 
 // FindingAction
@@ -8,9 +9,9 @@ import { ApiCallDetails } from "./apicalldetails";
  * Provides information about an action that occurred for a resource and produced a policy finding.
 **/
 export class FindingAction extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionType" })
+  @SpeakeasyMetadata({ data: "json, name=actionType" })
   actionType?: FindingActionTypeEnum;
 
-  @Metadata({ data: "json, name=apiCallDetails" })
+  @SpeakeasyMetadata({ data: "json, name=apiCallDetails" })
   apiCallDetails?: ApiCallDetails;
 }

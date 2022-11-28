@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetGetUserActionEnum(str, Enum):
     GET_USER = "GetUser"
@@ -10,9 +14,9 @@ class GetGetUserVersionEnum(str, Enum):
 
 @dataclass
 class GetGetUserQueryParams:
-    action: GetGetUserActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetGetUserActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    version: GetGetUserVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     user_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'UserName', 'style': 'form', 'explode': True }})
-    version: GetGetUserVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -28,13 +32,13 @@ class GetGetUserHeaders:
 
 @dataclass
 class GetGetUserRequest:
-    query_params: GetGetUserQueryParams = field(default=None)
-    headers: GetGetUserHeaders = field(default=None)
+    headers: GetGetUserHeaders = field()
+    query_params: GetGetUserQueryParams = field()
     
 
 @dataclass
 class GetGetUserResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import asset
+from sdk import utils
+from . import *
 
 class AssetAssociationRoleEnum(str, Enum):
     ASSET_ROLE_UNSPECIFIED = "ASSET_ROLE_UNSPECIFIED"
@@ -26,6 +28,10 @@ class AssetAssociationRoleEnum(str, Enum):
 @dataclass_json
 @dataclass
 class AssetAssociation:
-    asset: Optional[asset.Asset] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'asset' }})
-    role: Optional[AssetAssociationRoleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
+    r"""AssetAssociation
+    Asset association for the creative.
+    """
+    
+    asset: Optional[Asset] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('asset') }})
+    role: Optional[AssetAssociationRoleEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('role') }})
     

@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum WatchRequestLabelFilterActionEnum {
-    Include = "include"
-,    Exclude = "exclude"
+    Include = "include",
+    Exclude = "exclude"
 }
 
 
@@ -11,12 +12,12 @@ export enum WatchRequestLabelFilterActionEnum {
  * Set up or update a new push notification watch on this user's mailbox.
 **/
 export class WatchRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=labelFilterAction" })
+  @SpeakeasyMetadata({ data: "json, name=labelFilterAction" })
   labelFilterAction?: WatchRequestLabelFilterActionEnum;
 
-  @Metadata({ data: "json, name=labelIds" })
+  @SpeakeasyMetadata({ data: "json, name=labelIds" })
   labelIds?: string[];
 
-  @Metadata({ data: "json, name=topicName" })
+  @SpeakeasyMetadata({ data: "json, name=topicName" })
   topicName?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { User } from "./user";
 var FileObject = /** @class */ (function (_super) {
     __extends(FileObject, _super);
@@ -30,35 +30,35 @@ var FileObject = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreatedDateUtc" }),
+        SpeakeasyMetadata({ data: "json, name=CreatedDateUtc" }),
         __metadata("design:type", String)
     ], FileObject.prototype, "createdDateUtc", void 0);
     __decorate([
-        Metadata({ data: "json, name=FolderId" }),
+        SpeakeasyMetadata({ data: "json, name=FolderId" }),
         __metadata("design:type", String)
     ], FileObject.prototype, "folderId", void 0);
     __decorate([
-        Metadata({ data: "json, name=Id" }),
+        SpeakeasyMetadata({ data: "json, name=Id" }),
         __metadata("design:type", String)
     ], FileObject.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=MimeType" }),
+        SpeakeasyMetadata({ data: "json, name=MimeType" }),
         __metadata("design:type", String)
     ], FileObject.prototype, "mimeType", void 0);
     __decorate([
-        Metadata({ data: "json, name=Name" }),
+        SpeakeasyMetadata({ data: "json, name=Name" }),
         __metadata("design:type", String)
     ], FileObject.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=Size" }),
+        SpeakeasyMetadata({ data: "json, name=Size" }),
         __metadata("design:type", Number)
     ], FileObject.prototype, "size", void 0);
     __decorate([
-        Metadata({ data: "json, name=UpdatedDateUtc" }),
+        SpeakeasyMetadata({ data: "json, name=UpdatedDateUtc" }),
         __metadata("design:type", String)
     ], FileObject.prototype, "updatedDateUtc", void 0);
     __decorate([
-        Metadata({ data: "json, name=User" }),
+        SpeakeasyMetadata({ data: "json, name=User" }),
         __metadata("design:type", User)
     ], FileObject.prototype, "user", void 0);
     return FileObject;

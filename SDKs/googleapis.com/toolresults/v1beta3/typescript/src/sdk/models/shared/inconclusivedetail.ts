@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InconclusiveDetail
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details for an outcome with an INCONCLUSIVE outcome summary.
 **/
 export class InconclusiveDetail extends SpeakeasyBase {
-  @Metadata({ data: "json, name=abortedByUser" })
+  @SpeakeasyMetadata({ data: "json, name=abortedByUser" })
   abortedByUser?: boolean;
 
-  @Metadata({ data: "json, name=hasErrorLogs" })
+  @SpeakeasyMetadata({ data: "json, name=hasErrorLogs" })
   hasErrorLogs?: boolean;
 
-  @Metadata({ data: "json, name=infrastructureFailure" })
+  @SpeakeasyMetadata({ data: "json, name=infrastructureFailure" })
   infrastructureFailure?: boolean;
 }

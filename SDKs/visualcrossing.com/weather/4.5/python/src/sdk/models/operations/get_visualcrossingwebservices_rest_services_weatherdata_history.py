@@ -1,5 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Optional
+
+
 GET_VISUAL_CROSSING_WEB_SERVICES_REST_SERVICES_WEATHERDATA_HISTORY_SERVERS = [
 	"https://weather.visualcrossing.com",
 ]
@@ -24,12 +29,12 @@ class GetVisualCrossingWebServicesRestServicesWeatherdataHistoryQueryParams:
 
 @dataclass
 class GetVisualCrossingWebServicesRestServicesWeatherdataHistoryRequest:
+    query_params: GetVisualCrossingWebServicesRestServicesWeatherdataHistoryQueryParams = field()
     server_url: Optional[str] = field(default=None)
-    query_params: GetVisualCrossingWebServicesRestServicesWeatherdataHistoryQueryParams = field(default=None)
     
 
 @dataclass
 class GetVisualCrossingWebServicesRestServicesWeatherdataHistoryResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class FundingAccountResponse2 extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountName" })
+  @SpeakeasyMetadata({ data: "json, name=accountName" })
   accountName?: string;
 
-  @Metadata({ data: "json, name=accountNumber" })
+  @SpeakeasyMetadata({ data: "json, name=accountNumber" })
   accountNumber?: string;
 
-  @Metadata({ data: "json, name=archived" })
+  @SpeakeasyMetadata({ data: "json, name=archived" })
   archived?: boolean;
 
-  @Metadata({ data: "json, name=country" })
+  @SpeakeasyMetadata({ data: "json, name=country" })
   country?: string;
 
-  @Metadata({ data: "json, name=currency" })
+  @SpeakeasyMetadata({ data: "json, name=currency" })
   currency?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=payorId" })
+  @SpeakeasyMetadata({ data: "json, name=payorId" })
   payorId?: string;
 
-  @Metadata({ data: "json, name=routingNumber" })
+  @SpeakeasyMetadata({ data: "json, name=routingNumber" })
   routingNumber?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }

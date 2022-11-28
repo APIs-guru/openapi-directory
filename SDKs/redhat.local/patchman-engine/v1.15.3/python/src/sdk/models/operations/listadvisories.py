@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class ListAdvisoriesSortEnum(str, Enum):
@@ -31,18 +35,18 @@ class ListAdvisoriesQueryParams:
 
 @dataclass
 class ListAdvisoriesSecurity:
-    rh_identity: shared.SchemeRhIdentity = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    rh_identity: shared.SchemeRhIdentity = field(metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
     
 
 @dataclass
 class ListAdvisoriesRequest:
-    query_params: ListAdvisoriesQueryParams = field(default=None)
-    security: ListAdvisoriesSecurity = field(default=None)
+    query_params: ListAdvisoriesQueryParams = field()
+    security: ListAdvisoriesSecurity = field()
     
 
 @dataclass
 class ListAdvisoriesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     controllers_advisories_response: Optional[shared.ControllersAdvisoriesResponse] = field(default=None)
     

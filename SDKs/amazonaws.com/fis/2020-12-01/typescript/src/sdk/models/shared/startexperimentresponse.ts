@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Experiment } from "./experiment";
 
 
+
 export class StartExperimentResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=experiment" })
+  @SpeakeasyMetadata({ data: "json, name=experiment" })
   experiment?: Experiment;
 }

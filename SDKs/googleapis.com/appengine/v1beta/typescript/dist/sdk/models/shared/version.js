@@ -22,15 +22,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ApiConfigHandler } from "./apiconfighandler";
 import { AutomaticScaling } from "./automaticscaling";
 import { BasicScaling } from "./basicscaling";
 import { Deployment } from "./deployment";
 import { EndpointsApiService } from "./endpointsapiservice";
 import { Entrypoint } from "./entrypoint";
+import { ErrorHandler } from "./errorhandler";
+import { UrlMap } from "./urlmap";
 import { HealthCheck } from "./healthcheck";
+import { Library } from "./library";
 import { LivenessCheck } from "./livenesscheck";
 import { ManualScaling } from "./manualscaling";
 import { Network } from "./network";
@@ -65,163 +67,163 @@ var Version = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=apiConfig" }),
+        SpeakeasyMetadata({ data: "json, name=apiConfig" }),
         __metadata("design:type", ApiConfigHandler)
     ], Version.prototype, "apiConfig", void 0);
     __decorate([
-        Metadata({ data: "json, name=appEngineApis" }),
+        SpeakeasyMetadata({ data: "json, name=appEngineApis" }),
         __metadata("design:type", Boolean)
     ], Version.prototype, "appEngineApis", void 0);
     __decorate([
-        Metadata({ data: "json, name=automaticScaling" }),
+        SpeakeasyMetadata({ data: "json, name=automaticScaling" }),
         __metadata("design:type", AutomaticScaling)
     ], Version.prototype, "automaticScaling", void 0);
     __decorate([
-        Metadata({ data: "json, name=basicScaling" }),
+        SpeakeasyMetadata({ data: "json, name=basicScaling" }),
         __metadata("design:type", BasicScaling)
     ], Version.prototype, "basicScaling", void 0);
     __decorate([
-        Metadata({ data: "json, name=betaSettings" }),
+        SpeakeasyMetadata({ data: "json, name=betaSettings" }),
         __metadata("design:type", Map)
     ], Version.prototype, "betaSettings", void 0);
     __decorate([
-        Metadata({ data: "json, name=buildEnvVariables" }),
+        SpeakeasyMetadata({ data: "json, name=buildEnvVariables" }),
         __metadata("design:type", Map)
     ], Version.prototype, "buildEnvVariables", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Version.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=createdBy" }),
+        SpeakeasyMetadata({ data: "json, name=createdBy" }),
         __metadata("design:type", String)
     ], Version.prototype, "createdBy", void 0);
     __decorate([
-        Metadata({ data: "json, name=defaultExpiration" }),
+        SpeakeasyMetadata({ data: "json, name=defaultExpiration" }),
         __metadata("design:type", String)
     ], Version.prototype, "defaultExpiration", void 0);
     __decorate([
-        Metadata({ data: "json, name=deployment" }),
+        SpeakeasyMetadata({ data: "json, name=deployment" }),
         __metadata("design:type", Deployment)
     ], Version.prototype, "deployment", void 0);
     __decorate([
-        Metadata({ data: "json, name=diskUsageBytes" }),
+        SpeakeasyMetadata({ data: "json, name=diskUsageBytes" }),
         __metadata("design:type", String)
     ], Version.prototype, "diskUsageBytes", void 0);
     __decorate([
-        Metadata({ data: "json, name=endpointsApiService" }),
+        SpeakeasyMetadata({ data: "json, name=endpointsApiService" }),
         __metadata("design:type", EndpointsApiService)
     ], Version.prototype, "endpointsApiService", void 0);
     __decorate([
-        Metadata({ data: "json, name=entrypoint" }),
+        SpeakeasyMetadata({ data: "json, name=entrypoint" }),
         __metadata("design:type", Entrypoint)
     ], Version.prototype, "entrypoint", void 0);
     __decorate([
-        Metadata({ data: "json, name=env" }),
+        SpeakeasyMetadata({ data: "json, name=env" }),
         __metadata("design:type", String)
     ], Version.prototype, "env", void 0);
     __decorate([
-        Metadata({ data: "json, name=envVariables" }),
+        SpeakeasyMetadata({ data: "json, name=envVariables" }),
         __metadata("design:type", Map)
     ], Version.prototype, "envVariables", void 0);
     __decorate([
-        Metadata({ data: "json, name=errorHandlers", elemType: shared.ErrorHandler }),
+        SpeakeasyMetadata({ data: "json, name=errorHandlers", elemType: ErrorHandler }),
         __metadata("design:type", Array)
     ], Version.prototype, "errorHandlers", void 0);
     __decorate([
-        Metadata({ data: "json, name=handlers", elemType: shared.UrlMap }),
+        SpeakeasyMetadata({ data: "json, name=handlers", elemType: UrlMap }),
         __metadata("design:type", Array)
     ], Version.prototype, "handlers", void 0);
     __decorate([
-        Metadata({ data: "json, name=healthCheck" }),
+        SpeakeasyMetadata({ data: "json, name=healthCheck" }),
         __metadata("design:type", HealthCheck)
     ], Version.prototype, "healthCheck", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], Version.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=inboundServices" }),
+        SpeakeasyMetadata({ data: "json, name=inboundServices" }),
         __metadata("design:type", Array)
     ], Version.prototype, "inboundServices", void 0);
     __decorate([
-        Metadata({ data: "json, name=instanceClass" }),
+        SpeakeasyMetadata({ data: "json, name=instanceClass" }),
         __metadata("design:type", String)
     ], Version.prototype, "instanceClass", void 0);
     __decorate([
-        Metadata({ data: "json, name=libraries", elemType: shared.Library }),
+        SpeakeasyMetadata({ data: "json, name=libraries", elemType: Library }),
         __metadata("design:type", Array)
     ], Version.prototype, "libraries", void 0);
     __decorate([
-        Metadata({ data: "json, name=livenessCheck" }),
+        SpeakeasyMetadata({ data: "json, name=livenessCheck" }),
         __metadata("design:type", LivenessCheck)
     ], Version.prototype, "livenessCheck", void 0);
     __decorate([
-        Metadata({ data: "json, name=manualScaling" }),
+        SpeakeasyMetadata({ data: "json, name=manualScaling" }),
         __metadata("design:type", ManualScaling)
     ], Version.prototype, "manualScaling", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Version.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=network" }),
+        SpeakeasyMetadata({ data: "json, name=network" }),
         __metadata("design:type", Network)
     ], Version.prototype, "network", void 0);
     __decorate([
-        Metadata({ data: "json, name=nobuildFilesRegex" }),
+        SpeakeasyMetadata({ data: "json, name=nobuildFilesRegex" }),
         __metadata("design:type", String)
     ], Version.prototype, "nobuildFilesRegex", void 0);
     __decorate([
-        Metadata({ data: "json, name=readinessCheck" }),
+        SpeakeasyMetadata({ data: "json, name=readinessCheck" }),
         __metadata("design:type", ReadinessCheck)
     ], Version.prototype, "readinessCheck", void 0);
     __decorate([
-        Metadata({ data: "json, name=resources" }),
+        SpeakeasyMetadata({ data: "json, name=resources" }),
         __metadata("design:type", Resources)
     ], Version.prototype, "resources", void 0);
     __decorate([
-        Metadata({ data: "json, name=runtime" }),
+        SpeakeasyMetadata({ data: "json, name=runtime" }),
         __metadata("design:type", String)
     ], Version.prototype, "runtime", void 0);
     __decorate([
-        Metadata({ data: "json, name=runtimeApiVersion" }),
+        SpeakeasyMetadata({ data: "json, name=runtimeApiVersion" }),
         __metadata("design:type", String)
     ], Version.prototype, "runtimeApiVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=runtimeChannel" }),
+        SpeakeasyMetadata({ data: "json, name=runtimeChannel" }),
         __metadata("design:type", String)
     ], Version.prototype, "runtimeChannel", void 0);
     __decorate([
-        Metadata({ data: "json, name=runtimeMainExecutablePath" }),
+        SpeakeasyMetadata({ data: "json, name=runtimeMainExecutablePath" }),
         __metadata("design:type", String)
     ], Version.prototype, "runtimeMainExecutablePath", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccount" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccount" }),
         __metadata("design:type", String)
     ], Version.prototype, "serviceAccount", void 0);
     __decorate([
-        Metadata({ data: "json, name=servingStatus" }),
+        SpeakeasyMetadata({ data: "json, name=servingStatus" }),
         __metadata("design:type", String)
     ], Version.prototype, "servingStatus", void 0);
     __decorate([
-        Metadata({ data: "json, name=threadsafe" }),
+        SpeakeasyMetadata({ data: "json, name=threadsafe" }),
         __metadata("design:type", Boolean)
     ], Version.prototype, "threadsafe", void 0);
     __decorate([
-        Metadata({ data: "json, name=versionUrl" }),
+        SpeakeasyMetadata({ data: "json, name=versionUrl" }),
         __metadata("design:type", String)
     ], Version.prototype, "versionUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=vm" }),
+        SpeakeasyMetadata({ data: "json, name=vm" }),
         __metadata("design:type", Boolean)
     ], Version.prototype, "vm", void 0);
     __decorate([
-        Metadata({ data: "json, name=vpcAccessConnector" }),
+        SpeakeasyMetadata({ data: "json, name=vpcAccessConnector" }),
         __metadata("design:type", VpcAccessConnector)
     ], Version.prototype, "vpcAccessConnector", void 0);
     __decorate([
-        Metadata({ data: "json, name=zones" }),
+        SpeakeasyMetadata({ data: "json, name=zones" }),
         __metadata("design:type", Array)
     ], Version.prototype, "zones", void 0);
     return Version;

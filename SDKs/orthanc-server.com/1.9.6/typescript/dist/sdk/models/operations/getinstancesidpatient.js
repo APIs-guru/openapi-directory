@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetInstancesIdPatientPathParams = /** @class */ (function (_super) {
     __extends(GetInstancesIdPatientPathParams, _super);
     function GetInstancesIdPatientPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], GetInstancesIdPatientPathParams.prototype, "id", void 0);
     return GetInstancesIdPatientPathParams;
@@ -41,11 +41,11 @@ var GetInstancesIdPatientQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=full" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=full" }),
         __metadata("design:type", Boolean)
     ], GetInstancesIdPatientQueryParams.prototype, "full", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=short" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=short" }),
         __metadata("design:type", Boolean)
     ], GetInstancesIdPatientQueryParams.prototype, "short", void 0);
     return GetInstancesIdPatientQueryParams;
@@ -57,11 +57,11 @@ var GetInstancesIdPatientRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetInstancesIdPatientPathParams)
     ], GetInstancesIdPatientRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetInstancesIdPatientQueryParams)
     ], GetInstancesIdPatientRequest.prototype, "queryParams", void 0);
     return GetInstancesIdPatientRequest;
@@ -73,15 +73,15 @@ var GetInstancesIdPatientResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetInstancesIdPatientResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], GetInstancesIdPatientResponse.prototype, "getInstancesIdPatient200ApplicationJsonAny", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetInstancesIdPatientResponse.prototype, "statusCode", void 0);
     return GetInstancesIdPatientResponse;

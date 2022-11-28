@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Server
+// Describes a configuration management server.
 type Server struct {
 	AssociatePublicIPAddress   *bool                  `json:"AssociatePublicIpAddress,omitempty"`
 	BackupRetentionCount       *int64                 `json:"BackupRetentionCount,omitempty"`

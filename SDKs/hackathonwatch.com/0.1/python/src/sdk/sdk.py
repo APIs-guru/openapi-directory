@@ -1,7 +1,11 @@
-import warnings
+
+
 import requests
-from sdk.models import operations
+
 from . import utils
+
+from .hackathons import Hackathons
+from .swagger_doc import SwaggerDoc
 
 
 SERVERS = [
@@ -10,93 +14,56 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+    hackathons: Hackathons
+    swagger_doc: SwaggerDoc
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        self._init_sdks()
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        self._init_sdks()
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        self._init_sdks()
     
-    def get_hackathons_id_format_(self, request: operations.GetHackathonsIDFormatRequest) -> operations.GetHackathonsIDFormatResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/hackathons/{id}.json", request.path_params)
-
-        client = self.client
-
-        r = client.request("GET", url)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetHackathonsIDFormatResponse(status_code=r.status_code, content_type=content_type)
+    
+    def _init_sdks(self):
         
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def get_hackathons_coming_format_(self, request: operations.GetHackathonsComingFormatRequest) -> operations.GetHackathonsComingFormatResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/hackathons/coming.json"
-
-        query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetHackathonsComingFormatResponse(status_code=r.status_code, content_type=content_type)
+        self.hackathons = Hackathons(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
         
-        if r.status_code == 200:
-            pass
-
-        return res
-
+        self.swagger_doc = SwaggerDoc(
+            self._client,
+            self._security_client,
+            self._server_url,
+            self._language,
+            self._sdk_version,
+            self._gen_version
+        )
     
-    def get_swagger_doc_format_(self) -> operations.GetSwaggerDocFormatResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = base_url.removesuffix("/") + "/swagger_doc.json"
-
-        client = self.client
-
-        r = client.request("GET", url)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetSwaggerDocFormatResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
-    
-    def get_swagger_doc_name_format_(self, request: operations.GetSwaggerDocNameFormatRequest) -> operations.GetSwaggerDocNameFormatResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/swagger_doc/{name}.json", request.path_params)
-
-        client = self.client
-
-        r = client.request("GET", url)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.GetSwaggerDocNameFormatResponse(status_code=r.status_code, content_type=content_type)
-        
-        if r.status_code == 200:
-            pass
-
-        return res
-
     

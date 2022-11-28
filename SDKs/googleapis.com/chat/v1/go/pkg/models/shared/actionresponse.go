@@ -11,6 +11,8 @@ const (
 	ActionResponseTypeEnumDialog                 ActionResponseTypeEnum = "DIALOG"
 )
 
+// ActionResponse
+// Parameters that a Chat app can use to configure how it's response is posted.
 type ActionResponse struct {
 	DialogAction *DialogAction           `json:"dialogAction,omitempty"`
 	Type         *ActionResponseTypeEnum `json:"type,omitempty"`

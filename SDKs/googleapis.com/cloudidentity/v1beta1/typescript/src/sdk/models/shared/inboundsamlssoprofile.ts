@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SamlIdpConfig } from "./samlidpconfig";
 import { SamlSpConfig } from "./samlspconfig";
+
 
 
 // InboundSamlSsoProfile
@@ -8,18 +9,34 @@ import { SamlSpConfig } from "./samlspconfig";
  * A [SAML 2.0](https://www.oasis-open.org/standards#samlv2.0) federation between a Google enterprise customer and a SAML identity provider.
 **/
 export class InboundSamlSsoProfile extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customer" })
+  @SpeakeasyMetadata({ data: "json, name=customer" })
   customer?: string;
 
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=idpConfig" })
+  @SpeakeasyMetadata({ data: "json, name=idpConfig" })
   idpConfig?: SamlIdpConfig;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=spConfig" })
+  @SpeakeasyMetadata({ data: "json, name=spConfig" })
   spConfig?: SamlSpConfig;
+}
+
+
+// InboundSamlSsoProfileInput
+/** 
+ * A [SAML 2.0](https://www.oasis-open.org/standards#samlv2.0) federation between a Google enterprise customer and a SAML identity provider.
+**/
+export class InboundSamlSsoProfileInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=customer" })
+  customer?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @SpeakeasyMetadata({ data: "json, name=idpConfig" })
+  idpConfig?: SamlIdpConfig;
 }

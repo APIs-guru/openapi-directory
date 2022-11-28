@@ -1,34 +1,35 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ChartEntityResponseSchema extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cache_timeout" })
+  @SpeakeasyMetadata({ data: "json, name=cache_timeout" })
   cacheTimeout?: number;
 
-  @Metadata({ data: "json, name=changed_on" })
+  @SpeakeasyMetadata({ data: "json, name=changed_on" })
   changedOn?: string;
 
-  @Metadata({ data: "json, name=datasource" })
+  @SpeakeasyMetadata({ data: "json, name=datasource" })
   datasource?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=description_markeddown" })
+  @SpeakeasyMetadata({ data: "json, name=description_markeddown" })
   descriptionMarkeddown?: string;
 
-  @Metadata({ data: "json, name=form_data" })
+  @SpeakeasyMetadata({ data: "json, name=form_data" })
   formData?: Map<string, any>;
 
-  @Metadata({ data: "json, name=modified" })
+  @SpeakeasyMetadata({ data: "json, name=modified" })
   modified?: string;
 
-  @Metadata({ data: "json, name=slice_id" })
+  @SpeakeasyMetadata({ data: "json, name=slice_id" })
   sliceId?: number;
 
-  @Metadata({ data: "json, name=slice_name" })
+  @SpeakeasyMetadata({ data: "json, name=slice_name" })
   sliceName?: string;
 
-  @Metadata({ data: "json, name=slice_url" })
+  @SpeakeasyMetadata({ data: "json, name=slice_url" })
   sliceUrl?: string;
 }

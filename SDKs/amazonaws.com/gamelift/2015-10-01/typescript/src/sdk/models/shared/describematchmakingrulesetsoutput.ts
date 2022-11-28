@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MatchmakingRuleSet } from "./matchmakingruleset";
+
 
 
 // DescribeMatchmakingRuleSetsOutput
@@ -8,9 +8,9 @@ import { MatchmakingRuleSet } from "./matchmakingruleset";
  * Represents the returned data in response to a request operation.
 **/
 export class DescribeMatchmakingRuleSetsOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=NextToken" })
+  @SpeakeasyMetadata({ data: "json, name=NextToken" })
   nextToken?: string;
 
-  @Metadata({ data: "json, name=RuleSets", elemType: shared.MatchmakingRuleSet })
+  @SpeakeasyMetadata({ data: "json, name=RuleSets", elemType: MatchmakingRuleSet })
   ruleSets: MatchmakingRuleSet[];
 }

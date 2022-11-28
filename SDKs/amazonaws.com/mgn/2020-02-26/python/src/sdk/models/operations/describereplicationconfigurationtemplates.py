@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,24 +28,24 @@ class DescribeReplicationConfigurationTemplatesHeaders:
 @dataclass_json
 @dataclass
 class DescribeReplicationConfigurationTemplatesRequestBody:
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextToken' }})
-    replication_configuration_template_i_ds: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'replicationConfigurationTemplateIDs' }})
+    replication_configuration_template_i_ds: List[str] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('replicationConfigurationTemplateIDs') }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('maxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextToken') }})
     
 
 @dataclass
 class DescribeReplicationConfigurationTemplatesRequest:
-    query_params: DescribeReplicationConfigurationTemplatesQueryParams = field(default=None)
-    headers: DescribeReplicationConfigurationTemplatesHeaders = field(default=None)
-    request: DescribeReplicationConfigurationTemplatesRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DescribeReplicationConfigurationTemplatesHeaders = field()
+    query_params: DescribeReplicationConfigurationTemplatesQueryParams = field()
+    request: DescribeReplicationConfigurationTemplatesRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DescribeReplicationConfigurationTemplatesResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_replication_configuration_templates_response: Optional[shared.DescribeReplicationConfigurationTemplatesResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     uninitialized_account_exception: Optional[Any] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

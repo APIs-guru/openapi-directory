@@ -1,10 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class MBusData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Date, form, name=Date;" })
+  @SpeakeasyMetadata({ data: "json, name=Date, form, name=Date;" })
   date?: Date;
 
-  @Metadata({ data: "json, name=Telegram, form, name=Telegram;" })
+  @SpeakeasyMetadata({ data: "json, name=Telegram, form, name=Telegram;" })
   telegram?: string;
 }

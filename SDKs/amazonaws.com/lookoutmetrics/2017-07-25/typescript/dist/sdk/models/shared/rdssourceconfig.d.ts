@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { VpcConfiguration } from "./vpcconfiguration";
 /**
  * Contains information about the Amazon Relational Database Service (RDS) configuration.

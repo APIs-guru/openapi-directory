@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { MobileFriendlyIssue } from "./mobilefriendlyissue";
 import { ResourceIssue } from "./resourceissue";
 import { Image } from "./image";

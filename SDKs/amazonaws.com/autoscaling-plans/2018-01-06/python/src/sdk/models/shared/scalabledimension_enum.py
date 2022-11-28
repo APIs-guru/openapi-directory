@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 
 class ScalableDimensionEnum(str, Enum):
     AUTOSCALING_AUTO_SCALING_GROUP_DESIRED_CAPACITY = "autoscaling:autoScalingGroup:DesiredCapacity"

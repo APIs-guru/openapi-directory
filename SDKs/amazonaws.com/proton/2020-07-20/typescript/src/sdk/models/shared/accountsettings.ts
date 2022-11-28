@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AccountSettings
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The AWS Proton pipeline service role data.
 **/
 export class AccountSettings extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pipelineServiceRoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineServiceRoleArn" })
   pipelineServiceRoleArn?: string;
 }

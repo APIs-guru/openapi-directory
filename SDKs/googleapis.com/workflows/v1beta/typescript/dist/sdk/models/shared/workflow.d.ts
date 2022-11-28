@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum WorkflowStateEnum {
     StateUnspecified = "STATE_UNSPECIFIED",
     Active = "ACTIVE"
@@ -17,4 +17,14 @@ export declare class Workflow extends SpeakeasyBase {
     sourceContents?: string;
     state?: WorkflowStateEnum;
     updateTime?: string;
+}
+/**
+ * Workflow program to be executed by Workflows.
+**/
+export declare class WorkflowInput extends SpeakeasyBase {
+    description?: string;
+    labels?: Map<string, string>;
+    name?: string;
+    serviceAccount?: string;
+    sourceContents?: string;
 }

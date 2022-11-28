@@ -1,49 +1,50 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
+
 export enum GetConversationsDirectionEnum {
-    Before = "BEFORE"
-,    After = "AFTER"
+    Before = "BEFORE",
+    After = "AFTER"
 }
 
 
 export class GetConversationsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=direction" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=direction" })
   direction?: GetConversationsDirectionEnum;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=modTime" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modTime" })
   modTime?: Date;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=results" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=results" })
   results?: number;
 }
 
 
 export class GetConversationsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauth: shared.SchemeOauth;
 }
 
 
 export class GetConversationsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetConversationsQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetConversationsSecurity;
 }
 
 
 export class GetConversationsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   conversations?: any[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

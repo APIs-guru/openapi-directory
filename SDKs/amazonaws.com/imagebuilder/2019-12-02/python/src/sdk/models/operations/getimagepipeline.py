@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetImagePipelineQueryParams:
-    image_pipeline_arn: str = field(default=None, metadata={'query_param': { 'field_name': 'imagePipelineArn', 'style': 'form', 'explode': True }})
+    image_pipeline_arn: str = field(metadata={'query_param': { 'field_name': 'imagePipelineArn', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -21,19 +24,19 @@ class GetImagePipelineHeaders:
 
 @dataclass
 class GetImagePipelineRequest:
-    query_params: GetImagePipelineQueryParams = field(default=None)
-    headers: GetImagePipelineHeaders = field(default=None)
+    headers: GetImagePipelineHeaders = field()
+    query_params: GetImagePipelineQueryParams = field()
     
 
 @dataclass
 class GetImagePipelineResponse:
+    content_type: str = field()
+    status_code: int = field()
     call_rate_limit_exceeded_exception: Optional[Any] = field(default=None)
     client_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     forbidden_exception: Optional[Any] = field(default=None)
     get_image_pipeline_response: Optional[shared.GetImagePipelineResponse] = field(default=None)
     invalid_request_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
     service_unavailable_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

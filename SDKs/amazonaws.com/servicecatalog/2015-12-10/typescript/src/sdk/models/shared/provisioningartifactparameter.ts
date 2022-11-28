@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ParameterConstraints } from "./parameterconstraints";
+
 
 
 // ProvisioningArtifactParameter
@@ -7,21 +8,21 @@ import { ParameterConstraints } from "./parameterconstraints";
  * Information about a parameter used to provision a product.
 **/
 export class ProvisioningArtifactParameter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DefaultValue" })
+  @SpeakeasyMetadata({ data: "json, name=DefaultValue" })
   defaultValue?: string;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=IsNoEcho" })
+  @SpeakeasyMetadata({ data: "json, name=IsNoEcho" })
   isNoEcho?: boolean;
 
-  @Metadata({ data: "json, name=ParameterConstraints" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterConstraints" })
   parameterConstraints?: ParameterConstraints;
 
-  @Metadata({ data: "json, name=ParameterKey" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterKey" })
   parameterKey?: string;
 
-  @Metadata({ data: "json, name=ParameterType" })
+  @SpeakeasyMetadata({ data: "json, name=ParameterType" })
   parameterType?: string;
 }

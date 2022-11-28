@@ -35,7 +35,7 @@ type CloudbillingBillingAccountsCreateSecurity struct {
 
 type CloudbillingBillingAccountsCreateRequest struct {
 	QueryParams CloudbillingBillingAccountsCreateQueryParams
-	Request     *shared.BillingAccount `request:"mediaType=application/json"`
+	Request     *shared.BillingAccountInput `request:"mediaType=application/json"`
 	Security    CloudbillingBillingAccountsCreateSecurity
 }
 

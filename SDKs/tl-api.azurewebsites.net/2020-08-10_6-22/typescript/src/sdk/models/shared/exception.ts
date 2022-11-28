@@ -1,17 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { Exception } from "./exception";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class Exception extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InnerException" })
+  @SpeakeasyMetadata({ data: "json, name=InnerException" })
   innerException?: any;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 
-  @Metadata({ data: "json, name=Source" })
+  @SpeakeasyMetadata({ data: "json, name=Source" })
   source?: string;
 
-  @Metadata({ data: "json, name=StackTrace" })
+  @SpeakeasyMetadata({ data: "json, name=StackTrace" })
   stackTrace?: string;
 }

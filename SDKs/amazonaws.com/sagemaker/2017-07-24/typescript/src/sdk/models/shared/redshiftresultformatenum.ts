@@ -1,6 +1,7 @@
 
 
+
 export enum RedshiftResultFormatEnum {
-    Parquet = "PARQUET"
-,    Csv = "CSV"
+    Parquet = "PARQUET",
+    Csv = "CSV"
 }

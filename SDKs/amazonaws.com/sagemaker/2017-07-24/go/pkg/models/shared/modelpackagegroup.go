@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ModelPackageGroup
+// A group of versioned models in the model registry.
 type ModelPackageGroup struct {
 	CreatedBy                    *UserContext                 `json:"CreatedBy,omitempty"`
 	CreationTime                 *time.Time                   `json:"CreationTime,omitempty"`

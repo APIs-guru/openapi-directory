@@ -1,105 +1,105 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Activity } from "./activity";
 import { InvoiceAttachment } from "./invoiceattachment";
 import { InvoiceItem } from "./invoiceitem";
 import { PaymentGatewayForInvoice } from "./paymentgatewayforinvoice";
 import { Payment } from "./payment";
 
+
 export enum InvoiceStatusEnum {
-    Draft = "Draft"
-,    Paid = "Paid"
-,    Unpaid = "Unpaid"
-,    Overdue = "Overdue"
-,    Void = "Void"
+    Draft = "Draft",
+    Paid = "Paid",
+    Unpaid = "Unpaid",
+    Overdue = "Overdue",
+    Void = "Void"
 }
 
 
 export class Invoice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessToken" })
+  @SpeakeasyMetadata({ data: "json, name=AccessToken" })
   accessToken?: string;
 
-  @Metadata({ data: "json, name=Activities", elemType: shared.Activity })
+  @SpeakeasyMetadata({ data: "json, name=Activities", elemType: Activity })
   activities?: Activity[];
 
-  @Metadata({ data: "json, name=Attachments", elemType: shared.InvoiceAttachment })
+  @SpeakeasyMetadata({ data: "json, name=Attachments", elemType: InvoiceAttachment })
   attachments?: InvoiceAttachment[];
 
-  @Metadata({ data: "json, name=ClientId" })
+  @SpeakeasyMetadata({ data: "json, name=ClientId" })
   clientId?: number;
 
-  @Metadata({ data: "json, name=ClonedFromId" })
+  @SpeakeasyMetadata({ data: "json, name=ClonedFromId" })
   clonedFromId?: number;
 
-  @Metadata({ data: "json, name=CurrencyId" })
+  @SpeakeasyMetadata({ data: "json, name=CurrencyId" })
   currencyId?: number;
 
-  @Metadata({ data: "json, name=DiscountAmount" })
+  @SpeakeasyMetadata({ data: "json, name=DiscountAmount" })
   discountAmount?: number;
 
-  @Metadata({ data: "json, name=Duedate" })
+  @SpeakeasyMetadata({ data: "json, name=Duedate" })
   duedate?: Date;
 
-  @Metadata({ data: "json, name=EnablePartialPayments" })
+  @SpeakeasyMetadata({ data: "json, name=EnablePartialPayments" })
   enablePartialPayments?: boolean;
 
-  @Metadata({ data: "json, name=EstimationId" })
+  @SpeakeasyMetadata({ data: "json, name=EstimationId" })
   estimationId?: number;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id?: number;
 
-  @Metadata({ data: "json, name=InvoiceCategoryId" })
+  @SpeakeasyMetadata({ data: "json, name=InvoiceCategoryId" })
   invoiceCategoryId?: number;
 
-  @Metadata({ data: "json, name=IssuedOn" })
+  @SpeakeasyMetadata({ data: "json, name=IssuedOn" })
   issuedOn?: Date;
 
-  @Metadata({ data: "json, name=Items", elemType: shared.InvoiceItem })
+  @SpeakeasyMetadata({ data: "json, name=Items", elemType: InvoiceItem })
   items?: InvoiceItem[];
 
-  @Metadata({ data: "json, name=Notes" })
+  @SpeakeasyMetadata({ data: "json, name=Notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=Number" })
+  @SpeakeasyMetadata({ data: "json, name=Number" })
   number?: string;
 
-  @Metadata({ data: "json, name=OrderId" })
+  @SpeakeasyMetadata({ data: "json, name=OrderId" })
   orderId?: number;
 
-  @Metadata({ data: "json, name=PaymentGateways", elemType: shared.PaymentGatewayForInvoice })
+  @SpeakeasyMetadata({ data: "json, name=PaymentGateways", elemType: PaymentGatewayForInvoice })
   paymentGateways?: PaymentGatewayForInvoice[];
 
-  @Metadata({ data: "json, name=PaymentLinkId" })
+  @SpeakeasyMetadata({ data: "json, name=PaymentLinkId" })
   paymentLinkId?: number;
 
-  @Metadata({ data: "json, name=Payments", elemType: shared.Payment })
+  @SpeakeasyMetadata({ data: "json, name=Payments", elemType: Payment })
   payments?: Payment[];
 
-  @Metadata({ data: "json, name=PoNumber" })
+  @SpeakeasyMetadata({ data: "json, name=PoNumber" })
   poNumber?: string;
 
-  @Metadata({ data: "json, name=RecurringProfileId" })
+  @SpeakeasyMetadata({ data: "json, name=RecurringProfileId" })
   recurringProfileId?: number;
 
-  @Metadata({ data: "json, name=ShouldSendReminders" })
+  @SpeakeasyMetadata({ data: "json, name=ShouldSendReminders" })
   shouldSendReminders?: boolean;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: InvoiceStatusEnum;
 
-  @Metadata({ data: "json, name=SubTotalAmount" })
+  @SpeakeasyMetadata({ data: "json, name=SubTotalAmount" })
   subTotalAmount?: number;
 
-  @Metadata({ data: "json, name=TaxAmount" })
+  @SpeakeasyMetadata({ data: "json, name=TaxAmount" })
   taxAmount?: number;
 
-  @Metadata({ data: "json, name=Terms" })
+  @SpeakeasyMetadata({ data: "json, name=Terms" })
   terms?: string;
 
-  @Metadata({ data: "json, name=TotalAmount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalAmount" })
   totalAmount?: number;
 
-  @Metadata({ data: "json, name=UserId" })
+  @SpeakeasyMetadata({ data: "json, name=UserId" })
   userId?: number;
 }

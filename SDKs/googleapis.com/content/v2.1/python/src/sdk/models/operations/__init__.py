@@ -123,6 +123,7 @@ from .content_promotions_create import *
 from .content_promotions_get import *
 from .content_pubsubnotificationsettings_get import *
 from .content_pubsubnotificationsettings_update import *
+from .content_quotas_list import *
 from .content_regionalinventory_custombatch import *
 from .content_regionalinventory_insert import *
 from .content_regions_create import *

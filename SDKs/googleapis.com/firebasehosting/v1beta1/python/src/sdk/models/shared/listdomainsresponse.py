@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import domain
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListDomainsResponse:
-    domains: Optional[List[domain.Domain]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domains' }})
-    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nextPageToken' }})
+    r"""ListDomainsResponse
+    The response to listing Domains.
+    """
+    
+    domains: Optional[List[Domain]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('domains') }})
+    next_page_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('nextPageToken') }})
     

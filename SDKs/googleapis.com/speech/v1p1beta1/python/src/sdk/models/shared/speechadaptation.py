@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import customclass
-from . import phraseset
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class SpeechAdaptation:
-    custom_classes: Optional[List[customclass.CustomClass]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customClasses' }})
-    phrase_set_references: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phraseSetReferences' }})
-    phrase_sets: Optional[List[phraseset.PhraseSet]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phraseSets' }})
+    r"""SpeechAdaptation
+    Speech adaptation configuration.
+    """
+    
+    custom_classes: Optional[List[CustomClass]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('customClasses') }})
+    phrase_set_references: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('phraseSetReferences') }})
+    phrase_sets: Optional[List[PhraseSet]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('phraseSets') }})
     

@@ -1,0 +1,36 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { Database } from "./database";
+export declare class DashboardDatasetSchema extends SpeakeasyBase {
+    cacheTimeout?: number;
+    columnFormats?: Map<string, any>;
+    columnTypes?: number[];
+    columns?: Map<string, any>[];
+    database?: Database;
+    datasourceName?: string;
+    defaultEndpoint?: string;
+    editUrl?: string;
+    fetchValuesPredicate?: string;
+    filterSelect?: boolean;
+    filterSelectEnabled?: boolean;
+    granularitySqla?: string[][];
+    healthCheckMessage?: string;
+    id?: number;
+    isSqllabView?: boolean;
+    mainDttmCol?: string;
+    metrics?: Map<string, any>[];
+    name?: string;
+    offset?: number;
+    orderByChoices?: string[][];
+    owners?: number[];
+    params?: string;
+    perm?: string;
+    schema?: string;
+    selectStar?: string;
+    sql?: string;
+    tableName?: string;
+    templateParams?: string;
+    timeGrainSqla?: string[][];
+    type?: string;
+    uid?: string;
+    verboseMap?: Map<string, string>;
+}

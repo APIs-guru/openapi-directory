@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // NetworkInterface
 /**
  * An object representing the elastic network interface for a multi-node parallel job node.
@@ -33,15 +33,15 @@ var NetworkInterface = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=attachmentId" }),
+        SpeakeasyMetadata({ data: "json, name=attachmentId" }),
         __metadata("design:type", String)
     ], NetworkInterface.prototype, "attachmentId", void 0);
     __decorate([
-        Metadata({ data: "json, name=ipv6Address" }),
+        SpeakeasyMetadata({ data: "json, name=ipv6Address" }),
         __metadata("design:type", String)
     ], NetworkInterface.prototype, "ipv6Address", void 0);
     __decorate([
-        Metadata({ data: "json, name=privateIpv4Address" }),
+        SpeakeasyMetadata({ data: "json, name=privateIpv4Address" }),
         __metadata("design:type", String)
     ], NetworkInterface.prototype, "privateIpv4Address", void 0);
     return NetworkInterface;

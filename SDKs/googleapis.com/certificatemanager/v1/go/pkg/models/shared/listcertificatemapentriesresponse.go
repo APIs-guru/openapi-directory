@@ -1,5 +1,7 @@
 package shared
 
+// ListCertificateMapEntriesResponse
+// Response for the `ListCertificateMapEntries` method.
 type ListCertificateMapEntriesResponse struct {
 	CertificateMapEntries []CertificateMapEntry `json:"certificateMapEntries,omitempty"`
 	NextPageToken         *string               `json:"nextPageToken,omitempty"`

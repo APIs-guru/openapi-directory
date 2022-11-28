@@ -1,39 +1,40 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateConnectorPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=connectorArn" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=connectorArn" })
   connectorArn: string;
 }
 
 
 export class UpdateConnectorQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=currentVersion" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=currentVersion" })
   currentVersion: string;
 }
 
 
 export class UpdateConnectorHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -43,63 +44,63 @@ export class UpdateConnectorHeaders extends SpeakeasyBase {
  * The target capacity for the connector. The capacity can be auto scaled or provisioned.
 **/
 export class UpdateConnectorRequestBodyCapacity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=autoScaling" })
+  @SpeakeasyMetadata({ data: "json, name=autoScaling" })
   autoScaling?: shared.AutoScalingUpdate;
 
-  @Metadata({ data: "json, name=provisionedCapacity" })
+  @SpeakeasyMetadata({ data: "json, name=provisionedCapacity" })
   provisionedCapacity?: shared.ProvisionedCapacityUpdate;
 }
 
 
 export class UpdateConnectorRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=capacity" })
+  @SpeakeasyMetadata({ data: "json, name=capacity" })
   capacity: UpdateConnectorRequestBodyCapacity;
 }
 
 
 export class UpdateConnectorRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateConnectorPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: UpdateConnectorQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateConnectorHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateConnectorRequestBody;
 }
 
 
 export class UpdateConnectorResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   forbiddenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   unauthorizedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateConnectorResponse?: shared.UpdateConnectorResponse;
 }

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ComponentDependencyTypeEnum } from "./componentdependencytypeenum";
+
 
 
 // ComponentDependencyRequirement
@@ -7,9 +8,9 @@ import { ComponentDependencyTypeEnum } from "./componentdependencytypeenum";
  * Contains information about a component dependency for a Lambda function component.
 **/
 export class ComponentDependencyRequirement extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dependencyType" })
+  @SpeakeasyMetadata({ data: "json, name=dependencyType" })
   dependencyType?: ComponentDependencyTypeEnum;
 
-  @Metadata({ data: "json, name=versionRequirement" })
+  @SpeakeasyMetadata({ data: "json, name=versionRequirement" })
   versionRequirement?: string;
 }

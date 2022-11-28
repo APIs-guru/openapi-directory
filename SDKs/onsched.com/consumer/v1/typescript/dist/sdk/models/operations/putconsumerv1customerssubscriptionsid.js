@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var PutConsumerV1CustomersSubscriptionsIdPathParams = /** @class */ (function (_super) {
     __extends(PutConsumerV1CustomersSubscriptionsIdPathParams, _super);
@@ -30,7 +30,7 @@ var PutConsumerV1CustomersSubscriptionsIdPathParams = /** @class */ (function (_
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" }),
         __metadata("design:type", String)
     ], PutConsumerV1CustomersSubscriptionsIdPathParams.prototype, "id", void 0);
     return PutConsumerV1CustomersSubscriptionsIdPathParams;
@@ -42,19 +42,19 @@ var PutConsumerV1CustomersSubscriptionsIdRequests = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/*+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/*+json" }),
         __metadata("design:type", shared.CustomerSubscriptionUpdateModel)
     ], PutConsumerV1CustomersSubscriptionsIdRequests.prototype, "customerSubscriptionUpdateModel", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.CustomerSubscriptionUpdateModel)
     ], PutConsumerV1CustomersSubscriptionsIdRequests.prototype, "customerSubscriptionUpdateModel1", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json-patch+json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json-patch+json" }),
         __metadata("design:type", shared.CustomerSubscriptionUpdateModel)
     ], PutConsumerV1CustomersSubscriptionsIdRequests.prototype, "customerSubscriptionUpdateModel2", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=text/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=text/json" }),
         __metadata("design:type", shared.CustomerSubscriptionUpdateModel)
     ], PutConsumerV1CustomersSubscriptionsIdRequests.prototype, "customerSubscriptionUpdateModel3", void 0);
     return PutConsumerV1CustomersSubscriptionsIdRequests;
@@ -66,11 +66,11 @@ var PutConsumerV1CustomersSubscriptionsIdRequest = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutConsumerV1CustomersSubscriptionsIdPathParams)
     ], PutConsumerV1CustomersSubscriptionsIdRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", PutConsumerV1CustomersSubscriptionsIdRequests)
     ], PutConsumerV1CustomersSubscriptionsIdRequest.prototype, "request", void 0);
     return PutConsumerV1CustomersSubscriptionsIdRequest;
@@ -82,11 +82,11 @@ var PutConsumerV1CustomersSubscriptionsIdResponse = /** @class */ (function (_su
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], PutConsumerV1CustomersSubscriptionsIdResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], PutConsumerV1CustomersSubscriptionsIdResponse.prototype, "statusCode", void 0);
     return PutConsumerV1CustomersSubscriptionsIdResponse;

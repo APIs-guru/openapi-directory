@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Observation
+// Describes an anomaly or error with the application.
 type Observation struct {
 	CloudWatchEventDetailType *string                    `json:"CloudWatchEventDetailType,omitempty"`
 	CloudWatchEventID         *string                    `json:"CloudWatchEventId,omitempty"`

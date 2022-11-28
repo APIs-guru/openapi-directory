@@ -1,5 +1,7 @@
 package shared
 
-type CreateAttachmentRequest struct {
-	Attachment *Attachment `json:"attachment,omitempty"`
+// CreateAttachmentRequestInput
+// The request message for the CreateAttachment endpoint.
+type CreateAttachmentRequestInput struct {
+	Attachment *AttachmentInput `json:"attachment,omitempty"`
 }

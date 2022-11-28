@@ -1,25 +1,26 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DeleteNetworkSwitchPortSchedulePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=portScheduleId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=portScheduleId" })
   portScheduleId: string;
 }
 
 
 export class DeleteNetworkSwitchPortScheduleRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteNetworkSwitchPortSchedulePathParams;
 }
 
 
 export class DeleteNetworkSwitchPortScheduleResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

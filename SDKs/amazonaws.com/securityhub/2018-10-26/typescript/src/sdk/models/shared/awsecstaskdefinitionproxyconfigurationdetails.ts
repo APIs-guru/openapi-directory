@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails } from "./awsecstaskdefinitionproxyconfigurationproxyconfigurationpropertiesdetails";
+
 
 
 // AwsEcsTaskDefinitionProxyConfigurationDetails
@@ -8,12 +8,12 @@ import { AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetai
  * The configuration details for the App Mesh proxy.
 **/
 export class AwsEcsTaskDefinitionProxyConfigurationDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ContainerName" })
+  @SpeakeasyMetadata({ data: "json, name=ContainerName" })
   containerName?: string;
 
-  @Metadata({ data: "json, name=ProxyConfigurationProperties", elemType: shared.AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails })
+  @SpeakeasyMetadata({ data: "json, name=ProxyConfigurationProperties", elemType: AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails })
   proxyConfigurationProperties?: AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails[];
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 }

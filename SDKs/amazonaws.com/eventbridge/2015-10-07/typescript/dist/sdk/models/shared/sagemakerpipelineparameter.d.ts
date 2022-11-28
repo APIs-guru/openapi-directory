@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Name/Value pair of a parameter to start execution of a SageMaker Model Building Pipeline.
 **/

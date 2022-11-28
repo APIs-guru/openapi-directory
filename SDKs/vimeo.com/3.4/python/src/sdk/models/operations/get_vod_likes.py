@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class GetVodLikesPathParams:
-    ondemand_id: float = field(default=None, metadata={'path_param': { 'field_name': 'ondemand_id', 'style': 'simple', 'explode': False }})
+    ondemand_id: float = field(metadata={'path_param': { 'field_name': 'ondemand_id', 'style': 'simple', 'explode': False }})
     
 class GetVodLikesDirectionEnum(str, Enum):
     ASC = "asc"
@@ -32,13 +36,13 @@ class GetVodLikesQueryParams:
 
 @dataclass
 class GetVodLikesRequest:
-    path_params: GetVodLikesPathParams = field(default=None)
-    query_params: GetVodLikesQueryParams = field(default=None)
+    path_params: GetVodLikesPathParams = field()
+    query_params: GetVodLikesQueryParams = field()
     
 
 @dataclass
 class GetVodLikesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     users: Optional[List[shared.User]] = field(default=None)
     

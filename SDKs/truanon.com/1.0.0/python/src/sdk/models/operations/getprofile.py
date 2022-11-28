@@ -10,11 +10,11 @@ class GetProfileQueryParams:
 
 @dataclass
 class GetProfileRequest:
-    query_params: GetProfileQueryParams = field(default=None)
+    query_params: GetProfileQueryParams = field()
     
 
 @dataclass
 class GetProfileResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     

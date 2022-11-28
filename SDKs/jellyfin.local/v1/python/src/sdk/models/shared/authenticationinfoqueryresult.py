@@ -1,13 +1,14 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import authenticationinfo
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class AuthenticationInfoQueryResult:
-    items: Optional[List[authenticationinfo.AuthenticationInfo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Items' }})
-    start_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartIndex' }})
-    total_record_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TotalRecordCount' }})
+    items: Optional[List[AuthenticationInfo]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Items') }})
+    start_index: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('StartIndex') }})
+    total_record_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('TotalRecordCount') }})
     

@@ -17,12 +17,12 @@ type PostPortfolioOptimizationMaximumReturnRequestBody struct {
 	Constraints            *PostPortfolioOptimizationMaximumReturnRequestBodyConstraints `json:"constraints,omitempty"`
 }
 
-type PostPortfolioOptimizationMaximumReturnRequest struct {
-	Request PostPortfolioOptimizationMaximumReturnRequestBody `request:"mediaType=application/json"`
-}
-
 type PostPortfolioOptimizationMaximumReturn200ApplicationJSON struct {
 	AssetsWeights []float64 `json:"assetsWeights"`
+}
+
+type PostPortfolioOptimizationMaximumReturnRequest struct {
+	Request PostPortfolioOptimizationMaximumReturnRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioOptimizationMaximumReturnResponse struct {

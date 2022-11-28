@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LandlordMaintenanceJobNoteModel } from "./landlordmaintenancejobnotemodel";
+
 
 
 // LandlordMaintenanceJobModel
@@ -8,24 +8,24 @@ import { LandlordMaintenanceJobNoteModel } from "./landlordmaintenancejobnotemod
  * Maintenance Job
 **/
 export class LandlordMaintenanceJobModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AssignedTo" })
+  @SpeakeasyMetadata({ data: "json, name=AssignedTo" })
   assignedTo?: string;
 
-  @Metadata({ data: "json, name=ClosedDate" })
+  @SpeakeasyMetadata({ data: "json, name=ClosedDate" })
   closedDate?: Date;
 
-  @Metadata({ data: "json, name=Description" })
+  @SpeakeasyMetadata({ data: "json, name=Description" })
   description?: string;
 
-  @Metadata({ data: "json, name=MaintenanceNotes", elemType: shared.LandlordMaintenanceJobNoteModel })
+  @SpeakeasyMetadata({ data: "json, name=MaintenanceNotes", elemType: LandlordMaintenanceJobNoteModel })
   maintenanceNotes?: LandlordMaintenanceJobNoteModel[];
 
-  @Metadata({ data: "json, name=Property" })
+  @SpeakeasyMetadata({ data: "json, name=Property" })
   property?: string;
 
-  @Metadata({ data: "json, name=Reported" })
+  @SpeakeasyMetadata({ data: "json, name=Reported" })
   reported?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: string;
 }

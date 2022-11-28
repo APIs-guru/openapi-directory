@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import googletypemoney
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudApigeeV1AdjustDeveloperBalanceRequest:
-    adjustment: Optional[googletypemoney.GoogleTypeMoney] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'adjustment' }})
+    r"""GoogleCloudApigeeV1AdjustDeveloperBalanceRequest
+    Request for AdjustDeveloperBalance.
+    """
+    
+    adjustment: Optional[GoogleTypeMoney] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('adjustment') }})
     

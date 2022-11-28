@@ -1,5 +1,7 @@
 package shared
 
+// AwsAPIGatewayMethodSettings
+// Defines settings for a method for the stage.
 type AwsAPIGatewayMethodSettings struct {
 	CacheDataEncrypted                     *bool    `json:"CacheDataEncrypted,omitempty"`
 	CacheTTLInSeconds                      *int64   `json:"CacheTtlInSeconds,omitempty"`

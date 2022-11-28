@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 /**
  * Room resource represents an instance of sub-space within a structure such as rooms in a hotel suite or rental apartment.
 **/

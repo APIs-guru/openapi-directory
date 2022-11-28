@@ -8,6 +8,8 @@ const (
 	BusinessCallsSettingsCallsStateEnumDisabled              BusinessCallsSettingsCallsStateEnum = "DISABLED"
 )
 
+// BusinessCallsSettings
+// Business calls settings for a location.
 type BusinessCallsSettings struct {
 	CallsState  *BusinessCallsSettingsCallsStateEnum `json:"callsState,omitempty"`
 	ConsentTime *string                              `json:"consentTime,omitempty"`

@@ -1,38 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdatePluginSecurityInfoRequests extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/*+json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/*+json" })
   pluginSecurityInfo?: shared.PluginSecurityInfo;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   pluginSecurityInfo1?: shared.PluginSecurityInfo;
 
-  @Metadata({ data: "request, media_type=text/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=text/json" })
   pluginSecurityInfo2?: shared.PluginSecurityInfo;
 }
 
 
 export class UpdatePluginSecurityInfoSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
   customAuthentication: shared.SchemeCustomAuthentication;
 }
 
 
 export class UpdatePluginSecurityInfoRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   request: UpdatePluginSecurityInfoRequests;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: UpdatePluginSecurityInfoSecurity;
 }
 
 
 export class UpdatePluginSecurityInfoResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

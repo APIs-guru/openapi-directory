@@ -1,5 +1,7 @@
 package shared
 
+// OrganizationSimple
+// Organization Simple
 type OrganizationSimple struct {
 	AvatarURL        string `json:"avatar_url"`
 	Description      string `json:"description"`

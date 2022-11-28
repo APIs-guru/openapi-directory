@@ -1,13 +1,13 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OsUpdateStatus } from "./osupdatestatus";
 
 
+
 export class ChromeOsDeviceActiveTimeRanges extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeTime" })
+  @SpeakeasyMetadata({ data: "json, name=activeTime" })
   activeTime?: number;
 
-  @Metadata({ data: "json, name=date" })
+  @SpeakeasyMetadata({ data: "json, name=date" })
   date?: Date;
 }
 
@@ -17,10 +17,10 @@ export class ChromeOsDeviceActiveTimeRanges extends SpeakeasyBase {
  * Status of a single C-state. C-states are various modes the CPU can transition to in order to use more or less power.
 **/
 export class ChromeOsDeviceCpuInfoLogicalCpusCStates extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=sessionDuration" })
+  @SpeakeasyMetadata({ data: "json, name=sessionDuration" })
   sessionDuration?: string;
 }
 
@@ -30,16 +30,16 @@ export class ChromeOsDeviceCpuInfoLogicalCpusCStates extends SpeakeasyBase {
  * Status of a single logical CPU.
 **/
 export class ChromeOsDeviceCpuInfoLogicalCpus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cStates", elemType: shared.ChromeOsDeviceCpuInfoLogicalCpusCStates })
+  @SpeakeasyMetadata({ data: "json, name=cStates", elemType: ChromeOsDeviceCpuInfoLogicalCpusCStates })
   cStates?: ChromeOsDeviceCpuInfoLogicalCpusCStates[];
 
-  @Metadata({ data: "json, name=currentScalingFrequencyKhz" })
+  @SpeakeasyMetadata({ data: "json, name=currentScalingFrequencyKhz" })
   currentScalingFrequencyKhz?: number;
 
-  @Metadata({ data: "json, name=idleDuration" })
+  @SpeakeasyMetadata({ data: "json, name=idleDuration" })
   idleDuration?: string;
 
-  @Metadata({ data: "json, name=maxScalingFrequencyKhz" })
+  @SpeakeasyMetadata({ data: "json, name=maxScalingFrequencyKhz" })
   maxScalingFrequencyKhz?: number;
 }
 
@@ -49,70 +49,70 @@ export class ChromeOsDeviceCpuInfoLogicalCpus extends SpeakeasyBase {
  * CPU specs for a CPU.
 **/
 export class ChromeOsDeviceCpuInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=architecture" })
+  @SpeakeasyMetadata({ data: "json, name=architecture" })
   architecture?: string;
 
-  @Metadata({ data: "json, name=logicalCpus", elemType: shared.ChromeOsDeviceCpuInfoLogicalCpus })
+  @SpeakeasyMetadata({ data: "json, name=logicalCpus", elemType: ChromeOsDeviceCpuInfoLogicalCpus })
   logicalCpus?: ChromeOsDeviceCpuInfoLogicalCpus[];
 
-  @Metadata({ data: "json, name=maxClockSpeedKhz" })
+  @SpeakeasyMetadata({ data: "json, name=maxClockSpeedKhz" })
   maxClockSpeedKhz?: number;
 
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model?: string;
 }
 
 
 export class ChromeOsDeviceCpuStatusReportsCpuTemperatureInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=label" })
+  @SpeakeasyMetadata({ data: "json, name=label" })
   label?: string;
 
-  @Metadata({ data: "json, name=temperature" })
+  @SpeakeasyMetadata({ data: "json, name=temperature" })
   temperature?: number;
 }
 
 
 export class ChromeOsDeviceCpuStatusReports extends SpeakeasyBase {
-  @Metadata({ data: "json, name=cpuTemperatureInfo", elemType: shared.ChromeOsDeviceCpuStatusReportsCpuTemperatureInfo })
+  @SpeakeasyMetadata({ data: "json, name=cpuTemperatureInfo", elemType: ChromeOsDeviceCpuStatusReportsCpuTemperatureInfo })
   cpuTemperatureInfo?: ChromeOsDeviceCpuStatusReportsCpuTemperatureInfo[];
 
-  @Metadata({ data: "json, name=cpuUtilizationPercentageInfo" })
+  @SpeakeasyMetadata({ data: "json, name=cpuUtilizationPercentageInfo" })
   cpuUtilizationPercentageInfo?: number[];
 
-  @Metadata({ data: "json, name=reportTime" })
+  @SpeakeasyMetadata({ data: "json, name=reportTime" })
   reportTime?: Date;
 }
 
 
 export class ChromeOsDeviceDeviceFiles extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: Date;
 
-  @Metadata({ data: "json, name=downloadUrl" })
+  @SpeakeasyMetadata({ data: "json, name=downloadUrl" })
   downloadUrl?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class ChromeOsDeviceDiskVolumeReportsVolumeInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=storageFree" })
+  @SpeakeasyMetadata({ data: "json, name=storageFree" })
   storageFree?: string;
 
-  @Metadata({ data: "json, name=storageTotal" })
+  @SpeakeasyMetadata({ data: "json, name=storageTotal" })
   storageTotal?: string;
 
-  @Metadata({ data: "json, name=volumeId" })
+  @SpeakeasyMetadata({ data: "json, name=volumeId" })
   volumeId?: string;
 }
 
 
 export class ChromeOsDeviceDiskVolumeReports extends SpeakeasyBase {
-  @Metadata({ data: "json, name=volumeInfo", elemType: shared.ChromeOsDeviceDiskVolumeReportsVolumeInfo })
+  @SpeakeasyMetadata({ data: "json, name=volumeInfo", elemType: ChromeOsDeviceDiskVolumeReportsVolumeInfo })
   volumeInfo?: ChromeOsDeviceDiskVolumeReportsVolumeInfo[];
 }
 
@@ -122,47 +122,47 @@ export class ChromeOsDeviceDiskVolumeReports extends SpeakeasyBase {
  * Information for an ip address.
 **/
 export class ChromeOsDeviceLastKnownNetwork extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ipAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ipAddress" })
   ipAddress?: string;
 
-  @Metadata({ data: "json, name=wanIpAddress" })
+  @SpeakeasyMetadata({ data: "json, name=wanIpAddress" })
   wanIpAddress?: string;
 }
 
 
 // ChromeOsDeviceRecentUsers
 /** 
- * List of recent device users, in descending order, by last login time.
+ * A list of recent device users, in descending order, by last login time.
 **/
 export class ChromeOsDeviceRecentUsers extends SpeakeasyBase {
-  @Metadata({ data: "json, name=email" })
+  @SpeakeasyMetadata({ data: "json, name=email" })
   email?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class ChromeOsDeviceScreenshotFiles extends SpeakeasyBase {
-  @Metadata({ data: "json, name=createTime" })
+  @SpeakeasyMetadata({ data: "json, name=createTime" })
   createTime?: Date;
 
-  @Metadata({ data: "json, name=downloadUrl" })
+  @SpeakeasyMetadata({ data: "json, name=downloadUrl" })
   downloadUrl?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type?: string;
 }
 
 
 export class ChromeOsDeviceSystemRamFreeReports extends SpeakeasyBase {
-  @Metadata({ data: "json, name=reportTime" })
+  @SpeakeasyMetadata({ data: "json, name=reportTime" })
   reportTime?: Date;
 
-  @Metadata({ data: "json, name=systemRamFreeInfo" })
+  @SpeakeasyMetadata({ data: "json, name=systemRamFreeInfo" })
   systemRamFreeInfo?: string[];
 }
 
@@ -172,22 +172,22 @@ export class ChromeOsDeviceSystemRamFreeReports extends SpeakeasyBase {
  * Trusted Platform Module (TPM) (Read-only)
 **/
 export class ChromeOsDeviceTpmVersionInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=family" })
+  @SpeakeasyMetadata({ data: "json, name=family" })
   family?: string;
 
-  @Metadata({ data: "json, name=firmwareVersion" })
+  @SpeakeasyMetadata({ data: "json, name=firmwareVersion" })
   firmwareVersion?: string;
 
-  @Metadata({ data: "json, name=manufacturer" })
+  @SpeakeasyMetadata({ data: "json, name=manufacturer" })
   manufacturer?: string;
 
-  @Metadata({ data: "json, name=specLevel" })
+  @SpeakeasyMetadata({ data: "json, name=specLevel" })
   specLevel?: string;
 
-  @Metadata({ data: "json, name=tpmModel" })
+  @SpeakeasyMetadata({ data: "json, name=tpmModel" })
   tpmModel?: string;
 
-  @Metadata({ data: "json, name=vendorSpecific" })
+  @SpeakeasyMetadata({ data: "json, name=vendorSpecific" })
   vendorSpecific?: string;
 }
 
@@ -197,126 +197,126 @@ export class ChromeOsDeviceTpmVersionInfo extends SpeakeasyBase {
  * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
 **/
 export class ChromeOsDevice extends SpeakeasyBase {
-  @Metadata({ data: "json, name=activeTimeRanges", elemType: shared.ChromeOsDeviceActiveTimeRanges })
+  @SpeakeasyMetadata({ data: "json, name=activeTimeRanges", elemType: ChromeOsDeviceActiveTimeRanges })
   activeTimeRanges?: ChromeOsDeviceActiveTimeRanges[];
 
-  @Metadata({ data: "json, name=annotatedAssetId" })
+  @SpeakeasyMetadata({ data: "json, name=annotatedAssetId" })
   annotatedAssetId?: string;
 
-  @Metadata({ data: "json, name=annotatedLocation" })
+  @SpeakeasyMetadata({ data: "json, name=annotatedLocation" })
   annotatedLocation?: string;
 
-  @Metadata({ data: "json, name=annotatedUser" })
+  @SpeakeasyMetadata({ data: "json, name=annotatedUser" })
   annotatedUser?: string;
 
-  @Metadata({ data: "json, name=autoUpdateExpiration" })
+  @SpeakeasyMetadata({ data: "json, name=autoUpdateExpiration" })
   autoUpdateExpiration?: string;
 
-  @Metadata({ data: "json, name=bootMode" })
+  @SpeakeasyMetadata({ data: "json, name=bootMode" })
   bootMode?: string;
 
-  @Metadata({ data: "json, name=cpuInfo", elemType: shared.ChromeOsDeviceCpuInfo })
+  @SpeakeasyMetadata({ data: "json, name=cpuInfo", elemType: ChromeOsDeviceCpuInfo })
   cpuInfo?: ChromeOsDeviceCpuInfo[];
 
-  @Metadata({ data: "json, name=cpuStatusReports", elemType: shared.ChromeOsDeviceCpuStatusReports })
+  @SpeakeasyMetadata({ data: "json, name=cpuStatusReports", elemType: ChromeOsDeviceCpuStatusReports })
   cpuStatusReports?: ChromeOsDeviceCpuStatusReports[];
 
-  @Metadata({ data: "json, name=deviceFiles", elemType: shared.ChromeOsDeviceDeviceFiles })
+  @SpeakeasyMetadata({ data: "json, name=deviceFiles", elemType: ChromeOsDeviceDeviceFiles })
   deviceFiles?: ChromeOsDeviceDeviceFiles[];
 
-  @Metadata({ data: "json, name=deviceId" })
+  @SpeakeasyMetadata({ data: "json, name=deviceId" })
   deviceId?: string;
 
-  @Metadata({ data: "json, name=diskVolumeReports", elemType: shared.ChromeOsDeviceDiskVolumeReports })
+  @SpeakeasyMetadata({ data: "json, name=diskVolumeReports", elemType: ChromeOsDeviceDiskVolumeReports })
   diskVolumeReports?: ChromeOsDeviceDiskVolumeReports[];
 
-  @Metadata({ data: "json, name=dockMacAddress" })
+  @SpeakeasyMetadata({ data: "json, name=dockMacAddress" })
   dockMacAddress?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=ethernetMacAddress" })
+  @SpeakeasyMetadata({ data: "json, name=ethernetMacAddress" })
   ethernetMacAddress?: string;
 
-  @Metadata({ data: "json, name=ethernetMacAddress0" })
+  @SpeakeasyMetadata({ data: "json, name=ethernetMacAddress0" })
   ethernetMacAddress0?: string;
 
-  @Metadata({ data: "json, name=firmwareVersion" })
+  @SpeakeasyMetadata({ data: "json, name=firmwareVersion" })
   firmwareVersion?: string;
 
-  @Metadata({ data: "json, name=firstEnrollmentTime" })
+  @SpeakeasyMetadata({ data: "json, name=firstEnrollmentTime" })
   firstEnrollmentTime?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=lastEnrollmentTime" })
+  @SpeakeasyMetadata({ data: "json, name=lastEnrollmentTime" })
   lastEnrollmentTime?: Date;
 
-  @Metadata({ data: "json, name=lastKnownNetwork", elemType: shared.ChromeOsDeviceLastKnownNetwork })
+  @SpeakeasyMetadata({ data: "json, name=lastKnownNetwork", elemType: ChromeOsDeviceLastKnownNetwork })
   lastKnownNetwork?: ChromeOsDeviceLastKnownNetwork[];
 
-  @Metadata({ data: "json, name=lastSync" })
+  @SpeakeasyMetadata({ data: "json, name=lastSync" })
   lastSync?: Date;
 
-  @Metadata({ data: "json, name=macAddress" })
+  @SpeakeasyMetadata({ data: "json, name=macAddress" })
   macAddress?: string;
 
-  @Metadata({ data: "json, name=manufactureDate" })
+  @SpeakeasyMetadata({ data: "json, name=manufactureDate" })
   manufactureDate?: string;
 
-  @Metadata({ data: "json, name=meid" })
+  @SpeakeasyMetadata({ data: "json, name=meid" })
   meid?: string;
 
-  @Metadata({ data: "json, name=model" })
+  @SpeakeasyMetadata({ data: "json, name=model" })
   model?: string;
 
-  @Metadata({ data: "json, name=notes" })
+  @SpeakeasyMetadata({ data: "json, name=notes" })
   notes?: string;
 
-  @Metadata({ data: "json, name=orderNumber" })
+  @SpeakeasyMetadata({ data: "json, name=orderNumber" })
   orderNumber?: string;
 
-  @Metadata({ data: "json, name=orgUnitId" })
+  @SpeakeasyMetadata({ data: "json, name=orgUnitId" })
   orgUnitId?: string;
 
-  @Metadata({ data: "json, name=orgUnitPath" })
+  @SpeakeasyMetadata({ data: "json, name=orgUnitPath" })
   orgUnitPath?: string;
 
-  @Metadata({ data: "json, name=osUpdateStatus" })
+  @SpeakeasyMetadata({ data: "json, name=osUpdateStatus" })
   osUpdateStatus?: OsUpdateStatus;
 
-  @Metadata({ data: "json, name=osVersion" })
+  @SpeakeasyMetadata({ data: "json, name=osVersion" })
   osVersion?: string;
 
-  @Metadata({ data: "json, name=platformVersion" })
+  @SpeakeasyMetadata({ data: "json, name=platformVersion" })
   platformVersion?: string;
 
-  @Metadata({ data: "json, name=recentUsers", elemType: shared.ChromeOsDeviceRecentUsers })
+  @SpeakeasyMetadata({ data: "json, name=recentUsers", elemType: ChromeOsDeviceRecentUsers })
   recentUsers?: ChromeOsDeviceRecentUsers[];
 
-  @Metadata({ data: "json, name=screenshotFiles", elemType: shared.ChromeOsDeviceScreenshotFiles })
+  @SpeakeasyMetadata({ data: "json, name=screenshotFiles", elemType: ChromeOsDeviceScreenshotFiles })
   screenshotFiles?: ChromeOsDeviceScreenshotFiles[];
 
-  @Metadata({ data: "json, name=serialNumber" })
+  @SpeakeasyMetadata({ data: "json, name=serialNumber" })
   serialNumber?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=supportEndDate" })
+  @SpeakeasyMetadata({ data: "json, name=supportEndDate" })
   supportEndDate?: Date;
 
-  @Metadata({ data: "json, name=systemRamFreeReports", elemType: shared.ChromeOsDeviceSystemRamFreeReports })
+  @SpeakeasyMetadata({ data: "json, name=systemRamFreeReports", elemType: ChromeOsDeviceSystemRamFreeReports })
   systemRamFreeReports?: ChromeOsDeviceSystemRamFreeReports[];
 
-  @Metadata({ data: "json, name=systemRamTotal" })
+  @SpeakeasyMetadata({ data: "json, name=systemRamTotal" })
   systemRamTotal?: string;
 
-  @Metadata({ data: "json, name=tpmVersionInfo" })
+  @SpeakeasyMetadata({ data: "json, name=tpmVersionInfo" })
   tpmVersionInfo?: ChromeOsDeviceTpmVersionInfo;
 
-  @Metadata({ data: "json, name=willAutoRenew" })
+  @SpeakeasyMetadata({ data: "json, name=willAutoRenew" })
   willAutoRenew?: boolean;
 }

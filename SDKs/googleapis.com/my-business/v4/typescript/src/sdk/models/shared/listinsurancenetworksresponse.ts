@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { InsuranceNetwork } from "./insurancenetwork";
+
 
 
 // ListInsuranceNetworksResponse
@@ -8,9 +8,9 @@ import { InsuranceNetwork } from "./insurancenetwork";
  * Response message for InsuranceNetworkService.ListInsuranceNetworks
 **/
 export class ListInsuranceNetworksResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=networks", elemType: shared.InsuranceNetwork })
+  @SpeakeasyMetadata({ data: "json, name=networks", elemType: InsuranceNetwork })
   networks?: InsuranceNetwork[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

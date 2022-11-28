@@ -1,11 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 export enum LandlordPhotoModelPhotoTypeEnum {
-    Photo = "Photo"
-,    Map = "Map"
-,    FloorPlan = "FloorPlan"
-,    SiteMap = "SiteMap"
-,    AerialPhoto = "AerialPhoto"
+    Photo = "Photo",
+    Map = "Map",
+    FloorPlan = "FloorPlan",
+    SiteMap = "SiteMap",
+    AerialPhoto = "AerialPhoto"
 }
 
 
@@ -14,15 +15,15 @@ export enum LandlordPhotoModelPhotoTypeEnum {
  * Stores a photo related to a property structure.
 **/
 export class LandlordPhotoModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ETag" })
+  @SpeakeasyMetadata({ data: "json, name=ETag" })
   eTag?: string;
 
-  @Metadata({ data: "json, name=FileName" })
+  @SpeakeasyMetadata({ data: "json, name=FileName" })
   fileName?: string;
 
-  @Metadata({ data: "json, name=OID" })
+  @SpeakeasyMetadata({ data: "json, name=OID" })
   oid?: string;
 
-  @Metadata({ data: "json, name=PhotoType" })
+  @SpeakeasyMetadata({ data: "json, name=PhotoType" })
   photoType?: LandlordPhotoModelPhotoTypeEnum;
 }

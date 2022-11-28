@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { PeopleSuggestion } from "./peoplesuggestion";
 import { Source } from "./source";
+
 
 
 // SuggestResult
@@ -8,15 +9,15 @@ import { Source } from "./source";
  * One suggestion result.
 **/
 export class SuggestResult extends SpeakeasyBase {
-  @Metadata({ data: "json, name=peopleSuggestion" })
+  @SpeakeasyMetadata({ data: "json, name=peopleSuggestion" })
   peopleSuggestion?: PeopleSuggestion;
 
-  @Metadata({ data: "json, name=querySuggestion" })
+  @SpeakeasyMetadata({ data: "json, name=querySuggestion" })
   querySuggestion?: Map<string, any>;
 
-  @Metadata({ data: "json, name=source" })
+  @SpeakeasyMetadata({ data: "json, name=source" })
   source?: Source;
 
-  @Metadata({ data: "json, name=suggestedQuery" })
+  @SpeakeasyMetadata({ data: "json, name=suggestedQuery" })
   suggestedQuery?: string;
 }

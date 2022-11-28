@@ -11,13 +11,13 @@ class GetSigninsQueryParams:
 
 @dataclass
 class GetSigninsRequest:
-    query_params: GetSigninsQueryParams = field(default=None)
+    query_params: GetSigninsQueryParams = field()
     
 
 @dataclass
 class GetSigninsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     invalid_token: Optional[shared.InvalidToken] = field(default=None)
     key_failure: Optional[shared.KeyFailure] = field(default=None)
     signins: Optional[List[shared.Signin]] = field(default=None)

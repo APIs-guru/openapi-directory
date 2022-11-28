@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2AssistQueryParameters
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the parameters of human assist query.
 **/
 export class GoogleCloudDialogflowV2AssistQueryParameters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=documentsMetadataFilters" })
+  @SpeakeasyMetadata({ data: "json, name=documentsMetadataFilters" })
   documentsMetadataFilters?: Map<string, string>;
 }

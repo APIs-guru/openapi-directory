@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ActivityResponse
@@ -6,42 +7,42 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Provides information about an activity that was performed by a campaign.
 **/
 export class ActivityResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ApplicationId" })
+  @SpeakeasyMetadata({ data: "json, name=ApplicationId" })
   applicationId: string;
 
-  @Metadata({ data: "json, name=CampaignId" })
+  @SpeakeasyMetadata({ data: "json, name=CampaignId" })
   campaignId: string;
 
-  @Metadata({ data: "json, name=End" })
+  @SpeakeasyMetadata({ data: "json, name=End" })
   end?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: string;
 
-  @Metadata({ data: "json, name=Result" })
+  @SpeakeasyMetadata({ data: "json, name=Result" })
   result?: string;
 
-  @Metadata({ data: "json, name=ScheduledStart" })
+  @SpeakeasyMetadata({ data: "json, name=ScheduledStart" })
   scheduledStart?: string;
 
-  @Metadata({ data: "json, name=Start" })
+  @SpeakeasyMetadata({ data: "json, name=Start" })
   start?: string;
 
-  @Metadata({ data: "json, name=State" })
+  @SpeakeasyMetadata({ data: "json, name=State" })
   state?: string;
 
-  @Metadata({ data: "json, name=SuccessfulEndpointCount" })
+  @SpeakeasyMetadata({ data: "json, name=SuccessfulEndpointCount" })
   successfulEndpointCount?: number;
 
-  @Metadata({ data: "json, name=TimezonesCompletedCount" })
+  @SpeakeasyMetadata({ data: "json, name=TimezonesCompletedCount" })
   timezonesCompletedCount?: number;
 
-  @Metadata({ data: "json, name=TimezonesTotalCount" })
+  @SpeakeasyMetadata({ data: "json, name=TimezonesTotalCount" })
   timezonesTotalCount?: number;
 
-  @Metadata({ data: "json, name=TotalEndpointCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalEndpointCount" })
   totalEndpointCount?: number;
 
-  @Metadata({ data: "json, name=TreatmentId" })
+  @SpeakeasyMetadata({ data: "json, name=TreatmentId" })
   treatmentId?: string;
 }

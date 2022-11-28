@@ -8,6 +8,8 @@ const (
 	LeaderboardOrderEnumSmallerIsBetter       LeaderboardOrderEnum = "SMALLER_IS_BETTER"
 )
 
+// Leaderboard
+// The Leaderboard resource.
 type Leaderboard struct {
 	IconURL          *string               `json:"iconUrl,omitempty"`
 	ID               *string               `json:"id,omitempty"`

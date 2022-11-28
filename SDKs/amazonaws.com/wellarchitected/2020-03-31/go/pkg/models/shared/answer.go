@@ -1,5 +1,7 @@
 package shared
 
+// Answer
+// An answer of the question.
 type Answer struct {
 	ChoiceAnswers       []ChoiceAnswer    `json:"ChoiceAnswers,omitempty"`
 	Choices             []Choice          `json:"Choices,omitempty"`

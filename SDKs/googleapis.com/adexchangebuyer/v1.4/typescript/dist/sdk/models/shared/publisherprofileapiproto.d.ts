@@ -1,0 +1,31 @@
+import { SpeakeasyBase } from "../../../internal/utils";
+import { MobileApplication } from "./mobileapplication";
+import { PublisherProvidedForecast } from "./publisherprovidedforecast";
+import { Seller } from "./seller";
+export declare class PublisherProfileApiProto extends SpeakeasyBase {
+    audience?: string;
+    buyerPitchStatement?: string;
+    directContact?: string;
+    exchange?: string;
+    forecastInventory?: string;
+    googlePlusLink?: string;
+    isParent?: boolean;
+    isPublished?: boolean;
+    kind?: string;
+    logoUrl?: string;
+    mediaKitLink?: string;
+    name?: string;
+    overview?: string;
+    profileId?: number;
+    programmaticContact?: string;
+    publisherAppIds?: string[];
+    publisherApps?: MobileApplication[];
+    publisherDomains?: string[];
+    publisherProfileId?: string;
+    publisherProvidedForecast?: PublisherProvidedForecast;
+    rateCardInfoLink?: string;
+    samplePageLink?: string;
+    seller?: Seller;
+    state?: string;
+    topHeadlines?: string[];
+}

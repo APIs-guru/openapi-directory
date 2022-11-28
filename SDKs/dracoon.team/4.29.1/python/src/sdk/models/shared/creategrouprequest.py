@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import objectexpiration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class CreateGroupRequest:
-    expiration: Optional[objectexpiration.ObjectExpiration] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiration' }})
-    name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
+    r"""CreateGroupRequest
+    Request model for creating a group
+    """
+    
+    name: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('name') }})
+    expiration: Optional[ObjectExpiration] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('expiration') }})
     

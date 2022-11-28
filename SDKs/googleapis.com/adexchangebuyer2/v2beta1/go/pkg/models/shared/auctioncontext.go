@@ -7,6 +7,8 @@ const (
 	AuctionContextAuctionTypesEnumDirectDeals AuctionContextAuctionTypesEnum = "DIRECT_DEALS"
 )
 
+// AuctionContext
+// Output only. The auction type the restriction applies to.
 type AuctionContext struct {
 	AuctionTypes []AuctionContextAuctionTypesEnum `json:"auctionTypes,omitempty"`
 }

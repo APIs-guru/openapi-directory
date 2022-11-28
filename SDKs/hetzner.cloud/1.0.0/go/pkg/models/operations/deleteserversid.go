@@ -4,10 +4,8 @@ type DeleteServersIDPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type DeleteServersIDRequest struct {
-	PathParams DeleteServersIDPathParams
-}
-
+// DeleteServersID200ApplicationJSONActionError
+// Error message for the Action if error occurred, otherwise null
 type DeleteServersID200ApplicationJSONActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
@@ -39,6 +37,10 @@ type DeleteServersID200ApplicationJSONAction struct {
 
 type DeleteServersID200ApplicationJSON struct {
 	Action *DeleteServersID200ApplicationJSONAction `json:"action,omitempty"`
+}
+
+type DeleteServersIDRequest struct {
+	PathParams DeleteServersIDPathParams
 }
 
 type DeleteServersIDResponse struct {

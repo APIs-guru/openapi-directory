@@ -1,6 +1,7 @@
 
 
+
 export enum RegistrationStatusEnum {
-    Registered = "REGISTERED"
-,    Deprecated = "DEPRECATED"
+    Registered = "REGISTERED",
+    Deprecated = "DEPRECATED"
 }

@@ -1,16 +1,16 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RewindHyperparameterResponse } from "./rewindhyperparameterresponse";
 import { RewindTimeSeriesResponse } from "./rewindtimeseriesresponse";
 
 
+
 export class RewindResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=hyperparameters" })
+  @SpeakeasyMetadata({ data: "json, name=hyperparameters" })
   hyperparameters?: RewindHyperparameterResponse;
 
-  @Metadata({ data: "json, name=timeSeries", elemType: shared.RewindTimeSeriesResponse })
+  @SpeakeasyMetadata({ data: "json, name=timeSeries", elemType: RewindTimeSeriesResponse })
   timeSeries?: RewindTimeSeriesResponse[];
 
-  @Metadata({ data: "json, name=totalCost" })
+  @SpeakeasyMetadata({ data: "json, name=totalCost" })
   totalCost?: number;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { PolicyControllerHubConfig } from "./policycontrollerhubconfig";
 /**
  * **Policy Controller**: Configuration for a single cluster. Intended to parallel the PolicyController CR.

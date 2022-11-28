@@ -22,22 +22,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetStrainTypeDiffUsingGetPathParams = /** @class */ (function (_super) {
     __extends(GetStrainTypeDiffUsingGetPathParams, _super);
     function GetStrainTypeDiffUsingGetPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=dateFromYYYYMMDD" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=dateFromYYYYMMDD" }),
         __metadata("design:type", String)
     ], GetStrainTypeDiffUsingGetPathParams.prototype, "dateFromYyyymmdd", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=dateToYYYYMMDD" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=dateToYYYYMMDD" }),
         __metadata("design:type", String)
     ], GetStrainTypeDiffUsingGetPathParams.prototype, "dateToYyyymmdd", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=speciesTypeKey" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=speciesTypeKey" }),
         __metadata("design:type", Number)
     ], GetStrainTypeDiffUsingGetPathParams.prototype, "speciesTypeKey", void 0);
     return GetStrainTypeDiffUsingGetPathParams;
@@ -49,7 +49,7 @@ var GetStrainTypeDiffUsingGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetStrainTypeDiffUsingGetPathParams)
     ], GetStrainTypeDiffUsingGetRequest.prototype, "pathParams", void 0);
     return GetStrainTypeDiffUsingGetRequest;
@@ -61,15 +61,15 @@ var GetStrainTypeDiffUsingGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetStrainTypeDiffUsingGetResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetStrainTypeDiffUsingGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetStrainTypeDiffUsingGetResponse.prototype, "statusCode", void 0);
     return GetStrainTypeDiffUsingGetResponse;

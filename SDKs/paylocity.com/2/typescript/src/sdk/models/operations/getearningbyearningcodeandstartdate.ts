@@ -1,47 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetEarningByEarningCodeAndStartDatePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=companyId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=companyId" })
   companyId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=earningCode" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=earningCode" })
   earningCode: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=employeeId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=employeeId" })
   employeeId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=startDate" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=startDate" })
   startDate: string;
 }
 
 
 export class GetEarningByEarningCodeAndStartDateSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   paylocityAuth: shared.SchemePaylocityAuth;
 }
 
 
 export class GetEarningByEarningCodeAndStartDateRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetEarningByEarningCodeAndStartDatePathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetEarningByEarningCodeAndStartDateSecurity;
 }
 
 
 export class GetEarningByEarningCodeAndStartDateResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   earning?: shared.Earning;
 
-  @Metadata({ elemType: shared.Error })
+  @SpeakeasyMetadata({ elemType: shared.Error })
   errors?: shared.Error[];
 }

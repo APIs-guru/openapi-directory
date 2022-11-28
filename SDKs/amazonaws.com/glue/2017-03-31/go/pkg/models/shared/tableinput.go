@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// TableInput
+// A structure used to define a table.
 type TableInput struct {
 	Description       *string            `json:"Description,omitempty"`
 	LastAccessTime    *time.Time         `json:"LastAccessTime,omitempty"`

@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DirectoryDescription
+// Contains information about an Directory Service directory.
 type DirectoryDescription struct {
 	AccessURL                        *string                              `json:"AccessUrl,omitempty"`
 	Alias                            *string                              `json:"Alias,omitempty"`

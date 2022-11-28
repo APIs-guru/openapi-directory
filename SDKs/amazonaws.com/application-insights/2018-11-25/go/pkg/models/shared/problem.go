@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Problem
+// Describes a problem that is detected by correlating observations.
 type Problem struct {
 	AffectedResource  *string                      `json:"AffectedResource,omitempty"`
 	EndTime           *time.Time                   `json:"EndTime,omitempty"`

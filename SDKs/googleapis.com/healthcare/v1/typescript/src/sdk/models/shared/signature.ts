@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Image } from "./image";
+
 
 
 // Signature
@@ -7,15 +8,15 @@ import { Image } from "./image";
  * User signature.
 **/
 export class Signature extends SpeakeasyBase {
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: Image;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: Map<string, string>;
 
-  @Metadata({ data: "json, name=signatureTime" })
+  @SpeakeasyMetadata({ data: "json, name=signatureTime" })
   signatureTime?: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 }

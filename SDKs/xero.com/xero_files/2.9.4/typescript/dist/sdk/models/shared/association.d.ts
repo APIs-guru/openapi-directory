@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ObjectGroupEnum } from "./objectgroupenum";
 import { ObjectTypeEnum } from "./objecttypeenum";
 export declare class Association extends SpeakeasyBase {

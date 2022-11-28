@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { ContainerImage } from "./containerimage";
 export var RuntimeSoftwareConfigPostStartupScriptBehaviorEnum;
 (function (RuntimeSoftwareConfigPostStartupScriptBehaviorEnum) {
     RuntimeSoftwareConfigPostStartupScriptBehaviorEnum["PostStartupScriptBehaviorUnspecified"] = "POST_STARTUP_SCRIPT_BEHAVIOR_UNSPECIFIED";
@@ -40,49 +40,101 @@ var RuntimeSoftwareConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=customGpuDriverPath" }),
+        SpeakeasyMetadata({ data: "json, name=customGpuDriverPath" }),
         __metadata("design:type", String)
     ], RuntimeSoftwareConfig.prototype, "customGpuDriverPath", void 0);
     __decorate([
-        Metadata({ data: "json, name=disableTerminal" }),
+        SpeakeasyMetadata({ data: "json, name=disableTerminal" }),
         __metadata("design:type", Boolean)
     ], RuntimeSoftwareConfig.prototype, "disableTerminal", void 0);
     __decorate([
-        Metadata({ data: "json, name=enableHealthMonitoring" }),
+        SpeakeasyMetadata({ data: "json, name=enableHealthMonitoring" }),
         __metadata("design:type", Boolean)
     ], RuntimeSoftwareConfig.prototype, "enableHealthMonitoring", void 0);
     __decorate([
-        Metadata({ data: "json, name=idleShutdown" }),
+        SpeakeasyMetadata({ data: "json, name=idleShutdown" }),
         __metadata("design:type", Boolean)
     ], RuntimeSoftwareConfig.prototype, "idleShutdown", void 0);
     __decorate([
-        Metadata({ data: "json, name=idleShutdownTimeout" }),
+        SpeakeasyMetadata({ data: "json, name=idleShutdownTimeout" }),
         __metadata("design:type", Number)
     ], RuntimeSoftwareConfig.prototype, "idleShutdownTimeout", void 0);
     __decorate([
-        Metadata({ data: "json, name=installGpuDriver" }),
+        SpeakeasyMetadata({ data: "json, name=installGpuDriver" }),
         __metadata("design:type", Boolean)
     ], RuntimeSoftwareConfig.prototype, "installGpuDriver", void 0);
     __decorate([
-        Metadata({ data: "json, name=kernels", elemType: shared.ContainerImage }),
+        SpeakeasyMetadata({ data: "json, name=kernels", elemType: ContainerImage }),
         __metadata("design:type", Array)
     ], RuntimeSoftwareConfig.prototype, "kernels", void 0);
     __decorate([
-        Metadata({ data: "json, name=notebookUpgradeSchedule" }),
+        SpeakeasyMetadata({ data: "json, name=notebookUpgradeSchedule" }),
         __metadata("design:type", String)
     ], RuntimeSoftwareConfig.prototype, "notebookUpgradeSchedule", void 0);
     __decorate([
-        Metadata({ data: "json, name=postStartupScript" }),
+        SpeakeasyMetadata({ data: "json, name=postStartupScript" }),
         __metadata("design:type", String)
     ], RuntimeSoftwareConfig.prototype, "postStartupScript", void 0);
     __decorate([
-        Metadata({ data: "json, name=postStartupScriptBehavior" }),
+        SpeakeasyMetadata({ data: "json, name=postStartupScriptBehavior" }),
         __metadata("design:type", String)
     ], RuntimeSoftwareConfig.prototype, "postStartupScriptBehavior", void 0);
     __decorate([
-        Metadata({ data: "json, name=upgradeable" }),
+        SpeakeasyMetadata({ data: "json, name=upgradeable" }),
         __metadata("design:type", Boolean)
     ], RuntimeSoftwareConfig.prototype, "upgradeable", void 0);
     return RuntimeSoftwareConfig;
 }(SpeakeasyBase));
 export { RuntimeSoftwareConfig };
+// RuntimeSoftwareConfigInput
+/**
+ * Specifies the selection and configuration of software inside the runtime. The properties to set on runtime. Properties keys are specified in `key:value` format, for example: * `idle_shutdown: true` * `idle_shutdown_timeout: 180` * `enable_health_monitoring: true`
+**/
+var RuntimeSoftwareConfigInput = /** @class */ (function (_super) {
+    __extends(RuntimeSoftwareConfigInput, _super);
+    function RuntimeSoftwareConfigInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=customGpuDriverPath" }),
+        __metadata("design:type", String)
+    ], RuntimeSoftwareConfigInput.prototype, "customGpuDriverPath", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=disableTerminal" }),
+        __metadata("design:type", Boolean)
+    ], RuntimeSoftwareConfigInput.prototype, "disableTerminal", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=enableHealthMonitoring" }),
+        __metadata("design:type", Boolean)
+    ], RuntimeSoftwareConfigInput.prototype, "enableHealthMonitoring", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=idleShutdown" }),
+        __metadata("design:type", Boolean)
+    ], RuntimeSoftwareConfigInput.prototype, "idleShutdown", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=idleShutdownTimeout" }),
+        __metadata("design:type", Number)
+    ], RuntimeSoftwareConfigInput.prototype, "idleShutdownTimeout", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=installGpuDriver" }),
+        __metadata("design:type", Boolean)
+    ], RuntimeSoftwareConfigInput.prototype, "installGpuDriver", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=kernels", elemType: ContainerImage }),
+        __metadata("design:type", Array)
+    ], RuntimeSoftwareConfigInput.prototype, "kernels", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=notebookUpgradeSchedule" }),
+        __metadata("design:type", String)
+    ], RuntimeSoftwareConfigInput.prototype, "notebookUpgradeSchedule", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=postStartupScript" }),
+        __metadata("design:type", String)
+    ], RuntimeSoftwareConfigInput.prototype, "postStartupScript", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=postStartupScriptBehavior" }),
+        __metadata("design:type", String)
+    ], RuntimeSoftwareConfigInput.prototype, "postStartupScriptBehavior", void 0);
+    return RuntimeSoftwareConfigInput;
+}(SpeakeasyBase));
+export { RuntimeSoftwareConfigInput };

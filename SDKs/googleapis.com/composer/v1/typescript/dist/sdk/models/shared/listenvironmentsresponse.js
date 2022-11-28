@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Environment } from "./environment";
 // ListEnvironmentsResponse
 /**
  * The environments in a project and location.
@@ -34,11 +34,11 @@ var ListEnvironmentsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=environments", elemType: shared.Environment }),
+        SpeakeasyMetadata({ data: "json, name=environments", elemType: Environment }),
         __metadata("design:type", Array)
     ], ListEnvironmentsResponse.prototype, "environments", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextPageToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextPageToken" }),
         __metadata("design:type", String)
     ], ListEnvironmentsResponse.prototype, "nextPageToken", void 0);
     return ListEnvironmentsResponse;

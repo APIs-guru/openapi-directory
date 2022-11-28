@@ -1,6 +1,7 @@
 
 
+
 export enum ResourceTypeEnum {
-    Gpu = "GPU"
-,    InferenceAccelerator = "InferenceAccelerator"
+    Gpu = "GPU",
+    InferenceAccelerator = "InferenceAccelerator"
 }

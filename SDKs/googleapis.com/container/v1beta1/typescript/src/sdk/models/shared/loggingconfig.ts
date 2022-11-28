@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LoggingComponentConfig } from "./loggingcomponentconfig";
+
 
 
 // LoggingConfig
@@ -7,6 +8,6 @@ import { LoggingComponentConfig } from "./loggingcomponentconfig";
  * LoggingConfig is cluster logging configuration.
 **/
 export class LoggingConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=componentConfig" })
+  @SpeakeasyMetadata({ data: "json, name=componentConfig" })
   componentConfig?: LoggingComponentConfig;
 }

@@ -1,32 +1,33 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class PostPagesJsonQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=authtoken" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=authtoken" })
   authtoken: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=login" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=login" })
   login: string;
 }
 
 
 export class PostPagesJsonRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: PostPagesJsonQueryParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.PageModify;
 }
 
 
 export class PostPagesJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   page?: shared.Page;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { AdStyle } from "./adstyle";
 /**
  * The backup option to be used in instances where no ad is available.

@@ -9,6 +9,8 @@ const (
 	EnterpriseCrmEventbusProtoErrorDetailSeverityEnumInfo                EnterpriseCrmEventbusProtoErrorDetailSeverityEnum = "INFO"
 )
 
+// EnterpriseCrmEventbusProtoErrorDetail
+// An error, warning, or information message associated with a workflow.
 type EnterpriseCrmEventbusProtoErrorDetail struct {
 	ErrorCode    *CrmlogErrorCode                                   `json:"errorCode,omitempty"`
 	ErrorMessage *string                                            `json:"errorMessage,omitempty"`

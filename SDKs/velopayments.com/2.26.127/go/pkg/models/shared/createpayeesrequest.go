@@ -1,6 +1,6 @@
 package shared
 
-type CreatePayeesRequest struct {
-	Payees  []CreatePayee `json:"payees"`
-	PayorID string        `json:"payorId"`
+type CreatePayeesRequestInput struct {
+	Payees  []CreatePayeeInput `json:"payees"`
+	PayorID string             `json:"payorId"`
 }

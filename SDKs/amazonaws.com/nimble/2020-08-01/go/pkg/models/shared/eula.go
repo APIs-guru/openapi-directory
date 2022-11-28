@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Eula
+// Represents a EULA resource.
 type Eula struct {
 	Content   *string    `json:"content,omitempty"`
 	CreatedAt *time.Time `json:"createdAt,omitempty"`

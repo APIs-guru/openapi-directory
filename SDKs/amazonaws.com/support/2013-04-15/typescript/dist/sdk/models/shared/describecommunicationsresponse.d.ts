@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Communication } from "./communication";
 /**
  * The communications returned by the <a>DescribeCommunications</a> operation.

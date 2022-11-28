@@ -1,62 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetWorkspacesWorkspaceProjectsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=workspace" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspace" })
   workspace: string;
 }
 
 
-export class GetWorkspacesWorkspaceProjectsSecurityOption1 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
-  oauth2: shared.SchemeOauth2;
-}
-
-
-export class GetWorkspacesWorkspaceProjectsSecurityOption2 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
-  basic: shared.SchemeBasic;
-}
-
-
-export class GetWorkspacesWorkspaceProjectsSecurityOption3 extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
-  apiKey: shared.SchemeApiKey;
-}
-
-
 export class GetWorkspacesWorkspaceProjectsSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, option=true" })
-  option1?: GetWorkspacesWorkspaceProjectsSecurityOption1;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2?: shared.SchemeOauth2;
 
-  @Metadata({ data: "security, option=true" })
-  option2?: GetWorkspacesWorkspaceProjectsSecurityOption2;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  basic?: shared.SchemeBasic;
 
-  @Metadata({ data: "security, option=true" })
-  option3?: GetWorkspacesWorkspaceProjectsSecurityOption3;
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  apiKey?: shared.SchemeApiKey;
 }
 
 
 export class GetWorkspacesWorkspaceProjectsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetWorkspacesWorkspaceProjectsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   security: GetWorkspacesWorkspaceProjectsSecurity;
 }
 
 
 export class GetWorkspacesWorkspaceProjectsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   paginatedProjects?: shared.PaginatedProjects;
 }

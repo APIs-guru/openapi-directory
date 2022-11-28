@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ActionTypeEnum } from "./actiontypeenum";
+
 
 
 // AuthInfo
@@ -7,9 +8,9 @@ import { ActionTypeEnum } from "./actiontypeenum";
  * A collection of authorization information.
 **/
 export class AuthInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=actionType" })
+  @SpeakeasyMetadata({ data: "json, name=actionType" })
   actionType?: ActionTypeEnum;
 
-  @Metadata({ data: "json, name=resources" })
+  @SpeakeasyMetadata({ data: "json, name=resources" })
   resources: string[];
 }

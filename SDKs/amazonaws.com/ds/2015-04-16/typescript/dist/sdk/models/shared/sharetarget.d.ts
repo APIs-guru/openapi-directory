@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { TargetTypeEnum } from "./targettypeenum";
 /**
  * Identifier that contains details about the directory consumer account.

@@ -26,7 +26,7 @@ type ApigeeOrganizationsCreateSecurity struct {
 
 type ApigeeOrganizationsCreateRequest struct {
 	QueryParams ApigeeOrganizationsCreateQueryParams
-	Request     *shared.GoogleCloudApigeeV1Organization `request:"mediaType=application/json"`
+	Request     *shared.GoogleCloudApigeeV1OrganizationInput `request:"mediaType=application/json"`
 	Security    ApigeeOrganizationsCreateSecurity
 }
 

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // CmekSettings
 /**
  * Describes the customer-managed encryption key (CMEK) settings associated with a project, folder, organization, billing account, or flexible resource.Note: CMEK for the Log Router can currently only be configured for Google Cloud organizations. Once configured, it applies to all projects and folders in the Google Cloud organization.See Enabling CMEK for Log Router (https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
@@ -33,21 +33,41 @@ var CmekSettings = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=kmsKeyName" }),
+        SpeakeasyMetadata({ data: "json, name=kmsKeyName" }),
         __metadata("design:type", String)
     ], CmekSettings.prototype, "kmsKeyName", void 0);
     __decorate([
-        Metadata({ data: "json, name=kmsKeyVersionName" }),
+        SpeakeasyMetadata({ data: "json, name=kmsKeyVersionName" }),
         __metadata("design:type", String)
     ], CmekSettings.prototype, "kmsKeyVersionName", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], CmekSettings.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=serviceAccountId" }),
+        SpeakeasyMetadata({ data: "json, name=serviceAccountId" }),
         __metadata("design:type", String)
     ], CmekSettings.prototype, "serviceAccountId", void 0);
     return CmekSettings;
 }(SpeakeasyBase));
 export { CmekSettings };
+// CmekSettingsInput
+/**
+ * Describes the customer-managed encryption key (CMEK) settings associated with a project, folder, organization, billing account, or flexible resource.Note: CMEK for the Log Router can currently only be configured for Google Cloud organizations. Once configured, it applies to all projects and folders in the Google Cloud organization.See Enabling CMEK for Log Router (https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
+**/
+var CmekSettingsInput = /** @class */ (function (_super) {
+    __extends(CmekSettingsInput, _super);
+    function CmekSettingsInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=kmsKeyName" }),
+        __metadata("design:type", String)
+    ], CmekSettingsInput.prototype, "kmsKeyName", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=kmsKeyVersionName" }),
+        __metadata("design:type", String)
+    ], CmekSettingsInput.prototype, "kmsKeyVersionName", void 0);
+    return CmekSettingsInput;
+}(SpeakeasyBase));
+export { CmekSettingsInput };

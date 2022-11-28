@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TriggerTypeEnum } from "./triggertypeenum";
+
 
 
 // ExecutionTrigger
@@ -7,9 +8,9 @@ import { TriggerTypeEnum } from "./triggertypeenum";
  * The interaction or event that started a pipeline execution.
 **/
 export class ExecutionTrigger extends SpeakeasyBase {
-  @Metadata({ data: "json, name=triggerDetail" })
+  @SpeakeasyMetadata({ data: "json, name=triggerDetail" })
   triggerDetail?: string;
 
-  @Metadata({ data: "json, name=triggerType" })
+  @SpeakeasyMetadata({ data: "json, name=triggerType" })
   triggerType?: TriggerTypeEnum;
 }

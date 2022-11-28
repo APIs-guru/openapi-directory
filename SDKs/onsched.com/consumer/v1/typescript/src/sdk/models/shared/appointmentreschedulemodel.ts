@@ -1,22 +1,23 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class AppointmentRescheduleModel extends SpeakeasyBase {
-  @Metadata({ data: "json, name=endDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=endDateTime" })
   endDateTime?: Date;
 
-  @Metadata({ data: "json, name=resourceId" })
+  @SpeakeasyMetadata({ data: "json, name=resourceId" })
   resourceId?: string;
 
-  @Metadata({ data: "json, name=serviceId" })
+  @SpeakeasyMetadata({ data: "json, name=serviceId" })
   serviceId?: string;
 
-  @Metadata({ data: "json, name=startDateTime" })
+  @SpeakeasyMetadata({ data: "json, name=startDateTime" })
   startDateTime?: Date;
 
-  @Metadata({ data: "json, name=travelAppointmentId" })
+  @SpeakeasyMetadata({ data: "json, name=travelAppointmentId" })
   travelAppointmentId?: string;
 
-  @Metadata({ data: "json, name=travelTimeMins" })
+  @SpeakeasyMetadata({ data: "json, name=travelTimeMins" })
   travelTimeMins?: number;
 }

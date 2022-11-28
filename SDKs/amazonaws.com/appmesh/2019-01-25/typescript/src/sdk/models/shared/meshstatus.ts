@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { MeshStatusCodeEnum } from "./meshstatuscodeenum";
+
 
 
 // MeshStatus
@@ -7,6 +8,6 @@ import { MeshStatusCodeEnum } from "./meshstatuscodeenum";
  * An object that represents the status of a service mesh.
 **/
 export class MeshStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: MeshStatusCodeEnum;
 }

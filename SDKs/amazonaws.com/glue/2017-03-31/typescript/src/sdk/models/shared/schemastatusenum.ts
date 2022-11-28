@@ -1,7 +1,8 @@
 
 
+
 export enum SchemaStatusEnum {
-    Available = "AVAILABLE"
-,    Pending = "PENDING"
-,    Deleting = "DELETING"
+    Available = "AVAILABLE",
+    Pending = "PENDING",
+    Deleting = "DELETING"
 }

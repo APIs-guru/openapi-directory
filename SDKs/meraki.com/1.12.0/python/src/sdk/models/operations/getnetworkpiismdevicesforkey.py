@@ -4,7 +4,7 @@ from typing import Any,Optional
 
 @dataclass
 class GetNetworkPiiSmDevicesForKeyPathParams:
-    network_id: str = field(default=None, metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
+    network_id: str = field(metadata={'path_param': { 'field_name': 'networkId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -19,13 +19,13 @@ class GetNetworkPiiSmDevicesForKeyQueryParams:
 
 @dataclass
 class GetNetworkPiiSmDevicesForKeyRequest:
-    path_params: GetNetworkPiiSmDevicesForKeyPathParams = field(default=None)
-    query_params: GetNetworkPiiSmDevicesForKeyQueryParams = field(default=None)
+    path_params: GetNetworkPiiSmDevicesForKeyPathParams = field()
+    query_params: GetNetworkPiiSmDevicesForKeyQueryParams = field()
     
 
 @dataclass
 class GetNetworkPiiSmDevicesForKeyResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_network_pii_sm_devices_for_key_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

@@ -1,5 +1,7 @@
 package shared
 
+// Link
+// This corresponds to an in-toto link.
 type Link struct {
 	Byproducts  *ByProducts                    `json:"byproducts,omitempty"`
 	Command     []string                       `json:"command,omitempty"`

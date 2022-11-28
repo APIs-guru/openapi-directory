@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum DeliveryErrorErrorClassEnum {
     DeliveryErrorClassUnspecified = "DELIVERY_ERROR_CLASS_UNSPECIFIED",
     PermanentError = "PERMANENT_ERROR",

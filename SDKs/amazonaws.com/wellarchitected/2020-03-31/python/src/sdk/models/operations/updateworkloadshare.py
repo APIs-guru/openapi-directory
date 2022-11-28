@@ -1,13 +1,18 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class UpdateWorkloadSharePathParams:
-    share_id: str = field(default=None, metadata={'path_param': { 'field_name': 'ShareId', 'style': 'simple', 'explode': False }})
-    workload_id: str = field(default=None, metadata={'path_param': { 'field_name': 'WorkloadId', 'style': 'simple', 'explode': False }})
+    share_id: str = field(metadata={'path_param': { 'field_name': 'ShareId', 'style': 'simple', 'explode': False }})
+    workload_id: str = field(metadata={'path_param': { 'field_name': 'WorkloadId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,24 +33,24 @@ class UpdateWorkloadShareRequestBodyPermissionTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class UpdateWorkloadShareRequestBody:
-    permission_type: UpdateWorkloadShareRequestBodyPermissionTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PermissionType' }})
+    permission_type: UpdateWorkloadShareRequestBodyPermissionTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('PermissionType') }})
     
 
 @dataclass
 class UpdateWorkloadShareRequest:
-    path_params: UpdateWorkloadSharePathParams = field(default=None)
-    headers: UpdateWorkloadShareHeaders = field(default=None)
-    request: UpdateWorkloadShareRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: UpdateWorkloadShareHeaders = field()
+    path_params: UpdateWorkloadSharePathParams = field()
+    request: UpdateWorkloadShareRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class UpdateWorkloadShareResponse:
+    content_type: str = field()
+    status_code: int = field()
     access_denied_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     internal_server_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throttling_exception: Optional[Any] = field(default=None)
     update_workload_share_output: Optional[shared.UpdateWorkloadShareOutput] = field(default=None)
     validation_exception: Optional[Any] = field(default=None)

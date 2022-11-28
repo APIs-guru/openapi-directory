@@ -1,5 +1,7 @@
 package shared
 
+// OperationsListResponse
+// Operations list response.
 type OperationsListResponse struct {
 	Items         []Operation `json:"items,omitempty"`
 	Kind          *string     `json:"kind,omitempty"`

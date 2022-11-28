@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AdBreak } from "./adbreak";
 import { EditAtom } from "./editatom";
 import { ElementaryStream } from "./elementarystream";
@@ -12,38 +11,39 @@ import { PubsubDestination } from "./pubsubdestination";
 import { SpriteSheet } from "./spritesheet";
 
 
+
 // JobConfig
 /** 
  * Job configuration
 **/
 export class JobConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=adBreaks", elemType: shared.AdBreak })
+  @SpeakeasyMetadata({ data: "json, name=adBreaks", elemType: AdBreak })
   adBreaks?: AdBreak[];
 
-  @Metadata({ data: "json, name=editList", elemType: shared.EditAtom })
+  @SpeakeasyMetadata({ data: "json, name=editList", elemType: EditAtom })
   editList?: EditAtom[];
 
-  @Metadata({ data: "json, name=elementaryStreams", elemType: shared.ElementaryStream })
+  @SpeakeasyMetadata({ data: "json, name=elementaryStreams", elemType: ElementaryStream })
   elementaryStreams?: ElementaryStream[];
 
-  @Metadata({ data: "json, name=inputs", elemType: shared.Input })
+  @SpeakeasyMetadata({ data: "json, name=inputs", elemType: Input })
   inputs?: Input[];
 
-  @Metadata({ data: "json, name=manifests", elemType: shared.Manifest })
+  @SpeakeasyMetadata({ data: "json, name=manifests", elemType: Manifest })
   manifests?: Manifest[];
 
-  @Metadata({ data: "json, name=muxStreams", elemType: shared.MuxStream })
+  @SpeakeasyMetadata({ data: "json, name=muxStreams", elemType: MuxStream })
   muxStreams?: MuxStream[];
 
-  @Metadata({ data: "json, name=output" })
+  @SpeakeasyMetadata({ data: "json, name=output" })
   output?: Output;
 
-  @Metadata({ data: "json, name=overlays", elemType: shared.Overlay })
+  @SpeakeasyMetadata({ data: "json, name=overlays", elemType: Overlay })
   overlays?: Overlay[];
 
-  @Metadata({ data: "json, name=pubsubDestination" })
+  @SpeakeasyMetadata({ data: "json, name=pubsubDestination" })
   pubsubDestination?: PubsubDestination;
 
-  @Metadata({ data: "json, name=spriteSheets", elemType: shared.SpriteSheet })
+  @SpeakeasyMetadata({ data: "json, name=spriteSheets", elemType: SpriteSheet })
   spriteSheets?: SpriteSheet[];
 }

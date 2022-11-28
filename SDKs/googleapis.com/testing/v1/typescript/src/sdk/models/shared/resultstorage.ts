@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudStorage } from "./googlecloudstorage";
 import { ToolResultsExecution } from "./toolresultsexecution";
 import { ToolResultsHistory } from "./toolresultshistory";
+
 
 
 // ResultStorage
@@ -9,15 +10,15 @@ import { ToolResultsHistory } from "./toolresultshistory";
  * Locations where the results of running the test are stored.
 **/
 export class ResultStorage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=googleCloudStorage" })
+  @SpeakeasyMetadata({ data: "json, name=googleCloudStorage" })
   googleCloudStorage?: GoogleCloudStorage;
 
-  @Metadata({ data: "json, name=resultsUrl" })
+  @SpeakeasyMetadata({ data: "json, name=resultsUrl" })
   resultsUrl?: string;
 
-  @Metadata({ data: "json, name=toolResultsExecution" })
+  @SpeakeasyMetadata({ data: "json, name=toolResultsExecution" })
   toolResultsExecution?: ToolResultsExecution;
 
-  @Metadata({ data: "json, name=toolResultsHistory" })
+  @SpeakeasyMetadata({ data: "json, name=toolResultsHistory" })
   toolResultsHistory?: ToolResultsHistory;
 }

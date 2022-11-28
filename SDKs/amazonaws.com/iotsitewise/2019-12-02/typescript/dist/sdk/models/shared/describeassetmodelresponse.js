@@ -22,8 +22,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { AssetModelCompositeModel } from "./assetmodelcompositemodel";
+import { AssetModelHierarchy } from "./assetmodelhierarchy";
+import { AssetModelProperty } from "./assetmodelproperty";
 import { AssetModelStatus } from "./assetmodelstatus";
 var DescribeAssetModelResponse = /** @class */ (function (_super) {
     __extends(DescribeAssetModelResponse, _super);
@@ -31,43 +33,43 @@ var DescribeAssetModelResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=assetModelArn" }),
+        SpeakeasyMetadata({ data: "json, name=assetModelArn" }),
         __metadata("design:type", String)
     ], DescribeAssetModelResponse.prototype, "assetModelArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=assetModelCompositeModels", elemType: shared.AssetModelCompositeModel }),
+        SpeakeasyMetadata({ data: "json, name=assetModelCompositeModels", elemType: AssetModelCompositeModel }),
         __metadata("design:type", Array)
     ], DescribeAssetModelResponse.prototype, "assetModelCompositeModels", void 0);
     __decorate([
-        Metadata({ data: "json, name=assetModelCreationDate" }),
+        SpeakeasyMetadata({ data: "json, name=assetModelCreationDate" }),
         __metadata("design:type", Date)
     ], DescribeAssetModelResponse.prototype, "assetModelCreationDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=assetModelDescription" }),
+        SpeakeasyMetadata({ data: "json, name=assetModelDescription" }),
         __metadata("design:type", String)
     ], DescribeAssetModelResponse.prototype, "assetModelDescription", void 0);
     __decorate([
-        Metadata({ data: "json, name=assetModelHierarchies", elemType: shared.AssetModelHierarchy }),
+        SpeakeasyMetadata({ data: "json, name=assetModelHierarchies", elemType: AssetModelHierarchy }),
         __metadata("design:type", Array)
     ], DescribeAssetModelResponse.prototype, "assetModelHierarchies", void 0);
     __decorate([
-        Metadata({ data: "json, name=assetModelId" }),
+        SpeakeasyMetadata({ data: "json, name=assetModelId" }),
         __metadata("design:type", String)
     ], DescribeAssetModelResponse.prototype, "assetModelId", void 0);
     __decorate([
-        Metadata({ data: "json, name=assetModelLastUpdateDate" }),
+        SpeakeasyMetadata({ data: "json, name=assetModelLastUpdateDate" }),
         __metadata("design:type", Date)
     ], DescribeAssetModelResponse.prototype, "assetModelLastUpdateDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=assetModelName" }),
+        SpeakeasyMetadata({ data: "json, name=assetModelName" }),
         __metadata("design:type", String)
     ], DescribeAssetModelResponse.prototype, "assetModelName", void 0);
     __decorate([
-        Metadata({ data: "json, name=assetModelProperties", elemType: shared.AssetModelProperty }),
+        SpeakeasyMetadata({ data: "json, name=assetModelProperties", elemType: AssetModelProperty }),
         __metadata("design:type", Array)
     ], DescribeAssetModelResponse.prototype, "assetModelProperties", void 0);
     __decorate([
-        Metadata({ data: "json, name=assetModelStatus" }),
+        SpeakeasyMetadata({ data: "json, name=assetModelStatus" }),
         __metadata("design:type", AssetModelStatus)
     ], DescribeAssetModelResponse.prototype, "assetModelStatus", void 0);
     return DescribeAssetModelResponse;

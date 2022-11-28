@@ -1,103 +1,104 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListSessionsOfGroupUsingPostQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=groupID" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=groupID" })
   groupId?: string;
-}
-
-
-export class ListSessionsOfGroupUsingPostRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: ListSessionsOfGroupUsingPostQueryParams;
 }
 
 
 export class ListSessionsOfGroupUsingPost200ApplicationJsonDataSessions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=authorID" })
+  @SpeakeasyMetadata({ data: "json, name=authorID" })
   authorId?: string;
 
-  @Metadata({ data: "json, name=groupID" })
+  @SpeakeasyMetadata({ data: "json, name=groupID" })
   groupId?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=validUntil" })
+  @SpeakeasyMetadata({ data: "json, name=validUntil" })
   validUntil?: number;
 }
 
 
 export class ListSessionsOfGroupUsingPost200ApplicationJsonData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sessions", elemType: operations.ListSessionsOfGroupUsingPost200ApplicationJsonDataSessions })
+  @SpeakeasyMetadata({ data: "json, name=sessions", elemType: ListSessionsOfGroupUsingPost200ApplicationJsonDataSessions })
   sessions?: ListSessionsOfGroupUsingPost200ApplicationJsonDataSessions[];
 }
 
 
 export class ListSessionsOfGroupUsingPost200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: ListSessionsOfGroupUsingPost200ApplicationJsonData;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class ListSessionsOfGroupUsingPost400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class ListSessionsOfGroupUsingPost401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
 export class ListSessionsOfGroupUsingPost500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: number;
 
-  @Metadata({ data: "json, name=data" })
+  @SpeakeasyMetadata({ data: "json, name=data" })
   data?: Map<string, any>;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: string;
 }
 
 
+export class ListSessionsOfGroupUsingPostRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: ListSessionsOfGroupUsingPostQueryParams;
+}
+
+
 export class ListSessionsOfGroupUsingPostResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listSessionsOfGroupUsingPost200ApplicationJsonObject?: ListSessionsOfGroupUsingPost200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listSessionsOfGroupUsingPost400ApplicationJsonObject?: ListSessionsOfGroupUsingPost400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listSessionsOfGroupUsingPost401ApplicationJsonObject?: ListSessionsOfGroupUsingPost401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listSessionsOfGroupUsingPost500ApplicationJsonObject?: ListSessionsOfGroupUsingPost500ApplicationJson;
 }

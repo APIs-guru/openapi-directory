@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ApiModelsRole
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Defines an API Role
 **/
 export class ApiModelsRole extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Description, form, name=Description;" })
+  @SpeakeasyMetadata({ data: "json, name=Description, form, name=Description;" })
   description: string;
 
-  @Metadata({ data: "json, name=Id, form, name=Id;" })
+  @SpeakeasyMetadata({ data: "json, name=Id, form, name=Id;" })
   id?: number;
 
-  @Metadata({ data: "json, name=Name, form, name=Name;" })
+  @SpeakeasyMetadata({ data: "json, name=Name, form, name=Name;" })
   name: string;
 }

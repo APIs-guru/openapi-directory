@@ -1,13 +1,14 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class DescribeServiceErrorsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId?: string;
 
-  @Metadata({ data: "json, name=ServiceErrorIds" })
+  @SpeakeasyMetadata({ data: "json, name=ServiceErrorIds" })
   serviceErrorIds?: string[];
 
-  @Metadata({ data: "json, name=StackId" })
+  @SpeakeasyMetadata({ data: "json, name=StackId" })
   stackId?: string;
 }

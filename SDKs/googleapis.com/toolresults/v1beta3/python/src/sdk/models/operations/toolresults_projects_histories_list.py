@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ToolresultsProjectsHistoriesListPathParams:
-    project_id: str = field(default=None, metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
+    project_id: str = field(metadata={'path_param': { 'field_name': 'projectId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -28,20 +29,20 @@ class ToolresultsProjectsHistoriesListQueryParams:
 
 @dataclass
 class ToolresultsProjectsHistoriesListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class ToolresultsProjectsHistoriesListRequest:
-    path_params: ToolresultsProjectsHistoriesListPathParams = field(default=None)
-    query_params: ToolresultsProjectsHistoriesListQueryParams = field(default=None)
-    security: ToolresultsProjectsHistoriesListSecurity = field(default=None)
+    path_params: ToolresultsProjectsHistoriesListPathParams = field()
+    query_params: ToolresultsProjectsHistoriesListQueryParams = field()
+    security: ToolresultsProjectsHistoriesListSecurity = field()
     
 
 @dataclass
 class ToolresultsProjectsHistoriesListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_histories_response: Optional[shared.ListHistoriesResponse] = field(default=None)
-    status_code: int = field(default=None)
     

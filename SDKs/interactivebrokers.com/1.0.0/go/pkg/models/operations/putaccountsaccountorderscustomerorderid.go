@@ -26,11 +26,6 @@ type PutAccountsAccountOrdersCustomerOrderIDRequestBody struct {
 	TimeInForce           *float64 `json:"Time in Force,omitempty"`
 }
 
-type PutAccountsAccountOrdersCustomerOrderIDRequest struct {
-	PathParams PutAccountsAccountOrdersCustomerOrderIDPathParams
-	Request    PutAccountsAccountOrdersCustomerOrderIDRequestBody `request:"mediaType=application/json"`
-}
-
 type PutAccountsAccountOrdersCustomerOrderID200ApplicationJSON struct {
 	CustomerOrderID *string                 `json:"CustomerOrderId,omitempty"`
 	OrderQty        *float64                `json:"OrderQty,omitempty"`
@@ -40,6 +35,11 @@ type PutAccountsAccountOrdersCustomerOrderID200ApplicationJSON struct {
 	Status          *shared.OrderStatusEnum `json:"Status,omitempty"`
 	Symbol          *float64                `json:"Symbol,omitempty"`
 	Warning         *string                 `json:"Warning,omitempty"`
+}
+
+type PutAccountsAccountOrdersCustomerOrderIDRequest struct {
+	PathParams PutAccountsAccountOrdersCustomerOrderIDPathParams
+	Request    PutAccountsAccountOrdersCustomerOrderIDRequestBody `request:"mediaType=application/json"`
 }
 
 type PutAccountsAccountOrdersCustomerOrderIDResponse struct {

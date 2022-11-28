@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class GetAssociatedRolePathParams:
-    group_id: str = field(default=None, metadata={'path_param': { 'field_name': 'GroupId', 'style': 'simple', 'explode': False }})
+    group_id: str = field(metadata={'path_param': { 'field_name': 'GroupId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,15 +24,15 @@ class GetAssociatedRoleHeaders:
 
 @dataclass
 class GetAssociatedRoleRequest:
-    path_params: GetAssociatedRolePathParams = field(default=None)
-    headers: GetAssociatedRoleHeaders = field(default=None)
+    headers: GetAssociatedRoleHeaders = field()
+    path_params: GetAssociatedRolePathParams = field()
     
 
 @dataclass
 class GetAssociatedRoleResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     get_associated_role_response: Optional[shared.GetAssociatedRoleResponse] = field(default=None)
     internal_server_error_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

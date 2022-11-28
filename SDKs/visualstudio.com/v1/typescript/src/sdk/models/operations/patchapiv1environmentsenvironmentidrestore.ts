@@ -1,28 +1,29 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PatchApiV1EnvironmentsEnvironmentIdRestorePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=environmentId" })
   environmentId: string;
 }
 
 
 export class PatchApiV1EnvironmentsEnvironmentIdRestoreRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: PatchApiV1EnvironmentsEnvironmentIdRestorePathParams;
 }
 
 
 export class PatchApiV1EnvironmentsEnvironmentIdRestoreResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   body?: Uint8Array;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   problemDetails?: Map<string, any>;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

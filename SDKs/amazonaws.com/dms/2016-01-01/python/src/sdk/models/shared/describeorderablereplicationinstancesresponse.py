@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import orderablereplicationinstance
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeOrderableReplicationInstancesResponse:
-    marker: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Marker' }})
-    orderable_replication_instances: Optional[List[orderablereplicationinstance.OrderableReplicationInstance]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OrderableReplicationInstances' }})
+    r"""DescribeOrderableReplicationInstancesResponse
+    <p/>
+    """
+    
+    marker: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Marker') }})
+    orderable_replication_instances: Optional[List[OrderableReplicationInstance]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('OrderableReplicationInstances') }})
     

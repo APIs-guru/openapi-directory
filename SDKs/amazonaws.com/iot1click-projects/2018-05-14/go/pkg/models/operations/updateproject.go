@@ -18,6 +18,8 @@ type UpdateProjectHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateProjectRequestBodyPlacementTemplate
+// An object defining the template for a placement.
 type UpdateProjectRequestBodyPlacementTemplate struct {
 	DefaultAttributes map[string]string                `json:"defaultAttributes,omitempty"`
 	DeviceTemplates   map[string]shared.DeviceTemplate `json:"deviceTemplates,omitempty"`

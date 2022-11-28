@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { NotificationDto } from "./notificationdto";
+
 
 
 // NotificationResultDto
@@ -8,9 +8,9 @@ import { NotificationDto } from "./notificationdto";
  * A list of notifications with the total record count for pagination.
 **/
 export class NotificationResultDto extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Notifications", elemType: shared.NotificationDto })
+  @SpeakeasyMetadata({ data: "json, name=Notifications", elemType: NotificationDto })
   notifications?: NotificationDto[];
 
-  @Metadata({ data: "json, name=TotalRecordCount" })
+  @SpeakeasyMetadata({ data: "json, name=TotalRecordCount" })
   totalRecordCount?: number;
 }

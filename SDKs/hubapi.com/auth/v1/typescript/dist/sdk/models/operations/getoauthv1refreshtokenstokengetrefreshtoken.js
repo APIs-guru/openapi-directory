@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetOauthV1RefreshTokensTokenGetRefreshTokenPathParams = /** @class */ (function (_super) {
     __extends(GetOauthV1RefreshTokensTokenGetRefreshTokenPathParams, _super);
@@ -30,7 +30,7 @@ var GetOauthV1RefreshTokensTokenGetRefreshTokenPathParams = /** @class */ (funct
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=token" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=token" }),
         __metadata("design:type", String)
     ], GetOauthV1RefreshTokensTokenGetRefreshTokenPathParams.prototype, "token", void 0);
     return GetOauthV1RefreshTokensTokenGetRefreshTokenPathParams;
@@ -42,7 +42,7 @@ var GetOauthV1RefreshTokensTokenGetRefreshTokenRequest = /** @class */ (function
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetOauthV1RefreshTokensTokenGetRefreshTokenPathParams)
     ], GetOauthV1RefreshTokensTokenGetRefreshTokenRequest.prototype, "pathParams", void 0);
     return GetOauthV1RefreshTokensTokenGetRefreshTokenRequest;
@@ -54,19 +54,19 @@ var GetOauthV1RefreshTokensTokenGetRefreshTokenResponse = /** @class */ (functio
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetOauthV1RefreshTokensTokenGetRefreshTokenResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetOauthV1RefreshTokensTokenGetRefreshTokenResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.RefreshTokenInfoResponse)
     ], GetOauthV1RefreshTokensTokenGetRefreshTokenResponse.prototype, "refreshTokenInfoResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetOauthV1RefreshTokensTokenGetRefreshTokenResponse.prototype, "statusCode", void 0);
     return GetOauthV1RefreshTokensTokenGetRefreshTokenResponse;

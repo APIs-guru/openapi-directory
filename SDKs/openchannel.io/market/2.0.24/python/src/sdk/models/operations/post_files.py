@@ -10,24 +10,24 @@ class PostFilesQueryParams:
 
 @dataclass
 class PostFilesRequestBodyFile:
-    content: bytes = field(default=None, metadata={'multipart_form': { 'content': True }})
-    file: str = field(default=None, metadata={'multipart_form': { 'field_name': 'file' }})
+    content: bytes = field(metadata={'multipart_form': { 'content': True }})
+    file: str = field(metadata={'multipart_form': { 'field_name': 'file' }})
     
 
 @dataclass
 class PostFilesRequestBody:
-    file: PostFilesRequestBodyFile = field(default=None, metadata={'multipart_form': { 'file': True }})
+    file: PostFilesRequestBodyFile = field(metadata={'multipart_form': { 'file': True }})
     
 
 @dataclass
 class PostFilesRequest:
-    query_params: PostFilesQueryParams = field(default=None)
-    request: PostFilesRequestBody = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
+    query_params: PostFilesQueryParams = field()
+    request: PostFilesRequestBody = field(metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 
 @dataclass
 class PostFilesResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

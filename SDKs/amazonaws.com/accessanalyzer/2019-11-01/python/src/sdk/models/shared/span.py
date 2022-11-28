@@ -1,12 +1,16 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import position
-from . import position
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class Span:
-    end: position.Position = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
-    start: position.Position = field(default=None, metadata={'dataclasses_json': { 'field_name': 'start' }})
+    r"""Span
+    A span in a policy. The span consists of a start position (inclusive) and end position (exclusive).
+    """
+    
+    end: Position = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('end') }})
+    start: Position = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('start') }})
     

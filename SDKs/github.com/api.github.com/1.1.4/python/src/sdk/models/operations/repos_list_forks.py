@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class ReposListForksPathParams:
-    owner: str = field(default=None, metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
-    repo: str = field(default=None, metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
+    owner: str = field(metadata={'path_param': { 'field_name': 'owner', 'style': 'simple', 'explode': False }})
+    repo: str = field(metadata={'path_param': { 'field_name': 'repo', 'style': 'simple', 'explode': False }})
     
 class ReposListForksSortEnum(str, Enum):
     NEWEST = "newest"
@@ -26,15 +27,15 @@ class ReposListForksQueryParams:
 
 @dataclass
 class ReposListForksRequest:
-    path_params: ReposListForksPathParams = field(default=None)
-    query_params: ReposListForksQueryParams = field(default=None)
+    path_params: ReposListForksPathParams = field()
+    query_params: ReposListForksQueryParams = field()
     
 
 @dataclass
 class ReposListForksResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     basic_error: Optional[shared.BasicError] = field(default=None)
     minimal_repositories: Optional[List[shared.MinimalRepository]] = field(default=None)
     scim_error: Optional[shared.ScimError] = field(default=None)

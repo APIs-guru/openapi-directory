@@ -1,9 +1,6 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetUserUsernamePathParams extends SpeakeasyBase {
     username: string;
-}
-export declare class GetUserUsernameRequest extends SpeakeasyBase {
-    pathParams: GetUserUsernamePathParams;
 }
 /**
  * The user's preferred postal address.
@@ -42,6 +39,9 @@ export declare class GetUserUsername200ApplicationJson extends SpeakeasyBase {
     webmail?: string;
     website?: string;
     zoneinfo?: string;
+}
+export declare class GetUserUsernameRequest extends SpeakeasyBase {
+    pathParams: GetUserUsernamePathParams;
 }
 export declare class GetUserUsernameResponse extends SpeakeasyBase {
     contentType: string;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReplicationTaskStats
@@ -6,36 +7,36 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * In response to a request by the <code>DescribeReplicationTasks</code> operation, this object provides a collection of statistics about a replication task.
 **/
 export class ReplicationTaskStats extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ElapsedTimeMillis" })
+  @SpeakeasyMetadata({ data: "json, name=ElapsedTimeMillis" })
   elapsedTimeMillis?: number;
 
-  @Metadata({ data: "json, name=FreshStartDate" })
+  @SpeakeasyMetadata({ data: "json, name=FreshStartDate" })
   freshStartDate?: Date;
 
-  @Metadata({ data: "json, name=FullLoadFinishDate" })
+  @SpeakeasyMetadata({ data: "json, name=FullLoadFinishDate" })
   fullLoadFinishDate?: Date;
 
-  @Metadata({ data: "json, name=FullLoadProgressPercent" })
+  @SpeakeasyMetadata({ data: "json, name=FullLoadProgressPercent" })
   fullLoadProgressPercent?: number;
 
-  @Metadata({ data: "json, name=FullLoadStartDate" })
+  @SpeakeasyMetadata({ data: "json, name=FullLoadStartDate" })
   fullLoadStartDate?: Date;
 
-  @Metadata({ data: "json, name=StartDate" })
+  @SpeakeasyMetadata({ data: "json, name=StartDate" })
   startDate?: Date;
 
-  @Metadata({ data: "json, name=StopDate" })
+  @SpeakeasyMetadata({ data: "json, name=StopDate" })
   stopDate?: Date;
 
-  @Metadata({ data: "json, name=TablesErrored" })
+  @SpeakeasyMetadata({ data: "json, name=TablesErrored" })
   tablesErrored?: number;
 
-  @Metadata({ data: "json, name=TablesLoaded" })
+  @SpeakeasyMetadata({ data: "json, name=TablesLoaded" })
   tablesLoaded?: number;
 
-  @Metadata({ data: "json, name=TablesLoading" })
+  @SpeakeasyMetadata({ data: "json, name=TablesLoading" })
   tablesLoading?: number;
 
-  @Metadata({ data: "json, name=TablesQueued" })
+  @SpeakeasyMetadata({ data: "json, name=TablesQueued" })
   tablesQueued?: number;
 }

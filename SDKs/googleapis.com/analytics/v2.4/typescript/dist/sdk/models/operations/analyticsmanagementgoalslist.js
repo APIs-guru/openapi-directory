@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AnalyticsManagementGoalsListPathParams = /** @class */ (function (_super) {
     __extends(AnalyticsManagementGoalsListPathParams, _super);
@@ -30,15 +30,15 @@ var AnalyticsManagementGoalsListPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=accountId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=accountId" }),
         __metadata("design:type", String)
     ], AnalyticsManagementGoalsListPathParams.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=profileId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=profileId" }),
         __metadata("design:type", String)
     ], AnalyticsManagementGoalsListPathParams.prototype, "profileId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=webPropertyId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=webPropertyId" }),
         __metadata("design:type", String)
     ], AnalyticsManagementGoalsListPathParams.prototype, "webPropertyId", void 0);
     return AnalyticsManagementGoalsListPathParams;
@@ -50,39 +50,39 @@ var AnalyticsManagementGoalsListQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" }),
         __metadata("design:type", String)
     ], AnalyticsManagementGoalsListQueryParams.prototype, "alt", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fields" }),
         __metadata("design:type", String)
     ], AnalyticsManagementGoalsListQueryParams.prototype, "fields", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=key" }),
         __metadata("design:type", String)
     ], AnalyticsManagementGoalsListQueryParams.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=max-results" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=max-results" }),
         __metadata("design:type", Number)
     ], AnalyticsManagementGoalsListQueryParams.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
         __metadata("design:type", String)
     ], AnalyticsManagementGoalsListQueryParams.prototype, "oauthToken", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
         __metadata("design:type", Boolean)
     ], AnalyticsManagementGoalsListQueryParams.prototype, "prettyPrint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
         __metadata("design:type", String)
     ], AnalyticsManagementGoalsListQueryParams.prototype, "quotaUser", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=start-index" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=start-index" }),
         __metadata("design:type", Number)
     ], AnalyticsManagementGoalsListQueryParams.prototype, "startIndex", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=userIp" }),
         __metadata("design:type", String)
     ], AnalyticsManagementGoalsListQueryParams.prototype, "userIp", void 0);
     return AnalyticsManagementGoalsListQueryParams;
@@ -94,11 +94,11 @@ var AnalyticsManagementGoalsListSecurityOption1 = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], AnalyticsManagementGoalsListSecurityOption1.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], AnalyticsManagementGoalsListSecurityOption1.prototype, "oauth2c", void 0);
     return AnalyticsManagementGoalsListSecurityOption1;
@@ -110,11 +110,11 @@ var AnalyticsManagementGoalsListSecurityOption2 = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], AnalyticsManagementGoalsListSecurityOption2.prototype, "oauth2", void 0);
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2c)
     ], AnalyticsManagementGoalsListSecurityOption2.prototype, "oauth2c", void 0);
     return AnalyticsManagementGoalsListSecurityOption2;
@@ -126,11 +126,11 @@ var AnalyticsManagementGoalsListSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", AnalyticsManagementGoalsListSecurityOption1)
     ], AnalyticsManagementGoalsListSecurity.prototype, "option1", void 0);
     __decorate([
-        Metadata({ data: "security, option=true" }),
+        SpeakeasyMetadata({ data: "security, option=true" }),
         __metadata("design:type", AnalyticsManagementGoalsListSecurityOption2)
     ], AnalyticsManagementGoalsListSecurity.prototype, "option2", void 0);
     return AnalyticsManagementGoalsListSecurity;
@@ -142,15 +142,15 @@ var AnalyticsManagementGoalsListRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AnalyticsManagementGoalsListPathParams)
     ], AnalyticsManagementGoalsListRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AnalyticsManagementGoalsListQueryParams)
     ], AnalyticsManagementGoalsListRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AnalyticsManagementGoalsListSecurity)
     ], AnalyticsManagementGoalsListRequest.prototype, "security", void 0);
     return AnalyticsManagementGoalsListRequest;
@@ -162,11 +162,11 @@ var AnalyticsManagementGoalsListResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AnalyticsManagementGoalsListResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AnalyticsManagementGoalsListResponse.prototype, "statusCode", void 0);
     return AnalyticsManagementGoalsListResponse;

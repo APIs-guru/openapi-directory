@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { LicenseTypeEnum } from "./licensetypeenum";
 /**
  * The replication parameters for replicating a server.

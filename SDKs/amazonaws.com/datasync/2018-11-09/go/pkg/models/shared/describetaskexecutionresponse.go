@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DescribeTaskExecutionResponse
+// DescribeTaskExecutionResponse
 type DescribeTaskExecutionResponse struct {
 	BytesTransferred         *int64                     `json:"BytesTransferred,omitempty"`
 	BytesWritten             *int64                     `json:"BytesWritten,omitempty"`

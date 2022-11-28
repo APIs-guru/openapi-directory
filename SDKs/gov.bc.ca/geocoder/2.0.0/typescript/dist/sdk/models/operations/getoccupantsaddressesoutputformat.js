@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetOccupantsAddressesOutputFormatOutputFormatEnum;
 (function (GetOccupantsAddressesOutputFormatOutputFormatEnum) {
     GetOccupantsAddressesOutputFormatOutputFormatEnum["Json"] = "json";
@@ -39,7 +39,7 @@ var GetOccupantsAddressesOutputFormatPathParams = /** @class */ (function (_supe
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=outputFormat" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatPathParams.prototype, "outputFormat", void 0);
     return GetOccupantsAddressesOutputFormatPathParams;
@@ -99,131 +99,131 @@ var GetOccupantsAddressesOutputFormatQueryParams = /** @class */ (function (_sup
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=addressString" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=addressString" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "addressString", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=autoComplete" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=autoComplete" }),
         __metadata("design:type", Boolean)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "autoComplete", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=bbox" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=bbox" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "bbox", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=brief" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=brief" }),
         __metadata("design:type", Boolean)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "brief", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=centre" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=centre" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "centre", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=civicNumber" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=civicNumber" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "civicNumber", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=civicNumberSuffix" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=civicNumberSuffix" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "civicNumberSuffix", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=echo" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=echo" }),
         __metadata("design:type", Boolean)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "echo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=extrapolate" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=extrapolate" }),
         __metadata("design:type", Boolean)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "extrapolate", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=interpolation" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=interpolation" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "interpolation", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=localities" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=localities" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "localities", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=localityName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=localityName" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "localityName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=locationDescriptor" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locationDescriptor" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "locationDescriptor", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=matchPrecision" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=matchPrecision" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "matchPrecision", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=matchPrecisionNot" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=matchPrecisionNot" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "matchPrecisionNot", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxDistance" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxDistance" }),
         __metadata("design:type", Number)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "maxDistance", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=maxResults" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=maxResults" }),
         __metadata("design:type", Number)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "maxResults", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=minScore" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=minScore" }),
         __metadata("design:type", Number)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "minScore", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=notLocalities" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=notLocalities" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "notLocalities", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=outputSRS" }),
         __metadata("design:type", Number)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "outputSrs", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=parcelPoint" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parcelPoint" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "parcelPoint", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=provinceCode" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=provinceCode" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "provinceCode", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=setBack" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=setBack" }),
         __metadata("design:type", Number)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "setBack", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=siteName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=siteName" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "siteName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=streetDirection" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=streetDirection" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "streetDirection", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=streetName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=streetName" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "streetName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=streetQualifier" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=streetQualifier" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "streetQualifier", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=streetType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=streetType" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "streetType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=tags" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tags" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=unitDesignator" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=unitDesignator" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "unitDesignator", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=unitNumber" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=unitNumber" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "unitNumber", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=unitNumberSuffix" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=unitNumberSuffix" }),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatQueryParams.prototype, "unitNumberSuffix", void 0);
     return GetOccupantsAddressesOutputFormatQueryParams;
@@ -235,11 +235,11 @@ var GetOccupantsAddressesOutputFormatRequest = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetOccupantsAddressesOutputFormatPathParams)
     ], GetOccupantsAddressesOutputFormatRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetOccupantsAddressesOutputFormatQueryParams)
     ], GetOccupantsAddressesOutputFormatRequest.prototype, "queryParams", void 0);
     return GetOccupantsAddressesOutputFormatRequest;
@@ -251,11 +251,11 @@ var GetOccupantsAddressesOutputFormatResponse = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetOccupantsAddressesOutputFormatResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetOccupantsAddressesOutputFormatResponse.prototype, "statusCode", void 0);
     return GetOccupantsAddressesOutputFormatResponse;

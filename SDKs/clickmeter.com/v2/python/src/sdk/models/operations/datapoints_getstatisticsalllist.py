@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 class DataPointsGetStatisticsAllListGroupByEnum(str, Enum):
@@ -36,24 +37,24 @@ class DataPointsGetStatisticsAllListTypeEnum(str, Enum):
 
 @dataclass
 class DataPointsGetStatisticsAllListQueryParams:
+    time_frame: DataPointsGetStatisticsAllListTimeFrameEnum = field(metadata={'query_param': { 'field_name': 'timeFrame', 'style': 'form', 'explode': True }})
+    type: DataPointsGetStatisticsAllListTypeEnum = field(metadata={'query_param': { 'field_name': 'type', 'style': 'form', 'explode': True }})
     favourite: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'favourite', 'style': 'form', 'explode': True }})
     from_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fromDay', 'style': 'form', 'explode': True }})
     group_by: Optional[DataPointsGetStatisticsAllListGroupByEnum] = field(default=None, metadata={'query_param': { 'field_name': 'groupBy', 'style': 'form', 'explode': True }})
     status: Optional[DataPointsGetStatisticsAllListStatusEnum] = field(default=None, metadata={'query_param': { 'field_name': 'status', 'style': 'form', 'explode': True }})
     tag: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'tag', 'style': 'form', 'explode': True }})
-    time_frame: DataPointsGetStatisticsAllListTimeFrameEnum = field(default=None, metadata={'query_param': { 'field_name': 'timeFrame', 'style': 'form', 'explode': True }})
     to_day: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'toDay', 'style': 'form', 'explode': True }})
-    type: DataPointsGetStatisticsAllListTypeEnum = field(default=None, metadata={'query_param': { 'field_name': 'type', 'style': 'form', 'explode': True }})
     
 
 @dataclass
 class DataPointsGetStatisticsAllListRequest:
-    query_params: DataPointsGetStatisticsAllListQueryParams = field(default=None)
+    query_params: DataPointsGetStatisticsAllListQueryParams = field()
     
 
 @dataclass
 class DataPointsGetStatisticsAllListResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_core_responses_entities_response_api_core_dto_aggregated_aggregated_result_: Optional[shared.APICoreResponsesEntitiesResponseAPICoreDtoAggregatedAggregatedResult] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { RdsMetadata } from "./rdsmetadata";
 import { RedshiftMetadata } from "./redshiftmetadata";
 import { EntityStatusEnum } from "./entitystatusenum";
+
 
 
 // DataSource
@@ -9,57 +10,57 @@ import { EntityStatusEnum } from "./entitystatusenum";
  * <p> Represents the output of the <code>GetDataSource</code> operation. </p> <p> The content consists of the detailed metadata and data file information and the current status of the <code>DataSource</code>. </p>
 **/
 export class DataSource extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ComputeStatistics" })
+  @SpeakeasyMetadata({ data: "json, name=ComputeStatistics" })
   computeStatistics?: boolean;
 
-  @Metadata({ data: "json, name=ComputeTime" })
+  @SpeakeasyMetadata({ data: "json, name=ComputeTime" })
   computeTime?: number;
 
-  @Metadata({ data: "json, name=CreatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedAt" })
   createdAt?: Date;
 
-  @Metadata({ data: "json, name=CreatedByIamUser" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedByIamUser" })
   createdByIamUser?: string;
 
-  @Metadata({ data: "json, name=DataLocationS3" })
+  @SpeakeasyMetadata({ data: "json, name=DataLocationS3" })
   dataLocationS3?: string;
 
-  @Metadata({ data: "json, name=DataRearrangement" })
+  @SpeakeasyMetadata({ data: "json, name=DataRearrangement" })
   dataRearrangement?: string;
 
-  @Metadata({ data: "json, name=DataSizeInBytes" })
+  @SpeakeasyMetadata({ data: "json, name=DataSizeInBytes" })
   dataSizeInBytes?: number;
 
-  @Metadata({ data: "json, name=DataSourceId" })
+  @SpeakeasyMetadata({ data: "json, name=DataSourceId" })
   dataSourceId?: string;
 
-  @Metadata({ data: "json, name=FinishedAt" })
+  @SpeakeasyMetadata({ data: "json, name=FinishedAt" })
   finishedAt?: Date;
 
-  @Metadata({ data: "json, name=LastUpdatedAt" })
+  @SpeakeasyMetadata({ data: "json, name=LastUpdatedAt" })
   lastUpdatedAt?: Date;
 
-  @Metadata({ data: "json, name=Message" })
+  @SpeakeasyMetadata({ data: "json, name=Message" })
   message?: string;
 
-  @Metadata({ data: "json, name=Name" })
+  @SpeakeasyMetadata({ data: "json, name=Name" })
   name?: string;
 
-  @Metadata({ data: "json, name=NumberOfFiles" })
+  @SpeakeasyMetadata({ data: "json, name=NumberOfFiles" })
   numberOfFiles?: number;
 
-  @Metadata({ data: "json, name=RDSMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=RDSMetadata" })
   rdsMetadata?: RdsMetadata;
 
-  @Metadata({ data: "json, name=RedshiftMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=RedshiftMetadata" })
   redshiftMetadata?: RedshiftMetadata;
 
-  @Metadata({ data: "json, name=RoleARN" })
+  @SpeakeasyMetadata({ data: "json, name=RoleARN" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=StartedAt" })
+  @SpeakeasyMetadata({ data: "json, name=StartedAt" })
   startedAt?: Date;
 
-  @Metadata({ data: "json, name=Status" })
+  @SpeakeasyMetadata({ data: "json, name=Status" })
   status?: EntityStatusEnum;
 }

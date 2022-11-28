@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DeviceType
+// The device type.
 type DeviceType struct {
 	DeviceAttributes            []AttributeType `json:"DeviceAttributes,omitempty"`
 	DeviceCreateDate            *time.Time      `json:"DeviceCreateDate,omitempty"`

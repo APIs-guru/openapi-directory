@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DomainAssociation } from "./domainassociation";
 /**
  *  The result structure for the create domain association request.

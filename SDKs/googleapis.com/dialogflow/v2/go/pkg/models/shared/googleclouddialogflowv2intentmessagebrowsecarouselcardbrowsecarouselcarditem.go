@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDialogflowV2IntentMessageBrowseCarouselCardBrowseCarouselCardItem
+// Browsing carousel tile
 type GoogleCloudDialogflowV2IntentMessageBrowseCarouselCardBrowseCarouselCardItem struct {
 	Description   *string                                                                                    `json:"description,omitempty"`
 	Footer        *string                                                                                    `json:"footer,omitempty"`

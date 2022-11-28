@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudretailv2alphamodelpageoptimizationconfigpanel
+from sdk import utils
+from . import *
 
 class GoogleCloudRetailV2alphaModelPageOptimizationConfigRestrictionEnum(str, Enum):
     RESTRICTION_UNSPECIFIED = "RESTRICTION_UNSPECIFIED"
@@ -14,7 +16,11 @@ class GoogleCloudRetailV2alphaModelPageOptimizationConfigRestrictionEnum(str, En
 @dataclass_json
 @dataclass
 class GoogleCloudRetailV2alphaModelPageOptimizationConfig:
-    page_optimization_event_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pageOptimizationEventType' }})
-    panels: Optional[List[googlecloudretailv2alphamodelpageoptimizationconfigpanel.GoogleCloudRetailV2alphaModelPageOptimizationConfigPanel]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'panels' }})
-    restriction: Optional[GoogleCloudRetailV2alphaModelPageOptimizationConfigRestrictionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'restriction' }})
+    r"""GoogleCloudRetailV2alphaModelPageOptimizationConfig
+    The PageOptimizationConfig for model training. This determines how many panels to optimize for, and which serving configurations to consider for each panel. The purpose of this model is to optimize which ServingConfig to show on which panels in way that optimizes the visitors shopping journey.
+    """
+    
+    page_optimization_event_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('pageOptimizationEventType') }})
+    panels: Optional[List[GoogleCloudRetailV2alphaModelPageOptimizationConfigPanel]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('panels') }})
+    restriction: Optional[GoogleCloudRetailV2alphaModelPageOptimizationConfigRestrictionEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('restriction') }})
     

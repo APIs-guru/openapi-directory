@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var Destiny2ReportOffensivePostGameCarnageReportPlayerPathParams = /** @class */ (function (_super) {
     __extends(Destiny2ReportOffensivePostGameCarnageReportPlayerPathParams, _super);
@@ -30,7 +30,7 @@ var Destiny2ReportOffensivePostGameCarnageReportPlayerPathParams = /** @class */
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=activityId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=activityId" }),
         __metadata("design:type", Number)
     ], Destiny2ReportOffensivePostGameCarnageReportPlayerPathParams.prototype, "activityId", void 0);
     return Destiny2ReportOffensivePostGameCarnageReportPlayerPathParams;
@@ -42,7 +42,7 @@ var Destiny2ReportOffensivePostGameCarnageReportPlayerSecurity = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemeOauth2)
     ], Destiny2ReportOffensivePostGameCarnageReportPlayerSecurity.prototype, "oauth2", void 0);
     return Destiny2ReportOffensivePostGameCarnageReportPlayerSecurity;
@@ -54,11 +54,11 @@ var Destiny2ReportOffensivePostGameCarnageReportPlayerRequest = /** @class */ (f
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2ReportOffensivePostGameCarnageReportPlayerPathParams)
     ], Destiny2ReportOffensivePostGameCarnageReportPlayerRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Destiny2ReportOffensivePostGameCarnageReportPlayerSecurity)
     ], Destiny2ReportOffensivePostGameCarnageReportPlayerRequest.prototype, "security", void 0);
     return Destiny2ReportOffensivePostGameCarnageReportPlayerRequest;
@@ -70,15 +70,15 @@ var Destiny2ReportOffensivePostGameCarnageReportPlayerResponse = /** @class */ (
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], Destiny2ReportOffensivePostGameCarnageReportPlayerResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], Destiny2ReportOffensivePostGameCarnageReportPlayerResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], Destiny2ReportOffensivePostGameCarnageReportPlayerResponse.prototype, "statusCode", void 0);
     return Destiny2ReportOffensivePostGameCarnageReportPlayerResponse;

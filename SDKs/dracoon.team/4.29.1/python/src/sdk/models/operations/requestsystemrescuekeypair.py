@@ -1,4 +1,7 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
@@ -16,14 +19,14 @@ class RequestSystemRescueKeyPairHeaders:
 
 @dataclass
 class RequestSystemRescueKeyPairRequest:
-    query_params: RequestSystemRescueKeyPairQueryParams = field(default=None)
-    headers: RequestSystemRescueKeyPairHeaders = field(default=None)
+    headers: RequestSystemRescueKeyPairHeaders = field()
+    query_params: RequestSystemRescueKeyPairQueryParams = field()
     
 
 @dataclass
-class RequestSystemRescueKeyPairResponse:
-    content_type: str = field(default=None)
+class RequestSystemRescueKeyPairResponseOutput:
+    content_type: str = field()
+    status_code: int = field()
     error_response: Optional[shared.ErrorResponse] = field(default=None)
-    status_code: int = field(default=None)
-    user_key_pair_container: Optional[shared.UserKeyPairContainer] = field(default=None)
+    user_key_pair_container: Optional[shared.UserKeyPairContainerOutput] = field(default=None)
     

@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetRegionsGetRegionsGetQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=jwt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=jwt" })
   jwt: string;
 }
 
 
 export class GetRegionsGetRegionsGetRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetRegionsGetRegionsGetQueryParams;
 }
 
 
 export class GetRegionsGetRegionsGetResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   httpValidationError?: shared.HttpValidationError;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   regionResp?: shared.RegionResp;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

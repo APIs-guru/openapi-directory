@@ -1,23 +1,24 @@
 
 
+
 export enum PatchFilterKeyEnum {
-    Arch = "ARCH"
-,    AdvisoryId = "ADVISORY_ID"
-,    BugzillaId = "BUGZILLA_ID"
-,    PatchSet = "PATCH_SET"
-,    Product = "PRODUCT"
-,    ProductFamily = "PRODUCT_FAMILY"
-,    Classification = "CLASSIFICATION"
-,    CveId = "CVE_ID"
-,    Epoch = "EPOCH"
-,    MsrcSeverity = "MSRC_SEVERITY"
-,    Name = "NAME"
-,    PatchId = "PATCH_ID"
-,    Section = "SECTION"
-,    Priority = "PRIORITY"
-,    Repository = "REPOSITORY"
-,    Release = "RELEASE"
-,    Severity = "SEVERITY"
-,    Security = "SECURITY"
-,    Version = "VERSION"
+    Arch = "ARCH",
+    AdvisoryId = "ADVISORY_ID",
+    BugzillaId = "BUGZILLA_ID",
+    PatchSet = "PATCH_SET",
+    Product = "PRODUCT",
+    ProductFamily = "PRODUCT_FAMILY",
+    Classification = "CLASSIFICATION",
+    CveId = "CVE_ID",
+    Epoch = "EPOCH",
+    MsrcSeverity = "MSRC_SEVERITY",
+    Name = "NAME",
+    PatchId = "PATCH_ID",
+    Section = "SECTION",
+    Priority = "PRIORITY",
+    Repository = "REPOSITORY",
+    Release = "RELEASE",
+    Severity = "SEVERITY",
+    Security = "SECURITY",
+    Version = "VERSION"
 }

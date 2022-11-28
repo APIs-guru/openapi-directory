@@ -1,19 +1,20 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class RegisterGameServerInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ConnectionInfo" })
+  @SpeakeasyMetadata({ data: "json, name=ConnectionInfo" })
   connectionInfo?: string;
 
-  @Metadata({ data: "json, name=GameServerData" })
+  @SpeakeasyMetadata({ data: "json, name=GameServerData" })
   gameServerData?: string;
 
-  @Metadata({ data: "json, name=GameServerGroupName" })
+  @SpeakeasyMetadata({ data: "json, name=GameServerGroupName" })
   gameServerGroupName: string;
 
-  @Metadata({ data: "json, name=GameServerId" })
+  @SpeakeasyMetadata({ data: "json, name=GameServerId" })
   gameServerId: string;
 
-  @Metadata({ data: "json, name=InstanceId" })
+  @SpeakeasyMetadata({ data: "json, name=InstanceId" })
   instanceId: string;
 }

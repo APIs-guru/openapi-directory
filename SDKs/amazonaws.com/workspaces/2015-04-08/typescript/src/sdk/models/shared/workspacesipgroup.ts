@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { IpRuleItem } from "./ipruleitem";
+
 
 
 // WorkspacesIpGroup
@@ -8,15 +8,15 @@ import { IpRuleItem } from "./ipruleitem";
  * Describes an IP access control group.
 **/
 export class WorkspacesIpGroup extends SpeakeasyBase {
-  @Metadata({ data: "json, name=groupDesc" })
+  @SpeakeasyMetadata({ data: "json, name=groupDesc" })
   groupDesc?: string;
 
-  @Metadata({ data: "json, name=groupId" })
+  @SpeakeasyMetadata({ data: "json, name=groupId" })
   groupId?: string;
 
-  @Metadata({ data: "json, name=groupName" })
+  @SpeakeasyMetadata({ data: "json, name=groupName" })
   groupName?: string;
 
-  @Metadata({ data: "json, name=userRules", elemType: shared.IpRuleItem })
+  @SpeakeasyMetadata({ data: "json, name=userRules", elemType: IpRuleItem })
   userRules?: IpRuleItem[];
 }

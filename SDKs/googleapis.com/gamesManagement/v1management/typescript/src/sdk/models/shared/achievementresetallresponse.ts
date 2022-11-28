@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AchievementResetResponse } from "./achievementresetresponse";
+
 
 
 // AchievementResetAllResponse
@@ -8,9 +8,9 @@ import { AchievementResetResponse } from "./achievementresetresponse";
  * Achievement reset all response.
 **/
 export class AchievementResetAllResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=results", elemType: shared.AchievementResetResponse })
+  @SpeakeasyMetadata({ data: "json, name=results", elemType: AchievementResetResponse })
   results?: AchievementResetResponse[];
 }

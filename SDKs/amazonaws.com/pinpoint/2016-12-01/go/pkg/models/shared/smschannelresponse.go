@@ -1,5 +1,7 @@
 package shared
 
+// SmsChannelResponse
+// Provides information about the status and settings of the SMS channel for an application.
 type SmsChannelResponse struct {
 	ApplicationID                  *string `json:"ApplicationId,omitempty"`
 	CreationDate                   *string `json:"CreationDate,omitempty"`

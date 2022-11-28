@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { Certificate } from "./certificate";
 /**
  * Response for the `ListCertificates` method.

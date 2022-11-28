@@ -1,84 +1,85 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetIsosQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=name" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=name" })
   name?: string;
 }
 
-
-export class GetIsosRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetIsosQueryParams;
-}
-
 export enum GetIsos200ApplicationJsonIsosTypeEnum {
-    Public = "public"
-,    Private = "private"
+    Public = "public",
+    Private = "private"
 }
 
 
 export class GetIsos200ApplicationJsonIsos extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deprecated" })
+  @SpeakeasyMetadata({ data: "json, name=deprecated" })
   deprecated: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: number;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name: string;
 
-  @Metadata({ data: "json, name=type" })
+  @SpeakeasyMetadata({ data: "json, name=type" })
   type: GetIsos200ApplicationJsonIsosTypeEnum;
 }
 
 
 export class GetIsos200ApplicationJsonMetaPagination extends SpeakeasyBase {
-  @Metadata({ data: "json, name=last_page" })
+  @SpeakeasyMetadata({ data: "json, name=last_page" })
   lastPage: number;
 
-  @Metadata({ data: "json, name=next_page" })
+  @SpeakeasyMetadata({ data: "json, name=next_page" })
   nextPage: number;
 
-  @Metadata({ data: "json, name=page" })
+  @SpeakeasyMetadata({ data: "json, name=page" })
   page: number;
 
-  @Metadata({ data: "json, name=per_page" })
+  @SpeakeasyMetadata({ data: "json, name=per_page" })
   perPage: number;
 
-  @Metadata({ data: "json, name=previous_page" })
+  @SpeakeasyMetadata({ data: "json, name=previous_page" })
   previousPage: number;
 
-  @Metadata({ data: "json, name=total_entries" })
+  @SpeakeasyMetadata({ data: "json, name=total_entries" })
   totalEntries: number;
 }
 
 
 export class GetIsos200ApplicationJsonMeta extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pagination" })
+  @SpeakeasyMetadata({ data: "json, name=pagination" })
   pagination: GetIsos200ApplicationJsonMetaPagination;
 }
 
 
 export class GetIsos200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=isos", elemType: operations.GetIsos200ApplicationJsonIsos })
+  @SpeakeasyMetadata({ data: "json, name=isos", elemType: GetIsos200ApplicationJsonIsos })
   isos: GetIsos200ApplicationJsonIsos[];
 
-  @Metadata({ data: "json, name=meta" })
+  @SpeakeasyMetadata({ data: "json, name=meta" })
   meta?: GetIsos200ApplicationJsonMeta;
 }
 
 
+export class GetIsosRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetIsosQueryParams;
+}
+
+
 export class GetIsosResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getIsos200ApplicationJsonObject?: GetIsos200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

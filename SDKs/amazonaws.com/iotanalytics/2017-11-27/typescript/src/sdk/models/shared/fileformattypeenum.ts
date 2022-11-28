@@ -1,6 +1,7 @@
 
 
+
 export enum FileFormatTypeEnum {
-    Json = "JSON"
-,    Parquet = "PARQUET"
+    Json = "JSON",
+    Parquet = "PARQUET"
 }

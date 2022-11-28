@@ -1,59 +1,60 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class PostTIdNotificationsJsonPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=id" })
   id: string;
 }
 
 
 export class PostTIdNotificationsJsonHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Key" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Key" })
   apiKey: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=Api-Username" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=Api-Username" })
   apiUsername: string;
 }
 
 export enum PostTIdNotificationsJsonRequestBodyNotificationLevelEnum {
-    Zero = "0"
-,    One = "1"
-,    Two = "2"
-,    Three = "3"
+    Zero = "0",
+    One = "1",
+    Two = "2",
+    Three = "3"
 }
 
 
 export class PostTIdNotificationsJsonRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=notification_level" })
+  @SpeakeasyMetadata({ data: "json, name=notification_level" })
   notificationLevel: PostTIdNotificationsJsonRequestBodyNotificationLevelEnum;
 }
 
 
-export class PostTIdNotificationsJsonRequest extends SpeakeasyBase {
-  @Metadata()
-  pathParams: PostTIdNotificationsJsonPathParams;
-
-  @Metadata()
-  headers: PostTIdNotificationsJsonHeaders;
-
-  @Metadata({ data: "request, media_type=application/json" })
-  request?: PostTIdNotificationsJsonRequestBody;
-}
-
-
 export class PostTIdNotificationsJson200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=success" })
+  @SpeakeasyMetadata({ data: "json, name=success" })
   success?: string;
 }
 
 
+export class PostTIdNotificationsJsonRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  pathParams: PostTIdNotificationsJsonPathParams;
+
+  @SpeakeasyMetadata()
+  headers: PostTIdNotificationsJsonHeaders;
+
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  request?: PostTIdNotificationsJsonRequestBody;
+}
+
+
 export class PostTIdNotificationsJsonResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   postTIdNotificationsJson200ApplicationJsonObject?: PostTIdNotificationsJson200ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

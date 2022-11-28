@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var AddOrUpdateEmergencyContactsPathParams = /** @class */ (function (_super) {
     __extends(AddOrUpdateEmergencyContactsPathParams, _super);
@@ -30,11 +30,11 @@ var AddOrUpdateEmergencyContactsPathParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=companyId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=companyId" }),
         __metadata("design:type", String)
     ], AddOrUpdateEmergencyContactsPathParams.prototype, "companyId", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=employeeId" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=employeeId" }),
         __metadata("design:type", String)
     ], AddOrUpdateEmergencyContactsPathParams.prototype, "employeeId", void 0);
     return AddOrUpdateEmergencyContactsPathParams;
@@ -46,7 +46,7 @@ var AddOrUpdateEmergencyContactsSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" }),
         __metadata("design:type", shared.SchemePaylocityAuth)
     ], AddOrUpdateEmergencyContactsSecurity.prototype, "paylocityAuth", void 0);
     return AddOrUpdateEmergencyContactsSecurity;
@@ -58,15 +58,15 @@ var AddOrUpdateEmergencyContactsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddOrUpdateEmergencyContactsPathParams)
     ], AddOrUpdateEmergencyContactsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", shared.EmergencyContact)
     ], AddOrUpdateEmergencyContactsRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", AddOrUpdateEmergencyContactsSecurity)
     ], AddOrUpdateEmergencyContactsRequest.prototype, "security", void 0);
     return AddOrUpdateEmergencyContactsRequest;
@@ -78,15 +78,15 @@ var AddOrUpdateEmergencyContactsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], AddOrUpdateEmergencyContactsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], AddOrUpdateEmergencyContactsResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata({ elemType: shared.Error }),
+        SpeakeasyMetadata({ elemType: shared.Error }),
         __metadata("design:type", Array)
     ], AddOrUpdateEmergencyContactsResponse.prototype, "errors", void 0);
     return AddOrUpdateEmergencyContactsResponse;

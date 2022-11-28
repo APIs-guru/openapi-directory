@@ -12,14 +12,14 @@ class LanguagesGetLanguagesQueryParams:
 
 @dataclass
 class LanguagesGetLanguagesRequest:
-    query_params: LanguagesGetLanguagesQueryParams = field(default=None)
+    query_params: LanguagesGetLanguagesQueryParams = field()
     
 
 @dataclass
 class LanguagesGetLanguagesResponse:
+    content_type: str = field()
+    status_code: int = field()
     api_i_paged_response_global_resources_shared_models_language_: Optional[shared.APIIPagedResponseGlobalResourcesSharedModelsLanguage] = field(default=None)
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    body: Optional[bytes] = field(default=None)
     

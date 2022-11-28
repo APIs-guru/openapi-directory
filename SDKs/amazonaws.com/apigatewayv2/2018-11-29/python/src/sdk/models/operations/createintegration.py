@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
 @dataclass
 class CreateIntegrationPathParams:
-    api_id: str = field(default=None, metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
+    api_id: str = field(metadata={'path_param': { 'field_name': 'apiId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -43,45 +48,49 @@ class CreateIntegrationRequestBodyPassthroughBehaviorEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateIntegrationRequestBodyTLSConfig:
-    server_name_to_verify: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ServerNameToVerify' }})
+    r"""CreateIntegrationRequestBodyTLSConfig
+    The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.
+    """
+    
+    server_name_to_verify: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ServerNameToVerify') }})
     
 
 @dataclass_json
 @dataclass
 class CreateIntegrationRequestBody:
-    connection_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectionId' }})
-    connection_type: Optional[CreateIntegrationRequestBodyConnectionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connectionType' }})
-    content_handling_strategy: Optional[CreateIntegrationRequestBodyContentHandlingStrategyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contentHandlingStrategy' }})
-    credentials_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'credentialsArn' }})
-    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    integration_method: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'integrationMethod' }})
-    integration_subtype: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'integrationSubtype' }})
-    integration_type: CreateIntegrationRequestBodyIntegrationTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'integrationType' }})
-    integration_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'integrationUri' }})
-    passthrough_behavior: Optional[CreateIntegrationRequestBodyPassthroughBehaviorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'passthroughBehavior' }})
-    payload_format_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payloadFormatVersion' }})
-    request_parameters: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestParameters' }})
-    request_templates: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestTemplates' }})
-    response_parameters: Optional[dict[str, dict[str, str]]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responseParameters' }})
-    template_selection_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'templateSelectionExpression' }})
-    timeout_in_millis: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeoutInMillis' }})
-    tls_config: Optional[CreateIntegrationRequestBodyTLSConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tlsConfig' }})
+    integration_type: CreateIntegrationRequestBodyIntegrationTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('integrationType') }})
+    connection_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectionId') }})
+    connection_type: Optional[CreateIntegrationRequestBodyConnectionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('connectionType') }})
+    content_handling_strategy: Optional[CreateIntegrationRequestBodyContentHandlingStrategyEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('contentHandlingStrategy') }})
+    credentials_arn: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('credentialsArn') }})
+    description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('description') }})
+    integration_method: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('integrationMethod') }})
+    integration_subtype: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('integrationSubtype') }})
+    integration_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('integrationUri') }})
+    passthrough_behavior: Optional[CreateIntegrationRequestBodyPassthroughBehaviorEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('passthroughBehavior') }})
+    payload_format_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payloadFormatVersion') }})
+    request_parameters: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestParameters') }})
+    request_templates: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('requestTemplates') }})
+    response_parameters: Optional[dict[str, dict[str, str]]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('responseParameters') }})
+    template_selection_expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('templateSelectionExpression') }})
+    timeout_in_millis: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('timeoutInMillis') }})
+    tls_config: Optional[CreateIntegrationRequestBodyTLSConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tlsConfig') }})
     
 
 @dataclass
 class CreateIntegrationRequest:
-    path_params: CreateIntegrationPathParams = field(default=None)
-    headers: CreateIntegrationHeaders = field(default=None)
-    request: CreateIntegrationRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateIntegrationHeaders = field()
+    path_params: CreateIntegrationPathParams = field()
+    request: CreateIntegrationRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateIntegrationResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request_exception: Optional[Any] = field(default=None)
     conflict_exception: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     create_integration_result: Optional[shared.CreateIntegrationResult] = field(default=None)
     not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     too_many_requests_exception: Optional[Any] = field(default=None)
     

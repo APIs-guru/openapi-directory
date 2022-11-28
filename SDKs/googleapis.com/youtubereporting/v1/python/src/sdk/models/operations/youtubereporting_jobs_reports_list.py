@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class YoutubereportingJobsReportsListPathParams:
-    job_id: str = field(default=None, metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
+    job_id: str = field(metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -31,14 +32,14 @@ class YoutubereportingJobsReportsListQueryParams:
 
 @dataclass
 class YoutubereportingJobsReportsListSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class YoutubereportingJobsReportsListSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -49,14 +50,14 @@ class YoutubereportingJobsReportsListSecurity:
 
 @dataclass
 class YoutubereportingJobsReportsListRequest:
-    path_params: YoutubereportingJobsReportsListPathParams = field(default=None)
-    query_params: YoutubereportingJobsReportsListQueryParams = field(default=None)
-    security: YoutubereportingJobsReportsListSecurity = field(default=None)
+    path_params: YoutubereportingJobsReportsListPathParams = field()
+    query_params: YoutubereportingJobsReportsListQueryParams = field()
+    security: YoutubereportingJobsReportsListSecurity = field()
     
 
 @dataclass
 class YoutubereportingJobsReportsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_reports_response: Optional[shared.ListReportsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

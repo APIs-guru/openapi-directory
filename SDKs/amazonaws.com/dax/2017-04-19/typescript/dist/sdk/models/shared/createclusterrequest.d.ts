@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { ClusterEndpointEncryptionTypeEnum } from "./clusterendpointencryptiontypeenum";
 import { SseSpecification } from "./ssespecification";
 import { Tag } from "./tag";

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import googlecloudpolicytroubleshooterv1betaexplainedpolicy
+from sdk import utils
+from . import *
 
 class GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyResponseAccessEnum(str, Enum):
     ACCESS_STATE_UNSPECIFIED = "ACCESS_STATE_UNSPECIFIED"
@@ -14,6 +16,10 @@ class GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyResponseAccessEn
 @dataclass_json
 @dataclass
 class GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyResponse:
-    access: Optional[GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyResponseAccessEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'access' }})
-    explained_policies: Optional[List[googlecloudpolicytroubleshooterv1betaexplainedpolicy.GoogleCloudPolicytroubleshooterV1betaExplainedPolicy]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'explainedPolicies' }})
+    r"""GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyResponse
+    Response for TroubleshootIamPolicy.
+    """
+    
+    access: Optional[GoogleCloudPolicytroubleshooterV1betaTroubleshootIamPolicyResponseAccessEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('access') }})
+    explained_policies: Optional[List[GoogleCloudPolicytroubleshooterV1betaExplainedPolicy]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('explainedPolicies') }})
     

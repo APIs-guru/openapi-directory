@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare enum GoogleCloudPaymentsResellerSubscriptionV1SubscriptionCancellationDetailsReasonEnum {
     CancellationReasonUnspecified = "CANCELLATION_REASON_UNSPECIFIED",
     CancellationReasonFraud = "CANCELLATION_REASON_FRAUD",

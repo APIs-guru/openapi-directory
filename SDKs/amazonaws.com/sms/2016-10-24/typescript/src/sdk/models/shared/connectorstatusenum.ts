@@ -1,6 +1,7 @@
 
 
+
 export enum ConnectorStatusEnum {
-    Healthy = "HEALTHY"
-,    Unhealthy = "UNHEALTHY"
+    Healthy = "HEALTHY",
+    Unhealthy = "UNHEALTHY"
 }

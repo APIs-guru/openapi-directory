@@ -1,50 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetProtectionQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=alt" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=alt" })
   alt?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=from" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=from" })
   from: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lat" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lat" })
   lat: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=lng" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lng" })
   lng: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=ozone" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=ozone" })
   ozone?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=to" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=to" })
   to: number;
 }
 
 
 export class GetProtectionHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=x-access-token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-access-token" })
   xAccessToken: string;
 }
 
 
 export class GetProtectionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetProtectionQueryParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: GetProtectionHeaders;
 }
 
 
 export class GetProtectionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   protectionResult?: shared.ProtectionResult;
 }

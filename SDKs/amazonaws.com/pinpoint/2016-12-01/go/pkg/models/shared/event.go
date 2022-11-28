@@ -1,5 +1,7 @@
 package shared
 
+// Event
+// Specifies information about an event that reports data to Amazon Pinpoint.
 type Event struct {
 	AppPackageName   *string            `json:"AppPackageName,omitempty"`
 	AppTitle         *string            `json:"AppTitle,omitempty"`

@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SubscriptionStatusEnum } from "./subscriptionstatusenum";
 import { HiuSubscription } from "./hiusubscription";
 
 
+
 export class SubscriptionApprovalNotificationNotification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: SubscriptionStatusEnum;
 
-  @Metadata({ data: "json, name=subscription" })
+  @SpeakeasyMetadata({ data: "json, name=subscription" })
   subscription?: HiuSubscription;
 
-  @Metadata({ data: "json, name=subscriptionRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=subscriptionRequestId" })
   subscriptionRequestId?: string;
 }
 
 
 export class SubscriptionApprovalNotification extends SpeakeasyBase {
-  @Metadata({ data: "json, name=notification" })
+  @SpeakeasyMetadata({ data: "json, name=notification" })
   notification: SubscriptionApprovalNotificationNotification;
 
-  @Metadata({ data: "json, name=requestId" })
+  @SpeakeasyMetadata({ data: "json, name=requestId" })
   requestId: string;
 
-  @Metadata({ data: "json, name=timestamp" })
+  @SpeakeasyMetadata({ data: "json, name=timestamp" })
   timestamp: Date;
 }

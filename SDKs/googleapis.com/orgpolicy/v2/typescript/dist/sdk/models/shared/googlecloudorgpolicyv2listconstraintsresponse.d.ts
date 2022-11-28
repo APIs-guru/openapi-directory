@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudOrgpolicyV2Constraint } from "./googlecloudorgpolicyv2constraint";
 /**
  * The response returned from the ListConstraints method.

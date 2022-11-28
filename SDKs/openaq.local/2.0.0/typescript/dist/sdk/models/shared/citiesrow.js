@@ -22,38 +22,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var CitiesRow = /** @class */ (function (_super) {
     __extends(CitiesRow, _super);
     function CitiesRow() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=city" }),
+        SpeakeasyMetadata({ data: "json, name=city" }),
         __metadata("design:type", String)
     ], CitiesRow.prototype, "city", void 0);
     __decorate([
-        Metadata({ data: "json, name=count" }),
+        SpeakeasyMetadata({ data: "json, name=count" }),
         __metadata("design:type", Number)
     ], CitiesRow.prototype, "count", void 0);
     __decorate([
-        Metadata({ data: "json, name=country" }),
+        SpeakeasyMetadata({ data: "json, name=country" }),
         __metadata("design:type", String)
     ], CitiesRow.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "json, name=firstUpdated" }),
+        SpeakeasyMetadata({ data: "json, name=firstUpdated" }),
         __metadata("design:type", Date)
     ], CitiesRow.prototype, "firstUpdated", void 0);
     __decorate([
-        Metadata({ data: "json, name=lastUpdated" }),
+        SpeakeasyMetadata({ data: "json, name=lastUpdated" }),
         __metadata("design:type", Date)
     ], CitiesRow.prototype, "lastUpdated", void 0);
     __decorate([
-        Metadata({ data: "json, name=locations" }),
+        SpeakeasyMetadata({ data: "json, name=locations" }),
         __metadata("design:type", Number)
     ], CitiesRow.prototype, "locations", void 0);
     __decorate([
-        Metadata({ data: "json, name=parameters" }),
+        SpeakeasyMetadata({ data: "json, name=parameters" }),
         __metadata("design:type", Array)
     ], CitiesRow.prototype, "parameters", void 0);
     return CitiesRow;

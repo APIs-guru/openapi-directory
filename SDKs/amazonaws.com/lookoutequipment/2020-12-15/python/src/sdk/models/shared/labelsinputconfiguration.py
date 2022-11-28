@@ -1,10 +1,15 @@
 from dataclasses import dataclass, field
 from dataclasses_json import dataclass_json
-from . import labelss3inputconfiguration
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class LabelsInputConfiguration:
-    s3_input_configuration: labelss3inputconfiguration.LabelsS3InputConfiguration = field(default=None, metadata={'dataclasses_json': { 'field_name': 'S3InputConfiguration' }})
+    r"""LabelsInputConfiguration
+    Contains the configuration information for the S3 location being used to hold label data. 
+    """
+    
+    s3_input_configuration: LabelsS3InputConfiguration = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('S3InputConfiguration') }})
     

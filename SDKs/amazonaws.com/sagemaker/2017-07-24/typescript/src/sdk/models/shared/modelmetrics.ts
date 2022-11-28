@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Bias } from "./bias";
 import { Explainability } from "./explainability";
 import { ModelDataQuality } from "./modeldataquality";
 import { ModelQuality } from "./modelquality";
+
 
 
 // ModelMetrics
@@ -10,15 +11,15 @@ import { ModelQuality } from "./modelquality";
  * Contains metrics captured from a model.
 **/
 export class ModelMetrics extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Bias" })
+  @SpeakeasyMetadata({ data: "json, name=Bias" })
   bias?: Bias;
 
-  @Metadata({ data: "json, name=Explainability" })
+  @SpeakeasyMetadata({ data: "json, name=Explainability" })
   explainability?: Explainability;
 
-  @Metadata({ data: "json, name=ModelDataQuality" })
+  @SpeakeasyMetadata({ data: "json, name=ModelDataQuality" })
   modelDataQuality?: ModelDataQuality;
 
-  @Metadata({ data: "json, name=ModelQuality" })
+  @SpeakeasyMetadata({ data: "json, name=ModelQuality" })
   modelQuality?: ModelQuality;
 }

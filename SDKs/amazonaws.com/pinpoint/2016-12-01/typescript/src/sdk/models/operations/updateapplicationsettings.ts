@@ -1,33 +1,34 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateApplicationSettingsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=application-id" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=application-id" })
   applicationId: string;
 }
 
 
 export class UpdateApplicationSettingsHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -37,69 +38,69 @@ export class UpdateApplicationSettingsHeaders extends SpeakeasyBase {
  * Specifies the default settings for an application.
 **/
 export class UpdateApplicationSettingsRequestBodyWriteApplicationSettingsRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CampaignHook" })
+  @SpeakeasyMetadata({ data: "json, name=CampaignHook" })
   campaignHook?: shared.CampaignHook;
 
-  @Metadata({ data: "json, name=CloudWatchMetricsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=CloudWatchMetricsEnabled" })
   cloudWatchMetricsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=EventTaggingEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=EventTaggingEnabled" })
   eventTaggingEnabled?: boolean;
 
-  @Metadata({ data: "json, name=Limits" })
+  @SpeakeasyMetadata({ data: "json, name=Limits" })
   limits?: shared.CampaignLimits;
 
-  @Metadata({ data: "json, name=QuietTime" })
+  @SpeakeasyMetadata({ data: "json, name=QuietTime" })
   quietTime?: shared.QuietTime;
 }
 
 
 export class UpdateApplicationSettingsRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=WriteApplicationSettingsRequest" })
+  @SpeakeasyMetadata({ data: "json, name=WriteApplicationSettingsRequest" })
   writeApplicationSettingsRequest: UpdateApplicationSettingsRequestBodyWriteApplicationSettingsRequest;
 }
 
 
 export class UpdateApplicationSettingsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateApplicationSettingsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateApplicationSettingsHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateApplicationSettingsRequestBody;
 }
 
 
 export class UpdateApplicationSettingsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   badRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   forbiddenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   internalServerErrorException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   methodNotAllowedException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   notFoundException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   payloadTooLargeException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   tooManyRequestsException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateApplicationSettingsResponse?: shared.UpdateApplicationSettingsResponse;
 }

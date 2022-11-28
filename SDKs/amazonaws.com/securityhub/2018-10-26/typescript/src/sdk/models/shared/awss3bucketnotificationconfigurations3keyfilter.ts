@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsS3BucketNotificationConfigurationS3KeyFilterRule } from "./awss3bucketnotificationconfigurations3keyfilterrule";
+
 
 
 // AwsS3BucketNotificationConfigurationS3KeyFilter
@@ -8,6 +8,6 @@ import { AwsS3BucketNotificationConfigurationS3KeyFilterRule } from "./awss3buck
  * Details for an Amazon S3 filter.
 **/
 export class AwsS3BucketNotificationConfigurationS3KeyFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FilterRules", elemType: shared.AwsS3BucketNotificationConfigurationS3KeyFilterRule })
+  @SpeakeasyMetadata({ data: "json, name=FilterRules", elemType: AwsS3BucketNotificationConfigurationS3KeyFilterRule })
   filterRules?: AwsS3BucketNotificationConfigurationS3KeyFilterRule[];
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PaymentInitiationPaymentGetRequest
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * PaymentInitiationPaymentGetRequest defines the request schema for `/payment_initiation/payment/get`
 **/
 export class PaymentInitiationPaymentGetRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=client_id" })
+  @SpeakeasyMetadata({ data: "json, name=client_id" })
   clientId?: string;
 
-  @Metadata({ data: "json, name=payment_id" })
+  @SpeakeasyMetadata({ data: "json, name=payment_id" })
   paymentId: string;
 
-  @Metadata({ data: "json, name=secret" })
+  @SpeakeasyMetadata({ data: "json, name=secret" })
   secret?: string;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 export var CreateProductModuleRequestBodyLicenseTemplateEnum;
 (function (CreateProductModuleRequestBodyLicenseTemplateEnum) {
@@ -40,43 +40,43 @@ var CreateProductModuleRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "form, name=active;" }),
+        SpeakeasyMetadata({ data: "form, name=active;" }),
         __metadata("design:type", Boolean)
     ], CreateProductModuleRequestBody.prototype, "active", void 0);
     __decorate([
-        Metadata({ data: "form, name=licenseTemplate;" }),
+        SpeakeasyMetadata({ data: "form, name=licenseTemplate;" }),
         __metadata("design:type", Array)
     ], CreateProductModuleRequestBody.prototype, "licenseTemplate", void 0);
     __decorate([
-        Metadata({ data: "form, name=licensingModel;" }),
+        SpeakeasyMetadata({ data: "form, name=licensingModel;" }),
         __metadata("design:type", String)
     ], CreateProductModuleRequestBody.prototype, "licensingModel", void 0);
     __decorate([
-        Metadata({ data: "form, name=maxCheckoutValidity;" }),
+        SpeakeasyMetadata({ data: "form, name=maxCheckoutValidity;" }),
         __metadata("design:type", Number)
     ], CreateProductModuleRequestBody.prototype, "maxCheckoutValidity", void 0);
     __decorate([
-        Metadata({ data: "form, name=name;" }),
+        SpeakeasyMetadata({ data: "form, name=name;" }),
         __metadata("design:type", String)
     ], CreateProductModuleRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "form, name=nodeSecretMode;" }),
+        SpeakeasyMetadata({ data: "form, name=nodeSecretMode;" }),
         __metadata("design:type", Array)
     ], CreateProductModuleRequestBody.prototype, "nodeSecretMode", void 0);
     __decorate([
-        Metadata({ data: "form, name=number;" }),
+        SpeakeasyMetadata({ data: "form, name=number;" }),
         __metadata("design:type", String)
     ], CreateProductModuleRequestBody.prototype, "number", void 0);
     __decorate([
-        Metadata({ data: "form, name=productNumber;" }),
+        SpeakeasyMetadata({ data: "form, name=productNumber;" }),
         __metadata("design:type", String)
     ], CreateProductModuleRequestBody.prototype, "productNumber", void 0);
     __decorate([
-        Metadata({ data: "form, name=redThreshold;" }),
+        SpeakeasyMetadata({ data: "form, name=redThreshold;" }),
         __metadata("design:type", Number)
     ], CreateProductModuleRequestBody.prototype, "redThreshold", void 0);
     __decorate([
-        Metadata({ data: "form, name=yellowThreshold;" }),
+        SpeakeasyMetadata({ data: "form, name=yellowThreshold;" }),
         __metadata("design:type", Number)
     ], CreateProductModuleRequestBody.prototype, "yellowThreshold", void 0);
     return CreateProductModuleRequestBody;
@@ -88,7 +88,7 @@ var CreateProductModuleSecurity = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic" }),
         __metadata("design:type", shared.SchemeBasicAuth)
     ], CreateProductModuleSecurity.prototype, "basicAuth", void 0);
     return CreateProductModuleSecurity;
@@ -100,11 +100,11 @@ var CreateProductModuleRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
         __metadata("design:type", CreateProductModuleRequestBody)
     ], CreateProductModuleRequest.prototype, "request", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateProductModuleSecurity)
     ], CreateProductModuleRequest.prototype, "security", void 0);
     return CreateProductModuleRequest;
@@ -116,19 +116,19 @@ var CreateProductModuleResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], CreateProductModuleResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateProductModuleResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateProductModuleResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateProductModuleResponse.prototype, "netlicensing", void 0);
     return CreateProductModuleResponse;

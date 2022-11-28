@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { StorageUnitEnum } from "./storageunitenum";
+
 
 
 // NfsOnDeviceServiceConfiguration
@@ -7,9 +8,9 @@ import { StorageUnitEnum } from "./storageunitenum";
  * An object that represents metadata and configuration settings for NFS service on an AWS Snow Family device.
 **/
 export class NfsOnDeviceServiceConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=StorageLimit" })
+  @SpeakeasyMetadata({ data: "json, name=StorageLimit" })
   storageLimit?: number;
 
-  @Metadata({ data: "json, name=StorageUnit" })
+  @SpeakeasyMetadata({ data: "json, name=StorageUnit" })
   storageUnit?: StorageUnitEnum;
 }

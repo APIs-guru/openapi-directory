@@ -1,31 +1,32 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ListFeatureValuesQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=description" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=description" })
   description?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=language" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=language" })
   language?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=type" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=type" })
   type?: string;
 }
 
 
 export class ListFeatureValuesRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: ListFeatureValuesQueryParams;
 }
 
 
 export class ListFeatureValuesResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   listFeatureValues200ApplicationJsonStrings?: string[];
 }

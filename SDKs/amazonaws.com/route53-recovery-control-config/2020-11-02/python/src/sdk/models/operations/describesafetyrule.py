@@ -1,11 +1,14 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 from sdk.models import shared
 
 
 @dataclass
 class DescribeSafetyRulePathParams:
-    safety_rule_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'SafetyRuleArn', 'style': 'simple', 'explode': False }})
+    safety_rule_arn: str = field(metadata={'path_param': { 'field_name': 'SafetyRuleArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -21,15 +24,15 @@ class DescribeSafetyRuleHeaders:
 
 @dataclass
 class DescribeSafetyRuleRequest:
-    path_params: DescribeSafetyRulePathParams = field(default=None)
-    headers: DescribeSafetyRuleHeaders = field(default=None)
+    headers: DescribeSafetyRuleHeaders = field()
+    path_params: DescribeSafetyRulePathParams = field()
     
 
 @dataclass
 class DescribeSafetyRuleResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     describe_safety_rule_response: Optional[shared.DescribeSafetyRuleResponse] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

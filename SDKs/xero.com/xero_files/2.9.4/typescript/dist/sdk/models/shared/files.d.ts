@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { FileObject } from "./fileobject";
 export declare class Files extends SpeakeasyBase {
     items?: FileObject[];

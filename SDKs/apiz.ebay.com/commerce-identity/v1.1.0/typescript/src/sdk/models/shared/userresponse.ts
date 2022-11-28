@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { BusinessAccount } from "./businessaccount";
 import { IndividualAccount } from "./individualaccount";
+
 
 
 // UserResponse
@@ -8,24 +9,24 @@ import { IndividualAccount } from "./individualaccount";
  * The type that defines the fields for the getUser method.
 **/
 export class UserResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accountType" })
+  @SpeakeasyMetadata({ data: "json, name=accountType" })
   accountType?: string;
 
-  @Metadata({ data: "json, name=businessAccount" })
+  @SpeakeasyMetadata({ data: "json, name=businessAccount" })
   businessAccount?: BusinessAccount;
 
-  @Metadata({ data: "json, name=individualAccount" })
+  @SpeakeasyMetadata({ data: "json, name=individualAccount" })
   individualAccount?: IndividualAccount;
 
-  @Metadata({ data: "json, name=registrationMarketplaceId" })
+  @SpeakeasyMetadata({ data: "json, name=registrationMarketplaceId" })
   registrationMarketplaceId?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: string;
 
-  @Metadata({ data: "json, name=userId" })
+  @SpeakeasyMetadata({ data: "json, name=userId" })
   userId?: string;
 
-  @Metadata({ data: "json, name=username" })
+  @SpeakeasyMetadata({ data: "json, name=username" })
   username?: string;
 }

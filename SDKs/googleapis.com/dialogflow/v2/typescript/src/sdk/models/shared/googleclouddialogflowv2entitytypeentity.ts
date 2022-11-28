@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudDialogflowV2EntityTypeEntity
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An **entity entry** for an associated entity type.
 **/
 export class GoogleCloudDialogflowV2EntityTypeEntity extends SpeakeasyBase {
-  @Metadata({ data: "json, name=synonyms" })
+  @SpeakeasyMetadata({ data: "json, name=synonyms" })
   synonyms?: string[];
 
-  @Metadata({ data: "json, name=value" })
+  @SpeakeasyMetadata({ data: "json, name=value" })
   value?: string;
 }

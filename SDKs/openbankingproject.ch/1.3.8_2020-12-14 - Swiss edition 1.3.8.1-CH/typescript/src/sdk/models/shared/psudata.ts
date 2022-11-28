@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PsuData
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * PSU Data for Update PSU authentication.
 **/
 export class PsuData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additionalEncryptedPassword" })
+  @SpeakeasyMetadata({ data: "json, name=additionalEncryptedPassword" })
   additionalEncryptedPassword?: string;
 
-  @Metadata({ data: "json, name=additionalPassword" })
+  @SpeakeasyMetadata({ data: "json, name=additionalPassword" })
   additionalPassword?: string;
 
-  @Metadata({ data: "json, name=encryptedPassword" })
+  @SpeakeasyMetadata({ data: "json, name=encryptedPassword" })
   encryptedPassword?: string;
 
-  @Metadata({ data: "json, name=password" })
+  @SpeakeasyMetadata({ data: "json, name=password" })
   password?: string;
 }

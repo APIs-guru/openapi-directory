@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { OperationEnum } from "./operationenum";
 // RecordPatch
 /**
@@ -34,23 +34,23 @@ var RecordPatch = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=DeviceLastModifiedDate" }),
+        SpeakeasyMetadata({ data: "json, name=DeviceLastModifiedDate" }),
         __metadata("design:type", Date)
     ], RecordPatch.prototype, "deviceLastModifiedDate", void 0);
     __decorate([
-        Metadata({ data: "json, name=Key" }),
+        SpeakeasyMetadata({ data: "json, name=Key" }),
         __metadata("design:type", String)
     ], RecordPatch.prototype, "key", void 0);
     __decorate([
-        Metadata({ data: "json, name=Op" }),
+        SpeakeasyMetadata({ data: "json, name=Op" }),
         __metadata("design:type", String)
     ], RecordPatch.prototype, "op", void 0);
     __decorate([
-        Metadata({ data: "json, name=SyncCount" }),
+        SpeakeasyMetadata({ data: "json, name=SyncCount" }),
         __metadata("design:type", Number)
     ], RecordPatch.prototype, "syncCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=Value" }),
+        SpeakeasyMetadata({ data: "json, name=Value" }),
         __metadata("design:type", String)
     ], RecordPatch.prototype, "value", void 0);
     return RecordPatch;

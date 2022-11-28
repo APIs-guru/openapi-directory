@@ -10,37 +10,22 @@ class GetUserPermissionsWorkspacesQueryParams:
     
 
 @dataclass
-class GetUserPermissionsWorkspacesSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetUserPermissionsWorkspacesSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class GetUserPermissionsWorkspacesSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
 class GetUserPermissionsWorkspacesSecurity:
-    option1: Optional[GetUserPermissionsWorkspacesSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetUserPermissionsWorkspacesSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[GetUserPermissionsWorkspacesSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetUserPermissionsWorkspacesRequest:
-    query_params: GetUserPermissionsWorkspacesQueryParams = field(default=None)
-    security: GetUserPermissionsWorkspacesSecurity = field(default=None)
+    query_params: GetUserPermissionsWorkspacesQueryParams = field()
+    security: GetUserPermissionsWorkspacesSecurity = field()
     
 
 @dataclass
 class GetUserPermissionsWorkspacesResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[dict[str, Any]] = field(default=None)
     paginated_workspace_memberships: Optional[shared.PaginatedWorkspaceMemberships] = field(default=None)
     

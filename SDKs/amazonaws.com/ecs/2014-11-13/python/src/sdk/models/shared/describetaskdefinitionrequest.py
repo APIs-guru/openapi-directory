@@ -1,12 +1,14 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import taskdefinitionfield_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class DescribeTaskDefinitionRequest:
-    include: Optional[List[taskdefinitionfield_enum.TaskDefinitionFieldEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'include' }})
-    task_definition: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taskDefinition' }})
+    task_definition: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('taskDefinition') }})
+    include: Optional[List[TaskDefinitionFieldEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('include') }})
     

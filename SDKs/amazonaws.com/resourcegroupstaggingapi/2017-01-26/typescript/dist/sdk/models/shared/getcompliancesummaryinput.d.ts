@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { GroupByAttributeEnum } from "./groupbyattributeenum";
 export declare class GetComplianceSummaryInput extends SpeakeasyBase {
     groupBy?: GroupByAttributeEnum[];

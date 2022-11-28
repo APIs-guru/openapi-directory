@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ImageClassificationModelDeploymentMetadata
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Model deployment metadata specific to Image Classification.
 **/
 export class ImageClassificationModelDeploymentMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nodeCount" })
+  @SpeakeasyMetadata({ data: "json, name=nodeCount" })
   nodeCount?: string;
 }

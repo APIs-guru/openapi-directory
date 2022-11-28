@@ -22,14 +22,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var GetArrivalsAndDeparturesByCrsPathParams = /** @class */ (function (_super) {
     __extends(GetArrivalsAndDeparturesByCrsPathParams, _super);
     function GetArrivalsAndDeparturesByCrsPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=CRS" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=CRS" }),
         __metadata("design:type", String)
     ], GetArrivalsAndDeparturesByCrsPathParams.prototype, "crs", void 0);
     return GetArrivalsAndDeparturesByCrsPathParams;
@@ -41,31 +41,31 @@ var GetArrivalsAndDeparturesByCrsQueryParams = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=apiKey" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=apiKey" }),
         __metadata("design:type", String)
     ], GetArrivalsAndDeparturesByCrsQueryParams.prototype, "apiKey", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filterStation" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filterStation" }),
         __metadata("design:type", String)
     ], GetArrivalsAndDeparturesByCrsQueryParams.prototype, "filterStation", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=filterType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=filterType" }),
         __metadata("design:type", String)
     ], GetArrivalsAndDeparturesByCrsQueryParams.prototype, "filterType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=numServices" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=numServices" }),
         __metadata("design:type", Number)
     ], GetArrivalsAndDeparturesByCrsQueryParams.prototype, "numServices", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=serviceDetails" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=serviceDetails" }),
         __metadata("design:type", Boolean)
     ], GetArrivalsAndDeparturesByCrsQueryParams.prototype, "serviceDetails", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeOffset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeOffset" }),
         __metadata("design:type", Number)
     ], GetArrivalsAndDeparturesByCrsQueryParams.prototype, "timeOffset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=timeWindow" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=timeWindow" }),
         __metadata("design:type", Number)
     ], GetArrivalsAndDeparturesByCrsQueryParams.prototype, "timeWindow", void 0);
     return GetArrivalsAndDeparturesByCrsQueryParams;
@@ -77,11 +77,11 @@ var GetArrivalsAndDeparturesByCrsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetArrivalsAndDeparturesByCrsPathParams)
     ], GetArrivalsAndDeparturesByCrsRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetArrivalsAndDeparturesByCrsQueryParams)
     ], GetArrivalsAndDeparturesByCrsRequest.prototype, "queryParams", void 0);
     return GetArrivalsAndDeparturesByCrsRequest;
@@ -93,11 +93,11 @@ var GetArrivalsAndDeparturesByCrsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetArrivalsAndDeparturesByCrsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetArrivalsAndDeparturesByCrsResponse.prototype, "statusCode", void 0);
     return GetArrivalsAndDeparturesByCrsResponse;

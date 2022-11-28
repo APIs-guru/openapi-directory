@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import videosuggestionstagsuggestion
+from sdk import utils
+from . import *
 
 class VideoSuggestionsEditorSuggestionsEnum(str, Enum):
     VIDEO_AUTO_LEVELS = "videoAutoLevels"
@@ -44,9 +46,13 @@ class VideoSuggestionsProcessingWarningsEnum(str, Enum):
 @dataclass_json
 @dataclass
 class VideoSuggestions:
-    editor_suggestions: Optional[List[VideoSuggestionsEditorSuggestionsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'editorSuggestions' }})
-    processing_errors: Optional[List[VideoSuggestionsProcessingErrorsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'processingErrors' }})
-    processing_hints: Optional[List[VideoSuggestionsProcessingHintsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'processingHints' }})
-    processing_warnings: Optional[List[VideoSuggestionsProcessingWarningsEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'processingWarnings' }})
-    tag_suggestions: Optional[List[videosuggestionstagsuggestion.VideoSuggestionsTagSuggestion]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tagSuggestions' }})
+    r"""VideoSuggestions
+    Specifies suggestions on how to improve video content, including encoding hints, tag suggestions, and editor suggestions.
+    """
+    
+    editor_suggestions: Optional[List[VideoSuggestionsEditorSuggestionsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('editorSuggestions') }})
+    processing_errors: Optional[List[VideoSuggestionsProcessingErrorsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('processingErrors') }})
+    processing_hints: Optional[List[VideoSuggestionsProcessingHintsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('processingHints') }})
+    processing_warnings: Optional[List[VideoSuggestionsProcessingWarningsEnum]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('processingWarnings') }})
+    tag_suggestions: Optional[List[VideoSuggestionsTagSuggestion]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('tagSuggestions') }})
     

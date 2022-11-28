@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Offset } from "./offset";
 export var TitleAssetPositionEnum;
 (function (TitleAssetPositionEnum) {
@@ -69,35 +69,35 @@ var TitleAsset = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=background" }),
+        SpeakeasyMetadata({ data: "json, name=background" }),
         __metadata("design:type", String)
     ], TitleAsset.prototype, "background", void 0);
     __decorate([
-        Metadata({ data: "json, name=color" }),
+        SpeakeasyMetadata({ data: "json, name=color" }),
         __metadata("design:type", String)
     ], TitleAsset.prototype, "color", void 0);
     __decorate([
-        Metadata({ data: "json, name=offset" }),
+        SpeakeasyMetadata({ data: "json, name=offset" }),
         __metadata("design:type", Offset)
     ], TitleAsset.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "json, name=position" }),
+        SpeakeasyMetadata({ data: "json, name=position" }),
         __metadata("design:type", String)
     ], TitleAsset.prototype, "position", void 0);
     __decorate([
-        Metadata({ data: "json, name=size" }),
+        SpeakeasyMetadata({ data: "json, name=size" }),
         __metadata("design:type", String)
     ], TitleAsset.prototype, "size", void 0);
     __decorate([
-        Metadata({ data: "json, name=style" }),
+        SpeakeasyMetadata({ data: "json, name=style" }),
         __metadata("design:type", String)
     ], TitleAsset.prototype, "style", void 0);
     __decorate([
-        Metadata({ data: "json, name=text" }),
+        SpeakeasyMetadata({ data: "json, name=text" }),
         __metadata("design:type", String)
     ], TitleAsset.prototype, "text", void 0);
     __decorate([
-        Metadata({ data: "json, name=type" }),
+        SpeakeasyMetadata({ data: "json, name=type" }),
         __metadata("design:type", String)
     ], TitleAsset.prototype, "type", void 0);
     return TitleAsset;

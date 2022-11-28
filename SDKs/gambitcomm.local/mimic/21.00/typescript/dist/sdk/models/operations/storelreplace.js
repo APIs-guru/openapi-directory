@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var StoreLreplacePathParams = /** @class */ (function (_super) {
     __extends(StoreLreplacePathParams, _super);
     function StoreLreplacePathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=index" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=index" }),
         __metadata("design:type", Number)
     ], StoreLreplacePathParams.prototype, "index", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=var" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=var" }),
         __metadata("design:type", String)
     ], StoreLreplacePathParams.prototype, "var", void 0);
     return StoreLreplacePathParams;
@@ -45,11 +45,11 @@ var StoreLreplaceRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", StoreLreplacePathParams)
     ], StoreLreplaceRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", String)
     ], StoreLreplaceRequest.prototype, "request", void 0);
     return StoreLreplaceRequest;
@@ -61,15 +61,15 @@ var StoreLreplaceResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StoreLreplaceResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], StoreLreplaceResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], StoreLreplaceResponse.prototype, "storeLreplace200ApplicationJsonString", void 0);
     return StoreLreplaceResponse;

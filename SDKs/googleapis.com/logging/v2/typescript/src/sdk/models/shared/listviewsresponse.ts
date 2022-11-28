@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LogView } from "./logview";
+
 
 
 // ListViewsResponse
@@ -8,9 +8,9 @@ import { LogView } from "./logview";
  * The response from ListViews.
 **/
 export class ListViewsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=views", elemType: shared.LogView })
+  @SpeakeasyMetadata({ data: "json, name=views", elemType: LogView })
   views?: LogView[];
 }

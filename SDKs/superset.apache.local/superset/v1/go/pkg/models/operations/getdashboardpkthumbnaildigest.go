@@ -17,12 +17,6 @@ type GetDashboardPkThumbnailDigestSecurity struct {
 	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
-type GetDashboardPkThumbnailDigestRequest struct {
-	PathParams  GetDashboardPkThumbnailDigestPathParams
-	QueryParams GetDashboardPkThumbnailDigestQueryParams
-	Security    GetDashboardPkThumbnailDigestSecurity
-}
-
 type GetDashboardPkThumbnailDigest202ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
 }
@@ -41,6 +35,12 @@ type GetDashboardPkThumbnailDigest422ApplicationJSON struct {
 
 type GetDashboardPkThumbnailDigest500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type GetDashboardPkThumbnailDigestRequest struct {
+	PathParams  GetDashboardPkThumbnailDigestPathParams
+	QueryParams GetDashboardPkThumbnailDigestQueryParams
+	Security    GetDashboardPkThumbnailDigestSecurity
 }
 
 type GetDashboardPkThumbnailDigestResponse struct {

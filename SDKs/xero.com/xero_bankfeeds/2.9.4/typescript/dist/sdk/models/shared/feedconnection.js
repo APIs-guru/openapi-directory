@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CountryCodeEnum } from "./countrycodeenum";
 import { CurrencyCodeEnum } from "./currencycodeenum";
 import { Error } from "./error";
@@ -41,43 +41,43 @@ var FeedConnection = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=accountId" }),
+        SpeakeasyMetadata({ data: "json, name=accountId" }),
         __metadata("design:type", String)
     ], FeedConnection.prototype, "accountId", void 0);
     __decorate([
-        Metadata({ data: "json, name=accountName" }),
+        SpeakeasyMetadata({ data: "json, name=accountName" }),
         __metadata("design:type", String)
     ], FeedConnection.prototype, "accountName", void 0);
     __decorate([
-        Metadata({ data: "json, name=accountNumber" }),
+        SpeakeasyMetadata({ data: "json, name=accountNumber" }),
         __metadata("design:type", String)
     ], FeedConnection.prototype, "accountNumber", void 0);
     __decorate([
-        Metadata({ data: "json, name=accountToken" }),
+        SpeakeasyMetadata({ data: "json, name=accountToken" }),
         __metadata("design:type", String)
     ], FeedConnection.prototype, "accountToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=accountType" }),
+        SpeakeasyMetadata({ data: "json, name=accountType" }),
         __metadata("design:type", Object)
     ], FeedConnection.prototype, "accountType", void 0);
     __decorate([
-        Metadata({ data: "json, name=country" }),
+        SpeakeasyMetadata({ data: "json, name=country" }),
         __metadata("design:type", String)
     ], FeedConnection.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "json, name=currency" }),
+        SpeakeasyMetadata({ data: "json, name=currency" }),
         __metadata("design:type", String)
     ], FeedConnection.prototype, "currency", void 0);
     __decorate([
-        Metadata({ data: "json, name=error" }),
+        SpeakeasyMetadata({ data: "json, name=error" }),
         __metadata("design:type", Error)
     ], FeedConnection.prototype, "error", void 0);
     __decorate([
-        Metadata({ data: "json, name=id" }),
+        SpeakeasyMetadata({ data: "json, name=id" }),
         __metadata("design:type", String)
     ], FeedConnection.prototype, "id", void 0);
     __decorate([
-        Metadata({ data: "json, name=status" }),
+        SpeakeasyMetadata({ data: "json, name=status" }),
         __metadata("design:type", String)
     ], FeedConnection.prototype, "status", void 0);
     return FeedConnection;

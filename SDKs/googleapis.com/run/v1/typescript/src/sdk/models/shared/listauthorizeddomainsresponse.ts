@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AuthorizedDomain } from "./authorizeddomain";
+
 
 
 // ListAuthorizedDomainsResponse
@@ -8,9 +8,9 @@ import { AuthorizedDomain } from "./authorizeddomain";
  * A list of Authorized Domains.
 **/
 export class ListAuthorizedDomainsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=domains", elemType: shared.AuthorizedDomain })
+  @SpeakeasyMetadata({ data: "json, name=domains", elemType: AuthorizedDomain })
   domains?: AuthorizedDomain[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

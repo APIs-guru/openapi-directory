@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class CloudidentityInboundSsoAssignmentsDeletePathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,14 +26,14 @@ class CloudidentityInboundSsoAssignmentsDeleteQueryParams:
 
 @dataclass
 class CloudidentityInboundSsoAssignmentsDeleteSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudidentityInboundSsoAssignmentsDeleteSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -43,14 +44,14 @@ class CloudidentityInboundSsoAssignmentsDeleteSecurity:
 
 @dataclass
 class CloudidentityInboundSsoAssignmentsDeleteRequest:
-    path_params: CloudidentityInboundSsoAssignmentsDeletePathParams = field(default=None)
-    query_params: CloudidentityInboundSsoAssignmentsDeleteQueryParams = field(default=None)
-    security: CloudidentityInboundSsoAssignmentsDeleteSecurity = field(default=None)
+    path_params: CloudidentityInboundSsoAssignmentsDeletePathParams = field()
+    query_params: CloudidentityInboundSsoAssignmentsDeleteQueryParams = field()
+    security: CloudidentityInboundSsoAssignmentsDeleteSecurity = field()
     
 
 @dataclass
 class CloudidentityInboundSsoAssignmentsDeleteResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     operation: Optional[shared.Operation] = field(default=None)
-    status_code: int = field(default=None)
     

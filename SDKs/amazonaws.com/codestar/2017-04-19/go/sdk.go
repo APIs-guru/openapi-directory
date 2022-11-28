@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://codestar.{region}.amazonaws.com",
 	"https://codestar.{region}.amazonaws.com",
 	"http://codestar.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/codestar/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AssociateTeamMember - Adds an IAM user to the team for an AWS CodeStar project.
 func (s *SDK) AssociateTeamMember(ctx context.Context, request operations.AssociateTeamMemberRequest) (*operations.AssociateTeamMemberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeStar_20170419.AssociateTeamMember"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) AssociateTeamMember(ctx context.Context, request operations.Associ
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -181,8 +208,9 @@ func (s *SDK) AssociateTeamMember(ctx context.Context, request operations.Associ
 	return res, nil
 }
 
+// CreateProject - Creates a project, including project resources. This action creates a project based on a submitted project request. A set of source code files and a toolchain template file can be included with the project request. If these are not provided, an empty project is created.
 func (s *SDK) CreateProject(ctx context.Context, request operations.CreateProjectRequest) (*operations.CreateProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeStar_20170419.CreateProject"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -202,7 +230,7 @@ func (s *SDK) CreateProject(ctx context.Context, request operations.CreateProjec
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -302,8 +330,9 @@ func (s *SDK) CreateProject(ctx context.Context, request operations.CreateProjec
 	return res, nil
 }
 
+// CreateUserProfile - Creates a profile for a user that includes user preferences, such as the display name and email address assocciated with the user, in AWS CodeStar. The user profile is not project-specific. Information in the user profile is displayed wherever the user's information appears to other users in AWS CodeStar.
 func (s *SDK) CreateUserProfile(ctx context.Context, request operations.CreateUserProfileRequest) (*operations.CreateUserProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeStar_20170419.CreateUserProfile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -323,7 +352,7 @@ func (s *SDK) CreateUserProfile(ctx context.Context, request operations.CreateUs
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -373,8 +402,9 @@ func (s *SDK) CreateUserProfile(ctx context.Context, request operations.CreateUs
 	return res, nil
 }
 
+// DeleteProject - Deletes a project, including project resources. Does not delete users associated with the project, but does delete the IAM roles that allowed access to the project.
 func (s *SDK) DeleteProject(ctx context.Context, request operations.DeleteProjectRequest) (*operations.DeleteProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeStar_20170419.DeleteProject"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -394,7 +424,7 @@ func (s *SDK) DeleteProject(ctx context.Context, request operations.DeleteProjec
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -454,8 +484,9 @@ func (s *SDK) DeleteProject(ctx context.Context, request operations.DeleteProjec
 	return res, nil
 }
 
+// DeleteUserProfile - Deletes a user profile in AWS CodeStar, including all personal preference data associated with that profile, such as display name and email address. It does not delete the history of that user, for example the history of commits made by that user.
 func (s *SDK) DeleteUserProfile(ctx context.Context, request operations.DeleteUserProfileRequest) (*operations.DeleteUserProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeStar_20170419.DeleteUserProfile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -475,7 +506,7 @@ func (s *SDK) DeleteUserProfile(ctx context.Context, request operations.DeleteUs
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -515,8 +546,9 @@ func (s *SDK) DeleteUserProfile(ctx context.Context, request operations.DeleteUs
 	return res, nil
 }
 
+// DescribeProject - Describes a project and its resources.
 func (s *SDK) DescribeProject(ctx context.Context, request operations.DescribeProjectRequest) (*operations.DescribeProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeStar_20170419.DescribeProject"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -536,7 +568,7 @@ func (s *SDK) DescribeProject(ctx context.Context, request operations.DescribePr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -616,8 +648,9 @@ func (s *SDK) DescribeProject(ctx context.Context, request operations.DescribePr
 	return res, nil
 }
 
+// DescribeUserProfile - Describes a user in AWS CodeStar and the user attributes across all projects.
 func (s *SDK) DescribeUserProfile(ctx context.Context, request operations.DescribeUserProfileRequest) (*operations.DescribeUserProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeStar_20170419.DescribeUserProfile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -637,7 +670,7 @@ func (s *SDK) DescribeUserProfile(ctx context.Context, request operations.Descri
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -687,8 +720,9 @@ func (s *SDK) DescribeUserProfile(ctx context.Context, request operations.Descri
 	return res, nil
 }
 
+// DisassociateTeamMember - Removes a user from a project. Removing a user from a project also removes the IAM policies from that user that allowed access to the project and its resources. Disassociating a team member does not remove that user's profile from AWS CodeStar. It does not remove the user from IAM.
 func (s *SDK) DisassociateTeamMember(ctx context.Context, request operations.DisassociateTeamMemberRequest) (*operations.DisassociateTeamMemberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeStar_20170419.DisassociateTeamMember"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -708,7 +742,7 @@ func (s *SDK) DisassociateTeamMember(ctx context.Context, request operations.Dis
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -778,8 +812,9 @@ func (s *SDK) DisassociateTeamMember(ctx context.Context, request operations.Dis
 	return res, nil
 }
 
+// ListProjects - Lists all projects in AWS CodeStar associated with your AWS account.
 func (s *SDK) ListProjects(ctx context.Context, request operations.ListProjectsRequest) (*operations.ListProjectsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeStar_20170419.ListProjects"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -799,7 +834,7 @@ func (s *SDK) ListProjects(ctx context.Context, request operations.ListProjectsR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -849,8 +884,9 @@ func (s *SDK) ListProjects(ctx context.Context, request operations.ListProjectsR
 	return res, nil
 }
 
+// ListResources - Lists resources associated with a project in AWS CodeStar.
 func (s *SDK) ListResources(ctx context.Context, request operations.ListResourcesRequest) (*operations.ListResourcesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeStar_20170419.ListResources"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -870,7 +906,7 @@ func (s *SDK) ListResources(ctx context.Context, request operations.ListResource
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -930,8 +966,9 @@ func (s *SDK) ListResources(ctx context.Context, request operations.ListResource
 	return res, nil
 }
 
+// ListTagsForProject - Gets the tags for a project.
 func (s *SDK) ListTagsForProject(ctx context.Context, request operations.ListTagsForProjectRequest) (*operations.ListTagsForProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeStar_20170419.ListTagsForProject"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -951,7 +988,7 @@ func (s *SDK) ListTagsForProject(ctx context.Context, request operations.ListTag
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1011,8 +1048,9 @@ func (s *SDK) ListTagsForProject(ctx context.Context, request operations.ListTag
 	return res, nil
 }
 
+// ListTeamMembers - Lists all team members associated with a project.
 func (s *SDK) ListTeamMembers(ctx context.Context, request operations.ListTeamMembersRequest) (*operations.ListTeamMembersResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeStar_20170419.ListTeamMembers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1032,7 +1070,7 @@ func (s *SDK) ListTeamMembers(ctx context.Context, request operations.ListTeamMe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1092,8 +1130,9 @@ func (s *SDK) ListTeamMembers(ctx context.Context, request operations.ListTeamMe
 	return res, nil
 }
 
+// ListUserProfiles - Lists all the user profiles configured for your AWS account in AWS CodeStar.
 func (s *SDK) ListUserProfiles(ctx context.Context, request operations.ListUserProfilesRequest) (*operations.ListUserProfilesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeStar_20170419.ListUserProfiles"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1113,7 +1152,7 @@ func (s *SDK) ListUserProfiles(ctx context.Context, request operations.ListUserP
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1163,8 +1202,9 @@ func (s *SDK) ListUserProfiles(ctx context.Context, request operations.ListUserP
 	return res, nil
 }
 
+// TagProject - Adds tags to a project.
 func (s *SDK) TagProject(ctx context.Context, request operations.TagProjectRequest) (*operations.TagProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeStar_20170419.TagProject"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1184,7 +1224,7 @@ func (s *SDK) TagProject(ctx context.Context, request operations.TagProjectReque
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1254,8 +1294,9 @@ func (s *SDK) TagProject(ctx context.Context, request operations.TagProjectReque
 	return res, nil
 }
 
+// UntagProject - Removes tags from a project.
 func (s *SDK) UntagProject(ctx context.Context, request operations.UntagProjectRequest) (*operations.UntagProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeStar_20170419.UntagProject"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1275,7 +1316,7 @@ func (s *SDK) UntagProject(ctx context.Context, request operations.UntagProjectR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1345,8 +1386,9 @@ func (s *SDK) UntagProject(ctx context.Context, request operations.UntagProjectR
 	return res, nil
 }
 
+// UpdateProject - Updates a project in AWS CodeStar.
 func (s *SDK) UpdateProject(ctx context.Context, request operations.UpdateProjectRequest) (*operations.UpdateProjectResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeStar_20170419.UpdateProject"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1366,7 +1408,7 @@ func (s *SDK) UpdateProject(ctx context.Context, request operations.UpdateProjec
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1416,8 +1458,9 @@ func (s *SDK) UpdateProject(ctx context.Context, request operations.UpdateProjec
 	return res, nil
 }
 
+// UpdateTeamMember - Updates a team member's attributes in an AWS CodeStar project. For example, you can change a team member's role in the project, or change whether they have remote access to project resources.
 func (s *SDK) UpdateTeamMember(ctx context.Context, request operations.UpdateTeamMemberRequest) (*operations.UpdateTeamMemberResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeStar_20170419.UpdateTeamMember"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1437,7 +1480,7 @@ func (s *SDK) UpdateTeamMember(ctx context.Context, request operations.UpdateTea
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1537,8 +1580,9 @@ func (s *SDK) UpdateTeamMember(ctx context.Context, request operations.UpdateTea
 	return res, nil
 }
 
+// UpdateUserProfile - Updates a user's profile in AWS CodeStar. The user profile is not project-specific. Information in the user profile is displayed wherever the user's information appears to other users in AWS CodeStar.
 func (s *SDK) UpdateUserProfile(ctx context.Context, request operations.UpdateUserProfileRequest) (*operations.UpdateUserProfileResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/#X-Amz-Target=CodeStar_20170419.UpdateUserProfile"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1558,7 +1602,7 @@ func (s *SDK) UpdateUserProfile(ctx context.Context, request operations.UpdateUs
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

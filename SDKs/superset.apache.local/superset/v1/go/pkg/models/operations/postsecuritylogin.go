@@ -14,10 +14,6 @@ type PostSecurityLoginRequestBody struct {
 	Username *string                                   `json:"username,omitempty"`
 }
 
-type PostSecurityLoginRequest struct {
-	Request PostSecurityLoginRequestBody `request:"mediaType=application/json"`
-}
-
 type PostSecurityLogin200ApplicationJSON struct {
 	AccessToken  *string `json:"access_token,omitempty"`
 	RefreshToken *string `json:"refresh_token,omitempty"`
@@ -33,6 +29,10 @@ type PostSecurityLogin401ApplicationJSON struct {
 
 type PostSecurityLogin500ApplicationJSON struct {
 	Message *string `json:"message,omitempty"`
+}
+
+type PostSecurityLoginRequest struct {
+	Request PostSecurityLoginRequestBody `request:"mediaType=application/json"`
 }
 
 type PostSecurityLoginResponse struct {

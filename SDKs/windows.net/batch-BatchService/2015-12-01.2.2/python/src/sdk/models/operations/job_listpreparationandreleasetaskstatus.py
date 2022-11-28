@@ -1,17 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,List,Optional
 
 
 @dataclass
 class JobListPreparationAndReleaseTaskStatusPathParams:
-    job_id: str = field(default=None, metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
+    job_id: str = field(metadata={'path_param': { 'field_name': 'jobId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class JobListPreparationAndReleaseTaskStatusQueryParams:
+    api_version: str = field(metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
     dollar_filter: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': '$filter', 'style': 'form', 'explode': True }})
     dollar_select: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': '$select', 'style': 'form', 'explode': True }})
-    api_version: str = field(default=None, metadata={'query_param': { 'field_name': 'api-version', 'style': 'form', 'explode': True }})
     maxresults: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'maxresults', 'style': 'form', 'explode': True }})
     timeout: Optional[int] = field(default=None, metadata={'query_param': { 'field_name': 'timeout', 'style': 'form', 'explode': True }})
     
@@ -25,16 +28,16 @@ class JobListPreparationAndReleaseTaskStatusHeaders:
 
 @dataclass
 class JobListPreparationAndReleaseTaskStatusRequest:
-    path_params: JobListPreparationAndReleaseTaskStatusPathParams = field(default=None)
-    query_params: JobListPreparationAndReleaseTaskStatusQueryParams = field(default=None)
-    headers: JobListPreparationAndReleaseTaskStatusHeaders = field(default=None)
+    headers: JobListPreparationAndReleaseTaskStatusHeaders = field()
+    path_params: JobListPreparationAndReleaseTaskStatusPathParams = field()
+    query_params: JobListPreparationAndReleaseTaskStatusQueryParams = field()
     
 
 @dataclass
 class JobListPreparationAndReleaseTaskStatusResponse:
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     batch_error: Optional[Any] = field(default=None)
     cloud_job_list_preparation_and_release_task_status_result: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
     

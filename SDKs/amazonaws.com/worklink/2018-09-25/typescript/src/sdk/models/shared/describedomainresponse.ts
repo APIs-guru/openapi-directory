@@ -1,20 +1,21 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DomainStatusEnum } from "./domainstatusenum";
 
 
+
 export class DescribeDomainResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AcmCertificateArn" })
+  @SpeakeasyMetadata({ data: "json, name=AcmCertificateArn" })
   acmCertificateArn?: string;
 
-  @Metadata({ data: "json, name=CreatedTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedTime" })
   createdTime?: Date;
 
-  @Metadata({ data: "json, name=DisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=DisplayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=DomainName" })
+  @SpeakeasyMetadata({ data: "json, name=DomainName" })
   domainName?: string;
 
-  @Metadata({ data: "json, name=DomainStatus" })
+  @SpeakeasyMetadata({ data: "json, name=DomainStatus" })
   domainStatus?: DomainStatusEnum;
 }

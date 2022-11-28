@@ -1,5 +1,7 @@
 package shared
 
+// ConfirmSignUpRequest
+// Represents the request to confirm registration of a user.
 type ConfirmSignUpRequest struct {
 	AnalyticsMetadata  *AnalyticsMetadataType `json:"AnalyticsMetadata,omitempty"`
 	ClientID           string                 `json:"ClientId"`

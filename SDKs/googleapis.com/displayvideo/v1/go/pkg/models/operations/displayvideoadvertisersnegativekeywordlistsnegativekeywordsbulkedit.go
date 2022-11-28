@@ -31,7 +31,7 @@ type DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsBulkEditSecurity
 type DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsBulkEditRequest struct {
 	PathParams  DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsBulkEditPathParams
 	QueryParams DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsBulkEditQueryParams
-	Request     *shared.BulkEditNegativeKeywordsRequest `request:"mediaType=application/json"`
+	Request     *shared.BulkEditNegativeKeywordsRequestInput `request:"mediaType=application/json"`
 	Security    DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsBulkEditSecurity
 }
 

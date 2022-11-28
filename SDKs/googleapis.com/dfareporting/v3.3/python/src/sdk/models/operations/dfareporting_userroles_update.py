@@ -1,11 +1,15 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DfareportingUserRolesUpdatePathParams:
-    profile_id: str = field(default=None, metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
+    profile_id: str = field(metadata={'path_param': { 'field_name': 'profileId', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +29,21 @@ class DfareportingUserRolesUpdateQueryParams:
 
 @dataclass
 class DfareportingUserRolesUpdateSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DfareportingUserRolesUpdateRequest:
-    path_params: DfareportingUserRolesUpdatePathParams = field(default=None)
-    query_params: DfareportingUserRolesUpdateQueryParams = field(default=None)
+    path_params: DfareportingUserRolesUpdatePathParams = field()
+    query_params: DfareportingUserRolesUpdateQueryParams = field()
+    security: DfareportingUserRolesUpdateSecurity = field()
     request: Optional[shared.UserRole] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DfareportingUserRolesUpdateSecurity = field(default=None)
     
 
 @dataclass
 class DfareportingUserRolesUpdateResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     user_role: Optional[shared.UserRole] = field(default=None)
     

@@ -1,7 +1,8 @@
 
 
+
 export enum UsageRecordResultStatusEnum {
-    Success = "Success"
-,    CustomerNotSubscribed = "CustomerNotSubscribed"
-,    DuplicateRecord = "DuplicateRecord"
+    Success = "Success",
+    CustomerNotSubscribed = "CustomerNotSubscribed",
+    DuplicateRecord = "DuplicateRecord"
 }

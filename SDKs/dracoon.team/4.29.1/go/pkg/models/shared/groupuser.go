@@ -1,5 +1,7 @@
 package shared
 
+// GroupUser
+// User information
 type GroupUser struct {
 	DisplayName string   `json:"displayName"`
 	Email       string   `json:"email"`

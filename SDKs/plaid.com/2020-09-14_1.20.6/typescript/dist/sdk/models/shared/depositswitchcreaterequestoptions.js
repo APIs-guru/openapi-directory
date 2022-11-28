@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DepositSwitchCreateRequestOptions
 /**
  * Options to configure the `/deposit_switch/create` request. If provided, cannot be `null`.
@@ -33,11 +33,11 @@ var DepositSwitchCreateRequestOptions = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=transaction_item_access_tokens" }),
+        SpeakeasyMetadata({ data: "json, name=transaction_item_access_tokens" }),
         __metadata("design:type", Array)
     ], DepositSwitchCreateRequestOptions.prototype, "transactionItemAccessTokens", void 0);
     __decorate([
-        Metadata({ data: "json, name=webhook" }),
+        SpeakeasyMetadata({ data: "json, name=webhook" }),
         __metadata("design:type", String)
     ], DepositSwitchCreateRequestOptions.prototype, "webhook", void 0);
     return DepositSwitchCreateRequestOptions;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsSnsTopicSubscription
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A wrapper type for the attributes of an Amazon SNS subscription.
 **/
 export class AwsSnsTopicSubscription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Endpoint" })
+  @SpeakeasyMetadata({ data: "json, name=Endpoint" })
   endpoint?: string;
 
-  @Metadata({ data: "json, name=Protocol" })
+  @SpeakeasyMetadata({ data: "json, name=Protocol" })
   protocol?: string;
 }

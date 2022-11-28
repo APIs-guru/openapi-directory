@@ -1,17 +1,19 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import onboardedstatus_2_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class PayeeDelta:
-    dba_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dbaName' }})
-    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayName' }})
-    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
-    onboarded_status: Optional[onboardedstatus_2_enum.OnboardedStatus2Enum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'onboardedStatus' }})
-    payee_country: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payeeCountry' }})
-    payee_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payeeId' }})
-    remote_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'remoteId' }})
+    payee_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('payeeId') }})
+    remote_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('remoteId') }})
+    dba_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('dbaName') }})
+    display_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('displayName') }})
+    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('email') }})
+    onboarded_status: Optional[OnboardedStatus2Enum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('onboardedStatus') }})
+    payee_country: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('payeeCountry') }})
     

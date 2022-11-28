@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PageAuthorImage
@@ -6,7 +7,7 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The creator's avatar.
 **/
 export class PageAuthorImage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
@@ -16,16 +17,16 @@ export class PageAuthorImage extends SpeakeasyBase {
  * The author of this Page.
 **/
 export class PageAuthor extends SpeakeasyBase {
-  @Metadata({ data: "json, name=displayName" })
+  @SpeakeasyMetadata({ data: "json, name=displayName" })
   displayName?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=image" })
+  @SpeakeasyMetadata({ data: "json, name=image" })
   image?: PageAuthorImage;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }
 
@@ -35,54 +36,54 @@ export class PageAuthor extends SpeakeasyBase {
  * Data about the blog containing this Page.
 **/
 export class PageBlog extends SpeakeasyBase {
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 }
 
 export enum PageStatusEnum {
-    Live = "LIVE"
-,    Draft = "DRAFT"
-,    SoftTrashed = "SOFT_TRASHED"
+    Live = "LIVE",
+    Draft = "DRAFT",
+    SoftTrashed = "SOFT_TRASHED"
 }
 
 
 export class Page extends SpeakeasyBase {
-  @Metadata({ data: "json, name=author" })
+  @SpeakeasyMetadata({ data: "json, name=author" })
   author?: PageAuthor;
 
-  @Metadata({ data: "json, name=blog" })
+  @SpeakeasyMetadata({ data: "json, name=blog" })
   blog?: PageBlog;
 
-  @Metadata({ data: "json, name=content" })
+  @SpeakeasyMetadata({ data: "json, name=content" })
   content?: string;
 
-  @Metadata({ data: "json, name=etag" })
+  @SpeakeasyMetadata({ data: "json, name=etag" })
   etag?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=kind" })
+  @SpeakeasyMetadata({ data: "json, name=kind" })
   kind?: string;
 
-  @Metadata({ data: "json, name=published" })
+  @SpeakeasyMetadata({ data: "json, name=published" })
   published?: string;
 
-  @Metadata({ data: "json, name=selfLink" })
+  @SpeakeasyMetadata({ data: "json, name=selfLink" })
   selfLink?: string;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: PageStatusEnum;
 
-  @Metadata({ data: "json, name=title" })
+  @SpeakeasyMetadata({ data: "json, name=title" })
   title?: string;
 
-  @Metadata({ data: "json, name=trashed" })
+  @SpeakeasyMetadata({ data: "json, name=trashed" })
   trashed?: string;
 
-  @Metadata({ data: "json, name=updated" })
+  @SpeakeasyMetadata({ data: "json, name=updated" })
   updated?: string;
 
-  @Metadata({ data: "json, name=url" })
+  @SpeakeasyMetadata({ data: "json, name=url" })
   url?: string;
 }

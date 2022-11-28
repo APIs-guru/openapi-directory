@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleFirebaseFcmDataV1beta1AndroidDeliveryData } from "./googlefirebasefcmdatav1beta1androiddeliverydata";
+
 
 
 // GoogleFirebaseFcmDataV1beta1ListAndroidDeliveryDataResponse
@@ -8,9 +8,9 @@ import { GoogleFirebaseFcmDataV1beta1AndroidDeliveryData } from "./googlefirebas
  * Response message for ListAndroidDeliveryData.
 **/
 export class GoogleFirebaseFcmDataV1beta1ListAndroidDeliveryDataResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=androidDeliveryData", elemType: shared.GoogleFirebaseFcmDataV1beta1AndroidDeliveryData })
+  @SpeakeasyMetadata({ data: "json, name=androidDeliveryData", elemType: GoogleFirebaseFcmDataV1beta1AndroidDeliveryData })
   androidDeliveryData?: GoogleFirebaseFcmDataV1beta1AndroidDeliveryData[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 }

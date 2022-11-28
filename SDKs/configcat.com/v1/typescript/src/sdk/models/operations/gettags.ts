@@ -1,29 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetTagsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=productId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=productId" })
   productId: string;
 }
 
 
 export class GetTagsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetTagsPathParams;
 }
 
 
 export class GetTagsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata({ elemType: shared.TagModelHaljson })
+  @SpeakeasyMetadata({ elemType: shared.TagModelHaljson })
   tagModelHaljsons?: shared.TagModelHaljson[];
 
-  @Metadata({ elemType: shared.TagModel })
+  @SpeakeasyMetadata({ elemType: shared.TagModel })
   tagModels?: shared.TagModel[];
 }

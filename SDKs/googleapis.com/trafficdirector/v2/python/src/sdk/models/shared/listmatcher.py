@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
-from . import valuematcher
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ListMatcher:
-    one_of: Optional[valuematcher.ValueMatcher] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'oneOf' }})
+    r"""ListMatcher
+    Specifies the way to match a list value.
+    """
+    
+    one_of: Optional[ValueMatcher] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('oneOf') }})
     

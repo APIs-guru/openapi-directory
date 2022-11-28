@@ -1,13 +1,20 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from dataclasses_json import dataclass_json
-from . import cellinput
-from . import filter
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class UpsertRowData:
-    batch_item_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'batchItemId' }})
-    cells_to_update: dict[str, cellinput.CellInput] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cellsToUpdate' }})
-    filter: filter.Filter = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filter' }})
+    r"""UpsertRowData
+     Data needed to upsert rows in a table as part of a single item in the BatchUpsertTableRows request. 
+    """
+    
+    batch_item_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('batchItemId') }})
+    cells_to_update: dict[str, CellInput] = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('cellsToUpdate') }})
+    filter: Filter = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('filter') }})
     

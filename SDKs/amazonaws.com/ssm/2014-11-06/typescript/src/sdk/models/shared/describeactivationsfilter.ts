@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DescribeActivationsFilterKeysEnum } from "./describeactivationsfilterkeysenum";
+
 
 
 // DescribeActivationsFilter
@@ -7,9 +8,9 @@ import { DescribeActivationsFilterKeysEnum } from "./describeactivationsfilterke
  * Filter for the DescribeActivation API.
 **/
 export class DescribeActivationsFilter extends SpeakeasyBase {
-  @Metadata({ data: "json, name=FilterKey" })
+  @SpeakeasyMetadata({ data: "json, name=FilterKey" })
   filterKey?: DescribeActivationsFilterKeysEnum;
 
-  @Metadata({ data: "json, name=FilterValues" })
+  @SpeakeasyMetadata({ data: "json, name=FilterValues" })
   filterValues?: string[];
 }

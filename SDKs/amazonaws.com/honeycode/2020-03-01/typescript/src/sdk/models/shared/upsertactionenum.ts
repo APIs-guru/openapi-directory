@@ -1,6 +1,7 @@
 
 
+
 export enum UpsertActionEnum {
-    Updated = "UPDATED"
-,    Appended = "APPENDED"
+    Updated = "UPDATED",
+    Appended = "APPENDED"
 }

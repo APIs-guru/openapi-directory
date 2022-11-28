@@ -1,5 +1,7 @@
 package shared
 
+// AuthorizedCertificate
+// An SSL certificate that a user has been authorized to administer. A user is authorized to administer any certificate that applies to one of their authorized domains.
 type AuthorizedCertificate struct {
 	CertificateRawData    *CertificateRawData `json:"certificateRawData,omitempty"`
 	DisplayName           *string             `json:"displayName,omitempty"`

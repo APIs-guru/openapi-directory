@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsElasticsearchDomainNodeToNodeEncryptionOptions
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Details about the configuration for node-to-node encryption.
 **/
 export class AwsElasticsearchDomainNodeToNodeEncryptionOptions extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 }

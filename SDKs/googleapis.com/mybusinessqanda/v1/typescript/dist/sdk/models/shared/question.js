@@ -22,9 +22,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Author } from "./author";
+import { Answer } from "./answer";
+// QuestionInput
+/**
+ * Represents a single question and some of its answers.
+**/
+var QuestionInput = /** @class */ (function (_super) {
+    __extends(QuestionInput, _super);
+    function QuestionInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=author" }),
+        __metadata("design:type", Author)
+    ], QuestionInput.prototype, "author", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], QuestionInput.prototype, "name", void 0);
+    __decorate([
+        SpeakeasyMetadata({ data: "json, name=text" }),
+        __metadata("design:type", String)
+    ], QuestionInput.prototype, "text", void 0);
+    return QuestionInput;
+}(SpeakeasyBase));
+export { QuestionInput };
 // Question
 /**
  * Represents a single question and some of its answers.
@@ -35,35 +59,35 @@ var Question = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=author" }),
+        SpeakeasyMetadata({ data: "json, name=author" }),
         __metadata("design:type", Author)
     ], Question.prototype, "author", void 0);
     __decorate([
-        Metadata({ data: "json, name=createTime" }),
+        SpeakeasyMetadata({ data: "json, name=createTime" }),
         __metadata("design:type", String)
     ], Question.prototype, "createTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], Question.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=text" }),
+        SpeakeasyMetadata({ data: "json, name=text" }),
         __metadata("design:type", String)
     ], Question.prototype, "text", void 0);
     __decorate([
-        Metadata({ data: "json, name=topAnswers", elemType: shared.Answer }),
+        SpeakeasyMetadata({ data: "json, name=topAnswers", elemType: Answer }),
         __metadata("design:type", Array)
     ], Question.prototype, "topAnswers", void 0);
     __decorate([
-        Metadata({ data: "json, name=totalAnswerCount" }),
+        SpeakeasyMetadata({ data: "json, name=totalAnswerCount" }),
         __metadata("design:type", Number)
     ], Question.prototype, "totalAnswerCount", void 0);
     __decorate([
-        Metadata({ data: "json, name=updateTime" }),
+        SpeakeasyMetadata({ data: "json, name=updateTime" }),
         __metadata("design:type", String)
     ], Question.prototype, "updateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=upvoteCount" }),
+        SpeakeasyMetadata({ data: "json, name=upvoteCount" }),
         __metadata("design:type", Number)
     ], Question.prototype, "upvoteCount", void 0);
     return Question;

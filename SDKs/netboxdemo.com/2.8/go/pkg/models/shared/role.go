@@ -1,5 +1,12 @@
 package shared
 
+type RoleInput struct {
+	Description *string `json:"description,omitempty"`
+	Name        string  `json:"name"`
+	Slug        string  `json:"slug"`
+	Weight      *int64  `json:"weight,omitempty"`
+}
+
 type Role struct {
 	Description *string `json:"description,omitempty"`
 	ID          *int64  `json:"id,omitempty"`

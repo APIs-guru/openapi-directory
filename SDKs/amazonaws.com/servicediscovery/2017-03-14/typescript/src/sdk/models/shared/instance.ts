@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // Instance
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A complex type that contains information about an instance that Cloud Map creates when you submit a <code>RegisterInstance</code> request.
 **/
 export class Instance extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Attributes" })
+  @SpeakeasyMetadata({ data: "json, name=Attributes" })
   attributes?: Map<string, string>;
 
-  @Metadata({ data: "json, name=CreatorRequestId" })
+  @SpeakeasyMetadata({ data: "json, name=CreatorRequestId" })
   creatorRequestId?: string;
 
-  @Metadata({ data: "json, name=Id" })
+  @SpeakeasyMetadata({ data: "json, name=Id" })
   id: string;
 }

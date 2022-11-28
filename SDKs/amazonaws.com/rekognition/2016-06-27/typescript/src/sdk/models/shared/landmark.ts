@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { LandmarkTypeEnum } from "./landmarktypeenum";
+
 
 
 // Landmark
@@ -7,12 +8,12 @@ import { LandmarkTypeEnum } from "./landmarktypeenum";
  * Indicates the location of the landmark on the face.
 **/
 export class Landmark extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: LandmarkTypeEnum;
 
-  @Metadata({ data: "json, name=X" })
+  @SpeakeasyMetadata({ data: "json, name=X" })
   x?: number;
 
-  @Metadata({ data: "json, name=Y" })
+  @SpeakeasyMetadata({ data: "json, name=Y" })
   y?: number;
 }

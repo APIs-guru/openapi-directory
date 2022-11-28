@@ -1,14 +1,18 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import batchpredictinputconfig
-from . import batchpredictoutputconfig
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class BatchPredictRequest:
-    input_config: Optional[batchpredictinputconfig.BatchPredictInputConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inputConfig' }})
-    output_config: Optional[batchpredictoutputconfig.BatchPredictOutputConfig] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outputConfig' }})
-    params: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'params' }})
+    r"""BatchPredictRequest
+    Request message for PredictionService.BatchPredict.
+    """
+    
+    input_config: Optional[BatchPredictInputConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('inputConfig') }})
+    output_config: Optional[BatchPredictOutputConfig] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('outputConfig') }})
+    params: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('params') }})
     

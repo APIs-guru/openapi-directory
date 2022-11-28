@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AnalyticsMetadataType } from "./analyticsmetadatatype";
 import { UserContextDataType } from "./usercontextdatatype";
+
 
 
 // ResendConfirmationCodeRequest
@@ -8,21 +9,21 @@ import { UserContextDataType } from "./usercontextdatatype";
  * Represents the request to resend the confirmation code.
 **/
 export class ResendConfirmationCodeRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AnalyticsMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=AnalyticsMetadata" })
   analyticsMetadata?: AnalyticsMetadataType;
 
-  @Metadata({ data: "json, name=ClientId" })
+  @SpeakeasyMetadata({ data: "json, name=ClientId" })
   clientId: string;
 
-  @Metadata({ data: "json, name=ClientMetadata" })
+  @SpeakeasyMetadata({ data: "json, name=ClientMetadata" })
   clientMetadata?: Map<string, string>;
 
-  @Metadata({ data: "json, name=SecretHash" })
+  @SpeakeasyMetadata({ data: "json, name=SecretHash" })
   secretHash?: string;
 
-  @Metadata({ data: "json, name=UserContextData" })
+  @SpeakeasyMetadata({ data: "json, name=UserContextData" })
   userContextData?: UserContextDataType;
 
-  @Metadata({ data: "json, name=Username" })
+  @SpeakeasyMetadata({ data: "json, name=Username" })
   username: string;
 }

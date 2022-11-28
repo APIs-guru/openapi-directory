@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var UpdateComputeEnvironmentResponse = /** @class */ (function (_super) {
     __extends(UpdateComputeEnvironmentResponse, _super);
     function UpdateComputeEnvironmentResponse() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=computeEnvironmentArn" }),
+        SpeakeasyMetadata({ data: "json, name=computeEnvironmentArn" }),
         __metadata("design:type", String)
     ], UpdateComputeEnvironmentResponse.prototype, "computeEnvironmentArn", void 0);
     __decorate([
-        Metadata({ data: "json, name=computeEnvironmentName" }),
+        SpeakeasyMetadata({ data: "json, name=computeEnvironmentName" }),
         __metadata("design:type", String)
     ], UpdateComputeEnvironmentResponse.prototype, "computeEnvironmentName", void 0);
     return UpdateComputeEnvironmentResponse;

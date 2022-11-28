@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AdBreak
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Ad break.
 **/
 export class AdBreak extends SpeakeasyBase {
-  @Metadata({ data: "json, name=startTimeOffset" })
+  @SpeakeasyMetadata({ data: "json, name=startTimeOffset" })
   startTimeOffset?: string;
 }

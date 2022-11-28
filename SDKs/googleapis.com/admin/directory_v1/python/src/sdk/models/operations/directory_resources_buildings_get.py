@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DirectoryResourcesBuildingsGetPathParams:
-    building_id: str = field(default=None, metadata={'path_param': { 'field_name': 'buildingId', 'style': 'simple', 'explode': False }})
-    customer: str = field(default=None, metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
+    building_id: str = field(metadata={'path_param': { 'field_name': 'buildingId', 'style': 'simple', 'explode': False }})
+    customer: str = field(metadata={'path_param': { 'field_name': 'customer', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -26,14 +27,14 @@ class DirectoryResourcesBuildingsGetQueryParams:
 
 @dataclass
 class DirectoryResourcesBuildingsGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DirectoryResourcesBuildingsGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
@@ -44,14 +45,14 @@ class DirectoryResourcesBuildingsGetSecurity:
 
 @dataclass
 class DirectoryResourcesBuildingsGetRequest:
-    path_params: DirectoryResourcesBuildingsGetPathParams = field(default=None)
-    query_params: DirectoryResourcesBuildingsGetQueryParams = field(default=None)
-    security: DirectoryResourcesBuildingsGetSecurity = field(default=None)
+    path_params: DirectoryResourcesBuildingsGetPathParams = field()
+    query_params: DirectoryResourcesBuildingsGetQueryParams = field()
+    security: DirectoryResourcesBuildingsGetSecurity = field()
     
 
 @dataclass
 class DirectoryResourcesBuildingsGetResponse:
+    content_type: str = field()
+    status_code: int = field()
     building: Optional[shared.Building] = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
     

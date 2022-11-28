@@ -1,71 +1,72 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class UpdateNetworkWirelessAlternateManagementInterfacePathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=networkId" })
   networkId: string;
 }
 
 
 export class UpdateNetworkWirelessAlternateManagementInterfaceRequestBodyAccessPoints extends SpeakeasyBase {
-  @Metadata({ data: "json, name=alternateManagementIp" })
+  @SpeakeasyMetadata({ data: "json, name=alternateManagementIp" })
   alternateManagementIp: string;
 
-  @Metadata({ data: "json, name=dns1" })
+  @SpeakeasyMetadata({ data: "json, name=dns1" })
   dns1?: string;
 
-  @Metadata({ data: "json, name=dns2" })
+  @SpeakeasyMetadata({ data: "json, name=dns2" })
   dns2?: string;
 
-  @Metadata({ data: "json, name=gateway" })
+  @SpeakeasyMetadata({ data: "json, name=gateway" })
   gateway?: string;
 
-  @Metadata({ data: "json, name=serial" })
+  @SpeakeasyMetadata({ data: "json, name=serial" })
   serial: string;
 
-  @Metadata({ data: "json, name=subnetMask" })
+  @SpeakeasyMetadata({ data: "json, name=subnetMask" })
   subnetMask?: string;
 }
 
 export enum UpdateNetworkWirelessAlternateManagementInterfaceRequestBodyProtocolsEnum {
-    Radius = "radius"
-,    Snmp = "snmp"
-,    Syslog = "syslog"
-,    Ldap = "ldap"
+    Radius = "radius",
+    Snmp = "snmp",
+    Syslog = "syslog",
+    Ldap = "ldap"
 }
 
 
 export class UpdateNetworkWirelessAlternateManagementInterfaceRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=accessPoints", elemType: operations.UpdateNetworkWirelessAlternateManagementInterfaceRequestBodyAccessPoints })
+  @SpeakeasyMetadata({ data: "json, name=accessPoints", elemType: UpdateNetworkWirelessAlternateManagementInterfaceRequestBodyAccessPoints })
   accessPoints?: UpdateNetworkWirelessAlternateManagementInterfaceRequestBodyAccessPoints[];
 
-  @Metadata({ data: "json, name=enabled" })
+  @SpeakeasyMetadata({ data: "json, name=enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=protocols" })
+  @SpeakeasyMetadata({ data: "json, name=protocols" })
   protocols?: UpdateNetworkWirelessAlternateManagementInterfaceRequestBodyProtocolsEnum[];
 
-  @Metadata({ data: "json, name=vlanId" })
+  @SpeakeasyMetadata({ data: "json, name=vlanId" })
   vlanId?: number;
 }
 
 
 export class UpdateNetworkWirelessAlternateManagementInterfaceRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: UpdateNetworkWirelessAlternateManagementInterfacePathParams;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request?: UpdateNetworkWirelessAlternateManagementInterfaceRequestBody;
 }
 
 
 export class UpdateNetworkWirelessAlternateManagementInterfaceResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateNetworkWirelessAlternateManagementInterface200ApplicationJsonObject?: Map<string, any>;
 }

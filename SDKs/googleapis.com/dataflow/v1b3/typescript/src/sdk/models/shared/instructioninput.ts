@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // InstructionInput
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An input of an instruction, as a reference to an output of a producer instruction.
 **/
 export class InstructionInput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=outputNum" })
+  @SpeakeasyMetadata({ data: "json, name=outputNum" })
   outputNum?: number;
 
-  @Metadata({ data: "json, name=producerInstructionIndex" })
+  @SpeakeasyMetadata({ data: "json, name=producerInstructionIndex" })
   producerInstructionIndex?: number;
 }

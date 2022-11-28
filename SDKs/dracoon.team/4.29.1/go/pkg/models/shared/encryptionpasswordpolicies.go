@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// EncryptionPasswordPolicies
+// Encryption password policies
 type EncryptionPasswordPolicies struct {
 	CharacterRules         *CharacterRules `json:"characterRules,omitempty"`
 	MinLength              *int32          `json:"minLength,omitempty"`

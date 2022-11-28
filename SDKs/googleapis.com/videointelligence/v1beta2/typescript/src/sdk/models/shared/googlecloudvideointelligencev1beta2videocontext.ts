@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GoogleCloudVideointelligenceV1beta2ExplicitContentDetectionConfig } from "./googlecloudvideointelligencev1beta2explicitcontentdetectionconfig";
 import { GoogleCloudVideointelligenceV1beta2FaceDetectionConfig } from "./googlecloudvideointelligencev1beta2facedetectionconfig";
 import { GoogleCloudVideointelligenceV1beta2LabelDetectionConfig } from "./googlecloudvideointelligencev1beta2labeldetectionconfig";
@@ -11,35 +10,36 @@ import { GoogleCloudVideointelligenceV1beta2SpeechTranscriptionConfig } from "./
 import { GoogleCloudVideointelligenceV1beta2TextDetectionConfig } from "./googlecloudvideointelligencev1beta2textdetectionconfig";
 
 
+
 // GoogleCloudVideointelligenceV1beta2VideoContext
 /** 
  * Video context and/or feature-specific parameters.
 **/
 export class GoogleCloudVideointelligenceV1beta2VideoContext extends SpeakeasyBase {
-  @Metadata({ data: "json, name=explicitContentDetectionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=explicitContentDetectionConfig" })
   explicitContentDetectionConfig?: GoogleCloudVideointelligenceV1beta2ExplicitContentDetectionConfig;
 
-  @Metadata({ data: "json, name=faceDetectionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=faceDetectionConfig" })
   faceDetectionConfig?: GoogleCloudVideointelligenceV1beta2FaceDetectionConfig;
 
-  @Metadata({ data: "json, name=labelDetectionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=labelDetectionConfig" })
   labelDetectionConfig?: GoogleCloudVideointelligenceV1beta2LabelDetectionConfig;
 
-  @Metadata({ data: "json, name=objectTrackingConfig" })
+  @SpeakeasyMetadata({ data: "json, name=objectTrackingConfig" })
   objectTrackingConfig?: GoogleCloudVideointelligenceV1beta2ObjectTrackingConfig;
 
-  @Metadata({ data: "json, name=personDetectionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=personDetectionConfig" })
   personDetectionConfig?: GoogleCloudVideointelligenceV1beta2PersonDetectionConfig;
 
-  @Metadata({ data: "json, name=segments", elemType: shared.GoogleCloudVideointelligenceV1beta2VideoSegment })
+  @SpeakeasyMetadata({ data: "json, name=segments", elemType: GoogleCloudVideointelligenceV1beta2VideoSegment })
   segments?: GoogleCloudVideointelligenceV1beta2VideoSegment[];
 
-  @Metadata({ data: "json, name=shotChangeDetectionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=shotChangeDetectionConfig" })
   shotChangeDetectionConfig?: GoogleCloudVideointelligenceV1beta2ShotChangeDetectionConfig;
 
-  @Metadata({ data: "json, name=speechTranscriptionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=speechTranscriptionConfig" })
   speechTranscriptionConfig?: GoogleCloudVideointelligenceV1beta2SpeechTranscriptionConfig;
 
-  @Metadata({ data: "json, name=textDetectionConfig" })
+  @SpeakeasyMetadata({ data: "json, name=textDetectionConfig" })
   textDetectionConfig?: GoogleCloudVideointelligenceV1beta2TextDetectionConfig;
 }

@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class PutUserFollowsWebchannelsWebchannelIDPathParams:
-    webchannel_id: int = field(default=None, metadata={'path_param': { 'field_name': 'webchannel_id', 'style': 'simple', 'explode': False }})
+    webchannel_id: int = field(metadata={'path_param': { 'field_name': 'webchannel_id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class PutUserFollowsWebchannelsWebchannelIDRequest:
-    path_params: PutUserFollowsWebchannelsWebchannelIDPathParams = field(default=None)
+    path_params: PutUserFollowsWebchannelsWebchannelIDPathParams = field()
     
 
 @dataclass
 class PutUserFollowsWebchannelsWebchannelIDResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     webchannel_follow: Optional[shared.WebchannelFollow] = field(default=None)
     

@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,List,Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -26,33 +31,33 @@ class CreateFileSystemRequestBodyThroughputModeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class CreateFileSystemRequestBody:
-    availability_zone_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AvailabilityZoneName' }})
-    backup: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Backup' }})
-    creation_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreationToken' }})
-    encrypted: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Encrypted' }})
-    kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'KmsKeyId' }})
-    performance_mode: Optional[CreateFileSystemRequestBodyPerformanceModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PerformanceMode' }})
-    provisioned_throughput_in_mibps: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProvisionedThroughputInMibps' }})
-    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tags' }})
-    throughput_mode: Optional[CreateFileSystemRequestBodyThroughputModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ThroughputMode' }})
+    creation_token: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('CreationToken') }})
+    availability_zone_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('AvailabilityZoneName') }})
+    backup: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Backup') }})
+    encrypted: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Encrypted') }})
+    kms_key_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('KmsKeyId') }})
+    performance_mode: Optional[CreateFileSystemRequestBodyPerformanceModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PerformanceMode') }})
+    provisioned_throughput_in_mibps: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ProvisionedThroughputInMibps') }})
+    tags: Optional[List[shared.Tag]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('Tags') }})
+    throughput_mode: Optional[CreateFileSystemRequestBodyThroughputModeEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('ThroughputMode') }})
     
 
 @dataclass
 class CreateFileSystemRequest:
-    headers: CreateFileSystemHeaders = field(default=None)
-    request: CreateFileSystemRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: CreateFileSystemHeaders = field()
+    request: CreateFileSystemRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class CreateFileSystemResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     file_system_already_exists: Optional[Any] = field(default=None)
     file_system_description: Optional[shared.FileSystemDescription] = field(default=None)
     file_system_limit_exceeded: Optional[Any] = field(default=None)
     insufficient_throughput_capacity: Optional[Any] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     throughput_limit_exceeded: Optional[Any] = field(default=None)
     unsupported_availability_zone: Optional[Any] = field(default=None)
     

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -43,13 +44,13 @@ class GetV3SearchImagesCreativeHeaders:
 
 @dataclass
 class GetV3SearchImagesCreativeRequest:
-    query_params: GetV3SearchImagesCreativeQueryParams = field(default=None)
-    headers: GetV3SearchImagesCreativeHeaders = field(default=None)
+    headers: GetV3SearchImagesCreativeHeaders = field()
+    query_params: GetV3SearchImagesCreativeQueryParams = field()
     
 
 @dataclass
 class GetV3SearchImagesCreativeResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     creative_image_search_results: Optional[shared.CreativeImageSearchResults] = field(default=None)
-    status_code: int = field(default=None)
     

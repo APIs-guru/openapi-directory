@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ErrorMessage } from "./errormessage";
+
 
 
 // OdataError
@@ -7,9 +8,9 @@ import { ErrorMessage } from "./errormessage";
  * Active Directory OData error information.
 **/
 export class OdataError extends SpeakeasyBase {
-  @Metadata({ data: "json, name=code" })
+  @SpeakeasyMetadata({ data: "json, name=code" })
   code?: string;
 
-  @Metadata({ data: "json, name=message" })
+  @SpeakeasyMetadata({ data: "json, name=message" })
   message?: ErrorMessage;
 }

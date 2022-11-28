@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DestinationBackup
 /**
  * Contains information about the backup that will be copied and created by the <a>CopyBackupToRegion</a> operation.
@@ -33,19 +33,19 @@ var DestinationBackup = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=CreateTimestamp" }),
+        SpeakeasyMetadata({ data: "json, name=CreateTimestamp" }),
         __metadata("design:type", Date)
     ], DestinationBackup.prototype, "createTimestamp", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceBackup" }),
+        SpeakeasyMetadata({ data: "json, name=SourceBackup" }),
         __metadata("design:type", String)
     ], DestinationBackup.prototype, "sourceBackup", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceCluster" }),
+        SpeakeasyMetadata({ data: "json, name=SourceCluster" }),
         __metadata("design:type", String)
     ], DestinationBackup.prototype, "sourceCluster", void 0);
     __decorate([
-        Metadata({ data: "json, name=SourceRegion" }),
+        SpeakeasyMetadata({ data: "json, name=SourceRegion" }),
         __metadata("design:type", String)
     ], DestinationBackup.prototype, "sourceRegion", void 0);
     return DestinationBackup;

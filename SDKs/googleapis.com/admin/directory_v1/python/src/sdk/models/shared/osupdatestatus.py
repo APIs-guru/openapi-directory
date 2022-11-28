@@ -1,6 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 class OsUpdateStatusStateEnum(str, Enum):
     UPDATE_STATE_UNSPECIFIED = "updateStateUnspecified"
@@ -12,10 +17,14 @@ class OsUpdateStatusStateEnum(str, Enum):
 @dataclass_json
 @dataclass
 class OsUpdateStatus:
-    reboot_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rebootTime' }})
-    state: Optional[OsUpdateStatusStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    target_kiosk_app_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetKioskAppVersion' }})
-    target_os_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetOsVersion' }})
-    update_check_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateCheckTime' }})
-    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updateTime' }})
+    r"""OsUpdateStatus
+    Contains information regarding the current OS update status.
+    """
+    
+    reboot_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('rebootTime') }})
+    state: Optional[OsUpdateStatusStateEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('state') }})
+    target_kiosk_app_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetKioskAppVersion') }})
+    target_os_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('targetOsVersion') }})
+    update_check_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateCheckTime') }})
+    update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('updateTime') }})
     

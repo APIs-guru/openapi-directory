@@ -1,20 +1,16 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { MatchContentType } from "../internal/utils/contenttype";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import FormData from "form-data";
 import * as operations from "./models/operations";
-import { ParamsSerializerOptions } from "axios";
-import { GetQueryParamSerializer } from "../internal/utils/queryparams";
-import { SerializeRequestBody } from "../internal/utils/requestbody";
-import FormData from 'form-data';
-import {GetHeadersFromRequest} from "../internal/utils/headers";
-import { CreateSecurityClient } from "../internal/utils/security";
-import * as utils from "../internal/utils/utils";
+import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
+
+
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://online.visualstudio.com",
-  "https://online.visualstudio.com",
+export const ServerList = [
+	"https://online.visualstudio.com",
+	"https://online.visualstudio.com",
 ] as const;
 
 export function WithServerURL(
@@ -25,13 +21,13 @@ export function WithServerURL(
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
-    sdk.serverURL = serverURL;
+    sdk._serverURL = serverURL;
   };
 }
 
 export function WithClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
-    sdk.defaultClient = client;
+    sdk._defaultClient = client;
   };
 }
 
@@ -40,40 +36,45 @@ export function WithSecurity(security: Security): OptsFunc {
     security = new Security(security);
   }
   return (sdk: SDK) => {
-    sdk.security = security;
+    sdk._security = security;
   };
 }
 
 
 export class SDK {
-  defaultClient?: AxiosInstance;
-  securityClient?: AxiosInstance;
-  security?: any;
-  serverURL: string;
+
+  public _defaultClient: AxiosInstance;
+  public _securityClient: AxiosInstance;
+  public _security?: Security;
+  public _serverURL: string;
+  private _language = "typescript";
+  private _sdkVersion = "0.0.1";
+  private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this.serverURL == "") {
-      this.serverURL = Servers[0];
+    if (this._serverURL == "") {
+      this._serverURL = ServerList[0];
     }
 
-    if (!this.defaultClient) {
-      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    if (!this._defaultClient) {
+      this._defaultClient = axios.create({ baseURL: this._serverURL });
     }
 
-    if (!this.securityClient) {
-      if (this.security) {
-        this.securityClient = CreateSecurityClient(
-          this.defaultClient,
-          this.security
+    if (!this._securityClient) {
+      if (this._security) {
+        this._securityClient = utils.CreateSecurityClient(
+          this._defaultClient,
+          this._security
         );
       } else {
-        this.securityClient = this.defaultClient;
+        this._securityClient = this._defaultClient;
       }
     }
+    
   }
   
-  DeleteApiV1EnvironmentsEnvironmentId(
+  deleteApiV1EnvironmentsEnvironmentId(
     req: operations.DeleteApiV1EnvironmentsEnvironmentIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteApiV1EnvironmentsEnvironmentIdResponse> {
@@ -81,58 +82,60 @@ export class SDK {
       req = new operations.DeleteApiV1EnvironmentsEnvironmentIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Environments/{environmentId}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteApiV1EnvironmentsEnvironmentIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeleteApiV1EnvironmentsEnvironmentIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -147,7 +150,7 @@ export class SDK {
   }
 
   
-  DeleteApiV1EnvironmentsEnvironmentIdPortsPort(
+  deleteApiV1EnvironmentsEnvironmentIdPortsPort(
     req: operations.DeleteApiV1EnvironmentsEnvironmentIdPortsPortRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteApiV1EnvironmentsEnvironmentIdPortsPortResponse> {
@@ -155,72 +158,74 @@ export class SDK {
       req = new operations.DeleteApiV1EnvironmentsEnvironmentIdPortsPortRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Environments/{environmentId}/ports/{port}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteApiV1EnvironmentsEnvironmentIdPortsPortResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.DeleteApiV1EnvironmentsEnvironmentIdPortsPortResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -235,7 +240,7 @@ export class SDK {
   }
 
   
-  DeleteApiV1GenevaActionsEnvironmentsEnvironmentId(
+  deleteApiV1GenevaActionsEnvironmentsEnvironmentId(
     req: operations.DeleteApiV1GenevaActionsEnvironmentsEnvironmentIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteApiV1GenevaActionsEnvironmentsEnvironmentIdResponse> {
@@ -243,11 +248,12 @@ export class SDK {
       req = new operations.DeleteApiV1GenevaActionsEnvironmentsEnvironmentIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/GenevaActions/Environments/{environmentId}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -256,25 +262,26 @@ export class SDK {
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteApiV1GenevaActionsEnvironmentsEnvironmentIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeleteApiV1GenevaActionsEnvironmentsEnvironmentIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -289,7 +296,7 @@ export class SDK {
   }
 
   
-  DeleteApiV1SecretsSecretId(
+  deleteApiV1SecretsSecretId(
     req: operations.DeleteApiV1SecretsSecretIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteApiV1SecretsSecretIdResponse> {
@@ -297,11 +304,12 @@ export class SDK {
       req = new operations.DeleteApiV1SecretsSecretIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Secrets/{secretId}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -310,39 +318,40 @@ export class SDK {
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteApiV1SecretsSecretIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.DeleteApiV1SecretsSecretIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -357,7 +366,7 @@ export class SDK {
   }
 
   
-  DeleteApiV1TenantTenantId(
+  deleteApiV1TenantTenantId(
     req: operations.DeleteApiV1TenantTenantIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteApiV1TenantTenantIdResponse> {
@@ -365,67 +374,69 @@ export class SDK {
       req = new operations.DeleteApiV1TenantTenantIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Tenant/{tenantId}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteApiV1TenantTenantIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.DeleteApiV1TenantTenantIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -435,7 +446,7 @@ export class SDK {
   }
 
   
-  DeleteApiV1UserSubscriptions(
+  deleteApiV1UserSubscriptions(
     req: operations.DeleteApiV1UserSubscriptionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteApiV1UserSubscriptionsResponse> {
@@ -443,11 +454,12 @@ export class SDK {
       req = new operations.DeleteApiV1UserSubscriptionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/UserSubscriptions";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -456,16 +468,17 @@ export class SDK {
     };
     
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteApiV1UserSubscriptionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.DeleteApiV1UserSubscriptionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -475,7 +488,7 @@ export class SDK {
   }
 
   
-  DeleteApiV1TenantTenantIdPoolGroupPoolGroupName(
+  deleteApiV1TenantTenantIdPoolGroupPoolGroupName(
     req: operations.DeleteApiV1TenantTenantIdPoolGroupPoolGroupNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteApiV1TenantTenantIdPoolGroupPoolGroupNameResponse> {
@@ -483,67 +496,69 @@ export class SDK {
       req = new operations.DeleteApiV1TenantTenantIdPoolGroupPoolGroupNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/tenant/{tenantId}/PoolGroup/{poolGroupName}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteApiV1TenantTenantIdPoolGroupPoolGroupNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.DeleteApiV1TenantTenantIdPoolGroupPoolGroupNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -553,7 +568,7 @@ export class SDK {
   }
 
   
-  DeleteApiV1TenantTenantIdPoolPoolName(
+  deleteApiV1TenantTenantIdPoolPoolName(
     req: operations.DeleteApiV1TenantTenantIdPoolPoolNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteApiV1TenantTenantIdPoolPoolNameResponse> {
@@ -561,67 +576,69 @@ export class SDK {
       req = new operations.DeleteApiV1TenantTenantIdPoolPoolNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/tenant/{tenantId}/Pool/{poolName}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteApiV1TenantTenantIdPoolPoolNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.DeleteApiV1TenantTenantIdPoolPoolNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -631,7 +648,7 @@ export class SDK {
   }
 
   
-  DeleteApiV1TenantTenantIdPoolPoolNameVmVmName(
+  deleteApiV1TenantTenantIdPoolPoolNameVmVmName(
     req: operations.DeleteApiV1TenantTenantIdPoolPoolNameVmVmNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteApiV1TenantTenantIdPoolPoolNameVmVmNameResponse> {
@@ -639,67 +656,69 @@ export class SDK {
       req = new operations.DeleteApiV1TenantTenantIdPoolPoolNameVmVmNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/tenant/{tenantId}/pool/{poolName}/Vm/{vmName}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .delete(url, {
+      .request({
+        url: url,
+        method: "delete",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteApiV1TenantTenantIdPoolPoolNameVmVmNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.DeleteApiV1TenantTenantIdPoolPoolNameVmVmNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -709,7 +728,7 @@ export class SDK {
   }
 
   
-  GetApiV1AgentsFamily(
+  getApiV1AgentsFamily(
     req: operations.GetApiV1AgentsFamilyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1AgentsFamilyResponse> {
@@ -717,45 +736,47 @@ export class SDK {
       req = new operations.GetApiV1AgentsFamilyRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Agents/{family}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1AgentsFamilyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1AgentsFamilyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.agentResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.agentResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -767,7 +788,7 @@ export class SDK {
   }
 
   
-  GetApiV1Environments(
+  getApiV1Environments(
     req: operations.GetApiV1EnvironmentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1EnvironmentsResponse> {
@@ -775,11 +796,12 @@ export class SDK {
       req = new operations.GetApiV1EnvironmentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/Environments";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -788,40 +810,41 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1EnvironmentsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1EnvironmentsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudEnvironmentResults = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.cloudEnvironmentResults = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -833,7 +856,7 @@ export class SDK {
   }
 
   
-  GetApiV1EnvironmentsEnvironmentIdArchive(
+  getApiV1EnvironmentsEnvironmentIdArchive(
     req: operations.GetApiV1EnvironmentsEnvironmentIdArchiveRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1EnvironmentsEnvironmentIdArchiveResponse> {
@@ -841,87 +864,89 @@ export class SDK {
       req = new operations.GetApiV1EnvironmentsEnvironmentIdArchiveRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Environments/{environmentId}/archive", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1EnvironmentsEnvironmentIdArchiveResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1EnvironmentsEnvironmentIdArchiveResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.unfilteredCloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.unfilteredCloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
             break;
@@ -933,7 +958,7 @@ export class SDK {
   }
 
   
-  GetApiV1EnvironmentsEnvironmentIdHeartbeattoken(
+  getApiV1EnvironmentsEnvironmentIdHeartbeattoken(
     req: operations.GetApiV1EnvironmentsEnvironmentIdHeartbeattokenRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1EnvironmentsEnvironmentIdHeartbeattokenResponse> {
@@ -941,59 +966,61 @@ export class SDK {
       req = new operations.GetApiV1EnvironmentsEnvironmentIdHeartbeattokenRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Environments/{environmentId}/heartbeattoken", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1EnvironmentsEnvironmentIdHeartbeattokenResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1EnvironmentsEnvironmentIdHeartbeattokenResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -1005,7 +1032,7 @@ export class SDK {
   }
 
   
-  GetApiV1EnvironmentsEnvironmentIdLogs(
+  getApiV1EnvironmentsEnvironmentIdLogs(
     req: operations.GetApiV1EnvironmentsEnvironmentIdLogsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1EnvironmentsEnvironmentIdLogsResponse> {
@@ -1013,41 +1040,43 @@ export class SDK {
       req = new operations.GetApiV1EnvironmentsEnvironmentIdLogsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Environments/{environmentId}/logs", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1EnvironmentsEnvironmentIdLogsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1EnvironmentsEnvironmentIdLogsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.getApiV1EnvironmentsEnvironmentIdLogs200ApplicationJsonString = JSON.stringify(httpRes?.data);
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.getApiV1EnvironmentsEnvironmentIdLogs200TextJsonString = JSON.stringify(httpRes?.data);
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 res.getApiV1EnvironmentsEnvironmentIdLogs200TextPlainString = JSON.stringify(httpRes?.data);
             }
             break;
-          case 204:
+          case httpRes?.status == 204:
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -1062,7 +1091,7 @@ export class SDK {
   }
 
   
-  GetApiV1EnvironmentsEnvironmentIdState(
+  getApiV1EnvironmentsEnvironmentIdState(
     req: operations.GetApiV1EnvironmentsEnvironmentIdStateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1EnvironmentsEnvironmentIdStateResponse> {
@@ -1070,30 +1099,32 @@ export class SDK {
       req = new operations.GetApiV1EnvironmentsEnvironmentIdStateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Environments/{environmentId}/state", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1EnvironmentsEnvironmentIdStateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetApiV1EnvironmentsEnvironmentIdStateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -1108,7 +1139,7 @@ export class SDK {
   }
 
   
-  GetApiV1EnvironmentsEnvironmentIdUpdates(
+  getApiV1EnvironmentsEnvironmentIdUpdates(
     req: operations.GetApiV1EnvironmentsEnvironmentIdUpdatesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1EnvironmentsEnvironmentIdUpdatesResponse> {
@@ -1116,59 +1147,61 @@ export class SDK {
       req = new operations.GetApiV1EnvironmentsEnvironmentIdUpdatesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Environments/{environmentId}/updates", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1EnvironmentsEnvironmentIdUpdatesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1EnvironmentsEnvironmentIdUpdatesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -1180,7 +1213,7 @@ export class SDK {
   }
 
   
-  GetApiV1GenevaActionsBillingEnvironmentId(
+  getApiV1GenevaActionsBillingEnvironmentId(
     req: operations.GetApiV1GenevaActionsBillingEnvironmentIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1GenevaActionsBillingEnvironmentIdResponse> {
@@ -1188,11 +1221,12 @@ export class SDK {
       req = new operations.GetApiV1GenevaActionsBillingEnvironmentIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/GenevaActions/Billing/{environmentId}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1201,40 +1235,41 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1GenevaActionsBillingEnvironmentIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1GenevaActionsBillingEnvironmentIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.billSummary = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.billSummary = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -1246,7 +1281,7 @@ export class SDK {
   }
 
   
-  GetApiV1GenevaActionsBillingEnvironmentIdStateChanges(
+  getApiV1GenevaActionsBillingEnvironmentIdStateChanges(
     req: operations.GetApiV1GenevaActionsBillingEnvironmentIdStateChangesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1GenevaActionsBillingEnvironmentIdStateChangesResponse> {
@@ -1254,45 +1289,47 @@ export class SDK {
       req = new operations.GetApiV1GenevaActionsBillingEnvironmentIdStateChangesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/GenevaActions/Billing/{environmentId}/state-changes", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1GenevaActionsBillingEnvironmentIdStateChangesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1GenevaActionsBillingEnvironmentIdStateChangesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.environmentStateChange = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.environmentStateChange = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -1304,7 +1341,7 @@ export class SDK {
   }
 
   
-  GetApiV1GenevaActionsConfigurationTargetKey(
+  getApiV1GenevaActionsConfigurationTargetKey(
     req: operations.GetApiV1GenevaActionsConfigurationTargetKeyRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1GenevaActionsConfigurationTargetKeyResponse> {
@@ -1312,45 +1349,47 @@ export class SDK {
       req = new operations.GetApiV1GenevaActionsConfigurationTargetKeyRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/GenevaActions/Configuration/{target}/{key}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1GenevaActionsConfigurationTargetKeyResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1GenevaActionsConfigurationTargetKeyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.systemConfigurationResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.systemConfigurationResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -1362,7 +1401,7 @@ export class SDK {
   }
 
   
-  GetApiV1GenevaActionsEnvironmentsEnvironmentId(
+  getApiV1GenevaActionsEnvironmentsEnvironmentId(
     req: operations.GetApiV1GenevaActionsEnvironmentsEnvironmentIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1GenevaActionsEnvironmentsEnvironmentIdResponse> {
@@ -1370,45 +1409,47 @@ export class SDK {
       req = new operations.GetApiV1GenevaActionsEnvironmentsEnvironmentIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/GenevaActions/Environments/{environmentId}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1GenevaActionsEnvironmentsEnvironmentIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1GenevaActionsEnvironmentsEnvironmentIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -1420,32 +1461,33 @@ export class SDK {
   }
 
   
-  GetApiV1Locations(
-    
+  getApiV1Locations(
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1LocationsResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/Locations";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1LocationsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1LocationsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.locationsResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.locationsResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -1460,7 +1502,7 @@ export class SDK {
   }
 
   
-  GetApiV1LocationsLocation(
+  getApiV1LocationsLocation(
     req: operations.GetApiV1LocationsLocationRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1LocationsLocationResponse> {
@@ -1468,11 +1510,12 @@ export class SDK {
       req = new operations.GetApiV1LocationsLocationRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Locations/{location}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1481,68 +1524,69 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1LocationsLocationResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1LocationsLocationResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.locationInfoResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.locationInfoResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -1554,49 +1598,50 @@ export class SDK {
   }
 
   
-  GetApiV1Plans(
-    
+  getApiV1Plans(
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1PlansResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/Plans";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1PlansResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1PlansResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.planResults = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.planResults = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -1608,7 +1653,7 @@ export class SDK {
   }
 
   
-  GetApiV1PlansSubscriptionIdResourceGroupNameResourceName(
+  getApiV1PlansSubscriptionIdResourceGroupNameResourceName(
     req: operations.GetApiV1PlansSubscriptionIdResourceGroupNameResourceNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1PlansSubscriptionIdResourceGroupNameResourceNameResponse> {
@@ -1616,59 +1661,61 @@ export class SDK {
       req = new operations.GetApiV1PlansSubscriptionIdResourceGroupNameResourceNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Plans/{subscriptionId}/{resourceGroupName}/{resourceName}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1PlansSubscriptionIdResourceGroupNameResourceNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1PlansSubscriptionIdResourceGroupNameResourceNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.planResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.planResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -1680,77 +1727,78 @@ export class SDK {
   }
 
   
-  GetApiV1Sas(
-    
+  getApiV1Sas(
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1SasResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/Sas";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1SasResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1SasResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.scopedSecretResultBodies = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.scopedSecretResultBodies = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -1762,7 +1810,7 @@ export class SDK {
   }
 
   
-  GetApiV1Secrets(
+  getApiV1Secrets(
     req: operations.GetApiV1SecretsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1SecretsResponse> {
@@ -1770,11 +1818,12 @@ export class SDK {
       req = new operations.GetApiV1SecretsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/Secrets";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1783,68 +1832,69 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1SecretsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1SecretsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.scopedSecretResultBodies = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.scopedSecretResultBodies = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -1856,7 +1906,7 @@ export class SDK {
   }
 
   
-  GetApiV1TenantTenantId(
+  getApiV1TenantTenantId(
     req: operations.GetApiV1TenantTenantIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1TenantTenantIdResponse> {
@@ -1864,79 +1914,81 @@ export class SDK {
       req = new operations.GetApiV1TenantTenantIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Tenant/{tenantId}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1TenantTenantIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1TenantTenantIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.tenantInfoResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.tenantInfoResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -1946,7 +1998,7 @@ export class SDK {
   }
 
   
-  GetApiV1PoolsDefault(
+  getApiV1PoolsDefault(
     req: operations.GetApiV1PoolsDefaultRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1PoolsDefaultResponse> {
@@ -1954,11 +2006,12 @@ export class SDK {
       req = new operations.GetApiV1PoolsDefaultRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/pools/default";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -1967,40 +2020,41 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1PoolsDefaultResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1PoolsDefaultResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.poolStatusResponseBodies = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.poolStatusResponseBodies = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -2012,7 +2066,7 @@ export class SDK {
   }
 
   
-  GetApiV1TenantTenantIdPoolGroupPoolGroupName(
+  getApiV1TenantTenantIdPoolGroupPoolGroupName(
     req: operations.GetApiV1TenantTenantIdPoolGroupPoolGroupNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1TenantTenantIdPoolGroupPoolGroupNameResponse> {
@@ -2020,79 +2074,81 @@ export class SDK {
       req = new operations.GetApiV1TenantTenantIdPoolGroupPoolGroupNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/tenant/{tenantId}/PoolGroup/{poolGroupName}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1TenantTenantIdPoolGroupPoolGroupNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1TenantTenantIdPoolGroupPoolGroupNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.poolGroupResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.poolGroupResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -2102,7 +2158,7 @@ export class SDK {
   }
 
   
-  GetApiV1TenantTenantIdPoolPoolName(
+  getApiV1TenantTenantIdPoolPoolName(
     req: operations.GetApiV1TenantTenantIdPoolPoolNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1TenantTenantIdPoolPoolNameResponse> {
@@ -2110,79 +2166,81 @@ export class SDK {
       req = new operations.GetApiV1TenantTenantIdPoolPoolNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/tenant/{tenantId}/Pool/{poolName}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1TenantTenantIdPoolPoolNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1TenantTenantIdPoolPoolNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.poolResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.poolResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -2192,7 +2250,7 @@ export class SDK {
   }
 
   
-  GetApiV1TenantTenantIdPoolPoolNameVm(
+  getApiV1TenantTenantIdPoolPoolNameVm(
     req: operations.GetApiV1TenantTenantIdPoolPoolNameVmRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1TenantTenantIdPoolPoolNameVmResponse> {
@@ -2200,79 +2258,81 @@ export class SDK {
       req = new operations.GetApiV1TenantTenantIdPoolPoolNameVmRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/tenant/{tenantId}/pool/{poolName}/Vm", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1TenantTenantIdPoolPoolNameVmResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1TenantTenantIdPoolPoolNameVmResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.vmResults = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.vmResults = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -2282,7 +2342,7 @@ export class SDK {
   }
 
   
-  GetApiV1TenantTenantIdPoolPoolNameVmVmName(
+  getApiV1TenantTenantIdPoolPoolNameVmVmName(
     req: operations.GetApiV1TenantTenantIdPoolPoolNameVmVmNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiV1TenantTenantIdPoolPoolNameVmVmNameResponse> {
@@ -2290,79 +2350,81 @@ export class SDK {
       req = new operations.GetApiV1TenantTenantIdPoolPoolNameVmVmNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/tenant/{tenantId}/pool/{poolName}/Vm/{vmName}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiV1TenantTenantIdPoolPoolNameVmVmNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetApiV1TenantTenantIdPoolPoolNameVmVmNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.vmResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.vmResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -2372,27 +2434,28 @@ export class SDK {
   }
 
   
-  GetHealth(
-    
+  getHealth(
     config?: AxiosRequestConfig
   ): Promise<operations.GetHealthResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/health";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetHealthResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetHealthResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
         }
 
@@ -2402,27 +2465,28 @@ export class SDK {
   }
 
   
-  GetWarmup(
-    
+  getWarmup(
     config?: AxiosRequestConfig
   ): Promise<operations.GetWarmupResponse> {
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/warmup";
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetWarmupResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.GetWarmupResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -2432,7 +2496,7 @@ export class SDK {
   }
 
   
-  GetEnvironmentRoute(
+  getEnvironmentRoute(
     req: operations.GetEnvironmentRouteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetEnvironmentRouteResponse> {
@@ -2440,11 +2504,12 @@ export class SDK {
       req = new operations.GetEnvironmentRouteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Environments/{environmentId}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -2453,68 +2518,69 @@ export class SDK {
     };
     
     return client
-      .get(url, {
+      .request({
+        url: url,
+        method: "get",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEnvironmentRouteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.GetEnvironmentRouteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -2526,7 +2592,7 @@ export class SDK {
   }
 
   
-  PatchApiV1EnvironmentsEnvironmentId(
+  patchApiV1EnvironmentsEnvironmentId(
     req: operations.PatchApiV1EnvironmentsEnvironmentIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PatchApiV1EnvironmentsEnvironmentIdResponse> {
@@ -2534,117 +2600,118 @@ export class SDK {
       req = new operations.PatchApiV1EnvironmentsEnvironmentIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Environments/{environmentId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PatchApiV1EnvironmentsEnvironmentIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PatchApiV1EnvironmentsEnvironmentIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 409:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 409:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -2656,7 +2723,7 @@ export class SDK {
   }
 
   
-  PatchApiV1EnvironmentsEnvironmentIdFolder(
+  patchApiV1EnvironmentsEnvironmentIdFolder(
     req: operations.PatchApiV1EnvironmentsEnvironmentIdFolderRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PatchApiV1EnvironmentsEnvironmentIdFolderResponse> {
@@ -2664,103 +2731,104 @@ export class SDK {
       req = new operations.PatchApiV1EnvironmentsEnvironmentIdFolderRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Environments/{environmentId}/folder", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PatchApiV1EnvironmentsEnvironmentIdFolderResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PatchApiV1EnvironmentsEnvironmentIdFolderResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -2772,7 +2840,7 @@ export class SDK {
   }
 
   
-  PatchApiV1EnvironmentsEnvironmentIdRestore(
+  patchApiV1EnvironmentsEnvironmentIdRestore(
     req: operations.PatchApiV1EnvironmentsEnvironmentIdRestoreRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PatchApiV1EnvironmentsEnvironmentIdRestoreResponse> {
@@ -2780,58 +2848,60 @@ export class SDK {
       req = new operations.PatchApiV1EnvironmentsEnvironmentIdRestoreRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Environments/{environmentId}/restore", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .patch(url, {
+      .request({
+        url: url,
+        method: "patch",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PatchApiV1EnvironmentsEnvironmentIdRestoreResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.PatchApiV1EnvironmentsEnvironmentIdRestoreResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -2846,7 +2916,7 @@ export class SDK {
   }
 
   
-  PatchApiV1TenantTenantIdPoolGroupPoolGroupName(
+  patchApiV1TenantTenantIdPoolGroupPoolGroupName(
     req: operations.PatchApiV1TenantTenantIdPoolGroupPoolGroupNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PatchApiV1TenantTenantIdPoolGroupPoolGroupNameResponse> {
@@ -2854,83 +2924,84 @@ export class SDK {
       req = new operations.PatchApiV1TenantTenantIdPoolGroupPoolGroupNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/tenant/{tenantId}/PoolGroup/{poolGroupName}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PatchApiV1TenantTenantIdPoolGroupPoolGroupNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PatchApiV1TenantTenantIdPoolGroupPoolGroupNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -2940,7 +3011,7 @@ export class SDK {
   }
 
   
-  PatchApiV1TenantTenantIdPoolPoolName(
+  patchApiV1TenantTenantIdPoolPoolName(
     req: operations.PatchApiV1TenantTenantIdPoolPoolNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PatchApiV1TenantTenantIdPoolPoolNameResponse> {
@@ -2948,95 +3019,96 @@ export class SDK {
       req = new operations.PatchApiV1TenantTenantIdPoolPoolNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/tenant/{tenantId}/Pool/{poolName}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .patch(url, body, {
+      .request({
+        url: url,
+        method: "patch",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PatchApiV1TenantTenantIdPoolPoolNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PatchApiV1TenantTenantIdPoolPoolNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.poolResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.poolResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -3046,7 +3118,7 @@ export class SDK {
   }
 
   
-  PostApiV1AgentTelemetry(
+  postApiV1AgentTelemetry(
     req: operations.PostApiV1AgentTelemetryRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1AgentTelemetryResponse> {
@@ -3054,46 +3126,47 @@ export class SDK {
       req = new operations.PostApiV1AgentTelemetryRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/AgentTelemetry";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1AgentTelemetryResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.PostApiV1AgentTelemetryResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -3108,7 +3181,7 @@ export class SDK {
   }
 
   
-  PostApiV1Environments(
+  postApiV1Environments(
     req: operations.PostApiV1EnvironmentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1EnvironmentsResponse> {
@@ -3116,22 +3189,22 @@ export class SDK {
       req = new operations.PostApiV1EnvironmentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/Environments";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3142,113 +3215,114 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1EnvironmentsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostApiV1EnvironmentsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 307:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 307:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
             break;
-          case 409:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 409:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
             break;
@@ -3260,7 +3334,7 @@ export class SDK {
   }
 
   
-  PostApiV1EnvironmentsEnvironmentIdArchive(
+  postApiV1EnvironmentsEnvironmentIdArchive(
     req: operations.PostApiV1EnvironmentsEnvironmentIdArchiveRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1EnvironmentsEnvironmentIdArchiveResponse> {
@@ -3268,87 +3342,89 @@ export class SDK {
       req = new operations.PostApiV1EnvironmentsEnvironmentIdArchiveRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Environments/{environmentId}/archive", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1EnvironmentsEnvironmentIdArchiveResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostApiV1EnvironmentsEnvironmentIdArchiveResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
             break;
@@ -3360,7 +3436,7 @@ export class SDK {
   }
 
   
-  PostApiV1EnvironmentsEnvironmentIdExport(
+  postApiV1EnvironmentsEnvironmentIdExport(
     req: operations.PostApiV1EnvironmentsEnvironmentIdExportRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1EnvironmentsEnvironmentIdExportResponse> {
@@ -3368,87 +3444,89 @@ export class SDK {
       req = new operations.PostApiV1EnvironmentsEnvironmentIdExportRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Environments/{environmentId}/export", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1EnvironmentsEnvironmentIdExportResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostApiV1EnvironmentsEnvironmentIdExportResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
             break;
@@ -3460,7 +3538,7 @@ export class SDK {
   }
 
   
-  PostApiV1EnvironmentsEnvironmentIdShutdown(
+  postApiV1EnvironmentsEnvironmentIdShutdown(
     req: operations.PostApiV1EnvironmentsEnvironmentIdShutdownRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1EnvironmentsEnvironmentIdShutdownResponse> {
@@ -3468,73 +3546,75 @@ export class SDK {
       req = new operations.PostApiV1EnvironmentsEnvironmentIdShutdownRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Environments/{environmentId}/shutdown", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1EnvironmentsEnvironmentIdShutdownResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostApiV1EnvironmentsEnvironmentIdShutdownResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -3546,7 +3626,7 @@ export class SDK {
   }
 
   
-  PostApiV1EnvironmentsEnvironmentIdStart(
+  postApiV1EnvironmentsEnvironmentIdStart(
     req: operations.PostApiV1EnvironmentsEnvironmentIdStartRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1EnvironmentsEnvironmentIdStartResponse> {
@@ -3554,11 +3634,12 @@ export class SDK {
       req = new operations.PostApiV1EnvironmentsEnvironmentIdStartRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Environments/{environmentId}/start", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -3567,82 +3648,83 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1EnvironmentsEnvironmentIdStartResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostApiV1EnvironmentsEnvironmentIdStartResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
             break;
@@ -3654,7 +3736,7 @@ export class SDK {
   }
 
   
-  PostApiV1GenevaActionsBillingEnvironmentIdStateChanges(
+  postApiV1GenevaActionsBillingEnvironmentIdStateChanges(
     req: operations.PostApiV1GenevaActionsBillingEnvironmentIdStateChangesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1GenevaActionsBillingEnvironmentIdStateChangesResponse> {
@@ -3662,63 +3744,63 @@ export class SDK {
       req = new operations.PostApiV1GenevaActionsBillingEnvironmentIdStateChangesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/GenevaActions/Billing/{environmentId}/state-changes", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1GenevaActionsBillingEnvironmentIdStateChangesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostApiV1GenevaActionsBillingEnvironmentIdStateChangesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.environmentStateChange = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.environmentStateChange = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -3730,7 +3812,7 @@ export class SDK {
   }
 
   
-  PostApiV1GenevaActionsConfigurationTarget(
+  postApiV1GenevaActionsConfigurationTarget(
     req: operations.PostApiV1GenevaActionsConfigurationTargetRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1GenevaActionsConfigurationTargetResponse> {
@@ -3738,63 +3820,63 @@ export class SDK {
       req = new operations.PostApiV1GenevaActionsConfigurationTargetRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/GenevaActions/Configuration/{target}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1GenevaActionsConfigurationTargetResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostApiV1GenevaActionsConfigurationTargetResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.systemConfigurationResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.systemConfigurationResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -3806,7 +3888,7 @@ export class SDK {
   }
 
   
-  PostApiV1GenevaActionsPrivacyRefreshProfileTelemetryProperties(
+  postApiV1GenevaActionsPrivacyRefreshProfileTelemetryProperties(
     req: operations.PostApiV1GenevaActionsPrivacyRefreshProfileTelemetryPropertiesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1GenevaActionsPrivacyRefreshProfileTelemetryPropertiesResponse> {
@@ -3814,63 +3896,63 @@ export class SDK {
       req = new operations.PostApiV1GenevaActionsPrivacyRefreshProfileTelemetryPropertiesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/GenevaActions/Privacy/refresh-profile-telemetry-properties";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1GenevaActionsPrivacyRefreshProfileTelemetryPropertiesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostApiV1GenevaActionsPrivacyRefreshProfileTelemetryPropertiesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.refreshProfileTelemetryPropertiesResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.refreshProfileTelemetryPropertiesResponse = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -3882,7 +3964,7 @@ export class SDK {
   }
 
   
-  PostApiV1HeartBeat(
+  postApiV1HeartBeat(
     req: operations.PostApiV1HeartBeatRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1HeartBeatResponse> {
@@ -3890,46 +3972,47 @@ export class SDK {
       req = new operations.PostApiV1HeartBeatRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/HeartBeat";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1HeartBeatResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 204:
+        const res: operations.PostApiV1HeartBeatResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 204:
             break;
-          case 422:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 422:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -3944,7 +4027,7 @@ export class SDK {
   }
 
   
-  PostApiV1PrebuildsPoolsPoolIdInstances(
+  postApiV1PrebuildsPoolsPoolIdInstances(
     req: operations.PostApiV1PrebuildsPoolsPoolIdInstancesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1PrebuildsPoolsPoolIdInstancesResponse> {
@@ -3952,60 +4035,61 @@ export class SDK {
       req = new operations.PostApiV1PrebuildsPoolsPoolIdInstancesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Prebuilds/pools/{poolId}/instances", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1PrebuildsPoolsPoolIdInstancesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.PostApiV1PrebuildsPoolsPoolIdInstancesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -4020,7 +4104,7 @@ export class SDK {
   }
 
   
-  PostApiV1PrebuildsTemplates(
+  postApiV1PrebuildsTemplates(
     req: operations.PostApiV1PrebuildsTemplatesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1PrebuildsTemplatesResponse> {
@@ -4028,75 +4112,76 @@ export class SDK {
       req = new operations.PostApiV1PrebuildsTemplatesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/Prebuilds/templates";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1PrebuildsTemplatesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostApiV1PrebuildsTemplatesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -4108,7 +4193,7 @@ export class SDK {
   }
 
   
-  PostApiV1Secrets(
+  postApiV1Secrets(
     req: operations.PostApiV1SecretsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1SecretsResponse> {
@@ -4116,22 +4201,22 @@ export class SDK {
       req = new operations.PostApiV1SecretsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/Secrets";
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4142,57 +4227,58 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1SecretsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PostApiV1SecretsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.scopedSecretResultBody = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.scopedSecretResultBody = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -4204,7 +4290,7 @@ export class SDK {
   }
 
   
-  PostApiV1SubscriptionsSubscriptionIdProvidersProviderNamespaceResourceTypeResourceReadBegin(
+  postApiV1SubscriptionsSubscriptionIdProvidersProviderNamespaceResourceTypeResourceReadBegin(
     req: operations.PostApiV1SubscriptionsSubscriptionIdProvidersProviderNamespaceResourceTypeResourceReadBeginRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1SubscriptionsSubscriptionIdProvidersProviderNamespaceResourceTypeResourceReadBeginResponse> {
@@ -4212,37 +4298,38 @@ export class SDK {
       req = new operations.PostApiV1SubscriptionsSubscriptionIdProvidersProviderNamespaceResourceTypeResourceReadBeginRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Subscriptions/{subscriptionId}/providers/{providerNamespace}/{resourceType}/resourceReadBegin", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1SubscriptionsSubscriptionIdProvidersProviderNamespaceResourceTypeResourceReadBeginResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiV1SubscriptionsSubscriptionIdProvidersProviderNamespaceResourceTypeResourceReadBeginResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -4252,7 +4339,7 @@ export class SDK {
   }
 
   
-  PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteAllCodespaces(
+  postApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteAllCodespaces(
     req: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteAllCodespacesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteAllCodespacesResponse> {
@@ -4260,11 +4347,12 @@ export class SDK {
       req = new operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteAllCodespacesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/deleteAllCodespaces", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4273,16 +4361,17 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteAllCodespacesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteAllCodespacesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -4292,7 +4381,7 @@ export class SDK {
   }
 
   
-  PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteAllEnvironments(
+  postApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteAllEnvironments(
     req: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteAllEnvironmentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteAllEnvironmentsResponse> {
@@ -4300,11 +4389,12 @@ export class SDK {
       req = new operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteAllEnvironmentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/deleteAllEnvironments", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4313,16 +4403,17 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteAllEnvironmentsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteAllEnvironmentsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -4332,7 +4423,7 @@ export class SDK {
   }
 
   
-  PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteDelegates(
+  postApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteDelegates(
     req: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteDelegatesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteDelegatesResponse> {
@@ -4340,21 +4431,23 @@ export class SDK {
       req = new operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteDelegatesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/deleteDelegates", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteDelegatesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameDeleteDelegatesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -4364,7 +4457,7 @@ export class SDK {
   }
 
   
-  PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadAllCodespaces(
+  postApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadAllCodespaces(
     req: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadAllCodespacesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadAllCodespacesResponse> {
@@ -4372,11 +4465,12 @@ export class SDK {
       req = new operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadAllCodespacesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/readAllCodespaces", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4385,16 +4479,17 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadAllCodespacesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadAllCodespacesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -4404,7 +4499,7 @@ export class SDK {
   }
 
   
-  PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadAllEnvironments(
+  postApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadAllEnvironments(
     req: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadAllEnvironmentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadAllEnvironmentsResponse> {
@@ -4412,11 +4507,12 @@ export class SDK {
       req = new operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadAllEnvironmentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/readAllEnvironments", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4425,16 +4521,17 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadAllEnvironmentsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadAllEnvironmentsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -4444,7 +4541,7 @@ export class SDK {
   }
 
   
-  PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadDelegates(
+  postApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadDelegates(
     req: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadDelegatesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadDelegatesResponse> {
@@ -4452,21 +4549,23 @@ export class SDK {
       req = new operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadDelegatesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/readDelegates", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadDelegatesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameReadDelegatesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -4476,7 +4575,7 @@ export class SDK {
   }
 
   
-  PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceCreationCompleted(
+  postApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceCreationCompleted(
     req: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceCreationCompletedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceCreationCompletedResponse> {
@@ -4484,21 +4583,23 @@ export class SDK {
       req = new operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceCreationCompletedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/resourceCreationCompleted", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceCreationCompletedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceCreationCompletedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -4508,7 +4609,7 @@ export class SDK {
   }
 
   
-  PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceCreationValidate(
+  postApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceCreationValidate(
     req: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceCreationValidateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceCreationValidateResponse> {
@@ -4516,37 +4617,38 @@ export class SDK {
       req = new operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceCreationValidateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/resourceCreationValidate", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceCreationValidateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceCreationValidateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -4556,7 +4658,7 @@ export class SDK {
   }
 
   
-  PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceDeletionValidate(
+  postApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceDeletionValidate(
     req: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceDeletionValidateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceDeletionValidateResponse> {
@@ -4564,21 +4666,23 @@ export class SDK {
       req = new operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceDeletionValidateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/resourceDeletionValidate", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceDeletionValidateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceDeletionValidateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -4588,7 +4692,7 @@ export class SDK {
   }
 
   
-  PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchCompleted(
+  postApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchCompleted(
     req: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchCompletedRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchCompletedResponse> {
@@ -4596,37 +4700,38 @@ export class SDK {
       req = new operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchCompletedRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/resourcePatchCompleted", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchCompletedResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchCompletedResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -4636,7 +4741,7 @@ export class SDK {
   }
 
   
-  PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchValidate(
+  postApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchValidate(
     req: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchValidateRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchValidateResponse> {
@@ -4644,37 +4749,38 @@ export class SDK {
       req = new operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchValidateRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/resourcePatchValidate", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchValidateResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchValidateResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -4684,7 +4790,7 @@ export class SDK {
   }
 
   
-  PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceReadBegin(
+  postApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceReadBegin(
     req: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceReadBeginRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceReadBeginResponse> {
@@ -4692,37 +4798,38 @@ export class SDK {
       req = new operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceReadBeginRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/resourceReadBegin", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceReadBeginResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourceReadBeginResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -4732,7 +4839,7 @@ export class SDK {
   }
 
   
-  PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteCodespaces(
+  postApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteCodespaces(
     req: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteCodespacesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteCodespacesResponse> {
@@ -4740,11 +4847,12 @@ export class SDK {
       req = new operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteCodespacesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/writeCodespaces", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4753,16 +4861,17 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteCodespacesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteCodespacesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -4772,7 +4881,7 @@ export class SDK {
   }
 
   
-  PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteDelegates(
+  postApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteDelegates(
     req: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteDelegatesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteDelegatesResponse> {
@@ -4780,37 +4889,38 @@ export class SDK {
       req = new operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteDelegatesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/writeDelegates", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteDelegatesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteDelegatesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -4820,7 +4930,7 @@ export class SDK {
   }
 
   
-  PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteEnvironments(
+  postApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteEnvironments(
     req: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteEnvironmentsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteEnvironmentsResponse> {
@@ -4828,11 +4938,12 @@ export class SDK {
       req = new operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteEnvironmentsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/writeEnvironments", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4841,16 +4952,17 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteEnvironmentsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameWriteEnvironmentsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -4860,7 +4972,7 @@ export class SDK {
   }
 
   
-  PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceReadBegin(
+  postApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceReadBegin(
     req: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceReadBeginRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceReadBeginResponse> {
@@ -4868,37 +4980,38 @@ export class SDK {
       req = new operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceReadBeginRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/resourceReadBegin", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceReadBeginResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceReadBeginResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -4908,7 +5021,7 @@ export class SDK {
   }
 
   
-  PostApiV1UserSubscriptions(
+  postApiV1UserSubscriptions(
     req: operations.PostApiV1UserSubscriptionsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1UserSubscriptionsResponse> {
@@ -4916,11 +5029,12 @@ export class SDK {
       req = new operations.PostApiV1UserSubscriptionsRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/api/v1/UserSubscriptions";
     
-    const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -4929,16 +5043,17 @@ export class SDK {
     };
     
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1UserSubscriptionsResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiV1UserSubscriptionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -4948,7 +5063,7 @@ export class SDK {
   }
 
   
-  PostApiV1TenantTenantIdPoolPoolNameVmVmNameStart(
+  postApiV1TenantTenantIdPoolPoolNameVmVmNameStart(
     req: operations.PostApiV1TenantTenantIdPoolPoolNameVmVmNameStartRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1TenantTenantIdPoolPoolNameVmVmNameStartResponse> {
@@ -4956,67 +5071,69 @@ export class SDK {
       req = new operations.PostApiV1TenantTenantIdPoolPoolNameVmVmNameStartRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/tenant/{tenantId}/pool/{poolName}/Vm/{vmName}/start", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1TenantTenantIdPoolPoolNameVmVmNameStartResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiV1TenantTenantIdPoolPoolNameVmVmNameStartResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -5026,7 +5143,7 @@ export class SDK {
   }
 
   
-  PostApiV1TenantTenantIdPoolPoolNameVmVmNameStop(
+  postApiV1TenantTenantIdPoolPoolNameVmVmNameStop(
     req: operations.PostApiV1TenantTenantIdPoolPoolNameVmVmNameStopRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PostApiV1TenantTenantIdPoolPoolNameVmVmNameStopResponse> {
@@ -5034,67 +5151,69 @@ export class SDK {
       req = new operations.PostApiV1TenantTenantIdPoolPoolNameVmVmNameStopRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/tenant/{tenantId}/pool/{poolName}/Vm/{vmName}/stop", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .post(url, {
+      .request({
+        url: url,
+        method: "post",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PostApiV1TenantTenantIdPoolPoolNameVmVmNameStopResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PostApiV1TenantTenantIdPoolPoolNameVmVmNameStopResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -5104,7 +5223,7 @@ export class SDK {
   }
 
   
-  PutApiV1EnvironmentsEnvironmentIdPortsPort(
+  putApiV1EnvironmentsEnvironmentIdPortsPort(
     req: operations.PutApiV1EnvironmentsEnvironmentIdPortsPortRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutApiV1EnvironmentsEnvironmentIdPortsPortResponse> {
@@ -5112,88 +5231,89 @@ export class SDK {
       req = new operations.PutApiV1EnvironmentsEnvironmentIdPortsPortRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Environments/{environmentId}/ports/{port}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutApiV1EnvironmentsEnvironmentIdPortsPortResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PutApiV1EnvironmentsEnvironmentIdPortsPortResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 503:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 503:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.messageCodes = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -5208,7 +5328,7 @@ export class SDK {
   }
 
   
-  PutApiV1GenevaActionsEnvironmentsEnvironmentIdArchive(
+  putApiV1GenevaActionsEnvironmentsEnvironmentIdArchive(
     req: operations.PutApiV1GenevaActionsEnvironmentsEnvironmentIdArchiveRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutApiV1GenevaActionsEnvironmentsEnvironmentIdArchiveResponse> {
@@ -5216,45 +5336,47 @@ export class SDK {
       req = new operations.PutApiV1GenevaActionsEnvironmentsEnvironmentIdArchiveRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/GenevaActions/Environments/{environmentId}/archive", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .put(url, {
+      .request({
+        url: url,
+        method: "put",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutApiV1GenevaActionsEnvironmentsEnvironmentIdArchiveResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PutApiV1GenevaActionsEnvironmentsEnvironmentIdArchiveResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -5266,7 +5388,7 @@ export class SDK {
   }
 
   
-  PutApiV1GenevaActionsEnvironmentsEnvironmentIdShutdown(
+  putApiV1GenevaActionsEnvironmentsEnvironmentIdShutdown(
     req: operations.PutApiV1GenevaActionsEnvironmentsEnvironmentIdShutdownRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutApiV1GenevaActionsEnvironmentsEnvironmentIdShutdownResponse> {
@@ -5274,45 +5396,47 @@ export class SDK {
       req = new operations.PutApiV1GenevaActionsEnvironmentsEnvironmentIdShutdownRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/GenevaActions/Environments/{environmentId}/shutdown", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .put(url, {
+      .request({
+        url: url,
+        method: "put",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutApiV1GenevaActionsEnvironmentsEnvironmentIdShutdownResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PutApiV1GenevaActionsEnvironmentsEnvironmentIdShutdownResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -5324,7 +5448,7 @@ export class SDK {
   }
 
   
-  PutApiV1PrebuildsPoolsPoolIdInstances(
+  putApiV1PrebuildsPoolsPoolIdInstances(
     req: operations.PutApiV1PrebuildsPoolsPoolIdInstancesRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutApiV1PrebuildsPoolsPoolIdInstancesResponse> {
@@ -5332,60 +5456,61 @@ export class SDK {
       req = new operations.PutApiV1PrebuildsPoolsPoolIdInstancesRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Prebuilds/pools/{poolId}/instances", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutApiV1PrebuildsPoolsPoolIdInstancesResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 201:
+        const res: operations.PutApiV1PrebuildsPoolsPoolIdInstancesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 201:
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -5400,7 +5525,7 @@ export class SDK {
   }
 
   
-  PutApiV1SecretsSecretId(
+  putApiV1SecretsSecretId(
     req: operations.PutApiV1SecretsSecretIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutApiV1SecretsSecretIdResponse> {
@@ -5408,22 +5533,22 @@ export class SDK {
       req = new operations.PutApiV1SecretsSecretIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Secrets/{secretId}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
+    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -5434,57 +5559,58 @@ export class SDK {
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...requestConfig,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutApiV1SecretsSecretIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PutApiV1SecretsSecretIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.scopedSecretResultBody = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.scopedSecretResultBody = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
@@ -5496,7 +5622,7 @@ export class SDK {
   }
 
   
-  PutApiV1SubscriptionsSubscriptionIdProvidersProviderNamespaceResourceTypeSubscriptionLifeCycleNotification(
+  putApiV1SubscriptionsSubscriptionIdProvidersProviderNamespaceResourceTypeSubscriptionLifeCycleNotification(
     req: operations.PutApiV1SubscriptionsSubscriptionIdProvidersProviderNamespaceResourceTypeSubscriptionLifeCycleNotificationRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutApiV1SubscriptionsSubscriptionIdProvidersProviderNamespaceResourceTypeSubscriptionLifeCycleNotificationResponse> {
@@ -5504,37 +5630,38 @@ export class SDK {
       req = new operations.PutApiV1SubscriptionsSubscriptionIdProvidersProviderNamespaceResourceTypeSubscriptionLifeCycleNotificationRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Subscriptions/{subscriptionId}/providers/{providerNamespace}/{resourceType}/SubscriptionLifeCycleNotification", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutApiV1SubscriptionsSubscriptionIdProvidersProviderNamespaceResourceTypeSubscriptionLifeCycleNotificationResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PutApiV1SubscriptionsSubscriptionIdProvidersProviderNamespaceResourceTypeSubscriptionLifeCycleNotificationResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -5544,7 +5671,7 @@ export class SDK {
   }
 
   
-  PutApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceName(
+  putApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceName(
     req: operations.PutApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResponse> {
@@ -5552,37 +5679,38 @@ export class SDK {
       req = new operations.PutApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...utils.GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PutApiV1SubscriptionsSubscriptionIdResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
         }
 
@@ -5592,7 +5720,7 @@ export class SDK {
   }
 
   
-  PutApiV1TenantTenantId(
+  putApiV1TenantTenantId(
     req: operations.PutApiV1TenantTenantIdRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutApiV1TenantTenantIdResponse> {
@@ -5600,53 +5728,55 @@ export class SDK {
       req = new operations.PutApiV1TenantTenantIdRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Tenant/{tenantId}", req.pathParams);
     
-    const client: AxiosInstance = this.securityClient!;
+    const client: AxiosInstance = this._securityClient!;
+    
     return client
-      .put(url, {
+      .request({
+        url: url,
+        method: "put",
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutApiV1TenantTenantIdResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PutApiV1TenantTenantIdResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -5656,7 +5786,7 @@ export class SDK {
   }
 
   
-  PutApiV1TenantTenantIdPoolGroupPoolGroupName(
+  putApiV1TenantTenantIdPoolGroupPoolGroupName(
     req: operations.PutApiV1TenantTenantIdPoolGroupPoolGroupNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutApiV1TenantTenantIdPoolGroupPoolGroupNameResponse> {
@@ -5664,69 +5794,70 @@ export class SDK {
       req = new operations.PutApiV1TenantTenantIdPoolGroupPoolGroupNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/tenant/{tenantId}/PoolGroup/{poolGroupName}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutApiV1TenantTenantIdPoolGroupPoolGroupNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
+        const res: operations.PutApiV1TenantTenantIdPoolGroupPoolGroupNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
             break;
-          case 400:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -5736,7 +5867,7 @@ export class SDK {
   }
 
   
-  PutApiV1TenantTenantIdPoolPoolName(
+  putApiV1TenantTenantIdPoolPoolName(
     req: operations.PutApiV1TenantTenantIdPoolPoolNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutApiV1TenantTenantIdPoolPoolNameResponse> {
@@ -5744,95 +5875,96 @@ export class SDK {
       req = new operations.PutApiV1TenantTenantIdPoolPoolNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/tenant/{tenantId}/Pool/{poolName}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutApiV1TenantTenantIdPoolPoolNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PutApiV1TenantTenantIdPoolPoolNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.poolResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.poolResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 202:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 202:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.poolResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.poolResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -5842,7 +5974,7 @@ export class SDK {
   }
 
   
-  PutApiV1TenantTenantIdPoolPoolNameVmVmName(
+  putApiV1TenantTenantIdPoolPoolNameVmVmName(
     req: operations.PutApiV1TenantTenantIdPoolPoolNameVmVmNameRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.PutApiV1TenantTenantIdPoolPoolNameVmVmNameResponse> {
@@ -5850,95 +5982,96 @@ export class SDK {
       req = new operations.PutApiV1TenantTenantIdPoolPoolNameVmVmNameRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/tenant/{tenantId}/pool/{poolName}/Vm/{vmName}", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .put(url, body, {
+      .request({
+        url: url,
+        method: "put",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.PutApiV1TenantTenantIdPoolPoolNameVmVmNameResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.PutApiV1TenantTenantIdPoolPoolNameVmVmNameResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.vmResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.vmResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 202:
-            if (MatchContentType(contentType, `application/json`)) {
+          case httpRes?.status == 202:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.vmResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.vmResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 400:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 400:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 500:
+          case httpRes?.status == 500:
             break;
-          case 503:
+          case httpRes?.status == 503:
             break;
         }
 
@@ -5948,7 +6081,7 @@ export class SDK {
   }
 
   
-  UpdateEnvironmentRoute(
+  updateEnvironmentRoute(
     req: operations.UpdateEnvironmentRouteRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpdateEnvironmentRouteResponse> {
@@ -5956,89 +6089,90 @@ export class SDK {
       req = new operations.UpdateEnvironmentRouteRequest(req);
     }
     
-    let baseURL: string = this.serverURL;
+    const baseURL: string = this._serverURL;
     const url: string = utils.GenerateURL(baseURL, "/api/v1/Environments/{environmentId}/_callback", req.pathParams);
-    
+
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
-    
+    const client: AxiosInstance = this._securityClient!;
+    const headers = {...reqBodyHeaders, ...config?.headers};
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = {...reqBody};
-    
     return client
-      .post(url, body, {
+      .request({
+        url: url,
+        method: "post",
         headers: headers,
+        data: body, 
         ...config,
-      })
-      .then((httpRes: AxiosResponse) => {
+      }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpdateEnvironmentRouteResponse = {statusCode: httpRes.status, contentType: contentType};
-        switch (httpRes?.status) {
-          case 200:
-            if (MatchContentType(contentType, `application/json`)) {
+        const res: operations.UpdateEnvironmentRouteResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.cloudEnvironmentResult = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/plain`)) {
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
             break;
-          case 401:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 401:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 403:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 403:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;
-          case 404:
-            if (MatchContentType(contentType, `text/plain`)) {
+          case httpRes?.status == 404:
+            if (utils.MatchContentType(contentType, `text/plain`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
                 res.body = out;
             }
-            if (MatchContentType(contentType, `application/json`)) {
+            if (utils.MatchContentType(contentType, `application/json`)) {
                 res.problemDetails = httpRes?.data;
             }
-            if (MatchContentType(contentType, `text/json`)) {
+            if (utils.MatchContentType(contentType, `text/json`)) {
                 res.problemDetails = httpRes?.data;
             }
             break;

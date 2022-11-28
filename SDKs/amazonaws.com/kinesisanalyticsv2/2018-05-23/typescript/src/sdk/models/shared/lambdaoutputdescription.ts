@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // LambdaOutputDescription
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * For a SQL-based Kinesis Data Analytics application's output, describes the AWS Lambda function that is configured as its destination. 
 **/
 export class LambdaOutputDescription extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ResourceARN" })
+  @SpeakeasyMetadata({ data: "json, name=ResourceARN" })
   resourceArn: string;
 
-  @Metadata({ data: "json, name=RoleARN" })
+  @SpeakeasyMetadata({ data: "json, name=RoleARN" })
   roleArn?: string;
 }

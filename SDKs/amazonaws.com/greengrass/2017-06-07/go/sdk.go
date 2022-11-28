@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var Servers = []string{
+var ServerList = []string{
 	"http://greengrass.{region}.amazonaws.com",
 	"https://greengrass.{region}.amazonaws.com",
 	"http://greengrass.{region}.amazonaws.com.cn",
@@ -21,10 +21,15 @@ type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
+// SDK Documentation: https://docs.aws.amazon.com/greengrass/ - Amazon Web Services documentation
 type SDK struct {
-	defaultClient  HTTPClient
-	securityClient HTTPClient
-	serverURL      string
+	_defaultClient  HTTPClient
+	_securityClient HTTPClient
+	_security       *shared.Security
+	_serverURL      string
+	_language       string
+	_sdkVersion     string
+	_genVersion     string
 }
 
 type SDKOption func(*SDK)
@@ -35,33 +40,55 @@ func WithServerURL(serverURL string, params map[string]string) SDKOption {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
 
-		sdk.serverURL = serverURL
+		sdk._serverURL = serverURL
+	}
+}
+
+func WithClient(client HTTPClient) SDKOption {
+	return func(sdk *SDK) {
+		sdk._defaultClient = client
 	}
 }
 
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *SDK) {
-		sdk.securityClient = utils.CreateSecurityClient(security)
+		sdk._security = &security
 	}
 }
 
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		defaultClient:  http.DefaultClient,
-		securityClient: http.DefaultClient,
+		_language:   "go",
+		_sdkVersion: "",
+		_genVersion: "internal",
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
-	if sdk.serverURL == "" {
-		sdk.serverURL = Servers[0]
+
+	if sdk._defaultClient == nil {
+		sdk._defaultClient = http.DefaultClient
+	}
+	if sdk._securityClient == nil {
+
+		if sdk._security != nil {
+			sdk._securityClient = utils.ConfigureSecurityClient(sdk._defaultClient, sdk._security)
+		} else {
+			sdk._securityClient = sdk._defaultClient
+		}
+
+	}
+
+	if sdk._serverURL == "" {
+		sdk._serverURL = ServerList[0]
 	}
 
 	return sdk
 }
 
+// AssociateRoleToGroup - Associates a role with a group. Your Greengrass core will use the role to access AWS cloud services. The role's permissions should allow Greengrass core Lambda functions to perform actions against the cloud.
 func (s *SDK) AssociateRoleToGroup(ctx context.Context, request operations.AssociateRoleToGroupRequest) (*operations.AssociateRoleToGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/groups/{GroupId}/role", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -81,7 +108,7 @@ func (s *SDK) AssociateRoleToGroup(ctx context.Context, request operations.Assoc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -131,8 +158,9 @@ func (s *SDK) AssociateRoleToGroup(ctx context.Context, request operations.Assoc
 	return res, nil
 }
 
+// AssociateServiceRoleToAccount - Associates a role with your account. AWS IoT Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ”AWSGreengrassResourceAccessRolePolicy”.
 func (s *SDK) AssociateServiceRoleToAccount(ctx context.Context, request operations.AssociateServiceRoleToAccountRequest) (*operations.AssociateServiceRoleToAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/servicerole"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -152,7 +180,7 @@ func (s *SDK) AssociateServiceRoleToAccount(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -202,8 +230,9 @@ func (s *SDK) AssociateServiceRoleToAccount(ctx context.Context, request operati
 	return res, nil
 }
 
+// CreateConnectorDefinition - Creates a connector definition. You may provide the initial version of the connector definition now or use ”CreateConnectorDefinitionVersion” at a later time.
 func (s *SDK) CreateConnectorDefinition(ctx context.Context, request operations.CreateConnectorDefinitionRequest) (*operations.CreateConnectorDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/definition/connectors"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -223,7 +252,7 @@ func (s *SDK) CreateConnectorDefinition(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -263,8 +292,9 @@ func (s *SDK) CreateConnectorDefinition(ctx context.Context, request operations.
 	return res, nil
 }
 
+// CreateConnectorDefinitionVersion - Creates a version of a connector definition which has already been defined.
 func (s *SDK) CreateConnectorDefinitionVersion(ctx context.Context, request operations.CreateConnectorDefinitionVersionRequest) (*operations.CreateConnectorDefinitionVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/connectors/{ConnectorDefinitionId}/versions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -284,7 +314,7 @@ func (s *SDK) CreateConnectorDefinitionVersion(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -324,8 +354,9 @@ func (s *SDK) CreateConnectorDefinitionVersion(ctx context.Context, request oper
 	return res, nil
 }
 
+// CreateCoreDefinition - Creates a core definition. You may provide the initial version of the core definition now or use ”CreateCoreDefinitionVersion” at a later time. Greengrass groups must each contain exactly one Greengrass core.
 func (s *SDK) CreateCoreDefinition(ctx context.Context, request operations.CreateCoreDefinitionRequest) (*operations.CreateCoreDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/definition/cores"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -345,7 +376,7 @@ func (s *SDK) CreateCoreDefinition(ctx context.Context, request operations.Creat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -385,8 +416,9 @@ func (s *SDK) CreateCoreDefinition(ctx context.Context, request operations.Creat
 	return res, nil
 }
 
+// CreateCoreDefinitionVersion - Creates a version of a core definition that has already been defined. Greengrass groups must each contain exactly one Greengrass core.
 func (s *SDK) CreateCoreDefinitionVersion(ctx context.Context, request operations.CreateCoreDefinitionVersionRequest) (*operations.CreateCoreDefinitionVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/cores/{CoreDefinitionId}/versions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -406,7 +438,7 @@ func (s *SDK) CreateCoreDefinitionVersion(ctx context.Context, request operation
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -446,8 +478,9 @@ func (s *SDK) CreateCoreDefinitionVersion(ctx context.Context, request operation
 	return res, nil
 }
 
+// CreateDeployment - Creates a deployment. ”CreateDeployment” requests are idempotent with respect to the ”X-Amzn-Client-Token” token and the request parameters.
 func (s *SDK) CreateDeployment(ctx context.Context, request operations.CreateDeploymentRequest) (*operations.CreateDeploymentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/groups/{GroupId}/deployments", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -467,7 +500,7 @@ func (s *SDK) CreateDeployment(ctx context.Context, request operations.CreateDep
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -507,8 +540,9 @@ func (s *SDK) CreateDeployment(ctx context.Context, request operations.CreateDep
 	return res, nil
 }
 
+// CreateDeviceDefinition - Creates a device definition. You may provide the initial version of the device definition now or use ”CreateDeviceDefinitionVersion” at a later time.
 func (s *SDK) CreateDeviceDefinition(ctx context.Context, request operations.CreateDeviceDefinitionRequest) (*operations.CreateDeviceDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/definition/devices"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -528,7 +562,7 @@ func (s *SDK) CreateDeviceDefinition(ctx context.Context, request operations.Cre
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -568,8 +602,9 @@ func (s *SDK) CreateDeviceDefinition(ctx context.Context, request operations.Cre
 	return res, nil
 }
 
+// CreateDeviceDefinitionVersion - Creates a version of a device definition that has already been defined.
 func (s *SDK) CreateDeviceDefinitionVersion(ctx context.Context, request operations.CreateDeviceDefinitionVersionRequest) (*operations.CreateDeviceDefinitionVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/devices/{DeviceDefinitionId}/versions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -589,7 +624,7 @@ func (s *SDK) CreateDeviceDefinitionVersion(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -629,8 +664,9 @@ func (s *SDK) CreateDeviceDefinitionVersion(ctx context.Context, request operati
 	return res, nil
 }
 
+// CreateFunctionDefinition - Creates a Lambda function definition which contains a list of Lambda functions and their configurations to be used in a group. You can create an initial version of the definition by providing a list of Lambda functions and their configurations now, or use ”CreateFunctionDefinitionVersion” later.
 func (s *SDK) CreateFunctionDefinition(ctx context.Context, request operations.CreateFunctionDefinitionRequest) (*operations.CreateFunctionDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/definition/functions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -650,7 +686,7 @@ func (s *SDK) CreateFunctionDefinition(ctx context.Context, request operations.C
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -690,8 +726,9 @@ func (s *SDK) CreateFunctionDefinition(ctx context.Context, request operations.C
 	return res, nil
 }
 
+// CreateFunctionDefinitionVersion - Creates a version of a Lambda function definition that has already been defined.
 func (s *SDK) CreateFunctionDefinitionVersion(ctx context.Context, request operations.CreateFunctionDefinitionVersionRequest) (*operations.CreateFunctionDefinitionVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/functions/{FunctionDefinitionId}/versions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -711,7 +748,7 @@ func (s *SDK) CreateFunctionDefinitionVersion(ctx context.Context, request opera
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -751,8 +788,9 @@ func (s *SDK) CreateFunctionDefinitionVersion(ctx context.Context, request opera
 	return res, nil
 }
 
+// CreateGroup - Creates a group. You may provide the initial version of the group or use ”CreateGroupVersion” at a later time. Tip: You can use the ”gg_group_setup” package (https://github.com/awslabs/aws-greengrass-group-setup) as a library or command-line application to create and deploy Greengrass groups.
 func (s *SDK) CreateGroup(ctx context.Context, request operations.CreateGroupRequest) (*operations.CreateGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/groups"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -772,7 +810,7 @@ func (s *SDK) CreateGroup(ctx context.Context, request operations.CreateGroupReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -812,8 +850,9 @@ func (s *SDK) CreateGroup(ctx context.Context, request operations.CreateGroupReq
 	return res, nil
 }
 
+// CreateGroupCertificateAuthority - Creates a CA for the group. If a CA already exists, it will rotate the existing CA.
 func (s *SDK) CreateGroupCertificateAuthority(ctx context.Context, request operations.CreateGroupCertificateAuthorityRequest) (*operations.CreateGroupCertificateAuthorityResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/groups/{GroupId}/certificateauthorities", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "POST", url, nil)
@@ -823,7 +862,7 @@ func (s *SDK) CreateGroupCertificateAuthority(ctx context.Context, request opera
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -873,8 +912,9 @@ func (s *SDK) CreateGroupCertificateAuthority(ctx context.Context, request opera
 	return res, nil
 }
 
+// CreateGroupVersion - Creates a version of a group which has already been defined.
 func (s *SDK) CreateGroupVersion(ctx context.Context, request operations.CreateGroupVersionRequest) (*operations.CreateGroupVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/groups/{GroupId}/versions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -894,7 +934,7 @@ func (s *SDK) CreateGroupVersion(ctx context.Context, request operations.CreateG
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -934,8 +974,9 @@ func (s *SDK) CreateGroupVersion(ctx context.Context, request operations.CreateG
 	return res, nil
 }
 
+// CreateLoggerDefinition - Creates a logger definition. You may provide the initial version of the logger definition now or use ”CreateLoggerDefinitionVersion” at a later time.
 func (s *SDK) CreateLoggerDefinition(ctx context.Context, request operations.CreateLoggerDefinitionRequest) (*operations.CreateLoggerDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/definition/loggers"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -955,7 +996,7 @@ func (s *SDK) CreateLoggerDefinition(ctx context.Context, request operations.Cre
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -995,8 +1036,9 @@ func (s *SDK) CreateLoggerDefinition(ctx context.Context, request operations.Cre
 	return res, nil
 }
 
+// CreateLoggerDefinitionVersion - Creates a version of a logger definition that has already been defined.
 func (s *SDK) CreateLoggerDefinitionVersion(ctx context.Context, request operations.CreateLoggerDefinitionVersionRequest) (*operations.CreateLoggerDefinitionVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/loggers/{LoggerDefinitionId}/versions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1016,7 +1058,7 @@ func (s *SDK) CreateLoggerDefinitionVersion(ctx context.Context, request operati
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1056,8 +1098,9 @@ func (s *SDK) CreateLoggerDefinitionVersion(ctx context.Context, request operati
 	return res, nil
 }
 
+// CreateResourceDefinition - Creates a resource definition which contains a list of resources to be used in a group. You can create an initial version of the definition by providing a list of resources now, or use ”CreateResourceDefinitionVersion” later.
 func (s *SDK) CreateResourceDefinition(ctx context.Context, request operations.CreateResourceDefinitionRequest) (*operations.CreateResourceDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/definition/resources"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1077,7 +1120,7 @@ func (s *SDK) CreateResourceDefinition(ctx context.Context, request operations.C
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1117,8 +1160,9 @@ func (s *SDK) CreateResourceDefinition(ctx context.Context, request operations.C
 	return res, nil
 }
 
+// CreateResourceDefinitionVersion - Creates a version of a resource definition that has already been defined.
 func (s *SDK) CreateResourceDefinitionVersion(ctx context.Context, request operations.CreateResourceDefinitionVersionRequest) (*operations.CreateResourceDefinitionVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/resources/{ResourceDefinitionId}/versions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1138,7 +1182,7 @@ func (s *SDK) CreateResourceDefinitionVersion(ctx context.Context, request opera
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1178,8 +1222,9 @@ func (s *SDK) CreateResourceDefinitionVersion(ctx context.Context, request opera
 	return res, nil
 }
 
+// CreateSoftwareUpdateJob - Creates a software update for a core or group of cores (specified as an IoT thing group.) Use this to update the OTA Agent as well as the Greengrass core software. It makes use of the IoT Jobs feature which provides additional commands to manage a Greengrass core software update job.
 func (s *SDK) CreateSoftwareUpdateJob(ctx context.Context, request operations.CreateSoftwareUpdateJobRequest) (*operations.CreateSoftwareUpdateJobResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/updates"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1199,7 +1244,7 @@ func (s *SDK) CreateSoftwareUpdateJob(ctx context.Context, request operations.Cr
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1249,8 +1294,9 @@ func (s *SDK) CreateSoftwareUpdateJob(ctx context.Context, request operations.Cr
 	return res, nil
 }
 
+// CreateSubscriptionDefinition - Creates a subscription definition. You may provide the initial version of the subscription definition now or use ”CreateSubscriptionDefinitionVersion” at a later time.
 func (s *SDK) CreateSubscriptionDefinition(ctx context.Context, request operations.CreateSubscriptionDefinitionRequest) (*operations.CreateSubscriptionDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/definition/subscriptions"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1270,7 +1316,7 @@ func (s *SDK) CreateSubscriptionDefinition(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1310,8 +1356,9 @@ func (s *SDK) CreateSubscriptionDefinition(ctx context.Context, request operatio
 	return res, nil
 }
 
+// CreateSubscriptionDefinitionVersion - Creates a version of a subscription definition which has already been defined.
 func (s *SDK) CreateSubscriptionDefinitionVersion(ctx context.Context, request operations.CreateSubscriptionDefinitionVersionRequest) (*operations.CreateSubscriptionDefinitionVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -1331,7 +1378,7 @@ func (s *SDK) CreateSubscriptionDefinitionVersion(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1371,8 +1418,9 @@ func (s *SDK) CreateSubscriptionDefinitionVersion(ctx context.Context, request o
 	return res, nil
 }
 
+// DeleteConnectorDefinition - Deletes a connector definition.
 func (s *SDK) DeleteConnectorDefinition(ctx context.Context, request operations.DeleteConnectorDefinitionRequest) (*operations.DeleteConnectorDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/connectors/{ConnectorDefinitionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1382,7 +1430,7 @@ func (s *SDK) DeleteConnectorDefinition(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1422,8 +1470,9 @@ func (s *SDK) DeleteConnectorDefinition(ctx context.Context, request operations.
 	return res, nil
 }
 
+// DeleteCoreDefinition - Deletes a core definition.
 func (s *SDK) DeleteCoreDefinition(ctx context.Context, request operations.DeleteCoreDefinitionRequest) (*operations.DeleteCoreDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/cores/{CoreDefinitionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1433,7 +1482,7 @@ func (s *SDK) DeleteCoreDefinition(ctx context.Context, request operations.Delet
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1473,8 +1522,9 @@ func (s *SDK) DeleteCoreDefinition(ctx context.Context, request operations.Delet
 	return res, nil
 }
 
+// DeleteDeviceDefinition - Deletes a device definition.
 func (s *SDK) DeleteDeviceDefinition(ctx context.Context, request operations.DeleteDeviceDefinitionRequest) (*operations.DeleteDeviceDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/devices/{DeviceDefinitionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1484,7 +1534,7 @@ func (s *SDK) DeleteDeviceDefinition(ctx context.Context, request operations.Del
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1524,8 +1574,9 @@ func (s *SDK) DeleteDeviceDefinition(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteFunctionDefinition - Deletes a Lambda function definition.
 func (s *SDK) DeleteFunctionDefinition(ctx context.Context, request operations.DeleteFunctionDefinitionRequest) (*operations.DeleteFunctionDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/functions/{FunctionDefinitionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1535,7 +1586,7 @@ func (s *SDK) DeleteFunctionDefinition(ctx context.Context, request operations.D
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1575,8 +1626,9 @@ func (s *SDK) DeleteFunctionDefinition(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DeleteGroup - Deletes a group.
 func (s *SDK) DeleteGroup(ctx context.Context, request operations.DeleteGroupRequest) (*operations.DeleteGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/groups/{GroupId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1586,7 +1638,7 @@ func (s *SDK) DeleteGroup(ctx context.Context, request operations.DeleteGroupReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1626,8 +1678,9 @@ func (s *SDK) DeleteGroup(ctx context.Context, request operations.DeleteGroupReq
 	return res, nil
 }
 
+// DeleteLoggerDefinition - Deletes a logger definition.
 func (s *SDK) DeleteLoggerDefinition(ctx context.Context, request operations.DeleteLoggerDefinitionRequest) (*operations.DeleteLoggerDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/loggers/{LoggerDefinitionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1637,7 +1690,7 @@ func (s *SDK) DeleteLoggerDefinition(ctx context.Context, request operations.Del
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1677,8 +1730,9 @@ func (s *SDK) DeleteLoggerDefinition(ctx context.Context, request operations.Del
 	return res, nil
 }
 
+// DeleteResourceDefinition - Deletes a resource definition.
 func (s *SDK) DeleteResourceDefinition(ctx context.Context, request operations.DeleteResourceDefinitionRequest) (*operations.DeleteResourceDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/resources/{ResourceDefinitionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1688,7 +1742,7 @@ func (s *SDK) DeleteResourceDefinition(ctx context.Context, request operations.D
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1728,8 +1782,9 @@ func (s *SDK) DeleteResourceDefinition(ctx context.Context, request operations.D
 	return res, nil
 }
 
+// DeleteSubscriptionDefinition - Deletes a subscription definition.
 func (s *SDK) DeleteSubscriptionDefinition(ctx context.Context, request operations.DeleteSubscriptionDefinitionRequest) (*operations.DeleteSubscriptionDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1739,7 +1794,7 @@ func (s *SDK) DeleteSubscriptionDefinition(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1779,8 +1834,9 @@ func (s *SDK) DeleteSubscriptionDefinition(ctx context.Context, request operatio
 	return res, nil
 }
 
+// DisassociateRoleFromGroup - Disassociates the role from a group.
 func (s *SDK) DisassociateRoleFromGroup(ctx context.Context, request operations.DisassociateRoleFromGroupRequest) (*operations.DisassociateRoleFromGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/groups/{GroupId}/role", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1790,7 +1846,7 @@ func (s *SDK) DisassociateRoleFromGroup(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1840,8 +1896,9 @@ func (s *SDK) DisassociateRoleFromGroup(ctx context.Context, request operations.
 	return res, nil
 }
 
+// DisassociateServiceRoleFromAccount - Disassociates the service role from your account. Without a service role, deployments will not work.
 func (s *SDK) DisassociateServiceRoleFromAccount(ctx context.Context, request operations.DisassociateServiceRoleFromAccountRequest) (*operations.DisassociateServiceRoleFromAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/servicerole"
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -1851,7 +1908,7 @@ func (s *SDK) DisassociateServiceRoleFromAccount(ctx context.Context, request op
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1891,8 +1948,9 @@ func (s *SDK) DisassociateServiceRoleFromAccount(ctx context.Context, request op
 	return res, nil
 }
 
+// GetAssociatedRole - Retrieves the role associated with a particular group.
 func (s *SDK) GetAssociatedRole(ctx context.Context, request operations.GetAssociatedRoleRequest) (*operations.GetAssociatedRoleResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/groups/{GroupId}/role", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1902,7 +1960,7 @@ func (s *SDK) GetAssociatedRole(ctx context.Context, request operations.GetAssoc
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -1952,8 +2010,9 @@ func (s *SDK) GetAssociatedRole(ctx context.Context, request operations.GetAssoc
 	return res, nil
 }
 
+// GetBulkDeploymentStatus - Returns the status of a bulk deployment.
 func (s *SDK) GetBulkDeploymentStatus(ctx context.Context, request operations.GetBulkDeploymentStatusRequest) (*operations.GetBulkDeploymentStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/bulk/deployments/{BulkDeploymentId}/status", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -1963,7 +2022,7 @@ func (s *SDK) GetBulkDeploymentStatus(ctx context.Context, request operations.Ge
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2003,8 +2062,9 @@ func (s *SDK) GetBulkDeploymentStatus(ctx context.Context, request operations.Ge
 	return res, nil
 }
 
+// GetConnectivityInfo - Retrieves the connectivity information for a core.
 func (s *SDK) GetConnectivityInfo(ctx context.Context, request operations.GetConnectivityInfoRequest) (*operations.GetConnectivityInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/things/{ThingName}/connectivityInfo", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2014,7 +2074,7 @@ func (s *SDK) GetConnectivityInfo(ctx context.Context, request operations.GetCon
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2064,8 +2124,9 @@ func (s *SDK) GetConnectivityInfo(ctx context.Context, request operations.GetCon
 	return res, nil
 }
 
+// GetConnectorDefinition - Retrieves information about a connector definition.
 func (s *SDK) GetConnectorDefinition(ctx context.Context, request operations.GetConnectorDefinitionRequest) (*operations.GetConnectorDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/connectors/{ConnectorDefinitionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2075,7 +2136,7 @@ func (s *SDK) GetConnectorDefinition(ctx context.Context, request operations.Get
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2115,8 +2176,9 @@ func (s *SDK) GetConnectorDefinition(ctx context.Context, request operations.Get
 	return res, nil
 }
 
+// GetConnectorDefinitionVersion - Retrieves information about a connector definition version, including the connectors that the version contains. Connectors are prebuilt modules that interact with local infrastructure, device protocols, AWS, and other cloud services.
 func (s *SDK) GetConnectorDefinitionVersion(ctx context.Context, request operations.GetConnectorDefinitionVersionRequest) (*operations.GetConnectorDefinitionVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/connectors/{ConnectorDefinitionId}/versions/{ConnectorDefinitionVersionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2128,7 +2190,7 @@ func (s *SDK) GetConnectorDefinitionVersion(ctx context.Context, request operati
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2168,8 +2230,9 @@ func (s *SDK) GetConnectorDefinitionVersion(ctx context.Context, request operati
 	return res, nil
 }
 
+// GetCoreDefinition - Retrieves information about a core definition version.
 func (s *SDK) GetCoreDefinition(ctx context.Context, request operations.GetCoreDefinitionRequest) (*operations.GetCoreDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/cores/{CoreDefinitionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2179,7 +2242,7 @@ func (s *SDK) GetCoreDefinition(ctx context.Context, request operations.GetCoreD
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2219,8 +2282,9 @@ func (s *SDK) GetCoreDefinition(ctx context.Context, request operations.GetCoreD
 	return res, nil
 }
 
+// GetCoreDefinitionVersion - Retrieves information about a core definition version.
 func (s *SDK) GetCoreDefinitionVersion(ctx context.Context, request operations.GetCoreDefinitionVersionRequest) (*operations.GetCoreDefinitionVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/cores/{CoreDefinitionId}/versions/{CoreDefinitionVersionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2230,7 +2294,7 @@ func (s *SDK) GetCoreDefinitionVersion(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2270,8 +2334,9 @@ func (s *SDK) GetCoreDefinitionVersion(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetDeploymentStatus - Returns the status of a deployment.
 func (s *SDK) GetDeploymentStatus(ctx context.Context, request operations.GetDeploymentStatusRequest) (*operations.GetDeploymentStatusResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/groups/{GroupId}/deployments/{DeploymentId}/status", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2281,7 +2346,7 @@ func (s *SDK) GetDeploymentStatus(ctx context.Context, request operations.GetDep
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2321,8 +2386,9 @@ func (s *SDK) GetDeploymentStatus(ctx context.Context, request operations.GetDep
 	return res, nil
 }
 
+// GetDeviceDefinition - Retrieves information about a device definition.
 func (s *SDK) GetDeviceDefinition(ctx context.Context, request operations.GetDeviceDefinitionRequest) (*operations.GetDeviceDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/devices/{DeviceDefinitionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2332,7 +2398,7 @@ func (s *SDK) GetDeviceDefinition(ctx context.Context, request operations.GetDev
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2372,8 +2438,9 @@ func (s *SDK) GetDeviceDefinition(ctx context.Context, request operations.GetDev
 	return res, nil
 }
 
+// GetDeviceDefinitionVersion - Retrieves information about a device definition version.
 func (s *SDK) GetDeviceDefinitionVersion(ctx context.Context, request operations.GetDeviceDefinitionVersionRequest) (*operations.GetDeviceDefinitionVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/devices/{DeviceDefinitionId}/versions/{DeviceDefinitionVersionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2385,7 +2452,7 @@ func (s *SDK) GetDeviceDefinitionVersion(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2425,8 +2492,9 @@ func (s *SDK) GetDeviceDefinitionVersion(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetFunctionDefinition - Retrieves information about a Lambda function definition, including its creation time and latest version.
 func (s *SDK) GetFunctionDefinition(ctx context.Context, request operations.GetFunctionDefinitionRequest) (*operations.GetFunctionDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/functions/{FunctionDefinitionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2436,7 +2504,7 @@ func (s *SDK) GetFunctionDefinition(ctx context.Context, request operations.GetF
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2476,8 +2544,9 @@ func (s *SDK) GetFunctionDefinition(ctx context.Context, request operations.GetF
 	return res, nil
 }
 
+// GetFunctionDefinitionVersion - Retrieves information about a Lambda function definition version, including which Lambda functions are included in the version and their configurations.
 func (s *SDK) GetFunctionDefinitionVersion(ctx context.Context, request operations.GetFunctionDefinitionVersionRequest) (*operations.GetFunctionDefinitionVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/functions/{FunctionDefinitionId}/versions/{FunctionDefinitionVersionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2489,7 +2558,7 @@ func (s *SDK) GetFunctionDefinitionVersion(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2529,8 +2598,9 @@ func (s *SDK) GetFunctionDefinitionVersion(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetGroup - Retrieves information about a group.
 func (s *SDK) GetGroup(ctx context.Context, request operations.GetGroupRequest) (*operations.GetGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/groups/{GroupId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2540,7 +2610,7 @@ func (s *SDK) GetGroup(ctx context.Context, request operations.GetGroupRequest) 
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2580,8 +2650,9 @@ func (s *SDK) GetGroup(ctx context.Context, request operations.GetGroupRequest) 
 	return res, nil
 }
 
+// GetGroupCertificateAuthority - Retreives the CA associated with a group. Returns the public key of the CA.
 func (s *SDK) GetGroupCertificateAuthority(ctx context.Context, request operations.GetGroupCertificateAuthorityRequest) (*operations.GetGroupCertificateAuthorityResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/groups/{GroupId}/certificateauthorities/{CertificateAuthorityId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2591,7 +2662,7 @@ func (s *SDK) GetGroupCertificateAuthority(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2641,8 +2712,9 @@ func (s *SDK) GetGroupCertificateAuthority(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetGroupCertificateConfiguration - Retrieves the current configuration for the CA used by the group.
 func (s *SDK) GetGroupCertificateConfiguration(ctx context.Context, request operations.GetGroupCertificateConfigurationRequest) (*operations.GetGroupCertificateConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/groups/{GroupId}/certificateauthorities/configuration/expiry", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2652,7 +2724,7 @@ func (s *SDK) GetGroupCertificateConfiguration(ctx context.Context, request oper
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2702,8 +2774,9 @@ func (s *SDK) GetGroupCertificateConfiguration(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetGroupVersion - Retrieves information about a group version.
 func (s *SDK) GetGroupVersion(ctx context.Context, request operations.GetGroupVersionRequest) (*operations.GetGroupVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/groups/{GroupId}/versions/{GroupVersionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2713,7 +2786,7 @@ func (s *SDK) GetGroupVersion(ctx context.Context, request operations.GetGroupVe
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2753,8 +2826,9 @@ func (s *SDK) GetGroupVersion(ctx context.Context, request operations.GetGroupVe
 	return res, nil
 }
 
+// GetLoggerDefinition - Retrieves information about a logger definition.
 func (s *SDK) GetLoggerDefinition(ctx context.Context, request operations.GetLoggerDefinitionRequest) (*operations.GetLoggerDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/loggers/{LoggerDefinitionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2764,7 +2838,7 @@ func (s *SDK) GetLoggerDefinition(ctx context.Context, request operations.GetLog
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2804,8 +2878,9 @@ func (s *SDK) GetLoggerDefinition(ctx context.Context, request operations.GetLog
 	return res, nil
 }
 
+// GetLoggerDefinitionVersion - Retrieves information about a logger definition version.
 func (s *SDK) GetLoggerDefinitionVersion(ctx context.Context, request operations.GetLoggerDefinitionVersionRequest) (*operations.GetLoggerDefinitionVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/loggers/{LoggerDefinitionId}/versions/{LoggerDefinitionVersionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2817,7 +2892,7 @@ func (s *SDK) GetLoggerDefinitionVersion(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2857,8 +2932,9 @@ func (s *SDK) GetLoggerDefinitionVersion(ctx context.Context, request operations
 	return res, nil
 }
 
+// GetResourceDefinition - Retrieves information about a resource definition, including its creation time and latest version.
 func (s *SDK) GetResourceDefinition(ctx context.Context, request operations.GetResourceDefinitionRequest) (*operations.GetResourceDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/resources/{ResourceDefinitionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2868,7 +2944,7 @@ func (s *SDK) GetResourceDefinition(ctx context.Context, request operations.GetR
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2908,8 +2984,9 @@ func (s *SDK) GetResourceDefinition(ctx context.Context, request operations.GetR
 	return res, nil
 }
 
+// GetResourceDefinitionVersion - Retrieves information about a resource definition version, including which resources are included in the version.
 func (s *SDK) GetResourceDefinitionVersion(ctx context.Context, request operations.GetResourceDefinitionVersionRequest) (*operations.GetResourceDefinitionVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/resources/{ResourceDefinitionId}/versions/{ResourceDefinitionVersionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2919,7 +2996,7 @@ func (s *SDK) GetResourceDefinitionVersion(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -2959,8 +3036,9 @@ func (s *SDK) GetResourceDefinitionVersion(ctx context.Context, request operatio
 	return res, nil
 }
 
+// GetServiceRoleForAccount - Retrieves the service role that is attached to your account.
 func (s *SDK) GetServiceRoleForAccount(ctx context.Context, request operations.GetServiceRoleForAccountRequest) (*operations.GetServiceRoleForAccountResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/servicerole"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -2970,7 +3048,7 @@ func (s *SDK) GetServiceRoleForAccount(ctx context.Context, request operations.G
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3010,8 +3088,9 @@ func (s *SDK) GetServiceRoleForAccount(ctx context.Context, request operations.G
 	return res, nil
 }
 
+// GetSubscriptionDefinition - Retrieves information about a subscription definition.
 func (s *SDK) GetSubscriptionDefinition(ctx context.Context, request operations.GetSubscriptionDefinitionRequest) (*operations.GetSubscriptionDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3021,7 +3100,7 @@ func (s *SDK) GetSubscriptionDefinition(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3061,8 +3140,9 @@ func (s *SDK) GetSubscriptionDefinition(ctx context.Context, request operations.
 	return res, nil
 }
 
+// GetSubscriptionDefinitionVersion - Retrieves information about a subscription definition version.
 func (s *SDK) GetSubscriptionDefinitionVersion(ctx context.Context, request operations.GetSubscriptionDefinitionVersionRequest) (*operations.GetSubscriptionDefinitionVersionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions/{SubscriptionDefinitionVersionId}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3074,7 +3154,7 @@ func (s *SDK) GetSubscriptionDefinitionVersion(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3114,8 +3194,9 @@ func (s *SDK) GetSubscriptionDefinitionVersion(ctx context.Context, request oper
 	return res, nil
 }
 
+// GetThingRuntimeConfiguration - Get the runtime configuration of a thing.
 func (s *SDK) GetThingRuntimeConfiguration(ctx context.Context, request operations.GetThingRuntimeConfigurationRequest) (*operations.GetThingRuntimeConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/things/{ThingName}/runtimeconfig", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3125,7 +3206,7 @@ func (s *SDK) GetThingRuntimeConfiguration(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3175,8 +3256,9 @@ func (s *SDK) GetThingRuntimeConfiguration(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ListBulkDeploymentDetailedReports - Gets a paginated list of the deployments that have been started in a bulk deployment operation, and their current deployment status.
 func (s *SDK) ListBulkDeploymentDetailedReports(ctx context.Context, request operations.ListBulkDeploymentDetailedReportsRequest) (*operations.ListBulkDeploymentDetailedReportsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/bulk/deployments/{BulkDeploymentId}/detailed-reports", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3188,7 +3270,7 @@ func (s *SDK) ListBulkDeploymentDetailedReports(ctx context.Context, request ope
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3228,8 +3310,9 @@ func (s *SDK) ListBulkDeploymentDetailedReports(ctx context.Context, request ope
 	return res, nil
 }
 
+// ListBulkDeployments - Returns a list of bulk deployments.
 func (s *SDK) ListBulkDeployments(ctx context.Context, request operations.ListBulkDeploymentsRequest) (*operations.ListBulkDeploymentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/bulk/deployments"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3241,7 +3324,7 @@ func (s *SDK) ListBulkDeployments(ctx context.Context, request operations.ListBu
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3281,8 +3364,9 @@ func (s *SDK) ListBulkDeployments(ctx context.Context, request operations.ListBu
 	return res, nil
 }
 
+// ListConnectorDefinitionVersions - Lists the versions of a connector definition, which are containers for connectors. Connectors run on the Greengrass core and contain built-in integration with local infrastructure, device protocols, AWS, and other cloud services.
 func (s *SDK) ListConnectorDefinitionVersions(ctx context.Context, request operations.ListConnectorDefinitionVersionsRequest) (*operations.ListConnectorDefinitionVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/connectors/{ConnectorDefinitionId}/versions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3294,7 +3378,7 @@ func (s *SDK) ListConnectorDefinitionVersions(ctx context.Context, request opera
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3334,8 +3418,9 @@ func (s *SDK) ListConnectorDefinitionVersions(ctx context.Context, request opera
 	return res, nil
 }
 
+// ListConnectorDefinitions - Retrieves a list of connector definitions.
 func (s *SDK) ListConnectorDefinitions(ctx context.Context, request operations.ListConnectorDefinitionsRequest) (*operations.ListConnectorDefinitionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/definition/connectors"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3347,7 +3432,7 @@ func (s *SDK) ListConnectorDefinitions(ctx context.Context, request operations.L
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3377,8 +3462,9 @@ func (s *SDK) ListConnectorDefinitions(ctx context.Context, request operations.L
 	return res, nil
 }
 
+// ListCoreDefinitionVersions - Lists the versions of a core definition.
 func (s *SDK) ListCoreDefinitionVersions(ctx context.Context, request operations.ListCoreDefinitionVersionsRequest) (*operations.ListCoreDefinitionVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/cores/{CoreDefinitionId}/versions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3390,7 +3476,7 @@ func (s *SDK) ListCoreDefinitionVersions(ctx context.Context, request operations
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3430,8 +3516,9 @@ func (s *SDK) ListCoreDefinitionVersions(ctx context.Context, request operations
 	return res, nil
 }
 
+// ListCoreDefinitions - Retrieves a list of core definitions.
 func (s *SDK) ListCoreDefinitions(ctx context.Context, request operations.ListCoreDefinitionsRequest) (*operations.ListCoreDefinitionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/definition/cores"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3443,7 +3530,7 @@ func (s *SDK) ListCoreDefinitions(ctx context.Context, request operations.ListCo
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3473,8 +3560,9 @@ func (s *SDK) ListCoreDefinitions(ctx context.Context, request operations.ListCo
 	return res, nil
 }
 
+// ListDeployments - Returns a history of deployments for the group.
 func (s *SDK) ListDeployments(ctx context.Context, request operations.ListDeploymentsRequest) (*operations.ListDeploymentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/groups/{GroupId}/deployments", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3486,7 +3574,7 @@ func (s *SDK) ListDeployments(ctx context.Context, request operations.ListDeploy
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3526,8 +3614,9 @@ func (s *SDK) ListDeployments(ctx context.Context, request operations.ListDeploy
 	return res, nil
 }
 
+// ListDeviceDefinitionVersions - Lists the versions of a device definition.
 func (s *SDK) ListDeviceDefinitionVersions(ctx context.Context, request operations.ListDeviceDefinitionVersionsRequest) (*operations.ListDeviceDefinitionVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/devices/{DeviceDefinitionId}/versions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3539,7 +3628,7 @@ func (s *SDK) ListDeviceDefinitionVersions(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3579,8 +3668,9 @@ func (s *SDK) ListDeviceDefinitionVersions(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ListDeviceDefinitions - Retrieves a list of device definitions.
 func (s *SDK) ListDeviceDefinitions(ctx context.Context, request operations.ListDeviceDefinitionsRequest) (*operations.ListDeviceDefinitionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/definition/devices"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3592,7 +3682,7 @@ func (s *SDK) ListDeviceDefinitions(ctx context.Context, request operations.List
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3622,8 +3712,9 @@ func (s *SDK) ListDeviceDefinitions(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListFunctionDefinitionVersions - Lists the versions of a Lambda function definition.
 func (s *SDK) ListFunctionDefinitionVersions(ctx context.Context, request operations.ListFunctionDefinitionVersionsRequest) (*operations.ListFunctionDefinitionVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/functions/{FunctionDefinitionId}/versions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3635,7 +3726,7 @@ func (s *SDK) ListFunctionDefinitionVersions(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3675,8 +3766,9 @@ func (s *SDK) ListFunctionDefinitionVersions(ctx context.Context, request operat
 	return res, nil
 }
 
+// ListFunctionDefinitions - Retrieves a list of Lambda function definitions.
 func (s *SDK) ListFunctionDefinitions(ctx context.Context, request operations.ListFunctionDefinitionsRequest) (*operations.ListFunctionDefinitionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/definition/functions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3688,7 +3780,7 @@ func (s *SDK) ListFunctionDefinitions(ctx context.Context, request operations.Li
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3718,8 +3810,9 @@ func (s *SDK) ListFunctionDefinitions(ctx context.Context, request operations.Li
 	return res, nil
 }
 
+// ListGroupCertificateAuthorities - Retrieves the current CAs for a group.
 func (s *SDK) ListGroupCertificateAuthorities(ctx context.Context, request operations.ListGroupCertificateAuthoritiesRequest) (*operations.ListGroupCertificateAuthoritiesResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/groups/{GroupId}/certificateauthorities", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3729,7 +3822,7 @@ func (s *SDK) ListGroupCertificateAuthorities(ctx context.Context, request opera
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3779,8 +3872,9 @@ func (s *SDK) ListGroupCertificateAuthorities(ctx context.Context, request opera
 	return res, nil
 }
 
+// ListGroupVersions - Lists the versions of a group.
 func (s *SDK) ListGroupVersions(ctx context.Context, request operations.ListGroupVersionsRequest) (*operations.ListGroupVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/groups/{GroupId}/versions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3792,7 +3886,7 @@ func (s *SDK) ListGroupVersions(ctx context.Context, request operations.ListGrou
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3832,8 +3926,9 @@ func (s *SDK) ListGroupVersions(ctx context.Context, request operations.ListGrou
 	return res, nil
 }
 
+// ListGroups - Retrieves a list of groups.
 func (s *SDK) ListGroups(ctx context.Context, request operations.ListGroupsRequest) (*operations.ListGroupsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/groups"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3845,7 +3940,7 @@ func (s *SDK) ListGroups(ctx context.Context, request operations.ListGroupsReque
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3875,8 +3970,9 @@ func (s *SDK) ListGroups(ctx context.Context, request operations.ListGroupsReque
 	return res, nil
 }
 
+// ListLoggerDefinitionVersions - Lists the versions of a logger definition.
 func (s *SDK) ListLoggerDefinitionVersions(ctx context.Context, request operations.ListLoggerDefinitionVersionsRequest) (*operations.ListLoggerDefinitionVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/loggers/{LoggerDefinitionId}/versions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3888,7 +3984,7 @@ func (s *SDK) ListLoggerDefinitionVersions(ctx context.Context, request operatio
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3928,8 +4024,9 @@ func (s *SDK) ListLoggerDefinitionVersions(ctx context.Context, request operatio
 	return res, nil
 }
 
+// ListLoggerDefinitions - Retrieves a list of logger definitions.
 func (s *SDK) ListLoggerDefinitions(ctx context.Context, request operations.ListLoggerDefinitionsRequest) (*operations.ListLoggerDefinitionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/definition/loggers"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3941,7 +4038,7 @@ func (s *SDK) ListLoggerDefinitions(ctx context.Context, request operations.List
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -3971,8 +4068,9 @@ func (s *SDK) ListLoggerDefinitions(ctx context.Context, request operations.List
 	return res, nil
 }
 
+// ListResourceDefinitionVersions - Lists the versions of a resource definition.
 func (s *SDK) ListResourceDefinitionVersions(ctx context.Context, request operations.ListResourceDefinitionVersionsRequest) (*operations.ListResourceDefinitionVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/resources/{ResourceDefinitionId}/versions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -3984,7 +4082,7 @@ func (s *SDK) ListResourceDefinitionVersions(ctx context.Context, request operat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4024,8 +4122,9 @@ func (s *SDK) ListResourceDefinitionVersions(ctx context.Context, request operat
 	return res, nil
 }
 
+// ListResourceDefinitions - Retrieves a list of resource definitions.
 func (s *SDK) ListResourceDefinitions(ctx context.Context, request operations.ListResourceDefinitionsRequest) (*operations.ListResourceDefinitionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/definition/resources"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4037,7 +4136,7 @@ func (s *SDK) ListResourceDefinitions(ctx context.Context, request operations.Li
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4067,8 +4166,9 @@ func (s *SDK) ListResourceDefinitions(ctx context.Context, request operations.Li
 	return res, nil
 }
 
+// ListSubscriptionDefinitionVersions - Lists the versions of a subscription definition.
 func (s *SDK) ListSubscriptionDefinitionVersions(ctx context.Context, request operations.ListSubscriptionDefinitionVersionsRequest) (*operations.ListSubscriptionDefinitionVersionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4080,7 +4180,7 @@ func (s *SDK) ListSubscriptionDefinitionVersions(ctx context.Context, request op
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4120,8 +4220,9 @@ func (s *SDK) ListSubscriptionDefinitionVersions(ctx context.Context, request op
 	return res, nil
 }
 
+// ListSubscriptionDefinitions - Retrieves a list of subscription definitions.
 func (s *SDK) ListSubscriptionDefinitions(ctx context.Context, request operations.ListSubscriptionDefinitionsRequest) (*operations.ListSubscriptionDefinitionsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/definition/subscriptions"
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4133,7 +4234,7 @@ func (s *SDK) ListSubscriptionDefinitions(ctx context.Context, request operation
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4163,8 +4264,9 @@ func (s *SDK) ListSubscriptionDefinitions(ctx context.Context, request operation
 	return res, nil
 }
 
+// ListTagsForResource - Retrieves a list of resource tags for a resource arn.
 func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTagsForResourceRequest) (*operations.ListTagsForResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resource-arn}", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -4174,7 +4276,7 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4214,8 +4316,9 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	return res, nil
 }
 
+// ResetDeployments - Resets a group's deployments.
 func (s *SDK) ResetDeployments(ctx context.Context, request operations.ResetDeploymentsRequest) (*operations.ResetDeploymentsResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/groups/{GroupId}/deployments/$reset", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4235,7 +4338,7 @@ func (s *SDK) ResetDeployments(ctx context.Context, request operations.ResetDepl
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4275,8 +4378,9 @@ func (s *SDK) ResetDeployments(ctx context.Context, request operations.ResetDepl
 	return res, nil
 }
 
+// StartBulkDeployment - Deploys multiple groups in one operation. This action starts the bulk deployment of a specified set of group versions. Each group version deployment will be triggered with an adaptive rate that has a fixed upper limit. We recommend that you include an ”X-Amzn-Client-Token” token in every ”StartBulkDeployment” request. These requests are idempotent with respect to the token and the request parameters.
 func (s *SDK) StartBulkDeployment(ctx context.Context, request operations.StartBulkDeploymentRequest) (*operations.StartBulkDeploymentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/greengrass/bulk/deployments"
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4296,7 +4400,7 @@ func (s *SDK) StartBulkDeployment(ctx context.Context, request operations.StartB
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4336,8 +4440,9 @@ func (s *SDK) StartBulkDeployment(ctx context.Context, request operations.StartB
 	return res, nil
 }
 
+// StopBulkDeployment - Stops the execution of a bulk deployment. This action returns a status of ”Stopping” until the deployment is stopped. You cannot start a new bulk deployment while a previous deployment is in the ”Stopping” state. This action doesn't rollback completed deployments or cancel pending deployments.
 func (s *SDK) StopBulkDeployment(ctx context.Context, request operations.StopBulkDeploymentRequest) (*operations.StopBulkDeploymentResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/bulk/deployments/{BulkDeploymentId}/$stop", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "PUT", url, nil)
@@ -4347,7 +4452,7 @@ func (s *SDK) StopBulkDeployment(ctx context.Context, request operations.StopBul
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4387,8 +4492,9 @@ func (s *SDK) StopBulkDeployment(ctx context.Context, request operations.StopBul
 	return res, nil
 }
 
+// TagResource - Adds tags to a Greengrass resource. Valid resources are 'Group', 'ConnectorDefinition', 'CoreDefinition', 'DeviceDefinition', 'FunctionDefinition', 'LoggerDefinition', 'SubscriptionDefinition', 'ResourceDefinition', and 'BulkDeployment'.
 func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceRequest) (*operations.TagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resource-arn}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4408,7 +4514,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4439,8 +4545,9 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	return res, nil
 }
 
+// UntagResource - Remove resource tags from a Greengrass Resource.
 func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourceRequest) (*operations.UntagResourceResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/tags/{resource-arn}#tagKeys", request.PathParams)
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
@@ -4452,7 +4559,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4483,8 +4590,9 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	return res, nil
 }
 
+// UpdateConnectivityInfo - Updates the connectivity information for the core. Any devices that belong to the group which has this core will receive this information in order to find the location of the core and connect to it.
 func (s *SDK) UpdateConnectivityInfo(ctx context.Context, request operations.UpdateConnectivityInfoRequest) (*operations.UpdateConnectivityInfoResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/things/{ThingName}/connectivityInfo", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4504,7 +4612,7 @@ func (s *SDK) UpdateConnectivityInfo(ctx context.Context, request operations.Upd
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4554,8 +4662,9 @@ func (s *SDK) UpdateConnectivityInfo(ctx context.Context, request operations.Upd
 	return res, nil
 }
 
+// UpdateConnectorDefinition - Updates a connector definition.
 func (s *SDK) UpdateConnectorDefinition(ctx context.Context, request operations.UpdateConnectorDefinitionRequest) (*operations.UpdateConnectorDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/connectors/{ConnectorDefinitionId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4575,7 +4684,7 @@ func (s *SDK) UpdateConnectorDefinition(ctx context.Context, request operations.
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4615,8 +4724,9 @@ func (s *SDK) UpdateConnectorDefinition(ctx context.Context, request operations.
 	return res, nil
 }
 
+// UpdateCoreDefinition - Updates a core definition.
 func (s *SDK) UpdateCoreDefinition(ctx context.Context, request operations.UpdateCoreDefinitionRequest) (*operations.UpdateCoreDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/cores/{CoreDefinitionId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4636,7 +4746,7 @@ func (s *SDK) UpdateCoreDefinition(ctx context.Context, request operations.Updat
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4676,8 +4786,9 @@ func (s *SDK) UpdateCoreDefinition(ctx context.Context, request operations.Updat
 	return res, nil
 }
 
+// UpdateDeviceDefinition - Updates a device definition.
 func (s *SDK) UpdateDeviceDefinition(ctx context.Context, request operations.UpdateDeviceDefinitionRequest) (*operations.UpdateDeviceDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/devices/{DeviceDefinitionId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4697,7 +4808,7 @@ func (s *SDK) UpdateDeviceDefinition(ctx context.Context, request operations.Upd
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4737,8 +4848,9 @@ func (s *SDK) UpdateDeviceDefinition(ctx context.Context, request operations.Upd
 	return res, nil
 }
 
+// UpdateFunctionDefinition - Updates a Lambda function definition.
 func (s *SDK) UpdateFunctionDefinition(ctx context.Context, request operations.UpdateFunctionDefinitionRequest) (*operations.UpdateFunctionDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/functions/{FunctionDefinitionId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4758,7 +4870,7 @@ func (s *SDK) UpdateFunctionDefinition(ctx context.Context, request operations.U
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4798,8 +4910,9 @@ func (s *SDK) UpdateFunctionDefinition(ctx context.Context, request operations.U
 	return res, nil
 }
 
+// UpdateGroup - Updates a group.
 func (s *SDK) UpdateGroup(ctx context.Context, request operations.UpdateGroupRequest) (*operations.UpdateGroupResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/groups/{GroupId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4819,7 +4932,7 @@ func (s *SDK) UpdateGroup(ctx context.Context, request operations.UpdateGroupReq
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4859,8 +4972,9 @@ func (s *SDK) UpdateGroup(ctx context.Context, request operations.UpdateGroupReq
 	return res, nil
 }
 
+// UpdateGroupCertificateConfiguration - Updates the Certificate expiry time for a group.
 func (s *SDK) UpdateGroupCertificateConfiguration(ctx context.Context, request operations.UpdateGroupCertificateConfigurationRequest) (*operations.UpdateGroupCertificateConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/groups/{GroupId}/certificateauthorities/configuration/expiry", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4880,7 +4994,7 @@ func (s *SDK) UpdateGroupCertificateConfiguration(ctx context.Context, request o
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4930,8 +5044,9 @@ func (s *SDK) UpdateGroupCertificateConfiguration(ctx context.Context, request o
 	return res, nil
 }
 
+// UpdateLoggerDefinition - Updates a logger definition.
 func (s *SDK) UpdateLoggerDefinition(ctx context.Context, request operations.UpdateLoggerDefinitionRequest) (*operations.UpdateLoggerDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/loggers/{LoggerDefinitionId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -4951,7 +5066,7 @@ func (s *SDK) UpdateLoggerDefinition(ctx context.Context, request operations.Upd
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -4991,8 +5106,9 @@ func (s *SDK) UpdateLoggerDefinition(ctx context.Context, request operations.Upd
 	return res, nil
 }
 
+// UpdateResourceDefinition - Updates a resource definition.
 func (s *SDK) UpdateResourceDefinition(ctx context.Context, request operations.UpdateResourceDefinitionRequest) (*operations.UpdateResourceDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/resources/{ResourceDefinitionId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5012,7 +5128,7 @@ func (s *SDK) UpdateResourceDefinition(ctx context.Context, request operations.U
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5052,8 +5168,9 @@ func (s *SDK) UpdateResourceDefinition(ctx context.Context, request operations.U
 	return res, nil
 }
 
+// UpdateSubscriptionDefinition - Updates a subscription definition.
 func (s *SDK) UpdateSubscriptionDefinition(ctx context.Context, request operations.UpdateSubscriptionDefinitionRequest) (*operations.UpdateSubscriptionDefinitionResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5073,7 +5190,7 @@ func (s *SDK) UpdateSubscriptionDefinition(ctx context.Context, request operatio
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -5113,8 +5230,9 @@ func (s *SDK) UpdateSubscriptionDefinition(ctx context.Context, request operatio
 	return res, nil
 }
 
+// UpdateThingRuntimeConfiguration - Updates the runtime configuration of a thing.
 func (s *SDK) UpdateThingRuntimeConfiguration(ctx context.Context, request operations.UpdateThingRuntimeConfigurationRequest) (*operations.UpdateThingRuntimeConfigurationResponse, error) {
-	baseURL := s.serverURL
+	baseURL := s._serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/greengrass/things/{ThingName}/runtimeconfig", request.PathParams)
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
@@ -5134,7 +5252,7 @@ func (s *SDK) UpdateThingRuntimeConfiguration(ctx context.Context, request opera
 
 	utils.PopulateHeaders(ctx, req, request.Headers)
 
-	client := s.securityClient
+	client := s._securityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {

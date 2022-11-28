@@ -22,34 +22,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ForumGetTopicsPagedPathParams = /** @class */ (function (_super) {
     __extends(ForumGetTopicsPagedPathParams, _super);
     function ForumGetTopicsPagedPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=categoryFilter" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=categoryFilter" }),
         __metadata("design:type", Number)
     ], ForumGetTopicsPagedPathParams.prototype, "categoryFilter", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=group" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=group" }),
         __metadata("design:type", Number)
     ], ForumGetTopicsPagedPathParams.prototype, "group", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=page" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=page" }),
         __metadata("design:type", Number)
     ], ForumGetTopicsPagedPathParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=pageSize" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pageSize" }),
         __metadata("design:type", Number)
     ], ForumGetTopicsPagedPathParams.prototype, "pageSize", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=quickDate" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=quickDate" }),
         __metadata("design:type", Number)
     ], ForumGetTopicsPagedPathParams.prototype, "quickDate", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=sort" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sort" }),
         __metadata("design:type", Number)
     ], ForumGetTopicsPagedPathParams.prototype, "sort", void 0);
     return ForumGetTopicsPagedPathParams;
@@ -61,11 +61,11 @@ var ForumGetTopicsPagedQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=locales" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=locales" }),
         __metadata("design:type", String)
     ], ForumGetTopicsPagedQueryParams.prototype, "locales", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=tagstring" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=tagstring" }),
         __metadata("design:type", String)
     ], ForumGetTopicsPagedQueryParams.prototype, "tagstring", void 0);
     return ForumGetTopicsPagedQueryParams;
@@ -77,11 +77,11 @@ var ForumGetTopicsPagedRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ForumGetTopicsPagedPathParams)
     ], ForumGetTopicsPagedRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ForumGetTopicsPagedQueryParams)
     ], ForumGetTopicsPagedRequest.prototype, "queryParams", void 0);
     return ForumGetTopicsPagedRequest;
@@ -93,15 +93,15 @@ var ForumGetTopicsPagedResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], ForumGetTopicsPagedResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ForumGetTopicsPagedResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ForumGetTopicsPagedResponse.prototype, "statusCode", void 0);
     return ForumGetTopicsPagedResponse;

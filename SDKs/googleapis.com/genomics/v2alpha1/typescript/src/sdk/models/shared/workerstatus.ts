@@ -1,7 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DiskStatus } from "./diskstatus";
-import { DiskStatus } from "./diskstatus";
+
 
 
 // WorkerStatus
@@ -9,18 +8,18 @@ import { DiskStatus } from "./diskstatus";
  * The status of the worker VM.
 **/
 export class WorkerStatus extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachedDisks", elemType: shared.DiskStatus })
+  @SpeakeasyMetadata({ data: "json, name=attachedDisks", elemType: DiskStatus })
   attachedDisks?: Map<string, DiskStatus>;
 
-  @Metadata({ data: "json, name=bootDisk" })
+  @SpeakeasyMetadata({ data: "json, name=bootDisk" })
   bootDisk?: DiskStatus;
 
-  @Metadata({ data: "json, name=freeRamBytes" })
+  @SpeakeasyMetadata({ data: "json, name=freeRamBytes" })
   freeRamBytes?: string;
 
-  @Metadata({ data: "json, name=totalRamBytes" })
+  @SpeakeasyMetadata({ data: "json, name=totalRamBytes" })
   totalRamBytes?: string;
 
-  @Metadata({ data: "json, name=uptimeSeconds" })
+  @SpeakeasyMetadata({ data: "json, name=uptimeSeconds" })
   uptimeSeconds?: string;
 }

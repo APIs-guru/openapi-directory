@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class ModelDict extends SpeakeasyBase {
-  @Metadata({ data: "json, name=modelName" })
+  @SpeakeasyMetadata({ data: "json, name=modelName" })
   modelName: string;
 }

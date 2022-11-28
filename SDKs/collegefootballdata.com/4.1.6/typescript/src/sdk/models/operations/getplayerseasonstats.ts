@@ -1,44 +1,45 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetPlayerSeasonStatsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=category" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=category" })
   category?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=conference" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=conference" })
   conference?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=endWeek" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=endWeek" })
   endWeek?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=seasonType" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=seasonType" })
   seasonType?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=startWeek" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=startWeek" })
   startWeek?: number;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=team" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=team" })
   team?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=year" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=year" })
   year: number;
 }
 
 
 export class GetPlayerSeasonStatsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetPlayerSeasonStatsQueryParams;
 }
 
 
 export class GetPlayerSeasonStatsResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata({ elemType: shared.PlayerSeasonStat })
+  @SpeakeasyMetadata({ elemType: shared.PlayerSeasonStat })
   playerSeasonStats?: shared.PlayerSeasonStat[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

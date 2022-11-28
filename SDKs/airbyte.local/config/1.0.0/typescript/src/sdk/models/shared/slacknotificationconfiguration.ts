@@ -1,7 +1,8 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class SlackNotificationConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=webhook" })
+  @SpeakeasyMetadata({ data: "json, name=webhook" })
   webhook: string;
 }

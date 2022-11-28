@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudContactcenterinsightsV1AnalysisResultCallAnalysisMetadata
+// Call-specific metadata created during analysis.
 type GoogleCloudContactcenterinsightsV1AnalysisResultCallAnalysisMetadata struct {
 	Annotations      []GoogleCloudContactcenterinsightsV1CallAnnotation             `json:"annotations,omitempty"`
 	Entities         map[string]GoogleCloudContactcenterinsightsV1Entity            `json:"entities,omitempty"`

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var LatestGetV2LatestLocationIdGetPathParams = /** @class */ (function (_super) {
     __extends(LatestGetV2LatestLocationIdGetPathParams, _super);
@@ -30,7 +30,7 @@ var LatestGetV2LatestLocationIdGetPathParams = /** @class */ (function (_super) 
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=location_id" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=location_id" }),
         __metadata("design:type", Number)
     ], LatestGetV2LatestLocationIdGetPathParams.prototype, "locationId", void 0);
     return LatestGetV2LatestLocationIdGetPathParams;
@@ -42,95 +42,95 @@ var LatestGetV2LatestLocationIdGetQueryParams = /** @class */ (function (_super)
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=city" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=city" }),
         __metadata("design:type", Array)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "city", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=coordinates" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=coordinates" }),
         __metadata("design:type", String)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "coordinates", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country" }),
         __metadata("design:type", Array)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "country", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=country_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=country_id" }),
         __metadata("design:type", String)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "countryId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=dumpRaw" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=dumpRaw" }),
         __metadata("design:type", Boolean)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "dumpRaw", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=entity" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=entity" }),
         __metadata("design:type", String)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "entity", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=has_geo" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=has_geo" }),
         __metadata("design:type", Boolean)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "hasGeo", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=isAnalysis" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isAnalysis" }),
         __metadata("design:type", Boolean)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "isAnalysis", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=isMobile" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=isMobile" }),
         __metadata("design:type", Boolean)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "isMobile", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" }),
         __metadata("design:type", Number)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=location" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=location" }),
         __metadata("design:type", Array)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "location", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=manufacturerName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=manufacturerName" }),
         __metadata("design:type", Array)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "manufacturerName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=modelName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=modelName" }),
         __metadata("design:type", Array)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "modelName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=offset" }),
         __metadata("design:type", Number)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=order_by" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=order_by" }),
         __metadata("design:type", String)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "orderBy", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=page" }),
         __metadata("design:type", Number)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "page", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=parameter" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameter" }),
         __metadata("design:type", Array)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "parameter", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=parameter_id" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=parameter_id" }),
         __metadata("design:type", Number)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "parameterId", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=radius" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=radius" }),
         __metadata("design:type", Number)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "radius", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sensorType" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sensorType" }),
         __metadata("design:type", String)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "sensorType", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sort" }),
         __metadata("design:type", String)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "sort", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=sourceName" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=sourceName" }),
         __metadata("design:type", Array)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "sourceName", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=unit" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=unit" }),
         __metadata("design:type", Array)
     ], LatestGetV2LatestLocationIdGetQueryParams.prototype, "unit", void 0);
     return LatestGetV2LatestLocationIdGetQueryParams;
@@ -142,11 +142,11 @@ var LatestGetV2LatestLocationIdGetRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LatestGetV2LatestLocationIdGetPathParams)
     ], LatestGetV2LatestLocationIdGetRequest.prototype, "pathParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", LatestGetV2LatestLocationIdGetQueryParams)
     ], LatestGetV2LatestLocationIdGetRequest.prototype, "queryParams", void 0);
     return LatestGetV2LatestLocationIdGetRequest;
@@ -158,19 +158,19 @@ var LatestGetV2LatestLocationIdGetResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], LatestGetV2LatestLocationIdGetResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.HttpValidationError)
     ], LatestGetV2LatestLocationIdGetResponse.prototype, "httpValidationError", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.OpenAqResult)
     ], LatestGetV2LatestLocationIdGetResponse.prototype, "openAqResult", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], LatestGetV2LatestLocationIdGetResponse.prototype, "statusCode", void 0);
     return LatestGetV2LatestLocationIdGetResponse;

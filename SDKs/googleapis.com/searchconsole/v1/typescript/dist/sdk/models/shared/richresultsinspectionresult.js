@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { DetectedItems } from "./detecteditems";
 export var RichResultsInspectionResultVerdictEnum;
 (function (RichResultsInspectionResultVerdictEnum) {
     RichResultsInspectionResultVerdictEnum["VerdictUnspecified"] = "VERDICT_UNSPECIFIED";
@@ -42,11 +42,11 @@ var RichResultsInspectionResult = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=detectedItems", elemType: shared.DetectedItems }),
+        SpeakeasyMetadata({ data: "json, name=detectedItems", elemType: DetectedItems }),
         __metadata("design:type", Array)
     ], RichResultsInspectionResult.prototype, "detectedItems", void 0);
     __decorate([
-        Metadata({ data: "json, name=verdict" }),
+        SpeakeasyMetadata({ data: "json, name=verdict" }),
         __metadata("design:type", String)
     ], RichResultsInspectionResult.prototype, "verdict", void 0);
     return RichResultsInspectionResult;

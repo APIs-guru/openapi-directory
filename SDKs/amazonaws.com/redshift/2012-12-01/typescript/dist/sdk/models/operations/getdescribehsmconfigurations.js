@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 export var GetDescribeHsmConfigurationsActionEnum;
 (function (GetDescribeHsmConfigurationsActionEnum) {
     GetDescribeHsmConfigurationsActionEnum["DescribeHsmConfigurations"] = "DescribeHsmConfigurations";
@@ -37,31 +37,31 @@ var GetDescribeHsmConfigurationsQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Action" }),
         __metadata("design:type", String)
     ], GetDescribeHsmConfigurationsQueryParams.prototype, "action", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=HsmConfigurationIdentifier" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=HsmConfigurationIdentifier" }),
         __metadata("design:type", String)
     ], GetDescribeHsmConfigurationsQueryParams.prototype, "hsmConfigurationIdentifier", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Marker" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Marker" }),
         __metadata("design:type", String)
     ], GetDescribeHsmConfigurationsQueryParams.prototype, "marker", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" }),
         __metadata("design:type", Number)
     ], GetDescribeHsmConfigurationsQueryParams.prototype, "maxRecords", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TagKeys" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TagKeys" }),
         __metadata("design:type", Array)
     ], GetDescribeHsmConfigurationsQueryParams.prototype, "tagKeys", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=TagValues" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=TagValues" }),
         __metadata("design:type", Array)
     ], GetDescribeHsmConfigurationsQueryParams.prototype, "tagValues", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=Version" }),
         __metadata("design:type", String)
     ], GetDescribeHsmConfigurationsQueryParams.prototype, "version", void 0);
     return GetDescribeHsmConfigurationsQueryParams;
@@ -73,31 +73,31 @@ var GetDescribeHsmConfigurationsHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], GetDescribeHsmConfigurationsHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], GetDescribeHsmConfigurationsHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], GetDescribeHsmConfigurationsHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], GetDescribeHsmConfigurationsHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], GetDescribeHsmConfigurationsHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], GetDescribeHsmConfigurationsHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], GetDescribeHsmConfigurationsHeaders.prototype, "xAmzSignedHeaders", void 0);
     return GetDescribeHsmConfigurationsHeaders;
@@ -109,11 +109,11 @@ var GetDescribeHsmConfigurationsRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDescribeHsmConfigurationsQueryParams)
     ], GetDescribeHsmConfigurationsRequest.prototype, "queryParams", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetDescribeHsmConfigurationsHeaders)
     ], GetDescribeHsmConfigurationsRequest.prototype, "headers", void 0);
     return GetDescribeHsmConfigurationsRequest;
@@ -125,15 +125,15 @@ var GetDescribeHsmConfigurationsResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Uint8Array)
     ], GetDescribeHsmConfigurationsResponse.prototype, "body", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetDescribeHsmConfigurationsResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetDescribeHsmConfigurationsResponse.prototype, "statusCode", void 0);
     return GetDescribeHsmConfigurationsResponse;

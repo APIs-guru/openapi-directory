@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetPlaylistsSortEnum(str, Enum):
@@ -17,19 +18,19 @@ class GetPlaylistsQueryParams:
 
 @dataclass
 class GetPlaylistsHeaders:
-    x_listen_api_key: str = field(default=None, metadata={'header': { 'field_name': 'X-ListenAPI-Key', 'style': 'simple', 'explode': False }})
+    x_listen_api_key: str = field(metadata={'header': { 'field_name': 'X-ListenAPI-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetPlaylistsRequest:
-    query_params: GetPlaylistsQueryParams = field(default=None)
-    headers: GetPlaylistsHeaders = field(default=None)
+    headers: GetPlaylistsHeaders = field()
+    query_params: GetPlaylistsQueryParams = field()
     
 
 @dataclass
 class GetPlaylistsResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     playlists_response: Optional[shared.PlaylistsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

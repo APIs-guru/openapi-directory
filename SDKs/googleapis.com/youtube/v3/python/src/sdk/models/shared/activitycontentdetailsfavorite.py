@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import resourceid
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ActivityContentDetailsFavorite:
-    resource_id: Optional[resourceid.ResourceID] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceId' }})
+    r"""ActivityContentDetailsFavorite
+    Information about a video that was marked as a favorite video.
+    """
+    
+    resource_id: Optional[ResourceID] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceId') }})
     

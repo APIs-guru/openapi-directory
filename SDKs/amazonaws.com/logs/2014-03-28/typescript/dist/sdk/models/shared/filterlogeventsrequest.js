@@ -22,46 +22,46 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var FilterLogEventsRequest = /** @class */ (function (_super) {
     __extends(FilterLogEventsRequest, _super);
     function FilterLogEventsRequest() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=endTime" }),
+        SpeakeasyMetadata({ data: "json, name=endTime" }),
         __metadata("design:type", Number)
     ], FilterLogEventsRequest.prototype, "endTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=filterPattern" }),
+        SpeakeasyMetadata({ data: "json, name=filterPattern" }),
         __metadata("design:type", String)
     ], FilterLogEventsRequest.prototype, "filterPattern", void 0);
     __decorate([
-        Metadata({ data: "json, name=interleaved" }),
+        SpeakeasyMetadata({ data: "json, name=interleaved" }),
         __metadata("design:type", Boolean)
     ], FilterLogEventsRequest.prototype, "interleaved", void 0);
     __decorate([
-        Metadata({ data: "json, name=limit" }),
+        SpeakeasyMetadata({ data: "json, name=limit" }),
         __metadata("design:type", Number)
     ], FilterLogEventsRequest.prototype, "limit", void 0);
     __decorate([
-        Metadata({ data: "json, name=logGroupName" }),
+        SpeakeasyMetadata({ data: "json, name=logGroupName" }),
         __metadata("design:type", String)
     ], FilterLogEventsRequest.prototype, "logGroupName", void 0);
     __decorate([
-        Metadata({ data: "json, name=logStreamNamePrefix" }),
+        SpeakeasyMetadata({ data: "json, name=logStreamNamePrefix" }),
         __metadata("design:type", String)
     ], FilterLogEventsRequest.prototype, "logStreamNamePrefix", void 0);
     __decorate([
-        Metadata({ data: "json, name=logStreamNames" }),
+        SpeakeasyMetadata({ data: "json, name=logStreamNames" }),
         __metadata("design:type", Array)
     ], FilterLogEventsRequest.prototype, "logStreamNames", void 0);
     __decorate([
-        Metadata({ data: "json, name=nextToken" }),
+        SpeakeasyMetadata({ data: "json, name=nextToken" }),
         __metadata("design:type", String)
     ], FilterLogEventsRequest.prototype, "nextToken", void 0);
     __decorate([
-        Metadata({ data: "json, name=startTime" }),
+        SpeakeasyMetadata({ data: "json, name=startTime" }),
         __metadata("design:type", Number)
     ], FilterLogEventsRequest.prototype, "startTime", void 0);
     return FilterLogEventsRequest;

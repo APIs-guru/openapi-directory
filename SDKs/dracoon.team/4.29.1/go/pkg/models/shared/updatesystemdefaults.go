@@ -1,5 +1,7 @@
 package shared
 
+// UpdateSystemDefaults
+// Request model for updating system defaults
 type UpdateSystemDefaults struct {
 	DownloadShareDefaultExpirationPeriod *int32  `json:"downloadShareDefaultExpirationPeriod,omitempty"`
 	FileDefaultExpirationPeriod          *int32  `json:"fileDefaultExpirationPeriod,omitempty"`

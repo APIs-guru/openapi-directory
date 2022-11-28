@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ReportType
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A report type.
 **/
 export class ReportType extends SpeakeasyBase {
-  @Metadata({ data: "json, name=deprecateTime" })
+  @SpeakeasyMetadata({ data: "json, name=deprecateTime" })
   deprecateTime?: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id?: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=systemManaged" })
+  @SpeakeasyMetadata({ data: "json, name=systemManaged" })
   systemManaged?: boolean;
 }

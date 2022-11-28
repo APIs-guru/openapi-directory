@@ -1,6 +1,7 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { CustomAccount } from "./customaccount";
 import { GoogleAccount } from "./googleaccount";
+
 
 
 // Authentication
@@ -8,9 +9,9 @@ import { GoogleAccount } from "./googleaccount";
  * Scan authentication configuration.
 **/
 export class Authentication extends SpeakeasyBase {
-  @Metadata({ data: "json, name=customAccount" })
+  @SpeakeasyMetadata({ data: "json, name=customAccount" })
   customAccount?: CustomAccount;
 
-  @Metadata({ data: "json, name=googleAccount" })
+  @SpeakeasyMetadata({ data: "json, name=googleAccount" })
   googleAccount?: GoogleAccount;
 }

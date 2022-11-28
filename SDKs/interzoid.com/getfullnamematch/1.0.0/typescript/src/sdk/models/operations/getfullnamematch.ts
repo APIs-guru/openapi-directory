@@ -1,40 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 export class GetfullnamematchQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=fullname" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=fullname" })
   fullname: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=license" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=license" })
   license: string;
 }
 
 
-export class GetfullnamematchRequest extends SpeakeasyBase {
-  @Metadata()
-  queryParams: GetfullnamematchQueryParams;
-}
-
-
 export class Getfullnamematch200ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Code" })
+  @SpeakeasyMetadata({ data: "json, name=Code" })
   code?: string;
 
-  @Metadata({ data: "json, name=Credits" })
+  @SpeakeasyMetadata({ data: "json, name=Credits" })
   credits?: string;
 
-  @Metadata({ data: "json, name=Simkey" })
+  @SpeakeasyMetadata({ data: "json, name=Simkey" })
   simkey?: string;
 }
 
 
+export class GetfullnamematchRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata()
+  queryParams: GetfullnamematchQueryParams;
+}
+
+
 export class GetfullnamematchResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getfullnamematch200ApplicationJsonObject?: Getfullnamematch200ApplicationJson;
 }

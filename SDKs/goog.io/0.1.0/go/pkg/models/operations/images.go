@@ -8,10 +8,6 @@ type ImagesPathParams struct {
 	Query string `pathParam:"style=simple,explode=false,name=query"`
 }
 
-type ImagesRequest struct {
-	PathParams ImagesPathParams
-}
-
 type Images200ApplicationJSONImageResultsImage struct {
 	Alt *string `json:"alt,omitempty"`
 	Src *string `json:"src,omitempty"`
@@ -33,6 +29,10 @@ type Images200ApplicationJSON struct {
 	ImageResults []Images200ApplicationJSONImageResults `json:"image_results,omitempty"`
 	Results      []map[string]interface{}               `json:"results,omitempty"`
 	Total        *int64                                 `json:"total,omitempty"`
+}
+
+type ImagesRequest struct {
+	PathParams ImagesPathParams
 }
 
 type ImagesResponse struct {

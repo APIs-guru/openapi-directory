@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from typing import Optional
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import dimension
-from . import dimension
+from sdk import utils
+from . import *
 
 class PositionedObjectPositioningLayoutEnum(str, Enum):
     POSITIONED_OBJECT_LAYOUT_UNSPECIFIED = "POSITIONED_OBJECT_LAYOUT_UNSPECIFIED"
@@ -17,7 +18,11 @@ class PositionedObjectPositioningLayoutEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PositionedObjectPositioning:
-    layout: Optional[PositionedObjectPositioningLayoutEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'layout' }})
-    left_offset: Optional[dimension.Dimension] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'leftOffset' }})
-    top_offset: Optional[dimension.Dimension] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'topOffset' }})
+    r"""PositionedObjectPositioning
+    The positioning of a PositionedObject. The positioned object is positioned relative to the beginning of the Paragraph it's tethered to.
+    """
+    
+    layout: Optional[PositionedObjectPositioningLayoutEnum] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('layout') }})
+    left_offset: Optional[Dimension] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('leftOffset') }})
+    top_offset: Optional[Dimension] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('topOffset') }})
     

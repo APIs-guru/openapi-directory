@@ -1,51 +1,51 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DataPreProcessingConfiguration } from "./datapreprocessingconfiguration";
 import { DatasetSchema } from "./datasetschema";
 import { LabelsInputConfiguration } from "./labelsinputconfiguration";
 import { Tag } from "./tag";
 
 
+
 export class CreateModelRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ClientToken" })
+  @SpeakeasyMetadata({ data: "json, name=ClientToken" })
   clientToken: string;
 
-  @Metadata({ data: "json, name=DataPreProcessingConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=DataPreProcessingConfiguration" })
   dataPreProcessingConfiguration?: DataPreProcessingConfiguration;
 
-  @Metadata({ data: "json, name=DatasetName" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetName" })
   datasetName: string;
 
-  @Metadata({ data: "json, name=DatasetSchema" })
+  @SpeakeasyMetadata({ data: "json, name=DatasetSchema" })
   datasetSchema?: DatasetSchema;
 
-  @Metadata({ data: "json, name=EvaluationDataEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=EvaluationDataEndTime" })
   evaluationDataEndTime?: Date;
 
-  @Metadata({ data: "json, name=EvaluationDataStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=EvaluationDataStartTime" })
   evaluationDataStartTime?: Date;
 
-  @Metadata({ data: "json, name=LabelsInputConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=LabelsInputConfiguration" })
   labelsInputConfiguration?: LabelsInputConfiguration;
 
-  @Metadata({ data: "json, name=ModelName" })
+  @SpeakeasyMetadata({ data: "json, name=ModelName" })
   modelName: string;
 
-  @Metadata({ data: "json, name=OffCondition" })
+  @SpeakeasyMetadata({ data: "json, name=OffCondition" })
   offCondition?: string;
 
-  @Metadata({ data: "json, name=RoleArn" })
+  @SpeakeasyMetadata({ data: "json, name=RoleArn" })
   roleArn?: string;
 
-  @Metadata({ data: "json, name=ServerSideKmsKeyId" })
+  @SpeakeasyMetadata({ data: "json, name=ServerSideKmsKeyId" })
   serverSideKmsKeyId?: string;
 
-  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=Tags", elemType: Tag })
   tags?: Tag[];
 
-  @Metadata({ data: "json, name=TrainingDataEndTime" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingDataEndTime" })
   trainingDataEndTime?: Date;
 
-  @Metadata({ data: "json, name=TrainingDataStartTime" })
+  @SpeakeasyMetadata({ data: "json, name=TrainingDataStartTime" })
   trainingDataStartTime?: Date;
 }

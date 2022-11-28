@@ -10,7 +10,7 @@ type DcimPowerFeedsUpdatePathParams struct {
 
 type DcimPowerFeedsUpdateRequest struct {
 	PathParams DcimPowerFeedsUpdatePathParams
-	Request    shared.WritablePowerFeed `request:"mediaType=application/json"`
+	Request    shared.WritablePowerFeedInput `request:"mediaType=application/json"`
 }
 
 type DcimPowerFeedsUpdateResponse struct {

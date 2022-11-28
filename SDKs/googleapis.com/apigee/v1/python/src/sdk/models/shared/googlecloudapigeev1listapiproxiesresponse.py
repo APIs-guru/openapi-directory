@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import googlecloudapigeev1apiproxy
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GoogleCloudApigeeV1ListAPIProxiesResponse:
-    proxies: Optional[List[googlecloudapigeev1apiproxy.GoogleCloudApigeeV1APIProxy]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'proxies' }})
+    r"""GoogleCloudApigeeV1ListAPIProxiesResponse
+    To change this message, in the same CL add a change log in go/changing-api-proto-breaks-ui
+    """
+    
+    proxies: Optional[List[GoogleCloudApigeeV1APIProxy]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('proxies') }})
     

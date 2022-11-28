@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // OnPremConfig
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A list of Amazon Resource Names (ARNs) of agents to use for a Network File System (NFS) location.
 **/
 export class OnPremConfig extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AgentArns" })
+  @SpeakeasyMetadata({ data: "json, name=AgentArns" })
   agentArns: string[];
 }

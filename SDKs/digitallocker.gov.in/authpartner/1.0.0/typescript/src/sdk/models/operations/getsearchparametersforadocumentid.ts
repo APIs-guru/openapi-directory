@@ -1,65 +1,66 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class GetSearchParametersForADocumentIdSecurity extends SpeakeasyBase {
-  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  @SpeakeasyMetadata({ data: "security, scheme=true;type=oauth2" })
   oauthsecurity: shared.SchemeOauthsecurity;
 }
 
 
-export class GetSearchParametersForADocumentIdRequest extends SpeakeasyBase {
-  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
-  request?: any;
-
-  @Metadata()
-  security: GetSearchParametersForADocumentIdSecurity;
-}
-
-
 export class GetSearchParametersForADocumentId400ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: any;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: any;
 }
 
 
 export class GetSearchParametersForADocumentId401ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: string;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: string;
 }
 
 
 export class GetSearchParametersForADocumentId500ApplicationJson extends SpeakeasyBase {
-  @Metadata({ data: "json, name=error" })
+  @SpeakeasyMetadata({ data: "json, name=error" })
   error?: any;
 
-  @Metadata({ data: "json, name=error_description" })
+  @SpeakeasyMetadata({ data: "json, name=error_description" })
   errorDescription?: any;
 }
 
 
+export class GetSearchParametersForADocumentIdRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  request?: any;
+
+  @SpeakeasyMetadata()
+  security: GetSearchParametersForADocumentIdSecurity;
+}
+
+
 export class GetSearchParametersForADocumentIdResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSearchParametersForADocumentId400ApplicationJsonObject?: GetSearchParametersForADocumentId400ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSearchParametersForADocumentId401ApplicationJsonObject?: GetSearchParametersForADocumentId401ApplicationJson;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   getSearchParametersForADocumentId500ApplicationJsonObject?: GetSearchParametersForADocumentId500ApplicationJson;
 
-  @Metadata({ elemType: shared.SearchParametersResponse })
+  @SpeakeasyMetadata({ elemType: shared.SearchParametersResponse })
   searchParametersResponse?: shared.SearchParametersResponse[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

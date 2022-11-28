@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import List,Optional
+from typing import Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 
 
 @dataclass_json
 @dataclass
 class ListUserImportJobsRequest:
-    max_results: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    pagination_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PaginationToken' }})
-    user_pool_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UserPoolId' }})
+    r"""ListUserImportJobsRequest
+    Represents the request to list the user import jobs.
+    """
+    
+    max_results: int = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    user_pool_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('UserPoolId') }})
+    pagination_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('PaginationToken') }})
     

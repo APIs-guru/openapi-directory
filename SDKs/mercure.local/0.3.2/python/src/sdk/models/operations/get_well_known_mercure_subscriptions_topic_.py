@@ -5,17 +5,17 @@ from sdk.models import shared
 
 @dataclass
 class GetWellKnownMercureSubscriptionsTopicPathParams:
-    topic: str = field(default=None, metadata={'path_param': { 'field_name': 'topic', 'style': 'simple', 'explode': False }})
+    topic: str = field(metadata={'path_param': { 'field_name': 'topic', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetWellKnownMercureSubscriptionsTopicRequest:
-    path_params: GetWellKnownMercureSubscriptionsTopicPathParams = field(default=None)
+    path_params: GetWellKnownMercureSubscriptionsTopicPathParams = field()
     
 
 @dataclass
 class GetWellKnownMercureSubscriptionsTopicResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     subscriptions: Optional[shared.Subscriptions] = field(default=None)
     

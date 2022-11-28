@@ -1,27 +1,28 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
+
 export class UpdateImagePipelineHeaders extends SpeakeasyBase {
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
   xAmzAlgorithm?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
   xAmzContentSha256?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
   xAmzCredential?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
   xAmzDate?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
   xAmzSecurityToken?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
   xAmzSignature?: string;
 
-  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
   xAmzSignedHeaders?: string;
 }
 
@@ -31,10 +32,10 @@ export class UpdateImagePipelineHeaders extends SpeakeasyBase {
  * Image tests configuration.
 **/
 export class UpdateImagePipelineRequestBodyImageTestsConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=imageTestsEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=imageTestsEnabled" })
   imageTestsEnabled?: boolean;
 
-  @Metadata({ data: "json, name=timeoutMinutes" })
+  @SpeakeasyMetadata({ data: "json, name=timeoutMinutes" })
   timeoutMinutes?: number;
 }
 
@@ -44,98 +45,98 @@ export class UpdateImagePipelineRequestBodyImageTestsConfiguration extends Speak
  * A schedule configures how often and when a pipeline will automatically create a new image.
 **/
 export class UpdateImagePipelineRequestBodySchedule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=pipelineExecutionStartCondition" })
+  @SpeakeasyMetadata({ data: "json, name=pipelineExecutionStartCondition" })
   pipelineExecutionStartCondition?: shared.PipelineExecutionStartConditionEnum;
 
-  @Metadata({ data: "json, name=scheduleExpression" })
+  @SpeakeasyMetadata({ data: "json, name=scheduleExpression" })
   scheduleExpression?: string;
 
-  @Metadata({ data: "json, name=timezone" })
+  @SpeakeasyMetadata({ data: "json, name=timezone" })
   timezone?: string;
 }
 
 export enum UpdateImagePipelineRequestBodyStatusEnum {
-    Disabled = "DISABLED"
-,    Enabled = "ENABLED"
+    Disabled = "DISABLED",
+    Enabled = "ENABLED"
 }
 
 
 export class UpdateImagePipelineRequestBody extends SpeakeasyBase {
-  @Metadata({ data: "json, name=clientToken" })
+  @SpeakeasyMetadata({ data: "json, name=clientToken" })
   clientToken: string;
 
-  @Metadata({ data: "json, name=containerRecipeArn" })
+  @SpeakeasyMetadata({ data: "json, name=containerRecipeArn" })
   containerRecipeArn?: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description?: string;
 
-  @Metadata({ data: "json, name=distributionConfigurationArn" })
+  @SpeakeasyMetadata({ data: "json, name=distributionConfigurationArn" })
   distributionConfigurationArn?: string;
 
-  @Metadata({ data: "json, name=enhancedImageMetadataEnabled" })
+  @SpeakeasyMetadata({ data: "json, name=enhancedImageMetadataEnabled" })
   enhancedImageMetadataEnabled?: boolean;
 
-  @Metadata({ data: "json, name=imagePipelineArn" })
+  @SpeakeasyMetadata({ data: "json, name=imagePipelineArn" })
   imagePipelineArn: string;
 
-  @Metadata({ data: "json, name=imageRecipeArn" })
+  @SpeakeasyMetadata({ data: "json, name=imageRecipeArn" })
   imageRecipeArn?: string;
 
-  @Metadata({ data: "json, name=imageTestsConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=imageTestsConfiguration" })
   imageTestsConfiguration?: UpdateImagePipelineRequestBodyImageTestsConfiguration;
 
-  @Metadata({ data: "json, name=infrastructureConfigurationArn" })
+  @SpeakeasyMetadata({ data: "json, name=infrastructureConfigurationArn" })
   infrastructureConfigurationArn: string;
 
-  @Metadata({ data: "json, name=schedule" })
+  @SpeakeasyMetadata({ data: "json, name=schedule" })
   schedule?: UpdateImagePipelineRequestBodySchedule;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status?: UpdateImagePipelineRequestBodyStatusEnum;
 }
 
 
 export class UpdateImagePipelineRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   headers: UpdateImagePipelineHeaders;
 
-  @Metadata({ data: "request, media_type=application/json" })
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: UpdateImagePipelineRequestBody;
 }
 
 
 export class UpdateImagePipelineResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   callRateLimitExceededException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   clientException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   forbiddenException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   idempotentParameterMismatchException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   invalidRequestException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   resourceInUseException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   serviceUnavailableException?: any;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   updateImagePipelineResponse?: shared.UpdateImagePipelineResponse;
 }

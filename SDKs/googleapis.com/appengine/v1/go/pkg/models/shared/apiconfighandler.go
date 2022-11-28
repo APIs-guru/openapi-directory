@@ -27,6 +27,8 @@ const (
 	APIConfigHandlerSecurityLevelEnumSecureAlways      APIConfigHandlerSecurityLevelEnum = "SECURE_ALWAYS"
 )
 
+// APIConfigHandler
+// Google Cloud Endpoints (https://cloud.google.com/endpoints) configuration for API handlers.
 type APIConfigHandler struct {
 	AuthFailAction *APIConfigHandlerAuthFailActionEnum `json:"authFailAction,omitempty"`
 	Login          *APIConfigHandlerLoginEnum          `json:"login,omitempty"`

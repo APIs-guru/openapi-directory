@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AwsEcsClusterConfigurationExecuteCommandConfigurationDetails } from "./awsecsclusterconfigurationexecutecommandconfigurationdetails";
+
 
 
 // AwsEcsClusterConfigurationDetails
@@ -7,6 +8,6 @@ import { AwsEcsClusterConfigurationExecuteCommandConfigurationDetails } from "./
  * The run command configuration for the cluster.
 **/
 export class AwsEcsClusterConfigurationDetails extends SpeakeasyBase {
-  @Metadata({ data: "json, name=ExecuteCommandConfiguration" })
+  @SpeakeasyMetadata({ data: "json, name=ExecuteCommandConfiguration" })
   executeCommandConfiguration?: AwsEcsClusterConfigurationExecuteCommandConfigurationDetails;
 }

@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var GetResourcesCampaignsJsonQueryParams = /** @class */ (function (_super) {
     __extends(GetResourcesCampaignsJsonQueryParams, _super);
@@ -30,15 +30,15 @@ var GetResourcesCampaignsJsonQueryParams = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=max" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=max" }),
         __metadata("design:type", Number)
     ], GetResourcesCampaignsJsonQueryParams.prototype, "max", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=offset" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=offset" }),
         __metadata("design:type", Number)
     ], GetResourcesCampaignsJsonQueryParams.prototype, "offset", void 0);
     __decorate([
-        Metadata({ data: "queryParam, style=form;explode=false;name=sort" }),
+        SpeakeasyMetadata({ data: "queryParam, style=form;explode=false;name=sort" }),
         __metadata("design:type", String)
     ], GetResourcesCampaignsJsonQueryParams.prototype, "sort", void 0);
     return GetResourcesCampaignsJsonQueryParams;
@@ -50,7 +50,7 @@ var GetResourcesCampaignsJsonRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", GetResourcesCampaignsJsonQueryParams)
     ], GetResourcesCampaignsJsonRequest.prototype, "queryParams", void 0);
     return GetResourcesCampaignsJsonRequest;
@@ -62,15 +62,15 @@ var GetResourcesCampaignsJsonResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.CampaignWrapped)
     ], GetResourcesCampaignsJsonResponse.prototype, "campaignWrapped", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], GetResourcesCampaignsJsonResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], GetResourcesCampaignsJsonResponse.prototype, "statusCode", void 0);
     return GetResourcesCampaignsJsonResponse;

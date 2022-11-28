@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Backup
+// Describes a single backup.
 type Backup struct {
 	BackupArn                  *string           `json:"BackupArn,omitempty"`
 	BackupID                   *string           `json:"BackupId,omitempty"`

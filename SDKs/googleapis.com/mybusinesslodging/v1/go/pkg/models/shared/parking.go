@@ -63,6 +63,8 @@ const (
 	ParkingValetParkingAvailableExceptionEnumDependentOnDayOfWeek ParkingValetParkingAvailableExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+// Parking
+// Parking options at the property.
 type Parking struct {
 	ElectricCarChargingStations          *bool                                            `json:"electricCarChargingStations,omitempty"`
 	ElectricCarChargingStationsException *ParkingElectricCarChargingStationsExceptionEnum `json:"electricCarChargingStationsException,omitempty"`

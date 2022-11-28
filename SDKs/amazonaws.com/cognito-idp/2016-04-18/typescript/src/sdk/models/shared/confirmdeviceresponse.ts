@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ConfirmDeviceResponse
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Confirms the device response.
 **/
 export class ConfirmDeviceResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=UserConfirmationNecessary" })
+  @SpeakeasyMetadata({ data: "json, name=UserConfirmationNecessary" })
   userConfirmationNecessary?: boolean;
 }

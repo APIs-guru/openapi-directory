@@ -1,7 +1,8 @@
 
 
+
 export enum InputStartingPositionEnum {
-    Now = "NOW"
-,    TrimHorizon = "TRIM_HORIZON"
-,    LastStoppedPoint = "LAST_STOPPED_POINT"
+    Now = "NOW",
+    TrimHorizon = "TRIM_HORIZON",
+    LastStoppedPoint = "LAST_STOPPED_POINT"
 }

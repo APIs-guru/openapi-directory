@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// ParameterHistory
+// Information about parameter usage.
 type ParameterHistory struct {
 	AllowedPattern   *string                 `json:"AllowedPattern,omitempty"`
 	DataType         *string                 `json:"DataType,omitempty"`

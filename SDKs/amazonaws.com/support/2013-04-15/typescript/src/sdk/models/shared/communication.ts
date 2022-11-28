@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AttachmentDetails } from "./attachmentdetails";
+
 
 
 // Communication
@@ -8,18 +8,18 @@ import { AttachmentDetails } from "./attachmentdetails";
  * A communication associated with a support case. The communication consists of the case ID, the message body, attachment information, the submitter of the communication, and the date and time of the communication.
 **/
 export class Communication extends SpeakeasyBase {
-  @Metadata({ data: "json, name=attachmentSet", elemType: shared.AttachmentDetails })
+  @SpeakeasyMetadata({ data: "json, name=attachmentSet", elemType: AttachmentDetails })
   attachmentSet?: AttachmentDetails[];
 
-  @Metadata({ data: "json, name=body" })
+  @SpeakeasyMetadata({ data: "json, name=body" })
   body?: string;
 
-  @Metadata({ data: "json, name=caseId" })
+  @SpeakeasyMetadata({ data: "json, name=caseId" })
   caseId?: string;
 
-  @Metadata({ data: "json, name=submittedBy" })
+  @SpeakeasyMetadata({ data: "json, name=submittedBy" })
   submittedBy?: string;
 
-  @Metadata({ data: "json, name=timeCreated" })
+  @SpeakeasyMetadata({ data: "json, name=timeCreated" })
   timeCreated?: string;
 }

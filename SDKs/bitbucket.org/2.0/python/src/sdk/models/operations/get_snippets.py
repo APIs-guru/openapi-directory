@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 class GetSnippetsRoleEnum(str, Enum):
@@ -14,37 +15,22 @@ class GetSnippetsQueryParams:
     
 
 @dataclass
-class GetSnippetsSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class GetSnippetsSecurityOption2:
-    basic: shared.SchemeBasic = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
-    
-
-@dataclass
-class GetSnippetsSecurityOption3:
-    api_key: shared.SchemeAPIKey = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
-    
-
-@dataclass
 class GetSnippetsSecurity:
-    option1: Optional[GetSnippetsSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[GetSnippetsSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
-    option3: Optional[GetSnippetsSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
+    api_key: Optional[shared.SchemeAPIKey] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'apiKey', 'sub_type': 'header' }})
+    basic: Optional[shared.SchemeBasic] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'basic' }})
+    oauth2: Optional[shared.SchemeOauth2] = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class GetSnippetsRequest:
-    query_params: GetSnippetsQueryParams = field(default=None)
-    security: GetSnippetsSecurity = field(default=None)
+    query_params: GetSnippetsQueryParams = field()
+    security: GetSnippetsSecurity = field()
     
 
 @dataclass
 class GetSnippetsResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     error: Optional[dict[str, Any]] = field(default=None)
     paginated_snippets: Optional[shared.PaginatedSnippets] = field(default=None)
     

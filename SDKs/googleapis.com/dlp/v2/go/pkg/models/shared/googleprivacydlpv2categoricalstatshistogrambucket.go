@@ -1,5 +1,7 @@
 package shared
 
+// GooglePrivacyDlpV2CategoricalStatsHistogramBucket
+// Histogram of value frequencies in the column.
 type GooglePrivacyDlpV2CategoricalStatsHistogramBucket struct {
 	BucketSize               *string                            `json:"bucketSize,omitempty"`
 	BucketValueCount         *string                            `json:"bucketValueCount,omitempty"`

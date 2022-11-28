@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // DeviceConfig
 /**
  * The device configuration. Eventually delivered to devices.
@@ -33,19 +33,19 @@ var DeviceConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=binaryData" }),
+        SpeakeasyMetadata({ data: "json, name=binaryData" }),
         __metadata("design:type", String)
     ], DeviceConfig.prototype, "binaryData", void 0);
     __decorate([
-        Metadata({ data: "json, name=cloudUpdateTime" }),
+        SpeakeasyMetadata({ data: "json, name=cloudUpdateTime" }),
         __metadata("design:type", String)
     ], DeviceConfig.prototype, "cloudUpdateTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=deviceAckTime" }),
+        SpeakeasyMetadata({ data: "json, name=deviceAckTime" }),
         __metadata("design:type", String)
     ], DeviceConfig.prototype, "deviceAckTime", void 0);
     __decorate([
-        Metadata({ data: "json, name=version" }),
+        SpeakeasyMetadata({ data: "json, name=version" }),
         __metadata("design:type", String)
     ], DeviceConfig.prototype, "version", void 0);
     return DeviceConfig;

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AlgorithmImage
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Describes an algorithm image.
 **/
 export class AlgorithmImage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dockerURI" })
+  @SpeakeasyMetadata({ data: "json, name=dockerURI" })
   dockerUri: string;
 
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 }

@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // AwsApiGatewayEndpointConfiguration
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Contains information about the endpoints for the API.
 **/
 export class AwsApiGatewayEndpointConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Types" })
+  @SpeakeasyMetadata({ data: "json, name=Types" })
   types?: string[];
 }

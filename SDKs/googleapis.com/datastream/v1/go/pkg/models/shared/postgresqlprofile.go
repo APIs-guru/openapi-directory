@@ -1,5 +1,7 @@
 package shared
 
+// PostgresqlProfile
+// PostgreSQL database profile.
 type PostgresqlProfile struct {
 	Database *string `json:"database,omitempty"`
 	Hostname *string `json:"hostname,omitempty"`

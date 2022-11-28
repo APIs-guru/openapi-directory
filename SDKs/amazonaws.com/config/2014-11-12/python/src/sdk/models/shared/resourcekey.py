@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Enum
+from enum import Enum
 from dataclasses_json import dataclass_json
-from . import resourcetype_enum
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class ResourceKey:
-    resource_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceId' }})
-    resource_type: resourcetype_enum.ResourceTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resourceType' }})
+    r"""ResourceKey
+    The details that identify a resource within Config, including the resource type and resource ID.
+    """
+    
+    resource_id: str = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceId') }})
+    resource_type: ResourceTypeEnum = field(metadata={'dataclasses_json': { 'letter_case': utils.field_name('resourceType') }})
     

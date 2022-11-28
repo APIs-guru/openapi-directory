@@ -1,8 +1,11 @@
-import warnings
+
+
 import requests
-from typing import List,Optional
-from sdk.models import operations, shared
+from typing import Optional
+from sdk.models import shared, operations
 from . import utils
+
+
 
 
 SERVERS = [
@@ -11,28 +14,49 @@ SERVERS = [
 
 
 class SDK:
-    client = requests.Session()
-    server_url = SERVERS[0]
+    
+
+    _client: requests.Session
+    _security_client: requests.Session
+    
+    _server_url: str = SERVERS[0]
+    _language: str = "python"
+    _sdk_version: str = "0.0.1"
+    _gen_version: str = "internal"
+
+    def __init__(self) -> None:
+        self._client = requests.Session()
+        self._security_client = requests.Session()
+        
+
 
     def config_server_url(self, server_url: str, params: dict[str, str]):
-        if not params is None:
-            self.server_url = utils.replace_parameters(server_url, params)
+        if params is not None:
+            self._server_url = utils.replace_parameters(server_url, params)
         else:
-            self.server_url = server_url
-            
+            self._server_url = server_url
+
+        
     
 
+    def config_client(self, client: requests.Session):
+        self._client = client
+        
+    
+    
     
     def creator_roles_list(self, request: operations.CreatorRolesListRequest) -> operations.CreatorRolesListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of creator positions (jobs).
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/creator-roles"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -47,15 +71,17 @@ class SDK:
 
     
     def creators_list(self, request: operations.CreatorsListRequest) -> operations.CreatorsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of game creators.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/creators"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -70,13 +96,16 @@ class SDK:
 
     
     def creators_read(self, request: operations.CreatorsReadRequest) -> operations.CreatorsReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get details of the creator.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/creators/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -91,15 +120,17 @@ class SDK:
 
     
     def developers_list(self, request: operations.DevelopersListRequest) -> operations.DevelopersListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of game developers.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/developers"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -114,13 +145,16 @@ class SDK:
 
     
     def developers_read(self, request: operations.DevelopersReadRequest) -> operations.DevelopersReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get details of the developer.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/developers/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -135,13 +169,16 @@ class SDK:
 
     
     def games_achievements_read(self, request: operations.GamesAchievementsReadRequest) -> operations.GamesAchievementsReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of game achievements.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/games/{id}/achievements", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -156,15 +193,17 @@ class SDK:
 
     
     def games_additions_list(self, request: operations.GamesAdditionsListRequest) -> operations.GamesAdditionsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of DLC's for the game, GOTY and other editions, companion apps, etc.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/games/{game_pk}/additions", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -179,15 +218,17 @@ class SDK:
 
     
     def games_development_team_list(self, request: operations.GamesDevelopmentTeamListRequest) -> operations.GamesDevelopmentTeamListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of individual creators that were part of the development team.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/games/{game_pk}/development-team", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -202,15 +243,17 @@ class SDK:
 
     
     def games_game_series_list(self, request: operations.GamesGameSeriesListRequest) -> operations.GamesGameSeriesListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of games that are part of the same series.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/games/{game_pk}/game-series", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -225,15 +268,17 @@ class SDK:
 
     
     def games_list(self, request: operations.GamesListRequest) -> operations.GamesListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of games.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/games"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -248,13 +293,16 @@ class SDK:
 
     
     def games_movies_read(self, request: operations.GamesMoviesReadRequest) -> operations.GamesMoviesReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of game trailers.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/games/{id}/movies", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -269,15 +317,17 @@ class SDK:
 
     
     def games_parent_games_list(self, request: operations.GamesParentGamesListRequest) -> operations.GamesParentGamesListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of parent games for DLC's and editions.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/games/{game_pk}/parent-games", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -292,13 +342,16 @@ class SDK:
 
     
     def games_read(self, request: operations.GamesReadRequest) -> operations.GamesReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get details of the game.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/games/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -313,13 +366,16 @@ class SDK:
 
     
     def games_reddit_read(self, request: operations.GamesRedditReadRequest) -> operations.GamesRedditReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of most recent posts from the game's subreddit.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/games/{id}/reddit", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -334,15 +390,17 @@ class SDK:
 
     
     def games_screenshots_list(self, request: operations.GamesScreenshotsListRequest) -> operations.GamesScreenshotsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get screenshots for the game.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/games/{game_pk}/screenshots", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -357,15 +415,17 @@ class SDK:
 
     
     def games_stores_list(self, request: operations.GamesStoresListRequest) -> operations.GamesStoresListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get links to the stores that sell the game.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/games/{game_pk}/stores", request.path_params)
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -380,13 +440,16 @@ class SDK:
 
     
     def games_suggested_read(self, request: operations.GamesSuggestedReadRequest) -> operations.GamesSuggestedReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of visually similar games, available only for business and enterprise API users.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/games/{id}/suggested", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -401,13 +464,16 @@ class SDK:
 
     
     def games_twitch_read(self, request: operations.GamesTwitchReadRequest) -> operations.GamesTwitchReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get streams on Twitch associated with the game, available only for business and enterprise API users.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/games/{id}/twitch", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -422,13 +488,16 @@ class SDK:
 
     
     def games_youtube_read(self, request: operations.GamesYoutubeReadRequest) -> operations.GamesYoutubeReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get videos from YouTube associated with the game, available only for business and enterprise API users.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/games/{id}/youtube", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -443,15 +512,17 @@ class SDK:
 
     
     def genres_list(self, request: operations.GenresListRequest) -> operations.GenresListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of video game genres.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/genres"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -466,13 +537,16 @@ class SDK:
 
     
     def genres_read(self, request: operations.GenresReadRequest) -> operations.GenresReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get details of the genre.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/genres/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -487,15 +561,17 @@ class SDK:
 
     
     def platforms_list(self, request: operations.PlatformsListRequest) -> operations.PlatformsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of video game platforms.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/platforms"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -510,15 +586,18 @@ class SDK:
 
     
     def platforms_lists_parents_list(self, request: operations.PlatformsListsParentsListRequest) -> operations.PlatformsListsParentsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of parent platforms.
+        For instance, for PS2 and PS4 the “parent platform” is PlayStation.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/platforms/lists/parents"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -533,13 +612,16 @@ class SDK:
 
     
     def platforms_read(self, request: operations.PlatformsReadRequest) -> operations.PlatformsReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get details of the platform.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/platforms/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -554,15 +636,17 @@ class SDK:
 
     
     def publishers_list(self, request: operations.PublishersListRequest) -> operations.PublishersListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of video game publishers.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/publishers"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -577,13 +661,16 @@ class SDK:
 
     
     def publishers_read(self, request: operations.PublishersReadRequest) -> operations.PublishersReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get details of the publisher.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/publishers/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -598,15 +685,17 @@ class SDK:
 
     
     def stores_list(self, request: operations.StoresListRequest) -> operations.StoresListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of video game storefronts.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/stores"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -621,13 +710,16 @@ class SDK:
 
     
     def stores_read(self, request: operations.StoresReadRequest) -> operations.StoresReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get details of the store.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/stores/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
@@ -642,15 +734,17 @@ class SDK:
 
     
     def tags_list(self, request: operations.TagsListRequest) -> operations.TagsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get a list of tags.
+        """
+        
+        base_url = self._server_url
+        
         url = base_url.removesuffix("/") + "/tags"
-
+        
         query_params = utils.get_query_params(request.query_params)
-
-        client = self.client
-
+        
+        client = self._client
+        
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
@@ -665,13 +759,16 @@ class SDK:
 
     
     def tags_read(self, request: operations.TagsReadRequest) -> operations.TagsReadResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
+        r"""Get details of the tag.
+        """
+        
+        base_url = self._server_url
+        
         url = utils.generate_url(base_url, "/tags/{id}", request.path_params)
-
-        client = self.client
-
+        
+        
+        client = self._client
+        
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 

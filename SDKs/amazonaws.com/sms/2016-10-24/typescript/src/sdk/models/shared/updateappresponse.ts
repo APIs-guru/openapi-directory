@@ -1,17 +1,17 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { AppSummary } from "./appsummary";
 import { ServerGroup } from "./servergroup";
 import { Tag } from "./tag";
 
 
+
 export class UpdateAppResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=appSummary" })
+  @SpeakeasyMetadata({ data: "json, name=appSummary" })
   appSummary?: AppSummary;
 
-  @Metadata({ data: "json, name=serverGroups", elemType: shared.ServerGroup })
+  @SpeakeasyMetadata({ data: "json, name=serverGroups", elemType: ServerGroup })
   serverGroups?: ServerGroup[];
 
-  @Metadata({ data: "json, name=tags", elemType: shared.Tag })
+  @SpeakeasyMetadata({ data: "json, name=tags", elemType: Tag })
   tags?: Tag[];
 }

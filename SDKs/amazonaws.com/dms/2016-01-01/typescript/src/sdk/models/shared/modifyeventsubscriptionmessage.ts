@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // ModifyEventSubscriptionMessage
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * <p/>
 **/
 export class ModifyEventSubscriptionMessage extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Enabled" })
+  @SpeakeasyMetadata({ data: "json, name=Enabled" })
   enabled?: boolean;
 
-  @Metadata({ data: "json, name=EventCategories" })
+  @SpeakeasyMetadata({ data: "json, name=EventCategories" })
   eventCategories?: string[];
 
-  @Metadata({ data: "json, name=SnsTopicArn" })
+  @SpeakeasyMetadata({ data: "json, name=SnsTopicArn" })
   snsTopicArn?: string;
 
-  @Metadata({ data: "json, name=SourceType" })
+  @SpeakeasyMetadata({ data: "json, name=SourceType" })
   sourceType?: string;
 
-  @Metadata({ data: "json, name=SubscriptionName" })
+  @SpeakeasyMetadata({ data: "json, name=SubscriptionName" })
   subscriptionName: string;
 }

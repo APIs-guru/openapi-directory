@@ -9,6 +9,8 @@ const (
 	StatusCodeEnumUnknown         StatusCodeEnum = "UNKNOWN"
 )
 
+// Status
+// Status specifies state for the subcomponent.
 type Status struct {
 	Code        *StatusCodeEnum `json:"code,omitempty"`
 	Description *string         `json:"description,omitempty"`

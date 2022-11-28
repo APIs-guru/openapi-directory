@@ -43,6 +43,8 @@ const (
 	RecognitionMetadataRecordingDeviceTypeEnumOtherIndoorDevice              RecognitionMetadataRecordingDeviceTypeEnum = "OTHER_INDOOR_DEVICE"
 )
 
+// RecognitionMetadata
+// Description of audio data to be recognized.
 type RecognitionMetadata struct {
 	AudioTopic               *string                                     `json:"audioTopic,omitempty"`
 	IndustryNaicsCodeOfAudio *int64                                      `json:"industryNaicsCodeOfAudio,omitempty"`

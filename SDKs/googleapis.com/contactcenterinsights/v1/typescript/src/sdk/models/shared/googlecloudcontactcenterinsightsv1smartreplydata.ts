@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // GoogleCloudContactcenterinsightsV1SmartReplyData
@@ -6,15 +7,15 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Agent Assist Smart Reply data.
 **/
 export class GoogleCloudContactcenterinsightsV1SmartReplyData extends SpeakeasyBase {
-  @Metadata({ data: "json, name=confidenceScore" })
+  @SpeakeasyMetadata({ data: "json, name=confidenceScore" })
   confidenceScore?: number;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: Map<string, string>;
 
-  @Metadata({ data: "json, name=queryRecord" })
+  @SpeakeasyMetadata({ data: "json, name=queryRecord" })
   queryRecord?: string;
 
-  @Metadata({ data: "json, name=reply" })
+  @SpeakeasyMetadata({ data: "json, name=reply" })
   reply?: string;
 }

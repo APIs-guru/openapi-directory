@@ -1,10 +1,11 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,List,Optional
+from typing import Any,List,Optional
+from enum import Enum
 
 
 @dataclass
 class GetOrganizationInventoryDevicesPathParams:
-    organization_id: str = field(default=None, metadata={'path_param': { 'field_name': 'organizationId', 'style': 'simple', 'explode': False }})
+    organization_id: str = field(metadata={'path_param': { 'field_name': 'organizationId', 'style': 'simple', 'explode': False }})
     
 class GetOrganizationInventoryDevicesUsedStateEnum(str, Enum):
     USED = "used"
@@ -22,14 +23,14 @@ class GetOrganizationInventoryDevicesQueryParams:
 
 @dataclass
 class GetOrganizationInventoryDevicesRequest:
-    path_params: GetOrganizationInventoryDevicesPathParams = field(default=None)
-    query_params: GetOrganizationInventoryDevicesQueryParams = field(default=None)
+    path_params: GetOrganizationInventoryDevicesPathParams = field()
+    query_params: GetOrganizationInventoryDevicesQueryParams = field()
     
 
 @dataclass
 class GetOrganizationInventoryDevicesResponse:
-    content_type: str = field(default=None)
-    headers: dict[str, List[str]] = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    headers: dict[str, List[str]] = field()
+    status_code: int = field()
     get_organization_inventory_devices_200_application_json_object: Optional[dict[str, Any]] = field(default=None)
     

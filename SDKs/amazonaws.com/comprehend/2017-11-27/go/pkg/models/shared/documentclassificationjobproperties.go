@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// DocumentClassificationJobProperties
+// Provides information about a document classification job.
 type DocumentClassificationJobProperties struct {
 	DataAccessRoleArn     *string           `json:"DataAccessRoleArn,omitempty"`
 	DocumentClassifierArn *string           `json:"DocumentClassifierArn,omitempty"`

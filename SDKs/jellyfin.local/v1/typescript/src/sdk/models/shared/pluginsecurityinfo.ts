@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // PluginSecurityInfo
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Plugin security info.
 **/
 export class PluginSecurityInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=IsMbSupporter" })
+  @SpeakeasyMetadata({ data: "json, name=IsMbSupporter" })
   isMbSupporter?: boolean;
 
-  @Metadata({ data: "json, name=SupporterKey" })
+  @SpeakeasyMetadata({ data: "json, name=SupporterKey" })
   supporterKey?: string;
 }

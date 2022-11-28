@@ -1,8 +1,9 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ServiceTemplateVersion } from "./servicetemplateversion";
 
 
+
 export class GetServiceTemplateVersionOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=serviceTemplateVersion" })
+  @SpeakeasyMetadata({ data: "json, name=serviceTemplateVersion" })
   serviceTemplateVersion: ServiceTemplateVersion;
 }

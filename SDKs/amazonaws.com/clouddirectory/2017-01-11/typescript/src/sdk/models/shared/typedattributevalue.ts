@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TypedAttributeValue
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the data for a typed attribute. You can set one, and only one, of the elements. Each attribute in an item is a name-value pair. Attributes have a single value.
 **/
 export class TypedAttributeValue extends SpeakeasyBase {
-  @Metadata({ data: "json, name=BinaryValue" })
+  @SpeakeasyMetadata({ data: "json, name=BinaryValue" })
   binaryValue?: string;
 
-  @Metadata({ data: "json, name=BooleanValue" })
+  @SpeakeasyMetadata({ data: "json, name=BooleanValue" })
   booleanValue?: boolean;
 
-  @Metadata({ data: "json, name=DatetimeValue" })
+  @SpeakeasyMetadata({ data: "json, name=DatetimeValue" })
   datetimeValue?: Date;
 
-  @Metadata({ data: "json, name=NumberValue" })
+  @SpeakeasyMetadata({ data: "json, name=NumberValue" })
   numberValue?: string;
 
-  @Metadata({ data: "json, name=StringValue" })
+  @SpeakeasyMetadata({ data: "json, name=StringValue" })
   stringValue?: string;
 }

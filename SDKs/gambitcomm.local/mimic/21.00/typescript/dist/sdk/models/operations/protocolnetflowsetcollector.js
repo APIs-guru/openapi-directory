@@ -22,18 +22,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 var ProtocolNetflowSetCollectorPathParams = /** @class */ (function (_super) {
     __extends(ProtocolNetflowSetCollectorPathParams, _super);
     function ProtocolNetflowSetCollectorPathParams() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=agentNum" }),
         __metadata("design:type", Number)
     ], ProtocolNetflowSetCollectorPathParams.prototype, "agentNum", void 0);
     __decorate([
-        Metadata({ data: "pathParam, style=simple;explode=false;name=collectorIP" }),
+        SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=collectorIP" }),
         __metadata("design:type", String)
     ], ProtocolNetflowSetCollectorPathParams.prototype, "collectorIp", void 0);
     return ProtocolNetflowSetCollectorPathParams;
@@ -45,7 +45,7 @@ var ProtocolNetflowSetCollectorRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", ProtocolNetflowSetCollectorPathParams)
     ], ProtocolNetflowSetCollectorRequest.prototype, "pathParams", void 0);
     return ProtocolNetflowSetCollectorRequest;
@@ -57,15 +57,15 @@ var ProtocolNetflowSetCollectorResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolNetflowSetCollectorResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], ProtocolNetflowSetCollectorResponse.prototype, "statusCode", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], ProtocolNetflowSetCollectorResponse.prototype, "protocolNetflowSetCollector200ApplicationJsonString", void 0);
     return ProtocolNetflowSetCollectorResponse;

@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { EndpointDetails } from "./endpointdetails";
+
 
 
 // GetDataflowEndpointGroupResponse
@@ -8,15 +8,15 @@ import { EndpointDetails } from "./endpointdetails";
  * <p/>
 **/
 export class GetDataflowEndpointGroupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=dataflowEndpointGroupArn" })
+  @SpeakeasyMetadata({ data: "json, name=dataflowEndpointGroupArn" })
   dataflowEndpointGroupArn?: string;
 
-  @Metadata({ data: "json, name=dataflowEndpointGroupId" })
+  @SpeakeasyMetadata({ data: "json, name=dataflowEndpointGroupId" })
   dataflowEndpointGroupId?: string;
 
-  @Metadata({ data: "json, name=endpointsDetails", elemType: shared.EndpointDetails })
+  @SpeakeasyMetadata({ data: "json, name=endpointsDetails", elemType: EndpointDetails })
   endpointsDetails?: EndpointDetails[];
 
-  @Metadata({ data: "json, name=tags" })
+  @SpeakeasyMetadata({ data: "json, name=tags" })
   tags?: Map<string, string>;
 }

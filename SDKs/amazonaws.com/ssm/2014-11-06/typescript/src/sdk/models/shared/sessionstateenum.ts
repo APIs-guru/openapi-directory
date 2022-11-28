@@ -1,6 +1,7 @@
 
 
+
 export enum SessionStateEnum {
-    Active = "Active"
-,    History = "History"
+    Active = "Active",
+    History = "History"
 }

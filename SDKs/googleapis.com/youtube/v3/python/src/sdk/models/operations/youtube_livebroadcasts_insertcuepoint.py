@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import List,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -23,21 +24,40 @@ class YoutubeLiveBroadcastsInsertCuepointQueryParams:
     
 
 @dataclass
+class YoutubeLiveBroadcastsInsertCuepointSecurityOption1:
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class YoutubeLiveBroadcastsInsertCuepointSecurityOption2:
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
+class YoutubeLiveBroadcastsInsertCuepointSecurityOption3:
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
 class YoutubeLiveBroadcastsInsertCuepointSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    option1: Optional[YoutubeLiveBroadcastsInsertCuepointSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
+    option2: Optional[YoutubeLiveBroadcastsInsertCuepointSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    option3: Optional[YoutubeLiveBroadcastsInsertCuepointSecurityOption3] = field(default=None, metadata={'security': { 'option': True }})
     
 
 @dataclass
 class YoutubeLiveBroadcastsInsertCuepointRequest:
-    query_params: YoutubeLiveBroadcastsInsertCuepointQueryParams = field(default=None)
+    query_params: YoutubeLiveBroadcastsInsertCuepointQueryParams = field()
+    security: YoutubeLiveBroadcastsInsertCuepointSecurity = field()
     request: Optional[shared.Cuepoint] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: YoutubeLiveBroadcastsInsertCuepointSecurity = field(default=None)
     
 
 @dataclass
 class YoutubeLiveBroadcastsInsertCuepointResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     cuepoint: Optional[shared.Cuepoint] = field(default=None)
-    status_code: int = field(default=None)
     

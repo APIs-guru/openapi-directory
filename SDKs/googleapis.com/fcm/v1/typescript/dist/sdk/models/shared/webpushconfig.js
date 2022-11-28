@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { WebpushFcmOptions } from "./webpushfcmoptions";
 // WebpushConfig
 /**
@@ -34,19 +34,19 @@ var WebpushConfig = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=data" }),
+        SpeakeasyMetadata({ data: "json, name=data" }),
         __metadata("design:type", Map)
     ], WebpushConfig.prototype, "data", void 0);
     __decorate([
-        Metadata({ data: "json, name=fcmOptions" }),
+        SpeakeasyMetadata({ data: "json, name=fcmOptions" }),
         __metadata("design:type", WebpushFcmOptions)
     ], WebpushConfig.prototype, "fcmOptions", void 0);
     __decorate([
-        Metadata({ data: "json, name=headers" }),
+        SpeakeasyMetadata({ data: "json, name=headers" }),
         __metadata("design:type", Map)
     ], WebpushConfig.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "json, name=notification" }),
+        SpeakeasyMetadata({ data: "json, name=notification" }),
         __metadata("design:type", Map)
     ], WebpushConfig.prototype, "notification", void 0);
     return WebpushConfig;

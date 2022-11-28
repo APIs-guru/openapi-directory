@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -14,6 +18,7 @@ class DescribeVolumesXAmzTargetEnum(str, Enum):
 
 @dataclass
 class DescribeVolumesHeaders:
+    x_amz_target: DescribeVolumesXAmzTargetEnum = field(metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
     x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
     x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
@@ -21,22 +26,21 @@ class DescribeVolumesHeaders:
     x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
     x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
     x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
-    x_amz_target: DescribeVolumesXAmzTargetEnum = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Target', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class DescribeVolumesRequest:
-    query_params: DescribeVolumesQueryParams = field(default=None)
-    headers: DescribeVolumesHeaders = field(default=None)
-    request: shared.DescribeVolumesRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: DescribeVolumesHeaders = field()
+    query_params: DescribeVolumesQueryParams = field()
+    request: shared.DescribeVolumesRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class DescribeVolumesResponse:
+    content_type: str = field()
+    status_code: int = field()
     bad_request: Optional[Any] = field(default=None)
-    content_type: str = field(default=None)
     describe_volumes_response: Optional[shared.DescribeVolumesResponse] = field(default=None)
     internal_server_error: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     volume_not_found: Optional[Any] = field(default=None)
     

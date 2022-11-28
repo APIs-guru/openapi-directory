@@ -1,5 +1,7 @@
 package shared
 
+// RemediationAction
+// Information about an individual action you can take to remediate a violation.
 type RemediationAction struct {
 	Description                           *string                                `json:"Description,omitempty"`
 	Ec2AssociateRouteTableAction          *Ec2AssociateRouteTableAction          `json:"EC2AssociateRouteTableAction,omitempty"`

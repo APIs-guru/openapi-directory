@@ -8,6 +8,8 @@ const (
 	HangoutsChatExportOptionsExportFormatEnumPst                     HangoutsChatExportOptionsExportFormatEnum = "PST"
 )
 
+// HangoutsChatExportOptions
+// Options for Chat exports.
 type HangoutsChatExportOptions struct {
 	ExportFormat *HangoutsChatExportOptionsExportFormatEnum `json:"exportFormat,omitempty"`
 }

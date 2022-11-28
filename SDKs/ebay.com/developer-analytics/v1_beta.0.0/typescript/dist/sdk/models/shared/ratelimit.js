@@ -22,8 +22,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { Resource } from "./resource";
 // RateLimit
 /**
  * This complex types defines the resource (such as an API method) for which the rate-limit data is returned. A method is included in an API, and an API is part of an API context for the API version specified.
@@ -34,19 +34,19 @@ var RateLimit = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=apiContext" }),
+        SpeakeasyMetadata({ data: "json, name=apiContext" }),
         __metadata("design:type", String)
     ], RateLimit.prototype, "apiContext", void 0);
     __decorate([
-        Metadata({ data: "json, name=apiName" }),
+        SpeakeasyMetadata({ data: "json, name=apiName" }),
         __metadata("design:type", String)
     ], RateLimit.prototype, "apiName", void 0);
     __decorate([
-        Metadata({ data: "json, name=apiVersion" }),
+        SpeakeasyMetadata({ data: "json, name=apiVersion" }),
         __metadata("design:type", String)
     ], RateLimit.prototype, "apiVersion", void 0);
     __decorate([
-        Metadata({ data: "json, name=resources", elemType: shared.Resource }),
+        SpeakeasyMetadata({ data: "json, name=resources", elemType: Resource }),
         __metadata("design:type", Array)
     ], RateLimit.prototype, "resources", void 0);
     return RateLimit;

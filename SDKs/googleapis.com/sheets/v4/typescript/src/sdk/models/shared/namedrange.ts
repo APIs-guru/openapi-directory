@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { GridRange } from "./gridrange";
+
 
 
 // NamedRange
@@ -7,12 +8,12 @@ import { GridRange } from "./gridrange";
  * A named range.
 **/
 export class NamedRange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=name" })
+  @SpeakeasyMetadata({ data: "json, name=name" })
   name?: string;
 
-  @Metadata({ data: "json, name=namedRangeId" })
+  @SpeakeasyMetadata({ data: "json, name=namedRangeId" })
   namedRangeId?: string;
 
-  @Metadata({ data: "json, name=range" })
+  @SpeakeasyMetadata({ data: "json, name=range" })
   range?: GridRange;
 }

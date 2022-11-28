@@ -1,12 +1,17 @@
 from dataclasses import dataclass, field
 from typing import List,Optional
 from dataclasses_json import dataclass_json
-from . import ospolicyresourcefile
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class OsPolicyResourcePackageResourceMsi:
-    properties: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'properties' }})
-    source: Optional[ospolicyresourcefile.OsPolicyResourceFile] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
+    r"""OsPolicyResourcePackageResourceMsi
+    An MSI package. MSI packages only support INSTALLED state.
+    """
+    
+    properties: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('properties') }})
+    source: Optional[OsPolicyResourceFile] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('source') }})
     

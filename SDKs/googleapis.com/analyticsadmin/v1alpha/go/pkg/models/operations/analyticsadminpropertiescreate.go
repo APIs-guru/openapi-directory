@@ -25,7 +25,7 @@ type AnalyticsadminPropertiesCreateSecurity struct {
 
 type AnalyticsadminPropertiesCreateRequest struct {
 	QueryParams AnalyticsadminPropertiesCreateQueryParams
-	Request     *shared.GoogleAnalyticsAdminV1alphaProperty `request:"mediaType=application/json"`
+	Request     *shared.GoogleAnalyticsAdminV1alphaPropertyInput `request:"mediaType=application/json"`
 	Security    AnalyticsadminPropertiesCreateSecurity
 }
 

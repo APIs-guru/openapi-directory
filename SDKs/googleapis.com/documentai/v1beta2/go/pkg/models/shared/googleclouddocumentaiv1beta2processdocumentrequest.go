@@ -1,5 +1,7 @@
 package shared
 
+// GoogleCloudDocumentaiV1beta2ProcessDocumentRequest
+// Request to process one document.
 type GoogleCloudDocumentaiV1beta2ProcessDocumentRequest struct {
 	AutomlParams           *GoogleCloudDocumentaiV1beta2AutoMlParams           `json:"automlParams,omitempty"`
 	DocumentType           *string                                             `json:"documentType,omitempty"`

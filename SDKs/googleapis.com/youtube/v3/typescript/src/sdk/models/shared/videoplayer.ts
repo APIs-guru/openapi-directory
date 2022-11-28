@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // VideoPlayer
@@ -6,12 +7,12 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Player to be used for a video playback.
 **/
 export class VideoPlayer extends SpeakeasyBase {
-  @Metadata({ data: "json, name=embedHeight" })
+  @SpeakeasyMetadata({ data: "json, name=embedHeight" })
   embedHeight?: string;
 
-  @Metadata({ data: "json, name=embedHtml" })
+  @SpeakeasyMetadata({ data: "json, name=embedHtml" })
   embedHtml?: string;
 
-  @Metadata({ data: "json, name=embedWidth" })
+  @SpeakeasyMetadata({ data: "json, name=embedWidth" })
   embedWidth?: string;
 }

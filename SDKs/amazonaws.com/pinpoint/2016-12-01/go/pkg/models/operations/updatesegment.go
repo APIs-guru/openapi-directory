@@ -19,6 +19,8 @@ type UpdateSegmentHeaders struct {
 	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
+// UpdateSegmentRequestBodyWriteSegmentRequest
+// Specifies the configuration, dimension, and other settings for a segment. A WriteSegmentRequest object can include a Dimensions object or a SegmentGroups object, but not both.
 type UpdateSegmentRequestBodyWriteSegmentRequest struct {
 	Dimensions    *shared.SegmentDimensions `json:"Dimensions,omitempty"`
 	Name          *string                   `json:"Name,omitempty"`

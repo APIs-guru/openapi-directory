@@ -1,5 +1,7 @@
 package shared
 
+// UpdateMatchmakingConfigurationInput
+// Represents the input for a request operation.
 type UpdateMatchmakingConfigurationInput struct {
 	AcceptanceRequired       *bool              `json:"AcceptanceRequired,omitempty"`
 	AcceptanceTimeoutSeconds *int64             `json:"AcceptanceTimeoutSeconds,omitempty"`

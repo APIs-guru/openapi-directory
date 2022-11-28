@@ -1,5 +1,7 @@
 package shared
 
+// AwsEc2SecurityGroupDetails
+// Details about an EC2 security group.
 type AwsEc2SecurityGroupDetails struct {
 	GroupID             *string                           `json:"GroupId,omitempty"`
 	GroupName           *string                           `json:"GroupName,omitempty"`

@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { DayOfWeekEnum } from "./dayofweekenum";
+
 
 
 // TaskTriggerInfo
@@ -7,18 +8,18 @@ import { DayOfWeekEnum } from "./dayofweekenum";
  * Class TaskTriggerInfo.
 **/
 export class TaskTriggerInfo extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DayOfWeek" })
+  @SpeakeasyMetadata({ data: "json, name=DayOfWeek" })
   dayOfWeek?: DayOfWeekEnum;
 
-  @Metadata({ data: "json, name=IntervalTicks" })
+  @SpeakeasyMetadata({ data: "json, name=IntervalTicks" })
   intervalTicks?: number;
 
-  @Metadata({ data: "json, name=MaxRuntimeTicks" })
+  @SpeakeasyMetadata({ data: "json, name=MaxRuntimeTicks" })
   maxRuntimeTicks?: number;
 
-  @Metadata({ data: "json, name=TimeOfDayTicks" })
+  @SpeakeasyMetadata({ data: "json, name=TimeOfDayTicks" })
   timeOfDayTicks?: number;
 
-  @Metadata({ data: "json, name=Type" })
+  @SpeakeasyMetadata({ data: "json, name=Type" })
   type?: string;
 }

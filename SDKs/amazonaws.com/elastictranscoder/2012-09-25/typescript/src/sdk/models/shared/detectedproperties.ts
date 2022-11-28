@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DetectedProperties
@@ -6,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * The detected properties of the input file. Elastic Transcoder identifies these values from the input file.
 **/
 export class DetectedProperties extends SpeakeasyBase {
-  @Metadata({ data: "json, name=DurationMillis" })
+  @SpeakeasyMetadata({ data: "json, name=DurationMillis" })
   durationMillis?: number;
 
-  @Metadata({ data: "json, name=FileSize" })
+  @SpeakeasyMetadata({ data: "json, name=FileSize" })
   fileSize?: number;
 
-  @Metadata({ data: "json, name=FrameRate" })
+  @SpeakeasyMetadata({ data: "json, name=FrameRate" })
   frameRate?: string;
 
-  @Metadata({ data: "json, name=Height" })
+  @SpeakeasyMetadata({ data: "json, name=Height" })
   height?: number;
 
-  @Metadata({ data: "json, name=Width" })
+  @SpeakeasyMetadata({ data: "json, name=Width" })
   width?: number;
 }

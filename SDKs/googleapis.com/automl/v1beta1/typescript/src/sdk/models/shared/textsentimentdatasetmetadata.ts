@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // TextSentimentDatasetMetadata
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Dataset metadata for text sentiment.
 **/
 export class TextSentimentDatasetMetadata extends SpeakeasyBase {
-  @Metadata({ data: "json, name=sentimentMax" })
+  @SpeakeasyMetadata({ data: "json, name=sentimentMax" })
   sentimentMax?: number;
 }

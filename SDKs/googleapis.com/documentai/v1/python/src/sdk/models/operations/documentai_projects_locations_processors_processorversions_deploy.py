@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Any,Enum,Optional
+from typing import Any,Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class DocumentaiProjectsLocationsProcessorsProcessorVersionsDeployPathParams:
-    name: str = field(default=None, metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
+    name: str = field(metadata={'path_param': { 'field_name': 'name', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -25,21 +26,21 @@ class DocumentaiProjectsLocationsProcessorsProcessorVersionsDeployQueryParams:
 
 @dataclass
 class DocumentaiProjectsLocationsProcessorsProcessorVersionsDeploySecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class DocumentaiProjectsLocationsProcessorsProcessorVersionsDeployRequest:
-    path_params: DocumentaiProjectsLocationsProcessorsProcessorVersionsDeployPathParams = field(default=None)
-    query_params: DocumentaiProjectsLocationsProcessorsProcessorVersionsDeployQueryParams = field(default=None)
+    path_params: DocumentaiProjectsLocationsProcessorsProcessorVersionsDeployPathParams = field()
+    query_params: DocumentaiProjectsLocationsProcessorsProcessorVersionsDeployQueryParams = field()
+    security: DocumentaiProjectsLocationsProcessorsProcessorVersionsDeploySecurity = field()
     request: Optional[dict[str, Any]] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    security: DocumentaiProjectsLocationsProcessorsProcessorVersionsDeploySecurity = field(default=None)
     
 
 @dataclass
 class DocumentaiProjectsLocationsProcessorsProcessorVersionsDeployResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     google_longrunning_operation: Optional[shared.GoogleLongrunningOperation] = field(default=None)
-    status_code: int = field(default=None)
     

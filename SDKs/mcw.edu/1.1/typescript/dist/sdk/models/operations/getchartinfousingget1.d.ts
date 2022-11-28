@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 export declare class GetChartInfoUsingGet1PathParams extends SpeakeasyBase {
     speciesTypeKey: number;
     termString: string;

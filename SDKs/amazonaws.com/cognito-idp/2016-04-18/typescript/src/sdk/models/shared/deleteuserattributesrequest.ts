@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // DeleteUserAttributesRequest
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Represents the request to delete user attributes.
 **/
 export class DeleteUserAttributesRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=AccessToken" })
+  @SpeakeasyMetadata({ data: "json, name=AccessToken" })
   accessToken: string;
 
-  @Metadata({ data: "json, name=UserAttributeNames" })
+  @SpeakeasyMetadata({ data: "json, name=UserAttributeNames" })
   userAttributeNames: string[];
 }

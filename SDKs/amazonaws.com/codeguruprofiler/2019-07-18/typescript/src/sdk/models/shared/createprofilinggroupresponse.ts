@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ProfilingGroupDescription } from "./profilinggroupdescription";
+
 
 
 // CreateProfilingGroupResponse
@@ -7,6 +8,6 @@ import { ProfilingGroupDescription } from "./profilinggroupdescription";
  * The structure representing the createProfilingGroupResponse.
 **/
 export class CreateProfilingGroupResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=profilingGroup" })
+  @SpeakeasyMetadata({ data: "json, name=profilingGroup" })
   profilingGroup: ProfilingGroupDescription;
 }

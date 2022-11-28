@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { VirtualRouterListener } from "./virtualrouterlistener";
+
 
 
 // VirtualRouterSpec
@@ -8,6 +8,6 @@ import { VirtualRouterListener } from "./virtualrouterlistener";
  * An object that represents the specification of a virtual router.
 **/
 export class VirtualRouterSpec extends SpeakeasyBase {
-  @Metadata({ data: "json, name=listeners", elemType: shared.VirtualRouterListener })
+  @SpeakeasyMetadata({ data: "json, name=listeners", elemType: VirtualRouterListener })
   listeners?: VirtualRouterListener[];
 }

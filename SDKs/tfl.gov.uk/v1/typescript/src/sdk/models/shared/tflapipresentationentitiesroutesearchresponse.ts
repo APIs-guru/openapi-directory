@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { TflApiPresentationEntitiesRouteSearchMatch } from "./tflapipresentationentitiesroutesearchmatch";
 
 
+
 export class TflApiPresentationEntitiesRouteSearchResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=input" })
+  @SpeakeasyMetadata({ data: "json, name=input" })
   input?: string;
 
-  @Metadata({ data: "json, name=searchMatches", elemType: shared.TflApiPresentationEntitiesRouteSearchMatch })
+  @SpeakeasyMetadata({ data: "json, name=searchMatches", elemType: TflApiPresentationEntitiesRouteSearchMatch })
   searchMatches?: TflApiPresentationEntitiesRouteSearchMatch[];
 }

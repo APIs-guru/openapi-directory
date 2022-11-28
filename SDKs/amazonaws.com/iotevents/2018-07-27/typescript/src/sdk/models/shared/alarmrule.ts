@@ -1,5 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { SimpleRule } from "./simplerule";
+
 
 
 // AlarmRule
@@ -7,6 +8,6 @@ import { SimpleRule } from "./simplerule";
  * Defines when your alarm is invoked.
 **/
 export class AlarmRule extends SpeakeasyBase {
-  @Metadata({ data: "json, name=simpleRule" })
+  @SpeakeasyMetadata({ data: "json, name=simpleRule" })
   simpleRule?: SimpleRule;
 }

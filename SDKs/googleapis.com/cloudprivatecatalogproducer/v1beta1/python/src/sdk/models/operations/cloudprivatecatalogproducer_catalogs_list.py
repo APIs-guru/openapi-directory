@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
@@ -23,19 +24,19 @@ class CloudprivatecatalogproducerCatalogsListQueryParams:
 
 @dataclass
 class CloudprivatecatalogproducerCatalogsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class CloudprivatecatalogproducerCatalogsListRequest:
-    query_params: CloudprivatecatalogproducerCatalogsListQueryParams = field(default=None)
-    security: CloudprivatecatalogproducerCatalogsListSecurity = field(default=None)
+    query_params: CloudprivatecatalogproducerCatalogsListQueryParams = field()
+    security: CloudprivatecatalogproducerCatalogsListSecurity = field()
     
 
 @dataclass
 class CloudprivatecatalogproducerCatalogsListResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

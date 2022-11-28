@@ -1,12 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ResourceTagMapping } from "./resourcetagmapping";
 
 
+
 export class GetResourcesOutput extends SpeakeasyBase {
-  @Metadata({ data: "json, name=PaginationToken" })
+  @SpeakeasyMetadata({ data: "json, name=PaginationToken" })
   paginationToken?: string;
 
-  @Metadata({ data: "json, name=ResourceTagMappingList", elemType: shared.ResourceTagMapping })
+  @SpeakeasyMetadata({ data: "json, name=ResourceTagMappingList", elemType: ResourceTagMapping })
   resourceTagMappingList?: ResourceTagMapping[];
 }

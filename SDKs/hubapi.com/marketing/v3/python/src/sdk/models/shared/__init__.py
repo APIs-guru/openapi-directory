@@ -6,6 +6,7 @@ from .batchresponsemarketingeventpublicdefaultresponse import *
 from .batchresponsesubscriberemailresponse import *
 from .batchresponsesubscribervidresponse import *
 from .collectionresponsemarketingeventexternaluniqueidentifiernopaging import *
+from .error import *
 from .errorcategory import *
 from .errordetail import *
 from .eventdetailsettings import *

@@ -1,5 +1,7 @@
 package shared
 
+// BranchModel
+// Defines a single branch of a client.
 type BranchModel struct {
 	Address1     *string `json:"Address1,omitempty"`
 	Address2     *string `json:"Address2,omitempty"`

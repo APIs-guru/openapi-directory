@@ -1,5 +1,7 @@
 package shared
 
+// Workspace
+// Describes a WorkSpace.
 type Workspace struct {
 	BundleID                    *string              `json:"BundleId,omitempty"`
 	ComputerName                *string              `json:"ComputerName,omitempty"`

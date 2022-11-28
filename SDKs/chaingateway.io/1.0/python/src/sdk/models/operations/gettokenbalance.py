@@ -5,18 +5,18 @@ from sdk.models import shared
 
 @dataclass
 class GetTokenBalanceHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    authorization: str = field(metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
 class GetTokenBalanceRequest:
-    headers: GetTokenBalanceHeaders = field(default=None)
-    request: shared.GetTokenBalanceRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: GetTokenBalanceHeaders = field()
+    request: shared.GetTokenBalanceRequest = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class GetTokenBalanceResponse:
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     get_token_balance: Optional[shared.GetTokenBalance] = field(default=None)
     

@@ -1,11 +1,12 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from typing import Optional
+from enum import Enum
 from sdk.models import shared
 
 
 @dataclass
 class RunNamespacesDomainmappingsListPathParams:
-    parent: str = field(default=None, metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
+    parent: str = field(metadata={'path_param': { 'field_name': 'parent', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -32,20 +33,20 @@ class RunNamespacesDomainmappingsListQueryParams:
 
 @dataclass
 class RunNamespacesDomainmappingsListSecurity:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2: shared.SchemeOauth2 = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass
 class RunNamespacesDomainmappingsListRequest:
-    path_params: RunNamespacesDomainmappingsListPathParams = field(default=None)
-    query_params: RunNamespacesDomainmappingsListQueryParams = field(default=None)
-    security: RunNamespacesDomainmappingsListSecurity = field(default=None)
+    path_params: RunNamespacesDomainmappingsListPathParams = field()
+    query_params: RunNamespacesDomainmappingsListQueryParams = field()
+    security: RunNamespacesDomainmappingsListSecurity = field()
     
 
 @dataclass
 class RunNamespacesDomainmappingsListResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     list_domain_mappings_response: Optional[shared.ListDomainMappingsResponse] = field(default=None)
-    status_code: int = field(default=None)
     

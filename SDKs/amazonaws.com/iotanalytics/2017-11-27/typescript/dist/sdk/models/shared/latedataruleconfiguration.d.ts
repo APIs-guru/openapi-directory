@@ -1,4 +1,4 @@
-import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyBase } from "../../../internal/utils";
 import { DeltaTimeSessionWindowConfiguration } from "./deltatimesessionwindowconfiguration";
 /**
  * The information needed to configure a delta time session window.

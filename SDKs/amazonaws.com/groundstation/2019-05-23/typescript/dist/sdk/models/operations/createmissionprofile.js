@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 var CreateMissionProfileHeaders = /** @class */ (function (_super) {
     __extends(CreateMissionProfileHeaders, _super);
@@ -30,31 +30,31 @@ var CreateMissionProfileHeaders = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
         __metadata("design:type", String)
     ], CreateMissionProfileHeaders.prototype, "xAmzAlgorithm", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
         __metadata("design:type", String)
     ], CreateMissionProfileHeaders.prototype, "xAmzContentSha256", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
         __metadata("design:type", String)
     ], CreateMissionProfileHeaders.prototype, "xAmzCredential", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
         __metadata("design:type", String)
     ], CreateMissionProfileHeaders.prototype, "xAmzDate", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
         __metadata("design:type", String)
     ], CreateMissionProfileHeaders.prototype, "xAmzSecurityToken", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
         __metadata("design:type", String)
     ], CreateMissionProfileHeaders.prototype, "xAmzSignature", void 0);
     __decorate([
-        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
         __metadata("design:type", String)
     ], CreateMissionProfileHeaders.prototype, "xAmzSignedHeaders", void 0);
     return CreateMissionProfileHeaders;
@@ -66,31 +66,31 @@ var CreateMissionProfileRequestBody = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=contactPostPassDurationSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=contactPostPassDurationSeconds" }),
         __metadata("design:type", Number)
     ], CreateMissionProfileRequestBody.prototype, "contactPostPassDurationSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=contactPrePassDurationSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=contactPrePassDurationSeconds" }),
         __metadata("design:type", Number)
     ], CreateMissionProfileRequestBody.prototype, "contactPrePassDurationSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=dataflowEdges" }),
+        SpeakeasyMetadata({ data: "json, name=dataflowEdges" }),
         __metadata("design:type", Array)
     ], CreateMissionProfileRequestBody.prototype, "dataflowEdges", void 0);
     __decorate([
-        Metadata({ data: "json, name=minimumViableContactDurationSeconds" }),
+        SpeakeasyMetadata({ data: "json, name=minimumViableContactDurationSeconds" }),
         __metadata("design:type", Number)
     ], CreateMissionProfileRequestBody.prototype, "minimumViableContactDurationSeconds", void 0);
     __decorate([
-        Metadata({ data: "json, name=name" }),
+        SpeakeasyMetadata({ data: "json, name=name" }),
         __metadata("design:type", String)
     ], CreateMissionProfileRequestBody.prototype, "name", void 0);
     __decorate([
-        Metadata({ data: "json, name=tags" }),
+        SpeakeasyMetadata({ data: "json, name=tags" }),
         __metadata("design:type", Map)
     ], CreateMissionProfileRequestBody.prototype, "tags", void 0);
     __decorate([
-        Metadata({ data: "json, name=trackingConfigArn" }),
+        SpeakeasyMetadata({ data: "json, name=trackingConfigArn" }),
         __metadata("design:type", String)
     ], CreateMissionProfileRequestBody.prototype, "trackingConfigArn", void 0);
     return CreateMissionProfileRequestBody;
@@ -102,11 +102,11 @@ var CreateMissionProfileRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", CreateMissionProfileHeaders)
     ], CreateMissionProfileRequest.prototype, "headers", void 0);
     __decorate([
-        Metadata({ data: "request, media_type=application/json" }),
+        SpeakeasyMetadata({ data: "request, media_type=application/json" }),
         __metadata("design:type", CreateMissionProfileRequestBody)
     ], CreateMissionProfileRequest.prototype, "request", void 0);
     return CreateMissionProfileRequest;
@@ -118,27 +118,27 @@ var CreateMissionProfileResponse = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", String)
     ], CreateMissionProfileResponse.prototype, "contentType", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateMissionProfileResponse.prototype, "dependencyException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateMissionProfileResponse.prototype, "invalidParameterException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", shared.MissionProfileIdResponse)
     ], CreateMissionProfileResponse.prototype, "missionProfileIdResponse", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Object)
     ], CreateMissionProfileResponse.prototype, "resourceNotFoundException", void 0);
     __decorate([
-        Metadata(),
+        SpeakeasyMetadata(),
         __metadata("design:type", Number)
     ], CreateMissionProfileResponse.prototype, "statusCode", void 0);
     return CreateMissionProfileResponse;

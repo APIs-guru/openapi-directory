@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
 from typing import Optional
 from dataclasses_json import dataclass_json
-from . import instancesummary
+from sdk import utils
+from . import *
 
 
 @dataclass_json
 @dataclass
 class GetDeploymentInstanceOutput:
-    instance_summary: Optional[instancesummary.InstanceSummary] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instanceSummary' }})
+    r"""GetDeploymentInstanceOutput
+     Represents the output of a <code>GetDeploymentInstance</code> operation. 
+    """
+    
+    instance_summary: Optional[InstanceSummary] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('instanceSummary') }})
     

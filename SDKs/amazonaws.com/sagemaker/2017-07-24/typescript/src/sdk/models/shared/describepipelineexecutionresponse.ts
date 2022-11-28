@@ -1,41 +1,41 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import { UserContext } from "./usercontext";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { UserContext } from "./usercontext";
 import { PipelineExecutionStatusEnum } from "./pipelineexecutionstatusenum";
 import { PipelineExperimentConfig } from "./pipelineexperimentconfig";
 
 
+
 export class DescribePipelineExecutionResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=CreatedBy" })
+  @SpeakeasyMetadata({ data: "json, name=CreatedBy" })
   createdBy?: UserContext;
 
-  @Metadata({ data: "json, name=CreationTime" })
+  @SpeakeasyMetadata({ data: "json, name=CreationTime" })
   creationTime?: Date;
 
-  @Metadata({ data: "json, name=FailureReason" })
+  @SpeakeasyMetadata({ data: "json, name=FailureReason" })
   failureReason?: string;
 
-  @Metadata({ data: "json, name=LastModifiedBy" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedBy" })
   lastModifiedBy?: UserContext;
 
-  @Metadata({ data: "json, name=LastModifiedTime" })
+  @SpeakeasyMetadata({ data: "json, name=LastModifiedTime" })
   lastModifiedTime?: Date;
 
-  @Metadata({ data: "json, name=PipelineArn" })
+  @SpeakeasyMetadata({ data: "json, name=PipelineArn" })
   pipelineArn?: string;
 
-  @Metadata({ data: "json, name=PipelineExecutionArn" })
+  @SpeakeasyMetadata({ data: "json, name=PipelineExecutionArn" })
   pipelineExecutionArn?: string;
 
-  @Metadata({ data: "json, name=PipelineExecutionDescription" })
+  @SpeakeasyMetadata({ data: "json, name=PipelineExecutionDescription" })
   pipelineExecutionDescription?: string;
 
-  @Metadata({ data: "json, name=PipelineExecutionDisplayName" })
+  @SpeakeasyMetadata({ data: "json, name=PipelineExecutionDisplayName" })
   pipelineExecutionDisplayName?: string;
 
-  @Metadata({ data: "json, name=PipelineExecutionStatus" })
+  @SpeakeasyMetadata({ data: "json, name=PipelineExecutionStatus" })
   pipelineExecutionStatus?: PipelineExecutionStatusEnum;
 
-  @Metadata({ data: "json, name=PipelineExperimentConfig" })
+  @SpeakeasyMetadata({ data: "json, name=PipelineExperimentConfig" })
   pipelineExperimentConfig?: PipelineExperimentConfig;
 }

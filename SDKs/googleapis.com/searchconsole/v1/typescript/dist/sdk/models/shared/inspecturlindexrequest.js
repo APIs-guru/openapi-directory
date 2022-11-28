@@ -22,7 +22,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 // InspectUrlIndexRequest
 /**
  * Index inspection request.
@@ -33,15 +33,15 @@ var InspectUrlIndexRequest = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     __decorate([
-        Metadata({ data: "json, name=inspectionUrl" }),
+        SpeakeasyMetadata({ data: "json, name=inspectionUrl" }),
         __metadata("design:type", String)
     ], InspectUrlIndexRequest.prototype, "inspectionUrl", void 0);
     __decorate([
-        Metadata({ data: "json, name=languageCode" }),
+        SpeakeasyMetadata({ data: "json, name=languageCode" }),
         __metadata("design:type", String)
     ], InspectUrlIndexRequest.prototype, "languageCode", void 0);
     __decorate([
-        Metadata({ data: "json, name=siteUrl" }),
+        SpeakeasyMetadata({ data: "json, name=siteUrl" }),
         __metadata("design:type", String)
     ], InspectUrlIndexRequest.prototype, "siteUrl", void 0);
     return InspectUrlIndexRequest;

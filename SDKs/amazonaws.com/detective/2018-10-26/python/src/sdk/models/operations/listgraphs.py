@@ -1,6 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Any,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Any,Optional
 from dataclasses_json import dataclass_json
+from sdk import utils
 from sdk.models import shared
 
 
@@ -24,22 +28,22 @@ class ListGraphsHeaders:
 @dataclass_json
 @dataclass
 class ListGraphsRequestBody:
-    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaxResults' }})
-    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NextToken' }})
+    max_results: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('MaxResults') }})
+    next_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.field_name('NextToken') }})
     
 
 @dataclass
 class ListGraphsRequest:
-    query_params: ListGraphsQueryParams = field(default=None)
-    headers: ListGraphsHeaders = field(default=None)
-    request: ListGraphsRequestBody = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    headers: ListGraphsHeaders = field()
+    query_params: ListGraphsQueryParams = field()
+    request: ListGraphsRequestBody = field(metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass
 class ListGraphsResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     internal_server_exception: Optional[Any] = field(default=None)
     list_graphs_response: Optional[shared.ListGraphsResponse] = field(default=None)
-    status_code: int = field(default=None)
     validation_exception: Optional[Any] = field(default=None)
     

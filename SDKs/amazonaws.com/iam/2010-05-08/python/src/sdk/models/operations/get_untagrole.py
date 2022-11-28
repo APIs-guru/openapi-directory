@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,List,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import List,Optional
+from enum import Enum
 
 class GetUntagRoleActionEnum(str, Enum):
     UNTAG_ROLE = "UntagRole"
@@ -10,10 +14,10 @@ class GetUntagRoleVersionEnum(str, Enum):
 
 @dataclass
 class GetUntagRoleQueryParams:
-    action: GetUntagRoleActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
-    role_name: str = field(default=None, metadata={'query_param': { 'field_name': 'RoleName', 'style': 'form', 'explode': True }})
-    tag_keys: List[str] = field(default=None, metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
-    version: GetUntagRoleVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
+    action: GetUntagRoleActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    role_name: str = field(metadata={'query_param': { 'field_name': 'RoleName', 'style': 'form', 'explode': True }})
+    tag_keys: List[str] = field(metadata={'query_param': { 'field_name': 'TagKeys', 'style': 'form', 'explode': True }})
+    version: GetUntagRoleVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -29,13 +33,13 @@ class GetUntagRoleHeaders:
 
 @dataclass
 class GetUntagRoleRequest:
-    query_params: GetUntagRoleQueryParams = field(default=None)
-    headers: GetUntagRoleHeaders = field(default=None)
+    headers: GetUntagRoleHeaders = field()
+    query_params: GetUntagRoleQueryParams = field()
     
 
 @dataclass
 class GetUntagRoleResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
 from typing import Any,Optional
 
 
 @dataclass
 class DeleteCodeSigningConfigPathParams:
-    code_signing_config_arn: str = field(default=None, metadata={'path_param': { 'field_name': 'CodeSigningConfigArn', 'style': 'simple', 'explode': False }})
+    code_signing_config_arn: str = field(metadata={'path_param': { 'field_name': 'CodeSigningConfigArn', 'style': 'simple', 'explode': False }})
     
 
 @dataclass
@@ -20,17 +23,17 @@ class DeleteCodeSigningConfigHeaders:
 
 @dataclass
 class DeleteCodeSigningConfigRequest:
-    path_params: DeleteCodeSigningConfigPathParams = field(default=None)
-    headers: DeleteCodeSigningConfigHeaders = field(default=None)
+    headers: DeleteCodeSigningConfigHeaders = field()
+    path_params: DeleteCodeSigningConfigPathParams = field()
     
 
 @dataclass
 class DeleteCodeSigningConfigResponse:
-    content_type: str = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
     delete_code_signing_config_response: Optional[dict[str, Any]] = field(default=None)
     invalid_parameter_value_exception: Optional[Any] = field(default=None)
     resource_conflict_exception: Optional[Any] = field(default=None)
     resource_not_found_exception: Optional[Any] = field(default=None)
     service_exception: Optional[Any] = field(default=None)
-    status_code: int = field(default=None)
     

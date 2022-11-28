@@ -1,6 +1,6 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { ListAssetsResult } from "./listassetsresult";
+
 
 
 // ListAssetsResponse
@@ -8,15 +8,15 @@ import { ListAssetsResult } from "./listassetsresult";
  * Response message for listing assets.
 **/
 export class ListAssetsResponse extends SpeakeasyBase {
-  @Metadata({ data: "json, name=listAssetsResults", elemType: shared.ListAssetsResult })
+  @SpeakeasyMetadata({ data: "json, name=listAssetsResults", elemType: ListAssetsResult })
   listAssetsResults?: ListAssetsResult[];
 
-  @Metadata({ data: "json, name=nextPageToken" })
+  @SpeakeasyMetadata({ data: "json, name=nextPageToken" })
   nextPageToken?: string;
 
-  @Metadata({ data: "json, name=readTime" })
+  @SpeakeasyMetadata({ data: "json, name=readTime" })
   readTime?: string;
 
-  @Metadata({ data: "json, name=totalSize" })
+  @SpeakeasyMetadata({ data: "json, name=totalSize" })
   totalSize?: number;
 }

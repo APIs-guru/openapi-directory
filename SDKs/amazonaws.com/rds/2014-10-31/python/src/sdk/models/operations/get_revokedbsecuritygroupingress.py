@@ -1,5 +1,9 @@
 from dataclasses import dataclass, field
-from typing import Enum,Optional
+from datetime import date, datetime
+from marshmallow import fields
+import dateutil.parser
+from typing import Optional
+from enum import Enum
 
 class GetRevokeDbSecurityGroupIngressActionEnum(str, Enum):
     REVOKE_DB_SECURITY_GROUP_INGRESS = "RevokeDBSecurityGroupIngress"
@@ -10,13 +14,13 @@ class GetRevokeDbSecurityGroupIngressVersionEnum(str, Enum):
 
 @dataclass
 class GetRevokeDbSecurityGroupIngressQueryParams:
-    action: GetRevokeDbSecurityGroupIngressActionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    action: GetRevokeDbSecurityGroupIngressActionEnum = field(metadata={'query_param': { 'field_name': 'Action', 'style': 'form', 'explode': True }})
+    db_security_group_name: str = field(metadata={'query_param': { 'field_name': 'DBSecurityGroupName', 'style': 'form', 'explode': True }})
+    version: GetRevokeDbSecurityGroupIngressVersionEnum = field(metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     cidrip: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'CIDRIP', 'style': 'form', 'explode': True }})
-    db_security_group_name: str = field(default=None, metadata={'query_param': { 'field_name': 'DBSecurityGroupName', 'style': 'form', 'explode': True }})
     ec2_security_group_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'EC2SecurityGroupId', 'style': 'form', 'explode': True }})
     ec2_security_group_name: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'EC2SecurityGroupName', 'style': 'form', 'explode': True }})
     ec2_security_group_owner_id: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'EC2SecurityGroupOwnerId', 'style': 'form', 'explode': True }})
-    version: GetRevokeDbSecurityGroupIngressVersionEnum = field(default=None, metadata={'query_param': { 'field_name': 'Version', 'style': 'form', 'explode': True }})
     
 
 @dataclass
@@ -32,13 +36,13 @@ class GetRevokeDbSecurityGroupIngressHeaders:
 
 @dataclass
 class GetRevokeDbSecurityGroupIngressRequest:
-    query_params: GetRevokeDbSecurityGroupIngressQueryParams = field(default=None)
-    headers: GetRevokeDbSecurityGroupIngressHeaders = field(default=None)
+    headers: GetRevokeDbSecurityGroupIngressHeaders = field()
+    query_params: GetRevokeDbSecurityGroupIngressQueryParams = field()
     
 
 @dataclass
 class GetRevokeDbSecurityGroupIngressResponse:
-    body: bytes = field(default=None)
-    content_type: str = field(default=None)
-    status_code: int = field(default=None)
+    content_type: str = field()
+    status_code: int = field()
+    body: Optional[bytes] = field(default=None)
     

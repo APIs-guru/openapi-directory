@@ -1,5 +1,7 @@
 package shared
 
+// CrossRegionCopyRule
+// Specifies a rule for cross-Region snapshot copies.
 type CrossRegionCopyRule struct {
 	CmkArn        *string                       `json:"CmkArn,omitempty"`
 	CopyTags      *bool                         `json:"CopyTags,omitempty"`

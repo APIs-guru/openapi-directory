@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // CloudPubsubTopic
@@ -6,6 +7,6 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A Pub/Sub topic.
 **/
 export class CloudPubsubTopic extends SpeakeasyBase {
-  @Metadata({ data: "json, name=topicName" })
+  @SpeakeasyMetadata({ data: "json, name=topicName" })
   topicName?: string;
 }

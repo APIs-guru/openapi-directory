@@ -1,4 +1,5 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+
 
 
 // BuildSystemSharedDtoStepConfiguration
@@ -6,9 +7,9 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * Step Configuration
 **/
 export class BuildSystemSharedDtoStepConfiguration extends SpeakeasyBase {
-  @Metadata({ data: "json, name=Configurations" })
+  @SpeakeasyMetadata({ data: "json, name=Configurations" })
   configurations?: string[];
 
-  @Metadata({ data: "json, name=StepImplementationID" })
+  @SpeakeasyMetadata({ data: "json, name=StepImplementationID" })
   stepImplementationId: string;
 }
